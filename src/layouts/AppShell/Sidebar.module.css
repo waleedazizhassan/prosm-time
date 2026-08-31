@@ -22,13 +22,19 @@
 .sidebarHeader {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  justify-content: space-between;
 
   min-height: 64px;
   padding: 0 var(--space-5);
 
   border-bottom: 1px solid var(--border-light);
   background: var(--surface-card);
+}
+
+.sidebarBrand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 .sidebarBrandName {
@@ -192,6 +198,10 @@
 .collapsed {
   width: 84px;
   min-width: 84px;
+}
+
+.collapsed .sidebarHeader {
+  align-items: center;
 }
 
 .collapsed .sidebarBrandName,

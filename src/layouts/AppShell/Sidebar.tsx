@@ -78,8 +78,20 @@ export default function Sidebar() {
         className={[styles.sidebar, sidebarCollapsed ? styles.collapsed : "", mobileSidebarOpen ? styles.mobileOpen : ""].filter(Boolean).join(" ")}
       >
         <div className={styles.sidebarHeader}>
-          <BrandMark size={24} />
-          {!sidebarCollapsed ? <span className={styles.sidebarBrandName}>PROSM Time</span> : null}
+          <div className={styles.sidebarBrand}>
+            <BrandMark size={24} />
+            {!sidebarCollapsed ? <span className={styles.sidebarBrandName}>PROSM Time</span> : null}
+          </div>
+
+          <button
+            type="button"
+            className={styles.collapseButton}
+            onClick={toggleSidebarCollapsed}
+            aria-label={sidebarCollapsed ? t("expandSidebar") : t("collapseSidebar")}
+            aria-expanded={!sidebarCollapsed}
+          >
+            {sidebarCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+          </button>
         </div>
 
         <nav className={styles.navigation} aria-label={t("navigationLabel")}>
@@ -101,16 +113,6 @@ export default function Sidebar() {
             );
           })}
         </nav>
-
-        <button
-          type="button"
-          className={styles.collapseButton}
-          style={{ margin: "0 auto var(--space-2)" }}
-          onClick={toggleSidebarCollapsed}
-          aria-label={sidebarCollapsed ? t("expandSidebar") : t("collapseSidebar")}
-        >
-          {sidebarCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
-        </button>
 
         <UserMenu collapsed={sidebarCollapsed} />
       </aside>
