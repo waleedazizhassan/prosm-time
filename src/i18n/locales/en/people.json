@@ -70,7 +70,10 @@
       "clockOutAction": "Clock Out on behalf",
       "clockedInSince": "Clocked in since {{time}}",
       "clockInError": "Unable to clock in this employee.",
-      "clockOutError": "Unable to clock out this employee."
+      "clockOutError": "Unable to clock out this employee.",
+      "evidenceLabel": "Photo evidence",
+      "evidenceRequiredHint": "This site requires a photo for this action.",
+      "evidenceUploadError": "Clocked in/out successfully, but the photo could not be uploaded."
     }
   }
 }

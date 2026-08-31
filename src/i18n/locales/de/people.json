@@ -70,7 +70,10 @@
       "clockOutAction": "Im Auftrag ausstempeln",
       "clockedInSince": "Eingestempelt seit {{time}}",
       "clockInError": "Dieser Mitarbeiter konnte nicht eingestempelt werden.",
-      "clockOutError": "Dieser Mitarbeiter konnte nicht ausgestempelt werden."
+      "clockOutError": "Dieser Mitarbeiter konnte nicht ausgestempelt werden.",
+      "evidenceLabel": "Fotobeleg",
+      "evidenceRequiredHint": "Dieser Standort erfordert ein Foto für diese Aktion.",
+      "evidenceUploadError": "Erfolgreich ein-/ausgestempelt, aber das Foto konnte nicht hochgeladen werden."
     }
   }
 }

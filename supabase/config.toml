@@ -47,3 +47,13 @@ entrypoint = "./functions/admin-clock-in/index.ts"
 enabled = true
 verify_jwt = true
 entrypoint = "./functions/admin-clock-out/index.ts"
+
+# purge-camera-evidence is a maintenance endpoint (§16 retention-policy
+# foundation), meant to be invoked by a future scheduler, never by an
+# end user - verify_jwt=false because no ordinary org-member session
+# should reach it at all; the function itself only proceeds when the
+# caller's own Authorization header is literally the service role key.
+[functions.purge-camera-evidence]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/purge-camera-evidence/index.ts"

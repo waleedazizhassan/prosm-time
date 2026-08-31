@@ -95,7 +95,7 @@ class AttendanceRepository {
     }
   }
 
-  async clockIn(input: ClockInInput): Promise<ServiceResult<{ sessionId: string }>> {
+  async clockIn(input: ClockInInput): Promise<ServiceResult<{ sessionId: string; eventId: string }>> {
     try {
       const { data, error } = await this.client.functions.invoke("clock-in", {
         body: {
@@ -117,13 +117,13 @@ class AttendanceRepository {
         return createError(data?.error?.message ?? "Unable to clock in.");
       }
 
-      return createSuccess({ sessionId: data.data.sessionId });
+      return createSuccess({ sessionId: data.data.sessionId, eventId: data.data.eventId });
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
     }
   }
 
-  async clockOut(input: ClockOutInput): Promise<ServiceResult<{ sessionId: string }>> {
+  async clockOut(input: ClockOutInput): Promise<ServiceResult<{ sessionId: string; eventId: string }>> {
     try {
       const { data, error } = await this.client.functions.invoke("clock-out", {
         body: {
@@ -143,7 +143,7 @@ class AttendanceRepository {
         return createError(data?.error?.message ?? "Unable to clock out.");
       }
 
-      return createSuccess({ sessionId: data.data.sessionId });
+      return createSuccess({ sessionId: data.data.sessionId, eventId: data.data.eventId });
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
     }
@@ -155,7 +155,7 @@ class AttendanceRepository {
   // above) - admin-clock-in/admin-clock-out re-check
   // 'attendance.clock_in_on_behalf'/'attendance.clock_out_on_behalf'
   // server-side and record the caller as ACTOR, the target as SUBJECT.
-  async adminClockIn(input: AdminClockInInput): Promise<ServiceResult<{ sessionId: string }>> {
+  async adminClockIn(input: AdminClockInInput): Promise<ServiceResult<{ sessionId: string; eventId: string }>> {
     try {
       const { data, error } = await this.client.functions.invoke("admin-clock-in", {
         body: {
@@ -178,13 +178,13 @@ class AttendanceRepository {
         return createError(data?.error?.message ?? "Unable to clock in this employee.");
       }
 
-      return createSuccess({ sessionId: data.data.sessionId });
+      return createSuccess({ sessionId: data.data.sessionId, eventId: data.data.eventId });
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
     }
   }
 
-  async adminClockOut(input: AdminClockOutInput): Promise<ServiceResult<{ sessionId: string }>> {
+  async adminClockOut(input: AdminClockOutInput): Promise<ServiceResult<{ sessionId: string; eventId: string }>> {
     try {
       const { data, error } = await this.client.functions.invoke("admin-clock-out", {
         body: {
@@ -205,7 +205,7 @@ class AttendanceRepository {
         return createError(data?.error?.message ?? "Unable to clock out this employee.");
       }
 
-      return createSuccess({ sessionId: data.data.sessionId });
+      return createSuccess({ sessionId: data.data.sessionId, eventId: data.data.eventId });
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
     }

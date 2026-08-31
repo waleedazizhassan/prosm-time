@@ -35,7 +35,10 @@
     "clockOutAction": "Ausstempeln",
     "clockedInSince": "Eingestempelt seit {{time}}",
     "clockInError": "Einstempeln nicht möglich.",
-    "clockOutError": "Ausstempeln nicht möglich."
+    "clockOutError": "Ausstempeln nicht möglich.",
+    "evidenceLabel": "Fotobeleg",
+    "evidenceRequiredHint": "Dieser Standort erfordert ein Foto für diese Aktion.",
+    "evidenceUploadError": "Erfolgreich ein-/ausgestempelt, aber das Foto konnte nicht hochgeladen werden."
   },
   "comingSoon": "Der Rest von PROSM Time (Zeitpläne, Stundenzettel, Berichte) folgt in späteren Arbeitspaketen."
 }

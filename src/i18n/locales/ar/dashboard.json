@@ -35,7 +35,10 @@
     "clockOutAction": "تسجيل الانصراف",
     "clockedInSince": "مسجل الحضور منذ {{time}}",
     "clockInError": "تعذر تسجيل الحضور.",
-    "clockOutError": "تعذر تسجيل الانصراف."
+    "clockOutError": "تعذر تسجيل الانصراف.",
+    "evidenceLabel": "دليل مصور",
+    "evidenceRequiredHint": "يتطلب هذا الموقع صورة لهذا الإجراء.",
+    "evidenceUploadError": "تم تسجيل الحضور/الانصراف بنجاح، لكن تعذر رفع الصورة."
   },
   "comingSoon": "باقي أجزاء PROSM Time (الجداول، كشوف الدوام، التقارير) ستُضاف في حزم عمل لاحقة."
 }

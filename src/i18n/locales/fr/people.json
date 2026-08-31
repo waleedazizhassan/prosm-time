@@ -70,7 +70,10 @@
       "clockOutAction": "Pointer le départ au nom de l'employé",
       "clockedInSince": "Présence pointée depuis {{time}}",
       "clockInError": "Impossible de pointer l'arrivée de cet employé.",
-      "clockOutError": "Impossible de pointer le départ de cet employé."
+      "clockOutError": "Impossible de pointer le départ de cet employé.",
+      "evidenceLabel": "Preuve photo",
+      "evidenceRequiredHint": "Ce site exige une photo pour cette action.",
+      "evidenceUploadError": "Pointage réussi, mais la photo n'a pas pu être téléchargée."
     }
   }
 }

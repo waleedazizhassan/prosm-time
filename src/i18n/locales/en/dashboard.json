@@ -35,7 +35,10 @@
     "clockOutAction": "Clock Out",
     "clockedInSince": "Clocked in since {{time}}",
     "clockInError": "Unable to clock in.",
-    "clockOutError": "Unable to clock out."
+    "clockOutError": "Unable to clock out.",
+    "evidenceLabel": "Photo evidence",
+    "evidenceRequiredHint": "This site requires a photo for this action.",
+    "evidenceUploadError": "Clocked in/out successfully, but the photo could not be uploaded."
   },
   "comingSoon": "The rest of PROSM Time (schedules, timesheets, reports) arrives in later work packages."
 }

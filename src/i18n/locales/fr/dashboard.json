@@ -35,7 +35,10 @@
     "clockOutAction": "Pointer le départ",
     "clockedInSince": "Présence pointée depuis {{time}}",
     "clockInError": "Impossible de pointer l'arrivée.",
-    "clockOutError": "Impossible de pointer le départ."
+    "clockOutError": "Impossible de pointer le départ.",
+    "evidenceLabel": "Preuve photo",
+    "evidenceRequiredHint": "Ce site exige une photo pour cette action.",
+    "evidenceUploadError": "Pointage réussi, mais la photo n'a pas pu être téléchargée."
   },
   "comingSoon": "Le reste de PROSM Time (plannings, feuilles de temps, rapports) arrivera dans les prochains lots de travail."
 }
