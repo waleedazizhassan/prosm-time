@@ -62,3 +62,18 @@ entrypoint = "./functions/purge-camera-evidence/index.ts"
 enabled = true
 verify_jwt = true
 entrypoint = "./functions/trigger-sos-alert/index.ts"
+
+[functions.submit-exception-reason]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/submit-exception-reason/index.ts"
+
+[functions.submit-correction-request]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/submit-correction-request/index.ts"
+
+[functions.review-exception]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/review-exception/index.ts"

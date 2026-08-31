@@ -44,5 +44,21 @@
     "sosSent": "Alerte SOS enregistrée.",
     "sosError": "Impossible d'envoyer l'alerte SOS."
   },
+  "exceptions": {
+    "title": "Exceptions en attente",
+    "hint": "Vous avez pointé en dehors de votre zone de travail assignée. Veuillez expliquer pourquoi.",
+    "outsideZone": "Vous étiez à {{distance}} m en dehors de la zone autorisée du site.",
+    "reasonCategoryLabel": "Catégorie de motif",
+    "reasonLabel": "Détails",
+    "submitAction": "Envoyer le motif",
+    "submitError": "Impossible d'envoyer ce motif.",
+    "category": {
+      "purchasing_food": "Achat de nourriture",
+      "restroom": "Toilettes",
+      "work_assignment": "Mission de travail",
+      "emergency": "Urgence",
+      "other": "Autre"
+    }
+  },
   "comingSoon": "Le reste de PROSM Time (plannings, feuilles de temps, rapports) arrivera dans les prochains lots de travail."
 }

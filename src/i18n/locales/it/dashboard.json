@@ -44,5 +44,21 @@
     "sosSent": "Allarme SOS registrato.",
     "sosError": "Impossibile inviare l'allarme SOS."
   },
+  "exceptions": {
+    "title": "Eccezioni in sospeso",
+    "hint": "Hai timbrato al di fuori della tua zona di lavoro assegnata. Spiega il motivo.",
+    "outsideZone": "Eri a {{distance}} m al di fuori dell'area consentita della sede.",
+    "reasonCategoryLabel": "Categoria del motivo",
+    "reasonLabel": "Dettagli",
+    "submitAction": "Invia motivo",
+    "submitError": "Impossibile inviare questo motivo.",
+    "category": {
+      "purchasing_food": "Acquisto cibo",
+      "restroom": "Bagno",
+      "work_assignment": "Incarico di lavoro",
+      "emergency": "Emergenza",
+      "other": "Altro"
+    }
+  },
   "comingSoon": "Il resto di PROSM Time (turni, fogli ore, report) arriverà nei prossimi pacchetti di lavoro."
 }

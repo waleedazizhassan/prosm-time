@@ -44,5 +44,21 @@
     "sosSent": "SOS-Alarm erfasst.",
     "sosError": "Der SOS-Alarm konnte nicht gesendet werden."
   },
+  "exceptions": {
+    "title": "Ausstehende Ausnahmen",
+    "hint": "Sie haben sich außerhalb Ihres zugewiesenen Arbeitsbereichs ein-/ausgestempelt. Bitte erklären Sie den Grund.",
+    "outsideZone": "Sie waren {{distance}} m außerhalb des zulässigen Bereichs des Standorts.",
+    "reasonCategoryLabel": "Grundkategorie",
+    "reasonLabel": "Details",
+    "submitAction": "Grund senden",
+    "submitError": "Dieser Grund konnte nicht gesendet werden.",
+    "category": {
+      "purchasing_food": "Essenseinkauf",
+      "restroom": "Toilette",
+      "work_assignment": "Arbeitsauftrag",
+      "emergency": "Notfall",
+      "other": "Sonstiges"
+    }
+  },
   "comingSoon": "Der Rest von PROSM Time (Zeitpläne, Stundenzettel, Berichte) folgt in späteren Arbeitspaketen."
 }

@@ -44,5 +44,21 @@
     "sosSent": "SOS alert recorded.",
     "sosError": "Unable to send the SOS alert."
   },
+  "exceptions": {
+    "title": "Pending exceptions",
+    "hint": "You clocked in/out outside your assigned work area. Please explain why.",
+    "outsideZone": "You were {{distance}} m outside the site's allowed area.",
+    "reasonCategoryLabel": "Reason category",
+    "reasonLabel": "Details",
+    "submitAction": "Submit reason",
+    "submitError": "Unable to submit this reason.",
+    "category": {
+      "purchasing_food": "Purchasing food",
+      "restroom": "Restroom",
+      "work_assignment": "Work assignment",
+      "emergency": "Emergency",
+      "other": "Other"
+    }
+  },
   "comingSoon": "The rest of PROSM Time (schedules, timesheets, reports) arrives in later work packages."
 }
