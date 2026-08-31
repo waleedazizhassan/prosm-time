@@ -23,17 +23,23 @@ import frDashboard from "./locales/fr/dashboard.json";
 import deDashboard from "./locales/de/dashboard.json";
 import itDashboard from "./locales/it/dashboard.json";
 
+import enPeople from "./locales/en/people.json";
+import arPeople from "./locales/ar/people.json";
+import frPeople from "./locales/fr/people.json";
+import dePeople from "./locales/de/people.json";
+import itPeople from "./locales/it/people.json";
+
 // PROSM Time i18n bootstrap. One namespace per screen/domain area,
 // exactly the way PROSM Platform's own src/i18n/index.js does - never
-// raw strings in components. `auth`/`dashboard` are WP-03's additions
-// (activation, login, the minimal dashboard shell).
+// raw strings in components. `people` is WP-04's addition (Employee
+// Management, invitations, Administrator & Permission Management).
 
 const resources = {
-  en: { common: enCommon, auth: enAuth, dashboard: enDashboard },
-  ar: { common: arCommon, auth: arAuth, dashboard: arDashboard },
-  fr: { common: frCommon, auth: frAuth, dashboard: frDashboard },
-  de: { common: deCommon, auth: deAuth, dashboard: deDashboard },
-  it: { common: itCommon, auth: itAuth, dashboard: itDashboard },
+  en: { common: enCommon, auth: enAuth, dashboard: enDashboard, people: enPeople },
+  ar: { common: arCommon, auth: arAuth, dashboard: arDashboard, people: arPeople },
+  fr: { common: frCommon, auth: frAuth, dashboard: frDashboard, people: frPeople },
+  de: { common: deCommon, auth: deAuth, dashboard: deDashboard, people: dePeople },
+  it: { common: itCommon, auth: itAuth, dashboard: itDashboard, people: itPeople },
 };
 
 export const I18N_STORAGE_KEY = "prosm_time_language";
@@ -47,7 +53,7 @@ i18next
     fallbackLng: DEFAULT_LANGUAGE,
     supportedLngs: LANGUAGE_CODES,
 
-    ns: ["common", "auth", "dashboard"],
+    ns: ["common", "auth", "dashboard", "people"],
     defaultNS: "common",
 
     detection: {

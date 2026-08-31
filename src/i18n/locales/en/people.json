@@ -1,0 +1,57 @@
+{
+  "title": "People",
+  "subtitle": "Administrators and employees in your organization.",
+  "backToDashboard": "Back to dashboard",
+  "loadError": "Unable to load your organization's members.",
+  "columns": {
+    "name": "Name",
+    "email": "Email",
+    "role": "Role",
+    "status": "Status"
+  },
+  "status": {
+    "active": "Active",
+    "invited": "Invited",
+    "suspended": "Suspended"
+  },
+  "ownerBadge": "Owner",
+  "noAccess": "You do not have permission to view people.",
+  "invite": {
+    "actionLabel": "Invite employee",
+    "title": "Invite an employee",
+    "emailLabel": "Email",
+    "fullNameLabel": "Full name",
+    "roleLabel": "Role",
+    "role": {
+      "manager": "Manager / Site Manager",
+      "supervisor": "Supervisor / Team Lead",
+      "employee": "Employee",
+      "read_only": "Read-only / Reporting"
+    },
+    "confirm": "Send invitation",
+    "genericError": "Unable to invite this employee.",
+    "successTitle": "Invitation created",
+    "oneTimeWarning": "This verification code is shown only once. Hand it to the employee directly - email delivery is not yet automated.",
+    "codeLabel": "Verification code",
+    "close": "Close"
+  },
+  "detail": {
+    "title": "Member",
+    "loadError": "Unable to load this member.",
+    "permissionsTitle": "Permissions",
+    "permissionsHint": "Bold entries are individually overridden for this person; everything else follows their role's default bundle.",
+    "grantedLabel": "Granted",
+    "notGrantedLabel": "Not granted",
+    "grantAction": "Grant",
+    "revokeAction": "Revoke",
+    "resetAction": "Reset to role default",
+    "reasonLabel": "Reason",
+    "reasonRequired": "A reason is required.",
+    "genericError": "Unable to update this permission.",
+    "devicesTitle": "Device bindings",
+    "devicesHint": "Devices this person has attempted to clock in from will appear here once attendance tracking (a later work package) is live.",
+    "noDevices": "No devices bound yet.",
+    "approveAction": "Approve",
+    "blockAction": "Block"
+  }
+}

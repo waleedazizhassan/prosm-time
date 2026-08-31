@@ -22,6 +22,8 @@ describe("LoginPage", () => {
       loading: false,
       isAuthenticated: false,
       profile: null,
+      permissions: [],
+      hasPermission: () => false,
       refreshProfile: vi.fn(),
       signOut: vi.fn(),
     });

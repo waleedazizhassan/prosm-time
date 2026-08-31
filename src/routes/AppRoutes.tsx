@@ -5,12 +5,16 @@ import ProtectedRoute from "./ProtectedRoute";
 
 import ActivationPage from "../modules/activation/ActivationPage";
 import LoginPage from "../modules/auth/LoginPage";
+import AcceptInvitationPage from "../modules/onboarding/AcceptInvitationPage";
 import DashboardPage from "../modules/dashboard/DashboardPage";
+import PeoplePage from "../modules/people/PeoplePage";
+import PersonDetailPage from "../modules/people/PersonDetailPage";
 
-// PROSM Time WP-03 route map: /activate and /login are public (no
-// session exists yet at /activate by definition); /dashboard is
-// protected. Root redirects to whichever of those the current session
-// state actually calls for - never a bare unauthenticated home screen.
+// PROSM Time route map. /activate, /login, /accept-invitation are
+// public (no session exists yet by definition at any of them);
+// /dashboard, /people, /people/:userId are protected. Root redirects to
+// whichever of those the current session state actually calls for -
+// never a bare unauthenticated home screen.
 function RootRedirect() {
   const { loading, isAuthenticated } = useAuth();
 
@@ -27,11 +31,28 @@ export default function AppRoutes() {
           <Route path="/" element={<RootRedirect />} />
           <Route path="/activate" element={<ActivationPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/accept-invitation" element={<AcceptInvitationPage />} />
           <Route
             path="/dashboard"
             element={
               <ProtectedRoute>
                 <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/people"
+            element={
+              <ProtectedRoute>
+                <PeoplePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/people/:userId"
+            element={
+              <ProtectedRoute>
+                <PersonDetailPage />
               </ProtectedRoute>
             }
           />

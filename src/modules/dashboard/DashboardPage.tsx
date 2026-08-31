@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 import { useAuth } from "../../core/context/AuthContext";
 import OrganizationRepository, { type Organization } from "../../core/repositories/OrganizationRepository";
@@ -17,7 +18,7 @@ import BrandMark from "../../components/common/BrandMark";
 // exist to actually show.
 export default function DashboardPage() {
   const { t } = useTranslation("dashboard");
-  const { profile, signOut } = useAuth();
+  const { profile, signOut, hasPermission } = useAuth();
 
   const [organization, setOrganization] = useState<Organization | null>(null);
   const [license, setLicense] = useState<LicenseState | null>(null);
@@ -111,6 +112,14 @@ export default function DashboardPage() {
           </section>
         </div>
       )}
+
+      {hasPermission("employees.view") ? (
+        <p style={{ marginTop: "1.5rem" }}>
+          <Link to="/people" style={{ color: "var(--accent-light)" }}>
+            {t("peopleLink")}
+          </Link>
+        </p>
+      ) : null}
 
       <p style={{ marginTop: "2rem", color: "var(--text-secondary)", fontSize: "0.85rem" }}>{t("comingSoon")}</p>
     </div>

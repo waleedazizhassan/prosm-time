@@ -15,3 +15,15 @@ entrypoint = "./functions/activate-organization/index.ts"
 enabled = true
 verify_jwt = true
 entrypoint = "./functions/refresh-license-status/index.ts"
+
+[functions.invite-user]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/invite-user/index.ts"
+
+# redeem-invitation is the invited employee's own entry point - no
+# session exists yet (§37), same reasoning as activate-organization.
+[functions.redeem-invitation]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/redeem-invitation/index.ts"

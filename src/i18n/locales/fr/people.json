@@ -1,0 +1,57 @@
+{
+  "title": "Personnes",
+  "subtitle": "Administrateurs et employés de votre organisation.",
+  "backToDashboard": "Retour au tableau de bord",
+  "loadError": "Impossible de charger les membres de votre organisation.",
+  "columns": {
+    "name": "Nom",
+    "email": "E-mail",
+    "role": "Rôle",
+    "status": "Statut"
+  },
+  "status": {
+    "active": "Actif",
+    "invited": "Invité",
+    "suspended": "Suspendu"
+  },
+  "ownerBadge": "Propriétaire",
+  "noAccess": "Vous n'avez pas la permission de voir les personnes.",
+  "invite": {
+    "actionLabel": "Inviter un employé",
+    "title": "Inviter un employé",
+    "emailLabel": "E-mail",
+    "fullNameLabel": "Nom complet",
+    "roleLabel": "Rôle",
+    "role": {
+      "manager": "Manager / Responsable de site",
+      "supervisor": "Superviseur / Chef d'équipe",
+      "employee": "Employé",
+      "read_only": "Lecture seule / Rapports"
+    },
+    "confirm": "Envoyer l'invitation",
+    "genericError": "Impossible d'inviter cet employé.",
+    "successTitle": "Invitation créée",
+    "oneTimeWarning": "Ce code de vérification ne s'affiche qu'une seule fois. Remettez-le directement à l'employé - l'envoi par e-mail n'est pas encore automatisé.",
+    "codeLabel": "Code de vérification",
+    "close": "Fermer"
+  },
+  "detail": {
+    "title": "Membre",
+    "loadError": "Impossible de charger ce membre.",
+    "permissionsTitle": "Autorisations",
+    "permissionsHint": "Les entrées en gras sont modifiées individuellement pour cette personne ; tout le reste suit le lot par défaut de son rôle.",
+    "grantedLabel": "Accordée",
+    "notGrantedLabel": "Non accordée",
+    "grantAction": "Accorder",
+    "revokeAction": "Révoquer",
+    "resetAction": "Réinitialiser au rôle par défaut",
+    "reasonLabel": "Motif",
+    "reasonRequired": "Un motif est requis.",
+    "genericError": "Impossible de mettre à jour cette autorisation.",
+    "devicesTitle": "Appareils associés",
+    "devicesHint": "Les appareils depuis lesquels cette personne a tenté de pointer apparaîtront ici une fois le suivi de présence (un lot de travail ultérieur) actif.",
+    "noDevices": "Aucun appareil associé pour le moment.",
+    "approveAction": "Approuver",
+    "blockAction": "Bloquer"
+  }
+}

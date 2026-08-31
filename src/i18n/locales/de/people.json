@@ -1,0 +1,57 @@
+{
+  "title": "Personen",
+  "subtitle": "Administratoren und Mitarbeiter in Ihrer Organisation.",
+  "backToDashboard": "Zurück zum Dashboard",
+  "loadError": "Mitglieder Ihrer Organisation konnten nicht geladen werden.",
+  "columns": {
+    "name": "Name",
+    "email": "E-Mail",
+    "role": "Rolle",
+    "status": "Status"
+  },
+  "status": {
+    "active": "Aktiv",
+    "invited": "Eingeladen",
+    "suspended": "Gesperrt"
+  },
+  "ownerBadge": "Inhaber",
+  "noAccess": "Sie haben keine Berechtigung, Personen anzuzeigen.",
+  "invite": {
+    "actionLabel": "Mitarbeiter einladen",
+    "title": "Einen Mitarbeiter einladen",
+    "emailLabel": "E-Mail",
+    "fullNameLabel": "Vollständiger Name",
+    "roleLabel": "Rolle",
+    "role": {
+      "manager": "Manager / Standortleiter",
+      "supervisor": "Vorgesetzter / Teamleiter",
+      "employee": "Mitarbeiter",
+      "read_only": "Nur Lesezugriff / Berichte"
+    },
+    "confirm": "Einladung senden",
+    "genericError": "Dieser Mitarbeiter konnte nicht eingeladen werden.",
+    "successTitle": "Einladung erstellt",
+    "oneTimeWarning": "Dieser Verifizierungscode wird nur einmal angezeigt. Geben Sie ihn dem Mitarbeiter direkt weiter - der E-Mail-Versand ist noch nicht automatisiert.",
+    "codeLabel": "Verifizierungscode",
+    "close": "Schließen"
+  },
+  "detail": {
+    "title": "Mitglied",
+    "loadError": "Dieses Mitglied konnte nicht geladen werden.",
+    "permissionsTitle": "Berechtigungen",
+    "permissionsHint": "Fett hervorgehobene Einträge sind für diese Person individuell überschrieben; alles andere folgt dem Standardpaket ihrer Rolle.",
+    "grantedLabel": "Gewährt",
+    "notGrantedLabel": "Nicht gewährt",
+    "grantAction": "Gewähren",
+    "revokeAction": "Entziehen",
+    "resetAction": "Auf Rollenstandard zurücksetzen",
+    "reasonLabel": "Grund",
+    "reasonRequired": "Ein Grund ist erforderlich.",
+    "genericError": "Diese Berechtigung konnte nicht aktualisiert werden.",
+    "devicesTitle": "Geräteverknüpfungen",
+    "devicesHint": "Geräte, von denen aus diese Person versucht hat, sich einzustempeln, erscheinen hier, sobald die Anwesenheitserfassung (ein späteres Arbeitspaket) aktiv ist.",
+    "noDevices": "Noch keine Geräte verknüpft.",
+    "approveAction": "Genehmigen",
+    "blockAction": "Sperren"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "title": "الأشخاص",
+  "subtitle": "المسؤولون والموظفون في مؤسستك.",
+  "backToDashboard": "العودة إلى لوحة التحكم",
+  "loadError": "تعذر تحميل أعضاء مؤسستك.",
+  "columns": {
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "role": "الدور",
+    "status": "الحالة"
+  },
+  "status": {
+    "active": "نشط",
+    "invited": "تمت الدعوة",
+    "suspended": "موقوف"
+  },
+  "ownerBadge": "المالك",
+  "noAccess": "ليس لديك صلاحية لعرض الأشخاص.",
+  "invite": {
+    "actionLabel": "دعوة موظف",
+    "title": "دعوة موظف",
+    "emailLabel": "البريد الإلكتروني",
+    "fullNameLabel": "الاسم الكامل",
+    "roleLabel": "الدور",
+    "role": {
+      "manager": "مدير / مدير موقع",
+      "supervisor": "مشرف / قائد فريق",
+      "employee": "موظف",
+      "read_only": "قراءة فقط / تقارير"
+    },
+    "confirm": "إرسال الدعوة",
+    "genericError": "تعذر دعوة هذا الموظف.",
+    "successTitle": "تم إنشاء الدعوة",
+    "oneTimeWarning": "يُعرض كود التحقق هذا مرة واحدة فقط. سلّمه للموظف مباشرة - إرسال البريد الإلكتروني غير آلي بعد.",
+    "codeLabel": "كود التحقق",
+    "close": "إغلاق"
+  },
+  "detail": {
+    "title": "العضو",
+    "loadError": "تعذر تحميل بيانات هذا العضو.",
+    "permissionsTitle": "الصلاحيات",
+    "permissionsHint": "العناصر البارزة معدّلة يدويًا لهذا الشخص؛ وكل ما عداها يتبع الحزمة الافتراضية لدوره.",
+    "grantedLabel": "ممنوحة",
+    "notGrantedLabel": "غير ممنوحة",
+    "grantAction": "منح",
+    "revokeAction": "سحب",
+    "resetAction": "إعادة للافتراضي",
+    "reasonLabel": "السبب",
+    "reasonRequired": "السبب مطلوب.",
+    "genericError": "تعذر تحديث هذا الصلاحية.",
+    "devicesTitle": "الأجهزة المرتبطة",
+    "devicesHint": "ستظهر هنا الأجهزة التي حاول هذا الشخص تسجيل الحضور منها بمجرد تفعيل تتبع الحضور (حزمة عمل لاحقة).",
+    "noDevices": "لا توجد أجهزة مرتبطة بعد.",
+    "approveAction": "اعتماد",
+    "blockAction": "حظر"
+  }
+}

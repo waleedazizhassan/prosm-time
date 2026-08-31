@@ -1,0 +1,57 @@
+{
+  "title": "Persone",
+  "subtitle": "Amministratori e dipendenti della tua organizzazione.",
+  "backToDashboard": "Torna alla dashboard",
+  "loadError": "Impossibile caricare i membri della tua organizzazione.",
+  "columns": {
+    "name": "Nome",
+    "email": "Email",
+    "role": "Ruolo",
+    "status": "Stato"
+  },
+  "status": {
+    "active": "Attivo",
+    "invited": "Invitato",
+    "suspended": "Sospeso"
+  },
+  "ownerBadge": "Proprietario",
+  "noAccess": "Non hai il permesso di visualizzare le persone.",
+  "invite": {
+    "actionLabel": "Invita dipendente",
+    "title": "Invita un dipendente",
+    "emailLabel": "Email",
+    "fullNameLabel": "Nome completo",
+    "roleLabel": "Ruolo",
+    "role": {
+      "manager": "Manager / Responsabile di sede",
+      "supervisor": "Supervisore / Capo squadra",
+      "employee": "Dipendente",
+      "read_only": "Sola lettura / Report"
+    },
+    "confirm": "Invia invito",
+    "genericError": "Impossibile invitare questo dipendente.",
+    "successTitle": "Invito creato",
+    "oneTimeWarning": "Questo codice di verifica viene mostrato una sola volta. Consegnalo direttamente al dipendente - l'invio via email non è ancora automatizzato.",
+    "codeLabel": "Codice di verifica",
+    "close": "Chiudi"
+  },
+  "detail": {
+    "title": "Membro",
+    "loadError": "Impossibile caricare questo membro.",
+    "permissionsTitle": "Autorizzazioni",
+    "permissionsHint": "Le voci in grassetto sono sovrascritte individualmente per questa persona; tutto il resto segue il pacchetto predefinito del suo ruolo.",
+    "grantedLabel": "Concessa",
+    "notGrantedLabel": "Non concessa",
+    "grantAction": "Concedi",
+    "revokeAction": "Revoca",
+    "resetAction": "Ripristina al predefinito del ruolo",
+    "reasonLabel": "Motivo",
+    "reasonRequired": "È richiesto un motivo.",
+    "genericError": "Impossibile aggiornare questa autorizzazione.",
+    "devicesTitle": "Dispositivi associati",
+    "devicesHint": "I dispositivi da cui questa persona ha tentato di timbrare appariranno qui una volta attivo il tracciamento delle presenze (un pacchetto di lavoro successivo).",
+    "noDevices": "Nessun dispositivo associato ancora.",
+    "approveAction": "Approva",
+    "blockAction": "Blocca"
+  }
+}
