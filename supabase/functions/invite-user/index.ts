@@ -13,14 +13,18 @@
 // itself has no idea who is calling, this Edge Function is what makes
 // that safe.
 //
-// Real email delivery (user-directed, Resend, noreply@prosm.net) is
-// attempted after the invitation is created - sendEmail() is a soft
-// dependency (§ _shared/emailService.ts), so a missing RESEND_API_KEY
-// or provider outage never blocks the invitation itself. The code/link
-// are always returned in this response too, for the inviting admin to
-// share directly - same "controlled one-time display" posture as every
-// other secret in this codebase, now a real delivered email as well as
-// a fallback the admin can act on immediately.
+// Real email delivery is attempted after the invitation is created -
+// sendEmail() is a soft dependency (§ _shared/emailService.ts), so
+// missing/invalid Zoho OAuth config or a provider outage never blocks
+// the invitation itself. Provider is Zoho Mail from noreply@prosm.net,
+// matching PROSM Platform's own already-verified, already-working
+// email configuration exactly (same ZOHO_* secret names, same OAuth
+// flow) - PROSM Time holds its own copies of those secrets in its own
+// Supabase project. The code/link are always returned in this response
+// too, for the inviting admin to share directly - same "controlled
+// one-time display" posture as every other secret in this codebase,
+// now a real delivered email as well as a fallback the admin can act
+// on immediately.
 // deno-lint-ignore-file no-explicit-any
 
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
