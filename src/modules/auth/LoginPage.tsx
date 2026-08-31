@@ -7,6 +7,7 @@ import { useAuth } from "../../core/context/AuthContext";
 
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
+import BrandMark from "../../components/common/BrandMark";
 
 // PROSM Time Implementation Master File V3.0, WP-03/§12/§37 - "secure
 // authentication." Plain Supabase Auth email/password sign-in - the
@@ -45,6 +46,9 @@ export default function LoginPage() {
 
   return (
     <div style={{ maxWidth: 380, margin: "5rem auto", padding: "0 1rem" }}>
+      <div style={{ marginBottom: "1.5rem" }}>
+        <BrandMark size={48} />
+      </div>
       <h1 style={{ fontSize: "1.5rem", marginBottom: "0.25rem" }}>{t("login.title")}</h1>
       <p style={{ color: "var(--text-secondary)", marginBottom: "1.5rem" }}>{t("login.subtitle")}</p>
 

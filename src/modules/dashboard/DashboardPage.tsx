@@ -6,6 +6,7 @@ import OrganizationRepository, { type Organization } from "../../core/repositori
 import LicenseRepository, { type LicenseState } from "../../core/repositories/LicenseRepository";
 
 import Button from "../../components/common/Button";
+import BrandMark from "../../components/common/BrandMark";
 
 // PROSM Time Implementation Master File V3.0, WP-03/§21/§37 - "Admin
 // Dashboard." Deliberately minimal: real organization identity and a
@@ -54,9 +55,12 @@ export default function DashboardPage() {
   return (
     <div style={{ maxWidth: 720, margin: "0 auto", padding: "2rem 1rem" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
-        <div>
-          <h1 style={{ fontSize: "1.5rem", margin: 0 }}>{t("title")}</h1>
-          {profile ? <p style={{ color: "var(--text-secondary)", margin: 0 }}>{t("welcomeMessage", { name: profile.fullName })}</p> : null}
+        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+          <BrandMark size={32} />
+          <div>
+            <h1 style={{ fontSize: "1.5rem", margin: 0 }}>{t("title")}</h1>
+            {profile ? <p style={{ color: "var(--text-secondary)", margin: 0 }}>{t("welcomeMessage", { name: profile.fullName })}</p> : null}
+          </div>
         </div>
         <Button variant="ghost" onClick={signOut}>
           {t("signOutAction")}
