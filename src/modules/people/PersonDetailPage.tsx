@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type CSSProperties } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, Navigate, useParams } from "react-router-dom";
 
@@ -7,14 +7,26 @@ import EmployeeRepository, { type OrgMember } from "../../core/repositories/Empl
 import PermissionRepository, { type Permission } from "../../core/repositories/PermissionRepository";
 import DeviceBindingRepository, { type DeviceBinding } from "../../core/repositories/DeviceBindingRepository";
 
+import PageShell from "../../components/common/PageShell";
+import Card from "../../components/common/Card";
 import Button from "../../components/common/Button";
 import Modal from "../../components/common/Modal";
 import Textarea from "../../components/common/Textarea";
+import StatusBadge from "../../components/common/StatusBadge";
 
 interface PendingChange {
   permission: Permission;
   action: "grant" | "revoke" | "reset";
 }
+
+const rowStyle: CSSProperties = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  gap: "var(--space-3)",
+  padding: "var(--space-3) 0",
+  borderTop: "1px solid var(--border-light)",
+};
 
 // PROSM Time Implementation Master File V3.0, WP-04/§9/§37 -
 // "Administrator & Permission Management." Shows the real effective
@@ -123,93 +135,98 @@ export default function PersonDetailPage() {
     await load();
   };
 
-  if (loading) return <div style={{ padding: "2rem" }}>…</div>;
-  if (loadError || !member) return <div style={{ padding: "2rem", color: "var(--danger)" }}>{loadError}</div>;
+  if (loading) {
+    return (
+      <PageShell title={t("detail.title")}>
+        <p>…</p>
+      </PageShell>
+    );
+  }
+  if (loadError || !member) {
+    return (
+      <PageShell title={t("detail.title")}>
+        <p style={{ color: "var(--brand-danger)" }}>{loadError}</p>
+      </PageShell>
+    );
+  }
 
   return (
-    <div style={{ maxWidth: 720, margin: "0 auto", padding: "2rem 1rem" }}>
-      <Link to="/people" style={{ color: "var(--accent-light)", fontSize: "0.85rem" }}>
+    <PageShell title={member.fullName} subtitle={`${member.email} · ${member.roleName}`}>
+      <Link to="/people" style={{ color: "var(--text-link)", fontSize: "var(--font-sm)" }}>
         {t("backToDashboard")}
       </Link>
-      <h1 style={{ fontSize: "1.5rem", marginTop: "0.5rem", marginBottom: 0 }}>{member.fullName}</h1>
-      <p style={{ color: "var(--text-secondary)", marginTop: "0.25rem" }}>
-        {member.email} · {member.roleName}
-      </p>
 
-      <section style={{ marginTop: "1.5rem" }}>
-        <h2 style={{ fontSize: "1.1rem" }}>{t("detail.permissionsTitle")}</h2>
-        <p style={{ color: "var(--text-secondary)", fontSize: "0.85rem" }}>{t("detail.permissionsHint")}</p>
+      <Card title={t("detail.permissionsTitle")}>
+        <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.permissionsHint")}</p>
 
         {member.isOwner ? (
-          <p style={{ color: "var(--text-secondary)", fontSize: "0.85rem" }}>{t("ownerBadge")}: {catalog.length}/{catalog.length}</p>
+          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>
+            {t("ownerBadge")}: {catalog.length}/{catalog.length}
+          </p>
         ) : (
-          <div>
-            {catalog.map((permission) => {
-              const isGranted = effective.includes(permission.permissionKey);
-              const isOverridden = permission.permissionKey in overrides;
-              return (
-                <div
-                  key={permission.id}
-                  style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.5rem 0", borderTop: "1px solid var(--border)" }}
-                >
-                  <div style={{ fontWeight: isOverridden ? 700 : 400 }}>
-                    <div>{permission.name}</div>
-                    <div style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>
-                      {isGranted ? t("detail.grantedLabel") : t("detail.notGrantedLabel")}
-                    </div>
+          catalog.map((permission) => {
+            const isGranted = effective.includes(permission.permissionKey);
+            const isOverridden = permission.permissionKey in overrides;
+            return (
+              <div key={permission.id} style={rowStyle}>
+                <div>
+                  <div style={{ fontWeight: isOverridden ? "var(--font-weight-bold)" : "var(--font-weight-regular)", color: "var(--text-primary)", fontSize: "var(--font-sm)" }}>
+                    {permission.name}
                   </div>
-                  {canManagePermissions ? (
-                    <div style={{ display: "flex", gap: "0.5rem" }}>
-                      {!isGranted ? (
-                        <Button variant="ghost" onClick={() => openChange(permission, "grant")}>
-                          {t("detail.grantAction")}
-                        </Button>
-                      ) : (
-                        <Button variant="ghost" onClick={() => openChange(permission, "revoke")}>
-                          {t("detail.revokeAction")}
-                        </Button>
-                      )}
-                      {isOverridden ? (
-                        <Button variant="ghost" onClick={() => openChange(permission, "reset")}>
-                          {t("detail.resetAction")}
-                        </Button>
-                      ) : null}
-                    </div>
-                  ) : null}
+                  <StatusBadge status={isGranted ? "active" : "neutral"}>{isGranted ? t("detail.grantedLabel") : t("detail.notGrantedLabel")}</StatusBadge>
                 </div>
-              );
-            })}
-          </div>
+                {canManagePermissions ? (
+                  <div style={{ display: "flex", gap: "var(--space-2)" }}>
+                    {!isGranted ? (
+                      <Button variant="ghost" size="xs" onClick={() => openChange(permission, "grant")}>
+                        {t("detail.grantAction")}
+                      </Button>
+                    ) : (
+                      <Button variant="ghost" size="xs" onClick={() => openChange(permission, "revoke")}>
+                        {t("detail.revokeAction")}
+                      </Button>
+                    )}
+                    {isOverridden ? (
+                      <Button variant="ghost" size="xs" onClick={() => openChange(permission, "reset")}>
+                        {t("detail.resetAction")}
+                      </Button>
+                    ) : null}
+                  </div>
+                ) : null}
+              </div>
+            );
+          })
         )}
-      </section>
+      </Card>
 
-      <section style={{ marginTop: "1.5rem" }}>
-        <h2 style={{ fontSize: "1.1rem" }}>{t("detail.devicesTitle")}</h2>
-        <p style={{ color: "var(--text-secondary)", fontSize: "0.85rem" }}>{t("detail.devicesHint")}</p>
-        {deviceActionError ? <p style={{ color: "var(--danger)", fontSize: "0.85rem" }}>{deviceActionError}</p> : null}
+      <Card title={t("detail.devicesTitle")}>
+        <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.devicesHint")}</p>
+        {deviceActionError ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{deviceActionError}</p> : null}
         {devices.length === 0 ? (
-          <p style={{ color: "var(--text-secondary)" }}>{t("detail.noDevices")}</p>
+          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("detail.noDevices")}</p>
         ) : (
           devices.map((device) => (
-            <div key={device.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.5rem 0", borderTop: "1px solid var(--border)" }}>
+            <div key={device.id} style={rowStyle}>
               <div>
-                <div>{device.deviceLabel ?? device.deviceIdentifier}</div>
-                <div style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>{device.status}</div>
+                <div style={{ color: "var(--text-primary)", fontSize: "var(--font-sm)" }}>{device.deviceLabel ?? device.deviceIdentifier}</div>
+                <StatusBadge status={device.status}>{device.status}</StatusBadge>
               </div>
-              {canManageDevices && device.status !== "approved" ? (
-                <Button variant="ghost" onClick={() => handleDeviceStatus(device.id, "approved")}>
-                  {t("detail.approveAction")}
-                </Button>
-              ) : null}
-              {canManageDevices && device.status !== "blocked" ? (
-                <Button variant="ghost" onClick={() => handleDeviceStatus(device.id, "blocked")}>
-                  {t("detail.blockAction")}
-                </Button>
-              ) : null}
+              <div style={{ display: "flex", gap: "var(--space-2)" }}>
+                {canManageDevices && device.status !== "approved" ? (
+                  <Button variant="ghost" size="xs" onClick={() => handleDeviceStatus(device.id, "approved")}>
+                    {t("detail.approveAction")}
+                  </Button>
+                ) : null}
+                {canManageDevices && device.status !== "blocked" ? (
+                  <Button variant="ghost" size="xs" onClick={() => handleDeviceStatus(device.id, "blocked")}>
+                    {t("detail.blockAction")}
+                  </Button>
+                ) : null}
+              </div>
             </div>
           ))
         )}
-      </section>
+      </Card>
 
       <Modal
         isOpen={Boolean(pendingChange)}
@@ -227,8 +244,8 @@ export default function PersonDetailPage() {
         }
       >
         <Textarea label={t("detail.reasonLabel")} name="changeReason" value={reason} onChange={(event) => setReason(event.target.value)} required disabled={submitting} />
-        {changeError ? <p style={{ color: "var(--danger)", fontSize: "0.85rem" }}>{changeError}</p> : null}
+        {changeError ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{changeError}</p> : null}
       </Modal>
-    </div>
+    </PageShell>
   );
 }

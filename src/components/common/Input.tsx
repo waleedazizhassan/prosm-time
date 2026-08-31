@@ -1,5 +1,6 @@
 import type { ChangeEvent } from "react";
 import FormField from "./FormField";
+import styles from "./Input.module.css";
 
 interface InputProps {
   label?: string;
@@ -39,17 +40,7 @@ export default function Input({
         onChange={onChange}
         disabled={disabled}
         autoComplete={autoComplete}
-        style={{
-          width: "100%",
-          padding: "10px 12px",
-          fontSize: "0.95rem",
-          fontFamily: "inherit",
-          color: "var(--text-primary)",
-          background: "var(--surface-card)",
-          border: `1px solid ${error ? "var(--danger)" : "var(--border)"}`,
-          borderRadius: "var(--radius-md)",
-          outline: "none",
-        }}
+        className={[styles.input, error ? styles.errorInput : ""].filter(Boolean).join(" ")}
       />
     </FormField>
   );

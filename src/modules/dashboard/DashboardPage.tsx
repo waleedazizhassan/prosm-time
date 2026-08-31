@@ -6,8 +6,10 @@ import { useAuth } from "../../core/context/AuthContext";
 import OrganizationRepository, { type Organization } from "../../core/repositories/OrganizationRepository";
 import LicenseRepository, { type LicenseState } from "../../core/repositories/LicenseRepository";
 
+import PageShell from "../../components/common/PageShell";
+import Card from "../../components/common/Card";
 import Button from "../../components/common/Button";
-import BrandMark from "../../components/common/BrandMark";
+import StatusBadge from "../../components/common/StatusBadge";
 
 // PROSM Time Implementation Master File V3.0, WP-03/§21/§37 - "Admin
 // Dashboard." Deliberately minimal: real organization identity and a
@@ -54,74 +56,67 @@ export default function DashboardPage() {
   };
 
   return (
-    <div style={{ maxWidth: 720, margin: "0 auto", padding: "2rem 1rem" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-          <BrandMark size={32} />
-          <div>
-            <h1 style={{ fontSize: "1.5rem", margin: 0 }}>{t("title")}</h1>
-            {profile ? <p style={{ color: "var(--text-secondary)", margin: 0 }}>{t("welcomeMessage", { name: profile.fullName })}</p> : null}
-          </div>
-        </div>
+    <PageShell
+      title={t("title")}
+      subtitle={profile ? t("welcomeMessage", { name: profile.fullName }) : undefined}
+      actions={
         <Button variant="ghost" onClick={signOut}>
           {t("signOutAction")}
         </Button>
-      </div>
-
+      }
+    >
       {loading ? (
         <p>…</p>
       ) : (
-        <div style={{ display: "grid", gap: "1rem", gridTemplateColumns: "1fr 1fr" }}>
-          <section style={{ background: "var(--surface-card)", border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "1.25rem" }}>
-            <h2 style={{ fontSize: "1rem", marginTop: 0 }}>{t("organizationCard.title")}</h2>
+        <div style={{ display: "grid", gap: "var(--space-4)", gridTemplateColumns: "1fr 1fr" }}>
+          <Card title={t("organizationCard.title")}>
             {organization ? (
-              <dl style={{ margin: 0 }}>
-                <dt style={{ fontSize: "0.8rem", color: "var(--text-secondary)" }}>{organization.name}</dt>
-                <dd style={{ margin: "0.25rem 0 0.75rem", fontSize: "0.85rem", color: "var(--text-secondary)" }}>
+              <dl style={{ margin: 0, fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>
+                <dt style={{ color: "var(--text-primary)", fontWeight: "var(--font-weight-semibold)" }}>{organization.name}</dt>
+                <dd style={{ margin: "var(--space-2) 0" }}>
                   {t("organizationCard.codeLabel")}: {organization.organizationCode}
                 </dd>
-                <dd style={{ margin: 0, fontSize: "0.85rem", color: "var(--text-secondary)" }}>
-                  {t("organizationCard.statusLabel")}: {organization.status}
+                <dd style={{ margin: 0 }}>
+                  {t("organizationCard.statusLabel")}: <StatusBadge status={organization.status}>{organization.status}</StatusBadge>
                 </dd>
               </dl>
             ) : null}
-          </section>
+          </Card>
 
-          <section style={{ background: "var(--surface-card)", border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "1.25rem" }}>
-            <h2 style={{ fontSize: "1rem", marginTop: 0 }}>{t("licenseCard.title")}</h2>
+          <Card title={t("licenseCard.title")}>
             {license ? (
-              <dl style={{ margin: 0, fontSize: "0.85rem", color: "var(--text-secondary)" }}>
-                <dd style={{ margin: "0 0 0.5rem" }}>
+              <dl style={{ margin: 0, fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>
+                <dd style={{ margin: "0 0 var(--space-2)" }}>
                   {t("licenseCard.licenseNumberLabel")}: {license.licenseNumber}
                 </dd>
-                <dd style={{ margin: "0 0 0.5rem" }}>
-                  {t("licenseCard.statusLabel")}: {t(`licenseCard.status.${license.status}`, { defaultValue: license.status })}
+                <dd style={{ margin: "0 0 var(--space-2)" }}>
+                  {t("licenseCard.statusLabel")}: <StatusBadge status={license.status}>{t(`licenseCard.status.${license.status}`, { defaultValue: license.status })}</StatusBadge>
                 </dd>
-                <dd style={{ margin: "0 0 0.5rem" }}>
+                <dd style={{ margin: "0 0 var(--space-2)" }}>
                   {t("licenseCard.usersLabel")}: {license.maxUsers ?? "—"} · {t("licenseCard.devicesLabel")}: {license.maxDevices ?? "—"}
                 </dd>
-                <dd style={{ margin: "0 0 0.75rem" }}>
+                <dd style={{ margin: "0 0 var(--space-3)" }}>
                   {t("licenseCard.expiresLabel")}: {license.expiresAt ? new Date(license.expiresAt).toLocaleDateString() : t("licenseCard.noExpiry")}
                 </dd>
               </dl>
             ) : null}
-            {refreshError ? <p style={{ color: "var(--danger)", fontSize: "0.85rem" }}>{refreshError}</p> : null}
-            <Button variant="ghost" loading={refreshing} onClick={handleRefreshLicense}>
+            {refreshError ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{refreshError}</p> : null}
+            <Button variant="ghost" size="sm" loading={refreshing} onClick={handleRefreshLicense}>
               {t("licenseCard.refreshAction")}
             </Button>
-          </section>
+          </Card>
         </div>
       )}
 
       {hasPermission("employees.view") ? (
-        <p style={{ marginTop: "1.5rem" }}>
-          <Link to="/people" style={{ color: "var(--accent-light)" }}>
+        <p>
+          <Link to="/people" style={{ color: "var(--text-link)", fontWeight: "var(--font-weight-semibold)" }}>
             {t("peopleLink")}
           </Link>
         </p>
       ) : null}
 
-      <p style={{ marginTop: "2rem", color: "var(--text-secondary)", fontSize: "0.85rem" }}>{t("comingSoon")}</p>
-    </div>
+      <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("comingSoon")}</p>
+    </PageShell>
   );
 }

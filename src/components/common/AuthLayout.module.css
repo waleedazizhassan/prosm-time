@@ -1,0 +1,63 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+
+  background: var(--surface-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-8);
+}
+
+.brandRow {
+  margin-bottom: var(--space-6);
+}
+
+.title {
+  margin: 0 0 var(--space-1);
+  font-size: var(--font-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.subtitle {
+  margin: 0 0 var(--space-6);
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+.footerLine {
+  margin-top: var(--space-6);
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+.footerLine a {
+  color: var(--text-link);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+}
+
+.footerLine a:hover {
+  text-decoration: underline;
+}
+
+.errorText {
+  margin: 0 0 var(--space-4);
+  font-size: var(--font-sm);
+  color: var(--brand-danger);
+}
+
+.successText {
+  margin: 0 0 var(--space-4);
+  font-size: var(--font-sm);
+  color: var(--brand-success);
+}

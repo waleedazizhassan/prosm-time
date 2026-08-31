@@ -1,5 +1,6 @@
 import type { ChangeEvent } from "react";
 import FormField from "./FormField";
+import styles from "./Input.module.css";
 
 interface TextareaProps {
   label?: string;
@@ -23,18 +24,8 @@ export default function Textarea({ label, name, value, placeholder = "", onChang
         onChange={onChange}
         disabled={disabled}
         rows={rows}
-        style={{
-          width: "100%",
-          padding: "10px 12px",
-          fontSize: "0.95rem",
-          fontFamily: "inherit",
-          color: "var(--text-primary)",
-          background: "var(--surface-card)",
-          border: "1px solid var(--border)",
-          borderRadius: "var(--radius-md)",
-          outline: "none",
-          resize: "vertical",
-        }}
+        className={styles.input}
+        style={{ height: "auto", padding: "var(--space-3) var(--space-4)", resize: "vertical" }}
       />
     </FormField>
   );

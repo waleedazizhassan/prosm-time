@@ -7,7 +7,8 @@ import AuthService from "../../core/auth/AuthService";
 
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
-import BrandMark from "../../components/common/BrandMark";
+import AuthLayout from "../../components/common/AuthLayout";
+import styles from "../../components/common/AuthLayout.module.css";
 
 // PROSM Time Implementation Master File V3.0, WP-04/§12 - the invited
 // employee's own onboarding entry point. No session exists yet, same
@@ -55,13 +56,7 @@ export default function AcceptInvitationPage() {
   };
 
   return (
-    <div style={{ maxWidth: 420, margin: "4rem auto", padding: "0 1rem" }}>
-      <div style={{ marginBottom: "1.5rem" }}>
-        <BrandMark size={48} />
-      </div>
-      <h1 style={{ fontSize: "1.5rem", marginBottom: "0.25rem" }}>{t("acceptInvitation.title")}</h1>
-      <p style={{ color: "var(--text-secondary)", marginBottom: "1.5rem" }}>{t("acceptInvitation.subtitle")}</p>
-
+    <AuthLayout title={t("acceptInvitation.title")} subtitle={t("acceptInvitation.subtitle")}>
       <form onSubmit={handleSubmit}>
         <Input label={t("login.emailLabel")} name="email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} required disabled={submitting || success} autoComplete="email" />
         <Input
@@ -84,13 +79,13 @@ export default function AcceptInvitationPage() {
           autoComplete="new-password"
         />
 
-        {error ? <p style={{ color: "var(--danger)", marginBottom: "1rem" }}>{error}</p> : null}
-        {success ? <p style={{ color: "var(--success)", marginBottom: "1rem" }}>{t("activation.successMessage")}</p> : null}
+        {error ? <p className={styles.errorText}>{error}</p> : null}
+        {success ? <p className={styles.successText}>{t("activation.successMessage")}</p> : null}
 
         <Button type="submit" fullWidth loading={submitting} disabled={success}>
           {t("activation.submitAction")}
         </Button>
       </form>
-    </div>
+    </AuthLayout>
   );
 }

@@ -7,7 +7,8 @@ import AuthService from "../../core/auth/AuthService";
 
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
-import BrandMark from "../../components/common/BrandMark";
+import AuthLayout from "../../components/common/AuthLayout";
+import styles from "../../components/common/AuthLayout.module.css";
 
 // PROSM Time Implementation Master File V3.0, WP-03/§37 - "Activation /
 // Welcome." The one screen a brand-new customer reaches with no session
@@ -64,13 +65,15 @@ export default function ActivationPage() {
   };
 
   return (
-    <div style={{ maxWidth: 420, margin: "4rem auto", padding: "0 1rem" }}>
-      <div style={{ marginBottom: "1.5rem" }}>
-        <BrandMark size={48} />
-      </div>
-      <h1 style={{ fontSize: "1.5rem", marginBottom: "0.25rem" }}>{t("activation.title")}</h1>
-      <p style={{ color: "var(--text-secondary)", marginBottom: "1.5rem" }}>{t("activation.subtitle")}</p>
-
+    <AuthLayout
+      title={t("activation.title")}
+      subtitle={t("activation.subtitle")}
+      footer={
+        <>
+          {t("activation.alreadyHaveAccount")} <Link to="/login">{t("activation.goToLogin")}</Link>
+        </>
+      }
+    >
       <form onSubmit={handleSubmit}>
         <Input
           label={t("activation.activationCodeLabel")}
@@ -118,17 +121,13 @@ export default function ActivationPage() {
           autoComplete="new-password"
         />
 
-        {error ? <p style={{ color: "var(--danger)", marginBottom: "1rem" }}>{error}</p> : null}
-        {success ? <p style={{ color: "var(--success)", marginBottom: "1rem" }}>{t("activation.successMessage")}</p> : null}
+        {error ? <p className={styles.errorText}>{error}</p> : null}
+        {success ? <p className={styles.successText}>{t("activation.successMessage")}</p> : null}
 
         <Button type="submit" fullWidth loading={submitting} disabled={success}>
           {t("activation.submitAction")}
         </Button>
       </form>
-
-      <p style={{ marginTop: "1.5rem", color: "var(--text-secondary)", fontSize: "0.9rem" }}>
-        {t("activation.alreadyHaveAccount")} <Link to="/login" style={{ color: "var(--accent-light)" }}>{t("activation.goToLogin")}</Link>
-      </p>
-    </div>
+    </AuthLayout>
   );
 }

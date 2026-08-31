@@ -66,11 +66,22 @@ export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: Invi
   if (result) {
     return (
       <Modal isOpen={isOpen} onClose={handleClose} title={t("invite.successTitle")} footer={<Button onClick={handleClose}>{t("invite.close")}</Button>}>
-        <p style={{ color: "var(--danger)", fontSize: "0.85rem" }}>{t("invite.oneTimeWarning")}</p>
-        <p>
-          <strong>{t("invite.codeLabel")}:</strong> <span style={{ fontFamily: "monospace", fontSize: "1.2rem" }}>{result.verificationCode}</span>
+        <p
+          style={{
+            color: "var(--status-warning-text)",
+            background: "var(--status-warning-bg)",
+            border: "1px solid var(--status-warning-border)",
+            borderRadius: "var(--radius-sm)",
+            padding: "var(--space-2) var(--space-3)",
+            fontSize: "var(--font-sm)",
+          }}
+        >
+          {t("invite.oneTimeWarning")}
         </p>
-        <p style={{ color: "var(--text-secondary)", fontSize: "0.85rem" }}>{result.email}</p>
+        <p>
+          <strong>{t("invite.codeLabel")}:</strong> <span style={{ fontFamily: "monospace", fontSize: "var(--font-lg)" }}>{result.verificationCode}</span>
+        </p>
+        <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{result.email}</p>
       </Modal>
     );
   }
@@ -101,7 +112,7 @@ export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: Invi
         disabled={submitting}
         options={ROLE_OPTIONS.map((key) => ({ value: key, label: t(`invite.role.${key}`) }))}
       />
-      {error ? <p style={{ color: "var(--danger)", fontSize: "0.85rem" }}>{error}</p> : null}
+      {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
     </Modal>
   );
 }

@@ -1,45 +1,35 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
+import styles from "./Button.module.css";
 
 interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "type"> {
   children: ReactNode;
   type?: "button" | "submit";
-  variant?: "primary" | "ghost";
+  variant?: "primary" | "ghost" | "danger";
+  size?: "xs" | "sm" | "md";
   loading?: boolean;
   fullWidth?: boolean;
 }
 
+// PROSM Time - mirrors PROSM Platform's own Button.module.css exactly
+// (§ visual consistency pass, user-directed): same variant/size class
+// names and values, same disabled/hover/focus-ring behavior.
 export default function Button({
   children,
   type = "button",
   variant = "primary",
+  size = "md",
   loading = false,
   fullWidth = false,
   disabled,
-  style,
+  className,
   ...rest
 }: ButtonProps) {
-  const isPrimary = variant === "primary";
+  const classNames = [styles.button, styles[variant], styles[size], fullWidth ? styles.fullWidth : "", className]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <button
-      type={type}
-      disabled={disabled || loading}
-      style={{
-        width: fullWidth ? "100%" : undefined,
-        padding: "10px 16px",
-        fontSize: "0.95rem",
-        fontWeight: 600,
-        fontFamily: "inherit",
-        cursor: disabled || loading ? "not-allowed" : "pointer",
-        borderRadius: "var(--radius-md)",
-        border: isPrimary ? "none" : "1px solid var(--border)",
-        background: isPrimary ? "var(--accent)" : "transparent",
-        color: isPrimary ? "var(--accent-contrast)" : "var(--text-primary)",
-        opacity: disabled || loading ? 0.6 : 1,
-        ...style,
-      }}
-      {...rest}
-    >
+    <button type={type} disabled={disabled || loading} aria-busy={loading} className={classNames} {...rest}>
       {loading ? "…" : children}
     </button>
   );

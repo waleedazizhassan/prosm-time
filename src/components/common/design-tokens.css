@@ -1,0 +1,232 @@
+/* PROSM Time - design tokens, ported from PROSM Platform's own
+   src/styles/theme.css (Theme v2.0.0) at the user's explicit direction:
+   "Use the exact existing PROSM visual language... Reuse the existing
+   PROSM design system... Do not invent a new UI style." An independent
+   copy (own repository, §43.5/§6 - never shared code between the two
+   products), but the token NAMES and VALUES are deliberately identical
+   to the real, established system - including --brand-primary being
+   GREEN (#16A34A), confirmed there by an actual usage audit across the
+   app, not the logo's blue (which PROSM Platform reserves specifically
+   for --brand-ai / AI-surfaces only, per that file's own comment).
+
+   Same three-tier architecture as the source: Tier 1 palette (private),
+   Tier 2 semantic (the public API every component reads), Tier 3
+   structural (radius/space/font/shadow/z-index). See the source file
+   for the full rationale; not re-derived here. */
+
+:root {
+  /* Tier 1 - Palette */
+  --palette-slate-950: #020617;
+  --palette-slate-900: #0f172a;
+  --palette-slate-850: #111827;
+  --palette-slate-800: #1e293b;
+  --palette-slate-700: #334155;
+  --palette-slate-600: #475569;
+  --palette-slate-500: #64748b;
+  --palette-slate-400: #94a3b8;
+  --palette-slate-300: #cbd5e1;
+  --palette-slate-200: #e2e8f0;
+  --palette-slate-100: #f1f5f9;
+  --palette-slate-50: #f8fafc;
+  --palette-white: #ffffff;
+
+  --palette-green-900: #166534;
+  --palette-green-800: #15803d;
+  --palette-green-700: #16a34a;
+  --palette-green-600: #22c55e;
+  --palette-green-400: #4ade80;
+  --palette-green-200: #86efac;
+  --palette-green-100: #dcfce7;
+  --palette-green-50: #f0fdf4;
+
+  --palette-navy-900: #0a224a;
+
+  --palette-amber-800: #92400e;
+  --palette-amber-500: #f59e0b;
+  --palette-amber-400: #fbbf24;
+  --palette-amber-300: #fcd34d;
+  --palette-amber-100: #fef3c7;
+
+  --palette-red-800: #991b1b;
+  --palette-red-700: #b91c1c;
+  --palette-red-600: #dc2626;
+  --palette-red-400: #f87171;
+  --palette-red-200: #fecaca;
+  --palette-red-50: #fef2f2;
+
+  --palette-blue-700: #0369a1;
+  --palette-blue-500: #0ea5e9;
+  --palette-blue-400: #38bdf8;
+  --palette-blue-300: #7dd3fc;
+  --palette-blue-100: #e0f2fe;
+
+  --palette-indigo-800: #3730a3;
+  --palette-indigo-700: #4338ca;
+  --palette-indigo-600: #4f46e5;
+  --palette-indigo-400: #818cf8;
+  --palette-indigo-100: #e0e7ff;
+  --palette-indigo-50: #eef2ff;
+
+  /* Tier 2 - Semantic (light, the default) */
+  --brand-primary: var(--palette-green-700);
+  --brand-primary-hover: var(--palette-green-800);
+  --brand-primary-active: var(--palette-green-900);
+  --brand-primary-subtle: var(--palette-green-50);
+  --brand-primary-subtle-border: var(--palette-green-200);
+  --brand-on-primary: var(--palette-white);
+
+  --brand-secondary: var(--palette-navy-900);
+
+  --brand-success: var(--palette-green-700);
+  --brand-warning: var(--palette-amber-500);
+  --brand-danger: var(--palette-red-600);
+  --brand-info: var(--palette-blue-500);
+
+  --brand-ai: var(--palette-indigo-600);
+  --brand-ai-hover: var(--palette-indigo-700);
+  --brand-ai-subtle: var(--palette-indigo-50);
+  --brand-ai-subtle-border: var(--palette-indigo-100);
+  --brand-ai-on-ai: var(--palette-white);
+
+  --surface-app: var(--palette-slate-50);
+  --surface-page: var(--palette-white);
+  --surface-card: var(--palette-white);
+  --surface-sidebar: var(--palette-navy-900);
+  --surface-hover: var(--palette-slate-100);
+
+  --text-primary: var(--palette-slate-800);
+  --text-secondary: var(--palette-slate-500);
+  --text-disabled: var(--palette-slate-400);
+  --text-white: var(--palette-white);
+  --text-on-brand: var(--palette-white);
+  --text-link: var(--brand-primary);
+
+  --border-light: var(--palette-slate-200);
+  --border-medium: var(--palette-slate-300);
+  --border-dark: var(--palette-slate-400);
+  --border-focus: var(--brand-primary);
+
+  --status-success-bg: var(--palette-green-100);
+  --status-success-border: var(--palette-green-200);
+  --status-success-text: var(--palette-green-800);
+
+  --status-warning-bg: var(--palette-amber-100);
+  --status-warning-border: var(--palette-amber-300);
+  --status-warning-text: var(--palette-amber-800);
+
+  --status-danger-bg: var(--palette-red-50);
+  --status-danger-border: var(--palette-red-200);
+  --status-danger-text: var(--palette-red-600);
+
+  --status-info-bg: var(--palette-blue-100);
+  --status-info-border: var(--palette-blue-300);
+  --status-info-text: var(--palette-blue-700);
+
+  --focus-ring: 0 0 0 3px rgba(22, 163, 74, 0.35);
+  --disabled-opacity: 0.6;
+
+  /* Tier 3 - Structural */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-round: 999px;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.12);
+
+  --font-family: "Inter", "Segoe UI", sans-serif;
+  --font-xs: 0.75rem;
+  --font-sm: 0.875rem;
+  --font-md: 1rem;
+  --font-lg: 1.125rem;
+  --font-xl: 1.5rem;
+  --font-2xl: 2rem;
+  --font-3xl: 3rem;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-9: 48px;
+  --space-10: 64px;
+
+  --transition-fast: 150ms ease;
+  --transition: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  --z-header: 1000;
+  --z-dropdown: 2000;
+  --z-panel: 2200;
+  --z-modal: 3000;
+  --z-toast: 9000;
+}
+
+/* Dark theme - Tier 2 overrides only, same structure as the source. */
+[data-theme="dark"] {
+  --surface-app: var(--palette-slate-900);
+  --surface-page: var(--palette-slate-850);
+  --surface-card: var(--palette-slate-800);
+  --surface-sidebar: var(--palette-slate-950);
+  --surface-hover: var(--palette-slate-700);
+
+  --text-primary: var(--palette-slate-50);
+  --text-secondary: var(--palette-slate-300);
+  --text-disabled: var(--palette-slate-400);
+
+  --border-light: var(--palette-slate-700);
+  --border-medium: var(--palette-slate-600);
+  --border-dark: var(--palette-slate-500);
+
+  --brand-primary-subtle: rgba(34, 197, 94, 0.14);
+  --brand-primary-subtle-border: rgba(34, 197, 94, 0.4);
+
+  --brand-ai-subtle: rgba(79, 70, 229, 0.16);
+  --brand-ai-subtle-border: rgba(79, 70, 229, 0.4);
+
+  --status-success-bg: rgba(34, 197, 94, 0.14);
+  --status-success-border: rgba(34, 197, 94, 0.4);
+  --status-success-text: var(--palette-green-400);
+
+  --status-warning-bg: rgba(245, 158, 11, 0.14);
+  --status-warning-border: rgba(245, 158, 11, 0.4);
+  --status-warning-text: var(--palette-amber-400);
+
+  --status-danger-bg: rgba(220, 38, 38, 0.16);
+  --status-danger-border: rgba(220, 38, 38, 0.4);
+  --status-danger-text: var(--palette-red-400);
+
+  --status-info-bg: rgba(14, 165, 233, 0.14);
+  --status-info-border: rgba(14, 165, 233, 0.4);
+  --status-info-text: var(--palette-blue-400);
+
+  --focus-ring: 0 0 0 3px rgba(74, 222, 128, 0.4);
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--surface-app);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+}
