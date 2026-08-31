@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useAuth } from "../../core/context/AuthContext";
@@ -6,6 +6,7 @@ import AttendanceRepository, { type AttendanceSession } from "../../core/reposit
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
 import ProjectRepository, { type Project } from "../../core/repositories/ProjectRepository";
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
+import PresenceRepository, { type PresenceSession } from "../../core/repositories/PresenceRepository";
 import { getCurrentPosition } from "../../core/utils/geo";
 
 import Card from "../../components/common/Card";
@@ -13,23 +14,30 @@ import Select from "../../components/common/Select";
 import Button from "../../components/common/Button";
 import EvidenceCaptureField from "../../components/common/EvidenceCaptureField";
 
-// PROSM Time WP-06/WP-08/§17/§16/§37 - real Clock In/Out on the
-// Dashboard (Employee Mobile Home is a later, dedicated mobile-UX pass
-// - this is the same real functionality on the screen every employee
-// already lands on). Location is a best-effort capture only: WP-06
-// never blocks a Clock In on a geolocation failure - GPS/geofence
+const PRESENCE_SAMPLE_INTERVAL_MS = 5 * 60 * 1000;
+
+// PROSM Time WP-06/WP-08/WP-10/§17/§16/§18/§37 - real Clock In/Out on
+// the Dashboard (Employee Mobile Home is a later, dedicated mobile-UX
+// pass - this is the same real functionality on the screen every
+// employee already lands on). Location is a best-effort capture only:
+// WP-06 never blocks a Clock In on a geolocation failure - GPS/geofence
 // enforcement is WP-09's job. Camera evidence (§16) is required only
 // when the selected/current site's own cameraRequired policy (§13) is
-// on; the photo is uploaded after the clock event succeeds (the event
-// must exist first - evidence links to it, §16), so an upload failure
-// is surfaced as its own warning rather than undoing an attendance
-// event that has already really happened.
+// on. Presence monitoring (§18) starts automatically at Clock In only
+// when the site's own presence_monitoring_enabled policy is on
+// (WP-06's RPC decides this server-side, never the client) - while
+// active, this component silently submits a periodic location sample
+// ("controlled location sampling", tab must stay open - no background
+// service worker, matching §15's own "subject to platform/browser
+// capabilities" caveat) and surfaces the SOS/Emergency action, which
+// is only ever reachable during an active presence session (§18).
 export default function ClockInOutCard() {
   const { t } = useTranslation("dashboard");
   const { profile } = useAuth();
 
   const [session, setSession] = useState<AttendanceSession | null>(null);
   const [currentSite, setCurrentSite] = useState<Site | null>(null);
+  const [presenceSession, setPresenceSession] = useState<PresenceSession | null>(null);
   const [sites, setSites] = useState<Site[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
   const [siteId, setSiteId] = useState("");
@@ -39,13 +47,23 @@ export default function ClockInOutCard() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [evidenceWarning, setEvidenceWarning] = useState("");
+  const [sosSubmitting, setSosSubmitting] = useState(false);
+  const [sosSent, setSosSent] = useState(false);
+
+  const presenceSessionRef = useRef<PresenceSession | null>(null);
+  presenceSessionRef.current = presenceSession;
 
   const load = useCallback(async () => {
     if (!profile) return;
     setLoading(true);
-    const [sessionResult, sitesResult] = await Promise.all([AttendanceRepository.getCurrentSession(profile.id), SiteRepository.listAssignedSites(profile.id)]);
+    const [sessionResult, sitesResult, presenceResult] = await Promise.all([
+      AttendanceRepository.getCurrentSession(profile.id),
+      SiteRepository.listAssignedSites(profile.id),
+      PresenceRepository.getActiveSession(profile.id),
+    ]);
     const activeSession = sessionResult.success ? sessionResult.data ?? null : null;
     setSession(activeSession);
+    setPresenceSession(presenceResult.success ? presenceResult.data ?? null : null);
     const assignedSites = sitesResult.success ? sitesResult.data ?? [] : [];
     setSites(assignedSites);
     setSiteId((current) => current || assignedSites[0]?.id || "");
@@ -58,6 +76,7 @@ export default function ClockInOutCard() {
     }
 
     setEvidenceFile(null);
+    setSosSent(false);
     setLoading(false);
   }, [profile]);
 
@@ -77,6 +96,30 @@ export default function ClockInOutCard() {
       setProjectId("");
     });
   }, [profile, siteId]);
+
+  // §18: "location samples collected per policy and platform
+  // capability" - only runs while a presence session is genuinely
+  // active, stops the instant it isn't (interval cleared on unmount/
+  // dependency change, matching "no active presence tracking after
+  // Clock Out").
+  useEffect(() => {
+    if (!presenceSession) return undefined;
+
+    const interval = setInterval(async () => {
+      const current = presenceSessionRef.current;
+      if (!current) return;
+      try {
+        const position = await getCurrentPosition();
+        await PresenceRepository.recordSample(current.id, position.latitude, position.longitude, position.accuracyMeters);
+      } catch {
+        // Best-effort only - a failed/denied sample never surfaces as
+        // an error, matching every other geolocation capture in this
+        // component.
+      }
+    }, PRESENCE_SAMPLE_INTERVAL_MS);
+
+    return () => clearInterval(interval);
+  }, [presenceSession]);
 
   if (!profile || loading) return null;
 
@@ -160,6 +203,36 @@ export default function ClockInOutCard() {
     load();
   };
 
+  const handleSos = async () => {
+    if (!presenceSession) return;
+    setSosSubmitting(true);
+    setError("");
+
+    let latitude: number | null = null;
+    let longitude: number | null = null;
+    let accuracyMeters: number | null = null;
+    try {
+      const position = await getCurrentPosition();
+      latitude = position.latitude;
+      longitude = position.longitude;
+      accuracyMeters = position.accuracyMeters;
+    } catch {
+      // SOS must still fire without a location sample - safety comes
+      // first, geolocation is still best-effort.
+    }
+
+    const result = await PresenceRepository.triggerSos(presenceSession.id, latitude, longitude, accuracyMeters);
+
+    setSosSubmitting(false);
+
+    if (!result.success) {
+      setError(result.message ?? t("attendance.sosError"));
+      return;
+    }
+
+    setSosSent(true);
+  };
+
   return (
     <Card title={t("attendance.title")}>
       {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
@@ -172,6 +245,19 @@ export default function ClockInOutCard() {
           <Button onClick={handleClockOut} loading={submitting} disabled={clockOutCameraRequired && !evidenceFile}>
             {t("attendance.clockOutAction")}
           </Button>
+
+          {presenceSession ? (
+            <div style={{ marginTop: "var(--space-4)", paddingTop: "var(--space-4)", borderTop: "1px solid var(--border-light)" }}>
+              <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)" }}>{t("attendance.presenceActive")}</p>
+              {sosSent ? (
+                <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("attendance.sosSent")}</p>
+              ) : (
+                <Button variant="danger" onClick={handleSos} loading={sosSubmitting}>
+                  {t("attendance.sosAction")}
+                </Button>
+              )}
+            </div>
+          ) : null}
         </>
       ) : sites.length === 0 ? (
         <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("attendance.noAssignedSites")}</p>

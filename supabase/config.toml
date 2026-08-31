@@ -57,3 +57,8 @@ entrypoint = "./functions/admin-clock-out/index.ts"
 enabled = true
 verify_jwt = false
 entrypoint = "./functions/purge-camera-evidence/index.ts"
+
+[functions.trigger-sos-alert]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/trigger-sos-alert/index.ts"

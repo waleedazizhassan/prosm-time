@@ -70,7 +70,7 @@ serve(async (request: Request) => {
       return errorResponse(error?.message ?? "Unable to clock in.", 400, "CLOCK_IN_FAILED");
     }
 
-    return successResponse({ sessionId: data.sessionId, eventId: data.eventId, replay: data.replay });
+    return successResponse({ sessionId: data.sessionId, eventId: data.eventId, replay: data.replay, presenceSessionId: data.presenceSessionId ?? null });
   } catch (error: any) {
     return errorResponse(error?.message ?? "Attendance service unavailable.", 500, "INTERNAL_ERROR");
   }

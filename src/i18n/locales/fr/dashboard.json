@@ -38,7 +38,11 @@
     "clockOutError": "Impossible de pointer le départ.",
     "evidenceLabel": "Preuve photo",
     "evidenceRequiredHint": "Ce site exige une photo pour cette action.",
-    "evidenceUploadError": "Pointage réussi, mais la photo n'a pas pu être téléchargée."
+    "evidenceUploadError": "Pointage réussi, mais la photo n'a pas pu être téléchargée.",
+    "presenceActive": "Le suivi de présence est actif pour ce quart de travail.",
+    "sosAction": "SOS / Urgence",
+    "sosSent": "Alerte SOS enregistrée.",
+    "sosError": "Impossible d'envoyer l'alerte SOS."
   },
   "comingSoon": "Le reste de PROSM Time (plannings, feuilles de temps, rapports) arrivera dans les prochains lots de travail."
 }

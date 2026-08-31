@@ -38,7 +38,11 @@
     "clockOutError": "Ausstempeln nicht möglich.",
     "evidenceLabel": "Fotobeleg",
     "evidenceRequiredHint": "Dieser Standort erfordert ein Foto für diese Aktion.",
-    "evidenceUploadError": "Erfolgreich ein-/ausgestempelt, aber das Foto konnte nicht hochgeladen werden."
+    "evidenceUploadError": "Erfolgreich ein-/ausgestempelt, aber das Foto konnte nicht hochgeladen werden.",
+    "presenceActive": "Die Anwesenheitsüberwachung ist für diese Schicht aktiv.",
+    "sosAction": "SOS / Notfall",
+    "sosSent": "SOS-Alarm erfasst.",
+    "sosError": "Der SOS-Alarm konnte nicht gesendet werden."
   },
   "comingSoon": "Der Rest von PROSM Time (Zeitpläne, Stundenzettel, Berichte) folgt in späteren Arbeitspaketen."
 }

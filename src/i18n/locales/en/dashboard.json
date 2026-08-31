@@ -38,7 +38,11 @@
     "clockOutError": "Unable to clock out.",
     "evidenceLabel": "Photo evidence",
     "evidenceRequiredHint": "This site requires a photo for this action.",
-    "evidenceUploadError": "Clocked in/out successfully, but the photo could not be uploaded."
+    "evidenceUploadError": "Clocked in/out successfully, but the photo could not be uploaded.",
+    "presenceActive": "Presence monitoring is active for this shift.",
+    "sosAction": "SOS / Emergency",
+    "sosSent": "SOS alert recorded.",
+    "sosError": "Unable to send the SOS alert."
   },
   "comingSoon": "The rest of PROSM Time (schedules, timesheets, reports) arrives in later work packages."
 }

@@ -38,7 +38,11 @@
     "clockOutError": "Impossibile timbrare l'uscita.",
     "evidenceLabel": "Prova fotografica",
     "evidenceRequiredHint": "Questa sede richiede una foto per questa azione.",
-    "evidenceUploadError": "Timbratura riuscita, ma non è stato possibile caricare la foto."
+    "evidenceUploadError": "Timbratura riuscita, ma non è stato possibile caricare la foto.",
+    "presenceActive": "Il monitoraggio della presenza è attivo per questo turno.",
+    "sosAction": "SOS / Emergenza",
+    "sosSent": "Allarme SOS registrato.",
+    "sosError": "Impossibile inviare l'allarme SOS."
   },
   "comingSoon": "Il resto di PROSM Time (turni, fogli ore, report) arriverà nei prossimi pacchetti di lavoro."
 }

@@ -95,7 +95,7 @@ class AttendanceRepository {
     }
   }
 
-  async clockIn(input: ClockInInput): Promise<ServiceResult<{ sessionId: string; eventId: string }>> {
+  async clockIn(input: ClockInInput): Promise<ServiceResult<{ sessionId: string; eventId: string; presenceSessionId: string | null }>> {
     try {
       const { data, error } = await this.client.functions.invoke("clock-in", {
         body: {
@@ -117,7 +117,7 @@ class AttendanceRepository {
         return createError(data?.error?.message ?? "Unable to clock in.");
       }
 
-      return createSuccess({ sessionId: data.data.sessionId, eventId: data.data.eventId });
+      return createSuccess({ sessionId: data.data.sessionId, eventId: data.data.eventId, presenceSessionId: data.data.presenceSessionId ?? null });
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
     }
