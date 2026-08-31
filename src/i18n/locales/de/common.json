@@ -1,0 +1,11 @@
+{
+  "appName": "PROSM Time",
+  "loading": "Wird geladen…",
+  "actions": {
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "close": "Schließen",
+    "save": "Speichern",
+    "retry": "Erneut versuchen"
+  }
+}
