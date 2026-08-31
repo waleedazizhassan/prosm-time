@@ -61,3 +61,65 @@
   font-size: var(--font-sm);
   color: var(--brand-success);
 }
+
+/* ===== New-user entry points below the divider (§ visual consistency
+   pass, user-directed): matches PROSM Platform's own AuthLayout.module.css
+   secondaryButton/textLink/hint classes exactly - outlined, lower-
+   emphasis secondary action so it never competes with the one primary
+   button on the same screen, and a plain minimal text link beneath it. ===== */
+
+.hint {
+  margin: var(--space-2) 0 var(--space-2);
+  text-align: center;
+  font-size: var(--font-xs);
+  color: var(--text-disabled);
+}
+
+.secondaryButton {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 var(--space-5);
+
+  border: 1px solid var(--brand-primary);
+  border-radius: var(--radius-md);
+
+  background: transparent;
+  color: var(--brand-primary);
+
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+
+  transition: background-color var(--transition-fast);
+}
+
+.secondaryButton:hover:not(:disabled) {
+  background: var(--surface-hover);
+}
+
+.secondaryButton:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.textLink {
+  display: block;
+  width: 100%;
+  margin-top: var(--space-3);
+  text-align: center;
+
+  background: none;
+  border: none;
+  padding: 0;
+
+  color: var(--text-secondary);
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+
+  transition: color var(--transition-fast);
+}
+
+.textLink:hover {
+  color: var(--brand-primary-hover);
+}
