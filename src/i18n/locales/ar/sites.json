@@ -1,0 +1,94 @@
+{
+  "title": "المواقع",
+  "subtitle": "مواقع العمل وإعدادات النطاق الجغرافي وسياسة الكشك لمؤسستك.",
+  "loadError": "تعذر تحميل المواقع.",
+  "noAccess": "ليس لديك صلاحية لعرض المواقع.",
+  "columns": {
+    "name": "الاسم",
+    "address": "العنوان",
+    "kioskMode": "وضع الكشك",
+    "status": "الحالة"
+  },
+  "status": {
+    "active": "نشط",
+    "inactive": "غير نشط"
+  },
+  "kioskMode": {
+    "personal_device_only": "الجهاز الشخصي فقط",
+    "kiosk_only": "الكشك فقط",
+    "both_allowed": "كلاهما مسموح"
+  },
+  "addAction": "إضافة موقع",
+  "form": {
+    "createTitle": "إضافة موقع",
+    "editTitle": "تعديل الموقع",
+    "nameLabel": "اسم الموقع",
+    "displayAddressLabel": "عنوان العرض",
+    "displayAddressHint": "للعرض فقط - إحداثيات GPS والنطاق أدناه هما المصدر الحقيقي للتحقق من النطاق الجغرافي.",
+    "latitudeLabel": "خط العرض",
+    "longitudeLabel": "خط الطول",
+    "useCurrentLocationAction": "استخدام موقعي الحالي",
+    "locationError": "تعذر تحديد موقعك.",
+    "testLocationAction": "اختبار هذا الموقع",
+    "testLocationResultWithin": "موقعك الحالي يبعد {{distance}} م عن مركز هذا الموقع - ضمن النطاق الجغرافي المحدد ({{radius}} م).",
+    "testLocationResultOutside": "موقعك الحالي يبعد {{distance}} م عن مركز هذا الموقع - خارج النطاق الجغرافي المحدد ({{radius}} م).",
+    "allowedRadiusLabel": "النطاق المسموح به (بالأمتار)",
+    "gpsAccuracyToleranceLabel": "هامش دقة GPS (بالأمتار)",
+    "timezoneLabel": "المنطقة الزمنية",
+    "timezoneHint": "معرّف المنطقة الزمنية بصيغة IANA، مثل Africa/Cairo. التخزين يبقى بتوقيت UTC؛ هذا يؤثر فقط على العرض المحلي.",
+    "graceToleranceLabel": "فترة السماح (بالدقائق)",
+    "kioskModeLabel": "وضع الكشك",
+    "attendanceAllowedLabel": "الحضور مسموح",
+    "geofenceRequiredLabel": "النطاق الجغرافي مطلوب",
+    "cameraRequiredLabel": "الكاميرا مطلوبة",
+    "environmentalTagLabel": "الوسم البيئي مفعّل",
+    "activeLabel": "الموقع نشط",
+    "confirm": "حفظ الموقع",
+    "genericError": "تعذر حفظ هذا الموقع."
+  },
+  "detail": {
+    "backToList": "العودة إلى المواقع",
+    "loadError": "تعذر تحميل هذا الموقع.",
+    "editAction": "تعديل",
+    "assignmentsTitle": "الموظفون المعيّنون",
+    "assignmentsHint": "الموظفون والمديرون المعيّنون لهذا الموقع.",
+    "assignAction": "تعيين موظف",
+    "noAssignments": "لا يوجد أحد معيّن لهذا الموقع بعد.",
+    "roleAtSite": {
+      "member": "عضو",
+      "manager": "مدير"
+    },
+    "removeAssignmentAction": "إزالة",
+    "assignForm": {
+      "title": "تعيين موظف لهذا الموقع",
+      "employeeLabel": "الموظف",
+      "roleLabel": "الدور في هذا الموقع",
+      "confirm": "تعيين",
+      "genericError": "تعذر تعيين هذا الموظف."
+    },
+    "projectsTitle": "المشاريع",
+    "projectsHint": "مشاريع هذا الموقع. يجب تعيين الموظفين لمشروع قبل أن يتمكنوا من اختياره أثناء الحضور.",
+    "addProjectAction": "إضافة مشروع",
+    "noProjects": "لا توجد مشاريع في هذا الموقع بعد.",
+    "projectForm": {
+      "createTitle": "إضافة مشروع",
+      "editTitle": "تعديل المشروع",
+      "nameLabel": "اسم المشروع",
+      "codeLabel": "رمز المشروع",
+      "descriptionLabel": "الوصف",
+      "activeLabel": "المشروع نشط",
+      "confirm": "حفظ المشروع",
+      "genericError": "تعذر حفظ هذا المشروع."
+    },
+    "manageProjectAssignmentsAction": "إدارة التعيينات"
+  },
+  "projectAssignments": {
+    "title": "تعيينات المشروع",
+    "hint": "الموظفون المعيّنون لهذا المشروع - هم فقط من يمكنهم اختياره أثناء الحضور.",
+    "assignAction": "تعيين موظف",
+    "noAssignments": "لا يوجد أحد معيّن لهذا المشروع بعد.",
+    "removeAssignmentAction": "إزالة",
+    "close": "إغلاق",
+    "genericError": "تعذر تحديث تعيينات هذا المشروع."
+  }
+}

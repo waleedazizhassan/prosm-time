@@ -1,0 +1,94 @@
+{
+  "title": "Sites",
+  "subtitle": "Worksites, geofence configuration, and kiosk policy for your organization.",
+  "loadError": "Unable to load sites.",
+  "noAccess": "You do not have permission to view sites.",
+  "columns": {
+    "name": "Name",
+    "address": "Address",
+    "kioskMode": "Kiosk mode",
+    "status": "Status"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "kioskMode": {
+    "personal_device_only": "Personal device only",
+    "kiosk_only": "Kiosk only",
+    "both_allowed": "Both allowed"
+  },
+  "addAction": "Add site",
+  "form": {
+    "createTitle": "Add a site",
+    "editTitle": "Edit site",
+    "nameLabel": "Site name",
+    "displayAddressLabel": "Display address",
+    "displayAddressHint": "Informational only - GPS coordinates and radius below are the real source of truth for geofence validation.",
+    "latitudeLabel": "Latitude",
+    "longitudeLabel": "Longitude",
+    "useCurrentLocationAction": "Use my current location",
+    "locationError": "Unable to determine your location.",
+    "testLocationAction": "Test this location",
+    "testLocationResultWithin": "Your current location is {{distance}} m from this site's center - within the configured geofence ({{radius}} m).",
+    "testLocationResultOutside": "Your current location is {{distance}} m from this site's center - outside the configured geofence ({{radius}} m).",
+    "allowedRadiusLabel": "Allowed radius (meters)",
+    "gpsAccuracyToleranceLabel": "GPS accuracy tolerance (meters)",
+    "timezoneLabel": "Time zone",
+    "timezoneHint": "IANA time zone identifier, e.g. Africa/Cairo. Storage remains UTC; this only affects local display.",
+    "graceToleranceLabel": "Grace tolerance (minutes)",
+    "kioskModeLabel": "Kiosk mode",
+    "attendanceAllowedLabel": "Attendance allowed",
+    "geofenceRequiredLabel": "Geofence required",
+    "cameraRequiredLabel": "Camera required",
+    "environmentalTagLabel": "Environmental tag enabled",
+    "activeLabel": "Site active",
+    "confirm": "Save site",
+    "genericError": "Unable to save this site."
+  },
+  "detail": {
+    "backToList": "Back to sites",
+    "loadError": "Unable to load this site.",
+    "editAction": "Edit",
+    "assignmentsTitle": "Assigned employees",
+    "assignmentsHint": "Employees and managers assigned to this site.",
+    "assignAction": "Assign employee",
+    "noAssignments": "No one assigned to this site yet.",
+    "roleAtSite": {
+      "member": "Member",
+      "manager": "Manager"
+    },
+    "removeAssignmentAction": "Remove",
+    "assignForm": {
+      "title": "Assign an employee to this site",
+      "employeeLabel": "Employee",
+      "roleLabel": "Role at this site",
+      "confirm": "Assign",
+      "genericError": "Unable to assign this employee."
+    },
+    "projectsTitle": "Projects",
+    "projectsHint": "Projects at this site. Employees must be assigned to a project before they can select it during attendance.",
+    "addProjectAction": "Add project",
+    "noProjects": "No projects at this site yet.",
+    "projectForm": {
+      "createTitle": "Add a project",
+      "editTitle": "Edit project",
+      "nameLabel": "Project name",
+      "codeLabel": "Project code",
+      "descriptionLabel": "Description",
+      "activeLabel": "Project active",
+      "confirm": "Save project",
+      "genericError": "Unable to save this project."
+    },
+    "manageProjectAssignmentsAction": "Manage assignments"
+  },
+  "projectAssignments": {
+    "title": "Project assignments",
+    "hint": "Employees assigned to this project - only they can select it during attendance.",
+    "assignAction": "Assign employee",
+    "noAssignments": "No one assigned to this project yet.",
+    "removeAssignmentAction": "Remove",
+    "close": "Close",
+    "genericError": "Unable to update this project's assignments."
+  }
+}

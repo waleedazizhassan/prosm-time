@@ -1,0 +1,94 @@
+{
+  "title": "Standorte",
+  "subtitle": "Arbeitsstandorte, Geofence-Konfiguration und Kiosk-Richtlinien für Ihre Organisation.",
+  "loadError": "Standorte konnten nicht geladen werden.",
+  "noAccess": "Sie haben keine Berechtigung, Standorte anzuzeigen.",
+  "columns": {
+    "name": "Name",
+    "address": "Adresse",
+    "kioskMode": "Kiosk-Modus",
+    "status": "Status"
+  },
+  "status": {
+    "active": "Aktiv",
+    "inactive": "Inaktiv"
+  },
+  "kioskMode": {
+    "personal_device_only": "Nur persönliches Gerät",
+    "kiosk_only": "Nur Kiosk",
+    "both_allowed": "Beides erlaubt"
+  },
+  "addAction": "Standort hinzufügen",
+  "form": {
+    "createTitle": "Standort hinzufügen",
+    "editTitle": "Standort bearbeiten",
+    "nameLabel": "Standortname",
+    "displayAddressLabel": "Anzeigeadresse",
+    "displayAddressHint": "Nur informativ - GPS-Koordinaten und der Radius unten sind die tatsächliche Grundlage für die Geofence-Validierung.",
+    "latitudeLabel": "Breitengrad",
+    "longitudeLabel": "Längengrad",
+    "useCurrentLocationAction": "Meinen aktuellen Standort verwenden",
+    "locationError": "Ihr Standort konnte nicht ermittelt werden.",
+    "testLocationAction": "Diesen Standort testen",
+    "testLocationResultWithin": "Ihr aktueller Standort ist {{distance}} m vom Zentrum dieses Standorts entfernt - innerhalb des konfigurierten Geofence ({{radius}} m).",
+    "testLocationResultOutside": "Ihr aktueller Standort ist {{distance}} m vom Zentrum dieses Standorts entfernt - außerhalb des konfigurierten Geofence ({{radius}} m).",
+    "allowedRadiusLabel": "Zulässiger Radius (Meter)",
+    "gpsAccuracyToleranceLabel": "GPS-Genauigkeitstoleranz (Meter)",
+    "timezoneLabel": "Zeitzone",
+    "timezoneHint": "IANA-Zeitzonenkennung, z. B. Africa/Cairo. Die Speicherung erfolgt weiterhin in UTC; dies wirkt sich nur auf die lokale Anzeige aus.",
+    "graceToleranceLabel": "Kulanzzeit (Minuten)",
+    "kioskModeLabel": "Kiosk-Modus",
+    "attendanceAllowedLabel": "Anwesenheit erlaubt",
+    "geofenceRequiredLabel": "Geofence erforderlich",
+    "cameraRequiredLabel": "Kamera erforderlich",
+    "environmentalTagLabel": "Umgebungs-Tag aktiviert",
+    "activeLabel": "Standort aktiv",
+    "confirm": "Standort speichern",
+    "genericError": "Dieser Standort konnte nicht gespeichert werden."
+  },
+  "detail": {
+    "backToList": "Zurück zu Standorten",
+    "loadError": "Dieser Standort konnte nicht geladen werden.",
+    "editAction": "Bearbeiten",
+    "assignmentsTitle": "Zugewiesene Mitarbeiter",
+    "assignmentsHint": "Mitarbeiter und Manager, die diesem Standort zugewiesen sind.",
+    "assignAction": "Mitarbeiter zuweisen",
+    "noAssignments": "Diesem Standort ist noch niemand zugewiesen.",
+    "roleAtSite": {
+      "member": "Mitglied",
+      "manager": "Manager"
+    },
+    "removeAssignmentAction": "Entfernen",
+    "assignForm": {
+      "title": "Einen Mitarbeiter diesem Standort zuweisen",
+      "employeeLabel": "Mitarbeiter",
+      "roleLabel": "Rolle an diesem Standort",
+      "confirm": "Zuweisen",
+      "genericError": "Dieser Mitarbeiter konnte nicht zugewiesen werden."
+    },
+    "projectsTitle": "Projekte",
+    "projectsHint": "Projekte an diesem Standort. Mitarbeiter müssen einem Projekt zugewiesen sein, bevor sie es während der Anwesenheitserfassung auswählen können.",
+    "addProjectAction": "Projekt hinzufügen",
+    "noProjects": "An diesem Standort gibt es noch keine Projekte.",
+    "projectForm": {
+      "createTitle": "Projekt hinzufügen",
+      "editTitle": "Projekt bearbeiten",
+      "nameLabel": "Projektname",
+      "codeLabel": "Projektcode",
+      "descriptionLabel": "Beschreibung",
+      "activeLabel": "Projekt aktiv",
+      "confirm": "Projekt speichern",
+      "genericError": "Dieses Projekt konnte nicht gespeichert werden."
+    },
+    "manageProjectAssignmentsAction": "Zuweisungen verwalten"
+  },
+  "projectAssignments": {
+    "title": "Projektzuweisungen",
+    "hint": "Mitarbeiter, die diesem Projekt zugewiesen sind - nur sie können es während der Anwesenheitserfassung auswählen.",
+    "assignAction": "Mitarbeiter zuweisen",
+    "noAssignments": "Diesem Projekt ist noch niemand zugewiesen.",
+    "removeAssignmentAction": "Entfernen",
+    "close": "Schließen",
+    "genericError": "Die Zuweisungen dieses Projekts konnten nicht aktualisiert werden."
+  }
+}

@@ -7,6 +7,7 @@
   "signOutAction": "Se déconnecter",
   "items": {
     "dashboard": "Tableau de bord",
-    "people": "Personnes"
+    "people": "Personnes",
+    "sites": "Sites"
   }
 }

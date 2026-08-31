@@ -1,0 +1,94 @@
+{
+  "title": "Sites",
+  "subtitle": "Sites de travail, configuration du géorepérage et politique de kiosque pour votre organisation.",
+  "loadError": "Impossible de charger les sites.",
+  "noAccess": "Vous n'avez pas la permission de voir les sites.",
+  "columns": {
+    "name": "Nom",
+    "address": "Adresse",
+    "kioskMode": "Mode kiosque",
+    "status": "Statut"
+  },
+  "status": {
+    "active": "Actif",
+    "inactive": "Inactif"
+  },
+  "kioskMode": {
+    "personal_device_only": "Appareil personnel uniquement",
+    "kiosk_only": "Kiosque uniquement",
+    "both_allowed": "Les deux autorisés"
+  },
+  "addAction": "Ajouter un site",
+  "form": {
+    "createTitle": "Ajouter un site",
+    "editTitle": "Modifier le site",
+    "nameLabel": "Nom du site",
+    "displayAddressLabel": "Adresse d'affichage",
+    "displayAddressHint": "À titre informatif uniquement - les coordonnées GPS et le rayon ci-dessous sont la véritable source de vérité pour la validation du géorepérage.",
+    "latitudeLabel": "Latitude",
+    "longitudeLabel": "Longitude",
+    "useCurrentLocationAction": "Utiliser ma position actuelle",
+    "locationError": "Impossible de déterminer votre position.",
+    "testLocationAction": "Tester cette position",
+    "testLocationResultWithin": "Votre position actuelle est à {{distance}} m du centre de ce site - à l'intérieur du géorepérage configuré ({{radius}} m).",
+    "testLocationResultOutside": "Votre position actuelle est à {{distance}} m du centre de ce site - en dehors du géorepérage configuré ({{radius}} m).",
+    "allowedRadiusLabel": "Rayon autorisé (mètres)",
+    "gpsAccuracyToleranceLabel": "Tolérance de précision GPS (mètres)",
+    "timezoneLabel": "Fuseau horaire",
+    "timezoneHint": "Identifiant de fuseau horaire IANA, par ex. Africa/Cairo. Le stockage reste en UTC ; cela n'affecte que l'affichage local.",
+    "graceToleranceLabel": "Tolérance de grâce (minutes)",
+    "kioskModeLabel": "Mode kiosque",
+    "attendanceAllowedLabel": "Présence autorisée",
+    "geofenceRequiredLabel": "Géorepérage requis",
+    "cameraRequiredLabel": "Caméra requise",
+    "environmentalTagLabel": "Balise environnementale activée",
+    "activeLabel": "Site actif",
+    "confirm": "Enregistrer le site",
+    "genericError": "Impossible d'enregistrer ce site."
+  },
+  "detail": {
+    "backToList": "Retour aux sites",
+    "loadError": "Impossible de charger ce site.",
+    "editAction": "Modifier",
+    "assignmentsTitle": "Employés assignés",
+    "assignmentsHint": "Employés et managers assignés à ce site.",
+    "assignAction": "Assigner un employé",
+    "noAssignments": "Personne n'est encore assigné à ce site.",
+    "roleAtSite": {
+      "member": "Membre",
+      "manager": "Manager"
+    },
+    "removeAssignmentAction": "Retirer",
+    "assignForm": {
+      "title": "Assigner un employé à ce site",
+      "employeeLabel": "Employé",
+      "roleLabel": "Rôle sur ce site",
+      "confirm": "Assigner",
+      "genericError": "Impossible d'assigner cet employé."
+    },
+    "projectsTitle": "Projets",
+    "projectsHint": "Projets sur ce site. Les employés doivent être assignés à un projet avant de pouvoir le sélectionner lors de la présence.",
+    "addProjectAction": "Ajouter un projet",
+    "noProjects": "Aucun projet sur ce site pour le moment.",
+    "projectForm": {
+      "createTitle": "Ajouter un projet",
+      "editTitle": "Modifier le projet",
+      "nameLabel": "Nom du projet",
+      "codeLabel": "Code du projet",
+      "descriptionLabel": "Description",
+      "activeLabel": "Projet actif",
+      "confirm": "Enregistrer le projet",
+      "genericError": "Impossible d'enregistrer ce projet."
+    },
+    "manageProjectAssignmentsAction": "Gérer les assignations"
+  },
+  "projectAssignments": {
+    "title": "Assignations du projet",
+    "hint": "Employés assignés à ce projet - eux seuls peuvent le sélectionner lors de la présence.",
+    "assignAction": "Assigner un employé",
+    "noAssignments": "Personne n'est encore assigné à ce projet.",
+    "removeAssignmentAction": "Retirer",
+    "close": "Fermer",
+    "genericError": "Impossible de mettre à jour les assignations de ce projet."
+  }
+}

@@ -35,19 +35,26 @@ import frShell from "./locales/fr/shell.json";
 import deShell from "./locales/de/shell.json";
 import itShell from "./locales/it/shell.json";
 
+import enSites from "./locales/en/sites.json";
+import arSites from "./locales/ar/sites.json";
+import frSites from "./locales/fr/sites.json";
+import deSites from "./locales/de/sites.json";
+import itSites from "./locales/it/sites.json";
+
 // PROSM Time i18n bootstrap. One namespace per screen/domain area,
 // exactly the way PROSM Platform's own src/i18n/index.js does - never
 // raw strings in components. `shell` is the application shell's own
 // namespace (Header/Sidebar/User Menu chrome), matching PROSM
 // Platform's own dedicated `sidebar` namespace pattern - never mixed
-// into a page's own namespace.
+// into a page's own namespace. `sites` is WP-05's addition (Site
+// Management + Map/Geofence, Project Management, §13/§14).
 
 const resources = {
-  en: { common: enCommon, auth: enAuth, dashboard: enDashboard, people: enPeople, shell: enShell },
-  ar: { common: arCommon, auth: arAuth, dashboard: arDashboard, people: arPeople, shell: arShell },
-  fr: { common: frCommon, auth: frAuth, dashboard: frDashboard, people: frPeople, shell: frShell },
-  de: { common: deCommon, auth: deAuth, dashboard: deDashboard, people: dePeople, shell: deShell },
-  it: { common: itCommon, auth: itAuth, dashboard: itDashboard, people: itPeople, shell: itShell },
+  en: { common: enCommon, auth: enAuth, dashboard: enDashboard, people: enPeople, shell: enShell, sites: enSites },
+  ar: { common: arCommon, auth: arAuth, dashboard: arDashboard, people: arPeople, shell: arShell, sites: arSites },
+  fr: { common: frCommon, auth: frAuth, dashboard: frDashboard, people: frPeople, shell: frShell, sites: frSites },
+  de: { common: deCommon, auth: deAuth, dashboard: deDashboard, people: dePeople, shell: deShell, sites: deSites },
+  it: { common: itCommon, auth: itAuth, dashboard: itDashboard, people: itPeople, shell: itShell, sites: itSites },
 };
 
 export const I18N_STORAGE_KEY = "prosm_time_language";
@@ -61,7 +68,7 @@ i18next
     fallbackLng: DEFAULT_LANGUAGE,
     supportedLngs: LANGUAGE_CODES,
 
-    ns: ["common", "auth", "dashboard", "people", "shell"],
+    ns: ["common", "auth", "dashboard", "people", "shell", "sites"],
     defaultNS: "common",
 
     detection: {

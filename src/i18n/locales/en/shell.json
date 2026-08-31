@@ -7,6 +7,7 @@
   "signOutAction": "Sign out",
   "items": {
     "dashboard": "Dashboard",
-    "people": "People"
+    "people": "People",
+    "sites": "Sites"
   }
 }

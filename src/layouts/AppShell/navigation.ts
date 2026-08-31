@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { LayoutDashboard, Users } from "lucide-react";
+import { LayoutDashboard, Users, MapPin } from "lucide-react";
 
 export interface NavItem {
   id: string;
@@ -20,4 +20,5 @@ export interface NavItem {
 export const NAV_ITEMS: NavItem[] = [
   { id: "dashboard", labelKey: "items.dashboard", path: "/dashboard", icon: LayoutDashboard, requiredPermission: null },
   { id: "people", labelKey: "items.people", path: "/people", icon: Users, requiredPermission: "employees.view" },
+  { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage" },
 ];

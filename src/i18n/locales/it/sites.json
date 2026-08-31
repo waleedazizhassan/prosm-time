@@ -1,0 +1,94 @@
+{
+  "title": "Sedi",
+  "subtitle": "Sedi di lavoro, configurazione del geofencing e politica kiosk per la tua organizzazione.",
+  "loadError": "Impossibile caricare le sedi.",
+  "noAccess": "Non hai il permesso di visualizzare le sedi.",
+  "columns": {
+    "name": "Nome",
+    "address": "Indirizzo",
+    "kioskMode": "Modalità kiosk",
+    "status": "Stato"
+  },
+  "status": {
+    "active": "Attiva",
+    "inactive": "Inattiva"
+  },
+  "kioskMode": {
+    "personal_device_only": "Solo dispositivo personale",
+    "kiosk_only": "Solo kiosk",
+    "both_allowed": "Entrambi consentiti"
+  },
+  "addAction": "Aggiungi sede",
+  "form": {
+    "createTitle": "Aggiungi una sede",
+    "editTitle": "Modifica sede",
+    "nameLabel": "Nome della sede",
+    "displayAddressLabel": "Indirizzo visualizzato",
+    "displayAddressHint": "Solo a scopo informativo - le coordinate GPS e il raggio sottostante sono la vera fonte di verità per la convalida del geofence.",
+    "latitudeLabel": "Latitudine",
+    "longitudeLabel": "Longitudine",
+    "useCurrentLocationAction": "Usa la mia posizione attuale",
+    "locationError": "Impossibile determinare la tua posizione.",
+    "testLocationAction": "Testa questa posizione",
+    "testLocationResultWithin": "La tua posizione attuale è a {{distance}} m dal centro di questa sede - all'interno del geofence configurato ({{radius}} m).",
+    "testLocationResultOutside": "La tua posizione attuale è a {{distance}} m dal centro di questa sede - al di fuori del geofence configurato ({{radius}} m).",
+    "allowedRadiusLabel": "Raggio consentito (metri)",
+    "gpsAccuracyToleranceLabel": "Tolleranza di precisione GPS (metri)",
+    "timezoneLabel": "Fuso orario",
+    "timezoneHint": "Identificatore del fuso orario IANA, ad es. Africa/Cairo. L'archiviazione rimane in UTC; questo influisce solo sulla visualizzazione locale.",
+    "graceToleranceLabel": "Tolleranza di cortesia (minuti)",
+    "kioskModeLabel": "Modalità kiosk",
+    "attendanceAllowedLabel": "Presenza consentita",
+    "geofenceRequiredLabel": "Geofence richiesto",
+    "cameraRequiredLabel": "Fotocamera richiesta",
+    "environmentalTagLabel": "Tag ambientale abilitato",
+    "activeLabel": "Sede attiva",
+    "confirm": "Salva sede",
+    "genericError": "Impossibile salvare questa sede."
+  },
+  "detail": {
+    "backToList": "Torna alle sedi",
+    "loadError": "Impossibile caricare questa sede.",
+    "editAction": "Modifica",
+    "assignmentsTitle": "Dipendenti assegnati",
+    "assignmentsHint": "Dipendenti e manager assegnati a questa sede.",
+    "assignAction": "Assegna dipendente",
+    "noAssignments": "Nessuno è ancora assegnato a questa sede.",
+    "roleAtSite": {
+      "member": "Membro",
+      "manager": "Manager"
+    },
+    "removeAssignmentAction": "Rimuovi",
+    "assignForm": {
+      "title": "Assegna un dipendente a questa sede",
+      "employeeLabel": "Dipendente",
+      "roleLabel": "Ruolo in questa sede",
+      "confirm": "Assegna",
+      "genericError": "Impossibile assegnare questo dipendente."
+    },
+    "projectsTitle": "Progetti",
+    "projectsHint": "Progetti in questa sede. I dipendenti devono essere assegnati a un progetto prima di poterlo selezionare durante la presenza.",
+    "addProjectAction": "Aggiungi progetto",
+    "noProjects": "Nessun progetto in questa sede ancora.",
+    "projectForm": {
+      "createTitle": "Aggiungi un progetto",
+      "editTitle": "Modifica progetto",
+      "nameLabel": "Nome del progetto",
+      "codeLabel": "Codice del progetto",
+      "descriptionLabel": "Descrizione",
+      "activeLabel": "Progetto attivo",
+      "confirm": "Salva progetto",
+      "genericError": "Impossibile salvare questo progetto."
+    },
+    "manageProjectAssignmentsAction": "Gestisci assegnazioni"
+  },
+  "projectAssignments": {
+    "title": "Assegnazioni del progetto",
+    "hint": "Dipendenti assegnati a questo progetto - solo loro possono selezionarlo durante la presenza.",
+    "assignAction": "Assegna dipendente",
+    "noAssignments": "Nessuno è ancora assegnato a questo progetto.",
+    "removeAssignmentAction": "Rimuovi",
+    "close": "Chiudi",
+    "genericError": "Impossibile aggiornare le assegnazioni di questo progetto."
+  }
+}

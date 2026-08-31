@@ -7,6 +7,7 @@
   "signOutAction": "Esci",
   "items": {
     "dashboard": "Dashboard",
-    "people": "Persone"
+    "people": "Persone",
+    "sites": "Sedi"
   }
 }
