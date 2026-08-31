@@ -1,0 +1,12 @@
+{
+  "navigationLabel": "Navigazione principale",
+  "toggleSidebar": "Attiva/disattiva navigazione",
+  "collapseSidebar": "Comprimi barra laterale",
+  "expandSidebar": "Espandi barra laterale",
+  "openUserMenu": "Apri menu utente",
+  "signOutAction": "Esci",
+  "items": {
+    "dashboard": "Dashboard",
+    "people": "Persone"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "navigationLabel": "Hauptnavigation",
+  "toggleSidebar": "Navigation umschalten",
+  "collapseSidebar": "Seitenleiste einklappen",
+  "expandSidebar": "Seitenleiste ausklappen",
+  "openUserMenu": "Benutzermenü öffnen",
+  "signOutAction": "Abmelden",
+  "items": {
+    "dashboard": "Dashboard",
+    "people": "Personen"
+  }
+}

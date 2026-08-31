@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 
 import { useAuth } from "../../core/context/AuthContext";
 import OrganizationRepository, { type Organization } from "../../core/repositories/OrganizationRepository";
@@ -17,10 +16,12 @@ import StatusBadge from "../../components/common/StatusBadge";
 // state (§37: "License & Plan (read-only reflection of PROSM
 // Management state)") - not the full Manager/Administration Console
 // (§21), which is WP-14's own scope once sites/employees/attendance
-// exist to actually show.
+// exist to actually show. Sign-out and cross-page navigation now live
+// in the application shell (Sidebar/User Menu, § visual consistency
+// pass) - this page only owns its own content.
 export default function DashboardPage() {
   const { t } = useTranslation("dashboard");
-  const { profile, signOut, hasPermission } = useAuth();
+  const { profile } = useAuth();
 
   const [organization, setOrganization] = useState<Organization | null>(null);
   const [license, setLicense] = useState<LicenseState | null>(null);
@@ -56,15 +57,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <PageShell
-      title={t("title")}
-      subtitle={profile ? t("welcomeMessage", { name: profile.fullName }) : undefined}
-      actions={
-        <Button variant="ghost" onClick={signOut}>
-          {t("signOutAction")}
-        </Button>
-      }
-    >
+    <PageShell title={t("title")} subtitle={profile ? t("welcomeMessage", { name: profile.fullName }) : undefined}>
       {loading ? (
         <p>…</p>
       ) : (
@@ -107,14 +100,6 @@ export default function DashboardPage() {
           </Card>
         </div>
       )}
-
-      {hasPermission("employees.view") ? (
-        <p>
-          <Link to="/people" style={{ color: "var(--text-link)", fontWeight: "var(--font-weight-semibold)" }}>
-            {t("peopleLink")}
-          </Link>
-        </p>
-      ) : null}
 
       <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("comingSoon")}</p>
     </PageShell>

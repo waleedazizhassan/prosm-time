@@ -1,0 +1,110 @@
+/* PROSM Time - mirrors PROSM Platform's own Header.module.css (§
+   visual consistency pass, shell): same fixed 64px bar, blurred
+   translucent surface-card background, three-zone grid. This product
+   has no search/notifications/AI/email/radio yet, so the right zone is
+   simpler - the zone SHAPE (fixed height, border-bottom, backdrop
+   blur) is what's shared, not every utility PROSM Platform's Header
+   happens to also hold. */
+.header {
+  --header-height: 64px;
+
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: var(--z-header);
+
+  height: var(--header-height);
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-4);
+
+  padding: 0 var(--space-5);
+
+  background: color-mix(in srgb, var(--surface-card) 94%, transparent);
+  backdrop-filter: blur(10px);
+
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: var(--shadow-xs);
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+
+  min-width: 0;
+  height: 100%;
+}
+
+.centerSection {
+  min-width: 0;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+
+  min-width: 0;
+  height: 100%;
+}
+
+.sidebarToggle {
+  display: none;
+
+  width: 40px;
+  height: 40px;
+
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.sidebarToggle:hover {
+  background: var(--surface-hover);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.brandName {
+  font-size: var(--font-lg);
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .sidebarToggle {
+    display: flex;
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding: 0 var(--space-3);
+    gap: var(--space-2);
+  }
+
+  .brandName {
+    display: none;
+  }
+}
+
+@media print {
+  .header {
+    display: none !important;
+  }
+}

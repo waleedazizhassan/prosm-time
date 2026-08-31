@@ -1,0 +1,12 @@
+{
+  "navigationLabel": "Navigation principale",
+  "toggleSidebar": "Basculer la navigation",
+  "collapseSidebar": "Réduire la barre latérale",
+  "expandSidebar": "Développer la barre latérale",
+  "openUserMenu": "Ouvrir le menu utilisateur",
+  "signOutAction": "Se déconnecter",
+  "items": {
+    "dashboard": "Tableau de bord",
+    "people": "Personnes"
+  }
+}

@@ -1,0 +1,23 @@
+/* PROSM Time - mirrors PROSM Platform's own AppLayout.module.css
+   exactly (§ visual consistency pass, shell): height-capped to one
+   viewport so Main's own overflow-y: auto is the real scroll boundary,
+   not the whole page. */
+.layout {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+
+  background: var(--surface-app);
+}
+
+.body {
+  display: flex;
+  flex: 1;
+
+  min-height: 0;
+
+  margin-top: 64px;
+}

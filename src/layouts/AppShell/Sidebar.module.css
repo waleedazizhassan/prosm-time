@@ -1,0 +1,314 @@
+/* PROSM Time - ported from PROSM Platform's own Sidebar.module.css (§
+   visual consistency pass, shell): same 280px/84px collapse-to-rail,
+   same mobile off-canvas drawer breakpoint (900px) and slide/backdrop
+   behavior, same nav-item/active/badge visual language. */
+.sidebar {
+  width: 280px;
+  min-width: 280px;
+
+  height: calc(100vh - 64px);
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: auto;
+
+  background: var(--surface-card);
+  border-right: 1px solid var(--border-light);
+
+  transition: width 220ms ease, box-shadow 220ms ease;
+}
+
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  min-height: 64px;
+  padding: 0 var(--space-5);
+
+  border-bottom: 1px solid var(--border-light);
+  background: var(--surface-card);
+}
+
+.sidebarBrandName {
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.navigation {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+
+  padding: var(--space-4) var(--space-3);
+
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.item {
+  width: 100%;
+  min-height: 44px;
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+
+  padding: 0 var(--space-3);
+
+  border: none;
+  border-radius: var(--radius-md);
+
+  background: transparent;
+  color: var(--text-primary);
+
+  font-size: var(--font-md);
+  font-weight: var(--font-weight-medium);
+  text-align: left;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition: background-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.item:hover {
+  background: var(--surface-hover);
+  transform: translateX(2px);
+}
+
+.item:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+.active {
+  background: var(--brand-primary);
+  color: var(--brand-on-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.active:hover {
+  background: var(--brand-primary-hover);
+}
+
+.itemIcon {
+  width: 22px;
+  min-width: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.itemLabel {
+  flex: 1;
+}
+
+/* ===== User trigger (Sidebar footer) ===== */
+
+.userTrigger {
+  position: relative;
+
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  padding: var(--space-3) var(--space-5);
+
+  border: none;
+  border-top: 1px solid var(--border-light);
+
+  background: transparent;
+  cursor: pointer;
+
+  transition: background-color 0.18s ease;
+}
+
+.userTrigger:hover,
+.userTrigger[aria-expanded="true"] {
+  background: var(--surface-hover);
+}
+
+.userTrigger:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: -2px;
+}
+
+.triggerAvatar {
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+  border-radius: 50%;
+
+  background: var(--brand-primary);
+  color: var(--brand-on-primary);
+
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.triggerName {
+  flex: 1;
+  min-width: 0;
+
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.triggerChevron {
+  flex-shrink: 0;
+  display: flex;
+  color: var(--text-disabled);
+  transition: transform 0.2s ease;
+}
+
+.triggerChevronOpen {
+  transform: rotate(180deg);
+}
+
+/* ===== Desktop collapse-to-rail ===== */
+
+.collapsed {
+  width: 84px;
+  min-width: 84px;
+}
+
+.collapsed .sidebarBrandName,
+.collapsed .itemLabel,
+.collapsed .triggerName {
+  opacity: 0;
+  transform: translateX(-8px);
+  pointer-events: none;
+}
+
+.sidebarBrandName,
+.itemLabel,
+.triggerName {
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.collapsed .item {
+  justify-content: center;
+  padding: 0;
+}
+
+.collapsed .userTrigger {
+  justify-content: center;
+  padding: var(--space-3) 0;
+}
+
+.collapseButton {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: var(--radius-sm);
+
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+}
+
+.collapseButton:hover {
+  background: var(--surface-hover);
+}
+
+/* ===== Mobile off-canvas drawer ===== */
+
+.mobileBackdrop {
+  position: fixed;
+  inset: 64px 0 0 0;
+
+  background: rgba(15, 23, 42, 0.4);
+  z-index: var(--z-dropdown);
+}
+
+@media (min-width: 901px) {
+  .mobileBackdrop {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    top: 64px;
+    left: 0;
+
+    height: calc(100vh - 64px);
+    width: 280px;
+
+    transform: translateX(-100%);
+
+    border-right: none;
+    box-shadow: 4px 0 24px rgba(15, 23, 42, 0.12);
+
+    z-index: var(--z-panel);
+
+    transition: transform 220ms ease, visibility 0s linear 220ms;
+    visibility: hidden;
+  }
+
+  .mobileOpen {
+    transform: translateX(0);
+    visibility: visible;
+
+    transition: transform 220ms ease, visibility 0s linear 0s;
+  }
+
+  .sidebar.collapsed {
+    width: 280px;
+    min-width: 280px;
+  }
+
+  .collapsed .sidebarBrandName,
+  .collapsed .itemLabel,
+  .collapsed .triggerName {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .collapsed .item {
+    justify-content: flex-start;
+    padding: 0 var(--space-3);
+  }
+
+  .collapsed .userTrigger {
+    justify-content: flex-start;
+    padding: var(--space-3) var(--space-5);
+  }
+}
+
+@media print {
+  .sidebar {
+    display: none !important;
+  }
+}

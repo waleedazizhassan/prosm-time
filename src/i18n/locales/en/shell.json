@@ -1,0 +1,12 @@
+{
+  "navigationLabel": "Main navigation",
+  "toggleSidebar": "Toggle navigation",
+  "collapseSidebar": "Collapse sidebar",
+  "expandSidebar": "Expand sidebar",
+  "openUserMenu": "Open user menu",
+  "signOutAction": "Sign out",
+  "items": {
+    "dashboard": "Dashboard",
+    "people": "People"
+  }
+}

@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { AuthProvider, useAuth } from "../core/context/AuthContext";
 import ProtectedRoute from "./ProtectedRoute";
+import AppShell from "../layouts/AppShell";
 
 import ActivationPage from "../modules/activation/ActivationPage";
 import LoginPage from "../modules/auth/LoginPage";
@@ -11,10 +12,14 @@ import PeoplePage from "../modules/people/PeoplePage";
 import PersonDetailPage from "../modules/people/PersonDetailPage";
 
 // PROSM Time route map. /activate, /login, /accept-invitation are
-// public (no session exists yet by definition at any of them);
-// /dashboard, /people, /people/:userId are protected. Root redirects to
-// whichever of those the current session state actually calls for -
-// never a bare unauthenticated home screen.
+// public (no session exists yet by definition at any of them) and
+// render standalone (no shell - there is nothing to navigate yet).
+// Every protected destination is nested under one AppShell layout
+// route (Header + Sidebar + Main, § visual consistency pass) inside
+// ProtectedRoute, so the shell mounts once and every page inside it is
+// just its own content. Root redirects to whichever of those the
+// current session state actually calls for - never a bare
+// unauthenticated home screen.
 function RootRedirect() {
   const { loading, isAuthenticated } = useAuth();
 
@@ -32,30 +37,19 @@ export default function AppRoutes() {
           <Route path="/activate" element={<ActivationPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/accept-invitation" element={<AcceptInvitationPage />} />
+
           <Route
-            path="/dashboard"
             element={
               <ProtectedRoute>
-                <DashboardPage />
+                <AppShell />
               </ProtectedRoute>
             }
-          />
-          <Route
-            path="/people"
-            element={
-              <ProtectedRoute>
-                <PeoplePage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/people/:userId"
-            element={
-              <ProtectedRoute>
-                <PersonDetailPage />
-              </ProtectedRoute>
-            }
-          />
+          >
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/people" element={<PeoplePage />} />
+            <Route path="/people/:userId" element={<PersonDetailPage />} />
+          </Route>
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AuthProvider>

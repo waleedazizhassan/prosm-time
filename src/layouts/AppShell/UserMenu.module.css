@@ -1,0 +1,71 @@
+/* PROSM Time - a lighter, self-contained port of PROSM Platform's own
+   UserWorkspacePanel visual language (card surface, border-light,
+   radius-lg, shadow-lg) for the identity fact this product actually
+   has today (name/email/role + sign out) - not that panel's own
+   Settings/Appearance/Delegation sections, which have no equivalent
+   here yet. */
+.panel {
+  position: absolute;
+  bottom: calc(100% + var(--space-2));
+  left: var(--space-3);
+  right: var(--space-3);
+
+  background: var(--surface-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+
+  padding: var(--space-4);
+  z-index: var(--z-dropdown);
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.name {
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.email {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.role {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.signOutButton {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  padding: var(--space-2) var(--space-3);
+
+  border: none;
+  border-radius: var(--radius-md);
+
+  background: transparent;
+  color: var(--brand-danger);
+
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-medium);
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.signOutButton:hover {
+  background: var(--status-danger-bg);
+}

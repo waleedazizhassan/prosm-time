@@ -1,7 +1,6 @@
 {
   "title": "Personnes",
   "subtitle": "Administrateurs et employés de votre organisation.",
-  "backToDashboard": "Retour au tableau de bord",
   "loadError": "Impossible de charger les membres de votre organisation.",
   "columns": {
     "name": "Nom",
@@ -37,6 +36,7 @@
   },
   "detail": {
     "title": "Membre",
+    "backToList": "Retour aux personnes",
     "loadError": "Impossible de charger ce membre.",
     "permissionsTitle": "Autorisations",
     "permissionsHint": "Les entrées en gras sont modifiées individuellement pour cette personne ; tout le reste suit le lot par défaut de son rôle.",

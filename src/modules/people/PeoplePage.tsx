@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../core/context/AuthContext";
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
@@ -74,10 +74,6 @@ export default function PeoplePage() {
       subtitle={t("subtitle")}
       actions={hasPermission("employees.create") ? <Button onClick={() => setInviteOpen(true)}>{t("invite.actionLabel")}</Button> : undefined}
     >
-      <Link to="/dashboard" style={{ color: "var(--text-link)", fontSize: "var(--font-sm)" }}>
-        {t("backToDashboard")}
-      </Link>
-
       {loadError ? <p style={{ color: "var(--brand-danger)" }}>{loadError}</p> : null}
 
       <Table columns={columns} data={members} getRowId={(member) => member.id} loading={loading} emptyMessage="—" onRowClick={(member) => navigate(`/people/${member.id}`)} />

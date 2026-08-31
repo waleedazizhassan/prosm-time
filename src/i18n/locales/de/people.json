@@ -1,7 +1,6 @@
 {
   "title": "Personen",
   "subtitle": "Administratoren und Mitarbeiter in Ihrer Organisation.",
-  "backToDashboard": "Zurück zum Dashboard",
   "loadError": "Mitglieder Ihrer Organisation konnten nicht geladen werden.",
   "columns": {
     "name": "Name",
@@ -37,6 +36,7 @@
   },
   "detail": {
     "title": "Mitglied",
+    "backToList": "Zurück zu Personen",
     "loadError": "Dieses Mitglied konnte nicht geladen werden.",
     "permissionsTitle": "Berechtigungen",
     "permissionsHint": "Fett hervorgehobene Einträge sind für diese Person individuell überschrieben; alles andere folgt dem Standardpaket ihrer Rolle.",

@@ -153,7 +153,7 @@ export default function PersonDetailPage() {
   return (
     <PageShell title={member.fullName} subtitle={`${member.email} · ${member.roleName}`}>
       <Link to="/people" style={{ color: "var(--text-link)", fontSize: "var(--font-sm)" }}>
-        {t("backToDashboard")}
+        {t("detail.backToList")}
       </Link>
 
       <Card title={t("detail.permissionsTitle")}>

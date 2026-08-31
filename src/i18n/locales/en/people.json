@@ -1,7 +1,6 @@
 {
   "title": "People",
   "subtitle": "Administrators and employees in your organization.",
-  "backToDashboard": "Back to dashboard",
   "loadError": "Unable to load your organization's members.",
   "columns": {
     "name": "Name",
@@ -37,6 +36,7 @@
   },
   "detail": {
     "title": "Member",
+    "backToList": "Back to people",
     "loadError": "Unable to load this member.",
     "permissionsTitle": "Permissions",
     "permissionsHint": "Bold entries are individually overridden for this person; everything else follows their role's default bundle.",

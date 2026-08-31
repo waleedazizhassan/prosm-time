@@ -29,17 +29,25 @@ import frPeople from "./locales/fr/people.json";
 import dePeople from "./locales/de/people.json";
 import itPeople from "./locales/it/people.json";
 
+import enShell from "./locales/en/shell.json";
+import arShell from "./locales/ar/shell.json";
+import frShell from "./locales/fr/shell.json";
+import deShell from "./locales/de/shell.json";
+import itShell from "./locales/it/shell.json";
+
 // PROSM Time i18n bootstrap. One namespace per screen/domain area,
 // exactly the way PROSM Platform's own src/i18n/index.js does - never
-// raw strings in components. `people` is WP-04's addition (Employee
-// Management, invitations, Administrator & Permission Management).
+// raw strings in components. `shell` is the application shell's own
+// namespace (Header/Sidebar/User Menu chrome), matching PROSM
+// Platform's own dedicated `sidebar` namespace pattern - never mixed
+// into a page's own namespace.
 
 const resources = {
-  en: { common: enCommon, auth: enAuth, dashboard: enDashboard, people: enPeople },
-  ar: { common: arCommon, auth: arAuth, dashboard: arDashboard, people: arPeople },
-  fr: { common: frCommon, auth: frAuth, dashboard: frDashboard, people: frPeople },
-  de: { common: deCommon, auth: deAuth, dashboard: deDashboard, people: dePeople },
-  it: { common: itCommon, auth: itAuth, dashboard: itDashboard, people: itPeople },
+  en: { common: enCommon, auth: enAuth, dashboard: enDashboard, people: enPeople, shell: enShell },
+  ar: { common: arCommon, auth: arAuth, dashboard: arDashboard, people: arPeople, shell: arShell },
+  fr: { common: frCommon, auth: frAuth, dashboard: frDashboard, people: frPeople, shell: frShell },
+  de: { common: deCommon, auth: deAuth, dashboard: deDashboard, people: dePeople, shell: deShell },
+  it: { common: itCommon, auth: itAuth, dashboard: itDashboard, people: itPeople, shell: itShell },
 };
 
 export const I18N_STORAGE_KEY = "prosm_time_language";
@@ -53,7 +61,7 @@ i18next
     fallbackLng: DEFAULT_LANGUAGE,
     supportedLngs: LANGUAGE_CODES,
 
-    ns: ["common", "auth", "dashboard", "people"],
+    ns: ["common", "auth", "dashboard", "people", "shell"],
     defaultNS: "common",
 
     detection: {

@@ -1,7 +1,6 @@
 {
   "title": "Persone",
   "subtitle": "Amministratori e dipendenti della tua organizzazione.",
-  "backToDashboard": "Torna alla dashboard",
   "loadError": "Impossibile caricare i membri della tua organizzazione.",
   "columns": {
     "name": "Nome",
@@ -37,6 +36,7 @@
   },
   "detail": {
     "title": "Membro",
+    "backToList": "Torna alle persone",
     "loadError": "Impossibile caricare questo membro.",
     "permissionsTitle": "Autorizzazioni",
     "permissionsHint": "Le voci in grassetto sono sovrascritte individualmente per questa persona; tutto il resto segue il pacchetto predefinito del suo ruolo.",

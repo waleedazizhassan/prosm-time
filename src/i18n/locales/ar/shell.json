@@ -1,0 +1,12 @@
+{
+  "navigationLabel": "التنقل الرئيسي",
+  "toggleSidebar": "تبديل التنقل",
+  "collapseSidebar": "طي الشريط الجانبي",
+  "expandSidebar": "توسيع الشريط الجانبي",
+  "openUserMenu": "فتح قائمة المستخدم",
+  "signOutAction": "تسجيل الخروج",
+  "items": {
+    "dashboard": "لوحة التحكم",
+    "people": "الأشخاص"
+  }
+}
