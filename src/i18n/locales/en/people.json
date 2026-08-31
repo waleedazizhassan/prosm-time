@@ -30,7 +30,10 @@
     "confirm": "Send invitation",
     "genericError": "Unable to invite this employee.",
     "successTitle": "Invitation created",
-    "oneTimeWarning": "This verification code is shown only once. Hand it to the employee directly - email delivery is not yet automated.",
+    "oneTimeWarning": "This invitation link and code are shown only once. Share the link with the employee directly (email delivery is not yet automated) - opening it takes them straight to the invitation screen with their email and code already filled in.",
+    "linkLabel": "Invitation link",
+    "copyLinkAction": "Copy link",
+    "linkCopied": "Link copied",
     "codeLabel": "Verification code",
     "close": "Close"
   },

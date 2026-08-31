@@ -11,6 +11,7 @@ interface InputProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;
   disabled?: boolean;
+  readOnly?: boolean;
   helperText?: string;
   error?: string;
   autoComplete?: string;
@@ -25,6 +26,7 @@ export default function Input({
   onChange,
   required = false,
   disabled = false,
+  readOnly = false,
   helperText = "",
   error = "",
   autoComplete,
@@ -39,6 +41,7 @@ export default function Input({
         placeholder={placeholder}
         onChange={onChange}
         disabled={disabled}
+        readOnly={readOnly}
         autoComplete={autoComplete}
         className={[styles.input, error ? styles.errorInput : ""].filter(Boolean).join(" ")}
       />

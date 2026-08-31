@@ -30,7 +30,10 @@
     "confirm": "Einladung senden",
     "genericError": "Dieser Mitarbeiter konnte nicht eingeladen werden.",
     "successTitle": "Einladung erstellt",
-    "oneTimeWarning": "Dieser Verifizierungscode wird nur einmal angezeigt. Geben Sie ihn dem Mitarbeiter direkt weiter - der E-Mail-Versand ist noch nicht automatisiert.",
+    "oneTimeWarning": "Dieser Einladungslink und -code werden nur einmal angezeigt. Teilen Sie den Link direkt mit dem Mitarbeiter (der E-Mail-Versand ist noch nicht automatisiert) - beim Öffnen gelangt er direkt zum Einladungsbildschirm mit bereits ausgefüllter E-Mail und Code.",
+    "linkLabel": "Einladungslink",
+    "copyLinkAction": "Link kopieren",
+    "linkCopied": "Link kopiert",
     "codeLabel": "Verifizierungscode",
     "close": "Schließen"
   },

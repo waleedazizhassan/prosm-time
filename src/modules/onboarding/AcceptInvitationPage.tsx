@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import InvitationRepository from "../../core/repositories/InvitationRepository";
 import AuthService from "../../core/auth/AuthService";
@@ -17,9 +17,13 @@ import styles from "../../components/common/AuthLayout.module.css";
 export default function AcceptInvitationPage() {
   const { t } = useTranslation("auth");
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
-  const [email, setEmail] = useState("");
-  const [verificationCode, setVerificationCode] = useState("");
+  // The invitation link an admin shares (InviteEmployeeModal) carries
+  // ?email=&code= so the employee never has to type either by hand -
+  // both stay editable in case the link was forwarded/mistyped.
+  const [email, setEmail] = useState(searchParams.get("email") ?? "");
+  const [verificationCode, setVerificationCode] = useState(searchParams.get("code") ?? "");
   const [newPassword, setNewPassword] = useState("");
 
   const [submitting, setSubmitting] = useState(false);

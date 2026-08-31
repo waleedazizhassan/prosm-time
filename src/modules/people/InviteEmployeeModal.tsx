@@ -30,6 +30,7 @@ export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: Invi
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [result, setResult] = useState<InviteResultData | null>(null);
+  const [linkCopied, setLinkCopied] = useState(false);
 
   const reset = () => {
     setEmail("");
@@ -37,6 +38,7 @@ export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: Invi
     setRoleKey("employee");
     setError("");
     setResult(null);
+    setLinkCopied(false);
   };
 
   const handleClose = () => {
@@ -64,6 +66,17 @@ export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: Invi
   };
 
   if (result) {
+    const invitationUrl = `${window.location.origin}/accept-invitation?email=${encodeURIComponent(result.email)}&code=${encodeURIComponent(result.verificationCode)}`;
+
+    const handleCopyLink = async () => {
+      try {
+        await navigator.clipboard.writeText(invitationUrl);
+        setLinkCopied(true);
+      } catch {
+        setLinkCopied(false);
+      }
+    };
+
     return (
       <Modal isOpen={isOpen} onClose={handleClose} title={t("invite.successTitle")} footer={<Button onClick={handleClose}>{t("invite.close")}</Button>}>
         <p
@@ -78,7 +91,13 @@ export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: Invi
         >
           {t("invite.oneTimeWarning")}
         </p>
-        <p>
+
+        <Input label={t("invite.linkLabel")} name="invitationLink" value={invitationUrl} onChange={() => {}} readOnly />
+        <Button variant="ghost" size="sm" onClick={handleCopyLink}>
+          {linkCopied ? t("invite.linkCopied") : t("invite.copyLinkAction")}
+        </Button>
+
+        <p style={{ marginTop: "var(--space-4)" }}>
           <strong>{t("invite.codeLabel")}:</strong> <span style={{ fontFamily: "monospace", fontSize: "var(--font-lg)" }}>{result.verificationCode}</span>
         </p>
         <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{result.email}</p>

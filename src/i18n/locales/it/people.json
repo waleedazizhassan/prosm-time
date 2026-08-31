@@ -30,7 +30,10 @@
     "confirm": "Invia invito",
     "genericError": "Impossibile invitare questo dipendente.",
     "successTitle": "Invito creato",
-    "oneTimeWarning": "Questo codice di verifica viene mostrato una sola volta. Consegnalo direttamente al dipendente - l'invio via email non è ancora automatizzato.",
+    "oneTimeWarning": "Questo link e codice di invito vengono mostrati una sola volta. Condividi il link direttamente con il dipendente (l'invio via email non è ancora automatizzato) - aprendolo si accede direttamente alla schermata di invito con email e codice già compilati.",
+    "linkLabel": "Link di invito",
+    "copyLinkAction": "Copia link",
+    "linkCopied": "Link copiato",
     "codeLabel": "Codice di verifica",
     "close": "Chiudi"
   },
