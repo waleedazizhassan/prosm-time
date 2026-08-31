@@ -11,17 +11,29 @@ import frCommon from "./locales/fr/common.json";
 import deCommon from "./locales/de/common.json";
 import itCommon from "./locales/it/common.json";
 
-// PROSM Time i18n bootstrap - WP-01 foundation only (the `common`
-// namespace). Every future work package adds its own namespace here
-// exactly the way PROSM Platform's own src/i18n/index.js does - one
-// namespace per screen/domain area, never raw strings in components.
+import enAuth from "./locales/en/auth.json";
+import arAuth from "./locales/ar/auth.json";
+import frAuth from "./locales/fr/auth.json";
+import deAuth from "./locales/de/auth.json";
+import itAuth from "./locales/it/auth.json";
+
+import enDashboard from "./locales/en/dashboard.json";
+import arDashboard from "./locales/ar/dashboard.json";
+import frDashboard from "./locales/fr/dashboard.json";
+import deDashboard from "./locales/de/dashboard.json";
+import itDashboard from "./locales/it/dashboard.json";
+
+// PROSM Time i18n bootstrap. One namespace per screen/domain area,
+// exactly the way PROSM Platform's own src/i18n/index.js does - never
+// raw strings in components. `auth`/`dashboard` are WP-03's additions
+// (activation, login, the minimal dashboard shell).
 
 const resources = {
-  en: { common: enCommon },
-  ar: { common: arCommon },
-  fr: { common: frCommon },
-  de: { common: deCommon },
-  it: { common: itCommon },
+  en: { common: enCommon, auth: enAuth, dashboard: enDashboard },
+  ar: { common: arCommon, auth: arAuth, dashboard: arDashboard },
+  fr: { common: frCommon, auth: frAuth, dashboard: frDashboard },
+  de: { common: deCommon, auth: deAuth, dashboard: deDashboard },
+  it: { common: itCommon, auth: itAuth, dashboard: itDashboard },
 };
 
 export const I18N_STORAGE_KEY = "prosm_time_language";
@@ -35,7 +47,7 @@ i18next
     fallbackLng: DEFAULT_LANGUAGE,
     supportedLngs: LANGUAGE_CODES,
 
-    ns: ["common"],
+    ns: ["common", "auth", "dashboard"],
     defaultNS: "common",
 
     detection: {

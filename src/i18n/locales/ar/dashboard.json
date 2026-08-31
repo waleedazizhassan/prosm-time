@@ -1,0 +1,29 @@
+{
+  "title": "لوحة التحكم",
+  "welcomeMessage": "مرحبًا، {{name}}.",
+  "signOutAction": "تسجيل الخروج",
+  "organizationCard": {
+    "title": "المؤسسة",
+    "codeLabel": "كود المؤسسة",
+    "statusLabel": "الحالة"
+  },
+  "licenseCard": {
+    "title": "الترخيص والخطة",
+    "licenseNumberLabel": "رقم الترخيص",
+    "statusLabel": "الحالة",
+    "usersLabel": "المستخدمون",
+    "devicesLabel": "الأجهزة",
+    "expiresLabel": "تاريخ الانتهاء",
+    "noExpiry": "بدون انتهاء",
+    "lastVerifiedLabel": "آخر تحقق",
+    "refreshAction": "تحديث الحالة",
+    "refreshError": "تعذر تحديث حالة الترخيص.",
+    "status": {
+      "ACTIVE": "نشط",
+      "SUSPENDED": "موقوف",
+      "EXPIRED": "منتهي الصلاحية",
+      "REVOKED": "ملغى"
+    }
+  },
+  "comingSoon": "باقي أجزاء PROSM Time (المواقع، الموظفون، الحضور، كشوف الدوام) ستُضاف في حزم عمل لاحقة."
+}

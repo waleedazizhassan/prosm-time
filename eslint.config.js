@@ -11,7 +11,11 @@ import tseslint from "typescript-eslint";
 // typescript-eslint layered on top for the TS/TSX stack this product
 // uses (§: "Core technology baseline: React + Vite + TypeScript").
 export default tseslint.config(
-  { ignores: ["dist/**"] },
+  // supabase/functions/** is Deno runtime code (Deno.env, remote URL
+  // imports, its own lint via deno-lint-ignore-file comments) - a
+  // Node/browser-targeted config has no business validating it, same
+  // reasoning dist/** is excluded as build output rather than source.
+  { ignores: ["dist/**", "supabase/functions/**"] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {

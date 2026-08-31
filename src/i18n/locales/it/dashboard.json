@@ -1,0 +1,29 @@
+{
+  "title": "Dashboard",
+  "welcomeMessage": "Benvenuto, {{name}}.",
+  "signOutAction": "Esci",
+  "organizationCard": {
+    "title": "Organizzazione",
+    "codeLabel": "Codice organizzazione",
+    "statusLabel": "Stato"
+  },
+  "licenseCard": {
+    "title": "Licenza e piano",
+    "licenseNumberLabel": "Numero di licenza",
+    "statusLabel": "Stato",
+    "usersLabel": "Utenti",
+    "devicesLabel": "Dispositivi",
+    "expiresLabel": "Scade",
+    "noExpiry": "Nessuna scadenza",
+    "lastVerifiedLabel": "Ultima verifica",
+    "refreshAction": "Aggiorna stato",
+    "refreshError": "Impossibile aggiornare lo stato della licenza.",
+    "status": {
+      "ACTIVE": "Attiva",
+      "SUSPENDED": "Sospesa",
+      "EXPIRED": "Scaduta",
+      "REVOKED": "Revocata"
+    }
+  },
+  "comingSoon": "Il resto di PROSM Time (sedi, dipendenti, presenza, fogli ore) arriverà nei prossimi pacchetti di lavoro."
+}

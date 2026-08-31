@@ -1,0 +1,29 @@
+{
+  "title": "Tableau de bord",
+  "welcomeMessage": "Bienvenue, {{name}}.",
+  "signOutAction": "Se déconnecter",
+  "organizationCard": {
+    "title": "Organisation",
+    "codeLabel": "Code de l'organisation",
+    "statusLabel": "Statut"
+  },
+  "licenseCard": {
+    "title": "Licence et plan",
+    "licenseNumberLabel": "Numéro de licence",
+    "statusLabel": "Statut",
+    "usersLabel": "Utilisateurs",
+    "devicesLabel": "Appareils",
+    "expiresLabel": "Expire",
+    "noExpiry": "Aucune expiration",
+    "lastVerifiedLabel": "Dernière vérification",
+    "refreshAction": "Actualiser le statut",
+    "refreshError": "Impossible d'actualiser le statut de la licence.",
+    "status": {
+      "ACTIVE": "Active",
+      "SUSPENDED": "Suspendue",
+      "EXPIRED": "Expirée",
+      "REVOKED": "Révoquée"
+    }
+  },
+  "comingSoon": "Le reste de PROSM Time (sites, employés, présence, feuilles de temps) arrivera dans les prochains lots de travail."
+}

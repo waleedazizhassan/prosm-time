@@ -1,0 +1,108 @@
+/* PROSM Time - design tokens (WP-03, revised after the official PROSM
+   logo was supplied, 2026-08-31). §28: "Dark Mode is the default
+   application appearance... Dark, Light, and System" - true default
+   (no explicit choice) is DARK, System is an explicit third choice, not
+   a fallback.
+
+   §29: "The supplied logo image must be inspected and the actual
+   visual palette extracted/approximated accurately before finalizing
+   design tokens... Do not guess the logo colors." These values are
+   derived from direct inspection of the real supplied logo (the glass/
+   crystal hexagonal "P" mark, blue-to-green gradient, dark navy
+   surface) and the accompanying brand slides (bold white wordmark, a
+   4-segment blue -> cyan -> green -> white accent bar, cyan-outlined
+   module badges). Still NOT the finished WP-20 token system - the
+   actual logo FILE has not yet reached this repository as an asset
+   (§33: "preserve supplied branding exactly," which requires the real
+   file, not a description of it) - but the palette itself is real, not
+   a neutral guess, so these are no longer placeholder values. */
+
+:root {
+  --surface-app: #070c18;
+  --surface-card: #101a2e;
+  --border: #23324a;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+
+  /* Primary Blue - navigation, interactive controls, active states (§29). */
+  --accent: #2563eb;
+  --accent-strong: #1d4ed8;
+  --accent-contrast: #ffffff;
+
+  /* Supporting cyan-blue accent from the logo's rim light / brand bar. */
+  --accent-light: #38bdf8;
+
+  /* Supporting Green - success, valid presence, approved states (§29). */
+  --success: #16a34a;
+  --success-surface: #0f2418;
+
+  /* Red - error, rejection, critical danger, SOS/emergency ONLY, never
+     a general brand color (§29's own explicit rule) - not present in
+     any supplied asset, kept as a standard, unambiguous error red. */
+  --danger: #f87171;
+  --danger-surface: #2a1414;
+
+  --focus-ring: #60a5fa;
+
+  --font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+}
+
+/* Explicit "Light" choice. No light-surface reference exists yet in
+   the supplied brand material (every slide is dark-only) - this stays
+   a reasonable, legible light counterpart to the real dark tokens
+   above, not itself drawn from a supplied asset. */
+:root[data-theme="light"] {
+  --surface-app: #ffffff;
+  --surface-card: #f8fafc;
+  --border: #e2e8f0;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --accent: #2563eb;
+  --accent-strong: #1d4ed8;
+  --accent-contrast: #ffffff;
+  --accent-light: #0ea5e9;
+  --success: #16a34a;
+  --success-surface: #f0fdf4;
+  --danger: #dc2626;
+  --danger-surface: #fef2f2;
+  --focus-ring: #2563eb;
+}
+
+/* Explicit "System" choice - only then does the OS preference apply;
+   it is never the silent default. */
+@media (prefers-color-scheme: light) {
+  :root[data-theme="system"] {
+    --surface-app: #ffffff;
+    --surface-card: #f8fafc;
+    --border: #e2e8f0;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --accent: #2563eb;
+    --accent-strong: #1d4ed8;
+    --accent-contrast: #ffffff;
+    --accent-light: #0ea5e9;
+    --success: #16a34a;
+    --success-surface: #f0fdf4;
+    --danger: #dc2626;
+    --danger-surface: #fef2f2;
+    --focus-ring: #2563eb;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--surface-app);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+}

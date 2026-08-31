@@ -1,0 +1,29 @@
+{
+  "title": "Dashboard",
+  "welcomeMessage": "Welcome, {{name}}.",
+  "signOutAction": "Sign out",
+  "organizationCard": {
+    "title": "Organization",
+    "codeLabel": "Organization code",
+    "statusLabel": "Status"
+  },
+  "licenseCard": {
+    "title": "License & Plan",
+    "licenseNumberLabel": "License number",
+    "statusLabel": "Status",
+    "usersLabel": "Users",
+    "devicesLabel": "Devices",
+    "expiresLabel": "Expires",
+    "noExpiry": "No expiry",
+    "lastVerifiedLabel": "Last verified",
+    "refreshAction": "Refresh status",
+    "refreshError": "Unable to refresh license status.",
+    "status": {
+      "ACTIVE": "Active",
+      "SUSPENDED": "Suspended",
+      "EXPIRED": "Expired",
+      "REVOKED": "Revoked"
+    }
+  },
+  "comingSoon": "The rest of PROSM Time (sites, employees, attendance, timesheets) arrives in later work packages."
+}

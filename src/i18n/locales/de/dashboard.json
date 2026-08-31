@@ -1,0 +1,29 @@
+{
+  "title": "Dashboard",
+  "welcomeMessage": "Willkommen, {{name}}.",
+  "signOutAction": "Abmelden",
+  "organizationCard": {
+    "title": "Organisation",
+    "codeLabel": "Organisationscode",
+    "statusLabel": "Status"
+  },
+  "licenseCard": {
+    "title": "Lizenz & Plan",
+    "licenseNumberLabel": "Lizenznummer",
+    "statusLabel": "Status",
+    "usersLabel": "Nutzer",
+    "devicesLabel": "Geräte",
+    "expiresLabel": "Läuft ab",
+    "noExpiry": "Kein Ablaufdatum",
+    "lastVerifiedLabel": "Zuletzt geprüft",
+    "refreshAction": "Status aktualisieren",
+    "refreshError": "Lizenzstatus konnte nicht aktualisiert werden.",
+    "status": {
+      "ACTIVE": "Aktiv",
+      "SUSPENDED": "Ausgesetzt",
+      "EXPIRED": "Abgelaufen",
+      "REVOKED": "Widerrufen"
+    }
+  },
+  "comingSoon": "Der Rest von PROSM Time (Standorte, Mitarbeiter, Anwesenheit, Stundenzettel) folgt in späteren Arbeitspaketen."
+}

@@ -1,0 +1,17 @@
+project_id = "prosm-time"
+
+# activate-organization is reached by a brand-new customer with NO
+# Supabase session at all - it must accept the request before any JWT
+# exists, then does its own real verification against PROSM
+# Management's integration contract server-side (§5). Every other
+# function keeps the default verify_jwt = true (an authenticated
+# org member's own session is required).
+[functions.activate-organization]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/activate-organization/index.ts"
+
+[functions.refresh-license-status]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/refresh-license-status/index.ts"
