@@ -66,11 +66,9 @@ export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: Invi
   };
 
   if (result) {
-    const invitationUrl = `${window.location.origin}/accept-invitation?email=${encodeURIComponent(result.email)}&code=${encodeURIComponent(result.verificationCode)}`;
-
     const handleCopyLink = async () => {
       try {
-        await navigator.clipboard.writeText(invitationUrl);
+        await navigator.clipboard.writeText(result.invitationUrl);
         setLinkCopied(true);
       } catch {
         setLinkCopied(false);
@@ -80,19 +78,16 @@ export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: Invi
     return (
       <Modal isOpen={isOpen} onClose={handleClose} title={t("invite.successTitle")} footer={<Button onClick={handleClose}>{t("invite.close")}</Button>}>
         <p
-          style={{
-            color: "var(--status-warning-text)",
-            background: "var(--status-warning-bg)",
-            border: "1px solid var(--status-warning-border)",
-            borderRadius: "var(--radius-sm)",
-            padding: "var(--space-2) var(--space-3)",
-            fontSize: "var(--font-sm)",
-          }}
+          style={
+            result.emailSent
+              ? { color: "var(--status-success-text)", background: "var(--status-success-bg)", border: "1px solid var(--status-success-border)", borderRadius: "var(--radius-sm)", padding: "var(--space-2) var(--space-3)", fontSize: "var(--font-sm)" }
+              : { color: "var(--status-warning-text)", background: "var(--status-warning-bg)", border: "1px solid var(--status-warning-border)", borderRadius: "var(--radius-sm)", padding: "var(--space-2) var(--space-3)", fontSize: "var(--font-sm)" }
+          }
         >
-          {t("invite.oneTimeWarning")}
+          {result.emailSent ? t("invite.emailSentNotice", { email: result.email }) : t("invite.emailNotSentNotice")}
         </p>
 
-        <Input label={t("invite.linkLabel")} name="invitationLink" value={invitationUrl} onChange={() => {}} readOnly />
+        <Input label={t("invite.linkLabel")} name="invitationLink" value={result.invitationUrl} onChange={() => {}} readOnly />
         <Button variant="ghost" size="sm" onClick={handleCopyLink}>
           {linkCopied ? t("invite.linkCopied") : t("invite.copyLinkAction")}
         </Button>

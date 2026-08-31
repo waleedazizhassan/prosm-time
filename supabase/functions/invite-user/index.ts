@@ -13,17 +13,29 @@
 // itself has no idea who is calling, this Edge Function is what makes
 // that safe.
 //
-// Email delivery of the verification code is explicitly NOT built here
-// - that is WP-13's job (Notifications). The code is returned once, in
-// this response, for the inviting admin to hand to the employee
-// out-of-band - same "controlled one-time display" posture as every
-// other secret in this codebase.
+// Real email delivery (user-directed, Resend, noreply@prosm.net) is
+// attempted after the invitation is created - sendEmail() is a soft
+// dependency (§ _shared/emailService.ts), so a missing RESEND_API_KEY
+// or provider outage never blocks the invitation itself. The code/link
+// are always returned in this response too, for the inviting admin to
+// share directly - same "controlled one-time display" posture as every
+// other secret in this codebase, now a real delivered email as well as
+// a fallback the admin can act on immediately.
 // deno-lint-ignore-file no-explicit-any
 
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
+import { sendEmail } from "../_shared/emailService.ts";
+import { renderInvitationEmail } from "../_shared/emailTemplates.ts";
+
+const ROLE_LABELS: Record<string, string> = {
+  manager: "Manager / Site Manager",
+  supervisor: "Supervisor / Team Lead",
+  employee: "Employee",
+  read_only: "Read-only / Reporting",
+};
 
 function generateVerificationCode(): string {
   const randomBuffer = new Uint32Array(1);
@@ -111,7 +123,8 @@ serve(async (request: Request) => {
     const newAuthUserId = authResult.user.id;
 
     const verificationCode = generateVerificationCode();
-    const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7).toISOString(); // 7 days
+    const expiryDays = 7;
+    const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * expiryDays).toISOString();
 
     const { data: createResult, error: createError } = await serviceClient.rpc("create_invited_prosm_time_user", {
       p_organization_id: callerRow.organization_id,
@@ -133,10 +146,38 @@ serve(async (request: Request) => {
       return errorResponse(createError?.message ?? "Unable to invite this employee.", 500, "INVITE_FAILED");
     }
 
+    const { data: organizationRow } = await serviceClient
+      .from("organizations")
+      .select("name")
+      .eq("id", callerRow.organization_id)
+      .maybeSingle();
+
+    const appOrigin = request.headers.get("origin") || Deno.env.get("PROSM_TIME_APP_URL") || "http://localhost:5177";
+    const invitationUrl = `${appOrigin}/accept-invitation?email=${encodeURIComponent(normalizedEmail)}&code=${encodeURIComponent(verificationCode)}`;
+
+    const emailResult = await sendEmail({
+      to: normalizedEmail,
+      subject: `You're invited to join ${organizationRow?.name ?? "your organization"} on PROSM Time`,
+      html: renderInvitationEmail({
+        organizationName: organizationRow?.name ?? "your organization",
+        inviteeName: fullName.trim(),
+        roleLabel: ROLE_LABELS[roleKey] ?? roleKey,
+        invitationUrl,
+        verificationCode,
+        expiryDays,
+      }),
+      purpose: "user_invitation",
+      supabase: serviceClient,
+      organizationId: callerRow.organization_id,
+      userId: createResult.userId,
+    });
+
     return successResponse({
       userId: createResult.userId,
       email: normalizedEmail,
       verificationCode,
+      invitationUrl,
+      emailSent: emailResult.sent,
       expiresAt,
     });
   } catch (error: any) {

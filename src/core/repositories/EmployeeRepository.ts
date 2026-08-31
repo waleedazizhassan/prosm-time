@@ -27,6 +27,8 @@ export interface InviteResultData {
   userId: string;
   email: string;
   verificationCode: string;
+  invitationUrl: string;
+  emailSent: boolean;
   expiresAt: string;
 }
 
