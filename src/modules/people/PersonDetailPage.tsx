@@ -13,6 +13,7 @@ import Button from "../../components/common/Button";
 import Modal from "../../components/common/Modal";
 import Textarea from "../../components/common/Textarea";
 import StatusBadge from "../../components/common/StatusBadge";
+import AdminAttendanceCard from "./AdminAttendanceCard";
 
 interface PendingChange {
   permission: Permission;
@@ -227,6 +228,8 @@ export default function PersonDetailPage() {
           ))
         )}
       </Card>
+
+      <AdminAttendanceCard subjectUserId={member.id} />
 
       <Modal
         isOpen={Boolean(pendingChange)}

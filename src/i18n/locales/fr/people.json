@@ -53,9 +53,24 @@
     "reasonRequired": "Un motif est requis.",
     "genericError": "Impossible de mettre à jour cette autorisation.",
     "devicesTitle": "Appareils associés",
-    "devicesHint": "Les appareils depuis lesquels cette personne a tenté de pointer apparaîtront ici une fois le suivi de présence (un lot de travail ultérieur) actif.",
+    "devicesHint": "Les appareils depuis lesquels cette personne a tenté de pointer apparaîtront ici une fois l'application des associations d'appareils (un lot de travail ultérieur) active.",
     "noDevices": "Aucun appareil associé pour le moment.",
     "approveAction": "Approuver",
-    "blockAction": "Bloquer"
+    "blockAction": "Bloquer",
+    "attendance": {
+      "title": "Présence (au nom de)",
+      "hint": "Pointez l'arrivée ou le départ de cet employé lorsqu'il ne peut pas le faire lui-même. Ceci est enregistré comme une action administrative distincte, jamais fusionnée avec son propre historique de présence.",
+      "siteLabel": "Site",
+      "projectLabel": "Projet (facultatif)",
+      "noProject": "Aucun projet",
+      "noAssignedSites": "Cet employé n'est assigné à aucun site pour le moment.",
+      "notClockedIn": "Cet employé n'a pas pointé son arrivée actuellement.",
+      "reasonLabel": "Motif",
+      "clockInAction": "Pointer l'arrivée au nom de l'employé",
+      "clockOutAction": "Pointer le départ au nom de l'employé",
+      "clockedInSince": "Présence pointée depuis {{time}}",
+      "clockInError": "Impossible de pointer l'arrivée de cet employé.",
+      "clockOutError": "Impossible de pointer le départ de cet employé."
+    }
   }
 }

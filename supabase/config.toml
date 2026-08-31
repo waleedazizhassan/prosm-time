@@ -37,3 +37,13 @@ entrypoint = "./functions/clock-in/index.ts"
 enabled = true
 verify_jwt = true
 entrypoint = "./functions/clock-out/index.ts"
+
+[functions.admin-clock-in]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/admin-clock-in/index.ts"
+
+[functions.admin-clock-out]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/admin-clock-out/index.ts"

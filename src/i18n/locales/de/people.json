@@ -53,9 +53,24 @@
     "reasonRequired": "Ein Grund ist erforderlich.",
     "genericError": "Diese Berechtigung konnte nicht aktualisiert werden.",
     "devicesTitle": "Geräteverknüpfungen",
-    "devicesHint": "Geräte, von denen aus diese Person versucht hat, sich einzustempeln, erscheinen hier, sobald die Anwesenheitserfassung (ein späteres Arbeitspaket) aktiv ist.",
+    "devicesHint": "Geräte, von denen aus diese Person versucht hat, sich einzustempeln, erscheinen hier, sobald die Geräteverknüpfungs-Durchsetzung (ein späteres Arbeitspaket) aktiv ist.",
     "noDevices": "Noch keine Geräte verknüpft.",
     "approveAction": "Genehmigen",
-    "blockAction": "Sperren"
+    "blockAction": "Sperren",
+    "attendance": {
+      "title": "Anwesenheit (im Auftrag)",
+      "hint": "Stempeln Sie diesen Mitarbeiter ein oder aus, wenn er dies nicht selbst tun kann. Dies wird als eigenständige administrative Aktion erfasst, niemals mit seiner eigenen Anwesenheitshistorie vermischt.",
+      "siteLabel": "Standort",
+      "projectLabel": "Projekt (optional)",
+      "noProject": "Kein Projekt",
+      "noAssignedSites": "Dieser Mitarbeiter ist noch keinem Standort zugewiesen.",
+      "notClockedIn": "Dieser Mitarbeiter ist derzeit nicht eingestempelt.",
+      "reasonLabel": "Grund",
+      "clockInAction": "Im Auftrag einstempeln",
+      "clockOutAction": "Im Auftrag ausstempeln",
+      "clockedInSince": "Eingestempelt seit {{time}}",
+      "clockInError": "Dieser Mitarbeiter konnte nicht eingestempelt werden.",
+      "clockOutError": "Dieser Mitarbeiter konnte nicht ausgestempelt werden."
+    }
   }
 }

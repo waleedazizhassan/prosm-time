@@ -53,9 +53,24 @@
     "reasonRequired": "È richiesto un motivo.",
     "genericError": "Impossibile aggiornare questa autorizzazione.",
     "devicesTitle": "Dispositivi associati",
-    "devicesHint": "I dispositivi da cui questa persona ha tentato di timbrare appariranno qui una volta attivo il tracciamento delle presenze (un pacchetto di lavoro successivo).",
+    "devicesHint": "I dispositivi da cui questa persona ha tentato di timbrare appariranno qui una volta attivo l'applicazione dell'associazione dei dispositivi (un pacchetto di lavoro successivo).",
     "noDevices": "Nessun dispositivo associato ancora.",
     "approveAction": "Approva",
-    "blockAction": "Blocca"
+    "blockAction": "Blocca",
+    "attendance": {
+      "title": "Presenza (per conto di)",
+      "hint": "Timbra l'entrata o l'uscita di questo dipendente quando non può farlo da solo. Questo viene registrato come un'azione amministrativa distinta, mai unita alla sua cronologia di presenza.",
+      "siteLabel": "Sede",
+      "projectLabel": "Progetto (facoltativo)",
+      "noProject": "Nessun progetto",
+      "noAssignedSites": "Questo dipendente non è ancora assegnato a nessuna sede.",
+      "notClockedIn": "Questo dipendente non è attualmente in servizio.",
+      "reasonLabel": "Motivo",
+      "clockInAction": "Timbra entrata per conto suo",
+      "clockOutAction": "Timbra uscita per conto suo",
+      "clockedInSince": "In servizio dalle {{time}}",
+      "clockInError": "Impossibile timbrare l'entrata di questo dipendente.",
+      "clockOutError": "Impossibile timbrare l'uscita di questo dipendente."
+    }
   }
 }

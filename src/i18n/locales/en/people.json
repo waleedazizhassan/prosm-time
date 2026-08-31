@@ -53,9 +53,24 @@
     "reasonRequired": "A reason is required.",
     "genericError": "Unable to update this permission.",
     "devicesTitle": "Device bindings",
-    "devicesHint": "Devices this person has attempted to clock in from will appear here once attendance tracking (a later work package) is live.",
+    "devicesHint": "Devices this person has attempted to clock in from appear here once device binding enforcement (a later work package) is live.",
     "noDevices": "No devices bound yet.",
     "approveAction": "Approve",
-    "blockAction": "Block"
+    "blockAction": "Block",
+    "attendance": {
+      "title": "Attendance (on behalf)",
+      "hint": "Perform Clock In/Out for this employee when they are unable to do it themselves. This is recorded as a distinct administrative action, never merged into their own attendance history.",
+      "siteLabel": "Site",
+      "projectLabel": "Project (optional)",
+      "noProject": "No project",
+      "noAssignedSites": "This employee is not assigned to any site yet.",
+      "notClockedIn": "This employee is not currently clocked in.",
+      "reasonLabel": "Reason",
+      "clockInAction": "Clock In on behalf",
+      "clockOutAction": "Clock Out on behalf",
+      "clockedInSince": "Clocked in since {{time}}",
+      "clockInError": "Unable to clock in this employee.",
+      "clockOutError": "Unable to clock out this employee."
+    }
   }
 }

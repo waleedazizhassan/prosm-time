@@ -29,6 +29,24 @@ export interface ClockOutInput {
   accuracyMeters?: number | null;
 }
 
+export interface AdminClockInInput {
+  subjectUserId: string;
+  siteId: string;
+  reason: string;
+  projectId?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
+  accuracyMeters?: number | null;
+}
+
+export interface AdminClockOutInput {
+  subjectUserId: string;
+  reason: string;
+  latitude?: number | null;
+  longitude?: number | null;
+  accuracyMeters?: number | null;
+}
+
 function createSuccess<T>(data: T | null = null): ServiceResult<T> {
   return { success: true, message: null, data };
 }
@@ -123,6 +141,68 @@ class AttendanceRepository {
       }
       if (data?.success === false) {
         return createError(data?.error?.message ?? "Unable to clock out.");
+      }
+
+      return createSuccess({ sessionId: data.data.sessionId });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
+    }
+  }
+
+  // WP-07/§10 - "An authorized administrator may perform Clock In...
+  // on behalf of an employee." A distinct, separately-permissioned
+  // action (never a variant of the employee's own clockIn/clockOut
+  // above) - admin-clock-in/admin-clock-out re-check
+  // 'attendance.clock_in_on_behalf'/'attendance.clock_out_on_behalf'
+  // server-side and record the caller as ACTOR, the target as SUBJECT.
+  async adminClockIn(input: AdminClockInInput): Promise<ServiceResult<{ sessionId: string }>> {
+    try {
+      const { data, error } = await this.client.functions.invoke("admin-clock-in", {
+        body: {
+          subjectUserId: input.subjectUserId,
+          siteId: input.siteId,
+          reason: input.reason,
+          projectId: input.projectId ?? null,
+          idempotencyKey: crypto.randomUUID(),
+          latitude: input.latitude ?? null,
+          longitude: input.longitude ?? null,
+          accuracyMeters: input.accuracyMeters ?? null,
+        },
+      });
+
+      if (error) {
+        const errorBody = await error.context?.json?.().catch(() => null);
+        return createError(errorBody?.error?.message ?? error.message ?? "Unable to clock in this employee.");
+      }
+      if (data?.success === false) {
+        return createError(data?.error?.message ?? "Unable to clock in this employee.");
+      }
+
+      return createSuccess({ sessionId: data.data.sessionId });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
+    }
+  }
+
+  async adminClockOut(input: AdminClockOutInput): Promise<ServiceResult<{ sessionId: string }>> {
+    try {
+      const { data, error } = await this.client.functions.invoke("admin-clock-out", {
+        body: {
+          subjectUserId: input.subjectUserId,
+          reason: input.reason,
+          idempotencyKey: crypto.randomUUID(),
+          latitude: input.latitude ?? null,
+          longitude: input.longitude ?? null,
+          accuracyMeters: input.accuracyMeters ?? null,
+        },
+      });
+
+      if (error) {
+        const errorBody = await error.context?.json?.().catch(() => null);
+        return createError(errorBody?.error?.message ?? error.message ?? "Unable to clock out this employee.");
+      }
+      if (data?.success === false) {
+        return createError(data?.error?.message ?? "Unable to clock out this employee.");
       }
 
       return createSuccess({ sessionId: data.data.sessionId });
