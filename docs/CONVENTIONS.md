@@ -10,6 +10,14 @@ React 19 + Vite 7 + TypeScript, Supabase (`@supabase/supabase-js`), react-router
 
 This repository, its Supabase project, and its deployment are **completely independent** from the PROSM Platform / PROSM Management repository and Supabase project. No shared tables, no shared auth, no shared connection strings, no shared credentials — ever (Master File §6, §7, §43.5, §43.6). The only channel between the two systems is the versioned integration contract (`prosm-management-integration` Edge Function on the PROSM Management side) — see `.env.example` for how PROSM Time's own backend authenticates to it.
 
+### Cross-product shared services boundary
+
+Some capabilities are genuinely Platform-owned shared infrastructure and are consumed through that same integration contract rather than reimplemented here — the canonical decision record is PROSM Platform's `docs/architecture/decisions/ADR-049-cross-product-shared-services-boundary.md`. Do not assume any capability is centralized just because it sounds reusable; the two-part test in that ADR (real external provider credential *or* genuinely zero product-specific content, plus a clean product-specific/shared split) governs every case, and a new candidate requires its own investigation and its own ADR before implementation.
+
+**Centralized today:** outbound email (`_shared/emailService.ts` relays through `prosm-management-integration`'s `sendEmail` action — PROSM Time never holds a Zoho credential; content stays product-authored, only delivery is Platform's).
+
+**Explicitly NOT centralized:** i18n/translation strings (product-specific UI copy — stays entirely in this repo's own `src/i18n/locales/`), this repo's own `audit_logs` (PROSM Time's own tenant/business data — must never move to Platform's database), and notification business logic once WP-13 is built (only a future delivery *channel*, if genuinely shared, would follow the email pattern — the trigger/content/recipient rules stay here).
+
 ## Repository pattern
 
 Every table/RPC gets a thin repository class under `src/core/repositories/`, one file per aggregate, mirroring the PROSM Platform convention exactly:
