@@ -27,3 +27,13 @@ entrypoint = "./functions/invite-user/index.ts"
 enabled = true
 verify_jwt = false
 entrypoint = "./functions/redeem-invitation/index.ts"
+
+[functions.clock-in]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/clock-in/index.ts"
+
+[functions.clock-out]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/clock-out/index.ts"

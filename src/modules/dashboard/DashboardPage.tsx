@@ -9,6 +9,7 @@ import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
 import Button from "../../components/common/Button";
 import StatusBadge from "../../components/common/StatusBadge";
+import ClockInOutCard from "./ClockInOutCard";
 
 // PROSM Time Implementation Master File V3.0, WP-03/§21/§37 - "Admin
 // Dashboard." Deliberately minimal: real organization identity and a
@@ -58,6 +59,8 @@ export default function DashboardPage() {
 
   return (
     <PageShell title={t("title")} subtitle={profile ? t("welcomeMessage", { name: profile.fullName }) : undefined}>
+      <ClockInOutCard />
+
       {loading ? (
         <p>…</p>
       ) : (

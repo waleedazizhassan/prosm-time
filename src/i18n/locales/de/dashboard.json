@@ -25,6 +25,17 @@
       "REVOKED": "Widerrufen"
     }
   },
-  "peopleLink": "Personen anzeigen",
-  "comingSoon": "Der Rest von PROSM Time (Standorte, Mitarbeiter, Anwesenheit, Stundenzettel) folgt in späteren Arbeitspaketen."
+  "attendance": {
+    "title": "Anwesenheit",
+    "noAssignedSites": "Sie sind noch keinem Standort zugewiesen. Wenden Sie sich an Ihren Administrator.",
+    "siteLabel": "Standort",
+    "projectLabel": "Projekt (optional)",
+    "noProject": "Kein Projekt",
+    "clockInAction": "Einstempeln",
+    "clockOutAction": "Ausstempeln",
+    "clockedInSince": "Eingestempelt seit {{time}}",
+    "clockInError": "Einstempeln nicht möglich.",
+    "clockOutError": "Ausstempeln nicht möglich."
+  },
+  "comingSoon": "Der Rest von PROSM Time (Zeitpläne, Stundenzettel, Berichte) folgt in späteren Arbeitspaketen."
 }

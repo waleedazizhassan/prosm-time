@@ -25,6 +25,17 @@
       "REVOKED": "ملغى"
     }
   },
-  "peopleLink": "عرض الأشخاص",
-  "comingSoon": "باقي أجزاء PROSM Time (المواقع، الموظفون، الحضور، كشوف الدوام) ستُضاف في حزم عمل لاحقة."
+  "attendance": {
+    "title": "الحضور",
+    "noAssignedSites": "لم يتم تعيينك في أي موقع بعد. تواصل مع المسؤول لديك.",
+    "siteLabel": "الموقع",
+    "projectLabel": "المشروع (اختياري)",
+    "noProject": "بدون مشروع",
+    "clockInAction": "تسجيل الحضور",
+    "clockOutAction": "تسجيل الانصراف",
+    "clockedInSince": "مسجل الحضور منذ {{time}}",
+    "clockInError": "تعذر تسجيل الحضور.",
+    "clockOutError": "تعذر تسجيل الانصراف."
+  },
+  "comingSoon": "باقي أجزاء PROSM Time (الجداول، كشوف الدوام، التقارير) ستُضاف في حزم عمل لاحقة."
 }

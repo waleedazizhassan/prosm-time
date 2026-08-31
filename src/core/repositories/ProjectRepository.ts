@@ -90,6 +90,24 @@ class ProjectRepository {
     }
   }
 
+  // WP-06/§14: "Employees must not be able to select projects to which
+  // they are not assigned." This is only what the Clock In picker
+  // offers - clock_in_prosm_time_attendance() re-checks the same
+  // project_assignments row server-side regardless.
+  async listAssignedProjectsForSite(userId: string, siteId: string): Promise<ServiceResult<Project[]>> {
+    try {
+      const { data, error } = await this.client.from("project_assignments").select("projects!inner(*)").eq("user_id", userId).eq("projects.site_id", siteId);
+      if (error) return createError(error.message);
+      const projects = (data ?? []).flatMap((row) => {
+        const project = Array.isArray(row.projects) ? row.projects[0] : row.projects;
+        return project ? [mapProjectRow(project)] : [];
+      });
+      return createSuccess(projects);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Project service unavailable.");
+    }
+  }
+
   async createProject(siteId: string, name: string, code: string | null, description: string | null): Promise<ServiceResult<{ projectId: string }>> {
     try {
       const { data, error } = await this.client.rpc("create_prosm_time_project", {

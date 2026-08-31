@@ -25,6 +25,17 @@
       "REVOKED": "Revocata"
     }
   },
-  "peopleLink": "Visualizza persone",
-  "comingSoon": "Il resto di PROSM Time (sedi, dipendenti, presenza, fogli ore) arriverà nei prossimi pacchetti di lavoro."
+  "attendance": {
+    "title": "Presenza",
+    "noAssignedSites": "Non sei ancora assegnato a nessuna sede. Contatta il tuo amministratore.",
+    "siteLabel": "Sede",
+    "projectLabel": "Progetto (facoltativo)",
+    "noProject": "Nessun progetto",
+    "clockInAction": "Timbra entrata",
+    "clockOutAction": "Timbra uscita",
+    "clockedInSince": "In servizio dalle {{time}}",
+    "clockInError": "Impossibile timbrare l'entrata.",
+    "clockOutError": "Impossibile timbrare l'uscita."
+  },
+  "comingSoon": "Il resto di PROSM Time (turni, fogli ore, report) arriverà nei prossimi pacchetti di lavoro."
 }

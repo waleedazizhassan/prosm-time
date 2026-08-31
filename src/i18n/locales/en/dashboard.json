@@ -25,6 +25,17 @@
       "REVOKED": "Revoked"
     }
   },
-  "peopleLink": "View people",
-  "comingSoon": "The rest of PROSM Time (sites, employees, attendance, timesheets) arrives in later work packages."
+  "attendance": {
+    "title": "Attendance",
+    "noAssignedSites": "You are not assigned to any site yet. Contact your administrator.",
+    "siteLabel": "Site",
+    "projectLabel": "Project (optional)",
+    "noProject": "No project",
+    "clockInAction": "Clock In",
+    "clockOutAction": "Clock Out",
+    "clockedInSince": "Clocked in since {{time}}",
+    "clockInError": "Unable to clock in.",
+    "clockOutError": "Unable to clock out."
+  },
+  "comingSoon": "The rest of PROSM Time (schedules, timesheets, reports) arrives in later work packages."
 }

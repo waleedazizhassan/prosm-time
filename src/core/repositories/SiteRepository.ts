@@ -140,6 +140,24 @@ class SiteRepository {
     }
   }
 
+  // WP-06/§13: the sites a given employee is actually assigned to -
+  // the same real authorization source clock_in_prosm_time_attendance()
+  // itself checks server-side; this is only what the Clock In picker
+  // offers, never the enforcement.
+  async listAssignedSites(userId: string): Promise<ServiceResult<Site[]>> {
+    try {
+      const { data, error } = await this.client.from("site_assignments").select("sites(*)").eq("user_id", userId);
+      if (error) return createError(error.message);
+      const sites = (data ?? []).flatMap((row) => {
+        const site = Array.isArray(row.sites) ? row.sites[0] : row.sites;
+        return site ? [mapSiteRow(site)] : [];
+      });
+      return createSuccess(sites);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Site service unavailable.");
+    }
+  }
+
   async getSite(siteId: string): Promise<ServiceResult<Site>> {
     try {
       const { data, error } = await this.client.from("sites").select("*").eq("id", siteId).maybeSingle();
