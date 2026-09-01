@@ -10,24 +10,28 @@ A fully independent application: own repository (this one), own Supabase project
 
 ## Status
 
-**WP-00 through WP-23 complete.** PROSM Time is a real, standalone,
-independently-deployed Supabase project with its own database, Storage
-and Edge Functions — Authentication/Activation, Organizations, People &
+**WP-00 through WP-24 complete** — every Work Package in the Master
+File's §38 list. PROSM Time is a real, standalone, independently-
+deployed Supabase project with its own database, Storage and Edge
+Functions — Authentication/Activation, Organizations, People &
 Permissions, Sites & Projects, Attendance Core, Administrative
 On-Behalf Actions, Camera Evidence, GPS & Geofence, Presence
 Monitoring, Exceptions & Corrections, Break & Overtime, Notifications,
 Manager Console, Offline & Sync Resilience, Timesheets, Reports &
 Evidence Pack, Kiosk Mode, Localization (5 languages + RTL), Theming
-(Dark/Light/System), Navigation/Splash/Help, and Security Hardening
-(RLS/grant audit, data-subject rights, retention) are all real,
-live-HTTP-verified backend + frontend, not scaffolding. See
-`docs/PROSM_TIME_IMPLEMENTATION_MASTER_FILE_V3.md` §38 for the full
-work-package list and each WP's own commit history for exactly what
-shipped and how it was verified.
+(Dark/Light/System), Navigation/Splash/Help, Security Hardening
+(RLS/grant audit, data-subject rights, retention), Production
+Readiness (error boundary, deployment process) and Integration
+Readiness (adapter interfaces, data-ownership map — see
+`src/core/adapters/README.md` and `docs/DATA_OWNERSHIP.md`) are all
+real, live-HTTP-verified backend + frontend, not scaffolding. See each
+WP's own commit history for exactly what shipped and how it was
+verified.
 
-**WP-24 (PROSM Native Integration)** — the adapter layer for a future
-PROSM Platform-native integration path — remains, by design: it is
-explicitly deferred, standalone-first architecture (§41).
+PROSM Time remains standalone-first by design (§41) — WP-24 defines
+the *readiness* for a future PROSM Platform-native integration
+(adapter interfaces, data-ownership map, migration-mapping notes), not
+a working integration, since no native consumption path exists yet.
 
 ## Getting started
 
