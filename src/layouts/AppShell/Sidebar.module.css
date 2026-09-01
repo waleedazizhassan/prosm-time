@@ -260,6 +260,14 @@
   background: var(--surface-hover);
 }
 
+/* RTL: the sidebar sits on the opposite physical edge (flex row order
+   reverses under dir="rtl"), so the collapse/expand chevron's real-
+   world meaning flips too - mirror the icon rather than re-deriving
+   which lucide icon "means" expand in each direction. */
+.collapseButton svg:dir(rtl) {
+  transform: scaleX(-1);
+}
+
 /* ===== Mobile off-canvas drawer ===== */
 
 .mobileBackdrop {

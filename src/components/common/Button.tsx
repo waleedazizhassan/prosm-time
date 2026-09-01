@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import styles from "./Button.module.css";
 
 interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "type"> {
@@ -24,13 +25,14 @@ export default function Button({
   className,
   ...rest
 }: ButtonProps) {
+  const { t } = useTranslation("common");
   const classNames = [styles.button, styles[variant], styles[size], fullWidth ? styles.fullWidth : "", className]
     .filter(Boolean)
     .join(" ");
 
   return (
     <button type={type} disabled={disabled || loading} aria-busy={loading} className={classNames} {...rest}>
-      {loading ? "…" : children}
+      {loading ? t("loading") : children}
     </button>
   );
 }

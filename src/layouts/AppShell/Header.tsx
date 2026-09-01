@@ -16,19 +16,19 @@ import styles from "./Header.module.css";
 // no other search/AI utilities yet, not invented here just to fill
 // the header.
 export default function Header() {
-  const { t } = useTranslation("shell");
+  const { t } = useTranslation(["shell", "common"]);
   const { openMobileSidebar } = useAppLayout();
 
   return (
     <header className={styles.header}>
       <div className={styles.leftSection}>
-        <button type="button" className={styles.sidebarToggle} onClick={openMobileSidebar} aria-label={t("toggleSidebar")}>
+        <button type="button" className={styles.sidebarToggle} onClick={openMobileSidebar} aria-label={t("shell:toggleSidebar")}>
           <Menu size={20} />
         </button>
 
         <Link to="/dashboard" className={styles.brand}>
           <BrandMark size={28} />
-          <span className={styles.brandName}>PROSM Time</span>
+          <span className={styles.brandName}>{t("common:appName")}</span>
         </Link>
       </div>
 

@@ -7,6 +7,7 @@ import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
+import LoadingState from "../../components/common/LoadingState";
 import Button from "../../components/common/Button";
 import StatusBadge from "../../components/common/StatusBadge";
 import styles from "./TimesheetReportPage.module.css";
@@ -118,7 +119,7 @@ export default function TimesheetReportPage() {
   if (loading) {
     return (
       <PageShell title={t("report.title")}>
-        <p>…</p>
+        <LoadingState fullHeight />
       </PageShell>
     );
   }

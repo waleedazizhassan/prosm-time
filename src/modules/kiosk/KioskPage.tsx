@@ -9,6 +9,8 @@ import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import PageShell from "../../components/common/PageShell";
 import Button from "../../components/common/Button";
 import EvidenceCaptureField from "../../components/common/EvidenceCaptureField";
+import LoadingState from "../../components/common/LoadingState";
+import EmptyState from "../../components/common/EmptyState";
 import styles from "./KioskPage.module.css";
 
 type Screen = "roster" | "pin" | "success";
@@ -112,7 +114,7 @@ export default function KioskPage() {
   if (loading) {
     return (
       <PageShell title={t("title")}>
-        <p>…</p>
+        <LoadingState fullHeight />
       </PageShell>
     );
   }
@@ -131,7 +133,7 @@ export default function KioskPage() {
         <div className={styles.screen}>
           <h2 className={styles.siteName}>{t("selectYourself")}</h2>
           {roster.length === 0 ? (
-            <p style={{ color: "var(--text-secondary)" }}>{t("noRoster")}</p>
+            <EmptyState message={t("noRoster")} />
           ) : (
             <div className={styles.rosterGrid}>
               {roster.map((employee) => (

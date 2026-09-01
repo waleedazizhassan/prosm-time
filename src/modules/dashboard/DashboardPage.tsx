@@ -8,6 +8,8 @@ import LicenseRepository, { type LicenseState } from "../../core/repositories/Li
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
 import Button from "../../components/common/Button";
+import LoadingState from "../../components/common/LoadingState";
+import FormGrid from "../../components/common/FormGrid";
 import StatusBadge from "../../components/common/StatusBadge";
 import ClockInOutCard from "./ClockInOutCard";
 import ExceptionsCard from "./ExceptionsCard";
@@ -67,9 +69,9 @@ export default function DashboardPage() {
       <KioskPinCard />
 
       {loading ? (
-        <p>…</p>
+        <LoadingState />
       ) : (
-        <div style={{ display: "grid", gap: "var(--space-4)", gridTemplateColumns: "1fr 1fr" }}>
+        <FormGrid columns={2}>
           <Card title={t("organizationCard.title")}>
             {organization ? (
               <dl style={{ margin: 0, fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>
@@ -106,10 +108,8 @@ export default function DashboardPage() {
               {t("licenseCard.refreshAction")}
             </Button>
           </Card>
-        </div>
+        </FormGrid>
       )}
-
-      <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("comingSoon")}</p>
     </PageShell>
   );
 }

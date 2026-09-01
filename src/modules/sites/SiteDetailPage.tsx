@@ -8,6 +8,9 @@ import ProjectRepository, { type Project } from "../../core/repositories/Project
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
+import LoadingState from "../../components/common/LoadingState";
+import EmptyState from "../../components/common/EmptyState";
+import ListRow from "../../components/common/ListRow";
 import Button from "../../components/common/Button";
 import StatusBadge from "../../components/common/StatusBadge";
 import Table, { type TableColumn } from "../../components/common/Table";
@@ -15,15 +18,6 @@ import SiteFormModal from "./SiteFormModal";
 import AssignSiteMemberModal from "./AssignSiteMemberModal";
 import ProjectFormModal from "./ProjectFormModal";
 import ProjectAssignmentsModal from "./ProjectAssignmentsModal";
-
-const rowStyle = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  gap: "var(--space-3)",
-  padding: "var(--space-3) 0",
-  borderTop: "1px solid var(--border-light)",
-} as const;
 
 // PROSM Time WP-05/§13/§14 - Site detail: full configuration, assigned
 // employees/managers, and the site's projects. Project management is
@@ -115,15 +109,15 @@ export default function SiteDetailPage() {
 
   if (loading) {
     return (
-      <PageShell title={t("form.editTitle")}>
-        <p>…</p>
+      <PageShell title={t("title")}>
+        <LoadingState fullHeight />
       </PageShell>
     );
   }
   if (loadError || !site) {
     return (
-      <PageShell title={t("form.editTitle")}>
-        <p style={{ color: "var(--brand-danger)" }}>{loadError}</p>
+      <PageShell title={t("title")}>
+        <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{loadError}</p>
       </PageShell>
     );
   }
@@ -157,10 +151,10 @@ export default function SiteDetailPage() {
         ) : null}
 
         {assignments.length === 0 ? (
-          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("detail.noAssignments")}</p>
+          <EmptyState message={t("detail.noAssignments")} />
         ) : (
           assignments.map((assignment) => (
-            <div key={assignment.id} style={rowStyle}>
+            <ListRow key={assignment.id}>
               <div>
                 <div style={{ color: "var(--text-primary)", fontSize: "var(--font-sm)" }}>{assignment.userFullName}</div>
                 <StatusBadge status="neutral">{t(`detail.roleAtSite.${assignment.roleAtSite}`)}</StatusBadge>
@@ -170,7 +164,7 @@ export default function SiteDetailPage() {
                   {t("detail.removeAssignmentAction")}
                 </Button>
               ) : null}
-            </div>
+            </ListRow>
           ))
         )}
       </Card>

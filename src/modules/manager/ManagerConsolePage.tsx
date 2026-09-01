@@ -12,6 +12,8 @@ import StatusBadge from "../../components/common/StatusBadge";
 import Button from "../../components/common/Button";
 import Modal from "../../components/common/Modal";
 import Textarea from "../../components/common/Textarea";
+import EmptyState from "../../components/common/EmptyState";
+import ListRow from "../../components/common/ListRow";
 import { formatTimeOnly } from "../../core/utils/formatDate";
 
 const REVIEW_ACTIONS = ["approved", "rejected", "acknowledged", "clarification_requested"] as const;
@@ -101,10 +103,10 @@ export default function ManagerConsolePage() {
       <Card title={t("pending.title")}>
         {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
         {pendingItems.length === 0 ? (
-          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("pending.empty")}</p>
+          <EmptyState message={t("pending.empty")} />
         ) : (
           pendingItems.map((item) => (
-            <div key={`${item.kind}-${item.id}`} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "var(--space-3)", padding: "var(--space-3) 0", borderTop: "1px solid var(--border-light)" }}>
+            <ListRow key={`${item.kind}-${item.id}`}>
               <div>
                 <div style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)", fontWeight: "var(--font-weight-semibold)" }}>
                   {item.userFullName} — {t(`pending.kind.${item.kind}`)}
@@ -116,7 +118,7 @@ export default function ManagerConsolePage() {
                   {t("pending.reviewAction")}
                 </Button>
               ) : null}
-            </div>
+            </ListRow>
           ))
         )}
       </Card>

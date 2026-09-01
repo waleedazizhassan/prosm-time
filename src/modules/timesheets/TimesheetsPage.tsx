@@ -15,6 +15,10 @@ import Select from "../../components/common/Select";
 import Input from "../../components/common/Input";
 import Modal from "../../components/common/Modal";
 import Textarea from "../../components/common/Textarea";
+import LoadingState from "../../components/common/LoadingState";
+import EmptyState from "../../components/common/EmptyState";
+import ListRow from "../../components/common/ListRow";
+import FormGrid from "../../components/common/FormGrid";
 import { formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
 
 function formatMinutes(minutes: number): string {
@@ -214,14 +218,14 @@ export default function TimesheetsPage() {
 
       {canGenerate ? (
         <Card title={t("generate.title")}>
-          <div style={{ display: "grid", gap: "var(--space-3)", gridTemplateColumns: "1fr 1fr 1fr auto", alignItems: "end" }}>
+          <FormGrid columns={4} gap="sm" alignItems="end">
             <Select label={t("generate.employeeLabel")} name="generateUserId" value={generateUserId} onChange={(event) => setGenerateUserId(event.target.value)} options={members.map((member) => ({ value: member.id, label: member.fullName }))} disabled={generating} />
             <Input label={t("generate.periodStartLabel")} name="periodStart" type="date" value={period.start} onChange={(event) => setPeriod((current) => ({ ...current, start: event.target.value }))} disabled={generating} />
             <Input label={t("generate.periodEndLabel")} name="periodEnd" type="date" value={period.end} onChange={(event) => setPeriod((current) => ({ ...current, end: event.target.value }))} disabled={generating} />
             <Button onClick={handleGenerate} loading={generating} disabled={!generateUserId}>
               {t("generate.action")}
             </Button>
-          </div>
+          </FormGrid>
         </Card>
       ) : null}
 
@@ -234,10 +238,10 @@ export default function TimesheetsPage() {
       {canCorrect ? (
         <Card title={t("pendingCorrections.title")}>
           {pendingCorrections.length === 0 ? (
-            <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("pendingCorrections.empty")}</p>
+            <EmptyState message={t("pendingCorrections.empty")} />
           ) : (
             pendingCorrections.map((correction) => (
-              <div key={correction.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "var(--space-3)", padding: "var(--space-3) 0", borderTop: "1px solid var(--border-light)" }}>
+              <ListRow key={correction.id}>
                 <div>
                   <div style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)", fontWeight: "var(--font-weight-semibold)" }}>
                     {correction.userFullName} — {correction.periodStart} — {correction.periodEnd}
@@ -247,7 +251,7 @@ export default function TimesheetsPage() {
                 <Button variant="ghost" size="sm" onClick={() => setCorrectionReviewTarget(correction)}>
                   {t("pendingCorrections.reviewAction")}
                 </Button>
-              </div>
+              </ListRow>
             ))
           )}
         </Card>
@@ -312,9 +316,9 @@ export default function TimesheetsPage() {
             </dl>
 
             {entriesLoading ? (
-              <p>…</p>
+              <LoadingState size="sm" />
             ) : entries.length === 0 ? (
-              <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("detail.noEntries")}</p>
+              <EmptyState message={t("detail.noEntries")} />
             ) : (
               <div style={{ display: "grid", gap: "var(--space-2)" }}>
                 {entries.map((entry) => (

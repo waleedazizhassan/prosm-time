@@ -22,7 +22,7 @@ const FOCUSABLE_SELECTOR = 'button:not(:disabled), [href], input, select, textar
 // what renders, every destination page re-enforces its own access
 // independently (e.g. PeoplePage's own Navigate-away-if-unauthorized).
 export default function Sidebar() {
-  const { t } = useTranslation("shell");
+  const { t } = useTranslation(["shell", "common"]);
   const { hasPermission } = useAuth();
   const { sidebarCollapsed, toggleSidebarCollapsed, mobileSidebarOpen, closeMobileSidebar } = useAppLayout();
   const asideRef = useRef<HTMLElement>(null);
@@ -80,7 +80,7 @@ export default function Sidebar() {
         <div className={styles.sidebarHeader}>
           <div className={styles.sidebarBrand}>
             <BrandMark size={24} />
-            {!sidebarCollapsed ? <span className={styles.sidebarBrandName}>PROSM Time</span> : null}
+            {!sidebarCollapsed ? <span className={styles.sidebarBrandName}>{t("common:appName")}</span> : null}
           </div>
 
           <button

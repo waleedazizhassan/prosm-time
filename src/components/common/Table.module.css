@@ -59,8 +59,5 @@
 }
 
 .emptyCell {
-  padding: var(--space-6);
-  text-align: center;
-  color: var(--text-secondary);
-  font-size: var(--font-sm);
+  padding: var(--space-3);
 }

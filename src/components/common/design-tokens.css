@@ -230,3 +230,24 @@ body {
   color: var(--text-primary);
   font-family: var(--font-family);
 }
+
+/* Printed output (§22's own Timesheet/Evidence Pack "Print / Save as
+   PDF") must always look like a real document - white page, dark text
+   - regardless of whether the user happens to have Dark theme active
+   on screen. Without this, printing while in Dark theme would print a
+   dark page with light text: wasteful and unprofessional. */
+@media print {
+  :root,
+  [data-theme="dark"] {
+    --surface-app: var(--palette-white);
+    --surface-page: var(--palette-white);
+    --surface-card: var(--palette-white);
+    --text-primary: var(--palette-slate-800);
+    --text-secondary: var(--palette-slate-500);
+    --border-light: var(--palette-slate-200);
+    --shadow-xs: none;
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: none;
+  }
+}

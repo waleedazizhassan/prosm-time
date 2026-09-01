@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, Navigate, useParams } from "react-router-dom";
 
@@ -10,6 +10,9 @@ import KioskRepository from "../../core/repositories/KioskRepository";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
+import LoadingState from "../../components/common/LoadingState";
+import EmptyState from "../../components/common/EmptyState";
+import ListRow from "../../components/common/ListRow";
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
 import Modal from "../../components/common/Modal";
@@ -21,15 +24,6 @@ interface PendingChange {
   permission: Permission;
   action: "grant" | "revoke" | "reset";
 }
-
-const rowStyle: CSSProperties = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  gap: "var(--space-3)",
-  padding: "var(--space-3) 0",
-  borderTop: "1px solid var(--border-light)",
-};
 
 // PROSM Time Implementation Master File V3.0, WP-04/§9/§37 -
 // "Administrator & Permission Management." Shows the real effective
@@ -204,7 +198,7 @@ export default function PersonDetailPage() {
   if (loading) {
     return (
       <PageShell title={t("detail.title")}>
-        <p>…</p>
+        <LoadingState fullHeight />
       </PageShell>
     );
   }
@@ -234,7 +228,7 @@ export default function PersonDetailPage() {
             const isGranted = effective.includes(permission.permissionKey);
             const isOverridden = permission.permissionKey in overrides;
             return (
-              <div key={permission.id} style={rowStyle}>
+              <ListRow key={permission.id}>
                 <div>
                   <div style={{ fontWeight: isOverridden ? "var(--font-weight-bold)" : "var(--font-weight-regular)", color: "var(--text-primary)", fontSize: "var(--font-sm)" }}>
                     {permission.name}
@@ -259,7 +253,7 @@ export default function PersonDetailPage() {
                     ) : null}
                   </div>
                 ) : null}
-              </div>
+              </ListRow>
             );
           })
         )}
@@ -269,10 +263,10 @@ export default function PersonDetailPage() {
         <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.devicesHint")}</p>
         {deviceActionError ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{deviceActionError}</p> : null}
         {devices.length === 0 ? (
-          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("detail.noDevices")}</p>
+          <EmptyState message={t("detail.noDevices")} />
         ) : (
           devices.map((device) => (
-            <div key={device.id} style={rowStyle}>
+            <ListRow key={device.id}>
               <div>
                 <div style={{ color: "var(--text-primary)", fontSize: "var(--font-sm)" }}>{device.deviceLabel ?? device.deviceIdentifier}</div>
                 <StatusBadge status={device.status}>{device.status}</StatusBadge>
@@ -289,7 +283,7 @@ export default function PersonDetailPage() {
                   </Button>
                 ) : null}
               </div>
-            </div>
+            </ListRow>
           ))
         )}
       </Card>

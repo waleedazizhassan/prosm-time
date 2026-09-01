@@ -7,21 +7,14 @@ import ProjectRepository, { type Project, type ProjectAssignment } from "../../c
 import Modal from "../../components/common/Modal";
 import Select from "../../components/common/Select";
 import Button from "../../components/common/Button";
+import EmptyState from "../../components/common/EmptyState";
+import ListRow from "../../components/common/ListRow";
 
 interface ProjectAssignmentsModalProps {
   isOpen: boolean;
   onClose: () => void;
   project: Project;
 }
-
-const rowStyle = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  gap: "var(--space-3)",
-  padding: "var(--space-2) 0",
-  borderTop: "1px solid var(--border-light)",
-} as const;
 
 // PROSM Time WP-05/§14 - "Employees must not be able to select
 // projects to which they are not assigned." This is the admin UI for
@@ -105,15 +98,15 @@ export default function ProjectAssignmentsModal({ isOpen, onClose, project }: Pr
       {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
 
       {assignments.length === 0 ? (
-        <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("projectAssignments.noAssignments")}</p>
+        <EmptyState message={t("projectAssignments.noAssignments")} />
       ) : (
         assignments.map((assignment) => (
-          <div key={assignment.id} style={rowStyle}>
+          <ListRow key={assignment.id}>
             <span style={{ color: "var(--text-primary)", fontSize: "var(--font-sm)" }}>{assignment.userFullName}</span>
             <Button variant="ghost" size="xs" onClick={() => handleRemove(assignment.userId)} disabled={submitting}>
               {t("projectAssignments.removeAssignmentAction")}
             </Button>
-          </div>
+          </ListRow>
         ))
       )}
     </Modal>

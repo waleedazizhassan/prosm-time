@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import LoadingState from "./LoadingState";
+import EmptyState from "./EmptyState";
 import styles from "./Table.module.css";
 
 export interface TableColumn<T> {
@@ -12,17 +14,21 @@ interface TableProps<T> {
   data: T[];
   getRowId: (row: T) => string;
   loading?: boolean;
+  emptyTitle?: string;
   emptyMessage: string;
   onRowClick?: (row: T) => void;
 }
 
 // PROSM Time - a lighter port of PROSM Platform's own Table component
 // (§ visual consistency pass): same wrapper/tableScroll/table/
-// headerCell/row/cell CSS classes and visual behavior. Sorting/
+// headerCell/row/cell CSS classes and visual behavior, and the same
+// LoadingState/EmptyState treatment for its loading/empty rows (a
+// spinner rather than Platform's own per-column Skeleton rows - real
+// parity in kind, not a 1:1 port of every primitive). Sorting/
 // selection/density are PROSM Platform's own Table features this
 // product doesn't need yet - the shape (columns + render) is what's
 // shared, not every capability.
-export default function Table<T>({ columns, data, getRowId, loading = false, emptyMessage, onRowClick }: TableProps<T>) {
+export default function Table<T>({ columns, data, getRowId, loading = false, emptyTitle, emptyMessage, onRowClick }: TableProps<T>) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.tableScroll}>
@@ -40,13 +46,13 @@ export default function Table<T>({ columns, data, getRowId, loading = false, emp
             {loading ? (
               <tr>
                 <td className={styles.emptyCell} colSpan={columns.length}>
-                  …
+                  <LoadingState size="sm" />
                 </td>
               </tr>
             ) : data.length === 0 ? (
               <tr>
                 <td className={styles.emptyCell} colSpan={columns.length}>
-                  {emptyMessage}
+                  <EmptyState title={emptyTitle} message={emptyMessage} />
                 </td>
               </tr>
             ) : (
