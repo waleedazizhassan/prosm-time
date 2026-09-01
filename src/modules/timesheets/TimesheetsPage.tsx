@@ -243,7 +243,21 @@ export default function TimesheetsPage() {
       {canGenerate ? (
         <Card title={t("generate.title")}>
           <FormGrid columns={4} gap="sm" alignItems="end">
-            <Select label={t("generate.employeeLabel")} name="generateUserId" value={generateUserId} onChange={(event) => setGenerateUserId(event.target.value)} options={members.map((member) => ({ value: member.id, label: member.fullName }))} disabled={generating} />
+            {/* § live UX review - two accounts with near-identical names
+                ("waleed" / "WALEED AZIZ") led to a timesheet being
+                generated for the wrong one (confirmed by querying the
+                live database directly - a real draft timesheet existed
+                for the selected user, correctly showing 0 worked
+                minutes, because THAT account had never actually
+                clocked in). Email now disambiguates every option. */}
+            <Select
+              label={t("generate.employeeLabel")}
+              name="generateUserId"
+              value={generateUserId}
+              onChange={(event) => setGenerateUserId(event.target.value)}
+              options={members.map((member) => ({ value: member.id, label: `${member.fullName} (${member.email})` }))}
+              disabled={generating}
+            />
             <Input label={t("generate.periodStartLabel")} name="periodStart" type="date" value={period.start} onChange={(event) => setPeriod((current) => ({ ...current, start: event.target.value }))} disabled={generating} />
             <Input label={t("generate.periodEndLabel")} name="periodEnd" type="date" value={period.end} onChange={(event) => setPeriod((current) => ({ ...current, end: event.target.value }))} disabled={generating} />
             <Button onClick={handleGenerate} loading={generating} disabled={!generateUserId}>

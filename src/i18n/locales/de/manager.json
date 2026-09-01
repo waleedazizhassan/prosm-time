@@ -14,7 +14,12 @@
     "clockOutAt": "Gehen",
     "clocked_in": "Eingestempelt",
     "clocked_out": "Ausgestempelt",
-    "empty": "Heute wurde keine Anwesenheit erfasst."
+    "empty": "Heute wurde keine Anwesenheit erfasst.",
+    "viewPhoto": "Foto ansehen",
+    "photoModalTitle": "Anwesenheitsfoto",
+    "photoLoading": "Foto wird geladen…",
+    "photoAlt": "Anwesenheitsnachweis-Foto",
+    "photoLoadError": "Dieses Foto kann nicht geladen werden."
   },
   "pending": {
     "title": "Ausstehende Prüfung",

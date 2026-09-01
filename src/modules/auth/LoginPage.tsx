@@ -87,6 +87,10 @@ export default function LoginPage() {
           autoComplete="current-password"
         />
 
+        <button type="button" className={styles.textLink} onClick={() => navigate("/forgot-password")}>
+          {t("login.forgotPassword")}
+        </button>
+
         {error ? <p className={styles.errorText}>{error}</p> : null}
 
         <Button type="submit" fullWidth loading={submitting}>

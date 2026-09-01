@@ -90,3 +90,82 @@ export function renderInvitationEmail({
 </div>
 `;
 }
+
+export function renderPasswordResetEmail({
+  fullName,
+  resetUrl,
+  verificationCode,
+  expiryMinutes,
+}: {
+  fullName: string;
+  resetUrl: string;
+  verificationCode: string;
+  expiryMinutes: number;
+}): string {
+  return `
+<div style="font-family:Arial,sans-serif;padding:24px;background:#f5f5f5;">
+  <div style="max-width:600px;margin:auto;background:#ffffff;border-radius:8px;padding:32px;">
+
+    <h2 style="margin-top:0;color:#0f172a;">
+      Reset your PROSM Time password
+    </h2>
+
+    <p style="font-size:16px;color:#374151;">
+      Hi ${fullName}, we received a request to reset your PROSM Time password. Use the button below to choose a new one.
+    </p>
+
+    <div style="margin:30px 0;text-align:center;">
+      <a href="${resetUrl}" style="
+        display:inline-block;
+        background:#16a34a;
+        color:#ffffff;
+        font-size:16px;
+        font-weight:bold;
+        text-decoration:none;
+        padding:14px 32px;
+        border-radius:8px;
+      ">
+        Reset password
+      </a>
+    </div>
+
+    <p style="color:#6b7280;font-size:14px;">
+      If the button doesn't work, copy and paste this link into your browser:
+    </p>
+    <p style="color:#374151;font-size:14px;word-break:break-all;">
+      ${resetUrl}
+    </p>
+
+    <p style="color:#6b7280;font-size:14px;margin-top:24px;">
+      Your reset code (already filled in for you if you use the link above):
+    </p>
+    <div style="margin:12px 0;text-align:center;">
+      <span style="
+        display:inline-block;
+        font-size:28px;
+        font-weight:bold;
+        letter-spacing:6px;
+        color:#16a34a;
+      ">
+        ${verificationCode}
+      </span>
+    </div>
+
+    <p style="color:#6b7280;">
+      This code expires in <strong>${expiryMinutes} minutes</strong>.
+    </p>
+
+    <p style="color:#6b7280;">
+      If you didn't request this, you can safely ignore this email - your password will not change.
+    </p>
+
+    <hr style="margin:30px 0;border:none;border-top:1px solid #e5e7eb;">
+
+    <p style="font-size:12px;color:#9ca3af;">
+      PROSM Time
+    </p>
+
+  </div>
+</div>
+`;
+}

@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, Navigate } from "react-router-dom";
+import { Camera } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import ManagerRepository, { type TodayAttendanceRow, type PendingReviewItem } from "../../core/repositories/ManagerRepository";
+import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
@@ -46,6 +48,10 @@ export default function ManagerConsolePage() {
   const [reviewNotes, setReviewNotes] = useState("");
   const [submitting, setSubmitting] = useState<string | null>(null);
   const [error, setError] = useState("");
+  const [evidenceModalTitle, setEvidenceModalTitle] = useState<string | null>(null);
+  const [evidenceUrl, setEvidenceUrl] = useState<string | null>(null);
+  const [evidenceLoading, setEvidenceLoading] = useState(false);
+  const [evidenceError, setEvidenceError] = useState("");
 
   const canManageExceptions = hasPermission("exceptions.manage");
 
@@ -84,6 +90,33 @@ export default function ManagerConsolePage() {
     load();
   };
 
+  // § live UX review, user-directed - "the photo the employee captures
+  // should show next to the clock-in time, and the clock-out photo
+  // next to the clock-out time." Storage paths only travel with the
+  // row (ManagerRepository); the actual image is downloaded on demand
+  // here, matching EvidenceRepository's own authenticated-download
+  // pattern (no raw public URL, RLS-respecting, revoked on close).
+  const openEvidence = async (storagePath: string, title: string) => {
+    setEvidenceModalTitle(title);
+    setEvidenceUrl(null);
+    setEvidenceError("");
+    setEvidenceLoading(true);
+    const result = await EvidenceRepository.getEvidenceObjectUrl(storagePath);
+    setEvidenceLoading(false);
+    if (!result.success || !result.data) {
+      setEvidenceError(result.message ?? t("attendance.photoLoadError"));
+      return;
+    }
+    setEvidenceUrl(result.data);
+  };
+
+  const closeEvidence = () => {
+    if (evidenceUrl) URL.revokeObjectURL(evidenceUrl);
+    setEvidenceModalTitle(null);
+    setEvidenceUrl(null);
+    setEvidenceError("");
+  };
+
   // § final visual consistency pass, correction (item 12) - "structured
   // employee/day row: Employee | Site/Location | Clock In | Clock Out |
   // Status", one row per employee/session rather than a stacked
@@ -101,8 +134,49 @@ export default function ManagerConsolePage() {
   const attendanceColumns: TableColumn<TodayAttendanceRow>[] = [
     { key: "name", header: t("attendance.employee"), render: (row) => row.userFullName },
     { key: "site", header: t("attendance.site"), render: (row) => row.siteName },
-    { key: "clockInAt", header: t("attendance.clockInAt"), render: (row) => formatTimeOnly(row.clockInAt, i18n.language) },
-    { key: "clockOutAt", header: t("attendance.clockOutAt"), render: (row) => (row.clockOutAt ? formatTimeOnly(row.clockOutAt, i18n.language) : "—") },
+    {
+      key: "clockInAt",
+      header: t("attendance.clockInAt"),
+      render: (row) => (
+        <span style={{ display: "inline-flex", alignItems: "center", gap: "var(--space-1)" }}>
+          {formatTimeOnly(row.clockInAt, i18n.language)}
+          {row.clockInEvidencePath ? (
+            <button
+              type="button"
+              onClick={() => openEvidence(row.clockInEvidencePath as string, `${row.userFullName} — ${t("attendance.clockInAt")}`)}
+              title={t("attendance.viewPhoto")}
+              aria-label={t("attendance.viewPhoto")}
+              style={{ display: "inline-flex", alignItems: "center", background: "none", border: "none", cursor: "pointer", color: "var(--text-link)", padding: 0 }}
+            >
+              <Camera size={14} />
+            </button>
+          ) : null}
+        </span>
+      ),
+    },
+    {
+      key: "clockOutAt",
+      header: t("attendance.clockOutAt"),
+      render: (row) =>
+        row.clockOutAt ? (
+          <span style={{ display: "inline-flex", alignItems: "center", gap: "var(--space-1)" }}>
+            {formatTimeOnly(row.clockOutAt, i18n.language)}
+            {row.clockOutEvidencePath ? (
+              <button
+                type="button"
+                onClick={() => openEvidence(row.clockOutEvidencePath as string, `${row.userFullName} — ${t("attendance.clockOutAt")}`)}
+                title={t("attendance.viewPhoto")}
+                aria-label={t("attendance.viewPhoto")}
+                style={{ display: "inline-flex", alignItems: "center", background: "none", border: "none", cursor: "pointer", color: "var(--text-link)", padding: 0 }}
+              >
+                <Camera size={14} />
+              </button>
+            ) : null}
+          </span>
+        ) : (
+          "—"
+        ),
+    },
     { key: "status", header: t("attendance.status"), render: (row) => <StatusBadge status={row.status === "clocked_in" ? "active" : "neutral"}>{t(`attendance.${row.status}`)}</StatusBadge> },
     { key: "workedHours", header: t("attendance.workedHours"), render: (row) => formatWorkedHours(row.clockInAt, row.clockOutAt) },
   ];
@@ -164,6 +238,16 @@ export default function ManagerConsolePage() {
         }
       >
         <Textarea label={t("pending.notesLabel")} name="reviewNotes" value={reviewNotes} onChange={(event) => setReviewNotes(event.target.value)} disabled={Boolean(submitting)} />
+      </Modal>
+
+      <Modal isOpen={Boolean(evidenceModalTitle)} onClose={closeEvidence} title={evidenceModalTitle ?? t("attendance.photoModalTitle")}>
+        {evidenceLoading ? (
+          <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("attendance.photoLoading")}</p>
+        ) : evidenceError ? (
+          <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{evidenceError}</p>
+        ) : evidenceUrl ? (
+          <img src={evidenceUrl} alt={t("attendance.photoAlt")} style={{ maxWidth: "100%", borderRadius: "var(--radius-md)", display: "block" }} />
+        ) : null}
       </Modal>
     </PageShell>
   );

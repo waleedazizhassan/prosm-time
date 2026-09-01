@@ -14,7 +14,12 @@
     "clockOutAt": "Départ",
     "clocked_in": "Pointé (arrivée)",
     "clocked_out": "Pointé (départ)",
-    "empty": "Aucune activité de présence enregistrée aujourd'hui."
+    "empty": "Aucune activité de présence enregistrée aujourd'hui.",
+    "viewPhoto": "Voir la photo",
+    "photoModalTitle": "Photo de présence",
+    "photoLoading": "Chargement de la photo…",
+    "photoAlt": "Photo de justificatif de présence",
+    "photoLoadError": "Impossible de charger cette photo."
   },
   "pending": {
     "title": "En attente de révision",

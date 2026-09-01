@@ -14,6 +14,8 @@ export interface TodayAttendanceRow {
   clockInAt: string;
   clockOutAt: string | null;
   hasActivePresence: boolean;
+  clockInEvidencePath: string | null;
+  clockOutEvidencePath: string | null;
 }
 
 export interface PendingReviewItem {
@@ -35,6 +37,17 @@ interface RawAttendanceSessionRow {
   clock_out_at: string | null;
   users: RawUserRef | RawUserRef[] | null;
   sites: { name: string | null } | { name: string | null }[] | null;
+}
+
+interface RawAttendanceEventRow {
+  id: string;
+  session_id: string;
+  event_type: "clock_in" | "clock_out";
+}
+
+interface RawCameraEvidenceRow {
+  attendance_event_id: string;
+  storage_path: string;
 }
 
 interface RawGeofenceExceptionRow {
@@ -85,6 +98,40 @@ class ManagerRepository {
 
       const activePresenceIds = new Set((presenceResult.data ?? []).map((row: { attendance_session_id: string }) => row.attendance_session_id));
 
+      const sessionIds = ((sessionsResult.data ?? []) as RawAttendanceSessionRow[]).map((row) => row.id);
+
+      // PROSM Time - live UX review: "the photo the employee captures
+      // should show next to the clock-in time, and the clock-out photo
+      // next to the clock-out time." attendance_events/camera_evidence
+      // are only joined for today's sessions (not a global fetch), and
+      // storage paths only - no eager download here, EvidenceRepository
+      // downloads on demand when the manager opens a thumbnail.
+      const clockInEvidenceBySession = new Map<string, string>();
+      const clockOutEvidenceBySession = new Map<string, string>();
+      if (sessionIds.length > 0) {
+        const eventsResult = await this.client.from("attendance_events").select("id, session_id, event_type").in("session_id", sessionIds).in("event_type", ["clock_in", "clock_out"]);
+        if (eventsResult.error) return createError(eventsResult.error.message);
+
+        const events = (eventsResult.data ?? []) as RawAttendanceEventRow[];
+        const eventIds = events.map((event) => event.id);
+
+        const evidenceByEvent = new Map<string, string>();
+        if (eventIds.length > 0) {
+          const evidenceResult = await this.client.from("camera_evidence").select("attendance_event_id, storage_path").in("attendance_event_id", eventIds).order("captured_at", { ascending: true });
+          if (evidenceResult.error) return createError(evidenceResult.error.message);
+          for (const evidenceRow of (evidenceResult.data ?? []) as RawCameraEvidenceRow[]) {
+            if (!evidenceByEvent.has(evidenceRow.attendance_event_id)) evidenceByEvent.set(evidenceRow.attendance_event_id, evidenceRow.storage_path);
+          }
+        }
+
+        for (const event of events) {
+          const storagePath = evidenceByEvent.get(event.id);
+          if (!storagePath) continue;
+          if (event.event_type === "clock_in") clockInEvidenceBySession.set(event.session_id, storagePath);
+          else clockOutEvidenceBySession.set(event.session_id, storagePath);
+        }
+      }
+
       const rows = ((sessionsResult.data ?? []) as RawAttendanceSessionRow[]).map((row) => {
         const user = Array.isArray(row.users) ? row.users[0] : row.users;
         const site = Array.isArray(row.sites) ? row.sites[0] : row.sites;
@@ -96,6 +143,8 @@ class ManagerRepository {
           clockInAt: row.clock_in_at,
           clockOutAt: row.clock_out_at,
           hasActivePresence: activePresenceIds.has(row.id),
+          clockInEvidencePath: clockInEvidenceBySession.get(row.id) ?? null,
+          clockOutEvidencePath: clockOutEvidenceBySession.get(row.id) ?? null,
         };
       });
 

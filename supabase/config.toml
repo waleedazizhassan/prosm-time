@@ -28,6 +28,19 @@ enabled = true
 verify_jwt = false
 entrypoint = "./functions/redeem-invitation/index.ts"
 
+# request-password-reset/reset-password are a forgotten-password
+# user's own entry point - no session exists yet, same reasoning as
+# activate-organization/redeem-invitation.
+[functions.request-password-reset]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/request-password-reset/index.ts"
+
+[functions.reset-password]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/reset-password/index.ts"
+
 [functions.clock-in]
 enabled = true
 verify_jwt = true

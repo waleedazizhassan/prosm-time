@@ -6,6 +6,8 @@ import AppShell from "../layouts/AppShell";
 
 import ActivationPage from "../modules/activation/ActivationPage";
 import LoginPage from "../modules/auth/LoginPage";
+import ForgotPasswordPage from "../modules/auth/ForgotPasswordPage";
+import ResetPasswordPage from "../modules/auth/ResetPasswordPage";
 import AcceptInvitationPage from "../modules/onboarding/AcceptInvitationPage";
 import DashboardPage from "../modules/dashboard/DashboardPage";
 import PeoplePage from "../modules/people/PeoplePage";
@@ -44,6 +46,8 @@ export default function AppRoutes() {
           <Route path="/" element={<RootRedirect />} />
           <Route path="/activate" element={<ActivationPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/accept-invitation" element={<AcceptInvitationPage />} />
 
           <Route

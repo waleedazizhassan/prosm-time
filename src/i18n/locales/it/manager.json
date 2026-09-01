@@ -14,7 +14,12 @@
     "clockOutAt": "Uscita",
     "clocked_in": "Timbrato (entrata)",
     "clocked_out": "Timbrato (uscita)",
-    "empty": "Nessuna attività di presenza registrata oggi."
+    "empty": "Nessuna attività di presenza registrata oggi.",
+    "viewPhoto": "Vedi foto",
+    "photoModalTitle": "Foto di presenza",
+    "photoLoading": "Caricamento foto…",
+    "photoAlt": "Foto di evidenza della presenza",
+    "photoLoadError": "Impossibile caricare questa foto."
   },
   "pending": {
     "title": "In attesa di revisione",
