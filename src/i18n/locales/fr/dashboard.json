@@ -47,7 +47,15 @@
     "breakEndAction": "Terminer la pause",
     "breakStartError": "Impossible de commencer la pause.",
     "breakEndError": "Impossible de terminer cette pause.",
-    "breakExceeded": "Cette pause a dépassé la durée maximale autorisée."
+    "breakExceeded": "Cette pause a dépassé la durée maximale autorisée.",
+    "pendingClockIn": "Pointage d'arrivée en attente de synchronisation",
+    "pendingClockOut": "Pointage de départ en attente de synchronisation",
+    "pendingWaitingForConnection": "En attente d'une connexion pour synchroniser cette action. Elle sera envoyée automatiquement dès que vous serez de nouveau en ligne.",
+    "pendingSyncing": "Synchronisation en cours...",
+    "pendingSyncFailed": "Cette action n'a pas pu être synchronisée.",
+    "retrySync": "Réessayer la synchronisation",
+    "discardPending": "Ignorer",
+    "offlineQueueError": "Impossible de mettre cette action en file d'attente pour une synchronisation hors ligne."
   },
   "exceptions": {
     "title": "Exceptions en attente",

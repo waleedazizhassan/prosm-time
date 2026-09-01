@@ -4,6 +4,11 @@ export interface ServiceResult<T = null> {
   success: boolean;
   message: string | null;
   data: T | null;
+  // WP-15/§25 - set only on a genuine connectivity failure (the Edge
+  // Function was never reached at all), never on a real server
+  // rejection, so the offline queue knows when it is safe to queue-
+  // and-retry versus surface a real error to the employee.
+  networkError?: boolean;
 }
 
 export interface AttendanceSession {
@@ -21,12 +26,20 @@ export interface ClockInInput {
   latitude?: number | null;
   longitude?: number | null;
   accuracyMeters?: number | null;
+  // WP-15 - an offline-queued replay passes its own already-generated
+  // idempotency key and the ORIGINAL client-captured time (§35:
+  // "client-captured timestamps are preserved for offline
+  // transparency") instead of a fresh one per call.
+  idempotencyKey?: string;
+  clientReportedAt?: string;
 }
 
 export interface ClockOutInput {
   latitude?: number | null;
   longitude?: number | null;
   accuracyMeters?: number | null;
+  idempotencyKey?: string;
+  clientReportedAt?: string;
 }
 
 export interface AdminClockInInput {
@@ -101,8 +114,8 @@ class AttendanceRepository {
         body: {
           siteId: input.siteId,
           projectId: input.projectId ?? null,
-          idempotencyKey: crypto.randomUUID(),
-          clientReportedAt: new Date().toISOString(),
+          idempotencyKey: input.idempotencyKey ?? crypto.randomUUID(),
+          clientReportedAt: input.clientReportedAt ?? new Date().toISOString(),
           latitude: input.latitude ?? null,
           longitude: input.longitude ?? null,
           accuracyMeters: input.accuracyMeters ?? null,
@@ -110,6 +123,9 @@ class AttendanceRepository {
       });
 
       if (error) {
+        if (error.name === "FunctionsFetchError") {
+          return { success: false, message: null, data: null, networkError: true };
+        }
         const errorBody = await error.context?.json?.().catch(() => null);
         return createError(errorBody?.error?.message ?? error.message ?? "Unable to clock in.");
       }
@@ -127,8 +143,8 @@ class AttendanceRepository {
     try {
       const { data, error } = await this.client.functions.invoke("clock-out", {
         body: {
-          idempotencyKey: crypto.randomUUID(),
-          clientReportedAt: new Date().toISOString(),
+          idempotencyKey: input.idempotencyKey ?? crypto.randomUUID(),
+          clientReportedAt: input.clientReportedAt ?? new Date().toISOString(),
           latitude: input.latitude ?? null,
           longitude: input.longitude ?? null,
           accuracyMeters: input.accuracyMeters ?? null,
@@ -136,6 +152,9 @@ class AttendanceRepository {
       });
 
       if (error) {
+        if (error.name === "FunctionsFetchError") {
+          return { success: false, message: null, data: null, networkError: true };
+        }
         const errorBody = await error.context?.json?.().catch(() => null);
         return createError(errorBody?.error?.message ?? error.message ?? "Unable to clock out.");
       }

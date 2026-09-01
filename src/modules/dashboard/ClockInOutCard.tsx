@@ -8,6 +8,8 @@ import ProjectRepository, { type Project } from "../../core/repositories/Project
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import PresenceRepository, { type PresenceSession } from "../../core/repositories/PresenceRepository";
 import { getCurrentPosition } from "../../core/utils/geo";
+import OfflineQueueService from "../../core/offline/OfflineQueueService";
+import { useOfflineQueue } from "../../core/offline/useOfflineQueue";
 
 import Card from "../../components/common/Card";
 import Select from "../../components/common/Select";
@@ -56,6 +58,9 @@ export default function ClockInOutCard() {
   const presenceSessionRef = useRef<PresenceSession | null>(null);
   presenceSessionRef.current = presenceSession;
 
+  const pendingOfflineItems = useOfflineQueue(profile?.id);
+  const pendingOfflineItem = pendingOfflineItems[0] ?? null;
+
   const load = useCallback(async () => {
     if (!profile) return;
     setLoading(true);
@@ -89,6 +94,19 @@ export default function ClockInOutCard() {
   useEffect(() => {
     load();
   }, [load]);
+
+  // WP-15 - once a queued action finally syncs (or a failed one is
+  // discarded), the real session state on the server may have
+  // changed - re-fetch it rather than trusting whatever was on screen
+  // while the action sat unsynced.
+  const previousPendingIdRef = useRef<string | null>(null);
+  useEffect(() => {
+    const currentId = pendingOfflineItem?.id ?? null;
+    if (previousPendingIdRef.current && !currentId) {
+      load();
+    }
+    previousPendingIdRef.current = currentId;
+  }, [pendingOfflineItem, load]);
 
   useEffect(() => {
     if (!profile || !siteId) {
@@ -153,7 +171,20 @@ export default function ClockInOutCard() {
       // location sample rather than blocking the Clock In.
     }
 
+    // WP-15/§25 - offline (or unreachable) is queued locally rather
+    // than surfaced as an error; the client-captured time/coordinates/
+    // evidence captured above travel with the queued item unchanged.
+    if (typeof navigator !== "undefined" && navigator.onLine === false) {
+      await queueOffline("clock_in", { siteId, projectId: projectId || null, latitude, longitude, accuracyMeters });
+      return;
+    }
+
     const result = await AttendanceRepository.clockIn({ siteId, projectId: projectId || null, latitude, longitude, accuracyMeters });
+
+    if (result.networkError) {
+      await queueOffline("clock_in", { siteId, projectId: projectId || null, latitude, longitude, accuracyMeters });
+      return;
+    }
 
     if (!result.success || !result.data) {
       setSubmitting(false);
@@ -170,6 +201,29 @@ export default function ClockInOutCard() {
 
     setSubmitting(false);
     load();
+  };
+
+  const queueOffline = async (type: "clock_in" | "clock_out", location: { siteId?: string; projectId?: string | null; latitude: number | null; longitude: number | null; accuracyMeters: number | null }) => {
+    if (!profile) {
+      setSubmitting(false);
+      return;
+    }
+    try {
+      await OfflineQueueService.enqueue({
+        userId: profile.id,
+        type,
+        siteId: location.siteId ?? null,
+        projectId: location.projectId ?? null,
+        latitude: location.latitude,
+        longitude: location.longitude,
+        accuracyMeters: location.accuracyMeters,
+        clientReportedAt: new Date().toISOString(),
+        evidenceFile: evidenceFile ?? null,
+      });
+    } catch (queueError) {
+      setError(queueError instanceof Error ? queueError.message : t("attendance.offlineQueueError"));
+    }
+    setSubmitting(false);
   };
 
   const handleClockOut = async () => {
@@ -190,7 +244,17 @@ export default function ClockInOutCard() {
       // Best-effort only - see handleClockIn.
     }
 
+    if (typeof navigator !== "undefined" && navigator.onLine === false) {
+      await queueOffline("clock_out", { latitude, longitude, accuracyMeters });
+      return;
+    }
+
     const result = await AttendanceRepository.clockOut({ latitude, longitude, accuracyMeters });
+
+    if (result.networkError) {
+      await queueOffline("clock_out", { latitude, longitude, accuracyMeters });
+      return;
+    }
 
     if (!result.success || !result.data) {
       setSubmitting(false);
@@ -207,6 +271,16 @@ export default function ClockInOutCard() {
 
     setSubmitting(false);
     load();
+  };
+
+  const handleRetryOfflineSync = async () => {
+    if (!pendingOfflineItem) return;
+    await OfflineQueueService.retry(pendingOfflineItem.id);
+  };
+
+  const handleDiscardOfflineItem = async () => {
+    if (!pendingOfflineItem) return;
+    await OfflineQueueService.discard(pendingOfflineItem.id);
   };
 
   const handleSos = async () => {
@@ -272,7 +346,30 @@ export default function ClockInOutCard() {
       {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
       {evidenceWarning ? <p style={{ color: "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>{evidenceWarning}</p> : null}
 
-      {session ? (
+      {pendingOfflineItem ? (
+        <div style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--surface-hover)" }}>
+          <p style={{ fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)" }}>
+            {pendingOfflineItem.type === "clock_in" ? t("attendance.pendingClockIn") : t("attendance.pendingClockOut")}
+          </p>
+          <p style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
+            {pendingOfflineItem.status === "failed"
+              ? pendingOfflineItem.errorMessage ?? t("attendance.pendingSyncFailed")
+              : pendingOfflineItem.status === "syncing"
+                ? t("attendance.pendingSyncing")
+                : t("attendance.pendingWaitingForConnection")}
+          </p>
+          {pendingOfflineItem.status === "failed" ? (
+            <div style={{ display: "flex", gap: "var(--space-2)", marginTop: "var(--space-2)" }}>
+              <Button size="sm" onClick={handleRetryOfflineSync}>
+                {t("attendance.retrySync")}
+              </Button>
+              <Button size="sm" variant="ghost" onClick={handleDiscardOfflineItem}>
+                {t("attendance.discardPending")}
+              </Button>
+            </div>
+          ) : null}
+        </div>
+      ) : session ? (
         <>
           <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("attendance.clockedInSince", { time: new Date(session.clockInAt).toLocaleTimeString() })}</p>
           {breakWarning ? <p style={{ color: "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>{breakWarning}</p> : null}

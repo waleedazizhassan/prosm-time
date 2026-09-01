@@ -47,7 +47,15 @@
     "breakEndAction": "End break",
     "breakStartError": "Unable to start a break.",
     "breakEndError": "Unable to end this break.",
-    "breakExceeded": "This break exceeded the maximum allowed duration."
+    "breakExceeded": "This break exceeded the maximum allowed duration.",
+    "pendingClockIn": "Clock In queued for sync",
+    "pendingClockOut": "Clock Out queued for sync",
+    "pendingWaitingForConnection": "Waiting for a connection to sync this action. It will send automatically once you're back online.",
+    "pendingSyncing": "Syncing...",
+    "pendingSyncFailed": "This action could not be synced.",
+    "retrySync": "Retry sync",
+    "discardPending": "Discard",
+    "offlineQueueError": "Unable to queue this action for offline sync."
   },
   "exceptions": {
     "title": "Pending exceptions",

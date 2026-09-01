@@ -47,7 +47,15 @@
     "breakEndAction": "Pause beenden",
     "breakStartError": "Die Pause konnte nicht gestartet werden.",
     "breakEndError": "Die Pause konnte nicht beendet werden.",
-    "breakExceeded": "Diese Pause hat die maximal zulässige Dauer überschritten."
+    "breakExceeded": "Diese Pause hat die maximal zulässige Dauer überschritten.",
+    "pendingClockIn": "Einstempeln wartet auf Synchronisierung",
+    "pendingClockOut": "Ausstempeln wartet auf Synchronisierung",
+    "pendingWaitingForConnection": "Warten auf eine Verbindung, um diese Aktion zu synchronisieren. Sie wird automatisch gesendet, sobald Sie wieder online sind.",
+    "pendingSyncing": "Wird synchronisiert...",
+    "pendingSyncFailed": "Diese Aktion konnte nicht synchronisiert werden.",
+    "retrySync": "Synchronisierung erneut versuchen",
+    "discardPending": "Verwerfen",
+    "offlineQueueError": "Diese Aktion konnte nicht für die Offline-Synchronisierung eingereiht werden."
   },
   "exceptions": {
     "title": "Ausstehende Ausnahmen",
