@@ -38,7 +38,7 @@
   },
   "myTimesheets": {
     "title": "I miei fogli ore",
-    "empty": "Non è ancora stato generato alcun foglio ore per te."
+    "empty": "Non è ancora stato generato alcun foglio ore per te. Un amministratore genera un foglio ore per ogni periodo di paga una volta terminato."
   },
   "detail": {
     "status": "Stato",

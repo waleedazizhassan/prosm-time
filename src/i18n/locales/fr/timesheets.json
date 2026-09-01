@@ -38,7 +38,7 @@
   },
   "myTimesheets": {
     "title": "Mes feuilles de temps",
-    "empty": "Aucune feuille de temps n'a encore été générée pour vous."
+    "empty": "Aucune feuille de temps n'a encore été générée pour vous. Un administrateur génère une feuille de temps pour chaque période de paie une fois celle-ci terminée."
   },
   "detail": {
     "status": "Statut",

@@ -80,7 +80,13 @@ export default function Sidebar() {
         <div className={styles.sidebarHeader}>
           <div className={styles.sidebarBrand}>
             <BrandMark size={28} glow />
-            {!sidebarCollapsed ? <span className={styles.sidebarBrandName}>{t("common:appName")}</span> : null}
+            {/* § live UX review, user-directed - "PROSM Time" already
+                anchors the Header; showing it again here read as
+                duplicated branding whenever both are visible at once.
+                The Sidebar now shows the shorter parent-platform mark
+                instead ("PROSM" - this product's own family brand),
+                matching the user's own suggested resolution. */}
+            {!sidebarCollapsed ? <span className={styles.sidebarBrandName}>{t("common:appNameShort")}</span> : null}
           </div>
 
           <button

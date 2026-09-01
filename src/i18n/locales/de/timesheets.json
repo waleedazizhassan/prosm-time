@@ -38,7 +38,7 @@
   },
   "myTimesheets": {
     "title": "Meine Stundenzettel",
-    "empty": "Für Sie wurde noch kein Stundenzettel erstellt."
+    "empty": "Für Sie wurde noch kein Stundenzettel erstellt. Ein Administrator erstellt für jeden Abrechnungszeitraum nach dessen Ende einen Stundenzettel."
   },
   "detail": {
     "status": "Status",

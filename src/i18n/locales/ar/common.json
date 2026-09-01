@@ -1,5 +1,6 @@
 {
   "appName": "PROSM Time",
+  "appNameShort": "PROSM",
   "loading": "جارٍ التحميل…",
   "greeting": {
     "morning": "صباح الخير",

@@ -6,6 +6,7 @@ import PageShell from "../../components/common/PageShell";
 import ClockInOutCard from "./ClockInOutCard";
 import ExceptionsCard from "./ExceptionsCard";
 import KioskPinCard from "./KioskPinCard";
+import AdminOverviewCard from "./AdminOverviewCard";
 
 // PROSM Time Implementation Master File V3.0, WP-03/§21/§37 - "Admin
 // Dashboard." Deliberately minimal and operational: real-time
@@ -18,6 +19,14 @@ import KioskPinCard from "./KioskPinCard";
 // stays focused on what an employee actually does here. Sign-out and
 // cross-page navigation live in the application shell (Sidebar/User
 // Menu, Header) - this page only owns its own operational content.
+//
+// § live UX review, user-directed - an Owner/Admin's Dashboard looked
+// identical to an individual employee's, with nothing signaling they
+// can see more than their own attendance. AdminOverviewCard renders
+// only for attendance.view holders (Manager Console's own gate) and
+// shows real counts already available from ManagerRepository/
+// SiteRepository - a rollup of existing data, not a new domain
+// concept.
 export default function DashboardPage() {
   const { t } = useTranslation("dashboard");
   const { profile } = useAuth();
@@ -25,6 +34,7 @@ export default function DashboardPage() {
   return (
     <PageShell title={t("title")} subtitle={profile ? t("welcomeMessage", { name: profile.fullName }) : undefined}>
       <ClockInOutCard />
+      <AdminOverviewCard />
       <ExceptionsCard />
       <KioskPinCard />
     </PageShell>

@@ -2,6 +2,13 @@
   "title": "Dashboard",
   "welcomeMessage": "Willkommen, {{name}}.",
   "signOutAction": "Abmelden",
+  "overview": {
+    "title": "Organisationsübersicht",
+    "sites": "Standorte",
+    "clockedInNow": "Aktuell eingestempelt",
+    "pendingReviews": "Ausstehende Prüfungen",
+    "openManagerAction": "Manager-Konsole öffnen"
+  },
   "organizationCard": {
     "title": "Organisation",
     "codeLabel": "Organisationscode",

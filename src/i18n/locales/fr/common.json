@@ -1,5 +1,6 @@
 {
   "appName": "PROSM Time",
+  "appNameShort": "PROSM",
   "loading": "Chargement…",
   "greeting": {
     "morning": "Bonjour",

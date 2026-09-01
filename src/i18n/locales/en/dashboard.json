@@ -2,6 +2,13 @@
   "title": "Dashboard",
   "welcomeMessage": "Welcome, {{name}}.",
   "signOutAction": "Sign out",
+  "overview": {
+    "title": "Organization Overview",
+    "sites": "Sites",
+    "clockedInNow": "Clocked In Now",
+    "pendingReviews": "Pending Reviews",
+    "openManagerAction": "Open Manager Console"
+  },
   "organizationCard": {
     "title": "Organization",
     "codeLabel": "Organization code",

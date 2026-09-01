@@ -38,7 +38,7 @@
   },
   "myTimesheets": {
     "title": "My Timesheets",
-    "empty": "No timesheets have been generated for you yet."
+    "empty": "No timesheets have been generated for you yet. An administrator generates a timesheet for each pay period once it ends."
   },
   "detail": {
     "status": "Status",

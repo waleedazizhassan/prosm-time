@@ -2,6 +2,13 @@
   "title": "لوحة التحكم",
   "welcomeMessage": "مرحبًا، {{name}}.",
   "signOutAction": "تسجيل الخروج",
+  "overview": {
+    "title": "نظرة عامة على المؤسسة",
+    "sites": "المواقع",
+    "clockedInNow": "متواجدون الآن",
+    "pendingReviews": "مراجعات معلقة",
+    "openManagerAction": "فتح لوحة المدير"
+  },
   "organizationCard": {
     "title": "المؤسسة",
     "codeLabel": "كود المؤسسة",

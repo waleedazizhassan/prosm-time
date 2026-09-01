@@ -1,0 +1,74 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+
+  margin-bottom: var(--space-3);
+}
+
+.eyebrow {
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.link {
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-link);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+
+/* § visual identity reference pass carried forward - the same subtle
+   emerald glow motif used elsewhere in the shell (BrandMark, camera
+   viewport), here marking these as the app's own "in control" numbers
+   rather than a generic card. */
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+
+  padding: var(--space-3);
+
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+
+  background: var(--surface-hover);
+}
+
+.tileIcon {
+  color: var(--brand-primary);
+  margin-bottom: var(--space-1);
+}
+
+.tileValue {
+  font-size: var(--font-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.tileLabel {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

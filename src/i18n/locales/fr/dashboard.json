@@ -2,6 +2,13 @@
   "title": "Tableau de bord",
   "welcomeMessage": "Bienvenue, {{name}}.",
   "signOutAction": "Se déconnecter",
+  "overview": {
+    "title": "Aperçu de l'organisation",
+    "sites": "Sites",
+    "clockedInNow": "Actuellement présents",
+    "pendingReviews": "Révisions en attente",
+    "openManagerAction": "Ouvrir la console gestionnaire"
+  },
   "organizationCard": {
     "title": "Organisation",
     "codeLabel": "Code de l'organisation",
