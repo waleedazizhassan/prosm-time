@@ -5,6 +5,8 @@
   "expandSidebar": "Seitenleiste ausklappen",
   "openUserMenu": "Benutzermenü öffnen",
   "signOutAction": "Abmelden",
+  "notificationsLabel": "Benachrichtigungen",
+  "noNotifications": "Noch keine Benachrichtigungen.",
   "items": {
     "dashboard": "Dashboard",
     "people": "Personen",

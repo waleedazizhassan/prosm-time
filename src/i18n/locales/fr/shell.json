@@ -5,6 +5,8 @@
   "expandSidebar": "Développer la barre latérale",
   "openUserMenu": "Ouvrir le menu utilisateur",
   "signOutAction": "Se déconnecter",
+  "notificationsLabel": "Notifications",
+  "noNotifications": "Aucune notification pour le moment.",
   "items": {
     "dashboard": "Tableau de bord",
     "people": "Personnes",

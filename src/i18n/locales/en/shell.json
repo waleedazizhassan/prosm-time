@@ -5,6 +5,8 @@
   "expandSidebar": "Expand sidebar",
   "openUserMenu": "Open user menu",
   "signOutAction": "Sign out",
+  "notificationsLabel": "Notifications",
+  "noNotifications": "No notifications yet.",
   "items": {
     "dashboard": "Dashboard",
     "people": "People",

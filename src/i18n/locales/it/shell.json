@@ -5,6 +5,8 @@
   "expandSidebar": "Espandi barra laterale",
   "openUserMenu": "Apri menu utente",
   "signOutAction": "Esci",
+  "notificationsLabel": "Notifiche",
+  "noNotifications": "Nessuna notifica al momento.",
   "items": {
     "dashboard": "Dashboard",
     "people": "Persone",

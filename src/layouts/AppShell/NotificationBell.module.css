@@ -1,0 +1,117 @@
+.container {
+  position: relative;
+}
+
+.trigger {
+  position: relative;
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: var(--radius-md);
+
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+
+  transition: background-color 0.18s ease;
+}
+
+.trigger:hover {
+  background: var(--surface-hover);
+}
+
+.badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+
+  min-width: 16px;
+  height: 16px;
+  padding: 0 3px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+  background: var(--brand-danger);
+  color: var(--brand-on-primary);
+
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+}
+
+.panel {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0;
+
+  width: 320px;
+  max-height: 400px;
+  overflow-y: auto;
+
+  background: var(--surface-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+
+  z-index: var(--z-dropdown);
+}
+
+.panelHeader {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border-light);
+
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.empty {
+  padding: var(--space-4);
+  margin: 0;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+.item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+
+  padding: var(--space-3) var(--space-4);
+
+  border: none;
+  border-bottom: 1px solid var(--border-light);
+
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+
+  transition: background-color 0.18s ease;
+}
+
+.item:hover {
+  background: var(--surface-hover);
+}
+
+.itemUnread {
+  background: var(--brand-primary-subtle, var(--surface-hover));
+}
+
+.itemTitle {
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.itemBody {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}

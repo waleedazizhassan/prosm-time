@@ -5,6 +5,8 @@
   "expandSidebar": "توسيع الشريط الجانبي",
   "openUserMenu": "فتح قائمة المستخدم",
   "signOutAction": "تسجيل الخروج",
+  "notificationsLabel": "الإشعارات",
+  "noNotifications": "لا توجد إشعارات بعد.",
   "items": {
     "dashboard": "لوحة التحكم",
     "people": "الأشخاص",
