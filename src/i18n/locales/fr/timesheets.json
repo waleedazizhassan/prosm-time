@@ -55,6 +55,37 @@
     "approveAction": "Approuver",
     "rejectAction": "Rejeter",
     "requestCorrectionAction": "Demander une correction",
-    "submitCorrectionAction": "Soumettre la demande de correction"
+    "submitCorrectionAction": "Soumettre la demande de correction",
+    "viewReportAction": "Voir le rapport"
+  },
+  "report": {
+    "title": "Rapport de feuille de temps",
+    "loadError": "Impossible de charger ce rapport.",
+    "backLink": "Retour aux feuilles de temps",
+    "exportCsvAction": "Exporter en CSV",
+    "printAction": "Imprimer / Enregistrer en PDF",
+    "summaryTitle": "Résumé",
+    "organization": "Organisation",
+    "employee": "Employé",
+    "status": "Statut",
+    "worked": "Travaillé",
+    "breaks": "Pauses",
+    "overtime": "Heures sup.",
+    "approver": "Approbateur",
+    "approvedAt": "Approuvé le",
+    "lockStatus": "Statut de verrouillage",
+    "locked": "Verrouillé",
+    "unlocked": "Non verrouillé",
+    "entriesTitle": "Entrées de présence",
+    "exceptionsTitle": "Exceptions de géorepérage (résumé de validation GPS)",
+    "noExceptions": "Aucune exception de géorepérage dans cette période.",
+    "correctionsTitle": "Corrections",
+    "noCorrections": "Aucune correction dans cette période.",
+    "timesheetLevelCorrection": "Correction de feuille de temps",
+    "evidenceTitle": "Références de preuves photo",
+    "noEvidence": "Aucune preuve photo dans cette période.",
+    "viewEvidence": "Voir",
+    "approvalTrailTitle": "Historique des approbations",
+    "noApprovalTrail": "Aucune activité d'approbation pour le moment."
   }
 }

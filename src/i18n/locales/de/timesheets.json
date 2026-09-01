@@ -55,6 +55,37 @@
     "approveAction": "Genehmigen",
     "rejectAction": "Ablehnen",
     "requestCorrectionAction": "Korrektur anfordern",
-    "submitCorrectionAction": "Korrekturantrag einreichen"
+    "submitCorrectionAction": "Korrekturantrag einreichen",
+    "viewReportAction": "Bericht anzeigen"
+  },
+  "report": {
+    "title": "Stundenzettel-Bericht",
+    "loadError": "Dieser Bericht konnte nicht geladen werden.",
+    "backLink": "Zurück zu Stundenzetteln",
+    "exportCsvAction": "CSV exportieren",
+    "printAction": "Drucken / Als PDF speichern",
+    "summaryTitle": "Zusammenfassung",
+    "organization": "Organisation",
+    "employee": "Mitarbeiter",
+    "status": "Status",
+    "worked": "Gearbeitet",
+    "breaks": "Pausen",
+    "overtime": "Überstunden",
+    "approver": "Genehmiger",
+    "approvedAt": "Genehmigt am",
+    "lockStatus": "Sperrstatus",
+    "locked": "Gesperrt",
+    "unlocked": "Nicht gesperrt",
+    "entriesTitle": "Anwesenheitseinträge",
+    "exceptionsTitle": "Geofence-Ausnahmen (GPS-Validierungsübersicht)",
+    "noExceptions": "Keine Geofence-Ausnahmen in diesem Zeitraum.",
+    "correctionsTitle": "Korrekturen",
+    "noCorrections": "Keine Korrekturen in diesem Zeitraum.",
+    "timesheetLevelCorrection": "Stundenzettel-Korrektur",
+    "evidenceTitle": "Kamerabeleg-Referenzen",
+    "noEvidence": "Keine Kamerabelege in diesem Zeitraum.",
+    "viewEvidence": "Anzeigen",
+    "approvalTrailTitle": "Genehmigungsverlauf",
+    "noApprovalTrail": "Noch keine Genehmigungsaktivität."
   }
 }

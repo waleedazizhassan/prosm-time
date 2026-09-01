@@ -55,6 +55,37 @@
     "approveAction": "Approve",
     "rejectAction": "Reject",
     "requestCorrectionAction": "Request correction",
-    "submitCorrectionAction": "Submit correction request"
+    "submitCorrectionAction": "Submit correction request",
+    "viewReportAction": "View report"
+  },
+  "report": {
+    "title": "Timesheet Report",
+    "loadError": "Unable to load this report.",
+    "backLink": "Back to Timesheets",
+    "exportCsvAction": "Export CSV",
+    "printAction": "Print / Save as PDF",
+    "summaryTitle": "Summary",
+    "organization": "Organization",
+    "employee": "Employee",
+    "status": "Status",
+    "worked": "Worked",
+    "breaks": "Breaks",
+    "overtime": "Overtime",
+    "approver": "Approver",
+    "approvedAt": "Approved At",
+    "lockStatus": "Lock Status",
+    "locked": "Locked",
+    "unlocked": "Not locked",
+    "entriesTitle": "Attendance Entries",
+    "exceptionsTitle": "Geofence Exceptions (GPS Validation Summary)",
+    "noExceptions": "No geofence exceptions in this period.",
+    "correctionsTitle": "Corrections",
+    "noCorrections": "No corrections in this period.",
+    "timesheetLevelCorrection": "Timesheet correction",
+    "evidenceTitle": "Camera Evidence References",
+    "noEvidence": "No camera evidence in this period.",
+    "viewEvidence": "View",
+    "approvalTrailTitle": "Approval Trail",
+    "noApprovalTrail": "No approval activity yet."
   }
 }

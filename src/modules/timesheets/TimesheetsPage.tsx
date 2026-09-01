@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 import { useAuth } from "../../core/context/AuthContext";
 import TimesheetRepository, { type Timesheet, type TimesheetEntry, type TimesheetCorrection } from "../../core/repositories/TimesheetRepository";
@@ -262,6 +263,9 @@ export default function TimesheetsPage() {
         footer={
           detailTimesheet ? (
             <>
+              <Link to={`/timesheets/${detailTimesheet.id}/report`}>
+                <Button variant="ghost">{t("detail.viewReportAction")}</Button>
+              </Link>
               {canSubmitDetail ? (
                 <Button onClick={handleSubmitTimesheet} loading={actionSubmitting}>
                   {t("detail.submitAction")}

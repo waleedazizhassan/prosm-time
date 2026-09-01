@@ -55,6 +55,37 @@
     "approveAction": "اعتماد",
     "rejectAction": "رفض",
     "requestCorrectionAction": "طلب تصحيح",
-    "submitCorrectionAction": "تقديم طلب التصحيح"
+    "submitCorrectionAction": "تقديم طلب التصحيح",
+    "viewReportAction": "عرض التقرير"
+  },
+  "report": {
+    "title": "تقرير كشف الدوام",
+    "loadError": "تعذر تحميل هذا التقرير.",
+    "backLink": "العودة إلى كشوف الدوام",
+    "exportCsvAction": "تصدير CSV",
+    "printAction": "طباعة / حفظ كـ PDF",
+    "summaryTitle": "الملخص",
+    "organization": "المؤسسة",
+    "employee": "الموظف",
+    "status": "الحالة",
+    "worked": "ساعات العمل",
+    "breaks": "الاستراحات",
+    "overtime": "الوقت الإضافي",
+    "approver": "المعتمد",
+    "approvedAt": "تاريخ الاعتماد",
+    "lockStatus": "حالة القفل",
+    "locked": "مقفل",
+    "unlocked": "غير مقفل",
+    "entriesTitle": "سجلات الحضور",
+    "exceptionsTitle": "استثناءات النطاق الجغرافي (ملخص التحقق من الموقع)",
+    "noExceptions": "لا توجد استثناءات نطاق جغرافي في هذه الفترة.",
+    "correctionsTitle": "التصحيحات",
+    "noCorrections": "لا توجد تصحيحات في هذه الفترة.",
+    "timesheetLevelCorrection": "تصحيح كشف الدوام",
+    "evidenceTitle": "مراجع الأدلة المصورة",
+    "noEvidence": "لا توجد أدلة مصورة في هذه الفترة.",
+    "viewEvidence": "عرض",
+    "approvalTrailTitle": "سجل الاعتماد",
+    "noApprovalTrail": "لا يوجد نشاط اعتماد بعد."
   }
 }

@@ -55,6 +55,37 @@
     "approveAction": "Approva",
     "rejectAction": "Rifiuta",
     "requestCorrectionAction": "Richiedi correzione",
-    "submitCorrectionAction": "Invia richiesta di correzione"
+    "submitCorrectionAction": "Invia richiesta di correzione",
+    "viewReportAction": "Visualizza report"
+  },
+  "report": {
+    "title": "Report del foglio ore",
+    "loadError": "Impossibile caricare questo report.",
+    "backLink": "Torna ai fogli ore",
+    "exportCsvAction": "Esporta CSV",
+    "printAction": "Stampa / Salva come PDF",
+    "summaryTitle": "Riepilogo",
+    "organization": "Organizzazione",
+    "employee": "Dipendente",
+    "status": "Stato",
+    "worked": "Lavorato",
+    "breaks": "Pause",
+    "overtime": "Straordinario",
+    "approver": "Approvatore",
+    "approvedAt": "Approvato il",
+    "lockStatus": "Stato di blocco",
+    "locked": "Bloccato",
+    "unlocked": "Non bloccato",
+    "entriesTitle": "Voci di presenza",
+    "exceptionsTitle": "Eccezioni geofence (riepilogo validazione GPS)",
+    "noExceptions": "Nessuna eccezione geofence in questo periodo.",
+    "correctionsTitle": "Correzioni",
+    "noCorrections": "Nessuna correzione in questo periodo.",
+    "timesheetLevelCorrection": "Correzione del foglio ore",
+    "evidenceTitle": "Riferimenti prove fotografiche",
+    "noEvidence": "Nessuna prova fotografica in questo periodo.",
+    "viewEvidence": "Visualizza",
+    "approvalTrailTitle": "Cronologia approvazioni",
+    "noApprovalTrail": "Nessuna attività di approvazione finora."
   }
 }

@@ -48,6 +48,72 @@ export interface TimesheetCorrection {
   createdAt: string;
 }
 
+export interface EvidencePackException {
+  id: string;
+  distanceMeters: number;
+  reasonCategory: string | null;
+  employeeReason: string | null;
+  status: string;
+  createdAt: string;
+}
+
+export interface EvidencePackCorrection {
+  id: string;
+  proposedEventType: string;
+  proposedCorrectTime: string;
+  reason: string;
+  status: string;
+  createdAt: string;
+}
+
+export interface EvidencePackEvidenceReference {
+  id: string;
+  attendanceEventId: string;
+  storagePath: string;
+  contentType: string;
+  capturedAt: string;
+}
+
+export interface EvidencePackApprovalTrailRow {
+  action: string;
+  actorName: string;
+  notes: string | null;
+  createdAt: string;
+}
+
+export interface EvidencePackTimesheetCorrection {
+  id: string;
+  reason: string;
+  status: string;
+  reviewNotes: string | null;
+  reviewedAt: string | null;
+  createdAt: string;
+}
+
+export interface EvidencePack {
+  timesheet: {
+    id: string;
+    periodStart: string;
+    periodEnd: string;
+    status: TimesheetStatus;
+    totalWorkedMinutes: number;
+    totalBreakMinutes: number;
+    totalOvertimeMinutes: number;
+    submittedAt: string | null;
+    approvedAt: string | null;
+    lockedAt: string | null;
+    approverName: string | null;
+  };
+  employee: { id: string; fullName: string; email: string };
+  organization: { id: string; name: string; organizationCode: string };
+  entries: TimesheetEntry[];
+  exceptions: EvidencePackException[];
+  corrections: EvidencePackCorrection[];
+  evidenceReferences: EvidencePackEvidenceReference[];
+  approvalTrail: EvidencePackApprovalTrailRow[];
+  timesheetCorrections: EvidencePackTimesheetCorrection[];
+}
+
 function createSuccess<T>(data: T | null = null): ServiceResult<T> {
   return { success: true, message: null, data };
 }
@@ -189,6 +255,18 @@ class TimesheetRepository {
         breakMinutes: number;
       }>;
       return createSuccess(rows);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Timesheet service unavailable.");
+    }
+  }
+
+  async getEvidencePack(timesheetId: string): Promise<ServiceResult<EvidencePack>> {
+    try {
+      const { data, error } = await this.client.rpc("list_prosm_time_timesheet_evidence_pack", { p_timesheet_id: timesheetId });
+      if (error) return createError(error.message);
+      if (data?.success === false) return createError("Unable to load this report.");
+      const { success: _success, ...pack } = data as EvidencePack & { success: boolean };
+      return createSuccess(pack as EvidencePack);
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Timesheet service unavailable.");
     }
