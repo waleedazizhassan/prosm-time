@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { LayoutDashboard, Users, MapPin, LayoutGrid } from "lucide-react";
+import { LayoutDashboard, Users, MapPin, LayoutGrid, FileText } from "lucide-react";
 
 export interface NavItem {
   id: string;
@@ -22,4 +22,10 @@ export const NAV_ITEMS: NavItem[] = [
   { id: "people", labelKey: "items.people", path: "/people", icon: Users, requiredPermission: "employees.view" },
   { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage" },
   { id: "manager", labelKey: "items.manager", path: "/manager", icon: LayoutGrid, requiredPermission: "attendance.view" },
+  // §22: "Employee reviews their period" - self-access to one's own
+  // timesheets needs no special permission (same as Dashboard), so
+  // this nav item is visible to every authenticated org member; the
+  // page itself further gates its Generate/Approve/Correction-review
+  // sections on timesheets.generate/timesheets.approve/attendance.correct.
+  { id: "timesheets", labelKey: "items.timesheets", path: "/timesheets", icon: FileText, requiredPermission: null },
 ];

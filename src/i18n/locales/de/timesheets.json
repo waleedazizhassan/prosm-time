@@ -1,0 +1,60 @@
+{
+  "title": "Stundenzettel",
+  "subtitle": "Monatliche Anwesenheitszeiträume prüfen, einreichen, genehmigen und korrigieren.",
+  "generateError": "Dieser Stundenzettel konnte nicht erstellt werden.",
+  "submitError": "Dieser Stundenzettel konnte nicht eingereicht werden.",
+  "approveError": "Dieser Stundenzettel konnte nicht geprüft werden.",
+  "correctionRequestError": "Diese Korrektur konnte nicht angefordert werden.",
+  "correctionReviewError": "Diese Korrektur konnte nicht geprüft werden.",
+  "columns": {
+    "employee": "Mitarbeiter",
+    "period": "Zeitraum",
+    "status": "Status",
+    "worked": "Gearbeitet",
+    "overtime": "Überstunden"
+  },
+  "status": {
+    "draft": "Entwurf",
+    "submitted": "Eingereicht",
+    "approved": "Genehmigt & Gesperrt",
+    "rejected": "Abgelehnt"
+  },
+  "generate": {
+    "title": "Stundenzettel erstellen",
+    "employeeLabel": "Mitarbeiter",
+    "periodStartLabel": "Zeitraum Beginn",
+    "periodEndLabel": "Zeitraum Ende",
+    "action": "Erstellen"
+  },
+  "pendingApprovals": {
+    "title": "Ausstehende Genehmigungen",
+    "empty": "Keine Stundenzettel warten auf Genehmigung."
+  },
+  "pendingCorrections": {
+    "title": "Ausstehende Korrekturanträge",
+    "empty": "Keine Korrekturanträge zur Prüfung.",
+    "reviewAction": "Prüfen",
+    "reviewTitle": "Korrekturantrag"
+  },
+  "myTimesheets": {
+    "title": "Meine Stundenzettel",
+    "empty": "Für Sie wurde noch kein Stundenzettel erstellt."
+  },
+  "detail": {
+    "status": "Status",
+    "worked": "Gearbeitet",
+    "breaks": "Pausen",
+    "overtime": "Überstunden",
+    "exceptions": "Ausnahmen",
+    "corrections": "Korrekturen",
+    "noEntries": "Keine Anwesenheitssitzungen in diesem Zeitraum.",
+    "stillOpen": "noch offen",
+    "notesLabel": "Notizen (optional)",
+    "correctionReasonLabel": "Korrekturgrund",
+    "submitAction": "Zur Genehmigung einreichen",
+    "approveAction": "Genehmigen",
+    "rejectAction": "Ablehnen",
+    "requestCorrectionAction": "Korrektur anfordern",
+    "submitCorrectionAction": "Korrekturantrag einreichen"
+  }
+}

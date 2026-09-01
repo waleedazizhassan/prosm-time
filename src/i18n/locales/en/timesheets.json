@@ -1,0 +1,60 @@
+{
+  "title": "Timesheets",
+  "subtitle": "Review, submit, approve and correct monthly attendance periods.",
+  "generateError": "Unable to generate this timesheet.",
+  "submitError": "Unable to submit this timesheet.",
+  "approveError": "Unable to review this timesheet.",
+  "correctionRequestError": "Unable to request this correction.",
+  "correctionReviewError": "Unable to review this correction.",
+  "columns": {
+    "employee": "Employee",
+    "period": "Period",
+    "status": "Status",
+    "worked": "Worked",
+    "overtime": "Overtime"
+  },
+  "status": {
+    "draft": "Draft",
+    "submitted": "Submitted",
+    "approved": "Approved & Locked",
+    "rejected": "Rejected"
+  },
+  "generate": {
+    "title": "Generate Timesheet",
+    "employeeLabel": "Employee",
+    "periodStartLabel": "Period start",
+    "periodEndLabel": "Period end",
+    "action": "Generate"
+  },
+  "pendingApprovals": {
+    "title": "Pending Approvals",
+    "empty": "No timesheets awaiting approval."
+  },
+  "pendingCorrections": {
+    "title": "Pending Correction Requests",
+    "empty": "No correction requests awaiting review.",
+    "reviewAction": "Review",
+    "reviewTitle": "Correction request"
+  },
+  "myTimesheets": {
+    "title": "My Timesheets",
+    "empty": "No timesheets have been generated for you yet."
+  },
+  "detail": {
+    "status": "Status",
+    "worked": "Worked",
+    "breaks": "Breaks",
+    "overtime": "Overtime",
+    "exceptions": "Exceptions",
+    "corrections": "Corrections",
+    "noEntries": "No attendance sessions in this period.",
+    "stillOpen": "still open",
+    "notesLabel": "Notes (optional)",
+    "correctionReasonLabel": "Correction reason",
+    "submitAction": "Submit for approval",
+    "approveAction": "Approve",
+    "rejectAction": "Reject",
+    "requestCorrectionAction": "Request correction",
+    "submitCorrectionAction": "Submit correction request"
+  }
+}

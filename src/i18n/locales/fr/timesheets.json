@@ -1,0 +1,60 @@
+{
+  "title": "Feuilles de temps",
+  "subtitle": "Réviser, soumettre, approuver et corriger les périodes de présence mensuelles.",
+  "generateError": "Impossible de générer cette feuille de temps.",
+  "submitError": "Impossible de soumettre cette feuille de temps.",
+  "approveError": "Impossible d'examiner cette feuille de temps.",
+  "correctionRequestError": "Impossible de demander cette correction.",
+  "correctionReviewError": "Impossible d'examiner cette correction.",
+  "columns": {
+    "employee": "Employé",
+    "period": "Période",
+    "status": "Statut",
+    "worked": "Travaillé",
+    "overtime": "Heures sup."
+  },
+  "status": {
+    "draft": "Brouillon",
+    "submitted": "Soumise",
+    "approved": "Approuvée et verrouillée",
+    "rejected": "Rejetée"
+  },
+  "generate": {
+    "title": "Générer une feuille de temps",
+    "employeeLabel": "Employé",
+    "periodStartLabel": "Début de période",
+    "periodEndLabel": "Fin de période",
+    "action": "Générer"
+  },
+  "pendingApprovals": {
+    "title": "Approbations en attente",
+    "empty": "Aucune feuille de temps en attente d'approbation."
+  },
+  "pendingCorrections": {
+    "title": "Demandes de correction en attente",
+    "empty": "Aucune demande de correction en attente de révision.",
+    "reviewAction": "Examiner",
+    "reviewTitle": "Demande de correction"
+  },
+  "myTimesheets": {
+    "title": "Mes feuilles de temps",
+    "empty": "Aucune feuille de temps n'a encore été générée pour vous."
+  },
+  "detail": {
+    "status": "Statut",
+    "worked": "Travaillé",
+    "breaks": "Pauses",
+    "overtime": "Heures sup.",
+    "exceptions": "Exceptions",
+    "corrections": "Corrections",
+    "noEntries": "Aucune session de présence dans cette période.",
+    "stillOpen": "toujours ouverte",
+    "notesLabel": "Notes (facultatif)",
+    "correctionReasonLabel": "Motif de la correction",
+    "submitAction": "Soumettre pour approbation",
+    "approveAction": "Approuver",
+    "rejectAction": "Rejeter",
+    "requestCorrectionAction": "Demander une correction",
+    "submitCorrectionAction": "Soumettre la demande de correction"
+  }
+}

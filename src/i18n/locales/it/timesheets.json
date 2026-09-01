@@ -1,0 +1,60 @@
+{
+  "title": "Fogli ore",
+  "subtitle": "Rivedi, invia, approva e correggi i periodi di presenza mensili.",
+  "generateError": "Impossibile generare questo foglio ore.",
+  "submitError": "Impossibile inviare questo foglio ore.",
+  "approveError": "Impossibile esaminare questo foglio ore.",
+  "correctionRequestError": "Impossibile richiedere questa correzione.",
+  "correctionReviewError": "Impossibile esaminare questa correzione.",
+  "columns": {
+    "employee": "Dipendente",
+    "period": "Periodo",
+    "status": "Stato",
+    "worked": "Lavorato",
+    "overtime": "Straordinario"
+  },
+  "status": {
+    "draft": "Bozza",
+    "submitted": "Inviato",
+    "approved": "Approvato e bloccato",
+    "rejected": "Respinto"
+  },
+  "generate": {
+    "title": "Genera foglio ore",
+    "employeeLabel": "Dipendente",
+    "periodStartLabel": "Inizio periodo",
+    "periodEndLabel": "Fine periodo",
+    "action": "Genera"
+  },
+  "pendingApprovals": {
+    "title": "Approvazioni in sospeso",
+    "empty": "Nessun foglio ore in attesa di approvazione."
+  },
+  "pendingCorrections": {
+    "title": "Richieste di correzione in sospeso",
+    "empty": "Nessuna richiesta di correzione in attesa di revisione.",
+    "reviewAction": "Esamina",
+    "reviewTitle": "Richiesta di correzione"
+  },
+  "myTimesheets": {
+    "title": "I miei fogli ore",
+    "empty": "Non è ancora stato generato alcun foglio ore per te."
+  },
+  "detail": {
+    "status": "Stato",
+    "worked": "Lavorato",
+    "breaks": "Pause",
+    "overtime": "Straordinario",
+    "exceptions": "Eccezioni",
+    "corrections": "Correzioni",
+    "noEntries": "Nessuna sessione di presenza in questo periodo.",
+    "stillOpen": "ancora aperta",
+    "notesLabel": "Note (facoltative)",
+    "correctionReasonLabel": "Motivo della correzione",
+    "submitAction": "Invia per approvazione",
+    "approveAction": "Approva",
+    "rejectAction": "Rifiuta",
+    "requestCorrectionAction": "Richiedi correzione",
+    "submitCorrectionAction": "Invia richiesta di correzione"
+  }
+}

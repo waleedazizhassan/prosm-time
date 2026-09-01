@@ -87,3 +87,28 @@ entrypoint = "./functions/start-break/index.ts"
 enabled = true
 verify_jwt = true
 entrypoint = "./functions/end-break/index.ts"
+
+[functions.generate-timesheet]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/generate-timesheet/index.ts"
+
+[functions.submit-timesheet]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/submit-timesheet/index.ts"
+
+[functions.approve-timesheet]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/approve-timesheet/index.ts"
+
+[functions.request-timesheet-correction]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/request-timesheet-correction/index.ts"
+
+[functions.review-timesheet-correction]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/review-timesheet-correction/index.ts"

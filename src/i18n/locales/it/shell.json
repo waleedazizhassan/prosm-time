@@ -11,6 +11,7 @@
     "dashboard": "Dashboard",
     "people": "Persone",
     "sites": "Sedi",
-    "manager": "Console manager"
+    "manager": "Console manager",
+    "timesheets": "Fogli ore"
   }
 }

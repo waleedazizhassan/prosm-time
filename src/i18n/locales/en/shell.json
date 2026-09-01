@@ -11,6 +11,7 @@
     "dashboard": "Dashboard",
     "people": "People",
     "sites": "Sites",
-    "manager": "Manager Console"
+    "manager": "Manager Console",
+    "timesheets": "Timesheets"
   }
 }

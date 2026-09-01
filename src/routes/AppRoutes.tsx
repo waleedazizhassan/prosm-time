@@ -13,6 +13,7 @@ import PersonDetailPage from "../modules/people/PersonDetailPage";
 import SitesPage from "../modules/sites/SitesPage";
 import SiteDetailPage from "../modules/sites/SiteDetailPage";
 import ManagerConsolePage from "../modules/manager/ManagerConsolePage";
+import TimesheetsPage from "../modules/timesheets/TimesheetsPage";
 
 // PROSM Time route map. /activate, /login, /accept-invitation are
 // public (no session exists yet by definition at any of them) and
@@ -54,6 +55,7 @@ export default function AppRoutes() {
             <Route path="/sites" element={<SitesPage />} />
             <Route path="/sites/:siteId" element={<SiteDetailPage />} />
             <Route path="/manager" element={<ManagerConsolePage />} />
+            <Route path="/timesheets" element={<TimesheetsPage />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />

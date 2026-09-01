@@ -1,0 +1,60 @@
+{
+  "title": "كشوف الدوام",
+  "subtitle": "مراجعة وتقديم واعتماد وتصحيح فترات الحضور الشهرية.",
+  "generateError": "تعذر إنشاء كشف الدوام هذا.",
+  "submitError": "تعذر تقديم كشف الدوام هذا.",
+  "approveError": "تعذرت مراجعة كشف الدوام هذا.",
+  "correctionRequestError": "تعذر طلب هذا التصحيح.",
+  "correctionReviewError": "تعذرت مراجعة هذا التصحيح.",
+  "columns": {
+    "employee": "الموظف",
+    "period": "الفترة",
+    "status": "الحالة",
+    "worked": "ساعات العمل",
+    "overtime": "الوقت الإضافي"
+  },
+  "status": {
+    "draft": "مسودة",
+    "submitted": "تم التقديم",
+    "approved": "معتمد ومقفل",
+    "rejected": "مرفوض"
+  },
+  "generate": {
+    "title": "إنشاء كشف دوام",
+    "employeeLabel": "الموظف",
+    "periodStartLabel": "بداية الفترة",
+    "periodEndLabel": "نهاية الفترة",
+    "action": "إنشاء"
+  },
+  "pendingApprovals": {
+    "title": "بانتظار الاعتماد",
+    "empty": "لا توجد كشوف دوام بانتظار الاعتماد."
+  },
+  "pendingCorrections": {
+    "title": "طلبات التصحيح المعلقة",
+    "empty": "لا توجد طلبات تصحيح بانتظار المراجعة.",
+    "reviewAction": "مراجعة",
+    "reviewTitle": "طلب تصحيح"
+  },
+  "myTimesheets": {
+    "title": "كشوف دوامي",
+    "empty": "لم يتم إنشاء أي كشف دوام لك بعد."
+  },
+  "detail": {
+    "status": "الحالة",
+    "worked": "ساعات العمل",
+    "breaks": "الاستراحات",
+    "overtime": "الوقت الإضافي",
+    "exceptions": "الاستثناءات",
+    "corrections": "التصحيحات",
+    "noEntries": "لا توجد جلسات حضور في هذه الفترة.",
+    "stillOpen": "لا تزال مفتوحة",
+    "notesLabel": "ملاحظات (اختياري)",
+    "correctionReasonLabel": "سبب التصحيح",
+    "submitAction": "تقديم للاعتماد",
+    "approveAction": "اعتماد",
+    "rejectAction": "رفض",
+    "requestCorrectionAction": "طلب تصحيح",
+    "submitCorrectionAction": "تقديم طلب التصحيح"
+  }
+}
