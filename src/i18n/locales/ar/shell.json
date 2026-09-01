@@ -6,6 +6,12 @@
   "openUserMenu": "فتح قائمة المستخدم",
   "signOutAction": "تسجيل الخروج",
   "languageLabel": "اللغة",
+  "themeLabel": "المظهر",
+  "theme": {
+    "dark": "داكن",
+    "light": "فاتح",
+    "system": "النظام"
+  },
   "notificationsLabel": "الإشعارات",
   "noNotifications": "لا توجد إشعارات بعد.",
   "items": {

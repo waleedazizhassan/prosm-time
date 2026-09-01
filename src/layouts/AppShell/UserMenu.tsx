@@ -4,6 +4,7 @@ import { ChevronDown, LogOut } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import { useAppLayout } from "./LayoutContext";
+import { useTheme, type ThemeMode } from "../../core/context/ThemeContext";
 import { LANGUAGES } from "../../i18n/languages";
 import sidebarStyles from "./Sidebar.module.css";
 import styles from "./UserMenu.module.css";
@@ -21,6 +22,7 @@ export default function UserMenu({ collapsed }: { collapsed: boolean }) {
   const { t, i18n } = useTranslation("shell");
   const { profile, signOut } = useAuth();
   const { userMenuOpen, toggleUserMenu, closeUserMenu } = useAppLayout();
+  const { theme, setTheme } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -73,6 +75,14 @@ export default function UserMenu({ collapsed }: { collapsed: boolean }) {
                 {language.nativeLabel}
               </option>
             ))}
+          </select>
+          <label className={styles.languageLabel} htmlFor="userMenuTheme">
+            {t("themeLabel")}
+          </label>
+          <select id="userMenuTheme" className={styles.languageSelect} value={theme} onChange={(event) => setTheme(event.target.value as ThemeMode)}>
+            <option value="dark">{t("theme.dark")}</option>
+            <option value="light">{t("theme.light")}</option>
+            <option value="system">{t("theme.system")}</option>
           </select>
           <button type="button" className={styles.signOutButton} onClick={signOut}>
             <LogOut size={16} />

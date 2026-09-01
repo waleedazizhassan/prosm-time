@@ -6,6 +6,12 @@
   "openUserMenu": "Benutzermenü öffnen",
   "signOutAction": "Abmelden",
   "languageLabel": "Sprache",
+  "themeLabel": "Erscheinungsbild",
+  "theme": {
+    "dark": "Dunkel",
+    "light": "Hell",
+    "system": "System"
+  },
   "notificationsLabel": "Benachrichtigungen",
   "noNotifications": "Noch keine Benachrichtigungen.",
   "items": {

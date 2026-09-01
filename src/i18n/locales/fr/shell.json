@@ -6,6 +6,12 @@
   "openUserMenu": "Ouvrir le menu utilisateur",
   "signOutAction": "Se déconnecter",
   "languageLabel": "Langue",
+  "themeLabel": "Apparence",
+  "theme": {
+    "dark": "Sombre",
+    "light": "Clair",
+    "system": "Système"
+  },
   "notificationsLabel": "Notifications",
   "noNotifications": "Aucune notification pour le moment.",
   "items": {

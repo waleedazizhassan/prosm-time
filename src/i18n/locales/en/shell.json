@@ -6,6 +6,12 @@
   "openUserMenu": "Open user menu",
   "signOutAction": "Sign out",
   "languageLabel": "Language",
+  "themeLabel": "Appearance",
+  "theme": {
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System"
+  },
   "notificationsLabel": "Notifications",
   "noNotifications": "No notifications yet.",
   "items": {
