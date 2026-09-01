@@ -6,10 +6,12 @@ import { useAuth } from "../../core/context/AuthContext";
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
 import PermissionRepository, { type Permission } from "../../core/repositories/PermissionRepository";
 import DeviceBindingRepository, { type DeviceBinding } from "../../core/repositories/DeviceBindingRepository";
+import KioskRepository from "../../core/repositories/KioskRepository";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
 import Button from "../../components/common/Button";
+import Input from "../../components/common/Input";
 import Modal from "../../components/common/Modal";
 import Textarea from "../../components/common/Textarea";
 import StatusBadge from "../../components/common/StatusBadge";
@@ -55,6 +57,11 @@ export default function PersonDetailPage() {
   const [changeError, setChangeError] = useState("");
 
   const [deviceActionError, setDeviceActionError] = useState("");
+
+  const [kioskPin, setKioskPin] = useState("");
+  const [kioskPinSubmitting, setKioskPinSubmitting] = useState(false);
+  const [kioskPinError, setKioskPinError] = useState("");
+  const [kioskPinSuccess, setKioskPinSuccess] = useState(false);
 
   const canManagePermissions = hasPermission("permissions.assign");
   const canManageDevices = hasPermission("employees.manage_accounts");
@@ -134,6 +141,21 @@ export default function PersonDetailPage() {
       return;
     }
     await load();
+  };
+
+  const handleSetKioskPin = async () => {
+    if (!member) return;
+    setKioskPinSubmitting(true);
+    setKioskPinError("");
+    setKioskPinSuccess(false);
+    const result = await KioskRepository.adminSetPin(member.id, kioskPin);
+    setKioskPinSubmitting(false);
+    if (!result.success) {
+      setKioskPinError(result.message ?? t("detail.kioskPinError"));
+      return;
+    }
+    setKioskPin("");
+    setKioskPinSuccess(true);
   };
 
   if (loading) {
@@ -228,6 +250,18 @@ export default function PersonDetailPage() {
           ))
         )}
       </Card>
+
+      {canManageDevices ? (
+        <Card title={t("detail.kioskPinTitle")}>
+          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.kioskPinHint")}</p>
+          {kioskPinError ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{kioskPinError}</p> : null}
+          {kioskPinSuccess ? <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("detail.kioskPinSuccess")}</p> : null}
+          <Input label={t("detail.kioskPinLabel")} name="kioskPin" type="password" value={kioskPin} onChange={(event) => setKioskPin(event.target.value.replace(/[^0-9]/g, "").slice(0, 6))} disabled={kioskPinSubmitting} />
+          <Button onClick={handleSetKioskPin} loading={kioskPinSubmitting} disabled={kioskPin.length < 4}>
+            {t("detail.kioskPinAction")}
+          </Button>
+        </Card>
+      ) : null}
 
       <AdminAttendanceCard subjectUserId={member.id} />
 

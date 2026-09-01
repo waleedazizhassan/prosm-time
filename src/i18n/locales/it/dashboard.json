@@ -57,6 +57,14 @@
     "discardPending": "Ignora",
     "offlineQueueError": "Impossibile mettere in coda questa azione per la sincronizzazione offline."
   },
+  "kioskPin": {
+    "title": "PIN chiosco",
+    "hint": "Imposta un PIN per identificarti su un dispositivo chiosco condiviso. È indipendente dalla tua password di accesso.",
+    "pinLabel": "PIN (4-6 cifre)",
+    "saveAction": "Salva PIN",
+    "error": "Impossibile impostare questo PIN.",
+    "success": "PIN aggiornato."
+  },
   "exceptions": {
     "title": "Eccezioni in sospeso",
     "hint": "Hai timbrato al di fuori della tua zona di lavoro assegnata. Spiega il motivo.",

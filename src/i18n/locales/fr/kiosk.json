@@ -1,0 +1,17 @@
+{
+  "title": "Mode kiosque",
+  "subtitle": "Sélectionnez-vous, saisissez votre code PIN, puis pointez votre arrivée ou votre départ.",
+  "loadError": "Impossible de charger cet écran kiosque.",
+  "selectYourself": "Sélectionnez-vous",
+  "noRoster": "Aucun employé n'est encore affecté à ce site.",
+  "pinPlaceholder": "Code PIN",
+  "evidenceLabel": "Preuve photo",
+  "evidenceRequiredHint": "Ce site exige une photo pour cette action.",
+  "cancelAction": "Annuler",
+  "clockInAction": "Pointer l'arrivée",
+  "clockOutAction": "Pointer le départ",
+  "clockInSuccess": "{{name}} a pointé son arrivée.",
+  "clockOutSuccess": "{{name}} a pointé son départ.",
+  "backToRosterAction": "Retour à la liste",
+  "actionError": "Impossible de terminer cette action."
+}

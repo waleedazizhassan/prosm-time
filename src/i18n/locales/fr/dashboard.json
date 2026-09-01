@@ -57,6 +57,14 @@
     "discardPending": "Ignorer",
     "offlineQueueError": "Impossible de mettre cette action en file d'attente pour une synchronisation hors ligne."
   },
+  "kioskPin": {
+    "title": "Code PIN kiosque",
+    "hint": "Définissez un code PIN pour vous identifier sur un appareil kiosque partagé. Il est distinct de votre mot de passe de connexion.",
+    "pinLabel": "Code PIN (4 à 6 chiffres)",
+    "saveAction": "Enregistrer le code PIN",
+    "error": "Impossible de définir ce code PIN.",
+    "success": "Code PIN mis à jour."
+  },
   "exceptions": {
     "title": "Exceptions en attente",
     "hint": "Vous avez pointé en dehors de votre zone de travail assignée. Veuillez expliquer pourquoi.",

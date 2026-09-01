@@ -57,6 +57,14 @@
     "discardPending": "Verwerfen",
     "offlineQueueError": "Diese Aktion konnte nicht für die Offline-Synchronisierung eingereiht werden."
   },
+  "kioskPin": {
+    "title": "Kiosk-PIN",
+    "hint": "Legen Sie eine PIN fest, um sich an einem gemeinsam genutzten Kiosk-Gerät zu identifizieren. Diese ist unabhängig von Ihrem Anmeldepasswort.",
+    "pinLabel": "PIN (4-6 Ziffern)",
+    "saveAction": "PIN speichern",
+    "error": "Diese PIN konnte nicht festgelegt werden.",
+    "success": "PIN aktualisiert."
+  },
   "exceptions": {
     "title": "Ausstehende Ausnahmen",
     "hint": "Sie haben sich außerhalb Ihres zugewiesenen Arbeitsbereichs ein-/ausgestempelt. Bitte erklären Sie den Grund.",

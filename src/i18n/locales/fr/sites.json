@@ -50,6 +50,7 @@
     "backToList": "Retour aux sites",
     "loadError": "Impossible de charger ce site.",
     "editAction": "Modifier",
+    "launchKioskAction": "Lancer le mode kiosque",
     "assignmentsTitle": "Employés assignés",
     "assignmentsHint": "Employés et managers assignés à ce site.",
     "assignAction": "Assigner un employé",

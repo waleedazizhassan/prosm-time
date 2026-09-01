@@ -1,0 +1,17 @@
+{
+  "title": "وضع الكشك",
+  "subtitle": "اختر نفسك، أدخل رمزك، ثم سجّل الحضور أو الانصراف.",
+  "loadError": "تعذر تحميل شاشة الكشك هذه.",
+  "selectYourself": "اختر نفسك",
+  "noRoster": "لا يوجد موظفون معينون لهذا الموقع بعد.",
+  "pinPlaceholder": "الرمز",
+  "evidenceLabel": "دليل مصور",
+  "evidenceRequiredHint": "يتطلب هذا الموقع صورة لهذا الإجراء.",
+  "cancelAction": "إلغاء",
+  "clockInAction": "تسجيل الحضور",
+  "clockOutAction": "تسجيل الانصراف",
+  "clockInSuccess": "تم تسجيل حضور {{name}}.",
+  "clockOutSuccess": "تم تسجيل انصراف {{name}}.",
+  "backToRosterAction": "العودة إلى القائمة",
+  "actionError": "تعذر إتمام هذا الإجراء."
+}

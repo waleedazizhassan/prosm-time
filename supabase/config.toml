@@ -112,3 +112,23 @@ entrypoint = "./functions/request-timesheet-correction/index.ts"
 enabled = true
 verify_jwt = true
 entrypoint = "./functions/review-timesheet-correction/index.ts"
+
+[functions.kiosk-clock-in]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/kiosk-clock-in/index.ts"
+
+[functions.kiosk-clock-out]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/kiosk-clock-out/index.ts"
+
+[functions.set-kiosk-pin]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/set-kiosk-pin/index.ts"
+
+[functions.admin-set-kiosk-pin]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/admin-set-kiosk-pin/index.ts"

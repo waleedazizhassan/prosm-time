@@ -50,6 +50,7 @@
     "backToList": "Torna alle sedi",
     "loadError": "Impossibile caricare questa sede.",
     "editAction": "Modifica",
+    "launchKioskAction": "Avvia modalità chiosco",
     "assignmentsTitle": "Dipendenti assegnati",
     "assignmentsHint": "Dipendenti e manager assegnati a questa sede.",
     "assignAction": "Assegna dipendente",

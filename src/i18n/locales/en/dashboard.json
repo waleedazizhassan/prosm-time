@@ -57,6 +57,14 @@
     "discardPending": "Discard",
     "offlineQueueError": "Unable to queue this action for offline sync."
   },
+  "kioskPin": {
+    "title": "Kiosk PIN",
+    "hint": "Set a PIN to identify yourself at a shared kiosk device. This is separate from your login password.",
+    "pinLabel": "PIN (4-6 digits)",
+    "saveAction": "Save PIN",
+    "error": "Unable to set this PIN.",
+    "success": "PIN updated."
+  },
   "exceptions": {
     "title": "Pending exceptions",
     "hint": "You clocked in/out outside your assigned work area. Please explain why.",

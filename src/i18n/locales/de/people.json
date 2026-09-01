@@ -57,6 +57,12 @@
     "noDevices": "Noch keine Geräte verknüpft.",
     "approveAction": "Genehmigen",
     "blockAction": "Sperren",
+    "kioskPinTitle": "Kiosk-PIN",
+    "kioskPinHint": "Legen Sie die Kiosk-Identifikations-PIN dieses Mitarbeiters fest oder setzen Sie sie zurück.",
+    "kioskPinLabel": "Neue PIN (4-6 Ziffern)",
+    "kioskPinAction": "PIN festlegen",
+    "kioskPinError": "Die PIN dieses Mitarbeiters konnte nicht festgelegt werden.",
+    "kioskPinSuccess": "PIN aktualisiert.",
     "attendance": {
       "title": "Anwesenheit (im Auftrag)",
       "hint": "Stempeln Sie diesen Mitarbeiter ein oder aus, wenn er dies nicht selbst tun kann. Dies wird als eigenständige administrative Aktion erfasst, niemals mit seiner eigenen Anwesenheitshistorie vermischt.",

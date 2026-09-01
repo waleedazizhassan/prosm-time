@@ -50,6 +50,7 @@
     "backToList": "Zurück zu Standorten",
     "loadError": "Dieser Standort konnte nicht geladen werden.",
     "editAction": "Bearbeiten",
+    "launchKioskAction": "Kiosk-Modus starten",
     "assignmentsTitle": "Zugewiesene Mitarbeiter",
     "assignmentsHint": "Mitarbeiter und Manager, die diesem Standort zugewiesen sind.",
     "assignAction": "Mitarbeiter zuweisen",

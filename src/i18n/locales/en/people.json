@@ -57,6 +57,12 @@
     "noDevices": "No devices bound yet.",
     "approveAction": "Approve",
     "blockAction": "Block",
+    "kioskPinTitle": "Kiosk PIN",
+    "kioskPinHint": "Set or reset this employee's kiosk identification PIN.",
+    "kioskPinLabel": "New PIN (4-6 digits)",
+    "kioskPinAction": "Set PIN",
+    "kioskPinError": "Unable to set this employee's PIN.",
+    "kioskPinSuccess": "PIN updated.",
     "attendance": {
       "title": "Attendance (on behalf)",
       "hint": "Perform Clock In/Out for this employee when they are unable to do it themselves. This is recorded as a distinct administrative action, never merged into their own attendance history.",

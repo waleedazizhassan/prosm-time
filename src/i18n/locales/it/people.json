@@ -57,6 +57,12 @@
     "noDevices": "Nessun dispositivo associato ancora.",
     "approveAction": "Approva",
     "blockAction": "Blocca",
+    "kioskPinTitle": "PIN chiosco",
+    "kioskPinHint": "Imposta o reimposta il PIN di identificazione chiosco di questo dipendente.",
+    "kioskPinLabel": "Nuovo PIN (4-6 cifre)",
+    "kioskPinAction": "Imposta PIN",
+    "kioskPinError": "Impossibile impostare il PIN di questo dipendente.",
+    "kioskPinSuccess": "PIN aggiornato.",
     "attendance": {
       "title": "Presenza (per conto di)",
       "hint": "Timbra l'entrata o l'uscita di questo dipendente quando non può farlo da solo. Questo viene registrato come un'azione amministrativa distinta, mai unita alla sua cronologia di presenza.",

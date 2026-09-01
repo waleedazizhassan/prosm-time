@@ -1,0 +1,17 @@
+{
+  "title": "Kiosk-Modus",
+  "subtitle": "Wählen Sie sich aus, geben Sie Ihre PIN ein und stempeln Sie ein oder aus.",
+  "loadError": "Dieser Kiosk-Bildschirm konnte nicht geladen werden.",
+  "selectYourself": "Wählen Sie sich aus",
+  "noRoster": "Diesem Standort sind noch keine Mitarbeiter zugewiesen.",
+  "pinPlaceholder": "PIN",
+  "evidenceLabel": "Fotobeleg",
+  "evidenceRequiredHint": "Dieser Standort erfordert ein Foto für diese Aktion.",
+  "cancelAction": "Abbrechen",
+  "clockInAction": "Einstempeln",
+  "clockOutAction": "Ausstempeln",
+  "clockInSuccess": "{{name}} wurde eingestempelt.",
+  "clockOutSuccess": "{{name}} wurde ausgestempelt.",
+  "backToRosterAction": "Zurück zur Liste",
+  "actionError": "Diese Aktion konnte nicht abgeschlossen werden."
+}

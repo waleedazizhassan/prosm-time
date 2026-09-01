@@ -57,6 +57,12 @@
     "noDevices": "Aucun appareil associé pour le moment.",
     "approveAction": "Approuver",
     "blockAction": "Bloquer",
+    "kioskPinTitle": "Code PIN kiosque",
+    "kioskPinHint": "Définir ou réinitialiser le code PIN d'identification kiosque de cet employé.",
+    "kioskPinLabel": "Nouveau code PIN (4 à 6 chiffres)",
+    "kioskPinAction": "Définir le code PIN",
+    "kioskPinError": "Impossible de définir le code PIN de cet employé.",
+    "kioskPinSuccess": "Code PIN mis à jour.",
     "attendance": {
       "title": "Présence (au nom de)",
       "hint": "Pointez l'arrivée ou le départ de cet employé lorsqu'il ne peut pas le faire lui-même. Ceci est enregistré comme une action administrative distincte, jamais fusionnée avec son propre historique de présence.",

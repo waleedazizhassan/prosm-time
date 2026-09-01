@@ -1,0 +1,17 @@
+{
+  "title": "Modalità chiosco",
+  "subtitle": "Selezionati, inserisci il tuo PIN, quindi timbra entrata o uscita.",
+  "loadError": "Impossibile caricare questa schermata chiosco.",
+  "selectYourself": "Selezionati",
+  "noRoster": "Nessun dipendente è ancora assegnato a questa sede.",
+  "pinPlaceholder": "PIN",
+  "evidenceLabel": "Prova fotografica",
+  "evidenceRequiredHint": "Questa sede richiede una foto per questa azione.",
+  "cancelAction": "Annulla",
+  "clockInAction": "Timbra entrata",
+  "clockOutAction": "Timbra uscita",
+  "clockInSuccess": "{{name}} ha timbrato l'entrata.",
+  "clockOutSuccess": "{{name}} ha timbrato l'uscita.",
+  "backToRosterAction": "Torna all'elenco",
+  "actionError": "Impossibile completare questa azione."
+}

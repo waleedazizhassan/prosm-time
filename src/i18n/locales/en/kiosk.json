@@ -1,0 +1,17 @@
+{
+  "title": "Kiosk Mode",
+  "subtitle": "Select yourself, enter your PIN, then Clock In or Clock Out.",
+  "loadError": "Unable to load this kiosk screen.",
+  "selectYourself": "Select yourself",
+  "noRoster": "No employees are assigned to this site yet.",
+  "pinPlaceholder": "PIN",
+  "evidenceLabel": "Photo evidence",
+  "evidenceRequiredHint": "This site requires a photo for this action.",
+  "cancelAction": "Cancel",
+  "clockInAction": "Clock In",
+  "clockOutAction": "Clock Out",
+  "clockInSuccess": "{{name}} clocked in.",
+  "clockOutSuccess": "{{name}} clocked out.",
+  "backToRosterAction": "Back to roster",
+  "actionError": "Unable to complete this action."
+}

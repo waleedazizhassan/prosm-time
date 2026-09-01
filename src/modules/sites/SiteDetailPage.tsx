@@ -132,7 +132,16 @@ export default function SiteDetailPage() {
     <PageShell
       title={site.name}
       subtitle={site.displayAddress ?? undefined}
-      actions={canManageSites ? <Button onClick={() => setEditOpen(true)}>{t("detail.editAction")}</Button> : undefined}
+      actions={
+        <>
+          {site.kioskMode !== "personal_device_only" ? (
+            <Link to={`/kiosk/${site.id}`}>
+              <Button variant="ghost">{t("detail.launchKioskAction")}</Button>
+            </Link>
+          ) : null}
+          {canManageSites ? <Button onClick={() => setEditOpen(true)}>{t("detail.editAction")}</Button> : null}
+        </>
+      }
     >
       <Link to="/sites" style={{ color: "var(--text-link)", fontSize: "var(--font-sm)" }}>
         {t("detail.backToList")}
