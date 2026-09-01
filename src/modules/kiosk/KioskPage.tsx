@@ -8,7 +8,7 @@ import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 
 import PageShell from "../../components/common/PageShell";
 import Button from "../../components/common/Button";
-import EvidenceCaptureField from "../../components/common/EvidenceCaptureField";
+import CameraCaptureModal from "../../components/common/CameraCaptureModal";
 import LoadingState from "../../components/common/LoadingState";
 import EmptyState from "../../components/common/EmptyState";
 import styles from "./KioskPage.module.css";
@@ -18,11 +18,14 @@ type Screen = "roster" | "pin" | "success";
 const AUTO_RETURN_MS = 4000;
 
 // PROSM Time WP-18/§13.1 - "Kiosk Mode." Locked-down shared-device
-// screen: pick yourself from the roster, enter your own PIN, capture
-// evidence if the site requires it, Clock In/Out. Identity is proven
-// by the PIN alone (see the WP-18 migration's own header comment) -
-// this screen never assumes the operating browser session belongs to
-// the employee being clocked in.
+// screen: pick yourself from the roster, enter your own PIN, tap
+// Clock In/Out. Identity is proven by the PIN alone (see the WP-18
+// migration's own header comment) - this screen never assumes the
+// operating browser session belongs to the employee being clocked in.
+// § final visual consistency pass, correction: Clock In/Out is the
+// single primary action - when the site requires evidence, tapping it
+// opens the camera automatically as part of that one tap rather than
+// gating the buttons behind a separate always-visible Camera control.
 export default function KioskPage() {
   const { t } = useTranslation("kiosk");
   const { siteId } = useParams<{ siteId: string }>();
@@ -35,7 +38,8 @@ export default function KioskPage() {
   const [screen, setScreen] = useState<Screen>("roster");
   const [selectedEmployee, setSelectedEmployee] = useState<KioskRosterEntry | null>(null);
   const [pin, setPin] = useState("");
-  const [evidenceFile, setEvidenceFile] = useState<File | null>(null);
+  const [pendingAction, setPendingAction] = useState<"in" | "out" | null>(null);
+  const [cameraOpen, setCameraOpen] = useState(false);
   const [submitting, setSubmitting] = useState<"in" | "out" | null>(null);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -75,7 +79,8 @@ export default function KioskPage() {
     setScreen("roster");
     setSelectedEmployee(null);
     setPin("");
-    setEvidenceFile(null);
+    setPendingAction(null);
+    setCameraOpen(false);
     setError("");
     setSuccessMessage("");
   }, []);
@@ -83,13 +88,12 @@ export default function KioskPage() {
   const handleSelectEmployee = (employee: KioskRosterEntry) => {
     setSelectedEmployee(employee);
     setPin("");
-    setEvidenceFile(null);
     setError("");
     setScreen("pin");
   };
 
-  const handleAction = async (action: "in" | "out") => {
-    if (!siteId || !selectedEmployee || pin.length < 4) return;
+  const performAction = async (action: "in" | "out", evidenceFile: File | null) => {
+    if (!siteId || !selectedEmployee) return;
     setSubmitting(action);
     setError("");
 
@@ -109,6 +113,28 @@ export default function KioskPage() {
     setSuccessMessage(action === "in" ? t("clockInSuccess", { name: selectedEmployee.fullName }) : t("clockOutSuccess", { name: selectedEmployee.fullName }));
     setScreen("success");
     autoReturnRef.current = setTimeout(resetToRoster, AUTO_RETURN_MS);
+  };
+
+  const handleActionTap = (action: "in" | "out") => {
+    if (!site || !selectedEmployee || pin.length < 4) return;
+    if (site.cameraRequired) {
+      setPendingAction(action);
+      setCameraOpen(true);
+      return;
+    }
+    performAction(action, null);
+  };
+
+  const handleCameraCapture = (file: File) => {
+    setCameraOpen(false);
+    const action = pendingAction;
+    setPendingAction(null);
+    if (action) performAction(action, file);
+  };
+
+  const handleCameraClose = () => {
+    setCameraOpen(false);
+    setPendingAction(null);
   };
 
   if (loading) {
@@ -161,19 +187,21 @@ export default function KioskPage() {
               className={styles.pinInput}
               disabled={Boolean(submitting)}
             />
-            {site.cameraRequired ? <EvidenceCaptureField label={t("evidenceLabel")} file={evidenceFile} onChange={setEvidenceFile} disabled={Boolean(submitting)} helperText={t("evidenceRequiredHint")} /> : null}
+            {site.cameraRequired ? <p style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)", margin: 0 }}>{t("evidenceRequiredHint")}</p> : null}
             <div className={styles.actionRow}>
               <Button variant="ghost" size="md" fullWidth onClick={resetToRoster} disabled={Boolean(submitting)}>
                 {t("cancelAction")}
               </Button>
-              <Button size="md" fullWidth onClick={() => handleAction("in")} loading={submitting === "in"} disabled={pin.length < 4 || Boolean(submitting) || (site.cameraRequired && !evidenceFile)}>
+              <Button size="md" fullWidth onClick={() => handleActionTap("in")} loading={submitting === "in"} disabled={pin.length < 4 || Boolean(submitting)}>
                 {t("clockInAction")}
               </Button>
-              <Button size="md" fullWidth onClick={() => handleAction("out")} loading={submitting === "out"} disabled={pin.length < 4 || Boolean(submitting) || (site.cameraRequired && !evidenceFile)}>
+              <Button size="md" fullWidth onClick={() => handleActionTap("out")} loading={submitting === "out"} disabled={pin.length < 4 || Boolean(submitting)}>
                 {t("clockOutAction")}
               </Button>
             </div>
           </div>
+
+          <CameraCaptureModal isOpen={cameraOpen} onClose={handleCameraClose} onCapture={handleCameraCapture} />
         </div>
       ) : null}
 

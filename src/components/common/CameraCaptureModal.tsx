@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { Camera, RefreshCw, X } from "lucide-react";
+import { Camera, RefreshCw, Upload, X } from "lucide-react";
 
 import Modal from "./Modal";
 import Button from "./Button";
@@ -12,24 +12,30 @@ interface CameraCaptureModalProps {
   onCapture: (file: File) => void;
 }
 
-// PROSM Time - mirrors PROSM Platform's own CameraCaptureModal exactly
-// (§ final visual consistency pass, user-directed: "open the device/
-// browser camera directly... do not present a generic file-upload
-// picker as the primary flow"). Real flow: User Action -> Camera
-// Permission -> Camera Opens -> User Captures -> Preview -> User
-// Confirms -> File handed to the caller. The camera never opens until
-// this modal is explicitly opened, and a captured frame is never
-// handed back until the user's own explicit "Use Photo" click -
-// onCapture fires exactly once, only from that button. A captured
-// frame becomes an ordinary File (canvas.toBlob), so it re-enters the
-// exact same EvidenceRepository.uploadEvidence() pipeline an uploaded
-// photo already used - no separate architecture for camera capture,
-// and the private-storage/RLS/retention/audit backend behind it (WP-08)
-// is entirely unchanged.
+// PROSM Time - mirrors PROSM Platform's own CameraCaptureModal (§ final
+// visual consistency pass, correction: "Clock In / Clock Out must be
+// the single primary attendance action... Camera is part of the
+// attendance flow, not a standalone feature/button"). This modal is
+// never opened by its own dedicated button anymore - the caller
+// (ClockInOutCard / KioskPage) opens it automatically the instant the
+// employee taps Clock In/Out on a site that requires evidence, as one
+// continuous action: Clock In/Out tap -> Camera Opens -> Capture ->
+// Preview -> Use Photo -> the attendance action completes immediately
+// with that file. onCapture fires exactly once, only from "Use Photo"
+// (or the fallback file input below). A captured frame becomes an
+// ordinary File (canvas.toBlob), so it re-enters the exact same
+// EvidenceRepository.uploadEvidence() pipeline an uploaded photo
+// already used - no separate architecture for camera capture, and the
+// private-storage/RLS/retention/audit backend behind it (WP-08) is
+// entirely unchanged. A real file-picker fallback lives here too (not
+// a separate always-visible button) - reachable only once getUserMedia
+// has actually failed, so evidence capture is never a hard dead end
+// even without a standalone Camera control anywhere in the UI.
 export default function CameraCaptureModal({ isOpen, onClose, onCapture }: CameraCaptureModalProps) {
   const { t } = useTranslation("camera");
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [capturedDataUrl, setCapturedDataUrl] = useState<string | null>(null);
   const [error, setError] = useState("");
 
@@ -105,6 +111,17 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
     onClose();
   };
 
+  // Real fallback for the "never a hard dead end" promise (see file
+  // header) - reachable only once getUserMedia has already failed
+  // (denied permission, no camera hardware, unsupported browser), so
+  // it never competes with Capture as a second primary path.
+  const handleFileFallback = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    onCapture(file);
+    onClose();
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -121,12 +138,21 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
               {t("usePhoto")}
             </Button>
           </>
+        ) : error ? (
+          <>
+            <Button variant="ghost" onClick={onClose}>
+              {t("cancel")}
+            </Button>
+            <Button variant="primary" onClick={() => fileInputRef.current?.click()}>
+              <Upload size={14} /> {t("chooseFileAction")}
+            </Button>
+          </>
         ) : (
           <>
             <Button variant="ghost" onClick={onClose}>
               {t("cancel")}
             </Button>
-            <Button variant="primary" onClick={handleCapture} disabled={Boolean(error)}>
+            <Button variant="primary" onClick={handleCapture}>
               <Camera size={14} /> {t("capture")}
             </Button>
           </>
@@ -146,6 +172,16 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
           <video ref={videoRef} autoPlay playsInline muted className={styles.video} />
         )}
       </div>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        onChange={handleFileFallback}
+        className={styles.hiddenInput}
+        tabIndex={-1}
+        aria-hidden="true"
+      />
     </Modal>
   );
 }

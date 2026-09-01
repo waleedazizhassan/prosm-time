@@ -27,6 +27,11 @@
   },
   "attendance": {
     "title": "Anwesenheit",
+    "status": {
+      "clockedIn": "Eingestempelt",
+      "onBreak": "In der Pause",
+      "notClockedIn": "Nicht eingestempelt"
+    },
     "noAssignedSites": "Sie sind noch keinem Standort zugewiesen. Wenden Sie sich an Ihren Administrator.",
     "siteLabel": "Standort",
     "projectLabel": "Projekt (optional)",
@@ -36,8 +41,6 @@
     "clockedInSince": "Eingestempelt seit {{time}}",
     "clockInError": "Einstempeln nicht möglich.",
     "clockOutError": "Ausstempeln nicht möglich.",
-    "evidenceLabel": "Fotobeleg",
-    "evidenceRequiredHint": "Dieser Standort erfordert ein Foto für diese Aktion.",
     "evidenceUploadError": "Erfolgreich ein-/ausgestempelt, aber das Foto konnte nicht hochgeladen werden.",
     "presenceActive": "Die Anwesenheitsüberwachung ist für diese Schicht aktiv.",
     "sosAction": "SOS / Notfall",

@@ -27,6 +27,11 @@
   },
   "attendance": {
     "title": "الحضور",
+    "status": {
+      "clockedIn": "تم تسجيل الحضور",
+      "onBreak": "في استراحة",
+      "notClockedIn": "لم يُسجَّل الحضور"
+    },
     "noAssignedSites": "لم يتم تعيينك في أي موقع بعد. تواصل مع المسؤول لديك.",
     "siteLabel": "الموقع",
     "projectLabel": "المشروع (اختياري)",
@@ -36,8 +41,6 @@
     "clockedInSince": "مسجل الحضور منذ {{time}}",
     "clockInError": "تعذر تسجيل الحضور.",
     "clockOutError": "تعذر تسجيل الانصراف.",
-    "evidenceLabel": "دليل مصور",
-    "evidenceRequiredHint": "يتطلب هذا الموقع صورة لهذا الإجراء.",
     "evidenceUploadError": "تم تسجيل الحضور/الانصراف بنجاح، لكن تعذر رفع الصورة.",
     "presenceActive": "مراقبة الحضور مفعّلة لهذه الوردية.",
     "sosAction": "استغاثة / طوارئ",

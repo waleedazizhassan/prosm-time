@@ -24,6 +24,10 @@ const STATUS_TONE: Record<string, "success" | "warning" | "danger" | "info" | "n
   REVOKED: "danger",
   expired: "danger",
   EXPIRED: "danger",
+
+  clockedIn: "success",
+  onBreak: "warning",
+  notClockedIn: "neutral",
 };
 
 export default function StatusBadge({ status, children }: { status: string; children: ReactNode }) {

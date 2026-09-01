@@ -27,6 +27,11 @@
   },
   "attendance": {
     "title": "Présence",
+    "status": {
+      "clockedIn": "Arrivée pointée",
+      "onBreak": "En pause",
+      "notClockedIn": "Arrivée non pointée"
+    },
     "noAssignedSites": "Vous n'êtes assigné à aucun site pour le moment. Contactez votre administrateur.",
     "siteLabel": "Site",
     "projectLabel": "Projet (facultatif)",
@@ -36,8 +41,6 @@
     "clockedInSince": "Présence pointée depuis {{time}}",
     "clockInError": "Impossible de pointer l'arrivée.",
     "clockOutError": "Impossible de pointer le départ.",
-    "evidenceLabel": "Preuve photo",
-    "evidenceRequiredHint": "Ce site exige une photo pour cette action.",
     "evidenceUploadError": "Pointage réussi, mais la photo n'a pas pu être téléchargée.",
     "presenceActive": "Le suivi de présence est actif pour ce quart de travail.",
     "sosAction": "SOS / Urgence",

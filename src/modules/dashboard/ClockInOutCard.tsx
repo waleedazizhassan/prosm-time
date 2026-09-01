@@ -16,9 +16,20 @@ import { formatTimeOnly } from "../../core/utils/formatDate";
 import Card from "../../components/common/Card";
 import Select from "../../components/common/Select";
 import Button from "../../components/common/Button";
-import EvidenceCaptureField from "../../components/common/EvidenceCaptureField";
+import StatusBadge from "../../components/common/StatusBadge";
+import CameraCaptureModal from "../../components/common/CameraCaptureModal";
 
 const PRESENCE_SAMPLE_INTERVAL_MS = 5 * 60 * 1000;
+
+function formatElapsed(startIso: string, nowMs: number): string {
+  const startMs = new Date(startIso).getTime();
+  const totalSeconds = Math.max(0, Math.floor((nowMs - startMs) / 1000));
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  const pad = (value: number) => String(value).padStart(2, "0");
+  return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+}
 
 // PROSM Time WP-06/WP-08/WP-10/§17/§16/§18/§37 - real Clock In/Out on
 // the Dashboard (Employee Mobile Home is a later, dedicated mobile-UX
@@ -35,6 +46,16 @@ const PRESENCE_SAMPLE_INTERVAL_MS = 5 * 60 * 1000;
 // service worker, matching §15's own "subject to platform/browser
 // capabilities" caveat) and surfaces the SOS/Emergency action, which
 // is only ever reachable during an active presence session (§18).
+//
+// § final visual consistency pass, correction (Jibble mobile reference
+// studied for information hierarchy only, not copied): Clock In/Out is
+// the single primary action - tapping it is the one thing an employee
+// does, and it orchestrates location + camera internally rather than
+// requiring a separate Camera button pressed first. A status header
+// (state pill + a live elapsed-time readout while clocked in) replaces
+// a bare title, matching the "clear primary action + useful status
+// information" hierarchy the reference material demonstrated, rendered
+// entirely in PROSM's own StatusBadge/Button/token language.
 export default function ClockInOutCard() {
   const { t, i18n } = useTranslation("dashboard");
   const { profile } = useAuth();
@@ -46,7 +67,7 @@ export default function ClockInOutCard() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [siteId, setSiteId] = useState("");
   const [projectId, setProjectId] = useState("");
-  const [evidenceFile, setEvidenceFile] = useState<File | null>(null);
+  const [cameraFor, setCameraFor] = useState<"clockIn" | "clockOut" | null>(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -90,7 +111,6 @@ export default function ClockInOutCard() {
       setActiveBreakId(null);
     }
 
-    setEvidenceFile(null);
     setSosSent(false);
     setLoading(false);
   }, [profile]);
@@ -175,15 +195,35 @@ export default function ClockInOutCard() {
     return () => clearInterval(interval);
   }, [presenceSession]);
 
+  // Live elapsed-time readout while clocked in (§ final visual
+  // consistency pass, correction - "useful status information" from
+  // the Jibble reference's own Time Clock screen, reinvented here as a
+  // ticking status-header field rather than that screen's map/pill
+  // treatment). Purely a display tick - never read by any submit path.
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    if (!session) return undefined;
+    const interval = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(interval);
+  }, [session]);
+
   if (!profile || loading) return null;
 
   const selectedSite = sites.find((site) => site.id === siteId) ?? null;
   const clockInCameraRequired = selectedSite?.cameraRequired ?? false;
   const clockOutCameraRequired = currentSite?.cameraRequired ?? false;
 
-  const handleClockIn = async () => {
+  // § final visual consistency pass, correction - "Clock In / Clock
+  // Out must be the single primary attendance action... Camera is part
+  // of the attendance flow, not a standalone feature/button." Evidence
+  // is now a parameter passed in at the moment of submission, never a
+  // pre-selected field the button waits on: handleClockInTap below
+  // opens the camera itself (when the site requires it) and this
+  // function only ever runs once a file already exists or none is
+  // needed. Location capture and the offline-queue path are otherwise
+  // byte-for-byte what WP-06/WP-15/§25 already established.
+  const performClockIn = async (evidenceFile: File | null) => {
     if (!siteId) return;
-    if (clockInCameraRequired && !evidenceFile) return;
     setSubmitting(true);
     setError("");
     setEvidenceWarning("");
@@ -205,14 +245,14 @@ export default function ClockInOutCard() {
     // than surfaced as an error; the client-captured time/coordinates/
     // evidence captured above travel with the queued item unchanged.
     if (typeof navigator !== "undefined" && navigator.onLine === false) {
-      await queueOffline("clock_in", { siteId, projectId: projectId || null, latitude, longitude, accuracyMeters });
+      await queueOffline("clock_in", { siteId, projectId: projectId || null, latitude, longitude, accuracyMeters }, evidenceFile);
       return;
     }
 
     const result = await AttendanceRepository.clockIn({ siteId, projectId: projectId || null, latitude, longitude, accuracyMeters });
 
     if (result.networkError) {
-      await queueOffline("clock_in", { siteId, projectId: projectId || null, latitude, longitude, accuracyMeters });
+      await queueOffline("clock_in", { siteId, projectId: projectId || null, latitude, longitude, accuracyMeters }, evidenceFile);
       return;
     }
 
@@ -233,7 +273,11 @@ export default function ClockInOutCard() {
     load();
   };
 
-  const queueOffline = async (type: "clock_in" | "clock_out", location: { siteId?: string; projectId?: string | null; latitude: number | null; longitude: number | null; accuracyMeters: number | null }) => {
+  const queueOffline = async (
+    type: "clock_in" | "clock_out",
+    location: { siteId?: string; projectId?: string | null; latitude: number | null; longitude: number | null; accuracyMeters: number | null },
+    evidenceFile: File | null,
+  ) => {
     if (!profile) {
       setSubmitting(false);
       return;
@@ -248,7 +292,7 @@ export default function ClockInOutCard() {
         longitude: location.longitude,
         accuracyMeters: location.accuracyMeters,
         clientReportedAt: new Date().toISOString(),
-        evidenceFile: evidenceFile ?? null,
+        evidenceFile,
       });
     } catch (queueError) {
       setError(queueError instanceof Error ? queueError.message : t("attendance.offlineQueueError"));
@@ -256,8 +300,7 @@ export default function ClockInOutCard() {
     setSubmitting(false);
   };
 
-  const handleClockOut = async () => {
-    if (clockOutCameraRequired && !evidenceFile) return;
+  const performClockOut = async (evidenceFile: File | null) => {
     setSubmitting(true);
     setError("");
     setEvidenceWarning("");
@@ -271,18 +314,18 @@ export default function ClockInOutCard() {
       longitude = position.longitude;
       accuracyMeters = position.accuracyMeters;
     } catch {
-      // Best-effort only - see handleClockIn.
+      // Best-effort only - see performClockIn.
     }
 
     if (typeof navigator !== "undefined" && navigator.onLine === false) {
-      await queueOffline("clock_out", { latitude, longitude, accuracyMeters });
+      await queueOffline("clock_out", { latitude, longitude, accuracyMeters }, evidenceFile);
       return;
     }
 
     const result = await AttendanceRepository.clockOut({ latitude, longitude, accuracyMeters });
 
     if (result.networkError) {
-      await queueOffline("clock_out", { latitude, longitude, accuracyMeters });
+      await queueOffline("clock_out", { latitude, longitude, accuracyMeters }, evidenceFile);
       return;
     }
 
@@ -301,6 +344,34 @@ export default function ClockInOutCard() {
 
     setSubmitting(false);
     load();
+  };
+
+  const handleClockInTap = () => {
+    if (!siteId) return;
+    if (clockInCameraRequired) {
+      setCameraFor("clockIn");
+      return;
+    }
+    performClockIn(null);
+  };
+
+  const handleClockOutTap = () => {
+    if (clockOutCameraRequired) {
+      setCameraFor("clockOut");
+      return;
+    }
+    performClockOut(null);
+  };
+
+  const handleCameraCapture = (file: File) => {
+    const pending = cameraFor;
+    setCameraFor(null);
+    if (pending === "clockIn") performClockIn(file);
+    else if (pending === "clockOut") performClockOut(file);
+  };
+
+  const handleCameraClose = () => {
+    setCameraFor(null);
   };
 
   const handleRetryOfflineSync = async () => {
@@ -371,16 +442,34 @@ export default function ClockInOutCard() {
     }
   };
 
+  const statusKey = activeBreakId ? "onBreak" : session ? "clockedIn" : "notClockedIn";
+
   return (
-    <Card title={t("attendance.title")}>
-      {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
-      {evidenceWarning ? <p style={{ color: "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>{evidenceWarning}</p> : null}
+    <Card>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--space-2)" }}>
+        <span style={{ fontSize: "var(--font-xs)", fontWeight: "var(--font-weight-bold)", letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--text-secondary)" }}>
+          {t("attendance.title")}
+        </span>
+        <StatusBadge status={statusKey}>{t(`attendance.status.${statusKey}`)}</StatusBadge>
+      </div>
+
+      {session ? (
+        <div style={{ margin: "var(--space-3) 0" }}>
+          <div style={{ fontSize: "var(--font-3xl)", fontWeight: "var(--font-weight-bold)", color: "var(--text-primary)", fontVariantNumeric: "tabular-nums", lineHeight: 1.1 }}>
+            {formatElapsed(session.clockInAt, now)}
+          </div>
+          <p style={{ margin: "var(--space-1) 0 0", color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>
+            {t("attendance.clockedInSince", { time: formatTimeOnly(session.clockInAt, i18n.language) })}
+          </p>
+        </div>
+      ) : null}
 
       <div
         style={{
           display: "flex",
           alignItems: "center",
           gap: "var(--space-2)",
+          margin: "var(--space-3) 0",
           padding: "var(--space-2) var(--space-3)",
           borderRadius: "var(--radius-md)",
           background: "var(--surface-hover)",
@@ -401,6 +490,10 @@ export default function ClockInOutCard() {
           <span>{t("attendance.locationUnavailable")}</span>
         )}
       </div>
+
+      {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
+      {evidenceWarning ? <p style={{ color: "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>{evidenceWarning}</p> : null}
+      {breakWarning ? <p style={{ color: "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>{breakWarning}</p> : null}
 
       {pendingOfflineItem ? (
         <div style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--surface-hover)" }}>
@@ -427,15 +520,14 @@ export default function ClockInOutCard() {
         </div>
       ) : session ? (
         <>
-          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("attendance.clockedInSince", { time: formatTimeOnly(session.clockInAt, i18n.language) })}</p>
-          {breakWarning ? <p style={{ color: "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>{breakWarning}</p> : null}
-          {clockOutCameraRequired ? <EvidenceCaptureField label={t("attendance.evidenceLabel")} file={evidenceFile} onChange={setEvidenceFile} required disabled={submitting} helperText={t("attendance.evidenceRequiredHint")} /> : null}
-          <Button onClick={handleClockOut} loading={submitting} disabled={clockOutCameraRequired && !evidenceFile}>
-            {t("attendance.clockOutAction")}
-          </Button>
-          <Button variant="ghost" onClick={handleToggleBreak} loading={breakSubmitting} style={{ marginTop: "var(--space-2)" }}>
-            {activeBreakId ? t("attendance.breakEndAction") : t("attendance.breakStartAction")}
-          </Button>
+          <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
+            <Button variant="danger" fullWidth onClick={handleClockOutTap} loading={submitting}>
+              {t("attendance.clockOutAction")}
+            </Button>
+            <Button variant="ghost" fullWidth onClick={handleToggleBreak} loading={breakSubmitting}>
+              {activeBreakId ? t("attendance.breakEndAction") : t("attendance.breakStartAction")}
+            </Button>
+          </div>
 
           {presenceSession ? (
             <div style={{ marginTop: "var(--space-4)", paddingTop: "var(--space-4)", borderTop: "1px solid var(--border-light)" }}>
@@ -463,12 +555,13 @@ export default function ClockInOutCard() {
             disabled={submitting || projects.length === 0}
             options={[{ value: "", label: t("attendance.noProject") }, ...projects.map((project) => ({ value: project.id, label: project.name }))]}
           />
-          {clockInCameraRequired ? <EvidenceCaptureField label={t("attendance.evidenceLabel")} file={evidenceFile} onChange={setEvidenceFile} required disabled={submitting} helperText={t("attendance.evidenceRequiredHint")} /> : null}
-          <Button onClick={handleClockIn} loading={submitting} disabled={!siteId || (clockInCameraRequired && !evidenceFile)}>
+          <Button fullWidth onClick={handleClockInTap} loading={submitting} disabled={!siteId}>
             {t("attendance.clockInAction")}
           </Button>
         </>
       )}
+
+      <CameraCaptureModal isOpen={cameraFor !== null} onClose={handleCameraClose} onCapture={handleCameraCapture} />
     </Card>
   );
 }

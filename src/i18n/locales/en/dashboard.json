@@ -27,6 +27,11 @@
   },
   "attendance": {
     "title": "Attendance",
+    "status": {
+      "clockedIn": "Clocked In",
+      "onBreak": "On Break",
+      "notClockedIn": "Not Clocked In"
+    },
     "noAssignedSites": "You are not assigned to any site yet. Contact your administrator.",
     "siteLabel": "Site",
     "projectLabel": "Project (optional)",
@@ -36,8 +41,6 @@
     "clockedInSince": "Clocked in since {{time}}",
     "clockInError": "Unable to clock in.",
     "clockOutError": "Unable to clock out.",
-    "evidenceLabel": "Photo evidence",
-    "evidenceRequiredHint": "This site requires a photo for this action.",
     "evidenceUploadError": "Clocked in/out successfully, but the photo could not be uploaded.",
     "presenceActive": "Presence monitoring is active for this shift.",
     "sosAction": "SOS / Emergency",
