@@ -124,6 +124,37 @@ class EmployeeRepository {
       return createError(error instanceof Error ? error.message : "Employee service unavailable.");
     }
   }
+
+  // WP-22/§24 - "Data subject rights: admin can export or delete an
+  // individual employee's personal attendance data on request,
+  // subject to legal/retention holds."
+  async exportEmployeeData(userId: string): Promise<ServiceResult<Record<string, unknown>>> {
+    try {
+      const { data, error } = await this.client.functions.invoke("export-employee-data", { body: { userId } });
+      if (error) {
+        const errorBody = await error.context?.json?.().catch(() => null);
+        return createError(errorBody?.error?.message ?? error.message ?? "Unable to export this employee's data.");
+      }
+      if (data?.success === false) return createError(data?.error?.message ?? "Unable to export this employee's data.");
+      return createSuccess(data.data as Record<string, unknown>);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Employee service unavailable.");
+    }
+  }
+
+  async deleteEmployeeData(userId: string, reason: string): Promise<ServiceResult> {
+    try {
+      const { data, error } = await this.client.functions.invoke("delete-employee-data", { body: { userId, reason } });
+      if (error) {
+        const errorBody = await error.context?.json?.().catch(() => null);
+        return createError(errorBody?.error?.message ?? error.message ?? "Unable to delete this employee's data.");
+      }
+      if (data?.success === false) return createError(data?.error?.message ?? "Unable to delete this employee's data.");
+      return createSuccess();
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Employee service unavailable.");
+    }
+  }
 }
 
 export default new EmployeeRepository();

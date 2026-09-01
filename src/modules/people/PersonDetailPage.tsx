@@ -63,6 +63,13 @@ export default function PersonDetailPage() {
   const [kioskPinError, setKioskPinError] = useState("");
   const [kioskPinSuccess, setKioskPinSuccess] = useState(false);
 
+  const [exportSubmitting, setExportSubmitting] = useState(false);
+  const [exportError, setExportError] = useState("");
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [deleteReason, setDeleteReason] = useState("");
+  const [deleteSubmitting, setDeleteSubmitting] = useState(false);
+  const [deleteError, setDeleteError] = useState("");
+
   const canManagePermissions = hasPermission("permissions.assign");
   const canManageDevices = hasPermission("employees.manage_accounts");
 
@@ -156,6 +163,42 @@ export default function PersonDetailPage() {
     }
     setKioskPin("");
     setKioskPinSuccess(true);
+  };
+
+  const handleExportData = async () => {
+    if (!member) return;
+    setExportSubmitting(true);
+    setExportError("");
+    const result = await EmployeeRepository.exportEmployeeData(member.id);
+    setExportSubmitting(false);
+    if (!result.success || !result.data) {
+      setExportError(result.message ?? t("detail.exportError"));
+      return;
+    }
+    const blob = new Blob([JSON.stringify(result.data, null, 2)], { type: "application/json;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `employee-data-${member.fullName.replace(/\s+/g, "-")}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  const handleDeleteData = async () => {
+    if (!member || !deleteReason.trim()) return;
+    setDeleteSubmitting(true);
+    setDeleteError("");
+    const result = await EmployeeRepository.deleteEmployeeData(member.id, deleteReason.trim());
+    setDeleteSubmitting(false);
+    if (!result.success) {
+      setDeleteError(result.message ?? t("detail.deleteDataError"));
+      return;
+    }
+    setDeleteModalOpen(false);
+    setDeleteReason("");
+    await load();
   };
 
   if (loading) {
@@ -263,7 +306,37 @@ export default function PersonDetailPage() {
         </Card>
       ) : null}
 
+      {canManageDevices ? (
+        <Card title={t("detail.dataRightsTitle")}>
+          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.dataRightsHint")}</p>
+          {exportError ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{exportError}</p> : null}
+          <div style={{ display: "flex", gap: "var(--space-2)" }}>
+            <Button variant="ghost" onClick={handleExportData} loading={exportSubmitting}>
+              {t("detail.exportDataAction")}
+            </Button>
+            <Button variant="danger" onClick={() => setDeleteModalOpen(true)}>
+              {t("detail.deleteDataAction")}
+            </Button>
+          </div>
+        </Card>
+      ) : null}
+
       <AdminAttendanceCard subjectUserId={member.id} />
+
+      <Modal
+        isOpen={deleteModalOpen}
+        onClose={() => setDeleteModalOpen(false)}
+        title={t("detail.deleteDataAction")}
+        footer={
+          <Button variant="danger" onClick={handleDeleteData} loading={deleteSubmitting} disabled={!deleteReason.trim()}>
+            {t("detail.confirmDeleteAction")}
+          </Button>
+        }
+      >
+        <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("detail.deleteDataWarning")}</p>
+        {deleteError ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{deleteError}</p> : null}
+        <Textarea label={t("detail.deleteReasonLabel")} name="deleteReason" value={deleteReason} onChange={(event) => setDeleteReason(event.target.value)} disabled={deleteSubmitting} required />
+      </Modal>
 
       <Modal
         isOpen={Boolean(pendingChange)}

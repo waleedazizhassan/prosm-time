@@ -132,3 +132,21 @@ entrypoint = "./functions/set-kiosk-pin/index.ts"
 enabled = true
 verify_jwt = true
 entrypoint = "./functions/admin-set-kiosk-pin/index.ts"
+
+[functions.export-employee-data]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/export-employee-data/index.ts"
+
+[functions.delete-employee-data]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/delete-employee-data/index.ts"
+
+# purge-location-samples mirrors purge-camera-evidence's own posture -
+# a maintenance endpoint meant to be invoked by a future scheduler,
+# never by an end user.
+[functions.purge-location-samples]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/purge-location-samples/index.ts"
