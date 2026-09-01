@@ -1,12 +1,29 @@
+/* § live UX review, user-directed - "use the reference images in
+   anything, even a watermark distributed across the pages." The images
+   themselves stay reference-only (§33: never embed literal supplied
+   marketing photography into the real product UI - the same principle
+   already applied when SplashScreen's own navy/glow treatment was
+   built from these images rather than the photos themselves). This is
+   that same abstracted identity applied here: a faint, theme-aware
+   ambient glow using the app's own --brand-primary token (never a raw
+   color), so it stays correct in light/dark/system exactly like every
+   other surface - unlike SplashScreen, which deliberately commits to a
+   single fixed dark look, this page keeps the real theme system intact. */
 .page {
+  position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: var(--space-6);
+  overflow: hidden;
+
+  background: radial-gradient(circle at 15% 12%, color-mix(in srgb, var(--brand-primary) 10%, transparent), transparent 45%), radial-gradient(circle at 85% 88%, color-mix(in srgb, var(--brand-primary) 8%, transparent), transparent 50%), var(--surface-app);
 }
 
 .card {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 420px;
 
