@@ -42,7 +42,12 @@
     "presenceActive": "Die Anwesenheitsüberwachung ist für diese Schicht aktiv.",
     "sosAction": "SOS / Notfall",
     "sosSent": "SOS-Alarm erfasst.",
-    "sosError": "Der SOS-Alarm konnte nicht gesendet werden."
+    "sosError": "Der SOS-Alarm konnte nicht gesendet werden.",
+    "breakStartAction": "Pause beginnen",
+    "breakEndAction": "Pause beenden",
+    "breakStartError": "Die Pause konnte nicht gestartet werden.",
+    "breakEndError": "Die Pause konnte nicht beendet werden.",
+    "breakExceeded": "Diese Pause hat die maximal zulässige Dauer überschritten."
   },
   "exceptions": {
     "title": "Ausstehende Ausnahmen",

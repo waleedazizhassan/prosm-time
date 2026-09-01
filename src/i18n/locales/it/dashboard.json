@@ -42,7 +42,12 @@
     "presenceActive": "Il monitoraggio della presenza è attivo per questo turno.",
     "sosAction": "SOS / Emergenza",
     "sosSent": "Allarme SOS registrato.",
-    "sosError": "Impossibile inviare l'allarme SOS."
+    "sosError": "Impossibile inviare l'allarme SOS.",
+    "breakStartAction": "Inizia pausa",
+    "breakEndAction": "Termina pausa",
+    "breakStartError": "Impossibile iniziare la pausa.",
+    "breakEndError": "Impossibile terminare questa pausa.",
+    "breakExceeded": "Questa pausa ha superato la durata massima consentita."
   },
   "exceptions": {
     "title": "Eccezioni in sospeso",

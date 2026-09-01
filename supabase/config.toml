@@ -77,3 +77,13 @@ entrypoint = "./functions/submit-correction-request/index.ts"
 enabled = true
 verify_jwt = true
 entrypoint = "./functions/review-exception/index.ts"
+
+[functions.start-break]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/start-break/index.ts"
+
+[functions.end-break]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/end-break/index.ts"

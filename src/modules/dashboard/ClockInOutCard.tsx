@@ -49,6 +49,9 @@ export default function ClockInOutCard() {
   const [evidenceWarning, setEvidenceWarning] = useState("");
   const [sosSubmitting, setSosSubmitting] = useState(false);
   const [sosSent, setSosSent] = useState(false);
+  const [activeBreakId, setActiveBreakId] = useState<string | null>(null);
+  const [breakSubmitting, setBreakSubmitting] = useState(false);
+  const [breakWarning, setBreakWarning] = useState("");
 
   const presenceSessionRef = useRef<PresenceSession | null>(null);
   presenceSessionRef.current = presenceSession;
@@ -71,8 +74,11 @@ export default function ClockInOutCard() {
     if (activeSession) {
       const siteResult = await SiteRepository.getSite(activeSession.siteId);
       setCurrentSite(siteResult.success ? siteResult.data ?? null : null);
+      const breakResult = await AttendanceRepository.getActiveBreak(activeSession.id);
+      setActiveBreakId(breakResult.success ? breakResult.data?.id ?? null : null);
     } else {
       setCurrentSite(null);
+      setActiveBreakId(null);
     }
 
     setEvidenceFile(null);
@@ -233,6 +239,34 @@ export default function ClockInOutCard() {
     setSosSent(true);
   };
 
+  const handleToggleBreak = async () => {
+    if (!session) return;
+    setBreakSubmitting(true);
+    setError("");
+    setBreakWarning("");
+
+    if (activeBreakId) {
+      const result = await AttendanceRepository.endBreak(activeBreakId);
+      setBreakSubmitting(false);
+      if (!result.success) {
+        setError(result.message ?? t("attendance.breakEndError"));
+        return;
+      }
+      if (result.data?.maxDurationExceeded) {
+        setBreakWarning(t("attendance.breakExceeded"));
+      }
+      setActiveBreakId(null);
+    } else {
+      const result = await AttendanceRepository.startBreak(session.id);
+      setBreakSubmitting(false);
+      if (!result.success || !result.data) {
+        setError(result.message ?? t("attendance.breakStartError"));
+        return;
+      }
+      setActiveBreakId(result.data.breakId);
+    }
+  };
+
   return (
     <Card title={t("attendance.title")}>
       {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
@@ -241,9 +275,13 @@ export default function ClockInOutCard() {
       {session ? (
         <>
           <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("attendance.clockedInSince", { time: new Date(session.clockInAt).toLocaleTimeString() })}</p>
+          {breakWarning ? <p style={{ color: "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>{breakWarning}</p> : null}
           {clockOutCameraRequired ? <EvidenceCaptureField label={t("attendance.evidenceLabel")} file={evidenceFile} onChange={setEvidenceFile} required disabled={submitting} helperText={t("attendance.evidenceRequiredHint")} /> : null}
           <Button onClick={handleClockOut} loading={submitting} disabled={clockOutCameraRequired && !evidenceFile}>
             {t("attendance.clockOutAction")}
+          </Button>
+          <Button variant="ghost" onClick={handleToggleBreak} loading={breakSubmitting} style={{ marginTop: "var(--space-2)" }}>
+            {activeBreakId ? t("attendance.breakEndAction") : t("attendance.breakStartAction")}
           </Button>
 
           {presenceSession ? (

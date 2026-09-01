@@ -210,6 +210,47 @@ class AttendanceRepository {
       return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
     }
   }
+
+  async getActiveBreak(attendanceSessionId: string): Promise<ServiceResult<{ id: string } | null>> {
+    try {
+      const { data, error } = await this.client.from("break_events").select("id").eq("attendance_session_id", attendanceSessionId).eq("status", "active").maybeSingle();
+      if (error) return createError(error.message);
+      return createSuccess(data ? { id: data.id } : null);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
+    }
+  }
+
+  // WP-12/§17.1 - break start/end, real Edge Functions per §35.
+  async startBreak(attendanceSessionId: string): Promise<ServiceResult<{ breakId: string }>> {
+    try {
+      const { data, error } = await this.client.functions.invoke("start-break", {
+        body: { attendanceSessionId, idempotencyKey: crypto.randomUUID() },
+      });
+      if (error) {
+        const errorBody = await error.context?.json?.().catch(() => null);
+        return createError(errorBody?.error?.message ?? error.message ?? "Unable to start a break.");
+      }
+      if (data?.success === false) return createError(data?.error?.message ?? "Unable to start a break.");
+      return createSuccess({ breakId: data.data.breakId });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
+    }
+  }
+
+  async endBreak(breakId: string): Promise<ServiceResult<{ maxDurationExceeded: boolean }>> {
+    try {
+      const { data, error } = await this.client.functions.invoke("end-break", { body: { breakId } });
+      if (error) {
+        const errorBody = await error.context?.json?.().catch(() => null);
+        return createError(errorBody?.error?.message ?? error.message ?? "Unable to end this break.");
+      }
+      if (data?.success === false) return createError(data?.error?.message ?? "Unable to end this break.");
+      return createSuccess({ maxDurationExceeded: Boolean(data.data.maxDurationExceeded) });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
+    }
+  }
 }
 
 export default new AttendanceRepository();

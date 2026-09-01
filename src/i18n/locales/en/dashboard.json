@@ -42,7 +42,12 @@
     "presenceActive": "Presence monitoring is active for this shift.",
     "sosAction": "SOS / Emergency",
     "sosSent": "SOS alert recorded.",
-    "sosError": "Unable to send the SOS alert."
+    "sosError": "Unable to send the SOS alert.",
+    "breakStartAction": "Start break",
+    "breakEndAction": "End break",
+    "breakStartError": "Unable to start a break.",
+    "breakEndError": "Unable to end this break.",
+    "breakExceeded": "This break exceeded the maximum allowed duration."
   },
   "exceptions": {
     "title": "Pending exceptions",

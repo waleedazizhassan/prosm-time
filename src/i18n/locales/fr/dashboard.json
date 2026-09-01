@@ -42,7 +42,12 @@
     "presenceActive": "Le suivi de présence est actif pour ce quart de travail.",
     "sosAction": "SOS / Urgence",
     "sosSent": "Alerte SOS enregistrée.",
-    "sosError": "Impossible d'envoyer l'alerte SOS."
+    "sosError": "Impossible d'envoyer l'alerte SOS.",
+    "breakStartAction": "Commencer la pause",
+    "breakEndAction": "Terminer la pause",
+    "breakStartError": "Impossible de commencer la pause.",
+    "breakEndError": "Impossible de terminer cette pause.",
+    "breakExceeded": "Cette pause a dépassé la durée maximale autorisée."
   },
   "exceptions": {
     "title": "Exceptions en attente",
