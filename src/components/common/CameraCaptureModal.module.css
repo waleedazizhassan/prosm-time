@@ -1,3 +1,8 @@
+/* § visual identity reference pass, user-directed - a subtle emerald
+   scan-frame glow while the live camera feed is active, echoing the
+   "face-based employee identification" cue in the supplied references
+   without adding any new capability - purely a border treatment
+   around the exact same getUserMedia video element/capture flow. */
 .viewport {
   display: flex;
   align-items: center;
@@ -6,6 +11,8 @@
   min-height: 320px;
 
   border-radius: var(--radius-md);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.12), 0 0 24px rgba(52, 211, 153, 0.18);
   overflow: hidden;
 
   background: #000;

@@ -483,7 +483,7 @@ export default function ClockInOutCard() {
           fontSize: "var(--font-xs)",
         }}
       >
-        <MapPin size={14} style={{ flexShrink: 0 }} />
+        <MapPin size={14} style={{ flexShrink: 0, color: locationStatus === "available" ? "var(--brand-primary)" : undefined }} />
         {locationStatus === "detecting" ? (
           <span>{t("attendance.locationDetecting")}</span>
         ) : locationStatus === "available" && currentLocation ? (

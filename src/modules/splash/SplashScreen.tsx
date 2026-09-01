@@ -13,7 +13,7 @@ export default function SplashScreen() {
   return (
     <div className={styles.page}>
       <div className={styles.center}>
-        <BrandMark size={72} />
+        <BrandMark size={72} glow />
         <p className={styles.appName}>{t("appName")}</p>
         <p className={styles.tagline}>{t("splash.tagline")}</p>
       </div>

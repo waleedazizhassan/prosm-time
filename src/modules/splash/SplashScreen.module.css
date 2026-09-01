@@ -1,3 +1,13 @@
+/* § visual identity reference pass, user-directed - "deep navy/dark
+   blue backgrounds... subtle cyan/green glow... premium glass...
+   clean futuristic enterprise aesthetic." This screen (WP-21/§31) is a
+   presentation-only, business-logic-free surface shown briefly while
+   auth state resolves - the one place in the app where committing to
+   a single branded look (independent of the viewer's light/dark/
+   system theme choice, like a native app's own launch screen) doesn't
+   fight the user's own preference anywhere they actually work. Every
+   other screen keeps the real light/dark/system theme system exactly
+   as-is. */
 .page {
   position: relative;
   min-height: 100vh;
@@ -5,12 +15,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 
-  background: var(--surface-app);
+  background:
+    radial-gradient(circle at 50% 38%, rgba(52, 211, 153, 0.16), transparent 55%),
+    radial-gradient(circle at 50% 55%, rgba(59, 130, 246, 0.14), transparent 60%),
+    #0b1220;
   padding: var(--space-6);
 }
 
 .center {
+  position: relative;
+  z-index: 1;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,26 +38,27 @@
   margin: 0;
   font-size: var(--font-xl);
   font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
+  color: #f8fafc;
 }
 
 .tagline {
   margin: 0;
   font-size: var(--font-sm);
-  color: var(--text-secondary);
+  color: rgba(226, 232, 240, 0.72);
 }
 
 .footer {
   position: absolute;
+  z-index: 1;
   bottom: var(--space-6);
 
   margin: 0;
   font-size: var(--font-xs);
-  color: var(--text-secondary);
+  color: rgba(226, 232, 240, 0.6);
 }
 
 .footerLink {
-  color: var(--text-link);
+  color: #34d399;
   font-weight: var(--font-weight-semibold);
   text-decoration: none;
 }
