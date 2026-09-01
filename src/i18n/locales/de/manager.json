@@ -12,6 +12,7 @@
     "presence": "Präsenz",
     "presenceActive": "Aktiv",
     "clockInAt": "Kommen",
+    "clockOutAt": "Gehen",
     "clocked_in": "Eingestempelt",
     "clocked_out": "Ausgestempelt",
     "empty": "Heute wurde keine Anwesenheit erfasst."

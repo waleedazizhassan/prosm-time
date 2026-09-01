@@ -315,7 +315,7 @@ export default function PersonDetailPage() {
         </Card>
       ) : null}
 
-      <AdminAttendanceCard subjectUserId={member.id} />
+      <AdminAttendanceCard subjectUserId={member.id} subjectFullName={member.fullName} />
 
       <Modal
         isOpen={deleteModalOpen}

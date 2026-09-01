@@ -79,7 +79,7 @@ export default function Sidebar() {
       >
         <div className={styles.sidebarHeader}>
           <div className={styles.sidebarBrand}>
-            <BrandMark size={24} />
+            <BrandMark size={28} />
             {!sidebarCollapsed ? <span className={styles.sidebarBrandName}>{t("common:appName")}</span> : null}
           </div>
 

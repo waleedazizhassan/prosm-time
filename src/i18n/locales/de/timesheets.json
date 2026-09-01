@@ -63,6 +63,7 @@
     "loadError": "Dieser Bericht konnte nicht geladen werden.",
     "backLink": "Zurück zu Stundenzetteln",
     "exportCsvAction": "CSV exportieren",
+    "exportPdfAction": "PDF exportieren",
     "printAction": "Drucken / Als PDF speichern",
     "summaryTitle": "Zusammenfassung",
     "organization": "Organisation",

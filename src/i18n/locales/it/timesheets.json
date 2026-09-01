@@ -63,6 +63,7 @@
     "loadError": "Impossibile caricare questo report.",
     "backLink": "Torna ai fogli ore",
     "exportCsvAction": "Esporta CSV",
+    "exportPdfAction": "Esporta PDF",
     "printAction": "Stampa / Salva come PDF",
     "summaryTitle": "Riepilogo",
     "organization": "Organizzazione",

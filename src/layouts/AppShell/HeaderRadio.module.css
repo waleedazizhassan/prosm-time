@@ -1,0 +1,242 @@
+.container {
+  position: relative;
+
+  flex-shrink: 0;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  height: 36px;
+
+  padding: 0 var(--space-3);
+
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+
+  background: var(--surface-card);
+  color: var(--text-secondary);
+
+  cursor: pointer;
+
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pill:hover {
+  background: var(--surface-hover);
+}
+
+.pill:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--brand-primary-subtle-border);
+}
+
+.pillActive {
+  color: var(--brand-primary);
+  border-color: var(--brand-primary-subtle-border);
+  background: var(--brand-primary-subtle);
+}
+
+.pillText {
+  max-width: 110px;
+
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-semibold);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.expanded {
+  position: fixed;
+
+  width: 300px;
+  max-width: calc(100vw - 16px);
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--surface-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-md);
+
+  z-index: var(--z-panel);
+
+  overflow: hidden;
+
+  animation: radioExpand 160ms ease;
+}
+
+@keyframes radioExpand {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.nowPlaying {
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--border-light);
+  background: var(--surface-hover);
+}
+
+.nowPlayingInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  margin-bottom: var(--space-2);
+}
+
+.nowPlayingName {
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nowPlayingStatus {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.nowPlayingControls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 28px;
+  height: 28px;
+
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+
+  background: var(--surface-card);
+  color: var(--text-primary);
+
+  cursor: pointer;
+}
+
+.iconButton:hover {
+  background: var(--surface-hover);
+}
+
+.spinning {
+  animation: radioSpin 800ms linear infinite;
+}
+
+@keyframes radioSpin {
+  to { transform: rotate(360deg); }
+}
+
+.volumeSlider {
+  flex: 1;
+  min-width: 0;
+  accent-color: var(--brand-primary);
+}
+
+.searchRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.searchIcon {
+  flex-shrink: 0;
+  color: var(--text-disabled);
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+
+  border: none;
+  background: transparent;
+  outline: none;
+
+  font-size: var(--font-sm);
+  color: var(--text-primary);
+}
+
+.stationList {
+  overflow-y: auto;
+  max-height: 260px;
+}
+
+.stateMessage {
+  padding: var(--space-4) var(--space-3);
+
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.stationRow {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+
+  border: none;
+  border-bottom: 1px solid var(--border-light);
+  background: transparent;
+
+  text-align: start;
+  cursor: pointer;
+}
+
+.stationRow:last-child {
+  border-bottom: none;
+}
+
+.stationRow:hover {
+  background: var(--surface-hover);
+}
+
+.stationRowActive {
+  background: var(--brand-primary-subtle);
+}
+
+.stationName {
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stationMeta {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    display: none;
+  }
+}

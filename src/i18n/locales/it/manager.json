@@ -12,6 +12,7 @@
     "presence": "Presenza",
     "presenceActive": "Attiva",
     "clockInAt": "Entrata",
+    "clockOutAt": "Uscita",
     "clocked_in": "Timbrato (entrata)",
     "clocked_out": "Timbrato (uscita)",
     "empty": "Nessuna attività di presenza registrata oggi."

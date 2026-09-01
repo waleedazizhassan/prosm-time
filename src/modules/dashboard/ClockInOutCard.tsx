@@ -9,6 +9,7 @@ import ProjectRepository, { type Project } from "../../core/repositories/Project
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import PresenceRepository, { type PresenceSession } from "../../core/repositories/PresenceRepository";
 import { getCurrentPosition, type CurrentPosition } from "../../core/utils/geo";
+import { reverseGeocodePlaceName } from "../../core/utils/reverseGeocode";
 import OfflineQueueService from "../../core/offline/OfflineQueueService";
 import { useOfflineQueue } from "../../core/offline/useOfflineQueue";
 import { formatTimeOnly } from "../../core/utils/formatDate";
@@ -79,6 +80,7 @@ export default function ClockInOutCard() {
   const [breakWarning, setBreakWarning] = useState("");
   const [currentLocation, setCurrentLocation] = useState<CurrentPosition | null>(null);
   const [locationStatus, setLocationStatus] = useState<"detecting" | "available" | "unavailable">("detecting");
+  const [placeName, setPlaceName] = useState<string | null>(null);
 
   const presenceSessionRef = useRef<PresenceSession | null>(null);
   presenceSessionRef.current = presenceSession;
@@ -143,11 +145,15 @@ export default function ClockInOutCard() {
   useEffect(() => {
     let cancelled = false;
     setLocationStatus("detecting");
+    setPlaceName(null);
     getCurrentPosition()
       .then((position) => {
         if (cancelled) return;
         setCurrentLocation(position);
         setLocationStatus("available");
+        reverseGeocodePlaceName(position.latitude, position.longitude, i18n.language).then((name) => {
+          if (!cancelled) setPlaceName(name);
+        });
       })
       .catch(() => {
         if (cancelled) return;
@@ -156,7 +162,7 @@ export default function ClockInOutCard() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [i18n.language]);
 
   useEffect(() => {
     if (!profile || !siteId) {
@@ -482,7 +488,7 @@ export default function ClockInOutCard() {
           <span>{t("attendance.locationDetecting")}</span>
         ) : locationStatus === "available" && currentLocation ? (
           <span>
-            {t("attendance.locationLabel")}: {currentLocation.latitude.toFixed(5)}, {currentLocation.longitude.toFixed(5)}
+            {placeName ?? `${currentLocation.latitude.toFixed(5)}, ${currentLocation.longitude.toFixed(5)}`}
             {" "}
             ({t("attendance.locationAccuracy", { meters: Math.round(currentLocation.accuracyMeters) })})
           </span>

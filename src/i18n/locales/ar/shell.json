@@ -57,5 +57,23 @@
       "thunderstorm": "عاصفة رعدية",
       "unknown": "غير معروف"
     }
+  },
+  "radio": {
+    "title": "الراديو",
+    "loading": "جارٍ التحميل...",
+    "reconnecting": "إعادة الاتصال...",
+    "error": "تعذر التشغيل.",
+    "paused": "متوقف مؤقتًا",
+    "playing": "قيد التشغيل",
+    "pauseAction": "إيقاف مؤقت",
+    "playAction": "تشغيل",
+    "stopAction": "إيقاف",
+    "muteAction": "كتم الصوت",
+    "unmuteAction": "إلغاء الكتم",
+    "volumeLabel": "مستوى الصوت",
+    "searchPlaceholder": "ابحث عن محطات...",
+    "searching": "جارٍ البحث...",
+    "noResults": "لا توجد محطات.",
+    "loadingStations": "جارٍ تحميل المحطات..."
   }
 }

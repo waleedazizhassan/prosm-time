@@ -38,6 +38,17 @@
   cursor: not-allowed;
 }
 
+/* § final visual consistency pass, correction (item 15) - "input/form
+   areas... are visually larger than necessary... compact and
+   professional, especially on mobile." 44px still clears the WCAG
+   touch-target minimum, just tighter than the 48px desktop height. */
+@media (max-width: 640px) {
+  .input {
+    height: 44px;
+    padding: 0 var(--space-3);
+  }
+}
+
 .errorInput {
   border-color: var(--brand-danger);
 }

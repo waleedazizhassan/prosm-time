@@ -57,5 +57,23 @@
       "thunderstorm": "Orage",
       "unknown": "Inconnu"
     }
+  },
+  "radio": {
+    "title": "Radio",
+    "loading": "Chargement…",
+    "reconnecting": "Reconnexion…",
+    "error": "Échec de la lecture.",
+    "paused": "En pause",
+    "playing": "En cours de lecture",
+    "pauseAction": "Pause",
+    "playAction": "Lecture",
+    "stopAction": "Arrêter",
+    "muteAction": "Couper le son",
+    "unmuteAction": "Rétablir le son",
+    "volumeLabel": "Volume",
+    "searchPlaceholder": "Rechercher des stations…",
+    "searching": "Recherche…",
+    "noResults": "Aucune station trouvée.",
+    "loadingStations": "Chargement des stations…"
   }
 }

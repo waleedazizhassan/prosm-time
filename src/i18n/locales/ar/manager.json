@@ -12,6 +12,7 @@
     "presence": "التواجد",
     "presenceActive": "نشط",
     "clockInAt": "وقت الحضور",
+    "clockOutAt": "وقت الانصراف",
     "clocked_in": "مسجّل حضور",
     "clocked_out": "مسجّل انصراف",
     "empty": "لا يوجد نشاط حضور مسجل اليوم."

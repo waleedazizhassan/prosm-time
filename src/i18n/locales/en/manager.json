@@ -12,6 +12,7 @@
     "presence": "Presence",
     "presenceActive": "Active",
     "clockInAt": "Clock In",
+    "clockOutAt": "Clock Out",
     "clocked_in": "Clocked In",
     "clocked_out": "Clocked Out",
     "empty": "No attendance activity recorded today."

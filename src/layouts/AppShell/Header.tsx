@@ -8,21 +8,24 @@ import NotificationBell from "./NotificationBell";
 import HeaderNavControls from "./HeaderNavControls";
 import HeaderGreeting from "./HeaderGreeting";
 import WeatherMiniPanel from "./WeatherMiniPanel";
+import HeaderRadio from "./HeaderRadio";
+import HeaderOrganizationCard from "./HeaderOrganizationCard";
 import styles from "./Header.module.css";
 
-// PROSM Time - the application shell's Header (§ visual consistency
-// pass: "consistent PROSM Header"). Fixed 64px bar, same visual
-// language as PROSM Platform's own Header - brand identity + Back/
-// Forward/Dashboard nav controls on the left (matching Platform's own
-// HeaderNavControls), a mobile sidebar toggle that only renders below
-// 900px (same breakpoint Sidebar's own mobile drawer uses), and a
-// personalized time-of-day greeting on the right (matching Platform's
-// own HeaderGreeting). The User Menu itself stays anchored at the
-// Sidebar's own footer (UserMenu.tsx) - that already matches PROSM
-// Platform's own current architecture (moved out of the Header there
-// too), not the Header. NotificationBell (WP-13) is the one other real
-// feature that belongs in the right section - no search/AI utilities
-// yet, not invented here just to fill the header.
+// PROSM Time - the application shell's Header (§ final visual
+// consistency pass, correction: "Bring the PROSM Time Header closer to
+// the established PROSM Platform experience... Radio, Weather, Back,
+// Forward, Dashboard, greeting, existing notification/user controls").
+// Fixed 64px bar, same visual language as PROSM Platform's own Header.
+// Left: brand identity + Back/Forward/Dashboard (HeaderNavControls) -
+// Dashboard's ONLY navigation entry point now (the Sidebar's own
+// duplicate was removed, see navigation.ts). Right: a compact
+// Organization/License quick-look (HeaderOrganizationCard, replacing
+// the Dashboard's old large cards), Radio, Weather, a personalized
+// greeting, and notifications. The User Menu itself stays anchored at
+// the Sidebar's own footer (UserMenu.tsx) - that already matches
+// PROSM Platform's own current architecture (moved out of the Header
+// there too), not the Header.
 export default function Header() {
   const { t } = useTranslation(["shell", "common"]);
   const { openMobileSidebar } = useAppLayout();
@@ -45,6 +48,8 @@ export default function Header() {
       <div className={styles.centerSection} />
 
       <div className={styles.rightSection}>
+        <HeaderOrganizationCard />
+        <HeaderRadio />
         <WeatherMiniPanel />
         <HeaderGreeting />
         <NotificationBell />

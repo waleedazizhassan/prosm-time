@@ -57,5 +57,23 @@
       "thunderstorm": "Temporale",
       "unknown": "Sconosciuto"
     }
+  },
+  "radio": {
+    "title": "Radio",
+    "loading": "Caricamento…",
+    "reconnecting": "Riconnessione…",
+    "error": "Riproduzione non riuscita.",
+    "paused": "In pausa",
+    "playing": "In riproduzione",
+    "pauseAction": "Pausa",
+    "playAction": "Riproduci",
+    "stopAction": "Interrompi",
+    "muteAction": "Disattiva audio",
+    "unmuteAction": "Riattiva audio",
+    "volumeLabel": "Volume",
+    "searchPlaceholder": "Cerca stazioni…",
+    "searching": "Ricerca…",
+    "noResults": "Nessuna stazione trovata.",
+    "loadingStations": "Caricamento stazioni…"
   }
 }

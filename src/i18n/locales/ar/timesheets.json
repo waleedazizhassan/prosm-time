@@ -63,6 +63,7 @@
     "loadError": "تعذر تحميل هذا التقرير.",
     "backLink": "العودة إلى كشوف الدوام",
     "exportCsvAction": "تصدير CSV",
+    "exportPdfAction": "تصدير PDF",
     "printAction": "طباعة / حفظ كـ PDF",
     "summaryTitle": "الملخص",
     "organization": "المؤسسة",

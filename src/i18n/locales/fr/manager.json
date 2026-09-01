@@ -12,6 +12,7 @@
     "presence": "Présence",
     "presenceActive": "Active",
     "clockInAt": "Arrivée",
+    "clockOutAt": "Départ",
     "clocked_in": "Pointé (arrivée)",
     "clocked_out": "Pointé (départ)",
     "empty": "Aucune activité de présence enregistrée aujourd'hui."

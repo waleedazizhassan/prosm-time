@@ -86,9 +86,7 @@
       "clockedInSince": "مسجل الحضور منذ {{time}}",
       "clockInError": "تعذر تسجيل حضور هذا الموظف.",
       "clockOutError": "تعذر تسجيل انصراف هذا الموظف.",
-      "evidenceLabel": "دليل مصور",
-      "evidenceRequiredHint": "يتطلب هذا الموقع صورة لهذا الإجراء.",
-      "evidenceUploadError": "تم تسجيل الحضور/الانصراف بنجاح، لكن تعذر رفع الصورة."
+      "actorSubjectNotice": "تم تنفيذ هذا الإجراء بواسطة {{actor}} نيابةً عن {{subject}}. يُسجَّل باسمك كمنفِّذ، و{{subject}} كموظف معني، والسبب أدناه."
     }
   }
 }

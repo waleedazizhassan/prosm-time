@@ -57,5 +57,23 @@
       "thunderstorm": "Thunderstorm",
       "unknown": "Unknown"
     }
+  },
+  "radio": {
+    "title": "Radio",
+    "loading": "Loading…",
+    "reconnecting": "Reconnecting…",
+    "error": "Playback failed.",
+    "paused": "Paused",
+    "playing": "Playing",
+    "pauseAction": "Pause",
+    "playAction": "Play",
+    "stopAction": "Stop",
+    "muteAction": "Mute",
+    "unmuteAction": "Unmute",
+    "volumeLabel": "Volume",
+    "searchPlaceholder": "Search stations…",
+    "searching": "Searching…",
+    "noResults": "No stations found.",
+    "loadingStations": "Loading stations…"
   }
 }

@@ -63,6 +63,7 @@
     "loadError": "Impossible de charger ce rapport.",
     "backLink": "Retour aux feuilles de temps",
     "exportCsvAction": "Exporter en CSV",
+    "exportPdfAction": "Exporter en PDF",
     "printAction": "Imprimer / Enregistrer en PDF",
     "summaryTitle": "Résumé",
     "organization": "Organisation",

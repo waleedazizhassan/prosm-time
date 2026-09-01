@@ -57,5 +57,23 @@
       "thunderstorm": "Gewitter",
       "unknown": "Unbekannt"
     }
+  },
+  "radio": {
+    "title": "Radio",
+    "loading": "Wird geladen …",
+    "reconnecting": "Verbindung wird wiederhergestellt …",
+    "error": "Wiedergabe fehlgeschlagen.",
+    "paused": "Pausiert",
+    "playing": "Wird abgespielt",
+    "pauseAction": "Pause",
+    "playAction": "Abspielen",
+    "stopAction": "Stopp",
+    "muteAction": "Stummschalten",
+    "unmuteAction": "Stummschaltung aufheben",
+    "volumeLabel": "Lautstärke",
+    "searchPlaceholder": "Sender suchen …",
+    "searching": "Suche läuft …",
+    "noResults": "Keine Sender gefunden.",
+    "loadingStations": "Sender werden geladen …"
   }
 }

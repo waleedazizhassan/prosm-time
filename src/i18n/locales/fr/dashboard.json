@@ -60,7 +60,6 @@
     "discardPending": "Ignorer",
     "offlineQueueError": "Impossible de mettre cette action en file d'attente pour une synchronisation hors ligne.",
     "locationDetecting": "Détection de votre position actuelle...",
-    "locationLabel": "Position actuelle",
     "locationAccuracy": "±{{meters}}m",
     "locationUnavailable": "Position actuelle indisponible"
   },

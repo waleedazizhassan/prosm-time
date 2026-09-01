@@ -12,6 +12,7 @@ export interface TodayAttendanceRow {
   siteName: string;
   status: "clocked_in" | "clocked_out";
   clockInAt: string;
+  clockOutAt: string | null;
   hasActivePresence: boolean;
 }
 
@@ -31,6 +32,7 @@ interface RawAttendanceSessionRow {
   id: string;
   status: "clocked_in" | "clocked_out";
   clock_in_at: string;
+  clock_out_at: string | null;
   users: RawUserRef | RawUserRef[] | null;
   sites: { name: string | null } | { name: string | null }[] | null;
 }
@@ -75,7 +77,7 @@ class ManagerRepository {
       startOfDay.setHours(0, 0, 0, 0);
 
       const [sessionsResult, presenceResult] = await Promise.all([
-        this.client.from("attendance_sessions").select("id, status, clock_in_at, users(full_name), sites(name)").gte("clock_in_at", startOfDay.toISOString()).order("clock_in_at", { ascending: false }),
+        this.client.from("attendance_sessions").select("id, status, clock_in_at, clock_out_at, users(full_name), sites(name)").gte("clock_in_at", startOfDay.toISOString()).order("clock_in_at", { ascending: false }),
         this.client.from("presence_sessions").select("attendance_session_id").eq("status", "active"),
       ]);
 
@@ -92,6 +94,7 @@ class ManagerRepository {
           siteName: site?.name ?? "",
           status: row.status,
           clockInAt: row.clock_in_at,
+          clockOutAt: row.clock_out_at,
           hasActivePresence: activePresenceIds.has(row.id),
         };
       });

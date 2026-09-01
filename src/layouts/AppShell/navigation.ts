@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { LayoutDashboard, Users, MapPin, LayoutGrid, FileText, HelpCircle } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, HelpCircle } from "lucide-react";
 
 export interface NavItem {
   id: string;
@@ -10,15 +10,20 @@ export interface NavItem {
   // appropriate to the user's role, and must respect authorization -
   // users never see administrative navigation items for which they
   // have no permission." null means every authenticated org member
-  // sees it (Dashboard); anything else is a real permission key from
-  // the WP-04 catalog, checked via the same hasPermission() every
-  // other gated control in this app already uses - never a second,
-  // parallel authorization concept.
+  // sees it; anything else is a real permission key from the WP-04
+  // catalog, checked via the same hasPermission() every other gated
+  // control in this app already uses - never a second, parallel
+  // authorization concept.
   requiredPermission: string | null;
 }
 
+// § final visual consistency pass, correction - "The Dashboard button
+// must exist in the HEADER only... remove the duplicate Dashboard
+// entry/button from the Sidebar." HeaderNavControls' own Dashboard
+// shortcut (added in an earlier pass of this same finishing sweep) is
+// now the ONLY Dashboard navigation mechanism - no Dashboard entry
+// lives here anymore.
 export const NAV_ITEMS: NavItem[] = [
-  { id: "dashboard", labelKey: "items.dashboard", path: "/dashboard", icon: LayoutDashboard, requiredPermission: null },
   { id: "people", labelKey: "items.people", path: "/people", icon: Users, requiredPermission: "employees.view" },
   { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage" },
   { id: "manager", labelKey: "items.manager", path: "/manager", icon: LayoutGrid, requiredPermission: "attendance.view" },

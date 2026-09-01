@@ -1,0 +1,187 @@
+.container {
+  position: relative;
+
+  flex-shrink: 0;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  padding: 0;
+
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+
+  background: var(--surface-card);
+
+  cursor: pointer;
+
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.trigger:hover,
+.trigger[aria-expanded="true"] {
+  background: var(--surface-hover);
+  border-color: var(--brand-primary);
+}
+
+.trigger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--brand-primary-subtle-border);
+}
+
+.logo {
+  width: 24px;
+  height: 24px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px;
+
+  background: var(--brand-primary);
+  color: var(--brand-on-primary);
+
+  font-size: 11px;
+  font-weight: var(--font-weight-bold);
+}
+
+/* Portaled to document.body (see HeaderOrganizationCard.tsx) - fixed,
+   not absolute, positioned from the trigger's real getBoundingClientRect(). */
+.panel {
+  position: fixed;
+
+  width: 280px;
+  max-width: calc(100vw - 16px);
+
+  padding: var(--space-4);
+
+  background: var(--surface-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-md);
+
+  z-index: var(--z-panel);
+
+  animation: panelIn 160ms ease;
+}
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  padding-bottom: var(--space-3);
+  margin-bottom: var(--space-3);
+
+  border-bottom: 1px solid var(--border-light);
+}
+
+.panelLogo {
+  width: 32px;
+  height: 32px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: var(--radius-sm);
+
+  background: var(--brand-primary);
+  color: var(--brand-on-primary);
+
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.panelName {
+  flex: 1;
+  min-width: 0;
+
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.refreshButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 26px;
+  height: 26px;
+
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+
+  background: transparent;
+  color: var(--text-secondary);
+
+  cursor: pointer;
+}
+
+.refreshButton:hover {
+  background: var(--surface-hover);
+}
+
+.spinning {
+  animation: spin 800ms linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.panelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+
+  padding: 6px 0;
+}
+
+.panelLabel {
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  color: var(--text-disabled);
+}
+
+.panelValue {
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+
+  text-align: end;
+}
+
+@media (max-width: 640px) {
+  .container {
+    display: none;
+  }
+}

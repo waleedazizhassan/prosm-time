@@ -60,7 +60,6 @@
     "discardPending": "Verwerfen",
     "offlineQueueError": "Diese Aktion konnte nicht für die Offline-Synchronisierung eingereiht werden.",
     "locationDetecting": "Ihr aktueller Standort wird ermittelt...",
-    "locationLabel": "Aktueller Standort",
     "locationAccuracy": "±{{meters}} m",
     "locationUnavailable": "Aktueller Standort nicht verfügbar"
   },

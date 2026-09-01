@@ -12,3 +12,12 @@
   font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
 }
+
+/* § final visual consistency pass, correction (item 15) - compact,
+   professional feel on mobile without shrinking the card so far that
+   its own content (buttons, inputs) loses room to breathe. */
+@media (max-width: 640px) {
+  .card {
+    padding: var(--space-4);
+  }
+}

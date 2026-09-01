@@ -86,9 +86,7 @@
       "clockedInSince": "Eingestempelt seit {{time}}",
       "clockInError": "Dieser Mitarbeiter konnte nicht eingestempelt werden.",
       "clockOutError": "Dieser Mitarbeiter konnte nicht ausgestempelt werden.",
-      "evidenceLabel": "Fotobeleg",
-      "evidenceRequiredHint": "Dieser Standort erfordert ein Foto für diese Aktion.",
-      "evidenceUploadError": "Erfolgreich ein-/ausgestempelt, aber das Foto konnte nicht hochgeladen werden."
+      "actorSubjectNotice": "Ausgeführt von {{actor}} im Namen von {{subject}}. Wird mit Ihrer Identität als ausführende Person, {{subject}} als betroffener Person und dem unten stehenden Grund erfasst."
     }
   }
 }

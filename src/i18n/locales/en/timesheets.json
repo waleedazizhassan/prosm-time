@@ -63,6 +63,7 @@
     "loadError": "Unable to load this report.",
     "backLink": "Back to Timesheets",
     "exportCsvAction": "Export CSV",
+    "exportPdfAction": "Export PDF",
     "printAction": "Print / Save as PDF",
     "summaryTitle": "Summary",
     "organization": "Organization",

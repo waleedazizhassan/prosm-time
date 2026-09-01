@@ -14,7 +14,7 @@ import Modal from "../../components/common/Modal";
 import Textarea from "../../components/common/Textarea";
 import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
-import { formatTimeOnly } from "../../core/utils/formatDate";
+import { formatTimeOnly, formatDateOnly } from "../../core/utils/formatDate";
 
 const REVIEW_ACTIONS = ["approved", "rejected", "acknowledged", "clarification_requested"] as const;
 
@@ -76,12 +76,20 @@ export default function ManagerConsolePage() {
     load();
   };
 
+  // § final visual consistency pass, correction (item 12) - "structured
+  // employee/day row: Employee | Site/Location | Clock In | Clock Out |
+  // Status", one row per employee/session rather than a stacked
+  // activity stream. This table already rendered one row per session
+  // (Table, not a list) - the real gap was a missing Clock Out column
+  // (ManagerRepository now selects clock_out_at too) and no day
+  // context; both fixed here using the existing real data only.
   const attendanceColumns: TableColumn<TodayAttendanceRow>[] = [
     { key: "name", header: t("attendance.employee"), render: (row) => row.userFullName },
     { key: "site", header: t("attendance.site"), render: (row) => row.siteName },
+    { key: "clockInAt", header: t("attendance.clockInAt"), render: (row) => formatTimeOnly(row.clockInAt, i18n.language) },
+    { key: "clockOutAt", header: t("attendance.clockOutAt"), render: (row) => (row.clockOutAt ? formatTimeOnly(row.clockOutAt, i18n.language) : "—") },
     { key: "status", header: t("attendance.status"), render: (row) => <StatusBadge status={row.status === "clocked_in" ? "active" : "neutral"}>{t(`attendance.${row.status}`)}</StatusBadge> },
     { key: "presence", header: t("attendance.presence"), render: (row) => (row.hasActivePresence ? <StatusBadge status="active">{t("attendance.presenceActive")}</StatusBadge> : "—") },
-    { key: "clockInAt", header: t("attendance.clockInAt"), render: (row) => formatTimeOnly(row.clockInAt, i18n.language) },
   ];
 
   return (
@@ -97,6 +105,9 @@ export default function ManagerConsolePage() {
       </p>
 
       <Card title={t("attendance.title")}>
+        <p style={{ margin: "calc(-1 * var(--space-2)) 0 var(--space-3)", fontSize: "var(--font-xs)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.04em" }}>
+          {formatDateOnly(new Date(), i18n.language)}
+        </p>
         <Table columns={attendanceColumns} data={attendance} getRowId={(row) => row.sessionId} loading={loading} emptyMessage={t("attendance.empty")} />
       </Card>
 
