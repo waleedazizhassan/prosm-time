@@ -11,5 +11,11 @@
   "splash": {
     "tagline": "Présence, suivi et gestion du temps de la main-d'œuvre.",
     "contactLabel": "Des questions ? Contactez-nous :"
+  },
+  "errorBoundary": {
+    "title": "Une erreur s'est produite",
+    "message": "Une erreur inattendue s'est produite. Recharger la page résout généralement ce problème.",
+    "reloadAction": "Recharger",
+    "contactPrefix": "Si cela persiste, contactez"
   }
 }

@@ -11,5 +11,11 @@
   "splash": {
     "tagline": "Workforce attendance, presence and time management.",
     "contactLabel": "Questions? Contact us:"
+  },
+  "errorBoundary": {
+    "title": "Something went wrong",
+    "message": "An unexpected error occurred. Reloading the page usually resolves this.",
+    "reloadAction": "Reload",
+    "contactPrefix": "If this keeps happening, contact"
   }
 }

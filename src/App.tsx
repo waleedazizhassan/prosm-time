@@ -1,6 +1,7 @@
 import "./components/common/design-tokens.css";
 import AppRoutes from "./routes/AppRoutes";
 import { ThemeProvider } from "./core/context/ThemeContext";
+import ErrorBoundary from "./components/common/ErrorBoundary";
 
 // PROSM Time Implementation Master File V3.0 - the real application
 // shell, wired up as of WP-03 (Authentication & Organization). The
@@ -13,8 +14,10 @@ import { ThemeProvider } from "./core/context/ThemeContext";
 // file's earlier fixed GUEST_DEFAULT_THEME useEffect.
 export default function App() {
   return (
-    <ThemeProvider>
-      <AppRoutes />
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider>
+        <AppRoutes />
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 }

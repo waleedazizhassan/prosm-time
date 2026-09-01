@@ -11,5 +11,11 @@
   "splash": {
     "tagline": "Anwesenheit, Präsenz und Zeitmanagement für die Belegschaft.",
     "contactLabel": "Fragen? Kontaktieren Sie uns:"
+  },
+  "errorBoundary": {
+    "title": "Etwas ist schiefgelaufen",
+    "message": "Ein unerwarteter Fehler ist aufgetreten. Ein Neuladen der Seite behebt dies in der Regel.",
+    "reloadAction": "Neu laden",
+    "contactPrefix": "Falls dies weiterhin auftritt, kontaktieren Sie"
   }
 }

@@ -11,5 +11,11 @@
   "splash": {
     "tagline": "Presenza, gestione della forza lavoro e del tempo.",
     "contactLabel": "Domande? Contattaci:"
+  },
+  "errorBoundary": {
+    "title": "Qualcosa è andato storto",
+    "message": "Si è verificato un errore imprevisto. Ricaricare la pagina di solito risolve il problema.",
+    "reloadAction": "Ricarica",
+    "contactPrefix": "Se il problema persiste, contatta"
   }
 }
