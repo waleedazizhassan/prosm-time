@@ -1,5 +1,10 @@
 {
   "navigationLabel": "Hauptnavigation",
+  "nav": {
+    "back": "Zurück",
+    "forward": "Vorwärts",
+    "dashboard": "Dashboard"
+  },
   "toggleSidebar": "Navigation umschalten",
   "collapseSidebar": "Seitenleiste einklappen",
   "expandSidebar": "Seitenleiste ausklappen",
@@ -21,5 +26,36 @@
     "manager": "Manager-Konsole",
     "timesheets": "Stundenzettel",
     "help": "Hilfe"
+  },
+  "weather": {
+    "loading": "Wetter wird geladen",
+    "unavailable": "Wetter nicht verfügbar",
+    "locationUnavailable": "Standort nicht verfügbar",
+    "retryLocation": "Klicken, um den Standortzugriff erneut zu versuchen",
+    "detailsLabel": "Wetterdetails",
+    "yourLocation": "Ihr Standort",
+    "feelsLike": "Gefühlt",
+    "humidity": "Luftfeuchtigkeit",
+    "wind": "Wind",
+    "uvIndex": "UV-Index",
+    "dailyHigh": "Tageshöchstwert",
+    "dailyLow": "Tagestiefstwert",
+    "sunrise": "Sonnenaufgang",
+    "sunset": "Sonnenuntergang",
+    "refresh": "Wetter aktualisieren",
+    "lastUpdated": "Zuletzt aktualisiert {{time}}",
+    "genericError": "Wetter kann derzeit nicht geladen werden.",
+    "tryAgain": "Erneut versuchen",
+    "categories": {
+      "clear": "Klarer Himmel",
+      "partly-cloudy": "Teilweise bewölkt",
+      "cloudy": "Bedeckt",
+      "fog": "Nebel",
+      "drizzle": "Nieselregen",
+      "rain": "Regen",
+      "snow": "Schnee",
+      "thunderstorm": "Gewitter",
+      "unknown": "Unbekannt"
+    }
   }
 }

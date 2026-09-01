@@ -55,7 +55,11 @@
     "pendingSyncFailed": "This action could not be synced.",
     "retrySync": "Retry sync",
     "discardPending": "Discard",
-    "offlineQueueError": "Unable to queue this action for offline sync."
+    "offlineQueueError": "Unable to queue this action for offline sync.",
+    "locationDetecting": "Detecting your current location...",
+    "locationLabel": "Current location",
+    "locationAccuracy": "±{{meters}}m",
+    "locationUnavailable": "Current location unavailable"
   },
   "kioskPin": {
     "title": "Kiosk PIN",

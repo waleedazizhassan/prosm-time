@@ -55,7 +55,11 @@
     "pendingSyncFailed": "Impossibile sincronizzare questa azione.",
     "retrySync": "Riprova sincronizzazione",
     "discardPending": "Ignora",
-    "offlineQueueError": "Impossibile mettere in coda questa azione per la sincronizzazione offline."
+    "offlineQueueError": "Impossibile mettere in coda questa azione per la sincronizzazione offline.",
+    "locationDetecting": "Rilevamento della posizione attuale...",
+    "locationLabel": "Posizione attuale",
+    "locationAccuracy": "±{{meters}}m",
+    "locationUnavailable": "Posizione attuale non disponibile"
   },
   "kioskPin": {
     "title": "PIN chiosco",

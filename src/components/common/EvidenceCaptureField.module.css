@@ -1,0 +1,53 @@
+.actionsRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.fallbackLink {
+  background: none;
+  border: none;
+  padding: 0;
+
+  color: var(--text-secondary);
+  font-size: var(--font-xs);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.fallbackLink:hover {
+  color: var(--text-primary);
+}
+
+.fallbackLink:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.previewRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.previewImage {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+}
+
+.hiddenInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

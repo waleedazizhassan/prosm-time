@@ -1,6 +1,12 @@
 {
   "appName": "PROSM Time",
   "loading": "Loading…",
+  "greeting": {
+    "morning": "Good morning",
+    "afternoon": "Good afternoon",
+    "evening": "Good evening",
+    "night": "Good night"
+  },
   "actions": {
     "cancel": "Cancel",
     "confirm": "Confirm",

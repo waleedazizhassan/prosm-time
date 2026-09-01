@@ -1,5 +1,10 @@
 {
   "navigationLabel": "Navigazione principale",
+  "nav": {
+    "back": "Indietro",
+    "forward": "Avanti",
+    "dashboard": "Dashboard"
+  },
   "toggleSidebar": "Attiva/disattiva navigazione",
   "collapseSidebar": "Comprimi barra laterale",
   "expandSidebar": "Espandi barra laterale",
@@ -21,5 +26,36 @@
     "manager": "Console manager",
     "timesheets": "Fogli ore",
     "help": "Assistenza"
+  },
+  "weather": {
+    "loading": "Caricamento meteo",
+    "unavailable": "Meteo non disponibile",
+    "locationUnavailable": "Posizione non disponibile",
+    "retryLocation": "Fai clic per riprovare l'accesso alla posizione",
+    "detailsLabel": "Dettagli meteo",
+    "yourLocation": "La tua posizione",
+    "feelsLike": "Percepita",
+    "humidity": "Umidità",
+    "wind": "Vento",
+    "uvIndex": "Indice UV",
+    "dailyHigh": "Massima giornaliera",
+    "dailyLow": "Minima giornaliera",
+    "sunrise": "Alba",
+    "sunset": "Tramonto",
+    "refresh": "Aggiorna meteo",
+    "lastUpdated": "Ultimo aggiornamento {{time}}",
+    "genericError": "Impossibile caricare il meteo al momento.",
+    "tryAgain": "Riprova",
+    "categories": {
+      "clear": "Cielo sereno",
+      "partly-cloudy": "Parzialmente nuvoloso",
+      "cloudy": "Coperto",
+      "fog": "Nebbia",
+      "drizzle": "Pioggerella",
+      "rain": "Pioggia",
+      "snow": "Neve",
+      "thunderstorm": "Temporale",
+      "unknown": "Sconosciuto"
+    }
   }
 }

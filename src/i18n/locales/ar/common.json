@@ -1,6 +1,12 @@
 {
   "appName": "PROSM Time",
   "loading": "جارٍ التحميل…",
+  "greeting": {
+    "morning": "صباح الخير",
+    "afternoon": "مساء الخير",
+    "evening": "مساء الخير",
+    "night": "تصبح على خير"
+  },
   "actions": {
     "cancel": "إلغاء",
     "confirm": "تأكيد",

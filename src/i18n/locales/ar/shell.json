@@ -1,5 +1,10 @@
 {
   "navigationLabel": "التنقل الرئيسي",
+  "nav": {
+    "back": "رجوع",
+    "forward": "التالي",
+    "dashboard": "لوحة التحكم"
+  },
   "toggleSidebar": "تبديل التنقل",
   "collapseSidebar": "طي الشريط الجانبي",
   "expandSidebar": "توسيع الشريط الجانبي",
@@ -21,5 +26,36 @@
     "manager": "لوحة المدير",
     "timesheets": "كشوف الدوام",
     "help": "المساعدة"
+  },
+  "weather": {
+    "loading": "جارٍ تحميل الطقس",
+    "unavailable": "الطقس غير متاح",
+    "locationUnavailable": "الموقع غير متاح",
+    "retryLocation": "انقر لإعادة محاولة الوصول إلى الموقع",
+    "detailsLabel": "تفاصيل الطقس",
+    "yourLocation": "موقعك",
+    "feelsLike": "الإحساس الحراري",
+    "humidity": "الرطوبة",
+    "wind": "الرياح",
+    "uvIndex": "مؤشر الأشعة فوق البنفسجية",
+    "dailyHigh": "أعلى درجة اليوم",
+    "dailyLow": "أدنى درجة اليوم",
+    "sunrise": "الشروق",
+    "sunset": "الغروب",
+    "refresh": "تحديث الطقس",
+    "lastUpdated": "آخر تحديث {{time}}",
+    "genericError": "تعذر تحميل بيانات الطقس حاليًا.",
+    "tryAgain": "إعادة المحاولة",
+    "categories": {
+      "clear": "سماء صافية",
+      "partly-cloudy": "غائم جزئيًا",
+      "cloudy": "غائم",
+      "fog": "ضباب",
+      "drizzle": "رذاذ",
+      "rain": "مطر",
+      "snow": "ثلج",
+      "thunderstorm": "عاصفة رعدية",
+      "unknown": "غير معروف"
+    }
   }
 }

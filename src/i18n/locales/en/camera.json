@@ -1,0 +1,12 @@
+{
+  "title": "Camera",
+  "openCameraAction": "Open Camera",
+  "capture": "Capture",
+  "retake": "Retake",
+  "usePhoto": "Use Photo",
+  "cancel": "Cancel",
+  "chooseFileAction": "Or choose a file instead",
+  "permissionDenied": "Camera access was denied or is unavailable on this device.",
+  "alternativeHint": "You can choose a file instead.",
+  "previewAlt": "Captured photo preview"
+}

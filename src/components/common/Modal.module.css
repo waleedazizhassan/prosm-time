@@ -18,13 +18,24 @@
   flex-direction: column;
 
   width: 100%;
-  max-width: 440px;
   max-height: calc(100vh - var(--space-9));
   max-height: calc(100dvh - var(--space-9));
 
   background: var(--surface-card);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
+}
+
+.sm {
+  max-width: 420px;
+}
+
+.md {
+  max-width: 640px;
+}
+
+.lg {
+  max-width: 960px;
 }
 
 .header {

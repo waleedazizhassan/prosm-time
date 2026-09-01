@@ -1,5 +1,10 @@
 {
   "navigationLabel": "Main navigation",
+  "nav": {
+    "back": "Back",
+    "forward": "Forward",
+    "dashboard": "Dashboard"
+  },
   "toggleSidebar": "Toggle navigation",
   "collapseSidebar": "Collapse sidebar",
   "expandSidebar": "Expand sidebar",
@@ -21,5 +26,36 @@
     "manager": "Manager Console",
     "timesheets": "Timesheets",
     "help": "Help"
+  },
+  "weather": {
+    "loading": "Loading weather",
+    "unavailable": "Weather unavailable",
+    "locationUnavailable": "Location unavailable",
+    "retryLocation": "Click to retry location access",
+    "detailsLabel": "Weather details",
+    "yourLocation": "Your location",
+    "feelsLike": "Feels Like",
+    "humidity": "Humidity",
+    "wind": "Wind",
+    "uvIndex": "UV Index",
+    "dailyHigh": "Daily High",
+    "dailyLow": "Daily Low",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "refresh": "Refresh weather",
+    "lastUpdated": "Last updated {{time}}",
+    "genericError": "Unable to load weather right now.",
+    "tryAgain": "Try Again",
+    "categories": {
+      "clear": "Clear sky",
+      "partly-cloudy": "Partly cloudy",
+      "cloudy": "Overcast",
+      "fog": "Fog",
+      "drizzle": "Drizzle",
+      "rain": "Rain",
+      "snow": "Snow",
+      "thunderstorm": "Thunderstorm",
+      "unknown": "Unknown"
+    }
   }
 }

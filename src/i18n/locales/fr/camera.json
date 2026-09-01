@@ -1,0 +1,12 @@
+{
+  "title": "Appareil photo",
+  "openCameraAction": "Ouvrir l'appareil photo",
+  "capture": "Capturer",
+  "retake": "Reprendre",
+  "usePhoto": "Utiliser la photo",
+  "cancel": "Annuler",
+  "chooseFileAction": "Ou choisissez plutôt un fichier",
+  "permissionDenied": "L'accès à l'appareil photo a été refusé ou n'est pas disponible sur cet appareil.",
+  "alternativeHint": "Vous pouvez choisir un fichier à la place.",
+  "previewAlt": "Aperçu de la photo capturée"
+}

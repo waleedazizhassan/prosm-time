@@ -55,7 +55,11 @@
     "pendingSyncFailed": "تعذرت مزامنة هذا الإجراء.",
     "retrySync": "إعادة محاولة المزامنة",
     "discardPending": "تجاهل",
-    "offlineQueueError": "تعذر وضع هذا الإجراء في قائمة انتظار المزامنة دون اتصال."
+    "offlineQueueError": "تعذر وضع هذا الإجراء في قائمة انتظار المزامنة دون اتصال.",
+    "locationDetecting": "جارٍ تحديد موقعك الحالي...",
+    "locationLabel": "الموقع الحالي",
+    "locationAccuracy": "±{{meters}} م",
+    "locationUnavailable": "الموقع الحالي غير متاح"
   },
   "kioskPin": {
     "title": "رمز الكشك",

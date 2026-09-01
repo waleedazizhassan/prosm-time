@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { MapPin } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import AttendanceRepository, { type AttendanceSession } from "../../core/repositories/AttendanceRepository";
@@ -7,7 +8,7 @@ import SiteRepository, { type Site } from "../../core/repositories/SiteRepositor
 import ProjectRepository, { type Project } from "../../core/repositories/ProjectRepository";
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import PresenceRepository, { type PresenceSession } from "../../core/repositories/PresenceRepository";
-import { getCurrentPosition } from "../../core/utils/geo";
+import { getCurrentPosition, type CurrentPosition } from "../../core/utils/geo";
 import OfflineQueueService from "../../core/offline/OfflineQueueService";
 import { useOfflineQueue } from "../../core/offline/useOfflineQueue";
 import { formatTimeOnly } from "../../core/utils/formatDate";
@@ -55,6 +56,8 @@ export default function ClockInOutCard() {
   const [activeBreakId, setActiveBreakId] = useState<string | null>(null);
   const [breakSubmitting, setBreakSubmitting] = useState(false);
   const [breakWarning, setBreakWarning] = useState("");
+  const [currentLocation, setCurrentLocation] = useState<CurrentPosition | null>(null);
+  const [locationStatus, setLocationStatus] = useState<"detecting" | "available" | "unavailable">("detecting");
 
   const presenceSessionRef = useRef<PresenceSession | null>(null);
   presenceSessionRef.current = presenceSession;
@@ -108,6 +111,32 @@ export default function ClockInOutCard() {
     }
     previousPendingIdRef.current = currentId;
   }, [pendingOfflineItem, load]);
+
+  // § final visual consistency pass, user-directed - "During mobile
+  // Clock In, obtain the device's current location... clearly display
+  // the detected/current location to the employee." Display-only: a
+  // fresh, independent best-effort read is still taken at the moment
+  // Clock In/Out is actually pressed (handleClockIn/handleClockOut,
+  // unchanged below) and is the ONLY sample ever sent to the server -
+  // this effect never feeds the submitted reading, and the server-side
+  // geofence decision (WP-09) is entirely untouched.
+  useEffect(() => {
+    let cancelled = false;
+    setLocationStatus("detecting");
+    getCurrentPosition()
+      .then((position) => {
+        if (cancelled) return;
+        setCurrentLocation(position);
+        setLocationStatus("available");
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setLocationStatus("unavailable");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     if (!profile || !siteId) {
@@ -346,6 +375,32 @@ export default function ClockInOutCard() {
     <Card title={t("attendance.title")}>
       {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
       {evidenceWarning ? <p style={{ color: "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>{evidenceWarning}</p> : null}
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "var(--space-2)",
+          padding: "var(--space-2) var(--space-3)",
+          borderRadius: "var(--radius-md)",
+          background: "var(--surface-hover)",
+          color: locationStatus === "unavailable" ? "var(--status-warning-text)" : "var(--text-secondary)",
+          fontSize: "var(--font-xs)",
+        }}
+      >
+        <MapPin size={14} style={{ flexShrink: 0 }} />
+        {locationStatus === "detecting" ? (
+          <span>{t("attendance.locationDetecting")}</span>
+        ) : locationStatus === "available" && currentLocation ? (
+          <span>
+            {t("attendance.locationLabel")}: {currentLocation.latitude.toFixed(5)}, {currentLocation.longitude.toFixed(5)}
+            {" "}
+            ({t("attendance.locationAccuracy", { meters: Math.round(currentLocation.accuracyMeters) })})
+          </span>
+        ) : (
+          <span>{t("attendance.locationUnavailable")}</span>
+        )}
+      </div>
 
       {pendingOfflineItem ? (
         <div style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--surface-hover)" }}>

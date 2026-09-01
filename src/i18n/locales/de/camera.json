@@ -1,0 +1,12 @@
+{
+  "title": "Kamera",
+  "openCameraAction": "Kamera öffnen",
+  "capture": "Aufnehmen",
+  "retake": "Erneut aufnehmen",
+  "usePhoto": "Foto verwenden",
+  "cancel": "Abbrechen",
+  "chooseFileAction": "Oder stattdessen eine Datei auswählen",
+  "permissionDenied": "Der Kamerazugriff wurde verweigert oder ist auf diesem Gerät nicht verfügbar.",
+  "alternativeHint": "Sie können stattdessen eine Datei auswählen.",
+  "previewAlt": "Vorschau des aufgenommenen Fotos"
+}

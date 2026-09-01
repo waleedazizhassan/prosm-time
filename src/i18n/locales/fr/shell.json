@@ -1,5 +1,10 @@
 {
   "navigationLabel": "Navigation principale",
+  "nav": {
+    "back": "Précédent",
+    "forward": "Suivant",
+    "dashboard": "Tableau de bord"
+  },
   "toggleSidebar": "Basculer la navigation",
   "collapseSidebar": "Réduire la barre latérale",
   "expandSidebar": "Développer la barre latérale",
@@ -21,5 +26,36 @@
     "manager": "Console gestionnaire",
     "timesheets": "Feuilles de temps",
     "help": "Aide"
+  },
+  "weather": {
+    "loading": "Chargement de la météo",
+    "unavailable": "Météo indisponible",
+    "locationUnavailable": "Position indisponible",
+    "retryLocation": "Cliquez pour réessayer l'accès à la position",
+    "detailsLabel": "Détails météo",
+    "yourLocation": "Votre position",
+    "feelsLike": "Ressenti",
+    "humidity": "Humidité",
+    "wind": "Vent",
+    "uvIndex": "Indice UV",
+    "dailyHigh": "Maximum du jour",
+    "dailyLow": "Minimum du jour",
+    "sunrise": "Lever du soleil",
+    "sunset": "Coucher du soleil",
+    "refresh": "Actualiser la météo",
+    "lastUpdated": "Dernière mise à jour {{time}}",
+    "genericError": "Impossible de charger la météo pour le moment.",
+    "tryAgain": "Réessayer",
+    "categories": {
+      "clear": "Ciel dégagé",
+      "partly-cloudy": "Partiellement nuageux",
+      "cloudy": "Couvert",
+      "fog": "Brouillard",
+      "drizzle": "Bruine",
+      "rain": "Pluie",
+      "snow": "Neige",
+      "thunderstorm": "Orage",
+      "unknown": "Inconnu"
+    }
   }
 }

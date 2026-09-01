@@ -55,7 +55,11 @@
     "pendingSyncFailed": "Cette action n'a pas pu être synchronisée.",
     "retrySync": "Réessayer la synchronisation",
     "discardPending": "Ignorer",
-    "offlineQueueError": "Impossible de mettre cette action en file d'attente pour une synchronisation hors ligne."
+    "offlineQueueError": "Impossible de mettre cette action en file d'attente pour une synchronisation hors ligne.",
+    "locationDetecting": "Détection de votre position actuelle...",
+    "locationLabel": "Position actuelle",
+    "locationAccuracy": "±{{meters}}m",
+    "locationUnavailable": "Position actuelle indisponible"
   },
   "kioskPin": {
     "title": "Code PIN kiosque",
