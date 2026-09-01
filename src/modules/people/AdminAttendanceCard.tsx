@@ -13,6 +13,7 @@ import Select from "../../components/common/Select";
 import Textarea from "../../components/common/Textarea";
 import Button from "../../components/common/Button";
 import EvidenceCaptureField from "../../components/common/EvidenceCaptureField";
+import { formatTimeOnly } from "../../core/utils/formatDate";
 
 interface AdminAttendanceCardProps {
   subjectUserId: string;
@@ -30,7 +31,7 @@ interface AdminAttendanceCardProps {
 // performing the action (attach_prosm_time_camera_evidence authorizes
 // the event's own recorded_by, not just its user_id).
 export default function AdminAttendanceCard({ subjectUserId }: AdminAttendanceCardProps) {
-  const { t } = useTranslation("people");
+  const { t, i18n } = useTranslation("people");
   const { hasPermission } = useAuth();
 
   const canClockIn = hasPermission("attendance.clock_in_on_behalf");
@@ -181,7 +182,7 @@ export default function AdminAttendanceCard({ subjectUserId }: AdminAttendanceCa
 
       {session ? (
         <>
-          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("detail.attendance.clockedInSince", { time: new Date(session.clockInAt).toLocaleTimeString() })}</p>
+          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("detail.attendance.clockedInSince", { time: formatTimeOnly(session.clockInAt, i18n.language) })}</p>
           {canClockOut ? (
             <>
               <Textarea label={t("detail.attendance.reasonLabel")} name="adminClockOutReason" value={reason} onChange={(event) => setReason(event.target.value)} required disabled={submitting} />

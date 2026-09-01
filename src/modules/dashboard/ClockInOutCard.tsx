@@ -10,6 +10,7 @@ import PresenceRepository, { type PresenceSession } from "../../core/repositorie
 import { getCurrentPosition } from "../../core/utils/geo";
 import OfflineQueueService from "../../core/offline/OfflineQueueService";
 import { useOfflineQueue } from "../../core/offline/useOfflineQueue";
+import { formatTimeOnly } from "../../core/utils/formatDate";
 
 import Card from "../../components/common/Card";
 import Select from "../../components/common/Select";
@@ -34,7 +35,7 @@ const PRESENCE_SAMPLE_INTERVAL_MS = 5 * 60 * 1000;
 // capabilities" caveat) and surfaces the SOS/Emergency action, which
 // is only ever reachable during an active presence session (§18).
 export default function ClockInOutCard() {
-  const { t } = useTranslation("dashboard");
+  const { t, i18n } = useTranslation("dashboard");
   const { profile } = useAuth();
 
   const [session, setSession] = useState<AttendanceSession | null>(null);
@@ -371,7 +372,7 @@ export default function ClockInOutCard() {
         </div>
       ) : session ? (
         <>
-          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("attendance.clockedInSince", { time: new Date(session.clockInAt).toLocaleTimeString() })}</p>
+          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("attendance.clockedInSince", { time: formatTimeOnly(session.clockInAt, i18n.language) })}</p>
           {breakWarning ? <p style={{ color: "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>{breakWarning}</p> : null}
           {clockOutCameraRequired ? <EvidenceCaptureField label={t("attendance.evidenceLabel")} file={evidenceFile} onChange={setEvidenceFile} required disabled={submitting} helperText={t("attendance.evidenceRequiredHint")} /> : null}
           <Button onClick={handleClockOut} loading={submitting} disabled={clockOutCameraRequired && !evidenceFile}>

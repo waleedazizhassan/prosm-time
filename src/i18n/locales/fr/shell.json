@@ -5,6 +5,7 @@
   "expandSidebar": "Développer la barre latérale",
   "openUserMenu": "Ouvrir le menu utilisateur",
   "signOutAction": "Se déconnecter",
+  "languageLabel": "Langue",
   "notificationsLabel": "Notifications",
   "noNotifications": "Aucune notification pour le moment.",
   "items": {

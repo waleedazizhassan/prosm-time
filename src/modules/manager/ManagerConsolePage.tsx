@@ -12,6 +12,7 @@ import StatusBadge from "../../components/common/StatusBadge";
 import Button from "../../components/common/Button";
 import Modal from "../../components/common/Modal";
 import Textarea from "../../components/common/Textarea";
+import { formatTimeOnly } from "../../core/utils/formatDate";
 
 const REVIEW_ACTIONS = ["approved", "rejected", "acknowledged", "clarification_requested"] as const;
 
@@ -25,7 +26,7 @@ const REVIEW_ACTIONS = ["approved", "rejected", "acknowledged", "clarification_r
 // no WP in this Master File owns "schedules" yet, and timesheets/
 // reports/audit-log-UI are explicitly WP-16/WP-17/later scope.
 export default function ManagerConsolePage() {
-  const { t } = useTranslation("manager");
+  const { t, i18n } = useTranslation("manager");
   const { hasPermission } = useAuth();
 
   const [attendance, setAttendance] = useState<TodayAttendanceRow[]>([]);
@@ -78,7 +79,7 @@ export default function ManagerConsolePage() {
     { key: "site", header: t("attendance.site"), render: (row) => row.siteName },
     { key: "status", header: t("attendance.status"), render: (row) => <StatusBadge status={row.status === "clocked_in" ? "active" : "neutral"}>{t(`attendance.${row.status}`)}</StatusBadge> },
     { key: "presence", header: t("attendance.presence"), render: (row) => (row.hasActivePresence ? <StatusBadge status="active">{t("attendance.presenceActive")}</StatusBadge> : "—") },
-    { key: "clockInAt", header: t("attendance.clockInAt"), render: (row) => new Date(row.clockInAt).toLocaleTimeString() },
+    { key: "clockInAt", header: t("attendance.clockInAt"), render: (row) => formatTimeOnly(row.clockInAt, i18n.language) },
   ];
 
   return (

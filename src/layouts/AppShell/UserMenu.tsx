@@ -4,6 +4,7 @@ import { ChevronDown, LogOut } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import { useAppLayout } from "./LayoutContext";
+import { LANGUAGES } from "../../i18n/languages";
 import sidebarStyles from "./Sidebar.module.css";
 import styles from "./UserMenu.module.css";
 
@@ -17,7 +18,7 @@ import styles from "./UserMenu.module.css";
 // Delegation sections) - this product has no equivalent screens yet;
 // Sign out is the one real action that exists today.
 export default function UserMenu({ collapsed }: { collapsed: boolean }) {
-  const { t } = useTranslation("shell");
+  const { t, i18n } = useTranslation("shell");
   const { profile, signOut } = useAuth();
   const { userMenuOpen, toggleUserMenu, closeUserMenu } = useAppLayout();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -63,6 +64,16 @@ export default function UserMenu({ collapsed }: { collapsed: boolean }) {
             <span className={styles.email}>{profile?.email}</span>
             <span className={styles.role}>{profile?.roleName}</span>
           </div>
+          <label className={styles.languageLabel} htmlFor="userMenuLanguage">
+            {t("languageLabel")}
+          </label>
+          <select id="userMenuLanguage" className={styles.languageSelect} value={i18n.language} onChange={(event) => i18n.changeLanguage(event.target.value)}>
+            {LANGUAGES.map((language) => (
+              <option key={language.code} value={language.code}>
+                {language.nativeLabel}
+              </option>
+            ))}
+          </select>
           <button type="button" className={styles.signOutButton} onClick={signOut}>
             <LogOut size={16} />
             {t("signOutAction")}

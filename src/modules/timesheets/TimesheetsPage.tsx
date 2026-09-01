@@ -15,6 +15,7 @@ import Select from "../../components/common/Select";
 import Input from "../../components/common/Input";
 import Modal from "../../components/common/Modal";
 import Textarea from "../../components/common/Textarea";
+import { formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
 
 function formatMinutes(minutes: number): string {
   const totalMinutes = Math.round(minutes);
@@ -52,7 +53,7 @@ const STATUS_BADGE_KEY: Record<Timesheet["status"], string> = {
 // later row - this page is the real generate/review/approve/correct
 // workflow the export will eventually read from, not a placeholder.
 export default function TimesheetsPage() {
-  const { t } = useTranslation("timesheets");
+  const { t, i18n } = useTranslation("timesheets");
   const { profile, hasPermission } = useAuth();
 
   const canGenerate = hasPermission("timesheets.generate");
@@ -318,7 +319,7 @@ export default function TimesheetsPage() {
               <div style={{ display: "grid", gap: "var(--space-2)" }}>
                 {entries.map((entry) => (
                   <div key={entry.sessionId} style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)", borderTop: "1px solid var(--border-light)", paddingTop: "var(--space-2)" }}>
-                    {new Date(entry.clockInAt).toLocaleString()} — {entry.clockOutAt ? new Date(entry.clockOutAt).toLocaleTimeString() : t("detail.stillOpen")} · {entry.siteName ?? "—"}
+                    {formatDateTime(entry.clockInAt, i18n.language)} — {entry.clockOutAt ? formatTimeOnly(entry.clockOutAt, i18n.language) : t("detail.stillOpen")} · {entry.siteName ?? "—"}
                     {entry.projectName ? ` · ${entry.projectName}` : ""} · {formatMinutes(entry.workedMinutes)}
                   </div>
                 ))}

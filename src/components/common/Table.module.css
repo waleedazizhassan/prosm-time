@@ -25,7 +25,7 @@
 .headerCell {
   padding: var(--space-3) var(--space-4);
 
-  text-align: left;
+  text-align: start;
   font-size: var(--font-xs);
   font-weight: var(--font-weight-semibold);
   color: var(--text-secondary);

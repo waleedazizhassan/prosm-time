@@ -12,6 +12,7 @@ import StatusBadge from "../../components/common/StatusBadge";
 import ClockInOutCard from "./ClockInOutCard";
 import ExceptionsCard from "./ExceptionsCard";
 import KioskPinCard from "./KioskPinCard";
+import { formatDateOnly } from "../../core/utils/formatDate";
 
 // PROSM Time Implementation Master File V3.0, WP-03/§21/§37 - "Admin
 // Dashboard." Deliberately minimal: real organization identity and a
@@ -23,7 +24,7 @@ import KioskPinCard from "./KioskPinCard";
 // in the application shell (Sidebar/User Menu, § visual consistency
 // pass) - this page only owns its own content.
 export default function DashboardPage() {
-  const { t } = useTranslation("dashboard");
+  const { t, i18n } = useTranslation("dashboard");
   const { profile } = useAuth();
 
   const [organization, setOrganization] = useState<Organization | null>(null);
@@ -96,7 +97,7 @@ export default function DashboardPage() {
                   {t("licenseCard.usersLabel")}: {license.maxUsers ?? "—"} · {t("licenseCard.devicesLabel")}: {license.maxDevices ?? "—"}
                 </dd>
                 <dd style={{ margin: "0 0 var(--space-3)" }}>
-                  {t("licenseCard.expiresLabel")}: {license.expiresAt ? new Date(license.expiresAt).toLocaleDateString() : t("licenseCard.noExpiry")}
+                  {t("licenseCard.expiresLabel")}: {license.expiresAt ? formatDateOnly(license.expiresAt, i18n.language) : t("licenseCard.noExpiry")}
                 </dd>
               </dl>
             ) : null}

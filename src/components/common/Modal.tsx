@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { createPortal } from "react-dom";
+import { useTranslation } from "react-i18next";
 import styles from "./Modal.module.css";
 
 interface ModalProps {
@@ -11,6 +12,7 @@ interface ModalProps {
 }
 
 export default function Modal({ isOpen, onClose, title, children, footer }: ModalProps) {
+  const { t } = useTranslation("common");
   if (!isOpen) return null;
 
   return createPortal(
@@ -23,7 +25,7 @@ export default function Modal({ isOpen, onClose, title, children, footer }: Moda
       <div className={styles.panel}>
         <div className={styles.header}>
           <h2 className={styles.title}>{title}</h2>
-          <button type="button" onClick={onClose} aria-label="Close" className={styles.closeButton}>
+          <button type="button" onClick={onClose} aria-label={t("actions.close")} className={styles.closeButton}>
             &times;
           </button>
         </div>

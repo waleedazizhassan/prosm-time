@@ -28,7 +28,7 @@
   position: absolute;
 
   top: 2px;
-  left: 2px;
+  inset-inline-start: 2px;
 
   width: 18px;
   height: 18px;
@@ -44,4 +44,8 @@
 
 .checked .thumb {
   transform: translateX(16px);
+}
+
+.checked .thumb:dir(rtl) {
+  transform: translateX(-16px);
 }

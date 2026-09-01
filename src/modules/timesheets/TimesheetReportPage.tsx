@@ -10,6 +10,7 @@ import Card from "../../components/common/Card";
 import Button from "../../components/common/Button";
 import StatusBadge from "../../components/common/StatusBadge";
 import styles from "./TimesheetReportPage.module.css";
+import { formatDateOnly, formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
 
 function formatMinutes(minutes: number): string {
   const totalMinutes = Math.round(minutes);
@@ -31,15 +32,15 @@ function csvEscape(value: string): string {
   return `"${value.replace(/"/g, '""')}"`;
 }
 
-function buildCsv(pack: EvidencePack): string {
+function buildCsv(pack: EvidencePack, languageCode: string): string {
   const lines: string[][] = [
     ["Date", "Site", "Project", "Clock In", "Clock Out", "Worked (min)", "Break (min)"],
     ...pack.entries.map((entry) => [
-      new Date(entry.clockInAt).toLocaleDateString(),
+      formatDateOnly(entry.clockInAt, languageCode),
       entry.siteName ?? "",
       entry.projectName ?? "",
-      new Date(entry.clockInAt).toLocaleTimeString(),
-      entry.clockOutAt ? new Date(entry.clockOutAt).toLocaleTimeString() : "",
+      formatTimeOnly(entry.clockInAt, languageCode),
+      entry.clockOutAt ? formatTimeOnly(entry.clockOutAt, languageCode) : "",
       String(Math.round(entry.workedMinutes)),
       String(Math.round(entry.breakMinutes)),
     ]),
@@ -77,7 +78,7 @@ function downloadCsv(filename: string, content: string) {
 // reasons and approvals - in one authorized read
 // (list_prosm_time_timesheet_evidence_pack).
 export default function TimesheetReportPage() {
-  const { t } = useTranslation("timesheets");
+  const { t, i18n } = useTranslation("timesheets");
   const { timesheetId } = useParams<{ timesheetId: string }>();
 
   const [pack, setPack] = useState<EvidencePack | null>(null);
@@ -104,7 +105,7 @@ export default function TimesheetReportPage() {
 
   const handleExportCsv = () => {
     if (!pack) return;
-    downloadCsv(`timesheet-${pack.employee.fullName.replace(/\s+/g, "-")}-${pack.timesheet.periodStart}.csv`, buildCsv(pack));
+    downloadCsv(`timesheet-${pack.employee.fullName.replace(/\s+/g, "-")}-${pack.timesheet.periodStart}.csv`, buildCsv(pack, i18n.language));
   };
 
   const handleViewEvidence = async (storagePath: string) => {
@@ -187,7 +188,7 @@ export default function TimesheetReportPage() {
           </div>
           <div className={styles.summaryItem}>
             {t("report.approvedAt")}
-            <span className={styles.summaryValue}>{pack.timesheet.approvedAt ? new Date(pack.timesheet.approvedAt).toLocaleString() : "—"}</span>
+            <span className={styles.summaryValue}>{pack.timesheet.approvedAt ? formatDateTime(pack.timesheet.approvedAt, i18n.language) : "—"}</span>
           </div>
           <div className={styles.summaryItem}>
             {t("report.lockStatus")}
@@ -202,8 +203,8 @@ export default function TimesheetReportPage() {
         ) : (
           pack.entries.map((entry) => (
             <div key={entry.sessionId} className={styles.row}>
-              <span>{new Date(entry.clockInAt).toLocaleString()}</span>
-              <span>{entry.clockOutAt ? new Date(entry.clockOutAt).toLocaleTimeString() : t("detail.stillOpen")}</span>
+              <span>{formatDateTime(entry.clockInAt, i18n.language)}</span>
+              <span>{entry.clockOutAt ? formatTimeOnly(entry.clockOutAt, i18n.language) : t("detail.stillOpen")}</span>
               <span>{entry.siteName ?? "—"}</span>
               <span>{entry.projectName ?? "—"}</span>
               <span>{formatMinutes(entry.workedMinutes)}</span>
@@ -218,7 +219,7 @@ export default function TimesheetReportPage() {
         ) : (
           pack.exceptions.map((exception) => (
             <div key={exception.id} className={styles.row}>
-              <span>{new Date(exception.createdAt).toLocaleString()}</span>
+              <span>{formatDateTime(exception.createdAt, i18n.language)}</span>
               <span>{Math.round(exception.distanceMeters)} m</span>
               <span>{exception.reasonCategory ?? "—"}</span>
               <span>{exception.employeeReason ?? "—"}</span>
@@ -235,7 +236,7 @@ export default function TimesheetReportPage() {
           <>
             {pack.corrections.map((correction) => (
               <div key={correction.id} className={styles.row}>
-                <span>{new Date(correction.createdAt).toLocaleString()}</span>
+                <span>{formatDateTime(correction.createdAt, i18n.language)}</span>
                 <span>{correction.proposedEventType}</span>
                 <span>{correction.reason}</span>
                 <span>{correction.status}</span>
@@ -243,7 +244,7 @@ export default function TimesheetReportPage() {
             ))}
             {pack.timesheetCorrections.map((correction) => (
               <div key={correction.id} className={styles.row}>
-                <span>{new Date(correction.createdAt).toLocaleString()}</span>
+                <span>{formatDateTime(correction.createdAt, i18n.language)}</span>
                 <span>{t("report.timesheetLevelCorrection")}</span>
                 <span>{correction.reason}</span>
                 <span>{correction.status}</span>
@@ -259,7 +260,7 @@ export default function TimesheetReportPage() {
         ) : (
           pack.evidenceReferences.map((evidence) => (
             <div key={evidence.id} className={styles.row}>
-              <span>{new Date(evidence.capturedAt).toLocaleString()}</span>
+              <span>{formatDateTime(evidence.capturedAt, i18n.language)}</span>
               <span>{evidence.contentType}</span>
               <button type="button" className={styles.noPrint} onClick={() => handleViewEvidence(evidence.storagePath)} style={{ background: "none", border: "none", color: "var(--text-link)", cursor: "pointer", padding: 0, font: "inherit" }}>
                 {t("report.viewEvidence")}
@@ -275,7 +276,7 @@ export default function TimesheetReportPage() {
         ) : (
           pack.approvalTrail.map((row, index) => (
             <div key={index} className={styles.row}>
-              <span>{new Date(row.createdAt).toLocaleString()}</span>
+              <span>{formatDateTime(row.createdAt, i18n.language)}</span>
               <span>{row.actorName}</span>
               <span>{row.action}</span>
               <span>{row.notes ?? "—"}</span>
