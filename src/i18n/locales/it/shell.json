@@ -10,6 +10,7 @@
   "items": {
     "dashboard": "Dashboard",
     "people": "Persone",
-    "sites": "Sedi"
+    "sites": "Sedi",
+    "manager": "Console manager"
   }
 }

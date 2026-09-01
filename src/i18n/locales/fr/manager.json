@@ -1,0 +1,35 @@
+{
+  "title": "Console gestionnaire",
+  "subtitle": "Présence du jour dans votre organisation et révisions d'exceptions/corrections en attente.",
+  "linkPeople": "Aller à Personnes",
+  "linkSites": "Aller à Sites",
+  "reviewError": "Impossible d'examiner cet élément.",
+  "attendance": {
+    "title": "Présence du jour",
+    "employee": "Employé",
+    "site": "Site",
+    "status": "Statut",
+    "presence": "Présence",
+    "presenceActive": "Active",
+    "clockInAt": "Arrivée",
+    "clocked_in": "Pointé (arrivée)",
+    "clocked_out": "Pointé (départ)",
+    "empty": "Aucune activité de présence enregistrée aujourd'hui."
+  },
+  "pending": {
+    "title": "En attente de révision",
+    "empty": "Aucune exception ni correction en attente de révision.",
+    "kind": {
+      "geofence_exception": "Exception de géorepérage",
+      "correction_request": "Demande de correction"
+    },
+    "reviewAction": "Examiner",
+    "notesLabel": "Notes (facultatif)",
+    "action": {
+      "approved": "Approuver",
+      "rejected": "Rejeter",
+      "acknowledged": "Accuser réception",
+      "clarification_requested": "Demander une clarification"
+    }
+  }
+}

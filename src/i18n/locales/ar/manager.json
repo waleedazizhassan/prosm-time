@@ -1,0 +1,35 @@
+{
+  "title": "لوحة المدير",
+  "subtitle": "حضور اليوم عبر مؤسستك ومراجعات الاستثناءات/التصحيحات المعلقة.",
+  "linkPeople": "الانتقال إلى الأشخاص",
+  "linkSites": "الانتقال إلى المواقع",
+  "reviewError": "تعذّرت مراجعة هذا العنصر.",
+  "attendance": {
+    "title": "حضور اليوم",
+    "employee": "الموظف",
+    "site": "الموقع",
+    "status": "الحالة",
+    "presence": "التواجد",
+    "presenceActive": "نشط",
+    "clockInAt": "وقت الحضور",
+    "clocked_in": "مسجّل حضور",
+    "clocked_out": "مسجّل انصراف",
+    "empty": "لا يوجد نشاط حضور مسجل اليوم."
+  },
+  "pending": {
+    "title": "بانتظار المراجعة",
+    "empty": "لا توجد استثناءات أو تصحيحات بانتظار المراجعة.",
+    "kind": {
+      "geofence_exception": "استثناء النطاق الجغرافي",
+      "correction_request": "طلب تصحيح"
+    },
+    "reviewAction": "مراجعة",
+    "notesLabel": "ملاحظات (اختياري)",
+    "action": {
+      "approved": "موافقة",
+      "rejected": "رفض",
+      "acknowledged": "الإحاطة",
+      "clarification_requested": "طلب توضيح"
+    }
+  }
+}

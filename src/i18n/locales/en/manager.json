@@ -1,0 +1,35 @@
+{
+  "title": "Manager Console",
+  "subtitle": "Today's attendance across your organization and pending exception/correction reviews.",
+  "linkPeople": "Go to People",
+  "linkSites": "Go to Sites",
+  "reviewError": "Unable to review this item.",
+  "attendance": {
+    "title": "Today's Attendance",
+    "employee": "Employee",
+    "site": "Site",
+    "status": "Status",
+    "presence": "Presence",
+    "presenceActive": "Active",
+    "clockInAt": "Clock In",
+    "clocked_in": "Clocked In",
+    "clocked_out": "Clocked Out",
+    "empty": "No attendance activity recorded today."
+  },
+  "pending": {
+    "title": "Pending Review",
+    "empty": "No exceptions or corrections awaiting review.",
+    "kind": {
+      "geofence_exception": "Geofence Exception",
+      "correction_request": "Correction Request"
+    },
+    "reviewAction": "Review",
+    "notesLabel": "Notes (optional)",
+    "action": {
+      "approved": "Approve",
+      "rejected": "Reject",
+      "acknowledged": "Acknowledge",
+      "clarification_requested": "Request Clarification"
+    }
+  }
+}

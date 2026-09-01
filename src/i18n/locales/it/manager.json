@@ -1,0 +1,35 @@
+{
+  "title": "Console manager",
+  "subtitle": "Presenze odierne nella tua organizzazione e revisioni di eccezioni/correzioni in sospeso.",
+  "linkPeople": "Vai a Persone",
+  "linkSites": "Vai a Sedi",
+  "reviewError": "Impossibile esaminare questo elemento.",
+  "attendance": {
+    "title": "Presenze odierne",
+    "employee": "Dipendente",
+    "site": "Sede",
+    "status": "Stato",
+    "presence": "Presenza",
+    "presenceActive": "Attiva",
+    "clockInAt": "Entrata",
+    "clocked_in": "Timbrato (entrata)",
+    "clocked_out": "Timbrato (uscita)",
+    "empty": "Nessuna attività di presenza registrata oggi."
+  },
+  "pending": {
+    "title": "In attesa di revisione",
+    "empty": "Nessuna eccezione o correzione in attesa di revisione.",
+    "kind": {
+      "geofence_exception": "Eccezione geofence",
+      "correction_request": "Richiesta di correzione"
+    },
+    "reviewAction": "Esamina",
+    "notesLabel": "Note (facoltative)",
+    "action": {
+      "approved": "Approva",
+      "rejected": "Rifiuta",
+      "acknowledged": "Presa visione",
+      "clarification_requested": "Richiedi chiarimento"
+    }
+  }
+}

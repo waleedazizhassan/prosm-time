@@ -41,6 +41,12 @@ import frSites from "./locales/fr/sites.json";
 import deSites from "./locales/de/sites.json";
 import itSites from "./locales/it/sites.json";
 
+import enManager from "./locales/en/manager.json";
+import arManager from "./locales/ar/manager.json";
+import frManager from "./locales/fr/manager.json";
+import deManager from "./locales/de/manager.json";
+import itManager from "./locales/it/manager.json";
+
 // PROSM Time i18n bootstrap. One namespace per screen/domain area,
 // exactly the way PROSM Platform's own src/i18n/index.js does - never
 // raw strings in components. `shell` is the application shell's own
@@ -50,11 +56,11 @@ import itSites from "./locales/it/sites.json";
 // Management + Map/Geofence, Project Management, §13/§14).
 
 const resources = {
-  en: { common: enCommon, auth: enAuth, dashboard: enDashboard, people: enPeople, shell: enShell, sites: enSites },
-  ar: { common: arCommon, auth: arAuth, dashboard: arDashboard, people: arPeople, shell: arShell, sites: arSites },
-  fr: { common: frCommon, auth: frAuth, dashboard: frDashboard, people: frPeople, shell: frShell, sites: frSites },
-  de: { common: deCommon, auth: deAuth, dashboard: deDashboard, people: dePeople, shell: deShell, sites: deSites },
-  it: { common: itCommon, auth: itAuth, dashboard: itDashboard, people: itPeople, shell: itShell, sites: itSites },
+  en: { common: enCommon, auth: enAuth, dashboard: enDashboard, people: enPeople, shell: enShell, sites: enSites, manager: enManager },
+  ar: { common: arCommon, auth: arAuth, dashboard: arDashboard, people: arPeople, shell: arShell, sites: arSites, manager: arManager },
+  fr: { common: frCommon, auth: frAuth, dashboard: frDashboard, people: frPeople, shell: frShell, sites: frSites, manager: frManager },
+  de: { common: deCommon, auth: deAuth, dashboard: deDashboard, people: dePeople, shell: deShell, sites: deSites, manager: deManager },
+  it: { common: itCommon, auth: itAuth, dashboard: itDashboard, people: itPeople, shell: itShell, sites: itSites, manager: itManager },
 };
 
 export const I18N_STORAGE_KEY = "prosm_time_language";
@@ -68,7 +74,7 @@ i18next
     fallbackLng: DEFAULT_LANGUAGE,
     supportedLngs: LANGUAGE_CODES,
 
-    ns: ["common", "auth", "dashboard", "people", "shell", "sites"],
+    ns: ["common", "auth", "dashboard", "people", "shell", "sites", "manager"],
     defaultNS: "common",
 
     detection: {

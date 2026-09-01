@@ -1,0 +1,160 @@
+import DatabaseManager from "../database/DatabaseManager";
+
+export interface ServiceResult<T = null> {
+  success: boolean;
+  message: string | null;
+  data: T | null;
+}
+
+export interface TodayAttendanceRow {
+  sessionId: string;
+  userFullName: string;
+  siteName: string;
+  status: "clocked_in" | "clocked_out";
+  clockInAt: string;
+  hasActivePresence: boolean;
+}
+
+export interface PendingReviewItem {
+  kind: "geofence_exception" | "correction_request";
+  id: string;
+  userFullName: string;
+  summary: string;
+  createdAt: string;
+}
+
+interface RawUserRef {
+  full_name: string | null;
+}
+
+interface RawAttendanceSessionRow {
+  id: string;
+  status: "clocked_in" | "clocked_out";
+  clock_in_at: string;
+  users: RawUserRef | RawUserRef[] | null;
+  sites: { name: string | null } | { name: string | null }[] | null;
+}
+
+interface RawGeofenceExceptionRow {
+  id: string;
+  distance_meters: number;
+  employee_reason: string | null;
+  created_at: string;
+  users: RawUserRef | RawUserRef[] | null;
+}
+
+interface RawCorrectionRequestRow {
+  id: string;
+  proposed_event_type: string;
+  proposed_correct_time: string;
+  reason: string;
+  created_at: string;
+  users: RawUserRef | RawUserRef[] | null;
+}
+
+function createSuccess<T>(data: T | null = null): ServiceResult<T> {
+  return { success: true, message: null, data };
+}
+function createError<T>(message: string): ServiceResult<T> {
+  return { success: false, message, data: null };
+}
+
+// PROSM Time WP-14/§21 - "Operational dashboard... Exceptions and
+// approvals." No new RPCs needed - geofence_exceptions/correction_
+// requests/attendance_sessions RLS already grants org-wide read to
+// attendance.view holders (WP-06/WP-11); this repository is purely
+// the aggregation queries the Manager Console needs.
+class ManagerRepository {
+  get client() {
+    return DatabaseManager.getClient();
+  }
+
+  async listTodayAttendance(): Promise<ServiceResult<TodayAttendanceRow[]>> {
+    try {
+      const startOfDay = new Date();
+      startOfDay.setHours(0, 0, 0, 0);
+
+      const [sessionsResult, presenceResult] = await Promise.all([
+        this.client.from("attendance_sessions").select("id, status, clock_in_at, users(full_name), sites(name)").gte("clock_in_at", startOfDay.toISOString()).order("clock_in_at", { ascending: false }),
+        this.client.from("presence_sessions").select("attendance_session_id").eq("status", "active"),
+      ]);
+
+      if (sessionsResult.error) return createError(sessionsResult.error.message);
+
+      const activePresenceIds = new Set((presenceResult.data ?? []).map((row: { attendance_session_id: string }) => row.attendance_session_id));
+
+      const rows = ((sessionsResult.data ?? []) as RawAttendanceSessionRow[]).map((row) => {
+        const user = Array.isArray(row.users) ? row.users[0] : row.users;
+        const site = Array.isArray(row.sites) ? row.sites[0] : row.sites;
+        return {
+          sessionId: row.id,
+          userFullName: user?.full_name ?? "",
+          siteName: site?.name ?? "",
+          status: row.status,
+          clockInAt: row.clock_in_at,
+          hasActivePresence: activePresenceIds.has(row.id),
+        };
+      });
+
+      return createSuccess(rows);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Manager console service unavailable.");
+    }
+  }
+
+  async listPendingReview(): Promise<ServiceResult<PendingReviewItem[]>> {
+    try {
+      const [exceptionsResult, correctionsResult] = await Promise.all([
+        this.client.from("geofence_exceptions").select("id, distance_meters, employee_reason, created_at, users(full_name)").eq("status", "pending_review"),
+        this.client.from("correction_requests").select("id, proposed_event_type, proposed_correct_time, reason, created_at, users(full_name)").eq("status", "pending"),
+      ]);
+
+      if (exceptionsResult.error) return createError(exceptionsResult.error.message);
+      if (correctionsResult.error) return createError(correctionsResult.error.message);
+
+      const exceptionItems: PendingReviewItem[] = ((exceptionsResult.data ?? []) as RawGeofenceExceptionRow[]).map((row) => {
+        const user = Array.isArray(row.users) ? row.users[0] : row.users;
+        return {
+          kind: "geofence_exception" as const,
+          id: row.id,
+          userFullName: user?.full_name ?? "",
+          summary: `${Math.round(row.distance_meters)} m outside area - ${row.employee_reason ?? ""}`,
+          createdAt: row.created_at,
+        };
+      });
+
+      const correctionItems: PendingReviewItem[] = ((correctionsResult.data ?? []) as RawCorrectionRequestRow[]).map((row) => {
+        const user = Array.isArray(row.users) ? row.users[0] : row.users;
+        return {
+          kind: "correction_request" as const,
+          id: row.id,
+          userFullName: user?.full_name ?? "",
+          summary: `${row.proposed_event_type} -> ${new Date(row.proposed_correct_time).toLocaleString()} - ${row.reason}`,
+          createdAt: row.created_at,
+        };
+      });
+
+      return createSuccess([...exceptionItems, ...correctionItems].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Manager console service unavailable.");
+    }
+  }
+
+  async reviewItem(kind: "geofence_exception" | "correction_request", targetId: string, actionType: string, notes?: string): Promise<ServiceResult> {
+    try {
+      const { data, error } = await this.client.functions.invoke("review-exception", {
+        body: { kind, targetId, actionType, notes: notes ?? null },
+      });
+      if (error) {
+        const errorBody = await error.context?.json?.().catch(() => null);
+        return createError(errorBody?.error?.message ?? error.message ?? "Unable to review this item.");
+      }
+      if (data?.success === false) return createError(data?.error?.message ?? "Unable to review this item.");
+      return createSuccess();
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Manager console service unavailable.");
+    }
+  }
+}
+
+export default new ManagerRepository();

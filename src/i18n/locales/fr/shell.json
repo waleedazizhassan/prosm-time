@@ -10,6 +10,7 @@
   "items": {
     "dashboard": "Tableau de bord",
     "people": "Personnes",
-    "sites": "Sites"
+    "sites": "Sites",
+    "manager": "Console gestionnaire"
   }
 }

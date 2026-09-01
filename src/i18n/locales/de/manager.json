@@ -1,0 +1,35 @@
+{
+  "title": "Manager-Konsole",
+  "subtitle": "Heutige Anwesenheit in Ihrer Organisation und ausstehende Ausnahme-/Korrekturprüfungen.",
+  "linkPeople": "Zu Personen",
+  "linkSites": "Zu Standorten",
+  "reviewError": "Dieser Eintrag kann nicht geprüft werden.",
+  "attendance": {
+    "title": "Heutige Anwesenheit",
+    "employee": "Mitarbeiter",
+    "site": "Standort",
+    "status": "Status",
+    "presence": "Präsenz",
+    "presenceActive": "Aktiv",
+    "clockInAt": "Kommen",
+    "clocked_in": "Eingestempelt",
+    "clocked_out": "Ausgestempelt",
+    "empty": "Heute wurde keine Anwesenheit erfasst."
+  },
+  "pending": {
+    "title": "Ausstehende Prüfung",
+    "empty": "Keine Ausnahmen oder Korrekturen zur Prüfung.",
+    "kind": {
+      "geofence_exception": "Geofence-Ausnahme",
+      "correction_request": "Korrekturantrag"
+    },
+    "reviewAction": "Prüfen",
+    "notesLabel": "Notizen (optional)",
+    "action": {
+      "approved": "Genehmigen",
+      "rejected": "Ablehnen",
+      "acknowledged": "Zur Kenntnis genommen",
+      "clarification_requested": "Klärung anfordern"
+    }
+  }
+}
