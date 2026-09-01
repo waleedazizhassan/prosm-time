@@ -18,6 +18,14 @@ import { formatTimeOnly, formatDateOnly } from "../../core/utils/formatDate";
 
 const REVIEW_ACTIONS = ["approved", "rejected", "acknowledged", "clarification_requested"] as const;
 
+function formatWorkedHours(clockInAt: string, clockOutAt: string | null): string {
+  const endMs = clockOutAt ? new Date(clockOutAt).getTime() : Date.now();
+  const totalMinutes = Math.max(0, Math.round((endMs - new Date(clockInAt).getTime()) / 60000));
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+  return `${hours}h ${minutes}m`;
+}
+
 // PROSM Time WP-14/§21 - "Operational dashboard... Exceptions and
 // approvals." Deliberately does not duplicate Employees (/people),
 // Sites/Projects (/sites), or Administrator & Permission Management
@@ -83,13 +91,20 @@ export default function ManagerConsolePage() {
   // (Table, not a list) - the real gap was a missing Clock Out column
   // (ManagerRepository now selects clock_out_at too) and no day
   // context; both fixed here using the existing real data only.
+  //
+  // § live UX review, user-directed - the last column showed
+  // "Presence: Active" only while WP-18 presence monitoring was live,
+  // "—" for every completed session (i.e. almost every row on a real
+  // day). Replaced with worked hours (clockInAt -> clockOutAt, or now
+  // if still open) - useful for every row, computed from the same real
+  // data already on screen, not a new metric.
   const attendanceColumns: TableColumn<TodayAttendanceRow>[] = [
     { key: "name", header: t("attendance.employee"), render: (row) => row.userFullName },
     { key: "site", header: t("attendance.site"), render: (row) => row.siteName },
     { key: "clockInAt", header: t("attendance.clockInAt"), render: (row) => formatTimeOnly(row.clockInAt, i18n.language) },
     { key: "clockOutAt", header: t("attendance.clockOutAt"), render: (row) => (row.clockOutAt ? formatTimeOnly(row.clockOutAt, i18n.language) : "—") },
     { key: "status", header: t("attendance.status"), render: (row) => <StatusBadge status={row.status === "clocked_in" ? "active" : "neutral"}>{t(`attendance.${row.status}`)}</StatusBadge> },
-    { key: "presence", header: t("attendance.presence"), render: (row) => (row.hasActivePresence ? <StatusBadge status="active">{t("attendance.presenceActive")}</StatusBadge> : "—") },
+    { key: "workedHours", header: t("attendance.workedHours"), render: (row) => formatWorkedHours(row.clockInAt, row.clockOutAt) },
   ];
 
   return (

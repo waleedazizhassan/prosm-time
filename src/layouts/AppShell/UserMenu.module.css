@@ -4,25 +4,25 @@
    has today (name/email/role + sign out) - not that panel's own
    Settings/Appearance/Delegation sections, which have no equivalent
    here yet. */
-/* § live UX review bug fix, confirmed from a clear screenshot - `left`/
-   `right: var(--space-3)` stretched this panel to fill its positioned
-   ancestor's own width. That ancestor sits inside the Sidebar's own
-   footer, so when the Sidebar is collapsed to its 84px icon rail, the
-   panel was squeezed down with it - every word wrapping onto its own
-   line, the language/theme <select> elements shrinking to their native
-   minimum width with no room to show the selected option's text at
-   all (what read as "jumbled data"/only a bare checkmark icon). A
-   flyout menu opening off a collapsed rail is supposed to be wider
-   than the rail itself, not confined to it - fixed width instead,
-   anchored with a logical inset so it still opens on the correct side
-   under RTL. */
+/* § live UX review bug fix (round 2, confirmed from a second
+   screenshot) - a fixed width alone wasn't enough. `.sidebar` sets
+   `overflow-y: auto`, which per the CSS spec computes `overflow-x` to
+   `auto` too (an axis left at its default `visible` becomes `auto`
+   the instant the OTHER axis is anything but `visible`) - so the
+   Sidebar was silently clipping any horizontal overflow the whole
+   time, and this panel wasn't portaled out of that ancestor like
+   WeatherMiniPanel/HeaderRadio/HeaderOrganizationCard already are.
+   Now portaled to document.body and positioned via the trigger's real
+   getBoundingClientRect() (UserMenu.tsx), so `position: fixed` here
+   with JS-computed top/left - the exact same architecture those three
+   components already use for this exact class of problem. */
 .panel {
-  position: absolute;
-  bottom: calc(100% + var(--space-2));
-  inset-inline-start: var(--space-3);
+  position: fixed;
 
   width: 260px;
-  max-width: calc(100vw - 24px);
+  max-width: calc(100vw - 16px);
+
+  overflow-y: auto;
 
   background: var(--surface-card);
   border: 1px solid var(--border-light);
@@ -30,7 +30,14 @@
   box-shadow: var(--shadow-lg);
 
   padding: var(--space-4);
-  z-index: var(--z-dropdown);
+  z-index: var(--z-panel);
+
+  animation: userMenuIn 160ms ease;
+}
+
+@keyframes userMenuIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .identity {
