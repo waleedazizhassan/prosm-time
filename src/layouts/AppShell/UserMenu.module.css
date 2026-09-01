@@ -4,11 +4,25 @@
    has today (name/email/role + sign out) - not that panel's own
    Settings/Appearance/Delegation sections, which have no equivalent
    here yet. */
+/* § live UX review bug fix, confirmed from a clear screenshot - `left`/
+   `right: var(--space-3)` stretched this panel to fill its positioned
+   ancestor's own width. That ancestor sits inside the Sidebar's own
+   footer, so when the Sidebar is collapsed to its 84px icon rail, the
+   panel was squeezed down with it - every word wrapping onto its own
+   line, the language/theme <select> elements shrinking to their native
+   minimum width with no room to show the selected option's text at
+   all (what read as "jumbled data"/only a bare checkmark icon). A
+   flyout menu opening off a collapsed rail is supposed to be wider
+   than the rail itself, not confined to it - fixed width instead,
+   anchored with a logical inset so it still opens on the correct side
+   under RTL. */
 .panel {
   position: absolute;
   bottom: calc(100% + var(--space-2));
-  left: var(--space-3);
-  right: var(--space-3);
+  inset-inline-start: var(--space-3);
+
+  width: 260px;
+  max-width: calc(100vw - 24px);
 
   background: var(--surface-card);
   border: 1px solid var(--border-light);
