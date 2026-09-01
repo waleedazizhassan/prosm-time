@@ -1,0 +1,49 @@
+{
+  "title": "Help & Support",
+  "subtitle": "Product help, usage guidance and support contact.",
+  "guides": {
+    "gettingStarted": {
+      "title": "Getting Started",
+      "body": "Sign in with the email and password your administrator set up for you. On the Dashboard, use Clock In to start your shift and Clock Out to end it. Your organization's site(s) and any camera/GPS requirements are configured by your administrator."
+    },
+    "attendance": {
+      "title": "Clocking In & Out",
+      "body": "Choose your site (and project, if applicable) before clocking in. Some sites require a photo before you can clock in or out. If you clock in or out outside your assigned work area, you will be asked to explain why - your explanation is reviewed by a manager."
+    },
+    "timesheets": {
+      "title": "Timesheets",
+      "body": "Once your manager generates a timesheet for a period, it appears under Timesheets for you to review and submit for approval. Worked time, breaks and overtime are shown as separate totals. Once approved, a timesheet is locked - if you believe it needs a correction, you can request one from the timesheet's own page."
+    },
+    "kiosk": {
+      "title": "Kiosk Mode",
+      "body": "At sites with a shared kiosk device, select your name from the list, enter your personal kiosk PIN, then Clock In or Clock Out. Your kiosk PIN is separate from your login password - set or change it from the Dashboard."
+    },
+    "exceptions": {
+      "title": "Exceptions",
+      "body": "If you clock in or out outside your assigned work area, this is recorded as an exception. Provide a short reason from the Dashboard so a manager can review it."
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "q1": {
+      "question": "I forgot to clock out - what do I do?",
+      "answer": "Contact an administrator or manager - they can record the correct Clock Out on your behalf, and the action is recorded as theirs, not yours."
+    },
+    "q2": {
+      "question": "Why was my Clock In flagged as outside my work area?",
+      "answer": "Your site has a configured geofence and GPS accuracy tolerance. If your reported location fell outside that area, you're asked to explain why so a manager can review it."
+    },
+    "q3": {
+      "question": "Can I use the app while offline?",
+      "answer": "Clock In and Clock Out are queued locally if you lose connectivity and sync automatically once you're back online - you'll see a pending-sync notice until it's confirmed."
+    },
+    "q4": {
+      "question": "How do I change the language or theme?",
+      "answer": "Open the user menu (bottom of the sidebar) - Language and Appearance (Dark/Light/System) can be changed there at any time."
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "body": "For product help or support, contact us at:"
+  }
+}

@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 
 import { useAuth } from "../core/context/AuthContext";
+import SplashScreen from "../modules/splash/SplashScreen";
 
 // PROSM Time - the client-side redirect ONLY. It is never the real
 // authorization boundary (§9: "the client only reflects, never
@@ -13,7 +14,7 @@ export default function ProtectedRoute({ children }: { children: ReactNode }) {
   const { loading, isAuthenticated } = useAuth();
 
   if (loading) {
-    return <div style={{ padding: "2rem" }}>…</div>;
+    return <SplashScreen />;
   }
 
   if (!isAuthenticated) {

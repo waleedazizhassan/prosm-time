@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { LayoutDashboard, Users, MapPin, LayoutGrid, FileText } from "lucide-react";
+import { LayoutDashboard, Users, MapPin, LayoutGrid, FileText, HelpCircle } from "lucide-react";
 
 export interface NavItem {
   id: string;
@@ -28,4 +28,5 @@ export const NAV_ITEMS: NavItem[] = [
   // page itself further gates its Generate/Approve/Correction-review
   // sections on timesheets.generate/timesheets.approve/attendance.correct.
   { id: "timesheets", labelKey: "items.timesheets", path: "/timesheets", icon: FileText, requiredPermission: null },
+  { id: "help", labelKey: "items.help", path: "/help", icon: HelpCircle, requiredPermission: null },
 ];

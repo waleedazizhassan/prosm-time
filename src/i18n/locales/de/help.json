@@ -1,0 +1,49 @@
+{
+  "title": "Hilfe & Support",
+  "subtitle": "Produkthilfe, Nutzungshinweise und Support-Kontakt.",
+  "guides": {
+    "gettingStarted": {
+      "title": "Erste Schritte",
+      "body": "Melden Sie sich mit der E-Mail-Adresse und dem Passwort an, die Ihr Administrator für Sie eingerichtet hat. Nutzen Sie auf dem Dashboard „Einstempeln“, um Ihre Schicht zu beginnen, und „Ausstempeln“, um sie zu beenden. Die Standorte Ihrer Organisation sowie eventuelle Kamera-/GPS-Anforderungen werden von Ihrem Administrator konfiguriert."
+    },
+    "attendance": {
+      "title": "Ein- und Ausstempeln",
+      "body": "Wählen Sie vor dem Einstempeln Ihren Standort (und ggf. Ihr Projekt). An manchen Standorten ist vor dem Ein- oder Ausstempeln ein Foto erforderlich. Wenn Sie außerhalb Ihres zugewiesenen Arbeitsbereichs ein- oder ausstempeln, werden Sie um eine Begründung gebeten - diese wird von einem Manager geprüft."
+    },
+    "timesheets": {
+      "title": "Stundenzettel",
+      "body": "Sobald Ihr Manager einen Stundenzettel für einen Zeitraum erstellt, erscheint dieser unter Stundenzettel zur Prüfung und Einreichung zur Genehmigung. Gearbeitete Zeit, Pausen und Überstunden werden als separate Summen angezeigt. Nach der Genehmigung ist ein Stundenzettel gesperrt - falls eine Korrektur nötig ist, können Sie diese über die Stundenzettelseite anfordern."
+    },
+    "kiosk": {
+      "title": "Kiosk-Modus",
+      "body": "An Standorten mit einem gemeinsam genutzten Kiosk-Gerät wählen Sie Ihren Namen aus der Liste, geben Ihre persönliche Kiosk-PIN ein und stempeln dann ein oder aus. Ihre Kiosk-PIN ist unabhängig von Ihrem Anmeldepasswort - Sie können sie über das Dashboard festlegen oder ändern."
+    },
+    "exceptions": {
+      "title": "Ausnahmen",
+      "body": "Wenn Sie außerhalb Ihres zugewiesenen Arbeitsbereichs ein- oder ausstempeln, wird dies als Ausnahme erfasst. Geben Sie über das Dashboard eine kurze Begründung an, damit ein Manager sie prüfen kann."
+    }
+  },
+  "faq": {
+    "title": "Häufig gestellte Fragen",
+    "q1": {
+      "question": "Ich habe vergessen auszustempeln - was tue ich?",
+      "answer": "Wenden Sie sich an einen Administrator oder Manager - dieser kann das korrekte Ausstempeln in Ihrem Namen erfassen, und die Aktion wird als seine, nicht als Ihre, aufgezeichnet."
+    },
+    "q2": {
+      "question": "Warum wurde mein Einstempeln als außerhalb meines Arbeitsbereichs markiert?",
+      "answer": "Ihr Standort hat einen konfigurierten Geofence und eine GPS-Genauigkeitstoleranz. Wenn Ihr gemeldeter Standort außerhalb dieses Bereichs lag, werden Sie um eine Begründung gebeten, damit ein Manager sie prüfen kann."
+    },
+    "q3": {
+      "question": "Kann ich die App offline nutzen?",
+      "answer": "Ein- und Ausstempeln werden bei fehlender Verbindung lokal in eine Warteschlange gestellt und automatisch synchronisiert, sobald Sie wieder online sind - bis zur Bestätigung sehen Sie einen Hinweis auf ausstehende Synchronisierung."
+    },
+    "q4": {
+      "question": "Wie ändere ich die Sprache oder das Erscheinungsbild?",
+      "answer": "Öffnen Sie das Benutzermenü (unten in der Seitenleiste) - Sprache und Erscheinungsbild (Dunkel/Hell/System) können dort jederzeit geändert werden."
+    }
+  },
+  "contact": {
+    "title": "Kontakt",
+    "body": "Für Produkthilfe oder Support kontaktieren Sie uns unter:"
+  }
+}

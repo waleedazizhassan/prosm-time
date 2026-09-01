@@ -1,0 +1,49 @@
+{
+  "title": "Assistenza e supporto",
+  "subtitle": "Guida al prodotto, indicazioni d'uso e contatto assistenza.",
+  "guides": {
+    "gettingStarted": {
+      "title": "Per iniziare",
+      "body": "Accedi con l'email e la password configurate dal tuo amministratore. Nella Dashboard, usa Timbra entrata per iniziare il turno e Timbra uscita per terminarlo. Le sedi della tua organizzazione ed eventuali requisiti fotografici/GPS sono configurati dal tuo amministratore."
+    },
+    "attendance": {
+      "title": "Timbrare entrata e uscita",
+      "body": "Scegli la tua sede (e il progetto, se applicabile) prima di timbrare l'entrata. Alcune sedi richiedono una foto prima di poter timbrare entrata o uscita. Se timbri al di fuori della tua area di lavoro assegnata, ti verrà chiesto di spiegare il motivo - la tua spiegazione viene esaminata da un responsabile."
+    },
+    "timesheets": {
+      "title": "Fogli ore",
+      "body": "Una volta che il tuo responsabile genera un foglio ore per un periodo, questo appare in Fogli ore per la tua revisione e l'invio per l'approvazione. Ore lavorate, pause e straordinari sono mostrati come totali separati. Una volta approvato, un foglio ore viene bloccato - se ritieni sia necessaria una correzione, puoi richiederla dalla pagina del foglio ore stesso."
+    },
+    "kiosk": {
+      "title": "Modalità chiosco",
+      "body": "Nelle sedi con un dispositivo chiosco condiviso, seleziona il tuo nome dall'elenco, inserisci il tuo PIN personale del chiosco, quindi timbra entrata o uscita. Il tuo PIN del chiosco è indipendente dalla password di accesso - impostalo o modificalo dalla Dashboard."
+    },
+    "exceptions": {
+      "title": "Eccezioni",
+      "body": "Se timbri entrata o uscita al di fuori della tua area di lavoro assegnata, questo viene registrato come eccezione. Fornisci un breve motivo dalla Dashboard affinché un responsabile possa esaminarlo."
+    }
+  },
+  "faq": {
+    "title": "Domande frequenti",
+    "q1": {
+      "question": "Ho dimenticato di timbrare l'uscita, cosa faccio?",
+      "answer": "Contatta un amministratore o un responsabile - può registrare la timbratura di uscita corretta per tuo conto, e l'azione viene registrata come sua, non tua."
+    },
+    "q2": {
+      "question": "Perché la mia timbratura di entrata è stata segnalata come fuori dalla mia area di lavoro?",
+      "answer": "La tua sede ha un geofence configurato e una tolleranza di precisione GPS. Se la posizione rilevata era al di fuori di quest'area, ti viene chiesto di spiegare il motivo affinché un responsabile possa esaminarlo."
+    },
+    "q3": {
+      "question": "Posso usare l'app offline?",
+      "answer": "Le timbrature di entrata e uscita vengono messe in coda localmente in caso di perdita di connessione e si sincronizzano automaticamente al ripristino della connessione - vedrai un avviso di sincronizzazione in sospeso fino alla conferma."
+    },
+    "q4": {
+      "question": "Come cambio la lingua o l'aspetto?",
+      "answer": "Apri il menu utente (in fondo alla barra laterale) - lingua e aspetto (Scuro/Chiaro/Sistema) possono essere modificati lì in qualsiasi momento."
+    }
+  },
+  "contact": {
+    "title": "Contatti",
+    "body": "Per assistenza sul prodotto, contattaci a:"
+  }
+}

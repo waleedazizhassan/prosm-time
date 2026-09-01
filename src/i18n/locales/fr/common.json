@@ -7,5 +7,9 @@
     "close": "Fermer",
     "save": "Enregistrer",
     "retry": "Réessayer"
+  },
+  "splash": {
+    "tagline": "Présence, suivi et gestion du temps de la main-d'œuvre.",
+    "contactLabel": "Des questions ? Contactez-nous :"
   }
 }

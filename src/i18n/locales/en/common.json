@@ -7,5 +7,9 @@
     "close": "Close",
     "save": "Save",
     "retry": "Retry"
+  },
+  "splash": {
+    "tagline": "Workforce attendance, presence and time management.",
+    "contactLabel": "Questions? Contact us:"
   }
 }

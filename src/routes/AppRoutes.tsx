@@ -16,6 +16,8 @@ import ManagerConsolePage from "../modules/manager/ManagerConsolePage";
 import TimesheetsPage from "../modules/timesheets/TimesheetsPage";
 import TimesheetReportPage from "../modules/timesheets/TimesheetReportPage";
 import KioskPage from "../modules/kiosk/KioskPage";
+import HelpPage from "../modules/help/HelpPage";
+import SplashScreen from "../modules/splash/SplashScreen";
 
 // PROSM Time route map. /activate, /login, /accept-invitation are
 // public (no session exists yet by definition at any of them) and
@@ -29,7 +31,7 @@ import KioskPage from "../modules/kiosk/KioskPage";
 function RootRedirect() {
   const { loading, isAuthenticated } = useAuth();
 
-  if (loading) return null;
+  if (loading) return <SplashScreen />;
 
   return <Navigate to={isAuthenticated ? "/dashboard" : "/activate"} replace />;
 }
@@ -60,6 +62,7 @@ export default function AppRoutes() {
             <Route path="/timesheets" element={<TimesheetsPage />} />
             <Route path="/timesheets/:timesheetId/report" element={<TimesheetReportPage />} />
             <Route path="/kiosk/:siteId" element={<KioskPage />} />
+            <Route path="/help" element={<HelpPage />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />

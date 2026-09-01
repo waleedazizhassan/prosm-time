@@ -7,5 +7,9 @@
     "close": "Chiudi",
     "save": "Salva",
     "retry": "Riprova"
+  },
+  "splash": {
+    "tagline": "Presenza, gestione della forza lavoro e del tempo.",
+    "contactLabel": "Domande? Contattaci:"
   }
 }

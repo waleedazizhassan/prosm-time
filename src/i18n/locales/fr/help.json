@@ -1,0 +1,49 @@
+{
+  "title": "Aide et assistance",
+  "subtitle": "Aide produit, conseils d'utilisation et contact d'assistance.",
+  "guides": {
+    "gettingStarted": {
+      "title": "Prise en main",
+      "body": "Connectez-vous avec l'e-mail et le mot de passe configurés par votre administrateur. Sur le tableau de bord, utilisez Pointer l'arrivée pour commencer votre poste et Pointer le départ pour le terminer. Les sites de votre organisation ainsi que les éventuelles exigences de photo/GPS sont configurés par votre administrateur."
+    },
+    "attendance": {
+      "title": "Pointer l'arrivée et le départ",
+      "body": "Choisissez votre site (et votre projet, le cas échéant) avant de pointer votre arrivée. Certains sites exigent une photo avant de pointer l'arrivée ou le départ. Si vous pointez en dehors de votre zone de travail assignée, on vous demandera d'expliquer pourquoi - votre explication est examinée par un responsable."
+    },
+    "timesheets": {
+      "title": "Feuilles de temps",
+      "body": "Une fois qu'un responsable génère une feuille de temps pour une période, elle apparaît dans Feuilles de temps pour révision et soumission pour approbation. Le temps travaillé, les pauses et les heures supplémentaires sont affichés en totaux distincts. Une fois approuvée, une feuille de temps est verrouillée - si vous pensez qu'une correction est nécessaire, vous pouvez en faire la demande depuis la page de la feuille de temps."
+    },
+    "kiosk": {
+      "title": "Mode kiosque",
+      "body": "Sur les sites disposant d'un appareil kiosque partagé, sélectionnez votre nom dans la liste, saisissez votre code PIN kiosque personnel, puis pointez votre arrivée ou votre départ. Votre code PIN kiosque est distinct de votre mot de passe de connexion - définissez-le ou modifiez-le depuis le tableau de bord."
+    },
+    "exceptions": {
+      "title": "Exceptions",
+      "body": "Si vous pointez en dehors de votre zone de travail assignée, cela est enregistré comme une exception. Indiquez un court motif depuis le tableau de bord afin qu'un responsable puisse l'examiner."
+    }
+  },
+  "faq": {
+    "title": "Questions fréquentes",
+    "q1": {
+      "question": "J'ai oublié de pointer mon départ, que dois-je faire ?",
+      "answer": "Contactez un administrateur ou un responsable - il peut enregistrer le bon pointage de départ en votre nom, et l'action est enregistrée comme la sienne, pas la vôtre."
+    },
+    "q2": {
+      "question": "Pourquoi mon pointage d'arrivée a-t-il été signalé comme hors de ma zone de travail ?",
+      "answer": "Votre site dispose d'un géorepérage configuré et d'une tolérance de précision GPS. Si votre position signalée se trouvait en dehors de cette zone, on vous demande d'expliquer pourquoi afin qu'un responsable puisse l'examiner."
+    },
+    "q3": {
+      "question": "Puis-je utiliser l'application hors ligne ?",
+      "answer": "Les pointages d'arrivée et de départ sont mis en file d'attente localement en cas de perte de connexion et se synchronisent automatiquement une fois de retour en ligne - vous verrez un avis de synchronisation en attente jusqu'à confirmation."
+    },
+    "q4": {
+      "question": "Comment changer la langue ou l'apparence ?",
+      "answer": "Ouvrez le menu utilisateur (en bas de la barre latérale) - la langue et l'apparence (Sombre/Clair/Système) peuvent y être modifiées à tout moment."
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "body": "Pour toute aide produit ou assistance, contactez-nous à :"
+  }
+}

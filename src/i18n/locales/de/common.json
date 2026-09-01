@@ -7,5 +7,9 @@
     "close": "Schließen",
     "save": "Speichern",
     "retry": "Erneut versuchen"
+  },
+  "splash": {
+    "tagline": "Anwesenheit, Präsenz und Zeitmanagement für die Belegschaft.",
+    "contactLabel": "Fragen? Kontaktieren Sie uns:"
   }
 }

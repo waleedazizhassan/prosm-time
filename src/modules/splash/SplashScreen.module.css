@@ -1,0 +1,50 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--surface-app);
+  padding: var(--space-6);
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.appName {
+  margin: 0;
+  font-size: var(--font-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.tagline {
+  margin: 0;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+.footer {
+  position: absolute;
+  bottom: var(--space-6);
+
+  margin: 0;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.footerLink {
+  color: var(--text-link);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+}
+
+.footerLink:hover {
+  text-decoration: underline;
+}
