@@ -229,7 +229,6 @@ export default function ClockInOutCard() {
   // needed. Location capture and the offline-queue path are otherwise
   // byte-for-byte what WP-06/WP-15/§25 already established.
   const performClockIn = async (evidenceFile: File | null) => {
-    if (!siteId) return;
     setSubmitting(true);
     setError("");
     setEvidenceWarning("");
@@ -251,14 +250,14 @@ export default function ClockInOutCard() {
     // than surfaced as an error; the client-captured time/coordinates/
     // evidence captured above travel with the queued item unchanged.
     if (typeof navigator !== "undefined" && navigator.onLine === false) {
-      await queueOffline("clock_in", { siteId, projectId: projectId || null, latitude, longitude, accuracyMeters }, evidenceFile);
+      await queueOffline("clock_in", { siteId: siteId || null, projectId: projectId || null, latitude, longitude, accuracyMeters }, evidenceFile);
       return;
     }
 
-    const result = await AttendanceRepository.clockIn({ siteId, projectId: projectId || null, latitude, longitude, accuracyMeters });
+    const result = await AttendanceRepository.clockIn({ siteId: siteId || null, projectId: projectId || null, latitude, longitude, accuracyMeters });
 
     if (result.networkError) {
-      await queueOffline("clock_in", { siteId, projectId: projectId || null, latitude, longitude, accuracyMeters }, evidenceFile);
+      await queueOffline("clock_in", { siteId: siteId || null, projectId: projectId || null, latitude, longitude, accuracyMeters }, evidenceFile);
       return;
     }
 
@@ -281,7 +280,7 @@ export default function ClockInOutCard() {
 
   const queueOffline = async (
     type: "clock_in" | "clock_out",
-    location: { siteId?: string; projectId?: string | null; latitude: number | null; longitude: number | null; accuracyMeters: number | null },
+    location: { siteId?: string | null; projectId?: string | null; latitude: number | null; longitude: number | null; accuracyMeters: number | null },
     evidenceFile: File | null,
   ) => {
     if (!profile) {
@@ -353,7 +352,6 @@ export default function ClockInOutCard() {
   };
 
   const handleClockInTap = () => {
-    if (!siteId) return;
     if (clockInCameraRequired) {
       setCameraFor("clockIn");
       return;
@@ -548,20 +546,36 @@ export default function ClockInOutCard() {
             </div>
           ) : null}
         </>
-      ) : sites.length === 0 ? (
-        <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("attendance.noAssignedSites")}</p>
       ) : (
         <>
-          <Select label={t("attendance.siteLabel")} name="clockInSite" value={siteId} onChange={(event) => setSiteId(event.target.value)} disabled={submitting} options={sites.map((site) => ({ value: site.id, label: site.name }))} />
+          {/* § live UX review, user-directed - "site should be optional;
+              the important thing is registering attendance at the
+              employee's actual current location, since they may be
+              working somewhere not registered as a work site." Site
+              stays the default, preferred choice when one is assigned
+              (still first in the list, still auto-selected by load()
+              below), but "No site" is now a real, always-available
+              option rather than sites.length === 0 being a dead end
+              with no way to clock in at all. */}
           <Select
-            label={t("attendance.projectLabel")}
-            name="clockInProject"
-            value={projectId}
-            onChange={(event) => setProjectId(event.target.value)}
-            disabled={submitting || projects.length === 0}
-            options={[{ value: "", label: t("attendance.noProject") }, ...projects.map((project) => ({ value: project.id, label: project.name }))]}
+            label={t("attendance.siteLabel")}
+            name="clockInSite"
+            value={siteId}
+            onChange={(event) => setSiteId(event.target.value)}
+            disabled={submitting}
+            options={[{ value: "", label: t("attendance.noSiteOption") }, ...sites.map((site) => ({ value: site.id, label: site.name }))]}
           />
-          <Button fullWidth onClick={handleClockInTap} loading={submitting} disabled={!siteId}>
+          {siteId ? (
+            <Select
+              label={t("attendance.projectLabel")}
+              name="clockInProject"
+              value={projectId}
+              onChange={(event) => setProjectId(event.target.value)}
+              disabled={submitting || projects.length === 0}
+              options={[{ value: "", label: t("attendance.noProject") }, ...projects.map((project) => ({ value: project.id, label: project.name }))]}
+            />
+          ) : null}
+          <Button fullWidth onClick={handleClockInTap} loading={submitting}>
             {t("attendance.clockInAction")}
           </Button>
         </>

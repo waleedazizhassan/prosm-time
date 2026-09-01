@@ -21,7 +21,13 @@ export interface AttendanceSession {
 }
 
 export interface ClockInInput {
-  siteId: string;
+  // § live UX review, user-directed - site is optional: an employee
+  // can clock in at their real current location even when it isn't a
+  // registered site. WP-06's own clock_in_prosm_time_attendance now
+  // accepts a null site and skips site assignment/geofence/presence
+  // logic entirely in that case - see the migration's own header for
+  // the full reasoning.
+  siteId?: string | null;
   projectId?: string | null;
   latitude?: number | null;
   longitude?: number | null;

@@ -11,7 +11,8 @@
     "period": "Period",
     "status": "Status",
     "worked": "Worked",
-    "overtime": "Overtime"
+    "overtime": "Overtime",
+    "export": "Export"
   },
   "status": {
     "draft": "Draft",

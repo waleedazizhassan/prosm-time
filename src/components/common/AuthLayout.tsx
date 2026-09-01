@@ -19,7 +19,7 @@ export default function AuthLayout({ title, subtitle, children, footer }: AuthLa
     <div className={styles.page}>
       <div className={styles.card}>
         <div className={styles.brandRow}>
-          <BrandMark size={48} />
+          <BrandMark size={72} />
         </div>
         <h1 className={styles.title}>{title}</h1>
         <p className={styles.subtitle}>{subtitle}</p>

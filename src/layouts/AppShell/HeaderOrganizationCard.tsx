@@ -1,8 +1,9 @@
-import { memo, useCallback, useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
+import { memo, useCallback, useEffect, useRef, useState, type ChangeEvent, type MouseEvent as ReactMouseEvent } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
-import { RefreshCw } from "lucide-react";
+import { RefreshCw, Upload, Loader2 } from "lucide-react";
 
+import { useAuth } from "../../core/context/AuthContext";
 import OrganizationRepository, { type Organization } from "../../core/repositories/OrganizationRepository";
 import LicenseRepository, { type LicenseState } from "../../core/repositories/LicenseRepository";
 import StatusBadge from "../../components/common/StatusBadge";
@@ -25,16 +26,20 @@ const VIEWPORT_MARGIN = 8;
 // refresh icon, not dropped.
 function HeaderOrganizationCard() {
   const { t, i18n } = useTranslation("dashboard");
+  const { profile } = useAuth();
 
   const [organization, setOrganization] = useState<Organization | null>(null);
   const [license, setLicense] = useState<LicenseState | null>(null);
   const [panelOpen, setPanelOpen] = useState(false);
   const [panelPosition, setPanelPosition] = useState<{ top: number; left: number } | null>(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [uploadingLogo, setUploadingLogo] = useState(false);
+  const [logoError, setLogoError] = useState("");
 
   const triggerRef = useRef<HTMLButtonElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const logoInputRef = useRef<HTMLInputElement>(null);
 
   const load = useCallback(async () => {
     const [orgResult, licenseResult] = await Promise.all([OrganizationRepository.getCurrentOrganization(), LicenseRepository.getCurrentLicenseState()]);
@@ -95,6 +100,33 @@ function HeaderOrganizationCard() {
     setRefreshing(false);
   };
 
+  // § live UX review, user-directed - "a place to upload the company
+  // logo so it shows in the organization data in the Header." Owner-
+  // only (the RPC re-checks this server-side regardless), reachable
+  // from here since it works for any already-activated organization
+  // immediately, not only at the one-time Activation moment.
+  const handleLogoButtonClick = (event: ReactMouseEvent) => {
+    event.stopPropagation();
+    logoInputRef.current?.click();
+  };
+
+  const handleLogoFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file || !organization) return;
+
+    setUploadingLogo(true);
+    setLogoError("");
+    const result = await OrganizationRepository.uploadLogo(organization.id, file);
+    setUploadingLogo(false);
+
+    if (!result.success) {
+      setLogoError(result.message ?? t("organizationCard.logoUploadError"));
+      return;
+    }
+    await load();
+  };
+
   if (!organization) return null;
 
   const initial = organization.name.charAt(0).toUpperCase();
@@ -111,7 +143,7 @@ function HeaderOrganizationCard() {
         aria-label={organization.name}
         title={organization.name}
       >
-        <span className={styles.logo}>{initial}</span>
+        {organization.logoUrl ? <img src={organization.logoUrl} alt={organization.name} className={styles.logoImage} /> : <span className={styles.logo}>{initial}</span>}
       </button>
 
       {panelOpen &&
@@ -119,7 +151,7 @@ function HeaderOrganizationCard() {
         createPortal(
           <div ref={panelRef} className={styles.panel} style={{ top: panelPosition.top, left: panelPosition.left }} role="dialog" aria-label={organization.name}>
             <div className={styles.panelHeader}>
-              <span className={styles.panelLogo}>{initial}</span>
+              {organization.logoUrl ? <img src={organization.logoUrl} alt={organization.name} className={styles.panelLogoImage} /> : <span className={styles.panelLogo}>{initial}</span>}
               <div className={styles.panelName}>{organization.name}</div>
               <button type="button" className={styles.refreshButton} onClick={handleRefresh} aria-label={t("licenseCard.refreshAction")} title={t("licenseCard.refreshAction")}>
                 <RefreshCw size={13} className={refreshing ? styles.spinning : undefined} />
@@ -134,6 +166,17 @@ function HeaderOrganizationCard() {
               <span className={styles.panelLabel}>{t("organizationCard.statusLabel")}</span>
               <StatusBadge status={organization.status}>{organization.status}</StatusBadge>
             </div>
+
+            {profile?.isOwner ? (
+              <>
+                {logoError ? <p className={styles.logoError}>{logoError}</p> : null}
+                <button type="button" className={styles.logoUploadButton} onClick={handleLogoButtonClick} disabled={uploadingLogo}>
+                  {uploadingLogo ? <Loader2 size={13} className={styles.spinning} /> : <Upload size={13} />}
+                  {organization.logoUrl ? t("organizationCard.changeLogoAction") : t("organizationCard.uploadLogoAction")}
+                </button>
+                <input ref={logoInputRef} type="file" accept="image/png,image/jpeg,image/webp" onChange={handleLogoFileChange} className={styles.hiddenInput} tabIndex={-1} aria-hidden="true" />
+              </>
+            ) : null}
 
             {license ? (
               <>

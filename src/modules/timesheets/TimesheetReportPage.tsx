@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
-import { jsPDF } from "jspdf";
 
 import TimesheetRepository, { type EvidencePack, type TimesheetStatus } from "../../core/repositories/TimesheetRepository";
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
+import { formatMinutes, buildTimesheetPdf } from "./timesheetPdf";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
@@ -13,13 +13,6 @@ import Button from "../../components/common/Button";
 import StatusBadge from "../../components/common/StatusBadge";
 import styles from "./TimesheetReportPage.module.css";
 import { formatDateOnly, formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
-
-function formatMinutes(minutes: number): string {
-  const totalMinutes = Math.round(minutes);
-  const hours = Math.floor(totalMinutes / 60);
-  const mins = totalMinutes % 60;
-  return `${hours}h ${mins}m`;
-}
 
 // Same domain-status -> StatusBadge tone-key mapping as TimesheetsPage
 // (StatusBadge's own tone lookup only recognizes a fixed vocabulary).
@@ -67,124 +60,6 @@ function downloadCsv(filename: string, content: string) {
   link.click();
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
-}
-
-// § final visual consistency pass, correction - "The Timesheet Report
-// must provide an actual PDF output... verify the PDF action actually
-// generates/downloads a valid PDF file." A real client-built PDF
-// (jsPDF - the only new dependency this pass adds, no backend/service
-// involved) rather than relying on the browser's print dialog's own
-// manual "destination: Save as PDF" step. The existing CSV export and
-// the Print button (still useful for an actual printer) are unchanged.
-function buildTimesheetPdf(pack: EvidencePack, languageCode: string, t: (key: string, options?: Record<string, unknown>) => string): jsPDF {
-  const doc = new jsPDF({ unit: "pt", format: "a4" });
-  const marginX = 40;
-  const pageHeight = doc.internal.pageSize.getHeight();
-  const pageWidth = doc.internal.pageSize.getWidth();
-  let y = 48;
-
-  const ensureSpace = (needed: number) => {
-    if (y + needed > pageHeight - 40) {
-      doc.addPage();
-      y = 48;
-    }
-  };
-
-  const heading = (text: string) => {
-    ensureSpace(28);
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(11);
-    doc.text(text.toUpperCase(), marginX, y);
-    y += 6;
-    doc.setDrawColor(200);
-    doc.line(marginX, y, pageWidth - marginX, y);
-    y += 16;
-  };
-
-  const line = (text: string, options?: { bold?: boolean; size?: number }) => {
-    ensureSpace(16);
-    doc.setFont("helvetica", options?.bold ? "bold" : "normal");
-    doc.setFontSize(options?.size ?? 10);
-    const wrapped = doc.splitTextToSize(text, pageWidth - marginX * 2);
-    doc.text(wrapped, marginX, y);
-    y += 14 * wrapped.length;
-  };
-
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(16);
-  doc.text(t("report.title"), marginX, y);
-  y += 22;
-
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(10);
-  doc.text(`${pack.employee.fullName} — ${pack.timesheet.periodStart} — ${pack.timesheet.periodEnd}`, marginX, y);
-  y += 24;
-
-  heading(t("report.summaryTitle"));
-  line(`${t("report.organization")}: ${pack.organization.name} (${pack.organization.organizationCode})`);
-  line(`${t("report.employee")}: ${pack.employee.fullName} (${pack.employee.email})`);
-  line(`${t("report.status")}: ${t(`status.${pack.timesheet.status}`)}`);
-  line(`${t("report.worked")}: ${formatMinutes(pack.timesheet.totalWorkedMinutes)}    ${t("report.breaks")}: ${formatMinutes(pack.timesheet.totalBreakMinutes)}    ${t("report.overtime")}: ${formatMinutes(pack.timesheet.totalOvertimeMinutes)}`);
-  line(`${t("report.approver")}: ${pack.timesheet.approverName ?? "—"}`);
-  line(`${t("report.approvedAt")}: ${pack.timesheet.approvedAt ? formatDateTime(pack.timesheet.approvedAt, languageCode) : "—"}`);
-  line(`${t("report.lockStatus")}: ${pack.timesheet.lockedAt ? t("report.locked") : t("report.unlocked")}`);
-  y += 8;
-
-  heading(t("report.entriesTitle"));
-  if (pack.entries.length === 0) {
-    line(t("detail.noEntries"));
-  } else {
-    pack.entries.forEach((entry) => {
-      line(
-        `${formatDateTime(entry.clockInAt, languageCode)} → ${entry.clockOutAt ? formatTimeOnly(entry.clockOutAt, languageCode) : t("detail.stillOpen")}  ·  ${entry.siteName ?? "—"}${entry.projectName ? ` · ${entry.projectName}` : ""}  ·  ${formatMinutes(entry.workedMinutes)}`,
-      );
-    });
-  }
-  y += 8;
-
-  heading(t("report.exceptionsTitle"));
-  if (pack.exceptions.length === 0) {
-    line(t("report.noExceptions"));
-  } else {
-    pack.exceptions.forEach((exception) => {
-      line(`${formatDateTime(exception.createdAt, languageCode)}  ·  ${Math.round(exception.distanceMeters)} m  ·  ${exception.reasonCategory ?? "—"}  ·  ${exception.employeeReason ?? "—"}  ·  ${exception.status}`);
-    });
-  }
-  y += 8;
-
-  heading(t("report.correctionsTitle"));
-  if (pack.corrections.length === 0 && pack.timesheetCorrections.length === 0) {
-    line(t("report.noCorrections"));
-  } else {
-    pack.corrections.forEach((correction) => {
-      line(`${formatDateTime(correction.createdAt, languageCode)}  ·  ${correction.proposedEventType}  ·  ${correction.reason}  ·  ${correction.status}`);
-    });
-    pack.timesheetCorrections.forEach((correction) => {
-      line(`${formatDateTime(correction.createdAt, languageCode)}  ·  ${t("report.timesheetLevelCorrection")}  ·  ${correction.reason}  ·  ${correction.status}`);
-    });
-  }
-  y += 8;
-
-  heading(t("report.evidenceTitle"));
-  if (pack.evidenceReferences.length === 0) {
-    line(t("report.noEvidence"));
-  } else {
-    pack.evidenceReferences.forEach((evidence) => {
-      line(`${formatDateTime(evidence.capturedAt, languageCode)}  ·  ${evidence.contentType}`);
-    });
-  }
-  y += 8;
-
-  heading(t("report.approvalTrailTitle"));
-  if (pack.approvalTrail.length === 0) {
-    line(t("report.noApprovalTrail"));
-  } else {
-    pack.approvalTrail.forEach((row) => {
-      line(`${formatDateTime(row.createdAt, languageCode)}  ·  ${row.actorName}  ·  ${row.action}  ·  ${row.notes ?? "—"}`);
-    });
-  }
-
-  return doc;
 }
 
 // PROSM Time WP-17/§22 - "Monthly Evidence Pack." Real, functioning

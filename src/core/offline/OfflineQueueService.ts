@@ -117,7 +117,7 @@ class OfflineQueueService {
     const result =
       item.type === "clock_in"
         ? await AttendanceRepository.clockIn({
-            siteId: item.siteId as string,
+            siteId: item.siteId,
             projectId: item.projectId,
             latitude: item.latitude,
             longitude: item.longitude,

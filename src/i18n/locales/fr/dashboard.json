@@ -12,7 +12,10 @@
   "organizationCard": {
     "title": "Organisation",
     "codeLabel": "Code de l'organisation",
-    "statusLabel": "Statut"
+    "statusLabel": "Statut",
+    "uploadLogoAction": "Importer le logo de l'entreprise",
+    "changeLogoAction": "Changer le logo",
+    "logoUploadError": "Impossible d'importer ce logo."
   },
   "licenseCard": {
     "title": "Licence et plan",
@@ -39,8 +42,8 @@
       "onBreak": "En pause",
       "notClockedIn": "Arrivée non pointée"
     },
-    "noAssignedSites": "Vous n'êtes assigné à aucun site pour le moment. Contactez votre administrateur.",
     "siteLabel": "Site",
+    "noSiteOption": "Aucun site — utiliser ma position actuelle",
     "projectLabel": "Projet (facultatif)",
     "noProject": "Aucun projet",
     "clockInAction": "Pointer l'arrivée",

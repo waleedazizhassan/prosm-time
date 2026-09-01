@@ -13,6 +13,7 @@ export interface Organization {
   status: string;
   defaultLanguage: string;
   defaultTheme: string;
+  logoUrl: string | null;
 }
 
 function createSuccess<T>(data: T | null = null): ServiceResult<T> {
@@ -37,7 +38,7 @@ class OrganizationRepository {
     try {
       const { data, error } = await this.client
         .from("organizations")
-        .select("id, organization_code, name, status, organization_settings(default_language, default_theme)")
+        .select("id, organization_code, name, status, logo_url, organization_settings(default_language, default_theme)")
         .maybeSingle();
 
       if (error) return createError(error.message);
@@ -52,7 +53,38 @@ class OrganizationRepository {
         status: data.status,
         defaultLanguage: settings?.default_language ?? "en",
         defaultTheme: settings?.default_theme ?? "dark",
+        logoUrl: data.logo_url ?? null,
       });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Organization service unavailable.");
+    }
+  }
+
+  // § live UX review, user-directed - "a place to upload the company
+  // logo so it appears in the organization data in the Header."
+  // Uploads directly to the public organization-logos bucket (a
+  // company logo is meant to be seen, not access-controlled like
+  // camera evidence - same rationale as the storage migration's own
+  // header comment), then calls the owner-only RPC to record the new
+  // URL on the organizations row itself (no direct client UPDATE grant
+  // exists on that table, matching every other organization mutation
+  // in this codebase).
+  async uploadLogo(organizationId: string, file: File): Promise<ServiceResult<string>> {
+    try {
+      const extension = file.name.split(".").pop() || "png";
+      const path = `organizations/${organizationId}/logo-${Date.now()}.${extension}`;
+
+      const { error: uploadError } = await this.client.storage.from("organization-logos").upload(path, file, { contentType: file.type, upsert: false });
+      if (uploadError) return createError(uploadError.message);
+
+      const { data: publicUrlData } = this.client.storage.from("organization-logos").getPublicUrl(path);
+      const logoUrl = publicUrlData.publicUrl;
+
+      const { data, error } = await this.client.rpc("set_prosm_time_organization_logo", { p_logo_url: logoUrl });
+      if (error) return createError(error.message);
+      if (data?.success === false) return createError("Unable to set the organization logo.");
+
+      return createSuccess(logoUrl);
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Organization service unavailable.");
     }

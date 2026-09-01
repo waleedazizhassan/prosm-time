@@ -12,7 +12,10 @@
   "organizationCard": {
     "title": "Organisation",
     "codeLabel": "Organisationscode",
-    "statusLabel": "Status"
+    "statusLabel": "Status",
+    "uploadLogoAction": "Firmenlogo hochladen",
+    "changeLogoAction": "Logo ändern",
+    "logoUploadError": "Dieses Logo konnte nicht hochgeladen werden."
   },
   "licenseCard": {
     "title": "Lizenz & Plan",
@@ -39,8 +42,8 @@
       "onBreak": "In der Pause",
       "notClockedIn": "Nicht eingestempelt"
     },
-    "noAssignedSites": "Sie sind noch keinem Standort zugewiesen. Wenden Sie sich an Ihren Administrator.",
     "siteLabel": "Standort",
+    "noSiteOption": "Kein Standort — meinen aktuellen Standort verwenden",
     "projectLabel": "Projekt (optional)",
     "noProject": "Kein Projekt",
     "clockInAction": "Einstempeln",

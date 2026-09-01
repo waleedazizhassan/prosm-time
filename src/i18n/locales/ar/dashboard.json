@@ -12,7 +12,10 @@
   "organizationCard": {
     "title": "المؤسسة",
     "codeLabel": "كود المؤسسة",
-    "statusLabel": "الحالة"
+    "statusLabel": "الحالة",
+    "uploadLogoAction": "رفع شعار الشركة",
+    "changeLogoAction": "تغيير الشعار",
+    "logoUploadError": "تعذر رفع هذا الشعار."
   },
   "licenseCard": {
     "title": "الترخيص والخطة",
@@ -39,8 +42,8 @@
       "onBreak": "في استراحة",
       "notClockedIn": "لم يُسجَّل الحضور"
     },
-    "noAssignedSites": "لم يتم تعيينك في أي موقع بعد. تواصل مع المسؤول لديك.",
     "siteLabel": "الموقع",
+    "noSiteOption": "بدون موقع — استخدام موقعي الحالي",
     "projectLabel": "المشروع (اختياري)",
     "noProject": "بدون مشروع",
     "clockInAction": "تسجيل الحضور",

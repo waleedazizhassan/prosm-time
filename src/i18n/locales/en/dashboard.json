@@ -12,7 +12,10 @@
   "organizationCard": {
     "title": "Organization",
     "codeLabel": "Organization code",
-    "statusLabel": "Status"
+    "statusLabel": "Status",
+    "uploadLogoAction": "Upload company logo",
+    "changeLogoAction": "Change logo",
+    "logoUploadError": "Unable to upload this logo."
   },
   "licenseCard": {
     "title": "License & Plan",
@@ -39,8 +42,8 @@
       "onBreak": "On Break",
       "notClockedIn": "Not Clocked In"
     },
-    "noAssignedSites": "You are not assigned to any site yet. Contact your administrator.",
     "siteLabel": "Site",
+    "noSiteOption": "No site — use my current location",
     "projectLabel": "Project (optional)",
     "noProject": "No project",
     "clockInAction": "Clock In",

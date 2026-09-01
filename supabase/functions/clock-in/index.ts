@@ -49,17 +49,22 @@ serve(async (request: Request) => {
     const payload = await request.json().catch(() => ({}));
     const { siteId, projectId, idempotencyKey, clientReportedAt, latitude, longitude, accuracyMeters } = payload;
 
-    if (!siteId || typeof siteId !== "string") {
-      return errorResponse("siteId is required.", 400, "INVALID_REQUEST");
+    // § live UX review, user-directed - site is now optional: an
+    // employee can clock in at their real current location even when
+    // it isn't a registered site. siteId/projectId, when present,
+    // still go through every existing WP-06 check (site assignment,
+    // project-at-site, geofence) unchanged server-side.
+    if (siteId !== undefined && siteId !== null && typeof siteId !== "string") {
+      return errorResponse("siteId must be a string when provided.", 400, "INVALID_REQUEST");
     }
     if (!idempotencyKey || typeof idempotencyKey !== "string") {
       return errorResponse("idempotencyKey is required.", 400, "INVALID_REQUEST");
     }
 
     const { data, error } = await callerClient.rpc("clock_in_prosm_time_attendance", {
-      p_site_id: siteId,
-      p_project_id: projectId ?? null,
       p_idempotency_key: idempotencyKey,
+      p_site_id: siteId || null,
+      p_project_id: projectId ?? null,
       p_client_reported_at: clientReportedAt ?? null,
       p_latitude: typeof latitude === "number" ? latitude : null,
       p_longitude: typeof longitude === "number" ? longitude : null,

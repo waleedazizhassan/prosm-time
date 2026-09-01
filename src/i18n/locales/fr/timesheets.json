@@ -11,7 +11,8 @@
     "period": "Période",
     "status": "Statut",
     "worked": "Travaillé",
-    "overtime": "Heures sup."
+    "overtime": "Heures sup.",
+    "export": "Exporter"
   },
   "status": {
     "draft": "Brouillon",

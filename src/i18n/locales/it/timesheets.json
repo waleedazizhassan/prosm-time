@@ -11,7 +11,8 @@
     "period": "Periodo",
     "status": "Stato",
     "worked": "Lavorato",
-    "overtime": "Straordinario"
+    "overtime": "Straordinario",
+    "export": "Esporta"
   },
   "status": {
     "draft": "Bozza",

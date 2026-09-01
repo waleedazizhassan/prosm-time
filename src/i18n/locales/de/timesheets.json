@@ -11,7 +11,8 @@
     "period": "Zeitraum",
     "status": "Status",
     "worked": "Gearbeitet",
-    "overtime": "Überstunden"
+    "overtime": "Überstunden",
+    "export": "Export"
   },
   "status": {
     "draft": "Entwurf",

@@ -1,10 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type MouseEvent as ReactMouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { Download } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import TimesheetRepository, { type Timesheet, type TimesheetEntry, type TimesheetCorrection } from "../../core/repositories/TimesheetRepository";
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
+import { formatMinutes, buildTimesheetPdf } from "./timesheetPdf";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
@@ -20,13 +22,6 @@ import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
 import FormGrid from "../../components/common/FormGrid";
 import { formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
-
-function formatMinutes(minutes: number): string {
-  const totalMinutes = Math.round(minutes);
-  const hours = Math.floor(totalMinutes / 60);
-  const mins = totalMinutes % 60;
-  return `${hours}h ${mins}m`;
-}
 
 function toDateInput(date: Date): string {
   return date.toISOString().slice(0, 10);
@@ -87,6 +82,8 @@ export default function TimesheetsPage() {
   const [correctionReviewTarget, setCorrectionReviewTarget] = useState<TimesheetCorrection | null>(null);
   const [correctionReviewNotes, setCorrectionReviewNotes] = useState("");
   const [correctionReviewSubmitting, setCorrectionReviewSubmitting] = useState<string | null>(null);
+
+  const [exportingId, setExportingId] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     if (!profile) return;
@@ -199,12 +196,39 @@ export default function TimesheetsPage() {
     load();
   };
 
+  // § live UX review, user-directed - "make sure PDF data export is
+  // available" on the Timesheets list itself, not only after clicking
+  // into a specific timesheet's own Report page. Reuses the exact same
+  // buildTimesheetPdf/getEvidencePack path TimesheetReportPage already
+  // uses - one PDF implementation, two entry points.
+  const handleExportPdf = async (event: ReactMouseEvent, row: Timesheet) => {
+    event.stopPropagation();
+    setExportingId(row.id);
+    const result = await TimesheetRepository.getEvidencePack(row.id);
+    setExportingId(null);
+    if (!result.success || !result.data) {
+      setError(result.message ?? t("report.loadError"));
+      return;
+    }
+    const doc = buildTimesheetPdf(result.data, i18n.language, t);
+    doc.save(`timesheet-${row.userFullName.replace(/\s+/g, "-")}-${row.periodStart}.pdf`);
+  };
+
   const timesheetColumns = (showEmployee: boolean): TableColumn<Timesheet>[] => [
     ...(showEmployee ? [{ key: "employee", header: t("columns.employee"), render: (row: Timesheet) => row.userFullName } as TableColumn<Timesheet>] : []),
     { key: "period", header: t("columns.period"), render: (row) => `${row.periodStart} — ${row.periodEnd}` },
     { key: "status", header: t("columns.status"), render: (row) => <StatusBadge status={STATUS_BADGE_KEY[row.status]}>{t(`status.${row.status}`)}</StatusBadge> },
     { key: "worked", header: t("columns.worked"), render: (row) => formatMinutes(row.totalWorkedMinutes) },
     { key: "overtime", header: t("columns.overtime"), render: (row) => formatMinutes(row.totalOvertimeMinutes) },
+    {
+      key: "exportPdf",
+      header: t("columns.export"),
+      render: (row) => (
+        <Button variant="ghost" size="xs" onClick={(event) => handleExportPdf(event, row)} loading={exportingId === row.id}>
+          <Download size={13} /> {t("report.exportPdfAction")}
+        </Button>
+      ),
+    },
   ];
 
   const isOwnDetail = detailTimesheet && profile ? detailTimesheet.userId === profile.id : false;

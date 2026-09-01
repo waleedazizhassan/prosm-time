@@ -12,7 +12,10 @@
   "organizationCard": {
     "title": "Organizzazione",
     "codeLabel": "Codice organizzazione",
-    "statusLabel": "Stato"
+    "statusLabel": "Stato",
+    "uploadLogoAction": "Carica il logo aziendale",
+    "changeLogoAction": "Cambia logo",
+    "logoUploadError": "Impossibile caricare questo logo."
   },
   "licenseCard": {
     "title": "Licenza e piano",
@@ -39,8 +42,8 @@
       "onBreak": "In pausa",
       "notClockedIn": "Entrata non timbrata"
     },
-    "noAssignedSites": "Non sei ancora assegnato a nessuna sede. Contatta il tuo amministratore.",
     "siteLabel": "Sede",
+    "noSiteOption": "Nessuna sede — usa la mia posizione attuale",
     "projectLabel": "Progetto (facoltativo)",
     "noProject": "Nessun progetto",
     "clockInAction": "Timbra entrata",
