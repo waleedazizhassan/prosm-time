@@ -38,7 +38,7 @@ function RootRedirect() {
 
   if (loading) return <SplashScreen />;
 
-  return <Navigate to={isAuthenticated ? "/dashboard" : "/activate"} replace />;
+  return <Navigate to={isAuthenticated ? "/dashboard" : "/welcome"} replace />;
 }
 
 export default function AppRoutes() {

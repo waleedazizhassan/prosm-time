@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import { LANGUAGES } from "../../i18n/languages";
@@ -11,11 +12,37 @@ import styles from "./AuthLayout.module.css";
 // AuthLayout so WelcomePage (which has no form, so doesn't use
 // AuthLayout itself) gets the identical header instead of a
 // duplicated copy.
+//
+// § live UX review, user-directed - "Contact us" should show the
+// support/info emails, not jump straight to composing a mail: a click
+// reveals both addresses (still real mailto links, so a second click
+// on either one does open a mail client) instead of firing mailto:
+// on the header button itself.
 export default function AuthHeader() {
   const { t, i18n } = useTranslation("auth");
   const location = useLocation();
+  const [contactOpen, setContactOpen] = useState(false);
+  const contactRef = useRef<HTMLDivElement>(null);
 
   const isActive = (path: string) => location.pathname === path;
+
+  useEffect(() => {
+    if (!contactOpen) return undefined;
+
+    function handleClickOutside(event: MouseEvent) {
+      if (!contactRef.current?.contains(event.target as Node)) setContactOpen(false);
+    }
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") setContactOpen(false);
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [contactOpen]);
 
   return (
     <header className={styles.authHeader}>
@@ -44,9 +71,25 @@ export default function AuthHeader() {
             </option>
           ))}
         </select>
-        <a href="mailto:info@prosm.net" className={styles.headerHelpLink}>
-          {t("authHeader.contactUs")}
-        </a>
+
+        <div ref={contactRef} className={styles.contactWrapper}>
+          <button type="button" className={styles.headerHelpLink} onClick={() => setContactOpen((open) => !open)} aria-haspopup="true" aria-expanded={contactOpen}>
+            {t("authHeader.contactUs")}
+          </button>
+
+          {contactOpen ? (
+            <div className={styles.contactPanel} role="menu">
+              <span className={styles.contactPanelLabel}>{t("authHeader.supportEmailLabel")}</span>
+              <a href="mailto:support@prosm.net" className={styles.contactPanelEmail}>
+                support@prosm.net
+              </a>
+              <span className={styles.contactPanelLabel}>{t("authHeader.infoEmailLabel")}</span>
+              <a href="mailto:info@prosm.net" className={styles.contactPanelEmail}>
+                info@prosm.net
+              </a>
+            </div>
+          ) : null}
+        </div>
       </div>
     </header>
   );

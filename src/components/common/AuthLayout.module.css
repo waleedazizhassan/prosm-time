@@ -182,13 +182,64 @@
   }
 
   .headerHelpLink {
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+
+    color: #f8fafc;
+    font-size: var(--font-sm);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .headerHelpLink:hover {
+    text-decoration: underline;
+  }
+
+  .contactWrapper {
+    position: relative;
+  }
+
+  .contactPanel {
+    position: absolute;
+    z-index: 3;
+    top: calc(100% + var(--space-3));
+    inset-inline-end: 0;
+    min-width: 220px;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-4);
+
+    background: rgba(15, 23, 42, 0.92);
+    border: 1px solid rgba(248, 250, 252, 0.18);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .contactPanelLabel {
+    margin-top: var(--space-2);
+    color: rgba(226, 232, 240, 0.68);
+    font-size: var(--font-xs);
+  }
+
+  .contactPanelLabel:first-child {
+    margin-top: 0;
+  }
+
+  .contactPanelEmail {
     color: #f8fafc;
     font-size: var(--font-sm);
     font-weight: var(--font-weight-semibold);
     text-decoration: none;
   }
 
-  .headerHelpLink:hover {
+  .contactPanelEmail:hover {
     text-decoration: underline;
   }
 

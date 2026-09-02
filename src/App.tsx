@@ -2,6 +2,7 @@ import "./components/common/design-tokens.css";
 import AppRoutes from "./routes/AppRoutes";
 import { ThemeProvider } from "./core/context/ThemeContext";
 import ErrorBoundary from "./components/common/ErrorBoundary";
+import useAutoFullscreen from "./core/hooks/useAutoFullscreen";
 
 // PROSM Time Implementation Master File V3.0 - the real application
 // shell, wired up as of WP-03 (Authentication & Organization). The
@@ -13,6 +14,8 @@ import ErrorBoundary from "./components/common/ErrorBoundary";
 // owns the real default/toggle/persistence now - it replaces this
 // file's earlier fixed GUEST_DEFAULT_THEME useEffect.
 export default function App() {
+  useAutoFullscreen();
+
   return (
     <ErrorBoundary>
       <ThemeProvider>

@@ -1,0 +1,55 @@
+/* PROSM Time - § live UX review, user-directed: "check the mobile
+   situation from splash through Welcome." AuthHeader is desktop-only
+   (no mobile nav bar exists in this design), so phones need their own
+   Sign in / Create organization entry points - this mobile-only card
+   (hidden once the desktop header takes over at >=861px) mirrors
+   AuthLayout's own mobile split-card shape exactly. */
+.mobileCard {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-rows: 180px auto;
+
+  background: var(--surface-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.photoBand {
+  background-color: #0b1220;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.body {
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  margin: 0 0 var(--space-1);
+  font-size: var(--font-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.subtitle {
+  margin: 0 0 var(--space-6);
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+@media (min-width: 861px) {
+  .mobileCard {
+    display: none;
+  }
+}
