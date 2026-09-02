@@ -46,19 +46,13 @@ export default function LoginPage() {
     navigate("/dashboard", { replace: true });
   };
 
-  // §12/§37 "new user" entry points - same placement/wording/behavior
-  // as PROSM Platform's own Login.jsx (Divider("or") + hint +
-  // outlined secondary button + plain text link below the form).
-  // "Activate license" maps to organization activation (this
-  // product's equivalent of Platform's /bootstrap); "Activate your
-  // account" maps to redeeming an employee invitation (this product's
-  // equivalent of Platform's /verify-reset?mode=activation) - both are
-  // first-access flows for someone with no session yet, kept as two
-  // distinct destinations exactly like Platform keeps them distinct.
-  const handleActivateLicense = () => {
-    navigate("/activate");
-  };
-
+  // §12/§37 "new user" entry point - redeeming an employee invitation
+  // (this product's equivalent of Platform's /verify-reset?mode=activation).
+  // Organization activation ("Create organization") used to have its
+  // own button right here too, but now that the desktop header and
+  // the mobile Welcome card both already offer that entry point (§
+  // live UX review, user-directed), repeating it here was redundant -
+  // removed along with its now-orphaned "first time?" hint.
   const handleActivateAccount = () => {
     navigate("/accept-invitation");
   };
@@ -99,12 +93,6 @@ export default function LoginPage() {
       </form>
 
       <Divider label={t("login.orDivider")} />
-
-      <p className={styles.hint}>{t("login.newOrganizationHint")}</p>
-
-      <button type="button" className={styles.secondaryButton} onClick={handleActivateLicense}>
-        {t("login.activateLicense")}
-      </button>
 
       <button type="button" className={styles.textLink} onClick={handleActivateAccount}>
         {t("login.activateAccount")}
