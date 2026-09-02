@@ -47,9 +47,11 @@ describe("InviteEmployeeModal", () => {
   });
 
   it("surfaces a real server error instead of the generic one when provided", async () => {
+    // A real raw backend code - humanizeBackendError translates it,
+    // this is no longer the raw ALL-CAPS text reaching the UI verbatim.
     vi.mocked(EmployeeRepository.inviteUser).mockResolvedValue({
       success: false,
-      message: "You do not have permission to invite employees.",
+      message: "A USER WITH THIS EMAIL ALREADY EXISTS IN THIS ORGANIZATION",
       data: null,
     });
 
@@ -59,6 +61,6 @@ describe("InviteEmployeeModal", () => {
     fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: "Morgan Manager" } });
     fireEvent.click(screen.getByRole("button", { name: /Send invitation/i }));
 
-    expect(await screen.findByText("You do not have permission to invite employees.")).toBeInTheDocument();
+    expect(await screen.findByText("A user with this email already exists in this organization.")).toBeInTheDocument();
   });
 });

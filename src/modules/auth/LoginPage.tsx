@@ -39,6 +39,12 @@ export default function LoginPage() {
     setSubmitting(false);
 
     if (!result.success) {
+      // Not wrapped in humanizeBackendError - AuthService.signIn calls
+      // Supabase Auth directly (supabase.auth.signInWithPassword), so
+      // this is always a real Supabase Auth message (e.g. "Invalid
+      // login credentials"), never one of this backend's own RPC
+      // codes - showing it as-is is more useful than the generic
+      // fallback, even though it isn't translated.
       setError(result.message ?? t("login.genericError"));
       return;
     }

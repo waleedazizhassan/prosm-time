@@ -7,6 +7,7 @@ import ActivationRepository from "../../core/repositories/ActivationRepository";
 import AuthService from "../../core/auth/AuthService";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import LicenseRepository from "../../core/repositories/LicenseRepository";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { buildLicenseCertificatePdf } from "./licenseCertificatePdf";
 
 import Input from "../../components/common/Input";
@@ -77,7 +78,7 @@ export default function ActivationPage() {
 
     if (!result.success || !result.data) {
       setSubmitting(false);
-      setError(result.message ?? t("auth:activation.genericError"));
+      setError(humanizeBackendError(result.message, t) ?? t("auth:activation.genericError"));
       return;
     }
 

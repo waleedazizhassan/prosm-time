@@ -6,6 +6,7 @@ import { Camera } from "lucide-react";
 import { useAuth } from "../../core/context/AuthContext";
 import ManagerRepository, { type TodayAttendanceRow, type PendingReviewItem } from "../../core/repositories/ManagerRepository";
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
@@ -13,6 +14,7 @@ import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import Button from "../../components/common/Button";
 import Modal from "../../components/common/Modal";
+import ErrorText from "../../components/common/ErrorText";
 import Textarea from "../../components/common/Textarea";
 import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
@@ -81,7 +83,7 @@ export default function ManagerConsolePage() {
     setSubmitting(null);
 
     if (!result.success) {
-      setError(result.message ?? t("reviewError"));
+      setError(humanizeBackendError(result.message, t) ?? t("reviewError"));
       return;
     }
 
@@ -104,7 +106,7 @@ export default function ManagerConsolePage() {
     const result = await EvidenceRepository.getEvidenceObjectUrl(storagePath);
     setEvidenceLoading(false);
     if (!result.success || !result.data) {
-      setEvidenceError(result.message ?? t("attendance.photoLoadError"));
+      setEvidenceError(humanizeBackendError(result.message, t) ?? t("attendance.photoLoadError"));
       return;
     }
     setEvidenceUrl(result.data);
@@ -201,7 +203,7 @@ export default function ManagerConsolePage() {
       </Card>
 
       <Card title={t("pending.title")}>
-        {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
+        <ErrorText>{error}</ErrorText>
         {pendingItems.length === 0 ? (
           <EmptyState message={t("pending.empty")} />
         ) : (
@@ -244,7 +246,7 @@ export default function ManagerConsolePage() {
         {evidenceLoading ? (
           <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("attendance.photoLoading")}</p>
         ) : evidenceError ? (
-          <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{evidenceError}</p>
+          <ErrorText>{evidenceError}</ErrorText>
         ) : evidenceUrl ? (
           <img src={evidenceUrl} alt={t("attendance.photoAlt")} style={{ maxWidth: "100%", borderRadius: "var(--radius-md)", display: "block" }} />
         ) : null}

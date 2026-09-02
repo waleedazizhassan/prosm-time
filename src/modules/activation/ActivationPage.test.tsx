@@ -61,9 +61,14 @@ describe("ActivationPage", () => {
   });
 
   it("shows the real server error message on failure, not a generic one when provided", async () => {
+    // A real raw backend code (compute_prosm_time_geofence_check's own
+    // sibling RPCs raise this literal string - see
+    // supabase/migrations/20260831110000_wp03_organizations_and_auth.sql)
+    // - humanizeBackendError translates it, this is no longer the raw
+    // ALL-CAPS text reaching the UI verbatim.
     vi.mocked(ActivationRepository.activateOrganization).mockResolvedValue({
       success: false,
-      message: "This activation code has already been used.",
+      message: "INVALID LICENSE STATUS",
       data: null,
     });
 
@@ -75,7 +80,7 @@ describe("ActivationPage", () => {
 
     fillAndSubmit();
 
-    expect(await screen.findByText("This activation code has already been used.")).toBeInTheDocument();
+    expect(await screen.findByText("This license status isn't valid.")).toBeInTheDocument();
     expect(AuthService.signIn).not.toHaveBeenCalled();
   });
 });

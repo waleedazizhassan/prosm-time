@@ -4,12 +4,14 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../core/context/AuthContext";
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import PageShell from "../../components/common/PageShell";
 import Button from "../../components/common/Button";
 import StatusBadge from "../../components/common/StatusBadge";
 import Table, { type TableColumn } from "../../components/common/Table";
 import SiteFormModal from "./SiteFormModal";
+import ErrorText from "../../components/common/ErrorText";
 
 // PROSM Time Implementation Master File V3.0, WP-05/§13/§37 - "Site
 // Management + Map/Geofence." The site list itself is RLS-scoped to
@@ -32,7 +34,7 @@ export default function SitesPage() {
     setLoadError("");
     const result = await SiteRepository.listSites();
     if (!result.success) {
-      setLoadError(result.message ?? t("loadError"));
+      setLoadError(humanizeBackendError(result.message, t) ?? t("loadError"));
       setSites([]);
       setLoading(false);
       return;
@@ -66,7 +68,7 @@ export default function SitesPage() {
       subtitle={t("subtitle")}
       actions={profile?.isOwner ? <Button onClick={() => setCreateOpen(true)}>{t("addAction")}</Button> : undefined}
     >
-      {loadError ? <p style={{ color: "var(--brand-danger)" }}>{loadError}</p> : null}
+      <ErrorText>{loadError}</ErrorText>
 
       <Table columns={columns} data={sites} getRowId={(site) => site.id} loading={loading} emptyMessage="—" onRowClick={(site) => navigate(`/sites/${site.id}`)} />
 

@@ -6,12 +6,14 @@ import AttendanceRepository, { type AttendanceSession } from "../../core/reposit
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
 import ProjectRepository, { type Project } from "../../core/repositories/ProjectRepository";
 import { getCurrentPosition } from "../../core/utils/geo";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import Card from "../../components/common/Card";
 import Select from "../../components/common/Select";
 import Textarea from "../../components/common/Textarea";
 import Button from "../../components/common/Button";
 import { formatTimeOnly } from "../../core/utils/formatDate";
+import ErrorText from "../../components/common/ErrorText";
 
 interface AdminAttendanceCardProps {
   subjectUserId: string;
@@ -106,7 +108,7 @@ export default function AdminAttendanceCard({ subjectUserId, subjectFullName }: 
     setSubmitting(false);
 
     if (!result.success || !result.data) {
-      setError(result.message ?? t("detail.attendance.clockInError"));
+      setError(humanizeBackendError(result.message, t) ?? t("detail.attendance.clockInError"));
       return;
     }
 
@@ -136,7 +138,7 @@ export default function AdminAttendanceCard({ subjectUserId, subjectFullName }: 
     setSubmitting(false);
 
     if (!result.success || !result.data) {
-      setError(result.message ?? t("detail.attendance.clockOutError"));
+      setError(humanizeBackendError(result.message, t) ?? t("detail.attendance.clockOutError"));
       return;
     }
 
@@ -154,7 +156,7 @@ export default function AdminAttendanceCard({ subjectUserId, subjectFullName }: 
         {t("detail.attendance.actorSubjectNotice", { actor: profile?.fullName ?? "", subject: subjectFullName })}
       </div>
 
-      {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
+      <ErrorText>{error}</ErrorText>
 
       {session ? (
         <>

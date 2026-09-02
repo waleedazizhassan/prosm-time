@@ -9,8 +9,10 @@ import EmployeeRepository, { type OrgMember } from "../../core/repositories/Empl
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import { formatMinutes, buildTimesheetPdf } from "./timesheetPdf";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import PageShell from "../../components/common/PageShell";
+import ErrorText from "../../components/common/ErrorText";
 import Card from "../../components/common/Card";
 import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
@@ -142,7 +144,7 @@ export default function TimesheetsPage() {
     const result = await TimesheetRepository.generateTimesheet(generateUserId, period.start, period.end);
     setGenerating(false);
     if (!result.success) {
-      setError(result.message ?? t("generateError"));
+      setError(humanizeBackendError(result.message, t) ?? t("generateError"));
       return;
     }
     load();
@@ -160,7 +162,7 @@ export default function TimesheetsPage() {
     const result = await EvidenceRepository.getEvidenceObjectUrl(storagePath);
     setEvidenceLoading(false);
     if (!result.success || !result.data) {
-      setEvidenceError(result.message ?? t("photoLoadError"));
+      setEvidenceError(humanizeBackendError(result.message, t) ?? t("photoLoadError"));
       return;
     }
     setEvidenceUrl(result.data);
@@ -203,7 +205,7 @@ export default function TimesheetsPage() {
     const result = await TimesheetRepository.getEvidencePack(detailTimesheet.id);
     if (!result.success || !result.data) {
       setExportingPdf(false);
-      setDetailError(result.message ?? t("report.loadError"));
+      setDetailError(humanizeBackendError(result.message, t) ?? t("report.loadError"));
       return;
     }
     try {
@@ -221,7 +223,7 @@ export default function TimesheetsPage() {
     const result = await TimesheetRepository.submitTimesheet(detailTimesheet.id);
     setActionSubmitting(false);
     if (!result.success) {
-      setDetailError(result.message ?? t("submitError"));
+      setDetailError(humanizeBackendError(result.message, t) ?? t("submitError"));
       return;
     }
     closeDetail();
@@ -235,7 +237,7 @@ export default function TimesheetsPage() {
     const result = await TimesheetRepository.approveTimesheet(detailTimesheet.id, action, reviewNotes.trim() || undefined);
     setActionSubmitting(false);
     if (!result.success) {
-      setDetailError(result.message ?? t("approveError"));
+      setDetailError(humanizeBackendError(result.message, t) ?? t("approveError"));
       return;
     }
     closeDetail();
@@ -249,7 +251,7 @@ export default function TimesheetsPage() {
     const result = await TimesheetRepository.requestCorrection(detailTimesheet.id, correctionReason.trim());
     setActionSubmitting(false);
     if (!result.success) {
-      setDetailError(result.message ?? t("correctionRequestError"));
+      setDetailError(humanizeBackendError(result.message, t) ?? t("correctionRequestError"));
       return;
     }
     closeDetail();
@@ -263,7 +265,7 @@ export default function TimesheetsPage() {
     const result = await TimesheetRepository.reviewCorrection(correctionReviewTarget.id, action, correctionReviewNotes.trim() || undefined);
     setCorrectionReviewSubmitting(null);
     if (!result.success) {
-      setError(result.message ?? t("correctionReviewError"));
+      setError(humanizeBackendError(result.message, t) ?? t("correctionReviewError"));
       return;
     }
     setCorrectionReviewTarget(null);
@@ -291,7 +293,7 @@ export default function TimesheetsPage() {
 
   return (
     <PageShell title={t("title")} subtitle={t("subtitle")}>
-      {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
+      <ErrorText>{error}</ErrorText>
 
       {canGenerate ? (
         <Card title={t("generate.title")}>
@@ -396,7 +398,7 @@ export default function TimesheetsPage() {
       >
         {detailTimesheet ? (
           <>
-            {detailError ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{detailError}</p> : null}
+            <ErrorText>{detailError}</ErrorText>
             <dl style={{ margin: "0 0 var(--space-4)", fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>
               <dd style={{ margin: "0 0 var(--space-1)" }}>
                 {t("detail.status")}: <StatusBadge status={STATUS_BADGE_KEY[detailTimesheet.status]}>{t(`status.${detailTimesheet.status}`)}</StatusBadge>
@@ -485,7 +487,7 @@ export default function TimesheetsPage() {
         {evidenceLoading ? (
           <LoadingState size="sm" />
         ) : evidenceError ? (
-          <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{evidenceError}</p>
+          <ErrorText>{evidenceError}</ErrorText>
         ) : evidenceUrl ? (
           <img src={evidenceUrl} alt={t("viewPhoto")} style={{ maxWidth: "100%", borderRadius: "var(--radius-md)", display: "block" }} />
         ) : null}

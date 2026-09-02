@@ -3,12 +3,14 @@ import { useTranslation } from "react-i18next";
 
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
 import ProjectRepository, { type Project, type ProjectAssignment } from "../../core/repositories/ProjectRepository";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import Modal from "../../components/common/Modal";
 import Select from "../../components/common/Select";
 import Button from "../../components/common/Button";
 import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
+import ErrorText from "../../components/common/ErrorText";
 
 interface ProjectAssignmentsModalProps {
   isOpen: boolean;
@@ -55,7 +57,7 @@ export default function ProjectAssignmentsModal({ isOpen, onClose, project }: Pr
     const result = await ProjectRepository.setProjectAssignment(project.id, pickerUserId);
     setSubmitting(false);
     if (!result.success) {
-      setError(result.message ?? t("projectAssignments.genericError"));
+      setError(humanizeBackendError(result.message, t) ?? t("projectAssignments.genericError"));
       return;
     }
     load();
@@ -67,7 +69,7 @@ export default function ProjectAssignmentsModal({ isOpen, onClose, project }: Pr
     const result = await ProjectRepository.removeProjectAssignment(project.id, userId);
     setSubmitting(false);
     if (!result.success) {
-      setError(result.message ?? t("projectAssignments.genericError"));
+      setError(humanizeBackendError(result.message, t) ?? t("projectAssignments.genericError"));
       return;
     }
     load();
@@ -95,7 +97,7 @@ export default function ProjectAssignmentsModal({ isOpen, onClose, project }: Pr
         </div>
       ) : null}
 
-      {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
+      <ErrorText>{error}</ErrorText>
 
       {assignments.length === 0 ? (
         <EmptyState message={t("projectAssignments.noAssignments")} />

@@ -4,6 +4,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import InvitationRepository from "../../core/repositories/InvitationRepository";
 import AuthService from "../../core/auth/AuthService";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
@@ -43,7 +44,7 @@ export default function AcceptInvitationPage() {
 
     if (!result.success) {
       setSubmitting(false);
-      setError(result.message ?? t("activation.genericError"));
+      setError(humanizeBackendError(result.message, t) ?? t("activation.genericError"));
       return;
     }
 

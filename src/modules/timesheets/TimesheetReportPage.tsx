@@ -6,12 +6,14 @@ import TimesheetRepository, { type EvidencePack, type TimesheetStatus } from "..
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import { formatMinutes, buildTimesheetPdf } from "./timesheetPdf";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
 import LoadingState from "../../components/common/LoadingState";
 import Button from "../../components/common/Button";
 import StatusBadge from "../../components/common/StatusBadge";
+import ErrorText from "../../components/common/ErrorText";
 import styles from "./TimesheetReportPage.module.css";
 import { formatDateOnly, formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
 
@@ -90,7 +92,7 @@ export default function TimesheetReportPage() {
     setError("");
     const [result, organizationResult] = await Promise.all([TimesheetRepository.getEvidencePack(timesheetId), OrganizationRepository.getCurrentOrganization()]);
     if (!result.success || !result.data) {
-      setError(result.message ?? t("report.loadError"));
+      setError(humanizeBackendError(result.message, t) ?? t("report.loadError"));
       setPack(null);
     } else {
       setPack(result.data);
@@ -137,7 +139,7 @@ export default function TimesheetReportPage() {
   if (error || !pack) {
     return (
       <PageShell title={t("report.title")}>
-        <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error || t("report.loadError")}</p>
+        <ErrorText>{error || t("report.loadError")}</ErrorText>
         <Link to="/timesheets">{t("report.backLink")}</Link>
       </PageShell>
     );

@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 import PasswordResetRepository from "../../core/repositories/PasswordResetRepository";
 import AuthService from "../../core/auth/AuthService";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
@@ -48,7 +49,7 @@ export default function ResetPasswordPage() {
 
     if (!result.success) {
       setSubmitting(false);
-      setError(result.message ?? t("resetPassword.genericError"));
+      setError(humanizeBackendError(result.message, t) ?? t("resetPassword.genericError"));
       return;
     }
 

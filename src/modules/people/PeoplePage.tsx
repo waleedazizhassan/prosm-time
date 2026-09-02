@@ -4,12 +4,14 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../core/context/AuthContext";
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import PageShell from "../../components/common/PageShell";
 import Button from "../../components/common/Button";
 import StatusBadge from "../../components/common/StatusBadge";
 import Table, { type TableColumn } from "../../components/common/Table";
 import InviteEmployeeModal from "./InviteEmployeeModal";
+import ErrorText from "../../components/common/ErrorText";
 
 // PROSM Time Implementation Master File V3.0, WP-04/§37 - "Employee
 // Management." Real org-member list (RLS-scoped) with an Invite action
@@ -31,7 +33,7 @@ export default function PeoplePage() {
     setLoadError("");
     const result = await EmployeeRepository.listOrganizationMembers();
     if (!result.success) {
-      setLoadError(result.message ?? t("loadError"));
+      setLoadError(humanizeBackendError(result.message, t) ?? t("loadError"));
       setMembers([]);
       setLoading(false);
       return;
@@ -74,7 +76,7 @@ export default function PeoplePage() {
       subtitle={t("subtitle")}
       actions={hasPermission("employees.create") ? <Button onClick={() => setInviteOpen(true)}>{t("invite.actionLabel")}</Button> : undefined}
     >
-      {loadError ? <p style={{ color: "var(--brand-danger)" }}>{loadError}</p> : null}
+      <ErrorText>{loadError}</ErrorText>
 
       <Table columns={columns} data={members} getRowId={(member) => member.id} loading={loading} emptyMessage="—" onRowClick={(member) => navigate(`/people/${member.id}`)} />
 

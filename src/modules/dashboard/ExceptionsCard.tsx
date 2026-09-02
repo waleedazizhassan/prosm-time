@@ -4,11 +4,13 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../../core/context/AuthContext";
 import ExceptionRepository, { type GeofenceException } from "../../core/repositories/ExceptionRepository";
 import playAlertSound from "../../core/utils/playAlertSound";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import Card from "../../components/common/Card";
 import Select from "../../components/common/Select";
 import Textarea from "../../components/common/Textarea";
 import Button from "../../components/common/Button";
+import ErrorText from "../../components/common/ErrorText";
 
 const REASON_CATEGORIES = ["purchasing_food", "restroom", "work_assignment", "emergency", "other"];
 const REFRESH_INTERVAL_MS = 60 * 1000;
@@ -73,7 +75,7 @@ export default function ExceptionsCard() {
     setSubmitting(null);
 
     if (!result.success) {
-      setError(result.message ?? t("exceptions.submitError"));
+      setError(humanizeBackendError(result.message, t) ?? t("exceptions.submitError"));
       return;
     }
 
@@ -83,7 +85,7 @@ export default function ExceptionsCard() {
   return (
     <Card title={t("exceptions.title")}>
       <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("exceptions.hint")}</p>
-      {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
+      <ErrorText>{error}</ErrorText>
 
       {exceptions.map((exception) => (
         <div key={exception.id} style={{ borderTop: "1px solid var(--border-light)", paddingTop: "var(--space-3)", marginTop: "var(--space-3)" }}>

@@ -2,11 +2,13 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import EmployeeRepository, { type InviteInput, type InviteResultData } from "../../core/repositories/EmployeeRepository";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import Modal from "../../components/common/Modal";
 import Input from "../../components/common/Input";
 import Select from "../../components/common/Select";
 import Button from "../../components/common/Button";
+import ErrorText from "../../components/common/ErrorText";
 
 const ROLE_OPTIONS: InviteInput["roleKey"][] = ["manager", "supervisor", "employee", "read_only"];
 
@@ -58,7 +60,7 @@ export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: Invi
     setSubmitting(false);
 
     if (!inviteResult.success) {
-      setError(inviteResult.message ?? t("invite.genericError"));
+      setError(humanizeBackendError(inviteResult.message, t) ?? t("invite.genericError"));
       return;
     }
 
@@ -126,7 +128,7 @@ export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: Invi
         disabled={submitting}
         options={ROLE_OPTIONS.map((key) => ({ value: key, label: t(`invite.role.${key}`) }))}
       />
-      {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
+      <ErrorText>{error}</ErrorText>
     </Modal>
   );
 }

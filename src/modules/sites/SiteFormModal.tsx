@@ -3,12 +3,14 @@ import { useTranslation } from "react-i18next";
 
 import SiteRepository, { type Site, type KioskMode, type BreakRoundingMode } from "../../core/repositories/SiteRepository";
 import { getCurrentPosition, haversineDistanceMeters } from "../../core/utils/geo";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import Modal from "../../components/common/Modal";
 import Input from "../../components/common/Input";
 import Select from "../../components/common/Select";
 import Button from "../../components/common/Button";
 import Toggle from "../../components/common/Toggle";
+import ErrorText from "../../components/common/ErrorText";
 
 interface SiteFormModalProps {
   isOpen: boolean;
@@ -130,7 +132,7 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
     setSubmitting(false);
 
     if (!result.success) {
-      setError(result.message ?? t("form.genericError"));
+      setError(humanizeBackendError(result.message, t) ?? t("form.genericError"));
       return;
     }
 
@@ -177,7 +179,7 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
         </Button>
       </div>
 
-      {locationError ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{locationError}</p> : null}
+      <ErrorText>{locationError}</ErrorText>
       {testResult ? (
         <p style={{ color: testResult.within ? "var(--status-success-text)" : "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>
           {t(testResult.within ? "form.testLocationResultWithin" : "form.testLocationResultOutside", {
@@ -301,7 +303,7 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
         </div>
       ) : null}
 
-      {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
+      <ErrorText>{error}</ErrorText>
     </Modal>
   );
 }

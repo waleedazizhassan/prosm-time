@@ -10,6 +10,7 @@ import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import PresenceRepository, { type PresenceSession } from "../../core/repositories/PresenceRepository";
 import { getCurrentPosition, type CurrentPosition } from "../../core/utils/geo";
 import playAlertSound from "../../core/utils/playAlertSound";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { reverseGeocodePlaceName } from "../../core/utils/reverseGeocode";
 import { getDeviceLabel } from "../../core/utils/deviceInfo";
 import OfflineQueueService from "../../core/offline/OfflineQueueService";
@@ -22,6 +23,7 @@ import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import StatusBadge from "../../components/common/StatusBadge";
 import CameraCaptureModal from "../../components/common/CameraCaptureModal";
+import ErrorText from "../../components/common/ErrorText";
 
 const PRESENCE_SAMPLE_INTERVAL_MS = 5 * 60 * 1000;
 
@@ -292,18 +294,24 @@ export default function ClockInOutCard() {
       // § live UX review, user-directed - a site configured to block
       // self clock-in past its grace period raises this exact marker
       // (clock_in_prosm_time_attendance, 20260902130000) - shown as
-      // its own distinct message rather than the generic clock-in
+      // its own distinct, richer message (deliberately NOT in
+      // humanizeBackendError's map - this dedicated copy is better
+      // than that generic fallback) rather than the generic clock-in
       // error, since there is no retry action here: the employee
       // genuinely cannot self-clock-in past this point and needs
       // their Manager to do it on their behalf.
-      setError(result.message?.includes("CLOCK_IN_BLOCKED_CONTACT_MANAGER") ? t("attendance.clockInBlockedContactManager") : (result.message ?? t("attendance.clockInError")));
+      setError(
+        result.message?.includes("CLOCK_IN_BLOCKED_CONTACT_MANAGER")
+          ? t("attendance.clockInBlockedContactManager")
+          : (humanizeBackendError(result.message, t) ?? t("attendance.clockInError"))
+      );
       return;
     }
 
     if (evidenceFile) {
       const evidenceResult = await EvidenceRepository.uploadEvidence(result.data.eventId, evidenceFile);
       if (!evidenceResult.success) {
-        setEvidenceWarning(evidenceResult.message ?? t("attendance.evidenceUploadError"));
+        setEvidenceWarning(humanizeBackendError(evidenceResult.message, t) ?? t("attendance.evidenceUploadError"));
       }
     }
 
@@ -370,14 +378,14 @@ export default function ClockInOutCard() {
 
     if (!result.success || !result.data) {
       setSubmitting(false);
-      setError(result.message ?? t("attendance.clockOutError"));
+      setError(humanizeBackendError(result.message, t) ?? t("attendance.clockOutError"));
       return;
     }
 
     if (evidenceFile) {
       const evidenceResult = await EvidenceRepository.uploadEvidence(result.data.eventId, evidenceFile);
       if (!evidenceResult.success) {
-        setEvidenceWarning(evidenceResult.message ?? t("attendance.evidenceUploadError"));
+        setEvidenceWarning(humanizeBackendError(evidenceResult.message, t) ?? t("attendance.evidenceUploadError"));
       }
     }
 
@@ -450,7 +458,7 @@ export default function ClockInOutCard() {
     setSosSubmitting(false);
 
     if (!result.success) {
-      setError(result.message ?? t("attendance.sosError"));
+      setError(humanizeBackendError(result.message, t) ?? t("attendance.sosError"));
       return;
     }
 
@@ -467,7 +475,7 @@ export default function ClockInOutCard() {
       const result = await AttendanceRepository.endBreak(activeBreakId);
       setBreakSubmitting(false);
       if (!result.success) {
-        setError(result.message ?? t("attendance.breakEndError"));
+        setError(humanizeBackendError(result.message, t) ?? t("attendance.breakEndError"));
         return;
       }
       if (result.data?.maxDurationExceeded) {
@@ -478,7 +486,7 @@ export default function ClockInOutCard() {
       const result = await AttendanceRepository.startBreak(session.id);
       setBreakSubmitting(false);
       if (!result.success || !result.data) {
-        setError(result.message ?? t("attendance.breakStartError"));
+        setError(humanizeBackendError(result.message, t) ?? t("attendance.breakStartError"));
         return;
       }
       setActiveBreakId(result.data.breakId);
@@ -534,7 +542,7 @@ export default function ClockInOutCard() {
         )}
       </div>
 
-      {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
+      <ErrorText>{error}</ErrorText>
       {evidenceWarning ? <p style={{ color: "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>{evidenceWarning}</p> : null}
       {breakWarning ? <p style={{ color: "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>{breakWarning}</p> : null}
 

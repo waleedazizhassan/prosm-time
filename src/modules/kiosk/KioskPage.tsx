@@ -5,12 +5,14 @@ import { useParams } from "react-router-dom";
 import KioskRepository, { type KioskRosterEntry } from "../../core/repositories/KioskRepository";
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import PageShell from "../../components/common/PageShell";
 import Button from "../../components/common/Button";
 import CameraCaptureModal from "../../components/common/CameraCaptureModal";
 import LoadingState from "../../components/common/LoadingState";
 import EmptyState from "../../components/common/EmptyState";
+import ErrorText from "../../components/common/ErrorText";
 import styles from "./KioskPage.module.css";
 
 type Screen = "roster" | "pin" | "success";
@@ -52,11 +54,11 @@ export default function KioskPage() {
     setLoadError("");
     const [siteResult, rosterResult] = await Promise.all([SiteRepository.getSite(siteId), KioskRepository.getRoster(siteId)]);
     if (!siteResult.success || !siteResult.data) {
-      setLoadError(siteResult.message ?? t("loadError"));
+      setLoadError(humanizeBackendError(siteResult.message, t) ?? t("loadError"));
     } else {
       setSite(siteResult.data);
       if (!rosterResult.success) {
-        setLoadError(rosterResult.message ?? t("loadError"));
+        setLoadError(humanizeBackendError(rosterResult.message, t) ?? t("loadError"));
       } else {
         setRoster(rosterResult.data ?? []);
       }
@@ -101,7 +103,7 @@ export default function KioskPage() {
 
     if (!result.success || !result.data) {
       setSubmitting(null);
-      setError(result.message ?? t("actionError"));
+      setError(humanizeBackendError(result.message, t) ?? t("actionError"));
       return;
     }
 
@@ -148,7 +150,7 @@ export default function KioskPage() {
   if (loadError || !site) {
     return (
       <PageShell title={t("title")}>
-        <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{loadError || t("loadError")}</p>
+        <ErrorText>{loadError || t("loadError")}</ErrorText>
       </PageShell>
     );
   }
@@ -176,7 +178,7 @@ export default function KioskPage() {
         <div className={styles.screen}>
           <h2 className={styles.siteName}>{selectedEmployee.fullName}</h2>
           <div className={styles.pinCard}>
-            {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
+            <ErrorText>{error}</ErrorText>
             <input
               type="password"
               inputMode="numeric"

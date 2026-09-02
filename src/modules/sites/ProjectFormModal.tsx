@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import ProjectRepository, { type Project } from "../../core/repositories/ProjectRepository";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import Modal from "../../components/common/Modal";
 import Input from "../../components/common/Input";
 import Textarea from "../../components/common/Textarea";
 import Button from "../../components/common/Button";
 import Toggle from "../../components/common/Toggle";
+import ErrorText from "../../components/common/ErrorText";
 
 interface ProjectFormModalProps {
   isOpen: boolean;
@@ -43,7 +45,7 @@ export default function ProjectFormModal({ isOpen, onClose, onSaved, siteId, pro
     setSubmitting(false);
 
     if (!result.success) {
-      setError(result.message ?? t("detail.projectForm.genericError"));
+      setError(humanizeBackendError(result.message, t) ?? t("detail.projectForm.genericError"));
       return;
     }
 
@@ -77,7 +79,7 @@ export default function ProjectFormModal({ isOpen, onClose, onSaved, siteId, pro
         </div>
       ) : null}
 
-      {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
+      <ErrorText>{error}</ErrorText>
     </Modal>
   );
 }

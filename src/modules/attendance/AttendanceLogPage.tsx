@@ -5,6 +5,8 @@ import { Camera } from "lucide-react";
 import ManagerRepository, { type TodayAttendanceRow } from "../../core/repositories/ManagerRepository";
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
+import ErrorText from "../../components/common/ErrorText";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
@@ -69,7 +71,7 @@ export default function AttendanceLogPage() {
     setLoadError("");
     const result = await ManagerRepository.listAttendanceHistory(startDate, endDate);
     if (!result.success) {
-      setLoadError(result.message ?? t("loadError"));
+      setLoadError(humanizeBackendError(result.message, t) ?? t("loadError"));
       setRows([]);
       setLoading(false);
       return;
@@ -133,7 +135,7 @@ export default function AttendanceLogPage() {
     const result = await EvidenceRepository.getEvidenceObjectUrl(storagePath);
     setEvidenceLoading(false);
     if (!result.success || !result.data) {
-      setEvidenceError(result.message ?? t("photoLoadError"));
+      setEvidenceError(humanizeBackendError(result.message, t) ?? t("photoLoadError"));
       return;
     }
     setEvidenceUrl(result.data);
@@ -217,7 +219,7 @@ export default function AttendanceLogPage() {
       </Card>
 
       <Card>
-        {loadError ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{loadError}</p> : null}
+        <ErrorText>{loadError}</ErrorText>
         <Table columns={columns} data={filteredRows} getRowId={(row) => row.sessionId} loading={loading} emptyMessage={t("empty")} />
       </Card>
 
@@ -225,7 +227,7 @@ export default function AttendanceLogPage() {
         {evidenceLoading ? (
           <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("photoLoading")}</p>
         ) : evidenceError ? (
-          <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{evidenceError}</p>
+          <ErrorText>{evidenceError}</ErrorText>
         ) : evidenceUrl ? (
           <img src={evidenceUrl} alt={t("photoAlt")} style={{ maxWidth: "100%", borderRadius: "var(--radius-md)", display: "block" }} />
         ) : null}

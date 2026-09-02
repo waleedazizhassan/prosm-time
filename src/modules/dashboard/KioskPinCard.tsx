@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import KioskRepository from "../../core/repositories/KioskRepository";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import Card from "../../components/common/Card";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
+import ErrorText from "../../components/common/ErrorText";
 
 // PROSM Time WP-18/§13.1 - self-service kiosk PIN setup. Every
 // employee who might ever use a shared kiosk device needs their own
@@ -27,7 +29,7 @@ export default function KioskPinCard() {
     const result = await KioskRepository.setMyPin(pin);
     setSubmitting(false);
     if (!result.success) {
-      setError(result.message ?? t("kioskPin.error"));
+      setError(humanizeBackendError(result.message, t) ?? t("kioskPin.error"));
       return;
     }
     setPin("");
@@ -37,7 +39,7 @@ export default function KioskPinCard() {
   return (
     <Card title={t("kioskPin.title")}>
       <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("kioskPin.hint")}</p>
-      {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
+      <ErrorText>{error}</ErrorText>
       {success ? <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("kioskPin.success")}</p> : null}
       <Input label={t("kioskPin.pinLabel")} name="kioskPin" type="password" value={pin} onChange={(event) => setPin(event.target.value.replace(/[^0-9]/g, "").slice(0, 6))} disabled={submitting} />
       <Button onClick={handleSubmit} loading={submitting} disabled={pin.length < 4}>

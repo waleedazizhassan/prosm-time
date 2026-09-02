@@ -5,6 +5,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { useAuth } from "../../core/context/AuthContext";
 import SiteRepository, { type Site, type SiteAssignment } from "../../core/repositories/SiteRepository";
 import ProjectRepository, { type Project } from "../../core/repositories/ProjectRepository";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
@@ -13,6 +14,7 @@ import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
 import Button from "../../components/common/Button";
 import StatusBadge from "../../components/common/StatusBadge";
+import ErrorText from "../../components/common/ErrorText";
 import Table, { type TableColumn } from "../../components/common/Table";
 import SiteFormModal from "./SiteFormModal";
 import AssignSiteMemberModal from "./AssignSiteMemberModal";
@@ -56,7 +58,7 @@ export default function SiteDetailPage() {
     ]);
 
     if (!siteResult.success || !siteResult.data) {
-      setLoadError(siteResult.message ?? t("detail.loadError"));
+      setLoadError(humanizeBackendError(siteResult.message, t) ?? t("detail.loadError"));
       setLoading(false);
       return;
     }
@@ -117,7 +119,7 @@ export default function SiteDetailPage() {
   if (loadError || !site) {
     return (
       <PageShell title={t("title")}>
-        <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{loadError}</p>
+        <ErrorText>{loadError}</ErrorText>
       </PageShell>
     );
   }

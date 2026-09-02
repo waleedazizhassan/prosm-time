@@ -4,10 +4,12 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../../core/context/AuthContext";
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
 import SiteRepository from "../../core/repositories/SiteRepository";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import Modal from "../../components/common/Modal";
 import Select from "../../components/common/Select";
 import Button from "../../components/common/Button";
+import ErrorText from "../../components/common/ErrorText";
 
 interface AssignSiteMemberModalProps {
   isOpen: boolean;
@@ -63,7 +65,7 @@ export default function AssignSiteMemberModal({ isOpen, onClose, onAssigned, sit
     setSubmitting(false);
 
     if (!result.success) {
-      setError(result.message ?? t("detail.assignForm.genericError"));
+      setError(humanizeBackendError(result.message, t) ?? t("detail.assignForm.genericError"));
       return;
     }
 
@@ -108,7 +110,7 @@ export default function AssignSiteMemberModal({ isOpen, onClose, onAssigned, sit
         ]}
       />
 
-      {error ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{error}</p> : null}
+      <ErrorText>{error}</ErrorText>
     </Modal>
   );
 }

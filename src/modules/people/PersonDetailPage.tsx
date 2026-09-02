@@ -7,6 +7,7 @@ import EmployeeRepository, { type OrgMember } from "../../core/repositories/Empl
 import PermissionRepository, { type Permission } from "../../core/repositories/PermissionRepository";
 import DeviceBindingRepository, { type DeviceBinding } from "../../core/repositories/DeviceBindingRepository";
 import KioskRepository from "../../core/repositories/KioskRepository";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
@@ -18,6 +19,7 @@ import Input from "../../components/common/Input";
 import Modal from "../../components/common/Modal";
 import Textarea from "../../components/common/Textarea";
 import StatusBadge from "../../components/common/StatusBadge";
+import ErrorText from "../../components/common/ErrorText";
 import AdminAttendanceCard from "./AdminAttendanceCard";
 
 interface PendingChange {
@@ -79,7 +81,7 @@ export default function PersonDetailPage() {
     ]);
 
     if (!memberResult.success) {
-      setLoadError(memberResult.message ?? t("detail.loadError"));
+      setLoadError(humanizeBackendError(memberResult.message, t) ?? t("detail.loadError"));
       setLoading(false);
       return;
     }
@@ -124,7 +126,7 @@ export default function PersonDetailPage() {
     setSubmitting(false);
 
     if (!result.success) {
-      setChangeError(result.message ?? t("detail.genericError"));
+      setChangeError(humanizeBackendError(result.message, t) ?? t("detail.genericError"));
       return;
     }
 
@@ -136,7 +138,7 @@ export default function PersonDetailPage() {
     setDeviceActionError("");
     const result = await DeviceBindingRepository.setStatus(deviceBindingId, status, `Set to ${status} from the Person detail screen.`);
     if (!result.success) {
-      setDeviceActionError(result.message ?? "Unable to update this device.");
+      setDeviceActionError(humanizeBackendError(result.message, t) ?? t("detail.genericError"));
       return;
     }
     await load();
@@ -150,7 +152,7 @@ export default function PersonDetailPage() {
     const result = await KioskRepository.adminSetPin(member.id, kioskPin);
     setKioskPinSubmitting(false);
     if (!result.success) {
-      setKioskPinError(result.message ?? t("detail.kioskPinError"));
+      setKioskPinError(humanizeBackendError(result.message, t) ?? t("detail.kioskPinError"));
       return;
     }
     setKioskPin("");
@@ -164,7 +166,7 @@ export default function PersonDetailPage() {
     const result = await EmployeeRepository.deleteEmployeeData(member.id, deleteReason.trim());
     setDeleteSubmitting(false);
     if (!result.success) {
-      setDeleteError(result.message ?? t("detail.deleteDataError"));
+      setDeleteError(humanizeBackendError(result.message, t) ?? t("detail.deleteDataError"));
       return;
     }
     setDeleteModalOpen(false);
@@ -182,7 +184,7 @@ export default function PersonDetailPage() {
   if (loadError || !member) {
     return (
       <PageShell title={t("detail.title")}>
-        <p style={{ color: "var(--brand-danger)" }}>{loadError}</p>
+        <ErrorText>{loadError}</ErrorText>
       </PageShell>
     );
   }
@@ -238,7 +240,7 @@ export default function PersonDetailPage() {
 
       <Card title={t("detail.devicesTitle")}>
         <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.devicesHint")}</p>
-        {deviceActionError ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{deviceActionError}</p> : null}
+        <ErrorText>{deviceActionError}</ErrorText>
         {devices.length === 0 ? (
           <EmptyState message={t("detail.noDevices")} />
         ) : (
@@ -268,7 +270,7 @@ export default function PersonDetailPage() {
       {canManageDevices ? (
         <Card title={t("detail.kioskPinTitle")}>
           <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.kioskPinHint")}</p>
-          {kioskPinError ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{kioskPinError}</p> : null}
+          <ErrorText>{kioskPinError}</ErrorText>
           {kioskPinSuccess ? <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("detail.kioskPinSuccess")}</p> : null}
           <Input label={t("detail.kioskPinLabel")} name="kioskPin" type="password" value={kioskPin} onChange={(event) => setKioskPin(event.target.value.replace(/[^0-9]/g, "").slice(0, 6))} disabled={kioskPinSubmitting} />
           <Button onClick={handleSetKioskPin} loading={kioskPinSubmitting} disabled={kioskPin.length < 4}>
@@ -301,7 +303,7 @@ export default function PersonDetailPage() {
         }
       >
         <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("detail.deleteDataWarning")}</p>
-        {deleteError ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{deleteError}</p> : null}
+        <ErrorText>{deleteError}</ErrorText>
         <Textarea label={t("detail.deleteReasonLabel")} name="deleteReason" value={deleteReason} onChange={(event) => setDeleteReason(event.target.value)} disabled={deleteSubmitting} required />
       </Modal>
 
@@ -321,7 +323,7 @@ export default function PersonDetailPage() {
         }
       >
         <Textarea label={t("detail.reasonLabel")} name="changeReason" value={reason} onChange={(event) => setReason(event.target.value)} required disabled={submitting} />
-        {changeError ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{changeError}</p> : null}
+        <ErrorText>{changeError}</ErrorText>
       </Modal>
     </PageShell>
   );

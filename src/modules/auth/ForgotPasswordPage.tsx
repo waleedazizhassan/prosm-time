@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import PasswordResetRepository from "../../core/repositories/PasswordResetRepository";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
@@ -35,7 +36,7 @@ export default function ForgotPasswordPage() {
     setSubmitting(false);
 
     if (!result.success) {
-      setError(result.message ?? t("forgotPassword.genericError"));
+      setError(humanizeBackendError(result.message, t) ?? t("forgotPassword.genericError"));
       return;
     }
 

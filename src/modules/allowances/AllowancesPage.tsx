@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../../core/context/AuthContext";
 import AllowanceRepository, { type AllowanceEntry, type AllowanceEntryInput } from "../../core/repositories/AllowanceRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
+import ErrorText from "../../components/common/ErrorText";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
@@ -88,7 +90,7 @@ export default function AllowancesPage() {
     setLoadError("");
     const result = await AllowanceRepository.listEntries(startDate, endDate);
     if (!result.success) {
-      setLoadError(result.message ?? t("loadError"));
+      setLoadError(humanizeBackendError(result.message, t) ?? t("loadError"));
       setEntries([]);
       setLoading(false);
       return;
@@ -137,7 +139,7 @@ export default function AllowancesPage() {
     const result = await AllowanceRepository.upsertEntry(newEntryDate, EMPTY_INPUT);
     setAddingEntry(false);
     if (!result.success) {
-      setAddError(result.message ?? t("addError"));
+      setAddError(humanizeBackendError(result.message, t) ?? t("addError"));
       return;
     }
     await load();
@@ -174,7 +176,7 @@ export default function AllowancesPage() {
     const result = await AllowanceRepository.upsertEntry(detailEntry.entryDate, formInput);
     setSaving(false);
     if (!result.success) {
-      setDetailError(result.message ?? t("saveError"));
+      setDetailError(humanizeBackendError(result.message, t) ?? t("saveError"));
       return;
     }
     closeDetail();
@@ -188,7 +190,7 @@ export default function AllowancesPage() {
     const result = await AllowanceRepository.submitEntry(detailEntry.id);
     setSubmitting(false);
     if (!result.success) {
-      setDetailError(result.message ?? t("submitError"));
+      setDetailError(humanizeBackendError(result.message, t) ?? t("submitError"));
       return;
     }
     closeDetail();
@@ -202,7 +204,7 @@ export default function AllowancesPage() {
     const result = await AllowanceRepository.approveEntry(detailEntry.id, action, reviewNotes.trim() || undefined);
     setReviewing(null);
     if (!result.success) {
-      setDetailError(result.message ?? t("reviewError"));
+      setDetailError(humanizeBackendError(result.message, t) ?? t("reviewError"));
       return;
     }
     closeDetail();
@@ -259,7 +261,7 @@ export default function AllowancesPage() {
 
       <Card title={t("addEntry.title")}>
         <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("addEntry.hint")}</p>
-        {addError ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{addError}</p> : null}
+        <ErrorText>{addError}</ErrorText>
         <div style={{ display: "flex", gap: "var(--space-3)", alignItems: "flex-end" }}>
           <Input label={t("addEntry.dateLabel")} name="newAllowanceEntryDate" type="date" value={newEntryDate} onChange={(event) => setNewEntryDate(event.target.value)} />
           <Button onClick={handleAddEntry} loading={addingEntry} disabled={!newEntryDate}>
@@ -269,7 +271,7 @@ export default function AllowancesPage() {
       </Card>
 
       <Card>
-        {loadError ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{loadError}</p> : null}
+        <ErrorText>{loadError}</ErrorText>
         <Table columns={columns} data={filteredEntries} getRowId={(entry) => entry.id} loading={loading} emptyMessage={t("empty")} onRowClick={openDetail} />
       </Card>
 
@@ -377,7 +379,7 @@ export default function AllowancesPage() {
               <Textarea label={t("detail.reviewNotesLabel")} name="reviewNotes" value={reviewNotes} onChange={(event) => setReviewNotes(event.target.value)} disabled={Boolean(reviewing)} />
             ) : null}
 
-            {detailError ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{detailError}</p> : null}
+            <ErrorText>{detailError}</ErrorText>
           </>
         ) : null}
       </Modal>
