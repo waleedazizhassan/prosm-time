@@ -98,8 +98,13 @@ function mapEntryRow(row: AllowanceEntryRow): AllowanceEntry {
   };
 }
 
+// allowance_entries has two FKs to users (user_id, approved_by) -
+// the embed must be qualified with the constraint name or PostgREST
+// rejects it as ambiguous (the exact same bug class audited and
+// fixed across timesheets/project_assignments/site_assignments
+// earlier this session).
 const ENTRY_SELECT =
-  "id, user_id, entry_date, meal_allowance, expatriation_allowance, transportation_allowance, housing_allowance, travel_allowance, other_allowance, other_allowance_note, overtime_hours, overtime_days, status, submitted_at, approved_at, users(full_name), attendance_sessions(clock_in_at, clock_out_at, manual_location_label, sites(name))";
+  "id, user_id, entry_date, meal_allowance, expatriation_allowance, transportation_allowance, housing_allowance, travel_allowance, other_allowance, other_allowance_note, overtime_hours, overtime_days, status, submitted_at, approved_at, users!allowance_entries_user_id_fkey(full_name), attendance_sessions(clock_in_at, clock_out_at, manual_location_label, sites(name))";
 
 // PROSM Time - Allowances (2026-09-02 plan). Reads are RLS-scoped
 // (self always; a Manager's own managed sites' people; everyone for
