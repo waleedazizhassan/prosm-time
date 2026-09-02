@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { Camera } from "lucide-react";
+import { Camera, Download } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import TimesheetRepository, { type Timesheet, type TimesheetEntry, type TimesheetCorrection } from "../../core/repositories/TimesheetRepository";
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
-import { formatMinutes } from "./timesheetPdf";
+import OrganizationRepository from "../../core/repositories/OrganizationRepository";
+import { formatMinutes, buildTimesheetPdf } from "./timesheetPdf";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
@@ -76,6 +77,8 @@ export default function TimesheetsPage() {
   const [entriesLoading, setEntriesLoading] = useState(false);
   const [actionSubmitting, setActionSubmitting] = useState(false);
   const [detailError, setDetailError] = useState("");
+  const [exportingPdf, setExportingPdf] = useState(false);
+  const [organizationLogoUrl, setOrganizationLogoUrl] = useState<string | null>(null);
   const [reviewNotes, setReviewNotes] = useState("");
   const [showCorrectionForm, setShowCorrectionForm] = useState(false);
   const [correctionReason, setCorrectionReason] = useState("");
@@ -125,6 +128,12 @@ export default function TimesheetsPage() {
   useEffect(() => {
     load();
   }, [load]);
+
+  useEffect(() => {
+    OrganizationRepository.getCurrentOrganization().then((result) => {
+      setOrganizationLogoUrl(result.success ? result.data?.logoUrl ?? null : null);
+    });
+  }, []);
 
   const handleGenerate = async () => {
     if (!generateUserId) return;
@@ -179,6 +188,30 @@ export default function TimesheetsPage() {
 
   const closeDetail = () => {
     setDetailTimesheet(null);
+  };
+
+  // § live UX review, user-directed correction (round 2) - removing the
+  // per-row list column ("متكرر في كل سطر") left export reachable only
+  // via a second navigation (View Report's own page) - "الزرار اختفى
+  // خالص" made clear that read as gone, not simplified. Restored as a
+  // single action here instead - one button, scoped to whichever record
+  // is currently open in this modal, not duplicated across every row.
+  const handleExportPdf = async () => {
+    if (!detailTimesheet) return;
+    setExportingPdf(true);
+    setDetailError("");
+    const result = await TimesheetRepository.getEvidencePack(detailTimesheet.id);
+    if (!result.success || !result.data) {
+      setExportingPdf(false);
+      setDetailError(result.message ?? t("report.loadError"));
+      return;
+    }
+    try {
+      const doc = await buildTimesheetPdf(result.data, i18n.language, t, organizationLogoUrl);
+      doc.save(`timesheet-${detailTimesheet.userFullName.replace(/\s+/g, "-")}-${detailTimesheet.periodStart}.pdf`);
+    } finally {
+      setExportingPdf(false);
+    }
   };
 
   const handleSubmitTimesheet = async () => {
@@ -329,6 +362,9 @@ export default function TimesheetsPage() {
               <Link to={`/timesheets/${detailTimesheet.id}/report`}>
                 <Button variant="ghost">{t("detail.viewReportAction")}</Button>
               </Link>
+              <Button variant="ghost" onClick={handleExportPdf} loading={exportingPdf}>
+                <Download size={13} /> {t("report.exportPdfAction")}
+              </Button>
               {canSubmitDetail ? (
                 <Button onClick={handleSubmitTimesheet} loading={actionSubmitting}>
                   {t("detail.submitAction")}
