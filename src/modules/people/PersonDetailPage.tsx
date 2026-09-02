@@ -216,26 +216,26 @@ export default function PersonDetailPage() {
         {t("detail.backToList")}
       </Link>
 
-      <Card title={t("detail.permissionsTitle")}>
-        <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.permissionsHint")}</p>
+      {canManagePermissions ? (
+        <Card title={t("detail.permissionsTitle")}>
+          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.permissionsHint")}</p>
 
-        {member.isOwner ? (
-          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>
-            {t("ownerBadge")}: {catalog.length}/{catalog.length}
-          </p>
-        ) : (
-          catalog.map((permission) => {
-            const isGranted = effective.includes(permission.permissionKey);
-            const isOverridden = permission.permissionKey in overrides;
-            return (
-              <ListRow key={permission.id}>
-                <div>
-                  <div style={{ fontWeight: isOverridden ? "var(--font-weight-bold)" : "var(--font-weight-regular)", color: "var(--text-primary)", fontSize: "var(--font-sm)" }}>
-                    {permission.name}
+          {member.isOwner ? (
+            <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>
+              {t("ownerBadge")}: {catalog.length}/{catalog.length}
+            </p>
+          ) : (
+            catalog.map((permission) => {
+              const isGranted = effective.includes(permission.permissionKey);
+              const isOverridden = permission.permissionKey in overrides;
+              return (
+                <ListRow key={permission.id}>
+                  <div>
+                    <div style={{ fontWeight: isOverridden ? "var(--font-weight-bold)" : "var(--font-weight-regular)", color: "var(--text-primary)", fontSize: "var(--font-sm)" }}>
+                      {permission.name}
+                    </div>
+                    <StatusBadge status={isGranted ? "active" : "neutral"}>{isGranted ? t("detail.grantedLabel") : t("detail.notGrantedLabel")}</StatusBadge>
                   </div>
-                  <StatusBadge status={isGranted ? "active" : "neutral"}>{isGranted ? t("detail.grantedLabel") : t("detail.notGrantedLabel")}</StatusBadge>
-                </div>
-                {canManagePermissions ? (
                   <div style={{ display: "flex", gap: "var(--space-2)" }}>
                     {!isGranted ? (
                       <Button variant="ghost" size="xs" onClick={() => openChange(permission, "grant")}>
@@ -252,12 +252,12 @@ export default function PersonDetailPage() {
                       </Button>
                     ) : null}
                   </div>
-                ) : null}
-              </ListRow>
-            );
-          })
-        )}
-      </Card>
+                </ListRow>
+              );
+            })
+          )}
+        </Card>
+      ) : null}
 
       <Card title={t("detail.devicesTitle")}>
         <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.devicesHint")}</p>

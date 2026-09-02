@@ -64,6 +64,30 @@ function mapMemberRow(row: OrgMemberRow): OrgMember {
   };
 }
 
+interface VisibleMemberRow {
+  id: string;
+  email: string;
+  full_name: string;
+  status: string;
+  is_owner: boolean;
+  created_at: string;
+  role_key: string | null;
+  role_name: string | null;
+}
+
+function mapVisibleMemberRow(row: VisibleMemberRow): OrgMember {
+  return {
+    id: row.id,
+    email: row.email,
+    fullName: row.full_name,
+    status: row.status,
+    isOwner: row.is_owner,
+    roleKey: row.role_key ?? "",
+    roleName: row.role_name ?? "",
+    createdAt: row.created_at,
+  };
+}
+
 // PROSM Time - "Employee Management" (§37) + invitations (§12). Reads
 // are RLS-scoped to the caller's own organization
 // ("members can view users in own organization", 20260831110000);
@@ -75,16 +99,21 @@ class EmployeeRepository {
     return DatabaseManager.getClient();
   }
 
+  // Scoped via list_prosm_time_visible_members() rather than a raw
+  // `users` select: the Owner sees the whole org, but a Manager must
+  // only see herself and the people assigned to a site she manages -
+  // not the Owner or unrelated employees (20260902090000).
   async listOrganizationMembers(): Promise<ServiceResult<OrgMember[]>> {
     try {
-      const { data, error } = await this.client
-        .from("users")
-        .select("id, email, full_name, status, is_owner, created_at, roles(role_key, name)")
-        .order("created_at", { ascending: true });
+      const { data, error } = await this.client.rpc("list_prosm_time_visible_members");
 
       if (error) return createError(error.message);
 
-      return createSuccess((data ?? []).map(mapMemberRow));
+      const rows = (data ?? []) as VisibleMemberRow[];
+      const sorted = [...rows].sort(
+        (a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime(),
+      );
+      return createSuccess(sorted.map(mapVisibleMemberRow));
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Employee service unavailable.");
     }
