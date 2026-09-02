@@ -1,0 +1,28 @@
+{
+  "title": "Anwesenheitsprotokoll",
+  "subtitle": "Kommen-/Gehen-Verlauf, beschränkt auf die Personen und Standorte, die Sie sehen dürfen.",
+  "loadError": "Anwesenheitsdatensätze konnten nicht geladen werden.",
+  "filters": {
+    "title": "Zeitraum",
+    "fromLabel": "Von",
+    "toLabel": "Bis"
+  },
+  "columns": {
+    "employee": "Mitarbeiter",
+    "site": "Standort",
+    "clockInAt": "Kommen",
+    "clockOutAt": "Gehen",
+    "status": "Status",
+    "workedHours": "Geleistete Stunden"
+  },
+  "status": {
+    "clocked_in": "Eingestempelt",
+    "clocked_out": "Ausgestempelt"
+  },
+  "empty": "Keine Anwesenheitsdatensätze für diesen Zeitraum.",
+  "viewPhoto": "Foto anzeigen",
+  "photoModalTitle": "Anwesenheitsfoto",
+  "photoLoading": "Foto wird geladen…",
+  "photoAlt": "Anwesenheitsnachweisfoto",
+  "photoLoadError": "Dieses Foto konnte nicht geladen werden."
+}

@@ -1,0 +1,28 @@
+{
+  "title": "سجل الحضور",
+  "subtitle": "سجل تحركات الحضور والانصراف، على حسب الأشخاص والمواقع اللي مسموح لك تشوفها.",
+  "loadError": "تعذر تحميل سجلات الحضور.",
+  "filters": {
+    "title": "الفترة",
+    "fromLabel": "من",
+    "toLabel": "إلى"
+  },
+  "columns": {
+    "employee": "الموظف",
+    "site": "الموقع",
+    "clockInAt": "وقت الحضور",
+    "clockOutAt": "وقت الانصراف",
+    "status": "الحالة",
+    "workedHours": "ساعات العمل"
+  },
+  "status": {
+    "clocked_in": "حاضر",
+    "clocked_out": "منصرف"
+  },
+  "empty": "لا توجد سجلات حضور لهذه الفترة.",
+  "viewPhoto": "عرض الصورة",
+  "photoModalTitle": "صورة الحضور",
+  "photoLoading": "جارٍ تحميل الصورة…",
+  "photoAlt": "صورة إثبات الحضور",
+  "photoLoadError": "تعذر تحميل هذه الصورة."
+}

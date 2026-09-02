@@ -1,0 +1,28 @@
+{
+  "title": "Registro presenze",
+  "subtitle": "Cronologia di entrata/uscita, limitata alle persone e alle sedi che sei autorizzato a vedere.",
+  "loadError": "Impossibile caricare i registri di presenza.",
+  "filters": {
+    "title": "Periodo",
+    "fromLabel": "Dal",
+    "toLabel": "Al"
+  },
+  "columns": {
+    "employee": "Dipendente",
+    "site": "Sede",
+    "clockInAt": "Entrata",
+    "clockOutAt": "Uscita",
+    "status": "Stato",
+    "workedHours": "Ore lavorate"
+  },
+  "status": {
+    "clocked_in": "Presente",
+    "clocked_out": "Uscito"
+  },
+  "empty": "Nessun registro di presenza per questo periodo.",
+  "viewPhoto": "Visualizza foto",
+  "photoModalTitle": "Foto presenza",
+  "photoLoading": "Caricamento foto…",
+  "photoAlt": "Foto di prova della presenza",
+  "photoLoadError": "Impossibile caricare questa foto."
+}

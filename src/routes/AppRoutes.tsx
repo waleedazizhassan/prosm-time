@@ -15,6 +15,7 @@ import PersonDetailPage from "../modules/people/PersonDetailPage";
 import SitesPage from "../modules/sites/SitesPage";
 import SiteDetailPage from "../modules/sites/SiteDetailPage";
 import ManagerConsolePage from "../modules/manager/ManagerConsolePage";
+import AttendanceLogPage from "../modules/attendance/AttendanceLogPage";
 import TimesheetsPage from "../modules/timesheets/TimesheetsPage";
 import TimesheetReportPage from "../modules/timesheets/TimesheetReportPage";
 import KioskPage from "../modules/kiosk/KioskPage";
@@ -63,6 +64,7 @@ export default function AppRoutes() {
             <Route path="/sites" element={<SitesPage />} />
             <Route path="/sites/:siteId" element={<SiteDetailPage />} />
             <Route path="/manager" element={<ManagerConsolePage />} />
+            <Route path="/attendance" element={<AttendanceLogPage />} />
             <Route path="/timesheets" element={<TimesheetsPage />} />
             <Route path="/timesheets/:timesheetId/report" element={<TimesheetReportPage />} />
             <Route path="/kiosk/:siteId" element={<KioskPage />} />

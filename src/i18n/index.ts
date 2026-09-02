@@ -47,6 +47,12 @@ import frManager from "./locales/fr/manager.json";
 import deManager from "./locales/de/manager.json";
 import itManager from "./locales/it/manager.json";
 
+import enAttendanceLog from "./locales/en/attendanceLog.json";
+import arAttendanceLog from "./locales/ar/attendanceLog.json";
+import frAttendanceLog from "./locales/fr/attendanceLog.json";
+import deAttendanceLog from "./locales/de/attendanceLog.json";
+import itAttendanceLog from "./locales/it/attendanceLog.json";
+
 import enTimesheets from "./locales/en/timesheets.json";
 import arTimesheets from "./locales/ar/timesheets.json";
 import frTimesheets from "./locales/fr/timesheets.json";
@@ -80,11 +86,11 @@ import itCamera from "./locales/it/camera.json";
 // Management + Map/Geofence, Project Management, §13/§14).
 
 const resources = {
-  en: { common: enCommon, auth: enAuth, dashboard: enDashboard, people: enPeople, shell: enShell, sites: enSites, manager: enManager, timesheets: enTimesheets, kiosk: enKiosk, help: enHelp, camera: enCamera },
-  ar: { common: arCommon, auth: arAuth, dashboard: arDashboard, people: arPeople, shell: arShell, sites: arSites, manager: arManager, timesheets: arTimesheets, kiosk: arKiosk, help: arHelp, camera: arCamera },
-  fr: { common: frCommon, auth: frAuth, dashboard: frDashboard, people: frPeople, shell: frShell, sites: frSites, manager: frManager, timesheets: frTimesheets, kiosk: frKiosk, help: frHelp, camera: frCamera },
-  de: { common: deCommon, auth: deAuth, dashboard: deDashboard, people: dePeople, shell: deShell, sites: deSites, manager: deManager, timesheets: deTimesheets, kiosk: deKiosk, help: deHelp, camera: deCamera },
-  it: { common: itCommon, auth: itAuth, dashboard: itDashboard, people: itPeople, shell: itShell, sites: itSites, manager: itManager, timesheets: itTimesheets, kiosk: itKiosk, help: itHelp, camera: itCamera },
+  en: { common: enCommon, auth: enAuth, dashboard: enDashboard, people: enPeople, shell: enShell, sites: enSites, manager: enManager, attendanceLog: enAttendanceLog, timesheets: enTimesheets, kiosk: enKiosk, help: enHelp, camera: enCamera },
+  ar: { common: arCommon, auth: arAuth, dashboard: arDashboard, people: arPeople, shell: arShell, sites: arSites, manager: arManager, attendanceLog: arAttendanceLog, timesheets: arTimesheets, kiosk: arKiosk, help: arHelp, camera: arCamera },
+  fr: { common: frCommon, auth: frAuth, dashboard: frDashboard, people: frPeople, shell: frShell, sites: frSites, manager: frManager, attendanceLog: frAttendanceLog, timesheets: frTimesheets, kiosk: frKiosk, help: frHelp, camera: frCamera },
+  de: { common: deCommon, auth: deAuth, dashboard: deDashboard, people: dePeople, shell: deShell, sites: deSites, manager: deManager, attendanceLog: deAttendanceLog, timesheets: deTimesheets, kiosk: deKiosk, help: deHelp, camera: deCamera },
+  it: { common: itCommon, auth: itAuth, dashboard: itDashboard, people: itPeople, shell: itShell, sites: itSites, manager: itManager, attendanceLog: itAttendanceLog, timesheets: itTimesheets, kiosk: itKiosk, help: itHelp, camera: itCamera },
 };
 
 export const I18N_STORAGE_KEY = "prosm_time_language";
@@ -98,7 +104,7 @@ i18next
     fallbackLng: DEFAULT_LANGUAGE,
     supportedLngs: LANGUAGE_CODES,
 
-    ns: ["common", "auth", "dashboard", "people", "shell", "sites", "manager", "timesheets", "kiosk", "help", "camera"],
+    ns: ["common", "auth", "dashboard", "people", "shell", "sites", "manager", "attendanceLog", "timesheets", "kiosk", "help", "camera"],
     defaultNS: "common",
 
     detection: {

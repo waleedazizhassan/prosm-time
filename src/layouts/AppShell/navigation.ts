@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, HelpCircle } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, HelpCircle, Clock } from "lucide-react";
 
 export type NavSection = "organization" | "help";
 
@@ -34,6 +34,14 @@ export const NAV_ITEMS: NavItem[] = [
   { id: "people", labelKey: "items.people", path: "/people", icon: Users, requiredPermission: "employees.view", section: "organization" },
   { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage", section: "organization" },
   { id: "manager", labelKey: "items.manager", path: "/manager", icon: LayoutGrid, requiredPermission: "attendance.view", section: "organization" },
+  // § live UX review, user-directed - "a direct sidebar button to view
+  // employees' clock-in/clock-out record." No permission gate, same
+  // reasoning as Timesheets below: attendance_sessions' own RLS
+  // already returns exactly what the caller may see (their own
+  // sessions always; a Manager's managed-site people; everyone for
+  // the Owner), so every authenticated member can open this item and
+  // simply gets their own scope back.
+  { id: "attendance", labelKey: "items.attendance", path: "/attendance", icon: Clock, requiredPermission: null, section: "organization" },
   // §22: "Employee reviews their period" - self-access to one's own
   // timesheets needs no special permission (same as Dashboard), so
   // this nav item is visible to every authenticated org member; the

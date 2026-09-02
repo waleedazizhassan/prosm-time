@@ -1,0 +1,28 @@
+{
+  "title": "Attendance Record",
+  "subtitle": "Clock-in/out history, scoped to the people and sites you're authorized to see.",
+  "loadError": "Unable to load attendance records.",
+  "filters": {
+    "title": "Period",
+    "fromLabel": "From",
+    "toLabel": "To"
+  },
+  "columns": {
+    "employee": "Employee",
+    "site": "Site",
+    "clockInAt": "Clock In",
+    "clockOutAt": "Clock Out",
+    "status": "Status",
+    "workedHours": "Hours Worked"
+  },
+  "status": {
+    "clocked_in": "Clocked In",
+    "clocked_out": "Clocked Out"
+  },
+  "empty": "No attendance records for this period.",
+  "viewPhoto": "View photo",
+  "photoModalTitle": "Attendance Photo",
+  "photoLoading": "Loading photo…",
+  "photoAlt": "Attendance evidence photo",
+  "photoLoadError": "Unable to load this photo."
+}

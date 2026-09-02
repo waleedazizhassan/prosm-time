@@ -1,0 +1,28 @@
+{
+  "title": "Registre de présence",
+  "subtitle": "Historique des pointages, limité aux personnes et sites que vous êtes autorisé à voir.",
+  "loadError": "Impossible de charger les enregistrements de présence.",
+  "filters": {
+    "title": "Période",
+    "fromLabel": "Du",
+    "toLabel": "Au"
+  },
+  "columns": {
+    "employee": "Employé",
+    "site": "Site",
+    "clockInAt": "Entrée",
+    "clockOutAt": "Sortie",
+    "status": "Statut",
+    "workedHours": "Heures travaillées"
+  },
+  "status": {
+    "clocked_in": "Présent",
+    "clocked_out": "Sorti"
+  },
+  "empty": "Aucun enregistrement de présence pour cette période.",
+  "viewPhoto": "Voir la photo",
+  "photoModalTitle": "Photo de présence",
+  "photoLoading": "Chargement de la photo…",
+  "photoAlt": "Photo justificative de présence",
+  "photoLoadError": "Impossible de charger cette photo."
+}

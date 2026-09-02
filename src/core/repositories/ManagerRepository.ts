@@ -76,21 +76,32 @@ function createError<T>(message: string): ServiceResult<T> {
 
 // PROSM Time WP-14/§21 - "Operational dashboard... Exceptions and
 // approvals." No new RPCs needed - geofence_exceptions/correction_
-// requests/attendance_sessions RLS already grants org-wide read to
-// attendance.view holders (WP-06/WP-11); this repository is purely
-// the aggregation queries the Manager Console needs.
+// requests/attendance_sessions RLS grants each caller exactly what
+// they are authorized to see (their own rows always; an org-wide
+// read additionally scoped to the caller's own managed sites for
+// attendance.view holders, unscoped for the Owner - 20260902090000);
+// this repository is purely the aggregation queries Manager Console
+// and the Attendance Record screen need, on top of that same RLS.
 class ManagerRepository {
   get client() {
     return DatabaseManager.getClient();
   }
 
-  async listTodayAttendance(): Promise<ServiceResult<TodayAttendanceRow[]>> {
+  // Shared by listTodayAttendance and listAttendanceHistory - only the
+  // clock_in_at range differs between "today" and an arbitrary
+  // caller-picked period; the session/presence/evidence joins and row
+  // shaping are otherwise identical.
+  private async fetchAttendanceRows(fromIso: string, toIso?: string): Promise<ServiceResult<TodayAttendanceRow[]>> {
     try {
-      const startOfDay = new Date();
-      startOfDay.setHours(0, 0, 0, 0);
+      let sessionsQuery = this.client
+        .from("attendance_sessions")
+        .select("id, status, clock_in_at, clock_out_at, users(full_name), sites(name)")
+        .gte("clock_in_at", fromIso)
+        .order("clock_in_at", { ascending: false });
+      if (toIso) sessionsQuery = sessionsQuery.lte("clock_in_at", toIso);
 
       const [sessionsResult, presenceResult] = await Promise.all([
-        this.client.from("attendance_sessions").select("id, status, clock_in_at, clock_out_at, users(full_name), sites(name)").gte("clock_in_at", startOfDay.toISOString()).order("clock_in_at", { ascending: false }),
+        sessionsQuery,
         this.client.from("presence_sessions").select("attendance_session_id").eq("status", "active"),
       ]);
 
@@ -152,6 +163,23 @@ class ManagerRepository {
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Manager console service unavailable.");
     }
+  }
+
+  async listTodayAttendance(): Promise<ServiceResult<TodayAttendanceRow[]>> {
+    const startOfDay = new Date();
+    startOfDay.setHours(0, 0, 0, 0);
+    return this.fetchAttendanceRows(startOfDay.toISOString());
+  }
+
+  // Attendance Record screen - same underlying rows as
+  // listTodayAttendance, just over a caller-picked calendar range
+  // instead of a hardcoded "today". startDate/endDate are plain
+  // "YYYY-MM-DD" strings from a date input; expanded to that day's
+  // full local start/end before querying so the end date is inclusive.
+  async listAttendanceHistory(startDate: string, endDate: string): Promise<ServiceResult<TodayAttendanceRow[]>> {
+    const from = new Date(`${startDate}T00:00:00`);
+    const to = new Date(`${endDate}T23:59:59.999`);
+    return this.fetchAttendanceRows(from.toISOString(), to.toISOString());
   }
 
   async listPendingReview(): Promise<ServiceResult<PendingReviewItem[]>> {
