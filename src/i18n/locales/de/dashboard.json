@@ -4,6 +4,7 @@
   "signOutAction": "Abmelden",
   "overview": {
     "title": "Organisationsübersicht",
+    "titleScoped": "Übersicht meiner Standorte",
     "sites": "Standorte",
     "clockedInNow": "Aktuell eingestempelt",
     "pendingReviews": "Ausstehende Prüfungen",

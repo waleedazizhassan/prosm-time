@@ -4,6 +4,7 @@
   "signOutAction": "Esci",
   "overview": {
     "title": "Panoramica organizzazione",
+    "titleScoped": "Panoramica delle mie sedi",
     "sites": "Sedi",
     "clockedInNow": "Presenti ora",
     "pendingReviews": "Revisioni in sospeso",

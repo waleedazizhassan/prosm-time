@@ -25,10 +25,14 @@ interface Kpi {
 // is a compact rollup of that same real data, not a new domain
 // concept. Gated on the same `attendance.view` permission Manager
 // Console itself requires, so it only ever appears for someone who
-// can already see this data on that page.
+// can already see this data on that page. All three reads are
+// RLS-scoped to the caller's own managed sites for a non-owner
+// (20260902090000) - the title switches to "my sites" rather than
+// "organization" for anyone but the Owner, so the label never
+// overclaims what the numbers actually cover.
 export default function AdminOverviewCard() {
   const { t } = useTranslation("dashboard");
-  const { hasPermission } = useAuth();
+  const { hasPermission, profile } = useAuth();
   const canView = hasPermission("attendance.view");
 
   const [loading, setLoading] = useState(true);
@@ -64,7 +68,7 @@ export default function AdminOverviewCard() {
   return (
     <Card>
       <div className={styles.header}>
-        <span className={styles.eyebrow}>{t("overview.title")}</span>
+        <span className={styles.eyebrow}>{t(profile?.isOwner ? "overview.title" : "overview.titleScoped")}</span>
         <Link to="/manager" className={styles.link}>
           {t("overview.openManagerAction")}
         </Link>

@@ -4,6 +4,7 @@
   "signOutAction": "Se déconnecter",
   "overview": {
     "title": "Aperçu de l'organisation",
+    "titleScoped": "Aperçu de mes sites",
     "sites": "Sites",
     "clockedInNow": "Actuellement présents",
     "pendingReviews": "Révisions en attente",

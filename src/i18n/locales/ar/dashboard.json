@@ -4,6 +4,7 @@
   "signOutAction": "تسجيل الخروج",
   "overview": {
     "title": "نظرة عامة على المؤسسة",
+    "titleScoped": "نظرة عامة على مواقعي",
     "sites": "المواقع",
     "clockedInNow": "متواجدون الآن",
     "pendingReviews": "مراجعات معلقة",

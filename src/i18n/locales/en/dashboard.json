@@ -4,6 +4,7 @@
   "signOutAction": "Sign out",
   "overview": {
     "title": "Organization Overview",
+    "titleScoped": "Overview of My Sites",
     "sites": "Sites",
     "clockedInNow": "Clocked In Now",
     "pendingReviews": "Pending Reviews",

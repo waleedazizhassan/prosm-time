@@ -12,14 +12,15 @@ import Table, { type TableColumn } from "../../components/common/Table";
 import SiteFormModal from "./SiteFormModal";
 
 // PROSM Time Implementation Master File V3.0, WP-05/§13/§37 - "Site
-// Management + Map/Geofence." Real org-scoped site list (RLS) with an
-// Add action gated on the real 'sites.manage' permission - the RPCs
-// themselves re-check this server-side, this page only hides the
-// button.
+// Management + Map/Geofence." The site list itself is RLS-scoped to
+// sites the caller is assigned to (or all, for the Owner); Add Site
+// is Owner-only (create_prosm_time_site rejects non-owners
+// server-side, 20260902090000) - a Manager may configure a site she
+// manages, but creating a new one is an organizational decision.
 export default function SitesPage() {
   const { t } = useTranslation("sites");
   const navigate = useNavigate();
-  const { hasPermission } = useAuth();
+  const { hasPermission, profile } = useAuth();
 
   const [sites, setSites] = useState<Site[]>([]);
   const [loading, setLoading] = useState(true);
@@ -60,7 +61,11 @@ export default function SitesPage() {
   ];
 
   return (
-    <PageShell title={t("title")} subtitle={t("subtitle")} actions={<Button onClick={() => setCreateOpen(true)}>{t("addAction")}</Button>}>
+    <PageShell
+      title={t("title")}
+      subtitle={t("subtitle")}
+      actions={profile?.isOwner ? <Button onClick={() => setCreateOpen(true)}>{t("addAction")}</Button> : undefined}
+    >
       {loadError ? <p style={{ color: "var(--brand-danger)" }}>{loadError}</p> : null}
 
       <Table columns={columns} data={sites} getRowId={(site) => site.id} loading={loading} emptyMessage="—" onRowClick={(site) => navigate(`/sites/${site.id}`)} />
