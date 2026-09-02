@@ -88,11 +88,21 @@ export default function AttendanceLogPage() {
     });
   }, []);
 
-  const employeeOptions = useMemo(() => {
+  // § live UX review, user-directed - "the employee filter shouldn't
+  // even appear on a plain employee's own screen, they only ever see
+  // themselves." A single visible name (this viewer's own RLS-scoped
+  // data always contains at least their own rows) means there is
+  // nothing to filter - the dropdown itself is hidden rather than
+  // shown with one pointless option.
+  const employeeNames = useMemo(() => {
     const collator = new Intl.Collator(i18n.language, { sensitivity: "base" });
-    const names = Array.from(new Set(rows.map((row) => row.userFullName))).sort(collator.compare);
-    return [{ value: ALL_EMPLOYEES, label: t("filters.allEmployees") }, ...names.map((name) => ({ value: name, label: name }))];
-  }, [rows, i18n.language, t]);
+    return Array.from(new Set(rows.map((row) => row.userFullName))).sort(collator.compare);
+  }, [rows, i18n.language]);
+  const showEmployeeFilter = employeeNames.length > 1;
+  const employeeOptions = useMemo(
+    () => [{ value: ALL_EMPLOYEES, label: t("filters.allEmployees") }, ...employeeNames.map((name) => ({ value: name, label: name }))],
+    [employeeNames, t],
+  );
 
   useEffect(() => {
     if (employeeFilter !== ALL_EMPLOYEES && !rows.some((row) => row.userFullName === employeeFilter)) {
@@ -200,7 +210,9 @@ export default function AttendanceLogPage() {
         <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
           <Input label={t("filters.fromLabel")} name="attendanceLogFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />
           <Input label={t("filters.toLabel")} name="attendanceLogTo" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
-          <Select label={t("filters.employeeLabel")} name="attendanceLogEmployee" value={employeeFilter} onChange={(event) => setEmployeeFilter(event.target.value)} options={employeeOptions} />
+          {showEmployeeFilter ? (
+            <Select label={t("filters.employeeLabel")} name="attendanceLogEmployee" value={employeeFilter} onChange={(event) => setEmployeeFilter(event.target.value)} options={employeeOptions} />
+          ) : null}
         </div>
       </Card>
 

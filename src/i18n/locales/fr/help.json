@@ -21,6 +21,18 @@
     "exceptions": {
       "title": "Exceptions",
       "body": "Si vous pointez en dehors de votre zone de travail assignée, cela est enregistré comme une exception. Indiquez un court motif depuis le tableau de bord afin qu'un responsable puisse l'examiner."
+    },
+    "allowances": {
+      "title": "Indemnités",
+      "body": "Ouvrez Indemnités dans la barre latérale et choisissez une date pour ajouter une entrée - la date, le site et les heures de pointage sont remplis automatiquement. Complétez vous-même les montants de repas, transport, logement et autres, puis soumettez. Un responsable ou le propriétaire l'approuve ou la rejette ; tant qu'elle est en brouillon, vous pouvez encore la modifier. Les heures/jours supplémentaires sont calculés automatiquement selon la politique de shift de votre site, si elle est configurée."
+    },
+    "sites": {
+      "title": "Sites et politique de shift (administrateurs)",
+      "body": "Sites (Propriétaire/Responsable uniquement) permet de configurer les sites, leur géorepérage GPS, le mode kiosque et la politique caméra/présence, et d'y affecter des employés/responsables. Chaque site peut aussi avoir sa propre politique de shift optionnelle : horaires de travail, à partir de quand les heures supplémentaires et les retards sont comptabilisés, une période de tolérance, et si un employé est bloqué de pointer lui-même au-delà de cette tolérance (un responsable pointe alors à sa place, avec un motif)."
+    },
+    "permissions": {
+      "title": "Permissions (administrateurs)",
+      "body": "La page de chaque personne dans Personnes affiche ses permissions réellement accordées et permet à un administrateur autorisé d'accorder, révoquer ou réinitialiser une permission individuelle avec un motif - visible uniquement par ceux qui possèdent déjà cette autorité. Le propriétaire a toujours toutes les permissions ; les autres rôles partent d'un ensemble par défaut ajustable par personne."
     }
   },
   "faq": {
@@ -40,6 +52,22 @@
     "q4": {
       "question": "Comment changer la langue ou l'apparence ?",
       "answer": "Ouvrez le menu utilisateur (en bas de la barre latérale) - la langue et l'apparence (Sombre/Clair/Système) peuvent y être modifiées à tout moment."
+    },
+    "q5": {
+      "question": "J'ai pointé sans choisir de site - pourquoi un « lieu de travail » m'a-t-il été demandé ?",
+      "answer": "Le site est optionnel afin que vous puissiez enregistrer votre présence depuis votre position réelle même si ce n'est pas un site enregistré - mais une courte description de l'endroit où vous êtes est alors obligatoire, pour que les rapports n'affichent jamais un site vide."
+    },
+    "q6": {
+      "question": "Quelle est la différence entre Registre de présence et Feuilles de temps ?",
+      "answer": "Le Registre de présence est un journal en direct des pointages sur une période donnée - rien à approuver. Les Feuilles de temps sont un objet généré pour une période (totaux travaillé/pause/heures sup.) qui suit un vrai flux de soumission -> approbation et se verrouille une fois approuvé."
+    },
+    "q7": {
+      "question": "Puis-je exporter ma présence ou ma feuille de temps en PDF ?",
+      "answer": "Oui - Registre de présence, Feuilles de temps et Indemnités ont chacun leur propre action Exporter en PDF, limitée à ce que vous consultez actuellement."
+    },
+    "q8": {
+      "question": "Pourquoi ne vois-je pas certains employés dans Personnes ou le Registre de présence ?",
+      "answer": "Vous ne voyez toujours que vous-même, plus - si vous gérez un site - les personnes affectées à ce site. Le propriétaire voit tout le monde. Ceci est appliqué par le serveur, pas seulement masqué dans l'interface."
     }
   },
   "contact": {

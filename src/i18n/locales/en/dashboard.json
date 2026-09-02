@@ -7,8 +7,33 @@
     "titleScoped": "Overview of My Sites",
     "sites": "Sites",
     "clockedInNow": "Clocked In Now",
+    "registeredEmployees": "Registered Employees",
     "pendingReviews": "Pending Reviews",
-    "openManagerAction": "Open Manager Console"
+    "openManagerAction": "Open Manager Console",
+    "drilldown": {
+      "title": {
+        "sites": "Sites",
+        "present": "Currently Present",
+        "employees": "Registered Employees",
+        "pending": "Pending Reviews"
+      },
+      "nameColumn": "Name",
+      "dateColumn": "Date",
+      "timeColumn": "Time",
+      "siteColumn": "Site",
+      "jobColumn": "Job",
+      "statusColumn": "Status",
+      "activeNow": "Active",
+      "inactiveNow": "Inactive",
+      "emptySites": "No sites yet.",
+      "emptyPresent": "No one is currently clocked in.",
+      "emptyEmployees": "No employees found.",
+      "emptyPending": "No exceptions or corrections awaiting review.",
+      "pendingKind": {
+        "geofence_exception": "Geofence Exception",
+        "correction_request": "Correction Request"
+      }
+    }
   },
   "organizationCard": {
     "title": "Organization",

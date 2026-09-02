@@ -209,7 +209,7 @@ export default function PersonDetailPage() {
                 <ListRow key={permission.id}>
                   <div>
                     <div style={{ fontWeight: isOverridden ? "var(--font-weight-bold)" : "var(--font-weight-regular)", color: "var(--text-primary)", fontSize: "var(--font-sm)" }}>
-                      {permission.name}
+                      {t(`catalog.${permission.permissionKey}`, { defaultValue: permission.name })}
                     </div>
                     <StatusBadge status={isGranted ? "active" : "neutral"}>{isGranted ? t("detail.grantedLabel") : t("detail.notGrantedLabel")}</StatusBadge>
                   </div>
@@ -308,7 +308,7 @@ export default function PersonDetailPage() {
       <Modal
         isOpen={Boolean(pendingChange)}
         onClose={() => setPendingChange(null)}
-        title={pendingChange ? pendingChange.permission.name : ""}
+        title={pendingChange ? t(`catalog.${pendingChange.permission.permissionKey}`, { defaultValue: pendingChange.permission.name }) : ""}
         footer={
           <>
             <Button variant="ghost" onClick={() => setPendingChange(null)} disabled={submitting}>

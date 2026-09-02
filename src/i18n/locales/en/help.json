@@ -21,6 +21,18 @@
     "exceptions": {
       "title": "Exceptions",
       "body": "If you clock in or out outside your assigned work area, this is recorded as an exception. Provide a short reason from the Dashboard so a manager can review it."
+    },
+    "allowances": {
+      "title": "Allowances",
+      "body": "Open Allowances from the sidebar and pick a date to add an entry - the date, site and clock-in/out are filled in automatically. Fill in meal, transportation, housing and other amounts yourself, then Submit. A manager or the Owner approves or rejects it; while it's a draft you can still edit and re-save it. Overtime hours/days are computed automatically from your site's shift policy, if one is configured."
+    },
+    "sites": {
+      "title": "Sites & Shift Policy (Administrators)",
+      "body": "Sites (Owner/Manager only) is where worksites, their GPS geofence, kiosk mode and camera/attendance policy are configured, and where employees/managers are assigned to a site. Each site can also have its own optional shift policy - work hours, when overtime and lateness deductions start counting, a grace period, and whether an employee is blocked from self clock-in past that grace period (in which case a manager clocks them in instead, with a reason)."
+    },
+    "permissions": {
+      "title": "Permissions (Administrators)",
+      "body": "Each person's page under People shows their real granted permissions and lets an authorized administrator grant, revoke, or reset an individual permission with a reason - visible only to those who already hold that authority. The Owner always has every permission; other roles start from a default bundle that can be adjusted per person."
     }
   },
   "faq": {
@@ -40,6 +52,22 @@
     "q4": {
       "question": "How do I change the language or theme?",
       "answer": "Open the user menu (bottom of the sidebar) - Language and Appearance (Dark/Light/System) can be changed there at any time."
+    },
+    "q5": {
+      "question": "I clocked in without choosing a site - why did it ask for a \"workplace\"?",
+      "answer": "Site is optional so you can register attendance from your real current location even when it isn't a registered site - but a short description of where you actually are is required in that case, so reports never show a blank site."
+    },
+    "q6": {
+      "question": "What's the difference between Attendance Record and Timesheets?",
+      "answer": "Attendance Record is a live, date-ranged log of clock-in/out events - nothing to approve. Timesheets are a generated, period-based object (worked/break/overtime totals) that goes through a real submit -> approve workflow and gets locked once approved."
+    },
+    "q7": {
+      "question": "Can I export my attendance or timesheet as a PDF?",
+      "answer": "Yes - Attendance Record, Timesheets and Allowances each have their own Export PDF action, scoped to whatever you're currently viewing."
+    },
+    "q8": {
+      "question": "Why can't I see some employees in People or Attendance Record?",
+      "answer": "You only ever see yourself, plus - if you manage a site - the people assigned to that site. The Owner sees everyone. This is enforced by the server, not just hidden in the interface."
     }
   },
   "contact": {

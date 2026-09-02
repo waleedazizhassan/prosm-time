@@ -54,6 +54,7 @@
     "clockOutLine": "انصراف {{time}}",
     "overtimeLine": "الإضافي: {{hours}} ساعة ({{days}} يوم)",
     "otherNoteLabel": "ملاحظة (لبند \"أخرى\")",
+    "totalsLabel": "الإجمالي",
     "reviewNotesLabel": "ملاحظات المراجعة (اختياري)"
   }
 }

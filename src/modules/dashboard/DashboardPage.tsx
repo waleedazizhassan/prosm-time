@@ -5,8 +5,11 @@ import { useAuth } from "../../core/context/AuthContext";
 import PageShell from "../../components/common/PageShell";
 import ClockInOutCard from "./ClockInOutCard";
 import ExceptionsCard from "./ExceptionsCard";
-import KioskPinCard from "./KioskPinCard";
 import AdminOverviewCard from "./AdminOverviewCard";
+// KioskPinCard intentionally not rendered below - § live UX review,
+// user-directed: its current look reads as dated next to the rest of
+// this pass; hidden (not deleted, component/route untouched) until a
+// redesigned version is ready.
 
 // PROSM Time Implementation Master File V3.0, WP-03/§21/§37 - "Admin
 // Dashboard." Deliberately minimal and operational: real-time
@@ -36,7 +39,6 @@ export default function DashboardPage() {
       <ClockInOutCard />
       <AdminOverviewCard />
       <ExceptionsCard />
-      <KioskPinCard />
     </PageShell>
   );
 }

@@ -54,6 +54,7 @@
     "clockOutLine": "Out {{time}}",
     "overtimeLine": "Overtime: {{hours}} hrs ({{days}} days)",
     "otherNoteLabel": "Note (for \"Other\")",
+    "totalsLabel": "Totals",
     "reviewNotesLabel": "Review notes (optional)"
   }
 }

@@ -4,14 +4,17 @@
   justify-content: center;
   gap: var(--space-2);
 
-  min-height: 48px;
+  min-height: 44px;
   padding: 0 var(--space-5);
 
   border: none;
-  border-radius: var(--radius-md);
+  /* § live UX review, user-directed - "rounded, professional-looking
+     buttons." A true pill shape rather than the previous 12px
+     rounding, matching the modern look asked for. */
+  border-radius: var(--radius-round);
 
   font-family: var(--font-family);
-  font-size: var(--font-md);
+  font-size: var(--font-sm);
   font-weight: var(--font-weight-semibold);
 
   cursor: pointer;
@@ -67,22 +70,22 @@
 }
 
 .xs {
-  min-height: 30px;
+  min-height: 28px;
   padding: 0 var(--space-3);
   font-size: var(--font-xs);
   gap: var(--space-1);
 }
 
 .sm {
-  min-height: 40px;
+  min-height: 36px;
   padding: 0 var(--space-4);
-  font-size: var(--font-sm);
+  font-size: var(--font-xs);
 }
 
 .md {
-  min-height: 48px;
+  min-height: 44px;
   padding: 0 var(--space-5);
-  font-size: var(--font-md);
+  font-size: var(--font-sm);
 }
 
 .fullWidth {

@@ -54,6 +54,7 @@
     "clockOutLine": "Sortie {{time}}",
     "overtimeLine": "Heures sup. : {{hours}} h ({{days}} j)",
     "otherNoteLabel": "Note (pour « Autre »)",
+    "totalsLabel": "Totaux",
     "reviewNotesLabel": "Notes de révision (facultatif)"
   }
 }

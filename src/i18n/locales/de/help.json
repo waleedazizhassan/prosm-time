@@ -21,6 +21,18 @@
     "exceptions": {
       "title": "Ausnahmen",
       "body": "Wenn Sie außerhalb Ihres zugewiesenen Arbeitsbereichs ein- oder ausstempeln, wird dies als Ausnahme erfasst. Geben Sie über das Dashboard eine kurze Begründung an, damit ein Manager sie prüfen kann."
+    },
+    "allowances": {
+      "title": "Zulagen",
+      "body": "Öffnen Sie Zulagen in der Seitenleiste und wählen Sie ein Datum, um einen Eintrag hinzuzufügen - Datum, Standort und Kommen/Gehen werden automatisch übernommen. Füllen Sie die Beträge für Verpflegung, Fahrtkosten, Wohnen und Sonstiges selbst aus und reichen Sie den Eintrag ein. Ein Manager oder der Inhaber genehmigt oder lehnt ihn ab; solange er ein Entwurf ist, können Sie ihn noch bearbeiten. Überstunden werden automatisch aus der Schichtrichtlinie Ihres Standorts berechnet, falls konfiguriert."
+    },
+    "sites": {
+      "title": "Standorte und Schichtrichtlinie (Administratoren)",
+      "body": "Standorte (nur Inhaber/Manager) ist der Ort, an dem Arbeitsstandorte, ihr GPS-Geofence, der Kiosk-Modus und die Kamera-/Anwesenheitsrichtlinie konfiguriert werden und Mitarbeiter/Manager einem Standort zugewiesen werden. Jeder Standort kann außerdem eine eigene, optionale Schichtrichtlinie haben: Arbeitszeiten, ab wann Überstunden und Verspätungsabzüge zählen, eine Kulanzzeit, und ob ein Mitarbeiter nach dieser Kulanzzeit vom Selbst-Einstempeln blockiert wird (in diesem Fall stempelt ein Manager ihn stattdessen mit Begründung ein)."
+    },
+    "permissions": {
+      "title": "Berechtigungen (Administratoren)",
+      "body": "Die Seite jeder Person unter Personen zeigt ihre tatsächlich erteilten Berechtigungen und ermöglicht einem berechtigten Administrator, eine einzelne Berechtigung mit Begründung zu erteilen, zu entziehen oder zurückzusetzen - sichtbar nur für diejenigen, die diese Befugnis bereits besitzen. Der Inhaber hat immer alle Berechtigungen; andere Rollen starten mit einem Standardpaket, das pro Person angepasst werden kann."
     }
   },
   "faq": {
@@ -40,6 +52,22 @@
     "q4": {
       "question": "Wie ändere ich die Sprache oder das Erscheinungsbild?",
       "answer": "Öffnen Sie das Benutzermenü (unten in der Seitenleiste) - Sprache und Erscheinungsbild (Dunkel/Hell/System) können dort jederzeit geändert werden."
+    },
+    "q5": {
+      "question": "Ich habe ohne Standortauswahl eingestempelt - warum wurde ein „Arbeitsort“ verlangt?",
+      "answer": "Der Standort ist optional, damit Sie Ihre Anwesenheit von Ihrem tatsächlichen aktuellen Ort erfassen können, auch wenn dieser kein registrierter Standort ist - in diesem Fall ist jedoch eine kurze Beschreibung erforderlich, damit Berichte niemals einen leeren Standort zeigen."
+    },
+    "q6": {
+      "question": "Was ist der Unterschied zwischen Anwesenheitsprotokoll und Stundenzetteln?",
+      "answer": "Das Anwesenheitsprotokoll ist ein live geführtes Protokoll der Ein-/Ausstempel-Ereignisse über einen Zeitraum - nichts muss genehmigt werden. Stundenzettel sind ein generiertes, zeitraumbasiertes Objekt (Arbeits-/Pausen-/Überstundensummen), das einen echten Einreichungs- -> Genehmigungsprozess durchläuft und nach Genehmigung gesperrt wird."
+    },
+    "q7": {
+      "question": "Kann ich meine Anwesenheit oder meinen Stundenzettel als PDF exportieren?",
+      "answer": "Ja - Anwesenheitsprotokoll, Stundenzettel und Zulagen haben jeweils eine eigene Aktion „PDF exportieren“, beschränkt auf das, was Sie gerade betrachten."
+    },
+    "q8": {
+      "question": "Warum sehe ich manche Mitarbeiter nicht unter Personen oder im Anwesenheitsprotokoll?",
+      "answer": "Sie sehen immer nur sich selbst, plus - wenn Sie einen Standort leiten - die diesem Standort zugewiesenen Personen. Der Inhaber sieht alle. Dies wird vom Server durchgesetzt, nicht nur in der Oberfläche verborgen."
     }
   },
   "contact": {

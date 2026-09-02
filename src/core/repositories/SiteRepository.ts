@@ -289,6 +289,27 @@ class SiteRepository {
     }
   }
 
+  // § live UX review, user-directed - the Dashboard's "Registered
+  // employees" drill-down needs each employee's site name(s); no
+  // existing read returns that org-wide (listSiteAssignments is
+  // per-site). Relies on the same site_assignments RLS every other
+  // read here already does - never a new authorization concept.
+  async listAllAssignedSiteNames(): Promise<ServiceResult<Record<string, string[]>>> {
+    try {
+      const { data, error } = await this.client.from("site_assignments").select("user_id, sites(name)");
+      if (error) return createError(error.message);
+      const byUser: Record<string, string[]> = {};
+      for (const row of data ?? []) {
+        const site = Array.isArray(row.sites) ? row.sites[0] : row.sites;
+        if (!site?.name) continue;
+        (byUser[row.user_id] ??= []).push(site.name);
+      }
+      return createSuccess(byUser);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Site service unavailable.");
+    }
+  }
+
   async setSiteAssignment(siteId: string, userId: string, roleAtSite: "member" | "manager"): Promise<ServiceResult> {
     try {
       const { data, error } = await this.client.rpc("set_prosm_time_site_assignment", {

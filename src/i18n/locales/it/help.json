@@ -21,6 +21,18 @@
     "exceptions": {
       "title": "Eccezioni",
       "body": "Se timbri entrata o uscita al di fuori della tua area di lavoro assegnata, questo viene registrato come eccezione. Fornisci un breve motivo dalla Dashboard affinché un responsabile possa esaminarlo."
+    },
+    "allowances": {
+      "title": "Indennità",
+      "body": "Apri Indennità dalla barra laterale e scegli una data per aggiungere una voce - data, sede e orari di entrata/uscita vengono importati automaticamente. Completa tu gli importi di pasto, trasporto, alloggio e altro, quindi invia. Un responsabile o il proprietario la approva o la respinge; finché è una bozza puoi ancora modificarla. Le ore/giorni di straordinario vengono calcolati automaticamente dalla politica del turno della tua sede, se configurata."
+    },
+    "sites": {
+      "title": "Sedi e politica del turno (amministratori)",
+      "body": "Sedi (solo Proprietario/Manager) è dove si configurano le sedi di lavoro, il loro geofence GPS, la modalità kiosk e la politica di fotocamera/presenza, e dove i dipendenti/manager vengono assegnati a una sede. Ogni sede può inoltre avere una propria politica del turno facoltativa: orari di lavoro, da quando iniziano a contare straordinari e detrazioni per ritardo, un periodo di tolleranza, e se un dipendente è bloccato dalla timbratura autonoma oltre tale periodo (in tal caso un manager lo timbra al suo posto, con un motivo)."
+    },
+    "permissions": {
+      "title": "Permessi (amministratori)",
+      "body": "La pagina di ciascuna persona in Persone mostra i permessi effettivamente concessi e consente a un amministratore autorizzato di concedere, revocare o azzerare un singolo permesso con un motivo - visibile solo a chi possiede già tale autorità. Il proprietario ha sempre tutti i permessi; gli altri ruoli partono da un pacchetto predefinito regolabile per persona."
     }
   },
   "faq": {
@@ -40,6 +52,22 @@
     "q4": {
       "question": "Come cambio la lingua o l'aspetto?",
       "answer": "Apri il menu utente (in fondo alla barra laterale) - lingua e aspetto (Scuro/Chiaro/Sistema) possono essere modificati lì in qualsiasi momento."
+    },
+    "q5": {
+      "question": "Ho timbrato senza scegliere una sede - perché mi è stato chiesto un \"luogo di lavoro\"?",
+      "answer": "La sede è facoltativa così puoi registrare la presenza dalla tua posizione reale anche se non è una sede registrata - ma in tal caso è richiesta una breve descrizione di dove ti trovi, così i report non mostrano mai una sede vuota."
+    },
+    "q6": {
+      "question": "Qual è la differenza tra Registro presenze e Fogli ore?",
+      "answer": "Il Registro presenze è un log in tempo reale degli eventi di entrata/uscita su un periodo - niente da approvare. I Fogli ore sono un oggetto generato per un periodo (totali lavorato/pausa/straordinario) che segue un vero flusso di invio -> approvazione e viene bloccato una volta approvato."
+    },
+    "q7": {
+      "question": "Posso esportare la mia presenza o il mio foglio ore in PDF?",
+      "answer": "Sì - Registro presenze, Fogli ore e Indennità hanno ciascuno la propria azione Esporta PDF, limitata a ciò che stai visualizzando in quel momento."
+    },
+    "q8": {
+      "question": "Perché non vedo alcuni dipendenti in Persone o nel Registro presenze?",
+      "answer": "Vedi sempre solo te stesso, più - se gestisci una sede - le persone assegnate a quella sede. Il proprietario vede tutti. Questo è applicato dal server, non solo nascosto nell'interfaccia."
     }
   },
   "contact": {

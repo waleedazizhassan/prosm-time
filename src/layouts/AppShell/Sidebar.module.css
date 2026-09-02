@@ -362,6 +362,20 @@
   }
 }
 
+/* Header shrinks to 56px at this same breakpoint (Header.module.css)
+   - the mobile drawer/backdrop must match, since both position
+   themselves relative to the header's real height. */
+@media (max-width: 640px) {
+  .mobileBackdrop {
+    inset: 56px 0 0 0;
+  }
+
+  .sidebar {
+    top: 56px;
+    height: calc(100vh - 56px);
+  }
+}
+
 @media print {
   .sidebar {
     display: none !important;

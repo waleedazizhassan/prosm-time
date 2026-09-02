@@ -212,15 +212,20 @@
   color: rgba(255, 255, 255, 0.85);
 }
 
-@media (max-width: 1024px) {
-  .container {
-    display: none;
-  }
-}
-
+/* § live UX review, user-directed - "the radio and weather should
+   show up in the mobile header too." Previously hidden entirely
+   below 1024px; now stays visible down to phone widths, using its
+   own compact pill (icon + short text) rather than disappearing -
+   removing HeaderNavControls from the mobile header (see
+   HeaderNavControls.module.css) is what makes the room for it. */
 @media (max-width: 640px) {
+  .pill {
+    height: 32px;
+    padding: 0 var(--space-2);
+  }
+
   .pillText {
-    max-width: 70px;
+    max-width: 56px;
   }
 
   .expanded {

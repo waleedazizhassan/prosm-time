@@ -107,11 +107,17 @@ export default function AllowancesPage() {
     });
   }, []);
 
-  const employeeOptions = useMemo(() => {
+  // § live UX review, user-directed - hidden entirely on a plain
+  // employee's own screen (same reasoning as Attendance Record).
+  const employeeNames = useMemo(() => {
     const collator = new Intl.Collator(i18n.language, { sensitivity: "base" });
-    const names = Array.from(new Set(entries.map((entry) => entry.userFullName))).sort(collator.compare);
-    return [{ value: ALL_EMPLOYEES, label: t("filters.allEmployees") }, ...names.map((name) => ({ value: name, label: name }))];
-  }, [entries, i18n.language, t]);
+    return Array.from(new Set(entries.map((entry) => entry.userFullName))).sort(collator.compare);
+  }, [entries, i18n.language]);
+  const showEmployeeFilter = employeeNames.length > 1;
+  const employeeOptions = useMemo(
+    () => [{ value: ALL_EMPLOYEES, label: t("filters.allEmployees") }, ...employeeNames.map((name) => ({ value: name, label: name }))],
+    [employeeNames, t],
+  );
 
   useEffect(() => {
     if (employeeFilter !== ALL_EMPLOYEES && !entries.some((entry) => entry.userFullName === employeeFilter)) {
@@ -245,7 +251,9 @@ export default function AllowancesPage() {
         <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
           <Input label={t("filters.fromLabel")} name="allowancesFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />
           <Input label={t("filters.toLabel")} name="allowancesTo" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
-          <Select label={t("filters.employeeLabel")} name="allowancesEmployee" value={employeeFilter} onChange={(event) => setEmployeeFilter(event.target.value)} options={employeeOptions} />
+          {showEmployeeFilter ? (
+            <Select label={t("filters.employeeLabel")} name="allowancesEmployee" value={employeeFilter} onChange={(event) => setEmployeeFilter(event.target.value)} options={employeeOptions} />
+          ) : null}
         </div>
       </Card>
 

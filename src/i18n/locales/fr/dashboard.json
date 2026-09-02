@@ -7,8 +7,33 @@
     "titleScoped": "Aperçu de mes sites",
     "sites": "Sites",
     "clockedInNow": "Actuellement présents",
+    "registeredEmployees": "Employés enregistrés",
     "pendingReviews": "Révisions en attente",
-    "openManagerAction": "Ouvrir la console gestionnaire"
+    "openManagerAction": "Ouvrir la console gestionnaire",
+    "drilldown": {
+      "title": {
+        "sites": "Sites",
+        "present": "Actuellement présents",
+        "employees": "Employés enregistrés",
+        "pending": "Révisions en attente"
+      },
+      "nameColumn": "Nom",
+      "dateColumn": "Date",
+      "timeColumn": "Heure",
+      "siteColumn": "Site",
+      "jobColumn": "Poste",
+      "statusColumn": "Statut",
+      "activeNow": "Actif",
+      "inactiveNow": "Inactif",
+      "emptySites": "Aucun site pour le moment.",
+      "emptyPresent": "Personne n'est actuellement présent.",
+      "emptyEmployees": "Aucun employé trouvé.",
+      "emptyPending": "Aucune exception ou correction en attente de révision.",
+      "pendingKind": {
+        "geofence_exception": "Exception de géorepérage",
+        "correction_request": "Demande de correction"
+      }
+    }
   },
   "organizationCard": {
     "title": "Organisation",

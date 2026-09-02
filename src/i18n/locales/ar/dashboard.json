@@ -7,8 +7,33 @@
     "titleScoped": "نظرة عامة على مواقعي",
     "sites": "المواقع",
     "clockedInNow": "متواجدون الآن",
+    "registeredEmployees": "الموظفون المسجلون",
     "pendingReviews": "مراجعات معلقة",
-    "openManagerAction": "فتح لوحة المدير"
+    "openManagerAction": "فتح لوحة المدير",
+    "drilldown": {
+      "title": {
+        "sites": "المواقع",
+        "present": "المتواجدون الآن",
+        "employees": "الموظفون المسجلون",
+        "pending": "مراجعات معلقة"
+      },
+      "nameColumn": "الاسم",
+      "dateColumn": "التاريخ",
+      "timeColumn": "الوقت",
+      "siteColumn": "الموقع",
+      "jobColumn": "الوظيفة",
+      "statusColumn": "الحالة",
+      "activeNow": "نشط",
+      "inactiveNow": "غير نشط",
+      "emptySites": "لا توجد مواقع بعد.",
+      "emptyPresent": "لا يوجد أحد متواجد حاليًا.",
+      "emptyEmployees": "لا يوجد موظفون.",
+      "emptyPending": "لا توجد استثناءات أو تصحيحات بانتظار المراجعة.",
+      "pendingKind": {
+        "geofence_exception": "استثناء نطاق جغرافي",
+        "correction_request": "طلب تصحيح"
+      }
+    }
   },
   "organizationCard": {
     "title": "المؤسسة",

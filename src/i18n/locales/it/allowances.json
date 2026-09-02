@@ -54,6 +54,7 @@
     "clockOutLine": "Uscita {{time}}",
     "overtimeLine": "Straordinario: {{hours}} ore ({{days}} giorni)",
     "otherNoteLabel": "Nota (per \"Altro\")",
+    "totalsLabel": "Totali",
     "reviewNotesLabel": "Note di revisione (facoltativo)"
   }
 }

@@ -7,8 +7,33 @@
     "titleScoped": "Übersicht meiner Standorte",
     "sites": "Standorte",
     "clockedInNow": "Aktuell eingestempelt",
+    "registeredEmployees": "Registrierte Mitarbeiter",
     "pendingReviews": "Ausstehende Prüfungen",
-    "openManagerAction": "Manager-Konsole öffnen"
+    "openManagerAction": "Manager-Konsole öffnen",
+    "drilldown": {
+      "title": {
+        "sites": "Standorte",
+        "present": "Aktuell anwesend",
+        "employees": "Registrierte Mitarbeiter",
+        "pending": "Ausstehende Prüfungen"
+      },
+      "nameColumn": "Name",
+      "dateColumn": "Datum",
+      "timeColumn": "Uhrzeit",
+      "siteColumn": "Standort",
+      "jobColumn": "Funktion",
+      "statusColumn": "Status",
+      "activeNow": "Aktiv",
+      "inactiveNow": "Inaktiv",
+      "emptySites": "Noch keine Standorte.",
+      "emptyPresent": "Aktuell ist niemand eingestempelt.",
+      "emptyEmployees": "Keine Mitarbeiter gefunden.",
+      "emptyPending": "Keine Ausnahmen oder Korrekturen zur Prüfung.",
+      "pendingKind": {
+        "geofence_exception": "Geofence-Ausnahme",
+        "correction_request": "Korrekturanfrage"
+      }
+    }
   },
   "organizationCard": {
     "title": "Organisation",

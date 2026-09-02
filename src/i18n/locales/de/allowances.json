@@ -54,6 +54,7 @@
     "clockOutLine": "Gehen {{time}}",
     "overtimeLine": "Überstunden: {{hours}} Std. ({{days}} Tage)",
     "otherNoteLabel": "Notiz (für „Sonstiges“)",
+    "totalsLabel": "Summen",
     "reviewNotesLabel": "Prüfnotizen (optional)"
   }
 }

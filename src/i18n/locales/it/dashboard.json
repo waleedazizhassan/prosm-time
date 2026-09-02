@@ -7,8 +7,33 @@
     "titleScoped": "Panoramica delle mie sedi",
     "sites": "Sedi",
     "clockedInNow": "Presenti ora",
+    "registeredEmployees": "Dipendenti registrati",
     "pendingReviews": "Revisioni in sospeso",
-    "openManagerAction": "Apri console manager"
+    "openManagerAction": "Apri console manager",
+    "drilldown": {
+      "title": {
+        "sites": "Sedi",
+        "present": "Presenti ora",
+        "employees": "Dipendenti registrati",
+        "pending": "Revisioni in sospeso"
+      },
+      "nameColumn": "Nome",
+      "dateColumn": "Data",
+      "timeColumn": "Ora",
+      "siteColumn": "Sede",
+      "jobColumn": "Ruolo",
+      "statusColumn": "Stato",
+      "activeNow": "Attivo",
+      "inactiveNow": "Inattivo",
+      "emptySites": "Ancora nessuna sede.",
+      "emptyPresent": "Nessuno è attualmente presente.",
+      "emptyEmployees": "Nessun dipendente trovato.",
+      "emptyPending": "Nessuna eccezione o correzione in attesa di revisione.",
+      "pendingKind": {
+        "geofence_exception": "Eccezione geofence",
+        "correction_request": "Richiesta di correzione"
+      }
+    }
   },
   "organizationCard": {
     "title": "Organizzazione",

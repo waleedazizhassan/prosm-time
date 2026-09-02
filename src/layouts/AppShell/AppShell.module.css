@@ -21,3 +21,11 @@
 
   margin-top: 64px;
 }
+
+/* Matches Header.module.css's own 56px mobile height at the same
+   breakpoint. */
+@media (max-width: 640px) {
+  .body {
+    margin-top: 56px;
+  }
+}

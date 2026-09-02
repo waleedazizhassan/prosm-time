@@ -28,7 +28,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-3);
 }
 
@@ -36,18 +36,39 @@
    emerald glow motif used elsewhere in the shell (BrandMark, camera
    viewport), here marking these as the app's own "in control" numbers
    rather than a generic card. */
+/* § live UX review, user-directed - "the KPI cards should be
+   clickable and show their info." A real <button>, not a styled div -
+   keyboard/focus-visible/hover affordance included, same reset
+   pattern as every other icon-button in this shell. */
 .tile {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 2px;
 
+  width: 100%;
   padding: var(--space-3);
 
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
 
   background: var(--surface-hover);
+  cursor: pointer;
+  font-family: inherit;
+  text-align: start;
+
+  transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.tile:hover {
+  background: var(--brand-primary-subtle);
+  border-color: var(--brand-primary-subtle-border);
+  transform: translateY(-1px);
+}
+
+.tile:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
 }
 
 .tileIcon {

@@ -15,7 +15,7 @@ export function buildAllowancesPdf(entries: AllowanceEntry[], startDate: string,
 
   const bodyRows =
     entries.length === 0
-      ? `<tr><td colspan="12" style="padding:14px;text-align:center;color:#64748b;">${escapeHtml(t("empty"))}</td></tr>`
+      ? `<tr><td colspan="13" style="padding:14px;text-align:center;color:#64748b;">${escapeHtml(t("empty"))}</td></tr>`
       : entries
           .map(
             (entry) => `
@@ -29,12 +29,45 @@ export function buildAllowancesPdf(entries: AllowanceEntry[], startDate: string,
           <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${entry.expatriationAllowance.toFixed(2)}</td>
           <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${entry.transportationAllowance.toFixed(2)}</td>
           <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${entry.overtimeHours.toFixed(2)}</td>
+          <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${entry.overtimeDays.toFixed(1)}</td>
           <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${entry.housingAllowance.toFixed(2)}</td>
           <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${entry.travelAllowance.toFixed(2)}</td>
           <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${entry.otherAllowance.toFixed(2)}</td>
         </tr>`,
           )
           .join("");
+
+  // § live UX review, user-directed - "a vertical total at the bottom
+  // of the table" - one summed value per numeric column.
+  const totals = entries.reduce(
+    (acc, entry) => ({
+      meal: acc.meal + entry.mealAllowance,
+      expatriation: acc.expatriation + entry.expatriationAllowance,
+      transportation: acc.transportation + entry.transportationAllowance,
+      overtimeHours: acc.overtimeHours + entry.overtimeHours,
+      overtimeDays: acc.overtimeDays + entry.overtimeDays,
+      housing: acc.housing + entry.housingAllowance,
+      travel: acc.travel + entry.travelAllowance,
+      other: acc.other + entry.otherAllowance,
+    }),
+    { meal: 0, expatriation: 0, transportation: 0, overtimeHours: 0, overtimeDays: 0, housing: 0, travel: 0, other: 0 },
+  );
+
+  const totalsRow =
+    entries.length === 0
+      ? ""
+      : `
+    <tr style="background:#f8fafc;font-weight:700;">
+      <td colspan="5" style="padding:6px 8px;border-top:2px solid #cbd5e1;text-align:${isRtl ? "left" : "right"};">${escapeHtml(t("detail.totalsLabel"))}</td>
+      <td style="padding:6px 8px;border-top:2px solid #cbd5e1;">${totals.meal.toFixed(2)}</td>
+      <td style="padding:6px 8px;border-top:2px solid #cbd5e1;">${totals.expatriation.toFixed(2)}</td>
+      <td style="padding:6px 8px;border-top:2px solid #cbd5e1;">${totals.transportation.toFixed(2)}</td>
+      <td style="padding:6px 8px;border-top:2px solid #cbd5e1;">${totals.overtimeHours.toFixed(2)}</td>
+      <td style="padding:6px 8px;border-top:2px solid #cbd5e1;">${totals.overtimeDays.toFixed(1)}</td>
+      <td style="padding:6px 8px;border-top:2px solid #cbd5e1;">${totals.housing.toFixed(2)}</td>
+      <td style="padding:6px 8px;border-top:2px solid #cbd5e1;">${totals.travel.toFixed(2)}</td>
+      <td style="padding:6px 8px;border-top:2px solid #cbd5e1;">${totals.other.toFixed(2)}</td>
+    </tr>`;
 
   const container = document.createElement("div");
   container.dir = isRtl ? "rtl" : "ltr";
@@ -62,12 +95,14 @@ export function buildAllowancesPdf(entries: AllowanceEntry[], startDate: string,
           <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.expatriation"))}</th>
           <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.transportation"))}</th>
           <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.overtimeHours"))}</th>
+          <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.overtimeDays"))}</th>
           <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.housing"))}</th>
           <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.travel"))}</th>
           <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.other"))}</th>
         </tr>
       </thead>
       <tbody>${bodyRows}</tbody>
+      <tfoot>${totalsRow}</tfoot>
     </table>
   `;
 

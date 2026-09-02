@@ -8,6 +8,7 @@ export interface ServiceResult<T = null> {
 
 export interface TodayAttendanceRow {
   sessionId: string;
+  userId: string;
   userFullName: string;
   siteName: string;
   status: "clocked_in" | "clocked_out";
@@ -32,6 +33,7 @@ interface RawUserRef {
 
 interface RawAttendanceSessionRow {
   id: string;
+  user_id: string;
   status: "clocked_in" | "clocked_out";
   clock_in_at: string;
   clock_out_at: string | null;
@@ -96,7 +98,7 @@ class ManagerRepository {
     try {
       let sessionsQuery = this.client
         .from("attendance_sessions")
-        .select("id, status, clock_in_at, clock_out_at, manual_location_label, users(full_name), sites(name)")
+        .select("id, user_id, status, clock_in_at, clock_out_at, manual_location_label, users(full_name), sites(name)")
         .gte("clock_in_at", fromIso)
         .order("clock_in_at", { ascending: false });
       if (toIso) sessionsQuery = sessionsQuery.lte("clock_in_at", toIso);
@@ -149,6 +151,7 @@ class ManagerRepository {
         const site = Array.isArray(row.sites) ? row.sites[0] : row.sites;
         return {
           sessionId: row.id,
+          userId: row.user_id,
           userFullName: user?.full_name ?? "",
           // § live UX review, user-directed - a no-site clock-in now
           // requires a free-text workplace label instead of leaving

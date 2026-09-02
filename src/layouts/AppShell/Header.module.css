@@ -94,6 +94,12 @@
 
 @media (max-width: 640px) {
   .header {
+    /* § live UX review, user-directed - "make the header a bit
+       smaller/slimmer, more modern" on mobile. Sidebar/mobileBackdrop
+       (Sidebar.module.css) match this same 56px at the same
+       breakpoint, since their mobile drawer positions itself relative
+       to the header's real height. */
+    --header-height: 56px;
     padding: 0 var(--space-3);
     gap: var(--space-2);
   }

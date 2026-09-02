@@ -235,8 +235,17 @@
   white-space: nowrap;
 }
 
-@media (max-width: 1024px) {
-  .container {
-    display: none;
+/* § live UX review, user-directed - stays visible on mobile now (see
+   WeatherMiniPanel.module.css's matching note); the station name
+   truncates via .stationName's own overflow:hidden rather than the
+   whole widget disappearing. */
+@media (max-width: 640px) {
+  .pill {
+    height: 32px;
+    padding: 0 var(--space-2);
+  }
+
+  .pillText {
+    max-width: 56px;
   }
 }

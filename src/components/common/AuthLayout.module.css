@@ -21,21 +21,78 @@
   background: radial-gradient(circle at 15% 12%, color-mix(in srgb, var(--brand-primary) 10%, transparent), transparent 45%), radial-gradient(circle at 85% 88%, color-mix(in srgb, var(--brand-primary) 8%, transparent), transparent 50%), var(--surface-app);
 }
 
-.card {
+/* § live UX review, user-directed - split-panel shape from the PROSM
+   Platform login reference: a dark brand panel beside the actual
+   form, sharing one rounded card boundary instead of two separate
+   surfaces. */
+.shell {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 420px;
+  max-width: 880px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 
   background: var(--surface-card);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  padding: var(--space-8);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
 }
 
-.brandRow {
-  margin-bottom: var(--space-6);
+.brandPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-8);
+  text-align: center;
+
+  background: radial-gradient(circle at 50% 30%, rgba(52, 211, 153, 0.18), transparent 55%), radial-gradient(circle at 50% 75%, rgba(59, 130, 246, 0.16), transparent 60%), #0b1220;
+}
+
+.brandName {
+  margin: 0;
+  font-size: var(--font-xl);
+  font-weight: var(--font-weight-bold);
+  color: #f8fafc;
+}
+
+.brandTagline {
+  margin: 0;
+  max-width: 26ch;
+  font-size: var(--font-sm);
+  color: rgba(226, 232, 240, 0.72);
+}
+
+.formPanel {
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 860px) {
+  .shell {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+  }
+
+  .brandPanel {
+    flex-direction: row;
+    padding: var(--space-5) var(--space-6);
+    gap: var(--space-3);
+  }
+
+  .brandTagline {
+    display: none;
+  }
+
+  .brandName {
+    font-size: var(--font-lg);
+  }
 }
 
 .title {
