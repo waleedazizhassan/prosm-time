@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState, type MouseEvent as ReactMouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { Download } from "lucide-react";
+import { Download, Camera } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import TimesheetRepository, { type Timesheet, type TimesheetEntry, type TimesheetCorrection } from "../../core/repositories/TimesheetRepository";
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
+import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import { formatMinutes, buildTimesheetPdf } from "./timesheetPdf";
 
 import PageShell from "../../components/common/PageShell";
@@ -85,9 +86,15 @@ export default function TimesheetsPage() {
 
   const [exportingId, setExportingId] = useState<string | null>(null);
 
+  const [evidenceModalTitle, setEvidenceModalTitle] = useState<string | null>(null);
+  const [evidenceUrl, setEvidenceUrl] = useState<string | null>(null);
+  const [evidenceLoading, setEvidenceLoading] = useState(false);
+  const [evidenceError, setEvidenceError] = useState("");
+
   const load = useCallback(async () => {
     if (!profile) return;
     setLoading(true);
+    setError("");
 
     const [myResult, approvalsResult, correctionsResult, membersResult] = await Promise.all([
       TimesheetRepository.listMyTimesheets(profile.id),
@@ -96,6 +103,18 @@ export default function TimesheetsPage() {
       canGenerate ? EmployeeRepository.listOrganizationMembers() : Promise.resolve({ success: true, message: null, data: [] as OrgMember[] }),
     ]);
 
+    // § live UX review, user-directed - "Timesheets shows no data" kept
+    // recurring with no visible cause. Root gap found on inspection: a
+    // failed fetch here (RLS, network, session) was silently treated
+    // the same as "genuinely empty" - defaulting to [] with nothing
+    // ever surfaced to the user or to us. Any real failure is now
+    // shown, so a future recurrence reports its actual cause instead of
+    // looking identical to "no data".
+    const failures = [myResult, approvalsResult, correctionsResult, membersResult].filter((result) => !result.success);
+    if (failures.length > 0) {
+      setError(failures.map((result) => result.message).filter(Boolean).join(" · ") || t("loadError"));
+    }
+
     setMyTimesheets(myResult.success ? myResult.data ?? [] : []);
     setPendingApprovals(approvalsResult.success ? approvalsResult.data ?? [] : []);
     setPendingCorrections(correctionsResult.success ? correctionsResult.data ?? [] : []);
@@ -103,7 +122,7 @@ export default function TimesheetsPage() {
     setMembers(memberList);
     setGenerateUserId((current) => current || memberList[0]?.id || "");
     setLoading(false);
-  }, [profile, canApprove, canCorrect, canGenerate]);
+  }, [profile, canApprove, canCorrect, canGenerate, t]);
 
   useEffect(() => {
     load();
@@ -120,6 +139,31 @@ export default function TimesheetsPage() {
       return;
     }
     load();
+  };
+
+  // § live UX review, user-directed - "no button to view the clock-in/
+  // clock-out photo" in Timesheets itself, matching the same feature
+  // already built into Manager Console (§ ManagerConsolePage's own
+  // identical openEvidence/closeEvidence pair).
+  const openEvidence = async (storagePath: string, title: string) => {
+    setEvidenceModalTitle(title);
+    setEvidenceUrl(null);
+    setEvidenceError("");
+    setEvidenceLoading(true);
+    const result = await EvidenceRepository.getEvidenceObjectUrl(storagePath);
+    setEvidenceLoading(false);
+    if (!result.success || !result.data) {
+      setEvidenceError(result.message ?? t("photoLoadError"));
+      return;
+    }
+    setEvidenceUrl(result.data);
+  };
+
+  const closeEvidence = () => {
+    if (evidenceUrl) URL.revokeObjectURL(evidenceUrl);
+    setEvidenceModalTitle(null);
+    setEvidenceUrl(null);
+    setEvidenceError("");
   };
 
   const openDetail = async (timesheet: Timesheet) => {
@@ -361,7 +405,32 @@ export default function TimesheetsPage() {
               <div style={{ display: "grid", gap: "var(--space-2)" }}>
                 {entries.map((entry) => (
                   <div key={entry.sessionId} style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)", borderTop: "1px solid var(--border-light)", paddingTop: "var(--space-2)" }}>
-                    {formatDateTime(entry.clockInAt, i18n.language)} — {entry.clockOutAt ? formatTimeOnly(entry.clockOutAt, i18n.language) : t("detail.stillOpen")} · {entry.siteName ?? "—"}
+                    {formatDateTime(entry.clockInAt, i18n.language)}
+                    {entry.clockInEvidencePath ? (
+                      <button
+                        type="button"
+                        onClick={() => openEvidence(entry.clockInEvidencePath as string, `${t("columns.clockIn")} — ${formatDateTime(entry.clockInAt, i18n.language)}`)}
+                        title={t("viewPhoto")}
+                        aria-label={t("viewPhoto")}
+                        style={{ display: "inline-flex", verticalAlign: "middle", margin: "0 4px", background: "none", border: "none", cursor: "pointer", color: "var(--text-link)", padding: 0 }}
+                      >
+                        <Camera size={12} />
+                      </button>
+                    ) : null}
+                    — {entry.clockOutAt ? formatTimeOnly(entry.clockOutAt, i18n.language) : t("detail.stillOpen")}
+                    {entry.clockOutEvidencePath ? (
+                      <button
+                        type="button"
+                        onClick={() => openEvidence(entry.clockOutEvidencePath as string, `${t("columns.clockOut")} — ${entry.clockOutAt ? formatDateTime(entry.clockOutAt, i18n.language) : ""}`)}
+                        title={t("viewPhoto")}
+                        aria-label={t("viewPhoto")}
+                        style={{ display: "inline-flex", verticalAlign: "middle", margin: "0 4px", background: "none", border: "none", cursor: "pointer", color: "var(--text-link)", padding: 0 }}
+                      >
+                        <Camera size={12} />
+                      </button>
+                    ) : null}
+                    {" "}
+                    · {entry.siteName ?? "—"}
                     {entry.projectName ? ` · ${entry.projectName}` : ""} · {formatMinutes(entry.workedMinutes)}
                   </div>
                 ))}
@@ -397,6 +466,16 @@ export default function TimesheetsPage() {
             <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{correctionReviewTarget.reason}</p>
             <Textarea label={t("detail.notesLabel")} name="correctionReviewNotes" value={correctionReviewNotes} onChange={(event) => setCorrectionReviewNotes(event.target.value)} disabled={Boolean(correctionReviewSubmitting)} />
           </>
+        ) : null}
+      </Modal>
+
+      <Modal isOpen={Boolean(evidenceModalTitle)} onClose={closeEvidence} title={evidenceModalTitle ?? t("viewPhoto")}>
+        {evidenceLoading ? (
+          <LoadingState size="sm" />
+        ) : evidenceError ? (
+          <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{evidenceError}</p>
+        ) : evidenceUrl ? (
+          <img src={evidenceUrl} alt={t("viewPhoto")} style={{ maxWidth: "100%", borderRadius: "var(--radius-md)", display: "block" }} />
         ) : null}
       </Modal>
     </PageShell>

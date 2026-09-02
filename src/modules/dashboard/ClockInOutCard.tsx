@@ -216,8 +216,17 @@ export default function ClockInOutCard() {
   if (!profile || loading) return null;
 
   const selectedSite = sites.find((site) => site.id === siteId) ?? null;
-  const clockInCameraRequired = selectedSite?.cameraRequired ?? false;
-  const clockOutCameraRequired = currentSite?.cameraRequired ?? false;
+  // § live UX review, user-directed - "clock-in without a site doesn't
+  // ask for a photo." With no site there is also no server-side
+  // geofence check to fall back on (§ migration 20260901180000 -
+  // compute_prosm_time_geofence_check is skipped entirely when
+  // p_site_id is null), so a no-site attendance event has no location-
+  // based verification at all unless the photo itself is required -
+  // camera evidence becomes the one remaining verification signal, not
+  // an optional one, exactly when there is no registered site's own
+  // policy to defer to.
+  const clockInCameraRequired = siteId ? selectedSite?.cameraRequired ?? false : true;
+  const clockOutCameraRequired = currentSite ? currentSite.cameraRequired : true;
 
   // § final visual consistency pass, correction - "Clock In / Clock
   // Out must be the single primary attendance action... Camera is part

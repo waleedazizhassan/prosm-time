@@ -1,7 +1,10 @@
 {
   "title": "Feuilles de temps",
   "subtitle": "Réviser, soumettre, approuver et corriger les périodes de présence mensuelles.",
+  "loadError": "Impossible de charger les feuilles de temps.",
   "generateError": "Impossible de générer cette feuille de temps.",
+  "viewPhoto": "Voir la photo",
+  "photoLoadError": "Impossible de charger cette photo.",
   "submitError": "Impossible de soumettre cette feuille de temps.",
   "approveError": "Impossible d'examiner cette feuille de temps.",
   "correctionRequestError": "Impossible de demander cette correction.",
@@ -12,7 +15,9 @@
     "status": "Statut",
     "worked": "Travaillé",
     "overtime": "Heures sup.",
-    "export": "Exporter"
+    "export": "Exporter",
+    "clockIn": "Arrivée",
+    "clockOut": "Départ"
   },
   "status": {
     "draft": "Brouillon",

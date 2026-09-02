@@ -1,7 +1,10 @@
 {
   "title": "Stundenzettel",
   "subtitle": "Monatliche Anwesenheitszeiträume prüfen, einreichen, genehmigen und korrigieren.",
+  "loadError": "Stundenzettel konnten nicht geladen werden.",
   "generateError": "Dieser Stundenzettel konnte nicht erstellt werden.",
+  "viewPhoto": "Foto ansehen",
+  "photoLoadError": "Dieses Foto kann nicht geladen werden.",
   "submitError": "Dieser Stundenzettel konnte nicht eingereicht werden.",
   "approveError": "Dieser Stundenzettel konnte nicht geprüft werden.",
   "correctionRequestError": "Diese Korrektur konnte nicht angefordert werden.",
@@ -12,7 +15,9 @@
     "status": "Status",
     "worked": "Gearbeitet",
     "overtime": "Überstunden",
-    "export": "Export"
+    "export": "Export",
+    "clockIn": "Kommen",
+    "clockOut": "Gehen"
   },
   "status": {
     "draft": "Entwurf",

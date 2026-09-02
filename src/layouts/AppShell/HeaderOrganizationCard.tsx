@@ -42,6 +42,7 @@ function HeaderOrganizationCard() {
   const panelRef = useRef<HTMLDivElement>(null);
   const logoInputRef = useRef<HTMLInputElement>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const filePickerOpenRef = useRef(false);
 
   const load = useCallback(async () => {
     const [orgResult, licenseResult] = await Promise.all([OrganizationRepository.getCurrentOrganization(), LicenseRepository.getCurrentLicenseState()]);
@@ -86,7 +87,21 @@ function HeaderOrganizationCard() {
 
   const closePanel = () => setPanelOpen(false);
 
+  // § live UX review, user-directed - "the button works but the logo
+  // itself never uploads." Root cause found by querying the live
+  // storage bucket directly: it was empty, meaning the upload never
+  // even started. The native OS file picker opened by
+  // logoInputRef.current.click() takes the OS window away from the
+  // browser - the cursor leaves the panel the instant that happens,
+  // which (even with the hover-close fix above) still schedules a
+  // close; by the time the user has picked a file and the OS dialog
+  // closes, the timer has long since fired and unmounted the portaled
+  // panel - taking the very <input> the OS dialog was about to report
+  // back to with it, so the file selection had nowhere to land.
+  // filePickerOpenRef suspends the hover-close entirely for the
+  // duration of the picker being open.
   const scheduleClosePanel = () => {
+    if (filePickerOpenRef.current) return;
     cancelScheduledClose();
     closeTimerRef.current = setTimeout(() => setPanelOpen(false), HOVER_CLOSE_DELAY_MS);
   };
@@ -133,10 +148,22 @@ function HeaderOrganizationCard() {
   // immediately, not only at the one-time Activation moment.
   const handleLogoButtonClick = (event: ReactMouseEvent) => {
     event.stopPropagation();
+    cancelScheduledClose();
+    filePickerOpenRef.current = true;
+    // The OS file picker is its own window - there is no reliable
+    // "picker closed" DOM event, so window focus returning (fires
+    // whether a file was chosen or the dialog was cancelled) is the
+    // one signal that reliably means the picker is gone.
+    const clearFilePickerFlag = () => {
+      filePickerOpenRef.current = false;
+      window.removeEventListener("focus", clearFilePickerFlag);
+    };
+    window.addEventListener("focus", clearFilePickerFlag, { once: true });
     logoInputRef.current?.click();
   };
 
   const handleLogoFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    filePickerOpenRef.current = false;
     const file = event.target.files?.[0];
     event.target.value = "";
     if (!file || !organization) return;

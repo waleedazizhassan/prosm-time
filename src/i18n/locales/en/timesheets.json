@@ -1,7 +1,10 @@
 {
   "title": "Timesheets",
   "subtitle": "Review, submit, approve and correct monthly attendance periods.",
+  "loadError": "Unable to load timesheets.",
   "generateError": "Unable to generate this timesheet.",
+  "viewPhoto": "View photo",
+  "photoLoadError": "Unable to load this photo.",
   "submitError": "Unable to submit this timesheet.",
   "approveError": "Unable to review this timesheet.",
   "correctionRequestError": "Unable to request this correction.",
@@ -12,7 +15,9 @@
     "status": "Status",
     "worked": "Worked",
     "overtime": "Overtime",
-    "export": "Export"
+    "export": "Export",
+    "clockIn": "Clock In",
+    "clockOut": "Clock Out"
   },
   "status": {
     "draft": "Draft",

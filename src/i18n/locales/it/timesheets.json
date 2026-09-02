@@ -1,7 +1,10 @@
 {
   "title": "Fogli ore",
   "subtitle": "Rivedi, invia, approva e correggi i periodi di presenza mensili.",
+  "loadError": "Impossibile caricare i fogli ore.",
   "generateError": "Impossibile generare questo foglio ore.",
+  "viewPhoto": "Vedi foto",
+  "photoLoadError": "Impossibile caricare questa foto.",
   "submitError": "Impossibile inviare questo foglio ore.",
   "approveError": "Impossibile esaminare questo foglio ore.",
   "correctionRequestError": "Impossibile richiedere questa correzione.",
@@ -12,7 +15,9 @@
     "status": "Stato",
     "worked": "Lavorato",
     "overtime": "Straordinario",
-    "export": "Esporta"
+    "export": "Esporta",
+    "clockIn": "Entrata",
+    "clockOut": "Uscita"
   },
   "status": {
     "draft": "Bozza",

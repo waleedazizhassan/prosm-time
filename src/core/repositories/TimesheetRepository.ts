@@ -35,6 +35,8 @@ export interface TimesheetEntry {
   clockOutAt: string | null;
   workedMinutes: number;
   breakMinutes: number;
+  clockInEvidencePath: string | null;
+  clockOutEvidencePath: string | null;
 }
 
 export interface TimesheetCorrection {
@@ -239,6 +241,13 @@ class TimesheetRepository {
     }
   }
 
+  // § live UX review, user-directed - "the clock-in/clock-out photo
+  // should be viewable next to its time" applies here too, not only in
+  // Manager Console's own attendance table (§ ManagerRepository's own
+  // identical join). list_prosm_time_timesheet_entries doesn't carry
+  // evidence, so this does the same client-side attendance_events ->
+  // camera_evidence join per session, storage paths only (no eager
+  // download - EvidenceRepository downloads on demand).
   async getEntries(timesheetId: string): Promise<ServiceResult<TimesheetEntry[]>> {
     try {
       const { data, error } = await this.client.rpc("list_prosm_time_timesheet_entries", { p_timesheet_id: timesheetId });
@@ -254,7 +263,43 @@ class TimesheetRepository {
         workedMinutes: number;
         breakMinutes: number;
       }>;
-      return createSuccess(rows);
+
+      const sessionIds = rows.map((row) => row.sessionId);
+      const clockInEvidenceBySession = new Map<string, string>();
+      const clockOutEvidenceBySession = new Map<string, string>();
+
+      if (sessionIds.length > 0) {
+        const eventsResult = await this.client.from("attendance_events").select("id, session_id, event_type").in("session_id", sessionIds).in("event_type", ["clock_in", "clock_out"]);
+        if (!eventsResult.error) {
+          const events = (eventsResult.data ?? []) as Array<{ id: string; session_id: string; event_type: "clock_in" | "clock_out" }>;
+          const eventIds = events.map((event) => event.id);
+
+          const evidenceByEvent = new Map<string, string>();
+          if (eventIds.length > 0) {
+            const evidenceResult = await this.client.from("camera_evidence").select("attendance_event_id, storage_path").in("attendance_event_id", eventIds).order("captured_at", { ascending: true });
+            if (!evidenceResult.error) {
+              for (const evidenceRow of (evidenceResult.data ?? []) as Array<{ attendance_event_id: string; storage_path: string }>) {
+                if (!evidenceByEvent.has(evidenceRow.attendance_event_id)) evidenceByEvent.set(evidenceRow.attendance_event_id, evidenceRow.storage_path);
+              }
+            }
+          }
+
+          for (const event of events) {
+            const storagePath = evidenceByEvent.get(event.id);
+            if (!storagePath) continue;
+            if (event.event_type === "clock_in") clockInEvidenceBySession.set(event.session_id, storagePath);
+            else clockOutEvidenceBySession.set(event.session_id, storagePath);
+          }
+        }
+      }
+
+      return createSuccess(
+        rows.map((row) => ({
+          ...row,
+          clockInEvidencePath: clockInEvidenceBySession.get(row.sessionId) ?? null,
+          clockOutEvidencePath: clockOutEvidenceBySession.get(row.sessionId) ?? null,
+        }))
+      );
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Timesheet service unavailable.");
     }
