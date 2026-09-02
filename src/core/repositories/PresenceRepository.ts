@@ -54,7 +54,7 @@ class PresenceRepository {
     }
   }
 
-  async recordSample(presenceSessionId: string, latitude: number, longitude: number, accuracyMeters: number | null): Promise<ServiceResult> {
+  async recordSample(presenceSessionId: string, latitude: number, longitude: number, accuracyMeters: number | null): Promise<ServiceResult<{ exceptionCreated: boolean }>> {
     try {
       const { data, error } = await this.client.rpc("record_prosm_time_presence_sample", {
         p_presence_session_id: presenceSessionId,
@@ -65,7 +65,7 @@ class PresenceRepository {
       });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to record this location sample.");
-      return createSuccess();
+      return createSuccess({ exceptionCreated: data?.exceptionCreated === true });
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Presence service unavailable.");
     }

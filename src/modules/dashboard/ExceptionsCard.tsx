@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { useAuth } from "../../core/context/AuthContext";
 import ExceptionRepository, { type GeofenceException } from "../../core/repositories/ExceptionRepository";
+import playAlertSound from "../../core/utils/playAlertSound";
 
 import Card from "../../components/common/Card";
 import Select from "../../components/common/Select";
@@ -10,11 +11,19 @@ import Textarea from "../../components/common/Textarea";
 import Button from "../../components/common/Button";
 
 const REASON_CATEGORIES = ["purchasing_food", "restroom", "work_assignment", "emergency", "other"];
+const REFRESH_INTERVAL_MS = 60 * 1000;
+const REMINDER_INTERVAL_MS = 3 * 60 * 1000;
 
 // PROSM Time WP-11/§19 steps 3-5 - "Notify employee... allow employee
 // to enter a reason." Real notification delivery is WP-13's job; this
 // card is the real reason-entry surface for whatever pending
-// exceptions already exist (WP-09's geofence check auto-creates them).
+// exceptions already exist (WP-09's geofence check auto-creates them
+// at Clock In/Out, and now also a mid-shift geofence exit - § live UX
+// review, user-directed). Polls for new ones (a mid-shift exit can
+// appear while this card is already on screen) and, while any remain
+// unresolved, re-plays the alert sound on a timer - the "scheduled
+// reminder" the same request asked for, reusing the one sound utility
+// rather than a second alert mechanism.
 export default function ExceptionsCard() {
   const { t } = useTranslation("dashboard");
   const { profile } = useAuth();
@@ -37,6 +46,17 @@ export default function ExceptionsCard() {
   useEffect(() => {
     load();
   }, [load]);
+
+  useEffect(() => {
+    const interval = setInterval(load, REFRESH_INTERVAL_MS);
+    return () => clearInterval(interval);
+  }, [load]);
+
+  useEffect(() => {
+    if (exceptions.length === 0) return undefined;
+    const interval = setInterval(playAlertSound, REMINDER_INTERVAL_MS);
+    return () => clearInterval(interval);
+  }, [exceptions.length]);
 
   if (!profile || loading || exceptions.length === 0) return null;
 

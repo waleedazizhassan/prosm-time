@@ -9,6 +9,7 @@ import ProjectRepository, { type Project } from "../../core/repositories/Project
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import PresenceRepository, { type PresenceSession } from "../../core/repositories/PresenceRepository";
 import { getCurrentPosition, type CurrentPosition } from "../../core/utils/geo";
+import playAlertSound from "../../core/utils/playAlertSound";
 import { reverseGeocodePlaceName } from "../../core/utils/reverseGeocode";
 import { getDeviceLabel } from "../../core/utils/deviceInfo";
 import OfflineQueueService from "../../core/offline/OfflineQueueService";
@@ -196,7 +197,15 @@ export default function ClockInOutCard() {
       if (!current) return;
       try {
         const position = await getCurrentPosition();
-        await PresenceRepository.recordSample(current.id, position.latitude, position.longitude, position.accuracyMeters);
+        const result = await PresenceRepository.recordSample(current.id, position.latitude, position.longitude, position.accuracyMeters);
+        // § live UX review, user-directed - "sound + reason + scheduled
+        // reminder" when a mid-shift sample lands outside the site's
+        // geofence: this is the immediate alert; ExceptionsCard's own
+        // reminder loop keeps re-playing it until the employee submits
+        // a reason.
+        if (result.success && result.data?.exceptionCreated) {
+          playAlertSound();
+        }
       } catch {
         // Best-effort only - a failed/denied sample never surfaces as
         // an error, matching every other geolocation capture in this
