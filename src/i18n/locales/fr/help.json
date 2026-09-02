@@ -44,6 +44,8 @@
   },
   "contact": {
     "title": "Contact",
-    "body": "Pour toute aide produit ou assistance, contactez-nous à :"
+    "body": "Pour toute aide produit ou assistance, contactez-nous à :",
+    "infoLabel": "Demandes générales :",
+    "supportLabel": "Assistance :"
   }
 }

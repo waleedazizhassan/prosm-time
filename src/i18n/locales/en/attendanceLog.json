@@ -2,10 +2,12 @@
   "title": "Attendance Record",
   "subtitle": "Clock-in/out history, scoped to the people and sites you're authorized to see.",
   "loadError": "Unable to load attendance records.",
+  "exportPdfAction": "Export PDF",
   "filters": {
     "title": "Period",
     "fromLabel": "From",
-    "toLabel": "To"
+    "toLabel": "To",
+    "sortByName": "Sort by name"
   },
   "columns": {
     "employee": "Employee",

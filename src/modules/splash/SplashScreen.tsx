@@ -19,8 +19,8 @@ export default function SplashScreen() {
       </div>
       <p className={styles.footer}>
         {t("splash.contactLabel")}{" "}
-        <a href="mailto:info@prosm.com" className={styles.footerLink}>
-          info@prosm.com
+        <a href="mailto:info@prosm.net" className={styles.footerLink}>
+          info@prosm.net
         </a>
       </p>
     </div>

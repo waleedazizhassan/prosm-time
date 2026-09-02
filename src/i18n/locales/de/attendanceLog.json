@@ -2,10 +2,12 @@
   "title": "Anwesenheitsprotokoll",
   "subtitle": "Kommen-/Gehen-Verlauf, beschränkt auf die Personen und Standorte, die Sie sehen dürfen.",
   "loadError": "Anwesenheitsdatensätze konnten nicht geladen werden.",
+  "exportPdfAction": "PDF exportieren",
   "filters": {
     "title": "Zeitraum",
     "fromLabel": "Von",
-    "toLabel": "Bis"
+    "toLabel": "Bis",
+    "sortByName": "Nach Name sortieren"
   },
   "columns": {
     "employee": "Mitarbeiter",

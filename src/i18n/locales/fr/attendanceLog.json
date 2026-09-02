@@ -2,10 +2,12 @@
   "title": "Registre de présence",
   "subtitle": "Historique des pointages, limité aux personnes et sites que vous êtes autorisé à voir.",
   "loadError": "Impossible de charger les enregistrements de présence.",
+  "exportPdfAction": "Exporter en PDF",
   "filters": {
     "title": "Période",
     "fromLabel": "Du",
-    "toLabel": "Au"
+    "toLabel": "Au",
+    "sortByName": "Trier par nom"
   },
   "columns": {
     "employee": "Employé",

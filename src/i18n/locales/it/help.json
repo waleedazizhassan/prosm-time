@@ -44,6 +44,8 @@
   },
   "contact": {
     "title": "Contatti",
-    "body": "Per assistenza sul prodotto, contattaci a:"
+    "body": "Per assistenza sul prodotto, contattaci a:",
+    "infoLabel": "Richieste generali:",
+    "supportLabel": "Assistenza:"
   }
 }

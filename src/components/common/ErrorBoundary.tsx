@@ -44,8 +44,8 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBo
             </button>
             <p className={styles.contact}>
               {i18next.t("common:errorBoundary.contactPrefix")}{" "}
-              <a href="mailto:info@prosm.com" className={styles.contactLink}>
-                info@prosm.com
+              <a href="mailto:info@prosm.net" className={styles.contactLink}>
+                info@prosm.net
               </a>
               .
             </p>

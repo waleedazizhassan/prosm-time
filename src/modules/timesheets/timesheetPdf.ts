@@ -1,7 +1,7 @@
-import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";
+import type { jsPDF } from "jspdf";
 import type { EvidencePack } from "../../core/repositories/TimesheetRepository";
 import { formatDateTime, formatTimeOnly, formatDateOnly } from "../../core/utils/formatDate";
+import { renderHtmlToPdf, escapeHtml, sectionHeadingStyle } from "../../core/utils/htmlToPdf";
 import prosmLogo from "../../assets/prosm-logo.png";
 
 export function formatMinutes(minutes: number): string {
@@ -9,12 +9,6 @@ export function formatMinutes(minutes: number): string {
   const hours = Math.floor(totalMinutes / 60);
   const mins = totalMinutes % 60;
   return `${hours}h ${mins}m`;
-}
-
-function escapeHtml(value: string): string {
-  const div = document.createElement("div");
-  div.textContent = value;
-  return div.innerHTML;
 }
 
 type TFunc = (key: string, options?: Record<string, unknown>) => string;
@@ -37,7 +31,7 @@ type TFunc = (key: string, options?: Record<string, unknown>) => string;
 // (not a reuse of the on-screen Report page's markup) so the certified
 // document's layout - two logos, a bordered table - is deliberate, not
 // incidental to on-screen UI chrome.
-export async function buildTimesheetPdf(pack: EvidencePack, languageCode: string, t: TFunc, organizationLogoUrl?: string | null): Promise<jsPDF> {
+export function buildTimesheetPdf(pack: EvidencePack, languageCode: string, t: TFunc, organizationLogoUrl?: string | null): Promise<jsPDF> {
   const isRtl = languageCode === "ar";
   const locale = languageCode;
 
@@ -68,17 +62,10 @@ export async function buildTimesheetPdf(pack: EvidencePack, languageCode: string
           )
           .join("");
 
-  // Arabic script relies on letters visually joining - letter-spacing
-  // (and its own uppercase transform, meaningless for Arabic anyway)
-  // breaks that joining and reads as crowded/displaced text (found
-  // during real-output verification - the headings were the one spot
-  // still slightly off after the actual mangled-text bug was fixed).
-  const sectionHeadingStyle = isRtl
-    ? "font-weight:700;font-size:12px;color:#0f172a;border-bottom:1px solid #cbd5e1;padding-bottom:6px;margin:20px 0 8px;"
-    : "font-weight:700;font-size:12px;letter-spacing:0.03em;text-transform:uppercase;color:#0f172a;border-bottom:1px solid #cbd5e1;padding-bottom:6px;margin:20px 0 8px;";
+  const headingStyle = sectionHeadingStyle(isRtl);
 
   const listSection = (title: string, rows: string, emptyMessage: string) => `
-    <div style="${sectionHeadingStyle}">${escapeHtml(title)}</div>
+    <div style="${headingStyle}">${escapeHtml(title)}</div>
     ${rows || `<p style="margin:0;font-size:11px;color:#64748b;">${escapeHtml(emptyMessage)}</p>`}
   `;
 
@@ -135,9 +122,6 @@ export async function buildTimesheetPdf(pack: EvidencePack, languageCode: string
   // WRAPPER (zero-size, overflow:hidden - never cloned, since only
   // `container` itself is passed to .html()) and leaving `container`
   // itself unpositioned, so the clone renders normally in-flow.
-  const wrapper = document.createElement("div");
-  wrapper.style.cssText = "position:fixed;top:0;left:0;width:0;height:0;overflow:hidden;";
-
   const container = document.createElement("div");
   container.dir = isRtl ? "rtl" : "ltr";
   container.style.cssText = "width:780px;padding:36px;background:#ffffff;color:#0f172a;font-family:'Segoe UI',Tahoma,Arial,sans-serif;";
@@ -160,7 +144,7 @@ export async function buildTimesheetPdf(pack: EvidencePack, languageCode: string
       <tr>${summaryRow(t("report.approvedAt"), pack.timesheet.approvedAt ? formatDateTime(pack.timesheet.approvedAt, locale) : "—")}<td></td><td></td></tr>
     </table>
 
-    <div style="${sectionHeadingStyle}">${escapeHtml(t("report.entriesTitle"))}</div>
+    <div style="${headingStyle}">${escapeHtml(t("report.entriesTitle"))}</div>
     <table style="width:100%;border-collapse:collapse;font-size:11.5px;">
       <thead>
         <tr style="background:#f1f5f9;">
@@ -187,9 +171,6 @@ export async function buildTimesheetPdf(pack: EvidencePack, languageCode: string
     ${listSection(t("report.approvalTrailTitle"), approvalTrailRows, t("report.noApprovalTrail"))}
   `;
 
-  wrapper.appendChild(container);
-  document.body.appendChild(wrapper);
-
   // § live UX review, user-directed - "the on-screen preview is
   // correct, but the downloaded PDF still comes out garbled." Root
   // cause, finally isolated by comparing the on-screen render (correct)
@@ -198,47 +179,9 @@ export async function buildTimesheetPdf(pack: EvidencePack, languageCode: string
   // built-in Latin-1-only font - regardless of the `autoPaging` option;
   // that option only ever controlled how page breaks are computed, not
   // whether .html() draws real PDF text at all. There is no jsPDF
-  // .html() setting that avoids this for non-Latin scripts.
-  //
-  // Fixed by not using .html() at all: html2canvas renders `container`
-  // to a canvas directly (proven correct - a real Arabic RTL capture
-  // was verified from this exact technique), and the canvas is embedded
-  // as a plain JPEG image via addImage() - jsPDF never touches the text
-  // as text, only as pixels it already rendered correctly. Multi-page
-  // output is handled here by slicing the canvas manually.
-  try {
-    const canvas = await html2canvas(container, { scale: 1.4, useCORS: true, backgroundColor: "#ffffff" });
-
-    const doc = new jsPDF({ unit: "pt", format: "a4" });
-    const marginX = 20;
-    const marginY = 20;
-    const contentWidthPt = 555;
-    const pageContentHeightPt = 841.89 - marginY * 2;
-
-    const pxPerPt = canvas.width / contentWidthPt;
-    const pageContentHeightPx = pageContentHeightPt * pxPerPt;
-
-    let renderedPx = 0;
-    let firstPage = true;
-    while (renderedPx < canvas.height) {
-      const sliceHeightPx = Math.min(pageContentHeightPx, canvas.height - renderedPx);
-
-      const sliceCanvas = document.createElement("canvas");
-      sliceCanvas.width = canvas.width;
-      sliceCanvas.height = sliceHeightPx;
-      const sliceCtx = sliceCanvas.getContext("2d");
-      if (!sliceCtx) break;
-      sliceCtx.drawImage(canvas, 0, renderedPx, canvas.width, sliceHeightPx, 0, 0, canvas.width, sliceHeightPx);
-
-      if (!firstPage) doc.addPage();
-      doc.addImage(sliceCanvas.toDataURL("image/jpeg", 0.92), "JPEG", marginX, marginY, contentWidthPt, sliceHeightPx / pxPerPt);
-
-      renderedPx += sliceHeightPx;
-      firstPage = false;
-    }
-
-    return doc;
-  } finally {
-    document.body.removeChild(wrapper);
-  }
+  // .html() setting that avoids this for non-Latin scripts. Fixed by
+  // not using .html() at all - renderHtmlToPdf() (core/utils/
+  // htmlToPdf.ts) captures `container` with html2canvas instead and
+  // embeds the result as a plain image.
+  return renderHtmlToPdf(container);
 }

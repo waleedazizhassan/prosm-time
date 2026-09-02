@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Camera } from "lucide-react";
+import { Camera, ArrowUpAZ, ArrowDownAZ } from "lucide-react";
 
 import ManagerRepository, { type TodayAttendanceRow } from "../../core/repositories/ManagerRepository";
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
+import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
@@ -11,7 +12,9 @@ import Input from "../../components/common/Input";
 import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import Modal from "../../components/common/Modal";
+import Button from "../../components/common/Button";
 import { formatTimeOnly } from "../../core/utils/formatDate";
+import { buildAttendanceLogPdf } from "./attendanceLogPdf";
 
 function formatWorkedHours(clockInAt: string, clockOutAt: string | null): string {
   const endMs = clockOutAt ? new Date(clockOutAt).getTime() : Date.now();
@@ -47,11 +50,15 @@ export default function AttendanceLogPage() {
   const [rows, setRows] = useState<TodayAttendanceRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
+  const [nameSortAscending, setNameSortAscending] = useState(true);
 
   const [evidenceModalTitle, setEvidenceModalTitle] = useState<string | null>(null);
   const [evidenceUrl, setEvidenceUrl] = useState<string | null>(null);
   const [evidenceLoading, setEvidenceLoading] = useState(false);
   const [evidenceError, setEvidenceError] = useState("");
+
+  const [organizationLogoUrl, setOrganizationLogoUrl] = useState<string | null>(null);
+  const [exportingPdf, setExportingPdf] = useState(false);
 
   const load = useCallback(async () => {
     if (!startDate || !endDate) return;
@@ -71,6 +78,27 @@ export default function AttendanceLogPage() {
   useEffect(() => {
     load();
   }, [load]);
+
+  useEffect(() => {
+    OrganizationRepository.getCurrentOrganization().then((result) => {
+      setOrganizationLogoUrl(result.success ? (result.data?.logoUrl ?? null) : null);
+    });
+  }, []);
+
+  const sortedRows = useMemo(() => {
+    const collator = new Intl.Collator(i18n.language, { sensitivity: "base" });
+    return [...rows].sort((a, b) => collator.compare(a.userFullName, b.userFullName) * (nameSortAscending ? 1 : -1));
+  }, [rows, nameSortAscending, i18n.language]);
+
+  const handleExportPdf = async () => {
+    setExportingPdf(true);
+    try {
+      const doc = await buildAttendanceLogPdf(sortedRows, startDate, endDate, i18n.language, t, organizationLogoUrl);
+      doc.save(`attendance-record-${startDate}-${endDate}.pdf`);
+    } finally {
+      setExportingPdf(false);
+    }
+  };
 
   const openEvidence = async (storagePath: string, title: string) => {
     setEvidenceModalTitle(title);
@@ -143,18 +171,34 @@ export default function AttendanceLogPage() {
     { key: "workedHours", header: t("columns.workedHours"), render: (row) => formatWorkedHours(row.clockInAt, row.clockOutAt) },
   ];
 
+  const SortIcon = nameSortAscending ? ArrowUpAZ : ArrowDownAZ;
+
   return (
-    <PageShell title={t("title")} subtitle={t("subtitle")}>
+    <PageShell
+      title={t("title")}
+      subtitle={t("subtitle")}
+      actions={
+        <Button variant="ghost" onClick={handleExportPdf} loading={exportingPdf} disabled={sortedRows.length === 0}>
+          {t("exportPdfAction")}
+        </Button>
+      }
+    >
       <Card title={t("filters.title")}>
-        <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap", alignItems: "flex-end" }}>
           <Input label={t("filters.fromLabel")} name="attendanceLogFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />
           <Input label={t("filters.toLabel")} name="attendanceLogTo" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
+          <Button variant="ghost" onClick={() => setNameSortAscending((current) => !current)}>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: "var(--space-1)" }}>
+              <SortIcon size={16} />
+              {t("filters.sortByName")}
+            </span>
+          </Button>
         </div>
       </Card>
 
       <Card>
         {loadError ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{loadError}</p> : null}
-        <Table columns={columns} data={rows} getRowId={(row) => row.sessionId} loading={loading} emptyMessage={t("empty")} />
+        <Table columns={columns} data={sortedRows} getRowId={(row) => row.sessionId} loading={loading} emptyMessage={t("empty")} />
       </Card>
 
       <Modal isOpen={Boolean(evidenceModalTitle)} onClose={closeEvidence} title={evidenceModalTitle ?? t("photoModalTitle")}>

@@ -2,10 +2,12 @@
   "title": "Registro presenze",
   "subtitle": "Cronologia di entrata/uscita, limitata alle persone e alle sedi che sei autorizzato a vedere.",
   "loadError": "Impossibile caricare i registri di presenza.",
+  "exportPdfAction": "Esporta PDF",
   "filters": {
     "title": "Periodo",
     "fromLabel": "Dal",
-    "toLabel": "Al"
+    "toLabel": "Al",
+    "sortByName": "Ordina per nome"
   },
   "columns": {
     "employee": "Dipendente",
