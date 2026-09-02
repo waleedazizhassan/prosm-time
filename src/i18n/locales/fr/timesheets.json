@@ -12,10 +12,11 @@
   "columns": {
     "employee": "Employé",
     "period": "Période",
+    "date": "Date",
+    "site": "Site",
     "status": "Statut",
     "worked": "Travaillé",
     "overtime": "Heures sup.",
-    "export": "Exporter",
     "clockIn": "Arrivée",
     "clockOut": "Départ"
   },

@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 
 import TimesheetRepository, { type EvidencePack, type TimesheetStatus } from "../../core/repositories/TimesheetRepository";
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
+import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import { formatMinutes, buildTimesheetPdf } from "./timesheetPdf";
 
 import PageShell from "../../components/common/PageShell";
@@ -78,20 +79,23 @@ export default function TimesheetReportPage() {
   const { timesheetId } = useParams<{ timesheetId: string }>();
 
   const [pack, setPack] = useState<EvidencePack | null>(null);
+  const [organizationLogoUrl, setOrganizationLogoUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [exportingPdf, setExportingPdf] = useState(false);
 
   const load = useCallback(async () => {
     if (!timesheetId) return;
     setLoading(true);
     setError("");
-    const result = await TimesheetRepository.getEvidencePack(timesheetId);
+    const [result, organizationResult] = await Promise.all([TimesheetRepository.getEvidencePack(timesheetId), OrganizationRepository.getCurrentOrganization()]);
     if (!result.success || !result.data) {
       setError(result.message ?? t("report.loadError"));
       setPack(null);
     } else {
       setPack(result.data);
     }
+    setOrganizationLogoUrl(organizationResult.success ? organizationResult.data?.logoUrl ?? null : null);
     setLoading(false);
   }, [timesheetId, t]);
 
@@ -104,10 +108,15 @@ export default function TimesheetReportPage() {
     downloadCsv(`timesheet-${pack.employee.fullName.replace(/\s+/g, "-")}-${pack.timesheet.periodStart}.csv`, buildCsv(pack, i18n.language));
   };
 
-  const handleExportPdf = () => {
+  const handleExportPdf = async () => {
     if (!pack) return;
-    const doc = buildTimesheetPdf(pack, i18n.language, t);
-    doc.save(`timesheet-${pack.employee.fullName.replace(/\s+/g, "-")}-${pack.timesheet.periodStart}.pdf`);
+    setExportingPdf(true);
+    try {
+      const doc = await buildTimesheetPdf(pack, i18n.language, t, organizationLogoUrl);
+      doc.save(`timesheet-${pack.employee.fullName.replace(/\s+/g, "-")}-${pack.timesheet.periodStart}.pdf`);
+    } finally {
+      setExportingPdf(false);
+    }
   };
 
   const handleViewEvidence = async (storagePath: string) => {
@@ -151,7 +160,7 @@ export default function TimesheetReportPage() {
           <Button variant="ghost" size="sm" onClick={() => window.print()}>
             {t("report.printAction")}
           </Button>
-          <Button size="sm" onClick={handleExportPdf}>
+          <Button size="sm" onClick={handleExportPdf} loading={exportingPdf}>
             {t("report.exportPdfAction")}
           </Button>
         </div>

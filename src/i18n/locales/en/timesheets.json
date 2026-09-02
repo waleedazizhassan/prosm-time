@@ -12,10 +12,11 @@
   "columns": {
     "employee": "Employee",
     "period": "Period",
+    "date": "Date",
+    "site": "Site",
     "status": "Status",
     "worked": "Worked",
     "overtime": "Overtime",
-    "export": "Export",
     "clockIn": "Clock In",
     "clockOut": "Clock Out"
   },

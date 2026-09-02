@@ -12,10 +12,11 @@
   "columns": {
     "employee": "Mitarbeiter",
     "period": "Zeitraum",
+    "date": "Datum",
+    "site": "Standort",
     "status": "Status",
     "worked": "Gearbeitet",
     "overtime": "Überstunden",
-    "export": "Export",
     "clockIn": "Kommen",
     "clockOut": "Gehen"
   },

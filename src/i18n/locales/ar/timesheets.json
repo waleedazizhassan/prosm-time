@@ -12,10 +12,11 @@
   "columns": {
     "employee": "الموظف",
     "period": "الفترة",
+    "date": "التاريخ",
+    "site": "الموقع",
     "status": "الحالة",
     "worked": "ساعات العمل",
     "overtime": "الوقت الإضافي",
-    "export": "تصدير",
     "clockIn": "وقت الحضور",
     "clockOut": "وقت الانصراف"
   },
