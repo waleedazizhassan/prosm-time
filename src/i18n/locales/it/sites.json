@@ -18,6 +18,10 @@
     "kiosk_only": "Solo kiosk",
     "both_allowed": "Entrambi consentiti"
   },
+  "breakRoundingMode": {
+    "cumulative": "Cumulativo (durata pausa esatta)",
+    "full_hour": "Arrotonda per eccesso all'ora piena"
+  },
   "addAction": "Aggiungi sede",
   "form": {
     "createTitle": "Aggiungi una sede",
@@ -38,6 +42,14 @@
     "timezoneHint": "Identificatore del fuso orario IANA, ad es. Africa/Cairo. L'archiviazione rimane in UTC; questo influisce solo sulla visualizzazione locale.",
     "graceToleranceLabel": "Tolleranza di cortesia (minuti)",
     "kioskModeLabel": "Modalità kiosk",
+    "shiftPolicyTitle": "Politica del turno",
+    "shiftPolicyHint": "Facoltativo - una sede senza nessuna di queste impostazioni si comporta esattamente come prima. Tutti gli orari sono nel fuso orario della sede stessa.",
+    "shiftStartTimeLabel": "Inizio turno",
+    "shiftEndTimeLabel": "Fine turno",
+    "overtimeStartTimeLabel": "Inizio conteggio straordinario",
+    "lateDeductionStartTimeLabel": "Inizio detrazione per ritardo",
+    "breakRoundingModeLabel": "Arrotondamento tempo di pausa",
+    "blockSelfClockInLabel": "Blocca la timbratura autonoma oltre il periodo di tolleranza (richiede invece una timbratura assistita dal manager)",
     "attendanceAllowedLabel": "Presenza consentita",
     "geofenceRequiredLabel": "Geofence richiesto",
     "cameraRequiredLabel": "Fotocamera richiesta",

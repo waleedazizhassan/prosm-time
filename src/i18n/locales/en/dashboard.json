@@ -48,6 +48,7 @@
     "manualLocationLabel": "Workplace",
     "manualLocationHint": "Type where you actually are (e.g. a client's site, working from home) — required when no site is selected.",
     "manualLocationRequired": "Enter your workplace to clock in without a registered site.",
+    "clockInBlockedContactManager": "The grace period for this site's shift has passed - please contact your manager to register your attendance.",
     "projectLabel": "Project (optional)",
     "noProject": "No project",
     "clockInAction": "Clock In",

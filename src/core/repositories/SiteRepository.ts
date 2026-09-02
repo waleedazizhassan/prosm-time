@@ -7,6 +7,7 @@ export interface ServiceResult<T = null> {
 }
 
 export type KioskMode = "personal_device_only" | "kiosk_only" | "both_allowed";
+export type BreakRoundingMode = "cumulative" | "full_hour";
 
 export interface Site {
   id: string;
@@ -24,6 +25,19 @@ export interface Site {
   environmentalTagEnabled: boolean;
   kioskMode: KioskMode;
   graceToleranceMinutes: number;
+  // § live UX review, user-directed - per-site shift policy: work
+  // hours (from/to), the hour overtime starts, the hour a lateness
+  // deduction starts, whether break time rounds to a full locked
+  // hour, and whether a self clock-in is blocked past the grace
+  // period (requiring a manager-assisted clock-in instead). "HH:MM"
+  // strings (or null = not configured, every behavior below stays a
+  // no-op) - matches <input type="time">'s own value format.
+  shiftStartTime: string | null;
+  shiftEndTime: string | null;
+  overtimeStartTime: string | null;
+  lateDeductionStartTime: string | null;
+  breakRoundingMode: BreakRoundingMode;
+  blockSelfClockInAfterGrace: boolean;
   createdAt: string;
 }
 
@@ -50,6 +64,17 @@ export interface SiteInput {
   environmentalTagEnabled: boolean;
   kioskMode: KioskMode;
   graceToleranceMinutes: number;
+  shiftStartTime: string | null;
+  shiftEndTime: string | null;
+  overtimeStartTime: string | null;
+  lateDeductionStartTime: string | null;
+  breakRoundingMode: BreakRoundingMode;
+  blockSelfClockInAfterGrace: boolean;
+  // update-only: explicitly blanks out an already-configured shift
+  // policy (time fields have no other "unset" signal once a real
+  // time has been set, since the RPC's coalesce-based partial update
+  // treats null as "keep current value" for every other field).
+  clearShiftPolicy?: boolean;
 }
 
 function createSuccess<T>(data: T | null = null): ServiceResult<T> {
@@ -76,7 +101,21 @@ interface SiteRow {
   environmental_tag_enabled: boolean;
   kiosk_mode: KioskMode;
   grace_tolerance_minutes: number;
+  shift_start_time: string | null;
+  shift_end_time: string | null;
+  overtime_start_time: string | null;
+  late_deduction_start_time: string | null;
+  break_rounding_mode: BreakRoundingMode;
+  block_self_clock_in_after_grace: boolean;
   created_at: string;
+}
+
+// Postgres' `time` column comes back over PostgREST as "HH:MM:SS" -
+// truncated to "HH:MM" to match <input type="time">'s own value
+// format exactly (and sent back the same way; Postgres parses
+// "HH:MM" as a valid time literal without seconds).
+function toHhMm(value: string | null): string | null {
+  return value ? value.slice(0, 5) : null;
 }
 
 function mapSiteRow(row: SiteRow): Site {
@@ -96,6 +135,12 @@ function mapSiteRow(row: SiteRow): Site {
     environmentalTagEnabled: row.environmental_tag_enabled,
     kioskMode: row.kiosk_mode,
     graceToleranceMinutes: row.grace_tolerance_minutes,
+    shiftStartTime: toHhMm(row.shift_start_time),
+    shiftEndTime: toHhMm(row.shift_end_time),
+    overtimeStartTime: toHhMm(row.overtime_start_time),
+    lateDeductionStartTime: toHhMm(row.late_deduction_start_time),
+    breakRoundingMode: row.break_rounding_mode,
+    blockSelfClockInAfterGrace: row.block_self_clock_in_after_grace,
     createdAt: row.created_at,
   };
 }
@@ -185,6 +230,12 @@ class SiteRepository {
         p_kiosk_mode: input.kioskMode,
         p_environmental_tag_enabled: input.environmentalTagEnabled,
         p_grace_tolerance_minutes: input.graceToleranceMinutes,
+        p_shift_start_time: input.shiftStartTime,
+        p_shift_end_time: input.shiftEndTime,
+        p_overtime_start_time: input.overtimeStartTime,
+        p_late_deduction_start_time: input.lateDeductionStartTime,
+        p_break_rounding_mode: input.breakRoundingMode,
+        p_block_self_clock_in_after_grace: input.blockSelfClockInAfterGrace,
       });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to create this site.");
@@ -212,6 +263,13 @@ class SiteRepository {
         p_environmental_tag_enabled: input.environmentalTagEnabled,
         p_grace_tolerance_minutes: input.graceToleranceMinutes,
         p_is_active: input.isActive,
+        p_shift_start_time: input.shiftStartTime,
+        p_shift_end_time: input.shiftEndTime,
+        p_overtime_start_time: input.overtimeStartTime,
+        p_late_deduction_start_time: input.lateDeductionStartTime,
+        p_break_rounding_mode: input.breakRoundingMode,
+        p_block_self_clock_in_after_grace: input.blockSelfClockInAfterGrace,
+        p_clear_shift_policy: input.clearShiftPolicy ?? false,
       });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to update this site.");

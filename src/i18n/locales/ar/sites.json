@@ -18,6 +18,10 @@
     "kiosk_only": "الكشك فقط",
     "both_allowed": "كلاهما مسموح"
   },
+  "breakRoundingMode": {
+    "cumulative": "تراكمي (مدة الاستراحة الفعلية)",
+    "full_hour": "يُقفل لساعة كاملة"
+  },
   "addAction": "إضافة موقع",
   "form": {
     "createTitle": "إضافة موقع",
@@ -38,6 +42,14 @@
     "timezoneHint": "معرّف المنطقة الزمنية بصيغة IANA، مثل Africa/Cairo. التخزين يبقى بتوقيت UTC؛ هذا يؤثر فقط على العرض المحلي.",
     "graceToleranceLabel": "فترة السماح (بالدقائق)",
     "kioskModeLabel": "وضع الكشك",
+    "shiftPolicyTitle": "سياسة الشيفت",
+    "shiftPolicyHint": "اختياري - الموقع اللي مفيهوش أي إعداد من دول هيفضل شغال زي ما هو من غير أي تغيير. كل الأوقات بتوقيت الموقع نفسه.",
+    "shiftStartTimeLabel": "بداية الشيفت",
+    "shiftEndTimeLabel": "نهاية الشيفت",
+    "overtimeStartTimeLabel": "بداية احتساب الإضافي",
+    "lateDeductionStartTimeLabel": "بداية احتساب خصم التأخير",
+    "breakRoundingModeLabel": "احتساب وقت الاستراحة",
+    "blockSelfClockInLabel": "منع تسجيل الحضور الذاتي بعد فترة السماح (يتطلب تسجيل حضور من المدير بدلاً منه)",
     "attendanceAllowedLabel": "الحضور مسموح",
     "geofenceRequiredLabel": "النطاق الجغرافي مطلوب",
     "cameraRequiredLabel": "الكاميرا مطلوبة",

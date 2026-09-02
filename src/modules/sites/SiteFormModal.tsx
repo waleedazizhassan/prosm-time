@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import SiteRepository, { type Site, type KioskMode } from "../../core/repositories/SiteRepository";
+import SiteRepository, { type Site, type KioskMode, type BreakRoundingMode } from "../../core/repositories/SiteRepository";
 import { getCurrentPosition, haversineDistanceMeters } from "../../core/utils/geo";
 
 import Modal from "../../components/common/Modal";
@@ -18,6 +18,7 @@ interface SiteFormModalProps {
 }
 
 const KIOSK_MODE_OPTIONS: KioskMode[] = ["personal_device_only", "kiosk_only", "both_allowed"];
+const BREAK_ROUNDING_MODE_OPTIONS: BreakRoundingMode[] = ["cumulative", "full_hour"];
 
 const toggleRowStyle = {
   display: "flex",
@@ -47,6 +48,12 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
   const [timezone, setTimezone] = useState(site?.timezone ?? "UTC");
   const [graceToleranceMinutes, setGraceToleranceMinutes] = useState(site ? String(site.graceToleranceMinutes) : "5");
   const [kioskMode, setKioskMode] = useState<KioskMode>(site?.kioskMode ?? "personal_device_only");
+  const [shiftStartTime, setShiftStartTime] = useState(site?.shiftStartTime ?? "");
+  const [shiftEndTime, setShiftEndTime] = useState(site?.shiftEndTime ?? "");
+  const [overtimeStartTime, setOvertimeStartTime] = useState(site?.overtimeStartTime ?? "");
+  const [lateDeductionStartTime, setLateDeductionStartTime] = useState(site?.lateDeductionStartTime ?? "");
+  const [breakRoundingMode, setBreakRoundingMode] = useState<BreakRoundingMode>(site?.breakRoundingMode ?? "cumulative");
+  const [blockSelfClockInAfterGrace, setBlockSelfClockInAfterGrace] = useState(site?.blockSelfClockInAfterGrace ?? false);
   const [attendanceAllowed, setAttendanceAllowed] = useState(site?.attendanceAllowed ?? true);
   const [geofenceRequired, setGeofenceRequired] = useState(site?.geofenceRequired ?? true);
   const [cameraRequired, setCameraRequired] = useState(site?.cameraRequired ?? false);
@@ -110,6 +117,12 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
       environmentalTagEnabled,
       kioskMode,
       graceToleranceMinutes: Number(graceToleranceMinutes),
+      shiftStartTime: shiftStartTime || null,
+      shiftEndTime: shiftEndTime || null,
+      overtimeStartTime: overtimeStartTime || null,
+      lateDeductionStartTime: lateDeductionStartTime || null,
+      breakRoundingMode,
+      blockSelfClockInAfterGrace,
     };
 
     const result = isEditing && site ? await SiteRepository.updateSite(site.id, { ...input, isActive }) : await SiteRepository.createSite(input);
@@ -215,6 +228,55 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
         disabled={submitting}
         options={KIOSK_MODE_OPTIONS.map((mode) => ({ value: mode, label: t(`kioskMode.${mode}`) }))}
       />
+
+      {/* § live UX review, user-directed - per-site shift policy:
+          work hours, when overtime/deduction start, break rounding,
+          and whether a late self clock-in is blocked (manager-
+          assisted only past that point). Every field here is
+          optional - a site with none of them set behaves exactly as
+          before this section existed. */}
+      <h3 style={{ fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)", margin: "var(--space-4) 0 var(--space-1)" }}>
+        {t("form.shiftPolicyTitle")}
+      </h3>
+      <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("form.shiftPolicyHint")}</p>
+
+      <div style={{ display: "flex", gap: "var(--space-3)" }}>
+        <Input label={t("form.shiftStartTimeLabel")} name="siteShiftStartTime" type="time" value={shiftStartTime} onChange={(event) => setShiftStartTime(event.target.value)} disabled={submitting} />
+        <Input label={t("form.shiftEndTimeLabel")} name="siteShiftEndTime" type="time" value={shiftEndTime} onChange={(event) => setShiftEndTime(event.target.value)} disabled={submitting} />
+      </div>
+
+      <div style={{ display: "flex", gap: "var(--space-3)" }}>
+        <Input
+          label={t("form.overtimeStartTimeLabel")}
+          name="siteOvertimeStartTime"
+          type="time"
+          value={overtimeStartTime}
+          onChange={(event) => setOvertimeStartTime(event.target.value)}
+          disabled={submitting}
+        />
+        <Input
+          label={t("form.lateDeductionStartTimeLabel")}
+          name="siteLateDeductionStartTime"
+          type="time"
+          value={lateDeductionStartTime}
+          onChange={(event) => setLateDeductionStartTime(event.target.value)}
+          disabled={submitting}
+        />
+      </div>
+
+      <Select
+        label={t("form.breakRoundingModeLabel")}
+        name="siteBreakRoundingMode"
+        value={breakRoundingMode}
+        onChange={(event) => setBreakRoundingMode(event.target.value as BreakRoundingMode)}
+        disabled={submitting}
+        options={BREAK_ROUNDING_MODE_OPTIONS.map((mode) => ({ value: mode, label: t(`breakRoundingMode.${mode}`) }))}
+      />
+
+      <div style={toggleRowStyle}>
+        <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.blockSelfClockInLabel")}</span>
+        <Toggle checked={blockSelfClockInAfterGrace} onChange={setBlockSelfClockInAfterGrace} disabled={submitting} label={t("form.blockSelfClockInLabel")} />
+      </div>
 
       <div style={toggleRowStyle}>
         <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.attendanceAllowedLabel")}</span>

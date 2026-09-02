@@ -18,6 +18,10 @@
     "kiosk_only": "Nur Kiosk",
     "both_allowed": "Beides erlaubt"
   },
+  "breakRoundingMode": {
+    "cumulative": "Kumulativ (genaue Pausendauer)",
+    "full_hour": "Aufrundung auf die volle Stunde"
+  },
   "addAction": "Standort hinzufügen",
   "form": {
     "createTitle": "Standort hinzufügen",
@@ -38,6 +42,14 @@
     "timezoneHint": "IANA-Zeitzonenkennung, z. B. Africa/Cairo. Die Speicherung erfolgt weiterhin in UTC; dies wirkt sich nur auf die lokale Anzeige aus.",
     "graceToleranceLabel": "Kulanzzeit (Minuten)",
     "kioskModeLabel": "Kiosk-Modus",
+    "shiftPolicyTitle": "Schichtrichtlinie",
+    "shiftPolicyHint": "Optional - ein Standort ohne diese Einstellungen verhält sich genau wie zuvor. Alle Zeiten gelten in der eigenen Zeitzone des Standorts.",
+    "shiftStartTimeLabel": "Schichtbeginn",
+    "shiftEndTimeLabel": "Schichtende",
+    "overtimeStartTimeLabel": "Überstunden beginnen um",
+    "lateDeductionStartTimeLabel": "Verspätungsabzug beginnt um",
+    "breakRoundingModeLabel": "Pausenzeit-Rundung",
+    "blockSelfClockInLabel": "Selbst-Einstempeln nach der Kulanzzeit blockieren (erfordert stattdessen ein von einem Manager unterstütztes Einstempeln)",
     "attendanceAllowedLabel": "Anwesenheit erlaubt",
     "geofenceRequiredLabel": "Geofence erforderlich",
     "cameraRequiredLabel": "Kamera erforderlich",

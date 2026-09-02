@@ -18,6 +18,10 @@
     "kiosk_only": "Kiosque uniquement",
     "both_allowed": "Les deux autorisés"
   },
+  "breakRoundingMode": {
+    "cumulative": "Cumulatif (durée de pause exacte)",
+    "full_hour": "Arrondi à l'heure pleine supérieure"
+  },
   "addAction": "Ajouter un site",
   "form": {
     "createTitle": "Ajouter un site",
@@ -38,6 +42,14 @@
     "timezoneHint": "Identifiant de fuseau horaire IANA, par ex. Africa/Cairo. Le stockage reste en UTC ; cela n'affecte que l'affichage local.",
     "graceToleranceLabel": "Tolérance de grâce (minutes)",
     "kioskModeLabel": "Mode kiosque",
+    "shiftPolicyTitle": "Politique de shift",
+    "shiftPolicyHint": "Optionnel - un site sans aucun de ces réglages se comporte exactement comme avant. Toutes les heures sont dans le fuseau horaire propre au site.",
+    "shiftStartTimeLabel": "Début du shift",
+    "shiftEndTimeLabel": "Fin du shift",
+    "overtimeStartTimeLabel": "Début du décompte des heures supplémentaires",
+    "lateDeductionStartTimeLabel": "Début de la déduction pour retard",
+    "breakRoundingModeLabel": "Arrondi du temps de pause",
+    "blockSelfClockInLabel": "Bloquer le pointage automatique après la période de tolérance (nécessite un pointage assisté par un responsable)",
     "attendanceAllowedLabel": "Présence autorisée",
     "geofenceRequiredLabel": "Géorepérage requis",
     "cameraRequiredLabel": "Caméra requise",

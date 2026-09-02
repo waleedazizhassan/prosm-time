@@ -280,7 +280,14 @@ export default function ClockInOutCard() {
 
     if (!result.success || !result.data) {
       setSubmitting(false);
-      setError(result.message ?? t("attendance.clockInError"));
+      // § live UX review, user-directed - a site configured to block
+      // self clock-in past its grace period raises this exact marker
+      // (clock_in_prosm_time_attendance, 20260902130000) - shown as
+      // its own distinct message rather than the generic clock-in
+      // error, since there is no retry action here: the employee
+      // genuinely cannot self-clock-in past this point and needs
+      // their Manager to do it on their behalf.
+      setError(result.message?.includes("CLOCK_IN_BLOCKED_CONTACT_MANAGER") ? t("attendance.clockInBlockedContactManager") : (result.message ?? t("attendance.clockInError")));
       return;
     }
 

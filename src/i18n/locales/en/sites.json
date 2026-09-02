@@ -18,6 +18,10 @@
     "kiosk_only": "Kiosk only",
     "both_allowed": "Both allowed"
   },
+  "breakRoundingMode": {
+    "cumulative": "Cumulative (exact break time)",
+    "full_hour": "Rounds up to a full hour"
+  },
   "addAction": "Add site",
   "form": {
     "createTitle": "Add a site",
@@ -38,6 +42,14 @@
     "timezoneHint": "IANA time zone identifier, e.g. Africa/Cairo. Storage remains UTC; this only affects local display.",
     "graceToleranceLabel": "Grace tolerance (minutes)",
     "kioskModeLabel": "Kiosk mode",
+    "shiftPolicyTitle": "Shift policy",
+    "shiftPolicyHint": "Optional - a site with none of these set behaves exactly as before. All times are in this site's own time zone.",
+    "shiftStartTimeLabel": "Shift starts at",
+    "shiftEndTimeLabel": "Shift ends at",
+    "overtimeStartTimeLabel": "Overtime starts at",
+    "lateDeductionStartTimeLabel": "Lateness deduction starts at",
+    "breakRoundingModeLabel": "Break time rounding",
+    "blockSelfClockInLabel": "Block self clock-in past the grace period (require a manager-assisted clock-in instead)",
     "attendanceAllowedLabel": "Attendance allowed",
     "geofenceRequiredLabel": "Geofence required",
     "cameraRequiredLabel": "Camera required",

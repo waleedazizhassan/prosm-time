@@ -48,6 +48,7 @@
     "manualLocationLabel": "Arbeitsort",
     "manualLocationHint": "Geben Sie an, wo Sie sich tatsächlich befinden (z. B. beim Kunden, im Homeoffice) — erforderlich, wenn kein Standort ausgewählt ist.",
     "manualLocationRequired": "Geben Sie Ihren Arbeitsort ein, um ohne registrierten Standort einzustempeln.",
+    "clockInBlockedContactManager": "Die Kulanzzeit für die Schicht dieses Standorts ist abgelaufen - bitte wenden Sie sich an Ihren Manager, um Ihre Anwesenheit zu erfassen.",
     "projectLabel": "Projekt (optional)",
     "noProject": "Kein Projekt",
     "clockInAction": "Einstempeln",
