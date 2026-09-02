@@ -4,6 +4,8 @@
    without adding any new capability - purely a border treatment
    around the exact same getUserMedia video element/capture flow. */
 .viewport {
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,6 +26,29 @@
   max-height: 480px;
 
   object-fit: contain;
+}
+
+/* § live UX review, user-directed - "the photo comes out round" (the
+   reference screenshots' circular face-guide during capture). This is
+   a guide overlay only, never a crop - the captured frame itself stays
+   the full rectangle (cropping real evidence to a circle would throw
+   away verifiable content, which defeats the point of evidence
+   capture). box-shadow's own spread trick draws the darkened vignette
+   outside the circle without a second element. */
+.faceGuide {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: min(62%, 260px);
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+  border: 3px solid rgba(52, 211, 153, 0.85);
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+
+  pointer-events: none;
 }
 
 .errorState {

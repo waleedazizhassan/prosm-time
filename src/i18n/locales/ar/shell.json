@@ -27,6 +27,10 @@
     "timesheets": "كشوف الدوام",
     "help": "المساعدة"
   },
+  "sections": {
+    "organization": "المؤسسة",
+    "help": "المساعدة"
+  },
   "weather": {
     "loading": "جارٍ تحميل الطقس",
     "unavailable": "الطقس غير متاح",

@@ -49,6 +49,8 @@
     "clockInAction": "تسجيل الحضور",
     "clockOutAction": "تسجيل الانصراف",
     "clockedInSince": "مسجل الحضور منذ {{time}}",
+    "viaDevice": "عبر {{device}}",
+    "lastClockOut": "آخر انصراف {{time}}",
     "clockInError": "تعذر تسجيل الحضور.",
     "clockOutError": "تعذر تسجيل الانصراف.",
     "evidenceUploadError": "تم تسجيل الحضور/الانصراف بنجاح، لكن تعذر رفع الصورة.",

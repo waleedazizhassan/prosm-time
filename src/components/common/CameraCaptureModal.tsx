@@ -169,7 +169,10 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
         ) : capturedDataUrl ? (
           <img src={capturedDataUrl} alt={t("previewAlt")} className={styles.preview} />
         ) : (
-          <video ref={videoRef} autoPlay playsInline muted className={styles.video} />
+          <>
+            <video ref={videoRef} autoPlay playsInline muted className={styles.video} />
+            <div className={styles.faceGuide} aria-hidden="true" />
+          </>
         )}
       </div>
 

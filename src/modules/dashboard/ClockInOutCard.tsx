@@ -10,6 +10,7 @@ import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import PresenceRepository, { type PresenceSession } from "../../core/repositories/PresenceRepository";
 import { getCurrentPosition, type CurrentPosition } from "../../core/utils/geo";
 import { reverseGeocodePlaceName } from "../../core/utils/reverseGeocode";
+import { getDeviceLabel } from "../../core/utils/deviceInfo";
 import OfflineQueueService from "../../core/offline/OfflineQueueService";
 import { useOfflineQueue } from "../../core/offline/useOfflineQueue";
 import { formatTimeOnly } from "../../core/utils/formatDate";
@@ -81,6 +82,7 @@ export default function ClockInOutCard() {
   const [currentLocation, setCurrentLocation] = useState<CurrentPosition | null>(null);
   const [locationStatus, setLocationStatus] = useState<"detecting" | "available" | "unavailable">("detecting");
   const [placeName, setPlaceName] = useState<string | null>(null);
+  const [lastCompletedSession, setLastCompletedSession] = useState<AttendanceSession | null>(null);
 
   const presenceSessionRef = useRef<PresenceSession | null>(null);
   presenceSessionRef.current = presenceSession;
@@ -111,6 +113,8 @@ export default function ClockInOutCard() {
     } else {
       setCurrentSite(null);
       setActiveBreakId(null);
+      const lastSessionResult = await AttendanceRepository.getLastCompletedSession(profile.id);
+      setLastCompletedSession(lastSessionResult.success ? lastSessionResult.data ?? null : null);
     }
 
     setSosSent(false);
@@ -557,6 +561,25 @@ export default function ClockInOutCard() {
         </>
       ) : (
         <>
+          {/* § live UX review, user-directed - "the confirm-clock-in
+              step should be clear, smooth, and show who's clocking in,
+              from what device, and when they last clocked out"
+              (reference-app screenshots studied for information
+              hierarchy only, not copied - same posture as this whole
+              component's own header comment). All display-only, no new
+              submitted field: name/device are read straight from
+              profile/navigator, last-out is one new small repository
+              read (AttendanceRepository.getLastCompletedSession). */}
+          {profile ? (
+            <div style={{ margin: "0 0 var(--space-3)" }}>
+              <p style={{ margin: 0, fontSize: "var(--font-lg)", fontWeight: "var(--font-weight-bold)", color: "var(--text-primary)" }}>{profile.fullName}</p>
+              <p style={{ margin: "var(--space-1) 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
+                {t("attendance.viaDevice", { device: getDeviceLabel() })}
+                {lastCompletedSession?.clockOutAt ? ` · ${t("attendance.lastClockOut", { time: formatTimeOnly(lastCompletedSession.clockOutAt, i18n.language) })}` : ""}
+              </p>
+            </div>
+          ) : null}
+
           {/* § live UX review, user-directed - "site should be optional;
               the important thing is registering attendance at the
               employee's actual current location, since they may be

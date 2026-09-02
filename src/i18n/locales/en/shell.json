@@ -27,6 +27,10 @@
     "timesheets": "Timesheets",
     "help": "Help"
   },
+  "sections": {
+    "organization": "Organization",
+    "help": "Help"
+  },
   "weather": {
     "loading": "Loading weather",
     "unavailable": "Weather unavailable",

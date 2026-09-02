@@ -114,6 +114,27 @@ class AttendanceRepository {
     }
   }
 
+  // § live UX review, user-directed - "the confirm-clock-in step should
+  // show the last clock-out time" (reference-app inspiration for
+  // information hierarchy only). Purely a display read - never fed back
+  // into any submit path.
+  async getLastCompletedSession(userId: string): Promise<ServiceResult<AttendanceSession | null>> {
+    try {
+      const { data, error } = await this.client
+        .from("attendance_sessions")
+        .select("*")
+        .eq("user_id", userId)
+        .eq("status", "clocked_out")
+        .order("clock_out_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      if (error) return createError(error.message);
+      return createSuccess(data ? mapSessionRow(data) : null);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
+    }
+  }
+
   async clockIn(input: ClockInInput): Promise<ServiceResult<{ sessionId: string; eventId: string; presenceSessionId: string | null }>> {
     try {
       const { data, error } = await this.client.functions.invoke("clock-in", {

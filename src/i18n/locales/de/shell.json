@@ -27,6 +27,10 @@
     "timesheets": "Stundenzettel",
     "help": "Hilfe"
   },
+  "sections": {
+    "organization": "Organisation",
+    "help": "Hilfe"
+  },
   "weather": {
     "loading": "Wetter wird geladen",
     "unavailable": "Wetter nicht verfügbar",

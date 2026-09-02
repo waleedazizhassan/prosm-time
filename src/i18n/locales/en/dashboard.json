@@ -49,6 +49,8 @@
     "clockInAction": "Clock In",
     "clockOutAction": "Clock Out",
     "clockedInSince": "Clocked in since {{time}}",
+    "viaDevice": "via {{device}}",
+    "lastClockOut": "Last out {{time}}",
     "clockInError": "Unable to clock in.",
     "clockOutError": "Unable to clock out.",
     "evidenceUploadError": "Clocked in/out successfully, but the photo could not be uploaded.",

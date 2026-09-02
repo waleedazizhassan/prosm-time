@@ -27,6 +27,10 @@
     "timesheets": "Feuilles de temps",
     "help": "Aide"
   },
+  "sections": {
+    "organization": "Organisation",
+    "help": "Aide"
+  },
   "weather": {
     "loading": "Chargement de la météo",
     "unavailable": "Météo indisponible",

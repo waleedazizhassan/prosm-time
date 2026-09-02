@@ -1,6 +1,8 @@
 import type { LucideIcon } from "lucide-react";
 import { Users, MapPin, LayoutGrid, FileText, HelpCircle } from "lucide-react";
 
+export type NavSection = "organization" | "help";
+
 export interface NavItem {
   id: string;
   labelKey: string;
@@ -15,6 +17,11 @@ export interface NavItem {
   // control in this app already uses - never a second, parallel
   // authorization concept.
   requiredPermission: string | null;
+  // § live UX review, user-directed - "Menu" screen reference material
+  // grouped its items under labeled sections rather than one flat
+  // list. Pure presentational grouping of the exact same items/
+  // permissions above - no new nav destination is introduced here.
+  section: NavSection;
 }
 
 // § final visual consistency pass, correction - "The Dashboard button
@@ -24,14 +31,16 @@ export interface NavItem {
 // now the ONLY Dashboard navigation mechanism - no Dashboard entry
 // lives here anymore.
 export const NAV_ITEMS: NavItem[] = [
-  { id: "people", labelKey: "items.people", path: "/people", icon: Users, requiredPermission: "employees.view" },
-  { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage" },
-  { id: "manager", labelKey: "items.manager", path: "/manager", icon: LayoutGrid, requiredPermission: "attendance.view" },
+  { id: "people", labelKey: "items.people", path: "/people", icon: Users, requiredPermission: "employees.view", section: "organization" },
+  { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage", section: "organization" },
+  { id: "manager", labelKey: "items.manager", path: "/manager", icon: LayoutGrid, requiredPermission: "attendance.view", section: "organization" },
   // §22: "Employee reviews their period" - self-access to one's own
   // timesheets needs no special permission (same as Dashboard), so
   // this nav item is visible to every authenticated org member; the
   // page itself further gates its Generate/Approve/Correction-review
   // sections on timesheets.generate/timesheets.approve/attendance.correct.
-  { id: "timesheets", labelKey: "items.timesheets", path: "/timesheets", icon: FileText, requiredPermission: null },
-  { id: "help", labelKey: "items.help", path: "/help", icon: HelpCircle, requiredPermission: null },
+  { id: "timesheets", labelKey: "items.timesheets", path: "/timesheets", icon: FileText, requiredPermission: null, section: "organization" },
+  { id: "help", labelKey: "items.help", path: "/help", icon: HelpCircle, requiredPermission: null, section: "help" },
 ];
+
+export const NAV_SECTION_ORDER: NavSection[] = ["organization", "help"];

@@ -49,6 +49,8 @@
     "clockInAction": "Einstempeln",
     "clockOutAction": "Ausstempeln",
     "clockedInSince": "Eingestempelt seit {{time}}",
+    "viaDevice": "über {{device}}",
+    "lastClockOut": "Zuletzt ausgestempelt {{time}}",
     "clockInError": "Einstempeln nicht möglich.",
     "clockOutError": "Ausstempeln nicht möglich.",
     "evidenceUploadError": "Erfolgreich ein-/ausgestempelt, aber das Foto konnte nicht hochgeladen werden.",

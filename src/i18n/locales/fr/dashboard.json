@@ -49,6 +49,8 @@
     "clockInAction": "Pointer l'arrivée",
     "clockOutAction": "Pointer le départ",
     "clockedInSince": "Présence pointée depuis {{time}}",
+    "viaDevice": "via {{device}}",
+    "lastClockOut": "Dernier départ {{time}}",
     "clockInError": "Impossible de pointer l'arrivée.",
     "clockOutError": "Impossible de pointer le départ.",
     "evidenceUploadError": "Pointage réussi, mais la photo n'a pas pu être téléchargée.",

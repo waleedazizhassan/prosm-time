@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import { useAppLayout } from "./LayoutContext";
-import { NAV_ITEMS } from "./navigation";
+import { NAV_ITEMS, NAV_SECTION_ORDER } from "./navigation";
 import BrandMark from "../../components/common/BrandMark";
 import UserMenu from "./UserMenu";
 import styles from "./Sidebar.module.css";
@@ -63,6 +63,11 @@ export default function Sidebar() {
   }, [mobileSidebarOpen, closeMobileSidebar]);
 
   const visibleItems = NAV_ITEMS.filter((item) => item.requiredPermission === null || hasPermission(item.requiredPermission));
+  // § live UX review, user-directed - group the same flat item list
+  // under labeled sections (reference "Menu" screen's own grouping),
+  // nothing new introduced - a section with no visible items (every
+  // item in it permission-gated away) simply renders no heading.
+  const sections = NAV_SECTION_ORDER.map((section) => ({ section, items: visibleItems.filter((item) => item.section === section) })).filter((group) => group.items.length > 0);
 
   return (
     <>
@@ -101,23 +106,28 @@ export default function Sidebar() {
         </div>
 
         <nav className={styles.navigation} aria-label={t("navigationLabel")}>
-          {visibleItems.map((item) => {
-            const Icon = item.icon;
-            return (
-              <NavLink
-                key={item.id}
-                to={item.path}
-                end
-                className={({ isActive }) => [styles.item, isActive ? styles.active : ""].filter(Boolean).join(" ")}
-                title={sidebarCollapsed ? t(item.labelKey) : undefined}
-              >
-                <span className={styles.itemIcon}>
-                  <Icon size={18} strokeWidth={2} />
-                </span>
-                {!sidebarCollapsed ? <span className={styles.itemLabel}>{t(item.labelKey)}</span> : null}
-              </NavLink>
-            );
-          })}
+          {sections.map((group) => (
+            <div key={group.section} className={styles.navSection}>
+              {!sidebarCollapsed ? <p className={styles.navSectionLabel}>{t(`sections.${group.section}`)}</p> : null}
+              {group.items.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <NavLink
+                    key={item.id}
+                    to={item.path}
+                    end
+                    className={({ isActive }) => [styles.item, isActive ? styles.active : ""].filter(Boolean).join(" ")}
+                    title={sidebarCollapsed ? t(item.labelKey) : undefined}
+                  >
+                    <span className={styles.itemIcon}>
+                      <Icon size={18} strokeWidth={2} />
+                    </span>
+                    {!sidebarCollapsed ? <span className={styles.itemLabel}>{t(item.labelKey)}</span> : null}
+                  </NavLink>
+                );
+              })}
+            </div>
+          ))}
         </nav>
 
         <UserMenu collapsed={sidebarCollapsed} />

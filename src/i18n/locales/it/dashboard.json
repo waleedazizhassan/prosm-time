@@ -49,6 +49,8 @@
     "clockInAction": "Timbra entrata",
     "clockOutAction": "Timbra uscita",
     "clockedInSince": "In servizio dalle {{time}}",
+    "viaDevice": "tramite {{device}}",
+    "lastClockOut": "Ultima uscita {{time}}",
     "clockInError": "Impossibile timbrare l'entrata.",
     "clockOutError": "Impossibile timbrare l'uscita.",
     "evidenceUploadError": "Timbratura riuscita, ma non è stato possibile caricare la foto.",
