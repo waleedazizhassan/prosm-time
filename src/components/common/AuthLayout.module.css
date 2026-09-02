@@ -42,8 +42,16 @@
 }
 
 .brandPanel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #0b1220;
-  background-size: contain;
+}
+
+.brandPhoto {
+  width: 100%;
+  height: min(100%, 580px);
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -62,7 +70,11 @@
   }
 
   .brandPanel {
-    min-height: 160px;
+    height: 180px;
+  }
+
+  .brandPhoto {
+    height: 100%;
   }
 }
 

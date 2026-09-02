@@ -22,13 +22,21 @@ interface AuthLayoutProps {
 //
 // § live UX review, user-directed - the brand panel shows the photo
 // only, no logo or text over it (previous overlay text/gradient made
-// it "look bad"), and the full photo must be visible rather than
-// cropped - see .brandPanel's background-size: contain.
+// it "look bad"). The photo band inside the panel is capped in height
+// (.brandPhoto) rather than stretched to the full panel: uncapped
+// cover cropped the photo down to an unrecognizable sliver on the
+// long Activation form (its panel stretches to match that form's
+// height), while uncapped contain left most of the panel empty on
+// every page - the cap fills the panel on normal-height pages and
+// only leaves the two short pages with an unusually tall form with
+// modest letterboxing above/below.
 export default function AuthLayout({ title, subtitle, children, footer }: AuthLayoutProps) {
   return (
     <div className={styles.page}>
       <div className={styles.shell}>
-        <div className={styles.brandPanel} style={{ backgroundImage: `url(${authPhoto})` }} />
+        <div className={styles.brandPanel}>
+          <div className={styles.brandPhoto} style={{ backgroundImage: `url(${authPhoto})` }} />
+        </div>
 
         <div className={styles.formPanel}>
           <h1 className={styles.title}>{title}</h1>
