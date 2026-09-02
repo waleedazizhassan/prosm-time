@@ -35,6 +35,7 @@ interface RawAttendanceSessionRow {
   status: "clocked_in" | "clocked_out";
   clock_in_at: string;
   clock_out_at: string | null;
+  manual_location_label: string | null;
   users: RawUserRef | RawUserRef[] | null;
   sites: { name: string | null } | { name: string | null }[] | null;
 }
@@ -95,7 +96,7 @@ class ManagerRepository {
     try {
       let sessionsQuery = this.client
         .from("attendance_sessions")
-        .select("id, status, clock_in_at, clock_out_at, users(full_name), sites(name)")
+        .select("id, status, clock_in_at, clock_out_at, manual_location_label, users(full_name), sites(name)")
         .gte("clock_in_at", fromIso)
         .order("clock_in_at", { ascending: false });
       if (toIso) sessionsQuery = sessionsQuery.lte("clock_in_at", toIso);
@@ -149,7 +150,11 @@ class ManagerRepository {
         return {
           sessionId: row.id,
           userFullName: user?.full_name ?? "",
-          siteName: site?.name ?? "",
+          // § live UX review, user-directed - a no-site clock-in now
+          // requires a free-text workplace label instead of leaving
+          // this blank (manual_location_label, 20260902120000) - a
+          // real site's name always wins when one exists.
+          siteName: site?.name ?? row.manual_location_label ?? "",
           status: row.status,
           clockInAt: row.clock_in_at,
           clockOutAt: row.clock_out_at,

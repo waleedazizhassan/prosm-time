@@ -10,6 +10,7 @@ export interface OfflineQueueItem {
   userId: string;
   type: OfflineActionType;
   siteId: string | null;
+  manualLocationLabel: string | null;
   projectId: string | null;
   latitude: number | null;
   longitude: number | null;
@@ -118,6 +119,7 @@ class OfflineQueueService {
       item.type === "clock_in"
         ? await AttendanceRepository.clockIn({
             siteId: item.siteId,
+            manualLocationLabel: item.manualLocationLabel,
             projectId: item.projectId,
             latitude: item.latitude,
             longitude: item.longitude,

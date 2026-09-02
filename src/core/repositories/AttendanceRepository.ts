@@ -32,6 +32,12 @@ export interface ClockInInput {
   latitude?: number | null;
   longitude?: number | null;
   accuracyMeters?: number | null;
+  // § live UX review, user-directed - required whenever siteId is
+  // empty: a free-text description of where the employee actually is
+  // ("workplace"), so a no-site clock-in never leaves the site column
+  // blank in reports. The Edge Function/RPC both re-check this is
+  // non-empty when siteId is empty - this is never trusted as-is.
+  manualLocationLabel?: string | null;
   // WP-15 - an offline-queued replay passes its own already-generated
   // idempotency key and the ORIGINAL client-captured time (§35:
   // "client-captured timestamps are preserved for offline
@@ -146,6 +152,7 @@ class AttendanceRepository {
           latitude: input.latitude ?? null,
           longitude: input.longitude ?? null,
           accuracyMeters: input.accuracyMeters ?? null,
+          manualLocationLabel: input.manualLocationLabel ?? null,
         },
       });
 

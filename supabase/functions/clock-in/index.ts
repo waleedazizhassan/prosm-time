@@ -47,7 +47,7 @@ serve(async (request: Request) => {
     }
 
     const payload = await request.json().catch(() => ({}));
-    const { siteId, projectId, idempotencyKey, clientReportedAt, latitude, longitude, accuracyMeters } = payload;
+    const { siteId, projectId, idempotencyKey, clientReportedAt, latitude, longitude, accuracyMeters, manualLocationLabel } = payload;
 
     // § live UX review, user-directed - site is now optional: an
     // employee can clock in at their real current location even when
@@ -60,6 +60,14 @@ serve(async (request: Request) => {
     if (!idempotencyKey || typeof idempotencyKey !== "string") {
       return errorResponse("idempotencyKey is required.", 400, "INVALID_REQUEST");
     }
+    // § live UX review, user-directed - "won't accept clock-in unless
+    // I type the workplace name": when no site is selected, a
+    // free-text workplace label is required here too (the RPC itself
+    // re-checks this server-side - this is just a fast, clear 400
+    // instead of a raised-exception round trip for the obvious case).
+    if (!siteId && (!manualLocationLabel || typeof manualLocationLabel !== "string" || manualLocationLabel.trim().length === 0)) {
+      return errorResponse("manualLocationLabel is required when no site is selected.", 400, "INVALID_REQUEST");
+    }
 
     const { data, error } = await callerClient.rpc("clock_in_prosm_time_attendance", {
       p_idempotency_key: idempotencyKey,
@@ -69,6 +77,7 @@ serve(async (request: Request) => {
       p_latitude: typeof latitude === "number" ? latitude : null,
       p_longitude: typeof longitude === "number" ? longitude : null,
       p_accuracy_meters: typeof accuracyMeters === "number" ? accuracyMeters : null,
+      p_manual_location_label: siteId ? null : (manualLocationLabel as string).trim(),
     });
 
     if (error || !data?.success) {

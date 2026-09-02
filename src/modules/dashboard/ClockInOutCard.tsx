@@ -17,6 +17,7 @@ import { formatTimeOnly } from "../../core/utils/formatDate";
 
 import Card from "../../components/common/Card";
 import Select from "../../components/common/Select";
+import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import StatusBadge from "../../components/common/StatusBadge";
 import CameraCaptureModal from "../../components/common/CameraCaptureModal";
@@ -68,6 +69,7 @@ export default function ClockInOutCard() {
   const [sites, setSites] = useState<Site[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
   const [siteId, setSiteId] = useState("");
+  const [manualLocationLabel, setManualLocationLabel] = useState("");
   const [projectId, setProjectId] = useState("");
   const [cameraFor, setCameraFor] = useState<"clockIn" | "clockOut" | null>(null);
   const [loading, setLoading] = useState(true);
@@ -259,18 +261,20 @@ export default function ClockInOutCard() {
       // location sample rather than blocking the Clock In.
     }
 
+    const trimmedManualLabel = siteId ? null : manualLocationLabel.trim() || null;
+
     // WP-15/§25 - offline (or unreachable) is queued locally rather
     // than surfaced as an error; the client-captured time/coordinates/
     // evidence captured above travel with the queued item unchanged.
     if (typeof navigator !== "undefined" && navigator.onLine === false) {
-      await queueOffline("clock_in", { siteId: siteId || null, projectId: projectId || null, latitude, longitude, accuracyMeters }, evidenceFile);
+      await queueOffline("clock_in", { siteId: siteId || null, manualLocationLabel: trimmedManualLabel, projectId: projectId || null, latitude, longitude, accuracyMeters }, evidenceFile);
       return;
     }
 
-    const result = await AttendanceRepository.clockIn({ siteId: siteId || null, projectId: projectId || null, latitude, longitude, accuracyMeters });
+    const result = await AttendanceRepository.clockIn({ siteId: siteId || null, manualLocationLabel: trimmedManualLabel, projectId: projectId || null, latitude, longitude, accuracyMeters });
 
     if (result.networkError) {
-      await queueOffline("clock_in", { siteId: siteId || null, projectId: projectId || null, latitude, longitude, accuracyMeters }, evidenceFile);
+      await queueOffline("clock_in", { siteId: siteId || null, manualLocationLabel: trimmedManualLabel, projectId: projectId || null, latitude, longitude, accuracyMeters }, evidenceFile);
       return;
     }
 
@@ -293,7 +297,7 @@ export default function ClockInOutCard() {
 
   const queueOffline = async (
     type: "clock_in" | "clock_out",
-    location: { siteId?: string | null; projectId?: string | null; latitude: number | null; longitude: number | null; accuracyMeters: number | null },
+    location: { siteId?: string | null; manualLocationLabel?: string | null; projectId?: string | null; latitude: number | null; longitude: number | null; accuracyMeters: number | null },
     evidenceFile: File | null,
   ) => {
     if (!profile) {
@@ -305,6 +309,7 @@ export default function ClockInOutCard() {
         userId: profile.id,
         type,
         siteId: location.siteId ?? null,
+        manualLocationLabel: location.manualLocationLabel ?? null,
         projectId: location.projectId ?? null,
         latitude: location.latitude,
         longitude: location.longitude,
@@ -365,6 +370,11 @@ export default function ClockInOutCard() {
   };
 
   const handleClockInTap = () => {
+    if (!siteId && !manualLocationLabel.trim()) {
+      setError(t("attendance.manualLocationRequired"));
+      return;
+    }
+    setError("");
     if (clockInCameraRequired) {
       setCameraFor("clockIn");
       return;
@@ -593,10 +603,24 @@ export default function ClockInOutCard() {
             label={t("attendance.siteLabel")}
             name="clockInSite"
             value={siteId}
-            onChange={(event) => setSiteId(event.target.value)}
+            onChange={(event) => {
+              setSiteId(event.target.value);
+              if (event.target.value) setManualLocationLabel("");
+            }}
             disabled={submitting}
             options={[{ value: "", label: t("attendance.noSiteOption") }, ...sites.map((site) => ({ value: site.id, label: site.name }))]}
           />
+          {!siteId ? (
+            <Input
+              label={t("attendance.manualLocationLabel")}
+              name="clockInManualLocation"
+              value={manualLocationLabel}
+              onChange={(event) => setManualLocationLabel(event.target.value)}
+              disabled={submitting}
+              required
+              helperText={t("attendance.manualLocationHint")}
+            />
+          ) : null}
           {siteId ? (
             <Select
               label={t("attendance.projectLabel")}
@@ -607,7 +631,7 @@ export default function ClockInOutCard() {
               options={[{ value: "", label: t("attendance.noProject") }, ...projects.map((project) => ({ value: project.id, label: project.name }))]}
             />
           ) : null}
-          <Button fullWidth onClick={handleClockInTap} loading={submitting}>
+          <Button fullWidth onClick={handleClockInTap} loading={submitting} disabled={!siteId && !manualLocationLabel.trim()}>
             {t("attendance.clockInAction")}
           </Button>
         </>
