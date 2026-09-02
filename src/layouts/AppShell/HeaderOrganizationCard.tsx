@@ -13,6 +13,7 @@ import styles from "./HeaderOrganizationCard.module.css";
 const PANEL_GAP = 8;
 const PANEL_WIDTH = 280;
 const VIEWPORT_MARGIN = 8;
+const HOVER_CLOSE_DELAY_MS = 150;
 
 // Ported from PROSM Platform's own Header/OrganizationCard (§ final
 // visual consistency pass, correction - "The large Organization and
@@ -40,6 +41,7 @@ function HeaderOrganizationCard() {
   const containerRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const logoInputRef = useRef<HTMLInputElement>(null);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const load = useCallback(async () => {
     const [orgResult, licenseResult] = await Promise.all([OrganizationRepository.getCurrentOrganization(), LicenseRepository.getCurrentLicenseState()]);
@@ -60,12 +62,34 @@ function HeaderOrganizationCard() {
     setPanelPosition({ top: rect.bottom + PANEL_GAP, left });
   };
 
+  const cancelScheduledClose = () => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  };
+
+  // § live UX review, user-directed - "the flyout closes the instant I
+  // move the mouse off the button, before I can reach it." Root cause:
+  // the portaled panel lives outside containerRef's own DOM subtree
+  // (createPortal to document.body, § WeatherMiniPanel's own comment),
+  // so onMouseLeave fired the moment the cursor left the trigger's
+  // bounding box, before ever reaching the panel below it. Fixed with
+  // the exact same pattern WeatherMiniPanel already uses for this same
+  // problem: a short debounced close (cancelled if the cursor re-enters
+  // either the trigger or the panel itself) instead of an instant one.
   const openPanel = () => {
+    cancelScheduledClose();
     updatePosition();
     setPanelOpen(true);
   };
 
   const closePanel = () => setPanelOpen(false);
+
+  const scheduleClosePanel = () => {
+    cancelScheduledClose();
+    closeTimerRef.current = setTimeout(() => setPanelOpen(false), HOVER_CLOSE_DELAY_MS);
+  };
 
   useEffect(() => {
     if (!panelOpen) return undefined;
@@ -91,6 +115,8 @@ function HeaderOrganizationCard() {
       document.removeEventListener("keydown", handleEscape);
     };
   }, [panelOpen]);
+
+  useEffect(() => cancelScheduledClose, []);
 
   const handleRefresh = async (event: ReactMouseEvent) => {
     event.stopPropagation();
@@ -132,7 +158,7 @@ function HeaderOrganizationCard() {
   const initial = organization.name.charAt(0).toUpperCase();
 
   return (
-    <div ref={containerRef} className={styles.container} onMouseEnter={openPanel} onMouseLeave={closePanel}>
+    <div ref={containerRef} className={styles.container} onMouseEnter={openPanel} onMouseLeave={scheduleClosePanel}>
       <button
         ref={triggerRef}
         type="button"
@@ -149,7 +175,15 @@ function HeaderOrganizationCard() {
       {panelOpen &&
         panelPosition &&
         createPortal(
-          <div ref={panelRef} className={styles.panel} style={{ top: panelPosition.top, left: panelPosition.left }} role="dialog" aria-label={organization.name}>
+          <div
+            ref={panelRef}
+            className={styles.panel}
+            style={{ top: panelPosition.top, left: panelPosition.left }}
+            role="dialog"
+            aria-label={organization.name}
+            onMouseEnter={openPanel}
+            onMouseLeave={scheduleClosePanel}
+          >
             <div className={styles.panelHeader}>
               {organization.logoUrl ? <img src={organization.logoUrl} alt={organization.name} className={styles.panelLogoImage} /> : <span className={styles.panelLogo}>{initial}</span>}
               <div className={styles.panelName}>{organization.name}</div>
