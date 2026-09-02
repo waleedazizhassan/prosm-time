@@ -8,7 +8,10 @@
    ambient glow using the app's own --brand-primary token (never a raw
    color), so it stays correct in light/dark/system exactly like every
    other surface - unlike SplashScreen, which deliberately commits to a
-   single fixed dark look, this page keeps the real theme system intact. */
+   single fixed dark look, this page keeps the real theme system intact.
+   This is the mobile (<=860px) treatment only, unchanged from the
+   previous round - see the >=861px override at the bottom of this file
+   for the desktop full-page-photo + header treatment. */
 .page {
   position: relative;
   min-height: 100vh;
@@ -19,6 +22,20 @@
   overflow: hidden;
 
   background: radial-gradient(circle at 15% 12%, color-mix(in srgb, var(--brand-primary) 10%, transparent), transparent 45%), radial-gradient(circle at 85% 88%, color-mix(in srgb, var(--brand-primary) 8%, transparent), transparent 50%), var(--surface-app);
+}
+
+/* New header (desktop-only, see >=861px block below) - hidden here so
+   it takes no space in the mobile layout. */
+.authHeader {
+  display: none;
+}
+
+/* New wrapper around .shell (desktop-only, see >=861px block below) -
+   `display: contents` makes it computationally transparent so .shell
+   stays a direct flex child of .page here, exactly as before this
+   wrapper existed. */
+.content {
+  display: contents;
 }
 
 /* § live UX review, user-directed - split-panel shape from the PROSM
@@ -75,6 +92,152 @@
 
   .brandPhoto {
     height: 100%;
+  }
+}
+
+/* § live UX review, user-directed - "make the photo fill the whole
+   desktop page, with a header (Sign in / Create organization /
+   language / contact us)." The split card disappears entirely here:
+   the photo becomes the page's own full-bleed background behind a
+   fixed header, and .shell collapses to a single floating glass card
+   holding just the form (.brandPanel/.brandPhoto stay mobile-only,
+   hidden below). The card commits to one fixed dark look regardless
+   of the light/dark/system theme - like SplashScreen's own treatment -
+   by locally overriding the semantic tokens its children already read
+   (Input/Button/Divider/etc. need no changes themselves), reusing this
+   app's own real dark-theme palette values (design-tokens.css) rather
+   than inventing new colors, so it always reads legibly over the busy
+   photo no matter the viewer's chosen theme. */
+@media (min-width: 861px) {
+  .page {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 0;
+
+    background-color: #0b1220;
+    background-image: linear-gradient(180deg, rgba(11, 18, 32, 0.62) 0%, rgba(11, 18, 32, 0.28) 38%, rgba(11, 18, 32, 0.7) 100%), var(--auth-photo);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .authHeader {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-5) var(--space-8);
+  }
+
+  .headerNav {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .headerNavLink {
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid rgba(248, 250, 252, 0.32);
+    border-radius: var(--radius-md);
+
+    color: #f8fafc;
+    font-size: var(--font-sm);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+
+    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .headerNavLink:hover {
+    background: rgba(248, 250, 252, 0.12);
+  }
+
+  .headerNavLinkActive {
+    background: #f8fafc;
+    border-color: #f8fafc;
+    color: #0b1220;
+  }
+
+  .headerActions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .headerLanguageSelect {
+    padding: var(--space-1) var(--space-2);
+    border: 1px solid rgba(248, 250, 252, 0.32);
+    border-radius: var(--radius-md);
+
+    background: rgba(11, 18, 32, 0.45);
+    color: #f8fafc;
+    font-size: var(--font-sm);
+    cursor: pointer;
+  }
+
+  .headerLanguageSelect option {
+    color: #0b1220;
+  }
+
+  .headerHelpLink {
+    color: #f8fafc;
+    font-size: var(--font-sm);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+  }
+
+  .headerHelpLink:hover {
+    text-decoration: underline;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    /* § live UX review, user-directed - "put the card on the left of
+       the page, not the middle." `left` (a physical keyword, unlike
+       flex-start) pins it to the true left edge in both LTR and RTL,
+       so the card doesn't jump sides when the language switches. */
+    justify-content: left;
+    padding: var(--space-6) var(--space-10);
+  }
+
+  .shell {
+    display: block;
+    max-width: 420px;
+    /* § live UX review, user-directed - "the Login page's card size is
+       perfect, make Create organization the same size, it's too big":
+       every desktop card is capped to Login's own natural height (it
+       never had enough fields to reach this cap, so it's unaffected)
+       and scrolls its own content past that, instead of the page
+       itself growing tall on the long Activation form. */
+    max-height: min(620px, calc(100vh - 140px));
+    overflow-y: auto;
+
+    /* § live UX review, user-directed - "make the cards a bit
+       transparent, more modern" - lower opacity than the first pass
+       (was 0.74), more blur to compensate so text over the busy photo
+       stays legible. */
+    background: rgba(15, 23, 42, 0.5);
+    border-color: rgba(248, 250, 252, 0.18);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    --surface-card: var(--palette-slate-800);
+    --surface-hover: var(--palette-slate-700);
+    --text-primary: var(--palette-slate-50);
+    --text-secondary: var(--palette-slate-300);
+    --text-disabled: var(--palette-slate-400);
+    --border-light: var(--palette-slate-700);
+  }
+
+  .brandPanel {
+    display: none;
   }
 }
 

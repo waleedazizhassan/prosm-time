@@ -5,6 +5,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import AppShell from "../layouts/AppShell";
 
 import ActivationPage from "../modules/activation/ActivationPage";
+import WelcomePage from "../modules/auth/WelcomePage";
 import LoginPage from "../modules/auth/LoginPage";
 import ForgotPasswordPage from "../modules/auth/ForgotPasswordPage";
 import ResetPasswordPage from "../modules/auth/ResetPasswordPage";
@@ -46,6 +47,7 @@ export default function AppRoutes() {
       <AuthProvider>
         <Routes>
           <Route path="/" element={<RootRedirect />} />
+          <Route path="/welcome" element={<WelcomePage />} />
           <Route path="/activate" element={<ActivationPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
