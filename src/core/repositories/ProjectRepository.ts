@@ -143,7 +143,7 @@ class ProjectRepository {
 
   async listProjectAssignments(projectId: string): Promise<ServiceResult<ProjectAssignment[]>> {
     try {
-      const { data, error } = await this.client.from("project_assignments").select("id, project_id, user_id, users(full_name, email)").eq("project_id", projectId);
+      const { data, error } = await this.client.from("project_assignments").select("id, project_id, user_id, users!project_assignments_user_id_fkey(full_name, email)").eq("project_id", projectId);
       if (error) return createError(error.message);
       return createSuccess((data ?? []).map(mapProjectAssignmentRow));
     } catch (error) {

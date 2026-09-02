@@ -223,7 +223,7 @@ class SiteRepository {
 
   async listSiteAssignments(siteId: string): Promise<ServiceResult<SiteAssignment[]>> {
     try {
-      const { data, error } = await this.client.from("site_assignments").select("id, site_id, user_id, role_at_site, users(full_name, email)").eq("site_id", siteId);
+      const { data, error } = await this.client.from("site_assignments").select("id, site_id, user_id, role_at_site, users!site_assignments_user_id_fkey(full_name, email)").eq("site_id", siteId);
       if (error) return createError(error.message);
       return createSuccess((data ?? []).map(mapSiteAssignmentRow));
     } catch (error) {

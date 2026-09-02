@@ -203,7 +203,7 @@ class TimesheetRepository {
     try {
       const { data, error } = await this.client
         .from("timesheets")
-        .select("id, user_id, period_start, period_end, status, total_worked_minutes, total_break_minutes, total_overtime_minutes, exceptions_count, corrections_count, submitted_at, approved_at, locked_at, users(full_name)")
+        .select("id, user_id, period_start, period_end, status, total_worked_minutes, total_break_minutes, total_overtime_minutes, exceptions_count, corrections_count, submitted_at, approved_at, locked_at, users!timesheets_user_id_fkey(full_name)")
         .eq("user_id", userId)
         .order("period_start", { ascending: false });
       if (error) return createError(error.message);
@@ -217,7 +217,7 @@ class TimesheetRepository {
     try {
       const { data, error } = await this.client
         .from("timesheets")
-        .select("id, user_id, period_start, period_end, status, total_worked_minutes, total_break_minutes, total_overtime_minutes, exceptions_count, corrections_count, submitted_at, approved_at, locked_at, users(full_name)")
+        .select("id, user_id, period_start, period_end, status, total_worked_minutes, total_break_minutes, total_overtime_minutes, exceptions_count, corrections_count, submitted_at, approved_at, locked_at, users!timesheets_user_id_fkey(full_name)")
         .eq("status", "submitted")
         .order("submitted_at", { ascending: true });
       if (error) return createError(error.message);
@@ -231,7 +231,7 @@ class TimesheetRepository {
     try {
       const { data, error } = await this.client
         .from("timesheet_corrections")
-        .select("id, timesheet_id, reason, status, created_at, timesheets(period_start, period_end, users(full_name))")
+        .select("id, timesheet_id, reason, status, created_at, timesheets(period_start, period_end, users!timesheets_user_id_fkey(full_name))")
         .eq("status", "pending")
         .order("created_at", { ascending: true });
       if (error) return createError(error.message);
