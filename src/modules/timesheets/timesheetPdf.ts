@@ -109,9 +109,23 @@ export async function buildTimesheetPdf(pack: EvidencePack, languageCode: string
     )
     .join("");
 
+  // § live UX review, user-directed - "the PDF comes out completely
+  // blank." Root cause: jsPDF's .html() clones the element it's given
+  // (outerHTML, inline styles included) into its OWN internal hidden
+  // iframe before running html2canvas on the clone - the container's
+  // own `position:fixed;left:-9999px` (meant to hide it from the real
+  // page) rode along into that clone too, so the cloned content was
+  // ALSO shifted off-screen inside jsPDF's own iframe, and html2canvas
+  // captured nothing. Fixed by moving the hiding entirely onto a
+  // WRAPPER (zero-size, overflow:hidden - never cloned, since only
+  // `container` itself is passed to .html()) and leaving `container`
+  // itself unpositioned, so the clone renders normally in-flow.
+  const wrapper = document.createElement("div");
+  wrapper.style.cssText = "position:fixed;top:0;left:0;width:0;height:0;overflow:hidden;";
+
   const container = document.createElement("div");
   container.dir = isRtl ? "rtl" : "ltr";
-  container.style.cssText = "position:fixed;top:0;left:-9999px;width:780px;padding:36px;background:#ffffff;color:#0f172a;font-family:'Segoe UI',Tahoma,Arial,sans-serif;";
+  container.style.cssText = "width:780px;padding:36px;background:#ffffff;color:#0f172a;font-family:'Segoe UI',Tahoma,Arial,sans-serif;";
 
   container.innerHTML = `
     <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:3px solid #16a34a;padding-bottom:16px;margin-bottom:20px;">
@@ -158,20 +172,29 @@ export async function buildTimesheetPdf(pack: EvidencePack, languageCode: string
     ${listSection(t("report.approvalTrailTitle"), approvalTrailRows, t("report.noApprovalTrail"))}
   `;
 
-  document.body.appendChild(container);
+  wrapper.appendChild(container);
+  document.body.appendChild(wrapper);
 
   try {
     const doc = new jsPDF({ unit: "pt", format: "a4" });
+    // autoPaging: "slice" (not "text") deliberately - "text" mode makes
+    // jsPDF walk the DOM a second time and reconstruct real PDF text
+    // objects using its OWN built-in Latin-1-only font, which would
+    // silently reintroduce the exact Arabic-mangling bug this rewrite
+    // exists to fix, underneath/alongside the correct html2canvas
+    // raster. "slice" instead paginates by cutting the already-correct
+    // html2canvas screenshot itself - what ends up on the page is
+    // exactly what the browser rendered, nothing jsPDF reinterprets.
     await doc.html(container, {
       x: 20,
       y: 20,
       width: 555,
       windowWidth: 780,
-      autoPaging: "text",
-      html2canvas: { scale: 0.72, useCORS: true },
+      autoPaging: "slice",
+      html2canvas: { scale: 0.72, useCORS: true, backgroundColor: "#ffffff" },
     });
     return doc;
   } finally {
-    document.body.removeChild(container);
+    document.body.removeChild(wrapper);
   }
 }
