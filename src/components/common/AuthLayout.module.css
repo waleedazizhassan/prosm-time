@@ -42,29 +42,10 @@
 }
 
 .brandPanel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-3);
-  padding: var(--space-8);
-  text-align: center;
-
-  background: radial-gradient(circle at 50% 30%, rgba(52, 211, 153, 0.18), transparent 55%), radial-gradient(circle at 50% 75%, rgba(59, 130, 246, 0.16), transparent 60%), #0b1220;
-}
-
-.brandName {
-  margin: 0;
-  font-size: var(--font-xl);
-  font-weight: var(--font-weight-bold);
-  color: #f8fafc;
-}
-
-.brandTagline {
-  margin: 0;
-  max-width: 26ch;
-  font-size: var(--font-sm);
-  color: rgba(226, 232, 240, 0.72);
+  background-color: #0b1220;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .formPanel {
@@ -81,17 +62,7 @@
   }
 
   .brandPanel {
-    flex-direction: row;
-    padding: var(--space-5) var(--space-6);
-    gap: var(--space-3);
-  }
-
-  .brandTagline {
-    display: none;
-  }
-
-  .brandName {
-    font-size: var(--font-lg);
+    min-height: 160px;
   }
 }
 
@@ -122,6 +93,39 @@
 
 .footerLine a:hover {
   text-decoration: underline;
+}
+
+/* § live UX review, user-directed - company logo selection on the
+   Activation form itself (the actual upload still only happens once
+   a real session exists - see ActivationPage.tsx's own comment). */
+.fileFieldContainer {
+  margin-bottom: var(--space-4);
+}
+
+.fileFieldLabel {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.fileFieldRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.fileFieldName {
+  font-size: var(--font-sm);
+  color: var(--text-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.fileFieldHint {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
 }
 
 .errorText {
@@ -180,6 +184,7 @@
   display: block;
   width: 100%;
   margin-top: var(--space-3);
+  margin-bottom: var(--space-4);
   text-align: center;
 
   background: none;

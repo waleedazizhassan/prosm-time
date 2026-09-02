@@ -6,11 +6,12 @@ import { Upload } from "lucide-react";
 import ActivationRepository from "../../core/repositories/ActivationRepository";
 import AuthService from "../../core/auth/AuthService";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
+import LicenseRepository from "../../core/repositories/LicenseRepository";
+import { buildLicenseCertificatePdf } from "./licenseCertificatePdf";
 
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import AuthLayout from "../../components/common/AuthLayout";
-import BrandMark from "../../components/common/BrandMark";
 import styles from "../../components/common/AuthLayout.module.css";
 
 // PROSM Time Implementation Master File V3.0, WP-03/§37 - "Activation /
@@ -19,19 +20,21 @@ import styles from "../../components/common/AuthLayout.module.css";
 // activate-organization (§5) - this component only collects input and
 // reports the real result, never decides activation success itself.
 //
-// § live UX review, user-directed - "a place to upload the company
-// logo during activation." The activation form itself runs with NO
-// session at all (the organization doesn't exist yet), so there is no
-// valid path/owner-check to upload into until AFTER activation
-// succeeds and the Owner is signed in - that happens a few lines
-// below in handleSubmit. Rather than force a real upload into a
-// pre-session form, this is a distinct step shown right after sign-in
-// succeeds (organizationId + a real authenticated session both exist
-// by then), before the existing navigate-to-dashboard redirect -
-// optional, skippable, and reachable again anytime afterward from the
-// Header's own organization card for an org that skips it here.
+// § live UX review, user-directed - "the activation page should let
+// you upload the company logo, confirm the password, and after
+// pressing Activate automatically download the license (PROSM logo +
+// organization logo + PROSM Time)." The logo file itself is only
+// SELECTED here (held in memory - there is still no session/
+// organization to upload into until after activation succeeds); it
+// is uploaded automatically the moment one exists, in the same
+// handleSubmit continuation that used to be a separate "add a logo
+// now?" screen - that extra screen is gone, since the field is now
+// up front. The certificate reuses the same certified-document PDF
+// shell (renderHtmlToPdf) every other export in this app already
+// uses, built from a fresh read of the real license_activation_state
+// row (LicenseRepository) - never data invented client-side.
 export default function ActivationPage() {
-  const { t } = useTranslation("auth");
+  const { t, i18n } = useTranslation(["auth", "common"]);
   const navigate = useNavigate();
 
   const [activationCode, setActivationCode] = useState("");
@@ -40,21 +43,28 @@ export default function ActivationPage() {
   const [ownerFullName, setOwnerFullName] = useState("");
   const [ownerEmail, setOwnerEmail] = useState("");
   const [ownerPassword, setOwnerPassword] = useState("");
+  const [confirmOwnerPassword, setConfirmOwnerPassword] = useState("");
+  const [logoFile, setLogoFile] = useState<File | null>(null);
 
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-
-  const [signedIn, setSignedIn] = useState(false);
-  const [organizationId, setOrganizationId] = useState<string | null>(null);
-  const [uploadingLogo, setUploadingLogo] = useState(false);
-  const [logoError, setLogoError] = useState("");
   const logoInputRef = useRef<HTMLInputElement>(null);
+
+  const handleLogoFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setLogoFile(event.target.files?.[0] ?? null);
+  };
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    setSubmitting(true);
     setError("");
+
+    if (ownerPassword !== confirmOwnerPassword) {
+      setError(t("auth:activation.passwordMismatch"));
+      return;
+    }
+
+    setSubmitting(true);
 
     const result = await ActivationRepository.activateOrganization({
       activationCode: activationCode.trim(),
@@ -65,9 +75,9 @@ export default function ActivationPage() {
       siteName: siteName.trim(),
     });
 
-    if (!result.success) {
+    if (!result.success || !result.data) {
       setSubmitting(false);
-      setError(result.message ?? t("activation.genericError"));
+      setError(result.message ?? t("auth:activation.genericError"));
       return;
     }
 
@@ -78,66 +88,70 @@ export default function ActivationPage() {
     // screen for a credential they just typed once (createUser on the
     // server does not itself establish a client session).
     const signInResult = await AuthService.signIn(ownerEmail.trim(), ownerPassword);
-    setSubmitting(false);
 
-    if (signInResult.success && result.data) {
-      setOrganizationId(result.data.organizationId);
-      setSignedIn(true);
-    } else if (signInResult.success) {
-      navigate("/dashboard", { replace: true });
-    } else {
+    if (!signInResult.success) {
+      setSubmitting(false);
       navigate("/login", { replace: true });
-    }
-  };
-
-  const handleLogoFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    event.target.value = "";
-    if (!file || !organizationId) return;
-
-    setUploadingLogo(true);
-    setLogoError("");
-    const result = await OrganizationRepository.uploadLogo(organizationId, file);
-    setUploadingLogo(false);
-
-    if (!result.success) {
-      setLogoError(result.message ?? t("activation.logoUploadError"));
       return;
     }
+
+    let organizationLogoUrl: string | null = null;
+    if (logoFile) {
+      const uploadResult = await OrganizationRepository.uploadLogo(result.data.organizationId, logoFile);
+      if (uploadResult.success) organizationLogoUrl = uploadResult.data;
+      // A failed logo upload is never fatal to activation itself - the
+      // Owner can always add/change it later from the Header's own
+      // organization card.
+    }
+
+    const licenseResult = await LicenseRepository.getCurrentLicenseState();
+    if (licenseResult.success && licenseResult.data) {
+      const license = licenseResult.data;
+      const orgResult = await OrganizationRepository.getCurrentOrganization();
+      const org = orgResult.success ? orgResult.data : null;
+      try {
+        const doc = await buildLicenseCertificatePdf(
+          {
+            organizationName: org?.name ?? organizationName.trim(),
+            organizationCode: org?.organizationCode ?? "—",
+            siteName: siteName.trim(),
+            ownerFullName: ownerFullName.trim(),
+            ownerEmail: ownerEmail.trim(),
+            licenseNumber: license.licenseNumber,
+            status: license.status,
+            maxUsers: license.maxUsers,
+            maxDevices: license.maxDevices,
+            expiresAt: license.expiresAt,
+            activatedAt: new Date().toLocaleDateString(i18n.language),
+          },
+          i18n.language,
+          t,
+          organizationLogoUrl ?? org?.logoUrl ?? null,
+        );
+        doc.save(`prosm-time-license-${license.licenseNumber}.pdf`);
+      } catch {
+        // A failed certificate render/download is display-only and
+        // never blocks getting into the app the Owner just activated.
+      }
+    }
+
+    setSubmitting(false);
     navigate("/dashboard", { replace: true });
   };
 
-  if (signedIn) {
-    return (
-      <AuthLayout title={t("activation.logoStepTitle")} subtitle={t("activation.logoStepSubtitle")}>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--space-4)", padding: "var(--space-4) 0" }}>
-          <BrandMark size={64} />
-          {logoError ? <p className={styles.errorText}>{logoError}</p> : null}
-          <Button type="button" fullWidth onClick={() => logoInputRef.current?.click()} loading={uploadingLogo}>
-            <Upload size={16} /> {t("activation.uploadLogoAction")}
-          </Button>
-          <button type="button" className={styles.textLink} onClick={() => navigate("/dashboard", { replace: true })} disabled={uploadingLogo}>
-            {t("activation.skipLogoAction")}
-          </button>
-          <input ref={logoInputRef} type="file" accept="image/png,image/jpeg,image/webp" onChange={handleLogoFileChange} style={{ display: "none" }} />
-        </div>
-      </AuthLayout>
-    );
-  }
-
   return (
     <AuthLayout
-      title={t("activation.title")}
-      subtitle={t("activation.subtitle")}
+      title={t("auth:activation.title")}
+      subtitle={t("auth:activation.subtitle")}
       footer={
         <>
-          {t("activation.alreadyHaveAccount")} <Link to="/login">{t("activation.goToLogin")}</Link>
+          {t("auth:activation.alreadyHaveAccount")} <Link to="/login">{t("auth:activation.goToLogin")}</Link>
         </>
       }
     >
       <form onSubmit={handleSubmit}>
         <Input
-          label={t("activation.activationCodeLabel")}
+          label={t("auth:activation.activationCodeLabel")}
           name="activationCode"
           value={activationCode}
           onChange={(event) => setActivationCode(event.target.value)}
@@ -145,7 +159,7 @@ export default function ActivationPage() {
           disabled={submitting || success}
         />
         <Input
-          label={t("activation.organizationNameLabel")}
+          label={t("auth:activation.organizationNameLabel")}
           name="organizationName"
           value={organizationName}
           onChange={(event) => setOrganizationName(event.target.value)}
@@ -153,16 +167,28 @@ export default function ActivationPage() {
           disabled={submitting || success}
         />
         <Input
-          label={t("activation.siteNameLabel")}
+          label={t("auth:activation.siteNameLabel")}
           name="siteName"
           value={siteName}
           onChange={(event) => setSiteName(event.target.value)}
           required
           disabled={submitting || success}
-          helperText={t("activation.siteNameHelper")}
+          helperText={t("auth:activation.siteNameHelper")}
         />
+
+        <div className={styles.fileFieldContainer}>
+          <span className={styles.fileFieldLabel}>{t("auth:activation.logoLabel")}</span>
+          <div className={styles.fileFieldRow}>
+            <Button type="button" variant="ghost" onClick={() => logoInputRef.current?.click()} disabled={submitting || success}>
+              <Upload size={16} /> {logoFile ? t("auth:activation.changeLogoAction") : t("auth:activation.chooseLogoAction")}
+            </Button>
+            {logoFile ? <span className={styles.fileFieldName}>{logoFile.name}</span> : <span className={styles.fileFieldHint}>{t("auth:activation.logoHint")}</span>}
+          </div>
+          <input ref={logoInputRef} type="file" accept="image/png,image/jpeg,image/webp" onChange={handleLogoFileChange} style={{ display: "none" }} />
+        </div>
+
         <Input
-          label={t("activation.ownerFullNameLabel")}
+          label={t("auth:activation.ownerFullNameLabel")}
           name="ownerFullName"
           value={ownerFullName}
           onChange={(event) => setOwnerFullName(event.target.value)}
@@ -170,7 +196,7 @@ export default function ActivationPage() {
           disabled={submitting || success}
         />
         <Input
-          label={t("activation.ownerEmailLabel")}
+          label={t("auth:activation.ownerEmailLabel")}
           name="ownerEmail"
           type="email"
           value={ownerEmail}
@@ -180,22 +206,32 @@ export default function ActivationPage() {
           autoComplete="email"
         />
         <Input
-          label={t("activation.ownerPasswordLabel")}
+          label={t("auth:activation.ownerPasswordLabel")}
           name="ownerPassword"
           type="password"
           value={ownerPassword}
           onChange={(event) => setOwnerPassword(event.target.value)}
           required
           disabled={submitting || success}
-          helperText={t("activation.passwordHelper")}
+          helperText={t("auth:activation.passwordHelper")}
+          autoComplete="new-password"
+        />
+        <Input
+          label={t("auth:activation.confirmPasswordLabel")}
+          name="confirmOwnerPassword"
+          type="password"
+          value={confirmOwnerPassword}
+          onChange={(event) => setConfirmOwnerPassword(event.target.value)}
+          required
+          disabled={submitting || success}
           autoComplete="new-password"
         />
 
         {error ? <p className={styles.errorText}>{error}</p> : null}
-        {success ? <p className={styles.successText}>{t("activation.successMessage")}</p> : null}
+        {success ? <p className={styles.successText}>{t("auth:activation.successMessage")}</p> : null}
 
         <Button type="submit" fullWidth loading={submitting} disabled={success}>
-          {t("activation.submitAction")}
+          {t("auth:activation.submitAction")}
         </Button>
       </form>
     </AuthLayout>

@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
-import { useTranslation } from "react-i18next";
-import BrandMark from "./BrandMark";
+import authPhoto from "../../assets/splash-photo.png";
 import styles from "./AuthLayout.module.css";
 
 interface AuthLayoutProps {
@@ -20,17 +19,16 @@ interface AuthLayoutProps {
 // per-page changes needed. The brand panel collapses to a slim header
 // strip below 860px (AuthLayout.module.css) rather than disappearing,
 // so the identity still reads on a phone-sized screen.
+//
+// § live UX review, user-directed - the brand panel shows the photo
+// only, no logo or text over it (previous overlay text/gradient made
+// it "look bad"), and the full photo must be visible rather than
+// cropped - see .brandPanel's background-size: contain.
 export default function AuthLayout({ title, subtitle, children, footer }: AuthLayoutProps) {
-  const { t } = useTranslation("common");
-
   return (
     <div className={styles.page}>
       <div className={styles.shell}>
-        <div className={styles.brandPanel}>
-          <BrandMark size={64} glow />
-          <p className={styles.brandName}>{t("appName")}</p>
-          <p className={styles.brandTagline}>{t("splash.tagline")}</p>
-        </div>
+        <div className={styles.brandPanel} style={{ backgroundImage: `url(${authPhoto})` }} />
 
         <div className={styles.formPanel}>
           <h1 className={styles.title}>{title}</h1>

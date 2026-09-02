@@ -22,7 +22,8 @@ function fillAndSubmit() {
   fireEvent.change(screen.getByLabelText(/Your full name/i), { target: { value: "Jordan Rivera" } });
   fireEvent.change(screen.getByLabelText(/Your email/i), { target: { value: "owner@acme.example" } });
   fireEvent.change(screen.getByLabelText(/Choose a password/i), { target: { value: "SuperSecret123" } });
-  fireEvent.click(screen.getByRole("button", { name: /Activate/i }));
+  fireEvent.change(screen.getByLabelText(/Confirm password/i, { selector: "input" }), { target: { value: "SuperSecret123" } });
+  fireEvent.click(screen.getByRole("button", { name: /^Activate$/i }));
 }
 
 describe("ActivationPage", () => {

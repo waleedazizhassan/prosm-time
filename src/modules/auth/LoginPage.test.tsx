@@ -39,7 +39,7 @@ describe("LoginPage", () => {
     );
 
     fireEvent.change(screen.getByLabelText(/Email/i), { target: { value: "owner@acme.example" } });
-    fireEvent.change(screen.getByLabelText(/Password/i), { target: { value: "SuperSecret123" } });
+    fireEvent.change(screen.getByLabelText(/Password/i, { selector: "input" }), { target: { value: "SuperSecret123" } });
     fireEvent.click(screen.getByRole("button", { name: /Sign in/i }));
 
     await waitFor(() => {
@@ -57,7 +57,7 @@ describe("LoginPage", () => {
     );
 
     fireEvent.change(screen.getByLabelText(/Email/i), { target: { value: "owner@acme.example" } });
-    fireEvent.change(screen.getByLabelText(/Password/i), { target: { value: "wrong" } });
+    fireEvent.change(screen.getByLabelText(/Password/i, { selector: "input" }), { target: { value: "wrong" } });
     fireEvent.click(screen.getByRole("button", { name: /Sign in/i }));
 
     expect(await screen.findByText("Invalid login credentials.")).toBeInTheDocument();

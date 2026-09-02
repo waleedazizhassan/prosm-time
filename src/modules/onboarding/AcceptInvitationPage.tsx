@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import InvitationRepository from "../../core/repositories/InvitationRepository";
 import AuthService from "../../core/auth/AuthService";
@@ -60,7 +60,15 @@ export default function AcceptInvitationPage() {
   };
 
   return (
-    <AuthLayout title={t("acceptInvitation.title")} subtitle={t("acceptInvitation.subtitle")}>
+    <AuthLayout
+      title={t("acceptInvitation.title")}
+      subtitle={t("acceptInvitation.subtitle")}
+      footer={
+        <>
+          {t("acceptInvitation.alreadyHaveAccount")} <Link to="/login">{t("activation.goToLogin")}</Link>
+        </>
+      }
+    >
       <form onSubmit={handleSubmit}>
         <Input label={t("login.emailLabel")} name="email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} required disabled={submitting || success} autoComplete="email" />
         <Input

@@ -52,3 +52,43 @@
 .errorInput {
   border-color: var(--brand-danger);
 }
+
+.passwordWrapper {
+  position: relative;
+}
+
+.passwordInput {
+  padding-inline-end: var(--space-8);
+}
+
+.revealToggle {
+  position: absolute;
+  top: 50%;
+  inset-inline-end: var(--space-2);
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.revealToggle:hover:not(:disabled) {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.revealToggle:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}

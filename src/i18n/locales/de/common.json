@@ -1,5 +1,7 @@
 {
   "appName": "PROSM Time",
+  "showPassword": "Passwort anzeigen",
+  "hidePassword": "Passwort verbergen",
   "appNameShort": "PROSM",
   "loading": "Wird geladen…",
   "greeting": {
