@@ -1,4 +1,5 @@
 import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
 import type { EvidencePack } from "../../core/repositories/TimesheetRepository";
 import { formatDateTime, formatTimeOnly, formatDateOnly } from "../../core/utils/formatDate";
 import prosmLogo from "../../assets/prosm-logo.png";
@@ -21,16 +22,21 @@ type TFunc = (key: string, options?: Record<string, unknown>) => string;
 // § live UX review, user-directed - "if I want to pull an end-of-month
 // CERTIFIED copy: period on it, the client's logo and PROSM's logo,
 // and a table with days/sites/clock-in/clock-out/hours." A real
-// redesign, not a tweak - previously jsPDF's own native text() drawing
-// with the "helvetica" built-in font, which only supports Latin-1 and
-// silently mangled Arabic into garbage glyphs (confirmed live - the
-// exact bug this replaces). jsPDF's own .html() (backed by html2canvas,
-// already a real dependency here) rasterizes real DOM/CSS instead - the
-// browser's own text engine does Arabic shaping/RTL correctly for
-// free, no font-embedding or bidi-reordering library needed. Built as
-// its own offscreen template (not a reuse of the on-screen Report
-// page's markup) so the certified document's layout - two logos, a
-// bordered table - is deliberate, not incidental to on-screen UI chrome.
+// redesign, not a tweak. Two prior jsPDF approaches were tried and both
+// mangled Arabic: (1) jsPDF's native text()/the built-in "helvetica"
+// font only supports Latin-1; (2) jsPDF's own .html() helper turned out
+// to ALWAYS reconstruct visible text natively with that same limited
+// font, regardless of its `autoPaging` option (confirmed live - the
+// on-screen preview rendered correctly, but the downloaded .html()-based
+// PDF still didn't). The approach that actually works: render this
+// template to a canvas directly via html2canvas (already a real
+// dependency here - the browser's own text engine does Arabic shaping/
+// RTL correctly for free), then embed that canvas as a plain JPEG image
+// via addImage() - jsPDF never touches the text as text, only as pixels
+// it already rendered correctly. Built as its own offscreen template
+// (not a reuse of the on-screen Report page's markup) so the certified
+// document's layout - two logos, a bordered table - is deliberate, not
+// incidental to on-screen UI chrome.
 export async function buildTimesheetPdf(pack: EvidencePack, languageCode: string, t: TFunc, organizationLogoUrl?: string | null): Promise<jsPDF> {
   const isRtl = languageCode === "ar";
   const locale = languageCode;
@@ -62,8 +68,17 @@ export async function buildTimesheetPdf(pack: EvidencePack, languageCode: string
           )
           .join("");
 
+  // Arabic script relies on letters visually joining - letter-spacing
+  // (and its own uppercase transform, meaningless for Arabic anyway)
+  // breaks that joining and reads as crowded/displaced text (found
+  // during real-output verification - the headings were the one spot
+  // still slightly off after the actual mangled-text bug was fixed).
+  const sectionHeadingStyle = isRtl
+    ? "font-weight:700;font-size:12px;color:#0f172a;border-bottom:1px solid #cbd5e1;padding-bottom:6px;margin:20px 0 8px;"
+    : "font-weight:700;font-size:12px;letter-spacing:0.03em;text-transform:uppercase;color:#0f172a;border-bottom:1px solid #cbd5e1;padding-bottom:6px;margin:20px 0 8px;";
+
   const listSection = (title: string, rows: string, emptyMessage: string) => `
-    <div style="font-weight:700;font-size:12px;letter-spacing:0.03em;text-transform:uppercase;color:#0f172a;border-bottom:1px solid #cbd5e1;padding-bottom:6px;margin:20px 0 8px;">${escapeHtml(title)}</div>
+    <div style="${sectionHeadingStyle}">${escapeHtml(title)}</div>
     ${rows || `<p style="margin:0;font-size:11px;color:#64748b;">${escapeHtml(emptyMessage)}</p>`}
   `;
 
@@ -145,7 +160,7 @@ export async function buildTimesheetPdf(pack: EvidencePack, languageCode: string
       <tr>${summaryRow(t("report.approvedAt"), pack.timesheet.approvedAt ? formatDateTime(pack.timesheet.approvedAt, locale) : "—")}<td></td><td></td></tr>
     </table>
 
-    <div style="font-weight:700;font-size:12px;letter-spacing:0.03em;text-transform:uppercase;color:#0f172a;border-bottom:1px solid #cbd5e1;padding-bottom:6px;margin:20px 0 8px;">${escapeHtml(t("report.entriesTitle"))}</div>
+    <div style="${sectionHeadingStyle}">${escapeHtml(t("report.entriesTitle"))}</div>
     <table style="width:100%;border-collapse:collapse;font-size:11.5px;">
       <thead>
         <tr style="background:#f1f5f9;">
@@ -175,24 +190,53 @@ export async function buildTimesheetPdf(pack: EvidencePack, languageCode: string
   wrapper.appendChild(container);
   document.body.appendChild(wrapper);
 
+  // § live UX review, user-directed - "the on-screen preview is
+  // correct, but the downloaded PDF still comes out garbled." Root
+  // cause, finally isolated by comparing the on-screen render (correct)
+  // against the actual downloaded file (still garbled): jsPDF's own
+  // .html() ALWAYS reconstructs visible text natively - using its own
+  // built-in Latin-1-only font - regardless of the `autoPaging` option;
+  // that option only ever controlled how page breaks are computed, not
+  // whether .html() draws real PDF text at all. There is no jsPDF
+  // .html() setting that avoids this for non-Latin scripts.
+  //
+  // Fixed by not using .html() at all: html2canvas renders `container`
+  // to a canvas directly (proven correct - a real Arabic RTL capture
+  // was verified from this exact technique), and the canvas is embedded
+  // as a plain JPEG image via addImage() - jsPDF never touches the text
+  // as text, only as pixels it already rendered correctly. Multi-page
+  // output is handled here by slicing the canvas manually.
   try {
+    const canvas = await html2canvas(container, { scale: 1.4, useCORS: true, backgroundColor: "#ffffff" });
+
     const doc = new jsPDF({ unit: "pt", format: "a4" });
-    // autoPaging: "slice" (not "text") deliberately - "text" mode makes
-    // jsPDF walk the DOM a second time and reconstruct real PDF text
-    // objects using its OWN built-in Latin-1-only font, which would
-    // silently reintroduce the exact Arabic-mangling bug this rewrite
-    // exists to fix, underneath/alongside the correct html2canvas
-    // raster. "slice" instead paginates by cutting the already-correct
-    // html2canvas screenshot itself - what ends up on the page is
-    // exactly what the browser rendered, nothing jsPDF reinterprets.
-    await doc.html(container, {
-      x: 20,
-      y: 20,
-      width: 555,
-      windowWidth: 780,
-      autoPaging: "slice",
-      html2canvas: { scale: 0.72, useCORS: true, backgroundColor: "#ffffff" },
-    });
+    const marginX = 20;
+    const marginY = 20;
+    const contentWidthPt = 555;
+    const pageContentHeightPt = 841.89 - marginY * 2;
+
+    const pxPerPt = canvas.width / contentWidthPt;
+    const pageContentHeightPx = pageContentHeightPt * pxPerPt;
+
+    let renderedPx = 0;
+    let firstPage = true;
+    while (renderedPx < canvas.height) {
+      const sliceHeightPx = Math.min(pageContentHeightPx, canvas.height - renderedPx);
+
+      const sliceCanvas = document.createElement("canvas");
+      sliceCanvas.width = canvas.width;
+      sliceCanvas.height = sliceHeightPx;
+      const sliceCtx = sliceCanvas.getContext("2d");
+      if (!sliceCtx) break;
+      sliceCtx.drawImage(canvas, 0, renderedPx, canvas.width, sliceHeightPx, 0, 0, canvas.width, sliceHeightPx);
+
+      if (!firstPage) doc.addPage();
+      doc.addImage(sliceCanvas.toDataURL("image/jpeg", 0.92), "JPEG", marginX, marginY, contentWidthPt, sliceHeightPx / pxPerPt);
+
+      renderedPx += sliceHeightPx;
+      firstPage = false;
+    }
+
     return doc;
   } finally {
     document.body.removeChild(wrapper);
