@@ -58,7 +58,7 @@ serve(async (request: Request) => {
 
   try {
     const payload = await request.json().catch(() => ({}));
-    const { activationCode, organizationName, ownerEmail, ownerPassword, ownerFullName } = payload;
+    const { activationCode, organizationName, ownerEmail, ownerPassword, ownerFullName, siteName } = payload;
 
     if (!activationCode || typeof activationCode !== "string") {
       return errorResponse("activationCode is required.", 400, "INVALID_REQUEST");
@@ -74,6 +74,13 @@ serve(async (request: Request) => {
     }
     if (!ownerFullName || typeof ownerFullName !== "string" || ownerFullName.trim().length === 0) {
       return errorResponse("ownerFullName is required.", 400, "INVALID_REQUEST");
+    }
+    // § live UX review, user-directed - "a field to type your site
+    // name during activation, so reports never show a blank site."
+    // Required, same posture as organizationName - a brand-new org
+    // should never reach the dashboard with zero sites.
+    if (!siteName || typeof siteName !== "string" || siteName.trim().length === 0) {
+      return errorResponse("siteName is required.", 400, "INVALID_REQUEST");
     }
 
     const managementApiUrl = Deno.env.get("PROSM_MANAGEMENT_API_URL");
@@ -136,6 +143,7 @@ serve(async (request: Request) => {
       p_max_users: license.maxUsers,
       p_max_devices: license.maxDevices,
       p_expires_at: license.expiresAt,
+      p_site_name: siteName.trim(),
     });
 
     if (bootstrapError || !bootstrapResult?.success) {

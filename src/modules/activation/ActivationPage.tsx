@@ -36,6 +36,7 @@ export default function ActivationPage() {
 
   const [activationCode, setActivationCode] = useState("");
   const [organizationName, setOrganizationName] = useState("");
+  const [siteName, setSiteName] = useState("");
   const [ownerFullName, setOwnerFullName] = useState("");
   const [ownerEmail, setOwnerEmail] = useState("");
   const [ownerPassword, setOwnerPassword] = useState("");
@@ -61,6 +62,7 @@ export default function ActivationPage() {
       ownerEmail: ownerEmail.trim(),
       ownerPassword,
       ownerFullName: ownerFullName.trim(),
+      siteName: siteName.trim(),
     });
 
     if (!result.success) {
@@ -149,6 +151,15 @@ export default function ActivationPage() {
           onChange={(event) => setOrganizationName(event.target.value)}
           required
           disabled={submitting || success}
+        />
+        <Input
+          label={t("activation.siteNameLabel")}
+          name="siteName"
+          value={siteName}
+          onChange={(event) => setSiteName(event.target.value)}
+          required
+          disabled={submitting || success}
+          helperText={t("activation.siteNameHelper")}
         />
         <Input
           label={t("activation.ownerFullNameLabel")}

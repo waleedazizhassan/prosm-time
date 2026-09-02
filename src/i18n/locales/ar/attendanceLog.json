@@ -7,7 +7,8 @@
     "title": "الفترة",
     "fromLabel": "من",
     "toLabel": "إلى",
-    "sortByName": "ترتيب بالاسم"
+    "employeeLabel": "الموظف",
+    "allEmployees": "كل الموظفين"
   },
   "columns": {
     "employee": "الموظف",

@@ -12,6 +12,7 @@ export interface ActivationInput {
   ownerEmail: string;
   ownerPassword: string;
   ownerFullName: string;
+  siteName: string;
 }
 
 export interface ActivationResultData {

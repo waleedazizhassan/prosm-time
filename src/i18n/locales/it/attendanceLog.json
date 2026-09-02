@@ -7,7 +7,8 @@
     "title": "Periodo",
     "fromLabel": "Dal",
     "toLabel": "Al",
-    "sortByName": "Ordina per nome"
+    "employeeLabel": "Dipendente",
+    "allEmployees": "Tutti i dipendenti"
   },
   "columns": {
     "employee": "Dipendente",

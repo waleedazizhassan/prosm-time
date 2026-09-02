@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Camera, ArrowUpAZ, ArrowDownAZ } from "lucide-react";
+import { Camera } from "lucide-react";
 
 import ManagerRepository, { type TodayAttendanceRow } from "../../core/repositories/ManagerRepository";
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
@@ -9,12 +9,15 @@ import OrganizationRepository from "../../core/repositories/OrganizationReposito
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
 import Input from "../../components/common/Input";
+import Select from "../../components/common/Select";
 import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
 import { formatTimeOnly } from "../../core/utils/formatDate";
 import { buildAttendanceLogPdf } from "./attendanceLogPdf";
+
+const ALL_EMPLOYEES = "";
 
 function formatWorkedHours(clockInAt: string, clockOutAt: string | null): string {
   const endMs = clockOutAt ? new Date(clockOutAt).getTime() : Date.now();
@@ -50,7 +53,7 @@ export default function AttendanceLogPage() {
   const [rows, setRows] = useState<TodayAttendanceRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
-  const [nameSortAscending, setNameSortAscending] = useState(true);
+  const [employeeFilter, setEmployeeFilter] = useState(ALL_EMPLOYEES);
 
   const [evidenceModalTitle, setEvidenceModalTitle] = useState<string | null>(null);
   const [evidenceUrl, setEvidenceUrl] = useState<string | null>(null);
@@ -85,15 +88,27 @@ export default function AttendanceLogPage() {
     });
   }, []);
 
-  const sortedRows = useMemo(() => {
+  const employeeOptions = useMemo(() => {
     const collator = new Intl.Collator(i18n.language, { sensitivity: "base" });
-    return [...rows].sort((a, b) => collator.compare(a.userFullName, b.userFullName) * (nameSortAscending ? 1 : -1));
-  }, [rows, nameSortAscending, i18n.language]);
+    const names = Array.from(new Set(rows.map((row) => row.userFullName))).sort(collator.compare);
+    return [{ value: ALL_EMPLOYEES, label: t("filters.allEmployees") }, ...names.map((name) => ({ value: name, label: name }))];
+  }, [rows, i18n.language, t]);
+
+  useEffect(() => {
+    if (employeeFilter !== ALL_EMPLOYEES && !rows.some((row) => row.userFullName === employeeFilter)) {
+      setEmployeeFilter(ALL_EMPLOYEES);
+    }
+  }, [rows, employeeFilter]);
+
+  const filteredRows = useMemo(
+    () => (employeeFilter === ALL_EMPLOYEES ? rows : rows.filter((row) => row.userFullName === employeeFilter)),
+    [rows, employeeFilter],
+  );
 
   const handleExportPdf = async () => {
     setExportingPdf(true);
     try {
-      const doc = await buildAttendanceLogPdf(sortedRows, startDate, endDate, i18n.language, t, organizationLogoUrl);
+      const doc = await buildAttendanceLogPdf(filteredRows, startDate, endDate, i18n.language, t, organizationLogoUrl);
       doc.save(`attendance-record-${startDate}-${endDate}.pdf`);
     } finally {
       setExportingPdf(false);
@@ -171,34 +186,27 @@ export default function AttendanceLogPage() {
     { key: "workedHours", header: t("columns.workedHours"), render: (row) => formatWorkedHours(row.clockInAt, row.clockOutAt) },
   ];
 
-  const SortIcon = nameSortAscending ? ArrowUpAZ : ArrowDownAZ;
-
   return (
     <PageShell
       title={t("title")}
       subtitle={t("subtitle")}
       actions={
-        <Button variant="ghost" onClick={handleExportPdf} loading={exportingPdf} disabled={sortedRows.length === 0}>
+        <Button onClick={handleExportPdf} loading={exportingPdf} disabled={filteredRows.length === 0}>
           {t("exportPdfAction")}
         </Button>
       }
     >
       <Card title={t("filters.title")}>
-        <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap", alignItems: "flex-end" }}>
+        <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
           <Input label={t("filters.fromLabel")} name="attendanceLogFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />
           <Input label={t("filters.toLabel")} name="attendanceLogTo" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
-          <Button variant="ghost" onClick={() => setNameSortAscending((current) => !current)}>
-            <span style={{ display: "inline-flex", alignItems: "center", gap: "var(--space-1)" }}>
-              <SortIcon size={16} />
-              {t("filters.sortByName")}
-            </span>
-          </Button>
+          <Select label={t("filters.employeeLabel")} name="attendanceLogEmployee" value={employeeFilter} onChange={(event) => setEmployeeFilter(event.target.value)} options={employeeOptions} />
         </div>
       </Card>
 
       <Card>
         {loadError ? <p style={{ color: "var(--brand-danger)", fontSize: "var(--font-sm)" }}>{loadError}</p> : null}
-        <Table columns={columns} data={sortedRows} getRowId={(row) => row.sessionId} loading={loading} emptyMessage={t("empty")} />
+        <Table columns={columns} data={filteredRows} getRowId={(row) => row.sessionId} loading={loading} emptyMessage={t("empty")} />
       </Card>
 
       <Modal isOpen={Boolean(evidenceModalTitle)} onClose={closeEvidence} title={evidenceModalTitle ?? t("photoModalTitle")}>

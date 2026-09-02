@@ -7,7 +7,8 @@
     "title": "Period",
     "fromLabel": "From",
     "toLabel": "To",
-    "sortByName": "Sort by name"
+    "employeeLabel": "Employee",
+    "allEmployees": "All employees"
   },
   "columns": {
     "employee": "Employee",

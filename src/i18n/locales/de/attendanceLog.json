@@ -7,7 +7,8 @@
     "title": "Zeitraum",
     "fromLabel": "Von",
     "toLabel": "Bis",
-    "sortByName": "Nach Name sortieren"
+    "employeeLabel": "Mitarbeiter",
+    "allEmployees": "Alle Mitarbeiter"
   },
   "columns": {
     "employee": "Mitarbeiter",
