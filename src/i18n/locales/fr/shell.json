@@ -26,6 +26,7 @@
     "manager": "Console gestionnaire",
     "attendance": "Registre de présence",
     "timesheets": "Feuilles de temps",
+    "allowances": "Indemnités",
     "help": "Aide"
   },
   "sections": {

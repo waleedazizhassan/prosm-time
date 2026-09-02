@@ -1,0 +1,59 @@
+{
+  "title": "البدلات",
+  "subtitle": "بدل الإعاشة والمواصلات والسكن وغيرها جنب بيانات الحضور - على حسب اللي مسموح لك تشوفه.",
+  "loadError": "تعذر تحميل سجلات البدلات.",
+  "exportPdfAction": "تصدير PDF",
+  "empty": "لا توجد سجلات بدلات لهذه الفترة.",
+  "addError": "تعذر إضافة هذا السجل.",
+  "saveError": "تعذر حفظ هذا السجل.",
+  "submitError": "تعذر تقديم هذا السجل.",
+  "reviewError": "تعذر مراجعة هذا السجل.",
+  "filters": {
+    "title": "الفترة",
+    "fromLabel": "من",
+    "toLabel": "إلى",
+    "employeeLabel": "الموظف",
+    "allEmployees": "كل الموظفين"
+  },
+  "addEntry": {
+    "title": "إضافة سجل",
+    "hint": "التاريخ والموقع ووقت الحضور/الانصراف تتسحب تلقائيًا - أكمل قيم البدلات بعد الإضافة.",
+    "dateLabel": "التاريخ",
+    "action": "إضافة"
+  },
+  "columns": {
+    "employee": "الموظف",
+    "date": "التاريخ",
+    "day": "اليوم",
+    "site": "الموقع",
+    "clockIn": "وقت الحضور",
+    "clockOut": "وقت الانصراف",
+    "meal": "بدل إعاشة",
+    "expatriation": "بدل اغتراب",
+    "transportation": "بدل مواصلات",
+    "overtimeHours": "ساعات إضافية",
+    "overtimeDays": "أيام إضافية",
+    "housing": "بدل سكن",
+    "travel": "بدل سفر",
+    "other": "أخرى",
+    "status": "الحالة"
+  },
+  "status": {
+    "draft": "مسودة",
+    "submitted": "مقدَّم",
+    "approved": "معتمد",
+    "rejected": "مرفوض"
+  },
+  "detail": {
+    "saveAction": "حفظ",
+    "submitAction": "تقديم",
+    "approveAction": "اعتماد",
+    "rejectAction": "رفض",
+    "siteLine": "الموقع: {{site}}",
+    "clockInLine": "حضور {{time}}",
+    "clockOutLine": "انصراف {{time}}",
+    "overtimeLine": "الإضافي: {{hours}} ساعة ({{days}} يوم)",
+    "otherNoteLabel": "ملاحظة (لبند \"أخرى\")",
+    "reviewNotesLabel": "ملاحظات المراجعة (اختياري)"
+  }
+}

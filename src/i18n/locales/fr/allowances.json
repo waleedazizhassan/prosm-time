@@ -1,0 +1,59 @@
+{
+  "title": "Indemnités",
+  "subtitle": "Indemnités de repas, transport, logement et autres à côté de votre présence - limité à ce que vous êtes autorisé à voir.",
+  "loadError": "Impossible de charger les indemnités.",
+  "exportPdfAction": "Exporter en PDF",
+  "empty": "Aucune indemnité pour cette période.",
+  "addError": "Impossible d'ajouter cette entrée.",
+  "saveError": "Impossible d'enregistrer cette entrée.",
+  "submitError": "Impossible de soumettre cette entrée.",
+  "reviewError": "Impossible d'examiner cette entrée.",
+  "filters": {
+    "title": "Période",
+    "fromLabel": "Du",
+    "toLabel": "Au",
+    "employeeLabel": "Employé",
+    "allEmployees": "Tous les employés"
+  },
+  "addEntry": {
+    "title": "Ajouter une entrée",
+    "hint": "La date, le site et les heures de pointage sont importés automatiquement - complétez les montants après l'ajout.",
+    "dateLabel": "Date",
+    "action": "Ajouter"
+  },
+  "columns": {
+    "employee": "Employé",
+    "date": "Date",
+    "day": "Jour",
+    "site": "Site",
+    "clockIn": "Entrée",
+    "clockOut": "Sortie",
+    "meal": "Repas",
+    "expatriation": "Expatriation",
+    "transportation": "Transport",
+    "overtimeHours": "Heures sup. (h)",
+    "overtimeDays": "Heures sup. (jours)",
+    "housing": "Logement",
+    "travel": "Voyage",
+    "other": "Autre",
+    "status": "Statut"
+  },
+  "status": {
+    "draft": "Brouillon",
+    "submitted": "Soumis",
+    "approved": "Approuvé",
+    "rejected": "Rejeté"
+  },
+  "detail": {
+    "saveAction": "Enregistrer",
+    "submitAction": "Soumettre",
+    "approveAction": "Approuver",
+    "rejectAction": "Rejeter",
+    "siteLine": "Site : {{site}}",
+    "clockInLine": "Entrée {{time}}",
+    "clockOutLine": "Sortie {{time}}",
+    "overtimeLine": "Heures sup. : {{hours}} h ({{days}} j)",
+    "otherNoteLabel": "Note (pour « Autre »)",
+    "reviewNotesLabel": "Notes de révision (facultatif)"
+  }
+}

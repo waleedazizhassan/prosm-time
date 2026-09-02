@@ -1,0 +1,59 @@
+{
+  "title": "Indennità",
+  "subtitle": "Indennità di pasto, trasporto, alloggio e altro accanto alla tua presenza - limitato a ciò che sei autorizzato a vedere.",
+  "loadError": "Impossibile caricare le indennità.",
+  "exportPdfAction": "Esporta PDF",
+  "empty": "Nessuna indennità per questo periodo.",
+  "addError": "Impossibile aggiungere questa voce.",
+  "saveError": "Impossibile salvare questa voce.",
+  "submitError": "Impossibile inviare questa voce.",
+  "reviewError": "Impossibile esaminare questa voce.",
+  "filters": {
+    "title": "Periodo",
+    "fromLabel": "Dal",
+    "toLabel": "Al",
+    "employeeLabel": "Dipendente",
+    "allEmployees": "Tutti i dipendenti"
+  },
+  "addEntry": {
+    "title": "Aggiungi una voce",
+    "hint": "Data, sede e orari di entrata/uscita vengono importati automaticamente - completa gli importi delle indennità dopo l'aggiunta.",
+    "dateLabel": "Data",
+    "action": "Aggiungi"
+  },
+  "columns": {
+    "employee": "Dipendente",
+    "date": "Data",
+    "day": "Giorno",
+    "site": "Sede",
+    "clockIn": "Entrata",
+    "clockOut": "Uscita",
+    "meal": "Pasto",
+    "expatriation": "Indennità estero",
+    "transportation": "Trasporto",
+    "overtimeHours": "Straordinario (ore)",
+    "overtimeDays": "Straordinario (giorni)",
+    "housing": "Alloggio",
+    "travel": "Viaggio",
+    "other": "Altro",
+    "status": "Stato"
+  },
+  "status": {
+    "draft": "Bozza",
+    "submitted": "Inviata",
+    "approved": "Approvata",
+    "rejected": "Respinta"
+  },
+  "detail": {
+    "saveAction": "Salva",
+    "submitAction": "Invia",
+    "approveAction": "Approva",
+    "rejectAction": "Respingi",
+    "siteLine": "Sede: {{site}}",
+    "clockInLine": "Entrata {{time}}",
+    "clockOutLine": "Uscita {{time}}",
+    "overtimeLine": "Straordinario: {{hours}} ore ({{days}} giorni)",
+    "otherNoteLabel": "Nota (per \"Altro\")",
+    "reviewNotesLabel": "Note di revisione (facoltativo)"
+  }
+}

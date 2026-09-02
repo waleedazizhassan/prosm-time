@@ -1,0 +1,59 @@
+{
+  "title": "Zulagen",
+  "subtitle": "Verpflegungs-, Fahrt-, Wohn- und sonstige Zulagen neben Ihrer Anwesenheit - beschränkt auf das, was Sie sehen dürfen.",
+  "loadError": "Zulagen konnten nicht geladen werden.",
+  "exportPdfAction": "PDF exportieren",
+  "empty": "Keine Zulagen für diesen Zeitraum.",
+  "addError": "Dieser Eintrag konnte nicht hinzugefügt werden.",
+  "saveError": "Dieser Eintrag konnte nicht gespeichert werden.",
+  "submitError": "Dieser Eintrag konnte nicht eingereicht werden.",
+  "reviewError": "Dieser Eintrag konnte nicht geprüft werden.",
+  "filters": {
+    "title": "Zeitraum",
+    "fromLabel": "Von",
+    "toLabel": "Bis",
+    "employeeLabel": "Mitarbeiter",
+    "allEmployees": "Alle Mitarbeiter"
+  },
+  "addEntry": {
+    "title": "Eintrag hinzufügen",
+    "hint": "Datum, Standort und Kommen/Gehen werden automatisch übernommen - füllen Sie die Zulagenbeträge nach dem Hinzufügen aus.",
+    "dateLabel": "Datum",
+    "action": "Hinzufügen"
+  },
+  "columns": {
+    "employee": "Mitarbeiter",
+    "date": "Datum",
+    "day": "Tag",
+    "site": "Standort",
+    "clockIn": "Kommen",
+    "clockOut": "Gehen",
+    "meal": "Verpflegung",
+    "expatriation": "Auslandszulage",
+    "transportation": "Fahrtkosten",
+    "overtimeHours": "Überstunden (Std.)",
+    "overtimeDays": "Überstunden (Tage)",
+    "housing": "Wohnen",
+    "travel": "Reise",
+    "other": "Sonstiges",
+    "status": "Status"
+  },
+  "status": {
+    "draft": "Entwurf",
+    "submitted": "Eingereicht",
+    "approved": "Genehmigt",
+    "rejected": "Abgelehnt"
+  },
+  "detail": {
+    "saveAction": "Speichern",
+    "submitAction": "Einreichen",
+    "approveAction": "Genehmigen",
+    "rejectAction": "Ablehnen",
+    "siteLine": "Standort: {{site}}",
+    "clockInLine": "Kommen {{time}}",
+    "clockOutLine": "Gehen {{time}}",
+    "overtimeLine": "Überstunden: {{hours}} Std. ({{days}} Tage)",
+    "otherNoteLabel": "Notiz (für „Sonstiges“)",
+    "reviewNotesLabel": "Prüfnotizen (optional)"
+  }
+}

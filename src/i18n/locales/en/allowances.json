@@ -1,0 +1,59 @@
+{
+  "title": "Allowances",
+  "subtitle": "Meal, transportation, housing and other allowances alongside your attendance - scoped to what you're authorized to see.",
+  "loadError": "Unable to load allowance entries.",
+  "exportPdfAction": "Export PDF",
+  "empty": "No allowance entries for this period.",
+  "addError": "Unable to add this entry.",
+  "saveError": "Unable to save this entry.",
+  "submitError": "Unable to submit this entry.",
+  "reviewError": "Unable to review this entry.",
+  "filters": {
+    "title": "Period",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "employeeLabel": "Employee",
+    "allEmployees": "All employees"
+  },
+  "addEntry": {
+    "title": "Add an entry",
+    "hint": "Date, site, and clock-in/out are imported automatically - fill in the allowance amounts after adding.",
+    "dateLabel": "Date",
+    "action": "Add"
+  },
+  "columns": {
+    "employee": "Employee",
+    "date": "Date",
+    "day": "Day",
+    "site": "Site",
+    "clockIn": "Clock In",
+    "clockOut": "Clock Out",
+    "meal": "Meal",
+    "expatriation": "Expatriation",
+    "transportation": "Transportation",
+    "overtimeHours": "Overtime (hrs)",
+    "overtimeDays": "Overtime (days)",
+    "housing": "Housing",
+    "travel": "Travel",
+    "other": "Other",
+    "status": "Status"
+  },
+  "status": {
+    "draft": "Draft",
+    "submitted": "Submitted",
+    "approved": "Approved",
+    "rejected": "Rejected"
+  },
+  "detail": {
+    "saveAction": "Save",
+    "submitAction": "Submit",
+    "approveAction": "Approve",
+    "rejectAction": "Reject",
+    "siteLine": "Site: {{site}}",
+    "clockInLine": "In {{time}}",
+    "clockOutLine": "Out {{time}}",
+    "overtimeLine": "Overtime: {{hours}} hrs ({{days}} days)",
+    "otherNoteLabel": "Note (for \"Other\")",
+    "reviewNotesLabel": "Review notes (optional)"
+  }
+}

@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, HelpCircle, Clock } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, HelpCircle, Clock, Wallet } from "lucide-react";
 
 export type NavSection = "organization" | "help";
 
@@ -48,6 +48,11 @@ export const NAV_ITEMS: NavItem[] = [
   // page itself further gates its Generate/Approve/Correction-review
   // sections on timesheets.generate/timesheets.approve/attendance.correct.
   { id: "timesheets", labelKey: "items.timesheets", path: "/timesheets", icon: FileText, requiredPermission: null, section: "organization" },
+  // § approved 2026-09-02 plan (Feature 2) - self-access to one's own
+  // allowance entries needs no special permission, same reasoning as
+  // Timesheets above; allowance_entries' own RLS is what actually
+  // scopes what an approver sees.
+  { id: "allowances", labelKey: "items.allowances", path: "/allowances", icon: Wallet, requiredPermission: null, section: "organization" },
   { id: "help", labelKey: "items.help", path: "/help", icon: HelpCircle, requiredPermission: null, section: "help" },
 ];
 

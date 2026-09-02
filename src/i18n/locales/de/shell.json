@@ -26,6 +26,7 @@
     "manager": "Manager-Konsole",
     "attendance": "Anwesenheitsprotokoll",
     "timesheets": "Stundenzettel",
+    "allowances": "Zulagen",
     "help": "Hilfe"
   },
   "sections": {

@@ -126,6 +126,21 @@ enabled = true
 verify_jwt = true
 entrypoint = "./functions/review-timesheet-correction/index.ts"
 
+[functions.upsert-allowance-entry]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/upsert-allowance-entry/index.ts"
+
+[functions.submit-allowance-entry]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/submit-allowance-entry/index.ts"
+
+[functions.approve-allowance-entry]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/approve-allowance-entry/index.ts"
+
 [functions.kiosk-clock-in]
 enabled = true
 verify_jwt = true
