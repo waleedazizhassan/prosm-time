@@ -53,3 +53,22 @@
     display: none;
   }
 }
+
+/* § live UX review, user-directed - "the version number on this page
+   belongs at the bottom, not the header" (AuthHeader gets
+   showVersion={false} here for exactly that reason). Centered at the
+   page's own bottom edge on both breakpoints - .page is always
+   position: relative and full-height/width, mobile included. */
+.versionFooter {
+  position: absolute;
+  z-index: 1;
+  bottom: var(--space-4);
+  /* physical `left`, not a logical inset - centering via translateX
+     is itself a physical transform, so pairing it with a logical
+     inset would mis-center under dir="rtl" */
+  left: 50%;
+  transform: translateX(-50%);
+
+  color: rgba(226, 232, 240, 0.5);
+  font-size: var(--font-xs);
+}

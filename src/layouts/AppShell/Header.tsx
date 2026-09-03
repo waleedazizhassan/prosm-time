@@ -45,12 +45,21 @@ export default function Header() {
         <HeaderNavControls />
       </div>
 
-      <div className={styles.centerSection} />
+      {/* § live UX review, user-directed - "the media center [Radio +
+          Weather], like PROSM Platform, centered in the header,
+          visible on both mobile and desktop." Moved out of the right
+          section (where they competed for space with the
+          Organization card/greeting/notifications, both of which
+          already hide at narrower widths) into this grid's own middle
+          `1fr` column - reserved for exactly this since the header was
+          first built, previously left empty. */}
+      <div className={styles.centerSection}>
+        <HeaderRadio />
+        <WeatherMiniPanel />
+      </div>
 
       <div className={styles.rightSection}>
         <HeaderOrganizationCard />
-        <HeaderRadio />
-        <WeatherMiniPanel />
         <HeaderGreeting />
         <NotificationBell />
       </div>

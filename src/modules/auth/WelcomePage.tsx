@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import AuthHeader from "../../components/common/AuthHeader";
 import Button from "../../components/common/Button";
 import authPhoto from "../../assets/splash-photo.png";
+import { APP_VERSION } from "../../core/appVersion";
 import pageStyles from "../../components/common/AuthLayout.module.css";
 import styles from "./WelcomePage.module.css";
 
@@ -25,7 +26,7 @@ export default function WelcomePage() {
 
   return (
     <div className={pageStyles.page} style={{ "--auth-photo": `url(${authPhoto})` } as CSSProperties}>
-      <AuthHeader />
+      <AuthHeader showVersion={false} />
 
       <div className={styles.mobileCard}>
         <div className={styles.photoBand} style={{ backgroundImage: `url(${authPhoto})` }} />
@@ -41,6 +42,8 @@ export default function WelcomePage() {
           </button>
         </div>
       </div>
+
+      <span className={styles.versionFooter}>{t("common:versionLabel", { version: APP_VERSION })}</span>
     </div>
   );
 }

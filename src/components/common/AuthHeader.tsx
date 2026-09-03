@@ -19,7 +19,12 @@ import styles from "./AuthLayout.module.css";
 // reveals both addresses (still real mailto links, so a second click
 // on either one does open a mail client) instead of firing mailto:
 // on the header button itself.
-export default function AuthHeader() {
+//
+// § live UX review, user-directed - "the version number on the
+// Welcome page belongs at the bottom, not the header" - WelcomePage
+// renders its own bottom-positioned version text instead and passes
+// showVersion={false} here; every other page keeps it in the header.
+export default function AuthHeader({ showVersion = true }: { showVersion?: boolean }) {
   const { t, i18n } = useTranslation("auth");
   const location = useLocation();
   const [contactOpen, setContactOpen] = useState(false);
@@ -92,7 +97,7 @@ export default function AuthHeader() {
           ) : null}
         </div>
 
-        <span className={styles.headerVersion}>{t("common:versionLabel", { version: APP_VERSION })}</span>
+        {showVersion ? <span className={styles.headerVersion}>{t("common:versionLabel", { version: APP_VERSION })}</span> : null}
       </div>
     </header>
   );
