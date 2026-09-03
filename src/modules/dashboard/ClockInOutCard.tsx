@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { MapPin } from "lucide-react";
+import { MapPin, Siren } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import AttendanceRepository, { type AttendanceSession } from "../../core/repositories/AttendanceRepository";
@@ -24,6 +24,7 @@ import Button from "../../components/common/Button";
 import StatusBadge from "../../components/common/StatusBadge";
 import CameraCaptureModal from "../../components/common/CameraCaptureModal";
 import ErrorText from "../../components/common/ErrorText";
+import styles from "./ClockInOutCard.module.css";
 
 const PRESENCE_SAMPLE_INTERVAL_MS = 5 * 60 * 1000;
 
@@ -645,7 +646,8 @@ export default function ClockInOutCard() {
               {sosSent ? (
                 <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("attendance.sosSent")}</p>
               ) : (
-                <Button variant="danger" onClick={handleSos} loading={sosSubmitting}>
+                <Button variant="danger" className={styles.sosButton} onClick={handleSos} loading={sosSubmitting}>
+                  <Siren size={18} />
                   {t("attendance.sosAction")}
                 </Button>
               )}

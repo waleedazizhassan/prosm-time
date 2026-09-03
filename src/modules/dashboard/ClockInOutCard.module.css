@@ -1,0 +1,39 @@
+/* § live UX review, user-directed - "this button's shape looks bad" -
+   the SOS/Emergency action was visually identical to every other
+   danger button (deactivate employee, remove employee, etc.), which
+   reads as just another destructive action rather than the one
+   life-safety control in this app. Built on the existing Button
+   component (variant="danger" + this className), not a one-off. */
+.sosButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  padding-inline: var(--space-6);
+  min-height: 52px;
+
+  font-size: var(--font-md);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.02em;
+
+  box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.55);
+  animation: sosPulse 2s ease-out infinite;
+}
+
+@keyframes sosPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(220, 38, 38, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sosButton {
+    animation: none;
+  }
+}
