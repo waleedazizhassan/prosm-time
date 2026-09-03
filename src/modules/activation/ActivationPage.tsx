@@ -46,6 +46,7 @@ export default function ActivationPage() {
   const [ownerPassword, setOwnerPassword] = useState("");
   const [confirmOwnerPassword, setConfirmOwnerPassword] = useState("");
   const [logoFile, setLogoFile] = useState<File | null>(null);
+  const [agreedToEmailPolicy, setAgreedToEmailPolicy] = useState(false);
 
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -228,10 +229,24 @@ export default function ActivationPage() {
           autoComplete="new-password"
         />
 
+        <p className={styles.consentNotice}>{t("auth:activation.emailPolicyNotice")}</p>
+        <div className={styles.consentCheckboxRow}>
+          <input
+            type="checkbox"
+            id="agreedToEmailPolicy"
+            checked={agreedToEmailPolicy}
+            onChange={(event) => setAgreedToEmailPolicy(event.target.checked)}
+            disabled={submitting || success}
+          />
+          <label htmlFor="agreedToEmailPolicy" className={styles.consentCheckboxLabel}>
+            {t("auth:activation.emailPolicyCheckboxLabel")}
+          </label>
+        </div>
+
         {error ? <p className={styles.errorText}>{error}</p> : null}
         {success ? <p className={styles.successText}>{t("auth:activation.successMessage")}</p> : null}
 
-        <Button type="submit" fullWidth loading={submitting} disabled={success}>
+        <Button type="submit" fullWidth loading={submitting} disabled={success || !agreedToEmailPolicy}>
           {t("auth:activation.submitAction")}
         </Button>
       </form>
