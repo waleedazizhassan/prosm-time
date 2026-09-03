@@ -12,6 +12,12 @@ export interface OrgMember {
   fullName: string;
   status: string;
   isOwner: boolean;
+  // § live UX review, user-directed - "delete an employee from the
+  // application, Owner-only, requires a reason." A deactivated
+  // employee can no longer sign in (current_prosm_time_user_id() stops
+  // resolving them, 20260903150000) but their historical data is kept
+  // - reversible by an Owner, unlike deleteEmployeeData's GDPR purge.
+  isActive: boolean;
   roleKey: string;
   roleName: string;
   createdAt: string;
@@ -45,6 +51,7 @@ interface OrgMemberRow {
   full_name: string;
   status: string;
   is_owner: boolean;
+  is_active: boolean;
   created_at: string;
   roles: { role_key: string; name: string } | { role_key: string; name: string }[] | null;
 }
@@ -57,6 +64,7 @@ function mapMemberRow(row: OrgMemberRow): OrgMember {
     fullName: row.full_name,
     status: row.status,
     isOwner: row.is_owner,
+    isActive: row.is_active,
     roleKey: role?.role_key ?? "",
     roleName: role?.name ?? "",
     createdAt: row.created_at,
@@ -69,6 +77,7 @@ interface VisibleMemberRow {
   full_name: string;
   status: string;
   is_owner: boolean;
+  is_active: boolean;
   created_at: string;
   role_key: string | null;
   role_name: string | null;
@@ -81,6 +90,7 @@ function mapVisibleMemberRow(row: VisibleMemberRow): OrgMember {
     fullName: row.full_name,
     status: row.status,
     isOwner: row.is_owner,
+    isActive: row.is_active,
     roleKey: row.role_key ?? "",
     roleName: row.role_name ?? "",
     createdAt: row.created_at,
@@ -122,7 +132,7 @@ class EmployeeRepository {
     try {
       const { data, error } = await this.client
         .from("users")
-        .select("id, email, full_name, status, is_owner, created_at, roles(role_key, name)")
+        .select("id, email, full_name, status, is_owner, is_active, created_at, roles(role_key, name)")
         .eq("id", userId)
         .maybeSingle();
 
@@ -165,6 +175,28 @@ class EmployeeRepository {
       }
       if (data?.success === false) return createError(data?.error?.message ?? "Unable to export this employee's data.");
       return createSuccess(data.data as Record<string, unknown>);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Employee service unavailable.");
+    }
+  }
+
+  async deactivateEmployee(userId: string, reason: string): Promise<ServiceResult> {
+    try {
+      const { data, error } = await this.client.rpc("deactivate_prosm_time_employee", { p_user_id: userId, p_reason: reason });
+      if (error) return createError(error.message);
+      if (data?.success === false) return createError("Unable to deactivate this employee.");
+      return createSuccess();
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Employee service unavailable.");
+    }
+  }
+
+  async reactivateEmployee(userId: string): Promise<ServiceResult> {
+    try {
+      const { data, error } = await this.client.rpc("reactivate_prosm_time_employee", { p_user_id: userId });
+      if (error) return createError(error.message);
+      if (data?.success === false) return createError("Unable to reactivate this employee.");
+      return createSuccess();
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Employee service unavailable.");
     }

@@ -37,7 +37,7 @@ interface PendingChange {
 export default function PersonDetailPage() {
   const { t } = useTranslation("people");
   const { userId } = useParams<{ userId: string }>();
-  const { hasPermission } = useAuth();
+  const { hasPermission, profile } = useAuth();
 
   const [member, setMember] = useState<OrgMember | null>(null);
   const [catalog, setCatalog] = useState<Permission[]>([]);
@@ -64,8 +64,20 @@ export default function PersonDetailPage() {
   const [deleteSubmitting, setDeleteSubmitting] = useState(false);
   const [deleteError, setDeleteError] = useState("");
 
+  const [deactivateModalOpen, setDeactivateModalOpen] = useState(false);
+  const [deactivateReason, setDeactivateReason] = useState("");
+  const [deactivateSubmitting, setDeactivateSubmitting] = useState(false);
+  const [deactivateError, setDeactivateError] = useState("");
+  const [reactivateSubmitting, setReactivateSubmitting] = useState(false);
+  const [reactivateError, setReactivateError] = useState("");
+
   const canManagePermissions = hasPermission("permissions.assign");
   const canManageDevices = hasPermission("employees.manage_accounts");
+  // § live UX review, user-directed - "requires a reason, and is
+  // Owner-only authority" - deliberately not a permission flag like
+  // every other action on this page, the user was explicit this one
+  // is Owner-only.
+  const canDeactivate = Boolean(profile?.isOwner);
 
   const load = useCallback(async () => {
     if (!userId) return;
@@ -159,6 +171,34 @@ export default function PersonDetailPage() {
     setKioskPinSuccess(true);
   };
 
+  const handleDeactivate = async () => {
+    if (!member || !deactivateReason.trim()) return;
+    setDeactivateSubmitting(true);
+    setDeactivateError("");
+    const result = await EmployeeRepository.deactivateEmployee(member.id, deactivateReason.trim());
+    setDeactivateSubmitting(false);
+    if (!result.success) {
+      setDeactivateError(humanizeBackendError(result.message, t) ?? t("detail.deactivateError"));
+      return;
+    }
+    setDeactivateModalOpen(false);
+    setDeactivateReason("");
+    await load();
+  };
+
+  const handleReactivate = async () => {
+    if (!member) return;
+    setReactivateSubmitting(true);
+    setReactivateError("");
+    const result = await EmployeeRepository.reactivateEmployee(member.id);
+    setReactivateSubmitting(false);
+    if (!result.success) {
+      setReactivateError(humanizeBackendError(result.message, t) ?? t("detail.reactivateError"));
+      return;
+    }
+    await load();
+  };
+
   const handleDeleteData = async () => {
     if (!member || !deleteReason.trim()) return;
     setDeleteSubmitting(true);
@@ -194,6 +234,27 @@ export default function PersonDetailPage() {
       <Link to="/people" style={{ color: "var(--text-link)", fontSize: "var(--font-sm)" }}>
         {t("detail.backToList")}
       </Link>
+
+      {!member.isActive ? (
+        <Card title={t("detail.accessTitle")}>
+          <StatusBadge status="deactivated">{t("detail.deactivatedBadge")}</StatusBadge>
+          <ErrorText>{reactivateError}</ErrorText>
+          {canDeactivate ? (
+            <div style={{ display: "flex", gap: "var(--space-2)", marginTop: "var(--space-3)" }}>
+              <Button onClick={handleReactivate} loading={reactivateSubmitting}>
+                {t("detail.reactivateAction")}
+              </Button>
+            </div>
+          ) : null}
+        </Card>
+      ) : canDeactivate && !member.isOwner ? (
+        <Card title={t("detail.accessTitle")}>
+          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.deactivateHint")}</p>
+          <Button variant="danger" onClick={() => setDeactivateModalOpen(true)}>
+            {t("detail.deactivateAction")}
+          </Button>
+        </Card>
+      ) : null}
 
       {canManagePermissions ? (
         <Card title={t("detail.permissionsTitle")}>
@@ -291,6 +352,21 @@ export default function PersonDetailPage() {
       ) : null}
 
       <AdminAttendanceCard subjectUserId={member.id} subjectFullName={member.fullName} />
+
+      <Modal
+        isOpen={deactivateModalOpen}
+        onClose={() => setDeactivateModalOpen(false)}
+        title={t("detail.deactivateAction")}
+        footer={
+          <Button variant="danger" onClick={handleDeactivate} loading={deactivateSubmitting} disabled={!deactivateReason.trim()}>
+            {t("detail.confirmDeactivateAction")}
+          </Button>
+        }
+      >
+        <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("detail.deactivateWarning")}</p>
+        <ErrorText>{deactivateError}</ErrorText>
+        <Textarea label={t("detail.reasonLabel")} name="deactivateReason" value={deactivateReason} onChange={(event) => setDeactivateReason(event.target.value)} disabled={deactivateSubmitting} required />
+      </Modal>
 
       <Modal
         isOpen={deleteModalOpen}

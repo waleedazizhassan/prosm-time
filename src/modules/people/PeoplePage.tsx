@@ -66,7 +66,12 @@ export default function PeoplePage() {
     {
       key: "status",
       header: t("columns.status"),
-      render: (member) => <StatusBadge status={member.status}>{t(`status.${member.status}`, { defaultValue: member.status })}</StatusBadge>,
+      render: (member) =>
+        member.isActive ? (
+          <StatusBadge status={member.status}>{t(`status.${member.status}`, { defaultValue: member.status })}</StatusBadge>
+        ) : (
+          <StatusBadge status="deactivated">{t("detail.deactivatedBadge")}</StatusBadge>
+        ),
     },
   ];
 
