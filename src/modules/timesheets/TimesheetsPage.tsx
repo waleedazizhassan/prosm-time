@@ -10,6 +10,7 @@ import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import { formatMinutes, buildTimesheetPdf } from "./timesheetPdf";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
+import savePdfDocument from "../../core/utils/savePdfDocument";
 
 import PageShell from "../../components/common/PageShell";
 import ErrorText from "../../components/common/ErrorText";
@@ -210,7 +211,7 @@ export default function TimesheetsPage() {
     }
     try {
       const doc = await buildTimesheetPdf(result.data, i18n.language, t, organizationLogoUrl);
-      doc.save(`timesheet-${detailTimesheet.userFullName.replace(/\s+/g, "-")}-${detailTimesheet.periodStart}.pdf`);
+      await savePdfDocument(doc, `timesheet-${detailTimesheet.userFullName.replace(/\s+/g, "-")}-${detailTimesheet.periodStart}.pdf`);
     } finally {
       setExportingPdf(false);
     }

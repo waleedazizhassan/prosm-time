@@ -6,6 +6,7 @@ import ManagerRepository, { type TodayAttendanceRow, type AttendanceEventLocatio
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
+import savePdfDocument from "../../core/utils/savePdfDocument";
 import ErrorText from "../../components/common/ErrorText";
 
 import PageShell from "../../components/common/PageShell";
@@ -154,7 +155,7 @@ export default function AttendanceLogPage() {
     setExportingPdf(true);
     try {
       const doc = await buildAttendanceLogPdf(filteredRows, startDate, endDate, i18n.language, t, organizationLogoUrl);
-      doc.save(`attendance-record-${startDate}-${endDate}.pdf`);
+      await savePdfDocument(doc, `attendance-record-${startDate}-${endDate}.pdf`);
     } finally {
       setExportingPdf(false);
     }

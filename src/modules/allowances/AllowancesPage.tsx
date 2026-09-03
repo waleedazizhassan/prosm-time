@@ -5,6 +5,7 @@ import { useAuth } from "../../core/context/AuthContext";
 import AllowanceRepository, { type AllowanceEntry, type AllowanceEntryInput } from "../../core/repositories/AllowanceRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
+import savePdfDocument from "../../core/utils/savePdfDocument";
 import ErrorText from "../../components/common/ErrorText";
 
 import PageShell from "../../components/common/PageShell";
@@ -215,7 +216,7 @@ export default function AllowancesPage() {
     setExportingPdf(true);
     try {
       const doc = await buildAllowancesPdf(filteredEntries, startDate, endDate, i18n.language, t, organizationLogoUrl);
-      doc.save(`allowances-${startDate}-${endDate}.pdf`);
+      await savePdfDocument(doc, `allowances-${startDate}-${endDate}.pdf`);
     } finally {
       setExportingPdf(false);
     }

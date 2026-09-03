@@ -7,6 +7,8 @@ import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import { formatMinutes, buildTimesheetPdf } from "./timesheetPdf";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
+import savePdfDocument from "../../core/utils/savePdfDocument";
+import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
@@ -54,15 +56,7 @@ function buildCsv(pack: EvidencePack, languageCode: string): string {
 }
 
 function downloadCsv(filename: string, content: string) {
-  const blob = new Blob([content], { type: "text/csv;charset=utf-8;" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
+  saveGeneratedFile(filename, new Blob([content], { type: "text/csv;charset=utf-8;" }));
 }
 
 // PROSM Time WP-17/§22 - "Monthly Evidence Pack." Real, functioning
@@ -115,7 +109,7 @@ export default function TimesheetReportPage() {
     setExportingPdf(true);
     try {
       const doc = await buildTimesheetPdf(pack, i18n.language, t, organizationLogoUrl);
-      doc.save(`timesheet-${pack.employee.fullName.replace(/\s+/g, "-")}-${pack.timesheet.periodStart}.pdf`);
+      await savePdfDocument(doc, `timesheet-${pack.employee.fullName.replace(/\s+/g, "-")}-${pack.timesheet.periodStart}.pdf`);
     } finally {
       setExportingPdf(false);
     }
