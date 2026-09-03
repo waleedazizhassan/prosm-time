@@ -79,6 +79,11 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
   const [assignments, setAssignments] = useState<SiteAssignment[]>([]);
   const [exemptionSavingUserId, setExemptionSavingUserId] = useState<string | null>(null);
   const [exemptionError, setExemptionError] = useState("");
+  // § live UX review, user-directed correction - a per-employee row
+  // with its own toggle doesn't scale to a site with dozens/hundreds
+  // of assignments; a dropdown-to-add + a removable list of the
+  // already-exempt employees stays usable at any size.
+  const [employeeToExempt, setEmployeeToExempt] = useState("");
 
   useEffect(() => {
     if (!isEditing || !site) return;
@@ -98,6 +103,17 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
       return;
     }
     setAssignments((current) => current.map((row) => (row.userId === assignment.userId ? { ...row, isExemptFromRestrictions: isExempt } : row)));
+  };
+
+  const exemptAssignments = assignments.filter((assignment) => assignment.isExemptFromRestrictions);
+  const nonExemptAssignments = assignments.filter((assignment) => !assignment.isExemptFromRestrictions);
+
+  const handleAddExemption = async () => {
+    if (!employeeToExempt) return;
+    const assignment = assignments.find((row) => row.userId === employeeToExempt);
+    if (!assignment) return;
+    await handleToggleExemption(assignment, true);
+    setEmployeeToExempt("");
   };
 
   const handleUseCurrentLocation = async () => {
@@ -329,17 +345,46 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
         <div style={{ margin: "var(--space-3) 0" }}>
           <h3 style={{ fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)", margin: "0 0 var(--space-1)" }}>{t("form.exemptEmployeesTitle")}</h3>
           <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("form.exemptEmployeesHint")}</p>
-          {assignments.map((assignment) => (
-            <div key={assignment.id} style={toggleRowStyle}>
-              <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{assignment.userFullName}</span>
-              <Toggle
-                checked={assignment.isExemptFromRestrictions}
-                onChange={(checked) => handleToggleExemption(assignment, checked)}
-                disabled={exemptionSavingUserId === assignment.userId}
-                label={t("form.exemptEmployeesTitle") + " - " + assignment.userFullName}
-              />
+
+          {nonExemptAssignments.length > 0 ? (
+            <div style={{ display: "flex", gap: "var(--space-2)", alignItems: "flex-end" }}>
+              <div style={{ flex: 1 }}>
+                <Select
+                  label={t("form.exemptEmployeesAddLabel")}
+                  name="employeeToExempt"
+                  value={employeeToExempt}
+                  onChange={(event) => setEmployeeToExempt(event.target.value)}
+                  disabled={exemptionSavingUserId !== null}
+                  options={[{ value: "", label: t("form.exemptEmployeesSelectPlaceholder") }, ...nonExemptAssignments.map((assignment) => ({ value: assignment.userId, label: assignment.userFullName }))]}
+                />
+              </div>
+              <Button type="button" variant="ghost" size="sm" onClick={handleAddExemption} disabled={!employeeToExempt || exemptionSavingUserId !== null} style={{ marginBottom: "var(--space-4)" }}>
+                {t("form.exemptEmployeesAddAction")}
+              </Button>
             </div>
-          ))}
+          ) : null}
+
+          {exemptAssignments.length > 0 ? (
+            <ul style={{ listStyle: "none", margin: "var(--space-2) 0 0", padding: 0, display: "flex", flexDirection: "column", gap: "var(--space-1)" }}>
+              {exemptAssignments.map((assignment) => (
+                <li key={assignment.id} style={toggleRowStyle}>
+                  <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{assignment.userFullName}</span>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => handleToggleExemption(assignment, false)}
+                    disabled={exemptionSavingUserId === assignment.userId}
+                  >
+                    {t("form.exemptEmployeesRemoveAction")}
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p style={{ margin: "var(--space-2) 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("form.exemptEmployeesEmpty")}</p>
+          )}
+
           <ErrorText>{exemptionError}</ErrorText>
         </div>
       ) : null}
