@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 
 import { useAuth } from "../../core/context/AuthContext";
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
@@ -38,6 +38,7 @@ export default function PersonDetailPage() {
   const { t } = useTranslation("people");
   const { userId } = useParams<{ userId: string }>();
   const { hasPermission, profile } = useAuth();
+  const navigate = useNavigate();
 
   const [member, setMember] = useState<OrgMember | null>(null);
   const [catalog, setCatalog] = useState<Permission[]>([]);
@@ -70,6 +71,11 @@ export default function PersonDetailPage() {
   const [deactivateError, setDeactivateError] = useState("");
   const [reactivateSubmitting, setReactivateSubmitting] = useState(false);
   const [reactivateError, setReactivateError] = useState("");
+
+  const [removeModalOpen, setRemoveModalOpen] = useState(false);
+  const [removeReason, setRemoveReason] = useState("");
+  const [removeSubmitting, setRemoveSubmitting] = useState(false);
+  const [removeError, setRemoveError] = useState("");
 
   const canManagePermissions = hasPermission("permissions.assign");
   const canManageDevices = hasPermission("employees.manage_accounts");
@@ -199,6 +205,20 @@ export default function PersonDetailPage() {
     await load();
   };
 
+  const handleRemove = async () => {
+    if (!member || !removeReason.trim()) return;
+    setRemoveSubmitting(true);
+    setRemoveError("");
+    const result = await EmployeeRepository.removeEmployee(member.id, removeReason.trim());
+    setRemoveSubmitting(false);
+    if (!result.success) {
+      setRemoveError(humanizeBackendError(result.message, t) ?? t("detail.removeError"));
+      return;
+    }
+    // The employee's row no longer exists - nothing left to show here.
+    navigate("/people", { replace: true });
+  };
+
   const handleDeleteData = async () => {
     if (!member || !deleteReason.trim()) return;
     setDeleteSubmitting(true);
@@ -252,6 +272,21 @@ export default function PersonDetailPage() {
           <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.deactivateHint")}</p>
           <Button variant="danger" onClick={() => setDeactivateModalOpen(true)}>
             {t("detail.deactivateAction")}
+          </Button>
+        </Card>
+      ) : null}
+
+      {/* § live UX review, user-directed correction - "I asked for a
+          button to remove an employee from the application, not just
+          deactivate them." Permanent (users row + their real sign-in
+          account both deleted) - available regardless of active/
+          deactivated state, deliberately separate from the reversible
+          deactivate action above. */}
+      {canDeactivate && !member.isOwner ? (
+        <Card title={t("detail.removeTitle")}>
+          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.removeHint")}</p>
+          <Button variant="danger" onClick={() => setRemoveModalOpen(true)}>
+            {t("detail.removeAction")}
           </Button>
         </Card>
       ) : null}
@@ -366,6 +401,21 @@ export default function PersonDetailPage() {
         <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("detail.deactivateWarning")}</p>
         <ErrorText>{deactivateError}</ErrorText>
         <Textarea label={t("detail.reasonLabel")} name="deactivateReason" value={deactivateReason} onChange={(event) => setDeactivateReason(event.target.value)} disabled={deactivateSubmitting} required />
+      </Modal>
+
+      <Modal
+        isOpen={removeModalOpen}
+        onClose={() => setRemoveModalOpen(false)}
+        title={t("detail.removeAction")}
+        footer={
+          <Button variant="danger" onClick={handleRemove} loading={removeSubmitting} disabled={!removeReason.trim()}>
+            {t("detail.confirmRemoveAction")}
+          </Button>
+        }
+      >
+        <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("detail.removeWarning")}</p>
+        <ErrorText>{removeError}</ErrorText>
+        <Textarea label={t("detail.reasonLabel")} name="removeReason" value={removeReason} onChange={(event) => setRemoveReason(event.target.value)} disabled={removeSubmitting} required />
       </Modal>
 
       <Modal

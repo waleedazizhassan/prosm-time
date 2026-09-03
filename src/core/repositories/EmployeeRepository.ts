@@ -202,6 +202,25 @@ class EmployeeRepository {
     }
   }
 
+  // § live UX review, user-directed correction - "I asked for a button
+  // to remove an employee from the application - only deactivation got
+  // built." This is the real, permanent removal (users row + their
+  // Supabase Auth account both deleted, Owner-only) - deactivateEmployee
+  // above stays the reversible, history-preserving option.
+  async removeEmployee(userId: string, reason: string): Promise<ServiceResult> {
+    try {
+      const { data, error } = await this.client.functions.invoke("remove-employee", { body: { userId, reason } });
+      if (error) {
+        const errorBody = await error.context?.json?.().catch(() => null);
+        return createError(errorBody?.error?.message ?? error.message ?? "Unable to remove this employee.");
+      }
+      if (data?.success === false) return createError(data?.error?.message ?? "Unable to remove this employee.");
+      return createSuccess();
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Employee service unavailable.");
+    }
+  }
+
   async deleteEmployeeData(userId: string, reason: string): Promise<ServiceResult> {
     try {
       const { data, error } = await this.client.functions.invoke("delete-employee-data", { body: { userId, reason } });
