@@ -132,9 +132,13 @@ export default function AdminOverviewCard() {
       <div className={styles.grid}>
         {kpis.map((kpi) => (
           <button key={kpi.key} type="button" className={styles.tile} onClick={() => setDrilldown(kpi.key)}>
-            <kpi.icon size={16} className={styles.tileIcon} />
-            <span className={styles.tileValue}>{kpi.value}</span>
-            <span className={styles.tileLabel}>{kpi.label}</span>
+            <span className={styles.tileIconWrap}>
+              <kpi.icon size={26} className={styles.tileIcon} />
+            </span>
+            <span className={styles.tileContent}>
+              <span className={styles.tileValue}>{kpi.value}</span>
+              <span className={styles.tileLabel}>{kpi.label}</span>
+            </span>
           </button>
         ))}
       </div>

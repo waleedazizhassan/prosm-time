@@ -40,14 +40,26 @@
    clickable and show their info." A real <button>, not a styled div -
    keyboard/focus-visible/hover affordance included, same reset
    pattern as every other icon-button in this shell. */
+/* § live UX review, user-directed - "bigger icon, centered on the
+   card's [physical] left; the number facing it, centered on the
+   [physical] right; shorter card." `direction: ltr` pins that icon-
+   left/number-right layout to the true physical sides regardless of
+   the page's own language direction - the same physical-positioning
+   need this session already solved once (AuthLayout's login card,
+   `justify-content: left`), here needing actual item order rather
+   than just content alignment, so a base-direction override is the
+   right tool. Safe for the label's own Arabic text: an isolated short
+   phrase still shapes/reads correctly per the Unicode Bidi Algorithm
+   regardless of the container's base direction. */
 .tile {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
+  direction: ltr;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
 
   width: 100%;
-  padding: var(--space-3);
+  padding: var(--space-2) var(--space-4);
 
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
@@ -55,7 +67,6 @@
   background: var(--surface-hover);
   cursor: pointer;
   font-family: inherit;
-  text-align: start;
 
   transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
 }
@@ -71,9 +82,30 @@
   outline-offset: 2px;
 }
 
+.tileIconWrap {
+  flex-shrink: 0;
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--brand-primary-subtle-border);
+  border-radius: 50%;
+  background: var(--brand-primary-subtle);
+}
+
 .tileIcon {
   color: var(--brand-primary);
-  margin-bottom: var(--space-1);
+}
+
+.tileContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
 }
 
 .tileValue {
@@ -86,6 +118,7 @@
 .tileLabel {
   font-size: var(--font-xs);
   color: var(--text-secondary);
+  text-align: end;
 }
 
 @media (max-width: 640px) {
