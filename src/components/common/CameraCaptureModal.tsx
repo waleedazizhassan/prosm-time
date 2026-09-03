@@ -78,7 +78,11 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
       stopStream();
       setCapturedDataUrl(null);
       setError("");
-      setFacingMode("environment");
+      // § real bug, live-tested: this reset still targeted the OLD
+      // default ("environment") after the default was changed to
+      // "user" - so the very first close (any clock-in/out) flipped
+      // it to the back camera and it stayed there from then on.
+      setFacingMode("user");
       return undefined;
     }
 
