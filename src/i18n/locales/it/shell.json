@@ -10,6 +10,8 @@
   "expandSidebar": "Espandi barra laterale",
   "closeSidebar": "Chiudi il menu",
   "openUserMenu": "Apri menu utente",
+  "changeAvatarAction": "Cambia immagine del profilo",
+  "avatarUploadError": "Impossibile caricare l'immagine del profilo. Riprova.",
   "signOutAction": "Esci",
   "languageLabel": "Lingua",
   "themeLabel": "Aspetto",

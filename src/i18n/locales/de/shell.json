@@ -10,6 +10,8 @@
   "expandSidebar": "Seitenleiste ausklappen",
   "closeSidebar": "Menü schließen",
   "openUserMenu": "Benutzermenü öffnen",
+  "changeAvatarAction": "Profilbild ändern",
+  "avatarUploadError": "Das Profilbild konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut.",
   "signOutAction": "Abmelden",
   "languageLabel": "Sprache",
   "themeLabel": "Erscheinungsbild",

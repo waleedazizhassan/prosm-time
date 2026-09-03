@@ -10,6 +10,8 @@
   "expandSidebar": "Expand sidebar",
   "closeSidebar": "Close menu",
   "openUserMenu": "Open user menu",
+  "changeAvatarAction": "Change profile picture",
+  "avatarUploadError": "Couldn't upload the profile picture. Please try again.",
   "signOutAction": "Sign out",
   "languageLabel": "Language",
   "themeLabel": "Appearance",

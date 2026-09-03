@@ -10,6 +10,8 @@
   "expandSidebar": "Développer la barre latérale",
   "closeSidebar": "Fermer le menu",
   "openUserMenu": "Ouvrir le menu utilisateur",
+  "changeAvatarAction": "Changer la photo de profil",
+  "avatarUploadError": "Impossible de téléverser la photo de profil. Veuillez réessayer.",
   "signOutAction": "Se déconnecter",
   "languageLabel": "Langue",
   "themeLabel": "Apparence",

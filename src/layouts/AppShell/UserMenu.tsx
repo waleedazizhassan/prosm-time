@@ -1,12 +1,13 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type ChangeEvent } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
-import { ChevronDown, LogOut } from "lucide-react";
+import { ChevronDown, LogOut, Camera, Loader2 } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import { useAppLayout } from "./LayoutContext";
 import { useTheme, type ThemeMode } from "../../core/context/ThemeContext";
 import { LANGUAGES } from "../../i18n/languages";
+import UserRepository from "../../core/repositories/UserRepository";
 import sidebarStyles from "./Sidebar.module.css";
 import styles from "./UserMenu.module.css";
 
@@ -40,13 +41,35 @@ const VIEWPORT_MARGIN = 8;
 // the same positioning pattern already used by those three components.
 export default function UserMenu({ collapsed }: { collapsed: boolean }) {
   const { t, i18n } = useTranslation("shell");
-  const { profile, signOut } = useAuth();
+  const { profile, signOut, refreshProfile } = useAuth();
   const { userMenuOpen, toggleUserMenu, closeUserMenu } = useAppLayout();
   const { theme, setTheme } = useTheme();
 
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const avatarInputRef = useRef<HTMLInputElement>(null);
   const [panelStyle, setPanelStyle] = useState<{ top: number; left: number; maxHeight: number } | null>(null);
+  // § live UX review, user-directed - "a place in the user menu to
+  // upload a profile picture."
+  const [avatarUploading, setAvatarUploading] = useState(false);
+  const [avatarError, setAvatarError] = useState("");
+
+  const handleAvatarFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file || !profile) return;
+
+    setAvatarUploading(true);
+    setAvatarError("");
+    const result = await UserRepository.uploadAvatar(profile.id, file);
+    setAvatarUploading(false);
+
+    if (!result.success) {
+      setAvatarError(result.message ?? t("avatarUploadError"));
+      return;
+    }
+    await refreshProfile();
+  };
 
   useEffect(() => {
     if (!userMenuOpen) return undefined;
@@ -111,7 +134,7 @@ export default function UserMenu({ collapsed }: { collapsed: boolean }) {
         aria-expanded={userMenuOpen}
         aria-label={t("openUserMenu")}
       >
-        <span className={sidebarStyles.triggerAvatar}>{initial}</span>
+        <span className={sidebarStyles.triggerAvatar}>{profile?.avatarUrl ? <img src={profile.avatarUrl} alt="" /> : initial}</span>
         {!collapsed ? (
           <>
             <span className={sidebarStyles.triggerName}>{profile?.fullName ?? ""}</span>
@@ -129,6 +152,19 @@ export default function UserMenu({ collapsed }: { collapsed: boolean }) {
             style={{ top: panelStyle?.top ?? 0, left: panelStyle?.left ?? 0, maxHeight: panelStyle?.maxHeight, visibility: panelStyle ? "visible" : "hidden" }}
           >
             <div className={styles.identity}>
+              <button
+                type="button"
+                className={styles.avatarButton}
+                onClick={() => avatarInputRef.current?.click()}
+                disabled={avatarUploading}
+                aria-label={t("changeAvatarAction")}
+                title={t("changeAvatarAction")}
+              >
+                {profile?.avatarUrl ? <img src={profile.avatarUrl} alt="" className={styles.avatarImage} /> : <span className={styles.avatarInitial}>{initial}</span>}
+                <span className={styles.avatarOverlay}>{avatarUploading ? <Loader2 size={14} className={styles.avatarSpinner} /> : <Camera size={14} />}</span>
+              </button>
+              <input ref={avatarInputRef} type="file" accept="image/png,image/jpeg,image/webp" onChange={handleAvatarFileChange} className={styles.hiddenInput} tabIndex={-1} aria-hidden="true" />
+              {avatarError ? <span className={styles.avatarError}>{avatarError}</span> : null}
               <span className={styles.name}>{profile?.fullName}</span>
               <span className={styles.email}>{profile?.email}</span>
               <span className={styles.role}>{profile?.roleName}</span>

@@ -10,6 +10,8 @@
   "expandSidebar": "توسيع الشريط الجانبي",
   "closeSidebar": "إغلاق القائمة",
   "openUserMenu": "فتح قائمة المستخدم",
+  "changeAvatarAction": "تغيير الصورة الشخصية",
+  "avatarUploadError": "تعذّر رفع الصورة الشخصية. حاول مرة أخرى.",
   "signOutAction": "تسجيل الخروج",
   "languageLabel": "اللغة",
   "themeLabel": "المظهر",

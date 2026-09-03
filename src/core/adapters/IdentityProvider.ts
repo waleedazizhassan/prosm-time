@@ -18,6 +18,7 @@ export interface IdentityProfile {
   isOwner: boolean;
   roleKey: string;
   roleName: string;
+  avatarUrl: string | null;
 }
 
 export interface IdentityProvider {
