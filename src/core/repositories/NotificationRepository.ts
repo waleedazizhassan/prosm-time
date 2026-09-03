@@ -18,6 +18,13 @@ export interface AppNotification {
   // frontend renders through i18n - title/body above stay the raw
   // English fallback for any type this client doesn't recognize.
   data: Record<string, unknown>;
+  // § live UX review, user-directed - "clicking a notification should
+  // take me to the thing it's about." Already stored on every real
+  // notification (create_prosm_time_notification's own
+  // p_related_entity_type/p_related_entity_id), just never surfaced to
+  // the frontend until now.
+  relatedEntityType: string | null;
+  relatedEntityId: string | null;
   readAt: string | null;
   createdAt: string;
 }
@@ -36,12 +43,25 @@ interface NotificationRow {
   title: string;
   body: string | null;
   data: Record<string, unknown> | null;
+  related_entity_type: string | null;
+  related_entity_id: string | null;
   read_at: string | null;
   created_at: string;
 }
 
 function mapRow(row: NotificationRow): AppNotification {
-  return { id: row.id, type: row.type, priority: row.priority, title: row.title, body: row.body, data: row.data ?? {}, readAt: row.read_at, createdAt: row.created_at };
+  return {
+    id: row.id,
+    type: row.type,
+    priority: row.priority,
+    title: row.title,
+    body: row.body,
+    data: row.data ?? {},
+    relatedEntityType: row.related_entity_type,
+    relatedEntityId: row.related_entity_id,
+    readAt: row.read_at,
+    createdAt: row.created_at,
+  };
 }
 
 // PROSM Time WP-13/§20 - real notification inbox. RLS scopes every

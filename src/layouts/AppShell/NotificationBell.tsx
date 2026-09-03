@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { Bell } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
@@ -9,6 +10,26 @@ import playAlertSound from "../../core/utils/playAlertSound";
 import localizeNotification from "../../core/utils/localizeNotification";
 import styles from "./NotificationBell.module.css";
 
+// § live UX review, user-directed - "clicking a notification should
+// take me to the thing it needs" (e.g. something awaiting approval
+// should open the approval screen). Every real notification type maps
+// to the one screen where its underlying record is actually reviewed/
+// acted on; a type with no dedicated action screen just goes to the
+// Dashboard rather than nowhere.
+function notificationRoute(type: string): string {
+  switch (type) {
+    case "exception_pending_review":
+    case "out_of_zone_manager":
+    case "sos_alert":
+      return "/manager";
+    case "out_of_zone_employee":
+    case "correction_reviewed":
+    case "break_exceeded":
+    default:
+      return "/dashboard";
+  }
+}
+
 // PROSM Time WP-13/§20 - real notification bell, the entry point §20's
 // own notification types (out-of-zone, exceptions, corrections, break
 // overrun, SOS) surface at. Polls every 60s rather than a live
@@ -17,6 +38,7 @@ import styles from "./NotificationBell.module.css";
 export default function NotificationBell() {
   const { t, i18n } = useTranslation("shell");
   const { profile } = useAuth();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [notifications, setNotifications] = useState<AppNotification[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -66,6 +88,8 @@ export default function NotificationBell() {
       await NotificationRepository.markRead(notification.id);
       load();
     }
+    setOpen(false);
+    navigate(notificationRoute(notification.type));
   };
 
   return (
