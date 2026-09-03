@@ -65,21 +65,22 @@
 
 @media (max-width: 640px) {
   /* § live UX review, user-directed correction - these were previously
-     hidden on mobile; the user now wants them visible there too, so
-     the buttons shrink further to make room instead of disappearing -
-     "the arrows are jammed right up against the PROSM icon". */
+     hidden on mobile entirely, then shrunk too far while the Radio
+     still shared the header ("need to be a bit bigger"). Now that the
+     Radio has moved to the mobile Sidebar's own Media section, there's
+     real room again - only a small reduction from desktop size. */
   .container {
-    gap: 1px;
-    padding: 1px;
+    gap: 2px;
+    padding: 2px;
   }
 
   .button {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
   }
 
   .button svg {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
   }
 }
