@@ -13,6 +13,8 @@
   "columns": {
     "employee": "Mitarbeiter",
     "site": "Standort",
+    "clockInLocation": "Tatsächlicher Einstempel-Standort",
+    "clockOutLocation": "Tatsächlicher Ausstempel-Standort",
     "clockInAt": "Kommen",
     "clockOutAt": "Gehen",
     "status": "Status",
@@ -24,6 +26,9 @@
   },
   "empty": "Keine Anwesenheitsdatensätze für diesen Zeitraum.",
   "viewPhoto": "Foto anzeigen",
+  "viewOnMap": "Auf der Karte ansehen",
+  "locationMatch": "Stimmt mit dem Standortbereich überein",
+  "locationMismatch": "Stimmt nicht mit dem Standortbereich überein",
   "photoModalTitle": "Anwesenheitsfoto",
   "photoLoading": "Foto wird geladen…",
   "photoAlt": "Anwesenheitsnachweisfoto",

@@ -13,6 +13,8 @@
   "columns": {
     "employee": "Dipendente",
     "site": "Sede",
+    "clockInLocation": "Posizione reale di entrata",
+    "clockOutLocation": "Posizione reale di uscita",
     "clockInAt": "Entrata",
     "clockOutAt": "Uscita",
     "status": "Stato",
@@ -24,6 +26,9 @@
   },
   "empty": "Nessun registro di presenza per questo periodo.",
   "viewPhoto": "Visualizza foto",
+  "viewOnMap": "Visualizza sulla mappa",
+  "locationMatch": "Corrisponde all'area della sede",
+  "locationMismatch": "Non corrisponde all'area della sede",
   "photoModalTitle": "Foto presenza",
   "photoLoading": "Caricamento foto…",
   "photoAlt": "Foto di prova della presenza",

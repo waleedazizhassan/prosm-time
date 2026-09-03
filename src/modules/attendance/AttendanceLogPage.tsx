@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Camera } from "lucide-react";
+import { Camera, MapPin, Check, X } from "lucide-react";
 
-import ManagerRepository, { type TodayAttendanceRow } from "../../core/repositories/ManagerRepository";
+import ManagerRepository, { type TodayAttendanceRow, type AttendanceEventLocation } from "../../core/repositories/ManagerRepository";
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
@@ -31,6 +31,39 @@ function formatWorkedHours(clockInAt: string, clockOutAt: string | null): string
 
 function isoDate(date: Date): string {
   return date.toISOString().slice(0, 10);
+}
+
+// § live UX review, user-directed - "next to the site name, show the
+// real GPS location captured, plus whether it matched the site."
+// A plain Google Maps link rather than a reverse-geocoded address - no
+// geocoding provider exists in this codebase, and coordinates are
+// already the real, verifiable source of truth an admin can act on.
+function LocationCell({ location, t }: { location: AttendanceEventLocation | null; t: (key: string) => string }) {
+  if (!location) return <>—</>;
+  const mapsUrl = `https://www.google.com/maps?q=${location.latitude},${location.longitude}`;
+  return (
+    <span style={{ display: "inline-flex", alignItems: "center", gap: "var(--space-1)" }}>
+      <a
+        href={mapsUrl}
+        target="_blank"
+        rel="noreferrer"
+        title={t("viewOnMap")}
+        style={{ display: "inline-flex", alignItems: "center", gap: "2px", color: "var(--text-link)", textDecoration: "none", fontSize: "var(--font-xs)" }}
+      >
+        <MapPin size={13} />
+        {location.latitude.toFixed(4)}, {location.longitude.toFixed(4)}
+      </a>
+      {location.withinGeofence === true ? (
+        <span title={t("locationMatch")}>
+          <Check size={14} color="var(--status-success-text)" aria-label={t("locationMatch")} />
+        </span>
+      ) : location.withinGeofence === false ? (
+        <span title={t("locationMismatch")}>
+          <X size={14} color="var(--status-danger-text)" aria-label={t("locationMismatch")} />
+        </span>
+      ) : null}
+    </span>
+  );
 }
 
 // PROSM Time - direct sidebar request (live UX review, user-directed):
@@ -151,6 +184,8 @@ export default function AttendanceLogPage() {
   const columns: TableColumn<TodayAttendanceRow>[] = [
     { key: "name", header: t("columns.employee"), render: (row) => row.userFullName },
     { key: "site", header: t("columns.site"), render: (row) => row.siteName || "—" },
+    { key: "clockInLocation", header: t("columns.clockInLocation"), render: (row) => <LocationCell location={row.clockInLocation} t={t} /> },
+    { key: "clockOutLocation", header: t("columns.clockOutLocation"), render: (row) => <LocationCell location={row.clockOutLocation} t={t} /> },
     {
       key: "clockInAt",
       header: t("columns.clockInAt"),

@@ -13,6 +13,8 @@
   "columns": {
     "employee": "Employee",
     "site": "Site",
+    "clockInLocation": "Actual Clock-In Location",
+    "clockOutLocation": "Actual Clock-Out Location",
     "clockInAt": "Clock In",
     "clockOutAt": "Clock Out",
     "status": "Status",
@@ -24,6 +26,9 @@
   },
   "empty": "No attendance records for this period.",
   "viewPhoto": "View photo",
+  "viewOnMap": "View on map",
+  "locationMatch": "Matched the site's geofence",
+  "locationMismatch": "Did not match the site's geofence",
   "photoModalTitle": "Attendance Photo",
   "photoLoading": "Loading photo…",
   "photoAlt": "Attendance evidence photo",

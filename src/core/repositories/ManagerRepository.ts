@@ -6,6 +6,14 @@ export interface ServiceResult<T = null> {
   data: T | null;
 }
 
+export interface AttendanceEventLocation {
+  latitude: number;
+  longitude: number;
+  // null when the event had no site to check against (e.g. a manual
+  // workplace label) - "not checked", distinct from a real mismatch.
+  withinGeofence: boolean | null;
+}
+
 export interface TodayAttendanceRow {
   sessionId: string;
   userId: string;
@@ -17,6 +25,13 @@ export interface TodayAttendanceRow {
   hasActivePresence: boolean;
   clockInEvidencePath: string | null;
   clockOutEvidencePath: string | null;
+  // § live UX review, user-directed - "next to the site name, show the
+  // real GPS location captured at clock-in/out, plus whether it
+  // matched the site." Already captured by every clock-in/out
+  // regardless of whether a site was selected (ClockInOutCard always
+  // calls getUserPosition first) - this was only ever a display gap.
+  clockInLocation: AttendanceEventLocation | null;
+  clockOutLocation: AttendanceEventLocation | null;
 }
 
 export interface PendingReviewItem {
@@ -46,6 +61,9 @@ interface RawAttendanceEventRow {
   id: string;
   session_id: string;
   event_type: "clock_in" | "clock_out";
+  latitude: number | null;
+  longitude: number | null;
+  within_geofence: boolean | null;
 }
 
 interface RawCameraEvidenceRow {
@@ -122,8 +140,14 @@ class ManagerRepository {
       // downloads on demand when the manager opens a thumbnail.
       const clockInEvidenceBySession = new Map<string, string>();
       const clockOutEvidenceBySession = new Map<string, string>();
+      const clockInLocationBySession = new Map<string, AttendanceEventLocation>();
+      const clockOutLocationBySession = new Map<string, AttendanceEventLocation>();
       if (sessionIds.length > 0) {
-        const eventsResult = await this.client.from("attendance_events").select("id, session_id, event_type").in("session_id", sessionIds).in("event_type", ["clock_in", "clock_out"]);
+        const eventsResult = await this.client
+          .from("attendance_events")
+          .select("id, session_id, event_type, latitude, longitude, within_geofence")
+          .in("session_id", sessionIds)
+          .in("event_type", ["clock_in", "clock_out"]);
         if (eventsResult.error) return createError(eventsResult.error.message);
 
         const events = (eventsResult.data ?? []) as RawAttendanceEventRow[];
@@ -140,9 +164,16 @@ class ManagerRepository {
 
         for (const event of events) {
           const storagePath = evidenceByEvent.get(event.id);
-          if (!storagePath) continue;
-          if (event.event_type === "clock_in") clockInEvidenceBySession.set(event.session_id, storagePath);
-          else clockOutEvidenceBySession.set(event.session_id, storagePath);
+          if (storagePath) {
+            if (event.event_type === "clock_in") clockInEvidenceBySession.set(event.session_id, storagePath);
+            else clockOutEvidenceBySession.set(event.session_id, storagePath);
+          }
+
+          if (event.latitude !== null && event.longitude !== null) {
+            const location: AttendanceEventLocation = { latitude: event.latitude, longitude: event.longitude, withinGeofence: event.within_geofence };
+            if (event.event_type === "clock_in") clockInLocationBySession.set(event.session_id, location);
+            else clockOutLocationBySession.set(event.session_id, location);
+          }
         }
       }
 
@@ -164,6 +195,8 @@ class ManagerRepository {
           hasActivePresence: activePresenceIds.has(row.id),
           clockInEvidencePath: clockInEvidenceBySession.get(row.id) ?? null,
           clockOutEvidencePath: clockOutEvidenceBySession.get(row.id) ?? null,
+          clockInLocation: clockInLocationBySession.get(row.id) ?? null,
+          clockOutLocation: clockOutLocationBySession.get(row.id) ?? null,
         };
       });
 

@@ -13,6 +13,8 @@
   "columns": {
     "employee": "الموظف",
     "site": "الموقع",
+    "clockInLocation": "موقع الحضور الفعلي",
+    "clockOutLocation": "موقع الانصراف الفعلي",
     "clockInAt": "وقت الحضور",
     "clockOutAt": "وقت الانصراف",
     "status": "الحالة",
@@ -24,6 +26,9 @@
   },
   "empty": "لا توجد سجلات حضور لهذه الفترة.",
   "viewPhoto": "عرض الصورة",
+  "viewOnMap": "عرض على الخريطة",
+  "locationMatch": "مطابق لنطاق الموقع",
+  "locationMismatch": "غير مطابق لنطاق الموقع",
   "photoModalTitle": "صورة الحضور",
   "photoLoading": "جارٍ تحميل الصورة…",
   "photoAlt": "صورة إثبات الحضور",
