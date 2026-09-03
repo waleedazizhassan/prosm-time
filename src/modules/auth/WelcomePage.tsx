@@ -6,6 +6,7 @@ import AuthHeader from "../../components/common/AuthHeader";
 import Button from "../../components/common/Button";
 import authPhoto from "../../assets/splash-photo.png";
 import { APP_VERSION } from "../../core/appVersion";
+import { LANGUAGES } from "../../i18n/languages";
 import pageStyles from "../../components/common/AuthLayout.module.css";
 import styles from "./WelcomePage.module.css";
 
@@ -21,7 +22,7 @@ import styles from "./WelcomePage.module.css";
 //   mobile-only card below (WelcomePage.module.css) gives them the
 //   same two entry points AuthHeader gives desktop.
 export default function WelcomePage() {
-  const { t } = useTranslation("auth");
+  const { t, i18n } = useTranslation("auth");
   const navigate = useNavigate();
 
   return (
@@ -31,6 +32,23 @@ export default function WelcomePage() {
       <div className={styles.mobileCard}>
         <div className={styles.photoBand} style={{ backgroundImage: `url(${authPhoto})` }} />
         <div className={styles.body}>
+          {/* § live UX review, user-directed - mobile has no other way
+              to change language (AuthHeader's own selector is
+              desktop-only), and the default language is now always
+              English on first load - give phones an explicit switch. */}
+          <select
+            className={styles.mobileLanguageSelect}
+            value={i18n.language}
+            onChange={(event) => i18n.changeLanguage(event.target.value)}
+            aria-label={t("authHeader.languageAriaLabel")}
+          >
+            {LANGUAGES.map((language) => (
+              <option key={language.code} value={language.code}>
+                {language.nativeLabel}
+              </option>
+            ))}
+          </select>
+
           <h1 className={styles.title}>{t("welcome.title")}</h1>
           <p className={styles.subtitle}>{t("welcome.subtitle")}</p>
 

@@ -113,8 +113,12 @@ i18next
     ns: ["common", "auth", "dashboard", "people", "shell", "sites", "manager", "attendanceLog", "timesheets", "allowances", "kiosk", "help", "camera"],
     defaultNS: "common",
 
+    // § live UX review, user-directed - a fresh install must default to
+    // English regardless of the device's own OS language; only an
+    // explicit in-app choice (persisted to localStorage) should ever
+    // override fallbackLng. "navigator" detection deliberately removed.
     detection: {
-      order: ["localStorage", "navigator"],
+      order: ["localStorage"],
       lookupLocalStorage: I18N_STORAGE_KEY,
       caches: ["localStorage"],
     },
