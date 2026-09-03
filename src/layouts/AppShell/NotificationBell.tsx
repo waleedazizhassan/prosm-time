@@ -6,6 +6,7 @@ import { useAuth } from "../../core/context/AuthContext";
 import NotificationRepository, { type AppNotification } from "../../core/repositories/NotificationRepository";
 import { formatDateTime } from "../../core/utils/formatDate";
 import playAlertSound from "../../core/utils/playAlertSound";
+import localizeNotification from "../../core/utils/localizeNotification";
 import styles from "./NotificationBell.module.css";
 
 // PROSM Time WP-13/§20 - real notification bell, the entry point §20's
@@ -80,13 +81,16 @@ export default function NotificationBell() {
           {notifications.length === 0 ? (
             <p className={styles.empty}>{t("noNotifications")}</p>
           ) : (
-            notifications.map((notification) => (
-              <button key={notification.id} type="button" className={`${styles.item} ${notification.readAt ? "" : styles.itemUnread}`} onClick={() => handleSelect(notification)}>
-                <span className={styles.itemTitle}>{notification.title}</span>
-                {notification.body ? <span className={styles.itemBody}>{notification.body}</span> : null}
-                <span className={styles.itemTime}>{formatDateTime(notification.createdAt, i18n.language)}</span>
-              </button>
-            ))
+            notifications.map((notification) => {
+              const localized = localizeNotification(notification, t);
+              return (
+                <button key={notification.id} type="button" className={`${styles.item} ${notification.readAt ? "" : styles.itemUnread}`} onClick={() => handleSelect(notification)}>
+                  <span className={styles.itemTitle}>{localized.title}</span>
+                  {localized.body ? <span className={styles.itemBody}>{localized.body}</span> : null}
+                  <span className={styles.itemTime}>{formatDateTime(notification.createdAt, i18n.language)}</span>
+                </button>
+              );
+            })
           )}
         </div>
       ) : null}

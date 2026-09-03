@@ -12,6 +12,12 @@ export interface AppNotification {
   priority: "normal" | "high";
   title: string;
   body: string | null;
+  // § live UX review, user-directed - "notifications need to be
+  // translated." Structured params (employee name, distance, which
+  // sub-case a shared type represents, a manager's decision) the
+  // frontend renders through i18n - title/body above stay the raw
+  // English fallback for any type this client doesn't recognize.
+  data: Record<string, unknown>;
   readAt: string | null;
   createdAt: string;
 }
@@ -29,12 +35,13 @@ interface NotificationRow {
   priority: "normal" | "high";
   title: string;
   body: string | null;
+  data: Record<string, unknown> | null;
   read_at: string | null;
   created_at: string;
 }
 
 function mapRow(row: NotificationRow): AppNotification {
-  return { id: row.id, type: row.type, priority: row.priority, title: row.title, body: row.body, readAt: row.read_at, createdAt: row.created_at };
+  return { id: row.id, type: row.type, priority: row.priority, title: row.title, body: row.body, data: row.data ?? {}, readAt: row.read_at, createdAt: row.created_at };
 }
 
 // PROSM Time WP-13/§20 - real notification inbox. RLS scopes every
