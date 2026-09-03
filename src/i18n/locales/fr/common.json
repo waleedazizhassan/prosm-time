@@ -4,6 +4,7 @@
   "hidePassword": "Masquer le mot de passe",
   "appNameShort": "PROSM",
   "loading": "Chargement…",
+  "versionLabel": "Version {{version}}",
   "greeting": {
     "morning": "Bonjour",
     "afternoon": "Bon après-midi",
@@ -16,10 +17,6 @@
     "close": "Fermer",
     "save": "Enregistrer",
     "retry": "Réessayer"
-  },
-  "splash": {
-    "tagline": "Présence, suivi et gestion du temps de la main-d'œuvre.",
-    "contactLabel": "Des questions ? Contactez-nous :"
   },
   "errorBoundary": {
     "title": "Une erreur s'est produite",

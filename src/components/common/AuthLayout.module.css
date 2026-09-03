@@ -198,6 +198,11 @@
     text-decoration: underline;
   }
 
+  .headerVersion {
+    color: rgba(226, 232, 240, 0.5);
+    font-size: var(--font-xs);
+  }
+
   .contactWrapper {
     position: relative;
   }

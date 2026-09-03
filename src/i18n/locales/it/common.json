@@ -4,6 +4,7 @@
   "hidePassword": "Nascondi password",
   "appNameShort": "PROSM",
   "loading": "Caricamento…",
+  "versionLabel": "Versione {{version}}",
   "greeting": {
     "morning": "Buongiorno",
     "afternoon": "Buon pomeriggio",
@@ -16,10 +17,6 @@
     "close": "Chiudi",
     "save": "Salva",
     "retry": "Riprova"
-  },
-  "splash": {
-    "tagline": "Presenza, gestione della forza lavoro e del tempo.",
-    "contactLabel": "Domande? Contattaci:"
   },
   "errorBoundary": {
     "title": "Qualcosa è andato storto",

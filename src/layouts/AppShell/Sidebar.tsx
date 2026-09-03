@@ -8,6 +8,7 @@ import { useAppLayout } from "./LayoutContext";
 import { NAV_ITEMS, NAV_SECTION_ORDER } from "./navigation";
 import BrandMark from "../../components/common/BrandMark";
 import UserMenu from "./UserMenu";
+import { APP_VERSION } from "../../core/appVersion";
 import styles from "./Sidebar.module.css";
 
 const FOCUSABLE_SELECTOR = 'button:not(:disabled), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
@@ -131,6 +132,7 @@ export default function Sidebar() {
         </nav>
 
         <UserMenu collapsed={sidebarCollapsed} />
+        <p className={styles.versionLabel}>{t("common:versionLabel", { version: APP_VERSION })}</p>
       </aside>
     </>
   );

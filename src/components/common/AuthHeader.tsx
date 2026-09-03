@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import { LANGUAGES } from "../../i18n/languages";
+import { APP_VERSION } from "../../core/appVersion";
 import styles from "./AuthLayout.module.css";
 
 // PROSM Time - the desktop-only header shared by every session-less
@@ -90,6 +91,8 @@ export default function AuthHeader() {
             </div>
           ) : null}
         </div>
+
+        <span className={styles.headerVersion}>{t("common:versionLabel", { version: APP_VERSION })}</span>
       </div>
     </header>
   );

@@ -4,6 +4,7 @@
   "hidePassword": "Passwort verbergen",
   "appNameShort": "PROSM",
   "loading": "Wird geladen…",
+  "versionLabel": "Version {{version}}",
   "greeting": {
     "morning": "Guten Morgen",
     "afternoon": "Guten Tag",
@@ -16,10 +17,6 @@
     "close": "Schließen",
     "save": "Speichern",
     "retry": "Erneut versuchen"
-  },
-  "splash": {
-    "tagline": "Anwesenheit, Präsenz und Zeitmanagement für die Belegschaft.",
-    "contactLabel": "Fragen? Kontaktieren Sie uns:"
   },
   "errorBoundary": {
     "title": "Etwas ist schiefgelaufen",

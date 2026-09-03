@@ -4,6 +4,7 @@
   "hidePassword": "Hide password",
   "appNameShort": "PROSM",
   "loading": "Loading…",
+  "versionLabel": "Version {{version}}",
   "greeting": {
     "morning": "Good morning",
     "afternoon": "Good afternoon",
@@ -16,10 +17,6 @@
     "close": "Close",
     "save": "Save",
     "retry": "Retry"
-  },
-  "splash": {
-    "tagline": "Workforce attendance, presence and time management.",
-    "contactLabel": "Questions? Contact us:"
   },
   "errorBoundary": {
     "title": "Something went wrong",

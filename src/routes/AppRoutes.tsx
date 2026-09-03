@@ -22,7 +22,6 @@ import TimesheetReportPage from "../modules/timesheets/TimesheetReportPage";
 import AllowancesPage from "../modules/allowances/AllowancesPage";
 import KioskPage from "../modules/kiosk/KioskPage";
 import HelpPage from "../modules/help/HelpPage";
-import SplashScreen from "../modules/splash/SplashScreen";
 
 // PROSM Time route map. /activate, /login, /accept-invitation are
 // public (no session exists yet by definition at any of them) and
@@ -33,10 +32,13 @@ import SplashScreen from "../modules/splash/SplashScreen";
 // just its own content. Root redirects to whichever of those the
 // current session state actually calls for - never a bare
 // unauthenticated home screen.
+// § live UX review, user-directed - "the splash screen has no use,
+// remove it entirely." Renders nothing while the auth check resolves
+// (typically near-instant) rather than any placeholder screen.
 function RootRedirect() {
   const { loading, isAuthenticated } = useAuth();
 
-  if (loading) return <SplashScreen />;
+  if (loading) return null;
 
   return <Navigate to={isAuthenticated ? "/dashboard" : "/welcome"} replace />;
 }

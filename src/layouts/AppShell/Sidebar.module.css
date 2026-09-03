@@ -376,6 +376,31 @@
   }
 }
 
+/* ===== Version label (Sidebar footer) - § live UX review, user-
+   directed: "remove the splash screen entirely, write the version
+   number in the appropriate places instead." ===== */
+
+.versionLabel {
+  margin: 0;
+  padding: var(--space-2) var(--space-5);
+
+  font-size: var(--font-xs);
+  color: var(--text-disabled);
+  text-align: center;
+}
+
+.collapsed .versionLabel {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .collapsed .versionLabel {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
 @media print {
   .sidebar {
     display: none !important;

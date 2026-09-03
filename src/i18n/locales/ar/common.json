@@ -4,6 +4,7 @@
   "hidePassword": "إخفاء كلمة المرور",
   "appNameShort": "PROSM",
   "loading": "جارٍ التحميل…",
+  "versionLabel": "الإصدار {{version}}",
   "greeting": {
     "morning": "صباح الخير",
     "afternoon": "مساء الخير",
@@ -16,10 +17,6 @@
     "close": "إغلاق",
     "save": "حفظ",
     "retry": "إعادة المحاولة"
-  },
-  "splash": {
-    "tagline": "إدارة حضور القوى العاملة والتواجد والوقت.",
-    "contactLabel": "لديك أسئلة؟ تواصل معنا:"
   },
   "errorBoundary": {
     "title": "حدث خطأ ما",
