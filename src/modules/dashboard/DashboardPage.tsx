@@ -35,7 +35,7 @@ export default function DashboardPage() {
   const { profile } = useAuth();
 
   return (
-    <PageShell title={t("title")} subtitle={profile ? t("welcomeMessage", { name: profile.fullName }) : undefined}>
+    <PageShell title={t("title")} subtitle={profile ? t("welcomeMessage", { name: profile.fullName }) : undefined} compact>
       <ClockInOutCard />
       <AdminOverviewCard />
       <ExceptionsCard />

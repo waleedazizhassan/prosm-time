@@ -1,0 +1,36 @@
+.map {
+  width: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--surface-hover);
+}
+
+.markerIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.markerIcon span {
+  display: block;
+  width: 14px;
+  height: 14px;
+
+  border-radius: 50%;
+  border: 2px solid var(--surface-card);
+
+  background: var(--brand-primary);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.25);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .markerIcon span {
+    animation: liveLocationPulse 2.4s ease-out infinite;
+  }
+}
+
+@keyframes liveLocationPulse {
+  0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.35); }
+  70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+}

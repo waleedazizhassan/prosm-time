@@ -24,6 +24,7 @@ import Button from "../../components/common/Button";
 import StatusBadge from "../../components/common/StatusBadge";
 import CameraCaptureModal from "../../components/common/CameraCaptureModal";
 import Modal from "../../components/common/Modal";
+import LiveLocationMap from "../../components/common/LiveLocationMap";
 import ErrorText from "../../components/common/ErrorText";
 import styles from "./ClockInOutCard.module.css";
 
@@ -611,6 +612,7 @@ export default function ClockInOutCard() {
   const changeSiteOptions = sites
     .filter((site) => site.id !== currentSite?.id)
     .map((site) => ({ value: site.id, label: nearbySiteIds.has(site.id) ? t("attendance.nearbySiteOption", { name: site.name }) : site.name }));
+  const mapRelevantSite = session ? currentSite : selectedSite;
 
   return (
     <Card>
@@ -631,6 +633,18 @@ export default function ClockInOutCard() {
           </p>
         </div>
       ) : null}
+
+      <div style={{ marginTop: "var(--space-3)" }}>
+        <LiveLocationMap
+          latitude={currentLocation?.latitude ?? null}
+          longitude={currentLocation?.longitude ?? null}
+          site={
+            mapRelevantSite
+              ? { name: mapRelevantSite.name, latitude: mapRelevantSite.latitude, longitude: mapRelevantSite.longitude, allowedRadiusMeters: mapRelevantSite.allowedRadiusMeters }
+              : null
+          }
+        />
+      </div>
 
       <div
         style={{
