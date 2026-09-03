@@ -2,6 +2,7 @@
   "title": "Appareil photo",
   "openCameraAction": "Ouvrir l'appareil photo",
   "capture": "Capturer",
+  "switchCamera": "Changer de caméra",
   "retake": "Reprendre",
   "usePhoto": "Utiliser la photo",
   "cancel": "Annuler",

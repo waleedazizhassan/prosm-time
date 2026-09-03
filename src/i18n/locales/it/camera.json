@@ -2,6 +2,7 @@
   "title": "Fotocamera",
   "openCameraAction": "Apri fotocamera",
   "capture": "Scatta",
+  "switchCamera": "Cambia fotocamera",
   "retake": "Riprova",
   "usePhoto": "Usa foto",
   "cancel": "Annulla",

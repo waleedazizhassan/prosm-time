@@ -2,6 +2,7 @@
   "title": "Kamera",
   "openCameraAction": "Kamera öffnen",
   "capture": "Aufnehmen",
+  "switchCamera": "Kamera wechseln",
   "retake": "Erneut aufnehmen",
   "usePhoto": "Foto verwenden",
   "cancel": "Abbrechen",

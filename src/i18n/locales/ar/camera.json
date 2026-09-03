@@ -2,6 +2,7 @@
   "title": "الكاميرا",
   "openCameraAction": "فتح الكاميرا",
   "capture": "التقاط",
+  "switchCamera": "تبديل الكاميرا",
   "retake": "إعادة الالتقاط",
   "usePhoto": "استخدام الصورة",
   "cancel": "إلغاء",

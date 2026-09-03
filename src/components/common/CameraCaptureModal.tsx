@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { Camera, RefreshCw, Upload, X } from "lucide-react";
+import { Camera, RefreshCw, Upload, X, SwitchCamera } from "lucide-react";
 
 import Modal from "./Modal";
 import Button from "./Button";
@@ -12,18 +12,23 @@ interface CameraCaptureModalProps {
   onCapture: (file: File) => void;
 }
 
+type FacingMode = "environment" | "user";
+
 // § live UX review, user-directed - "the rear camera doesn't reliably
-// open on mobile." A plain (non-exact) facingMode constraint is only a
-// preference - some Android WebViews still hand back the front camera
-// under it. Try the authoritative `exact` form first; only a device
-// with a single, unlabeled camera throws OverconstrainedError for that,
-// so fall back to the original ideal constraint in that one case.
-async function openRearCamera(): Promise<MediaStream> {
+// open on mobile" (originally rear-only), then "the front camera
+// doesn't work at all, there should be a button to switch between
+// them" - this now opens whichever facing mode is requested. A plain
+// (non-exact) facingMode constraint is only a preference - some
+// Android WebViews still hand back the wrong camera under it. Try the
+// authoritative `exact` form first; only a device with a single,
+// unlabeled camera throws OverconstrainedError for that, so fall back
+// to the plain ideal constraint in that one case.
+async function openCamera(facingMode: FacingMode): Promise<MediaStream> {
   try {
-    return await navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } });
+    return await navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: facingMode } } });
   } catch (error) {
     if (error instanceof Error && error.name === "OverconstrainedError") {
-      return navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+      return navigator.mediaDevices.getUserMedia({ video: { facingMode } });
     }
     throw error;
   }
@@ -55,6 +60,10 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [capturedDataUrl, setCapturedDataUrl] = useState<string | null>(null);
   const [error, setError] = useState("");
+  // § live UX review, user-directed - "the front camera doesn't work,
+  // there should be a button to switch between them." Defaults to the
+  // rear camera (the real attendance-evidence use case), switchable.
+  const [facingMode, setFacingMode] = useState<FacingMode>("environment");
 
   const stopStream = () => {
     streamRef.current?.getTracks().forEach((track) => track.stop());
@@ -66,12 +75,13 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
       stopStream();
       setCapturedDataUrl(null);
       setError("");
+      setFacingMode("environment");
       return undefined;
     }
 
     let cancelled = false;
 
-    openRearCamera()
+    openCamera(facingMode)
       .then((stream) => {
         if (cancelled) {
           stream.getTracks().forEach((track) => track.stop());
@@ -84,12 +94,18 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
         if (!cancelled) setError(t("permissionDenied"));
       });
 
-    // No camera stream may remain active after cancel/close/unmount.
+    // No camera stream may remain active after cancel/close/unmount, or
+    // before re-opening on the newly selected facing mode.
     return () => {
       cancelled = true;
       stopStream();
     };
-  }, [isOpen, t]);
+  }, [isOpen, facingMode, t]);
+
+  const handleSwitchCamera = () => {
+    setError("");
+    setFacingMode((current) => (current === "environment" ? "user" : "environment"));
+  };
 
   const handleCapture = () => {
     const video = videoRef.current;
@@ -108,7 +124,7 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
   const handleRetake = () => {
     setCapturedDataUrl(null);
     if (isOpen) {
-      openRearCamera()
+      openCamera(facingMode)
         .then((stream) => {
           streamRef.current = stream;
           if (videoRef.current) videoRef.current.srcObject = stream;
@@ -185,8 +201,11 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
           <img src={capturedDataUrl} alt={t("previewAlt")} className={styles.preview} />
         ) : (
           <>
-            <video ref={videoRef} autoPlay playsInline muted className={styles.video} />
+            <video ref={videoRef} autoPlay playsInline muted className={`${styles.video} ${facingMode === "user" ? styles.videoMirrored : ""}`} />
             <div className={styles.faceGuide} aria-hidden="true" />
+            <button type="button" className={styles.switchCameraButton} onClick={handleSwitchCamera} aria-label={t("switchCamera")} title={t("switchCamera")}>
+              <SwitchCamera size={18} />
+            </button>
           </>
         )}
       </div>

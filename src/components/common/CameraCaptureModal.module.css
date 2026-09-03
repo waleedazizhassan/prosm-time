@@ -28,6 +28,41 @@
   object-fit: contain;
 }
 
+/* Front camera previews mirrored, matching every real camera app's
+   own selfie convention - the captured frame itself is drawn from the
+   real (unmirrored) video track, so evidence content is never flipped. */
+.videoMirrored {
+  transform: scaleX(-1);
+}
+
+/* § live UX review, user-directed - "the front camera doesn't work,
+   there should be a button to switch between them." */
+.switchCameraButton {
+  position: absolute;
+  top: var(--space-3);
+  inset-inline-end: var(--space-3);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(15, 23, 42, 0.55);
+  color: #f8fafc;
+  cursor: pointer;
+
+  backdrop-filter: blur(4px);
+}
+
+.switchCameraButton:hover {
+  background: rgba(15, 23, 42, 0.75);
+}
+
 /* § live UX review, user-directed - "the photo comes out round" (the
    reference screenshots' circular face-guide during capture). This is
    a guide overlay only, never a crop - the captured frame itself stays
