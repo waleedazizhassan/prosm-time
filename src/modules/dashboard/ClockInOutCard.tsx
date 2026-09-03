@@ -87,6 +87,14 @@ export default function ClockInOutCard() {
   const [currentLocation, setCurrentLocation] = useState<CurrentPosition | null>(null);
   const [locationStatus, setLocationStatus] = useState<"detecting" | "available" | "unavailable">("detecting");
   const [placeName, setPlaceName] = useState<string | null>(null);
+  // § live UX review, user-directed - "I'm at a different site every
+  // day - shouldn't the geofence itself suggest it to me?" Sites the
+  // employee isn't assigned to but is verifiably standing inside the
+  // geofence of right now (SiteRepository.listNearbySites, a real
+  // server-side GPS check) - merged into the picker, labeled
+  // separately so it's clear this is a detected walk-in, not a formal
+  // assignment.
+  const [nearbySiteIds, setNearbySiteIds] = useState<Set<string>>(new Set());
   const [lastCompletedSession, setLastCompletedSession] = useState<AttendanceSession | null>(null);
 
   const presenceSessionRef = useRef<PresenceSession | null>(null);
@@ -162,6 +170,47 @@ export default function ClockInOutCard() {
         setLocationStatus("available");
         reverseGeocodePlaceName(position.latitude, position.longitude, i18n.language).then((name) => {
           if (!cancelled) setPlaceName(name);
+        });
+        SiteRepository.listNearbySites(position.latitude, position.longitude, position.accuracyMeters).then((result) => {
+          if (cancelled || !result.success || !result.data || result.data.length === 0) return;
+          setNearbySiteIds(new Set(result.data.map((site) => site.id)));
+          setSites((current) => {
+            const existingIds = new Set(current.map((site) => site.id));
+            const additions = (result.data ?? [])
+              .filter((nearby) => !existingIds.has(nearby.id))
+              .map((nearby) => ({
+                id: nearby.id,
+                name: nearby.name,
+                displayAddress: nearby.displayAddress,
+                // Everything below this line is genuinely unknown for a
+                // site the caller isn't assigned to (RLS never exposes
+                // the full row until they're actually clocked in there -
+                // see 20260903170100's own policy change) and unused by
+                // anything client-side except cameraRequired, which the
+                // nearby-sites RPC deliberately does return.
+                latitude: position.latitude,
+                longitude: position.longitude,
+                allowedRadiusMeters: 0,
+                gpsAccuracyToleranceMeters: 0,
+                timezone: "UTC",
+                isActive: true,
+                attendanceAllowed: true,
+                geofenceRequired: true,
+                cameraRequired: nearby.cameraRequired,
+                environmentalTagEnabled: false,
+                kioskMode: "personal_device_only" as const,
+                graceToleranceMinutes: 0,
+                shiftStartTime: null,
+                shiftEndTime: null,
+                overtimeStartTime: null,
+                lateDeductionStartTime: null,
+                breakRoundingMode: "cumulative" as const,
+                blockSelfClockInAfterGrace: false,
+                blockSelfClockOutOutsideGeofence: false,
+                createdAt: new Date().toISOString(),
+              }));
+            return additions.length > 0 ? [...current, ...additions] : current;
+          });
         });
       })
       .catch(() => {
@@ -642,7 +691,10 @@ export default function ClockInOutCard() {
               if (event.target.value) setManualLocationLabel("");
             }}
             disabled={submitting}
-            options={[{ value: "", label: t("attendance.noSiteOption") }, ...sites.map((site) => ({ value: site.id, label: site.name }))]}
+            options={[
+              { value: "", label: t("attendance.noSiteOption") },
+              ...sites.map((site) => ({ value: site.id, label: nearbySiteIds.has(site.id) ? t("attendance.nearbySiteOption", { name: site.name }) : site.name })),
+            ]}
           />
           {!siteId ? (
             <Input

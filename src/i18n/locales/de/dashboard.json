@@ -70,6 +70,7 @@
     },
     "siteLabel": "Standort",
     "noSiteOption": "Kein Standort — meinen aktuellen Standort verwenden",
+    "nearbySiteOption": "📍 {{name}} (Sie sind heute hier)",
     "manualLocationLabel": "Arbeitsort",
     "manualLocationHint": "Geben Sie an, wo Sie sich tatsächlich befinden (z. B. beim Kunden, im Homeoffice) — erforderlich, wenn kein Standort ausgewählt ist.",
     "manualLocationRequired": "Geben Sie Ihren Arbeitsort ein, um ohne registrierten Standort einzustempeln.",

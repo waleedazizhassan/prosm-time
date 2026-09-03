@@ -70,6 +70,7 @@
     },
     "siteLabel": "Site",
     "noSiteOption": "No site — use my current location",
+    "nearbySiteOption": "📍 {{name}} (you're here today)",
     "manualLocationLabel": "Workplace",
     "manualLocationHint": "Type where you actually are (e.g. a client's site, working from home) — required when no site is selected.",
     "manualLocationRequired": "Enter your workplace to clock in without a registered site.",

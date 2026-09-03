@@ -45,6 +45,14 @@ export interface Site {
   createdAt: string;
 }
 
+export interface NearbySite {
+  id: string;
+  name: string;
+  displayAddress: string | null;
+  distanceMeters: number;
+  cameraRequired: boolean;
+}
+
 export interface SiteAssignment {
   id: string;
   siteId: string;
@@ -193,6 +201,31 @@ class SiteRepository {
       const { data, error } = await this.client.from("sites").select("*").order("name", { ascending: true });
       if (error) return createError(error.message);
       return createSuccess((data ?? []).map(mapSiteRow));
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Site service unavailable.");
+    }
+  }
+
+  // § live UX review, user-directed - "I'm at a different site every
+  // day, the geofence itself should let me clock in without a prior
+  // assignment." Sites the caller is NOT assigned to but is verifiably
+  // standing inside the geofence of right now - a real server-side GPS
+  // check (compute_prosm_time_geofence_check), not a client guess. Only
+  // a suggestion for the Clock In picker - clock_in_prosm_time_attendance
+  // re-verifies the same check server-side regardless of what this
+  // returned.
+  async listNearbySites(latitude: number, longitude: number, accuracyMeters: number | null): Promise<ServiceResult<NearbySite[]>> {
+    try {
+      const { data, error } = await this.client.rpc("list_prosm_time_nearby_sites", {
+        p_latitude: latitude,
+        p_longitude: longitude,
+        p_accuracy_meters: accuracyMeters,
+      });
+      if (error) return createError(error.message);
+      const rows = (data ?? []) as { id: string; name: string; display_address: string | null; distance_meters: number; camera_required: boolean }[];
+      return createSuccess(
+        rows.map((row) => ({ id: row.id, name: row.name, displayAddress: row.display_address, distanceMeters: row.distance_meters, cameraRequired: row.camera_required })),
+      );
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Site service unavailable.");
     }

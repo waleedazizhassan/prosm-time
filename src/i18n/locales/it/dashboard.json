@@ -70,6 +70,7 @@
     },
     "siteLabel": "Sede",
     "noSiteOption": "Nessuna sede — usa la mia posizione attuale",
+    "nearbySiteOption": "📍 {{name}} (sei qui oggi)",
     "manualLocationLabel": "Luogo di lavoro",
     "manualLocationHint": "Indica dove ti trovi realmente (es. presso un cliente, lavoro da casa) — obbligatorio se non è selezionata nessuna sede.",
     "manualLocationRequired": "Inserisci il tuo luogo di lavoro per timbrare senza una sede registrata.",

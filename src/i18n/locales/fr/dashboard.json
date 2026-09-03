@@ -70,6 +70,7 @@
     },
     "siteLabel": "Site",
     "noSiteOption": "Aucun site — utiliser ma position actuelle",
+    "nearbySiteOption": "📍 {{name}} (vous êtes ici aujourd'hui)",
     "manualLocationLabel": "Lieu de travail",
     "manualLocationHint": "Indiquez où vous êtes réellement (chez un client, en télétravail...) — obligatoire si aucun site n'est sélectionné.",
     "manualLocationRequired": "Indiquez votre lieu de travail pour pointer sans site enregistré.",
