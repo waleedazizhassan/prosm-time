@@ -11,17 +11,24 @@ import styles from "./LiveLocationMap.module.css";
 // position, and when a site is relevant (clocked in, or picked in the
 // Clock In site selector), a translucent circle for that site's real
 // geofence radius. Plain Leaflet + OpenStreetMap (no react-leaflet) -
-// free, keyless, no vendor account. CartoDB's free light_all/dark_all
-// tile sets switch with the app's own theme so the map never looks
-// like a foreign widget dropped onto a dark UI.
+// free, keyless, no vendor account.
+//
+// § real bug, live-tested: CartoDB's basemaps.cartocdn.com light_all/
+// dark_all tiles (this component's original source) now render an
+// "API KEY REQUIRED" watermark for unauthenticated requests - CARTO
+// retired free anonymous access to that CDN. Switched to plain
+// OpenStreetMap standard tiles (genuinely free, no key, no account -
+// the one source that still matches what the user actually asked for)
+// for BOTH themes, with a CSS invert+hue-rotate filter faking a dark
+// variant in dark mode - the standard technique for theming raster OSM
+// tiles when no free dark tile source exists.
 //
 // A custom divIcon (not Leaflet's default marker) - the default marker
 // image path doesn't resolve correctly once bundled by Vite, and a
 // plain brand-colored dot matches this app's own MapPin/token language
 // better than Leaflet's default blue pin anyway.
-const LIGHT_TILE_URL = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
-const DARK_TILE_URL = "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
-const TILE_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
+const TILE_URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+const TILE_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
 function buildMarkerIcon(): L.DivIcon {
   return L.divIcon({
@@ -51,6 +58,10 @@ export default function LiveLocationMap({ latitude, longitude, site = null, heig
     if (!containerRef.current || mapRef.current) return;
     const map = L.map(containerRef.current, { zoomControl: false, attributionControl: true, dragging: true, scrollWheelZoom: false });
     map.setView([latitude ?? 30.0444, longitude ?? 31.2357], 15);
+    // OpenStreetMap's tile usage policy requires real attribution to
+    // stay visible - only Leaflet's own "Leaflet" self-credit prefix
+    // (not a license requirement) is dropped, to keep the bar compact.
+    map.attributionControl.setPrefix(false);
     mapRef.current = map;
     return () => {
       map.remove();
@@ -66,7 +77,11 @@ export default function LiveLocationMap({ latitude, longitude, site = null, heig
     const map = mapRef.current;
     if (!map) return;
     if (tileLayerRef.current) map.removeLayer(tileLayerRef.current);
-    const tileLayer = L.tileLayer(resolvedTheme === "dark" ? DARK_TILE_URL : LIGHT_TILE_URL, { attribution: TILE_ATTRIBUTION, maxZoom: 19 });
+    const tileLayer = L.tileLayer(TILE_URL, {
+      attribution: TILE_ATTRIBUTION,
+      maxZoom: 19,
+      className: resolvedTheme === "dark" ? styles.darkTiles : undefined,
+    });
     tileLayer.addTo(map);
     tileLayerRef.current = tileLayer;
   }, [resolvedTheme]);

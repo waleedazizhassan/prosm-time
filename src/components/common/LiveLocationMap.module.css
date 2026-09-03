@@ -5,6 +5,32 @@
   background: var(--surface-hover);
 }
 
+/* § real bug, live-tested: CartoDB's dark tile CDN now requires a key
+   (an "API KEY REQUIRED" watermark, no longer a free anonymous
+   source) - faking a dark variant from plain OpenStreetMap tiles via
+   the standard invert+hue-rotate trick instead. */
+.darkTiles {
+  filter: invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.9);
+}
+
+/* § live UX review, user-directed - the attribution bar read as too
+   bulky. OpenStreetMap's tile usage policy requires real attribution
+   to stay visible (can't be removed), so this only shrinks it and
+   drops Leaflet's own "Leaflet |" self-credit prefix (handled in
+   LiveLocationMap.tsx via attributionControl.setPrefix(false)) - not
+   a license requirement, just Leaflet's own default courtesy credit. */
+.map :global(.leaflet-control-attribution) {
+  background: rgba(0, 0, 0, 0.35);
+  font-size: 9px;
+  line-height: 1.4;
+  padding: 0 4px;
+  color: #e5e7eb;
+}
+
+.map :global(.leaflet-control-attribution a) {
+  color: #e5e7eb;
+}
+
 .markerIcon {
   display: flex;
   align-items: center;
