@@ -1,0 +1,182 @@
+/* PROSM Time - the mobile-drawer inline "Media" section (SidebarRadio.tsx),
+   reusing the same visual language as HeaderRadio's own popup panel
+   (nowPlaying/searchRow/stationList) but laid out inline, full-width,
+   never portaled/floating - it IS the sidebar section, not a popup
+   opened from one. */
+.container {
+  display: flex;
+  flex-direction: column;
+
+  margin: var(--space-2) 0;
+  border-top: 1px solid var(--border-light);
+}
+
+.sectionLabel {
+  margin: var(--space-3) 0 var(--space-1);
+  padding: 0 var(--space-3);
+
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-disabled);
+}
+
+.nowPlaying {
+  margin: 0 var(--space-3) var(--space-2);
+  padding: var(--space-2) var(--space-3);
+
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  background: var(--surface-hover);
+}
+
+.nowPlayingInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  margin-bottom: var(--space-2);
+}
+
+.nowPlayingName {
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nowPlayingStatus {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.nowPlayingControls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 28px;
+  height: 28px;
+
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+
+  background: var(--surface-card);
+  color: var(--text-primary);
+
+  cursor: pointer;
+}
+
+.iconButton:hover {
+  background: var(--surface-hover);
+}
+
+.spinning {
+  animation: sidebarRadioSpin 800ms linear infinite;
+}
+
+@keyframes sidebarRadioSpin {
+  to { transform: rotate(360deg); }
+}
+
+.volumeSlider {
+  flex: 1;
+  min-width: 0;
+  accent-color: var(--brand-primary);
+}
+
+.searchRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  margin: 0 var(--space-3) var(--space-1);
+  padding: var(--space-1) var(--space-2);
+
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+}
+
+.searchIcon {
+  flex-shrink: 0;
+  color: var(--text-disabled);
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+
+  border: none;
+  background: transparent;
+  outline: none;
+
+  font-size: var(--font-sm);
+  color: var(--text-primary);
+}
+
+.stationList {
+  overflow-y: auto;
+  max-height: 220px;
+}
+
+.stateMessage {
+  padding: var(--space-3);
+
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.stationRow {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+
+  border: none;
+  background: transparent;
+
+  text-align: start;
+  cursor: pointer;
+}
+
+.stationRow:hover {
+  background: var(--surface-hover);
+}
+
+.stationRowActive {
+  background: var(--brand-primary-subtle);
+}
+
+.stationName {
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stationMeta {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

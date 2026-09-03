@@ -405,6 +405,16 @@
   }
 }
 
+/* § live UX review, user-directed - the radio only lives here on
+   mobile (the drawer); desktop keeps it in the Header
+   (HeaderRadio.module.css hides itself at the same 900px breakpoint,
+   inverted) - never both at once. */
+@media (min-width: 901px) {
+  .mobileRadioSlot {
+    display: none;
+  }
+}
+
 /* ===== Version label (Sidebar footer) - § live UX review, user-
    directed: "remove the splash screen entirely, write the version
    number in the appropriate places instead." ===== */

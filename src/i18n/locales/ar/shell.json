@@ -102,6 +102,7 @@
   },
   "radio": {
     "title": "الراديو",
+    "mediaSectionTitle": "وسائط",
     "loading": "جارٍ التحميل...",
     "reconnecting": "إعادة الاتصال...",
     "error": "تعذر التشغيل.",

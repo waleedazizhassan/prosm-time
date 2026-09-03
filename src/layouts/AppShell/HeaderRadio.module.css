@@ -4,6 +4,16 @@
   flex-shrink: 0;
 }
 
+/* § live UX review, user-directed - "on mobile, take the radio out of
+   the header entirely and put it in the sidebar under a Media
+   heading" (SidebarRadio.tsx) - same breakpoint the Sidebar itself
+   flips from a rail to an off-canvas drawer at (Sidebar.module.css). */
+@media (max-width: 900px) {
+  .container {
+    display: none;
+  }
+}
+
 .pill {
   display: flex;
   align-items: center;

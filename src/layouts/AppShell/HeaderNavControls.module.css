@@ -66,9 +66,20 @@
 @media (max-width: 640px) {
   /* § live UX review, user-directed correction - these were previously
      hidden on mobile; the user now wants them visible there too, so
-     the buttons shrink slightly to make room instead of disappearing. */
+     the buttons shrink further to make room instead of disappearing -
+     "the arrows are jammed right up against the PROSM icon". */
+  .container {
+    gap: 1px;
+    padding: 1px;
+  }
+
   .button {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .button svg {
+    width: 14px;
+    height: 14px;
   }
 }

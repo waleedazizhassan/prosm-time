@@ -112,6 +112,10 @@
 
   .centerSection {
     gap: var(--space-1);
+    /* § live UX review, user-directed correction - "the arrows and the
+       PROSM icon are stuck right against each other" - the header's
+       own 8px gap alone wasn't enough breathing room at this width. */
+    margin-inline-end: var(--space-2);
   }
 
   .brandName {

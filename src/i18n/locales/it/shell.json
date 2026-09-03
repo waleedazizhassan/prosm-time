@@ -102,6 +102,7 @@
   },
   "radio": {
     "title": "Radio",
+    "mediaSectionTitle": "Media",
     "loading": "Caricamento…",
     "reconnecting": "Riconnessione…",
     "error": "Riproduzione non riuscita.",

@@ -7,6 +7,7 @@ import { useAuth } from "../../core/context/AuthContext";
 import { useAppLayout } from "./LayoutContext";
 import { NAV_ITEMS, NAV_SECTION_ORDER } from "./navigation";
 import UserMenu from "./UserMenu";
+import SidebarRadio from "./SidebarRadio";
 import { APP_VERSION } from "../../core/appVersion";
 import styles from "./Sidebar.module.css";
 
@@ -131,6 +132,15 @@ export default function Sidebar() {
             </div>
           ))}
         </nav>
+
+        {/* § live UX review, user-directed - "on mobile, take the
+            radio out of the header entirely and put it in the sidebar
+            under a Media heading" - CSS-hidden at desktop widths
+            (Sidebar.module.css), mirroring HeaderRadio's own inverse
+            hiding on mobile (HeaderRadio.module.css). */}
+        <div className={styles.mobileRadioSlot}>
+          <SidebarRadio />
+        </div>
 
         <UserMenu collapsed={sidebarCollapsed} />
         <p className={styles.versionLabel}>{t("common:versionLabel", { version: APP_VERSION })}</p>

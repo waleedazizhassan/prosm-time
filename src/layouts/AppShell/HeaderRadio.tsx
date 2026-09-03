@@ -3,9 +3,10 @@ import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { Radio as RadioIcon, Play, Pause, Square, Volume2, VolumeX, Search, Loader2 } from "lucide-react";
 
-import RadioBrowserClient, { type RadioStation } from "../../core/services/RadioBrowserClient";
+import type { RadioStation } from "../../core/services/RadioBrowserClient";
 import RadioPlaybackEngine from "../../core/services/RadioPlaybackEngine";
 import useRadio from "../../core/hooks/useRadio";
+import useRadioStations from "../../core/hooks/useRadioStations";
 import styles from "./HeaderRadio.module.css";
 
 const PANEL_GAP = 10;
@@ -30,60 +31,11 @@ export default function HeaderRadio() {
 
   const [expanded, setExpanded] = useState(false);
   const [panelStyle, setPanelStyle] = useState<{ top: number; left: number; maxHeight: number } | null>(null);
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState<RadioStation[]>([]);
-  const [defaultStations, setDefaultStations] = useState<RadioStation[]>([]);
-  const [searching, setSearching] = useState(false);
-  const [loadedDefaults, setLoadedDefaults] = useState(false);
+  const { query, setQuery, stationList, searching } = useRadioStations(expanded);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-  const searchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    if (!expanded || loadedDefaults) return;
-    setLoadedDefaults(true);
-    // § live UX review, user-directed - "widen the radio's range, add
-    // Egyptian/Arab stations" - the global top-clicked list alone
-    // rarely surfaces them. Egypt/Arab countries are fetched alongside
-    // the global list and placed first, de-duplicated by stationUuid.
-    Promise.allSettled([
-      RadioBrowserClient.listByCountry("Egypt", 15),
-      RadioBrowserClient.listByCountry("Saudi Arabia", 10),
-      RadioBrowserClient.listByCountry("United Arab Emirates", 10),
-      RadioBrowserClient.listTopStations(24),
-    ])
-      .then(([egypt, saudi, uae, top]) => {
-        const merged = new Map<string, RadioStation>();
-        for (const settled of [egypt, saudi, uae, top]) {
-          if (settled.status !== "fulfilled") continue;
-          for (const station of settled.value) {
-            if (!merged.has(station.stationUuid)) merged.set(station.stationUuid, station);
-          }
-        }
-        setDefaultStations([...merged.values()]);
-      })
-      .catch(() => setDefaultStations([]));
-  }, [expanded, loadedDefaults]);
-
-  useEffect(() => {
-    if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current);
-    if (!query.trim()) {
-      setResults([]);
-      setSearching(false);
-      return;
-    }
-    setSearching(true);
-    searchDebounceRef.current = setTimeout(async () => {
-      const stations = await RadioBrowserClient.search(query, 30).catch(() => []);
-      setResults(stations);
-      setSearching(false);
-    }, 400);
-    return () => {
-      if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current);
-    };
-  }, [query]);
 
   useEffect(() => {
     if (!expanded) return undefined;
@@ -134,7 +86,7 @@ export default function HeaderRadio() {
       window.removeEventListener("resize", computePosition);
       window.removeEventListener("scroll", computePosition, true);
     };
-  }, [expanded, results.length, defaultStations.length]);
+  }, [expanded, stationList.length]);
 
   const handlePlay = (station: RadioStation) => {
     RadioPlaybackEngine.startPlayback(station);
@@ -148,7 +100,6 @@ export default function HeaderRadio() {
     }
   };
 
-  const stationList = query.trim() ? results : defaultStations;
   const isPlaying = radio.playbackState === "playing" || radio.playbackState === "loading";
   const isPanelVisible = expanded && panelStyle !== null;
 
