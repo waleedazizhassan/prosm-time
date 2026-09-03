@@ -61,9 +61,12 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
   const [capturedDataUrl, setCapturedDataUrl] = useState<string | null>(null);
   const [error, setError] = useState("");
   // § live UX review, user-directed - "the front camera doesn't work,
-  // there should be a button to switch between them." Defaults to the
-  // rear camera (the real attendance-evidence use case), switchable.
-  const [facingMode, setFacingMode] = useState<FacingMode>("environment");
+  // there should be a button to switch between them," then "the front
+  // camera should be the one active by default for clock-in/out" -
+  // matches this modal's own face-based-identification framing (see
+  // the CSS's own header comment); the switch button still reaches the
+  // rear camera when needed.
+  const [facingMode, setFacingMode] = useState<FacingMode>("user");
 
   const stopStream = () => {
     streamRef.current?.getTracks().forEach((track) => track.stop());
