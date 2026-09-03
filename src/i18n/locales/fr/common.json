@@ -122,6 +122,7 @@
     "unknownPermissionKey": "Cette permission n'est pas reconnue.",
     "userNotFound": "Cet utilisateur est introuvable.",
     "workplaceNameRequiredWhenNoSite": "Un nom de lieu de travail est requis lorsqu'aucun site n'est sélectionné.",
+    "youAreAlreadyAtThisSite": "Vous êtes déjà sur ce site.",
     "youAreAlreadyClockedIn": "Vous avez déjà pointé votre arrivée.",
     "youAreNotAssignedToProject": "Vous n'êtes pas affecté à ce projet.",
     "youAreNotAssignedToSite": "Vous n'êtes pas affecté à ce site.",
@@ -142,6 +143,7 @@
     "onlyRequestCorrectionOwnTimesheet": "Vous ne pouvez demander une correction que sur votre propre feuille de temps.",
     "onlySubmitOwnAllowanceEntry": "Vous ne pouvez soumettre que votre propre entrée d'indemnité.",
     "onlySubmitOwnTimesheet": "Vous ne pouvez soumettre que votre propre feuille de temps.",
+    "mustBeClockedInToChangeSite": "Vous devez avoir pointé votre arrivée pour changer de site.",
     "mustBeClockedInToStartBreak": "Vous devez avoir pointé votre arrivée pour commencer une pause."
   }
 }

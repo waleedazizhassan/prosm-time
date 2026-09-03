@@ -23,6 +23,7 @@ import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import StatusBadge from "../../components/common/StatusBadge";
 import CameraCaptureModal from "../../components/common/CameraCaptureModal";
+import Modal from "../../components/common/Modal";
 import ErrorText from "../../components/common/ErrorText";
 import styles from "./ClockInOutCard.module.css";
 
@@ -85,6 +86,13 @@ export default function ClockInOutCard() {
   const [activeBreakId, setActiveBreakId] = useState<string | null>(null);
   const [breakSubmitting, setBreakSubmitting] = useState(false);
   const [breakWarning, setBreakWarning] = useState("");
+  // § live UX review, user-directed - mid-shift "Change Site": press
+  // Pause before leaving the current site, then "Change Site" once
+  // arrived at the next one - never clocks out, records the move.
+  const [changeSiteModalOpen, setChangeSiteModalOpen] = useState(false);
+  const [changeSiteTargetId, setChangeSiteTargetId] = useState("");
+  const [changeSiteSubmitting, setChangeSiteSubmitting] = useState(false);
+  const [changeSiteError, setChangeSiteError] = useState("");
   const [currentLocation, setCurrentLocation] = useState<CurrentPosition | null>(null);
   const [locationStatus, setLocationStatus] = useState<"detecting" | "available" | "unavailable">("detecting");
   const [placeName, setPlaceName] = useState<string | null>(null);
@@ -553,7 +561,56 @@ export default function ClockInOutCard() {
     }
   };
 
+  const handleOpenChangeSiteModal = () => {
+    setChangeSiteTargetId("");
+    setChangeSiteError("");
+    setChangeSiteModalOpen(true);
+  };
+
+  const handleCloseChangeSiteModal = () => {
+    if (changeSiteSubmitting) return;
+    setChangeSiteModalOpen(false);
+  };
+
+  const handleConfirmChangeSite = async () => {
+    if (!activeBreakId || !changeSiteTargetId) return;
+    setChangeSiteSubmitting(true);
+    setChangeSiteError("");
+
+    let latitude: number | null = null;
+    let longitude: number | null = null;
+    let accuracyMeters: number | null = null;
+    try {
+      const position = await getCurrentPosition();
+      latitude = position.latitude;
+      longitude = position.longitude;
+      accuracyMeters = position.accuracyMeters;
+    } catch {
+      // Best-effort, same posture as SOS - the server re-verifies the
+      // geofence itself and rejects when it can't confirm presence.
+    }
+
+    const result = await AttendanceRepository.changeSite(activeBreakId, changeSiteTargetId, latitude, longitude, accuracyMeters);
+    setChangeSiteSubmitting(false);
+
+    if (!result.success) {
+      setChangeSiteError(humanizeBackendError(result.message, t) ?? t("attendance.changeSiteError"));
+      return;
+    }
+
+    if (result.data?.maxDurationExceeded) {
+      setBreakWarning(t("attendance.breakExceeded"));
+    }
+
+    setChangeSiteModalOpen(false);
+    setActiveBreakId(null);
+    load();
+  };
+
   const statusKey = activeBreakId ? "onBreak" : session ? "clockedIn" : "notClockedIn";
+  const changeSiteOptions = sites
+    .filter((site) => site.id !== currentSite?.id)
+    .map((site) => ({ value: site.id, label: nearbySiteIds.has(site.id) ? t("attendance.nearbySiteOption", { name: site.name }) : site.name }));
 
   return (
     <Card>
@@ -638,6 +695,11 @@ export default function ClockInOutCard() {
             <Button variant="ghost" fullWidth onClick={handleToggleBreak} loading={breakSubmitting}>
               {activeBreakId ? t("attendance.breakEndAction") : t("attendance.breakStartAction")}
             </Button>
+            {activeBreakId ? (
+              <Button variant="ghost" fullWidth onClick={handleOpenChangeSiteModal}>
+                {t("attendance.changeSiteAction")}
+              </Button>
+            ) : null}
           </div>
 
           {presenceSession ? (
@@ -726,6 +788,27 @@ export default function ClockInOutCard() {
       )}
 
       <CameraCaptureModal isOpen={cameraFor !== null} onClose={handleCameraClose} onCapture={handleCameraCapture} />
+
+      <Modal
+        isOpen={changeSiteModalOpen}
+        onClose={handleCloseChangeSiteModal}
+        title={t("attendance.changeSiteModalTitle")}
+        footer={
+          <Button fullWidth onClick={handleConfirmChangeSite} loading={changeSiteSubmitting} disabled={!changeSiteTargetId}>
+            {t("attendance.changeSiteConfirmAction")}
+          </Button>
+        }
+      >
+        <Select
+          label={t("attendance.siteLabel")}
+          name="changeSiteTarget"
+          value={changeSiteTargetId}
+          onChange={(event) => setChangeSiteTargetId(event.target.value)}
+          disabled={changeSiteSubmitting}
+          options={[{ value: "", label: t("attendance.changeSitePickPlaceholder") }, ...changeSiteOptions]}
+        />
+        <ErrorText>{changeSiteError}</ErrorText>
+      </Modal>
     </Card>
   );
 }

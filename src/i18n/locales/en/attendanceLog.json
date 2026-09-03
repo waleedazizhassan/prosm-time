@@ -27,6 +27,7 @@
   "empty": "No attendance records for this period.",
   "viewPhoto": "View photo",
   "viewOnMap": "View on map",
+  "siteChangedTo": "→ {{site}} at {{time}}",
   "locationMatch": "Matched the site's geofence",
   "locationMismatch": "Did not match the site's geofence",
   "photoModalTitle": "Attendance Photo",

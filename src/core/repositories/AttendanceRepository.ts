@@ -304,6 +304,26 @@ class AttendanceRepository {
       return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
     }
   }
+
+  // § live UX review, user-directed - mid-shift "Change Site": ends the
+  // active break, moves the still-open session to the new site, never
+  // clocks the employee out. Same Edge Function shape as start-break/
+  // end-break (§35 - a real session mutation, not a direct table write).
+  async changeSite(breakId: string, newSiteId: string, latitude: number | null, longitude: number | null, accuracyMeters: number | null): Promise<ServiceResult<{ siteChangeId: string; maxDurationExceeded: boolean }>> {
+    try {
+      const { data, error } = await this.client.functions.invoke("change-site", {
+        body: { breakId, newSiteId, latitude, longitude, accuracyMeters },
+      });
+      if (error) {
+        const errorBody = await error.context?.json?.().catch(() => null);
+        return createError(errorBody?.error?.message ?? error.message ?? "Unable to change site.");
+      }
+      if (data?.success === false) return createError(data?.error?.message ?? "Unable to change site.");
+      return createSuccess({ siteChangeId: data.data.siteChangeId, maxDurationExceeded: Boolean(data.data.maxDurationExceeded) });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
+    }
+  }
 }
 
 export default new AttendanceRepository();

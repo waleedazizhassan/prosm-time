@@ -27,6 +27,7 @@
   "empty": "لا توجد سجلات حضور لهذه الفترة.",
   "viewPhoto": "عرض الصورة",
   "viewOnMap": "عرض على الخريطة",
+  "siteChangedTo": "→ {{site}} الساعة {{time}}",
   "locationMatch": "مطابق لنطاق الموقع",
   "locationMismatch": "غير مطابق لنطاق الموقع",
   "photoModalTitle": "صورة الحضور",

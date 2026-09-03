@@ -122,6 +122,7 @@
     "unknownPermissionKey": "هذه الصلاحية غير معروفة.",
     "userNotFound": "تعذر العثور على هذا المستخدم.",
     "workplaceNameRequiredWhenNoSite": "اسم مكان العمل مطلوب عند عدم اختيار موقع.",
+    "youAreAlreadyAtThisSite": "أنت بالفعل في هذا الموقع.",
     "youAreAlreadyClockedIn": "أنت مسجل حضورك بالفعل.",
     "youAreNotAssignedToProject": "أنت غير معيّن لهذا المشروع.",
     "youAreNotAssignedToSite": "أنت غير معيّن لهذا الموقع.",
@@ -142,6 +143,7 @@
     "onlyRequestCorrectionOwnTimesheet": "يمكنك طلب تصحيح لكشف دوامك الخاص فقط.",
     "onlySubmitOwnAllowanceEntry": "يمكنك إرسال قيد البدل الخاص بك فقط.",
     "onlySubmitOwnTimesheet": "يمكنك إرسال كشف دوامك الخاص فقط.",
+    "mustBeClockedInToChangeSite": "يجب أن تكون مسجلاً حضورك لتغيير الموقع.",
     "mustBeClockedInToStartBreak": "يجب أن تكون مسجلاً حضورك لبدء استراحة."
   }
 }

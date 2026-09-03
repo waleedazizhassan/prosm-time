@@ -133,6 +133,7 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "UNKNOWN PERMISSION KEY": "unknownPermissionKey",
   "USER NOT FOUND": "userNotFound",
   "WORKPLACE NAME IS REQUIRED WHEN NO SITE IS SELECTED": "workplaceNameRequiredWhenNoSite",
+  "YOU ARE ALREADY AT THIS SITE": "youAreAlreadyAtThisSite",
   "YOU ARE ALREADY CLOCKED IN": "youAreAlreadyClockedIn",
   "YOU ARE NOT ASSIGNED TO THIS PROJECT": "youAreNotAssignedToProject",
   "YOU ARE NOT ASSIGNED TO THIS SITE": "youAreNotAssignedToSite",
@@ -153,5 +154,6 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "YOU MAY ONLY REQUEST A CORRECTION ON YOUR OWN TIMESHEET": "onlyRequestCorrectionOwnTimesheet",
   "YOU MAY ONLY SUBMIT YOUR OWN ALLOWANCE ENTRY": "onlySubmitOwnAllowanceEntry",
   "YOU MAY ONLY SUBMIT YOUR OWN TIMESHEET": "onlySubmitOwnTimesheet",
+  "YOU MUST BE CLOCKED IN TO CHANGE SITE": "mustBeClockedInToChangeSite",
   "YOU MUST BE CLOCKED IN TO START A BREAK": "mustBeClockedInToStartBreak",
 };

@@ -27,6 +27,7 @@
   "empty": "Nessun registro di presenza per questo periodo.",
   "viewPhoto": "Visualizza foto",
   "viewOnMap": "Visualizza sulla mappa",
+  "siteChangedTo": "→ {{site}} alle {{time}}",
   "locationMatch": "Corrisponde all'area della sede",
   "locationMismatch": "Non corrisponde all'area della sede",
   "photoModalTitle": "Foto presenza",

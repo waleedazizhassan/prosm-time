@@ -27,6 +27,7 @@
   "empty": "Aucun enregistrement de présence pour cette période.",
   "viewPhoto": "Voir la photo",
   "viewOnMap": "Voir sur la carte",
+  "siteChangedTo": "→ {{site}} à {{time}}",
   "locationMatch": "Correspond à la zone du site",
   "locationMismatch": "Ne correspond pas à la zone du site",
   "photoModalTitle": "Photo de présence",

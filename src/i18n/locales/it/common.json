@@ -122,6 +122,7 @@
     "unknownPermissionKey": "Questo permesso non è riconosciuto.",
     "userNotFound": "Questo utente non è stato trovato.",
     "workplaceNameRequiredWhenNoSite": "È richiesto un nome del luogo di lavoro quando non è selezionato alcun sito.",
+    "youAreAlreadyAtThisSite": "Sei già in questo sito.",
     "youAreAlreadyClockedIn": "Hai già timbrato l'entrata.",
     "youAreNotAssignedToProject": "Non sei assegnato a questo progetto.",
     "youAreNotAssignedToSite": "Non sei assegnato a questo sito.",
@@ -142,6 +143,7 @@
     "onlyRequestCorrectionOwnTimesheet": "Puoi richiedere una correzione solo sul tuo foglio ore.",
     "onlySubmitOwnAllowanceEntry": "Puoi inviare solo la tua voce di indennità.",
     "onlySubmitOwnTimesheet": "Puoi inviare solo il tuo foglio ore.",
+    "mustBeClockedInToChangeSite": "Devi aver timbrato l'entrata per cambiare sito.",
     "mustBeClockedInToStartBreak": "Devi aver timbrato l'entrata per iniziare una pausa."
   }
 }

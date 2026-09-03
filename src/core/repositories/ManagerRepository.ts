@@ -32,6 +32,17 @@ export interface TodayAttendanceRow {
   // calls getUserPosition first) - this was only ever a display gap.
   clockInLocation: AttendanceEventLocation | null;
   clockOutLocation: AttendanceEventLocation | null;
+  // § live UX review, user-directed - "Change Site" mid-shift: show the
+  // move inline under the site name ("changed to X at HH:MM"), same
+  // "the record itself carries what happened" posture as the evidence-
+  // photo icons above.
+  siteChanges: SiteChangeEntry[];
+}
+
+export interface SiteChangeEntry {
+  fromSiteName: string | null;
+  toSiteName: string;
+  changedAt: string;
 }
 
 export interface PendingReviewItem {
@@ -69,6 +80,13 @@ interface RawAttendanceEventRow {
 interface RawCameraEvidenceRow {
   attendance_event_id: string;
   storage_path: string;
+}
+
+interface RawSiteChangeRow {
+  attendance_session_id: string;
+  changed_at: string;
+  old_site: { name: string } | { name: string }[] | null;
+  new_site: { name: string } | { name: string }[] | null;
 }
 
 interface RawGeofenceExceptionRow {
@@ -177,6 +195,28 @@ class ManagerRepository {
         }
       }
 
+      // § live UX review, user-directed - the mid-shift "Change Site"
+      // move, joined the same way evidence/location are above (only
+      // for the sessions already being fetched).
+      const siteChangesBySession = new Map<string, SiteChangeEntry[]>();
+      if (sessionIds.length > 0) {
+        const changesResult = await this.client
+          .from("site_change_events")
+          .select("attendance_session_id, changed_at, old_site:sites!site_change_events_old_site_id_fkey(name), new_site:sites!site_change_events_new_site_id_fkey(name)")
+          .in("attendance_session_id", sessionIds)
+          .order("changed_at", { ascending: true });
+        if (changesResult.error) return createError(changesResult.error.message);
+
+        for (const changeRow of (changesResult.data ?? []) as RawSiteChangeRow[]) {
+          const oldSite = Array.isArray(changeRow.old_site) ? changeRow.old_site[0] : changeRow.old_site;
+          const newSite = Array.isArray(changeRow.new_site) ? changeRow.new_site[0] : changeRow.new_site;
+          const entry: SiteChangeEntry = { fromSiteName: oldSite?.name ?? null, toSiteName: newSite?.name ?? "", changedAt: changeRow.changed_at };
+          const existing = siteChangesBySession.get(changeRow.attendance_session_id) ?? [];
+          existing.push(entry);
+          siteChangesBySession.set(changeRow.attendance_session_id, existing);
+        }
+      }
+
       const rows = ((sessionsResult.data ?? []) as RawAttendanceSessionRow[]).map((row) => {
         const user = Array.isArray(row.users) ? row.users[0] : row.users;
         const site = Array.isArray(row.sites) ? row.sites[0] : row.sites;
@@ -197,6 +237,7 @@ class ManagerRepository {
           clockOutEvidencePath: clockOutEvidenceBySession.get(row.id) ?? null,
           clockInLocation: clockInLocationBySession.get(row.id) ?? null,
           clockOutLocation: clockOutLocationBySession.get(row.id) ?? null,
+          siteChanges: siteChangesBySession.get(row.id) ?? [],
         };
       });
 

@@ -184,7 +184,20 @@ export default function AttendanceLogPage() {
 
   const columns: TableColumn<TodayAttendanceRow>[] = [
     { key: "name", header: t("columns.employee"), render: (row) => row.userFullName },
-    { key: "site", header: t("columns.site"), render: (row) => row.siteName || "—" },
+    {
+      key: "site",
+      header: t("columns.site"),
+      render: (row) => (
+        <span>
+          {row.siteName || "—"}
+          {row.siteChanges.map((change, index) => (
+            <span key={index} style={{ display: "block", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
+              {t("siteChangedTo", { site: change.toSiteName, time: formatTimeOnly(change.changedAt, i18n.language) })}
+            </span>
+          ))}
+        </span>
+      ),
+    },
     { key: "clockInLocation", header: t("columns.clockInLocation"), render: (row) => <LocationCell location={row.clockInLocation} t={t} /> },
     { key: "clockOutLocation", header: t("columns.clockOutLocation"), render: (row) => <LocationCell location={row.clockOutLocation} t={t} /> },
     {

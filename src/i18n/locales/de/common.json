@@ -122,6 +122,7 @@
     "unknownPermissionKey": "Diese Berechtigung ist nicht bekannt.",
     "userNotFound": "Dieser Benutzer wurde nicht gefunden.",
     "workplaceNameRequiredWhenNoSite": "Ein Arbeitsplatzname ist erforderlich, wenn kein Standort ausgewählt ist.",
+    "youAreAlreadyAtThisSite": "Sie befinden sich bereits an diesem Standort.",
     "youAreAlreadyClockedIn": "Sie sind bereits eingestempelt.",
     "youAreNotAssignedToProject": "Sie sind diesem Projekt nicht zugewiesen.",
     "youAreNotAssignedToSite": "Sie sind diesem Standort nicht zugewiesen.",
@@ -142,6 +143,7 @@
     "onlyRequestCorrectionOwnTimesheet": "Sie können eine Korrektur nur für Ihre eigene Zeiterfassung beantragen.",
     "onlySubmitOwnAllowanceEntry": "Sie können nur Ihren eigenen Zulageneintrag einreichen.",
     "onlySubmitOwnTimesheet": "Sie können nur Ihre eigene Zeiterfassung einreichen.",
+    "mustBeClockedInToChangeSite": "Sie müssen eingestempelt sein, um den Standort zu wechseln.",
     "mustBeClockedInToStartBreak": "Sie müssen eingestempelt sein, um eine Pause zu beginnen."
   }
 }

@@ -122,6 +122,7 @@
     "unknownPermissionKey": "This permission isn't recognized.",
     "userNotFound": "This user could not be found.",
     "workplaceNameRequiredWhenNoSite": "A workplace name is required when no site is selected.",
+    "youAreAlreadyAtThisSite": "You're already at this site.",
     "youAreAlreadyClockedIn": "You're already clocked in.",
     "youAreNotAssignedToProject": "You aren't assigned to this project.",
     "youAreNotAssignedToSite": "You aren't assigned to this site.",
@@ -142,6 +143,7 @@
     "onlyRequestCorrectionOwnTimesheet": "You may only request a correction on your own timesheet.",
     "onlySubmitOwnAllowanceEntry": "You may only submit your own allowance entry.",
     "onlySubmitOwnTimesheet": "You may only submit your own timesheet.",
+    "mustBeClockedInToChangeSite": "You must be clocked in to change site.",
     "mustBeClockedInToStartBreak": "You must be clocked in to start a break."
   }
 }
