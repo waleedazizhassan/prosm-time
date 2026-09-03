@@ -110,7 +110,16 @@
     "offlineQueueError": "Diese Aktion konnte nicht für die Offline-Synchronisierung eingereiht werden.",
     "locationDetecting": "Ihr aktueller Standort wird ermittelt...",
     "locationAccuracy": "±{{meters}} m",
-    "locationUnavailable": "Aktueller Standort nicht verfügbar"
+    "locationUnavailable": "Aktueller Standort nicht verfügbar",
+    "confirmClockInTitle": "Einstempeln bestätigen",
+    "confirmClockOutTitle": "Ausstempeln bestätigen",
+    "confirmPhotoLabel": "Foto",
+    "confirmNoPhoto": "Kein Foto erforderlich.",
+    "confirmTimeLabel": "Uhrzeit",
+    "confirmLocationLabel": "Standort",
+    "noteLabel": "Notiz hinzufügen",
+    "activityLabel": "Tätigkeit",
+    "optionalPlaceholder": "Optional"
   },
   "kioskPin": {
     "title": "Kiosk-PIN",

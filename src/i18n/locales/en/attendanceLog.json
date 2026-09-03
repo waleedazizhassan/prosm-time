@@ -28,6 +28,8 @@
   "viewPhoto": "View photo",
   "viewOnMap": "View on map",
   "siteChangedTo": "→ {{site}} at {{time}}",
+  "noteLabel": "Note: {{note}}",
+  "activityLabel": "Activity: {{activity}}",
   "locationMatch": "Matched the site's geofence",
   "locationMismatch": "Did not match the site's geofence",
   "photoModalTitle": "Attendance Photo",

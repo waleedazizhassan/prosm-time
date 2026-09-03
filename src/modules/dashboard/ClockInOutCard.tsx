@@ -24,6 +24,7 @@ import Button from "../../components/common/Button";
 import StatusBadge from "../../components/common/StatusBadge";
 import CameraCaptureModal from "../../components/common/CameraCaptureModal";
 import Modal from "../../components/common/Modal";
+import AttendanceConfirmModal from "../../components/common/AttendanceConfirmModal";
 import LiveLocationMap from "../../components/common/LiveLocationMap";
 import ErrorText from "../../components/common/ErrorText";
 import styles from "./ClockInOutCard.module.css";
@@ -106,6 +107,27 @@ export default function ClockInOutCard() {
   // assignment.
   const [nearbySiteIds, setNearbySiteIds] = useState<Set<string>>(new Set());
   const [lastCompletedSession, setLastCompletedSession] = useState<AttendanceSession | null>(null);
+  // § live UX review, user-directed - a real confirmation screen shown
+  // right before every clock-in/out actually submits (photo if any,
+  // GPS detail, site/workplace, time), with an optional note/activity
+  // - not just when a photo was captured. handleClockInTap/
+  // handleClockOutTap/handleCameraCapture all funnel here now instead
+  // of calling performClockIn/performClockOut directly.
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
+  const [confirmAction, setConfirmAction] = useState<"clockIn" | "clockOut" | null>(null);
+  const [pendingEvidenceFile, setPendingEvidenceFile] = useState<File | null>(null);
+  const [pendingPhotoPreviewUrl, setPendingPhotoPreviewUrl] = useState<string | null>(null);
+  const [confirmError, setConfirmError] = useState("");
+
+  useEffect(() => {
+    if (!pendingEvidenceFile) {
+      setPendingPhotoPreviewUrl(null);
+      return undefined;
+    }
+    const url = URL.createObjectURL(pendingEvidenceFile);
+    setPendingPhotoPreviewUrl(url);
+    return () => URL.revokeObjectURL(url);
+  }, [pendingEvidenceFile]);
 
   const presenceSessionRef = useRef<PresenceSession | null>(null);
   presenceSessionRef.current = presenceSession;
@@ -313,9 +335,9 @@ export default function ClockInOutCard() {
   // function only ever runs once a file already exists or none is
   // needed. Location capture and the offline-queue path are otherwise
   // byte-for-byte what WP-06/WP-15/§25 already established.
-  const performClockIn = async (evidenceFile: File | null) => {
+  const performClockIn = async (evidenceFile: File | null, note: string, activity: string) => {
     setSubmitting(true);
-    setError("");
+    setConfirmError("");
     setEvidenceWarning("");
 
     let latitude: number | null = null;
@@ -332,19 +354,38 @@ export default function ClockInOutCard() {
     }
 
     const trimmedManualLabel = siteId ? null : manualLocationLabel.trim() || null;
+    const trimmedNote = note.trim() || null;
+    const trimmedActivity = activity.trim() || null;
 
     // WP-15/§25 - offline (or unreachable) is queued locally rather
     // than surfaced as an error; the client-captured time/coordinates/
     // evidence captured above travel with the queued item unchanged.
     if (typeof navigator !== "undefined" && navigator.onLine === false) {
-      await queueOffline("clock_in", { siteId: siteId || null, manualLocationLabel: trimmedManualLabel, projectId: projectId || null, latitude, longitude, accuracyMeters }, evidenceFile);
+      await queueOffline(
+        "clock_in",
+        { siteId: siteId || null, manualLocationLabel: trimmedManualLabel, note: trimmedNote, activity: trimmedActivity, projectId: projectId || null, latitude, longitude, accuracyMeters },
+        evidenceFile,
+      );
       return;
     }
 
-    const result = await AttendanceRepository.clockIn({ siteId: siteId || null, manualLocationLabel: trimmedManualLabel, projectId: projectId || null, latitude, longitude, accuracyMeters });
+    const result = await AttendanceRepository.clockIn({
+      siteId: siteId || null,
+      manualLocationLabel: trimmedManualLabel,
+      note: trimmedNote,
+      activity: trimmedActivity,
+      projectId: projectId || null,
+      latitude,
+      longitude,
+      accuracyMeters,
+    });
 
     if (result.networkError) {
-      await queueOffline("clock_in", { siteId: siteId || null, manualLocationLabel: trimmedManualLabel, projectId: projectId || null, latitude, longitude, accuracyMeters }, evidenceFile);
+      await queueOffline(
+        "clock_in",
+        { siteId: siteId || null, manualLocationLabel: trimmedManualLabel, note: trimmedNote, activity: trimmedActivity, projectId: projectId || null, latitude, longitude, accuracyMeters },
+        evidenceFile,
+      );
       return;
     }
 
@@ -359,7 +400,7 @@ export default function ClockInOutCard() {
       // error, since there is no retry action here: the employee
       // genuinely cannot self-clock-in past this point and needs
       // their Manager to do it on their behalf.
-      setError(
+      setConfirmError(
         result.message?.includes("CLOCK_IN_BLOCKED_CONTACT_MANAGER")
           ? t("attendance.clockInBlockedContactManager")
           : (humanizeBackendError(result.message, t) ?? t("attendance.clockInError"))
@@ -375,12 +416,24 @@ export default function ClockInOutCard() {
     }
 
     setSubmitting(false);
+    setConfirmModalOpen(false);
+    setConfirmAction(null);
+    setPendingEvidenceFile(null);
     load();
   };
 
   const queueOffline = async (
     type: "clock_in" | "clock_out",
-    location: { siteId?: string | null; manualLocationLabel?: string | null; projectId?: string | null; latitude: number | null; longitude: number | null; accuracyMeters: number | null },
+    location: {
+      siteId?: string | null;
+      manualLocationLabel?: string | null;
+      note?: string | null;
+      activity?: string | null;
+      projectId?: string | null;
+      latitude: number | null;
+      longitude: number | null;
+      accuracyMeters: number | null;
+    },
     evidenceFile: File | null,
   ) => {
     if (!profile) {
@@ -393,6 +446,8 @@ export default function ClockInOutCard() {
         type,
         siteId: location.siteId ?? null,
         manualLocationLabel: location.manualLocationLabel ?? null,
+        note: location.note ?? null,
+        activity: location.activity ?? null,
         projectId: location.projectId ?? null,
         latitude: location.latitude,
         longitude: location.longitude,
@@ -400,15 +455,18 @@ export default function ClockInOutCard() {
         clientReportedAt: new Date().toISOString(),
         evidenceFile,
       });
+      setConfirmModalOpen(false);
+      setConfirmAction(null);
+      setPendingEvidenceFile(null);
     } catch (queueError) {
-      setError(queueError instanceof Error ? queueError.message : t("attendance.offlineQueueError"));
+      setConfirmError(queueError instanceof Error ? queueError.message : t("attendance.offlineQueueError"));
     }
     setSubmitting(false);
   };
 
-  const performClockOut = async (evidenceFile: File | null) => {
+  const performClockOut = async (evidenceFile: File | null, note: string, activity: string) => {
     setSubmitting(true);
-    setError("");
+    setConfirmError("");
     setEvidenceWarning("");
 
     let latitude: number | null = null;
@@ -423,15 +481,18 @@ export default function ClockInOutCard() {
       // Best-effort only - see performClockIn.
     }
 
+    const trimmedNote = note.trim() || null;
+    const trimmedActivity = activity.trim() || null;
+
     if (typeof navigator !== "undefined" && navigator.onLine === false) {
-      await queueOffline("clock_out", { latitude, longitude, accuracyMeters }, evidenceFile);
+      await queueOffline("clock_out", { note: trimmedNote, activity: trimmedActivity, latitude, longitude, accuracyMeters }, evidenceFile);
       return;
     }
 
-    const result = await AttendanceRepository.clockOut({ latitude, longitude, accuracyMeters });
+    const result = await AttendanceRepository.clockOut({ note: trimmedNote, activity: trimmedActivity, latitude, longitude, accuracyMeters });
 
     if (result.networkError) {
-      await queueOffline("clock_out", { latitude, longitude, accuracyMeters }, evidenceFile);
+      await queueOffline("clock_out", { note: trimmedNote, activity: trimmedActivity, latitude, longitude, accuracyMeters }, evidenceFile);
       return;
     }
 
@@ -443,7 +504,7 @@ export default function ClockInOutCard() {
       // mirroring the existing clock-in-after-grace block exactly -
       // same dedicated richer copy, same reasoning (no retry action
       // here, the employee needs their Manager to record it instead).
-      setError(
+      setConfirmError(
         result.message?.includes("CLOCK_OUT_BLOCKED_CONTACT_MANAGER")
           ? t("attendance.clockOutBlockedContactManager")
           : (humanizeBackendError(result.message, t) ?? t("attendance.clockOutError"))
@@ -459,6 +520,9 @@ export default function ClockInOutCard() {
     }
 
     setSubmitting(false);
+    setConfirmModalOpen(false);
+    setConfirmAction(null);
+    setPendingEvidenceFile(null);
     load();
   };
 
@@ -472,7 +536,10 @@ export default function ClockInOutCard() {
       setCameraFor("clockIn");
       return;
     }
-    performClockIn(null);
+    setPendingEvidenceFile(null);
+    setConfirmError("");
+    setConfirmAction("clockIn");
+    setConfirmModalOpen(true);
   };
 
   const handleClockOutTap = () => {
@@ -480,18 +547,36 @@ export default function ClockInOutCard() {
       setCameraFor("clockOut");
       return;
     }
-    performClockOut(null);
+    setPendingEvidenceFile(null);
+    setConfirmError("");
+    setConfirmAction("clockOut");
+    setConfirmModalOpen(true);
   };
 
   const handleCameraCapture = (file: File) => {
     const pending = cameraFor;
     setCameraFor(null);
-    if (pending === "clockIn") performClockIn(file);
-    else if (pending === "clockOut") performClockOut(file);
+    setPendingEvidenceFile(file);
+    setConfirmError("");
+    setConfirmAction(pending);
+    setConfirmModalOpen(true);
   };
 
   const handleCameraClose = () => {
     setCameraFor(null);
+  };
+
+  const handleConfirmCancel = () => {
+    if (submitting) return;
+    setConfirmModalOpen(false);
+    setConfirmAction(null);
+    setPendingEvidenceFile(null);
+    setConfirmError("");
+  };
+
+  const handleConfirmSubmit = (note: string, activity: string) => {
+    if (confirmAction === "clockIn") performClockIn(pendingEvidenceFile, note, activity);
+    else if (confirmAction === "clockOut") performClockOut(pendingEvidenceFile, note, activity);
   };
 
   const handleRetryOfflineSync = async () => {
@@ -613,6 +698,10 @@ export default function ClockInOutCard() {
     .filter((site) => site.id !== currentSite?.id)
     .map((site) => ({ value: site.id, label: nearbySiteIds.has(site.id) ? t("attendance.nearbySiteOption", { name: site.name }) : site.name }));
   const mapRelevantSite = session ? currentSite : selectedSite;
+  const confirmSiteName =
+    confirmAction === "clockOut"
+      ? currentSite?.name ?? session?.manualLocationLabel ?? ""
+      : selectedSite?.name ?? (manualLocationLabel.trim() || t("attendance.noSiteOption"));
 
   return (
     <Card>
@@ -802,6 +891,23 @@ export default function ClockInOutCard() {
       )}
 
       <CameraCaptureModal isOpen={cameraFor !== null} onClose={handleCameraClose} onCapture={handleCameraCapture} />
+
+      {confirmAction ? (
+        <AttendanceConfirmModal
+          isOpen={confirmModalOpen}
+          action={confirmAction}
+          photoPreviewUrl={pendingPhotoPreviewUrl}
+          latitude={currentLocation?.latitude ?? null}
+          longitude={currentLocation?.longitude ?? null}
+          accuracyMeters={currentLocation?.accuracyMeters ?? null}
+          placeName={placeName}
+          siteName={confirmSiteName}
+          submitting={submitting}
+          error={confirmError}
+          onCancel={handleConfirmCancel}
+          onConfirm={handleConfirmSubmit}
+        />
+      ) : null}
 
       <Modal
         isOpen={changeSiteModalOpen}

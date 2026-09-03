@@ -18,6 +18,10 @@ export interface AttendanceSession {
   status: "clocked_in" | "clocked_out";
   clockInAt: string;
   clockOutAt: string | null;
+  // § live UX review, user-directed - the clock-out confirmation
+  // screen needs the workplace name for a no-site session too, not
+  // just an assigned site's own name.
+  manualLocationLabel: string | null;
 }
 
 export interface ClockInInput {
@@ -38,6 +42,12 @@ export interface ClockInInput {
   // blank in reports. The Edge Function/RPC both re-check this is
   // non-empty when siteId is empty - this is never trusted as-is.
   manualLocationLabel?: string | null;
+  // § live UX review, user-directed - a new confirmation screen shown
+  // right before every clock-in/out submits offers these two optional
+  // free-text fields, stored per-event (attendance_events.note/
+  // activity) and shown to managers in the Attendance Record.
+  note?: string | null;
+  activity?: string | null;
   // WP-15 - an offline-queued replay passes its own already-generated
   // idempotency key and the ORIGINAL client-captured time (§35:
   // "client-captured timestamps are preserved for offline
@@ -50,6 +60,8 @@ export interface ClockOutInput {
   latitude?: number | null;
   longitude?: number | null;
   accuracyMeters?: number | null;
+  note?: string | null;
+  activity?: string | null;
   idempotencyKey?: string;
   clientReportedAt?: string;
 }
@@ -87,6 +99,7 @@ interface AttendanceSessionRow {
   status: "clocked_in" | "clocked_out";
   clock_in_at: string;
   clock_out_at: string | null;
+  manual_location_label: string | null;
 }
 
 function mapSessionRow(row: AttendanceSessionRow): AttendanceSession {
@@ -97,6 +110,7 @@ function mapSessionRow(row: AttendanceSessionRow): AttendanceSession {
     status: row.status,
     clockInAt: row.clock_in_at,
     clockOutAt: row.clock_out_at,
+    manualLocationLabel: row.manual_location_label,
   };
 }
 
@@ -153,6 +167,8 @@ class AttendanceRepository {
           longitude: input.longitude ?? null,
           accuracyMeters: input.accuracyMeters ?? null,
           manualLocationLabel: input.manualLocationLabel ?? null,
+          note: input.note ?? null,
+          activity: input.activity ?? null,
         },
       });
 
@@ -182,6 +198,8 @@ class AttendanceRepository {
           latitude: input.latitude ?? null,
           longitude: input.longitude ?? null,
           accuracyMeters: input.accuracyMeters ?? null,
+          note: input.note ?? null,
+          activity: input.activity ?? null,
         },
       });
 

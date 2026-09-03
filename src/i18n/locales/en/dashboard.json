@@ -110,7 +110,16 @@
     "offlineQueueError": "Unable to queue this action for offline sync.",
     "locationDetecting": "Detecting your current location...",
     "locationAccuracy": "±{{meters}}m",
-    "locationUnavailable": "Current location unavailable"
+    "locationUnavailable": "Current location unavailable",
+    "confirmClockInTitle": "Confirm Clock In",
+    "confirmClockOutTitle": "Confirm Clock Out",
+    "confirmPhotoLabel": "Photo",
+    "confirmNoPhoto": "No photo required.",
+    "confirmTimeLabel": "Time",
+    "confirmLocationLabel": "Location",
+    "noteLabel": "Add a note",
+    "activityLabel": "Activity",
+    "optionalPlaceholder": "Optional"
   },
   "kioskPin": {
     "title": "Kiosk PIN",

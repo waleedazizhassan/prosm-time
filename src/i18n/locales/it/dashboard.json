@@ -110,7 +110,16 @@
     "offlineQueueError": "Impossibile mettere in coda questa azione per la sincronizzazione offline.",
     "locationDetecting": "Rilevamento della posizione attuale...",
     "locationAccuracy": "±{{meters}}m",
-    "locationUnavailable": "Posizione attuale non disponibile"
+    "locationUnavailable": "Posizione attuale non disponibile",
+    "confirmClockInTitle": "Conferma entrata",
+    "confirmClockOutTitle": "Conferma uscita",
+    "confirmPhotoLabel": "Foto",
+    "confirmNoPhoto": "Nessuna foto richiesta.",
+    "confirmTimeLabel": "Ora",
+    "confirmLocationLabel": "Posizione",
+    "noteLabel": "Aggiungi una nota",
+    "activityLabel": "Attività",
+    "optionalPlaceholder": "Facoltativo"
   },
   "kioskPin": {
     "title": "PIN chiosco",

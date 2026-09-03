@@ -110,7 +110,16 @@
     "offlineQueueError": "Impossible de mettre cette action en file d'attente pour une synchronisation hors ligne.",
     "locationDetecting": "Détection de votre position actuelle...",
     "locationAccuracy": "±{{meters}}m",
-    "locationUnavailable": "Position actuelle indisponible"
+    "locationUnavailable": "Position actuelle indisponible",
+    "confirmClockInTitle": "Confirmer l'arrivée",
+    "confirmClockOutTitle": "Confirmer le départ",
+    "confirmPhotoLabel": "Photo",
+    "confirmNoPhoto": "Aucune photo requise.",
+    "confirmTimeLabel": "Heure",
+    "confirmLocationLabel": "Position",
+    "noteLabel": "Ajouter une note",
+    "activityLabel": "Activité",
+    "optionalPlaceholder": "Facultatif"
   },
   "kioskPin": {
     "title": "Code PIN kiosque",

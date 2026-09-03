@@ -28,6 +28,8 @@
   "viewPhoto": "عرض الصورة",
   "viewOnMap": "عرض على الخريطة",
   "siteChangedTo": "→ {{site}} الساعة {{time}}",
+  "noteLabel": "ملاحظة: {{note}}",
+  "activityLabel": "النشاط: {{activity}}",
   "locationMatch": "مطابق لنطاق الموقع",
   "locationMismatch": "غير مطابق لنطاق الموقع",
   "photoModalTitle": "صورة الحضور",

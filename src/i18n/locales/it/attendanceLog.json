@@ -28,6 +28,8 @@
   "viewPhoto": "Visualizza foto",
   "viewOnMap": "Visualizza sulla mappa",
   "siteChangedTo": "→ {{site}} alle {{time}}",
+  "noteLabel": "Nota: {{note}}",
+  "activityLabel": "Attività: {{activity}}",
   "locationMatch": "Corrisponde all'area della sede",
   "locationMismatch": "Non corrisponde all'area della sede",
   "photoModalTitle": "Foto presenza",

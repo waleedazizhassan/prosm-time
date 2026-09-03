@@ -47,7 +47,7 @@ serve(async (request: Request) => {
     }
 
     const payload = await request.json().catch(() => ({}));
-    const { siteId, projectId, idempotencyKey, clientReportedAt, latitude, longitude, accuracyMeters, manualLocationLabel } = payload;
+    const { siteId, projectId, idempotencyKey, clientReportedAt, latitude, longitude, accuracyMeters, manualLocationLabel, note, activity } = payload;
 
     // § live UX review, user-directed - site is now optional: an
     // employee can clock in at their real current location even when
@@ -78,6 +78,8 @@ serve(async (request: Request) => {
       p_longitude: typeof longitude === "number" ? longitude : null,
       p_accuracy_meters: typeof accuracyMeters === "number" ? accuracyMeters : null,
       p_manual_location_label: siteId ? null : (manualLocationLabel as string).trim(),
+      p_note: typeof note === "string" ? note : null,
+      p_activity: typeof activity === "string" ? activity : null,
     });
 
     if (error || !data?.success) {

@@ -11,6 +11,8 @@ export interface OfflineQueueItem {
   type: OfflineActionType;
   siteId: string | null;
   manualLocationLabel: string | null;
+  note: string | null;
+  activity: string | null;
   projectId: string | null;
   latitude: number | null;
   longitude: number | null;
@@ -120,6 +122,8 @@ class OfflineQueueService {
         ? await AttendanceRepository.clockIn({
             siteId: item.siteId,
             manualLocationLabel: item.manualLocationLabel,
+            note: item.note,
+            activity: item.activity,
             projectId: item.projectId,
             latitude: item.latitude,
             longitude: item.longitude,
@@ -131,6 +135,8 @@ class OfflineQueueService {
             latitude: item.latitude,
             longitude: item.longitude,
             accuracyMeters: item.accuracyMeters,
+            note: item.note,
+            activity: item.activity,
             idempotencyKey: item.id,
             clientReportedAt: item.clientReportedAt,
           });

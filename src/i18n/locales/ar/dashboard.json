@@ -110,7 +110,16 @@
     "offlineQueueError": "تعذر وضع هذا الإجراء في قائمة انتظار المزامنة دون اتصال.",
     "locationDetecting": "جارٍ تحديد موقعك الحالي...",
     "locationAccuracy": "±{{meters}} م",
-    "locationUnavailable": "الموقع الحالي غير متاح"
+    "locationUnavailable": "الموقع الحالي غير متاح",
+    "confirmClockInTitle": "تأكيد تسجيل الحضور",
+    "confirmClockOutTitle": "تأكيد تسجيل الانصراف",
+    "confirmPhotoLabel": "الصورة",
+    "confirmNoPhoto": "لا يوجد تصوير مطلوب.",
+    "confirmTimeLabel": "الوقت",
+    "confirmLocationLabel": "الموقع",
+    "noteLabel": "إضافة ملاحظة",
+    "activityLabel": "النشاط",
+    "optionalPlaceholder": "اختياري"
   },
   "kioskPin": {
     "title": "رمز الكشك",

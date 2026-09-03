@@ -28,6 +28,8 @@
   "viewPhoto": "Foto anzeigen",
   "viewOnMap": "Auf der Karte ansehen",
   "siteChangedTo": "→ {{site}} um {{time}}",
+  "noteLabel": "Notiz: {{note}}",
+  "activityLabel": "Tätigkeit: {{activity}}",
   "locationMatch": "Stimmt mit dem Standortbereich überein",
   "locationMismatch": "Stimmt nicht mit dem Standortbereich überein",
   "photoModalTitle": "Anwesenheitsfoto",

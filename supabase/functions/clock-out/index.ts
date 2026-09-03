@@ -39,7 +39,7 @@ serve(async (request: Request) => {
     }
 
     const payload = await request.json().catch(() => ({}));
-    const { idempotencyKey, clientReportedAt, latitude, longitude, accuracyMeters } = payload;
+    const { idempotencyKey, clientReportedAt, latitude, longitude, accuracyMeters, note, activity } = payload;
 
     if (!idempotencyKey || typeof idempotencyKey !== "string") {
       return errorResponse("idempotencyKey is required.", 400, "INVALID_REQUEST");
@@ -51,6 +51,8 @@ serve(async (request: Request) => {
       p_latitude: typeof latitude === "number" ? latitude : null,
       p_longitude: typeof longitude === "number" ? longitude : null,
       p_accuracy_meters: typeof accuracyMeters === "number" ? accuracyMeters : null,
+      p_note: typeof note === "string" ? note : null,
+      p_activity: typeof activity === "string" ? activity : null,
     });
 
     if (error || !data?.success) {

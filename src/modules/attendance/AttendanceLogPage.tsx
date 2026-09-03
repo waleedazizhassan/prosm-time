@@ -67,6 +67,24 @@ function LocationCell({ location, t }: { location: AttendanceEventLocation | nul
   );
 }
 
+// § live UX review, user-directed - the optional note/activity typed
+// into the confirmation screen right before a clock-in/out submits,
+// shown to managers here the same "the record itself carries what
+// happened" way site changes already are.
+function NoteActivityCell({ note, activity, t }: { note: string | null; activity: string | null; t: (key: string, options?: Record<string, unknown>) => string }) {
+  if (!note && !activity) return null;
+  return (
+    <>
+      {note ? (
+        <span style={{ display: "block", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("noteLabel", { note })}</span>
+      ) : null}
+      {activity ? (
+        <span style={{ display: "block", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("activityLabel", { activity })}</span>
+      ) : null}
+    </>
+  );
+}
+
 // PROSM Time - direct sidebar request (live UX review, user-directed):
 // "a direct sidebar button to view employees' clock-in/clock-out
 // record." Deliberately its own screen rather than folded into
@@ -204,19 +222,22 @@ export default function AttendanceLogPage() {
       key: "clockInAt",
       header: t("columns.clockInAt"),
       render: (row) => (
-        <span style={{ display: "inline-flex", alignItems: "center", gap: "var(--space-1)" }}>
-          {formatTimeOnly(row.clockInAt, i18n.language)}
-          {row.clockInEvidencePath ? (
-            <button
-              type="button"
-              onClick={() => openEvidence(row.clockInEvidencePath as string, `${row.userFullName} — ${t("columns.clockInAt")}`)}
-              title={t("viewPhoto")}
-              aria-label={t("viewPhoto")}
-              style={{ display: "inline-flex", alignItems: "center", background: "none", border: "none", cursor: "pointer", color: "var(--text-link)", padding: 0 }}
-            >
-              <Camera size={14} />
-            </button>
-          ) : null}
+        <span style={{ display: "block" }}>
+          <span style={{ display: "inline-flex", alignItems: "center", gap: "var(--space-1)" }}>
+            {formatTimeOnly(row.clockInAt, i18n.language)}
+            {row.clockInEvidencePath ? (
+              <button
+                type="button"
+                onClick={() => openEvidence(row.clockInEvidencePath as string, `${row.userFullName} — ${t("columns.clockInAt")}`)}
+                title={t("viewPhoto")}
+                aria-label={t("viewPhoto")}
+                style={{ display: "inline-flex", alignItems: "center", background: "none", border: "none", cursor: "pointer", color: "var(--text-link)", padding: 0 }}
+              >
+                <Camera size={14} />
+              </button>
+            ) : null}
+          </span>
+          <NoteActivityCell note={row.clockInNote} activity={row.clockInActivity} t={t} />
         </span>
       ),
     },
@@ -225,19 +246,22 @@ export default function AttendanceLogPage() {
       header: t("columns.clockOutAt"),
       render: (row) =>
         row.clockOutAt ? (
-          <span style={{ display: "inline-flex", alignItems: "center", gap: "var(--space-1)" }}>
-            {formatTimeOnly(row.clockOutAt, i18n.language)}
-            {row.clockOutEvidencePath ? (
-              <button
-                type="button"
-                onClick={() => openEvidence(row.clockOutEvidencePath as string, `${row.userFullName} — ${t("columns.clockOutAt")}`)}
-                title={t("viewPhoto")}
-                aria-label={t("viewPhoto")}
-                style={{ display: "inline-flex", alignItems: "center", background: "none", border: "none", cursor: "pointer", color: "var(--text-link)", padding: 0 }}
-              >
-                <Camera size={14} />
-              </button>
-            ) : null}
+          <span style={{ display: "block" }}>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: "var(--space-1)" }}>
+              {formatTimeOnly(row.clockOutAt, i18n.language)}
+              {row.clockOutEvidencePath ? (
+                <button
+                  type="button"
+                  onClick={() => openEvidence(row.clockOutEvidencePath as string, `${row.userFullName} — ${t("columns.clockOutAt")}`)}
+                  title={t("viewPhoto")}
+                  aria-label={t("viewPhoto")}
+                  style={{ display: "inline-flex", alignItems: "center", background: "none", border: "none", cursor: "pointer", color: "var(--text-link)", padding: 0 }}
+                >
+                  <Camera size={14} />
+                </button>
+              ) : null}
+            </span>
+            <NoteActivityCell note={row.clockOutNote} activity={row.clockOutActivity} t={t} />
           </span>
         ) : (
           "—"

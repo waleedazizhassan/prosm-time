@@ -32,6 +32,14 @@ export interface TodayAttendanceRow {
   // calls getUserPosition first) - this was only ever a display gap.
   clockInLocation: AttendanceEventLocation | null;
   clockOutLocation: AttendanceEventLocation | null;
+  // § live UX review, user-directed - the optional note/activity typed
+  // into the new attendance confirmation screen, shown to managers in
+  // the Attendance Record. Per-event (note/activity can differ between
+  // the clock-in and the clock-out of the same session).
+  clockInNote: string | null;
+  clockInActivity: string | null;
+  clockOutNote: string | null;
+  clockOutActivity: string | null;
   // § live UX review, user-directed - "Change Site" mid-shift: show the
   // move inline under the site name ("changed to X at HH:MM"), same
   // "the record itself carries what happened" posture as the evidence-
@@ -75,6 +83,8 @@ interface RawAttendanceEventRow {
   latitude: number | null;
   longitude: number | null;
   within_geofence: boolean | null;
+  note: string | null;
+  activity: string | null;
 }
 
 interface RawCameraEvidenceRow {
@@ -160,10 +170,14 @@ class ManagerRepository {
       const clockOutEvidenceBySession = new Map<string, string>();
       const clockInLocationBySession = new Map<string, AttendanceEventLocation>();
       const clockOutLocationBySession = new Map<string, AttendanceEventLocation>();
+      const clockInNoteBySession = new Map<string, string>();
+      const clockInActivityBySession = new Map<string, string>();
+      const clockOutNoteBySession = new Map<string, string>();
+      const clockOutActivityBySession = new Map<string, string>();
       if (sessionIds.length > 0) {
         const eventsResult = await this.client
           .from("attendance_events")
-          .select("id, session_id, event_type, latitude, longitude, within_geofence")
+          .select("id, session_id, event_type, latitude, longitude, within_geofence, note, activity")
           .in("session_id", sessionIds)
           .in("event_type", ["clock_in", "clock_out"]);
         if (eventsResult.error) return createError(eventsResult.error.message);
@@ -191,6 +205,15 @@ class ManagerRepository {
             const location: AttendanceEventLocation = { latitude: event.latitude, longitude: event.longitude, withinGeofence: event.within_geofence };
             if (event.event_type === "clock_in") clockInLocationBySession.set(event.session_id, location);
             else clockOutLocationBySession.set(event.session_id, location);
+          }
+
+          if (event.note) {
+            if (event.event_type === "clock_in") clockInNoteBySession.set(event.session_id, event.note);
+            else clockOutNoteBySession.set(event.session_id, event.note);
+          }
+          if (event.activity) {
+            if (event.event_type === "clock_in") clockInActivityBySession.set(event.session_id, event.activity);
+            else clockOutActivityBySession.set(event.session_id, event.activity);
           }
         }
       }
@@ -237,6 +260,10 @@ class ManagerRepository {
           clockOutEvidencePath: clockOutEvidenceBySession.get(row.id) ?? null,
           clockInLocation: clockInLocationBySession.get(row.id) ?? null,
           clockOutLocation: clockOutLocationBySession.get(row.id) ?? null,
+          clockInNote: clockInNoteBySession.get(row.id) ?? null,
+          clockInActivity: clockInActivityBySession.get(row.id) ?? null,
+          clockOutNote: clockOutNoteBySession.get(row.id) ?? null,
+          clockOutActivity: clockOutActivityBySession.get(row.id) ?? null,
           siteChanges: siteChangesBySession.get(row.id) ?? [],
         };
       });
