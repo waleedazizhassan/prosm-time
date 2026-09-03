@@ -6,7 +6,6 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useAuth } from "../../core/context/AuthContext";
 import { useAppLayout } from "./LayoutContext";
 import { NAV_ITEMS, NAV_SECTION_ORDER } from "./navigation";
-import BrandMark from "../../components/common/BrandMark";
 import UserMenu from "./UserMenu";
 import { APP_VERSION } from "../../core/appVersion";
 import styles from "./Sidebar.module.css";
@@ -85,14 +84,11 @@ export default function Sidebar() {
       >
         <div className={styles.sidebarHeader}>
           <div className={styles.sidebarBrand}>
-            <BrandMark size={28} glow />
-            {/* § live UX review, user-directed - "PROSM Time" already
-                anchors the Header; showing it again here read as
-                duplicated branding whenever both are visible at once.
-                The Sidebar now shows the shorter parent-platform mark
-                instead ("PROSM" - this product's own family brand),
-                matching the user's own suggested resolution. */}
-            {!sidebarCollapsed ? <span className={styles.sidebarBrandName}>{t("common:appNameShort")}</span> : null}
+            {/* § live UX review, user-directed - remove the logo mark
+                from the Sidebar entirely, keep only the "PROSM" text.
+                Always visible (even collapsed) since there is no icon
+                left to represent the brand in the rail. */}
+            <span className={styles.sidebarBrandName}>{t("common:appNameShort")}</span>
           </div>
 
           <button

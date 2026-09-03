@@ -12,6 +12,23 @@ interface CameraCaptureModalProps {
   onCapture: (file: File) => void;
 }
 
+// § live UX review, user-directed - "the rear camera doesn't reliably
+// open on mobile." A plain (non-exact) facingMode constraint is only a
+// preference - some Android WebViews still hand back the front camera
+// under it. Try the authoritative `exact` form first; only a device
+// with a single, unlabeled camera throws OverconstrainedError for that,
+// so fall back to the original ideal constraint in that one case.
+async function openRearCamera(): Promise<MediaStream> {
+  try {
+    return await navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } });
+  } catch (error) {
+    if (error instanceof Error && error.name === "OverconstrainedError") {
+      return navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+    }
+    throw error;
+  }
+}
+
 // PROSM Time - mirrors PROSM Platform's own CameraCaptureModal (§ final
 // visual consistency pass, correction: "Clock In / Clock Out must be
 // the single primary attendance action... Camera is part of the
@@ -54,8 +71,7 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
 
     let cancelled = false;
 
-    navigator.mediaDevices
-      .getUserMedia({ video: { facingMode: "environment" } })
+    openRearCamera()
       .then((stream) => {
         if (cancelled) {
           stream.getTracks().forEach((track) => track.stop());
@@ -92,8 +108,7 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
   const handleRetake = () => {
     setCapturedDataUrl(null);
     if (isOpen) {
-      navigator.mediaDevices
-        .getUserMedia({ video: { facingMode: "environment" } })
+      openRearCamera()
         .then((stream) => {
           streamRef.current = stream;
           if (videoRef.current) videoRef.current.srcObject = stream;

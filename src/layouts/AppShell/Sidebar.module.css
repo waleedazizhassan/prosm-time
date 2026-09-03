@@ -231,7 +231,6 @@
   align-items: center;
 }
 
-.collapsed .sidebarBrandName,
 .collapsed .itemLabel,
 .collapsed .triggerName {
   opacity: 0;
@@ -239,10 +238,19 @@
   pointer-events: none;
 }
 
-.collapsed .sidebarBrandName:dir(rtl),
 .collapsed .itemLabel:dir(rtl),
 .collapsed .triggerName:dir(rtl) {
   transform: translateX(8px);
+}
+
+/* Sidebar text is the only brand mark left once collapsed - stays
+   visible, shrunk to fit the 84px rail instead of fading out. */
+.collapsed .sidebarBrandName {
+  font-size: 11px;
+}
+
+.collapsed .sidebarHeader {
+  padding: 0 var(--space-2);
 }
 
 .sidebarBrandName,
@@ -331,7 +339,18 @@
     transform: translateX(100%);
   }
 
-  .mobileOpen {
+  /* § live UX review, user-directed - real bug, Arabic-only: the
+     mobile drawer never visually opened under RTL. Root cause was CSS
+     specificity, not positioning - `.sidebar:dir(rtl)` (class +
+     pseudo-class, specificity 0,2,0) always outranked a bare
+     `.mobileOpen` (0,1,0), so the closed-state translateX(100%) kept
+     winning over the open-state translateX(0) regardless of the
+     mobileOpen class being applied - the backdrop still dimmed the
+     screen (a separate element), but the drawer itself stayed
+     off-screen, i.e. exactly "a transparent shadow with no data
+     inside it". Qualifying with `.sidebar` ties the specificity
+     (0,2,0) and wins on source order instead. */
+  .sidebar.mobileOpen {
     transform: translateX(0);
     visibility: visible;
 
@@ -343,12 +362,22 @@
     min-width: 280px;
   }
 
-  .collapsed .sidebarBrandName,
   .collapsed .itemLabel,
   .collapsed .triggerName {
     opacity: 1;
     transform: none;
     pointer-events: auto;
+  }
+
+  /* Mobile drawer always renders at full 280px width even in
+     "collapsed" state (rail collapse is a desktop-only concept), so
+     the brand text keeps its normal size/padding here. */
+  .collapsed .sidebarBrandName {
+    font-size: var(--font-sm);
+  }
+
+  .collapsed .sidebarHeader {
+    padding: 0 var(--space-5);
   }
 
   .collapsed .item {
