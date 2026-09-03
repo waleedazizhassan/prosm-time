@@ -19,8 +19,16 @@ export interface RadioEngineState {
   errorMessage: string | null;
 }
 
-const MAX_RECONNECT_ATTEMPTS = 3;
+const MAX_RECONNECT_ATTEMPTS = 6;
 const RECONNECT_DELAY_MS = 2000;
+// § live UX review, user-directed - "the radio stops a lot." A
+// `stalled` event fires constantly during completely normal live
+// streaming (a momentary buffer underrun the browser recovers from on
+// its own) - it is not a real failure. Only escalate to a reconnect if
+// playback hasn't recovered (no "playing"/"canplay") within this grace
+// window; a real dead stream still gets caught, ordinary jitter no
+// longer burns through the reconnect budget.
+const STALL_GRACE_MS = 4000;
 
 type Listener = (state: RadioEngineState) => void;
 
@@ -29,6 +37,7 @@ class RadioPlaybackEngine {
   private listeners = new Set<Listener>();
   private reconnectAttempts = 0;
   private reconnectTimer: ReturnType<typeof setTimeout> | null = null;
+  private stallGraceTimer: ReturnType<typeof setTimeout> | null = null;
 
   private state: RadioEngineState = {
     currentStation: null,
@@ -47,6 +56,7 @@ class RadioPlaybackEngine {
 
     audio.addEventListener("playing", () => {
       this.reconnectAttempts = 0;
+      this.clearStallGraceTimer();
       this.setState({ playbackState: "playing", errorMessage: null });
     });
     audio.addEventListener("waiting", () => this.setState({ playbackState: "loading" }));
@@ -56,7 +66,10 @@ class RadioPlaybackEngine {
       }
     });
     audio.addEventListener("error", () => this.handleStreamFailure());
-    audio.addEventListener("stalled", () => this.handleStreamFailure());
+    // A genuinely dead stream still ends up here (via "error", or if
+    // the stall never actually recovers) - it just isn't punished for
+    // a momentary buffer underrun that resolves on its own.
+    audio.addEventListener("stalled", () => this.scheduleStallCheck());
 
     this.audio = audio;
     return audio;
@@ -76,6 +89,7 @@ class RadioPlaybackEngine {
 
   async startPlayback(station: RadioStation) {
     this.clearReconnectTimer();
+    this.clearStallGraceTimer();
     this.reconnectAttempts = 0;
     this.setState({ currentStation: station, playbackState: "loading", errorMessage: null });
 
@@ -96,6 +110,7 @@ class RadioPlaybackEngine {
   }
 
   pausePlayback() {
+    this.clearStallGraceTimer();
     this.audio?.pause();
   }
 
@@ -107,6 +122,7 @@ class RadioPlaybackEngine {
 
   stopPlayback() {
     this.clearReconnectTimer();
+    this.clearStallGraceTimer();
     this.reconnectAttempts = 0;
     if (this.audio) {
       this.audio.pause();
@@ -133,6 +149,25 @@ class RadioPlaybackEngine {
       clearTimeout(this.reconnectTimer);
       this.reconnectTimer = null;
     }
+  }
+
+  private clearStallGraceTimer() {
+    if (this.stallGraceTimer) {
+      clearTimeout(this.stallGraceTimer);
+      this.stallGraceTimer = null;
+    }
+  }
+
+  private scheduleStallCheck() {
+    if (this.stallGraceTimer) return;
+    this.stallGraceTimer = setTimeout(() => {
+      this.stallGraceTimer = null;
+      // Still not playing after the grace window - a real failure, not
+      // a momentary hiccup the browser already recovered from.
+      if (this.state.playbackState !== "playing") {
+        this.handleStreamFailure();
+      }
+    }, STALL_GRACE_MS);
   }
 
   private handleStreamFailure() {
