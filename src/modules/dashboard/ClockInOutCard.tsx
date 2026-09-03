@@ -378,7 +378,17 @@ export default function ClockInOutCard() {
 
     if (!result.success || !result.data) {
       setSubmitting(false);
-      setError(humanizeBackendError(result.message, t) ?? t("attendance.clockOutError"));
+      // § live UX review, user-directed - self clock-out outside a
+      // real site's geofence can now be blocked outright
+      // (clock_out_prosm_time_attendance, block_self_clock_out_outside_geofence)
+      // mirroring the existing clock-in-after-grace block exactly -
+      // same dedicated richer copy, same reasoning (no retry action
+      // here, the employee needs their Manager to record it instead).
+      setError(
+        result.message?.includes("CLOCK_OUT_BLOCKED_CONTACT_MANAGER")
+          ? t("attendance.clockOutBlockedContactManager")
+          : (humanizeBackendError(result.message, t) ?? t("attendance.clockOutError"))
+      );
       return;
     }
 

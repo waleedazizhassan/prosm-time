@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import SiteRepository, { type Site, type KioskMode, type BreakRoundingMode } from "../../core/repositories/SiteRepository";
+import SiteRepository, { type Site, type SiteAssignment, type KioskMode, type BreakRoundingMode } from "../../core/repositories/SiteRepository";
 import { getCurrentPosition, haversineDistanceMeters } from "../../core/utils/geo";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
@@ -56,6 +56,7 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
   const [lateDeductionStartTime, setLateDeductionStartTime] = useState(site?.lateDeductionStartTime ?? "");
   const [breakRoundingMode, setBreakRoundingMode] = useState<BreakRoundingMode>(site?.breakRoundingMode ?? "cumulative");
   const [blockSelfClockInAfterGrace, setBlockSelfClockInAfterGrace] = useState(site?.blockSelfClockInAfterGrace ?? false);
+  const [blockSelfClockOutOutsideGeofence, setBlockSelfClockOutOutsideGeofence] = useState(site?.blockSelfClockOutOutsideGeofence ?? false);
   const [attendanceAllowed, setAttendanceAllowed] = useState(site?.attendanceAllowed ?? true);
   const [geofenceRequired, setGeofenceRequired] = useState(site?.geofenceRequired ?? true);
   const [cameraRequired, setCameraRequired] = useState(site?.cameraRequired ?? false);
@@ -68,6 +69,36 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
 
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+
+  // § live UX review, user-directed - "a field with employee options,
+  // to exempt specific employees from the time/out-of-zone
+  // restrictions." Edit-mode only - a brand-new site has no assigned
+  // employees yet to exempt. Each checkbox saves immediately via its
+  // own dedicated RPC (set_prosm_time_site_assignment_exemption) -
+  // this list isn't part of the main Save action.
+  const [assignments, setAssignments] = useState<SiteAssignment[]>([]);
+  const [exemptionSavingUserId, setExemptionSavingUserId] = useState<string | null>(null);
+  const [exemptionError, setExemptionError] = useState("");
+
+  useEffect(() => {
+    if (!isEditing || !site) return;
+    SiteRepository.listSiteAssignments(site.id).then((result) => {
+      if (result.success && result.data) setAssignments(result.data);
+    });
+  }, [isEditing, site]);
+
+  const handleToggleExemption = async (assignment: SiteAssignment, isExempt: boolean) => {
+    if (!site) return;
+    setExemptionSavingUserId(assignment.userId);
+    setExemptionError("");
+    const result = await SiteRepository.setSiteAssignmentExemption(site.id, assignment.userId, isExempt);
+    setExemptionSavingUserId(null);
+    if (!result.success) {
+      setExemptionError(humanizeBackendError(result.message, t) ?? t("form.genericError"));
+      return;
+    }
+    setAssignments((current) => current.map((row) => (row.userId === assignment.userId ? { ...row, isExemptFromRestrictions: isExempt } : row)));
+  };
 
   const handleUseCurrentLocation = async () => {
     setLocating(true);
@@ -125,6 +156,7 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
       lateDeductionStartTime: lateDeductionStartTime || null,
       breakRoundingMode,
       blockSelfClockInAfterGrace,
+      blockSelfClockOutOutsideGeofence,
     };
 
     const result = isEditing && site ? await SiteRepository.updateSite(site.id, { ...input, isActive }) : await SiteRepository.createSite(input);
@@ -288,6 +320,30 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
         <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.geofenceRequiredLabel")}</span>
         <Toggle checked={geofenceRequired} onChange={setGeofenceRequired} disabled={submitting} label={t("form.geofenceRequiredLabel")} />
       </div>
+      <div style={toggleRowStyle}>
+        <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.blockSelfClockOutLabel")}</span>
+        <Toggle checked={blockSelfClockOutOutsideGeofence} onChange={setBlockSelfClockOutOutsideGeofence} disabled={submitting} label={t("form.blockSelfClockOutLabel")} />
+      </div>
+
+      {isEditing && assignments.length > 0 ? (
+        <div style={{ margin: "var(--space-3) 0" }}>
+          <h3 style={{ fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)", margin: "0 0 var(--space-1)" }}>{t("form.exemptEmployeesTitle")}</h3>
+          <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("form.exemptEmployeesHint")}</p>
+          {assignments.map((assignment) => (
+            <div key={assignment.id} style={toggleRowStyle}>
+              <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{assignment.userFullName}</span>
+              <Toggle
+                checked={assignment.isExemptFromRestrictions}
+                onChange={(checked) => handleToggleExemption(assignment, checked)}
+                disabled={exemptionSavingUserId === assignment.userId}
+                label={t("form.exemptEmployeesTitle") + " - " + assignment.userFullName}
+              />
+            </div>
+          ))}
+          <ErrorText>{exemptionError}</ErrorText>
+        </div>
+      ) : null}
+
       <div style={toggleRowStyle}>
         <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.cameraRequiredLabel")}</span>
         <Toggle checked={cameraRequired} onChange={setCameraRequired} disabled={submitting} label={t("form.cameraRequiredLabel")} />

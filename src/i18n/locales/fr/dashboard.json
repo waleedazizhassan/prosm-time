@@ -74,6 +74,7 @@
     "manualLocationHint": "Indiquez où vous êtes réellement (chez un client, en télétravail...) — obligatoire si aucun site n'est sélectionné.",
     "manualLocationRequired": "Indiquez votre lieu de travail pour pointer sans site enregistré.",
     "clockInBlockedContactManager": "La période de tolérance pour le shift de ce site est dépassée - veuillez contacter votre responsable pour enregistrer votre présence.",
+    "clockOutBlockedContactManager": "Vous êtes en dehors de la zone de travail de ce site - veuillez contacter votre responsable pour enregistrer votre départ.",
     "projectLabel": "Projet (facultatif)",
     "noProject": "Aucun projet",
     "clockInAction": "Pointer l'arrivée",

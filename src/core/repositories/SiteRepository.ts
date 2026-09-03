@@ -38,6 +38,10 @@ export interface Site {
   lateDeductionStartTime: string | null;
   breakRoundingMode: BreakRoundingMode;
   blockSelfClockInAfterGrace: boolean;
+  // § live UX review, user-directed - self clock-out outside this
+  // site's geofence is blocked outright (not just recorded as an
+  // exception) when this is on, mirroring blockSelfClockInAfterGrace.
+  blockSelfClockOutOutsideGeofence: boolean;
   createdAt: string;
 }
 
@@ -48,6 +52,10 @@ export interface SiteAssignment {
   roleAtSite: "member" | "manager";
   userFullName: string;
   userEmail: string;
+  // § live UX review, user-directed - per-site exemption from both
+  // time (block_self_clock_in_after_grace) and geofence
+  // (block_self_clock_out_outside_geofence) self-service restrictions.
+  isExemptFromRestrictions: boolean;
 }
 
 export interface SiteInput {
@@ -70,6 +78,7 @@ export interface SiteInput {
   lateDeductionStartTime: string | null;
   breakRoundingMode: BreakRoundingMode;
   blockSelfClockInAfterGrace: boolean;
+  blockSelfClockOutOutsideGeofence: boolean;
   // update-only: explicitly blanks out an already-configured shift
   // policy (time fields have no other "unset" signal once a real
   // time has been set, since the RPC's coalesce-based partial update
@@ -107,6 +116,7 @@ interface SiteRow {
   late_deduction_start_time: string | null;
   break_rounding_mode: BreakRoundingMode;
   block_self_clock_in_after_grace: boolean;
+  block_self_clock_out_outside_geofence: boolean;
   created_at: string;
 }
 
@@ -141,6 +151,7 @@ function mapSiteRow(row: SiteRow): Site {
     lateDeductionStartTime: toHhMm(row.late_deduction_start_time),
     breakRoundingMode: row.break_rounding_mode,
     blockSelfClockInAfterGrace: row.block_self_clock_in_after_grace,
+    blockSelfClockOutOutsideGeofence: row.block_self_clock_out_outside_geofence,
     createdAt: row.created_at,
   };
 }
@@ -150,6 +161,7 @@ interface SiteAssignmentRow {
   site_id: string;
   user_id: string;
   role_at_site: "member" | "manager";
+  is_exempt_from_restrictions: boolean;
   users: { full_name: string; email: string } | { full_name: string; email: string }[] | null;
 }
 
@@ -162,6 +174,7 @@ function mapSiteAssignmentRow(row: SiteAssignmentRow): SiteAssignment {
     roleAtSite: row.role_at_site,
     userFullName: user?.full_name ?? "",
     userEmail: user?.email ?? "",
+    isExemptFromRestrictions: row.is_exempt_from_restrictions,
   };
 }
 
@@ -236,6 +249,7 @@ class SiteRepository {
         p_late_deduction_start_time: input.lateDeductionStartTime,
         p_break_rounding_mode: input.breakRoundingMode,
         p_block_self_clock_in_after_grace: input.blockSelfClockInAfterGrace,
+        p_block_self_clock_out_outside_geofence: input.blockSelfClockOutOutsideGeofence,
       });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to create this site.");
@@ -270,6 +284,7 @@ class SiteRepository {
         p_break_rounding_mode: input.breakRoundingMode,
         p_block_self_clock_in_after_grace: input.blockSelfClockInAfterGrace,
         p_clear_shift_policy: input.clearShiftPolicy ?? false,
+        p_block_self_clock_out_outside_geofence: input.blockSelfClockOutOutsideGeofence,
       });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to update this site.");
@@ -281,7 +296,10 @@ class SiteRepository {
 
   async listSiteAssignments(siteId: string): Promise<ServiceResult<SiteAssignment[]>> {
     try {
-      const { data, error } = await this.client.from("site_assignments").select("id, site_id, user_id, role_at_site, users!site_assignments_user_id_fkey(full_name, email)").eq("site_id", siteId);
+      const { data, error } = await this.client
+        .from("site_assignments")
+        .select("id, site_id, user_id, role_at_site, is_exempt_from_restrictions, users!site_assignments_user_id_fkey(full_name, email)")
+        .eq("site_id", siteId);
       if (error) return createError(error.message);
       return createSuccess((data ?? []).map(mapSiteAssignmentRow));
     } catch (error) {
@@ -319,6 +337,21 @@ class SiteRepository {
       });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to assign this employee to the site.");
+      return createSuccess();
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Site service unavailable.");
+    }
+  }
+
+  async setSiteAssignmentExemption(siteId: string, userId: string, isExempt: boolean): Promise<ServiceResult> {
+    try {
+      const { data, error } = await this.client.rpc("set_prosm_time_site_assignment_exemption", {
+        p_site_id: siteId,
+        p_user_id: userId,
+        p_is_exempt: isExempt,
+      });
+      if (error) return createError(error.message);
+      if (data?.success === false) return createError("Unable to update this employee's exemption.");
       return createSuccess();
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Site service unavailable.");
