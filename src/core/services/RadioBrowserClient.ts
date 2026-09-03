@@ -127,6 +127,21 @@ class RadioBrowserClient {
     const rows = await this.requestJson<RawStationRow[]>(`/json/stations/topclick/${limit}`, { hidebroken: "true" });
     return (rows ?? []).map(mapStation);
   }
+
+  // § live UX review, user-directed - "widen the radio's range, add
+  // Egyptian/Arab stations." Radio Browser's own /json/stations/bycountry
+  // endpoint (ISO country name, not code) is the direct equivalent of
+  // listTopStations scoped to one country, ordered by clicks like the
+  // global list already is.
+  async listByCountry(country: string, limit = 20): Promise<RadioStation[]> {
+    const rows = await this.requestJson<RawStationRow[]>(`/json/stations/bycountry/${encodeURIComponent(country)}`, {
+      limit,
+      hidebroken: "true",
+      order: "clickcount",
+      reverse: "true",
+    });
+    return (rows ?? []).map(mapStation);
+  }
 }
 
 export default new RadioBrowserClient();

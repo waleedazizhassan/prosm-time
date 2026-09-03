@@ -44,8 +44,26 @@ export default function HeaderRadio() {
   useEffect(() => {
     if (!expanded || loadedDefaults) return;
     setLoadedDefaults(true);
-    RadioBrowserClient.listTopStations(24)
-      .then(setDefaultStations)
+    // § live UX review, user-directed - "widen the radio's range, add
+    // Egyptian/Arab stations" - the global top-clicked list alone
+    // rarely surfaces them. Egypt/Arab countries are fetched alongside
+    // the global list and placed first, de-duplicated by stationUuid.
+    Promise.allSettled([
+      RadioBrowserClient.listByCountry("Egypt", 15),
+      RadioBrowserClient.listByCountry("Saudi Arabia", 10),
+      RadioBrowserClient.listByCountry("United Arab Emirates", 10),
+      RadioBrowserClient.listTopStations(24),
+    ])
+      .then(([egypt, saudi, uae, top]) => {
+        const merged = new Map<string, RadioStation>();
+        for (const settled of [egypt, saudi, uae, top]) {
+          if (settled.status !== "fulfilled") continue;
+          for (const station of settled.value) {
+            if (!merged.has(station.stationUuid)) merged.set(station.stationUuid, station);
+          }
+        }
+        setDefaultStations([...merged.values()]);
+      })
       .catch(() => setDefaultStations([]));
   }, [expanded, loadedDefaults]);
 
