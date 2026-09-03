@@ -8,6 +8,7 @@
   "toggleSidebar": "Toggle navigation",
   "collapseSidebar": "Collapse sidebar",
   "expandSidebar": "Expand sidebar",
+  "closeSidebar": "Close menu",
   "openUserMenu": "Open user menu",
   "signOutAction": "Sign out",
   "languageLabel": "Language",
@@ -19,6 +20,41 @@
   },
   "notificationsLabel": "Notifications",
   "noNotifications": "No notifications yet.",
+  "notifications": {
+    "outOfZoneEmployee": {
+      "title": "You are outside your assigned work area",
+      "body": "Please explain why. Distance: {{distance}} m."
+    },
+    "outOfZoneManager": {
+      "title": "Employee outside their work area",
+      "body": "{{name}} is outside the assigned area (distance: {{distance}} m)."
+    },
+    "exceptionPendingReview": {
+      "titleException": "Exception awaiting your review",
+      "bodyException": "{{name}} submitted a reason for an out-of-zone exception.",
+      "titleCorrection": "Correction request awaiting your review",
+      "bodyCorrection": "{{name}} submitted a correction request."
+    },
+    "correctionReviewed": {
+      "titleException": "Your exception was reviewed",
+      "titleCorrection": "Your correction request was reviewed",
+      "body": "Decision: {{decision}}."
+    },
+    "breakExceeded": {
+      "title": "Break duration exceeded",
+      "body": "Your break exceeded the maximum allowed duration."
+    },
+    "sosAlert": {
+      "title": "SOS/Emergency alert",
+      "body": "{{name}} triggered an SOS/Emergency alert."
+    },
+    "decision": {
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "acknowledged": "Acknowledged",
+      "clarification_requested": "Clarification requested"
+    }
+  },
   "items": {
     "dashboard": "Dashboard",
     "people": "People",

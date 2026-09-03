@@ -8,6 +8,7 @@
   "toggleSidebar": "Attiva/disattiva navigazione",
   "collapseSidebar": "Comprimi barra laterale",
   "expandSidebar": "Espandi barra laterale",
+  "closeSidebar": "Chiudi il menu",
   "openUserMenu": "Apri menu utente",
   "signOutAction": "Esci",
   "languageLabel": "Lingua",
@@ -19,6 +20,41 @@
   },
   "notificationsLabel": "Notifiche",
   "noNotifications": "Nessuna notifica al momento.",
+  "notifications": {
+    "outOfZoneEmployee": {
+      "title": "Sei fuori dalla tua area di lavoro assegnata",
+      "body": "Spiega il motivo. Distanza: {{distance}} m."
+    },
+    "outOfZoneManager": {
+      "title": "Dipendente fuori dalla propria area di lavoro",
+      "body": "{{name}} è fuori dall'area assegnata (distanza: {{distance}} m)."
+    },
+    "exceptionPendingReview": {
+      "titleException": "Eccezione in attesa della tua revisione",
+      "bodyException": "{{name}} ha inviato un motivo per un'eccezione fuori area.",
+      "titleCorrection": "Richiesta di correzione in attesa della tua revisione",
+      "bodyCorrection": "{{name}} ha inviato una richiesta di correzione."
+    },
+    "correctionReviewed": {
+      "titleException": "La tua eccezione è stata esaminata",
+      "titleCorrection": "La tua richiesta di correzione è stata esaminata",
+      "body": "Decisione: {{decision}}."
+    },
+    "breakExceeded": {
+      "title": "Durata della pausa superata",
+      "body": "La tua pausa ha superato la durata massima consentita."
+    },
+    "sosAlert": {
+      "title": "Allarme SOS/Emergenza",
+      "body": "{{name}} ha attivato un allarme SOS/Emergenza."
+    },
+    "decision": {
+      "approved": "Approvato",
+      "rejected": "Rifiutato",
+      "acknowledged": "Preso atto",
+      "clarification_requested": "Chiarimento richiesto"
+    }
+  },
   "items": {
     "dashboard": "Dashboard",
     "people": "Persone",

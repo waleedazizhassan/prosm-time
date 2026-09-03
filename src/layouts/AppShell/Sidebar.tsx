@@ -94,8 +94,13 @@ export default function Sidebar() {
           <button
             type="button"
             className={styles.collapseButton}
-            onClick={toggleSidebarCollapsed}
-            aria-label={sidebarCollapsed ? t("expandSidebar") : t("collapseSidebar")}
+            // § live UX review, user-directed - on the mobile drawer,
+            // this same chevron used to collapse it to a useless
+            // icon-only rail that still ate screen space; a drawer that
+            // never overlays a fixed rail should just close outright.
+            // Desktop keeps the real collapse-to-rail behavior.
+            onClick={mobileSidebarOpen ? closeMobileSidebar : toggleSidebarCollapsed}
+            aria-label={mobileSidebarOpen ? t("closeSidebar") : sidebarCollapsed ? t("expandSidebar") : t("collapseSidebar")}
             aria-expanded={!sidebarCollapsed}
           >
             {sidebarCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}

@@ -8,6 +8,7 @@
   "toggleSidebar": "Navigation umschalten",
   "collapseSidebar": "Seitenleiste einklappen",
   "expandSidebar": "Seitenleiste ausklappen",
+  "closeSidebar": "Menü schließen",
   "openUserMenu": "Benutzermenü öffnen",
   "signOutAction": "Abmelden",
   "languageLabel": "Sprache",
@@ -19,6 +20,41 @@
   },
   "notificationsLabel": "Benachrichtigungen",
   "noNotifications": "Noch keine Benachrichtigungen.",
+  "notifications": {
+    "outOfZoneEmployee": {
+      "title": "Sie befinden sich außerhalb Ihres zugewiesenen Arbeitsbereichs",
+      "body": "Bitte erklären Sie warum. Entfernung: {{distance}} m."
+    },
+    "outOfZoneManager": {
+      "title": "Mitarbeiter außerhalb des Arbeitsbereichs",
+      "body": "{{name}} befindet sich außerhalb des zugewiesenen Bereichs (Entfernung: {{distance}} m)."
+    },
+    "exceptionPendingReview": {
+      "titleException": "Ausnahme wartet auf Ihre Prüfung",
+      "bodyException": "{{name}} hat einen Grund für eine Ausnahme außerhalb des Bereichs angegeben.",
+      "titleCorrection": "Korrekturantrag wartet auf Ihre Prüfung",
+      "bodyCorrection": "{{name}} hat einen Korrekturantrag eingereicht."
+    },
+    "correctionReviewed": {
+      "titleException": "Ihre Ausnahme wurde geprüft",
+      "titleCorrection": "Ihr Korrekturantrag wurde geprüft",
+      "body": "Entscheidung: {{decision}}."
+    },
+    "breakExceeded": {
+      "title": "Pausendauer überschritten",
+      "body": "Ihre Pause hat die maximal zulässige Dauer überschritten."
+    },
+    "sosAlert": {
+      "title": "SOS-/Notfallalarm",
+      "body": "{{name}} hat einen SOS-/Notfallalarm ausgelöst."
+    },
+    "decision": {
+      "approved": "Genehmigt",
+      "rejected": "Abgelehnt",
+      "acknowledged": "Zur Kenntnis genommen",
+      "clarification_requested": "Klärung angefordert"
+    }
+  },
   "items": {
     "dashboard": "Dashboard",
     "people": "Personen",

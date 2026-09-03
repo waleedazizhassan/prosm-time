@@ -64,11 +64,11 @@
 }
 
 @media (max-width: 640px) {
-  /* § live UX review, user-directed - "remove the Dashboard button
-     and the back/forward arrows from the mobile header - tapping the
-     logo already returns to Dashboard, and the phone's own OS
-     already has its own back/forward gesture." */
-  .container {
-    display: none;
+  /* § live UX review, user-directed correction - these were previously
+     hidden on mobile; the user now wants them visible there too, so
+     the buttons shrink slightly to make room instead of disappearing. */
+  .button {
+    width: 28px;
+    height: 28px;
   }
 }

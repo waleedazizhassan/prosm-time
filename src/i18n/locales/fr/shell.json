@@ -8,6 +8,7 @@
   "toggleSidebar": "Basculer la navigation",
   "collapseSidebar": "Réduire la barre latérale",
   "expandSidebar": "Développer la barre latérale",
+  "closeSidebar": "Fermer le menu",
   "openUserMenu": "Ouvrir le menu utilisateur",
   "signOutAction": "Se déconnecter",
   "languageLabel": "Langue",
@@ -19,6 +20,41 @@
   },
   "notificationsLabel": "Notifications",
   "noNotifications": "Aucune notification pour le moment.",
+  "notifications": {
+    "outOfZoneEmployee": {
+      "title": "Vous êtes en dehors de votre zone de travail",
+      "body": "Merci d'expliquer pourquoi. Distance : {{distance}} m."
+    },
+    "outOfZoneManager": {
+      "title": "Employé en dehors de sa zone de travail",
+      "body": "{{name}} est en dehors de la zone assignée (distance : {{distance}} m)."
+    },
+    "exceptionPendingReview": {
+      "titleException": "Exception en attente de votre validation",
+      "bodyException": "{{name}} a soumis un motif pour une exception hors zone.",
+      "titleCorrection": "Demande de correction en attente de votre validation",
+      "bodyCorrection": "{{name}} a soumis une demande de correction."
+    },
+    "correctionReviewed": {
+      "titleException": "Votre exception a été examinée",
+      "titleCorrection": "Votre demande de correction a été examinée",
+      "body": "Décision : {{decision}}."
+    },
+    "breakExceeded": {
+      "title": "Durée de pause dépassée",
+      "body": "Votre pause a dépassé la durée maximale autorisée."
+    },
+    "sosAlert": {
+      "title": "Alerte SOS/Urgence",
+      "body": "{{name}} a déclenché une alerte SOS/Urgence."
+    },
+    "decision": {
+      "approved": "Approuvé",
+      "rejected": "Rejeté",
+      "acknowledged": "Pris en compte",
+      "clarification_requested": "Clarification demandée"
+    }
+  },
   "items": {
     "dashboard": "Tableau de bord",
     "people": "Personnes",

@@ -8,6 +8,7 @@
   "toggleSidebar": "تبديل التنقل",
   "collapseSidebar": "طي الشريط الجانبي",
   "expandSidebar": "توسيع الشريط الجانبي",
+  "closeSidebar": "إغلاق القائمة",
   "openUserMenu": "فتح قائمة المستخدم",
   "signOutAction": "تسجيل الخروج",
   "languageLabel": "اللغة",
@@ -19,6 +20,41 @@
   },
   "notificationsLabel": "الإشعارات",
   "noNotifications": "لا توجد إشعارات بعد.",
+  "notifications": {
+    "outOfZoneEmployee": {
+      "title": "أنت خارج نطاق موقع العمل المحدد لك",
+      "body": "من فضلك وضّح السبب. المسافة: {{distance}} م."
+    },
+    "outOfZoneManager": {
+      "title": "موظف خارج نطاق موقع العمل",
+      "body": "{{name}} خارج النطاق المحدد (المسافة: {{distance}} م)."
+    },
+    "exceptionPendingReview": {
+      "titleException": "استثناء بانتظار مراجعتك",
+      "bodyException": "{{name}} أرسل سببًا لاستثناء خروج عن النطاق.",
+      "titleCorrection": "طلب تصحيح بانتظار مراجعتك",
+      "bodyCorrection": "{{name}} أرسل طلب تصحيح."
+    },
+    "correctionReviewed": {
+      "titleException": "تمت مراجعة الاستثناء الخاص بك",
+      "titleCorrection": "تمت مراجعة طلب التصحيح الخاص بك",
+      "body": "القرار: {{decision}}."
+    },
+    "breakExceeded": {
+      "title": "تجاوزت مدة الاستراحة",
+      "body": "استراحتك تجاوزت الحد الأقصى المسموح به."
+    },
+    "sosAlert": {
+      "title": "تنبيه طوارئ (SOS)",
+      "body": "{{name}} أرسل تنبيه طوارئ (SOS)."
+    },
+    "decision": {
+      "approved": "تمت الموافقة",
+      "rejected": "تم الرفض",
+      "acknowledged": "تم الاطلاع",
+      "clarification_requested": "مطلوب توضيح"
+    }
+  },
   "items": {
     "dashboard": "لوحة التحكم",
     "people": "الأشخاص",
