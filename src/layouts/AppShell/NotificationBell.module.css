@@ -115,3 +115,8 @@
   font-size: var(--font-xs);
   color: var(--text-secondary);
 }
+
+.itemTime {
+  font-size: 10px;
+  color: var(--text-disabled);
+}
