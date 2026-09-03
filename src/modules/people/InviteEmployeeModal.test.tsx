@@ -22,7 +22,6 @@ describe("InviteEmployeeModal", () => {
         userId: "user-1",
         email: "morgan@acme.example",
         verificationCode: "123456",
-        invitationUrl: "http://localhost:5177/accept-invitation?email=morgan%40acme.example&code=123456",
         emailSent: true,
         expiresAt: "2026-09-07T00:00:00.000Z",
       },

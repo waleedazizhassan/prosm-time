@@ -66,15 +66,14 @@ serve(async (request: Request) => {
     }
 
     if (requestResult?.success) {
-      const appOrigin = request.headers.get("origin") || Deno.env.get("PROSM_TIME_APP_URL") || "http://localhost:5177";
-      const resetUrl = `${appOrigin}/reset-password?email=${encodeURIComponent(normalizedEmail)}&code=${encodeURIComponent(verificationCode)}`;
-
+      // § live UX review, user-directed - the reset link always
+      // resolved to a dead localhost fallback; the code alone is the
+      // real call to action now (see _shared/emailTemplates.ts).
       await sendEmail({
         to: normalizedEmail,
         subject: "Reset your PROSM Time password",
         html: renderPasswordResetEmail({
           fullName: requestResult.fullName ?? "there",
-          resetUrl,
           verificationCode,
           expiryMinutes: EXPIRY_MINUTES,
         }),

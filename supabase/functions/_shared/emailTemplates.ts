@@ -11,14 +11,12 @@ export function renderInvitationEmail({
   organizationName,
   inviteeName,
   roleLabel,
-  invitationUrl,
   verificationCode,
   expiryDays,
 }: {
   organizationName: string;
   inviteeName: string;
   roleLabel: string;
-  invitationUrl: string;
   verificationCode: string;
   expiryDays: number;
 }): string {
@@ -32,33 +30,11 @@ export function renderInvitationEmail({
 
     <p style="font-size:16px;color:#374151;">
       Hi ${inviteeName}, you've been invited to join <strong>${organizationName}</strong> on PROSM Time as
-      <strong>${roleLabel}</strong>. Use the button below to accept your invitation and set up your account.
-    </p>
-
-    <div style="margin:30px 0;text-align:center;">
-      <a href="${invitationUrl}" style="
-        display:inline-block;
-        background:#16a34a;
-        color:#ffffff;
-        font-size:16px;
-        font-weight:bold;
-        text-decoration:none;
-        padding:14px 32px;
-        border-radius:8px;
-      ">
-        Accept invitation
-      </a>
-    </div>
-
-    <p style="color:#6b7280;font-size:14px;">
-      If the button doesn't work, copy and paste this link into your browser:
-    </p>
-    <p style="color:#374151;font-size:14px;word-break:break-all;">
-      ${invitationUrl}
+      <strong>${roleLabel}</strong>. Enter the code below in the app to accept your invitation and set up your account.
     </p>
 
     <p style="color:#6b7280;font-size:14px;margin-top:24px;">
-      Your verification code (already filled in for you if you use the link above):
+      Your verification code:
     </p>
     <div style="margin:12px 0;text-align:center;">
       <span style="
@@ -93,12 +69,10 @@ export function renderInvitationEmail({
 
 export function renderPasswordResetEmail({
   fullName,
-  resetUrl,
   verificationCode,
   expiryMinutes,
 }: {
   fullName: string;
-  resetUrl: string;
   verificationCode: string;
   expiryMinutes: number;
 }): string {
@@ -111,33 +85,11 @@ export function renderPasswordResetEmail({
     </h2>
 
     <p style="font-size:16px;color:#374151;">
-      Hi ${fullName}, we received a request to reset your PROSM Time password. Use the button below to choose a new one.
-    </p>
-
-    <div style="margin:30px 0;text-align:center;">
-      <a href="${resetUrl}" style="
-        display:inline-block;
-        background:#16a34a;
-        color:#ffffff;
-        font-size:16px;
-        font-weight:bold;
-        text-decoration:none;
-        padding:14px 32px;
-        border-radius:8px;
-      ">
-        Reset password
-      </a>
-    </div>
-
-    <p style="color:#6b7280;font-size:14px;">
-      If the button doesn't work, copy and paste this link into your browser:
-    </p>
-    <p style="color:#374151;font-size:14px;word-break:break-all;">
-      ${resetUrl}
+      Hi ${fullName}, we received a request to reset your PROSM Time password. Enter the code below in the app to choose a new one.
     </p>
 
     <p style="color:#6b7280;font-size:14px;margin-top:24px;">
-      Your reset code (already filled in for you if you use the link above):
+      Your reset code:
     </p>
     <div style="margin:12px 0;text-align:center;">
       <span style="

@@ -20,11 +20,11 @@
 // (action: "sendEmail"), the same authenticated channel already used
 // for activation/license status - PROSM Time never holds Zoho
 // credentials at all; Platform remains the sole owner of the ZOHO_*
-// secrets and sends from noreply@prosm.net. The code/link are always
-// returned in this response too, for the inviting admin to share
-// directly - same "controlled one-time display" posture as every
-// other secret in this codebase, now a real delivered email as well
-// as a fallback the admin can act on immediately.
+// secrets and sends from noreply@prosm.net. The verification code is
+// always returned in this response too, for the inviting admin to
+// share directly - same "controlled one-time display" posture as
+// every other secret in this codebase, now a real delivered email as
+// well as a fallback the admin can act on immediately.
 // deno-lint-ignore-file no-explicit-any
 
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
@@ -156,9 +156,10 @@ serve(async (request: Request) => {
       .eq("id", callerRow.organization_id)
       .maybeSingle();
 
-    const appOrigin = request.headers.get("origin") || Deno.env.get("PROSM_TIME_APP_URL") || "http://localhost:5177";
-    const invitationUrl = `${appOrigin}/accept-invitation?email=${encodeURIComponent(normalizedEmail)}&code=${encodeURIComponent(verificationCode)}`;
-
+    // § live UX review, user-directed - "the link button in invite/
+    // reset emails is broken (points at localhost) - drop it, the code
+    // is enough." No app URL is threaded through anywhere in this flow
+    // any more; the verification code is the only real call to action.
     const emailResult = await sendEmail({
       to: normalizedEmail,
       subject: `You're invited to join ${organizationRow?.name ?? "your organization"} on PROSM Time`,
@@ -166,7 +167,6 @@ serve(async (request: Request) => {
         organizationName: organizationRow?.name ?? "your organization",
         inviteeName: fullName.trim(),
         roleLabel: ROLE_LABELS[roleKey] ?? roleKey,
-        invitationUrl,
         verificationCode,
         expiryDays,
       }),
@@ -180,7 +180,6 @@ serve(async (request: Request) => {
       userId: createResult.userId,
       email: normalizedEmail,
       verificationCode,
-      invitationUrl,
       emailSent: emailResult.sent,
       expiresAt,
     });
