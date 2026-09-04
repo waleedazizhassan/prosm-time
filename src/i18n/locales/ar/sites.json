@@ -49,6 +49,7 @@
     "testLocationResultOutside": "موقعك الحالي يبعد {{distance}} م عن مركز هذا الموقع - خارج النطاق الجغرافي المحدد ({{radius}} م).",
     "allowedRadiusLabel": "النطاق المسموح به (بالأمتار)",
     "gpsAccuracyToleranceLabel": "هامش دقة GPS (بالأمتار)",
+    "orgDefaultHint": "معبأ تلقائيًا من الإعداد الافتراضي للمؤسسة - تقدر تديره من الإعدادات، أو تجاوزه هنا لهذا الموقع بس.",
     "timezoneLabel": "المنطقة الزمنية",
     "timezoneHint": "معرّف المنطقة الزمنية بصيغة IANA، مثل Africa/Cairo. التخزين يبقى بتوقيت UTC؛ هذا يؤثر فقط على العرض المحلي.",
     "graceToleranceLabel": "فترة السماح (بالدقائق)",
@@ -72,7 +73,6 @@
     "attendanceAllowedLabel": "الحضور مسموح",
     "geofenceRequiredLabel": "النطاق الجغرافي مطلوب",
     "cameraRequiredLabel": "الكاميرا مطلوبة",
-    "environmentalTagLabel": "الوسم البيئي مفعّل",
     "activeLabel": "الموقع نشط",
     "confirm": "حفظ الموقع",
     "genericError": "تعذر حفظ هذا الموقع."

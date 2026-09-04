@@ -1,5 +1,21 @@
 {
   "title": "Einstellungen",
   "subtitle": "Organisationsweite Konfiguration.",
-  "noAccess": "Sie haben keine Berechtigung, die Einstellungen anzuzeigen."
+  "noAccess": "Sie haben keine Berechtigung, die Einstellungen anzuzeigen.",
+  "siteDefaults": {
+    "title": "Standort-Richtlinien-Standardwerte",
+    "hint": "Wird auf jeden neuen Standort angewendet, den Sie anlegen - dies sind Richtlinienentscheidungen, die organisationsweit fast immer gleich sind, kein echtes standortspezifisches Attribut. Ein bestehender Standort behält seinen eigenen gespeicherten Wert; Sie können jeden dieser Werte weiterhin für einen bestimmten Standort in dessen eigenem Bearbeiten-Formular überschreiben.",
+    "gpsAccuracyToleranceLabel": "GPS-Genauigkeitstoleranz (Meter)",
+    "graceToleranceLabel": "Kulanzzeit (Minuten)",
+    "breakRoundingModeLabel": "Pausenzeit-Rundung",
+    "breakRoundingMode": {
+      "cumulative": "Kumulativ (genaue Pausendauer)",
+      "full_hour": "Aufrundung auf die volle Stunde"
+    },
+    "saveAction": "Speichern",
+    "saveSuccess": "Standort-Standardwerte aktualisiert.",
+    "invalidGpsTolerance": "Geben Sie eine GPS-Genauigkeitstoleranz größer als null ein.",
+    "invalidGraceTolerance": "Die Kulanzzeit darf nicht negativ sein.",
+    "genericError": "Die Standort-Standardwerte konnten nicht aktualisiert werden."
+  }
 }

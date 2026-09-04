@@ -49,6 +49,7 @@
     "testLocationResultOutside": "Your current location is {{distance}} m from this site's center - outside the configured geofence ({{radius}} m).",
     "allowedRadiusLabel": "Allowed radius (meters)",
     "gpsAccuracyToleranceLabel": "GPS accuracy tolerance (meters)",
+    "orgDefaultHint": "Pre-filled from your organization's default - manage it in Settings, or override it here for this site only.",
     "timezoneLabel": "Time zone",
     "timezoneHint": "IANA time zone identifier, e.g. Africa/Cairo. Storage remains UTC; this only affects local display.",
     "graceToleranceLabel": "Grace tolerance (minutes)",
@@ -72,7 +73,6 @@
     "attendanceAllowedLabel": "Attendance allowed",
     "geofenceRequiredLabel": "Geofence required",
     "cameraRequiredLabel": "Camera required",
-    "environmentalTagLabel": "Environmental tag enabled",
     "activeLabel": "Site active",
     "confirm": "Save site",
     "genericError": "Unable to save this site."

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import SiteRepository, { type Site, type SiteAssignment, type KioskMode, type BreakRoundingMode } from "../../core/repositories/SiteRepository";
+import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import { getCurrentPosition, haversineDistanceMeters } from "../../core/utils/geo";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
@@ -60,7 +61,6 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
   const [attendanceAllowed, setAttendanceAllowed] = useState(site?.attendanceAllowed ?? true);
   const [geofenceRequired, setGeofenceRequired] = useState(site?.geofenceRequired ?? true);
   const [cameraRequired, setCameraRequired] = useState(site?.cameraRequired ?? false);
-  const [environmentalTagEnabled, setEnvironmentalTagEnabled] = useState(site?.environmentalTagEnabled ?? false);
   const [isActive, setIsActive] = useState(site?.isActive ?? true);
 
   const [locating, setLocating] = useState(false);
@@ -91,6 +91,23 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
       if (result.success && result.data) setAssignments(result.data);
     });
   }, [isEditing, site]);
+
+  // § live UX review, user-directed - "look at the site Edit form,
+  // you'll find things that deserve to be in Settings." GPS accuracy
+  // tolerance, break rounding mode and grace tolerance are now
+  // organization-wide defaults (Settings) - a brand-new site starts
+  // from them instead of hardcoded literals, but stays fully
+  // overridable right here. An existing site's own saved values (set
+  // above from `site`) are never touched by this.
+  useEffect(() => {
+    if (isEditing) return;
+    OrganizationRepository.getCurrentOrganization().then((result) => {
+      if (!result.success || !result.data) return;
+      setGpsAccuracyToleranceMeters(String(result.data.defaultGpsAccuracyToleranceMeters));
+      setBreakRoundingMode(result.data.defaultBreakRoundingMode);
+      setGraceToleranceMinutes(String(result.data.defaultGraceToleranceMinutes));
+    });
+  }, [isEditing]);
 
   const handleToggleExemption = async (assignment: SiteAssignment, isExempt: boolean) => {
     if (!site) return;
@@ -163,7 +180,6 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
       attendanceAllowed,
       geofenceRequired,
       cameraRequired,
-      environmentalTagEnabled,
       kioskMode,
       graceToleranceMinutes: Number(graceToleranceMinutes),
       shiftStartTime: shiftStartTime || null,
@@ -255,6 +271,7 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
           onChange={(event) => setGpsAccuracyToleranceMeters(event.target.value)}
           required
           disabled={submitting}
+          helperText={!isEditing ? t("form.orgDefaultHint") : undefined}
         />
       </div>
 
@@ -268,6 +285,7 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
         onChange={(event) => setGraceToleranceMinutes(event.target.value)}
         required
         disabled={submitting}
+        helperText={!isEditing ? t("form.orgDefaultHint") : undefined}
       />
 
       <Select
@@ -392,10 +410,6 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
       <div style={toggleRowStyle}>
         <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.cameraRequiredLabel")}</span>
         <Toggle checked={cameraRequired} onChange={setCameraRequired} disabled={submitting} label={t("form.cameraRequiredLabel")} />
-      </div>
-      <div style={toggleRowStyle}>
-        <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.environmentalTagLabel")}</span>
-        <Toggle checked={environmentalTagEnabled} onChange={setEnvironmentalTagEnabled} disabled={submitting} label={t("form.environmentalTagLabel")} />
       </div>
       {isEditing ? (
         <div style={toggleRowStyle}>

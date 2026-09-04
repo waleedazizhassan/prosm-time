@@ -229,7 +229,6 @@ export default function ClockInOutCard() {
                 attendanceAllowed: true,
                 geofenceRequired: true,
                 cameraRequired: nearby.cameraRequired,
-                environmentalTagEnabled: false,
                 kioskMode: "personal_device_only" as const,
                 graceToleranceMinutes: 0,
                 shiftStartTime: null,

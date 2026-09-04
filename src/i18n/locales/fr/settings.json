@@ -1,5 +1,21 @@
 {
   "title": "Paramètres",
   "subtitle": "Configuration à l'échelle de l'organisation.",
-  "noAccess": "Vous n'avez pas la permission de voir les paramètres."
+  "noAccess": "Vous n'avez pas la permission de voir les paramètres.",
+  "siteDefaults": {
+    "title": "Politique de site par défaut",
+    "hint": "Appliqué à chaque nouveau site que vous créez - ce sont des décisions de politique presque toujours identiques dans toute l'organisation, pas un véritable attribut propre à chaque site. Un site existant conserve sa propre valeur enregistrée ; vous pouvez toujours en outrepasser une pour un site précis depuis la propre page Modifier de ce site.",
+    "gpsAccuracyToleranceLabel": "Tolérance de précision GPS (mètres)",
+    "graceToleranceLabel": "Tolérance de grâce (minutes)",
+    "breakRoundingModeLabel": "Arrondi du temps de pause",
+    "breakRoundingMode": {
+      "cumulative": "Cumulatif (durée de pause exacte)",
+      "full_hour": "Arrondi à l'heure pleine supérieure"
+    },
+    "saveAction": "Enregistrer",
+    "saveSuccess": "Politiques par défaut des sites mises à jour.",
+    "invalidGpsTolerance": "Saisissez une tolérance de précision GPS supérieure à zéro.",
+    "invalidGraceTolerance": "La tolérance de grâce ne peut pas être négative.",
+    "genericError": "Impossible de mettre à jour les politiques par défaut des sites."
+  }
 }

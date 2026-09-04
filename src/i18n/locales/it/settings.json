@@ -1,5 +1,21 @@
 {
   "title": "Impostazioni",
   "subtitle": "Configurazione a livello di organizzazione.",
-  "noAccess": "Non hai il permesso di visualizzare le impostazioni."
+  "noAccess": "Non hai il permesso di visualizzare le impostazioni.",
+  "siteDefaults": {
+    "title": "Politiche predefinite delle sedi",
+    "hint": "Applicato a ogni nuova sede che crei - sono decisioni di policy quasi sempre identiche in tutta l'organizzazione, non un vero attributo specifico della sede. Una sede già esistente mantiene il proprio valore salvato; puoi comunque sovrascrivere ciascuna di queste per una sede specifica dalla pagina di modifica di quella sede.",
+    "gpsAccuracyToleranceLabel": "Tolleranza di precisione GPS (metri)",
+    "graceToleranceLabel": "Tolleranza di cortesia (minuti)",
+    "breakRoundingModeLabel": "Arrotondamento tempo di pausa",
+    "breakRoundingMode": {
+      "cumulative": "Cumulativo (durata pausa esatta)",
+      "full_hour": "Arrotonda per eccesso all'ora piena"
+    },
+    "saveAction": "Salva",
+    "saveSuccess": "Politiche predefinite delle sedi aggiornate.",
+    "invalidGpsTolerance": "Inserisci una tolleranza di precisione GPS maggiore di zero.",
+    "invalidGraceTolerance": "La tolleranza di cortesia non può essere negativa.",
+    "genericError": "Impossibile aggiornare le politiche predefinite delle sedi."
+  }
 }

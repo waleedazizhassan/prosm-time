@@ -18,6 +18,12 @@ export interface Organization {
   // way, whether clocked in at a site or not." The org-wide radius
   // (meters) applied around a no-site clock-in's own GPS point.
   noSiteAllowedRadiusMeters: number;
+  // § live UX review, user-directed - "the site Edit form has things
+  // that deserve to be in Settings." Org-wide defaults a new site's
+  // create form pre-fills from - still fully overridable per site.
+  defaultGpsAccuracyToleranceMeters: number;
+  defaultBreakRoundingMode: "cumulative" | "full_hour";
+  defaultGraceToleranceMinutes: number;
 }
 
 function createSuccess<T>(data: T | null = null): ServiceResult<T> {
@@ -42,7 +48,9 @@ class OrganizationRepository {
     try {
       const { data, error } = await this.client
         .from("organizations")
-        .select("id, organization_code, name, status, logo_url, organization_settings(default_language, default_theme, no_site_allowed_radius_meters)")
+        .select(
+          "id, organization_code, name, status, logo_url, organization_settings(default_language, default_theme, no_site_allowed_radius_meters, default_gps_accuracy_tolerance_meters, default_break_rounding_mode, default_grace_tolerance_minutes)",
+        )
         .maybeSingle();
 
       if (error) return createError(error.message);
@@ -59,6 +67,9 @@ class OrganizationRepository {
         defaultTheme: settings?.default_theme ?? "dark",
         logoUrl: data.logo_url ?? null,
         noSiteAllowedRadiusMeters: settings?.no_site_allowed_radius_meters ?? 500,
+        defaultGpsAccuracyToleranceMeters: settings?.default_gps_accuracy_tolerance_meters ?? 50,
+        defaultBreakRoundingMode: settings?.default_break_rounding_mode ?? "cumulative",
+        defaultGraceToleranceMinutes: settings?.default_grace_tolerance_minutes ?? 5,
       });
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Organization service unavailable.");
@@ -103,6 +114,24 @@ class OrganizationRepository {
       const { data, error } = await this.client.rpc("set_prosm_time_no_site_radius", { p_radius_meters: radiusMeters });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to set the no-site radius.");
+      return createSuccess();
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Organization service unavailable.");
+    }
+  }
+
+  // § live UX review, user-directed - "the site Edit form has things
+  // that deserve to be in Settings." Owner-only, same "no direct
+  // client UPDATE grant" posture as setNoSiteAllowedRadius above.
+  async setSiteDefaults(gpsAccuracyToleranceMeters: number, breakRoundingMode: "cumulative" | "full_hour", graceToleranceMinutes: number): Promise<ServiceResult> {
+    try {
+      const { data, error } = await this.client.rpc("set_prosm_time_site_defaults", {
+        p_gps_accuracy_tolerance_meters: gpsAccuracyToleranceMeters,
+        p_break_rounding_mode: breakRoundingMode,
+        p_grace_tolerance_minutes: graceToleranceMinutes,
+      });
+      if (error) return createError(error.message);
+      if (data?.success === false) return createError("Unable to update the site defaults.");
       return createSuccess();
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Organization service unavailable.");

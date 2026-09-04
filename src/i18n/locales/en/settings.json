@@ -1,5 +1,21 @@
 {
   "title": "Settings",
   "subtitle": "Organization-wide configuration.",
-  "noAccess": "You do not have permission to view settings."
+  "noAccess": "You do not have permission to view settings.",
+  "siteDefaults": {
+    "title": "Site Policy Defaults",
+    "hint": "Applied to every new site you create - these are policy decisions that are almost always the same across an organization, not a real per-site attribute. Any existing site keeps its own saved value; you can still override any of these for a specific site from that site's own Edit form.",
+    "gpsAccuracyToleranceLabel": "GPS accuracy tolerance (meters)",
+    "graceToleranceLabel": "Grace tolerance (minutes)",
+    "breakRoundingModeLabel": "Break time rounding",
+    "breakRoundingMode": {
+      "cumulative": "Cumulative (exact break time)",
+      "full_hour": "Rounds up to a full hour"
+    },
+    "saveAction": "Save",
+    "saveSuccess": "Site defaults updated.",
+    "invalidGpsTolerance": "Enter a GPS accuracy tolerance greater than zero.",
+    "invalidGraceTolerance": "Grace tolerance cannot be negative.",
+    "genericError": "Unable to update the site defaults."
+  }
 }

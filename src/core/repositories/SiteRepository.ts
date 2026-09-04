@@ -22,7 +22,6 @@ export interface Site {
   attendanceAllowed: boolean;
   geofenceRequired: boolean;
   cameraRequired: boolean;
-  environmentalTagEnabled: boolean;
   kioskMode: KioskMode;
   graceToleranceMinutes: number;
   // § live UX review, user-directed - per-site shift policy: work
@@ -77,7 +76,6 @@ export interface SiteInput {
   attendanceAllowed: boolean;
   geofenceRequired: boolean;
   cameraRequired: boolean;
-  environmentalTagEnabled: boolean;
   kioskMode: KioskMode;
   graceToleranceMinutes: number;
   shiftStartTime: string | null;
@@ -115,7 +113,6 @@ interface SiteRow {
   attendance_allowed: boolean;
   geofence_required: boolean;
   camera_required: boolean;
-  environmental_tag_enabled: boolean;
   kiosk_mode: KioskMode;
   grace_tolerance_minutes: number;
   shift_start_time: string | null;
@@ -150,7 +147,6 @@ function mapSiteRow(row: SiteRow): Site {
     attendanceAllowed: row.attendance_allowed,
     geofenceRequired: row.geofence_required,
     cameraRequired: row.camera_required,
-    environmentalTagEnabled: row.environmental_tag_enabled,
     kioskMode: row.kiosk_mode,
     graceToleranceMinutes: row.grace_tolerance_minutes,
     shiftStartTime: toHhMm(row.shift_start_time),
@@ -274,7 +270,6 @@ class SiteRepository {
         p_geofence_required: input.geofenceRequired,
         p_camera_required: input.cameraRequired,
         p_kiosk_mode: input.kioskMode,
-        p_environmental_tag_enabled: input.environmentalTagEnabled,
         p_grace_tolerance_minutes: input.graceToleranceMinutes,
         p_shift_start_time: input.shiftStartTime,
         p_shift_end_time: input.shiftEndTime,
@@ -307,7 +302,6 @@ class SiteRepository {
         p_geofence_required: input.geofenceRequired,
         p_camera_required: input.cameraRequired,
         p_kiosk_mode: input.kioskMode,
-        p_environmental_tag_enabled: input.environmentalTagEnabled,
         p_grace_tolerance_minutes: input.graceToleranceMinutes,
         p_is_active: input.isActive,
         p_shift_start_time: input.shiftStartTime,
