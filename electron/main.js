@@ -24,6 +24,10 @@ function createWindow() {
     height: 900,
     minWidth: 960,
     minHeight: 640,
+    // § live UX review, user-directed - opens already filling the
+    // screen, the same fullscreen state a browser's own F11 toggles
+    // into (not just maximized - no title bar/taskbar either).
+    fullscreen: true,
     icon: path.join(__dirname, "..", "build", "icon.ico"),
     autoHideMenuBar: true,
     webPreferences: {
@@ -37,6 +41,14 @@ function createWindow() {
   // APIs that Electron blocks by default unless explicitly allowed.
   win.webContents.session.setPermissionRequestHandler((_webContents, permission, callback) => {
     callback(permission === "media" || permission === "geolocation");
+  });
+
+  // F11 toggles fullscreen the same way it does in a real browser tab
+  // - Electron doesn't bind this by default outside a menu accelerator.
+  win.webContents.on("before-input-event", (_event, input) => {
+    if (input.type === "keyDown" && input.key === "F11") {
+      win.setFullScreen(!win.isFullScreen());
+    }
   });
 
   loadURL(win);
