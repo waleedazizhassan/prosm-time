@@ -30,7 +30,9 @@
     "saveAction": "Save",
     "saveSuccess": "No-site radius updated.",
     "invalidRadius": "Enter a radius greater than zero.",
-    "genericError": "Unable to update the no-site radius."
+    "genericError": "Unable to update the no-site radius.",
+    "summaryLine": "No-site radius: {{meters}} m.",
+    "manageLink": "Manage in Settings"
   },
   "form": {
     "createTitle": "Add a site",

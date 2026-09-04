@@ -30,7 +30,9 @@
     "saveAction": "Enregistrer",
     "saveSuccess": "Rayon sans site mis à jour.",
     "invalidRadius": "Saisissez un rayon supérieur à zéro.",
-    "genericError": "Impossible de mettre à jour le rayon sans site."
+    "genericError": "Impossible de mettre à jour le rayon sans site.",
+    "summaryLine": "Rayon sans site : {{meters}} m.",
+    "manageLink": "Gérer dans Paramètres"
   },
   "form": {
     "createTitle": "Ajouter un site",

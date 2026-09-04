@@ -65,10 +65,16 @@
     "attendance": "Anwesenheitsprotokoll",
     "timesheets": "Stundenzettel",
     "allowances": "Zulagen",
+    "reports": "Berichte",
+    "settings": "Einstellungen",
     "help": "Hilfe"
   },
   "sections": {
-    "organization": "Organisation",
+    "attendance": "Anwesenheit",
+    "people": "Personal & Standorte",
+    "payroll": "Gehaltsabrechnung",
+    "reports": "Berichte",
+    "settings": "Einstellungen",
     "help": "Hilfe"
   },
   "weather": {

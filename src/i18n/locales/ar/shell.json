@@ -65,10 +65,16 @@
     "attendance": "سجل الحضور",
     "timesheets": "كشوف الدوام",
     "allowances": "البدلات",
+    "reports": "التقارير",
+    "settings": "الإعدادات",
     "help": "المساعدة"
   },
   "sections": {
-    "organization": "المؤسسة",
+    "attendance": "الحضور",
+    "people": "الأفراد والمواقع",
+    "payroll": "الرواتب",
+    "reports": "التقارير",
+    "settings": "الإعدادات",
     "help": "المساعدة"
   },
   "weather": {

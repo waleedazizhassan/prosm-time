@@ -30,7 +30,9 @@
     "saveAction": "Speichern",
     "saveSuccess": "Radius ohne Standort aktualisiert.",
     "invalidRadius": "Geben Sie einen Radius größer als null ein.",
-    "genericError": "Der Radius ohne Standort konnte nicht aktualisiert werden."
+    "genericError": "Der Radius ohne Standort konnte nicht aktualisiert werden.",
+    "summaryLine": "Radius ohne Standort: {{meters}} m.",
+    "manageLink": "In den Einstellungen verwalten"
   },
   "form": {
     "createTitle": "Standort hinzufügen",

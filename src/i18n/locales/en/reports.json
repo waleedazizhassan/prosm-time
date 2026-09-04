@@ -1,0 +1,21 @@
+{
+  "title": "Reports",
+  "subtitle": "Pull any report you need, for any date range.",
+  "loadError": "Unable to load this report's data.",
+  "types": {
+    "attendance": "Attendance Record",
+    "allowances": "Allowances",
+    "timesheets": "Timesheets"
+  },
+  "timesheetsHint": "Timesheets are generated and approved per employee and period, not by date range.",
+  "timesheetsLink": "Go to Timesheets",
+  "filters": {
+    "fromLabel": "From",
+    "toLabel": "To",
+    "employeeLabel": "Employee",
+    "allEmployees": "All employees"
+  },
+  "loadingRows": "Loading…",
+  "rowCount": "{{count}} row(s) ready to export.",
+  "exportAction": "Export PDF"
+}

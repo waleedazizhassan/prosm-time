@@ -1,0 +1,21 @@
+{
+  "title": "Report",
+  "subtitle": "Scarica qualsiasi report ti serva, per qualsiasi intervallo di date.",
+  "loadError": "Impossibile caricare i dati di questo report.",
+  "types": {
+    "attendance": "Registro presenze",
+    "allowances": "Indennità",
+    "timesheets": "Fogli ore"
+  },
+  "timesheetsHint": "I fogli ore vengono generati e approvati per dipendente e periodo, non per intervallo di date.",
+  "timesheetsLink": "Vai ai fogli ore",
+  "filters": {
+    "fromLabel": "Da",
+    "toLabel": "A",
+    "employeeLabel": "Dipendente",
+    "allEmployees": "Tutti i dipendenti"
+  },
+  "loadingRows": "Caricamento…",
+  "rowCount": "{{count}} riga/e pronta/e per l'esportazione.",
+  "exportAction": "Esporta PDF"
+}

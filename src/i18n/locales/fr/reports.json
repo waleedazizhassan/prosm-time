@@ -1,0 +1,21 @@
+{
+  "title": "Rapports",
+  "subtitle": "Extrayez n'importe quel rapport, pour n'importe quelle période.",
+  "loadError": "Impossible de charger les données de ce rapport.",
+  "types": {
+    "attendance": "Registre de présence",
+    "allowances": "Indemnités",
+    "timesheets": "Feuilles de temps"
+  },
+  "timesheetsHint": "Les feuilles de temps sont générées et approuvées par employé et par période, pas par plage de dates.",
+  "timesheetsLink": "Aller aux feuilles de temps",
+  "filters": {
+    "fromLabel": "Du",
+    "toLabel": "Au",
+    "employeeLabel": "Employé",
+    "allEmployees": "Tous les employés"
+  },
+  "loadingRows": "Chargement…",
+  "rowCount": "{{count}} ligne(s) prête(s) à exporter.",
+  "exportAction": "Exporter en PDF"
+}

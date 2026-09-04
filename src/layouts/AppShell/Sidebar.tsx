@@ -24,7 +24,7 @@ const FOCUSABLE_SELECTOR = 'button:not(:disabled), [href], input, select, textar
 // independently (e.g. PeoplePage's own Navigate-away-if-unauthorized).
 export default function Sidebar() {
   const { t } = useTranslation(["shell", "common"]);
-  const { hasPermission } = useAuth();
+  const { hasPermission, profile } = useAuth();
   const { sidebarCollapsed, toggleSidebarCollapsed, mobileSidebarOpen, closeMobileSidebar } = useAppLayout();
   const asideRef = useRef<HTMLElement>(null);
 
@@ -63,7 +63,9 @@ export default function Sidebar() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [mobileSidebarOpen, closeMobileSidebar]);
 
-  const visibleItems = NAV_ITEMS.filter((item) => item.requiredPermission === null || hasPermission(item.requiredPermission));
+  const visibleItems = NAV_ITEMS.filter(
+    (item) => (item.requiredPermission === null || hasPermission(item.requiredPermission)) && (!item.ownerOnly || profile?.isOwner)
+  );
   // § live UX review, user-directed - group the same flat item list
   // under labeled sections (reference "Menu" screen's own grouping),
   // nothing new introduced - a section with no visible items (every

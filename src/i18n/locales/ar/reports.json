@@ -1,0 +1,21 @@
+{
+  "title": "التقارير",
+  "subtitle": "اسحب أي تقرير تحتاجه، لأي فترة زمنية.",
+  "loadError": "تعذر تحميل بيانات هذا التقرير.",
+  "types": {
+    "attendance": "سجل الحضور",
+    "allowances": "البدلات",
+    "timesheets": "الجداول الزمنية"
+  },
+  "timesheetsHint": "الجداول الزمنية تُنشأ وتُعتمد لكل موظف وفترة على حدة، مش بنطاق تاريخ.",
+  "timesheetsLink": "الذهاب إلى الجداول الزمنية",
+  "filters": {
+    "fromLabel": "من",
+    "toLabel": "إلى",
+    "employeeLabel": "الموظف",
+    "allEmployees": "كل الموظفين"
+  },
+  "loadingRows": "جارٍ التحميل…",
+  "rowCount": "{{count}} صف جاهز للتصدير.",
+  "exportAction": "تصدير PDF"
+}

@@ -30,7 +30,9 @@
     "saveAction": "حفظ",
     "saveSuccess": "تم تحديث نطاق التسجيل بدون موقع.",
     "invalidRadius": "أدخل نطاقًا أكبر من صفر.",
-    "genericError": "تعذر تحديث نطاق التسجيل بدون موقع."
+    "genericError": "تعذر تحديث نطاق التسجيل بدون موقع.",
+    "summaryLine": "نطاق التسجيل بدون موقع: {{meters}} م.",
+    "manageLink": "إدارته من الإعدادات"
   },
   "form": {
     "createTitle": "إضافة موقع",

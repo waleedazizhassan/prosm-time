@@ -30,7 +30,9 @@
     "saveAction": "Salva",
     "saveSuccess": "Raggio senza sito aggiornato.",
     "invalidRadius": "Inserisci un raggio maggiore di zero.",
-    "genericError": "Impossibile aggiornare il raggio senza sito."
+    "genericError": "Impossibile aggiornare il raggio senza sito.",
+    "summaryLine": "Raggio senza sito: {{meters}} m.",
+    "manageLink": "Gestisci nelle Impostazioni"
   },
   "form": {
     "createTitle": "Aggiungi una sede",

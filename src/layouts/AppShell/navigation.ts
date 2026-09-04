@@ -1,7 +1,13 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, HelpCircle, Clock, Wallet } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet } from "lucide-react";
 
-export type NavSection = "organization" | "help";
+// § live UX review, user-directed - "professional reorganization" of
+// the Sidebar into grouped sections/"centers" instead of one flat
+// list (the earlier "Menu screen" grouping only ever had one real
+// group, "organization" - this actually splits it): attendance-facing
+// tools, people/sites, payroll (timesheets+allowances), a new Reports
+// Center, a new Settings section, and Help.
+export type NavSection = "attendance" | "people" | "payroll" | "reports" | "settings" | "help";
 
 export interface NavItem {
   id: string;
@@ -17,6 +23,11 @@ export interface NavItem {
   // control in this app already uses - never a second, parallel
   // authorization concept.
   requiredPermission: string | null;
+  // § live UX review, user-directed - Settings is Owner-only (matches
+  // its page's own gate) but isn't backed by a permission-catalog key
+  // the way every other item above is - a dedicated boolean rather
+  // than inventing a fake permission string for one nav item.
+  ownerOnly?: boolean;
   // § live UX review, user-directed - "Menu" screen reference material
   // grouped its items under labeled sections rather than one flat
   // list. Pure presentational grouping of the exact same items/
@@ -31,9 +42,7 @@ export interface NavItem {
 // now the ONLY Dashboard navigation mechanism - no Dashboard entry
 // lives here anymore.
 export const NAV_ITEMS: NavItem[] = [
-  { id: "people", labelKey: "items.people", path: "/people", icon: Users, requiredPermission: "employees.view", section: "organization" },
-  { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage", section: "organization" },
-  { id: "manager", labelKey: "items.manager", path: "/manager", icon: LayoutGrid, requiredPermission: "attendance.view", section: "organization" },
+  { id: "manager", labelKey: "items.manager", path: "/manager", icon: LayoutGrid, requiredPermission: "attendance.view", section: "attendance" },
   // § live UX review, user-directed - "a direct sidebar button to view
   // employees' clock-in/clock-out record." No permission gate, same
   // reasoning as Timesheets below: attendance_sessions' own RLS
@@ -41,19 +50,31 @@ export const NAV_ITEMS: NavItem[] = [
   // sessions always; a Manager's managed-site people; everyone for
   // the Owner), so every authenticated member can open this item and
   // simply gets their own scope back.
-  { id: "attendance", labelKey: "items.attendance", path: "/attendance", icon: Clock, requiredPermission: null, section: "organization" },
+  { id: "attendance", labelKey: "items.attendance", path: "/attendance", icon: Clock, requiredPermission: null, section: "attendance" },
+  { id: "people", labelKey: "items.people", path: "/people", icon: Users, requiredPermission: "employees.view", section: "people" },
+  { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage", section: "people" },
   // §22: "Employee reviews their period" - self-access to one's own
   // timesheets needs no special permission (same as Dashboard), so
   // this nav item is visible to every authenticated org member; the
   // page itself further gates its Generate/Approve/Correction-review
   // sections on timesheets.generate/timesheets.approve/attendance.correct.
-  { id: "timesheets", labelKey: "items.timesheets", path: "/timesheets", icon: FileText, requiredPermission: null, section: "organization" },
+  { id: "timesheets", labelKey: "items.timesheets", path: "/timesheets", icon: FileText, requiredPermission: null, section: "payroll" },
   // § approved 2026-09-02 plan (Feature 2) - self-access to one's own
   // allowance entries needs no special permission, same reasoning as
   // Timesheets above; allowance_entries' own RLS is what actually
   // scopes what an approver sees.
-  { id: "allowances", labelKey: "items.allowances", path: "/allowances", icon: Wallet, requiredPermission: null, section: "organization" },
+  { id: "allowances", labelKey: "items.allowances", path: "/allowances", icon: Wallet, requiredPermission: null, section: "payroll" },
+  // § live UX review, user-directed - "a Reports Center where any PDF
+  // can be pulled." No permission gate on the nav item itself - the
+  // page's own report-type selector gates each report by the exact
+  // same permission its original source page already used.
+  { id: "reports", labelKey: "items.reports", path: "/reports", icon: FileBarChart, requiredPermission: null, section: "reports" },
+  // § live UX review, user-directed - a real home for org-wide
+  // settings (today: the no-site geofence radius) instead of living
+  // inside an unrelated page. Owner-only, matching that setting's own
+  // existing RPC-level gate.
+  { id: "settings", labelKey: "items.settings", path: "/settings", icon: Settings, requiredPermission: null, ownerOnly: true, section: "settings" },
   { id: "help", labelKey: "items.help", path: "/help", icon: HelpCircle, requiredPermission: null, section: "help" },
 ];
 
-export const NAV_SECTION_ORDER: NavSection[] = ["organization", "help"];
+export const NAV_SECTION_ORDER: NavSection[] = ["attendance", "people", "payroll", "reports", "settings", "help"];

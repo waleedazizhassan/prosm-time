@@ -83,6 +83,18 @@ import frCamera from "./locales/fr/camera.json";
 import deCamera from "./locales/de/camera.json";
 import itCamera from "./locales/it/camera.json";
 
+import enReports from "./locales/en/reports.json";
+import arReports from "./locales/ar/reports.json";
+import frReports from "./locales/fr/reports.json";
+import deReports from "./locales/de/reports.json";
+import itReports from "./locales/it/reports.json";
+
+import enSettings from "./locales/en/settings.json";
+import arSettings from "./locales/ar/settings.json";
+import frSettings from "./locales/fr/settings.json";
+import deSettings from "./locales/de/settings.json";
+import itSettings from "./locales/it/settings.json";
+
 // PROSM Time i18n bootstrap. One namespace per screen/domain area,
 // exactly the way PROSM Platform's own src/i18n/index.js does - never
 // raw strings in components. `shell` is the application shell's own
@@ -92,11 +104,11 @@ import itCamera from "./locales/it/camera.json";
 // Management + Map/Geofence, Project Management, §13/§14).
 
 const resources = {
-  en: { common: enCommon, auth: enAuth, dashboard: enDashboard, people: enPeople, shell: enShell, sites: enSites, manager: enManager, attendanceLog: enAttendanceLog, timesheets: enTimesheets, allowances: enAllowances, kiosk: enKiosk, help: enHelp, camera: enCamera },
-  ar: { common: arCommon, auth: arAuth, dashboard: arDashboard, people: arPeople, shell: arShell, sites: arSites, manager: arManager, attendanceLog: arAttendanceLog, timesheets: arTimesheets, allowances: arAllowances, kiosk: arKiosk, help: arHelp, camera: arCamera },
-  fr: { common: frCommon, auth: frAuth, dashboard: frDashboard, people: frPeople, shell: frShell, sites: frSites, manager: frManager, attendanceLog: frAttendanceLog, timesheets: frTimesheets, allowances: frAllowances, kiosk: frKiosk, help: frHelp, camera: frCamera },
-  de: { common: deCommon, auth: deAuth, dashboard: deDashboard, people: dePeople, shell: deShell, sites: deSites, manager: deManager, attendanceLog: deAttendanceLog, timesheets: deTimesheets, allowances: deAllowances, kiosk: deKiosk, help: deHelp, camera: deCamera },
-  it: { common: itCommon, auth: itAuth, dashboard: itDashboard, people: itPeople, shell: itShell, sites: itSites, manager: itManager, attendanceLog: itAttendanceLog, timesheets: itTimesheets, allowances: itAllowances, kiosk: itKiosk, help: itHelp, camera: itCamera },
+  en: { common: enCommon, auth: enAuth, dashboard: enDashboard, people: enPeople, shell: enShell, sites: enSites, manager: enManager, attendanceLog: enAttendanceLog, timesheets: enTimesheets, allowances: enAllowances, kiosk: enKiosk, help: enHelp, camera: enCamera, reports: enReports, settings: enSettings },
+  ar: { common: arCommon, auth: arAuth, dashboard: arDashboard, people: arPeople, shell: arShell, sites: arSites, manager: arManager, attendanceLog: arAttendanceLog, timesheets: arTimesheets, allowances: arAllowances, kiosk: arKiosk, help: arHelp, camera: arCamera, reports: arReports, settings: arSettings },
+  fr: { common: frCommon, auth: frAuth, dashboard: frDashboard, people: frPeople, shell: frShell, sites: frSites, manager: frManager, attendanceLog: frAttendanceLog, timesheets: frTimesheets, allowances: frAllowances, kiosk: frKiosk, help: frHelp, camera: frCamera, reports: frReports, settings: frSettings },
+  de: { common: deCommon, auth: deAuth, dashboard: deDashboard, people: dePeople, shell: deShell, sites: deSites, manager: deManager, attendanceLog: deAttendanceLog, timesheets: deTimesheets, allowances: deAllowances, kiosk: deKiosk, help: deHelp, camera: deCamera, reports: deReports, settings: deSettings },
+  it: { common: itCommon, auth: itAuth, dashboard: itDashboard, people: itPeople, shell: itShell, sites: itSites, manager: itManager, attendanceLog: itAttendanceLog, timesheets: itTimesheets, allowances: itAllowances, kiosk: itKiosk, help: itHelp, camera: itCamera, reports: itReports, settings: itSettings },
 };
 
 export const I18N_STORAGE_KEY = "prosm_time_language";
@@ -110,7 +122,7 @@ i18next
     fallbackLng: DEFAULT_LANGUAGE,
     supportedLngs: LANGUAGE_CODES,
 
-    ns: ["common", "auth", "dashboard", "people", "shell", "sites", "manager", "attendanceLog", "timesheets", "allowances", "kiosk", "help", "camera"],
+    ns: ["common", "auth", "dashboard", "people", "shell", "sites", "manager", "attendanceLog", "timesheets", "allowances", "kiosk", "help", "camera", "reports", "settings"],
     defaultNS: "common",
 
     // § live UX review, user-directed - a fresh install must default to

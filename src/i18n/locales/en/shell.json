@@ -65,10 +65,16 @@
     "attendance": "Attendance Record",
     "timesheets": "Timesheets",
     "allowances": "Allowances",
+    "reports": "Reports",
+    "settings": "Settings",
     "help": "Help"
   },
   "sections": {
-    "organization": "Organization",
+    "attendance": "Attendance",
+    "people": "People & Sites",
+    "payroll": "Payroll",
+    "reports": "Reports",
+    "settings": "Settings",
     "help": "Help"
   },
   "weather": {

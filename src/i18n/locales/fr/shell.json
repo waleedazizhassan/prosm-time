@@ -65,10 +65,16 @@
     "attendance": "Registre de présence",
     "timesheets": "Feuilles de temps",
     "allowances": "Indemnités",
+    "reports": "Rapports",
+    "settings": "Paramètres",
     "help": "Aide"
   },
   "sections": {
-    "organization": "Organisation",
+    "attendance": "Présence",
+    "people": "Personnel & sites",
+    "payroll": "Paie",
+    "reports": "Rapports",
+    "settings": "Paramètres",
     "help": "Aide"
   },
   "weather": {
