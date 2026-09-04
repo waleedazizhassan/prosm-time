@@ -46,9 +46,24 @@ class AuthService {
     }
   }
 
+  // § real bug, user-reported - the Windows desktop build "signs out"
+  // on every restart even though the session token genuinely persists
+  // to disk (confirmed directly in the Electron app's own storage
+  // file). Root cause: a fresh Electron process opens its on-disk
+  // storage backend asynchronously, and this very first getSession()
+  // call - fired the instant the page's JS runs - can race ahead of
+  // that and read an empty store, even though the real data is there
+  // a moment later. A plain browser tab reload doesn't hit this (the
+  // storage backend for that origin is already warm); a genuinely
+  // logged-out user still gets null instantly on the retry too, so
+  // this costs nothing in the real "not signed in" case.
   async getSession() {
     const { data } = await this.client.auth.getSession();
-    return data.session;
+    if (data.session) return data.session;
+
+    await new Promise((resolve) => setTimeout(resolve, 250));
+    const retry = await this.client.auth.getSession();
+    return retry.data.session;
   }
 
   onAuthStateChange(callback: (event: string, session: unknown) => void) {
