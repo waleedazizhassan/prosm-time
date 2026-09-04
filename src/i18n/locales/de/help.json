@@ -4,46 +4,82 @@
   "guides": {
     "gettingStarted": {
       "title": "Erste Schritte",
-      "body": "Melden Sie sich mit der E-Mail-Adresse und dem Passwort an, die Ihr Administrator für Sie eingerichtet hat. Nutzen Sie auf dem Dashboard „Einstempeln“, um Ihre Schicht zu beginnen, und „Ausstempeln“, um sie zu beenden. Die Standorte Ihrer Organisation sowie eventuelle Kamera-/GPS-Anforderungen werden von Ihrem Administrator konfiguriert."
+      "body": "Melden Sie sich mit der E-Mail-Adresse und dem Passwort an, die Ihr Administrator für Sie eingerichtet hat. Nutzen Sie auf dem Dashboard „Einstempeln“, um Ihre Schicht zu beginnen, und „Ausstempeln“, um sie zu beenden - eine Live-Karte über dem Button zeigt Ihre aktuelle Position und, sofern relevant, den Geofence-Kreis des Standorts. Die Standorte Ihrer Organisation sowie eventuelle Kamera-/GPS-Anforderungen werden von Ihrem Administrator konfiguriert."
     },
     "attendance": {
       "title": "Ein- und Ausstempeln",
-      "body": "Wählen Sie vor dem Einstempeln Ihren Standort (und ggf. Ihr Projekt). An manchen Standorten ist vor dem Ein- oder Ausstempeln ein Foto erforderlich. Wenn Sie außerhalb Ihres zugewiesenen Arbeitsbereichs ein- oder ausstempeln, werden Sie um eine Begründung gebeten - diese wird von einem Manager geprüft."
+      "body": "Wählen Sie vor dem Einstempeln Ihren Standort (und ggf. Ihr Projekt) - oder lassen Sie das Feld Standort leer und beschreiben Sie, wo Sie sich tatsächlich befinden, wenn Sie nicht an einem registrierten Ort sind. An manchen Standorten ist ein Foto erforderlich. Unmittelbar vor dem Absenden zeigt ein Bestätigungsbildschirm genau, was erfasst wird - Ihr Foto (falls aufgenommen), Ihr detaillierter GPS-Standort, der Standort/Arbeitsort und die Uhrzeit - mit zwei optionalen Feldern, einer Notiz und Ihrer aktuellen Tätigkeit, die mit diesem Ein-/Ausstempeln gespeichert werden und für Ihren Manager sichtbar sind."
+    },
+    "walkInGeofence": {
+      "title": "Arbeiten an einem Standort, dem Sie nicht zugewiesen sind",
+      "body": "Wenn Sie sich heute physisch im Geofence eines registrierten Standorts befinden, ihm aber nicht formell zugewiesen sind, wird er Ihnen automatisch in der Standortliste vorgeschlagen (markiert als „heute hier“) - nützlich, wenn Sie tatsächlich jeden Tag an einem anderen Standort arbeiten. Einstempeln ganz ohne Standort funktioniert ebenfalls: Ihr eigener Einstempelpunkt wird für den Rest der Schicht zum Mittelpunkt eines organisationsweiten Radius und bietet Ihnen denselben Echtzeitschutz wie der Geofence eines registrierten Standorts - selbst an einem Ort, der nie als Standort eingerichtet wurde."
+    },
+    "siteChange": {
+      "title": "Standort während der Schicht wechseln",
+      "body": "Um zu einem anderen Standort zu wechseln, ohne vollständig auszustempeln: Drücken Sie Pause, bevor Sie Ihren aktuellen Standort verlassen. Der Button wird zu Standort wechseln - drücken Sie ihn, sobald Sie am nächsten Standort angekommen sind, und der Wechsel wird mit der genauen Uhrzeit in Ihrem Anwesenheitsverlauf erfasst. Danach wird der Button wieder zu Pause, bereit für den nächsten Wechsel."
+    },
+    "sos": {
+      "title": "SOS / Notfall",
+      "body": "Verfügbar, solange die Anwesenheitsüberwachung für Ihre Schicht aktiv ist. Ein Tastendruck sendet sofort einen Alarm mit hoher Priorität an Ihre Manager mit Ihrem letzten bekannten Standort und wird als echter Notfalldatensatz protokolliert - reserviert für tatsächliche Sicherheitssituationen, kein Allzweck-Button."
+    },
+    "notifications": {
+      "title": "Wie Benachrichtigungen die richtige Person erreichen",
+      "body": "Wenn Sie außerhalb Ihres zugewiesenen Arbeitsbereichs ein- oder ausstempeln - oder sich während Ihrer Schicht dorthin bewegen -, werden Sie um eine Begründung gebeten, und die richtige Person wird automatisch benachrichtigt: Der Fall eines gewöhnlichen Mitarbeiters erreicht den Manager dieses Standorts (und den Inhaber); der Fall eines Managers eskaliert direkt zum Inhaber statt zu anderen Managern; der Inhaber, der niemandem Rechenschaft schuldet, wird nie gemeldet. Tippen Sie auf eine Benachrichtigung, um direkt zum betreffenden Vorgang zu springen."
     },
     "timesheets": {
       "title": "Stundenzettel",
-      "body": "Sobald Ihr Manager einen Stundenzettel für einen Zeitraum erstellt, erscheint dieser unter Stundenzettel zur Prüfung und Einreichung zur Genehmigung. Gearbeitete Zeit, Pausen und Überstunden werden als separate Summen angezeigt. Nach der Genehmigung ist ein Stundenzettel gesperrt - falls eine Korrektur nötig ist, können Sie diese über die Stundenzettelseite anfordern."
-    },
-    "kiosk": {
-      "title": "Kiosk-Modus",
-      "body": "An Standorten mit einem gemeinsam genutzten Kiosk-Gerät wählen Sie Ihren Namen aus der Liste, geben Ihre persönliche Kiosk-PIN ein und stempeln dann ein oder aus. Ihre Kiosk-PIN ist unabhängig von Ihrem Anmeldepasswort - Sie können sie über das Dashboard festlegen oder ändern."
+      "body": "Sobald Ihr Manager einen Stundenzettel für einen Zeitraum erstellt, erscheint dieser unter Stundenzettel zur Prüfung und Einreichung zur Genehmigung. Gearbeitete Zeit, Pausen und Überstunden werden als separate Summen angezeigt - Pausenzeit wird nie von Ihrer gearbeiteten Zeit abgezogen, und Überstunden basieren auf der in der Richtlinie Ihres Standorts festgelegten Startzeit. Nach der Genehmigung ist ein Stundenzettel gesperrt - falls eine Korrektur nötig ist, können Sie diese über die Stundenzettelseite anfordern, und eine genehmigte Korrektur aktualisiert die betreffende erfasste Zeit tatsächlich."
     },
     "exceptions": {
-      "title": "Ausnahmen",
-      "body": "Wenn Sie außerhalb Ihres zugewiesenen Arbeitsbereichs ein- oder ausstempeln, wird dies als Ausnahme erfasst. Geben Sie über das Dashboard eine kurze Begründung an, damit ein Manager sie prüfen kann."
+      "title": "Ausnahmen und Korrekturen - was eine Genehmigung wirklich bedeutet",
+      "body": "Eine Zonenausnahme oder ein Korrekturantrag ist nicht mehr nur eine Entscheidung auf dem Papier: Genehmigt Ihr Manager sie, gelten Sie als die gesamte Zeit über anwesend, ohne Abzug. Wird sie abgelehnt - ob vor oder nach Ihrer Erklärung -, wird Ihre effektive Arbeitszeit auf den Moment der erstmaligen Erkennung begrenzt, was die für diesen Tag gezählten Stunden und Überstunden reduziert."
     },
     "allowances": {
       "title": "Zulagen",
       "body": "Öffnen Sie Zulagen in der Seitenleiste und wählen Sie ein Datum, um einen Eintrag hinzuzufügen - Datum, Standort und Kommen/Gehen werden automatisch übernommen. Füllen Sie die Beträge für Verpflegung, Fahrtkosten, Wohnen und Sonstiges selbst aus und reichen Sie den Eintrag ein. Ein Manager oder der Inhaber genehmigt oder lehnt ihn ab; solange er ein Entwurf ist, können Sie ihn noch bearbeiten. Überstunden werden automatisch aus der Schichtrichtlinie Ihres Standorts berechnet, falls konfiguriert."
     },
+    "kiosk": {
+      "title": "Kiosk-Modus",
+      "body": "An Standorten mit einem gemeinsam genutzten Kiosk-Gerät wählen Sie Ihren Namen aus der Liste, geben Ihre persönliche Kiosk-PIN ein und stempeln dann ein oder aus. Ihre Kiosk-PIN ist unabhängig von Ihrem Anmeldepasswort - Sie können sie über das Dashboard festlegen oder ändern."
+    },
+    "reportsCenter": {
+      "title": "Berichtszentrum",
+      "body": "Berichte bündelt die Berichtserstellung an einem Ort: Wählen Sie einen Berichtstyp (Anwesenheitsprotokoll oder Zulagen), einen Zeitraum und, falls relevant, einen Mitarbeiter, und exportieren Sie ihn dann als PDF - derselbe Export, der bereits auf jeder dieser Seiten verfügbar ist, jetzt aber an einem zentralen Ort erreichbar. Stundenzettel werden stattdessen auf ihrer eigenen Stundenzettel-Seite erstellt, eingereicht und exportiert, da ein Stundenzettel zu einem bestimmten Mitarbeiter und Zeitraum gehört, nicht zu einem Datumsbereich."
+    },
     "sites": {
       "title": "Standorte und Schichtrichtlinie (Administratoren)",
-      "body": "Standorte (nur Inhaber/Manager) ist der Ort, an dem Arbeitsstandorte, ihr GPS-Geofence, der Kiosk-Modus und die Kamera-/Anwesenheitsrichtlinie konfiguriert werden und Mitarbeiter/Manager einem Standort zugewiesen werden. Jeder Standort kann außerdem eine eigene, optionale Schichtrichtlinie haben: Arbeitszeiten, ab wann Überstunden und Verspätungsabzüge zählen, eine Kulanzzeit, und ob ein Mitarbeiter nach dieser Kulanzzeit vom Selbst-Einstempeln blockiert wird (in diesem Fall stempelt ein Manager ihn stattdessen mit Begründung ein)."
+      "body": "Standorte (nur Inhaber/Manager) ist der Ort, an dem Arbeitsstandorte, ihr GPS-Geofence, der Kiosk-Modus und die Kamera-/Anwesenheitsrichtlinie konfiguriert werden und Mitarbeiter/Manager einem Standort zugewiesen werden. Jeder Standort kann außerdem eine eigene, optionale Schichtrichtlinie haben: Arbeitszeiten, ab wann Überstunden und Verspätungsabzüge zählen, eine Kulanzzeit, und ob ein Mitarbeiter nach dieser Kulanzzeit vom Selbst-Einstempeln blockiert wird (in diesem Fall stempelt ein Manager ihn stattdessen mit Begründung ein). Der für Einstempeln ohne Standort verwendete Radius wird in den Einstellungen verwaltet, mit einer kurzen Zusammenfassung auch hier."
+    },
+    "settingsCenter": {
+      "title": "Einstellungen (Inhaber)",
+      "body": "Ein echter Ort für organisationsweite Konfiguration, beginnend mit dem Geofence-Radius ohne Standort - dem Bereich um den Einstempelpunkt eines mobilen Mitarbeiters, der ihn genauso schützt wie der Geofence eines registrierten Standorts."
     },
     "permissions": {
       "title": "Berechtigungen (Administratoren)",
       "body": "Die Seite jeder Person unter Personen zeigt ihre tatsächlich erteilten Berechtigungen und ermöglicht einem berechtigten Administrator, eine einzelne Berechtigung mit Begründung zu erteilen, zu entziehen oder zurückzusetzen - sichtbar nur für diejenigen, die diese Befugnis bereits besitzen. Der Inhaber hat immer alle Berechtigungen; andere Rollen starten mit einem Standardpaket, das pro Person angepasst werden kann."
+    },
+    "desktopApp": {
+      "title": "Windows-Desktop-App",
+      "body": "Dasselbe PROSM Time, das Sie bereits kennen, installiert als echtes Windows-Programm. Es öffnet sich bildschirmfüllend; F11 wechselt in den echten Vollbildmodus, und Escape bringt immer das normale Fenster mit seinem Schließen-Button zurück. Ihre Anmeldung bleibt zwischen den Starts gespeichert, genau wie auf Ihrem Smartphone oder im Browser."
+    },
+    "liveMap": {
+      "title": "Live-Karte",
+      "body": "Das Dashboard zeigt eine echte, designkonforme Karte mit Ihrer aktuellen Position - und sobald Sie eingestempelt sind oder einen Standort ausgewählt haben, einen durchscheinenden Kreis, der den echten Geofence dieses Standorts markiert, sodass Sie auf einen Blick sehen, wo Sie sich relativ dazu befinden, noch bevor Sie überhaupt ein- oder ausstempeln."
+    },
+    "radio": {
+      "title": "Warum es ein Radio in PROSM Time gibt",
+      "body": "Das Radio ist keine Ablenkung von der Anwesenheit - es ist genau darauf ausgelegt. Spielen Sie während Ihres Arbeitswegs einen Sender ab, und PROSM Time ist bereits geöffnet und präsent, sobald Sie ankommen: Statt einer App, an die man sich erst am Schreibtisch erinnern muss, ist sie bereits in Ihrer Hand, und Einstempeln liegt genau dort, wo Sie es zuletzt verlassen haben. Ein kleiner, bewusster Anstoß gegen den häufigsten Anwesenheitsfehler überhaupt - schlicht das rechtzeitige Einstempeln zu vergessen."
     }
   },
   "faq": {
     "title": "Häufig gestellte Fragen",
     "q1": {
       "question": "Ich habe vergessen auszustempeln - was tue ich?",
-      "answer": "Wenden Sie sich an einen Administrator oder Manager - dieser kann das korrekte Ausstempeln in Ihrem Namen erfassen, und die Aktion wird als seine, nicht als Ihre, aufgezeichnet."
+      "answer": "Wenden Sie sich an einen Administrator oder Manager - dieser kann das korrekte Ausstempeln in Ihrem Namen erfassen, und die Aktion wird als seine, nicht als Ihre, aufgezeichnet. Ein Manager kann auch einen Korrekturantrag für eine bereits erfasste Zeit einreichen, der - nach Genehmigung - diese tatsächlich aktualisiert."
     },
     "q2": {
       "question": "Warum wurde mein Einstempeln als außerhalb meines Arbeitsbereichs markiert?",
-      "answer": "Ihr Standort hat einen konfigurierten Geofence und eine GPS-Genauigkeitstoleranz. Wenn Ihr gemeldeter Standort außerhalb dieses Bereichs lag, werden Sie um eine Begründung gebeten, damit ein Manager sie prüfen kann."
+      "answer": "Ihr Standort hat einen konfigurierten Geofence und eine GPS-Genauigkeitstoleranz (oder, ohne ausgewählten Standort, den organisationseigenen Radius ohne Standort um Ihren Einstempelpunkt). Wenn Ihr gemeldeter Standort außerhalb dieses Bereichs lag, werden Sie um eine Begründung gebeten, damit der zuständige Manager sie prüfen kann - eine Genehmigung entfernt die Markierung vollständig; eine Ablehnung begrenzt Ihre Arbeitszeit auf diesen Zeitpunkt."
     },
     "q3": {
       "question": "Kann ich die App offline nutzen?",
@@ -51,11 +87,11 @@
     },
     "q4": {
       "question": "Wie ändere ich die Sprache oder das Erscheinungsbild?",
-      "answer": "Öffnen Sie das Benutzermenü (unten in der Seitenleiste) - Sprache und Erscheinungsbild (Dunkel/Hell/System) können dort jederzeit geändert werden."
+      "answer": "Öffnen Sie das Benutzermenü (unten in der Seitenleiste) - Sprache und Erscheinungsbild (Dunkel/Hell/System) können dort jederzeit geändert werden, und Sie können dort auch Ihr Profilbild festlegen."
     },
     "q5": {
       "question": "Ich habe ohne Standortauswahl eingestempelt - warum wurde ein „Arbeitsort“ verlangt?",
-      "answer": "Der Standort ist optional, damit Sie Ihre Anwesenheit von Ihrem tatsächlichen aktuellen Ort erfassen können, auch wenn dieser kein registrierter Standort ist - in diesem Fall ist jedoch eine kurze Beschreibung erforderlich, damit Berichte niemals einen leeren Standort zeigen."
+      "answer": "Der Standort ist optional, damit Sie Ihre Anwesenheit von Ihrem tatsächlichen aktuellen Ort erfassen können, auch wenn dieser kein registrierter Standort ist - in diesem Fall ist jedoch eine kurze Beschreibung erforderlich, damit Berichte niemals einen leeren Standort zeigen. Der organisationseigene Radius ohne Standort schützt diese Sitzung weiterhin genauso wie der Geofence eines echten Standorts."
     },
     "q6": {
       "question": "Was ist der Unterschied zwischen Anwesenheitsprotokoll und Stundenzetteln?",
@@ -63,11 +99,19 @@
     },
     "q7": {
       "question": "Kann ich meine Anwesenheit oder meinen Stundenzettel als PDF exportieren?",
-      "answer": "Ja - Anwesenheitsprotokoll, Stundenzettel und Zulagen haben jeweils eine eigene Aktion „PDF exportieren“, beschränkt auf das, was Sie gerade betrachten."
+      "answer": "Ja - Anwesenheitsprotokoll, Stundenzettel und Zulagen haben jeweils eine eigene Aktion „PDF exportieren“, beschränkt auf das, was Sie gerade betrachten, und Berichte bündelt die Exporte von Anwesenheitsprotokoll und Zulagen ebenfalls an einem zentralen Ort."
     },
     "q8": {
       "question": "Warum sehe ich manche Mitarbeiter nicht unter Personen oder im Anwesenheitsprotokoll?",
       "answer": "Sie sehen immer nur sich selbst, plus - wenn Sie einen Standort leiten - die diesem Standort zugewiesenen Personen. Der Inhaber sieht alle. Dies wird vom Server durchgesetzt, nicht nur in der Oberfläche verborgen."
+    },
+    "q9": {
+      "question": "Meldet mich die Desktop-App bei jedem Schließen ab?",
+      "answer": "Nein - Ihre Sitzung bleibt zwischen den Starts gespeichert, genau wie auf Ihrem Smartphone oder im Browser."
+    },
+    "q10": {
+      "question": "Kann ich das Radio weiterhören, während ich eingestempelt bin?",
+      "answer": "Ja - es spielt unabhängig von Ihrem Anwesenheitsstatus im Hintergrund weiter. Es befindet sich in der Media-Zeile der Seitenleiste (antippen, um die Senderliste und Suche zu öffnen) statt in der Kopfzeile und nimmt eingeklappt nur sehr wenig Platz ein."
     }
   },
   "contact": {

@@ -4,46 +4,82 @@
   "guides": {
     "gettingStarted": {
       "title": "Prise en main",
-      "body": "Connectez-vous avec l'e-mail et le mot de passe configurés par votre administrateur. Sur le tableau de bord, utilisez Pointer l'arrivée pour commencer votre poste et Pointer le départ pour le terminer. Les sites de votre organisation ainsi que les éventuelles exigences de photo/GPS sont configurés par votre administrateur."
+      "body": "Connectez-vous avec l'e-mail et le mot de passe configurés par votre administrateur. Sur le tableau de bord, utilisez Pointer l'arrivée pour commencer votre poste et Pointer le départ pour le terminer - une carte en direct au-dessus du bouton affiche votre position actuelle et, le cas échéant, le cercle de géorepérage du site. Les sites de votre organisation ainsi que les éventuelles exigences de photo/GPS sont configurés par votre administrateur."
     },
     "attendance": {
       "title": "Pointer l'arrivée et le départ",
-      "body": "Choisissez votre site (et votre projet, le cas échéant) avant de pointer votre arrivée. Certains sites exigent une photo avant de pointer l'arrivée ou le départ. Si vous pointez en dehors de votre zone de travail assignée, on vous demandera d'expliquer pourquoi - votre explication est examinée par un responsable."
+      "body": "Choisissez votre site (et votre projet, le cas échéant) avant de pointer votre arrivée - ou laissez le champ Site vide et décrivez où vous vous trouvez réellement si vous n'êtes pas sur un lieu enregistré. Certains sites exigent une photo. Juste avant l'envoi, un écran de confirmation affiche exactement ce qui va être enregistré - votre photo (le cas échéant), votre position GPS détaillée, le site/lieu de travail et l'heure - avec deux champs optionnels, une note et votre activité en cours, enregistrés avec ce pointage et visibles par votre responsable."
+    },
+    "walkInGeofence": {
+      "title": "Travailler sur un site auquel vous n'êtes pas affecté",
+      "body": "Si vous vous trouvez physiquement dans le géorepérage d'un site enregistré aujourd'hui sans y être formellement affecté, cela vous est suggéré automatiquement dans la liste des sites (marqué « vous êtes ici aujourd'hui ») - utile si vous travaillez réellement sur un site différent chaque jour. Pointer sans aucun site fonctionne aussi : votre propre point de pointage devient le centre d'un rayon à l'échelle de l'organisation pour le reste du poste, vous offrant la même protection en temps réel qu'un site enregistré, même dans un lieu jamais configuré comme site."
+    },
+    "siteChange": {
+      "title": "Changer de site en cours de poste",
+      "body": "Pour passer à un autre site sans pointer complètement votre départ : appuyez sur Pause avant de quitter votre site actuel. Le bouton devient Changer de site - appuyez dessus une fois arrivé sur le suivant, et le déplacement est enregistré dans votre historique de présence avec l'heure exacte. Le bouton redevient ensuite Pause, prêt pour le prochain déplacement."
+    },
+    "sos": {
+      "title": "SOS / Urgence",
+      "body": "Disponible tant que le suivi de présence est actif pour votre poste. Appuyer dessus envoie immédiatement une alerte haute priorité à vos responsables avec votre dernière position connue, et est enregistré comme un véritable incident d'urgence - réservé aux situations de sécurité réelles, pas un bouton polyvalent."
+    },
+    "notifications": {
+      "title": "Comment les notifications atteignent la bonne personne",
+      "body": "Si vous pointez votre arrivée, votre départ, ou vous déplacez pendant votre poste, en dehors de votre zone de travail assignée, on vous demande d'expliquer pourquoi, et la bonne personne est notifiée automatiquement : la situation d'un employé ordinaire remonte au responsable de ce site (et au propriétaire) ; celle d'un responsable remonte directement au propriétaire plutôt qu'à d'autres responsables ; le propriétaire, qui ne répond à personne, n'est jamais signalé. Touchez une notification pour accéder directement à ce qu'elle concerne."
     },
     "timesheets": {
       "title": "Feuilles de temps",
-      "body": "Une fois qu'un responsable génère une feuille de temps pour une période, elle apparaît dans Feuilles de temps pour révision et soumission pour approbation. Le temps travaillé, les pauses et les heures supplémentaires sont affichés en totaux distincts. Une fois approuvée, une feuille de temps est verrouillée - si vous pensez qu'une correction est nécessaire, vous pouvez en faire la demande depuis la page de la feuille de temps."
-    },
-    "kiosk": {
-      "title": "Mode kiosque",
-      "body": "Sur les sites disposant d'un appareil kiosque partagé, sélectionnez votre nom dans la liste, saisissez votre code PIN kiosque personnel, puis pointez votre arrivée ou votre départ. Votre code PIN kiosque est distinct de votre mot de passe de connexion - définissez-le ou modifiez-le depuis le tableau de bord."
+      "body": "Une fois qu'un responsable génère une feuille de temps pour une période, elle apparaît dans Feuilles de temps pour révision et soumission pour approbation. Le temps travaillé, les pauses et les heures supplémentaires sont affichés en totaux distincts - le temps de pause n'est jamais déduit de vos heures travaillées, et les heures supplémentaires se basent sur l'heure de début définie par la politique de votre site. Une fois approuvée, une feuille de temps est verrouillée - si vous pensez qu'une correction est nécessaire, vous pouvez en faire la demande depuis la page de la feuille de temps, et une correction approuvée met réellement à jour l'heure enregistrée concernée."
     },
     "exceptions": {
-      "title": "Exceptions",
-      "body": "Si vous pointez en dehors de votre zone de travail assignée, cela est enregistré comme une exception. Indiquez un court motif depuis le tableau de bord afin qu'un responsable puisse l'examiner."
+      "title": "Exceptions et corrections - ce que l'approbation change réellement",
+      "body": "Une exception de zone ou une demande de correction n'est plus une simple décision sur papier : si votre responsable l'approuve, vous êtes considéré présent tout le temps, sans pénalité. Si elle est rejetée - avant ou après votre explication - votre temps travaillé effectif est plafonné au moment où la situation a été détectée pour la première fois, ce qui réduit les heures et les heures supplémentaires comptabilisées ce jour-là."
     },
     "allowances": {
       "title": "Indemnités",
       "body": "Ouvrez Indemnités dans la barre latérale et choisissez une date pour ajouter une entrée - la date, le site et les heures de pointage sont remplis automatiquement. Complétez vous-même les montants de repas, transport, logement et autres, puis soumettez. Un responsable ou le propriétaire l'approuve ou la rejette ; tant qu'elle est en brouillon, vous pouvez encore la modifier. Les heures/jours supplémentaires sont calculés automatiquement selon la politique de shift de votre site, si elle est configurée."
     },
+    "kiosk": {
+      "title": "Mode kiosque",
+      "body": "Sur les sites disposant d'un appareil kiosque partagé, sélectionnez votre nom dans la liste, saisissez votre code PIN kiosque personnel, puis pointez votre arrivée ou votre départ. Votre code PIN kiosque est distinct de votre mot de passe de connexion - définissez-le ou modifiez-le depuis le tableau de bord."
+    },
+    "reportsCenter": {
+      "title": "Centre de rapports",
+      "body": "Rapports regroupe la génération de rapports en un seul endroit : choisissez un type de rapport (Registre de présence ou Indemnités), une période et, si pertinent, un employé, puis exportez-le en PDF - le même export déjà disponible sur chacune de ces pages, mais avec un seul endroit dédié pour y accéder. Les feuilles de temps sont générées, soumises et exportées depuis leur propre page Feuilles de temps, car une feuille de temps appartient à un employé et une période précis plutôt qu'à une plage de dates."
+    },
     "sites": {
       "title": "Sites et politique de shift (administrateurs)",
-      "body": "Sites (Propriétaire/Responsable uniquement) permet de configurer les sites, leur géorepérage GPS, le mode kiosque et la politique caméra/présence, et d'y affecter des employés/responsables. Chaque site peut aussi avoir sa propre politique de shift optionnelle : horaires de travail, à partir de quand les heures supplémentaires et les retards sont comptabilisés, une période de tolérance, et si un employé est bloqué de pointer lui-même au-delà de cette tolérance (un responsable pointe alors à sa place, avec un motif)."
+      "body": "Sites (Propriétaire/Responsable uniquement) permet de configurer les sites, leur géorepérage GPS, le mode kiosque et la politique caméra/présence, et d'y affecter des employés/responsables. Chaque site peut aussi avoir sa propre politique de shift optionnelle : horaires de travail, à partir de quand les heures supplémentaires et les retards sont comptabilisés, une période de tolérance, et si un employé est bloqué de pointer lui-même au-delà de cette tolérance (un responsable pointe alors à sa place, avec un motif). Le rayon utilisé pour les pointages sans site est géré depuis Paramètres, avec un résumé rapide affiché ici aussi."
+    },
+    "settingsCenter": {
+      "title": "Paramètres (Propriétaire)",
+      "body": "Un véritable emplacement pour la configuration à l'échelle de l'organisation, à commencer par le rayon de géorepérage sans site - la zone autour du point de pointage d'un employé itinérant qui le protège de la même façon qu'un géorepérage de site enregistré."
     },
     "permissions": {
       "title": "Permissions (administrateurs)",
       "body": "La page de chaque personne dans Personnes affiche ses permissions réellement accordées et permet à un administrateur autorisé d'accorder, révoquer ou réinitialiser une permission individuelle avec un motif - visible uniquement par ceux qui possèdent déjà cette autorité. Le propriétaire a toujours toutes les permissions ; les autres rôles partent d'un ensemble par défaut ajustable par personne."
+    },
+    "desktopApp": {
+      "title": "Application de bureau Windows",
+      "body": "Le même PROSM Time que vous connaissez déjà, installé comme un véritable programme Windows. Il s'ouvre en occupant tout l'écran ; F11 bascule en plein écran véritable et Échap ramène toujours la fenêtre normale avec son bouton de fermeture. Votre connexion reste mémorisée d'un lancement à l'autre, exactement comme sur votre téléphone ou dans un navigateur."
+    },
+    "liveMap": {
+      "title": "Carte en direct",
+      "body": "Le tableau de bord affiche une véritable carte adaptée au thème avec votre position actuelle - et, une fois pointé ou un site sélectionné, un cercle translucide marquant le véritable géorepérage de ce site, pour voir d'un coup d'œil où vous vous situez par rapport à lui avant même d'essayer de pointer."
+    },
+    "radio": {
+      "title": "Pourquoi il y a une radio dans PROSM Time",
+      "body": "La Radio n'est pas une distraction par rapport à la présence - elle est conçue autour d'elle. Écoutez une station pendant votre trajet, et PROSM Time est déjà ouvert et présent à votre esprit au moment où vous arrivez : au lieu d'être une application qu'il faut penser à ouvrir une fois à votre poste, elle est déjà là, dans votre main, et Pointer l'arrivée est juste là où vous l'avez laissé. Un petit coup de pouce délibéré contre l'erreur de présence la plus courante - simplement oublier de pointer à l'heure."
     }
   },
   "faq": {
     "title": "Questions fréquentes",
     "q1": {
       "question": "J'ai oublié de pointer mon départ, que dois-je faire ?",
-      "answer": "Contactez un administrateur ou un responsable - il peut enregistrer le bon pointage de départ en votre nom, et l'action est enregistrée comme la sienne, pas la vôtre."
+      "answer": "Contactez un administrateur ou un responsable - il peut enregistrer le bon pointage de départ en votre nom, et l'action est enregistrée comme la sienne, pas la vôtre. Un responsable peut aussi soumettre une demande de correction sur une heure déjà enregistrée, qui - une fois approuvée - la met réellement à jour."
     },
     "q2": {
       "question": "Pourquoi mon pointage d'arrivée a-t-il été signalé comme hors de ma zone de travail ?",
-      "answer": "Votre site dispose d'un géorepérage configuré et d'une tolérance de précision GPS. Si votre position signalée se trouvait en dehors de cette zone, on vous demande d'expliquer pourquoi afin qu'un responsable puisse l'examiner."
+      "answer": "Votre site dispose d'un géorepérage configuré et d'une tolérance de précision GPS (ou, sans site sélectionné, du rayon sans site propre à votre organisation, autour de votre point de pointage). Si votre position signalée se trouvait en dehors de cette zone, on vous demande d'expliquer pourquoi afin que le bon responsable puisse l'examiner - une approbation efface entièrement le signalement ; un rejet plafonne votre temps travaillé à ce moment-là."
     },
     "q3": {
       "question": "Puis-je utiliser l'application hors ligne ?",
@@ -51,11 +87,11 @@
     },
     "q4": {
       "question": "Comment changer la langue ou l'apparence ?",
-      "answer": "Ouvrez le menu utilisateur (en bas de la barre latérale) - la langue et l'apparence (Sombre/Clair/Système) peuvent y être modifiées à tout moment."
+      "answer": "Ouvrez le menu utilisateur (en bas de la barre latérale) - la langue et l'apparence (Sombre/Clair/Système) peuvent y être modifiées à tout moment, et vous pouvez aussi y définir votre photo de profil."
     },
     "q5": {
       "question": "J'ai pointé sans choisir de site - pourquoi un « lieu de travail » m'a-t-il été demandé ?",
-      "answer": "Le site est optionnel afin que vous puissiez enregistrer votre présence depuis votre position réelle même si ce n'est pas un site enregistré - mais une courte description de l'endroit où vous êtes est alors obligatoire, pour que les rapports n'affichent jamais un site vide."
+      "answer": "Le site est optionnel afin que vous puissiez enregistrer votre présence depuis votre position réelle même si ce n'est pas un site enregistré - mais une courte description de l'endroit où vous êtes est alors obligatoire, pour que les rapports n'affichent jamais un site vide. Le rayon sans site de votre organisation continue de protéger ce pointage comme le ferait un véritable géorepérage de site."
     },
     "q6": {
       "question": "Quelle est la différence entre Registre de présence et Feuilles de temps ?",
@@ -63,11 +99,19 @@
     },
     "q7": {
       "question": "Puis-je exporter ma présence ou ma feuille de temps en PDF ?",
-      "answer": "Oui - Registre de présence, Feuilles de temps et Indemnités ont chacun leur propre action Exporter en PDF, limitée à ce que vous consultez actuellement."
+      "answer": "Oui - Registre de présence, Feuilles de temps et Indemnités ont chacun leur propre action Exporter en PDF, limitée à ce que vous consultez actuellement, et Rapports regroupe aussi les exports du Registre de présence et des Indemnités en un seul endroit dédié."
     },
     "q8": {
       "question": "Pourquoi ne vois-je pas certains employés dans Personnes ou le Registre de présence ?",
       "answer": "Vous ne voyez toujours que vous-même, plus - si vous gérez un site - les personnes affectées à ce site. Le propriétaire voit tout le monde. Ceci est appliqué par le serveur, pas seulement masqué dans l'interface."
+    },
+    "q9": {
+      "question": "L'application de bureau me déconnecte-t-elle à chaque fermeture ?",
+      "answer": "Non - votre session reste mémorisée d'un lancement à l'autre, exactement comme sur votre téléphone ou dans un navigateur."
+    },
+    "q10": {
+      "question": "Puis-je continuer à écouter la radio pendant que je suis pointé ?",
+      "answer": "Oui - elle continue de jouer en arrière-plan quel que soit votre statut de présence. Elle se trouve dans la rangée Média de la barre latérale (touchez-la pour déployer la liste des stations et la recherche) plutôt que dans l'en-tête, et occupe très peu de place une fois repliée."
     }
   },
   "contact": {

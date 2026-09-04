@@ -12,8 +12,26 @@ import Card from "../../components/common/Card";
 export default function HelpPage() {
   const { t } = useTranslation("help");
 
-  const guideSections = ["gettingStarted", "attendance", "timesheets", "allowances", "kiosk", "exceptions", "sites", "permissions"] as const;
-  const faqEntries = [1, 2, 3, 4, 5, 6, 7, 8] as const;
+  const guideSections = [
+    "gettingStarted",
+    "attendance",
+    "walkInGeofence",
+    "siteChange",
+    "sos",
+    "notifications",
+    "timesheets",
+    "exceptions",
+    "allowances",
+    "kiosk",
+    "reportsCenter",
+    "sites",
+    "settingsCenter",
+    "permissions",
+    "desktopApp",
+    "liveMap",
+    "radio",
+  ] as const;
+  const faqEntries = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const;
 
   return (
     <PageShell title={t("title")} subtitle={t("subtitle")}>

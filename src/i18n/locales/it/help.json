@@ -4,46 +4,82 @@
   "guides": {
     "gettingStarted": {
       "title": "Per iniziare",
-      "body": "Accedi con l'email e la password configurate dal tuo amministratore. Nella Dashboard, usa Timbra entrata per iniziare il turno e Timbra uscita per terminarlo. Le sedi della tua organizzazione ed eventuali requisiti fotografici/GPS sono configurati dal tuo amministratore."
+      "body": "Accedi con l'email e la password configurate dal tuo amministratore. Nella Dashboard, usa Timbra entrata per iniziare il turno e Timbra uscita per terminarlo - una mappa in tempo reale sopra il pulsante mostra la tua posizione attuale e, se pertinente, il cerchio del geofence della sede. Le sedi della tua organizzazione ed eventuali requisiti fotografici/GPS sono configurati dal tuo amministratore."
     },
     "attendance": {
       "title": "Timbrare entrata e uscita",
-      "body": "Scegli la tua sede (e il progetto, se applicabile) prima di timbrare l'entrata. Alcune sedi richiedono una foto prima di poter timbrare entrata o uscita. Se timbri al di fuori della tua area di lavoro assegnata, ti verrà chiesto di spiegare il motivo - la tua spiegazione viene esaminata da un responsabile."
+      "body": "Scegli la tua sede (e il progetto, se applicabile) prima di timbrare l'entrata - oppure lascia vuoto il campo Sede e descrivi dove ti trovi realmente se non sei in un luogo registrato. Alcune sedi richiedono una foto. Subito prima dell'invio, una schermata di conferma mostra esattamente cosa sta per essere registrato - la tua foto (se scattata), la tua posizione GPS dettagliata, la sede/luogo di lavoro e l'orario - con due campi facoltativi, una nota e l'attività su cui stai lavorando, salvati con quella timbratura e visibili al tuo responsabile."
+    },
+    "walkInGeofence": {
+      "title": "Lavorare in una sede a cui non sei assegnato",
+      "body": "Se oggi ti trovi fisicamente dentro il geofence di una sede registrata senza esservi formalmente assegnato, ti viene suggerita automaticamente nell'elenco delle sedi (contrassegnata come \"sei qui oggi\") - utile se lavori davvero in una sede diversa ogni giorno. Anche timbrare senza alcuna sede funziona: il tuo stesso punto di timbratura diventa il centro di un raggio a livello di organizzazione per il resto del turno, offrendoti la stessa protezione in tempo reale di una sede registrata, anche in un luogo mai configurato come sede."
+    },
+    "siteChange": {
+      "title": "Cambiare sede a metà turno",
+      "body": "Per passare a un'altra sede senza timbrare completamente l'uscita: premi Pausa prima di lasciare la sede attuale. Il pulsante diventa Cambia sede - premilo una volta arrivato in quella successiva, e lo spostamento viene registrato nella tua cronologia presenze con l'orario esatto. Il pulsante torna quindi a essere Pausa, pronto per il prossimo spostamento."
+    },
+    "sos": {
+      "title": "SOS / Emergenza",
+      "body": "Disponibile finché il monitoraggio della presenza è attivo per il tuo turno. Premerlo invia immediatamente un avviso ad alta priorità ai tuoi responsabili con la tua ultima posizione nota, e viene registrato come un vero evento di emergenza - riservato a situazioni di sicurezza reali, non un pulsante generico."
+    },
+    "notifications": {
+      "title": "Come le notifiche raggiungono la persona giusta",
+      "body": "Se timbri entrata o uscita - o ti sposti durante il turno - al di fuori della tua area di lavoro assegnata, ti viene chiesto di spiegare il motivo, e la persona giusta viene notificata automaticamente: la situazione di un dipendente comune raggiunge il responsabile di quella sede (e il proprietario); quella di un responsabile viene inoltrata direttamente al proprietario anziché ad altri responsabili; il proprietario, che non risponde a nessuno, non viene mai segnalato. Tocca una notifica per accedere direttamente a ciò a cui si riferisce."
     },
     "timesheets": {
       "title": "Fogli ore",
-      "body": "Una volta che il tuo responsabile genera un foglio ore per un periodo, questo appare in Fogli ore per la tua revisione e l'invio per l'approvazione. Ore lavorate, pause e straordinari sono mostrati come totali separati. Una volta approvato, un foglio ore viene bloccato - se ritieni sia necessaria una correzione, puoi richiederla dalla pagina del foglio ore stesso."
-    },
-    "kiosk": {
-      "title": "Modalità chiosco",
-      "body": "Nelle sedi con un dispositivo chiosco condiviso, seleziona il tuo nome dall'elenco, inserisci il tuo PIN personale del chiosco, quindi timbra entrata o uscita. Il tuo PIN del chiosco è indipendente dalla password di accesso - impostalo o modificalo dalla Dashboard."
+      "body": "Una volta che il tuo responsabile genera un foglio ore per un periodo, questo appare in Fogli ore per la tua revisione e l'invio per l'approvazione. Ore lavorate, pause e straordinari sono mostrati come totali separati - il tempo di pausa non viene mai sottratto dalle ore lavorate, e lo straordinario si basa sull'orario di inizio definito dalla politica della tua sede. Una volta approvato, un foglio ore viene bloccato - se ritieni sia necessaria una correzione, puoi richiederla dalla pagina del foglio ore stesso, e una correzione approvata aggiorna realmente l'orario registrato a cui si riferisce."
     },
     "exceptions": {
-      "title": "Eccezioni",
-      "body": "Se timbri entrata o uscita al di fuori della tua area di lavoro assegnata, questo viene registrato come eccezione. Fornisci un breve motivo dalla Dashboard affinché un responsabile possa esaminarlo."
+      "title": "Eccezioni e correzioni - cosa significa davvero l'approvazione",
+      "body": "Un'eccezione fuori zona o una richiesta di correzione non è più solo una decisione formale: se il tuo responsabile la approva, sei considerato presente per l'intero periodo, senza penalità. Se viene respinta - prima o dopo la tua spiegazione - il tuo tempo lavorato effettivo viene limitato al momento in cui la situazione è stata rilevata per la prima volta, riducendo le ore e lo straordinario conteggiati quel giorno."
     },
     "allowances": {
       "title": "Indennità",
       "body": "Apri Indennità dalla barra laterale e scegli una data per aggiungere una voce - data, sede e orari di entrata/uscita vengono importati automaticamente. Completa tu gli importi di pasto, trasporto, alloggio e altro, quindi invia. Un responsabile o il proprietario la approva o la respinge; finché è una bozza puoi ancora modificarla. Le ore/giorni di straordinario vengono calcolati automaticamente dalla politica del turno della tua sede, se configurata."
     },
+    "kiosk": {
+      "title": "Modalità chiosco",
+      "body": "Nelle sedi con un dispositivo chiosco condiviso, seleziona il tuo nome dall'elenco, inserisci il tuo PIN personale del chiosco, quindi timbra entrata o uscita. Il tuo PIN del chiosco è indipendente dalla password di accesso - impostalo o modificalo dalla Dashboard."
+    },
+    "reportsCenter": {
+      "title": "Centro report",
+      "body": "Report raccoglie la generazione dei report in un unico posto: scegli un tipo di report (Registro presenze o Indennità), un intervallo di date e, se pertinente, un dipendente, quindi esportalo in PDF - lo stesso export già disponibile su ciascuna di quelle pagine, ma con un unico punto dedicato per raggiungerli tutti. I fogli ore vengono invece generati, inviati ed esportati dalla propria pagina Fogli ore, poiché un foglio ore appartiene a un dipendente e un periodo specifici, non a un intervallo di date."
+    },
     "sites": {
       "title": "Sedi e politica del turno (amministratori)",
-      "body": "Sedi (solo Proprietario/Manager) è dove si configurano le sedi di lavoro, il loro geofence GPS, la modalità kiosk e la politica di fotocamera/presenza, e dove i dipendenti/manager vengono assegnati a una sede. Ogni sede può inoltre avere una propria politica del turno facoltativa: orari di lavoro, da quando iniziano a contare straordinari e detrazioni per ritardo, un periodo di tolleranza, e se un dipendente è bloccato dalla timbratura autonoma oltre tale periodo (in tal caso un manager lo timbra al suo posto, con un motivo)."
+      "body": "Sedi (solo Proprietario/Manager) è dove si configurano le sedi di lavoro, il loro geofence GPS, la modalità kiosk e la politica di fotocamera/presenza, e dove i dipendenti/manager vengono assegnati a una sede. Ogni sede può inoltre avere una propria politica del turno facoltativa: orari di lavoro, da quando iniziano a contare straordinari e detrazioni per ritardo, un periodo di tolleranza, e se un dipendente è bloccato dalla timbratura autonoma oltre tale periodo (in tal caso un manager lo timbra al suo posto, con un motivo). Il raggio usato per le timbrature senza sede si gestisce da Impostazioni, con un riepilogo rapido mostrato anche qui."
+    },
+    "settingsCenter": {
+      "title": "Impostazioni (Proprietario)",
+      "body": "Una vera casa per la configurazione a livello di organizzazione, a partire dal raggio del geofence senza sede - l'area intorno al punto di timbratura di un dipendente itinerante che lo protegge allo stesso modo del geofence di una sede registrata."
     },
     "permissions": {
       "title": "Permessi (amministratori)",
       "body": "La pagina di ciascuna persona in Persone mostra i permessi effettivamente concessi e consente a un amministratore autorizzato di concedere, revocare o azzerare un singolo permesso con un motivo - visibile solo a chi possiede già tale autorità. Il proprietario ha sempre tutti i permessi; gli altri ruoli partono da un pacchetto predefinito regolabile per persona."
+    },
+    "desktopApp": {
+      "title": "App desktop per Windows",
+      "body": "Lo stesso PROSM Time che già conosci, installato come vero programma Windows. Si apre a schermo pieno; F11 passa alla modalità schermo intero reale e Esc riporta sempre alla finestra normale con il suo pulsante di chiusura. Il tuo accesso resta memorizzato tra un avvio e l'altro, esattamente come sul telefono o nel browser."
+    },
+    "liveMap": {
+      "title": "Mappa in tempo reale",
+      "body": "La Dashboard mostra una vera mappa coerente con il tema, con la tua posizione attuale - e, una volta timbrata l'entrata o selezionata una sede, un cerchio traslucido che segna il vero geofence di quella sede, così puoi vedere a colpo d'occhio dove ti trovi rispetto ad esso ancora prima di provare a timbrare."
+    },
+    "radio": {
+      "title": "Perché c'è una radio in PROSM Time",
+      "body": "La Radio non è una distrazione dalla presenza - è pensata proprio intorno ad essa. Ascolta una stazione durante il tragitto verso il lavoro, e PROSM Time è già aperto e presente nella tua mente nel momento in cui arrivi: invece di essere un'app che devi ricordarti di aprire una volta alla scrivania, è già lì, in mano, e Timbra entrata è proprio dove l'hai lasciata. Una piccola spinta deliberata contro l'errore di presenza più comune in assoluto - dimenticarsi semplicemente di timbrare in orario."
     }
   },
   "faq": {
     "title": "Domande frequenti",
     "q1": {
       "question": "Ho dimenticato di timbrare l'uscita, cosa faccio?",
-      "answer": "Contatta un amministratore o un responsabile - può registrare la timbratura di uscita corretta per tuo conto, e l'azione viene registrata come sua, non tua."
+      "answer": "Contatta un amministratore o un responsabile - può registrare la timbratura di uscita corretta per tuo conto, e l'azione viene registrata come sua, non tua. Un responsabile può anche inviare una richiesta di correzione su un orario già registrato, che - una volta approvata - lo aggiorna realmente."
     },
     "q2": {
       "question": "Perché la mia timbratura di entrata è stata segnalata come fuori dalla mia area di lavoro?",
-      "answer": "La tua sede ha un geofence configurato e una tolleranza di precisione GPS. Se la posizione rilevata era al di fuori di quest'area, ti viene chiesto di spiegare il motivo affinché un responsabile possa esaminarlo."
+      "answer": "La tua sede ha un geofence configurato e una tolleranza di precisione GPS (oppure, senza sede selezionata, il raggio senza sede della tua organizzazione intorno al tuo punto di timbratura). Se la posizione rilevata era al di fuori di quest'area, ti viene chiesto di spiegare il motivo affinché il responsabile giusto possa esaminarlo - l'approvazione rimuove del tutto la segnalazione; il rifiuto limita il tuo tempo lavorato a quel momento."
     },
     "q3": {
       "question": "Posso usare l'app offline?",
@@ -51,11 +87,11 @@
     },
     "q4": {
       "question": "Come cambio la lingua o l'aspetto?",
-      "answer": "Apri il menu utente (in fondo alla barra laterale) - lingua e aspetto (Scuro/Chiaro/Sistema) possono essere modificati lì in qualsiasi momento."
+      "answer": "Apri il menu utente (in fondo alla barra laterale) - lingua e aspetto (Scuro/Chiaro/Sistema) possono essere modificati lì in qualsiasi momento, e da lì puoi anche impostare la tua immagine del profilo."
     },
     "q5": {
       "question": "Ho timbrato senza scegliere una sede - perché mi è stato chiesto un \"luogo di lavoro\"?",
-      "answer": "La sede è facoltativa così puoi registrare la presenza dalla tua posizione reale anche se non è una sede registrata - ma in tal caso è richiesta una breve descrizione di dove ti trovi, così i report non mostrano mai una sede vuota."
+      "answer": "La sede è facoltativa così puoi registrare la presenza dalla tua posizione reale anche se non è una sede registrata - ma in tal caso è richiesta una breve descrizione di dove ti trovi, così i report non mostrano mai una sede vuota. Il raggio senza sede della tua organizzazione continua a proteggere questa sessione come farebbe il geofence di una sede reale."
     },
     "q6": {
       "question": "Qual è la differenza tra Registro presenze e Fogli ore?",
@@ -63,11 +99,19 @@
     },
     "q7": {
       "question": "Posso esportare la mia presenza o il mio foglio ore in PDF?",
-      "answer": "Sì - Registro presenze, Fogli ore e Indennità hanno ciascuno la propria azione Esporta PDF, limitata a ciò che stai visualizzando in quel momento."
+      "answer": "Sì - Registro presenze, Fogli ore e Indennità hanno ciascuno la propria azione Esporta PDF, limitata a ciò che stai visualizzando in quel momento, e anche Report raccoglie gli export di Registro presenze e Indennità in un unico punto dedicato."
     },
     "q8": {
       "question": "Perché non vedo alcuni dipendenti in Persone o nel Registro presenze?",
       "answer": "Vedi sempre solo te stesso, più - se gestisci una sede - le persone assegnate a quella sede. Il proprietario vede tutti. Questo è applicato dal server, non solo nascosto nell'interfaccia."
+    },
+    "q9": {
+      "question": "L'app desktop mi disconnette ogni volta che la chiudo?",
+      "answer": "No - la tua sessione resta memorizzata tra un avvio e l'altro, esattamente come sul telefono o nel browser."
+    },
+    "q10": {
+      "question": "Posso continuare ad ascoltare la radio mentre ho timbrato l'entrata?",
+      "answer": "Sì - continua a suonare in background indipendentemente dal tuo stato di presenza. Si trova nella riga Media della barra laterale (toccala per aprire l'elenco delle stazioni e la ricerca) invece che nell'intestazione, e occupa pochissimo spazio quando è ripiegata."
     }
   },
   "contact": {

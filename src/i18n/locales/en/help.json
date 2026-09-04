@@ -4,46 +4,82 @@
   "guides": {
     "gettingStarted": {
       "title": "Getting Started",
-      "body": "Sign in with the email and password your administrator set up for you. On the Dashboard, use Clock In to start your shift and Clock Out to end it. Your organization's site(s) and any camera/GPS requirements are configured by your administrator."
+      "body": "Sign in with the email and password your administrator set up for you. On the Dashboard, use Clock In to start your shift and Clock Out to end it - a live map above the button shows your current position and, when relevant, the site's own geofence circle. Your organization's site(s) and any camera/GPS requirements are configured by your administrator."
     },
     "attendance": {
       "title": "Clocking In & Out",
-      "body": "Choose your site (and project, if applicable) before clocking in. Some sites require a photo before you can clock in or out. If you clock in or out outside your assigned work area, you will be asked to explain why - your explanation is reviewed by a manager."
+      "body": "Choose your site (and project, if applicable) before clocking in - or leave Site empty and describe where you actually are if you're not at a registered location. Some sites require a photo. Right before anything is submitted, a confirmation screen shows exactly what's about to be recorded - your photo (if one was taken), your detailed GPS location, the site/workplace, and the time - with two optional fields, a note and what you're working on (activity), that get saved with that clock-in or clock-out and are visible to your manager."
+    },
+    "walkInGeofence": {
+      "title": "Working at a Site You're Not Assigned To",
+      "body": "If you're physically standing inside a registered site's geofence today but aren't formally assigned there, it's suggested to you automatically in the Site list (marked as \"you're here today\") - useful if you genuinely work at a different site every day. Clocking in with no site at all still works too: your own clock-in point becomes the center of an organization-wide radius for the rest of that shift, giving you the same real-time protection a registered site's geofence already provides, even somewhere that was never set up as a site."
+    },
+    "siteChange": {
+      "title": "Changing Sites Mid-Shift",
+      "body": "Moving to a different site without clocking out entirely: press Pause before you leave your current site. The button becomes Change Site - press it once you've arrived at the next one, and the move is recorded in your attendance history with the time it happened. The button then goes back to being Pause, ready for the next time you move."
+    },
+    "sos": {
+      "title": "SOS / Emergency",
+      "body": "Available while presence monitoring is active for your shift. Pressing it immediately sends a high-priority alert to your managers with your last known location, and is logged as a real emergency record - reserved for genuine safety situations, not a general-purpose button."
+    },
+    "notifications": {
+      "title": "How Notifications Reach the Right Person",
+      "body": "If you clock in or out - or move around during your shift - outside your assigned work area, you're asked to explain why, and the right person is notified automatically: an ordinary employee's situation reaches that site's own manager (and the Owner); a manager's own situation escalates straight to the Owner instead of to fellow managers; the Owner, answering to no one, is never flagged at all. Tap a notification to jump straight to what it's about."
     },
     "timesheets": {
       "title": "Timesheets",
-      "body": "Once your manager generates a timesheet for a period, it appears under Timesheets for you to review and submit for approval. Worked time, breaks and overtime are shown as separate totals. Once approved, a timesheet is locked - if you believe it needs a correction, you can request one from the timesheet's own page."
-    },
-    "kiosk": {
-      "title": "Kiosk Mode",
-      "body": "At sites with a shared kiosk device, select your name from the list, enter your personal kiosk PIN, then Clock In or Clock Out. Your kiosk PIN is separate from your login password - set or change it from the Dashboard."
+      "body": "Once your manager generates a timesheet for a period, it appears under Timesheets for you to review and submit for approval. Worked time, breaks and overtime are shown as separate totals - break time is never subtracted from your worked hours, and overtime is based on the start time your site's own policy defines. Once approved, a timesheet is locked - if you believe it needs a correction, you can request one from the timesheet's own page, and an approved correction genuinely updates the recorded time it applies to."
     },
     "exceptions": {
-      "title": "Exceptions",
-      "body": "If you clock in or out outside your assigned work area, this is recorded as an exception. Provide a short reason from the Dashboard so a manager can review it."
+      "title": "Exceptions & Corrections - What Approval Actually Means",
+      "body": "An out-of-zone exception or a correction request isn't just a paper decision anymore: if your manager approves it, you're treated as present the full time with no penalty. If it's rejected - whether before or after you've explained yourself - your effective worked time is capped at the moment the situation was first detected, which reduces the hours and overtime your timesheet ends up counting for that day."
     },
     "allowances": {
       "title": "Allowances",
       "body": "Open Allowances from the sidebar and pick a date to add an entry - the date, site and clock-in/out are filled in automatically. Fill in meal, transportation, housing and other amounts yourself, then Submit. A manager or the Owner approves or rejects it; while it's a draft you can still edit and re-save it. Overtime hours/days are computed automatically from your site's shift policy, if one is configured."
     },
+    "kiosk": {
+      "title": "Kiosk Mode",
+      "body": "At sites with a shared kiosk device, select your name from the list, enter your personal kiosk PIN, then Clock In or Clock Out. Your kiosk PIN is separate from your login password - set or change it from the Dashboard."
+    },
+    "reportsCenter": {
+      "title": "Reports Center",
+      "body": "Reports gathers report generation in one place: pick a report type (Attendance Record or Allowances), a date range and, if relevant, an employee, then export it as a PDF - the same export already available on each of those pages, just with one dedicated place to reach for any of them. Timesheets are generated, submitted and exported from their own Timesheets page instead, since a timesheet belongs to one specific employee and period rather than a date range."
+    },
     "sites": {
       "title": "Sites & Shift Policy (Administrators)",
-      "body": "Sites (Owner/Manager only) is where worksites, their GPS geofence, kiosk mode and camera/attendance policy are configured, and where employees/managers are assigned to a site. Each site can also have its own optional shift policy - work hours, when overtime and lateness deductions start counting, a grace period, and whether an employee is blocked from self clock-in past that grace period (in which case a manager clocks them in instead, with a reason)."
+      "body": "Sites (Owner/Manager only) is where worksites, their GPS geofence, kiosk mode and camera/attendance policy are configured, and where employees/managers are assigned to a site. Each site can also have its own optional shift policy - work hours, when overtime and lateness deductions start counting, a grace period, and whether an employee is blocked from self clock-in past that grace period (in which case a manager clocks them in instead, with a reason). The radius used for no-site clock-ins is managed from Settings, with a quick summary shown here too."
+    },
+    "settingsCenter": {
+      "title": "Settings (Owner)",
+      "body": "A real home for organization-wide configuration, starting with the no-site geofence radius - the range around a walk-in employee's own clock-in point that keeps them protected the same way a registered site's geofence would."
     },
     "permissions": {
       "title": "Permissions (Administrators)",
       "body": "Each person's page under People shows their real granted permissions and lets an authorized administrator grant, revoke, or reset an individual permission with a reason - visible only to those who already hold that authority. The Owner always has every permission; other roles start from a default bundle that can be adjusted per person."
+    },
+    "desktopApp": {
+      "title": "Windows Desktop App",
+      "body": "The same PROSM Time you already know, installed as a real Windows program. It opens filling your screen; F11 switches to true fullscreen and Escape always brings back the normal window with its close button. Your sign-in stays remembered between launches, exactly like on your phone or in a browser."
+    },
+    "liveMap": {
+      "title": "Live Map",
+      "body": "The Dashboard shows a real, theme-aware map with your current position - and, once you're clocked in or have a site selected, a translucent circle marking that site's real geofence, so you can see at a glance where you stand relative to it before you even try to clock in or out."
+    },
+    "radio": {
+      "title": "Why There's a Radio in PROSM Time",
+      "body": "The Radio isn't a distraction from attendance - it's built around it. Play a station during your commute, and PROSM Time is already open and on your mind the moment you arrive: instead of the app being something you have to remember to open once you're at your desk, it's already there in your hand, and Clock In is right where you left it. It's a small, deliberate nudge against the single most common attendance mistake - simply forgetting to clock in on time."
     }
   },
   "faq": {
     "title": "Frequently Asked Questions",
     "q1": {
       "question": "I forgot to clock out - what do I do?",
-      "answer": "Contact an administrator or manager - they can record the correct Clock Out on your behalf, and the action is recorded as theirs, not yours."
+      "answer": "Contact an administrator or manager - they can record the correct Clock Out on your behalf, and the action is recorded as theirs, not yours. A manager can also submit a correction request on an already-recorded time, which - once approved - genuinely updates it."
     },
     "q2": {
       "question": "Why was my Clock In flagged as outside my work area?",
-      "answer": "Your site has a configured geofence and GPS accuracy tolerance. If your reported location fell outside that area, you're asked to explain why so a manager can review it."
+      "answer": "Your site has a configured geofence and GPS accuracy tolerance (or, with no site selected, your organization's own no-site radius around where you clocked in). If your reported location fell outside that area, you're asked to explain why so the right manager can review it - approving it clears the flag entirely; rejecting it caps your worked time at that moment."
     },
     "q3": {
       "question": "Can I use the app while offline?",
@@ -51,11 +87,11 @@
     },
     "q4": {
       "question": "How do I change the language or theme?",
-      "answer": "Open the user menu (bottom of the sidebar) - Language and Appearance (Dark/Light/System) can be changed there at any time."
+      "answer": "Open the user menu (bottom of the sidebar) - Language and Appearance (Dark/Light/System) can be changed there at any time, and you can also set your profile picture from the same menu."
     },
     "q5": {
       "question": "I clocked in without choosing a site - why did it ask for a \"workplace\"?",
-      "answer": "Site is optional so you can register attendance from your real current location even when it isn't a registered site - but a short description of where you actually are is required in that case, so reports never show a blank site."
+      "answer": "Site is optional so you can register attendance from your real current location even when it isn't a registered site - but a short description of where you actually are is required in that case, so reports never show a blank site. Your organization's own no-site radius still protects that session the same way a real site's geofence would."
     },
     "q6": {
       "question": "What's the difference between Attendance Record and Timesheets?",
@@ -63,11 +99,19 @@
     },
     "q7": {
       "question": "Can I export my attendance or timesheet as a PDF?",
-      "answer": "Yes - Attendance Record, Timesheets and Allowances each have their own Export PDF action, scoped to whatever you're currently viewing."
+      "answer": "Yes - Attendance Record, Timesheets and Allowances each have their own Export PDF action, scoped to whatever you're currently viewing, and Reports gathers the Attendance Record and Allowances exports in one dedicated place too."
     },
     "q8": {
       "question": "Why can't I see some employees in People or Attendance Record?",
       "answer": "You only ever see yourself, plus - if you manage a site - the people assigned to that site. The Owner sees everyone. This is enforced by the server, not just hidden in the interface."
+    },
+    "q9": {
+      "question": "Does the desktop app sign me out every time I close it?",
+      "answer": "No - your session is remembered between launches, the same way it is on your phone or in a browser."
+    },
+    "q10": {
+      "question": "Can I still play the radio while I'm clocked in?",
+      "answer": "Yes - it keeps playing in the background regardless of your attendance status. It lives in the sidebar's Media row (tap it to expand the station list and search) rather than the header, and takes up very little space when collapsed."
     }
   },
   "contact": {
