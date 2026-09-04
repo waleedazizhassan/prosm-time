@@ -59,20 +59,20 @@ export default function NoSiteRadiusSettingsCard() {
   return (
     <Card title={t("noSiteRadius.title")}>
       <p style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("noSiteRadius.hint")}</p>
-      <div style={{ display: "flex", alignItems: "flex-end", gap: "var(--space-3)" }}>
-        <div style={{ maxWidth: 220 }}>
-          <Input
-            label={t("noSiteRadius.radiusLabel")}
-            name="noSiteRadius"
-            type="number"
-            value={radius}
-            onChange={(event) => {
-              setRadius(event.target.value);
-              setSaved(false);
-            }}
-            disabled={saving}
-          />
-        </div>
+      <div style={{ maxWidth: 220 }}>
+        <Input
+          label={t("noSiteRadius.radiusLabel")}
+          name="noSiteRadius"
+          type="number"
+          value={radius}
+          onChange={(event) => {
+            setRadius(event.target.value);
+            setSaved(false);
+          }}
+          disabled={saving}
+        />
+      </div>
+      <div style={{ marginTop: "var(--space-3)" }}>
         <Button onClick={handleSave} loading={saving}>
           {t("noSiteRadius.saveAction")}
         </Button>
