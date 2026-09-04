@@ -43,11 +43,19 @@ function createWindow() {
     callback(permission === "media" || permission === "geolocation");
   });
 
-  // F11 toggles fullscreen the same way it does in a real browser tab
-  // - Electron doesn't bind this by default outside a menu accelerator.
+  // F11 toggles fullscreen and Escape always exits it, matching a real
+  // browser tab - Electron doesn't bind either by default outside a
+  // menu accelerator. Windows' own fullscreen mode hides the entire
+  // window frame (no title bar, no close button), so without this the
+  // window opening straight into fullscreen (see above) would have no
+  // discoverable way out at all - once out of fullscreen, the normal
+  // title bar/close button is back.
   win.webContents.on("before-input-event", (_event, input) => {
-    if (input.type === "keyDown" && input.key === "F11") {
+    if (input.type !== "keyDown") return;
+    if (input.key === "F11") {
       win.setFullScreen(!win.isFullScreen());
+    } else if (input.key === "Escape" && win.isFullScreen()) {
+      win.setFullScreen(false);
     }
   });
 
