@@ -17,5 +17,17 @@
     "invalidGpsTolerance": "Geben Sie eine GPS-Genauigkeitstoleranz größer als null ein.",
     "invalidGraceTolerance": "Die Kulanzzeit darf nicht negativ sein.",
     "genericError": "Die Standort-Standardwerte konnten nicht aktualisiert werden."
+  },
+  "sitePolicy": {
+    "title": "Standort-Richtlinie",
+    "hint": "Wählen Sie einen Standort, um seine eigene GPS-Genauigkeitstoleranz, Kulanzzeit, Schichtrichtlinie und befreiten Mitarbeiter einzusehen oder zu ändern - nichts davon wird mehr über das eigene Bearbeiten-Formular dieses Standorts geändert.",
+    "siteSelectLabel": "Standort",
+    "siteSelectPlaceholder": "Standort auswählen…",
+    "noSites": "Noch keine Standorte - legen Sie zuerst einen unter Standorte an.",
+    "loadError": "Die Richtlinie dieses Standorts konnte nicht geladen werden.",
+    "noAssignmentsYet": "Diesem Standort ist noch niemand zugewiesen, es gibt also niemanden zum Befreien.",
+    "saveAction": "Speichern",
+    "saveSuccess": "Standort-Richtlinie aktualisiert.",
+    "genericError": "Die Richtlinie dieses Standorts konnte nicht aktualisiert werden."
   }
 }

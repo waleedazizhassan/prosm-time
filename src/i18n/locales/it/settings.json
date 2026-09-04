@@ -17,5 +17,17 @@
     "invalidGpsTolerance": "Inserisci una tolleranza di precisione GPS maggiore di zero.",
     "invalidGraceTolerance": "La tolleranza di cortesia non può essere negativa.",
     "genericError": "Impossibile aggiornare le politiche predefinite delle sedi."
+  },
+  "sitePolicy": {
+    "title": "Politica della sede",
+    "hint": "Scegli una sede per rivedere o modificare la sua tolleranza di precisione GPS, il periodo di tolleranza, la politica del turno e i dipendenti esentati - niente di tutto ciò si modifica più dalla pagina di modifica di quella sede.",
+    "siteSelectLabel": "Sede",
+    "siteSelectPlaceholder": "Seleziona una sede…",
+    "noSites": "Nessuna sede ancora - aggiungine una da Sedi prima.",
+    "loadError": "Impossibile caricare la politica di questa sede.",
+    "noAssignmentsYet": "Nessuno è ancora assegnato a questa sede, quindi non c'è nessuno da esentare.",
+    "saveAction": "Salva",
+    "saveSuccess": "Politica della sede aggiornata.",
+    "genericError": "Impossibile aggiornare la politica di questa sede."
   }
 }

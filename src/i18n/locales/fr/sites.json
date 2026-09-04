@@ -49,7 +49,6 @@
     "testLocationResultOutside": "Votre position actuelle est à {{distance}} m du centre de ce site - en dehors du géorepérage configuré ({{radius}} m).",
     "allowedRadiusLabel": "Rayon autorisé (mètres)",
     "gpsAccuracyToleranceLabel": "Tolérance de précision GPS (mètres)",
-    "orgDefaultHint": "Pré-rempli avec la valeur par défaut de votre organisation - gérez-la dans Paramètres, ou remplacez-la ici pour ce site uniquement.",
     "timezoneLabel": "Fuseau horaire",
     "timezoneHint": "Identifiant de fuseau horaire IANA, par ex. Africa/Cairo. Le stockage reste en UTC ; cela n'affecte que l'affichage local.",
     "graceToleranceLabel": "Tolérance de grâce (minutes)",
@@ -74,6 +73,7 @@
     "geofenceRequiredLabel": "Géorepérage requis",
     "cameraRequiredLabel": "Caméra requise",
     "activeLabel": "Site actif",
+    "sitePolicyMovedHint": "La tolérance de précision GPS, la période de tolérance, la politique de shift et les employés exemptés sont gérés depuis Paramètres.",
     "confirm": "Enregistrer le site",
     "genericError": "Impossible d'enregistrer ce site."
   },

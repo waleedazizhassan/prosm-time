@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import SiteRepository, { type Site, type SiteAssignment, type KioskMode, type BreakRoundingMode } from "../../core/repositories/SiteRepository";
+import SiteRepository, { type Site, type KioskMode } from "../../core/repositories/SiteRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import { getCurrentPosition, haversineDistanceMeters } from "../../core/utils/geo";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
@@ -21,7 +21,6 @@ interface SiteFormModalProps {
 }
 
 const KIOSK_MODE_OPTIONS: KioskMode[] = ["personal_device_only", "kiosk_only", "both_allowed"];
-const BREAK_ROUNDING_MODE_OPTIONS: BreakRoundingMode[] = ["cumulative", "full_hour"];
 
 const toggleRowStyle = {
   display: "flex",
@@ -30,14 +29,20 @@ const toggleRowStyle = {
   padding: "var(--space-2) 0",
 } as const;
 
-// PROSM Time WP-05/§13 - "Site name, display address, latitude/
-// longitude, allowed radius... GPS accuracy/tolerance policy...
-// Time zone... Site policy... Map-based configuration and a test/
-// verify function." Reused for both create and edit - the parent
-// mounts this with `key={site?.id ?? "create"}` so state resets
-// cleanly when switching between them. Every save is the real RPC
-// (create/update_prosm_time_site) which re-checks 'sites.manage'
-// server-side.
+// PROSM Time WP-05/§13 - site identity, location and core capability
+// only: name, address, coordinates, allowed radius, time zone, kiosk
+// mode, attendance/geofence/camera toggles, active status. Reused for
+// both create and edit - the parent mounts this with
+// `key={site?.id ?? "create"}` so state resets cleanly when switching
+// between them. Every save is the real RPC (create/update_prosm_time_
+// site) which re-checks 'sites.manage' server-side.
+//
+// § live UX review, user-directed - "Site Policy" (GPS accuracy
+// tolerance, grace period, shift hours/overtime/late-deduction, break
+// rounding, both self-service block toggles, exempt employees) moved
+// entirely to its own Settings hub (SitePolicySettingsCard, a site
+// picked from a dropdown) - none of that is collected or editable
+// here anymore.
 export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFormModalProps) {
   const { t } = useTranslation("sites");
   const isEditing = Boolean(site);
@@ -47,17 +52,8 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
   const [latitude, setLatitude] = useState(site ? String(site.latitude) : "");
   const [longitude, setLongitude] = useState(site ? String(site.longitude) : "");
   const [allowedRadiusMeters, setAllowedRadiusMeters] = useState(site ? String(site.allowedRadiusMeters) : "100");
-  const [gpsAccuracyToleranceMeters, setGpsAccuracyToleranceMeters] = useState(site ? String(site.gpsAccuracyToleranceMeters) : "50");
   const [timezone, setTimezone] = useState(site?.timezone ?? "UTC");
-  const [graceToleranceMinutes, setGraceToleranceMinutes] = useState(site ? String(site.graceToleranceMinutes) : "5");
   const [kioskMode, setKioskMode] = useState<KioskMode>(site?.kioskMode ?? "personal_device_only");
-  const [shiftStartTime, setShiftStartTime] = useState(site?.shiftStartTime ?? "");
-  const [shiftEndTime, setShiftEndTime] = useState(site?.shiftEndTime ?? "");
-  const [overtimeStartTime, setOvertimeStartTime] = useState(site?.overtimeStartTime ?? "");
-  const [lateDeductionStartTime, setLateDeductionStartTime] = useState(site?.lateDeductionStartTime ?? "");
-  const [breakRoundingMode, setBreakRoundingMode] = useState<BreakRoundingMode>(site?.breakRoundingMode ?? "cumulative");
-  const [blockSelfClockInAfterGrace, setBlockSelfClockInAfterGrace] = useState(site?.blockSelfClockInAfterGrace ?? false);
-  const [blockSelfClockOutOutsideGeofence, setBlockSelfClockOutOutsideGeofence] = useState(site?.blockSelfClockOutOutsideGeofence ?? false);
   const [attendanceAllowed, setAttendanceAllowed] = useState(site?.attendanceAllowed ?? true);
   const [geofenceRequired, setGeofenceRequired] = useState(site?.geofenceRequired ?? true);
   const [cameraRequired, setCameraRequired] = useState(site?.cameraRequired ?? false);
@@ -70,68 +66,19 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
-  // § live UX review, user-directed - "a field with employee options,
-  // to exempt specific employees from the time/out-of-zone
-  // restrictions." Edit-mode only - a brand-new site has no assigned
-  // employees yet to exempt. Each checkbox saves immediately via its
-  // own dedicated RPC (set_prosm_time_site_assignment_exemption) -
-  // this list isn't part of the main Save action.
-  const [assignments, setAssignments] = useState<SiteAssignment[]>([]);
-  const [exemptionSavingUserId, setExemptionSavingUserId] = useState<string | null>(null);
-  const [exemptionError, setExemptionError] = useState("");
-  // § live UX review, user-directed correction - a per-employee row
-  // with its own toggle doesn't scale to a site with dozens/hundreds
-  // of assignments; a dropdown-to-add + a removable list of the
-  // already-exempt employees stays usable at any size.
-  const [employeeToExempt, setEmployeeToExempt] = useState("");
+  // Not an editable field here - only used to make "Test this
+  // location" show a realistic combined radius. Editing (site policy)
+  // has its own real home in Settings. When creating a brand-new
+  // site, this previews the organization's own current default rather
+  // than a stale/hardcoded guess.
+  const [gpsAccuracyToleranceMeters, setGpsAccuracyToleranceMeters] = useState(site ? site.gpsAccuracyToleranceMeters : 50);
 
-  useEffect(() => {
-    if (!isEditing || !site) return;
-    SiteRepository.listSiteAssignments(site.id).then((result) => {
-      if (result.success && result.data) setAssignments(result.data);
-    });
-  }, [isEditing, site]);
-
-  // § live UX review, user-directed - "look at the site Edit form,
-  // you'll find things that deserve to be in Settings." GPS accuracy
-  // tolerance, break rounding mode and grace tolerance are now
-  // organization-wide defaults (Settings) - a brand-new site starts
-  // from them instead of hardcoded literals, but stays fully
-  // overridable right here. An existing site's own saved values (set
-  // above from `site`) are never touched by this.
   useEffect(() => {
     if (isEditing) return;
     OrganizationRepository.getCurrentOrganization().then((result) => {
-      if (!result.success || !result.data) return;
-      setGpsAccuracyToleranceMeters(String(result.data.defaultGpsAccuracyToleranceMeters));
-      setBreakRoundingMode(result.data.defaultBreakRoundingMode);
-      setGraceToleranceMinutes(String(result.data.defaultGraceToleranceMinutes));
+      if (result.success && result.data) setGpsAccuracyToleranceMeters(result.data.defaultGpsAccuracyToleranceMeters);
     });
   }, [isEditing]);
-
-  const handleToggleExemption = async (assignment: SiteAssignment, isExempt: boolean) => {
-    if (!site) return;
-    setExemptionSavingUserId(assignment.userId);
-    setExemptionError("");
-    const result = await SiteRepository.setSiteAssignmentExemption(site.id, assignment.userId, isExempt);
-    setExemptionSavingUserId(null);
-    if (!result.success) {
-      setExemptionError(humanizeBackendError(result.message, t) ?? t("form.genericError"));
-      return;
-    }
-    setAssignments((current) => current.map((row) => (row.userId === assignment.userId ? { ...row, isExemptFromRestrictions: isExempt } : row)));
-  };
-
-  const exemptAssignments = assignments.filter((assignment) => assignment.isExemptFromRestrictions);
-  const nonExemptAssignments = assignments.filter((assignment) => !assignment.isExemptFromRestrictions);
-
-  const handleAddExemption = async () => {
-    if (!employeeToExempt) return;
-    const assignment = assignments.find((row) => row.userId === employeeToExempt);
-    if (!assignment) return;
-    await handleToggleExemption(assignment, true);
-    setEmployeeToExempt("");
-  };
 
   const handleUseCurrentLocation = async () => {
     setLocating(true);
@@ -156,7 +103,7 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
       const siteLat = Number(latitude);
       const siteLng = Number(longitude);
       const distanceMeters = haversineDistanceMeters(position.latitude, position.longitude, siteLat, siteLng);
-      const radius = Number(allowedRadiusMeters) + Number(gpsAccuracyToleranceMeters);
+      const radius = Number(allowedRadiusMeters) + gpsAccuracyToleranceMeters;
       setTestResult({ distanceMeters, within: distanceMeters <= radius });
     } catch (geoError) {
       setLocationError(geoError instanceof Error ? geoError.message : t("form.locationError"));
@@ -175,20 +122,11 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
       latitude: Number(latitude),
       longitude: Number(longitude),
       allowedRadiusMeters: Number(allowedRadiusMeters),
-      gpsAccuracyToleranceMeters: Number(gpsAccuracyToleranceMeters),
       timezone: timezone.trim(),
       attendanceAllowed,
       geofenceRequired,
       cameraRequired,
       kioskMode,
-      graceToleranceMinutes: Number(graceToleranceMinutes),
-      shiftStartTime: shiftStartTime || null,
-      shiftEndTime: shiftEndTime || null,
-      overtimeStartTime: overtimeStartTime || null,
-      lateDeductionStartTime: lateDeductionStartTime || null,
-      breakRoundingMode,
-      blockSelfClockInAfterGrace,
-      blockSelfClockOutOutsideGeofence,
     };
 
     const result = isEditing && site ? await SiteRepository.updateSite(site.id, { ...input, isActive }) : await SiteRepository.createSite(input);
@@ -248,45 +186,22 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
         <p style={{ color: testResult.within ? "var(--status-success-text)" : "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>
           {t(testResult.within ? "form.testLocationResultWithin" : "form.testLocationResultOutside", {
             distance: Math.round(testResult.distanceMeters),
-            radius: Number(allowedRadiusMeters) + Number(gpsAccuracyToleranceMeters),
+            radius: Number(allowedRadiusMeters) + gpsAccuracyToleranceMeters,
           })}
         </p>
       ) : null}
 
-      <div style={{ display: "flex", gap: "var(--space-3)" }}>
-        <Input
-          label={t("form.allowedRadiusLabel")}
-          name="siteAllowedRadius"
-          type="number"
-          value={allowedRadiusMeters}
-          onChange={(event) => setAllowedRadiusMeters(event.target.value)}
-          required
-          disabled={submitting}
-        />
-        <Input
-          label={t("form.gpsAccuracyToleranceLabel")}
-          name="siteGpsAccuracyTolerance"
-          type="number"
-          value={gpsAccuracyToleranceMeters}
-          onChange={(event) => setGpsAccuracyToleranceMeters(event.target.value)}
-          required
-          disabled={submitting}
-          helperText={!isEditing ? t("form.orgDefaultHint") : undefined}
-        />
-      </div>
-
-      <Input label={t("form.timezoneLabel")} name="siteTimezone" value={timezone} onChange={(event) => setTimezone(event.target.value)} required disabled={submitting} helperText={t("form.timezoneHint")} />
-
       <Input
-        label={t("form.graceToleranceLabel")}
-        name="siteGraceTolerance"
+        label={t("form.allowedRadiusLabel")}
+        name="siteAllowedRadius"
         type="number"
-        value={graceToleranceMinutes}
-        onChange={(event) => setGraceToleranceMinutes(event.target.value)}
+        value={allowedRadiusMeters}
+        onChange={(event) => setAllowedRadiusMeters(event.target.value)}
         required
         disabled={submitting}
-        helperText={!isEditing ? t("form.orgDefaultHint") : undefined}
       />
+
+      <Input label={t("form.timezoneLabel")} name="siteTimezone" value={timezone} onChange={(event) => setTimezone(event.target.value)} required disabled={submitting} helperText={t("form.timezoneHint")} />
 
       <Select
         label={t("form.kioskModeLabel")}
@@ -297,55 +212,6 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
         options={KIOSK_MODE_OPTIONS.map((mode) => ({ value: mode, label: t(`kioskMode.${mode}`) }))}
       />
 
-      {/* § live UX review, user-directed - per-site shift policy:
-          work hours, when overtime/deduction start, break rounding,
-          and whether a late self clock-in is blocked (manager-
-          assisted only past that point). Every field here is
-          optional - a site with none of them set behaves exactly as
-          before this section existed. */}
-      <h3 style={{ fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)", margin: "var(--space-4) 0 var(--space-1)" }}>
-        {t("form.shiftPolicyTitle")}
-      </h3>
-      <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("form.shiftPolicyHint")}</p>
-
-      <div style={{ display: "flex", gap: "var(--space-3)" }}>
-        <Input label={t("form.shiftStartTimeLabel")} name="siteShiftStartTime" type="time" value={shiftStartTime} onChange={(event) => setShiftStartTime(event.target.value)} disabled={submitting} />
-        <Input label={t("form.shiftEndTimeLabel")} name="siteShiftEndTime" type="time" value={shiftEndTime} onChange={(event) => setShiftEndTime(event.target.value)} disabled={submitting} />
-      </div>
-
-      <div style={{ display: "flex", gap: "var(--space-3)" }}>
-        <Input
-          label={t("form.overtimeStartTimeLabel")}
-          name="siteOvertimeStartTime"
-          type="time"
-          value={overtimeStartTime}
-          onChange={(event) => setOvertimeStartTime(event.target.value)}
-          disabled={submitting}
-        />
-        <Input
-          label={t("form.lateDeductionStartTimeLabel")}
-          name="siteLateDeductionStartTime"
-          type="time"
-          value={lateDeductionStartTime}
-          onChange={(event) => setLateDeductionStartTime(event.target.value)}
-          disabled={submitting}
-        />
-      </div>
-
-      <Select
-        label={t("form.breakRoundingModeLabel")}
-        name="siteBreakRoundingMode"
-        value={breakRoundingMode}
-        onChange={(event) => setBreakRoundingMode(event.target.value as BreakRoundingMode)}
-        disabled={submitting}
-        options={BREAK_ROUNDING_MODE_OPTIONS.map((mode) => ({ value: mode, label: t(`breakRoundingMode.${mode}`) }))}
-      />
-
-      <div style={toggleRowStyle}>
-        <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.blockSelfClockInLabel")}</span>
-        <Toggle checked={blockSelfClockInAfterGrace} onChange={setBlockSelfClockInAfterGrace} disabled={submitting} label={t("form.blockSelfClockInLabel")} />
-      </div>
-
       <div style={toggleRowStyle}>
         <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.attendanceAllowedLabel")}</span>
         <Toggle checked={attendanceAllowed} onChange={setAttendanceAllowed} disabled={submitting} label={t("form.attendanceAllowedLabel")} />
@@ -354,59 +220,6 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
         <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.geofenceRequiredLabel")}</span>
         <Toggle checked={geofenceRequired} onChange={setGeofenceRequired} disabled={submitting} label={t("form.geofenceRequiredLabel")} />
       </div>
-      <div style={toggleRowStyle}>
-        <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.blockSelfClockOutLabel")}</span>
-        <Toggle checked={blockSelfClockOutOutsideGeofence} onChange={setBlockSelfClockOutOutsideGeofence} disabled={submitting} label={t("form.blockSelfClockOutLabel")} />
-      </div>
-
-      {isEditing && assignments.length > 0 ? (
-        <div style={{ margin: "var(--space-3) 0" }}>
-          <h3 style={{ fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)", margin: "0 0 var(--space-1)" }}>{t("form.exemptEmployeesTitle")}</h3>
-          <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("form.exemptEmployeesHint")}</p>
-
-          {nonExemptAssignments.length > 0 ? (
-            <div style={{ display: "flex", gap: "var(--space-2)", alignItems: "flex-end" }}>
-              <div style={{ flex: 1 }}>
-                <Select
-                  label={t("form.exemptEmployeesAddLabel")}
-                  name="employeeToExempt"
-                  value={employeeToExempt}
-                  onChange={(event) => setEmployeeToExempt(event.target.value)}
-                  disabled={exemptionSavingUserId !== null}
-                  options={[{ value: "", label: t("form.exemptEmployeesSelectPlaceholder") }, ...nonExemptAssignments.map((assignment) => ({ value: assignment.userId, label: assignment.userFullName }))]}
-                />
-              </div>
-              <Button type="button" variant="ghost" size="sm" onClick={handleAddExemption} disabled={!employeeToExempt || exemptionSavingUserId !== null} style={{ marginBottom: "var(--space-4)" }}>
-                {t("form.exemptEmployeesAddAction")}
-              </Button>
-            </div>
-          ) : null}
-
-          {exemptAssignments.length > 0 ? (
-            <ul style={{ listStyle: "none", margin: "var(--space-2) 0 0", padding: 0, display: "flex", flexDirection: "column", gap: "var(--space-1)" }}>
-              {exemptAssignments.map((assignment) => (
-                <li key={assignment.id} style={toggleRowStyle}>
-                  <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{assignment.userFullName}</span>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => handleToggleExemption(assignment, false)}
-                    disabled={exemptionSavingUserId === assignment.userId}
-                  >
-                    {t("form.exemptEmployeesRemoveAction")}
-                  </Button>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p style={{ margin: "var(--space-2) 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("form.exemptEmployeesEmpty")}</p>
-          )}
-
-          <ErrorText>{exemptionError}</ErrorText>
-        </div>
-      ) : null}
-
       <div style={toggleRowStyle}>
         <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.cameraRequiredLabel")}</span>
         <Toggle checked={cameraRequired} onChange={setCameraRequired} disabled={submitting} label={t("form.cameraRequiredLabel")} />
@@ -417,6 +230,8 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
           <Toggle checked={isActive} onChange={setIsActive} disabled={submitting} label={t("form.activeLabel")} />
         </div>
       ) : null}
+
+      {isEditing ? <p style={{ margin: "var(--space-3) 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("form.sitePolicyMovedHint")}</p> : null}
 
       <ErrorText>{error}</ErrorText>
     </Modal>

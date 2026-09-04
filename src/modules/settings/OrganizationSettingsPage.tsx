@@ -6,6 +6,7 @@ import { useAuth } from "../../core/context/AuthContext";
 import PageShell from "../../components/common/PageShell";
 import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
 import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
+import SitePolicySettingsCard from "./SitePolicySettingsCard";
 
 // PROSM Time - § live UX review, user-directed: "a professional
 // reorganization" - org-wide settings (today: the no-site geofence
@@ -28,6 +29,7 @@ export default function OrganizationSettingsPage() {
     <PageShell title={t("title")} subtitle={t("subtitle")}>
       <NoSiteRadiusSettingsCard />
       <SiteDefaultsSettingsCard />
+      <SitePolicySettingsCard />
     </PageShell>
   );
 }

@@ -17,5 +17,17 @@
     "invalidGpsTolerance": "Enter a GPS accuracy tolerance greater than zero.",
     "invalidGraceTolerance": "Grace tolerance cannot be negative.",
     "genericError": "Unable to update the site defaults."
+  },
+  "sitePolicy": {
+    "title": "Site Policy",
+    "hint": "Pick a site to review or change its own GPS accuracy tolerance, grace period, shift policy and exempt employees - none of this is edited from that site's own Edit form anymore.",
+    "siteSelectLabel": "Site",
+    "siteSelectPlaceholder": "Select a site…",
+    "noSites": "No sites yet - add one from Sites first.",
+    "loadError": "Unable to load this site's policy.",
+    "noAssignmentsYet": "No one is assigned to this site yet, so there's no one to exempt.",
+    "saveAction": "Save",
+    "saveSuccess": "Site policy updated.",
+    "genericError": "Unable to update this site's policy."
   }
 }

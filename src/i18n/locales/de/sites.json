@@ -49,7 +49,6 @@
     "testLocationResultOutside": "Ihr aktueller Standort ist {{distance}} m vom Zentrum dieses Standorts entfernt - außerhalb des konfigurierten Geofence ({{radius}} m).",
     "allowedRadiusLabel": "Zulässiger Radius (Meter)",
     "gpsAccuracyToleranceLabel": "GPS-Genauigkeitstoleranz (Meter)",
-    "orgDefaultHint": "Vorausgefüllt mit dem Standardwert Ihrer Organisation - verwalten Sie ihn in den Einstellungen, oder überschreiben Sie ihn hier nur für diesen Standort.",
     "timezoneLabel": "Zeitzone",
     "timezoneHint": "IANA-Zeitzonenkennung, z. B. Africa/Cairo. Die Speicherung erfolgt weiterhin in UTC; dies wirkt sich nur auf die lokale Anzeige aus.",
     "graceToleranceLabel": "Kulanzzeit (Minuten)",
@@ -74,6 +73,7 @@
     "geofenceRequiredLabel": "Geofence erforderlich",
     "cameraRequiredLabel": "Kamera erforderlich",
     "activeLabel": "Standort aktiv",
+    "sitePolicyMovedHint": "GPS-Genauigkeitstoleranz, Kulanzzeit, Schichtrichtlinie und befreite Mitarbeiter werden in den Einstellungen verwaltet.",
     "confirm": "Standort speichern",
     "genericError": "Dieser Standort konnte nicht gespeichert werden."
   },

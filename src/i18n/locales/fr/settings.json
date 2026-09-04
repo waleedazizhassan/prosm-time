@@ -17,5 +17,17 @@
     "invalidGpsTolerance": "Saisissez une tolérance de précision GPS supérieure à zéro.",
     "invalidGraceTolerance": "La tolérance de grâce ne peut pas être négative.",
     "genericError": "Impossible de mettre à jour les politiques par défaut des sites."
+  },
+  "sitePolicy": {
+    "title": "Politique de site",
+    "hint": "Choisissez un site pour consulter ou modifier sa propre tolérance de précision GPS, sa période de tolérance, sa politique de shift et ses employés exemptés - plus rien de tout cela ne se modifie depuis la page Modifier de ce site.",
+    "siteSelectLabel": "Site",
+    "siteSelectPlaceholder": "Sélectionner un site…",
+    "noSites": "Aucun site pour l'instant - ajoutez-en un depuis Sites d'abord.",
+    "loadError": "Impossible de charger la politique de ce site.",
+    "noAssignmentsYet": "Personne n'est encore assigné à ce site, il n'y a donc personne à exempter.",
+    "saveAction": "Enregistrer",
+    "saveSuccess": "Politique du site mise à jour.",
+    "genericError": "Impossible de mettre à jour la politique de ce site."
   }
 }

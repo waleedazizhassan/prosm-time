@@ -71,20 +71,29 @@ export interface SiteInput {
   latitude: number;
   longitude: number;
   allowedRadiusMeters: number;
-  gpsAccuracyToleranceMeters: number;
   timezone: string;
   attendanceAllowed: boolean;
   geofenceRequired: boolean;
   cameraRequired: boolean;
   kioskMode: KioskMode;
-  graceToleranceMinutes: number;
-  shiftStartTime: string | null;
-  shiftEndTime: string | null;
-  overtimeStartTime: string | null;
-  lateDeductionStartTime: string | null;
-  breakRoundingMode: BreakRoundingMode;
-  blockSelfClockInAfterGrace: boolean;
-  blockSelfClockOutOutsideGeofence: boolean;
+  // § live UX review, user-directed - "Site Policy" (GPS tolerance,
+  // grace period, shift hours/overtime/late-deduction, break
+  // rounding, both self-service block toggles) moved entirely to its
+  // own Settings hub (site picked from a dropdown) - the site Edit
+  // form no longer collects any of these. Optional here rather than
+  // required: on create, an omitted field lets create_prosm_time_site
+  // derive it from the organization's own policy defaults server-side
+  // instead of a hardcoded literal; on update, an omitted field is
+  // coalesced to "leave unchanged" by the RPC.
+  gpsAccuracyToleranceMeters?: number;
+  graceToleranceMinutes?: number;
+  shiftStartTime?: string | null;
+  shiftEndTime?: string | null;
+  overtimeStartTime?: string | null;
+  lateDeductionStartTime?: string | null;
+  breakRoundingMode?: BreakRoundingMode;
+  blockSelfClockInAfterGrace?: boolean;
+  blockSelfClockOutOutsideGeofence?: boolean;
   // update-only: explicitly blanks out an already-configured shift
   // policy (time fields have no other "unset" signal once a real
   // time has been set, since the RPC's coalesce-based partial update
@@ -287,7 +296,12 @@ class SiteRepository {
     }
   }
 
-  async updateSite(siteId: string, input: SiteInput & { isActive: boolean }): Promise<ServiceResult> {
+  // Partial - the identity/capability fields (SiteFormModal) and the
+  // Site Policy fields (SitePolicySettingsCard) are edited from two
+  // separate places now; each caller sends only what it owns, and
+  // update_prosm_time_site's own coalesce-based partial update leaves
+  // every omitted field untouched server-side.
+  async updateSite(siteId: string, input: Partial<SiteInput> & { isActive?: boolean }): Promise<ServiceResult> {
     try {
       const { data, error } = await this.client.rpc("update_prosm_time_site", {
         p_site_id: siteId,

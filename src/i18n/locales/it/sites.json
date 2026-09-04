@@ -49,7 +49,6 @@
     "testLocationResultOutside": "La tua posizione attuale è a {{distance}} m dal centro di questa sede - al di fuori del geofence configurato ({{radius}} m).",
     "allowedRadiusLabel": "Raggio consentito (metri)",
     "gpsAccuracyToleranceLabel": "Tolleranza di precisione GPS (metri)",
-    "orgDefaultHint": "Precompilato dal valore predefinito della tua organizzazione - gestiscilo in Impostazioni, oppure sovrascrivilo qui solo per questa sede.",
     "timezoneLabel": "Fuso orario",
     "timezoneHint": "Identificatore del fuso orario IANA, ad es. Africa/Cairo. L'archiviazione rimane in UTC; questo influisce solo sulla visualizzazione locale.",
     "graceToleranceLabel": "Tolleranza di cortesia (minuti)",
@@ -74,6 +73,7 @@
     "geofenceRequiredLabel": "Geofence richiesto",
     "cameraRequiredLabel": "Fotocamera richiesta",
     "activeLabel": "Sede attiva",
+    "sitePolicyMovedHint": "Tolleranza di precisione GPS, periodo di tolleranza, politica del turno e dipendenti esentati si gestiscono da Impostazioni.",
     "confirm": "Salva sede",
     "genericError": "Impossibile salvare questa sede."
   },
