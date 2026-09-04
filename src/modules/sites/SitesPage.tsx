@@ -11,6 +11,7 @@ import Button from "../../components/common/Button";
 import StatusBadge from "../../components/common/StatusBadge";
 import Table, { type TableColumn } from "../../components/common/Table";
 import SiteFormModal from "./SiteFormModal";
+import NoSiteRadiusSettingsCard from "./NoSiteRadiusSettingsCard";
 import ErrorText from "../../components/common/ErrorText";
 
 // PROSM Time Implementation Master File V3.0, WP-05/§13/§37 - "Site
@@ -68,6 +69,8 @@ export default function SitesPage() {
       subtitle={t("subtitle")}
       actions={profile?.isOwner ? <Button onClick={() => setCreateOpen(true)}>{t("addAction")}</Button> : undefined}
     >
+      {profile?.isOwner ? <NoSiteRadiusSettingsCard /> : null}
+
       <ErrorText>{loadError}</ErrorText>
 
       <Table columns={columns} data={sites} getRowId={(site) => site.id} loading={loading} emptyMessage="—" onRowClick={(site) => navigate(`/sites/${site.id}`)} />

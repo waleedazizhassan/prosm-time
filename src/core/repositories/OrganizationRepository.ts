@@ -14,6 +14,10 @@ export interface Organization {
   defaultLanguage: string;
   defaultTheme: string;
   logoUrl: string | null;
+  // § live UX review, user-directed - "control every employee the same
+  // way, whether clocked in at a site or not." The org-wide radius
+  // (meters) applied around a no-site clock-in's own GPS point.
+  noSiteAllowedRadiusMeters: number;
 }
 
 function createSuccess<T>(data: T | null = null): ServiceResult<T> {
@@ -38,7 +42,7 @@ class OrganizationRepository {
     try {
       const { data, error } = await this.client
         .from("organizations")
-        .select("id, organization_code, name, status, logo_url, organization_settings(default_language, default_theme)")
+        .select("id, organization_code, name, status, logo_url, organization_settings(default_language, default_theme, no_site_allowed_radius_meters)")
         .maybeSingle();
 
       if (error) return createError(error.message);
@@ -54,6 +58,7 @@ class OrganizationRepository {
         defaultLanguage: settings?.default_language ?? "en",
         defaultTheme: settings?.default_theme ?? "dark",
         logoUrl: data.logo_url ?? null,
+        noSiteAllowedRadiusMeters: settings?.no_site_allowed_radius_meters ?? 500,
       });
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Organization service unavailable.");
@@ -85,6 +90,20 @@ class OrganizationRepository {
       if (data?.success === false) return createError("Unable to set the organization logo.");
 
       return createSuccess(logoUrl);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Organization service unavailable.");
+    }
+  }
+
+  // § live UX review, user-directed - "control every employee the same
+  // way, whether clocked in at a site or not." Owner-only, same
+  // "no direct client UPDATE grant" posture as uploadLogo above.
+  async setNoSiteAllowedRadius(radiusMeters: number): Promise<ServiceResult> {
+    try {
+      const { data, error } = await this.client.rpc("set_prosm_time_no_site_radius", { p_radius_meters: radiusMeters });
+      if (error) return createError(error.message);
+      if (data?.success === false) return createError("Unable to set the no-site radius.");
+      return createSuccess();
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Organization service unavailable.");
     }

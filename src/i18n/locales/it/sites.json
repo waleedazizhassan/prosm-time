@@ -23,6 +23,15 @@
     "full_hour": "Arrotonda per eccesso all'ora piena"
   },
   "addAction": "Aggiungi sede",
+  "noSiteRadius": {
+    "title": "Raggio di entrata senza sito",
+    "hint": "Quando un dipendente timbra senza un sito registrato, il suo punto di timbratura diventa il centro di questo raggio per il resto del turno - la stessa protezione già offerta dal geofence di un sito reale, applicata a tutta l'organizzazione.",
+    "radiusLabel": "Raggio consentito (metri)",
+    "saveAction": "Salva",
+    "saveSuccess": "Raggio senza sito aggiornato.",
+    "invalidRadius": "Inserisci un raggio maggiore di zero.",
+    "genericError": "Impossibile aggiornare il raggio senza sito."
+  },
   "form": {
     "createTitle": "Aggiungi una sede",
     "editTitle": "Modifica sede",

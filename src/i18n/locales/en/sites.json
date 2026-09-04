@@ -23,6 +23,15 @@
     "full_hour": "Rounds up to a full hour"
   },
   "addAction": "Add site",
+  "noSiteRadius": {
+    "title": "No-Site Clock-In Radius",
+    "hint": "When an employee clocks in without a registered site, their own clock-in point becomes the center of this range for the rest of that shift - the same protection a real site's geofence already gives, applied org-wide.",
+    "radiusLabel": "Allowed radius (meters)",
+    "saveAction": "Save",
+    "saveSuccess": "No-site radius updated.",
+    "invalidRadius": "Enter a radius greater than zero.",
+    "genericError": "Unable to update the no-site radius."
+  },
   "form": {
     "createTitle": "Add a site",
     "editTitle": "Edit site",

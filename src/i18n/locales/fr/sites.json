@@ -23,6 +23,15 @@
     "full_hour": "Arrondi à l'heure pleine supérieure"
   },
   "addAction": "Ajouter un site",
+  "noSiteRadius": {
+    "title": "Rayon de pointage sans site",
+    "hint": "Lorsqu'un employé pointe sans site enregistré, son propre point de pointage devient le centre de ce rayon pour le reste de son quart - la même protection qu'offre déjà la géolocalisation d'un vrai site, appliquée à toute l'organisation.",
+    "radiusLabel": "Rayon autorisé (mètres)",
+    "saveAction": "Enregistrer",
+    "saveSuccess": "Rayon sans site mis à jour.",
+    "invalidRadius": "Saisissez un rayon supérieur à zéro.",
+    "genericError": "Impossible de mettre à jour le rayon sans site."
+  },
   "form": {
     "createTitle": "Ajouter un site",
     "editTitle": "Modifier le site",

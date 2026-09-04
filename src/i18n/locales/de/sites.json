@@ -23,6 +23,15 @@
     "full_hour": "Aufrundung auf die volle Stunde"
   },
   "addAction": "Standort hinzufügen",
+  "noSiteRadius": {
+    "title": "Radius für Einstempeln ohne Standort",
+    "hint": "Wenn ein Mitarbeiter ohne registrierten Standort einstempelt, wird sein eigener Einstempelpunkt für den Rest dieser Schicht zum Mittelpunkt dieses Radius - derselbe Schutz, den ein echter Standort-Geofence bereits bietet, unternehmensweit angewendet.",
+    "radiusLabel": "Zulässiger Radius (Meter)",
+    "saveAction": "Speichern",
+    "saveSuccess": "Radius ohne Standort aktualisiert.",
+    "invalidRadius": "Geben Sie einen Radius größer als null ein.",
+    "genericError": "Der Radius ohne Standort konnte nicht aktualisiert werden."
+  },
   "form": {
     "createTitle": "Standort hinzufügen",
     "editTitle": "Standort bearbeiten",
