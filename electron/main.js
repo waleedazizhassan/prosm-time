@@ -24,10 +24,14 @@ function createWindow() {
     height: 900,
     minWidth: 960,
     minHeight: 640,
-    // § live UX review, user-directed - opens already filling the
-    // screen, the same fullscreen state a browser's own F11 toggles
-    // into (not just maximized - no title bar/taskbar either).
-    fullscreen: true,
+    // § real bug, user-reported - "no close button from the Welcome
+    // page." True OS fullscreen (the earlier approach) hides the
+    // ENTIRE window frame on Windows, including the close button, with
+    // no discoverable way out. Maximizing instead still fills the
+    // screen but keeps the title bar and its close button visible at
+    // all times - see win.maximize() below (fullscreen:true would
+    // otherwise ignore the initial width/height and start maximized
+    // is the one that actually shows a frame).
     icon: path.join(__dirname, "..", "build", "icon.ico"),
     autoHideMenuBar: true,
     webPreferences: {
@@ -37,19 +41,17 @@ function createWindow() {
     },
   });
 
+  win.maximize();
+
   // Clock in/out (geolocation) and camera evidence both call browser
   // APIs that Electron blocks by default unless explicitly allowed.
   win.webContents.session.setPermissionRequestHandler((_webContents, permission, callback) => {
     callback(permission === "media" || permission === "geolocation");
   });
 
-  // F11 toggles fullscreen and Escape always exits it, matching a real
-  // browser tab - Electron doesn't bind either by default outside a
-  // menu accelerator. Windows' own fullscreen mode hides the entire
-  // window frame (no title bar, no close button), so without this the
-  // window opening straight into fullscreen (see above) would have no
-  // discoverable way out at all - once out of fullscreen, the normal
-  // title bar/close button is back.
+  // F11 still offers real (frameless) fullscreen for anyone who wants
+  // it, same as a browser tab; Escape always exits back to the normal
+  // maximized window with its title bar/close button.
   win.webContents.on("before-input-event", (_event, input) => {
     if (input.type !== "keyDown") return;
     if (input.key === "F11") {
