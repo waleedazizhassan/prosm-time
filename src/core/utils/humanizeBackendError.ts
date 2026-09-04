@@ -95,6 +95,7 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "PROJECT NOT FOUND": "projectNotFound",
   "PROJECT NOT FOUND AT THIS SITE": "projectNotFoundAtSite",
   "PROJECTS.MANAGE AUTHORITY REQUIRED": "projectsManageAuthorityRequired",
+  "PROPOSED CORRECT TIME IS NOT VALID FOR THIS SESSION": "proposedCorrectTimeNotValid",
   "PROPOSED CORRECT TIME IS REQUIRED": "proposedCorrectTimeRequired",
   "RADIUS MUST BE GREATER THAN ZERO": "radiusMustBeGreaterThanZero",
   "REASON IS REQUIRED": "reasonIsRequired",

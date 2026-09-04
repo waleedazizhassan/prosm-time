@@ -84,6 +84,7 @@
     "projectNotFound": "Ce projet est introuvable.",
     "projectNotFoundAtSite": "Ce projet est introuvable sur ce site.",
     "projectsManageAuthorityRequired": "Vous n'avez pas l'autorité pour gérer les projets.",
+    "proposedCorrectTimeNotValid": "L'heure proposée n'est pas valide pour ce quart (doit rester entre l'autre heure d'arrivée/départ).",
     "proposedCorrectTimeRequired": "Une heure corrigée proposée est requise.",
     "radiusMustBeGreaterThanZero": "Le rayon doit être supérieur à zéro.",
     "reasonIsRequired": "Un motif est requis.",

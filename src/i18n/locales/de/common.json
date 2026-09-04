@@ -84,6 +84,7 @@
     "projectNotFound": "Dieses Projekt wurde nicht gefunden.",
     "projectNotFoundAtSite": "Dieses Projekt wurde an diesem Standort nicht gefunden.",
     "projectsManageAuthorityRequired": "Sie sind nicht berechtigt, Projekte zu verwalten.",
+    "proposedCorrectTimeNotValid": "Die vorgeschlagene Uhrzeit ist für diese Schicht ungültig (muss zwischen der anderen Kommen-/Gehen-Zeit liegen).",
     "proposedCorrectTimeRequired": "Eine vorgeschlagene korrekte Uhrzeit ist erforderlich.",
     "radiusMustBeGreaterThanZero": "Der Radius muss größer als null sein.",
     "reasonIsRequired": "Ein Grund ist erforderlich.",

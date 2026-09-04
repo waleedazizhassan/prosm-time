@@ -84,6 +84,7 @@
     "projectNotFound": "This project could not be found.",
     "projectNotFoundAtSite": "This project could not be found at this site.",
     "projectsManageAuthorityRequired": "You don't have authority to manage projects.",
+    "proposedCorrectTimeNotValid": "The proposed correct time isn't valid for this session (must stay between the other clock in/out time).",
     "proposedCorrectTimeRequired": "A proposed correct time is required.",
     "radiusMustBeGreaterThanZero": "The radius must be greater than zero.",
     "reasonIsRequired": "A reason is required.",

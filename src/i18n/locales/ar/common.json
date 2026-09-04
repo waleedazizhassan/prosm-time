@@ -84,6 +84,7 @@
     "projectNotFound": "تعذر العثور على هذا المشروع.",
     "projectNotFoundAtSite": "تعذر العثور على هذا المشروع في هذا الموقع.",
     "projectsManageAuthorityRequired": "ليس لديك صلاحية إدارة المشاريع.",
+    "proposedCorrectTimeNotValid": "الوقت المقترح غير صالح لهذه الوردية (يجب أن يبقى بين وقتي الحضور والانصراف الآخرين).",
     "proposedCorrectTimeRequired": "الوقت الصحيح المقترح مطلوب.",
     "radiusMustBeGreaterThanZero": "النطاق يجب أن يكون أكبر من صفر.",
     "reasonIsRequired": "السبب مطلوب.",
