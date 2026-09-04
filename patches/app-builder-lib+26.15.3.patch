@@ -1,0 +1,40 @@
+diff --git a/node_modules/app-builder-lib/out/util/electronGet.js b/node_modules/app-builder-lib/out/util/electronGet.js
+index a941f9d..7ce73b2 100644
+--- a/node_modules/app-builder-lib/out/util/electronGet.js
++++ b/node_modules/app-builder-lib/out/util/electronGet.js
+@@ -184,7 +184,34 @@ async function extractArchive(file, dir) {
+             throw new Error(`Extraction of ${path.basename(file)} produced no files`);
+         }
+         await fs.rm(dir, { recursive: true, force: true });
+-        await fs.rename(tmpDir, dir);
++        // Windows-only: renaming a directory immediately after writing thousands of
++        // files into it via async fs streams can lose a race against the OS fully
++        // releasing the last file handle(s) - fs.rename then throws EPERM even
++        // though every write already completed. Ruled out antivirus as the cause
++        // (PowerShell's own Expand-Archive + Rename-Item on the identical zip
++        // succeeded instantly, and Windows Defender's own event log showed no scan
++        // activity at the failure time) - this is Node's fs streams specifically.
++        // Retrying the rename alone (not the whole extraction) clears it within a
++        // few hundred ms once the OS-level handle actually closes.
++        if (process.platform === "win32") {
++            const maxAttempts = 15;
++            for (let attempt = 1; ; attempt++) {
++                try {
++                    await fs.rename(tmpDir, dir);
++                    break;
++                }
++                catch (err) {
++                    if (attempt >= maxAttempts || !["EPERM", "EBUSY"].includes(err === null || err === void 0 ? void 0 : err.code)) {
++                        throw err;
++                    }
++                    builder_util_1.log.warn({ tmpDir, dir, attempt, code: err.code }, "rename after extraction failed, retrying");
++                    await new Promise(r => setTimeout(r, Math.min(300 * attempt, 2000)));
++                }
++            }
++        }
++        else {
++            await fs.rename(tmpDir, dir);
++        }
+     }
+     finally {
+         await release().catch(err => builder_util_1.log.warn({ err }, "failed to release lockfile"));
