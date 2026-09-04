@@ -48,11 +48,11 @@
     },
     "sites": {
       "title": "Sites & Shift Policy (Administrators)",
-      "body": "Sites (Owner/Manager only) is where worksites, their GPS geofence, kiosk mode and camera/attendance policy are configured, and where employees/managers are assigned to a site. Each site can also have its own optional shift policy - work hours, when overtime and lateness deductions start counting, a grace period, and whether an employee is blocked from self clock-in past that grace period (in which case a manager clocks them in instead, with a reason). The radius used for no-site clock-ins is managed from Settings, with a quick summary shown here too."
+      "body": "Sites (Owner/Manager only) is where worksites, their GPS geofence, kiosk mode and camera/attendance policy are configured, and where employees/managers are assigned to a site. Each site can also have its own optional shift policy - work hours, when overtime and lateness deductions start counting, a grace period, and whether an employee is blocked from self clock-in past that grace period (in which case a manager clocks them in instead, with a reason). GPS accuracy tolerance, break rounding and grace period all start from the organization-wide defaults set in Settings - a new site pre-fills from them automatically, and any site can still override them individually. The radius used for no-site clock-ins is also managed from Settings, with a quick summary shown here too."
     },
     "settingsCenter": {
       "title": "Settings (Owner)",
-      "body": "A real home for organization-wide configuration, starting with the no-site geofence radius - the range around a walk-in employee's own clock-in point that keeps them protected the same way a registered site's geofence would."
+      "body": "A real home for organization-wide configuration: the no-site geofence radius (the range around a walk-in employee's own clock-in point that keeps them protected the same way a registered site's geofence would), and the site policy defaults - GPS accuracy tolerance, break rounding mode and grace period - that a brand-new site starts from, since these are almost always the same across an organization's sites rather than something that genuinely differs site to site."
     },
     "permissions": {
       "title": "Permissions (Administrators)",

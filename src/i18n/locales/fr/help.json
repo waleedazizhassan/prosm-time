@@ -48,11 +48,11 @@
     },
     "sites": {
       "title": "Sites et politique de shift (administrateurs)",
-      "body": "Sites (Propriétaire/Responsable uniquement) permet de configurer les sites, leur géorepérage GPS, le mode kiosque et la politique caméra/présence, et d'y affecter des employés/responsables. Chaque site peut aussi avoir sa propre politique de shift optionnelle : horaires de travail, à partir de quand les heures supplémentaires et les retards sont comptabilisés, une période de tolérance, et si un employé est bloqué de pointer lui-même au-delà de cette tolérance (un responsable pointe alors à sa place, avec un motif). Le rayon utilisé pour les pointages sans site est géré depuis Paramètres, avec un résumé rapide affiché ici aussi."
+      "body": "Sites (Propriétaire/Responsable uniquement) permet de configurer les sites, leur géorepérage GPS, le mode kiosque et la politique caméra/présence, et d'y affecter des employés/responsables. Chaque site peut aussi avoir sa propre politique de shift optionnelle : horaires de travail, à partir de quand les heures supplémentaires et les retards sont comptabilisés, une période de tolérance, et si un employé est bloqué de pointer lui-même au-delà de cette tolérance (un responsable pointe alors à sa place, avec un motif). La tolérance de précision GPS, l'arrondi des pauses et la période de tolérance partent tous des valeurs par défaut de l'organisation définies dans Paramètres - un nouveau site s'en remplit automatiquement, et chaque site peut toujours les remplacer individuellement. Le rayon utilisé pour les pointages sans site est aussi géré depuis Paramètres, avec un résumé rapide affiché ici."
     },
     "settingsCenter": {
       "title": "Paramètres (Propriétaire)",
-      "body": "Un véritable emplacement pour la configuration à l'échelle de l'organisation, à commencer par le rayon de géorepérage sans site - la zone autour du point de pointage d'un employé itinérant qui le protège de la même façon qu'un géorepérage de site enregistré."
+      "body": "Un véritable emplacement pour la configuration à l'échelle de l'organisation : le rayon de géorepérage sans site (la zone autour du point de pointage d'un employé itinérant qui le protège de la même façon qu'un géorepérage de site enregistré), et les politiques de site par défaut - tolérance de précision GPS, arrondi des pauses et période de tolérance - dont part chaque nouveau site, puisque ce sont des valeurs presque toujours identiques dans toute l'organisation plutôt qu'une chose qui varie réellement d'un site à l'autre."
     },
     "permissions": {
       "title": "Permissions (administrateurs)",

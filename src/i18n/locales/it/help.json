@@ -48,11 +48,11 @@
     },
     "sites": {
       "title": "Sedi e politica del turno (amministratori)",
-      "body": "Sedi (solo Proprietario/Manager) è dove si configurano le sedi di lavoro, il loro geofence GPS, la modalità kiosk e la politica di fotocamera/presenza, e dove i dipendenti/manager vengono assegnati a una sede. Ogni sede può inoltre avere una propria politica del turno facoltativa: orari di lavoro, da quando iniziano a contare straordinari e detrazioni per ritardo, un periodo di tolleranza, e se un dipendente è bloccato dalla timbratura autonoma oltre tale periodo (in tal caso un manager lo timbra al suo posto, con un motivo). Il raggio usato per le timbrature senza sede si gestisce da Impostazioni, con un riepilogo rapido mostrato anche qui."
+      "body": "Sedi (solo Proprietario/Manager) è dove si configurano le sedi di lavoro, il loro geofence GPS, la modalità kiosk e la politica di fotocamera/presenza, e dove i dipendenti/manager vengono assegnati a una sede. Ogni sede può inoltre avere una propria politica del turno facoltativa: orari di lavoro, da quando iniziano a contare straordinari e detrazioni per ritardo, un periodo di tolleranza, e se un dipendente è bloccato dalla timbratura autonoma oltre tale periodo (in tal caso un manager lo timbra al suo posto, con un motivo). Tolleranza di precisione GPS, arrotondamento delle pause e periodo di tolleranza partono tutti dai valori predefiniti dell'organizzazione impostati in Impostazioni - una nuova sede li eredita automaticamente, e ogni sede può comunque sovrascriverli singolarmente. Anche il raggio usato per le timbrature senza sede si gestisce da Impostazioni, con un riepilogo rapido mostrato qui."
     },
     "settingsCenter": {
       "title": "Impostazioni (Proprietario)",
-      "body": "Una vera casa per la configurazione a livello di organizzazione, a partire dal raggio del geofence senza sede - l'area intorno al punto di timbratura di un dipendente itinerante che lo protegge allo stesso modo del geofence di una sede registrata."
+      "body": "Una vera casa per la configurazione a livello di organizzazione: il raggio del geofence senza sede (l'area intorno al punto di timbratura di un dipendente itinerante che lo protegge allo stesso modo del geofence di una sede registrata), e le politiche predefinite delle sedi - tolleranza di precisione GPS, arrotondamento delle pause e periodo di tolleranza - da cui parte ogni nuova sede, poiché sono valori quasi sempre identici in tutta l'organizzazione più che qualcosa che varia davvero da sede a sede."
     },
     "permissions": {
       "title": "Permessi (amministratori)",

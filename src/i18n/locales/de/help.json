@@ -48,11 +48,11 @@
     },
     "sites": {
       "title": "Standorte und Schichtrichtlinie (Administratoren)",
-      "body": "Standorte (nur Inhaber/Manager) ist der Ort, an dem Arbeitsstandorte, ihr GPS-Geofence, der Kiosk-Modus und die Kamera-/Anwesenheitsrichtlinie konfiguriert werden und Mitarbeiter/Manager einem Standort zugewiesen werden. Jeder Standort kann außerdem eine eigene, optionale Schichtrichtlinie haben: Arbeitszeiten, ab wann Überstunden und Verspätungsabzüge zählen, eine Kulanzzeit, und ob ein Mitarbeiter nach dieser Kulanzzeit vom Selbst-Einstempeln blockiert wird (in diesem Fall stempelt ein Manager ihn stattdessen mit Begründung ein). Der für Einstempeln ohne Standort verwendete Radius wird in den Einstellungen verwaltet, mit einer kurzen Zusammenfassung auch hier."
+      "body": "Standorte (nur Inhaber/Manager) ist der Ort, an dem Arbeitsstandorte, ihr GPS-Geofence, der Kiosk-Modus und die Kamera-/Anwesenheitsrichtlinie konfiguriert werden und Mitarbeiter/Manager einem Standort zugewiesen werden. Jeder Standort kann außerdem eine eigene, optionale Schichtrichtlinie haben: Arbeitszeiten, ab wann Überstunden und Verspätungsabzüge zählen, eine Kulanzzeit, und ob ein Mitarbeiter nach dieser Kulanzzeit vom Selbst-Einstempeln blockiert wird (in diesem Fall stempelt ein Manager ihn stattdessen mit Begründung ein). GPS-Genauigkeitstoleranz, Pausenrundung und Kulanzzeit starten alle mit den organisationsweiten Standardwerten aus den Einstellungen - ein neuer Standort übernimmt sie automatisch, und jeder Standort kann sie weiterhin einzeln überschreiben. Der für Einstempeln ohne Standort verwendete Radius wird ebenfalls in den Einstellungen verwaltet, mit einer kurzen Zusammenfassung auch hier."
     },
     "settingsCenter": {
       "title": "Einstellungen (Inhaber)",
-      "body": "Ein echter Ort für organisationsweite Konfiguration, beginnend mit dem Geofence-Radius ohne Standort - dem Bereich um den Einstempelpunkt eines mobilen Mitarbeiters, der ihn genauso schützt wie der Geofence eines registrierten Standorts."
+      "body": "Ein echter Ort für organisationsweite Konfiguration: der Geofence-Radius ohne Standort (der Bereich um den Einstempelpunkt eines mobilen Mitarbeiters, der ihn genauso schützt wie der Geofence eines registrierten Standorts) und die Standort-Richtlinien-Standardwerte - GPS-Genauigkeitstoleranz, Pausenrundung und Kulanzzeit -, mit denen ein brandneuer Standort startet, da diese organisationsweit fast immer gleich sind statt sich wirklich von Standort zu Standort zu unterscheiden."
     },
     "permissions": {
       "title": "Berechtigungen (Administratoren)",
