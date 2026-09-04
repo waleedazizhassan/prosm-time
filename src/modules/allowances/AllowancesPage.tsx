@@ -43,6 +43,25 @@ function isoDate(date: Date): string {
   return date.toISOString().slice(0, 10);
 }
 
+// § real bug, live-tested: "these fields don't accept typing unless I
+// select the 0 first and delete it." value={String(numericState)} +
+// onChange doing Number(event.target.value) meant clearing the field
+// (event.target.value === "") immediately coerced back to 0, so the
+// controlled input snapped back to "0" on every single keystroke
+// before the user's next digit could land - especially disruptive on
+// mobile numeric keyboards. A genuine 0 now displays as an empty field
+// (a placeholder shows "0" for the same visual default) so clearing it
+// stays blank instead of fighting the re-render.
+function amountFieldValue(amount: number): string {
+  return amount === 0 ? "" : String(amount);
+}
+
+function parseAmountInput(raw: string): number {
+  if (raw === "") return 0;
+  const parsed = Number(raw);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
 // PROSM Time - Allowances (2026-09-02 approved plan, Feature 2).
 // "Date/day/site/clock in/out are auto-imported; the employee
 // completes the rest" - an entry is created via "Add" for a chosen
@@ -323,48 +342,54 @@ export default function AllowancesPage() {
                 label={t("columns.meal")}
                 name="mealAllowance"
                 type="number"
-                value={String(formInput.mealAllowance)}
-                onChange={(event) => setFormInput((current) => ({ ...current, mealAllowance: Number(event.target.value) }))}
+                placeholder="0"
+                value={amountFieldValue(formInput.mealAllowance)}
+                onChange={(event) => setFormInput((current) => ({ ...current, mealAllowance: parseAmountInput(event.target.value) }))}
                 disabled={!canEditDetail}
               />
               <Input
                 label={t("columns.expatriation")}
                 name="expatriationAllowance"
                 type="number"
-                value={String(formInput.expatriationAllowance)}
-                onChange={(event) => setFormInput((current) => ({ ...current, expatriationAllowance: Number(event.target.value) }))}
+                placeholder="0"
+                value={amountFieldValue(formInput.expatriationAllowance)}
+                onChange={(event) => setFormInput((current) => ({ ...current, expatriationAllowance: parseAmountInput(event.target.value) }))}
                 disabled={!canEditDetail}
               />
               <Input
                 label={t("columns.transportation")}
                 name="transportationAllowance"
                 type="number"
-                value={String(formInput.transportationAllowance)}
-                onChange={(event) => setFormInput((current) => ({ ...current, transportationAllowance: Number(event.target.value) }))}
+                placeholder="0"
+                value={amountFieldValue(formInput.transportationAllowance)}
+                onChange={(event) => setFormInput((current) => ({ ...current, transportationAllowance: parseAmountInput(event.target.value) }))}
                 disabled={!canEditDetail}
               />
               <Input
                 label={t("columns.housing")}
                 name="housingAllowance"
                 type="number"
-                value={String(formInput.housingAllowance)}
-                onChange={(event) => setFormInput((current) => ({ ...current, housingAllowance: Number(event.target.value) }))}
+                placeholder="0"
+                value={amountFieldValue(formInput.housingAllowance)}
+                onChange={(event) => setFormInput((current) => ({ ...current, housingAllowance: parseAmountInput(event.target.value) }))}
                 disabled={!canEditDetail}
               />
               <Input
                 label={t("columns.travel")}
                 name="travelAllowance"
                 type="number"
-                value={String(formInput.travelAllowance)}
-                onChange={(event) => setFormInput((current) => ({ ...current, travelAllowance: Number(event.target.value) }))}
+                placeholder="0"
+                value={amountFieldValue(formInput.travelAllowance)}
+                onChange={(event) => setFormInput((current) => ({ ...current, travelAllowance: parseAmountInput(event.target.value) }))}
                 disabled={!canEditDetail}
               />
               <Input
                 label={t("columns.other")}
                 name="otherAllowance"
                 type="number"
-                value={String(formInput.otherAllowance)}
-                onChange={(event) => setFormInput((current) => ({ ...current, otherAllowance: Number(event.target.value) }))}
+                placeholder="0"
+                value={amountFieldValue(formInput.otherAllowance)}
+                onChange={(event) => setFormInput((current) => ({ ...current, otherAllowance: parseAmountInput(event.target.value) }))}
                 disabled={!canEditDetail}
               />
             </div>
