@@ -6,7 +6,17 @@
   width: 280px;
   min-width: 280px;
 
+  /* dvh tracks the browser's actual visible viewport as mobile
+     toolbars show/hide; vh does not, and different mobile browsers
+     compute it against a different fixed reference (some against the
+     viewport with the toolbar collapsed, some against the full
+     screen height) - on the browsers that pick the taller reference,
+     this made the drawer's real content (including the User Menu at
+     its bottom) sit below the visible fold even though the flexbox
+     math inside was already correct. vh stays first as the fallback
+     for the few browsers that don't support dvh at all. */
   height: calc(100vh - 64px);
+  height: calc(100dvh - 64px);
 
   display: flex;
   flex-direction: column;
@@ -335,6 +345,7 @@
     inset-inline-start: 0;
 
     height: calc(100vh - 64px);
+    height: calc(100dvh - 64px);
     width: 280px;
 
     transform: translateX(-100%);
@@ -415,6 +426,7 @@
   .sidebar {
     top: 56px;
     height: calc(100vh - 56px);
+    height: calc(100dvh - 56px);
   }
 }
 
