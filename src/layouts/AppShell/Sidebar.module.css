@@ -46,6 +46,13 @@
 
 .navigation {
   flex: 1;
+  /* A flex item's default min-height is auto (its content's natural
+     height), not 0 - without this, a long nav-section list can't
+     shrink to fit the space left for it and instead grows past it,
+     pushing the radio/UserMenu/version footer below the drawer's
+     visible bottom on short phone screens rather than scrolling
+     internally as its own overflow-y:auto intends. */
+  min-height: 0;
 
   display: flex;
   flex-direction: column;
