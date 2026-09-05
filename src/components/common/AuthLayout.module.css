@@ -248,6 +248,50 @@
     text-decoration: underline;
   }
 
+  /* § live UX review, user-directed - "Contact us" became "Get an
+     activation code": the panel now shows PROSM Time's real plans
+     (name/description/site limit) instead of two email links, so it
+     needs real width and per-plan structure - reuses .contactPanel's
+     own positioning/background, just wider and taller. */
+  .plansPanel {
+    min-width: 300px;
+    max-width: 340px;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .planCard {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    padding: var(--space-2) var(--space-3);
+    margin-top: var(--space-1);
+
+    background: rgba(248, 250, 252, 0.06);
+    border: 1px solid rgba(248, 250, 252, 0.12);
+    border-radius: var(--radius-sm);
+  }
+
+  .planName {
+    color: #f8fafc;
+    font-size: var(--font-sm);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .planDescription {
+    color: rgba(226, 232, 240, 0.78);
+    font-size: var(--font-xs);
+    line-height: 1.5;
+  }
+
+  .planMeta {
+    margin-top: 2px;
+    color: rgba(226, 232, 240, 0.55);
+    font-size: var(--font-xs);
+    font-weight: var(--font-weight-semibold);
+  }
+
   .content {
     position: relative;
     z-index: 1;
