@@ -1,8 +1,21 @@
+/* Real bug fix, user-reported (screenshot showed the map's own
+   attribution text painting above the notification dropdown):
+   Leaflet's own CSS gives its internal controls a z-index scale up to
+   1000 (.leaflet-top/.leaflet-bottom), and Leaflet only sets
+   position: relative on its container - never a z-index - so that
+   scale was never actually contained. Without a z-index of its own,
+   this container doesn't form a stacking context, so those internal
+   z-index values leaked out to compete directly with the rest of the
+   app's own UI layer (Header, dropdowns, modals) instead of staying
+   scoped to the map. isolation: isolate creates a real stacking
+   context here with no other side effects, caging every Leaflet
+   z-index value inside it for good. */
 .map {
   width: 100%;
   border-radius: var(--radius-md);
   overflow: hidden;
   background: var(--surface-hover);
+  isolation: isolate;
 }
 
 /* § real bug, live-tested: CartoDB's dark tile CDN now requires a key
