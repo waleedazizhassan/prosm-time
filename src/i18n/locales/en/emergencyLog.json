@@ -1,0 +1,36 @@
+{
+  "title": "Emergency Log",
+  "subtitle": "Every SOS/emergency alert - exact GPS location, time, employee and site.",
+  "loadError": "Unable to load the emergency log.",
+  "filters": {
+    "title": "Period",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "employeeLabel": "Employee",
+    "allEmployees": "All employees"
+  },
+  "columns": {
+    "employee": "Employee",
+    "site": "Site",
+    "triggeredAt": "Triggered At",
+    "location": "Location",
+    "status": "Status"
+  },
+  "status": {
+    "active": "Active",
+    "resolved": "Resolved"
+  },
+  "empty": "No emergency alerts for this period.",
+  "detail": {
+    "title": "Emergency Alert",
+    "employeeLabel": "Employee",
+    "siteLabel": "Work Site",
+    "triggeredAtLabel": "Triggered At",
+    "locationLabel": "Exact GPS Location",
+    "accuracyLabel": "GPS accuracy: ±{{meters}} m",
+    "resolvedAtLabel": "Resolved At",
+    "resolutionNotesLabel": "Resolution Notes",
+    "resolveAction": "Mark Resolved",
+    "resolveError": "Unable to resolve this alert."
+  }
+}

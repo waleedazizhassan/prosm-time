@@ -25,8 +25,9 @@ const toggleRowStyle = {
 // dropdown - and same thing for GPS accuracy tolerance." A site's
 // full behavioral policy - GPS tolerance, grace period, shift hours/
 // overtime/late-deduction, break rounding, both self-service block
-// toggles, and exempt employees - now lives entirely here rather than
-// in that site's own Edit form: pick a site, edit its policy, save.
+// toggles, exempt employees, and ongoing presence monitoring - now
+// lives entirely here rather than in that site's own Edit form: pick
+// a site, edit its policy, save.
 // Identity/location/capability (name, address, coordinates, radius,
 // time zone, kiosk mode, attendance/geofence/camera, active status)
 // stay on the site's own Edit form - genuinely site-identity concerns
@@ -50,6 +51,7 @@ export default function SitePolicySettingsCard() {
   const [breakRoundingMode, setBreakRoundingMode] = useState<BreakRoundingMode>("cumulative");
   const [blockSelfClockInAfterGrace, setBlockSelfClockInAfterGrace] = useState(false);
   const [blockSelfClockOutOutsideGeofence, setBlockSelfClockOutOutsideGeofence] = useState(false);
+  const [presenceMonitoringEnabled, setPresenceMonitoringEnabled] = useState(false);
 
   const [assignments, setAssignments] = useState<SiteAssignment[]>([]);
   const [exemptionSavingUserId, setExemptionSavingUserId] = useState<string | null>(null);
@@ -93,6 +95,7 @@ export default function SitePolicySettingsCard() {
       setBreakRoundingMode(loaded.breakRoundingMode);
       setBlockSelfClockInAfterGrace(loaded.blockSelfClockInAfterGrace);
       setBlockSelfClockOutOutsideGeofence(loaded.blockSelfClockOutOutsideGeofence);
+      setPresenceMonitoringEnabled(loaded.presenceMonitoringEnabled);
       setAssignments(assignmentsResult.success ? assignmentsResult.data ?? [] : []);
     });
   }, [selectedSiteId, t]);
@@ -137,6 +140,7 @@ export default function SitePolicySettingsCard() {
       breakRoundingMode,
       blockSelfClockInAfterGrace,
       blockSelfClockOutOutsideGeofence,
+      presenceMonitoringEnabled,
     });
 
     setSaving(false);
@@ -288,6 +292,19 @@ export default function SitePolicySettingsCard() {
               label={t("sites:form.blockSelfClockOutLabel")}
             />
           </div>
+          <div style={toggleRowStyle}>
+            <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("sites:form.presenceMonitoringEnabledLabel")}</span>
+            <Toggle
+              checked={presenceMonitoringEnabled}
+              onChange={(checked) => {
+                setPresenceMonitoringEnabled(checked);
+                setSaved(false);
+              }}
+              disabled={saving}
+              label={t("sites:form.presenceMonitoringEnabledLabel")}
+            />
+          </div>
+          <p style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("sites:form.presenceMonitoringEnabledHint")}</p>
 
           {assignments.length > 0 ? (
             <div style={{ margin: "var(--space-3) 0" }}>

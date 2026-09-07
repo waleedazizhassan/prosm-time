@@ -116,6 +116,51 @@ interface RawCorrectionRequestRow {
   users: RawUserRef | RawUserRef[] | null;
 }
 
+// § live UX review, user-directed - "SOS/emergency alerts need a real
+// log: the exact GPS location, the time, the employee's name, the
+// work site, and everything about the site and the employee." Backed
+// entirely by the WP-10 sos_alerts table (§18) and its already-live
+// resolve_prosm_time_sos_alert RPC - both existed with zero frontend
+// caller until now.
+export interface SosAlertRow {
+  id: string;
+  userFullName: string;
+  userEmail: string;
+  siteId: string | null;
+  siteName: string;
+  siteDisplayAddress: string | null;
+  triggeredAt: string;
+  latitude: number | null;
+  longitude: number | null;
+  accuracyMeters: number | null;
+  status: "active" | "resolved";
+  resolvedAt: string | null;
+  resolutionNotes: string | null;
+}
+
+interface RawUserRefWithEmail {
+  full_name: string | null;
+  email: string | null;
+}
+
+interface RawPresenceSiteRef {
+  site_id: string;
+  sites: { name: string | null; display_address: string | null } | { name: string | null; display_address: string | null }[] | null;
+}
+
+interface RawSosAlertRow {
+  id: string;
+  triggered_at: string;
+  latitude: number | null;
+  longitude: number | null;
+  accuracy_meters: number | null;
+  status: "active" | "resolved";
+  resolved_at: string | null;
+  resolution_notes: string | null;
+  users: RawUserRefWithEmail | RawUserRefWithEmail[] | null;
+  presence_sessions: RawPresenceSiteRef | RawPresenceSiteRef[] | null;
+}
+
 function createSuccess<T>(data: T | null = null): ServiceResult<T> {
   return { success: true, message: null, data };
 }
@@ -339,6 +384,67 @@ class ManagerRepository {
       });
 
       return createSuccess([...exceptionItems, ...correctionItems].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Manager console service unavailable.");
+    }
+  }
+
+  // Emergency Log - same "own picked date range" shape as
+  // listAttendanceHistory. sos_alerts' own RLS already scopes rows to
+  // the alerting employee, attendance.view holders, or the Owner - no
+  // extra filtering needed here.
+  async listSosAlerts(startDate: string, endDate: string): Promise<ServiceResult<SosAlertRow[]>> {
+    try {
+      const from = new Date(`${startDate}T00:00:00`).toISOString();
+      const to = new Date(`${endDate}T23:59:59.999`).toISOString();
+
+      const { data, error } = await this.client
+        .from("sos_alerts")
+        .select(
+          "id, triggered_at, latitude, longitude, accuracy_meters, status, resolved_at, resolution_notes, users(full_name, email), presence_sessions(site_id, sites(name, display_address))",
+        )
+        .gte("triggered_at", from)
+        .lte("triggered_at", to)
+        .order("triggered_at", { ascending: false });
+
+      if (error) return createError(error.message);
+
+      const rows: SosAlertRow[] = ((data ?? []) as RawSosAlertRow[]).map((row) => {
+        const user = Array.isArray(row.users) ? row.users[0] : row.users;
+        const presenceSession = Array.isArray(row.presence_sessions) ? row.presence_sessions[0] : row.presence_sessions;
+        const site = presenceSession ? (Array.isArray(presenceSession.sites) ? presenceSession.sites[0] : presenceSession.sites) : null;
+        return {
+          id: row.id,
+          userFullName: user?.full_name ?? "",
+          userEmail: user?.email ?? "",
+          siteId: presenceSession?.site_id ?? null,
+          siteName: site?.name ?? "",
+          siteDisplayAddress: site?.display_address ?? null,
+          triggeredAt: row.triggered_at,
+          latitude: row.latitude,
+          longitude: row.longitude,
+          accuracyMeters: row.accuracy_meters,
+          status: row.status,
+          resolvedAt: row.resolved_at,
+          resolutionNotes: row.resolution_notes,
+        };
+      });
+
+      return createSuccess(rows);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Manager console service unavailable.");
+    }
+  }
+
+  async resolveSosAlert(sosAlertId: string, resolutionNotes?: string): Promise<ServiceResult> {
+    try {
+      const { data, error } = await this.client.rpc("resolve_prosm_time_sos_alert", {
+        p_sos_alert_id: sosAlertId,
+        p_resolution_notes: resolutionNotes?.trim() || null,
+      });
+      if (error) return createError(error.message);
+      if (data?.success === false) return createError("Unable to resolve this alert.");
+      return createSuccess();
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Manager console service unavailable.");
     }

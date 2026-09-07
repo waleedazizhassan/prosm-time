@@ -63,11 +63,18 @@
     "sites": "Standorte",
     "manager": "Manager-Konsole",
     "attendance": "Anwesenheitsprotokoll",
+    "emergencyLog": "Notfallprotokoll",
     "timesheets": "Stundenzettel",
     "allowances": "Zulagen",
     "reports": "Berichte",
     "settings": "Einstellungen",
     "help": "Hilfe"
+  },
+  "sosOverlay": {
+    "title": "SOS-/Notfallalarm",
+    "subtitle": "{{name}} hat gerade einen Notfallalarm ausgelöst.",
+    "viewAction": "Notfallprotokoll anzeigen",
+    "dismissAction": "Ausblenden"
   },
   "sections": {
     "attendance": "Anwesenheit",

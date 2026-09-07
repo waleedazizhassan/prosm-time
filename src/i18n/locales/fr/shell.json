@@ -63,11 +63,18 @@
     "sites": "Sites",
     "manager": "Console gestionnaire",
     "attendance": "Registre de présence",
+    "emergencyLog": "Journal des urgences",
     "timesheets": "Feuilles de temps",
     "allowances": "Indemnités",
     "reports": "Rapports",
     "settings": "Paramètres",
     "help": "Aide"
+  },
+  "sosOverlay": {
+    "title": "Alerte SOS/Urgence",
+    "subtitle": "{{name}} vient de déclencher une alerte d'urgence.",
+    "viewAction": "Voir le journal des urgences",
+    "dismissAction": "Ignorer"
   },
   "sections": {
     "attendance": "Présence",

@@ -1,0 +1,36 @@
+{
+  "title": "Journal des urgences",
+  "subtitle": "Chaque alerte SOS/urgence - localisation GPS exacte, heure, employé et site.",
+  "loadError": "Impossible de charger le journal des urgences.",
+  "filters": {
+    "title": "Période",
+    "fromLabel": "Du",
+    "toLabel": "Au",
+    "employeeLabel": "Employé",
+    "allEmployees": "Tous les employés"
+  },
+  "columns": {
+    "employee": "Employé",
+    "site": "Site",
+    "triggeredAt": "Déclenchée à",
+    "location": "Localisation",
+    "status": "Statut"
+  },
+  "status": {
+    "active": "Active",
+    "resolved": "Résolue"
+  },
+  "empty": "Aucune alerte d'urgence pour cette période.",
+  "detail": {
+    "title": "Alerte d'urgence",
+    "employeeLabel": "Employé",
+    "siteLabel": "Site de travail",
+    "triggeredAtLabel": "Déclenchée à",
+    "locationLabel": "Localisation GPS exacte",
+    "accuracyLabel": "Précision GPS : ±{{meters}} m",
+    "resolvedAtLabel": "Résolue à",
+    "resolutionNotesLabel": "Notes de résolution",
+    "resolveAction": "Marquer comme résolue",
+    "resolveError": "Impossible de résoudre cette alerte."
+  }
+}

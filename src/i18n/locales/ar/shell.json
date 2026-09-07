@@ -63,11 +63,18 @@
     "sites": "المواقع",
     "manager": "لوحة المدير",
     "attendance": "سجل الحضور",
+    "emergencyLog": "سجل الطوارئ",
     "timesheets": "كشوف الدوام",
     "allowances": "البدلات",
     "reports": "التقارير",
     "settings": "الإعدادات",
     "help": "المساعدة"
+  },
+  "sosOverlay": {
+    "title": "تنبيه طوارئ (SOS)",
+    "subtitle": "{{name}} أرسل تنبيه طوارئ الآن.",
+    "viewAction": "عرض سجل الطوارئ",
+    "dismissAction": "إغلاق"
   },
   "sections": {
     "attendance": "الحضور",

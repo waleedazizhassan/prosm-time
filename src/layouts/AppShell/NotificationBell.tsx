@@ -7,8 +7,12 @@ import { useAuth } from "../../core/context/AuthContext";
 import NotificationRepository, { type AppNotification } from "../../core/repositories/NotificationRepository";
 import { formatDateTime } from "../../core/utils/formatDate";
 import playAlertSound from "../../core/utils/playAlertSound";
+import playSirenSound from "../../core/utils/playSirenSound";
 import localizeNotification from "../../core/utils/localizeNotification";
+import SosAlertOverlay from "./SosAlertOverlay";
 import styles from "./NotificationBell.module.css";
+
+const SOS_SIREN_SECONDS = 10;
 
 // § live UX review, user-directed - "clicking a notification should
 // take me to the thing it needs" (e.g. something awaiting approval
@@ -16,12 +20,19 @@ import styles from "./NotificationBell.module.css";
 // to the one screen where its underlying record is actually reviewed/
 // acted on; a type with no dedicated action screen just goes to the
 // Dashboard rather than nowhere.
+//
+// § live UX review, user-directed - "an SOS alert should go to a real
+// Emergency Log, not the Manager Console" - sos_alert now routes to
+// /emergency-log (with its own alertId appended by handleSelect/
+// handleViewSos below, this bare fallback only fires if a stored
+// notification is somehow missing its relatedEntityId).
 function notificationRoute(type: string): string {
   switch (type) {
     case "exception_pending_review":
     case "out_of_zone_manager":
-    case "sos_alert":
       return "/manager";
+    case "sos_alert":
+      return "/emergency-log";
     case "out_of_zone_employee":
     case "correction_reviewed":
     case "break_exceeded":
@@ -48,19 +59,60 @@ export default function NotificationBell() {
   // so the very first load of the session never itself sounds an alert.
   const seenIdsRef = useRef<Set<string> | undefined>(undefined);
 
+  // § live UX review, user-directed - "SOS shouldn't just be a
+  // notification - a continuous siren for 10 seconds, and a siren
+  // image on screen for the Admin/Owner." activeSosAlert drives
+  // SosAlertOverlay below; sirenStopRef/sirenTimeoutRef let a later
+  // dismiss (or a fresh SOS arriving mid-siren) cut the current one
+  // short instead of letting two overlap.
+  const [activeSosAlert, setActiveSosAlert] = useState<AppNotification | null>(null);
+  const sirenStopRef = useRef<(() => void) | null>(null);
+  const sirenTimeoutRef = useRef<number | null>(null);
+
+  const clearSiren = useCallback(() => {
+    if (sirenTimeoutRef.current !== null) {
+      window.clearTimeout(sirenTimeoutRef.current);
+      sirenTimeoutRef.current = null;
+    }
+    if (sirenStopRef.current) {
+      sirenStopRef.current();
+      sirenStopRef.current = null;
+    }
+  }, []);
+
+  const triggerSosAlert = useCallback(
+    (notification: AppNotification) => {
+      clearSiren();
+      setActiveSosAlert(notification);
+      const handle = playSirenSound(SOS_SIREN_SECONDS);
+      sirenStopRef.current = handle.stop;
+      sirenTimeoutRef.current = window.setTimeout(() => {
+        clearSiren();
+        setActiveSosAlert(null);
+      }, SOS_SIREN_SECONDS * 1000);
+    },
+    [clearSiren],
+  );
+
+  useEffect(() => () => clearSiren(), [clearSiren]);
+
   const load = useCallback(async () => {
     if (!profile) return;
     const result = await NotificationRepository.listRecent();
     const list = result.success ? result.data ?? [] : [];
     setNotifications(list);
 
-    const currentIds = new Set(list.map((notification) => notification.id));
     if (seenIdsRef.current) {
-      const hasNew = list.some((notification) => !seenIdsRef.current!.has(notification.id));
-      if (hasNew) playAlertSound();
+      const newOnes = list.filter((notification) => !seenIdsRef.current!.has(notification.id));
+      const newSosAlert = newOnes.find((notification) => notification.type === "sos_alert");
+      if (newSosAlert) {
+        triggerSosAlert(newSosAlert);
+      } else if (newOnes.length > 0) {
+        playAlertSound();
+      }
     }
-    seenIdsRef.current = currentIds;
-  }, [profile]);
+    seenIdsRef.current = new Set(list.map((notification) => notification.id));
+  }, [profile, triggerSosAlert]);
 
   useEffect(() => {
     load();
@@ -89,7 +141,28 @@ export default function NotificationBell() {
       load();
     }
     setOpen(false);
+    if (notification.type === "sos_alert" && notification.relatedEntityId) {
+      navigate(`/emergency-log?alertId=${notification.relatedEntityId}`);
+      return;
+    }
     navigate(notificationRoute(notification.type));
+  };
+
+  const handleDismissSos = () => {
+    clearSiren();
+    setActiveSosAlert(null);
+  };
+
+  const handleViewSos = async () => {
+    const notification = activeSosAlert;
+    if (!notification) return;
+    clearSiren();
+    setActiveSosAlert(null);
+    if (!notification.readAt) {
+      await NotificationRepository.markRead(notification.id);
+      load();
+    }
+    navigate(notification.relatedEntityId ? `/emergency-log?alertId=${notification.relatedEntityId}` : "/emergency-log");
   };
 
   return (
@@ -117,6 +190,14 @@ export default function NotificationBell() {
             })
           )}
         </div>
+      ) : null}
+
+      {activeSosAlert ? (
+        <SosAlertOverlay
+          employeeName={typeof activeSosAlert.data?.employeeName === "string" ? activeSosAlert.data.employeeName : ""}
+          onView={handleViewSos}
+          onDismiss={handleDismissSos}
+        />
       ) : null}
     </div>
   );

@@ -63,11 +63,18 @@
     "sites": "Sites",
     "manager": "Manager Console",
     "attendance": "Attendance Record",
+    "emergencyLog": "Emergency Log",
     "timesheets": "Timesheets",
     "allowances": "Allowances",
     "reports": "Reports",
     "settings": "Settings",
     "help": "Help"
+  },
+  "sosOverlay": {
+    "title": "SOS/Emergency alert",
+    "subtitle": "{{name}} just triggered an emergency alert.",
+    "viewAction": "View Emergency Log",
+    "dismissAction": "Dismiss"
   },
   "sections": {
     "attendance": "Attendance",

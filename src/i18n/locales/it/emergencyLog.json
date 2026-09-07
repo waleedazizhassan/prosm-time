@@ -1,0 +1,36 @@
+{
+  "title": "Registro emergenze",
+  "subtitle": "Ogni allarme SOS/emergenza - posizione GPS esatta, orario, dipendente e sede.",
+  "loadError": "Impossibile caricare il registro emergenze.",
+  "filters": {
+    "title": "Periodo",
+    "fromLabel": "Dal",
+    "toLabel": "Al",
+    "employeeLabel": "Dipendente",
+    "allEmployees": "Tutti i dipendenti"
+  },
+  "columns": {
+    "employee": "Dipendente",
+    "site": "Sede",
+    "triggeredAt": "Attivato alle",
+    "location": "Posizione",
+    "status": "Stato"
+  },
+  "status": {
+    "active": "Attivo",
+    "resolved": "Risolto"
+  },
+  "empty": "Nessun allarme di emergenza in questo periodo.",
+  "detail": {
+    "title": "Allarme di emergenza",
+    "employeeLabel": "Dipendente",
+    "siteLabel": "Sede di lavoro",
+    "triggeredAtLabel": "Attivato alle",
+    "locationLabel": "Posizione GPS esatta",
+    "accuracyLabel": "Precisione GPS: ±{{meters}} m",
+    "resolvedAtLabel": "Risolto alle",
+    "resolutionNotesLabel": "Note di risoluzione",
+    "resolveAction": "Segna come risolto",
+    "resolveError": "Impossibile risolvere questo allarme."
+  }
+}

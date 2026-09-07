@@ -63,11 +63,18 @@
     "sites": "Sedi",
     "manager": "Console manager",
     "attendance": "Registro presenze",
+    "emergencyLog": "Registro emergenze",
     "timesheets": "Fogli ore",
     "allowances": "Indennità",
     "reports": "Report",
     "settings": "Impostazioni",
     "help": "Assistenza"
+  },
+  "sosOverlay": {
+    "title": "Allarme SOS/Emergenza",
+    "subtitle": "{{name}} ha appena attivato un allarme di emergenza.",
+    "viewAction": "Vedi registro emergenze",
+    "dismissAction": "Ignora"
   },
   "sections": {
     "attendance": "Presenze",

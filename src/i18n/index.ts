@@ -95,6 +95,12 @@ import frSettings from "./locales/fr/settings.json";
 import deSettings from "./locales/de/settings.json";
 import itSettings from "./locales/it/settings.json";
 
+import enEmergencyLog from "./locales/en/emergencyLog.json";
+import arEmergencyLog from "./locales/ar/emergencyLog.json";
+import frEmergencyLog from "./locales/fr/emergencyLog.json";
+import deEmergencyLog from "./locales/de/emergencyLog.json";
+import itEmergencyLog from "./locales/it/emergencyLog.json";
+
 // PROSM Time i18n bootstrap. One namespace per screen/domain area,
 // exactly the way PROSM Platform's own src/i18n/index.js does - never
 // raw strings in components. `shell` is the application shell's own
@@ -104,11 +110,11 @@ import itSettings from "./locales/it/settings.json";
 // Management + Map/Geofence, Project Management, §13/§14).
 
 const resources = {
-  en: { common: enCommon, auth: enAuth, dashboard: enDashboard, people: enPeople, shell: enShell, sites: enSites, manager: enManager, attendanceLog: enAttendanceLog, timesheets: enTimesheets, allowances: enAllowances, kiosk: enKiosk, help: enHelp, camera: enCamera, reports: enReports, settings: enSettings },
-  ar: { common: arCommon, auth: arAuth, dashboard: arDashboard, people: arPeople, shell: arShell, sites: arSites, manager: arManager, attendanceLog: arAttendanceLog, timesheets: arTimesheets, allowances: arAllowances, kiosk: arKiosk, help: arHelp, camera: arCamera, reports: arReports, settings: arSettings },
-  fr: { common: frCommon, auth: frAuth, dashboard: frDashboard, people: frPeople, shell: frShell, sites: frSites, manager: frManager, attendanceLog: frAttendanceLog, timesheets: frTimesheets, allowances: frAllowances, kiosk: frKiosk, help: frHelp, camera: frCamera, reports: frReports, settings: frSettings },
-  de: { common: deCommon, auth: deAuth, dashboard: deDashboard, people: dePeople, shell: deShell, sites: deSites, manager: deManager, attendanceLog: deAttendanceLog, timesheets: deTimesheets, allowances: deAllowances, kiosk: deKiosk, help: deHelp, camera: deCamera, reports: deReports, settings: deSettings },
-  it: { common: itCommon, auth: itAuth, dashboard: itDashboard, people: itPeople, shell: itShell, sites: itSites, manager: itManager, attendanceLog: itAttendanceLog, timesheets: itTimesheets, allowances: itAllowances, kiosk: itKiosk, help: itHelp, camera: itCamera, reports: itReports, settings: itSettings },
+  en: { common: enCommon, auth: enAuth, dashboard: enDashboard, people: enPeople, shell: enShell, sites: enSites, manager: enManager, attendanceLog: enAttendanceLog, timesheets: enTimesheets, allowances: enAllowances, kiosk: enKiosk, help: enHelp, camera: enCamera, reports: enReports, settings: enSettings, emergencyLog: enEmergencyLog },
+  ar: { common: arCommon, auth: arAuth, dashboard: arDashboard, people: arPeople, shell: arShell, sites: arSites, manager: arManager, attendanceLog: arAttendanceLog, timesheets: arTimesheets, allowances: arAllowances, kiosk: arKiosk, help: arHelp, camera: arCamera, reports: arReports, settings: arSettings, emergencyLog: arEmergencyLog },
+  fr: { common: frCommon, auth: frAuth, dashboard: frDashboard, people: frPeople, shell: frShell, sites: frSites, manager: frManager, attendanceLog: frAttendanceLog, timesheets: frTimesheets, allowances: frAllowances, kiosk: frKiosk, help: frHelp, camera: frCamera, reports: frReports, settings: frSettings, emergencyLog: frEmergencyLog },
+  de: { common: deCommon, auth: deAuth, dashboard: deDashboard, people: dePeople, shell: deShell, sites: deSites, manager: deManager, attendanceLog: deAttendanceLog, timesheets: deTimesheets, allowances: deAllowances, kiosk: deKiosk, help: deHelp, camera: deCamera, reports: deReports, settings: deSettings, emergencyLog: deEmergencyLog },
+  it: { common: itCommon, auth: itAuth, dashboard: itDashboard, people: itPeople, shell: itShell, sites: itSites, manager: itManager, attendanceLog: itAttendanceLog, timesheets: itTimesheets, allowances: itAllowances, kiosk: itKiosk, help: itHelp, camera: itCamera, reports: itReports, settings: itSettings, emergencyLog: itEmergencyLog },
 };
 
 export const I18N_STORAGE_KEY = "prosm_time_language";
@@ -122,7 +128,7 @@ i18next
     fallbackLng: DEFAULT_LANGUAGE,
     supportedLngs: LANGUAGE_CODES,
 
-    ns: ["common", "auth", "dashboard", "people", "shell", "sites", "manager", "attendanceLog", "timesheets", "allowances", "kiosk", "help", "camera", "reports", "settings"],
+    ns: ["common", "auth", "dashboard", "people", "shell", "sites", "manager", "attendanceLog", "timesheets", "allowances", "kiosk", "help", "camera", "reports", "settings", "emergencyLog"],
     defaultNS: "common",
 
     // § live UX review, user-directed - a fresh install must default to

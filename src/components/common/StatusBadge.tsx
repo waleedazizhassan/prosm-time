@@ -28,6 +28,14 @@ const STATUS_TONE: Record<string, "success" | "warning" | "danger" | "info" | "n
   clockedIn: "success",
   onBreak: "warning",
   notClockedIn: "neutral",
+
+  // Emergency Log - an unresolved SOS alert is urgent (danger), a
+  // resolved one is a closed, no-longer-urgent record (success). Kept
+  // distinct from the plain "active"/"resolved"-style words above
+  // since a clocked-in session being "active" is a good, ordinary
+  // state (success) while an active SOS alert is the opposite.
+  sosActive: "danger",
+  sosResolved: "success",
 };
 
 export default function StatusBadge({ status, children }: { status: string; children: ReactNode }) {

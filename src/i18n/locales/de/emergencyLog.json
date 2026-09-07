@@ -1,0 +1,36 @@
+{
+  "title": "Notfallprotokoll",
+  "subtitle": "Jeder SOS-/Notfallalarm - exakter GPS-Standort, Uhrzeit, Mitarbeiter und Standort.",
+  "loadError": "Das Notfallprotokoll konnte nicht geladen werden.",
+  "filters": {
+    "title": "Zeitraum",
+    "fromLabel": "Von",
+    "toLabel": "Bis",
+    "employeeLabel": "Mitarbeiter",
+    "allEmployees": "Alle Mitarbeiter"
+  },
+  "columns": {
+    "employee": "Mitarbeiter",
+    "site": "Standort",
+    "triggeredAt": "Ausgelöst um",
+    "location": "Standort",
+    "status": "Status"
+  },
+  "status": {
+    "active": "Aktiv",
+    "resolved": "Behoben"
+  },
+  "empty": "Keine Notfallalarme in diesem Zeitraum.",
+  "detail": {
+    "title": "Notfallalarm",
+    "employeeLabel": "Mitarbeiter",
+    "siteLabel": "Arbeitsstandort",
+    "triggeredAtLabel": "Ausgelöst um",
+    "locationLabel": "Exakter GPS-Standort",
+    "accuracyLabel": "GPS-Genauigkeit: ±{{meters}} m",
+    "resolvedAtLabel": "Behoben am",
+    "resolutionNotesLabel": "Lösungshinweise",
+    "resolveAction": "Als behoben markieren",
+    "resolveError": "Dieser Alarm konnte nicht als behoben markiert werden."
+  }
+}

@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren } from "lucide-react";
 
 // § live UX review, user-directed - "professional reorganization" of
 // the Sidebar into grouped sections/"centers" instead of one flat
@@ -51,6 +51,13 @@ export const NAV_ITEMS: NavItem[] = [
   // the Owner), so every authenticated member can open this item and
   // simply gets their own scope back.
   { id: "attendance", labelKey: "items.attendance", path: "/attendance", icon: Clock, requiredPermission: null, section: "attendance" },
+  // § live UX review, user-directed - a real Emergency Log for SOS
+  // alerts (exact GPS location, time, employee, site), reached from
+  // both the sidebar and the notification bell/siren overlay. Gated on
+  // the same permission sos_alerts' own RLS uses for org-wide
+  // visibility - a plain employee sees nothing useful here (only their
+  // own alerts, if any), same as Manager Console's own gate.
+  { id: "emergencyLog", labelKey: "items.emergencyLog", path: "/emergency-log", icon: Siren, requiredPermission: "attendance.view", section: "attendance" },
   { id: "people", labelKey: "items.people", path: "/people", icon: Users, requiredPermission: "employees.view", section: "people" },
   { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage", section: "people" },
   // §22: "Employee reviews their period" - self-access to one's own

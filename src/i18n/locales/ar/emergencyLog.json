@@ -1,0 +1,36 @@
+{
+  "title": "سجل الطوارئ",
+  "subtitle": "كل تنبيه طوارئ (SOS) - موقع الجي بي إس الفعلي والوقت والموظف والموقع.",
+  "loadError": "تعذّر تحميل سجل الطوارئ.",
+  "filters": {
+    "title": "الفترة",
+    "fromLabel": "من",
+    "toLabel": "إلى",
+    "employeeLabel": "الموظف",
+    "allEmployees": "كل الموظفين"
+  },
+  "columns": {
+    "employee": "الموظف",
+    "site": "الموقع",
+    "triggeredAt": "وقت التنبيه",
+    "location": "الموقع الجغرافي",
+    "status": "الحالة"
+  },
+  "status": {
+    "active": "نشط",
+    "resolved": "تم الحل"
+  },
+  "empty": "لا توجد تنبيهات طوارئ في هذه الفترة.",
+  "detail": {
+    "title": "تنبيه طوارئ",
+    "employeeLabel": "الموظف",
+    "siteLabel": "موقع العمل",
+    "triggeredAtLabel": "وقت التنبيه",
+    "locationLabel": "الموقع الفعلي على الجي بي إس",
+    "accuracyLabel": "دقة الجي بي إس: ±{{meters}} م",
+    "resolvedAtLabel": "وقت الحل",
+    "resolutionNotesLabel": "ملاحظات الحل",
+    "resolveAction": "وضع علامة تم الحل",
+    "resolveError": "تعذّر حل هذا التنبيه."
+  }
+}
