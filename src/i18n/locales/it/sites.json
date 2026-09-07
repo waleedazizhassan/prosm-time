@@ -71,6 +71,8 @@
     "exemptEmployeesEmpty": "Nessun dipendente esentato per ora.",
     "attendanceAllowedLabel": "Presenza consentita",
     "geofenceRequiredLabel": "Geofence richiesto",
+    "presenceMonitoringEnabledLabel": "Monitoraggio continuo della presenza",
+    "presenceMonitoringEnabledHint": "Riverifica periodicamente la posizione durante un turno in questo sito, attiva il pulsante SOS e segnala se qualcuno lascia l'area dopo la timbratura. Disattivato per impostazione predefinita.",
     "cameraRequiredLabel": "Fotocamera richiesta",
     "activeLabel": "Sede attiva",
     "sitePolicyMovedHint": "Tolleranza di precisione GPS, periodo di tolleranza, politica del turno e dipendenti esentati si gestiscono da Impostazioni.",

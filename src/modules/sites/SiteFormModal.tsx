@@ -57,6 +57,7 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
   const [attendanceAllowed, setAttendanceAllowed] = useState(site?.attendanceAllowed ?? true);
   const [geofenceRequired, setGeofenceRequired] = useState(site?.geofenceRequired ?? true);
   const [cameraRequired, setCameraRequired] = useState(site?.cameraRequired ?? false);
+  const [presenceMonitoringEnabled, setPresenceMonitoringEnabled] = useState(site?.presenceMonitoringEnabled ?? false);
   const [isActive, setIsActive] = useState(site?.isActive ?? true);
 
   const [locating, setLocating] = useState(false);
@@ -127,6 +128,7 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
       geofenceRequired,
       cameraRequired,
       kioskMode,
+      presenceMonitoringEnabled,
     };
 
     const result = isEditing && site ? await SiteRepository.updateSite(site.id, { ...input, isActive }) : await SiteRepository.createSite(input);
@@ -220,6 +222,11 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
         <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.geofenceRequiredLabel")}</span>
         <Toggle checked={geofenceRequired} onChange={setGeofenceRequired} disabled={submitting} label={t("form.geofenceRequiredLabel")} />
       </div>
+      <div style={toggleRowStyle}>
+        <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.presenceMonitoringEnabledLabel")}</span>
+        <Toggle checked={presenceMonitoringEnabled} onChange={setPresenceMonitoringEnabled} disabled={submitting} label={t("form.presenceMonitoringEnabledLabel")} />
+      </div>
+      <p style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("form.presenceMonitoringEnabledHint")}</p>
       <div style={toggleRowStyle}>
         <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.cameraRequiredLabel")}</span>
         <Toggle checked={cameraRequired} onChange={setCameraRequired} disabled={submitting} label={t("form.cameraRequiredLabel")} />

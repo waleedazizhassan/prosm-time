@@ -238,6 +238,7 @@ export default function ClockInOutCard() {
                 breakRoundingMode: "cumulative" as const,
                 blockSelfClockInAfterGrace: false,
                 blockSelfClockOutOutsideGeofence: false,
+                presenceMonitoringEnabled: false,
                 createdAt: new Date().toISOString(),
               }));
             return additions.length > 0 ? [...current, ...additions] : current;

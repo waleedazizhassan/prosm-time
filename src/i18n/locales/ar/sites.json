@@ -71,6 +71,8 @@
     "exemptEmployeesEmpty": "لا يوجد موظفون مستثنون حتى الآن.",
     "attendanceAllowedLabel": "الحضور مسموح",
     "geofenceRequiredLabel": "النطاق الجغرافي مطلوب",
+    "presenceMonitoringEnabledLabel": "متابعة الوجود المستمرة",
+    "presenceMonitoringEnabledHint": "تعيد فحص الموقع بشكل دوري أثناء الشيفت في هذا الموقع، وتفعّل زر الطوارئ (SOS)، وتُبلّغ لو حد خرج من النطاق بعد تسجيل الحضور. مُعطّلة افتراضيًا.",
     "cameraRequiredLabel": "الكاميرا مطلوبة",
     "activeLabel": "الموقع نشط",
     "sitePolicyMovedHint": "هامش دقة GPS، وفترة السماح، وسياسة الشيفت، والموظفون المستثنون - كل ده بيتدار من الإعدادات.",

@@ -41,6 +41,13 @@ export interface Site {
   // site's geofence is blocked outright (not just recorded as an
   // exception) when this is on, mirroring blockSelfClockInAfterGrace.
   blockSelfClockOutOutsideGeofence: boolean;
+  // § real bug fix, 2026-09-07 - gates ongoing GPS re-checks during a
+  // shift, the SOS button, and geofence-exit-during-shift
+  // notifications (WP-10's presence_sessions are only opened for a
+  // site-based clock-in when this is true). Defaulted to false at the
+  // schema level and, until this fix, had no way to be turned on -
+  // permanently stuck off for every site.
+  presenceMonitoringEnabled: boolean;
   createdAt: string;
 }
 
@@ -94,6 +101,7 @@ export interface SiteInput {
   breakRoundingMode?: BreakRoundingMode;
   blockSelfClockInAfterGrace?: boolean;
   blockSelfClockOutOutsideGeofence?: boolean;
+  presenceMonitoringEnabled?: boolean;
   // update-only: explicitly blanks out an already-configured shift
   // policy (time fields have no other "unset" signal once a real
   // time has been set, since the RPC's coalesce-based partial update
@@ -131,6 +139,7 @@ interface SiteRow {
   break_rounding_mode: BreakRoundingMode;
   block_self_clock_in_after_grace: boolean;
   block_self_clock_out_outside_geofence: boolean;
+  presence_monitoring_enabled: boolean;
   created_at: string;
 }
 
@@ -165,6 +174,7 @@ function mapSiteRow(row: SiteRow): Site {
     breakRoundingMode: row.break_rounding_mode,
     blockSelfClockInAfterGrace: row.block_self_clock_in_after_grace,
     blockSelfClockOutOutsideGeofence: row.block_self_clock_out_outside_geofence,
+    presenceMonitoringEnabled: row.presence_monitoring_enabled,
     createdAt: row.created_at,
   };
 }
@@ -287,6 +297,7 @@ class SiteRepository {
         p_break_rounding_mode: input.breakRoundingMode,
         p_block_self_clock_in_after_grace: input.blockSelfClockInAfterGrace,
         p_block_self_clock_out_outside_geofence: input.blockSelfClockOutOutsideGeofence,
+        p_presence_monitoring_enabled: input.presenceMonitoringEnabled,
       });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to create this site.");
@@ -326,6 +337,7 @@ class SiteRepository {
         p_block_self_clock_in_after_grace: input.blockSelfClockInAfterGrace,
         p_clear_shift_policy: input.clearShiftPolicy ?? false,
         p_block_self_clock_out_outside_geofence: input.blockSelfClockOutOutsideGeofence,
+        p_presence_monitoring_enabled: input.presenceMonitoringEnabled,
       });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to update this site.");

@@ -71,6 +71,8 @@
     "exemptEmployeesEmpty": "No employees exempted yet.",
     "attendanceAllowedLabel": "Attendance allowed",
     "geofenceRequiredLabel": "Geofence required",
+    "presenceMonitoringEnabledLabel": "Ongoing presence monitoring",
+    "presenceMonitoringEnabledHint": "Re-checks location periodically during a shift at this site, enables the SOS button, and reports if someone leaves the area after clocking in. Off by default.",
     "cameraRequiredLabel": "Camera required",
     "activeLabel": "Site active",
     "sitePolicyMovedHint": "GPS accuracy tolerance, grace period, shift policy and exempt employees are managed from Settings.",

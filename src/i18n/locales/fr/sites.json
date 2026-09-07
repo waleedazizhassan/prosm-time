@@ -71,6 +71,8 @@
     "exemptEmployeesEmpty": "Aucun employé exempté pour l'instant.",
     "attendanceAllowedLabel": "Présence autorisée",
     "geofenceRequiredLabel": "Géorepérage requis",
+    "presenceMonitoringEnabledLabel": "Suivi de présence continu",
+    "presenceMonitoringEnabledHint": "Revérifie périodiquement la position pendant un poste sur ce site, active le bouton SOS et signale si quelqu'un quitte la zone après avoir pointé. Désactivé par défaut.",
     "cameraRequiredLabel": "Caméra requise",
     "activeLabel": "Site actif",
     "sitePolicyMovedHint": "La tolérance de précision GPS, la période de tolérance, la politique de shift et les employés exemptés sont gérés depuis Paramètres.",
