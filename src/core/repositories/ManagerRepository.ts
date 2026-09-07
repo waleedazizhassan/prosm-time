@@ -140,13 +140,28 @@ class ManagerRepository {
   // clock_in_at range differs between "today" and an arbitrary
   // caller-picked period; the session/presence/evidence joins and row
   // shaping are otherwise identical.
-  private async fetchAttendanceRows(fromIso: string, toIso?: string): Promise<ServiceResult<TodayAttendanceRow[]>> {
+  private async fetchAttendanceRows(fromIso: string, toIso?: string, includeOpenSessions = false): Promise<ServiceResult<TodayAttendanceRow[]>> {
     try {
       let sessionsQuery = this.client
         .from("attendance_sessions")
         .select("id, user_id, status, clock_in_at, clock_out_at, manual_location_label, users(full_name), sites(name)")
-        .gte("clock_in_at", fromIso)
         .order("clock_in_at", { ascending: false });
+
+      // Real bug fix - listTodayAttendance's own "Currently present" KPI
+      // used a plain clock_in_at >= startOfDay filter, so anyone who
+      // clocked in before local midnight and simply never clocked out
+      // (still status='clocked_in') silently vanished from Currently
+      // Present the instant the calendar day rolled over, despite the
+      // Attendance Record still correctly showing them as clocked in
+      // (it queries the same rows, unfiltered by this bug). An open
+      // session belongs in "today" regardless of when its own clock-in
+      // happened - only listAttendanceHistory's own caller-picked range
+      // (includeOpenSessions left false) should stay a strict date filter.
+      if (includeOpenSessions) {
+        sessionsQuery = sessionsQuery.or(`clock_in_at.gte.${fromIso},status.eq.clocked_in`);
+      } else {
+        sessionsQuery = sessionsQuery.gte("clock_in_at", fromIso);
+      }
       if (toIso) sessionsQuery = sessionsQuery.lte("clock_in_at", toIso);
 
       const [sessionsResult, presenceResult] = await Promise.all([
@@ -277,7 +292,7 @@ class ManagerRepository {
   async listTodayAttendance(): Promise<ServiceResult<TodayAttendanceRow[]>> {
     const startOfDay = new Date();
     startOfDay.setHours(0, 0, 0, 0);
-    return this.fetchAttendanceRows(startOfDay.toISOString());
+    return this.fetchAttendanceRows(startOfDay.toISOString(), undefined, true);
   }
 
   // Attendance Record screen - same underlying rows as
