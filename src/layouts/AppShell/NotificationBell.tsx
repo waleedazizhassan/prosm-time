@@ -12,7 +12,7 @@ import localizeNotification from "../../core/utils/localizeNotification";
 import SosAlertOverlay from "./SosAlertOverlay";
 import styles from "./NotificationBell.module.css";
 
-const SOS_SIREN_SECONDS = 10;
+const SOS_SIREN_SECONDS = 30;
 
 // § live UX review, user-directed - "clicking a notification should
 // take me to the thing it needs" (e.g. something awaiting approval

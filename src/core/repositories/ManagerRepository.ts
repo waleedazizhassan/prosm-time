@@ -401,7 +401,12 @@ class ManagerRepository {
       const { data, error } = await this.client
         .from("sos_alerts")
         .select(
-          "id, triggered_at, latitude, longitude, accuracy_meters, status, resolved_at, resolution_notes, users(full_name, email), presence_sessions(site_id, sites(name, display_address))",
+          // sos_alerts has two FKs into users (user_id - the alerting
+          // employee - and resolved_by), so a bare "users(...)" embed
+          // is ambiguous to PostgREST and fails to load entirely
+          // (PGRST201). The !sos_alerts_user_id_fkey hint picks the
+          // alerting employee's own relationship explicitly.
+          "id, triggered_at, latitude, longitude, accuracy_meters, status, resolved_at, resolution_notes, users!sos_alerts_user_id_fkey(full_name, email), presence_sessions(site_id, sites(name, display_address))",
         )
         .gte("triggered_at", from)
         .lte("triggered_at", to)

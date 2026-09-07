@@ -3,7 +3,7 @@ export interface SirenHandle {
 }
 
 // PROSM Time - user-directed: SOS/emergency notifications need more
-// than the standard alert beep - "a continuous siren sound for 10
+// than the standard alert beep - "a continuous siren sound for 30
 // seconds." Synthesized via the Web Audio API (same posture as
 // playAlertSound.ts - no licensed audio asset in this repo): a single
 // oscillator sweeping between two frequencies on a ~1s cycle, the
@@ -13,7 +13,7 @@ export interface SirenHandle {
 // duration. Best-effort only, matching every other client-only
 // capability in this codebase - a browser that blocks autoplay/Web
 // Audio never surfaces as an error, it's just silent.
-export default function playSirenSound(durationSeconds = 10): SirenHandle {
+export default function playSirenSound(durationSeconds = 30): SirenHandle {
   const noop: SirenHandle = { stop: () => {} };
   try {
     const AudioContextClass = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
