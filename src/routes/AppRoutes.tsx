@@ -25,6 +25,7 @@ import SchedulePage from "../modules/schedule/SchedulePage";
 import EmergencyLogPage from "../modules/emergency/EmergencyLogPage";
 import ReportsPage from "../modules/reports/ReportsPage";
 import OrganizationSettingsPage from "../modules/settings/OrganizationSettingsPage";
+import IntegrationsPage from "../modules/settings/IntegrationsPage";
 import KioskPage from "../modules/kiosk/KioskPage";
 import HelpPage from "../modules/help/HelpPage";
 
@@ -83,6 +84,7 @@ export default function AppRoutes() {
             <Route path="/emergency-log" element={<EmergencyLogPage />} />
             <Route path="/reports" element={<ReportsPage />} />
             <Route path="/settings" element={<OrganizationSettingsPage />} />
+            <Route path="/integrations" element={<IntegrationsPage />} />
             <Route path="/kiosk/:siteId" element={<KioskPage />} />
             <Route path="/help" element={<HelpPage />} />
           </Route>

@@ -75,6 +75,7 @@
     "schedule": "Schedule",
     "reports": "Reports",
     "settings": "Settings",
+    "integrations": "API",
     "help": "Help"
   },
   "sosOverlay": {

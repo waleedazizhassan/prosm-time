@@ -7,7 +7,6 @@ import PageShell from "../../components/common/PageShell";
 import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
 import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
-import IntegrationsSettingsCard from "./IntegrationsSettingsCard";
 import PayrollIntegrationCard from "./PayrollIntegrationCard";
 
 // PROSM Time - § live UX review, user-directed: "a professional
@@ -32,7 +31,6 @@ export default function OrganizationSettingsPage() {
       <NoSiteRadiusSettingsCard />
       <SiteDefaultsSettingsCard />
       <SitePolicySettingsCard />
-      <IntegrationsSettingsCard />
       <PayrollIntegrationCard />
     </PageShell>
   );

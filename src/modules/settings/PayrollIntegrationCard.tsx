@@ -182,25 +182,34 @@ function ProviderPanel({ provider, providerKey }: { provider: PayrollProviderRep
   );
 }
 
+// § user-directed 2026-09-09: Xero and Gusto stay fully built
+// (schema/RPCs/Edge Functions untouched, PROVIDERS map below still
+// carries all three) but are hidden from this UI for now - only
+// QuickBooks has real credentials configured, and showing a picker
+// over two dormant options was more confusing than useful. Restoring
+// them later is a one-line change: set VISIBLE_PROVIDERS back to
+// PROVIDER_ORDER (or add a provider selector again once more than one
+// is real) - no backend work needed.
+const PROVIDER_ORDER: ProviderKey[] = ["quickbooks", "xero", "gusto"];
+const VISIBLE_PROVIDERS: ProviderKey[] = ["quickbooks"];
+
 export default function PayrollIntegrationCard() {
   const { t } = useTranslation("settings");
-  const [selected, setSelected] = useState<ProviderKey>("quickbooks");
+  const [selected, setSelected] = useState<ProviderKey>(VISIBLE_PROVIDERS[0]);
 
   return (
     <Card title={t("payroll.title")}>
-      <div style={{ marginBottom: "var(--space-3)", maxWidth: 280 }}>
-        <Select
-          label={t("payroll.providerLabel")}
-          name="payrollProvider"
-          value={selected}
-          onChange={(event) => setSelected(event.target.value as ProviderKey)}
-          options={[
-            { value: "quickbooks", label: t("payroll.providers.quickbooks") },
-            { value: "xero", label: t("payroll.providers.xero") },
-            { value: "gusto", label: t("payroll.providers.gusto") },
-          ]}
-        />
-      </div>
+      {VISIBLE_PROVIDERS.length > 1 ? (
+        <div style={{ marginBottom: "var(--space-3)", maxWidth: 280 }}>
+          <Select
+            label={t("payroll.providerLabel")}
+            name="payrollProvider"
+            value={selected}
+            onChange={(event) => setSelected(event.target.value as ProviderKey)}
+            options={PROVIDER_ORDER.filter((key) => VISIBLE_PROVIDERS.includes(key)).map((key) => ({ value: key, label: t(`payroll.providers.${key}`) }))}
+          />
+        </div>
+      ) : null}
       <ProviderPanel key={selected} provider={PROVIDERS[selected]} providerKey={selected} />
     </Card>
   );
