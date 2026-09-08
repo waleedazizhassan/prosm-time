@@ -50,6 +50,11 @@
       "unpaid": "Unbezahlt",
       "emergency": "Notfall",
       "other": "Sonstiges"
-    }
+    },
+    "revokeTitle": "Genehmigten Urlaub widerrufen",
+    "revokeHint": "Bereits genehmigter, bevorstehender Urlaub - verwenden Sie dies, wenn sich die Pläne geändert haben und der Urlaub nachträglich storniert werden muss.",
+    "revokeEmpty": "Kein genehmigter bevorstehender Urlaub zum Widerrufen.",
+    "revokeAction": "Widerrufen",
+    "revokeReasonLabel": "Grund (erforderlich)"
   }
 }

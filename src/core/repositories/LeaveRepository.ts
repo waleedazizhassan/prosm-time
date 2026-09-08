@@ -34,6 +34,19 @@ export interface PendingLeaveReviewRow {
   createdAt: string;
 }
 
+export interface ApprovedLeaveRow {
+  id: string;
+  userId: string;
+  employeeName: string;
+  leaveType: LeaveType;
+  startDate: string;
+  endDate: string;
+  daysCount: number;
+  reason: string | null;
+  reviewedByName: string | null;
+  reviewedAt: string | null;
+}
+
 export interface LeaveBalanceEntry {
   leaveType: LeaveType;
   entitledDays: number | null;
@@ -179,6 +192,51 @@ class LeaveRepository {
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Leave service unavailable.");
     }
+  }
+
+  async listApproved(upcomingOnly = true): Promise<ServiceResult<ApprovedLeaveRow[]>> {
+    try {
+      const { data, error } = await this.client.rpc("list_prosm_time_approved_leave_requests", { p_upcoming_only: upcomingOnly });
+      if (error) return createError(error.message);
+      return createSuccess(
+        (data ?? []).map(
+          (row: {
+            id: string;
+            user_id: string;
+            employee_name: string;
+            leave_type: LeaveType;
+            start_date: string;
+            end_date: string;
+            days_count: number;
+            reason: string | null;
+            reviewed_by_name: string | null;
+            reviewed_at: string | null;
+          }) => ({
+            id: row.id,
+            userId: row.user_id,
+            employeeName: row.employee_name,
+            leaveType: row.leave_type,
+            startDate: row.start_date,
+            endDate: row.end_date,
+            daysCount: row.days_count,
+            reason: row.reason,
+            reviewedByName: row.reviewed_by_name,
+            reviewedAt: row.reviewed_at,
+          }),
+        ),
+      );
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Leave service unavailable.");
+    }
+  }
+
+  // Revoking an already-approved leave request reuses review_prosm_
+  // time_leave's own 'rejected' action - the RPC has always accepted
+  // this (see its own header comment), this repository method just
+  // names the real intent clearly at the call site rather than making
+  // every caller remember that "reject" is also how you revoke.
+  async revokeApproved(requestId: string, notes: string): Promise<ServiceResult> {
+    return this.review(requestId, "rejected", notes);
   }
 }
 

@@ -6,7 +6,7 @@ import { Camera } from "lucide-react";
 import { useAuth } from "../../core/context/AuthContext";
 import ManagerRepository, { type TodayAttendanceRow, type PendingReviewItem } from "../../core/repositories/ManagerRepository";
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
-import LeaveRepository, { type PendingLeaveReviewRow } from "../../core/repositories/LeaveRepository";
+import LeaveRepository, { type PendingLeaveReviewRow, type ApprovedLeaveRow } from "../../core/repositories/LeaveRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import PageShell from "../../components/common/PageShell";
@@ -68,18 +68,36 @@ export default function ManagerConsolePage() {
   const [leaveSubmitting, setLeaveSubmitting] = useState<"approved" | "rejected" | null>(null);
   const [leaveError, setLeaveError] = useState("");
 
+  // § live UX review, user-directed - a real gap found during a
+  // multi-role QA pass: cancel_prosm_time_leave_request's own error
+  // message pointed employees at "ask your manager to revoke an
+  // approved one," but review_prosm_time_leave's existing 'rejected'-
+  // on-'approved' capability had no listing surface to actually reach
+  // it from. This closes that gap - reuses the same review RPC, adds
+  // the missing "find an approved request to revoke" screen. A reason
+  // is required here (unlike an ordinary reject) since revoking
+  // already-approved leave is more disruptive - the employee may have
+  // already made plans around it.
+  const [approvedLeave, setApprovedLeave] = useState<ApprovedLeaveRow[]>([]);
+  const [revokeTarget, setRevokeTarget] = useState<ApprovedLeaveRow | null>(null);
+  const [revokeReason, setRevokeReason] = useState("");
+  const [revokeSubmitting, setRevokeSubmitting] = useState(false);
+  const [revokeError, setRevokeError] = useState("");
+
   const canManageExceptions = hasPermission("exceptions.manage");
 
   const load = useCallback(async () => {
     setLoading(true);
-    const [attendanceResult, pendingResult, pendingLeaveResult] = await Promise.all([
+    const [attendanceResult, pendingResult, pendingLeaveResult, approvedLeaveResult] = await Promise.all([
       ManagerRepository.listTodayAttendance(),
       ManagerRepository.listPendingReview(),
       canManageExceptions ? LeaveRepository.listPendingReview() : Promise.resolve({ success: true, message: null, data: [] as PendingLeaveReviewRow[] }),
+      canManageExceptions ? LeaveRepository.listApproved() : Promise.resolve({ success: true, message: null, data: [] as ApprovedLeaveRow[] }),
     ]);
     setAttendance(attendanceResult.success ? attendanceResult.data ?? [] : []);
     setPendingItems(pendingResult.success ? pendingResult.data ?? [] : []);
     setPendingLeave(pendingLeaveResult.success ? pendingLeaveResult.data ?? [] : []);
+    setApprovedLeave(approvedLeaveResult.success ? approvedLeaveResult.data ?? [] : []);
     setLoading(false);
   }, [canManageExceptions]);
 
@@ -126,6 +144,25 @@ export default function ManagerConsolePage() {
 
     setLeaveReviewTarget(null);
     setLeaveReviewNotes("");
+    load();
+  };
+
+  const handleRevoke = async () => {
+    if (!revokeTarget || !revokeReason.trim()) return;
+    setRevokeSubmitting(true);
+    setRevokeError("");
+
+    const result = await LeaveRepository.revokeApproved(revokeTarget.id, revokeReason.trim());
+
+    setRevokeSubmitting(false);
+
+    if (!result.success) {
+      setRevokeError(humanizeBackendError(result.message, t) ?? t("leave.reviewError"));
+      return;
+    }
+
+    setRevokeTarget(null);
+    setRevokeReason("");
     load();
   };
 
@@ -329,6 +366,53 @@ export default function ManagerConsolePage() {
       >
         <Textarea label={t("pending.notesLabel")} name="leaveReviewNotes" value={leaveReviewNotes} onChange={(event) => setLeaveReviewNotes(event.target.value)} disabled={Boolean(leaveSubmitting)} />
         <ErrorText>{leaveError}</ErrorText>
+      </Modal>
+
+      {canManageExceptions ? (
+        <Card title={t("leave.revokeTitle")}>
+          <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("leave.revokeHint")}</p>
+          {approvedLeave.length === 0 ? (
+            <EmptyState message={t("leave.revokeEmpty")} />
+          ) : (
+            approvedLeave.map((item) => (
+              <ListRow key={item.id}>
+                <div>
+                  <div style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)", fontWeight: "var(--font-weight-semibold)" }}>
+                    {item.employeeName} — {t(`leave.types.${item.leaveType}`)}
+                  </div>
+                  <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
+                    {formatDateOnly(item.startDate, i18n.language)} — {formatDateOnly(item.endDate, i18n.language)} ({item.daysCount} {t("leave.daysSuffix")})
+                  </div>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    setRevokeTarget(item);
+                    setRevokeReason("");
+                    setRevokeError("");
+                  }}
+                >
+                  {t("leave.revokeAction")}
+                </Button>
+              </ListRow>
+            ))
+          )}
+        </Card>
+      ) : null}
+
+      <Modal
+        isOpen={Boolean(revokeTarget)}
+        onClose={() => setRevokeTarget(null)}
+        title={revokeTarget ? `${revokeTarget.employeeName} — ${t(`leave.types.${revokeTarget.leaveType}`)}` : ""}
+        footer={
+          <Button variant="danger" onClick={handleRevoke} loading={revokeSubmitting} disabled={!revokeReason.trim()}>
+            {t("leave.revokeAction")}
+          </Button>
+        }
+      >
+        <Textarea label={t("leave.revokeReasonLabel")} name="revokeReason" value={revokeReason} onChange={(event) => setRevokeReason(event.target.value)} disabled={revokeSubmitting} />
+        <ErrorText>{revokeError}</ErrorText>
       </Modal>
 
       <Modal isOpen={Boolean(evidenceModalTitle)} onClose={closeEvidence} title={evidenceModalTitle ?? t("attendance.photoModalTitle")}>
