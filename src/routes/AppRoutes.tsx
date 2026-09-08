@@ -20,6 +20,7 @@ import AttendanceLogPage from "../modules/attendance/AttendanceLogPage";
 import TimesheetsPage from "../modules/timesheets/TimesheetsPage";
 import TimesheetReportPage from "../modules/timesheets/TimesheetReportPage";
 import AllowancesPage from "../modules/allowances/AllowancesPage";
+import LeaveRequestsPage from "../modules/leave/LeaveRequestsPage";
 import EmergencyLogPage from "../modules/emergency/EmergencyLogPage";
 import ReportsPage from "../modules/reports/ReportsPage";
 import OrganizationSettingsPage from "../modules/settings/OrganizationSettingsPage";
@@ -76,6 +77,7 @@ export default function AppRoutes() {
             <Route path="/timesheets" element={<TimesheetsPage />} />
             <Route path="/timesheets/:timesheetId/report" element={<TimesheetReportPage />} />
             <Route path="/allowances" element={<AllowancesPage />} />
+            <Route path="/leave" element={<LeaveRequestsPage />} />
             <Route path="/emergency-log" element={<EmergencyLogPage />} />
             <Route path="/reports" element={<ReportsPage />} />
             <Route path="/settings" element={<OrganizationSettingsPage />} />

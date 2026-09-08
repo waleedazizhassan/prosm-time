@@ -37,11 +37,14 @@
       "titleCorrection": "Richiesta di correzione in attesa della tua revisione",
       "bodyCorrection": "{{name}} ha inviato una richiesta di correzione.",
       "titleEarlyLeave": "Motivo dell'uscita anticipata inviato",
-      "bodyEarlyLeave": "{{name}} ha spiegato perché è uscito/a in anticipo."
+      "bodyEarlyLeave": "{{name}} ha spiegato perché è uscito/a in anticipo.",
+      "titleLeave": "Richiesta di ferie in attesa della tua revisione",
+      "bodyLeave": "{{name}} ha richiesto {{days}} giorno/i di ferie."
     },
     "correctionReviewed": {
       "titleException": "La tua eccezione è stata esaminata",
       "titleCorrection": "La tua richiesta di correzione è stata esaminata",
+      "titleLeave": "La tua richiesta di ferie è stata esaminata",
       "body": "Decisione: {{decision}}."
     },
     "breakExceeded": {
@@ -68,6 +71,7 @@
     "emergencyLog": "Registro emergenze",
     "timesheets": "Fogli ore",
     "allowances": "Indennità",
+    "leave": "Ferie",
     "reports": "Report",
     "settings": "Impostazioni",
     "help": "Assistenza"

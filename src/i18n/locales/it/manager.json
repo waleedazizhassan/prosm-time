@@ -36,5 +36,20 @@
       "acknowledged": "Presa visione",
       "clarification_requested": "Richiedi chiarimento"
     }
+  },
+  "leave": {
+    "title": "Richieste di ferie in attesa",
+    "empty": "Nessuna richiesta di ferie in attesa.",
+    "daysSuffix": "giorno/i",
+    "approveAction": "Approva",
+    "rejectAction": "Rifiuta",
+    "reviewError": "Impossibile esaminare questa richiesta di ferie.",
+    "types": {
+      "annual": "Annuali",
+      "sick": "Malattia",
+      "unpaid": "Non retribuite",
+      "emergency": "Emergenza",
+      "other": "Altro"
+    }
   }
 }

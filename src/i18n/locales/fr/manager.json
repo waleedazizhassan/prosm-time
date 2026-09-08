@@ -36,5 +36,20 @@
       "acknowledged": "Accuser réception",
       "clarification_requested": "Demander une clarification"
     }
+  },
+  "leave": {
+    "title": "Demandes de congé en attente",
+    "empty": "Aucune demande de congé en attente.",
+    "daysSuffix": "jour(s)",
+    "approveAction": "Approuver",
+    "rejectAction": "Rejeter",
+    "reviewError": "Impossible d'examiner cette demande de congé.",
+    "types": {
+      "annual": "Annuel",
+      "sick": "Maladie",
+      "unpaid": "Sans solde",
+      "emergency": "Urgence",
+      "other": "Autre"
+    }
   }
 }

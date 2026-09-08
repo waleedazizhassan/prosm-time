@@ -1,0 +1,40 @@
+{
+  "title": "Leave",
+  "subtitle": "Request time off and track your leave balance.",
+  "loadError": "Unable to load your leave requests.",
+  "submitError": "Unable to submit this leave request.",
+  "cancelError": "Unable to cancel this leave request.",
+  "cancelAction": "Cancel",
+  "balanceTitle": "Balance ({{year}})",
+  "daysRemainingSuffix": "days remaining",
+  "daysTakenSuffix": "days taken",
+  "balanceDetail": "{{used}} used, {{pending}} pending, {{entitled}} entitled",
+  "pendingSuffix": "{{pending}} pending",
+  "requestFormTitle": "Request leave",
+  "startDateLabel": "Start date",
+  "endDateLabel": "End date",
+  "reasonLabel": "Reason (optional)",
+  "submitAction": "Submit request",
+  "myRequestsTitle": "My requests",
+  "empty": "No leave requests yet.",
+  "columns": {
+    "type": "Type",
+    "dates": "Dates",
+    "days": "Days",
+    "reason": "Reason",
+    "status": "Status"
+  },
+  "types": {
+    "annual": "Annual",
+    "sick": "Sick",
+    "unpaid": "Unpaid",
+    "emergency": "Emergency",
+    "other": "Other"
+  },
+  "status": {
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "cancelled": "Cancelled"
+  }
+}

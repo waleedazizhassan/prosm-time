@@ -30,8 +30,12 @@ export default function localizeNotification(notification: AppNotification, t: T
     }
     case "exception_pending_review": {
       const name = typeof data.employeeName === "string" ? data.employeeName : null;
-      const kind = data.kind === "exception" || data.kind === "correction" || data.kind === "early_leave" ? data.kind : null;
+      const kind = data.kind === "exception" || data.kind === "correction" || data.kind === "early_leave" || data.kind === "leave" ? data.kind : null;
       if (!name || !kind) break;
+      if (kind === "leave") {
+        const days = typeof data.days === "number" ? data.days : null;
+        return { title: t("shell:notifications.exceptionPendingReview.titleLeave"), body: t("shell:notifications.exceptionPendingReview.bodyLeave", { name, days: days ?? "?" }) };
+      }
       const titleKey =
         kind === "exception"
           ? "shell:notifications.exceptionPendingReview.titleException"
@@ -47,12 +51,18 @@ export default function localizeNotification(notification: AppNotification, t: T
       return { title: t(titleKey), body: t(bodyKey, { name }) };
     }
     case "correction_reviewed": {
-      const kind = data.kind === "exception" || data.kind === "correction" ? data.kind : null;
+      const kind = data.kind === "exception" || data.kind === "correction" || data.kind === "leave" ? data.kind : null;
       const actionType = typeof data.actionType === "string" ? data.actionType : null;
       if (!kind || !actionType) break;
       const decision = t(`shell:notifications.decision.${actionType}`, { defaultValue: actionType });
+      const titleKey =
+        kind === "exception"
+          ? "shell:notifications.correctionReviewed.titleException"
+          : kind === "correction"
+            ? "shell:notifications.correctionReviewed.titleCorrection"
+            : "shell:notifications.correctionReviewed.titleLeave";
       return {
-        title: t(kind === "exception" ? "shell:notifications.correctionReviewed.titleException" : "shell:notifications.correctionReviewed.titleCorrection"),
+        title: t(titleKey),
         body: t("shell:notifications.correctionReviewed.body", { decision }),
       };
     }

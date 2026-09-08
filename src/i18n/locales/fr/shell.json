@@ -37,11 +37,14 @@
       "titleCorrection": "Demande de correction en attente de votre validation",
       "bodyCorrection": "{{name}} a soumis une demande de correction.",
       "titleEarlyLeave": "Motif de départ anticipé envoyé",
-      "bodyEarlyLeave": "{{name}} a expliqué la raison de son départ anticipé."
+      "bodyEarlyLeave": "{{name}} a expliqué la raison de son départ anticipé.",
+      "titleLeave": "Demande de congé en attente de votre validation",
+      "bodyLeave": "{{name}} a demandé {{days}} jour(s) de congé."
     },
     "correctionReviewed": {
       "titleException": "Votre exception a été examinée",
       "titleCorrection": "Votre demande de correction a été examinée",
+      "titleLeave": "Votre demande de congé a été examinée",
       "body": "Décision : {{decision}}."
     },
     "breakExceeded": {
@@ -68,6 +71,7 @@
     "emergencyLog": "Journal des urgences",
     "timesheets": "Feuilles de temps",
     "allowances": "Indemnités",
+    "leave": "Congés",
     "reports": "Rapports",
     "settings": "Paramètres",
     "help": "Aide"

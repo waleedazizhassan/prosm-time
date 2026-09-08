@@ -36,5 +36,20 @@
       "acknowledged": "Acknowledge",
       "clarification_requested": "Request Clarification"
     }
+  },
+  "leave": {
+    "title": "Leave Requests Awaiting Review",
+    "empty": "No leave requests awaiting review.",
+    "daysSuffix": "day(s)",
+    "approveAction": "Approve",
+    "rejectAction": "Reject",
+    "reviewError": "Unable to review this leave request.",
+    "types": {
+      "annual": "Annual",
+      "sick": "Sick",
+      "unpaid": "Unpaid",
+      "emergency": "Emergency",
+      "other": "Other"
+    }
   }
 }

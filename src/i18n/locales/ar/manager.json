@@ -36,5 +36,20 @@
       "acknowledged": "الإحاطة",
       "clarification_requested": "طلب توضيح"
     }
+  },
+  "leave": {
+    "title": "طلبات إجازة بانتظار المراجعة",
+    "empty": "لا توجد طلبات إجازة بانتظار المراجعة.",
+    "daysSuffix": "يوم",
+    "approveAction": "موافقة",
+    "rejectAction": "رفض",
+    "reviewError": "تعذر مراجعة طلب الإجازة هذا.",
+    "types": {
+      "annual": "سنوية",
+      "sick": "مرضية",
+      "unpaid": "بدون أجر",
+      "emergency": "طارئة",
+      "other": "أخرى"
+    }
   }
 }

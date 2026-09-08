@@ -1,0 +1,40 @@
+{
+  "title": "الإجازات",
+  "subtitle": "اطلب إجازة وتابع رصيدك.",
+  "loadError": "تعذر تحميل طلبات إجازتك.",
+  "submitError": "تعذر إرسال طلب الإجازة.",
+  "cancelError": "تعذر إلغاء طلب الإجازة.",
+  "cancelAction": "إلغاء",
+  "balanceTitle": "الرصيد ({{year}})",
+  "daysRemainingSuffix": "يوم متبقي",
+  "daysTakenSuffix": "يوم مستخدم",
+  "balanceDetail": "{{used}} مستخدم، {{pending}} قيد المراجعة، {{entitled}} المستحق",
+  "pendingSuffix": "{{pending}} قيد المراجعة",
+  "requestFormTitle": "طلب إجازة",
+  "startDateLabel": "تاريخ البداية",
+  "endDateLabel": "تاريخ النهاية",
+  "reasonLabel": "السبب (اختياري)",
+  "submitAction": "إرسال الطلب",
+  "myRequestsTitle": "طلباتي",
+  "empty": "لا توجد طلبات إجازة بعد.",
+  "columns": {
+    "type": "النوع",
+    "dates": "التواريخ",
+    "days": "الأيام",
+    "reason": "السبب",
+    "status": "الحالة"
+  },
+  "types": {
+    "annual": "سنوية",
+    "sick": "مرضية",
+    "unpaid": "بدون أجر",
+    "emergency": "طارئة",
+    "other": "أخرى"
+  },
+  "status": {
+    "pending": "قيد المراجعة",
+    "approved": "موافق عليها",
+    "rejected": "مرفوضة",
+    "cancelled": "ملغاة"
+  }
+}

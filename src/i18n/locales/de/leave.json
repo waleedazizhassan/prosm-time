@@ -1,0 +1,40 @@
+{
+  "title": "Urlaub",
+  "subtitle": "Urlaub beantragen und Ihr Guthaben verfolgen.",
+  "loadError": "Ihre Urlaubsanträge konnten nicht geladen werden.",
+  "submitError": "Dieser Urlaubsantrag konnte nicht gesendet werden.",
+  "cancelError": "Dieser Urlaubsantrag konnte nicht storniert werden.",
+  "cancelAction": "Stornieren",
+  "balanceTitle": "Guthaben ({{year}})",
+  "daysRemainingSuffix": "Tage verbleibend",
+  "daysTakenSuffix": "Tage genommen",
+  "balanceDetail": "{{used}} genutzt, {{pending}} ausstehend, {{entitled}} zustehend",
+  "pendingSuffix": "{{pending}} ausstehend",
+  "requestFormTitle": "Urlaub beantragen",
+  "startDateLabel": "Startdatum",
+  "endDateLabel": "Enddatum",
+  "reasonLabel": "Grund (optional)",
+  "submitAction": "Antrag senden",
+  "myRequestsTitle": "Meine Anträge",
+  "empty": "Noch keine Urlaubsanträge.",
+  "columns": {
+    "type": "Typ",
+    "dates": "Daten",
+    "days": "Tage",
+    "reason": "Grund",
+    "status": "Status"
+  },
+  "types": {
+    "annual": "Jahresurlaub",
+    "sick": "Krankheit",
+    "unpaid": "Unbezahlt",
+    "emergency": "Notfall",
+    "other": "Sonstiges"
+  },
+  "status": {
+    "pending": "Ausstehend",
+    "approved": "Genehmigt",
+    "rejected": "Abgelehnt",
+    "cancelled": "Storniert"
+  }
+}

@@ -37,11 +37,14 @@
       "titleCorrection": "Correction request awaiting your review",
       "bodyCorrection": "{{name}} submitted a correction request.",
       "titleEarlyLeave": "Early leave reason submitted",
-      "bodyEarlyLeave": "{{name}} explained why they left early."
+      "bodyEarlyLeave": "{{name}} explained why they left early.",
+      "titleLeave": "Leave request awaiting your review",
+      "bodyLeave": "{{name}} requested {{days}} day(s) of leave."
     },
     "correctionReviewed": {
       "titleException": "Your exception was reviewed",
       "titleCorrection": "Your correction request was reviewed",
+      "titleLeave": "Your leave request was reviewed",
       "body": "Decision: {{decision}}."
     },
     "breakExceeded": {
@@ -68,6 +71,7 @@
     "emergencyLog": "Emergency Log",
     "timesheets": "Timesheets",
     "allowances": "Allowances",
+    "leave": "Leave",
     "reports": "Reports",
     "settings": "Settings",
     "help": "Help"

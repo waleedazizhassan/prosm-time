@@ -37,11 +37,14 @@
       "titleCorrection": "Korrekturantrag wartet auf Ihre Prüfung",
       "bodyCorrection": "{{name}} hat einen Korrekturantrag eingereicht.",
       "titleEarlyLeave": "Grund für vorzeitiges Verlassen übermittelt",
-      "bodyEarlyLeave": "{{name}} hat erklärt, warum er/sie früher gegangen ist."
+      "bodyEarlyLeave": "{{name}} hat erklärt, warum er/sie früher gegangen ist.",
+      "titleLeave": "Urlaubsantrag wartet auf Ihre Prüfung",
+      "bodyLeave": "{{name}} hat {{days}} Urlaubstag(e) beantragt."
     },
     "correctionReviewed": {
       "titleException": "Ihre Ausnahme wurde geprüft",
       "titleCorrection": "Ihr Korrekturantrag wurde geprüft",
+      "titleLeave": "Ihr Urlaubsantrag wurde geprüft",
       "body": "Entscheidung: {{decision}}."
     },
     "breakExceeded": {
@@ -68,6 +71,7 @@
     "emergencyLog": "Notfallprotokoll",
     "timesheets": "Stundenzettel",
     "allowances": "Zulagen",
+    "leave": "Urlaub",
     "reports": "Berichte",
     "settings": "Einstellungen",
     "help": "Hilfe"

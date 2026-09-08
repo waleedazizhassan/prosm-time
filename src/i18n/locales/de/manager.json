@@ -36,5 +36,20 @@
       "acknowledged": "Zur Kenntnis genommen",
       "clarification_requested": "Klärung anfordern"
     }
+  },
+  "leave": {
+    "title": "Ausstehende Urlaubsanträge",
+    "empty": "Keine ausstehenden Urlaubsanträge.",
+    "daysSuffix": "Tag(e)",
+    "approveAction": "Genehmigen",
+    "rejectAction": "Ablehnen",
+    "reviewError": "Dieser Urlaubsantrag konnte nicht geprüft werden.",
+    "types": {
+      "annual": "Jahresurlaub",
+      "sick": "Krankheit",
+      "unpaid": "Unbezahlt",
+      "emergency": "Notfall",
+      "other": "Sonstiges"
+    }
   }
 }

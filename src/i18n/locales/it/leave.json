@@ -1,0 +1,40 @@
+{
+  "title": "Ferie",
+  "subtitle": "Richiedi le ferie e monitora il tuo saldo.",
+  "loadError": "Impossibile caricare le tue richieste di ferie.",
+  "submitError": "Impossibile inviare questa richiesta di ferie.",
+  "cancelError": "Impossibile annullare questa richiesta di ferie.",
+  "cancelAction": "Annulla",
+  "balanceTitle": "Saldo ({{year}})",
+  "daysRemainingSuffix": "giorni rimanenti",
+  "daysTakenSuffix": "giorni presi",
+  "balanceDetail": "{{used}} presi, {{pending}} in attesa, {{entitled}} spettanti",
+  "pendingSuffix": "{{pending}} in attesa",
+  "requestFormTitle": "Richiedi ferie",
+  "startDateLabel": "Data di inizio",
+  "endDateLabel": "Data di fine",
+  "reasonLabel": "Motivo (facoltativo)",
+  "submitAction": "Invia richiesta",
+  "myRequestsTitle": "Le mie richieste",
+  "empty": "Ancora nessuna richiesta di ferie.",
+  "columns": {
+    "type": "Tipo",
+    "dates": "Date",
+    "days": "Giorni",
+    "reason": "Motivo",
+    "status": "Stato"
+  },
+  "types": {
+    "annual": "Annuali",
+    "sick": "Malattia",
+    "unpaid": "Non retribuite",
+    "emergency": "Emergenza",
+    "other": "Altro"
+  },
+  "status": {
+    "pending": "In attesa",
+    "approved": "Approvata",
+    "rejected": "Rifiutata",
+    "cancelled": "Annullata"
+  }
+}

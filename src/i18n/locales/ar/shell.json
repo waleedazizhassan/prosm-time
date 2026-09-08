@@ -37,11 +37,14 @@
       "titleCorrection": "طلب تصحيح بانتظار مراجعتك",
       "bodyCorrection": "{{name}} أرسل طلب تصحيح.",
       "titleEarlyLeave": "تم إرسال سبب الانصراف المبكر",
-      "bodyEarlyLeave": "{{name}} أوضح سبب انصرافه مبكرًا."
+      "bodyEarlyLeave": "{{name}} أوضح سبب انصرافه مبكرًا.",
+      "titleLeave": "طلب إجازة بانتظار مراجعتك",
+      "bodyLeave": "{{name}} طلب إجازة لمدة {{days}} يوم."
     },
     "correctionReviewed": {
       "titleException": "تمت مراجعة الاستثناء الخاص بك",
       "titleCorrection": "تمت مراجعة طلب التصحيح الخاص بك",
+      "titleLeave": "تمت مراجعة طلب إجازتك",
       "body": "القرار: {{decision}}."
     },
     "breakExceeded": {
@@ -68,6 +71,7 @@
     "emergencyLog": "سجل الطوارئ",
     "timesheets": "كشوف الدوام",
     "allowances": "البدلات",
+    "leave": "الإجازات",
     "reports": "التقارير",
     "settings": "الإعدادات",
     "help": "المساعدة"

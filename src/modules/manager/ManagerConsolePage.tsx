@@ -6,6 +6,7 @@ import { Camera } from "lucide-react";
 import { useAuth } from "../../core/context/AuthContext";
 import ManagerRepository, { type TodayAttendanceRow, type PendingReviewItem } from "../../core/repositories/ManagerRepository";
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
+import LeaveRepository, { type PendingLeaveReviewRow } from "../../core/repositories/LeaveRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import PageShell from "../../components/common/PageShell";
@@ -55,15 +56,32 @@ export default function ManagerConsolePage() {
   const [evidenceLoading, setEvidenceLoading] = useState(false);
   const [evidenceError, setEvidenceError] = useState("");
 
+  // § user-directed - real PTO/leave management (20260908200000). A
+  // separate review queue rather than folded into pendingItems above -
+  // leave requests are a genuinely different domain (their own table,
+  // their own approve/reject RPC) from geofence exceptions/correction
+  // requests, and review-exception's own kind union would need real
+  // rework to absorb a third, unrelated kind for no real benefit.
+  const [pendingLeave, setPendingLeave] = useState<PendingLeaveReviewRow[]>([]);
+  const [leaveReviewTarget, setLeaveReviewTarget] = useState<PendingLeaveReviewRow | null>(null);
+  const [leaveReviewNotes, setLeaveReviewNotes] = useState("");
+  const [leaveSubmitting, setLeaveSubmitting] = useState<"approved" | "rejected" | null>(null);
+  const [leaveError, setLeaveError] = useState("");
+
   const canManageExceptions = hasPermission("exceptions.manage");
 
   const load = useCallback(async () => {
     setLoading(true);
-    const [attendanceResult, pendingResult] = await Promise.all([ManagerRepository.listTodayAttendance(), ManagerRepository.listPendingReview()]);
+    const [attendanceResult, pendingResult, pendingLeaveResult] = await Promise.all([
+      ManagerRepository.listTodayAttendance(),
+      ManagerRepository.listPendingReview(),
+      canManageExceptions ? LeaveRepository.listPendingReview() : Promise.resolve({ success: true, message: null, data: [] as PendingLeaveReviewRow[] }),
+    ]);
     setAttendance(attendanceResult.success ? attendanceResult.data ?? [] : []);
     setPendingItems(pendingResult.success ? pendingResult.data ?? [] : []);
+    setPendingLeave(pendingLeaveResult.success ? pendingLeaveResult.data ?? [] : []);
     setLoading(false);
-  }, []);
+  }, [canManageExceptions]);
 
   useEffect(() => {
     load();
@@ -89,6 +107,25 @@ export default function ManagerConsolePage() {
 
     setReviewTarget(null);
     setReviewNotes("");
+    load();
+  };
+
+  const handleLeaveReview = async (action: "approved" | "rejected") => {
+    if (!leaveReviewTarget) return;
+    setLeaveSubmitting(action);
+    setLeaveError("");
+
+    const result = await LeaveRepository.review(leaveReviewTarget.id, action, leaveReviewNotes.trim() || undefined);
+
+    setLeaveSubmitting(null);
+
+    if (!result.success) {
+      setLeaveError(humanizeBackendError(result.message, t) ?? t("leave.reviewError"));
+      return;
+    }
+
+    setLeaveReviewTarget(null);
+    setLeaveReviewNotes("");
     load();
   };
 
@@ -240,6 +277,58 @@ export default function ManagerConsolePage() {
         }
       >
         <Textarea label={t("pending.notesLabel")} name="reviewNotes" value={reviewNotes} onChange={(event) => setReviewNotes(event.target.value)} disabled={Boolean(submitting)} />
+      </Modal>
+
+      {canManageExceptions ? (
+        <Card title={t("leave.title")}>
+          {pendingLeave.length === 0 ? (
+            <EmptyState message={t("leave.empty")} />
+          ) : (
+            pendingLeave.map((item) => (
+              <ListRow key={item.id}>
+                <div>
+                  <div style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)", fontWeight: "var(--font-weight-semibold)" }}>
+                    {item.employeeName} — {t(`leave.types.${item.leaveType}`)}
+                  </div>
+                  <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
+                    {formatDateOnly(item.startDate, i18n.language)} — {formatDateOnly(item.endDate, i18n.language)} ({item.daysCount} {t("leave.daysSuffix")})
+                    {item.reason ? ` · ${item.reason}` : ""}
+                  </div>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    setLeaveReviewTarget(item);
+                    setLeaveReviewNotes("");
+                    setLeaveError("");
+                  }}
+                >
+                  {t("pending.reviewAction")}
+                </Button>
+              </ListRow>
+            ))
+          )}
+        </Card>
+      ) : null}
+
+      <Modal
+        isOpen={Boolean(leaveReviewTarget)}
+        onClose={() => setLeaveReviewTarget(null)}
+        title={leaveReviewTarget ? `${leaveReviewTarget.employeeName} — ${t(`leave.types.${leaveReviewTarget.leaveType}`)}` : ""}
+        footer={
+          <>
+            <Button variant="danger" onClick={() => handleLeaveReview("rejected")} loading={leaveSubmitting === "rejected"}>
+              {t("leave.rejectAction")}
+            </Button>
+            <Button onClick={() => handleLeaveReview("approved")} loading={leaveSubmitting === "approved"}>
+              {t("leave.approveAction")}
+            </Button>
+          </>
+        }
+      >
+        <Textarea label={t("pending.notesLabel")} name="leaveReviewNotes" value={leaveReviewNotes} onChange={(event) => setLeaveReviewNotes(event.target.value)} disabled={Boolean(leaveSubmitting)} />
+        <ErrorText>{leaveError}</ErrorText>
       </Modal>
 
       <Modal isOpen={Boolean(evidenceModalTitle)} onClose={closeEvidence} title={evidenceModalTitle ?? t("attendance.photoModalTitle")}>

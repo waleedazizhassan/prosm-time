@@ -1,0 +1,40 @@
+{
+  "title": "Congés",
+  "subtitle": "Demandez un congé et suivez votre solde.",
+  "loadError": "Impossible de charger vos demandes de congé.",
+  "submitError": "Impossible d'envoyer cette demande de congé.",
+  "cancelError": "Impossible d'annuler cette demande de congé.",
+  "cancelAction": "Annuler",
+  "balanceTitle": "Solde ({{year}})",
+  "daysRemainingSuffix": "jours restants",
+  "daysTakenSuffix": "jours pris",
+  "balanceDetail": "{{used}} pris, {{pending}} en attente, {{entitled}} accordés",
+  "pendingSuffix": "{{pending}} en attente",
+  "requestFormTitle": "Demander un congé",
+  "startDateLabel": "Date de début",
+  "endDateLabel": "Date de fin",
+  "reasonLabel": "Motif (facultatif)",
+  "submitAction": "Envoyer la demande",
+  "myRequestsTitle": "Mes demandes",
+  "empty": "Aucune demande de congé pour l'instant.",
+  "columns": {
+    "type": "Type",
+    "dates": "Dates",
+    "days": "Jours",
+    "reason": "Motif",
+    "status": "Statut"
+  },
+  "types": {
+    "annual": "Annuel",
+    "sick": "Maladie",
+    "unpaid": "Sans solde",
+    "emergency": "Urgence",
+    "other": "Autre"
+  },
+  "status": {
+    "pending": "En attente",
+    "approved": "Approuvé",
+    "rejected": "Rejeté",
+    "cancelled": "Annulé"
+  }
+}
