@@ -210,3 +210,38 @@ entrypoint = "./functions/quickbooks-oauth-callback/index.ts"
 enabled = true
 verify_jwt = true
 entrypoint = "./functions/sync-quickbooks-time-activity/index.ts"
+
+# Xero and Gusto payroll integrations - additional providers alongside
+# QuickBooks in the Settings > Payroll Integration selector. Same
+# verify_jwt posture per function role as QuickBooks above. Both are
+# deliberately dormant until XERO_CLIENT_ID/XERO_CLIENT_SECRET and
+# GUSTO_CLIENT_ID/GUSTO_CLIENT_SECRET exist as real secrets.
+[functions.xero-authorize]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/xero-authorize/index.ts"
+
+[functions.xero-oauth-callback]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/xero-oauth-callback/index.ts"
+
+[functions.sync-xero-timesheets]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/sync-xero-timesheets/index.ts"
+
+[functions.gusto-authorize]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/gusto-authorize/index.ts"
+
+[functions.gusto-oauth-callback]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/gusto-oauth-callback/index.ts"
+
+[functions.sync-gusto-hours]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/sync-gusto-hours/index.ts"

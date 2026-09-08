@@ -46,8 +46,17 @@
     "newKeyWarning": "Copiala ora - non verrà più mostrata. In seguito verrà conservato solo il suo prefisso.",
     "genericError": "Impossibile caricare le tue chiavi di integrazione."
   },
+  "payroll": {
+    "title": "Integrazione buste paga",
+    "providerLabel": "Provider",
+    "providers": {
+      "quickbooks": "QuickBooks Online",
+      "xero": "Xero",
+      "gusto": "Gusto"
+    },
+    "notConfigured": "Questa integrazione non è ancora configurata - chiedi al tuo amministratore di aggiungere le credenziali API."
+  },
   "quickbooks": {
-    "title": "QuickBooks Online",
     "hint": "Collega l'azienda QuickBooks Online della tua organizzazione per inviare automaticamente le ore lavorate verificate come voci Time Activity - abbinate ai dipendenti QuickBooks tramite email.",
     "notConnected": "Non ancora collegato.",
     "connectAction": "Collega QuickBooks",
@@ -62,5 +71,37 @@
     "neverSynced": "mai sincronizzato",
     "summary": "Ultima esecuzione: {{synced}} sincronizzati, {{skipped}} saltati (nessun dipendente corrispondente), {{failed}} falliti.",
     "unmatchedEmails": "Nessun dipendente QuickBooks trovato per: {{emails}}"
+  },
+  "xero": {
+    "hint": "Collega l'organizzazione Xero della tua azienda per inviare automaticamente le ore lavorate verificate come Payroll Timesheets - abbinate ai dipendenti Xero tramite email.",
+    "notConnected": "Non ancora collegato.",
+    "connectAction": "Collega Xero",
+    "connectError": "Impossibile avviare la connessione a Xero.",
+    "connectedTo": "Collegato a {{company}}",
+    "unnamedCompany": "la tua organizzazione Xero",
+    "disconnectAction": "Scollega",
+    "disconnectError": "Impossibile scollegare Xero.",
+    "syncAction": "Sincronizza ora",
+    "syncError": "Impossibile sincronizzare con Xero.",
+    "lastSynced": "ultima sincronizzazione {{time}}",
+    "neverSynced": "mai sincronizzato",
+    "summary": "Ultima esecuzione: {{synced}} sincronizzati, {{skipped}} saltati (nessun dipendente corrispondente), {{failed}} falliti.",
+    "unmatchedEmails": "Nessun dipendente Xero trovato per: {{emails}}"
+  },
+  "gusto": {
+    "hint": "Collega l'azienda Gusto della tua organizzazione per inviare le ore lavorate verificate - abbinate ai dipendenti Gusto tramite email. Gusto accetta le ore solo in un ciclo paghe attualmente aperto.",
+    "notConnected": "Non ancora collegato.",
+    "connectAction": "Collega Gusto",
+    "connectError": "Impossibile avviare la connessione a Gusto.",
+    "connectedTo": "Collegato a {{company}}",
+    "unnamedCompany": "la tua azienda Gusto",
+    "disconnectAction": "Scollega",
+    "disconnectError": "Impossibile scollegare Gusto.",
+    "syncAction": "Sincronizza ora",
+    "syncError": "Impossibile sincronizzare con Gusto.",
+    "lastSynced": "ultima sincronizzazione {{time}}",
+    "neverSynced": "mai sincronizzato",
+    "summary": "Ultima esecuzione: {{synced}} sincronizzati, {{skipped}} saltati (nessun dipendente corrispondente), {{failed}} falliti.",
+    "unmatchedEmails": "Nessun dipendente Gusto trovato per: {{emails}}"
   }
 }

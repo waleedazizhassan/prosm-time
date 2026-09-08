@@ -46,8 +46,17 @@
     "newKeyWarning": "Kopieren Sie ihn jetzt - er wird nicht erneut angezeigt. Danach wird nur sein Präfix gespeichert.",
     "genericError": "Ihre Integrationsschlüssel konnten nicht geladen werden."
   },
+  "payroll": {
+    "title": "Lohnbuchhaltungs-Integration",
+    "providerLabel": "Anbieter",
+    "providers": {
+      "quickbooks": "QuickBooks Online",
+      "xero": "Xero",
+      "gusto": "Gusto"
+    },
+    "notConfigured": "Diese Integration ist noch nicht eingerichtet - bitten Sie Ihren Administrator, die API-Zugangsdaten hinzuzufügen."
+  },
   "quickbooks": {
-    "title": "QuickBooks Online",
     "hint": "Verbinden Sie das QuickBooks-Online-Unternehmen Ihrer Organisation, um verifizierte Arbeitsstunden automatisch als Time-Activity-Einträge zu senden - abgeglichen mit QuickBooks-Mitarbeitern per E-Mail.",
     "notConnected": "Noch nicht verbunden.",
     "connectAction": "QuickBooks verbinden",
@@ -62,5 +71,37 @@
     "neverSynced": "noch nie synchronisiert",
     "summary": "Letzter Lauf: {{synced}} synchronisiert, {{skipped}} übersprungen (kein passender Mitarbeiter), {{failed}} fehlgeschlagen.",
     "unmatchedEmails": "Kein QuickBooks-Mitarbeiter gefunden für: {{emails}}"
+  },
+  "xero": {
+    "hint": "Verbinden Sie die Xero-Organisation Ihres Unternehmens, um verifizierte Arbeitsstunden automatisch als Payroll-Timesheets zu senden - abgeglichen mit Xero-Mitarbeitern per E-Mail.",
+    "notConnected": "Noch nicht verbunden.",
+    "connectAction": "Xero verbinden",
+    "connectError": "Die Verbindung zu Xero konnte nicht gestartet werden.",
+    "connectedTo": "Verbunden mit {{company}}",
+    "unnamedCompany": "Ihrer Xero-Organisation",
+    "disconnectAction": "Trennen",
+    "disconnectError": "Xero konnte nicht getrennt werden.",
+    "syncAction": "Jetzt synchronisieren",
+    "syncError": "Synchronisierung mit Xero fehlgeschlagen.",
+    "lastSynced": "zuletzt synchronisiert {{time}}",
+    "neverSynced": "noch nie synchronisiert",
+    "summary": "Letzter Lauf: {{synced}} synchronisiert, {{skipped}} übersprungen (kein passender Mitarbeiter), {{failed}} fehlgeschlagen.",
+    "unmatchedEmails": "Kein Xero-Mitarbeiter gefunden für: {{emails}}"
+  },
+  "gusto": {
+    "hint": "Verbinden Sie das Gusto-Unternehmen Ihrer Organisation, um verifizierte Arbeitsstunden zu übermitteln - abgeglichen mit Gusto-Mitarbeitern per E-Mail. Gusto akzeptiert Stunden nur in einem aktuell offenen Lohnlauf.",
+    "notConnected": "Noch nicht verbunden.",
+    "connectAction": "Gusto verbinden",
+    "connectError": "Die Verbindung zu Gusto konnte nicht gestartet werden.",
+    "connectedTo": "Verbunden mit {{company}}",
+    "unnamedCompany": "Ihrem Gusto-Unternehmen",
+    "disconnectAction": "Trennen",
+    "disconnectError": "Gusto konnte nicht getrennt werden.",
+    "syncAction": "Jetzt synchronisieren",
+    "syncError": "Synchronisierung mit Gusto fehlgeschlagen.",
+    "lastSynced": "zuletzt synchronisiert {{time}}",
+    "neverSynced": "noch nie synchronisiert",
+    "summary": "Letzter Lauf: {{synced}} synchronisiert, {{skipped}} übersprungen (kein passender Mitarbeiter), {{failed}} fehlgeschlagen.",
+    "unmatchedEmails": "Kein Gusto-Mitarbeiter gefunden für: {{emails}}"
   }
 }

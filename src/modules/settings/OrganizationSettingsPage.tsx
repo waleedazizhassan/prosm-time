@@ -8,7 +8,7 @@ import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
 import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
 import IntegrationsSettingsCard from "./IntegrationsSettingsCard";
-import QuickBooksSettingsCard from "./QuickBooksSettingsCard";
+import PayrollIntegrationCard from "./PayrollIntegrationCard";
 
 // PROSM Time - § live UX review, user-directed: "a professional
 // reorganization" - org-wide settings (today: the no-site geofence
@@ -33,7 +33,7 @@ export default function OrganizationSettingsPage() {
       <SiteDefaultsSettingsCard />
       <SitePolicySettingsCard />
       <IntegrationsSettingsCard />
-      <QuickBooksSettingsCard />
+      <PayrollIntegrationCard />
     </PageShell>
   );
 }

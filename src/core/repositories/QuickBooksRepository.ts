@@ -4,6 +4,7 @@ export interface ServiceResult<T = null> {
   success: boolean;
   message: string | null;
   data: T | null;
+  code?: string | null;
 }
 
 export interface QuickBooksStatus {
@@ -18,8 +19,8 @@ export interface QuickBooksStatus {
 function createSuccess<T>(data: T | null = null): ServiceResult<T> {
   return { success: true, message: null, data };
 }
-function createError<T>(message: string): ServiceResult<T> {
-  return { success: false, message, data: null };
+function createError<T>(message: string, code: string | null = null): ServiceResult<T> {
+  return { success: false, message, data: null, code };
 }
 
 // PROSM Time - the 3rd and final competitive gap this session's own
@@ -57,9 +58,9 @@ class QuickBooksRepository {
       const { data, error } = await this.client.functions.invoke("quickbooks-authorize", { body: {} });
       if (error) {
         const errorBody = await error.context?.json?.().catch(() => null);
-        return createError(errorBody?.error?.message ?? error.message ?? "Unable to start the QuickBooks connection.");
+        return createError(errorBody?.error?.message ?? error.message ?? "Unable to start the QuickBooks connection.", errorBody?.error?.code ?? null);
       }
-      if (!data?.success) return createError(data?.error?.message ?? "Unable to start the QuickBooks connection.");
+      if (!data?.success) return createError(data?.error?.message ?? "Unable to start the QuickBooks connection.", data?.error?.code ?? null);
       return createSuccess({ authorizeUrl: data.data.authorizeUrl });
     } catch (error) {
       return createError(error instanceof Error ? error.message : "QuickBooks service unavailable.");
