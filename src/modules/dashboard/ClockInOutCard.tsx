@@ -25,18 +25,18 @@ import StatusBadge from "../../components/common/StatusBadge";
 import CameraCaptureModal from "../../components/common/CameraCaptureModal";
 import Modal from "../../components/common/Modal";
 import AttendanceConfirmModal from "../../components/common/AttendanceConfirmModal";
+import ClockOutSummaryModal from "../../components/common/ClockOutSummaryModal";
 import LiveLocationMap from "../../components/common/LiveLocationMap";
 import ErrorText from "../../components/common/ErrorText";
 import styles from "./ClockInOutCard.module.css";
 
 const PRESENCE_SAMPLE_INTERVAL_MS = 5 * 60 * 1000;
 
-function formatElapsed(startIso: string, nowMs: number): string {
-  const startMs = new Date(startIso).getTime();
-  const totalSeconds = Math.max(0, Math.floor((nowMs - startMs) / 1000));
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
+function formatElapsed(totalSeconds: number): string {
+  const clamped = Math.max(0, Math.floor(totalSeconds));
+  const hours = Math.floor(clamped / 3600);
+  const minutes = Math.floor((clamped % 3600) / 60);
+  const seconds = clamped % 60;
   const pad = (value: number) => String(value).padStart(2, "0");
   return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
 }
@@ -86,8 +86,34 @@ export default function ClockInOutCard() {
   const [sosSubmitting, setSosSubmitting] = useState(false);
   const [sosSent, setSosSent] = useState(false);
   const [activeBreakId, setActiveBreakId] = useState<string | null>(null);
+  // § live UX review, user-directed - "the break button doesn't pause
+  // the elapsed-time counter, it just keeps counting." activeBreakStartedAt
+  // freezes the ticking display the instant a break starts;
+  // completedBreakSeconds is the running total of every break already
+  // ended this session, subtracted from wall-clock elapsed so the
+  // counter resumes exactly where it left off once the break ends
+  // (never jumps forward by the break's own duration).
+  const [activeBreakStartedAt, setActiveBreakStartedAt] = useState<string | null>(null);
+  const [completedBreakSeconds, setCompletedBreakSeconds] = useState(0);
   const [breakSubmitting, setBreakSubmitting] = useState(false);
   const [breakWarning, setBreakWarning] = useState("");
+  // § live UX review, user-directed - a real summary (worked/break/
+  // overtime minutes, exceptions this shift, an early-leave reason
+  // field) shown right after a successful Clock Out.
+  const [summaryModalOpen, setSummaryModalOpen] = useState(false);
+  const [clockOutSummary, setClockOutSummary] = useState<{
+    workedMinutes: number;
+    breakMinutes: number;
+    overtimeMinutes: number;
+    exceptionsCount: number;
+    leftEarly: boolean;
+    earlyMinutes: number;
+    earlyLeaveReason: string | null;
+  } | null>(null);
+  const [clockOutSummarySessionId, setClockOutSummarySessionId] = useState<string | null>(null);
+  const [earlyReasonSubmitting, setEarlyReasonSubmitting] = useState(false);
+  const [earlyReasonSaved, setEarlyReasonSaved] = useState(false);
+  const [earlyReasonError, setEarlyReasonError] = useState("");
   // § live UX review, user-directed - mid-shift "Change Site": press
   // Pause before leaving the current site, then "Change Site" once
   // arrived at the next one - never clocks out, records the move.
@@ -153,11 +179,18 @@ export default function ClockInOutCard() {
     if (activeSession) {
       const siteResult = await SiteRepository.getSite(activeSession.siteId);
       setCurrentSite(siteResult.success ? siteResult.data ?? null : null);
-      const breakResult = await AttendanceRepository.getActiveBreak(activeSession.id);
+      const [breakResult, completedBreakResult] = await Promise.all([
+        AttendanceRepository.getActiveBreak(activeSession.id),
+        AttendanceRepository.getCompletedBreakSeconds(activeSession.id),
+      ]);
       setActiveBreakId(breakResult.success ? breakResult.data?.id ?? null : null);
+      setActiveBreakStartedAt(breakResult.success ? breakResult.data?.startedAt ?? null : null);
+      setCompletedBreakSeconds(completedBreakResult.success ? completedBreakResult.data ?? 0 : 0);
     } else {
       setCurrentSite(null);
       setActiveBreakId(null);
+      setActiveBreakStartedAt(null);
+      setCompletedBreakSeconds(0);
       const lastSessionResult = await AttendanceRepository.getLastCompletedSession(profile.id);
       setLastCompletedSession(lastSessionResult.success ? lastSessionResult.data ?? null : null);
     }
@@ -519,11 +552,22 @@ export default function ClockInOutCard() {
       }
     }
 
+    const completedSessionId = result.data.sessionId;
+
     setSubmitting(false);
     setConfirmModalOpen(false);
     setConfirmAction(null);
     setPendingEvidenceFile(null);
-    load();
+    await load();
+
+    const summaryResult = await AttendanceRepository.getSessionSummary(completedSessionId);
+    if (summaryResult.success && summaryResult.data) {
+      setClockOutSummary(summaryResult.data);
+      setClockOutSummarySessionId(completedSessionId);
+      setEarlyReasonSaved(false);
+      setEarlyReasonError("");
+      setSummaryModalOpen(true);
+    }
   };
 
   const handleClockInTap = () => {
@@ -635,7 +679,7 @@ export default function ClockInOutCard() {
       if (result.data?.maxDurationExceeded) {
         setBreakWarning(t("attendance.breakExceeded"));
       }
-      setActiveBreakId(null);
+      await load();
     } else {
       const result = await AttendanceRepository.startBreak(session.id);
       setBreakSubmitting(false);
@@ -643,8 +687,29 @@ export default function ClockInOutCard() {
         setError(humanizeBackendError(result.message, t) ?? t("attendance.breakStartError"));
         return;
       }
-      setActiveBreakId(result.data.breakId);
+      await load();
     }
+  };
+
+  const handleSubmitEarlyReason = async (reason: string) => {
+    if (!clockOutSummarySessionId) return;
+    setEarlyReasonSubmitting(true);
+    setEarlyReasonError("");
+    const result = await AttendanceRepository.submitEarlyLeaveReason(clockOutSummarySessionId, reason);
+    setEarlyReasonSubmitting(false);
+    if (!result.success) {
+      setEarlyReasonError(humanizeBackendError(result.message, t) ?? t("attendance.summaryEarlyReasonError"));
+      return;
+    }
+    setEarlyReasonSaved(true);
+  };
+
+  const handleCloseSummary = () => {
+    setSummaryModalOpen(false);
+    setClockOutSummary(null);
+    setClockOutSummarySessionId(null);
+    setEarlyReasonSaved(false);
+    setEarlyReasonError("");
   };
 
   const handleOpenChangeSiteModal = () => {
@@ -715,10 +780,14 @@ export default function ClockInOutCard() {
       {session ? (
         <div style={{ margin: "var(--space-3) 0" }}>
           <div style={{ fontSize: "var(--font-3xl)", fontWeight: "var(--font-weight-bold)", color: "var(--text-primary)", fontVariantNumeric: "tabular-nums", lineHeight: 1.1 }}>
-            {formatElapsed(session.clockInAt, now)}
+            {formatElapsed(
+              Math.floor(
+                ((activeBreakId && activeBreakStartedAt ? new Date(activeBreakStartedAt).getTime() : now) - new Date(session.clockInAt).getTime()) / 1000,
+              ) - Math.floor(completedBreakSeconds),
+            )}
           </div>
           <p style={{ margin: "var(--space-1) 0 0", color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>
-            {t("attendance.clockedInSince", { time: formatTimeOnly(session.clockInAt, i18n.language) })}
+            {activeBreakId ? t("attendance.timerPausedOnBreak") : t("attendance.clockedInSince", { time: formatTimeOnly(session.clockInAt, i18n.language) })}
           </p>
         </div>
       ) : null}
@@ -906,6 +975,24 @@ export default function ClockInOutCard() {
           error={confirmError}
           onCancel={handleConfirmCancel}
           onConfirm={handleConfirmSubmit}
+        />
+      ) : null}
+
+      {clockOutSummary ? (
+        <ClockOutSummaryModal
+          isOpen={summaryModalOpen}
+          workedMinutes={clockOutSummary.workedMinutes}
+          breakMinutes={clockOutSummary.breakMinutes}
+          overtimeMinutes={clockOutSummary.overtimeMinutes}
+          exceptionsCount={clockOutSummary.exceptionsCount}
+          leftEarly={clockOutSummary.leftEarly}
+          earlyMinutes={clockOutSummary.earlyMinutes}
+          earlyLeaveReason={clockOutSummary.earlyLeaveReason}
+          reasonSubmitting={earlyReasonSubmitting}
+          reasonSaved={earlyReasonSaved}
+          error={earlyReasonError}
+          onSubmitReason={handleSubmitEarlyReason}
+          onClose={handleCloseSummary}
         />
       ) : null}
 

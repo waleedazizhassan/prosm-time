@@ -35,7 +35,9 @@
       "titleException": "Exception awaiting your review",
       "bodyException": "{{name}} submitted a reason for an out-of-zone exception.",
       "titleCorrection": "Correction request awaiting your review",
-      "bodyCorrection": "{{name}} submitted a correction request."
+      "bodyCorrection": "{{name}} submitted a correction request.",
+      "titleEarlyLeave": "Early leave reason submitted",
+      "bodyEarlyLeave": "{{name}} explained why they left early."
     },
     "correctionReviewed": {
       "titleException": "Your exception was reviewed",

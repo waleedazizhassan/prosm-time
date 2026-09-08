@@ -30,12 +30,21 @@ export default function localizeNotification(notification: AppNotification, t: T
     }
     case "exception_pending_review": {
       const name = typeof data.employeeName === "string" ? data.employeeName : null;
-      const kind = data.kind === "exception" || data.kind === "correction" ? data.kind : null;
+      const kind = data.kind === "exception" || data.kind === "correction" || data.kind === "early_leave" ? data.kind : null;
       if (!name || !kind) break;
-      return {
-        title: t(kind === "exception" ? "shell:notifications.exceptionPendingReview.titleException" : "shell:notifications.exceptionPendingReview.titleCorrection"),
-        body: t(kind === "exception" ? "shell:notifications.exceptionPendingReview.bodyException" : "shell:notifications.exceptionPendingReview.bodyCorrection", { name }),
-      };
+      const titleKey =
+        kind === "exception"
+          ? "shell:notifications.exceptionPendingReview.titleException"
+          : kind === "correction"
+            ? "shell:notifications.exceptionPendingReview.titleCorrection"
+            : "shell:notifications.exceptionPendingReview.titleEarlyLeave";
+      const bodyKey =
+        kind === "exception"
+          ? "shell:notifications.exceptionPendingReview.bodyException"
+          : kind === "correction"
+            ? "shell:notifications.exceptionPendingReview.bodyCorrection"
+            : "shell:notifications.exceptionPendingReview.bodyEarlyLeave";
+      return { title: t(titleKey), body: t(bodyKey, { name }) };
     }
     case "correction_reviewed": {
       const kind = data.kind === "exception" || data.kind === "correction" ? data.kind : null;

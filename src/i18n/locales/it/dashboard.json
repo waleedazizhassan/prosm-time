@@ -119,7 +119,20 @@
     "confirmLocationLabel": "Posizione",
     "noteLabel": "Aggiungi una nota",
     "activityLabel": "Attività",
-    "optionalPlaceholder": "Facoltativo"
+    "optionalPlaceholder": "Facoltativo",
+    "timerPausedOnBreak": "Timer in pausa — in pausa",
+    "summaryTitle": "Riepilogo turno",
+    "summaryWorked": "Lavorato",
+    "summaryBreak": "Pausa",
+    "summaryOvertime": "Straordinario",
+    "summaryExceptions": "Eccezioni in questo turno",
+    "summaryLeftEarlyWarning": "Hai timbrato l'uscita {{minutes}} min prima della fine prevista del turno.",
+    "summaryEarlyReasonLabel": "Perché sei uscito/a in anticipo?",
+    "summaryEarlyReasonSubmit": "Invia motivo",
+    "summaryEarlyReasonError": "Impossibile inviare questo motivo.",
+    "summaryEarlyReasonSaved": "Motivo inviato al tuo responsabile.",
+    "summaryAllowancesAction": "Completa ora le indennità",
+    "summaryNotNowAction": "Non ora"
   },
   "kioskPin": {
     "title": "PIN chiosco",

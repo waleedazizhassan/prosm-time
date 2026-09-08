@@ -35,7 +35,9 @@
       "titleException": "استثناء بانتظار مراجعتك",
       "bodyException": "{{name}} أرسل سببًا لاستثناء خروج عن النطاق.",
       "titleCorrection": "طلب تصحيح بانتظار مراجعتك",
-      "bodyCorrection": "{{name}} أرسل طلب تصحيح."
+      "bodyCorrection": "{{name}} أرسل طلب تصحيح.",
+      "titleEarlyLeave": "تم إرسال سبب الانصراف المبكر",
+      "bodyEarlyLeave": "{{name}} أوضح سبب انصرافه مبكرًا."
     },
     "correctionReviewed": {
       "titleException": "تمت مراجعة الاستثناء الخاص بك",

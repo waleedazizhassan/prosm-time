@@ -26,6 +26,18 @@ const SOS_SIREN_SECONDS = 30;
 // /emergency-log (with its own alertId appended by handleSelect/
 // handleViewSos below, this bare fallback only fires if a stored
 // notification is somehow missing its relatedEntityId).
+//
+// § real bug, user-reported - "the notification doesn't lead the
+// employee to a specific place to write the reason" - out_of_zone_employee
+// fell into the generic /dashboard fallback with no indication of
+// WHICH pending exception it was about; the employee had to scroll
+// past every other Dashboard card to find ExceptionsCard, with no
+// guarantee it was even the right one if more than one was pending.
+// Now routes to /dashboard with the notification's own relatedEntityId
+// (the geofence_exceptions row id, always present - see
+// clock_in/clock_out_prosm_time_attendance's own create_prosm_time_
+// notification calls) so ExceptionsCard can scroll to and focus that
+// exact reason field.
 function notificationRoute(type: string): string {
   switch (type) {
     case "exception_pending_review":
@@ -143,6 +155,10 @@ export default function NotificationBell() {
     setOpen(false);
     if (notification.type === "sos_alert" && notification.relatedEntityId) {
       navigate(`/emergency-log?alertId=${notification.relatedEntityId}`);
+      return;
+    }
+    if (notification.type === "out_of_zone_employee" && notification.relatedEntityId) {
+      navigate(`/dashboard?exceptionId=${notification.relatedEntityId}`);
       return;
     }
     navigate(notificationRoute(notification.type));

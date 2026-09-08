@@ -119,7 +119,20 @@
     "confirmLocationLabel": "الموقع",
     "noteLabel": "إضافة ملاحظة",
     "activityLabel": "النشاط",
-    "optionalPlaceholder": "اختياري"
+    "optionalPlaceholder": "اختياري",
+    "timerPausedOnBreak": "العداد متوقف مؤقتًا — في استراحة",
+    "summaryTitle": "ملخص الوردية",
+    "summaryWorked": "ساعات العمل",
+    "summaryBreak": "الاستراحة",
+    "summaryOvertime": "الساعات الإضافية",
+    "summaryExceptions": "الاستثناءات في هذه الوردية",
+    "summaryLeftEarlyWarning": "سجّلت الانصراف قبل {{minutes}} دقيقة من موعد نهاية الوردية.",
+    "summaryEarlyReasonLabel": "ما سبب انصرافك مبكرًا؟",
+    "summaryEarlyReasonSubmit": "إرسال السبب",
+    "summaryEarlyReasonError": "تعذر إرسال هذا السبب.",
+    "summaryEarlyReasonSaved": "تم إرسال السبب إلى مديرك.",
+    "summaryAllowancesAction": "إتمام البدلات الآن",
+    "summaryNotNowAction": "ليس الآن"
   },
   "kioskPin": {
     "title": "رمز الكشك",

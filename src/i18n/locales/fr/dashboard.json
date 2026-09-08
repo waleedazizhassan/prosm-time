@@ -119,7 +119,20 @@
     "confirmLocationLabel": "Position",
     "noteLabel": "Ajouter une note",
     "activityLabel": "Activité",
-    "optionalPlaceholder": "Facultatif"
+    "optionalPlaceholder": "Facultatif",
+    "timerPausedOnBreak": "Minuteur en pause — en pause",
+    "summaryTitle": "Résumé du poste",
+    "summaryWorked": "Travaillé",
+    "summaryBreak": "Pause",
+    "summaryOvertime": "Heures supplémentaires",
+    "summaryExceptions": "Exceptions ce poste",
+    "summaryLeftEarlyWarning": "Vous avez pointé votre départ {{minutes}} min avant la fin prévue de votre poste.",
+    "summaryEarlyReasonLabel": "Pourquoi êtes-vous parti(e) plus tôt ?",
+    "summaryEarlyReasonSubmit": "Envoyer le motif",
+    "summaryEarlyReasonError": "Impossible d'envoyer ce motif.",
+    "summaryEarlyReasonSaved": "Motif envoyé à votre responsable.",
+    "summaryAllowancesAction": "Compléter les indemnités maintenant",
+    "summaryNotNowAction": "Pas maintenant"
   },
   "kioskPin": {
     "title": "Code PIN kiosque",

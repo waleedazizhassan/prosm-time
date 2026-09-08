@@ -35,7 +35,9 @@
       "titleException": "Eccezione in attesa della tua revisione",
       "bodyException": "{{name}} ha inviato un motivo per un'eccezione fuori area.",
       "titleCorrection": "Richiesta di correzione in attesa della tua revisione",
-      "bodyCorrection": "{{name}} ha inviato una richiesta di correzione."
+      "bodyCorrection": "{{name}} ha inviato una richiesta di correzione.",
+      "titleEarlyLeave": "Motivo dell'uscita anticipata inviato",
+      "bodyEarlyLeave": "{{name}} ha spiegato perché è uscito/a in anticipo."
     },
     "correctionReviewed": {
       "titleException": "La tua eccezione è stata esaminata",

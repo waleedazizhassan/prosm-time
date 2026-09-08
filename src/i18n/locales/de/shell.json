@@ -35,7 +35,9 @@
       "titleException": "Ausnahme wartet auf Ihre Prüfung",
       "bodyException": "{{name}} hat einen Grund für eine Ausnahme außerhalb des Bereichs angegeben.",
       "titleCorrection": "Korrekturantrag wartet auf Ihre Prüfung",
-      "bodyCorrection": "{{name}} hat einen Korrekturantrag eingereicht."
+      "bodyCorrection": "{{name}} hat einen Korrekturantrag eingereicht.",
+      "titleEarlyLeave": "Grund für vorzeitiges Verlassen übermittelt",
+      "bodyEarlyLeave": "{{name}} hat erklärt, warum er/sie früher gegangen ist."
     },
     "correctionReviewed": {
       "titleException": "Ihre Ausnahme wurde geprüft",

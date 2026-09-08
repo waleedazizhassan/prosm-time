@@ -35,7 +35,9 @@
       "titleException": "Exception en attente de votre validation",
       "bodyException": "{{name}} a soumis un motif pour une exception hors zone.",
       "titleCorrection": "Demande de correction en attente de votre validation",
-      "bodyCorrection": "{{name}} a soumis une demande de correction."
+      "bodyCorrection": "{{name}} a soumis une demande de correction.",
+      "titleEarlyLeave": "Motif de départ anticipé envoyé",
+      "bodyEarlyLeave": "{{name}} a expliqué la raison de son départ anticipé."
     },
     "correctionReviewed": {
       "titleException": "Votre exception a été examinée",

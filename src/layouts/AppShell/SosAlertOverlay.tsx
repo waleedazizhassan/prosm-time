@@ -13,12 +13,17 @@ interface SosAlertOverlayProps {
 
 // PROSM Time - user-directed: an SOS/emergency notification must not
 // be "just a notification" - a full-screen siren takeover for whoever
-// is watching (Admin/Owner - the only recipients notify_prosm_time_
-// supervisors ever sends this to), paired with playSirenSound.ts's
-// continuous audio. Dismiss just clears the takeover (the notification
-// itself stays in the bell, unread until opened); "View" is the real
-// action - it's how an admin actually gets to the emergency's exact
-// GPS location, timestamp, employee and site (Emergency Log).
+// is watching, paired with playSirenSound.ts's continuous audio.
+// Recipients: every org supervisor (notify_prosm_time_supervisors -
+// Owner/Admin or exceptions.manage/attendance.clock_out_on_behalf
+// holders) AND, since 20260908170000 (user-reported: SOS must also
+// reach co-workers physically at the same site, not just Admin/Owner),
+// every other user currently clocked in at the same site -
+// trigger_prosm_time_sos_alert notifies both sets. Dismiss just clears
+// the takeover (the notification itself stays in the bell, unread
+// until opened); "View" is the real action - it's how anyone who sees
+// this actually gets to the emergency's exact GPS location, timestamp,
+// employee and site (Emergency Log).
 //
 // Real bug fix, user-reported (screenshot showed the siren squeezed
 // into a thin band instead of covering the screen): NotificationBell

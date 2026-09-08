@@ -78,12 +78,22 @@ export default function AttendanceConfirmModal({
         </>
       }
     >
+      {/* § live UX review, user-directed - "the capture happens twice":
+          landing on a second, full-size photo re-display right after
+          Camera's own Use Photo/Retake step read as a second capture
+          screen. A small confirmation chip (not a hero image) keeps the
+          reassurance that a photo was attached without repeating the
+          review step - this is the note-adding screen, not another
+          photo screen. */}
       {photoPreviewUrl ? (
-        <img
-          src={photoPreviewUrl}
-          alt={t("attendance.confirmPhotoLabel")}
-          style={{ width: "100%", maxHeight: 220, objectFit: "cover", borderRadius: "var(--radius-md)", marginBottom: "var(--space-3)" }}
-        />
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", marginBottom: "var(--space-3)" }}>
+          <img
+            src={photoPreviewUrl}
+            alt={t("attendance.confirmPhotoLabel")}
+            style={{ width: 44, height: 44, objectFit: "cover", borderRadius: "var(--radius-md)", flexShrink: 0 }}
+          />
+          <span style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("attendance.confirmPhotoLabel")}</span>
+        </div>
       ) : (
         <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)", marginBottom: "var(--space-3)" }}>{t("attendance.confirmNoPhoto")}</p>
       )}

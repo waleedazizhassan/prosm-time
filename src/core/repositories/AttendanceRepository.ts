@@ -282,11 +282,78 @@ class AttendanceRepository {
     }
   }
 
-  async getActiveBreak(attendanceSessionId: string): Promise<ServiceResult<{ id: string } | null>> {
+  async getActiveBreak(attendanceSessionId: string): Promise<ServiceResult<{ id: string; startedAt: string } | null>> {
     try {
-      const { data, error } = await this.client.from("break_events").select("id").eq("attendance_session_id", attendanceSessionId).eq("status", "active").maybeSingle();
+      const { data, error } = await this.client.from("break_events").select("id, started_at").eq("attendance_session_id", attendanceSessionId).eq("status", "active").maybeSingle();
       if (error) return createError(error.message);
-      return createSuccess(data ? { id: data.id } : null);
+      return createSuccess(data ? { id: data.id, startedAt: data.started_at } : null);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
+    }
+  }
+
+  // § live UX review, user-directed - "the break button doesn't pause
+  // the elapsed-time counter, it just keeps counting" - the counter
+  // needs the total of every ALREADY-ENDED break this session to
+  // subtract from wall-clock elapsed time (the currently active break,
+  // if any, contributes nothing further while it's still running -
+  // ClockInOutCard freezes the display at its own startedAt instead).
+  async getCompletedBreakSeconds(attendanceSessionId: string): Promise<ServiceResult<number>> {
+    try {
+      const { data, error } = await this.client.from("break_events").select("started_at, ended_at").eq("attendance_session_id", attendanceSessionId).eq("status", "ended");
+      if (error) return createError(error.message);
+      const totalSeconds = (data ?? []).reduce((sum: number, row: { started_at: string; ended_at: string | null }) => {
+        if (!row.ended_at) return sum;
+        return sum + Math.max(0, (new Date(row.ended_at).getTime() - new Date(row.started_at).getTime()) / 1000);
+      }, 0);
+      return createSuccess(totalSeconds);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
+    }
+  }
+
+  // § live UX review, user-directed - a real clock-out summary (worked/
+  // break/overtime minutes, whether the employee left before the
+  // site's own shift_end_time) shown right after a successful Clock
+  // Out. Mirrors generate_prosm_time_timesheet's own overtime formula
+  // (20260902130000) applied to this one session, not a full pay
+  // period - an at-a-glance figure, not the authoritative payroll one.
+  async getSessionSummary(attendanceSessionId: string): Promise<
+    ServiceResult<{
+      workedMinutes: number;
+      breakMinutes: number;
+      overtimeMinutes: number;
+      exceptionsCount: number;
+      leftEarly: boolean;
+      earlyMinutes: number;
+      shiftEndTime: string | null;
+      earlyLeaveReason: string | null;
+    }>
+  > {
+    try {
+      const { data, error } = await this.client.rpc("get_prosm_time_session_summary", { p_attendance_session_id: attendanceSessionId });
+      if (error) return createError(error.message);
+      return createSuccess({
+        workedMinutes: Number(data?.workedMinutes ?? 0),
+        breakMinutes: Number(data?.breakMinutes ?? 0),
+        overtimeMinutes: Number(data?.overtimeMinutes ?? 0),
+        exceptionsCount: Number(data?.exceptionsCount ?? 0),
+        leftEarly: data?.leftEarly === true,
+        earlyMinutes: Number(data?.earlyMinutes ?? 0),
+        shiftEndTime: data?.shiftEndTime ?? null,
+        earlyLeaveReason: data?.earlyLeaveReason ?? null,
+      });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
+    }
+  }
+
+  async submitEarlyLeaveReason(attendanceSessionId: string, reason: string): Promise<ServiceResult> {
+    try {
+      const { data, error } = await this.client.rpc("submit_prosm_time_early_leave_reason", { p_attendance_session_id: attendanceSessionId, p_reason: reason });
+      if (error) return createError(error.message);
+      if (data?.success === false) return createError("Unable to submit this reason.");
+      return createSuccess();
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
     }

@@ -119,7 +119,20 @@
     "confirmLocationLabel": "Standort",
     "noteLabel": "Notiz hinzufügen",
     "activityLabel": "Tätigkeit",
-    "optionalPlaceholder": "Optional"
+    "optionalPlaceholder": "Optional",
+    "timerPausedOnBreak": "Timer pausiert — in Pause",
+    "summaryTitle": "Schichtzusammenfassung",
+    "summaryWorked": "Gearbeitet",
+    "summaryBreak": "Pause",
+    "summaryOvertime": "Überstunden",
+    "summaryExceptions": "Ausnahmen in dieser Schicht",
+    "summaryLeftEarlyWarning": "Du hast dich {{minutes}} Min. vor dem geplanten Schichtende ausgestempelt.",
+    "summaryEarlyReasonLabel": "Warum bist du früher gegangen?",
+    "summaryEarlyReasonSubmit": "Grund senden",
+    "summaryEarlyReasonError": "Dieser Grund konnte nicht gesendet werden.",
+    "summaryEarlyReasonSaved": "Grund an deinen Manager gesendet.",
+    "summaryAllowancesAction": "Zulagen jetzt abschließen",
+    "summaryNotNowAction": "Nicht jetzt"
   },
   "kioskPin": {
     "title": "Kiosk-PIN",

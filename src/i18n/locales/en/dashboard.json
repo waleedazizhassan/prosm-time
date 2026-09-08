@@ -119,7 +119,20 @@
     "confirmLocationLabel": "Location",
     "noteLabel": "Add a note",
     "activityLabel": "Activity",
-    "optionalPlaceholder": "Optional"
+    "optionalPlaceholder": "Optional",
+    "timerPausedOnBreak": "Timer paused — on break",
+    "summaryTitle": "Shift Summary",
+    "summaryWorked": "Worked",
+    "summaryBreak": "Break",
+    "summaryOvertime": "Overtime",
+    "summaryExceptions": "Exceptions this shift",
+    "summaryLeftEarlyWarning": "You clocked out {{minutes}} min before your shift's scheduled end.",
+    "summaryEarlyReasonLabel": "Why did you leave early?",
+    "summaryEarlyReasonSubmit": "Submit reason",
+    "summaryEarlyReasonError": "Unable to submit this reason.",
+    "summaryEarlyReasonSaved": "Reason sent to your manager.",
+    "summaryAllowancesAction": "Complete Allowances Now",
+    "summaryNotNowAction": "Not now"
   },
   "kioskPin": {
     "title": "Kiosk PIN",
