@@ -22,6 +22,7 @@ export interface MyShiftRow {
   shiftDate: string;
   startTime: string;
   endTime: string;
+  crossesMidnight: boolean;
   status: "scheduled" | "cancelled";
   notes: string | null;
   cancelledReason: string | null;
@@ -34,6 +35,7 @@ export interface SiteShiftRow {
   shiftDate: string;
   startTime: string;
   endTime: string;
+  crossesMidnight: boolean;
   status: "scheduled" | "cancelled";
   notes: string | null;
   cancelledReason: string | null;
@@ -80,6 +82,10 @@ function mapMyShiftRow(row: MyShiftRowRaw): MyShiftRow {
     shiftDate: row.shift_date,
     startTime: row.start_time,
     endTime: row.end_time,
+    // start_time/end_time come back as "HH:MM:SS" - a lexicographic
+    // compare is a valid same-length-string time-of-day compare, same
+    // convention the backend RPC uses server-side.
+    crossesMidnight: row.end_time <= row.start_time,
     status: row.status,
     notes: row.notes,
     cancelledReason: row.cancelled_reason,
@@ -155,17 +161,31 @@ class ShiftRepository {
       const { data, error } = await this.client.rpc("list_prosm_time_site_shifts", { p_site_id: siteId, p_start_date: startDate, p_end_date: endDate });
       if (error) return createError(error.message);
       return createSuccess(
-        (data ?? []).map((row: { id: string; user_id: string; employee_name: string; shift_date: string; start_time: string; end_time: string; status: "scheduled" | "cancelled"; notes: string | null; cancelled_reason: string | null }) => ({
-          id: row.id,
-          userId: row.user_id,
-          employeeName: row.employee_name,
-          shiftDate: row.shift_date,
-          startTime: row.start_time,
-          endTime: row.end_time,
-          status: row.status,
-          notes: row.notes,
-          cancelledReason: row.cancelled_reason,
-        })),
+        (data ?? []).map(
+          (row: {
+            id: string;
+            user_id: string;
+            employee_name: string;
+            shift_date: string;
+            start_time: string;
+            end_time: string;
+            crosses_midnight: boolean;
+            status: "scheduled" | "cancelled";
+            notes: string | null;
+            cancelled_reason: string | null;
+          }) => ({
+            id: row.id,
+            userId: row.user_id,
+            employeeName: row.employee_name,
+            shiftDate: row.shift_date,
+            startTime: row.start_time,
+            endTime: row.end_time,
+            crossesMidnight: row.crosses_midnight,
+            status: row.status,
+            notes: row.notes,
+            cancelledReason: row.cancelled_reason,
+          }),
+        ),
       );
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Schedule service unavailable.");

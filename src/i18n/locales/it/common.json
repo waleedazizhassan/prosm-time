@@ -25,7 +25,7 @@
     "contactPrefix": "Se il problema persiste, contatta"
   },
   "backendErrors": {
-    "shiftOvernightNotSupported": "L'ora di fine deve essere successiva all'ora di inizio - i turni notturni che superano la mezzanotte non sono ancora supportati. Dividilo in due turni nello stesso giorno (es. 22:00-23:59 e 00:00-06:00).",
+    "shiftEndEqualsStart": "L'ora di fine deve essere diversa dall'ora di inizio.",
     "shiftOverlap": "Questo dipendente ha già un turno che si sovrappone in questa data.",
     "breakAlreadyActive": "Una pausa è già attiva per questa sessione.",
     "correctionRequiresLockedTimesheet": "Una correzione può essere richiesta solo su un foglio ore bloccato (approvato).",

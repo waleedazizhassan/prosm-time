@@ -22,6 +22,14 @@ function isoDate(date: Date): string {
   return date.toISOString().slice(0, 10);
 }
 
+// end <= start means the shift crosses midnight and really ends the
+// next day - shown as a "+1" suffix rather than a start time that
+// silently looks later than the end time.
+function formatShiftTime(startTime: string, endTime: string, crossesMidnight: boolean): string {
+  const range = `${startTime.slice(0, 5)} — ${endTime.slice(0, 5)}`;
+  return crossesMidnight ? `${range} (+1)` : range;
+}
+
 // PROSM Time - § user-directed: real advance shift scheduling/
 // rostering, the last of the 3 competitive gaps this session's own
 // research found (every competitor researched has drag-and-drop shift
@@ -158,7 +166,7 @@ export default function SchedulePage() {
   const myColumns: TableColumn<MyShiftRow>[] = [
     { key: "date", header: t("columns.date"), render: (row) => formatDateOnly(row.shiftDate, i18n.language) },
     { key: "site", header: t("columns.site"), render: (row) => row.siteName },
-    { key: "time", header: t("columns.time"), render: (row) => `${row.startTime.slice(0, 5)} — ${row.endTime.slice(0, 5)}` },
+    { key: "time", header: t("columns.time"), render: (row) => formatShiftTime(row.startTime, row.endTime, row.crossesMidnight) },
     { key: "status", header: t("common:status"), render: (row) => <StatusBadge status={row.status === "scheduled" ? "active" : "revoked"}>{t(`status.${row.status}`)}</StatusBadge> },
     { key: "notes", header: t("columns.notes"), render: (row) => row.notes ?? "—" },
   ];
@@ -166,7 +174,7 @@ export default function SchedulePage() {
   const siteColumns: TableColumn<SiteShiftRow>[] = [
     { key: "employee", header: t("columns.employee"), render: (row) => row.employeeName },
     { key: "date", header: t("columns.date"), render: (row) => formatDateOnly(row.shiftDate, i18n.language) },
-    { key: "time", header: t("columns.time"), render: (row) => `${row.startTime.slice(0, 5)} — ${row.endTime.slice(0, 5)}` },
+    { key: "time", header: t("columns.time"), render: (row) => formatShiftTime(row.startTime, row.endTime, row.crossesMidnight) },
     { key: "status", header: t("common:status"), render: (row) => <StatusBadge status={row.status === "scheduled" ? "active" : "revoked"}>{t(`status.${row.status}`)}</StatusBadge> },
     {
       key: "actions",
@@ -213,7 +221,7 @@ export default function SchedulePage() {
                     fontWeight: "var(--font-weight-medium)",
                   }}
                 >
-                  {template.name} ({template.startTime.slice(0, 5)}–{template.endTime.slice(0, 5)})
+                  {template.name} ({formatShiftTime(template.startTime, template.endTime, template.endTime <= template.startTime)})
                 </span>
               ))}
               {templates.length === 0 ? <span style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("noTemplates")}</span> : null}
