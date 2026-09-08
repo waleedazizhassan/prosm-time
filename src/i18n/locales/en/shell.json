@@ -20,6 +20,11 @@
     "light": "Light",
     "system": "System"
   },
+  "calendarLabel": "Calendar",
+  "calendar": {
+    "gregorian": "Gregorian",
+    "hijri": "Hijri"
+  },
   "notificationsLabel": "Notifications",
   "noNotifications": "No notifications yet.",
   "notifications": {

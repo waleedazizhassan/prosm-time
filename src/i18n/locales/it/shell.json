@@ -20,6 +20,11 @@
     "light": "Chiaro",
     "system": "Sistema"
   },
+  "calendarLabel": "Calendario",
+  "calendar": {
+    "gregorian": "Gregoriano",
+    "hijri": "Egira"
+  },
   "notificationsLabel": "Notifiche",
   "noNotifications": "Nessuna notifica al momento.",
   "notifications": {

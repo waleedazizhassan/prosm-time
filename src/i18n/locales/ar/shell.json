@@ -20,6 +20,11 @@
     "light": "فاتح",
     "system": "النظام"
   },
+  "calendarLabel": "التقويم",
+  "calendar": {
+    "gregorian": "ميلادي",
+    "hijri": "هجري"
+  },
   "notificationsLabel": "الإشعارات",
   "noNotifications": "لا توجد إشعارات بعد.",
   "notifications": {

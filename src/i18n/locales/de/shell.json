@@ -20,6 +20,11 @@
     "light": "Hell",
     "system": "System"
   },
+  "calendarLabel": "Kalender",
+  "calendar": {
+    "gregorian": "Gregorianisch",
+    "hijri": "Hidschri"
+  },
   "notificationsLabel": "Benachrichtigungen",
   "noNotifications": "Noch keine Benachrichtigungen.",
   "notifications": {

@@ -6,6 +6,7 @@ import { ChevronDown, LogOut, Camera, Loader2 } from "lucide-react";
 import { useAuth } from "../../core/context/AuthContext";
 import { useAppLayout } from "./LayoutContext";
 import { useTheme, type ThemeMode } from "../../core/context/ThemeContext";
+import { useCalendar, setCalendarSystem, type CalendarSystem } from "../../core/context/CalendarContext";
 import { LANGUAGES } from "../../i18n/languages";
 import UserRepository from "../../core/repositories/UserRepository";
 import sidebarStyles from "./Sidebar.module.css";
@@ -44,6 +45,7 @@ export default function UserMenu({ collapsed }: { collapsed: boolean }) {
   const { profile, signOut, refreshProfile } = useAuth();
   const { userMenuOpen, toggleUserMenu, closeUserMenu } = useAppLayout();
   const { theme, setTheme } = useTheme();
+  const { calendarSystem } = useCalendar();
 
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -186,6 +188,13 @@ export default function UserMenu({ collapsed }: { collapsed: boolean }) {
               <option value="dark">{t("theme.dark")}</option>
               <option value="light">{t("theme.light")}</option>
               <option value="system">{t("theme.system")}</option>
+            </select>
+            <label className={styles.languageLabel} htmlFor="userMenuCalendar">
+              {t("calendarLabel")}
+            </label>
+            <select id="userMenuCalendar" className={styles.languageSelect} value={calendarSystem} onChange={(event) => setCalendarSystem(event.target.value as CalendarSystem)}>
+              <option value="gregorian">{t("calendar.gregorian")}</option>
+              <option value="hijri">{t("calendar.hijri")}</option>
             </select>
             <button type="button" className={styles.signOutButton} onClick={signOut}>
               <LogOut size={16} />

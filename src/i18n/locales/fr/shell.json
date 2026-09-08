@@ -20,6 +20,11 @@
     "light": "Clair",
     "system": "Système"
   },
+  "calendarLabel": "Calendrier",
+  "calendar": {
+    "gregorian": "Grégorien",
+    "hijri": "Hégirien"
+  },
   "notificationsLabel": "Notifications",
   "noNotifications": "Aucune notification pour le moment.",
   "notifications": {
