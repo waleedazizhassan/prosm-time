@@ -45,5 +45,22 @@
     "newKeyTitle": "Ihr neuer API-Schlüssel",
     "newKeyWarning": "Kopieren Sie ihn jetzt - er wird nicht erneut angezeigt. Danach wird nur sein Präfix gespeichert.",
     "genericError": "Ihre Integrationsschlüssel konnten nicht geladen werden."
+  },
+  "quickbooks": {
+    "title": "QuickBooks Online",
+    "hint": "Verbinden Sie das QuickBooks-Online-Unternehmen Ihrer Organisation, um verifizierte Arbeitsstunden automatisch als Time-Activity-Einträge zu senden - abgeglichen mit QuickBooks-Mitarbeitern per E-Mail.",
+    "notConnected": "Noch nicht verbunden.",
+    "connectAction": "QuickBooks verbinden",
+    "connectError": "Die Verbindung zu QuickBooks konnte nicht gestartet werden.",
+    "connectedTo": "Verbunden mit {{company}}",
+    "unnamedCompany": "Ihrem QuickBooks-Unternehmen",
+    "disconnectAction": "Trennen",
+    "disconnectError": "QuickBooks konnte nicht getrennt werden.",
+    "syncAction": "Jetzt synchronisieren",
+    "syncError": "Synchronisierung mit QuickBooks fehlgeschlagen.",
+    "lastSynced": "zuletzt synchronisiert {{time}}",
+    "neverSynced": "noch nie synchronisiert",
+    "summary": "Letzter Lauf: {{synced}} synchronisiert, {{skipped}} übersprungen (kein passender Mitarbeiter), {{failed}} fehlgeschlagen.",
+    "unmatchedEmails": "Kein QuickBooks-Mitarbeiter gefunden für: {{emails}}"
   }
 }

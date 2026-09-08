@@ -45,5 +45,22 @@
     "newKeyTitle": "Votre nouvelle clé API",
     "newKeyWarning": "Copiez-la maintenant - elle ne sera plus affichée. Seul son préfixe est conservé ensuite.",
     "genericError": "Impossible de charger vos clés d'intégration."
+  },
+  "quickbooks": {
+    "title": "QuickBooks Online",
+    "hint": "Connectez l'entreprise QuickBooks Online de votre organisation pour envoyer automatiquement les heures travaillées vérifiées sous forme d'entrées Time Activity - mises en correspondance avec les employés QuickBooks par e-mail.",
+    "notConnected": "Pas encore connecté.",
+    "connectAction": "Connecter QuickBooks",
+    "connectError": "Impossible de démarrer la connexion à QuickBooks.",
+    "connectedTo": "Connecté à {{company}}",
+    "unnamedCompany": "votre entreprise QuickBooks",
+    "disconnectAction": "Déconnecter",
+    "disconnectError": "Impossible de déconnecter QuickBooks.",
+    "syncAction": "Synchroniser maintenant",
+    "syncError": "Impossible de synchroniser avec QuickBooks.",
+    "lastSynced": "dernière synchronisation {{time}}",
+    "neverSynced": "jamais synchronisé",
+    "summary": "Dernière exécution : {{synced}} synchronisés, {{skipped}} ignorés (aucun employé correspondant), {{failed}} échoués.",
+    "unmatchedEmails": "Aucun employé QuickBooks trouvé pour : {{emails}}"
   }
 }

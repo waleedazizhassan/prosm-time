@@ -189,3 +189,24 @@ entrypoint = "./functions/purge-location-samples/index.ts"
 enabled = true
 verify_jwt = false
 entrypoint = "./functions/export-attendance/index.ts"
+
+# QuickBooks Online payroll integration (the 3rd competitive gap).
+# quickbooks-authorize/sync-quickbooks-time-activity require a real
+# caller session (Owner-only, enforced inside the RPCs they call).
+# quickbooks-oauth-callback is verify_jwt=false because Intuit's own
+# browser redirect lands here with no Supabase session at all - the
+# state param it carries is the real, single-use authorization check.
+[functions.quickbooks-authorize]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/quickbooks-authorize/index.ts"
+
+[functions.quickbooks-oauth-callback]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/quickbooks-oauth-callback/index.ts"
+
+[functions.sync-quickbooks-time-activity]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/sync-quickbooks-time-activity/index.ts"

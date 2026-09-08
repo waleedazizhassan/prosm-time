@@ -45,5 +45,22 @@
     "newKeyTitle": "Your new API key",
     "newKeyWarning": "Copy this now - it will not be shown again. Only its prefix is kept afterward.",
     "genericError": "Unable to load your integration keys."
+  },
+  "quickbooks": {
+    "title": "QuickBooks Online",
+    "hint": "Connect your organization's QuickBooks Online company to automatically send verified worked hours as Time Activity entries - matched to QuickBooks employees by email.",
+    "notConnected": "Not connected yet.",
+    "connectAction": "Connect QuickBooks",
+    "connectError": "Unable to start the QuickBooks connection.",
+    "connectedTo": "Connected to {{company}}",
+    "unnamedCompany": "your QuickBooks company",
+    "disconnectAction": "Disconnect",
+    "disconnectError": "Unable to disconnect QuickBooks.",
+    "syncAction": "Sync now",
+    "syncError": "Unable to sync with QuickBooks.",
+    "lastSynced": "last synced {{time}}",
+    "neverSynced": "never synced yet",
+    "summary": "Last run: {{synced}} synced, {{skipped}} skipped (no matching employee), {{failed}} failed.",
+    "unmatchedEmails": "No QuickBooks employee found for: {{emails}}"
   }
 }
