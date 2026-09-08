@@ -25,6 +25,8 @@
     "contactPrefix": "If this keeps happening, contact"
   },
   "backendErrors": {
+    "shiftOvernightNotSupported": "End time must be after start time - overnight shifts crossing midnight aren't supported yet. Split it into two same-day shifts instead (e.g. 22:00-23:59 and 00:00-06:00).",
+    "shiftOverlap": "This employee already has an overlapping shift on this date.",
     "breakAlreadyActive": "A break is already active for this session.",
     "correctionRequiresLockedTimesheet": "A correction can only be requested on a locked (approved) timesheet.",
     "aReasonRequired": "A reason is required.",

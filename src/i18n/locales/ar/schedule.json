@@ -1,0 +1,40 @@
+{
+  "title": "الجدولة",
+  "subtitle": "جدولة الشيفتات مسبقًا لفريقك.",
+  "loadError": "تعذر تحميل شيفتاتك.",
+  "myShiftsTitle": "شيفتاتي القادمة",
+  "emptyMine": "لا توجد شيفتات مجدولة لك بعد.",
+  "manageTitle": "جدول الموقع",
+  "siteLabel": "الموقع",
+  "rangeStartLabel": "من",
+  "rangeEndLabel": "إلى",
+  "emptySite": "لا توجد شيفتات مجدولة لهذا الموقع في هذه الفترة.",
+  "cancelAction": "إلغاء",
+  "cancelError": "تعذر إلغاء هذا الشيفت.",
+  "templatesTitle": "قوالب الشيفتات",
+  "templatesHint": "أنماط وقت قابلة لإعادة الاستخدام لهذا الموقع (مثل صباحي، ليلي) - اختر واحدًا تحت عشان يملأ التعيين الجديد تلقائيًا، أو حدد وقت مخصص بدلاً من ذلك.",
+  "noTemplates": "لا توجد قوالب بعد لهذا الموقع.",
+  "templateNameLabel": "اسم القالب",
+  "startTimeLabel": "وقت البداية",
+  "endTimeLabel": "وقت النهاية",
+  "createTemplateAction": "إضافة قالب",
+  "templateError": "تعذر إنشاء قالب الشيفت هذا.",
+  "assignTitle": "تعيين شيفت",
+  "selectEmployeePlaceholder": "اختر موظفًا",
+  "templateLabel": "القالب",
+  "customTimeOption": "وقت مخصص",
+  "notesLabel": "ملاحظات (اختياري)",
+  "assignAction": "تعيين الشيفت",
+  "assignError": "تعذر تعيين هذا الشيفت.",
+  "columns": {
+    "employee": "الموظف",
+    "site": "الموقع",
+    "date": "التاريخ",
+    "time": "الوقت",
+    "notes": "ملاحظات"
+  },
+  "status": {
+    "scheduled": "مجدول",
+    "cancelled": "ملغى"
+  }
+}

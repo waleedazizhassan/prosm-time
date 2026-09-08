@@ -25,6 +25,8 @@
     "contactPrefix": "Si cela persiste, contactez"
   },
   "backendErrors": {
+    "shiftOvernightNotSupported": "L'heure de fin doit être après l'heure de début - les shifts de nuit chevauchant minuit ne sont pas encore pris en charge. Divisez-le en deux shifts sur le même jour à la place (ex. 22:00-23:59 et 00:00-06:00).",
+    "shiftOverlap": "Cet employé a déjà un shift qui chevauche cette date.",
     "breakAlreadyActive": "Une pause est déjà active pour cette session.",
     "correctionRequiresLockedTimesheet": "Une correction ne peut être demandée que sur une feuille de temps verrouillée (approuvée).",
     "aReasonRequired": "Un motif est requis.",

@@ -1,0 +1,40 @@
+{
+  "title": "Schedule",
+  "subtitle": "Advance shift scheduling for your team.",
+  "loadError": "Unable to load your shifts.",
+  "myShiftsTitle": "My upcoming shifts",
+  "emptyMine": "No shifts scheduled for you yet.",
+  "manageTitle": "Site schedule",
+  "siteLabel": "Site",
+  "rangeStartLabel": "From",
+  "rangeEndLabel": "To",
+  "emptySite": "No shifts scheduled for this site in this range.",
+  "cancelAction": "Cancel",
+  "cancelError": "Unable to cancel this shift.",
+  "templatesTitle": "Shift templates",
+  "templatesHint": "Reusable time patterns for this site (e.g. Morning, Night) - pick one below to pre-fill a new assignment, or set custom times instead.",
+  "noTemplates": "No templates yet for this site.",
+  "templateNameLabel": "Template name",
+  "startTimeLabel": "Start time",
+  "endTimeLabel": "End time",
+  "createTemplateAction": "Add template",
+  "templateError": "Unable to create this shift template.",
+  "assignTitle": "Assign a shift",
+  "selectEmployeePlaceholder": "Select an employee",
+  "templateLabel": "Template",
+  "customTimeOption": "Custom time",
+  "notesLabel": "Notes (optional)",
+  "assignAction": "Assign shift",
+  "assignError": "Unable to assign this shift.",
+  "columns": {
+    "employee": "Employee",
+    "site": "Site",
+    "date": "Date",
+    "time": "Time",
+    "notes": "Notes"
+  },
+  "status": {
+    "scheduled": "Scheduled",
+    "cancelled": "Cancelled"
+  }
+}

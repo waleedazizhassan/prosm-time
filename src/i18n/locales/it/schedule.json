@@ -1,0 +1,40 @@
+{
+  "title": "Turni",
+  "subtitle": "Pianificazione anticipata dei turni per il tuo team.",
+  "loadError": "Impossibile caricare i tuoi turni.",
+  "myShiftsTitle": "I miei prossimi turni",
+  "emptyMine": "Ancora nessun turno pianificato per te.",
+  "manageTitle": "Turni della sede",
+  "siteLabel": "Sede",
+  "rangeStartLabel": "Da",
+  "rangeEndLabel": "A",
+  "emptySite": "Nessun turno pianificato per questa sede in questo periodo.",
+  "cancelAction": "Annulla",
+  "cancelError": "Impossibile annullare questo turno.",
+  "templatesTitle": "Modelli di turno",
+  "templatesHint": "Fasce orarie riutilizzabili per questa sede (es. Mattina, Notte) - scegline una qui sotto per precompilare una nuova assegnazione, oppure imposta orari personalizzati.",
+  "noTemplates": "Ancora nessun modello per questa sede.",
+  "templateNameLabel": "Nome del modello",
+  "startTimeLabel": "Ora di inizio",
+  "endTimeLabel": "Ora di fine",
+  "createTemplateAction": "Aggiungi modello",
+  "templateError": "Impossibile creare questo modello di turno.",
+  "assignTitle": "Assegna un turno",
+  "selectEmployeePlaceholder": "Seleziona un dipendente",
+  "templateLabel": "Modello",
+  "customTimeOption": "Orario personalizzato",
+  "notesLabel": "Note (facoltative)",
+  "assignAction": "Assegna turno",
+  "assignError": "Impossibile assegnare questo turno.",
+  "columns": {
+    "employee": "Dipendente",
+    "site": "Sede",
+    "date": "Data",
+    "time": "Orario",
+    "notes": "Note"
+  },
+  "status": {
+    "scheduled": "Pianificato",
+    "cancelled": "Annullato"
+  }
+}

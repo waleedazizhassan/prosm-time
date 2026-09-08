@@ -25,6 +25,8 @@
     "contactPrefix": "Falls dies weiterhin auftritt, kontaktieren Sie"
   },
   "backendErrors": {
+    "shiftOvernightNotSupported": "Die Endzeit muss nach der Startzeit liegen - Nachtschichten über Mitternacht hinweg werden noch nicht unterstützt. Teilen Sie sie stattdessen in zwei Schichten am selben Tag auf (z. B. 22:00-23:59 und 00:00-06:00).",
+    "shiftOverlap": "Dieser Mitarbeiter hat an diesem Datum bereits eine sich überschneidende Schicht.",
     "breakAlreadyActive": "Für diese Sitzung ist bereits eine Pause aktiv.",
     "correctionRequiresLockedTimesheet": "Eine Korrektur kann nur für eine gesperrte (genehmigte) Zeiterfassung beantragt werden.",
     "aReasonRequired": "Ein Grund ist erforderlich.",

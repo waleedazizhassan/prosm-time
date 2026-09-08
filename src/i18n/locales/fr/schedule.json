@@ -1,0 +1,40 @@
+{
+  "title": "Planning",
+  "subtitle": "Planification des shifts à l'avance pour votre équipe.",
+  "loadError": "Impossible de charger vos shifts.",
+  "myShiftsTitle": "Mes prochains shifts",
+  "emptyMine": "Aucun shift planifié pour vous pour l'instant.",
+  "manageTitle": "Planning du site",
+  "siteLabel": "Site",
+  "rangeStartLabel": "Du",
+  "rangeEndLabel": "Au",
+  "emptySite": "Aucun shift planifié pour ce site sur cette période.",
+  "cancelAction": "Annuler",
+  "cancelError": "Impossible d'annuler ce shift.",
+  "templatesTitle": "Modèles de shift",
+  "templatesHint": "Des plages horaires réutilisables pour ce site (ex. Matin, Nuit) - choisissez-en un ci-dessous pour préremplir une nouvelle affectation, ou définissez des horaires personnalisés.",
+  "noTemplates": "Aucun modèle pour l'instant pour ce site.",
+  "templateNameLabel": "Nom du modèle",
+  "startTimeLabel": "Heure de début",
+  "endTimeLabel": "Heure de fin",
+  "createTemplateAction": "Ajouter un modèle",
+  "templateError": "Impossible de créer ce modèle de shift.",
+  "assignTitle": "Affecter un shift",
+  "selectEmployeePlaceholder": "Sélectionner un employé",
+  "templateLabel": "Modèle",
+  "customTimeOption": "Horaire personnalisé",
+  "notesLabel": "Notes (facultatif)",
+  "assignAction": "Affecter le shift",
+  "assignError": "Impossible d'affecter ce shift.",
+  "columns": {
+    "employee": "Employé",
+    "site": "Site",
+    "date": "Date",
+    "time": "Horaire",
+    "notes": "Notes"
+  },
+  "status": {
+    "scheduled": "Planifié",
+    "cancelled": "Annulé"
+  }
+}

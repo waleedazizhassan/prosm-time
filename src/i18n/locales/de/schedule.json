@@ -1,0 +1,40 @@
+{
+  "title": "Dienstplan",
+  "subtitle": "Schichtplanung im Voraus für Ihr Team.",
+  "loadError": "Ihre Schichten konnten nicht geladen werden.",
+  "myShiftsTitle": "Meine bevorstehenden Schichten",
+  "emptyMine": "Noch keine Schichten für Sie geplant.",
+  "manageTitle": "Standort-Dienstplan",
+  "siteLabel": "Standort",
+  "rangeStartLabel": "Von",
+  "rangeEndLabel": "Bis",
+  "emptySite": "Keine Schichten für diesen Standort in diesem Zeitraum geplant.",
+  "cancelAction": "Stornieren",
+  "cancelError": "Diese Schicht konnte nicht storniert werden.",
+  "templatesTitle": "Schichtvorlagen",
+  "templatesHint": "Wiederverwendbare Zeitmuster für diesen Standort (z. B. Früh, Nacht) - wählen Sie unten eine aus, um eine neue Zuweisung vorauszufüllen, oder legen Sie stattdessen individuelle Zeiten fest.",
+  "noTemplates": "Noch keine Vorlagen für diesen Standort.",
+  "templateNameLabel": "Vorlagenname",
+  "startTimeLabel": "Startzeit",
+  "endTimeLabel": "Endzeit",
+  "createTemplateAction": "Vorlage hinzufügen",
+  "templateError": "Diese Schichtvorlage konnte nicht erstellt werden.",
+  "assignTitle": "Schicht zuweisen",
+  "selectEmployeePlaceholder": "Mitarbeiter auswählen",
+  "templateLabel": "Vorlage",
+  "customTimeOption": "Individuelle Zeit",
+  "notesLabel": "Notizen (optional)",
+  "assignAction": "Schicht zuweisen",
+  "assignError": "Diese Schicht konnte nicht zugewiesen werden.",
+  "columns": {
+    "employee": "Mitarbeiter",
+    "site": "Standort",
+    "date": "Datum",
+    "time": "Uhrzeit",
+    "notes": "Notizen"
+  },
+  "status": {
+    "scheduled": "Geplant",
+    "cancelled": "Storniert"
+  }
+}

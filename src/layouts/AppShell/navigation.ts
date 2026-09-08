@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock } from "lucide-react";
 
 // § live UX review, user-directed - "professional reorganization" of
 // the Sidebar into grouped sections/"centers" instead of one flat
@@ -51,6 +51,12 @@ export const NAV_ITEMS: NavItem[] = [
   // the Owner), so every authenticated member can open this item and
   // simply gets their own scope back.
   { id: "attendance", labelKey: "items.attendance", path: "/attendance", icon: Clock, requiredPermission: null, section: "attendance" },
+  // § user-directed - real advance shift scheduling/rostering
+  // (20260908220000). Self-access to one's own upcoming shifts needs
+  // no special permission, same reasoning as Timesheets/Allowances/
+  // Leave above - the management section within the page itself gates
+  // on schedules.manage (an established permission, unused until now).
+  { id: "schedule", labelKey: "items.schedule", path: "/schedule", icon: CalendarClock, requiredPermission: null, section: "attendance" },
   // § live UX review, user-directed - a real Emergency Log for SOS
   // alerts (exact GPS location, time, employee, site), reached from
   // both the sidebar and the notification bell/siren overlay. Gated on
