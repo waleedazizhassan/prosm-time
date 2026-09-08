@@ -26,6 +26,7 @@ export default function HelpPage() {
     "reportsCenter",
     "sites",
     "settingsCenter",
+    "quickbooks",
     "permissions",
     "desktopApp",
     "liveMap",

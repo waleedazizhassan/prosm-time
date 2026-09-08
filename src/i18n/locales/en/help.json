@@ -54,6 +54,10 @@
       "title": "Settings (Owner)",
       "body": "A real home for organization-wide configuration: the no-site geofence radius; the site policy defaults (GPS accuracy tolerance, break rounding, grace period) a brand-new site starts from, since these are almost always the same across an organization rather than something that genuinely differs site to site; and Site Policy itself - pick any site from a dropdown to review or change its own GPS tolerance, grace period, shift hours, overtime/late-deduction timing, break rounding, both self-service block toggles, and exempt employees, all in one place instead of hunting through that site's own page."
     },
+    "quickbooks": {
+      "title": "QuickBooks Online (Owner)",
+      "body": "From Settings, connect your organization's own QuickBooks Online company to automatically send verified worked hours as Time Activity entries, matched to your QuickBooks employees by email. This is a one-time connection each organization sets up for itself - you sign in with your own QuickBooks account and approve the connection; no one else can do this on your behalf, since it's your company's own QuickBooks data. Once connected, use \"Sync now\" any time to push newly completed, verified shifts across - hours already sent are never duplicated on a later sync."
+    },
     "permissions": {
       "title": "Permissions (Administrators)",
       "body": "Each person's page under People shows their real granted permissions and lets an authorized administrator grant, revoke, or reset an individual permission with a reason - visible only to those who already hold that authority. The Owner always has every permission; other roles start from a default bundle that can be adjusted per person."
