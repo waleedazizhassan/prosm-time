@@ -29,5 +29,21 @@
     "saveAction": "Salva",
     "saveSuccess": "Politica della sede aggiornata.",
     "genericError": "Impossibile aggiornare la politica di questa sede."
+  },
+  "integrations": {
+    "title": "Integrazioni",
+    "hint": "Una chiave di sola lettura per permettere a un altro prodotto PROSM (come PROSM Projects) di recuperare le presenze reali e verificate del tuo team invece di digitarle a mano. Questa chiave non può mai scrivere nulla in PROSM Time.",
+    "nameLabel": "Nome chiave",
+    "namePlaceholder": "es. PROSM Projects",
+    "createAction": "Crea chiave",
+    "createError": "Impossibile creare questa chiave API.",
+    "revokeAction": "Revoca",
+    "revokeError": "Impossibile revocare questa chiave API.",
+    "empty": "Nessuna chiave di integrazione ancora.",
+    "lastUsed": "ultimo utilizzo {{time}}",
+    "neverUsed": "mai utilizzata",
+    "newKeyTitle": "La tua nuova chiave API",
+    "newKeyWarning": "Copiala ora - non verrà più mostrata. In seguito verrà conservato solo il suo prefisso.",
+    "genericError": "Impossibile caricare le tue chiavi di integrazione."
   }
 }

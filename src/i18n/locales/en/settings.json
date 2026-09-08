@@ -29,5 +29,21 @@
     "saveAction": "Save",
     "saveSuccess": "Site policy updated.",
     "genericError": "Unable to update this site's policy."
+  },
+  "integrations": {
+    "title": "Integrations",
+    "hint": "A read-only key so another PROSM product (like PROSM Projects) can pull your team's real, verified attendance instead of hand-typing it. This key can never write anything back into PROSM Time.",
+    "nameLabel": "Key name",
+    "namePlaceholder": "e.g. PROSM Projects",
+    "createAction": "Create key",
+    "createError": "Unable to create this API key.",
+    "revokeAction": "Revoke",
+    "revokeError": "Unable to revoke this API key.",
+    "empty": "No integration keys yet.",
+    "lastUsed": "last used {{time}}",
+    "neverUsed": "never used",
+    "newKeyTitle": "Your new API key",
+    "newKeyWarning": "Copy this now - it will not be shown again. Only its prefix is kept afterward.",
+    "genericError": "Unable to load your integration keys."
   }
 }

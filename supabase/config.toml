@@ -178,3 +178,14 @@ entrypoint = "./functions/delete-employee-data/index.ts"
 enabled = true
 verify_jwt = false
 entrypoint = "./functions/purge-location-samples/index.ts"
+
+# export-attendance is called by an external caller (a sibling PROSM
+# product's own Edge Function) presenting this organization's own
+# api_keys plaintext value as its Authorization header - never a
+# Supabase JWT, so the platform's own JWT gate must be off. The RPC it
+# calls (authenticate_prosm_time_api_key, service_role-only) is the
+# real authorization check, same posture as purge-camera-evidence.
+[functions.export-attendance]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/export-attendance/index.ts"

@@ -7,6 +7,7 @@ import PageShell from "../../components/common/PageShell";
 import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
 import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
+import IntegrationsSettingsCard from "./IntegrationsSettingsCard";
 
 // PROSM Time - § live UX review, user-directed: "a professional
 // reorganization" - org-wide settings (today: the no-site geofence
@@ -30,6 +31,7 @@ export default function OrganizationSettingsPage() {
       <NoSiteRadiusSettingsCard />
       <SiteDefaultsSettingsCard />
       <SitePolicySettingsCard />
+      <IntegrationsSettingsCard />
     </PageShell>
   );
 }

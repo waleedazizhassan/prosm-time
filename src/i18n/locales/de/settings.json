@@ -29,5 +29,21 @@
     "saveAction": "Speichern",
     "saveSuccess": "Standort-Richtlinie aktualisiert.",
     "genericError": "Die Richtlinie dieses Standorts konnte nicht aktualisiert werden."
+  },
+  "integrations": {
+    "title": "Integrationen",
+    "hint": "Ein reiner Lese-Schlüssel, damit ein anderes PROSM-Produkt (wie PROSM Projects) die echte, verifizierte Anwesenheit Ihres Teams abrufen kann, statt sie manuell einzutippen. Dieser Schlüssel kann niemals etwas an PROSM Time zurückschreiben.",
+    "nameLabel": "Schlüsselname",
+    "namePlaceholder": "z. B. PROSM Projects",
+    "createAction": "Schlüssel erstellen",
+    "createError": "Dieser API-Schlüssel konnte nicht erstellt werden.",
+    "revokeAction": "Widerrufen",
+    "revokeError": "Dieser API-Schlüssel konnte nicht widerrufen werden.",
+    "empty": "Noch keine Integrationsschlüssel.",
+    "lastUsed": "zuletzt verwendet {{time}}",
+    "neverUsed": "nie verwendet",
+    "newKeyTitle": "Ihr neuer API-Schlüssel",
+    "newKeyWarning": "Kopieren Sie ihn jetzt - er wird nicht erneut angezeigt. Danach wird nur sein Präfix gespeichert.",
+    "genericError": "Ihre Integrationsschlüssel konnten nicht geladen werden."
   }
 }
