@@ -34,6 +34,7 @@
     "attendanceEventNotFound": "Questo evento di presenza non è stato trovato.",
     "attendanceNotAllowedAtSite": "La rilevazione presenze non è consentita in questo sito.",
     "attendanceSessionNotFound": "Questa sessione di presenza non è stata trovata.",
+    "orphanedPresenceSession": "La tua sessione di lavoro precedente non è stata chiusa completamente. Riprova a timbrare l'entrata - se il problema persiste, contatta il tuo responsabile.",
     "clockInOnBehalfAuthorityRequired": "Non hai l'autorità per timbrare l'entrata di questo dipendente.",
     "clockOutOnBehalfAuthorityRequired": "Non hai l'autorità per timbrare l'uscita di questo dipendente.",
     "authUserIdRequired": "È richiesto un identificativo di autenticazione.",

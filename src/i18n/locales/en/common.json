@@ -34,6 +34,7 @@
     "attendanceEventNotFound": "This attendance event could not be found.",
     "attendanceNotAllowedAtSite": "Attendance isn't allowed at this site.",
     "attendanceSessionNotFound": "This attendance session could not be found.",
+    "orphanedPresenceSession": "Your previous work session wasn't fully closed. Please try clocking in again - if this keeps happening, contact your manager.",
     "clockInOnBehalfAuthorityRequired": "You don't have authority to clock this employee in.",
     "clockOutOnBehalfAuthorityRequired": "You don't have authority to clock this employee out.",
     "authUserIdRequired": "An authentication identifier is required.",

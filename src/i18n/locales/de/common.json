@@ -34,6 +34,7 @@
     "attendanceEventNotFound": "Dieses Anwesenheitsereignis wurde nicht gefunden.",
     "attendanceNotAllowedAtSite": "Anwesenheitserfassung ist an diesem Standort nicht zulässig.",
     "attendanceSessionNotFound": "Diese Anwesenheitssitzung wurde nicht gefunden.",
+    "orphanedPresenceSession": "Ihre vorherige Arbeitssitzung wurde nicht vollständig beendet. Bitte versuchen Sie erneut, sich einzuchecken - falls dies weiterhin auftritt, wenden Sie sich an Ihren Vorgesetzten.",
     "clockInOnBehalfAuthorityRequired": "Sie sind nicht berechtigt, diesen Mitarbeiter einzustempeln.",
     "clockOutOnBehalfAuthorityRequired": "Sie sind nicht berechtigt, diesen Mitarbeiter auszustempeln.",
     "authUserIdRequired": "Eine Authentifizierungs-ID ist erforderlich.",

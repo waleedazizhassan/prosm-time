@@ -34,6 +34,7 @@
     "attendanceEventNotFound": "تعذر العثور على حدث الحضور هذا.",
     "attendanceNotAllowedAtSite": "تسجيل الحضور غير مسموح في هذا الموقع.",
     "attendanceSessionNotFound": "تعذر العثور على جلسة الحضور هذه.",
+    "orphanedPresenceSession": "جلسة عملك السابقة لم تُغلق بالكامل. حاول تسجيل الحضور مرة أخرى - وإذا استمرت المشكلة، تواصل مع مديرك.",
     "clockInOnBehalfAuthorityRequired": "ليس لديك صلاحية تسجيل حضور هذا الموظف نيابة عنه.",
     "clockOutOnBehalfAuthorityRequired": "ليس لديك صلاحية تسجيل انصراف هذا الموظف نيابة عنه.",
     "authUserIdRequired": "معرّف المصادقة مطلوب.",

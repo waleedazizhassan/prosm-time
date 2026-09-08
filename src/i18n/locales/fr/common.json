@@ -34,6 +34,7 @@
     "attendanceEventNotFound": "Cet événement de présence est introuvable.",
     "attendanceNotAllowedAtSite": "La présence n'est pas autorisée sur ce site.",
     "attendanceSessionNotFound": "Cette session de présence est introuvable.",
+    "orphanedPresenceSession": "Votre session de travail précédente n'a pas été entièrement clôturée. Réessayez de pointer votre arrivée - si le problème persiste, contactez votre responsable.",
     "clockInOnBehalfAuthorityRequired": "Vous n'avez pas l'autorité pour pointer l'arrivée de cet employé.",
     "clockOutOnBehalfAuthorityRequired": "Vous n'avez pas l'autorité pour pointer le départ de cet employé.",
     "authUserIdRequired": "Un identifiant d'authentification est requis.",

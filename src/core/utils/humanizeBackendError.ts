@@ -22,9 +22,21 @@ import type { TFunction } from "i18next";
 // through to that same existing generic fallback, never raw text.
 export default function humanizeBackendError(rawMessage: string | null | undefined, t: TFunction): string | null {
   if (!rawMessage) return null;
-  const key = BACKEND_ERROR_KEYS[rawMessage.trim()];
-  if (!key) return null;
-  return t(`common:backendErrors.${key}`);
+  const trimmed = rawMessage.trim();
+  const key = BACKEND_ERROR_KEYS[trimmed];
+  if (key) return t(`common:backendErrors.${key}`);
+  // § 2026-09-08 real bug fix, defense in depth: the orphaned-
+  // presence-session bug (admin_clock_out never closed it, now fixed
+  // and self-healing) surfaced as this exact raw Postgres constraint
+  // message, completely unmapped, showing the employee nothing but a
+  // generic "unable to clock in" with zero explanation. Even though
+  // the root cause is fixed, keep this mapped permanently - any other
+  // future path that ever produces the same raw constraint violation
+  // should still show something real, not silently fall through.
+  if (trimmed.includes("presence_sessions_one_active_per_user")) {
+    return t("common:backendErrors.orphanedPresenceSession");
+  }
+  return null;
 }
 
 // Raw backend message -> common:backendErrors.<key>. Keys use a
