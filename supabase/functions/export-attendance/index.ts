@@ -13,6 +13,7 @@
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
+import { clientIdentifier, enforceRateLimits, hashIdentifier } from "../_shared/rateLimit.ts";
 
 const MAX_WINDOW_DAYS = 90;
 const DEFAULT_WINDOW_DAYS = 30;
@@ -34,8 +35,22 @@ serve(async (request: Request) => {
       auth: { autoRefreshToken: false, persistSession: false },
     });
 
+    // Security Hardening phase (user-directed): an integration surface
+    // that returns attendance records is worth both guessing at and
+    // scraping, so the attempt rate is capped server-side per caller
+    // and per presented key BEFORE the key is looked up. The raw key is
+    // never used as an identifier - only its SHA-256.
+    const exportRateLimited = await enforceRateLimits(serviceClient, [
+      { scope: "export_attendance_ip", identifier: clientIdentifier(request), limit: 60, windowSeconds: 300, blockSeconds: 900 },
+      { scope: "export_attendance_key", identifier: await hashIdentifier(rawKey), limit: 60, windowSeconds: 300, blockSeconds: 900 },
+    ]);
+    if (exportRateLimited) return exportRateLimited;
+
     const { data: organizationId, error: authError } = await serviceClient.rpc("authenticate_prosm_time_api_key", { p_raw_key: rawKey });
-    if (authError) return errorResponse(authError.message, 500, "INTERNAL_ERROR");
+    if (authError) {
+      console.error("[export-attendance] api key auth failed", authError.message);
+      return errorResponse("Invalid or revoked API key.", 401, "UNAUTHORIZED");
+    }
     if (!organizationId) return errorResponse("Invalid or revoked API key.", 401, "UNAUTHORIZED");
 
     const url = new URL(request.url);

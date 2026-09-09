@@ -11,6 +11,13 @@ import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
+import { clientIdentifier, enforceRateLimits, padResponseTime } from "../_shared/rateLimit.ts";
+
+// Security Hardening phase (user-directed): session-less endpoint, so
+// abuse control is server-side. One neutral failure message for every
+// user-caused failure - an unknown email must not be distinguishable
+// from a wrong invitation code.
+const GENERIC_FAILURE = "This invitation code is invalid or has expired. Ask your administrator for a new invitation.";
 
 serve(async (request: Request) => {
   if (request.method === "OPTIONS") {
@@ -19,6 +26,8 @@ serve(async (request: Request) => {
   if (request.method !== "POST") {
     return errorResponse("Method not allowed.", 405, "METHOD_NOT_ALLOWED");
   }
+
+  const startedAt = Date.now();
 
   try {
     const payload = await request.json().catch(() => ({}));
@@ -40,13 +49,24 @@ serve(async (request: Request) => {
       auth: { autoRefreshToken: false, persistSession: false },
     });
 
+    const rateLimited = await enforceRateLimits(serviceClient, [
+      { scope: "invitation_redeem_email", identifier: email.trim().toLowerCase(), limit: 5, windowSeconds: 900, blockSeconds: 1800 },
+      { scope: "invitation_redeem_ip", identifier: clientIdentifier(request), limit: 20, windowSeconds: 3600, blockSeconds: 3600 },
+    ]);
+    if (rateLimited) {
+      await padResponseTime(startedAt);
+      return rateLimited;
+    }
+
     const { data: redeemResult, error: redeemError } = await serviceClient.rpc("redeem_prosm_time_invitation", {
       p_email: email.trim().toLowerCase(),
       p_verification_code: verificationCode.trim(),
     });
 
     if (redeemError || !redeemResult?.success) {
-      return errorResponse(redeemError?.message ?? "Unable to redeem this invitation.", 400, "REDEEM_FAILED");
+      if (redeemError) console.error("[redeem-invitation] redeem RPC failed", redeemError.message);
+      await padResponseTime(startedAt);
+      return errorResponse(GENERIC_FAILURE, 400, "REDEEM_FAILED");
     }
 
     const { error: updatePasswordError } = await serviceClient.auth.admin.updateUserById(redeemResult.authUserId, {
@@ -58,15 +78,20 @@ serve(async (request: Request) => {
       // visible, retriable ops issue (the account exists but the
       // employee doesn't yet know a working password), not a reason to
       // pretend redemption didn't happen.
+      console.error("[redeem-invitation] password set failed", updatePasswordError.message);
+      await padResponseTime(startedAt);
       return errorResponse(
-        `Invitation redeemed but the password could not be set: ${updatePasswordError.message}. Contact your administrator.`,
+        "Invitation redeemed but the password could not be set. Contact your administrator.",
         500,
         "PASSWORD_SET_FAILED"
       );
     }
 
+    await padResponseTime(startedAt);
     return successResponse({ userId: redeemResult.userId });
   } catch (error: any) {
-    return errorResponse(error?.message ?? "Invitation service unavailable.", 500, "INTERNAL_ERROR");
+    console.error("[redeem-invitation] unexpected failure", error?.message);
+    await padResponseTime(startedAt);
+    return errorResponse("Invitation service unavailable.", 500, "INTERNAL_ERROR");
   }
 });
