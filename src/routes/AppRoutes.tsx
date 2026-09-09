@@ -51,7 +51,7 @@ function RootRedirect() {
 
 export default function AppRoutes() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <AuthProvider>
         <Routes>
           <Route path="/" element={<RootRedirect />} />
