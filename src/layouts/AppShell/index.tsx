@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Main from "./Main";
+import LicenseWarningBanner from "../../components/common/LicenseWarningBanner";
 import { LayoutProvider } from "./LayoutContext";
 import styles from "./AppShell.module.css";
 
@@ -22,6 +23,7 @@ export default function AppShell() {
         <div className={styles.body}>
           <Sidebar />
           <Main>
+            <LicenseWarningBanner />
             <Outlet />
           </Main>
         </div>

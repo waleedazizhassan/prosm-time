@@ -25,4 +25,13 @@ echo "==> applying hardening migration"
 echo "==> running assertions"
 "${PSQL[@]}" -d "$DB" -f "$ROOT/supabase/tests/security/password_reset_and_rate_limit.test.sql" 2>&1 | sed 's/^psql[^ ]* //'
 
+echo "==> loading license enforcement fixture"
+"${PSQL[@]}" -d "$DB" -f "$ROOT/supabase/tests/security/license_fixture.sql" >/dev/null
+
+echo "==> applying license enforcement migration"
+"${PSQL[@]}" -d "$DB" -f "$ROOT/supabase/migrations/20260909140000_prosm_time_installation_identity_and_license_enforcement.sql" >/dev/null
+
+echo "==> running license enforcement assertions"
+"${PSQL[@]}" -d "$DB" -f "$ROOT/supabase/tests/security/license_enforcement.test.sql" 2>&1 | sed 's/^psql[^ ]* //'
+
 echo "==> all security assertions passed"

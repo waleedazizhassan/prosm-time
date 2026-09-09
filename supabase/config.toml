@@ -245,3 +245,30 @@ entrypoint = "./functions/gusto-oauth-callback/index.ts"
 enabled = true
 verify_jwt = true
 entrypoint = "./functions/sync-gusto-hours/index.ts"
+
+# register-installation is called by a brand-new installation that may not
+# have a session yet (the same reasoning as activate-organization). It mints
+# nothing but an identity: the organization and every license decision are
+# derived server-side afterwards.
+[functions.register-installation]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/register-installation/index.ts"
+
+[functions.validate-installation]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/validate-installation/index.ts"
+
+# platform-installations and sync-protection-policy are service-to-service
+# only: no user session is accepted, the PROSM Management integration key is
+# verified inside the handler in constant time.
+[functions.platform-installations]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/platform-installations/index.ts"
+
+[functions.sync-protection-policy]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/sync-protection-policy/index.ts"

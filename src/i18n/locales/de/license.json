@@ -1,0 +1,13 @@
+{
+  "notice": {
+    "grace": "Diese Kopie ist nicht lizenziert — noch {{days}} Tage.",
+    "expired": "Der Lizenzzeitraum ist abgelaufen — Vorgänge sind gesperrt.",
+    "suspended": "Diese Kopie wurde gesperrt — bitte den Support kontaktieren.",
+    "blocked": "Diese Kopie wurde blockiert — bitte den Support kontaktieren.",
+    "revoked": "Diese Lizenz wurde widerrufen — bitte den Support kontaktieren."
+  },
+  "action": {
+    "activate": "Lizenz aktivieren",
+    "support": "Support kontaktieren"
+  }
+}

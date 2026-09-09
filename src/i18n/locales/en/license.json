@@ -1,0 +1,13 @@
+{
+  "notice": {
+    "grace": "This copy is not licensed — {{days}} days remaining.",
+    "expired": "The license period has ended — operations are on hold.",
+    "suspended": "This copy has been suspended — contact support.",
+    "blocked": "This copy has been blocked — contact support.",
+    "revoked": "This license has been revoked — contact support."
+  },
+  "action": {
+    "activate": "Activate license",
+    "support": "Contact support"
+  }
+}

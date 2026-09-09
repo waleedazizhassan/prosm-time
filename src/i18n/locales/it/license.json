@@ -1,0 +1,13 @@
+{
+  "notice": {
+    "grace": "Questa copia non è concessa in licenza — {{days}} giorni rimanenti.",
+    "expired": "Il periodo di licenza è terminato — operazioni sospese.",
+    "suspended": "Questa copia è stata sospesa — contatta l'assistenza.",
+    "blocked": "Questa copia è stata bloccata — contatta l'assistenza.",
+    "revoked": "Questa licenza è stata revocata — contatta l'assistenza."
+  },
+  "action": {
+    "activate": "Attiva licenza",
+    "support": "Contatta l'assistenza"
+  }
+}

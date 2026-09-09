@@ -16,6 +16,7 @@ import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
+import { enforceLicenseGate } from "../_shared/licenseGate.ts";
 
 serve(async (request: Request) => {
   if (request.method === "OPTIONS") {
@@ -45,6 +46,10 @@ serve(async (request: Request) => {
     if (!authUser) {
       return errorResponse("Invalid or expired session.", 401, "UNAUTHORIZED");
     }
+
+    // Server-side license gate. The client cannot influence this decision.
+    const licenseDenial = await enforceLicenseGate(request, "clock-in", authUser.id);
+    if (licenseDenial) return licenseDenial;
 
     const payload = await request.json().catch(() => ({}));
     const { siteId, projectId, idempotencyKey, clientReportedAt, latitude, longitude, accuracyMeters, manualLocationLabel, note, activity } = payload;

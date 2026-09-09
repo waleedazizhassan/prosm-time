@@ -1,0 +1,33 @@
+/* PROSM Time - the persistent license notice. Same card language as the
+   rest of PROSM (dark surface, subtle border, one clear action). */
+
+.banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  background: var(--surface-card);
+  color: var(--text-primary);
+  font-size: var(--font-sm);
+  margin-bottom: var(--space-4);
+}
+
+.warning {
+  border-inline-start: 4px solid var(--color-warning, #d99a2b);
+}
+
+.critical {
+  border-inline-start: 4px solid var(--color-danger, #d9534f);
+}
+
+.message {
+  flex: 1 1 220px;
+  margin: 0;
+}
+
+.action {
+  flex: 0 0 auto;
+}

@@ -1,5 +1,7 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
+import { installationHeaders } from "../license/installationIdentity";
+
 // PROSM Time's own Supabase client - its own project, own URL, own anon
 // key (VITE_SUPABASE_URL/VITE_SUPABASE_ANON_KEY, §43.5: "never reuse
 // credentials, project refs, or connection strings from PROSM Platform
@@ -25,6 +27,23 @@ export function getSupabaseClient(): SupabaseClient {
       persistSession: true,
       autoRefreshToken: true,
       detectSessionInUrl: false,
+    },
+    global: {
+      // Every Edge Function call carries this installation's identity, so the
+      // server can recognise the installation behind a protected operation.
+      // The identity is issued and verified server-side; attaching it here is
+      // transport only, never a permission.
+      fetch: (input, init) => {
+        const url = typeof input === "string" ? input : input instanceof URL ? input.toString() : input.url;
+        if (!url.includes("/functions/v1/")) {
+          return fetch(input as RequestInfo, init);
+        }
+        const headers = new Headers(init?.headers ?? (input instanceof Request ? input.headers : undefined));
+        for (const [name, value] of Object.entries(installationHeaders())) {
+          if (!headers.has(name)) headers.set(name, value);
+        }
+        return fetch(input as RequestInfo, { ...init, headers });
+      },
     },
   });
 

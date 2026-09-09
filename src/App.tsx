@@ -2,6 +2,7 @@ import "./components/common/design-tokens.css";
 import AppRoutes from "./routes/AppRoutes";
 import { ThemeProvider } from "./core/context/ThemeContext";
 import { CalendarProvider } from "./core/context/CalendarContext";
+import { LicenseProvider } from "./core/context/LicenseContext";
 import ErrorBoundary from "./components/common/ErrorBoundary";
 import useAutoFullscreen from "./core/hooks/useAutoFullscreen";
 import useAndroidBackButton from "./core/hooks/useAndroidBackButton";
@@ -23,7 +24,10 @@ export default function App() {
     <ErrorBoundary>
       <ThemeProvider>
         <CalendarProvider>
-          <AppRoutes />
+          {/* License state is surfaced app-wide; enforcement itself is server-side. */}
+          <LicenseProvider>
+            <AppRoutes />
+          </LicenseProvider>
         </CalendarProvider>
       </ThemeProvider>
     </ErrorBoundary>
