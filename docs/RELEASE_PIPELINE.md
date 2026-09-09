@@ -82,3 +82,18 @@ git push --follow-tags
 ```
 
 The tag push runs `release.yml` end to end.
+
+## Activating the workflows
+
+The two workflow files live in `ci/workflows/`. GitHub only runs workflows
+from `.github/workflows/`, and writing there requires the `workflow`
+permission, which the current integration does not hold. Activate them once
+with:
+
+```bash
+mkdir -p .github/workflows
+cp ci/workflows/*.yml .github/workflows/
+git add .github/workflows && git commit -m "Activate PROSM Time pipelines" && git push
+```
+
+Nothing else changes: the files are final and need no editing.

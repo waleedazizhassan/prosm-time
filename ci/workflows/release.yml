@@ -1,0 +1,202 @@
+# PROSM Time - release pipeline.
+#
+# Validate -> tests -> security gate -> build Web / Android / Windows ->
+# artifact validation -> GitHub Release -> publish the release manifest that
+# installed clients poll for updates.
+#
+# GitHub is only the build and distribution source. The apps never update
+# themselves from source code: they read a published release manifest and
+# point the user at the official download for their platform.
+#
+# Any failing step stops the release. Signing material lives only in GitHub
+# Actions secrets, never in the repository.
+name: PROSM Time Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      security_release:
+        description: "Mark this as a security-critical release"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  ci:
+    name: CI gate
+    uses: ./.github/workflows/ci.yml
+
+  android:
+    name: Build Android APK
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - run: npm ci
+      - run: npm run version:sync
+      - run: npm run build
+      - run: npm run security:gate
+      - run: npx cap sync android
+
+      - name: Decode signing keystore
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          if [ -n "$ANDROID_KEYSTORE_BASE64" ]; then
+            echo "$ANDROID_KEYSTORE_BASE64" | base64 -d > android/app/release.keystore
+          else
+            echo "No signing keystore configured - the APK will be unsigned."
+          fi
+
+      - name: Assemble release APK and AAB
+        working-directory: android
+        env:
+          PROSM_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          PROSM_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          PROSM_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: ./gradlew assembleRelease bundleRelease
+
+      - name: Validate the APK artifact
+        run: |
+          set -e
+          found=$(find android/app/build/outputs/apk/release -name "*.apk" -size +1M | head -1)
+          if [ -z "$found" ]; then
+            echo "No usable release APK produced."
+            exit 1
+          fi
+          echo "APK: $found"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prosm-time-android
+          path: |
+            android/app/build/outputs/apk/release/*.apk
+            android/app/build/outputs/bundle/release/*.aab
+
+  windows:
+    name: Build Windows installer
+    needs: ci
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm run security:gate
+
+      - name: Build installer
+        env:
+          CSC_LINK: ${{ secrets.WINDOWS_CERT_BASE64 }}
+          CSC_KEY_PASSWORD: ${{ secrets.WINDOWS_CERT_PASSWORD }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx electron-builder --win --publish never
+
+      - name: Validate the installer artifact
+        shell: bash
+        run: |
+          set -e
+          found=$(find release dist_electron -name "*.exe" -size +10M 2>/dev/null | head -1)
+          if [ -z "$found" ]; then
+            echo "No usable Windows installer produced."
+            exit 1
+          fi
+          echo "Installer: $found"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prosm-time-windows
+          path: |
+            release/*.exe
+            dist_electron/*.exe
+
+  release:
+    name: Publish GitHub Release
+    needs: [ci, android, windows]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Validate the artifact set
+        run: |
+          set -e
+          find artifacts -name "*.apk" -size +1M | grep . || { echo "Missing APK"; exit 1; }
+          find artifacts -name "*.exe" -size +10M | grep . || { echo "Missing installer"; exit 1; }
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+          files: |
+            artifacts/prosm-time-android/**/*.apk
+            artifacts/prosm-time-android/**/*.aab
+            artifacts/prosm-time-windows/**/*.exe
+
+  deploy-web:
+    name: Build web and publish the update manifest
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm run security:gate
+
+      - name: Generate the release manifest installed clients poll
+        env:
+          PROSM_RELEASE_SECURITY: ${{ inputs.security_release }}
+          PROSM_ANDROID_URL: ${{ github.server_url }}/${{ github.repository }}/releases/latest
+          PROSM_WINDOWS_URL: ${{ github.server_url }}/${{ github.repository }}/releases/latest
+        run: npm run release:manifest
+
+      - name: Attach the manifest to the release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/release-manifest.json
+
+      - name: Deploy the web build
+        env:
+          PROSM_WEB_DEPLOY_HOOKS: ${{ secrets.PROSM_WEB_DEPLOY_HOOKS }}
+        run: |
+          # Comma-separated deploy hooks, one per hosted web copy. Cache
+          # busting comes from content-hashed asset names plus the no-store
+          # release manifest, so no client is stranded on stale assets.
+          if [ -z "$PROSM_WEB_DEPLOY_HOOKS" ]; then
+            echo "No web deploy hooks configured - skipping web deployment."
+            exit 0
+          fi
+          IFS=',' read -ra HOOKS <<< "$PROSM_WEB_DEPLOY_HOOKS"
+          for hook in "${HOOKS[@]}"; do
+            echo "Deploying to ${hook%%\?*}"
+            curl -fsS -X POST "$hook" > /dev/null
+          done
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prosm-time-web-release
+          path: dist
