@@ -35,6 +35,12 @@ import frLicense from "./locales/fr/license.json";
 import deLicense from "./locales/de/license.json";
 import itLicense from "./locales/it/license.json";
 
+import enUpdate from "./locales/en/update.json";
+import arUpdate from "./locales/ar/update.json";
+import frUpdate from "./locales/fr/update.json";
+import deUpdate from "./locales/de/update.json";
+import itUpdate from "./locales/it/update.json";
+
 import enShell from "./locales/en/shell.json";
 import arShell from "./locales/ar/shell.json";
 import frShell from "./locales/fr/shell.json";
@@ -128,11 +134,11 @@ import itEmergencyLog from "./locales/it/emergencyLog.json";
 // Management + Map/Geofence, Project Management, §13/§14).
 
 const resources = {
-  en: { common: enCommon, auth: enAuth, dashboard: enDashboard, people: enPeople, shell: enShell, sites: enSites, manager: enManager, attendanceLog: enAttendanceLog, timesheets: enTimesheets, allowances: enAllowances, leave: enLeave, schedule: enSchedule, kiosk: enKiosk, help: enHelp, camera: enCamera, reports: enReports, settings: enSettings, emergencyLog: enEmergencyLog, license: enLicense },
-  ar: { common: arCommon, auth: arAuth, dashboard: arDashboard, people: arPeople, shell: arShell, sites: arSites, manager: arManager, attendanceLog: arAttendanceLog, timesheets: arTimesheets, allowances: arAllowances, leave: arLeave, schedule: arSchedule, kiosk: arKiosk, help: arHelp, camera: arCamera, reports: arReports, settings: arSettings, emergencyLog: arEmergencyLog, license: arLicense },
-  fr: { common: frCommon, auth: frAuth, dashboard: frDashboard, people: frPeople, shell: frShell, sites: frSites, manager: frManager, attendanceLog: frAttendanceLog, timesheets: frTimesheets, allowances: frAllowances, leave: frLeave, schedule: frSchedule, kiosk: frKiosk, help: frHelp, camera: frCamera, reports: frReports, settings: frSettings, emergencyLog: frEmergencyLog, license: frLicense },
-  de: { common: deCommon, auth: deAuth, dashboard: deDashboard, people: dePeople, shell: deShell, sites: deSites, manager: deManager, attendanceLog: deAttendanceLog, timesheets: deTimesheets, allowances: deAllowances, leave: deLeave, schedule: deSchedule, kiosk: deKiosk, help: deHelp, camera: deCamera, reports: deReports, settings: deSettings, emergencyLog: deEmergencyLog, license: deLicense },
-  it: { common: itCommon, auth: itAuth, dashboard: itDashboard, people: itPeople, shell: itShell, sites: itSites, manager: itManager, attendanceLog: itAttendanceLog, timesheets: itTimesheets, allowances: itAllowances, leave: itLeave, schedule: itSchedule, kiosk: itKiosk, help: itHelp, camera: itCamera, reports: itReports, settings: itSettings, emergencyLog: itEmergencyLog, license: itLicense },
+  en: { common: enCommon, auth: enAuth, dashboard: enDashboard, people: enPeople, shell: enShell, sites: enSites, manager: enManager, attendanceLog: enAttendanceLog, timesheets: enTimesheets, allowances: enAllowances, leave: enLeave, schedule: enSchedule, kiosk: enKiosk, help: enHelp, camera: enCamera, reports: enReports, settings: enSettings, emergencyLog: enEmergencyLog, license: enLicense, update: enUpdate },
+  ar: { common: arCommon, auth: arAuth, dashboard: arDashboard, people: arPeople, shell: arShell, sites: arSites, manager: arManager, attendanceLog: arAttendanceLog, timesheets: arTimesheets, allowances: arAllowances, leave: arLeave, schedule: arSchedule, kiosk: arKiosk, help: arHelp, camera: arCamera, reports: arReports, settings: arSettings, emergencyLog: arEmergencyLog, license: arLicense, update: arUpdate },
+  fr: { common: frCommon, auth: frAuth, dashboard: frDashboard, people: frPeople, shell: frShell, sites: frSites, manager: frManager, attendanceLog: frAttendanceLog, timesheets: frTimesheets, allowances: frAllowances, leave: frLeave, schedule: frSchedule, kiosk: frKiosk, help: frHelp, camera: frCamera, reports: frReports, settings: frSettings, emergencyLog: frEmergencyLog, license: frLicense, update: frUpdate },
+  de: { common: deCommon, auth: deAuth, dashboard: deDashboard, people: dePeople, shell: deShell, sites: deSites, manager: deManager, attendanceLog: deAttendanceLog, timesheets: deTimesheets, allowances: deAllowances, leave: deLeave, schedule: deSchedule, kiosk: deKiosk, help: deHelp, camera: deCamera, reports: deReports, settings: deSettings, emergencyLog: deEmergencyLog, license: deLicense, update: deUpdate },
+  it: { common: itCommon, auth: itAuth, dashboard: itDashboard, people: itPeople, shell: itShell, sites: itSites, manager: itManager, attendanceLog: itAttendanceLog, timesheets: itTimesheets, allowances: itAllowances, leave: itLeave, schedule: itSchedule, kiosk: itKiosk, help: itHelp, camera: itCamera, reports: itReports, settings: itSettings, emergencyLog: itEmergencyLog, license: itLicense, update: itUpdate },
 };
 
 export const I18N_STORAGE_KEY = "prosm_time_language";

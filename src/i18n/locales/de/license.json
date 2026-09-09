@@ -1,13 +1,18 @@
 {
+  "title": "PROSM Time Lizenz erforderlich",
   "notice": {
-    "grace": "Diese Kopie ist nicht lizenziert — noch {{days}} Tage.",
-    "expired": "Der Lizenzzeitraum ist abgelaufen — Vorgänge sind gesperrt.",
-    "suspended": "Diese Kopie wurde gesperrt — bitte den Support kontaktieren.",
-    "blocked": "Diese Kopie wurde blockiert — bitte den Support kontaktieren.",
-    "revoked": "Diese Lizenz wurde widerrufen — bitte den Support kontaktieren."
+    "grace": "Diese Installation ist noch nicht mit einer gültigen Lizenz verknüpft.",
+    "expired": "Der Lizenzzeitraum ist beendet — geschützte Vorgänge sind ausgesetzt.",
+    "suspended": "Diese Installation wurde gesperrt — kontaktieren Sie den Support.",
+    "blocked": "Diese Installation wurde blockiert — kontaktieren Sie den Support.",
+    "revoked": "Diese Lizenz wurde widerrufen — kontaktieren Sie den Support."
+  },
+  "detail": {
+    "grace": "Noch {{days}} Tage — die Kulanzfrist endet am {{date}}."
   },
   "action": {
     "activate": "Lizenz aktivieren",
+    "sales": "Vertrieb kontaktieren",
     "support": "Support kontaktieren"
   }
 }

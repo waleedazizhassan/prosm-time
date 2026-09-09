@@ -1,13 +1,18 @@
 {
+  "title": "Licence PROSM Time requise",
   "notice": {
-    "grace": "Cette copie n'est pas sous licence — {{days}} jours restants.",
-    "expired": "La période de licence est terminée — opérations suspendues.",
-    "suspended": "Cette copie a été suspendue — contactez le support.",
-    "blocked": "Cette copie a été bloquée — contactez le support.",
+    "grace": "Cette installation n'est pas encore associée à une licence valide.",
+    "expired": "La période de licence est terminée — les opérations protégées sont suspendues.",
+    "suspended": "Cette installation a été suspendue — contactez le support.",
+    "blocked": "Cette installation a été bloquée — contactez le support.",
     "revoked": "Cette licence a été révoquée — contactez le support."
+  },
+  "detail": {
+    "grace": "{{days}} jours restants — la période de grâce se termine le {{date}}."
   },
   "action": {
     "activate": "Activer la licence",
+    "sales": "Contacter le service commercial",
     "support": "Contacter le support"
   }
 }

@@ -1,13 +1,18 @@
 {
+  "title": "PROSM Time License Required",
   "notice": {
-    "grace": "This copy is not licensed — {{days}} days remaining.",
-    "expired": "The license period has ended — operations are on hold.",
-    "suspended": "This copy has been suspended — contact support.",
-    "blocked": "This copy has been blocked — contact support.",
+    "grace": "This installation is not linked to a valid license yet.",
+    "expired": "The license period has ended — protected operations are on hold.",
+    "suspended": "This installation has been suspended — contact support.",
+    "blocked": "This installation has been blocked — contact support.",
     "revoked": "This license has been revoked — contact support."
+  },
+  "detail": {
+    "grace": "{{days}} days remaining — the grace period ends on {{date}}."
   },
   "action": {
     "activate": "Activate license",
+    "sales": "Contact sales",
     "support": "Contact support"
   }
 }

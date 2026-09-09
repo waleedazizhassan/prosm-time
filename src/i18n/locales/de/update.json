@@ -1,0 +1,9 @@
+{
+  "title": "🚀 Eine neue Version von PROSM Time ist verfügbar",
+  "versions": "Aktuelle Version: v{{current}} — Neue Version: v{{next}}",
+  "defaultNotes": "Diese Version enthält Verbesserungen, Sicherheitsupdates und bessere Leistung.",
+  "action": {
+    "updateNow": "Jetzt aktualisieren",
+    "later": "Später"
+  }
+}

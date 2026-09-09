@@ -58,19 +58,17 @@ export async function evaluateLicenseGate(
   });
 
   if (error || !data) {
-    // The gate itself is unavailable. Refusing every request would take a
-    // fully licensed customer offline because of our own infrastructure, so
-    // the request proceeds - but the outage is recorded, and no license state
-    // is inferred or cached from it. Enforcement resumes on the next call.
+    // FAIL CLOSED. If the gate cannot render a decision, the operation does
+    // not happen: an infrastructure error must never become a way to perform
+    // protected work without a license check. The failure is logged and the
+    // caller gets a retryable 503, not an authorization.
     console.error("[licenseGate] gate unavailable", operation, error?.message);
     return {
-      allowed: true,
-      state: "GATE_UNAVAILABLE",
-      identified: false,
-      graceEndsAt: null,
-      graceDaysRemaining: null,
-      licenseStatus: null,
-      protectionVersion: null,
+      fatal: errorResponse(
+        "License verification is temporarily unavailable. Please try again.",
+        503,
+        "LICENSE_GATE_UNAVAILABLE"
+      ),
     };
   }
 

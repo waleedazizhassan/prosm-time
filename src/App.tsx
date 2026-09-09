@@ -3,6 +3,7 @@ import AppRoutes from "./routes/AppRoutes";
 import { ThemeProvider } from "./core/context/ThemeContext";
 import { CalendarProvider } from "./core/context/CalendarContext";
 import { LicenseProvider } from "./core/context/LicenseContext";
+import { UpdateProvider } from "./core/context/UpdateContext";
 import ErrorBoundary from "./components/common/ErrorBoundary";
 import useAutoFullscreen from "./core/hooks/useAutoFullscreen";
 import useAndroidBackButton from "./core/hooks/useAndroidBackButton";
@@ -26,7 +27,10 @@ export default function App() {
         <CalendarProvider>
           {/* License state is surfaced app-wide; enforcement itself is server-side. */}
           <LicenseProvider>
-            <AppRoutes />
+            {/* Update awareness only: it notifies, it never installs silently. */}
+            <UpdateProvider>
+              <AppRoutes />
+            </UpdateProvider>
           </LicenseProvider>
         </CalendarProvider>
       </ThemeProvider>

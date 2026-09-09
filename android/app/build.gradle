@@ -3,11 +3,16 @@ apply plugin: 'com.android.application'
 android {
     namespace = "net.prosm.time"
     compileSdk = rootProject.ext.compileSdkVersion
+    buildFeatures {
+        // Required so MainActivity can read BuildConfig.DEBUG and switch
+        // off WebView remote inspection in release builds.
+        buildConfig = true
+    }
     defaultConfig {
         applicationId "net.prosm.time"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
+        versionCode 20300
         versionName "2.3.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
@@ -18,9 +23,23 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // Release hardening: R8 renames and strips the compiled
+            // Java, and unused resources are dropped. proguard-rules.pro
+            // keeps every Capacitor/WebView entry point, so app
+            // behaviour is unchanged.
+            minifyEnabled true
+            shrinkResources true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            minifyEnabled false
+        }
+    }
+    packagingOptions {
+        // No stray debug metadata in the shipped APK.
+        exclude 'DebugProbesKt.bin'
+        exclude '**/*.map'
     }
 }
 
