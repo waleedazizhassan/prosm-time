@@ -40,7 +40,7 @@
     },
     "kiosk": {
       "title": "Kiosk Mode",
-      "body": "At sites with a shared kiosk device, select your name from the list, enter your personal kiosk PIN, then Clock In or Clock Out. Your kiosk PIN is separate from your login password - set or change it from the Dashboard."
+      "body": "Open Kiosk Mode from the sidebar and pick a site to launch its shared clock-in screen - meant for a tablet or computer at the entrance, not your own personal device. Select your name from the list, enter your personal kiosk PIN, then Clock In or Clock Out. Your kiosk PIN is separate from your login password - set or change it from the Dashboard, or an administrator/manager can set it for you from your profile page under People."
     },
     "reportsCenter": {
       "title": "Reports Center",
@@ -52,7 +52,19 @@
     },
     "settingsCenter": {
       "title": "Settings (Owner)",
-      "body": "A real home for organization-wide configuration: the no-site geofence radius; the site policy defaults (GPS accuracy tolerance, break rounding, grace period) a brand-new site starts from, since these are almost always the same across an organization rather than something that genuinely differs site to site; and Site Policy itself - pick any site from a dropdown to review or change its own GPS tolerance, grace period, shift hours, overtime/late-deduction timing, break rounding, both self-service block toggles, and exempt employees, all in one place instead of hunting through that site's own page."
+      "body": "A real home for organization-wide configuration: the no-site geofence radius; the site policy defaults (GPS accuracy tolerance, break rounding, grace period) a brand-new site starts from, since these are almost always the same across an organization rather than something that genuinely differs site to site; Site Policy itself - pick any site from a dropdown to review or change its own GPS tolerance, grace period, shift hours, overtime/late-deduction timing, break rounding, both self-service block toggles, and exempt employees, all in one place instead of hunting through that site's own page; and Payroll Integration (QuickBooks Online). API keys for connecting other PROSM products now have their own dedicated page in the sidebar instead of living here."
+    },
+    "leave": {
+      "title": "Leave (PTO)",
+      "body": "Request time off from the Leave page - pick a type (Annual, Sick, Unpaid, Emergency, Other), a date range and an optional reason. Only Annual leave tracks a real entitled/used/remaining balance (21 days a year by default - an Owner can raise or lower a specific employee's own entitlement from their profile page under People, e.g. for legally-required increases tied to long tenure); every other type just shows how many days you've taken this year, with no fixed cap. Your manager or the Owner reviews pending requests from the Manager Console, and can also revoke an already-approved request from there if plans change - you'll be notified either way. Approved leave counts toward your generated timesheet for that period."
+    },
+    "schedule": {
+      "title": "Shift Roster",
+      "body": "See your own upcoming shifts from the sidebar's Shift Roster page - everyone can see their own. Managers with scheduling authority can additionally set up reusable shift templates per site (e.g. \"Morning\", \"Night\") and assign specific employees to specific shifts, including real overnight shifts that cross midnight (shown with a \"(+1)\" marker) - the system checks for overlapping shifts automatically, even across a midnight boundary."
+    },
+    "calendar": {
+      "title": "Hijri or Gregorian Calendar",
+      "body": "Every date shown in the app can display as Gregorian or Hijri - pick your preference from the user menu at the bottom of the sidebar, next to Language and Appearance. This is a per-device preference, not an organization-wide setting - each person can choose their own."
     },
     "payrollIntegration": {
       "title": "Payroll Integration (Owner)",

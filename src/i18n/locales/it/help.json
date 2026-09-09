@@ -40,7 +40,7 @@
     },
     "kiosk": {
       "title": "Modalità chiosco",
-      "body": "Nelle sedi con un dispositivo chiosco condiviso, seleziona il tuo nome dall'elenco, inserisci il tuo PIN personale del chiosco, quindi timbra entrata o uscita. Il tuo PIN del chiosco è indipendente dalla password di accesso - impostalo o modificalo dalla Dashboard."
+      "body": "Apri la Modalità chiosco dalla barra laterale e scegli una sede per avviare il suo schermo di timbratura condiviso - pensato per un tablet o un computer all'ingresso, non per il tuo dispositivo personale. Seleziona il tuo nome dall'elenco, inserisci il tuo PIN personale del chiosco, quindi timbra entrata o uscita. Il tuo PIN del chiosco è indipendente dalla password di accesso - impostalo o modificalo dalla Dashboard, oppure un amministratore/responsabile può impostarlo per te dalla tua pagina profilo in Persone."
     },
     "reportsCenter": {
       "title": "Centro report",
@@ -52,7 +52,19 @@
     },
     "settingsCenter": {
       "title": "Impostazioni (Proprietario)",
-      "body": "Una vera casa per la configurazione a livello di organizzazione: il raggio del geofence senza sede; le politiche predefinite delle sedi (tolleranza di precisione GPS, arrotondamento delle pause, periodo di tolleranza) da cui parte ogni nuova sede, poiché sono valori quasi sempre identici in tutta l'organizzazione; e la Politica della sede stessa - scegli qualsiasi sede da un menu a tendina per rivedere o modificare la sua tolleranza GPS, il periodo di tolleranza, gli orari del turno, la tempistica di straordinario/detrazione ritardo, l'arrotondamento delle pause, entrambi i blocchi self-service e i dipendenti esentati, tutto in un unico posto invece di cercarli nella pagina di quella sede."
+      "body": "Una vera casa per la configurazione a livello di organizzazione: il raggio del geofence senza sede; le politiche predefinite delle sedi (tolleranza di precisione GPS, arrotondamento delle pause, periodo di tolleranza) da cui parte ogni nuova sede, poiché sono valori quasi sempre identici in tutta l'organizzazione; la Politica della sede stessa - scegli qualsiasi sede da un menu a tendina per rivedere o modificare la sua tolleranza GPS, il periodo di tolleranza, gli orari del turno, la tempistica di straordinario/detrazione ritardo, l'arrotondamento delle pause, entrambi i blocchi self-service e i dipendenti esentati, tutto in un unico posto invece di cercarli nella pagina di quella sede; e l'integrazione buste paga (QuickBooks Online). Le chiavi API per collegare altri prodotti PROSM hanno ora una propria pagina dedicata nella barra laterale invece di stare qui."
+    },
+    "leave": {
+      "title": "Ferie (PTO)",
+      "body": "Richiedi un permesso dalla pagina Ferie - scegli un tipo (Annuali, Malattia, Non retribuite, Emergenza, Altro), un intervallo di date e un motivo facoltativo. Solo le ferie annuali tengono traccia di un vero saldo (maturato/utilizzato/residuo) - 21 giorni all'anno per impostazione predefinita; un proprietario può aumentare o ridurre le ferie maturate di un dipendente specifico dalla sua pagina profilo in Persone (ad es. per un aumento previsto per legge in base all'anzianità). Tutti gli altri tipi mostrano solo quanti giorni hai preso quest'anno, senza un tetto fisso. Il tuo responsabile o il proprietario esamina le richieste in sospeso dalla Console manager, e può anche revocare da lì una richiesta già approvata se i piani cambiano - sarai avvisato in entrambi i casi. Le ferie approvate contano nel foglio ore generato per quel periodo."
+    },
+    "schedule": {
+      "title": "Turni",
+      "body": "Consulta i tuoi turni futuri dalla pagina Turni nella barra laterale - ognuno vede i propri. I responsabili con autorità di pianificazione possono inoltre creare modelli di turno riutilizzabili per sede (es. \"Mattina\", \"Notte\") e assegnare dipendenti specifici a turni specifici, compresi veri turni notturni che superano la mezzanotte (mostrati con un indicatore \"(+1)\") - il sistema controlla automaticamente le sovrapposizioni, anche oltre la mezzanotte."
+    },
+    "calendar": {
+      "title": "Calendario Hijri o Gregoriano",
+      "body": "Ogni data mostrata nell'app può essere visualizzata come Gregoriana o Hijri - scegli la tua preferenza dal menu utente in fondo alla barra laterale, accanto a Lingua e Aspetto. È una preferenza per dispositivo, non un'impostazione a livello di organizzazione - ognuno può fare la propria scelta."
     },
     "payrollIntegration": {
       "title": "Integrazione buste paga (proprietario)",

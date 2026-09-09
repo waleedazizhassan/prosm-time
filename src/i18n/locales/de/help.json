@@ -40,7 +40,7 @@
     },
     "kiosk": {
       "title": "Kiosk-Modus",
-      "body": "An Standorten mit einem gemeinsam genutzten Kiosk-Gerät wählen Sie Ihren Namen aus der Liste, geben Ihre persönliche Kiosk-PIN ein und stempeln dann ein oder aus. Ihre Kiosk-PIN ist unabhängig von Ihrem Anmeldepasswort - Sie können sie über das Dashboard festlegen oder ändern."
+      "body": "Öffnen Sie den Kiosk-Modus über die Seitenleiste und wählen Sie einen Standort, um dessen gemeinsam genutzten Stempel-Bildschirm zu starten - gedacht für ein Tablet oder einen Computer am Eingang, nicht für Ihr eigenes Gerät. Wählen Sie Ihren Namen aus der Liste, geben Sie Ihre persönliche Kiosk-PIN ein und stempeln Sie dann ein oder aus. Ihre Kiosk-PIN ist unabhängig von Ihrem Anmeldepasswort - legen Sie sie über das Dashboard fest oder ändern Sie sie dort, oder ein Administrator/Manager kann sie für Sie über Ihr Profil unter Personen festlegen."
     },
     "reportsCenter": {
       "title": "Berichtszentrum",
@@ -52,7 +52,19 @@
     },
     "settingsCenter": {
       "title": "Einstellungen (Inhaber)",
-      "body": "Ein echter Ort für organisationsweite Konfiguration: der Geofence-Radius ohne Standort; die Standort-Richtlinien-Standardwerte (GPS-Genauigkeitstoleranz, Pausenrundung, Kulanzzeit), mit denen ein brandneuer Standort startet, da diese organisationsweit fast immer gleich sind; und die Standort-Richtlinie selbst - wählen Sie einen beliebigen Standort aus einer Dropdown-Liste, um dessen eigene GPS-Toleranz, Kulanzzeit, Schichtzeiten, Überstunden-/Verspätungsabzugs-Timing, Pausenrundung, beide Selbstbedienungs-Blockierungen und befreite Mitarbeiter an einem einzigen Ort einzusehen oder zu ändern, statt auf der eigenen Seite dieses Standorts danach zu suchen."
+      "body": "Ein echter Ort für organisationsweite Konfiguration: der Geofence-Radius ohne Standort; die Standort-Richtlinien-Standardwerte (GPS-Genauigkeitstoleranz, Pausenrundung, Kulanzzeit), mit denen ein brandneuer Standort startet, da diese organisationsweit fast immer gleich sind; die Standort-Richtlinie selbst - wählen Sie einen beliebigen Standort aus einer Dropdown-Liste, um dessen eigene GPS-Toleranz, Kulanzzeit, Schichtzeiten, Überstunden-/Verspätungsabzugs-Timing, Pausenrundung, beide Selbstbedienungs-Blockierungen und befreite Mitarbeiter an einem einzigen Ort einzusehen oder zu ändern, statt auf der eigenen Seite dieses Standorts danach zu suchen; und die Lohnbuchhaltungs-Integration (QuickBooks Online). API-Schlüssel zum Verbinden anderer PROSM-Produkte haben jetzt eine eigene Seite in der Seitenleiste statt hier zu leben."
+    },
+    "leave": {
+      "title": "Urlaub (PTO)",
+      "body": "Beantragen Sie Urlaub über die Urlaubsseite - wählen Sie eine Art (Jahresurlaub, Krankheit, Unbezahlt, Notfall, Sonstiges), einen Zeitraum und einen optionalen Grund. Nur Jahresurlaub verfolgt ein echtes Guthaben (Anspruch/verbraucht/verbleibend) - standardmäßig 21 Tage pro Jahr; ein Inhaber kann den Jahresanspruch eines bestimmten Mitarbeiters über dessen Profil unter Personen erhöhen oder senken (z. B. für eine gesetzlich vorgeschriebene Erhöhung bei langer Betriebszugehörigkeit). Alle anderen Arten zeigen nur, wie viele Tage Sie dieses Jahr genommen haben, ohne feste Obergrenze. Ihr Manager oder der Inhaber prüft ausstehende Anträge über die Manager-Konsole und kann von dort aus auch einen bereits genehmigten Antrag widerrufen, falls sich Pläne ändern - Sie werden in beiden Fällen benachrichtigt. Genehmigter Urlaub zählt zu Ihrem generierten Stundenzettel für diesen Zeitraum."
+    },
+    "schedule": {
+      "title": "Dienstplan",
+      "body": "Sehen Sie Ihre eigenen bevorstehenden Schichten über die Dienstplan-Seite in der Seitenleiste - jeder sieht seine eigenen. Manager mit Planungsbefugnis können zusätzlich wiederverwendbare Schichtvorlagen pro Standort erstellen (z. B. „Früh“, „Nacht“) und bestimmte Mitarbeiter bestimmten Schichten zuweisen, einschließlich echter Nachtschichten über Mitternacht hinweg (mit einer „(+1)“-Markierung angezeigt) - das System prüft automatisch auf Überschneidungen, auch über die Mitternachtsgrenze hinweg."
+    },
+    "calendar": {
+      "title": "Hidschri- oder gregorianischer Kalender",
+      "body": "Jedes in der App angezeigte Datum kann gregorianisch oder hidschri angezeigt werden - wählen Sie Ihre Präferenz im Benutzermenü unten in der Seitenleiste, neben Sprache und Erscheinungsbild. Dies ist eine geräteweise Einstellung, keine organisationsweite - jede Person kann ihre eigene Wahl treffen."
     },
     "payrollIntegration": {
       "title": "Lohnbuchhaltungs-Integration (Inhaber)",
