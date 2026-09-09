@@ -17,6 +17,8 @@
     "status": "Status",
     "worked": "Worked",
     "overtime": "Overtime",
+    "leave": "Leave",
+    "leaveDays": "{{count}} day(s)",
     "clockIn": "Clock In",
     "clockOut": "Clock Out"
   },
@@ -52,6 +54,7 @@
     "worked": "Worked",
     "breaks": "Breaks",
     "overtime": "Overtime",
+    "leave": "Leave",
     "exceptions": "Exceptions",
     "corrections": "Corrections",
     "noEntries": "No attendance sessions in this period.",

@@ -17,6 +17,8 @@
     "status": "Status",
     "worked": "Gearbeitet",
     "overtime": "Überstunden",
+    "leave": "Urlaub",
+    "leaveDays": "{{count}} Tag(e)",
     "clockIn": "Kommen",
     "clockOut": "Gehen"
   },
@@ -52,6 +54,7 @@
     "worked": "Gearbeitet",
     "breaks": "Pausen",
     "overtime": "Überstunden",
+    "leave": "Urlaub",
     "exceptions": "Ausnahmen",
     "corrections": "Korrekturen",
     "noEntries": "Keine Anwesenheitssitzungen in diesem Zeitraum.",

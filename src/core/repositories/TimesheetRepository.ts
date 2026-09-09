@@ -18,6 +18,7 @@ export interface Timesheet {
   totalWorkedMinutes: number;
   totalBreakMinutes: number;
   totalOvertimeMinutes: number;
+  totalLeaveDays: number;
   exceptionsCount: number;
   correctionsCount: number;
   submittedAt: string | null;
@@ -137,6 +138,7 @@ interface TimesheetRow {
   total_worked_minutes: number;
   total_break_minutes: number;
   total_overtime_minutes: number;
+  total_leave_days: number;
   exceptions_count: number;
   corrections_count: number;
   submitted_at: string | null;
@@ -157,6 +159,7 @@ function mapTimesheetRow(row: TimesheetRow): Timesheet {
     totalWorkedMinutes: row.total_worked_minutes,
     totalBreakMinutes: row.total_break_minutes,
     totalOvertimeMinutes: row.total_overtime_minutes,
+    totalLeaveDays: row.total_leave_days,
     exceptionsCount: row.exceptions_count,
     correctionsCount: row.corrections_count,
     submittedAt: row.submitted_at,
@@ -203,7 +206,7 @@ class TimesheetRepository {
     try {
       const { data, error } = await this.client
         .from("timesheets")
-        .select("id, user_id, period_start, period_end, status, total_worked_minutes, total_break_minutes, total_overtime_minutes, exceptions_count, corrections_count, submitted_at, approved_at, locked_at, users!timesheets_user_id_fkey(full_name)")
+        .select("id, user_id, period_start, period_end, status, total_worked_minutes, total_break_minutes, total_overtime_minutes, total_leave_days, exceptions_count, corrections_count, submitted_at, approved_at, locked_at, users!timesheets_user_id_fkey(full_name)")
         .eq("user_id", userId)
         .order("period_start", { ascending: false });
       if (error) return createError(error.message);
@@ -217,7 +220,7 @@ class TimesheetRepository {
     try {
       const { data, error } = await this.client
         .from("timesheets")
-        .select("id, user_id, period_start, period_end, status, total_worked_minutes, total_break_minutes, total_overtime_minutes, exceptions_count, corrections_count, submitted_at, approved_at, locked_at, users!timesheets_user_id_fkey(full_name)")
+        .select("id, user_id, period_start, period_end, status, total_worked_minutes, total_break_minutes, total_overtime_minutes, total_leave_days, exceptions_count, corrections_count, submitted_at, approved_at, locked_at, users!timesheets_user_id_fkey(full_name)")
         .eq("status", "submitted")
         .order("submitted_at", { ascending: true });
       if (error) return createError(error.message);

@@ -17,6 +17,8 @@
     "status": "Statut",
     "worked": "Travaillé",
     "overtime": "Heures sup.",
+    "leave": "Congé",
+    "leaveDays": "{{count}} jour(s)",
     "clockIn": "Arrivée",
     "clockOut": "Départ"
   },
@@ -52,6 +54,7 @@
     "worked": "Travaillé",
     "breaks": "Pauses",
     "overtime": "Heures sup.",
+    "leave": "Congé",
     "exceptions": "Exceptions",
     "corrections": "Corrections",
     "noEntries": "Aucune session de présence dans cette période.",

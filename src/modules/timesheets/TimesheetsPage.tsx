@@ -285,6 +285,7 @@ export default function TimesheetsPage() {
     { key: "status", header: t("columns.status"), render: (row) => <StatusBadge status={STATUS_BADGE_KEY[row.status]}>{t(`status.${row.status}`)}</StatusBadge> },
     { key: "worked", header: t("columns.worked"), render: (row) => formatMinutes(row.totalWorkedMinutes) },
     { key: "overtime", header: t("columns.overtime"), render: (row) => formatMinutes(row.totalOvertimeMinutes) },
+    { key: "leave", header: t("columns.leave"), render: (row) => (row.totalLeaveDays > 0 ? t("columns.leaveDays", { count: row.totalLeaveDays }) : "—") },
   ];
 
   const isOwnDetail = detailTimesheet && profile ? detailTimesheet.userId === profile.id : false;
@@ -406,6 +407,7 @@ export default function TimesheetsPage() {
               </dd>
               <dd style={{ margin: "0 0 var(--space-1)" }}>
                 {t("detail.worked")}: {formatMinutes(detailTimesheet.totalWorkedMinutes)} · {t("detail.breaks")}: {formatMinutes(detailTimesheet.totalBreakMinutes)} · {t("detail.overtime")}: {formatMinutes(detailTimesheet.totalOvertimeMinutes)}
+                {detailTimesheet.totalLeaveDays > 0 ? ` · ${t("detail.leave")}: ${t("columns.leaveDays", { count: detailTimesheet.totalLeaveDays })}` : ""}
               </dd>
               <dd style={{ margin: 0 }}>
                 {t("detail.exceptions")}: {detailTimesheet.exceptionsCount} · {t("detail.corrections")}: {detailTimesheet.correctionsCount}

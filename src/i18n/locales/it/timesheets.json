@@ -17,6 +17,8 @@
     "status": "Stato",
     "worked": "Lavorato",
     "overtime": "Straordinario",
+    "leave": "Ferie",
+    "leaveDays": "{{count}} giorno/i",
     "clockIn": "Entrata",
     "clockOut": "Uscita"
   },
@@ -52,6 +54,7 @@
     "worked": "Lavorato",
     "breaks": "Pause",
     "overtime": "Straordinario",
+    "leave": "Ferie",
     "exceptions": "Eccezioni",
     "corrections": "Correzioni",
     "noEntries": "Nessuna sessione di presenza in questo periodo.",
