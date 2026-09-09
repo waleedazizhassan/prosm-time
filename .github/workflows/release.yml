@@ -50,6 +50,7 @@ jobs:
       - run: npm run build
       - run: npm run security:gate
       - run: npx cap sync android
+      - run: chmod +x android/gradlew
 
       - name: Decode signing keystore
         env:
@@ -72,7 +73,7 @@ jobs:
       - name: Validate the APK artifact
         run: |
           set -e
-          found=$(find android/app/build/outputs/apk/release -name "*.apk" -size +1M | head -1)
+          found=$(find android/app/build/outputs/apk/release -name "*.apk" -size +1M 2>/dev/null | head -1 || true)
           if [ -z "$found" ]; then
             echo "No usable release APK produced."
             exit 1
@@ -112,7 +113,7 @@ jobs:
         shell: bash
         run: |
           set -e
-          found=$(find release dist_electron -name "*.exe" -size +10M 2>/dev/null | head -1)
+          found=$(find release -name "*.exe" -size +10M 2>/dev/null | head -1 || true)
           if [ -z "$found" ]; then
             echo "No usable Windows installer produced."
             exit 1
