@@ -19,6 +19,7 @@
     "electron:build": "npm run build && electron-builder --win"
   },
   "dependencies": {
+    "@anuradev/capacitor-background-mode": "^8.1.0",
     "@capacitor/android": "^8.5.1",
     "@capacitor/app": "^8.1.1",
     "@capacitor/core": "^8.5.1",

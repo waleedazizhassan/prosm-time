@@ -1,3 +1,6 @@
+import { Capacitor } from "@capacitor/core";
+import { BackgroundMode } from "@anuradev/capacitor-background-mode";
+
 import type { RadioStation } from "./RadioBrowserClient";
 
 // PROSM Time - ported from PROSM Platform's own RadioPlaybackEngine (§
@@ -87,6 +90,40 @@ class RadioPlaybackEngine {
 
   getSnapshot = (): RadioEngineState => this.state;
 
+  // § real bug, user-reported: "the radio is heavy and stops playing in
+  // the background within a minute." Root cause: a plain <audio>
+  // element's playback (and the JS reconnect/stall-recovery logic
+  // above) has no way to keep running once Android suspends the
+  // WebView's own JS execution while the app is backgrounded - there
+  // is no purely-JS fix for this, the OS itself pauses the timers this
+  // engine depends on. @anuradev/capacitor-background-mode starts a
+  // real Android foreground service (with its own persistent, low-
+  // priority notification, as Android requires for any foreground
+  // service) that keeps the WebView genuinely alive in the background -
+  // enabled only while audio is actually meant to be playing, disabled
+  // the moment playback truly stops, so it never lingers as a battery
+  // drain after the user is done listening. No-op on web/Electron
+  // (Capacitor.isNativePlatform() false there) - this class of
+  // suspension is Android-specific.
+  private async enableBackgroundMode(stationName: string) {
+    if (!Capacitor.isNativePlatform()) return;
+    try {
+      await BackgroundMode.enable({ title: "PROSM Time", text: stationName, silent: true });
+    } catch {
+      // Missing notification permission or similar - playback itself
+      // still proceeds normally in the foreground either way.
+    }
+  }
+
+  private async disableBackgroundMode() {
+    if (!Capacitor.isNativePlatform()) return;
+    try {
+      await BackgroundMode.disable();
+    } catch {
+      // Nothing meaningful to recover from here.
+    }
+  }
+
   async startPlayback(station: RadioStation) {
     this.clearReconnectTimer();
     this.clearStallGraceTimer();
@@ -102,6 +139,8 @@ class RadioPlaybackEngine {
     audio.src = station.streamUrl;
     audio.muted = this.state.isMuted;
 
+    this.enableBackgroundMode(station.name);
+
     try {
       await audio.play();
     } catch {
@@ -112,10 +151,16 @@ class RadioPlaybackEngine {
   pausePlayback() {
     this.clearStallGraceTimer();
     this.audio?.pause();
+    // A deliberate pause (not just stop) still means playback isn't
+    // actually happening - the foreground service exists to keep audio
+    // ALIVE, not to linger notifying the user for no reason while
+    // they've paused it. resumePlayback() re-enables it.
+    this.disableBackgroundMode();
   }
 
   resumePlayback() {
     if (this.audio && this.state.currentStation) {
+      this.enableBackgroundMode(this.state.currentStation.name);
       this.audio.play().catch(() => this.handleStreamFailure());
     }
   }
@@ -129,6 +174,7 @@ class RadioPlaybackEngine {
       this.audio.removeAttribute("src");
       this.audio.load();
     }
+    this.disableBackgroundMode();
     this.setState({ currentStation: null, playbackState: "idle", errorMessage: null });
   }
 
