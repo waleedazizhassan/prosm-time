@@ -12,5 +12,11 @@
   "clockInSuccess": "{{name}} clocked in.",
   "clockOutSuccess": "{{name}} clocked out.",
   "backToRosterAction": "Back to roster",
-  "actionError": "Unable to complete this action."
+  "actionError": "Unable to complete this action.",
+  "launcher": {
+    "title": "Choose a site",
+    "empty": "No sites have kiosk mode enabled yet - a Site Manager can turn it on from that site's own settings.",
+    "openAction": "Open kiosk",
+    "explainer": "Kiosk mode turns any shared device (a tablet at the entrance, a computer at reception) into a shared clock-in screen: each person picks their own name from the list and enters their own personal kiosk PIN to clock in or out - no login needed on the shared device itself. Your kiosk PIN is separate from your account password. Set or change your own PIN from your Dashboard; an administrator or manager can also set it for you from your profile page under People."
+  }
 }

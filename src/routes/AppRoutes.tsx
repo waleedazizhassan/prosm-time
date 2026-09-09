@@ -27,6 +27,7 @@ import ReportsPage from "../modules/reports/ReportsPage";
 import OrganizationSettingsPage from "../modules/settings/OrganizationSettingsPage";
 import IntegrationsPage from "../modules/settings/IntegrationsPage";
 import KioskPage from "../modules/kiosk/KioskPage";
+import KioskLauncherPage from "../modules/kiosk/KioskLauncherPage";
 import HelpPage from "../modules/help/HelpPage";
 
 // PROSM Time route map. /activate, /login, /accept-invitation are
@@ -85,6 +86,7 @@ export default function AppRoutes() {
             <Route path="/reports" element={<ReportsPage />} />
             <Route path="/settings" element={<OrganizationSettingsPage />} />
             <Route path="/integrations" element={<IntegrationsPage />} />
+            <Route path="/kiosk" element={<KioskLauncherPage />} />
             <Route path="/kiosk/:siteId" element={<KioskPage />} />
             <Route path="/help" element={<HelpPage />} />
           </Route>

@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, Plug } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, Plug, MonitorSmartphone } from "lucide-react";
 
 // § live UX review, user-directed - "professional reorganization" of
 // the Sidebar into grouped sections/"centers" instead of one flat
@@ -57,6 +57,12 @@ export const NAV_ITEMS: NavItem[] = [
   // Leave above - the management section within the page itself gates
   // on schedules.manage (an established permission, unused until now).
   { id: "schedule", labelKey: "items.schedule", path: "/schedule", icon: CalendarClock, requiredPermission: null, section: "attendance" },
+  // § user-directed - "bring Kiosk mode back into the sidebar" (it was
+  // reachable only via a direct /kiosk/:siteId URL, invisible from
+  // navigation). Open to every authenticated member, same reasoning as
+  // Attendance Record above - the real identity check inside kiosk mode
+  // is the PIN, not who launched the screen.
+  { id: "kiosk", labelKey: "items.kiosk", path: "/kiosk", icon: MonitorSmartphone, requiredPermission: null, section: "attendance" },
   // § live UX review, user-directed - a real Emergency Log for SOS
   // alerts (exact GPS location, time, employee, site), reached from
   // both the sidebar and the notification bell/siren overlay. Gated on

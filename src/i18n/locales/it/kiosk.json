@@ -12,5 +12,11 @@
   "clockInSuccess": "{{name}} ha timbrato l'entrata.",
   "clockOutSuccess": "{{name}} ha timbrato l'uscita.",
   "backToRosterAction": "Torna all'elenco",
-  "actionError": "Impossibile completare questa azione."
+  "actionError": "Impossibile completare questa azione.",
+  "launcher": {
+    "title": "Scegli una sede",
+    "empty": "Nessuna sede ha ancora la modalità chiosco attiva - un responsabile di sede può attivarla dalle impostazioni di quella sede.",
+    "openAction": "Apri chiosco",
+    "explainer": "La modalità chiosco trasforma qualsiasi dispositivo condiviso (un tablet all'ingresso, un computer alla reception) in uno schermo di timbratura comune: ognuno seleziona il proprio nome dall'elenco e inserisce il proprio PIN personale del chiosco per timbrare entrata o uscita - senza bisogno di accedere sul dispositivo condiviso stesso. Il tuo PIN del chiosco è separato dalla password del tuo account. Imposta o cambia il tuo PIN dalla tua Dashboard; un amministratore o un responsabile può impostarlo anche per te dalla tua pagina profilo in Persone."
+  }
 }
