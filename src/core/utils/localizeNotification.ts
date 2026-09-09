@@ -34,7 +34,22 @@ export default function localizeNotification(notification: AppNotification, t: T
       if (!name || !kind) break;
       if (kind === "leave") {
         const days = typeof data.days === "number" ? data.days : null;
-        return { title: t("shell:notifications.exceptionPendingReview.titleLeave"), body: t("shell:notifications.exceptionPendingReview.bodyLeave", { name, days: days ?? "?" }) };
+        const leaveType = typeof data.leaveType === "string" ? data.leaveType : null;
+        const startDate = typeof data.startDate === "string" ? data.startDate : null;
+        const endDate = typeof data.endDate === "string" ? data.endDate : null;
+        const reason = typeof data.reason === "string" ? data.reason : null;
+        const typeLabel = leaveType ? t(`leave:types.${leaveType}`) : t("leave:types.other");
+        const body =
+          startDate && endDate
+            ? t("shell:notifications.exceptionPendingReview.bodyLeaveDetailed", {
+                name,
+                days: days ?? "?",
+                type: typeLabel,
+                startDate,
+                endDate,
+              }) + (reason ? ` ${t("shell:notifications.exceptionPendingReview.bodyLeaveReasonSuffix", { reason })}` : "")
+            : t("shell:notifications.exceptionPendingReview.bodyLeave", { name, days: days ?? "?" });
+        return { title: t("shell:notifications.exceptionPendingReview.titleLeave"), body };
       }
       const titleKey =
         kind === "exception"
