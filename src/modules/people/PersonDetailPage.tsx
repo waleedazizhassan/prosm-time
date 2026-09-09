@@ -7,6 +7,7 @@ import EmployeeRepository, { type OrgMember } from "../../core/repositories/Empl
 import PermissionRepository, { type Permission } from "../../core/repositories/PermissionRepository";
 import DeviceBindingRepository, { type DeviceBinding } from "../../core/repositories/DeviceBindingRepository";
 import KioskRepository from "../../core/repositories/KioskRepository";
+import LeaveRepository from "../../core/repositories/LeaveRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import PageShell from "../../components/common/PageShell";
@@ -60,6 +61,12 @@ export default function PersonDetailPage() {
   const [kioskPinError, setKioskPinError] = useState("");
   const [kioskPinSuccess, setKioskPinSuccess] = useState(false);
 
+  const [annualEntitlement, setAnnualEntitlement] = useState<number | null>(null);
+  const [annualEntitlementInput, setAnnualEntitlementInput] = useState("");
+  const [entitlementSubmitting, setEntitlementSubmitting] = useState(false);
+  const [entitlementError, setEntitlementError] = useState("");
+  const [entitlementSuccess, setEntitlementSuccess] = useState(false);
+
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [deleteReason, setDeleteReason] = useState("");
   const [deleteSubmitting, setDeleteSubmitting] = useState(false);
@@ -84,18 +91,24 @@ export default function PersonDetailPage() {
   // every other action on this page, the user was explicit this one
   // is Owner-only.
   const canDeactivate = Boolean(profile?.isOwner);
+  // § real request, user-directed - "an Owner button to override annual
+  // entitlement" (real Egyptian labor-law context: 10+ years of
+  // social-insurance tenure legally entitles 30 days/year, not the
+  // org's 21-day default). Owner-only, same posture as canDeactivate.
+  const canEditLeaveEntitlement = Boolean(profile?.isOwner);
 
   const load = useCallback(async () => {
     if (!userId) return;
     setLoading(true);
     setLoadError("");
 
-    const [memberResult, catalogResult, effectiveResult, overridesResult, devicesResult] = await Promise.all([
+    const [memberResult, catalogResult, effectiveResult, overridesResult, devicesResult, leaveBalanceResult] = await Promise.all([
       EmployeeRepository.getMember(userId),
       PermissionRepository.listCatalog(),
       PermissionRepository.getEffectivePermissions(userId),
       PermissionRepository.getUserOverrides(userId),
       DeviceBindingRepository.listForUser(userId),
+      LeaveRepository.getBalanceFor(userId),
     ]);
 
     if (!memberResult.success) {
@@ -109,8 +122,30 @@ export default function PersonDetailPage() {
     setEffective(effectiveResult.success ? effectiveResult.data ?? [] : []);
     setOverrides(overridesResult.success ? overridesResult.data ?? {} : {});
     setDevices(devicesResult.success ? devicesResult.data ?? [] : []);
+    if (leaveBalanceResult.success && leaveBalanceResult.data) {
+      const annual = leaveBalanceResult.data.balances.find((entry) => entry.leaveType === "annual");
+      setAnnualEntitlement(annual?.entitledDays ?? null);
+      setAnnualEntitlementInput(annual?.entitledDays != null ? String(annual.entitledDays) : "");
+    }
     setLoading(false);
   }, [userId, t]);
+
+  const handleSetAnnualEntitlement = async () => {
+    if (!userId) return;
+    const days = Number(annualEntitlementInput);
+    if (!Number.isFinite(days) || days < 0) return;
+    setEntitlementSubmitting(true);
+    setEntitlementError("");
+    setEntitlementSuccess(false);
+    const result = await LeaveRepository.setAnnualEntitlement(userId, new Date().getFullYear(), days);
+    setEntitlementSubmitting(false);
+    if (!result.success) {
+      setEntitlementError(humanizeBackendError(result.message, t) ?? t("detail.leaveEntitlementError"));
+      return;
+    }
+    setAnnualEntitlement(days);
+    setEntitlementSuccess(true);
+  };
 
   useEffect(() => {
     load();
@@ -371,6 +406,28 @@ export default function PersonDetailPage() {
           <Input label={t("detail.kioskPinLabel")} name="kioskPin" type="password" value={kioskPin} onChange={(event) => setKioskPin(event.target.value.replace(/[^0-9]/g, "").slice(0, 6))} disabled={kioskPinSubmitting} />
           <Button onClick={handleSetKioskPin} loading={kioskPinSubmitting} disabled={kioskPin.length < 4}>
             {t("detail.kioskPinAction")}
+          </Button>
+        </Card>
+      ) : null}
+
+      {canEditLeaveEntitlement ? (
+        <Card title={t("detail.leaveEntitlementTitle")}>
+          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.leaveEntitlementHint")}</p>
+          {annualEntitlement != null ? (
+            <p style={{ fontSize: "var(--font-sm)", margin: "0 0 var(--space-2)" }}>{t("detail.leaveEntitlementCurrent", { days: annualEntitlement })}</p>
+          ) : null}
+          <ErrorText>{entitlementError}</ErrorText>
+          {entitlementSuccess ? <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("detail.leaveEntitlementSuccess")}</p> : null}
+          <Input
+            label={t("detail.leaveEntitlementLabel")}
+            name="annualEntitlement"
+            type="number"
+            value={annualEntitlementInput}
+            onChange={(event) => setAnnualEntitlementInput(event.target.value)}
+            disabled={entitlementSubmitting}
+          />
+          <Button onClick={handleSetAnnualEntitlement} loading={entitlementSubmitting} disabled={!annualEntitlementInput.trim()}>
+            {t("detail.leaveEntitlementAction")}
           </Button>
         </Card>
       ) : null}

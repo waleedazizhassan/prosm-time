@@ -238,6 +238,47 @@ class LeaveRepository {
   async revokeApproved(requestId: string, notes: string): Promise<ServiceResult> {
     return this.review(requestId, "rejected", notes);
   }
+
+  // § real request, user-directed: an Owner-only override for a
+  // specific employee's annual entitlement (real Egyptian labor-law
+  // context - 10+ years of social-insurance tenure legally entitles 30
+  // days/year, not the org's own 21-day default). Wraps the RPC that
+  // already existed but had no UI anywhere.
+  async getBalanceFor(userId: string, year?: number): Promise<ServiceResult<{ year: number; balances: LeaveBalanceEntry[] }>> {
+    try {
+      const { data, error } = await this.client.rpc("get_prosm_time_leave_balance", { p_user_id: userId, p_year: year ?? null });
+      if (error) return createError(error.message);
+      if (data?.success === false) return createError("Unable to load this employee's leave balance.");
+      return createSuccess({
+        year: data.year,
+        balances: (data.balances ?? []).map((entry: { leaveType: LeaveType; entitledDays: number | null; usedDays: number; pendingDays: number; remainingDays: number | null }) => ({
+          leaveType: entry.leaveType,
+          entitledDays: entry.entitledDays,
+          usedDays: entry.usedDays,
+          pendingDays: entry.pendingDays,
+          remainingDays: entry.remainingDays,
+        })),
+      });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Leave service unavailable.");
+    }
+  }
+
+  async setAnnualEntitlement(userId: string, year: number, entitledDays: number): Promise<ServiceResult> {
+    try {
+      const { data, error } = await this.client.rpc("set_prosm_time_leave_entitlement", {
+        p_user_id: userId,
+        p_leave_type: "annual",
+        p_year: year,
+        p_entitled_days: entitledDays,
+      });
+      if (error) return createError(error.message);
+      if (data?.success === false) return createError("Unable to update this employee's leave entitlement.");
+      return createSuccess();
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Leave service unavailable.");
+    }
+  }
 }
 
 export default new LeaveRepository();
