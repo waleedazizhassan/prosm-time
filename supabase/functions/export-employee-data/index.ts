@@ -6,6 +6,7 @@
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
+import { checkInstallationGate } from "../_shared/installationGate.ts";
 
 serve(async (request: Request) => {
   if (request.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
@@ -26,6 +27,9 @@ serve(async (request: Request) => {
       data: { user: authUser },
     } = await callerClient.auth.getUser();
     if (!authUser) return errorResponse("Invalid or expired session.", 401, "UNAUTHORIZED");
+
+    const gate = await checkInstallationGate(callerClient, supabaseUrl, anonKey, authorizationHeader);
+    if (!gate.allowed) return errorResponse(gate.reason ?? "This installation is not covered by a valid license.", 403, "INSTALLATION_BLOCKED");
 
     const payload = await request.json().catch(() => ({}));
     const { userId } = payload;
