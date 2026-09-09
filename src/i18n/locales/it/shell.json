@@ -64,6 +64,27 @@
       "title": "Allarme SOS/Emergenza",
       "body": "{{name}} ha attivato un allarme SOS/Emergenza."
     },
+    "timesheet": {
+      "submittedTitle": "Foglio ore inviato per la revisione",
+      "submittedBody": "Un foglio ore è stato inviato ed è in attesa della tua approvazione.",
+      "approvedTitle": "Foglio ore approvato",
+      "approvedBody": "Il tuo foglio ore è stato approvato ed è ora bloccato.",
+      "rejectedTitle": "Foglio ore rifiutato",
+      "rejectedBody": "Il tuo foglio ore è stato rifiutato ed è tornato in bozza.",
+      "correctionRequestedTitle": "Richiesta di correzione del foglio ore",
+      "correctionRequestedBody": "Un dipendente ha richiesto una correzione su un foglio ore bloccato.",
+      "correctionApprovedTitle": "Correzione del foglio ore approvata",
+      "correctionApprovedBody": "La tua richiesta di correzione è stata approvata e il periodo è stato riaperto per un nuovo invio.",
+      "correctionRejectedTitle": "Correzione del foglio ore rifiutata",
+      "correctionRejectedBody": "La tua richiesta di correzione del foglio ore è stata rifiutata."
+    },
+    "shiftAssigned": {
+      "title": "Ti è stato assegnato un nuovo turno",
+      "body": "Sei programmato il {{date}} dalle {{startTime}} alle {{endTime}}.",
+      "bodyOvernight": "Sei programmato il {{date}} dalle {{startTime}} alle {{endTime}} (il giorno successivo).",
+      "cancelledTitle": "Un turno programmato è stato annullato",
+      "cancelledBody": "Il tuo turno del {{date}} è stato annullato."
+    },
     "decision": {
       "approved": "Approvato",
       "rejected": "Rifiutato",
@@ -82,6 +103,7 @@
     "allowances": "Indennità",
     "leave": "Ferie",
     "schedule": "Turni",
+    "kiosk": "Modalità Chiosco",
     "reports": "Report",
     "settings": "Impostazioni",
     "integrations": "API",

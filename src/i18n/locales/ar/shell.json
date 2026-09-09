@@ -64,6 +64,27 @@
       "title": "تنبيه طوارئ (SOS)",
       "body": "{{name}} أرسل تنبيه طوارئ (SOS)."
     },
+    "timesheet": {
+      "submittedTitle": "تايم شيت مُرسل للمراجعة",
+      "submittedBody": "تم إرسال تايم شيت وهو بانتظار موافقتك.",
+      "approvedTitle": "تم اعتماد التايم شيت",
+      "approvedBody": "تم اعتماد التايم شيت بتاعك وأصبح مقفلاً الآن.",
+      "rejectedTitle": "تم رفض التايم شيت",
+      "rejectedBody": "تم رفض التايم شيت بتاعك وأُعيد لحالة المسودة.",
+      "correctionRequestedTitle": "طلب تعديل على تايم شيت",
+      "correctionRequestedBody": "طلب موظف تعديل على تايم شيت مقفل.",
+      "correctionApprovedTitle": "تمت الموافقة على طلب تعديل التايم شيت",
+      "correctionApprovedBody": "تمت الموافقة على طلب تعديل التايم شيت بتاعك وأُعيدت الفترة للتعديل والإرسال من جديد.",
+      "correctionRejectedTitle": "تم رفض طلب تعديل التايم شيت",
+      "correctionRejectedBody": "تم رفض طلب تعديل التايم شيت بتاعك."
+    },
+    "shiftAssigned": {
+      "title": "تم جدولة شيفت جديد لك",
+      "body": "أنت مجدول يوم {{date}} من {{startTime}} إلى {{endTime}}.",
+      "bodyOvernight": "أنت مجدول يوم {{date}} من {{startTime}} إلى {{endTime}} (اليوم التالي).",
+      "cancelledTitle": "تم إلغاء شيفت مجدول",
+      "cancelledBody": "تم إلغاء شيفتك يوم {{date}}."
+    },
     "decision": {
       "approved": "تمت الموافقة",
       "rejected": "تم الرفض",
@@ -81,7 +102,8 @@
     "timesheets": "كشوف الدوام",
     "allowances": "البدلات",
     "leave": "الإجازات",
-    "schedule": "الجدولة",
+    "schedule": "جدول الشيفتات",
+    "kiosk": "وضع الكشك",
     "reports": "التقارير",
     "settings": "الإعدادات",
     "integrations": "API",

@@ -64,6 +64,27 @@
       "title": "SOS-/Notfallalarm",
       "body": "{{name}} hat einen SOS-/Notfallalarm ausgelöst."
     },
+    "timesheet": {
+      "submittedTitle": "Stundenzettel zur Prüfung eingereicht",
+      "submittedBody": "Ein Stundenzettel wurde eingereicht und wartet auf Ihre Genehmigung.",
+      "approvedTitle": "Stundenzettel genehmigt",
+      "approvedBody": "Ihr Stundenzettel wurde genehmigt und ist jetzt gesperrt.",
+      "rejectedTitle": "Stundenzettel abgelehnt",
+      "rejectedBody": "Ihr Stundenzettel wurde abgelehnt und in den Entwurf zurückgesetzt.",
+      "correctionRequestedTitle": "Korrektur des Stundenzettels angefordert",
+      "correctionRequestedBody": "Ein Mitarbeiter hat eine Korrektur an einem gesperrten Stundenzettel angefordert.",
+      "correctionApprovedTitle": "Korrektur des Stundenzettels genehmigt",
+      "correctionApprovedBody": "Ihre Korrekturanfrage wurde genehmigt und der Zeitraum zur erneuten Einreichung wieder geöffnet.",
+      "correctionRejectedTitle": "Korrektur des Stundenzettels abgelehnt",
+      "correctionRejectedBody": "Ihre Korrekturanfrage für den Stundenzettel wurde abgelehnt."
+    },
+    "shiftAssigned": {
+      "title": "Eine neue Schicht wurde für Sie geplant",
+      "body": "Sie sind am {{date}} von {{startTime}} bis {{endTime}} eingeteilt.",
+      "bodyOvernight": "Sie sind am {{date}} von {{startTime}} bis {{endTime}} (am nächsten Tag) eingeteilt.",
+      "cancelledTitle": "Eine geplante Schicht wurde storniert",
+      "cancelledBody": "Ihre Schicht am {{date}} wurde storniert."
+    },
     "decision": {
       "approved": "Genehmigt",
       "rejected": "Abgelehnt",
@@ -82,6 +103,7 @@
     "allowances": "Zulagen",
     "leave": "Urlaub",
     "schedule": "Dienstplan",
+    "kiosk": "Kiosk-Modus",
     "reports": "Berichte",
     "settings": "Einstellungen",
     "integrations": "API",

@@ -64,6 +64,27 @@
       "title": "SOS/Emergency alert",
       "body": "{{name}} triggered an SOS/Emergency alert."
     },
+    "timesheet": {
+      "submittedTitle": "Timesheet submitted for review",
+      "submittedBody": "A timesheet was submitted and is awaiting your approval.",
+      "approvedTitle": "Timesheet approved",
+      "approvedBody": "Your timesheet was approved and is now locked.",
+      "rejectedTitle": "Timesheet rejected",
+      "rejectedBody": "Your timesheet was rejected and returned to draft.",
+      "correctionRequestedTitle": "Timesheet correction requested",
+      "correctionRequestedBody": "An employee requested a correction on a locked timesheet.",
+      "correctionApprovedTitle": "Timesheet correction approved",
+      "correctionApprovedBody": "Your timesheet correction was approved and the period reopened for resubmission.",
+      "correctionRejectedTitle": "Timesheet correction rejected",
+      "correctionRejectedBody": "Your timesheet correction request was rejected."
+    },
+    "shiftAssigned": {
+      "title": "A new shift was scheduled for you",
+      "body": "You are scheduled on {{date}} from {{startTime}} to {{endTime}}.",
+      "bodyOvernight": "You are scheduled on {{date}} from {{startTime}} to {{endTime}} (next day).",
+      "cancelledTitle": "A scheduled shift was cancelled",
+      "cancelledBody": "Your shift on {{date}} was cancelled."
+    },
     "decision": {
       "approved": "Approved",
       "rejected": "Rejected",
@@ -81,7 +102,8 @@
     "timesheets": "Timesheets",
     "allowances": "Allowances",
     "leave": "Leave",
-    "schedule": "Schedule",
+    "schedule": "Shift Roster",
+    "kiosk": "Kiosk Mode",
     "reports": "Reports",
     "settings": "Settings",
     "integrations": "API",

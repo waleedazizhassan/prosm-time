@@ -73,6 +73,38 @@ export default function localizeNotification(notification: AppNotification, t: T
       if (!name) break;
       return { title: t("shell:notifications.sosAlert.title"), body: t("shell:notifications.sosAlert.body", { name }) };
     }
+    // § real bug, user-reported - "timesheet notifications aren't
+    // translated." These 6 types (plus shift_assigned below) were never
+    // handled here at all - every one of them fell straight through to
+    // the raw stored (English-only) title/body. None of these need any
+    // dynamic data - unlike out_of_zone/exception cases, "your timesheet
+    // was approved" reads the same regardless of which timesheet.
+    case "timesheet_submitted":
+      return { title: t("shell:notifications.timesheet.submittedTitle"), body: t("shell:notifications.timesheet.submittedBody") };
+    case "timesheet_approved":
+      return { title: t("shell:notifications.timesheet.approvedTitle"), body: t("shell:notifications.timesheet.approvedBody") };
+    case "timesheet_rejected":
+      return { title: t("shell:notifications.timesheet.rejectedTitle"), body: t("shell:notifications.timesheet.rejectedBody") };
+    case "timesheet_correction_requested":
+      return { title: t("shell:notifications.timesheet.correctionRequestedTitle"), body: t("shell:notifications.timesheet.correctionRequestedBody") };
+    case "timesheet_correction_approved":
+      return { title: t("shell:notifications.timesheet.correctionApprovedTitle"), body: t("shell:notifications.timesheet.correctionApprovedBody") };
+    case "timesheet_correction_rejected":
+      return { title: t("shell:notifications.timesheet.correctionRejectedTitle"), body: t("shell:notifications.timesheet.correctionRejectedBody") };
+    case "shift_assigned": {
+      const shiftDate = typeof data.shiftDate === "string" ? data.shiftDate : null;
+      if (!shiftDate) break;
+      if (data.cancelled === true) {
+        return { title: t("shell:notifications.shiftAssigned.cancelledTitle"), body: t("shell:notifications.shiftAssigned.cancelledBody", { date: shiftDate }) };
+      }
+      const startTime = typeof data.startTime === "string" ? data.startTime : "";
+      const endTime = typeof data.endTime === "string" ? data.endTime : "";
+      const body =
+        data.crossesMidnight === true
+          ? t("shell:notifications.shiftAssigned.bodyOvernight", { date: shiftDate, startTime, endTime })
+          : t("shell:notifications.shiftAssigned.body", { date: shiftDate, startTime, endTime });
+      return { title: t("shell:notifications.shiftAssigned.title"), body };
+    }
   }
 
   return { title: notification.title, body: notification.body };

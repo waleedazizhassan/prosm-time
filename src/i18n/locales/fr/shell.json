@@ -64,6 +64,27 @@
       "title": "Alerte SOS/Urgence",
       "body": "{{name}} a déclenché une alerte SOS/Urgence."
     },
+    "timesheet": {
+      "submittedTitle": "Feuille de temps soumise pour examen",
+      "submittedBody": "Une feuille de temps a été soumise et attend votre approbation.",
+      "approvedTitle": "Feuille de temps approuvée",
+      "approvedBody": "Votre feuille de temps a été approuvée et est maintenant verrouillée.",
+      "rejectedTitle": "Feuille de temps rejetée",
+      "rejectedBody": "Votre feuille de temps a été rejetée et remise en brouillon.",
+      "correctionRequestedTitle": "Correction de feuille de temps demandée",
+      "correctionRequestedBody": "Un employé a demandé une correction sur une feuille de temps verrouillée.",
+      "correctionApprovedTitle": "Correction de feuille de temps approuvée",
+      "correctionApprovedBody": "Votre demande de correction a été approuvée et la période rouverte pour une nouvelle soumission.",
+      "correctionRejectedTitle": "Correction de feuille de temps rejetée",
+      "correctionRejectedBody": "Votre demande de correction de feuille de temps a été rejetée."
+    },
+    "shiftAssigned": {
+      "title": "Un nouveau quart de travail vous a été attribué",
+      "body": "Vous êtes planifié le {{date}} de {{startTime}} à {{endTime}}.",
+      "bodyOvernight": "Vous êtes planifié le {{date}} de {{startTime}} à {{endTime}} (le lendemain).",
+      "cancelledTitle": "Un quart de travail planifié a été annulé",
+      "cancelledBody": "Votre quart du {{date}} a été annulé."
+    },
     "decision": {
       "approved": "Approuvé",
       "rejected": "Rejeté",
@@ -81,7 +102,8 @@
     "timesheets": "Feuilles de temps",
     "allowances": "Indemnités",
     "leave": "Congés",
-    "schedule": "Planning",
+    "schedule": "Planning des shifts",
+    "kiosk": "Mode Kiosque",
     "reports": "Rapports",
     "settings": "Paramètres",
     "integrations": "API",
