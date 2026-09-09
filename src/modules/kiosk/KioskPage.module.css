@@ -1,63 +1,219 @@
-.screen {
-  min-height: calc(100vh - 64px);
+.page {
+  min-height: 100vh;
+  background: linear-gradient(160deg, var(--brand-secondary) 0%, var(--surface-page) 55%);
+}
+
+.hero {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: var(--space-6);
-  gap: var(--space-4);
+  gap: var(--space-2);
+  padding: var(--space-6) var(--space-4) var(--space-4);
+  text-align: center;
 }
 
 .siteName {
-  font-size: var(--font-xl, 1.5rem);
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-primary);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-on-brand);
   margin: 0;
+}
+
+.clock {
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-on-brand);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.dateLine {
+  font-size: var(--font-md, 1rem);
+  color: var(--text-on-brand);
+  opacity: 0.8;
+  margin: 0;
+}
+
+.modeSwitch {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  background: rgba(255, 255, 255, 0.12);
+  padding: 4px;
+  border-radius: var(--radius-round);
+}
+
+.modeButton {
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-round);
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-on-brand);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.modeButtonActive {
+  background: var(--surface-card);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--space-4) var(--space-6) var(--space-8);
+  gap: var(--space-5);
+}
+
+.card {
+  width: 100%;
+  max-width: 960px;
+  background: var(--surface-card);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-6);
 }
 
 .rosterGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-4);
   width: 100%;
-  max-width: 900px;
 }
 
 .rosterButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
   padding: var(--space-5) var(--space-3);
-  font-size: var(--font-lg, 1.125rem);
+  font-size: var(--font-md, 1rem);
   font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
-  background: var(--surface-card);
+  background: var(--surface-page);
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   cursor: pointer;
+  text-align: center;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+}
+
+.rosterButton:hover,
+.rosterButton:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--brand-primary);
+}
+
+.rosterButton:active {
+  transform: translateY(0);
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-round);
+  background: var(--brand-primary-subtle);
+  color: var(--brand-primary);
+  border: 1px solid var(--brand-primary-subtle-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-lg, 1.125rem);
+  font-weight: var(--font-weight-bold);
+}
+
+.selectedHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
   text-align: center;
 }
 
-.rosterButton:hover {
-  background: var(--surface-hover);
+.selectedAvatar {
+  width: 72px;
+  height: 72px;
+  font-size: var(--font-xl, 1.5rem);
+}
+
+.selectedName {
+  font-size: var(--font-xl, 1.5rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin: 0;
 }
 
 .pinCard {
   width: 100%;
-  max-width: 420px;
+  max-width: 380px;
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
   align-items: center;
 }
 
-.pinInput {
+.pinDots {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+.pinDot {
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-round);
+  border: 2px solid var(--border-medium, var(--border-light));
+  background: transparent;
+  transition: background 0.1s ease, border-color 0.1s ease;
+}
+
+.pinDotFilled {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
   width: 100%;
+}
+
+.keypadButton {
+  aspect-ratio: 1;
   font-size: var(--font-xl, 1.5rem);
-  text-align: center;
-  letter-spacing: 0.5em;
-  padding: var(--space-4);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-light);
-  background: var(--surface-card);
+  font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
+  background: var(--surface-page);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+}
+
+.keypadButton:hover {
+  background: var(--surface-hover);
+}
+
+.keypadButton:active {
+  transform: scale(0.96);
+}
+
+.keypadButtonMuted {
+  color: var(--text-secondary);
+  font-size: var(--font-md, 1rem);
+}
+
+.evidenceHint {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  margin: 0;
+  text-align: center;
 }
 
 .actionRow {
@@ -70,9 +226,41 @@
   flex: 1;
 }
 
+.successCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.successIcon {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-round);
+  background: var(--status-success-bg, var(--brand-primary-subtle));
+  color: var(--status-success-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .successMessage {
   font-size: var(--font-xl, 1.5rem);
-  font-weight: var(--font-weight-semibold);
-  color: var(--status-success-text);
-  text-align: center;
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.workerNumberDisplay {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  letter-spacing: 0.3em;
+  font-variant-numeric: tabular-nums;
+  min-height: 1.4em;
+}
+
+.workerNumberPlaceholder {
+  color: var(--text-secondary);
 }

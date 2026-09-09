@@ -5,6 +5,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { useAuth } from "../../core/context/AuthContext";
 import SiteRepository, { type Site, type SiteAssignment } from "../../core/repositories/SiteRepository";
 import ProjectRepository, { type Project } from "../../core/repositories/ProjectRepository";
+import SiteWorkerRepository, { type SiteWorker } from "../../core/repositories/SiteWorkerRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import PageShell from "../../components/common/PageShell";
@@ -13,6 +14,7 @@ import LoadingState from "../../components/common/LoadingState";
 import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
 import Button from "../../components/common/Button";
+import Input from "../../components/common/Input";
 import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
 import Table, { type TableColumn } from "../../components/common/Table";
@@ -43,6 +45,13 @@ export default function SiteDetailPage() {
   const [projectFormState, setProjectFormState] = useState<{ open: boolean; project?: Project }>({ open: false });
   const [projectAssignmentsFor, setProjectAssignmentsFor] = useState<Project | null>(null);
 
+  const [siteWorkers, setSiteWorkers] = useState<SiteWorker[]>([]);
+  const [workerName, setWorkerName] = useState("");
+  const [workerNumber, setWorkerNumber] = useState("");
+  const [workerSubmitting, setWorkerSubmitting] = useState(false);
+  const [workerError, setWorkerError] = useState("");
+  const [deactivatingWorkerId, setDeactivatingWorkerId] = useState<string | null>(null);
+
   const canManageSites = hasPermission("sites.manage");
   const canManageProjects = hasPermission("projects.manage");
 
@@ -51,10 +60,11 @@ export default function SiteDetailPage() {
     setLoading(true);
     setLoadError("");
 
-    const [siteResult, assignmentsResult, projectsResult] = await Promise.all([
+    const [siteResult, assignmentsResult, projectsResult, workersResult] = await Promise.all([
       SiteRepository.getSite(siteId),
       SiteRepository.listSiteAssignments(siteId),
       ProjectRepository.listProjectsForSite(siteId),
+      SiteWorkerRepository.list(siteId),
     ]);
 
     if (!siteResult.success || !siteResult.data) {
@@ -66,8 +76,35 @@ export default function SiteDetailPage() {
     setSite(siteResult.data);
     setAssignments(assignmentsResult.success ? assignmentsResult.data ?? [] : []);
     setProjects(projectsResult.success ? projectsResult.data ?? [] : []);
+    setSiteWorkers(workersResult.success ? workersResult.data ?? [] : []);
     setLoading(false);
   }, [siteId, t]);
+
+  const handleAddWorker = async () => {
+    if (!siteId || !workerName.trim() || workerNumber.length !== 6) return;
+    setWorkerSubmitting(true);
+    setWorkerError("");
+    const result = await SiteWorkerRepository.create(siteId, workerName.trim(), workerNumber);
+    setWorkerSubmitting(false);
+    if (!result.success) {
+      setWorkerError(humanizeBackendError(result.message, t) ?? t("detail.workforceAddError"));
+      return;
+    }
+    setWorkerName("");
+    setWorkerNumber("");
+    load();
+  };
+
+  const handleDeactivateWorker = async (workerId: string) => {
+    setDeactivatingWorkerId(workerId);
+    const result = await SiteWorkerRepository.deactivate(workerId);
+    setDeactivatingWorkerId(null);
+    if (!result.success) {
+      setWorkerError(humanizeBackendError(result.message, t) ?? t("detail.workforceDeactivateError"));
+      return;
+    }
+    load();
+  };
 
   useEffect(() => {
     load();
@@ -181,6 +218,48 @@ export default function SiteDetailPage() {
         ) : null}
 
         <Table columns={projectColumns} data={projects} getRowId={(project) => project.id} loading={false} emptyMessage={t("detail.noProjects")} />
+      </Card>
+
+      <Card title={t("detail.workforceTitle")}>
+        <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.workforceHint")}</p>
+
+        {siteWorkers.length === 0 ? (
+          <EmptyState message={t("detail.noWorkforce")} />
+        ) : (
+          siteWorkers
+            .filter((worker) => worker.status === "active")
+            .map((worker) => (
+              <ListRow key={worker.id}>
+                <div>
+                  <div style={{ color: "var(--text-primary)", fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-medium)" }}>{worker.fullName}</div>
+                  <div style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", fontFamily: "monospace", letterSpacing: "0.1em" }}>{worker.workerNumber}</div>
+                </div>
+                <Button variant="ghost" size="xs" onClick={() => handleDeactivateWorker(worker.id)} loading={deactivatingWorkerId === worker.id}>
+                  {t("detail.deactivateWorkerAction")}
+                </Button>
+              </ListRow>
+            ))
+        )}
+
+        <div style={{ display: "flex", gap: "var(--space-2)", alignItems: "flex-end", flexWrap: "wrap", marginTop: "var(--space-3)" }}>
+          <div style={{ minWidth: 180 }}>
+            <Input label={t("detail.workerNameLabel")} name="workerName" value={workerName} onChange={(event) => setWorkerName(event.target.value)} disabled={workerSubmitting} />
+          </div>
+          <div style={{ width: 140 }}>
+            <Input
+              label={t("detail.workerNumberLabel")}
+              name="workerNumber"
+              value={workerNumber}
+              onChange={(event) => setWorkerNumber(event.target.value.replace(/[^0-9]/g, "").slice(0, 6))}
+              placeholder="123456"
+              disabled={workerSubmitting}
+            />
+          </div>
+          <Button onClick={handleAddWorker} loading={workerSubmitting} disabled={!workerName.trim() || workerNumber.length !== 6}>
+            {t("detail.addWorkerAction")}
+          </Button>
+        </div>
+        <ErrorText>{workerError}</ErrorText>
       </Card>
 
       <SiteFormModal

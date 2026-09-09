@@ -199,6 +199,27 @@ enabled = true
 verify_jwt = false
 entrypoint = "./functions/export-attendance/index.ts"
 
+# External/contractor workforce kiosk (user-directed). kiosk-worker-*
+# mirror kiosk-clock-in/out's own posture exactly (verify_jwt=true -
+# the caller is whoever is signed into the operating kiosk device, the
+# WORKER's own identity is proven by their 6-digit number inside the
+# RPC, not the caller's session). export-worker-attendance mirrors
+# export-attendance's own API-key posture.
+[functions.kiosk-worker-clock-in]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/kiosk-worker-clock-in/index.ts"
+
+[functions.kiosk-worker-clock-out]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/kiosk-worker-clock-out/index.ts"
+
+[functions.export-worker-attendance]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/export-worker-attendance/index.ts"
+
 # QuickBooks Online payroll integration (the 3rd competitive gap).
 # quickbooks-authorize/sync-quickbooks-time-activity require a real
 # caller session (Owner-only, enforced inside the RPCs they call).
