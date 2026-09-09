@@ -129,6 +129,8 @@
     "userNotFound": "تعذر العثور على هذا المستخدم.",
     "workplaceNameRequiredWhenNoSite": "اسم مكان العمل مطلوب عند عدم اختيار موقع.",
     "youAreAlreadyAtThisSite": "أنت بالفعل في هذا الموقع.",
+    "alreadyWorkingWithoutSite": "إنت شغال بالفعل من غير موقع مسجل.",
+    "locationSampleRequiredForNoSiteChange": "لازم عينة موقع حقيقية عشان تغيّر لغير موقع - فعّل صلاحية الموقع وحاول تاني.",
     "youAreAlreadyClockedIn": "أنت مسجل حضورك بالفعل.",
     "youAreNotAssignedToProject": "أنت غير معيّن لهذا المشروع.",
     "youAreNotAssignedToSite": "أنت غير معيّن لهذا الموقع.",

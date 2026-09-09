@@ -1,6 +1,9 @@
 // change-site - live UX review, user-directed (mid-shift "Change
 // Site" workflow). Forwards the caller's own session to
 // change_prosm_time_site(), same shape as start-break/end-break.
+// user-directed follow-up: newSiteId is now optional - a null site
+// (walk-in style, same as clock-in's own no-site option) requires
+// manualLocationLabel and a real GPS sample, never a photo.
 // deno-lint-ignore-file no-explicit-any
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
@@ -27,16 +30,17 @@ serve(async (request: Request) => {
     if (!authUser) return errorResponse("Invalid or expired session.", 401, "UNAUTHORIZED");
 
     const payload = await request.json().catch(() => ({}));
-    const { breakId, newSiteId, latitude, longitude, accuracyMeters } = payload;
+    const { breakId, newSiteId, latitude, longitude, accuracyMeters, manualLocationLabel } = payload;
     if (!breakId || typeof breakId !== "string") return errorResponse("breakId is required.", 400, "INVALID_REQUEST");
-    if (!newSiteId || typeof newSiteId !== "string") return errorResponse("newSiteId is required.", 400, "INVALID_REQUEST");
+    if (newSiteId !== null && newSiteId !== undefined && typeof newSiteId !== "string") return errorResponse("newSiteId must be a string or null.", 400, "INVALID_REQUEST");
 
     const { data, error } = await callerClient.rpc("change_prosm_time_site", {
       p_break_id: breakId,
-      p_new_site_id: newSiteId,
+      p_new_site_id: newSiteId || null,
       p_latitude: latitude ?? null,
       p_longitude: longitude ?? null,
       p_accuracy_meters: accuracyMeters ?? null,
+      p_manual_location_label: manualLocationLabel ?? null,
     });
 
     if (error || !data?.success) return errorResponse(error?.message ?? "Unable to change site.", 400, "CHANGE_SITE_FAILED");

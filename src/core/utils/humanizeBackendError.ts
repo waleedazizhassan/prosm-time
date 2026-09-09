@@ -149,6 +149,8 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "USER NOT FOUND": "userNotFound",
   "WORKPLACE NAME IS REQUIRED WHEN NO SITE IS SELECTED": "workplaceNameRequiredWhenNoSite",
   "YOU ARE ALREADY AT THIS SITE": "youAreAlreadyAtThisSite",
+  "YOU ARE ALREADY WORKING WITHOUT A REGISTERED SITE": "alreadyWorkingWithoutSite",
+  "A REAL LOCATION SAMPLE IS REQUIRED TO CHANGE TO NO SITE": "locationSampleRequiredForNoSiteChange",
   "YOU ARE ALREADY CLOCKED IN": "youAreAlreadyClockedIn",
   "YOU ARE NOT ASSIGNED TO THIS PROJECT": "youAreNotAssignedToProject",
   "YOU ARE NOT ASSIGNED TO THIS SITE": "youAreNotAssignedToSite",

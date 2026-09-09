@@ -394,10 +394,17 @@ class AttendanceRepository {
   // active break, moves the still-open session to the new site, never
   // clocks the employee out. Same Edge Function shape as start-break/
   // end-break (§35 - a real session mutation, not a direct table write).
-  async changeSite(breakId: string, newSiteId: string, latitude: number | null, longitude: number | null, accuracyMeters: number | null): Promise<ServiceResult<{ siteChangeId: string; maxDurationExceeded: boolean }>> {
+  async changeSite(
+    breakId: string,
+    newSiteId: string | null,
+    latitude: number | null,
+    longitude: number | null,
+    accuracyMeters: number | null,
+    manualLocationLabel?: string | null,
+  ): Promise<ServiceResult<{ siteChangeId: string; maxDurationExceeded: boolean }>> {
     try {
       const { data, error } = await this.client.functions.invoke("change-site", {
-        body: { breakId, newSiteId, latitude, longitude, accuracyMeters },
+        body: { breakId, newSiteId, latitude, longitude, accuracyMeters, manualLocationLabel: manualLocationLabel ?? null },
       });
       if (error) {
         const errorBody = await error.context?.json?.().catch(() => null);

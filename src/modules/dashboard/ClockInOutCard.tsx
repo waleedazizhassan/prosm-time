@@ -31,6 +31,7 @@ import ErrorText from "../../components/common/ErrorText";
 import styles from "./ClockInOutCard.module.css";
 
 const PRESENCE_SAMPLE_INTERVAL_MS = 5 * 60 * 1000;
+const CHANGE_SITE_NO_SITE_VALUE = "__no_site__";
 
 function formatElapsed(totalSeconds: number): string {
   const clamped = Math.max(0, Math.floor(totalSeconds));
@@ -121,6 +122,11 @@ export default function ClockInOutCard() {
   const [changeSiteTargetId, setChangeSiteTargetId] = useState("");
   const [changeSiteSubmitting, setChangeSiteSubmitting] = useState(false);
   const [changeSiteError, setChangeSiteError] = useState("");
+  // § user-directed follow-up - the same "no site / walk-in" option
+  // clock-in already offers must also be reachable when changing site
+  // mid-shift: a sentinel value distinct from "" (nothing picked yet)
+  // so the Select can distinguish "deliberately no site" from unset.
+  const [changeSiteManualLabel, setChangeSiteManualLabel] = useState("");
   const [currentLocation, setCurrentLocation] = useState<CurrentPosition | null>(null);
   const [locationStatus, setLocationStatus] = useState<"detecting" | "available" | "unavailable">("detecting");
   const [placeName, setPlaceName] = useState<string | null>(null);
@@ -714,6 +720,7 @@ export default function ClockInOutCard() {
 
   const handleOpenChangeSiteModal = () => {
     setChangeSiteTargetId("");
+    setChangeSiteManualLabel("");
     setChangeSiteError("");
     setChangeSiteModalOpen(true);
   };
@@ -723,8 +730,11 @@ export default function ClockInOutCard() {
     setChangeSiteModalOpen(false);
   };
 
+  const isNoSiteChange = changeSiteTargetId === CHANGE_SITE_NO_SITE_VALUE;
+
   const handleConfirmChangeSite = async () => {
     if (!activeBreakId || !changeSiteTargetId) return;
+    if (isNoSiteChange && !changeSiteManualLabel.trim()) return;
     setChangeSiteSubmitting(true);
     setChangeSiteError("");
 
@@ -737,11 +747,20 @@ export default function ClockInOutCard() {
       longitude = position.longitude;
       accuracyMeters = position.accuracyMeters;
     } catch {
-      // Best-effort, same posture as SOS - the server re-verifies the
-      // geofence itself and rejects when it can't confirm presence.
+      // Best-effort for a real site (the server re-verifies the
+      // geofence itself and rejects when it can't confirm presence).
+      // For the no-site path a real sample is mandatory - the server
+      // itself will reject a missing sample there.
     }
 
-    const result = await AttendanceRepository.changeSite(activeBreakId, changeSiteTargetId, latitude, longitude, accuracyMeters);
+    const result = await AttendanceRepository.changeSite(
+      activeBreakId,
+      isNoSiteChange ? null : changeSiteTargetId,
+      latitude,
+      longitude,
+      accuracyMeters,
+      isNoSiteChange ? changeSiteManualLabel.trim() : null,
+    );
     setChangeSiteSubmitting(false);
 
     if (!result.success) {
@@ -1001,7 +1020,12 @@ export default function ClockInOutCard() {
         onClose={handleCloseChangeSiteModal}
         title={t("attendance.changeSiteModalTitle")}
         footer={
-          <Button fullWidth onClick={handleConfirmChangeSite} loading={changeSiteSubmitting} disabled={!changeSiteTargetId}>
+          <Button
+            fullWidth
+            onClick={handleConfirmChangeSite}
+            loading={changeSiteSubmitting}
+            disabled={!changeSiteTargetId || (isNoSiteChange && !changeSiteManualLabel.trim())}
+          >
             {t("attendance.changeSiteConfirmAction")}
           </Button>
         }
@@ -1012,8 +1036,23 @@ export default function ClockInOutCard() {
           value={changeSiteTargetId}
           onChange={(event) => setChangeSiteTargetId(event.target.value)}
           disabled={changeSiteSubmitting}
-          options={[{ value: "", label: t("attendance.changeSitePickPlaceholder") }, ...changeSiteOptions]}
+          options={[
+            { value: "", label: t("attendance.changeSitePickPlaceholder") },
+            { value: CHANGE_SITE_NO_SITE_VALUE, label: t("attendance.noSiteOption") },
+            ...changeSiteOptions,
+          ]}
         />
+        {isNoSiteChange ? (
+          <Input
+            label={t("attendance.manualLocationLabel")}
+            name="changeSiteManualLocation"
+            value={changeSiteManualLabel}
+            onChange={(event) => setChangeSiteManualLabel(event.target.value)}
+            disabled={changeSiteSubmitting}
+            required
+            helperText={t("attendance.manualLocationHint")}
+          />
+        ) : null}
         <ErrorText>{changeSiteError}</ErrorText>
       </Modal>
     </Card>

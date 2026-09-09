@@ -129,6 +129,8 @@
     "userNotFound": "Cet utilisateur est introuvable.",
     "workplaceNameRequiredWhenNoSite": "Un nom de lieu de travail est requis lorsqu'aucun site n'est sélectionné.",
     "youAreAlreadyAtThisSite": "Vous êtes déjà sur ce site.",
+    "alreadyWorkingWithoutSite": "Vous travaillez déjà sans site enregistré.",
+    "locationSampleRequiredForNoSiteChange": "Un échantillon de localisation réel est requis pour passer à « aucun site » - veuillez autoriser l'accès à la position et réessayer.",
     "youAreAlreadyClockedIn": "Vous avez déjà pointé votre arrivée.",
     "youAreNotAssignedToProject": "Vous n'êtes pas affecté à ce projet.",
     "youAreNotAssignedToSite": "Vous n'êtes pas affecté à ce site.",
