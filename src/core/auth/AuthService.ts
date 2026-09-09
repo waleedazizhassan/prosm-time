@@ -69,6 +69,26 @@ class AuthService {
   onAuthStateChange(callback: (event: string, session: unknown) => void) {
     return this.client.auth.onAuthStateChange(callback);
   }
+
+  // § real bug, user-reported - the Android app "signs itself out"
+  // after being backgrounded for a while. Root cause: supabase-js's
+  // own autoRefreshToken relies on a JS setInterval to renew the
+  // access token before it expires, and Android suspends WebView timers
+  // while the app is backgrounded (screen off, app switched away from)
+  // to save battery - the timer simply never fires. If the access token
+  // (1 hour lifetime) expires during that suspension, the app looks
+  // signed-out the instant the user returns, even though the longer-
+  // lived refresh token on disk is still perfectly valid and could
+  // silently repair the session. Called on app resume (useSessionResume,
+  // native + web) rather than left to the background timer alone.
+  async refreshSession() {
+    try {
+      const { data, error } = await this.client.auth.refreshSession();
+      return !error && Boolean(data.session);
+    } catch {
+      return false;
+    }
+  }
 }
 
 export default new AuthService();

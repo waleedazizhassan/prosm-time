@@ -5,6 +5,7 @@ import { CalendarProvider } from "./core/context/CalendarContext";
 import ErrorBoundary from "./components/common/ErrorBoundary";
 import useAutoFullscreen from "./core/hooks/useAutoFullscreen";
 import useAndroidBackButton from "./core/hooks/useAndroidBackButton";
+import useSessionResume from "./core/hooks/useSessionResume";
 
 // PROSM Time Implementation Master File V3.0 - the real application
 // shell, wired up as of WP-03 (Authentication & Organization). The
@@ -18,6 +19,7 @@ import useAndroidBackButton from "./core/hooks/useAndroidBackButton";
 export default function App() {
   useAutoFullscreen();
   useAndroidBackButton();
+  useSessionResume();
 
   return (
     <ErrorBoundary>
