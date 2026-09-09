@@ -25,6 +25,10 @@
     "gregorian": "Gregoriano",
     "hijri": "Egira"
   },
+  "installation": {
+    "grace": "Questa installazione non è coperta da una licenza valida. Attiva una licenza entro il {{date}}.",
+    "blocked": "Questa installazione non è coperta da una licenza valida e l'accesso è stato sospeso. Contatta il tuo amministratore."
+  },
   "notificationsLabel": "Notifiche",
   "noNotifications": "Nessuna notifica al momento.",
   "notifications": {

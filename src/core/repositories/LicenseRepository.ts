@@ -6,6 +6,14 @@ export interface ServiceResult<T = null> {
   data: T | null;
 }
 
+export interface InstallationStatus {
+  registered: boolean;
+  state: "ACTIVE" | "GRACE" | "BLOCKED" | "UNREGISTERED" | null;
+  graceEndsAt: string | null;
+  message: string | null;
+  outdatedVersion: boolean;
+}
+
 export interface LicenseState {
   licenseNumber: string;
   status: string;
@@ -80,6 +88,40 @@ class LicenseRepository {
         return createError(data?.error?.message ?? "Unable to refresh license status.");
       }
 
+      return createSuccess(data?.data ?? null);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "License service unavailable.");
+    }
+  }
+
+  // Anti-Crack & Unauthorized Installation (user-directed spec,
+  // centralized in Platform Management) - this org's own installation
+  // identity status. Foundation only: reads/syncs state, does not gate
+  // any protected operation.
+  async getInstallationStatus(): Promise<ServiceResult<InstallationStatus>> {
+    try {
+      const { data, error } = await this.client.rpc("get_prosm_time_installation_status");
+      if (error) return createError(error.message);
+      return createSuccess({
+        registered: data.registered === true,
+        state: data.state ?? null,
+        graceEndsAt: data.graceEndsAt ?? null,
+        message: data.message ?? null,
+        outdatedVersion: data.outdatedVersion === true,
+      });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "License service unavailable.");
+    }
+  }
+
+  async syncInstallationIdentity(): Promise<ServiceResult<{ state: string; graceEndsAt: string | null; message: string | null }>> {
+    try {
+      const { data, error } = await this.client.functions.invoke("sync-installation-identity", { body: { platform: "web" } });
+      if (error) {
+        const errorBody = await error.context?.json?.().catch(() => null);
+        return createError(errorBody?.error?.message ?? error.message ?? "Unable to sync installation identity.");
+      }
+      if (data?.success === false) return createError(data?.error?.message ?? "Unable to sync installation identity.");
       return createSuccess(data?.data ?? null);
     } catch (error) {
       return createError(error instanceof Error ? error.message : "License service unavailable.");

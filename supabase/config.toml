@@ -16,6 +16,15 @@ enabled = true
 verify_jwt = true
 entrypoint = "./functions/refresh-license-status/index.ts"
 
+# Anti-Crack & Unauthorized Installation (user-directed spec) - registers
+# and validates this org's own installation with Platform Management.
+# Deliberately does not gate any protected operation yet (foundation
+# only, enforcement wiring is a separate later step).
+[functions.sync-installation-identity]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/sync-installation-identity/index.ts"
+
 [functions.invite-user]
 enabled = true
 verify_jwt = true

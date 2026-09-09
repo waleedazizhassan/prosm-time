@@ -25,6 +25,10 @@
     "gregorian": "Grégorien",
     "hijri": "Hégirien"
   },
+  "installation": {
+    "grace": "Cette installation n'est pas couverte par une licence valide. Veuillez activer une licence avant le {{date}}.",
+    "blocked": "Cette installation n'est pas couverte par une licence valide et l'accès a été suspendu. Veuillez contacter votre administrateur."
+  },
   "notificationsLabel": "Notifications",
   "noNotifications": "Aucune notification pour le moment.",
   "notifications": {

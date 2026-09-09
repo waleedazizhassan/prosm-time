@@ -25,6 +25,10 @@
     "gregorian": "Gregorian",
     "hijri": "Hijri"
   },
+  "installation": {
+    "grace": "This installation is not covered by a valid license. Please activate a license by {{date}}.",
+    "blocked": "This installation is not covered by a valid license and access has been suspended. Please contact your administrator."
+  },
   "notificationsLabel": "Notifications",
   "noNotifications": "No notifications yet.",
   "notifications": {
