@@ -18,6 +18,22 @@ export default tseslint.config(
   { ignores: ["dist/**", "supabase/functions/**"] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
+  // Build, release and desktop-shell tooling runs on Node, not in the
+  // browser: process/console/Buffer are legitimate globals there.
+  {
+    files: [
+      "scripts/**/*.{js,mjs,cjs}",
+      "electron/**/*.{js,mjs,cjs}",
+      "*.config.{js,mjs,cjs}",
+    ],
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
   {
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
