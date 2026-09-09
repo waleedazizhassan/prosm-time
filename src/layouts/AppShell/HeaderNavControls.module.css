@@ -18,8 +18,8 @@
   align-items: center;
   justify-content: center;
 
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
 
   border: none;
   border-radius: 8px;
@@ -75,12 +75,12 @@
   }
 
   .button {
-    width: 30px;
-    height: 30px;
+    width: 34px;
+    height: 34px;
   }
 
   .button svg {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
   }
 }
