@@ -1,8 +1,8 @@
 diff --git a/node_modules/app-builder-lib/out/util/electronGet.js b/node_modules/app-builder-lib/out/util/electronGet.js
-index a941f9d..7ce73b2 100644
+index a941f9d..33aef8a 100644
 --- a/node_modules/app-builder-lib/out/util/electronGet.js
 +++ b/node_modules/app-builder-lib/out/util/electronGet.js
-@@ -184,7 +184,34 @@ async function extractArchive(file, dir) {
+@@ -184,7 +184,38 @@ async function extractArchive(file, dir) {
              throw new Error(`Extraction of ${path.basename(file)} produced no files`);
          }
          await fs.rm(dir, { recursive: true, force: true });
@@ -17,7 +17,11 @@ index a941f9d..7ce73b2 100644
 +        // Retrying the rename alone (not the whole extraction) clears it within a
 +        // few hundred ms once the OS-level handle actually closes.
 +        if (process.platform === "win32") {
-+            const maxAttempts = 15;
++            // Bumped from 15 attempts/2s cap to 30/3s (this machine is under
++            // sustained low-RAM/IO pressure this session - the original
++            // budget's ~15s worst case wasn't enough margin for the OS to
++            // actually release the last file handle; ~76s worst case here is).
++            const maxAttempts = 30;
 +            for (let attempt = 1; ; attempt++) {
 +                try {
 +                    await fs.rename(tmpDir, dir);
@@ -28,7 +32,7 @@ index a941f9d..7ce73b2 100644
 +                        throw err;
 +                    }
 +                    builder_util_1.log.warn({ tmpDir, dir, attempt, code: err.code }, "rename after extraction failed, retrying");
-+                    await new Promise(r => setTimeout(r, Math.min(300 * attempt, 2000)));
++                    await new Promise(r => setTimeout(r, Math.min(300 * attempt, 3000)));
 +                }
 +            }
 +        }

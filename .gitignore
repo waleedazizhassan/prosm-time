@@ -20,3 +20,8 @@ npm-debug.log*
 coverage
 *.tsbuildinfo
 supabase/.temp
+
+# Delivered release artifacts - built locally, handed to the user
+# directly, never meant to live in the repo itself.
+*.apk
+prosm-time-web-*.zip
