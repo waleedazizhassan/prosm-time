@@ -48,7 +48,9 @@
       "titleEarlyLeave": "Early leave reason submitted",
       "bodyEarlyLeave": "{{name}} explained why they left early.",
       "titleLeave": "Leave request awaiting your review",
-      "bodyLeave": "{{name}} requested {{days}} day(s) of leave."
+      "bodyLeave": "{{name}} requested {{days}} day(s) of leave.",
+      "bodyLeaveDetailed": "{{name}} requested {{days}} day(s) of {{type}} leave ({{startDate}} to {{endDate}}).",
+      "bodyLeaveReasonSuffix": "Reason: {{reason}}."
     },
     "correctionReviewed": {
       "titleException": "Your exception was reviewed",
@@ -98,6 +100,7 @@
     "sites": "Sites",
     "manager": "Manager Console",
     "attendance": "Attendance Record",
+    "adminClock": "Clock In/Out On Behalf",
     "emergencyLog": "Emergency Log",
     "timesheets": "Timesheets",
     "allowances": "Allowances",

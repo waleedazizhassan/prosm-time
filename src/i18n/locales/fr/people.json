@@ -133,5 +133,12 @@
       "clockOutError": "Impossible de pointer le départ de cet employé.",
       "actorSubjectNotice": "Effectué par {{actor}} au nom de {{subject}}. Enregistré avec votre identité comme auteur, {{subject}} comme sujet, et le motif ci-dessous."
     }
+  },
+  "onBehalf": {
+    "title": "Pointer au nom d'un employé",
+    "subtitle": "Enregistrez la présence d'un employé qui ne peut pas le faire lui-même en ce moment.",
+    "pickEmployeeTitle": "Choisir l'employé",
+    "employeeLabel": "Employé",
+    "employeePlaceholder": "Sélectionner un employé…"
   }
 }

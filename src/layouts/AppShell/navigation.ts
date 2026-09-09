@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, Plug, MonitorSmartphone } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, Plug, MonitorSmartphone, UserCog } from "lucide-react";
 
 // § live UX review, user-directed - "professional reorganization" of
 // the Sidebar into grouped sections/"centers" instead of one flat
@@ -51,6 +51,12 @@ export const NAV_ITEMS: NavItem[] = [
   // the Owner), so every authenticated member can open this item and
   // simply gets their own scope back.
   { id: "attendance", labelKey: "items.attendance", path: "/attendance", icon: Clock, requiredPermission: null, section: "attendance" },
+  // § user-directed follow-up - a direct sidebar entry for
+  // Administrative Clock In/Out (On Behalf Of), previously only
+  // reachable via a specific employee's own People > detail page. Same
+  // AdminAttendanceCard, same authorization, just a picker in front of
+  // it - no new capability.
+  { id: "adminClock", labelKey: "items.adminClock", path: "/admin-clock", icon: UserCog, requiredPermission: "attendance.clock_in_on_behalf", section: "attendance" },
   // § user-directed - real advance shift scheduling/rostering
   // (20260908220000). Self-access to one's own upcoming shifts needs
   // no special permission, same reasoning as Timesheets/Allowances/

@@ -133,5 +133,12 @@
       "clockOutError": "Unable to clock out this employee.",
       "actorSubjectNotice": "Performed by {{actor}} on behalf of {{subject}}. Recorded with your identity as the actor, {{subject}} as the subject, and the reason below."
     }
+  },
+  "onBehalf": {
+    "title": "Clock In/Out On Behalf",
+    "subtitle": "Record attendance for an employee who can't do it themselves right now.",
+    "pickEmployeeTitle": "Choose employee",
+    "employeeLabel": "Employee",
+    "employeePlaceholder": "Select an employee…"
   }
 }

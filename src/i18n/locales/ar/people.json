@@ -133,5 +133,12 @@
       "clockOutError": "تعذر تسجيل انصراف هذا الموظف.",
       "actorSubjectNotice": "تم تنفيذ هذا الإجراء بواسطة {{actor}} نيابةً عن {{subject}}. يُسجَّل باسمك كمنفِّذ، و{{subject}} كموظف معني، والسبب أدناه."
     }
+  },
+  "onBehalf": {
+    "title": "تسجيل حضور/انصراف بالنيابة",
+    "subtitle": "سجّل حضور موظف مش قادر يسجله بنفسه دلوقتي.",
+    "pickEmployeeTitle": "اختار الموظف",
+    "employeeLabel": "الموظف",
+    "employeePlaceholder": "اختر موظفًا…"
   }
 }

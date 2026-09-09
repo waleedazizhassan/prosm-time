@@ -13,6 +13,7 @@ import AcceptInvitationPage from "../modules/onboarding/AcceptInvitationPage";
 import DashboardPage from "../modules/dashboard/DashboardPage";
 import PeoplePage from "../modules/people/PeoplePage";
 import PersonDetailPage from "../modules/people/PersonDetailPage";
+import AdminOnBehalfPage from "../modules/people/AdminOnBehalfPage";
 import SitesPage from "../modules/sites/SitesPage";
 import SiteDetailPage from "../modules/sites/SiteDetailPage";
 import ManagerConsolePage from "../modules/manager/ManagerConsolePage";
@@ -73,6 +74,7 @@ export default function AppRoutes() {
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/people" element={<PeoplePage />} />
             <Route path="/people/:userId" element={<PersonDetailPage />} />
+            <Route path="/admin-clock" element={<AdminOnBehalfPage />} />
             <Route path="/sites" element={<SitesPage />} />
             <Route path="/sites/:siteId" element={<SiteDetailPage />} />
             <Route path="/manager" element={<ManagerConsolePage />} />

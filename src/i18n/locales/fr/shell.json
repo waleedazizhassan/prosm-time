@@ -48,7 +48,9 @@
       "titleEarlyLeave": "Motif de départ anticipé envoyé",
       "bodyEarlyLeave": "{{name}} a expliqué la raison de son départ anticipé.",
       "titleLeave": "Demande de congé en attente de votre validation",
-      "bodyLeave": "{{name}} a demandé {{days}} jour(s) de congé."
+      "bodyLeave": "{{name}} a demandé {{days}} jour(s) de congé.",
+      "bodyLeaveDetailed": "{{name}} a demandé {{days}} jour(s) de congé {{type}} (du {{startDate}} au {{endDate}}).",
+      "bodyLeaveReasonSuffix": "Motif : {{reason}}."
     },
     "correctionReviewed": {
       "titleException": "Votre exception a été examinée",
@@ -98,6 +100,7 @@
     "sites": "Sites",
     "manager": "Console gestionnaire",
     "attendance": "Registre de présence",
+    "adminClock": "Pointer au nom d'un employé",
     "emergencyLog": "Journal des urgences",
     "timesheets": "Feuilles de temps",
     "allowances": "Indemnités",

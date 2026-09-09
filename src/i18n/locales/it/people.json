@@ -133,5 +133,12 @@
       "clockOutError": "Impossibile timbrare l'uscita di questo dipendente.",
       "actorSubjectNotice": "Eseguito da {{actor}} per conto di {{subject}}. Registrato con la tua identità come autore, {{subject}} come soggetto e il motivo qui sotto."
     }
+  },
+  "onBehalf": {
+    "title": "Timbra entrata/uscita per conto di",
+    "subtitle": "Registra la presenza di un dipendente che al momento non può farlo da solo.",
+    "pickEmployeeTitle": "Scegli il dipendente",
+    "employeeLabel": "Dipendente",
+    "employeePlaceholder": "Seleziona un dipendente…"
   }
 }

@@ -48,7 +48,9 @@
       "titleEarlyLeave": "Motivo dell'uscita anticipata inviato",
       "bodyEarlyLeave": "{{name}} ha spiegato perché è uscito/a in anticipo.",
       "titleLeave": "Richiesta di ferie in attesa della tua revisione",
-      "bodyLeave": "{{name}} ha richiesto {{days}} giorno/i di ferie."
+      "bodyLeave": "{{name}} ha richiesto {{days}} giorno/i di ferie.",
+      "bodyLeaveDetailed": "{{name}} ha richiesto {{days}} giorno/i di {{type}} (dal {{startDate}} al {{endDate}}).",
+      "bodyLeaveReasonSuffix": "Motivo: {{reason}}."
     },
     "correctionReviewed": {
       "titleException": "La tua eccezione è stata esaminata",
@@ -98,6 +100,7 @@
     "sites": "Sedi",
     "manager": "Console manager",
     "attendance": "Registro presenze",
+    "adminClock": "Timbra per conto di",
     "emergencyLog": "Registro emergenze",
     "timesheets": "Fogli ore",
     "allowances": "Indennità",

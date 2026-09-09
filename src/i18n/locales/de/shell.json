@@ -48,7 +48,9 @@
       "titleEarlyLeave": "Grund für vorzeitiges Verlassen übermittelt",
       "bodyEarlyLeave": "{{name}} hat erklärt, warum er/sie früher gegangen ist.",
       "titleLeave": "Urlaubsantrag wartet auf Ihre Prüfung",
-      "bodyLeave": "{{name}} hat {{days}} Urlaubstag(e) beantragt."
+      "bodyLeave": "{{name}} hat {{days}} Urlaubstag(e) beantragt.",
+      "bodyLeaveDetailed": "{{name}} hat {{days}} Tag(e) {{type}} beantragt ({{startDate}} bis {{endDate}}).",
+      "bodyLeaveReasonSuffix": "Grund: {{reason}}."
     },
     "correctionReviewed": {
       "titleException": "Ihre Ausnahme wurde geprüft",
@@ -98,6 +100,7 @@
     "sites": "Standorte",
     "manager": "Manager-Konsole",
     "attendance": "Anwesenheitsprotokoll",
+    "adminClock": "Im Auftrag ein-/ausstempeln",
     "emergencyLog": "Notfallprotokoll",
     "timesheets": "Stundenzettel",
     "allowances": "Zulagen",

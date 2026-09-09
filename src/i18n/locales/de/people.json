@@ -133,5 +133,12 @@
       "clockOutError": "Dieser Mitarbeiter konnte nicht ausgestempelt werden.",
       "actorSubjectNotice": "Ausgeführt von {{actor}} im Namen von {{subject}}. Wird mit Ihrer Identität als ausführende Person, {{subject}} als betroffener Person und dem unten stehenden Grund erfasst."
     }
+  },
+  "onBehalf": {
+    "title": "Im Auftrag ein-/ausstempeln",
+    "subtitle": "Erfassen Sie die Anwesenheit für einen Mitarbeiter, der dies gerade nicht selbst tun kann.",
+    "pickEmployeeTitle": "Mitarbeiter auswählen",
+    "employeeLabel": "Mitarbeiter",
+    "employeePlaceholder": "Mitarbeiter auswählen…"
   }
 }

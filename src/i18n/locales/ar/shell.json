@@ -48,7 +48,9 @@
       "titleEarlyLeave": "تم إرسال سبب الانصراف المبكر",
       "bodyEarlyLeave": "{{name}} أوضح سبب انصرافه مبكرًا.",
       "titleLeave": "طلب إجازة بانتظار مراجعتك",
-      "bodyLeave": "{{name}} طلب إجازة لمدة {{days}} يوم."
+      "bodyLeave": "{{name}} طلب إجازة لمدة {{days}} يوم.",
+      "bodyLeaveDetailed": "{{name}} طلب إجازة {{type}} لمدة {{days}} يوم (من {{startDate}} لـ {{endDate}}).",
+      "bodyLeaveReasonSuffix": "السبب: {{reason}}."
     },
     "correctionReviewed": {
       "titleException": "تمت مراجعة الاستثناء الخاص بك",
@@ -98,6 +100,7 @@
     "sites": "المواقع",
     "manager": "لوحة المدير",
     "attendance": "سجل الحضور",
+    "adminClock": "تسجيل حضور/انصراف بالنيابة",
     "emergencyLog": "سجل الطوارئ",
     "timesheets": "كشوف الدوام",
     "allowances": "البدلات",
