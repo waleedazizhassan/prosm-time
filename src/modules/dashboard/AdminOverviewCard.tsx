@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { MapPin, UserCheck, Users, ClipboardList } from "lucide-react";
+import { MapPin, UserCheck, Users, ClipboardList, CalendarDays, Coffee } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
 import ManagerRepository, { type TodayAttendanceRow, type PendingReviewItem } from "../../core/repositories/ManagerRepository";
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
+import AttendanceRepository from "../../core/repositories/AttendanceRepository";
+import LeaveRepository from "../../core/repositories/LeaveRepository";
 import Card from "../../components/common/Card";
 import Modal from "../../components/common/Modal";
 import Table, { type TableColumn } from "../../components/common/Table";
@@ -15,7 +17,7 @@ import EmptyState from "../../components/common/EmptyState";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
 import styles from "./AdminOverviewCard.module.css";
 
-type Drilldown = "sites" | "present" | "employees" | "pending" | null;
+type Drilldown = "sites" | "present" | "employees" | "pending" | "leaveToday" | "onBreak" | null;
 
 interface Kpi {
   key: Exclude<Drilldown, null>;
@@ -50,6 +52,18 @@ interface Kpi {
 // component already loaded (or, for Registered employees, one small
 // additional read) - never a new capability, just a closer look at
 // what the tile already summarizes.
+//
+// § user-directed follow-up - "only 4 cards, what's missing? e.g.
+// leave today - click it, see names and sites": added "On Leave
+// Today" (leave_requests' own RLS already scopes this correctly - see
+// LeaveRepository.listToday's own comment) and "On Break Now"
+// (break_events' own RLS is the exact same attendance.view-scoped
+// posture every other tile here already relies on). Deliberately did
+// NOT add more than these two - every other plausible candidate (SOS
+// today, pending exceptions) either already has its own dedicated
+// surface (Emergency Log) or is already folded into "Pending
+// reviews" above, so a third tile would only pad the count without
+// showing anything genuinely new.
 export default function AdminOverviewCard() {
   const { t, i18n } = useTranslation("dashboard");
   const { hasPermission, profile } = useAuth();
@@ -61,23 +75,29 @@ export default function AdminOverviewCard() {
   const [pending, setPending] = useState<PendingReviewItem[]>([]);
   const [members, setMembers] = useState<OrgMember[]>([]);
   const [siteNamesByUser, setSiteNamesByUser] = useState<Record<string, string[]>>({});
+  const [leaveToday, setLeaveToday] = useState<{ id: string; userId: string; employeeName: string; leaveType: string; endDate: string }[]>([]);
+  const [onBreak, setOnBreak] = useState<{ id: string; userId: string; userFullName: string; startedAt: string }[]>([]);
 
   const [drilldown, setDrilldown] = useState<Drilldown>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
-    const [sitesResult, attendanceResult, pendingResult, membersResult, assignmentsResult] = await Promise.all([
+    const [sitesResult, attendanceResult, pendingResult, membersResult, assignmentsResult, leaveTodayResult, onBreakResult] = await Promise.all([
       SiteRepository.listSites(),
       ManagerRepository.listTodayAttendance(),
       ManagerRepository.listPendingReview(),
       EmployeeRepository.listOrganizationMembers(),
       SiteRepository.listAllAssignedSiteNames(),
+      LeaveRepository.listToday(),
+      AttendanceRepository.listOnBreakNow(),
     ]);
     setSites(sitesResult.success ? (sitesResult.data ?? []) : []);
     setTodayAttendance(attendanceResult.success ? (attendanceResult.data ?? []) : []);
     setPending(pendingResult.success ? (pendingResult.data ?? []) : []);
     setMembers(membersResult.success ? (membersResult.data ?? []) : []);
     setSiteNamesByUser(assignmentsResult.success ? (assignmentsResult.data ?? {}) : {});
+    setLeaveToday(leaveTodayResult.success ? (leaveTodayResult.data ?? []) : []);
+    setOnBreak(onBreakResult.success ? (onBreakResult.data ?? []) : []);
     setLoading(false);
   }, []);
 
@@ -95,6 +115,8 @@ export default function AdminOverviewCard() {
     { key: "present", icon: UserCheck, value: presentRows.length, label: t("overview.clockedInNow") },
     { key: "employees", icon: Users, value: members.length, label: t("overview.registeredEmployees") },
     { key: "pending", icon: ClipboardList, value: pending.length, label: t("overview.pendingReviews") },
+    { key: "leaveToday", icon: CalendarDays, value: leaveToday.length, label: t("overview.leaveToday") },
+    { key: "onBreak", icon: Coffee, value: onBreak.length, label: t("overview.onBreakNow") },
   ];
 
   const presentColumns: TableColumn<TodayAttendanceRow>[] = [
@@ -164,6 +186,39 @@ export default function AdminOverviewCard() {
 
         {drilldown === "employees" ? (
           <Table columns={employeeColumns} data={members} getRowId={(member) => member.id} loading={false} emptyMessage={t("overview.drilldown.emptyEmployees")} />
+        ) : null}
+
+        {drilldown === "leaveToday" ? (
+          leaveToday.length === 0 ? (
+            <EmptyState message={t("overview.drilldown.emptyLeaveToday")} />
+          ) : (
+            <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
+              {leaveToday.map((item) => (
+                <li key={item.id} style={{ padding: "var(--space-2) 0", borderBottom: "1px solid var(--border-light)" }}>
+                  <div style={{ fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)" }}>{item.employeeName}</div>
+                  <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
+                    {siteNamesByUser[item.userId]?.length ? siteNamesByUser[item.userId].join(", ") : t("overview.drilldown.noSite")} ·{" "}
+                    {t(`overview.drilldown.leaveType.${item.leaveType}`)} · {t("overview.drilldown.leaveReturns", { date: formatDateOnly(item.endDate, i18n.language) })}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )
+        ) : null}
+
+        {drilldown === "onBreak" ? (
+          onBreak.length === 0 ? (
+            <EmptyState message={t("overview.drilldown.emptyOnBreak")} />
+          ) : (
+            <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
+              {onBreak.map((item) => (
+                <li key={item.id} style={{ padding: "var(--space-2) 0", borderBottom: "1px solid var(--border-light)" }}>
+                  <div style={{ fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)" }}>{item.userFullName}</div>
+                  <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("overview.drilldown.onBreakSince", { time: formatTimeOnly(item.startedAt, i18n.language) })}</div>
+                </li>
+              ))}
+            </ul>
+          )
         ) : null}
 
         {drilldown === "pending" ? (

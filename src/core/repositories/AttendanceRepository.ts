@@ -416,6 +416,31 @@ class AttendanceRepository {
       return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
     }
   }
+
+  // § user-directed - Dashboard KPI audit: a real-time "on break now"
+  // count. break_events' own RLS (subject OR org-wide attendance.view
+  // holder) is exactly what already scopes every other KPI on this
+  // dashboard - a plain direct select, no new RPC needed.
+  async listOnBreakNow(): Promise<ServiceResult<{ id: string; userId: string; userFullName: string; startedAt: string }[]>> {
+    interface RawBreakRow {
+      id: string;
+      user_id: string;
+      started_at: string;
+      users: { full_name: string } | { full_name: string }[] | null;
+    }
+    try {
+      const { data, error } = await this.client.from("break_events").select("id, user_id, started_at, users(full_name)").eq("status", "active").order("started_at", { ascending: true });
+      if (error) return createError(error.message);
+      return createSuccess(
+        ((data ?? []) as RawBreakRow[]).map((row) => {
+          const user = Array.isArray(row.users) ? row.users[0] : row.users;
+          return { id: row.id, userId: row.user_id, userFullName: user?.full_name ?? "", startedAt: row.started_at };
+        }),
+      );
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
+    }
+  }
 }
 
 export default new AttendanceRepository();

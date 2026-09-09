@@ -28,7 +28,11 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* § user-directed follow-up - 2 more KPI tiles added alongside the
+     original 4 (6 total now). A fixed 4-column grid would strand the
+     last row with 2 lonely tiles - auto-fit wraps naturally at any
+     tile count instead, still filling the full width. */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: var(--space-3);
 }
 

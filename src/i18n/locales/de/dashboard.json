@@ -9,13 +9,17 @@
     "clockedInNow": "Aktuell eingestempelt",
     "registeredEmployees": "Registrierte Mitarbeiter",
     "pendingReviews": "Ausstehende Prüfungen",
+    "leaveToday": "Heute im Urlaub",
+    "onBreakNow": "Aktuell in Pause",
     "openManagerAction": "Manager-Konsole öffnen",
     "drilldown": {
       "title": {
         "sites": "Standorte",
         "present": "Aktuell anwesend",
         "employees": "Registrierte Mitarbeiter",
-        "pending": "Ausstehende Prüfungen"
+        "pending": "Ausstehende Prüfungen",
+        "leaveToday": "Heute im Urlaub",
+        "onBreak": "Aktuell in Pause"
       },
       "nameColumn": "Name",
       "dateColumn": "Datum",
@@ -29,6 +33,18 @@
       "emptyPresent": "Aktuell ist niemand eingestempelt.",
       "emptyEmployees": "Keine Mitarbeiter gefunden.",
       "emptyPending": "Keine Ausnahmen oder Korrekturen zur Prüfung.",
+      "emptyLeaveToday": "Heute ist niemand im Urlaub.",
+      "emptyOnBreak": "Aktuell macht niemand Pause.",
+      "noSite": "Kein registrierter Standort",
+      "leaveReturns": "zurück am {{date}}",
+      "onBreakSince": "in Pause seit {{time}}",
+      "leaveType": {
+        "annual": "Jahresurlaub",
+        "sick": "Krankheit",
+        "unpaid": "Unbezahlt",
+        "emergency": "Notfall",
+        "other": "Sonstiges"
+      },
       "pendingKind": {
         "geofence_exception": "Geofence-Ausnahme",
         "correction_request": "Korrekturanfrage"

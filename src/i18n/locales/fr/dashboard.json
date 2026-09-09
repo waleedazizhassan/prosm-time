@@ -9,13 +9,17 @@
     "clockedInNow": "Actuellement présents",
     "registeredEmployees": "Employés enregistrés",
     "pendingReviews": "Révisions en attente",
+    "leaveToday": "En congé aujourd'hui",
+    "onBreakNow": "En pause actuellement",
     "openManagerAction": "Ouvrir la console gestionnaire",
     "drilldown": {
       "title": {
         "sites": "Sites",
         "present": "Actuellement présents",
         "employees": "Employés enregistrés",
-        "pending": "Révisions en attente"
+        "pending": "Révisions en attente",
+        "leaveToday": "En congé aujourd'hui",
+        "onBreak": "En pause actuellement"
       },
       "nameColumn": "Nom",
       "dateColumn": "Date",
@@ -29,6 +33,18 @@
       "emptyPresent": "Personne n'est actuellement présent.",
       "emptyEmployees": "Aucun employé trouvé.",
       "emptyPending": "Aucune exception ou correction en attente de révision.",
+      "emptyLeaveToday": "Personne n'est en congé aujourd'hui.",
+      "emptyOnBreak": "Personne n'est actuellement en pause.",
+      "noSite": "Aucun site enregistré",
+      "leaveReturns": "de retour le {{date}}",
+      "onBreakSince": "en pause depuis {{time}}",
+      "leaveType": {
+        "annual": "Annuel",
+        "sick": "Maladie",
+        "unpaid": "Sans solde",
+        "emergency": "Urgence",
+        "other": "Autre"
+      },
       "pendingKind": {
         "geofence_exception": "Exception de géorepérage",
         "correction_request": "Demande de correction"

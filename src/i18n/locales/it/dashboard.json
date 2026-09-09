@@ -9,13 +9,17 @@
     "clockedInNow": "Presenti ora",
     "registeredEmployees": "Dipendenti registrati",
     "pendingReviews": "Revisioni in sospeso",
+    "leaveToday": "In ferie oggi",
+    "onBreakNow": "In pausa ora",
     "openManagerAction": "Apri console manager",
     "drilldown": {
       "title": {
         "sites": "Sedi",
         "present": "Presenti ora",
         "employees": "Dipendenti registrati",
-        "pending": "Revisioni in sospeso"
+        "pending": "Revisioni in sospeso",
+        "leaveToday": "In ferie oggi",
+        "onBreak": "In pausa ora"
       },
       "nameColumn": "Nome",
       "dateColumn": "Data",
@@ -29,6 +33,18 @@
       "emptyPresent": "Nessuno è attualmente presente.",
       "emptyEmployees": "Nessun dipendente trovato.",
       "emptyPending": "Nessuna eccezione o correzione in attesa di revisione.",
+      "emptyLeaveToday": "Nessuno è in ferie oggi.",
+      "emptyOnBreak": "Nessuno è attualmente in pausa.",
+      "noSite": "Nessuna sede registrata",
+      "leaveReturns": "torna il {{date}}",
+      "onBreakSince": "in pausa dalle {{time}}",
+      "leaveType": {
+        "annual": "Annuali",
+        "sick": "Malattia",
+        "unpaid": "Non retribuite",
+        "emergency": "Emergenza",
+        "other": "Altro"
+      },
       "pendingKind": {
         "geofence_exception": "Eccezione geofence",
         "correction_request": "Richiesta di correzione"

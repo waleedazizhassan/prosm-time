@@ -279,6 +279,40 @@ class LeaveRepository {
       return createError(error instanceof Error ? error.message : "Leave service unavailable.");
     }
   }
+
+  // § user-directed - Dashboard KPI audit: "today I have 5 on leave,
+  // click the card, see their names and sites." leave_requests' own
+  // RLS (self OR owner OR exceptions.manage - 20260908210000) already
+  // scopes this correctly: a plain employee only ever sees their own
+  // row here (matching every other KPI's "own-scope numbers" posture),
+  // an authorized reviewer sees everyone genuinely on leave today.
+  async listToday(): Promise<ServiceResult<{ id: string; userId: string; employeeName: string; leaveType: LeaveType; endDate: string }[]>> {
+    interface RawTodayLeaveRow {
+      id: string;
+      user_id: string;
+      leave_type: LeaveType;
+      end_date: string;
+      users: { full_name: string } | { full_name: string }[] | null;
+    }
+    try {
+      const today = new Date().toISOString().slice(0, 10);
+      const { data, error } = await this.client
+        .from("leave_requests")
+        .select("id, user_id, leave_type, end_date, users!leave_requests_user_id_fkey(full_name)")
+        .eq("status", "approved")
+        .lte("start_date", today)
+        .gte("end_date", today);
+      if (error) return createError(error.message);
+      return createSuccess(
+        ((data ?? []) as RawTodayLeaveRow[]).map((row) => {
+          const user = Array.isArray(row.users) ? row.users[0] : row.users;
+          return { id: row.id, userId: row.user_id, employeeName: user?.full_name ?? "", leaveType: row.leave_type, endDate: row.end_date };
+        }),
+      );
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Leave service unavailable.");
+    }
+  }
 }
 
 export default new LeaveRepository();

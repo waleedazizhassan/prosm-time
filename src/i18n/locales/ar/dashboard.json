@@ -9,13 +9,17 @@
     "clockedInNow": "متواجدون الآن",
     "registeredEmployees": "الموظفون المسجلون",
     "pendingReviews": "مراجعات معلقة",
+    "leaveToday": "في إجازة النهاردة",
+    "onBreakNow": "في استراحة دلوقتي",
     "openManagerAction": "فتح لوحة المدير",
     "drilldown": {
       "title": {
         "sites": "المواقع",
         "present": "المتواجدون الآن",
         "employees": "الموظفون المسجلون",
-        "pending": "مراجعات معلقة"
+        "pending": "مراجعات معلقة",
+        "leaveToday": "في إجازة النهاردة",
+        "onBreak": "في استراحة دلوقتي"
       },
       "nameColumn": "الاسم",
       "dateColumn": "التاريخ",
@@ -29,6 +33,18 @@
       "emptyPresent": "لا يوجد أحد متواجد حاليًا.",
       "emptyEmployees": "لا يوجد موظفون.",
       "emptyPending": "لا توجد استثناءات أو تصحيحات بانتظار المراجعة.",
+      "emptyLeaveToday": "محدش في إجازة النهاردة.",
+      "emptyOnBreak": "محدش في استراحة دلوقتي.",
+      "noSite": "مفيش موقع مسجل",
+      "leaveReturns": "بيرجع {{date}}",
+      "onBreakSince": "في استراحة من الساعة {{time}}",
+      "leaveType": {
+        "annual": "سنوية",
+        "sick": "مرضية",
+        "unpaid": "بدون أجر",
+        "emergency": "طارئة",
+        "other": "أخرى"
+      },
       "pendingKind": {
         "geofence_exception": "استثناء نطاق جغرافي",
         "correction_request": "طلب تصحيح"

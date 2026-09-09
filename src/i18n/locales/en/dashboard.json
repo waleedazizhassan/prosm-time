@@ -9,13 +9,17 @@
     "clockedInNow": "Clocked In Now",
     "registeredEmployees": "Registered Employees",
     "pendingReviews": "Pending Reviews",
+    "leaveToday": "On Leave Today",
+    "onBreakNow": "On Break Now",
     "openManagerAction": "Open Manager Console",
     "drilldown": {
       "title": {
         "sites": "Sites",
         "present": "Currently Present",
         "employees": "Registered Employees",
-        "pending": "Pending Reviews"
+        "pending": "Pending Reviews",
+        "leaveToday": "On Leave Today",
+        "onBreak": "On Break Now"
       },
       "nameColumn": "Name",
       "dateColumn": "Date",
@@ -29,6 +33,18 @@
       "emptyPresent": "No one is currently clocked in.",
       "emptyEmployees": "No employees found.",
       "emptyPending": "No exceptions or corrections awaiting review.",
+      "emptyLeaveToday": "No one is on leave today.",
+      "emptyOnBreak": "No one is currently on a break.",
+      "noSite": "No registered site",
+      "leaveReturns": "back {{date}}",
+      "onBreakSince": "on break since {{time}}",
+      "leaveType": {
+        "annual": "Annual",
+        "sick": "Sick",
+        "unpaid": "Unpaid",
+        "emergency": "Emergency",
+        "other": "Other"
+      },
       "pendingKind": {
         "geofence_exception": "Geofence Exception",
         "correction_request": "Correction Request"
