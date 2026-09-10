@@ -137,6 +137,12 @@ export default function localizeNotification(notification: AppNotification, t: T
       if (!name || hours === null) break;
       return { title: t("shell:notifications.missingClockOut.title"), body: t("shell:notifications.missingClockOut.body", { name, hours }) };
     }
+    case "location_plausibility_flag": {
+      const name = typeof data.employeeName === "string" ? data.employeeName : null;
+      const speed = typeof data.impliedSpeedKmh === "number" ? data.impliedSpeedKmh : null;
+      if (!name || speed === null) break;
+      return { title: t("shell:notifications.locationPlausibilityFlag.title"), body: t("shell:notifications.locationPlausibilityFlag.body", { name, speed }) };
+    }
   }
 
   return { title: notification.title, body: notification.body };

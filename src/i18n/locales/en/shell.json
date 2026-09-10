@@ -100,6 +100,10 @@
       "title": "Employee has not clocked out",
       "body": "{{name}} has been clocked in for over {{hours}} hours with no clock-out yet."
     },
+    "locationPlausibilityFlag": {
+      "title": "Unusual location movement detected",
+      "body": "{{name}}'s location implies about {{speed}} km/h since their last known position - please review."
+    },
     "decision": {
       "approved": "Approved",
       "rejected": "Rejected",

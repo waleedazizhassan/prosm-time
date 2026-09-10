@@ -100,6 +100,10 @@
       "title": "Il dipendente non ha timbrato l'uscita",
       "body": "{{name}} ha timbrato l'entrata da oltre {{hours}} ore senza ancora aver timbrato l'uscita."
     },
+    "locationPlausibilityFlag": {
+      "title": "Rilevato spostamento di posizione insolito",
+      "body": "La posizione di {{name}} implica circa {{speed}} km/h dall'ultima posizione nota - si prega di verificare."
+    },
     "decision": {
       "approved": "Approvato",
       "rejected": "Rifiutato",

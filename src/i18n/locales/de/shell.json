@@ -100,6 +100,10 @@
       "title": "Mitarbeiter hat sich nicht ausgestempelt",
       "body": "{{name}} ist seit über {{hours}} Stunden eingestempelt und hat sich noch nicht ausgestempelt."
     },
+    "locationPlausibilityFlag": {
+      "title": "Ungewöhnliche Standortbewegung erkannt",
+      "body": "Der Standort von {{name}} impliziert seit der letzten bekannten Position etwa {{speed}} km/h - bitte überprüfen."
+    },
     "decision": {
       "approved": "Genehmigt",
       "rejected": "Abgelehnt",
