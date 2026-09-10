@@ -8,7 +8,7 @@
     },
     "attendance": {
       "title": "Pointer l'arrivée et le départ",
-      "body": "Choisissez votre site (et votre projet, le cas échéant) avant de pointer votre arrivée - ou laissez le champ Site vide et décrivez où vous vous trouvez réellement si vous n'êtes pas sur un lieu enregistré. Certains sites exigent une photo. Juste avant l'envoi, un écran de confirmation affiche exactement ce qui va être enregistré - votre photo (le cas échéant), votre position GPS détaillée, le site/lieu de travail et l'heure - avec deux champs optionnels, une note et votre activité en cours, enregistrés avec ce pointage et visibles par votre responsable."
+      "body": "Choisissez votre site (et votre projet, le cas échéant) avant de pointer votre arrivée - ou laissez le champ Site vide et décrivez où vous vous trouvez réellement si vous n'êtes pas sur un lieu enregistré. Certains sites exigent une photo, à garder immobile un court instant afin que l'application puisse confirmer qu'il s'agit d'une prise en direct, pas d'une image ancienne ou statique. Juste avant l'envoi, un écran de confirmation affiche exactement ce qui va être enregistré - votre photo (le cas échéant), votre position GPS détaillée, le site/lieu de travail et l'heure - avec deux champs optionnels, une note et votre activité en cours, enregistrés avec ce pointage et visibles par votre responsable. Le pointage d'arrivée est bloqué pour un jour déjà couvert par un de vos congés approuvés - si c'est une erreur, demandez à votre responsable de vérifier depuis Congés."
     },
     "walkInGeofence": {
       "title": "Travailler sur un site auquel vous n'êtes pas affecté",
@@ -16,7 +16,7 @@
     },
     "siteChange": {
       "title": "Changer de site en cours de poste",
-      "body": "Pour passer à un autre site sans pointer complètement votre départ : appuyez sur Pause avant de quitter votre site actuel. Le bouton devient Changer de site - appuyez dessus une fois arrivé sur le suivant, et le déplacement est enregistré dans votre historique de présence avec l'heure exacte. Le bouton redevient ensuite Pause, prêt pour le prochain déplacement."
+      "body": "Changer de site est désormais son propre bouton sur le tableau de bord dès que vous êtes pointé - plus besoin d'appuyer sur Pause au préalable. Appuyez dessus, choisissez où vous vous êtes rendu (ou laissez Site vide pour un déplacement réellement improvisé, comme pointer l'arrivée sans site), et le déplacement est enregistré dans votre historique de présence avec l'heure exacte. Vous n'êtes jamais pointé en sortie au passage."
     },
     "sos": {
       "title": "SOS / Urgence",
@@ -40,11 +40,11 @@
     },
     "kiosk": {
       "title": "Mode kiosque",
-      "body": "Ouvrez le mode kiosque depuis la barre latérale et choisissez un site pour lancer son écran de pointage partagé - destiné à une tablette ou un ordinateur à l'entrée, pas à votre propre appareil. Sélectionnez votre nom dans la liste, saisissez votre code PIN kiosque personnel, puis pointez votre arrivée ou votre départ. Votre code PIN kiosque est distinct de votre mot de passe de connexion - définissez-le ou modifiez-le depuis le tableau de bord, ou un administrateur/responsable peut le définir pour vous depuis votre fiche dans Personnes."
+      "body": "Ouvrez le mode kiosque depuis la barre latérale et choisissez un site pour lancer son écran de pointage partagé - destiné à une tablette ou un ordinateur à l'entrée, pas à votre propre appareil. Il comporte deux onglets : Employés, où vous sélectionnez votre nom dans la liste et saisissez votre code PIN kiosque personnel avant de pointer votre arrivée ou votre départ (votre code PIN kiosque est distinct de votre mot de passe de connexion - définissez-le depuis le tableau de bord, ou un administrateur/responsable peut le définir pour vous depuis votre fiche dans Personnes) ; et Personnel externe, pour les sous-traitants et autres travailleurs non-employés qui ne sont pas utilisateurs de PROSM Time - chacun a son propre numéro à 6 chiffres, configuré à l'avance par un administrateur ou un responsable, seule saisie nécessaire pour pointer l'arrivée ou le départ. Les deux onglets reviennent automatiquement à leur écran de départ après chaque action, prêts pour la personne suivante."
     },
     "reportsCenter": {
       "title": "Centre de rapports",
-      "body": "Rapports regroupe la génération de rapports en un seul endroit : choisissez un type de rapport (Registre de présence ou Indemnités), une période et, si pertinent, un employé, puis exportez-le en PDF - le même export déjà disponible sur chacune de ces pages, mais avec un seul endroit dédié pour y accéder. Les feuilles de temps sont générées, soumises et exportées depuis leur propre page Feuilles de temps, car une feuille de temps appartient à un employé et une période précis plutôt qu'à une plage de dates."
+      "body": "Rapports regroupe la génération de rapports en un seul endroit : choisissez un type de rapport, une période et, si pertinent, un employé ou un site, puis exportez-le en PDF. Outre les exports d'origine Registre de présence et Indemnités, il couvre désormais aussi : Personnel (les totaux de tous en un seul export), Sous-traitants (la présence du personnel externe), Site (l'activité d'un site précis), Retards, Départs non pointés, Conflits de congés (présence enregistrée pendant un congé approuvé), Interventions du responsable (chaque pointage effectué par un administrateur au nom d'un employé), et Violations de localisation (écarts hors zone). Un responsable ne voit que les données des sites qu'il gère réellement - le propriétaire voit toute l'organisation. Les feuilles de temps sont générées, soumises et exportées depuis leur propre page Feuilles de temps, car une feuille de temps appartient à un employé et une période précis plutôt qu'à une plage de dates."
     },
     "sites": {
       "title": "Sites (administrateurs)",

@@ -8,7 +8,7 @@
     },
     "attendance": {
       "title": "Clocking In & Out",
-      "body": "Choose your site (and project, if applicable) before clocking in - or leave Site empty and describe where you actually are if you're not at a registered location. Some sites require a photo. Right before anything is submitted, a confirmation screen shows exactly what's about to be recorded - your photo (if one was taken), your detailed GPS location, the site/workplace, and the time - with two optional fields, a note and what you're working on (activity), that get saved with that clock-in or clock-out and are visible to your manager."
+      "body": "Choose your site (and project, if applicable) before clocking in - or leave Site empty and describe where you actually are if you're not at a registered location. Some sites require a photo, held steady for a moment so the app can confirm it's a live capture, not an old or static image. Right before anything is submitted, a confirmation screen shows exactly what's about to be recorded - your photo (if one was taken), your detailed GPS location, the site/workplace, and the time - with two optional fields, a note and what you're working on (activity), that get saved with that clock-in or clock-out and are visible to your manager. Clocking in is blocked for a day your own approved leave already covers - if that's wrong, ask your manager to review it from Leave."
     },
     "walkInGeofence": {
       "title": "Working at a Site You're Not Assigned To",
@@ -16,7 +16,7 @@
     },
     "siteChange": {
       "title": "Changing Sites Mid-Shift",
-      "body": "Moving to a different site without clocking out entirely: press Pause before you leave your current site. The button becomes Change Site - press it once you've arrived at the next one, and the move is recorded in your attendance history with the time it happened. The button then goes back to being Pause, ready for the next time you move."
+      "body": "Change Site is its own button on the Dashboard whenever you're clocked in - no need to press Pause first. Tap it, pick where you've moved to (or leave Site empty for a genuine walk-in move, the same as clocking in with no site), and the move is recorded in your attendance history with the exact time it happened. You're never clocked out in the process."
     },
     "sos": {
       "title": "SOS / Emergency",
@@ -40,11 +40,11 @@
     },
     "kiosk": {
       "title": "Kiosk Mode",
-      "body": "Open Kiosk Mode from the sidebar and pick a site to launch its shared clock-in screen - meant for a tablet or computer at the entrance, not your own personal device. Select your name from the list, enter your personal kiosk PIN, then Clock In or Clock Out. Your kiosk PIN is separate from your login password - set or change it from the Dashboard, or an administrator/manager can set it for you from your profile page under People."
+      "body": "Open Kiosk Mode from the sidebar and pick a site to launch its shared clock-in screen - meant for a tablet or computer at the entrance, not your own personal device. It has two tabs: Employees, where you select your name from the list and enter your personal kiosk PIN before clocking in or out (your kiosk PIN is separate from your login password - set or change it from the Dashboard, or an administrator/manager can set it for you from your profile page under People); and Workforce, for contractors and other non-employee workers who aren't PROSM Time users - each has their own 6-digit number, set up in advance by an administrator or manager, which is all they need to type in to clock in or out. Both tabs return to their starting screen automatically after each action, ready for the next person."
     },
     "reportsCenter": {
       "title": "Reports Center",
-      "body": "Reports gathers report generation in one place: pick a report type (Attendance Record or Allowances), a date range and, if relevant, an employee, then export it as a PDF - the same export already available on each of those pages, just with one dedicated place to reach for any of them. Timesheets are generated, submitted and exported from their own Timesheets page instead, since a timesheet belongs to one specific employee and period rather than a date range."
+      "body": "Reports gathers report generation in one place: pick a report type, a date range and, where relevant, an employee or site, then export it as a PDF. Alongside the original Attendance Record and Allowances exports, it now also covers Workforce (everyone's totals in one export), Contractor (the external workforce's own attendance), Site (a single site's activity), Late Arrivals, Missed Checkouts, Leave Conflicts (attendance recorded during approved leave), Manager Overrides (every on-behalf clock-in/out an administrator performed), and Location Violations (out-of-zone exceptions). A Manager only ever sees data for the sites they actually manage - the Owner sees the whole organization. Timesheets are generated, submitted and exported from their own Timesheets page instead, since a timesheet belongs to one specific employee and period rather than a date range."
     },
     "sites": {
       "title": "Sites (Administrators)",

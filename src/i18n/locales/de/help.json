@@ -8,7 +8,7 @@
     },
     "attendance": {
       "title": "Ein- und Ausstempeln",
-      "body": "Wählen Sie vor dem Einstempeln Ihren Standort (und ggf. Ihr Projekt) - oder lassen Sie das Feld Standort leer und beschreiben Sie, wo Sie sich tatsächlich befinden, wenn Sie nicht an einem registrierten Ort sind. An manchen Standorten ist ein Foto erforderlich. Unmittelbar vor dem Absenden zeigt ein Bestätigungsbildschirm genau, was erfasst wird - Ihr Foto (falls aufgenommen), Ihr detaillierter GPS-Standort, der Standort/Arbeitsort und die Uhrzeit - mit zwei optionalen Feldern, einer Notiz und Ihrer aktuellen Tätigkeit, die mit diesem Ein-/Ausstempeln gespeichert werden und für Ihren Manager sichtbar sind."
+      "body": "Wählen Sie vor dem Einstempeln Ihren Standort (und ggf. Ihr Projekt) - oder lassen Sie das Feld Standort leer und beschreiben Sie, wo Sie sich tatsächlich befinden, wenn Sie nicht an einem registrierten Ort sind. An manchen Standorten ist ein Foto erforderlich, das einen kurzen Moment lang ruhig gehalten wird, damit die App bestätigen kann, dass es sich um eine Live-Aufnahme und nicht um ein altes oder statisches Bild handelt. Unmittelbar vor dem Absenden zeigt ein Bestätigungsbildschirm genau, was erfasst wird - Ihr Foto (falls aufgenommen), Ihr detaillierter GPS-Standort, der Standort/Arbeitsort und die Uhrzeit - mit zwei optionalen Feldern, einer Notiz und Ihrer aktuellen Tätigkeit, die mit diesem Ein-/Ausstempeln gespeichert werden und für Ihren Manager sichtbar sind. Das Einstempeln ist für einen Tag gesperrt, der bereits durch Ihren eigenen genehmigten Urlaub abgedeckt ist - falls das falsch ist, bitten Sie Ihren Manager, dies unter Urlaub zu prüfen."
     },
     "walkInGeofence": {
       "title": "Arbeiten an einem Standort, dem Sie nicht zugewiesen sind",
@@ -16,7 +16,7 @@
     },
     "siteChange": {
       "title": "Standort während der Schicht wechseln",
-      "body": "Um zu einem anderen Standort zu wechseln, ohne vollständig auszustempeln: Drücken Sie Pause, bevor Sie Ihren aktuellen Standort verlassen. Der Button wird zu Standort wechseln - drücken Sie ihn, sobald Sie am nächsten Standort angekommen sind, und der Wechsel wird mit der genauen Uhrzeit in Ihrem Anwesenheitsverlauf erfasst. Danach wird der Button wieder zu Pause, bereit für den nächsten Wechsel."
+      "body": "Standort wechseln ist jetzt ein eigenständiger Button im Dashboard, sobald Sie eingestempelt sind - Sie müssen nicht mehr zuerst Pause drücken. Tippen Sie ihn an, wählen Sie, wohin Sie gewechselt sind (oder lassen Sie Standort leer für einen echten spontanen Wechsel, genau wie beim Einstempeln ohne Standort), und der Wechsel wird mit der genauen Uhrzeit in Ihrem Anwesenheitsverlauf erfasst. Dabei werden Sie nie ausgestempelt."
     },
     "sos": {
       "title": "SOS / Notfall",
@@ -40,11 +40,11 @@
     },
     "kiosk": {
       "title": "Kiosk-Modus",
-      "body": "Öffnen Sie den Kiosk-Modus über die Seitenleiste und wählen Sie einen Standort, um dessen gemeinsam genutzten Stempel-Bildschirm zu starten - gedacht für ein Tablet oder einen Computer am Eingang, nicht für Ihr eigenes Gerät. Wählen Sie Ihren Namen aus der Liste, geben Sie Ihre persönliche Kiosk-PIN ein und stempeln Sie dann ein oder aus. Ihre Kiosk-PIN ist unabhängig von Ihrem Anmeldepasswort - legen Sie sie über das Dashboard fest oder ändern Sie sie dort, oder ein Administrator/Manager kann sie für Sie über Ihr Profil unter Personen festlegen."
+      "body": "Öffnen Sie den Kiosk-Modus über die Seitenleiste und wählen Sie einen Standort, um dessen gemeinsam genutzten Stempel-Bildschirm zu starten - gedacht für ein Tablet oder einen Computer am Eingang, nicht für Ihr eigenes Gerät. Es gibt zwei Reiter: Mitarbeiter, wo Sie Ihren Namen aus der Liste wählen und Ihre persönliche Kiosk-PIN eingeben, bevor Sie ein- oder ausstempeln (Ihre Kiosk-PIN ist unabhängig von Ihrem Anmeldepasswort - legen Sie sie über das Dashboard fest, oder ein Administrator/Manager kann sie für Sie über Ihr Profil unter Personen festlegen); und Belegschaft, für Subunternehmer und andere externe Arbeitskräfte, die keine PROSM-Time-Benutzer sind - jeder hat seine eigene 6-stellige Nummer, die im Voraus von einem Administrator oder Manager eingerichtet wird und die einzige Eingabe ist, die zum Ein- oder Ausstempeln nötig ist. Beide Reiter kehren nach jeder Aktion automatisch zum Startbildschirm zurück, bereit für die nächste Person."
     },
     "reportsCenter": {
       "title": "Berichtszentrum",
-      "body": "Berichte bündelt die Berichtserstellung an einem Ort: Wählen Sie einen Berichtstyp (Anwesenheitsprotokoll oder Zulagen), einen Zeitraum und, falls relevant, einen Mitarbeiter, und exportieren Sie ihn dann als PDF - derselbe Export, der bereits auf jeder dieser Seiten verfügbar ist, jetzt aber an einem zentralen Ort erreichbar. Stundenzettel werden stattdessen auf ihrer eigenen Stundenzettel-Seite erstellt, eingereicht und exportiert, da ein Stundenzettel zu einem bestimmten Mitarbeiter und Zeitraum gehört, nicht zu einem Datumsbereich."
+      "body": "Berichte bündelt die Berichtserstellung an einem Ort: Wählen Sie einen Berichtstyp, einen Zeitraum und, falls relevant, einen Mitarbeiter oder Standort, und exportieren Sie ihn dann als PDF. Neben den ursprünglichen Exporten für Anwesenheitsprotokoll und Zulagen deckt es jetzt auch ab: Belegschaft (Summen aller Personen in einem Export), Subunternehmer (Anwesenheit der externen Belegschaft), Standort (Aktivität eines einzelnen Standorts), Verspätungen, Fehlende Ausstempelungen, Urlaubskonflikte (während genehmigten Urlaubs erfasste Anwesenheit), Manager-Eingriffe (jedes von einem Administrator durchgeführte Ein-/Ausstempeln im Auftrag) und Standortverstöße (Verstöße außerhalb der Zone). Ein Manager sieht dabei ausschließlich Daten der Standorte, die er tatsächlich verwaltet - der Owner sieht die gesamte Organisation. Stundenzettel werden stattdessen auf ihrer eigenen Stundenzettel-Seite erstellt, eingereicht und exportiert, da ein Stundenzettel zu einem bestimmten Mitarbeiter und Zeitraum gehört, nicht zu einem Datumsbereich."
     },
     "sites": {
       "title": "Standorte (Administratoren)",

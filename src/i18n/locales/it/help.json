@@ -8,7 +8,7 @@
     },
     "attendance": {
       "title": "Timbrare entrata e uscita",
-      "body": "Scegli la tua sede (e il progetto, se applicabile) prima di timbrare l'entrata - oppure lascia vuoto il campo Sede e descrivi dove ti trovi realmente se non sei in un luogo registrato. Alcune sedi richiedono una foto. Subito prima dell'invio, una schermata di conferma mostra esattamente cosa sta per essere registrato - la tua foto (se scattata), la tua posizione GPS dettagliata, la sede/luogo di lavoro e l'orario - con due campi facoltativi, una nota e l'attività su cui stai lavorando, salvati con quella timbratura e visibili al tuo responsabile."
+      "body": "Scegli la tua sede (e il progetto, se applicabile) prima di timbrare l'entrata - oppure lascia vuoto il campo Sede e descrivi dove ti trovi realmente se non sei in un luogo registrato. Alcune sedi richiedono una foto, da tenere ferma per un istante così l'app può confermare che si tratta di uno scatto dal vivo, non di un'immagine vecchia o statica. Subito prima dell'invio, una schermata di conferma mostra esattamente cosa sta per essere registrato - la tua foto (se scattata), la tua posizione GPS dettagliata, la sede/luogo di lavoro e l'orario - con due campi facoltativi, una nota e l'attività su cui stai lavorando, salvati con quella timbratura e visibili al tuo responsabile. La timbratura di entrata è bloccata per un giorno già coperto da un tuo congedo approvato - se è un errore, chiedi al tuo responsabile di rivederlo da Congedi."
     },
     "walkInGeofence": {
       "title": "Lavorare in una sede a cui non sei assegnato",
@@ -16,7 +16,7 @@
     },
     "siteChange": {
       "title": "Cambiare sede a metà turno",
-      "body": "Per passare a un'altra sede senza timbrare completamente l'uscita: premi Pausa prima di lasciare la sede attuale. Il pulsante diventa Cambia sede - premilo una volta arrivato in quella successiva, e lo spostamento viene registrato nella tua cronologia presenze con l'orario esatto. Il pulsante torna quindi a essere Pausa, pronto per il prossimo spostamento."
+      "body": "Cambia sede è ora un pulsante autonomo nella Dashboard non appena hai timbrato l'entrata - non serve più premere Pausa prima. Toccalo, scegli dove ti sei spostato (oppure lascia vuoto il campo Sede per uno spostamento realmente improvvisato, come timbrare l'entrata senza sede), e lo spostamento viene registrato nella tua cronologia presenze con l'orario esatto. Non vieni mai timbrato in uscita nel frattempo."
     },
     "sos": {
       "title": "SOS / Emergenza",
@@ -40,11 +40,11 @@
     },
     "kiosk": {
       "title": "Modalità chiosco",
-      "body": "Apri la Modalità chiosco dalla barra laterale e scegli una sede per avviare il suo schermo di timbratura condiviso - pensato per un tablet o un computer all'ingresso, non per il tuo dispositivo personale. Seleziona il tuo nome dall'elenco, inserisci il tuo PIN personale del chiosco, quindi timbra entrata o uscita. Il tuo PIN del chiosco è indipendente dalla password di accesso - impostalo o modificalo dalla Dashboard, oppure un amministratore/responsabile può impostarlo per te dalla tua pagina profilo in Persone."
+      "body": "Apri la Modalità chiosco dalla barra laterale e scegli una sede per avviare il suo schermo di timbratura condiviso - pensato per un tablet o un computer all'ingresso, non per il tuo dispositivo personale. Ha due schede: Dipendenti, dove selezioni il tuo nome dall'elenco e inserisci il tuo PIN personale del chiosco prima di timbrare entrata o uscita (il tuo PIN del chiosco è indipendente dalla password di accesso - impostalo dalla Dashboard, oppure un amministratore/responsabile può impostarlo per te dalla tua pagina profilo in Persone); e Manodopera esterna, per appaltatori e altri lavoratori non dipendenti che non sono utenti di PROSM Time - ognuno ha il proprio numero a 6 cifre, impostato in anticipo da un amministratore o responsabile, l'unica cosa che deve digitare per timbrare entrata o uscita. Entrambe le schede tornano automaticamente alla schermata iniziale dopo ogni operazione, pronte per la persona successiva."
     },
     "reportsCenter": {
       "title": "Centro report",
-      "body": "Report raccoglie la generazione dei report in un unico posto: scegli un tipo di report (Registro presenze o Indennità), un intervallo di date e, se pertinente, un dipendente, quindi esportalo in PDF - lo stesso export già disponibile su ciascuna di quelle pagine, ma con un unico punto dedicato per raggiungerli tutti. I fogli ore vengono invece generati, inviati ed esportati dalla propria pagina Fogli ore, poiché un foglio ore appartiene a un dipendente e un periodo specifici, non a un intervallo di date."
+      "body": "Report raccoglie la generazione dei report in un unico posto: scegli un tipo di report, un intervallo di date e, se pertinente, un dipendente o una sede, quindi esportalo in PDF. Oltre agli export originali di Registro presenze e Indennità, ora copre anche: Manodopera (i totali di tutti in un unico export), Appaltatori (la presenza della manodopera esterna), Sede (l'attività di una singola sede), Ritardi, Uscite mancate, Conflitti di congedo (presenza registrata durante un congedo approvato), Interventi del responsabile (ogni timbratura effettuata da un amministratore per conto di qualcuno), e Violazioni di localizzazione (eccezioni fuori zona). Un responsabile vede solo i dati delle sedi che gestisce realmente - il proprietario vede l'intera organizzazione. I fogli ore vengono invece generati, inviati ed esportati dalla propria pagina Fogli ore, poiché un foglio ore appartiene a un dipendente e un periodo specifici, non a un intervallo di date."
     },
     "sites": {
       "title": "Sedi (amministratori)",

@@ -115,9 +115,11 @@ export default function ClockInOutCard() {
   const [earlyReasonSubmitting, setEarlyReasonSubmitting] = useState(false);
   const [earlyReasonSaved, setEarlyReasonSaved] = useState(false);
   const [earlyReasonError, setEarlyReasonError] = useState("");
-  // § live UX review, user-directed - mid-shift "Change Site": press
-  // Pause before leaving the current site, then "Change Site" once
-  // arrived at the next one - never clocks out, records the move.
+  // § live UX review, user-directed - mid-shift "Change Site": its own
+  // independent control while clocked in (real gap fix, 14-point
+  // live-audit - no longer routed through Break/Pause), with a
+  // no-site/GPS-only option for a genuine walk-in move. Never clocks
+  // out - just records the move.
   const [changeSiteModalOpen, setChangeSiteModalOpen] = useState(false);
   const [changeSiteTargetId, setChangeSiteTargetId] = useState("");
   const [changeSiteSubmitting, setChangeSiteSubmitting] = useState(false);
