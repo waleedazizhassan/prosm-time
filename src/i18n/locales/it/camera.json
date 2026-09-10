@@ -9,5 +9,6 @@
   "chooseFileAction": "Oppure scegli un file",
   "permissionDenied": "L'accesso alla fotocamera è stato negato o non è disponibile su questo dispositivo.",
   "alternativeHint": "Puoi scegliere un file in alternativa.",
-  "previewAlt": "Anteprima della foto scattata"
+  "previewAlt": "Anteprima della foto scattata",
+  "verifyingLiveness": "Verifica che tu sia in diretta - resta fermo per un momento"
 }

@@ -9,5 +9,6 @@
   "chooseFileAction": "Or choose a file instead",
   "permissionDenied": "Camera access was denied or is unavailable on this device.",
   "alternativeHint": "You can choose a file instead.",
-  "previewAlt": "Captured photo preview"
+  "previewAlt": "Captured photo preview",
+  "verifyingLiveness": "Verifying you're live - hold still for a moment"
 }

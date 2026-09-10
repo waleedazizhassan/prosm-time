@@ -4,7 +4,15 @@ import { Camera, RefreshCw, Upload, X, SwitchCamera } from "lucide-react";
 
 import Modal from "./Modal";
 import Button from "./Button";
+import { LivenessGate } from "../../core/utils/livenessCheck";
 import styles from "./CameraCaptureModal.module.css";
+
+// Low-res sampling for the liveness check below - a full-resolution frame
+// diff would be needlessly slow for a signal this coarse (real vs. a
+// perfectly static image), and a small canvas still carries plenty of
+// pixel variance to detect real camera motion.
+const LIVENESS_SAMPLE_SIZE = 24;
+const LIVENESS_SAMPLE_INTERVAL_MS = 250;
 
 interface CameraCaptureModalProps {
   isOpen: boolean;
@@ -60,6 +68,13 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [capturedDataUrl, setCapturedDataUrl] = useState<string | null>(null);
   const [error, setError] = useState("");
+  // § real gap fix, 14-point live-audit - no liveness signal existed at
+  // all, so a printed/screenshotted photo held up to the camera captured
+  // identically to a real live face. See livenessCheck.ts's own header
+  // for exactly what this does and does not defend against.
+  const [livenessReady, setLivenessReady] = useState(false);
+  const livenessGateRef = useRef<LivenessGate | null>(null);
+  const livenessCanvasRef = useRef<HTMLCanvasElement | null>(null);
   // § live UX review, user-directed - "the front camera doesn't work,
   // there should be a button to switch between them," then "the front
   // camera should be the one active by default for clock-in/out" -
@@ -87,6 +102,8 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
     }
 
     let cancelled = false;
+    livenessGateRef.current = new LivenessGate();
+    setLivenessReady(false);
 
     openCamera(facingMode)
       .then((stream) => {
@@ -101,10 +118,28 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
         if (!cancelled) setError(t("permissionDenied"));
       });
 
+    const sampleInterval = window.setInterval(() => {
+      const video = videoRef.current;
+      const gate = livenessGateRef.current;
+      if (!video || !gate || !video.videoWidth || video.paused) return;
+
+      if (!livenessCanvasRef.current) livenessCanvasRef.current = document.createElement("canvas");
+      const canvas = livenessCanvasRef.current;
+      canvas.width = LIVENESS_SAMPLE_SIZE;
+      canvas.height = LIVENESS_SAMPLE_SIZE;
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
+      if (!ctx) return;
+      ctx.drawImage(video, 0, 0, LIVENESS_SAMPLE_SIZE, LIVENESS_SAMPLE_SIZE);
+      const { data } = ctx.getImageData(0, 0, LIVENESS_SAMPLE_SIZE, LIVENESS_SAMPLE_SIZE);
+      gate.addSample(data);
+      if (gate.ready) setLivenessReady(true);
+    }, LIVENESS_SAMPLE_INTERVAL_MS);
+
     // No camera stream may remain active after cancel/close/unmount, or
     // before re-opening on the newly selected facing mode.
     return () => {
       cancelled = true;
+      window.clearInterval(sampleInterval);
       stopStream();
     };
   }, [isOpen, facingMode, t]);
@@ -130,6 +165,8 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
 
   const handleRetake = () => {
     setCapturedDataUrl(null);
+    livenessGateRef.current = new LivenessGate();
+    setLivenessReady(false);
     if (isOpen) {
       openCamera(facingMode)
         .then((stream) => {
@@ -190,7 +227,7 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
             <Button variant="ghost" onClick={onClose}>
               {t("cancel")}
             </Button>
-            <Button variant="primary" onClick={handleCapture}>
+            <Button variant="primary" onClick={handleCapture} disabled={!livenessReady}>
               <Camera size={14} /> {t("capture")}
             </Button>
           </>
@@ -210,6 +247,11 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
           <>
             <video ref={videoRef} autoPlay playsInline muted className={`${styles.video} ${facingMode === "user" ? styles.videoMirrored : ""}`} />
             <div className={styles.faceGuide} aria-hidden="true" />
+            {!livenessReady && (
+              <div className={styles.livenessHint} aria-live="polite">
+                {t("verifyingLiveness")}
+              </div>
+            )}
             <button type="button" className={styles.switchCameraButton} onClick={handleSwitchCamera} aria-label={t("switchCamera")} title={t("switchCamera")}>
               <SwitchCamera size={18} />
             </button>
