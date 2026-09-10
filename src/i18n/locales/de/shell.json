@@ -91,6 +91,15 @@
       "cancelledTitle": "Eine geplante Schicht wurde storniert",
       "cancelledBody": "Ihre Schicht am {{date}} wurde storniert."
     },
+    "siteChangeAlert": {
+      "title": "Mitarbeiter hat während der Schicht den Standort gewechselt",
+      "body": "{{name}} hat während der Schicht den Standort gewechselt, von {{oldSite}} zu {{newSite}}.",
+      "unregisteredLocation": "einem nicht registrierten Ort"
+    },
+    "missingClockOut": {
+      "title": "Mitarbeiter hat sich nicht ausgestempelt",
+      "body": "{{name}} ist seit über {{hours}} Stunden eingestempelt und hat sich noch nicht ausgestempelt."
+    },
     "decision": {
       "approved": "Genehmigt",
       "rejected": "Abgelehnt",

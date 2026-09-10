@@ -120,6 +120,23 @@ export default function localizeNotification(notification: AppNotification, t: T
           : t("shell:notifications.shiftAssigned.body", { date: shiftDate, startTime, endTime });
       return { title: t("shell:notifications.shiftAssigned.title"), body };
     }
+    // § real gap fix, 14-point live-audit - site_change_events and
+    // an abandoned/missing-checkout session both had zero alerting
+    // before this pass; these two new types carry the same localized
+    // treatment as every other notification kind.
+    case "site_change_alert": {
+      const name = typeof data.employeeName === "string" ? data.employeeName : null;
+      if (!name) break;
+      const oldSite = typeof data.oldSiteName === "string" ? data.oldSiteName : t("shell:notifications.siteChangeAlert.unregisteredLocation");
+      const newSite = typeof data.newSiteName === "string" ? data.newSiteName : t("shell:notifications.siteChangeAlert.unregisteredLocation");
+      return { title: t("shell:notifications.siteChangeAlert.title"), body: t("shell:notifications.siteChangeAlert.body", { name, oldSite, newSite }) };
+    }
+    case "missing_clock_out": {
+      const name = typeof data.employeeName === "string" ? data.employeeName : null;
+      const hours = typeof data.hoursSinceClockIn === "number" ? data.hoursSinceClockIn : null;
+      if (!name || hours === null) break;
+      return { title: t("shell:notifications.missingClockOut.title"), body: t("shell:notifications.missingClockOut.body", { name, hours }) };
+    }
   }
 
   return { title: notification.title, body: notification.body };

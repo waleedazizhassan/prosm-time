@@ -91,6 +91,15 @@
       "cancelledTitle": "Un turno programmato è stato annullato",
       "cancelledBody": "Il tuo turno del {{date}} è stato annullato."
     },
+    "siteChangeAlert": {
+      "title": "Il dipendente ha cambiato sede durante il turno",
+      "body": "{{name}} ha cambiato sede durante il turno, da {{oldSite}} a {{newSite}}.",
+      "unregisteredLocation": "una posizione non registrata"
+    },
+    "missingClockOut": {
+      "title": "Il dipendente non ha timbrato l'uscita",
+      "body": "{{name}} ha timbrato l'entrata da oltre {{hours}} ore senza ancora aver timbrato l'uscita."
+    },
     "decision": {
       "approved": "Approvato",
       "rejected": "Rifiutato",

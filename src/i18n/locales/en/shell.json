@@ -91,6 +91,15 @@
       "cancelledTitle": "A scheduled shift was cancelled",
       "cancelledBody": "Your shift on {{date}} was cancelled."
     },
+    "siteChangeAlert": {
+      "title": "Employee changed site mid-shift",
+      "body": "{{name}} changed site mid-shift, from {{oldSite}} to {{newSite}}.",
+      "unregisteredLocation": "an unregistered location"
+    },
+    "missingClockOut": {
+      "title": "Employee has not clocked out",
+      "body": "{{name}} has been clocked in for over {{hours}} hours with no clock-out yet."
+    },
     "decision": {
       "approved": "Approved",
       "rejected": "Rejected",

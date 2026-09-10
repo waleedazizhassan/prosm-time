@@ -91,6 +91,15 @@
       "cancelledTitle": "تم إلغاء شيفت مجدول",
       "cancelledBody": "تم إلغاء شيفتك يوم {{date}}."
     },
+    "siteChangeAlert": {
+      "title": "الموظف غيّر الموقع أثناء الوردية",
+      "body": "{{name}} غيّر الموقع أثناء الوردية، من {{oldSite}} إلى {{newSite}}.",
+      "unregisteredLocation": "موقع غير مسجل"
+    },
+    "missingClockOut": {
+      "title": "الموظف لم يسجل الانصراف",
+      "body": "{{name}} مسجل حضوره منذ أكثر من {{hours}} ساعة ولم يسجل الانصراف بعد."
+    },
     "decision": {
       "approved": "تمت الموافقة",
       "rejected": "تم الرفض",

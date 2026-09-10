@@ -91,6 +91,15 @@
       "cancelledTitle": "Un quart de travail planifié a été annulé",
       "cancelledBody": "Votre quart du {{date}} a été annulé."
     },
+    "siteChangeAlert": {
+      "title": "L'employé a changé de site en cours de service",
+      "body": "{{name}} a changé de site en cours de service, de {{oldSite}} à {{newSite}}.",
+      "unregisteredLocation": "un lieu non enregistré"
+    },
+    "missingClockOut": {
+      "title": "L'employé n'a pas pointé sa sortie",
+      "body": "{{name}} est pointé depuis plus de {{hours}} heures sans avoir encore pointé sa sortie."
+    },
     "decision": {
       "approved": "Approuvé",
       "rejected": "Rejeté",
