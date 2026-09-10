@@ -1,9 +1,9 @@
 {
   "version": "2.3.1",
-  "releasedAt": "2026-09-10T03:13:44.436Z",
+  "releasedAt": "2026-09-10T03:27:27.531Z",
   "downloads": {
     "windows": "https://github.com/waleedazizhassan/prosm-time/releases/download/v2.3.1/PROSM Time Setup 2.3.1.exe",
     "android": "https://github.com/waleedazizhassan/prosm-time/releases/download/v2.3.1/app-debug.apk",
-    "web": "https://waleedazizhassan.github.io/prosm-time/"
+    "web": "https://github.com/waleedazizhassan/prosm-time/releases/download/v2.3.1/prosm-time-web-v2.3.1.zip"
   }
 }
