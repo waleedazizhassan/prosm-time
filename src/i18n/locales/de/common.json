@@ -132,6 +132,7 @@
     "alreadyWorkingWithoutSite": "Sie arbeiten bereits ohne registrierten Standort.",
     "locationSampleRequiredForNoSiteChange": "Für den Wechsel ohne Standort ist eine echte Standortabtastung erforderlich - bitte erlauben Sie den Standortzugriff und versuchen Sie es erneut.",
     "youAreAlreadyClockedIn": "Sie sind bereits eingestempelt.",
+    "youAreOnApprovedLeaveToday": "Sie haben heute genehmigten Urlaub und können sich nicht einstempeln. Wenden Sie sich an Ihre Führungskraft, falls eine Ausnahme nötig ist.",
     "youAreNotAssignedToProject": "Sie sind diesem Projekt nicht zugewiesen.",
     "youAreNotAssignedToSite": "Sie sind diesem Standort nicht zugewiesen.",
     "notAuthorizedApproveTimesheet": "Sie sind nicht berechtigt, diese Zeiterfassung zu genehmigen.",

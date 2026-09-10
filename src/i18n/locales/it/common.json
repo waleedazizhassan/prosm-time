@@ -132,6 +132,7 @@
     "alreadyWorkingWithoutSite": "Stai già lavorando senza un sito registrato.",
     "locationSampleRequiredForNoSiteChange": "È richiesto un campione di posizione reale per passare a nessun sito - consenti l'accesso alla posizione e riprova.",
     "youAreAlreadyClockedIn": "Hai già timbrato l'entrata.",
+    "youAreOnApprovedLeaveToday": "Oggi sei in congedo approvato, quindi non puoi timbrare l'entrata. Contatta il tuo responsabile se serve un'eccezione.",
     "youAreNotAssignedToProject": "Non sei assegnato a questo progetto.",
     "youAreNotAssignedToSite": "Non sei assegnato a questo sito.",
     "notAuthorizedApproveTimesheet": "Non sei autorizzato ad approvare questo foglio ore.",

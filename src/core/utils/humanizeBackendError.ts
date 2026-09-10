@@ -152,6 +152,7 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "YOU ARE ALREADY WORKING WITHOUT A REGISTERED SITE": "alreadyWorkingWithoutSite",
   "A REAL LOCATION SAMPLE IS REQUIRED TO CHANGE TO NO SITE": "locationSampleRequiredForNoSiteChange",
   "YOU ARE ALREADY CLOCKED IN": "youAreAlreadyClockedIn",
+  "YOU ARE ON APPROVED LEAVE TODAY": "youAreOnApprovedLeaveToday",
   "YOU ARE NOT ASSIGNED TO THIS PROJECT": "youAreNotAssignedToProject",
   "YOU ARE NOT ASSIGNED TO THIS SITE": "youAreNotAssignedToSite",
   "YOU ARE NOT AUTHORIZED TO APPROVE THIS TIMESHEET": "notAuthorizedApproveTimesheet",

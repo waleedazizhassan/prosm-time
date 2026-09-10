@@ -132,6 +132,7 @@
     "alreadyWorkingWithoutSite": "إنت شغال بالفعل من غير موقع مسجل.",
     "locationSampleRequiredForNoSiteChange": "لازم عينة موقع حقيقية عشان تغيّر لغير موقع - فعّل صلاحية الموقع وحاول تاني.",
     "youAreAlreadyClockedIn": "أنت مسجل حضورك بالفعل.",
+    "youAreOnApprovedLeaveToday": "أنت في إجازة معتمدة اليوم، فلا يمكنك تسجيل الحضور. تواصل مع مديرك إذا كان هناك استثناء مطلوب.",
     "youAreNotAssignedToProject": "أنت غير معيّن لهذا المشروع.",
     "youAreNotAssignedToSite": "أنت غير معيّن لهذا الموقع.",
     "notAuthorizedApproveTimesheet": "غير مصرّح لك باعتماد كشف الدوام هذا.",

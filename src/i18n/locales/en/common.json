@@ -132,6 +132,7 @@
     "alreadyWorkingWithoutSite": "You're already working without a registered site.",
     "locationSampleRequiredForNoSiteChange": "A real location sample is required to change to no site - please allow location access and try again.",
     "youAreAlreadyClockedIn": "You're already clocked in.",
+    "youAreOnApprovedLeaveToday": "You're on approved leave today, so you can't clock in. Contact your manager if this needs an exception.",
     "youAreNotAssignedToProject": "You aren't assigned to this project.",
     "youAreNotAssignedToSite": "You aren't assigned to this site.",
     "notAuthorizedApproveTimesheet": "You aren't authorized to approve this timesheet.",
