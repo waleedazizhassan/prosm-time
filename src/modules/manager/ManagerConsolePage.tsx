@@ -313,6 +313,21 @@ export default function ManagerConsolePage() {
           </>
         }
       >
+        {reviewTarget ? (
+          // § real bug, live-reported - the modal used to render only
+          // the notes field, nothing about the actual request. The
+          // details (old/new time or exception distance, and the
+          // employee's own reason) already existed on reviewTarget.
+          // summary - the outer, now-dimmed list row behind the modal
+          // showed it, the modal itself never did. A manager had no
+          // way to see what they were approving.
+          <div style={{ marginBottom: "var(--space-4)", padding: "var(--space-3)", background: "var(--surface-app)", borderRadius: "var(--radius-md)" }}>
+            <p style={{ margin: 0, fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{reviewTarget.summary}</p>
+            <p style={{ margin: "var(--space-2) 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
+              {t("pending.submittedAtLabel")}: {formatDateOnly(reviewTarget.createdAt, i18n.language)} {formatTimeOnly(reviewTarget.createdAt, i18n.language)}
+            </p>
+          </div>
+        ) : null}
         <Textarea label={t("pending.notesLabel")} name="reviewNotes" value={reviewNotes} onChange={(event) => setReviewNotes(event.target.value)} disabled={Boolean(submitting)} />
       </Modal>
 

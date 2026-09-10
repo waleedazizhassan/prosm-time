@@ -30,6 +30,7 @@
     },
     "reviewAction": "Prüfen",
     "notesLabel": "Notizen (optional)",
+    "submittedAtLabel": "Eingereicht am",
     "action": {
       "approved": "Genehmigen",
       "rejected": "Ablehnen",

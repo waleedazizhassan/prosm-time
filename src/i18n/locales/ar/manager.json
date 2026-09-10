@@ -30,6 +30,7 @@
     },
     "reviewAction": "مراجعة",
     "notesLabel": "ملاحظات (اختياري)",
+    "submittedAtLabel": "تاريخ الطلب",
     "action": {
       "approved": "موافقة",
       "rejected": "رفض",

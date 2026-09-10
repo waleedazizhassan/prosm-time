@@ -30,6 +30,7 @@
     },
     "reviewAction": "Esamina",
     "notesLabel": "Note (facoltative)",
+    "submittedAtLabel": "Inviata il",
     "action": {
       "approved": "Approva",
       "rejected": "Rifiuta",

@@ -30,6 +30,7 @@
     },
     "reviewAction": "Review",
     "notesLabel": "Notes (optional)",
+    "submittedAtLabel": "Submitted",
     "action": {
       "approved": "Approve",
       "rejected": "Reject",

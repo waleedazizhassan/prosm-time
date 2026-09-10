@@ -30,6 +30,7 @@
     },
     "reviewAction": "Examiner",
     "notesLabel": "Notes (facultatif)",
+    "submittedAtLabel": "Soumis le",
     "action": {
       "approved": "Approuver",
       "rejected": "Rejeter",
