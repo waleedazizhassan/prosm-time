@@ -11,6 +11,12 @@
 // never reaches the client, so this endpoint gives no email-
 // enumeration signal. Real email delivery is a soft dependency
 // (sendEmail(), § _shared/emailService.ts) exactly like invite-user.
+//
+// Security Hardening phase (user-directed): because this endpoint is
+// session-less, abuse control has to be server-side - per-IP and
+// per-email rate limits (§ _shared/rateLimit.ts, enforced in Postgres)
+// and a padded response time so the "account exists" branch does not
+// finish measurably faster than the "no such account" branch.
 // deno-lint-ignore-file no-explicit-any
 
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
@@ -19,6 +25,7 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
 import { sendEmail } from "../_shared/emailService.ts";
 import { renderPasswordResetEmail } from "../_shared/emailTemplates.ts";
+import { clientIdentifier, enforceRateLimits, padResponseTime } from "../_shared/rateLimit.ts";
 
 const GENERIC_MESSAGE = "If an account exists for this email, a password reset code has been sent.";
 const EXPIRY_MINUTES = 30;
@@ -37,6 +44,8 @@ serve(async (request: Request) => {
     return errorResponse("Method not allowed.", 405, "METHOD_NOT_ALLOWED");
   }
 
+  const startedAt = Date.now();
+
   try {
     const payload = await request.json().catch(() => ({}));
     const { email } = payload;
@@ -52,6 +61,18 @@ serve(async (request: Request) => {
     });
 
     const normalizedEmail = email.trim().toLowerCase();
+
+    const rateLimited = await enforceRateLimits(serviceClient, [
+      // A single address may not be flooded with reset codes...
+      { scope: "password_reset_request_email", identifier: normalizedEmail, limit: 3, windowSeconds: 900, blockSeconds: 900 },
+      // ...and one source may not sweep many addresses either.
+      { scope: "password_reset_request_ip", identifier: clientIdentifier(request), limit: 10, windowSeconds: 3600, blockSeconds: 3600 },
+    ]);
+    if (rateLimited) {
+      await padResponseTime(startedAt);
+      return rateLimited;
+    }
+
     const verificationCode = generateVerificationCode();
     const expiresAt = new Date(Date.now() + 1000 * 60 * EXPIRY_MINUTES).toISOString();
 
@@ -62,7 +83,11 @@ serve(async (request: Request) => {
     });
 
     if (requestError) {
-      return errorResponse(requestError.message, 500, "REQUEST_FAILED");
+      // Never surface the internal reason here - a failing lookup must
+      // look exactly like a successful one from outside.
+      console.error("[request-password-reset] RPC failed", requestError.message);
+      await padResponseTime(startedAt);
+      return successResponse({ message: GENERIC_MESSAGE, email: normalizedEmail });
     }
 
     if (requestResult?.success) {
@@ -84,8 +109,11 @@ serve(async (request: Request) => {
       });
     }
 
+    await padResponseTime(startedAt);
     return successResponse({ message: GENERIC_MESSAGE, email: normalizedEmail });
   } catch (error: any) {
-    return errorResponse(error?.message ?? "Password reset service unavailable.", 500, "INTERNAL_ERROR");
+    console.error("[request-password-reset] unexpected failure", error?.message);
+    await padResponseTime(startedAt);
+    return errorResponse("Password reset service unavailable.", 500, "INTERNAL_ERROR");
   }
 });

@@ -5,12 +5,22 @@
 // verification code, §12) against the database, then sets the real
 // password on the already-created Auth account (service role) and
 // activates the user row.
+//
+// § real gap fix, 14-point live-audit - a session-less endpoint
+// guessing a 6-digit code needs a server-side rate limit; added here.
+// Deliberately NOT collapsed to one generic failure message the way
+// password-reset was (20260910150000): "invitation not found / already
+// used / expired / wrong code" are real, currently-translated, useful
+// distinctions for a legitimately invited employee, and the email
+// address here is already known to whoever sent the invite - a
+// separate, lower-severity call than the password-reset case.
 // deno-lint-ignore-file no-explicit-any
 
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
+import { clientIdentifier, enforceRateLimits } from "../_shared/rateLimit.ts";
 
 serve(async (request: Request) => {
   if (request.method === "OPTIONS") {
@@ -40,8 +50,15 @@ serve(async (request: Request) => {
       auth: { autoRefreshToken: false, persistSession: false },
     });
 
+    const normalizedEmail = email.trim().toLowerCase();
+    const rateLimited = await enforceRateLimits(serviceClient, [
+      { scope: "invitation_redeem_email", identifier: normalizedEmail, limit: 5, windowSeconds: 900, blockSeconds: 1800 },
+      { scope: "invitation_redeem_ip", identifier: clientIdentifier(request), limit: 20, windowSeconds: 3600, blockSeconds: 3600 },
+    ]);
+    if (rateLimited) return rateLimited;
+
     const { data: redeemResult, error: redeemError } = await serviceClient.rpc("redeem_prosm_time_invitation", {
-      p_email: email.trim().toLowerCase(),
+      p_email: normalizedEmail,
       p_verification_code: verificationCode.trim(),
     });
 

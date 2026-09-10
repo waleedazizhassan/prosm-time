@@ -34,6 +34,7 @@ import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
+import { clientIdentifier, enforceRateLimits, hashIdentifier } from "../_shared/rateLimit.ts";
 
 interface ActivationResult {
   success: boolean;
@@ -82,6 +83,20 @@ serve(async (request: Request) => {
     if (!siteName || typeof siteName !== "string" || siteName.trim().length === 0) {
       return errorResponse("siteName is required.", 400, "INVALID_REQUEST");
     }
+
+    // Security Hardening phase (user-directed): activation codes are
+    // guessable secrets on a session-less endpoint, so the guessing
+    // rate is capped server-side before any cross-system call is made.
+    // The code itself is never used as an identifier - only its
+    // SHA-256 - so the limiter table never stores a live secret.
+    const rateLimitClient = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, {
+      auth: { autoRefreshToken: false, persistSession: false },
+    });
+    const activationRateLimited = await enforceRateLimits(rateLimitClient, [
+      { scope: "activate_organization_ip", identifier: clientIdentifier(request), limit: 10, windowSeconds: 3600, blockSeconds: 3600 },
+      { scope: "activate_organization_code", identifier: await hashIdentifier(activationCode.trim()), limit: 5, windowSeconds: 3600, blockSeconds: 3600 },
+    ]);
+    if (activationRateLimited) return activationRateLimited;
 
     const managementApiUrl = Deno.env.get("PROSM_MANAGEMENT_API_URL");
     const managementApiKey = Deno.env.get("PROSM_MANAGEMENT_API_KEY");

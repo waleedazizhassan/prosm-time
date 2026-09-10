@@ -4,10 +4,19 @@
 // EMPLOYEE being clocked in by their own PIN (not by the caller's
 // identity) and uses the site's own fixed coordinates rather than any
 // client-supplied location.
+//
+// § real gap fix, 14-point live-audit - a shared kiosk device is the
+// one place in this app where a short PIN alone is the credential;
+// rate-limited per (site, employee) so it can't be brute-forced at
+// the keypad, and per caller IP so one device can't sweep many
+// employees. The rate-limit RPC is service_role-only, so this needs
+// its own service-role client alongside callerClient (which only has
+// the operating device's own authenticated-user privileges).
 // deno-lint-ignore-file no-explicit-any
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
+import { clientIdentifier, enforceRateLimits } from "../_shared/rateLimit.ts";
 
 serve(async (request: Request) => {
   if (request.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
@@ -36,6 +45,15 @@ serve(async (request: Request) => {
     if (!employeeUserId || typeof employeeUserId !== "string") return errorResponse("employeeUserId is required.", 400, "INVALID_REQUEST");
     if (!pin || typeof pin !== "string") return errorResponse("pin is required.", 400, "INVALID_REQUEST");
     if (!idempotencyKey || typeof idempotencyKey !== "string") return errorResponse("idempotencyKey is required.", 400, "INVALID_REQUEST");
+
+    const serviceClient = createClient(supabaseUrl, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, {
+      auth: { autoRefreshToken: false, persistSession: false },
+    });
+    const rateLimited = await enforceRateLimits(serviceClient, [
+      { scope: "kiosk_clock_in_pin", identifier: `${siteId}:${employeeUserId}`, limit: 8, windowSeconds: 900, blockSeconds: 1800 },
+      { scope: "kiosk_clock_in_ip", identifier: clientIdentifier(request), limit: 60, windowSeconds: 900, blockSeconds: 900 },
+    ]);
+    if (rateLimited) return rateLimited;
 
     const { data, error } = await callerClient.rpc("kiosk_clock_in_prosm_time_attendance", {
       p_site_id: siteId,

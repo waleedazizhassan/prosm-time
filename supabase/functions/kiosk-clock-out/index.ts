@@ -1,9 +1,12 @@
 // kiosk-clock-out - WP-18 (§13.1, §35). Mirrors kiosk-clock-in;
 // forwards to kiosk_clock_out_prosm_time_attendance().
+// § real gap fix, 14-point live-audit - same PIN-brute-force rate
+// limiting as kiosk-clock-in.
 // deno-lint-ignore-file no-explicit-any
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
+import { clientIdentifier, enforceRateLimits } from "../_shared/rateLimit.ts";
 
 serve(async (request: Request) => {
   if (request.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
@@ -32,6 +35,15 @@ serve(async (request: Request) => {
     if (!employeeUserId || typeof employeeUserId !== "string") return errorResponse("employeeUserId is required.", 400, "INVALID_REQUEST");
     if (!pin || typeof pin !== "string") return errorResponse("pin is required.", 400, "INVALID_REQUEST");
     if (!idempotencyKey || typeof idempotencyKey !== "string") return errorResponse("idempotencyKey is required.", 400, "INVALID_REQUEST");
+
+    const serviceClient = createClient(supabaseUrl, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, {
+      auth: { autoRefreshToken: false, persistSession: false },
+    });
+    const rateLimited = await enforceRateLimits(serviceClient, [
+      { scope: "kiosk_clock_out_pin", identifier: `${siteId}:${employeeUserId}`, limit: 8, windowSeconds: 900, blockSeconds: 1800 },
+      { scope: "kiosk_clock_out_ip", identifier: clientIdentifier(request), limit: 60, windowSeconds: 900, blockSeconds: 900 },
+    ]);
+    if (rateLimited) return rateLimited;
 
     const { data, error } = await callerClient.rpc("kiosk_clock_out_prosm_time_attendance", {
       p_site_id: siteId,
