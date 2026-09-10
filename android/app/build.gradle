@@ -1,14 +1,42 @@
 apply plugin: 'com.android.application'
 
+// Real release signing - reads android/keystore.properties (git-ignored,
+// never committed - see .gitignore's own comment on why losing this
+// keystore is permanent). Falls back to null (an unsigned release build)
+// if the properties file isn't present, so CI/other machines without the
+// keystore don't hard-fail - only this machine's own release builds are
+// actually signed until the keystore is provisioned elsewhere too.
+def keystorePropertiesFile = rootProject.file('keystore.properties')
+def keystoreProperties = new Properties()
+def hasSigningConfig = keystorePropertiesFile.exists()
+if (hasSigningConfig) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
     namespace = "net.prosm.time"
     compileSdk = rootProject.ext.compileSdkVersion
+    buildFeatures {
+        // Required so MainActivity can read BuildConfig.DEBUG and switch
+        // off WebView remote inspection in release builds.
+        buildConfig = true
+    }
+    if (hasSigningConfig) {
+        signingConfigs {
+            release {
+                storeFile rootProject.file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            }
+        }
+    }
     defaultConfig {
         applicationId "net.prosm.time"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
-        versionName "2.3.1"
+        versionCode 3
+        versionName "2.3.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -18,9 +46,26 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // Release hardening: R8 renames and strips the compiled
+            // Java, and unused resources are dropped. proguard-rules.pro
+            // keeps every Capacitor/WebView entry point, so app
+            // behaviour is unchanged.
+            minifyEnabled true
+            shrinkResources true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if (hasSigningConfig) {
+                signingConfig signingConfigs.release
+            }
         }
+        debug {
+            minifyEnabled false
+        }
+    }
+    packagingOptions {
+        // No stray debug metadata in the shipped APK.
+        exclude 'DebugProbesKt.bin'
+        exclude '**/*.map'
     }
 }
 

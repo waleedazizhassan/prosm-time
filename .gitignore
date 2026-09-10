@@ -25,3 +25,13 @@ supabase/.temp
 # directly, never meant to live in the repo itself.
 *.apk
 prosm-time-web-*.zip
+
+# Android release signing - the keystore itself and its passwords must
+# NEVER be committed. Losing this keystore means every future release
+# can never be signed with the same identity again - the user must back
+# it up somewhere durable outside this repo, not rely on git for it.
+android/app/*.keystore
+android/keystore.properties
+
+# Gradle/Kotlin build cache - regenerated every build, machine-local.
+android/.kotlin/

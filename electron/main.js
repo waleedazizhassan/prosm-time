@@ -10,13 +10,21 @@
 // own web implementation (e.g. saveGeneratedFile's blob-URL download),
 // which Electron's default session already turns into a real file
 // save the same way a normal browser tab would.
-import { app, BrowserWindow, session } from "electron";
+// Hardening (docs/SECURITY_HARDENING.md): DevTools, the application
+// menu, window popups and off-origin navigation are all disabled in a
+// packaged build, so the bundled app cannot be inspected, re-pointed or
+// scraped from inside the shell. Behaviour of the app itself is
+// unchanged. Set PROSM_TIME_DEVTOOLS=1 when running from source if you
+// need the inspector back during development.
+import { app, BrowserWindow, Menu, session, shell } from "electron";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import serve from "electron-serve";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const loadURL = serve({ directory: path.join(__dirname, "..", "dist") });
+
+const ALLOW_DEVTOOLS = !app.isPackaged && process.env.PROSM_TIME_DEVTOOLS === "1";
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -38,6 +46,7 @@ function createWindow() {
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: true,
+      devTools: ALLOW_DEVTOOLS,
     },
   });
 
@@ -49,11 +58,33 @@ function createWindow() {
     callback(permission === "media" || permission === "geolocation");
   });
 
+  // No popups, and no navigating the shell away from the packaged app.
+  // External links still open in the user's real browser.
+  win.webContents.setWindowOpenHandler(({ url }) => {
+    if (url.startsWith("https://")) shell.openExternal(url);
+    return { action: "deny" };
+  });
+  win.webContents.on("will-navigate", (event, url) => {
+    if (!url.startsWith("app://")) {
+      event.preventDefault();
+      if (url.startsWith("https://")) shell.openExternal(url);
+    }
+  });
+
   // F11 still offers real (frameless) fullscreen for anyone who wants
   // it, same as a browser tab; Escape always exits back to the normal
-  // maximized window with its title bar/close button.
-  win.webContents.on("before-input-event", (_event, input) => {
+  // maximized window with its title bar/close button. DevTools
+  // shortcuts are swallowed in a packaged build.
+  win.webContents.on("before-input-event", (event, input) => {
     if (input.type !== "keyDown") return;
+    const isDevToolsShortcut =
+      input.key === "F12" ||
+      (input.control && input.shift && ["I", "J", "C"].includes(String(input.key).toUpperCase())) ||
+      (input.control && String(input.key).toUpperCase() === "U");
+    if (isDevToolsShortcut && !ALLOW_DEVTOOLS) {
+      event.preventDefault();
+      return;
+    }
     if (input.key === "F11") {
       win.setFullScreen(!win.isFullScreen());
     } else if (input.key === "Escape" && win.isFullScreen()) {
@@ -61,12 +92,21 @@ function createWindow() {
     }
   });
 
+  // Belt and braces: even a programmatic openDevTools() closes again.
+  if (!ALLOW_DEVTOOLS) {
+    win.webContents.on("devtools-opened", () => win.webContents.closeDevTools());
+  }
+
   loadURL(win);
   return win;
 }
 
 app.whenReady().then(() => {
   app.setName("PROSM Time");
+
+  if (!ALLOW_DEVTOOLS) {
+    Menu.setApplicationMenu(null);
+  }
 
   // § live UX review, user-directed - a real Windows desktop build.
   // setPermissionRequestHandler above only covers foreground requests;

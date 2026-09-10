@@ -1,21 +1,40 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
+# PROSM Time - Android release hardening (R8 / ProGuard).
 #
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# minifyEnabled + shrinkResources are turned on for the release build in
+# app/build.gradle. These rules keep the Capacitor bridge and every
+# @JavascriptInterface / @PluginMethod entry point intact, so the app's
+# behaviour is unchanged - only the compiled Java/Kotlin is renamed and
+# stripped.
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# --- Capacitor bridge and plugins ---
+-keep class com.getcapacitor.** { *; }
+-keep @com.getcapacitor.annotation.CapacitorPlugin class * { *; }
+-keepclassmembers class * {
+    @com.getcapacitor.PluginMethod public <methods>;
+}
+-keep class net.prosm.time.** { *; }
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# --- Cordova plugins bridged through Capacitor ---
+-keep class org.apache.cordova.** { *; }
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# --- Anything the WebView calls into ---
+-keepclassmembers class * {
+    @android.webkit.JavascriptInterface <methods>;
+}
+
+# --- AndroidX / annotations ---
+-keep class androidx.** { *; }
+-dontwarn androidx.**
+-keepattributes *Annotation*, Signature, InnerClasses, EnclosingMethod
+
+# --- Strip developer conveniences from the release binary ---
+-assumenosideeffects class android.util.Log {
+    public static *** v(...);
+    public static *** d(...);
+    public static *** i(...);
+    public static *** w(...);
+}
+
+# --- Hide original source file names in stack traces ---
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable
