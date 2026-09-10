@@ -10,7 +10,9 @@ export interface SiteWorker {
   id: string;
   fullName: string;
   workerNumber: string;
+  contractorName: string | null;
   status: "active" | "inactive";
+  hasOpenSession: boolean;
   createdAt: string;
 }
 
@@ -47,25 +49,53 @@ class SiteWorkerRepository {
       const { data, error } = await this.client.rpc("list_prosm_time_site_workers", { p_site_id: siteId });
       if (error) return createError(error.message);
       return createSuccess(
-        (data ?? []).map((row: { id: string; full_name: string; worker_number: string; status: "active" | "inactive"; created_at: string }) => ({
-          id: row.id,
-          fullName: row.full_name,
-          workerNumber: row.worker_number,
-          status: row.status,
-          createdAt: row.created_at,
-        })),
+        (data ?? []).map(
+          (row: {
+            id: string;
+            full_name: string;
+            worker_number: string;
+            contractor_name: string | null;
+            status: "active" | "inactive";
+            has_open_session: boolean;
+            created_at: string;
+          }) => ({
+            id: row.id,
+            fullName: row.full_name,
+            workerNumber: row.worker_number,
+            contractorName: row.contractor_name,
+            status: row.status,
+            hasOpenSession: row.has_open_session,
+            createdAt: row.created_at,
+          }),
+        ),
       );
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Workforce service unavailable.");
     }
   }
 
-  async create(siteId: string, fullName: string, workerNumber: string): Promise<ServiceResult<{ workerId: string }>> {
+  async create(siteId: string, fullName: string, workerNumber: string, contractorName: string | null = null): Promise<ServiceResult<{ workerId: string }>> {
     try {
-      const { data, error } = await this.client.rpc("create_prosm_time_site_worker", { p_site_id: siteId, p_full_name: fullName, p_worker_number: workerNumber });
+      const { data, error } = await this.client.rpc("create_prosm_time_site_worker", {
+        p_site_id: siteId,
+        p_full_name: fullName,
+        p_worker_number: workerNumber,
+        p_contractor_name: contractorName,
+      });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to add this worker.");
       return createSuccess({ workerId: data.workerId });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Workforce service unavailable.");
+    }
+  }
+
+  async adminClockOut(workerId: string, reason: string): Promise<ServiceResult<{ attendanceId: string }>> {
+    try {
+      const { data, error } = await this.client.rpc("admin_clock_out_prosm_time_site_worker", { p_worker_id: workerId, p_reason: reason });
+      if (error) return createError(error.message);
+      if (data?.success === false) return createError("Unable to clock out this worker.");
+      return createSuccess({ attendanceId: data.attendanceId });
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Workforce service unavailable.");
     }

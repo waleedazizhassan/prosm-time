@@ -113,6 +113,13 @@
     "deactivateWorkerAction": "إلغاء تفعيل",
     "workforceAddError": "تعذر إضافة هذا العامل.",
     "workforceDeactivateError": "تعذر إلغاء تفعيل هذا العامل.",
+    "workerContractorNameLabel": "المقاول (اختياري)",
+    "workforceOpenSessionBadge": "مسجل حضوره",
+    "workforceOverrideAction": "تسجيل انصراف إجباري",
+    "workforceOverrideReasonLabel": "سبب التدخل",
+    "workforceOverrideConfirmAction": "تأكيد الانصراف",
+    "workforceOverrideError": "تعذر تسجيل انصراف هذا العامل.",
+    "cancelAction": "إلغاء",
     "projectForm": {
       "createTitle": "إضافة مشروع",
       "editTitle": "تعديل المشروع",

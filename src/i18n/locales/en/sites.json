@@ -113,6 +113,13 @@
     "deactivateWorkerAction": "Deactivate",
     "workforceAddError": "Unable to add this worker.",
     "workforceDeactivateError": "Unable to deactivate this worker.",
+    "workerContractorNameLabel": "Contractor (optional)",
+    "workforceOpenSessionBadge": "Clocked in",
+    "workforceOverrideAction": "Force clock-out",
+    "workforceOverrideReasonLabel": "Reason for the override",
+    "workforceOverrideConfirmAction": "Confirm clock-out",
+    "workforceOverrideError": "Unable to clock out this worker.",
+    "cancelAction": "Cancel",
     "projectForm": {
       "createTitle": "Add a project",
       "editTitle": "Edit project",

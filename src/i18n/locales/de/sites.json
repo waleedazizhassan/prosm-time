@@ -113,6 +113,13 @@
     "deactivateWorkerAction": "Deaktivieren",
     "workforceAddError": "Dieser Arbeiter konnte nicht hinzugefügt werden.",
     "workforceDeactivateError": "Dieser Arbeiter konnte nicht deaktiviert werden.",
+    "workerContractorNameLabel": "Subunternehmer (optional)",
+    "workforceOpenSessionBadge": "Eingestempelt",
+    "workforceOverrideAction": "Zwangsweise ausstempeln",
+    "workforceOverrideReasonLabel": "Grund für den Eingriff",
+    "workforceOverrideConfirmAction": "Ausstempeln bestätigen",
+    "workforceOverrideError": "Dieser Arbeiter konnte nicht ausgestempelt werden.",
+    "cancelAction": "Abbrechen",
     "projectForm": {
       "createTitle": "Projekt hinzufügen",
       "editTitle": "Projekt bearbeiten",

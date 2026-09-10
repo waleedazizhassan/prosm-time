@@ -113,6 +113,13 @@
     "deactivateWorkerAction": "Disattiva",
     "workforceAddError": "Impossibile aggiungere questo lavoratore.",
     "workforceDeactivateError": "Impossibile disattivare questo lavoratore.",
+    "workerContractorNameLabel": "Appaltatore (facoltativo)",
+    "workforceOpenSessionBadge": "In servizio",
+    "workforceOverrideAction": "Forza uscita",
+    "workforceOverrideReasonLabel": "Motivo dell'intervento",
+    "workforceOverrideConfirmAction": "Conferma uscita",
+    "workforceOverrideError": "Impossibile registrare l'uscita di questo lavoratore.",
+    "cancelAction": "Annulla",
     "projectForm": {
       "createTitle": "Aggiungi un progetto",
       "editTitle": "Modifica progetto",

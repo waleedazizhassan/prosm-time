@@ -113,6 +113,13 @@
     "deactivateWorkerAction": "Désactiver",
     "workforceAddError": "Impossible d'ajouter ce travailleur.",
     "workforceDeactivateError": "Impossible de désactiver ce travailleur.",
+    "workerContractorNameLabel": "Sous-traitant (facultatif)",
+    "workforceOpenSessionBadge": "Pointé",
+    "workforceOverrideAction": "Forcer le pointage de sortie",
+    "workforceOverrideReasonLabel": "Motif de l'intervention",
+    "workforceOverrideConfirmAction": "Confirmer la sortie",
+    "workforceOverrideError": "Impossible de pointer la sortie de ce travailleur.",
+    "cancelAction": "Annuler",
     "projectForm": {
       "createTitle": "Ajouter un projet",
       "editTitle": "Modifier le projet",
