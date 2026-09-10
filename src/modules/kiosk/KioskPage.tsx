@@ -92,18 +92,28 @@ export default function KioskPage() {
     };
   }, []);
 
-  const resetToRoster = useCallback((nextMode?: Mode) => {
-    if (autoReturnRef.current) clearTimeout(autoReturnRef.current);
-    if (nextMode) setMode(nextMode);
-    setScreen("roster");
-    setSelectedEmployee(null);
-    setPin("");
-    setWorkerNumber("");
-    setPendingAction(null);
-    setCameraOpen(false);
-    setError("");
-    setSuccessMessage("");
-  }, []);
+  const resetToRoster = useCallback(
+    (nextMode?: Mode) => {
+      if (autoReturnRef.current) clearTimeout(autoReturnRef.current);
+      const targetMode = nextMode ?? mode;
+      if (nextMode) setMode(nextMode);
+      // § real bug, live-reported - this used to always land on
+      // "roster", but that screen only ever renders in employees mode
+      // (see the JSX below). Landing there while in workforce mode
+      // matched no render branch at all, so only the header painted -
+      // the reported "blank navy screen" after a workforce clock-in.
+      // Each mode has its own real landing screen; return to it.
+      setScreen(targetMode === "workforce" ? "keypad" : "roster");
+      setSelectedEmployee(null);
+      setPin("");
+      setWorkerNumber("");
+      setPendingAction(null);
+      setCameraOpen(false);
+      setError("");
+      setSuccessMessage("");
+    },
+    [mode],
+  );
 
   const handleSwitchMode = (nextMode: Mode) => {
     if (nextMode === mode) return;
