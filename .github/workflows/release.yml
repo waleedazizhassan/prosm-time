@@ -27,6 +27,29 @@ name: PROSM Time Release
 # never update themselves from source, they read the published
 # manifest and point the user at the official download for their
 # platform (see UpdateAvailableBanner.tsx).
+#
+# § real gap fix, 14-point live-audit gap #1: this workflow used to
+# ship the unsigned, unhardened `assembleDebug` Android build with no
+# test gate at all. It now runs the real test suite before any build
+# job starts, and Android now builds the real signed `assembleRelease`
+# (minified/ProGuard-shrunk, per docs/SECURITY_HARDENING.md) instead.
+# That real release build needs the local signing keystore this session
+# generated (android/app/prosm-time-release.keystore, gitignored by
+# design - never committed) available to CI as 4 repo secrets. One-time
+# setup, from a machine that has the real keystore file and `gh` CLI
+# authenticated against this repo:
+#
+#   cd prosm-time
+#   base64 -w0 android/app/prosm-time-release.keystore > keystore.b64
+#   gh secret set ANDROID_KEYSTORE_BASE64 --repo <owner>/<repo> < keystore.b64
+#   gh secret set ANDROID_KEYSTORE_PASSWORD --repo <owner>/<repo>   # paste storePassword from android/keystore.properties
+#   gh secret set ANDROID_KEY_ALIAS --repo <owner>/<repo>           # paste keyAlias from android/keystore.properties
+#   gh secret set ANDROID_KEY_PASSWORD --repo <owner>/<repo>        # paste keyPassword from android/keystore.properties
+#   rm keystore.b64
+#
+# Until these 4 secrets exist, the android job's own "Provision the
+# release signing keystore from secrets" step fails loudly and on
+# purpose - it will never silently fall back to an unsigned build.
 
 on:
   push:
@@ -41,8 +64,23 @@ permissions:
   contents: write
 
 jobs:
+  # § real gap fix, 14-point live-audit gap #1: this workflow had no
+  # test/type-check gate at all before building and publishing a real
+  # release - a broken commit would have shipped straight to users.
+  test:
+    name: Type-check and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "22", cache: npm }
+      - run: npm ci
+      - run: npx tsc -b
+      - run: npx vitest run
+
   android:
-    name: Build Android APK
+    name: Build Android APK (release, signed)
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -79,17 +117,44 @@ jobs:
           sed -i "s/versionName \".*\"/versionName \"$VERSION\"/" android/app/build.gradle
           sed -i "s/versionCode [0-9]*/versionCode ${{ github.run_number }}/" android/app/build.gradle
 
-      - name: Assemble the debug APK
+      # § real gap fix, 14-point live-audit gap #1: CI was shipping the
+      # unsigned, unhardened assembleDebug build - the real signing
+      # keystore this session provisioned (android/app/prosm-time-
+      # release.keystore) only exists on the machine that generated it,
+      # gitignored by design (docs/SECURITY_HARDENING.md). It's read
+      # from 4 repo secrets here instead of ever being committed. Until
+      # those secrets exist, this step fails loudly rather than
+      # silently falling back to an unsigned build (build.gradle's own
+      # hasSigningConfig check would otherwise do exactly that) - see
+      # this workflow's own trailing comment for the one-time setup
+      # command the repo owner needs to run.
+      - name: Provision the release signing keystore from secrets
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          set -e
+          if [ -z "$ANDROID_KEYSTORE_BASE64" ]; then
+            echo "::error::ANDROID_KEYSTORE_BASE64 (and the 3 matching password/alias secrets) are not set on this repo yet - see release.yml's own trailing comment for the one-time 'gh secret set' commands. Refusing to fall back to an unsigned build."
+            exit 1
+          fi
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 -d > android/app/prosm-time-release.keystore
+          printf 'storeFile=app/prosm-time-release.keystore\nstorePassword=%s\nkeyAlias=%s\nkeyPassword=%s\n' \
+            "$ANDROID_KEYSTORE_PASSWORD" "$ANDROID_KEY_ALIAS" "$ANDROID_KEY_PASSWORD" > android/keystore.properties
+
+      - name: Assemble the release APK (signed, minified, ProGuard-shrunk)
         working-directory: android
         run: |
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon
+          ./gradlew assembleRelease --no-daemon
 
       - name: Locate the built APK
         id: apk
         run: |
           set -e
-          found=$(find android/app/build/outputs/apk/debug -name "*.apk" | head -1)
+          found=$(find android/app/build/outputs/apk/release -name "*.apk" | head -1)
           if [ -z "$found" ]; then echo "No APK produced."; exit 1; fi
           echo "path=$found" >> "$GITHUB_OUTPUT"
           echo "name=$(basename "$found")" >> "$GITHUB_OUTPUT"
@@ -101,6 +166,7 @@ jobs:
 
   windows:
     name: Build Windows installer
+    needs: test
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
