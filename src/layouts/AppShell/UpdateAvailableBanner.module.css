@@ -1,0 +1,26 @@
+.banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-medium);
+  background: var(--status-info-bg, #d6e9ff);
+  color: var(--status-info-text, #0b4a8f);
+}
+
+.action {
+  margin-inline-start: auto;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm, 4px);
+  cursor: pointer;
+}
+
+.action:hover {
+  background: rgba(255, 255, 255, 0.25);
+}

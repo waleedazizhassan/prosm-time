@@ -29,6 +29,10 @@
     "grace": "Cette installation n'est pas couverte par une licence valide. Veuillez activer une licence avant le {{date}}.",
     "blocked": "Cette installation n'est pas couverte par une licence valide et l'accès a été suspendu. Veuillez contacter votre administrateur."
   },
+  "update": {
+    "available": "Une nouvelle version (v{{version}}) est disponible.",
+    "action": "Mettre à jour"
+  },
   "notificationsLabel": "Notifications",
   "noNotifications": "Aucune notification pour le moment.",
   "notifications": {
