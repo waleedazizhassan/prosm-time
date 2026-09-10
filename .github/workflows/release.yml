@@ -39,19 +39,22 @@ jobs:
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: "21" }
 
-      - name: Install Android SDK (platform-tools, platforms;android-36, build-tools;36.0.0)
+      - name: Install missing Android SDK packages into the runner's own pre-installed SDK
+        # ubuntu-latest already ships a real Android SDK at $ANDROID_SDK_ROOT
+        # with its own ANDROID_HOME set to that same path - installing a
+        # SECOND, separate SDK under $HOME and pointing ANDROID_HOME at it
+        # (the original version of this step) put the two env vars at
+        # different paths, which Gradle refuses to proceed with ("Several
+        # environment variables... contain different paths to the SDK").
+        # Real fix, found from a real failed run: reuse the runner's own
+        # SDK_ROOT, just install the specific packages this repo needs into
+        # it, and never touch ANDROID_HOME.
         run: |
           set -e
-          SDK_ROOT="$HOME/android-sdk"
-          mkdir -p "$SDK_ROOT/cmdline-tools"
-          curl -sSL -o cmdline-tools.zip "https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip"
-          unzip -q cmdline-tools.zip -d "$SDK_ROOT/cmdline-tools"
-          mv "$SDK_ROOT/cmdline-tools/cmdline-tools" "$SDK_ROOT/cmdline-tools/latest"
-          echo "ANDROID_HOME=$SDK_ROOT" >> "$GITHUB_ENV"
-          echo "$SDK_ROOT/cmdline-tools/latest/bin" >> "$GITHUB_PATH"
-          echo "$SDK_ROOT/platform-tools" >> "$GITHUB_PATH"
-          yes | "$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$SDK_ROOT" --licenses > /dev/null
-          "$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$SDK_ROOT" "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+          SDK_ROOT="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
+          SDKMANAGER=$(find "$SDK_ROOT/cmdline-tools" -name "sdkmanager" | sort -r | head -1)
+          yes | "$SDKMANAGER" --sdk_root="$SDK_ROOT" --licenses > /dev/null
+          "$SDKMANAGER" --sdk_root="$SDK_ROOT" "platform-tools" "platforms;android-36" "build-tools;36.0.0"
 
       - run: npm ci
       - run: npm run build
@@ -93,7 +96,11 @@ jobs:
         with: { node-version: "22", cache: npm }
       - run: npm ci
       - run: npm run build
-      - run: npx electron-builder --win
+      # electron-builder auto-detects CI and implicitly tries to publish
+      # (needs a GH_TOKEN it doesn't have here) unless told not to - the
+      # "Publish GitHub Release" job handles uploading the built .exe
+      # itself, so this build step must never attempt its own publish.
+      - run: npx electron-builder --win --publish never
 
       - name: Locate the built installer
         id: exe
