@@ -4,6 +4,10 @@
 // user-directed follow-up: newSiteId is now optional - a null site
 // (walk-in style, same as clock-in's own no-site option) requires
 // manualLocationLabel and a real GPS sample, never a photo.
+// § real gap fix, 14-point live-audit - the user's own spec required
+// Change Site to be its own independent control, not routed through
+// Break/Pause. breakId is now optional: omit it to move the caller's
+// currently open session directly, no break required at all.
 // deno-lint-ignore-file no-explicit-any
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
@@ -31,11 +35,11 @@ serve(async (request: Request) => {
 
     const payload = await request.json().catch(() => ({}));
     const { breakId, newSiteId, latitude, longitude, accuracyMeters, manualLocationLabel } = payload;
-    if (!breakId || typeof breakId !== "string") return errorResponse("breakId is required.", 400, "INVALID_REQUEST");
+    if (breakId !== null && breakId !== undefined && typeof breakId !== "string") return errorResponse("breakId must be a string or null.", 400, "INVALID_REQUEST");
     if (newSiteId !== null && newSiteId !== undefined && typeof newSiteId !== "string") return errorResponse("newSiteId must be a string or null.", 400, "INVALID_REQUEST");
 
     const { data, error } = await callerClient.rpc("change_prosm_time_site", {
-      p_break_id: breakId,
+      p_break_id: breakId || null,
       p_new_site_id: newSiteId || null,
       p_latitude: latitude ?? null,
       p_longitude: longitude ?? null,

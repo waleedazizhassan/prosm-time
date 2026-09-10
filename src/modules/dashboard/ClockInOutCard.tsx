@@ -733,7 +733,13 @@ export default function ClockInOutCard() {
   const isNoSiteChange = changeSiteTargetId === CHANGE_SITE_NO_SITE_VALUE;
 
   const handleConfirmChangeSite = async () => {
-    if (!activeBreakId || !changeSiteTargetId) return;
+    // § real gap fix, 14-point live-audit - Change Site is now its own
+    // independent control (the user's own spec, capitalized
+    // "IMPORTANT"), not routed through Break/Pause. activeBreakId is
+    // passed through when one happens to be active (ending it as part
+    // of the move, unchanged from the original flow) but is no longer
+    // required to use this at all.
+    if (!changeSiteTargetId) return;
     if (isNoSiteChange && !changeSiteManualLabel.trim()) return;
     setChangeSiteSubmitting(true);
     setChangeSiteError("");
@@ -886,11 +892,9 @@ export default function ClockInOutCard() {
             <Button variant="ghost" fullWidth onClick={handleToggleBreak} loading={breakSubmitting}>
               {activeBreakId ? t("attendance.breakEndAction") : t("attendance.breakStartAction")}
             </Button>
-            {activeBreakId ? (
-              <Button variant="ghost" fullWidth onClick={handleOpenChangeSiteModal}>
-                {t("attendance.changeSiteAction")}
-              </Button>
-            ) : null}
+            <Button variant="ghost" fullWidth onClick={handleOpenChangeSiteModal}>
+              {t("attendance.changeSiteAction")}
+            </Button>
           </div>
 
           {presenceSession ? (

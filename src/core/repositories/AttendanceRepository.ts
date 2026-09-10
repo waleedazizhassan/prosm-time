@@ -395,7 +395,7 @@ class AttendanceRepository {
   // clocks the employee out. Same Edge Function shape as start-break/
   // end-break (§35 - a real session mutation, not a direct table write).
   async changeSite(
-    breakId: string,
+    breakId: string | null,
     newSiteId: string | null,
     latitude: number | null,
     longitude: number | null,
