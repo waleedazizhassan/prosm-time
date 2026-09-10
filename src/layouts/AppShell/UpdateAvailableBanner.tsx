@@ -9,10 +9,18 @@ import styles from "./UpdateAvailableBanner.module.css";
 
 const SYNC_INTERVAL_MS = 6 * 60 * 60 * 1000; // matches InstallationStatusBanner's own established polling cadence
 
-// release.yml publishes this manifest to the same GitHub Pages URL it
-// deploys the web build to - a public, no-auth static file every
-// client type (web/Android/Windows) can poll identically.
-const MANIFEST_URL = import.meta.env.VITE_UPDATE_MANIFEST_URL ?? "https://waleedazizhassan.github.io/prosm-time/latest-version.json";
+// release.yml commits this manifest to public/latest-version.json on
+// every real release. Real, known limitation (user-directed 2026-09-10,
+// after GitHub Pages turned out to need a paid plan on this PRIVATE
+// repo and the user chose not to upgrade or add an external host):
+// there is currently no public, no-auth URL this file is actually
+// reachable at - a private repo's raw file/Release-asset URLs both
+// require GitHub authentication. Until the repo goes public or a real
+// host is added, this poll will simply never succeed (handled safely
+// below - a failed/404 fetch never shows a false "update available"),
+// so no banner will ever appear. Set VITE_UPDATE_MANIFEST_URL once a
+// real public URL exists to turn this on for real.
+const MANIFEST_URL = import.meta.env.VITE_UPDATE_MANIFEST_URL ?? "";
 
 interface ReleaseManifest {
   version: string;
@@ -42,6 +50,7 @@ export default function UpdateAvailableBanner() {
     let cancelled = false;
 
     const poll = async () => {
+      if (!MANIFEST_URL) return;
       try {
         const response = await fetch(MANIFEST_URL, { cache: "no-store" });
         if (!response.ok) return;
