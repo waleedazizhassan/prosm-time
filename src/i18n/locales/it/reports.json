@@ -5,7 +5,15 @@
   "types": {
     "attendance": "Registro presenze",
     "allowances": "Indennità",
-    "timesheets": "Fogli ore"
+    "timesheets": "Fogli ore",
+    "workforce": "Personale",
+    "contractor": "Appaltatori",
+    "site": "Riepilogo sito",
+    "late": "Ritardi",
+    "missingCheckouts": "Uscite mancanti",
+    "leaveConflicts": "Conflitti di ferie",
+    "managerOverrides": "Interventi manager",
+    "locationViolations": "Violazioni di posizione"
   },
   "timesheetsHint": "I fogli ore vengono generati e approvati per dipendente e periodo, non per intervallo di date.",
   "timesheetsLink": "Vai ai fogli ore",
@@ -17,5 +25,66 @@
   },
   "loadingRows": "Caricamento…",
   "rowCount": "{{count}} riga/e pronta/e per l'esportazione.",
-  "exportAction": "Esporta PDF"
+  "exportAction": "Esporta PDF",
+  "empty": "Nessuna riga per questo intervallo.",
+  "columns": {
+    "workforce": {
+      "name": "Nome",
+      "email": "Email",
+      "role": "Ruolo",
+      "owner": "Titolare",
+      "sites": "Siti",
+      "status": "Stato"
+    },
+    "contractor": {
+      "name": "Lavoratore",
+      "number": "Numero",
+      "site": "Sito",
+      "clockIn": "Entrata",
+      "clockOut": "Uscita"
+    },
+    "site": {
+      "name": "Sito",
+      "employees": "Dipendenti",
+      "hours": "Ore totali",
+      "exceptions": "Eccezioni"
+    },
+    "late": {
+      "name": "Dipendente",
+      "site": "Sito",
+      "shiftStart": "Inizio turno",
+      "clockIn": "Entrata registrata",
+      "minutesLate": "Minuti di ritardo"
+    },
+    "missingCheckouts": {
+      "name": "Dipendente",
+      "site": "Sito",
+      "clockIn": "Entrata registrata",
+      "hoursOpen": "Ore aperte",
+      "status": "Stato",
+      "stillOpen": "Ancora aperta",
+      "eventuallyClosed": "Chiusa successivamente"
+    },
+    "leaveConflicts": {
+      "name": "Dipendente",
+      "site": "Sito",
+      "clockIn": "Entrata registrata",
+      "leaveType": "Tipo di ferie",
+      "leaveRange": "Date delle ferie"
+    },
+    "managerOverrides": {
+      "actor": "Eseguito da",
+      "subject": "Interessato",
+      "action": "Azione",
+      "reason": "Motivo",
+      "when": "Quando"
+    },
+    "locationViolations": {
+      "name": "Dipendente",
+      "site": "Sito",
+      "speed": "Velocità implicita",
+      "distance": "Distanza",
+      "when": "Quando"
+    }
+  }
 }

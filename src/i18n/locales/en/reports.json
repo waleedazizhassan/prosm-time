@@ -5,7 +5,15 @@
   "types": {
     "attendance": "Attendance Record",
     "allowances": "Allowances",
-    "timesheets": "Timesheets"
+    "timesheets": "Timesheets",
+    "workforce": "Workforce",
+    "contractor": "Contractor",
+    "site": "Site Summary",
+    "late": "Late Arrivals",
+    "missingCheckouts": "Missing Checkouts",
+    "leaveConflicts": "Leave Conflicts",
+    "managerOverrides": "Manager Overrides",
+    "locationViolations": "Location Violations"
   },
   "timesheetsHint": "Timesheets are generated and approved per employee and period, not by date range.",
   "timesheetsLink": "Go to Timesheets",
@@ -17,5 +25,66 @@
   },
   "loadingRows": "Loading…",
   "rowCount": "{{count}} row(s) ready to export.",
-  "exportAction": "Export PDF"
+  "exportAction": "Export PDF",
+  "empty": "No rows for this range.",
+  "columns": {
+    "workforce": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "owner": "Owner",
+      "sites": "Sites",
+      "status": "Status"
+    },
+    "contractor": {
+      "name": "Worker",
+      "number": "Number",
+      "site": "Site",
+      "clockIn": "Clock in",
+      "clockOut": "Clock out"
+    },
+    "site": {
+      "name": "Site",
+      "employees": "Employees",
+      "hours": "Total hours",
+      "exceptions": "Exceptions"
+    },
+    "late": {
+      "name": "Employee",
+      "site": "Site",
+      "shiftStart": "Shift start",
+      "clockIn": "Clocked in",
+      "minutesLate": "Minutes late"
+    },
+    "missingCheckouts": {
+      "name": "Employee",
+      "site": "Site",
+      "clockIn": "Clocked in",
+      "hoursOpen": "Hours open",
+      "status": "Status",
+      "stillOpen": "Still open",
+      "eventuallyClosed": "Eventually closed"
+    },
+    "leaveConflicts": {
+      "name": "Employee",
+      "site": "Site",
+      "clockIn": "Clocked in",
+      "leaveType": "Leave type",
+      "leaveRange": "Leave dates"
+    },
+    "managerOverrides": {
+      "actor": "Performed by",
+      "subject": "Subject",
+      "action": "Action",
+      "reason": "Reason",
+      "when": "When"
+    },
+    "locationViolations": {
+      "name": "Employee",
+      "site": "Site",
+      "speed": "Implied speed",
+      "distance": "Distance",
+      "when": "When"
+    }
+  }
 }

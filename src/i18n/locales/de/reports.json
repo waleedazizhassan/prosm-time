@@ -5,7 +5,15 @@
   "types": {
     "attendance": "Anwesenheitsprotokoll",
     "allowances": "Zulagen",
-    "timesheets": "Stundenzettel"
+    "timesheets": "Stundenzettel",
+    "workforce": "Belegschaft",
+    "contractor": "Fremdpersonal",
+    "site": "Standortübersicht",
+    "late": "Verspätungen",
+    "missingCheckouts": "Fehlende Abmeldungen",
+    "leaveConflicts": "Urlaubskonflikte",
+    "managerOverrides": "Manager-Eingriffe",
+    "locationViolations": "Standortverstöße"
   },
   "timesheetsHint": "Stundenzettel werden pro Mitarbeiter und Zeitraum erstellt und genehmigt, nicht nach Datumsbereich.",
   "timesheetsLink": "Zu den Stundenzetteln",
@@ -17,5 +25,66 @@
   },
   "loadingRows": "Wird geladen…",
   "rowCount": "{{count}} Zeile(n) exportbereit.",
-  "exportAction": "Als PDF exportieren"
+  "exportAction": "Als PDF exportieren",
+  "empty": "Keine Zeilen für diesen Zeitraum.",
+  "columns": {
+    "workforce": {
+      "name": "Name",
+      "email": "E-Mail",
+      "role": "Rolle",
+      "owner": "Inhaber",
+      "sites": "Standorte",
+      "status": "Status"
+    },
+    "contractor": {
+      "name": "Arbeiter",
+      "number": "Nummer",
+      "site": "Standort",
+      "clockIn": "Einstempeln",
+      "clockOut": "Ausstempeln"
+    },
+    "site": {
+      "name": "Standort",
+      "employees": "Mitarbeiter",
+      "hours": "Gesamtstunden",
+      "exceptions": "Ausnahmen"
+    },
+    "late": {
+      "name": "Mitarbeiter",
+      "site": "Standort",
+      "shiftStart": "Schichtbeginn",
+      "clockIn": "Eingestempelt",
+      "minutesLate": "Minuten zu spät"
+    },
+    "missingCheckouts": {
+      "name": "Mitarbeiter",
+      "site": "Standort",
+      "clockIn": "Eingestempelt",
+      "hoursOpen": "Offene Stunden",
+      "status": "Status",
+      "stillOpen": "Noch offen",
+      "eventuallyClosed": "Später geschlossen"
+    },
+    "leaveConflicts": {
+      "name": "Mitarbeiter",
+      "site": "Standort",
+      "clockIn": "Eingestempelt",
+      "leaveType": "Urlaubsart",
+      "leaveRange": "Urlaubszeitraum"
+    },
+    "managerOverrides": {
+      "actor": "Durchgeführt von",
+      "subject": "Betroffene Person",
+      "action": "Aktion",
+      "reason": "Grund",
+      "when": "Zeitpunkt"
+    },
+    "locationViolations": {
+      "name": "Mitarbeiter",
+      "site": "Standort",
+      "speed": "Implizierte Geschwindigkeit",
+      "distance": "Entfernung",
+      "when": "Zeitpunkt"
+    }
+  }
 }

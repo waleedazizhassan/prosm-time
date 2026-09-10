@@ -5,7 +5,15 @@
   "types": {
     "attendance": "سجل الحضور",
     "allowances": "البدلات",
-    "timesheets": "الجداول الزمنية"
+    "timesheets": "الجداول الزمنية",
+    "workforce": "القوى العاملة",
+    "contractor": "المقاولين",
+    "site": "ملخص المواقع",
+    "late": "حالات التأخير",
+    "missingCheckouts": "بدون انصراف",
+    "leaveConflicts": "تعارض الإجازات",
+    "managerOverrides": "تدخلات المدير",
+    "locationViolations": "مخالفات الموقع"
   },
   "timesheetsHint": "الجداول الزمنية تُنشأ وتُعتمد لكل موظف وفترة على حدة، مش بنطاق تاريخ.",
   "timesheetsLink": "الذهاب إلى الجداول الزمنية",
@@ -17,5 +25,66 @@
   },
   "loadingRows": "جارٍ التحميل…",
   "rowCount": "{{count}} صف جاهز للتصدير.",
-  "exportAction": "تصدير PDF"
+  "exportAction": "تصدير PDF",
+  "empty": "لا توجد بيانات لهذه الفترة.",
+  "columns": {
+    "workforce": {
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "role": "الدور",
+      "owner": "المالك",
+      "sites": "المواقع",
+      "status": "الحالة"
+    },
+    "contractor": {
+      "name": "العامل",
+      "number": "الرقم",
+      "site": "الموقع",
+      "clockIn": "الحضور",
+      "clockOut": "الانصراف"
+    },
+    "site": {
+      "name": "الموقع",
+      "employees": "عدد الموظفين",
+      "hours": "إجمالي الساعات",
+      "exceptions": "الاستثناءات"
+    },
+    "late": {
+      "name": "الموظف",
+      "site": "الموقع",
+      "shiftStart": "بداية الوردية",
+      "clockIn": "وقت الحضور",
+      "minutesLate": "دقائق التأخير"
+    },
+    "missingCheckouts": {
+      "name": "الموظف",
+      "site": "الموقع",
+      "clockIn": "وقت الحضور",
+      "hoursOpen": "الساعات المفتوحة",
+      "status": "الحالة",
+      "stillOpen": "ما زالت مفتوحة",
+      "eventuallyClosed": "أُغلقت لاحقًا"
+    },
+    "leaveConflicts": {
+      "name": "الموظف",
+      "site": "الموقع",
+      "clockIn": "وقت الحضور",
+      "leaveType": "نوع الإجازة",
+      "leaveRange": "تواريخ الإجازة"
+    },
+    "managerOverrides": {
+      "actor": "تم بواسطة",
+      "subject": "الشخص المعني",
+      "action": "الإجراء",
+      "reason": "السبب",
+      "when": "التوقيت"
+    },
+    "locationViolations": {
+      "name": "الموظف",
+      "site": "الموقع",
+      "speed": "السرعة المفترضة",
+      "distance": "المسافة",
+      "when": "التوقيت"
+    }
+  }
 }

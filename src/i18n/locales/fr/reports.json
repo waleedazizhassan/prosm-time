@@ -5,7 +5,15 @@
   "types": {
     "attendance": "Registre de présence",
     "allowances": "Indemnités",
-    "timesheets": "Feuilles de temps"
+    "timesheets": "Feuilles de temps",
+    "workforce": "Effectif",
+    "contractor": "Sous-traitants",
+    "site": "Résumé par site",
+    "late": "Retards",
+    "missingCheckouts": "Sorties manquantes",
+    "leaveConflicts": "Conflits de congés",
+    "managerOverrides": "Interventions manager",
+    "locationViolations": "Violations de localisation"
   },
   "timesheetsHint": "Les feuilles de temps sont générées et approuvées par employé et par période, pas par plage de dates.",
   "timesheetsLink": "Aller aux feuilles de temps",
@@ -17,5 +25,66 @@
   },
   "loadingRows": "Chargement…",
   "rowCount": "{{count}} ligne(s) prête(s) à exporter.",
-  "exportAction": "Exporter en PDF"
+  "exportAction": "Exporter en PDF",
+  "empty": "Aucune ligne pour cette période.",
+  "columns": {
+    "workforce": {
+      "name": "Nom",
+      "email": "E-mail",
+      "role": "Rôle",
+      "owner": "Propriétaire",
+      "sites": "Sites",
+      "status": "Statut"
+    },
+    "contractor": {
+      "name": "Travailleur",
+      "number": "Numéro",
+      "site": "Site",
+      "clockIn": "Entrée",
+      "clockOut": "Sortie"
+    },
+    "site": {
+      "name": "Site",
+      "employees": "Employés",
+      "hours": "Heures totales",
+      "exceptions": "Exceptions"
+    },
+    "late": {
+      "name": "Employé",
+      "site": "Site",
+      "shiftStart": "Début de service",
+      "clockIn": "Pointé",
+      "minutesLate": "Minutes de retard"
+    },
+    "missingCheckouts": {
+      "name": "Employé",
+      "site": "Site",
+      "clockIn": "Pointé",
+      "hoursOpen": "Heures ouvertes",
+      "status": "Statut",
+      "stillOpen": "Toujours ouvert",
+      "eventuallyClosed": "Finalement fermé"
+    },
+    "leaveConflicts": {
+      "name": "Employé",
+      "site": "Site",
+      "clockIn": "Pointé",
+      "leaveType": "Type de congé",
+      "leaveRange": "Dates de congé"
+    },
+    "managerOverrides": {
+      "actor": "Effectué par",
+      "subject": "Concerné",
+      "action": "Action",
+      "reason": "Motif",
+      "when": "Quand"
+    },
+    "locationViolations": {
+      "name": "Employé",
+      "site": "Site",
+      "speed": "Vitesse implicite",
+      "distance": "Distance",
+      "when": "Quand"
+    }
+  }
 }
