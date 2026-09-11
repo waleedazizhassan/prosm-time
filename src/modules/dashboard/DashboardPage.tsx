@@ -44,8 +44,17 @@ export default function DashboardPage() {
   // reach the exact same widget via the new /clock-in sidebar entry.
   const hasManagementScope = Boolean(profile?.isOwner) || hasPermission("exceptions.manage");
 
+  // § user-directed, 2026-09-11 - AdminOverviewCard already carries its
+  // own complete greeting banner for the Owner/Manager view; PageShell's
+  // title/subtitle above it was pure duplication and left an empty gap
+  // before the real content. Only the plain Employee view (no rich
+  // banner of its own) still needs PageShell's header.
   return (
-    <PageShell title={t("title")} subtitle={profile ? t("welcomeMessage", { name: profile.fullName }) : undefined} compact>
+    <PageShell
+      title={hasManagementScope ? undefined : t("title")}
+      subtitle={hasManagementScope || !profile ? undefined : t("welcomeMessage", { name: profile.fullName })}
+      compact
+    >
       {hasManagementScope ? null : <ClockInOutCard />}
       <AdminOverviewCard />
       <ExceptionsCard />

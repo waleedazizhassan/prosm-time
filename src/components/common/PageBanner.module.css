@@ -13,14 +13,12 @@
 .image {
   display: block;
   width: 100%;
-  max-width: 420px;
+  max-width: 320px;
   height: auto;
-  -webkit-mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
 }
 
 @media (max-width: 640px) {
   .image {
-    max-width: 280px;
+    max-width: 240px;
   }
 }

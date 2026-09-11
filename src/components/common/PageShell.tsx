@@ -2,7 +2,13 @@ import type { ReactNode } from "react";
 import styles from "./PageShell.module.css";
 
 interface PageShellProps {
-  title: string;
+  // § user-directed, 2026-09-11 - Dashboard's Owner/Manager view has
+  // its own complete greeting banner inside AdminOverviewCard now;
+  // PageShell's own title/subtitle above it was pure duplication and
+  // left an empty gap before the real content. Falsy/omitted title
+  // skips the whole header block (not just the text) so that gap goes
+  // away entirely - every other screen still passes a real title.
+  title?: string;
   subtitle?: string;
   actions?: ReactNode;
   wide?: boolean;
@@ -20,13 +26,15 @@ interface PageShellProps {
 export default function PageShell({ title, subtitle, actions, wide = false, compact = false, children }: PageShellProps) {
   return (
     <div className={[styles.container, wide ? styles.wide : ""].filter(Boolean).join(" ")}>
-      <div className={[styles.pageHeader, compact ? styles.pageHeaderCompact : ""].filter(Boolean).join(" ")}>
-        <div>
-          <h1 className={[styles.title, compact ? styles.titleCompact : ""].filter(Boolean).join(" ")}>{title}</h1>
-          {subtitle ? <p className={styles.subtitle}>{subtitle}</p> : null}
+      {title ? (
+        <div className={[styles.pageHeader, compact ? styles.pageHeaderCompact : ""].filter(Boolean).join(" ")}>
+          <div>
+            <h1 className={[styles.title, compact ? styles.titleCompact : ""].filter(Boolean).join(" ")}>{title}</h1>
+            {subtitle ? <p className={styles.subtitle}>{subtitle}</p> : null}
+          </div>
+          {actions ? <div className={styles.actions}>{actions}</div> : null}
         </div>
-        {actions ? <div className={styles.actions}>{actions}</div> : null}
-      </div>
+      ) : null}
       <div className={styles.content}>{children}</div>
     </div>
   );
