@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import { MapPin, UserCheck, Users, ClipboardList, CalendarDays, Coffee } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { MapPin, UserCheck, Users, CalendarDays, Coffee, CheckCircle2, ClipboardCheck, FileClock, CalendarClock } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
@@ -9,6 +9,8 @@ import ManagerRepository, { type TodayAttendanceRow, type PendingReviewItem } fr
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
 import AttendanceRepository from "../../core/repositories/AttendanceRepository";
 import LeaveRepository from "../../core/repositories/LeaveRepository";
+import TimesheetRepository from "../../core/repositories/TimesheetRepository";
+import ShiftRepository from "../../core/repositories/ShiftRepository";
 import Card from "../../components/common/Card";
 import Modal from "../../components/common/Modal";
 import Table, { type TableColumn } from "../../components/common/Table";
@@ -64,10 +66,38 @@ interface Kpi {
 // surface (Emergency Log) or is already folded into "Pending
 // reviews" above, so a third tile would only pad the count without
 // showing anything genuinely new.
+//
+// § "the Owner/Manager dashboard doesn't look professional," 2026-09-11
+// - research pass into real SaaS admin-dashboard design (Deputy/
+// Jibble/Connecteam's own category, plus general 2026 SaaS dashboard
+// design writeups) converged on the same real complaint a flat grid of
+// 6 identical tiles has: no hierarchy, so nothing tells the viewer
+// what actually needs their attention right now vs. what's just a
+// reference number. Concrete patterns borrowed, same real data as
+// before (no new backend/RPC):
+//   - "one primary number, everything else subordinate" + F-pattern
+//     (top-left is the highest-value real estate) -> a real hero row:
+//     a live presence stat (computed from data already loaded here,
+//     the same presentRows/members this component already fetches)
+//     with an actual small progress bar, not just a number in a circle.
+//   - "disciplined color reserved for state and meaning, not
+//     decoration" -> every tile below used the same brand-green circle
+//     regardless of what it meant. Now: the presence bar's color
+//     reflects real staffing level (good/watch/low), and Pending
+//     Reviews gets its own amber "needs attention" card when non-zero
+//     instead of sitting flat among six equal tiles - a "next best
+//     action" card (a real button straight into Manager Console's own
+//     queue) rather than a passive count, per that same research.
+//   - Everything else (Sites, Registered Employees, On Leave Today, On
+//     Break Now) moves into a visually quieter secondary row - still
+//     real, still clickable, still opens the exact same drill-down
+//     modals below, just no longer competing for the same visual
+//     weight as what actually needs a decision made on it today.
 export default function AdminOverviewCard() {
   const { t, i18n } = useTranslation("dashboard");
   const { hasPermission, profile } = useAuth();
   const canView = hasPermission("attendance.view");
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
   const [sites, setSites] = useState<Site[]>([]);
@@ -77,27 +107,84 @@ export default function AdminOverviewCard() {
   const [siteNamesByUser, setSiteNamesByUser] = useState<Record<string, string[]>>({});
   const [leaveToday, setLeaveToday] = useState<{ id: string; userId: string; employeeName: string; leaveType: string; endDate: string }[]>([]);
   const [onBreak, setOnBreak] = useState<{ id: string; userId: string; userFullName: string; startedAt: string }[]>([]);
+  // § real reference screenshots the user sent (Jibble), 2026-09-11 -
+  // "Tracked Hours" week chart and a live "Who's In/Out" roster.
+  // weeklyHistory reuses ManagerRepository.listAttendanceHistory(), an
+  // existing RLS-scoped query Attendance Record's own page already
+  // calls for a date range - no new RPC, just the same query pointed
+  // at the last 7 days and aggregated client-side into hours/day.
+  const [weeklyHistory, setWeeklyHistory] = useState<TodayAttendanceRow[]>([]);
+  // § real reference screenshots (Deputy), 2026-09-11 - a single
+  // unified "Needs Attention" card aggregating every real pending-
+  // action type this app already has, instead of one scattered alert
+  // per type. Both reused verbatim from existing repositories
+  // (LeaveRepository/TimesheetRepository already power the real Leave
+  // and Timesheets approval pages) - no new RPC.
+  const [pendingLeaveCount, setPendingLeaveCount] = useState(0);
+  const [pendingTimesheetCount, setPendingTimesheetCount] = useState(0);
+  // § Deputy's real "Actual vs Scheduled hours" comparison, adapted -
+  // scheduled hours come from ShiftRepository.listForSite(), the same
+  // query the Shift Roster page already uses per site; summed across
+  // every site this caller can see (already RLS-scoped per site).
+  const [scheduledHours, setScheduledHours] = useState<number | null>(null);
 
   const [drilldown, setDrilldown] = useState<Drilldown>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
-    const [sitesResult, attendanceResult, pendingResult, membersResult, assignmentsResult, leaveTodayResult, onBreakResult] = await Promise.all([
-      SiteRepository.listSites(),
-      ManagerRepository.listTodayAttendance(),
-      ManagerRepository.listPendingReview(),
-      EmployeeRepository.listOrganizationMembers(),
-      SiteRepository.listAllAssignedSiteNames(),
-      LeaveRepository.listToday(),
-      AttendanceRepository.listOnBreakNow(),
-    ]);
-    setSites(sitesResult.success ? (sitesResult.data ?? []) : []);
+    const today = new Date();
+    const weekStart = new Date(today);
+    weekStart.setDate(weekStart.getDate() - 6);
+    const isoDate = (d: Date) => d.toISOString().slice(0, 10);
+    const weekStartIso = isoDate(weekStart);
+    const weekEndIso = isoDate(today);
+
+    const [sitesResult, attendanceResult, pendingResult, membersResult, assignmentsResult, leaveTodayResult, onBreakResult, weeklyResult, pendingLeaveResult, pendingTimesheetResult] =
+      await Promise.all([
+        SiteRepository.listSites(),
+        ManagerRepository.listTodayAttendance(),
+        ManagerRepository.listPendingReview(),
+        EmployeeRepository.listOrganizationMembers(),
+        SiteRepository.listAllAssignedSiteNames(),
+        LeaveRepository.listToday(),
+        AttendanceRepository.listOnBreakNow(),
+        ManagerRepository.listAttendanceHistory(weekStartIso, weekEndIso),
+        LeaveRepository.listPendingReview(),
+        TimesheetRepository.listPendingApprovals(),
+      ]);
+    const realSites = sitesResult.success ? (sitesResult.data ?? []) : [];
+    setSites(realSites);
     setTodayAttendance(attendanceResult.success ? (attendanceResult.data ?? []) : []);
     setPending(pendingResult.success ? (pendingResult.data ?? []) : []);
     setMembers(membersResult.success ? (membersResult.data ?? []) : []);
     setSiteNamesByUser(assignmentsResult.success ? (assignmentsResult.data ?? {}) : {});
     setLeaveToday(leaveTodayResult.success ? (leaveTodayResult.data ?? []) : []);
     setOnBreak(onBreakResult.success ? (onBreakResult.data ?? []) : []);
+    setWeeklyHistory(weeklyResult.success ? (weeklyResult.data ?? []) : []);
+    setPendingLeaveCount(pendingLeaveResult.success ? (pendingLeaveResult.data ?? []).length : 0);
+    setPendingTimesheetCount(pendingTimesheetResult.success ? (pendingTimesheetResult.data ?? []).length : 0);
+
+    // Sequential (needs real site ids first) and bounded to this
+    // caller's own real sites - a real org has a handful of sites, not
+    // hundreds, so N parallel per-site calls stays cheap.
+    if (realSites.length > 0) {
+      const shiftResults = await Promise.all(realSites.map((site) => ShiftRepository.listForSite(site.id, weekStartIso, weekEndIso)));
+      let totalScheduled = 0;
+      for (const result of shiftResults) {
+        if (!result.success || !result.data) continue;
+        for (const shift of result.data) {
+          if (shift.status !== "scheduled") continue;
+          const [startH, startM] = shift.startTime.split(":").map(Number);
+          const [endH, endM] = shift.endTime.split(":").map(Number);
+          let minutes = endH * 60 + endM - (startH * 60 + startM);
+          if (shift.crossesMidnight || minutes < 0) minutes += 24 * 60;
+          totalScheduled += minutes / 60;
+        }
+      }
+      setScheduledHours(totalScheduled);
+    } else {
+      setScheduledHours(0);
+    }
     setLoading(false);
   }, []);
 
@@ -107,14 +194,48 @@ export default function AdminOverviewCard() {
 
   const presentRows = useMemo(() => todayAttendance.filter((row) => row.status === "clocked_in"), [todayAttendance]);
   const presentUserIds = useMemo(() => new Set(presentRows.map((row) => row.userId)), [presentRows]);
+  const onBreakUserIds = useMemo(() => new Set(onBreak.map((row) => row.userId)), [onBreak]);
+
+  // § real hours-per-day totals for the last 7 days, from the same
+  // weeklyHistory read above - clamps an open (still clocked-in)
+  // session's duration at "now" rather than leaving it out, so today's
+  // own bar isn't understated while someone's still on shift.
+  const weeklyBars = useMemo(() => {
+    const days: { key: string; label: string; hours: number }[] = [];
+    const now = new Date();
+    for (let i = 6; i >= 0; i -= 1) {
+      const d = new Date(now);
+      d.setDate(d.getDate() - i);
+      days.push({ key: d.toISOString().slice(0, 10), label: d.toLocaleDateString(i18n.language, { weekday: "short" }), hours: 0 });
+    }
+    const byKey = new Map(days.map((d) => [d.key, d]));
+    for (const row of weeklyHistory) {
+      const key = new Date(row.clockInAt).toISOString().slice(0, 10);
+      const bucket = byKey.get(key);
+      if (!bucket) continue;
+      const end = row.clockOutAt ? new Date(row.clockOutAt) : now;
+      const hours = Math.max(0, (end.getTime() - new Date(row.clockInAt).getTime()) / (1000 * 60 * 60));
+      bucket.hours += hours;
+    }
+    return days;
+  }, [weeklyHistory, i18n.language]);
+  const weeklyMaxHours = Math.max(1, ...weeklyBars.map((d) => d.hours));
+  const weeklyTotalHours = weeklyBars.reduce((sum, d) => sum + d.hours, 0);
+  const totalNeedsAttention = pending.length + pendingLeaveCount + pendingTimesheetCount;
 
   if (!canView || loading) return null;
 
-  const kpis: Kpi[] = [
+  // Real staffing-level read on data already loaded above - no new
+  // fetch. Thresholds are a plain, explainable rule of thumb (not a
+  // config value pulled from anywhere) - "most of the roster present"
+  // reads as healthy, "under half" is the one state worth a warning
+  // color rather than the brand-neutral tone every other tile uses.
+  const presencePercent = members.length > 0 ? Math.round((presentRows.length / members.length) * 100) : 0;
+  const presenceLevel: "good" | "watch" | "low" = members.length === 0 ? "good" : presencePercent >= 70 ? "good" : presencePercent >= 40 ? "watch" : "low";
+
+  const secondaryKpis: Kpi[] = [
     { key: "sites", icon: MapPin, value: sites.length, label: t("overview.sites") },
-    { key: "present", icon: UserCheck, value: presentRows.length, label: t("overview.clockedInNow") },
     { key: "employees", icon: Users, value: members.length, label: t("overview.registeredEmployees") },
-    { key: "pending", icon: ClipboardList, value: pending.length, label: t("overview.pendingReviews") },
     { key: "leaveToday", icon: CalendarDays, value: leaveToday.length, label: t("overview.leaveToday") },
     { key: "onBreak", icon: Coffee, value: onBreak.length, label: t("overview.onBreakNow") },
   ];
@@ -156,11 +277,130 @@ export default function AdminOverviewCard() {
           {t("overview.openManagerAction")}
         </Link>
       </div>
+      <div className={styles.heroRow}>
+        <button
+          type="button"
+          className={`${styles.presenceHero} ${styles[`presence${presenceLevel === "good" ? "Good" : presenceLevel === "watch" ? "Watch" : "Low"}`]}`}
+          onClick={() => setDrilldown("present")}
+        >
+          <span className={styles.presenceIconWrap}>
+            <UserCheck size={28} />
+          </span>
+          <span className={styles.presenceBody}>
+            <span className={styles.presenceEyebrow}>{t("overview.presenceTitle")}</span>
+            <span className={styles.presenceValueRow}>
+              <span className={styles.presenceValue}>{presentRows.length}</span>
+              <span className={styles.presenceOf}>{t("overview.presenceOfTotal", { total: members.length })}</span>
+            </span>
+            <span className={styles.presenceBarTrack}>
+              <span className={styles.presenceBarFill} style={{ width: `${presencePercent}%` }} />
+            </span>
+          </span>
+        </button>
+
+        <div className={styles.attentionCard}>
+          <span className={styles.cardTitle}>{t("overview.attentionTitle")}</span>
+          {totalNeedsAttention === 0 ? (
+            <div className={styles.attentionAllClear}>
+              <CheckCircle2 size={18} />
+              {t("overview.pendingAllClear")}
+            </div>
+          ) : (
+            <ul className={styles.attentionList}>
+              <li className={`${styles.attentionRow} ${pendingTimesheetCount > 0 ? styles.attentionRowActive : ""}`}>
+                <FileClock size={18} className={styles.attentionIcon} />
+                <span className={styles.attentionLabel}>{t("overview.attentionTimesheets")}</span>
+                <button type="button" className={`${styles.attentionBadge} ${pendingTimesheetCount > 0 ? styles.attentionBadgeActive : ""}`} onClick={() => navigate("/timesheets")}>
+                  {pendingTimesheetCount}
+                </button>
+              </li>
+              <li className={`${styles.attentionRow} ${pendingLeaveCount > 0 ? styles.attentionRowActive : ""}`}>
+                <CalendarClock size={18} className={styles.attentionIcon} />
+                <span className={styles.attentionLabel}>{t("overview.attentionLeave")}</span>
+                <button type="button" className={`${styles.attentionBadge} ${pendingLeaveCount > 0 ? styles.attentionBadgeActive : ""}`} onClick={() => navigate("/leave")}>
+                  {pendingLeaveCount}
+                </button>
+              </li>
+              <li className={`${styles.attentionRow} ${pending.length > 0 ? styles.attentionRowActive : ""}`}>
+                <ClipboardCheck size={18} className={styles.attentionIcon} />
+                <span className={styles.attentionLabel}>{t("overview.attentionExceptions")}</span>
+                <button type="button" className={`${styles.attentionBadge} ${pending.length > 0 ? styles.attentionBadgeActive : ""}`} onClick={() => setDrilldown("pending")}>
+                  {pending.length}
+                </button>
+              </li>
+            </ul>
+          )}
+        </div>
+      </div>
+
+      <div className={styles.insightRow}>
+        <div className={styles.chartCard}>
+          <span className={styles.cardTitle}>{t("overview.weeklyHoursTitle")}</span>
+          <span className={styles.chartTotal}>{t("overview.weeklyHoursTotal", { hours: weeklyTotalHours.toFixed(0) })}</span>
+          {scheduledHours !== null && scheduledHours > 0 ? (
+            <span className={`${styles.chartComparison} ${weeklyTotalHours >= scheduledHours ? styles.chartComparisonGood : styles.chartComparisonWatch}`}>
+              {t("overview.weeklyHoursScheduled", { hours: scheduledHours.toFixed(0) })}
+            </span>
+          ) : null}
+          <div className={styles.barChart}>
+            {weeklyBars.map((day) => (
+              <div key={day.key} className={styles.barColumn}>
+                <span className={styles.barValue}>{day.hours >= 1 ? Math.round(day.hours) : ""}</span>
+                <span className={styles.barTrack}>
+                  <span className={styles.barFill} style={{ height: `${Math.max(3, (day.hours / weeklyMaxHours) * 100)}%` }} />
+                </span>
+                <span className={styles.barLabel}>{day.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.rosterCard}>
+          <span className={styles.cardTitle}>{t("overview.rosterTitle")}</span>
+          <div className={styles.rosterCounts}>
+            <span className={styles.rosterCount}>
+              <span className={`${styles.rosterDot} ${styles.rosterDotIn}`} />
+              {t("overview.rosterIn", { count: presentRows.length - onBreak.length })}
+            </span>
+            <span className={styles.rosterCount}>
+              <span className={`${styles.rosterDot} ${styles.rosterDotBreak}`} />
+              {t("overview.rosterBreak", { count: onBreak.length })}
+            </span>
+            <span className={styles.rosterCount}>
+              <span className={`${styles.rosterDot} ${styles.rosterDotOut}`} />
+              {t("overview.rosterOut", { count: Math.max(0, members.length - presentRows.length) })}
+            </span>
+          </div>
+          <ul className={styles.rosterList}>
+            {presentRows.length === 0 ? (
+              <li className={styles.rosterEmpty}>{t("overview.drilldown.emptyPresent")}</li>
+            ) : (
+              presentRows.slice(0, 6).map((row) => (
+                <li key={row.sessionId} className={styles.rosterRow}>
+                  <span className={styles.rosterAvatar}>{row.userFullName.trim().charAt(0).toUpperCase()}</span>
+                  <span className={styles.rosterInfo}>
+                    <span className={styles.rosterName}>{row.userFullName}</span>
+                    <span className={styles.rosterMeta}>{row.siteName || t("overview.drilldown.noSite")}</span>
+                  </span>
+                  <span className={`${styles.rosterStatusDot} ${onBreakUserIds.has(row.userId) ? styles.rosterDotBreak : styles.rosterDotIn}`} />
+                  <span className={styles.rosterTime}>{formatTimeOnly(row.clockInAt, i18n.language)}</span>
+                </li>
+              ))
+            )}
+          </ul>
+          {presentRows.length > 6 ? (
+            <button type="button" className={styles.rosterMore} onClick={() => setDrilldown("present")}>
+              {t("overview.rosterSeeAll", { count: presentRows.length })}
+            </button>
+          ) : null}
+        </div>
+      </div>
+
       <div className={styles.grid}>
-        {kpis.map((kpi) => (
+        {secondaryKpis.map((kpi) => (
           <button key={kpi.key} type="button" className={styles.tile} onClick={() => setDrilldown(kpi.key)}>
             <span className={styles.tileIconWrap}>
-              <kpi.icon size={26} className={styles.tileIcon} />
+              <kpi.icon size={20} className={styles.tileIcon} />
             </span>
             <span className={styles.tileContent}>
               <span className={styles.tileValue}>{kpi.value}</span>

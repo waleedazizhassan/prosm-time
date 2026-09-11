@@ -61,14 +61,489 @@
   text-decoration: underline;
 }
 
+/* § "not professional" redesign pass, 2026-09-11 - the hero row: one
+   primary live number (presence) plus one actionable card (pending
+   reviews), the F-pattern top-left real estate a flat 6-tile grid
+   never gave either of them. Two columns on a wide dashboard, stacks
+   on mobile - same breakpoint the secondary grid already used. */
+.heroRow {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+@media (max-width: 640px) {
+  .heroRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+.presenceHero {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  cursor: pointer;
+  text-align: start;
+  font-family: inherit;
+
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.presenceHero:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.presenceHero:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+/* Real staffing-level color, not decoration - see the component's own
+   comment on the threshold rule. */
+.presenceGood {
+  background: var(--status-success-bg);
+  border-color: var(--status-success-border);
+}
+.presenceGood .presenceIconWrap {
+  color: var(--status-success-text);
+  background: var(--surface-card);
+}
+.presenceGood .presenceBarFill {
+  background: var(--status-success-text);
+}
+
+.presenceWatch {
+  background: var(--status-warning-bg);
+  border-color: var(--status-warning-border);
+}
+.presenceWatch .presenceIconWrap {
+  color: var(--status-warning-text);
+  background: var(--surface-card);
+}
+.presenceWatch .presenceBarFill {
+  background: var(--status-warning-text);
+}
+
+.presenceLow {
+  background: var(--status-danger-bg);
+  border-color: var(--status-danger-border);
+}
+.presenceLow .presenceIconWrap {
+  color: var(--status-danger-text);
+  background: var(--surface-card);
+}
+.presenceLow .presenceBarFill {
+  background: var(--status-danger-text);
+}
+
+.presenceIconWrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  box-shadow: var(--shadow-xs);
+}
+
+.presenceBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+  flex: 1;
+}
+
+.presenceEyebrow {
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.presenceValueRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.presenceValue {
+  font-size: var(--font-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.presenceOf {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.presenceBarTrack {
+  display: block;
+  width: 100%;
+  height: 6px;
+  margin-top: var(--space-1);
+  border-radius: var(--radius-round);
+  background: var(--surface-hover);
+  overflow: hidden;
+}
+
+.presenceBarFill {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-round);
+  transition: width 0.4s ease;
+}
+
+/* § real reference screenshots (Deputy), 2026-09-11 - "Needs
+   Attention": ONE card aggregating every real pending-action type
+   (timesheets/leave/exceptions) as sub-rows, instead of a separate
+   alert card per type. Each row's own count badge only takes on the
+   warning tone when it's actually non-zero - a zero count stays
+   visually quiet rather than implying urgency it doesn't have. */
+.attentionCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  background: var(--surface-page);
+}
+
+.cardTitle {
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.attentionAllClear {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  color: var(--status-success-text);
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.attentionList {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.attentionRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.attentionRow:last-child {
+  border-bottom: none;
+}
+
+.attentionIcon {
+  flex-shrink: 0;
+  color: var(--text-secondary);
+}
+
+.attentionRowActive .attentionIcon {
+  color: var(--status-warning-text);
+}
+
+.attentionLabel {
+  flex: 1;
+  font-size: var(--font-sm);
+  color: var(--text-primary);
+}
+
+.attentionBadge {
+  flex-shrink: 0;
+  min-width: 28px;
+  padding: 2px var(--space-2);
+
+  border: none;
+  border-radius: var(--radius-round);
+  background: var(--surface-hover);
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-bold);
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+
+  transition: opacity 0.18s ease;
+}
+
+.attentionBadge:hover {
+  opacity: 0.85;
+}
+
+.attentionBadgeActive {
+  background: var(--status-warning-bg);
+  color: var(--status-warning-text);
+}
+
+/* § "Tracked Hours" week chart, real reference screenshots (Jibble),
+   2026-09-11 - a plain inline-SVG-free CSS bar chart (no charting
+   library added for one chart), 7 columns, bar height proportional to
+   that day's real total worked hours from weeklyHistory. */
+.chartCard,
+.rosterCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  background: var(--surface-page);
+}
+
+.chartTotal {
+  font-size: var(--font-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.chartComparison {
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+.chartComparisonGood {
+  color: var(--status-success-text);
+}
+
+.chartComparisonWatch {
+  color: var(--status-warning-text);
+}
+
+.barChart {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-2);
+  height: 120px;
+  margin-top: var(--space-2);
+}
+
+.barColumn {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+}
+
+.barValue {
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  height: 12px;
+}
+
+.barTrack {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  flex: 1;
+  border-radius: var(--radius-xs);
+  background: var(--surface-hover);
+  overflow: hidden;
+}
+
+.barFill {
+  display: block;
+  width: 100%;
+  border-radius: var(--radius-xs);
+  background: var(--brand-primary);
+  transition: height 0.4s ease;
+}
+
+.barLabel {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+/* § "Who's In/Out" live roster, real reference screenshots (Jibble/
+   Deputy), 2026-09-11 - real people (avatar initial/name/site/time),
+   not just a bare count tile. Reuses presentRows/onBreak this
+   component already loads for the "present" drill-down - capped at 6
+   rows with a "see all N" hand-off into that same existing modal
+   rather than growing this card without bound. */
+.rosterCounts {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.rosterCount {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.rosterDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.rosterDotIn {
+  background: var(--status-success-text);
+}
+
+.rosterDotBreak {
+  background: var(--status-warning-text);
+}
+
+.rosterDotOut {
+  background: var(--text-disabled);
+}
+
+.rosterList {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.rosterEmpty {
+  padding: var(--space-3) 0;
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+}
+
+.rosterRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.rosterRow:last-child {
+  border-bottom: none;
+}
+
+.rosterAvatar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--brand-primary-subtle);
+  color: var(--brand-primary);
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-bold);
+}
+
+.rosterInfo {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.rosterName {
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rosterMeta {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.rosterStatusDot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.rosterTime {
+  flex-shrink: 0;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.rosterMore {
+  align-self: flex-start;
+  padding: 0;
+  margin-top: var(--space-1);
+
+  border: none;
+  background: none;
+  color: var(--text-link);
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-semibold);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.rosterMore:hover {
+  text-decoration: underline;
+}
+
+.insightRow {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+@media (max-width: 640px) {
+  .insightRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* § redesign pass - these 4 tiles are now deliberately the QUIET
+   secondary row (smaller icon/value than before, neutral slate rather
+   than brand-green) now that the hero row above carries the primary
+   visual weight - see the component's own comment. */
 .grid {
   display: grid;
-  /* § user-directed follow-up - 2 more KPI tiles added alongside the
-     original 4 (6 total now). A fixed 4-column grid would strand the
-     last row with 2 lonely tiles - auto-fit wraps naturally at any
-     tile count instead, still filling the full width. */
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: var(--space-3);
+  gap: var(--space-2);
 }
 
 /* § visual identity reference pass carried forward - the same subtle
@@ -95,15 +570,15 @@
   direction: ltr;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-3);
+  gap: var(--space-2);
 
   width: 100%;
-  padding: var(--space-2) var(--space-4);
+  padding: var(--space-2) var(--space-3);
 
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
 
-  background: var(--surface-hover);
+  background: var(--surface-page);
   cursor: pointer;
   font-family: inherit;
 
@@ -111,8 +586,8 @@
 }
 
 .tile:hover {
-  background: var(--brand-primary-subtle);
-  border-color: var(--brand-primary-subtle-border);
+  background: var(--surface-hover);
+  border-color: var(--border-medium);
   transform: translateY(-1px);
 }
 
@@ -121,34 +596,37 @@
   outline-offset: 2px;
 }
 
+/* Quiet on purpose - neutral slate, not the brand-green circle every
+   tile used before the hero row existed. That color now means
+   something specific (presence health) up above; repeating it down
+   here would dilute it back into decoration. */
 .tileIconWrap {
   flex-shrink: 0;
 
-  width: 44px;
-  height: 44px;
+  width: 32px;
+  height: 32px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border: 1px solid var(--brand-primary-subtle-border);
   border-radius: 50%;
-  background: var(--brand-primary-subtle);
+  background: var(--surface-hover);
 }
 
 .tileIcon {
-  color: var(--brand-primary);
+  color: var(--text-secondary);
 }
 
 .tileContent {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 2px;
+  gap: 1px;
 }
 
 .tileValue {
-  font-size: var(--font-xl);
+  font-size: var(--font-lg);
   font-weight: var(--font-weight-bold);
   color: var(--text-primary);
   font-variant-numeric: tabular-nums;
