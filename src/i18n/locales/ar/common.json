@@ -31,6 +31,7 @@
     "correctionRequiresLockedTimesheet": "لا يمكن طلب تصحيح إلا على كشف دوام معتمد ومغلق.",
     "aReasonRequired": "السبب مطلوب.",
     "emailAlreadyExistsInOrganization": "يوجد بالفعل مستخدم بهذا البريد الإلكتروني في هذه المؤسسة.",
+    "nameAlreadyExistsInOrganization": "يوجد بالفعل مستخدم بهذا الاسم في هذه المؤسسة. الرجاء استخدام اسم مختلف لتجنب الالتباس.",
     "allowanceEntryNotFound": "تعذر العثور على قيد البدل هذا.",
     "allowancesApproveAuthorityRequired": "ليس لديك صلاحية اعتماد بدلات هذا الموظف.",
     "attendanceEventNotFound": "تعذر العثور على حدث الحضور هذا.",

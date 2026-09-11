@@ -120,6 +120,27 @@ serve(async (request: Request) => {
     }
 
     const normalizedEmail = email.trim().toLowerCase();
+    const trimmedFullName = fullName.trim();
+
+    // § real bug, user-reported - two real employees ended up sharing
+    // the exact same display name (different emails), and the user
+    // themselves genuinely confused the two while testing, including
+    // one real clock-in report that traced back to session/local-state
+    // confusion between the two identically-named accounts on the same
+    // device. Checked here, BEFORE the real Auth account is created
+    // below, so a rejected duplicate name never leaves an orphaned
+    // auth.users row behind (the RPC's own defense-in-depth check runs
+    // too late for that - it only protects direct RPC callers).
+    const { data: existingNameMatch } = await serviceClient
+      .from("users")
+      .select("id")
+      .eq("organization_id", callerRow.organization_id)
+      .ilike("full_name", trimmedFullName)
+      .maybeSingle();
+    if (existingNameMatch) {
+      return errorResponse("A USER WITH THIS NAME ALREADY EXISTS IN THIS ORGANIZATION", 409, "DUPLICATE_NAME");
+    }
+
     const randomPassword = crypto.randomUUID() + crypto.randomUUID();
 
     const { data: authResult, error: authError } = await serviceClient.auth.admin.createUser({

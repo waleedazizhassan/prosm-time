@@ -31,6 +31,7 @@
     "correctionRequiresLockedTimesheet": "Eine Korrektur kann nur für eine gesperrte (genehmigte) Zeiterfassung beantragt werden.",
     "aReasonRequired": "Ein Grund ist erforderlich.",
     "emailAlreadyExistsInOrganization": "In dieser Organisation existiert bereits ein Benutzer mit dieser E-Mail-Adresse.",
+    "nameAlreadyExistsInOrganization": "In dieser Organisation existiert bereits ein Benutzer mit diesem Namen. Bitte verwenden Sie einen anderen Namen, um Verwechslungen zu vermeiden.",
     "allowanceEntryNotFound": "Dieser Zulageneintrag wurde nicht gefunden.",
     "allowancesApproveAuthorityRequired": "Sie sind nicht berechtigt, Zulagen für diesen Mitarbeiter zu genehmigen.",
     "attendanceEventNotFound": "Dieses Anwesenheitsereignis wurde nicht gefunden.",

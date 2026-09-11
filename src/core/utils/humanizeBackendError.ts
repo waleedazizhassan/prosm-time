@@ -48,6 +48,7 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "A CORRECTION CAN ONLY BE REQUESTED ON A LOCKED (APPROVED) TIMESHEET": "correctionRequiresLockedTimesheet",
   "A REASON IS REQUIRED": "aReasonRequired",
   "A USER WITH THIS EMAIL ALREADY EXISTS IN THIS ORGANIZATION": "emailAlreadyExistsInOrganization",
+  "A USER WITH THIS NAME ALREADY EXISTS IN THIS ORGANIZATION": "nameAlreadyExistsInOrganization",
   "ALLOWANCE ENTRY NOT FOUND": "allowanceEntryNotFound",
   "ALLOWANCES.APPROVE AUTHORITY REQUIRED FOR THIS EMPLOYEE": "allowancesApproveAuthorityRequired",
   "ATTENDANCE EVENT NOT FOUND": "attendanceEventNotFound",

@@ -31,6 +31,7 @@
     "correctionRequiresLockedTimesheet": "Une correction ne peut être demandée que sur une feuille de temps verrouillée (approuvée).",
     "aReasonRequired": "Un motif est requis.",
     "emailAlreadyExistsInOrganization": "Un utilisateur avec cet e-mail existe déjà dans cette organisation.",
+    "nameAlreadyExistsInOrganization": "Un utilisateur portant ce nom existe déjà dans cette organisation. Veuillez utiliser un nom différent pour éviter toute confusion.",
     "allowanceEntryNotFound": "Cette entrée d'indemnité est introuvable.",
     "allowancesApproveAuthorityRequired": "Vous n'avez pas l'autorité pour approuver les indemnités de cet employé.",
     "attendanceEventNotFound": "Cet événement de présence est introuvable.",

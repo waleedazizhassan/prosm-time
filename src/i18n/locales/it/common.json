@@ -31,6 +31,7 @@
     "correctionRequiresLockedTimesheet": "Una correzione può essere richiesta solo su un foglio ore bloccato (approvato).",
     "aReasonRequired": "È richiesto un motivo.",
     "emailAlreadyExistsInOrganization": "Esiste già un utente con questa email in questa organizzazione.",
+    "nameAlreadyExistsInOrganization": "Esiste già un utente con questo nome in questa organizzazione. Utilizza un nome diverso per evitare confusione.",
     "allowanceEntryNotFound": "Questa voce di indennità non è stata trovata.",
     "allowancesApproveAuthorityRequired": "Non hai l'autorità per approvare le indennità di questo dipendente.",
     "attendanceEventNotFound": "Questo evento di presenza non è stato trovato.",
