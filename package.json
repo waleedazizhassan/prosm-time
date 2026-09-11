@@ -88,6 +88,6 @@
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true
     },
-    "asar": true
+    "asar": false
   }
 }
