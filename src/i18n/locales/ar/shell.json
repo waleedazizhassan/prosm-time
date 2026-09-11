@@ -13,6 +13,8 @@
   "changeAvatarAction": "تغيير الصورة الشخصية",
   "avatarUploadError": "تعذّر رفع الصورة الشخصية. حاول مرة أخرى.",
   "signOutAction": "تسجيل الخروج",
+  "kioskPinLabel": "رقم سري للكشك (٤ إلى ٦ أرقام)",
+  "kioskPinSaved": "تم حفظ الرقم السري.",
   "languageLabel": "اللغة",
   "themeLabel": "المظهر",
   "theme": {

@@ -239,6 +239,11 @@ export default function AttendanceLogPage() {
             ) : null}
           </span>
           <NoteActivityCell note={row.clockInNote} activity={row.clockInActivity} t={t} />
+          {row.clockInRecordedByName ? (
+            <span style={{ display: "block", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
+              {t("recordedByOnBehalf", { name: row.clockInRecordedByName })}
+            </span>
+          ) : null}
         </span>
       ),
     },
@@ -263,6 +268,11 @@ export default function AttendanceLogPage() {
               ) : null}
             </span>
             <NoteActivityCell note={row.clockOutNote} activity={row.clockOutActivity} t={t} />
+            {row.clockOutRecordedByName ? (
+              <span style={{ display: "block", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
+                {t("recordedByOnBehalf", { name: row.clockOutRecordedByName })}
+              </span>
+            ) : null}
           </span>
         ) : (
           "—"

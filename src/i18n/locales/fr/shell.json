@@ -13,6 +13,8 @@
   "changeAvatarAction": "Changer la photo de profil",
   "avatarUploadError": "Impossible de téléverser la photo de profil. Veuillez réessayer.",
   "signOutAction": "Se déconnecter",
+  "kioskPinLabel": "Code PIN du kiosque (4 à 6 chiffres)",
+  "kioskPinSaved": "Code PIN enregistré.",
   "languageLabel": "Langue",
   "themeLabel": "Apparence",
   "theme": {

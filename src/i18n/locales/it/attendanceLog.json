@@ -28,6 +28,7 @@
   "viewPhoto": "Visualizza foto",
   "viewOnMap": "Visualizza sulla mappa",
   "siteChangedTo": "→ {{site}} alle {{time}}",
+  "recordedByOnBehalf": "Registrato per conto di, da {{name}}",
   "noteLabel": "Nota: {{note}}",
   "activityLabel": "Attività: {{activity}}",
   "locationMatch": "Corrisponde all'area della sede",

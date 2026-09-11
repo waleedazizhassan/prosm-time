@@ -28,6 +28,7 @@
   "viewPhoto": "عرض الصورة",
   "viewOnMap": "عرض على الخريطة",
   "siteChangedTo": "→ {{site}} الساعة {{time}}",
+  "recordedByOnBehalf": "سُجّل بالنيابة بواسطة {{name}}",
   "noteLabel": "ملاحظة: {{note}}",
   "activityLabel": "النشاط: {{activity}}",
   "locationMatch": "مطابق لنطاق الموقع",

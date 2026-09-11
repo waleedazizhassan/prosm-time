@@ -13,6 +13,8 @@
   "changeAvatarAction": "Change profile picture",
   "avatarUploadError": "Couldn't upload the profile picture. Please try again.",
   "signOutAction": "Sign out",
+  "kioskPinLabel": "Kiosk PIN (4-6 digits)",
+  "kioskPinSaved": "Kiosk PIN saved.",
   "languageLabel": "Language",
   "themeLabel": "Appearance",
   "theme": {

@@ -13,6 +13,8 @@
   "changeAvatarAction": "Cambia immagine del profilo",
   "avatarUploadError": "Impossibile caricare l'immagine del profilo. Riprova.",
   "signOutAction": "Esci",
+  "kioskPinLabel": "PIN del chiosco (4-6 cifre)",
+  "kioskPinSaved": "PIN salvato.",
   "languageLabel": "Lingua",
   "themeLabel": "Aspetto",
   "theme": {

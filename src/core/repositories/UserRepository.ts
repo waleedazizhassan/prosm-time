@@ -117,6 +117,22 @@ class UserRepository {
       return createError(error instanceof Error ? error.message : "User service unavailable.");
     }
   }
+
+  // § user-directed, 2026-09-12 - "the kiosk PIN must be chosen by the
+  // employee themselves, not a manager or the Owner." set_prosm_time_
+  // kiosk_pin already existed server-side (self-service, sets the
+  // caller's own kiosk_pin_hash) but had no frontend caller anywhere -
+  // this is that missing UI's own repository call.
+  async setKioskPin(pin: string): Promise<ServiceResult<null>> {
+    try {
+      const { data, error } = await this.client.rpc("set_prosm_time_kiosk_pin", { p_pin: pin });
+      if (error) return createError(error.message);
+      if (data?.success === false) return createError("Unable to set the kiosk PIN.");
+      return createSuccess(null);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "User service unavailable.");
+    }
+  }
 }
 
 export default new UserRepository();

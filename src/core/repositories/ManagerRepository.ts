@@ -40,6 +40,14 @@ export interface TodayAttendanceRow {
   clockInActivity: string | null;
   clockOutNote: string | null;
   clockOutActivity: string | null;
+  // § user-directed, 2026-09-12 - "the report should show who recorded
+  // an on-behalf clock-in/out." attendance_events.recorded_by already
+  // captured this (set by admin_clock_in/out_prosm_time_attendance)
+  // but no repository or screen ever surfaced it - null for a normal
+  // self clock-in/out, the actor's name only when it was recorded on
+  // someone else's behalf.
+  clockInRecordedByName: string | null;
+  clockOutRecordedByName: string | null;
   // § live UX review, user-directed - "Change Site" mid-shift: show the
   // move inline under the site name ("changed to X at HH:MM"), same
   // "the record itself carries what happened" posture as the evidence-
@@ -85,6 +93,7 @@ interface RawAttendanceEventRow {
   within_geofence: boolean | null;
   note: string | null;
   activity: string | null;
+  recorded_by_user: { full_name: string } | { full_name: string }[] | null;
 }
 
 interface RawCameraEvidenceRow {
@@ -234,10 +243,12 @@ class ManagerRepository {
       const clockInActivityBySession = new Map<string, string>();
       const clockOutNoteBySession = new Map<string, string>();
       const clockOutActivityBySession = new Map<string, string>();
+      const clockInRecordedByBySession = new Map<string, string>();
+      const clockOutRecordedByBySession = new Map<string, string>();
       if (sessionIds.length > 0) {
         const eventsResult = await this.client
           .from("attendance_events")
-          .select("id, session_id, event_type, latitude, longitude, within_geofence, note, activity")
+          .select("id, session_id, event_type, latitude, longitude, within_geofence, note, activity, recorded_by_user:users!attendance_events_recorded_by_fkey(full_name)")
           .in("session_id", sessionIds)
           .in("event_type", ["clock_in", "clock_out"]);
         if (eventsResult.error) return createError(eventsResult.error.message);
@@ -274,6 +285,11 @@ class ManagerRepository {
           if (event.activity) {
             if (event.event_type === "clock_in") clockInActivityBySession.set(event.session_id, event.activity);
             else clockOutActivityBySession.set(event.session_id, event.activity);
+          }
+          const recordedByUser = Array.isArray(event.recorded_by_user) ? event.recorded_by_user[0] : event.recorded_by_user;
+          if (recordedByUser?.full_name) {
+            if (event.event_type === "clock_in") clockInRecordedByBySession.set(event.session_id, recordedByUser.full_name);
+            else clockOutRecordedByBySession.set(event.session_id, recordedByUser.full_name);
           }
         }
       }
@@ -324,6 +340,8 @@ class ManagerRepository {
           clockInActivity: clockInActivityBySession.get(row.id) ?? null,
           clockOutNote: clockOutNoteBySession.get(row.id) ?? null,
           clockOutActivity: clockOutActivityBySession.get(row.id) ?? null,
+          clockInRecordedByName: clockInRecordedByBySession.get(row.id) ?? null,
+          clockOutRecordedByName: clockOutRecordedByBySession.get(row.id) ?? null,
           siteChanges: siteChangesBySession.get(row.id) ?? [],
         };
       });

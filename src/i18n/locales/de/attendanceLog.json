@@ -28,6 +28,7 @@
   "viewPhoto": "Foto anzeigen",
   "viewOnMap": "Auf der Karte ansehen",
   "siteChangedTo": "→ {{site}} um {{time}}",
+  "recordedByOnBehalf": "Im Auftrag erfasst von {{name}}",
   "noteLabel": "Notiz: {{note}}",
   "activityLabel": "Tätigkeit: {{activity}}",
   "locationMatch": "Stimmt mit dem Standortbereich überein",

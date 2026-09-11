@@ -41,8 +41,8 @@ export function buildAttendanceLogPdf(
         <tr>
           <td style="padding:6px 10px;border-top:1px solid #e2e8f0;">${escapeHtml(row.userFullName)}</td>
           <td style="padding:6px 10px;border-top:1px solid #e2e8f0;">${escapeHtml(row.siteName || "—")}</td>
-          <td style="padding:6px 10px;border-top:1px solid #e2e8f0;">${escapeHtml(formatTimeOnly(row.clockInAt, locale))}</td>
-          <td style="padding:6px 10px;border-top:1px solid #e2e8f0;">${row.clockOutAt ? escapeHtml(formatTimeOnly(row.clockOutAt, locale)) : "—"}</td>
+          <td style="padding:6px 10px;border-top:1px solid #e2e8f0;">${escapeHtml(formatTimeOnly(row.clockInAt, locale))}${row.clockInRecordedByName ? `<br/><span style="font-size:10px;color:#64748b;">${escapeHtml(t("recordedByOnBehalf", { name: row.clockInRecordedByName }))}</span>` : ""}</td>
+          <td style="padding:6px 10px;border-top:1px solid #e2e8f0;">${row.clockOutAt ? escapeHtml(formatTimeOnly(row.clockOutAt, locale)) : "—"}${row.clockOutRecordedByName ? `<br/><span style="font-size:10px;color:#64748b;">${escapeHtml(t("recordedByOnBehalf", { name: row.clockOutRecordedByName }))}</span>` : ""}</td>
           <td style="padding:6px 10px;border-top:1px solid #e2e8f0;">${escapeHtml(t(`status.${row.status}`))}</td>
           <td style="padding:6px 10px;border-top:1px solid #e2e8f0;">${escapeHtml(formatWorkedHours(row.clockInAt, row.clockOutAt))}</td>
         </tr>`,

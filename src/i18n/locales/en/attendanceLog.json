@@ -28,6 +28,7 @@
   "viewPhoto": "View photo",
   "viewOnMap": "View on map",
   "siteChangedTo": "→ {{site}} at {{time}}",
+  "recordedByOnBehalf": "Recorded on behalf by {{name}}",
   "noteLabel": "Note: {{note}}",
   "activityLabel": "Activity: {{activity}}",
   "locationMatch": "Matched the site's geofence",
