@@ -1,0 +1,79 @@
+/* § point 3, 2026-09-11 - replaces the previous flex-wrap of pill
+   tab-buttons with a grid of small, icon-led cards, one per report
+   type. Same click-to-select behavior, just a clearer visual unit per
+   report. */
+.typeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.typeCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  padding: var(--space-2) var(--space-3);
+
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  background: var(--surface-hover);
+  cursor: pointer;
+  font-family: inherit;
+  text-align: start;
+
+  transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.typeCard:hover {
+  background: var(--brand-primary-subtle);
+  border-color: var(--brand-primary-subtle-border);
+  transform: translateY(-1px);
+}
+
+.typeCard:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+.typeCardActive {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+
+.typeCardActive .typeIconWrap {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: transparent;
+}
+
+.typeCardActive .typeIcon,
+.typeCardActive .typeLabel {
+  color: var(--text-on-brand, #fff);
+}
+
+.typeIconWrap {
+  flex-shrink: 0;
+
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--brand-primary-subtle-border);
+  border-radius: 50%;
+  background: var(--brand-primary-subtle);
+}
+
+.typeIcon {
+  color: var(--brand-primary);
+}
+
+.typeLabel {
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  line-height: 1.2;
+}

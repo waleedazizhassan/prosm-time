@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import ManagerRepository, { type TodayAttendanceRow } from "../../core/repositories/ManagerRepository";
+import ManagerRepository, { type TodayAttendanceRow, type SosAlertRow } from "../../core/repositories/ManagerRepository";
 import AllowanceRepository, { type AllowanceEntry } from "../../core/repositories/AllowanceRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import SiteWorkerRepository, { type SiteWorkerAttendanceRow } from "../../core/repositories/SiteWorkerRepository";
@@ -14,14 +14,19 @@ import { buildAttendanceLogPdf } from "../attendance/attendanceLogPdf";
 import { buildAllowancesPdf } from "../allowances/allowancesPdf";
 import { buildGenericReportPdf } from "./genericReportPdf";
 
+import { useAuth } from "../../core/context/AuthContext";
+
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
 import Input from "../../components/common/Input";
 import Select from "../../components/common/Select";
 import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
+import { REPORT_TYPE_ICONS } from "./reportTypeIcons";
+import styles from "./ReportsPage.module.css";
 
 const ALL_EMPLOYEES = "";
+const ALL_SITES = "";
 
 // The 3 original report types keep their own bespoke fetch/PDF
 // pipeline (unchanged below - see this file's own header comment on
@@ -31,12 +36,32 @@ const ALL_EMPLOYEES = "";
 // different columns - so they share one config-driven path instead of
 // 8 near-duplicate branches.
 type BespokeReportType = "attendance" | "allowances" | "timesheets";
-type GenericReportType = "workforce" | "contractor" | "site" | "late" | "missingCheckouts" | "leaveConflicts" | "managerOverrides" | "locationViolations";
+type GenericReportType = "workforce" | "contractor" | "site" | "late" | "missingCheckouts" | "leaveConflicts" | "managerOverrides" | "locationViolations" | "sos";
 type ReportType = BespokeReportType | GenericReportType;
+
+// § point 2, 2026-09-11 - "an Employee sees report buttons that don't
+// apply to them - don't remove them, just don't show them." Every type
+// below requires real management scope server-side (attendance.view +
+// managed-site data an Employee simply has none of) - a plain
+// Employee/read_only would only ever see an empty/near-empty report.
+// Gated the same way DashboardPage.tsx now gates the ClockInOutCard
+// widget: Owner, or 'exceptions.manage' holders (Manager/Supervisor).
+const MANAGEMENT_SCOPED_TYPES: ReportType[] = [
+  "workforce",
+  "contractor",
+  "site",
+  "late",
+  "missingCheckouts",
+  "leaveConflicts",
+  "managerOverrides",
+  "locationViolations",
+  "sos",
+];
 
 interface GenericRow {
   cells: string[];
   employeeName: string | null;
+  siteName: string | null;
 }
 
 function isoDate(date: Date): string {
@@ -47,6 +72,21 @@ export default function ReportsPage() {
   const { t, i18n } = useTranslation("reports");
   const { t: tAttendance } = useTranslation("attendanceLog");
   const { t: tAllowances } = useTranslation("allowances");
+  const { profile, hasPermission } = useAuth();
+
+  // § point 2, 2026-09-11 - same authority test as DashboardPage.tsx's
+  // ClockInOutCard gate: Owner, or 'exceptions.manage' holders
+  // (Manager/Supervisor) get the full report-type list; everyone else
+  // (Employee, read_only) only sees the 3 that are actually about
+  // their own, self-scoped data.
+  const hasManagementScope = Boolean(profile?.isOwner) || hasPermission("exceptions.manage");
+  const visibleReportTypes = useMemo<ReportType[]>(
+    () =>
+      (["attendance", "allowances", "timesheets", "workforce", "contractor", "site", "late", "missingCheckouts", "leaveConflicts", "managerOverrides", "locationViolations", "sos"] as ReportType[]).filter(
+        (type) => hasManagementScope || !MANAGEMENT_SCOPED_TYPES.includes(type),
+      ),
+    [hasManagementScope],
+  );
 
   const [reportType, setReportType] = useState<ReportType>("attendance");
 
@@ -55,6 +95,7 @@ export default function ReportsPage() {
   const [startDate, setStartDate] = useState(isoDate(monthStart));
   const [endDate, setEndDate] = useState(isoDate(today));
   const [employeeFilter, setEmployeeFilter] = useState(ALL_EMPLOYEES);
+  const [siteFilter, setSiteFilter] = useState(ALL_SITES);
 
   const [attendanceRows, setAttendanceRows] = useState<TodayAttendanceRow[]>([]);
   const [allowanceEntries, setAllowanceEntries] = useState<AllowanceEntry[]>([]);
@@ -81,7 +122,7 @@ export default function ReportsPage() {
       {
         columns: string[];
         fetch: () => Promise<{ success: boolean; message: string | null; data: unknown[] | null }>;
-        toRow: (row: never) => { cells: string[]; employeeName: string | null };
+        toRow: (row: never) => { cells: string[]; employeeName: string | null; siteName: string | null };
       }
     > = {
       workforce: {
@@ -90,6 +131,7 @@ export default function ReportsPage() {
         toRow: (row: import("../../core/repositories/ReportRepository").WorkforceRow) => ({
           cells: [row.fullName, row.email, row.isOwner ? t("columns.workforce.owner") : row.roleName, row.siteNames || "—", row.status],
           employeeName: row.fullName,
+          siteName: null,
         }),
       },
       contractor: {
@@ -98,6 +140,7 @@ export default function ReportsPage() {
         toRow: (row: SiteWorkerAttendanceRow) => ({
           cells: [row.workerName, row.workerNumber, row.siteName, formatTimeOnly(row.clockInAt, locale), row.clockOutAt ? formatTimeOnly(row.clockOutAt, locale) : "—"],
           employeeName: row.workerName,
+          siteName: row.siteName,
         }),
       },
       site: {
@@ -106,6 +149,7 @@ export default function ReportsPage() {
         toRow: (row: import("../../core/repositories/ReportRepository").SiteSummaryRow) => ({
           cells: [row.siteName, String(row.employeeCount), String(row.totalHours), String(row.exceptionCount)],
           employeeName: null,
+          siteName: row.siteName,
         }),
       },
       late: {
@@ -114,6 +158,7 @@ export default function ReportsPage() {
         toRow: (row: import("../../core/repositories/ReportRepository").LateRow) => ({
           cells: [row.userFullName, row.siteName, row.shiftStartTime.slice(0, 5), formatTimeOnly(row.clockInAt, locale), String(row.minutesLate)],
           employeeName: row.userFullName,
+          siteName: row.siteName,
         }),
       },
       missingCheckouts: {
@@ -128,6 +173,7 @@ export default function ReportsPage() {
             row.stillOpen ? t("columns.missingCheckouts.stillOpen") : t("columns.missingCheckouts.eventuallyClosed"),
           ],
           employeeName: row.userFullName,
+          siteName: row.siteName,
         }),
       },
       leaveConflicts: {
@@ -142,6 +188,7 @@ export default function ReportsPage() {
             `${formatDateOnly(row.leaveStartDate, locale)} — ${formatDateOnly(row.leaveEndDate, locale)}`,
           ],
           employeeName: row.userFullName,
+          siteName: row.siteName,
         }),
       },
       managerOverrides: {
@@ -150,6 +197,28 @@ export default function ReportsPage() {
         toRow: (row: import("../../core/repositories/ReportRepository").ManagerOverrideRow) => ({
           cells: [row.actorName, row.subjectName, row.action, row.reason || "—", `${formatDateOnly(row.createdAt, locale)} ${formatTimeOnly(row.createdAt, locale)}`],
           employeeName: null,
+          siteName: null,
+        }),
+      },
+      // § point 1, 2026-09-11 - "add an Emergency report, with site and
+      // employee filters." Reuses ManagerRepository.listSosAlerts()
+      // as-is (a real, already-live, RLS-scoped read - no new RPC
+      // needed). Deliberately NOT site-scoped for a Manager, unlike
+      // every other type above - matches this session's own earlier,
+      // reviewed decision that SOS/emergency visibility must never be
+      // restricted by site, since that could delay a real response.
+      sos: {
+        columns: [t("columns.sos.name"), t("columns.sos.site"), t("columns.sos.triggeredAt"), t("columns.sos.status")],
+        fetch: () => ManagerRepository.listSosAlerts(startDate, endDate),
+        toRow: (row: SosAlertRow) => ({
+          cells: [
+            row.userFullName,
+            row.siteName || "—",
+            `${formatDateOnly(row.triggeredAt, locale)} ${formatTimeOnly(row.triggeredAt, locale)}`,
+            row.status === "resolved" ? t("columns.sos.resolved") : t("columns.sos.active"),
+          ],
+          employeeName: row.userFullName,
+          siteName: row.siteName || null,
         }),
       },
       locationViolations: {
@@ -164,6 +233,7 @@ export default function ReportsPage() {
             `${formatDateOnly(row.occurredAt, locale)} ${formatTimeOnly(row.occurredAt, locale)}`,
           ],
           employeeName: row.userFullName,
+          siteName: row.siteName,
         }),
       },
     };
@@ -210,7 +280,16 @@ export default function ReportsPage() {
 
   useEffect(() => {
     setEmployeeFilter(ALL_EMPLOYEES);
+    setSiteFilter(ALL_SITES);
   }, [reportType]);
+
+  // Defense-in-depth, same reasoning as every other permission gate in
+  // this codebase (the button list is already filtered below, but a
+  // stale selection - e.g. a role change mid-session - must not leave
+  // reportType pointed at a now-hidden type).
+  useEffect(() => {
+    if (!visibleReportTypes.includes(reportType)) setReportType("attendance");
+  }, [visibleReportTypes, reportType]);
 
   const employeeNames = useMemo(() => {
     let names: string[];
@@ -226,6 +305,22 @@ export default function ReportsPage() {
     [employeeNames, t],
   );
 
+  // § point 1, 2026-09-11 - a site filter, same shape as the employee
+  // filter above: only shown when the current report type's rows
+  // actually carry site data worth filtering on (most generic types
+  // do; attendance/allowances/timesheets/workforce/managerOverrides
+  // don't set siteName, so this naturally stays hidden for them).
+  const siteNames = useMemo(() => {
+    const names = genericRows.map((row) => row.siteName).filter((name): name is string => Boolean(name));
+    const collator = new Intl.Collator(i18n.language, { sensitivity: "base" });
+    return Array.from(new Set(names)).sort(collator.compare);
+  }, [genericRows, i18n.language]);
+
+  const siteOptions = useMemo(
+    () => [{ value: ALL_SITES, label: t("filters.allSites") }, ...siteNames.map((name) => ({ value: name, label: name }))],
+    [siteNames, t],
+  );
+
   const filteredAttendanceRows = useMemo(
     () => (employeeFilter === ALL_EMPLOYEES ? attendanceRows : attendanceRows.filter((row) => row.userFullName === employeeFilter)),
     [attendanceRows, employeeFilter],
@@ -235,8 +330,11 @@ export default function ReportsPage() {
     [allowanceEntries, employeeFilter],
   );
   const filteredGenericRows = useMemo(
-    () => (employeeFilter === ALL_EMPLOYEES ? genericRows : genericRows.filter((row) => row.employeeName === employeeFilter)),
-    [genericRows, employeeFilter],
+    () =>
+      genericRows
+        .filter((row) => employeeFilter === ALL_EMPLOYEES || row.employeeName === employeeFilter)
+        .filter((row) => siteFilter === ALL_SITES || row.siteName === siteFilter),
+    [genericRows, employeeFilter, siteFilter],
   );
 
   const rowCount = reportType === "attendance" ? filteredAttendanceRows.length : reportType === "allowances" ? filteredAllowanceEntries.length : filteredGenericRows.length;
@@ -272,14 +370,25 @@ export default function ReportsPage() {
   return (
     <PageShell title={t("title")} subtitle={t("subtitle")}>
       <Card>
-        <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap", marginBottom: "var(--space-4)" }}>
-          {(["attendance", "allowances", "timesheets", "workforce", "contractor", "site", "late", "missingCheckouts", "leaveConflicts", "managerOverrides", "locationViolations"] as ReportType[]).map(
-            (type) => (
-              <Button key={type} variant={reportType === type ? "primary" : "ghost"} size="sm" onClick={() => setReportType(type)}>
-                {t(`types.${type}`)}
-              </Button>
-            ),
-          )}
+        <div className={styles.typeGrid}>
+          {visibleReportTypes.map((type) => {
+            const Icon = REPORT_TYPE_ICONS[type];
+            const isActive = reportType === type;
+            return (
+              <button
+                key={type}
+                type="button"
+                className={`${styles.typeCard} ${isActive ? styles.typeCardActive : ""}`}
+                onClick={() => setReportType(type)}
+                aria-pressed={isActive}
+              >
+                <span className={styles.typeIconWrap}>
+                  <Icon size={18} className={styles.typeIcon} />
+                </span>
+                <span className={styles.typeLabel}>{t(`types.${type}`)}</span>
+              </button>
+            );
+          })}
         </div>
 
         {reportType === "timesheets" ? (
@@ -293,6 +402,9 @@ export default function ReportsPage() {
               <Input label={t("filters.toLabel")} name="reportsTo" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
               {employeeNames.length > 1 ? (
                 <Select label={t("filters.employeeLabel")} name="reportsEmployee" value={employeeFilter} onChange={(event) => setEmployeeFilter(event.target.value)} options={employeeOptions} />
+              ) : null}
+              {siteNames.length > 1 ? (
+                <Select label={t("filters.siteLabel")} name="reportsSite" value={siteFilter} onChange={(event) => setSiteFilter(event.target.value)} options={siteOptions} />
               ) : null}
             </div>
 

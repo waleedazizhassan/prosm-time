@@ -6,14 +6,15 @@
     "attendance": "Anwesenheitsprotokoll",
     "allowances": "Zulagen",
     "timesheets": "Stundenzettel",
-    "workforce": "Belegschaft",
-    "contractor": "Fremdpersonal",
+    "workforce": "Unternehmensmitarbeiter",
+    "contractor": "Temporäre Arbeitskräfte",
     "site": "Standortübersicht",
     "late": "Verspätungen",
     "missingCheckouts": "Fehlende Abmeldungen",
     "leaveConflicts": "Urlaubskonflikte",
     "managerOverrides": "Manager-Eingriffe",
-    "locationViolations": "Standortverstöße"
+    "locationViolations": "Standortverstöße",
+    "sos": "Notfall (SOS)"
   },
   "timesheetsHint": "Stundenzettel werden pro Mitarbeiter und Zeitraum erstellt und genehmigt, nicht nach Datumsbereich.",
   "timesheetsLink": "Zu den Stundenzetteln",
@@ -21,7 +22,9 @@
     "fromLabel": "Von",
     "toLabel": "Bis",
     "employeeLabel": "Mitarbeiter",
-    "allEmployees": "Alle Mitarbeiter"
+    "allEmployees": "Alle Mitarbeiter",
+    "siteLabel": "Standort",
+    "allSites": "Alle Standorte"
   },
   "loadingRows": "Wird geladen…",
   "rowCount": "{{count}} Zeile(n) exportbereit.",
@@ -85,6 +88,14 @@
       "speed": "Implizierte Geschwindigkeit",
       "distance": "Entfernung",
       "when": "Zeitpunkt"
+    },
+    "sos": {
+      "name": "Mitarbeiter",
+      "site": "Standort",
+      "triggeredAt": "Ausgelöst um",
+      "status": "Status",
+      "active": "Aktiv",
+      "resolved": "Behoben"
     }
   }
 }

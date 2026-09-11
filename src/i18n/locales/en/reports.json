@@ -6,14 +6,15 @@
     "attendance": "Attendance Record",
     "allowances": "Allowances",
     "timesheets": "Timesheets",
-    "workforce": "Workforce",
-    "contractor": "Contractor",
+    "workforce": "Company Employees",
+    "contractor": "Temporary Workforce",
     "site": "Site Summary",
     "late": "Late Arrivals",
     "missingCheckouts": "Missing Checkouts",
     "leaveConflicts": "Leave Conflicts",
     "managerOverrides": "Manager Overrides",
-    "locationViolations": "Location Violations"
+    "locationViolations": "Location Violations",
+    "sos": "Emergency (SOS)"
   },
   "timesheetsHint": "Timesheets are generated and approved per employee and period, not by date range.",
   "timesheetsLink": "Go to Timesheets",
@@ -21,7 +22,9 @@
     "fromLabel": "From",
     "toLabel": "To",
     "employeeLabel": "Employee",
-    "allEmployees": "All employees"
+    "allEmployees": "All employees",
+    "siteLabel": "Site",
+    "allSites": "All sites"
   },
   "loadingRows": "Loading…",
   "rowCount": "{{count}} row(s) ready to export.",
@@ -85,6 +88,14 @@
       "speed": "Implied speed",
       "distance": "Distance",
       "when": "When"
+    },
+    "sos": {
+      "name": "Employee",
+      "site": "Site",
+      "triggeredAt": "Triggered at",
+      "status": "Status",
+      "active": "Active",
+      "resolved": "Resolved"
     }
   }
 }

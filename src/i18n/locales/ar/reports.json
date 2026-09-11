@@ -6,14 +6,15 @@
     "attendance": "سجل الحضور",
     "allowances": "البدلات",
     "timesheets": "الجداول الزمنية",
-    "workforce": "القوى العاملة",
-    "contractor": "المقاولين",
+    "workforce": "موظفين الشركة",
+    "contractor": "العمالة المؤقتة",
     "site": "ملخص المواقع",
     "late": "حالات التأخير",
     "missingCheckouts": "بدون انصراف",
     "leaveConflicts": "تعارض الإجازات",
     "managerOverrides": "تدخلات المدير",
-    "locationViolations": "مخالفات الموقع"
+    "locationViolations": "مخالفات الموقع",
+    "sos": "الطوارئ"
   },
   "timesheetsHint": "الجداول الزمنية تُنشأ وتُعتمد لكل موظف وفترة على حدة، مش بنطاق تاريخ.",
   "timesheetsLink": "الذهاب إلى الجداول الزمنية",
@@ -21,7 +22,9 @@
     "fromLabel": "من",
     "toLabel": "إلى",
     "employeeLabel": "الموظف",
-    "allEmployees": "كل الموظفين"
+    "allEmployees": "كل الموظفين",
+    "siteLabel": "الموقع",
+    "allSites": "كل المواقع"
   },
   "loadingRows": "جارٍ التحميل…",
   "rowCount": "{{count}} صف جاهز للتصدير.",
@@ -85,6 +88,14 @@
       "speed": "السرعة المفترضة",
       "distance": "المسافة",
       "when": "التوقيت"
+    },
+    "sos": {
+      "name": "الموظف",
+      "site": "الموقع",
+      "triggeredAt": "وقت التفعيل",
+      "status": "الحالة",
+      "active": "نشط",
+      "resolved": "تم الحل"
     }
   }
 }

@@ -6,14 +6,15 @@
     "attendance": "Registre de présence",
     "allowances": "Indemnités",
     "timesheets": "Feuilles de temps",
-    "workforce": "Effectif",
-    "contractor": "Sous-traitants",
+    "workforce": "Employés de l'entreprise",
+    "contractor": "Main-d'œuvre temporaire",
     "site": "Résumé par site",
     "late": "Retards",
     "missingCheckouts": "Sorties manquantes",
     "leaveConflicts": "Conflits de congés",
     "managerOverrides": "Interventions manager",
-    "locationViolations": "Violations de localisation"
+    "locationViolations": "Violations de localisation",
+    "sos": "Urgence (SOS)"
   },
   "timesheetsHint": "Les feuilles de temps sont générées et approuvées par employé et par période, pas par plage de dates.",
   "timesheetsLink": "Aller aux feuilles de temps",
@@ -21,7 +22,9 @@
     "fromLabel": "Du",
     "toLabel": "Au",
     "employeeLabel": "Employé",
-    "allEmployees": "Tous les employés"
+    "allEmployees": "Tous les employés",
+    "siteLabel": "Site",
+    "allSites": "Tous les sites"
   },
   "loadingRows": "Chargement…",
   "rowCount": "{{count}} ligne(s) prête(s) à exporter.",
@@ -85,6 +88,14 @@
       "speed": "Vitesse implicite",
       "distance": "Distance",
       "when": "Quand"
+    },
+    "sos": {
+      "name": "Employé",
+      "site": "Site",
+      "triggeredAt": "Déclenché à",
+      "status": "Statut",
+      "active": "Actif",
+      "resolved": "Résolu"
     }
   }
 }

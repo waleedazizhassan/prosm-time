@@ -6,14 +6,15 @@
     "attendance": "Registro presenze",
     "allowances": "Indennità",
     "timesheets": "Fogli ore",
-    "workforce": "Personale",
-    "contractor": "Appaltatori",
+    "workforce": "Dipendenti aziendali",
+    "contractor": "Personale temporaneo",
     "site": "Riepilogo sito",
     "late": "Ritardi",
     "missingCheckouts": "Uscite mancanti",
     "leaveConflicts": "Conflitti di ferie",
     "managerOverrides": "Interventi manager",
-    "locationViolations": "Violazioni di posizione"
+    "locationViolations": "Violazioni di posizione",
+    "sos": "Emergenza (SOS)"
   },
   "timesheetsHint": "I fogli ore vengono generati e approvati per dipendente e periodo, non per intervallo di date.",
   "timesheetsLink": "Vai ai fogli ore",
@@ -21,7 +22,9 @@
     "fromLabel": "Da",
     "toLabel": "A",
     "employeeLabel": "Dipendente",
-    "allEmployees": "Tutti i dipendenti"
+    "allEmployees": "Tutti i dipendenti",
+    "siteLabel": "Sito",
+    "allSites": "Tutti i siti"
   },
   "loadingRows": "Caricamento…",
   "rowCount": "{{count}} riga/e pronta/e per l'esportazione.",
@@ -85,6 +88,14 @@
       "speed": "Velocità implicita",
       "distance": "Distanza",
       "when": "Quando"
+    },
+    "sos": {
+      "name": "Dipendente",
+      "site": "Sito",
+      "triggeredAt": "Attivato alle",
+      "status": "Stato",
+      "active": "Attivo",
+      "resolved": "Risolto"
     }
   }
 }
