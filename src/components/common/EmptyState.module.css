@@ -9,6 +9,14 @@
   background: var(--surface-app);
 }
 
+.illustration {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  justify-self: center;
+  margin-bottom: var(--space-2);
+}
+
 .title {
   font-size: var(--font-md);
   font-weight: var(--font-weight-semibold);

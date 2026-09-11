@@ -20,6 +20,7 @@ import Textarea from "../../components/common/Textarea";
 import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
 import { formatTimeOnly, formatDateOnly } from "../../core/utils/formatDate";
+import allCaughtUpIllustration from "../../assets/illustration-all-caught-up.png";
 
 const REVIEW_ACTIONS = ["approved", "rejected", "acknowledged", "clarification_requested"] as const;
 
@@ -279,7 +280,7 @@ export default function ManagerConsolePage() {
       <Card title={t("pending.title")}>
         <ErrorText>{error}</ErrorText>
         {pendingItems.length === 0 ? (
-          <EmptyState message={t("pending.empty")} />
+          <EmptyState message={t("pending.empty")} illustrationSrc={allCaughtUpIllustration} />
         ) : (
           pendingItems.map((item) => (
             <ListRow key={`${item.kind}-${item.id}`}>
