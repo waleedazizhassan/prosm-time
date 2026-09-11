@@ -15,22 +15,31 @@ authorisation decisions, business rules) lives in the client at all.
 
 - `vite.config.ts`: `minify: "terser"`, two compress passes, identifier mangling,
   all comments stripped, `sourcemap: false`, opaque hash-only chunk file names.
-- `scripts/obfuscate.mjs` runs after every `vite build` (wired into `npm run build`)
-  and applies `javascript-obfuscator` to the emitted `dist/**/*.js`:
-  hexadecimal identifiers, encoded + rotated + shuffled string array, string
-  array wrappers, numbers-to-expressions.
-- Deliberately **off**, because they break real apps or cost runtime performance:
-  `controlFlowFlattening`, `deadCodeInjection`, `transformObjectKeys` (would
-  rename Supabase/Capacitor payload keys), `selfDefending`, property mangling.
-- Escape hatch for local debugging: `PROSM_SKIP_OBFUSCATION=1 npm run build`,
-  or `npm run build:raw`.
+  This alone is `npm run build`'s real, always-on protection.
+- `scripts/obfuscate.mjs` (a SECOND, separate pass applying `javascript-obfuscator`
+  on top of the already-terser-minified output: hexadecimal identifiers, encoded
+  + rotated + shuffled string array, string array wrappers, numbers-to-expressions)
+  is **currently disabled by default** — real gap found 2026-09-11: a real signed
+  release APK built with this pass produced an immediate, un-reproduced-in-dev
+  crash on a real device (React's ErrorBoundary fallback, "Something went wrong",
+  right after a fresh install), while the exact same source rendered cleanly in
+  every local check (tsc, vitest, an authenticated jsdom render). Never
+  runtime-tested on a real device before it first shipped in a signed build - the
+  earlier build+size+syntax checks (bundle grew ~2.7x, `node --check` passed on
+  every chunk) proved the pass *ran*, not that its *output behaved correctly* at
+  runtime. Root cause not yet isolated (a terser-then-obfuscator double-pass is
+  an unusual, higher-risk pipeline - most guides run one or the other, not both in
+  sequence). Opt back in explicitly with `npm run build:obfuscated` once a real
+  device has confirmed it doesn't reproduce the crash; do not wire it back into
+  the default `build` script (or CI) before that.
 
 All three distributions build from the same `dist/`, so all three inherit this.
 
 ## Layer 2 — No developer conveniences in a release
 
-- `drop_console` and `drop_debugger` in the Terser pass; `disableConsoleOutput`
-  in the obfuscator.
+- `drop_console` and `drop_debugger` in the Terser pass (always on); the
+  obfuscator's own separate `disableConsoleOutput` is part of the currently
+  disabled Layer 1 second pass above.
 - No source maps are emitted or packaged (`!**/*.map` in the electron-builder
   `files` list, `**/*.map` excluded from the APK packaging).
 - Electron: DevTools disabled (`devTools: false`), application menu removed,

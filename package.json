@@ -10,8 +10,8 @@
   "scripts": {
     "postinstall": "patch-package",
     "dev": "vite",
-    "build": "tsc -b && vite build && node scripts/obfuscate.mjs",
-    "build:raw": "tsc -b && vite build",
+    "build": "tsc -b && vite build",
+    "build:obfuscated": "tsc -b && vite build && node scripts/obfuscate.mjs",
     "preview": "vite preview",
     "lint": "eslint .",
     "test": "vitest run",
