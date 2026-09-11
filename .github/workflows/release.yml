@@ -334,6 +334,16 @@ jobs:
           tag_name: v${{ needs.create-release.outputs.version }}
           files: PROSM-Time-Web.zip
 
+      # releasedAt below is the SAME value (needs.test.outputs.releasedAt,
+      # via the RELEASED_AT env var) every builder job already baked into
+      # its own VITE_BUILD_RELEASED_AT - not a fresh `new Date()` call
+      # here, which would always land a few minutes later than what
+      # actually shipped in the binaries and defeat UpdateAvailableBanner
+      # .tsx's own "is the manifest newer than my own build" comparison.
+      # Kept as a YAML-level comment, not inside the embedded node -e
+      # script below - a comment with an apostrophe inside that
+      # single-quoted shell string once broke this exact step (real
+      # failure hit and fixed the same day this was written).
       - name: Write and commit the release manifest installed clients poll
         env:
           RELEASE_VERSION: ${{ needs.create-release.outputs.version }}
@@ -348,12 +358,6 @@ jobs:
             const fs = require("fs");
             const manifest = {
               version: process.env.RELEASE_VERSION,
-              // Same exact timestamp the test job generated and every
-              // builder job baked into its own VITE_BUILD_RELEASED_AT -
-              // not a fresh new Date() here, which would always be a
-              // few minutes later than what shipped in the actual
-              // binaries and defeat UpdateAvailableBanner.tsx's own
-              // "is the manifest newer than my own build" comparison.
               releasedAt: process.env.RELEASED_AT,
               downloads: {
                 windows: process.env.WINDOWS_URL,
