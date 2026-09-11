@@ -16,6 +16,11 @@ interface TableProps<T> {
   loading?: boolean;
   emptyTitle?: string;
   emptyMessage: string;
+  // § user-directed, 2026-09-11 - same opt-in illustration this Table
+  // already forwards to EmptyState under the hood; most tables across
+  // this app stay plain, a few genuinely welcoming empty states (no
+  // leave requests yet, no sites yet) get one.
+  emptyIllustrationSrc?: string;
   onRowClick?: (row: T) => void;
 }
 
@@ -28,7 +33,7 @@ interface TableProps<T> {
 // selection/density are PROSM Platform's own Table features this
 // product doesn't need yet - the shape (columns + render) is what's
 // shared, not every capability.
-export default function Table<T>({ columns, data, getRowId, loading = false, emptyTitle, emptyMessage, onRowClick }: TableProps<T>) {
+export default function Table<T>({ columns, data, getRowId, loading = false, emptyTitle, emptyMessage, emptyIllustrationSrc, onRowClick }: TableProps<T>) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.tableScroll}>
@@ -52,7 +57,7 @@ export default function Table<T>({ columns, data, getRowId, loading = false, emp
             ) : data.length === 0 ? (
               <tr>
                 <td className={styles.emptyCell} colSpan={columns.length}>
-                  <EmptyState title={emptyTitle} message={emptyMessage} />
+                  <EmptyState title={emptyTitle} message={emptyMessage} illustrationSrc={emptyIllustrationSrc} />
                 </td>
               </tr>
             ) : (

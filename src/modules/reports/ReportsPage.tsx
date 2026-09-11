@@ -22,6 +22,8 @@ import Input from "../../components/common/Input";
 import Select from "../../components/common/Select";
 import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
+import PageBanner from "../../components/common/PageBanner";
+import reportsBanner from "../../assets/illustration-reports-banner.png";
 import { REPORT_TYPE_ICONS } from "./reportTypeIcons";
 import styles from "./ReportsPage.module.css";
 
@@ -369,6 +371,7 @@ export default function ReportsPage() {
 
   return (
     <PageShell title={t("title")} subtitle={t("subtitle")}>
+      <PageBanner src={reportsBanner} />
       <Card>
         <div className={styles.typeGrid}>
           {visibleReportTypes.map((type) => {

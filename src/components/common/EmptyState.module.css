@@ -10,8 +10,9 @@
 }
 
 .illustration {
+  /* § user-directed, 2026-09-11 - "big and clear", not a small icon */
   width: 100%;
-  max-width: 220px;
+  max-width: 340px;
   height: auto;
   justify-self: center;
   margin-bottom: var(--space-2);

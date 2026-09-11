@@ -12,6 +12,8 @@ import StatusBadge from "../../components/common/StatusBadge";
 import Table, { type TableColumn } from "../../components/common/Table";
 import InviteEmployeeModal from "./InviteEmployeeModal";
 import ErrorText from "../../components/common/ErrorText";
+import PageBanner from "../../components/common/PageBanner";
+import peopleBanner from "../../assets/illustration-people-banner.png";
 
 // PROSM Time Implementation Master File V3.0, WP-04/§37 - "Employee
 // Management." Real org-member list (RLS-scoped) with an Invite action
@@ -81,6 +83,7 @@ export default function PeoplePage() {
       subtitle={t("subtitle")}
       actions={hasPermission("employees.create") ? <Button onClick={() => setInviteOpen(true)}>{t("invite.actionLabel")}</Button> : undefined}
     >
+      <PageBanner src={peopleBanner} />
       <ErrorText>{loadError}</ErrorText>
 
       <Table columns={columns} data={members} getRowId={(member) => member.id} loading={loading} emptyMessage="—" onRowClick={(member) => navigate(`/people/${member.id}`)} />
