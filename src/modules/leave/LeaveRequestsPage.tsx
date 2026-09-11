@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Navigate } from "react-router-dom";
 
+import { useAuth } from "../../core/context/AuthContext";
 import LeaveRepository, { type LeaveRequestRow, type LeaveBalanceEntry, type LeaveType } from "../../core/repositories/LeaveRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { formatDateOnly } from "../../core/utils/formatDate";
@@ -38,6 +40,7 @@ const STATUS_BADGE_KEY: Record<LeaveRequestRow["status"], string> = {
 // year, deliberately never a hard cap.
 export default function LeaveRequestsPage() {
   const { t, i18n } = useTranslation("leave");
+  const { profile } = useAuth();
 
   const today = new Date();
   const [requests, setRequests] = useState<LeaveRequestRow[]>([]);
@@ -117,6 +120,19 @@ export default function LeaveRequestsPage() {
         ) : null,
     },
   ];
+
+  // § user-directed, 2026-09-11 - "the Owner shouldn't have a Leave
+  // page at all - they're not requesting leave from anyone." Mirrors
+  // OrganizationSettingsPage's own Navigate-away guard, just inverted
+  // (hidden FROM the Owner instead of Owner-only); the sidebar item is
+  // already hidden for the Owner too (navigation.ts hiddenFromOwner),
+  // this is the direct-URL backstop. Placed after every hook above
+  // (not before, like OrganizationSettingsPage) - this page, unlike
+  // that one, has real useState/useEffect calls that must run
+  // unconditionally on every render.
+  if (profile?.isOwner) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   return (
     <PageShell title={t("title")} subtitle={t("subtitle")} bannerSrc={leaveIllustration}>

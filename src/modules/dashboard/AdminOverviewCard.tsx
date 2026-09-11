@@ -325,7 +325,13 @@ export default function AdminOverviewCard() {
               <li className={`${styles.attentionRow} ${pendingLeaveCount > 0 ? styles.attentionRowActive : ""}`}>
                 <CalendarClock size={18} className={styles.attentionIcon} />
                 <span className={styles.attentionLabel}>{t("overview.attentionLeave")}</span>
-                <button type="button" className={`${styles.attentionBadge} ${pendingLeaveCount > 0 ? styles.attentionBadgeActive : ""}`} onClick={() => navigate("/leave")}>
+                {/* § user-directed fix, 2026-09-11 - this used to send a
+                    manager to /leave (the self-service "my own leave"
+                    page), not the actual review queue - Manager
+                    Console's own leave section is the real destination,
+                    matching how the Timesheets row below already
+                    behaves. */}
+                <button type="button" className={`${styles.attentionBadge} ${pendingLeaveCount > 0 ? styles.attentionBadgeActive : ""}`} onClick={() => navigate("/manager")}>
                   {pendingLeaveCount}
                 </button>
               </li>

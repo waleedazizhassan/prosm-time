@@ -64,7 +64,10 @@ export default function Sidebar() {
   }, [mobileSidebarOpen, closeMobileSidebar]);
 
   const visibleItems = NAV_ITEMS.filter(
-    (item) => (item.requiredPermission === null || hasPermission(item.requiredPermission)) && (!item.ownerOnly || profile?.isOwner)
+    (item) =>
+      (item.requiredPermission === null || hasPermission(item.requiredPermission)) &&
+      (!item.ownerOnly || profile?.isOwner) &&
+      (!item.hiddenFromOwner || !profile?.isOwner)
   );
   // § live UX review, user-directed - group the same flat item list
   // under labeled sections (reference "Menu" screen's own grouping),

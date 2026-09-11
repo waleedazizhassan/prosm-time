@@ -28,6 +28,13 @@ export interface NavItem {
   // the way every other item above is - a dedicated boolean rather
   // than inventing a fake permission string for one nav item.
   ownerOnly?: boolean;
+  // § user-directed, 2026-09-11 - "the Owner shouldn't even have a
+  // Leave page - they're not requesting leave from anyone." The
+  // inverse of ownerOnly above: hidden specifically FROM the Owner,
+  // visible to everyone else who'd otherwise see it (here: every
+  // authenticated member, same as requiredPermission: null already
+  // means for this one item).
+  hiddenFromOwner?: boolean;
   // § live UX review, user-directed - "Menu" screen reference material
   // grouped its items under labeled sections rather than one flat
   // list. Pure presentational grouping of the exact same items/
@@ -105,7 +112,7 @@ export const NAV_ITEMS: NavItem[] = [
   // permission, same reasoning as Timesheets/Allowances above -
   // leave_requests' own RLS is what actually scopes what a supervisor
   // sees (Manager Console's own new review section).
-  { id: "leave", labelKey: "items.leave", path: "/leave", icon: CalendarDays, requiredPermission: null, section: "payroll" },
+  { id: "leave", labelKey: "items.leave", path: "/leave", icon: CalendarDays, requiredPermission: null, hiddenFromOwner: true, section: "payroll" },
   // § live UX review, user-directed - "a Reports Center where any PDF
   // can be pulled." No permission gate on the nav item itself - the
   // page's own report-type selector gates each report by the exact
