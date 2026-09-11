@@ -10,16 +10,17 @@ import styles from "./UpdateAvailableBanner.module.css";
 const SYNC_INTERVAL_MS = 6 * 60 * 60 * 1000; // matches InstallationStatusBanner's own established polling cadence
 
 // release.yml commits this manifest to public/latest-version.json on
-// every real release. Real, known limitation (user-directed 2026-09-10,
-// after GitHub Pages turned out to need a paid plan on this PRIVATE
-// repo and the user chose not to upgrade or add an external host):
-// there is currently no public, no-auth URL this file is actually
-// reachable at - a private repo's raw file/Release-asset URLs both
-// require GitHub authentication. Until the repo goes public or a real
-// host is added, this poll will simply never succeed (handled safely
-// below - a failed/404 fetch never shows a false "update available"),
-// so no banner will ever appear. Set VITE_UPDATE_MANIFEST_URL once a
-// real public URL exists to turn this on for real.
+// every real release, and (2026-09-11, once the repo went public for
+// unrelated download-URL reasons) sets VITE_UPDATE_MANIFEST_URL to its
+// raw.githubusercontent.com URL - now a real, no-auth-required public
+// URL. Real, known limitation this fixed: VITE_* values are baked in
+// at BUILD TIME, so this poll only works in a build compiled AFTER
+// that env var was added - an already-installed older binary has no
+// way to retroactively gain the ability to check for updates; only
+// once a user is running a build with this wired in will they start
+// seeing banners for whatever release comes after that one. A missing
+// env var (local dev, or if this is ever unset again) degrades safely
+// - a failed/404 fetch never shows a false "update available".
 const MANIFEST_URL = import.meta.env.VITE_UPDATE_MANIFEST_URL ?? "";
 
 interface ReleaseManifest {
