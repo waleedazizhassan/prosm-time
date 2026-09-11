@@ -46,11 +46,13 @@ export const NAV_ITEMS: NavItem[] = [
   // clock-in widget on their own Dashboard (point 5, 2026-09-11: "the
   // Owner and Manager shouldn't have the clock-in widget on the
   // Dashboard the way an Employee does"); this is the sidebar entry
-  // that takes them to it instead. Open to every authenticated member
-  // (same reasoning as Attendance Record below) - an Employee simply
-  // has a second way to reach the exact same action they already have
-  // embedded on their own Dashboard.
-  { id: "clockIn", labelKey: "items.clockIn", path: "/clock-in", icon: LogIn, requiredPermission: null, section: "attendance" },
+  // that takes them to it instead. § correction, same day - the user
+  // explicitly meant this for the Owner/Manager ONLY, not a redundant
+  // second entry for an Employee who already has the widget on their
+  // own Dashboard. "attendance.view" is exactly the Owner+Manager
+  // audience already established for Manager Console below (same
+  // permission key, same real audience per the multirole audit).
+  { id: "clockIn", labelKey: "items.clockIn", path: "/clock-in", icon: LogIn, requiredPermission: "attendance.view", section: "attendance" },
   { id: "manager", labelKey: "items.manager", path: "/manager", icon: LayoutGrid, requiredPermission: "attendance.view", section: "attendance" },
   // § live UX review, user-directed - "a direct sidebar button to view
   // employees' clock-in/clock-out record." No permission gate, same
