@@ -18,6 +18,7 @@ import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
 import Textarea from "../../components/common/Textarea";
 import ErrorText from "../../components/common/ErrorText";
+import emergencyBanner from "../../assets/illustration-emergency-banner.png";
 
 const ALL_EMPLOYEES = "";
 
@@ -177,7 +178,7 @@ export default function EmergencyLogPage() {
   ];
 
   return (
-    <PageShell title={t("title")} subtitle={t("subtitle")}>
+    <PageShell title={t("title")} subtitle={t("subtitle")} bannerSrc={emergencyBanner}>
       <Card title={t("filters.title")}>
         <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
           <Input label={t("filters.fromLabel")} name="emergencyLogFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />

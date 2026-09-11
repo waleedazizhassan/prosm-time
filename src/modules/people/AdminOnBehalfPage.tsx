@@ -9,6 +9,7 @@ import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
 import Select from "../../components/common/Select";
 import AdminAttendanceCard from "./AdminAttendanceCard";
+import onBehalfBanner from "../../assets/illustration-onbehalf-banner.png";
 
 // PROSM Time - § user-directed follow-up: Administrative Clock In/Out
 // (On Behalf Of) already existed as a real, working card
@@ -42,7 +43,7 @@ export default function AdminOnBehalfPage() {
   const subject = members.find((member) => member.id === subjectId) ?? null;
 
   return (
-    <PageShell title={t("onBehalf.title")} subtitle={t("onBehalf.subtitle")}>
+    <PageShell title={t("onBehalf.title")} subtitle={t("onBehalf.subtitle")} bannerSrc={onBehalfBanner}>
       <Card title={t("onBehalf.pickEmployeeTitle")}>
         <Select
           label={t("onBehalf.employeeLabel")}

@@ -27,6 +27,7 @@ import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
 import FormGrid from "../../components/common/FormGrid";
 import { formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
+import timesheetsBanner from "../../assets/illustration-timesheets-banner.png";
 
 function toDateInput(date: Date): string {
   return date.toISOString().slice(0, 10);
@@ -294,7 +295,7 @@ export default function TimesheetsPage() {
   const canRequestCorrectionDetail = detailTimesheet ? isOwnDetail && detailTimesheet.status === "approved" : false;
 
   return (
-    <PageShell title={t("title")} subtitle={t("subtitle")}>
+    <PageShell title={t("title")} subtitle={t("subtitle")} bannerSrc={timesheetsBanner}>
       <ErrorText>{error}</ErrorText>
 
       {canGenerate ? (

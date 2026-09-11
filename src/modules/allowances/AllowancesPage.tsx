@@ -19,6 +19,7 @@ import Button from "../../components/common/Button";
 import Textarea from "../../components/common/Textarea";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
 import { buildAllowancesPdf } from "./allowancesPdf";
+import allowancesBanner from "../../assets/illustration-allowances-banner.png";
 
 const ALL_EMPLOYEES = "";
 
@@ -263,6 +264,7 @@ export default function AllowancesPage() {
     <PageShell
       title={t("title")}
       subtitle={t("subtitle")}
+      bannerSrc={allowancesBanner}
       actions={
         <Button onClick={handleExportPdf} loading={exportingPdf} disabled={filteredEntries.length === 0}>
           {t("exportPdfAction")}
