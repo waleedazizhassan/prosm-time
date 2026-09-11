@@ -17,7 +17,6 @@ import Button from "../../components/common/Button";
 import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
-import PageBanner from "../../components/common/PageBanner";
 import shiftsBanner from "../../assets/illustration-shifts-banner.png";
 
 function isoDate(date: Date): string {
@@ -191,8 +190,7 @@ export default function SchedulePage() {
   ];
 
   return (
-    <PageShell title={t("title")} subtitle={t("subtitle")}>
-      <PageBanner src={shiftsBanner} />
+    <PageShell title={t("title")} subtitle={t("subtitle")} bannerSrc={shiftsBanner}>
       <Card title={t("myShiftsTitle")}>
         <ErrorText>{loadError}</ErrorText>
         <Table columns={myColumns} data={myShifts} getRowId={(row) => row.id} loading={loading} emptyMessage={t("emptyMine")} />

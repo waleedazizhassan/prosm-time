@@ -14,7 +14,6 @@ import Button from "../../components/common/Button";
 import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
-import PageBanner from "../../components/common/PageBanner";
 import leaveIllustration from "../../assets/illustration-leave-scene.png";
 
 const LEAVE_TYPES: LeaveType[] = ["annual", "sick", "unpaid", "emergency", "other"];
@@ -120,8 +119,7 @@ export default function LeaveRequestsPage() {
   ];
 
   return (
-    <PageShell title={t("title")} subtitle={t("subtitle")}>
-      <PageBanner src={leaveIllustration} />
+    <PageShell title={t("title")} subtitle={t("subtitle")} bannerSrc={leaveIllustration}>
       <Card title={t("balanceTitle", { year: balanceYear })}>
         <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
           {balances.map((entry) => (

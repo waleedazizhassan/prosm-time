@@ -10,6 +10,11 @@ interface PageShellProps {
   // away entirely - every other screen still passes a real title.
   title?: string;
   subtitle?: string;
+  // § user-directed, 2026-09-11 - page illustrations used to sit as a
+  // large stacked block below the header, leaving a big gap under the
+  // title/subtitle. Moved into the header row itself, small and right
+  // next to (opposite) the title/subtitle text, closing that gap.
+  bannerSrc?: string;
   actions?: ReactNode;
   wide?: boolean;
   // § live UX review, user-directed - "shrink or remove the 'Dashboard'
@@ -23,7 +28,7 @@ interface PageShellProps {
 // exactly (§ visual consistency pass): title + subtitle + actions +
 // content well, so every screen shares one header/spacing pattern
 // instead of reinventing it.
-export default function PageShell({ title, subtitle, actions, wide = false, compact = false, children }: PageShellProps) {
+export default function PageShell({ title, subtitle, bannerSrc, actions, wide = false, compact = false, children }: PageShellProps) {
   return (
     <div className={[styles.container, wide ? styles.wide : ""].filter(Boolean).join(" ")}>
       {title ? (
@@ -32,7 +37,12 @@ export default function PageShell({ title, subtitle, actions, wide = false, comp
             <h1 className={[styles.title, compact ? styles.titleCompact : ""].filter(Boolean).join(" ")}>{title}</h1>
             {subtitle ? <p className={styles.subtitle}>{subtitle}</p> : null}
           </div>
-          {actions ? <div className={styles.actions}>{actions}</div> : null}
+          {bannerSrc || actions ? (
+            <div className={styles.headerExtras}>
+              {bannerSrc ? <img src={bannerSrc} alt="" className={styles.headerBanner} /> : null}
+              {actions ? <div className={styles.actions}>{actions}</div> : null}
+            </div>
+          ) : null}
         </div>
       ) : null}
       <div className={styles.content}>{children}</div>

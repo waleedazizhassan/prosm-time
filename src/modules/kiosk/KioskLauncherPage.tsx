@@ -10,7 +10,6 @@ import Button from "../../components/common/Button";
 import LoadingState from "../../components/common/LoadingState";
 import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
-import PageBanner from "../../components/common/PageBanner";
 import checkInRemoteIllustration from "../../assets/illustration-checkin-remote.png";
 import kioskBanner from "../../assets/illustration-kiosk-banner.png";
 
@@ -35,8 +34,7 @@ export default function KioskLauncherPage() {
   }, []);
 
   return (
-    <PageShell title={t("title")} subtitle={t("subtitle")}>
-      <PageBanner src={kioskBanner} />
+    <PageShell title={t("title")} subtitle={t("subtitle")} bannerSrc={kioskBanner}>
       <Card title={t("launcher.title")}>
         {loading ? (
           <LoadingState />

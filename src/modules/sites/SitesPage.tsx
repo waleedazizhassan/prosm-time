@@ -13,7 +13,6 @@ import StatusBadge from "../../components/common/StatusBadge";
 import Table, { type TableColumn } from "../../components/common/Table";
 import SiteFormModal from "./SiteFormModal";
 import ErrorText from "../../components/common/ErrorText";
-import PageBanner from "../../components/common/PageBanner";
 import sitesBanner from "../../assets/illustration-sites-banner.png";
 
 // § live UX review, user-directed - "give it a real proper home, but
@@ -93,9 +92,9 @@ export default function SitesPage() {
     <PageShell
       title={t("title")}
       subtitle={t("subtitle")}
+      bannerSrc={sitesBanner}
       actions={profile?.isOwner ? <Button onClick={() => setCreateOpen(true)}>{t("addAction")}</Button> : undefined}
     >
-      <PageBanner src={sitesBanner} />
       {profile?.isOwner ? <NoSiteRadiusSummary /> : null}
 
       <ErrorText>{loadError}</ErrorText>
