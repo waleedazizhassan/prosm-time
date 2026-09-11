@@ -46,14 +46,22 @@ android {
     }
     buildTypes {
         release {
-            // Release hardening: R8 renames and strips the compiled
-            // Java, and unused resources are dropped. proguard-rules.pro
-            // keeps every Capacitor/WebView entry point, so app
-            // behaviour is unchanged.
-            minifyEnabled true
-            shrinkResources true
+            // § real gap found 2026-09-11: a real signed release build
+            // with minifyEnabled/shrinkResources on crashed immediately
+            // on a real device (React ErrorBoundary, "Something went
+            // wrong") even AFTER the separate JS-obfuscation pass was
+            // already ruled out and disabled - this native-layer R8
+            // shrink/strip was the other piece of today's hardening
+            // that had never actually been runtime-tested on a real
+            // device before it first shipped signed. proguard-rules.pro
+            // is meant to keep every Capacitor/WebView entry point, but
+            // evidently doesn't cover something real. Disabled for now
+            // (real signing is untouched and stays on - that part is
+            // proven safe). Re-enable only after a real device confirms
+            // it no longer crashes with R8 on.
+            minifyEnabled false
+            shrinkResources false
             debuggable false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             if (hasSigningConfig) {
                 signingConfig signingConfigs.release
             }

@@ -54,21 +54,31 @@ All three distributions build from the same `dist/`, so all three inherit this.
 
 ## Layer 3 — Android (APK) hardening
 
-- `minifyEnabled true` + `shrinkResources true` with `proguard-android-optimize`;
-  `proguard-rules.pro` keeps the whole Capacitor bridge, every `@PluginMethod`
-  and `@JavascriptInterface`, and `net.prosm.time.**` — behaviour is unchanged.
-- `android.util.Log` v/d/i/w calls stripped from the release binary.
-- `debuggable false` on release.
+- `minifyEnabled true` + `shrinkResources true` with R8/ProGuard is **currently
+  disabled** (`minifyEnabled false` on the `release` build type too, as of
+  2026-09-11) — real gap found the same day the JS obfuscation pass was also
+  disabled: a real signed release build crashed immediately on a real device
+  even after that JS-side pass was already ruled out, and R8/ProGuard on the
+  native Capacitor bridge layer was the only other piece of today's hardening
+  never runtime-tested on a real device before it shipped. `proguard-rules.pro`
+  is still in the repo (meant to keep the whole Capacitor bridge, every
+  `@PluginMethod`/`@JavascriptInterface`, and `net.prosm.time.**`) but evidently
+  doesn't cover something real yet - do not re-enable `minifyEnabled`/
+  `shrinkResources` on `release` before a real device confirms it no longer
+  crashes with R8 on.
+- `android.util.Log` v/d/i/w calls would be stripped from the release binary
+  once R8 is back on (the rule is in `proguard-rules.pro`, just not applied
+  while R8 is off).
+- `debuggable false` on release (unaffected by the above, still real).
 - `allowBackup="false"` + `data_extraction_rules.xml`: session tokens and cached
   evidence cannot be pulled out of a cloud backup or device-to-device transfer.
 - `usesCleartextTraffic="false"` + `network_security_config.xml`: HTTPS only, and
   user-installed CAs are not trusted in release — a proxy tool cannot casually
   record the API traffic to reconstruct the backend contract.
 - The release APK is signed with a real local upload keystore (see "Signing"
-  below) - the `assembleDebug` builds this session used earlier today were
-  unsigned and did not carry the ProGuard/R8 protection above at all (`debug`
-  build type keeps `minifyEnabled false` deliberately, so local development
-  stays fast and inspectable) - only `assembleRelease` carries this layer.
+  below) - this part is proven working and unaffected by the R8 issue above.
+  The `assembleDebug` builds this session used earlier were unsigned; only
+  `assembleRelease` is signed.
 
 ## Layer 4 — The real protection: nothing valuable in the client
 
