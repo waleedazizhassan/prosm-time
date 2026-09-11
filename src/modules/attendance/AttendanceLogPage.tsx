@@ -17,6 +17,8 @@ import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
+import PageBanner from "../../components/common/PageBanner";
+import attendanceBanner from "../../assets/illustration-attendance-banner.png";
 import { formatTimeOnly } from "../../core/utils/formatDate";
 import { buildAttendanceLogPdf } from "./attendanceLogPdf";
 
@@ -281,6 +283,7 @@ export default function AttendanceLogPage() {
         </Button>
       }
     >
+      <PageBanner src={attendanceBanner} />
       <Card title={t("filters.title")}>
         <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
           <Input label={t("filters.fromLabel")} name="attendanceLogFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />

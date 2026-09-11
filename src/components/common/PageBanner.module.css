@@ -1,22 +1,26 @@
-/* § user-directed, 2026-09-11 - "shrink it a bit so the whole image
-   shows" - the earlier object-fit:cover treatment filled the box
-   width and cropped whatever didn't fit vertically. Shown at a real,
-   smaller size instead so nothing is cut off, centered on a neutral
-   fill so the surrounding space reads as intentional. */
+/* § user-directed, 2026-09-11 - "drop the card idea, let it float
+   free, size it to fit the page nicely." No box/shadow/background -
+   the illustration sits directly on the page, a soft mask fading its
+   bottom edge into the page background instead of a hard rectangular
+   cutoff, so it reads as part of the page rather than a framed photo. */
 .banner {
   width: 100%;
-  margin-bottom: var(--space-4);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
   display: flex;
   justify-content: center;
-  background: var(--surface-hover);
+  margin-bottom: var(--space-5);
 }
 
 .image {
   display: block;
   width: 100%;
-  max-width: 480px;
+  max-width: 420px;
   height: auto;
+  -webkit-mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
+}
+
+@media (max-width: 640px) {
+  .image {
+    max-width: 280px;
+  }
 }
