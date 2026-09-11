@@ -1,23 +1,22 @@
+/* § user-directed, 2026-09-11 - "shrink it a bit so the whole image
+   shows" - the earlier object-fit:cover treatment filled the box
+   width and cropped whatever didn't fit vertically. Shown at a real,
+   smaller size instead so nothing is cut off, centered on a neutral
+   fill so the surrounding space reads as intentional. */
 .banner {
   width: 100%;
   margin-bottom: var(--space-4);
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
-  line-height: 0;
+  display: flex;
+  justify-content: center;
+  background: var(--surface-hover);
 }
 
 .image {
   display: block;
   width: 100%;
+  max-width: 480px;
   height: auto;
-  max-height: 320px;
-  object-fit: cover;
-  object-position: center 20%;
-}
-
-@media (max-width: 640px) {
-  .image {
-    max-height: 180px;
-  }
 }
