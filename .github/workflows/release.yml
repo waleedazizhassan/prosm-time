@@ -13,15 +13,23 @@ name: PROSM Time Release
 # Web is a downloadable zip, not a live hosted URL: GitHub Pages
 # requires a paid plan on a PRIVATE repository (confirmed live -
 # "Your current plan does not support GitHub Pages for this
-# repository", HTTP 422) - the user chose to keep the repo private and
-# distribute the web build the same way as the APK/EXE rather than pay
-# for Pages or add an external host. Real, known limitation this
-# carries: GitHub Release assets on a PRIVATE repo require the
-# downloader to be authenticated with real access to this repo -
-# there is currently no way for an end customer with no GitHub access
-# to download any of the three artifacts. This applies equally to the
-# APK/EXE, not just the web zip - flagged for the user's own future
-# decision, not something this workflow can route around on its own.
+# repository", HTTP 422). Rather than pay for Pages or add an external
+# host, the repo itself went PUBLIC instead (user-directed, 2026-09-11)
+# - a public repo's Release assets are downloadable by anyone with a
+# plain browser, no GitHub account or login required, which was the
+# user's actual real requirement all along. The web build is still
+# distributed the same way as the APK/EXE (a zip attached to the
+# Release) rather than a live hosted URL, since Pages itself still
+# needs a paid plan regardless of visibility.
+#
+# Every artifact is uploaded under a FIXED filename (PROSM-Time.apk /
+# PROSM-Time-Setup.exe / PROSM-Time-Web.zip), not one that embeds the
+# version number, specifically so prosm.net's own download buttons can
+# point at GitHub's own stable "always the newest release" URL pattern
+# once and never need editing again on any future release:
+#   https://github.com/<owner>/prosm-time/releases/latest/download/PROSM-Time.apk
+#   https://github.com/<owner>/prosm-time/releases/latest/download/PROSM-Time-Setup.exe
+#   https://github.com/<owner>/prosm-time/releases/latest/download/PROSM-Time-Web.zip
 #
 # GitHub is the build/distribution source only - installed clients
 # never update themselves from source, they read the published
@@ -150,14 +158,21 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleRelease --no-daemon
 
-      - name: Locate the built APK
+      - name: Locate the built APK and give it a fixed, version-less name
+        # Fixed filename (not e.g. "app-release.apk") so prosm.net's own
+        # download button can point at GitHub's stable
+        # releases/latest/download/PROSM-Time.apk URL forever, across
+        # every future version, with zero manual updates on the site's
+        # side - see this workflow's own top comment.
         id: apk
         run: |
           set -e
           found=$(find android/app/build/outputs/apk/release -name "*.apk" | head -1)
           if [ -z "$found" ]; then echo "No APK produced."; exit 1; fi
-          echo "path=$found" >> "$GITHUB_OUTPUT"
-          echo "name=$(basename "$found")" >> "$GITHUB_OUTPUT"
+          fixed="$(dirname "$found")/PROSM-Time.apk"
+          mv "$found" "$fixed"
+          echo "path=$fixed" >> "$GITHUB_OUTPUT"
+          echo "name=PROSM-Time.apk" >> "$GITHUB_OUTPUT"
 
       - uses: actions/upload-artifact@v4
         with:
@@ -252,21 +267,24 @@ jobs:
       - run: npm ci
       - run: npm run build
 
+      # Fixed filename (not e.g. "prosm-time-web-v2.3.2.zip") - same
+      # reasoning as the APK's own fixed name above, so
+      # releases/latest/download/PROSM-Time-Web.zip never changes.
       - name: Zip the web build
-        run: cd dist && zip -r ../prosm-time-web-v${{ needs.create-release.outputs.version }}.zip .
+        run: cd dist && zip -r ../PROSM-Time-Web.zip .
 
       - name: Attach the web zip to the existing release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ needs.create-release.outputs.version }}
-          files: prosm-time-web-v${{ needs.create-release.outputs.version }}.zip
+          files: PROSM-Time-Web.zip
 
       - name: Write and commit the release manifest installed clients poll
         env:
           RELEASE_VERSION: ${{ needs.create-release.outputs.version }}
           ANDROID_URL: ${{ needs.create-release.outputs.android_url }}
           WINDOWS_URL: ${{ needs.create-release.outputs.windows_url }}
-          WEB_URL: https://github.com/${{ github.repository }}/releases/download/v${{ needs.create-release.outputs.version }}/prosm-time-web-v${{ needs.create-release.outputs.version }}.zip
+          WEB_URL: https://github.com/${{ github.repository }}/releases/download/v${{ needs.create-release.outputs.version }}/PROSM-Time-Web.zip
         run: |
           set -e
           base="${{ github.server_url }}/${{ github.repository }}/releases/download/v${RELEASE_VERSION}"
