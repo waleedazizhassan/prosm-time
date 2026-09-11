@@ -24,7 +24,17 @@ import serve from "electron-serve";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const loadURL = serve({ directory: path.join(__dirname, "..", "dist") });
 
-const ALLOW_DEVTOOLS = !app.isPackaged && process.env.PROSM_TIME_DEVTOOLS === "1";
+// § TEMPORARY diagnostic build, 2026-09-11 - a real user is hitting a
+// persistent crash (React ErrorBoundary) in the packaged app that
+// hasn't reproduced in any local/source-run test yet, on any of 3
+// prior hardening-related hypotheses (all ruled out - obfuscation,
+// R8/ProGuard, asar were each disabled and the crash still happens).
+// DevTools is forced open here, even packaged, specifically to capture
+// the real console error directly from the user's own machine. This
+// must be reverted once the real error is captured - it is NOT meant
+// to ship long-term.
+const ALLOW_DEVTOOLS = true;
+const FORCE_OPEN_DEVTOOLS_FOR_DIAGNOSIS = true;
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -95,6 +105,12 @@ function createWindow() {
   // Belt and braces: even a programmatic openDevTools() closes again.
   if (!ALLOW_DEVTOOLS) {
     win.webContents.on("devtools-opened", () => win.webContents.closeDevTools());
+  }
+
+  if (FORCE_OPEN_DEVTOOLS_FOR_DIAGNOSIS) {
+    win.webContents.on("did-finish-load", () => {
+      win.webContents.openDevTools({ mode: "bottom" });
+    });
   }
 
   loadURL(win);
