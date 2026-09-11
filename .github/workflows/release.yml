@@ -114,6 +114,17 @@ jobs:
   test:
     name: Type-check and test
     runs-on: ubuntu-latest
+    outputs:
+      # § real bug fix, 2026-09-11 - one canonical timestamp for this
+      # entire workflow run, generated once here and threaded (as
+      # VITE_BUILD_RELEASED_AT) into every builder job's own `npm run
+      # build` below AND into deploy-web's public/latest-version.json
+      # write - guaranteeing a running client's own baked-in value and
+      # the manifest it polls always agree for the release that
+      # produced it. See UpdateAvailableBanner.tsx's own header comment
+      # for why this replaced a package.json version-number comparison
+      # (the version field never actually changes release to release).
+      releasedAt: ${{ steps.timestamp.outputs.releasedAt }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -121,6 +132,8 @@ jobs:
       - run: npm ci
       - run: npx tsc -b
       - run: npx vitest run
+      - id: timestamp
+        run: echo "releasedAt=$(node -e 'console.log(new Date().toISOString())')" >> "$GITHUB_OUTPUT"
 
   android:
     name: Build Android APK (release, signed)
@@ -152,6 +165,8 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+        env:
+          VITE_BUILD_RELEASED_AT: ${{ needs.test.outputs.releasedAt }}
       - run: npx cap sync android
 
       - name: Sync app version into the Android project
@@ -225,6 +240,8 @@ jobs:
         with: { node-version: "22", cache: npm }
       - run: npm ci
       - run: npm run build
+        env:
+          VITE_BUILD_RELEASED_AT: ${{ needs.test.outputs.releasedAt }}
       # electron-builder auto-detects CI and implicitly tries to publish
       # (needs a GH_TOKEN it doesn't have here) unless told not to - the
       # "Publish GitHub Release" job handles uploading the built .exe
@@ -294,7 +311,7 @@ jobs:
     # remaining real limitation this creates (private-repo Release
     # assets need a GitHub-authenticated download, same caveat that
     # already applies to the APK/EXE).
-    needs: create-release
+    needs: [create-release, test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -302,6 +319,8 @@ jobs:
         with: { node-version: "22", cache: npm }
       - run: npm ci
       - run: npm run build
+        env:
+          VITE_BUILD_RELEASED_AT: ${{ needs.test.outputs.releasedAt }}
 
       # Fixed filename (not e.g. "prosm-time-web-v2.3.2.zip") - same
       # reasoning as the APK's own fixed name above, so
@@ -318,6 +337,7 @@ jobs:
       - name: Write and commit the release manifest installed clients poll
         env:
           RELEASE_VERSION: ${{ needs.create-release.outputs.version }}
+          RELEASED_AT: ${{ needs.test.outputs.releasedAt }}
           ANDROID_URL: ${{ needs.create-release.outputs.android_url }}
           WINDOWS_URL: ${{ needs.create-release.outputs.windows_url }}
           WEB_URL: https://github.com/${{ github.repository }}/releases/download/v${{ needs.create-release.outputs.version }}/PROSM-Time-Web.zip
@@ -328,7 +348,13 @@ jobs:
             const fs = require("fs");
             const manifest = {
               version: process.env.RELEASE_VERSION,
-              releasedAt: new Date().toISOString(),
+              // Same exact timestamp the test job generated and every
+              // builder job baked into its own VITE_BUILD_RELEASED_AT -
+              // not a fresh new Date() here, which would always be a
+              // few minutes later than what shipped in the actual
+              // binaries and defeat UpdateAvailableBanner.tsx's own
+              // "is the manifest newer than my own build" comparison.
+              releasedAt: process.env.RELEASED_AT,
               downloads: {
                 windows: process.env.WINDOWS_URL,
                 android: process.env.ANDROID_URL,

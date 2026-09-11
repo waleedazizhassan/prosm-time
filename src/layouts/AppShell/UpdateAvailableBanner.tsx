@@ -3,8 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Capacitor } from "@capacitor/core";
 import { Download } from "lucide-react";
 
-import { APP_VERSION } from "../../core/appVersion";
-import { isVersionNewer } from "../../core/utils/compareVersions";
+import { BUILD_RELEASED_AT } from "../../core/buildInfo";
 import styles from "./UpdateAvailableBanner.module.css";
 
 const SYNC_INTERVAL_MS = 6 * 60 * 60 * 1000; // matches InstallationStatusBanner's own established polling cadence
@@ -22,6 +21,19 @@ const SYNC_INTERVAL_MS = 6 * 60 * 60 * 1000; // matches InstallationStatusBanner
 // env var (local dev, or if this is ever unset again) degrades safely
 // - a failed/404 fetch never shows a false "update available".
 const MANIFEST_URL = import.meta.env.VITE_UPDATE_MANIFEST_URL ?? "";
+
+// § real bug found same day, right after the fix above shipped: this
+// used to compare package.json's own semver `version` field - which
+// this repo's release process never actually bumps automatically (it
+// stays whatever the repo owner last hand-edited it to, across many
+// real releases in a row) - so "is the manifest's version newer than
+// mine" was always false even minutes after a genuinely new build
+// went out. `releasedAt` is the value that's actually guaranteed to
+// change on every release (release.yml generates a fresh timestamp
+// each run) - compare THAT instead, exactly the same "poll releasedAt,
+// not the static version string" fix already given to prosm.net's own
+// Lovable-hosted freshness check earlier this session, just not yet
+// applied here in the app itself until now.
 
 interface ReleaseManifest {
   version: string;
@@ -56,7 +68,12 @@ export default function UpdateAvailableBanner() {
         const response = await fetch(MANIFEST_URL, { cache: "no-store" });
         if (!response.ok) return;
         const data: ReleaseManifest = await response.json();
-        if (!cancelled && data?.version && isVersionNewer(data.version, APP_VERSION)) {
+        if (
+          !cancelled &&
+          data?.releasedAt &&
+          BUILD_RELEASED_AT &&
+          new Date(data.releasedAt).getTime() > new Date(BUILD_RELEASED_AT).getTime()
+        ) {
           setManifest(data);
         }
       } catch {
