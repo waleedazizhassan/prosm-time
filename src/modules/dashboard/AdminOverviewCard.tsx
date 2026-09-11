@@ -17,6 +17,7 @@ import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import EmptyState from "../../components/common/EmptyState";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
+import greetingIllustration from "../../assets/illustration-dashboard-greeting.png";
 import styles from "./AdminOverviewCard.module.css";
 
 type Drilldown = "sites" | "present" | "employees" | "pending" | "leaveToday" | "onBreak" | null;
@@ -266,6 +267,13 @@ export default function AdminOverviewCard() {
 
   return (
     <Card>
+      <div className={styles.greetingBanner}>
+        <div className={styles.greetingText}>
+          <span className={styles.greetingEyebrow}>{t(profile?.isOwner ? "overview.greetingEyebrowOwner" : "overview.greetingEyebrowManager")}</span>
+          <h2 className={styles.greetingTitle}>{t("overview.greetingTitle", { name: profile?.fullName })}</h2>
+        </div>
+        <img src={greetingIllustration} alt="" className={styles.greetingIllustration} />
+      </div>
       <div className={styles.header}>
         <span className={styles.eyebrowGroup}>
           <span className={styles.eyebrow}>{t(profile?.isOwner ? "overview.title" : "overview.titleScoped")}</span>

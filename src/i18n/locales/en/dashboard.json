@@ -7,6 +7,9 @@
     "subtitle": "Record your own attendance here."
   },
   "overview": {
+    "greetingEyebrowOwner": "Organization overview",
+    "greetingEyebrowManager": "Your sites overview",
+    "greetingTitle": "Welcome back, {{name}}",
     "title": "Organization Overview",
     "titleScoped": "Overview of My Sites",
     "scopeOwner": "Organization-wide",

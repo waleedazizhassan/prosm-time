@@ -7,6 +7,9 @@
     "subtitle": "Erfassen Sie hier Ihre eigene Anwesenheit."
   },
   "overview": {
+    "greetingEyebrowOwner": "Organisationsübersicht",
+    "greetingEyebrowManager": "Übersicht Ihrer Standorte",
+    "greetingTitle": "Willkommen zurück, {{name}}",
     "title": "Organisationsübersicht",
     "titleScoped": "Übersicht meiner Standorte",
     "scopeOwner": "Organisationsweit",

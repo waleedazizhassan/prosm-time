@@ -7,6 +7,9 @@
     "subtitle": "Registra qui la tua presenza."
   },
   "overview": {
+    "greetingEyebrowOwner": "Panoramica organizzazione",
+    "greetingEyebrowManager": "Panoramica dei tuoi siti",
+    "greetingTitle": "Bentornato, {{name}}",
     "title": "Panoramica organizzazione",
     "titleScoped": "Panoramica delle mie sedi",
     "scopeOwner": "A livello di organizzazione",

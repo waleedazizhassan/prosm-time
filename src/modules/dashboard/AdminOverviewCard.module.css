@@ -1,3 +1,56 @@
+/* § user-directed, 2026-09-11 - a big, clear illustrated greeting atop
+   the Owner/Manager overview (their own KPI dashboard, not the same
+   greeting already shown to everyone in PageShell's subtitle above
+   this card). Kept to a fixed-height strip so it introduces the card
+   without competing with the real data below it. */
+.greetingBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+
+  margin-bottom: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--palette-navy-900) 0%, var(--palette-blue-700) 100%);
+  overflow: hidden;
+}
+
+.greetingText {
+  display: grid;
+  gap: var(--space-1);
+  z-index: 1;
+}
+
+.greetingEyebrow {
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--palette-slate-300);
+}
+
+.greetingTitle {
+  margin: 0;
+  font-size: var(--font-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--palette-white);
+}
+
+.greetingIllustration {
+  flex-shrink: 0;
+  width: 180px;
+  height: auto;
+  margin-block: calc(var(--space-4) * -1);
+}
+
+@media (max-width: 640px) {
+  .greetingIllustration {
+    display: none;
+  }
+}
+
 .header {
   display: flex;
   align-items: center;

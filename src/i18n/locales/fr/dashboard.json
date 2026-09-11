@@ -7,6 +7,9 @@
     "subtitle": "Enregistrez votre propre présence ici."
   },
   "overview": {
+    "greetingEyebrowOwner": "Aperçu de l'organisation",
+    "greetingEyebrowManager": "Aperçu de vos sites",
+    "greetingTitle": "Bon retour, {{name}}",
     "title": "Aperçu de l'organisation",
     "titleScoped": "Aperçu de mes sites",
     "scopeOwner": "À l'échelle de l'organisation",

@@ -7,6 +7,9 @@
     "subtitle": "سجّل حضورك وانصرافك من هنا."
   },
   "overview": {
+    "greetingEyebrowOwner": "نظرة عامة على المؤسسة",
+    "greetingEyebrowManager": "نظرة عامة على مواقعك",
+    "greetingTitle": "أهلًا بيك، {{name}}",
     "title": "نظرة عامة على المؤسسة",
     "titleScoped": "نظرة عامة على مواقعي",
     "scopeOwner": "على مستوى المؤسسة",
