@@ -5,6 +5,7 @@
    without competing with the real data below it. */
 .greetingBanner {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
@@ -21,6 +22,8 @@
   display: grid;
   gap: var(--space-1);
   z-index: 1;
+  flex: 1;
+  min-width: 0;
 }
 
 .greetingEyebrow {
@@ -45,9 +48,14 @@
   margin-block: calc(var(--space-4) * -1);
 }
 
+/* § user-directed correction, 2026-09-11 - live testing on a real
+   phone (the APK) showed the greeting card with no image at all: this
+   used to hide the illustration entirely below 640px. Shrunk instead
+   of hidden - the user wants it visible on mobile too. */
 @media (max-width: 640px) {
   .greetingIllustration {
-    display: none;
+    width: 96px;
+    margin-block: 0;
   }
 }
 
