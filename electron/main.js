@@ -24,17 +24,12 @@ import serve from "electron-serve";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const loadURL = serve({ directory: path.join(__dirname, "..", "dist") });
 
-// § TEMPORARY diagnostic build, 2026-09-11 - a real user is hitting a
-// persistent crash (React ErrorBoundary) in the packaged app that
-// hasn't reproduced in any local/source-run test yet, on any of 3
-// prior hardening-related hypotheses (all ruled out - obfuscation,
-// R8/ProGuard, asar were each disabled and the crash still happens).
-// DevTools is forced open here, even packaged, specifically to capture
-// the real console error directly from the user's own machine. This
-// must be reverted once the real error is captured - it is NOT meant
-// to ship long-term.
-const ALLOW_DEVTOOLS = true;
-const FORCE_OPEN_DEVTOOLS_FOR_DIAGNOSIS = true;
+const ALLOW_DEVTOOLS = !app.isPackaged && process.env.PROSM_TIME_DEVTOOLS === "1";
+// The 2026-09-11 diagnostic build forced DevTools open to capture a
+// real console error - found it (a missing CI env var, unrelated to
+// any of this file's own hardening), fixed at the source, reverted
+// here.
+const FORCE_OPEN_DEVTOOLS_FOR_DIAGNOSIS = false;
 
 function createWindow() {
   const win = new BrowserWindow({

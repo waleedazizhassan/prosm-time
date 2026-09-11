@@ -73,6 +73,28 @@ concurrency:
 permissions:
   contents: write
 
+# § real root cause found 2026-09-11: every CI-built artifact (web,
+# Android, Windows - all three) has been crashing immediately on
+# launch ("Missing Supabase environment variables", thrown from
+# getSupabaseClient()) since the day this workflow was first created.
+# Vite bakes import.meta.env.VITE_* values in at BUILD TIME from
+# whatever's in the environment/.env - locally that's a real .env file
+# (correctly gitignored, real credentials never committed), but CI has
+# never had these values at all, so every CI build has shipped with
+# them literally undefined. Three separate hardening-related
+# hypotheses (JS obfuscation, Android R8/ProGuard, Electron asar) were
+# investigated and ruled out chasing this same symptom before the real
+# cause was found via a real console error captured from a diagnostic
+# build - none of those were actually it.
+#
+# VITE_SUPABASE_ANON_KEY is Supabase's own "publishable" key (the
+# sb_publishable_ prefix) - it is DESIGNED to be public and ship inside
+# the client bundle; the real security boundary is RLS, not hiding this
+# value. Safe to commit directly here rather than as a GitHub secret.
+env:
+  VITE_SUPABASE_URL: https://wcfdhsxzeryqwpmftgay.supabase.co
+  VITE_SUPABASE_ANON_KEY: sb_publishable_HIckVV9KFC3f6xhq6VS5RQ_KGybZ6bt
+
 jobs:
   # § real gap fix, 14-point live-audit gap #1: this workflow had no
   # test/type-check gate at all before building and publishing a real
