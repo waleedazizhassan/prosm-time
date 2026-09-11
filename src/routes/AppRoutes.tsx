@@ -11,6 +11,7 @@ import ForgotPasswordPage from "../modules/auth/ForgotPasswordPage";
 import ResetPasswordPage from "../modules/auth/ResetPasswordPage";
 import AcceptInvitationPage from "../modules/onboarding/AcceptInvitationPage";
 import DashboardPage from "../modules/dashboard/DashboardPage";
+import ClockInPage from "../modules/attendance/ClockInPage";
 import PeoplePage from "../modules/people/PeoplePage";
 import PersonDetailPage from "../modules/people/PersonDetailPage";
 import AdminOnBehalfPage from "../modules/people/AdminOnBehalfPage";
@@ -72,6 +73,7 @@ export default function AppRoutes() {
             }
           >
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/clock-in" element={<ClockInPage />} />
             <Route path="/people" element={<PeoplePage />} />
             <Route path="/people/:userId" element={<PersonDetailPage />} />
             <Route path="/admin-clock" element={<AdminOnBehalfPage />} />

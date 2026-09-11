@@ -2,9 +2,15 @@
   "title": "لوحة التحكم",
   "welcomeMessage": "مرحبًا، {{name}}.",
   "signOutAction": "تسجيل الخروج",
+  "clockInPage": {
+    "title": "تسجيل الحضور",
+    "subtitle": "سجّل حضورك وانصرافك من هنا."
+  },
   "overview": {
     "title": "نظرة عامة على المؤسسة",
     "titleScoped": "نظرة عامة على مواقعي",
+    "scopeOwner": "على مستوى المؤسسة",
+    "scopeManager": "{{count}} موقع تحت إدارتك",
     "sites": "المواقع",
     "clockedInNow": "متواجدون الآن",
     "registeredEmployees": "الموظفون المسجلون",

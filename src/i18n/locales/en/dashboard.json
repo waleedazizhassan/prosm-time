@@ -2,9 +2,15 @@
   "title": "Dashboard",
   "welcomeMessage": "Welcome, {{name}}.",
   "signOutAction": "Sign out",
+  "clockInPage": {
+    "title": "Clock In",
+    "subtitle": "Record your own attendance here."
+  },
   "overview": {
     "title": "Organization Overview",
     "titleScoped": "Overview of My Sites",
+    "scopeOwner": "Organization-wide",
+    "scopeManager": "{{count}} managed site(s)",
     "sites": "Sites",
     "clockedInNow": "Clocked In Now",
     "registeredEmployees": "Registered Employees",

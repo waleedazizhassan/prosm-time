@@ -2,9 +2,15 @@
   "title": "Dashboard",
   "welcomeMessage": "Benvenuto, {{name}}.",
   "signOutAction": "Esci",
+  "clockInPage": {
+    "title": "Timbra il cartellino",
+    "subtitle": "Registra qui la tua presenza."
+  },
   "overview": {
     "title": "Panoramica organizzazione",
     "titleScoped": "Panoramica delle mie sedi",
+    "scopeOwner": "A livello di organizzazione",
+    "scopeManager": "{{count}} sede/i gestita/e",
     "sites": "Sedi",
     "clockedInNow": "Presenti ora",
     "registeredEmployees": "Dipendenti registrati",

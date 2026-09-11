@@ -146,7 +146,12 @@ export default function AdminOverviewCard() {
   return (
     <Card>
       <div className={styles.header}>
-        <span className={styles.eyebrow}>{t(profile?.isOwner ? "overview.title" : "overview.titleScoped")}</span>
+        <span className={styles.eyebrowGroup}>
+          <span className={styles.eyebrow}>{t(profile?.isOwner ? "overview.title" : "overview.titleScoped")}</span>
+          <span className={`${styles.scopeBadge} ${profile?.isOwner ? styles.scopeBadgeOwner : styles.scopeBadgeManager}`}>
+            {profile?.isOwner ? t("overview.scopeOwner") : t("overview.scopeManager", { count: sites.length })}
+          </span>
+        </span>
         <Link to="/manager" className={styles.link}>
           {t("overview.openManagerAction")}
         </Link>

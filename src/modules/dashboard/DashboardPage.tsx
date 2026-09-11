@@ -32,11 +32,21 @@ import AdminOverviewCard from "./AdminOverviewCard";
 // concept.
 export default function DashboardPage() {
   const { t } = useTranslation("dashboard");
-  const { profile } = useAuth();
+  const { profile, hasPermission } = useAuth();
+
+  // § user-directed, point 5 (2026-09-11) - "the Owner and Manager
+  // shouldn't have the clock-in widget on their own Dashboard the way
+  // an Employee does... a sidebar entry that takes them to a dedicated
+  // page is more logical." Uses the same 'exceptions.manage' authority
+  // Manager Console/Reports Center already treat as "has real
+  // management scope" elsewhere in this pass - Manager and Supervisor
+  // both hold it, plain Employee/read_only don't. Owner/Manager still
+  // reach the exact same widget via the new /clock-in sidebar entry.
+  const hasManagementScope = Boolean(profile?.isOwner) || hasPermission("exceptions.manage");
 
   return (
     <PageShell title={t("title")} subtitle={profile ? t("welcomeMessage", { name: profile.fullName }) : undefined} compact>
-      <ClockInOutCard />
+      {hasManagementScope ? null : <ClockInOutCard />}
       <AdminOverviewCard />
       <ExceptionsCard />
     </PageShell>

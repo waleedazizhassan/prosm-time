@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, Plug, MonitorSmartphone, UserCog } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, Plug, MonitorSmartphone, UserCog, LogIn } from "lucide-react";
 
 // § live UX review, user-directed - "professional reorganization" of
 // the Sidebar into grouped sections/"centers" instead of one flat
@@ -42,6 +42,15 @@ export interface NavItem {
 // now the ONLY Dashboard navigation mechanism - no Dashboard entry
 // lives here anymore.
 export const NAV_ITEMS: NavItem[] = [
+  // § user-directed - Owner/Manager no longer carry the personal
+  // clock-in widget on their own Dashboard (point 5, 2026-09-11: "the
+  // Owner and Manager shouldn't have the clock-in widget on the
+  // Dashboard the way an Employee does"); this is the sidebar entry
+  // that takes them to it instead. Open to every authenticated member
+  // (same reasoning as Attendance Record below) - an Employee simply
+  // has a second way to reach the exact same action they already have
+  // embedded on their own Dashboard.
+  { id: "clockIn", labelKey: "items.clockIn", path: "/clock-in", icon: LogIn, requiredPermission: null, section: "attendance" },
   { id: "manager", labelKey: "items.manager", path: "/manager", icon: LayoutGrid, requiredPermission: "attendance.view", section: "attendance" },
   // § live UX review, user-directed - "a direct sidebar button to view
   // employees' clock-in/clock-out record." No permission gate, same

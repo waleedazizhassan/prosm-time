@@ -2,9 +2,15 @@
   "title": "Dashboard",
   "welcomeMessage": "Willkommen, {{name}}.",
   "signOutAction": "Abmelden",
+  "clockInPage": {
+    "title": "Einstempeln",
+    "subtitle": "Erfassen Sie hier Ihre eigene Anwesenheit."
+  },
   "overview": {
     "title": "Organisationsübersicht",
     "titleScoped": "Übersicht meiner Standorte",
+    "scopeOwner": "Organisationsweit",
+    "scopeManager": "{{count}} verwaltete Standort(e)",
     "sites": "Standorte",
     "clockedInNow": "Aktuell eingestempelt",
     "registeredEmployees": "Registrierte Mitarbeiter",

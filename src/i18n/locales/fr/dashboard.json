@@ -2,9 +2,15 @@
   "title": "Tableau de bord",
   "welcomeMessage": "Bienvenue, {{name}}.",
   "signOutAction": "Se déconnecter",
+  "clockInPage": {
+    "title": "Pointer",
+    "subtitle": "Enregistrez votre propre présence ici."
+  },
   "overview": {
     "title": "Aperçu de l'organisation",
     "titleScoped": "Aperçu de mes sites",
+    "scopeOwner": "À l'échelle de l'organisation",
+    "scopeManager": "{{count}} site(s) géré(s)",
     "sites": "Sites",
     "clockedInNow": "Actuellement présents",
     "registeredEmployees": "Employés enregistrés",
