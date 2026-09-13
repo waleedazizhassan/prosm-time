@@ -1,12 +1,14 @@
 import type { CSSProperties } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { Sun, Moon } from "lucide-react";
 
 import AuthHeader from "../../components/common/AuthHeader";
 import Button from "../../components/common/Button";
 import authPhoto from "../../assets/splash-photo.png";
 import { APP_VERSION } from "../../core/appVersion";
 import { LANGUAGES } from "../../i18n/languages";
+import { useTheme } from "../../core/context/ThemeContext";
 import pageStyles from "../../components/common/AuthLayout.module.css";
 import styles from "./WelcomePage.module.css";
 
@@ -24,31 +26,43 @@ import styles from "./WelcomePage.module.css";
 export default function WelcomePage() {
   const { t, i18n } = useTranslation("auth");
   const navigate = useNavigate();
+  const { resolvedTheme, setTheme } = useTheme();
 
   return (
     <div className={pageStyles.page} style={{ "--auth-photo": `url(${authPhoto})` } as CSSProperties}>
       <AuthHeader showVersion={false} />
 
       <div className={styles.mobileCard}>
-        <div className={styles.photoBand} style={{ backgroundImage: `url(${authPhoto})` }} />
+        <div className={styles.photoBand} style={{ backgroundImage: `url(${authPhoto})` }}>
+          {/* § user-directed, 2026-09-13 - moved off the card body
+              (where it pushed the title down) to float over the photo's
+              own top-right corner instead, with a theme toggle right
+              beside it - mobile has no other way to reach either
+              control (AuthHeader's own versions are desktop-only). */}
+          <div className={styles.topControls}>
+            <select
+              className={styles.mobileLanguageSelect}
+              value={i18n.language}
+              onChange={(event) => i18n.changeLanguage(event.target.value)}
+              aria-label={t("authHeader.languageAriaLabel")}
+            >
+              {LANGUAGES.map((language) => (
+                <option key={language.code} value={language.code}>
+                  {language.nativeLabel}
+                </option>
+              ))}
+            </select>
+            <button
+              type="button"
+              className={styles.themeToggle}
+              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+              aria-label={t("authHeader.themeToggleAriaLabel")}
+            >
+              {resolvedTheme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+          </div>
+        </div>
         <div className={styles.body}>
-          {/* § live UX review, user-directed - mobile has no other way
-              to change language (AuthHeader's own selector is
-              desktop-only), and the default language is now always
-              English on first load - give phones an explicit switch. */}
-          <select
-            className={styles.mobileLanguageSelect}
-            value={i18n.language}
-            onChange={(event) => i18n.changeLanguage(event.target.value)}
-            aria-label={t("authHeader.languageAriaLabel")}
-          >
-            {LANGUAGES.map((language) => (
-              <option key={language.code} value={language.code}>
-                {language.nativeLabel}
-              </option>
-            ))}
-          </select>
-
           <h1 className={styles.title}>{t("welcome.title")}</h1>
           <p className={styles.subtitle}>{t("welcome.subtitle")}</p>
 

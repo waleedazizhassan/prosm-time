@@ -22,10 +22,27 @@
 }
 
 .photoBand {
+  position: relative;
   background-color: #0b1220;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+/* § user-directed, 2026-09-13 - language + theme controls, floating
+   over the photo's own top-right corner (a physical corner, not a
+   logical/RTL-flipping one - this is page chrome sitting on an image,
+   not flowing content, and the user pointed at this exact physical
+   corner while looking at the app in Arabic). */
+.topControls {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 .body {
@@ -36,16 +53,31 @@
 }
 
 .mobileLanguageSelect {
-  align-self: flex-start;
-  margin: 0 0 var(--space-4);
   padding: var(--space-1) var(--space-2);
 
-  border: 1px solid var(--border-light);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: var(--radius-md);
 
-  background: var(--surface-page);
-  color: var(--text-primary);
-  font-size: var(--font-sm);
+  background: rgba(11, 18, 32, 0.55);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  font-size: var(--font-xs);
+  cursor: pointer;
+}
+
+.themeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+
+  background: rgba(11, 18, 32, 0.55);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
   cursor: pointer;
 }
 
