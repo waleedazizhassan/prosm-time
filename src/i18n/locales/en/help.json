@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Emergency",
-      "body": "Available while presence monitoring is active for your shift. Pressing it immediately sends a high-priority alert to your managers with your last known location, and is logged as a real emergency record - reserved for genuine safety situations, not a general-purpose button."
+      "body": "Available while presence monitoring is active for your shift. Pressing it immediately sends a high-priority alert to your managers with your last known location, and is logged as a real emergency record - reserved for genuine safety situations, not a general-purpose button. On Android, presence monitoring may ask for a background location permission the first time - accepting keeps checking your position even if you switch to another app or lock your screen, shown as a real, always-cancellable notification the whole time; declining is fine too, monitoring simply continues only while PROSM Time itself is open."
     },
     "notifications": {
       "title": "How Notifications Reach the Right Person",
@@ -40,7 +40,7 @@
     },
     "kiosk": {
       "title": "Kiosk Mode",
-      "body": "Open Kiosk Mode from the sidebar and pick a site to launch its shared clock-in screen - meant for a tablet or computer at the entrance, not your own personal device. It has two tabs: Employees, where you select your name from the list and enter your personal kiosk PIN before clocking in or out (your kiosk PIN is separate from your login password - set or change it from the Dashboard, or an administrator/manager can set it for you from your profile page under People); and Workforce, for contractors and other non-employee workers who aren't PROSM Time users - each has their own 6-digit number, set up in advance by an administrator or manager, which is all they need to type in to clock in or out. Both tabs return to their starting screen automatically after each action, ready for the next person."
+      "body": "Open Kiosk Mode from the sidebar and pick a site to launch its shared clock-in screen - meant for a tablet or computer at the entrance, not your own personal device. It has two tabs: Employees, where you select your name from the list and enter your personal kiosk PIN before clocking in or out (your kiosk PIN is separate from your login password - set or change it from the user menu at the bottom of the sidebar, or an administrator/manager can set it for you from your profile page under People); and Workforce, for contractors and other non-employee workers who aren't PROSM Time users - each has their own 6-digit number, set up in advance by an administrator or manager, which is all they need to type in to clock in or out. Both tabs return to their starting screen automatically after each action, ready for the next person."
     },
     "reportsCenter": {
       "title": "Reports Center",
@@ -52,11 +52,11 @@
     },
     "settingsCenter": {
       "title": "Settings (Owner)",
-      "body": "A real home for organization-wide configuration: the no-site geofence radius; the site policy defaults (GPS accuracy tolerance, break rounding, grace period) a brand-new site starts from, since these are almost always the same across an organization rather than something that genuinely differs site to site; Site Policy itself - pick any site from a dropdown to review or change its own GPS tolerance, grace period, shift hours, overtime/late-deduction timing, break rounding, both self-service block toggles, and exempt employees, all in one place instead of hunting through that site's own page; and Payroll Integration (QuickBooks Online). API keys for connecting other PROSM products now have their own dedicated page in the sidebar instead of living here."
+      "body": "A real home for organization-wide configuration: the no-site geofence radius; the site policy defaults (GPS accuracy tolerance, break rounding, grace period) a brand-new site starts from, since these are almost always the same across an organization rather than something that genuinely differs site to site; and Site Policy itself - pick any site from a dropdown to review or change its own GPS tolerance, grace period, shift hours, overtime/late-deduction timing, break rounding, both self-service block toggles, and exempt employees, all in one place instead of hunting through that site's own page."
     },
     "leave": {
       "title": "Leave (PTO)",
-      "body": "Request time off from the Leave page - pick a type (Annual, Sick, Unpaid, Emergency, Other), a date range and an optional reason. Only Annual leave tracks a real entitled/used/remaining balance (21 days a year by default - an Owner can raise or lower a specific employee's own entitlement from their profile page under People, e.g. for legally-required increases tied to long tenure); every other type just shows how many days you've taken this year, with no fixed cap. Your manager or the Owner reviews pending requests from the Manager Console, and can also revoke an already-approved request from there if plans change - you'll be notified either way. Approved leave counts toward your generated timesheet for that period."
+      "body": "Request time off from the Leave page - pick a type (Annual, Sick, Unpaid, Emergency, Other), a date range and an optional reason. Only Annual leave tracks a real entitled/used/remaining balance (21 days a year by default - an Owner can raise or lower a specific employee's own entitlement from their profile page under People, e.g. for legally-required increases tied to long tenure); every other type just shows how many days you've taken this year, with no fixed cap. A request from an ordinary employee assigned to a site goes to that site's own manager (and the Owner); a request from a manager/supervisor themselves, or from anyone not yet assigned to any site, goes straight to the Owner instead. Your reviewer sees pending requests from the Manager Console, and can also revoke an already-approved request from there if plans change - you'll be notified either way. Approving leave for a period you already have attendance recorded in is blocked - the attendance record has to be resolved first, so you never end up marked both present and on leave the same day. The Owner doesn't request leave through this page - there's no one above them to review it. Approved leave counts toward your generated timesheet for that period."
     },
     "schedule": {
       "title": "Shift Roster",
@@ -99,7 +99,7 @@
     },
     "q3": {
       "question": "Can I use the app while offline?",
-      "answer": "Clock In and Clock Out are queued locally if you lose connectivity and sync automatically once you're back online - you'll see a pending-sync notice until it's confirmed."
+      "answer": "Clock In and Clock Out are queued locally if you lose connectivity and sync automatically once you're back online - you'll see a pending-sync notice until it's confirmed, and the time actually recorded is the real moment you tapped the button, not whenever your connection came back. Opening the app itself while offline now also shows your last-loaded information right away instead of a blank screen."
     },
     "q4": {
       "question": "How do I change the language or theme?",

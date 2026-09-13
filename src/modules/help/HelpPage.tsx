@@ -29,7 +29,12 @@ export default function HelpPage() {
     "reportsCenter",
     "sites",
     "settingsCenter",
-    "payrollIntegration",
+    // "payrollIntegration" intentionally not listed below - § user-
+    // directed, 2026-09-13: the Payroll Integration card itself is
+    // hidden (OrganizationSettingsPage.tsx) until it's clear how it'll
+    // actually be used - its Help entry stays hidden the same way
+    // (content untouched in help.json, just not rendered here). Add
+    // "payrollIntegration" back to this list when that card comes back.
     "permissions",
     "calendar",
     "desktopApp",
