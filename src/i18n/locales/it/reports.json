@@ -97,5 +97,24 @@
       "active": "Attivo",
       "resolved": "Risolto"
     }
+  },
+  "values": {
+    "memberStatus": {
+      "active": "Attivo",
+      "invited": "Invitato",
+      "suspended": "Sospeso"
+    },
+    "leaveType": {
+      "annual": "Annuali",
+      "sick": "Malattia",
+      "unpaid": "Non retribuite",
+      "emergency": "Emergenza",
+      "other": "Altro"
+    },
+    "overrideAction": {
+      "ADMIN_CLOCK_IN_ON_BEHALF": "Entrata timbrata per conto di",
+      "ADMIN_CLOCK_OUT_ON_BEHALF": "Uscita timbrata per conto di",
+      "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "Uscita lavoratore esterno timbrata per conto di"
+    }
   }
 }

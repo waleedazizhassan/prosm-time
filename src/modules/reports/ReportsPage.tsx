@@ -130,7 +130,7 @@ export default function ReportsPage() {
         columns: [t("columns.workforce.name"), t("columns.workforce.email"), t("columns.workforce.role"), t("columns.workforce.sites"), t("columns.workforce.status")],
         fetch: () => ReportRepository.workforce(),
         toRow: (row: import("../../core/repositories/ReportRepository").WorkforceRow) => ({
-          cells: [row.fullName, row.email, row.isOwner ? t("columns.workforce.owner") : row.roleName, row.siteNames || "—", row.status],
+          cells: [row.fullName, row.email, row.isOwner ? t("columns.workforce.owner") : row.roleName, row.siteNames || "—", t(`values.memberStatus.${row.status}`, { defaultValue: row.status })],
           employeeName: row.fullName,
           siteName: null,
         }),
@@ -185,7 +185,7 @@ export default function ReportsPage() {
             row.userFullName,
             row.siteName,
             `${formatDateOnly(row.clockInAt, locale)} ${formatTimeOnly(row.clockInAt, locale)}`,
-            row.leaveType,
+            t(`values.leaveType.${row.leaveType}`, { defaultValue: row.leaveType }),
             `${formatDateOnly(row.leaveStartDate, locale)} — ${formatDateOnly(row.leaveEndDate, locale)}`,
           ],
           employeeName: row.userFullName,
@@ -196,7 +196,7 @@ export default function ReportsPage() {
         columns: [t("columns.managerOverrides.actor"), t("columns.managerOverrides.subject"), t("columns.managerOverrides.action"), t("columns.managerOverrides.reason"), t("columns.managerOverrides.when")],
         fetch: () => ReportRepository.managerOverrides(startDate, endDate),
         toRow: (row: import("../../core/repositories/ReportRepository").ManagerOverrideRow) => ({
-          cells: [row.actorName, row.subjectName, row.action, row.reason || "—", `${formatDateOnly(row.createdAt, locale)} ${formatTimeOnly(row.createdAt, locale)}`],
+          cells: [row.actorName, row.subjectName, t(`values.overrideAction.${row.action}`, { defaultValue: row.action }), row.reason || "—", `${formatDateOnly(row.createdAt, locale)} ${formatTimeOnly(row.createdAt, locale)}`],
           employeeName: null,
           siteName: null,
         }),

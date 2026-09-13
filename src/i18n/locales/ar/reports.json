@@ -97,5 +97,24 @@
       "active": "نشط",
       "resolved": "تم الحل"
     }
+  },
+  "values": {
+    "memberStatus": {
+      "active": "نشط",
+      "invited": "تمت الدعوة",
+      "suspended": "موقوف"
+    },
+    "leaveType": {
+      "annual": "سنوية",
+      "sick": "مرضية",
+      "unpaid": "بدون أجر",
+      "emergency": "طارئة",
+      "other": "أخرى"
+    },
+    "overrideAction": {
+      "ADMIN_CLOCK_IN_ON_BEHALF": "تسجيل حضور بالنيابة",
+      "ADMIN_CLOCK_OUT_ON_BEHALF": "تسجيل انصراف بالنيابة",
+      "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "تسجيل انصراف عامل مؤقت بالنيابة"
+    }
   }
 }

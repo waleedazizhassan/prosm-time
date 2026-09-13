@@ -97,5 +97,24 @@
       "active": "Actif",
       "resolved": "Résolu"
     }
+  },
+  "values": {
+    "memberStatus": {
+      "active": "Actif",
+      "invited": "Invité",
+      "suspended": "Suspendu"
+    },
+    "leaveType": {
+      "annual": "Annuel",
+      "sick": "Maladie",
+      "unpaid": "Sans solde",
+      "emergency": "Urgence",
+      "other": "Autre"
+    },
+    "overrideAction": {
+      "ADMIN_CLOCK_IN_ON_BEHALF": "Pointage d'arrivée au nom de",
+      "ADMIN_CLOCK_OUT_ON_BEHALF": "Pointage de départ au nom de",
+      "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "Pointage de départ d'un sous-traitant au nom de"
+    }
   }
 }

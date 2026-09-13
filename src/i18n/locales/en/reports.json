@@ -97,5 +97,24 @@
       "active": "Active",
       "resolved": "Resolved"
     }
+  },
+  "values": {
+    "memberStatus": {
+      "active": "Active",
+      "invited": "Invited",
+      "suspended": "Suspended"
+    },
+    "leaveType": {
+      "annual": "Annual",
+      "sick": "Sick",
+      "unpaid": "Unpaid",
+      "emergency": "Emergency",
+      "other": "Other"
+    },
+    "overrideAction": {
+      "ADMIN_CLOCK_IN_ON_BEHALF": "Clocked in on behalf",
+      "ADMIN_CLOCK_OUT_ON_BEHALF": "Clocked out on behalf",
+      "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "Clocked out contractor on behalf"
+    }
   }
 }

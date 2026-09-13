@@ -97,5 +97,24 @@
       "active": "Aktiv",
       "resolved": "Behoben"
     }
+  },
+  "values": {
+    "memberStatus": {
+      "active": "Aktiv",
+      "invited": "Eingeladen",
+      "suspended": "Gesperrt"
+    },
+    "leaveType": {
+      "annual": "Jahresurlaub",
+      "sick": "Krankheit",
+      "unpaid": "Unbezahlt",
+      "emergency": "Notfall",
+      "other": "Sonstiges"
+    },
+    "overrideAction": {
+      "ADMIN_CLOCK_IN_ON_BEHALF": "Im Auftrag eingestempelt",
+      "ADMIN_CLOCK_OUT_ON_BEHALF": "Im Auftrag ausgestempelt",
+      "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "Subunternehmer im Auftrag ausgestempelt"
+    }
   }
 }
