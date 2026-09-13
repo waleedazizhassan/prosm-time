@@ -21,9 +21,18 @@
 /* § real bug, live-tested: CartoDB's dark tile CDN now requires a key
    (an "API KEY REQUIRED" watermark, no longer a free anonymous
    source) - faking a dark variant from plain OpenStreetMap tiles via
-   the standard invert+hue-rotate trick instead. */
+   the standard invert+hue-rotate trick instead.
+   § user-directed refinement, 2026-09-13 - tuned toward a deep navy
+   (not muddy brown/green) with legible light labels, matching a
+   reference dark-map mockup as closely as a uniform image filter on
+   raster tiles can get. A raster CSS filter applies to the whole
+   image at once - it cannot target roads/water/labels with the
+   reference's own distinct per-feature hex values independently; that
+   level of control needs a real custom map style (e.g. Google Maps'
+   styled-map JSON), which needs a paid API key this app deliberately
+   doesn't use (see this file's own CartoDB-retirement note above). */
 .darkTiles {
-  filter: invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.9);
+  filter: invert(1) hue-rotate(200deg) brightness(0.92) contrast(0.88) saturate(0.75);
 }
 
 /* § live UX review, user-directed - the attribution bar read as too
@@ -50,6 +59,10 @@
   justify-content: center;
 }
 
+/* § user-directed, 2026-09-13 - the location dot's own color, matching
+   a reference dark-map mockup's exact "current location" green
+   (#10B981) - unlike the raster tiles below, this is a real element
+   this app fully controls, so it can match the reference precisely. */
 .markerIcon span {
   display: block;
   width: 14px;
@@ -58,8 +71,8 @@
   border-radius: 50%;
   border: 2px solid var(--surface-card);
 
-  background: var(--brand-primary);
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.25);
+  background: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -69,7 +82,7 @@
 }
 
 @keyframes liveLocationPulse {
-  0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.35); }
-  70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.35); }
+  70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }

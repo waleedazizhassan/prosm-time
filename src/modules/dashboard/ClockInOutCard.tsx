@@ -9,7 +9,6 @@ import ProjectRepository, { type Project } from "../../core/repositories/Project
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import PresenceRepository, { type PresenceSession } from "../../core/repositories/PresenceRepository";
 import { getCurrentPosition, type CurrentPosition } from "../../core/utils/geo";
-import playAlertSound from "../../core/utils/playAlertSound";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { reverseGeocodePlaceName } from "../../core/utils/reverseGeocode";
 import { getDeviceLabel } from "../../core/utils/deviceInfo";
@@ -30,7 +29,6 @@ import LiveLocationMap from "../../components/common/LiveLocationMap";
 import ErrorText from "../../components/common/ErrorText";
 import styles from "./ClockInOutCard.module.css";
 
-const PRESENCE_SAMPLE_INTERVAL_MS = 5 * 60 * 1000;
 const CHANGE_SITE_NO_SITE_VALUE = "__no_site__";
 
 function formatElapsed(totalSeconds: number): string {
@@ -162,9 +160,6 @@ export default function ClockInOutCard() {
     setPendingPhotoPreviewUrl(url);
     return () => URL.revokeObjectURL(url);
   }, [pendingEvidenceFile]);
-
-  const presenceSessionRef = useRef<PresenceSession | null>(null);
-  presenceSessionRef.current = presenceSession;
 
   const pendingOfflineItems = useOfflineQueue(profile?.id);
   const pendingOfflineItem = pendingOfflineItems[0] ?? null;
@@ -308,37 +303,14 @@ export default function ClockInOutCard() {
     });
   }, [profile, siteId]);
 
-  // §18: "location samples collected per policy and platform
-  // capability" - only runs while a presence session is genuinely
-  // active, stops the instant it isn't (interval cleared on unmount/
-  // dependency change, matching "no active presence tracking after
-  // Clock Out").
-  useEffect(() => {
-    if (!presenceSession) return undefined;
-
-    const interval = setInterval(async () => {
-      const current = presenceSessionRef.current;
-      if (!current) return;
-      try {
-        const position = await getCurrentPosition();
-        const result = await PresenceRepository.recordSample(current.id, position.latitude, position.longitude, position.accuracyMeters);
-        // § live UX review, user-directed - "sound + reason + scheduled
-        // reminder" when a mid-shift sample lands outside the site's
-        // geofence: this is the immediate alert; ExceptionsCard's own
-        // reminder loop keeps re-playing it until the employee submits
-        // a reason.
-        if (result.success && result.data?.exceptionCreated) {
-          playAlertSound();
-        }
-      } catch {
-        // Best-effort only - a failed/denied sample never surfaces as
-        // an error, matching every other geolocation capture in this
-        // component.
-      }
-    }, PRESENCE_SAMPLE_INTERVAL_MS);
-
-    return () => clearInterval(interval);
-  }, [presenceSession]);
+  // § real bug fix, 2026-09-13 - the actual periodic location-sampling
+  // loop used to live here, tied to this component's own mount
+  // lifetime - the moment an employee navigated to any other page,
+  // sampling silently stopped for the rest of their shift. Moved to
+  // PresenceTrackingLoop.tsx, mounted once in AppShell so it survives
+  // page navigation for the whole app session. This component still
+  // owns presenceSession purely for its own display (the SOS action's
+  // visibility below) - it no longer submits samples itself.
 
   // Live elapsed-time readout while clocked in (§ final visual
   // consistency pass, correction - "useful status information" from
