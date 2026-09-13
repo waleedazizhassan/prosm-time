@@ -17,10 +17,19 @@
 .pageHeader {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
+  align-items: center;
+  /* § user-directed, 2026-09-13 - never wrap the banner below the
+     title, on any screen width (a real mobile screenshot showed this
+     happening) - the title block shrinks/wraps its own text instead,
+     see .titleBlock below. */
+  flex-wrap: nowrap;
 
-  gap: var(--space-4);
+  gap: var(--space-3);
+}
+
+.titleBlock {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .title {
@@ -56,10 +65,11 @@
 
 .headerExtras {
   display: flex;
+  flex-shrink: 0;
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
 .headerBanner {
@@ -72,8 +82,8 @@
 
 @media (max-width: 640px) {
   .headerBanner {
-    height: 68px;
-    max-width: 130px;
+    height: 52px;
+    max-width: 96px;
   }
 }
 

@@ -15,6 +15,8 @@
   "signOutAction": "Se déconnecter",
   "kioskPinLabel": "Code PIN du kiosque (4 à 6 chiffres)",
   "kioskPinSaved": "Code PIN enregistré.",
+  "backgroundTrackingTitle": "PROSM Time suit votre position",
+  "backgroundTrackingMessage": "Votre position est enregistrée tant que vous êtes pointé. Annulez pour arrêter.",
   "languageLabel": "Langue",
   "themeLabel": "Apparence",
   "theme": {

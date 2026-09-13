@@ -15,6 +15,8 @@
   "signOutAction": "Esci",
   "kioskPinLabel": "PIN del chiosco (4-6 cifre)",
   "kioskPinSaved": "PIN salvato.",
+  "backgroundTrackingTitle": "PROSM Time sta monitorando la tua posizione",
+  "backgroundTrackingMessage": "La posizione viene registrata mentre sei in servizio. Annulla per interrompere.",
   "languageLabel": "Lingua",
   "themeLabel": "Aspetto",
   "theme": {

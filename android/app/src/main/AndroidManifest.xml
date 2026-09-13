@@ -45,4 +45,25 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera" android:required="false" />
     <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+
+    <!-- § user-directed, 2026-09-13 - real geofence-exit tracking must
+         keep working even while the app is backgrounded (screen
+         locked, another app in front), not just while this app's own
+         screen is on top - @capacitor-community/background-geolocation
+         drives this, only ever active while a real presence session
+         is open (clocked in at a monitored site), and only ever with
+         the user's own explicit consent via the plugin's own
+         permission dialogs. ACCESS_BACKGROUND_LOCATION is Android's
+         own separate "Allow all the time" consent step (distinct from
+         the foreground ACCESS_FINE_LOCATION above); FOREGROUND_SERVICE/
+         FOREGROUND_SERVICE_LOCATION and POST_NOTIFICATIONS are what let
+         Android keep the tracking alive with a real, visible, always-
+         cancellable notification while backgrounded - required as of
+         Android 14/13 respectively, and Google Play's own review
+         requires this exact "visible ongoing notification" pattern for
+         any app requesting background location. -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 </manifest>

@@ -14,6 +14,12 @@ interface PageShellProps {
   // large stacked block below the header, leaving a big gap under the
   // title/subtitle. Moved into the header row itself, small and right
   // next to (opposite) the title/subtitle text, closing that gap.
+  // § user-directed correction, 2026-09-13 - a real mobile screenshot
+  // showed this still dropping below the title on narrow screens
+  // (desktop only had room for the side-by-side layout) - the header
+  // row no longer wraps at all now, on any width; the title block
+  // shrinks/wraps its own text instead so the banner always stays
+  // beside it.
   bannerSrc?: string;
   actions?: ReactNode;
   wide?: boolean;
@@ -33,7 +39,7 @@ export default function PageShell({ title, subtitle, bannerSrc, actions, wide = 
     <div className={[styles.container, wide ? styles.wide : ""].filter(Boolean).join(" ")}>
       {title ? (
         <div className={[styles.pageHeader, compact ? styles.pageHeaderCompact : ""].filter(Boolean).join(" ")}>
-          <div>
+          <div className={styles.titleBlock}>
             <h1 className={[styles.title, compact ? styles.titleCompact : ""].filter(Boolean).join(" ")}>{title}</h1>
             {subtitle ? <p className={styles.subtitle}>{subtitle}</p> : null}
           </div>

@@ -5,7 +5,11 @@
    without competing with the real data below it. */
 .greetingBanner {
   display: flex;
-  flex-wrap: wrap;
+  /* § user-directed, 2026-09-13 - never wrap the illustration below
+     the greeting text, on any screen width - matches PageShell's own
+     header banner treatment. .greetingText's min-width: 0 lets the
+     text itself shrink/wrap instead. */
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
