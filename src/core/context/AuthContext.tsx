@@ -31,6 +31,44 @@ function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T | "timeout">
   return Promise.race([promise, new Promise<"timeout">((resolve) => setTimeout(() => resolve("timeout"), ms))]);
 }
 
+// § real bug, user-reported (2026-09-13) - the timeout fix above stops
+// the infinite spinner, but a cold app open while offline still left
+// `profile` at its initial `null` forever (loadProfile() returns
+// immediately, never setting it) - every screen that needs profile.*
+// to render anything real then shows nothing, the same blank result as
+// the original bug, just without the hang. Real fix: persist the last
+// successfully-loaded profile/permissions locally and hydrate from
+// that cache immediately on boot, online or not - a real (if possibly
+// a few minutes stale) screen instead of a blank one. The background
+// loadProfile() call still runs and overwrites this with a fresh
+// server read the moment a real connection exists.
+const CACHE_KEY = "prosm_time_cached_profile_v1";
+
+interface CachedProfileState {
+  profile: CurrentUserProfile;
+  permissions: string[];
+}
+
+function readCachedProfile(): CachedProfileState | null {
+  try {
+    const raw = localStorage.getItem(CACHE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw) as CachedProfileState;
+  } catch {
+    return null;
+  }
+}
+
+function writeCachedProfile(state: CachedProfileState | null): void {
+  try {
+    if (state) localStorage.setItem(CACHE_KEY, JSON.stringify(state));
+    else localStorage.removeItem(CACHE_KEY);
+  } catch {
+    // Private browsing / storage disabled - the cache is a convenience,
+    // never a requirement, so a write failure here is silently ignored.
+  }
+}
+
 // PROSM Time - the one place session state, the caller's own
 // server-verified profile, and their real effective permission set
 // (§9: "the client only reflects, never enforces, permission state")
@@ -63,8 +101,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (result === "timeout") return;
 
     const [profileResult, permissionsResult] = result;
-    setProfile(profileResult.success ? profileResult.data : null);
-    setPermissions(permissionsResult.success ? permissionsResult.data ?? [] : []);
+    const nextProfile = profileResult.success ? profileResult.data : null;
+    const nextPermissions = permissionsResult.success ? permissionsResult.data ?? [] : [];
+    setProfile(nextProfile);
+    setPermissions(nextPermissions);
+    if (nextProfile) writeCachedProfile({ profile: nextProfile, permissions: nextPermissions });
   }, []);
 
   const refreshProfile = useCallback(async () => {
@@ -73,6 +114,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let mounted = true;
+
+    // Hydrate synchronously from the last cached profile before any
+    // network call resolves - this is what actually renders a real
+    // screen on a cold, offline app open instead of a blank one.
+    // loadProfile() below still runs and overwrites this with a fresh
+    // server read the moment a real connection exists.
+    const cached = readCachedProfile();
+    if (cached) {
+      setProfile(cached.profile);
+      setPermissions(cached.permissions);
+    }
 
     AuthService.getSession().then(async (session) => {
       if (!mounted) return;
@@ -91,6 +143,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       } else {
         setProfile(null);
         setPermissions([]);
+        writeCachedProfile(null);
       }
     });
 
@@ -115,6 +168,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setProfile(null);
     setPermissions([]);
     setIsAuthenticated(false);
+    // Privacy: never leave a signed-out user's cached profile behind
+    // for the next person to boot into on a shared device.
+    writeCachedProfile(null);
   }, []);
 
   const hasPermission = useCallback((permissionKey: string) => permissions.includes(permissionKey), [permissions]);
