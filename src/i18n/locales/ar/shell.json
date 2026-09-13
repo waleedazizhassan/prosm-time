@@ -35,7 +35,10 @@
   },
   "update": {
     "available": "في نسخة جديدة (v{{version}}) متاحة.",
-    "action": "حدّث دلوقتي"
+    "action": "حدّث دلوقتي",
+    "checkAction": "تحقق من وجود تحديث",
+    "checking": "جاري التحقق...",
+    "upToDate": "إنت على آخر نسخة."
   },
   "notificationsLabel": "الإشعارات",
   "noNotifications": "لا توجد إشعارات بعد.",

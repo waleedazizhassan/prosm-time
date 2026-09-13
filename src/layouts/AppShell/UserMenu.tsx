@@ -1,12 +1,14 @@
 import { useEffect, useLayoutEffect, useRef, useState, type ChangeEvent } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
-import { ChevronDown, LogOut, Camera, Loader2 } from "lucide-react";
+import { Capacitor } from "@capacitor/core";
+import { ChevronDown, LogOut, Camera, Loader2, RefreshCw } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import { useAppLayout } from "./LayoutContext";
 import { useTheme, type ThemeMode } from "../../core/context/ThemeContext";
 import { useCalendar, setCalendarSystem, type CalendarSystem } from "../../core/context/CalendarContext";
+import { useUpdateCheck } from "../../core/hooks/useUpdateCheck";
 import { LANGUAGES } from "../../i18n/languages";
 import UserRepository from "../../core/repositories/UserRepository";
 import sidebarStyles from "./Sidebar.module.css";
@@ -46,6 +48,34 @@ export default function UserMenu({ collapsed }: { collapsed: boolean }) {
   const { userMenuOpen, toggleUserMenu, closeUserMenu } = useAppLayout();
   const { theme, setTheme } = useTheme();
   const { calendarSystem } = useCalendar();
+  // § user-directed, 2026-09-13 - "the automatic banner isn't
+  // reliably reaching people - let's also have a real 'Check for
+  // update' button." Same shared hook UpdateAvailableBanner already
+  // uses (useUpdateCheck.ts) - checkedOnce/justChecked are purely this
+  // button's own transient "you're up to date" feedback, since the
+  // hook itself stays silent on a negative result (by design, for the
+  // background banner's own sake).
+  const { manifest: updateManifest, checking: updateChecking, checkNow: checkForUpdate } = useUpdateCheck();
+  const [justChecked, setJustChecked] = useState(false);
+
+  const handleCheckForUpdate = async () => {
+    setJustChecked(false);
+    await checkForUpdate();
+    setJustChecked(true);
+  };
+
+  const handleGoToUpdate = () => {
+    if (!updateManifest) return;
+    if (Capacitor.isNativePlatform()) {
+      window.open(updateManifest.downloads.android, "_blank", "noopener,noreferrer");
+      return;
+    }
+    if (window.location.protocol.startsWith("http")) {
+      window.location.reload();
+      return;
+    }
+    window.open(updateManifest.downloads.windows, "_blank", "noopener,noreferrer");
+  };
 
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -245,6 +275,19 @@ export default function UserMenu({ collapsed }: { collapsed: boolean }) {
               <option value="gregorian">{t("calendar.gregorian")}</option>
               <option value="hijri">{t("calendar.hijri")}</option>
             </select>
+            <button type="button" className={styles.signOutButton} onClick={handleCheckForUpdate} disabled={updateChecking}>
+              <RefreshCw size={16} className={updateChecking ? styles.avatarSpinner : undefined} />
+              {t("update.checkAction")}
+            </button>
+            {updateChecking ? (
+              <span className={styles.email}>{t("update.checking")}</span>
+            ) : updateManifest ? (
+              <button type="button" className={styles.signOutButton} onClick={handleGoToUpdate}>
+                {t("update.available", { version: updateManifest.version })} — {t("update.action")}
+              </button>
+            ) : justChecked ? (
+              <span className={styles.email}>{t("update.upToDate")}</span>
+            ) : null}
             <button type="button" className={styles.signOutButton} onClick={signOut}>
               <LogOut size={16} />
               {t("signOutAction")}

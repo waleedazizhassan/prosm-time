@@ -35,7 +35,10 @@
   },
   "update": {
     "available": "Une nouvelle version (v{{version}}) est disponible.",
-    "action": "Mettre à jour"
+    "action": "Mettre à jour",
+    "checkAction": "Vérifier les mises à jour",
+    "checking": "Vérification...",
+    "upToDate": "Vous avez la dernière version."
   },
   "notificationsLabel": "Notifications",
   "noNotifications": "Aucune notification pour le moment.",
