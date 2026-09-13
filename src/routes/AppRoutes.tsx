@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AuthProvider, useAuth } from "../core/context/AuthContext";
 import ProtectedRoute from "./ProtectedRoute";
 import AppShell from "../layouts/AppShell";
+import UpdateAvailableBanner from "../layouts/AppShell/UpdateAvailableBanner";
 
 import ActivationPage from "../modules/activation/ActivationPage";
 import WelcomePage from "../modules/auth/WelcomePage";
@@ -56,6 +57,17 @@ export default function AppRoutes() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        {/* § real bug fix, 2026-09-13 - this used to live inside
+            AppShell, which only mounts AFTER a real login - a user
+            checking for updates from the pre-login Welcome/Login
+            screens (a real, observed case: someone opening the app
+            fresh just to see if a newer build exists) would never see
+            it, even though the underlying poll/compare logic was
+            already correct. Hoisted here, above every route including
+            the public ones, so it shows regardless of auth state -
+            removed from AppShell/index.tsx so it doesn't double-mount
+            on authenticated pages. */}
+        <UpdateAvailableBanner />
         <Routes>
           <Route path="/" element={<RootRedirect />} />
           <Route path="/welcome" element={<WelcomePage />} />
