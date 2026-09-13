@@ -7,7 +7,12 @@ import PageShell from "../../components/common/PageShell";
 import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
 import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
-import PayrollIntegrationCard from "./PayrollIntegrationCard";
+// PayrollIntegrationCard intentionally not rendered below - § user-
+// directed, 2026-09-13: "hide it, not delete it, until we know how
+// we'll actually use it." Component and its own QuickBooks RPCs are
+// untouched - uncomment the import and the render below to bring it
+// back.
+// import PayrollIntegrationCard from "./PayrollIntegrationCard";
 
 // PROSM Time - § live UX review, user-directed: "a professional
 // reorganization" - org-wide settings (today: the no-site geofence
@@ -31,7 +36,7 @@ export default function OrganizationSettingsPage() {
       <NoSiteRadiusSettingsCard />
       <SiteDefaultsSettingsCard />
       <SitePolicySettingsCard />
-      <PayrollIntegrationCard />
+      {/* <PayrollIntegrationCard /> - see the hidden import's own comment above */}
     </PageShell>
   );
 }
