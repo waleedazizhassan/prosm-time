@@ -228,6 +228,23 @@ enabled = true
 verify_jwt = false
 entrypoint = "./functions/export-worker-rates/index.ts"
 
+# PROSM Finance payroll bridge (2026-09-14) - same payroll:read scope,
+# same verify_jwt=false reasoning as export-worker-rates above.
+[functions.export-allowances]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/export-allowances/index.ts"
+
+[functions.export-leave]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/export-leave/index.ts"
+
+[functions.export-payroll-deductions]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/export-payroll-deductions/index.ts"
+
 # QuickBooks Online payroll integration (the 3rd competitive gap).
 # quickbooks-authorize/sync-quickbooks-time-activity require a real
 # caller session (Owner-only, enforced inside the RPCs they call).
