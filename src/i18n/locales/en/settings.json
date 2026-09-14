@@ -44,7 +44,12 @@
     "neverUsed": "never used",
     "newKeyTitle": "Your new API key",
     "newKeyWarning": "Copy this now - it will not be shown again. Only its prefix is kept afterward.",
-    "genericError": "Unable to load your integration keys."
+    "genericError": "Unable to load your integration keys.",
+    "scopeLabel": "Access",
+    "scope": {
+      "attendanceRead": "Attendance (read-only)",
+      "payrollRead": "Pay rates (read-only)"
+    }
   },
   "payroll": {
     "title": "Payroll Integration",

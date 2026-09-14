@@ -220,6 +220,14 @@ enabled = true
 verify_jwt = false
 entrypoint = "./functions/export-worker-attendance/index.ts"
 
+# PROSM Finance bridge (2026-09-14) - compensation export, its own
+# payroll:read scope, same verify_jwt=false reasoning as the exports
+# above (caller presents this org's own api_keys value, not a JWT).
+[functions.export-worker-rates]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/export-worker-rates/index.ts"
+
 # QuickBooks Online payroll integration (the 3rd competitive gap).
 # quickbooks-authorize/sync-quickbooks-time-activity require a real
 # caller session (Owner-only, enforced inside the RPCs they call).

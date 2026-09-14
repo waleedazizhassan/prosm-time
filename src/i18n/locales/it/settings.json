@@ -44,7 +44,12 @@
     "neverUsed": "mai utilizzata",
     "newKeyTitle": "La tua nuova chiave API",
     "newKeyWarning": "Copiala ora - non verrà più mostrata. In seguito verrà conservato solo il suo prefisso.",
-    "genericError": "Impossibile caricare le tue chiavi di integrazione."
+    "genericError": "Impossibile caricare le tue chiavi di integrazione.",
+    "scopeLabel": "Accesso",
+    "scope": {
+      "attendanceRead": "Presenze (sola lettura)",
+      "payrollRead": "Tariffe salariali (sola lettura)"
+    }
   },
   "payroll": {
     "title": "Integrazione buste paga",

@@ -44,7 +44,12 @@
     "neverUsed": "nie verwendet",
     "newKeyTitle": "Ihr neuer API-Schlüssel",
     "newKeyWarning": "Kopieren Sie ihn jetzt - er wird nicht erneut angezeigt. Danach wird nur sein Präfix gespeichert.",
-    "genericError": "Ihre Integrationsschlüssel konnten nicht geladen werden."
+    "genericError": "Ihre Integrationsschlüssel konnten nicht geladen werden.",
+    "scopeLabel": "Zugriff",
+    "scope": {
+      "attendanceRead": "Anwesenheit (nur lesen)",
+      "payrollRead": "Lohnsätze (nur lesen)"
+    }
   },
   "payroll": {
     "title": "Lohnbuchhaltungs-Integration",

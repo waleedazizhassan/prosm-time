@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Copy, Check } from "lucide-react";
 
-import ApiKeyRepository, { type ApiKeySummary } from "../../core/repositories/ApiKeyRepository";
+import ApiKeyRepository, { type ApiKeySummary, type ApiKeyScope } from "../../core/repositories/ApiKeyRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { formatDateTime } from "../../core/utils/formatDate";
 
 import Card from "../../components/common/Card";
 import Input from "../../components/common/Input";
+import Select from "../../components/common/Select";
 import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
 import Modal from "../../components/common/Modal";
@@ -20,12 +21,25 @@ import Modal from "../../components/common/Modal";
 // creation, in its own confirmation modal - list() below only ever
 // returns metadata afterward, matching the platform's own product API
 // key posture (never retrievable again, only revocable).
+//
+// A key now carries a scope (2026-09-14, PROSM Finance's compensation
+// bridge added payroll:read alongside attendance:read) - i18next's
+// default nsSeparator is ':', so the raw scope value can't be
+// interpolated straight into a translation key (it would be misread
+// as a namespace split); SCOPE_LABEL_KEYS below maps each scope to a
+// colon-free key instead.
+const SCOPE_LABEL_KEYS: Record<ApiKeyScope, string> = {
+  "attendance:read": "integrations.scope.attendanceRead",
+  "payroll:read": "integrations.scope.payrollRead",
+};
+
 export default function IntegrationsSettingsCard() {
   const { t, i18n } = useTranslation("settings");
 
   const [keys, setKeys] = useState<ApiKeySummary[]>([]);
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
+  const [scope, setScope] = useState<ApiKeyScope>("attendance:read");
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState("");
   const [revokingId, setRevokingId] = useState<string | null>(null);
@@ -48,7 +62,7 @@ export default function IntegrationsSettingsCard() {
     if (!name.trim()) return;
     setCreating(true);
     setError("");
-    const result = await ApiKeyRepository.generate(name.trim());
+    const result = await ApiKeyRepository.generate(name.trim(), scope);
     setCreating(false);
     if (!result.success || !result.data) {
       setError(humanizeBackendError(result.message, t) ?? t("integrations.createError"));
@@ -56,6 +70,7 @@ export default function IntegrationsSettingsCard() {
     }
     setNewKeyValue(result.data.apiKey);
     setName("");
+    setScope("attendance:read");
     load();
   };
 
@@ -106,7 +121,9 @@ export default function IntegrationsSettingsCard() {
               }}
             >
               <div>
-                <p style={{ margin: 0, fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-medium)" }}>{key.name}</p>
+                <p style={{ margin: 0, fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-medium)" }}>
+                  {key.name} <span style={{ fontWeight: "var(--font-weight-regular)", color: "var(--text-secondary)" }}>· {t(SCOPE_LABEL_KEYS[key.scope])}</span>
+                </p>
                 <p style={{ margin: "2px 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)", fontFamily: "monospace" }}>
                   {key.keyPrefix}…
                   {key.lastUsedAt ? ` · ${t("integrations.lastUsed", { time: formatDateTime(key.lastUsedAt, i18n.language) })}` : ` · ${t("integrations.neverUsed")}`}
@@ -131,6 +148,19 @@ export default function IntegrationsSettingsCard() {
             onChange={(event) => setName(event.target.value)}
             disabled={creating}
             placeholder={t("integrations.namePlaceholder")}
+          />
+        </div>
+        <div style={{ minWidth: 200 }}>
+          <Select
+            label={t("integrations.scopeLabel")}
+            name="apiKeyScope"
+            value={scope}
+            onChange={(event) => setScope(event.target.value as ApiKeyScope)}
+            disabled={creating}
+            options={[
+              { value: "attendance:read", label: t(SCOPE_LABEL_KEYS["attendance:read"]) },
+              { value: "payroll:read", label: t(SCOPE_LABEL_KEYS["payroll:read"]) },
+            ]}
           />
         </div>
         <Button onClick={handleCreate} loading={creating} disabled={!name.trim()}>

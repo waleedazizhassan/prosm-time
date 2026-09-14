@@ -6,10 +6,13 @@ export interface ServiceResult<T = null> {
   data: T | null;
 }
 
+export type ApiKeyScope = "attendance:read" | "payroll:read";
+
 export interface ApiKeySummary {
   id: string;
   name: string;
   keyPrefix: string;
+  scope: ApiKeyScope;
   createdAt: string;
   lastUsedAt: string | null;
   revokedAt: string | null;
@@ -26,6 +29,7 @@ interface ApiKeyRow {
   id: string;
   name: string;
   key_prefix: string;
+  scope: ApiKeyScope;
   created_at: string;
   last_used_at: string | null;
   revoked_at: string | null;
@@ -36,6 +40,7 @@ function mapRow(row: ApiKeyRow): ApiKeySummary {
     id: row.id,
     name: row.name,
     keyPrefix: row.key_prefix,
+    scope: row.scope,
     createdAt: row.created_at,
     lastUsedAt: row.last_used_at,
     revokedAt: row.revoked_at,
@@ -49,6 +54,12 @@ function mapRow(row: ApiKeyRow): ApiKeySummary {
 // is only ever returned once, from generate() itself - list() only
 // ever returns metadata (name/prefix/timestamps), matching the same
 // one-time-display posture as the platform's own product API keys.
+//
+// Gained a scope param 2026-09-14 for PROSM Finance's compensation
+// bridge (payroll:read, export-worker-rates) - a key holds exactly one
+// scope (least privilege: a leaked attendance:read key still can't see
+// pay rates), so Finance will hold two separate keys, not one
+// combined key.
 class ApiKeyRepository {
   get client() {
     return DatabaseManager.getClient();
@@ -56,7 +67,7 @@ class ApiKeyRepository {
 
   async list(): Promise<ServiceResult<ApiKeySummary[]>> {
     try {
-      const { data, error } = await this.client.from("api_keys").select("id, name, key_prefix, created_at, last_used_at, revoked_at").order("created_at", { ascending: false });
+      const { data, error } = await this.client.from("api_keys").select("id, name, key_prefix, scope, created_at, last_used_at, revoked_at").order("created_at", { ascending: false });
       if (error) return createError(error.message);
       return createSuccess((data ?? []).map(mapRow));
     } catch (error) {
@@ -64,9 +75,9 @@ class ApiKeyRepository {
     }
   }
 
-  async generate(name: string): Promise<ServiceResult<{ keyId: string; apiKey: string }>> {
+  async generate(name: string, scope: ApiKeyScope = "attendance:read"): Promise<ServiceResult<{ keyId: string; apiKey: string }>> {
     try {
-      const { data, error } = await this.client.rpc("generate_prosm_time_api_key", { p_name: name });
+      const { data, error } = await this.client.rpc("generate_prosm_time_api_key", { p_name: name, p_scope: scope });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to create this API key.");
       return createSuccess({ keyId: data.keyId, apiKey: data.apiKey });

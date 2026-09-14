@@ -8,6 +8,7 @@ import PermissionRepository, { type Permission } from "../../core/repositories/P
 import DeviceBindingRepository, { type DeviceBinding } from "../../core/repositories/DeviceBindingRepository";
 import KioskRepository from "../../core/repositories/KioskRepository";
 import LeaveRepository from "../../core/repositories/LeaveRepository";
+import PayRateRepository, { type PayRate, type PayRateType } from "../../core/repositories/PayRateRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import PageShell from "../../components/common/PageShell";
@@ -17,6 +18,7 @@ import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
+import Select from "../../components/common/Select";
 import Modal from "../../components/common/Modal";
 import Textarea from "../../components/common/Textarea";
 import StatusBadge from "../../components/common/StatusBadge";
@@ -67,6 +69,13 @@ export default function PersonDetailPage() {
   const [entitlementError, setEntitlementError] = useState("");
   const [entitlementSuccess, setEntitlementSuccess] = useState(false);
 
+  const [currentPayRate, setCurrentPayRate] = useState<PayRate | null>(null);
+  const [payRateTypeInput, setPayRateTypeInput] = useState<PayRateType>("MONTHLY");
+  const [payRateAmountInput, setPayRateAmountInput] = useState("");
+  const [payRateSubmitting, setPayRateSubmitting] = useState(false);
+  const [payRateError, setPayRateError] = useState("");
+  const [payRateSuccess, setPayRateSuccess] = useState(false);
+
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [deleteReason, setDeleteReason] = useState("");
   const [deleteSubmitting, setDeleteSubmitting] = useState(false);
@@ -96,19 +105,23 @@ export default function PersonDetailPage() {
   // social-insurance tenure legally entitles 30 days/year, not the
   // org's 21-day default). Owner-only, same posture as canDeactivate.
   const canEditLeaveEntitlement = Boolean(profile?.isOwner);
+  // § PROSM Finance labor-cost bridge (2026-09-14) - compensation data,
+  // Owner-only both here and server-side (set_worker_pay_rate).
+  const canEditPayRate = Boolean(profile?.isOwner);
 
   const load = useCallback(async () => {
     if (!userId) return;
     setLoading(true);
     setLoadError("");
 
-    const [memberResult, catalogResult, effectiveResult, overridesResult, devicesResult, leaveBalanceResult] = await Promise.all([
+    const [memberResult, catalogResult, effectiveResult, overridesResult, devicesResult, leaveBalanceResult, payRateResult] = await Promise.all([
       EmployeeRepository.getMember(userId),
       PermissionRepository.listCatalog(),
       PermissionRepository.getEffectivePermissions(userId),
       PermissionRepository.getUserOverrides(userId),
       DeviceBindingRepository.listForUser(userId),
       LeaveRepository.getBalanceFor(userId),
+      PayRateRepository.getCurrentForUser(userId),
     ]);
 
     if (!memberResult.success) {
@@ -126,6 +139,13 @@ export default function PersonDetailPage() {
       const annual = leaveBalanceResult.data.balances.find((entry) => entry.leaveType === "annual");
       setAnnualEntitlement(annual?.entitledDays ?? null);
       setAnnualEntitlementInput(annual?.entitledDays != null ? String(annual.entitledDays) : "");
+    }
+    if (payRateResult.success) {
+      setCurrentPayRate(payRateResult.data);
+      if (payRateResult.data) {
+        setPayRateTypeInput(payRateResult.data.rateType);
+        setPayRateAmountInput(String(payRateResult.data.rateAmount));
+      }
     }
     setLoading(false);
   }, [userId, t]);
@@ -145,6 +165,23 @@ export default function PersonDetailPage() {
     }
     setAnnualEntitlement(days);
     setEntitlementSuccess(true);
+  };
+
+  const handleSetPayRate = async () => {
+    if (!userId) return;
+    const amount = Number(payRateAmountInput);
+    if (!Number.isFinite(amount) || amount <= 0) return;
+    setPayRateSubmitting(true);
+    setPayRateError("");
+    setPayRateSuccess(false);
+    const result = await PayRateRepository.setRateForUser(userId, payRateTypeInput, amount);
+    setPayRateSubmitting(false);
+    if (!result.success) {
+      setPayRateError(humanizeBackendError(result.message, t) ?? t("detail.payRateError"));
+      return;
+    }
+    setPayRateSuccess(true);
+    await load();
   };
 
   useEffect(() => {
@@ -428,6 +465,34 @@ export default function PersonDetailPage() {
           />
           <Button onClick={handleSetAnnualEntitlement} loading={entitlementSubmitting} disabled={!annualEntitlementInput.trim()}>
             {t("detail.leaveEntitlementAction")}
+          </Button>
+        </Card>
+      ) : null}
+
+      {canEditPayRate ? (
+        <Card title={t("detail.payRateTitle")}>
+          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.payRateHint")}</p>
+          {currentPayRate ? (
+            <p style={{ fontSize: "var(--font-sm)", margin: "0 0 var(--space-2)" }}>
+              {t("detail.payRateCurrent", { amount: currentPayRate.rateAmount, currency: currentPayRate.currency, type: t(`detail.payRateType.${currentPayRate.rateType}`) })}
+            </p>
+          ) : null}
+          <ErrorText>{payRateError}</ErrorText>
+          {payRateSuccess ? <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("detail.payRateSuccess")}</p> : null}
+          <Select
+            label={t("detail.payRateTypeLabel")}
+            name="payRateType"
+            value={payRateTypeInput}
+            onChange={(event) => setPayRateTypeInput(event.target.value as PayRateType)}
+            disabled={payRateSubmitting}
+            options={[
+              { value: "MONTHLY", label: t("detail.payRateType.MONTHLY") },
+              { value: "HOURLY", label: t("detail.payRateType.HOURLY") },
+            ]}
+          />
+          <Input label={t("detail.payRateAmountLabel")} name="payRateAmount" type="number" value={payRateAmountInput} onChange={(event) => setPayRateAmountInput(event.target.value)} disabled={payRateSubmitting} />
+          <Button onClick={handleSetPayRate} loading={payRateSubmitting} disabled={!payRateAmountInput.trim()}>
+            {t("detail.payRateAction")}
           </Button>
         </Card>
       ) : null}
