@@ -12,6 +12,7 @@ import LeaveRepository from "../../core/repositories/LeaveRepository";
 import TimesheetRepository from "../../core/repositories/TimesheetRepository";
 import ShiftRepository from "../../core/repositories/ShiftRepository";
 import Card from "../../components/common/Card";
+import LoadingState from "../../components/common/LoadingState";
 import Modal from "../../components/common/Modal";
 import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
@@ -224,7 +225,20 @@ export default function AdminOverviewCard() {
   const weeklyTotalHours = weeklyBars.reduce((sum, d) => sum + d.hours, 0);
   const totalNeedsAttention = pending.length + pendingLeaveCount + pendingTimesheetCount;
 
-  if (!canView || loading) return null;
+  // § real fix for the "blank offline Dashboard" complaint (2026-09-15)
+  // - same reasoning as ClockInOutCard's own identical fix: `return
+  // null` while loading meant every second of a slow/flaky load (this
+  // card alone fires 10 parallel reads plus a per-site follow-up) was
+  // a totally blank Owner/Manager Dashboard. A visible spinner reads
+  // as "working," not "broken."
+  if (!canView) return null;
+  if (loading) {
+    return (
+      <Card>
+        <LoadingState fullHeight />
+      </Card>
+    );
+  }
 
   // Real staffing-level read on data already loaded above - no new
   // fetch. Thresholds are a plain, explainable rule of thumb (not a

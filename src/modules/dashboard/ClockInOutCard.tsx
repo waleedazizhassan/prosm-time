@@ -17,6 +17,7 @@ import { useOfflineQueue } from "../../core/offline/useOfflineQueue";
 import { formatTimeOnly } from "../../core/utils/formatDate";
 
 import Card from "../../components/common/Card";
+import LoadingState from "../../components/common/LoadingState";
 import Select from "../../components/common/Select";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
@@ -30,6 +31,49 @@ import ErrorText from "../../components/common/ErrorText";
 import styles from "./ClockInOutCard.module.css";
 
 const CHANGE_SITE_NO_SITE_VALUE = "__no_site__";
+
+// § real fix for the "blank offline Dashboard" complaint (2026-09-15) -
+// same "hydrate from cache immediately, refresh in background" pattern
+// already proven for AuthContext's own profile cache (2026-09-13) and
+// WeatherMiniPanel's getLastKnownWeather() - this is the employee's
+// actual daily home screen, so it's the highest-value place to apply
+// it. Scoped per profile.id (not a single shared key) so a device that
+// switches accounts never shows one person's clock-in state to
+// another. Not TTL-gated like Weather's cache - attendance state is
+// always shown as "last known, refreshing now" rather than discarded
+// after some arbitrary age, matching AuthContext's own choice.
+const CLOCKINOUT_CACHE_KEY_PREFIX = "prosm_time_clockinout_cache_v1_";
+
+interface CachedClockInOutState {
+  session: AttendanceSession | null;
+  currentSite: Site | null;
+  sites: Site[];
+  presenceSession: PresenceSession | null;
+  activeBreakId: string | null;
+  activeBreakStartedAt: string | null;
+  completedBreakSeconds: number;
+  lastCompletedSession: AttendanceSession | null;
+}
+
+function readClockInOutCache(profileId: string | undefined): CachedClockInOutState | null {
+  if (!profileId) return null;
+  try {
+    const raw = localStorage.getItem(CLOCKINOUT_CACHE_KEY_PREFIX + profileId);
+    if (!raw) return null;
+    return JSON.parse(raw) as CachedClockInOutState;
+  } catch {
+    return null;
+  }
+}
+
+function writeClockInOutCache(profileId: string | undefined, state: CachedClockInOutState): void {
+  if (!profileId) return;
+  try {
+    localStorage.setItem(CLOCKINOUT_CACHE_KEY_PREFIX + profileId, JSON.stringify(state));
+  } catch {
+    // Private browsing / storage disabled - the cache is a convenience, never a requirement.
+  }
+}
 
 function formatElapsed(totalSeconds: number): string {
   const clamped = Math.max(0, Math.floor(totalSeconds));
@@ -69,22 +113,28 @@ export default function ClockInOutCard() {
   const { t, i18n } = useTranslation("dashboard");
   const { profile } = useAuth();
 
-  const [session, setSession] = useState<AttendanceSession | null>(null);
-  const [currentSite, setCurrentSite] = useState<Site | null>(null);
-  const [presenceSession, setPresenceSession] = useState<PresenceSession | null>(null);
-  const [sites, setSites] = useState<Site[]>([]);
+  // Read exactly once, on mount - React guarantees a useState lazy
+  // initializer only ever runs the first time, so this one localStorage
+  // read seeds every field below without re-reading per field.
+  const [initialCache] = useState(() => readClockInOutCache(profile?.id));
+  const hydratedFromCacheRef = useRef(initialCache !== null);
+
+  const [session, setSession] = useState<AttendanceSession | null>(initialCache?.session ?? null);
+  const [currentSite, setCurrentSite] = useState<Site | null>(initialCache?.currentSite ?? null);
+  const [presenceSession, setPresenceSession] = useState<PresenceSession | null>(initialCache?.presenceSession ?? null);
+  const [sites, setSites] = useState<Site[]>(initialCache?.sites ?? []);
   const [projects, setProjects] = useState<Project[]>([]);
   const [siteId, setSiteId] = useState("");
   const [manualLocationLabel, setManualLocationLabel] = useState("");
   const [projectId, setProjectId] = useState("");
   const [cameraFor, setCameraFor] = useState<"clockIn" | "clockOut" | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(initialCache === null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [evidenceWarning, setEvidenceWarning] = useState("");
   const [sosSubmitting, setSosSubmitting] = useState(false);
   const [sosSent, setSosSent] = useState(false);
-  const [activeBreakId, setActiveBreakId] = useState<string | null>(null);
+  const [activeBreakId, setActiveBreakId] = useState<string | null>(initialCache?.activeBreakId ?? null);
   // § live UX review, user-directed - "the break button doesn't pause
   // the elapsed-time counter, it just keeps counting." activeBreakStartedAt
   // freezes the ticking display the instant a break starts;
@@ -92,8 +142,8 @@ export default function ClockInOutCard() {
   // ended this session, subtracted from wall-clock elapsed so the
   // counter resumes exactly where it left off once the break ends
   // (never jumps forward by the break's own duration).
-  const [activeBreakStartedAt, setActiveBreakStartedAt] = useState<string | null>(null);
-  const [completedBreakSeconds, setCompletedBreakSeconds] = useState(0);
+  const [activeBreakStartedAt, setActiveBreakStartedAt] = useState<string | null>(initialCache?.activeBreakStartedAt ?? null);
+  const [completedBreakSeconds, setCompletedBreakSeconds] = useState(initialCache?.completedBreakSeconds ?? 0);
   const [breakSubmitting, setBreakSubmitting] = useState(false);
   const [breakWarning, setBreakWarning] = useState("");
   // § live UX review, user-directed - a real summary (worked/break/
@@ -138,7 +188,7 @@ export default function ClockInOutCard() {
   // separately so it's clear this is a detected walk-in, not a formal
   // assignment.
   const [nearbySiteIds, setNearbySiteIds] = useState<Set<string>>(new Set());
-  const [lastCompletedSession, setLastCompletedSession] = useState<AttendanceSession | null>(null);
+  const [lastCompletedSession, setLastCompletedSession] = useState<AttendanceSession | null>(initialCache?.lastCompletedSession ?? null);
   // § live UX review, user-directed - a real confirmation screen shown
   // right before every clock-in/out actually submits (photo if any,
   // GPS detail, site/workplace, time), with an optional note/activity
@@ -164,46 +214,78 @@ export default function ClockInOutCard() {
   const pendingOfflineItems = useOfflineQueue(profile?.id);
   const pendingOfflineItem = pendingOfflineItems[0] ?? null;
 
-  const load = useCallback(async () => {
-    if (!profile) return;
-    setLoading(true);
-    const [sessionResult, sitesResult, presenceResult] = await Promise.all([
-      AttendanceRepository.getCurrentSession(profile.id),
-      SiteRepository.listAssignedSites(profile.id),
-      PresenceRepository.getActiveSession(profile.id),
-    ]);
-    const activeSession = sessionResult.success ? sessionResult.data ?? null : null;
-    setSession(activeSession);
-    setPresenceSession(presenceResult.success ? presenceResult.data ?? null : null);
-    const assignedSites = sitesResult.success ? sitesResult.data ?? [] : [];
-    setSites(assignedSites);
-    setSiteId((current) => current || assignedSites[0]?.id || "");
-
-    if (activeSession) {
-      const siteResult = await SiteRepository.getSite(activeSession.siteId);
-      setCurrentSite(siteResult.success ? siteResult.data ?? null : null);
-      const [breakResult, completedBreakResult] = await Promise.all([
-        AttendanceRepository.getActiveBreak(activeSession.id),
-        AttendanceRepository.getCompletedBreakSeconds(activeSession.id),
+  // § real fix for the "blank offline Dashboard" complaint (2026-09-15)
+  // - `silent` (true on the very first mount when a cache already
+  // hydrated the screen) skips the setLoading(true) flip, so a
+  // background refresh never yanks a real, already-visible card back
+  // to a spinner - it just quietly updates once fresh data arrives, or
+  // leaves the cached content exactly as it was if the refresh fails.
+  const load = useCallback(
+    async (silent = false) => {
+      if (!profile) return;
+      if (!silent) setLoading(true);
+      const [sessionResult, sitesResult, presenceResult] = await Promise.all([
+        AttendanceRepository.getCurrentSession(profile.id),
+        SiteRepository.listAssignedSites(profile.id),
+        PresenceRepository.getActiveSession(profile.id),
       ]);
-      setActiveBreakId(breakResult.success ? breakResult.data?.id ?? null : null);
-      setActiveBreakStartedAt(breakResult.success ? breakResult.data?.startedAt ?? null : null);
-      setCompletedBreakSeconds(completedBreakResult.success ? completedBreakResult.data ?? 0 : 0);
-    } else {
-      setCurrentSite(null);
-      setActiveBreakId(null);
-      setActiveBreakStartedAt(null);
-      setCompletedBreakSeconds(0);
-      const lastSessionResult = await AttendanceRepository.getLastCompletedSession(profile.id);
-      setLastCompletedSession(lastSessionResult.success ? lastSessionResult.data ?? null : null);
-    }
+      const activeSession = sessionResult.success ? sessionResult.data ?? null : null;
+      setSession(activeSession);
+      const activePresence = presenceResult.success ? presenceResult.data ?? null : null;
+      setPresenceSession(activePresence);
+      const assignedSites = sitesResult.success ? sitesResult.data ?? [] : [];
+      setSites(assignedSites);
+      setSiteId((current) => current || assignedSites[0]?.id || "");
 
-    setSosSent(false);
-    setLoading(false);
-  }, [profile]);
+      let resolvedCurrentSite: Site | null = null;
+      let resolvedActiveBreakId: string | null = null;
+      let resolvedActiveBreakStartedAt: string | null = null;
+      let resolvedCompletedBreakSeconds = 0;
+      let resolvedLastCompletedSession: AttendanceSession | null = null;
+
+      if (activeSession) {
+        const siteResult = await SiteRepository.getSite(activeSession.siteId);
+        resolvedCurrentSite = siteResult.success ? siteResult.data ?? null : null;
+        setCurrentSite(resolvedCurrentSite);
+        const [breakResult, completedBreakResult] = await Promise.all([
+          AttendanceRepository.getActiveBreak(activeSession.id),
+          AttendanceRepository.getCompletedBreakSeconds(activeSession.id),
+        ]);
+        resolvedActiveBreakId = breakResult.success ? breakResult.data?.id ?? null : null;
+        resolvedActiveBreakStartedAt = breakResult.success ? breakResult.data?.startedAt ?? null : null;
+        resolvedCompletedBreakSeconds = completedBreakResult.success ? completedBreakResult.data ?? 0 : 0;
+        setActiveBreakId(resolvedActiveBreakId);
+        setActiveBreakStartedAt(resolvedActiveBreakStartedAt);
+        setCompletedBreakSeconds(resolvedCompletedBreakSeconds);
+      } else {
+        setCurrentSite(null);
+        setActiveBreakId(null);
+        setActiveBreakStartedAt(null);
+        setCompletedBreakSeconds(0);
+        const lastSessionResult = await AttendanceRepository.getLastCompletedSession(profile.id);
+        resolvedLastCompletedSession = lastSessionResult.success ? lastSessionResult.data ?? null : null;
+        setLastCompletedSession(resolvedLastCompletedSession);
+      }
+
+      writeClockInOutCache(profile.id, {
+        session: activeSession,
+        currentSite: resolvedCurrentSite,
+        sites: assignedSites,
+        presenceSession: activePresence,
+        activeBreakId: resolvedActiveBreakId,
+        activeBreakStartedAt: resolvedActiveBreakStartedAt,
+        completedBreakSeconds: resolvedCompletedBreakSeconds,
+        lastCompletedSession: resolvedLastCompletedSession,
+      });
+
+      setSosSent(false);
+      setLoading(false);
+    },
+    [profile],
+  );
 
   useEffect(() => {
-    load();
+    load(hydratedFromCacheRef.current);
   }, [load]);
 
   // WP-15 - once a queued action finally syncs (or a failed one is
@@ -324,7 +406,23 @@ export default function ClockInOutCard() {
     return () => clearInterval(interval);
   }, [session]);
 
-  if (!profile || loading) return null;
+  // § real fix for the "blank offline Dashboard" complaint (2026-09-15,
+  // user sent a live screenshot after the earlier global-fetch-timeout
+  // fix): that fix bounds the worst case at 20s but never addressed
+  // what the screen actually SHOWS during any slow/flaky load - this
+  // component's own `return null` meant every one of those seconds was
+  // a totally blank card, indistinguishable from a crashed/dead app.
+  // A visible spinner during a genuinely slow load reads as "working",
+  // not "broken" - the single highest-value fix for the reported
+  // symptom, independent of what's actually making the network slow.
+  if (!profile) return null;
+  if (loading) {
+    return (
+      <Card>
+        <LoadingState fullHeight />
+      </Card>
+    );
+  }
 
   const selectedSite = sites.find((site) => site.id === siteId) ?? null;
   // § live UX review, user-directed - "clock-in without a site doesn't
