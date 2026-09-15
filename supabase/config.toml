@@ -228,6 +228,21 @@ enabled = true
 verify_jwt = false
 entrypoint = "./functions/export-worker-rates/index.ts"
 
+# PROSM Finance bridge (2026-09-15) - real sites/workforce directory,
+# not just derived from attendance records that already exist. Same
+# api_keys/attendance:read posture as export-attendance itself (names/
+# status only, no compensation data, so this deliberately does not
+# need payroll:read).
+[functions.export-sites]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/export-sites/index.ts"
+
+[functions.export-workers]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/export-workers/index.ts"
+
 # PROSM Finance payroll bridge (2026-09-14) - same payroll:read scope,
 # same verify_jwt=false reasoning as export-worker-rates above.
 [functions.export-allowances]
