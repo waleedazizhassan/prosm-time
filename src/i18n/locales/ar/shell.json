@@ -81,18 +81,18 @@
       "body": "{{name}} أرسل تنبيه طوارئ (SOS)."
     },
     "timesheet": {
-      "submittedTitle": "تايم شيت مُرسل للمراجعة",
-      "submittedBody": "تم إرسال تايم شيت وهو بانتظار موافقتك.",
-      "approvedTitle": "تم اعتماد التايم شيت",
-      "approvedBody": "تم اعتماد التايم شيت بتاعك وأصبح مقفلاً الآن.",
-      "rejectedTitle": "تم رفض التايم شيت",
-      "rejectedBody": "تم رفض التايم شيت بتاعك وأُعيد لحالة المسودة.",
-      "correctionRequestedTitle": "طلب تعديل على تايم شيت",
-      "correctionRequestedBody": "طلب موظف تعديل على تايم شيت مقفل.",
-      "correctionApprovedTitle": "تمت الموافقة على طلب تعديل التايم شيت",
-      "correctionApprovedBody": "تمت الموافقة على طلب تعديل التايم شيت بتاعك وأُعيدت الفترة للتعديل والإرسال من جديد.",
-      "correctionRejectedTitle": "تم رفض طلب تعديل التايم شيت",
-      "correctionRejectedBody": "تم رفض طلب تعديل التايم شيت بتاعك."
+      "submittedTitle": "كشف دوام مُرسل للمراجعة",
+      "submittedBody": "تم إرسال كشف دوام وهو بانتظار موافقتك.",
+      "approvedTitle": "تم اعتماد كشف الدوام",
+      "approvedBody": "تم اعتماد كشف الدوام بتاعك وأصبح مقفلاً الآن.",
+      "rejectedTitle": "تم رفض كشف الدوام",
+      "rejectedBody": "تم رفض كشف الدوام بتاعك وأُعيد لحالة المسودة.",
+      "correctionRequestedTitle": "طلب تعديل على كشف دوام",
+      "correctionRequestedBody": "طلب موظف تعديل على كشف دوام مقفل.",
+      "correctionApprovedTitle": "تمت الموافقة على طلب تعديل كشف الدوام",
+      "correctionApprovedBody": "تمت الموافقة على طلب تعديل كشف الدوام بتاعك وأُعيدت الفترة للتعديل والإرسال من جديد.",
+      "correctionRejectedTitle": "تم رفض طلب تعديل كشف الدوام",
+      "correctionRejectedBody": "تم رفض طلب تعديل كشف الدوام بتاعك."
     },
     "shiftAssigned": {
       "title": "تم جدولة شيفت جديد لك",

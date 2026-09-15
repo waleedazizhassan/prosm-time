@@ -38,13 +38,45 @@ const SOS_SIREN_SECONDS = 30;
 // clock_in/clock_out_prosm_time_attendance's own create_prosm_time_
 // notification calls) so ExceptionsCard can scroll to and focus that
 // exact reason field.
-function notificationRoute(type: string): string {
+// § real bug, user-reported 2026-09-15 - "timesheet notifications don't
+// navigate to the Timesheets page." 6 real timesheet_* notification
+// types exist (20260901120000 onward) but none were ever added here -
+// every one fell into the generic /dashboard fallback, same class of
+// gap as the out_of_zone_employee fix above, just never closed for
+// this whole category. timesheet_submitted/approved/rejected carry the
+// timesheet's own id as relatedEntityId (see approve_prosm_time_
+// timesheet's own notification call) - routed straight to its report
+// page. The 3 correction-flavored types carry a timesheet_correction
+// row's own id instead (a different entity - see submit/review
+// timesheet correction's own notification calls), which this bell has
+// no cheap way to resolve back to a parent timesheet id client-side -
+// routed to the plain Timesheets list rather than guessing. Also wires
+// up shift_assigned (Schedule) and the 3 manager-facing anomaly alerts
+// (site_change_alert/missing_clock_out/location_plausibility_flag,
+// all notify_prosm_time_site_managers_or_owner recipients - same
+// review surface as exception_pending_review/out_of_zone_manager) -
+// found while auditing every real notification type against this
+// switch for the same gap.
+function notificationRoute(type: string, relatedEntityId?: string | null): string {
   switch (type) {
     case "exception_pending_review":
     case "out_of_zone_manager":
+    case "site_change_alert":
+    case "missing_clock_out":
+    case "location_plausibility_flag":
       return "/manager";
     case "sos_alert":
       return "/emergency-log";
+    case "shift_assigned":
+      return "/schedule";
+    case "timesheet_submitted":
+    case "timesheet_approved":
+    case "timesheet_rejected":
+      return relatedEntityId ? `/timesheets/${relatedEntityId}/report` : "/timesheets";
+    case "timesheet_correction_requested":
+    case "timesheet_correction_approved":
+    case "timesheet_correction_rejected":
+      return "/timesheets";
     case "out_of_zone_employee":
     case "correction_reviewed":
     case "break_exceeded":
@@ -161,7 +193,7 @@ export default function NotificationBell() {
       navigate(`/dashboard?exceptionId=${notification.relatedEntityId}`);
       return;
     }
-    navigate(notificationRoute(notification.type));
+    navigate(notificationRoute(notification.type, notification.relatedEntityId));
   };
 
   const handleDismissSos = () => {
