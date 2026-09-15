@@ -7,7 +7,6 @@ type TFunc = (key: string, options?: Record<string, unknown>) => string;
 export interface LicenseCertificateData {
   organizationName: string;
   organizationCode: string;
-  siteName: string;
   ownerFullName: string;
   ownerEmail: string;
   licenseNumber: string;
@@ -50,7 +49,6 @@ export function buildLicenseCertificatePdf(data: LicenseCertificateData, languag
 
     <table style="width:100%;border-collapse:collapse;font-size:13px;">
       ${row(t("activation.certificate.organization"), `${data.organizationName} (${data.organizationCode})`)}
-      ${row(t("activation.certificate.site"), data.siteName)}
       ${row(t("activation.certificate.owner"), `${data.ownerFullName} (${data.ownerEmail})`)}
       ${row(t("activation.certificate.licenseNumber"), data.licenseNumber)}
       ${row(t("activation.certificate.status"), data.status)}

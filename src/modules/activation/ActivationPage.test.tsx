@@ -18,7 +18,6 @@ vi.mock("../../core/auth/AuthService", () => ({
 function fillAndSubmit() {
   fireEvent.change(screen.getByLabelText(/Activation code/i), { target: { value: "PMTIME-ABCD-1234-EFGH" } });
   fireEvent.change(screen.getByLabelText(/Organization name/i), { target: { value: "Acme Field Services" } });
-  fireEvent.change(screen.getByLabelText(/Enter your site name/i), { target: { value: "Main Branch" } });
   fireEvent.change(screen.getByLabelText(/Your full name/i), { target: { value: "Jordan Rivera" } });
   fireEvent.change(screen.getByLabelText(/Your email/i), { target: { value: "owner@acme.example" } });
   fireEvent.change(screen.getByLabelText(/Choose a password/i), { target: { value: "SuperSecret123" } });
@@ -53,7 +52,6 @@ describe("ActivationPage", () => {
       expect(ActivationRepository.activateOrganization).toHaveBeenCalledWith({
         activationCode: "PMTIME-ABCD-1234-EFGH",
         organizationName: "Acme Field Services",
-        siteName: "Main Branch",
         ownerEmail: "owner@acme.example",
         ownerPassword: "SuperSecret123",
         ownerFullName: "Jordan Rivera",
