@@ -32,9 +32,9 @@
   },
   "integrations": {
     "title": "Intégrations",
-    "hint": "Une clé en lecture seule pour qu'un autre produit PROSM (comme PROSM Projects) puisse récupérer les présences réelles et vérifiées de votre équipe au lieu de les saisir à la main. Cette clé ne peut jamais rien écrire en retour dans PROSM Time.",
+    "hint": "Une clé en lecture seule pour qu'un autre produit PROSM (comme PROSM Projects ou PROSM Finance) puisse récupérer les présences réelles et vérifiées de votre équipe - et les données de paie si la clé a la portée paie - au lieu de les saisir à la main. Cette clé ne peut jamais rien écrire en retour dans PROSM Time.",
     "nameLabel": "Nom de la clé",
-    "namePlaceholder": "ex. PROSM Projects",
+    "namePlaceholder": "ex. PROSM Projects ou PROSM Finance",
     "createAction": "Créer une clé",
     "createError": "Impossible de créer cette clé API.",
     "revokeAction": "Révoquer",

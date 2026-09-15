@@ -32,9 +32,9 @@
   },
   "integrations": {
     "title": "Integrationen",
-    "hint": "Ein reiner Lese-Schlüssel, damit ein anderes PROSM-Produkt (wie PROSM Projects) die echte, verifizierte Anwesenheit Ihres Teams abrufen kann, statt sie manuell einzutippen. Dieser Schlüssel kann niemals etwas an PROSM Time zurückschreiben.",
+    "hint": "Ein reiner Lese-Schlüssel, damit ein anderes PROSM-Produkt (wie PROSM Projects oder PROSM Finance) die echte, verifizierte Anwesenheit Ihres Teams - und bei Lohn-Berechtigung auch Gehaltsdaten - abrufen kann, statt sie manuell einzutippen. Dieser Schlüssel kann niemals etwas an PROSM Time zurückschreiben.",
     "nameLabel": "Schlüsselname",
-    "namePlaceholder": "z. B. PROSM Projects",
+    "namePlaceholder": "z. B. PROSM Projects oder PROSM Finance",
     "createAction": "Schlüssel erstellen",
     "createError": "Dieser API-Schlüssel konnte nicht erstellt werden.",
     "revokeAction": "Widerrufen",

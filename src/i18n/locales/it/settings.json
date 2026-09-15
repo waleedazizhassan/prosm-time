@@ -32,9 +32,9 @@
   },
   "integrations": {
     "title": "Integrazioni",
-    "hint": "Una chiave di sola lettura per permettere a un altro prodotto PROSM (come PROSM Projects) di recuperare le presenze reali e verificate del tuo team invece di digitarle a mano. Questa chiave non può mai scrivere nulla in PROSM Time.",
+    "hint": "Una chiave di sola lettura per permettere a un altro prodotto PROSM (come PROSM Projects o PROSM Finance) di recuperare le presenze reali e verificate del tuo team - e i dati sulle paghe se la chiave ha l'ambito paghe - invece di digitarle a mano. Questa chiave non può mai scrivere nulla in PROSM Time.",
     "nameLabel": "Nome chiave",
-    "namePlaceholder": "es. PROSM Projects",
+    "namePlaceholder": "es. PROSM Projects o PROSM Finance",
     "createAction": "Crea chiave",
     "createError": "Impossibile creare questa chiave API.",
     "revokeAction": "Revoca",

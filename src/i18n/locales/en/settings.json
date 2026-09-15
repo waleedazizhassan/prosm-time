@@ -32,9 +32,9 @@
   },
   "integrations": {
     "title": "Integrations",
-    "hint": "A read-only key so another PROSM product (like PROSM Projects) can pull your team's real, verified attendance instead of hand-typing it. This key can never write anything back into PROSM Time.",
+    "hint": "A read-only key so another PROSM product (like PROSM Projects or PROSM Finance) can pull your team's real, verified attendance - and payroll data too, if the key has payroll scope - instead of hand-typing it. This key can never write anything back into PROSM Time.",
     "nameLabel": "Key name",
-    "namePlaceholder": "e.g. PROSM Projects",
+    "namePlaceholder": "e.g. PROSM Projects or PROSM Finance",
     "createAction": "Create key",
     "createError": "Unable to create this API key.",
     "revokeAction": "Revoke",
