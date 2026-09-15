@@ -40,6 +40,9 @@
     "checking": "Vérification...",
     "upToDate": "Vous avez la dernière version."
   },
+  "offline": {
+    "message": "Vous êtes hors ligne - certaines informations peuvent être obsolètes jusqu'au retour de la connexion."
+  },
   "notificationsLabel": "Notifications",
   "noNotifications": "Aucune notification pour le moment.",
   "notifications": {

@@ -40,6 +40,9 @@
     "checking": "Verifica in corso...",
     "upToDate": "Hai la versione più recente."
   },
+  "offline": {
+    "message": "Sei offline - alcune informazioni potrebbero non essere aggiornate finché la connessione non torna."
+  },
   "notificationsLabel": "Notifiche",
   "noNotifications": "Nessuna notifica al momento.",
   "notifications": {

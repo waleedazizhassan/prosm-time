@@ -40,6 +40,9 @@
     "checking": "Checking...",
     "upToDate": "You're on the latest version."
   },
+  "offline": {
+    "message": "You're offline - some information may be out of date until your connection comes back."
+  },
   "notificationsLabel": "Notifications",
   "noNotifications": "No notifications yet.",
   "notifications": {

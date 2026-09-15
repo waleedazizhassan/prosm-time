@@ -4,6 +4,7 @@ import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Main from "./Main";
 import InstallationStatusBanner from "./InstallationStatusBanner";
+import OfflineBanner from "./OfflineBanner";
 import PresenceTrackingLoop from "./PresenceTrackingLoop";
 import { LayoutProvider } from "./LayoutContext";
 import styles from "./AppShell.module.css";
@@ -21,6 +22,7 @@ export default function AppShell() {
     <LayoutProvider>
       <div className={styles.layout}>
         <InstallationStatusBanner />
+        <OfflineBanner />
         <PresenceTrackingLoop />
         <Header />
         <div className={styles.body}>

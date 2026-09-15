@@ -40,6 +40,9 @@
     "checking": "Wird überprüft...",
     "upToDate": "Sie haben die neueste Version."
   },
+  "offline": {
+    "message": "Sie sind offline - einige Informationen sind möglicherweise veraltet, bis die Verbindung wiederhergestellt ist."
+  },
   "notificationsLabel": "Benachrichtigungen",
   "noNotifications": "Noch keine Benachrichtigungen.",
   "notifications": {

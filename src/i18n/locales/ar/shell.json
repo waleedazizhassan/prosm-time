@@ -40,6 +40,9 @@
     "checking": "جاري التحقق...",
     "upToDate": "إنت على آخر نسخة."
   },
+  "offline": {
+    "message": "إنت أوف لاين دلوقتي - بعض البيانات ممكن تكون مش محدّثة لحد ما الاتصال يرجع."
+  },
   "notificationsLabel": "الإشعارات",
   "noNotifications": "لا توجد إشعارات بعد.",
   "notifications": {
