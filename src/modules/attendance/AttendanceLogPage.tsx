@@ -17,7 +17,7 @@ import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
-import attendanceBanner from "../../assets/illustration-attendance-banner.jpg";
+import attendanceBanner from "../../assets/illustration-attendance-banner.png";
 import { formatTimeOnly } from "../../core/utils/formatDate";
 import { buildAttendanceLogPdf } from "./attendanceLogPdf";
 

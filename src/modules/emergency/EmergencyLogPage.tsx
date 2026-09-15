@@ -18,7 +18,7 @@ import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
 import Textarea from "../../components/common/Textarea";
 import ErrorText from "../../components/common/ErrorText";
-import emergencyBanner from "../../assets/illustration-emergency-banner.jpg";
+import emergencyBanner from "../../assets/illustration-emergency-banner.png";
 
 const ALL_EMPLOYEES = "";
 

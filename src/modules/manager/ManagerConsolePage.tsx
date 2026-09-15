@@ -21,7 +21,7 @@ import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
 import { formatTimeOnly, formatDateOnly } from "../../core/utils/formatDate";
 import allCaughtUpIllustration from "../../assets/illustration-all-caught-up.png";
-import managerConsoleBanner from "../../assets/illustration-manager-console-banner.jpg";
+import managerConsoleBanner from "../../assets/illustration-manager-console-banner.png";
 
 const REVIEW_ACTIONS = ["approved", "rejected", "acknowledged", "clarification_requested"] as const;
 

@@ -13,7 +13,7 @@ import StatusBadge from "../../components/common/StatusBadge";
 import Table, { type TableColumn } from "../../components/common/Table";
 import SiteFormModal from "./SiteFormModal";
 import ErrorText from "../../components/common/ErrorText";
-import sitesBanner from "../../assets/illustration-sites-banner.jpg";
+import sitesBanner from "../../assets/illustration-sites-banner.png";
 
 // § live UX review, user-directed - "give it a real proper home, but
 // keep it reachable from here too." The editable form itself now

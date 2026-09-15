@@ -4,7 +4,6 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../../core/context/AuthContext";
 
 import PageShell from "../../components/common/PageShell";
-import settingsBanner from "../../assets/illustration-settings-banner.jpg";
 import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
 import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
@@ -33,7 +32,7 @@ export default function OrganizationSettingsPage() {
   }
 
   return (
-    <PageShell title={t("title")} subtitle={t("subtitle")} bannerSrc={settingsBanner}>
+    <PageShell title={t("title")} subtitle={t("subtitle")}>
       <NoSiteRadiusSettingsCard />
       <SiteDefaultsSettingsCard />
       <SitePolicySettingsCard />
