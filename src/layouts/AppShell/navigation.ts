@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, MonitorSmartphone, UserCog, LogIn } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, MonitorSmartphone, UserCog, LogIn, Plug } from "lucide-react";
 
 // § live UX review, user-directed - "professional reorganization" of
 // the Sidebar into grouped sections/"centers" instead of one flat
@@ -128,12 +128,13 @@ export const NAV_ITEMS: NavItem[] = [
   // Settings itself (API keys grant external read access to this
   // organization's own attendance data - not a lesser-privilege
   // action).
-  // § user-directed, 2026-09-13 - "hide it, not delete it, until we
-  // know how we'll actually use it." Nav entry hidden only - the
-  // route (/integrations), IntegrationsPage.tsx, and every API-key RPC
-  // behind it are all still fully intact, reachable by direct URL for
-  // now. Re-add this line (unchanged) to bring the sidebar entry back.
-  // { id: "integrations", labelKey: "items.integrations", path: "/integrations", icon: Plug, requiredPermission: null, ownerOnly: true, section: "settings" },
+  // § hidden 2026-09-13 ("hide it, not delete it, until we know how
+  // we'll actually use it"), re-shown 2026-09-15 - now real, load-
+  // bearing infrastructure: PROSM Projects and PROSM Finance both
+  // actively depend on keys generated here (attendance:read/
+  // payroll:read) for their own cross-product data bridges, so the
+  // "how we'll use it" question is answered.
+  { id: "integrations", labelKey: "items.integrations", path: "/integrations", icon: Plug, requiredPermission: null, ownerOnly: true, section: "settings" },
   { id: "help", labelKey: "items.help", path: "/help", icon: HelpCircle, requiredPermission: null, section: "help" },
 ];
 
