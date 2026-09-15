@@ -21,8 +21,17 @@ import styles from "./SidebarRadio.module.css";
 export default function SidebarRadio() {
   const { t } = useTranslation("shell");
   const radio = useRadio();
-  const { query, setQuery, stationList, searching } = useRadioStations(true);
   const [expanded, setExpanded] = useState(false);
+  // § real perf bug, found while investigating #11 (2026-09-15,
+  // "Radio... very slow to load") - this was hardcoded `true` instead
+  // of `expanded`, unlike HeaderRadio.tsx's own correct usage of the
+  // exact same hook. SidebarRadio is unconditionally mounted in
+  // Sidebar.tsx (collapsed by default, one compact row) - every real
+  // app session was firing 4 parallel Radio Browser API requests on
+  // load whether or not the user ever touched the radio at all. Now
+  // lazy, same as the Header's own version - stations only fetch once
+  // this row is actually expanded.
+  const { query, setQuery, stationList, searching } = useRadioStations(expanded);
 
   const handlePlay = (station: (typeof stationList)[number]) => {
     RadioPlaybackEngine.startPlayback(station);

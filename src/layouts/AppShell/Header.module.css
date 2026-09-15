@@ -1,10 +1,13 @@
 /* PROSM Time - mirrors PROSM Platform's own Header.module.css (§
-   visual consistency pass, shell): same fixed 64px bar, blurred
-   translucent surface-card background, three-zone grid. This product
-   has no search/notifications/AI/email/radio yet, so the right zone is
-   simpler - the zone SHAPE (fixed height, border-bottom, backdrop
-   blur) is what's shared, not every utility PROSM Platform's Header
-   happens to also hold. */
+   visual consistency pass, shell, later unified further 2026-09-15
+   with a real CommandPalette search): same fixed 64px bar, blurred
+   translucent surface-card background, three-zone grid, brand + nav
+   controls together in the left section, search centered. This
+   product has no AI/email/media center concept, so the right zone
+   still carries its own real centers (Radio/Weather/notifications)
+   instead of Platform's - the zone SHAPE and left/center layout are
+   what's shared, not every utility PROSM Platform's Header happens to
+   also hold. */
 .header {
   --header-height: 64px;
 
@@ -110,12 +113,12 @@
     gap: var(--space-2);
   }
 
+  .leftSection {
+    gap: var(--space-2);
+  }
+
   .centerSection {
     gap: var(--space-1);
-    /* § live UX review, user-directed correction - "the arrows and the
-       PROSM icon are stuck right against each other" - the header's
-       own 8px gap alone wasn't enough breathing room at this width. */
-    margin-inline-end: var(--space-2);
   }
 
   .brandName {

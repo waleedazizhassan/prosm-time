@@ -6,6 +6,7 @@ import BrandMark from "../../components/common/BrandMark";
 import { useAppLayout } from "./LayoutContext";
 import NotificationBell from "./NotificationBell";
 import HeaderNavControls from "./HeaderNavControls";
+import CommandPalette from "./CommandPalette";
 import HeaderGreeting from "./HeaderGreeting";
 import WeatherMiniPanel from "./WeatherMiniPanel";
 import HeaderRadio from "./HeaderRadio";
@@ -18,14 +19,17 @@ import styles from "./Header.module.css";
 // Forward, Dashboard, greeting, existing notification/user controls").
 // Fixed 64px bar, same visual language as PROSM Platform's own Header.
 //
-// § live UX review, user-directed correction - the previous round
-// misread "media center" as this Radio/Weather pair; the user meant
-// PROSM Platform's own real HeaderMediaCenter widget (a separate
-// component there, not shown here yet - see this file's own follow-up
-// work). Layout correction per that same message: Radio/Weather move
-// back to the right (grouped with where the media center will sit
-// beside them once ported); Dashboard/Back/Forward (HeaderNavControls)
-// move into the middle column instead.
+// § user-directed, 2026-09-15 ("عايز توحيد للهيدر لكل المنتجات...
+// زراير الاسم والداشبورد والبحث الحجم الاشعارات" - unify the header
+// FORMAT across products regardless of each product's own centers/
+// capabilities, specifically: brand, dashboard nav, search, sizing,
+// notifications). Matches Platform's own Header/index.jsx section
+// layout exactly: brand + nav controls together in the LEFT section,
+// a real search (CommandPalette) in the CENTER - previously
+// HeaderNavControls sat alone in the center and there was no search
+// at all. Radio/Weather/notifications/greeting/org card stay in the
+// right section, same as before (Time's own real "centers", not
+// touched - only the layout format changed).
 export default function Header() {
   const { t } = useTranslation(["shell", "common"]);
   const { openMobileSidebar } = useAppLayout();
@@ -41,10 +45,12 @@ export default function Header() {
           <BrandMark size={28} />
           <span className={styles.brandName}>{t("common:appName")}</span>
         </Link>
+
+        <HeaderNavControls />
       </div>
 
       <div className={styles.centerSection}>
-        <HeaderNavControls />
+        <CommandPalette />
       </div>
 
       <div className={styles.rightSection}>

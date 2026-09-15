@@ -43,6 +43,14 @@
   "offline": {
     "message": "Sie sind offline - einige Informationen sind möglicherweise veraltet, bis die Verbindung wiederhergestellt ist."
   },
+  "commandPalette": {
+    "open": "Suche öffnen",
+    "placeholder": "Seiten durchsuchen…",
+    "noResults": "Keine Ergebnisse gefunden.",
+    "categories": {
+      "pages": "Seiten"
+    }
+  },
   "notificationsLabel": "Benachrichtigungen",
   "noNotifications": "Noch keine Benachrichtigungen.",
   "notifications": {

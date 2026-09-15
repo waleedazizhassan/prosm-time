@@ -22,7 +22,7 @@ import {
 
 import { getCurrentPosition } from "../../core/utils/geo";
 import { formatTimeOnly } from "../../core/utils/formatDate";
-import WeatherService, { weatherCategory, windDirectionLabel, type WeatherData, type WeatherCategory } from "../../core/services/WeatherService";
+import WeatherService, { weatherCategory, windDirectionLabel, getLastKnownWeather, type WeatherData, type WeatherCategory } from "../../core/services/WeatherService";
 import styles from "./WeatherMiniPanel.module.css";
 
 const CATEGORY_ICON: Record<WeatherCategory, LucideIcon> = {
@@ -69,7 +69,18 @@ interface PanelStyle {
 export default function WeatherMiniPanel() {
   const { t, i18n } = useTranslation("shell");
 
-  const [state, setState] = useState<WeatherState>({ status: "loading", data: null, message: null });
+  // § user-reported real perf issue (#11, 2026-09-15) - hydrate
+  // synchronously from the last real fetch (if still within the
+  // normal cache TTL) so the pill shows real data immediately on
+  // mount instead of a loading skeleton every single time - the
+  // effect below still kicks off a real, fresh geolocation+fetch to
+  // correct this if the viewer has genuinely moved since.
+  const hydratedFromCacheRef = useRef(false);
+  const [state, setState] = useState<WeatherState>(() => {
+    const cached = getLastKnownWeather();
+    hydratedFromCacheRef.current = Boolean(cached);
+    return cached ? { status: "ready", data: cached, message: null } : { status: "loading", data: null, message: null };
+  });
   const [expanded, setExpanded] = useState(false);
   const [panelStyle, setPanelStyle] = useState<PanelStyle | null>(null);
 
@@ -99,11 +110,24 @@ export default function WeatherMiniPanel() {
     closeTimerRef.current = setTimeout(() => setExpanded(false), HOVER_CLOSE_DELAY_MS);
   };
 
-  const load = async (forceRefresh = false) => {
-    setState((previous) => ({ ...previous, status: "loading" }));
+  // silent: the initial mount's background refresh, when a cached
+  // value already hydrated state synchronously above - never flashes
+  // a loading skeleton over real (if slightly stale) data already on
+  // screen, and never replaces it with an error/no-location state if
+  // this particular background refresh fails (the cached data stays
+  // shown; a later manual refresh or the next natural reload tries
+  // again for real).
+  const load = async (forceRefresh = false, silent = false) => {
+    if (!silent) setState((previous) => ({ ...previous, status: "loading" }));
 
     try {
-      const position = await getCurrentPosition();
+      // § user-reported real perf issue (#11, 2026-09-15) - weather
+      // only needs city-level precision, not the real GPS-fix
+      // high-accuracy geofence enforcement needs (see geo.ts's own
+      // header comment) - a fast, low-accuracy, short-timeout request
+      // resolves almost immediately on real devices instead of waiting
+      // out a real GPS fix (or its full 10s timeout) every load.
+      const position = await getCurrentPosition({ highAccuracy: false, timeoutMs: 5000 });
       const geoResult = await WeatherService.getWeatherForCoordinates(position.latitude, position.longitude, { forceRefresh });
 
       if (geoResult.success) {
@@ -111,14 +135,15 @@ export default function WeatherMiniPanel() {
         return;
       }
 
-      setState({ status: "error", data: null, message: geoResult.message });
+      if (!silent) setState({ status: "error", data: null, message: geoResult.message });
     } catch {
-      setState({ status: "no-location", data: null, message: null });
+      if (!silent) setState({ status: "no-location", data: null, message: null });
     }
   };
 
   useEffect(() => {
-    load();
+    load(false, hydratedFromCacheRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

@@ -19,6 +19,20 @@
 const MIRROR_DISCOVERY_URL = "https://all.api.radio-browser.info/json/servers";
 const FALLBACK_MIRROR_HOSTS = ["de1.api.radio-browser.info", "de2.api.radio-browser.info"];
 const REQUEST_TIMEOUT_MS = 8000;
+// § user-reported real perf/quality issue (#11, 2026-09-15) - "Radio...
+// very weak/poor in operation." hidebroken already filters out streams
+// Radio Browser's own tracking knows are dead, but said nothing about
+// STREAM QUALITY - a popular but genuinely low-bitrate station could
+// still rank ahead of a real, clear one on clickcount alone. Verified
+// live against the real API: bitrateMin is honored on /search but
+// silently ignored on the path-based /topclick and /bycountry
+// endpoints - so listTopStations/listByCountry below were switched to
+// /search (order=clickcount&reverse=true, with/without a country
+// filter) specifically so this floor actually applies to them too.
+// 96 kbps is a real, audible quality floor without over-filtering
+// thinner catalogs (a specific country's own station list) down to
+// almost nothing.
+const MIN_BITRATE_KBPS = 96;
 
 export interface RadioStation {
   stationUuid: string;
@@ -58,22 +72,32 @@ class RadioBrowserClient {
   private mirrorHosts: string[] = [...FALLBACK_MIRROR_HOSTS];
   private mirrorsDiscovered = false;
 
-  private async ensureMirrors(): Promise<void> {
+  // § user-reported real perf issue (#11, 2026-09-15) - "Radio...
+  // very slow to load." Root cause: every real request awaited this
+  // full mirror-discovery round trip FIRST, even though
+  // FALLBACK_MIRROR_HOSTS are already real, working official Radio
+  // Browser mirrors - the very first station list/search always paid
+  // for two sequential network round trips (discovery, then the real
+  // request) instead of one. Fire-and-forget now: the real request
+  // proceeds immediately against the seed fallback hosts, discovery
+  // still runs and updates this.mirrorHosts in the background for
+  // whichever request comes next - no request is ever blocked on it.
+  private ensureMirrors(): void {
     if (this.mirrorsDiscovered) return;
     this.mirrorsDiscovered = true;
-    try {
-      const response = await fetch(MIRROR_DISCOVERY_URL, { signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) });
-      if (!response.ok) return;
-      const servers = (await response.json()) as Array<{ name?: string }>;
-      const hosts = (servers ?? []).map((server) => server.name).filter((name): name is string => Boolean(name));
-      if (hosts.length > 0) this.mirrorHosts = hosts;
-    } catch {
-      // Discovery failing is not fatal - the seed FALLBACK_MIRROR_HOSTS list is still used.
-    }
+    fetch(MIRROR_DISCOVERY_URL, { signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) })
+      .then((response) => (response.ok ? (response.json() as Promise<Array<{ name?: string }>>) : null))
+      .then((servers) => {
+        const hosts = (servers ?? []).map((server) => server.name).filter((name): name is string => Boolean(name));
+        if (hosts.length > 0) this.mirrorHosts = hosts;
+      })
+      .catch(() => {
+        // Discovery failing is not fatal - the seed FALLBACK_MIRROR_HOSTS list keeps working.
+      });
   }
 
   private async requestJson<T>(path: string, params: Record<string, string | number | undefined> = {}): Promise<T> {
-    await this.ensureMirrors();
+    this.ensureMirrors();
 
     const query = new URLSearchParams(Object.entries(params).filter(([, value]) => value !== undefined) as [string, string][]).toString();
     const hosts = this.mirrorHosts.length > 0 ? this.mirrorHosts : FALLBACK_MIRROR_HOSTS;
@@ -101,7 +125,7 @@ class RadioBrowserClient {
     const trimmed = query.trim();
     if (!trimmed) return [];
     const lowered = trimmed.toLowerCase();
-    const baseParams = { limit, hidebroken: "true", order: "clickcount", reverse: "true" };
+    const baseParams = { limit, hidebroken: "true", order: "clickcount", reverse: "true", bitrateMin: MIN_BITRATE_KBPS };
 
     const settled = await Promise.allSettled([
       this.requestJson<RawStationRow[]>("/json/stations/search", { ...baseParams, name: trimmed }),
@@ -124,21 +148,32 @@ class RadioBrowserClient {
   }
 
   async listTopStations(limit = 30): Promise<RadioStation[]> {
-    const rows = await this.requestJson<RawStationRow[]>(`/json/stations/topclick/${limit}`, { hidebroken: "true" });
-    return (rows ?? []).map(mapStation);
-  }
-
-  // § live UX review, user-directed - "widen the radio's range, add
-  // Egyptian/Arab stations." Radio Browser's own /json/stations/bycountry
-  // endpoint (ISO country name, not code) is the direct equivalent of
-  // listTopStations scoped to one country, ordered by clicks like the
-  // global list already is.
-  async listByCountry(country: string, limit = 20): Promise<RadioStation[]> {
-    const rows = await this.requestJson<RawStationRow[]>(`/json/stations/bycountry/${encodeURIComponent(country)}`, {
+    // § switched from the path-based /topclick/{limit} to /search -
+    // see this file's own MIN_BITRATE_KBPS comment for why: bitrateMin
+    // is silently ignored on the path-based endpoint, verified live.
+    const rows = await this.requestJson<RawStationRow[]>("/json/stations/search", {
       limit,
       hidebroken: "true",
       order: "clickcount",
       reverse: "true",
+      bitrateMin: MIN_BITRATE_KBPS,
+    });
+    return (rows ?? []).map(mapStation);
+  }
+
+  // § live UX review, user-directed - "widen the radio's range, add
+  // Egyptian/Arab stations." Same /search switch as listTopStations
+  // above (country= replicates the old path-based /bycountry endpoint,
+  // but actually honors bitrateMin - verified live, the path-based
+  // version silently ignored it).
+  async listByCountry(country: string, limit = 20): Promise<RadioStation[]> {
+    const rows = await this.requestJson<RawStationRow[]>("/json/stations/search", {
+      country,
+      limit,
+      hidebroken: "true",
+      order: "clickcount",
+      reverse: "true",
+      bitrateMin: MIN_BITRATE_KBPS,
     });
     return (rows ?? []).map(mapStation);
   }

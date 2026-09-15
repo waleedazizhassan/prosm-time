@@ -43,6 +43,14 @@
   "offline": {
     "message": "Sei offline - alcune informazioni potrebbero non essere aggiornate finché la connessione non torna."
   },
+  "commandPalette": {
+    "open": "Apri ricerca",
+    "placeholder": "Cerca pagine…",
+    "noResults": "Nessun risultato trovato.",
+    "categories": {
+      "pages": "Pagine"
+    }
+  },
   "notificationsLabel": "Notifiche",
   "noNotifications": "Nessuna notifica al momento.",
   "notifications": {

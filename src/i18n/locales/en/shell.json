@@ -43,6 +43,14 @@
   "offline": {
     "message": "You're offline - some information may be out of date until your connection comes back."
   },
+  "commandPalette": {
+    "open": "Open search",
+    "placeholder": "Search pages…",
+    "noResults": "No results found.",
+    "categories": {
+      "pages": "Pages"
+    }
+  },
   "notificationsLabel": "Notifications",
   "noNotifications": "No notifications yet.",
   "notifications": {

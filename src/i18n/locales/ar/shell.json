@@ -43,6 +43,14 @@
   "offline": {
     "message": "إنت أوف لاين دلوقتي - بعض البيانات ممكن تكون مش محدّثة لحد ما الاتصال يرجع."
   },
+  "commandPalette": {
+    "open": "فتح البحث",
+    "placeholder": "دور على صفحة…",
+    "noResults": "مفيش نتائج.",
+    "categories": {
+      "pages": "الصفحات"
+    }
+  },
   "notificationsLabel": "الإشعارات",
   "noNotifications": "لا توجد إشعارات بعد.",
   "notifications": {

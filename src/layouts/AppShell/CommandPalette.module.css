@@ -1,0 +1,258 @@
+/* PROSM Time - ported from PROSM Platform's own CommandPalette.module.css
+   (same trigger/dialog sizing, adapted to this app's own token names). */
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  width: 100%;
+  max-width: 300px;
+
+  height: 36px;
+
+  padding: 0 10px;
+
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+
+  background: var(--surface-app);
+  color: var(--text-secondary);
+
+  cursor: pointer;
+
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.trigger:hover {
+  border-color: var(--border-medium);
+  background: var(--surface-hover);
+}
+
+.trigger:focus-visible {
+  outline: none;
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+}
+
+.triggerLabel {
+  flex: 1;
+  min-width: 0;
+
+  font-size: var(--font-sm);
+  font-weight: 500;
+  text-align: left;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.triggerShortcut {
+  flex-shrink: 0;
+
+  padding: 2px 6px;
+
+  border: 1px solid var(--border-light);
+  border-radius: 5px;
+
+  background: var(--surface-card);
+
+  font-size: var(--font-xs);
+  font-weight: 700;
+  font-family: inherit;
+
+  color: var(--text-disabled);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  padding-top: 12vh;
+
+  background: rgba(15, 23, 42, 0.4);
+
+  z-index: 3000;
+
+  animation: fadeIn 0.12s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+
+  width: min(600px, 92vw);
+  max-height: 60vh;
+
+  background: var(--surface-card);
+
+  border-radius: 16px;
+
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28);
+
+  overflow: hidden;
+
+  animation: dialogIn 0.16s ease;
+}
+
+@keyframes dialogIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.searchRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  flex-shrink: 0;
+
+  padding: 14px 18px;
+
+  border-bottom: 1px solid var(--border-light);
+}
+
+.searchIcon {
+  color: var(--text-disabled);
+  flex-shrink: 0;
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+
+  border: none;
+  outline: none;
+  background: transparent;
+
+  font-size: 15px;
+  color: var(--text-primary);
+}
+
+.escHint {
+  flex-shrink: 0;
+
+  padding: 2px 6px;
+
+  border: 1px solid var(--border-light);
+  border-radius: 5px;
+
+  font-size: var(--font-xs);
+  font-family: inherit;
+
+  color: var(--text-disabled);
+}
+
+.results {
+  flex: 1;
+  min-height: 0;
+
+  overflow-y: auto;
+
+  padding: 8px;
+}
+
+.empty {
+  padding: 32px 16px;
+
+  text-align: center;
+
+  font-size: var(--font-sm);
+  color: var(--text-disabled);
+}
+
+.group {
+  margin-bottom: 6px;
+}
+
+.groupLabel {
+  padding: 8px 10px 4px;
+
+  font-size: var(--font-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  color: var(--text-disabled);
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  width: 100%;
+
+  padding: 9px 10px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  text-align: left;
+}
+
+.resultActive {
+  background: var(--surface-hover);
+}
+
+.resultIcon {
+  flex-shrink: 0;
+  color: var(--brand-primary);
+}
+
+.resultText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.resultTitle {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 900px) {
+  .triggerLabel,
+  .triggerShortcut {
+    display: none;
+  }
+
+  .trigger {
+    width: 40px;
+    max-width: 40px;
+
+    justify-content: center;
+    padding: 0;
+  }
+}

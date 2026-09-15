@@ -78,6 +78,33 @@ function readCache(cacheKey: string): WeatherData | null {
   }
 }
 
+// § user-reported real perf issue (#11, 2026-09-15) - "Weather...
+// very slow to load." Second root cause beyond the GPS-accuracy fix
+// above: getWeatherForCoordinates's own cache lookup needs real
+// coordinates to even COMPUTE its cache key, so a geolocation round
+// trip always had to finish first before ANY cached data - even data
+// for the exact same real location as last time - could show. Same
+// "hydrate from cache immediately, refresh in the background" fix
+// already proven for AuthContext.tsx's own profile-load bug
+// (2026-09-13): this ignores the coordinate-match requirement
+// entirely and returns whatever real weather data was last fetched,
+// as long as it's still within the normal TTL - the caller still
+// kicks off a real, fresh geolocation+fetch afterward to correct it
+// if the viewer has genuinely moved.
+export function getLastKnownWeather(): WeatherData | null {
+  try {
+    const raw = localStorage.getItem(CACHE_KEY);
+    if (!raw) return null;
+
+    const cache = JSON.parse(raw);
+    if (Date.now() - cache.fetchedAt > CACHE_TTL_MS) return null;
+
+    return cache.data ?? null;
+  } catch {
+    return null;
+  }
+}
+
 function writeCache(cacheKey: string, data: WeatherData): void {
   try {
     localStorage.setItem(CACHE_KEY, JSON.stringify({ key: cacheKey, fetchedAt: Date.now(), data }));

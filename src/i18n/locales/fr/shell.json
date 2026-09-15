@@ -43,6 +43,14 @@
   "offline": {
     "message": "Vous êtes hors ligne - certaines informations peuvent être obsolètes jusqu'au retour de la connexion."
   },
+  "commandPalette": {
+    "open": "Ouvrir la recherche",
+    "placeholder": "Rechercher des pages…",
+    "noResults": "Aucun résultat trouvé.",
+    "categories": {
+      "pages": "Pages"
+    }
+  },
   "notificationsLabel": "Notifications",
   "noNotifications": "Aucune notification pour le moment.",
   "notifications": {

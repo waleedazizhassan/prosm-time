@@ -28,7 +28,18 @@ export interface CurrentPosition {
   accuracyMeters: number;
 }
 
-export function getCurrentPosition(): Promise<CurrentPosition> {
+// § user-reported real perf issue (#11, 2026-09-15): "Weather... very
+// slow to load." Root cause: every caller of this function - including
+// WeatherMiniPanel, which only needs city-level precision - paid the
+// same enableHighAccuracy:true, 10s-timeout GPS request every real
+// geofence caller (Clock In/Out, Kiosk, admin-on-behalf) genuinely
+// needs for real geofence precision. High-accuracy mode tries the
+// actual GPS receiver, which can take many seconds (or fail entirely
+// indoors/cold-start) - the wrong tradeoff for a weather widget.
+// Options are additive and optional so every existing real geofence
+// caller is byte-for-byte unaffected (same defaults as before);
+// WeatherMiniPanel is the only caller that opts into the fast path.
+export function getCurrentPosition(options?: { highAccuracy?: boolean; timeoutMs?: number }): Promise<CurrentPosition> {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
       reject(new Error("Geolocation is not available in this browser."));
@@ -46,7 +57,7 @@ export function getCurrentPosition(): Promise<CurrentPosition> {
       (error) => {
         reject(new Error(error.message || "Unable to determine your location."));
       },
-      { enableHighAccuracy: true, timeout: 10000 }
+      { enableHighAccuracy: options?.highAccuracy ?? true, timeout: options?.timeoutMs ?? 10000 }
     );
   });
 }
