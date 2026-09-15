@@ -2,7 +2,6 @@
   "title": "Standorte",
   "subtitle": "Arbeitsstandorte, Geofence-Konfiguration und Kiosk-Richtlinien für Ihre Organisation.",
   "loadError": "Standorte konnten nicht geladen werden.",
-  "noAccess": "Sie haben keine Berechtigung, Standorte anzuzeigen.",
   "columns": {
     "name": "Name",
     "address": "Adresse",

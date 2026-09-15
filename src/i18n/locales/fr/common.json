@@ -14,9 +14,7 @@
   "actions": {
     "cancel": "Annuler",
     "confirm": "Confirmer",
-    "close": "Fermer",
-    "save": "Enregistrer",
-    "retry": "Réessayer"
+    "close": "Fermer"
   },
   "errorBoundary": {
     "title": "Une erreur s'est produite",

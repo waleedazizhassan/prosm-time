@@ -14,7 +14,6 @@
     "suspended": "Gesperrt"
   },
   "ownerBadge": "Inhaber",
-  "noAccess": "Sie haben keine Berechtigung, Personen anzuzeigen.",
   "catalog": {
     "administrators.manage": "Administratoren verwalten",
     "allowances.approve": "Zulagen genehmigen",

@@ -14,7 +14,6 @@
     "suspended": "Suspendu"
   },
   "ownerBadge": "Propriétaire",
-  "noAccess": "Vous n'avez pas la permission de voir les personnes.",
   "catalog": {
     "administrators.manage": "Gérer les administrateurs",
     "allowances.approve": "Approuver les indemnités",

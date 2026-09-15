@@ -1,7 +1,6 @@
 {
   "title": "Settings",
   "subtitle": "Organization-wide configuration.",
-  "noAccess": "You do not have permission to view settings.",
   "siteDefaults": {
     "title": "Site Policy Defaults",
     "hint": "Applied to every new site you create - these are policy decisions that are almost always the same across an organization, not a real per-site attribute. Any existing site keeps its own saved value; you can still override any of these for a specific site from that site's own Edit form.",
@@ -44,7 +43,6 @@
     "neverUsed": "never used",
     "newKeyTitle": "Your new API key",
     "newKeyWarning": "Copy this now - it will not be shown again. Only its prefix is kept afterward.",
-    "genericError": "Unable to load your integration keys.",
     "scopeLabel": "Access",
     "scope": {
       "attendanceRead": "Attendance (read-only)",

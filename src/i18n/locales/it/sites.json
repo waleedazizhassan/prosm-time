@@ -2,7 +2,6 @@
   "title": "Sedi",
   "subtitle": "Sedi di lavoro, configurazione del geofencing e politica kiosk per la tua organizzazione.",
   "loadError": "Impossibile caricare le sedi.",
-  "noAccess": "Non hai il permesso di visualizzare le sedi.",
   "columns": {
     "name": "Nome",
     "address": "Indirizzo",

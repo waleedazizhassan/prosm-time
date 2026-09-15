@@ -14,9 +14,7 @@
   "actions": {
     "cancel": "إلغاء",
     "confirm": "تأكيد",
-    "close": "إغلاق",
-    "save": "حفظ",
-    "retry": "إعادة المحاولة"
+    "close": "إغلاق"
   },
   "errorBoundary": {
     "title": "حدث خطأ ما",

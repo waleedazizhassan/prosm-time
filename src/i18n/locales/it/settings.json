@@ -1,7 +1,6 @@
 {
   "title": "Impostazioni",
   "subtitle": "Configurazione a livello di organizzazione.",
-  "noAccess": "Non hai il permesso di visualizzare le impostazioni.",
   "siteDefaults": {
     "title": "Politiche predefinite delle sedi",
     "hint": "Applicato a ogni nuova sede che crei - sono decisioni di policy quasi sempre identiche in tutta l'organizzazione, non un vero attributo specifico della sede. Una sede già esistente mantiene il proprio valore salvato; puoi comunque sovrascrivere ciascuna di queste per una sede specifica dalla pagina di modifica di quella sede.",
@@ -44,7 +43,6 @@
     "neverUsed": "mai utilizzata",
     "newKeyTitle": "La tua nuova chiave API",
     "newKeyWarning": "Copiala ora - non verrà più mostrata. In seguito verrà conservato solo il suo prefisso.",
-    "genericError": "Impossibile caricare le tue chiavi di integrazione.",
     "scopeLabel": "Accesso",
     "scope": {
       "attendanceRead": "Presenze (sola lettura)",

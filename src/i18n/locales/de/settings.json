@@ -1,7 +1,6 @@
 {
   "title": "Einstellungen",
   "subtitle": "Organisationsweite Konfiguration.",
-  "noAccess": "Sie haben keine Berechtigung, die Einstellungen anzuzeigen.",
   "siteDefaults": {
     "title": "Standort-Richtlinien-Standardwerte",
     "hint": "Wird auf jeden neuen Standort angewendet, den Sie anlegen - dies sind Richtlinienentscheidungen, die organisationsweit fast immer gleich sind, kein echtes standortspezifisches Attribut. Ein bestehender Standort behält seinen eigenen gespeicherten Wert; Sie können jeden dieser Werte weiterhin für einen bestimmten Standort in dessen eigenem Bearbeiten-Formular überschreiben.",
@@ -44,7 +43,6 @@
     "neverUsed": "nie verwendet",
     "newKeyTitle": "Ihr neuer API-Schlüssel",
     "newKeyWarning": "Kopieren Sie ihn jetzt - er wird nicht erneut angezeigt. Danach wird nur sein Präfix gespeichert.",
-    "genericError": "Ihre Integrationsschlüssel konnten nicht geladen werden.",
     "scopeLabel": "Zugriff",
     "scope": {
       "attendanceRead": "Anwesenheit (nur lesen)",

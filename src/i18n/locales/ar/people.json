@@ -14,7 +14,6 @@
     "suspended": "موقوف"
   },
   "ownerBadge": "المالك",
-  "noAccess": "ليس لديك صلاحية لعرض الأشخاص.",
   "catalog": {
     "administrators.manage": "إدارة المسؤولين",
     "allowances.approve": "اعتماد البدلات",

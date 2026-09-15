@@ -2,7 +2,6 @@
   "title": "Sites",
   "subtitle": "Worksites, geofence configuration, and kiosk policy for your organization.",
   "loadError": "Unable to load sites.",
-  "noAccess": "You do not have permission to view sites.",
   "columns": {
     "name": "Name",
     "address": "Address",

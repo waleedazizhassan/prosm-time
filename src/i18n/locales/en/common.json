@@ -14,9 +14,7 @@
   "actions": {
     "cancel": "Cancel",
     "confirm": "Confirm",
-    "close": "Close",
-    "save": "Save",
-    "retry": "Retry"
+    "close": "Close"
   },
   "errorBoundary": {
     "title": "Something went wrong",

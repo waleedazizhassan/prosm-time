@@ -2,7 +2,6 @@
   "title": "Sites",
   "subtitle": "Sites de travail, configuration du géorepérage et politique de kiosque pour votre organisation.",
   "loadError": "Impossible de charger les sites.",
-  "noAccess": "Vous n'avez pas la permission de voir les sites.",
   "columns": {
     "name": "Nom",
     "address": "Adresse",
