@@ -1,0 +1,24 @@
+-- PROSM Time - real bug found by this session's own regression sweep
+-- (2026-09-15): the same "CREATE OR REPLACE with a different argument
+-- count creates a new overload instead of replacing the old one"
+-- pitfall (already hit twice this session - is_active_delegate_for in
+-- Projects, handle_prosm_time_geofence_violation here) struck twice
+-- more, silently, and had gone unnoticed until now:
+--
+-- 1. change_prosm_time_site: the original 5-arg version
+--    (uuid, uuid, double precision, double precision, double precision)
+--    from 20260903200000 was never dropped when 20260909300000 added
+--    a 6th parameter (p_manual_location_label). Both have coexisted
+--    live ever since.
+-- 2. generate_prosm_time_api_key: the original 1-arg version
+--    (text) from 20260908190000 was never dropped when 20260914200000
+--    added a 2nd parameter (p_scope, with a default - meaning a
+--    1-arg call could resolve to either overload ambiguously).
+--
+-- Neither is live-breaking today (every real caller passes named args
+-- matching the current signature), but both are the exact same latent
+-- "function X is not unique" risk for any future caller using fewer
+-- or positional args - drop the stale ones now rather than leave a
+-- third live landmine of the same class in this codebase.
+drop function if exists public.change_prosm_time_site(uuid, uuid, double precision, double precision, double precision);
+drop function if exists public.generate_prosm_time_api_key(text);
