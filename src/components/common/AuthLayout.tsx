@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from "react";
+import { useState, type CSSProperties, type MouseEvent, type ReactNode } from "react";
 import AuthHeader from "./AuthHeader";
 import authPhoto from "../../assets/splash-photo.png";
 import styles from "./AuthLayout.module.css";
@@ -26,23 +26,49 @@ interface AuthLayoutProps {
 //   card with its own capped-height photo band on top, no header (the
 //   .brandPanel/.brandPhoto pair below only ever renders there; the
 //   desktop CSS hides it in favor of the full-page background).
+// § user-directed, 2026-09-15 - "clicking the marketing image should
+// hide the sign-in form" (all 3 PROSM products, clarified to mean this
+// shared shell specifically - Login/Activation/Forgot-Password/Reset-
+// Password all route through this one component). uiHidden hides
+// .formPanel and strips .shell's own card chrome (background/border/
+// shadow/blur) via inline style - inline styles win over the
+// >=861px media query's own re-declaration of those same properties,
+// which a plain CSS class toggle would lose to on source order alone.
+// .brandPanel/.brandPhoto are deliberately NEVER hidden: on mobile
+// that's the only remaining visible+clickable surface to toggle back
+// with; on desktop it's already display:none via CSS, so nothing
+// extra shows there either way.
 export default function AuthLayout({ title, subtitle, children, footer }: AuthLayoutProps) {
+  const [uiHidden, setUiHidden] = useState(false);
+
+  const toggleUiOnBackgroundClick = (event: MouseEvent) => {
+    if (event.target === event.currentTarget) {
+      setUiHidden((current) => !current);
+    }
+  };
+
+  const shellChromeStyle: CSSProperties | undefined = uiHidden
+    ? { background: "transparent", borderColor: "transparent", boxShadow: "none", backdropFilter: "none", WebkitBackdropFilter: "none" }
+    : undefined;
+
   return (
-    <div className={styles.page} style={{ "--auth-photo": `url(${authPhoto})` } as CSSProperties}>
+    <div className={styles.page} style={{ "--auth-photo": `url(${authPhoto})` } as CSSProperties} onClick={toggleUiOnBackgroundClick}>
       <AuthHeader />
 
       <div className={styles.content}>
-        <div className={styles.shell}>
+        <div className={styles.shell} style={shellChromeStyle}>
           <div className={styles.brandPanel}>
-            <div className={styles.brandPhoto} style={{ backgroundImage: `url(${authPhoto})` }} />
+            <div className={styles.brandPhoto} style={{ backgroundImage: `url(${authPhoto})` }} onClick={toggleUiOnBackgroundClick} />
           </div>
 
-          <div className={styles.formPanel}>
-            <h1 className={styles.title}>{title}</h1>
-            <p className={styles.subtitle}>{subtitle}</p>
-            {children}
-            {footer ? <p className={styles.footerLine}>{footer}</p> : null}
-          </div>
+          {uiHidden ? null : (
+            <div className={styles.formPanel}>
+              <h1 className={styles.title}>{title}</h1>
+              <p className={styles.subtitle}>{subtitle}</p>
+              {children}
+              {footer ? <p className={styles.footerLine}>{footer}</p> : null}
+            </div>
+          )}
         </div>
       </div>
     </div>
