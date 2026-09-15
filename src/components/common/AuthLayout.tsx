@@ -1,6 +1,8 @@
 import { useState, type CSSProperties, type MouseEvent, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import AuthHeader from "./AuthHeader";
 import authPhoto from "../../assets/splash-photo.webp";
+import { APP_VERSION } from "../../core/appVersion";
 import styles from "./AuthLayout.module.css";
 
 interface AuthLayoutProps {
@@ -39,6 +41,7 @@ interface AuthLayoutProps {
 // with; on desktop it's already display:none via CSS, so nothing
 // extra shows there either way.
 export default function AuthLayout({ title, subtitle, children, footer }: AuthLayoutProps) {
+  const { t } = useTranslation("common");
   const [uiHidden, setUiHidden] = useState(false);
 
   const toggleUiOnBackgroundClick = (event: MouseEvent) => {
@@ -53,9 +56,16 @@ export default function AuthLayout({ title, subtitle, children, footer }: AuthLa
 
   return (
     <div className={styles.page} style={{ "--auth-photo": `url(${authPhoto})` } as CSSProperties} onClick={toggleUiOnBackgroundClick}>
-      <AuthHeader />
+      <AuthHeader showVersion={false} />
 
-      <div className={styles.content}>
+      {/* § bugfix, 2026-09-15 - the >=861px media query makes .content
+          a full flex:1 box covering nearly the entire visible photo
+          area, so .page's own onClick almost never actually receives
+          the click (.content intercepts it first as the real target).
+          Its own onClick+guard here is what makes desktop clicks work
+          at all; harmless on mobile where .content is display:contents
+          and therefore has no box of its own to be a click target. */}
+      <div className={styles.content} onClick={toggleUiOnBackgroundClick}>
         <div className={styles.shell} style={shellChromeStyle}>
           <div className={styles.brandPanel}>
             <div className={styles.brandPhoto} style={{ backgroundImage: `url(${authPhoto})` }} onClick={toggleUiOnBackgroundClick} />
@@ -71,6 +81,8 @@ export default function AuthLayout({ title, subtitle, children, footer }: AuthLa
           )}
         </div>
       </div>
+
+      <span className={styles.versionFooter}>{t("versionLabel", { version: APP_VERSION })}</span>
     </div>
   );
 }

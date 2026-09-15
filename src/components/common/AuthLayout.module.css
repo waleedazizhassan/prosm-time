@@ -354,6 +354,23 @@
   color: var(--text-secondary);
 }
 
+/* § bugfix, 2026-09-15 - matches PROSM Projects'/PROSM Finance's own
+   AuthLayout.module.css exactly (and WelcomePage's own identical mark)
+   - the version number belongs at the page's bottom, not the header;
+   this repo's own AuthHeader gets showVersion={false} for exactly
+   that reason. `.page` is always position:relative so this stays
+   anchored to the full page, not the card. */
+.versionFooter {
+  position: absolute;
+  z-index: 1;
+  bottom: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+
+  color: rgba(226, 232, 240, 0.5);
+  font-size: var(--font-xs);
+}
+
 .footerLine {
   margin-top: var(--space-6);
   font-size: var(--font-sm);
