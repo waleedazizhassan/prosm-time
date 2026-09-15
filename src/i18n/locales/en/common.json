@@ -4,7 +4,7 @@
   "hidePassword": "Hide password",
   "appNameShort": "PROSM",
   "loading": "Loading…",
-  "versionLabel": "Version {{version}}",
+  "versionLabel": "v{{version}}",
   "greeting": {
     "morning": "Good morning",
     "afternoon": "Good afternoon",

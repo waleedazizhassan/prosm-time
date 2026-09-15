@@ -4,7 +4,7 @@
   "hidePassword": "Masquer le mot de passe",
   "appNameShort": "PROSM",
   "loading": "Chargement…",
-  "versionLabel": "Version {{version}}",
+  "versionLabel": "v{{version}}",
   "greeting": {
     "morning": "Bonjour",
     "afternoon": "Bon après-midi",

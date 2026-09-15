@@ -1,6 +1,6 @@
 import { useState, type CSSProperties, type MouseEvent, type ReactNode } from "react";
 import AuthHeader from "./AuthHeader";
-import authPhoto from "../../assets/splash-photo.png";
+import authPhoto from "../../assets/splash-photo.webp";
 import styles from "./AuthLayout.module.css";
 
 interface AuthLayoutProps {

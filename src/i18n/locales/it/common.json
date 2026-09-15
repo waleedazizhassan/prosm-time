@@ -4,7 +4,7 @@
   "hidePassword": "Nascondi password",
   "appNameShort": "PROSM",
   "loading": "Caricamento…",
-  "versionLabel": "Versione {{version}}",
+  "versionLabel": "v{{version}}",
   "greeting": {
     "morning": "Buongiorno",
     "afternoon": "Buon pomeriggio",

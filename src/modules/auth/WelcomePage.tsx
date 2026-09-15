@@ -5,7 +5,7 @@ import { Sun, Moon } from "lucide-react";
 
 import AuthHeader from "../../components/common/AuthHeader";
 import Button from "../../components/common/Button";
-import authPhoto from "../../assets/splash-photo.png";
+import authPhoto from "../../assets/splash-photo.webp";
 import { APP_VERSION } from "../../core/appVersion";
 import { LANGUAGES } from "../../i18n/languages";
 import { useTheme } from "../../core/context/ThemeContext";
