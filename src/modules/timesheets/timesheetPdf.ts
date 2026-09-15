@@ -35,6 +35,17 @@ export function buildTimesheetPdf(pack: EvidencePack, languageCode: string, t: T
   const isRtl = languageCode === "ar";
   const locale = languageCode;
 
+  // § found live while verifying this fix - a real timesheet's own
+  // cached timesheet.totalLeaveDays (computed once at generation time)
+  // can drift out of sync with reality if a leave request is approved
+  // afterward (confirmed against real data: a real timesheet showed
+  // totalLeaveDays=0 while a real approved leave_requests row clearly
+  // overlapped its period). Summing pack.leaveEntries directly keeps
+  // this printed document internally consistent with its own Leave
+  // section below, always - not dependent on when that cache was last
+  // recomputed.
+  const totalLeaveDays = pack.leaveEntries.reduce((sum, entry) => sum + entry.daysCount, 0);
+
   const summaryRow = (label: string, value: string) => `
     <td style="padding:5px 10px;color:#64748b;white-space:nowrap;">${escapeHtml(label)}</td>
     <td style="padding:5px 10px;font-weight:600;color:#0f172a;">${escapeHtml(value)}</td>
@@ -93,11 +104,21 @@ export function buildTimesheetPdf(pack: EvidencePack, languageCode: string, t: T
     ),
   ].join("");
 
-  const evidenceRows = pack.evidenceReferences
+  // § real gap fix, user-reported (#6, 2026-09-15) - "leave isn't
+  // recorded in the timesheet PDF... remove the photos, they're
+  // useless printed - just become a label, nothing more." The old
+  // "Evidence" section here only ever listed captured-at/content-type
+  // TEXT for each camera_evidence row (never the actual image) - on a
+  // printed page that reads as exactly the useless label the user
+  // describes, so it's removed entirely rather than kept as dead
+  // weight. Real evidence photos are still viewable on-screen
+  // (TimesheetsPage.tsx/ManagerConsolePage.tsx's own photo modals) -
+  // this only ever affected the printed document.
+  const leaveRows = pack.leaveEntries
     .map(
-      (evidence) => `
+      (leave) => `
       <div style="font-size:11px;color:#334155;padding:4px 0;border-top:1px solid #f1f5f9;">
-        ${escapeHtml(formatDateTime(evidence.capturedAt, locale))} · ${escapeHtml(evidence.contentType)}
+        ${escapeHtml(t(`values.leaveType.${leave.leaveType}`, { defaultValue: leave.leaveType }))} · ${escapeHtml(formatDateOnly(leave.startDate, locale))} — ${escapeHtml(formatDateOnly(leave.endDate, locale))} · ${escapeHtml(t("report.leaveDays", { count: leave.daysCount }))}${leave.reason ? " · " + escapeHtml(leave.reason) : ""}
       </div>`
     )
     .join("");
@@ -141,7 +162,7 @@ export function buildTimesheetPdf(pack: EvidencePack, languageCode: string, t: T
       <tr>${summaryRow(t("report.status"), t(`status.${pack.timesheet.status}`))}${summaryRow(t("report.lockStatus"), pack.timesheet.lockedAt ? t("report.locked") : t("report.unlocked"))}</tr>
       <tr>${summaryRow(t("report.worked"), formatMinutes(pack.timesheet.totalWorkedMinutes))}${summaryRow(t("report.overtime"), formatMinutes(pack.timesheet.totalOvertimeMinutes))}</tr>
       <tr>${summaryRow(t("report.breaks"), formatMinutes(pack.timesheet.totalBreakMinutes))}${summaryRow(t("report.approver"), pack.timesheet.approverName ?? "—")}</tr>
-      <tr>${summaryRow(t("report.approvedAt"), pack.timesheet.approvedAt ? formatDateTime(pack.timesheet.approvedAt, locale) : "—")}<td></td><td></td></tr>
+      <tr>${summaryRow(t("report.approvedAt"), pack.timesheet.approvedAt ? formatDateTime(pack.timesheet.approvedAt, locale) : "—")}${summaryRow(t("report.leaveDaysLabel"), t("report.leaveDays", { count: totalLeaveDays }))}</tr>
     </table>
 
     <div style="${headingStyle}">${escapeHtml(t("report.entriesTitle"))}</div>
@@ -165,9 +186,9 @@ export function buildTimesheetPdf(pack: EvidencePack, languageCode: string, t: T
       </tfoot>
     </table>
 
+    ${listSection(t("report.leaveTitle"), leaveRows, t("report.noLeave"))}
     ${listSection(t("report.exceptionsTitle"), exceptionsRows, t("report.noExceptions"))}
     ${listSection(t("report.correctionsTitle"), correctionsRows, t("report.noCorrections"))}
-    ${listSection(t("report.evidenceTitle"), evidenceRows, t("report.noEvidence"))}
     ${listSection(t("report.approvalTrailTitle"), approvalTrailRows, t("report.noApprovalTrail"))}
   `;
 

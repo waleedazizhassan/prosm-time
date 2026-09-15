@@ -93,6 +93,19 @@ export interface EvidencePackTimesheetCorrection {
   createdAt: string;
 }
 
+// § real gap fix, user-reported (#6, 2026-09-15) - "the timesheet PDF
+// doesn't record leave at all." Real approved leave_requests rows for
+// this period, threaded through list_prosm_time_timesheet_evidence_pack.
+export interface EvidencePackLeaveEntry {
+  id: string;
+  leaveType: string;
+  startDate: string;
+  endDate: string;
+  daysCount: number;
+  status: string;
+  reason: string | null;
+}
+
 export interface EvidencePack {
   timesheet: {
     id: string;
@@ -102,6 +115,7 @@ export interface EvidencePack {
     totalWorkedMinutes: number;
     totalBreakMinutes: number;
     totalOvertimeMinutes: number;
+    totalLeaveDays: number;
     submittedAt: string | null;
     approvedAt: string | null;
     lockedAt: string | null;
@@ -115,6 +129,7 @@ export interface EvidencePack {
   evidenceReferences: EvidencePackEvidenceReference[];
   approvalTrail: EvidencePackApprovalTrailRow[];
   timesheetCorrections: EvidencePackTimesheetCorrection[];
+  leaveEntries: EvidencePackLeaveEntry[];
 }
 
 function createSuccess<T>(data: T | null = null): ServiceResult<T> {

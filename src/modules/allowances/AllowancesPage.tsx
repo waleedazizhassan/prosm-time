@@ -236,7 +236,7 @@ export default function AllowancesPage() {
     setExportingPdf(true);
     try {
       const doc = await buildAllowancesPdf(filteredEntries, startDate, endDate, i18n.language, t, organizationLogoUrl);
-      await savePdfDocument(doc, `allowances-${startDate}-${endDate}.pdf`);
+      await savePdfDocument(doc, `allowances-${startDate}-${endDate}.pdf`, "allowances", startDate, endDate);
     } finally {
       setExportingPdf(false);
     }

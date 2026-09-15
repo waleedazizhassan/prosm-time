@@ -7,9 +7,11 @@ import AllowanceRepository, { type AllowanceEntry } from "../../core/repositorie
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import SiteWorkerRepository, { type SiteWorkerAttendanceRow } from "../../core/repositories/SiteWorkerRepository";
 import ReportRepository from "../../core/repositories/ReportRepository";
+import ReportExportRepository, { type ReportExport } from "../../core/repositories/ReportExportRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
-import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
+import { formatDateOnly, formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
 import savePdfDocument from "../../core/utils/savePdfDocument";
+import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
 import { buildAttendanceLogPdf } from "../attendance/attendanceLogPdf";
 import { buildAllowancesPdf } from "../allowances/allowancesPdf";
 import { buildGenericReportPdf } from "./genericReportPdf";
@@ -22,6 +24,8 @@ import Input from "../../components/common/Input";
 import Select from "../../components/common/Select";
 import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
+import Table, { type TableColumn } from "../../components/common/Table";
+import { Download } from "lucide-react";
 import reportsBanner from "../../assets/illustration-reports-banner.png";
 import { REPORT_TYPE_ICONS } from "./reportTypeIcons";
 import styles from "./ReportsPage.module.css";
@@ -105,6 +109,51 @@ export default function ReportsPage() {
   const [loadError, setLoadError] = useState("");
   const [organizationLogoUrl, setOrganizationLogoUrl] = useState<string | null>(null);
   const [exporting, setExporting] = useState(false);
+
+  // § user-reported real gap (#4, 2026-09-15) - "once a report
+  // exports, it should be saved into Reports so I can pull it later
+  // even if I didn't save it at the time." recentExports mirrors what
+  // savePdfDocument.ts now archives automatically on every export.
+  const [recentExports, setRecentExports] = useState<ReportExport[]>([]);
+  const [recentExportsLoading, setRecentExportsLoading] = useState(true);
+  const [downloadingExportId, setDownloadingExportId] = useState<string | null>(null);
+
+  const loadRecentExports = useCallback(async () => {
+    setRecentExportsLoading(true);
+    const result = await ReportExportRepository.listRecent();
+    setRecentExports(result.success ? result.data ?? [] : []);
+    setRecentExportsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    loadRecentExports();
+  }, [loadRecentExports]);
+
+  const handleDownloadExport = async (exportRow: ReportExport) => {
+    setDownloadingExportId(exportRow.id);
+    const result = await ReportExportRepository.download(exportRow.storagePath);
+    setDownloadingExportId(null);
+    if (result.success && result.data) {
+      await saveGeneratedFile(exportRow.fileName, result.data);
+    }
+  };
+
+  const recentExportsColumns: TableColumn<ReportExport>[] = [
+    { key: "type", header: t("recentExports.typeColumn"), render: (row) => t(`types.${row.reportType}`, { defaultValue: row.reportType }) },
+    { key: "fileName", header: t("recentExports.fileColumn"), render: (row) => row.fileName },
+    { key: "period", header: t("recentExports.periodColumn"), render: (row) => (row.periodStart && row.periodEnd ? `${row.periodStart} — ${row.periodEnd}` : "—") },
+    { key: "exportedBy", header: t("recentExports.exportedByColumn"), render: (row) => row.exportedByName },
+    { key: "createdAt", header: t("recentExports.createdAtColumn"), render: (row) => formatDateTime(row.createdAt, i18n.language) },
+    {
+      key: "actions",
+      header: "",
+      render: (row) => (
+        <Button variant="ghost" size="sm" onClick={() => handleDownloadExport(row)} loading={downloadingExportId === row.id}>
+          <Download size={14} /> {t("recentExports.downloadAction")}
+        </Button>
+      ),
+    },
+  ];
 
   useEffect(() => {
     OrganizationRepository.getCurrentOrganization().then((result) => {
@@ -346,10 +395,10 @@ export default function ReportsPage() {
       const isRtl = i18n.language === "ar";
       if (reportType === "attendance") {
         const doc = await buildAttendanceLogPdf(filteredAttendanceRows, startDate, endDate, i18n.language, tAttendance, organizationLogoUrl);
-        await savePdfDocument(doc, `attendance-record-${startDate}-${endDate}.pdf`);
+        await savePdfDocument(doc, `attendance-record-${startDate}-${endDate}.pdf`, "attendance", startDate, endDate);
       } else if (reportType === "allowances") {
         const doc = await buildAllowancesPdf(filteredAllowanceEntries, startDate, endDate, i18n.language, tAllowances, organizationLogoUrl);
-        await savePdfDocument(doc, `allowances-${startDate}-${endDate}.pdf`);
+        await savePdfDocument(doc, `allowances-${startDate}-${endDate}.pdf`, "allowances", startDate, endDate);
       } else if (reportType !== "timesheets") {
         const cfg = genericConfig[reportType];
         const doc = await buildGenericReportPdf(
@@ -361,8 +410,9 @@ export default function ReportsPage() {
           isRtl,
           organizationLogoUrl,
         );
-        await savePdfDocument(doc, `${reportType}-${startDate}-${endDate}.pdf`);
+        await savePdfDocument(doc, `${reportType}-${startDate}-${endDate}.pdf`, reportType, startDate, endDate);
       }
+      loadRecentExports();
     } finally {
       setExporting(false);
     }
@@ -420,6 +470,16 @@ export default function ReportsPage() {
             </Button>
           </>
         )}
+      </Card>
+
+      <Card title={t("recentExports.title")}>
+        <Table
+          columns={recentExportsColumns}
+          data={recentExports}
+          getRowId={(row) => row.id}
+          loading={recentExportsLoading}
+          emptyMessage={t("recentExports.empty")}
+        />
       </Card>
     </PageShell>
   );

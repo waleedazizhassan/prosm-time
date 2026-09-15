@@ -6,6 +6,7 @@
     "attendance": "Registre de présence",
     "allowances": "Indemnités",
     "timesheets": "Feuilles de temps",
+    "timesheet": "Feuille de temps",
     "workforce": "Employés de l'entreprise",
     "contractor": "Main-d'œuvre temporaire",
     "site": "Résumé par site",
@@ -116,5 +117,15 @@
       "ADMIN_CLOCK_OUT_ON_BEHALF": "Pointage de départ au nom de",
       "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "Pointage de départ d'un sous-traitant au nom de"
     }
+  },
+  "recentExports": {
+    "title": "Exports récents",
+    "empty": "Aucun export pour l'instant - chaque PDF exporté est enregistré ici automatiquement.",
+    "typeColumn": "Type",
+    "fileColumn": "Fichier",
+    "periodColumn": "Période",
+    "exportedByColumn": "Exporté par",
+    "createdAtColumn": "Exporté le",
+    "downloadAction": "Télécharger"
   }
 }

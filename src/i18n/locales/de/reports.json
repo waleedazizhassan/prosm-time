@@ -6,6 +6,7 @@
     "attendance": "Anwesenheitsprotokoll",
     "allowances": "Zulagen",
     "timesheets": "Stundenzettel",
+    "timesheet": "Stundenzettel",
     "workforce": "Unternehmensmitarbeiter",
     "contractor": "Temporäre Arbeitskräfte",
     "site": "Standortübersicht",
@@ -116,5 +117,15 @@
       "ADMIN_CLOCK_OUT_ON_BEHALF": "Im Auftrag ausgestempelt",
       "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "Subunternehmer im Auftrag ausgestempelt"
     }
+  },
+  "recentExports": {
+    "title": "Letzte Exporte",
+    "empty": "Noch keine Exporte - jedes exportierte PDF wird hier automatisch gespeichert.",
+    "typeColumn": "Typ",
+    "fileColumn": "Datei",
+    "periodColumn": "Zeitraum",
+    "exportedByColumn": "Exportiert von",
+    "createdAtColumn": "Exportiert am",
+    "downloadAction": "Herunterladen"
   }
 }

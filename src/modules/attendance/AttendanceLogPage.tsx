@@ -174,7 +174,7 @@ export default function AttendanceLogPage() {
     setExportingPdf(true);
     try {
       const doc = await buildAttendanceLogPdf(filteredRows, startDate, endDate, i18n.language, t, organizationLogoUrl);
-      await savePdfDocument(doc, `attendance-record-${startDate}-${endDate}.pdf`);
+      await savePdfDocument(doc, `attendance-record-${startDate}-${endDate}.pdf`, "attendance", startDate, endDate);
     } finally {
       setExportingPdf(false);
     }

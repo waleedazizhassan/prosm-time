@@ -6,6 +6,7 @@
     "attendance": "Attendance Record",
     "allowances": "Allowances",
     "timesheets": "Timesheets",
+    "timesheet": "Timesheet",
     "workforce": "Company Employees",
     "contractor": "Temporary Workforce",
     "site": "Site Summary",
@@ -116,5 +117,15 @@
       "ADMIN_CLOCK_OUT_ON_BEHALF": "Clocked out on behalf",
       "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "Clocked out contractor on behalf"
     }
+  },
+  "recentExports": {
+    "title": "Recent Exports",
+    "empty": "No exports yet - every PDF you export is saved here automatically.",
+    "typeColumn": "Type",
+    "fileColumn": "File",
+    "periodColumn": "Period",
+    "exportedByColumn": "Exported by",
+    "createdAtColumn": "Exported",
+    "downloadAction": "Download"
   }
 }

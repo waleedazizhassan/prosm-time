@@ -5,7 +5,8 @@
   "types": {
     "attendance": "سجل الحضور",
     "allowances": "البدلات",
-    "timesheets": "الجداول الزمنية",
+    "timesheets": "كشوف الدوام",
+    "timesheet": "كشف الدوام",
     "workforce": "موظفين الشركة",
     "contractor": "العمالة المؤقتة",
     "site": "ملخص المواقع",
@@ -16,8 +17,8 @@
     "locationViolations": "مخالفات الموقع",
     "sos": "الطوارئ"
   },
-  "timesheetsHint": "الجداول الزمنية تُنشأ وتُعتمد لكل موظف وفترة على حدة، مش بنطاق تاريخ.",
-  "timesheetsLink": "الذهاب إلى الجداول الزمنية",
+  "timesheetsHint": "كشوف الدوام تُنشأ وتُعتمد لكل موظف وفترة على حدة، مش بنطاق تاريخ.",
+  "timesheetsLink": "الذهاب إلى كشوف الدوام",
   "filters": {
     "fromLabel": "من",
     "toLabel": "إلى",
@@ -116,5 +117,15 @@
       "ADMIN_CLOCK_OUT_ON_BEHALF": "تسجيل انصراف بالنيابة",
       "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "تسجيل انصراف عامل مؤقت بالنيابة"
     }
+  },
+  "recentExports": {
+    "title": "أحدث الملفات المُصدَّرة",
+    "empty": "لا توجد ملفات مُصدَّرة بعد - كل PDF تصدّره بيتحفظ هنا تلقائيًا.",
+    "typeColumn": "النوع",
+    "fileColumn": "الملف",
+    "periodColumn": "الفترة",
+    "exportedByColumn": "صدّره",
+    "createdAtColumn": "تاريخ التصدير",
+    "downloadAction": "تحميل"
   }
 }

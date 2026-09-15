@@ -88,6 +88,10 @@
     "locked": "Gesperrt",
     "unlocked": "Nicht gesperrt",
     "entriesTitle": "Anwesenheitseinträge",
+    "leaveTitle": "Abwesenheit",
+    "noLeave": "Keine genehmigte Abwesenheit in diesem Zeitraum.",
+    "leaveDaysLabel": "Abwesenheitstage",
+    "leaveDays": "{{count}} Tag(e)",
     "exceptionsTitle": "Geofence-Ausnahmen (GPS-Validierungsübersicht)",
     "noExceptions": "Keine Geofence-Ausnahmen in diesem Zeitraum.",
     "correctionsTitle": "Korrekturen",
@@ -98,5 +102,14 @@
     "viewEvidence": "Anzeigen",
     "approvalTrailTitle": "Genehmigungsverlauf",
     "noApprovalTrail": "Noch keine Genehmigungsaktivität."
+  },
+  "values": {
+    "leaveType": {
+      "annual": "Jahresurlaub",
+      "sick": "Krankheit",
+      "unpaid": "Unbezahlt",
+      "emergency": "Notfall",
+      "other": "Sonstiges"
+    }
   }
 }

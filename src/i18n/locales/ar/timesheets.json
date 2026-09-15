@@ -88,6 +88,10 @@
     "locked": "مقفل",
     "unlocked": "غير مقفل",
     "entriesTitle": "سجلات الحضور",
+    "leaveTitle": "الإجازات",
+    "noLeave": "لا توجد إجازة معتمدة في هذه الفترة.",
+    "leaveDaysLabel": "أيام الإجازة",
+    "leaveDays": "{{count}} يوم",
     "exceptionsTitle": "استثناءات النطاق الجغرافي (ملخص التحقق من الموقع)",
     "noExceptions": "لا توجد استثناءات نطاق جغرافي في هذه الفترة.",
     "correctionsTitle": "التصحيحات",
@@ -98,5 +102,14 @@
     "viewEvidence": "عرض",
     "approvalTrailTitle": "سجل الاعتماد",
     "noApprovalTrail": "لا يوجد نشاط اعتماد بعد."
+  },
+  "values": {
+    "leaveType": {
+      "annual": "سنوية",
+      "sick": "مرضية",
+      "unpaid": "بدون أجر",
+      "emergency": "طارئة",
+      "other": "أخرى"
+    }
   }
 }

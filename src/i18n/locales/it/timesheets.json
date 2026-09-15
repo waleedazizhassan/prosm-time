@@ -88,6 +88,10 @@
     "locked": "Bloccato",
     "unlocked": "Non bloccato",
     "entriesTitle": "Voci di presenza",
+    "leaveTitle": "Ferie e permessi",
+    "noLeave": "Nessun permesso approvato in questo periodo.",
+    "leaveDaysLabel": "Giorni di permesso",
+    "leaveDays": "{{count}} giorno/i",
     "exceptionsTitle": "Eccezioni geofence (riepilogo validazione GPS)",
     "noExceptions": "Nessuna eccezione geofence in questo periodo.",
     "correctionsTitle": "Correzioni",
@@ -98,5 +102,14 @@
     "viewEvidence": "Visualizza",
     "approvalTrailTitle": "Cronologia approvazioni",
     "noApprovalTrail": "Nessuna attività di approvazione finora."
+  },
+  "values": {
+    "leaveType": {
+      "annual": "Ferie annuali",
+      "sick": "Malattia",
+      "unpaid": "Non retribuito",
+      "emergency": "Emergenza",
+      "other": "Altro"
+    }
   }
 }

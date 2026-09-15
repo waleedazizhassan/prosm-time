@@ -88,6 +88,10 @@
     "locked": "Verrouillé",
     "unlocked": "Non verrouillé",
     "entriesTitle": "Entrées de présence",
+    "leaveTitle": "Congés",
+    "noLeave": "Aucun congé approuvé sur cette période.",
+    "leaveDaysLabel": "Jours de congé",
+    "leaveDays": "{{count}} jour(s)",
     "exceptionsTitle": "Exceptions de géorepérage (résumé de validation GPS)",
     "noExceptions": "Aucune exception de géorepérage dans cette période.",
     "correctionsTitle": "Corrections",
@@ -98,5 +102,14 @@
     "viewEvidence": "Voir",
     "approvalTrailTitle": "Historique des approbations",
     "noApprovalTrail": "Aucune activité d'approbation pour le moment."
+  },
+  "values": {
+    "leaveType": {
+      "annual": "Annuel",
+      "sick": "Maladie",
+      "unpaid": "Non rémunéré",
+      "emergency": "Urgence",
+      "other": "Autre"
+    }
   }
 }

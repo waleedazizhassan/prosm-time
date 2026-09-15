@@ -6,6 +6,7 @@
     "attendance": "Registro presenze",
     "allowances": "Indennità",
     "timesheets": "Fogli ore",
+    "timesheet": "Foglio ore",
     "workforce": "Dipendenti aziendali",
     "contractor": "Personale temporaneo",
     "site": "Riepilogo sito",
@@ -116,5 +117,15 @@
       "ADMIN_CLOCK_OUT_ON_BEHALF": "Uscita timbrata per conto di",
       "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "Uscita lavoratore esterno timbrata per conto di"
     }
+  },
+  "recentExports": {
+    "title": "Esportazioni recenti",
+    "empty": "Nessuna esportazione ancora - ogni PDF esportato viene salvato qui automaticamente.",
+    "typeColumn": "Tipo",
+    "fileColumn": "File",
+    "periodColumn": "Periodo",
+    "exportedByColumn": "Esportato da",
+    "createdAtColumn": "Esportato il",
+    "downloadAction": "Scarica"
   }
 }

@@ -109,7 +109,7 @@ export default function TimesheetReportPage() {
     setExportingPdf(true);
     try {
       const doc = await buildTimesheetPdf(pack, i18n.language, t, organizationLogoUrl);
-      await savePdfDocument(doc, `timesheet-${pack.employee.fullName.replace(/\s+/g, "-")}-${pack.timesheet.periodStart}.pdf`);
+      await savePdfDocument(doc, `timesheet-${pack.employee.fullName.replace(/\s+/g, "-")}-${pack.timesheet.periodStart}.pdf`, "timesheet", pack.timesheet.periodStart, pack.timesheet.periodEnd);
     } finally {
       setExportingPdf(false);
     }

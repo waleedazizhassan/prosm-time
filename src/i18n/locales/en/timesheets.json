@@ -88,6 +88,10 @@
     "locked": "Locked",
     "unlocked": "Not locked",
     "entriesTitle": "Attendance Entries",
+    "leaveTitle": "Leave",
+    "noLeave": "No approved leave in this period.",
+    "leaveDaysLabel": "Leave days",
+    "leaveDays": "{{count}} day(s)",
     "exceptionsTitle": "Geofence Exceptions (GPS Validation Summary)",
     "noExceptions": "No geofence exceptions in this period.",
     "correctionsTitle": "Corrections",
@@ -98,5 +102,14 @@
     "viewEvidence": "View",
     "approvalTrailTitle": "Approval Trail",
     "noApprovalTrail": "No approval activity yet."
+  },
+  "values": {
+    "leaveType": {
+      "annual": "Annual",
+      "sick": "Sick",
+      "unpaid": "Unpaid",
+      "emergency": "Emergency",
+      "other": "Other"
+    }
   }
 }
