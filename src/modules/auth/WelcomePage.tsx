@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import { useState, type CSSProperties, type MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Sun, Moon } from "lucide-react";
@@ -23,59 +23,79 @@ import styles from "./WelcomePage.module.css";
 //   otherwise land on a blank photo with no way to go anywhere. The
 //   mobile-only card below (WelcomePage.module.css) gives them the
 //   same two entry points AuthHeader gives desktop.
+//
+// § user-directed, 2026-09-15 - "clicking the marketing image on the
+// Welcome page should hide whatever card/UI is showing" (all 3 PROSM
+// products). uiHidden toggles AuthHeader (desktop) and the mobile
+// card's own body/controls off, leaving just the raw photo - a click
+// anywhere on the plain background (never a real child control) flips
+// it back. The `event.target === event.currentTarget` guard is what
+// keeps this from swallowing clicks on the real buttons/select/etc.
+// nested inside these same elements.
 export default function WelcomePage() {
   const { t, i18n } = useTranslation("auth");
   const navigate = useNavigate();
   const { resolvedTheme, setTheme } = useTheme();
+  const [uiHidden, setUiHidden] = useState(false);
+
+  const toggleUiOnBackgroundClick = (event: MouseEvent) => {
+    if (event.target === event.currentTarget) {
+      setUiHidden((current) => !current);
+    }
+  };
 
   return (
-    <div className={pageStyles.page} style={{ "--auth-photo": `url(${authPhoto})` } as CSSProperties}>
-      <AuthHeader showVersion={false} />
+    <div className={pageStyles.page} style={{ "--auth-photo": `url(${authPhoto})` } as CSSProperties} onClick={toggleUiOnBackgroundClick}>
+      {uiHidden ? null : <AuthHeader showVersion={false} />}
 
       <div className={styles.mobileCard}>
-        <div className={styles.photoBand} style={{ backgroundImage: `url(${authPhoto})` }}>
+        <div className={styles.photoBand} style={{ backgroundImage: `url(${authPhoto})` }} onClick={toggleUiOnBackgroundClick}>
           {/* § user-directed, 2026-09-13 - moved off the card body
               (where it pushed the title down) to float over the photo's
               own top-right corner instead, with a theme toggle right
               beside it - mobile has no other way to reach either
               control (AuthHeader's own versions are desktop-only). */}
-          <div className={styles.topControls}>
-            <select
-              className={styles.mobileLanguageSelect}
-              value={i18n.language}
-              onChange={(event) => i18n.changeLanguage(event.target.value)}
-              aria-label={t("authHeader.languageAriaLabel")}
-            >
-              {LANGUAGES.map((language) => (
-                <option key={language.code} value={language.code}>
-                  {language.nativeLabel}
-                </option>
-              ))}
-            </select>
-            <button
-              type="button"
-              className={styles.themeToggle}
-              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-              aria-label={t("authHeader.themeToggleAriaLabel")}
-            >
-              {resolvedTheme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+          {uiHidden ? null : (
+            <div className={styles.topControls}>
+              <select
+                className={styles.mobileLanguageSelect}
+                value={i18n.language}
+                onChange={(event) => i18n.changeLanguage(event.target.value)}
+                aria-label={t("authHeader.languageAriaLabel")}
+              >
+                {LANGUAGES.map((language) => (
+                  <option key={language.code} value={language.code}>
+                    {language.nativeLabel}
+                  </option>
+                ))}
+              </select>
+              <button
+                type="button"
+                className={styles.themeToggle}
+                onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+                aria-label={t("authHeader.themeToggleAriaLabel")}
+              >
+                {resolvedTheme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+              </button>
+            </div>
+          )}
+        </div>
+        {uiHidden ? null : (
+          <div className={styles.body}>
+            <h1 className={styles.title}>{t("welcome.title")}</h1>
+            <p className={styles.subtitle}>{t("welcome.subtitle")}</p>
+
+            <Button fullWidth onClick={() => navigate("/login")}>
+              {t("login.submitAction")}
+            </Button>
+            <button type="button" className={pageStyles.secondaryButton} style={{ marginTop: "var(--space-3)" }} onClick={() => navigate("/activate")}>
+              {t("authHeader.createOrganization")}
             </button>
           </div>
-        </div>
-        <div className={styles.body}>
-          <h1 className={styles.title}>{t("welcome.title")}</h1>
-          <p className={styles.subtitle}>{t("welcome.subtitle")}</p>
-
-          <Button fullWidth onClick={() => navigate("/login")}>
-            {t("login.submitAction")}
-          </Button>
-          <button type="button" className={pageStyles.secondaryButton} style={{ marginTop: "var(--space-3)" }} onClick={() => navigate("/activate")}>
-            {t("authHeader.createOrganization")}
-          </button>
-        </div>
+        )}
       </div>
 
-      <span className={styles.versionFooter}>{t("common:versionLabel", { version: APP_VERSION })}</span>
+      {uiHidden ? null : <span className={styles.versionFooter}>{t("common:versionLabel", { version: APP_VERSION })}</span>}
     </div>
   );
 }
