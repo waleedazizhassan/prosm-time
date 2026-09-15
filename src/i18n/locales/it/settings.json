@@ -55,27 +55,10 @@
     "title": "Integrazione buste paga",
     "providerLabel": "Provider",
     "providers": {
-      "quickbooks": "QuickBooks Online",
       "xero": "Xero",
       "gusto": "Gusto"
     },
     "notConfigured": "Questa integrazione non è ancora configurata - chiedi al tuo amministratore di aggiungere le credenziali API."
-  },
-  "quickbooks": {
-    "hint": "Collega l'azienda QuickBooks Online della tua organizzazione per inviare automaticamente le ore lavorate verificate come voci Time Activity - abbinate ai dipendenti QuickBooks tramite email.",
-    "notConnected": "Non ancora collegato.",
-    "connectAction": "Collega QuickBooks",
-    "connectError": "Impossibile avviare la connessione a QuickBooks.",
-    "connectedTo": "Collegato a {{company}}",
-    "unnamedCompany": "la tua azienda QuickBooks",
-    "disconnectAction": "Scollega",
-    "disconnectError": "Impossibile scollegare QuickBooks.",
-    "syncAction": "Sincronizza ora",
-    "syncError": "Impossibile sincronizzare con QuickBooks.",
-    "lastSynced": "ultima sincronizzazione {{time}}",
-    "neverSynced": "mai sincronizzato",
-    "summary": "Ultima esecuzione: {{synced}} sincronizzati, {{skipped}} saltati (nessun dipendente corrispondente), {{failed}} falliti.",
-    "unmatchedEmails": "Nessun dipendente QuickBooks trovato per: {{emails}}"
   },
   "xero": {
     "hint": "Collega l'organizzazione Xero della tua azienda per inviare automaticamente le ore lavorate verificate come Payroll Timesheets - abbinate ai dipendenti Xero tramite email.",

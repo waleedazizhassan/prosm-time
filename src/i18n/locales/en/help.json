@@ -66,10 +66,6 @@
       "title": "Hijri or Gregorian Calendar",
       "body": "Every date shown in the app can display as Gregorian or Hijri - pick your preference from the user menu at the bottom of the sidebar, next to Language and Appearance. This is a per-device preference, not an organization-wide setting - each person can choose their own."
     },
-    "payrollIntegration": {
-      "title": "Payroll Integration (Owner)",
-      "body": "From Settings > Payroll Integration, connect your organization's own QuickBooks Online company to automatically send verified worked hours across, matched to QuickBooks employees by email. This is a one-time connection each organization sets up for itself - here's exactly what happens: (1) you press Connect QuickBooks; (2) a new tab opens showing QuickBooks' own real sign-in screen; (3) you sign in with your own QuickBooks account (not PROSM's) and approve the connection on QuickBooks' own consent screen; (4) QuickBooks sends you back to PROSM Time's server, which exchanges that approval for a secure connection - no one, not even you, can view the underlying keys afterward, only PROSM Time's own server ever uses them; (5) back in PROSM Time, the card now shows your company's real name, confirming the connection is live. From then on, \"Sync now\" pushes newly completed, verified shifts across - hours already sent are never duplicated on a later sync. No one else can complete this connection on your behalf, since it's your own company's payroll data."
-    },
     "permissions": {
       "title": "Permissions (Administrators)",
       "body": "Each person's page under People shows their real granted permissions and lets an authorized administrator grant, revoke, or reset an individual permission with a reason - visible only to those who already hold that authority. The Owner always has every permission; other roles start from a default bundle that can be adjusted per person."

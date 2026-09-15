@@ -55,27 +55,10 @@
     "title": "Intégration de paie",
     "providerLabel": "Fournisseur",
     "providers": {
-      "quickbooks": "QuickBooks Online",
       "xero": "Xero",
       "gusto": "Gusto"
     },
     "notConfigured": "Cette intégration n'est pas encore configurée - demandez à votre administrateur d'ajouter ses identifiants API."
-  },
-  "quickbooks": {
-    "hint": "Connectez l'entreprise QuickBooks Online de votre organisation pour envoyer automatiquement les heures travaillées vérifiées sous forme d'entrées Time Activity - mises en correspondance avec les employés QuickBooks par e-mail.",
-    "notConnected": "Pas encore connecté.",
-    "connectAction": "Connecter QuickBooks",
-    "connectError": "Impossible de démarrer la connexion à QuickBooks.",
-    "connectedTo": "Connecté à {{company}}",
-    "unnamedCompany": "votre entreprise QuickBooks",
-    "disconnectAction": "Déconnecter",
-    "disconnectError": "Impossible de déconnecter QuickBooks.",
-    "syncAction": "Synchroniser maintenant",
-    "syncError": "Impossible de synchroniser avec QuickBooks.",
-    "lastSynced": "dernière synchronisation {{time}}",
-    "neverSynced": "jamais synchronisé",
-    "summary": "Dernière exécution : {{synced}} synchronisés, {{skipped}} ignorés (aucun employé correspondant), {{failed}} échoués.",
-    "unmatchedEmails": "Aucun employé QuickBooks trouvé pour : {{emails}}"
   },
   "xero": {
     "hint": "Connectez l'organisation Xero de votre entreprise pour envoyer automatiquement les heures travaillées vérifiées sous forme de feuilles de temps de paie - mises en correspondance avec les employés Xero par e-mail.",

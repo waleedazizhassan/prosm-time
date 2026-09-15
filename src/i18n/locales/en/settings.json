@@ -55,27 +55,10 @@
     "title": "Payroll Integration",
     "providerLabel": "Provider",
     "providers": {
-      "quickbooks": "QuickBooks Online",
       "xero": "Xero",
       "gusto": "Gusto"
     },
     "notConfigured": "This integration isn't set up yet - ask your administrator to add its API credentials."
-  },
-  "quickbooks": {
-    "hint": "Connect your organization's QuickBooks Online company to automatically send verified worked hours as Time Activity entries - matched to QuickBooks employees by email.",
-    "notConnected": "Not connected yet.",
-    "connectAction": "Connect QuickBooks",
-    "connectError": "Unable to start the QuickBooks connection.",
-    "connectedTo": "Connected to {{company}}",
-    "unnamedCompany": "your QuickBooks company",
-    "disconnectAction": "Disconnect",
-    "disconnectError": "Unable to disconnect QuickBooks.",
-    "syncAction": "Sync now",
-    "syncError": "Unable to sync with QuickBooks.",
-    "lastSynced": "last synced {{time}}",
-    "neverSynced": "never synced yet",
-    "summary": "Last run: {{synced}} synced, {{skipped}} skipped (no matching employee), {{failed}} failed.",
-    "unmatchedEmails": "No QuickBooks employee found for: {{emails}}"
   },
   "xero": {
     "hint": "Connect your organization's Xero organisation to automatically send verified worked hours as Payroll Timesheets - matched to Xero employees by email.",

@@ -66,10 +66,6 @@
       "title": "Calendario Hijri o Gregoriano",
       "body": "Ogni data mostrata nell'app può essere visualizzata come Gregoriana o Hijri - scegli la tua preferenza dal menu utente in fondo alla barra laterale, accanto a Lingua e Aspetto. È una preferenza per dispositivo, non un'impostazione a livello di organizzazione - ognuno può fare la propria scelta."
     },
-    "payrollIntegration": {
-      "title": "Integrazione buste paga (proprietario)",
-      "body": "Da Impostazioni > Integrazione buste paga, collega l'azienda QuickBooks Online reale della tua organizzazione per inviare automaticamente le ore lavorate verificate, abbinate ai dipendenti QuickBooks tramite email. Si tratta di una connessione che ogni organizzazione configura una sola volta, per conto proprio - ecco esattamente cosa succede: (1) premi Collega QuickBooks; (2) si apre una nuova scheda con la vera schermata di accesso di QuickBooks; (3) accedi con il tuo account QuickBooks (non quello di PROSM) e approvi la connessione nella schermata di consenso di QuickBooks stessa; (4) QuickBooks ti reindirizza al server di PROSM Time, che scambia quell'approvazione con una connessione sicura - nessuno, nemmeno tu, può visualizzare le chiavi sottostanti in seguito, solo il server di PROSM Time le utilizza; (5) tornato in PROSM Time, la scheda ora mostra il vero nome della tua azienda, a conferma che la connessione è attiva. Da questo momento, \"Sincronizza ora\" invia i turni verificati appena completati - le ore già inviate non vengono mai duplicate in una sincronizzazione successiva. Nessun altro può completare questa connessione al posto tuo, trattandosi dei dati delle buste paga della tua stessa azienda."
-    },
     "permissions": {
       "title": "Permessi (amministratori)",
       "body": "La pagina di ciascuna persona in Persone mostra i permessi effettivamente concessi e consente a un amministratore autorizzato di concedere, revocare o azzerare un singolo permesso con un motivo - visibile solo a chi possiede già tale autorità. Il proprietario ha sempre tutti i permessi; gli altri ruoli partono da un pacchetto predefinito regolabile per persona."

@@ -245,32 +245,15 @@ enabled = true
 verify_jwt = false
 entrypoint = "./functions/export-payroll-deductions/index.ts"
 
-# QuickBooks Online payroll integration (the 3rd competitive gap).
-# quickbooks-authorize/sync-quickbooks-time-activity require a real
-# caller session (Owner-only, enforced inside the RPCs they call).
-# quickbooks-oauth-callback is verify_jwt=false because Intuit's own
-# browser redirect lands here with no Supabase session at all - the
-# state param it carries is the real, single-use authorization check.
-[functions.quickbooks-authorize]
-enabled = true
-verify_jwt = true
-entrypoint = "./functions/quickbooks-authorize/index.ts"
+# QuickBooks Online payroll integration removed entirely 2026-09-15
+# (user-directed - PROSM Finance now computes payroll natively via its
+# own PROSM Time API-key bridge, so no external payroll software is
+# needed at all). See prosm_time_quickbooks_removal_pending in memory.
 
-[functions.quickbooks-oauth-callback]
-enabled = true
-verify_jwt = false
-entrypoint = "./functions/quickbooks-oauth-callback/index.ts"
-
-[functions.sync-quickbooks-time-activity]
-enabled = true
-verify_jwt = true
-entrypoint = "./functions/sync-quickbooks-time-activity/index.ts"
-
-# Xero and Gusto payroll integrations - additional providers alongside
-# QuickBooks in the Settings > Payroll Integration selector. Same
-# verify_jwt posture per function role as QuickBooks above. Both are
-# deliberately dormant until XERO_CLIENT_ID/XERO_CLIENT_SECRET and
-# GUSTO_CLIENT_ID/GUSTO_CLIENT_SECRET exist as real secrets.
+# Xero and Gusto payroll integrations - additional providers, same
+# verify_jwt posture per function role as QuickBooks used to have.
+# Both are deliberately dormant until XERO_CLIENT_ID/XERO_CLIENT_SECRET
+# and GUSTO_CLIENT_ID/GUSTO_CLIENT_SECRET exist as real secrets.
 [functions.xero-authorize]
 enabled = true
 verify_jwt = true

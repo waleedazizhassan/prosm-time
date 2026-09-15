@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import QuickBooksRepository from "../../core/repositories/QuickBooksRepository";
 import XeroRepository from "../../core/repositories/XeroRepository";
 import GustoRepository from "../../core/repositories/GustoRepository";
 import { formatDateTime } from "../../core/utils/formatDate";
@@ -32,10 +31,9 @@ interface PayrollProviderRepository {
   syncNow(): Promise<PayrollServiceResult<{ synced: number; skippedNoEmployee: number; failed: number; unmatchedEmails: string[] }>>;
 }
 
-type ProviderKey = "quickbooks" | "xero" | "gusto";
+type ProviderKey = "xero" | "gusto";
 
 const PROVIDERS: Record<ProviderKey, PayrollProviderRepository> = {
-  quickbooks: QuickBooksRepository,
   xero: XeroRepository,
   gusto: GustoRepository,
 };
@@ -46,10 +44,18 @@ const PROVIDERS: Record<ProviderKey, PayrollProviderRepository> = {
 // each provider's own Edge Function header comments) options -
 // user-directed 2026-09-09: "ready as options in a selection list."
 // Each provider's own backing schema/RPCs/Edge Functions stay fully
-// separate (xero_connections/gusto_connections/quickbooks_connections
-// are independent tables, matching this codebase's own established
-// "dedicated table per domain" convention) - this component is purely
-// a shared UI shell over three structurally-identical repositories.
+// separate (xero_connections/gusto_connections are independent
+// tables, matching this codebase's own established "dedicated table
+// per domain" convention) - this component is purely a shared UI
+// shell over these structurally-identical repositories.
+//
+// QuickBooks removed entirely 2026-09-15 (user-directed - PROSM
+// Finance now computes payroll natively via its own PROSM Time API-key
+// bridge, so no external payroll software is needed at all). Xero/
+// Gusto are untouched - they were never the subject of that
+// instruction and stay exactly as dormant/hidden as before (this whole
+// card is still not rendered anywhere - see OrganizationSettingsPage's
+// own "hide it, not delete it" comment).
 function ProviderPanel({ provider, providerKey }: { provider: PayrollProviderRepository; providerKey: ProviderKey }) {
   const { t, i18n } = useTranslation("settings");
 
@@ -184,18 +190,21 @@ function ProviderPanel({ provider, providerKey }: { provider: PayrollProviderRep
 
 // § user-directed 2026-09-09: Xero and Gusto stay fully built
 // (schema/RPCs/Edge Functions untouched, PROVIDERS map below still
-// carries all three) but are hidden from this UI for now - only
-// QuickBooks has real credentials configured, and showing a picker
-// over two dormant options was more confusing than useful. Restoring
-// them later is a one-line change: set VISIBLE_PROVIDERS back to
-// PROVIDER_ORDER (or add a provider selector again once more than one
-// is real) - no backend work needed.
-const PROVIDER_ORDER: ProviderKey[] = ["quickbooks", "xero", "gusto"];
-const VISIBLE_PROVIDERS: ProviderKey[] = ["quickbooks"];
+// carries both) but are hidden from this UI for now - neither has real
+// credentials configured. QuickBooks (the one that did) was removed
+// entirely 2026-09-15 - see this file's own header comment - so
+// VISIBLE_PROVIDERS is empty until Xero or Gusto is ever made real.
+// Restoring one later is a one-line change: add its key to
+// VISIBLE_PROVIDERS - no backend work needed. This whole card is still
+// not rendered anywhere regardless (OrganizationSettingsPage.tsx).
+const PROVIDER_ORDER: ProviderKey[] = ["xero", "gusto"];
+const VISIBLE_PROVIDERS: ProviderKey[] = [];
 
 export default function PayrollIntegrationCard() {
   const { t } = useTranslation("settings");
-  const [selected, setSelected] = useState<ProviderKey>(VISIBLE_PROVIDERS[0]);
+  const [selected, setSelected] = useState<ProviderKey | null>(VISIBLE_PROVIDERS[0] ?? null);
+
+  if (!selected) return null;
 
   return (
     <Card title={t("payroll.title")}>
