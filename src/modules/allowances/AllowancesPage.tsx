@@ -19,7 +19,7 @@ import Button from "../../components/common/Button";
 import Textarea from "../../components/common/Textarea";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
 import { buildAllowancesPdf } from "./allowancesPdf";
-import allowancesBanner from "../../assets/illustration-allowances-banner.png";
+import allowancesBanner from "../../assets/illustration-allowances-banner.jpg";
 
 const ALL_EMPLOYEES = "";
 

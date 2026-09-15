@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
-import helpBanner from "../../assets/illustration-help-banner.png";
+import helpBanner from "../../assets/illustration-help-banner.jpg";
 
 // PROSM Time WP-21/§32 - "A dedicated Help area must exist, providing:
 // product help, basic usage guidance, FAQ where implemented, support

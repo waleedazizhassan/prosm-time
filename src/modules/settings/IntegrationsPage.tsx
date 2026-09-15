@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../../core/context/AuthContext";
 
 import PageShell from "../../components/common/PageShell";
+import integrationsBanner from "../../assets/illustration-integrations-banner.jpg";
 import IntegrationsSettingsCard from "./IntegrationsSettingsCard";
 
 // PROSM Time - § user-directed 2026-09-09: API keys deserve their own
@@ -19,7 +20,7 @@ export default function IntegrationsPage() {
   }
 
   return (
-    <PageShell title={t("integrations.title")}>
+    <PageShell title={t("integrations.title")} bannerSrc={integrationsBanner}>
       <IntegrationsSettingsCard />
     </PageShell>
   );

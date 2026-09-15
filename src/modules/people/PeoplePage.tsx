@@ -12,7 +12,7 @@ import StatusBadge from "../../components/common/StatusBadge";
 import Table, { type TableColumn } from "../../components/common/Table";
 import InviteEmployeeModal from "./InviteEmployeeModal";
 import ErrorText from "../../components/common/ErrorText";
-import peopleBanner from "../../assets/illustration-people-banner.png";
+import peopleBanner from "../../assets/illustration-people-banner.jpg";
 
 // PROSM Time Implementation Master File V3.0, WP-04/§37 - "Employee
 // Management." Real org-member list (RLS-scoped) with an Invite action

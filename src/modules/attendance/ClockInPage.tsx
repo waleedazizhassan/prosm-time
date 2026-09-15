@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 
 import PageShell from "../../components/common/PageShell";
+import clockInOutBanner from "../../assets/illustration-clockinout-banner.jpg";
 import ClockInOutCard from "../dashboard/ClockInOutCard";
 
 // § user-directed - "the Owner/Manager shouldn't have the clock-in
@@ -13,7 +14,7 @@ export default function ClockInPage() {
   const { t } = useTranslation("dashboard");
 
   return (
-    <PageShell title={t("clockInPage.title")} subtitle={t("clockInPage.subtitle")} compact>
+    <PageShell title={t("clockInPage.title")} subtitle={t("clockInPage.subtitle")} bannerSrc={clockInOutBanner} compact>
       <ClockInOutCard />
     </PageShell>
   );
