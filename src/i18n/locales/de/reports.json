@@ -13,6 +13,7 @@
     "late": "Verspätungen",
     "missingCheckouts": "Fehlende Abmeldungen",
     "leaveConflicts": "Urlaubskonflikte",
+    "absences": "Abwesenheiten",
     "managerOverrides": "Manager-Eingriffe",
     "locationViolations": "Standortverstöße",
     "sos": "Notfall (SOS)"
@@ -75,6 +76,12 @@
       "clockIn": "Eingestempelt",
       "leaveType": "Urlaubsart",
       "leaveRange": "Urlaubszeitraum"
+    },
+    "absences": {
+      "name": "Mitarbeiter",
+      "site": "Standort",
+      "date": "Datum",
+      "shift": "Geplante Schicht"
     },
     "managerOverrides": {
       "actor": "Durchgeführt von",

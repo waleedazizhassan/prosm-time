@@ -13,6 +13,7 @@
     "late": "حالات التأخير",
     "missingCheckouts": "بدون انصراف",
     "leaveConflicts": "تعارض الإجازات",
+    "absences": "الغياب",
     "managerOverrides": "تدخلات المدير",
     "locationViolations": "مخالفات الموقع",
     "sos": "الطوارئ"
@@ -75,6 +76,12 @@
       "clockIn": "وقت الحضور",
       "leaveType": "نوع الإجازة",
       "leaveRange": "تواريخ الإجازة"
+    },
+    "absences": {
+      "name": "الموظف",
+      "site": "الموقع",
+      "date": "التاريخ",
+      "shift": "الشيفت المجدول"
     },
     "managerOverrides": {
       "actor": "تم بواسطة",

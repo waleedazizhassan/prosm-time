@@ -6,7 +6,7 @@ import ManagerRepository, { type TodayAttendanceRow, type SosAlertRow } from "..
 import AllowanceRepository, { type AllowanceEntry } from "../../core/repositories/AllowanceRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import SiteWorkerRepository, { type SiteWorkerAttendanceRow } from "../../core/repositories/SiteWorkerRepository";
-import ReportRepository from "../../core/repositories/ReportRepository";
+import ReportRepository, { type AbsenceRow } from "../../core/repositories/ReportRepository";
 import ReportExportRepository, { type ReportExport } from "../../core/repositories/ReportExportRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { formatDateOnly, formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
@@ -41,7 +41,7 @@ const ALL_SITES = "";
 // different columns - so they share one config-driven path instead of
 // 8 near-duplicate branches.
 type BespokeReportType = "attendance" | "allowances" | "timesheets";
-type GenericReportType = "workforce" | "contractor" | "site" | "late" | "missingCheckouts" | "leaveConflicts" | "managerOverrides" | "locationViolations" | "sos";
+type GenericReportType = "workforce" | "contractor" | "site" | "late" | "missingCheckouts" | "leaveConflicts" | "absences" | "managerOverrides" | "locationViolations" | "sos";
 type ReportType = BespokeReportType | GenericReportType;
 
 // § point 2, 2026-09-11 - "an Employee sees report buttons that don't
@@ -58,6 +58,7 @@ const MANAGEMENT_SCOPED_TYPES: ReportType[] = [
   "late",
   "missingCheckouts",
   "leaveConflicts",
+  "absences",
   "managerOverrides",
   "locationViolations",
   "sos",
@@ -87,7 +88,7 @@ export default function ReportsPage() {
   const hasManagementScope = Boolean(profile?.isOwner) || hasPermission("exceptions.manage");
   const visibleReportTypes = useMemo<ReportType[]>(
     () =>
-      (["attendance", "allowances", "timesheets", "workforce", "contractor", "site", "late", "missingCheckouts", "leaveConflicts", "managerOverrides", "locationViolations", "sos"] as ReportType[]).filter(
+      (["attendance", "allowances", "timesheets", "workforce", "contractor", "site", "late", "missingCheckouts", "leaveConflicts", "absences", "managerOverrides", "locationViolations", "sos"] as ReportType[]).filter(
         (type) => hasManagementScope || !MANAGEMENT_SCOPED_TYPES.includes(type),
       ),
     [hasManagementScope],
@@ -237,6 +238,15 @@ export default function ReportsPage() {
             t(`values.leaveType.${row.leaveType}`, { defaultValue: row.leaveType }),
             `${formatDateOnly(row.leaveStartDate, locale)} — ${formatDateOnly(row.leaveEndDate, locale)}`,
           ],
+          employeeName: row.userFullName,
+          siteName: row.siteName,
+        }),
+      },
+      absences: {
+        columns: [t("columns.absences.name"), t("columns.absences.site"), t("columns.absences.date"), t("columns.absences.shift")],
+        fetch: () => ReportRepository.absences(startDate, endDate),
+        toRow: (row: AbsenceRow) => ({
+          cells: [row.userFullName, row.siteName, formatDateOnly(row.shiftDate, locale), `${row.shiftStartTime.slice(0, 5)} — ${row.shiftEndTime.slice(0, 5)}`],
           employeeName: row.userFullName,
           siteName: row.siteName,
         }),

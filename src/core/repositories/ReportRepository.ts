@@ -50,6 +50,15 @@ export interface MissingCheckoutRow {
   stillOpen: boolean;
 }
 
+export interface AbsenceRow {
+  shiftAssignmentId: string;
+  userFullName: string;
+  siteName: string;
+  shiftDate: string;
+  shiftStartTime: string;
+  shiftEndTime: string;
+}
+
 export interface LeaveConflictRow {
   sessionId: string;
   userFullName: string;
@@ -163,6 +172,30 @@ class ReportRepository {
           clockInAt: row.clock_in_at,
           hoursOpen: row.hours_open,
           stillOpen: row.still_open,
+        })),
+      );
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Reports service unavailable.");
+    }
+  }
+
+  // § user-reported real gap (#7, 2026-09-15) - "nothing in the app
+  // talks about absence." Real shift_assignments give this a precise,
+  // honest "expected to work" signal - see the RPC's own header
+  // comment for why this only ever flags a real scheduled shift, never
+  // an inferred one.
+  async absences(startDate: string, endDate: string): Promise<ServiceResult<AbsenceRow[]>> {
+    try {
+      const { data, error } = await this.client.rpc("list_prosm_time_report_absences", { p_start_date: startDate, p_end_date: endDate });
+      if (error) return createError(error.message);
+      return createSuccess(
+        (data ?? []).map((row: { shift_assignment_id: string; user_full_name: string; site_name: string; shift_date: string; shift_start_time: string; shift_end_time: string }) => ({
+          shiftAssignmentId: row.shift_assignment_id,
+          userFullName: row.user_full_name,
+          siteName: row.site_name,
+          shiftDate: row.shift_date,
+          shiftStartTime: row.shift_start_time,
+          shiftEndTime: row.shift_end_time,
         })),
       );
     } catch (error) {

@@ -13,6 +13,7 @@
     "late": "Retards",
     "missingCheckouts": "Sorties manquantes",
     "leaveConflicts": "Conflits de congés",
+    "absences": "Absences",
     "managerOverrides": "Interventions manager",
     "locationViolations": "Violations de localisation",
     "sos": "Urgence (SOS)"
@@ -75,6 +76,12 @@
       "clockIn": "Pointé",
       "leaveType": "Type de congé",
       "leaveRange": "Dates de congé"
+    },
+    "absences": {
+      "name": "Employé",
+      "site": "Site",
+      "date": "Date",
+      "shift": "Poste prévu"
     },
     "managerOverrides": {
       "actor": "Effectué par",

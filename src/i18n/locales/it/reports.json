@@ -13,6 +13,7 @@
     "late": "Ritardi",
     "missingCheckouts": "Uscite mancanti",
     "leaveConflicts": "Conflitti di ferie",
+    "absences": "Assenze",
     "managerOverrides": "Interventi manager",
     "locationViolations": "Violazioni di posizione",
     "sos": "Emergenza (SOS)"
@@ -75,6 +76,12 @@
       "clockIn": "Entrata registrata",
       "leaveType": "Tipo di ferie",
       "leaveRange": "Date delle ferie"
+    },
+    "absences": {
+      "name": "Dipendente",
+      "site": "Cantiere",
+      "date": "Data",
+      "shift": "Turno previsto"
     },
     "managerOverrides": {
       "actor": "Eseguito da",

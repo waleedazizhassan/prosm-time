@@ -13,6 +13,7 @@
     "late": "Late Arrivals",
     "missingCheckouts": "Missing Checkouts",
     "leaveConflicts": "Leave Conflicts",
+    "absences": "Absences",
     "managerOverrides": "Manager Overrides",
     "locationViolations": "Location Violations",
     "sos": "Emergency (SOS)"
@@ -75,6 +76,12 @@
       "clockIn": "Clocked in",
       "leaveType": "Leave type",
       "leaveRange": "Leave dates"
+    },
+    "absences": {
+      "name": "Employee",
+      "site": "Site",
+      "date": "Date",
+      "shift": "Scheduled shift"
     },
     "managerOverrides": {
       "actor": "Performed by",
