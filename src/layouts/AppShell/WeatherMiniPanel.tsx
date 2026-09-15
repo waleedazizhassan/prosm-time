@@ -143,7 +143,6 @@ export default function WeatherMiniPanel() {
 
   useEffect(() => {
     load(false, hydratedFromCacheRef.current);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

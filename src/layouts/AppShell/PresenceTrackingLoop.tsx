@@ -91,7 +91,6 @@ export default function PresenceTrackingLoop() {
     return () => {
       BackgroundLocationService.stop();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activePresenceSessionId, t]);
 
   // Web fallback path - foreground-tab-only JS interval, unchanged
