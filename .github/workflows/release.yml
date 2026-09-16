@@ -320,6 +320,23 @@ jobs:
       - uses: actions/download-artifact@v4
         with: { path: artifacts }
 
+      - name: Also publish a versioned-filename copy of each artifact
+        # § user-directed, 2026-09-16 - "عايز رقم الاصدار يبقى مكتوب في
+        # جدول التحميل": someone downloading straight from the Releases
+        # page (rather than through prosm.net's own stable-URL button)
+        # sees a version-less "PROSM-Time.apk" in their own Downloads
+        # folder/download-confirmation dialog with no way to tell which
+        # build it is. The FIXED-name files stay untouched (prosm.net's
+        # own download buttons, and UpdateAvailableBanner.tsx, keep
+        # pointing at the same stable releases/latest/download/... URL
+        # forever, per this workflow's own top comment) - this just adds
+        # a second, versioned-filename copy of the same bytes alongside
+        # it on every release, so both are always available.
+        run: |
+          set -e
+          cp artifacts/prosm-time-android/PROSM-Time.apk "artifacts/prosm-time-android/PROSM-Time-v${{ needs.test.outputs.nextVersion }}.apk"
+          cp artifacts/prosm-time-windows/PROSM-Time-Setup.exe "artifacts/prosm-time-windows/PROSM-Time-Setup-v${{ needs.test.outputs.nextVersion }}.exe"
+
       - name: Publish (or update) the release for this version
         uses: softprops/action-gh-release@v2
         with:
@@ -375,11 +392,16 @@ jobs:
       - name: Zip the web build
         run: cd dist && zip -r ../PROSM-Time-Web.zip .
 
+      - name: Also publish a versioned-filename copy (see the APK/EXE step's own comment)
+        run: cp PROSM-Time-Web.zip "PROSM-Time-Web-v${{ needs.create-release.outputs.version }}.zip"
+
       - name: Attach the web zip to the existing release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ needs.create-release.outputs.version }}
-          files: PROSM-Time-Web.zip
+          files: |
+            PROSM-Time-Web.zip
+            PROSM-Time-Web-v${{ needs.create-release.outputs.version }}.zip
 
       # releasedAt below is the SAME value (needs.test.outputs.releasedAt,
       # via the RELEASED_AT env var) every builder job already baked into
