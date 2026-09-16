@@ -2,7 +2,7 @@
   "name": "prosm-time",
   "productName": "PROSM Time",
   "private": true,
-  "version": "2.3.14",
+  "version": "2.3.15",
   "description": "PROSM Time - Enterprise Time, Attendance & Workforce Presence. Standalone product, managed by PROSM Management as its control plane. See docs/PROSM_TIME_IMPLEMENTATION_MASTER_FILE_V3.md.",
   "author": "PROSM",
   "type": "module",

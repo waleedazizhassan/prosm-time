@@ -1,9 +1,9 @@
 {
-  "version": "2.3.14",
-  "releasedAt": "2026-09-15T20:17:33.222Z",
+  "version": "2.3.15",
+  "releasedAt": "2026-09-16T11:31:17.744Z",
   "downloads": {
-    "windows": "https://github.com/waleedazizhassan/prosm-time/releases/download/v2.3.14/PROSM-Time-Setup.exe",
-    "android": "https://github.com/waleedazizhassan/prosm-time/releases/download/v2.3.14/PROSM-Time.apk",
-    "web": "https://github.com/waleedazizhassan/prosm-time/releases/download/v2.3.14/PROSM-Time-Web.zip"
+    "windows": "https://github.com/waleedazizhassan/prosm-time/releases/download/v2.3.15/PROSM-Time-Setup.exe",
+    "android": "https://github.com/waleedazizhassan/prosm-time/releases/download/v2.3.15/PROSM-Time.apk",
+    "web": "https://github.com/waleedazizhassan/prosm-time/releases/download/v2.3.15/PROSM-Time-Web.zip"
   }
 }
