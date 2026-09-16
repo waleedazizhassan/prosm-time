@@ -356,6 +356,48 @@ jobs:
           echo "android_url=$base/$android_name" >> "$GITHUB_OUTPUT"
           echo "windows_url=$base/$windows_name" >> "$GITHUB_OUTPUT"
 
+      - name: Also mirror both APK files and both EXE files to a PROSM-owned URL (no github.com)
+        # § user-directed, 2026-09-16 - "ميتمش التحويل لصفحة جيتهاب ويبقى
+        # التحميل ثابت من جوة السايت بتاعة بروسم": prosm.net is a
+        # separate, disconnected project this session can't edit
+        # directly, so the fix that IS possible from here is giving it a
+        # real, stable, non-GitHub URL to point its own download button
+        # at - a public Storage bucket in this same Supabase project
+        # (20260916100000_app_releases_storage_bucket.sql), uploaded via
+        # service-role REST calls (x-upsert so a same-named file is
+        # replaced in place, keeping the STABLE filename's URL fixed
+        # forever across every future release - identical reasoning to
+        # the GitHub Release's own fixed-filename URL above). GitHub
+        # Releases stays the build/distribution source of truth
+        # (unchanged); this is purely an additional, PROSM-domain mirror
+        # of the exact same bytes.
+        env:
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          set -e
+          if [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "::warning::SUPABASE_SERVICE_ROLE_KEY is not set - skipping the PROSM-domain mirror upload (GitHub Release publish above already succeeded). See release.yml's own comment on this step for the one-time 'gh secret set' command."
+            exit 0
+          fi
+          base="https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/app-releases"
+          upload() {
+            local file="$1" path="$2"
+            curl -sf -X POST "$base/$path" \
+              -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
+              -H "x-upsert: true" \
+              -H "Content-Type: application/octet-stream" \
+              --data-binary "@$file"
+            echo ""
+          }
+          upload "artifacts/prosm-time-android/PROSM-Time.apk" "PROSM-Time.apk"
+          upload "artifacts/prosm-time-android/PROSM-Time-v${{ needs.test.outputs.nextVersion }}.apk" "PROSM-Time-v${{ needs.test.outputs.nextVersion }}.apk"
+          upload "artifacts/prosm-time-windows/PROSM-Time-Setup.exe" "PROSM-Time-Setup.exe"
+          upload "artifacts/prosm-time-windows/PROSM-Time-Setup-v${{ needs.test.outputs.nextVersion }}.exe" "PROSM-Time-Setup-v${{ needs.test.outputs.nextVersion }}.exe"
+          public_base="https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/public/app-releases"
+          echo "Stable mirror URLs (paste into prosm.net's own download buttons):"
+          echo "  $public_base/PROSM-Time.apk"
+          echo "  $public_base/PROSM-Time-Setup.exe"
+
   deploy-web:
     name: Build web, attach it to the Release, publish latest-version.json
     # user-directed 2026-09-10: GitHub Pages needs a paid plan on a
@@ -402,6 +444,28 @@ jobs:
           files: |
             PROSM-Time-Web.zip
             PROSM-Time-Web-v${{ needs.create-release.outputs.version }}.zip
+
+      - name: Also mirror the web zip to a PROSM-owned URL (no github.com)
+        # Same reasoning/pattern as create-release's own mirror step.
+        env:
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          set -e
+          if [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "::warning::SUPABASE_SERVICE_ROLE_KEY is not set - skipping the PROSM-domain mirror upload."
+            exit 0
+          fi
+          base="https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/app-releases"
+          upload() {
+            curl -sf -X POST "$base/$2" \
+              -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
+              -H "x-upsert: true" \
+              -H "Content-Type: application/zip" \
+              --data-binary "@$1"
+            echo ""
+          }
+          upload "PROSM-Time-Web.zip" "PROSM-Time-Web.zip"
+          upload "PROSM-Time-Web-v${{ needs.create-release.outputs.version }}.zip" "PROSM-Time-Web-v${{ needs.create-release.outputs.version }}.zip"
 
       # releasedAt below is the SAME value (needs.test.outputs.releasedAt,
       # via the RELEASED_AT env var) every builder job already baked into
