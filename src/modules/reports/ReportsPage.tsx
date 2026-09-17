@@ -26,7 +26,7 @@ import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
 import Table, { type TableColumn } from "../../components/common/Table";
 import { Download } from "lucide-react";
-import reportsBanner from "../../assets/illustration-reports-banner.png";
+import reportsHeaderImage from "../../assets/illustration-reports-header.png";
 import { REPORT_TYPE_ICONS } from "./reportTypeIcons";
 import styles from "./ReportsPage.module.css";
 
@@ -429,7 +429,13 @@ export default function ReportsPage() {
   };
 
   return (
-    <PageShell title={t("title")} subtitle={t("subtitle")} bannerSrc={reportsBanner}>
+    <PageShell title="">
+      <img
+        src={reportsHeaderImage}
+        alt=""
+        style={{ display: "block", width: "20cm", height: "3.3cm", maxWidth: "100%", objectFit: "cover", margin: "0 auto var(--space-4)", borderRadius: "var(--radius-md)" }}
+      />
+
       <Card>
         <div className={styles.typeGrid}>
           {visibleReportTypes.map((type) => {

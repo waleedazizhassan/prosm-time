@@ -19,7 +19,7 @@ import Button from "../../components/common/Button";
 import Textarea from "../../components/common/Textarea";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
 import { buildAllowancesPdf } from "./allowancesPdf";
-import allowancesBanner from "../../assets/illustration-allowances-banner.png";
+import allowancesHeaderImage from "../../assets/illustration-allowances-header.png";
 
 const ALL_EMPLOYEES = "";
 
@@ -261,16 +261,19 @@ export default function AllowancesPage() {
   ];
 
   return (
-    <PageShell
-      title={t("title")}
-      subtitle={t("subtitle")}
-      bannerSrc={allowancesBanner}
-      actions={
+    <PageShell title="">
+      <img
+        src={allowancesHeaderImage}
+        alt=""
+        style={{ display: "block", width: "20cm", height: "4.9cm", maxWidth: "100%", objectFit: "cover", margin: "0 auto var(--space-4)", borderRadius: "var(--radius-md)" }}
+      />
+
+      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "var(--space-4)" }}>
         <Button onClick={handleExportPdf} loading={exportingPdf} disabled={filteredEntries.length === 0}>
           {t("exportPdfAction")}
         </Button>
-      }
-    >
+      </div>
+
       <Card title={t("filters.title")}>
         <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
           <Input label={t("filters.fromLabel")} name="allowancesFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />

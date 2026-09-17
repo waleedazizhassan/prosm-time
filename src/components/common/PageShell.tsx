@@ -37,12 +37,14 @@ interface PageShellProps {
 export default function PageShell({ title, subtitle, bannerSrc, actions, wide = false, compact = false, children }: PageShellProps) {
   return (
     <div className={[styles.container, wide ? styles.wide : ""].filter(Boolean).join(" ")}>
-      {title ? (
+      {title || actions ? (
         <div className={[styles.pageHeader, compact ? styles.pageHeaderCompact : ""].filter(Boolean).join(" ")}>
-          <div className={styles.titleBlock}>
-            <h1 className={[styles.title, compact ? styles.titleCompact : ""].filter(Boolean).join(" ")}>{title}</h1>
-            {subtitle ? <p className={styles.subtitle}>{subtitle}</p> : null}
-          </div>
+          {title ? (
+            <div className={styles.titleBlock}>
+              <h1 className={[styles.title, compact ? styles.titleCompact : ""].filter(Boolean).join(" ")}>{title}</h1>
+              {subtitle ? <p className={styles.subtitle}>{subtitle}</p> : null}
+            </div>
+          ) : null}
           {bannerSrc || actions ? (
             <div className={styles.headerExtras}>
               {bannerSrc ? <img src={bannerSrc} alt="" className={styles.headerBanner} /> : null}

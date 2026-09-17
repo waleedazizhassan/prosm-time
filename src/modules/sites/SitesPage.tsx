@@ -13,7 +13,7 @@ import StatusBadge from "../../components/common/StatusBadge";
 import Table, { type TableColumn } from "../../components/common/Table";
 import SiteFormModal from "./SiteFormModal";
 import ErrorText from "../../components/common/ErrorText";
-import sitesBanner from "../../assets/illustration-sites-banner.png";
+import sitesHeaderImage from "../../assets/illustration-sites-header.png";
 
 // § live UX review, user-directed - "give it a real proper home, but
 // keep it reachable from here too." The editable form itself now
@@ -89,12 +89,19 @@ export default function SitesPage() {
   ];
 
   return (
-    <PageShell
-      title={t("title")}
-      subtitle={t("subtitle")}
-      bannerSrc={sitesBanner}
-      actions={profile?.isOwner ? <Button onClick={() => setCreateOpen(true)}>{t("addAction")}</Button> : undefined}
-    >
+    <PageShell title="">
+      <img
+        src={sitesHeaderImage}
+        alt=""
+        style={{ display: "block", width: "20cm", height: "3.9cm", maxWidth: "100%", objectFit: "cover", margin: "0 auto var(--space-4)", borderRadius: "var(--radius-md)" }}
+      />
+
+      {profile?.isOwner ? (
+        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "var(--space-4)" }}>
+          <Button onClick={() => setCreateOpen(true)}>{t("addAction")}</Button>
+        </div>
+      ) : null}
+
       {profile?.isOwner ? <NoSiteRadiusSummary /> : null}
 
       <ErrorText>{loadError}</ErrorText>

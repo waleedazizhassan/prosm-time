@@ -1,10 +1,10 @@
-import { useTranslation } from "react-i18next";
 import { Navigate } from "react-router-dom";
 
 import { useAuth } from "../../core/context/AuthContext";
 
 import PageShell from "../../components/common/PageShell";
 import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
+import settingsHeaderImage from "../../assets/illustration-settings-header.png";
 import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
 // PayrollIntegrationCard intentionally not rendered below - § user-
@@ -24,7 +24,6 @@ import SitePolicySettingsCard from "./SitePolicySettingsCard";
 // Dashboard cards per an earlier pass) - a genuinely good existing
 // home, not something misplaced.
 export default function OrganizationSettingsPage() {
-  const { t } = useTranslation("settings");
   const { profile } = useAuth();
 
   if (!profile?.isOwner) {
@@ -32,7 +31,13 @@ export default function OrganizationSettingsPage() {
   }
 
   return (
-    <PageShell title={t("title")} subtitle={t("subtitle")}>
+    <PageShell title="">
+      <img
+        src={settingsHeaderImage}
+        alt=""
+        style={{ display: "block", width: "20cm", height: "4.5cm", maxWidth: "100%", objectFit: "cover", margin: "0 auto var(--space-4)", borderRadius: "var(--radius-md)" }}
+      />
+
       <NoSiteRadiusSettingsCard />
       <SiteDefaultsSettingsCard />
       <SitePolicySettingsCard />

@@ -17,7 +17,7 @@ import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
-import attendanceBanner from "../../assets/illustration-attendance-banner.png";
+import attendanceHeaderImage from "../../assets/illustration-attendance-header.png";
 import { formatTimeOnly } from "../../core/utils/formatDate";
 import { buildAttendanceLogPdf } from "./attendanceLogPdf";
 
@@ -283,16 +283,19 @@ export default function AttendanceLogPage() {
   ];
 
   return (
-    <PageShell
-      title={t("title")}
-      subtitle={t("subtitle")}
-      bannerSrc={attendanceBanner}
-      actions={
+    <PageShell title="">
+      <img
+        src={attendanceHeaderImage}
+        alt=""
+        style={{ display: "block", width: "20cm", height: "3.9cm", maxWidth: "100%", objectFit: "cover", margin: "0 auto var(--space-4)", borderRadius: "var(--radius-md)" }}
+      />
+
+      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "var(--space-4)" }}>
         <Button onClick={handleExportPdf} loading={exportingPdf} disabled={filteredRows.length === 0}>
           {t("exportPdfAction")}
         </Button>
-      }
-    >
+      </div>
+
       <Card title={t("filters.title")}>
         <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
           <Input label={t("filters.fromLabel")} name="attendanceLogFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />

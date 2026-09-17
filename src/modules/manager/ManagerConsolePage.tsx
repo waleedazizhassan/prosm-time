@@ -21,7 +21,7 @@ import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
 import { formatTimeOnly, formatDateOnly } from "../../core/utils/formatDate";
 import allCaughtUpIllustration from "../../assets/illustration-all-caught-up.png";
-import managerConsoleBanner from "../../assets/illustration-manager-console-banner.png";
+import managerConsoleHeaderImage from "../../assets/illustration-manager-console-header.png";
 
 const REVIEW_ACTIONS = ["approved", "rejected", "acknowledged", "clarification_requested"] as const;
 
@@ -260,7 +260,13 @@ export default function ManagerConsolePage() {
   ];
 
   return (
-    <PageShell title={t("title")} subtitle={t("subtitle")} bannerSrc={managerConsoleBanner}>
+    <PageShell title="">
+      <img
+        src={managerConsoleHeaderImage}
+        alt=""
+        style={{ display: "block", width: "20cm", height: "3.9cm", maxWidth: "100%", objectFit: "cover", margin: "0 auto var(--space-4)", borderRadius: "var(--radius-md)" }}
+      />
+
       <p style={{ fontSize: "var(--font-sm)" }}>
         <Link to="/people" style={{ color: "var(--text-link)" }}>
           {t("linkPeople")}
