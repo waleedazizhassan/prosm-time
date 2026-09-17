@@ -16,13 +16,18 @@
   "reasonLabel": "Motivo (facoltativo)",
   "submitAction": "Invia richiesta",
   "myRequestsTitle": "Le mie richieste",
+  "orgWideRequestsTitle": "Ferie di tutta l'organizzazione",
+  "ownerAutoApproveHint": "In quanto proprietario, la tua richiesta viene approvata istantaneamente - non c'è nessuno sopra di te che debba esaminarla.",
+  "ownerAutoApprovedMessage": "Approvata istantaneamente.",
   "empty": "Ancora nessuna richiesta di ferie.",
   "columns": {
+    "employee": "Dipendente",
     "type": "Tipo",
     "dates": "Date",
     "days": "Giorni",
     "reason": "Motivo",
-    "status": "Stato"
+    "status": "Stato",
+    "reviewedBy": "Esaminata da"
   },
   "types": {
     "annual": "Annuali",

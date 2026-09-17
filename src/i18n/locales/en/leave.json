@@ -16,13 +16,18 @@
   "reasonLabel": "Reason (optional)",
   "submitAction": "Submit request",
   "myRequestsTitle": "My requests",
+  "orgWideRequestsTitle": "Organization-wide leave",
+  "ownerAutoApproveHint": "As the Owner, your own request is approved instantly - there's no one above you to review it.",
+  "ownerAutoApprovedMessage": "Approved instantly.",
   "empty": "No leave requests yet.",
   "columns": {
+    "employee": "Employee",
     "type": "Type",
     "dates": "Dates",
     "days": "Days",
     "reason": "Reason",
-    "status": "Status"
+    "status": "Status",
+    "reviewedBy": "Reviewed by"
   },
   "types": {
     "annual": "Annual",

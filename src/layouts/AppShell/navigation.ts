@@ -112,7 +112,7 @@ export const NAV_ITEMS: NavItem[] = [
   // permission, same reasoning as Timesheets/Allowances above -
   // leave_requests' own RLS is what actually scopes what a supervisor
   // sees (Manager Console's own new review section).
-  { id: "leave", labelKey: "items.leave", path: "/leave", icon: CalendarDays, requiredPermission: null, hiddenFromOwner: true, section: "payroll" },
+  { id: "leave", labelKey: "items.leave", path: "/leave", icon: CalendarDays, requiredPermission: null, section: "payroll" },
   // § live UX review, user-directed - "a Reports Center where any PDF
   // can be pulled." No permission gate on the nav item itself - the
   // page's own report-type selector gates each report by the exact

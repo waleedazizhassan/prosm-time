@@ -16,13 +16,18 @@
   "reasonLabel": "Motif (facultatif)",
   "submitAction": "Envoyer la demande",
   "myRequestsTitle": "Mes demandes",
+  "orgWideRequestsTitle": "Congés de toute l'organisation",
+  "ownerAutoApproveHint": "En tant que propriétaire, votre propre demande est approuvée instantanément - personne au-dessus de vous ne doit l'examiner.",
+  "ownerAutoApprovedMessage": "Approuvé instantanément.",
   "empty": "Aucune demande de congé pour l'instant.",
   "columns": {
+    "employee": "Employé",
     "type": "Type",
     "dates": "Dates",
     "days": "Jours",
     "reason": "Motif",
-    "status": "Statut"
+    "status": "Statut",
+    "reviewedBy": "Examiné par"
   },
   "types": {
     "annual": "Annuel",

@@ -16,13 +16,18 @@
   "reasonLabel": "السبب (اختياري)",
   "submitAction": "إرسال الطلب",
   "myRequestsTitle": "طلباتي",
+  "orgWideRequestsTitle": "إجازات المؤسسة بالكامل",
+  "ownerAutoApproveHint": "بصفتك صاحب المؤسسة، طلبك بيتوافق عليه فورًا - مفيش حد فوقك يراجعه.",
+  "ownerAutoApprovedMessage": "تمت الموافقة فورًا.",
   "empty": "لا توجد طلبات إجازة بعد.",
   "columns": {
+    "employee": "الموظف",
     "type": "النوع",
     "dates": "التواريخ",
     "days": "الأيام",
     "reason": "السبب",
-    "status": "الحالة"
+    "status": "الحالة",
+    "reviewedBy": "تمت المراجعة بواسطة"
   },
   "types": {
     "annual": "سنوية",

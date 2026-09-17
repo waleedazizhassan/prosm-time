@@ -22,6 +22,21 @@ export interface LeaveRequestRow {
   createdAt: string;
 }
 
+export interface OrgWideLeaveRow {
+  id: string;
+  userId: string;
+  employeeName: string;
+  leaveType: LeaveType;
+  startDate: string;
+  endDate: string;
+  daysCount: number;
+  reason: string | null;
+  status: LeaveStatus;
+  reviewedByName: string | null;
+  reviewedAt: string | null;
+  createdAt: string;
+}
+
 export interface PendingLeaveReviewRow {
   id: string;
   userId: string;
@@ -114,6 +129,49 @@ class LeaveRepository {
     }
   }
 
+  // § user-directed, 2026-09-16 - the Owner's own Leave page: an
+  // org-wide view of every leave request (not just their own), backed
+  // by list_prosm_time_all_leave_requests (Owner-only server-side).
+  async listAll(): Promise<ServiceResult<OrgWideLeaveRow[]>> {
+    try {
+      const { data, error } = await this.client.rpc("list_prosm_time_all_leave_requests");
+      if (error) return createError(error.message);
+      return createSuccess(
+        (data ?? []).map(
+          (row: {
+            id: string;
+            user_id: string;
+            employee_name: string;
+            leave_type: LeaveType;
+            start_date: string;
+            end_date: string;
+            days_count: number;
+            reason: string | null;
+            status: LeaveStatus;
+            reviewed_by_name: string | null;
+            reviewed_at: string | null;
+            created_at: string;
+          }) => ({
+            id: row.id,
+            userId: row.user_id,
+            employeeName: row.employee_name,
+            leaveType: row.leave_type,
+            startDate: row.start_date,
+            endDate: row.end_date,
+            daysCount: row.days_count,
+            reason: row.reason,
+            status: row.status,
+            reviewedByName: row.reviewed_by_name,
+            reviewedAt: row.reviewed_at,
+            createdAt: row.created_at,
+          }),
+        ),
+      );
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Leave service unavailable.");
+    }
+  }
+
   async getBalance(): Promise<ServiceResult<{ year: number; balances: LeaveBalanceEntry[] }>> {
     try {
       const { data, error } = await this.client.rpc("get_prosm_time_leave_balance", {});
@@ -134,7 +192,7 @@ class LeaveRepository {
     }
   }
 
-  async request(leaveType: LeaveType, startDate: string, endDate: string, reason?: string): Promise<ServiceResult<{ requestId: string; daysCount: number }>> {
+  async request(leaveType: LeaveType, startDate: string, endDate: string, reason?: string): Promise<ServiceResult<{ requestId: string; daysCount: number; autoApproved: boolean }>> {
     try {
       const { data, error } = await this.client.rpc("request_prosm_time_leave", {
         p_leave_type: leaveType,
@@ -144,7 +202,7 @@ class LeaveRepository {
       });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to submit this leave request.");
-      return createSuccess({ requestId: data.requestId, daysCount: data.daysCount });
+      return createSuccess({ requestId: data.requestId, daysCount: data.daysCount, autoApproved: Boolean(data.autoApproved) });
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Leave service unavailable.");
     }

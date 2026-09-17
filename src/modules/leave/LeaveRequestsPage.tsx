@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Navigate } from "react-router-dom";
 
 import { useAuth } from "../../core/context/AuthContext";
-import LeaveRepository, { type LeaveRequestRow, type LeaveBalanceEntry, type LeaveType } from "../../core/repositories/LeaveRepository";
+import LeaveRepository, { type LeaveRequestRow, type OrgWideLeaveRow, type LeaveBalanceEntry, type LeaveType } from "../../core/repositories/LeaveRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { formatDateOnly } from "../../core/utils/formatDate";
 
@@ -16,7 +15,7 @@ import Button from "../../components/common/Button";
 import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
-import leaveIllustration from "../../assets/illustration-leave-scene.png";
+import leaveHeaderImage from "../../assets/illustration-leave-header.png";
 
 const LEAVE_TYPES: LeaveType[] = ["annual", "sick", "unpaid", "emergency", "other"];
 
@@ -41,9 +40,11 @@ const STATUS_BADGE_KEY: Record<LeaveRequestRow["status"], string> = {
 export default function LeaveRequestsPage() {
   const { t, i18n } = useTranslation("leave");
   const { profile } = useAuth();
+  const isOwner = Boolean(profile?.isOwner);
 
   const today = new Date();
   const [requests, setRequests] = useState<LeaveRequestRow[]>([]);
+  const [orgWideRequests, setOrgWideRequests] = useState<OrgWideLeaveRow[]>([]);
   const [balances, setBalances] = useState<LeaveBalanceEntry[]>([]);
   const [balanceYear, setBalanceYear] = useState<number>(today.getFullYear());
   const [loading, setLoading] = useState(true);
@@ -55,23 +56,34 @@ export default function LeaveRequestsPage() {
   const [reason, setReason] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [submitSuccess, setSubmitSuccess] = useState(false);
   const [cancellingId, setCancellingId] = useState<string | null>(null);
 
+  // § user-directed, 2026-09-16 - the Owner now gets an org-wide view
+  // (every request in the organization, not just their own) instead
+  // of being blocked from this page entirely - see this page's own
+  // request/table logic below for the other half (self-request auto-
+  // approves, handled server-side in request_prosm_time_leave).
   const load = useCallback(async () => {
     setLoading(true);
     setLoadError("");
-    const [requestsResult, balanceResult] = await Promise.all([LeaveRepository.listMine(), LeaveRepository.getBalance()]);
+    const [requestsResult, balanceResult] = await Promise.all([
+      isOwner ? LeaveRepository.listAll() : LeaveRepository.listMine(),
+      LeaveRepository.getBalance(),
+    ]);
     if (!requestsResult.success) {
       setLoadError(humanizeBackendError(requestsResult.message, t) ?? t("loadError"));
+    } else if (isOwner) {
+      setOrgWideRequests((requestsResult.data ?? []) as OrgWideLeaveRow[]);
     } else {
-      setRequests(requestsResult.data ?? []);
+      setRequests((requestsResult.data ?? []) as LeaveRequestRow[]);
     }
     if (balanceResult.success && balanceResult.data) {
       setBalances(balanceResult.data.balances);
       setBalanceYear(balanceResult.data.year);
     }
     setLoading(false);
-  }, [t]);
+  }, [t, isOwner]);
 
   useEffect(() => {
     load();
@@ -81,6 +93,7 @@ export default function LeaveRequestsPage() {
     if (!startDate || !endDate) return;
     setSubmitting(true);
     setSubmitError("");
+    setSubmitSuccess(false);
     const result = await LeaveRepository.request(leaveType, startDate, endDate, reason);
     setSubmitting(false);
     if (!result.success) {
@@ -88,6 +101,7 @@ export default function LeaveRequestsPage() {
       return;
     }
     setReason("");
+    setSubmitSuccess(Boolean(result.data?.autoApproved));
     await load();
   };
 
@@ -121,21 +135,30 @@ export default function LeaveRequestsPage() {
     },
   ];
 
-  // § user-directed, 2026-09-11 - "the Owner shouldn't have a Leave
-  // page at all - they're not requesting leave from anyone." Mirrors
-  // OrganizationSettingsPage's own Navigate-away guard, just inverted
-  // (hidden FROM the Owner instead of Owner-only); the sidebar item is
-  // already hidden for the Owner too (navigation.ts hiddenFromOwner),
-  // this is the direct-URL backstop. Placed after every hook above
-  // (not before, like OrganizationSettingsPage) - this page, unlike
-  // that one, has real useState/useEffect calls that must run
-  // unconditionally on every render.
-  if (profile?.isOwner) {
-    return <Navigate to="/dashboard" replace />;
-  }
+  // § user-directed, 2026-09-16 - the Owner's org-wide view: every
+  // request, whose it is, and who (if anyone) reviewed it - read-only
+  // here (reviewing someone else's pending request is Manager
+  // Console's own job, unchanged), this page is purely the
+  // organization-wide picture plus the Owner's own auto-approved
+  // self-requests.
+  const orgWideColumns: TableColumn<OrgWideLeaveRow>[] = [
+    { key: "employee", header: t("columns.employee"), render: (row) => row.employeeName },
+    { key: "type", header: t("columns.type"), render: (row) => t(`types.${row.leaveType}`) },
+    { key: "dates", header: t("columns.dates"), render: (row) => `${formatDateOnly(row.startDate, i18n.language)} — ${formatDateOnly(row.endDate, i18n.language)}` },
+    { key: "days", header: t("columns.days"), render: (row) => row.daysCount },
+    { key: "reason", header: t("columns.reason"), render: (row) => row.reason ?? "—" },
+    { key: "status", header: t("columns.status"), render: (row) => <StatusBadge status={STATUS_BADGE_KEY[row.status]}>{t(`status.${row.status}`)}</StatusBadge> },
+    { key: "reviewedBy", header: t("columns.reviewedBy"), render: (row) => row.reviewedByName ?? "—" },
+  ];
 
   return (
-    <PageShell title={t("title")} subtitle={t("subtitle")} bannerSrc={leaveIllustration}>
+    <PageShell title="">
+      <img
+        src={leaveHeaderImage}
+        alt=""
+        style={{ display: "block", width: "20cm", height: "3.8cm", maxWidth: "100%", objectFit: "cover", margin: "0 auto var(--space-4)", borderRadius: "var(--radius-md)" }}
+      />
+
       <Card title={t("balanceTitle", { year: balanceYear })}>
         <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
           {balances.map((entry) => (
@@ -184,16 +207,22 @@ export default function LeaveRequestsPage() {
           <Input label={t("startDateLabel")} name="leaveStartDate" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} disabled={submitting} />
           <Input label={t("endDateLabel")} name="leaveEndDate" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} disabled={submitting} />
         </div>
+        {isOwner ? <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("ownerAutoApproveHint")}</p> : null}
         <Textarea label={t("reasonLabel")} name="leaveReason" value={reason} onChange={(event) => setReason(event.target.value)} disabled={submitting} rows={2} />
         <ErrorText>{submitError}</ErrorText>
+        {submitSuccess ? <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-sm)", color: "var(--status-success-text)" }}>{t("ownerAutoApprovedMessage")}</p> : null}
         <Button onClick={handleSubmit} loading={submitting} disabled={!startDate || !endDate}>
           {t("submitAction")}
         </Button>
       </Card>
 
-      <Card title={t("myRequestsTitle")}>
+      <Card title={isOwner ? t("orgWideRequestsTitle") : t("myRequestsTitle")}>
         <ErrorText>{loadError}</ErrorText>
-        <Table columns={columns} data={requests} getRowId={(row) => row.id} loading={loading} emptyMessage={t("empty")} />
+        {isOwner ? (
+          <Table columns={orgWideColumns} data={orgWideRequests} getRowId={(row) => row.id} loading={loading} emptyMessage={t("empty")} />
+        ) : (
+          <Table columns={columns} data={requests} getRowId={(row) => row.id} loading={loading} emptyMessage={t("empty")} />
+        )}
       </Card>
     </PageShell>
   );

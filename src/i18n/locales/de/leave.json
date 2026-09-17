@@ -16,13 +16,18 @@
   "reasonLabel": "Grund (optional)",
   "submitAction": "Antrag senden",
   "myRequestsTitle": "Meine Anträge",
+  "orgWideRequestsTitle": "Urlaub der gesamten Organisation",
+  "ownerAutoApproveHint": "Als Inhaber wird Ihr eigener Antrag sofort genehmigt - es gibt niemanden über Ihnen, der ihn prüfen müsste.",
+  "ownerAutoApprovedMessage": "Sofort genehmigt.",
   "empty": "Noch keine Urlaubsanträge.",
   "columns": {
+    "employee": "Mitarbeiter",
     "type": "Typ",
     "dates": "Daten",
     "days": "Tage",
     "reason": "Grund",
-    "status": "Status"
+    "status": "Status",
+    "reviewedBy": "Geprüft von"
   },
   "types": {
     "annual": "Jahresurlaub",
