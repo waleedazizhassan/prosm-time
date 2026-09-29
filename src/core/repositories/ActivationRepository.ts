@@ -12,6 +12,8 @@ export interface ActivationInput {
   ownerEmail: string;
   ownerPassword: string;
   ownerFullName: string;
+  /** Demo: a 30-day trial started without an activation code. */
+  demo?: boolean;
 }
 
 export interface ActivationResultData {

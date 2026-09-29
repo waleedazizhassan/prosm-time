@@ -6,6 +6,16 @@ export interface ServiceResult<T = null> {
   data: T | null;
 }
 
+export interface TrialStatus {
+  isTrial: boolean;
+  locked: boolean;
+  expiresAt?: string | null;
+  daysLeft?: number | null;
+  licenseNumber?: string;
+  isOwner?: boolean;
+  organizationName?: string;
+}
+
 export interface InstallationStatus {
   registered: boolean;
   state: "ACTIVE" | "GRACE" | "BLOCKED" | "UNREGISTERED" | null;
@@ -71,6 +81,32 @@ class LicenseRepository {
       if (!data) return createError("No license activation state found.");
 
       return createSuccess(mapLicenseRow(data));
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "License service unavailable.");
+    }
+  }
+
+  /** The organisation's trial (owner 2026-09-29): days left, and whether it has ended (server time). */
+  async getTrialStatus(): Promise<ServiceResult<TrialStatus>> {
+    try {
+      const { data, error } = await this.client.rpc("get_prosm_time_trial_status");
+      if (error) return createError(error.message);
+      return createSuccess(data as TrialStatus);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "License service unavailable.");
+    }
+  }
+
+  /** The owner enters a purchased activation code: the organisation continues on that license with all its data. */
+  async activateWithCode(activationCode: string): Promise<ServiceResult<{ licenseNumber: string; expiresAt: string | null }>> {
+    try {
+      const { data, error } = await this.client.functions.invoke("refresh-license-status", { body: { activationCode } });
+      if (error) {
+        const errorBody = await error.context?.json?.().catch(() => null);
+        return createError(errorBody?.error?.message ?? error.message ?? "Unable to verify this activation code.");
+      }
+      if (data?.success === false) return createError(data?.error?.message ?? "Unable to verify this activation code.");
+      return createSuccess(data?.data ?? null);
     } catch (error) {
       return createError(error instanceof Error ? error.message : "License service unavailable.");
     }

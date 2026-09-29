@@ -60,8 +60,11 @@ serve(async (request: Request) => {
   try {
     const payload = await request.json().catch(() => ({}));
     const { activationCode, organizationName, ownerEmail, ownerPassword, ownerFullName } = payload;
+    // Demo (owner 2026-09-29): the same activation with only the code skipped - PROSM Platform issues
+    // a 30-day trial license instead of redeeming a code; every other step below is unchanged.
+    const demo = payload.demo === true;
 
-    if (!activationCode || typeof activationCode !== "string") {
+    if (!demo && (!activationCode || typeof activationCode !== "string")) {
       return errorResponse("activationCode is required.", 400, "INVALID_REQUEST");
     }
     if (!organizationName || typeof organizationName !== "string" || organizationName.trim().length === 0) {
@@ -87,7 +90,8 @@ serve(async (request: Request) => {
     });
     const activationRateLimited = await enforceRateLimits(rateLimitClient, [
       { scope: "activate_organization_ip", identifier: clientIdentifier(request), limit: 10, windowSeconds: 3600, blockSeconds: 3600 },
-      { scope: "activate_organization_code", identifier: await hashIdentifier(activationCode.trim()), limit: 5, windowSeconds: 3600, blockSeconds: 3600 },
+      // Demo: no code to guess; the per-address limit above still applies.
+      ...(demo ? [] : [{ scope: "activate_organization_code", identifier: await hashIdentifier(activationCode.trim()), limit: 5, windowSeconds: 3600, blockSeconds: 3600 }]),
     ]);
     if (activationRateLimited) return activationRateLimited;
 
@@ -104,8 +108,7 @@ serve(async (request: Request) => {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-prosm-api-key": managementApiKey },
       body: JSON.stringify({
-        action: "activate",
-        code: activationCode.trim(),
+        ...(demo ? { action: "startTrial" } : { action: "activate", code: activationCode.trim() }),
         customerName: organizationName.trim(),
         customerReference: ownerEmail.trim().toLowerCase(),
       }),
@@ -168,10 +171,18 @@ serve(async (request: Request) => {
       );
     }
 
+    if (demo) {
+      // The trial license is marked here; it locks (never deletes) when it ends.
+      const { error: trialError } = await serviceClient.rpc("mark_prosm_time_trial", { p_organization_id: bootstrapResult.organizationId });
+      if (trialError) console.error("[activate-organization] MARK TRIAL failed", trialError);
+    }
+
     return successResponse({
       organizationId: bootstrapResult.organizationId,
       userId: bootstrapResult.userId,
       licenseNumber: license.licenseNumber,
+      trial: demo,
+      expiresAt: license.expiresAt,
     });
   } catch (error: any) {
     return errorResponse(error?.message ?? "Activation service unavailable.", 500, "INTERNAL_ERROR");

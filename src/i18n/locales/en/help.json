@@ -124,6 +124,10 @@
     "q10": {
       "question": "Can I still play the radio while I'm clocked in?",
       "answer": "Yes - it keeps playing in the background regardless of your attendance status. It lives in the sidebar's Media row (tap it to expand the station list and search) rather than the header, and takes up very little space when collapsed."
+    },
+    "q11": {
+      "question": "How does the 30-day demo work?",
+      "answer": "On the Welcome page, Use the demo version opens the usual activation without the activation code; your organisation and owner are created at once. The trial lasts 30 days (server time) and a bar shows the days left. A week before the end the owner gets a notice and an email with sales@prosm.net, info@prosm.net and support@prosm.net. When it ends, the app pauses and nothing is deleted: enter a purchased activation code on the page that appears, or ask PROSM to renew the license - then everything continues with all your data. One trial per email."
     }
   },
   "contact": {

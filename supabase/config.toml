@@ -298,3 +298,10 @@ entrypoint = "./functions/gusto-oauth-callback/index.ts"
 enabled = true
 verify_jwt = true
 entrypoint = "./functions/sync-gusto-hours/index.ts"
+
+# send-trial-notices is verify_jwt = false: it is called by pg_cron (no user
+# session) and checks its own private secret (x-trial-secret) instead.
+[functions.send-trial-notices]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/send-trial-notices/index.ts"

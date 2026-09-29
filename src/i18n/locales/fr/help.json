@@ -124,6 +124,10 @@
     "q10": {
       "question": "Puis-je continuer à écouter la radio pendant que je suis pointé ?",
       "answer": "Oui - elle continue de jouer en arrière-plan quel que soit votre statut de présence. Elle se trouve dans la rangée Média de la barre latérale (touchez-la pour déployer la liste des stations et la recherche) plutôt que dans l'en-tête, et occupe très peu de place une fois repliée."
+    },
+    "q11": {
+      "question": "Comment fonctionne la démo de 30 jours ?",
+      "answer": "Sur la page d’accueil, « Utiliser la version d’essai » ouvre l’activation habituelle sans code d’activation ; l’organisation et son propriétaire sont créés aussitôt. L’essai dure 30 jours (heure du serveur) et une barre indique les jours restants. Une semaine avant la fin, le propriétaire reçoit une notification et un e-mail avec sales@prosm.net, info@prosm.net et support@prosm.net. Ensuite l’application est mise en pause, rien n’est supprimé : saisissez un code d’activation acheté ou demandez à PROSM de renouveler la licence - tout reprend avec vos données. Un essai par e-mail."
     }
   },
   "contact": {

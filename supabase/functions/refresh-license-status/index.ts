@@ -56,16 +56,18 @@ serve(async (request: Request) => {
       return errorResponse("Invalid or expired session.", 401, "UNAUTHORIZED");
     }
 
-    const { data: callerRow } = await callerClient
+    // Read with the server's rights once the session is verified: a locked trial organisation
+    // must still be able to refresh (a renewal in Platform Manager reopens it) or be activated.
+    const { data: callerRow } = await serviceClient
       .from("users")
-      .select("id, organization_id")
+      .select("id, organization_id, is_owner, email")
       .eq("auth_user_id", authUser.id)
       .maybeSingle();
     if (!callerRow) {
       return errorResponse("Caller not found.", 401, "UNAUTHORIZED");
     }
 
-    const { data: licenseRow } = await callerClient
+    const { data: licenseRow } = await serviceClient
       .from("license_activation_state")
       .select("license_number")
       .eq("organization_id", callerRow.organization_id)
@@ -78,6 +80,36 @@ serve(async (request: Request) => {
     const managementApiKey = Deno.env.get("PROSM_MANAGEMENT_API_KEY");
     if (!managementApiUrl || !managementApiKey) {
       return errorResponse("Integration contract is not configured.", 500, "INTEGRATION_NOT_CONFIGURED");
+    }
+
+    // A purchased activation code (owner 2026-09-29): redeemed with PROSM Platform exactly like at
+    // activation, then the organisation moves onto that license - same organisation, same data.
+    const payload = await request.json().catch(() => ({}));
+    if (typeof payload.activationCode === "string" && payload.activationCode.trim()) {
+      if (!callerRow.is_owner) return errorResponse("ONLY THE OWNER CAN ENTER AN ACTIVATION CODE", 403, "OWNER_ONLY");
+      const { data: org } = await serviceClient.from("organizations").select("name").eq("id", callerRow.organization_id).maybeSingle();
+      const activationResponse = await fetch(managementApiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-prosm-api-key": managementApiKey },
+        body: JSON.stringify({ action: "activate", code: payload.activationCode.trim(), customerName: org?.name ?? "", customerReference: String(callerRow.email ?? "").toLowerCase() }),
+      });
+      const activation = (await activationResponse.json().catch(() => null)) as any;
+      if (!activationResponse.ok || !activation?.success || !activation.data) {
+        return errorResponse(activation?.error?.message ?? "Unable to verify this activation code.", 400, activation?.error?.code ?? "ACTIVATION_VERIFICATION_FAILED");
+      }
+      const { error: applyError } = await serviceClient.rpc("apply_prosm_time_license", {
+        p_organization_id: callerRow.organization_id,
+        p_license_number: activation.data.licenseNumber,
+        p_plan_id: activation.data.planId,
+        p_max_users: activation.data.maxUsers,
+        p_max_devices: activation.data.maxDevices,
+        p_expires_at: activation.data.expiresAt,
+        p_actor_user_id: callerRow.id,
+      });
+      if (applyError) {
+        return errorResponse(`The code was accepted by PROSM Platform (license ${activation.data.licenseNumber}) but could not be applied: ${applyError.message}. Contact support with this license number.`, 500, "LICENSE_APPLY_FAILED");
+      }
+      return successResponse({ status: "ACTIVE", expiresAt: activation.data.expiresAt, licenseNumber: activation.data.licenseNumber, activated: true });
     }
 
     const statusResponse = await fetch(managementApiUrl, {

@@ -211,5 +211,9 @@
     "searching": "Suche läuft …",
     "noResults": "Keine Sender gefunden.",
     "loadingStations": "Sender werden geladen …"
+  },
+  "trial": {
+    "banner_one": "Demoversion: noch 1 Tag (endet {{date}}). Ihre Daten bleiben erhalten - zum Fortfahren einen Aktivierungscode kaufen:",
+    "banner_other": "Demoversion: noch {{count}} Tage (endet {{date}}). Ihre Daten bleiben erhalten - zum Fortfahren einen Aktivierungscode kaufen:"
   }
 }

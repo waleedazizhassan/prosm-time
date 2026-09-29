@@ -211,5 +211,9 @@
     "searching": "Ricerca…",
     "noResults": "Nessuna stazione trovata.",
     "loadingStations": "Caricamento stazioni…"
+  },
+  "trial": {
+    "banner_one": "Versione di prova: 1 giorno rimasto (termina il {{date}}). I tuoi dati restano conservati - per continuare, acquista un codice di attivazione:",
+    "banner_other": "Versione di prova: {{count}} giorni rimasti (termina il {{date}}). I tuoi dati restano conservati - per continuare, acquista un codice di attivazione:"
   }
 }

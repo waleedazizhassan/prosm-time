@@ -1,6 +1,6 @@
 import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Upload } from "lucide-react";
 
 import ActivationRepository from "../../core/repositories/ActivationRepository";
@@ -38,6 +38,9 @@ import styles from "../../components/common/AuthLayout.module.css";
 export default function ActivationPage() {
   const { t, i18n } = useTranslation(["auth", "common"]);
   const navigate = useNavigate();
+  // Demo (owner 2026-09-29): this same activation, with only the activation code skipped.
+  const [params] = useSearchParams();
+  const demo = params.get("demo") === "1";
 
   const [activationCode, setActivationCode] = useState("");
   const [organizationName, setOrganizationName] = useState("");
@@ -69,7 +72,9 @@ export default function ActivationPage() {
     setSubmitting(true);
 
     const result = await ActivationRepository.activateOrganization({
-      activationCode: activationCode.trim(),
+      activationCode: demo ? "" : activationCode.trim(),
+      // Production sends exactly what it always sent; only the demo adds its flag.
+      ...(demo ? { demo: true } : {}),
       organizationName: organizationName.trim(),
       ownerEmail: ownerEmail.trim(),
       ownerPassword,
@@ -105,8 +110,9 @@ export default function ActivationPage() {
       // organization card.
     }
 
-    const licenseResult = await LicenseRepository.getCurrentLicenseState();
-    if (licenseResult.success && licenseResult.data) {
+    // A trial has no license certificate; a purchased license gets it as before.
+    const licenseResult = demo ? null : await LicenseRepository.getCurrentLicenseState();
+    if (licenseResult?.success && licenseResult.data) {
       const license = licenseResult.data;
       const orgResult = await OrganizationRepository.getCurrentOrganization();
       const org = orgResult.success ? orgResult.data : null;
@@ -141,8 +147,8 @@ export default function ActivationPage() {
 
   return (
     <AuthLayout
-      title={t("auth:activation.title")}
-      subtitle={t("auth:activation.subtitle")}
+      title={t(demo ? "auth:activation.demoTitle" : "auth:activation.title")}
+      subtitle={t(demo ? "auth:activation.demoSubtitle" : "auth:activation.subtitle")}
       footer={
         <>
           {t("auth:activation.alreadyHaveAccount")} <Link to="/login">{t("auth:activation.goToLogin")}</Link>
@@ -150,14 +156,18 @@ export default function ActivationPage() {
       }
     >
       <form onSubmit={handleSubmit}>
-        <Input
-          label={t("auth:activation.activationCodeLabel")}
-          name="activationCode"
-          value={activationCode}
-          onChange={(event) => setActivationCode(event.target.value)}
-          required
-          disabled={submitting || success}
-        />
+        {demo ? (
+          <p className={styles.consentNotice}>{t("auth:activation.demoNotice")}</p>
+        ) : (
+          <Input
+            label={t("auth:activation.activationCodeLabel")}
+            name="activationCode"
+            value={activationCode}
+            onChange={(event) => setActivationCode(event.target.value)}
+            required
+            disabled={submitting || success}
+          />
+        )}
         <Input
           label={t("auth:activation.organizationNameLabel")}
           name="organizationName"
@@ -235,7 +245,7 @@ export default function ActivationPage() {
         {success ? <p className={styles.successText}>{t("auth:activation.successMessage")}</p> : null}
 
         <Button type="submit" fullWidth loading={submitting} disabled={success || !agreedToEmailPolicy}>
-          {t("auth:activation.submitAction")}
+          {t(demo ? "auth:activation.demoSubmit" : "auth:activation.submitAction")}
         </Button>
       </form>
     </AuthLayout>

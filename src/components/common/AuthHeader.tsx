@@ -82,6 +82,9 @@ export default function AuthHeader({ showVersion = true }: { showVersion?: boole
         <Link to="/activate" className={`${styles.headerNavLink} ${isActive("/activate") ? styles.headerNavLinkActive : ""}`}>
           {t("authHeader.createOrganization")}
         </Link>
+        <Link to="/activate?demo=1" className={styles.headerNavLink}>
+          {t("authHeader.useDemo")}
+        </Link>
       </nav>
 
       <div className={styles.headerActions}>

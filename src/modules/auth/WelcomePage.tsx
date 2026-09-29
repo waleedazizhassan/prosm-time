@@ -91,6 +91,10 @@ export default function WelcomePage() {
             <button type="button" className={pageStyles.secondaryButton} style={{ marginTop: "var(--space-3)" }} onClick={() => navigate("/activate")}>
               {t("authHeader.createOrganization")}
             </button>
+            {/* Demo (owner 2026-09-29): the same activation, without the activation code, for 30 days. */}
+            <button type="button" className={pageStyles.secondaryButton} style={{ marginTop: "var(--space-3)" }} onClick={() => navigate("/activate?demo=1")}>
+              {t("authHeader.useDemo")}
+            </button>
           </div>
         )}
       </div>

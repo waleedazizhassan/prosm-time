@@ -8,6 +8,7 @@ import OfflineBanner from "./OfflineBanner";
 import PresenceTrackingLoop from "./PresenceTrackingLoop";
 import { LayoutProvider } from "./LayoutContext";
 import styles from "./AppShell.module.css";
+import TrialBanner from "./TrialBanner";
 
 // PROSM Time Implementation Master File V3.0, §30 ("Navigation must be
 // explicitly designed and implemented") - the real application shell:
@@ -22,6 +23,7 @@ export default function AppShell() {
     <LayoutProvider>
       <div className={styles.layout}>
         <InstallationStatusBanner />
+        <TrialBanner />
         <OfflineBanner />
         <PresenceTrackingLoop />
         <Header />

@@ -124,6 +124,10 @@
     "q10": {
       "question": "Kann ich das Radio weiterhören, während ich eingestempelt bin?",
       "answer": "Ja - es spielt unabhängig von Ihrem Anwesenheitsstatus im Hintergrund weiter. Es befindet sich in der Media-Zeile der Seitenleiste (antippen, um die Senderliste und Suche zu öffnen) statt in der Kopfzeile und nimmt eingeklappt nur sehr wenig Platz ein."
+    },
+    "q11": {
+      "question": "Wie funktioniert die 30-Tage-Demo?",
+      "answer": "Auf der Willkommensseite öffnet „Demoversion nutzen“ die übliche Aktivierung ohne Aktivierungscode; Organisation und Eigentümer werden sofort angelegt. Der Test dauert 30 Tage (Serverzeit), eine Leiste zeigt die verbleibenden Tage. Eine Woche vor Ende erhält der Eigentümer eine Mitteilung und eine E-Mail mit sales@prosm.net, info@prosm.net und support@prosm.net. Danach pausiert die App, nichts wird gelöscht: Geben Sie einen gekauften Aktivierungscode ein oder lassen Sie PROSM die Lizenz verlängern - dann geht alles mit Ihren Daten weiter. Ein Test pro E-Mail."
     }
   },
   "contact": {
