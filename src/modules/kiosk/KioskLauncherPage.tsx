@@ -10,8 +10,8 @@ import Button from "../../components/common/Button";
 import LoadingState from "../../components/common/LoadingState";
 import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
-import checkInRemoteIllustration from "../../assets/illustration-checkin-remote.png";
-import kioskHeaderImage from "../../assets/illustration-kiosk-header.png";
+import checkInRemoteIllustration from "../../assets/illustration-checkin-remote.webp";
+import kioskHeaderImage from "../../assets/illustration-kiosk-header.webp";
 
 // PROSM Time - § user-directed: bring Kiosk Mode back into the
 // sidebar (it was reachable only by a direct /kiosk/:siteId URL,

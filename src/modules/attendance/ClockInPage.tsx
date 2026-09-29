@@ -1,6 +1,6 @@
 import PageShell from "../../components/common/PageShell";
 import ClockInOutCard from "../dashboard/ClockInOutCard";
-import clockInOutHeaderImage from "../../assets/illustration-clockinout-header.png";
+import clockInOutHeaderImage from "../../assets/illustration-clockinout-header.webp";
 
 // § user-directed - "the Owner/Manager shouldn't have the clock-in
 // widget on their own Dashboard the way an Employee does - a sidebar

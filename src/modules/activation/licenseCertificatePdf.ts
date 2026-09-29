@@ -1,6 +1,6 @@
 import type { jsPDF } from "jspdf";
 import { renderHtmlToPdf, escapeHtml } from "../../core/utils/htmlToPdf";
-import prosmLogo from "../../assets/prosm-logo.png";
+import prosmLogo from "../../assets/prosm-logo-pdf.png";
 
 type TFunc = (key: string, options?: Record<string, unknown>) => string;
 

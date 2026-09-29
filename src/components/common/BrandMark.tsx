@@ -1,4 +1,4 @@
-import prosmLogo from "../../assets/prosm-logo.png";
+import prosmLogo from "../../assets/prosm-logo.webp";
 
 interface BrandMarkProps {
   size?: number;

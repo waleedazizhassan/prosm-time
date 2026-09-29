@@ -9,7 +9,7 @@ import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
 import Select from "../../components/common/Select";
 import AdminAttendanceCard from "./AdminAttendanceCard";
-import onBehalfHeaderImage from "../../assets/illustration-onbehalf-header.png";
+import onBehalfHeaderImage from "../../assets/illustration-onbehalf-header.webp";
 
 // PROSM Time - § user-directed follow-up: Administrative Clock In/Out
 // (On Behalf Of) already existed as a real, working card

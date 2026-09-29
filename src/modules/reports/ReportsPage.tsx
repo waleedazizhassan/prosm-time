@@ -26,7 +26,7 @@ import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
 import Table, { type TableColumn } from "../../components/common/Table";
 import { Download } from "lucide-react";
-import reportsHeaderImage from "../../assets/illustration-reports-header.png";
+import reportsHeaderImage from "../../assets/illustration-reports-header.webp";
 import { REPORT_TYPE_ICONS } from "./reportTypeIcons";
 import styles from "./ReportsPage.module.css";
 

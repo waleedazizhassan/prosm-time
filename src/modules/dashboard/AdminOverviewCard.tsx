@@ -18,7 +18,7 @@ import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import EmptyState from "../../components/common/EmptyState";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
-import greetingIllustration from "../../assets/illustration-dashboard-greeting.png";
+import greetingIllustration from "../../assets/illustration-dashboard-greeting.webp";
 import styles from "./AdminOverviewCard.module.css";
 
 type Drilldown = "sites" | "present" | "employees" | "pending" | "leaveToday" | "onBreak" | null;

@@ -15,7 +15,7 @@ import Button from "../../components/common/Button";
 import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
-import leaveHeaderImage from "../../assets/illustration-leave-header.png";
+import leaveHeaderImage from "../../assets/illustration-leave-header.webp";
 
 const LEAVE_TYPES: LeaveType[] = ["annual", "sick", "unpaid", "emergency", "other"];
 

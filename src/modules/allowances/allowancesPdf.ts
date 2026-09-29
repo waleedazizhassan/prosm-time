@@ -2,7 +2,7 @@ import type { jsPDF } from "jspdf";
 import type { AllowanceEntry } from "../../core/repositories/AllowanceRepository";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
 import { renderHtmlToPdf, escapeHtml } from "../../core/utils/htmlToPdf";
-import prosmLogo from "../../assets/prosm-logo.png";
+import prosmLogo from "../../assets/prosm-logo-pdf.png";
 
 type TFunc = (key: string, options?: Record<string, unknown>) => string;
 

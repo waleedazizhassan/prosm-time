@@ -18,7 +18,7 @@ import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
 import Textarea from "../../components/common/Textarea";
 import ErrorText from "../../components/common/ErrorText";
-import emergencyHeaderImage from "../../assets/illustration-emergency-header.png";
+import emergencyHeaderImage from "../../assets/illustration-emergency-header.webp";
 
 const ALL_EMPLOYEES = "";
 

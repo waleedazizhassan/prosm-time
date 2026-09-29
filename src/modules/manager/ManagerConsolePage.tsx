@@ -20,8 +20,8 @@ import Textarea from "../../components/common/Textarea";
 import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
 import { formatTimeOnly, formatDateOnly } from "../../core/utils/formatDate";
-import allCaughtUpIllustration from "../../assets/illustration-all-caught-up.png";
-import managerConsoleHeaderImage from "../../assets/illustration-manager-console-header.png";
+import allCaughtUpIllustration from "../../assets/illustration-all-caught-up.webp";
+import managerConsoleHeaderImage from "../../assets/illustration-manager-console-header.webp";
 
 const REVIEW_ACTIONS = ["approved", "rejected", "acknowledged", "clarification_requested"] as const;
 

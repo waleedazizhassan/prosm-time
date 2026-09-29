@@ -2,7 +2,7 @@ import type { jsPDF } from "jspdf";
 import type { EvidencePack } from "../../core/repositories/TimesheetRepository";
 import { formatDateTime, formatTimeOnly, formatDateOnly } from "../../core/utils/formatDate";
 import { renderHtmlToPdf, escapeHtml, sectionHeadingStyle } from "../../core/utils/htmlToPdf";
-import prosmLogo from "../../assets/prosm-logo.png";
+import prosmLogo from "../../assets/prosm-logo-pdf.png";
 
 export function formatMinutes(minutes: number): string {
   const totalMinutes = Math.round(minutes);

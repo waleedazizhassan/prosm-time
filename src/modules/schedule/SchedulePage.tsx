@@ -17,7 +17,7 @@ import Button from "../../components/common/Button";
 import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
-import shiftsHeaderImage from "../../assets/illustration-shifts-header.png";
+import shiftsHeaderImage from "../../assets/illustration-shifts-header.webp";
 
 function isoDate(date: Date): string {
   return date.toISOString().slice(0, 10);

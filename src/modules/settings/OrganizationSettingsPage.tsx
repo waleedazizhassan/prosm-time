@@ -4,7 +4,7 @@ import { useAuth } from "../../core/context/AuthContext";
 
 import PageShell from "../../components/common/PageShell";
 import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
-import settingsHeaderImage from "../../assets/illustration-settings-header.png";
+import settingsHeaderImage from "../../assets/illustration-settings-header.webp";
 import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
 // PayrollIntegrationCard intentionally not rendered below - § user-

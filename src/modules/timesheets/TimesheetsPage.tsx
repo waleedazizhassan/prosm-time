@@ -27,7 +27,7 @@ import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
 import FormGrid from "../../components/common/FormGrid";
 import { formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
-import timesheetsHeaderImage from "../../assets/illustration-timesheets-header.png";
+import timesheetsHeaderImage from "../../assets/illustration-timesheets-header.webp";
 
 function toDateInput(date: Date): string {
   return date.toISOString().slice(0, 10);
