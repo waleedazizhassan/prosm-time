@@ -12,7 +12,7 @@ import { getCurrentPosition, type CurrentPosition } from "../../core/utils/geo";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { reverseGeocodePlaceName } from "../../core/utils/reverseGeocode";
 import { getDeviceLabel } from "../../core/utils/deviceInfo";
-import OfflineQueueService from "../../core/offline/OfflineQueueService";
+import OfflineQueueService, { type OfflineActionType, type OfflineQueueItem } from "../../core/offline/OfflineQueueService";
 import { useOfflineQueue } from "../../core/offline/useOfflineQueue";
 import { formatTimeOnly } from "../../core/utils/formatDate";
 
@@ -82,6 +82,53 @@ function formatElapsed(totalSeconds: number): string {
   const seconds = clamped % 60;
   const pad = (value: number) => String(value).padStart(2, "0");
   return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+}
+
+interface AttendanceView {
+  session: AttendanceSession | null;
+  currentSite: Site | null;
+  activeBreakId: string | null;
+  activeBreakStartedAt: string | null;
+  completedBreakSeconds: number;
+}
+
+// Offline attendance (owner 2026-09-29): what the worker sees is the last known server state with
+// the actions queued on this device applied on top, in order (stopping at one the server refused).
+// A queued clock in / break start gets a local id "q:<queue id>", resolved to the server's id when
+// it is sent - so a break or a clock out can follow an offline clock in before any of it is sent.
+function applyQueuedActions(base: AttendanceView, items: OfflineQueueItem[], sites: Site[]): AttendanceView {
+  const view = { ...base };
+  const endBreakAt = (at: string) => {
+    if (view.activeBreakStartedAt) view.completedBreakSeconds += Math.max(0, (new Date(at).getTime() - new Date(view.activeBreakStartedAt).getTime()) / 1000);
+    view.activeBreakId = null;
+    view.activeBreakStartedAt = null;
+  };
+  for (const item of items) {
+    if (item.status === "failed") break;
+    if (item.type === "clock_in") {
+      view.session = { id: `q:${item.id}`, siteId: item.siteId ?? "", projectId: item.projectId, status: "clocked_in", clockInAt: item.clientReportedAt, clockOutAt: null, manualLocationLabel: item.manualLocationLabel };
+      view.currentSite = sites.find((site) => site.id === item.siteId) ?? null;
+      view.activeBreakId = null;
+      view.activeBreakStartedAt = null;
+      view.completedBreakSeconds = 0;
+    } else if (item.type === "start_break") {
+      view.activeBreakId = `q:${item.id}`;
+      view.activeBreakStartedAt = item.clientReportedAt;
+    } else if (item.type === "end_break") {
+      endBreakAt(item.clientReportedAt);
+    } else if (item.type === "change_site") {
+      if (view.activeBreakId) endBreakAt(item.clientReportedAt);
+      view.currentSite = sites.find((site) => site.id === item.newSiteId) ?? null;
+      if (view.session) view.session = { ...view.session, siteId: item.newSiteId ?? "", manualLocationLabel: item.newSiteId ? null : item.manualLocationLabel };
+    } else if (item.type === "clock_out") {
+      view.session = null;
+      view.currentSite = null;
+      view.activeBreakId = null;
+      view.activeBreakStartedAt = null;
+      view.completedBreakSeconds = 0;
+    }
+  }
+  return view;
 }
 
 // PROSM Time WP-06/WP-08/WP-10/§17/§16/§18/§37 - real Clock In/Out on
@@ -212,7 +259,9 @@ export default function ClockInOutCard() {
   }, [pendingEvidenceFile]);
 
   const pendingOfflineItems = useOfflineQueue(profile?.id);
-  const pendingOfflineItem = pendingOfflineItems[0] ?? null;
+  // The first action the server refused (kept, shown, retried or discarded); later ones wait behind it.
+  const failedOfflineItem = pendingOfflineItems.find((item) => item.status === "failed") ?? null;
+  const hasQueuedActions = pendingOfflineItems.length > 0;
 
   // § real fix for the "blank offline Dashboard" complaint (2026-09-15)
   // - `silent` (true on the very first mount when a cache already
@@ -229,6 +278,13 @@ export default function ClockInOutCard() {
         SiteRepository.listAssignedSites(profile.id),
         PresenceRepository.getActiveSession(profile.id),
       ]);
+      // Offline (owner 2026-09-29): when the server cannot be reached, keep the last known state -
+      // the worker's session, sites and break - instead of replacing it with empty values, so a
+      // worker who opens the app without a connection can still pick their site and clock in.
+      if (!sessionResult.success || !sitesResult.success) {
+        setLoading(false);
+        return;
+      }
       const activeSession = sessionResult.success ? sessionResult.data ?? null : null;
       setSession(activeSession);
       const activePresence = presenceResult.success ? presenceResult.data ?? null : null;
@@ -292,14 +348,13 @@ export default function ClockInOutCard() {
   // discarded), the real session state on the server may have
   // changed - re-fetch it rather than trusting whatever was on screen
   // while the action sat unsynced.
-  const previousPendingIdRef = useRef<string | null>(null);
+  const previousPendingCountRef = useRef(0);
   useEffect(() => {
-    const currentId = pendingOfflineItem?.id ?? null;
-    if (previousPendingIdRef.current && !currentId) {
+    if (previousPendingCountRef.current > 0 && pendingOfflineItems.length === 0) {
       load();
     }
-    previousPendingIdRef.current = currentId;
-  }, [pendingOfflineItem, load]);
+    previousPendingCountRef.current = pendingOfflineItems.length;
+  }, [pendingOfflineItems.length, load]);
 
   // § final visual consistency pass, user-directed - "During mobile
   // Clock In, obtain the device's current location... clearly display
@@ -400,11 +455,12 @@ export default function ClockInOutCard() {
   // ticking status-header field rather than that screen's map/pill
   // treatment). Purely a display tick - never read by any submit path.
   const [now, setNow] = useState(() => Date.now());
+  const clockedInOffline = pendingOfflineItems.some((item) => item.type === "clock_in");
   useEffect(() => {
-    if (!session) return undefined;
+    if (!session && !clockedInOffline) return undefined;
     const interval = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(interval);
-  }, [session]);
+  }, [session, clockedInOffline]);
 
   // § real fix for the "blank offline Dashboard" complaint (2026-09-15,
   // user sent a live screenshot after the earlier global-fetch-timeout
@@ -424,6 +480,10 @@ export default function ClockInOutCard() {
     );
   }
 
+  const view = applyQueuedActions({ session, currentSite, activeBreakId, activeBreakStartedAt, completedBreakSeconds }, pendingOfflineItems, sites);
+  // No connection, or earlier actions still waiting: this one joins the queue, so the order is kept.
+  const shouldQueue = () => (typeof navigator !== "undefined" && navigator.onLine === false) || pendingOfflineItems.length > 0;
+
   const selectedSite = sites.find((site) => site.id === siteId) ?? null;
   // § live UX review, user-directed - "clock-in without a site doesn't
   // ask for a photo." With no site there is also no server-side
@@ -435,7 +495,7 @@ export default function ClockInOutCard() {
   // an optional one, exactly when there is no registered site's own
   // policy to defer to.
   const clockInCameraRequired = siteId ? selectedSite?.cameraRequired ?? false : true;
-  const clockOutCameraRequired = currentSite ? currentSite.cameraRequired : true;
+  const clockOutCameraRequired = view.currentSite ? view.currentSite.cameraRequired : true;
 
   // § final visual consistency pass, correction - "Clock In / Clock
   // Out must be the single primary attendance action... Camera is part
@@ -471,7 +531,7 @@ export default function ClockInOutCard() {
     // WP-15/§25 - offline (or unreachable) is queued locally rather
     // than surfaced as an error; the client-captured time/coordinates/
     // evidence captured above travel with the queued item unchanged.
-    if (typeof navigator !== "undefined" && navigator.onLine === false) {
+    if (shouldQueue()) {
       await queueOffline(
         "clock_in",
         { siteId: siteId || null, manualLocationLabel: trimmedManualLabel, note: trimmedNote, activity: trimmedActivity, projectId: projectId || null, latitude, longitude, accuracyMeters },
@@ -534,8 +594,11 @@ export default function ClockInOutCard() {
   };
 
   const queueOffline = async (
-    type: "clock_in" | "clock_out",
+    type: OfflineActionType,
     location: {
+      sessionRef?: string | null;
+      breakRef?: string | null;
+      newSiteId?: string | null;
       siteId?: string | null;
       manualLocationLabel?: string | null;
       note?: string | null;
@@ -565,6 +628,9 @@ export default function ClockInOutCard() {
         accuracyMeters: location.accuracyMeters,
         clientReportedAt: new Date().toISOString(),
         evidenceFile,
+        sessionRef: location.sessionRef ?? null,
+        breakRef: location.breakRef ?? null,
+        newSiteId: location.newSiteId ?? null,
       });
       setConfirmModalOpen(false);
       setConfirmAction(null);
@@ -595,7 +661,7 @@ export default function ClockInOutCard() {
     const trimmedNote = note.trim() || null;
     const trimmedActivity = activity.trim() || null;
 
-    if (typeof navigator !== "undefined" && navigator.onLine === false) {
+    if (shouldQueue()) {
       await queueOffline("clock_out", { note: trimmedNote, activity: trimmedActivity, latitude, longitude, accuracyMeters }, evidenceFile);
       return;
     }
@@ -702,13 +768,13 @@ export default function ClockInOutCard() {
   };
 
   const handleRetryOfflineSync = async () => {
-    if (!pendingOfflineItem) return;
-    await OfflineQueueService.retry(pendingOfflineItem.id);
+    if (!failedOfflineItem) return;
+    await OfflineQueueService.retry(failedOfflineItem.id);
   };
 
   const handleDiscardOfflineItem = async () => {
-    if (!pendingOfflineItem) return;
-    await OfflineQueueService.discard(pendingOfflineItem.id);
+    if (!failedOfflineItem) return;
+    await OfflineQueueService.discard(failedOfflineItem.id);
   };
 
   const handleSos = async () => {
@@ -742,13 +808,27 @@ export default function ClockInOutCard() {
   };
 
   const handleToggleBreak = async () => {
-    if (!session) return;
+    if (!view.session) return;
     setBreakSubmitting(true);
     setError("");
     setBreakWarning("");
 
-    if (activeBreakId) {
-      const result = await AttendanceRepository.endBreak(activeBreakId);
+    const endingBreakId = view.activeBreakId;
+    const queueBreak = async () => {
+      await queueOffline(endingBreakId ? "end_break" : "start_break", { sessionRef: view.session?.id ?? null, breakRef: endingBreakId, latitude: null, longitude: null, accuracyMeters: null }, null);
+      setBreakSubmitting(false);
+    };
+    if (shouldQueue() || view.session.id.startsWith("q:") || endingBreakId?.startsWith("q:")) {
+      await queueBreak();
+      return;
+    }
+
+    if (endingBreakId) {
+      const result = await AttendanceRepository.endBreak(endingBreakId);
+      if (result.networkError) {
+        await queueBreak();
+        return;
+      }
       setBreakSubmitting(false);
       if (!result.success) {
         setError(humanizeBackendError(result.message, t) ?? t("attendance.breakEndError"));
@@ -759,7 +839,11 @@ export default function ClockInOutCard() {
       }
       await load();
     } else {
-      const result = await AttendanceRepository.startBreak(session.id);
+      const result = await AttendanceRepository.startBreak(view.session.id);
+      if (result.networkError) {
+        await queueBreak();
+        return;
+      }
       setBreakSubmitting(false);
       if (!result.success || !result.data) {
         setError(humanizeBackendError(result.message, t) ?? t("attendance.breakStartError"));
@@ -831,14 +915,32 @@ export default function ClockInOutCard() {
       // itself will reject a missing sample there.
     }
 
+    const queueChange = async () => {
+      await queueOffline(
+        "change_site",
+        { breakRef: view.activeBreakId, newSiteId: isNoSiteChange ? null : changeSiteTargetId, manualLocationLabel: isNoSiteChange ? changeSiteManualLabel.trim() : null, latitude, longitude, accuracyMeters },
+        null,
+      );
+      setChangeSiteSubmitting(false);
+      setChangeSiteModalOpen(false);
+    };
+    if (shouldQueue() || view.session?.id.startsWith("q:") || view.activeBreakId?.startsWith("q:")) {
+      await queueChange();
+      return;
+    }
+
     const result = await AttendanceRepository.changeSite(
-      activeBreakId,
+      view.activeBreakId,
       isNoSiteChange ? null : changeSiteTargetId,
       latitude,
       longitude,
       accuracyMeters,
       isNoSiteChange ? changeSiteManualLabel.trim() : null,
     );
+    if (result.networkError) {
+      await queueChange();
+      return;
+    }
     setChangeSiteSubmitting(false);
 
     if (!result.success) {
@@ -855,14 +957,14 @@ export default function ClockInOutCard() {
     load();
   };
 
-  const statusKey = activeBreakId ? "onBreak" : session ? "clockedIn" : "notClockedIn";
+  const statusKey = view.activeBreakId ? "onBreak" : view.session ? "clockedIn" : "notClockedIn";
   const changeSiteOptions = sites
-    .filter((site) => site.id !== currentSite?.id)
+    .filter((site) => site.id !== view.currentSite?.id)
     .map((site) => ({ value: site.id, label: nearbySiteIds.has(site.id) ? t("attendance.nearbySiteOption", { name: site.name }) : site.name }));
-  const mapRelevantSite = session ? currentSite : selectedSite;
+  const mapRelevantSite = view.session ? view.currentSite : selectedSite;
   const confirmSiteName =
     confirmAction === "clockOut"
-      ? currentSite?.name ?? session?.manualLocationLabel ?? ""
+      ? view.currentSite?.name ?? view.session?.manualLocationLabel ?? ""
       : selectedSite?.name ?? (manualLocationLabel.trim() || t("attendance.noSiteOption"));
 
   return (
@@ -874,17 +976,17 @@ export default function ClockInOutCard() {
         <StatusBadge status={statusKey}>{t(`attendance.status.${statusKey}`)}</StatusBadge>
       </div>
 
-      {session ? (
+      {view.session ? (
         <div style={{ margin: "var(--space-3) 0" }}>
           <div style={{ fontSize: "var(--font-3xl)", fontWeight: "var(--font-weight-bold)", color: "var(--text-primary)", fontVariantNumeric: "tabular-nums", lineHeight: 1.1 }}>
             {formatElapsed(
               Math.floor(
-                ((activeBreakId && activeBreakStartedAt ? new Date(activeBreakStartedAt).getTime() : now) - new Date(session.clockInAt).getTime()) / 1000,
-              ) - Math.floor(completedBreakSeconds),
+                ((view.activeBreakId && view.activeBreakStartedAt ? new Date(view.activeBreakStartedAt).getTime() : now) - new Date(view.session.clockInAt).getTime()) / 1000,
+              ) - Math.floor(view.completedBreakSeconds),
             )}
           </div>
           <p style={{ margin: "var(--space-1) 0 0", color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>
-            {activeBreakId ? t("attendance.timerPausedOnBreak") : t("attendance.clockedInSince", { time: formatTimeOnly(session.clockInAt, i18n.language) })}
+            {view.activeBreakId ? t("attendance.timerPausedOnBreak") : t("attendance.clockedInSince", { time: formatTimeOnly(view.session.clockInAt, i18n.language) })}
           </p>
         </div>
       ) : null}
@@ -932,19 +1034,26 @@ export default function ClockInOutCard() {
       {evidenceWarning ? <p style={{ color: "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>{evidenceWarning}</p> : null}
       {breakWarning ? <p style={{ color: "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>{breakWarning}</p> : null}
 
-      {pendingOfflineItem ? (
-        <div style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--surface-hover)" }}>
+      {hasQueuedActions ? (
+        <div data-testid="offline-queue" style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--surface-hover)", marginBottom: "var(--space-3)" }}>
           <p style={{ fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)" }}>
-            {pendingOfflineItem.type === "clock_in" ? t("attendance.pendingClockIn") : t("attendance.pendingClockOut")}
+            {t("attendance.pendingCount", { count: pendingOfflineItems.length })}
           </p>
-          <p style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
-            {pendingOfflineItem.status === "failed"
-              ? pendingOfflineItem.errorMessage ?? t("attendance.pendingSyncFailed")
-              : pendingOfflineItem.status === "syncing"
+          <ul style={{ margin: "var(--space-1) 0", paddingInlineStart: "var(--space-5)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
+            {pendingOfflineItems.map((item) => (
+              <li key={item.id}>
+                {t(`attendance.pendingType.${item.type}`)} · {formatTimeOnly(item.clientReportedAt, i18n.language)}
+              </li>
+            ))}
+          </ul>
+          <p style={{ fontSize: "var(--font-xs)", color: failedOfflineItem ? "var(--status-danger-text)" : "var(--text-secondary)" }}>
+            {failedOfflineItem
+              ? failedOfflineItem.errorMessage ?? t("attendance.pendingSyncFailed")
+              : pendingOfflineItems.some((item) => item.status === "syncing")
                 ? t("attendance.pendingSyncing")
                 : t("attendance.pendingWaitingForConnection")}
           </p>
-          {pendingOfflineItem.status === "failed" ? (
+          {failedOfflineItem ? (
             <div style={{ display: "flex", gap: "var(--space-2)", marginTop: "var(--space-2)" }}>
               <Button size="sm" onClick={handleRetryOfflineSync}>
                 {t("attendance.retrySync")}
@@ -955,14 +1064,15 @@ export default function ClockInOutCard() {
             </div>
           ) : null}
         </div>
-      ) : session ? (
+      ) : null}
+      {failedOfflineItem ? null : view.session ? (
         <>
           <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
             <Button variant="danger" fullWidth onClick={handleClockOutTap} loading={submitting}>
               {t("attendance.clockOutAction")}
             </Button>
             <Button variant="ghost" fullWidth onClick={handleToggleBreak} loading={breakSubmitting}>
-              {activeBreakId ? t("attendance.breakEndAction") : t("attendance.breakStartAction")}
+              {view.activeBreakId ? t("attendance.breakEndAction") : t("attendance.breakStartAction")}
             </Button>
             <Button variant="ghost" fullWidth onClick={handleOpenChangeSiteModal}>
               {t("attendance.changeSiteAction")}

@@ -1,4 +1,6 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import PageLoadBoundary from "../components/common/PageLoadBoundary";
 
 import { AuthProvider, useAuth } from "../core/context/AuthContext";
 import ProtectedRoute from "./ProtectedRoute";
@@ -13,25 +15,28 @@ import ResetPasswordPage from "../modules/auth/ResetPasswordPage";
 import AcceptInvitationPage from "../modules/onboarding/AcceptInvitationPage";
 import DashboardPage from "../modules/dashboard/DashboardPage";
 import ClockInPage from "../modules/attendance/ClockInPage";
-import PeoplePage from "../modules/people/PeoplePage";
-import PersonDetailPage from "../modules/people/PersonDetailPage";
-import AdminOnBehalfPage from "../modules/people/AdminOnBehalfPage";
-import SitesPage from "../modules/sites/SitesPage";
-import SiteDetailPage from "../modules/sites/SiteDetailPage";
-import ManagerConsolePage from "../modules/manager/ManagerConsolePage";
-import AttendanceLogPage from "../modules/attendance/AttendanceLogPage";
-import TimesheetsPage from "../modules/timesheets/TimesheetsPage";
-import TimesheetReportPage from "../modules/timesheets/TimesheetReportPage";
-import AllowancesPage from "../modules/allowances/AllowancesPage";
-import LeaveRequestsPage from "../modules/leave/LeaveRequestsPage";
-import SchedulePage from "../modules/schedule/SchedulePage";
-import EmergencyLogPage from "../modules/emergency/EmergencyLogPage";
-import ReportsPage from "../modules/reports/ReportsPage";
-import OrganizationSettingsPage from "../modules/settings/OrganizationSettingsPage";
-import IntegrationsPage from "../modules/settings/IntegrationsPage";
 import KioskPage from "../modules/kiosk/KioskPage";
 import KioskLauncherPage from "../modules/kiosk/KioskLauncherPage";
-import HelpPage from "../modules/help/HelpPage";
+
+// Pages other than sign-in, the dashboard, clock in and the kiosk are fetched when opened;
+// everything a worker needs offline stays in the main file.
+const PeoplePage = lazy(() => import("../modules/people/PeoplePage"));
+const PersonDetailPage = lazy(() => import("../modules/people/PersonDetailPage"));
+const AdminOnBehalfPage = lazy(() => import("../modules/people/AdminOnBehalfPage"));
+const SitesPage = lazy(() => import("../modules/sites/SitesPage"));
+const SiteDetailPage = lazy(() => import("../modules/sites/SiteDetailPage"));
+const ManagerConsolePage = lazy(() => import("../modules/manager/ManagerConsolePage"));
+const AttendanceLogPage = lazy(() => import("../modules/attendance/AttendanceLogPage"));
+const TimesheetsPage = lazy(() => import("../modules/timesheets/TimesheetsPage"));
+const TimesheetReportPage = lazy(() => import("../modules/timesheets/TimesheetReportPage"));
+const AllowancesPage = lazy(() => import("../modules/allowances/AllowancesPage"));
+const LeaveRequestsPage = lazy(() => import("../modules/leave/LeaveRequestsPage"));
+const SchedulePage = lazy(() => import("../modules/schedule/SchedulePage"));
+const EmergencyLogPage = lazy(() => import("../modules/emergency/EmergencyLogPage"));
+const ReportsPage = lazy(() => import("../modules/reports/ReportsPage"));
+const OrganizationSettingsPage = lazy(() => import("../modules/settings/OrganizationSettingsPage"));
+const IntegrationsPage = lazy(() => import("../modules/settings/IntegrationsPage"));
+const HelpPage = lazy(() => import("../modules/help/HelpPage"));
 
 // PROSM Time route map. /activate, /login, /accept-invitation are
 // public (no session exists yet by definition at any of them) and
@@ -68,6 +73,8 @@ export default function AppRoutes() {
             removed from AppShell/index.tsx so it doesn't double-mount
             on authenticated pages. */}
         <UpdateAvailableBanner />
+        <PageLoadBoundary>
+        <Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<RootRedirect />} />
           <Route path="/welcome" element={<WelcomePage />} />
@@ -109,6 +116,8 @@ export default function AppRoutes() {
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
+        </Suspense>
+        </PageLoadBoundary>
       </AuthProvider>
     </BrowserRouter>
   );

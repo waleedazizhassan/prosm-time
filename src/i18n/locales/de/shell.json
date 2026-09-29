@@ -215,5 +215,13 @@
   "trial": {
     "banner_one": "Demoversion: noch 1 Tag (endet {{date}}). Ihre Daten bleiben erhalten - zum Fortfahren einen Aktivierungscode kaufen:",
     "banner_other": "Demoversion: noch {{count}} Tage (endet {{date}}). Ihre Daten bleiben erhalten - zum Fortfahren einen Aktivierungscode kaufen:"
+  },
+  "offlineSync": {
+    "waiting_one": "1 Zeiterfassung wartet auf die Verbindung - sie wird automatisch gesendet.",
+    "waiting_other": "{{count}} Zeiterfassungen warten auf die Verbindung - sie werden automatisch gesendet.",
+    "syncing_one": "1 Zeiterfassung wird gesendet…",
+    "syncing_other": "{{count}} Zeiterfassungen werden gesendet…",
+    "failed_one": "Eine Zeiterfassung konnte nicht gesendet werden - im Dashboard erneut versuchen oder verwerfen.",
+    "failed_other": "Eine Zeiterfassung konnte nicht gesendet werden - im Dashboard erneut versuchen oder verwerfen ({{count}} warten)."
   }
 }

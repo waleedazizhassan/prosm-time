@@ -128,6 +128,10 @@
     "q11": {
       "question": "Wie funktioniert die 30-Tage-Demo?",
       "answer": "Auf der Willkommensseite öffnet „Demoversion nutzen“ die übliche Aktivierung ohne Aktivierungscode; Organisation und Eigentümer werden sofort angelegt. Der Test dauert 30 Tage (Serverzeit), eine Leiste zeigt die verbleibenden Tage. Eine Woche vor Ende erhält der Eigentümer eine Mitteilung und eine E-Mail mit sales@prosm.net, info@prosm.net und support@prosm.net. Danach pausiert die App, nichts wird gelöscht: Geben Sie einen gekauften Aktivierungscode ein oder lassen Sie PROSM die Lizenz verlängern - dann geht alles mit Ihren Daten weiter. Ein Test pro E-Mail."
+    },
+    "q12": {
+      "question": "Funktioniert die Anwesenheit ohne Internet?",
+      "answer": "Ja. Auf dem Telefon funktionieren Einstempeln, Ausstempeln, Pause beginnen/beenden und Standortwechsel ohne Verbindung, mit dem in diesem Moment aufgenommenen Foto und Standort. Sie werden verschlüsselt, in Reihenfolge und mit ihrer echten Zeit auf dem Gerät gespeichert; eine Leiste zeigt, wie viele warten. Sobald die Verbindung zurück ist, werden sie automatisch genau einmal gesendet - ein unterbrochenes Senden erzeugt nie ein Duplikat - und nichts wird vom Gerät entfernt, bevor der Server es angenommen hat. Es gelten dieselben Anwesenheitsregeln. Andere Seiten benötigen eine Verbindung und werden beim Öffnen geladen."
     }
   },
   "contact": {

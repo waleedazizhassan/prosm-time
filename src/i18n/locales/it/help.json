@@ -128,6 +128,10 @@
     "q11": {
       "question": "Come funziona la demo di 30 giorni?",
       "answer": "Nella pagina di benvenuto, “Usa la versione di prova” apre la normale attivazione senza codice; organizzazione e proprietario vengono creati subito. La prova dura 30 giorni (ora del server) e una barra mostra i giorni rimasti. Una settimana prima della fine il proprietario riceve una notifica e un’e-mail con sales@prosm.net, info@prosm.net e support@prosm.net. Poi l’app viene sospesa senza eliminare nulla: inserisci un codice di attivazione acquistato o chiedi a PROSM di rinnovare la licenza e tutto riprende con i tuoi dati. Una prova per e-mail."
+    },
+    "q12": {
+      "question": "La presenza funziona senza internet?",
+      "answer": "Sì. Sul telefono, timbrare entrata e uscita, iniziare/terminare la pausa e cambiare sede funzionano senza connessione, con la foto e la posizione rilevate in quel momento. Vengono conservati sul dispositivo cifrati, in ordine e con l'orario reale, e una barra mostra quanti sono in attesa. Al ritorno della connessione vengono inviati automaticamente, una sola volta - un invio interrotto non crea mai duplicati - e nulla viene rimosso dal dispositivo prima che il server lo abbia accettato. Si applicano le stesse regole di presenza. Le altre pagine richiedono una connessione e si caricano all'apertura."
     }
   },
   "contact": {

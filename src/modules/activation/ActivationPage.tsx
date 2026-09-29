@@ -8,8 +8,6 @@ import AuthService from "../../core/auth/AuthService";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import LicenseRepository from "../../core/repositories/LicenseRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
-import savePdfDocument from "../../core/utils/savePdfDocument";
-import { buildLicenseCertificatePdf } from "./licenseCertificatePdf";
 
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
@@ -117,6 +115,8 @@ export default function ActivationPage() {
       const orgResult = await OrganizationRepository.getCurrentOrganization();
       const org = orgResult.success ? orgResult.data : null;
       try {
+        // The PDF library is fetched only here, when a certificate is issued (keeps the app light).
+        const [{ buildLicenseCertificatePdf }, { default: savePdfDocument }] = await Promise.all([import("./licenseCertificatePdf"), import("../../core/utils/savePdfDocument")]);
         const doc = await buildLicenseCertificatePdf(
           {
             organizationName: org?.name ?? organizationName.trim(),

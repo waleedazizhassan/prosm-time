@@ -43,7 +43,7 @@ export default function HelpPage() {
     "liveMap",
     "radio",
   ] as const;
-  const faqEntries = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] as const;
+  const faqEntries = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] as const;
 
   return (
     <PageShell title="">

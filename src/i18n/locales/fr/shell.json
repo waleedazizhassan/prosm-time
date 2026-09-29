@@ -215,5 +215,13 @@
   "trial": {
     "banner_one": "Version d'essai : 1 jour restant (fin le {{date}}). Vos données sont conservées - pour continuer, achetez un code d'activation :",
     "banner_other": "Version d'essai : {{count}} jours restants (fin le {{date}}). Vos données sont conservées - pour continuer, achetez un code d'activation :"
+  },
+  "offlineSync": {
+    "waiting_one": "1 pointage attend la connexion - il sera envoyé automatiquement.",
+    "waiting_other": "{{count}} pointages attendent la connexion - ils seront envoyés automatiquement.",
+    "syncing_one": "Envoi d'1 pointage…",
+    "syncing_other": "Envoi de {{count}} pointages…",
+    "failed_one": "Un pointage n'a pas pu être envoyé - ouvrez le tableau de bord pour réessayer ou l'abandonner.",
+    "failed_other": "Un pointage n'a pas pu être envoyé - ouvrez le tableau de bord pour réessayer ou l'abandonner ({{count}} en attente)."
   }
 }

@@ -26,12 +26,14 @@ serve(async (request: Request) => {
     if (!authUser) return errorResponse("Invalid or expired session.", 401, "UNAUTHORIZED");
 
     const payload = await request.json().catch(() => ({}));
-    const { attendanceSessionId, idempotencyKey } = payload;
+    // clientReportedAt: an offline-captured break is sent later with the time it really started.
+    const { attendanceSessionId, idempotencyKey, clientReportedAt } = payload;
     if (!attendanceSessionId || typeof attendanceSessionId !== "string") return errorResponse("attendanceSessionId is required.", 400, "INVALID_REQUEST");
 
     const { data, error } = await callerClient.rpc("start_prosm_time_break", {
       p_attendance_session_id: attendanceSessionId,
       p_idempotency_key: idempotencyKey ?? null,
+      p_client_reported_at: clientReportedAt ?? null,
     });
 
     if (error || !data?.success) return errorResponse(error?.message ?? "Unable to start a break.", 400, "START_BREAK_FAILED");

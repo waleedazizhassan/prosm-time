@@ -172,7 +172,16 @@
     "summaryEarlyReasonError": "Impossibile inviare questo motivo.",
     "summaryEarlyReasonSaved": "Motivo inviato al tuo responsabile.",
     "summaryAllowancesAction": "Completa ora le indennità",
-    "summaryNotNowAction": "Non ora"
+    "summaryNotNowAction": "Non ora",
+    "pendingCount_one": "1 timbratura salvata su questo dispositivo",
+    "pendingCount_other": "{{count}} timbrature salvate su questo dispositivo",
+    "pendingType": {
+      "clock_in": "Entrata",
+      "clock_out": "Uscita",
+      "start_break": "Inizio pausa",
+      "end_break": "Fine pausa",
+      "change_site": "Cambio sede"
+    }
   },
   "kioskPin": {
     "title": "PIN chiosco",

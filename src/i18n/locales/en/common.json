@@ -153,5 +153,10 @@
     "onlySubmitOwnTimesheet": "You may only submit your own timesheet.",
     "mustBeClockedInToChangeSite": "You must be clocked in to change site.",
     "mustBeClockedInToStartBreak": "You must be clocked in to start a break."
+  },
+  "pageLoad": {
+    "title": "This page could not be opened",
+    "body": "It needs a connection to load. Clock in, clock out, breaks and site changes keep working offline and are sent when the connection returns.",
+    "retry": "Try again"
   }
 }

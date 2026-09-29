@@ -24,6 +24,12 @@ export interface AttendanceSession {
   manualLocationLabel: string | null;
 }
 
+/** An offline-captured action sent later: its own unique id (never recorded twice) and its real time. */
+export interface OfflineReplayOptions {
+  idempotencyKey?: string;
+  clientReportedAt?: string | null;
+}
+
 export interface ClockInInput {
   // § live UX review, user-directed - site is optional: an employee
   // can clock in at their real current location even when it isn't a
@@ -360,12 +366,14 @@ class AttendanceRepository {
   }
 
   // WP-12/§17.1 - break start/end, real Edge Functions per §35.
-  async startBreak(attendanceSessionId: string): Promise<ServiceResult<{ breakId: string }>> {
+  // options (offline sync, owner 2026-09-29): the queued action's own id and the time it really happened.
+  async startBreak(attendanceSessionId: string, options?: OfflineReplayOptions): Promise<ServiceResult<{ breakId: string }>> {
     try {
       const { data, error } = await this.client.functions.invoke("start-break", {
-        body: { attendanceSessionId, idempotencyKey: crypto.randomUUID() },
+        body: { attendanceSessionId, idempotencyKey: options?.idempotencyKey ?? crypto.randomUUID(), clientReportedAt: options?.clientReportedAt ?? null },
       });
       if (error) {
+        if (error.name === "FunctionsFetchError") return { success: false, message: null, data: null, networkError: true };
         const errorBody = await error.context?.json?.().catch(() => null);
         return createError(errorBody?.error?.message ?? error.message ?? "Unable to start a break.");
       }
@@ -376,10 +384,13 @@ class AttendanceRepository {
     }
   }
 
-  async endBreak(breakId: string): Promise<ServiceResult<{ maxDurationExceeded: boolean }>> {
+  async endBreak(breakId: string, options?: OfflineReplayOptions): Promise<ServiceResult<{ maxDurationExceeded: boolean }>> {
     try {
-      const { data, error } = await this.client.functions.invoke("end-break", { body: { breakId } });
+      const { data, error } = await this.client.functions.invoke("end-break", {
+        body: { breakId, idempotencyKey: options?.idempotencyKey ?? null, clientReportedAt: options?.clientReportedAt ?? null },
+      });
       if (error) {
+        if (error.name === "FunctionsFetchError") return { success: false, message: null, data: null, networkError: true };
         const errorBody = await error.context?.json?.().catch(() => null);
         return createError(errorBody?.error?.message ?? error.message ?? "Unable to end this break.");
       }
@@ -401,12 +412,14 @@ class AttendanceRepository {
     longitude: number | null,
     accuracyMeters: number | null,
     manualLocationLabel?: string | null,
+    options?: OfflineReplayOptions,
   ): Promise<ServiceResult<{ siteChangeId: string; maxDurationExceeded: boolean }>> {
     try {
       const { data, error } = await this.client.functions.invoke("change-site", {
-        body: { breakId, newSiteId, latitude, longitude, accuracyMeters, manualLocationLabel: manualLocationLabel ?? null },
+        body: { breakId, newSiteId, latitude, longitude, accuracyMeters, manualLocationLabel: manualLocationLabel ?? null, idempotencyKey: options?.idempotencyKey ?? null, clientReportedAt: options?.clientReportedAt ?? null },
       });
       if (error) {
+        if (error.name === "FunctionsFetchError") return { success: false, message: null, data: null, networkError: true };
         const errorBody = await error.context?.json?.().catch(() => null);
         return createError(errorBody?.error?.message ?? error.message ?? "Unable to change site.");
       }

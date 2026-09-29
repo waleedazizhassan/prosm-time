@@ -172,7 +172,16 @@
     "summaryEarlyReasonError": "Impossible d'envoyer ce motif.",
     "summaryEarlyReasonSaved": "Motif envoyé à votre responsable.",
     "summaryAllowancesAction": "Compléter les indemnités maintenant",
-    "summaryNotNowAction": "Pas maintenant"
+    "summaryNotNowAction": "Pas maintenant",
+    "pendingCount_one": "1 pointage enregistré sur cet appareil",
+    "pendingCount_other": "{{count}} pointages enregistrés sur cet appareil",
+    "pendingType": {
+      "clock_in": "Arrivée",
+      "clock_out": "Départ",
+      "start_break": "Début de pause",
+      "end_break": "Fin de pause",
+      "change_site": "Changement de site"
+    }
   },
   "kioskPin": {
     "title": "Code PIN kiosque",

@@ -172,7 +172,20 @@
     "summaryEarlyReasonError": "تعذر إرسال هذا السبب.",
     "summaryEarlyReasonSaved": "تم إرسال السبب إلى مديرك.",
     "summaryAllowancesAction": "إتمام البدلات الآن",
-    "summaryNotNowAction": "ليس الآن"
+    "summaryNotNowAction": "ليس الآن",
+    "pendingCount_zero": "لا توجد عمليات حضور محفوظة",
+    "pendingCount_one": "عملية حضور واحدة محفوظة على هذا الجهاز",
+    "pendingCount_two": "عمليتا حضور محفوظتان على هذا الجهاز",
+    "pendingCount_few": "{{count}} عمليات حضور محفوظة على هذا الجهاز",
+    "pendingCount_many": "{{count}} عملية حضور محفوظة على هذا الجهاز",
+    "pendingCount_other": "{{count}} عملية حضور محفوظة على هذا الجهاز",
+    "pendingType": {
+      "clock_in": "تسجيل حضور",
+      "clock_out": "تسجيل انصراف",
+      "start_break": "بدء استراحة",
+      "end_break": "إنهاء استراحة",
+      "change_site": "تغيير الموقع"
+    }
   },
   "kioskPin": {
     "title": "رمز الكشك",

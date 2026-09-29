@@ -153,5 +153,10 @@
     "onlySubmitOwnTimesheet": "Puoi inviare solo il tuo foglio ore.",
     "mustBeClockedInToChangeSite": "Devi aver timbrato l'entrata per cambiare sito.",
     "mustBeClockedInToStartBreak": "Devi aver timbrato l'entrata per iniziare una pausa."
+  },
+  "pageLoad": {
+    "title": "Impossibile aprire questa pagina",
+    "body": "Serve una connessione. Entrate, uscite, pause e cambi sede funzionano offline e vengono inviati al ritorno della connessione.",
+    "retry": "Riprova"
   }
 }

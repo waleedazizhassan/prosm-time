@@ -215,5 +215,13 @@
   "trial": {
     "banner_one": "Demo version: 1 day left (ends {{date}}). Your data is kept afterwards - to continue, buy an activation code:",
     "banner_other": "Demo version: {{count}} days left (ends {{date}}). Your data is kept afterwards - to continue, buy an activation code:"
+  },
+  "offlineSync": {
+    "waiting_one": "1 attendance action is waiting for the connection - it will be sent automatically.",
+    "waiting_other": "{{count}} attendance actions are waiting for the connection - they will be sent automatically.",
+    "syncing_one": "Sending 1 attendance action…",
+    "syncing_other": "Sending {{count}} attendance actions…",
+    "failed_one": "An attendance action could not be sent - open the dashboard to retry or discard it.",
+    "failed_other": "An attendance action could not be sent - open the dashboard to retry or discard it ({{count}} waiting)."
   }
 }

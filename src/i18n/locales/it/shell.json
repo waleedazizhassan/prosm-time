@@ -215,5 +215,13 @@
   "trial": {
     "banner_one": "Versione di prova: 1 giorno rimasto (termina il {{date}}). I tuoi dati restano conservati - per continuare, acquista un codice di attivazione:",
     "banner_other": "Versione di prova: {{count}} giorni rimasti (termina il {{date}}). I tuoi dati restano conservati - per continuare, acquista un codice di attivazione:"
+  },
+  "offlineSync": {
+    "waiting_one": "1 timbratura attende la connessione - verrà inviata automaticamente.",
+    "waiting_other": "{{count}} timbrature attendono la connessione - verranno inviate automaticamente.",
+    "syncing_one": "Invio di 1 timbratura…",
+    "syncing_other": "Invio di {{count}} timbrature…",
+    "failed_one": "Una timbratura non è stata inviata - apri la dashboard per riprovare o scartarla.",
+    "failed_other": "Una timbratura non è stata inviata - apri la dashboard per riprovare o scartarla ({{count}} in attesa)."
   }
 }

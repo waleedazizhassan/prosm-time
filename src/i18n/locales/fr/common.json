@@ -153,5 +153,10 @@
     "onlySubmitOwnTimesheet": "Vous ne pouvez soumettre que votre propre feuille de temps.",
     "mustBeClockedInToChangeSite": "Vous devez avoir pointé votre arrivée pour changer de site.",
     "mustBeClockedInToStartBreak": "Vous devez avoir pointé votre arrivée pour commencer une pause."
+  },
+  "pageLoad": {
+    "title": "Cette page n’a pas pu être ouverte",
+    "body": "Elle nécessite une connexion. Les pointages, pauses et changements de site fonctionnent hors ligne et sont envoyés au retour de la connexion.",
+    "retry": "Réessayer"
   }
 }

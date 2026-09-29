@@ -34,7 +34,8 @@ serve(async (request: Request) => {
     if (!authUser) return errorResponse("Invalid or expired session.", 401, "UNAUTHORIZED");
 
     const payload = await request.json().catch(() => ({}));
-    const { breakId, newSiteId, latitude, longitude, accuracyMeters, manualLocationLabel } = payload;
+    // idempotencyKey/clientReportedAt: an offline-captured move is sent later, once, with its real time.
+    const { breakId, newSiteId, latitude, longitude, accuracyMeters, manualLocationLabel, idempotencyKey, clientReportedAt } = payload;
     if (breakId !== null && breakId !== undefined && typeof breakId !== "string") return errorResponse("breakId must be a string or null.", 400, "INVALID_REQUEST");
     if (newSiteId !== null && newSiteId !== undefined && typeof newSiteId !== "string") return errorResponse("newSiteId must be a string or null.", 400, "INVALID_REQUEST");
 
@@ -45,6 +46,8 @@ serve(async (request: Request) => {
       p_longitude: longitude ?? null,
       p_accuracy_meters: accuracyMeters ?? null,
       p_manual_location_label: manualLocationLabel ?? null,
+      p_idempotency_key: idempotencyKey ?? null,
+      p_client_reported_at: clientReportedAt ?? null,
     });
 
     if (error || !data?.success) return errorResponse(error?.message ?? "Unable to change site.", 400, "CHANGE_SITE_FAILED");

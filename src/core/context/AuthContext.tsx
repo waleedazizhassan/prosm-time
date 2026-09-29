@@ -101,7 +101,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (result === "timeout") return;
 
     const [profileResult, permissionsResult] = result;
-    const nextProfile = profileResult.success ? profileResult.data : null;
+    // Server not reachable although the device reports a connection (weak signal, Wi-Fi without
+    // internet): keep the cached profile - replacing it with nothing blanked the attendance screen
+    // a worker needs offline (2026-09-29). Only a real answer from the server changes it.
+    if (!profileResult.success) return;
+    const nextProfile = profileResult.data;
     const nextPermissions = permissionsResult.success ? permissionsResult.data ?? [] : [];
     setProfile(nextProfile);
     setPermissions(nextPermissions);

@@ -172,7 +172,16 @@
     "summaryEarlyReasonError": "Dieser Grund konnte nicht gesendet werden.",
     "summaryEarlyReasonSaved": "Grund an deinen Manager gesendet.",
     "summaryAllowancesAction": "Zulagen jetzt abschließen",
-    "summaryNotNowAction": "Nicht jetzt"
+    "summaryNotNowAction": "Nicht jetzt",
+    "pendingCount_one": "1 Zeiterfassung auf diesem Gerät gespeichert",
+    "pendingCount_other": "{{count}} Zeiterfassungen auf diesem Gerät gespeichert",
+    "pendingType": {
+      "clock_in": "Einstempeln",
+      "clock_out": "Ausstempeln",
+      "start_break": "Pausenbeginn",
+      "end_break": "Pausenende",
+      "change_site": "Standortwechsel"
+    }
   },
   "kioskPin": {
     "title": "Kiosk-PIN",

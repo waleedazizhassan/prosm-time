@@ -153,5 +153,10 @@
     "onlySubmitOwnTimesheet": "Sie können nur Ihre eigene Zeiterfassung einreichen.",
     "mustBeClockedInToChangeSite": "Sie müssen eingestempelt sein, um den Standort zu wechseln.",
     "mustBeClockedInToStartBreak": "Sie müssen eingestempelt sein, um eine Pause zu beginnen."
+  },
+  "pageLoad": {
+    "title": "Diese Seite konnte nicht geöffnet werden",
+    "body": "Sie benötigt eine Verbindung. Ein- und Ausstempeln, Pausen und Standortwechsel funktionieren offline und werden gesendet, sobald die Verbindung zurück ist.",
+    "retry": "Erneut versuchen"
   }
 }

@@ -172,7 +172,16 @@
     "summaryEarlyReasonError": "Unable to submit this reason.",
     "summaryEarlyReasonSaved": "Reason sent to your manager.",
     "summaryAllowancesAction": "Complete Allowances Now",
-    "summaryNotNowAction": "Not now"
+    "summaryNotNowAction": "Not now",
+    "pendingCount_one": "1 attendance action saved on this device",
+    "pendingCount_other": "{{count}} attendance actions saved on this device",
+    "pendingType": {
+      "clock_in": "Clock in",
+      "clock_out": "Clock out",
+      "start_break": "Break start",
+      "end_break": "Break end",
+      "change_site": "Site change"
+    }
   },
   "kioskPin": {
     "title": "Kiosk PIN",
