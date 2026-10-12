@@ -20,6 +20,7 @@ import Button from "../../components/common/Button";
 import attendanceHeaderImage from "../../assets/illustration-attendance-header.webp";
 import { formatTimeOnly } from "../../core/utils/formatDate";
 import { buildAttendanceLogPdf } from "./attendanceLogPdf";
+import PageBannerImage from "../../components/common/PageBannerImage";
 
 const ALL_EMPLOYEES = "";
 
@@ -284,11 +285,7 @@ export default function AttendanceLogPage() {
 
   return (
     <PageShell title="">
-      <img
-        src={attendanceHeaderImage}
-        alt=""
-        style={{ display: "block", width: "20cm", height: "3.9cm", maxWidth: "100%", objectFit: "cover", margin: "0 auto var(--space-4)", borderRadius: "var(--radius-md)" }}
-      />
+      <PageBannerImage src={attendanceHeaderImage} />
 
       <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "var(--space-4)" }}>
         <Button onClick={handleExportPdf} loading={exportingPdf} disabled={filteredRows.length === 0}>

@@ -28,6 +28,7 @@ import ListRow from "../../components/common/ListRow";
 import FormGrid from "../../components/common/FormGrid";
 import { formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
 import timesheetsHeaderImage from "../../assets/illustration-timesheets-header.webp";
+import PageBannerImage from "../../components/common/PageBannerImage";
 
 function toDateInput(date: Date): string {
   return date.toISOString().slice(0, 10);
@@ -296,11 +297,7 @@ export default function TimesheetsPage() {
 
   return (
     <PageShell title="">
-      <img
-        src={timesheetsHeaderImage}
-        alt=""
-        style={{ display: "block", width: "20cm", height: "4.9cm", maxWidth: "100%", objectFit: "cover", margin: "0 auto var(--space-4)", borderRadius: "var(--radius-md)" }}
-      />
+      <PageBannerImage src={timesheetsHeaderImage} />
 
       <ErrorText>{error}</ErrorText>
 

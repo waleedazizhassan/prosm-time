@@ -29,6 +29,7 @@ import { Download } from "lucide-react";
 import reportsHeaderImage from "../../assets/illustration-reports-header.webp";
 import { REPORT_TYPE_ICONS } from "./reportTypeIcons";
 import styles from "./ReportsPage.module.css";
+import PageBannerImage from "../../components/common/PageBannerImage";
 
 const ALL_EMPLOYEES = "";
 const ALL_SITES = "";
@@ -430,11 +431,7 @@ export default function ReportsPage() {
 
   return (
     <PageShell title="">
-      <img
-        src={reportsHeaderImage}
-        alt=""
-        style={{ display: "block", width: "20cm", height: "3.3cm", maxWidth: "100%", objectFit: "cover", margin: "0 auto var(--space-4)", borderRadius: "var(--radius-md)" }}
-      />
+      <PageBannerImage src={reportsHeaderImage} />
 
       <Card>
         <div className={styles.typeGrid}>

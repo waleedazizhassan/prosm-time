@@ -19,6 +19,7 @@ import Button from "../../components/common/Button";
 import Textarea from "../../components/common/Textarea";
 import ErrorText from "../../components/common/ErrorText";
 import emergencyHeaderImage from "../../assets/illustration-emergency-header.webp";
+import PageBannerImage from "../../components/common/PageBannerImage";
 
 const ALL_EMPLOYEES = "";
 
@@ -179,11 +180,7 @@ export default function EmergencyLogPage() {
 
   return (
     <PageShell title="">
-      <img
-        src={emergencyHeaderImage}
-        alt=""
-        style={{ display: "block", width: "20cm", height: "4.9cm", maxWidth: "100%", objectFit: "cover", margin: "0 auto var(--space-4)", borderRadius: "var(--radius-md)" }}
-      />
+      <PageBannerImage src={emergencyHeaderImage} />
 
       <Card title={t("filters.title")}>
         <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>

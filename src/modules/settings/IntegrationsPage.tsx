@@ -5,6 +5,7 @@ import { useAuth } from "../../core/context/AuthContext";
 import PageShell from "../../components/common/PageShell";
 import IntegrationsSettingsCard from "./IntegrationsSettingsCard";
 import integrationsHeaderImage from "../../assets/illustration-integrations-header.webp";
+import PageBannerImage from "../../components/common/PageBannerImage";
 
 // PROSM Time - § user-directed 2026-09-09: API keys deserve their own
 // sidebar entry ("خانة لوحدها") instead of living inside the general
@@ -19,11 +20,7 @@ export default function IntegrationsPage() {
 
   return (
     <PageShell title="">
-      <img
-        src={integrationsHeaderImage}
-        alt=""
-        style={{ display: "block", width: "20cm", height: "4.5cm", maxWidth: "100%", objectFit: "cover", margin: "0 auto var(--space-4)", borderRadius: "var(--radius-md)" }}
-      />
+      <PageBannerImage src={integrationsHeaderImage} />
 
       <IntegrationsSettingsCard />
     </PageShell>

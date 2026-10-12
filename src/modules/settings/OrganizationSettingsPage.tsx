@@ -7,6 +7,7 @@ import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
 import settingsHeaderImage from "../../assets/illustration-settings-header.webp";
 import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
+import PageBannerImage from "../../components/common/PageBannerImage";
 // PayrollIntegrationCard intentionally not rendered below - § user-
 // directed, 2026-09-13: "hide it, not delete it, until we know how
 // we'll actually use it." Component and its own QuickBooks RPCs are
@@ -32,11 +33,7 @@ export default function OrganizationSettingsPage() {
 
   return (
     <PageShell title="">
-      <img
-        src={settingsHeaderImage}
-        alt=""
-        style={{ display: "block", width: "20cm", height: "4.5cm", maxWidth: "100%", objectFit: "cover", margin: "0 auto var(--space-4)", borderRadius: "var(--radius-md)" }}
-      />
+      <PageBannerImage src={settingsHeaderImage} />
 
       <NoSiteRadiusSettingsCard />
       <SiteDefaultsSettingsCard />

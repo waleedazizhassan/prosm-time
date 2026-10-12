@@ -1,0 +1,19 @@
+/* Page illustration banner (owner 2026-10-13: "the cards with the page
+   names should be a bit smaller so they show in full"). The images are
+   3:1 - shown whole (height follows the width, never cropped) and
+   capped smaller than before on every screen width. */
+.banner {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  aspect-ratio: 3 / 1;
+  object-fit: contain;
+  margin: 0 auto var(--space-3);
+}
+
+@media (max-width: 640px) {
+  .banner {
+    max-width: 82%;
+  }
+}

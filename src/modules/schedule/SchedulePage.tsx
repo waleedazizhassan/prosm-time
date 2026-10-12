@@ -18,6 +18,7 @@ import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
 import shiftsHeaderImage from "../../assets/illustration-shifts-header.webp";
+import PageBannerImage from "../../components/common/PageBannerImage";
 
 function isoDate(date: Date): string {
   return date.toISOString().slice(0, 10);
@@ -191,11 +192,7 @@ export default function SchedulePage() {
 
   return (
     <PageShell title="">
-      <img
-        src={shiftsHeaderImage}
-        alt=""
-        style={{ display: "block", width: "20cm", height: "3.9cm", maxWidth: "100%", objectFit: "cover", margin: "0 auto var(--space-4)", borderRadius: "var(--radius-md)" }}
-      />
+      <PageBannerImage src={shiftsHeaderImage} />
 
       <Card title={t("myShiftsTitle")}>
         <ErrorText>{loadError}</ErrorText>

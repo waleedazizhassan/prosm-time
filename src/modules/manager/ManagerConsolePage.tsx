@@ -22,6 +22,7 @@ import ListRow from "../../components/common/ListRow";
 import { formatTimeOnly, formatDateOnly } from "../../core/utils/formatDate";
 import allCaughtUpIllustration from "../../assets/illustration-all-caught-up.webp";
 import managerConsoleHeaderImage from "../../assets/illustration-manager-console-header.webp";
+import PageBannerImage from "../../components/common/PageBannerImage";
 
 const REVIEW_ACTIONS = ["approved", "rejected", "acknowledged", "clarification_requested"] as const;
 
@@ -261,11 +262,7 @@ export default function ManagerConsolePage() {
 
   return (
     <PageShell title="">
-      <img
-        src={managerConsoleHeaderImage}
-        alt=""
-        style={{ display: "block", width: "20cm", height: "3.9cm", maxWidth: "100%", objectFit: "cover", margin: "0 auto var(--space-4)", borderRadius: "var(--radius-md)" }}
-      />
+      <PageBannerImage src={managerConsoleHeaderImage} />
 
       <p style={{ fontSize: "var(--font-sm)" }}>
         <Link to="/people" style={{ color: "var(--text-link)" }}>

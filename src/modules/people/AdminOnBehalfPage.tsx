@@ -10,6 +10,7 @@ import Card from "../../components/common/Card";
 import Select from "../../components/common/Select";
 import AdminAttendanceCard from "./AdminAttendanceCard";
 import onBehalfHeaderImage from "../../assets/illustration-onbehalf-header.webp";
+import PageBannerImage from "../../components/common/PageBannerImage";
 
 // PROSM Time - § user-directed follow-up: Administrative Clock In/Out
 // (On Behalf Of) already existed as a real, working card
@@ -44,11 +45,7 @@ export default function AdminOnBehalfPage() {
 
   return (
     <PageShell title="">
-      <img
-        src={onBehalfHeaderImage}
-        alt=""
-        style={{ display: "block", width: "20cm", height: "3.9cm", maxWidth: "100%", objectFit: "cover", margin: "0 auto var(--space-4)", borderRadius: "var(--radius-md)" }}
-      />
+      <PageBannerImage src={onBehalfHeaderImage} />
 
       <Card title={t("onBehalf.pickEmployeeTitle")}>
         <Select

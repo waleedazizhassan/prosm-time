@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
 import helpHeaderImage from "../../assets/illustration-help-header.webp";
+import PageBannerImage from "../../components/common/PageBannerImage";
 
 // PROSM Time WP-21/§32 - "A dedicated Help area must exist, providing:
 // product help, basic usage guidance, FAQ where implemented, support
@@ -47,11 +48,7 @@ export default function HelpPage() {
 
   return (
     <PageShell title="">
-      <img
-        src={helpHeaderImage}
-        alt=""
-        style={{ display: "block", width: "20cm", height: "4.5cm", maxWidth: "100%", objectFit: "cover", margin: "0 auto var(--space-4)", borderRadius: "var(--radius-md)" }}
-      />
+      <PageBannerImage src={helpHeaderImage} />
 
       {guideSections.map((section) => (
         <Card key={section} title={t(`guides.${section}.title`)}>

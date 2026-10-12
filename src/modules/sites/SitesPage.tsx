@@ -14,6 +14,7 @@ import Table, { type TableColumn } from "../../components/common/Table";
 import SiteFormModal from "./SiteFormModal";
 import ErrorText from "../../components/common/ErrorText";
 import sitesHeaderImage from "../../assets/illustration-sites-header.webp";
+import PageBannerImage from "../../components/common/PageBannerImage";
 
 // § live UX review, user-directed - "give it a real proper home, but
 // keep it reachable from here too." The editable form itself now
@@ -90,11 +91,7 @@ export default function SitesPage() {
 
   return (
     <PageShell title="">
-      <img
-        src={sitesHeaderImage}
-        alt=""
-        style={{ display: "block", width: "20cm", height: "3.9cm", maxWidth: "100%", objectFit: "cover", margin: "0 auto var(--space-4)", borderRadius: "var(--radius-md)" }}
-      />
+      <PageBannerImage src={sitesHeaderImage} />
 
       {profile?.isOwner ? (
         <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "var(--space-4)" }}>

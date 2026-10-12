@@ -13,6 +13,7 @@ import Table, { type TableColumn } from "../../components/common/Table";
 import InviteEmployeeModal from "./InviteEmployeeModal";
 import ErrorText from "../../components/common/ErrorText";
 import peopleHeaderImage from "../../assets/illustration-people-header.webp";
+import PageBannerImage from "../../components/common/PageBannerImage";
 
 // PROSM Time Implementation Master File V3.0, WP-04/§37 - "Employee
 // Management." Real org-member list (RLS-scoped) with an Invite action
@@ -78,11 +79,7 @@ export default function PeoplePage() {
 
   return (
     <PageShell title="">
-      <img
-        src={peopleHeaderImage}
-        alt=""
-        style={{ display: "block", width: "20cm", height: "3.7cm", maxWidth: "100%", objectFit: "cover", margin: "0 auto var(--space-4)", borderRadius: "var(--radius-md)" }}
-      />
+      <PageBannerImage src={peopleHeaderImage} />
 
       {hasPermission("employees.create") ? (
         <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "var(--space-4)" }}>
