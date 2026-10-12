@@ -35,3 +35,5 @@ android/keystore.properties
 
 # Gradle/Kotlin build cache - regenerated every build, machine-local.
 android/.kotlin/
+
+.scratch/
