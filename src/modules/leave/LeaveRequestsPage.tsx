@@ -65,11 +65,13 @@ export default function LeaveRequestsPage() {
   // of being blocked from this page entirely - see this page's own
   // request/table logic below for the other half (self-request auto-
   // approves, handled server-side in request_prosm_time_leave).
+  const profileId = profile?.id;
   const load = useCallback(async () => {
+    if (!profileId) return;
     setLoading(true);
     setLoadError("");
     const [requestsResult, balanceResult] = await Promise.all([
-      isOwner ? LeaveRepository.listAll() : LeaveRepository.listMine(),
+      isOwner ? LeaveRepository.listAll() : LeaveRepository.listMine(profileId),
       LeaveRepository.getBalance(),
     ]);
     if (!requestsResult.success) {
@@ -84,7 +86,7 @@ export default function LeaveRequestsPage() {
       setBalanceYear(balanceResult.data.year);
     }
     setLoading(false);
-  }, [t, isOwner]);
+  }, [t, isOwner, profileId]);
 
   useEffect(() => {
     load();

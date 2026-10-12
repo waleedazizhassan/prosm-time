@@ -116,11 +116,14 @@ class LeaveRepository {
     return DatabaseManager.getClient();
   }
 
-  async listMine(): Promise<ServiceResult<LeaveRequestRow[]>> {
+  // Own requests only (audit 1.2) - RLS also shows a manager the
+  // requests of the employees at their sites.
+  async listMine(userId: string): Promise<ServiceResult<LeaveRequestRow[]>> {
     try {
       const { data, error } = await this.client
         .from("leave_requests")
         .select("id, leave_type, start_date, end_date, days_count, reason, status, reviewed_at, review_notes, created_at")
+        .eq("user_id", userId)
         .order("created_at", { ascending: false });
       if (error) return createError(error.message);
       return createSuccess((data ?? []).map(mapRow));

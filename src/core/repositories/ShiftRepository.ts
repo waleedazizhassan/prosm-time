@@ -143,11 +143,15 @@ class ShiftRepository {
     }
   }
 
-  async listMine(): Promise<ServiceResult<MyShiftRow[]>> {
+  // Audit 1.2 - "My upcoming shifts" must filter on the caller's own
+  // user id: RLS also lets an Owner / schedules.manage holder read
+  // everyone's shifts in the organisation, which are not "mine".
+  async listMine(userId: string): Promise<ServiceResult<MyShiftRow[]>> {
     try {
       const { data, error } = await this.client
         .from("shift_assignments")
         .select("id, shift_date, start_time, end_time, status, notes, cancelled_reason, sites(name)")
+        .eq("user_id", userId)
         .order("shift_date", { ascending: true });
       if (error) return createError(error.message);
       return createSuccess((data ?? []).map(mapMyShiftRow));

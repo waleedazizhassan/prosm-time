@@ -76,14 +76,16 @@ export default function SchedulePage() {
   const [assignError, setAssignError] = useState("");
   const [cancellingId, setCancellingId] = useState<string | null>(null);
 
+  const profileId = profile?.id;
   const loadMine = useCallback(async () => {
+    if (!profileId) return;
     setLoading(true);
     setLoadError("");
-    const result = await ShiftRepository.listMine();
+    const result = await ShiftRepository.listMine(profileId);
     if (!result.success) setLoadError(humanizeBackendError(result.message, t) ?? t("loadError"));
     else setMyShifts(result.data ?? []);
     setLoading(false);
-  }, [t]);
+  }, [t, profileId]);
 
   useEffect(() => {
     loadMine();
