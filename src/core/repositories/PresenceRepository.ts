@@ -71,10 +71,18 @@ class PresenceRepository {
     }
   }
 
-  async triggerSos(presenceSessionId: string, latitude: number | null, longitude: number | null, accuracyMeters: number | null): Promise<ServiceResult<{ alertId: string }>> {
+  // SOS on every shift (owner 2026-10-13): raised from the clocked-in
+  // shift itself; the presence session id (when monitoring is on) is
+  // sent too so an older trigger-sos-alert deployment still accepts it.
+  async triggerSos(
+    sessions: { attendanceSessionId: string; presenceSessionId: string | null },
+    latitude: number | null,
+    longitude: number | null,
+    accuracyMeters: number | null,
+  ): Promise<ServiceResult<{ alertId: string }>> {
     try {
       const { data, error } = await this.client.functions.invoke("trigger-sos-alert", {
-        body: { presenceSessionId, latitude, longitude, accuracyMeters },
+        body: { attendanceSessionId: sessions.attendanceSessionId, presenceSessionId: sessions.presenceSessionId, latitude, longitude, accuracyMeters },
       });
 
       if (error) {

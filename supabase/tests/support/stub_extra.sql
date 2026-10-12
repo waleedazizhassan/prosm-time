@@ -1,0 +1,15 @@
+create schema if not exists extensions;
+alter default privileges in schema public grant all on tables to anon, authenticated, service_role;
+alter default privileges in schema public grant all on functions to anon, authenticated, service_role;
+alter default privileges in schema public grant all on sequences to anon, authenticated, service_role;
+create schema if not exists cron;
+create table if not exists cron.job(jobid bigserial primary key, jobname text, schedule text, command text, active boolean default true);
+create or replace function cron.schedule(job_name text, schedule text, command text) returns bigint language sql as $$ insert into cron.job(jobname,schedule,command) values (job_name,schedule,command) returning jobid $$;
+create or replace function cron.unschedule(job_name text) returns boolean language sql as $$ delete from cron.job where jobname=job_name returning true $$;
+create schema if not exists net;
+create or replace function net.http_post(url text, body jsonb default '{}'::jsonb, params jsonb default '{}'::jsonb, headers jsonb default '{}'::jsonb, timeout_milliseconds integer default 5000) returns bigint language sql as $$ select 1::bigint $$;
+create schema if not exists vault;
+create table if not exists vault.secrets(id uuid primary key default gen_random_uuid(), name text unique, secret text, description text);
+create or replace view vault.decrypted_secrets as select id,name,secret as decrypted_secret,description from vault.secrets;
+create or replace function vault.create_secret(new_secret text, new_name text default null, new_description text default '') returns uuid language sql as $$ insert into vault.secrets(name,secret,description) values (new_name,new_secret,new_description) returning id $$;
+create or replace function cron.unschedule(job_id bigint) returns boolean language sql as $$ delete from cron.job where jobid=job_id returning true $$;

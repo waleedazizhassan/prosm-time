@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Notfall",
-      "body": "Verfügbar, solange die Anwesenheitsüberwachung für Ihre Schicht aktiv ist. Ein Tastendruck sendet sofort einen Alarm mit hoher Priorität an Ihre Manager mit Ihrem letzten bekannten Standort und wird als echter Notfalldatensatz protokolliert - reserviert für tatsächliche Sicherheitssituationen, kein Allzweck-Button. Unter Android fragt die Anwesenheitsüberwachung beim ersten Mal möglicherweise nach einer Standortberechtigung im Hintergrund - bei Zustimmung wird Ihre Position weiterhin geprüft, auch wenn Sie zu einer anderen App wechseln oder den Bildschirm sperren, jederzeit sichtbar über eine echte, jederzeit abbrechbare Benachrichtigung; eine Ablehnung ist ebenfalls in Ordnung - die Überwachung läuft dann nur weiter, solange PROSM Time selbst geöffnet ist."
+      "body": "Während jeder Schicht verfügbar, solange Sie eingestempelt sind. Ein Tastendruck sendet sofort einen Alarm mit hoher Priorität an Ihre Manager mit Ihrem letzten bekannten Standort und wird als echter Notfalldatensatz protokolliert - reserviert für tatsächliche Sicherheitssituationen, kein Allzweck-Button. Unter Android fragt die Anwesenheitsüberwachung beim ersten Mal möglicherweise nach einer Standortberechtigung im Hintergrund - bei Zustimmung wird Ihre Position weiterhin geprüft, auch wenn Sie zu einer anderen App wechseln oder den Bildschirm sperren, jederzeit sichtbar über eine echte, jederzeit abbrechbare Benachrichtigung; eine Ablehnung ist ebenfalls in Ordnung - die Überwachung läuft dann nur weiter, solange PROSM Time selbst geöffnet ist."
     },
     "notifications": {
       "title": "Wie Benachrichtigungen die richtige Person erreichen",

@@ -166,6 +166,8 @@ interface RawSosAlertRow {
   status: "active" | "resolved";
   resolved_at: string | null;
   resolution_notes: string | null;
+  site_id: string | null;
+  site_name: string | null;
   users: RawUserRefWithEmail | RawUserRefWithEmail[] | null;
   presence_sessions: RawPresenceSiteRef | RawPresenceSiteRef[] | null;
 }
@@ -424,7 +426,10 @@ class ManagerRepository {
           // is ambiguous to PostgREST and fails to load entirely
           // (PGRST201). The !sos_alerts_user_id_fkey hint picks the
           // alerting employee's own relationship explicitly.
-          "id, triggered_at, latitude, longitude, accuracy_meters, status, resolved_at, resolution_notes, users!sos_alerts_user_id_fkey(full_name, email), presence_sessions(site_id, sites(name, display_address))",
+          // site_id/site_name are stored on the alert itself (20261013100000)
+          // so the site always shows, even when the reader can't see the
+          // presence session or the site row.
+          "id, triggered_at, latitude, longitude, accuracy_meters, status, resolved_at, resolution_notes, site_id, site_name, users!sos_alerts_user_id_fkey(full_name, email), presence_sessions(site_id, sites(name, display_address))",
         )
         .gte("triggered_at", from)
         .lte("triggered_at", to)
@@ -440,8 +445,8 @@ class ManagerRepository {
           id: row.id,
           userFullName: user?.full_name ?? "",
           userEmail: user?.email ?? "",
-          siteId: presenceSession?.site_id ?? null,
-          siteName: site?.name ?? "",
+          siteId: row.site_id ?? presenceSession?.site_id ?? null,
+          siteName: row.site_name ?? site?.name ?? "",
           siteDisplayAddress: site?.display_address ?? null,
           triggeredAt: row.triggered_at,
           latitude: row.latitude,

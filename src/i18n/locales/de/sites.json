@@ -71,7 +71,7 @@
     "attendanceAllowedLabel": "Anwesenheit erlaubt",
     "geofenceRequiredLabel": "Geofence erforderlich",
     "presenceMonitoringEnabledLabel": "Laufende Anwesenheitsüberwachung",
-    "presenceMonitoringEnabledHint": "Überprüft den Standort während einer Schicht an diesem Standort regelmäßig erneut, aktiviert die SOS-Taste und meldet, wenn jemand nach dem Einstempeln den Bereich verlässt. Standardmäßig deaktiviert.",
+    "presenceMonitoringEnabledHint": "Überprüft den Standort während einer Schicht an diesem Standort regelmäßig erneut und meldet, wenn jemand nach dem Einstempeln den Bereich verlässt. Standardmäßig deaktiviert.",
     "cameraRequiredLabel": "Kamera erforderlich",
     "activeLabel": "Standort aktiv",
     "sitePolicyMovedHint": "GPS-Genauigkeitstoleranz, Kulanzzeit, Schichtrichtlinie und befreite Mitarbeiter werden in den Einstellungen verwaltet.",

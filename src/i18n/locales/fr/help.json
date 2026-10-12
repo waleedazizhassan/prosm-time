@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Urgence",
-      "body": "Disponible tant que le suivi de présence est actif pour votre poste. Appuyer dessus envoie immédiatement une alerte haute priorité à vos responsables avec votre dernière position connue, et est enregistré comme un véritable incident d'urgence - réservé aux situations de sécurité réelles, pas un bouton polyvalent. Sur Android, le suivi de présence peut demander une autorisation de localisation en arrière-plan la première fois - l'accepter permet de continuer à vérifier votre position même si vous passez à une autre application ou verrouillez votre écran, toujours visible via une notification réelle et annulable à tout moment ; refuser est également possible - le suivi continue alors uniquement tant que PROSM Time est ouvert."
+      "body": "Disponible pendant chaque poste, tant que vous avez pointé. Appuyer dessus envoie immédiatement une alerte haute priorité à vos responsables avec votre dernière position connue, et est enregistré comme un véritable incident d'urgence - réservé aux situations de sécurité réelles, pas un bouton polyvalent. Sur Android, le suivi de présence peut demander une autorisation de localisation en arrière-plan la première fois - l'accepter permet de continuer à vérifier votre position même si vous passez à une autre application ou verrouillez votre écran, toujours visible via une notification réelle et annulable à tout moment ; refuser est également possible - le suivi continue alors uniquement tant que PROSM Time est ouvert."
     },
     "notifications": {
       "title": "Comment les notifications atteignent la bonne personne",

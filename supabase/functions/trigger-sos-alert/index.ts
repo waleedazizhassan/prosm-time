@@ -46,18 +46,26 @@ serve(async (request: Request) => {
     }
 
     const payload = await request.json().catch(() => ({}));
-    const { presenceSessionId, latitude, longitude, accuracyMeters } = payload;
-
-    if (!presenceSessionId || typeof presenceSessionId !== "string") {
-      return errorResponse("presenceSessionId is required.", 400, "INVALID_REQUEST");
-    }
-
-    const { data, error } = await callerClient.rpc("trigger_prosm_time_sos_alert", {
-      p_presence_session_id: presenceSessionId,
+    const { presenceSessionId, attendanceSessionId, latitude, longitude, accuracyMeters } = payload;
+    const location = {
       p_latitude: typeof latitude === "number" ? latitude : null,
       p_longitude: typeof longitude === "number" ? longitude : null,
       p_accuracy_meters: typeof accuracyMeters === "number" ? accuracyMeters : null,
-    });
+    };
+
+    // SOS on every shift (owner 2026-10-13): the app sends the shift
+    // (attendanceSessionId); presenceSessionId stays accepted for
+    // installed apps that still send it.
+    let rpcCall;
+    if (typeof attendanceSessionId === "string" && attendanceSessionId) {
+      rpcCall = callerClient.rpc("trigger_prosm_time_shift_sos_alert", { p_attendance_session_id: attendanceSessionId, ...location });
+    } else if (typeof presenceSessionId === "string" && presenceSessionId) {
+      rpcCall = callerClient.rpc("trigger_prosm_time_sos_alert", { p_presence_session_id: presenceSessionId, ...location });
+    } else {
+      return errorResponse("attendanceSessionId or presenceSessionId is required.", 400, "INVALID_REQUEST");
+    }
+
+    const { data, error } = await rpcCall;
 
     if (error || !data?.success) {
       return errorResponse(error?.message ?? "Unable to trigger an SOS alert.", 400, "SOS_TRIGGER_FAILED");

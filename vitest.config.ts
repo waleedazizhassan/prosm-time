@@ -10,6 +10,8 @@ export default mergeConfig(
       globals: true,
       setupFiles: ["./src/testSetup.ts"],
       css: false,
+      // Database suites run separately: npm run test:db
+      exclude: ["**/node_modules/**", "supabase/**"],
     },
   })
 );

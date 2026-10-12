@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Emergency",
-      "body": "Available while presence monitoring is active for your shift. Pressing it immediately sends a high-priority alert to your managers with your last known location, and is logged as a real emergency record - reserved for genuine safety situations, not a general-purpose button. On Android, presence monitoring may ask for a background location permission the first time - accepting keeps checking your position even if you switch to another app or lock your screen, shown as a real, always-cancellable notification the whole time; declining is fine too, monitoring simply continues only while PROSM Time itself is open."
+      "body": "Available during every shift while you're clocked in. Pressing it immediately sends a high-priority alert to your managers with your last known location, and is logged as a real emergency record - reserved for genuine safety situations, not a general-purpose button. On Android, presence monitoring may ask for a background location permission the first time - accepting keeps checking your position even if you switch to another app or lock your screen, shown as a real, always-cancellable notification the whole time; declining is fine too, monitoring simply continues only while PROSM Time itself is open."
     },
     "notifications": {
       "title": "How Notifications Reach the Right Person",

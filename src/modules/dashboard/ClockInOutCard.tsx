@@ -778,7 +778,7 @@ export default function ClockInOutCard() {
   };
 
   const handleSos = async () => {
-    if (!presenceSession) return;
+    if (!session) return;
     setSosSubmitting(true);
     setError("");
 
@@ -795,7 +795,7 @@ export default function ClockInOutCard() {
       // first, geolocation is still best-effort.
     }
 
-    const result = await PresenceRepository.triggerSos(presenceSession.id, latitude, longitude, accuracyMeters);
+    const result = await PresenceRepository.triggerSos({ attendanceSessionId: session.id, presenceSessionId: presenceSession?.id ?? null }, latitude, longitude, accuracyMeters);
 
     setSosSubmitting(false);
 
@@ -1079,9 +1079,12 @@ export default function ClockInOutCard() {
             </Button>
           </div>
 
-          {presenceSession ? (
+          {/* SOS on every shift (owner 2026-10-13) - no longer tied to
+              presence monitoring; needs the shift the server confirmed
+              (a clock-in still waiting in the offline queue has none). */}
+          {session ? (
             <div style={{ marginTop: "var(--space-4)", paddingTop: "var(--space-4)", borderTop: "1px solid var(--border-light)" }}>
-              <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)" }}>{t("attendance.presenceActive")}</p>
+              {presenceSession ? <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)" }}>{t("attendance.presenceActive")}</p> : null}
               {sosSent ? (
                 <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("attendance.sosSent")}</p>
               ) : (

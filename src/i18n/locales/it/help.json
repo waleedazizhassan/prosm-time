@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Emergenza",
-      "body": "Disponibile finché il monitoraggio della presenza è attivo per il tuo turno. Premerlo invia immediatamente un avviso ad alta priorità ai tuoi responsabili con la tua ultima posizione nota, e viene registrato come un vero evento di emergenza - riservato a situazioni di sicurezza reali, non un pulsante generico. Su Android, il monitoraggio della presenza potrebbe chiedere un'autorizzazione per la posizione in background la prima volta - accettando, la tua posizione continua a essere controllata anche se passi a un'altra app o blocchi lo schermo, sempre visibile tramite una notifica reale e annullabile in qualsiasi momento; anche rifiutare va bene - il monitoraggio continua solo mentre PROSM Time stesso è aperto."
+      "body": "Disponibile durante ogni turno, finché hai timbrato l'entrata. Premerlo invia immediatamente un avviso ad alta priorità ai tuoi responsabili con la tua ultima posizione nota, e viene registrato come un vero evento di emergenza - riservato a situazioni di sicurezza reali, non un pulsante generico. Su Android, il monitoraggio della presenza potrebbe chiedere un'autorizzazione per la posizione in background la prima volta - accettando, la tua posizione continua a essere controllata anche se passi a un'altra app o blocchi lo schermo, sempre visibile tramite una notifica reale e annullabile in qualsiasi momento; anche rifiutare va bene - il monitoraggio continua solo mentre PROSM Time stesso è aperto."
     },
     "notifications": {
       "title": "Come le notifiche raggiungono la persona giusta",

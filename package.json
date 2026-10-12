@@ -17,7 +17,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "electron:start": "electron .",
-    "electron:build": "npm run build && electron-builder --win"
+    "electron:build": "npm run build && electron-builder --win",
+    "test:db": "vitest run --config vitest.db.config.ts"
   },
   "dependencies": {
     "@anuradev/capacitor-background-mode": "^8.1.0",
@@ -43,6 +44,7 @@
   "devDependencies": {
     "@capacitor/assets": "^3.0.5",
     "@capacitor/cli": "^8.5.1",
+    "@electric-sql/pglite": "^0.5.9",
     "@eslint/js": "^9.34.0",
     "@testing-library/jest-dom": "^7.0.0",
     "@testing-library/react": "^16.3.2",
