@@ -27,5 +27,14 @@
     "empty": "Aucun site n'a encore le mode kiosque activé - un responsable de site peut l'activer depuis les paramètres de ce site.",
     "openAction": "Ouvrir le kiosque",
     "explainer": "Le mode kiosque transforme n'importe quel appareil partagé (une tablette à l'entrée, un ordinateur à l'accueil) en écran de pointage commun : chacun sélectionne son propre nom dans la liste et saisit son propre code PIN kiosque pour pointer son arrivée ou son départ - sans connexion nécessaire sur l'appareil partagé lui-même. Votre code PIN kiosque est distinct du mot de passe de votre compte. Définissez ou modifiez votre propre code PIN depuis votre tableau de bord ; un administrateur ou un responsable peut aussi le définir pour vous depuis votre fiche dans Personnes."
+  },
+  "exit": {
+    "action": "Quitter le kiosque",
+    "title": "Quitter le mode kiosque",
+    "prompt": "Saisissez le mot de passe du compte qui a ouvert ce kiosque ({{email}}) pour quitter le mode kiosque.",
+    "passwordLabel": "Mot de passe",
+    "confirm": "Quitter le kiosque",
+    "wrongPassword": "Mot de passe incorrect.",
+    "error": "Impossible de vérifier le mot de passe. Vérifiez la connexion et réessayez."
   }
 }

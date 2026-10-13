@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { App as CapacitorApp } from "@capacitor/app";
 import { Capacitor } from "@capacitor/core";
 
+import { getLockedKioskSite } from "../../modules/kiosk/kioskLock";
+
 // PROSM Time - § live UX review, user-directed: "the phone's back
 // button exits the app instead of navigating between pages." Capacitor's
 // default Android behavior calls exitApp() the instant the WebView has
@@ -18,6 +20,9 @@ export default function useAndroidBackButton() {
     if (!Capacitor.isNativePlatform()) return undefined;
 
     const listenerPromise = CapacitorApp.addListener("backButton", ({ canGoBack }) => {
+      // Audit 1.3 - a locked kiosk ignores the hardware back button
+      // (no going back into the app, no closing it).
+      if (getLockedKioskSite()) return;
       if (canGoBack) window.history.back();
       else CapacitorApp.exitApp();
     });

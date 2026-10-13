@@ -17,6 +17,8 @@ import DashboardPage from "../modules/dashboard/DashboardPage";
 import ClockInPage from "../modules/attendance/ClockInPage";
 import KioskPage from "../modules/kiosk/KioskPage";
 import KioskLauncherPage from "../modules/kiosk/KioskLauncherPage";
+import KioskLayout from "../modules/kiosk/KioskLayout";
+import KioskLockGuard from "../modules/kiosk/KioskLockGuard";
 
 // Pages other than sign-in, the dashboard, clock in and the kiosk are fetched when opened;
 // everything a worker needs offline stays in the main file.
@@ -75,6 +77,7 @@ export default function AppRoutes() {
         <UpdateAvailableBanner />
         <PageLoadBoundary>
         <Suspense fallback={null}>
+        <KioskLockGuard>
         <Routes>
           <Route path="/" element={<RootRedirect />} />
           <Route path="/welcome" element={<WelcomePage />} />
@@ -83,6 +86,20 @@ export default function AppRoutes() {
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/accept-invitation" element={<AcceptInvitationPage />} />
+
+          {/* Audit 1.3 - the kiosk runs outside the app shell: no sidebar,
+              search or user menu, and KioskLockGuard keeps the device on it
+              until the exit check passes. */}
+          <Route
+            path="/kiosk/:siteId"
+            element={
+              <ProtectedRoute>
+                <KioskLayout>
+                  <KioskPage />
+                </KioskLayout>
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             element={
@@ -110,12 +127,12 @@ export default function AppRoutes() {
             <Route path="/settings" element={<OrganizationSettingsPage />} />
             <Route path="/integrations" element={<IntegrationsPage />} />
             <Route path="/kiosk" element={<KioskLauncherPage />} />
-            <Route path="/kiosk/:siteId" element={<KioskPage />} />
             <Route path="/help" element={<HelpPage />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
+        </KioskLockGuard>
         </Suspense>
         </PageLoadBoundary>
       </AuthProvider>

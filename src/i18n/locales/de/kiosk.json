@@ -27,5 +27,14 @@
     "empty": "Für noch keinen Standort ist der Kiosk-Modus aktiviert - ein Standortleiter kann ihn in den Einstellungen dieses Standorts aktivieren.",
     "openAction": "Kiosk öffnen",
     "explainer": "Der Kiosk-Modus verwandelt jedes gemeinsam genutzte Gerät (ein Tablet am Eingang, ein Computer am Empfang) in einen gemeinsamen Stempel-Bildschirm: Jede Person wählt ihren eigenen Namen aus der Liste und gibt ihre eigene persönliche Kiosk-PIN ein, um sich ein- oder auszustempeln - ohne Anmeldung auf dem gemeinsam genutzten Gerät selbst. Ihre Kiosk-PIN ist unabhängig von Ihrem Kontopasswort. Legen Sie Ihre eigene PIN über Ihr Dashboard fest oder ändern Sie sie dort; ein Administrator oder Manager kann sie auch für Sie über Ihr Profil unter Personen festlegen."
+  },
+  "exit": {
+    "action": "Kiosk verlassen",
+    "title": "Kioskmodus verlassen",
+    "prompt": "Geben Sie das Passwort des Kontos ein, das diesen Kiosk geöffnet hat ({{email}}), um den Kioskmodus zu verlassen.",
+    "passwordLabel": "Passwort",
+    "confirm": "Kiosk verlassen",
+    "wrongPassword": "Falsches Passwort.",
+    "error": "Das Passwort konnte nicht geprüft werden. Prüfen Sie die Verbindung und versuchen Sie es erneut."
   }
 }
