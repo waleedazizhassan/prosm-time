@@ -101,12 +101,16 @@
       "status": "Vérification",
       "types": {
         "outside_work_area": "Hors zone de travail",
-        "implausible_location": "Position invraisemblable"
+        "implausible_location": "Position invraisemblable",
+        "mock_location": "Position falsifiée (appli GPS)"
       },
       "statuses": {
         "pending_reason": "Motif attendu",
         "pending_review": "Vérification attendue",
-        "resolved": "Vérifié"
+        "resolved": "Vérifié",
+        "approved": "Approuvé",
+        "rejected": "Refusé",
+        "acknowledged": "Pris en compte"
       }
     },
     "sos": {

@@ -121,7 +121,12 @@ export default function ManagerConsolePage() {
           deviceTime: `${formatDateOnly(item.offlineTime.deviceTime, i18n.language)} ${formatTimeOnly(item.offlineTime.deviceTime, i18n.language)}`,
           receivedAt: `${formatDateOnly(item.offlineTime.receivedAt, i18n.language)} ${formatTimeOnly(item.offlineTime.receivedAt, i18n.language)}`,
         })
-      : item.summary;
+      : item.mockLocation
+        ? t("pending.mockLocation.summary", {
+            action: t(`pending.offlineTime.action.${item.mockLocation.eventType}`),
+            time: `${formatDateOnly(item.mockLocation.occurredAt, i18n.language)} ${formatTimeOnly(item.mockLocation.occurredAt, i18n.language)}`,
+          })
+        : item.summary;
 
   const handleReview = async (actionType: (typeof REVIEW_ACTIONS)[number]) => {
     if (!reviewTarget) return;

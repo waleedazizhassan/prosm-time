@@ -51,6 +51,39 @@ class BackgroundLocationService {
     }
   }
 
+  // Audit 2.4 (2026-10-13) - whether the device reports the current
+  // location as simulated (Android mock location; the plugin's own
+  // isFromMockProvider flag). One foreground reading, then the watcher is
+  // removed. null when unknown: not native, no permission, or no reading
+  // within the time limit - never blocks Clock In/Out.
+  async detectSimulated(timeoutMs = 5000): Promise<boolean | null> {
+    if (!this.isSupported()) return null;
+    return new Promise((resolve) => {
+      let watcherId: string | null = null;
+      let settled = false;
+      const finish = (value: boolean | null) => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        if (watcherId) BackgroundGeolocation.removeWatcher({ id: watcherId }).catch(() => undefined);
+        resolve(value);
+      };
+      const timer = setTimeout(() => finish(null), timeoutMs);
+      BackgroundGeolocation.addWatcher({ requestPermissions: false, stale: false }, (location?: BackgroundLocation, error?: Error) => {
+        if (error || !location) {
+          finish(null);
+          return;
+        }
+        finish(Boolean(location.simulated));
+      })
+        .then((id) => {
+          watcherId = id;
+          if (settled) BackgroundGeolocation.removeWatcher({ id }).catch(() => undefined);
+        })
+        .catch(() => finish(null));
+    });
+  }
+
   async stop(): Promise<void> {
     if (!this.watcherId) return;
     const id = this.watcherId;

@@ -89,5 +89,10 @@
     "neverSynced": "noch nie synchronisiert",
     "summary": "Letzter Lauf: {{synced}} synchronisiert, {{skipped}} übersprungen (kein passender Mitarbeiter), {{failed}} fehlgeschlagen.",
     "unmatchedEmails": "Kein Gusto-Mitarbeiter gefunden für: {{emails}}"
+  },
+  "rejectMockLocation": {
+    "label": "Ein-/Ausstempeln von gefälschtem Standort ablehnen",
+    "hint": "Android meldet, wenn ein Standort von einer Mock-Location-App (falsches GPS) stammt. Aus: wird erfasst und den Vorgesetzten zur Prüfung gesendet. An: das Ein- oder Ausstempeln wird abgelehnt.",
+    "genericError": "Diese Einstellung konnte nicht geändert werden."
   }
 }

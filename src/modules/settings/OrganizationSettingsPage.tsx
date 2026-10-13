@@ -4,6 +4,7 @@ import { useAuth } from "../../core/context/AuthContext";
 
 import PageShell from "../../components/common/PageShell";
 import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
+import MockLocationSettingsCard from "./MockLocationSettingsCard";
 import settingsHeaderImage from "../../assets/illustration-settings-header.webp";
 import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
@@ -36,6 +37,7 @@ export default function OrganizationSettingsPage() {
       <PageBannerImage src={settingsHeaderImage} />
 
       <NoSiteRadiusSettingsCard />
+      <MockLocationSettingsCard />
       <SiteDefaultsSettingsCard />
       <SitePolicySettingsCard />
       {/* <PayrollIntegrationCard /> - see the hidden import's own comment above */}

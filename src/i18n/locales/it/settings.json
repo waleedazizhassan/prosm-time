@@ -89,5 +89,10 @@
     "neverSynced": "mai sincronizzato",
     "summary": "Ultima esecuzione: {{synced}} sincronizzati, {{skipped}} saltati (nessun dipendente corrispondente), {{failed}} falliti.",
     "unmatchedEmails": "Nessun dipendente Gusto trovato per: {{emails}}"
+  },
+  "rejectMockLocation": {
+    "label": "Rifiuta timbrature da posizione falsa",
+    "hint": "Android segnala quando una posizione proviene da un'app di posizione fittizia (GPS falso). Disattivato: viene registrata e inviata ai responsabili per la verifica. Attivato: la timbratura viene rifiutata.",
+    "genericError": "Impossibile modificare questa impostazione."
   }
 }

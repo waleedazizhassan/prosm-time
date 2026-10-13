@@ -199,6 +199,7 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "A REAL GPS SAMPLE IS REQUIRED": "realGpsSampleRequired",
   "Too many attempts. Please wait a few minutes and try again.": "tooManyAttempts",
   "YOU CAN ONLY ACT ON BEHALF OF PEOPLE BELOW YOUR ROLE": "onBehalfOnlyBelowRole",
+  "A FAKE LOCATION IS NOT ACCEPTED": "fakeLocationRejected",
   // Offline replays (audit 1.4).
   "OFFLINE TIME IS BEFORE YOUR LAST RECORDED ACTION": "offlineTimeBeforeLastAction",
   "OFFLINE TIME FALLS ON A DAY OF APPROVED LEAVE": "offlineTimeOnLeaveDay",

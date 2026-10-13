@@ -101,12 +101,16 @@
       "status": "المراجعة",
       "types": {
         "outside_work_area": "خارج نطاق العمل",
-        "implausible_location": "موقع غير منطقي"
+        "implausible_location": "موقع غير منطقي",
+        "mock_location": "موقع مزيف (تطبيق GPS)"
       },
       "statuses": {
         "pending_reason": "بانتظار السبب",
         "pending_review": "بانتظار المراجعة",
-        "resolved": "تمت المراجعة"
+        "resolved": "تمت المراجعة",
+        "approved": "مقبول",
+        "rejected": "مرفوض",
+        "acknowledged": "تم الاطلاع"
       }
     },
     "sos": {

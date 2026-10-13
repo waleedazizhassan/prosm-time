@@ -27,7 +27,8 @@
     "kind": {
       "geofence_exception": "استثناء النطاق الجغرافي",
       "correction_request": "طلب تصحيح",
-      "offline_time": "وقت من الجهاز (أوفلاين)"
+      "offline_time": "وقت من الجهاز (أوفلاين)",
+      "mock_location": "موقع مزيف"
     },
     "reviewAction": "مراجعة",
     "notesLabel": "ملاحظات (اختياري)",
@@ -47,6 +48,9 @@
         "break_end": "إنهاء استراحة",
         "site_change": "تغيير الموقع"
       }
+    },
+    "mockLocation": {
+      "summary": "{{action}} في {{time}} من موقع أبلغ الجهاز أنه محاكى (GPS مزيف)."
     }
   },
   "leave": {

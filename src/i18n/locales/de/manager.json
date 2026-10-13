@@ -27,7 +27,8 @@
     "kind": {
       "geofence_exception": "Geofence-Ausnahme",
       "correction_request": "Korrekturantrag",
-      "offline_time": "Offline-Zeit"
+      "offline_time": "Offline-Zeit",
+      "mock_location": "Gefälschter Standort"
     },
     "reviewAction": "Prüfen",
     "notesLabel": "Notizen (optional)",
@@ -47,6 +48,9 @@
         "break_end": "Pausenende",
         "site_change": "Standortwechsel"
       }
+    },
+    "mockLocation": {
+      "summary": "{{action}} um {{time}} von einem Standort, den das Gerät als simuliert gemeldet hat (falsches GPS)."
     }
   },
   "leave": {

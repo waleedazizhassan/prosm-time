@@ -38,6 +38,13 @@ describe("attendance time source", () => {
     }
   });
 
+  it("sends the device's fake-location flag with clock in and out (audit 2.4)", async () => {
+    await AttendanceRepository.clockIn({ siteId: "site-1", isMockLocation: true });
+    await AttendanceRepository.clockOut({ isMockLocation: false });
+    await AttendanceRepository.clockIn({ siteId: "site-1" });
+    expect(invocations.map((call) => call.body.isMockLocation)).toEqual([true, false, null]);
+  });
+
   it("marks an offline-queue send as a replay with the time it happened", async () => {
     const options = { idempotencyKey: "q1", clientReportedAt: "2026-10-13T06:00:00.000Z", offlineReplay: true };
     await AttendanceRepository.clockIn({ siteId: "site-1", ...options });

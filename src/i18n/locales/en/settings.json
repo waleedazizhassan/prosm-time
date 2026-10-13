@@ -89,5 +89,10 @@
     "neverSynced": "never synced yet",
     "summary": "Last run: {{synced}} synced, {{skipped}} skipped (no matching employee), {{failed}} failed.",
     "unmatchedEmails": "No Gusto employee found for: {{emails}}"
+  },
+  "rejectMockLocation": {
+    "label": "Reject clock in/out from a fake location",
+    "hint": "Android reports when a location comes from a mock-location (fake GPS) app. Off: it is recorded and sent to managers for review. On: the clock in or out is refused.",
+    "genericError": "Unable to change this setting."
   }
 }

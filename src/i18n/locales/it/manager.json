@@ -27,7 +27,8 @@
     "kind": {
       "geofence_exception": "Eccezione geofence",
       "correction_request": "Richiesta di correzione",
-      "offline_time": "Ora offline"
+      "offline_time": "Ora offline",
+      "mock_location": "Posizione falsa"
     },
     "reviewAction": "Esamina",
     "notesLabel": "Note (facoltative)",
@@ -47,6 +48,9 @@
         "break_end": "Fine pausa",
         "site_change": "Cambio sede"
       }
+    },
+    "mockLocation": {
+      "summary": "{{action}} alle {{time}} da una posizione che il dispositivo ha segnalato come simulata (GPS falso)."
     }
   },
   "leave": {

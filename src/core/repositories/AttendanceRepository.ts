@@ -65,6 +65,8 @@ export interface ClockInInput {
   idempotencyKey?: string;
   clientReportedAt?: string;
   offlineReplay?: boolean;
+  // Audit 2.4 - the device reported this location as simulated (Android); null when unknown.
+  isMockLocation?: boolean | null;
 }
 
 export interface ClockOutInput {
@@ -76,6 +78,8 @@ export interface ClockOutInput {
   idempotencyKey?: string;
   clientReportedAt?: string;
   offlineReplay?: boolean;
+  // Audit 2.4 - the device reported this location as simulated (Android); null when unknown.
+  isMockLocation?: boolean | null;
 }
 
 export interface AdminClockInInput {
@@ -176,6 +180,7 @@ class AttendanceRepository {
           idempotencyKey: input.idempotencyKey ?? crypto.randomUUID(),
           clientReportedAt: input.clientReportedAt ?? null,
           offlineReplay: input.offlineReplay === true,
+          isMockLocation: input.isMockLocation ?? null,
           latitude: input.latitude ?? null,
           longitude: input.longitude ?? null,
           accuracyMeters: input.accuracyMeters ?? null,
@@ -209,6 +214,7 @@ class AttendanceRepository {
           idempotencyKey: input.idempotencyKey ?? crypto.randomUUID(),
           clientReportedAt: input.clientReportedAt ?? null,
           offlineReplay: input.offlineReplay === true,
+          isMockLocation: input.isMockLocation ?? null,
           latitude: input.latitude ?? null,
           longitude: input.longitude ?? null,
           accuracyMeters: input.accuracyMeters ?? null,

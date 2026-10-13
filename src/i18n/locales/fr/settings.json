@@ -89,5 +89,10 @@
     "neverSynced": "jamais synchronisé",
     "summary": "Dernière exécution : {{synced}} synchronisés, {{skipped}} ignorés (aucun employé correspondant), {{failed}} échoués.",
     "unmatchedEmails": "Aucun employé Gusto trouvé pour : {{emails}}"
+  },
+  "rejectMockLocation": {
+    "label": "Refuser le pointage depuis une position falsifiée",
+    "hint": "Android signale quand une position provient d'une application de position fictive (faux GPS). Désactivé : elle est enregistrée et envoyée aux responsables pour vérification. Activé : le pointage est refusé.",
+    "genericError": "Impossible de modifier ce paramètre."
   }
 }

@@ -8,6 +8,7 @@ import SiteRepository, { type Site } from "../../core/repositories/SiteRepositor
 import ProjectRepository, { type Project } from "../../core/repositories/ProjectRepository";
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import PresenceRepository, { type PresenceSession } from "../../core/repositories/PresenceRepository";
+import BackgroundLocationService from "../../core/services/BackgroundLocationService";
 import { getCurrentPosition, type CurrentPosition } from "../../core/utils/geo";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { reverseGeocodePlaceName } from "../../core/utils/reverseGeocode";
@@ -514,6 +515,8 @@ export default function ClockInOutCard() {
     let latitude: number | null = null;
     let longitude: number | null = null;
     let accuracyMeters: number | null = null;
+    // Audit 2.4 - read with the position: was it simulated (Android)?
+    const mockCheck = BackgroundLocationService.detectSimulated();
     try {
       const position = await getCurrentPosition();
       latitude = position.latitude;
@@ -524,6 +527,7 @@ export default function ClockInOutCard() {
       // location sample rather than blocking the Clock In.
     }
 
+    const isMockLocation = await mockCheck;
     const trimmedManualLabel = siteId ? null : manualLocationLabel.trim() || null;
     const trimmedNote = note.trim() || null;
     const trimmedActivity = activity.trim() || null;
@@ -534,7 +538,7 @@ export default function ClockInOutCard() {
     if (shouldQueue()) {
       await queueOffline(
         "clock_in",
-        { siteId: siteId || null, manualLocationLabel: trimmedManualLabel, note: trimmedNote, activity: trimmedActivity, projectId: projectId || null, latitude, longitude, accuracyMeters },
+        { siteId: siteId || null, manualLocationLabel: trimmedManualLabel, note: trimmedNote, activity: trimmedActivity, projectId: projectId || null, latitude, longitude, accuracyMeters, isMockLocation },
         evidenceFile,
       );
       return;
@@ -549,12 +553,13 @@ export default function ClockInOutCard() {
       latitude,
       longitude,
       accuracyMeters,
+      isMockLocation,
     });
 
     if (result.networkError) {
       await queueOffline(
         "clock_in",
-        { siteId: siteId || null, manualLocationLabel: trimmedManualLabel, note: trimmedNote, activity: trimmedActivity, projectId: projectId || null, latitude, longitude, accuracyMeters },
+        { siteId: siteId || null, manualLocationLabel: trimmedManualLabel, note: trimmedNote, activity: trimmedActivity, projectId: projectId || null, latitude, longitude, accuracyMeters, isMockLocation },
         evidenceFile,
       );
       return;
@@ -607,6 +612,7 @@ export default function ClockInOutCard() {
       latitude: number | null;
       longitude: number | null;
       accuracyMeters: number | null;
+      isMockLocation?: boolean | null;
     },
     evidenceFile: File | null,
   ) => {
@@ -626,6 +632,7 @@ export default function ClockInOutCard() {
         latitude: location.latitude,
         longitude: location.longitude,
         accuracyMeters: location.accuracyMeters,
+        isMockLocation: location.isMockLocation ?? null,
         clientReportedAt: new Date().toISOString(),
         evidenceFile,
         sessionRef: location.sessionRef ?? null,
@@ -649,6 +656,8 @@ export default function ClockInOutCard() {
     let latitude: number | null = null;
     let longitude: number | null = null;
     let accuracyMeters: number | null = null;
+    // Audit 2.4 - read with the position: was it simulated (Android)?
+    const mockCheck = BackgroundLocationService.detectSimulated();
     try {
       const position = await getCurrentPosition();
       latitude = position.latitude;
@@ -658,18 +667,19 @@ export default function ClockInOutCard() {
       // Best-effort only - see performClockIn.
     }
 
+    const isMockLocation = await mockCheck;
     const trimmedNote = note.trim() || null;
     const trimmedActivity = activity.trim() || null;
 
     if (shouldQueue()) {
-      await queueOffline("clock_out", { note: trimmedNote, activity: trimmedActivity, latitude, longitude, accuracyMeters }, evidenceFile);
+      await queueOffline("clock_out", { note: trimmedNote, activity: trimmedActivity, latitude, longitude, accuracyMeters, isMockLocation }, evidenceFile);
       return;
     }
 
-    const result = await AttendanceRepository.clockOut({ note: trimmedNote, activity: trimmedActivity, latitude, longitude, accuracyMeters });
+    const result = await AttendanceRepository.clockOut({ note: trimmedNote, activity: trimmedActivity, latitude, longitude, accuracyMeters, isMockLocation });
 
     if (result.networkError) {
-      await queueOffline("clock_out", { note: trimmedNote, activity: trimmedActivity, latitude, longitude, accuracyMeters }, evidenceFile);
+      await queueOffline("clock_out", { note: trimmedNote, activity: trimmedActivity, latitude, longitude, accuracyMeters, isMockLocation }, evidenceFile);
       return;
     }
 

@@ -18,6 +18,8 @@ export interface OfflineQueueItem {
   latitude: number | null;
   longitude: number | null;
   accuracyMeters: number | null;
+  // Audit 2.4 - the location was simulated (Android mock location); null when unknown.
+  isMockLocation?: boolean | null;
   clientReportedAt: string;
   evidenceFile: File | null;
   /** start_break: the session (a server id, or "q:<id>" of a queued clock in). */
@@ -224,10 +226,10 @@ class OfflineQueueService {
       const options = { idempotencyKey: item.id, clientReportedAt: item.clientReportedAt, offlineReplay: true };
       let result: { success: boolean; message: string | null; networkError?: boolean; data: unknown };
       if (item.type === "clock_in") {
-        result = await AttendanceRepository.clockIn({ siteId: item.siteId, manualLocationLabel: item.manualLocationLabel, note: item.note, activity: item.activity, projectId: item.projectId, latitude: item.latitude, longitude: item.longitude, accuracyMeters: item.accuracyMeters, ...options });
+        result = await AttendanceRepository.clockIn({ siteId: item.siteId, manualLocationLabel: item.manualLocationLabel, note: item.note, activity: item.activity, projectId: item.projectId, latitude: item.latitude, longitude: item.longitude, accuracyMeters: item.accuracyMeters, isMockLocation: item.isMockLocation ?? null, ...options });
         if (result.success && result.data) await setValue(REFS_STORE, item.id, { sessionId: (result.data as { sessionId: string }).sessionId });
       } else if (item.type === "clock_out") {
-        result = await AttendanceRepository.clockOut({ latitude: item.latitude, longitude: item.longitude, accuracyMeters: item.accuracyMeters, note: item.note, activity: item.activity, ...options });
+        result = await AttendanceRepository.clockOut({ latitude: item.latitude, longitude: item.longitude, accuracyMeters: item.accuracyMeters, isMockLocation: item.isMockLocation ?? null, note: item.note, activity: item.activity, ...options });
       } else if (item.type === "start_break") {
         const sessionId = await this.resolve(item.sessionRef, "sessionId");
         if (!sessionId || sessionId === "missing") return fail("The clock in this break belongs to was not sent.");

@@ -101,12 +101,16 @@
       "status": "Review",
       "types": {
         "outside_work_area": "Outside work area",
-        "implausible_location": "Implausible location"
+        "implausible_location": "Implausible location",
+        "mock_location": "Fake location (GPS app)"
       },
       "statuses": {
         "pending_reason": "Waiting for reason",
         "pending_review": "Waiting for review",
-        "resolved": "Reviewed"
+        "resolved": "Reviewed",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "acknowledged": "Acknowledged"
       }
     },
     "sos": {

@@ -101,12 +101,16 @@
       "status": "Prüfung",
       "types": {
         "outside_work_area": "Außerhalb des Arbeitsbereichs",
-        "implausible_location": "Unplausibler Standort"
+        "implausible_location": "Unplausibler Standort",
+        "mock_location": "Gefälschter Standort (GPS-App)"
       },
       "statuses": {
         "pending_reason": "Wartet auf Begründung",
         "pending_review": "Wartet auf Prüfung",
-        "resolved": "Geprüft"
+        "resolved": "Geprüft",
+        "approved": "Genehmigt",
+        "rejected": "Abgelehnt",
+        "acknowledged": "Zur Kenntnis genommen"
       }
     },
     "sos": {

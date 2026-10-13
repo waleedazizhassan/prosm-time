@@ -45,7 +45,7 @@ serve(async (request: Request) => {
     }
 
     const payload = await request.json().catch(() => ({}));
-    const { idempotencyKey, clientReportedAt, offlineReplay, latitude, longitude, accuracyMeters, note, activity } = payload;
+    const { idempotencyKey, clientReportedAt, offlineReplay, isMockLocation, latitude, longitude, accuracyMeters, note, activity } = payload;
 
     if (!idempotencyKey || typeof idempotencyKey !== "string") {
       return errorResponse("idempotencyKey is required.", 400, "INVALID_REQUEST");
@@ -56,6 +56,8 @@ serve(async (request: Request) => {
       p_client_reported_at: clientReportedAt ?? null,
       // Audit 1.4: only the offline queue sends this; a live action is recorded at the server's time.
       p_offline_replay: offlineReplay === true,
+      // Audit 2.4: the device reported the location as simulated (true/false; null = unknown).
+      p_is_mock_location: typeof isMockLocation === "boolean" ? isMockLocation : null,
       p_latitude: typeof latitude === "number" ? latitude : null,
       p_longitude: typeof longitude === "number" ? longitude : null,
       p_accuracy_meters: typeof accuracyMeters === "number" ? accuracyMeters : null,

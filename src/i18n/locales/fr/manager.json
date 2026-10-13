@@ -27,7 +27,8 @@
     "kind": {
       "geofence_exception": "Exception de géorepérage",
       "correction_request": "Demande de correction",
-      "offline_time": "Heure hors ligne"
+      "offline_time": "Heure hors ligne",
+      "mock_location": "Position falsifiée"
     },
     "reviewAction": "Examiner",
     "notesLabel": "Notes (facultatif)",
@@ -47,6 +48,9 @@
         "break_end": "Fin de pause",
         "site_change": "Changement de site"
       }
+    },
+    "mockLocation": {
+      "summary": "{{action}} à {{time}} depuis une position signalée comme simulée par l'appareil (faux GPS)."
     }
   },
   "leave": {

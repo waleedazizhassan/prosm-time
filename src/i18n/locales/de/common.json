@@ -162,7 +162,8 @@
     "tooManyAttempts": "Zu viele Versuche. Bitte warten Sie einige Minuten und versuchen Sie es erneut.",
     "offlineTimeBeforeLastAction": "Diese Offline-Aktion liegt zeitlich vor Ihrer letzten erfassten Aktion und wurde nicht erfasst. Bitten Sie Ihre Führungskraft um eine Korrektur.",
     "offlineTimeOnLeaveDay": "Diese Offline-Aktion fällt auf einen genehmigten Urlaubstag und wurde nicht erfasst.",
-    "onBehalfOnlyBelowRole": "Sie können nur für Personen unterhalb Ihrer Rolle ein- oder ausstempeln."
+    "onBehalfOnlyBelowRole": "Sie können nur für Personen unterhalb Ihrer Rolle ein- oder ausstempeln.",
+    "fakeLocationRejected": "Ein- oder Ausstempeln von einem gefälschten Standort (Mock-Location-App) wird in dieser Organisation nicht akzeptiert."
   },
   "pageLoad": {
     "title": "Diese Seite konnte nicht geöffnet werden",

@@ -162,7 +162,8 @@
     "tooManyAttempts": "Too many attempts. Please wait a few minutes and try again.",
     "offlineTimeBeforeLastAction": "This offline action has a time earlier than your last recorded action, so it was not recorded. Ask your manager to correct it.",
     "offlineTimeOnLeaveDay": "This offline action falls on a day of approved leave, so it was not recorded.",
-    "onBehalfOnlyBelowRole": "You can only clock in or out on behalf of people below your role."
+    "onBehalfOnlyBelowRole": "You can only clock in or out on behalf of people below your role.",
+    "fakeLocationRejected": "A clock in or out from a fake location (a mock-location app) is not accepted in this organisation."
   },
   "pageLoad": {
     "title": "This page could not be opened",

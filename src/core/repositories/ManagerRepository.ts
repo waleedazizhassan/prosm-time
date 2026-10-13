@@ -65,7 +65,7 @@ export interface SiteChangeEntry {
   changedAt: string;
 }
 
-export type PendingReviewKind = "geofence_exception" | "correction_request" | "offline_time";
+export type PendingReviewKind = "geofence_exception" | "correction_request" | "offline_time" | "mock_location";
 
 export interface PendingReviewItem {
   kind: PendingReviewKind;
@@ -75,6 +75,16 @@ export interface PendingReviewItem {
   createdAt: string;
   // offline_time only (audit 1.4): what was done, the device's time and when it reached the server.
   offlineTime?: { action: string; deviceTime: string; receivedAt: string };
+  // mock_location only (audit 2.4): clock in or out, and when.
+  mockLocation?: { eventType: string; occurredAt: string };
+}
+
+interface RawMockLocationRow {
+  id: string;
+  event_type: string;
+  occurred_at: string;
+  created_at: string;
+  users: RawUserRef | RawUserRef[] | null;
 }
 
 interface RawUserRef {
@@ -395,16 +405,18 @@ class ManagerRepository {
 
   async listPendingReview(): Promise<ServiceResult<PendingReviewItem[]>> {
     try {
-      const [exceptionsResult, correctionsResult, offlineResult] = await Promise.all([
+      const [exceptionsResult, correctionsResult, offlineResult, mockResult] = await Promise.all([
         this.client.from("geofence_exceptions").select("id, distance_meters, employee_reason, created_at, users(full_name)").eq("status", "pending_review"),
         this.client.from("correction_requests").select("id, proposed_event_type, proposed_correct_time, reason, created_at, users(full_name)").eq("status", "pending"),
         // offline_time_reviews has two links to users (the person, the reviewer): name the person's.
         this.client.from("offline_time_reviews").select("id, action, device_time, server_received_at, created_at, users!offline_time_reviews_user_id_fkey(full_name)").eq("status", "pending"),
+        this.client.from("mock_location_flags").select("id, event_type, occurred_at, created_at, users!mock_location_flags_user_id_fkey(full_name)").eq("status", "pending_review"),
       ]);
 
       if (exceptionsResult.error) return createError(exceptionsResult.error.message);
       if (correctionsResult.error) return createError(correctionsResult.error.message);
       if (offlineResult.error) return createError(offlineResult.error.message);
+      if (mockResult.error) return createError(mockResult.error.message);
 
       const exceptionItems: PendingReviewItem[] = ((exceptionsResult.data ?? []) as RawGeofenceExceptionRow[]).map((row) => {
         const user = Array.isArray(row.users) ? row.users[0] : row.users;
@@ -440,7 +452,19 @@ class ManagerRepository {
         };
       });
 
-      return createSuccess([...exceptionItems, ...correctionItems, ...offlineItems].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
+      const mockItems: PendingReviewItem[] = ((mockResult.data ?? []) as RawMockLocationRow[]).map((row) => {
+        const user = Array.isArray(row.users) ? row.users[0] : row.users;
+        return {
+          kind: "mock_location" as const,
+          id: row.id,
+          userFullName: user?.full_name ?? "",
+          summary: "",
+          createdAt: row.created_at,
+          mockLocation: { eventType: row.event_type, occurredAt: row.occurred_at },
+        };
+      });
+
+      return createSuccess([...exceptionItems, ...correctionItems, ...offlineItems, ...mockItems].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Manager console service unavailable.");
     }
