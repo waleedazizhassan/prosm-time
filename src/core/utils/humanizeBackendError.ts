@@ -23,7 +23,7 @@ import type { TFunction } from "i18next";
 export default function humanizeBackendError(rawMessage: string | null | undefined, t: TFunction): string | null {
   if (!rawMessage) return null;
   const trimmed = rawMessage.trim();
-  const key = BACKEND_ERROR_KEYS[trimmed];
+  const key = BACKEND_ERROR_KEYS[trimmed] ?? BACKEND_ERROR_KEYS[unwrap(trimmed)];
   if (key) return t(`common:backendErrors.${key}`);
   // § 2026-09-08 real bug fix, defense in depth: the orphaned-
   // presence-session bug (admin_clock_out never closed it, now fixed
@@ -43,6 +43,20 @@ export default function humanizeBackendError(rawMessage: string | null | undefin
 // single apostrophe (') for any raw message that contains one - SQL's
 // own doubled '' escape (source: `raise exception 'USER''S DATA'`)
 // resolves to one real apostrophe in the message the client receives.
+// Audit 4.1 (2026-10-13) - most RPCs re-raise their own expected errors
+// inside a 'X FAILED: %' wrapper ("KIOSK CLOCK IN FAILED: INCORRECT PIN"),
+// so the exact-match lookup above missed them and a wrong kiosk PIN
+// showed only "Unable to complete this action." The wrapper(s) are
+// removed and the inner message is looked up; a genuinely unexpected
+// inner message still falls through to the generic text.
+function unwrap(message: string): string {
+  let inner = message;
+  for (let match = /^[A-Z][A-Z _]* FAILED: (.+)$/s.exec(inner); match; match = /^[A-Z][A-Z _]* FAILED: (.+)$/s.exec(inner)) {
+    inner = match[1].trim();
+  }
+  return inner;
+}
+
 const BACKEND_ERROR_KEYS: Record<string, string> = {
   "A BREAK IS ALREADY ACTIVE FOR THIS SESSION": "breakAlreadyActive",
   "A CORRECTION CAN ONLY BE REQUESTED ON A LOCKED (APPROVED) TIMESHEET": "correctionRequiresLockedTimesheet",
@@ -177,4 +191,14 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "YOU MUST BE CLOCKED IN TO START A BREAK": "mustBeClockedInToStartBreak",
   "END TIME MUST BE DIFFERENT FROM START TIME": "shiftEndEqualsStart",
   "THIS EMPLOYEE ALREADY HAS AN OVERLAPPING SHIFT ON THIS DATE": "shiftOverlap",
+  // Kiosk workforce keypad and attempt limit (audit 4.1).
+  "NO ACTIVE WORKER WITH THIS NUMBER AT THIS SITE": "workerNumberNotRegistered",
+  "THIS WORKER IS NOT ACTIVE": "workerNotActive",
+  "THIS WORKER IS ALREADY CLOCKED IN": "workerAlreadyClockedIn",
+  "THIS WORKER IS NOT CURRENTLY CLOCKED IN": "workerNotClockedIn",
+  "A REAL GPS SAMPLE IS REQUIRED": "realGpsSampleRequired",
+  "Too many attempts. Please wait a few minutes and try again.": "tooManyAttempts",
+  // Offline replays (audit 1.4).
+  "OFFLINE TIME IS BEFORE YOUR LAST RECORDED ACTION": "offlineTimeBeforeLastAction",
+  "OFFLINE TIME FALLS ON A DAY OF APPROVED LEAVE": "offlineTimeOnLeaveDay",
 };

@@ -153,7 +153,15 @@
     "onlySubmitOwnAllowanceEntry": "You may only submit your own allowance entry.",
     "onlySubmitOwnTimesheet": "You may only submit your own timesheet.",
     "mustBeClockedInToChangeSite": "You must be clocked in to change site.",
-    "mustBeClockedInToStartBreak": "You must be clocked in to start a break."
+    "mustBeClockedInToStartBreak": "You must be clocked in to start a break.",
+    "workerNumberNotRegistered": "This number is not registered at this site.",
+    "workerNotActive": "This worker is not active.",
+    "workerAlreadyClockedIn": "This worker is already clocked in.",
+    "workerNotClockedIn": "This worker is not clocked in.",
+    "realGpsSampleRequired": "Your location is required for this action.",
+    "tooManyAttempts": "Too many attempts. Please wait a few minutes and try again.",
+    "offlineTimeBeforeLastAction": "This offline action has a time earlier than your last recorded action, so it was not recorded. Ask your manager to correct it.",
+    "offlineTimeOnLeaveDay": "This offline action falls on a day of approved leave, so it was not recorded."
   },
   "pageLoad": {
     "title": "This page could not be opened",

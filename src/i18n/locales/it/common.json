@@ -153,7 +153,15 @@
     "onlySubmitOwnAllowanceEntry": "Puoi inviare solo la tua voce di indennità.",
     "onlySubmitOwnTimesheet": "Puoi inviare solo il tuo foglio ore.",
     "mustBeClockedInToChangeSite": "Devi aver timbrato l'entrata per cambiare sito.",
-    "mustBeClockedInToStartBreak": "Devi aver timbrato l'entrata per iniziare una pausa."
+    "mustBeClockedInToStartBreak": "Devi aver timbrato l'entrata per iniziare una pausa.",
+    "workerNumberNotRegistered": "Questo numero non è registrato in questa sede.",
+    "workerNotActive": "Questo lavoratore non è attivo.",
+    "workerAlreadyClockedIn": "Questo lavoratore ha già timbrato l'entrata.",
+    "workerNotClockedIn": "Questo lavoratore non ha timbrato l'entrata.",
+    "realGpsSampleRequired": "Per questa azione è necessaria la tua posizione.",
+    "tooManyAttempts": "Troppi tentativi. Attendi qualche minuto e riprova.",
+    "offlineTimeBeforeLastAction": "Questa azione offline ha un orario precedente alla tua ultima azione registrata, quindi non è stata registrata. Chiedi al tuo responsabile di correggerla.",
+    "offlineTimeOnLeaveDay": "Questa azione offline cade in un giorno di ferie approvate, quindi non è stata registrata."
   },
   "pageLoad": {
     "title": "Impossibile aprire questa pagina",

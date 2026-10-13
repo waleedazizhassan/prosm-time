@@ -39,8 +39,9 @@ serve(async (request: Request) => {
     const serviceClient = createClient(supabaseUrl, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, {
       auth: { autoRefreshToken: false, persistSession: false },
     });
+    // Audit 4.1: 5 tries per person per 15 minutes, then 30 minutes locked.
     const rateLimited = await enforceRateLimits(serviceClient, [
-      { scope: "kiosk_clock_out_pin", identifier: `${siteId}:${employeeUserId}`, limit: 8, windowSeconds: 900, blockSeconds: 1800 },
+      { scope: "kiosk_clock_out_pin", identifier: `${siteId}:${employeeUserId}`, limit: 5, windowSeconds: 900, blockSeconds: 1800 },
       { scope: "kiosk_clock_out_ip", identifier: clientIdentifier(request), limit: 60, windowSeconds: 900, blockSeconds: 900 },
     ]);
     if (rateLimited) return rateLimited;

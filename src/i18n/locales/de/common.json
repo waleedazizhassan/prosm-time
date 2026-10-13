@@ -153,7 +153,15 @@
     "onlySubmitOwnAllowanceEntry": "Sie können nur Ihren eigenen Zulageneintrag einreichen.",
     "onlySubmitOwnTimesheet": "Sie können nur Ihre eigene Zeiterfassung einreichen.",
     "mustBeClockedInToChangeSite": "Sie müssen eingestempelt sein, um den Standort zu wechseln.",
-    "mustBeClockedInToStartBreak": "Sie müssen eingestempelt sein, um eine Pause zu beginnen."
+    "mustBeClockedInToStartBreak": "Sie müssen eingestempelt sein, um eine Pause zu beginnen.",
+    "workerNumberNotRegistered": "Diese Nummer ist an diesem Standort nicht registriert.",
+    "workerNotActive": "Diese Arbeitskraft ist nicht aktiv.",
+    "workerAlreadyClockedIn": "Diese Arbeitskraft ist bereits eingestempelt.",
+    "workerNotClockedIn": "Diese Arbeitskraft ist nicht eingestempelt.",
+    "realGpsSampleRequired": "Für diese Aktion wird Ihr Standort benötigt.",
+    "tooManyAttempts": "Zu viele Versuche. Bitte warten Sie einige Minuten und versuchen Sie es erneut.",
+    "offlineTimeBeforeLastAction": "Diese Offline-Aktion liegt zeitlich vor Ihrer letzten erfassten Aktion und wurde nicht erfasst. Bitten Sie Ihre Führungskraft um eine Korrektur.",
+    "offlineTimeOnLeaveDay": "Diese Offline-Aktion fällt auf einen genehmigten Urlaubstag und wurde nicht erfasst."
   },
   "pageLoad": {
     "title": "Diese Seite konnte nicht geöffnet werden",

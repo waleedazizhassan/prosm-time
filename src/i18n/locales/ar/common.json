@@ -153,7 +153,15 @@
     "onlySubmitOwnAllowanceEntry": "يمكنك إرسال قيد البدل الخاص بك فقط.",
     "onlySubmitOwnTimesheet": "يمكنك إرسال كشف دوامك الخاص فقط.",
     "mustBeClockedInToChangeSite": "يجب أن تكون مسجلاً حضورك لتغيير الموقع.",
-    "mustBeClockedInToStartBreak": "يجب أن تكون مسجلاً حضورك لبدء استراحة."
+    "mustBeClockedInToStartBreak": "يجب أن تكون مسجلاً حضورك لبدء استراحة.",
+    "workerNumberNotRegistered": "الرقم غير مسجل في هذا الموقع.",
+    "workerNotActive": "هذا العامل غير نشط.",
+    "workerAlreadyClockedIn": "هذا العامل مسجل حضوره بالفعل.",
+    "workerNotClockedIn": "هذا العامل غير مسجل حضوره.",
+    "realGpsSampleRequired": "يلزم تحديد موقعك لإتمام هذا الإجراء.",
+    "tooManyAttempts": "محاولات كثيرة. انتظر بضع دقائق ثم حاول مرة أخرى.",
+    "offlineTimeBeforeLastAction": "وقت هذا الإجراء المسجّل بدون اتصال أقدم من آخر إجراء مسجّل لك، لذلك لم يُسجَّل. اطلب من مديرك تصحيحه.",
+    "offlineTimeOnLeaveDay": "هذا الإجراء المسجّل بدون اتصال يقع في يوم إجازة معتمدة، لذلك لم يُسجَّل."
   },
   "pageLoad": {
     "title": "تعذّر فتح هذه الصفحة",
