@@ -5,10 +5,10 @@ import { useAuth } from "../../core/context/AuthContext";
 import PageShell from "../../components/common/PageShell";
 import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
 import MockLocationSettingsCard from "./MockLocationSettingsCard";
-import settingsHeaderImage from "../../assets/illustration-settings-header.webp";
+import settingsHeaderImage from "../../assets/illustrations/settings.svg";
 import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
-import PageBannerImage from "../../components/common/PageBannerImage";
+import PageBanner from "../../components/common/PageBanner";
 // PayrollIntegrationCard intentionally not rendered below - § user-
 // directed, 2026-09-13: "hide it, not delete it, until we know how
 // we'll actually use it." Component and its own QuickBooks RPCs are
@@ -34,7 +34,7 @@ export default function OrganizationSettingsPage() {
 
   return (
     <PageShell title="">
-      <PageBannerImage src={settingsHeaderImage} />
+      <PageBanner pageId="settings" illustration={settingsHeaderImage} />
 
       <NoSiteRadiusSettingsCard />
       <MockLocationSettingsCard />

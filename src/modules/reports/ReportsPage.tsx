@@ -26,10 +26,10 @@ import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
 import Table, { type TableColumn } from "../../components/common/Table";
 import { Download } from "lucide-react";
-import reportsHeaderImage from "../../assets/illustration-reports-header.webp";
+import reportsHeaderImage from "../../assets/illustrations/reports.svg";
 import { REPORT_TYPE_ICONS } from "./reportTypeIcons";
 import styles from "./ReportsPage.module.css";
-import PageBannerImage from "../../components/common/PageBannerImage";
+import PageBanner from "../../components/common/PageBanner";
 
 const ALL_EMPLOYEES = "";
 const ALL_SITES = "";
@@ -443,7 +443,7 @@ export default function ReportsPage() {
 
   return (
     <PageShell title="">
-      <PageBannerImage src={reportsHeaderImage} />
+      <PageBanner pageId="reports" illustration={reportsHeaderImage} />
 
       <Card>
         <div className={styles.typeGrid}>

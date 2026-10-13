@@ -13,8 +13,8 @@ import StatusBadge from "../../components/common/StatusBadge";
 import Table, { type TableColumn } from "../../components/common/Table";
 import SiteFormModal from "./SiteFormModal";
 import ErrorText from "../../components/common/ErrorText";
-import sitesHeaderImage from "../../assets/illustration-sites-header.webp";
-import PageBannerImage from "../../components/common/PageBannerImage";
+import sitesHeaderImage from "../../assets/illustrations/sites.svg";
+import PageBanner from "../../components/common/PageBanner";
 
 // § live UX review, user-directed - "give it a real proper home, but
 // keep it reachable from here too." The editable form itself now
@@ -91,7 +91,7 @@ export default function SitesPage() {
 
   return (
     <PageShell title="">
-      <PageBannerImage src={sitesHeaderImage} />
+      <PageBanner pageId="sites" illustration={sitesHeaderImage} />
 
       {profile?.isOwner ? (
         <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "var(--space-4)" }}>

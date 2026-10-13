@@ -223,5 +223,23 @@
     "syncing_other": "{{count}} Zeiterfassungen werden gesendet…",
     "failed_one": "Eine Zeiterfassung konnte nicht gesendet werden - im Dashboard erneut versuchen oder verwerfen.",
     "failed_other": "Eine Zeiterfassung konnte nicht gesendet werden - im Dashboard erneut versuchen oder verwerfen ({{count}} warten)."
+  },
+  "pageBanner": {
+    "manager": "Heutige Anwesenheit und offene Prüfungen",
+    "people": "Mitarbeiter, Rollen und Einladungen",
+    "leave": "Urlaub beantragen und verfolgen",
+    "reports": "Anwesenheitsberichte und Exporte",
+    "sites": "Standorte und ihre Bereiche",
+    "attendance": "Alle Ein- und Ausstempelungen",
+    "clockIn": "Schicht beginnen und beenden",
+    "schedule": "Kommende Schichten",
+    "emergencyLog": "SOS-Alarme und ihr Ort",
+    "allowances": "Tageszulagen und Überstunden",
+    "help": "Antworten und Anleitungen",
+    "kiosk": "Ein gemeinsames Gerät zum Stempeln",
+    "adminClock": "Jemanden ein- oder ausstempeln",
+    "settings": "Regeln für die ganze Organisation",
+    "integrations": "Lohnabrechnung und andere Systeme",
+    "timesheets": "Stunden zur Prüfung und Freigabe"
   }
 }

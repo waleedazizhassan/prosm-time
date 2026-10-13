@@ -1,7 +1,7 @@
 import PageShell from "../../components/common/PageShell";
 import ClockInOutCard from "../dashboard/ClockInOutCard";
-import clockInOutHeaderImage from "../../assets/illustration-clockinout-header.webp";
-import PageBannerImage from "../../components/common/PageBannerImage";
+import clockInOutHeaderImage from "../../assets/illustrations/clockIn.svg";
+import PageBanner from "../../components/common/PageBanner";
 
 // § user-directed - "the Owner/Manager shouldn't have the clock-in
 // widget on their own Dashboard the way an Employee does - a sidebar
@@ -12,7 +12,7 @@ import PageBannerImage from "../../components/common/PageBannerImage";
 export default function ClockInPage() {
   return (
     <PageShell title="">
-      <PageBannerImage src={clockInOutHeaderImage} />
+      <PageBanner pageId="clockIn" illustration={clockInOutHeaderImage} />
 
       <ClockInOutCard />
     </PageShell>

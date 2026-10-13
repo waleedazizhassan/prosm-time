@@ -1,0 +1,52 @@
+/* Page name card: name and a short line at the start, a flat
+   illustration at the end (both follow the language direction). */
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 76px;
+  padding: var(--space-2) var(--space-4);
+  background: var(--surface-card);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+}
+
+.text {
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.subtitle {
+  margin: 2px 0 0;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.art {
+  display: block;
+  flex-shrink: 0;
+  width: 130px;
+  height: 72px;
+  object-fit: contain;
+}
+
+/* The illustrations are drawn for a light background. */
+:global([data-theme="dark"]) .art {
+  background: var(--palette-slate-50, #f8fafc);
+  border-radius: 12px;
+  padding: 4px;
+}
+
+@media (max-width: 640px) {
+  .art {
+    width: 112px;
+    height: 64px;
+  }
+}

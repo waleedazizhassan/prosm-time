@@ -11,8 +11,8 @@ import LoadingState from "../../components/common/LoadingState";
 import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
 import checkInRemoteIllustration from "../../assets/illustration-checkin-remote.webp";
-import kioskHeaderImage from "../../assets/illustration-kiosk-header.webp";
-import PageBannerImage from "../../components/common/PageBannerImage";
+import kioskHeaderImage from "../../assets/illustrations/kiosk.svg";
+import PageBanner from "../../components/common/PageBanner";
 
 // PROSM Time - § user-directed: bring Kiosk Mode back into the
 // sidebar (it was reachable only by a direct /kiosk/:siteId URL,
@@ -36,7 +36,7 @@ export default function KioskLauncherPage() {
 
   return (
     <PageShell title="">
-      <PageBannerImage src={kioskHeaderImage} />
+      <PageBanner pageId="kiosk" illustration={kioskHeaderImage} />
 
       <Card title={t("launcher.title")}>
         {loading ? (

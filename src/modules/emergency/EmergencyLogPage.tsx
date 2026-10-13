@@ -18,8 +18,8 @@ import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
 import Textarea from "../../components/common/Textarea";
 import ErrorText from "../../components/common/ErrorText";
-import emergencyHeaderImage from "../../assets/illustration-emergency-header.webp";
-import PageBannerImage from "../../components/common/PageBannerImage";
+import emergencyHeaderImage from "../../assets/illustrations/emergencyLog.svg";
+import PageBanner from "../../components/common/PageBanner";
 
 const ALL_EMPLOYEES = "";
 
@@ -180,7 +180,7 @@ export default function EmergencyLogPage() {
 
   return (
     <PageShell title="">
-      <PageBannerImage src={emergencyHeaderImage} />
+      <PageBanner pageId="emergencyLog" illustration={emergencyHeaderImage} />
 
       <Card title={t("filters.title")}>
         <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>

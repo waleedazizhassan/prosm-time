@@ -223,5 +223,23 @@
     "syncing_other": "Sending {{count}} attendance actions…",
     "failed_one": "An attendance action could not be sent - open the dashboard to retry or discard it.",
     "failed_other": "An attendance action could not be sent - open the dashboard to retry or discard it ({{count}} waiting)."
+  },
+  "pageBanner": {
+    "manager": "Today's attendance and items awaiting review",
+    "people": "Employees, roles and invitations",
+    "leave": "Request and follow leave",
+    "reports": "Attendance reports and exports",
+    "sites": "Work sites and their areas",
+    "attendance": "Every clock-in and clock-out",
+    "clockIn": "Start and end your shift",
+    "schedule": "Upcoming shifts",
+    "emergencyLog": "SOS alerts and where they happened",
+    "allowances": "Daily allowances and overtime",
+    "help": "Answers and how-to guides",
+    "kiosk": "One shared device for clocking in",
+    "adminClock": "Clock someone in or out",
+    "settings": "Organisation-wide rules",
+    "integrations": "Payroll and other systems",
+    "timesheets": "Hours for review and approval"
   }
 }

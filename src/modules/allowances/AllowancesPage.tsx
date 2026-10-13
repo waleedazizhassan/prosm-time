@@ -19,8 +19,8 @@ import Button from "../../components/common/Button";
 import Textarea from "../../components/common/Textarea";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
 import { buildAllowancesPdf } from "./allowancesPdf";
-import allowancesHeaderImage from "../../assets/illustration-allowances-header.webp";
-import PageBannerImage from "../../components/common/PageBannerImage";
+import allowancesHeaderImage from "../../assets/illustrations/allowances.svg";
+import PageBanner from "../../components/common/PageBanner";
 
 const ALL_EMPLOYEES = "";
 
@@ -263,7 +263,7 @@ export default function AllowancesPage() {
 
   return (
     <PageShell title="">
-      <PageBannerImage src={allowancesHeaderImage} />
+      <PageBanner pageId="allowances" illustration={allowancesHeaderImage} />
 
       <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "var(--space-4)" }}>
         <Button onClick={handleExportPdf} loading={exportingPdf} disabled={filteredEntries.length === 0}>

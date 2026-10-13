@@ -17,10 +17,10 @@ import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
-import attendanceHeaderImage from "../../assets/illustration-attendance-header.webp";
+import attendanceHeaderImage from "../../assets/illustrations/attendance.svg";
 import { formatTimeOnly } from "../../core/utils/formatDate";
 import { buildAttendanceLogPdf } from "./attendanceLogPdf";
-import PageBannerImage from "../../components/common/PageBannerImage";
+import PageBanner from "../../components/common/PageBanner";
 
 const ALL_EMPLOYEES = "";
 
@@ -297,7 +297,7 @@ export default function AttendanceLogPage() {
 
   return (
     <PageShell title="">
-      <PageBannerImage src={attendanceHeaderImage} />
+      <PageBanner pageId="attendance" illustration={attendanceHeaderImage} />
 
       <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "var(--space-4)" }}>
         <Button onClick={handleExportPdf} loading={exportingPdf} disabled={filteredRows.length === 0}>

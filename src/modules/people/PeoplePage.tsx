@@ -12,8 +12,8 @@ import StatusBadge from "../../components/common/StatusBadge";
 import Table, { type TableColumn } from "../../components/common/Table";
 import InviteEmployeeModal from "./InviteEmployeeModal";
 import ErrorText from "../../components/common/ErrorText";
-import peopleHeaderImage from "../../assets/illustration-people-header.webp";
-import PageBannerImage from "../../components/common/PageBannerImage";
+import peopleHeaderImage from "../../assets/illustrations/people.svg";
+import PageBanner from "../../components/common/PageBanner";
 
 // PROSM Time Implementation Master File V3.0, WP-04/§37 - "Employee
 // Management." Real org-member list (RLS-scoped) with an Invite action
@@ -79,7 +79,7 @@ export default function PeoplePage() {
 
   return (
     <PageShell title="">
-      <PageBannerImage src={peopleHeaderImage} />
+      <PageBanner pageId="people" illustration={peopleHeaderImage} />
 
       {hasPermission("employees.create") ? (
         <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "var(--space-4)" }}>

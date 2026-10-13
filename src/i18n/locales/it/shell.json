@@ -223,5 +223,23 @@
     "syncing_other": "Invio di {{count}} timbrature…",
     "failed_one": "Una timbratura non è stata inviata - apri la dashboard per riprovare o scartarla.",
     "failed_other": "Una timbratura non è stata inviata - apri la dashboard per riprovare o scartarla ({{count}} in attesa)."
+  },
+  "pageBanner": {
+    "manager": "Presenze di oggi ed elementi da verificare",
+    "people": "Dipendenti, ruoli e inviti",
+    "leave": "Richiedi e segui le ferie",
+    "reports": "Report presenze ed esportazioni",
+    "sites": "Sedi di lavoro e le loro aree",
+    "attendance": "Tutte le timbrature di entrata e uscita",
+    "clockIn": "Inizia e termina il tuo turno",
+    "schedule": "Turni in arrivo",
+    "emergencyLog": "Allarmi SOS e dove sono avvenuti",
+    "allowances": "Indennità giornaliere e straordinari",
+    "help": "Risposte e guide",
+    "kiosk": "Un dispositivo condiviso per timbrare",
+    "adminClock": "Timbra per conto di qualcuno",
+    "settings": "Regole di tutta l'organizzazione",
+    "integrations": "Buste paga e altri sistemi",
+    "timesheets": "Ore da verificare e approvare"
   }
 }

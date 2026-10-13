@@ -21,8 +21,8 @@ import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
 import { formatTimeOnly, formatDateOnly } from "../../core/utils/formatDate";
 import allCaughtUpIllustration from "../../assets/illustration-all-caught-up.webp";
-import managerConsoleHeaderImage from "../../assets/illustration-manager-console-header.webp";
-import PageBannerImage from "../../components/common/PageBannerImage";
+import managerConsoleHeaderImage from "../../assets/illustrations/manager.svg";
+import PageBanner from "../../components/common/PageBanner";
 
 const REVIEW_ACTIONS = ["approved", "rejected", "acknowledged", "clarification_requested"] as const;
 
@@ -278,7 +278,7 @@ export default function ManagerConsolePage() {
 
   return (
     <PageShell title="">
-      <PageBannerImage src={managerConsoleHeaderImage} />
+      <PageBanner pageId="manager" illustration={managerConsoleHeaderImage} />
 
       <p style={{ fontSize: "var(--font-sm)" }}>
         <Link to="/people" style={{ color: "var(--text-link)" }}>

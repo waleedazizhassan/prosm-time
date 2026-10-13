@@ -223,5 +223,23 @@
     "syncing_other": "Envoi de {{count}} pointages…",
     "failed_one": "Un pointage n'a pas pu être envoyé - ouvrez le tableau de bord pour réessayer ou l'abandonner.",
     "failed_other": "Un pointage n'a pas pu être envoyé - ouvrez le tableau de bord pour réessayer ou l'abandonner ({{count}} en attente)."
+  },
+  "pageBanner": {
+    "manager": "Présence du jour et éléments à vérifier",
+    "people": "Employés, rôles et invitations",
+    "leave": "Demander et suivre les congés",
+    "reports": "Rapports de présence et exports",
+    "sites": "Sites de travail et leurs zones",
+    "attendance": "Tous les pointages d'arrivée et de départ",
+    "clockIn": "Commencer et terminer votre poste",
+    "schedule": "Postes à venir",
+    "emergencyLog": "Alertes SOS et leur lieu",
+    "allowances": "Indemnités journalières et heures supplémentaires",
+    "help": "Réponses et guides",
+    "kiosk": "Un appareil partagé pour pointer",
+    "adminClock": "Pointer à la place de quelqu'un",
+    "settings": "Règles de toute l'organisation",
+    "integrations": "Paie et autres systèmes",
+    "timesheets": "Heures à vérifier et approuver"
   }
 }
