@@ -1,6 +1,8 @@
 import type { LucideIcon } from "lucide-react";
 import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, MonitorSmartphone, UserCog, LogIn, Plug } from "lucide-react";
 
+import { FEATURES } from "../../config/features";
+
 // § live UX review, user-directed - "professional reorganization" of
 // the Sidebar into grouped sections/"centers" instead of one flat
 // list (the earlier "Menu screen" grouping only ever had one real
@@ -48,7 +50,7 @@ export interface NavItem {
 // shortcut (added in an earlier pass of this same finishing sweep) is
 // now the ONLY Dashboard navigation mechanism - no Dashboard entry
 // lives here anymore.
-export const NAV_ITEMS: NavItem[] = [
+const ALL_NAV_ITEMS: NavItem[] = [
   // § user-directed - Owner/Manager no longer carry the personal
   // clock-in widget on their own Dashboard (point 5, 2026-09-11: "the
   // Owner and Manager shouldn't have the clock-in widget on the
@@ -137,5 +139,8 @@ export const NAV_ITEMS: NavItem[] = [
   { id: "integrations", labelKey: "items.integrations", path: "/integrations", icon: Plug, requiredPermission: null, ownerOnly: true, section: "settings" },
   { id: "help", labelKey: "items.help", path: "/help", icon: HelpCircle, requiredPermission: null, section: "help" },
 ];
+
+// Hidden features (src/config/features.ts) leave the sidebar and the search.
+export const NAV_ITEMS: NavItem[] = ALL_NAV_ITEMS.filter((item) => item.id !== "integrations" || FEATURES.integrations);
 
 export const NAV_SECTION_ORDER: NavSection[] = ["attendance", "people", "payroll", "reports", "settings", "help"];

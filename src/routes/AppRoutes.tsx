@@ -4,6 +4,7 @@ import PageLoadBoundary from "../components/common/PageLoadBoundary";
 
 import { AuthProvider, useAuth } from "../core/context/AuthContext";
 import ProtectedRoute from "./ProtectedRoute";
+import { FEATURES } from "../config/features";
 import AppShell from "../layouts/AppShell";
 import UpdateAvailableBanner from "../layouts/AppShell/UpdateAvailableBanner";
 
@@ -125,7 +126,8 @@ export default function AppRoutes() {
             <Route path="/emergency-log" element={<EmergencyLogPage />} />
             <Route path="/reports" element={<ReportsPage />} />
             <Route path="/settings" element={<OrganizationSettingsPage />} />
-            <Route path="/integrations" element={<IntegrationsPage />} />
+            {/* Hidden while FEATURES.integrations is off (owner 2026-10-13). */}
+            <Route path="/integrations" element={FEATURES.integrations ? <IntegrationsPage /> : <Navigate to="/dashboard" replace />} />
             <Route path="/kiosk" element={<KioskLauncherPage />} />
             <Route path="/help" element={<HelpPage />} />
           </Route>
