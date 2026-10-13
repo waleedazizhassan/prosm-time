@@ -4,6 +4,8 @@
 **الأساس:** مراجعة الأمان والكود على `main` (`37e3858`)، واختبار E2E كامل (92 سيناريو، 87 نجح و5 فشل).
 **الحالة (تحديث 2026-10-13 مساءً):** تم النشر على Supabase (10 migrations و9 Edge Functions) ورُفعت التعديلات إلى GitHub بموافقة المالك. انظر قسم «النشر».
 
+> النسخة الإنجليزية: `AUDIT_FIXES_REPORT.en.md` (محدَّثة بعد النشر والإصدار v2.3.19).
+
 > ملاحظة: بدأ العمل في جلسة سابقة انتهت بشكل غير متوقع بعد البند 1.2. استُكمل العمل في هذه الجلسة من البند 1.3، بعد التأكد من أن كل ما سبق محفوظ في commits.
 
 ## النتيجة النهائية للفحوصات
@@ -29,31 +31,31 @@ CI جديد: `.github/workflows/ci.yml` يشغّل tsc وeslint وفحص الت�
 
 | # | البند | الحالة | Commit | الملفات الأساسية | الاختبار |
 | --- | --- | --- | --- | --- | --- |
-| 1.1 | مالك منظمة يقرأ بيانات منظمة أخرى (RLS) | ✅ تم | `c5d9cb0` | `supabase/migrations/20261013110000_tenant_scope_leave_and_shift_policies.sql` | `supabase/tests/crossTenant.test.ts`: منظمتان، مالك ومدير وموظف لكل منهما، كل الجداول (التغطية إلزامية) و31 RPC |
-| 1.2 | «ورديّاتي القادمة» تعرض ورديات الآخرين | ✅ تم | `d2c3098` | `ShiftRepository.ts` و`LeaveRepository.ts` (`listMine`) | `src/core/repositories/listMine.test.ts` |
-| 1.3 | شاشة الكشك غير مقفولة | ✅ تم | `bc0c9dd` | `src/modules/kiosk/KioskLayout.tsx` و`KioskLockGuard.tsx` و`kioskLock.ts` و`src/routes/AppRoutes.tsx` و`useAndroidBackButton.ts` | `src/routes/kioskLock.test.tsx` (3/3 فشلت قبل) |
-| 1.4 | الموظف يختار وقت حضوره بنفسه | ✅ تم | `81e66f9` | `20261013120000_server_time_for_live_attendance.sql`، و`AttendanceRepository.ts` و`OfflineQueueService.ts`، و5 Edge Functions، وسجل الحضور، ولوحة المدير | `supabase/tests/offlineTime.test.ts` (9) و`attendanceTime.test.ts` |
-| 2.1 | «السياج الجغرافي مطلوب» لا يمنع الحضور | ✅ تم (قرار المالك: الخيار أ) | `73113aa` | `20261013190000_block_clock_in_outside_area.sql`، `SitePolicySettingsCard.tsx` | `supabase/tests/clockInOutsideArea.test.ts` |
-| 2.2 | تقرير مخالفات الموقع لا يشمل الخروج من النطاق | ✅ تم | `13e53a4` | `20261013130000_location_violations_include_geofence.sql`، `ReportRepository.ts`، `ReportsPage.tsx` | `supabase/tests/locationViolations.test.ts` (4) |
-| 2.3 | المستودع عام | 🟡 تم جزئياً (موافقة المالك) | `66dbed6` | `.github/workflows/release.yml` | ملف التحديث والـ APK ونسخة الويب على Supabase Storage؛ مثبّت ويندوز بانتظار قرار |
-| 2.4 | لا يوجد كشف للـ GPS المزيف | ✅ تم | `5f6b873` | `20261013180000_mock_location_detection.sql`، `BackgroundLocationService.ts`، `ClockInOutCard.tsx`، `MockLocationSettingsCard.tsx` | `supabase/tests/mockLocation.test.ts` (4) |
-| 2.5 | الـ migrations لا تبني قاعدة بيانات جديدة | ✅ تم | `260c280` | الـ 24 ملف، و`README.md`، و`ci.yml` | `supabase/tests/freshDatabase.test.ts` (24 خطأ قبل، 0 بعد) |
-| 3 | لا توجد اختبارات للـ backend | ✅ تم | `e0b9e71` (والبنية في `da46dc4`) | `supabase/tests/lifecycle.test.ts` و`supabase/tests/support/*` | 27 اختبار (T10 كان يفشل قبل 1.4) |
-| 4.1 | رسالة عامة عند رمز كشك خاطئ | ✅ تم | `9e0e4b4` | `humanizeBackendError.ts`، `kiosk-clock-in/out` | `humanizeBackendError.test.ts` |
-| 4.2 | التطبيق يفتح بالإنجليزية على جهاز عربي | ✅ تم | `fdb731b` | `src/i18n/languages.ts` و`index.ts` | `src/i18n/languages.test.ts` |
-| 4.3 | دور الموقع يبدأ دائماً «عضو» | ✅ تم | `99ee074` | `AssignSiteMemberModal.tsx` | `AssignSiteMemberModal.test.tsx` |
-| 4.4 | المشرف يسجّل بالنيابة عن مديره | ✅ تم | `6b9e99b` | `20261013150000_on_behalf_only_below_caller.sql`، `roleRank.ts`، `AdminOnBehalfPage.tsx` | `supabase/tests/onBehalf.test.ts` و`roleRank.test.ts` |
-| 4.5 | تنبيهات SOS تصل لمديري مواقع أخرى | ✅ تم | `a685297` (واسم الموقع في `da46dc4`) | `20261013160000_sos_recipients_site_scoped.sql` | `supabase/tests/sosRecipients.test.ts` و`sos.test.ts` |
-| 4.6 | المتابعة المستمرة للتواجد في الإعدادات فقط | ✅ تم | `4193d50` | `SiteFormModal.tsx`، `SitePolicySettingsCard.tsx` | `SiteFormModal.test.tsx` |
-| 4.7 | البدلات تأخذ آخر جلسة فقط من اليوم | ✅ تم | `22e9dab` | `AllowanceRepository.ts`، `AllowancesPage.tsx` | `allowanceDay.test.ts` |
-| 4.8 | رحلة واحدة خارج النطاق تطلب السبب مرتين | ✅ تم | `3e21215` | `20261013170000_one_reason_per_trip.sql` | `supabase/tests/exceptionReason.test.ts` |
+| 1.1 | مالك منظمة يقرأ بيانات منظمة أخرى (RLS) | ✅ تم | `c0de6d0` | `supabase/migrations/20261013110000_tenant_scope_leave_and_shift_policies.sql` | `supabase/tests/crossTenant.test.ts`: منظمتان، مالك ومدير وموظف لكل منهما، كل الجداول (التغطية إلزامية) و31 RPC |
+| 1.2 | «ورديّاتي القادمة» تعرض ورديات الآخرين | ✅ تم | `b6f60cd` | `ShiftRepository.ts` و`LeaveRepository.ts` (`listMine`) | `src/core/repositories/listMine.test.ts` |
+| 1.3 | شاشة الكشك غير مقفولة | ✅ تم | `ef43504` | `src/modules/kiosk/KioskLayout.tsx` و`KioskLockGuard.tsx` و`kioskLock.ts` و`src/routes/AppRoutes.tsx` و`useAndroidBackButton.ts` | `src/routes/kioskLock.test.tsx` (3/3 فشلت قبل) |
+| 1.4 | الموظف يختار وقت حضوره بنفسه | ✅ تم | `0db9f2a` | `20261013120000_server_time_for_live_attendance.sql`، و`AttendanceRepository.ts` و`OfflineQueueService.ts`، و5 Edge Functions، وسجل الحضور، ولوحة المدير | `supabase/tests/offlineTime.test.ts` (9) و`attendanceTime.test.ts` |
+| 2.1 | «السياج الجغرافي مطلوب» لا يمنع الحضور | ✅ تم (قرار المالك: الخيار أ) | `d0617b0` | `20261013190000_block_clock_in_outside_area.sql`، `SitePolicySettingsCard.tsx` | `supabase/tests/clockInOutsideArea.test.ts` |
+| 2.2 | تقرير مخالفات الموقع لا يشمل الخروج من النطاق | ✅ تم | `0d0815f` | `20261013130000_location_violations_include_geofence.sql`، `ReportRepository.ts`، `ReportsPage.tsx` | `supabase/tests/locationViolations.test.ts` (4) |
+| 2.3 | المستودع عام | 🟡 تم جزئياً (موافقة المالك) | `026548a` | `.github/workflows/release.yml` | ملف التحديث والـ APK ونسخة الويب على Supabase Storage؛ مثبّت ويندوز بانتظار قرار |
+| 2.4 | لا يوجد كشف للـ GPS المزيف | ✅ تم | `39b17ed` | `20261013180000_mock_location_detection.sql`، `BackgroundLocationService.ts`، `ClockInOutCard.tsx`، `MockLocationSettingsCard.tsx` | `supabase/tests/mockLocation.test.ts` (4) |
+| 2.5 | الـ migrations لا تبني قاعدة بيانات جديدة | ✅ تم | `f0df182` | الـ 24 ملف، و`README.md`، و`ci.yml` | `supabase/tests/freshDatabase.test.ts` (24 خطأ قبل، 0 بعد) |
+| 3 | لا توجد اختبارات للـ backend | ✅ تم | `2e37c3e` (والبنية في `7cf992b`) | `supabase/tests/lifecycle.test.ts` و`supabase/tests/support/*` | 27 اختبار (T10 كان يفشل قبل 1.4) |
+| 4.1 | رسالة عامة عند رمز كشك خاطئ | ✅ تم | `d5ccafa` | `humanizeBackendError.ts`، `kiosk-clock-in/out` | `humanizeBackendError.test.ts` |
+| 4.2 | التطبيق يفتح بالإنجليزية على جهاز عربي | ✅ تم | `e815ec6` | `src/i18n/languages.ts` و`index.ts` | `src/i18n/languages.test.ts` |
+| 4.3 | دور الموقع يبدأ دائماً «عضو» | ✅ تم | `1fadad6` | `AssignSiteMemberModal.tsx` | `AssignSiteMemberModal.test.tsx` |
+| 4.4 | المشرف يسجّل بالنيابة عن مديره | ✅ تم | `7de3f54` | `20261013150000_on_behalf_only_below_caller.sql`، `roleRank.ts`، `AdminOnBehalfPage.tsx` | `supabase/tests/onBehalf.test.ts` و`roleRank.test.ts` |
+| 4.5 | تنبيهات SOS تصل لمديري مواقع أخرى | ✅ تم | `f103b4a` (واسم الموقع في `7cf992b`) | `20261013160000_sos_recipients_site_scoped.sql` | `supabase/tests/sosRecipients.test.ts` و`sos.test.ts` |
+| 4.6 | المتابعة المستمرة للتواجد في الإعدادات فقط | ✅ تم | `12fff82` | `SiteFormModal.tsx`، `SitePolicySettingsCard.tsx` | `SiteFormModal.test.tsx` |
+| 4.7 | البدلات تأخذ آخر جلسة فقط من اليوم | ✅ تم | `fd88a11` | `AllowanceRepository.ts`، `AllowancesPage.tsx` | `allowanceDay.test.ts` |
+| 4.8 | رحلة واحدة خارج النطاق تطلب السبب مرتين | ✅ تم | `6181a8a` | `20261013170000_one_reason_per_trip.sql` | `supabase/tests/exceptionReason.test.ts` |
 | 4.9 | نص PDF الكشف صورة | ⏳ مؤجَّل | — | — | — |
 | 4.10 | التحقق من relay الدعوات على dev | ⏳ لم يُتحقق منه | — | — | — |
-| 5.1 | 21 دالة قابلة للتنفيذ من `anon` | ✅ تم | `d1fcabe` | `20261013140000_revoke_anon_execute.sql` | `supabase/tests/anonGrants.test.ts` (يفشل في CI لو ظهرت دالة جديدة متاحة لـ anon) |
-| 5.2 | 3 مفاتيح ترجمة ناقصة | ✅ تم | `1ba9ded` | `common.json` ×5، `scripts/check-i18n.mjs` | الفحص: 25 نقص قبل، 0 بعد |
-| 5.3 | مقارنة سر `x-trial-secret` غير ثابتة الزمن | ✅ تم | `cb8b859` | `_shared/constantTime.ts`، `send-trial-notices` | `supabase/tests/constantTime.test.ts` |
-| 5.4 | `npm audit` | ✅ تم جزئياً | `ae00b08` | `package-lock.json` | tsc والاختبارات والبناء ناجحة |
-| — | زر SOS في كل وردية (قرارك 2026-10-13، الخيار أ) | ✅ تم | `da46dc4` | `20261013100000_sos_on_every_shift.sql` | `supabase/tests/sos.test.ts` (4) |
+| 5.1 | 21 دالة قابلة للتنفيذ من `anon` | ✅ تم | `ec70523` | `20261013140000_revoke_anon_execute.sql` | `supabase/tests/anonGrants.test.ts` (يفشل في CI لو ظهرت دالة جديدة متاحة لـ anon) |
+| 5.2 | 3 مفاتيح ترجمة ناقصة | ✅ تم | `32d35c5` | `common.json` ×5، `scripts/check-i18n.mjs` | الفحص: 25 نقص قبل، 0 بعد |
+| 5.3 | مقارنة سر `x-trial-secret` غير ثابتة الزمن | ✅ تم | `3aacbec` | `_shared/constantTime.ts`، `send-trial-notices` | `supabase/tests/constantTime.test.ts` |
+| 5.4 | `npm audit` | ✅ تم جزئياً | `e7c19e8` | `package-lock.json` | tsc والاختبارات والبناء ناجحة |
+| — | زر SOS في كل وردية (قرارك 2026-10-13، الخيار أ) | ✅ تم | `7cf992b` | `20261013100000_sos_on_every_shift.sql` | `supabase/tests/sos.test.ts` (4) |
 
 ---
 
@@ -157,9 +159,9 @@ CI جديد: `.github/workflows/ci.yml` يشغّل tsc وeslint وفحص الت�
   - المستلمون هم مديرو الموقع نفسه + المالك دائماً، والمالك وحده إذا لم يكن هناك موقع.
   - الزملاء الحاضرون في نفس الموقع يُبلَّغون كما كان.
 - سجل الطوارئ (RLS) بنفس النطاق.
-- اسم الموقع يُحفظ مع كل تنبيه منذ `da46dc4`.
+- اسم الموقع يُحفظ مع كل تنبيه منذ `7cf992b`.
 
-**4.6:** بعد `da46dc4` لم يعد زر SOS يعتمد على المتابعة المستمرة. نموذج الموقع الآن يذكر الإعداد ويحتوي رابط «افتح إعدادات هذا الموقع»، فتُفتح الإعدادات والموقع محدد مسبقاً.
+**4.6:** بعد `7cf992b` لم يعد زر SOS يعتمد على المتابعة المستمرة. نموذج الموقع الآن يذكر الإعداد ويحتوي رابط «افتح إعدادات هذا الموقع»، فتُفتح الإعدادات والموقع محدد مسبقاً.
 
 **4.7:** إدخال البدلات يغطي اليوم كله: أول حضور وآخر انصراف (فارغ إن كانت جلسة ما زالت مفتوحة)، ويعرض التفاصيل عدد الجلسات وساعات العمل. التقارير والتصدير المبنية على نفس الإدخالات تتبع ذلك.
 
@@ -190,8 +192,8 @@ CI جديد: `.github/workflows/ci.yml` يشغّل tsc وeslint وفحص الت�
 
 ## إضافات بعد التقرير (2026-10-13)
 
-- **كروت أسماء الصفحات** (`a20859c`): كارت صغير (حوالي 76 px) فيه اسم الصفحة وسطر وصف ورسمة 2D مسطّحة فيها أشخاص (unDraw، رخصة MIT)، في 16 صفحة، بدل الصور المقصوصة. حجم الصور نزل من 2.2 MB إلى 316 KB.
-- **رسائل عدم الاتصال ومشاكل الشبكة** (`379889c`): كارت لطيف برسمة عند انقطاع الإنترنت يوضح أن الحضور والانصراف شغالين، ورسالة «رجع الاتصال»، وشاشة «الصفحة محتاجة إنترنت» و«حصلت مشكلة صغيرة» برسومات، وأي طلب لم يصل للخادم يظهر برسالة واضحة بدل النص التقني.
+- **كروت أسماء الصفحات** (`42c8853`): كارت صغير (حوالي 76 px) فيه اسم الصفحة وسطر وصف ورسمة 2D مسطّحة فيها أشخاص (unDraw، رخصة MIT)، في 16 صفحة، بدل الصور المقصوصة. حجم الصور نزل من 2.2 MB إلى 316 KB.
+- **رسائل عدم الاتصال ومشاكل الشبكة** (`9d44088`): كارت لطيف برسمة عند انقطاع الإنترنت يوضح أن الحضور والانصراف شغالين، ورسالة «رجع الاتصال»، وشاشة «الصفحة محتاجة إنترنت» و«حصلت مشكلة صغيرة» برسومات، وأي طلب لم يصل للخادم يظهر برسالة واضحة بدل النص التقني.
 - **زر الطوارئ:** موجود في كل وردية مؤكدة من الخادم. تم التحقق من المسار كاملاً في الكود، ومن 7 اختبارات قاعدة بيانات، وعلى الخادم الحي: الدالة منشورة وترفض غير المسجلين. تجربة إرسال حقيقية لم تُعمل لأنها ترسل تنبيهات فعلية للمالك والمديرين.
 
 ## النشر — تم (2026-10-13)
