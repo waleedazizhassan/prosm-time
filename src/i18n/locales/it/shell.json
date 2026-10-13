@@ -243,5 +243,11 @@
     "settings": "Regole di tutta l'organizzazione",
     "integrations": "Buste paga e altri sistemi",
     "timesheets": "Ore da verificare e approvare"
+  },
+  "backgroundDisclosure": {
+    "title": "Posizione durante il turno",
+    "body": "PROSM Time raccoglie la tua posizione circa ogni 5 minuti per confermare che sei sul luogo di lavoro, anche quando l'app è chiusa o non in uso, ma solo mentre hai timbrato l'entrata. Si ferma quando timbri l'uscita. La posizione è condivisa con i responsabili della tua organizzazione ed eliminata dopo 30 giorni. Nella schermata successiva scegli \"Consenti sempre\".",
+    "accept": "Continua",
+    "decline": "Non ora"
   }
 }

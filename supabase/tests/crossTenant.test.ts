@@ -32,6 +32,7 @@ const TABLES: Record<string, string> = {
   gusto_oauth_states: "select state as id from gusto_oauth_states where organization_id = $1",
   installation_identity: byOrg,
   leave_entitlements: byOrg,
+  legal_acknowledgements: byOrg,
   leave_requests: byOrg,
   license_activation_state: byOrg,
   location_plausibility_flags: byOrg,

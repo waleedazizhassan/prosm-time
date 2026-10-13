@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import AuthHeader from "./AuthHeader";
 import authPhoto from "../../assets/splash-photo.webp";
 import { APP_VERSION } from "../../core/appVersion";
+import LegalLinks from "../../modules/legal/LegalLinks";
 import styles from "./AuthLayout.module.css";
 
 interface AuthLayoutProps {
@@ -82,7 +83,9 @@ export default function AuthLayout({ title, subtitle, children, footer }: AuthLa
         </div>
       </div>
 
-      <span className={styles.versionFooter}>{t("versionLabel", { version: APP_VERSION })}</span>
+      <span className={styles.versionFooter}>
+        {t("versionLabel", { version: APP_VERSION })} · <LegalLinks />
+      </span>
     </div>
   );
 }

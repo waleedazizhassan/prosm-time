@@ -1,0 +1,73 @@
+.page {
+  min-height: 100vh;
+  background: var(--surface-app);
+  padding: var(--space-6) var(--space-4);
+}
+
+.doc {
+  max-width: 760px;
+  margin: 0 auto;
+  background: var(--surface-card);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: var(--space-6);
+  color: var(--text-primary);
+  line-height: 1.8;
+}
+
+.back {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text-link);
+  font: inherit;
+  font-size: var(--font-sm);
+  cursor: pointer;
+}
+
+.title {
+  margin: var(--space-3) 0 0;
+  font-size: var(--font-xl);
+}
+
+.updated,
+.note {
+  margin: var(--space-1) 0 var(--space-4);
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.heading {
+  margin: var(--space-5, 20px) 0 var(--space-2);
+  font-size: var(--font-lg);
+}
+
+.paragraph {
+  margin: 0 0 var(--space-3);
+  font-size: var(--font-sm);
+}
+
+.list {
+  margin: 0 0 var(--space-3);
+  padding-inline-start: var(--space-5, 20px);
+  font-size: var(--font-sm);
+}
+
+.list li {
+  margin-bottom: var(--space-2);
+}
+
+.other {
+  margin-top: var(--space-6);
+  font-size: var(--font-sm);
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: var(--space-3);
+  }
+
+  .doc {
+    padding: var(--space-4);
+  }
+}

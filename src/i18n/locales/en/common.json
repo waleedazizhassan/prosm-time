@@ -173,5 +173,27 @@
     "retry": "Try again"
   },
   "status": "Status",
-  "save": "Save"
+  "save": "Save",
+  "legal": {
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "back": "Back",
+    "languageNote": "This document is available in Arabic and English; the English version is shown.",
+    "gate": {
+      "title": "Before you continue",
+      "intro": "PROSM Time records your attendance for your organisation. Depending on its settings:",
+      "points": [
+        "Your location is recorded when you clock in or out, take a break, change site or send an SOS.",
+        "If your organisation turns on presence monitoring, your location is recorded about every 5 minutes during your shift only (on Android also in the background, with a visible notification). It stops when you clock out.",
+        "A photo is taken only if your site requires one. There is no facial recognition.",
+        "Your organisation's managers see your records. Location samples are deleted after 30 days and photos after 90 days."
+      ],
+      "readFull": "Full details:",
+      "confirmMember": "I have read the Privacy Policy and I accept the Terms of Use.",
+      "confirmOwner": "I accept the Terms of Use on behalf of my organisation, and I confirm that our employees are informed of how PROSM Time records their attendance, location and photos.",
+      "accept": "Continue",
+      "signOut": "Sign out",
+      "error": "Couldn't save. Check your connection and try again."
+    }
+  }
 }

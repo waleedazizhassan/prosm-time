@@ -173,5 +173,27 @@
     "retry": "Erneut versuchen"
   },
   "status": "Status",
-  "save": "Speichern"
+  "save": "Speichern",
+  "legal": {
+    "privacy": "Datenschutzerklärung",
+    "terms": "Nutzungsbedingungen",
+    "back": "Zurück",
+    "languageNote": "Dieses Dokument ist auf Arabisch und Englisch verfügbar; die englische Fassung wird angezeigt.",
+    "gate": {
+      "title": "Bevor Sie fortfahren",
+      "intro": "PROSM Time erfasst Ihre Anwesenheit für Ihre Organisation. Je nach deren Einstellungen:",
+      "points": [
+        "Ihr Standort wird beim Ein- und Ausstempeln, bei Pausen, beim Standortwechsel und bei einem SOS erfasst.",
+        "Wenn Ihre Organisation die Anwesenheitsüberwachung aktiviert, wird Ihr Standort nur während Ihrer Schicht etwa alle 5 Minuten erfasst (unter Android auch im Hintergrund, mit sichtbarer Benachrichtigung). Beim Ausstempeln endet dies.",
+        "Ein Foto wird nur aufgenommen, wenn Ihr Standort es verlangt. Es gibt keine Gesichtserkennung.",
+        "Die Vorgesetzten Ihrer Organisation sehen Ihre Daten. Standortpunkte werden nach 30 Tagen gelöscht, Fotos nach 90 Tagen."
+      ],
+      "readFull": "Alle Einzelheiten:",
+      "confirmMember": "Ich habe die Datenschutzerklärung gelesen und akzeptiere die Nutzungsbedingungen.",
+      "confirmOwner": "Ich akzeptiere die Nutzungsbedingungen im Namen meiner Organisation und bestätige, dass unsere Mitarbeiter darüber informiert sind, wie PROSM Time ihre Anwesenheit, ihren Standort und Fotos erfasst.",
+      "accept": "Weiter",
+      "signOut": "Abmelden",
+      "error": "Speichern nicht möglich. Prüfen Sie die Verbindung und versuchen Sie es erneut."
+    }
+  }
 }

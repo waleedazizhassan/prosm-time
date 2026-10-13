@@ -173,5 +173,27 @@
     "retry": "Riprova"
   },
   "status": "Stato",
-  "save": "Salva"
+  "save": "Salva",
+  "legal": {
+    "privacy": "Informativa sulla privacy",
+    "terms": "Condizioni d'uso",
+    "back": "Indietro",
+    "languageNote": "Questo documento è disponibile in arabo e in inglese; viene mostrata la versione inglese.",
+    "gate": {
+      "title": "Prima di continuare",
+      "intro": "PROSM Time registra la tua presenza per la tua organizzazione. In base alle sue impostazioni:",
+      "points": [
+        "La tua posizione viene registrata quando timbri, fai una pausa, cambi sede o invii un SOS.",
+        "Se la tua organizzazione attiva il monitoraggio della presenza, la posizione viene registrata circa ogni 5 minuti solo durante il turno (su Android anche in background, con una notifica visibile). Si ferma quando timbri l'uscita.",
+        "Una foto viene scattata solo se la sede lo richiede. Non c'è riconoscimento facciale.",
+        "I responsabili della tua organizzazione vedono i tuoi dati. Le posizioni vengono eliminate dopo 30 giorni e le foto dopo 90 giorni."
+      ],
+      "readFull": "Tutti i dettagli:",
+      "confirmMember": "Ho letto l'Informativa sulla privacy e accetto le Condizioni d'uso.",
+      "confirmOwner": "Accetto le Condizioni d'uso per conto della mia organizzazione e confermo che i nostri dipendenti sono informati di come PROSM Time registra presenza, posizione e foto.",
+      "accept": "Continua",
+      "signOut": "Esci",
+      "error": "Impossibile salvare. Controlla la connessione e riprova."
+    }
+  }
 }

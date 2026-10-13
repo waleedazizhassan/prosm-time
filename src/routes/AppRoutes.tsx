@@ -40,6 +40,7 @@ const ReportsPage = lazy(() => import("../modules/reports/ReportsPage"));
 const OrganizationSettingsPage = lazy(() => import("../modules/settings/OrganizationSettingsPage"));
 const IntegrationsPage = lazy(() => import("../modules/settings/IntegrationsPage"));
 const HelpPage = lazy(() => import("../modules/help/HelpPage"));
+const LegalPage = lazy(() => import("../modules/legal/LegalPage"));
 
 // PROSM Time route map. /activate, /login, /accept-invitation are
 // public (no session exists yet by definition at any of them) and
@@ -87,6 +88,9 @@ export default function AppRoutes() {
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/accept-invitation" element={<AcceptInvitationPage />} />
+          {/* Privacy Policy and Terms of Use - public, no sign-in needed (owner 2026-10-13). */}
+          <Route path="/privacy" element={<LegalPage document="privacy" />} />
+          <Route path="/terms" element={<LegalPage document="terms" />} />
 
           {/* Audit 1.3 - the kiosk runs outside the app shell: no sidebar,
               search or user menu, and KioskLockGuard keeps the device on it

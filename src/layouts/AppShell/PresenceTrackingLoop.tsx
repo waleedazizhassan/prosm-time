@@ -6,6 +6,8 @@ import PresenceRepository, { type PresenceSession } from "../../core/repositorie
 import BackgroundLocationService from "../../core/services/BackgroundLocationService";
 import { getCurrentPosition } from "../../core/utils/geo";
 import playAlertSound from "../../core/utils/playAlertSound";
+import Modal from "../../components/common/Modal";
+import Button from "../../components/common/Button";
 
 const PRESENCE_SAMPLE_INTERVAL_MS = 5 * 60 * 1000;
 // Cheap "is a presence session active right now" recheck - much
@@ -42,11 +44,41 @@ const PRESENCE_SESSION_POLL_MS = 30 * 1000;
 // remains exactly as it was for the web build, where no such native
 // capability exists - foreground-tab sampling only, same disclosed
 // limitation as before there.
+type BackgroundConsent = "unknown" | "accepted" | "declined";
+const BACKGROUND_CONSENT_KEY = "prosm_time_background_location_disclosure_v1";
+
+function readBackgroundConsent(): BackgroundConsent {
+  try {
+    const value = localStorage.getItem(BACKGROUND_CONSENT_KEY);
+    return value === "accepted" || value === "declined" ? value : "unknown";
+  } catch {
+    return "unknown";
+  }
+}
+
+function writeBackgroundConsent(value: "accepted" | "declined") {
+  try {
+    localStorage.setItem(BACKGROUND_CONSENT_KEY, value);
+  } catch {
+    // storage unavailable - asked again next time
+  }
+}
+
 export default function PresenceTrackingLoop() {
   const { profile } = useAuth();
   const { t } = useTranslation("shell");
   const presenceSessionRef = useRef<PresenceSession | null>(null);
   const [activePresenceSessionId, setActivePresenceSessionId] = useState<string | null>(null);
+  // Prominent disclosure before background location (owner 2026-10-13,
+  // Google Play policy): asked once; the answer is remembered on the device.
+  const [backgroundConsent, setBackgroundConsent] = useState<BackgroundConsent>(readBackgroundConsent);
+  const [disclosureOpen, setDisclosureOpen] = useState(false);
+
+  const answerDisclosure = (answer: "accepted" | "declined") => {
+    writeBackgroundConsent(answer);
+    setBackgroundConsent(answer);
+    setDisclosureOpen(false);
+  };
 
   // Keeps activePresenceSessionId (and the ref every sampling path
   // reads from) in sync with the real server-side state - both the
@@ -79,10 +111,16 @@ export default function PresenceTrackingLoop() {
     if (result.success && result.data?.exceptionCreated) playAlertSound();
   };
 
-  // Native path - real background tracking.
+  // Native path - real background tracking, only after the in-app
+  // disclosure has been accepted (Google Play requires a prominent
+  // disclosure before background location is requested).
   useEffect(() => {
     if (!BackgroundLocationService.isSupported()) return undefined;
     if (!activePresenceSessionId) return undefined;
+    if (backgroundConsent !== "accepted") {
+      if (backgroundConsent === "unknown") setDisclosureOpen(true);
+      return undefined;
+    }
 
     BackgroundLocationService.start(t("backgroundTrackingTitle"), t("backgroundTrackingMessage"), (latitude, longitude, accuracyMeters) => {
       recordSample(latitude, longitude, accuracyMeters);
@@ -91,13 +129,15 @@ export default function PresenceTrackingLoop() {
     return () => {
       BackgroundLocationService.stop();
     };
-  }, [activePresenceSessionId, t]);
+  }, [activePresenceSessionId, backgroundConsent, t]);
 
   // Web fallback path - foreground-tab-only JS interval, unchanged
   // from before. Skipped entirely on native, where the background
   // watcher above already covers both foreground and background.
+  // Without background permission (web, or the disclosure declined on
+  // Android) samples are taken only while the app is open.
   useEffect(() => {
-    if (BackgroundLocationService.isSupported()) return undefined;
+    if (BackgroundLocationService.isSupported() && backgroundConsent !== "declined") return undefined;
     if (!activePresenceSessionId) return undefined;
 
     const sampleInterval = setInterval(async () => {
@@ -112,7 +152,18 @@ export default function PresenceTrackingLoop() {
     }, PRESENCE_SAMPLE_INTERVAL_MS);
 
     return () => clearInterval(sampleInterval);
-  }, [activePresenceSessionId]);
+  }, [activePresenceSessionId, backgroundConsent]);
 
-  return null;
+  if (!disclosureOpen) return null;
+  return (
+    <Modal isOpen onClose={() => answerDisclosure("declined")} title={t("backgroundDisclosure.title")}>
+      <p style={{ margin: "0 0 var(--space-4)", fontSize: "var(--font-sm)", lineHeight: 1.7, color: "var(--text-primary)" }}>{t("backgroundDisclosure.body")}</p>
+      <div style={{ display: "flex", justifyContent: "flex-end", gap: "var(--space-2)" }}>
+        <Button variant="ghost" onClick={() => answerDisclosure("declined")}>
+          {t("backgroundDisclosure.decline")}
+        </Button>
+        <Button onClick={() => answerDisclosure("accepted")}>{t("backgroundDisclosure.accept")}</Button>
+      </div>
+    </Modal>
+  );
 }

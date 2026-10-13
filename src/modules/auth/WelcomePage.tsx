@@ -11,6 +11,7 @@ import { LANGUAGES } from "../../i18n/languages";
 import { useTheme } from "../../core/context/ThemeContext";
 import pageStyles from "../../components/common/AuthLayout.module.css";
 import styles from "./WelcomePage.module.css";
+import LegalLinks from "../legal/LegalLinks";
 
 // PROSM Time - § live UX review, user-directed:
 // - Desktop (>=861px): "no need for a card here, the header alone is
@@ -99,7 +100,11 @@ export default function WelcomePage() {
         )}
       </div>
 
-      {uiHidden ? null : <span className={styles.versionFooter}>{t("common:versionLabel", { version: APP_VERSION })}</span>}
+      {uiHidden ? null : (
+        <span className={styles.versionFooter}>
+          {t("common:versionLabel", { version: APP_VERSION })} · <LegalLinks />
+        </span>
+      )}
     </div>
   );
 }

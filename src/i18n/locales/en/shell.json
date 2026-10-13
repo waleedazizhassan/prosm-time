@@ -243,5 +243,11 @@
     "settings": "Organisation-wide rules",
     "integrations": "Payroll and other systems",
     "timesheets": "Hours for review and approval"
+  },
+  "backgroundDisclosure": {
+    "title": "Location during your shift",
+    "body": "PROSM Time collects your location about every 5 minutes to confirm that you are at your work site, even when the app is closed or not in use, but only while you are clocked in. It stops when you clock out. Your location is shared with your organisation's managers and deleted after 30 days. On the next screen, choose \"Allow all the time\" for this to work.",
+    "accept": "Continue",
+    "decline": "Not now"
   }
 }

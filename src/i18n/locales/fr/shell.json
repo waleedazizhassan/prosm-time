@@ -243,5 +243,11 @@
     "settings": "Règles de toute l'organisation",
     "integrations": "Paie et autres systèmes",
     "timesheets": "Heures à vérifier et approuver"
+  },
+  "backgroundDisclosure": {
+    "title": "Position pendant votre poste",
+    "body": "PROSM Time collecte votre position environ toutes les 5 minutes pour confirmer que vous êtes sur votre site de travail, même lorsque l'application est fermée ou non utilisée, mais uniquement pendant que vous êtes pointé. Cela s'arrête quand vous pointez votre départ. Votre position est partagée avec les responsables de votre organisation et supprimée après 30 jours. À l'écran suivant, choisissez « Toujours autoriser ».",
+    "accept": "Continuer",
+    "decline": "Pas maintenant"
   }
 }

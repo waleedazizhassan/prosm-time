@@ -243,5 +243,11 @@
     "settings": "Regeln für die ganze Organisation",
     "integrations": "Lohnabrechnung und andere Systeme",
     "timesheets": "Stunden zur Prüfung und Freigabe"
+  },
+  "backgroundDisclosure": {
+    "title": "Standort während Ihrer Schicht",
+    "body": "PROSM Time erfasst Ihren Standort etwa alle 5 Minuten, um zu bestätigen, dass Sie am Arbeitsort sind, auch wenn die App geschlossen ist oder nicht verwendet wird - jedoch nur, solange Sie eingestempelt sind. Beim Ausstempeln endet dies. Ihr Standort wird mit den Vorgesetzten Ihrer Organisation geteilt und nach 30 Tagen gelöscht. Wählen Sie im nächsten Schritt \"Immer zulassen\".",
+    "accept": "Weiter",
+    "decline": "Nicht jetzt"
   }
 }

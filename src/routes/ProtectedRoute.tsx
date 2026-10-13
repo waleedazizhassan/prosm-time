@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../core/context/AuthContext";
 import TrialEndedPage from "../modules/activation/TrialEndedPage";
 import useTrialStatus from "../modules/activation/useTrialStatus";
+import LegalAcknowledgementGate from "../modules/legal/LegalAcknowledgementGate";
 
 // PROSM Time - the client-side redirect ONLY. It is never the real
 // authorization boundary (§9: "the client only reflects, never
@@ -32,5 +33,6 @@ export default function ProtectedRoute({ children }: { children: ReactNode }) {
     return <TrialEndedPage status={trial.status} onReopened={() => window.location.assign("/dashboard")} />;
   }
 
-  return <>{children}</>;
+  // Privacy Policy / Terms of Use acknowledged once per version (owner 2026-10-13).
+  return <LegalAcknowledgementGate>{children}</LegalAcknowledgementGate>;
 }

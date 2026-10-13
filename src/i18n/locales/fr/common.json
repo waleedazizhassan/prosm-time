@@ -173,5 +173,27 @@
     "retry": "Réessayer"
   },
   "status": "Statut",
-  "save": "Enregistrer"
+  "save": "Enregistrer",
+  "legal": {
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "back": "Retour",
+    "languageNote": "Ce document est disponible en arabe et en anglais ; la version anglaise est affichée.",
+    "gate": {
+      "title": "Avant de continuer",
+      "intro": "PROSM Time enregistre votre présence pour votre organisation. Selon ses réglages :",
+      "points": [
+        "Votre position est enregistrée lorsque vous pointez, prenez une pause, changez de site ou envoyez un SOS.",
+        "Si votre organisation active le suivi de présence, votre position est enregistrée environ toutes les 5 minutes, uniquement pendant votre poste (sur Android aussi en arrière-plan, avec une notification visible). Cela s'arrête quand vous pointez votre départ.",
+        "Une photo n'est prise que si votre site l'exige. Il n'y a aucune reconnaissance faciale.",
+        "Les responsables de votre organisation voient vos données. Les positions sont supprimées après 30 jours et les photos après 90 jours."
+      ],
+      "readFull": "Tous les détails :",
+      "confirmMember": "J'ai lu la Politique de confidentialité et j'accepte les Conditions d'utilisation.",
+      "confirmOwner": "J'accepte les Conditions d'utilisation au nom de mon organisation et je confirme que nos employés sont informés de la façon dont PROSM Time enregistre leur présence, leur position et leurs photos.",
+      "accept": "Continuer",
+      "signOut": "Se déconnecter",
+      "error": "Enregistrement impossible. Vérifiez la connexion et réessayez."
+    }
+  }
 }
