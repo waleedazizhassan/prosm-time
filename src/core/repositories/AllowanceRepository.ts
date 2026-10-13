@@ -14,8 +14,13 @@ export interface AllowanceEntry {
   userFullName: string;
   entryDate: string;
   siteName: string | null;
+  // Audit 4.7 - the whole day, not only the session the entry is linked
+  // to: the first clock-in, the last clock-out (null while one is still
+  // open), how many sessions and the minutes worked in the closed ones.
   clockInAt: string | null;
   clockOutAt: string | null;
+  sessionCount: number;
+  workedMinutes: number;
   mealAllowance: number;
   expatriationAllowance: number;
   transportationAllowance: number;
@@ -83,6 +88,8 @@ function mapEntryRow(row: AllowanceEntryRow): AllowanceEntry {
     siteName: site?.name ?? session?.manual_location_label ?? null,
     clockInAt: session?.clock_in_at ?? null,
     clockOutAt: session?.clock_out_at ?? null,
+    sessionCount: session ? 1 : 0,
+    workedMinutes: session?.clock_out_at ? Math.max(0, Math.round((new Date(session.clock_out_at).getTime() - new Date(session.clock_in_at).getTime()) / 60000)) : 0,
     mealAllowance: row.meal_allowance,
     expatriationAllowance: row.expatriation_allowance,
     transportationAllowance: row.transportation_allowance,
@@ -103,6 +110,29 @@ function mapEntryRow(row: AllowanceEntryRow): AllowanceEntry {
 // rejects it as ambiguous (the exact same bug class audited and
 // fixed across timesheets/project_assignments/site_assignments
 // earlier this session).
+export interface DaySession {
+  clockInAt: string;
+  clockOutAt: string | null;
+}
+
+/** First clock-in, last clock-out (null while a session is open), count and closed minutes of one day. */
+export function summarizeDay(sessions: DaySession[]): Pick<AllowanceEntry, "clockInAt" | "clockOutAt" | "sessionCount" | "workedMinutes"> {
+  if (sessions.length === 0) return { clockInAt: null, clockOutAt: null, sessionCount: 0, workedMinutes: 0 };
+  const sorted = [...sessions].sort((a, b) => a.clockInAt.localeCompare(b.clockInAt));
+  const open = sorted.some((session) => session.clockOutAt === null);
+  const lastOut = sorted.reduce<string | null>((latest, session) => (session.clockOutAt && (!latest || session.clockOutAt > latest) ? session.clockOutAt : latest), null);
+  const workedMinutes = sorted.reduce(
+    (total, session) => total + (session.clockOutAt ? Math.max(0, Math.round((new Date(session.clockOutAt).getTime() - new Date(session.clockInAt).getTime()) / 60000)) : 0),
+    0,
+  );
+  return { clockInAt: sorted[0].clockInAt, clockOutAt: open ? null : lastOut, sessionCount: sorted.length, workedMinutes };
+}
+
+function localDate(iso: string): string {
+  const date = new Date(iso);
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+}
+
 const ENTRY_SELECT =
   "id, user_id, entry_date, meal_allowance, expatriation_allowance, transportation_allowance, housing_allowance, travel_allowance, other_allowance, other_allowance_note, overtime_hours, overtime_days, status, submitted_at, approved_at, users!allowance_entries_user_id_fkey(full_name), attendance_sessions(clock_in_at, clock_out_at, manual_location_label, sites(name))";
 
@@ -127,10 +157,39 @@ class AllowanceRepository {
         .lte("entry_date", endDate)
         .order("entry_date", { ascending: false });
       if (error) return createError(error.message);
-      return createSuccess((data ?? []).map(mapEntryRow));
+      const entries = (data ?? []).map(mapEntryRow);
+      return createSuccess(await this.withWholeDays(entries, startDate, endDate));
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Allowances service unavailable.");
     }
+  }
+
+  // Audit 4.7 - an entry is for the whole day: read every session of that
+  // person on that day (same reach as the Attendance Log) and summarise.
+  // If they can't be read, the entry keeps its own linked session.
+  private async withWholeDays(entries: AllowanceEntry[], startDate: string, endDate: string): Promise<AllowanceEntry[]> {
+    if (entries.length === 0) return entries;
+    const from = new Date(`${startDate}T00:00:00`).toISOString();
+    const to = new Date(`${endDate}T23:59:59.999`).toISOString();
+    const { data, error } = await this.client
+      .from("attendance_sessions")
+      .select("user_id, clock_in_at, clock_out_at")
+      .in("user_id", [...new Set(entries.map((entry) => entry.userId))])
+      .gte("clock_in_at", from)
+      .lte("clock_in_at", to);
+    if (error || !data) return entries;
+
+    const byDay = new Map<string, DaySession[]>();
+    for (const row of data as Array<{ user_id: string; clock_in_at: string; clock_out_at: string | null }>) {
+      const key = `${row.user_id}:${localDate(row.clock_in_at)}`;
+      const list = byDay.get(key) ?? [];
+      list.push({ clockInAt: row.clock_in_at, clockOutAt: row.clock_out_at });
+      byDay.set(key, list);
+    }
+    return entries.map((entry) => {
+      const sessions = byDay.get(`${entry.userId}:${entry.entryDate}`);
+      return sessions && sessions.length > 0 ? { ...entry, ...summarizeDay(sessions) } : entry;
+    });
   }
 
   async upsertEntry(entryDate: string, input: AllowanceEntryInput): Promise<ServiceResult<{ entryId: string }>> {

@@ -55,6 +55,7 @@
     "overtimeLine": "Überstunden: {{hours}} Std. ({{days}} Tage)",
     "otherNoteLabel": "Notiz (für „Sonstiges“)",
     "totalsLabel": "Summen",
-    "reviewNotesLabel": "Prüfnotizen (optional)"
+    "reviewNotesLabel": "Prüfnotizen (optional)",
+    "daySessionsLine": "{{count}} Sitzungen an diesem Tag · {{hours}} Std. {{minutes}} Min. gearbeitet"
   }
 }

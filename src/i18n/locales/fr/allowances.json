@@ -55,6 +55,7 @@
     "overtimeLine": "Heures sup. : {{hours}} h ({{days}} j)",
     "otherNoteLabel": "Note (pour « Autre »)",
     "totalsLabel": "Totaux",
-    "reviewNotesLabel": "Notes de révision (facultatif)"
+    "reviewNotesLabel": "Notes de révision (facultatif)",
+    "daySessionsLine": "{{count}} sessions ce jour · {{hours}} h {{minutes}} min travaillées"
   }
 }

@@ -335,6 +335,11 @@ export default function AllowancesPage() {
               {detailEntry.clockInAt ? ` · ${t("detail.clockInLine", { time: formatTimeOnly(detailEntry.clockInAt, i18n.language) })}` : ""}
               {detailEntry.clockOutAt ? ` · ${t("detail.clockOutLine", { time: formatTimeOnly(detailEntry.clockOutAt, i18n.language) })}` : ""}
             </p>
+            {detailEntry.sessionCount > 1 ? (
+              <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>
+                {t("detail.daySessionsLine", { count: detailEntry.sessionCount, hours: Math.floor(detailEntry.workedMinutes / 60), minutes: detailEntry.workedMinutes % 60 })}
+              </p>
+            ) : null}
             <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>
               {t("detail.overtimeLine", { hours: detailEntry.overtimeHours.toFixed(2), days: detailEntry.overtimeDays.toFixed(1) })}
             </p>

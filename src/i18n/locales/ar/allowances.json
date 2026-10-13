@@ -55,6 +55,7 @@
     "overtimeLine": "الإضافي: {{hours}} ساعة ({{days}} يوم)",
     "otherNoteLabel": "ملاحظة (لبند \"أخرى\")",
     "totalsLabel": "الإجمالي",
-    "reviewNotesLabel": "ملاحظات المراجعة (اختياري)"
+    "reviewNotesLabel": "ملاحظات المراجعة (اختياري)",
+    "daySessionsLine": "{{count}} جلسات في هذا اليوم · {{hours}} س {{minutes}} د عمل"
   }
 }

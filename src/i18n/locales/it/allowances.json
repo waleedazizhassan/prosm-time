@@ -55,6 +55,7 @@
     "overtimeLine": "Straordinario: {{hours}} ore ({{days}} giorni)",
     "otherNoteLabel": "Nota (per \"Altro\")",
     "totalsLabel": "Totali",
-    "reviewNotesLabel": "Note di revisione (facoltativo)"
+    "reviewNotesLabel": "Note di revisione (facoltativo)",
+    "daySessionsLine": "{{count}} sessioni in questo giorno · {{hours}} h {{minutes}} min lavorati"
   }
 }
