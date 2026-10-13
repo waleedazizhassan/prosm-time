@@ -23,6 +23,12 @@ declare
     v_absences jsonb;
     v_flagged_dates date[];
 begin
+    -- Audit 2.5 (2026-10-13): a check against production data. On any other
+    -- database (a fresh build, staging, disaster recovery) it is skipped.
+    if not exists (select 1 from public.organizations where id = 'cef9fc27-343d-4194-8167-033d1823b3d0') then
+        raise notice 'skipped: 20260915261000_verify_absence_report needs the production PROSM organisation';
+        return;
+    end if;
     select organization_id, auth_user_id into v_org, v_employee_auth_id from users where id = v_employee_id;
     if v_org is null then raise exception 'VERIFY SETUP FAILED: QA Test Employee not found'; end if;
 

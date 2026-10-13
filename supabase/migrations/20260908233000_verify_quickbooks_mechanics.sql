@@ -20,6 +20,12 @@ declare
     v_test_site uuid;
     v_unsynced_count int;
 begin
+    -- Audit 2.5 (2026-10-13): a check against production data. On any other
+    -- database (a fresh build, staging, disaster recovery) it is skipped.
+    if not exists (select 1 from public.organizations where id = 'cef9fc27-343d-4194-8167-033d1823b3d0') then
+        raise notice 'skipped: 20260908233000_verify_quickbooks_mechanics needs the production PROSM organisation';
+        return;
+    end if;
     -- current_prosm_time_user_id() matches public.users.auth_user_id =
     -- auth.uid() - look this up rather than assuming v_owner (the
     -- public.users.id) equals the auth id.

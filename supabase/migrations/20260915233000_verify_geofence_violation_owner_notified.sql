@@ -16,6 +16,12 @@ declare
     v_session_id uuid;
     v_event_id uuid;
 begin
+    -- Audit 2.5 (2026-10-13): a check against production data. On any other
+    -- database (a fresh build, staging, disaster recovery) it is skipped.
+    if not exists (select 1 from public.organizations where id = 'cef9fc27-343d-4194-8167-033d1823b3d0') then
+        raise notice 'skipped: 20260915233000_verify_geofence_violation_owner_notified needs the production PROSM organisation';
+        return;
+    end if;
     select organization_id into v_org from users where id = v_owner_id;
     if v_org is null then raise exception 'VERIFY SETUP FAILED: Owner not found'; end if;
 

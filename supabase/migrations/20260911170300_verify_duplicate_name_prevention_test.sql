@@ -9,6 +9,12 @@ declare
     v_fake_auth uuid := gen_random_uuid();
     v_error text;
 begin
+    -- Audit 2.5 (2026-10-13): a check against production data. On any other
+    -- database (a fresh build, staging, disaster recovery) it is skipped.
+    if not exists (select 1 from public.organizations where id = 'cef9fc27-343d-4194-8167-033d1823b3d0') then
+        raise notice 'skipped: 20260911170300_verify_duplicate_name_prevention_test needs the production PROSM organisation';
+        return;
+    end if;
     begin
         perform public.create_invited_prosm_time_user(
             p_organization_id => v_org,

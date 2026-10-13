@@ -43,9 +43,13 @@ npm run dev
 
 ```bash
 npm run lint     # ESLint
-npm test         # Vitest
+npm test         # Vitest (app)
+npm run test:db  # Vitest (database: PGlite built from every migration)
 npm run build    # tsc -b && vite build
 ```
+
+CI (`.github/workflows/ci.yml`) runs all of these on every push and pull
+request, including a fresh database built from every migration.
 
 ## Structure
 
@@ -67,7 +71,8 @@ staging database for this product yet.
 ```bash
 # Schema/RPC changes: add a new, timestamped migration file under
 # supabase/migrations/ (never edit an already-applied one - add a new
-# migration that recreates the function/policy instead), then:
+# migration that recreates the function/policy instead), check it with
+# npm run test:db, then:
 npx supabase db push --linked
 
 # Edge Function changes:
@@ -77,6 +82,18 @@ npx supabase functions deploy <function-name>
 # uses for RLS/grant hygiene (see WP-22):
 npx supabase db advisors --linked --type security --level warn
 ```
+
+### Migrations must build a fresh database
+
+Every file in `supabase/migrations/` must apply to an empty database
+(`supabase db reset`, a new staging project, disaster recovery from Git).
+So a migration never depends on production rows - no specific
+organisation or user ids, emails or names. Verification, diagnostic and
+cleanup scripts go in `supabase/tests/` (as database tests), never in
+`supabase/migrations/`. The older scripts already applied in production
+skip themselves when the production organisation is absent (audit 2.5,
+2026-10-13), and `supabase/tests/freshDatabase.test.ts` fails on any
+migration error.
 
 Required secrets (set once via `npx supabase secrets set`, never
 committed): `PROSM_MANAGEMENT_API_URL`, `PROSM_MANAGEMENT_API_KEY` (the

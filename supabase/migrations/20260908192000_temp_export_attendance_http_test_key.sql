@@ -13,6 +13,12 @@ declare
     v_raw_key text := 'ptime_httptest_' || replace(gen_random_uuid()::text, '-', '');
     v_hash text;
 begin
+    -- Audit 2.5 (2026-10-13): a check against production data. On any other
+    -- database (a fresh build, staging, disaster recovery) it is skipped.
+    if not exists (select 1 from public.organizations where id = 'cef9fc27-343d-4194-8167-033d1823b3d0') then
+        raise notice 'skipped: 20260908192000_temp_export_attendance_http_test_key needs the production PROSM organisation';
+        return;
+    end if;
     v_hash := encode(sha256(convert_to(v_raw_key, 'utf8')), 'hex');
 
     insert into api_keys (organization_id, name, key_hash, key_prefix)

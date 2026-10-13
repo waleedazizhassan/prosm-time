@@ -10,6 +10,12 @@ declare
     v_row record;
     v_table_count record;
 begin
+    -- Audit 2.5 (2026-10-13): a check against production data. On any other
+    -- database (a fresh build, staging, disaster recovery) it is skipped.
+    if not exists (select 1 from public.organizations where id = 'cef9fc27-343d-4194-8167-033d1823b3d0') then
+        raise notice 'skipped: 20260915291000_diagnose_prosm_org_users_and_data needs the production PROSM organisation';
+        return;
+    end if;
     select id into v_org_id from organizations where name ilike '%prosm%' limit 1;
     if v_org_id is null then
         raise exception 'DIAG FAILED: no organization matching %%prosm%% found';

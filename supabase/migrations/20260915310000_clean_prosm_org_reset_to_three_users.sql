@@ -34,6 +34,12 @@ declare
     v_deleted_users integer;
     v_deleted_row_count integer;
 begin
+    -- Audit 2.5 (2026-10-13): a check against production data. On any other
+    -- database (a fresh build, staging, disaster recovery) it is skipped.
+    if not exists (select 1 from public.organizations where id = 'cef9fc27-343d-4194-8167-033d1823b3d0') then
+        raise notice 'skipped: 20260915310000_clean_prosm_org_reset_to_three_users needs the production PROSM organisation';
+        return;
+    end if;
     -- Real auth_user_ids for the 4 QA accounts (confirmed via
     -- 20260915291000's own diagnostic output), not the Owner/Lido/uu
     -- ones accidentally placeholder'd above - overwritten with the

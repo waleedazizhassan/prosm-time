@@ -40,6 +40,12 @@ declare
     v_count_b int;
     v_workforce_count int;
 begin
+    -- Audit 2.5 (2026-10-13): a check against production data. On any other
+    -- database (a fresh build, staging, disaster recovery) it is skipped.
+    if not exists (select 1 from public.organizations where id = 'cef9fc27-343d-4194-8167-033d1823b3d0') then
+        raise notice 'skipped: 20260910191000_verify_report_center_site_scoping_test needs the production PROSM organisation';
+        return;
+    end if;
     select id into v_manager_role from roles where role_key = 'manager';
     select id into v_employee_role from roles where role_key = 'employee';
 

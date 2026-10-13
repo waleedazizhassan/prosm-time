@@ -13,6 +13,12 @@ declare
   v_open_after boolean;
   v_contractor_name text;
 begin
+    -- Audit 2.5 (2026-10-13): a check against production data. On any other
+    -- database (a fresh build, staging, disaster recovery) it is skipped.
+    if not exists (select 1 from public.organizations where id = 'cef9fc27-343d-4194-8167-033d1823b3d0') then
+        raise notice 'skipped: 20260910171000_verify_site_worker_contractor_override_test needs the production PROSM organisation';
+        return;
+    end if;
   select u.auth_user_id, u.organization_id into v_owner_auth_id, v_org_id
   from users u where u.email = 'admin@prosm.net' and u.is_owner = true limit 1;
 

@@ -14,8 +14,11 @@
 
 begin;
 
+-- Audit 2.5 (2026-10-13): production data only - inserts nothing on any
+-- other database (a fresh build, staging, disaster recovery).
 insert into installation_identity (organization_id, installation_key, installation_secret, platform, app_version, state, message, last_synced_at)
-values ('cef9fc27-343d-4194-8167-033d1823b3d0', 'test-verify-blocked-key', 'test-verify-blocked-secret', 'web', '2.3.0', 'BLOCKED', 'This installation is not covered by a valid license and access has been suspended. Please contact your administrator.', now())
+select 'cef9fc27-343d-4194-8167-033d1823b3d0', 'test-verify-blocked-key', 'test-verify-blocked-secret', 'web', '2.3.0', 'BLOCKED', 'This installation is not covered by a valid license and access has been suspended. Please contact your administrator.', now()
+where exists (select 1 from public.organizations where id = 'cef9fc27-343d-4194-8167-033d1823b3d0')
 on conflict (organization_id) do update set
     state = excluded.state,
     message = excluded.message,

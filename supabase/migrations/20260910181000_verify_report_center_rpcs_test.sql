@@ -8,6 +8,12 @@ declare
   v_owner_auth_id uuid;
   v_row_count integer;
 begin
+    -- Audit 2.5 (2026-10-13): a check against production data. On any other
+    -- database (a fresh build, staging, disaster recovery) it is skipped.
+    if not exists (select 1 from public.organizations where id = 'cef9fc27-343d-4194-8167-033d1823b3d0') then
+        raise notice 'skipped: 20260910181000_verify_report_center_rpcs_test needs the production PROSM organisation';
+        return;
+    end if;
   select auth_user_id into v_owner_auth_id from users where email = 'admin@prosm.net' and is_owner = true limit 1;
   if v_owner_auth_id is null then
     raise exception 'VERIFY ABORTED - no Owner account found';

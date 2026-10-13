@@ -18,6 +18,12 @@ declare
     v_row record;
     v_crosses boolean;
 begin
+    -- Audit 2.5 (2026-10-13): a check against production data. On any other
+    -- database (a fresh build, staging, disaster recovery) it is skipped.
+    if not exists (select 1 from public.organizations where id = 'cef9fc27-343d-4194-8167-033d1823b3d0') then
+        raise notice 'skipped: 20260909101000_verify_overnight_shift_support needs the production PROSM organisation';
+        return;
+    end if;
     select auth_user_id into v_owner_auth_id from users where id = v_owner;
     perform set_config('request.jwt.claim.sub', v_owner_auth_id::text, true);
     perform set_config('request.jwt.claims', jsonb_build_object('sub', v_owner_auth_id, 'role', 'authenticated')::text, true);

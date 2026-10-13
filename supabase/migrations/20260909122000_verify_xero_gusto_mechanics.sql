@@ -19,6 +19,12 @@ declare
     v_test_site uuid;
     v_unsynced_count int;
 begin
+    -- Audit 2.5 (2026-10-13): a check against production data. On any other
+    -- database (a fresh build, staging, disaster recovery) it is skipped.
+    if not exists (select 1 from public.organizations where id = 'cef9fc27-343d-4194-8167-033d1823b3d0') then
+        raise notice 'skipped: 20260909122000_verify_xero_gusto_mechanics needs the production PROSM organisation';
+        return;
+    end if;
     select auth_user_id into v_owner_auth_id from users where id = v_owner;
     perform set_config('request.jwt.claim.sub', v_owner_auth_id::text, true);
     perform set_config('request.jwt.claims', jsonb_build_object('sub', v_owner_auth_id, 'role', 'authenticated')::text, true);

@@ -1,0 +1,35 @@
+name: PROSM Time CI
+
+# Audit 2026-10-12 (items 2.5 and 3): every push and pull request is
+# checked - types, lint, the app tests, and the database tests, which
+# build a fresh PostgreSQL (PGlite) from every migration and fail on any
+# migration error (supabase/tests/freshDatabase.test.ts) before running
+# the backend suites (cross-tenant isolation, attendance lifecycle, ...).
+on:
+  push:
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "22", cache: npm }
+      - run: npm ci
+      - run: npx tsc -b
+      - run: npx eslint .
+      - run: npm test
+
+  database:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "22", cache: npm }
+      - run: npm ci
+      - run: npm run test:db

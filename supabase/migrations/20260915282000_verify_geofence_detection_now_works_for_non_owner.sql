@@ -27,6 +27,12 @@ declare
     v_exception_count integer;
     v_notification_count integer;
 begin
+    -- Audit 2.5 (2026-10-13): a check against production data. On any other
+    -- database (a fresh build, staging, disaster recovery) it is skipped.
+    if not exists (select 1 from public.organizations where id = 'cef9fc27-343d-4194-8167-033d1823b3d0') then
+        raise notice 'skipped: 20260915282000_verify_geofence_detection_now_works_for_non_owner needs the production PROSM organisation';
+        return;
+    end if;
     select organization_id into v_test_org from users where id = v_test_user_id;
     if v_test_org is null then
         raise exception 'VERIFY SETUP FAILED: test user % not found', v_test_user_id;

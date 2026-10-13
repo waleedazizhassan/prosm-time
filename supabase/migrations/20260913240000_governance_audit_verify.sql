@@ -16,6 +16,12 @@ declare
     v_total_projects int;
     v_total_project_assignments int;
 begin
+    -- Audit 2.5 (2026-10-13): a check against production data. On any other
+    -- database (a fresh build, staging, disaster recovery) it is skipped.
+    if not exists (select 1 from public.organizations where id = 'cef9fc27-343d-4194-8167-033d1823b3d0') then
+        raise notice 'skipped: 20260913240000_governance_audit_verify needs the production PROSM organisation';
+        return;
+    end if;
     select auth_user_id into v_owner_auth_id from users where email = 'admin@prosm.net';
     select auth_user_id into v_manager_auth_id from users where email = 'eaya4340@gmail.com';
     select auth_user_id into v_employee_auth_id from users where email = 'waleedaziz144@yahoo.com';
