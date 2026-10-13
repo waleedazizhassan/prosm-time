@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 import SiteRepository, { type Site, type KioskMode } from "../../core/repositories/SiteRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
@@ -231,7 +232,15 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
         </div>
       ) : null}
 
-      {isEditing ? <p style={{ margin: "var(--space-3) 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("form.sitePolicyMovedHint")}</p> : null}
+      {isEditing && site ? (
+        <p style={{ margin: "var(--space-3) 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
+          {t("form.sitePolicyMovedHint")}{" "}
+          {/* Audit 4.6 - one step to this site's own settings (presence monitoring included). */}
+          <Link to={`/settings?site=${site.id}`} onClick={onClose} style={{ color: "var(--text-link)" }}>
+            {t("form.openSiteSettings")}
+          </Link>
+        </p>
+      ) : null}
 
       <ErrorText>{error}</ErrorText>
     </Modal>

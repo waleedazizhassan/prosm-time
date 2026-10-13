@@ -74,9 +74,10 @@
     "presenceMonitoringEnabledHint": "Riverifica periodicamente la posizione durante un turno in questo sito e segnala se qualcuno lascia l'area dopo la timbratura. Disattivato per impostazione predefinita.",
     "cameraRequiredLabel": "Fotocamera richiesta",
     "activeLabel": "Sede attiva",
-    "sitePolicyMovedHint": "Tolleranza di precisione GPS, periodo di tolleranza, politica del turno e dipendenti esentati si gestiscono da Impostazioni.",
+    "sitePolicyMovedHint": "Tolleranza di precisione GPS, periodo di tolleranza, politica del turno, monitoraggio continuo della presenza e dipendenti esentati si gestiscono da Impostazioni.",
     "confirm": "Salva sede",
-    "genericError": "Impossibile salvare questa sede."
+    "genericError": "Impossibile salvare questa sede.",
+    "openSiteSettings": "Apri le impostazioni di questa sede"
   },
   "detail": {
     "backToList": "Torna alle sedi",

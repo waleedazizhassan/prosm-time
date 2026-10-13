@@ -74,9 +74,10 @@
     "presenceMonitoringEnabledHint": "Re-checks location periodically during a shift at this site and reports if someone leaves the area after clocking in. Off by default.",
     "cameraRequiredLabel": "Camera required",
     "activeLabel": "Site active",
-    "sitePolicyMovedHint": "GPS accuracy tolerance, grace period, shift policy and exempt employees are managed from Settings.",
+    "sitePolicyMovedHint": "GPS accuracy tolerance, grace period, shift policy, ongoing presence monitoring and exempt employees are managed from Settings.",
     "confirm": "Save site",
-    "genericError": "Unable to save this site."
+    "genericError": "Unable to save this site.",
+    "openSiteSettings": "Open this site's settings"
   },
   "detail": {
     "backToList": "Back to sites",

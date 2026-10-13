@@ -74,9 +74,10 @@
     "presenceMonitoringEnabledHint": "Überprüft den Standort während einer Schicht an diesem Standort regelmäßig erneut und meldet, wenn jemand nach dem Einstempeln den Bereich verlässt. Standardmäßig deaktiviert.",
     "cameraRequiredLabel": "Kamera erforderlich",
     "activeLabel": "Standort aktiv",
-    "sitePolicyMovedHint": "GPS-Genauigkeitstoleranz, Kulanzzeit, Schichtrichtlinie und befreite Mitarbeiter werden in den Einstellungen verwaltet.",
+    "sitePolicyMovedHint": "GPS-Genauigkeitstoleranz, Kulanzzeit, Schichtrichtlinie, laufende Anwesenheitsüberwachung und befreite Mitarbeiter werden in den Einstellungen verwaltet.",
     "confirm": "Standort speichern",
-    "genericError": "Dieser Standort konnte nicht gespeichert werden."
+    "genericError": "Dieser Standort konnte nicht gespeichert werden.",
+    "openSiteSettings": "Einstellungen dieses Standorts öffnen"
   },
   "detail": {
     "backToList": "Zurück zu Standorten",

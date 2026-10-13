@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router-dom";
 
 import SiteRepository, { type Site, type SiteAssignment, type BreakRoundingMode } from "../../core/repositories/SiteRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
@@ -37,7 +38,9 @@ export default function SitePolicySettingsCard() {
 
   const [sites, setSites] = useState<Site[]>([]);
   const [sitesLoading, setSitesLoading] = useState(true);
-  const [selectedSiteId, setSelectedSiteId] = useState("");
+  // Audit 4.6 - the site form links here with ?site=<id>, already selected.
+  const [searchParams] = useSearchParams();
+  const [selectedSiteId, setSelectedSiteId] = useState(() => searchParams.get("site") ?? "");
   const [site, setSite] = useState<Site | null>(null);
   const [siteLoading, setSiteLoading] = useState(false);
   const [loadError, setLoadError] = useState("");
