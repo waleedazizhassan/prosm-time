@@ -67,3 +67,13 @@
 .contactLink:hover {
   text-decoration: underline;
 }
+
+/* Friendly illustration (owner 2026-10-13). */
+.art {
+  display: block;
+  width: min(220px, 70%);
+  height: auto;
+  max-height: 160px;
+  margin: 0 auto var(--space-4, 16px);
+  object-fit: contain;
+}

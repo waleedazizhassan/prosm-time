@@ -41,7 +41,9 @@
     "upToDate": "Sie haben die neueste Version."
   },
   "offline": {
-    "message": "Sie sind offline - einige Informationen sind möglicherweise veraltet, bis die Verbindung wiederhergestellt ist."
+    "message": "Kein Problem - Ein- und Ausstempeln und Pausen funktionieren weiter und werden gesendet, sobald Sie wieder online sind.",
+    "title": "Sie sind offline",
+    "backOnline": "Sie sind wieder online - Ihre Daten werden aktualisiert."
   },
   "commandPalette": {
     "open": "Suche öffnen",

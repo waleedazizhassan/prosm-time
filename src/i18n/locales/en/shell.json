@@ -41,7 +41,9 @@
     "upToDate": "You're on the latest version."
   },
   "offline": {
-    "message": "You're offline - some information may be out of date until your connection comes back."
+    "message": "No worries - clock in, clock out and breaks still work, and we'll send them as soon as you're back online.",
+    "title": "You're offline",
+    "backOnline": "You're back online - updating your information now."
   },
   "commandPalette": {
     "open": "Open search",

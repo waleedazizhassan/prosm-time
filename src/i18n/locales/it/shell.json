@@ -41,7 +41,9 @@
     "upToDate": "Hai la versione più recente."
   },
   "offline": {
-    "message": "Sei offline - alcune informazioni potrebbero non essere aggiornate finché la connessione non torna."
+    "message": "Nessun problema: timbrature e pause funzionano comunque e verranno inviate appena torni online.",
+    "title": "Sei offline",
+    "backOnline": "Sei di nuovo online - aggiornamento dei tuoi dati in corso."
   },
   "commandPalette": {
     "open": "Apri ricerca",

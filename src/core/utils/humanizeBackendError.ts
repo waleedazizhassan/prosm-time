@@ -33,6 +33,12 @@ export default function humanizeBackendError(rawMessage: string | null | undefin
   // the root cause is fixed, keep this mapped permanently - any other
   // future path that ever produces the same raw constraint violation
   // should still show something real, not silently fall through.
+  // Owner 2026-10-13 - a request that never reached the server (no
+  // internet, weak signal, server unreachable) gets a kind message
+  // instead of the browser's own technical text.
+  if (/failed to fetch|networkerror|network request failed|load failed|fetch failed|failed to send a request|err_internet_disconnected|timed? ?out/i.test(trimmed)) {
+    return t("common:backendErrors.networkProblem");
+  }
   if (trimmed.includes("presence_sessions_one_active_per_user")) {
     return t("common:backendErrors.orphanedPresenceSession");
   }

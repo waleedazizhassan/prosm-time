@@ -41,7 +41,9 @@
     "upToDate": "Vous avez la dernière version."
   },
   "offline": {
-    "message": "Vous êtes hors ligne - certaines informations peuvent être obsolètes jusqu'au retour de la connexion."
+    "message": "Pas d'inquiétude : les pointages et les pauses fonctionnent toujours et seront envoyés dès le retour de la connexion.",
+    "title": "Vous êtes hors ligne",
+    "backOnline": "Vous êtes de nouveau en ligne - mise à jour de vos informations."
   },
   "commandPalette": {
     "open": "Ouvrir la recherche",

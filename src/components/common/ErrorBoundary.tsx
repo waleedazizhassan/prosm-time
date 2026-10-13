@@ -1,6 +1,7 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
 import i18next from "../../i18n";
 import styles from "./ErrorBoundary.module.css";
+import errorArt from "../../assets/illustrations/state-error.svg";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -37,6 +38,7 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBo
       return (
         <div className={styles.page}>
           <div className={styles.card}>
+            <img src={errorArt} alt="" className={styles.art} />
             <h1 className={styles.title}>{i18next.t("common:errorBoundary.title")}</h1>
             <p className={styles.message}>{i18next.t("common:errorBoundary.message")}</p>
             <button type="button" className={styles.reloadButton} onClick={this.handleReload}>

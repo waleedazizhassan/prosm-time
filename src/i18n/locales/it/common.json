@@ -19,7 +19,7 @@
   },
   "errorBoundary": {
     "title": "Qualcosa è andato storto",
-    "message": "Si è verificato un errore imprevisto. Ricaricare la pagina di solito risolve il problema.",
+    "message": "Ci dispiace! Ricaricare di solito risolve.",
     "reloadAction": "Ricarica",
     "contactPrefix": "Se il problema persiste, contatta"
   },
@@ -164,11 +164,12 @@
     "offlineTimeOnLeaveDay": "Questa azione offline cade in un giorno di ferie approvate, quindi non è stata registrata.",
     "onBehalfOnlyBelowRole": "Puoi timbrare per conto solo di persone con un ruolo inferiore al tuo.",
     "fakeLocationRejected": "Timbrare da una posizione falsa (app di posizione fittizia) non è consentito in questa organizzazione.",
-    "clockInOutsideAreaContactManager": "Sei fuori dall'area di lavoro di questa sede e non puoi timbrare da solo qui - contatta il tuo responsabile per registrare la presenza."
+    "clockInOutsideAreaContactManager": "Sei fuori dall'area di lavoro di questa sede e non puoi timbrare da solo qui - contatta il tuo responsabile per registrare la presenza.",
+    "networkProblem": "Al momento non riusciamo a raggiungere il server. Controlla la connessione e riprova tra poco."
   },
   "pageLoad": {
-    "title": "Impossibile aprire questa pagina",
-    "body": "Serve una connessione. Entrate, uscite, pause e cambi sede funzionano offline e vengono inviati al ritorno della connessione.",
+    "title": "Questa pagina ha bisogno di una connessione",
+    "body": "Controlla la connessione e riprova. Intanto timbrature e pause funzionano anche senza internet.",
     "retry": "Riprova"
   },
   "status": "Stato",

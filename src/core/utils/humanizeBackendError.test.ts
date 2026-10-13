@@ -20,6 +20,11 @@ describe("humanizeBackendError", () => {
     expect(humanizeBackendError("Too many attempts. Please wait a few minutes and try again.", t)).toBe(t("common:backendErrors.tooManyAttempts"));
   });
 
+  it("turns a request that never reached the server into a kind message", () => {
+    expect(humanizeBackendError("TypeError: Failed to fetch", t)).toBe(t("common:backendErrors.networkProblem"));
+    expect(humanizeBackendError("Failed to send a request to the Edge Function", t)).toBe(t("common:backendErrors.networkProblem"));
+  });
+
   it("keeps exact messages working and leaves unexpected ones to the generic text", () => {
     expect(humanizeBackendError("INCORRECT PIN", t)).toBe(t("common:backendErrors.incorrectPin"));
     expect(humanizeBackendError("CLOCK IN FAILED: relation does not exist", t)).toBeNull();

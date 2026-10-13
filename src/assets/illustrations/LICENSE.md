@@ -3,7 +3,8 @@
 The SVG illustrations in this folder are from unDraw (https://undraw.co) by
 Katerina Limpitsouni, as published in the npm package
 `react-undraw-illustrations` 2.0.3 under the MIT License, recoloured to the
-PROSM green (#16a34a). One file per page, named after the page's navigation id.
+PROSM green (#16a34a). One file per page, named after the page's navigation id;
+state-*.svg are used for the offline, back-online and error messages.
 
 MIT License
 

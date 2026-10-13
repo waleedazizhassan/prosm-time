@@ -18,8 +18,8 @@
     "label": "Actions"
   },
   "errorBoundary": {
-    "title": "Something went wrong",
-    "message": "An unexpected error occurred. Reloading the page usually resolves this.",
+    "title": "Something went a little wrong",
+    "message": "Sorry about that! Reloading usually fixes it.",
     "reloadAction": "Reload",
     "contactPrefix": "If this keeps happening, contact"
   },
@@ -164,11 +164,12 @@
     "offlineTimeOnLeaveDay": "This offline action falls on a day of approved leave, so it was not recorded.",
     "onBehalfOnlyBelowRole": "You can only clock in or out on behalf of people below your role.",
     "fakeLocationRejected": "A clock in or out from a fake location (a mock-location app) is not accepted in this organisation.",
-    "clockInOutsideAreaContactManager": "You are outside this site's work area, so you can't clock in yourself here - please contact your manager to register your attendance."
+    "clockInOutsideAreaContactManager": "You are outside this site's work area, so you can't clock in yourself here - please contact your manager to register your attendance.",
+    "networkProblem": "We can't reach the server right now. Check your connection and try again in a moment."
   },
   "pageLoad": {
-    "title": "This page could not be opened",
-    "body": "It needs a connection to load. Clock in, clock out, breaks and site changes keep working offline and are sent when the connection returns.",
+    "title": "This page needs a connection",
+    "body": "Check that you're connected and try again. Meanwhile, clock in, clock out and breaks keep working without internet.",
     "retry": "Try again"
   },
   "status": "Status",

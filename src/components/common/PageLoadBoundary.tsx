@@ -1,8 +1,9 @@
 import { Component, type ReactNode } from "react";
-import { WifiOff } from "lucide-react";
 
 import i18n from "../../i18n";
 import Button from "./Button";
+import StateMessage from "./StateMessage";
+import offlineArt from "../../assets/illustrations/state-offline.svg";
 
 // Pages other than the attendance screens are fetched when opened (owner 2026-09-29), so opening
 // one can fail: no connection (web), or a new release replaced the page files. Without this the
@@ -49,13 +50,6 @@ export default class PageLoadBoundary extends Component<{ children: ReactNode; r
   render() {
     if (!this.state.failed) return this.props.children;
     const t = (k: string) => i18n.t(k, { ns: "common" }) as string;
-    return (
-      <div role="alert" style={{ display: "grid", justifyItems: "center", gap: "var(--space-3)", padding: "var(--space-8) var(--space-4)", textAlign: "center" }}>
-        <WifiOff size={32} />
-        <strong>{t("pageLoad.title")}</strong>
-        <span style={{ color: "var(--text-secondary)", maxWidth: 420 }}>{t("pageLoad.body")}</span>
-        <Button onClick={() => window.location.reload()}>{t("pageLoad.retry")}</Button>
-      </div>
-    );
+    return <StateMessage illustration={offlineArt} title={t("pageLoad.title")} body={t("pageLoad.body")} action={<Button onClick={() => window.location.reload()}>{t("pageLoad.retry")}</Button>} />;
   }
 }

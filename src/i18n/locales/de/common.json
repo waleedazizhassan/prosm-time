@@ -18,8 +18,8 @@
     "label": "Aktionen"
   },
   "errorBoundary": {
-    "title": "Etwas ist schiefgelaufen",
-    "message": "Ein unerwarteter Fehler ist aufgetreten. Ein Neuladen der Seite behebt dies in der Regel.",
+    "title": "Da ist etwas schiefgelaufen",
+    "message": "Das tut uns leid! Neu laden hilft meistens.",
     "reloadAction": "Neu laden",
     "contactPrefix": "Falls dies weiterhin auftritt, kontaktieren Sie"
   },
@@ -164,11 +164,12 @@
     "offlineTimeOnLeaveDay": "Diese Offline-Aktion fällt auf einen genehmigten Urlaubstag und wurde nicht erfasst.",
     "onBehalfOnlyBelowRole": "Sie können nur für Personen unterhalb Ihrer Rolle ein- oder ausstempeln.",
     "fakeLocationRejected": "Ein- oder Ausstempeln von einem gefälschten Standort (Mock-Location-App) wird in dieser Organisation nicht akzeptiert.",
-    "clockInOutsideAreaContactManager": "Sie sind außerhalb des Arbeitsbereichs dieses Standorts und können hier nicht selbst einstempeln - bitte wenden Sie sich an Ihre Führungskraft."
+    "clockInOutsideAreaContactManager": "Sie sind außerhalb des Arbeitsbereichs dieses Standorts und können hier nicht selbst einstempeln - bitte wenden Sie sich an Ihre Führungskraft.",
+    "networkProblem": "Der Server ist gerade nicht erreichbar. Prüfen Sie Ihre Verbindung und versuchen Sie es gleich noch einmal."
   },
   "pageLoad": {
-    "title": "Diese Seite konnte nicht geöffnet werden",
-    "body": "Sie benötigt eine Verbindung. Ein- und Ausstempeln, Pausen und Standortwechsel funktionieren offline und werden gesendet, sobald die Verbindung zurück ist.",
+    "title": "Diese Seite braucht eine Verbindung",
+    "body": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut. Ein- und Ausstempeln und Pausen funktionieren auch ohne Internet.",
     "retry": "Erneut versuchen"
   },
   "status": "Status",

@@ -18,8 +18,8 @@
     "label": "Actions"
   },
   "errorBoundary": {
-    "title": "Une erreur s'est produite",
-    "message": "Une erreur inattendue s'est produite. Recharger la page résout généralement ce problème.",
+    "title": "Un petit souci est survenu",
+    "message": "Désolé ! Recharger la page règle généralement le problème.",
     "reloadAction": "Recharger",
     "contactPrefix": "Si cela persiste, contactez"
   },
@@ -164,11 +164,12 @@
     "offlineTimeOnLeaveDay": "Cette action hors ligne tombe un jour de congé approuvé ; elle n'a pas été enregistrée.",
     "onBehalfOnlyBelowRole": "Vous ne pouvez pointer à la place que des personnes d'un rôle inférieur au vôtre.",
     "fakeLocationRejected": "Un pointage depuis une position falsifiée (application de position fictive) n'est pas accepté dans cette organisation.",
-    "clockInOutsideAreaContactManager": "Vous êtes en dehors de la zone de travail de ce site et ne pouvez pas pointer vous-même ici - contactez votre responsable pour enregistrer votre présence."
+    "clockInOutsideAreaContactManager": "Vous êtes en dehors de la zone de travail de ce site et ne pouvez pas pointer vous-même ici - contactez votre responsable pour enregistrer votre présence.",
+    "networkProblem": "Impossible de joindre le serveur pour le moment. Vérifiez votre connexion et réessayez dans un instant."
   },
   "pageLoad": {
-    "title": "Cette page n’a pas pu être ouverte",
-    "body": "Elle nécessite une connexion. Les pointages, pauses et changements de site fonctionnent hors ligne et sont envoyés au retour de la connexion.",
+    "title": "Cette page a besoin d'une connexion",
+    "body": "Vérifiez votre connexion et réessayez. En attendant, les pointages et les pauses fonctionnent sans internet.",
     "retry": "Réessayer"
   },
   "status": "Statut",
