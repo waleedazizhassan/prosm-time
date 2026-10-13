@@ -105,7 +105,12 @@ permissions:
 env:
   VITE_SUPABASE_URL: https://wcfdhsxzeryqwpmftgay.supabase.co
   VITE_SUPABASE_ANON_KEY: sb_publishable_HIckVV9KFC3f6xhq6VS5RQ_KGybZ6bt
-  VITE_UPDATE_MANIFEST_URL: https://raw.githubusercontent.com/waleedazizhassan/prosm-time/main/public/latest-version.json
+  # Audit 2.3 (owner 2026-10-13): installed apps read the update manifest
+  # from PROSM's own Supabase Storage (public bucket app-releases), not
+  # from GitHub, so the repository can be made private. The manifest is
+  # still committed to public/latest-version.json as well, for builds
+  # released before this change (they read the raw GitHub URL).
+  VITE_UPDATE_MANIFEST_URL: https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/public/app-releases/latest-version.json
 
 jobs:
   # § real gap fix, 14-point live-audit gap #1: this workflow had no
@@ -376,8 +381,9 @@ jobs:
         run: |
           set -e
           if [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
-            echo "::warning::SUPABASE_SERVICE_ROLE_KEY is not set - skipping the PROSM-domain mirror upload (GitHub Release publish above already succeeded). See release.yml's own comment on this step for the one-time 'gh secret set' command."
-            exit 0
+            # Audit 2.3: the update manifest's download links point here, so this is required now.
+            echo "::error::SUPABASE_SERVICE_ROLE_KEY is not set - the update manifest's download links point to app-releases."
+            exit 1
           fi
           base="https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/app-releases"
           upload() {
@@ -391,12 +397,12 @@ jobs:
           }
           upload "artifacts/prosm-time-android/PROSM-Time.apk" "PROSM-Time.apk"
           upload "artifacts/prosm-time-android/PROSM-Time-v${{ needs.test.outputs.nextVersion }}.apk" "PROSM-Time-v${{ needs.test.outputs.nextVersion }}.apk"
-          upload "artifacts/prosm-time-windows/PROSM-Time-Setup.exe" "PROSM-Time-Setup.exe"
-          upload "artifacts/prosm-time-windows/PROSM-Time-Setup-v${{ needs.test.outputs.nextVersion }}.exe" "PROSM-Time-Setup-v${{ needs.test.outputs.nextVersion }}.exe"
+          # The Windows installer (~130 MB) is above Supabase Storage's 50 MB
+          # per-file limit (checked 2026-10-13: 413 EntityTooLarge), so it
+          # stays on the GitHub Release only - see AUDIT_FIXES_REPORT.md, 2.3.
           public_base="https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/public/app-releases"
           echo "Stable mirror URLs (paste into prosm.net's own download buttons):"
           echo "  $public_base/PROSM-Time.apk"
-          echo "  $public_base/PROSM-Time-Setup.exe"
 
   deploy-web:
     name: Build web, attach it to the Release, publish latest-version.json
@@ -452,8 +458,8 @@ jobs:
         run: |
           set -e
           if [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
-            echo "::warning::SUPABASE_SERVICE_ROLE_KEY is not set - skipping the PROSM-domain mirror upload."
-            exit 0
+            echo "::error::SUPABASE_SERVICE_ROLE_KEY is not set - the update manifest's download links point to app-releases."
+            exit 1
           fi
           base="https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/app-releases"
           upload() {
@@ -481,9 +487,12 @@ jobs:
         env:
           RELEASE_VERSION: ${{ needs.create-release.outputs.version }}
           RELEASED_AT: ${{ needs.test.outputs.releasedAt }}
-          ANDROID_URL: ${{ needs.create-release.outputs.android_url }}
+          # Audit 2.3: Android and web from PROSM's Storage (uploaded above, before
+          # this job runs); Windows stays on the GitHub Release (over 50 MB).
+          ANDROID_URL: https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/public/app-releases/PROSM-Time-v${{ needs.create-release.outputs.version }}.apk
           WINDOWS_URL: ${{ needs.create-release.outputs.windows_url }}
-          WEB_URL: https://github.com/${{ github.repository }}/releases/download/v${{ needs.create-release.outputs.version }}/PROSM-Time-Web.zip
+          WEB_URL: https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/public/app-releases/PROSM-Time-Web-v${{ needs.create-release.outputs.version }}.zip
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
           set -e
           base="${{ github.server_url }}/${{ github.repository }}/releases/download/v${RELEASE_VERSION}"
@@ -501,6 +510,14 @@ jobs:
             fs.writeFileSync("public/latest-version.json", JSON.stringify(manifest, null, 2));
             console.log(JSON.stringify(manifest, null, 2));
           '
+          # Audit 2.3: the copy installed apps read (short cache so a new release shows within minutes).
+          curl -sf -X POST "https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/app-releases/latest-version.json" \
+            -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
+            -H "x-upsert: true" \
+            -H "Content-Type: application/json" \
+            -H "cache-control: max-age=60" \
+            --data-binary "@public/latest-version.json"
+          echo ""
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           # package.json here was already patched to this release's
