@@ -26,7 +26,8 @@
     "empty": "No exceptions or corrections awaiting review.",
     "kind": {
       "geofence_exception": "Geofence Exception",
-      "correction_request": "Correction Request"
+      "correction_request": "Correction Request",
+      "offline_time": "Offline time"
     },
     "reviewAction": "Review",
     "notesLabel": "Notes (optional)",
@@ -36,6 +37,16 @@
       "rejected": "Reject",
       "acknowledged": "Acknowledge",
       "clarification_requested": "Request Clarification"
+    },
+    "offlineTime": {
+      "summary": "{{action}} recorded offline at the device's time {{deviceTime}}; it reached the server at {{receivedAt}}.",
+      "action": {
+        "clock_in": "Clock in",
+        "clock_out": "Clock out",
+        "break_start": "Break start",
+        "break_end": "Break end",
+        "site_change": "Site change"
+      }
     }
   },
   "leave": {

@@ -45,7 +45,7 @@ serve(async (request: Request) => {
     }
 
     const payload = await request.json().catch(() => ({}));
-    const { idempotencyKey, clientReportedAt, latitude, longitude, accuracyMeters, note, activity } = payload;
+    const { idempotencyKey, clientReportedAt, offlineReplay, latitude, longitude, accuracyMeters, note, activity } = payload;
 
     if (!idempotencyKey || typeof idempotencyKey !== "string") {
       return errorResponse("idempotencyKey is required.", 400, "INVALID_REQUEST");
@@ -54,6 +54,8 @@ serve(async (request: Request) => {
     const { data, error } = await callerClient.rpc("clock_out_prosm_time_attendance", {
       p_idempotency_key: idempotencyKey,
       p_client_reported_at: clientReportedAt ?? null,
+      // Audit 1.4: only the offline queue sends this; a live action is recorded at the server's time.
+      p_offline_replay: offlineReplay === true,
       p_latitude: typeof latitude === "number" ? latitude : null,
       p_longitude: typeof longitude === "number" ? longitude : null,
       p_accuracy_meters: typeof accuracyMeters === "number" ? accuracyMeters : null,

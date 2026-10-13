@@ -36,5 +36,7 @@
   "photoModalTitle": "Photo de présence",
   "photoLoading": "Chargement de la photo…",
   "photoAlt": "Photo justificative de présence",
-  "photoLoadError": "Impossible de charger cette photo."
+  "photoLoadError": "Impossible de charger cette photo.",
+  "deviceTimeBadge": "Heure de l'appareil (hors ligne)",
+  "deviceTimeHint": "Enregistré sans connexion avec l'heure de l'appareil de l'employé ; en attente de la vérification d'un responsable."
 }

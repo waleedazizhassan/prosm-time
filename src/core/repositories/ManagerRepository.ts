@@ -48,6 +48,10 @@ export interface TodayAttendanceRow {
   // someone else's behalf.
   clockInRecordedByName: string | null;
   clockOutRecordedByName: string | null;
+  // Audit 1.4 - the time came from the device (an offline action sent
+  // later), not the server; a manager reviews it.
+  clockInDeviceTime: boolean;
+  clockOutDeviceTime: boolean;
   // § live UX review, user-directed - "Change Site" mid-shift: show the
   // move inline under the site name ("changed to X at HH:MM"), same
   // "the record itself carries what happened" posture as the evidence-
@@ -61,12 +65,16 @@ export interface SiteChangeEntry {
   changedAt: string;
 }
 
+export type PendingReviewKind = "geofence_exception" | "correction_request" | "offline_time";
+
 export interface PendingReviewItem {
-  kind: "geofence_exception" | "correction_request";
+  kind: PendingReviewKind;
   id: string;
   userFullName: string;
   summary: string;
   createdAt: string;
+  // offline_time only (audit 1.4): what was done, the device's time and when it reached the server.
+  offlineTime?: { action: string; deviceTime: string; receivedAt: string };
 }
 
 interface RawUserRef {
@@ -93,7 +101,17 @@ interface RawAttendanceEventRow {
   within_geofence: boolean | null;
   note: string | null;
   activity: string | null;
+  time_source: "server" | "device_offline" | null;
   recorded_by_user: { full_name: string } | { full_name: string }[] | null;
+}
+
+interface RawOfflineTimeReviewRow {
+  id: string;
+  action: string;
+  device_time: string;
+  server_received_at: string;
+  created_at: string;
+  users: RawUserRef | RawUserRef[] | null;
 }
 
 interface RawCameraEvidenceRow {
@@ -247,10 +265,11 @@ class ManagerRepository {
       const clockOutActivityBySession = new Map<string, string>();
       const clockInRecordedByBySession = new Map<string, string>();
       const clockOutRecordedByBySession = new Map<string, string>();
+      const deviceTimeEvents = new Set<string>();
       if (sessionIds.length > 0) {
         const eventsResult = await this.client
           .from("attendance_events")
-          .select("id, session_id, event_type, latitude, longitude, within_geofence, note, activity, recorded_by_user:users!attendance_events_recorded_by_fkey(full_name)")
+          .select("id, session_id, event_type, latitude, longitude, within_geofence, note, activity, time_source, recorded_by_user:users!attendance_events_recorded_by_fkey(full_name)")
           .in("session_id", sessionIds)
           .in("event_type", ["clock_in", "clock_out"]);
         if (eventsResult.error) return createError(eventsResult.error.message);
@@ -288,6 +307,7 @@ class ManagerRepository {
             if (event.event_type === "clock_in") clockInActivityBySession.set(event.session_id, event.activity);
             else clockOutActivityBySession.set(event.session_id, event.activity);
           }
+          if (event.time_source === "device_offline") deviceTimeEvents.add(`${event.session_id}:${event.event_type}`);
           const recordedByUser = Array.isArray(event.recorded_by_user) ? event.recorded_by_user[0] : event.recorded_by_user;
           if (recordedByUser?.full_name) {
             if (event.event_type === "clock_in") clockInRecordedByBySession.set(event.session_id, recordedByUser.full_name);
@@ -344,6 +364,8 @@ class ManagerRepository {
           clockOutActivity: clockOutActivityBySession.get(row.id) ?? null,
           clockInRecordedByName: clockInRecordedByBySession.get(row.id) ?? null,
           clockOutRecordedByName: clockOutRecordedByBySession.get(row.id) ?? null,
+          clockInDeviceTime: deviceTimeEvents.has(`${row.id}:clock_in`),
+          clockOutDeviceTime: deviceTimeEvents.has(`${row.id}:clock_out`),
           siteChanges: siteChangesBySession.get(row.id) ?? [],
         };
       });
@@ -373,13 +395,16 @@ class ManagerRepository {
 
   async listPendingReview(): Promise<ServiceResult<PendingReviewItem[]>> {
     try {
-      const [exceptionsResult, correctionsResult] = await Promise.all([
+      const [exceptionsResult, correctionsResult, offlineResult] = await Promise.all([
         this.client.from("geofence_exceptions").select("id, distance_meters, employee_reason, created_at, users(full_name)").eq("status", "pending_review"),
         this.client.from("correction_requests").select("id, proposed_event_type, proposed_correct_time, reason, created_at, users(full_name)").eq("status", "pending"),
+        // offline_time_reviews has two links to users (the person, the reviewer): name the person's.
+        this.client.from("offline_time_reviews").select("id, action, device_time, server_received_at, created_at, users!offline_time_reviews_user_id_fkey(full_name)").eq("status", "pending"),
       ]);
 
       if (exceptionsResult.error) return createError(exceptionsResult.error.message);
       if (correctionsResult.error) return createError(correctionsResult.error.message);
+      if (offlineResult.error) return createError(offlineResult.error.message);
 
       const exceptionItems: PendingReviewItem[] = ((exceptionsResult.data ?? []) as RawGeofenceExceptionRow[]).map((row) => {
         const user = Array.isArray(row.users) ? row.users[0] : row.users;
@@ -403,7 +428,19 @@ class ManagerRepository {
         };
       });
 
-      return createSuccess([...exceptionItems, ...correctionItems].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
+      const offlineItems: PendingReviewItem[] = ((offlineResult.data ?? []) as RawOfflineTimeReviewRow[]).map((row) => {
+        const user = Array.isArray(row.users) ? row.users[0] : row.users;
+        return {
+          kind: "offline_time" as const,
+          id: row.id,
+          userFullName: user?.full_name ?? "",
+          summary: "",
+          createdAt: row.created_at,
+          offlineTime: { action: row.action, deviceTime: row.device_time, receivedAt: row.server_received_at },
+        };
+      });
+
+      return createSuccess([...exceptionItems, ...correctionItems, ...offlineItems].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Manager console service unavailable.");
     }
@@ -478,7 +515,7 @@ class ManagerRepository {
     }
   }
 
-  async reviewItem(kind: "geofence_exception" | "correction_request", targetId: string, actionType: string, notes?: string): Promise<ServiceResult> {
+  async reviewItem(kind: PendingReviewKind, targetId: string, actionType: string, notes?: string): Promise<ServiceResult> {
     try {
       const { data, error } = await this.client.functions.invoke("review-exception", {
         body: { kind, targetId, actionType, notes: notes ?? null },

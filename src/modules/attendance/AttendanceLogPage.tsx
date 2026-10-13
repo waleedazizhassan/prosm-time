@@ -98,6 +98,16 @@ function NoteActivityCell({ note, activity, t }: { note: string | null; activity
 // own managed sites' people; everyone, for the Owner - 20260902090000)
 // so an employee opening this same screen simply sees their own
 // history, with zero role branching needed in this component.
+// Audit 1.4 - the time came from the employee's device (an offline action
+// sent later) and waits for a manager's review.
+function DeviceTimeBadge({ label, hint }: { label: string; hint: string }) {
+  return (
+    <span style={{ display: "block", marginTop: 2 }} title={hint}>
+      <StatusBadge status="pending">{label}</StatusBadge>
+    </span>
+  );
+}
+
 export default function AttendanceLogPage() {
   const { t, i18n } = useTranslation("attendanceLog");
 
@@ -245,6 +255,7 @@ export default function AttendanceLogPage() {
               {t("recordedByOnBehalf", { name: row.clockInRecordedByName })}
             </span>
           ) : null}
+          {row.clockInDeviceTime ? <DeviceTimeBadge label={t("deviceTimeBadge")} hint={t("deviceTimeHint")} /> : null}
         </span>
       ),
     },
@@ -274,6 +285,7 @@ export default function AttendanceLogPage() {
                 {t("recordedByOnBehalf", { name: row.clockOutRecordedByName })}
               </span>
             ) : null}
+            {row.clockOutDeviceTime ? <DeviceTimeBadge label={t("deviceTimeBadge")} hint={t("deviceTimeHint")} /> : null}
           </span>
         ) : (
           "—"

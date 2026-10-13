@@ -36,5 +36,7 @@
   "photoModalTitle": "Anwesenheitsfoto",
   "photoLoading": "Foto wird geladen…",
   "photoAlt": "Anwesenheitsnachweisfoto",
-  "photoLoadError": "Dieses Foto konnte nicht geladen werden."
+  "photoLoadError": "Dieses Foto konnte nicht geladen werden.",
+  "deviceTimeBadge": "Gerätezeit (offline)",
+  "deviceTimeHint": "Ohne Verbindung mit der Uhrzeit des Geräts erfasst; wartet auf die Prüfung durch eine Führungskraft."
 }

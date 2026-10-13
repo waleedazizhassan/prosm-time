@@ -36,5 +36,7 @@
   "photoModalTitle": "Foto presenza",
   "photoLoading": "Caricamento foto…",
   "photoAlt": "Foto di prova della presenza",
-  "photoLoadError": "Impossibile caricare questa foto."
+  "photoLoadError": "Impossibile caricare questa foto.",
+  "deviceTimeBadge": "Ora del dispositivo (offline)",
+  "deviceTimeHint": "Registrato senza connessione con l'ora del dispositivo del dipendente; in attesa della verifica di un responsabile."
 }

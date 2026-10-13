@@ -28,6 +28,10 @@ export interface AttendanceSession {
 export interface OfflineReplayOptions {
   idempotencyKey?: string;
   clientReportedAt?: string | null;
+  // Audit 1.4 - only the offline queue sets this. The server records a
+  // live action at its own time and keeps the device's time only for an
+  // offline replay (flagged for a manager's review when it differs).
+  offlineReplay?: boolean;
 }
 
 export interface ClockInInput {
@@ -60,6 +64,7 @@ export interface ClockInInput {
   // transparency") instead of a fresh one per call.
   idempotencyKey?: string;
   clientReportedAt?: string;
+  offlineReplay?: boolean;
 }
 
 export interface ClockOutInput {
@@ -70,6 +75,7 @@ export interface ClockOutInput {
   activity?: string | null;
   idempotencyKey?: string;
   clientReportedAt?: string;
+  offlineReplay?: boolean;
 }
 
 export interface AdminClockInInput {
@@ -168,7 +174,8 @@ class AttendanceRepository {
           siteId: input.siteId,
           projectId: input.projectId ?? null,
           idempotencyKey: input.idempotencyKey ?? crypto.randomUUID(),
-          clientReportedAt: input.clientReportedAt ?? new Date().toISOString(),
+          clientReportedAt: input.clientReportedAt ?? null,
+          offlineReplay: input.offlineReplay === true,
           latitude: input.latitude ?? null,
           longitude: input.longitude ?? null,
           accuracyMeters: input.accuracyMeters ?? null,
@@ -200,7 +207,8 @@ class AttendanceRepository {
       const { data, error } = await this.client.functions.invoke("clock-out", {
         body: {
           idempotencyKey: input.idempotencyKey ?? crypto.randomUUID(),
-          clientReportedAt: input.clientReportedAt ?? new Date().toISOString(),
+          clientReportedAt: input.clientReportedAt ?? null,
+          offlineReplay: input.offlineReplay === true,
           latitude: input.latitude ?? null,
           longitude: input.longitude ?? null,
           accuracyMeters: input.accuracyMeters ?? null,
@@ -370,7 +378,7 @@ class AttendanceRepository {
   async startBreak(attendanceSessionId: string, options?: OfflineReplayOptions): Promise<ServiceResult<{ breakId: string }>> {
     try {
       const { data, error } = await this.client.functions.invoke("start-break", {
-        body: { attendanceSessionId, idempotencyKey: options?.idempotencyKey ?? crypto.randomUUID(), clientReportedAt: options?.clientReportedAt ?? null },
+        body: { attendanceSessionId, idempotencyKey: options?.idempotencyKey ?? crypto.randomUUID(), clientReportedAt: options?.clientReportedAt ?? null, offlineReplay: options?.offlineReplay === true },
       });
       if (error) {
         if (error.name === "FunctionsFetchError") return { success: false, message: null, data: null, networkError: true };
@@ -387,7 +395,7 @@ class AttendanceRepository {
   async endBreak(breakId: string, options?: OfflineReplayOptions): Promise<ServiceResult<{ maxDurationExceeded: boolean }>> {
     try {
       const { data, error } = await this.client.functions.invoke("end-break", {
-        body: { breakId, idempotencyKey: options?.idempotencyKey ?? null, clientReportedAt: options?.clientReportedAt ?? null },
+        body: { breakId, idempotencyKey: options?.idempotencyKey ?? null, clientReportedAt: options?.clientReportedAt ?? null, offlineReplay: options?.offlineReplay === true },
       });
       if (error) {
         if (error.name === "FunctionsFetchError") return { success: false, message: null, data: null, networkError: true };
@@ -416,7 +424,7 @@ class AttendanceRepository {
   ): Promise<ServiceResult<{ siteChangeId: string; maxDurationExceeded: boolean }>> {
     try {
       const { data, error } = await this.client.functions.invoke("change-site", {
-        body: { breakId, newSiteId, latitude, longitude, accuracyMeters, manualLocationLabel: manualLocationLabel ?? null, idempotencyKey: options?.idempotencyKey ?? null, clientReportedAt: options?.clientReportedAt ?? null },
+        body: { breakId, newSiteId, latitude, longitude, accuracyMeters, manualLocationLabel: manualLocationLabel ?? null, idempotencyKey: options?.idempotencyKey ?? null, clientReportedAt: options?.clientReportedAt ?? null, offlineReplay: options?.offlineReplay === true },
       });
       if (error) {
         if (error.name === "FunctionsFetchError") return { success: false, message: null, data: null, networkError: true };

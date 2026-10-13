@@ -26,7 +26,8 @@
     "empty": "Keine Ausnahmen oder Korrekturen zur Prüfung.",
     "kind": {
       "geofence_exception": "Geofence-Ausnahme",
-      "correction_request": "Korrekturantrag"
+      "correction_request": "Korrekturantrag",
+      "offline_time": "Offline-Zeit"
     },
     "reviewAction": "Prüfen",
     "notesLabel": "Notizen (optional)",
@@ -36,6 +37,16 @@
       "rejected": "Ablehnen",
       "acknowledged": "Zur Kenntnis genommen",
       "clarification_requested": "Klärung anfordern"
+    },
+    "offlineTime": {
+      "summary": "{{action}} offline mit der Gerätezeit {{deviceTime}} erfasst; beim Server eingegangen um {{receivedAt}}.",
+      "action": {
+        "clock_in": "Einstempeln",
+        "clock_out": "Ausstempeln",
+        "break_start": "Pausenbeginn",
+        "break_end": "Pausenende",
+        "site_change": "Standortwechsel"
+      }
     }
   },
   "leave": {

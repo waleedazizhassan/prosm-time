@@ -221,7 +221,7 @@ class OfflineQueueService {
     // Already recorded by the server on an earlier attempt: only the photo is left to send.
     let eventId = item.serverEventId ?? null;
     if (!eventId) {
-      const options = { idempotencyKey: item.id, clientReportedAt: item.clientReportedAt };
+      const options = { idempotencyKey: item.id, clientReportedAt: item.clientReportedAt, offlineReplay: true };
       let result: { success: boolean; message: string | null; networkError?: boolean; data: unknown };
       if (item.type === "clock_in") {
         result = await AttendanceRepository.clockIn({ siteId: item.siteId, manualLocationLabel: item.manualLocationLabel, note: item.note, activity: item.activity, projectId: item.projectId, latitude: item.latitude, longitude: item.longitude, accuracyMeters: item.accuracyMeters, ...options });

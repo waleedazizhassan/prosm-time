@@ -36,5 +36,7 @@
   "photoModalTitle": "Attendance Photo",
   "photoLoading": "Loading photo…",
   "photoAlt": "Attendance evidence photo",
-  "photoLoadError": "Unable to load this photo."
+  "photoLoadError": "Unable to load this photo.",
+  "deviceTimeBadge": "Device time (offline)",
+  "deviceTimeHint": "Recorded without a connection with the time from the employee's device; waiting for a manager's review."
 }

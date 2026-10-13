@@ -37,6 +37,7 @@ const TABLES: Record<string, string> = {
   location_plausibility_flags: byOrg,
   location_samples: "select id from location_samples where presence_session_id in (select id from presence_sessions where organization_id = $1)",
   notifications: byOrg,
+  offline_time_reviews: byOrg,
   organization_settings: byOrg,
   organizations: "select id from organizations where id = $1",
   password_reset_requests: byUser,
@@ -68,7 +69,7 @@ const GLOBAL_TABLES = ["permissions", "roles", "role_default_permissions", "secu
 const MUST_BE_SEEDED = [
   "allowance_entries", "attendance_events", "attendance_sessions", "audit_logs", "break_events", "camera_evidence",
   "correction_requests", "device_bindings", "geofence_exceptions", "leave_entitlements", "leave_requests", "location_samples",
-  "notifications", "presence_sessions", "project_assignments", "projects", "report_exports", "shift_assignments",
+  "notifications", "offline_time_reviews", "presence_sessions", "project_assignments", "projects", "report_exports", "shift_assignments",
   "shift_templates", "site_assignments", "site_change_events", "site_worker_attendance", "site_workers", "sites", "sos_alerts",
   "timesheet_approvals", "timesheets", "user_permission_overrides", "users", "worker_pay_rates",
 ];
@@ -119,6 +120,13 @@ async function seedOrg(name: string): Promise<SeededOrg> {
   const [activeBreak] = await t.su<{ id: string }>("select id from break_events where user_id = $1 and status = 'active'", [employee.userId]);
   await must(t.as(employee.authId, "select public.end_prosm_time_break($1, $2)", [activeBreak.id, randomUUID()]), "end break");
   await must(clockIn(t, farEmployee, siteId, { latitude: 30.3, longitude: 31.9 }), "far clock in");
+  // An offline clock-in replayed an hour later (audit 1.4: a pending review).
+  const offlineEmployee = await addMember(t, org, "employee", `${name} Offline Employee`);
+  await assignToSite(t, siteId, offlineEmployee);
+  await must(
+    t.as(offlineEmployee.authId, "select public.clock_in_prosm_time_attendance($1, $2, null, $3, 30.02125, 31.75812, 8, null, null, null, true)", [randomUUID(), siteId, new Date(Date.now() - 3600e3).toISOString()]),
+    "offline clock in",
+  );
   await must(t.as(employee.authId, "select public.trigger_prosm_time_shift_sos_alert($1)", [session.id]), "sos");
 
   const [event] = await t.su<{ id: string }>("select id from attendance_events where session_id = $1 limit 1", [session.id]);

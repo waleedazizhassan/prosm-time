@@ -27,10 +27,10 @@ serve(async (request: Request) => {
 
     const payload = await request.json().catch(() => ({}));
     // idempotencyKey/clientReportedAt: an offline-captured end is sent later, once, with its real time.
-    const { breakId, idempotencyKey, clientReportedAt } = payload;
+    const { breakId, idempotencyKey, clientReportedAt, offlineReplay } = payload;
     if (!breakId || typeof breakId !== "string") return errorResponse("breakId is required.", 400, "INVALID_REQUEST");
 
-    const { data, error } = await callerClient.rpc("end_prosm_time_break", { p_break_id: breakId, p_idempotency_key: idempotencyKey ?? null, p_client_reported_at: clientReportedAt ?? null });
+    const { data, error } = await callerClient.rpc("end_prosm_time_break", { p_break_id: breakId, p_idempotency_key: idempotencyKey ?? null, p_client_reported_at: clientReportedAt ?? null, p_offline_replay: offlineReplay === true });
 
     if (error || !data?.success) return errorResponse(error?.message ?? "Unable to end this break.", 400, "END_BREAK_FAILED");
     return successResponse({ maxDurationExceeded: data.maxDurationExceeded });

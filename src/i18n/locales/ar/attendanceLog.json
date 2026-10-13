@@ -36,5 +36,7 @@
   "photoModalTitle": "صورة الحضور",
   "photoLoading": "جارٍ تحميل الصورة…",
   "photoAlt": "صورة إثبات الحضور",
-  "photoLoadError": "تعذر تحميل هذه الصورة."
+  "photoLoadError": "تعذر تحميل هذه الصورة.",
+  "deviceTimeBadge": "وقت من الجهاز (أوفلاين)",
+  "deviceTimeHint": "سُجّل بدون اتصال بوقت جهاز الموظف، وينتظر مراجعة المدير."
 }

@@ -26,7 +26,8 @@
     "empty": "لا توجد استثناءات أو تصحيحات بانتظار المراجعة.",
     "kind": {
       "geofence_exception": "استثناء النطاق الجغرافي",
-      "correction_request": "طلب تصحيح"
+      "correction_request": "طلب تصحيح",
+      "offline_time": "وقت من الجهاز (أوفلاين)"
     },
     "reviewAction": "مراجعة",
     "notesLabel": "ملاحظات (اختياري)",
@@ -36,6 +37,16 @@
       "rejected": "رفض",
       "acknowledged": "الإحاطة",
       "clarification_requested": "طلب توضيح"
+    },
+    "offlineTime": {
+      "summary": "{{action}} سُجّل بدون اتصال بوقت الجهاز {{deviceTime}}، ووصل إلى الخادم في {{receivedAt}}.",
+      "action": {
+        "clock_in": "تسجيل حضور",
+        "clock_out": "تسجيل انصراف",
+        "break_start": "بدء استراحة",
+        "break_end": "إنهاء استراحة",
+        "site_change": "تغيير الموقع"
+      }
     }
   },
   "leave": {

@@ -27,13 +27,15 @@ serve(async (request: Request) => {
 
     const payload = await request.json().catch(() => ({}));
     // clientReportedAt: an offline-captured break is sent later with the time it really started.
-    const { attendanceSessionId, idempotencyKey, clientReportedAt } = payload;
+    const { attendanceSessionId, idempotencyKey, clientReportedAt, offlineReplay } = payload;
     if (!attendanceSessionId || typeof attendanceSessionId !== "string") return errorResponse("attendanceSessionId is required.", 400, "INVALID_REQUEST");
 
     const { data, error } = await callerClient.rpc("start_prosm_time_break", {
       p_attendance_session_id: attendanceSessionId,
       p_idempotency_key: idempotencyKey ?? null,
       p_client_reported_at: clientReportedAt ?? null,
+      // Audit 1.4: only the offline queue sends this; a live action is recorded at the server's time.
+      p_offline_replay: offlineReplay === true,
     });
 
     if (error || !data?.success) return errorResponse(error?.message ?? "Unable to start a break.", 400, "START_BREAK_FAILED");

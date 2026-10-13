@@ -26,7 +26,8 @@
     "empty": "Nessuna eccezione o correzione in attesa di revisione.",
     "kind": {
       "geofence_exception": "Eccezione geofence",
-      "correction_request": "Richiesta di correzione"
+      "correction_request": "Richiesta di correzione",
+      "offline_time": "Ora offline"
     },
     "reviewAction": "Esamina",
     "notesLabel": "Note (facoltative)",
@@ -36,6 +37,16 @@
       "rejected": "Rifiuta",
       "acknowledged": "Presa visione",
       "clarification_requested": "Richiedi chiarimento"
+    },
+    "offlineTime": {
+      "summary": "{{action}} registrato offline con l'ora del dispositivo {{deviceTime}}; arrivato al server alle {{receivedAt}}.",
+      "action": {
+        "clock_in": "Entrata",
+        "clock_out": "Uscita",
+        "break_start": "Inizio pausa",
+        "break_end": "Fine pausa",
+        "site_change": "Cambio sede"
+      }
     }
   },
   "leave": {

@@ -26,7 +26,8 @@
     "empty": "Aucune exception ni correction en attente de révision.",
     "kind": {
       "geofence_exception": "Exception de géorepérage",
-      "correction_request": "Demande de correction"
+      "correction_request": "Demande de correction",
+      "offline_time": "Heure hors ligne"
     },
     "reviewAction": "Examiner",
     "notesLabel": "Notes (facultatif)",
@@ -36,6 +37,16 @@
       "rejected": "Rejeter",
       "acknowledged": "Accuser réception",
       "clarification_requested": "Demander une clarification"
+    },
+    "offlineTime": {
+      "summary": "{{action}} enregistré hors ligne à l'heure de l'appareil {{deviceTime}} ; reçu par le serveur à {{receivedAt}}.",
+      "action": {
+        "clock_in": "Pointage d'arrivée",
+        "clock_out": "Pointage de départ",
+        "break_start": "Début de pause",
+        "break_end": "Fin de pause",
+        "site_change": "Changement de site"
+      }
     }
   },
   "leave": {

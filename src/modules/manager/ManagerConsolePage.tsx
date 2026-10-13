@@ -112,6 +112,17 @@ export default function ManagerConsolePage() {
     return <Navigate to="/dashboard" replace />;
   }
 
+  // Audit 1.4 - an offline action recorded with the device's time: say what
+  // was done, at what device time, and when it reached the server.
+  const reviewSummary = (item: PendingReviewItem) =>
+    item.offlineTime
+      ? t("pending.offlineTime.summary", {
+          action: t(`pending.offlineTime.action.${item.offlineTime.action}`),
+          deviceTime: `${formatDateOnly(item.offlineTime.deviceTime, i18n.language)} ${formatTimeOnly(item.offlineTime.deviceTime, i18n.language)}`,
+          receivedAt: `${formatDateOnly(item.offlineTime.receivedAt, i18n.language)} ${formatTimeOnly(item.offlineTime.receivedAt, i18n.language)}`,
+        })
+      : item.summary;
+
   const handleReview = async (actionType: (typeof REVIEW_ACTIONS)[number]) => {
     if (!reviewTarget) return;
     setSubmitting(actionType);
@@ -292,7 +303,7 @@ export default function ManagerConsolePage() {
                 <div style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)", fontWeight: "var(--font-weight-semibold)" }}>
                   {item.userFullName} — {t(`pending.kind.${item.kind}`)}
                 </div>
-                <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{item.summary}</div>
+                <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{reviewSummary(item)}</div>
               </div>
               {canManageExceptions ? (
                 <Button variant="ghost" size="sm" onClick={() => setReviewTarget(item)}>
@@ -327,7 +338,7 @@ export default function ManagerConsolePage() {
           // showed it, the modal itself never did. A manager had no
           // way to see what they were approving.
           <div style={{ marginBottom: "var(--space-4)", padding: "var(--space-3)", background: "var(--surface-app)", borderRadius: "var(--radius-md)" }}>
-            <p style={{ margin: 0, fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{reviewTarget.summary}</p>
+            <p style={{ margin: 0, fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{reviewSummary(reviewTarget)}</p>
             <p style={{ margin: "var(--space-2) 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
               {t("pending.submittedAtLabel")}: {formatDateOnly(reviewTarget.createdAt, i18n.language)} {formatTimeOnly(reviewTarget.createdAt, i18n.language)}
             </p>
