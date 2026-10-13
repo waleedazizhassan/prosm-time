@@ -95,7 +95,19 @@
       "site": "الموقع",
       "speed": "السرعة المفترضة",
       "distance": "المسافة",
-      "when": "التوقيت"
+      "when": "التوقيت",
+      "type": "النوع",
+      "reason": "سبب الموظف",
+      "status": "المراجعة",
+      "types": {
+        "outside_work_area": "خارج نطاق العمل",
+        "implausible_location": "موقع غير منطقي"
+      },
+      "statuses": {
+        "pending_reason": "بانتظار السبب",
+        "pending_review": "بانتظار المراجعة",
+        "resolved": "تمت المراجعة"
+      }
     },
     "sos": {
       "name": "الموظف",

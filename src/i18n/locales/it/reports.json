@@ -95,7 +95,19 @@
       "site": "Sito",
       "speed": "Velocità implicita",
       "distance": "Distanza",
-      "when": "Quando"
+      "when": "Quando",
+      "type": "Tipo",
+      "reason": "Motivo del dipendente",
+      "status": "Verifica",
+      "types": {
+        "outside_work_area": "Fuori dall'area di lavoro",
+        "implausible_location": "Posizione non plausibile"
+      },
+      "statuses": {
+        "pending_reason": "In attesa del motivo",
+        "pending_review": "In attesa di verifica",
+        "resolved": "Verificato"
+      }
     },
     "sos": {
       "name": "Dipendente",

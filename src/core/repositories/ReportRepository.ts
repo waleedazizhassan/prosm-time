@@ -81,11 +81,15 @@ export interface ManagerOverrideRow {
 
 export interface LocationViolationRow {
   flagId: string;
+  // Audit 2.2 - geofence exceptions are listed too (20261013130000).
+  violationType: "outside_work_area" | "implausible_location";
   userFullName: string;
   siteName: string;
-  impliedSpeedKmh: number;
+  impliedSpeedKmh: number | null;
   distanceMeters: number;
   occurredAt: string;
+  employeeReason: string | null;
+  reviewStatus: string | null;
 }
 
 // PROSM Time - 14-point live-audit gap #8: 7 real report types the
@@ -250,13 +254,28 @@ class ReportRepository {
       const { data, error } = await this.client.rpc("list_prosm_time_report_location_violations", { p_start_date: startDate, p_end_date: endDate });
       if (error) return createError(error.message);
       return createSuccess(
-        (data ?? []).map((row: { flag_id: string; user_full_name: string; site_name: string; implied_speed_kmh: number; distance_meters: number; occurred_at: string }) => ({
+        (
+          (data ?? []) as Array<{
+            flag_id: string;
+            violation_type: LocationViolationRow["violationType"];
+            user_full_name: string;
+            site_name: string;
+            implied_speed_kmh: number | null;
+            distance_meters: number;
+            occurred_at: string;
+            employee_reason: string | null;
+            review_status: string | null;
+          }>
+        ).map((row) => ({
           flagId: row.flag_id,
+          violationType: row.violation_type,
           userFullName: row.user_full_name,
           siteName: row.site_name,
           impliedSpeedKmh: row.implied_speed_kmh,
           distanceMeters: row.distance_meters,
           occurredAt: row.occurred_at,
+          employeeReason: row.employee_reason,
+          reviewStatus: row.review_status,
         })),
       );
     } catch (error) {

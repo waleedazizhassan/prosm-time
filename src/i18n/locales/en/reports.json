@@ -95,7 +95,19 @@
       "site": "Site",
       "speed": "Implied speed",
       "distance": "Distance",
-      "when": "When"
+      "when": "When",
+      "type": "Type",
+      "reason": "Employee's reason",
+      "status": "Review",
+      "types": {
+        "outside_work_area": "Outside work area",
+        "implausible_location": "Implausible location"
+      },
+      "statuses": {
+        "pending_reason": "Waiting for reason",
+        "pending_review": "Waiting for review",
+        "resolved": "Reviewed"
+      }
     },
     "sos": {
       "name": "Employee",

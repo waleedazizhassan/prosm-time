@@ -95,7 +95,19 @@
       "site": "Standort",
       "speed": "Implizierte Geschwindigkeit",
       "distance": "Entfernung",
-      "when": "Zeitpunkt"
+      "when": "Zeitpunkt",
+      "type": "Art",
+      "reason": "Begründung",
+      "status": "Prüfung",
+      "types": {
+        "outside_work_area": "Außerhalb des Arbeitsbereichs",
+        "implausible_location": "Unplausibler Standort"
+      },
+      "statuses": {
+        "pending_reason": "Wartet auf Begründung",
+        "pending_review": "Wartet auf Prüfung",
+        "resolved": "Geprüft"
+      }
     },
     "sos": {
       "name": "Mitarbeiter",
