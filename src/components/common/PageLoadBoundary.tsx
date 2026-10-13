@@ -2,6 +2,7 @@ import { Component, type ReactNode } from "react";
 
 import i18n from "../../i18n";
 import Button from "./Button";
+import { isStaleBuildError, reloadForNewBuild } from "../../core/utils/staleBuild";
 import StateMessage from "./StateMessage";
 import offlineArt from "../../assets/illustrations/state-offline.svg";
 
@@ -9,9 +10,6 @@ import offlineArt from "../../assets/illustrations/state-offline.svg";
 // one can fail: no connection (web), or a new release replaced the page files. Without this the
 // whole screen would crash. With no connection the reader gets a clear message and a retry - the
 // attendance screens and the offline queue keep working; after a new release the app reloads once.
-const RELOAD_KEY = "prosm_time_page_reload_at";
-
-const isLoadError = (e: unknown) => /dynamically imported module|importing a module script failed|error loading dynamically|ChunkLoadError|Loading chunk/i.test(String((e as Error)?.message ?? e));
 
 interface State {
   failed: boolean;
@@ -21,26 +19,12 @@ export default class PageLoadBoundary extends Component<{ children: ReactNode; r
   state: State = { failed: false };
 
   static getDerivedStateFromError(error: unknown): State | null {
-    if (!isLoadError(error)) throw error;
+    if (!isStaleBuildError(error)) throw error;
     return { failed: true };
   }
 
   componentDidCatch(error: unknown) {
-    if (!isLoadError(error) || !navigator.onLine) return;
-    let last = 0;
-    try {
-      last = Number(sessionStorage.getItem(RELOAD_KEY) ?? 0);
-    } catch {
-      /* storage unavailable */
-    }
-    if (Date.now() - last > 30000) {
-      try {
-        sessionStorage.setItem(RELOAD_KEY, String(Date.now()));
-      } catch {
-        /* storage unavailable */
-      }
-      window.location.reload();
-    }
+    if (isStaleBuildError(error)) reloadForNewBuild();
   }
 
   componentDidUpdate(prev: { resetKey?: string }) {

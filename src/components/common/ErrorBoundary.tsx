@@ -2,6 +2,7 @@ import { Component, type ErrorInfo, type ReactNode } from "react";
 import i18next from "../../i18n";
 import styles from "./ErrorBoundary.module.css";
 import errorArt from "../../assets/illustrations/state-error.svg";
+import { isStaleBuildError, reloadForNewBuild } from "../../core/utils/staleBuild";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -27,6 +28,8 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBo
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error("[PROSM Time] Unhandled render error:", error, errorInfo.componentStack);
+    // A file of the previous build after a new release: reload once to pick up the new one.
+    if (isStaleBuildError(error)) reloadForNewBuild();
   }
 
   handleReload = () => {
