@@ -2,7 +2,7 @@ import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
-import { DEFAULT_LANGUAGE, LANGUAGE_CODES } from "./languages";
+import { initialLanguage, LANGUAGE_CODES } from "./languages";
 import { applyDirection } from "./direction";
 
 
@@ -65,7 +65,7 @@ export const i18nReady = i18next
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    lng: saved && (LANGUAGE_CODES as readonly string[]).includes(saved) ? saved : DEFAULT_LANGUAGE,
+    lng: initialLanguage(saved, typeof navigator === "undefined" ? [] : navigator.languages?.length ? navigator.languages : [navigator.language]),
     // Every language holds every key (checked 2026-09-29), so no second language is loaded as a fallback.
     fallbackLng: false,
     supportedLngs: LANGUAGE_CODES,
@@ -73,10 +73,8 @@ export const i18nReady = i18next
     ns: NAMESPACES,
     defaultNS: "common",
 
-    // § live UX review, user-directed - a fresh install must default to
-    // English regardless of the device's own OS language; only an
-    // explicit in-app choice (persisted to localStorage) should ever
-    // override fallbackLng. "navigator" detection deliberately removed.
+    // Only an explicit in-app choice is stored; with none, `lng` above
+    // follows the device language (audit 4.2).
     detection: {
       order: ["localStorage"],
       lookupLocalStorage: I18N_STORAGE_KEY,
