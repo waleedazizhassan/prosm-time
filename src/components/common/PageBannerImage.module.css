@@ -1,19 +1,19 @@
-/* Page illustration banner (owner 2026-10-13: "the cards with the page
-   names should be a bit smaller so they show in full"). The images are
-   3:1 - shown whole (height follows the width, never cropped) and
-   capped smaller than before on every screen width. */
+/* Page illustration banner (owner 2026-10-13: smaller, shown in full,
+   nothing cut at the sides). The pictures no longer carry transparent
+   margins, so the height simply follows the width (about 4.5:1):
+   up to 360 x ~80 px on wide screens, 80% of the width on phones
+   (about 285 x ~63 px on a 390 px phone). Never cropped. */
 .banner {
   display: block;
   width: 100%;
-  max-width: 480px;
+  max-width: 360px;
   height: auto;
-  aspect-ratio: 3 / 1;
   object-fit: contain;
-  margin: 0 auto var(--space-3);
+  margin: 0 auto;
 }
 
 @media (max-width: 640px) {
   .banner {
-    max-width: 82%;
+    max-width: 80%;
   }
 }
