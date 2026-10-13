@@ -7,6 +7,7 @@
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
+import { secretsMatch } from "../_shared/constantTime.ts";
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
 import { sendEmail } from "../_shared/emailService.ts";
 
@@ -32,8 +33,7 @@ serve(async (request: Request) => {
   if (request.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   if (request.method !== "POST") return errorResponse("Method not allowed.", 405, "METHOD_NOT_ALLOWED");
 
-  const secret = Deno.env.get("TRIAL_NOTICES_SECRET");
-  if (!secret || request.headers.get("x-trial-secret") !== secret) {
+  if (!(await secretsMatch(request.headers.get("x-trial-secret"), Deno.env.get("TRIAL_NOTICES_SECRET")))) {
     return errorResponse("Not allowed.", 401, "UNAUTHORIZED");
   }
 
