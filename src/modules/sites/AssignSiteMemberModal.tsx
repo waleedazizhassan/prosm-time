@@ -11,6 +11,14 @@ import Select from "../../components/common/Select";
 import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
 
+// Audit 4.3 (2026-10-13) - the site role used to start at "member" for
+// everyone, so a Manager assigned to a site saw none of its employees
+// (a site's people are visible to its site managers). It now starts from
+// the person's organisation role; the Owner can still change it.
+export function defaultSiteRole(roleKey: string | undefined): "member" | "manager" {
+  return roleKey === "manager" || roleKey === "supervisor" ? "manager" : "member";
+}
+
 interface AssignSiteMemberModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -54,6 +62,12 @@ export default function AssignSiteMemberModal({ isOpen, onClose, onAssigned, sit
     if (!isOpen) return;
     setUserId((current) => (assignableMembers.some((member) => member.id === current) ? current : assignableMembers[0]?.id ?? ""));
   }, [isOpen, assignableMembers]);
+
+  // Only the Owner may grant the site-manager tier (checked server-side too).
+  useEffect(() => {
+    if (!profile?.isOwner) return;
+    setRoleAtSite(defaultSiteRole(members.find((member) => member.id === userId)?.roleKey));
+  }, [userId, members, profile?.isOwner]);
 
   const handleSubmit = async () => {
     if (!userId) return;
