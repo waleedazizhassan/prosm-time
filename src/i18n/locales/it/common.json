@@ -163,7 +163,8 @@
     "offlineTimeBeforeLastAction": "Questa azione offline ha un orario precedente alla tua ultima azione registrata, quindi non è stata registrata. Chiedi al tuo responsabile di correggerla.",
     "offlineTimeOnLeaveDay": "Questa azione offline cade in un giorno di ferie approvate, quindi non è stata registrata.",
     "onBehalfOnlyBelowRole": "Puoi timbrare per conto solo di persone con un ruolo inferiore al tuo.",
-    "fakeLocationRejected": "Timbrare da una posizione falsa (app di posizione fittizia) non è consentito in questa organizzazione."
+    "fakeLocationRejected": "Timbrare da una posizione falsa (app di posizione fittizia) non è consentito in questa organizzazione.",
+    "clockInOutsideAreaContactManager": "Sei fuori dall'area di lavoro di questa sede e non puoi timbrare da solo qui - contatta il tuo responsabile per registrare la presenza."
   },
   "pageLoad": {
     "title": "Impossibile aprire questa pagina",

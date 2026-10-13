@@ -163,7 +163,8 @@
     "offlineTimeBeforeLastAction": "This offline action has a time earlier than your last recorded action, so it was not recorded. Ask your manager to correct it.",
     "offlineTimeOnLeaveDay": "This offline action falls on a day of approved leave, so it was not recorded.",
     "onBehalfOnlyBelowRole": "You can only clock in or out on behalf of people below your role.",
-    "fakeLocationRejected": "A clock in or out from a fake location (a mock-location app) is not accepted in this organisation."
+    "fakeLocationRejected": "A clock in or out from a fake location (a mock-location app) is not accepted in this organisation.",
+    "clockInOutsideAreaContactManager": "You are outside this site's work area, so you can't clock in yourself here - please contact your manager to register your attendance."
   },
   "pageLoad": {
     "title": "This page could not be opened",

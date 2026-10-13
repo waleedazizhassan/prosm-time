@@ -77,7 +77,8 @@
     "sitePolicyMovedHint": "GPS-Genauigkeitstoleranz, Kulanzzeit, Schichtrichtlinie, laufende Anwesenheitsüberwachung und befreite Mitarbeiter werden in den Einstellungen verwaltet.",
     "confirm": "Standort speichern",
     "genericError": "Dieser Standort konnte nicht gespeichert werden.",
-    "openSiteSettings": "Einstellungen dieses Standorts öffnen"
+    "openSiteSettings": "Einstellungen dieses Standorts öffnen",
+    "blockSelfClockInOutsideLabel": "Selbst-Einstempeln außerhalb des Arbeitsbereichs dieses Standorts sperren (stattdessen Einstempeln durch eine Führungskraft)"
   },
   "detail": {
     "backToList": "Zurück zu Standorten",

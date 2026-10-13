@@ -54,6 +54,7 @@ export default function SitePolicySettingsCard() {
   const [breakRoundingMode, setBreakRoundingMode] = useState<BreakRoundingMode>("cumulative");
   const [blockSelfClockInAfterGrace, setBlockSelfClockInAfterGrace] = useState(false);
   const [blockSelfClockOutOutsideGeofence, setBlockSelfClockOutOutsideGeofence] = useState(false);
+  const [blockSelfClockInOutsideGeofence, setBlockSelfClockInOutsideGeofence] = useState(false);
   const [presenceMonitoringEnabled, setPresenceMonitoringEnabled] = useState(false);
 
   const [assignments, setAssignments] = useState<SiteAssignment[]>([]);
@@ -98,6 +99,7 @@ export default function SitePolicySettingsCard() {
       setBreakRoundingMode(loaded.breakRoundingMode);
       setBlockSelfClockInAfterGrace(loaded.blockSelfClockInAfterGrace);
       setBlockSelfClockOutOutsideGeofence(loaded.blockSelfClockOutOutsideGeofence);
+      setBlockSelfClockInOutsideGeofence(loaded.blockSelfClockInOutsideGeofence);
       setPresenceMonitoringEnabled(loaded.presenceMonitoringEnabled);
       setAssignments(assignmentsResult.success ? assignmentsResult.data ?? [] : []);
     });
@@ -145,10 +147,12 @@ export default function SitePolicySettingsCard() {
       blockSelfClockOutOutsideGeofence,
       presenceMonitoringEnabled,
     });
+    // Audit 2.1 - its own call, same authority as the site update.
+    const clockInResult = result.success ? await SiteRepository.setBlockSelfClockInOutsideGeofence(selectedSiteId, blockSelfClockInOutsideGeofence) : result;
 
     setSaving(false);
-    if (!result.success) {
-      setSaveError(humanizeBackendError(result.message, t) ?? t("sitePolicy.genericError"));
+    if (!clockInResult.success) {
+      setSaveError(humanizeBackendError(clockInResult.message, t) ?? t("sitePolicy.genericError"));
       return;
     }
     setSaved(true);
@@ -281,6 +285,18 @@ export default function SitePolicySettingsCard() {
               }}
               disabled={saving}
               label={t("sites:form.blockSelfClockInLabel")}
+            />
+          </div>
+          <div style={toggleRowStyle}>
+            <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("sites:form.blockSelfClockInOutsideLabel")}</span>
+            <Toggle
+              checked={blockSelfClockInOutsideGeofence}
+              onChange={(checked) => {
+                setBlockSelfClockInOutsideGeofence(checked);
+                setSaved(false);
+              }}
+              disabled={saving}
+              label={t("sites:form.blockSelfClockInOutsideLabel")}
             />
           </div>
           <div style={toggleRowStyle}>

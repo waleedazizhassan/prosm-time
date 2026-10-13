@@ -41,6 +41,8 @@ export interface Site {
   // site's geofence is blocked outright (not just recorded as an
   // exception) when this is on, mirroring blockSelfClockInAfterGrace.
   blockSelfClockOutOutsideGeofence: boolean;
+  // Audit 2.1 (owner 2026-10-13) - the same for a self clock-in.
+  blockSelfClockInOutsideGeofence: boolean;
   // § real bug fix, 2026-09-07 - gates ongoing GPS re-checks during a
   // shift, the SOS button, and geofence-exit-during-shift
   // notifications (WP-10's presence_sessions are only opened for a
@@ -139,6 +141,7 @@ interface SiteRow {
   break_rounding_mode: BreakRoundingMode;
   block_self_clock_in_after_grace: boolean;
   block_self_clock_out_outside_geofence: boolean;
+  block_self_clock_in_outside_geofence?: boolean;
   presence_monitoring_enabled: boolean;
   created_at: string;
 }
@@ -174,6 +177,7 @@ function mapSiteRow(row: SiteRow): Site {
     breakRoundingMode: row.break_rounding_mode,
     blockSelfClockInAfterGrace: row.block_self_clock_in_after_grace,
     blockSelfClockOutOutsideGeofence: row.block_self_clock_out_outside_geofence,
+    blockSelfClockInOutsideGeofence: row.block_self_clock_in_outside_geofence ?? false,
     presenceMonitoringEnabled: row.presence_monitoring_enabled,
     createdAt: row.created_at,
   };
@@ -390,6 +394,18 @@ class SiteRepository {
       });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to assign this employee to the site.");
+      return createSuccess();
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Site service unavailable.");
+    }
+  }
+
+  // Audit 2.1 - Owner, or sites.manage for a managed site (checked server-side).
+  async setBlockSelfClockInOutsideGeofence(siteId: string, block: boolean): Promise<ServiceResult> {
+    try {
+      const { data, error } = await this.client.rpc("set_prosm_time_site_block_clock_in_outside", { p_site_id: siteId, p_block: block });
+      if (error) return createError(error.message);
+      if (data?.success === false) return createError("Unable to save this setting.");
       return createSuccess();
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Site service unavailable.");

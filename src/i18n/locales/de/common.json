@@ -163,7 +163,8 @@
     "offlineTimeBeforeLastAction": "Diese Offline-Aktion liegt zeitlich vor Ihrer letzten erfassten Aktion und wurde nicht erfasst. Bitten Sie Ihre Führungskraft um eine Korrektur.",
     "offlineTimeOnLeaveDay": "Diese Offline-Aktion fällt auf einen genehmigten Urlaubstag und wurde nicht erfasst.",
     "onBehalfOnlyBelowRole": "Sie können nur für Personen unterhalb Ihrer Rolle ein- oder ausstempeln.",
-    "fakeLocationRejected": "Ein- oder Ausstempeln von einem gefälschten Standort (Mock-Location-App) wird in dieser Organisation nicht akzeptiert."
+    "fakeLocationRejected": "Ein- oder Ausstempeln von einem gefälschten Standort (Mock-Location-App) wird in dieser Organisation nicht akzeptiert.",
+    "clockInOutsideAreaContactManager": "Sie sind außerhalb des Arbeitsbereichs dieses Standorts und können hier nicht selbst einstempeln - bitte wenden Sie sich an Ihre Führungskraft."
   },
   "pageLoad": {
     "title": "Diese Seite konnte nicht geöffnet werden",

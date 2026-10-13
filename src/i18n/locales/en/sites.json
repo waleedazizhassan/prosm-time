@@ -77,7 +77,8 @@
     "sitePolicyMovedHint": "GPS accuracy tolerance, grace period, shift policy, ongoing presence monitoring and exempt employees are managed from Settings.",
     "confirm": "Save site",
     "genericError": "Unable to save this site.",
-    "openSiteSettings": "Open this site's settings"
+    "openSiteSettings": "Open this site's settings",
+    "blockSelfClockInOutsideLabel": "Block self clock-in outside this site's work area (require a manager-assisted clock-in instead)"
   },
   "detail": {
     "backToList": "Back to sites",

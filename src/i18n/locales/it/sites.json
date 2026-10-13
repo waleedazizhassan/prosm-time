@@ -77,7 +77,8 @@
     "sitePolicyMovedHint": "Tolleranza di precisione GPS, periodo di tolleranza, politica del turno, monitoraggio continuo della presenza e dipendenti esentati si gestiscono da Impostazioni.",
     "confirm": "Salva sede",
     "genericError": "Impossibile salvare questa sede.",
-    "openSiteSettings": "Apri le impostazioni di questa sede"
+    "openSiteSettings": "Apri le impostazioni di questa sede",
+    "blockSelfClockInOutsideLabel": "Blocca la timbratura di entrata fuori dall'area di lavoro di questa sede (timbratura da parte di un responsabile)"
   },
   "detail": {
     "backToList": "Torna alle sedi",

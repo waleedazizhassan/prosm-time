@@ -163,7 +163,8 @@
     "offlineTimeBeforeLastAction": "Cette action hors ligne a une heure antérieure à votre dernière action enregistrée ; elle n'a pas été enregistrée. Demandez à votre responsable de la corriger.",
     "offlineTimeOnLeaveDay": "Cette action hors ligne tombe un jour de congé approuvé ; elle n'a pas été enregistrée.",
     "onBehalfOnlyBelowRole": "Vous ne pouvez pointer à la place que des personnes d'un rôle inférieur au vôtre.",
-    "fakeLocationRejected": "Un pointage depuis une position falsifiée (application de position fictive) n'est pas accepté dans cette organisation."
+    "fakeLocationRejected": "Un pointage depuis une position falsifiée (application de position fictive) n'est pas accepté dans cette organisation.",
+    "clockInOutsideAreaContactManager": "Vous êtes en dehors de la zone de travail de ce site et ne pouvez pas pointer vous-même ici - contactez votre responsable pour enregistrer votre présence."
   },
   "pageLoad": {
     "title": "Cette page n’a pas pu être ouverte",
