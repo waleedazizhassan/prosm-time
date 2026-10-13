@@ -14,7 +14,8 @@
   "actions": {
     "cancel": "Annuler",
     "confirm": "Confirmer",
-    "close": "Fermer"
+    "close": "Fermer",
+    "label": "Actions"
   },
   "errorBoundary": {
     "title": "Une erreur s'est produite",
@@ -158,5 +159,7 @@
     "title": "Cette page n’a pas pu être ouverte",
     "body": "Elle nécessite une connexion. Les pointages, pauses et changements de site fonctionnent hors ligne et sont envoyés au retour de la connexion.",
     "retry": "Réessayer"
-  }
+  },
+  "status": "Statut",
+  "save": "Enregistrer"
 }

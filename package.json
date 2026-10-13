@@ -18,7 +18,8 @@
     "test:watch": "vitest",
     "electron:start": "electron .",
     "electron:build": "npm run build && electron-builder --win",
-    "test:db": "vitest run --config vitest.db.config.ts"
+    "test:db": "vitest run --config vitest.db.config.ts",
+    "check:i18n": "node scripts/check-i18n.mjs"
   },
   "dependencies": {
     "@anuradev/capacitor-background-mode": "^8.1.0",

@@ -14,7 +14,8 @@
   "actions": {
     "cancel": "Annulla",
     "confirm": "Conferma",
-    "close": "Chiudi"
+    "close": "Chiudi",
+    "label": "Azioni"
   },
   "errorBoundary": {
     "title": "Qualcosa è andato storto",
@@ -158,5 +159,7 @@
     "title": "Impossibile aprire questa pagina",
     "body": "Serve una connessione. Entrate, uscite, pause e cambi sede funzionano offline e vengono inviati al ritorno della connessione.",
     "retry": "Riprova"
-  }
+  },
+  "status": "Stato",
+  "save": "Salva"
 }

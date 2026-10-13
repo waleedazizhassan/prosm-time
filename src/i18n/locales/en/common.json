@@ -14,7 +14,8 @@
   "actions": {
     "cancel": "Cancel",
     "confirm": "Confirm",
-    "close": "Close"
+    "close": "Close",
+    "label": "Actions"
   },
   "errorBoundary": {
     "title": "Something went wrong",
@@ -158,5 +159,7 @@
     "title": "This page could not be opened",
     "body": "It needs a connection to load. Clock in, clock out, breaks and site changes keep working offline and are sent when the connection returns.",
     "retry": "Try again"
-  }
+  },
+  "status": "Status",
+  "save": "Save"
 }
