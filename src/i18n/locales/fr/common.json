@@ -161,7 +161,8 @@
     "realGpsSampleRequired": "Votre position est nécessaire pour cette action.",
     "tooManyAttempts": "Trop de tentatives. Patientez quelques minutes puis réessayez.",
     "offlineTimeBeforeLastAction": "Cette action hors ligne a une heure antérieure à votre dernière action enregistrée ; elle n'a pas été enregistrée. Demandez à votre responsable de la corriger.",
-    "offlineTimeOnLeaveDay": "Cette action hors ligne tombe un jour de congé approuvé ; elle n'a pas été enregistrée."
+    "offlineTimeOnLeaveDay": "Cette action hors ligne tombe un jour de congé approuvé ; elle n'a pas été enregistrée.",
+    "onBehalfOnlyBelowRole": "Vous ne pouvez pointer à la place que des personnes d'un rôle inférieur au vôtre."
   },
   "pageLoad": {
     "title": "Cette page n’a pas pu être ouverte",

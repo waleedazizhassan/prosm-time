@@ -161,7 +161,8 @@
     "realGpsSampleRequired": "Per questa azione è necessaria la tua posizione.",
     "tooManyAttempts": "Troppi tentativi. Attendi qualche minuto e riprova.",
     "offlineTimeBeforeLastAction": "Questa azione offline ha un orario precedente alla tua ultima azione registrata, quindi non è stata registrata. Chiedi al tuo responsabile di correggerla.",
-    "offlineTimeOnLeaveDay": "Questa azione offline cade in un giorno di ferie approvate, quindi non è stata registrata."
+    "offlineTimeOnLeaveDay": "Questa azione offline cade in un giorno di ferie approvate, quindi non è stata registrata.",
+    "onBehalfOnlyBelowRole": "Puoi timbrare per conto solo di persone con un ruolo inferiore al tuo."
   },
   "pageLoad": {
     "title": "Impossibile aprire questa pagina",

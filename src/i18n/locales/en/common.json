@@ -161,7 +161,8 @@
     "realGpsSampleRequired": "Your location is required for this action.",
     "tooManyAttempts": "Too many attempts. Please wait a few minutes and try again.",
     "offlineTimeBeforeLastAction": "This offline action has a time earlier than your last recorded action, so it was not recorded. Ask your manager to correct it.",
-    "offlineTimeOnLeaveDay": "This offline action falls on a day of approved leave, so it was not recorded."
+    "offlineTimeOnLeaveDay": "This offline action falls on a day of approved leave, so it was not recorded.",
+    "onBehalfOnlyBelowRole": "You can only clock in or out on behalf of people below your role."
   },
   "pageLoad": {
     "title": "This page could not be opened",

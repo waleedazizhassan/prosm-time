@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 
 import { useAuth } from "../../core/context/AuthContext";
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
+import { canActOnBehalfOf } from "../../core/utils/roleRank";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
@@ -22,7 +23,7 @@ import PageBannerImage from "../../components/common/PageBannerImage";
 // same actor/subject/reason posture, same server-side re-checks.
 export default function AdminOnBehalfPage() {
   const { t } = useTranslation("people");
-  const { hasPermission } = useAuth();
+  const { hasPermission, profile } = useAuth();
   const canUse = hasPermission("attendance.clock_in_on_behalf") || hasPermission("attendance.clock_out_on_behalf");
 
   const [members, setMembers] = useState<OrgMember[]>([]);
@@ -32,10 +33,10 @@ export default function AdminOnBehalfPage() {
   useEffect(() => {
     if (!canUse) return;
     EmployeeRepository.listOrganizationMembers().then((result) => {
-      setMembers(result.success ? (result.data ?? []).filter((member) => member.isActive) : []);
+      setMembers(result.success ? (result.data ?? []).filter((member) => member.isActive && profile !== null && canActOnBehalfOf(profile, member)) : []);
       setLoading(false);
     });
-  }, [canUse]);
+  }, [canUse, profile]);
 
   if (!canUse) {
     return <Navigate to="/dashboard" replace />;
