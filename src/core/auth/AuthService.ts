@@ -66,6 +66,26 @@ class AuthService {
     return retry.data.session;
   }
 
+  // Owner 2026-10-18: "the app doesn't open offline". A session saved on
+  // this device (Supabase keeps it as sb-<project>-auth-token). With no
+  // connection, an expired session cannot be renewed, so getSession() gives
+  // nothing - or keeps retrying - although the person is still signed in.
+  // Supabase removes this entry itself when a session is really ended or
+  // invalid, so its presence means "signed in, waiting for a connection".
+  hasStoredSession(): boolean {
+    try {
+      for (let index = 0; index < localStorage.length; index += 1) {
+        const key = localStorage.key(index) ?? "";
+        if (!/^sb-.+-auth-token$/.test(key)) continue;
+        const stored = JSON.parse(localStorage.getItem(key) ?? "null") as { refresh_token?: string } | null;
+        if (stored?.refresh_token) return true;
+      }
+    } catch {
+      // storage unavailable or unreadable
+    }
+    return false;
+  }
+
   onAuthStateChange(callback: (event: string, session: unknown) => void) {
     return this.client.auth.onAuthStateChange(callback);
   }

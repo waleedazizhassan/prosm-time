@@ -7,6 +7,7 @@ import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
 import LegalLinks from "./LegalLinks";
 import { LEGAL_VERSION } from "./legalContent";
+import { startupCheck } from "../../core/utils/startupCheck";
 import styles from "./LegalAcknowledgementGate.module.css";
 
 const cacheKey = (userId: string) => `prosm_time_legal_ack_${LEGAL_VERSION}_${userId}`;
@@ -48,9 +49,12 @@ export default function LegalAcknowledgementGate({ children }: { children: React
       return undefined;
     }
     let active = true;
-    LegalRepository.hasAcknowledged(userId, LEGAL_VERSION).then((result) => {
+    startupCheck(() => LegalRepository.hasAcknowledged(userId, LEGAL_VERSION)).then((result) => {
       if (!active) return;
-      if (result.success && result.data) {
+      if (!result) {
+        // No connection, or no answer in time: do not block the app.
+        setStatus("done");
+      } else if (result.success && result.data) {
         writeCache(userId);
         setStatus("done");
       } else if (result.success) {

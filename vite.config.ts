@@ -1,5 +1,19 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import type { Plugin } from "vite";
+
+// The list of built files the web service worker (public/sw.js) saves on
+// the device, so the web version opens without a connection (owner 2026-10-18).
+function serviceWorkerAssetList(): Plugin {
+  return {
+    name: "prosm-time-sw-asset-list",
+    apply: "build",
+    generateBundle(_options, bundle) {
+      const files = Object.keys(bundle).filter((file) => file.startsWith("assets/")).sort();
+      this.emitFile({ type: "asset", fileName: "sw-assets.json", source: JSON.stringify(files) });
+    },
+  };
+}
 
 // PROSM Time - standalone Vite config, independent from PROSM
 // Platform's own build. See docs/PROSM_TIME_IMPLEMENTATION_MASTER_FILE_V3.md
@@ -18,7 +32,7 @@ import react from "@vitejs/plugin-react";
 // behaviour is unchanged - only the readability of the output is.
 export default defineConfig({
   base: process.env.VITE_BASE_PATH || "/",
-  plugins: [react()],
+  plugins: [react(), serviceWorkerAssetList()],
   build: {
     // Never ship a map of the original sources with the product.
     sourcemap: false,

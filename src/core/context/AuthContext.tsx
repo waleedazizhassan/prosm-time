@@ -3,6 +3,7 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState, ty
 import AuthService from "../auth/AuthService";
 import UserRepository, { type CurrentUserProfile } from "../repositories/UserRepository";
 import PermissionRepository from "../repositories/PermissionRepository";
+import { STARTUP_CHECK_TIMEOUT_MS } from "../utils/startupCheck";
 
 interface AuthContextValue {
   loading: boolean;
@@ -130,8 +131,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setPermissions(cached.permissions);
     }
 
+    // Owner 2026-10-18: the app must open without internet. A person who
+    // signed in on this device before (a saved session and a saved
+    // profile) opens on them at once while offline, or when the session
+    // check gets no answer in time; offline attendance then works as
+    // usual, and the session is renewed as soon as a connection returns.
+    const canOpenOffline = () => Boolean(cached) && AuthService.hasStoredSession();
+    let settled = false;
+    const openOffline = () => {
+      if (!mounted || settled) return;
+      settled = true;
+      setIsAuthenticated(true);
+      setLoading(false);
+    };
+    const offlineTimer = setTimeout(() => {
+      if (canOpenOffline()) openOffline();
+    }, STARTUP_CHECK_TIMEOUT_MS);
+    if (typeof navigator !== "undefined" && navigator.onLine === false && canOpenOffline()) openOffline();
+
     AuthService.getSession().then(async (session) => {
+      clearTimeout(offlineTimer);
       if (!mounted) return;
+      if (!session && canOpenOffline() && (typeof navigator === "undefined" || navigator.onLine === false || settled)) {
+        // Could not renew the session without a connection - stay signed in.
+        openOffline();
+        return;
+      }
+      settled = true;
       setIsAuthenticated(Boolean(session));
       if (session) await loadProfile();
       setLoading(false);
@@ -139,8 +165,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const {
       data: { subscription },
-    } = AuthService.onAuthStateChange((_event, session) => {
+    } = AuthService.onAuthStateChange((event, session) => {
       if (!mounted) return;
+      // No session only because it could not be renewed offline: stay
+      // signed in on the saved data. A real sign-out (or an invalid
+      // session, which Supabase removes from storage) still signs out.
+      if (!session && event !== "SIGNED_OUT" && canOpenOffline()) return;
       setIsAuthenticated(Boolean(session));
       if (session) {
         loadProfile();
@@ -162,6 +192,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     return () => {
       mounted = false;
+      clearTimeout(offlineTimer);
       subscription.unsubscribe();
       window.removeEventListener("online", handleOnline);
     };
