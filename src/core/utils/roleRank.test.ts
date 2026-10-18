@@ -16,5 +16,6 @@ describe("canActOnBehalfOf", () => {
     expect(canActOnBehalfOf(manager, supervisor)).toBe(true);
     expect(canActOnBehalfOf(manager, owner)).toBe(false);
     expect(canActOnBehalfOf(owner, manager)).toBe(true);
+    expect(canActOnBehalfOf(owner, owner)).toBe(false);
   });
 });

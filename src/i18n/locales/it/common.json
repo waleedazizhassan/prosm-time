@@ -166,7 +166,8 @@
     "fakeLocationRejected": "Timbrare da una posizione falsa (app di posizione fittizia) non è consentito in questa organizzazione.",
     "clockInOutsideAreaContactManager": "Sei fuori dall'area di lavoro di questa sede e non puoi timbrare da solo qui - contatta il tuo responsabile per registrare la presenza.",
     "networkProblem": "Al momento non riusciamo a raggiungere il server. Controlla la connessione e riprova tra poco.",
-    "allowanceAlreadyApproved": "Questa indennità è già approvata e non può più essere modificata."
+    "allowanceAlreadyApproved": "Questa indennità è già approvata e non può più essere modificata.",
+    "ownerDoesNotClockIn": "Il titolare non timbra - la presenza viene registrata per il resto del team."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

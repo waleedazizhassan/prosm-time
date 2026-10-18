@@ -61,7 +61,8 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // own Dashboard. "attendance.view" is exactly the Owner+Manager
   // audience already established for Manager Console below (same
   // permission key, same real audience per the multirole audit).
-  { id: "clockIn", labelKey: "items.clockIn", path: "/clock-in", icon: LogIn, requiredPermission: "attendance.view", section: "attendance" },
+  // Owner 2026-10-18: the Owner does not clock in or out.
+  { id: "clockIn", labelKey: "items.clockIn", path: "/clock-in", icon: LogIn, requiredPermission: "attendance.view", hiddenFromOwner: true, section: "attendance" },
   { id: "manager", labelKey: "items.manager", path: "/manager", icon: LayoutGrid, requiredPermission: "attendance.view", section: "attendance" },
   // § live UX review, user-directed - "a direct sidebar button to view
   // employees' clock-in/clock-out record." No permission gate, same

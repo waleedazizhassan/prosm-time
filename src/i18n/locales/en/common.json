@@ -166,7 +166,8 @@
     "fakeLocationRejected": "A clock in or out from a fake location (a mock-location app) is not accepted in this organisation.",
     "clockInOutsideAreaContactManager": "You are outside this site's work area, so you can't clock in yourself here - please contact your manager to register your attendance.",
     "networkProblem": "We can't reach the server right now. Check your connection and try again in a moment.",
-    "allowanceAlreadyApproved": "This allowance entry is already approved and can no longer be changed."
+    "allowanceAlreadyApproved": "This allowance entry is already approved and can no longer be changed.",
+    "ownerDoesNotClockIn": "The Owner does not clock in or out - attendance is recorded for the rest of the team."
   },
   "pageLoad": {
     "title": "This page needs a connection",

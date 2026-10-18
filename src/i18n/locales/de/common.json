@@ -166,7 +166,8 @@
     "fakeLocationRejected": "Ein- oder Ausstempeln von einem gefälschten Standort (Mock-Location-App) wird in dieser Organisation nicht akzeptiert.",
     "clockInOutsideAreaContactManager": "Sie sind außerhalb des Arbeitsbereichs dieses Standorts und können hier nicht selbst einstempeln - bitte wenden Sie sich an Ihre Führungskraft.",
     "networkProblem": "Der Server ist gerade nicht erreichbar. Prüfen Sie Ihre Verbindung und versuchen Sie es gleich noch einmal.",
-    "allowanceAlreadyApproved": "Dieser Zulageneintrag ist bereits genehmigt und kann nicht mehr geändert werden."
+    "allowanceAlreadyApproved": "Dieser Zulageneintrag ist bereits genehmigt und kann nicht mehr geändert werden.",
+    "ownerDoesNotClockIn": "Der Inhaber stempelt nicht ein oder aus - die Anwesenheit wird für das übrige Team erfasst."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

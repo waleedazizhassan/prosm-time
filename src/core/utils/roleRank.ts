@@ -8,6 +8,7 @@ export function roleRank(member: { isOwner: boolean; roleKey: string }): number 
   return 1;
 }
 
+// The Owner is never clocked in or out (owner 2026-10-18).
 export function canActOnBehalfOf(caller: { isOwner: boolean; roleKey: string }, subject: { isOwner: boolean; roleKey: string }): boolean {
-  return caller.isOwner || roleRank(subject) < roleRank(caller);
+  return !subject.isOwner && (caller.isOwner || roleRank(subject) < roleRank(caller));
 }

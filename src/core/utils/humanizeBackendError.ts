@@ -208,6 +208,7 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "A FAKE LOCATION IS NOT ACCEPTED": "fakeLocationRejected",
   "CLOCK_IN_OUTSIDE_AREA_CONTACT_MANAGER": "clockInOutsideAreaContactManager",
   "THIS ALLOWANCE ENTRY IS ALREADY APPROVED": "allowanceAlreadyApproved",
+  "THE OWNER DOES NOT CLOCK IN OR OUT": "ownerDoesNotClockIn",
   // Offline replays (audit 1.4).
   "OFFLINE TIME IS BEFORE YOUR LAST RECORDED ACTION": "offlineTimeBeforeLastAction",
   "OFFLINE TIME FALLS ON A DAY OF APPROVED LEAVE": "offlineTimeOnLeaveDay",
