@@ -708,3 +708,166 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Owner 2026-10-19: cleaner dashboard top - greeting card and stat tiles. */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  padding: var(--space-5, 20px) var(--space-5, 20px);
+  margin-bottom: var(--space-4);
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--brand-secondary, #0a224a) 0%, #11406f 100%);
+  color: #fff;
+}
+
+.heroText {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.heroDate {
+  font-size: var(--font-xs);
+  opacity: 0.75;
+}
+
+.heroTitle {
+  margin: 0;
+  font-size: clamp(1.25rem, 3.5vw, 1.6rem);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.3;
+}
+
+.heroScope {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  margin-top: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  font-size: var(--font-xs);
+}
+
+.heroAction {
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--brand-secondary, #0a224a);
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+}
+
+.heroAction:hover {
+  opacity: 0.9;
+}
+
+/* Follows the card's own width: four in a row on a wide screen, two on a phone. */
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.stat {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  background: var(--surface-card);
+  color: var(--text-primary);
+  text-align: start;
+  font: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.stat:hover {
+  border-color: var(--brand-primary-subtle-border, #86efac);
+  transform: translateY(-1px);
+}
+
+.statIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+}
+
+.statIconGreen {
+  background: rgba(22, 163, 74, 0.14);
+  color: #16a34a;
+}
+
+.statIconAmber {
+  background: rgba(245, 158, 11, 0.16);
+  color: #d97706;
+}
+
+.statIconSlate {
+  background: rgba(100, 116, 139, 0.16);
+  color: #64748b;
+}
+
+.statIconRed {
+  background: rgba(220, 38, 38, 0.14);
+  color: #dc2626;
+}
+
+.statLabel {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.statValue {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 1.75rem;
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.statOf {
+  font-size: var(--font-xs);
+  font-weight: normal;
+  color: var(--text-secondary);
+}
+
+.statTrack {
+  display: block;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--border-light);
+  overflow: hidden;
+}
+
+.statFill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+}
+
+.statFillGood {
+  background: #16a34a;
+}
+
+.statFillWatch {
+  background: #d97706;
+}
+
+.statFillLow {
+  background: #dc2626;
+}

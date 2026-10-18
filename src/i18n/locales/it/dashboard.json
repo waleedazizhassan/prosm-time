@@ -73,6 +73,16 @@
         "geofence_exception": "Eccezione geofence",
         "correction_request": "Richiesta di correzione"
       }
+    },
+    "greetingMorning": "Buongiorno, {{name}}",
+    "greetingAfternoon": "Buon pomeriggio, {{name}}",
+    "greetingEvening": "Buonasera, {{name}}",
+    "stat": {
+      "present": "Presenti ora",
+      "of": "su {{total}}",
+      "onBreak": "In pausa",
+      "notIn": "Non timbrati",
+      "review": "Da verificare"
     }
   },
   "organizationCard": {

@@ -73,6 +73,16 @@
         "geofence_exception": "استثناء نطاق جغرافي",
         "correction_request": "طلب تصحيح"
       }
+    },
+    "greetingMorning": "صباح الخير، {{name}}",
+    "greetingAfternoon": "مساء الخير، {{name}}",
+    "greetingEvening": "مساء الخير، {{name}}",
+    "stat": {
+      "present": "حاضر الآن",
+      "of": "من {{total}}",
+      "onBreak": "في استراحة",
+      "notIn": "لم يسجّل حضوره",
+      "review": "بانتظار مراجعتك"
     }
   },
   "organizationCard": {

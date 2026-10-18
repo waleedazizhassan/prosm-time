@@ -73,6 +73,16 @@
         "geofence_exception": "Exception de géorepérage",
         "correction_request": "Demande de correction"
       }
+    },
+    "greetingMorning": "Bonjour, {{name}}",
+    "greetingAfternoon": "Bon après-midi, {{name}}",
+    "greetingEvening": "Bonsoir, {{name}}",
+    "stat": {
+      "present": "Présents",
+      "of": "sur {{total}}",
+      "onBreak": "En pause",
+      "notIn": "Non pointés",
+      "review": "À vérifier"
     }
   },
   "organizationCard": {

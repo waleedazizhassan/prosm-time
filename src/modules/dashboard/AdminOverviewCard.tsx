@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
-import { MapPin, UserCheck, Users, CalendarDays, Coffee, CheckCircle2, ClipboardCheck, FileClock, CalendarClock } from "lucide-react";
+import { MapPin, UserCheck, UserX, Users, CalendarDays, Coffee, CheckCircle2, ClipboardCheck, FileClock, CalendarClock } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
@@ -18,7 +18,6 @@ import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import EmptyState from "../../components/common/EmptyState";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
-import greetingIllustration from "../../assets/illustration-dashboard-greeting.webp";
 import styles from "./AdminOverviewCard.module.css";
 
 type Drilldown = "sites" | "present" | "employees" | "pending" | "leaveToday" | "onBreak" | null;
@@ -245,8 +244,14 @@ export default function AdminOverviewCard() {
   // config value pulled from anywhere) - "most of the roster present"
   // reads as healthy, "under half" is the one state worth a warning
   // color rather than the brand-neutral tone every other tile uses.
-  const presencePercent = members.length > 0 ? Math.round((presentRows.length / members.length) * 100) : 0;
-  const presenceLevel: "good" | "watch" | "low" = members.length === 0 ? "good" : presencePercent >= 70 ? "good" : presencePercent >= 40 ? "watch" : "low";
+  // The Owner does not clock in (owner 2026-10-18): presence is counted over the team only.
+  const teamSize = members.filter((member) => !member.isOwner && member.isActive).length;
+  const presencePercent = teamSize > 0 ? Math.min(100, Math.round((presentRows.length / teamSize) * 100)) : 0;
+  const presenceLevel: "good" | "watch" | "low" = teamSize === 0 ? "good" : presencePercent >= 70 ? "good" : presencePercent >= 40 ? "watch" : "low";
+  const hour = new Date().getHours();
+  const greetingKey = hour < 12 ? "overview.greetingMorning" : hour < 17 ? "overview.greetingAfternoon" : "overview.greetingEvening";
+  const firstName = (profile?.fullName ?? "").trim().split(/\s+/)[0] ?? "";
+  const todayLabel = new Date().toLocaleDateString(i18n.language, { weekday: "long", day: "numeric", month: "long" });
 
   const secondaryKpis: Kpi[] = [
     { key: "sites", icon: MapPin, value: sites.length, label: t("overview.sites") },
@@ -281,53 +286,63 @@ export default function AdminOverviewCard() {
 
   return (
     <Card>
-      <div className={styles.greetingBanner}>
-        <div className={styles.greetingText}>
-          <span className={styles.greetingEyebrow}>{t(profile?.isOwner ? "overview.greetingEyebrowOwner" : "overview.greetingEyebrowManager")}</span>
-          <h2 className={styles.greetingTitle}>{t("overview.greetingTitle", { name: profile?.fullName })}</h2>
-        </div>
-        <img src={greetingIllustration} alt="" className={styles.greetingIllustration} />
-      </div>
-      <div className={styles.header}>
-        <span className={styles.eyebrowGroup}>
-          <span className={styles.eyebrow}>{t(profile?.isOwner ? "overview.title" : "overview.titleScoped")}</span>
-          <span className={`${styles.scopeBadge} ${profile?.isOwner ? styles.scopeBadgeOwner : styles.scopeBadgeManager}`}>
+      {/* Owner 2026-10-19: a cleaner, more professional top - one greeting
+          card (time-of-day greeting, today's date, scope, Manager Console)
+          and four matching stat tiles that open their details. */}
+      <div className={styles.hero}>
+        <div className={styles.heroText}>
+          <span className={styles.heroDate}>{todayLabel}</span>
+          <h2 className={styles.heroTitle}>{t(greetingKey, { name: firstName })}</h2>
+          <span className={styles.heroScope}>
+            <MapPin size={14} />
             {profile?.isOwner ? t("overview.scopeOwner") : t("overview.scopeManager", { count: sites.length })}
           </span>
-        </span>
-        <Link to="/manager" className={styles.link}>
+        </div>
+        <Link to="/manager" className={styles.heroAction}>
           {t("overview.openManagerAction")}
         </Link>
       </div>
-      <div className={styles.heroRow}>
-        <button
-          type="button"
-          className={`${styles.presenceHero} ${styles[`presence${presenceLevel === "good" ? "Good" : presenceLevel === "watch" ? "Watch" : "Low"}`]}`}
-          onClick={() => setDrilldown("present")}
-        >
-          <span className={styles.presenceIconWrap}>
-            <UserCheck size={28} />
+
+      <div className={styles.statGrid}>
+        <button type="button" className={styles.stat} onClick={() => setDrilldown("present")}>
+          <span className={`${styles.statIcon} ${styles.statIconGreen}`}>
+            <UserCheck size={18} />
           </span>
-          <span className={styles.presenceBody}>
-            <span className={styles.presenceEyebrow}>{t("overview.presenceTitle")}</span>
-            <span className={styles.presenceValueRow}>
-              <span className={styles.presenceValue}>{presentRows.length}</span>
-              <span className={styles.presenceOf}>{t("overview.presenceOfTotal", { total: members.length })}</span>
-            </span>
-            <span className={styles.presenceBarTrack}>
-              <span className={styles.presenceBarFill} style={{ width: `${presencePercent}%` }} />
-            </span>
+          <span className={styles.statLabel}>{t("overview.stat.present")}</span>
+          <span className={styles.statValue}>
+            {presentRows.length}
+            <span className={styles.statOf}>{t("overview.stat.of", { total: teamSize })}</span>
+          </span>
+          <span className={styles.statTrack}>
+            <span className={`${styles.statFill} ${styles[`statFill${presenceLevel === "good" ? "Good" : presenceLevel === "watch" ? "Watch" : "Low"}`]}`} style={{ width: `${presencePercent}%` }} />
           </span>
         </button>
+        <button type="button" className={styles.stat} onClick={() => setDrilldown("onBreak")}>
+          <span className={`${styles.statIcon} ${styles.statIconAmber}`}>
+            <Coffee size={18} />
+          </span>
+          <span className={styles.statLabel}>{t("overview.stat.onBreak")}</span>
+          <span className={styles.statValue}>{onBreak.length}</span>
+        </button>
+        <button type="button" className={styles.stat} onClick={() => setDrilldown("employees")}>
+          <span className={`${styles.statIcon} ${styles.statIconSlate}`}>
+            <UserX size={18} />
+          </span>
+          <span className={styles.statLabel}>{t("overview.stat.notIn")}</span>
+          <span className={styles.statValue}>{Math.max(0, teamSize - presentRows.length)}</span>
+        </button>
+        <button type="button" className={styles.stat} onClick={() => (pending.length > 0 ? setDrilldown("pending") : navigate("/manager"))}>
+          <span className={`${styles.statIcon} ${totalNeedsAttention > 0 ? styles.statIconRed : styles.statIconGreen}`}>
+            {totalNeedsAttention > 0 ? <ClipboardCheck size={18} /> : <CheckCircle2 size={18} />}
+          </span>
+          <span className={styles.statLabel}>{t("overview.stat.review")}</span>
+          <span className={styles.statValue}>{totalNeedsAttention}</span>
+        </button>
+      </div>
 
+      {totalNeedsAttention > 0 ? (
         <div className={styles.attentionCard}>
           <span className={styles.cardTitle}>{t("overview.attentionTitle")}</span>
-          {totalNeedsAttention === 0 ? (
-            <div className={styles.attentionAllClear}>
-              <CheckCircle2 size={18} />
-              {t("overview.pendingAllClear")}
-            </div>
-          ) : (
             <ul className={styles.attentionList}>
               <li className={`${styles.attentionRow} ${pendingTimesheetCount > 0 ? styles.attentionRowActive : ""}`}>
                 <FileClock size={18} className={styles.attentionIcon} />
@@ -357,9 +372,8 @@ export default function AdminOverviewCard() {
                 </button>
               </li>
             </ul>
-          )}
         </div>
-      </div>
+      ) : null}
 
       <div className={styles.insightRow}>
         <div className={styles.chartCard}>

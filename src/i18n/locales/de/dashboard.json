@@ -73,6 +73,16 @@
         "geofence_exception": "Geofence-Ausnahme",
         "correction_request": "Korrekturanfrage"
       }
+    },
+    "greetingMorning": "Guten Morgen, {{name}}",
+    "greetingAfternoon": "Guten Tag, {{name}}",
+    "greetingEvening": "Guten Abend, {{name}}",
+    "stat": {
+      "present": "Jetzt anwesend",
+      "of": "von {{total}}",
+      "onBreak": "In der Pause",
+      "notIn": "Nicht eingestempelt",
+      "review": "Wartet auf Ihre Prüfung"
     }
   },
   "organizationCard": {
