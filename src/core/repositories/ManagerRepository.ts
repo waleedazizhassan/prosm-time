@@ -52,6 +52,8 @@ export interface TodayAttendanceRow {
   // later), not the server; a manager reviews it.
   clockInDeviceTime: boolean;
   clockOutDeviceTime: boolean;
+  // Recorded by the former early-leave prompt (until 2026-10-18); shown with the notes.
+  earlyLeaveReason: string | null;
   // § live UX review, user-directed - "Change Site" mid-shift: show the
   // move inline under the site name ("changed to X at HH:MM"), same
   // "the record itself carries what happened" posture as the evidence-
@@ -92,6 +94,7 @@ interface RawUserRef {
 }
 
 interface RawAttendanceSessionRow {
+  early_leave_reason?: string | null;
   id: string;
   user_id: string;
   status: "clocked_in" | "clocked_out";
@@ -228,7 +231,7 @@ class ManagerRepository {
     try {
       let sessionsQuery = this.client
         .from("attendance_sessions")
-        .select("id, user_id, status, clock_in_at, clock_out_at, manual_location_label, users(full_name), sites(name)")
+        .select("id, user_id, status, clock_in_at, clock_out_at, manual_location_label, early_leave_reason, users(full_name), sites(name)")
         .order("clock_in_at", { ascending: false });
 
       // Real bug fix - listTodayAttendance's own "Currently present" KPI
@@ -376,6 +379,7 @@ class ManagerRepository {
           clockOutRecordedByName: clockOutRecordedByBySession.get(row.id) ?? null,
           clockInDeviceTime: deviceTimeEvents.has(`${row.id}:clock_in`),
           clockOutDeviceTime: deviceTimeEvents.has(`${row.id}:clock_out`),
+          earlyLeaveReason: row.early_leave_reason ?? null,
           siteChanges: siteChangesBySession.get(row.id) ?? [],
         };
       });

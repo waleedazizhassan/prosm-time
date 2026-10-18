@@ -207,10 +207,6 @@ export default function ClockInOutCard() {
     earlyMinutes: number;
     earlyLeaveReason: string | null;
   } | null>(null);
-  const [clockOutSummarySessionId, setClockOutSummarySessionId] = useState<string | null>(null);
-  const [earlyReasonSubmitting, setEarlyReasonSubmitting] = useState(false);
-  const [earlyReasonSaved, setEarlyReasonSaved] = useState(false);
-  const [earlyReasonError, setEarlyReasonError] = useState("");
   // § live UX review, user-directed - mid-shift "Change Site": its own
   // independent control while clocked in (real gap fix, 14-point
   // live-audit - no longer routed through Break/Pause), with a
@@ -718,9 +714,6 @@ export default function ClockInOutCard() {
     const summaryResult = await AttendanceRepository.getSessionSummary(completedSessionId);
     if (summaryResult.success && summaryResult.data) {
       setClockOutSummary(summaryResult.data);
-      setClockOutSummarySessionId(completedSessionId);
-      setEarlyReasonSaved(false);
-      setEarlyReasonError("");
       setSummaryModalOpen(true);
     }
   };
@@ -864,25 +857,9 @@ export default function ClockInOutCard() {
     }
   };
 
-  const handleSubmitEarlyReason = async (reason: string) => {
-    if (!clockOutSummarySessionId) return;
-    setEarlyReasonSubmitting(true);
-    setEarlyReasonError("");
-    const result = await AttendanceRepository.submitEarlyLeaveReason(clockOutSummarySessionId, reason);
-    setEarlyReasonSubmitting(false);
-    if (!result.success) {
-      setEarlyReasonError(humanizeBackendError(result.message, t) ?? t("attendance.summaryEarlyReasonError"));
-      return;
-    }
-    setEarlyReasonSaved(true);
-  };
-
   const handleCloseSummary = () => {
     setSummaryModalOpen(false);
     setClockOutSummary(null);
-    setClockOutSummarySessionId(null);
-    setEarlyReasonSaved(false);
-    setEarlyReasonError("");
   };
 
   const handleOpenChangeSiteModal = () => {
@@ -1204,13 +1181,6 @@ export default function ClockInOutCard() {
           breakMinutes={clockOutSummary.breakMinutes}
           overtimeMinutes={clockOutSummary.overtimeMinutes}
           exceptionsCount={clockOutSummary.exceptionsCount}
-          leftEarly={clockOutSummary.leftEarly}
-          earlyMinutes={clockOutSummary.earlyMinutes}
-          earlyLeaveReason={clockOutSummary.earlyLeaveReason}
-          reasonSubmitting={earlyReasonSubmitting}
-          reasonSaved={earlyReasonSaved}
-          error={earlyReasonError}
-          onSubmitReason={handleSubmitEarlyReason}
           onClose={handleCloseSummary}
         />
       ) : null}

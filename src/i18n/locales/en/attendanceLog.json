@@ -18,7 +18,8 @@
     "clockInAt": "Clock In",
     "clockOutAt": "Clock Out",
     "status": "Status",
-    "workedHours": "Hours Worked"
+    "workedHours": "Hours Worked",
+    "notes": "Notes"
   },
   "status": {
     "clocked_in": "Clocked In",
@@ -38,5 +39,10 @@
   "photoAlt": "Attendance evidence photo",
   "photoLoadError": "Unable to load this photo.",
   "deviceTimeBadge": "Device time (offline)",
-  "deviceTimeHint": "Recorded without a connection with the time from the employee's device; waiting for a manager's review."
+  "deviceTimeHint": "Recorded without a connection with the time from the employee's device; waiting for a manager's review.",
+  "notes": {
+    "clockIn": "Clock in: {{note}}",
+    "clockOut": "Clock out: {{note}}",
+    "earlyLeave": "Left early: {{reason}}"
+  }
 }

@@ -18,7 +18,8 @@
     "clockInAt": "وقت الحضور",
     "clockOutAt": "وقت الانصراف",
     "status": "الحالة",
-    "workedHours": "ساعات العمل"
+    "workedHours": "ساعات العمل",
+    "notes": "ملاحظات"
   },
   "status": {
     "clocked_in": "حاضر",
@@ -38,5 +39,10 @@
   "photoAlt": "صورة إثبات الحضور",
   "photoLoadError": "تعذر تحميل هذه الصورة.",
   "deviceTimeBadge": "وقت من الجهاز (أوفلاين)",
-  "deviceTimeHint": "سُجّل بدون اتصال بوقت جهاز الموظف، وينتظر مراجعة المدير."
+  "deviceTimeHint": "سُجّل بدون اتصال بوقت جهاز الموظف، وينتظر مراجعة المدير.",
+  "notes": {
+    "clockIn": "الحضور: {{note}}",
+    "clockOut": "الانصراف: {{note}}",
+    "earlyLeave": "انصراف مبكر: {{reason}}"
+  }
 }

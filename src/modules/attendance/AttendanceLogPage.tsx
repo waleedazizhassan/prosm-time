@@ -21,6 +21,7 @@ import attendanceHeaderImage from "../../assets/illustrations/attendance.svg";
 import { formatTimeOnly } from "../../core/utils/formatDate";
 import { buildAttendanceLogPdf } from "./attendanceLogPdf";
 import PageBanner from "../../components/common/PageBanner";
+import { attendanceNoteLines } from "./attendanceNotes";
 
 const ALL_EMPLOYEES = "";
 
@@ -73,16 +74,19 @@ function LocationCell({ location, t }: { location: AttendanceEventLocation | nul
 // into the confirmation screen right before a clock-in/out submits,
 // shown to managers here the same "the record itself carries what
 // happened" way site changes already are.
-function NoteActivityCell({ note, activity, t }: { note: string | null; activity: string | null; t: (key: string, options?: Record<string, unknown>) => string }) {
-  if (!note && !activity) return null;
+// Owner 2026-10-18: one Notes column for everything the employee wrote -
+// the clock-in and clock-out notes and activity, and a reason given by
+// the former early-leave prompt.
+function NotesCell({ row, t }: { row: TodayAttendanceRow; t: (key: string, options?: Record<string, unknown>) => string }) {
+  const lines = attendanceNoteLines(row, t);
+  if (lines.length === 0) return <>—</>;
   return (
     <>
-      {note ? (
-        <span style={{ display: "block", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("noteLabel", { note })}</span>
-      ) : null}
-      {activity ? (
-        <span style={{ display: "block", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("activityLabel", { activity })}</span>
-      ) : null}
+      {lines.map((line) => (
+        <span key={line} style={{ display: "block", fontSize: "var(--font-xs)", color: "var(--text-secondary)", whiteSpace: "pre-wrap" }}>
+          {line}
+        </span>
+      ))}
     </>
   );
 }
@@ -249,7 +253,6 @@ export default function AttendanceLogPage() {
               </button>
             ) : null}
           </span>
-          <NoteActivityCell note={row.clockInNote} activity={row.clockInActivity} t={t} />
           {row.clockInRecordedByName ? (
             <span style={{ display: "block", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
               {t("recordedByOnBehalf", { name: row.clockInRecordedByName })}
@@ -279,7 +282,6 @@ export default function AttendanceLogPage() {
                 </button>
               ) : null}
             </span>
-            <NoteActivityCell note={row.clockOutNote} activity={row.clockOutActivity} t={t} />
             {row.clockOutRecordedByName ? (
               <span style={{ display: "block", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
                 {t("recordedByOnBehalf", { name: row.clockOutRecordedByName })}
@@ -293,6 +295,7 @@ export default function AttendanceLogPage() {
     },
     { key: "status", header: t("columns.status"), render: (row) => <StatusBadge status={row.status === "clocked_in" ? "active" : "neutral"}>{t(`status.${row.status}`)}</StatusBadge> },
     { key: "workedHours", header: t("columns.workedHours"), render: (row) => formatWorkedHours(row.clockInAt, row.clockOutAt) },
+    { key: "notes", header: t("columns.notes"), render: (row) => <NotesCell row={row} t={t} /> },
   ];
 
   return (

@@ -1,11 +1,8 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import Modal from "./Modal";
 import Button from "./Button";
-import Textarea from "./Textarea";
-import ErrorText from "./ErrorText";
 
 interface ClockOutSummaryModalProps {
   isOpen: boolean;
@@ -13,13 +10,6 @@ interface ClockOutSummaryModalProps {
   breakMinutes: number;
   overtimeMinutes: number;
   exceptionsCount: number;
-  leftEarly: boolean;
-  earlyMinutes: number;
-  earlyLeaveReason: string | null;
-  reasonSubmitting: boolean;
-  reasonSaved: boolean;
-  error: string;
-  onSubmitReason: (reason: string) => void;
   onClose: () => void;
 }
 
@@ -32,10 +22,9 @@ function formatMinutes(minutes: number): string {
 
 // PROSM Time - § live UX review, user-directed: a real summary shown
 // right after a successful Clock Out (worked/break/overtime minutes,
-// exceptions logged this shift), with a reason field when the employee
-// left before the site's own shift_end_time (early leave has no
-// "consequence" beyond notifying supervisors - matching how an out-of-
-// zone reason already works, submit_prosm_time_early_leave_reason).
+// exceptions logged this shift). Owner 2026-10-18: no early-leave reason
+// prompt any more - the note the employee writes when clocking out is
+// shown in the Notes column of the attendance record instead.
 // "Complete Allowances Now" is offered unconditionally, not only on
 // early leave - the same posture as the rest of this shift's own
 // optional follow-ups (never a hard requirement to leave this screen).
@@ -45,18 +34,10 @@ export default function ClockOutSummaryModal({
   breakMinutes,
   overtimeMinutes,
   exceptionsCount,
-  leftEarly,
-  earlyMinutes,
-  earlyLeaveReason,
-  reasonSubmitting,
-  reasonSaved,
-  error,
-  onSubmitReason,
   onClose,
 }: ClockOutSummaryModalProps) {
   const { t } = useTranslation("dashboard");
   const navigate = useNavigate();
-  const [reason, setReason] = useState("");
 
   const handleGoToAllowances = () => {
     onClose();
@@ -86,31 +67,6 @@ export default function ClockOutSummaryModal({
         ) : null}
       </div>
 
-      {leftEarly ? (
-        <div style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--surface-hover)", marginBottom: "var(--space-4)" }}>
-          <p style={{ margin: 0, fontSize: "var(--font-sm)", color: "var(--status-warning-text)" }}>
-            {t("attendance.summaryLeftEarlyWarning", { minutes: Math.round(earlyMinutes) })}
-          </p>
-          {earlyLeaveReason || reasonSaved ? (
-            <p style={{ margin: "var(--space-2) 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("attendance.summaryEarlyReasonSaved")}</p>
-          ) : (
-            <>
-              <Textarea
-                label={t("attendance.summaryEarlyReasonLabel")}
-                name="earlyLeaveReason"
-                value={reason}
-                onChange={(event) => setReason(event.target.value)}
-                disabled={reasonSubmitting}
-                rows={2}
-              />
-              <Button size="sm" onClick={() => onSubmitReason(reason)} loading={reasonSubmitting} disabled={!reason.trim()} style={{ marginTop: "var(--space-2)" }}>
-                {t("attendance.summaryEarlyReasonSubmit")}
-              </Button>
-              <ErrorText>{error}</ErrorText>
-            </>
-          )}
-        </div>
-      ) : null}
 
       <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
         <Button fullWidth onClick={handleGoToAllowances}>

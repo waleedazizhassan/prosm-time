@@ -18,7 +18,8 @@
     "clockInAt": "Kommen",
     "clockOutAt": "Gehen",
     "status": "Status",
-    "workedHours": "Geleistete Stunden"
+    "workedHours": "Geleistete Stunden",
+    "notes": "Notizen"
   },
   "status": {
     "clocked_in": "Eingestempelt",
@@ -38,5 +39,10 @@
   "photoAlt": "Anwesenheitsnachweisfoto",
   "photoLoadError": "Dieses Foto konnte nicht geladen werden.",
   "deviceTimeBadge": "Gerätezeit (offline)",
-  "deviceTimeHint": "Ohne Verbindung mit der Uhrzeit des Geräts erfasst; wartet auf die Prüfung durch eine Führungskraft."
+  "deviceTimeHint": "Ohne Verbindung mit der Uhrzeit des Geräts erfasst; wartet auf die Prüfung durch eine Führungskraft.",
+  "notes": {
+    "clockIn": "Einstempeln: {{note}}",
+    "clockOut": "Ausstempeln: {{note}}",
+    "earlyLeave": "Früher gegangen: {{reason}}"
+  }
 }

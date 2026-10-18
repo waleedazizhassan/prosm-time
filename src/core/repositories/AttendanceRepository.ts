@@ -368,17 +368,6 @@ class AttendanceRepository {
     }
   }
 
-  async submitEarlyLeaveReason(attendanceSessionId: string, reason: string): Promise<ServiceResult> {
-    try {
-      const { data, error } = await this.client.rpc("submit_prosm_time_early_leave_reason", { p_attendance_session_id: attendanceSessionId, p_reason: reason });
-      if (error) return createError(error.message);
-      if (data?.success === false) return createError("Unable to submit this reason.");
-      return createSuccess();
-    } catch (error) {
-      return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
-    }
-  }
-
   // WP-12/§17.1 - break start/end, real Edge Functions per §35.
   // options (offline sync, owner 2026-09-29): the queued action's own id and the time it really happened.
   async startBreak(attendanceSessionId: string, options?: OfflineReplayOptions): Promise<ServiceResult<{ breakId: string }>> {

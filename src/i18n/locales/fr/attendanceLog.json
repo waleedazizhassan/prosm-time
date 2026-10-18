@@ -18,7 +18,8 @@
     "clockInAt": "Entrée",
     "clockOutAt": "Sortie",
     "status": "Statut",
-    "workedHours": "Heures travaillées"
+    "workedHours": "Heures travaillées",
+    "notes": "Notes"
   },
   "status": {
     "clocked_in": "Présent",
@@ -38,5 +39,10 @@
   "photoAlt": "Photo justificative de présence",
   "photoLoadError": "Impossible de charger cette photo.",
   "deviceTimeBadge": "Heure de l'appareil (hors ligne)",
-  "deviceTimeHint": "Enregistré sans connexion avec l'heure de l'appareil de l'employé ; en attente de la vérification d'un responsable."
+  "deviceTimeHint": "Enregistré sans connexion avec l'heure de l'appareil de l'employé ; en attente de la vérification d'un responsable.",
+  "notes": {
+    "clockIn": "Arrivée : {{note}}",
+    "clockOut": "Départ : {{note}}",
+    "earlyLeave": "Départ anticipé : {{reason}}"
+  }
 }
