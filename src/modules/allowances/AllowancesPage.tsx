@@ -187,8 +187,9 @@ export default function AllowancesPage() {
   const isOwnEntry = detailEntry ? detailEntry.userId === profile?.id : false;
   const isDraft = detailEntry?.status === "draft";
   const isSubmitted = detailEntry?.status === "submitted";
-  const canEditDetail = isOwnEntry && isDraft;
-  const canSubmitDetail = isOwnEntry && isDraft;
+  // Owner 2026-10-18: editable until approved (a submitted entry stays waiting for review).
+  const canEditDetail = isOwnEntry && detailEntry?.status !== "approved";
+  const canSubmitDetail = isOwnEntry && (isDraft || detailEntry?.status === "rejected");
   const canReviewDetail = canApprove && isSubmitted && !isOwnEntry;
 
   const handleSaveDetail = async () => {

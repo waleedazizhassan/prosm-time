@@ -165,7 +165,8 @@
     "onBehalfOnlyBelowRole": "You can only clock in or out on behalf of people below your role.",
     "fakeLocationRejected": "A clock in or out from a fake location (a mock-location app) is not accepted in this organisation.",
     "clockInOutsideAreaContactManager": "You are outside this site's work area, so you can't clock in yourself here - please contact your manager to register your attendance.",
-    "networkProblem": "We can't reach the server right now. Check your connection and try again in a moment."
+    "networkProblem": "We can't reach the server right now. Check your connection and try again in a moment.",
+    "allowanceAlreadyApproved": "This allowance entry is already approved and can no longer be changed."
   },
   "pageLoad": {
     "title": "This page needs a connection",

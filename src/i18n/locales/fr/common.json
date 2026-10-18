@@ -165,7 +165,8 @@
     "onBehalfOnlyBelowRole": "Vous ne pouvez pointer à la place que des personnes d'un rôle inférieur au vôtre.",
     "fakeLocationRejected": "Un pointage depuis une position falsifiée (application de position fictive) n'est pas accepté dans cette organisation.",
     "clockInOutsideAreaContactManager": "Vous êtes en dehors de la zone de travail de ce site et ne pouvez pas pointer vous-même ici - contactez votre responsable pour enregistrer votre présence.",
-    "networkProblem": "Impossible de joindre le serveur pour le moment. Vérifiez votre connexion et réessayez dans un instant."
+    "networkProblem": "Impossible de joindre le serveur pour le moment. Vérifiez votre connexion et réessayez dans un instant.",
+    "allowanceAlreadyApproved": "Cette indemnité est déjà approuvée et ne peut plus être modifiée."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

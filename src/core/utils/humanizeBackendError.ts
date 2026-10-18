@@ -207,6 +207,7 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "YOU CAN ONLY ACT ON BEHALF OF PEOPLE BELOW YOUR ROLE": "onBehalfOnlyBelowRole",
   "A FAKE LOCATION IS NOT ACCEPTED": "fakeLocationRejected",
   "CLOCK_IN_OUTSIDE_AREA_CONTACT_MANAGER": "clockInOutsideAreaContactManager",
+  "THIS ALLOWANCE ENTRY IS ALREADY APPROVED": "allowanceAlreadyApproved",
   // Offline replays (audit 1.4).
   "OFFLINE TIME IS BEFORE YOUR LAST RECORDED ACTION": "offlineTimeBeforeLastAction",
   "OFFLINE TIME FALLS ON A DAY OF APPROVED LEAVE": "offlineTimeOnLeaveDay",
