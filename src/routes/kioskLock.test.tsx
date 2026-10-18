@@ -25,6 +25,10 @@ vi.mock("../modules/kiosk/KioskLauncherPage", () => ({ default: () => <p>kiosk-l
 vi.mock("../modules/people/PeoplePage", () => ({ default: () => <p>people-page</p> }));
 vi.mock("../modules/activation/useTrialStatus", () => ({ default: () => ({ loading: false, status: null, reload: vi.fn() }) }));
 vi.mock("../core/auth/AuthService", () => ({ default: { signIn: vi.fn() } }));
+// The privacy acknowledgement is already given (tested in modules/legal).
+vi.mock("../core/repositories/LegalRepository", () => ({
+  default: { hasAcknowledged: () => Promise.resolve({ success: true, message: null, data: true }), acknowledge: vi.fn() },
+}));
 vi.mock("../core/context/AuthContext", () => ({
   AuthProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   useAuth: () => ({

@@ -4,6 +4,7 @@ import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
 import helpHeaderImage from "../../assets/illustrations/help.svg";
 import PageBanner from "../../components/common/PageBanner";
+import LegalLinks from "../legal/LegalLinks";
 
 // PROSM Time WP-21/§32 - "A dedicated Help area must exist, providing:
 // product help, basic usage guidance, FAQ where implemented, support
@@ -17,8 +18,10 @@ export default function HelpPage() {
   const guideSections = [
     "gettingStarted",
     "attendance",
+    "offline",
     "walkInGeofence",
     "siteChange",
+    "locationChecks",
     "sos",
     "notifications",
     "timesheets",
@@ -43,8 +46,9 @@ export default function HelpPage() {
     "desktopApp",
     "liveMap",
     "radio",
+    "privacy",
   ] as const;
-  const faqEntries = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] as const;
+  const faqEntries = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] as const;
 
   return (
     <PageShell title="">
@@ -53,6 +57,11 @@ export default function HelpPage() {
       {guideSections.map((section) => (
         <Card key={section} title={t(`guides.${section}.title`)}>
           <p style={{ margin: 0, color: "var(--text-secondary)", fontSize: "var(--font-sm)", whiteSpace: "pre-line" }}>{t(`guides.${section}.body`)}</p>
+          {section === "privacy" ? (
+            <p style={{ margin: "var(--space-3) 0 0", fontSize: "var(--font-sm)" }}>
+              <LegalLinks color="var(--text-link)" />
+            </p>
+          ) : null}
         </Card>
       ))}
 

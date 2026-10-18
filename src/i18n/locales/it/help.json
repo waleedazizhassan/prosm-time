@@ -4,11 +4,11 @@
   "guides": {
     "gettingStarted": {
       "title": "Per iniziare",
-      "body": "Accedi con l'email e la password configurate dal tuo amministratore. Nella Dashboard, usa Timbra entrata per iniziare il turno e Timbra uscita per terminarlo - una mappa in tempo reale sopra il pulsante mostra la tua posizione attuale e, se pertinente, il cerchio del geofence della sede. Le sedi della tua organizzazione ed eventuali requisiti fotografici/GPS sono configurati dal tuo amministratore."
+      "body": "Accedi con l'e-mail e la password impostate dal tuo amministratore. La prima volta (e a ogni modifica) vedi cosa registra PROSM Time e ti viene chiesto di riconoscere l'Informativa sulla privacy e le Condizioni d'uso. Dalla dashboard, Timbra entrata inizia il turno e Timbra uscita lo termina; una mappa mostra la tua posizione e l'area della sede. L'app si apre nella lingua del dispositivo se supportata; puoi cambiarla dal menu utente."
     },
     "attendance": {
       "title": "Timbrare entrata e uscita",
-      "body": "Scegli la tua sede (e il progetto, se applicabile) prima di timbrare l'entrata - oppure lascia vuoto il campo Sede e descrivi dove ti trovi realmente se non sei in un luogo registrato. Alcune sedi richiedono una foto, da tenere ferma per un istante così l'app può confermare che si tratta di uno scatto dal vivo, non di un'immagine vecchia o statica. Subito prima dell'invio, una schermata di conferma mostra esattamente cosa sta per essere registrato - la tua foto (se scattata), la tua posizione GPS dettagliata, la sede/luogo di lavoro e l'orario - con due campi facoltativi, una nota e l'attività su cui stai lavorando, salvati con quella timbratura e visibili al tuo responsabile. La timbratura di entrata è bloccata per un giorno già coperto da un tuo congedo approvato - se è un errore, chiedi al tuo responsabile di rivederlo da Congedi."
+      "body": "Scegli la sede (e il progetto) prima di timbrare, oppure lascia vuota la sede e descrivi dove ti trovi. Alcune sedi richiedono una foto: tieni ferma la fotocamera un istante per confermare una ripresa dal vivo. Prima dell'invio, una schermata mostra esattamente cosa verrà registrato - foto, posizione, luogo e ora - con nota e attività facoltative visibili al responsabile. L'ora registrata è sempre quella del server, non del telefono. La timbratura è bloccata nei giorni di ferie approvate."
     },
     "walkInGeofence": {
       "title": "Lavorare in una sede a cui non sei assegnato",
@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Emergenza",
-      "body": "Disponibile durante ogni turno, finché hai timbrato l'entrata. Premerlo invia immediatamente un avviso ad alta priorità ai tuoi responsabili con la tua ultima posizione nota, e viene registrato come un vero evento di emergenza - riservato a situazioni di sicurezza reali, non un pulsante generico. Su Android, il monitoraggio della presenza potrebbe chiedere un'autorizzazione per la posizione in background la prima volta - accettando, la tua posizione continua a essere controllata anche se passi a un'altra app o blocchi lo schermo, sempre visibile tramite una notifica reale e annullabile in qualsiasi momento; anche rifiutare va bene - il monitoraggio continua solo mentre PROSM Time stesso è aperto."
+      "body": "Il pulsante SOS è sulla dashboard durante ogni turno, una volta confermata la timbratura. Invia un allarme prioritario con la tua posizione ai responsabili della sede, al titolare e ai colleghi presenti, e viene registrato nel registro emergenze. SOS non è un servizio di emergenza: non chiama polizia o ambulanza. In emergenza chiama sempre il numero locale (in Egitto: ambulanza 123, polizia 122, vigili del fuoco 180). Richiede una connessione internet."
     },
     "notifications": {
       "title": "Come le notifiche raggiungono la persona giusta",
@@ -31,28 +31,28 @@
       "body": "Una volta che il tuo responsabile genera un foglio ore per un periodo, questo appare in Fogli ore per la tua revisione e l'invio per l'approvazione. Ore lavorate, pause e straordinari sono mostrati come totali separati - il tempo di pausa non viene mai sottratto dalle ore lavorate, e lo straordinario si basa sull'orario di inizio definito dalla politica della tua sede. Una volta approvato, un foglio ore viene bloccato - se ritieni sia necessaria una correzione, puoi richiederla dalla pagina del foglio ore stesso, e una correzione approvata aggiorna realmente l'orario registrato a cui si riferisce."
     },
     "exceptions": {
-      "title": "Eccezioni e correzioni - cosa significa davvero l'approvazione",
-      "body": "Un'eccezione fuori zona o una richiesta di correzione non è più solo una decisione formale: se il tuo responsabile la approva, sei considerato presente per l'intero periodo, senza penalità. Se viene respinta - prima o dopo la tua spiegazione - il tuo tempo lavorato effettivo viene limitato al momento in cui la situazione è stata rilevata per la prima volta, riducendo le ore e lo straordinario conteggiati quel giorno."
+      "title": "Verifiche - eccezioni, correzioni, orari offline, posizioni false",
+      "body": "Tutto ciò che richiede una decisione compare nella console del responsabile in «In attesa di verifica»: eccezioni fuori area (con il tuo motivo), richieste di correzione, azioni offline con l'ora del dispositivo e posizioni segnalate come false. Un'eccezione approvata ti considera presente tutto il tempo; respinta, il tempo di lavoro si ferma al momento del primo rilevamento. Le segnalazioni sono informazioni da verificare equamente da una persona, non decisioni automatiche."
     },
     "allowances": {
       "title": "Indennità",
-      "body": "Apri Indennità dalla barra laterale e scegli una data per aggiungere una voce - data, sede e orari di entrata/uscita vengono importati automaticamente. Completa tu gli importi di pasto, trasporto, alloggio e altro, quindi invia. Un responsabile o il proprietario la approva o la respinge; finché è una bozza puoi ancora modificarla. Le ore/giorni di straordinario vengono calcolati automaticamente dalla politica del turno della tua sede, se configurata."
+      "body": "Apri Indennità e scegli una data: sede e orari del giorno vengono compilati automaticamente - la prima entrata e l'ultima uscita del giorno; i dettagli mostrano il numero di sessioni e le ore lavorate. Inserisci gli importi e invia. Un responsabile o il titolare approva o rifiuta; in bozza puoi ancora modificare."
     },
     "kiosk": {
       "title": "Modalità chiosco",
-      "body": "Apri la Modalità chiosco dalla barra laterale e scegli una sede per avviare il suo schermo di timbratura condiviso - pensato per un tablet o un computer all'ingresso, non per il tuo dispositivo personale. Ha due schede: Dipendenti, dove selezioni il tuo nome dall'elenco e inserisci il tuo PIN personale del chiosco prima di timbrare entrata o uscita (il tuo PIN del chiosco è indipendente dalla password di accesso - impostalo dal menu utente in fondo alla barra laterale, oppure un amministratore/responsabile può impostarlo per te dalla tua pagina profilo in Persone); e Manodopera esterna, per appaltatori e altri lavoratori non dipendenti che non sono utenti di PROSM Time - ognuno ha il proprio numero a 6 cifre, impostato in anticipo da un amministratore o responsabile, l'unica cosa che deve digitare per timbrare entrata o uscita. Entrambe le schede tornano automaticamente alla schermata iniziale dopo ogni operazione, pronte per la persona successiva."
+      "body": "Apri la modalità chiosco e scegli una sede per trasformare un tablet o computer condiviso nella sua schermata di timbratura. Finché il chiosco è aperto, il dispositivo vi è bloccato: niente menu, le altre pagine e il tasto indietro riportano al chiosco, e per uscire serve la password dell'account che l'ha aperto. Dipendenti: scegli il tuo nome e inserisci il PIN personale. Dopo 5 PIN errati in 15 minuti, l'accesso di quella persona è sospeso per 30 minuti. Forza lavoro: i collaboratori inseriscono il loro numero di 6 cifre."
     },
     "reportsCenter": {
       "title": "Centro report",
-      "body": "Report raccoglie la generazione dei report in un unico posto: scegli un tipo di report, un intervallo di date e, se pertinente, un dipendente o una sede, quindi esportalo in PDF. Oltre agli export originali di Registro presenze e Indennità, ora copre anche: Manodopera (i totali di tutti in un unico export), Appaltatori (la presenza della manodopera esterna), Sede (l'attività di una singola sede), Ritardi, Uscite mancate, Conflitti di congedo (presenza registrata durante un congedo approvato), Interventi del responsabile (ogni timbratura effettuata da un amministratore per conto di qualcuno), e Violazioni di localizzazione (eccezioni fuori zona). Un responsabile vede solo i dati delle sedi che gestisce realmente - il proprietario vede l'intera organizzazione. I fogli ore vengono invece generati, inviati ed esportati dalla propria pagina Fogli ore, poiché un foglio ore appartiene a un dipendente e un periodo specifici, non a un intervallo di date."
+      "body": "Scegli tipo di report, periodo ed eventualmente dipendente o sede, poi esporta in PDF. Report: presenze (gli orari offline sono contrassegnati), indennità, forza lavoro, collaboratori, sede, ritardi, uscite mancanti, conflitti ferie, interventi dei responsabili e violazioni di posizione - che ora riunisce l'uscita dall'area (con motivo e stato), posizioni non plausibili e posizioni false. Un responsabile vede solo le sue sedi."
     },
     "sites": {
       "title": "Sedi (amministratori)",
-      "body": "Sedi (solo Proprietario/Manager) è dove si configurano le sedi stesse e vi si assegnano dipendenti/manager: nome, indirizzo, coordinate GPS e raggio, fuso orario, modalità kiosk, e se presenza/geofence/fotocamera sono richiesti lì. Il comportamento effettivo di una sede - tolleranza di precisione GPS, periodo di tolleranza, orari del turno, tempistica di straordinario/detrazione ritardo, arrotondamento delle pause, entrambi i blocchi self-service, e i dipendenti esentati - si configura invece da Impostazioni, non da questo modulo."
+      "body": "Qui si creano le sedi e si assegnano le persone: nome, indirizzo, coordinate GPS e raggio, fuso orario, modalità chiosco e requisiti di presenza, area o foto. All'assegnazione, il ruolo nella sede parte dal ruolo nell'organizzazione - manager o supervisore diventano responsabili della sede. Il resto si imposta in Impostazioni; il modulo della sede vi rimanda."
     },
     "settingsCenter": {
-      "title": "Impostazioni (Proprietario)",
-      "body": "Una vera casa per la configurazione a livello di organizzazione: il raggio del geofence senza sede; le politiche predefinite delle sedi (tolleranza di precisione GPS, arrotondamento delle pause, periodo di tolleranza) da cui parte ogni nuova sede, poiché sono valori quasi sempre identici in tutta l'organizzazione; la Politica della sede stessa - scegli qualsiasi sede da un menu a tendina per rivedere o modificare la sua tolleranza GPS, il periodo di tolleranza, gli orari del turno, la tempistica di straordinario/detrazione ritardo, l'arrotondamento delle pause, entrambi i blocchi self-service e i dipendenti esentati, tutto in un unico posto invece di cercarli nella pagina di quella sede."
+      "title": "Impostazioni (titolare)",
+      "body": "Impostazioni dell'intera organizzazione: raggio senza sede, «Rifiuta timbrature da posizione falsa», valori predefiniti delle nuove sedi e politica di ogni sede - tolleranza GPS, periodo di tolleranza, orari, straordinari e trattenute per ritardo, arrotondamento pause, monitoraggio continuo della presenza, dipendenti esentati e blocchi del self-service: dopo il periodo di tolleranza, uscita fuori area ed entrata fuori area."
     },
     "leave": {
       "title": "Ferie (PTO)",
@@ -67,8 +67,8 @@
       "body": "Ogni data mostrata nell'app può essere visualizzata come Gregoriana o Hijri - scegli la tua preferenza dal menu utente in fondo alla barra laterale, accanto a Lingua e Aspetto. È una preferenza per dispositivo, non un'impostazione a livello di organizzazione - ognuno può fare la propria scelta."
     },
     "permissions": {
-      "title": "Permessi (amministratori)",
-      "body": "La pagina di ciascuna persona in Persone mostra i permessi effettivamente concessi e consente a un amministratore autorizzato di concedere, revocare o azzerare un singolo permesso con un motivo - visibile solo a chi possiede già tale autorità. Il proprietario ha sempre tutti i permessi; gli altri ruoli partono da un pacchetto predefinito regolabile per persona."
+      "title": "Permessi e timbratura per conto (amministratori)",
+      "body": "La pagina di ogni persona in Persone mostra i suoi permessi; un amministratore autorizzato può concederli, revocarli o reimpostarli con un motivo. Il titolare ha tutti i permessi. Timbrare per conto di altri è consentito solo per ruoli inferiori al tuo (manager > supervisore > dipendente); il titolare per tutti. L'azione è registrata a tuo nome."
     },
     "desktopApp": {
       "title": "App desktop per Windows",
@@ -81,6 +81,18 @@
     "radio": {
       "title": "Perché c'è una radio in PROSM Time",
       "body": "La Radio non è una distrazione dalla presenza - è pensata proprio intorno ad essa. Ascolta una stazione durante il tragitto verso il lavoro, e PROSM Time è già aperto e presente nella tua mente nel momento in cui arrivi: invece di essere un'app che devi ricordarti di aprire una volta alla scrivania, è già lì, in mano, e Timbra entrata è proprio dove l'hai lasciata. Una piccola spinta deliberata contro l'errore di presenza più comune in assoluto - dimenticarsi semplicemente di timbrare in orario."
+    },
+    "offline": {
+      "title": "Lavorare senza internet",
+      "body": "Sul telefono timbrature, pause e cambio sede funzionano senza connessione; una piccola scheda indica che sei offline e una barra quante azioni sono in attesa. Restano cifrate sul dispositivo e vengono inviate una sola volta al ritorno della connessione. Registrate senza server, mantengono l'ora del dispositivo: se differisce di oltre 2 minuti, l'azione è contrassegnata «Ora del dispositivo (offline)» e verificata dal responsabile. Un'ora precedente all'ultima azione registrata, o in un giorno di ferie approvate, viene rifiutata - chiedi una correzione."
+    },
+    "locationChecks": {
+      "title": "Aree di lavoro e posizioni false",
+      "body": "Ogni sede ha un'area di lavoro (un cerchio sulla mappa). Timbrare fuori viene registrato come eccezione e ti viene chiesto il motivo; un solo motivo copre tutto il tragitto. Una sede può rifiutare la timbratura di entrata fuori area - chiedi allora al responsabile di timbrarti. Su Android, PROSM Time rileva una posizione da un'app di GPS falso: viene registrata e verificata, e la tua organizzazione può rifiutarla. Falsificare posizione o ora è contrario alle Condizioni d'uso."
+    },
+    "privacy": {
+      "title": "La tua privacy",
+      "body": "PROSM Time registra la tua posizione a timbrature, pause, cambi sede e SOS. Solo se la tua organizzazione attiva il monitoraggio della presenza, anche circa ogni 5 minuti durante il turno - su Android anche in background, dopo avertelo comunicato e con una notifica visibile - e sempre solo fino all'uscita. Foto solo dove la sede la richiede; nessun riconoscimento facciale. Le posizioni sono eliminate dopo 30 giorni, le foto dopo 90 giorni. Puoi revocare i permessi nelle impostazioni del dispositivo. Per i tuoi diritti rivolgiti prima alla tua organizzazione o a info@prosm.net. Dettagli nell'Informativa sulla privacy e nelle Condizioni d'uso qui sotto."
     }
   },
   "faq": {
@@ -94,8 +106,8 @@
       "answer": "La tua sede ha un geofence configurato e una tolleranza di precisione GPS (oppure, senza sede selezionata, il raggio senza sede della tua organizzazione intorno al tuo punto di timbratura). Se la posizione rilevata era al di fuori di quest'area, ti viene chiesto di spiegare il motivo affinché il responsabile giusto possa esaminarlo - l'approvazione rimuove del tutto la segnalazione; il rifiuto limita il tuo tempo lavorato a quel momento."
     },
     "q3": {
-      "question": "Posso usare l'app offline?",
-      "answer": "Le timbrature di entrata e uscita vengono messe in coda localmente in caso di perdita di connessione e si sincronizzano automaticamente al ripristino della connessione - vedrai un avviso di sincronizzazione in sospeso fino alla conferma, e l'orario effettivamente registrato è il momento reale in cui hai premuto il pulsante, non quello del ripristino della connessione. Anche aprire l'app offline ora mostra subito le ultime informazioni caricate, invece di uno schermo vuoto."
+      "question": "Quale ora viene registrata quando timbro?",
+      "answer": "Sempre quella del server - cambiare l'orologio del telefono non ha effetto. Unica eccezione: un'azione offline mantiene l'ora del dispositivo e, se differisce di oltre 2 minuti, viene contrassegnata per la verifica."
     },
     "q4": {
       "question": "Come cambio la lingua o l'aspetto?",
@@ -130,8 +142,20 @@
       "answer": "Nella pagina di benvenuto, “Usa la versione di prova” apre la normale attivazione senza codice; organizzazione e proprietario vengono creati subito. La prova dura 30 giorni (ora del server) e una barra mostra i giorni rimasti. Una settimana prima della fine il proprietario riceve una notifica e un’e-mail con sales@prosm.net, info@prosm.net e support@prosm.net. Poi l’app viene sospesa senza eliminare nulla: inserisci un codice di attivazione acquistato o chiedi a PROSM di rinnovare la licenza e tutto riprende con i tuoi dati. Una prova per e-mail."
     },
     "q12": {
-      "question": "La presenza funziona senza internet?",
-      "answer": "Sì. Sul telefono, timbrare entrata e uscita, iniziare/terminare la pausa e cambiare sede funzionano senza connessione, con la foto e la posizione rilevate in quel momento. Vengono conservati sul dispositivo cifrati, in ordine e con l'orario reale, e una barra mostra quanti sono in attesa. Al ritorno della connessione vengono inviati automaticamente, una sola volta - un invio interrotto non crea mai duplicati - e nulla viene rimosso dal dispositivo prima che il server lo abbia accettato. Si applicano le stesse regole di presenza. Le altre pagine richiedono una connessione e si caricano all'apertura."
+      "question": "La timbratura funziona senza internet?",
+      "answer": "Sì. Sul telefono timbrature, pause e cambio sede funzionano offline, restano cifrate e vengono inviate una sola volta al ritorno della connessione. Gli orari diversi sono contrassegnati per la verifica. Le altre pagine richiedono una connessione."
+    },
+    "q13": {
+      "question": "Perché vedo «Ora del dispositivo (offline)»?",
+      "answer": "L'azione è stata fatta offline con l'ora del telefono, che differiva di oltre 2 minuti. Il responsabile la vede in attesa di verifica e può approvarla o correggerla."
+    },
+    "q14": {
+      "question": "Chi vede la mia posizione e le mie foto, e per quanto tempo?",
+      "answer": "Tu, i responsabili della tua sede e il titolare. Le posizioni sono eliminate dopo 30 giorni, le foto dopo 90 giorni."
+    },
+    "q15": {
+      "question": "Il SOS chiama ambulanza o polizia?",
+      "answer": "No. Avvisa i responsabili, il titolare e i colleghi presenti con la tua posizione. In emergenza chiama tu il numero locale (in Egitto: ambulanza 123, polizia 122, vigili del fuoco 180)."
     }
   },
   "contact": {

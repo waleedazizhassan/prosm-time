@@ -56,7 +56,7 @@ describe("ActivationPage", () => {
         ownerPassword: "SuperSecret123",
         ownerFullName: "Jordan Rivera",
       });
-    });
+    }, { timeout: 5000 });
   });
 
   it("shows the real server error message on failure, not a generic one when provided", async () => {

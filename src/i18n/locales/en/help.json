@@ -4,83 +4,95 @@
   "guides": {
     "gettingStarted": {
       "title": "Getting Started",
-      "body": "Sign in with the email and password your administrator set up for you. On the Dashboard, use Clock In to start your shift and Clock Out to end it - a live map above the button shows your current position and, when relevant, the site's own geofence circle. Your organization's site(s) and any camera/GPS requirements are configured by your administrator."
+      "body": "Sign in with the email and password your administrator set up for you. The first time (and whenever they change), you're shown what PROSM Time records about you and asked to acknowledge the Privacy Policy and Terms of Use. On the Dashboard, use Clock In to start your shift and Clock Out to end it - a live map shows your current position and, when relevant, the site's work area. The app opens in your device's language when it's one of the five supported; you can change it any time from the user menu."
     },
     "attendance": {
       "title": "Clocking In & Out",
-      "body": "Choose your site (and project, if applicable) before clocking in - or leave Site empty and describe where you actually are if you're not at a registered location. Some sites require a photo, held steady for a moment so the app can confirm it's a live capture, not an old or static image. Right before anything is submitted, a confirmation screen shows exactly what's about to be recorded - your photo (if one was taken), your detailed GPS location, the site/workplace, and the time - with two optional fields, a note and what you're working on (activity), that get saved with that clock-in or clock-out and are visible to your manager. Clocking in is blocked for a day your own approved leave already covers - if that's wrong, ask your manager to review it from Leave."
+      "body": "Choose your site (and project, if applicable) before clocking in - or leave Site empty and describe where you actually are if you're not at a registered location. Some sites require a photo, held steady for a moment so the app can confirm it's a live capture, not an old or static image. Right before anything is submitted, a confirmation screen shows exactly what's about to be recorded - your photo (if one was taken), your GPS location, the site/workplace and the time - with two optional fields, a note and your activity, which your manager can see. The time recorded is always the server's time, not your phone's clock. Clocking in is blocked on a day your approved leave covers."
     },
     "walkInGeofence": {
       "title": "Working at a Site You're Not Assigned To",
-      "body": "If you're physically standing inside a registered site's geofence today but aren't formally assigned there, it's suggested to you automatically in the Site list (marked as \"you're here today\") - useful if you genuinely work at a different site every day. Clocking in with no site at all still works too: your own clock-in point becomes the center of an organization-wide radius for the rest of that shift, giving you the same real-time protection a registered site's geofence already provides, even somewhere that was never set up as a site."
+      "body": "If you're physically inside a registered site's work area today but aren't assigned there, it's suggested to you in the Site list (marked \"you're here today\"). Clocking in with no site at all still works too: your clock-in point becomes the centre of your organisation's no-site radius for the rest of that shift."
     },
     "siteChange": {
       "title": "Changing Sites Mid-Shift",
-      "body": "Change Site is its own button on the Dashboard whenever you're clocked in - no need to press Pause first. Tap it, pick where you've moved to (or leave Site empty for a genuine walk-in move, the same as clocking in with no site), and the move is recorded in your attendance history with the exact time it happened. You're never clocked out in the process."
+      "body": "Change Site is its own button on the Dashboard whenever you're clocked in - no need to pause first. Pick where you've moved to (or leave Site empty), and the move is recorded with the time it happened. You're never clocked out in the process."
     },
     "sos": {
       "title": "SOS / Emergency",
-      "body": "Available during every shift while you're clocked in. Pressing it immediately sends a high-priority alert to your managers with your last known location, and is logged as a real emergency record - reserved for genuine safety situations, not a general-purpose button. On Android, presence monitoring may ask for a background location permission the first time - accepting keeps checking your position even if you switch to another app or lock your screen, shown as a real, always-cancellable notification the whole time; declining is fine too, monitoring simply continues only while PROSM Time itself is open."
+      "body": "The SOS button is on the Dashboard during every shift once your clock-in is confirmed. Pressing it sends a high-priority alert with your location to your site's managers, the Owner and co-workers clocked in at the same site, and it's logged in the Emergency Log. SOS is not an emergency service - it doesn't call the police or an ambulance. In an emergency, always call your local emergency number (in Egypt: ambulance 123, police 122, fire 180). It needs an internet connection."
     },
     "notifications": {
       "title": "How Notifications Reach the Right Person",
-      "body": "If you clock in or out - or move around during your shift - outside your assigned work area, you're asked to explain why, and the right person is notified automatically: an ordinary employee's situation reaches that site's own manager (and the Owner); a manager's own situation escalates straight to the Owner instead of to fellow managers; the Owner, answering to no one, is never flagged at all. Tap a notification to jump straight to what it's about."
+      "body": "If you clock in or out - or move during your shift - outside your work area, you're asked to explain why, and the right person is notified: an employee's situation reaches that site's manager (and the Owner); a manager's own situation goes straight to the Owner. Tap a notification to jump to what it's about."
     },
     "timesheets": {
       "title": "Timesheets",
-      "body": "Once your manager generates a timesheet for a period, it appears under Timesheets for you to review and submit for approval. Worked time, breaks and overtime are shown as separate totals - break time is never subtracted from your worked hours, and overtime is based on the start time your site's own policy defines. Once approved, a timesheet is locked - if you believe it needs a correction, you can request one from the timesheet's own page, and an approved correction genuinely updates the recorded time it applies to."
+      "body": "Once your manager generates a timesheet for a period, it appears under Timesheets for you to review and submit for approval. Worked time, breaks and overtime are shown as separate totals - break time is never subtracted from your worked hours, and overtime starts at the time your site's policy defines. Once approved, a timesheet is locked; if it needs a correction, request one from the timesheet's page."
     },
     "exceptions": {
-      "title": "Exceptions & Corrections - What Approval Actually Means",
-      "body": "An out-of-zone exception or a correction request isn't just a paper decision anymore: if your manager approves it, you're treated as present the full time with no penalty. If it's rejected - whether before or after you've explained yourself - your effective worked time is capped at the moment the situation was first detected, which reduces the hours and overtime your timesheet ends up counting for that day."
+      "title": "Reviews - Exceptions, Corrections, Offline Times and Fake Locations",
+      "body": "Everything that needs a manager's decision appears in the Manager Console under Pending Review: out-of-zone exceptions (with your reason), correction requests, actions recorded offline with the device's time, and locations reported as fake. If an exception is approved you're treated as present the full time. If it's rejected, your effective worked time is capped at the moment the situation was first detected. Flags are information for a person to review fairly - not automatic decisions."
     },
     "allowances": {
       "title": "Allowances",
-      "body": "Open Allowances from the sidebar and pick a date to add an entry - the date, site and clock-in/out are filled in automatically. Fill in meal, transportation, housing and other amounts yourself, then Submit. A manager or the Owner approves or rejects it; while it's a draft you can still edit and re-save it. Overtime hours/days are computed automatically from your site's shift policy, if one is configured."
+      "body": "Open Allowances and pick a date to add an entry - the site and the day's times are filled in automatically: the first clock-in and the last clock-out of that day, and the details show how many sessions and hours you worked. Fill in meal, transportation, housing and other amounts, then Submit. A manager or the Owner approves or rejects it; while it's a draft you can still edit it."
     },
     "kiosk": {
       "title": "Kiosk Mode",
-      "body": "Open Kiosk Mode from the sidebar and pick a site to launch its shared clock-in screen - meant for a tablet or computer at the entrance, not your own personal device. It has two tabs: Employees, where you select your name from the list and enter your personal kiosk PIN before clocking in or out (your kiosk PIN is separate from your login password - set or change it from the user menu at the bottom of the sidebar, or an administrator/manager can set it for you from your profile page under People); and Workforce, for contractors and other non-employee workers who aren't PROSM Time users - each has their own 6-digit number, set up in advance by an administrator or manager, which is all they need to type in to clock in or out. Both tabs return to their starting screen automatically after each action, ready for the next person."
+      "body": "Open Kiosk Mode from the sidebar and pick a site to turn a shared tablet or computer into its clock-in screen. While the kiosk is open the device is locked to it: there's no menu, other pages and the back button lead back to the kiosk, and leaving needs the password of the account that opened it (the Exit kiosk button). The Employees tab: pick your name and enter your personal kiosk PIN (separate from your password; set it from the user menu, or a manager can set it from People). After 5 wrong PINs in 15 minutes, that person's kiosk sign-in pauses for 30 minutes. The Workforce tab: contractors type their own 6-digit number. Both tabs return to the start after each action."
     },
     "reportsCenter": {
       "title": "Reports Center",
-      "body": "Reports gathers report generation in one place: pick a report type, a date range and, where relevant, an employee or site, then export it as a PDF. Alongside the original Attendance Record and Allowances exports, it now also covers Workforce (everyone's totals in one export), Contractor (the external workforce's own attendance), Site (a single site's activity), Late Arrivals, Missed Checkouts, Leave Conflicts (attendance recorded during approved leave), Manager Overrides (every on-behalf clock-in/out an administrator performed), and Location Violations (out-of-zone exceptions). A Manager only ever sees data for the sites they actually manage - the Owner sees the whole organization. Timesheets are generated, submitted and exported from their own Timesheets page instead, since a timesheet belongs to one specific employee and period rather than a date range."
+      "body": "Pick a report type, a date range and, where relevant, an employee or site, then export it as a PDF. Reports include Attendance Record (offline device times are marked), Allowances, Workforce, Contractor, Site, Late Arrivals, Missed Checkouts, Leave Conflicts, Manager Overrides and Location Violations - which now lists being outside the work area (with the employee's reason and review status), implausible locations and fake locations together. A Manager sees only the sites they manage; the Owner sees the whole organisation."
     },
     "sites": {
       "title": "Sites (Administrators)",
-      "body": "Sites (Owner/Manager only) is where worksites are set up and where employees/managers are assigned to one: name, address, GPS coordinates and radius, time zone, kiosk mode, and whether attendance/geofence/camera are required there. A site's actual behavior - GPS accuracy tolerance, grace period, shift hours, overtime/late-deduction timing, break rounding, both self-service block toggles, and exempt employees - is configured from Settings instead, not from this form."
+      "body": "Sites is where work sites are set up and people are assigned: name, address, GPS coordinates and radius, time zone, kiosk mode, and whether attendance, geofence or a photo are required. When you assign someone, their role at the site starts from their organisation role - a Manager or Supervisor becomes the site's manager, so they see its people. The rest of a site's behaviour is in Settings; the site form has an \"Open this site's settings\" link."
     },
     "settingsCenter": {
       "title": "Settings (Owner)",
-      "body": "A real home for organization-wide configuration: the no-site geofence radius; the site policy defaults (GPS accuracy tolerance, break rounding, grace period) a brand-new site starts from, since these are almost always the same across an organization rather than something that genuinely differs site to site; and Site Policy itself - pick any site from a dropdown to review or change its own GPS tolerance, grace period, shift hours, overtime/late-deduction timing, break rounding, both self-service block toggles, and exempt employees, all in one place instead of hunting through that site's own page."
+      "body": "Organisation-wide configuration: the no-site radius; \"Reject clock-in/out from a fake location\"; the defaults a new site starts from; and Site Policy - pick a site to change its GPS tolerance, grace period, shift hours, overtime and late-deduction timing, break rounding, ongoing presence monitoring, exempt employees, and the self-service blocks: after the grace period, clock-out outside the work area, and clock-in outside the work area."
     },
     "leave": {
       "title": "Leave (PTO)",
-      "body": "Request time off from the Leave page - pick a type (Annual, Sick, Unpaid, Emergency, Other), a date range and an optional reason. Only Annual leave tracks a real entitled/used/remaining balance (21 days a year by default - an Owner can raise or lower a specific employee's own entitlement from their profile page under People, e.g. for legally-required increases tied to long tenure); every other type just shows how many days you've taken this year, with no fixed cap. A request from an ordinary employee assigned to a site goes to that site's own manager (and the Owner); a request from a manager/supervisor themselves, or from anyone not yet assigned to any site, goes straight to the Owner instead. Your reviewer sees pending requests from the Manager Console, and can also revoke an already-approved request from there if plans change - you'll be notified either way. Approving leave for a period you already have attendance recorded in is blocked - the attendance record has to be resolved first, so you never end up marked both present and on leave the same day. The Owner doesn't request leave through this page - there's no one above them to review it. Approved leave counts toward your generated timesheet for that period."
+      "body": "Request time off from the Leave page - pick a type (Annual, Sick, Unpaid, Emergency, Other), a date range and an optional reason (please don't include unnecessary health details). Only Annual leave tracks an entitled/used/remaining balance (21 days a year by default; the Owner can change an employee's entitlement from People). An employee's request goes to their site's manager (and the Owner); a manager's request goes to the Owner. Leave can't be approved over days that already have attendance. Approved leave counts toward your timesheet."
     },
     "schedule": {
       "title": "Shift Roster",
-      "body": "See your own upcoming shifts from the sidebar's Shift Roster page - everyone can see their own. Managers with scheduling authority can additionally set up reusable shift templates per site (e.g. \"Morning\", \"Night\") and assign specific employees to specific shifts, including real overnight shifts that cross midnight (shown with a \"(+1)\" marker) - the system checks for overlapping shifts automatically, even across a midnight boundary."
+      "body": "See your own upcoming shifts on the Shift Roster page. Managers with scheduling authority can create shift templates per site and assign people to shifts, including overnight shifts (marked \"(+1)\"); overlapping shifts are refused automatically."
     },
     "calendar": {
       "title": "Hijri or Gregorian Calendar",
-      "body": "Every date shown in the app can display as Gregorian or Hijri - pick your preference from the user menu at the bottom of the sidebar, next to Language and Appearance. This is a per-device preference, not an organization-wide setting - each person can choose their own."
+      "body": "Every date can show as Gregorian or Hijri - choose from the user menu, next to Language and Appearance. It's a per-device preference."
     },
     "permissions": {
-      "title": "Permissions (Administrators)",
-      "body": "Each person's page under People shows their real granted permissions and lets an authorized administrator grant, revoke, or reset an individual permission with a reason - visible only to those who already hold that authority. The Owner always has every permission; other roles start from a default bundle that can be adjusted per person."
+      "title": "Permissions and Clocking On Behalf (Administrators)",
+      "body": "Each person's page under People shows their permissions and lets an authorised administrator grant, revoke or reset one, with a reason. The Owner has every permission. Clocking in or out on someone's behalf is allowed only for people below your role (manager > supervisor > employee); the Owner can do it for anyone. The action is recorded as yours."
     },
     "desktopApp": {
       "title": "Windows Desktop App",
-      "body": "The same PROSM Time you already know, installed as a real Windows program. It opens filling your screen; F11 switches to true fullscreen and Escape always brings back the normal window with its close button. Your sign-in stays remembered between launches, exactly like on your phone or in a browser."
+      "body": "The same PROSM Time as a Windows program. It opens filling your screen; F11 switches to fullscreen and Escape brings back the normal window. Your sign-in is remembered between launches."
     },
     "liveMap": {
       "title": "Live Map",
-      "body": "The Dashboard shows a real, theme-aware map with your current position - and, once you're clocked in or have a site selected, a translucent circle marking that site's real geofence, so you can see at a glance where you stand relative to it before you even try to clock in or out."
+      "body": "The Dashboard shows a map with your current position and, once you're clocked in or have a site selected, a circle marking that site's work area, so you can see where you stand before clocking in or out."
     },
     "radio": {
       "title": "Why There's a Radio in PROSM Time",
-      "body": "The Radio isn't a distraction from attendance - it's built around it. Play a station during your commute, and PROSM Time is already open and on your mind the moment you arrive: instead of the app being something you have to remember to open once you're at your desk, it's already there in your hand, and Clock In is right where you left it. It's a small, deliberate nudge against the single most common attendance mistake - simply forgetting to clock in on time."
+      "body": "Play a station on your way to work, and PROSM Time is already open when you arrive - a small nudge against the most common attendance mistake: forgetting to clock in. It sends no personal data."
+    },
+    "offline": {
+      "title": "Working Without Internet",
+      "body": "On your phone, Clock In, Clock Out, breaks and Change Site work with no connection; a small card tells you you're offline, and a bar shows how many actions are waiting. They're kept encrypted on the device and sent automatically, once, when the connection returns. Because these were recorded without the server, they keep your device's time: if it differs from the server's by more than 2 minutes, the action is marked \"Device time (offline)\" and your manager reviews it. A time earlier than your last recorded action, or on a day of approved leave, is refused - ask your manager to correct it. Other pages need a connection; if one can't load, the app tells you and lets you try again."
+    },
+    "locationChecks": {
+      "title": "Work Areas and Fake Locations",
+      "body": "Each site has a work area (a circle on the map). Clocking in or out outside it is recorded as an exception and you're asked why; one reason covers the whole trip, even if both your clock-out and your next clock-in were outside. A site can also be set to refuse a self clock-in from outside its area - then ask your manager to clock you in. On Android, PROSM Time notices when the location comes from a mock-location (fake GPS) app: it's recorded and reviewed by your manager, and your organisation may choose to refuse it. Faking your location or your phone's time is against the Terms of Use."
+    },
+    "privacy": {
+      "title": "Your Privacy",
+      "body": "PROSM Time records your location when you clock in or out, take a break, change site or send an SOS. Only if your organisation turns on presence monitoring is it also recorded about every 5 minutes during your shift - on Android also in the background, after telling you first and with a visible notification - and it always stops when you clock out. A photo is taken only where your site requires one; there's no facial recognition. Your organisation's managers see your records. Location samples are deleted after 30 days and photos after 90 days. You can withdraw location or camera permission in your device settings at any time. For your rights over your data, ask your organisation first, or write to info@prosm.net. Full details are in the Privacy Policy and Terms of Use below."
     }
   },
   "faq": {
@@ -94,8 +106,8 @@
       "answer": "Your site has a configured geofence and GPS accuracy tolerance (or, with no site selected, your organization's own no-site radius around where you clocked in). If your reported location fell outside that area, you're asked to explain why so the right manager can review it - approving it clears the flag entirely; rejecting it caps your worked time at that moment."
     },
     "q3": {
-      "question": "Can I use the app while offline?",
-      "answer": "Clock In and Clock Out are queued locally if you lose connectivity and sync automatically once you're back online - you'll see a pending-sync notice until it's confirmed, and the time actually recorded is the real moment you tapped the button, not whenever your connection came back. Opening the app itself while offline now also shows your last-loaded information right away instead of a blank screen."
+      "question": "Which time is recorded when I clock in?",
+      "answer": "The server's time, always - changing your phone's clock has no effect. The only exception is an action made without a connection: it keeps the device's time, and if that differs from the server's by more than 2 minutes, it's marked for your manager to review."
     },
     "q4": {
       "question": "How do I change the language or theme?",
@@ -131,7 +143,19 @@
     },
     "q12": {
       "question": "Does attendance work without internet?",
-      "answer": "Yes. On your phone, Clock In, Clock Out, Start/End Break and Change Site work with no connection, with the photo and location taken at that moment. They are kept on the device encrypted, in order, with their real time, and a bar shows how many wait. When the connection returns they are sent automatically, once only - an interrupted send never creates a duplicate - and nothing is removed from the device until the server has accepted it. The same attendance rules apply. Other pages need a connection and load when opened."
+      "answer": "Yes. On your phone, Clock In, Clock Out, breaks and Change Site work with no connection, with the photo and location taken at that moment. They're kept encrypted on the device, in order, and sent automatically once when the connection returns - never twice. Times that differ from the server's are marked for review. Other pages need a connection."
+    },
+    "q13": {
+      "question": "Why does my record say \"Device time (offline)\"?",
+      "answer": "That action was made without a connection and recorded with your phone's time, which differed from the server's by more than 2 minutes. Your manager sees it in Pending Review and can approve it or correct it."
+    },
+    "q14": {
+      "question": "Who can see my location and photos, and for how long?",
+      "answer": "You, your site's managers and your organisation's Owner. Location samples taken during a shift are deleted after 30 days and attendance photos after 90 days. The Privacy Policy explains the rest."
+    },
+    "q15": {
+      "question": "Does SOS call the ambulance or the police?",
+      "answer": "No. It alerts your site's managers, the Owner and co-workers on site, with your location. In an emergency, call your local emergency number yourself (in Egypt: ambulance 123, police 122, fire 180)."
     }
   },
   "contact": {

@@ -4,11 +4,11 @@
   "guides": {
     "gettingStarted": {
       "title": "Erste Schritte",
-      "body": "Melden Sie sich mit der E-Mail-Adresse und dem Passwort an, die Ihr Administrator für Sie eingerichtet hat. Nutzen Sie auf dem Dashboard „Einstempeln“, um Ihre Schicht zu beginnen, und „Ausstempeln“, um sie zu beenden - eine Live-Karte über dem Button zeigt Ihre aktuelle Position und, sofern relevant, den Geofence-Kreis des Standorts. Die Standorte Ihrer Organisation sowie eventuelle Kamera-/GPS-Anforderungen werden von Ihrem Administrator konfiguriert."
+      "body": "Melden Sie sich mit der E-Mail-Adresse und dem Passwort an, die Ihr Administrator eingerichtet hat. Beim ersten Mal (und bei jeder Änderung) sehen Sie, was PROSM Time über Sie erfasst, und bestätigen die Datenschutzerklärung und die Nutzungsbedingungen. Auf dem Dashboard starten Sie Ihre Schicht mit Einstempeln und beenden sie mit Ausstempeln; eine Live-Karte zeigt Ihre Position und gegebenenfalls den Arbeitsbereich des Standorts. Die App öffnet sich in der Sprache Ihres Geräts, wenn sie unterstützt wird; Sie können sie jederzeit im Benutzermenü ändern."
     },
     "attendance": {
       "title": "Ein- und Ausstempeln",
-      "body": "Wählen Sie vor dem Einstempeln Ihren Standort (und ggf. Ihr Projekt) - oder lassen Sie das Feld Standort leer und beschreiben Sie, wo Sie sich tatsächlich befinden, wenn Sie nicht an einem registrierten Ort sind. An manchen Standorten ist ein Foto erforderlich, das einen kurzen Moment lang ruhig gehalten wird, damit die App bestätigen kann, dass es sich um eine Live-Aufnahme und nicht um ein altes oder statisches Bild handelt. Unmittelbar vor dem Absenden zeigt ein Bestätigungsbildschirm genau, was erfasst wird - Ihr Foto (falls aufgenommen), Ihr detaillierter GPS-Standort, der Standort/Arbeitsort und die Uhrzeit - mit zwei optionalen Feldern, einer Notiz und Ihrer aktuellen Tätigkeit, die mit diesem Ein-/Ausstempeln gespeichert werden und für Ihren Manager sichtbar sind. Das Einstempeln ist für einen Tag gesperrt, der bereits durch Ihren eigenen genehmigten Urlaub abgedeckt ist - falls das falsch ist, bitten Sie Ihren Manager, dies unter Urlaub zu prüfen."
+      "body": "Wählen Sie vor dem Einstempeln Ihren Standort (und ggf. das Projekt) - oder lassen Sie den Standort leer und beschreiben Sie, wo Sie tatsächlich sind. Manche Standorte verlangen ein Foto; halten Sie die Kamera kurz ruhig, damit die App eine Live-Aufnahme erkennt. Vor dem Senden zeigt ein Bestätigungsbildschirm genau, was erfasst wird - Foto, Standort, Arbeitsort und Uhrzeit - mit zwei optionalen Feldern (Notiz und Tätigkeit), die Ihre Führungskraft sieht. Erfasst wird immer die Uhrzeit des Servers, nicht die Ihres Telefons. An Tagen mit genehmigtem Urlaub ist das Einstempeln gesperrt."
     },
     "walkInGeofence": {
       "title": "Arbeiten an einem Standort, dem Sie nicht zugewiesen sind",
@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Notfall",
-      "body": "Während jeder Schicht verfügbar, solange Sie eingestempelt sind. Ein Tastendruck sendet sofort einen Alarm mit hoher Priorität an Ihre Manager mit Ihrem letzten bekannten Standort und wird als echter Notfalldatensatz protokolliert - reserviert für tatsächliche Sicherheitssituationen, kein Allzweck-Button. Unter Android fragt die Anwesenheitsüberwachung beim ersten Mal möglicherweise nach einer Standortberechtigung im Hintergrund - bei Zustimmung wird Ihre Position weiterhin geprüft, auch wenn Sie zu einer anderen App wechseln oder den Bildschirm sperren, jederzeit sichtbar über eine echte, jederzeit abbrechbare Benachrichtigung; eine Ablehnung ist ebenfalls in Ordnung - die Überwachung läuft dann nur weiter, solange PROSM Time selbst geöffnet ist."
+      "body": "Die SOS-Schaltfläche steht während jeder Schicht auf dem Dashboard, sobald Ihr Einstempeln bestätigt ist. Sie sendet einen dringenden Alarm mit Ihrem Standort an die Vorgesetzten Ihres Standorts, den Inhaber und die Kollegen vor Ort und wird im Notfallprotokoll erfasst. SOS ist kein Notruf - es ruft weder Polizei noch Rettungsdienst. Rufen Sie im Notfall immer die örtliche Notrufnummer an (in Ägypten: Rettung 123, Polizei 122, Feuerwehr 180). Es braucht eine Internetverbindung."
     },
     "notifications": {
       "title": "Wie Benachrichtigungen die richtige Person erreichen",
@@ -31,28 +31,28 @@
       "body": "Sobald Ihr Manager einen Stundenzettel für einen Zeitraum erstellt, erscheint dieser unter Stundenzettel zur Prüfung und Einreichung zur Genehmigung. Gearbeitete Zeit, Pausen und Überstunden werden als separate Summen angezeigt - Pausenzeit wird nie von Ihrer gearbeiteten Zeit abgezogen, und Überstunden basieren auf der in der Richtlinie Ihres Standorts festgelegten Startzeit. Nach der Genehmigung ist ein Stundenzettel gesperrt - falls eine Korrektur nötig ist, können Sie diese über die Stundenzettelseite anfordern, und eine genehmigte Korrektur aktualisiert die betreffende erfasste Zeit tatsächlich."
     },
     "exceptions": {
-      "title": "Ausnahmen und Korrekturen - was eine Genehmigung wirklich bedeutet",
-      "body": "Eine Zonenausnahme oder ein Korrekturantrag ist nicht mehr nur eine Entscheidung auf dem Papier: Genehmigt Ihr Manager sie, gelten Sie als die gesamte Zeit über anwesend, ohne Abzug. Wird sie abgelehnt - ob vor oder nach Ihrer Erklärung -, wird Ihre effektive Arbeitszeit auf den Moment der erstmaligen Erkennung begrenzt, was die für diesen Tag gezählten Stunden und Überstunden reduziert."
+      "title": "Prüfungen - Ausnahmen, Korrekturen, Offline-Zeiten, gefälschte Standorte",
+      "body": "Alles, was eine Entscheidung braucht, erscheint in der Manager-Konsole unter Ausstehende Prüfung: Ausnahmen außerhalb des Bereichs (mit Ihrem Grund), Korrekturanträge, offline erfasste Aktionen mit Gerätezeit und als gefälscht gemeldete Standorte. Wird eine Ausnahme genehmigt, gelten Sie als die ganze Zeit anwesend; wird sie abgelehnt, zählt Ihre Arbeitszeit nur bis zum Zeitpunkt der ersten Erkennung. Markierungen sind Informationen für eine faire Prüfung durch einen Menschen - keine automatischen Entscheidungen."
     },
     "allowances": {
       "title": "Zulagen",
-      "body": "Öffnen Sie Zulagen in der Seitenleiste und wählen Sie ein Datum, um einen Eintrag hinzuzufügen - Datum, Standort und Kommen/Gehen werden automatisch übernommen. Füllen Sie die Beträge für Verpflegung, Fahrtkosten, Wohnen und Sonstiges selbst aus und reichen Sie den Eintrag ein. Ein Manager oder der Inhaber genehmigt oder lehnt ihn ab; solange er ein Entwurf ist, können Sie ihn noch bearbeiten. Überstunden werden automatisch aus der Schichtrichtlinie Ihres Standorts berechnet, falls konfiguriert."
+      "body": "Öffnen Sie Zulagen und wählen Sie ein Datum - Standort und Zeiten des Tages werden automatisch eingetragen: das erste Einstempeln und das letzte Ausstempeln des Tages; die Details zeigen Anzahl der Sitzungen und gearbeitete Stunden. Tragen Sie die Beträge ein und senden Sie ab. Eine Führungskraft oder der Inhaber genehmigt oder lehnt ab; als Entwurf können Sie noch bearbeiten."
     },
     "kiosk": {
-      "title": "Kiosk-Modus",
-      "body": "Öffnen Sie den Kiosk-Modus über die Seitenleiste und wählen Sie einen Standort, um dessen gemeinsam genutzten Stempel-Bildschirm zu starten - gedacht für ein Tablet oder einen Computer am Eingang, nicht für Ihr eigenes Gerät. Es gibt zwei Reiter: Mitarbeiter, wo Sie Ihren Namen aus der Liste wählen und Ihre persönliche Kiosk-PIN eingeben, bevor Sie ein- oder ausstempeln (Ihre Kiosk-PIN ist unabhängig von Ihrem Anmeldepasswort - legen Sie sie über das Benutzermenü unten in der Seitenleiste fest, oder ein Administrator/Manager kann sie für Sie über Ihr Profil unter Personen festlegen); und Belegschaft, für Subunternehmer und andere externe Arbeitskräfte, die keine PROSM-Time-Benutzer sind - jeder hat seine eigene 6-stellige Nummer, die im Voraus von einem Administrator oder Manager eingerichtet wird und die einzige Eingabe ist, die zum Ein- oder Ausstempeln nötig ist. Beide Reiter kehren nach jeder Aktion automatisch zum Startbildschirm zurück, bereit für die nächste Person."
+      "title": "Kioskmodus",
+      "body": "Öffnen Sie den Kioskmodus und wählen Sie einen Standort, um ein gemeinsames Tablet oder einen Computer zu dessen Stempelbildschirm zu machen. Solange der Kiosk geöffnet ist, ist das Gerät darauf gesperrt: kein Menü, andere Seiten und die Zurück-Taste führen zum Kiosk zurück, und zum Verlassen ist das Passwort des Kontos nötig, das ihn geöffnet hat. Mitarbeiter: Namen wählen und persönliche Kiosk-PIN eingeben. Nach 5 falschen PINs in 15 Minuten wird die Anmeldung dieser Person für 30 Minuten gesperrt. Arbeitskräfte: Auftragnehmer geben ihre 6-stellige Nummer ein."
     },
     "reportsCenter": {
-      "title": "Berichtszentrum",
-      "body": "Berichte bündelt die Berichtserstellung an einem Ort: Wählen Sie einen Berichtstyp, einen Zeitraum und, falls relevant, einen Mitarbeiter oder Standort, und exportieren Sie ihn dann als PDF. Neben den ursprünglichen Exporten für Anwesenheitsprotokoll und Zulagen deckt es jetzt auch ab: Belegschaft (Summen aller Personen in einem Export), Subunternehmer (Anwesenheit der externen Belegschaft), Standort (Aktivität eines einzelnen Standorts), Verspätungen, Fehlende Ausstempelungen, Urlaubskonflikte (während genehmigten Urlaubs erfasste Anwesenheit), Manager-Eingriffe (jedes von einem Administrator durchgeführte Ein-/Ausstempeln im Auftrag) und Standortverstöße (Verstöße außerhalb der Zone). Ein Manager sieht dabei ausschließlich Daten der Standorte, die er tatsächlich verwaltet - der Owner sieht die gesamte Organisation. Stundenzettel werden stattdessen auf ihrer eigenen Stundenzettel-Seite erstellt, eingereicht und exportiert, da ein Stundenzettel zu einem bestimmten Mitarbeiter und Zeitraum gehört, nicht zu einem Datumsbereich."
+      "title": "Berichtszentrale",
+      "body": "Wählen Sie Berichtstyp, Zeitraum und ggf. Mitarbeiter oder Standort und exportieren Sie als PDF. Dazu gehören Anwesenheit (Offline-Gerätezeiten sind markiert), Zulagen, Belegschaft, Auftragnehmer, Standort, Verspätungen, fehlende Ausstempelungen, Urlaubskonflikte, Manager-Eingriffe und Standortverstöße - jetzt mit Verlassen des Arbeitsbereichs (mit Grund und Prüfstatus), unplausiblen und gefälschten Standorten. Führungskräfte sehen nur ihre Standorte, der Inhaber die ganze Organisation."
     },
     "sites": {
       "title": "Standorte (Administratoren)",
-      "body": "Standorte (nur Inhaber/Manager) ist der Ort, an dem Standorte selbst eingerichtet und Mitarbeiter/Manager ihnen zugewiesen werden: Name, Adresse, GPS-Koordinaten und Radius, Zeitzone, Kiosk-Modus, und ob dort Anwesenheit/Geofence/Kamera erforderlich sind. Das tatsächliche Verhalten eines Standorts - GPS-Genauigkeitstoleranz, Kulanzzeit, Schichtzeiten, Überstunden-/Verspätungsabzugs-Timing, Pausenrundung, beide Selbstbedienungs-Blockierungen und befreite Mitarbeiter - wird stattdessen in den Einstellungen konfiguriert, nicht in diesem Formular."
+      "body": "Hier werden Standorte eingerichtet und Personen zugewiesen: Name, Adresse, GPS-Koordinaten und Radius, Zeitzone, Kioskmodus sowie ob Anwesenheit, Geofence oder Foto erforderlich sind. Bei der Zuweisung beginnt die Rolle am Standort mit der Rolle in der Organisation - Manager und Supervisor werden Standortleiter. Das übrige Verhalten steht in den Einstellungen; das Standortformular verlinkt dorthin."
     },
     "settingsCenter": {
       "title": "Einstellungen (Inhaber)",
-      "body": "Ein echter Ort für organisationsweite Konfiguration: der Geofence-Radius ohne Standort; die Standort-Richtlinien-Standardwerte (GPS-Genauigkeitstoleranz, Pausenrundung, Kulanzzeit), mit denen ein brandneuer Standort startet, da diese organisationsweit fast immer gleich sind; die Standort-Richtlinie selbst - wählen Sie einen beliebigen Standort aus einer Dropdown-Liste, um dessen eigene GPS-Toleranz, Kulanzzeit, Schichtzeiten, Überstunden-/Verspätungsabzugs-Timing, Pausenrundung, beide Selbstbedienungs-Blockierungen und befreite Mitarbeiter an einem einzigen Ort einzusehen oder zu ändern, statt auf der eigenen Seite dieses Standorts danach zu suchen."
+      "body": "Organisationsweite Einstellungen: Radius ohne Standort, \"Ein-/Ausstempeln von gefälschtem Standort ablehnen\", Vorgaben für neue Standorte und die Standortrichtlinie - GPS-Toleranz, Kulanzzeit, Schichtzeiten, Überstunden und Verspätungsabzug, Pausenrundung, laufende Anwesenheitsüberwachung, befreite Mitarbeiter und die Selbstbedienungssperren: nach der Kulanzzeit, Ausstempeln außerhalb und Einstempeln außerhalb des Arbeitsbereichs."
     },
     "leave": {
       "title": "Urlaub (PTO)",
@@ -67,8 +67,8 @@
       "body": "Jedes in der App angezeigte Datum kann gregorianisch oder hidschri angezeigt werden - wählen Sie Ihre Präferenz im Benutzermenü unten in der Seitenleiste, neben Sprache und Erscheinungsbild. Dies ist eine geräteweise Einstellung, keine organisationsweite - jede Person kann ihre eigene Wahl treffen."
     },
     "permissions": {
-      "title": "Berechtigungen (Administratoren)",
-      "body": "Die Seite jeder Person unter Personen zeigt ihre tatsächlich erteilten Berechtigungen und ermöglicht einem berechtigten Administrator, eine einzelne Berechtigung mit Begründung zu erteilen, zu entziehen oder zurückzusetzen - sichtbar nur für diejenigen, die diese Befugnis bereits besitzen. Der Inhaber hat immer alle Berechtigungen; andere Rollen starten mit einem Standardpaket, das pro Person angepasst werden kann."
+      "title": "Berechtigungen und Stempeln im Auftrag (Administratoren)",
+      "body": "Die Seite jeder Person unter Personen zeigt ihre Berechtigungen; ein befugter Administrator kann sie mit Begründung erteilen, entziehen oder zurücksetzen. Der Inhaber hat alle Berechtigungen. Im Auftrag stempeln ist nur für Personen unterhalb Ihrer Rolle erlaubt (Manager > Supervisor > Mitarbeiter); der Inhaber für alle. Die Aktion wird Ihnen zugeordnet."
     },
     "desktopApp": {
       "title": "Windows-Desktop-App",
@@ -81,6 +81,18 @@
     "radio": {
       "title": "Warum es ein Radio in PROSM Time gibt",
       "body": "Das Radio ist keine Ablenkung von der Anwesenheit - es ist genau darauf ausgelegt. Spielen Sie während Ihres Arbeitswegs einen Sender ab, und PROSM Time ist bereits geöffnet und präsent, sobald Sie ankommen: Statt einer App, an die man sich erst am Schreibtisch erinnern muss, ist sie bereits in Ihrer Hand, und Einstempeln liegt genau dort, wo Sie es zuletzt verlassen haben. Ein kleiner, bewusster Anstoß gegen den häufigsten Anwesenheitsfehler überhaupt - schlicht das rechtzeitige Einstempeln zu vergessen."
+    },
+    "offline": {
+      "title": "Arbeiten ohne Internet",
+      "body": "Auf dem Telefon funktionieren Ein- und Ausstempeln, Pausen und Standortwechsel ohne Verbindung; eine kleine Karte zeigt, dass Sie offline sind, und eine Leiste, wie viele Aktionen warten. Sie werden verschlüsselt auf dem Gerät gespeichert und bei wiederhergestellter Verbindung automatisch einmal gesendet. Weil sie ohne Server erfasst wurden, behalten sie die Uhrzeit Ihres Geräts: Weicht sie um mehr als 2 Minuten ab, wird die Aktion als \"Gerätezeit (offline)\" markiert und von Ihrer Führungskraft geprüft. Eine Zeit vor Ihrer letzten erfassten Aktion oder an einem genehmigten Urlaubstag wird abgelehnt - bitten Sie Ihre Führungskraft um Korrektur."
+    },
+    "locationChecks": {
+      "title": "Arbeitsbereiche und gefälschte Standorte",
+      "body": "Jeder Standort hat einen Arbeitsbereich (Kreis auf der Karte). Ein- oder Ausstempeln außerhalb wird als Ausnahme erfasst, und Sie werden nach dem Grund gefragt; ein Grund gilt für die ganze Fahrt. Ein Standort kann so eingestellt sein, dass er ein Selbst-Einstempeln außerhalb ablehnt - dann stempelt Ihre Führungskraft Sie ein. Unter Android erkennt PROSM Time, wenn der Standort von einer Fake-GPS-App stammt: Das wird erfasst und geprüft, und Ihre Organisation kann es ablehnen. Das Fälschen von Standort oder Uhrzeit verstößt gegen die Nutzungsbedingungen."
+    },
+    "privacy": {
+      "title": "Ihre Privatsphäre",
+      "body": "PROSM Time erfasst Ihren Standort beim Ein- und Ausstempeln, bei Pausen, Standortwechsel und SOS. Nur wenn Ihre Organisation die Anwesenheitsüberwachung aktiviert, auch etwa alle 5 Minuten während der Schicht - unter Android auch im Hintergrund, nach vorheriger Information und mit sichtbarer Benachrichtigung - und immer nur bis zum Ausstempeln. Fotos nur, wo Ihr Standort sie verlangt; keine Gesichtserkennung. Standortpunkte werden nach 30 Tagen, Fotos nach 90 Tagen gelöscht. Berechtigungen können Sie jederzeit in den Geräteeinstellungen entziehen. Für Ihre Rechte wenden Sie sich zuerst an Ihre Organisation oder an info@prosm.net. Einzelheiten in der Datenschutzerklärung und den Nutzungsbedingungen unten."
     }
   },
   "faq": {
@@ -94,8 +106,8 @@
       "answer": "Ihr Standort hat einen konfigurierten Geofence und eine GPS-Genauigkeitstoleranz (oder, ohne ausgewählten Standort, den organisationseigenen Radius ohne Standort um Ihren Einstempelpunkt). Wenn Ihr gemeldeter Standort außerhalb dieses Bereichs lag, werden Sie um eine Begründung gebeten, damit der zuständige Manager sie prüfen kann - eine Genehmigung entfernt die Markierung vollständig; eine Ablehnung begrenzt Ihre Arbeitszeit auf diesen Zeitpunkt."
     },
     "q3": {
-      "question": "Kann ich die App offline nutzen?",
-      "answer": "Ein- und Ausstempeln werden bei fehlender Verbindung lokal in eine Warteschlange gestellt und automatisch synchronisiert, sobald Sie wieder online sind - bis zur Bestätigung sehen Sie einen Hinweis auf ausstehende Synchronisierung, und die tatsächlich erfasste Zeit ist der echte Moment Ihres Tastendrucks, nicht der Moment der Wiederverbindung. Das Öffnen der App selbst im Offline-Modus zeigt jetzt sofort Ihre zuletzt geladenen Informationen an, statt eines leeren Bildschirms."
+      "question": "Welche Uhrzeit wird beim Einstempeln erfasst?",
+      "answer": "Immer die des Servers - die Uhr Ihres Telefons zu ändern hat keine Wirkung. Ausnahme: eine Aktion ohne Verbindung behält die Gerätezeit und wird bei mehr als 2 Minuten Abweichung zur Prüfung markiert."
     },
     "q4": {
       "question": "Wie ändere ich die Sprache oder das Erscheinungsbild?",
@@ -131,7 +143,19 @@
     },
     "q12": {
       "question": "Funktioniert die Anwesenheit ohne Internet?",
-      "answer": "Ja. Auf dem Telefon funktionieren Einstempeln, Ausstempeln, Pause beginnen/beenden und Standortwechsel ohne Verbindung, mit dem in diesem Moment aufgenommenen Foto und Standort. Sie werden verschlüsselt, in Reihenfolge und mit ihrer echten Zeit auf dem Gerät gespeichert; eine Leiste zeigt, wie viele warten. Sobald die Verbindung zurück ist, werden sie automatisch genau einmal gesendet - ein unterbrochenes Senden erzeugt nie ein Duplikat - und nichts wird vom Gerät entfernt, bevor der Server es angenommen hat. Es gelten dieselben Anwesenheitsregeln. Andere Seiten benötigen eine Verbindung und werden beim Öffnen geladen."
+      "answer": "Ja. Ein- und Ausstempeln, Pausen und Standortwechsel funktionieren auf dem Telefon ohne Verbindung, verschlüsselt gespeichert und bei Verbindung automatisch einmal gesendet. Abweichende Zeiten werden zur Prüfung markiert. Andere Seiten brauchen eine Verbindung."
+    },
+    "q13": {
+      "question": "Warum steht bei mir \"Gerätezeit (offline)\"?",
+      "answer": "Die Aktion wurde ohne Verbindung mit der Uhrzeit Ihres Telefons erfasst, die um mehr als 2 Minuten abwich. Ihre Führungskraft sieht sie unter Ausstehende Prüfung und kann sie genehmigen oder korrigieren."
+    },
+    "q14": {
+      "question": "Wer sieht meinen Standort und meine Fotos, und wie lange?",
+      "answer": "Sie, die Vorgesetzten Ihres Standorts und der Inhaber. Standortpunkte werden nach 30 Tagen, Fotos nach 90 Tagen gelöscht."
+    },
+    "q15": {
+      "question": "Ruft SOS den Rettungsdienst oder die Polizei?",
+      "answer": "Nein. Es alarmiert Ihre Vorgesetzten, den Inhaber und Kollegen vor Ort mit Ihrem Standort. Rufen Sie im Notfall selbst die Notrufnummer an (in Ägypten: Rettung 123, Polizei 122, Feuerwehr 180)."
     }
   },
   "contact": {

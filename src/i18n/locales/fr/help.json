@@ -3,12 +3,12 @@
   "subtitle": "Aide produit, conseils d'utilisation et contact d'assistance.",
   "guides": {
     "gettingStarted": {
-      "title": "Prise en main",
-      "body": "Connectez-vous avec l'e-mail et le mot de passe configurés par votre administrateur. Sur le tableau de bord, utilisez Pointer l'arrivée pour commencer votre poste et Pointer le départ pour le terminer - une carte en direct au-dessus du bouton affiche votre position actuelle et, le cas échéant, le cercle de géorepérage du site. Les sites de votre organisation ainsi que les éventuelles exigences de photo/GPS sont configurés par votre administrateur."
+      "title": "Premiers pas",
+      "body": "Connectez-vous avec l'e-mail et le mot de passe fournis par votre administrateur. La première fois (et à chaque changement), l'application vous montre ce que PROSM Time enregistre et vous demande de reconnaître la Politique de confidentialité et les Conditions d'utilisation. Sur le tableau de bord, Pointer l'arrivée commence votre poste et Pointer le départ le termine ; une carte en direct montre votre position et la zone du site. L'application s'ouvre dans la langue de votre appareil si elle est prise en charge ; vous pouvez la changer à tout moment depuis le menu utilisateur."
     },
     "attendance": {
       "title": "Pointer l'arrivée et le départ",
-      "body": "Choisissez votre site (et votre projet, le cas échéant) avant de pointer votre arrivée - ou laissez le champ Site vide et décrivez où vous vous trouvez réellement si vous n'êtes pas sur un lieu enregistré. Certains sites exigent une photo, à garder immobile un court instant afin que l'application puisse confirmer qu'il s'agit d'une prise en direct, pas d'une image ancienne ou statique. Juste avant l'envoi, un écran de confirmation affiche exactement ce qui va être enregistré - votre photo (le cas échéant), votre position GPS détaillée, le site/lieu de travail et l'heure - avec deux champs optionnels, une note et votre activité en cours, enregistrés avec ce pointage et visibles par votre responsable. Le pointage d'arrivée est bloqué pour un jour déjà couvert par un de vos congés approuvés - si c'est une erreur, demandez à votre responsable de vérifier depuis Congés."
+      "body": "Choisissez votre site (et projet le cas échéant) avant de pointer, ou laissez le site vide et décrivez où vous êtes. Certains sites exigent une photo : tenez la caméra immobile un instant pour confirmer une prise en direct. Avant l'envoi, un écran de confirmation montre exactement ce qui sera enregistré - photo, position, lieu et heure - avec une note et une activité facultatives visibles par votre responsable. L'heure enregistrée est toujours celle du serveur, pas celle de votre téléphone. Le pointage est bloqué un jour de congé approuvé."
     },
     "walkInGeofence": {
       "title": "Travailler sur un site auquel vous n'êtes pas affecté",
@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Urgence",
-      "body": "Disponible pendant chaque poste, tant que vous avez pointé. Appuyer dessus envoie immédiatement une alerte haute priorité à vos responsables avec votre dernière position connue, et est enregistré comme un véritable incident d'urgence - réservé aux situations de sécurité réelles, pas un bouton polyvalent. Sur Android, le suivi de présence peut demander une autorisation de localisation en arrière-plan la première fois - l'accepter permet de continuer à vérifier votre position même si vous passez à une autre application ou verrouillez votre écran, toujours visible via une notification réelle et annulable à tout moment ; refuser est également possible - le suivi continue alors uniquement tant que PROSM Time est ouvert."
+      "body": "Le bouton SOS est sur le tableau de bord pendant chaque poste, une fois votre pointage confirmé. Il envoie une alerte prioritaire avec votre position aux responsables de votre site, au propriétaire et aux collègues présents, et l'enregistre dans le journal des urgences. SOS n'est pas un service d'urgence : il n'appelle ni la police ni une ambulance. En cas d'urgence, appelez toujours le numéro local (en Égypte : ambulance 123, police 122, pompiers 180). Il nécessite une connexion internet."
     },
     "notifications": {
       "title": "Comment les notifications atteignent la bonne personne",
@@ -31,28 +31,28 @@
       "body": "Une fois qu'un responsable génère une feuille de temps pour une période, elle apparaît dans Feuilles de temps pour révision et soumission pour approbation. Le temps travaillé, les pauses et les heures supplémentaires sont affichés en totaux distincts - le temps de pause n'est jamais déduit de vos heures travaillées, et les heures supplémentaires se basent sur l'heure de début définie par la politique de votre site. Une fois approuvée, une feuille de temps est verrouillée - si vous pensez qu'une correction est nécessaire, vous pouvez en faire la demande depuis la page de la feuille de temps, et une correction approuvée met réellement à jour l'heure enregistrée concernée."
     },
     "exceptions": {
-      "title": "Exceptions et corrections - ce que l'approbation change réellement",
-      "body": "Une exception de zone ou une demande de correction n'est plus une simple décision sur papier : si votre responsable l'approuve, vous êtes considéré présent tout le temps, sans pénalité. Si elle est rejetée - avant ou après votre explication - votre temps travaillé effectif est plafonné au moment où la situation a été détectée pour la première fois, ce qui réduit les heures et les heures supplémentaires comptabilisées ce jour-là."
+      "title": "Vérifications - exceptions, corrections, heures hors ligne, fausses positions",
+      "body": "Tout ce qui demande une décision apparaît dans la console du responsable sous « En attente de vérification » : exceptions hors zone (avec votre motif), demandes de correction, actions hors ligne avec l'heure de l'appareil et positions signalées comme fausses. Une exception approuvée vous compte présent tout le temps ; refusée, votre temps de travail s'arrête au moment de la première détection. Ces signalements sont des informations à vérifier équitablement par une personne, pas des décisions automatiques."
     },
     "allowances": {
       "title": "Indemnités",
-      "body": "Ouvrez Indemnités dans la barre latérale et choisissez une date pour ajouter une entrée - la date, le site et les heures de pointage sont remplis automatiquement. Complétez vous-même les montants de repas, transport, logement et autres, puis soumettez. Un responsable ou le propriétaire l'approuve ou la rejette ; tant qu'elle est en brouillon, vous pouvez encore la modifier. Les heures/jours supplémentaires sont calculés automatiquement selon la politique de shift de votre site, si elle est configurée."
+      "body": "Ouvrez Indemnités et choisissez une date : le site et les heures du jour sont remplis automatiquement - le premier pointage d'arrivée et le dernier départ du jour ; le détail montre le nombre de sessions et les heures travaillées. Saisissez les montants puis envoyez. Un responsable ou le propriétaire approuve ou refuse ; en brouillon, vous pouvez encore modifier."
     },
     "kiosk": {
       "title": "Mode kiosque",
-      "body": "Ouvrez le mode kiosque depuis la barre latérale et choisissez un site pour lancer son écran de pointage partagé - destiné à une tablette ou un ordinateur à l'entrée, pas à votre propre appareil. Il comporte deux onglets : Employés, où vous sélectionnez votre nom dans la liste et saisissez votre code PIN kiosque personnel avant de pointer votre arrivée ou votre départ (votre code PIN kiosque est distinct de votre mot de passe de connexion - définissez-le depuis le menu utilisateur en bas de la barre latérale, ou un administrateur/responsable peut le définir pour vous depuis votre fiche dans Personnes) ; et Personnel externe, pour les sous-traitants et autres travailleurs non-employés qui ne sont pas utilisateurs de PROSM Time - chacun a son propre numéro à 6 chiffres, configuré à l'avance par un administrateur ou un responsable, seule saisie nécessaire pour pointer l'arrivée ou le départ. Les deux onglets reviennent automatiquement à leur écran de départ après chaque action, prêts pour la personne suivante."
+      "body": "Ouvrez le mode kiosque et choisissez un site pour faire d'une tablette ou d'un ordinateur partagé son écran de pointage. Tant que le kiosque est ouvert, l'appareil y est verrouillé : pas de menu, les autres pages et le bouton retour ramènent au kiosque, et le quitter exige le mot de passe du compte qui l'a ouvert. Employés : choisissez votre nom et saisissez votre code PIN personnel. Après 5 codes erronés en 15 minutes, la connexion de cette personne est suspendue 30 minutes. Main-d'œuvre : les sous-traitants saisissent leur numéro à 6 chiffres."
     },
     "reportsCenter": {
       "title": "Centre de rapports",
-      "body": "Rapports regroupe la génération de rapports en un seul endroit : choisissez un type de rapport, une période et, si pertinent, un employé ou un site, puis exportez-le en PDF. Outre les exports d'origine Registre de présence et Indemnités, il couvre désormais aussi : Personnel (les totaux de tous en un seul export), Sous-traitants (la présence du personnel externe), Site (l'activité d'un site précis), Retards, Départs non pointés, Conflits de congés (présence enregistrée pendant un congé approuvé), Interventions du responsable (chaque pointage effectué par un administrateur au nom d'un employé), et Violations de localisation (écarts hors zone). Un responsable ne voit que les données des sites qu'il gère réellement - le propriétaire voit toute l'organisation. Les feuilles de temps sont générées, soumises et exportées depuis leur propre page Feuilles de temps, car une feuille de temps appartient à un employé et une période précis plutôt qu'à une plage de dates."
+      "body": "Choisissez un type de rapport, une période et, si besoin, un employé ou un site, puis exportez en PDF. Rapports : présence (les heures hors ligne sont marquées), indemnités, effectifs, sous-traitants, site, retards, départs manquants, conflits de congés, interventions des responsables et violations de position - qui regroupe désormais la sortie de zone (avec motif et statut), les positions invraisemblables et les fausses positions. Un responsable ne voit que ses sites."
     },
     "sites": {
       "title": "Sites (administrateurs)",
-      "body": "Sites (Propriétaire/Responsable uniquement) permet de configurer les sites eux-mêmes et d'y affecter des employés/responsables : nom, adresse, coordonnées GPS et rayon, fuseau horaire, mode kiosque, et si la présence/le géorepérage/la caméra y sont requis. Le comportement réel d'un site - tolérance de précision GPS, période de tolérance, horaires de shift, décompte des heures supplémentaires/retards, arrondi des pauses, les deux blocages en libre-service, et les employés exemptés - se configure depuis Paramètres, pas depuis ce formulaire."
+      "body": "Ici sont créés les sites et affectées les personnes : nom, adresse, coordonnées GPS et rayon, fuseau horaire, mode kiosque, et exigences de présence, de zone ou de photo. À l'affectation, le rôle sur le site part du rôle dans l'organisation - un manager ou superviseur devient responsable du site. Le reste se règle dans Paramètres ; le formulaire du site y renvoie."
     },
     "settingsCenter": {
-      "title": "Paramètres (Propriétaire)",
-      "body": "Un véritable emplacement pour la configuration à l'échelle de l'organisation : le rayon de géorepérage sans site ; les politiques de site par défaut (tolérance de précision GPS, arrondi des pauses, période de tolérance) dont part chaque nouveau site, puisque ce sont des valeurs presque toujours identiques dans toute l'organisation ; la Politique de site elle-même - choisissez n'importe quel site dans une liste déroulante pour consulter ou modifier sa propre tolérance GPS, sa période de tolérance, ses horaires de shift, le décompte de ses heures supplémentaires/retards, l'arrondi de ses pauses, ses deux blocages en libre-service et ses employés exemptés, le tout au même endroit plutôt qu'en fouillant dans la page de ce site."
+      "title": "Paramètres (propriétaire)",
+      "body": "Réglages de toute l'organisation : rayon sans site, « Refuser le pointage depuis une position falsifiée », valeurs par défaut des nouveaux sites et politique de chaque site - tolérance GPS, délai de grâce, horaires, heures supplémentaires et retenues de retard, arrondi des pauses, suivi de présence continu, employés exemptés et blocages du libre-service : après le délai de grâce, départ hors zone et arrivée hors zone."
     },
     "leave": {
       "title": "Congés (PTO)",
@@ -67,8 +67,8 @@
       "body": "Chaque date affichée dans l'application peut s'afficher en grégorien ou en hégirien - choisissez votre préférence depuis le menu utilisateur en bas de la barre latérale, à côté de Langue et Apparence. C'est une préférence par appareil, pas un paramètre à l'échelle de l'organisation - chacun peut faire son propre choix."
     },
     "permissions": {
-      "title": "Permissions (administrateurs)",
-      "body": "La page de chaque personne dans Personnes affiche ses permissions réellement accordées et permet à un administrateur autorisé d'accorder, révoquer ou réinitialiser une permission individuelle avec un motif - visible uniquement par ceux qui possèdent déjà cette autorité. Le propriétaire a toujours toutes les permissions ; les autres rôles partent d'un ensemble par défaut ajustable par personne."
+      "title": "Autorisations et pointage pour autrui (administrateurs)",
+      "body": "La page de chaque personne sous Personnes montre ses autorisations ; un administrateur habilité peut en accorder, retirer ou réinitialiser avec un motif. Le propriétaire a toutes les autorisations. Pointer pour quelqu'un n'est permis que pour les personnes d'un rôle inférieur au vôtre (manager > superviseur > employé) ; le propriétaire pour tous. L'action est enregistrée à votre nom."
     },
     "desktopApp": {
       "title": "Application de bureau Windows",
@@ -81,6 +81,18 @@
     "radio": {
       "title": "Pourquoi il y a une radio dans PROSM Time",
       "body": "La Radio n'est pas une distraction par rapport à la présence - elle est conçue autour d'elle. Écoutez une station pendant votre trajet, et PROSM Time est déjà ouvert et présent à votre esprit au moment où vous arrivez : au lieu d'être une application qu'il faut penser à ouvrir une fois à votre poste, elle est déjà là, dans votre main, et Pointer l'arrivée est juste là où vous l'avez laissé. Un petit coup de pouce délibéré contre l'erreur de présence la plus courante - simplement oublier de pointer à l'heure."
+    },
+    "offline": {
+      "title": "Travailler sans internet",
+      "body": "Sur votre téléphone, les pointages, les pauses et le changement de site fonctionnent sans connexion ; une petite carte indique que vous êtes hors ligne et une barre combien d'actions attendent. Elles sont gardées chiffrées sur l'appareil et envoyées une seule fois au retour de la connexion. Enregistrées sans le serveur, elles gardent l'heure de votre appareil : si elle diffère de plus de 2 minutes, l'action est marquée « Heure de l'appareil (hors ligne) » et vérifiée par votre responsable. Une heure antérieure à votre dernière action, ou un jour de congé approuvé, est refusée - demandez une correction."
+    },
+    "locationChecks": {
+      "title": "Zones de travail et fausses positions",
+      "body": "Chaque site a une zone de travail (un cercle sur la carte). Pointer en dehors est enregistré comme exception et on vous demande pourquoi ; un seul motif couvre tout le trajet. Un site peut refuser le pointage d'arrivée hors zone - demandez alors à votre responsable de vous pointer. Sur Android, PROSM Time détecte une position issue d'une application de faux GPS : elle est enregistrée et vérifiée, et votre organisation peut la refuser. Falsifier votre position ou l'heure est contraire aux Conditions d'utilisation."
+    },
+    "privacy": {
+      "title": "Votre vie privée",
+      "body": "PROSM Time enregistre votre position lors des pointages, pauses, changements de site et SOS. Seulement si votre organisation active le suivi de présence, aussi environ toutes les 5 minutes pendant le poste - sur Android aussi en arrière-plan, après vous en avoir informé et avec une notification visible - et toujours jusqu'au départ seulement. Une photo uniquement si votre site l'exige ; pas de reconnaissance faciale. Les positions sont supprimées après 30 jours, les photos après 90 jours. Vous pouvez retirer les autorisations dans les réglages de l'appareil. Pour vos droits, adressez-vous d'abord à votre organisation ou à info@prosm.net. Détails dans la Politique de confidentialité et les Conditions d'utilisation ci-dessous."
     }
   },
   "faq": {
@@ -94,8 +106,8 @@
       "answer": "Votre site dispose d'un géorepérage configuré et d'une tolérance de précision GPS (ou, sans site sélectionné, du rayon sans site propre à votre organisation, autour de votre point de pointage). Si votre position signalée se trouvait en dehors de cette zone, on vous demande d'expliquer pourquoi afin que le bon responsable puisse l'examiner - une approbation efface entièrement le signalement ; un rejet plafonne votre temps travaillé à ce moment-là."
     },
     "q3": {
-      "question": "Puis-je utiliser l'application hors ligne ?",
-      "answer": "Les pointages d'arrivée et de départ sont mis en file d'attente localement en cas de perte de connexion et se synchronisent automatiquement une fois de retour en ligne - vous verrez un avis de synchronisation en attente jusqu'à confirmation, et l'heure réellement enregistrée est le moment exact où vous avez appuyé sur le bouton, pas celui du retour de la connexion. Ouvrir l'application elle-même hors ligne affiche désormais aussi vos dernières informations chargées immédiatement, au lieu d'un écran vide."
+      "question": "Quelle heure est enregistrée lors du pointage ?",
+      "answer": "Toujours celle du serveur - changer l'horloge du téléphone n'a aucun effet. Seule exception : une action hors ligne garde l'heure de l'appareil et, si l'écart dépasse 2 minutes, elle est marquée pour vérification."
     },
     "q4": {
       "question": "Comment changer la langue ou l'apparence ?",
@@ -130,8 +142,20 @@
       "answer": "Sur la page d’accueil, « Utiliser la version d’essai » ouvre l’activation habituelle sans code d’activation ; l’organisation et son propriétaire sont créés aussitôt. L’essai dure 30 jours (heure du serveur) et une barre indique les jours restants. Une semaine avant la fin, le propriétaire reçoit une notification et un e-mail avec sales@prosm.net, info@prosm.net et support@prosm.net. Ensuite l’application est mise en pause, rien n’est supprimé : saisissez un code d’activation acheté ou demandez à PROSM de renouveler la licence - tout reprend avec vos données. Un essai par e-mail."
     },
     "q12": {
-      "question": "La présence fonctionne-t-elle sans internet ?",
-      "answer": "Oui. Sur votre téléphone, pointer l'arrivée, le départ, commencer/terminer une pause et changer de site fonctionnent sans connexion, avec la photo et la position prises à ce moment. Ils sont conservés sur l'appareil, chiffrés, dans l'ordre, avec leur heure réelle, et une barre indique combien sont en attente. Au retour de la connexion ils sont envoyés automatiquement, une seule fois - un envoi interrompu ne crée jamais de doublon - et rien n'est retiré de l'appareil avant que le serveur ne l'ait accepté. Les mêmes règles de présence s'appliquent. Les autres pages nécessitent une connexion et se chargent à l'ouverture."
+      "question": "Le pointage fonctionne-t-il sans internet ?",
+      "answer": "Oui. Sur le téléphone, pointages, pauses et changement de site fonctionnent hors ligne, sont gardés chiffrés et envoyés une seule fois au retour de la connexion. Les heures qui diffèrent sont marquées pour vérification. Les autres pages ont besoin d'une connexion."
+    },
+    "q13": {
+      "question": "Pourquoi mon relevé indique « Heure de l'appareil (hors ligne) » ?",
+      "answer": "L'action a été faite hors ligne avec l'heure de votre téléphone, qui différait de plus de 2 minutes. Votre responsable la voit en attente de vérification et peut l'approuver ou la corriger."
+    },
+    "q14": {
+      "question": "Qui voit ma position et mes photos, et combien de temps ?",
+      "answer": "Vous, les responsables de votre site et le propriétaire. Les positions sont supprimées après 30 jours, les photos après 90 jours."
+    },
+    "q15": {
+      "question": "Le SOS appelle-t-il une ambulance ou la police ?",
+      "answer": "Non. Il alerte vos responsables, le propriétaire et les collègues sur place avec votre position. En cas d'urgence, appelez vous-même le numéro local (en Égypte : ambulance 123, police 122, pompiers 180)."
     }
   },
   "contact": {
