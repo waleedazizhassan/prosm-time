@@ -44,5 +44,11 @@
     "clockIn": "Einstempeln: {{note}}",
     "clockOut": "Ausstempeln: {{note}}",
     "earlyLeave": "Früher gegangen: {{reason}}"
-  }
+  },
+  "periods": {
+    "today": "Heute",
+    "week": "Diese Woche",
+    "month": "Dieser Monat"
+  },
+  "totalHours": "Gesamt {{hours}} Stunden · {{count}} Schichten"
 }

@@ -220,5 +220,25 @@
       "emergency": "طارئ",
       "other": "أخرى"
     }
+  },
+  "employeeHome": {
+    "hoursTitle": "ساعاتي",
+    "hoursUnit": "ساعة",
+    "periods": {
+      "today": "اليوم",
+      "week": "هذا الأسبوع",
+      "month": "هذا الشهر"
+    },
+    "linksTitle": "سجلاتي",
+    "links": {
+      "attendance": "سجل حضوري",
+      "attendanceHint": "كل تسجيلات الحضور والانصراف · PDF",
+      "allowances": "بدلاتي",
+      "allowancesHint": "أضف بدلاتك وتابعها · PDF",
+      "timesheets": "كشوف دوامي",
+      "timesheetsHint": "راجع وأرسل · PDF",
+      "leave": "إجازاتي",
+      "leaveHint": "اطلب إجازة واعرف رصيدك"
+    }
   }
 }

@@ -1,0 +1,96 @@
+/* Owner 2026-10-19: the employee's light home page. */
+.hours {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.hourTile {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  padding: var(--space-3) var(--space-2);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  background: var(--surface-app);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+}
+
+.hourTile:hover {
+  border-color: var(--brand-primary-subtle-border, #86efac);
+}
+
+.hourLabel {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.hourValue {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+.hourUnit {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-2);
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+}
+
+.link:hover {
+  border-color: var(--brand-primary-subtle-border, #86efac);
+}
+
+.linkIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(22, 163, 74, 0.14);
+  color: #16a34a;
+}
+
+.linkText {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.linkLabel {
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.linkHint {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.linkChevron {
+  flex-shrink: 0;
+  color: var(--text-secondary);
+}

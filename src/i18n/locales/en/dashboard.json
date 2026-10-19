@@ -216,5 +216,25 @@
       "emergency": "Emergency",
       "other": "Other"
     }
+  },
+  "employeeHome": {
+    "hoursTitle": "My hours",
+    "hoursUnit": "hours",
+    "periods": {
+      "today": "Today",
+      "week": "This week",
+      "month": "This month"
+    },
+    "linksTitle": "My records",
+    "links": {
+      "attendance": "My attendance record",
+      "attendanceHint": "Every clock-in and out · PDF",
+      "allowances": "My allowances",
+      "allowancesHint": "Add and follow your allowances · PDF",
+      "timesheets": "My timesheets",
+      "timesheetsHint": "Review and submit · PDF",
+      "leave": "My leave",
+      "leaveHint": "Request leave and see your balance"
+    }
   }
 }

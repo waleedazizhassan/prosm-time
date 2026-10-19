@@ -216,5 +216,25 @@
       "emergency": "Notfall",
       "other": "Sonstiges"
     }
+  },
+  "employeeHome": {
+    "hoursTitle": "Meine Stunden",
+    "hoursUnit": "Stunden",
+    "periods": {
+      "today": "Heute",
+      "week": "Diese Woche",
+      "month": "Dieser Monat"
+    },
+    "linksTitle": "Meine Unterlagen",
+    "links": {
+      "attendance": "Meine Anwesenheit",
+      "attendanceHint": "Alle Ein- und Ausstempelungen · PDF",
+      "allowances": "Meine Zulagen",
+      "allowancesHint": "Zulagen erfassen und verfolgen · PDF",
+      "timesheets": "Meine Stundenzettel",
+      "timesheetsHint": "Prüfen und einreichen · PDF",
+      "leave": "Mein Urlaub",
+      "leaveHint": "Urlaub beantragen und Restanspruch sehen"
+    }
   }
 }

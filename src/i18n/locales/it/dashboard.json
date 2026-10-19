@@ -216,5 +216,25 @@
       "emergency": "Emergenza",
       "other": "Altro"
     }
+  },
+  "employeeHome": {
+    "hoursTitle": "Le mie ore",
+    "hoursUnit": "ore",
+    "periods": {
+      "today": "Oggi",
+      "week": "Questa settimana",
+      "month": "Questo mese"
+    },
+    "linksTitle": "I miei registri",
+    "links": {
+      "attendance": "Le mie presenze",
+      "attendanceHint": "Tutte le entrate e uscite · PDF",
+      "allowances": "Le mie indennità",
+      "allowancesHint": "Inserisci e segui le indennità · PDF",
+      "timesheets": "I miei fogli ore",
+      "timesheetsHint": "Controlla e invia · PDF",
+      "leave": "Le mie ferie",
+      "leaveHint": "Richiedi ferie e vedi il saldo"
+    }
   }
 }

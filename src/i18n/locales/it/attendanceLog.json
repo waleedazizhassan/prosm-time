@@ -44,5 +44,11 @@
     "clockIn": "Entrata: {{note}}",
     "clockOut": "Uscita: {{note}}",
     "earlyLeave": "Uscita anticipata: {{reason}}"
-  }
+  },
+  "periods": {
+    "today": "Oggi",
+    "week": "Questa settimana",
+    "month": "Questo mese"
+  },
+  "totalHours": "Totale {{hours}} ore · {{count}} turni"
 }

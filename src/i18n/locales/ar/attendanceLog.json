@@ -44,5 +44,11 @@
     "clockIn": "الحضور: {{note}}",
     "clockOut": "الانصراف: {{note}}",
     "earlyLeave": "انصراف مبكر: {{reason}}"
-  }
+  },
+  "periods": {
+    "today": "اليوم",
+    "week": "هذا الأسبوع",
+    "month": "هذا الشهر"
+  },
+  "totalHours": "الإجمالي {{hours}} ساعة · {{count}} وردية"
 }

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Camera, MapPin, Check, X } from "lucide-react";
 
@@ -21,6 +22,7 @@ import attendanceHeaderImage from "../../assets/illustrations/attendance.svg";
 import { formatTimeOnly } from "../../core/utils/formatDate";
 import { buildAttendanceLogPdf } from "./attendanceLogPdf";
 import PageBanner from "../../components/common/PageBanner";
+import { PERIODS, formatHours, isPeriod, periodRange, sessionHours, type Period } from "./periods";
 import { attendanceNoteLines } from "./attendanceNotes";
 
 const ALL_EMPLOYEES = "";
@@ -31,10 +33,6 @@ function formatWorkedHours(clockInAt: string, clockOutAt: string | null): string
   const hours = Math.floor(totalMinutes / 60);
   const minutes = totalMinutes % 60;
   return `${hours}h ${minutes}m`;
-}
-
-function isoDate(date: Date): string {
-  return date.toISOString().slice(0, 10);
 }
 
 // § live UX review, user-directed - "next to the site name, show the
@@ -115,11 +113,23 @@ function DeviceTimeBadge({ label, hint }: { label: string; hint: string }) {
 export default function AttendanceLogPage() {
   const { t, i18n } = useTranslation("attendanceLog");
 
-  const today = new Date();
-  const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+  // Owner 2026-10-19: quick day / week (from Sunday) / month views; the
+  // employee's home page links here with ?period=today|week|month.
+  const [searchParams] = useSearchParams();
+  const requestedPeriod = searchParams.get("period");
+  const initialRange = periodRange(isPeriod(requestedPeriod) ? requestedPeriod : "month");
 
-  const [startDate, setStartDate] = useState(isoDate(monthStart));
-  const [endDate, setEndDate] = useState(isoDate(today));
+  const [startDate, setStartDate] = useState(initialRange.start);
+  const [endDate, setEndDate] = useState(initialRange.end);
+  const choosePeriod = (period: Period) => {
+    const range = periodRange(period);
+    setStartDate(range.start);
+    setEndDate(range.end);
+  };
+  const activePeriod = PERIODS.find((period) => {
+    const range = periodRange(period);
+    return range.start === startDate && range.end === endDate;
+  });
   const [rows, setRows] = useState<TodayAttendanceRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
@@ -309,6 +319,13 @@ export default function AttendanceLogPage() {
       </div>
 
       <Card title={t("filters.title")}>
+        <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap", marginBottom: "var(--space-3)" }}>
+          {PERIODS.map((period) => (
+            <Button key={period} size="sm" variant={activePeriod === period ? "primary" : "ghost"} onClick={() => choosePeriod(period)}>
+              {t(`periods.${period}`)}
+            </Button>
+          ))}
+        </div>
         <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
           <Input label={t("filters.fromLabel")} name="attendanceLogFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />
           <Input label={t("filters.toLabel")} name="attendanceLogTo" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
@@ -321,6 +338,11 @@ export default function AttendanceLogPage() {
       <Card>
         <ErrorText>{loadError}</ErrorText>
         <Table columns={columns} data={filteredRows} getRowId={(row) => row.sessionId} loading={loading} emptyMessage={t("empty")} />
+        {!loading && filteredRows.length > 0 ? (
+          <p style={{ margin: "var(--space-3) 0 0", fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)" }}>
+            {t("totalHours", { hours: formatHours(filteredRows.reduce((sum, row) => sum + sessionHours(row), 0)), count: filteredRows.length })}
+          </p>
+        ) : null}
       </Card>
 
       <Modal isOpen={Boolean(evidenceModalTitle)} onClose={closeEvidence} title={evidenceModalTitle ?? t("photoModalTitle")}>

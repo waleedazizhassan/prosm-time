@@ -1,9 +1,7 @@
-import { useTranslation } from "react-i18next";
-
 import { useAuth } from "../../core/context/AuthContext";
 
 import PageShell from "../../components/common/PageShell";
-import ClockInOutCard from "./ClockInOutCard";
+import EmployeeHome from "./EmployeeHome";
 import ExceptionsCard from "./ExceptionsCard";
 import AdminOverviewCard from "./AdminOverviewCard";
 // KioskPinCard intentionally not rendered below - § live UX review,
@@ -31,7 +29,6 @@ import AdminOverviewCard from "./AdminOverviewCard";
 // SiteRepository - a rollup of existing data, not a new domain
 // concept.
 export default function DashboardPage() {
-  const { t } = useTranslation("dashboard");
   const { profile, hasPermission } = useAuth();
 
   // § user-directed, point 5 (2026-09-11) - "the Owner and Manager
@@ -49,14 +46,11 @@ export default function DashboardPage() {
   // title/subtitle above it was pure duplication and left an empty gap
   // before the real content. Only the plain Employee view (no rich
   // banner of its own) still needs PageShell's header.
+  // Owner 2026-10-19: the dashboard is for the Owner, Managers and
+  // Supervisors; everyone else gets their own light home page.
   return (
-    <PageShell
-      title={hasManagementScope ? undefined : t("title")}
-      subtitle={hasManagementScope || !profile ? undefined : t("welcomeMessage", { name: profile.fullName })}
-      compact
-    >
-      {hasManagementScope ? null : <ClockInOutCard />}
-      <AdminOverviewCard />
+    <PageShell compact>
+      {hasManagementScope ? <AdminOverviewCard /> : <EmployeeHome />}
       <ExceptionsCard />
     </PageShell>
   );

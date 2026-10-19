@@ -216,5 +216,25 @@
       "emergency": "Urgence",
       "other": "Autre"
     }
+  },
+  "employeeHome": {
+    "hoursTitle": "Mes heures",
+    "hoursUnit": "heures",
+    "periods": {
+      "today": "Aujourd'hui",
+      "week": "Cette semaine",
+      "month": "Ce mois-ci"
+    },
+    "linksTitle": "Mes relevés",
+    "links": {
+      "attendance": "Mes pointages",
+      "attendanceHint": "Toutes les entrées et sorties · PDF",
+      "allowances": "Mes indemnités",
+      "allowancesHint": "Saisir et suivre vos indemnités · PDF",
+      "timesheets": "Mes feuilles de temps",
+      "timesheetsHint": "Vérifier et envoyer · PDF",
+      "leave": "Mes congés",
+      "leaveHint": "Demander un congé et voir votre solde"
+    }
   }
 }

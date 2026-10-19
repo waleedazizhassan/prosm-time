@@ -44,5 +44,11 @@
     "clockIn": "Clock in: {{note}}",
     "clockOut": "Clock out: {{note}}",
     "earlyLeave": "Left early: {{reason}}"
-  }
+  },
+  "periods": {
+    "today": "Today",
+    "week": "This week",
+    "month": "This month"
+  },
+  "totalHours": "Total {{hours}} hours · {{count}} shifts"
 }
