@@ -208,6 +208,7 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "A REAL GPS SAMPLE IS REQUIRED": "realGpsSampleRequired",
   "Too many attempts. Please wait a few minutes and try again.": "tooManyAttempts",
   "YOU CAN ONLY ACT ON BEHALF OF PEOPLE BELOW YOUR ROLE": "onBehalfOnlyBelowRole",
+  "ONLY THE OWNER OR A MANAGER MAY ACT ON SOMEONE ELSES BEHALF": "onBehalfOwnerOrManagerOnly",
   "A FAKE LOCATION IS NOT ACCEPTED": "fakeLocationRejected",
   "CLOCK_IN_OUTSIDE_AREA_CONTACT_MANAGER": "clockInOutsideAreaContactManager",
   "THIS ALLOWANCE ENTRY IS ALREADY APPROVED": "allowanceAlreadyApproved",

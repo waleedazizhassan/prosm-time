@@ -169,7 +169,8 @@
     "allowanceAlreadyApproved": "Cette indemnité est déjà approuvée et ne peut plus être modifiée.",
     "ownerDoesNotClockIn": "Le propriétaire ne pointe pas - la présence est enregistrée pour le reste de l'équipe.",
     "nameRequired": "Veuillez saisir un nom.",
-    "noFreeWorkerNumber": "Impossible de créer un numéro pour l'instant. Veuillez réessayer."
+    "noFreeWorkerNumber": "Impossible de créer un numéro pour l'instant. Veuillez réessayer.",
+    "onBehalfOwnerOrManagerOnly": "Seuls le propriétaire ou un responsable peuvent pointer pour le compte de quelqu'un."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

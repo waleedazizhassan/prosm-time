@@ -169,7 +169,8 @@
     "allowanceAlreadyApproved": "Questa indennità è già approvata e non può più essere modificata.",
     "ownerDoesNotClockIn": "Il titolare non timbra - la presenza viene registrata per il resto del team.",
     "nameRequired": "Inserisci un nome.",
-    "noFreeWorkerNumber": "Impossibile creare un numero ora. Riprova."
+    "noFreeWorkerNumber": "Impossibile creare un numero ora. Riprova.",
+    "onBehalfOwnerOrManagerOnly": "Solo il titolare o un responsabile può timbrare per conto di qualcuno."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

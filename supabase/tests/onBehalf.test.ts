@@ -1,5 +1,6 @@
 // Audit 2026-10-12, item 4.4 - clock in/out on behalf only for people
-// below the caller's role. Migration 20261013150000.
+// below the caller's role (20261013150000), and only by the Owner or a
+// Manager (owner 2026-10-19, 20261019120000).
 import { beforeAll, describe, expect, it } from "vitest";
 
 import { buildDatabase, type TestDatabase } from "./support/db";
@@ -36,20 +37,35 @@ beforeAll(async () => {
   }
 });
 
-describe("on behalf only below the caller (audit 4.4)", () => {
-  it("refuses a supervisor clocking their manager in", async () => {
-    expect((await onBehalfIn(supervisor, manager)).error).toMatch(/BELOW YOUR ROLE/);
+describe("on behalf: Owner and Managers, only below them", () => {
+  it("refuses a supervisor, even one granted the permission individually", async () => {
+    expect((await onBehalfIn(supervisor, manager)).error).toMatch(/ONLY THE OWNER OR A MANAGER/);
+    expect((await onBehalfIn(supervisor, employee)).error).toMatch(/ONLY THE OWNER OR A MANAGER/);
+    expect((await onBehalfOut(supervisor, employee)).error).toMatch(/ONLY THE OWNER OR A MANAGER/);
   });
 
-  it("lets a supervisor clock an employee in and out", async () => {
-    expect((await onBehalfIn(supervisor, employee)).error).toBeNull();
-    expect((await onBehalfOut(supervisor, employee)).error).toBeNull();
+  it("does not give supervisors the on-behalf permissions by default", async () => {
+    const [row] = await t.su<{ n: number }>(
+      "select count(*)::int as n from role_default_permissions rdp join roles r on r.id = rdp.role_id join permissions p on p.id = rdp.permission_id where r.role_key = 'supervisor' and p.permission_key like 'attendance.clock_%_on_behalf'",
+    );
+    expect(row.n).toBe(0);
+  });
+
+  it("never lets anyone clock themselves in or out on their own behalf", async () => {
+    expect((await onBehalfIn(manager, manager)).error).toMatch(/BELOW YOUR ROLE/);
+    expect((await onBehalfOut(manager, manager)).error).toMatch(/BELOW YOUR ROLE/);
+    expect((await onBehalfIn(org.owner, org.owner)).error).toMatch(/BELOW YOUR ROLE|OWNER/);
+  });
+
+  it("lets a manager clock an employee in and out", async () => {
+    expect((await onBehalfIn(manager, employee)).error).toBeNull();
+    expect((await onBehalfOut(manager, employee)).error).toBeNull();
   });
 
   it("lets a manager act for a supervisor, and refuses the reverse clock-out", async () => {
     expect((await onBehalfIn(manager, supervisor)).error).toBeNull();
     expect((await onBehalfIn(org.owner, manager)).error).toBeNull();
-    expect((await onBehalfOut(supervisor, manager)).error).toMatch(/BELOW YOUR ROLE/);
+    expect((await onBehalfOut(supervisor, manager)).error).toMatch(/ONLY THE OWNER OR A MANAGER/);
     expect((await onBehalfOut(org.owner, manager)).error).toBeNull();
   });
 });

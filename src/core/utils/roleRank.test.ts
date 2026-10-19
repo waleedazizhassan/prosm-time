@@ -1,4 +1,5 @@
-// Audit 4.4 - the on-behalf list offers only people below the caller.
+// Audit 4.4 - the on-behalf list offers only people below the caller,
+// and only to the Owner or a Manager (owner 2026-10-19).
 import { describe, expect, it } from "vitest";
 
 import { canActOnBehalfOf } from "./roleRank";
@@ -12,7 +13,11 @@ describe("canActOnBehalfOf", () => {
   it("follows owner > manager > supervisor > employee", () => {
     expect(canActOnBehalfOf(supervisor, manager)).toBe(false);
     expect(canActOnBehalfOf(supervisor, supervisor)).toBe(false);
-    expect(canActOnBehalfOf(supervisor, employee)).toBe(true);
+    // Owner 2026-10-19: only the Owner or a Manager acts on someone's behalf.
+    expect(canActOnBehalfOf(supervisor, employee)).toBe(false);
+    expect(canActOnBehalfOf(manager, employee)).toBe(true);
+    // Never on one's own behalf (owner 2026-10-19).
+    expect(canActOnBehalfOf(manager, manager)).toBe(false);
     expect(canActOnBehalfOf(manager, supervisor)).toBe(true);
     expect(canActOnBehalfOf(manager, owner)).toBe(false);
     expect(canActOnBehalfOf(owner, manager)).toBe(true);

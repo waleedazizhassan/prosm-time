@@ -169,7 +169,8 @@
     "allowanceAlreadyApproved": "Dieser Zulageneintrag ist bereits genehmigt und kann nicht mehr geändert werden.",
     "ownerDoesNotClockIn": "Der Inhaber stempelt nicht ein oder aus - die Anwesenheit wird für das übrige Team erfasst.",
     "nameRequired": "Bitte einen Namen eingeben.",
-    "noFreeWorkerNumber": "Es konnte gerade keine Nummer erstellt werden. Bitte erneut versuchen."
+    "noFreeWorkerNumber": "Es konnte gerade keine Nummer erstellt werden. Bitte erneut versuchen.",
+    "onBehalfOwnerOrManagerOnly": "Nur der Inhaber oder ein Manager kann jemanden in dessen Namen ein- oder ausstempeln."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

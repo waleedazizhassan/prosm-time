@@ -169,7 +169,8 @@
     "allowanceAlreadyApproved": "This allowance entry is already approved and can no longer be changed.",
     "ownerDoesNotClockIn": "The Owner does not clock in or out - attendance is recorded for the rest of the team.",
     "nameRequired": "Please enter a name.",
-    "noFreeWorkerNumber": "Could not create a number right now. Please try again."
+    "noFreeWorkerNumber": "Could not create a number right now. Please try again.",
+    "onBehalfOwnerOrManagerOnly": "Only the Owner or a Manager can clock someone in or out on their behalf."
   },
   "pageLoad": {
     "title": "This page needs a connection",
