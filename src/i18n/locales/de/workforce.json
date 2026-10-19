@@ -1,0 +1,33 @@
+{
+  "addTitle": "Arbeiter hinzufügen",
+  "addHint": "Für Arbeiter ohne App-Konto (Subunternehmer, Tagelöhner). Die App erstellt für jeden eine 6-stellige Nummer; sie wird am Kiosk jedes Standorts zum Ein- und Ausstempeln eingegeben.",
+  "nameLabel": "Name",
+  "contractorLabel": "Subunternehmer (optional)",
+  "addAction": "Hinzufügen",
+  "addError": "Dieser Arbeiter konnte nicht hinzugefügt werden.",
+  "addedFor": "{{name}} wurde hinzugefügt. Kiosk-Nummer:",
+  "addedHint": "Geben Sie dem Arbeiter diese Nummer. Sie steht auch immer in der Liste unten.",
+  "copyAction": "Kopieren",
+  "copied": "Kopiert",
+  "listTitle": "Alle Arbeiter",
+  "empty": "Noch keine externen Arbeiter.",
+  "loadError": "Die Arbeiter konnten nicht geladen werden.",
+  "updateError": "Dieser Arbeiter konnte nicht aktualisiert werden.",
+  "columns": {
+    "name": "Name",
+    "number": "Kiosk-Nummer",
+    "contractor": "Subunternehmer",
+    "now": "Jetzt",
+    "status": "Status",
+    "actions": "Aktionen"
+  },
+  "atSite": "In {{site}}",
+  "status": {
+    "active": "Aktiv",
+    "inactive": "Inaktiv"
+  },
+  "clockOutAction": "Ausstempeln",
+  "deactivateAction": "Deaktivieren",
+  "activateAction": "Aktivieren",
+  "overrideReasonLabel": "Grund für das Ausstempeln"
+}

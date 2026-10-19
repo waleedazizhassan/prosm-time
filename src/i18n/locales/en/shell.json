@@ -148,7 +148,8 @@
     "reports": "Reports",
     "settings": "Settings",
     "integrations": "Integrations",
-    "help": "Help"
+    "help": "Help",
+    "workers": "Workers"
   },
   "sosOverlay": {
     "title": "SOS/Emergency alert",
@@ -242,7 +243,8 @@
     "adminClock": "Clock someone in or out",
     "settings": "Organisation-wide rules",
     "integrations": "Payroll and other systems",
-    "timesheets": "Hours for review and approval"
+    "timesheets": "Hours for review and approval",
+    "workers": "External workers and their kiosk numbers"
   },
   "backgroundDisclosure": {
     "title": "Location during your shift",

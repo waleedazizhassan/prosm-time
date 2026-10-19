@@ -13,7 +13,7 @@ describe("humanizeBackendError", () => {
   });
 
   it("maps an unknown worker number", () => {
-    expect(humanizeBackendError("KIOSK WORKER CLOCK IN FAILED: NO ACTIVE WORKER WITH THIS NUMBER AT THIS SITE", t)).toBe("This number is not registered at this site.");
+    expect(humanizeBackendError("KIOSK WORKER CLOCK IN FAILED: NO WORKER WITH THIS NUMBER", t)).toBe("This number is not registered.");
   });
 
   it("maps the attempt limit", () => {

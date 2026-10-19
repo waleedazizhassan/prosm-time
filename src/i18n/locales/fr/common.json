@@ -154,7 +154,7 @@
     "onlySubmitOwnTimesheet": "Vous ne pouvez soumettre que votre propre feuille de temps.",
     "mustBeClockedInToChangeSite": "Vous devez avoir pointé votre arrivée pour changer de site.",
     "mustBeClockedInToStartBreak": "Vous devez avoir pointé votre arrivée pour commencer une pause.",
-    "workerNumberNotRegistered": "Ce numéro n'est pas enregistré sur ce site.",
+    "workerNumberNotRegistered": "Ce numéro n'est pas enregistré.",
     "workerNotActive": "Ce travailleur n'est pas actif.",
     "workerAlreadyClockedIn": "Ce travailleur a déjà pointé son arrivée.",
     "workerNotClockedIn": "Ce travailleur n'a pas pointé son arrivée.",
@@ -167,7 +167,9 @@
     "clockInOutsideAreaContactManager": "Vous êtes en dehors de la zone de travail de ce site et ne pouvez pas pointer vous-même ici - contactez votre responsable pour enregistrer votre présence.",
     "networkProblem": "Impossible de joindre le serveur pour le moment. Vérifiez votre connexion et réessayez dans un instant.",
     "allowanceAlreadyApproved": "Cette indemnité est déjà approuvée et ne peut plus être modifiée.",
-    "ownerDoesNotClockIn": "Le propriétaire ne pointe pas - la présence est enregistrée pour le reste de l'équipe."
+    "ownerDoesNotClockIn": "Le propriétaire ne pointe pas - la présence est enregistrée pour le reste de l'équipe.",
+    "nameRequired": "Veuillez saisir un nom.",
+    "noFreeWorkerNumber": "Impossible de créer un numéro pour l'instant. Veuillez réessayer."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

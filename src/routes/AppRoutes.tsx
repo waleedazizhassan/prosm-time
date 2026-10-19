@@ -28,6 +28,7 @@ const PersonDetailPage = lazy(() => import("../modules/people/PersonDetailPage")
 const AdminOnBehalfPage = lazy(() => import("../modules/people/AdminOnBehalfPage"));
 const SitesPage = lazy(() => import("../modules/sites/SitesPage"));
 const SiteDetailPage = lazy(() => import("../modules/sites/SiteDetailPage"));
+const ExternalWorkersPage = lazy(() => import("../modules/workforce/ExternalWorkersPage"));
 const ManagerConsolePage = lazy(() => import("../modules/manager/ManagerConsolePage"));
 const AttendanceLogPage = lazy(() => import("../modules/attendance/AttendanceLogPage"));
 const TimesheetsPage = lazy(() => import("../modules/timesheets/TimesheetsPage"));
@@ -120,6 +121,7 @@ export default function AppRoutes() {
             <Route path="/admin-clock" element={<AdminOnBehalfPage />} />
             <Route path="/sites" element={<SitesPage />} />
             <Route path="/sites/:siteId" element={<SiteDetailPage />} />
+            <Route path="/workers" element={<ExternalWorkersPage />} />
             <Route path="/manager" element={<ManagerConsolePage />} />
             <Route path="/attendance" element={<AttendanceLogPage />} />
             <Route path="/timesheets" element={<TimesheetsPage />} />

@@ -1,0 +1,33 @@
+{
+  "addTitle": "Add a worker",
+  "addHint": "For workers without an app account (contractors, day labour). The app creates a 6-digit number for each worker; they type it at the kiosk of any site to clock in and out.",
+  "nameLabel": "Worker name",
+  "contractorLabel": "Contractor (optional)",
+  "addAction": "Add worker",
+  "addError": "Unable to add this worker.",
+  "addedFor": "{{name}} was added. Their kiosk number:",
+  "addedHint": "Give this number to the worker. You can always see it in the list below.",
+  "copyAction": "Copy",
+  "copied": "Copied",
+  "listTitle": "All workers",
+  "empty": "No external workers yet.",
+  "loadError": "Unable to load the workers.",
+  "updateError": "Unable to update this worker.",
+  "columns": {
+    "name": "Name",
+    "number": "Kiosk number",
+    "contractor": "Contractor",
+    "now": "Now",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  "atSite": "At {{site}}",
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "clockOutAction": "Clock out",
+  "deactivateAction": "Deactivate",
+  "activateAction": "Activate",
+  "overrideReasonLabel": "Reason for clocking this worker out"
+}

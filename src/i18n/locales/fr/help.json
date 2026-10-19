@@ -40,7 +40,7 @@
     },
     "kiosk": {
       "title": "Mode kiosque",
-      "body": "Ouvrez le mode kiosque et choisissez un site pour faire d'une tablette ou d'un ordinateur partagé son écran de pointage. Tant que le kiosque est ouvert, l'appareil y est verrouillé : pas de menu, les autres pages et le bouton retour ramènent au kiosque, et le quitter exige le mot de passe du compte qui l'a ouvert. Employés : choisissez votre nom et saisissez votre code PIN personnel. Après 5 codes erronés en 15 minutes, la connexion de cette personne est suspendue 30 minutes. Main-d'œuvre : les sous-traitants saisissent leur numéro à 6 chiffres."
+      "body": "Ouvrez le mode Borne depuis le menu latéral et choisissez un site pour transformer une tablette ou un ordinateur partagé en écran de pointage pour les intervenants externes (personnes sans compte dans l'application - toute personne ayant un compte pointe depuis l'application). L'intervenant saisit le numéro à 6 chiffres créé pour lui par l'application dans la page Intervenants externes, puis appuie sur Pointer l'entrée ou la sortie ; l'écran revient au clavier après chaque action. Tant que la borne est ouverte, l'appareil y est verrouillé : pas de menu, les autres pages et le bouton retour ramènent à la borne, et en sortir demande le mot de passe du compte qui l'a ouverte (bouton Quitter la borne)."
     },
     "reportsCenter": {
       "title": "Centre de rapports",
@@ -49,6 +49,10 @@
     "sites": {
       "title": "Sites (administrateurs)",
       "body": "Ici sont créés les sites et affectées les personnes : nom, adresse, coordonnées GPS et rayon, fuseau horaire, mode kiosque, et exigences de présence, de zone ou de photo. À l'affectation, le rôle sur le site part du rôle dans l'organisation - un manager ou superviseur devient responsable du site. Le reste se règle dans Paramètres ; le formulaire du site y renvoie."
+    },
+    "workers": {
+      "title": "Intervenants externes",
+      "body": "La page Intervenants externes (dans le menu latéral, pour le propriétaire et quiconque gère des sites) sert à ajouter les personnes qui travaillent pour vous sans compte dans l'application - sous-traitants ou journaliers. Saisissez le nom (et le sous-traitant, le cas échéant) et appuyez sur Ajouter : l'application crée le numéro à 6 chiffres et l'affiche pour que vous puissiez le copier et le lui donner. Les intervenants appartiennent à toute l'organisation, pas à un site : ils pointent avec leur numéro sur la borne de n'importe quel site, et la liste indique où chacun est pointé en ce moment. Vous pouvez pointer la sortie de quelqu'un qui a oublié (avec un motif) et désactiver un intervenant - un numéro désactivé ne fonctionne plus sur la borne."
     },
     "settingsCenter": {
       "title": "Paramètres (propriétaire)",

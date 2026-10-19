@@ -105,7 +105,7 @@
     "projectsHint": "Projets sur ce site. Les employés doivent être assignés à un projet avant de pouvoir le sélectionner lors de la présence.",
     "addProjectAction": "Ajouter un projet",
     "noProjects": "Aucun projet sur ce site pour le moment.",
-    "workforceTitle": "Main-d'œuvre (sous-traitants)",
+    "workforceTitle": "Intervenants externes",
     "workforceHint": "Travailleurs sous-traitants externes - pas des employés PROSM Time. Chacun reçoit un numéro à 6 chiffres, qui seul sert à pointer l'arrivée/le départ au Kiosque de ce site (sans photo, sans code PIN séparé).",
     "noWorkforce": "Aucune main-d'œuvre ajoutée sur ce site pour le moment.",
     "workerNameLabel": "Nom du travailleur",
@@ -131,7 +131,9 @@
       "confirm": "Enregistrer le projet",
       "genericError": "Impossible d'enregistrer ce projet."
     },
-    "manageProjectAssignmentsAction": "Gérer les assignations"
+    "manageProjectAssignmentsAction": "Gérer les assignations",
+    "workforceMovedHint": "Les intervenants externes sont désormais ajoutés une seule fois pour toute l'organisation, dans la page Intervenants externes. Chacun reçoit un numéro à 6 chiffres créé par l'application et pointe avec lui sur la borne de ce site ou de tout autre.",
+    "workforceOpenAction": "Ouvrir Intervenants externes"
   },
   "projectAssignments": {
     "title": "Assignations du projet",

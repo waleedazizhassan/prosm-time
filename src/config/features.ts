@@ -6,4 +6,8 @@ export const FEATURES = {
   // existing API keys - used by PROSM Projects and PROSM Finance - keep
   // working; only managing keys from the app is hidden.
   integrations: false,
+  // Owner 2026-10-18: people with an app account clock in from the app;
+  // the kiosk is for external workers only. Hides the kiosk's employee
+  // roster + PIN and the kiosk PIN settings (the server side is unchanged).
+  employeeKiosk: false,
 } as const;

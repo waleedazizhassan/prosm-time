@@ -32,6 +32,7 @@ export default function HelpPage() {
     "kiosk",
     "reportsCenter",
     "sites",
+    "workers",
     "settingsCenter",
     // "payrollIntegration" removed 2026-09-15 along with QuickBooks
     // itself (user-directed - PROSM Finance now computes payroll

@@ -105,7 +105,7 @@
     "projectsHint": "Projects at this site. Employees must be assigned to a project before they can select it during attendance.",
     "addProjectAction": "Add project",
     "noProjects": "No projects at this site yet.",
-    "workforceTitle": "Workforce (Contractors)",
+    "workforceTitle": "External workers",
     "workforceHint": "External contractor workers - not PROSM Time employees. Each gets a 6-digit number, which alone is used to clock in/out at this site's Kiosk (no photo, no separate PIN).",
     "noWorkforce": "No workforce added at this site yet.",
     "workerNameLabel": "Worker name",
@@ -131,7 +131,9 @@
       "confirm": "Save project",
       "genericError": "Unable to save this project."
     },
-    "manageProjectAssignmentsAction": "Manage assignments"
+    "manageProjectAssignmentsAction": "Manage assignments",
+    "workforceMovedHint": "External workers are now added once for the whole organisation, on the Workers page. Each gets a 6-digit number made by the app and can clock in and out with it at this site's kiosk or any other.",
+    "workforceOpenAction": "Open Workers"
   },
   "projectAssignments": {
     "title": "Project assignments",

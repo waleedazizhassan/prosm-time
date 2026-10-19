@@ -1,0 +1,33 @@
+{
+  "addTitle": "Ajouter un intervenant",
+  "addHint": "Pour les personnes sans compte dans l'application (sous-traitants, journaliers). L'application crée un numéro à 6 chiffres pour chacun ; il le saisit sur la borne de n'importe quel site pour pointer.",
+  "nameLabel": "Nom",
+  "contractorLabel": "Sous-traitant (facultatif)",
+  "addAction": "Ajouter",
+  "addError": "Impossible d'ajouter cet intervenant.",
+  "addedFor": "{{name}} a été ajouté. Son numéro de borne :",
+  "addedHint": "Donnez ce numéro à l'intervenant. Il reste visible dans la liste ci-dessous.",
+  "copyAction": "Copier",
+  "copied": "Copié",
+  "listTitle": "Tous les intervenants",
+  "empty": "Aucun intervenant externe pour l'instant.",
+  "loadError": "Impossible de charger les intervenants.",
+  "updateError": "Impossible de modifier cet intervenant.",
+  "columns": {
+    "name": "Nom",
+    "number": "Numéro de borne",
+    "contractor": "Sous-traitant",
+    "now": "Maintenant",
+    "status": "Statut",
+    "actions": "Actions"
+  },
+  "atSite": "À {{site}}",
+  "status": {
+    "active": "Actif",
+    "inactive": "Inactif"
+  },
+  "clockOutAction": "Pointer la sortie",
+  "deactivateAction": "Désactiver",
+  "activateAction": "Activer",
+  "overrideReasonLabel": "Motif du pointage de sortie"
+}

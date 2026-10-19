@@ -154,7 +154,7 @@
     "onlySubmitOwnTimesheet": "Puoi inviare solo il tuo foglio ore.",
     "mustBeClockedInToChangeSite": "Devi aver timbrato l'entrata per cambiare sito.",
     "mustBeClockedInToStartBreak": "Devi aver timbrato l'entrata per iniziare una pausa.",
-    "workerNumberNotRegistered": "Questo numero non è registrato in questa sede.",
+    "workerNumberNotRegistered": "Questo numero non è registrato.",
     "workerNotActive": "Questo lavoratore non è attivo.",
     "workerAlreadyClockedIn": "Questo lavoratore ha già timbrato l'entrata.",
     "workerNotClockedIn": "Questo lavoratore non ha timbrato l'entrata.",
@@ -167,7 +167,9 @@
     "clockInOutsideAreaContactManager": "Sei fuori dall'area di lavoro di questa sede e non puoi timbrare da solo qui - contatta il tuo responsabile per registrare la presenza.",
     "networkProblem": "Al momento non riusciamo a raggiungere il server. Controlla la connessione e riprova tra poco.",
     "allowanceAlreadyApproved": "Questa indennità è già approvata e non può più essere modificata.",
-    "ownerDoesNotClockIn": "Il titolare non timbra - la presenza viene registrata per il resto del team."
+    "ownerDoesNotClockIn": "Il titolare non timbra - la presenza viene registrata per il resto del team.",
+    "nameRequired": "Inserisci un nome.",
+    "noFreeWorkerNumber": "Impossibile creare un numero ora. Riprova."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

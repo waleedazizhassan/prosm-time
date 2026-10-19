@@ -40,7 +40,7 @@
     },
     "kiosk": {
       "title": "Modalità chiosco",
-      "body": "Apri la modalità chiosco e scegli una sede per trasformare un tablet o computer condiviso nella sua schermata di timbratura. Finché il chiosco è aperto, il dispositivo vi è bloccato: niente menu, le altre pagine e il tasto indietro riportano al chiosco, e per uscire serve la password dell'account che l'ha aperto. Dipendenti: scegli il tuo nome e inserisci il PIN personale. Dopo 5 PIN errati in 15 minuti, l'accesso di quella persona è sospeso per 30 minuti. Forza lavoro: i collaboratori inseriscono il loro numero di 6 cifre."
+      "body": "Apri la modalità Chiosco dalla barra laterale e scegli una sede per trasformare un tablet o un computer condiviso nella schermata di timbratura per i lavoratori esterni (persone senza account nell'app - chi ha un account timbra dall'app). Il lavoratore digita il numero a 6 cifre creato per lui dall'app nella pagina Lavoratori esterni, poi tocca Timbra entrata o uscita; dopo ogni azione la schermata torna al tastierino. Finché il chiosco è aperto il dispositivo è bloccato su di esso: nessun menu, le altre pagine e il tasto indietro riportano al chiosco, e per uscire serve la password dell'account che lo ha aperto (pulsante Esci dal chiosco)."
     },
     "reportsCenter": {
       "title": "Centro report",
@@ -49,6 +49,10 @@
     "sites": {
       "title": "Sedi (amministratori)",
       "body": "Qui si creano le sedi e si assegnano le persone: nome, indirizzo, coordinate GPS e raggio, fuso orario, modalità chiosco e requisiti di presenza, area o foto. All'assegnazione, il ruolo nella sede parte dal ruolo nell'organizzazione - manager o supervisore diventano responsabili della sede. Il resto si imposta in Impostazioni; il modulo della sede vi rimanda."
+    },
+    "workers": {
+      "title": "Lavoratori esterni",
+      "body": "La pagina Lavoratori esterni (nella barra laterale, per il titolare e chi gestisce le sedi) serve ad aggiungere chi lavora per te senza un account nell'app - subappaltatori o giornalieri. Inserisci il nome (e il subappaltatore, se c'è) e premi Aggiungi: l'app crea il numero a 6 cifre e lo mostra perché tu possa copiarlo e consegnarlo. I lavoratori appartengono a tutta l'organizzazione, non a una sede: timbrano con il loro numero al chiosco di qualsiasi sede, e l'elenco mostra dove ciascuno è timbrato ora. Puoi timbrare l'uscita di chi l'ha dimenticata (con un motivo) e disattivare un lavoratore - un numero disattivato non funziona più al chiosco."
     },
     "settingsCenter": {
       "title": "Impostazioni (titolare)",

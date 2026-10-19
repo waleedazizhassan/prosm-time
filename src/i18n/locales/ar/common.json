@@ -154,7 +154,7 @@
     "onlySubmitOwnTimesheet": "يمكنك إرسال كشف دوامك الخاص فقط.",
     "mustBeClockedInToChangeSite": "يجب أن تكون مسجلاً حضورك لتغيير الموقع.",
     "mustBeClockedInToStartBreak": "يجب أن تكون مسجلاً حضورك لبدء استراحة.",
-    "workerNumberNotRegistered": "الرقم غير مسجل في هذا الموقع.",
+    "workerNumberNotRegistered": "هذا الرقم غير مسجّل.",
     "workerNotActive": "هذا العامل غير نشط.",
     "workerAlreadyClockedIn": "هذا العامل مسجل حضوره بالفعل.",
     "workerNotClockedIn": "هذا العامل غير مسجل حضوره.",
@@ -167,7 +167,9 @@
     "clockInOutsideAreaContactManager": "أنت خارج نطاق موقع العمل، ولا يمكنك تسجيل حضورك بنفسك هنا - من فضلك تواصل مع مديرك لتسجيل حضورك.",
     "networkProblem": "مش قادرين نوصل للخادم دلوقتي. اتأكد من الإنترنت وجرّب تاني بعد لحظات.",
     "allowanceAlreadyApproved": "تم اعتماد إدخال البدلات هذا، ولم يعد من الممكن تعديله.",
-    "ownerDoesNotClockIn": "المالك لا يسجّل حضوراً أو انصرافاً؛ الحضور يُسجَّل لبقية الفريق."
+    "ownerDoesNotClockIn": "المالك لا يسجّل حضوراً أو انصرافاً؛ الحضور يُسجَّل لبقية الفريق.",
+    "nameRequired": "من فضلك اكتب الاسم.",
+    "noFreeWorkerNumber": "تعذّر إنشاء رقم الآن. حاول مرة أخرى."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

@@ -154,7 +154,7 @@
     "onlySubmitOwnTimesheet": "You may only submit your own timesheet.",
     "mustBeClockedInToChangeSite": "You must be clocked in to change site.",
     "mustBeClockedInToStartBreak": "You must be clocked in to start a break.",
-    "workerNumberNotRegistered": "This number is not registered at this site.",
+    "workerNumberNotRegistered": "This number is not registered.",
     "workerNotActive": "This worker is not active.",
     "workerAlreadyClockedIn": "This worker is already clocked in.",
     "workerNotClockedIn": "This worker is not clocked in.",
@@ -167,7 +167,9 @@
     "clockInOutsideAreaContactManager": "You are outside this site's work area, so you can't clock in yourself here - please contact your manager to register your attendance.",
     "networkProblem": "We can't reach the server right now. Check your connection and try again in a moment.",
     "allowanceAlreadyApproved": "This allowance entry is already approved and can no longer be changed.",
-    "ownerDoesNotClockIn": "The Owner does not clock in or out - attendance is recorded for the rest of the team."
+    "ownerDoesNotClockIn": "The Owner does not clock in or out - attendance is recorded for the rest of the team.",
+    "nameRequired": "Please enter a name.",
+    "noFreeWorkerNumber": "Could not create a number right now. Please try again."
   },
   "pageLoad": {
     "title": "This page needs a connection",

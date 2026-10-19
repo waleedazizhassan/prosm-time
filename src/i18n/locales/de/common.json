@@ -154,7 +154,7 @@
     "onlySubmitOwnTimesheet": "Sie können nur Ihre eigene Zeiterfassung einreichen.",
     "mustBeClockedInToChangeSite": "Sie müssen eingestempelt sein, um den Standort zu wechseln.",
     "mustBeClockedInToStartBreak": "Sie müssen eingestempelt sein, um eine Pause zu beginnen.",
-    "workerNumberNotRegistered": "Diese Nummer ist an diesem Standort nicht registriert.",
+    "workerNumberNotRegistered": "Diese Nummer ist nicht registriert.",
     "workerNotActive": "Diese Arbeitskraft ist nicht aktiv.",
     "workerAlreadyClockedIn": "Diese Arbeitskraft ist bereits eingestempelt.",
     "workerNotClockedIn": "Diese Arbeitskraft ist nicht eingestempelt.",
@@ -167,7 +167,9 @@
     "clockInOutsideAreaContactManager": "Sie sind außerhalb des Arbeitsbereichs dieses Standorts und können hier nicht selbst einstempeln - bitte wenden Sie sich an Ihre Führungskraft.",
     "networkProblem": "Der Server ist gerade nicht erreichbar. Prüfen Sie Ihre Verbindung und versuchen Sie es gleich noch einmal.",
     "allowanceAlreadyApproved": "Dieser Zulageneintrag ist bereits genehmigt und kann nicht mehr geändert werden.",
-    "ownerDoesNotClockIn": "Der Inhaber stempelt nicht ein oder aus - die Anwesenheit wird für das übrige Team erfasst."
+    "ownerDoesNotClockIn": "Der Inhaber stempelt nicht ein oder aus - die Anwesenheit wird für das übrige Team erfasst.",
+    "nameRequired": "Bitte einen Namen eingeben.",
+    "noFreeWorkerNumber": "Es konnte gerade keine Nummer erstellt werden. Bitte erneut versuchen."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

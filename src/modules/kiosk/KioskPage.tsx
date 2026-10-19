@@ -8,6 +8,7 @@ import SiteWorkerRepository from "../../core/repositories/SiteWorkerRepository";
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
+import { FEATURES } from "../../config/features";
 
 import PageShell from "../../components/common/PageShell";
 import Button from "../../components/common/Button";
@@ -45,8 +46,8 @@ export default function KioskPage() {
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
 
-  const [mode, setMode] = useState<Mode>("employees");
-  const [screen, setScreen] = useState<Screen>("roster");
+  const [mode, setMode] = useState<Mode>(FEATURES.employeeKiosk ? "employees" : "workforce");
+  const [screen, setScreen] = useState<Screen>(FEATURES.employeeKiosk ? "roster" : "keypad");
   const [selectedEmployee, setSelectedEmployee] = useState<KioskRosterEntry | null>(null);
   const [pin, setPin] = useState("");
   const [workerNumber, setWorkerNumber] = useState("");
@@ -63,7 +64,11 @@ export default function KioskPage() {
     if (!siteId) return;
     setLoading(true);
     setLoadError("");
-    const [siteResult, rosterResult] = await Promise.all([SiteRepository.getSite(siteId), KioskRepository.getRoster(siteId)]);
+    // Workers-only kiosk (FEATURES.employeeKiosk off): no employee roster to load.
+    const [siteResult, rosterResult] = await Promise.all([
+      SiteRepository.getSite(siteId),
+      FEATURES.employeeKiosk ? KioskRepository.getRoster(siteId) : Promise.resolve({ success: true as const, data: [] as KioskRosterEntry[], message: null }),
+    ]);
     if (!siteResult.success || !siteResult.data) {
       setLoadError(humanizeBackendError(siteResult.message, t) ?? t("loadError"));
     } else {
@@ -243,6 +248,7 @@ export default function KioskPage() {
         <p className={styles.siteName}>{site.name}</p>
         <p className={styles.clock}>{now.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit", second: "2-digit" })}</p>
         <p className={styles.dateLine}>{now.toLocaleDateString(undefined, { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</p>
+        {FEATURES.employeeKiosk ? (
         <div className={styles.modeSwitch}>
           <button type="button" className={`${styles.modeButton} ${mode === "employees" ? styles.modeButtonActive : ""}`} onClick={() => handleSwitchMode("employees")}>
             {t("modeEmployees")}
@@ -251,6 +257,7 @@ export default function KioskPage() {
             {t("modeWorkforce")}
           </button>
         </div>
+        ) : null}
       </div>
 
       {mode === "employees" && screen === "roster" ? (

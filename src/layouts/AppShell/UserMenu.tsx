@@ -11,6 +11,7 @@ import { useCalendar, setCalendarSystem, type CalendarSystem } from "../../core/
 import { useUpdateCheck } from "../../core/hooks/useUpdateCheck";
 import { LANGUAGES } from "../../i18n/languages";
 import UserRepository from "../../core/repositories/UserRepository";
+import { FEATURES } from "../../config/features";
 import sidebarStyles from "./Sidebar.module.css";
 import styles from "./UserMenu.module.css";
 
@@ -241,6 +242,9 @@ export default function UserMenu({ collapsed }: { collapsed: boolean }) {
               <option value="light">{t("theme.light")}</option>
               <option value="system">{t("theme.system")}</option>
             </select>
+            {/* Hidden while the kiosk is for external workers only (FEATURES.employeeKiosk). */}
+            {FEATURES.employeeKiosk ? (
+            <>
             <label className={styles.languageLabel} htmlFor="userMenuKioskPin">
               {t("kioskPinLabel")}
             </label>
@@ -268,6 +272,8 @@ export default function UserMenu({ collapsed }: { collapsed: boolean }) {
             </div>
             {kioskPinError ? <span className={styles.avatarError}>{kioskPinError}</span> : null}
             {kioskPinMessage ? <span className={styles.email}>{kioskPinMessage}</span> : null}
+            </>
+            ) : null}
             <label className={styles.languageLabel} htmlFor="userMenuCalendar">
               {t("calendarLabel")}
             </label>

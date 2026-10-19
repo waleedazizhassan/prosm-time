@@ -40,7 +40,7 @@
     },
     "kiosk": {
       "title": "Kioskmodus",
-      "body": "Öffnen Sie den Kioskmodus und wählen Sie einen Standort, um ein gemeinsames Tablet oder einen Computer zu dessen Stempelbildschirm zu machen. Solange der Kiosk geöffnet ist, ist das Gerät darauf gesperrt: kein Menü, andere Seiten und die Zurück-Taste führen zum Kiosk zurück, und zum Verlassen ist das Passwort des Kontos nötig, das ihn geöffnet hat. Mitarbeiter: Namen wählen und persönliche Kiosk-PIN eingeben. Nach 5 falschen PINs in 15 Minuten wird die Anmeldung dieser Person für 30 Minuten gesperrt. Arbeitskräfte: Auftragnehmer geben ihre 6-stellige Nummer ein."
+      "body": "Öffnen Sie den Kiosk-Modus in der Seitenleiste und wählen Sie einen Standort, um ein gemeinsames Tablet oder einen Computer zum Stempel-Bildschirm für externe Arbeiter zu machen (Personen ohne App-Konto - wer ein Konto hat, stempelt in der App). Der Arbeiter gibt die 6-stellige Nummer ein, die die App auf der Seite „Externe Arbeiter“ für ihn erstellt hat, und tippt auf Einstempeln oder Ausstempeln; danach kehrt der Bildschirm zum Ziffernfeld zurück. Solange der Kiosk geöffnet ist, ist das Gerät darauf gesperrt: kein Menü, andere Seiten und die Zurück-Taste führen zum Kiosk zurück, und zum Verlassen ist das Passwort des Kontos nötig, das ihn geöffnet hat (Schaltfläche Kiosk beenden)."
     },
     "reportsCenter": {
       "title": "Berichtszentrale",
@@ -49,6 +49,10 @@
     "sites": {
       "title": "Standorte (Administratoren)",
       "body": "Hier werden Standorte eingerichtet und Personen zugewiesen: Name, Adresse, GPS-Koordinaten und Radius, Zeitzone, Kioskmodus sowie ob Anwesenheit, Geofence oder Foto erforderlich sind. Bei der Zuweisung beginnt die Rolle am Standort mit der Rolle in der Organisation - Manager und Supervisor werden Standortleiter. Das übrige Verhalten steht in den Einstellungen; das Standortformular verlinkt dorthin."
+    },
+    "workers": {
+      "title": "Externe Arbeiter",
+      "body": "Auf der Seite „Externe Arbeiter“ (in der Seitenleiste, für den Inhaber und alle, die Standorte verwalten) fügen Sie Personen hinzu, die ohne App-Konto für Sie arbeiten - Subunternehmer oder Tagelöhner. Name (und ggf. Subunternehmer) eingeben und Hinzufügen drücken: Die App erstellt die 6-stellige Nummer und zeigt sie zum Kopieren an. Arbeiter gehören zur ganzen Organisation, nicht zu einem Standort: Sie stempeln mit ihrer Nummer am Kiosk jedes Standorts, und die Liste zeigt, wo jeder gerade eingestempelt ist. Sie können jemanden (mit Begründung) ausstempeln, der es vergessen hat, und einen Arbeiter deaktivieren - eine deaktivierte Nummer funktioniert am Kiosk nicht mehr."
     },
     "settingsCenter": {
       "title": "Einstellungen (Inhaber)",

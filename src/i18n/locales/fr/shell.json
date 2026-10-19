@@ -148,7 +148,8 @@
     "reports": "Rapports",
     "settings": "Paramètres",
     "integrations": "Intégrations",
-    "help": "Aide"
+    "help": "Aide",
+    "workers": "Intervenants externes"
   },
   "sosOverlay": {
     "title": "Alerte SOS/Urgence",
@@ -242,7 +243,8 @@
     "adminClock": "Pointer à la place de quelqu'un",
     "settings": "Règles de toute l'organisation",
     "integrations": "Paie et autres systèmes",
-    "timesheets": "Heures à vérifier et approuver"
+    "timesheets": "Heures à vérifier et approuver",
+    "workers": "Intervenants externes et leur numéro de borne"
   },
   "backgroundDisclosure": {
     "title": "Position pendant votre poste",

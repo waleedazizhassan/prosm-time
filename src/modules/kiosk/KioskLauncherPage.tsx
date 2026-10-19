@@ -13,6 +13,7 @@ import ListRow from "../../components/common/ListRow";
 import checkInRemoteIllustration from "../../assets/illustration-checkin-remote.webp";
 import kioskHeaderImage from "../../assets/illustrations/kiosk.svg";
 import PageBanner from "../../components/common/PageBanner";
+import { FEATURES } from "../../config/features";
 
 // PROSM Time - § user-directed: bring Kiosk Mode back into the
 // sidebar (it was reachable only by a direct /kiosk/:siteId URL,
@@ -56,7 +57,7 @@ export default function KioskLauncherPage() {
       </Card>
 
       <p style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)", lineHeight: 1.6, margin: "var(--space-3) var(--space-2) 0" }}>
-        {t("launcher.explainer")}
+        {t(FEATURES.employeeKiosk ? "launcher.explainer" : "launcher.explainerWorkers")}
       </p>
     </PageShell>
   );

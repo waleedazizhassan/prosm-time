@@ -105,7 +105,7 @@
     "projectsHint": "Projekte an diesem Standort. Mitarbeiter müssen einem Projekt zugewiesen sein, bevor sie es während der Anwesenheitserfassung auswählen können.",
     "addProjectAction": "Projekt hinzufügen",
     "noProjects": "An diesem Standort gibt es noch keine Projekte.",
-    "workforceTitle": "Belegschaft (Subunternehmer)",
+    "workforceTitle": "Externe Arbeiter",
     "workforceHint": "Externe Subunternehmer-Arbeiter - keine PROSM-Time-Mitarbeiter. Jeder erhält eine 6-stellige Nummer, die allein zum Ein-/Ausstempeln am Kiosk dieses Standorts dient (kein Foto, keine separate PIN).",
     "noWorkforce": "An diesem Standort wurde noch keine Belegschaft hinzugefügt.",
     "workerNameLabel": "Name des Arbeiters",
@@ -131,7 +131,9 @@
       "confirm": "Projekt speichern",
       "genericError": "Dieses Projekt konnte nicht gespeichert werden."
     },
-    "manageProjectAssignmentsAction": "Zuweisungen verwalten"
+    "manageProjectAssignmentsAction": "Zuweisungen verwalten",
+    "workforceMovedHint": "Externe Arbeiter werden jetzt einmal für die ganze Organisation auf der Seite „Externe Arbeiter“ angelegt. Jeder erhält eine 6-stellige Nummer von der App und stempelt damit am Kiosk dieses oder jedes anderen Standorts.",
+    "workforceOpenAction": "Externe Arbeiter öffnen"
   },
   "projectAssignments": {
     "title": "Projektzuweisungen",

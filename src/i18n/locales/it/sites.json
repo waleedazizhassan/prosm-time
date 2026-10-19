@@ -105,7 +105,7 @@
     "projectsHint": "Progetti in questa sede. I dipendenti devono essere assegnati a un progetto prima di poterlo selezionare durante la presenza.",
     "addProjectAction": "Aggiungi progetto",
     "noProjects": "Nessun progetto in questa sede ancora.",
-    "workforceTitle": "Manodopera (subappaltatori)",
+    "workforceTitle": "Lavoratori esterni",
     "workforceHint": "Lavoratori subappaltatori esterni - non dipendenti PROSM Time. Ognuno riceve un numero a 6 cifre, che da solo serve per timbrare entrata/uscita al Kiosk di questa sede (senza foto, senza PIN separato).",
     "noWorkforce": "Nessuna manodopera aggiunta in questa sede ancora.",
     "workerNameLabel": "Nome del lavoratore",
@@ -131,7 +131,9 @@
       "confirm": "Salva progetto",
       "genericError": "Impossibile salvare questo progetto."
     },
-    "manageProjectAssignmentsAction": "Gestisci assegnazioni"
+    "manageProjectAssignmentsAction": "Gestisci assegnazioni",
+    "workforceMovedHint": "I lavoratori esterni ora si aggiungono una sola volta per tutta l'organizzazione, nella pagina Lavoratori esterni. Ognuno riceve un numero a 6 cifre creato dall'app e timbra con esso al chiosco di questa o di qualsiasi altra sede.",
+    "workforceOpenAction": "Apri Lavoratori esterni"
   },
   "projectAssignments": {
     "title": "Assegnazioni del progetto",

@@ -148,7 +148,8 @@
     "reports": "Berichte",
     "settings": "Einstellungen",
     "integrations": "Integrationen",
-    "help": "Hilfe"
+    "help": "Hilfe",
+    "workers": "Externe Arbeiter"
   },
   "sosOverlay": {
     "title": "SOS-/Notfallalarm",
@@ -242,7 +243,8 @@
     "adminClock": "Jemanden ein- oder ausstempeln",
     "settings": "Regeln für die ganze Organisation",
     "integrations": "Lohnabrechnung und andere Systeme",
-    "timesheets": "Stunden zur Prüfung und Freigabe"
+    "timesheets": "Stunden zur Prüfung und Freigabe",
+    "workers": "Externe Arbeiter und ihre Kiosk-Nummern"
   },
   "backgroundDisclosure": {
     "title": "Standort während Ihrer Schicht",

@@ -199,6 +199,9 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "THIS EMPLOYEE ALREADY HAS AN OVERLAPPING SHIFT ON THIS DATE": "shiftOverlap",
   // Kiosk workforce keypad and attempt limit (audit 4.1).
   "NO ACTIVE WORKER WITH THIS NUMBER AT THIS SITE": "workerNumberNotRegistered",
+  "NO WORKER WITH THIS NUMBER": "workerNumberNotRegistered",
+  "A NAME IS REQUIRED": "nameRequired",
+  "NO FREE WORKER NUMBER - PLEASE TRY AGAIN": "noFreeWorkerNumber",
   "THIS WORKER IS NOT ACTIVE": "workerNotActive",
   "THIS WORKER IS ALREADY CLOCKED IN": "workerAlreadyClockedIn",
   "THIS WORKER IS NOT CURRENTLY CLOCKED IN": "workerNotClockedIn",

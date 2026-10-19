@@ -10,6 +10,7 @@ import KioskRepository from "../../core/repositories/KioskRepository";
 import LeaveRepository from "../../core/repositories/LeaveRepository";
 import PayRateRepository, { type PayRate, type PayRateType } from "../../core/repositories/PayRateRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
+import { FEATURES } from "../../config/features";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
@@ -435,7 +436,8 @@ export default function PersonDetailPage() {
         )}
       </Card>
 
-      {canManageDevices ? (
+      {/* Hidden while the kiosk is for external workers only (FEATURES.employeeKiosk). */}
+      {canManageDevices && FEATURES.employeeKiosk ? (
         <Card title={t("detail.kioskPinTitle")}>
           <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.kioskPinHint")}</p>
           <ErrorText>{kioskPinError}</ErrorText>

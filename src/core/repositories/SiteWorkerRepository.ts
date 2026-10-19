@@ -16,6 +16,18 @@ export interface SiteWorker {
   createdAt: string;
 }
 
+// Owner 2026-10-18/19: external workers belong to the organisation (no site);
+// the app generates their number.
+export interface ExternalWorker {
+  id: string;
+  fullName: string;
+  workerNumber: string;
+  contractorName: string | null;
+  status: "active" | "inactive";
+  currentSiteName: string | null;
+  clockedInAt: string | null;
+}
+
 export interface SiteWorkerAttendanceRow {
   id: string;
   workerName: string;
@@ -156,6 +168,48 @@ class SiteWorkerRepository {
       return createSuccess({ entryId: data.data.entryId, workerName: data.data.workerName });
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Kiosk service unavailable.");
+    }
+  }
+
+  async listExternal(): Promise<ServiceResult<ExternalWorker[]>> {
+    try {
+      const { data, error } = await this.client.rpc("list_prosm_time_external_workers");
+      if (error) return createError(error.message);
+      return createSuccess(
+        ((data ?? []) as Array<{ id: string; full_name: string; worker_number: string; contractor_name: string | null; status: "active" | "inactive"; current_site_name: string | null; clocked_in_at: string | null }>).map((row) => ({
+          id: row.id,
+          fullName: row.full_name,
+          workerNumber: row.worker_number,
+          contractorName: row.contractor_name,
+          status: row.status,
+          currentSiteName: row.current_site_name,
+          clockedInAt: row.clocked_in_at,
+        })),
+      );
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Workforce service unavailable.");
+    }
+  }
+
+  async createExternal(fullName: string, contractorName: string | null): Promise<ServiceResult<{ workerId: string; workerNumber: string }>> {
+    try {
+      const { data, error } = await this.client.rpc("create_prosm_time_external_worker", { p_full_name: fullName, p_contractor_name: contractorName });
+      if (error) return createError(error.message);
+      if (data?.success === false) return createError("Unable to add this worker.");
+      return createSuccess({ workerId: data.workerId, workerNumber: data.workerNumber });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Workforce service unavailable.");
+    }
+  }
+
+  async updateExternal(workerId: string, fullName: string, contractorName: string | null, status: "active" | "inactive"): Promise<ServiceResult> {
+    try {
+      const { data, error } = await this.client.rpc("update_prosm_time_external_worker", { p_worker_id: workerId, p_full_name: fullName, p_contractor_name: contractorName, p_status: status });
+      if (error) return createError(error.message);
+      if (data?.success === false) return createError("Unable to update this worker.");
+      return createSuccess();
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Workforce service unavailable.");
     }
   }
 }

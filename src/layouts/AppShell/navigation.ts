@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, MonitorSmartphone, UserCog, LogIn, Plug } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, MonitorSmartphone, UserCog, LogIn, Plug, HardHat } from "lucide-react";
 
 import { FEATURES } from "../../config/features";
 
@@ -99,6 +99,8 @@ const ALL_NAV_ITEMS: NavItem[] = [
   { id: "emergencyLog", labelKey: "items.emergencyLog", path: "/emergency-log", icon: Siren, requiredPermission: "attendance.view", section: "attendance" },
   { id: "people", labelKey: "items.people", path: "/people", icon: Users, requiredPermission: "employees.view", section: "people" },
   { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage", section: "people" },
+  // Owner 2026-10-18/19: external workers for the whole organisation (app-generated kiosk numbers).
+  { id: "workers", labelKey: "items.workers", path: "/workers", icon: HardHat, requiredPermission: "sites.manage", section: "people" },
   // §22: "Employee reviews their period" - self-access to one's own
   // timesheets needs no special permission (same as Dashboard), so
   // this nav item is visible to every authenticated org member; the

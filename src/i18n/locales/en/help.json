@@ -40,7 +40,7 @@
     },
     "kiosk": {
       "title": "Kiosk Mode",
-      "body": "Open Kiosk Mode from the sidebar and pick a site to turn a shared tablet or computer into its clock-in screen. While the kiosk is open the device is locked to it: there's no menu, other pages and the back button lead back to the kiosk, and leaving needs the password of the account that opened it (the Exit kiosk button). The Employees tab: pick your name and enter your personal kiosk PIN (separate from your password; set it from the user menu, or a manager can set it from People). After 5 wrong PINs in 15 minutes, that person's kiosk sign-in pauses for 30 minutes. The Workforce tab: contractors type their own 6-digit number. Both tabs return to the start after each action."
+      "body": "Open Kiosk Mode from the sidebar and pick a site to turn a shared tablet or computer into its clock-in screen for external workers (people without an app account - everyone with an account clocks in from the app). The worker types the 6-digit number the app made for them on the Workers page, then taps Clock in or Clock out; the screen returns to the keypad after each action. While the kiosk is open the device is locked to it: there's no menu, other pages and the back button lead back to the kiosk, and leaving needs the password of the account that opened it (the Exit kiosk button)."
     },
     "reportsCenter": {
       "title": "Reports Center",
@@ -49,6 +49,10 @@
     "sites": {
       "title": "Sites (Administrators)",
       "body": "Sites is where work sites are set up and people are assigned: name, address, GPS coordinates and radius, time zone, kiosk mode, and whether attendance, geofence or a photo are required. When you assign someone, their role at the site starts from their organisation role - a Manager or Supervisor becomes the site's manager, so they see its people. The rest of a site's behaviour is in Settings; the site form has an \"Open this site's settings\" link."
+    },
+    "workers": {
+      "title": "External Workers",
+      "body": "Workers (in the sidebar, for the Owner and anyone who manages sites) is where you add people who work for you without an app account - contractors or day labour. Type the name (and the contractor, if any) and press Add: the app creates the worker's 6-digit number and shows it so you can copy it and give it to them. Workers belong to the whole organisation, not to one site: they clock in and out with their number at the kiosk of any site, and the list shows where each one is clocked in right now. You can force a clock-out (with a reason) if someone forgot, and deactivate a worker - a deactivated number stops working at the kiosk."
     },
     "settingsCenter": {
       "title": "Settings (Owner)",

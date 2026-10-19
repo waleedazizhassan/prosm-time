@@ -1,0 +1,33 @@
+{
+  "addTitle": "Aggiungi un lavoratore",
+  "addHint": "Per chi non ha un account nell'app (subappaltatori, giornalieri). L'app crea un numero a 6 cifre per ciascuno; lo digita al chiosco di qualsiasi sede per timbrare.",
+  "nameLabel": "Nome",
+  "contractorLabel": "Subappaltatore (facoltativo)",
+  "addAction": "Aggiungi",
+  "addError": "Impossibile aggiungere questo lavoratore.",
+  "addedFor": "{{name}} è stato aggiunto. Il suo numero per il chiosco:",
+  "addedHint": "Consegna questo numero al lavoratore. Resta sempre visibile nell'elenco qui sotto.",
+  "copyAction": "Copia",
+  "copied": "Copiato",
+  "listTitle": "Tutti i lavoratori",
+  "empty": "Nessun lavoratore esterno.",
+  "loadError": "Impossibile caricare i lavoratori.",
+  "updateError": "Impossibile aggiornare questo lavoratore.",
+  "columns": {
+    "name": "Nome",
+    "number": "Numero chiosco",
+    "contractor": "Subappaltatore",
+    "now": "Ora",
+    "status": "Stato",
+    "actions": "Azioni"
+  },
+  "atSite": "A {{site}}",
+  "status": {
+    "active": "Attivo",
+    "inactive": "Inattivo"
+  },
+  "clockOutAction": "Timbra uscita",
+  "deactivateAction": "Disattiva",
+  "activateAction": "Attiva",
+  "overrideReasonLabel": "Motivo della timbratura di uscita"
+}
