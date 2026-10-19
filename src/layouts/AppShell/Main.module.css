@@ -20,3 +20,22 @@
     overflow: visible;
   }
 }
+
+/* Owner 2026-10-19: Privacy Policy and Terms of Use at the bottom of every page. */
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: auto;
+  padding: var(--space-4) var(--space-4) var(--space-5, 20px);
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+@media print {
+  .footer {
+    display: none;
+  }
+}
