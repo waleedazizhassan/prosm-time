@@ -72,7 +72,7 @@
     },
     "permissions": {
       "title": "Permissions and Clocking On Behalf (Administrators)",
-      "body": "Each person's page under People shows their permissions and lets an authorised administrator grant, revoke or reset one, with a reason. The Owner has every permission. Clocking in or out on someone's behalf is allowed only for people below your role (manager > supervisor > employee); the Owner can do it for anyone. The action is recorded as yours."
+      "body": "Each person's page under People shows their permissions; whoever may change them can grant, revoke or reset one, with a reason. The Owner has every permission and can give any of them to anyone below. A Manager can give a Supervisor at their own sites a permission the Manager holds, and take it back. Approving leave and clocking someone in or out on their behalf are for the Owner and Managers only - never for oneself, and only for people below you at the sites you manage. Every change is recorded with who made it."
     },
     "desktopApp": {
       "title": "Windows Desktop App",

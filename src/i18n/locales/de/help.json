@@ -72,7 +72,7 @@
     },
     "permissions": {
       "title": "Berechtigungen und Stempeln im Auftrag (Administratoren)",
-      "body": "Die Seite jeder Person unter Personen zeigt ihre Berechtigungen; ein befugter Administrator kann sie mit Begründung erteilen, entziehen oder zurücksetzen. Der Inhaber hat alle Berechtigungen. Im Auftrag stempeln ist nur für Personen unterhalb Ihrer Rolle erlaubt (Manager > Supervisor > Mitarbeiter); der Inhaber für alle. Die Aktion wird Ihnen zugeordnet."
+      "body": "Die Seite jeder Person unter Personen zeigt ihre Berechtigungen; wer sie ändern darf, kann eine mit Begründung vergeben, entziehen oder zurücksetzen. Der Inhaber hat alle Berechtigungen und kann jede davon an jeden unter ihm vergeben. Ein Manager kann einem Supervisor an seinen Standorten eine Berechtigung geben, die er selbst hat, und sie wieder entziehen. Urlaub genehmigen und jemanden in dessen Namen ein- oder ausstempeln dürfen nur der Inhaber und Manager - nie für sich selbst und nur für Personen unter ihnen an ihren Standorten. Jede Änderung wird mit ihrem Urheber festgehalten."
     },
     "desktopApp": {
       "title": "Windows-Desktop-App",

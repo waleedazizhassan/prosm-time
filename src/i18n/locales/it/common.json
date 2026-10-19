@@ -171,7 +171,10 @@
     "nameRequired": "Inserisci un nome.",
     "noFreeWorkerNumber": "Impossibile creare un numero ora. Riprova.",
     "onBehalfOwnerOrManagerOnly": "Solo il titolare o un responsabile può timbrare per conto di qualcuno.",
-    "workerKioskOwnerOrManager": "Solo il titolare o il responsabile di questa sede può usare il chiosco dei lavoratori esterni."
+    "workerKioskOwnerOrManager": "Solo il titolare o il responsabile di questa sede può usare il chiosco dei lavoratori esterni.",
+    "delegationSupervisorsOnly": "Un responsabile può modificare solo i permessi dei supervisori delle sue sedi.",
+    "delegationOwnPermissionsOnly": "Puoi trasmettere solo i permessi che hai.",
+    "permissionForManagersOnly": "Questo permesso è solo per i responsabili."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

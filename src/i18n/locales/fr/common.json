@@ -171,7 +171,10 @@
     "nameRequired": "Veuillez saisir un nom.",
     "noFreeWorkerNumber": "Impossible de créer un numéro pour l'instant. Veuillez réessayer.",
     "onBehalfOwnerOrManagerOnly": "Seuls le propriétaire ou un responsable peuvent pointer pour le compte de quelqu'un.",
-    "workerKioskOwnerOrManager": "Seuls le propriétaire ou le responsable de ce site peuvent utiliser la borne des intervenants externes."
+    "workerKioskOwnerOrManager": "Seuls le propriétaire ou le responsable de ce site peuvent utiliser la borne des intervenants externes.",
+    "delegationSupervisorsOnly": "Un responsable ne peut modifier que les autorisations des superviseurs de ses sites.",
+    "delegationOwnPermissionsOnly": "Vous ne pouvez transmettre que les autorisations que vous avez.",
+    "permissionForManagersOnly": "Cette autorisation est réservée aux responsables."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

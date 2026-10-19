@@ -26,6 +26,8 @@ import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
 import AdminAttendanceCard from "./AdminAttendanceCard";
 
+const MANAGER_ONLY_PERMISSIONS = ["leave.approve", "attendance.clock_in_on_behalf", "attendance.clock_out_on_behalf"];
+
 interface PendingChange {
   permission: Permission;
   action: "grant" | "revoke" | "reset";
@@ -94,7 +96,18 @@ export default function PersonDetailPage() {
   const [removeSubmitting, setRemoveSubmitting] = useState(false);
   const [removeError, setRemoveError] = useState("");
 
-  const canManagePermissions = hasPermission("permissions.assign");
+  // Owner 2026-10-19: the Owner (or a permissions.assign holder) changes
+  // anyone's permissions; a Manager changes a Supervisor's at their sites,
+  // passing on only what the Manager holds. Leave approval and acting on
+  // someone's behalf go to Managers only. The server enforces the same.
+  const assignsAll = hasPermission("permissions.assign");
+  const delegates = !assignsAll && profile?.roleKey === "manager" && member?.roleKey === "supervisor";
+  const canManagePermissions = assignsAll || delegates;
+  const canChangePermission = (key: string) => {
+    if (MANAGER_ONLY_PERMISSIONS.includes(key) && member?.roleKey !== "manager") return false;
+    if (!delegates) return true;
+    return hasPermission(key) && !["permissions.assign", "administrators.manage"].includes(key);
+  };
   const canManageDevices = hasPermission("employees.manage_accounts");
   // § live UX review, user-directed - "requires a reason, and is
   // Owner-only authority" - deliberately not a permission flag like
@@ -384,6 +397,7 @@ export default function PersonDetailPage() {
                     </div>
                     <StatusBadge status={isGranted ? "active" : "neutral"}>{isGranted ? t("detail.grantedLabel") : t("detail.notGrantedLabel")}</StatusBadge>
                   </div>
+                  {canChangePermission(permission.permissionKey) ? (
                   <div style={{ display: "flex", gap: "var(--space-2)" }}>
                     {!isGranted ? (
                       <Button variant="ghost" size="xs" onClick={() => openChange(permission, "grant")}>
@@ -400,6 +414,7 @@ export default function PersonDetailPage() {
                       </Button>
                     ) : null}
                   </div>
+                  ) : null}
                 </ListRow>
               );
             })

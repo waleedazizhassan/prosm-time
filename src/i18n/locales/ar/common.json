@@ -171,7 +171,10 @@
     "nameRequired": "من فضلك اكتب الاسم.",
     "noFreeWorkerNumber": "تعذّر إنشاء رقم الآن. حاول مرة أخرى.",
     "onBehalfOwnerOrManagerOnly": "تسجيل الحضور أو الانصراف بالنيابة عن شخص آخر للمالك والمدير فقط.",
-    "workerKioskOwnerOrManager": "كشك العمالة الخارجية يشغّله المالك أو مدير الموقع فقط."
+    "workerKioskOwnerOrManager": "كشك العمالة الخارجية يشغّله المالك أو مدير الموقع فقط.",
+    "delegationSupervisorsOnly": "المدير يغيّر صلاحيات المشرفين في مواقعه فقط.",
+    "delegationOwnPermissionsOnly": "تقدر تمنح الصلاحيات اللي معاك بس.",
+    "permissionForManagersOnly": "الصلاحية دي للمديرين فقط."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

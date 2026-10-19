@@ -72,7 +72,7 @@
     },
     "permissions": {
       "title": "Autorisations et pointage pour autrui (administrateurs)",
-      "body": "La page de chaque personne sous Personnes montre ses autorisations ; un administrateur habilité peut en accorder, retirer ou réinitialiser avec un motif. Le propriétaire a toutes les autorisations. Pointer pour quelqu'un n'est permis que pour les personnes d'un rôle inférieur au vôtre (manager > superviseur > employé) ; le propriétaire pour tous. L'action est enregistrée à votre nom."
+      "body": "La page de chaque personne dans Personnes affiche ses autorisations ; qui peut les modifier peut en accorder, retirer ou réinitialiser une, avec un motif. Le propriétaire a toutes les autorisations et peut en donner à toute personne en dessous de lui. Un responsable peut donner à un superviseur de ses sites une autorisation qu'il possède, et la retirer. Approuver les congés et pointer pour le compte de quelqu'un sont réservés au propriétaire et aux responsables - jamais pour soi-même, et seulement pour les personnes en dessous de soi sur ses sites. Chaque modification est enregistrée avec son auteur."
     },
     "desktopApp": {
       "title": "Application de bureau Windows",

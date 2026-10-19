@@ -171,7 +171,10 @@
     "nameRequired": "Bitte einen Namen eingeben.",
     "noFreeWorkerNumber": "Es konnte gerade keine Nummer erstellt werden. Bitte erneut versuchen.",
     "onBehalfOwnerOrManagerOnly": "Nur der Inhaber oder ein Manager kann jemanden in dessen Namen ein- oder ausstempeln.",
-    "workerKioskOwnerOrManager": "Nur der Inhaber oder der Manager dieses Standorts kann den Kiosk für externe Arbeiter betreiben."
+    "workerKioskOwnerOrManager": "Nur der Inhaber oder der Manager dieses Standorts kann den Kiosk für externe Arbeiter betreiben.",
+    "delegationSupervisorsOnly": "Ein Manager kann nur die Berechtigungen der Supervisoren an seinen Standorten ändern.",
+    "delegationOwnPermissionsOnly": "Sie können nur Berechtigungen weitergeben, die Sie selbst haben.",
+    "permissionForManagersOnly": "Diese Berechtigung ist nur für Manager."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

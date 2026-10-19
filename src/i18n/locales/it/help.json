@@ -72,7 +72,7 @@
     },
     "permissions": {
       "title": "Permessi e timbratura per conto (amministratori)",
-      "body": "La pagina di ogni persona in Persone mostra i suoi permessi; un amministratore autorizzato può concederli, revocarli o reimpostarli con un motivo. Il titolare ha tutti i permessi. Timbrare per conto di altri è consentito solo per ruoli inferiori al tuo (manager > supervisore > dipendente); il titolare per tutti. L'azione è registrata a tuo nome."
+      "body": "La pagina di ogni persona in Persone mostra i suoi permessi; chi può modificarli può concederne, revocarne o ripristinarne uno, con un motivo. Il titolare ha tutti i permessi e può darne qualsiasi a chiunque sotto di lui. Un responsabile può dare a un supervisore delle sue sedi un permesso che possiede, e toglierlo. Approvare le ferie e timbrare per conto di qualcuno sono solo per il titolare e i responsabili - mai per se stessi, e solo per le persone sotto di sé nelle sedi che gestiscono. Ogni modifica viene registrata con il suo autore."
     },
     "desktopApp": {
       "title": "App desktop per Windows",

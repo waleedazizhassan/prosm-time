@@ -214,6 +214,9 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "CLOCK_IN_OUTSIDE_AREA_CONTACT_MANAGER": "clockInOutsideAreaContactManager",
   "THIS ALLOWANCE ENTRY IS ALREADY APPROVED": "allowanceAlreadyApproved",
   "THE OWNER DOES NOT CLOCK IN OR OUT": "ownerDoesNotClockIn",
+  "A MANAGER MAY ONLY CHANGE THE PERMISSIONS OF SUPERVISORS AT THEIR SITES": "delegationSupervisorsOnly",
+  "A MANAGER MAY ONLY PASS ON PERMISSIONS THEY HOLD": "delegationOwnPermissionsOnly",
+  "THIS PERMISSION IS FOR MANAGERS ONLY": "permissionForManagersOnly",
   // Offline replays (audit 1.4).
   "OFFLINE TIME IS BEFORE YOUR LAST RECORDED ACTION": "offlineTimeBeforeLastAction",
   "OFFLINE TIME FALLS ON A DAY OF APPROVED LEAVE": "offlineTimeOnLeaveDay",

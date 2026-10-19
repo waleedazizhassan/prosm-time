@@ -171,7 +171,10 @@
     "nameRequired": "Please enter a name.",
     "noFreeWorkerNumber": "Could not create a number right now. Please try again.",
     "onBehalfOwnerOrManagerOnly": "Only the Owner or a Manager can clock someone in or out on their behalf.",
-    "workerKioskOwnerOrManager": "Only the Owner or this site's manager can run the workers' kiosk."
+    "workerKioskOwnerOrManager": "Only the Owner or this site's manager can run the workers' kiosk.",
+    "delegationSupervisorsOnly": "A Manager can change the permissions of Supervisors at their own sites only.",
+    "delegationOwnPermissionsOnly": "You can only pass on permissions you hold yourself.",
+    "permissionForManagersOnly": "This permission is for Managers only."
   },
   "pageLoad": {
     "title": "This page needs a connection",
