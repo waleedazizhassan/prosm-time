@@ -92,16 +92,20 @@ export default function SchedulePage() {
   }, [loadMine]);
 
   useEffect(() => {
-    if (!canManage) return;
-    SiteRepository.listSites().then((result) => {
-      const list = result.success ? result.data ?? [] : [];
+    if (!canManage || !profileId) return;
+    // Only the sites the caller may schedule: every site for the Owner,
+    // otherwise the sites they manage (the server allows no other).
+    Promise.all([SiteRepository.listSites(), profile?.isOwner ? null : SiteRepository.listManagedSiteIds(profileId)]).then(([result, managed]) => {
+      const all = result.success ? result.data ?? [] : [];
+      const managedIds = managed && managed.success ? new Set(managed.data ?? []) : null;
+      const list = profile?.isOwner ? all : all.filter((site) => managedIds?.has(site.id));
       setSites(list);
       setSelectedSiteId((current) => current || list[0]?.id || "");
     });
     EmployeeRepository.listOrganizationMembers().then((result) => {
       setMembers(result.success ? result.data ?? [] : []);
     });
-  }, [canManage]);
+  }, [canManage, profileId, profile?.isOwner]);
 
   const loadSiteData = useCallback(async () => {
     if (!canManage || !selectedSiteId) return;

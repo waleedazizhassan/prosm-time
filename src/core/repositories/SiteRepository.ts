@@ -351,6 +351,18 @@ class SiteRepository {
     }
   }
 
+  // Sites the given user manages (role_at_site = 'manager') - a Manager's
+  // or Supervisor's authority is limited to these (20261019110000).
+  async listManagedSiteIds(userId: string): Promise<ServiceResult<string[]>> {
+    try {
+      const { data, error } = await this.client.from("site_assignments").select("site_id").eq("user_id", userId).eq("role_at_site", "manager");
+      if (error) return createError(error.message);
+      return createSuccess((data ?? []).map((row: { site_id: string }) => row.site_id));
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Site service unavailable.");
+    }
+  }
+
   async listSiteAssignments(siteId: string): Promise<ServiceResult<SiteAssignment[]>> {
     try {
       const { data, error } = await this.client
