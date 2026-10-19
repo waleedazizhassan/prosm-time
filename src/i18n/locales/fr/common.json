@@ -170,7 +170,8 @@
     "ownerDoesNotClockIn": "Le propriétaire ne pointe pas - la présence est enregistrée pour le reste de l'équipe.",
     "nameRequired": "Veuillez saisir un nom.",
     "noFreeWorkerNumber": "Impossible de créer un numéro pour l'instant. Veuillez réessayer.",
-    "onBehalfOwnerOrManagerOnly": "Seuls le propriétaire ou un responsable peuvent pointer pour le compte de quelqu'un."
+    "onBehalfOwnerOrManagerOnly": "Seuls le propriétaire ou un responsable peuvent pointer pour le compte de quelqu'un.",
+    "workerKioskOwnerOrManager": "Seuls le propriétaire ou le responsable de ce site peuvent utiliser la borne des intervenants externes."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

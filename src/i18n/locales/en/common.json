@@ -170,7 +170,8 @@
     "ownerDoesNotClockIn": "The Owner does not clock in or out - attendance is recorded for the rest of the team.",
     "nameRequired": "Please enter a name.",
     "noFreeWorkerNumber": "Could not create a number right now. Please try again.",
-    "onBehalfOwnerOrManagerOnly": "Only the Owner or a Manager can clock someone in or out on their behalf."
+    "onBehalfOwnerOrManagerOnly": "Only the Owner or a Manager can clock someone in or out on their behalf.",
+    "workerKioskOwnerOrManager": "Only the Owner or this site's manager can run the workers' kiosk."
   },
   "pageLoad": {
     "title": "This page needs a connection",

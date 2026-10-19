@@ -20,7 +20,6 @@ import Textarea from "../../components/common/Textarea";
 import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
 import { formatTimeOnly, formatDateOnly } from "../../core/utils/formatDate";
-import allCaughtUpIllustration from "../../assets/illustration-all-caught-up.webp";
 import managerConsoleHeaderImage from "../../assets/illustrations/manager.svg";
 import PageBanner from "../../components/common/PageBanner";
 
@@ -88,21 +87,23 @@ export default function ManagerConsolePage() {
   const [revokeError, setRevokeError] = useState("");
 
   const canManageExceptions = hasPermission("exceptions.manage");
+  // Owner 2026-10-19: approving leave is its own permission (Managers and the Owner).
+  const canApproveLeave = hasPermission("leave.approve");
 
   const load = useCallback(async () => {
     setLoading(true);
     const [attendanceResult, pendingResult, pendingLeaveResult, approvedLeaveResult] = await Promise.all([
       ManagerRepository.listTodayAttendance(),
       ManagerRepository.listPendingReview(),
-      canManageExceptions ? LeaveRepository.listPendingReview() : Promise.resolve({ success: true, message: null, data: [] as PendingLeaveReviewRow[] }),
-      canManageExceptions ? LeaveRepository.listApproved() : Promise.resolve({ success: true, message: null, data: [] as ApprovedLeaveRow[] }),
+      canApproveLeave ? LeaveRepository.listPendingReview() : Promise.resolve({ success: true, message: null, data: [] as PendingLeaveReviewRow[] }),
+      canApproveLeave ? LeaveRepository.listApproved() : Promise.resolve({ success: true, message: null, data: [] as ApprovedLeaveRow[] }),
     ]);
     setAttendance(attendanceResult.success ? attendanceResult.data ?? [] : []);
     setPendingItems(pendingResult.success ? pendingResult.data ?? [] : []);
     setPendingLeave(pendingLeaveResult.success ? pendingLeaveResult.data ?? [] : []);
     setApprovedLeave(approvedLeaveResult.success ? approvedLeaveResult.data ?? [] : []);
     setLoading(false);
-  }, [canManageExceptions]);
+  }, [canApproveLeave]);
 
   useEffect(() => {
     load();
@@ -300,7 +301,7 @@ export default function ManagerConsolePage() {
       <Card title={t("pending.title")}>
         <ErrorText>{error}</ErrorText>
         {pendingItems.length === 0 ? (
-          <EmptyState message={t("pending.empty")} illustrationSrc={allCaughtUpIllustration} />
+          <EmptyState message={t("pending.empty")} />
         ) : (
           pendingItems.map((item) => (
             <ListRow key={`${item.kind}-${item.id}`}>
@@ -352,7 +353,7 @@ export default function ManagerConsolePage() {
         <Textarea label={t("pending.notesLabel")} name="reviewNotes" value={reviewNotes} onChange={(event) => setReviewNotes(event.target.value)} disabled={Boolean(submitting)} />
       </Modal>
 
-      {canManageExceptions ? (
+      {canApproveLeave ? (
         <Card title={t("leave.title")}>
           {pendingLeave.length === 0 ? (
             <EmptyState message={t("leave.empty")} />
@@ -404,7 +405,7 @@ export default function ManagerConsolePage() {
         <ErrorText>{leaveError}</ErrorText>
       </Modal>
 
-      {canManageExceptions ? (
+      {canApproveLeave ? (
         <Card title={t("leave.revokeTitle")}>
           <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("leave.revokeHint")}</p>
           {approvedLeave.length === 0 ? (

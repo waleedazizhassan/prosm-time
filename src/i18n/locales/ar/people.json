@@ -37,7 +37,8 @@
     "settings.manage": "إدارة الإعدادات",
     "sites.manage": "إدارة المواقع",
     "timesheets.approve": "اعتماد كشوف الدوام",
-    "timesheets.generate": "توليد كشوف الدوام"
+    "timesheets.generate": "توليد كشوف الدوام",
+    "leave.approve": "الموافقة على الإجازات"
   },
   "invite": {
     "actionLabel": "دعوة موظف",
@@ -98,7 +99,10 @@
     "payRateHint": "بيانات تعويضات تُستخدم في حساب تكلفة العمالة داخل بروسم فايننس. تحديد راتب جديد يحتفظ بالقديم في السجل بتواريخه الخاصة - لا يتم حذف التاريخ أبدًا.",
     "payRateCurrent": "الحالي: {{amount}} {{currency}} ({{type}})",
     "payRateTypeLabel": "نوع الراتب",
-    "payRateType": { "HOURLY": "بالساعة", "MONTHLY": "شهري" },
+    "payRateType": {
+      "HOURLY": "بالساعة",
+      "MONTHLY": "شهري"
+    },
     "payRateAmountLabel": "المبلغ",
     "payRateAction": "حفظ",
     "payRateError": "تعذر تحديد راتب هذا الموظف.",

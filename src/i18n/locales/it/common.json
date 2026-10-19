@@ -170,7 +170,8 @@
     "ownerDoesNotClockIn": "Il titolare non timbra - la presenza viene registrata per il resto del team.",
     "nameRequired": "Inserisci un nome.",
     "noFreeWorkerNumber": "Impossibile creare un numero ora. Riprova.",
-    "onBehalfOwnerOrManagerOnly": "Solo il titolare o un responsabile può timbrare per conto di qualcuno."
+    "onBehalfOwnerOrManagerOnly": "Solo il titolare o un responsabile può timbrare per conto di qualcuno.",
+    "workerKioskOwnerOrManager": "Solo il titolare o il responsabile di questa sede può usare il chiosco dei lavoratori esterni."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

@@ -37,7 +37,8 @@
     "settings.manage": "Gestisci impostazioni",
     "sites.manage": "Gestisci sedi",
     "timesheets.approve": "Approva fogli ore",
-    "timesheets.generate": "Genera fogli ore"
+    "timesheets.generate": "Genera fogli ore",
+    "leave.approve": "Approvare le ferie"
   },
   "invite": {
     "actionLabel": "Invita dipendente",
@@ -98,7 +99,10 @@
     "payRateHint": "Dati retributivi usati per il calcolo del costo del lavoro in PROSM Finance. Impostare una nuova tariffa mantiene quella precedente nello storico con le proprie date di validità - lo storico non viene mai sovrascritto.",
     "payRateCurrent": "Attuale: {{amount}} {{currency}} ({{type}})",
     "payRateTypeLabel": "Tipo di tariffa",
-    "payRateType": { "HOURLY": "Oraria", "MONTHLY": "Mensile" },
+    "payRateType": {
+      "HOURLY": "Oraria",
+      "MONTHLY": "Mensile"
+    },
     "payRateAmountLabel": "Importo",
     "payRateAction": "Salva",
     "payRateError": "Impossibile impostare la tariffa salariale di questo dipendente.",

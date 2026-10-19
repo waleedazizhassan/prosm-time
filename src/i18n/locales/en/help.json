@@ -40,7 +40,7 @@
     },
     "kiosk": {
       "title": "Kiosk Mode",
-      "body": "Open Kiosk Mode from the sidebar and pick a site to turn a shared tablet or computer into its clock-in screen for external workers (people without an app account - everyone with an account clocks in from the app). The worker types the 6-digit number the app made for them on the Workers page, then taps Clock in or Clock out; the screen returns to the keypad after each action. While the kiosk is open the device is locked to it: there's no menu, other pages and the back button lead back to the kiosk, and leaving needs the password of the account that opened it (the Exit kiosk button)."
+      "body": "Open Kiosk Mode from the sidebar and pick a site to turn a shared tablet or computer into its clock-in screen for external workers (people without an app account - everyone with an account clocks in from the app). The worker types the 6-digit number the app made for them on the Workers page, then taps Clock in or Clock out; the screen returns to the keypad after each action. While the kiosk is open the device is locked to it: there's no menu, other pages and the back button lead back to the kiosk, and leaving needs the password of the account that opened it (the Exit kiosk button). Kiosk Mode is opened by the Owner, or by a Manager for a site they manage."
     },
     "reportsCenter": {
       "title": "Reports Center",
@@ -60,7 +60,7 @@
     },
     "leave": {
       "title": "Leave (PTO)",
-      "body": "Request time off from the Leave page - pick a type (Annual, Sick, Unpaid, Emergency, Other), a date range and an optional reason (please don't include unnecessary health details). Only Annual leave tracks an entitled/used/remaining balance (21 days a year by default; the Owner can change an employee's entitlement from People). An employee's request goes to their site's manager (and the Owner); a manager's request goes to the Owner. Leave can't be approved over days that already have attendance. Approved leave counts toward your timesheet."
+      "body": "Request time off from the Leave page - pick a type (Annual, Sick, Unpaid, Emergency, Other), a date range and an optional reason (please don't include unnecessary health details). Only Annual leave tracks an entitled/used/remaining balance (21 days a year by default; the Owner can change an employee's entitlement from People). An employee's request goes to their site's manager (and the Owner); a manager's request goes to the Owner. Leave can't be approved over days that already have attendance. Approved leave counts toward your timesheet. Only the Owner and Managers approve leave: a Manager decides only for the people at the sites they manage, never for their own leave."
     },
     "schedule": {
       "title": "Shift Roster",

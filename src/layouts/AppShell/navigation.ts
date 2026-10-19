@@ -37,6 +37,8 @@ export interface NavItem {
   // authenticated member, same as requiredPermission: null already
   // means for this one item).
   hiddenFromOwner?: boolean;
+  // Owner 2026-10-19: shown only to the Owner and Managers (e.g. the workers' kiosk).
+  ownerOrManagerOnly?: boolean;
   // § live UX review, user-directed - "Menu" screen reference material
   // grouped its items under labeled sections rather than one flat
   // list. Pure presentational grouping of the exact same items/
@@ -89,7 +91,7 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // navigation). Open to every authenticated member, same reasoning as
   // Attendance Record above - the real identity check inside kiosk mode
   // is the PIN, not who launched the screen.
-  { id: "kiosk", labelKey: "items.kiosk", path: "/kiosk", icon: MonitorSmartphone, requiredPermission: null, section: "attendance" },
+  { id: "kiosk", labelKey: "items.kiosk", path: "/kiosk", icon: MonitorSmartphone, requiredPermission: null, ownerOrManagerOnly: true, section: "attendance" },
   // § live UX review, user-directed - a real Emergency Log for SOS
   // alerts (exact GPS location, time, employee, site), reached from
   // both the sidebar and the notification bell/siren overlay. Gated on

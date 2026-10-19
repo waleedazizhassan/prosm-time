@@ -66,16 +66,17 @@ describe("authority limited to the people a manager manages", () => {
     expect(await timesheetsSeen(readOnly)).toEqual(expect.arrayContaining([employeeA.userId, employeeB.userId]));
   });
 
-  it("lets a supervisor review leave only for people below them at their sites", async () => {
+  // Leave approval is its own permission since 20261019130000 (Managers and the Owner).
+  it("lets a manager review leave only for people below them at their sites", async () => {
     const leaveA = await requestLeave(employeeA);
     const leaveB = await requestLeave(employeeB);
-    const queue = ((await t.as<{ user_id: string }>(supervisorA.authId, "select user_id from public.list_prosm_time_pending_leave_requests()")).rows ?? []).map((row) => row.user_id);
+    const queue = ((await t.as<{ user_id: string }>(managerA.authId, "select user_id from public.list_prosm_time_pending_leave_requests()")).rows ?? []).map((row) => row.user_id);
     expect(queue).toEqual([employeeA.userId]);
-    expect((await reviewLeave(supervisorA, leaveB)).error).toMatch(/YOU DO NOT MANAGE THIS EMPLOYEES SITE/);
-    expect((await reviewLeave(supervisorA, leaveA)).error).toBeNull();
-    // A peer or someone above: not the supervisor's to decide.
+    expect((await reviewLeave(managerA, leaveB)).error).toMatch(/YOU DO NOT MANAGE THIS EMPLOYEES SITE/);
+    expect((await reviewLeave(managerA, leaveA)).error).toBeNull();
+    // Their own leave: not theirs to decide.
     const managerLeave = await requestLeave(managerA);
-    expect((await reviewLeave(supervisorA, managerLeave)).error).toMatch(/YOU DO NOT MANAGE THIS EMPLOYEES SITE/);
+    expect((await reviewLeave(managerA, managerLeave)).error).toMatch(/YOU DO NOT MANAGE THIS EMPLOYEES SITE/);
     expect((await reviewLeave(org.owner, managerLeave)).error).toBeNull();
   });
 

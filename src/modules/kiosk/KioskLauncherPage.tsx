@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
+import { useAuth } from "../../core/context/AuthContext";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
@@ -25,15 +26,23 @@ import { FEATURES } from "../../config/features";
 // KioskPage's own established posture).
 export default function KioskLauncherPage() {
   const { t } = useTranslation("kiosk");
+  const { profile } = useAuth();
+  const allowed = Boolean(profile?.isOwner) || profile?.roleKey === "manager";
   const [sites, setSites] = useState<Site[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Owner 2026-10-19: the workers' kiosk is run by the Owner, or by a Manager at a site they manage.
   useEffect(() => {
-    SiteRepository.listSites().then((result) => {
-      setSites(result.success ? (result.data ?? []).filter((site) => site.kioskMode !== "personal_device_only") : []);
+    if (!allowed || !profile) return;
+    Promise.all([SiteRepository.listSites(), profile.isOwner ? null : SiteRepository.listManagedSiteIds(profile.id)]).then(([result, managed]) => {
+      const managedIds = managed && managed.success ? new Set(managed.data ?? []) : null;
+      const usable = (result.success ? result.data ?? [] : []).filter((site) => site.kioskMode !== "personal_device_only");
+      setSites(profile.isOwner ? usable : usable.filter((site) => managedIds?.has(site.id)));
       setLoading(false);
     });
-  }, []);
+  }, [allowed, profile]);
+
+  if (!allowed) return <Navigate to="/dashboard" replace />;
 
   return (
     <PageShell title="">

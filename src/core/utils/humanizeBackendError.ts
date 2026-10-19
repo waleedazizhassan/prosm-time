@@ -200,6 +200,7 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   // Kiosk workforce keypad and attempt limit (audit 4.1).
   "NO ACTIVE WORKER WITH THIS NUMBER AT THIS SITE": "workerNumberNotRegistered",
   "NO WORKER WITH THIS NUMBER": "workerNumberNotRegistered",
+  "ONLY THE OWNER OR THE SITES MANAGER MAY RUN THE WORKERS KIOSK": "workerKioskOwnerOrManager",
   "A NAME IS REQUIRED": "nameRequired",
   "NO FREE WORKER NUMBER - PLEASE TRY AGAIN": "noFreeWorkerNumber",
   "THIS WORKER IS NOT ACTIVE": "workerNotActive",

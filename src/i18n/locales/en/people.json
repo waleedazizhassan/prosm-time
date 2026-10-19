@@ -37,7 +37,8 @@
     "settings.manage": "Manage settings",
     "sites.manage": "Manage sites",
     "timesheets.approve": "Approve timesheets",
-    "timesheets.generate": "Generate timesheets"
+    "timesheets.generate": "Generate timesheets",
+    "leave.approve": "Approve leave"
   },
   "invite": {
     "actionLabel": "Invite employee",
@@ -98,7 +99,10 @@
     "payRateHint": "Compensation data used for labor cost calculations in PROSM Finance. Setting a new rate keeps the old one on record with its own effective dates - it never overwrites history.",
     "payRateCurrent": "Current: {{amount}} {{currency}} ({{type}})",
     "payRateTypeLabel": "Rate type",
-    "payRateType": { "HOURLY": "Hourly", "MONTHLY": "Monthly" },
+    "payRateType": {
+      "HOURLY": "Hourly",
+      "MONTHLY": "Monthly"
+    },
     "payRateAmountLabel": "Amount",
     "payRateAction": "Save",
     "payRateError": "Unable to set this employee's pay rate.",

@@ -37,7 +37,8 @@
     "settings.manage": "Einstellungen verwalten",
     "sites.manage": "Standorte verwalten",
     "timesheets.approve": "Stundenzettel genehmigen",
-    "timesheets.generate": "Stundenzettel erstellen"
+    "timesheets.generate": "Stundenzettel erstellen",
+    "leave.approve": "Urlaub genehmigen"
   },
   "invite": {
     "actionLabel": "Mitarbeiter einladen",
@@ -98,7 +99,10 @@
     "payRateHint": "Vergütungsdaten für die Arbeitskostenberechnung in PROSM Finance. Ein neuer Satz behält den alten mit seinen eigenen Gültigkeitsdaten - der Verlauf wird nie überschrieben.",
     "payRateCurrent": "Aktuell: {{amount}} {{currency}} ({{type}})",
     "payRateTypeLabel": "Satzart",
-    "payRateType": { "HOURLY": "Stündlich", "MONTHLY": "Monatlich" },
+    "payRateType": {
+      "HOURLY": "Stündlich",
+      "MONTHLY": "Monatlich"
+    },
     "payRateAmountLabel": "Betrag",
     "payRateAction": "Speichern",
     "payRateError": "Der Lohnsatz dieses Mitarbeiters konnte nicht festgelegt werden.",

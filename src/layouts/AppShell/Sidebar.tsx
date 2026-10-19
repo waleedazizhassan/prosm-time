@@ -67,7 +67,8 @@ export default function Sidebar() {
     (item) =>
       (item.requiredPermission === null || hasPermission(item.requiredPermission)) &&
       (!item.ownerOnly || profile?.isOwner) &&
-      (!item.hiddenFromOwner || !profile?.isOwner)
+      (!item.hiddenFromOwner || !profile?.isOwner) &&
+      (!item.ownerOrManagerOnly || profile?.isOwner || profile?.roleKey === "manager")
   );
   // § live UX review, user-directed - group the same flat item list
   // under labeled sections (reference "Menu" screen's own grouping),

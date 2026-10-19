@@ -44,9 +44,10 @@ function CommandPalette() {
         (item) =>
           (item.requiredPermission === null || hasPermission(item.requiredPermission)) &&
           (!item.ownerOnly || profile?.isOwner) &&
-          (!item.hiddenFromOwner || !profile?.isOwner),
+          (!item.hiddenFromOwner || !profile?.isOwner) &&
+          (!item.ownerOrManagerOnly || profile?.isOwner || profile?.roleKey === "manager"),
       ).map((item) => ({ id: item.id, title: t(item.labelKey), path: item.path, Icon: item.icon })),
-    [hasPermission, profile?.isOwner, t],
+    [hasPermission, profile?.isOwner, profile?.roleKey, t],
   );
 
   const openPalette = useCallback(() => {
