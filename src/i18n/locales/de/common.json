@@ -175,7 +175,11 @@
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",
     "body": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut. Ein- und Ausstempeln und Pausen funktionieren auch ohne Internet.",
-    "retry": "Erneut versuchen"
+    "retry": "Erneut versuchen",
+    "server": {
+      "title": "Diese Seite konnte nicht geöffnet werden",
+      "body": "Der Server hat die Seite diesmal nicht geliefert - Sie sind verbunden, versuchen Sie es erneut. Ein- und Ausstempeln und Pausen funktionieren weiterhin."
+    }
   },
   "status": "Status",
   "save": "Speichern",

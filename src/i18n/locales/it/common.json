@@ -175,7 +175,11 @@
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",
     "body": "Controlla la connessione e riprova. Intanto timbrature e pause funzionano anche senza internet.",
-    "retry": "Riprova"
+    "retry": "Riprova",
+    "server": {
+      "title": "Impossibile aprire questa pagina",
+      "body": "Il server questa volta non ha inviato la pagina - sei connesso, riprova. Timbrature e pause continuano a funzionare."
+    }
   },
   "status": "Stato",
   "save": "Salva",

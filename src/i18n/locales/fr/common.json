@@ -175,7 +175,11 @@
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",
     "body": "Vérifiez votre connexion et réessayez. En attendant, les pointages et les pauses fonctionnent sans internet.",
-    "retry": "Réessayer"
+    "retry": "Réessayer",
+    "server": {
+      "title": "Impossible d'ouvrir cette page",
+      "body": "Le serveur n'a pas envoyé la page cette fois - vous êtes connecté, réessayez. Le pointage et les pauses continuent de fonctionner."
+    }
   },
   "status": "Statut",
   "save": "Enregistrer",

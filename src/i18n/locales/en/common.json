@@ -175,7 +175,11 @@
   "pageLoad": {
     "title": "This page needs a connection",
     "body": "Check that you're connected and try again. Meanwhile, clock in, clock out and breaks keep working without internet.",
-    "retry": "Try again"
+    "retry": "Try again",
+    "server": {
+      "title": "Couldn't open this page",
+      "body": "The server didn't send the page this time - you're connected, so try again. Clock in, clock out and breaks keep working meanwhile."
+    }
   },
   "status": "Status",
   "save": "Save",
