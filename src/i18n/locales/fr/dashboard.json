@@ -27,7 +27,7 @@
     "attentionTimesheets": "Feuilles de temps",
     "attentionLeave": "Demandes de congé",
     "attentionExceptions": "Exceptions et corrections",
-    "weeklyHoursTitle": "Heures suivies (7 jours)",
+    "weeklyHoursTitle": "Heures de travail cette semaine",
     "weeklyHoursTotal": "{{hours}}h au total",
     "weeklyHoursScheduled": "{{hours}}h planifiées",
     "rosterTitle": "Présents / Absents",

@@ -27,7 +27,7 @@
     "attentionTimesheets": "Timesheets",
     "attentionLeave": "Leave requests",
     "attentionExceptions": "Exceptions & corrections",
-    "weeklyHoursTitle": "Tracked Hours (7 days)",
+    "weeklyHoursTitle": "Working hours this week",
     "weeklyHoursTotal": "{{hours}}h total",
     "weeklyHoursScheduled": "{{hours}}h scheduled",
     "rosterTitle": "Who's In / Out",

@@ -27,7 +27,7 @@
     "attentionTimesheets": "Stundenzettel",
     "attentionLeave": "Urlaubsanträge",
     "attentionExceptions": "Ausnahmen & Korrekturen",
-    "weeklyHoursTitle": "Erfasste Stunden (7 Tage)",
+    "weeklyHoursTitle": "Arbeitsstunden diese Woche",
     "weeklyHoursTotal": "{{hours}} Std. gesamt",
     "weeklyHoursScheduled": "{{hours}} Std. geplant",
     "rosterTitle": "Anwesend / Abwesend",

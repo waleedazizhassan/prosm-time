@@ -27,7 +27,7 @@
     "attentionTimesheets": "كشوف الدوام",
     "attentionLeave": "طلبات الإجازة",
     "attentionExceptions": "الاستثناءات والتصحيحات",
-    "weeklyHoursTitle": "ساعات العمل (7 أيام)",
+    "weeklyHoursTitle": "ساعات العمل هذا الأسبوع",
     "weeklyHoursTotal": "الإجمالي {{hours}} ساعة",
     "weeklyHoursScheduled": "المجدول {{hours}} ساعة",
     "rosterTitle": "الحاضرين / المنصرفين",

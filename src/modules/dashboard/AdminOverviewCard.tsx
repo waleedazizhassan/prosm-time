@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MapPin, UserCheck, UserX, Users, CalendarDays, Coffee, CheckCircle2, ClipboardCheck, FileClock, CalendarClock } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
+import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import ManagerRepository, { type TodayAttendanceRow, type PendingReviewItem } from "../../core/repositories/ManagerRepository";
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
 import AttendanceRepository from "../../core/repositories/AttendanceRepository";
@@ -19,6 +20,7 @@ import StatusBadge from "../../components/common/StatusBadge";
 import EmptyState from "../../components/common/EmptyState";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
 import styles from "./AdminOverviewCard.module.css";
+import dashboardArt from "../../assets/illustrations/dashboard.svg";
 
 type Drilldown = "sites" | "present" | "employees" | "pending" | "leaveToday" | "onBreak" | null;
 
@@ -94,6 +96,9 @@ interface Kpi {
 //     real, still clickable, still opens the exact same drill-down
 //     modals below, just no longer competing for the same visual
 //     weight as what actually needs a decision made on it today.
+// A day's key in the device's own time zone (not UTC), e.g. 2026-10-19.
+const localDayKey = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+
 export default function AdminOverviewCard() {
   const { t, i18n } = useTranslation("dashboard");
   const { hasPermission, profile } = useAuth();
@@ -102,6 +107,12 @@ export default function AdminOverviewCard() {
 
   const [loading, setLoading] = useState(true);
   const [sites, setSites] = useState<Site[]>([]);
+  // Owner 2026-10-19: the greeting card names the organisation and, for a
+  // Manager or Supervisor, the site(s) they manage.
+  const profileId = profile?.id;
+  const isOwner = Boolean(profile?.isOwner);
+  const [organizationName, setOrganizationName] = useState("");
+  const [managedSiteNames, setManagedSiteNames] = useState<string[]>([]);
   const [todayAttendance, setTodayAttendance] = useState<TodayAttendanceRow[]>([]);
   const [pending, setPending] = useState<PendingReviewItem[]>([]);
   const [members, setMembers] = useState<OrgMember[]>([]);
@@ -155,6 +166,13 @@ export default function AdminOverviewCard() {
       ]);
     const realSites = sitesResult.success ? (sitesResult.data ?? []) : [];
     setSites(realSites);
+    const [organizationResult, managedResult] = await Promise.all([
+      OrganizationRepository.getCurrentOrganization(),
+      isOwner || !profileId ? null : SiteRepository.listManagedSiteIds(profileId),
+    ]);
+    setOrganizationName(organizationResult.success ? organizationResult.data?.name ?? "" : "");
+    const managedIds = managedResult && managedResult.success ? new Set(managedResult.data ?? []) : null;
+    setManagedSiteNames(managedIds ? realSites.filter((site) => managedIds.has(site.id)).map((site) => site.name) : []);
     setTodayAttendance(attendanceResult.success ? (attendanceResult.data ?? []) : []);
     setPending(pendingResult.success ? (pendingResult.data ?? []) : []);
     setMembers(membersResult.success ? (membersResult.data ?? []) : []);
@@ -187,7 +205,7 @@ export default function AdminOverviewCard() {
       setScheduledHours(0);
     }
     setLoading(false);
-  }, []);
+  }, [profileId, isOwner]);
 
   useEffect(() => {
     if (canView) load();
@@ -202,16 +220,17 @@ export default function AdminOverviewCard() {
   // session's duration at "now" rather than leaving it out, so today's
   // own bar isn't understated while someone's still on shift.
   const weeklyBars = useMemo(() => {
+    // Owner 2026-10-19: the week runs Sunday to Saturday; days still to come stay empty.
     const days: { key: string; label: string; hours: number }[] = [];
     const now = new Date();
-    for (let i = 6; i >= 0; i -= 1) {
-      const d = new Date(now);
-      d.setDate(d.getDate() - i);
-      days.push({ key: d.toISOString().slice(0, 10), label: d.toLocaleDateString(i18n.language, { weekday: "short" }), hours: 0 });
+    const sunday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay());
+    for (let i = 0; i < 7; i += 1) {
+      const d = new Date(sunday.getFullYear(), sunday.getMonth(), sunday.getDate() + i);
+      days.push({ key: localDayKey(d), label: d.toLocaleDateString(i18n.language, { weekday: "short" }), hours: 0 });
     }
     const byKey = new Map(days.map((d) => [d.key, d]));
     for (const row of weeklyHistory) {
-      const key = new Date(row.clockInAt).toISOString().slice(0, 10);
+      const key = localDayKey(new Date(row.clockInAt));
       const bucket = byKey.get(key);
       if (!bucket) continue;
       const end = row.clockOutAt ? new Date(row.clockOutAt) : now;
@@ -286,21 +305,22 @@ export default function AdminOverviewCard() {
 
   return (
     <Card>
-      {/* Owner 2026-10-19: a cleaner, more professional top - one greeting
-          card (time-of-day greeting, today's date, scope, Manager Console)
-          and four matching stat tiles that open their details. */}
+      {/* Owner 2026-10-19: a compact greeting card like the other pages' name
+          cards - greeting, today's date, the organisation (and, for a Manager
+          or Supervisor, their sites) and a flat illustration. The Manager
+          Console is in the sidebar, so no button here. */}
       <div className={styles.hero}>
         <div className={styles.heroText}>
-          <span className={styles.heroDate}>{todayLabel}</span>
           <h2 className={styles.heroTitle}>{t(greetingKey, { name: firstName })}</h2>
-          <span className={styles.heroScope}>
-            <MapPin size={14} />
-            {profile?.isOwner ? t("overview.scopeOwner") : t("overview.scopeManager", { count: sites.length })}
-          </span>
+          <span className={styles.heroDate}>{todayLabel}</span>
+          {organizationName || managedSiteNames.length > 0 ? (
+            <span className={styles.heroScope}>
+              <MapPin size={13} />
+              <span className={styles.heroScopeText}>{[organizationName, managedSiteNames.join(i18n.dir() === "rtl" ? "، " : ", ")].filter(Boolean).join(" · ")}</span>
+            </span>
+          ) : null}
         </div>
-        <Link to="/manager" className={styles.heroAction}>
-          {t("overview.openManagerAction")}
-        </Link>
+        <img src={dashboardArt} alt="" className={styles.heroArt} />
       </div>
 
       <div className={styles.statGrid}>
@@ -399,20 +419,6 @@ export default function AdminOverviewCard() {
 
         <div className={styles.rosterCard}>
           <span className={styles.cardTitle}>{t("overview.rosterTitle")}</span>
-          <div className={styles.rosterCounts}>
-            <span className={styles.rosterCount}>
-              <span className={`${styles.rosterDot} ${styles.rosterDotIn}`} />
-              {t("overview.rosterIn", { count: presentRows.length - onBreak.length })}
-            </span>
-            <span className={styles.rosterCount}>
-              <span className={`${styles.rosterDot} ${styles.rosterDotBreak}`} />
-              {t("overview.rosterBreak", { count: onBreak.length })}
-            </span>
-            <span className={styles.rosterCount}>
-              <span className={`${styles.rosterDot} ${styles.rosterDotOut}`} />
-              {t("overview.rosterOut", { count: Math.max(0, members.length - presentRows.length) })}
-            </span>
-          </div>
           <ul className={styles.rosterList}>
             {presentRows.length === 0 ? (
               <li className={styles.rosterEmpty}>{t("overview.drilldown.emptyPresent")}</li>

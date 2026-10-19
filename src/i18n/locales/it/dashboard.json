@@ -27,7 +27,7 @@
     "attentionTimesheets": "Fogli ore",
     "attentionLeave": "Richieste di ferie",
     "attentionExceptions": "Eccezioni e correzioni",
-    "weeklyHoursTitle": "Ore tracciate (7 giorni)",
+    "weeklyHoursTitle": "Ore di lavoro questa settimana",
     "weeklyHoursTotal": "{{hours}}h totali",
     "weeklyHoursScheduled": "{{hours}}h programmate",
     "rosterTitle": "Presenti / Assenti",
