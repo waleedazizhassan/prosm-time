@@ -45,7 +45,7 @@ function createWindow() {
     // all times - see win.maximize() below (fullscreen:true would
     // otherwise ignore the initial width/height and start maximized
     // is the one that actually shows a frame).
-    icon: path.join(__dirname, "..", "build", "icon.ico"),
+    icon: path.join(__dirname, "..", "build", "icon.png"),
     autoHideMenuBar: true,
     webPreferences: {
       contextIsolation: true,

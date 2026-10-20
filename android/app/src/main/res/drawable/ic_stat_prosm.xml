@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Notification bar icon (owner 2026-10-20: a white square showed instead).
-     Android draws it in one colour, so it is a plain white clock outline. -->
+     Android draws it in one colour, so it is the logo's hexagon and clock as a white outline. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
     <path
-        android:pathData="M22,12A10,10 0,1 1,2,12A10,10 0,1 1,22,12Z"
+        android:pathData="M12,2.2L20.5,7.1L20.5,16.9L12,21.8L3.5,16.9L3.5,7.1Z"
         android:strokeColor="#FFFFFFFF"
         android:strokeWidth="2.2"
         android:fillColor="#00000000" />

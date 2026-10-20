@@ -1,4 +1,4 @@
-import prosmLogo from "../../assets/prosm-logo.webp";
+import prosmLogo from "../../assets/brand/prosm-time-mark.png";
 
 interface BrandMarkProps {
   size?: number;
@@ -28,7 +28,7 @@ export default function BrandMark({ size = 40, glow = false }: BrandMarkProps) {
   return (
     <img
       src={prosmLogo}
-      alt="PROSM"
+      alt="PROSM Time"
       width={size}
       height={size}
       style={{
