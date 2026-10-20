@@ -48,7 +48,7 @@
     },
     "sites": {
       "title": "Standorte (Administratoren)",
-      "body": "Hier werden Standorte eingerichtet und Personen zugewiesen: Name, Adresse, GPS-Koordinaten und Radius, Zeitzone, Kioskmodus sowie ob Anwesenheit, Geofence oder Foto erforderlich sind. Bei der Zuweisung beginnt die Rolle am Standort mit der Rolle in der Organisation - Manager und Supervisor werden Standortleiter. Das übrige Verhalten steht in den Einstellungen; das Standortformular verlinkt dorthin."
+      "body": "Hier werden Standorte eingerichtet und Personen zugewiesen: Name, Adresse, GPS-Koordinaten und Radius, Zeitzone, Kioskmodus sowie ob Anwesenheit, Geofence oder Foto erforderlich sind. Bei der Zuweisung beginnt die Rolle am Standort mit der Rolle in der Organisation - Manager und Supervisor werden Standortleiter. Das übrige Verhalten steht in den Einstellungen; das Standortformular verlinkt dorthin. Für einen neuen Standort brauchen Sie nur den Namen, den Ort - dort stehen und Meinen aktuellen Standort verwenden tippen -, den Radius und ob ein Foto nötig ist; alles andere steht unter Weitere Optionen. Ein neuer Standort übernimmt die Zeitzone Ihres Geräts."
     },
     "workers": {
       "title": "Externe Arbeiter",

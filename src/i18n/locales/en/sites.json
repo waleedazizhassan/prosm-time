@@ -78,7 +78,11 @@
     "confirm": "Save site",
     "genericError": "Unable to save this site.",
     "openSiteSettings": "Open this site's settings",
-    "blockSelfClockInOutsideLabel": "Block self clock-in outside this site's work area (require a manager-assisted clock-in instead)"
+    "blockSelfClockInOutsideLabel": "Block self clock-in outside this site's work area (require a manager-assisted clock-in instead)",
+    "locationLabel": "Location",
+    "locationHint": "Stand at the site and press \"Use my current location\" - or enter the coordinates under More options.",
+    "locationSet": "Location set: {{latitude}}, {{longitude}}",
+    "moreOptions": "More options"
   },
   "detail": {
     "backToList": "Back to sites",

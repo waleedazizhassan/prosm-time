@@ -48,7 +48,7 @@
     },
     "sites": {
       "title": "Sites (administrateurs)",
-      "body": "Ici sont créés les sites et affectées les personnes : nom, adresse, coordonnées GPS et rayon, fuseau horaire, mode kiosque, et exigences de présence, de zone ou de photo. À l'affectation, le rôle sur le site part du rôle dans l'organisation - un manager ou superviseur devient responsable du site. Le reste se règle dans Paramètres ; le formulaire du site y renvoie."
+      "body": "Ici sont créés les sites et affectées les personnes : nom, adresse, coordonnées GPS et rayon, fuseau horaire, mode kiosque, et exigences de présence, de zone ou de photo. À l'affectation, le rôle sur le site part du rôle dans l'organisation - un manager ou superviseur devient responsable du site. Le reste se règle dans Paramètres ; le formulaire du site y renvoie. Pour ajouter un site, il suffit d'un nom, de son emplacement - placez-vous sur place et appuyez sur Utiliser ma position actuelle -, du rayon et de l'obligation ou non d'une photo ; le reste se trouve dans Plus d'options. Un nouveau site prend le fuseau horaire de votre appareil."
     },
     "workers": {
       "title": "Intervenants externes",

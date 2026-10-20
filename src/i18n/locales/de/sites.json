@@ -78,7 +78,11 @@
     "confirm": "Standort speichern",
     "genericError": "Dieser Standort konnte nicht gespeichert werden.",
     "openSiteSettings": "Einstellungen dieses Standorts öffnen",
-    "blockSelfClockInOutsideLabel": "Selbst-Einstempeln außerhalb des Arbeitsbereichs dieses Standorts sperren (stattdessen Einstempeln durch eine Führungskraft)"
+    "blockSelfClockInOutsideLabel": "Selbst-Einstempeln außerhalb des Arbeitsbereichs dieses Standorts sperren (stattdessen Einstempeln durch eine Führungskraft)",
+    "locationLabel": "Standort",
+    "locationHint": "Stellen Sie sich an den Standort und tippen Sie auf \"Meinen aktuellen Standort verwenden\" - oder geben Sie die Koordinaten unter Weitere Optionen ein.",
+    "locationSet": "Standort festgelegt: {{latitude}}, {{longitude}}",
+    "moreOptions": "Weitere Optionen"
   },
   "detail": {
     "backToList": "Zurück zu Standorten",

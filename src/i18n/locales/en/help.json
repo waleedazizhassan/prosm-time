@@ -48,7 +48,7 @@
     },
     "sites": {
       "title": "Sites (Administrators)",
-      "body": "Sites is where work sites are set up and people are assigned: name, address, GPS coordinates and radius, time zone, kiosk mode, and whether attendance, geofence or a photo are required. When you assign someone, their role at the site starts from their organisation role - a Manager or Supervisor becomes the site's manager, so they see its people. The rest of a site's behaviour is in Settings; the site form has an \"Open this site's settings\" link."
+      "body": "Sites is where work sites are set up and people are assigned: name, address, GPS coordinates and radius, time zone, kiosk mode, and whether attendance, geofence or a photo are required. When you assign someone, their role at the site starts from their organisation role - a Manager or Supervisor becomes the site's manager, so they see its people. The rest of a site's behaviour is in Settings; the site form has an \"Open this site's settings\" link. Adding a site needs only a name, its location - stand there and press Use my current location - the radius and whether a photo is required; everything else is under More options. A new site takes your device's time zone."
     },
     "workers": {
       "title": "External Workers",

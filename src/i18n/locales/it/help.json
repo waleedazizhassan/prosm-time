@@ -48,7 +48,7 @@
     },
     "sites": {
       "title": "Sedi (amministratori)",
-      "body": "Qui si creano le sedi e si assegnano le persone: nome, indirizzo, coordinate GPS e raggio, fuso orario, modalità chiosco e requisiti di presenza, area o foto. All'assegnazione, il ruolo nella sede parte dal ruolo nell'organizzazione - manager o supervisore diventano responsabili della sede. Il resto si imposta in Impostazioni; il modulo della sede vi rimanda."
+      "body": "Qui si creano le sedi e si assegnano le persone: nome, indirizzo, coordinate GPS e raggio, fuso orario, modalità chiosco e requisiti di presenza, area o foto. All'assegnazione, il ruolo nella sede parte dal ruolo nell'organizzazione - manager o supervisore diventano responsabili della sede. Il resto si imposta in Impostazioni; il modulo della sede vi rimanda. Per aggiungere una sede servono solo il nome, la posizione - mettiti lì e premi Usa la mia posizione attuale -, il raggio e se serve una foto; il resto è in Altre opzioni. Una nuova sede prende il fuso orario del tuo dispositivo."
     },
     "workers": {
       "title": "Lavoratori esterni",

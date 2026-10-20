@@ -78,7 +78,11 @@
     "confirm": "حفظ الموقع",
     "genericError": "تعذر حفظ هذا الموقع.",
     "openSiteSettings": "افتح إعدادات هذا الموقع",
-    "blockSelfClockInOutsideLabel": "منع تسجيل الحضور الذاتي خارج نطاق موقع العمل (يتطلب تسجيل حضور من المدير بدلاً منه)"
+    "blockSelfClockInOutsideLabel": "منع تسجيل الحضور الذاتي خارج نطاق موقع العمل (يتطلب تسجيل حضور من المدير بدلاً منه)",
+    "locationLabel": "الموقع",
+    "locationHint": "قف في الموقع واضغط \"استخدام موقعي الحالي\" - أو اكتب الإحداثيات في \"خيارات أخرى\".",
+    "locationSet": "تم تحديد الموقع: {{latitude}}، {{longitude}}",
+    "moreOptions": "خيارات أخرى"
   },
   "detail": {
     "backToList": "العودة إلى المواقع",

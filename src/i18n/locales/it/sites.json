@@ -78,7 +78,11 @@
     "confirm": "Salva sede",
     "genericError": "Impossibile salvare questa sede.",
     "openSiteSettings": "Apri le impostazioni di questa sede",
-    "blockSelfClockInOutsideLabel": "Blocca la timbratura di entrata fuori dall'area di lavoro di questa sede (timbratura da parte di un responsabile)"
+    "blockSelfClockInOutsideLabel": "Blocca la timbratura di entrata fuori dall'area di lavoro di questa sede (timbratura da parte di un responsabile)",
+    "locationLabel": "Posizione",
+    "locationHint": "Mettiti nella sede e premi \"Usa la mia posizione attuale\" - oppure inserisci le coordinate in Altre opzioni.",
+    "locationSet": "Posizione impostata: {{latitude}}, {{longitude}}",
+    "moreOptions": "Altre opzioni"
   },
   "detail": {
     "backToList": "Torna alle sedi",

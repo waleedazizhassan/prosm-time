@@ -78,7 +78,11 @@
     "confirm": "Enregistrer le site",
     "genericError": "Impossible d'enregistrer ce site.",
     "openSiteSettings": "Ouvrir les paramètres de ce site",
-    "blockSelfClockInOutsideLabel": "Bloquer le pointage d'arrivée en dehors de la zone de travail de ce site (pointage par un responsable à la place)"
+    "blockSelfClockInOutsideLabel": "Bloquer le pointage d'arrivée en dehors de la zone de travail de ce site (pointage par un responsable à la place)",
+    "locationLabel": "Emplacement",
+    "locationHint": "Placez-vous sur le site et appuyez sur « Utiliser ma position actuelle » - ou saisissez les coordonnées dans Plus d'options.",
+    "locationSet": "Emplacement défini : {{latitude}}, {{longitude}}",
+    "moreOptions": "Plus d'options"
   },
   "detail": {
     "backToList": "Retour aux sites",

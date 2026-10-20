@@ -44,6 +44,14 @@ const toggleRowStyle = {
 // ongoing presence monitoring) moved entirely to its own Settings hub
 // (SitePolicySettingsCard, a site picked from a dropdown) - none of
 // that is collected or editable here anymore.
+function deviceTimeZone(): string {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+  } catch {
+    return "UTC";
+  }
+}
+
 export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFormModalProps) {
   const { t } = useTranslation("sites");
   const isEditing = Boolean(site);
@@ -53,7 +61,9 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
   const [latitude, setLatitude] = useState(site ? String(site.latitude) : "");
   const [longitude, setLongitude] = useState(site ? String(site.longitude) : "");
   const [allowedRadiusMeters, setAllowedRadiusMeters] = useState(site ? String(site.allowedRadiusMeters) : "100");
-  const [timezone, setTimezone] = useState(site?.timezone ?? "UTC");
+  // A new site starts in the device's own time zone (it was UTC, which put
+  // shift times hours off in Egypt).
+  const [timezone, setTimezone] = useState(site?.timezone ?? deviceTimeZone());
   const [kioskMode, setKioskMode] = useState<KioskMode>(site?.kioskMode ?? "personal_device_only");
   const [attendanceAllowed, setAttendanceAllowed] = useState(site?.attendanceAllowed ?? true);
   const [geofenceRequired, setGeofenceRequired] = useState(site?.geofenceRequired ?? true);
@@ -158,28 +168,24 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
         </>
       }
     >
+      {/* Owner 2026-10-19 (simpler site setup): the essentials first - name,
+          the location (stand at the site and use the phone's position), the
+          radius and the photo; everything else under "More options". */}
       <Input label={t("form.nameLabel")} name="siteName" value={name} onChange={(event) => setName(event.target.value)} required disabled={submitting} />
-      <Input
-        label={t("form.displayAddressLabel")}
-        name="siteDisplayAddress"
-        value={displayAddress}
-        onChange={(event) => setDisplayAddress(event.target.value)}
-        disabled={submitting}
-        helperText={t("form.displayAddressHint")}
-      />
 
-      <div style={{ display: "flex", gap: "var(--space-3)" }}>
-        <Input label={t("form.latitudeLabel")} name="siteLatitude" type="number" value={latitude} onChange={(event) => setLatitude(event.target.value)} required disabled={submitting} />
-        <Input label={t("form.longitudeLabel")} name="siteLongitude" type="number" value={longitude} onChange={(event) => setLongitude(event.target.value)} required disabled={submitting} />
-      </div>
-
-      <div style={{ display: "flex", gap: "var(--space-2)", marginBottom: "var(--space-3)" }}>
-        <Button type="button" variant="ghost" size="sm" onClick={handleUseCurrentLocation} loading={locating} disabled={submitting}>
-          {t("form.useCurrentLocationAction")}
-        </Button>
-        <Button type="button" variant="ghost" size="sm" onClick={handleTestLocation} loading={locating} disabled={submitting || !latitude || !longitude}>
-          {t("form.testLocationAction")}
-        </Button>
+      <div style={{ marginBottom: "var(--space-3)" }}>
+        <span style={{ display: "block", fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-medium)", color: "var(--text-primary)", marginBottom: 6 }}>{t("form.locationLabel")}</span>
+        <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap", alignItems: "center" }}>
+          <Button type="button" size="sm" onClick={handleUseCurrentLocation} loading={locating} disabled={submitting}>
+            {t("form.useCurrentLocationAction")}
+          </Button>
+          <Button type="button" variant="ghost" size="sm" onClick={handleTestLocation} loading={locating} disabled={submitting || !latitude || !longitude}>
+            {t("form.testLocationAction")}
+          </Button>
+        </div>
+        <p style={{ margin: "6px 0 0", fontSize: "var(--font-xs)", color: latitude && longitude ? "var(--status-success-text)" : "var(--text-secondary)" }}>
+          {latitude && longitude ? t("form.locationSet", { latitude: Number(latitude).toFixed(5), longitude: Number(longitude).toFixed(5) }) : t("form.locationHint")}
+        </p>
       </div>
 
       <ErrorText>{locationError}</ErrorText>
@@ -202,35 +208,54 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
         disabled={submitting}
       />
 
-      <Input label={t("form.timezoneLabel")} name="siteTimezone" value={timezone} onChange={(event) => setTimezone(event.target.value)} required disabled={submitting} helperText={t("form.timezoneHint")} />
-
-      <Select
-        label={t("form.kioskModeLabel")}
-        name="siteKioskMode"
-        value={kioskMode}
-        onChange={(event) => setKioskMode(event.target.value as KioskMode)}
-        disabled={submitting}
-        options={KIOSK_MODE_OPTIONS.map((mode) => ({ value: mode, label: t(`kioskMode.${mode}`) }))}
-      />
-
-      <div style={toggleRowStyle}>
-        <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.attendanceAllowedLabel")}</span>
-        <Toggle checked={attendanceAllowed} onChange={setAttendanceAllowed} disabled={submitting} label={t("form.attendanceAllowedLabel")} />
-      </div>
-      <div style={toggleRowStyle}>
-        <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.geofenceRequiredLabel")}</span>
-        <Toggle checked={geofenceRequired} onChange={setGeofenceRequired} disabled={submitting} label={t("form.geofenceRequiredLabel")} />
-      </div>
       <div style={toggleRowStyle}>
         <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.cameraRequiredLabel")}</span>
         <Toggle checked={cameraRequired} onChange={setCameraRequired} disabled={submitting} label={t("form.cameraRequiredLabel")} />
       </div>
-      {isEditing ? (
-        <div style={toggleRowStyle}>
-          <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.activeLabel")}</span>
-          <Toggle checked={isActive} onChange={setIsActive} disabled={submitting} label={t("form.activeLabel")} />
+
+      <details style={{ marginTop: "var(--space-3)" }}>
+        <summary style={{ cursor: "pointer", fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-link)", padding: "var(--space-2) 0" }}>{t("form.moreOptions")}</summary>
+
+        <Input
+          label={t("form.displayAddressLabel")}
+          name="siteDisplayAddress"
+          value={displayAddress}
+          onChange={(event) => setDisplayAddress(event.target.value)}
+          disabled={submitting}
+          helperText={t("form.displayAddressHint")}
+        />
+
+        <div style={{ display: "flex", gap: "var(--space-3)" }}>
+          <Input label={t("form.latitudeLabel")} name="siteLatitude" type="number" value={latitude} onChange={(event) => setLatitude(event.target.value)} required disabled={submitting} />
+          <Input label={t("form.longitudeLabel")} name="siteLongitude" type="number" value={longitude} onChange={(event) => setLongitude(event.target.value)} required disabled={submitting} />
         </div>
-      ) : null}
+
+        <Input label={t("form.timezoneLabel")} name="siteTimezone" value={timezone} onChange={(event) => setTimezone(event.target.value)} required disabled={submitting} helperText={t("form.timezoneHint")} />
+
+        <Select
+          label={t("form.kioskModeLabel")}
+          name="siteKioskMode"
+          value={kioskMode}
+          onChange={(event) => setKioskMode(event.target.value as KioskMode)}
+          disabled={submitting}
+          options={KIOSK_MODE_OPTIONS.map((mode) => ({ value: mode, label: t(`kioskMode.${mode}`) }))}
+        />
+
+        <div style={toggleRowStyle}>
+          <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.attendanceAllowedLabel")}</span>
+          <Toggle checked={attendanceAllowed} onChange={setAttendanceAllowed} disabled={submitting} label={t("form.attendanceAllowedLabel")} />
+        </div>
+        <div style={toggleRowStyle}>
+          <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.geofenceRequiredLabel")}</span>
+          <Toggle checked={geofenceRequired} onChange={setGeofenceRequired} disabled={submitting} label={t("form.geofenceRequiredLabel")} />
+        </div>
+        {isEditing ? (
+          <div style={toggleRowStyle}>
+            <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.activeLabel")}</span>
+            <Toggle checked={isActive} onChange={setIsActive} disabled={submitting} label={t("form.activeLabel")} />
+          </div>
+        ) : null}
+      </details>
 
       {isEditing && site ? (
         <p style={{ margin: "var(--space-3) 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
