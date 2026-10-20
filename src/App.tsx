@@ -1,3 +1,9 @@
+// Bundled typefaces (work offline too): Inter for Latin, IBM Plex Sans Arabic for Arabic.
+import "@fontsource-variable/inter";
+import "@fontsource/ibm-plex-sans-arabic/arabic-400.css";
+import "@fontsource/ibm-plex-sans-arabic/arabic-500.css";
+import "@fontsource/ibm-plex-sans-arabic/arabic-600.css";
+import "@fontsource/ibm-plex-sans-arabic/arabic-700.css";
 import "./components/common/design-tokens.css";
 import AppRoutes from "./routes/AppRoutes";
 import { ThemeProvider } from "./core/context/ThemeContext";

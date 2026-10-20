@@ -18,7 +18,7 @@
   padding: var(--space-4) var(--space-5);
 
   border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, var(--palette-navy-900) 0%, var(--palette-blue-700) 100%);
+  background: linear-gradient(135deg, var(--brand-secondary) 0%, var(--palette-blue-700) 100%);
   overflow: hidden;
 }
 

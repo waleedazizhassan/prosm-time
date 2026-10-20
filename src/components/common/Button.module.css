@@ -1,4 +1,8 @@
+/* Aurora buttons (owner 2026-10-20): the same corner as inputs and cards;
+   primary carries the logo's gradient and a soft glow; "ghost" is a real
+   button (it read as plain text); danger is unmistakable. */
 .button {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -7,23 +11,26 @@
   min-height: 44px;
   padding: 0 var(--space-5);
 
-  border: none;
-  /* § live UX review, user-directed - "rounded, professional-looking
-     buttons." A true pill shape rather than the previous 12px
-     rounding, matching the modern look asked for. */
-  border-radius: var(--radius-round);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
 
   font-family: var(--font-family);
   font-size: var(--font-sm);
   font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+  white-space: nowrap;
 
   cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 
   transition:
     background-color var(--transition-fast),
+    border-color var(--transition-fast),
     color var(--transition-fast),
     transform var(--transition-fast),
-    box-shadow var(--transition-fast);
+    box-shadow var(--transition-fast),
+    filter var(--transition-fast);
 }
 
 .button:disabled {
@@ -31,8 +38,8 @@
   cursor: not-allowed;
 }
 
-.button:not(:disabled):hover {
-  transform: translateY(-1px);
+.button:not(:disabled):active {
+  transform: translateY(1px) scale(0.99);
 }
 
 .button:focus-visible {
@@ -41,45 +48,52 @@
 }
 
 .primary {
-  background: var(--brand-primary);
+  background: var(--brand-gradient-action);
   color: var(--brand-on-primary);
+  box-shadow: var(--brand-glow);
 }
 
 .primary:not(:disabled):hover {
-  background: var(--brand-primary-hover);
-  box-shadow: var(--shadow-md);
+  filter: brightness(1.08) saturate(1.05);
+  box-shadow: 0 12px 28px -10px rgba(30, 111, 217, 0.7);
 }
 
 .ghost {
-  background: transparent;
+  background: var(--surface-raised);
   color: var(--text-primary);
-  border: 1px solid transparent;
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-xs);
 }
 
 .ghost:not(:disabled):hover {
   background: var(--surface-hover);
+  border-color: var(--brand-primary-subtle-border);
+  color: var(--brand-primary);
 }
 
 .danger {
   background: var(--brand-danger);
   color: var(--brand-on-primary);
+  box-shadow: 0 8px 22px -10px rgba(220, 38, 38, 0.6);
 }
 
 .danger:not(:disabled):hover {
-  box-shadow: var(--shadow-md);
+  filter: brightness(1.08);
 }
 
 .xs {
-  min-height: 28px;
+  min-height: 30px;
   padding: 0 var(--space-3);
   font-size: var(--font-xs);
   gap: var(--space-1);
+  border-radius: var(--radius-sm);
 }
 
 .sm {
   min-height: 36px;
   padding: 0 var(--space-4);
-  font-size: var(--font-xs);
+  font-size: var(--font-sm);
+  border-radius: var(--radius-sm);
 }
 
 .md {

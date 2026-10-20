@@ -1,21 +1,26 @@
-/* PROSM Time - design tokens, ported from PROSM Platform's own
-   src/styles/theme.css (Theme v2.0.0) at the user's explicit direction:
-   "Use the exact existing PROSM visual language... Reuse the existing
-   PROSM design system... Do not invent a new UI style." An independent
-   copy (own repository, §43.5/§6 - never shared code between the two
-   products), but the token NAMES and VALUES are deliberately identical
-   to the real, established system - including --brand-primary being
-   GREEN (#16A34A), confirmed there by an actual usage audit across the
-   app, not the logo's blue (which PROSM Platform reserves specifically
-   for --brand-ai / AI-surfaces only, per that file's own comment).
+/* PROSM Time - design tokens: "Aurora", the app's own identity
+   (owner 2026-10-20: "something world-class, not ordinary - your own
+   design"; this replaces the earlier copy of PROSM Platform's theme).
 
-   Same three-tier architecture as the source: Tier 1 palette (private),
-   Tier 2 semantic (the public API every component reads), Tier 3
-   structural (radius/space/font/shadow/z-index). See the source file
-   for the full rationale; not re-derived here. */
+   Drawn from the PROSM Time logo: a deep navy ground, a blue -> cyan ->
+   green gradient and a soft glow. Blue is the action colour; green means
+   something good happened (present, approved, done) and nothing else;
+   the full gradient is kept for brand moments (buttons that move work
+   forward, the greeting card, the active page) so it stays special.
+
+   Same three tiers as before, and every public name kept, so nothing that
+   reads a token breaks: Tier 1 palette (private), Tier 2 semantic (what
+   components read), Tier 3 structure (radius, space, type, shadow, z). */
 
 :root {
-  /* Tier 1 - Palette */
+  /* ---------- Tier 1: palette ---------- */
+  --palette-ink-950: #040814;
+  --palette-ink-900: #070e1f;
+  --palette-ink-850: #0b1529;
+  --palette-ink-800: #101d36;
+  --palette-ink-700: #17284a;
+  --palette-ink-600: #22365f;
+
   --palette-slate-950: #020617;
   --palette-slate-900: #0f172a;
   --palette-slate-850: #111827;
@@ -26,22 +31,37 @@
   --palette-slate-400: #94a3b8;
   --palette-slate-300: #cbd5e1;
   --palette-slate-200: #e2e8f0;
-  --palette-slate-100: #f1f5f9;
-  --palette-slate-50: #f8fafc;
+  --palette-slate-100: #eef2f8;
+  --palette-slate-50: #f6f8fc;
   --palette-white: #ffffff;
 
-  --palette-green-900: #166534;
+  /* the logo's blues */
+  --palette-blue-900: #0b2a6b;
+  --palette-blue-800: #0f3d91;
+  --palette-blue-700: #1652c4;
+  --palette-blue-600: #1e6fd9;
+  --palette-blue-500: #3b8bf0;
+  --palette-blue-400: #6aa8f7;
+  --palette-blue-300: #9cc5fb;
+  --palette-blue-100: #dceafe;
+  --palette-blue-50: #eff5ff;
+
+  --palette-cyan-600: #0891b2;
+  --palette-cyan-500: #19b5e6;
+  --palette-cyan-400: #4cc9f0;
+  --palette-cyan-100: #d4f3fc;
+
+  --palette-green-900: #14532d;
   --palette-green-800: #15803d;
   --palette-green-700: #16a34a;
   --palette-green-600: #22c55e;
   --palette-green-400: #4ade80;
-  --palette-green-200: #86efac;
+  --palette-green-200: #a7f3c4;
   --palette-green-100: #dcfce7;
   --palette-green-50: #f0fdf4;
 
-  --palette-navy-900: #0a224a;
-
   --palette-amber-800: #92400e;
+  --palette-amber-600: #d97706;
   --palette-amber-500: #f59e0b;
   --palette-amber-400: #fbbf24;
   --palette-amber-300: #fcd34d;
@@ -54,33 +74,31 @@
   --palette-red-200: #fecaca;
   --palette-red-50: #fef2f2;
 
-  --palette-blue-700: #0369a1;
-  --palette-blue-500: #0ea5e9;
-  --palette-blue-400: #38bdf8;
-  --palette-blue-300: #7dd3fc;
-  --palette-blue-100: #e0f2fe;
-
-  --palette-indigo-800: #3730a3;
   --palette-indigo-700: #4338ca;
   --palette-indigo-600: #4f46e5;
-  --palette-indigo-400: #818cf8;
   --palette-indigo-100: #e0e7ff;
   --palette-indigo-50: #eef2ff;
 
-  /* Tier 2 - Semantic (light, the default) */
-  --brand-primary: var(--palette-green-700);
-  --brand-primary-hover: var(--palette-green-800);
-  --brand-primary-active: var(--palette-green-900);
-  --brand-primary-subtle: var(--palette-green-50);
-  --brand-primary-subtle-border: var(--palette-green-200);
+  /* ---------- Tier 2: semantic ---------- */
+  --brand-primary: var(--palette-blue-600);
+  --brand-primary-hover: var(--palette-blue-700);
+  --brand-primary-active: var(--palette-blue-800);
+  --brand-primary-subtle: var(--palette-blue-50);
+  --brand-primary-subtle-border: var(--palette-blue-300);
   --brand-on-primary: var(--palette-white);
 
-  --brand-secondary: var(--palette-navy-900);
+  --brand-secondary: var(--palette-blue-900);
+  --brand-accent: var(--palette-cyan-500);
+
+  --brand-gradient: linear-gradient(135deg, #1652c4 0%, #1e6fd9 38%, #19b5e6 72%, #22c55e 100%);
+  --brand-gradient-action: linear-gradient(135deg, #1652c4 0%, #1e6fd9 50%, #19a0e0 100%);
+  --brand-gradient-soft: linear-gradient(135deg, rgba(30, 111, 217, 0.1) 0%, rgba(25, 181, 230, 0.08) 60%, rgba(34, 197, 94, 0.08) 100%);
+  --brand-glow: 0 8px 24px -8px rgba(30, 111, 217, 0.55);
 
   --brand-success: var(--palette-green-700);
   --brand-warning: var(--palette-amber-500);
   --brand-danger: var(--palette-red-600);
-  --brand-info: var(--palette-blue-500);
+  --brand-info: var(--palette-cyan-600);
 
   --brand-ai: var(--palette-indigo-600);
   --brand-ai-hover: var(--palette-indigo-700);
@@ -91,20 +109,28 @@
   --surface-app: var(--palette-slate-50);
   --surface-page: var(--palette-white);
   --surface-card: var(--palette-white);
-  --surface-sidebar: var(--palette-navy-900);
+  --surface-raised: var(--palette-white);
+  --surface-sunken: var(--palette-slate-100);
+  --surface-sidebar: var(--palette-white);
   --surface-hover: var(--palette-slate-100);
+  --surface-selected: var(--palette-blue-50);
+  /* the faint aurora behind the app */
+  --aurora: radial-gradient(1200px 600px at 100% -10%, rgba(25, 181, 230, 0.1), transparent 60%),
+    radial-gradient(900px 500px at -10% 0%, rgba(30, 111, 217, 0.1), transparent 55%),
+    radial-gradient(800px 500px at 50% 110%, rgba(34, 197, 94, 0.06), transparent 60%);
 
-  --text-primary: var(--palette-slate-800);
-  --text-secondary: var(--palette-slate-500);
+  --text-primary: #0f1b33;
+  --text-secondary: #55657f;
+  --text-tertiary: #8291a8;
   --text-disabled: var(--palette-slate-400);
   --text-white: var(--palette-white);
   --text-on-brand: var(--palette-white);
-  --text-link: var(--brand-primary);
+  --text-link: var(--palette-blue-700);
 
-  --border-light: var(--palette-slate-200);
-  --border-medium: var(--palette-slate-300);
+  --border-light: #e3e9f3;
+  --border-medium: #cfd8e6;
   --border-dark: var(--palette-slate-400);
-  --border-focus: var(--brand-primary);
+  --border-focus: var(--palette-blue-600);
 
   --status-success-bg: var(--palette-green-100);
   --status-success-border: var(--palette-green-200);
@@ -116,38 +142,47 @@
 
   --status-danger-bg: var(--palette-red-50);
   --status-danger-border: var(--palette-red-200);
-  --status-danger-text: var(--palette-red-600);
+  --status-danger-text: var(--palette-red-700);
 
-  --status-info-bg: var(--palette-blue-100);
-  --status-info-border: var(--palette-blue-300);
-  --status-info-text: var(--palette-blue-700);
+  --status-info-bg: var(--palette-cyan-100);
+  --status-info-border: #8fdcf3;
+  --status-info-text: #0e6f8f;
 
-  --focus-ring: 0 0 0 3px rgba(22, 163, 74, 0.35);
-  --disabled-opacity: 0.6;
+  /* aliases that some components already read */
+  --warning-surface: var(--status-warning-bg);
+  --warning-text: var(--status-warning-text);
+  --danger-surface: var(--status-danger-bg);
+  --danger-text: var(--status-danger-text);
 
-  /* Tier 3 - Structural */
-  --radius-xs: 4px;
-  --radius-sm: 8px;
+  --focus-ring: 0 0 0 3px rgba(30, 111, 217, 0.35);
+  --disabled-opacity: 0.55;
+
+  /* ---------- Tier 3: structure ---------- */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
   --radius-md: 12px;
-  --radius-lg: 16px;
+  --radius-lg: 18px;
   --radius-xl: 24px;
   --radius-round: 999px;
+  --radius-full: 999px;
 
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.12);
+  --shadow-xs: 0 1px 2px rgba(15, 27, 51, 0.05);
+  --shadow-sm: 0 1px 2px rgba(15, 27, 51, 0.04), 0 4px 14px rgba(15, 27, 51, 0.05);
+  --shadow-md: 0 2px 6px rgba(15, 27, 51, 0.05), 0 12px 28px rgba(15, 27, 51, 0.08);
+  --shadow-lg: 0 24px 48px rgba(15, 27, 51, 0.14);
 
-  --font-family: "Inter", "Segoe UI", sans-serif;
+  --font-family: "Inter Variable", "IBM Plex Sans Arabic", "Segoe UI", system-ui, sans-serif;
+  --font-family-numeric: "Inter Variable", "Segoe UI", system-ui, sans-serif;
   --font-xs: 0.75rem;
   --font-sm: 0.875rem;
   --font-md: 1rem;
   --font-lg: 1.125rem;
-  --font-xl: 1.5rem;
-  --font-2xl: 2rem;
-  --font-3xl: 3rem;
+  --font-xl: 1.375rem;
+  --font-2xl: 1.75rem;
+  --font-3xl: 2.5rem;
 
   --font-weight-regular: 400;
+  --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
@@ -174,24 +209,37 @@
   --z-toast: 9000;
 }
 
-/* Dark theme - Tier 2 overrides only, same structure as the source. */
+/* Dark: deep space navy, the aurora glowing behind, cards lit at the edge. */
 [data-theme="dark"] {
-  --surface-app: var(--palette-slate-900);
-  --surface-page: var(--palette-slate-850);
-  --surface-card: var(--palette-slate-800);
-  --surface-sidebar: var(--palette-slate-950);
-  --surface-hover: var(--palette-slate-700);
+  --surface-app: var(--palette-ink-950);
+  --surface-page: var(--palette-ink-900);
+  --surface-card: var(--palette-ink-850);
+  --surface-raised: var(--palette-ink-800);
+  --surface-sunken: #060c1b;
+  --surface-sidebar: var(--palette-ink-900);
+  --surface-hover: var(--palette-ink-700);
+  --surface-selected: rgba(59, 139, 240, 0.16);
+  --aurora: radial-gradient(1100px 620px at 100% -10%, rgba(25, 181, 230, 0.16), transparent 60%),
+    radial-gradient(900px 560px at -10% 0%, rgba(30, 111, 217, 0.2), transparent 58%),
+    radial-gradient(900px 520px at 55% 115%, rgba(34, 197, 94, 0.1), transparent 62%);
 
-  --text-primary: var(--palette-slate-50);
-  --text-secondary: var(--palette-slate-300);
-  --text-disabled: var(--palette-slate-400);
+  --brand-primary: var(--palette-blue-500);
+  --brand-primary-hover: var(--palette-blue-400);
+  --brand-primary-active: var(--palette-blue-600);
+  --brand-primary-subtle: rgba(59, 139, 240, 0.14);
+  --brand-primary-subtle-border: rgba(59, 139, 240, 0.42);
+  --brand-glow: 0 10px 30px -8px rgba(59, 139, 240, 0.65);
 
-  --border-light: var(--palette-slate-700);
-  --border-medium: var(--palette-slate-600);
-  --border-dark: var(--palette-slate-500);
+  --text-primary: #e8eefb;
+  --text-secondary: #9fb0cc;
+  --text-tertiary: #71839f;
+  --text-disabled: var(--palette-slate-500);
+  --text-link: var(--palette-blue-400);
 
-  --brand-primary-subtle: rgba(34, 197, 94, 0.14);
-  --brand-primary-subtle-border: rgba(34, 197, 94, 0.4);
+  --border-light: rgba(148, 170, 214, 0.14);
+  --border-medium: rgba(148, 170, 214, 0.24);
+  --border-dark: rgba(148, 170, 214, 0.36);
+  --border-focus: var(--palette-blue-400);
 
   --brand-ai-subtle: rgba(79, 70, 229, 0.16);
   --brand-ai-subtle-border: rgba(79, 70, 229, 0.4);
@@ -208,40 +256,65 @@
   --status-danger-border: rgba(220, 38, 38, 0.4);
   --status-danger-text: var(--palette-red-400);
 
-  --status-info-bg: rgba(14, 165, 233, 0.14);
-  --status-info-border: rgba(14, 165, 233, 0.4);
-  --status-info-text: var(--palette-blue-400);
+  --status-info-bg: rgba(25, 181, 230, 0.14);
+  --status-info-border: rgba(25, 181, 230, 0.4);
+  --status-info-text: var(--palette-cyan-400);
 
-  --focus-ring: 0 0 0 3px rgba(74, 222, 128, 0.4);
+  --focus-ring: 0 0 0 3px rgba(106, 168, 247, 0.45);
 
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.45);
-  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.6);
+  --shadow-sm: 0 0 0 1px rgba(148, 170, 214, 0.06), 0 6px 18px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 0 0 1px rgba(148, 170, 214, 0.08), 0 14px 32px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 28px 56px rgba(0, 0, 0, 0.6);
 }
 
 * {
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  background: var(--surface-app);
-  color: var(--text-primary);
-  font-family: var(--font-family);
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
-/* Printed output (§22's own Timesheet/Evidence Pack "Print / Save as
-   PDF") must always look like a real document - white page, dark text
-   - regardless of whether the user happens to have Dark theme active
-   on screen. Without this, printing while in Dark theme would print a
-   dark page with light text: wasteful and unprofessional. */
+body {
+  margin: 0;
+  background: var(--aurora), var(--surface-app);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Numbers line up in tables and tiles. */
+table,
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* One keyboard focus ring for everything (it was missing on most controls). */
+:where(a, button, [role="button"], [role="switch"], [role="tab"], input, select, textarea, summary):focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+::selection {
+  background: rgba(30, 111, 217, 0.22);
+}
+
+/* Printed output must always look like a real document - white page,
+   dark text - whatever theme is on screen. */
 @media print {
   :root,
   [data-theme="dark"] {
     --surface-app: var(--palette-white);
     --surface-page: var(--palette-white);
     --surface-card: var(--palette-white);
+    --surface-raised: var(--palette-white);
+    --aurora: none;
     --text-primary: var(--palette-slate-800);
     --text-secondary: var(--palette-slate-500);
     --border-light: var(--palette-slate-200);
@@ -249,5 +322,18 @@ body {
     --shadow-sm: none;
     --shadow-md: none;
     --shadow-lg: none;
+  }
+
+  body {
+    background: var(--palette-white);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
   }
 }
