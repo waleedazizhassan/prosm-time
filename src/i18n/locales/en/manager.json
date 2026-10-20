@@ -19,7 +19,8 @@
     "photoModalTitle": "Attendance Photo",
     "photoLoading": "Loading photo…",
     "photoAlt": "Attendance evidence photo",
-    "photoLoadError": "Unable to load this photo."
+    "photoLoadError": "Unable to load this photo.",
+    "openToday": "Today's attendance → Attendance Record"
   },
   "pending": {
     "title": "Pending Review",

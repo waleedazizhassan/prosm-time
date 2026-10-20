@@ -1,18 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, Navigate } from "react-router-dom";
-import { Camera } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
-import ManagerRepository, { type TodayAttendanceRow, type PendingReviewItem, type PendingReviewKind } from "../../core/repositories/ManagerRepository";
-import EvidenceRepository from "../../core/repositories/EvidenceRepository";
+import ManagerRepository, { type PendingReviewItem, type PendingReviewKind } from "../../core/repositories/ManagerRepository";
 import LeaveRepository, { type PendingLeaveReviewRow, type ApprovedLeaveRow } from "../../core/repositories/LeaveRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
-import Table, { type TableColumn } from "../../components/common/Table";
-import StatusBadge from "../../components/common/StatusBadge";
 import Button from "../../components/common/Button";
 import Modal from "../../components/common/Modal";
 import ErrorText from "../../components/common/ErrorText";
@@ -33,14 +29,6 @@ const ACTIONS_BY_KIND: Record<PendingReviewKind, ReviewAction[]> = {
   mock_location: ["approved", "rejected"],
 };
 
-function formatWorkedHours(clockInAt: string, clockOutAt: string | null): string {
-  const endMs = clockOutAt ? new Date(clockOutAt).getTime() : Date.now();
-  const totalMinutes = Math.max(0, Math.round((endMs - new Date(clockInAt).getTime()) / 60000));
-  const hours = Math.floor(totalMinutes / 60);
-  const minutes = totalMinutes % 60;
-  return `${hours}h ${minutes}m`;
-}
-
 // PROSM Time WP-14/§21 - "Operational dashboard... Exceptions and
 // approvals." Deliberately does not duplicate Employees (/people),
 // Sites/Projects (/sites), or Administrator & Permission Management
@@ -54,17 +42,11 @@ export default function ManagerConsolePage() {
   const { t, i18n } = useTranslation("manager");
   const { hasPermission } = useAuth();
 
-  const [attendance, setAttendance] = useState<TodayAttendanceRow[]>([]);
   const [pendingItems, setPendingItems] = useState<PendingReviewItem[]>([]);
-  const [loading, setLoading] = useState(true);
   const [reviewTarget, setReviewTarget] = useState<PendingReviewItem | null>(null);
   const [reviewNotes, setReviewNotes] = useState("");
   const [submitting, setSubmitting] = useState<string | null>(null);
   const [error, setError] = useState("");
-  const [evidenceModalTitle, setEvidenceModalTitle] = useState<string | null>(null);
-  const [evidenceUrl, setEvidenceUrl] = useState<string | null>(null);
-  const [evidenceLoading, setEvidenceLoading] = useState(false);
-  const [evidenceError, setEvidenceError] = useState("");
 
   // § user-directed - real PTO/leave management (20260908200000). A
   // separate review queue rather than folded into pendingItems above -
@@ -99,18 +81,14 @@ export default function ManagerConsolePage() {
   const canApproveLeave = hasPermission("leave.approve");
 
   const load = useCallback(async () => {
-    setLoading(true);
-    const [attendanceResult, pendingResult, pendingLeaveResult, approvedLeaveResult] = await Promise.all([
-      ManagerRepository.listTodayAttendance(),
+    const [pendingResult, pendingLeaveResult, approvedLeaveResult] = await Promise.all([
       ManagerRepository.listPendingReview(),
       canApproveLeave ? LeaveRepository.listPendingReview() : Promise.resolve({ success: true, message: null, data: [] as PendingLeaveReviewRow[] }),
       canApproveLeave ? LeaveRepository.listApproved() : Promise.resolve({ success: true, message: null, data: [] as ApprovedLeaveRow[] }),
     ]);
-    setAttendance(attendanceResult.success ? attendanceResult.data ?? [] : []);
     setPendingItems(pendingResult.success ? pendingResult.data ?? [] : []);
     setPendingLeave(pendingLeaveResult.success ? pendingLeaveResult.data ?? [] : []);
     setApprovedLeave(approvedLeaveResult.success ? approvedLeaveResult.data ?? [] : []);
-    setLoading(false);
   }, [canApproveLeave]);
 
   useEffect(() => {
@@ -194,32 +172,6 @@ export default function ManagerConsolePage() {
     load();
   };
 
-  // § live UX review, user-directed - "the photo the employee captures
-  // should show next to the clock-in time, and the clock-out photo
-  // next to the clock-out time." Storage paths only travel with the
-  // row (ManagerRepository); the actual image is downloaded on demand
-  // here, matching EvidenceRepository's own authenticated-download
-  // pattern (no raw public URL, RLS-respecting, revoked on close).
-  const openEvidence = async (storagePath: string, title: string) => {
-    setEvidenceModalTitle(title);
-    setEvidenceUrl(null);
-    setEvidenceError("");
-    setEvidenceLoading(true);
-    const result = await EvidenceRepository.getEvidenceObjectUrl(storagePath);
-    setEvidenceLoading(false);
-    if (!result.success || !result.data) {
-      setEvidenceError(humanizeBackendError(result.message, t) ?? t("attendance.photoLoadError"));
-      return;
-    }
-    setEvidenceUrl(result.data);
-  };
-
-  const closeEvidence = () => {
-    if (evidenceUrl) URL.revokeObjectURL(evidenceUrl);
-    setEvidenceModalTitle(null);
-    setEvidenceUrl(null);
-    setEvidenceError("");
-  };
 
   // § final visual consistency pass, correction (item 12) - "structured
   // employee/day row: Employee | Site/Location | Clock In | Clock Out |
@@ -235,55 +187,6 @@ export default function ManagerConsolePage() {
   // day). Replaced with worked hours (clockInAt -> clockOutAt, or now
   // if still open) - useful for every row, computed from the same real
   // data already on screen, not a new metric.
-  const attendanceColumns: TableColumn<TodayAttendanceRow>[] = [
-    { key: "name", header: t("attendance.employee"), render: (row) => row.userFullName },
-    { key: "site", header: t("attendance.site"), render: (row) => row.siteName },
-    {
-      key: "clockInAt",
-      header: t("attendance.clockInAt"),
-      render: (row) => (
-        <span style={{ display: "inline-flex", alignItems: "center", gap: "var(--space-1)" }}>
-          {formatTimeOnly(row.clockInAt, i18n.language)}
-          {row.clockInEvidencePath ? (
-            <button
-              type="button"
-              onClick={() => openEvidence(row.clockInEvidencePath as string, `${row.userFullName} — ${t("attendance.clockInAt")}`)}
-              title={t("attendance.viewPhoto")}
-              aria-label={t("attendance.viewPhoto")}
-              style={{ display: "inline-flex", alignItems: "center", background: "none", border: "none", cursor: "pointer", color: "var(--text-link)", padding: 0 }}
-            >
-              <Camera size={14} />
-            </button>
-          ) : null}
-        </span>
-      ),
-    },
-    {
-      key: "clockOutAt",
-      header: t("attendance.clockOutAt"),
-      render: (row) =>
-        row.clockOutAt ? (
-          <span style={{ display: "inline-flex", alignItems: "center", gap: "var(--space-1)" }}>
-            {formatTimeOnly(row.clockOutAt, i18n.language)}
-            {row.clockOutEvidencePath ? (
-              <button
-                type="button"
-                onClick={() => openEvidence(row.clockOutEvidencePath as string, `${row.userFullName} — ${t("attendance.clockOutAt")}`)}
-                title={t("attendance.viewPhoto")}
-                aria-label={t("attendance.viewPhoto")}
-                style={{ display: "inline-flex", alignItems: "center", background: "none", border: "none", cursor: "pointer", color: "var(--text-link)", padding: 0 }}
-              >
-                <Camera size={14} />
-              </button>
-            ) : null}
-          </span>
-        ) : (
-          "—"
-        ),
-    },
-    { key: "status", header: t("attendance.status"), render: (row) => <StatusBadge status={row.status === "clocked_in" ? "active" : "neutral"}>{t(`attendance.${row.status}`)}</StatusBadge> },
-    { key: "workedHours", header: t("attendance.workedHours"), render: (row) => formatWorkedHours(row.clockInAt, row.clockOutAt) },
-  ];
 
   return (
     <PageShell title="">
@@ -299,12 +202,14 @@ export default function ManagerConsolePage() {
         </Link>
       </p>
 
-      <Card title={t("attendance.title")}>
-        <p style={{ margin: "calc(-1 * var(--space-2)) 0 var(--space-3)", fontSize: "var(--font-xs)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.04em" }}>
-          {formatDateOnly(new Date(), i18n.language)}
-        </p>
-        <Table columns={attendanceColumns} data={attendance} getRowId={(row) => row.sessionId} loading={loading} emptyMessage={t("attendance.empty")} />
-      </Card>
+      {/* Owner 2026-10-20 (no duplicates): today's attendance is the Attendance
+          Record's Today view (and who is in, on the dashboard); this page is
+          for what needs a decision. */}
+      <p style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-sm)" }}>
+        <Link to="/attendance?period=today" style={{ color: "var(--text-link)" }}>
+          {t("attendance.openToday")}
+        </Link>
+      </p>
 
       <Card title={t("pending.title")}>
         <ErrorText>{error}</ErrorText>
@@ -469,15 +374,6 @@ export default function ManagerConsolePage() {
         <ErrorText>{revokeError}</ErrorText>
       </Modal>
 
-      <Modal isOpen={Boolean(evidenceModalTitle)} onClose={closeEvidence} title={evidenceModalTitle ?? t("attendance.photoModalTitle")}>
-        {evidenceLoading ? (
-          <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("attendance.photoLoading")}</p>
-        ) : evidenceError ? (
-          <ErrorText>{evidenceError}</ErrorText>
-        ) : evidenceUrl ? (
-          <img src={evidenceUrl} alt={t("attendance.photoAlt")} style={{ maxWidth: "100%", borderRadius: "var(--radius-md)", display: "block" }} />
-        ) : null}
-      </Modal>
     </PageShell>
   );
 }

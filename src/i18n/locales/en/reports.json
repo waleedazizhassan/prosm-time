@@ -150,5 +150,6 @@
     "exportedByColumn": "Exported by",
     "createdAtColumn": "Exported",
     "downloadAction": "Download"
-  }
+  },
+  "ownExportsHint": "Your attendance record, allowances and timesheets are downloaded and printed from their own pages. Every PDF you export is kept here, so you can download it again any time."
 }

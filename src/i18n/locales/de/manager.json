@@ -19,7 +19,8 @@
     "photoModalTitle": "Anwesenheitsfoto",
     "photoLoading": "Foto wird geladen…",
     "photoAlt": "Anwesenheitsnachweis-Foto",
-    "photoLoadError": "Dieses Foto kann nicht geladen werden."
+    "photoLoadError": "Dieses Foto kann nicht geladen werden.",
+    "openToday": "Anwesenheit heute → Anwesenheit"
   },
   "pending": {
     "title": "Ausstehende Prüfung",

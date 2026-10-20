@@ -19,7 +19,8 @@
     "photoModalTitle": "Foto di presenza",
     "photoLoading": "Caricamento foto…",
     "photoAlt": "Foto di evidenza della presenza",
-    "photoLoadError": "Impossibile caricare questa foto."
+    "photoLoadError": "Impossibile caricare questa foto.",
+    "openToday": "Presenze di oggi → Presenze"
   },
   "pending": {
     "title": "In attesa di revisione",

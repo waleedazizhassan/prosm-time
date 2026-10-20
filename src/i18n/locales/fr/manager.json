@@ -19,7 +19,8 @@
     "photoModalTitle": "Photo de présence",
     "photoLoading": "Chargement de la photo…",
     "photoAlt": "Photo de justificatif de présence",
-    "photoLoadError": "Impossible de charger cette photo."
+    "photoLoadError": "Impossible de charger cette photo.",
+    "openToday": "Pointages du jour → Pointages"
   },
   "pending": {
     "title": "En attente de révision",

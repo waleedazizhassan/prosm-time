@@ -150,5 +150,6 @@
     "exportedByColumn": "Esportato da",
     "createdAtColumn": "Esportato il",
     "downloadAction": "Scarica"
-  }
+  },
+  "ownExportsHint": "Presenze, indennità e fogli ore si scaricano e stampano dalle loro pagine. Ogni PDF esportato resta qui, da scaricare di nuovo quando vuoi."
 }

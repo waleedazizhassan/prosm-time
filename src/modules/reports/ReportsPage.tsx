@@ -89,13 +89,16 @@ export default function ReportsPage() {
   const hasManagementScope = Boolean(profile?.isOwner) || hasPermission("exceptions.manage");
   const visibleReportTypes = useMemo<ReportType[]>(
     () =>
-      (["attendance", "allowances", "timesheets", "workforce", "contractor", "site", "late", "missingCheckouts", "leaveConflicts", "absences", "managerOverrides", "locationViolations", "sos"] as ReportType[]).filter(
+      // Owner 2026-10-20 (no duplicates): the attendance record, allowances and
+      // timesheets are exported - and printed - from their own pages; Reports
+      // keeps the reports found only here, and the archive of every export.
+      (["workforce", "contractor", "site", "late", "missingCheckouts", "leaveConflicts", "absences", "managerOverrides", "locationViolations", "sos"] as ReportType[]).filter(
         (type) => hasManagementScope || !MANAGEMENT_SCOPED_TYPES.includes(type),
       ),
     [hasManagementScope],
   );
 
-  const [reportType, setReportType] = useState<ReportType>("attendance");
+  const [reportType, setReportType] = useState<ReportType>(() => visibleReportTypes[0] ?? "late");
 
   const today = new Date();
   const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -361,7 +364,7 @@ export default function ReportsPage() {
   // stale selection - e.g. a role change mid-session - must not leave
   // reportType pointed at a now-hidden type).
   useEffect(() => {
-    if (!visibleReportTypes.includes(reportType)) setReportType("attendance");
+    if (visibleReportTypes.length > 0 && !visibleReportTypes.includes(reportType)) setReportType(visibleReportTypes[0]);
   }, [visibleReportTypes, reportType]);
 
   const employeeNames = useMemo(() => {
@@ -447,6 +450,9 @@ export default function ReportsPage() {
     <PageShell title="">
       <PageBanner pageId="reports" illustration={reportsHeaderImage} />
 
+      {visibleReportTypes.length === 0 ? (
+        <p style={{ margin: "0 0 var(--space-4)", fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("ownExportsHint")}</p>
+      ) : (
       <Card>
         <div className={styles.typeGrid}>
           {visibleReportTypes.map((type) => {
@@ -503,6 +509,7 @@ export default function ReportsPage() {
           </>
         )}
       </Card>
+      )}
 
       <Card title={t("recentExports.title")}>
         <Table

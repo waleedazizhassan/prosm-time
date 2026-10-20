@@ -150,5 +150,6 @@
     "exportedByColumn": "Exporté par",
     "createdAtColumn": "Exporté le",
     "downloadAction": "Télécharger"
-  }
+  },
+  "ownExportsHint": "Vos pointages, indemnités et feuilles de temps se téléchargent et s'impriment depuis leurs pages. Chaque PDF exporté est conservé ici pour être retéléchargé à tout moment."
 }

@@ -150,5 +150,6 @@
     "exportedByColumn": "Exportiert von",
     "createdAtColumn": "Exportiert am",
     "downloadAction": "Herunterladen"
-  }
+  },
+  "ownExportsHint": "Anwesenheit, Zulagen und Stundenzettel laden und drucken Sie auf ihren eigenen Seiten. Jedes exportierte PDF wird hier aufbewahrt und kann jederzeit erneut geladen werden."
 }

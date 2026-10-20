@@ -19,7 +19,8 @@
     "photoModalTitle": "صورة الحضور",
     "photoLoading": "جارٍ تحميل الصورة…",
     "photoAlt": "صورة إثبات الحضور",
-    "photoLoadError": "تعذّر تحميل هذه الصورة."
+    "photoLoadError": "تعذّر تحميل هذه الصورة.",
+    "openToday": "حضور اليوم ← سجل الحضور"
   },
   "pending": {
     "title": "بانتظار المراجعة",
