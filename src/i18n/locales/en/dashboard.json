@@ -238,5 +238,6 @@
       "leave": "My leave",
       "leaveHint": "Request leave and see your balance"
     }
-  }
+  },
+  "loadFailed": "Some of today's figures could not be loaded, so they may show as zero. It tries again every minute; reopening the app also helps. ({{reason}})"
 }

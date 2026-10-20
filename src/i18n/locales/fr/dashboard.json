@@ -238,5 +238,6 @@
       "leave": "Mes congés",
       "leaveHint": "Demander un congé et voir votre solde"
     }
-  }
+  },
+  "loadFailed": "Certains chiffres du jour n'ont pas pu être chargés et peuvent donc s'afficher à zéro. Nouvel essai chaque minute ; rouvrir l’application aide aussi. ({{reason}})"
 }

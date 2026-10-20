@@ -18,6 +18,7 @@ import Modal from "../../components/common/Modal";
 import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import EmptyState from "../../components/common/EmptyState";
+import ErrorText from "../../components/common/ErrorText";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
 import styles from "./AdminOverviewCard.module.css";
 import dashboardArt from "../../assets/illustrations/dashboard.svg";
@@ -111,6 +112,7 @@ export default function AdminOverviewCard() {
   // Manager or Supervisor, the site(s) they manage.
   const profileId = profile?.id;
   const isOwner = Boolean(profile?.isOwner);
+  const roleKey = profile?.roleKey ?? "";
   const [organizationName, setOrganizationName] = useState("");
   const [managedSiteNames, setManagedSiteNames] = useState<string[]>([]);
   const [todayAttendance, setTodayAttendance] = useState<TodayAttendanceRow[]>([]);
@@ -126,6 +128,8 @@ export default function AdminOverviewCard() {
   // calls for a date range - no new RPC, just the same query pointed
   // at the last 7 days and aggregated client-side into hours/day.
   const [weeklyHistory, setWeeklyHistory] = useState<TodayAttendanceRow[]>([]);
+  // Owner 2026-10-20: a dashboard that could not load showed zeros as if nobody came; now it says so.
+  const [loadError, setLoadError] = useState<string | null>(null);
   // § real reference screenshots (Deputy), 2026-09-11 - a single
   // unified "Needs Attention" card aggregating every real pending-
   // action type this app already has, instead of one scattered alert
@@ -155,7 +159,7 @@ export default function AdminOverviewCard() {
       await Promise.all([
         SiteRepository.listSites(),
         ManagerRepository.listTodayAttendance(),
-        ManagerRepository.listPendingReview(),
+        ManagerRepository.listPendingReview(profileId ? { id: profileId, isOwner, roleKey } : undefined),
         EmployeeRepository.listOrganizationMembers(),
         SiteRepository.listAllAssignedSiteNames(),
         LeaveRepository.listToday(),
@@ -183,6 +187,8 @@ export default function AdminOverviewCard() {
     const openShiftUserIds = new Set((attendanceResult.success ? attendanceResult.data ?? [] : []).filter((row) => row.status === "clocked_in").map((row) => row.userId));
     setOnBreak(onBreakResult.success ? (onBreakResult.data ?? []).filter((row) => openShiftUserIds.has(row.userId)) : []);
     setWeeklyHistory(weeklyResult.success ? (weeklyResult.data ?? []) : []);
+    const failed = [attendanceResult, weeklyResult, membersResult, pendingResult].find((result) => !result.success);
+    setLoadError(failed ? failed.message ?? "" : null);
     setPendingLeaveCount(pendingLeaveResult.success ? (pendingLeaveResult.data ?? []).length : 0);
     setPendingTimesheetCount(pendingTimesheetResult.success ? (pendingTimesheetResult.data ?? []).length : 0);
 
@@ -208,7 +214,7 @@ export default function AdminOverviewCard() {
       setScheduledHours(0);
     }
     setLoading(false);
-  }, [profileId, isOwner]);
+  }, [profileId, isOwner, roleKey]);
 
   // Owner 2026-10-20 ("someone is clocked in and the card doesn't show it"):
   // the numbers refresh every minute and whenever the app comes back to the front.
@@ -320,6 +326,7 @@ export default function AdminOverviewCard() {
 
   return (
     <Card>
+      {loadError !== null ? <ErrorText>{t("loadFailed", { reason: loadError })}</ErrorText> : null}
       {/* Owner 2026-10-19: a compact greeting card like the other pages' name
           cards - greeting, today's date, the organisation (and, for a Manager
           or Supervisor, their sites) and a flat illustration. The Manager

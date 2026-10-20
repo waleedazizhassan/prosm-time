@@ -238,5 +238,6 @@
       "leave": "Mein Urlaub",
       "leaveHint": "Urlaub beantragen und Restanspruch sehen"
     }
-  }
+  },
+  "loadFailed": "Einige Zahlen von heute konnten nicht geladen werden und erscheinen daher evtl. als null. Es wird jede Minute erneut versucht; die App neu zu öffnen hilft auch. ({{reason}})"
 }

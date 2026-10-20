@@ -40,7 +40,7 @@ const ACTIONS_BY_KIND: Record<PendingReviewKind, ReviewAction[]> = {
 // reports/audit-log-UI are explicitly WP-16/WP-17/later scope.
 export default function ManagerConsolePage() {
   const { t, i18n } = useTranslation("manager");
-  const { hasPermission } = useAuth();
+  const { hasPermission, profile } = useAuth();
 
   const [pendingItems, setPendingItems] = useState<PendingReviewItem[]>([]);
   const [reviewTarget, setReviewTarget] = useState<PendingReviewItem | null>(null);
@@ -82,14 +82,14 @@ export default function ManagerConsolePage() {
 
   const load = useCallback(async () => {
     const [pendingResult, pendingLeaveResult, approvedLeaveResult] = await Promise.all([
-      ManagerRepository.listPendingReview(),
+      ManagerRepository.listPendingReview(profile ?? undefined),
       canApproveLeave ? LeaveRepository.listPendingReview() : Promise.resolve({ success: true, message: null, data: [] as PendingLeaveReviewRow[] }),
       canApproveLeave ? LeaveRepository.listApproved() : Promise.resolve({ success: true, message: null, data: [] as ApprovedLeaveRow[] }),
     ]);
     setPendingItems(pendingResult.success ? pendingResult.data ?? [] : []);
     setPendingLeave(pendingLeaveResult.success ? pendingLeaveResult.data ?? [] : []);
     setApprovedLeave(approvedLeaveResult.success ? approvedLeaveResult.data ?? [] : []);
-  }, [canApproveLeave]);
+  }, [canApproveLeave, profile]);
 
   useEffect(() => {
     load();

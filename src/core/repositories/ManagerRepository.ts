@@ -1,4 +1,5 @@
 import DatabaseManager from "../database/DatabaseManager";
+import { roleRank } from "../utils/roleRank";
 
 export interface ServiceResult<T = null> {
   success: boolean;
@@ -90,11 +91,29 @@ interface RawMockLocationRow {
   event_type: string;
   occurred_at: string;
   created_at: string;
+  user_id?: string;
   users: RawUserRef | RawUserRef[] | null;
 }
 
 interface RawUserRef {
   full_name: string | null;
+  is_owner?: boolean | null;
+  roles?: { role_key: string } | { role_key: string }[] | null;
+}
+
+// Workflow audit I1 (owner 2026-10-20): the queue shows only what the reader can decide -
+// never their own items, nor a peer's or a superior's (the server refuses those anyway).
+const REVIEW_USER = "full_name, is_owner, roles(role_key)";
+export interface ReviewCaller {
+  id: string;
+  isOwner: boolean;
+  roleKey: string;
+}
+function callerCanReview(caller: ReviewCaller | undefined, subjectId: string | undefined, user: RawUserRef | null | undefined): boolean {
+  if (!caller || caller.isOwner) return true;
+  if (!subjectId || subjectId === caller.id) return false;
+  const role = Array.isArray(user?.roles) ? user?.roles[0] : user?.roles;
+  return roleRank(caller) > roleRank({ isOwner: Boolean(user?.is_owner), roleKey: role?.role_key ?? "employee" });
 }
 
 interface RawAttendanceSessionRow {
@@ -129,6 +148,7 @@ interface RawOfflineTimeReviewRow {
   device_time: string;
   server_received_at: string;
   created_at: string;
+  user_id?: string;
   users: RawUserRef | RawUserRef[] | null;
 }
 
@@ -149,6 +169,7 @@ interface RawGeofenceExceptionRow {
   distance_meters: number;
   employee_reason: string | null;
   created_at: string;
+  user_id?: string;
   users: RawUserRef | RawUserRef[] | null;
 }
 
@@ -158,6 +179,7 @@ interface RawCorrectionRequestRow {
   proposed_correct_time: string;
   reason: string;
   created_at: string;
+  user_id?: string;
   users: RawUserRef | RawUserRef[] | null;
 }
 
@@ -416,14 +438,14 @@ class ManagerRepository {
     return this.fetchAttendanceRows(from.toISOString(), to.toISOString());
   }
 
-  async listPendingReview(): Promise<ServiceResult<PendingReviewItem[]>> {
+  async listPendingReview(caller?: ReviewCaller): Promise<ServiceResult<PendingReviewItem[]>> {
     try {
       const [exceptionsResult, correctionsResult, offlineResult, mockResult] = await Promise.all([
-        this.client.from("geofence_exceptions").select("id, distance_meters, employee_reason, created_at, users(full_name)").eq("status", "pending_review"),
-        this.client.from("correction_requests").select("id, proposed_event_type, proposed_correct_time, reason, created_at, users(full_name)").eq("status", "pending"),
+        this.client.from("geofence_exceptions").select(`id, user_id, distance_meters, employee_reason, created_at, users(${REVIEW_USER})`).eq("status", "pending_review"),
+        this.client.from("correction_requests").select(`id, user_id, proposed_event_type, proposed_correct_time, reason, created_at, users(${REVIEW_USER})`).eq("status", "pending"),
         // offline_time_reviews has two links to users (the person, the reviewer): name the person's.
-        this.client.from("offline_time_reviews").select("id, action, device_time, server_received_at, created_at, users!offline_time_reviews_user_id_fkey(full_name)").eq("status", "pending"),
-        this.client.from("mock_location_flags").select("id, event_type, occurred_at, created_at, users!mock_location_flags_user_id_fkey(full_name)").eq("status", "pending_review"),
+        this.client.from("offline_time_reviews").select(`id, user_id, action, device_time, server_received_at, created_at, users!offline_time_reviews_user_id_fkey(${REVIEW_USER})`).eq("status", "pending"),
+        this.client.from("mock_location_flags").select(`id, user_id, event_type, occurred_at, created_at, users!mock_location_flags_user_id_fkey(${REVIEW_USER})`).eq("status", "pending_review"),
       ]);
 
       if (exceptionsResult.error) return createError(exceptionsResult.error.message);
@@ -431,7 +453,10 @@ class ManagerRepository {
       if (offlineResult.error) return createError(offlineResult.error.message);
       if (mockResult.error) return createError(mockResult.error.message);
 
-      const exceptionItems: PendingReviewItem[] = ((exceptionsResult.data ?? []) as RawGeofenceExceptionRow[]).map((row) => {
+      const reviewable = <T extends { user_id?: string; users: RawUserRef | RawUserRef[] | null }>(rows: T[]) =>
+        rows.filter((row) => callerCanReview(caller, row.user_id, Array.isArray(row.users) ? row.users[0] : row.users));
+
+      const exceptionItems: PendingReviewItem[] = reviewable((exceptionsResult.data ?? []) as RawGeofenceExceptionRow[]).map((row) => {
         const user = Array.isArray(row.users) ? row.users[0] : row.users;
         return {
           kind: "geofence_exception" as const,
@@ -442,7 +467,7 @@ class ManagerRepository {
         };
       });
 
-      const correctionItems: PendingReviewItem[] = ((correctionsResult.data ?? []) as RawCorrectionRequestRow[]).map((row) => {
+      const correctionItems: PendingReviewItem[] = reviewable((correctionsResult.data ?? []) as RawCorrectionRequestRow[]).map((row) => {
         const user = Array.isArray(row.users) ? row.users[0] : row.users;
         return {
           kind: "correction_request" as const,
@@ -453,7 +478,7 @@ class ManagerRepository {
         };
       });
 
-      const offlineItems: PendingReviewItem[] = ((offlineResult.data ?? []) as RawOfflineTimeReviewRow[]).map((row) => {
+      const offlineItems: PendingReviewItem[] = reviewable((offlineResult.data ?? []) as RawOfflineTimeReviewRow[]).map((row) => {
         const user = Array.isArray(row.users) ? row.users[0] : row.users;
         return {
           kind: "offline_time" as const,
@@ -465,7 +490,7 @@ class ManagerRepository {
         };
       });
 
-      const mockItems: PendingReviewItem[] = ((mockResult.data ?? []) as RawMockLocationRow[]).map((row) => {
+      const mockItems: PendingReviewItem[] = reviewable((mockResult.data ?? []) as RawMockLocationRow[]).map((row) => {
         const user = Array.isArray(row.users) ? row.users[0] : row.users;
         return {
           kind: "mock_location" as const,
