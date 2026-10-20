@@ -13,6 +13,7 @@ import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
+import { localizePush } from "../_shared/localizePush.ts";
 
 interface ServiceAccount {
   project_id: string;
@@ -80,8 +81,8 @@ serve(async (request: Request) => {
     // Service role only: anyone else gets "permission denied" here.
     const { data: message, error } = await client.rpc("get_prosm_time_push_message", { p_notification_id: notificationId });
     if (error) return errorResponse("This endpoint requires the service role key.", 401, "UNAUTHORIZED");
-    const tokens: string[] = message?.tokens ?? [];
-    if (!message || tokens.length === 0) return successResponse({ sent: 0 });
+    const devices: { token: string; language: string }[] = message?.devices ?? [];
+    if (!message || devices.length === 0) return successResponse({ sent: 0 });
 
     const rawAccount = Deno.env.get("FCM_SERVICE_ACCOUNT");
     if (!rawAccount) return successResponse({ sent: 0, skipped: "FCM_SERVICE_ACCOUNT is not set" });
@@ -91,23 +92,37 @@ serve(async (request: Request) => {
     const urgent = message.priority === "high" || message.type === "sos_alert";
     const gone: string[] = [];
     let sent = 0;
-    for (const deviceToken of tokens) {
+    for (const { token: deviceToken, language } of devices) {
+      // In the phone's language, with the in-app bell's own texts.
+      const text = localizePush(String(message.type ?? ""), message.data ?? {}, language, { title: message.title, body: message.body });
       const response = await fetch(`https://fcm.googleapis.com/v1/projects/${account.project_id}/messages:send`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
         body: JSON.stringify({
           message: {
             token: deviceToken,
-            notification: { title: message.title, body: message.body },
+            notification: { title: text.title, body: text.body },
             data: {
               notificationId: String(message.notificationId),
               type: String(message.type ?? ""),
               entityType: String(message.entityType ?? ""),
               entityId: String(message.entityId ?? ""),
             },
+            // Owner 2026-10-20 ("no sound"): channels with sound and vibration
+            // (the first ones were created silent and Android keeps a channel's
+            // settings, so these are new). HIGH so it shows at once, on screen.
             android: {
-              priority: urgent ? "HIGH" : "NORMAL",
-              notification: { channel_id: urgent ? "prosm-urgent" : "prosm-default", sound: "default" },
+              priority: "HIGH",
+              notification: {
+                channel_id: urgent ? "prosm-sos" : "prosm-alerts",
+                sound: "default",
+                default_sound: true,
+                default_vibrate_timings: true,
+                notification_priority: urgent ? "PRIORITY_MAX" : "PRIORITY_HIGH",
+                visibility: "PUBLIC",
+                icon: "ic_stat_prosm",
+                color: "#16A34A",
+              },
             },
           },
         }),

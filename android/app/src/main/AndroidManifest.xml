@@ -11,6 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!-- Push notifications (owner 2026-10-20): the notification bar icon, its colour and
+             the default channel for a message that names none. -->
+        <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/ic_stat_prosm" />
+        <meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/prosm_notification" />
+        <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="prosm-alerts" />
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode|navigation|density"
             android:name=".MainActivity"

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- PROSM green, behind the notification icon. -->
+    <color name="prosm_notification">#16A34A</color>
+</resources>
