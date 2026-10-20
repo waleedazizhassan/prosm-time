@@ -33,6 +33,14 @@ export function localizePush(type: string, data: Data, language: string, fallbac
     return title && body !== null ? { title, body } : null;
   };
 
+  // Owner 2026-10-20: the reviewer's note (data.notes, when sent) follows the decision.
+  const notes = str(data.notes)?.trim() || null;
+  const withNotes = (titlePath: string, bodyPath: string, vars: Record<string, unknown> = {}) => {
+    const text = pair(titlePath, bodyPath, vars);
+    const suffix = notes ? t("correctionReviewed.notesSuffix", { notes }) : null;
+    return text && suffix ? { title: text.title, body: `${text.body} ${suffix}` } : text;
+  };
+
   let result: { title: string; body: string } | null = null;
   switch (type) {
     case "out_of_zone_employee":
@@ -65,9 +73,9 @@ export function localizePush(type: string, data: Data, language: string, fallbac
       const kind = str(data.kind);
       const action = str(data.actionType);
       if (!kind || !action) break;
-      const suffix = kind === "exception" ? "Exception" : kind === "correction" ? "Correction" : kind === "leave" ? "Leave" : null;
+      const suffix = ({ exception: "Exception", correction: "Correction", leave: "Leave", mock_location: "MockLocation", offline_time: "OfflineTime" } as Record<string, string>)[kind];
       const decision = t(`decision.${action}`) ?? action;
-      if (suffix) result = pair(`correctionReviewed.title${suffix}`, "correctionReviewed.body", { decision });
+      if (suffix) result = withNotes(`correctionReviewed.title${suffix}`, "correctionReviewed.body", { decision });
       break;
     }
     case "break_exceeded":
@@ -84,19 +92,25 @@ export function localizePush(type: string, data: Data, language: string, fallbac
       result = pair("timesheet.submittedTitle", "timesheet.submittedBody");
       break;
     case "timesheet_approved":
-      result = pair("timesheet.approvedTitle", "timesheet.approvedBody");
+      result = withNotes("timesheet.approvedTitle", "timesheet.approvedBody");
       break;
     case "timesheet_rejected":
-      result = pair("timesheet.rejectedTitle", "timesheet.rejectedBody");
+      result = withNotes("timesheet.rejectedTitle", "timesheet.rejectedBody");
       break;
     case "timesheet_correction_requested":
       result = pair("timesheet.correctionRequestedTitle", "timesheet.correctionRequestedBody");
       break;
     case "timesheet_correction_approved":
-      result = pair("timesheet.correctionApprovedTitle", "timesheet.correctionApprovedBody");
+      result = withNotes("timesheet.correctionApprovedTitle", "timesheet.correctionApprovedBody");
       break;
     case "timesheet_correction_rejected":
-      result = pair("timesheet.correctionRejectedTitle", "timesheet.correctionRejectedBody");
+      result = withNotes("timesheet.correctionRejectedTitle", "timesheet.correctionRejectedBody");
+      break;
+    case "trial_ending":
+      result = pair("trial.endingTitle", "trial.endingBody");
+      break;
+    case "trial_ended":
+      result = pair("trial.endedTitle", "trial.endedBody");
       break;
     case "shift_assigned": {
       const date = str(data.shiftDate);

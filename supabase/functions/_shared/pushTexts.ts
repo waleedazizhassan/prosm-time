@@ -28,7 +28,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "titleException": "تمت مراجعة الاستثناء الخاص بك",
         "titleCorrection": "تمت مراجعة طلب التصحيح الخاص بك",
         "titleLeave": "تمت مراجعة طلب إجازتك",
-        "body": "القرار: {{decision}}."
+        "body": "القرار: {{decision}}.",
+        "titleMockLocation": "تمت مراجعة موقعك",
+        "titleOfflineTime": "تمت مراجعة وقتك المسجَّل دون اتصال",
+        "notesSuffix": "ملاحظة المراجِع: «{{notes}}»"
       },
       "breakExceeded": {
         "title": "تجاوزت مدة الاستراحة",
@@ -74,6 +77,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "title": "تم رصد تحرك غير منطقي في الموقع",
         "body": "موقع {{name}} يوحي بسرعة تقارب {{speed}} كم/س منذ آخر موقع معروف - يرجى المراجعة."
       },
+      "trial": {
+        "endingTitle": "الفترة التجريبية لـ PROSM Time تنتهي قريبًا",
+        "endingBody": "تنتهي الفترة التجريبية بعد أسبوع. بياناتك محفوظة ولن تُحذف. للاستمرار أدخل كود تفعيل أو تواصل معنا على sales@prosm.net.",
+        "endedTitle": "انتهت الفترة التجريبية لـ PROSM Time",
+        "endedBody": "البرنامج متوقف مؤقتًا وكل بياناتك محفوظة. أدخل كود تفعيل أو تواصل معنا على sales@prosm.net وسيعود كل شيء كما كان."
+      },
       "decision": {
         "approved": "تمت الموافقة",
         "rejected": "تم الرفض",
@@ -115,7 +124,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "titleException": "Your exception was reviewed",
         "titleCorrection": "Your correction request was reviewed",
         "titleLeave": "Your leave request was reviewed",
-        "body": "Decision: {{decision}}."
+        "body": "Decision: {{decision}}.",
+        "titleMockLocation": "Your location was reviewed",
+        "titleOfflineTime": "Your offline time was reviewed",
+        "notesSuffix": "Note: \"{{notes}}\""
       },
       "breakExceeded": {
         "title": "Break duration exceeded",
@@ -161,6 +173,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "title": "Unusual location movement detected",
         "body": "{{name}}'s location implies about {{speed}} km/h since their last known position - please review."
       },
+      "trial": {
+        "endingTitle": "Your PROSM Time trial ends soon",
+        "endingBody": "Your trial ends in a week. Your data is kept and will not be deleted. To continue, enter an activation code or contact us at sales@prosm.net.",
+        "endedTitle": "Your PROSM Time trial has ended",
+        "endedBody": "The app is paused and all your data is kept. Enter an activation code or contact us at sales@prosm.net and everything returns as it was."
+      },
       "decision": {
         "approved": "Approved",
         "rejected": "Rejected",
@@ -202,7 +220,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "titleException": "Ihre Ausnahme wurde geprüft",
         "titleCorrection": "Ihr Korrekturantrag wurde geprüft",
         "titleLeave": "Ihr Urlaubsantrag wurde geprüft",
-        "body": "Entscheidung: {{decision}}."
+        "body": "Entscheidung: {{decision}}.",
+        "titleMockLocation": "Ihr Standort wurde geprüft",
+        "titleOfflineTime": "Ihre Offline-Zeit wurde geprüft",
+        "notesSuffix": "Anmerkung: „{{notes}}“"
       },
       "breakExceeded": {
         "title": "Pausendauer überschritten",
@@ -248,6 +269,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "title": "Ungewöhnliche Standortbewegung erkannt",
         "body": "Der Standort von {{name}} impliziert seit der letzten bekannten Position etwa {{speed}} km/h - bitte überprüfen."
       },
+      "trial": {
+        "endingTitle": "Ihre PROSM Time-Testphase endet bald",
+        "endingBody": "Ihre Testphase endet in einer Woche. Ihre Daten bleiben erhalten und werden nicht gelöscht. Um weiterzumachen, geben Sie einen Aktivierungscode ein oder kontaktieren Sie uns unter sales@prosm.net.",
+        "endedTitle": "Ihre PROSM Time-Testphase ist beendet",
+        "endedBody": "Die App ist pausiert, alle Ihre Daten bleiben erhalten. Geben Sie einen Aktivierungscode ein oder kontaktieren Sie uns unter sales@prosm.net, und alles ist wieder wie vorher."
+      },
       "decision": {
         "approved": "Genehmigt",
         "rejected": "Abgelehnt",
@@ -289,7 +316,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "titleException": "Votre exception a été examinée",
         "titleCorrection": "Votre demande de correction a été examinée",
         "titleLeave": "Votre demande de congé a été examinée",
-        "body": "Décision : {{decision}}."
+        "body": "Décision : {{decision}}.",
+        "titleMockLocation": "Votre localisation a été examinée",
+        "titleOfflineTime": "Votre temps hors ligne a été examiné",
+        "notesSuffix": "Remarque : « {{notes}} »"
       },
       "breakExceeded": {
         "title": "Durée de pause dépassée",
@@ -335,6 +365,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "title": "Déplacement de localisation inhabituel détecté",
         "body": "La position de {{name}} implique environ {{speed}} km/h depuis sa dernière position connue - veuillez vérifier."
       },
+      "trial": {
+        "endingTitle": "Votre essai PROSM Time se termine bientôt",
+        "endingBody": "Votre essai se termine dans une semaine. Vos données sont conservées et ne seront pas supprimées. Pour continuer, saisissez un code d'activation ou contactez-nous à sales@prosm.net.",
+        "endedTitle": "Votre essai PROSM Time est terminé",
+        "endedBody": "L'application est en pause et toutes vos données sont conservées. Saisissez un code d'activation ou contactez-nous à sales@prosm.net et tout redeviendra comme avant."
+      },
       "decision": {
         "approved": "Approuvé",
         "rejected": "Rejeté",
@@ -376,7 +412,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "titleException": "La tua eccezione è stata esaminata",
         "titleCorrection": "La tua richiesta di correzione è stata esaminata",
         "titleLeave": "La tua richiesta di ferie è stata esaminata",
-        "body": "Decisione: {{decision}}."
+        "body": "Decisione: {{decision}}.",
+        "titleMockLocation": "La tua posizione è stata esaminata",
+        "titleOfflineTime": "Il tuo tempo offline è stato esaminato",
+        "notesSuffix": "Nota: «{{notes}}»"
       },
       "breakExceeded": {
         "title": "Durata della pausa superata",
@@ -421,6 +460,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "locationPlausibilityFlag": {
         "title": "Rilevato spostamento di posizione insolito",
         "body": "La posizione di {{name}} implica circa {{speed}} km/h dall'ultima posizione nota - si prega di verificare."
+      },
+      "trial": {
+        "endingTitle": "La tua prova di PROSM Time sta per scadere",
+        "endingBody": "La tua prova scade tra una settimana. I tuoi dati sono conservati e non verranno eliminati. Per continuare, inserisci un codice di attivazione o contattaci a sales@prosm.net.",
+        "endedTitle": "La tua prova di PROSM Time è terminata",
+        "endedBody": "L'app è in pausa e tutti i tuoi dati sono conservati. Inserisci un codice di attivazione o contattaci a sales@prosm.net e tutto tornerà come prima."
       },
       "decision": {
         "approved": "Approvato",

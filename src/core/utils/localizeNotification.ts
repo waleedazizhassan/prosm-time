@@ -15,6 +15,9 @@ import type { AppNotification } from "../repositories/NotificationRepository";
 // same graceful-degradation posture as humanizeBackendError.
 export default function localizeNotification(notification: AppNotification, t: TFunction): { title: string; body: string | null } {
   const data = notification.data ?? {};
+  // Owner 2026-10-20: the reviewer's note (data.notes, when the server sends one) follows the decision.
+  const notes = typeof data.notes === "string" && data.notes.trim() ? data.notes.trim() : null;
+  const withNotes = (body: string) => (notes ? `${body} ${t("shell:notifications.correctionReviewed.notesSuffix", { notes })}` : body);
 
   switch (notification.type) {
     case "out_of_zone_employee": {
@@ -66,19 +69,21 @@ export default function localizeNotification(notification: AppNotification, t: T
       return { title: t(titleKey), body: t(bodyKey, { name }) };
     }
     case "correction_reviewed": {
-      const kind = data.kind === "exception" || data.kind === "correction" || data.kind === "leave" ? data.kind : null;
+      // Owner 2026-10-20: a reviewed fake-location flag or offline time is named too.
+      const titleKeys: Record<string, string> = {
+        exception: "shell:notifications.correctionReviewed.titleException",
+        correction: "shell:notifications.correctionReviewed.titleCorrection",
+        leave: "shell:notifications.correctionReviewed.titleLeave",
+        mock_location: "shell:notifications.correctionReviewed.titleMockLocation",
+        offline_time: "shell:notifications.correctionReviewed.titleOfflineTime",
+      };
+      const titleKey = typeof data.kind === "string" ? titleKeys[data.kind] : undefined;
       const actionType = typeof data.actionType === "string" ? data.actionType : null;
-      if (!kind || !actionType) break;
+      if (!titleKey || !actionType) break;
       const decision = t(`shell:notifications.decision.${actionType}`, { defaultValue: actionType });
-      const titleKey =
-        kind === "exception"
-          ? "shell:notifications.correctionReviewed.titleException"
-          : kind === "correction"
-            ? "shell:notifications.correctionReviewed.titleCorrection"
-            : "shell:notifications.correctionReviewed.titleLeave";
       return {
         title: t(titleKey),
-        body: t("shell:notifications.correctionReviewed.body", { decision }),
+        body: withNotes(t("shell:notifications.correctionReviewed.body", { decision })),
       };
     }
     case "break_exceeded":
@@ -104,15 +109,20 @@ export default function localizeNotification(notification: AppNotification, t: T
     case "timesheet_submitted":
       return { title: t("shell:notifications.timesheet.submittedTitle"), body: t("shell:notifications.timesheet.submittedBody") };
     case "timesheet_approved":
-      return { title: t("shell:notifications.timesheet.approvedTitle"), body: t("shell:notifications.timesheet.approvedBody") };
+      return { title: t("shell:notifications.timesheet.approvedTitle"), body: withNotes(t("shell:notifications.timesheet.approvedBody")) };
     case "timesheet_rejected":
-      return { title: t("shell:notifications.timesheet.rejectedTitle"), body: t("shell:notifications.timesheet.rejectedBody") };
+      return { title: t("shell:notifications.timesheet.rejectedTitle"), body: withNotes(t("shell:notifications.timesheet.rejectedBody")) };
     case "timesheet_correction_requested":
       return { title: t("shell:notifications.timesheet.correctionRequestedTitle"), body: t("shell:notifications.timesheet.correctionRequestedBody") };
     case "timesheet_correction_approved":
-      return { title: t("shell:notifications.timesheet.correctionApprovedTitle"), body: t("shell:notifications.timesheet.correctionApprovedBody") };
+      return { title: t("shell:notifications.timesheet.correctionApprovedTitle"), body: withNotes(t("shell:notifications.timesheet.correctionApprovedBody")) };
     case "timesheet_correction_rejected":
-      return { title: t("shell:notifications.timesheet.correctionRejectedTitle"), body: t("shell:notifications.timesheet.correctionRejectedBody") };
+      return { title: t("shell:notifications.timesheet.correctionRejectedTitle"), body: withNotes(t("shell:notifications.timesheet.correctionRejectedBody")) };
+    // Owner 2026-10-20: the trial notices were stored in Arabic and English together; a fixed text in the reader's language.
+    case "trial_ending":
+      return { title: t("shell:notifications.trial.endingTitle"), body: t("shell:notifications.trial.endingBody") };
+    case "trial_ended":
+      return { title: t("shell:notifications.trial.endedTitle"), body: t("shell:notifications.trial.endedBody") };
     case "shift_assigned": {
       const shiftDate = typeof data.shiftDate === "string" ? data.shiftDate : null;
       if (!shiftDate) break;

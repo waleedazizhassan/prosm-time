@@ -81,7 +81,10 @@
       "titleException": "Your exception was reviewed",
       "titleCorrection": "Your correction request was reviewed",
       "titleLeave": "Your leave request was reviewed",
-      "body": "Decision: {{decision}}."
+      "body": "Decision: {{decision}}.",
+      "titleMockLocation": "Your location was reviewed",
+      "titleOfflineTime": "Your offline time was reviewed",
+      "notesSuffix": "Note: \"{{notes}}\""
     },
     "breakExceeded": {
       "title": "Break duration exceeded",
@@ -126,6 +129,12 @@
     "locationPlausibilityFlag": {
       "title": "Unusual location movement detected",
       "body": "{{name}}'s location implies about {{speed}} km/h since their last known position - please review."
+    },
+    "trial": {
+      "endingTitle": "Your PROSM Time trial ends soon",
+      "endingBody": "Your trial ends in a week. Your data is kept and will not be deleted. To continue, enter an activation code or contact us at sales@prosm.net.",
+      "endedTitle": "Your PROSM Time trial has ended",
+      "endedBody": "The app is paused and all your data is kept. Enter an activation code or contact us at sales@prosm.net and everything returns as it was."
     },
     "decision": {
       "approved": "Approved",

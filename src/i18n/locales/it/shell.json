@@ -81,7 +81,10 @@
       "titleException": "La tua eccezione è stata esaminata",
       "titleCorrection": "La tua richiesta di correzione è stata esaminata",
       "titleLeave": "La tua richiesta di ferie è stata esaminata",
-      "body": "Decisione: {{decision}}."
+      "body": "Decisione: {{decision}}.",
+      "titleMockLocation": "La tua posizione è stata esaminata",
+      "titleOfflineTime": "Il tuo tempo offline è stato esaminato",
+      "notesSuffix": "Nota: «{{notes}}»"
     },
     "breakExceeded": {
       "title": "Durata della pausa superata",
@@ -126,6 +129,12 @@
     "locationPlausibilityFlag": {
       "title": "Rilevato spostamento di posizione insolito",
       "body": "La posizione di {{name}} implica circa {{speed}} km/h dall'ultima posizione nota - si prega di verificare."
+    },
+    "trial": {
+      "endingTitle": "La tua prova di PROSM Time sta per scadere",
+      "endingBody": "La tua prova scade tra una settimana. I tuoi dati sono conservati e non verranno eliminati. Per continuare, inserisci un codice di attivazione o contattaci a sales@prosm.net.",
+      "endedTitle": "La tua prova di PROSM Time è terminata",
+      "endedBody": "L'app è in pausa e tutti i tuoi dati sono conservati. Inserisci un codice di attivazione o contattaci a sales@prosm.net e tutto tornerà come prima."
     },
     "decision": {
       "approved": "Approvato",

@@ -18,17 +18,6 @@ const TOKEN_KEY = "prosm_time_push_token";
 export const isPushSupported = () =>
   Capacitor.isNativePlatform() && Capacitor.getPlatform() === "android" && import.meta.env.VITE_FIREBASE_CONFIGURED === "true";
 
-/** Where tapping a notification takes the reader. */
-export function pushTarget(data: Record<string, unknown> | undefined): string {
-  const type = String(data?.type ?? "");
-  const entityType = String(data?.entityType ?? "");
-  if (type === "sos_alert") return "/emergency-log";
-  if (entityType === "leave_requests") return "/leave";
-  if (type.startsWith("timesheet")) return "/timesheets";
-  if (type === "exception_pending_review" || type === "correction_submitted" || type.startsWith("out_of_zone") || type === "missing_clock_out") return "/manager";
-  return "/dashboard";
-}
-
 function remember(token: string | null) {
   try {
     if (token) localStorage.setItem(TOKEN_KEY, token);
@@ -48,8 +37,8 @@ function remembered(): string | null {
 
 let started = false;
 
-/** Asks for permission (once), registers this phone and opens the right page when a notification is tapped. */
-export async function startPush(open: (path: string) => void): Promise<void> {
+/** Asks for permission (once), registers this phone and hands a tapped notification's data to `onTap` (which opens its page). */
+export async function startPush(onTap: (data: Record<string, unknown> | undefined) => void): Promise<void> {
   if (!isPushSupported() || started) return;
   started = true;
   try {
@@ -66,7 +55,7 @@ export async function startPush(open: (path: string) => void): Promise<void> {
       // The app's language, so notifications arrive in it.
       await requireSupabaseClient().rpc("register_prosm_time_push_device", { p_token: value, p_platform: "android", p_language: currentLanguage() });
     });
-    await PushNotifications.addListener("pushNotificationActionPerformed", ({ notification }) => open(pushTarget(notification.data)));
+    await PushNotifications.addListener("pushNotificationActionPerformed", ({ notification }) => onTap(notification.data));
     let permission = await PushNotifications.checkPermissions();
     if (permission.receive === "prompt" || permission.receive === "prompt-with-rationale") permission = await PushNotifications.requestPermissions();
     if (permission.receive !== "granted") return;

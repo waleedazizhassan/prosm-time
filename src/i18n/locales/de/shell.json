@@ -81,7 +81,10 @@
       "titleException": "Ihre Ausnahme wurde geprüft",
       "titleCorrection": "Ihr Korrekturantrag wurde geprüft",
       "titleLeave": "Ihr Urlaubsantrag wurde geprüft",
-      "body": "Entscheidung: {{decision}}."
+      "body": "Entscheidung: {{decision}}.",
+      "titleMockLocation": "Ihr Standort wurde geprüft",
+      "titleOfflineTime": "Ihre Offline-Zeit wurde geprüft",
+      "notesSuffix": "Anmerkung: „{{notes}}“"
     },
     "breakExceeded": {
       "title": "Pausendauer überschritten",
@@ -126,6 +129,12 @@
     "locationPlausibilityFlag": {
       "title": "Ungewöhnliche Standortbewegung erkannt",
       "body": "Der Standort von {{name}} impliziert seit der letzten bekannten Position etwa {{speed}} km/h - bitte überprüfen."
+    },
+    "trial": {
+      "endingTitle": "Ihre PROSM Time-Testphase endet bald",
+      "endingBody": "Ihre Testphase endet in einer Woche. Ihre Daten bleiben erhalten und werden nicht gelöscht. Um weiterzumachen, geben Sie einen Aktivierungscode ein oder kontaktieren Sie uns unter sales@prosm.net.",
+      "endedTitle": "Ihre PROSM Time-Testphase ist beendet",
+      "endedBody": "Die App ist pausiert, alle Ihre Daten bleiben erhalten. Geben Sie einen Aktivierungscode ein oder kontaktieren Sie uns unter sales@prosm.net, und alles ist wieder wie vorher."
     },
     "decision": {
       "approved": "Genehmigt",

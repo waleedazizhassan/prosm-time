@@ -45,7 +45,8 @@ export default function EmergencyLogPage() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const canView = profile?.isOwner || hasPermission("attendance.view");
-  const canResolve = profile?.isOwner || hasPermission("attendance.clock_out_on_behalf");
+  // Owner 2026-10-20: supervisors resolve SOS alerts with exceptions.manage (as the server allows).
+  const canResolve = profile?.isOwner || hasPermission("exceptions.manage") || hasPermission("attendance.clock_out_on_behalf");
 
   const today = new Date();
   const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);

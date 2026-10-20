@@ -26,6 +26,23 @@ describe("push notification texts", () => {
     expect(ar.body).toContain("2026-10-21");
   });
 
+  // Owner 2026-10-20: reviewed location/offline time, the trial notices and the reviewer's note.
+  it("names a reviewed location or offline time and adds the reviewer's note", () => {
+    const location = localizePush("correction_reviewed", { kind: "mock_location", actionType: "approved" }, "en", fallback);
+    expect(location.title).toBe("Your location was reviewed");
+    expect(location.body).toBe("Decision: Approved.");
+    const offline = localizePush("correction_reviewed", { kind: "offline_time", actionType: "rejected", notes: "No proof" }, "en", fallback);
+    expect(offline.title).toBe("Your offline time was reviewed");
+    expect(offline.body).toBe('Decision: Rejected. Note: "No proof"');
+    expect(localizePush("timesheet_rejected", { notes: "Fix Monday" }, "ar", fallback).body).toContain("Fix Monday");
+    expect(localizePush("timesheet_approved", {}, "en", fallback).body).not.toContain("Note");
+  });
+
+  it("writes the trial notices in the phone's language", () => {
+    expect(localizePush("trial_ending", { licenseNumber: "X" }, "ar", fallback).title).toMatch(/[؀-ۿ]/);
+    expect(localizePush("trial_ended", {}, "en", fallback).title).toBe("Your PROSM Time trial has ended");
+  });
+
   it("keeps the stored text for a type it doesn't know", () => {
     expect(localizePush("something_new", {}, "ar", fallback)).toEqual(fallback);
   });

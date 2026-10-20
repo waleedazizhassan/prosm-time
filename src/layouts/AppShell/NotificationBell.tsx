@@ -9,81 +9,17 @@ import { formatDateTime } from "../../core/utils/formatDate";
 import playAlertSound from "../../core/utils/playAlertSound";
 import playSirenSound from "../../core/utils/playSirenSound";
 import localizeNotification from "../../core/utils/localizeNotification";
+import notificationTarget from "../../core/utils/notificationTarget";
 import SosAlertOverlay from "./SosAlertOverlay";
 import styles from "./NotificationBell.module.css";
 
 const SOS_SIREN_SECONDS = 30;
 
 // § live UX review, user-directed - "clicking a notification should
-// take me to the thing it needs" (e.g. something awaiting approval
-// should open the approval screen). Every real notification type maps
-// to the one screen where its underlying record is actually reviewed/
-// acted on; a type with no dedicated action screen just goes to the
-// Dashboard rather than nowhere.
-//
-// § live UX review, user-directed - "an SOS alert should go to a real
-// Emergency Log, not the Manager Console" - sos_alert now routes to
-// /emergency-log (with its own alertId appended by handleSelect/
-// handleViewSos below, this bare fallback only fires if a stored
-// notification is somehow missing its relatedEntityId).
-//
-// § real bug, user-reported - "the notification doesn't lead the
-// employee to a specific place to write the reason" - out_of_zone_employee
-// fell into the generic /dashboard fallback with no indication of
-// WHICH pending exception it was about; the employee had to scroll
-// past every other Dashboard card to find ExceptionsCard, with no
-// guarantee it was even the right one if more than one was pending.
-// Now routes to /dashboard with the notification's own relatedEntityId
-// (the geofence_exceptions row id, always present - see
-// clock_in/clock_out_prosm_time_attendance's own create_prosm_time_
-// notification calls) so ExceptionsCard can scroll to and focus that
-// exact reason field.
-// § real bug, user-reported 2026-09-15 - "timesheet notifications don't
-// navigate to the Timesheets page." 6 real timesheet_* notification
-// types exist (20260901120000 onward) but none were ever added here -
-// every one fell into the generic /dashboard fallback, same class of
-// gap as the out_of_zone_employee fix above, just never closed for
-// this whole category. timesheet_submitted/approved/rejected carry the
-// timesheet's own id as relatedEntityId (see approve_prosm_time_
-// timesheet's own notification call) - routed straight to its report
-// page. The 3 correction-flavored types carry a timesheet_correction
-// row's own id instead (a different entity - see submit/review
-// timesheet correction's own notification calls), which this bell has
-// no cheap way to resolve back to a parent timesheet id client-side -
-// routed to the plain Timesheets list rather than guessing. Also wires
-// up shift_assigned (Schedule) and the 3 manager-facing anomaly alerts
-// (site_change_alert/missing_clock_out/location_plausibility_flag,
-// all notify_prosm_time_site_managers_or_owner recipients - same
-// review surface as exception_pending_review/out_of_zone_manager) -
-// found while auditing every real notification type against this
-// switch for the same gap.
-function notificationRoute(type: string, relatedEntityId?: string | null): string {
-  switch (type) {
-    case "exception_pending_review":
-    case "out_of_zone_manager":
-    case "site_change_alert":
-    case "missing_clock_out":
-    case "location_plausibility_flag":
-      return "/manager";
-    case "sos_alert":
-      return "/emergency-log";
-    case "shift_assigned":
-      return "/schedule";
-    case "timesheet_submitted":
-    case "timesheet_approved":
-    case "timesheet_rejected":
-      return relatedEntityId ? `/timesheets/${relatedEntityId}/report` : "/timesheets";
-    case "timesheet_correction_requested":
-    case "timesheet_correction_approved":
-    case "timesheet_correction_rejected":
-      return "/timesheets";
-    case "out_of_zone_employee":
-    case "correction_reviewed":
-    case "break_exceeded":
-    default:
-      return "/dashboard";
-  }
-}
+// take me to the thing it needs". Owner 2026-10-20: the page comes from
+// notificationTarget, shared with push notifications (the two disagreed);
+// the bell adds the exact record where a page can focus it (an SOS alert
+// on the Emergency Log, the employee's pending exception on the dashboard).
 
 // PROSM Time WP-13/§20 - real notification bell, the entry point §20's
 // own notification types (out-of-zone, exceptions, corrections, break
@@ -92,7 +28,7 @@ function notificationRoute(type: string, relatedEntityId?: string | null): strin
 // channel is a genuine future refinement, not built here.
 export default function NotificationBell() {
   const { t, i18n } = useTranslation("shell");
-  const { profile } = useAuth();
+  const { profile, hasPermission } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [notifications, setNotifications] = useState<AppNotification[]>([]);
@@ -179,21 +115,22 @@ export default function NotificationBell() {
 
   const unreadCount = notifications.filter((notification) => !notification.readAt).length;
 
+  const viewer = { isOwner: profile.isOwner, canViewEmergencyLog: hasPermission("attendance.view") };
+  const targetOf = (notification: AppNotification) => {
+    const path = notificationTarget({ type: notification.type, entityType: notification.relatedEntityType, kind: notification.data?.kind }, viewer);
+    if (!notification.relatedEntityId) return path;
+    if (path === "/emergency-log") return `/emergency-log?alertId=${notification.relatedEntityId}`;
+    if (notification.type === "out_of_zone_employee") return `/dashboard?exceptionId=${notification.relatedEntityId}`;
+    return path;
+  };
+
   const handleSelect = async (notification: AppNotification) => {
     if (!notification.readAt) {
       await NotificationRepository.markRead(notification.id);
       load();
     }
     setOpen(false);
-    if (notification.type === "sos_alert" && notification.relatedEntityId) {
-      navigate(`/emergency-log?alertId=${notification.relatedEntityId}`);
-      return;
-    }
-    if (notification.type === "out_of_zone_employee" && notification.relatedEntityId) {
-      navigate(`/dashboard?exceptionId=${notification.relatedEntityId}`);
-      return;
-    }
-    navigate(notificationRoute(notification.type, notification.relatedEntityId));
+    navigate(targetOf(notification));
   };
 
   const handleDismissSos = () => {
@@ -210,7 +147,7 @@ export default function NotificationBell() {
       await NotificationRepository.markRead(notification.id);
       load();
     }
-    navigate(notification.relatedEntityId ? `/emergency-log?alertId=${notification.relatedEntityId}` : "/emergency-log");
+    navigate(targetOf(notification));
   };
 
   return (
