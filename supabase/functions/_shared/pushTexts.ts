@@ -50,7 +50,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "correctionApprovedTitle": "تمت الموافقة على طلب تعديل كشف الدوام",
         "correctionApprovedBody": "تمت الموافقة على طلب تعديل كشف الدوام بتاعك وأُعيدت الفترة للتعديل والإرسال من جديد.",
         "correctionRejectedTitle": "تم رفض طلب تعديل كشف الدوام",
-        "correctionRejectedBody": "تم رفض طلب تعديل كشف الدوام بتاعك."
+        "correctionRejectedBody": "تم رفض طلب تعديل كشف الدوام بتاعك.",
+        "readyTitle": "كشف دوامك جاهز",
+        "readyBody": "راجع كشف دوامك للفترة من {{start}} إلى {{end}} ثم أرسله."
       },
       "shiftAssigned": {
         "title": "تم جدولة شيفت جديد لك",
@@ -135,7 +137,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "correctionApprovedTitle": "Timesheet correction approved",
         "correctionApprovedBody": "Your timesheet correction was approved and the period reopened for resubmission.",
         "correctionRejectedTitle": "Timesheet correction rejected",
-        "correctionRejectedBody": "Your timesheet correction request was rejected."
+        "correctionRejectedBody": "Your timesheet correction request was rejected.",
+        "readyTitle": "Your timesheet is ready",
+        "readyBody": "Review your timesheet for {{start}} - {{end}} and submit it."
       },
       "shiftAssigned": {
         "title": "A new shift was scheduled for you",
@@ -220,7 +224,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "correctionApprovedTitle": "Korrektur des Stundenzettels genehmigt",
         "correctionApprovedBody": "Ihre Korrekturanfrage wurde genehmigt und der Zeitraum zur erneuten Einreichung wieder geöffnet.",
         "correctionRejectedTitle": "Korrektur des Stundenzettels abgelehnt",
-        "correctionRejectedBody": "Ihre Korrekturanfrage für den Stundenzettel wurde abgelehnt."
+        "correctionRejectedBody": "Ihre Korrekturanfrage für den Stundenzettel wurde abgelehnt.",
+        "readyTitle": "Ihr Stundenzettel ist bereit",
+        "readyBody": "Prüfen Sie Ihren Stundenzettel für {{start}} - {{end}} und reichen Sie ihn ein."
       },
       "shiftAssigned": {
         "title": "Eine neue Schicht wurde für Sie geplant",
@@ -305,7 +311,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "correctionApprovedTitle": "Correction de feuille de temps approuvée",
         "correctionApprovedBody": "Votre demande de correction a été approuvée et la période rouverte pour une nouvelle soumission.",
         "correctionRejectedTitle": "Correction de feuille de temps rejetée",
-        "correctionRejectedBody": "Votre demande de correction de feuille de temps a été rejetée."
+        "correctionRejectedBody": "Votre demande de correction de feuille de temps a été rejetée.",
+        "readyTitle": "Votre feuille de temps est prête",
+        "readyBody": "Vérifiez votre feuille de temps du {{start}} au {{end}} et envoyez-la."
       },
       "shiftAssigned": {
         "title": "Un nouveau quart de travail vous a été attribué",
@@ -390,7 +398,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "correctionApprovedTitle": "Correzione del foglio ore approvata",
         "correctionApprovedBody": "La tua richiesta di correzione è stata approvata e il periodo è stato riaperto per un nuovo invio.",
         "correctionRejectedTitle": "Correzione del foglio ore rifiutata",
-        "correctionRejectedBody": "La tua richiesta di correzione del foglio ore è stata rifiutata."
+        "correctionRejectedBody": "La tua richiesta di correzione del foglio ore è stata rifiutata.",
+        "readyTitle": "Il tuo foglio ore è pronto",
+        "readyBody": "Controlla il tuo foglio ore dal {{start}} al {{end}} e invialo."
       },
       "shiftAssigned": {
         "title": "Ti è stato assegnato un nuovo turno",

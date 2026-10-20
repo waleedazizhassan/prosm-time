@@ -103,7 +103,9 @@
       "correctionApprovedTitle": "Korrektur des Stundenzettels genehmigt",
       "correctionApprovedBody": "Ihre Korrekturanfrage wurde genehmigt und der Zeitraum zur erneuten Einreichung wieder geöffnet.",
       "correctionRejectedTitle": "Korrektur des Stundenzettels abgelehnt",
-      "correctionRejectedBody": "Ihre Korrekturanfrage für den Stundenzettel wurde abgelehnt."
+      "correctionRejectedBody": "Ihre Korrekturanfrage für den Stundenzettel wurde abgelehnt.",
+      "readyTitle": "Ihr Stundenzettel ist bereit",
+      "readyBody": "Prüfen Sie Ihren Stundenzettel für {{start}} - {{end}} und reichen Sie ihn ein."
     },
     "shiftAssigned": {
       "title": "Eine neue Schicht wurde für Sie geplant",

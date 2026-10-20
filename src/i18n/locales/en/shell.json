@@ -103,7 +103,9 @@
       "correctionApprovedTitle": "Timesheet correction approved",
       "correctionApprovedBody": "Your timesheet correction was approved and the period reopened for resubmission.",
       "correctionRejectedTitle": "Timesheet correction rejected",
-      "correctionRejectedBody": "Your timesheet correction request was rejected."
+      "correctionRejectedBody": "Your timesheet correction request was rejected.",
+      "readyTitle": "Your timesheet is ready",
+      "readyBody": "Review your timesheet for {{start}} - {{end}} and submit it."
     },
     "shiftAssigned": {
       "title": "A new shift was scheduled for you",

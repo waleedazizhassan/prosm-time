@@ -103,7 +103,9 @@
       "correctionApprovedTitle": "Correzione del foglio ore approvata",
       "correctionApprovedBody": "La tua richiesta di correzione è stata approvata e il periodo è stato riaperto per un nuovo invio.",
       "correctionRejectedTitle": "Correzione del foglio ore rifiutata",
-      "correctionRejectedBody": "La tua richiesta di correzione del foglio ore è stata rifiutata."
+      "correctionRejectedBody": "La tua richiesta di correzione del foglio ore è stata rifiutata.",
+      "readyTitle": "Il tuo foglio ore è pronto",
+      "readyBody": "Controlla il tuo foglio ore dal {{start}} al {{end}} e invialo."
     },
     "shiftAssigned": {
       "title": "Ti è stato assegnato un nuovo turno",

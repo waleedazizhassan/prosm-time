@@ -103,7 +103,9 @@
       "correctionApprovedTitle": "تمت الموافقة على طلب تعديل كشف الدوام",
       "correctionApprovedBody": "تمت الموافقة على طلب تعديل كشف الدوام بتاعك وأُعيدت الفترة للتعديل والإرسال من جديد.",
       "correctionRejectedTitle": "تم رفض طلب تعديل كشف الدوام",
-      "correctionRejectedBody": "تم رفض طلب تعديل كشف الدوام بتاعك."
+      "correctionRejectedBody": "تم رفض طلب تعديل كشف الدوام بتاعك.",
+      "readyTitle": "كشف دوامك جاهز",
+      "readyBody": "راجع كشف دوامك للفترة من {{start}} إلى {{end}} ثم أرسله."
     },
     "shiftAssigned": {
       "title": "تم جدولة شيفت جديد لك",

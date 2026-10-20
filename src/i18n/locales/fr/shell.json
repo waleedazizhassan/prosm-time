@@ -103,7 +103,9 @@
       "correctionApprovedTitle": "Correction de feuille de temps approuvée",
       "correctionApprovedBody": "Votre demande de correction a été approuvée et la période rouverte pour une nouvelle soumission.",
       "correctionRejectedTitle": "Correction de feuille de temps rejetée",
-      "correctionRejectedBody": "Votre demande de correction de feuille de temps a été rejetée."
+      "correctionRejectedBody": "Votre demande de correction de feuille de temps a été rejetée.",
+      "readyTitle": "Votre feuille de temps est prête",
+      "readyBody": "Vérifiez votre feuille de temps du {{start}} au {{end}} et envoyez-la."
     },
     "shiftAssigned": {
       "title": "Un nouveau quart de travail vous a été attribué",

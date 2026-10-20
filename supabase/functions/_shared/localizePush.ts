@@ -76,6 +76,10 @@ export function localizePush(type: string, data: Data, language: string, fallbac
     case "sos_alert":
       if (str(data.employeeName)) result = pair("sosAlert.title", "sosAlert.body", { name: data.employeeName });
       break;
+    case "timesheet_ready":
+      if (str(data.periodStart) && str(data.periodEnd))
+        result = pair("timesheet.readyTitle", "timesheet.readyBody", { start: data.periodStart, end: data.periodEnd });
+      break;
     case "timesheet_submitted":
       result = pair("timesheet.submittedTitle", "timesheet.submittedBody");
       break;

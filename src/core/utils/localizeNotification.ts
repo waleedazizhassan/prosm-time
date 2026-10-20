@@ -94,6 +94,13 @@ export default function localizeNotification(notification: AppNotification, t: T
     // the raw stored (English-only) title/body. None of these need any
     // dynamic data - unlike out_of_zone/exception cases, "your timesheet
     // was approved" reads the same regardless of which timesheet.
+    // Owner 2026-10-20: a manager generated the employee's timesheet - review and submit it.
+    case "timesheet_ready": {
+      const start = typeof data.periodStart === "string" ? data.periodStart : null;
+      const end = typeof data.periodEnd === "string" ? data.periodEnd : null;
+      if (!start || !end) break;
+      return { title: t("shell:notifications.timesheet.readyTitle"), body: t("shell:notifications.timesheet.readyBody", { start, end }) };
+    }
     case "timesheet_submitted":
       return { title: t("shell:notifications.timesheet.submittedTitle"), body: t("shell:notifications.timesheet.submittedBody") };
     case "timesheet_approved":
