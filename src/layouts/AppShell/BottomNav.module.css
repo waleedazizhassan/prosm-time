@@ -12,7 +12,7 @@
     display: flex;
     justify-content: space-around;
     align-items: stretch;
-    height: calc(60px + env(safe-area-inset-bottom, 0px));
+    height: calc(64px + env(safe-area-inset-bottom, 0px));
     padding-bottom: env(safe-area-inset-bottom, 0px);
     background: var(--surface-card);
     border-top: 1px solid var(--border-light);
@@ -26,9 +26,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: 2px;
   min-width: 0;
-  padding: 6px 2px;
+  padding: 5px 2px;
   border: 0;
   background: none;
   color: var(--text-secondary);
@@ -39,6 +39,25 @@
 
 .active {
   color: var(--brand-primary, #16a34a);
+}
+
+/* The current page: a soft green pill behind its icon. */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 30px;
+  border-radius: 999px;
+  transition: background-color 0.15s ease;
+}
+
+.active .icon {
+  background: rgba(22, 163, 74, 0.15);
+}
+
+.active .label {
+  font-weight: var(--font-weight-semibold);
 }
 
 .label {

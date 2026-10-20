@@ -42,12 +42,16 @@ export default function BottomNav() {
     <nav className={styles.bar} aria-label={t("bottomNav.label")}>
       {items.map((item) => (
         <NavLink key={item.to} to={item.to} className={({ isActive }) => `${styles.item} ${isActive ? styles.active : ""}`}>
-          <item.icon size={20} />
+          <span className={styles.icon}>
+            <item.icon size={22} />
+          </span>
           <span className={styles.label}>{item.label}</span>
         </NavLink>
       ))}
       <button type="button" className={styles.item} onClick={openMobileSidebar}>
-        <Menu size={20} />
+        <span className={styles.icon}>
+          <Menu size={22} />
+        </span>
         <span className={styles.label}>{t("bottomNav.menu")}</span>
       </button>
     </nav>
