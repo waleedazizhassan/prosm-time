@@ -48,7 +48,7 @@
     },
     "sites": {
       "title": "Sites (Administrators)",
-      "body": "Sites is where work sites are set up and people are assigned: name, address, GPS coordinates and radius, time zone, kiosk mode, and whether attendance, geofence or a photo are required. When you assign someone, their role at the site starts from their organisation role - a Manager or Supervisor becomes the site's manager, so they see its people. The rest of a site's behaviour is in Settings; the site form has an \"Open this site's settings\" link. Adding a site needs only a name, its location - stand there and press Use my current location - the radius and whether a photo is required; everything else is under More options. A new site takes your device's time zone."
+      "body": "Sites is where work sites are set up and people are assigned. Adding a site needs only a name, its location - stand there and press Use my current location - the radius and whether a photo is required; everything else is under More options. A new site takes your device's time zone. When you assign someone, their role at the site starts from their organisation role - a Manager or Supervisor becomes the site's manager, so they see its people. Everything else about a site is on its own page, under Site rules: GPS tolerance, grace period, shift hours, overtime and late-deduction times, break rounding, ongoing presence monitoring, exempt employees, and the self-service blocks (after the grace period, clock-out outside the work area, clock-in outside the work area)."
     },
     "workers": {
       "title": "External Workers",
@@ -56,7 +56,7 @@
     },
     "settingsCenter": {
       "title": "Settings (Owner)",
-      "body": "Organisation-wide configuration: the no-site radius; \"Reject clock-in/out from a fake location\"; the defaults a new site starts from; and Site Policy - pick a site to change its GPS tolerance, grace period, shift hours, overtime and late-deduction timing, break rounding, ongoing presence monitoring, exempt employees, and the self-service blocks: after the grace period, clock-out outside the work area, and clock-in outside the work area."
+      "body": "Settings holds only what applies to the whole organisation: the work-area radius for people who clock in without a site; whether a clock-in or clock-out from a fake location is refused; and the defaults a new site starts from. A site's own rules are on that site's page."
     },
     "leave": {
       "title": "Leave (PTO)",

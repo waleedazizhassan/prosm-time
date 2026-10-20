@@ -48,7 +48,7 @@
     },
     "sites": {
       "title": "Standorte (Administratoren)",
-      "body": "Hier werden Standorte eingerichtet und Personen zugewiesen: Name, Adresse, GPS-Koordinaten und Radius, Zeitzone, Kioskmodus sowie ob Anwesenheit, Geofence oder Foto erforderlich sind. Bei der Zuweisung beginnt die Rolle am Standort mit der Rolle in der Organisation - Manager und Supervisor werden Standortleiter. Das übrige Verhalten steht in den Einstellungen; das Standortformular verlinkt dorthin. Für einen neuen Standort brauchen Sie nur den Namen, den Ort - dort stehen und Meinen aktuellen Standort verwenden tippen -, den Radius und ob ein Foto nötig ist; alles andere steht unter Weitere Optionen. Ein neuer Standort übernimmt die Zeitzone Ihres Geräts."
+      "body": "Unter Standorte werden Arbeitsorte angelegt und Personen zugewiesen. Für einen neuen Standort brauchen Sie nur den Namen, den Ort - dort stehen und Meinen aktuellen Standort verwenden tippen -, den Radius und ob ein Foto nötig ist; alles andere steht unter Weitere Optionen. Ein neuer Standort übernimmt die Zeitzone Ihres Geräts. Bei der Zuweisung richtet sich die Rolle am Standort nach der Rolle in der Organisation. Alles Weitere zu einem Standort steht auf seiner eigenen Seite unter Standortregeln: GPS-Toleranz, Kulanzzeit, Schichtzeiten, Überstunden- und Verspätungsabzug, Pausenrundung, laufende Anwesenheitsüberwachung, ausgenommene Mitarbeitende und die Selbstbedienungs-Sperren."
     },
     "workers": {
       "title": "Externe Arbeiter",
@@ -56,7 +56,7 @@
     },
     "settingsCenter": {
       "title": "Einstellungen (Inhaber)",
-      "body": "Organisationsweite Einstellungen: Radius ohne Standort, \"Ein-/Ausstempeln von gefälschtem Standort ablehnen\", Vorgaben für neue Standorte und die Standortrichtlinie - GPS-Toleranz, Kulanzzeit, Schichtzeiten, Überstunden und Verspätungsabzug, Pausenrundung, laufende Anwesenheitsüberwachung, befreite Mitarbeiter und die Selbstbedienungssperren: nach der Kulanzzeit, Ausstempeln außerhalb und Einstempeln außerhalb des Arbeitsbereichs."
+      "body": "Die Einstellungen enthalten nur, was für die ganze Organisation gilt: den Radius für Einstempeln ohne Standort, ob gefälschte Standorte abgelehnt werden, und die Startwerte neuer Standorte. Die Regeln eines Standorts stehen auf dessen Seite."
     },
     "leave": {
       "title": "Urlaub (PTO)",

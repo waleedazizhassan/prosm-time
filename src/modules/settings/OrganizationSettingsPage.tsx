@@ -7,7 +7,6 @@ import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
 import MockLocationSettingsCard from "./MockLocationSettingsCard";
 import settingsHeaderImage from "../../assets/illustrations/settings.svg";
 import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
-import SitePolicySettingsCard from "./SitePolicySettingsCard";
 import PageBanner from "../../components/common/PageBanner";
 // PayrollIntegrationCard intentionally not rendered below - § user-
 // directed, 2026-09-13: "hide it, not delete it, until we know how
@@ -39,7 +38,6 @@ export default function OrganizationSettingsPage() {
       <NoSiteRadiusSettingsCard />
       <MockLocationSettingsCard />
       <SiteDefaultsSettingsCard />
-      <SitePolicySettingsCard />
       {/* <PayrollIntegrationCard /> - see the hidden import's own comment above */}
     </PageShell>
   );

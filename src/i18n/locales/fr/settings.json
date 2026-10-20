@@ -18,8 +18,8 @@
     "genericError": "Impossible de mettre à jour les politiques par défaut des sites."
   },
   "sitePolicy": {
-    "title": "Politique de site",
-    "hint": "Choisissez un site pour consulter ou modifier sa propre tolérance de précision GPS, sa période de tolérance, sa politique de shift et ses employés exemptés - plus rien de tout cela ne se modifie depuis la page Modifier de ce site.",
+    "title": "Règles du site",
+    "hint": "Marge GPS, délai de grâce, horaires, heures supplémentaires et retenues de retard, arrondi des pauses, suivi de présence, employés exemptés et blocages en libre-service de ce site.",
     "siteSelectLabel": "Site",
     "siteSelectPlaceholder": "Sélectionner un site…",
     "noSites": "Aucun site pour l'instant - ajoutez-en un depuis Sites d'abord.",

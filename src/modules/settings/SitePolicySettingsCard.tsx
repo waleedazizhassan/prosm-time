@@ -33,14 +33,16 @@ const toggleRowStyle = {
 // time zone, kiosk mode, attendance/geofence/camera, active status)
 // stay on the site's own Edit form - genuinely site-identity concerns
 // rather than a behavioral policy knob.
-export default function SitePolicySettingsCard() {
+// Owner 2026-10-20 (simpler settings): shown on the site's own page with
+// `siteId` - no site picker; everything about a site in one place.
+export default function SitePolicySettingsCard({ siteId }: { siteId?: string } = {}) {
   const { t } = useTranslation(["settings", "sites"]);
 
   const [sites, setSites] = useState<Site[]>([]);
   const [sitesLoading, setSitesLoading] = useState(true);
   // Audit 4.6 - the site form links here with ?site=<id>, already selected.
   const [searchParams] = useSearchParams();
-  const [selectedSiteId, setSelectedSiteId] = useState(() => searchParams.get("site") ?? "");
+  const [selectedSiteId, setSelectedSiteId] = useState(() => siteId ?? searchParams.get("site") ?? "");
   const [site, setSite] = useState<Site | null>(null);
   const [siteLoading, setSiteLoading] = useState(false);
   const [loadError, setLoadError] = useState("");
@@ -67,11 +69,12 @@ export default function SitePolicySettingsCard() {
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
+    if (siteId) return;
     SiteRepository.listSites().then((result) => {
       if (result.success && result.data) setSites(result.data);
       setSitesLoading(false);
     });
-  }, []);
+  }, [siteId]);
 
   useEffect(() => {
     if (!selectedSiteId) {
@@ -162,6 +165,7 @@ export default function SitePolicySettingsCard() {
     <Card title={t("sitePolicy.title")}>
       <p style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("sitePolicy.hint")}</p>
 
+      {siteId ? null : (
       <div style={{ maxWidth: 320 }}>
         <Select
           label={t("sitePolicy.siteSelectLabel")}
@@ -172,8 +176,9 @@ export default function SitePolicySettingsCard() {
           options={[{ value: "", label: t("sitePolicy.siteSelectPlaceholder") }, ...sites.map((s) => ({ value: s.id, label: s.name }))]}
         />
       </div>
+      )}
 
-      {!sitesLoading && sites.length === 0 ? <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("sitePolicy.noSites")}</p> : null}
+      {!siteId && !sitesLoading && sites.length === 0 ? <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("sitePolicy.noSites")}</p> : null}
 
       <ErrorText>{loadError}</ErrorText>
 

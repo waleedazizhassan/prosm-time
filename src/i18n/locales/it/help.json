@@ -48,7 +48,7 @@
     },
     "sites": {
       "title": "Sedi (amministratori)",
-      "body": "Qui si creano le sedi e si assegnano le persone: nome, indirizzo, coordinate GPS e raggio, fuso orario, modalità chiosco e requisiti di presenza, area o foto. All'assegnazione, il ruolo nella sede parte dal ruolo nell'organizzazione - manager o supervisore diventano responsabili della sede. Il resto si imposta in Impostazioni; il modulo della sede vi rimanda. Per aggiungere una sede servono solo il nome, la posizione - mettiti lì e premi Usa la mia posizione attuale -, il raggio e se serve una foto; il resto è in Altre opzioni. Una nuova sede prende il fuso orario del tuo dispositivo."
+      "body": "In Sedi si creano i luoghi di lavoro e si assegnano le persone. Per aggiungere una sede servono solo il nome, la posizione - mettiti lì e premi Usa la mia posizione attuale -, il raggio e se serve una foto; il resto è in Altre opzioni. Una nuova sede prende il fuso orario del tuo dispositivo. Il ruolo nella sede parte dal ruolo nell'organizzazione. Tutto il resto di una sede si imposta nella sua pagina, in Regole della sede: margine GPS, tolleranza, orari dei turni, straordinari e trattenute per ritardo, arrotondamento delle pause, monitoraggio della presenza, dipendenti esentati e blocchi self-service."
     },
     "workers": {
       "title": "Lavoratori esterni",
@@ -56,7 +56,7 @@
     },
     "settingsCenter": {
       "title": "Impostazioni (titolare)",
-      "body": "Impostazioni dell'intera organizzazione: raggio senza sede, «Rifiuta timbrature da posizione falsa», valori predefiniti delle nuove sedi e politica di ogni sede - tolleranza GPS, periodo di tolleranza, orari, straordinari e trattenute per ritardo, arrotondamento pause, monitoraggio continuo della presenza, dipendenti esentati e blocchi del self-service: dopo il periodo di tolleranza, uscita fuori area ed entrata fuori area."
+      "body": "Le impostazioni contengono solo ciò che vale per tutta l'organizzazione: il raggio per chi timbra senza sede, il rifiuto o meno delle posizioni false e i valori iniziali di una nuova sede. Le regole di una sede sono nella sua pagina."
     },
     "leave": {
       "title": "Ferie (PTO)",

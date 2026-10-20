@@ -18,8 +18,8 @@
     "genericError": "Impossibile aggiornare le politiche predefinite delle sedi."
   },
   "sitePolicy": {
-    "title": "Politica della sede",
-    "hint": "Scegli una sede per rivedere o modificare la sua tolleranza di precisione GPS, il periodo di tolleranza, la politica del turno e i dipendenti esentati - niente di tutto ciò si modifica più dalla pagina di modifica di quella sede.",
+    "title": "Regole della sede",
+    "hint": "Margine GPS, tolleranza, orari dei turni, straordinari e trattenute per ritardo, arrotondamento delle pause, monitoraggio della presenza, dipendenti esentati e blocchi self-service di questa sede.",
     "siteSelectLabel": "Sede",
     "siteSelectPlaceholder": "Seleziona una sede…",
     "noSites": "Nessuna sede ancora - aggiungine una da Sedi prima.",

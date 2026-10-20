@@ -18,8 +18,8 @@
     "genericError": "Die Standort-Standardwerte konnten nicht aktualisiert werden."
   },
   "sitePolicy": {
-    "title": "Standort-Richtlinie",
-    "hint": "Wählen Sie einen Standort, um seine eigene GPS-Genauigkeitstoleranz, Kulanzzeit, Schichtrichtlinie und befreiten Mitarbeiter einzusehen oder zu ändern - nichts davon wird mehr über das eigene Bearbeiten-Formular dieses Standorts geändert.",
+    "title": "Standortregeln",
+    "hint": "GPS-Toleranz, Kulanzzeit, Schichtzeiten, Überstunden und Verspätungsabzug, Pausenrundung, Anwesenheitsüberwachung, ausgenommene Mitarbeitende und Selbstbedienungs-Sperren dieses Standorts.",
     "siteSelectLabel": "Standort",
     "siteSelectPlaceholder": "Standort auswählen…",
     "noSites": "Noch keine Standorte - legen Sie zuerst einen unter Standorte an.",

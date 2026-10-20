@@ -48,7 +48,7 @@
     },
     "sites": {
       "title": "Sites (administrateurs)",
-      "body": "Ici sont créés les sites et affectées les personnes : nom, adresse, coordonnées GPS et rayon, fuseau horaire, mode kiosque, et exigences de présence, de zone ou de photo. À l'affectation, le rôle sur le site part du rôle dans l'organisation - un manager ou superviseur devient responsable du site. Le reste se règle dans Paramètres ; le formulaire du site y renvoie. Pour ajouter un site, il suffit d'un nom, de son emplacement - placez-vous sur place et appuyez sur Utiliser ma position actuelle -, du rayon et de l'obligation ou non d'une photo ; le reste se trouve dans Plus d'options. Un nouveau site prend le fuseau horaire de votre appareil."
+      "body": "Sites sert à créer les lieux de travail et à y affecter les personnes. Pour ajouter un site, il suffit d'un nom, de son emplacement - placez-vous sur place et appuyez sur Utiliser ma position actuelle -, du rayon et de l'obligation ou non d'une photo ; le reste est dans Plus d'options. Un nouveau site prend le fuseau horaire de votre appareil. Le rôle sur le site part du rôle dans l'organisation. Tout le reste d'un site se règle sur sa propre page, sous Règles du site : marge GPS, délai de grâce, horaires, heures supplémentaires et retenues de retard, arrondi des pauses, suivi de présence, employés exemptés et blocages en libre-service."
     },
     "workers": {
       "title": "Intervenants externes",
@@ -56,7 +56,7 @@
     },
     "settingsCenter": {
       "title": "Paramètres (propriétaire)",
-      "body": "Réglages de toute l'organisation : rayon sans site, « Refuser le pointage depuis une position falsifiée », valeurs par défaut des nouveaux sites et politique de chaque site - tolérance GPS, délai de grâce, horaires, heures supplémentaires et retenues de retard, arrondi des pauses, suivi de présence continu, employés exemptés et blocages du libre-service : après le délai de grâce, départ hors zone et arrivée hors zone."
+      "body": "Les paramètres ne contiennent que ce qui vaut pour toute l'organisation : le rayon pour un pointage sans site, le refus ou non des fausses positions, et les valeurs de départ d'un nouveau site. Les règles d'un site sont sur la page du site."
     },
     "leave": {
       "title": "Congés (PTO)",
