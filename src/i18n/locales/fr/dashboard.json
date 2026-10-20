@@ -215,7 +215,9 @@
       "work_assignment": "Mission de travail",
       "emergency": "Urgence",
       "other": "Autre"
-    }
+    },
+    "clarificationAsked": "Votre responsable demande une précision : « {{question}} »",
+    "clarificationAskedNoNote": "Votre responsable vous demande de réexpliquer ceci."
   },
   "employeeHome": {
     "hoursTitle": "Mes heures",

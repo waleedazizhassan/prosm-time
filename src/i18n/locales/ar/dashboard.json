@@ -219,7 +219,9 @@
       "work_assignment": "مهمة عمل",
       "emergency": "طارئ",
       "other": "أخرى"
-    }
+    },
+    "clarificationAsked": "مديرك طلب توضيحاً: \"{{question}}\"",
+    "clarificationAskedNoNote": "مديرك طلب منك توضيح هذا مرة أخرى."
   },
   "employeeHome": {
     "hoursTitle": "ساعاتي",

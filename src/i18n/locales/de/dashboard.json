@@ -215,7 +215,9 @@
       "work_assignment": "Arbeitsauftrag",
       "emergency": "Notfall",
       "other": "Sonstiges"
-    }
+    },
+    "clarificationAsked": "Ihr Manager bittet um eine weitere Erklärung: \"{{question}}\"",
+    "clarificationAskedNoNote": "Ihr Manager bittet Sie, dies noch einmal zu erklären."
   },
   "employeeHome": {
     "hoursTitle": "Meine Stunden",

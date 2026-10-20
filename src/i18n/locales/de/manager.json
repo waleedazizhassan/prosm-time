@@ -51,6 +51,25 @@
     },
     "mockLocation": {
       "summary": "{{action}} um {{time}} von einem Standort, den das Gerät als simuliert gemeldet hat (falsches GPS)."
+    },
+    "effect": {
+      "geofence_exception": {
+        "approved": "der Grund wird akzeptiert - die Stunden der Schicht zählen voll.",
+        "rejected": "die Stunden zählen ab dem Verlassen des Arbeitsbereichs nicht mehr (der Stundenzettel zieht den Rest der Schicht ab).",
+        "clarification_requested": "geht mit Ihrer Notiz als Frage an den Mitarbeiter zurück; kommt hierher zurück, wenn er antwortet."
+      },
+      "correction_request": {
+        "approved": "die Ein- oder Ausstempelzeit wird auf die gewünschte Zeit geändert.",
+        "rejected": "die erfasste Zeit bleibt unverändert."
+      },
+      "offline_time": {
+        "approved": "die ohne Verbindung erfasste Zeit des Telefons wird akzeptiert.",
+        "rejected": "als nicht akzeptiert markiert; die Zeit selbst ändert sich nicht - bei Fehlern in der Anwesenheit korrigieren."
+      },
+      "mock_location": {
+        "approved": "als echter Standort behandelt (z. B. GPS-Fehler).",
+        "rejected": "als gefälschter Standort erfasst; sonst ändert sich nichts automatisch - mit dem Mitarbeiter klären."
+      }
     }
   },
   "leave": {

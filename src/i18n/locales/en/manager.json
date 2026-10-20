@@ -51,6 +51,25 @@
     },
     "mockLocation": {
       "summary": "{{action}} at {{time}} from a location the device reported as simulated (fake GPS)."
+    },
+    "effect": {
+      "geofence_exception": {
+        "approved": "the reason is accepted - the shift's hours count in full.",
+        "rejected": "the hours stop counting from the moment they left the work area (the timesheet deducts the rest of that shift).",
+        "clarification_requested": "it goes back to the employee, with your note as the question, to explain again; it returns here when they do."
+      },
+      "correction_request": {
+        "approved": "the clock-in or clock-out time is changed to the requested time.",
+        "rejected": "the recorded time stays as it is."
+      },
+      "offline_time": {
+        "approved": "the time the phone recorded without a connection is accepted.",
+        "rejected": "it is marked as not accepted; the time itself doesn't change - correct it from the Attendance Record if it is wrong."
+      },
+      "mock_location": {
+        "approved": "treated as a genuine location (e.g. a GPS mistake).",
+        "rejected": "recorded as a fake location; nothing else changes automatically - take it up with the employee."
+      }
     }
   },
   "leave": {

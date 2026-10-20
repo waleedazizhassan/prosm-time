@@ -130,6 +130,11 @@ export default function ExceptionsCard() {
           }}
         >
           <p style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("exceptions.outsideZone", { distance: Math.round(exception.distanceMeters) })}</p>
+          {exception.clarificationRequest !== null ? (
+            <p style={{ fontSize: "var(--font-sm)", color: "var(--status-warning-text)", fontWeight: "var(--font-weight-semibold)" }}>
+              {exception.clarificationRequest ? t("exceptions.clarificationAsked", { question: exception.clarificationRequest }) : t("exceptions.clarificationAskedNoNote")}
+            </p>
+          ) : null}
           <Select
             label={t("exceptions.reasonCategoryLabel")}
             name={`reasonCategory-${exception.id}`}

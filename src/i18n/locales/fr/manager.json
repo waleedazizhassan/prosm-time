@@ -51,6 +51,25 @@
     },
     "mockLocation": {
       "summary": "{{action}} à {{time}} depuis une position signalée comme simulée par l'appareil (faux GPS)."
+    },
+    "effect": {
+      "geofence_exception": {
+        "approved": "le motif est accepté - les heures du service comptent en entier.",
+        "rejected": "les heures cessent de compter dès la sortie de la zone de travail (la feuille de temps déduit le reste du service).",
+        "clarification_requested": "retourne à l'employé, avec votre note comme question, pour réexpliquer ; revient ici quand il répond."
+      },
+      "correction_request": {
+        "approved": "l'heure d'entrée ou de sortie devient l'heure demandée.",
+        "rejected": "l'heure enregistrée reste inchangée."
+      },
+      "offline_time": {
+        "approved": "l'heure enregistrée par le téléphone hors connexion est acceptée.",
+        "rejected": "marquée comme non acceptée ; l'heure ne change pas - corrigez-la dans les pointages si elle est fausse."
+      },
+      "mock_location": {
+        "approved": "considérée comme une vraie position (ex. erreur GPS).",
+        "rejected": "enregistrée comme fausse position ; rien d'autre ne change automatiquement - voyez avec l'employé."
+      }
     }
   },
   "leave": {

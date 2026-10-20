@@ -10,6 +10,8 @@ export interface GeofenceException {
   id: string;
   distanceMeters: number;
   status: "pending_reason" | "pending_review" | "resolved";
+  // The manager's question when they asked to explain again (owner 2026-10-20).
+  clarificationRequest: string | null;
 }
 
 function createSuccess<T>(data: T | null = null): ServiceResult<T> {
@@ -23,6 +25,7 @@ interface GeofenceExceptionRow {
   id: string;
   distance_meters: number;
   status: "pending_reason" | "pending_review" | "resolved";
+  clarification_request: string | null;
 }
 
 // PROSM Time WP-11/§19 - the employee's own pending out-of-zone
@@ -37,9 +40,9 @@ class ExceptionRepository {
 
   async listPendingReasonExceptions(userId: string): Promise<ServiceResult<GeofenceException[]>> {
     try {
-      const { data, error } = await this.client.from("geofence_exceptions").select("id, distance_meters, status").eq("user_id", userId).eq("status", "pending_reason").order("created_at", { ascending: false });
+      const { data, error } = await this.client.from("geofence_exceptions").select("id, distance_meters, status, clarification_request").eq("user_id", userId).eq("status", "pending_reason").order("created_at", { ascending: false });
       if (error) return createError(error.message);
-      return createSuccess((data ?? []).map((row: GeofenceExceptionRow) => ({ id: row.id, distanceMeters: row.distance_meters, status: row.status })));
+      return createSuccess((data ?? []).map((row: GeofenceExceptionRow) => ({ id: row.id, distanceMeters: row.distance_meters, status: row.status, clarificationRequest: row.clarification_request ?? null })));
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Exception service unavailable.");
     }

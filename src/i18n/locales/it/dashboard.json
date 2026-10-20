@@ -215,7 +215,9 @@
       "work_assignment": "Incarico di lavoro",
       "emergency": "Emergenza",
       "other": "Altro"
-    }
+    },
+    "clarificationAsked": "Il tuo responsabile chiede un chiarimento: \"{{question}}\"",
+    "clarificationAskedNoNote": "Il tuo responsabile ti chiede di spiegarlo di nuovo."
   },
   "employeeHome": {
     "hoursTitle": "Le mie ore",

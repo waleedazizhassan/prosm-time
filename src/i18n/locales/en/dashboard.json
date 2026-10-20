@@ -215,7 +215,9 @@
       "work_assignment": "Work assignment",
       "emergency": "Emergency",
       "other": "Other"
-    }
+    },
+    "clarificationAsked": "Your manager asked you to explain again: \"{{question}}\"",
+    "clarificationAskedNoNote": "Your manager asked you to explain this again."
   },
   "employeeHome": {
     "hoursTitle": "My hours",

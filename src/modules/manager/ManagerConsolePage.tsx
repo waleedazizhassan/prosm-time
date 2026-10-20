@@ -4,7 +4,7 @@ import { Link, Navigate } from "react-router-dom";
 import { Camera } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
-import ManagerRepository, { type TodayAttendanceRow, type PendingReviewItem } from "../../core/repositories/ManagerRepository";
+import ManagerRepository, { type TodayAttendanceRow, type PendingReviewItem, type PendingReviewKind } from "../../core/repositories/ManagerRepository";
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import LeaveRepository, { type PendingLeaveReviewRow, type ApprovedLeaveRow } from "../../core/repositories/LeaveRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
@@ -23,7 +23,15 @@ import { formatTimeOnly, formatDateOnly } from "../../core/utils/formatDate";
 import managerConsoleHeaderImage from "../../assets/illustrations/manager.svg";
 import PageBanner from "../../components/common/PageBanner";
 
-const REVIEW_ACTIONS = ["approved", "rejected", "acknowledged", "clarification_requested"] as const;
+type ReviewAction = "approved" | "rejected" | "acknowledged" | "clarification_requested";
+// Owner 2026-10-20 ("what is the right action for each reason?"): only the
+// decisions that mean something for each kind of item, each with what it does.
+const ACTIONS_BY_KIND: Record<PendingReviewKind, ReviewAction[]> = {
+  geofence_exception: ["approved", "rejected", "clarification_requested"],
+  correction_request: ["approved", "rejected"],
+  offline_time: ["approved", "rejected"],
+  mock_location: ["approved", "rejected"],
+};
 
 function formatWorkedHours(clockInAt: string, clockOutAt: string | null): string {
   const endMs = clockOutAt ? new Date(clockOutAt).getTime() : Date.now();
@@ -129,7 +137,7 @@ export default function ManagerConsolePage() {
           })
         : item.summary;
 
-  const handleReview = async (actionType: (typeof REVIEW_ACTIONS)[number]) => {
+  const handleReview = async (actionType: ReviewAction) => {
     if (!reviewTarget) return;
     setSubmitting(actionType);
     setError("");
@@ -327,7 +335,7 @@ export default function ManagerConsolePage() {
         title={reviewTarget ? `${reviewTarget.userFullName} — ${t(`pending.kind.${reviewTarget.kind}`)}` : ""}
         footer={
           <>
-            {REVIEW_ACTIONS.map((action) => (
+            {(reviewTarget ? ACTIONS_BY_KIND[reviewTarget.kind] : []).map((action) => (
               <Button key={action} variant={action === "approved" ? "primary" : "ghost"} onClick={() => handleReview(action)} loading={submitting === action}>
                 {t(`pending.action.${action}`)}
               </Button>
@@ -349,6 +357,15 @@ export default function ManagerConsolePage() {
               {t("pending.submittedAtLabel")}: {formatDateOnly(reviewTarget.createdAt, i18n.language)} {formatTimeOnly(reviewTarget.createdAt, i18n.language)}
             </p>
           </div>
+        ) : null}
+        {reviewTarget ? (
+          <ul style={{ margin: "0 0 var(--space-3)", paddingInlineStart: "var(--space-4)", fontSize: "var(--font-xs)", color: "var(--text-secondary)", lineHeight: 1.7 }}>
+            {ACTIONS_BY_KIND[reviewTarget.kind].map((action) => (
+              <li key={action}>
+                <strong style={{ color: "var(--text-primary)" }}>{t(`pending.action.${action}`)}:</strong> {t(`pending.effect.${reviewTarget.kind}.${action}`)}
+              </li>
+            ))}
+          </ul>
         ) : null}
         <Textarea label={t("pending.notesLabel")} name="reviewNotes" value={reviewNotes} onChange={(event) => setReviewNotes(event.target.value)} disabled={Boolean(submitting)} />
       </Modal>
