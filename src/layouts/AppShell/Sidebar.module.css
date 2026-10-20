@@ -23,7 +23,7 @@
 
   overflow-y: auto;
 
-  background: var(--surface-card);
+  background: var(--brand-gradient-soft), var(--surface-card);
   border-inline-end: 1px solid var(--border-light);
 
   transition: width 220ms ease, box-shadow 220ms ease;
@@ -38,7 +38,7 @@
   padding: 0 var(--space-5);
 
   border-bottom: 1px solid var(--border-light);
-  background: var(--surface-card);
+  background: transparent;
 }
 
 .sidebarBrand {
@@ -138,13 +138,16 @@
 }
 
 .active {
-  background: var(--brand-primary);
+  /* Aurora (owner 2026-10-20): the current page glows in the logo's gradient. */
+  background: var(--brand-gradient-action);
   color: var(--brand-on-primary);
   font-weight: var(--font-weight-semibold);
+  box-shadow: var(--brand-glow);
 }
 
 .active:hover {
-  background: var(--brand-primary-hover);
+  background: var(--brand-gradient-action);
+  filter: brightness(1.06);
 }
 
 .itemIcon {
@@ -205,7 +208,7 @@
   overflow: hidden;
   border-radius: 50%;
 
-  background: var(--brand-primary);
+  background: var(--brand-gradient);
   color: var(--brand-on-primary);
 
   font-size: var(--font-sm);
@@ -269,7 +272,7 @@
 /* Sidebar text is the only brand mark left once collapsed - stays
    visible, shrunk to fit the 84px rail instead of fading out. */
 .collapsed .sidebarBrandName {
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .collapsed .sidebarHeader {

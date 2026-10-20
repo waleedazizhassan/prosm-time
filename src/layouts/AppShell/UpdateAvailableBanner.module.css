@@ -9,15 +9,15 @@
   padding: var(--space-2) var(--space-4);
   font-size: var(--font-sm);
   font-weight: var(--font-weight-semibold);
-  background: var(--brand-primary, #16a34a);
-  color: #fff;
+  background: var(--brand-gradient-action);
+  color: var(--brand-on-primary);
 }
 
 .action {
   margin-inline-start: auto;
   border: 0;
-  background: #fff;
-  color: var(--brand-primary, #16a34a);
+  background: var(--palette-white);
+  color: var(--brand-primary);
   font-size: var(--font-xs);
   font-weight: var(--font-weight-semibold);
   padding: var(--space-1) var(--space-3);

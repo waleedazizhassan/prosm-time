@@ -69,8 +69,8 @@
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: rgba(22, 163, 74, 0.14);
-  color: #16a34a;
+  background: var(--status-success-bg);
+  color: var(--status-success-text);
 }
 
 .linkText {

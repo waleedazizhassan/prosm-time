@@ -423,7 +423,7 @@
 }
 
 .barValue {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: var(--font-weight-semibold);
   color: var(--text-secondary);
   font-variant-numeric: tabular-nums;
@@ -820,23 +820,23 @@
 }
 
 .statIconGreen {
-  background: rgba(22, 163, 74, 0.14);
-  color: #16a34a;
+  background: var(--status-success-bg);
+  color: var(--status-success-text);
 }
 
 .statIconAmber {
-  background: rgba(245, 158, 11, 0.16);
-  color: #d97706;
+  background: var(--status-warning-bg);
+  color: var(--status-warning-text);
 }
 
 .statIconSlate {
-  background: rgba(100, 116, 139, 0.16);
-  color: #64748b;
+  background: var(--surface-sunken);
+  color: var(--text-secondary);
 }
 
 .statIconRed {
-  background: rgba(220, 38, 38, 0.14);
-  color: #dc2626;
+  background: var(--status-danger-bg);
+  color: var(--status-danger-text);
 }
 
 .statLabel {
@@ -875,13 +875,13 @@
 }
 
 .statFillGood {
-  background: #16a34a;
+  background: var(--brand-success);
 }
 
 .statFillWatch {
-  background: #d97706;
+  background: var(--brand-warning);
 }
 
 .statFillLow {
-  background: #dc2626;
+  background: var(--brand-danger);
 }

@@ -31,6 +31,17 @@
   box-shadow: var(--shadow-xs);
 }
 
+/* Aurora (owner 2026-10-20): a thin light of the logo's gradient along the header's lower edge. */
+.header::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59, 139, 240, 0.55), rgba(34, 211, 238, 0.55), rgba(52, 211, 153, 0.45), transparent);
+  pointer-events: none;
+}
+
 .leftSection {
   display: flex;
   align-items: center;
