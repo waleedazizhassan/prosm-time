@@ -4,7 +4,7 @@
   "guides": {
     "gettingStarted": {
       "title": "Getting Started",
-      "body": "Sign in with the email and password your administrator set up for you. The first time (and whenever they change), you're shown what PROSM Time records about you and asked to acknowledge the Privacy Policy and Terms of Use. On the Dashboard, use Clock In to start your shift and Clock Out to end it - a live map shows your current position and, when relevant, the site's work area. The app opens in your device's language when it's one of the five supported; you can change it any time from the user menu."
+      "body": "Sign in with the email and password your administrator set up for you. The first time (and whenever they change), you're shown what PROSM Time records about you and asked to acknowledge the Privacy Policy and Terms of Use. On the Dashboard, use Clock In to start your shift and Clock Out to end it - a live map shows your current position and, when relevant, the site's work area. The app opens in your device's language when it's one of the five supported; you can change it any time from the user menu. Employees open to their own home page: clock in and out, their hours today, this week (from Sunday) and this month, and links to their attendance record, allowances, timesheets and leave. The Owner, Managers and Supervisors open to the Dashboard. The Owner doesn't clock in or out."
     },
     "attendance": {
       "title": "Clocking In & Out",
@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Emergency",
-      "body": "The SOS button is on the Dashboard during every shift once your clock-in is confirmed. Pressing it sends a high-priority alert with your location to your site's managers, the Owner and co-workers clocked in at the same site, and it's logged in the Emergency Log. SOS is not an emergency service - it doesn't call the police or an ambulance. In an emergency, always call your local emergency number (in Egypt: ambulance 123, police 122, fire 180). It needs an internet connection."
+      "body": "The SOS button is on the Dashboard during every shift once your clock-in is confirmed. Pressing it sends a high-priority alert with your location to your site's managers, the Owner and co-workers clocked in at the same site, and it's logged in the Emergency Log. SOS is not an emergency service - it doesn't call the police or an ambulance. In an emergency, always call your local emergency number (in Egypt: ambulance 123, police 122, fire 180). It needs an internet connection. If you work without a chosen site, the managers of the nearest site receive it."
     },
     "notifications": {
       "title": "How Notifications Reach the Right Person",
@@ -44,7 +44,7 @@
     },
     "reportsCenter": {
       "title": "Reports Center",
-      "body": "Pick a report type, a date range and, where relevant, an employee or site, then export it as a PDF. Reports include Attendance Record (offline device times are marked), Allowances, Workforce, Contractor, Site, Late Arrivals, Missed Checkouts, Leave Conflicts, Manager Overrides and Location Violations - which now lists being outside the work area (with the employee's reason and review status), implausible locations and fake locations together. A Manager sees only the sites they manage; the Owner sees the whole organisation."
+      "body": "Pick a report type, a date range and, where relevant, an employee or site, then export it as a PDF. Reports include Attendance Record (offline device times are marked), Allowances, Workforce, Contractor, Site, Late Arrivals, Missed Checkouts, Leave Conflicts, Manager Overrides and Location Violations - which now lists being outside the work area (with the employee's reason and review status), implausible locations and fake locations together. A Manager sees only the sites they manage; the Owner sees the whole organisation. Next to every PDF download there is a Print button. In the PDF, a page never cuts through a row, the column headings repeat on each page and the pages are numbered."
     },
     "sites": {
       "title": "Sites (Administrators)",
@@ -127,7 +127,7 @@
     },
     "q7": {
       "question": "Can I export my attendance or timesheet as a PDF?",
-      "answer": "Yes - Attendance Record, Timesheets and Allowances each have their own Export PDF action, scoped to whatever you're currently viewing, and Reports gathers the Attendance Record and Allowances exports in one dedicated place too."
+      "answer": "Yes - Attendance Record, Timesheets and Allowances each have their own Export PDF action, scoped to whatever you're currently viewing, and Reports gathers the Attendance Record and Allowances exports in one dedicated place too. Each also has a Print button, and your home page links to all of them."
     },
     "q8": {
       "question": "Why can't I see some employees in People or Attendance Record?",

@@ -4,7 +4,7 @@
   "guides": {
     "gettingStarted": {
       "title": "Per iniziare",
-      "body": "Accedi con l'e-mail e la password impostate dal tuo amministratore. La prima volta (e a ogni modifica) vedi cosa registra PROSM Time e ti viene chiesto di riconoscere l'Informativa sulla privacy e le Condizioni d'uso. Dalla dashboard, Timbra entrata inizia il turno e Timbra uscita lo termina; una mappa mostra la tua posizione e l'area della sede. L'app si apre nella lingua del dispositivo se supportata; puoi cambiarla dal menu utente."
+      "body": "Accedi con l'e-mail e la password impostate dal tuo amministratore. La prima volta (e a ogni modifica) vedi cosa registra PROSM Time e ti viene chiesto di riconoscere l'Informativa sulla privacy e le Condizioni d'uso. Dalla dashboard, Timbra entrata inizia il turno e Timbra uscita lo termina; una mappa mostra la tua posizione e l'area della sede. L'app si apre nella lingua del dispositivo se supportata; puoi cambiarla dal menu utente. I dipendenti aprono la propria pagina iniziale: timbrare entrata e uscita, le ore di oggi, di questa settimana (da domenica) e di questo mese, e i collegamenti a presenze, indennità, fogli ore e ferie. Il titolare, i responsabili e i supervisori aprono la dashboard. Il titolare non timbra."
     },
     "attendance": {
       "title": "Timbrare entrata e uscita",
@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Emergenza",
-      "body": "Il pulsante SOS è sulla dashboard durante ogni turno, una volta confermata la timbratura. Invia un allarme prioritario con la tua posizione ai responsabili della sede, al titolare e ai colleghi presenti, e viene registrato nel registro emergenze. SOS non è un servizio di emergenza: non chiama polizia o ambulanza. In emergenza chiama sempre il numero locale (in Egitto: ambulanza 123, polizia 122, vigili del fuoco 180). Richiede una connessione internet."
+      "body": "Il pulsante SOS è sulla dashboard durante ogni turno, una volta confermata la timbratura. Invia un allarme prioritario con la tua posizione ai responsabili della sede, al titolare e ai colleghi presenti, e viene registrato nel registro emergenze. SOS non è un servizio di emergenza: non chiama polizia o ambulanza. In emergenza chiama sempre il numero locale (in Egitto: ambulanza 123, polizia 122, vigili del fuoco 180). Richiede una connessione internet. Se lavori senza una sede scelta, lo ricevono i responsabili della sede più vicina."
     },
     "notifications": {
       "title": "Come le notifiche raggiungono la persona giusta",
@@ -44,7 +44,7 @@
     },
     "reportsCenter": {
       "title": "Centro report",
-      "body": "Scegli tipo di report, periodo ed eventualmente dipendente o sede, poi esporta in PDF. Report: presenze (gli orari offline sono contrassegnati), indennità, forza lavoro, collaboratori, sede, ritardi, uscite mancanti, conflitti ferie, interventi dei responsabili e violazioni di posizione - che ora riunisce l'uscita dall'area (con motivo e stato), posizioni non plausibili e posizioni false. Un responsabile vede solo le sue sedi."
+      "body": "Scegli tipo di report, periodo ed eventualmente dipendente o sede, poi esporta in PDF. Report: presenze (gli orari offline sono contrassegnati), indennità, forza lavoro, collaboratori, sede, ritardi, uscite mancanti, conflitti ferie, interventi dei responsabili e violazioni di posizione - che ora riunisce l'uscita dall'area (con motivo e stato), posizioni non plausibili e posizioni false. Un responsabile vede solo le sue sedi. Accanto a ogni download PDF c'è un pulsante Stampa. Nel PDF nessuna riga viene divisa tra due pagine, le intestazioni delle colonne si ripetono su ogni pagina e le pagine sono numerate."
     },
     "sites": {
       "title": "Sedi (amministratori)",
@@ -127,7 +127,7 @@
     },
     "q7": {
       "question": "Posso esportare la mia presenza o il mio foglio ore in PDF?",
-      "answer": "Sì - Registro presenze, Fogli ore e Indennità hanno ciascuno la propria azione Esporta PDF, limitata a ciò che stai visualizzando in quel momento, e anche Report raccoglie gli export di Registro presenze e Indennità in un unico punto dedicato."
+      "answer": "Sì - Registro presenze, Fogli ore e Indennità hanno ciascuno la propria azione Esporta PDF, limitata a ciò che stai visualizzando in quel momento, e anche Report raccoglie gli export di Registro presenze e Indennità in un unico punto dedicato. Ognuna ha anche un pulsante Stampa, e la tua pagina iniziale li collega tutti."
     },
     "q8": {
       "question": "Perché non vedo alcuni dipendenti in Persone o nel Registro presenze?",

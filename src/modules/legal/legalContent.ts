@@ -6,7 +6,7 @@
 //
 // When either text changes, raise LEGAL_VERSION: every user is asked to
 // read and acknowledge the new version once (LegalAcknowledgementGate).
-export const LEGAL_VERSION = "2026-10-13";
+export const LEGAL_VERSION = "2026-10-20";
 
 export interface LegalSection {
   heading: string;
@@ -25,7 +25,7 @@ export type LegalLanguage = "ar" | "en";
 
 const PRIVACY_EN: LegalDocument = {
   title: "Privacy Policy",
-  updated: "Last updated: 13 October 2026",
+  updated: "Last updated: 20 October 2026",
   intro: [
     "PROSM Time is an attendance, time and workforce-presence application provided by PROSM to organisations (\"the Organisation\") for their owners, managers, employees and site workers. This policy explains what personal data the application processes, why, who can see it, how long it is kept and what rights people have.",
     "PROSM Time records location and, where a site requires it, photos. We describe exactly when below. Please read it carefully.",
@@ -44,8 +44,8 @@ const PRIVACY_EN: LegalDocument = {
       bullets: [
         "Organisation owners and administrators who activate and manage an account.",
         "Managers, supervisors, employees and read-only users who sign in to the application.",
-        "Site workers (contractors) registered by the Organisation, who clock in with a worker number at a shared kiosk.",
-        "People who use a shared kiosk device with a personal PIN.",
+        "External workers (contractors, day labour) registered by the Organisation, who have no account in the app: the app gives each a 6-digit number, with which they clock in and out at a kiosk run by the Organisation's owner or a site manager.",
+        "Where the Organisation turns it on, people who clock in on a shared kiosk device with a personal PIN.",
       ],
     },
     {
@@ -60,10 +60,10 @@ const PRIVACY_EN: LegalDocument = {
         "Photos: only when a site requires a photo at clock-in or clock-out, taken by you with the camera at that moment. Before the photo, the app checks on your device that the camera shows a live scene (not a still picture) by comparing a few low-resolution frames for movement. Those frames are not stored or sent. PROSM Time does not perform facial recognition and does not create biometric templates.",
         "Leave, allowances and timesheets: leave requests (type, dates, reason), allowance entries, overtime, timesheets and their approvals. Please do not include unnecessary health details in a leave reason.",
         "Exceptions and reviews: reasons you give for being outside a work area, correction requests, and managers' decisions and notes.",
-        "Site worker data: name, worker number, site, clock times, kiosk location and pay rate.",
+        "External worker data: name, contractor (if given), the 6-digit number the app generated, the site of each clock-in and clock-out, the times, the kiosk's location and, if the Organisation records it, the pay rate.",
         "Kiosk PIN: stored only as a one-way cryptographic hash, never in readable form.",
         "Device and security data: a device identifier where the Organisation binds accounts to devices, the app installation and version, security and audit logs of important actions, and protection against repeated attempts, which stores only a scrambled (hashed) form of the network address.",
-        "Data kept on your device: actions made without a connection are kept encrypted on your device until they are sent, then removed.",
+        "Data kept on your device: actions made without a connection are kept encrypted on your device until they are sent, then removed. The web version also keeps the app's own program files on the device (not your data), so that it can open without a connection.",
       ],
     },
     {
@@ -71,7 +71,7 @@ const PRIVACY_EN: LegalDocument = {
       bullets: [
         "To record attendance, working time, breaks and leave, and to prepare timesheets, allowances and payroll inputs for the Organisation.",
         "To confirm, according to the Organisation's settings, that attendance is recorded at or near the work site.",
-        "For safety: to deliver SOS alerts with the location to the site's managers, the Organisation's owner and co-workers on site.",
+        "For safety: to deliver SOS alerts with the location to the site's managers, the Organisation's owner and co-workers on site. For someone working without a chosen site, the managers of the nearest site receive it.",
         "To prevent misuse such as backdated times or fake locations. Flags of this kind are sent to a person for review. PROSM Time does not take decisions about people by itself.",
         "To keep the service secure, provide support, and meet legal obligations.",
       ],
@@ -87,7 +87,7 @@ const PRIVACY_EN: LegalDocument = {
     {
       heading: "6. Who can see your data",
       bullets: [
-        "Within the Organisation, access depends on role. The owner can see the whole organisation. Managers see the sites they manage. Employees see their own records. Each organisation's data is separated from every other organisation's at the database level.",
+        "Within the Organisation, access depends on role. The owner can see the whole organisation. Managers and supervisors see, and act only for, the people at the sites they manage; a manager may pass some of their own permissions to a supervisor, and only the owner and managers approve leave or record attendance on someone's behalf (never their own). Employees see their own records. Exported report files are available to whoever made them and to the owner. Each organisation's data is separated from every other organisation's at the database level.",
         "PROSM staff, only when needed for support, security or maintenance, and under confidentiality.",
         "Service providers that host or deliver the service on PROSM's behalf:",
         "Supabase: database, file storage and server functions, hosted in the European Union (Frankfurt, Germany).",
@@ -160,7 +160,7 @@ const PRIVACY_EN: LegalDocument = {
 
 const PRIVACY_AR: LegalDocument = {
   title: "سياسة الخصوصية",
-  updated: "آخر تحديث: 13 أكتوبر 2026",
+  updated: "آخر تحديث: 20 أكتوبر 2026",
   intro: [
     "PROSM Time تطبيق لتسجيل الحضور ووقت العمل ومتابعة وجود العاملين، تقدّمه PROSM للمؤسسات («المؤسسة») لاستخدامه من مالكيها ومديريها وموظفيها وعمال مواقعها. توضّح هذه السياسة البيانات الشخصية التي يعالجها التطبيق، وسبب معالجتها، ومن يطّلع عليها، ومدة الاحتفاظ بها، والحقوق المكفولة لأصحابها.",
     "يسجّل PROSM Time الموقع الجغرافي، ويلتقط الصور حين يشترط الموقع ذلك، ونبيّن أدناه متى يحدث ذلك بالضبط. نرجو قراءتها بعناية.",
@@ -179,8 +179,8 @@ const PRIVACY_AR: LegalDocument = {
       bullets: [
         "مالكو المؤسسات والمسؤولون الذين يفعّلون الحساب ويديرونه.",
         "المديرون والمشرفون والموظفون ومستخدمو القراءة فقط الذين يسجّلون الدخول إلى التطبيق.",
-        "عمال المواقع (المقاولون) الذين تسجّلهم المؤسسة ويسجّلون حضورهم برقم عامل على جهاز كشك مشترك.",
-        "من يستخدمون جهاز كشك مشتركاً برمز PIN شخصي.",
+        "العمالة الخارجية (المقاولون والعمالة اليومية) الذين تسجّلهم المؤسسة وليس لهم حساب في التطبيق: يولّد التطبيق لكل منهم رقماً من 6 أرقام، يسجّل به حضوره وانصرافه على كشك يشغّله مالك المؤسسة أو مدير الموقع.",
+        "إذا فعّلت المؤسسة ذلك: من يسجّلون حضورهم على جهاز كشك مشترك برمز PIN شخصي.",
       ],
     },
     {
@@ -195,10 +195,10 @@ const PRIVACY_AR: LegalDocument = {
         "الصور: فقط عندما يشترط الموقع صورة عند الحضور أو الانصراف، وتلتقطها أنت بالكاميرا في تلك اللحظة. قبل الصورة يتحقق التطبيق على جهازك من أن الكاميرا تعرض مشهداً حياً لا صورة ثابتة، بمقارنة بضع لقطات منخفضة الدقة لرصد الحركة. هذه اللقطات لا تُحفظ ولا تُرسل. ولا يجري PROSM Time أي تعرّف على الوجوه، ولا يُنشئ أي بصمات حيوية (بيومترية).",
         "الإجازات والبدلات والكشوف: طلبات الإجازة (النوع، والتواريخ، والسبب)، وإدخالات البدلات، والعمل الإضافي، والكشوف واعتماداتها. نرجو عدم ذكر تفاصيل صحية غير ضرورية في سبب الإجازة.",
         "الاستثناءات والمراجعات: الأسباب التي تقدّمها عند وجودك خارج نطاق العمل، وطلبات التصحيح، وقرارات المديرين وملاحظاتهم.",
-        "بيانات عمال المواقع: الاسم، ورقم العامل، والموقع، وأوقات الحضور، وموقع الكشك، والأجر.",
+        "بيانات العمالة الخارجية: الاسم، والمقاول (إن ذُكر)، والرقم المكوّن من 6 أرقام الذي ولّده التطبيق، وموقع كل تسجيل حضور وانصراف، والأوقات، وموقع الكشك، والأجر إذا سجّلته المؤسسة.",
         "رمز PIN للكشك: يُحفظ في صورة تجزئة مشفّرة باتجاه واحد فقط، ولا يُحفظ أبداً بصيغة مقروءة.",
         "بيانات الجهاز والأمان: معرّف الجهاز إذا ربطت المؤسسة الحسابات بالأجهزة، وتثبيت التطبيق وإصداره، وسجلات الأمان والتدقيق للإجراءات المهمة، والحماية من المحاولات المتكررة، التي تحفظ عنوان الشبكة في صورة مجزّأة غير مقروءة فقط.",
-        "البيانات المحفوظة على جهازك: الإجراءات التي تتم دون اتصال تُحفظ مشفّرة على جهازك إلى أن تُرسل، ثم تُحذف منه.",
+        "البيانات المحفوظة على جهازك: الإجراءات التي تتم دون اتصال تُحفظ مشفّرة على جهازك إلى أن تُرسل، ثم تُحذف منه. وتحفظ نسخة الويب أيضاً ملفات البرنامج نفسه على الجهاز (لا بياناتك) حتى تفتح دون اتصال.",
       ],
     },
     {
@@ -206,7 +206,7 @@ const PRIVACY_AR: LegalDocument = {
       bullets: [
         "لتسجيل الحضور ووقت العمل والاستراحات والإجازات، وإعداد الكشوف والبدلات ومدخلات الرواتب للمؤسسة.",
         "للتأكد، وفق إعدادات المؤسسة، من أن الحضور يُسجَّل في موقع العمل أو بالقرب منه.",
-        "للسلامة: لإيصال تنبيهات الطوارئ SOS مع الموقع إلى مديري الموقع ومالك المؤسسة والزملاء الموجودين في الموقع.",
+        "للسلامة: لإيصال تنبيهات الطوارئ SOS مع الموقع إلى مديري الموقع ومالك المؤسسة والزملاء الموجودين في الموقع. ولمن يعمل دون اختيار موقع، يصل التنبيه إلى مديري أقرب موقع.",
         "لمنع إساءة الاستخدام، مثل تقديم الأوقات أو تزييف الموقع. تُرسل هذه التنبيهات لشخص يراجعها؛ فلا يتخذ PROSM Time قرارات بشأن الأشخاص من تلقاء نفسه.",
         "للحفاظ على أمان الخدمة، وتقديم الدعم، والوفاء بالالتزامات القانونية.",
       ],
@@ -222,7 +222,7 @@ const PRIVACY_AR: LegalDocument = {
     {
       heading: "6. من يطّلع على بياناتك",
       bullets: [
-        "داخل المؤسسة، يتوقف الاطلاع على الدور. فالمالك يطّلع على المؤسسة كلها، والمديرون على المواقع التي يديرونها، والموظفون على سجلاتهم فقط. وبيانات كل مؤسسة معزولة عن غيرها على مستوى قاعدة البيانات.",
+        "داخل المؤسسة، يتوقف الاطلاع على الدور. فالمالك يطّلع على المؤسسة كلها. والمديرون والمشرفون يطّلعون على من يعملون في المواقع التي يديرونها ويتصرفون لهم فقط؛ ويجوز للمدير أن يمنح المشرف بعض صلاحياته هو، ولا يوافق على الإجازات أو يسجّل الحضور بالنيابة عن أحد إلا المالك والمديرون (وليس لأنفسهم أبداً). والموظفون يطّلعون على سجلاتهم فقط. وملفات التقارير المُصدَّرة متاحة لمن أنشأها وللمالك. وبيانات كل مؤسسة معزولة عن بيانات أي مؤسسة أخرى على مستوى قاعدة البيانات.",
         "موظفو PROSM، فقط عند الحاجة للدعم أو الأمان أو الصيانة، مع الالتزام بالسرية.",
         "مقدّمو الخدمات الذين يستضيفون الخدمة أو يوصلونها نيابةً عن PROSM:",
         "Supabase: قاعدة البيانات وتخزين الملفات ووظائف الخادم، والاستضافة داخل الاتحاد الأوروبي (فرانكفورت، ألمانيا).",
@@ -295,7 +295,7 @@ const PRIVACY_AR: LegalDocument = {
 
 const TERMS_EN: LegalDocument = {
   title: "Terms of Use",
-  updated: "Last updated: 13 October 2026",
+  updated: "Last updated: 20 October 2026",
   intro: [
     "These terms govern the use of PROSM Time, provided by PROSM. By activating an organisation account, signing in, or using a PROSM Time kiosk, you agree to them. The person who activates an account accepts these terms on behalf of the organisation (\"the Organisation\") and confirms that they have authority to do so.",
     "How personal data is handled is described in the Privacy Policy, which forms part of these terms.",
@@ -344,7 +344,7 @@ const TERMS_EN: LegalDocument = {
     {
       heading: "5. SOS alerts",
       paragraphs: [
-        "The SOS button sends an alert with your location to your site's managers, the Organisation's owner and co-workers clocked in at the same site.",
+        "The SOS button sends an alert with your location to your site's managers, the Organisation's owner and co-workers clocked in at the same site. If you work without a chosen site, the managers of the nearest site receive it.",
         "It is not an emergency service and does not contact the police, an ambulance or the fire service. In an emergency, always call your local emergency number. In Egypt: ambulance 123, police 122, fire 180.",
         "An alert needs an internet connection and a shift confirmed by the server, and its delivery cannot be guaranteed. Use SOS for real emergencies only.",
       ],
@@ -414,7 +414,7 @@ const TERMS_EN: LegalDocument = {
 
 const TERMS_AR: LegalDocument = {
   title: "شروط الاستخدام",
-  updated: "آخر تحديث: 13 أكتوبر 2026",
+  updated: "آخر تحديث: 20 أكتوبر 2026",
   intro: [
     "تنظّم هذه الشروط استخدام PROSM Time الذي تقدّمه PROSM. وبتفعيل حساب مؤسسة، أو تسجيل الدخول، أو استخدام كشك PROSM Time، فإنك توافق عليها. ومن يفعّل الحساب يقبل هذه الشروط نيابةً عن المؤسسة («المؤسسة»)، ويؤكد أنه مخوَّل بذلك.",
     "تُبيِّن سياسة الخصوصية طريقة التعامل مع البيانات الشخصية، وهي جزء من هذه الشروط.",
@@ -463,7 +463,7 @@ const TERMS_AR: LegalDocument = {
     {
       heading: "5. تنبيهات الطوارئ SOS",
       paragraphs: [
-        "يرسل زر SOS تنبيهاً بموقعك إلى مديري موقعك، ومالك المؤسسة، والزملاء المسجَّل حضورهم في الموقع نفسه.",
+        "يرسل زر SOS تنبيهاً بموقعك إلى مديري موقعك، ومالك المؤسسة، والزملاء المسجَّل حضورهم في الموقع نفسه. وإذا كنت تعمل دون اختيار موقع، يصل التنبيه إلى مديري أقرب موقع.",
         "زر SOS ليس خدمة طوارئ، ولا يتصل بالشرطة أو الإسعاف أو الإطفاء. وفي حالات الطوارئ اتصل دائماً برقم الطوارئ المحلي. في مصر: الإسعاف 123، والشرطة 122، والمطافئ 180.",
         "يحتاج التنبيه إلى اتصال بالإنترنت ووردية مؤكدة من الخادم، ولا يمكن ضمان وصوله. استخدم SOS في الطوارئ الحقيقية فقط.",
       ],

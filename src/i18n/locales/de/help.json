@@ -4,7 +4,7 @@
   "guides": {
     "gettingStarted": {
       "title": "Erste Schritte",
-      "body": "Melden Sie sich mit der E-Mail-Adresse und dem Passwort an, die Ihr Administrator eingerichtet hat. Beim ersten Mal (und bei jeder Änderung) sehen Sie, was PROSM Time über Sie erfasst, und bestätigen die Datenschutzerklärung und die Nutzungsbedingungen. Auf dem Dashboard starten Sie Ihre Schicht mit Einstempeln und beenden sie mit Ausstempeln; eine Live-Karte zeigt Ihre Position und gegebenenfalls den Arbeitsbereich des Standorts. Die App öffnet sich in der Sprache Ihres Geräts, wenn sie unterstützt wird; Sie können sie jederzeit im Benutzermenü ändern."
+      "body": "Melden Sie sich mit der E-Mail-Adresse und dem Passwort an, die Ihr Administrator eingerichtet hat. Beim ersten Mal (und bei jeder Änderung) sehen Sie, was PROSM Time über Sie erfasst, und bestätigen die Datenschutzerklärung und die Nutzungsbedingungen. Auf dem Dashboard starten Sie Ihre Schicht mit Einstempeln und beenden sie mit Ausstempeln; eine Live-Karte zeigt Ihre Position und gegebenenfalls den Arbeitsbereich des Standorts. Die App öffnet sich in der Sprache Ihres Geräts, wenn sie unterstützt wird; Sie können sie jederzeit im Benutzermenü ändern. Mitarbeitende öffnen ihre eigene Startseite: Ein- und Ausstempeln, ihre Stunden heute, diese Woche (ab Sonntag) und diesen Monat sowie Links zu Anwesenheit, Zulagen, Stundenzetteln und Urlaub. Inhaber, Manager und Supervisoren öffnen das Dashboard. Der Inhaber stempelt nicht."
     },
     "attendance": {
       "title": "Ein- und Ausstempeln",
@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Notfall",
-      "body": "Die SOS-Schaltfläche steht während jeder Schicht auf dem Dashboard, sobald Ihr Einstempeln bestätigt ist. Sie sendet einen dringenden Alarm mit Ihrem Standort an die Vorgesetzten Ihres Standorts, den Inhaber und die Kollegen vor Ort und wird im Notfallprotokoll erfasst. SOS ist kein Notruf - es ruft weder Polizei noch Rettungsdienst. Rufen Sie im Notfall immer die örtliche Notrufnummer an (in Ägypten: Rettung 123, Polizei 122, Feuerwehr 180). Es braucht eine Internetverbindung."
+      "body": "Die SOS-Schaltfläche steht während jeder Schicht auf dem Dashboard, sobald Ihr Einstempeln bestätigt ist. Sie sendet einen dringenden Alarm mit Ihrem Standort an die Vorgesetzten Ihres Standorts, den Inhaber und die Kollegen vor Ort und wird im Notfallprotokoll erfasst. SOS ist kein Notruf - es ruft weder Polizei noch Rettungsdienst. Rufen Sie im Notfall immer die örtliche Notrufnummer an (in Ägypten: Rettung 123, Polizei 122, Feuerwehr 180). Es braucht eine Internetverbindung. Wenn Sie ohne gewählten Standort arbeiten, erhalten ihn die Manager des nächstgelegenen Standorts."
     },
     "notifications": {
       "title": "Wie Benachrichtigungen die richtige Person erreichen",
@@ -44,7 +44,7 @@
     },
     "reportsCenter": {
       "title": "Berichtszentrale",
-      "body": "Wählen Sie Berichtstyp, Zeitraum und ggf. Mitarbeiter oder Standort und exportieren Sie als PDF. Dazu gehören Anwesenheit (Offline-Gerätezeiten sind markiert), Zulagen, Belegschaft, Auftragnehmer, Standort, Verspätungen, fehlende Ausstempelungen, Urlaubskonflikte, Manager-Eingriffe und Standortverstöße - jetzt mit Verlassen des Arbeitsbereichs (mit Grund und Prüfstatus), unplausiblen und gefälschten Standorten. Führungskräfte sehen nur ihre Standorte, der Inhaber die ganze Organisation."
+      "body": "Wählen Sie Berichtstyp, Zeitraum und ggf. Mitarbeiter oder Standort und exportieren Sie als PDF. Dazu gehören Anwesenheit (Offline-Gerätezeiten sind markiert), Zulagen, Belegschaft, Auftragnehmer, Standort, Verspätungen, fehlende Ausstempelungen, Urlaubskonflikte, Manager-Eingriffe und Standortverstöße - jetzt mit Verlassen des Arbeitsbereichs (mit Grund und Prüfstatus), unplausiblen und gefälschten Standorten. Führungskräfte sehen nur ihre Standorte, der Inhaber die ganze Organisation. Neben jedem PDF-Download gibt es eine Schaltfläche Drucken. Im PDF wird keine Zeile über zwei Seiten getrennt, die Spaltenüberschriften stehen auf jeder Seite und die Seiten sind nummeriert."
     },
     "sites": {
       "title": "Standorte (Administratoren)",
@@ -127,7 +127,7 @@
     },
     "q7": {
       "question": "Kann ich meine Anwesenheit oder meinen Stundenzettel als PDF exportieren?",
-      "answer": "Ja - Anwesenheitsprotokoll, Stundenzettel und Zulagen haben jeweils eine eigene Aktion „PDF exportieren“, beschränkt auf das, was Sie gerade betrachten, und Berichte bündelt die Exporte von Anwesenheitsprotokoll und Zulagen ebenfalls an einem zentralen Ort."
+      "answer": "Ja - Anwesenheitsprotokoll, Stundenzettel und Zulagen haben jeweils eine eigene Aktion „PDF exportieren“, beschränkt auf das, was Sie gerade betrachten, und Berichte bündelt die Exporte von Anwesenheitsprotokoll und Zulagen ebenfalls an einem zentralen Ort. Jede hat auch eine Schaltfläche Drucken, und Ihre Startseite verlinkt alle."
     },
     "q8": {
       "question": "Warum sehe ich manche Mitarbeiter nicht unter Personen oder im Anwesenheitsprotokoll?",

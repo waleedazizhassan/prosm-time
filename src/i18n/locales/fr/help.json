@@ -4,7 +4,7 @@
   "guides": {
     "gettingStarted": {
       "title": "Premiers pas",
-      "body": "Connectez-vous avec l'e-mail et le mot de passe fournis par votre administrateur. La première fois (et à chaque changement), l'application vous montre ce que PROSM Time enregistre et vous demande de reconnaître la Politique de confidentialité et les Conditions d'utilisation. Sur le tableau de bord, Pointer l'arrivée commence votre poste et Pointer le départ le termine ; une carte en direct montre votre position et la zone du site. L'application s'ouvre dans la langue de votre appareil si elle est prise en charge ; vous pouvez la changer à tout moment depuis le menu utilisateur."
+      "body": "Connectez-vous avec l'e-mail et le mot de passe fournis par votre administrateur. La première fois (et à chaque changement), l'application vous montre ce que PROSM Time enregistre et vous demande de reconnaître la Politique de confidentialité et les Conditions d'utilisation. Sur le tableau de bord, Pointer l'arrivée commence votre poste et Pointer le départ le termine ; une carte en direct montre votre position et la zone du site. L'application s'ouvre dans la langue de votre appareil si elle est prise en charge ; vous pouvez la changer à tout moment depuis le menu utilisateur. Les employés ouvrent leur propre page d'accueil : pointer l'entrée et la sortie, leurs heures aujourd'hui, cette semaine (à partir du dimanche) et ce mois-ci, et des liens vers leurs pointages, indemnités, feuilles de temps et congés. Le propriétaire, les responsables et les superviseurs ouvrent le tableau de bord. Le propriétaire ne pointe pas."
     },
     "attendance": {
       "title": "Pointer l'arrivée et le départ",
@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Urgence",
-      "body": "Le bouton SOS est sur le tableau de bord pendant chaque poste, une fois votre pointage confirmé. Il envoie une alerte prioritaire avec votre position aux responsables de votre site, au propriétaire et aux collègues présents, et l'enregistre dans le journal des urgences. SOS n'est pas un service d'urgence : il n'appelle ni la police ni une ambulance. En cas d'urgence, appelez toujours le numéro local (en Égypte : ambulance 123, police 122, pompiers 180). Il nécessite une connexion internet."
+      "body": "Le bouton SOS est sur le tableau de bord pendant chaque poste, une fois votre pointage confirmé. Il envoie une alerte prioritaire avec votre position aux responsables de votre site, au propriétaire et aux collègues présents, et l'enregistre dans le journal des urgences. SOS n'est pas un service d'urgence : il n'appelle ni la police ni une ambulance. En cas d'urgence, appelez toujours le numéro local (en Égypte : ambulance 123, police 122, pompiers 180). Il nécessite une connexion internet. Si vous travaillez sans site choisi, les responsables du site le plus proche la reçoivent."
     },
     "notifications": {
       "title": "Comment les notifications atteignent la bonne personne",
@@ -44,7 +44,7 @@
     },
     "reportsCenter": {
       "title": "Centre de rapports",
-      "body": "Choisissez un type de rapport, une période et, si besoin, un employé ou un site, puis exportez en PDF. Rapports : présence (les heures hors ligne sont marquées), indemnités, effectifs, sous-traitants, site, retards, départs manquants, conflits de congés, interventions des responsables et violations de position - qui regroupe désormais la sortie de zone (avec motif et statut), les positions invraisemblables et les fausses positions. Un responsable ne voit que ses sites."
+      "body": "Choisissez un type de rapport, une période et, si besoin, un employé ou un site, puis exportez en PDF. Rapports : présence (les heures hors ligne sont marquées), indemnités, effectifs, sous-traitants, site, retards, départs manquants, conflits de congés, interventions des responsables et violations de position - qui regroupe désormais la sortie de zone (avec motif et statut), les positions invraisemblables et les fausses positions. Un responsable ne voit que ses sites. À côté de chaque téléchargement PDF se trouve un bouton Imprimer. Dans le PDF, aucune ligne n'est coupée entre deux pages, les en-têtes de colonnes se répètent sur chaque page et les pages sont numérotées."
     },
     "sites": {
       "title": "Sites (administrateurs)",
@@ -127,7 +127,7 @@
     },
     "q7": {
       "question": "Puis-je exporter ma présence ou ma feuille de temps en PDF ?",
-      "answer": "Oui - Registre de présence, Feuilles de temps et Indemnités ont chacun leur propre action Exporter en PDF, limitée à ce que vous consultez actuellement, et Rapports regroupe aussi les exports du Registre de présence et des Indemnités en un seul endroit dédié."
+      "answer": "Oui - Registre de présence, Feuilles de temps et Indemnités ont chacun leur propre action Exporter en PDF, limitée à ce que vous consultez actuellement, et Rapports regroupe aussi les exports du Registre de présence et des Indemnités en un seul endroit dédié. Chacun a aussi un bouton Imprimer, et votre page d'accueil renvoie vers tous."
     },
     "q8": {
       "question": "Pourquoi ne vois-je pas certains employés dans Personnes ou le Registre de présence ?",
