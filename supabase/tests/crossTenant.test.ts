@@ -33,6 +33,7 @@ const TABLES: Record<string, string> = {
   installation_identity: byOrg,
   leave_entitlements: byOrg,
   legal_acknowledgements: byOrg,
+  push_devices: byOrg,
   leave_requests: byOrg,
   license_activation_state: byOrg,
   location_plausibility_flags: byOrg,

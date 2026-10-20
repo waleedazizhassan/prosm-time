@@ -305,3 +305,11 @@ entrypoint = "./functions/sync-gusto-hours/index.ts"
 enabled = true
 verify_jwt = false
 entrypoint = "./functions/send-trial-notices/index.ts"
+
+# send-push (owner 2026-10-20): called in the background by the
+# notifications insert trigger with the service role key; the
+# service-role-only RPC inside is the real authorization check.
+[functions.send-push]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/send-push/index.ts"

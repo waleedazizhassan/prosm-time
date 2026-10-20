@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 
 import AuthService from "../auth/AuthService";
+import { stopPush } from "../services/PushService";
 import UserRepository, { type CurrentUserProfile } from "../repositories/UserRepository";
 import PermissionRepository from "../repositories/PermissionRepository";
 import { STARTUP_CHECK_TIMEOUT_MS } from "../utils/startupCheck";
@@ -199,6 +200,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [loadProfile]);
 
   const signOut = useCallback(async () => {
+    // While still signed in: this phone stops receiving the person's notifications.
+    await stopPush();
     await AuthService.signOut();
     setProfile(null);
     setPermissions([]);

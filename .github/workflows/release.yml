@@ -194,6 +194,22 @@ jobs:
           NEXT_VERSION: ${{ needs.test.outputs.nextVersion }}
         run: node -e 'const fs=require("fs"); const p=require("./package.json"); p.version=process.env.NEXT_VERSION; fs.writeFileSync("package.json", JSON.stringify(p, null, 2) + "\n");'
 
+      # Owner 2026-10-20: push notifications. google-services.json is kept
+      # out of this public repository and written here from the
+      # GOOGLE_SERVICES_JSON secret; the app turns push on only when it is
+      # there (VITE_FIREBASE_CONFIGURED), since calling Firebase without it
+      # would close the app.
+      - name: Add the Firebase configuration (push notifications)
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: |
+          if [ -n "$GOOGLE_SERVICES_JSON" ]; then
+            printf '%s' "$GOOGLE_SERVICES_JSON" > android/app/google-services.json
+            echo "VITE_FIREBASE_CONFIGURED=true" >> "$GITHUB_ENV"
+          else
+            echo "::warning::GOOGLE_SERVICES_JSON is not set - this APK has no push notifications."
+          fi
+
       - run: npm run build
         env:
           VITE_BUILD_RELEASED_AT: ${{ needs.test.outputs.releasedAt }}
