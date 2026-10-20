@@ -45,7 +45,7 @@ export default function UpdateAvailableBanner() {
         const permission = await LocalNotifications.checkPermissions();
         if (permission.display !== "granted") return;
         await LocalNotifications.schedule({
-          notifications: [{ id: UPDATE_NOTICE_ID, title: t("update.noticeTitle"), body: t("update.available", { version: pendingVersion }), ongoing: true, autoCancel: false }],
+          notifications: [{ id: UPDATE_NOTICE_ID, title: t("update.noticeTitle"), body: t("update.available", { version: pendingVersion }), ongoing: true, autoCancel: false, largeIcon: "ic_notification_large" }],
         });
       } catch {
         // notifications unavailable - the banner still shows

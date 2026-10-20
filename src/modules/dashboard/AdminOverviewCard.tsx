@@ -20,6 +20,7 @@ import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import EmptyState from "../../components/common/EmptyState";
 import ErrorText from "../../components/common/ErrorText";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
 import styles from "./AdminOverviewCard.module.css";
 import dashboardArt from "../../assets/illustrations/dashboard.svg";
@@ -184,7 +185,8 @@ export default function AdminOverviewCard() {
     setOnBreak(onBreakResult.success ? (onBreakResult.data ?? []).filter((row) => openShiftUserIds.has(row.userId)) : []);
     // The figures come from the summary; a list that failed to load only leaves its drill-down short.
     if (summaryResult.success) setSummary(summaryResult.data);
-    setLoadError(summaryResult.success ? null : summaryResult.message ?? "");
+    // In the reader's language (a technical message is not shown).
+    setLoadError(summaryResult.success ? null : humanizeBackendError(summaryResult.message, t) ?? "");
     setPendingLeaveCount(pendingLeaveResult.success ? (pendingLeaveResult.data ?? []).length : 0);
     setPendingTimesheetCount(pendingTimesheetResult.success ? (pendingTimesheetResult.data ?? []).length : 0);
 
@@ -210,7 +212,7 @@ export default function AdminOverviewCard() {
       setScheduledHours(0);
     }
     setLoading(false);
-  }, [profileId, isOwner, roleKey]);
+  }, [profileId, isOwner, roleKey, t]);
 
   // Owner 2026-10-20 ("someone is clocked in and the card doesn't show it"):
   // the numbers refresh every minute and whenever the app comes back to the front.

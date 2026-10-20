@@ -57,6 +57,8 @@ export default function ClockReminderLoop() {
                 title: t(`reminders.${reminder.kind}.title`),
                 body: t(`reminders.${reminder.kind}.body`, { time: reminder.time, site: reminder.siteName ?? "" }),
                 schedule: { at: reminder.at, allowWhileIdle: true },
+                // The full-colour app icon beside the reminder (owner 2026-10-20).
+                largeIcon: "ic_notification_large",
               },
             ],
           });

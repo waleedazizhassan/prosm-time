@@ -239,5 +239,5 @@
       "leaveHint": "Richiedi ferie e vedi il saldo"
     }
   },
-  "loadFailed": "Alcuni dati di oggi non sono stati caricati e potrebbero apparire a zero. Si riprova ogni minuto; anche riaprire l’app aiuta. ({{reason}})"
+  "loadFailed": "Alcuni dati di oggi non sono stati caricati e potrebbero apparire a zero. Si riprova ogni minuto; anche riaprire l’app aiuta. {{reason}}"
 }

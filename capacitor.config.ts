@@ -16,7 +16,7 @@ const config: CapacitorConfig = {
   plugins: {
     LocalNotifications: {
       smallIcon: 'ic_stat_prosm',
-      iconColor: '#16A34A',
+      iconColor: '#1E6FD9',
     },
   },
 };
