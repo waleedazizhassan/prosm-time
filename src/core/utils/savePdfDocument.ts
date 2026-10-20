@@ -36,3 +36,33 @@ export default async function savePdfDocument(doc: jsPDF, filename: string, repo
     await ReportExportRepository.persist(reportType, filename, doc.output("blob"), periodStart, periodEnd).catch(() => {});
   }
 }
+
+// Reports review (owner 2026-10-19): print straight from the app. On the
+// web the PDF is loaded into a hidden frame and the browser's print dialog
+// opens for it (no new window, so no pop-up blocker); if the browser can't
+// print a frame it opens in a new tab, and failing that it is downloaded.
+// In the phone and desktop apps the share sheet opens, which offers printing.
+export async function printPdfDocument(doc: jsPDF, filename: string): Promise<void> {
+  if (Capacitor.isNativePlatform()) {
+    await saveGeneratedFile(filename, doc.output("blob"));
+    return;
+  }
+  const url = URL.createObjectURL(doc.output("blob"));
+  const frame = document.createElement("iframe");
+  frame.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;";
+  frame.src = url;
+  frame.onload = () => {
+    try {
+      frame.contentWindow?.focus();
+      frame.contentWindow?.print();
+    } catch {
+      if (!window.open(url, "_blank")) doc.save(filename);
+    }
+    // The dialog keeps its own copy; the frame goes once printing is surely over.
+    window.setTimeout(() => {
+      frame.remove();
+      URL.revokeObjectURL(url);
+    }, 60000);
+  };
+  document.body.appendChild(frame);
+}

@@ -7,7 +7,7 @@ import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import { formatMinutes, buildTimesheetPdf } from "./timesheetPdf";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
-import savePdfDocument from "../../core/utils/savePdfDocument";
+import savePdfDocument, { printPdfDocument } from "../../core/utils/savePdfDocument";
 import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
 
 import PageShell from "../../components/common/PageShell";
@@ -104,12 +104,14 @@ export default function TimesheetReportPage() {
     downloadCsv(`timesheet-${pack.employee.fullName.replace(/\s+/g, "-")}-${pack.timesheet.periodStart}.csv`, buildCsv(pack, i18n.language));
   };
 
-  const handleExportPdf = async () => {
+  const handleExportPdf = async (mode: "save" | "print" = "save") => {
     if (!pack) return;
     setExportingPdf(true);
     try {
       const doc = await buildTimesheetPdf(pack, i18n.language, t, organizationLogoUrl);
-      await savePdfDocument(doc, `timesheet-${pack.employee.fullName.replace(/\s+/g, "-")}-${pack.timesheet.periodStart}.pdf`, "timesheet", pack.timesheet.periodStart, pack.timesheet.periodEnd);
+      const filename = `timesheet-${pack.employee.fullName.replace(/\s+/g, "-")}-${pack.timesheet.periodStart}.pdf`;
+      if (mode === "print") await printPdfDocument(doc, filename);
+      else await savePdfDocument(doc, filename, "timesheet", pack.timesheet.periodStart, pack.timesheet.periodEnd);
     } finally {
       setExportingPdf(false);
     }
@@ -156,7 +158,10 @@ export default function TimesheetReportPage() {
           <Button variant="ghost" size="sm" onClick={() => window.print()}>
             {t("report.printAction")}
           </Button>
-          <Button size="sm" onClick={handleExportPdf} loading={exportingPdf}>
+          <Button variant="ghost" size="sm" onClick={() => handleExportPdf("print")} loading={exportingPdf}>
+            {t("common:actions.print")}
+          </Button>
+          <Button size="sm" onClick={() => handleExportPdf()} loading={exportingPdf}>
             {t("report.exportPdfAction")}
           </Button>
         </div>

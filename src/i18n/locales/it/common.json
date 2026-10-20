@@ -15,7 +15,8 @@
     "cancel": "Annulla",
     "confirm": "Conferma",
     "close": "Chiudi",
-    "label": "Azioni"
+    "label": "Azioni",
+    "print": "Stampa"
   },
   "errorBoundary": {
     "title": "Qualcosa è andato storto",

@@ -15,7 +15,8 @@
     "cancel": "إلغاء",
     "confirm": "تأكيد",
     "close": "إغلاق",
-    "label": "الإجراءات"
+    "label": "الإجراءات",
+    "print": "طباعة"
   },
   "errorBoundary": {
     "title": "حصلت مشكلة صغيرة",

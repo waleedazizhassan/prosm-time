@@ -15,7 +15,8 @@
     "cancel": "Cancel",
     "confirm": "Confirm",
     "close": "Close",
-    "label": "Actions"
+    "label": "Actions",
+    "print": "Print"
   },
   "errorBoundary": {
     "title": "Something went a little wrong",

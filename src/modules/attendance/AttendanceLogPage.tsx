@@ -7,7 +7,7 @@ import ManagerRepository, { type TodayAttendanceRow, type AttendanceEventLocatio
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
-import savePdfDocument from "../../core/utils/savePdfDocument";
+import savePdfDocument, { printPdfDocument } from "../../core/utils/savePdfDocument";
 import ErrorText from "../../components/common/ErrorText";
 
 import PageShell from "../../components/common/PageShell";
@@ -195,11 +195,12 @@ export default function AttendanceLogPage() {
     [rows, employeeFilter],
   );
 
-  const handleExportPdf = async () => {
+  const handleExportPdf = async (mode: "save" | "print" = "save") => {
     setExportingPdf(true);
     try {
       const doc = await buildAttendanceLogPdf(filteredRows, startDate, endDate, i18n.language, t, organizationLogoUrl);
-      await savePdfDocument(doc, `attendance-record-${startDate}-${endDate}.pdf`, "attendance", startDate, endDate);
+      if (mode === "print") await printPdfDocument(doc, `attendance-record-${startDate}-${endDate}.pdf`);
+      else await savePdfDocument(doc, `attendance-record-${startDate}-${endDate}.pdf`, "attendance", startDate, endDate);
     } finally {
       setExportingPdf(false);
     }
@@ -313,7 +314,10 @@ export default function AttendanceLogPage() {
       <PageBanner pageId="attendance" illustration={attendanceHeaderImage} />
 
       <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "var(--space-4)" }}>
-        <Button onClick={handleExportPdf} loading={exportingPdf} disabled={filteredRows.length === 0}>
+        <Button variant="ghost" onClick={() => handleExportPdf("print")} loading={exportingPdf} disabled={filteredRows.length === 0}>
+          {t("common:actions.print")}
+        </Button>
+        <Button onClick={() => handleExportPdf()} loading={exportingPdf} disabled={filteredRows.length === 0}>
           {t("exportPdfAction")}
         </Button>
       </div>

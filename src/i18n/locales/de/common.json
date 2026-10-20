@@ -15,7 +15,8 @@
     "cancel": "Abbrechen",
     "confirm": "Bestätigen",
     "close": "Schließen",
-    "label": "Aktionen"
+    "label": "Aktionen",
+    "print": "Drucken"
   },
   "errorBoundary": {
     "title": "Da ist etwas schiefgelaufen",

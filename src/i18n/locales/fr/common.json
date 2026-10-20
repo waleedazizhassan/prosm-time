@@ -15,7 +15,8 @@
     "cancel": "Annuler",
     "confirm": "Confirmer",
     "close": "Fermer",
-    "label": "Actions"
+    "label": "Actions",
+    "print": "Imprimer"
   },
   "errorBoundary": {
     "title": "Un petit souci est survenu",

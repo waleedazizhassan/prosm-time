@@ -10,7 +10,7 @@ import ReportRepository, { type AbsenceRow } from "../../core/repositories/Repor
 import ReportExportRepository, { type ReportExport } from "../../core/repositories/ReportExportRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { formatDateOnly, formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
-import savePdfDocument from "../../core/utils/savePdfDocument";
+import savePdfDocument, { printPdfDocument } from "../../core/utils/savePdfDocument";
 import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
 import { buildAttendanceLogPdf } from "../attendance/attendanceLogPdf";
 import { buildAllowancesPdf } from "../allowances/allowancesPdf";
@@ -412,16 +412,18 @@ export default function ReportsPage() {
 
   const rowCount = reportType === "attendance" ? filteredAttendanceRows.length : reportType === "allowances" ? filteredAllowanceEntries.length : filteredGenericRows.length;
 
-  const handleExport = async () => {
+  const handleExport = async (mode: "save" | "print" = "save") => {
     setExporting(true);
+    const deliver = (doc: Awaited<ReturnType<typeof buildGenericReportPdf>>, filename: string, type: string) =>
+      mode === "print" ? printPdfDocument(doc, filename) : savePdfDocument(doc, filename, type, startDate, endDate);
     try {
       const isRtl = i18n.language === "ar";
       if (reportType === "attendance") {
         const doc = await buildAttendanceLogPdf(filteredAttendanceRows, startDate, endDate, i18n.language, tAttendance, organizationLogoUrl);
-        await savePdfDocument(doc, `attendance-record-${startDate}-${endDate}.pdf`, "attendance", startDate, endDate);
+        await deliver(doc, `attendance-record-${startDate}-${endDate}.pdf`, "attendance");
       } else if (reportType === "allowances") {
         const doc = await buildAllowancesPdf(filteredAllowanceEntries, startDate, endDate, i18n.language, tAllowances, organizationLogoUrl);
-        await savePdfDocument(doc, `allowances-${startDate}-${endDate}.pdf`, "allowances", startDate, endDate);
+        await deliver(doc, `allowances-${startDate}-${endDate}.pdf`, "allowances");
       } else if (reportType !== "timesheets") {
         const cfg = genericConfig[reportType];
         const doc = await buildGenericReportPdf(
@@ -433,9 +435,9 @@ export default function ReportsPage() {
           isRtl,
           organizationLogoUrl,
         );
-        await savePdfDocument(doc, `${reportType}-${startDate}-${endDate}.pdf`, reportType, startDate, endDate);
+        await deliver(doc, `${reportType}-${startDate}-${endDate}.pdf`, reportType);
       }
-      loadRecentExports();
+      if (mode === "save") loadRecentExports();
     } finally {
       setExporting(false);
     }
@@ -490,9 +492,14 @@ export default function ReportsPage() {
               {loading ? t("loadingRows") : t("rowCount", { count: rowCount })}
             </p>
 
-            <Button onClick={handleExport} loading={exporting} disabled={loading || rowCount === 0}>
-              {t("exportAction")}
-            </Button>
+            <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>
+              <Button onClick={() => handleExport()} loading={exporting} disabled={loading || rowCount === 0}>
+                {t("exportAction")}
+              </Button>
+              <Button variant="ghost" onClick={() => handleExport("print")} loading={exporting} disabled={loading || rowCount === 0}>
+                {t("common:actions.print")}
+              </Button>
+            </div>
           </>
         )}
       </Card>
