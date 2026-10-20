@@ -26,6 +26,25 @@ const SOS_SIREN_SECONDS = 30;
 // overrun, SOS) surface at. Polls every 60s rather than a live
 // subscription - simple, real, sufficient for this pass; a realtime
 // channel is a genuine future refinement, not built here.
+// SOS alerts already sounded on this device (kept across app restarts).
+const SOS_ALERTED_KEY = "prosm_time_sos_alerted_v1";
+const SOS_FRESH_MS = 30 * 60 * 1000;
+function wasSosAlerted(id: string): boolean {
+  try {
+    return (JSON.parse(localStorage.getItem(SOS_ALERTED_KEY) ?? "[]") as string[]).includes(id);
+  } catch {
+    return false;
+  }
+}
+function rememberSosAlerted(id: string): void {
+  try {
+    const ids = (JSON.parse(localStorage.getItem(SOS_ALERTED_KEY) ?? "[]") as string[]).filter((existing) => existing !== id);
+    localStorage.setItem(SOS_ALERTED_KEY, JSON.stringify([id, ...ids].slice(0, 50)));
+  } catch {
+    // storage unavailable - the read and freshness checks still apply
+  }
+}
+
 export default function NotificationBell() {
   const { t, i18n } = useTranslation("shell");
   const { profile, hasPermission } = useAuth();
@@ -79,15 +98,28 @@ export default function NotificationBell() {
   const load = useCallback(async () => {
     if (!profile) return;
     const result = await NotificationRepository.listRecent();
-    const list = result.success ? result.data ?? [] : [];
+    // Owner 2026-10-20 ("the emergency alarm comes back every time I open the app"):
+    // a failed read used to count as "no notifications", so the next good read
+    // treated every old one as new and replayed an SOS from hours before. A failed
+    // read now changes nothing.
+    if (!result.success) return;
+    const list = result.data ?? [];
     setNotifications(list);
 
     if (seenIdsRef.current) {
       const newOnes = list.filter((notification) => !seenIdsRef.current!.has(notification.id));
-      const newSosAlert = newOnes.find((notification) => notification.type === "sos_alert");
+      // An SOS sounds once, while it is fresh and unread - never again on this device.
+      const newSosAlert = newOnes.find(
+        (notification) =>
+          notification.type === "sos_alert" &&
+          notification.readAt === null &&
+          Date.now() - new Date(notification.createdAt).getTime() < SOS_FRESH_MS &&
+          !wasSosAlerted(notification.id),
+      );
       if (newSosAlert) {
+        rememberSosAlerted(newSosAlert.id);
         triggerSosAlert(newSosAlert);
-      } else if (newOnes.length > 0) {
+      } else if (newOnes.some((notification) => notification.type !== "sos_alert" && notification.readAt === null)) {
         playAlertSound();
       }
     }
