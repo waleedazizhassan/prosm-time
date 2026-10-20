@@ -80,7 +80,8 @@ export default function WelcomePage() {
       </div>
 
       <span className={pageStyles.versionFooter}>
-        {t("common:versionLabel", { version: APP_VERSION })} · <LegalLinks />
+        <span>{t("common:versionLabel", { version: APP_VERSION })}</span>
+        <LegalLinks />
       </span>
     </div>
   );

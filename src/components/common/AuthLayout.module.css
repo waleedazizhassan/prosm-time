@@ -160,7 +160,7 @@
   }
 
   .brandLogo {
-    width: min(240px, 70%);
+    width: min(200px, 58%);
   }
 
   .brandTagline {
@@ -365,14 +365,24 @@
    that reason. `.page` is always position:relative so this stays
    anchored to the full page, not the card. */
 .versionFooter {
-  position: absolute;
+  /* Owner 2026-10-20: the version and legal links sat on top of the card on a
+     phone - now a centred line in the page's flow, below everything. */
+  position: relative;
   z-index: 1;
-  bottom: var(--space-4);
-  left: 50%;
-  transform: translateX(-50%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 4px 10px;
+  padding: 0 var(--space-4) var(--space-5);
+  text-align: center;
 
-  color: rgba(226, 232, 240, 0.5);
+  color: rgba(226, 232, 240, 0.6);
   font-size: var(--font-xs);
+}
+
+.versionFooter a {
+  color: rgba(226, 232, 240, 0.8);
 }
 
 .footerLine {

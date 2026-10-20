@@ -258,7 +258,7 @@ class ManagerRepository {
     try {
       let sessionsQuery = this.client
         .from("attendance_sessions")
-        .select("id, user_id, status, clock_in_at, clock_out_at, manual_location_label, early_leave_reason, users(full_name), sites(name)")
+        .select("id, user_id, status, clock_in_at, clock_out_at, manual_location_label, early_leave_reason, users(full_name), sites!attendance_sessions_site_id_fkey(name)")
         .order("clock_in_at", { ascending: false });
 
       // Real bug fix - listTodayAttendance's own "Currently present" KPI

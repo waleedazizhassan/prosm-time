@@ -52,7 +52,8 @@ export default function AuthLayout({ title, subtitle, children, footer }: AuthLa
       </div>
 
       <span className={styles.versionFooter}>
-        {t("versionLabel", { version: APP_VERSION })} · <LegalLinks />
+        <span>{t("versionLabel", { version: APP_VERSION })}</span>
+        <LegalLinks />
       </span>
     </div>
   );
