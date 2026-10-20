@@ -36,7 +36,7 @@
     },
     "allowances": {
       "title": "Zulagen",
-      "body": "Öffnen Sie Zulagen und wählen Sie ein Datum - Standort und Zeiten des Tages werden automatisch eingetragen: das erste Einstempeln und das letzte Ausstempeln des Tages; die Details zeigen Anzahl der Sitzungen und gearbeitete Stunden. Tragen Sie die Beträge ein und senden Sie ab. Eine Führungskraft oder der Inhaber genehmigt oder lehnt ab; als Entwurf können Sie noch bearbeiten."
+      "body": "Tippen Sie auf \"Aus meiner Anwesenheit füllen\": Jeder Arbeitstag des Zeitraums wird aus Ihren Zulagenpreisen gefüllt (Standort des Tages, Ihre Kategorie, Ihre eigenen Preise). Ergänzen Sie nur, was keinen Preis hat - etwa Reisen -, prüfen Sie die Summen und reichen Sie ein; Ihre Führungskraft genehmigt oder schickt es mit einer Notiz zurück. Inhaber und Genehmigende legen die Preise unter Zulagen > Preise fest: je Standort, je Mitarbeiterkategorie (Ingenieure, Techniker, Arbeiter...) und je Person - der spätere gilt, ein leerer Preis wird übernommen - sowie den Preis einer Überstunde und eines Zusatztags. Das PDF enthält die Tagessummen und Zeilen für Ihre Unterschrift und die Freigabe der Projektleitung."
     },
     "kiosk": {
       "title": "Kioskmodus",

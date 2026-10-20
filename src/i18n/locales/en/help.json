@@ -36,7 +36,7 @@
     },
     "allowances": {
       "title": "Allowances",
-      "body": "Open Allowances and pick a date to add an entry - the site and the day's times are filled in automatically: the first clock-in and the last clock-out of that day, and the details show how many sessions and hours you worked. Fill in meal, transportation, housing and other amounts, then Submit. A manager or the Owner approves or rejects it; while it's a draft you can still edit it."
+      "body": "Tap \"Fill from my attendance\": every day you worked in the period is filled from your allowance prices (the site of that day, your category, your own prices). Add only what has no price - travel, for example - check the totals and submit; your manager approves or sends it back with a note. The Owner and those who approve allowances set the prices from Allowances > Prices: per site, per category of staff (engineers, technicians, workers...) and per person - the later wins, a blank price is inherited - plus the price of an overtime hour and an extra day. The PDF has the day totals and lines for your signature and the project manager's approval."
     },
     "kiosk": {
       "title": "Kiosk Mode",

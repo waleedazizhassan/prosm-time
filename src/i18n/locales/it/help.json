@@ -36,7 +36,7 @@
     },
     "allowances": {
       "title": "Indennità",
-      "body": "Apri Indennità e scegli una data: sede e orari del giorno vengono compilati automaticamente - la prima entrata e l'ultima uscita del giorno; i dettagli mostrano il numero di sessioni e le ore lavorate. Inserisci gli importi e invia. Un responsabile o il titolare approva o rifiuta; in bozza puoi ancora modificare."
+      "body": "Tocca \"Compila dalle mie presenze\": ogni giorno lavorato nel periodo viene compilato dalle tue tariffe (la sede del giorno, la tua categoria, le tue tariffe proprie). Aggiungi solo ciò che non ha tariffa - il viaggio, per esempio -, controlla i totali e invia; il tuo responsabile approva o rimanda con una nota. Il titolare e chi approva impostano le tariffe da Indennità > Tariffe: per sede, per categoria di personale (ingegneri, tecnici, operai...) e per persona - vale l'ultima, una tariffa vuota è ereditata - oltre al prezzo di un'ora di straordinario e di un giorno extra. Il PDF riporta i totali giornalieri e le righe per la tua firma e l'approvazione del capo progetto."
     },
     "kiosk": {
       "title": "Modalità chiosco",

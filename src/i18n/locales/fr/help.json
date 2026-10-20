@@ -36,7 +36,7 @@
     },
     "allowances": {
       "title": "Indemnités",
-      "body": "Ouvrez Indemnités et choisissez une date : le site et les heures du jour sont remplis automatiquement - le premier pointage d'arrivée et le dernier départ du jour ; le détail montre le nombre de sessions et les heures travaillées. Saisissez les montants puis envoyez. Un responsable ou le propriétaire approuve ou refuse ; en brouillon, vous pouvez encore modifier."
+      "body": "Touchez « Remplir depuis ma présence » : chaque jour travaillé de la période est rempli à partir de vos tarifs (le site du jour, votre catégorie, vos tarifs propres). Ajoutez seulement ce qui n'a pas de tarif - le déplacement, par exemple -, vérifiez les totaux et envoyez ; votre responsable approuve ou renvoie avec une note. Le propriétaire et ceux qui approuvent fixent les tarifs dans Indemnités > Tarifs : par site, par catégorie de personnel (ingénieurs, techniciens, ouvriers...) et par personne - le dernier l'emporte, un tarif vide est hérité - ainsi que le prix d'une heure et d'un jour supplémentaires. Le PDF comporte les totaux par jour et des lignes pour votre signature et l'approbation du chef de projet."
     },
     "kiosk": {
       "title": "Mode kiosque",
