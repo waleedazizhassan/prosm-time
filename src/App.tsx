@@ -3,7 +3,6 @@ import AppRoutes from "./routes/AppRoutes";
 import { ThemeProvider } from "./core/context/ThemeContext";
 import { CalendarProvider } from "./core/context/CalendarContext";
 import ErrorBoundary from "./components/common/ErrorBoundary";
-import useAutoFullscreen from "./core/hooks/useAutoFullscreen";
 import useAndroidBackButton from "./core/hooks/useAndroidBackButton";
 import useSessionResume from "./core/hooks/useSessionResume";
 
@@ -17,7 +16,6 @@ import useSessionResume from "./core/hooks/useSessionResume";
 // owns the real default/toggle/persistence now - it replaces this
 // file's earlier fixed GUEST_DEFAULT_THEME useEffect.
 export default function App() {
-  useAutoFullscreen();
   useAndroidBackButton();
   useSessionResume();
 

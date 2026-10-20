@@ -96,8 +96,9 @@
 }
 
 @media (max-width: 900px) {
+  /* Owner 2026-10-20: Menu is in the phone's bottom bar (BottomNav), so not here too. */
   .sidebarToggle {
-    display: flex;
+    display: none;
   }
 }
 

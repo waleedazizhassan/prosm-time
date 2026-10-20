@@ -142,8 +142,8 @@ export default function AdminOverviewCard() {
 
   const [drilldown, setDrilldown] = useState<Drilldown>(null);
 
+  // The first load shows the loading state; the regular refreshes after it don't.
   const load = useCallback(async () => {
-    setLoading(true);
     const today = new Date();
     const weekStart = new Date(today);
     weekStart.setDate(weekStart.getDate() - 6);
@@ -178,7 +178,10 @@ export default function AdminOverviewCard() {
     setMembers(membersResult.success ? (membersResult.data ?? []) : []);
     setSiteNamesByUser(assignmentsResult.success ? (assignmentsResult.data ?? {}) : {});
     setLeaveToday(leaveTodayResult.success ? (leaveTodayResult.data ?? []) : []);
-    setOnBreak(onBreakResult.success ? (onBreakResult.data ?? []) : []);
+    // Only breaks of shifts still open count as "on break" (owner 2026-10-20: two
+    // breaks left open after their shifts had ended showed for a week).
+    const openShiftUserIds = new Set((attendanceResult.success ? attendanceResult.data ?? [] : []).filter((row) => row.status === "clocked_in").map((row) => row.userId));
+    setOnBreak(onBreakResult.success ? (onBreakResult.data ?? []).filter((row) => openShiftUserIds.has(row.userId)) : []);
     setWeeklyHistory(weeklyResult.success ? (weeklyResult.data ?? []) : []);
     setPendingLeaveCount(pendingLeaveResult.success ? (pendingLeaveResult.data ?? []).length : 0);
     setPendingTimesheetCount(pendingTimesheetResult.success ? (pendingTimesheetResult.data ?? []).length : 0);
@@ -207,8 +210,20 @@ export default function AdminOverviewCard() {
     setLoading(false);
   }, [profileId, isOwner]);
 
+  // Owner 2026-10-20 ("someone is clocked in and the card doesn't show it"):
+  // the numbers refresh every minute and whenever the app comes back to the front.
   useEffect(() => {
-    if (canView) load();
+    if (!canView) return;
+    load();
+    const interval = window.setInterval(() => load(), 60000);
+    const onReturn = () => {
+      if (document.visibilityState === "visible") load();
+    };
+    document.addEventListener("visibilitychange", onReturn);
+    return () => {
+      window.clearInterval(interval);
+      document.removeEventListener("visibilitychange", onReturn);
+    };
   }, [canView, load]);
 
   const presentRows = useMemo(() => todayAttendance.filter((row) => row.status === "clocked_in"), [todayAttendance]);
@@ -351,7 +366,7 @@ export default function AdminOverviewCard() {
           <span className={styles.statLabel}>{t("overview.stat.notIn")}</span>
           <span className={styles.statValue}>{Math.max(0, teamSize - presentRows.length)}</span>
         </button>
-        <button type="button" className={styles.stat} onClick={() => (pending.length > 0 ? setDrilldown("pending") : navigate("/manager"))}>
+        <button type="button" className={styles.stat} onClick={() => navigate("/manager")}>
           <span className={`${styles.statIcon} ${totalNeedsAttention > 0 ? styles.statIconRed : styles.statIconGreen}`}>
             {totalNeedsAttention > 0 ? <ClipboardCheck size={18} /> : <CheckCircle2 size={18} />}
           </span>
@@ -360,7 +375,9 @@ export default function AdminOverviewCard() {
         </button>
       </div>
 
-      {totalNeedsAttention > 0 ? (
+      {/* The breakdown only when more than one kind is waiting - otherwise it
+          repeats the tile above (owner 2026-10-20). */}
+      {[pending.length, pendingLeaveCount, pendingTimesheetCount].filter((count) => count > 0).length > 1 ? (
         <div className={styles.attentionCard}>
           <span className={styles.cardTitle}>{t("overview.attentionTitle")}</span>
             <ul className={styles.attentionList}>
