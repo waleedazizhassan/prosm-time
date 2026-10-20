@@ -12,15 +12,15 @@ vi.mock("../../core/repositories/OrganizationRepository", () => ({
 }));
 
 describe("SiteFormModal", () => {
-  it("links an edited site to its own page, where its rules are", async () => {
+  it("links an edited site to its rules on the Settings page", async () => {
     const site = { id: "site-42", name: "Tower B", latitude: 30, longitude: 31 } as unknown as Site;
     render(
       <MemoryRouter>
         <SiteFormModal isOpen onClose={vi.fn()} onSaved={vi.fn()} site={site} />
       </MemoryRouter>,
     );
-    const link = await screen.findByRole("link", { name: "Open the site's page" });
-    expect(link).toHaveAttribute("href", "/sites/site-42");
+    const link = await screen.findByRole("link", { name: "Open the site's rules" });
+    expect(link).toHaveAttribute("href", "/settings?site=site-42");
     expect(screen.getByText(/ongoing presence monitoring/)).toBeInTheDocument();
   });
 });

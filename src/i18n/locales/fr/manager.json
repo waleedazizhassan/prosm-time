@@ -71,6 +71,12 @@
         "approved": "considérée comme une vraie position (ex. erreur GPS).",
         "rejected": "enregistrée comme fausse position ; rien d'autre ne change automatiquement - voyez avec l'employé."
       }
+    },
+    "geofence": {
+      "summary": "{{distance}} m hors de la zone de travail · motif : {{reason}}"
+    },
+    "correction": {
+      "summary": "{{action}} à {{time}} · {{reason}}"
     }
   },
   "leave": {

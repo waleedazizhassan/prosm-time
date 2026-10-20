@@ -114,7 +114,15 @@ export default function ManagerConsolePage() {
             action: t(`pending.offlineTime.action.${item.mockLocation.eventType}`),
             time: `${formatDateOnly(item.mockLocation.occurredAt, i18n.language)} ${formatTimeOnly(item.mockLocation.occurredAt, i18n.language)}`,
           })
-        : item.summary;
+        : item.geofence
+          ? t("pending.geofence.summary", { distance: item.geofence.distanceMeters.toLocaleString(i18n.language), reason: item.geofence.reason || "—" })
+          : item.correction
+            ? t("pending.correction.summary", {
+                action: t(`pending.offlineTime.action.${item.correction.eventType}`),
+                time: `${formatDateOnly(item.correction.correctTime, i18n.language)} ${formatTimeOnly(item.correction.correctTime, i18n.language)}`,
+                reason: item.correction.reason,
+              })
+            : item.summary;
 
   const handleReview = async (actionType: ReviewAction) => {
     if (!reviewTarget) return;
@@ -192,16 +200,6 @@ export default function ManagerConsolePage() {
   return (
     <PageShell title="">
       <PageBanner pageId="manager" illustration={managerConsoleHeaderImage} />
-
-      <p style={{ fontSize: "var(--font-sm)" }}>
-        <Link to="/people" style={{ color: "var(--text-link)" }}>
-          {t("linkPeople")}
-        </Link>
-        {" · "}
-        <Link to="/sites" style={{ color: "var(--text-link)" }}>
-          {t("linkSites")}
-        </Link>
-      </p>
 
       {/* Owner 2026-10-20 (no duplicates): today's attendance is the Attendance
           Record's Today view (and who is in, on the dashboard); this page is

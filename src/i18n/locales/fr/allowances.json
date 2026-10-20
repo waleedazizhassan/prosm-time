@@ -121,5 +121,52 @@
   "pdf": {
     "employeeSignature": "Signature de l'employé",
     "managerApproval": "Approbation du chef de projet"
+  },
+  "autoFill": {
+    "label": "Remplir automatiquement après chaque poste",
+    "hint": "Au pointage de sortie, les indemnités du jour sont ajoutées à partir de vos tarifs. Vous les vérifiez et les envoyez vous-même."
+  },
+  "sendAll": {
+    "action": "Envoyer au responsable",
+    "done": "{{count}} jours envoyés à votre responsable."
+  },
+  "sheet": {
+    "title": "Feuille de présence et d'indemnités",
+    "subtitle": "Feuille d'indemnités",
+    "combinedSubtitle": "Feuille d'indemnités regroupée",
+    "combinedTitle": "Feuille regroupée",
+    "combinedHint": "Choisissez qui apparaît - une ligne de totaux par personne.",
+    "selectAll": "Tous",
+    "selectNone": "Personne",
+    "employeeName": "Employé",
+    "employee": "Employé",
+    "employeesCount": "{{count}} employés",
+    "periodFrom": "Période du",
+    "periodTo": "au",
+    "day": "Jour",
+    "date": "Date",
+    "in": "Entrée",
+    "out": "Sortie",
+    "site": "Site",
+    "extraDays": "Jours sup.",
+    "overtimeHours": "Heures sup.",
+    "managerApproval": "Visa du chef de projet",
+    "total": "Total",
+    "grandTotal": "Total dû",
+    "extraDaysValue": "Jours sup.",
+    "overtimeValue": "Heures sup.",
+    "days": "Jours",
+    "allowances": "Indemnités",
+    "extra": "Heures sup.",
+    "noSite": "Sans site",
+    "employeeSignature": "Signature de l'employé",
+    "projectManager": "Chef de projet",
+    "accounts": "Comptabilité"
+  },
+  "sheets": {
+    "title": "Feuilles d'indemnités à valider",
+    "hint": "Chaque feuille contient tous les jours envoyés - validez ou refusez en une fois. Ouvrez-la pour voir les jours.",
+    "line": "{{from}} - {{to}} · {{days}} jours · total {{total}}",
+    "openAction": "Ouvrir"
   }
 }

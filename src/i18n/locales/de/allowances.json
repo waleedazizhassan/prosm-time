@@ -121,5 +121,52 @@
   "pdf": {
     "employeeSignature": "Unterschrift des Mitarbeiters",
     "managerApproval": "Freigabe der Projektleitung"
+  },
+  "autoFill": {
+    "label": "Nach jeder Schicht automatisch füllen",
+    "hint": "Beim Ausstempeln werden die Zulagen des Tages aus Ihren Preisen angelegt. Sie prüfen und senden sie weiterhin selbst."
+  },
+  "sendAll": {
+    "action": "An die Leitung senden",
+    "done": "{{count}} Tage an Ihre Leitung gesendet."
+  },
+  "sheet": {
+    "title": "Anwesenheits- und Zulagenblatt",
+    "subtitle": "Zulagenblatt",
+    "combinedSubtitle": "Zusammengefasstes Zulagenblatt",
+    "combinedTitle": "Zusammenfassung",
+    "combinedHint": "Wählen Sie, wer erscheint - eine Summenzeile je Person.",
+    "selectAll": "Alle",
+    "selectNone": "Niemand",
+    "employeeName": "Mitarbeiter",
+    "employee": "Mitarbeiter",
+    "employeesCount": "{{count}} Mitarbeiter",
+    "periodFrom": "Zeitraum von",
+    "periodTo": "bis",
+    "day": "Tag",
+    "date": "Datum",
+    "in": "Kommen",
+    "out": "Gehen",
+    "site": "Standort",
+    "extraDays": "Zusatztage",
+    "overtimeHours": "Überstunden",
+    "managerApproval": "Freigabe Projektleitung",
+    "total": "Gesamt",
+    "grandTotal": "Gesamt fällig",
+    "extraDaysValue": "Zusatztage",
+    "overtimeValue": "Überstunden",
+    "days": "Tage",
+    "allowances": "Zulagen",
+    "extra": "Mehrarbeit",
+    "noSite": "Kein Standort",
+    "employeeSignature": "Unterschrift Mitarbeiter",
+    "projectManager": "Projektleitung",
+    "accounts": "Buchhaltung"
+  },
+  "sheets": {
+    "title": "Zulagenblätter zur Freigabe",
+    "hint": "Jedes Blatt enthält alle gesendeten Tage - auf einmal freigeben oder ablehnen. Öffnen, um die Tage zu sehen.",
+    "line": "{{from}} - {{to}} · {{days}} Tage · gesamt {{total}}",
+    "openAction": "Öffnen"
   }
 }

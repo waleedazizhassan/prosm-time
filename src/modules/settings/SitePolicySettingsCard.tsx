@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
+import { useAuth } from "../../core/context/AuthContext";
 
 import SiteRepository, { type Site, type SiteAssignment, type BreakRoundingMode } from "../../core/repositories/SiteRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
@@ -69,13 +70,21 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
   const [saveError, setSaveError] = useState("");
   const [saved, setSaved] = useState(false);
 
+  // Owner 2026-10-20 ("every setting on the Settings page"): the picker lists the
+  // sites the reader manages (the Owner: every site); the first is chosen.
+  const { profile } = useAuth();
+  const isOwner = Boolean(profile?.isOwner);
+  const profileId = profile?.id;
   useEffect(() => {
     if (siteId) return;
-    SiteRepository.listSites().then((result) => {
-      if (result.success && result.data) setSites(result.data);
+    Promise.all([SiteRepository.listSites(), isOwner || !profileId ? Promise.resolve(null) : SiteRepository.listManagedSiteIds(profileId)]).then(([result, managed]) => {
+      const managedIds = managed && managed.success ? new Set(managed.data ?? []) : null;
+      const list = result.success && result.data ? result.data.filter((candidate) => !managedIds || managedIds.has(candidate.id)) : [];
+      setSites(list);
+      setSelectedSiteId((current) => current || list[0]?.id || "");
       setSitesLoading(false);
     });
-  }, [siteId]);
+  }, [siteId, isOwner, profileId]);
 
   useEffect(() => {
     if (!selectedSiteId) {

@@ -260,8 +260,8 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
       {isEditing && site ? (
         <p style={{ margin: "var(--space-3) 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
           {t("form.sitePolicyMovedHint")}{" "}
-          {/* The site's working rules are on its own page (owner 2026-10-20: simpler settings). */}
-          <Link to={`/sites/${site.id}`} onClick={onClose} style={{ color: "var(--text-link)" }}>
+          {/* The site's working rules are on the Settings page (owner 2026-10-20). */}
+          <Link to={`/settings?site=${site.id}`} onClick={onClose} style={{ color: "var(--text-link)" }}>
             {t("form.openSiteSettings")}
           </Link>
         </p>

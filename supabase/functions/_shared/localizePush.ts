@@ -107,14 +107,18 @@ export function localizePush(type: string, data: Data, language: string, fallbac
       result = withNotes("timesheet.correctionRejectedTitle", "timesheet.correctionRejectedBody");
       break;
     case "allowance_submitted":
-      if (str(data.employeeName) && str(data.entryDate))
+      if (str(data.employeeName) && str(data.periodStart) && str(data.periodEnd) && num(data.days) !== null)
+        result = pair("allowance.submittedTitle", "allowance.sheetSubmittedBody", { name: data.employeeName, days: data.days, start: data.periodStart, end: data.periodEnd });
+      else if (str(data.employeeName) && str(data.entryDate))
         result = pair("allowance.submittedTitle", "allowance.submittedBody", { name: data.employeeName, date: data.entryDate });
       break;
     case "allowance_approved":
-      if (str(data.entryDate)) result = withNotes("allowance.approvedTitle", "allowance.approvedBody", { date: data.entryDate });
+      if (str(data.periodStart) && str(data.periodEnd)) result = withNotes("allowance.approvedTitle", "allowance.sheetApprovedBody", { start: data.periodStart, end: data.periodEnd });
+      else if (str(data.entryDate)) result = withNotes("allowance.approvedTitle", "allowance.approvedBody", { date: data.entryDate });
       break;
     case "allowance_rejected":
-      if (str(data.entryDate)) result = withNotes("allowance.rejectedTitle", "allowance.rejectedBody", { date: data.entryDate });
+      if (str(data.periodStart) && str(data.periodEnd)) result = withNotes("allowance.rejectedTitle", "allowance.sheetRejectedBody", { start: data.periodStart, end: data.periodEnd });
+      else if (str(data.entryDate)) result = withNotes("allowance.rejectedTitle", "allowance.rejectedBody", { date: data.entryDate });
       break;
     case "trial_ending":
       result = pair("trial.endingTitle", "trial.endingBody");

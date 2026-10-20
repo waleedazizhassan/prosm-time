@@ -74,10 +74,10 @@
     "presenceMonitoringEnabledHint": "Revérifie périodiquement la position pendant un poste sur ce site et signale si quelqu'un quitte la zone après avoir pointé. Désactivé par défaut.",
     "cameraRequiredLabel": "Caméra requise",
     "activeLabel": "Site actif",
-    "sitePolicyMovedHint": "La marge GPS, le délai de grâce, les horaires, le suivi de présence et les employés exemptés se règlent sur la page du site.",
+    "sitePolicyMovedHint": "La marge GPS, le délai de grâce, les horaires, le suivi de présence et les employés exemptés se règlent sur la page Paramètres.",
     "confirm": "Enregistrer le site",
     "genericError": "Impossible d'enregistrer ce site.",
-    "openSiteSettings": "Ouvrir la page du site",
+    "openSiteSettings": "Ouvrir les règles du site",
     "blockSelfClockInOutsideLabel": "Bloquer le pointage d'arrivée en dehors de la zone de travail de ce site (pointage par un responsable à la place)",
     "locationLabel": "Emplacement",
     "locationHint": "Placez-vous sur le site et appuyez sur « Utiliser ma position actuelle » - ou saisissez les coordonnées dans Plus d'options.",
@@ -137,7 +137,10 @@
     },
     "manageProjectAssignmentsAction": "Gérer les assignations",
     "workforceMovedHint": "Les intervenants externes sont désormais ajoutés une seule fois pour toute l'organisation, dans la page Intervenants externes. Chacun reçoit un numéro à 6 chiffres créé par l'application et pointe avec lui sur la borne de ce site ou de tout autre.",
-    "workforceOpenAction": "Ouvrir Intervenants externes"
+    "workforceOpenAction": "Ouvrir Intervenants externes",
+    "rulesTitle": "Règles du site",
+    "rulesHint": "Tolérance GPS, délai de grâce, horaires, heures sup., pauses et exemptions - sur la page Paramètres.",
+    "rulesAction": "Ouvrir les règles du site"
   },
   "projectAssignments": {
     "title": "Assignations du projet",

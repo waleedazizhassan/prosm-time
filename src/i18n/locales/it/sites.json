@@ -74,10 +74,10 @@
     "presenceMonitoringEnabledHint": "Riverifica periodicamente la posizione durante un turno in questo sito e segnala se qualcuno lascia l'area dopo la timbratura. Disattivato per impostazione predefinita.",
     "cameraRequiredLabel": "Fotocamera richiesta",
     "activeLabel": "Sede attiva",
-    "sitePolicyMovedHint": "Margine GPS, tolleranza, orari dei turni, monitoraggio della presenza e dipendenti esentati si impostano nella pagina della sede.",
+    "sitePolicyMovedHint": "Margine GPS, tolleranza, orari dei turni, monitoraggio della presenza e dipendenti esentati si impostano nella pagina Impostazioni.",
     "confirm": "Salva sede",
     "genericError": "Impossibile salvare questa sede.",
-    "openSiteSettings": "Apri la pagina della sede",
+    "openSiteSettings": "Apri le regole della sede",
     "blockSelfClockInOutsideLabel": "Blocca la timbratura di entrata fuori dall'area di lavoro di questa sede (timbratura da parte di un responsabile)",
     "locationLabel": "Posizione",
     "locationHint": "Mettiti nella sede e premi \"Usa la mia posizione attuale\" - oppure inserisci le coordinate in Altre opzioni.",
@@ -137,7 +137,10 @@
     },
     "manageProjectAssignmentsAction": "Gestisci assegnazioni",
     "workforceMovedHint": "I lavoratori esterni ora si aggiungono una sola volta per tutta l'organizzazione, nella pagina Lavoratori esterni. Ognuno riceve un numero a 6 cifre creato dall'app e timbra con esso al chiosco di questa o di qualsiasi altra sede.",
-    "workforceOpenAction": "Apri Lavoratori esterni"
+    "workforceOpenAction": "Apri Lavoratori esterni",
+    "rulesTitle": "Regole della sede",
+    "rulesHint": "Tolleranza GPS, tolleranza ritardo, orari, straordinari, pause ed esenzioni - nella pagina Impostazioni.",
+    "rulesAction": "Apri le regole della sede"
   },
   "projectAssignments": {
     "title": "Assegnazioni del progetto",

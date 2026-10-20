@@ -198,7 +198,11 @@
     "removeBelowYou": "Vous ne retirez que les personnes sous vous d'un site que vous gérez.",
     "scheduleBelowYou": "Vous ne planifiez que les personnes sous vous.",
     "categoryBelowYou": "Vous ne fixez la catégorie que des personnes sous vous, sur vos sites.",
-    "pinBelowYou": "Vous ne définissez le code que des personnes sous vous, sur vos sites."
+    "pinBelowYou": "Vous ne définissez le code que des personnes sous vous, sur vos sites.",
+    "ownerHasNoAllowances": "Le propriétaire n'a pas d'indemnités propres.",
+    "noAllowancesToSend": "Rien à envoyer pour cette période.",
+    "reviewWholeSheet": "Ce jour fait partie d'une feuille - validez ou refusez toute la feuille.",
+    "sheetNotWaiting": "Cette feuille a déjà été traitée."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

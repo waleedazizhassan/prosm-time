@@ -121,5 +121,52 @@
   "pdf": {
     "employeeSignature": "توقيع الموظف",
     "managerApproval": "اعتماد مدير المشروع"
+  },
+  "autoFill": {
+    "label": "املأ تلقائيًا بعد كل وردية",
+    "hint": "عند الانصراف تُضاف بدلات اليوم من أسعارك، وتراجعها أنت وترسلها."
+  },
+  "sendAll": {
+    "action": "إرسال للمدير",
+    "done": "تم إرسال {{count}} يوم لمديرك."
+  },
+  "sheet": {
+    "title": "نموذج حضور وإنصراف",
+    "subtitle": "كشف بدلات",
+    "combinedSubtitle": "كشف بدلات مجمّع",
+    "combinedTitle": "الكشف المجمّع",
+    "combinedHint": "اختر من يظهر في الكشف - سطر بالإجماليات لكل شخص.",
+    "selectAll": "الكل",
+    "selectNone": "لا أحد",
+    "employeeName": "إسم الموظف",
+    "employee": "الموظف",
+    "employeesCount": "عدد الموظفين: {{count}}",
+    "periodFrom": "الفترة من",
+    "periodTo": "إلى",
+    "day": "اليوم",
+    "date": "التاريخ",
+    "in": "حضور",
+    "out": "إنصراف",
+    "site": "الموقع",
+    "extraDays": "الأيام الإضافية",
+    "overtimeHours": "الساعات الإضافية",
+    "managerApproval": "إعتماد مدير المشروع",
+    "total": "الإجمالي",
+    "grandTotal": "إجمالي المستحق",
+    "extraDaysValue": "أيام إضافية",
+    "overtimeValue": "ساعات إضافية",
+    "days": "أيام",
+    "allowances": "البدلات",
+    "extra": "الإضافي",
+    "noSite": "بدون موقع",
+    "employeeSignature": "توقيع الموظف",
+    "projectManager": "مدير المشروع",
+    "accounts": "الحسابات"
+  },
+  "sheets": {
+    "title": "كشوف بدلات بانتظار اعتمادك",
+    "hint": "كل كشف فيه كل الأيام التي أرسلها الموظف - اعتمده أو ارفضه مرة واحدة، وافتحه لترى الأيام.",
+    "line": "{{from}} - {{to}} · {{days}} يوم · الإجمالي {{total}}",
+    "openAction": "فتح"
   }
 }

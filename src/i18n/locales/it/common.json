@@ -198,7 +198,11 @@
     "removeBelowYou": "Puoi rimuovere solo chi è sotto di te da una sede che gestisci.",
     "scheduleBelowYou": "Puoi pianificare solo chi è sotto di te.",
     "categoryBelowYou": "Puoi impostare la categoria solo di chi è sotto di te nelle tue sedi.",
-    "pinBelowYou": "Puoi impostare il PIN solo di chi è sotto di te nelle tue sedi."
+    "pinBelowYou": "Puoi impostare il PIN solo di chi è sotto di te nelle tue sedi.",
+    "ownerHasNoAllowances": "Il titolare non ha indennità proprie.",
+    "noAllowancesToSend": "Niente da inviare per questo periodo.",
+    "reviewWholeSheet": "Questo giorno fa parte di un foglio - approva o rifiuta l'intero foglio.",
+    "sheetNotWaiting": "Questo foglio è già stato deciso."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

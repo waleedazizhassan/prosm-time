@@ -13,7 +13,7 @@ import { formatDateOnly, formatDateTime, formatTimeOnly } from "../../core/utils
 import savePdfDocument, { printPdfDocument } from "../../core/utils/savePdfDocument";
 import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
 import { buildAttendanceLogPdf } from "../attendance/attendanceLogPdf";
-import { buildAllowancesPdf } from "../allowances/allowancesPdf";
+import { buildCombinedAllowanceSheetPdf } from "../allowances/allowancesPdf";
 import { buildGenericReportPdf } from "./genericReportPdf";
 
 import { useAuth } from "../../core/context/AuthContext";
@@ -426,7 +426,7 @@ export default function ReportsPage() {
         const doc = await buildAttendanceLogPdf(filteredAttendanceRows, startDate, endDate, i18n.language, tAttendance, organizationLogoUrl);
         await deliver(doc, `attendance-record-${startDate}-${endDate}.pdf`, "attendance");
       } else if (reportType === "allowances") {
-        const doc = await buildAllowancesPdf(filteredAllowanceEntries, startDate, endDate, i18n.language, tAllowances, organizationLogoUrl);
+        const doc = await buildCombinedAllowanceSheetPdf(filteredAllowanceEntries, { startDate, endDate, languageCode: i18n.language, t: tAllowances, organizationName: "", organizationLogoUrl });
         await deliver(doc, `allowances-${startDate}-${endDate}.pdf`, "allowances");
       } else if (reportType !== "timesheets") {
         const cfg = genericConfig[reportType];

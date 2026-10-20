@@ -71,6 +71,12 @@
         "approved": "treated as a genuine location (e.g. a GPS mistake).",
         "rejected": "recorded as a fake location; nothing else changes automatically - take it up with the employee."
       }
+    },
+    "geofence": {
+      "summary": "{{distance}} m outside the work area · reason: {{reason}}"
+    },
+    "correction": {
+      "summary": "{{action}} at {{time}} · {{reason}}"
     }
   },
   "leave": {

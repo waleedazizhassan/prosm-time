@@ -129,7 +129,8 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // settings (today: the no-site geofence radius) instead of living
   // inside an unrelated page. Owner-only, matching that setting's own
   // existing RPC-level gate.
-  { id: "settings", labelKey: "items.settings", path: "/settings", icon: Settings, requiredPermission: null, ownerOnly: true, section: "settings" },
+  // Owner 2026-10-20: every setting lives here - each site's rules too, so managers who manage sites see it.
+  { id: "settings", labelKey: "items.settings", path: "/settings", icon: Settings, requiredPermission: "sites.manage", section: "settings" },
   // § user-directed 2026-09-09 - "API [keys] should appear on its own
   // in the sidebar, not inside Settings." Same Owner-only gate as
   // Settings itself (API keys grant external read access to this

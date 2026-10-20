@@ -95,7 +95,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "approvedTitle": "تم اعتماد البدلات",
         "approvedBody": "تم اعتماد بدلاتك ليوم {{date}}.",
         "rejectedTitle": "تم رفض البدلات",
-        "rejectedBody": "تم رفض بدلاتك ليوم {{date}}. يمكنك تعديلها وإرسالها مرة أخرى."
+        "rejectedBody": "تم رفض بدلاتك ليوم {{date}}. يمكنك تعديلها وإرسالها مرة أخرى.",
+        "sheetSubmittedBody": "أرسل {{name}} بدلات {{days}} يوم ({{start}} - {{end}}).",
+        "sheetApprovedBody": "تم اعتماد بدلاتك عن الفترة {{start}} - {{end}}.",
+        "sheetRejectedBody": "تم رفض بدلاتك عن الفترة {{start}} - {{end}}. عدّلها وأرسلها مرة أخرى."
       }
     },
     "leaveTypes": {
@@ -199,7 +202,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "approvedTitle": "Allowances approved",
         "approvedBody": "Your allowances for {{date}} were approved.",
         "rejectedTitle": "Allowances rejected",
-        "rejectedBody": "Your allowances for {{date}} were rejected. You can edit them and send them again."
+        "rejectedBody": "Your allowances for {{date}} were rejected. You can edit them and send them again.",
+        "sheetSubmittedBody": "{{name}} sent allowances for {{days}} days ({{start}} - {{end}}).",
+        "sheetApprovedBody": "Your allowances for {{start}} - {{end}} were approved.",
+        "sheetRejectedBody": "Your allowances for {{start}} - {{end}} were rejected. Fix them and send them again."
       }
     },
     "leaveTypes": {
@@ -303,7 +309,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "approvedTitle": "Zulagen genehmigt",
         "approvedBody": "Ihre Zulagen für den {{date}} wurden genehmigt.",
         "rejectedTitle": "Zulagen abgelehnt",
-        "rejectedBody": "Ihre Zulagen für den {{date}} wurden abgelehnt. Sie können sie bearbeiten und erneut einreichen."
+        "rejectedBody": "Ihre Zulagen für den {{date}} wurden abgelehnt. Sie können sie bearbeiten und erneut einreichen.",
+        "sheetSubmittedBody": "{{name}} hat Zulagen für {{days}} Tage gesendet ({{start}} - {{end}}).",
+        "sheetApprovedBody": "Ihre Zulagen für {{start}} - {{end}} wurden genehmigt.",
+        "sheetRejectedBody": "Ihre Zulagen für {{start}} - {{end}} wurden abgelehnt. Korrigieren und erneut senden."
       }
     },
     "leaveTypes": {
@@ -407,7 +416,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "approvedTitle": "Indemnités approuvées",
         "approvedBody": "Vos indemnités du {{date}} ont été approuvées.",
         "rejectedTitle": "Indemnités refusées",
-        "rejectedBody": "Vos indemnités du {{date}} ont été refusées. Vous pouvez les modifier et les renvoyer."
+        "rejectedBody": "Vos indemnités du {{date}} ont été refusées. Vous pouvez les modifier et les renvoyer.",
+        "sheetSubmittedBody": "{{name}} a envoyé ses indemnités pour {{days}} jours ({{start}} - {{end}}).",
+        "sheetApprovedBody": "Vos indemnités du {{start}} au {{end}} ont été approuvées.",
+        "sheetRejectedBody": "Vos indemnités du {{start}} au {{end}} ont été refusées. Corrigez-les et renvoyez-les."
       }
     },
     "leaveTypes": {
@@ -511,7 +523,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "approvedTitle": "Indennità approvate",
         "approvedBody": "Le tue indennità del {{date}} sono state approvate.",
         "rejectedTitle": "Indennità rifiutate",
-        "rejectedBody": "Le tue indennità del {{date}} sono state rifiutate. Puoi modificarle e inviarle di nuovo."
+        "rejectedBody": "Le tue indennità del {{date}} sono state rifiutate. Puoi modificarle e inviarle di nuovo.",
+        "sheetSubmittedBody": "{{name}} ha inviato le indennità di {{days}} giorni ({{start}} - {{end}}).",
+        "sheetApprovedBody": "Le tue indennità dal {{start}} al {{end}} sono state approvate.",
+        "sheetRejectedBody": "Le tue indennità dal {{start}} al {{end}} sono state rifiutate. Correggile e inviale di nuovo."
       }
     },
     "leaveTypes": {

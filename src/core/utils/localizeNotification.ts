@@ -122,14 +122,24 @@ export default function localizeNotification(notification: AppNotification, t: T
     case "allowance_submitted": {
       const name = typeof data.employeeName === "string" ? data.employeeName : null;
       const date = typeof data.entryDate === "string" ? data.entryDate : null;
+      // Owner 2026-10-20: a whole sheet (every unsent day) goes to the manager at once.
+      const start = typeof data.periodStart === "string" ? data.periodStart : null;
+      const end = typeof data.periodEnd === "string" ? data.periodEnd : null;
+      if (name && start && end && typeof data.days === "number") {
+        return { title: t("shell:notifications.allowance.submittedTitle"), body: t("shell:notifications.allowance.sheetSubmittedBody", { name, days: data.days, start, end }) };
+      }
       if (!name || !date) break;
       return { title: t("shell:notifications.allowance.submittedTitle"), body: t("shell:notifications.allowance.submittedBody", { name, date }) };
     }
     case "allowance_approved":
     case "allowance_rejected": {
       const date = typeof data.entryDate === "string" ? data.entryDate : null;
-      if (!date) break;
       const which = notification.type === "allowance_approved" ? "approved" : "rejected";
+      if (typeof data.periodStart === "string" && typeof data.periodEnd === "string") {
+        const sheetKey = which === "approved" ? "sheetApprovedBody" : "sheetRejectedBody";
+        return { title: t(`shell:notifications.allowance.${which}Title`), body: withNotes(t(`shell:notifications.allowance.${sheetKey}`, { start: data.periodStart, end: data.periodEnd })) };
+      }
+      if (!date) break;
       return { title: t(`shell:notifications.allowance.${which}Title`), body: withNotes(t(`shell:notifications.allowance.${which}Body`, { date })) };
     }
     // Owner 2026-10-20: the trial notices were stored in Arabic and English together; a fixed text in the reader's language.

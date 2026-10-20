@@ -148,7 +148,10 @@
       "approvedTitle": "Allowances approved",
       "approvedBody": "Your allowances for {{date}} were approved.",
       "rejectedTitle": "Allowances rejected",
-      "rejectedBody": "Your allowances for {{date}} were rejected. You can edit them and send them again."
+      "rejectedBody": "Your allowances for {{date}} were rejected. You can edit them and send them again.",
+      "sheetSubmittedBody": "{{name}} sent allowances for {{days}} days ({{start}} - {{end}}).",
+      "sheetApprovedBody": "Your allowances for {{start}} - {{end}} were approved.",
+      "sheetRejectedBody": "Your allowances for {{start}} - {{end}} were rejected. Fix them and send them again."
     }
   },
   "items": {

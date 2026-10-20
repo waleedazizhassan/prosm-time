@@ -148,7 +148,10 @@
       "approvedTitle": "Zulagen genehmigt",
       "approvedBody": "Ihre Zulagen für den {{date}} wurden genehmigt.",
       "rejectedTitle": "Zulagen abgelehnt",
-      "rejectedBody": "Ihre Zulagen für den {{date}} wurden abgelehnt. Sie können sie bearbeiten und erneut einreichen."
+      "rejectedBody": "Ihre Zulagen für den {{date}} wurden abgelehnt. Sie können sie bearbeiten und erneut einreichen.",
+      "sheetSubmittedBody": "{{name}} hat Zulagen für {{days}} Tage gesendet ({{start}} - {{end}}).",
+      "sheetApprovedBody": "Ihre Zulagen für {{start}} - {{end}} wurden genehmigt.",
+      "sheetRejectedBody": "Ihre Zulagen für {{start}} - {{end}} wurden abgelehnt. Korrigieren und erneut senden."
     }
   },
   "items": {

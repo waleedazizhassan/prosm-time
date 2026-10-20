@@ -38,6 +38,20 @@ export interface AllowanceEntry {
   approvedAt: string | null;
   // Owner 2026-10-20: the reviewer's note on the decision (why it was rejected).
   reviewNotes: string | null;
+  // Owner 2026-10-20: the sheet the day was sent in (decided with it, never alone).
+  sheetId: string | null;
+}
+
+export interface AllowanceSheet {
+  id: string;
+  userId: string;
+  userFullName: string;
+  periodStart: string;
+  periodEnd: string;
+  days: number;
+  total: number;
+  status: "submitted" | "approved" | "rejected";
+  submittedAt: string;
 }
 
 export interface AllowanceEntryInput {
@@ -77,6 +91,7 @@ interface AllowanceEntryRow {
   submitted_at: string | null;
   approved_at: string | null;
   review_notes: string | null;
+  sheet_id?: string | null;
   users: { full_name: string } | { full_name: string }[] | null;
   attendance_sessions:
     | { clock_in_at: string; clock_out_at: string | null; manual_location_label: string | null; sites: { name: string } | { name: string }[] | null }
@@ -113,6 +128,7 @@ function mapEntryRow(row: AllowanceEntryRow): AllowanceEntry {
     submittedAt: row.submitted_at,
     approvedAt: row.approved_at,
     reviewNotes: row.review_notes ?? null,
+    sheetId: row.sheet_id ?? null,
   };
 }
 
@@ -145,7 +161,7 @@ function localDate(iso: string): string {
 }
 
 const ENTRY_SELECT =
-  "id, user_id, entry_date, meal_allowance, expatriation_allowance, transportation_allowance, housing_allowance, travel_allowance, other_allowance, other_allowance_note, overtime_hours, overtime_days, overtime_amount, extra_days_amount, status, submitted_at, approved_at, review_notes, users!allowance_entries_user_id_fkey(full_name), attendance_sessions(clock_in_at, clock_out_at, manual_location_label, sites!attendance_sessions_site_id_fkey(name))";
+  "id, user_id, entry_date, meal_allowance, expatriation_allowance, transportation_allowance, housing_allowance, travel_allowance, other_allowance, other_allowance_note, overtime_hours, overtime_days, overtime_amount, extra_days_amount, status, submitted_at, approved_at, review_notes, sheet_id, users!allowance_entries_user_id_fkey(full_name), attendance_sessions(clock_in_at, clock_out_at, manual_location_label, sites!attendance_sessions_site_id_fkey(name))";
 
 // PROSM Time - Allowances (2026-09-02 plan). Reads are RLS-scoped
 // (self always; a Manager's own managed sites' people; everyone for
@@ -235,6 +251,65 @@ class AllowanceRepository {
       const { data, error } = await this.client.rpc("fill_prosm_time_allowances", { p_from: from, p_to: to });
       if (error) return createError(error.message);
       return createSuccess({ filled: Number((data as { filled?: number } | null)?.filled ?? 0) });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Allowances service unavailable.");
+    }
+  }
+
+  // Owner 2026-10-20: auto-fill (each clocked-out day starts itself) and "send to manager" for a whole period.
+  async getAutoFill(): Promise<ServiceResult<boolean>> {
+    try {
+      const { data, error } = await this.client.from("allowance_preferences").select("auto_fill").maybeSingle();
+      if (error) return createError(error.message);
+      return createSuccess(Boolean((data as { auto_fill?: boolean } | null)?.auto_fill));
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Allowances service unavailable.");
+    }
+  }
+
+  async setAutoFill(enabled: boolean): Promise<ServiceResult> {
+    try {
+      const { error } = await this.client.rpc("set_prosm_time_allowance_auto_fill", { p_enabled: enabled });
+      return error ? createError(error.message) : createSuccess();
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Allowances service unavailable.");
+    }
+  }
+
+  async submitPeriod(from: string, to: string): Promise<ServiceResult<{ sent: number }>> {
+    try {
+      const { data, error } = await this.client.rpc("submit_prosm_time_allowances", { p_from: from, p_to: to });
+      if (error) return createError(error.message);
+      return createSuccess({ sent: Number((data as { sent?: number } | null)?.sent ?? 0) });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Allowances service unavailable.");
+    }
+  }
+
+  async listSheets(status: AllowanceSheet["status"] = "submitted"): Promise<ServiceResult<AllowanceSheet[]>> {
+    try {
+      const { data, error } = await this.client
+        .from("allowance_sheets")
+        .select("id, user_id, period_start, period_end, days, total, status, submitted_at, users!allowance_sheets_user_id_fkey(full_name)")
+        .eq("status", status)
+        .order("submitted_at", { ascending: true });
+      if (error) return createError(error.message);
+      type Row = { id: string; user_id: string; period_start: string; period_end: string; days: number; total: number; status: AllowanceSheet["status"]; submitted_at: string; users: { full_name: string } | { full_name: string }[] | null };
+      return createSuccess(
+        ((data ?? []) as Row[]).map((row) => {
+          const user = Array.isArray(row.users) ? row.users[0] : row.users;
+          return { id: row.id, userId: row.user_id, userFullName: user?.full_name ?? "", periodStart: row.period_start, periodEnd: row.period_end, days: row.days, total: Number(row.total), status: row.status, submittedAt: row.submitted_at };
+        }),
+      );
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Allowances service unavailable.");
+    }
+  }
+
+  async reviewSheet(sheetId: string, action: "approved" | "rejected", notes?: string): Promise<ServiceResult> {
+    try {
+      const { error } = await this.client.rpc("review_prosm_time_allowance_sheet", { p_sheet_id: sheetId, p_action: action, p_notes: notes ?? null });
+      return error ? createError(error.message) : createSuccess();
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Allowances service unavailable.");
     }

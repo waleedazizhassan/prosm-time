@@ -1,133 +1,286 @@
 import type { jsPDF } from "jspdf";
 import type { AllowanceEntry } from "../../core/repositories/AllowanceRepository";
-import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
+import { formatTimeOnly } from "../../core/utils/formatDate";
 import { renderHtmlToPdf, escapeHtml } from "../../core/utils/htmlToPdf";
 import prosmLogo from "../../assets/prosm-logo-pdf.png";
 
 type TFunc = (key: string, options?: Record<string, unknown>) => string;
 
-const dayTotal = (entry: AllowanceEntry) =>
-  entry.mealAllowance +
-  entry.expatriationAllowance +
-  entry.transportationAllowance +
-  entry.housingAllowance +
-  entry.travelAllowance +
-  entry.otherAllowance +
-  entry.overtimeAmount +
-  entry.extraDaysAmount;
+export interface SheetContext {
+  startDate: string;
+  endDate: string;
+  languageCode: string;
+  t: TFunc;
+  organizationName: string;
+  organizationLogoUrl?: string | null;
+}
 
-// PROSM Time - Allowances PDF export, same certified-document shell
-// (two-logo header, html2canvas capture via renderHtmlToPdf) as
-// Timesheets/Attendance Record's own PDFs.
-export function buildAllowancesPdf(entries: AllowanceEntry[], startDate: string, endDate: string, languageCode: string, t: TFunc, organizationLogoUrl?: string | null): Promise<jsPDF> {
+// Owner 2026-10-20 ("the allowance sheet should look like this when I export
+// it as PDF" - the owner's own PROSM Allow sheet): an employee's sheet lists
+// every day of the period (days with nothing are shaded), the totals, a box
+// per allowance in money, the grand total, a line per site, and signature
+// lines for the employee, the project manager and accounts. A manager's
+// combined sheet has one line of totals per chosen employee.
+
+const BRAND = "#1e6fd9";
+const LINE = "#cbd5e1";
+
+const money = (value: number, locale: string) => (value === 0 ? "" : value.toLocaleString(locale, { maximumFractionDigits: 2 }));
+const moneyAlways = (value: number, locale: string) => value.toLocaleString(locale, { maximumFractionDigits: 2 });
+
+function allowanceSum(entry: AllowanceEntry): number {
+  return entry.mealAllowance + entry.expatriationAllowance + entry.transportationAllowance + entry.housingAllowance + entry.travelAllowance + entry.otherAllowance;
+}
+
+function extraSum(entry: AllowanceEntry): number {
+  return entry.overtimeAmount + entry.extraDaysAmount;
+}
+
+function dayList(startDate: string, endDate: string): string[] {
+  const days: string[] = [];
+  const cursor = new Date(`${startDate}T00:00:00`);
+  const end = new Date(`${endDate}T00:00:00`);
+  for (let guard = 0; cursor <= end && guard < 62; guard += 1) {
+    days.push(`${cursor.getFullYear()}-${String(cursor.getMonth() + 1).padStart(2, "0")}-${String(cursor.getDate()).padStart(2, "0")}`);
+    cursor.setDate(cursor.getDate() + 1);
+  }
+  return days;
+}
+
+function shortDate(iso: string): string {
+  const [year, month, day] = iso.split("-");
+  return year && month && day ? `${day}/${month}` : iso;
+}
+
+function longDate(iso: string): string {
+  const [year, month, day] = iso.split("-");
+  return year && month && day ? `${day}/${month}/${year}` : iso;
+}
+
+function header(ctx: SheetContext, subtitle: string): string {
+  const { t, organizationName, organizationLogoUrl } = ctx;
+  return `
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:3px solid ${BRAND};padding-bottom:12px;margin-bottom:14px;">
+      ${organizationLogoUrl ? `<img src="${escapeHtml(organizationLogoUrl)}" style="height:52px;max-width:120px;object-fit:contain;" />` : `<div style="width:52px;"></div>`}
+      <div style="text-align:center;flex:1;">
+        <div style="font-size:22px;font-weight:800;">${escapeHtml(t("sheet.title"))}</div>
+        <div style="font-size:12px;color:#475569;margin-top:2px;">${escapeHtml(subtitle)}${organizationName ? ` — ${escapeHtml(organizationName)}` : ""}</div>
+      </div>
+      <img src="${prosmLogo}" style="height:52px;width:52px;object-fit:contain;" />
+    </div>`;
+}
+
+function footer(ctx: SheetContext): string {
+  const { t, languageCode } = ctx;
+  return `
+    <div style="display:flex;justify-content:space-between;gap:24px;margin-top:40px;font-size:12px;font-weight:700;color:#0f172a;">
+      ${[t("sheet.employeeSignature"), t("sheet.projectManager"), t("sheet.accounts")]
+        .map((label) => `<div style="flex:1;text-align:center;"><div style="border-top:1px solid #0f172a;margin-bottom:6px;"></div>${escapeHtml(label)}</div>`)
+        .join("")}
+    </div>
+    <div style="text-align:center;margin-top:14px;font-size:10px;color:#94a3b8;">${escapeHtml(new Date().toLocaleString(languageCode))} · PROSM Time</div>`;
+}
+
+const cell = (content: string, extra = "") => `<td style="padding:4px 6px;border:1px solid ${LINE};text-align:center;${extra}">${content}</td>`;
+const head = (content: string) => `<th style="padding:5px 6px;border:1px solid ${LINE};background:#eef2f7;font-size:10px;line-height:1.25;">${escapeHtml(content)}</th>`;
+
+/** One employee's sheet: every day of the period, the totals in money, a line per site. */
+export function buildEmployeeAllowanceSheetPdf(entries: AllowanceEntry[], employeeName: string, ctx: SheetContext): Promise<jsPDF> {
+  const { t, languageCode, startDate, endDate } = ctx;
   const isRtl = languageCode === "ar";
-  const locale = languageCode;
+  const byDay = new Map(entries.map((entry) => [entry.entryDate, entry]));
+  const showHousing = entries.some((entry) => entry.housingAllowance > 0);
+  const showOther = entries.some((entry) => entry.otherAllowance > 0);
 
-  const bodyRows =
-    entries.length === 0
-      ? `<tr><td colspan="15" style="padding:14px;text-align:center;color:#64748b;">${escapeHtml(t("empty"))}</td></tr>`
-      : entries
-          .map(
-            (entry) => `
-        <tr>
-          <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${escapeHtml(entry.userFullName)}</td>
-          <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${escapeHtml(formatDateOnly(entry.entryDate, locale))}</td>
-          <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${escapeHtml(entry.siteName || "—")}</td>
-          <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${entry.clockInAt ? escapeHtml(formatTimeOnly(entry.clockInAt, locale)) : "—"}</td>
-          <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${entry.clockOutAt ? escapeHtml(formatTimeOnly(entry.clockOutAt, locale)) : "—"}</td>
-          <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${entry.mealAllowance.toFixed(2)}</td>
-          <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${entry.expatriationAllowance.toFixed(2)}</td>
-          <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${entry.transportationAllowance.toFixed(2)}</td>
-          <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${entry.overtimeHours.toFixed(2)}</td>
-          <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${entry.overtimeDays.toFixed(1)}</td>
-          <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${entry.housingAllowance.toFixed(2)}</td>
-          <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${entry.travelAllowance.toFixed(2)}</td>
-          <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${entry.otherAllowance.toFixed(2)}</td>
-          <td style="padding:6px 8px;border-top:1px solid #e2e8f0;">${(entry.overtimeAmount + entry.extraDaysAmount).toFixed(2)}</td>
-          <td style="padding:6px 8px;border-top:1px solid #e2e8f0;font-weight:700;">${dayTotal(entry).toFixed(2)}</td>
-        </tr>`,
-          )
-          .join("");
+  const columns = [
+    t("sheet.day"),
+    t("sheet.date"),
+    t("sheet.in"),
+    t("sheet.out"),
+    t("sheet.site"),
+    t("sheet.extraDays"),
+    t("prices.field.expatriation"),
+    t("prices.field.transportation"),
+    t("prices.field.travel"),
+    t("prices.field.meal"),
+    ...(showHousing ? [t("prices.field.housing")] : []),
+    ...(showOther ? [t("prices.field.other")] : []),
+    t("sheet.overtimeHours"),
+    t("sheet.managerApproval"),
+  ];
 
-  // § live UX review, user-directed - "a vertical total at the bottom
-  // of the table" - one summed value per numeric column.
-  const totals = entries.reduce(
-    (acc, entry) => ({
-      meal: acc.meal + entry.mealAllowance,
-      expatriation: acc.expatriation + entry.expatriationAllowance,
-      transportation: acc.transportation + entry.transportationAllowance,
-      overtimeHours: acc.overtimeHours + entry.overtimeHours,
-      overtimeDays: acc.overtimeDays + entry.overtimeDays,
-      housing: acc.housing + entry.housingAllowance,
-      travel: acc.travel + entry.travelAllowance,
-      other: acc.other + entry.otherAllowance,
-      overtimeValue: acc.overtimeValue + entry.overtimeAmount + entry.extraDaysAmount,
-      total: acc.total + dayTotal(entry),
-    }),
-    { meal: 0, expatriation: 0, transportation: 0, overtimeHours: 0, overtimeDays: 0, housing: 0, travel: 0, other: 0, overtimeValue: 0, total: 0 },
-  );
+  const rows = dayList(startDate, endDate)
+    .map((iso) => {
+      const entry = byDay.get(iso);
+      const weekday = new Date(`${iso}T00:00:00`).toLocaleDateString(languageCode, { weekday: "long" });
+      const shade = entry ? "" : "background:#f1f5f9;";
+      const values = entry
+        ? [
+            entry.clockInAt ? escapeHtml(formatTimeOnly(entry.clockInAt, languageCode)) : "",
+            entry.clockOutAt ? escapeHtml(formatTimeOnly(entry.clockOutAt, languageCode)) : "",
+            escapeHtml(entry.siteName ?? ""),
+            entry.overtimeDays ? String(entry.overtimeDays) : "",
+            money(entry.expatriationAllowance, languageCode),
+            money(entry.transportationAllowance, languageCode),
+            money(entry.travelAllowance, languageCode),
+            money(entry.mealAllowance, languageCode),
+            ...(showHousing ? [money(entry.housingAllowance, languageCode)] : []),
+            ...(showOther ? [money(entry.otherAllowance, languageCode)] : []),
+            entry.overtimeHours ? String(Number(entry.overtimeHours.toFixed(2))) : "",
+            "",
+          ]
+        : Array.from({ length: columns.length - 2 }, () => "");
+      return `<tr>${cell(escapeHtml(weekday), shade + "text-align:start;")}${cell(shortDate(iso), shade)}${values.map((value) => cell(value, shade)).join("")}</tr>`;
+    })
+    .join("");
 
-  const totalsRow =
-    entries.length === 0
-      ? ""
-      : `
-    <tr style="background:#f8fafc;font-weight:700;">
-      <td colspan="5" style="padding:6px 8px;border-top:2px solid #cbd5e1;text-align:${isRtl ? "left" : "right"};">${escapeHtml(t("detail.totalsLabel"))}</td>
-      <td style="padding:6px 8px;border-top:2px solid #cbd5e1;">${totals.meal.toFixed(2)}</td>
-      <td style="padding:6px 8px;border-top:2px solid #cbd5e1;">${totals.expatriation.toFixed(2)}</td>
-      <td style="padding:6px 8px;border-top:2px solid #cbd5e1;">${totals.transportation.toFixed(2)}</td>
-      <td style="padding:6px 8px;border-top:2px solid #cbd5e1;">${totals.overtimeHours.toFixed(2)}</td>
-      <td style="padding:6px 8px;border-top:2px solid #cbd5e1;">${totals.overtimeDays.toFixed(1)}</td>
-      <td style="padding:6px 8px;border-top:2px solid #cbd5e1;">${totals.housing.toFixed(2)}</td>
-      <td style="padding:6px 8px;border-top:2px solid #cbd5e1;">${totals.travel.toFixed(2)}</td>
-      <td style="padding:6px 8px;border-top:2px solid #cbd5e1;">${totals.other.toFixed(2)}</td>
-      <td style="padding:6px 8px;border-top:2px solid #cbd5e1;">${totals.overtimeValue.toFixed(2)}</td>
-      <td style="padding:6px 8px;border-top:2px solid #cbd5e1;">${totals.total.toFixed(2)}</td>
+  const sum = (pick: (entry: AllowanceEntry) => number) => entries.reduce((total, entry) => total + pick(entry), 0);
+  const totals = {
+    extraDays: sum((e) => e.overtimeDays),
+    expatriation: sum((e) => e.expatriationAllowance),
+    transportation: sum((e) => e.transportationAllowance),
+    travel: sum((e) => e.travelAllowance),
+    meal: sum((e) => e.mealAllowance),
+    housing: sum((e) => e.housingAllowance),
+    other: sum((e) => e.otherAllowance),
+    overtimeHours: sum((e) => e.overtimeHours),
+    extraDaysValue: sum((e) => e.extraDaysAmount),
+    overtimeValue: sum((e) => e.overtimeAmount),
+  };
+  const grand = sum((e) => allowanceSum(e) + extraSum(e));
+
+  const totalsRow = `<tr style="font-weight:800;">
+      <td colspan="5" style="padding:5px 6px;border:1px solid ${LINE};text-align:center;">${escapeHtml(t("sheet.total"))}</td>
+      ${cell(String(Number(totals.extraDays.toFixed(1))))}
+      ${cell(moneyAlways(totals.expatriation, languageCode))}
+      ${cell(moneyAlways(totals.transportation, languageCode))}
+      ${cell(moneyAlways(totals.travel, languageCode))}
+      ${cell(moneyAlways(totals.meal, languageCode))}
+      ${showHousing ? cell(moneyAlways(totals.housing, languageCode)) : ""}
+      ${showOther ? cell(moneyAlways(totals.other, languageCode)) : ""}
+      ${cell(String(Number(totals.overtimeHours.toFixed(2))))}
+      ${cell("")}
     </tr>`;
+
+  const boxes: [string, number][] = [
+    [t("prices.field.expatriation"), totals.expatriation],
+    [t("prices.field.transportation"), totals.transportation],
+    [t("prices.field.travel"), totals.travel],
+    [t("prices.field.meal"), totals.meal],
+    ...(showHousing ? ([[t("prices.field.housing"), totals.housing]] as [string, number][]) : []),
+    ...(showOther ? ([[t("prices.field.other"), totals.other]] as [string, number][]) : []),
+    [t("sheet.extraDaysValue"), totals.extraDaysValue],
+    [t("sheet.overtimeValue"), totals.overtimeValue],
+  ];
+
+  const bySite = new Map<string, { days: number; allowances: number; extra: number }>();
+  for (const entry of entries) {
+    const key = entry.siteName || t("sheet.noSite");
+    const row = bySite.get(key) ?? { days: 0, allowances: 0, extra: 0 };
+    row.days += entry.clockInAt ? 1 : 0;
+    row.allowances += allowanceSum(entry);
+    row.extra += extraSum(entry);
+    bySite.set(key, row);
+  }
 
   const container = document.createElement("div");
   container.dir = isRtl ? "rtl" : "ltr";
-  container.style.cssText = "width:900px;padding:36px;background:#ffffff;color:#0f172a;font-family:'Segoe UI',Tahoma,Arial,sans-serif;";
-
+  container.style.cssText = "width:900px;padding:30px 34px;background:#ffffff;color:#0f172a;font-family:'IBM Plex Sans Arabic','Segoe UI',Tahoma,Arial,sans-serif;";
   container.innerHTML = `
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:3px solid #1e6fd9;padding-bottom:16px;margin-bottom:20px;">
-      <img src="${prosmLogo}" style="height:44px;width:44px;object-fit:contain;" />
-      <div style="text-align:center;flex:1;">
-        <div style="font-size:19px;font-weight:700;">${escapeHtml(t("title"))}</div>
-        <div style="font-size:12px;color:#64748b;margin-top:2px;">${escapeHtml(startDate)} — ${escapeHtml(endDate)}</div>
-      </div>
-      ${organizationLogoUrl ? `<img src="${escapeHtml(organizationLogoUrl)}" style="height:44px;max-width:80px;object-fit:contain;" />` : `<div style="width:44px;"></div>`}
+    ${header(ctx, t("sheet.subtitle"))}
+    <div style="display:flex;justify-content:space-between;gap:16px;font-size:14px;font-weight:800;margin-bottom:10px;">
+      <div>${escapeHtml(t("sheet.employeeName"))} : ${escapeHtml(employeeName)}</div>
+      <div>${escapeHtml(t("sheet.periodFrom"))} : ${longDate(startDate)} &nbsp; ${escapeHtml(t("sheet.periodTo"))} : ${longDate(endDate)}</div>
     </div>
-
-    <table style="width:100%;border-collapse:collapse;font-size:10px;">
-      <thead>
-        <tr style="background:#f1f5f9;">
-          <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.employee"))}</th>
-          <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.date"))}</th>
-          <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.site"))}</th>
-          <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.clockIn"))}</th>
-          <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.clockOut"))}</th>
-          <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.meal"))}</th>
-          <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.expatriation"))}</th>
-          <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.transportation"))}</th>
-          <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.overtimeHours"))}</th>
-          <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.overtimeDays"))}</th>
-          <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.housing"))}</th>
-          <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.travel"))}</th>
-          <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.other"))}</th>
-          <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.overtimeAmount"))}</th>
-          <th style="padding:6px 8px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.total"))}</th>
-        </tr>
-      </thead>
-      <tbody>${bodyRows}</tbody>
+    <table style="width:100%;border-collapse:collapse;font-size:10.5px;">
+      <thead><tr>${columns.map(head).join("")}</tr></thead>
+      <tbody>${rows}</tbody>
       <tfoot>${totalsRow}</tfoot>
     </table>
 
-    <div style="display:flex;justify-content:space-between;gap:24px;margin-top:36px;font-size:12px;color:#334155;">
-      <div>${escapeHtml(t("pdf.employeeSignature"))}: ______________________</div>
-      <div>${escapeHtml(t("pdf.managerApproval"))}: ______________________</div>
+    <div style="display:grid;grid-template-columns:repeat(${Math.min(boxes.length, 6)}, 1fr);gap:8px;margin-top:16px;">
+      ${boxes
+        .map(
+          ([label, value]) => `<div style="border:1px solid ${LINE};border-radius:6px;padding:8px;text-align:center;">
+            <div style="font-size:11px;color:#475569;">${escapeHtml(label)}</div>
+            <div style="font-size:15px;font-weight:800;margin-top:2px;">${moneyAlways(value, languageCode)}</div>
+          </div>`,
+        )
+        .join("")}
     </div>
-  `;
+    <div style="margin-top:10px;padding:10px;border-radius:6px;background:${BRAND};color:#ffffff;text-align:center;">
+      <div style="font-size:12px;opacity:0.9;">${escapeHtml(t("sheet.grandTotal"))}</div>
+      <div style="font-size:20px;font-weight:800;">${moneyAlways(grand, languageCode)}</div>
+    </div>
 
+    <table style="width:70%;margin:16px auto 0;border-collapse:collapse;font-size:11px;">
+      <thead><tr>${[t("sheet.site"), t("sheet.days"), t("sheet.allowances"), t("sheet.extra"), t("sheet.total")].map(head).join("")}</tr></thead>
+      <tbody>
+        ${[...bySite.entries()]
+          .map(([site, row]) => `<tr>${cell(escapeHtml(site))}${cell(String(row.days))}${cell(moneyAlways(row.allowances, languageCode))}${cell(moneyAlways(row.extra, languageCode))}${cell(`<strong>${moneyAlways(row.allowances + row.extra, languageCode)}</strong>`)}</tr>`)
+          .join("")}
+      </tbody>
+    </table>
+    ${footer(ctx)}
+  `;
+  return renderHtmlToPdf(container);
+}
+
+/** A manager's combined sheet: one line of totals per chosen employee. */
+export function buildCombinedAllowanceSheetPdf(entries: AllowanceEntry[], ctx: SheetContext): Promise<jsPDF> {
+  const { t, languageCode, startDate, endDate } = ctx;
+  const isRtl = languageCode === "ar";
+  const people = new Map<string, AllowanceEntry[]>();
+  for (const entry of entries) people.set(entry.userFullName, [...(people.get(entry.userFullName) ?? []), entry]);
+  const collator = new Intl.Collator(languageCode, { sensitivity: "base" });
+  const names = [...people.keys()].sort(collator.compare);
+
+  const fields: [string, (entry: AllowanceEntry) => number][] = [
+    [t("prices.field.expatriation"), (e) => e.expatriationAllowance],
+    [t("prices.field.transportation"), (e) => e.transportationAllowance],
+    [t("prices.field.travel"), (e) => e.travelAllowance],
+    [t("prices.field.meal"), (e) => e.mealAllowance],
+    [t("prices.field.housing"), (e) => e.housingAllowance],
+    [t("prices.field.other"), (e) => e.otherAllowance],
+    [t("sheet.extraDaysValue"), (e) => e.extraDaysAmount],
+    [t("sheet.overtimeValue"), (e) => e.overtimeAmount],
+  ];
+  const used = fields.filter(([, pick]) => entries.some((entry) => pick(entry) > 0));
+
+  const rows = names
+    .map((name, index) => {
+      const list = people.get(name) ?? [];
+      const days = list.filter((entry) => entry.clockInAt).length;
+      const total = list.reduce((sum, entry) => sum + allowanceSum(entry) + extraSum(entry), 0);
+      return `<tr>${cell(String(index + 1))}${cell(escapeHtml(name), "text-align:start;")}${cell(String(days))}${used
+        .map(([, pick]) => cell(moneyAlways(list.reduce((sum, entry) => sum + pick(entry), 0), languageCode)))
+        .join("")}${cell(`<strong>${moneyAlways(total, languageCode)}</strong>`)}</tr>`;
+    })
+    .join("");
+  const grand = entries.reduce((sum, entry) => sum + allowanceSum(entry) + extraSum(entry), 0);
+  const totalsRow = `<tr style="font-weight:800;background:#eef2f7;">${cell("")}${cell(escapeHtml(t("sheet.total")))}${cell(String(entries.filter((entry) => entry.clockInAt).length))}${used
+    .map(([, pick]) => cell(moneyAlways(entries.reduce((sum, entry) => sum + pick(entry), 0), languageCode)))
+    .join("")}${cell(moneyAlways(grand, languageCode))}</tr>`;
+
+  const container = document.createElement("div");
+  container.dir = isRtl ? "rtl" : "ltr";
+  container.style.cssText = "width:900px;padding:30px 34px;background:#ffffff;color:#0f172a;font-family:'IBM Plex Sans Arabic','Segoe UI',Tahoma,Arial,sans-serif;";
+  container.innerHTML = `
+    ${header(ctx, t("sheet.combinedSubtitle"))}
+    <div style="display:flex;justify-content:space-between;gap:16px;font-size:14px;font-weight:800;margin-bottom:10px;">
+      <div>${escapeHtml(t("sheet.employeesCount", { count: names.length }))}</div>
+      <div>${escapeHtml(t("sheet.periodFrom"))} : ${longDate(startDate)} &nbsp; ${escapeHtml(t("sheet.periodTo"))} : ${longDate(endDate)}</div>
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:11px;">
+      <thead><tr>${["#", t("sheet.employee"), t("sheet.days"), ...used.map(([label]) => label), t("sheet.total")].map(head).join("")}</tr></thead>
+      <tbody>${rows}</tbody>
+      <tfoot>${totalsRow}</tfoot>
+    </table>
+    <div style="margin-top:12px;padding:10px;border-radius:6px;background:${BRAND};color:#ffffff;text-align:center;">
+      <div style="font-size:12px;opacity:0.9;">${escapeHtml(t("sheet.grandTotal"))}</div>
+      <div style="font-size:20px;font-weight:800;">${moneyAlways(grand, languageCode)}</div>
+    </div>
+    ${footer(ctx)}
+  `;
   return renderHtmlToPdf(container);
 }

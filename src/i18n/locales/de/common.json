@@ -198,7 +198,11 @@
     "removeBelowYou": "Sie können nur Personen unter Ihnen von einem Ihrer Standorte entfernen.",
     "scheduleBelowYou": "Sie können nur Personen unter Ihnen einplanen.",
     "categoryBelowYou": "Sie können die Kategorie nur für Personen unter Ihnen an Ihren Standorten festlegen.",
-    "pinBelowYou": "Sie können die PIN nur für Personen unter Ihnen an Ihren Standorten festlegen."
+    "pinBelowYou": "Sie können die PIN nur für Personen unter Ihnen an Ihren Standorten festlegen.",
+    "ownerHasNoAllowances": "Der Inhaber hat keine eigenen Zulagen.",
+    "noAllowancesToSend": "Für diesen Zeitraum gibt es nichts zu senden.",
+    "reviewWholeSheet": "Dieser Tag gehört zu einem Blatt - das ganze Blatt freigeben oder ablehnen.",
+    "sheetNotWaiting": "Über dieses Blatt wurde bereits entschieden."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

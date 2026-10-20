@@ -121,5 +121,52 @@
   "pdf": {
     "employeeSignature": "Employee's signature",
     "managerApproval": "Project manager's approval"
+  },
+  "autoFill": {
+    "label": "Fill automatically after each shift",
+    "hint": "When you clock out, that day's allowances are added from your prices. You still review and send them."
+  },
+  "sendAll": {
+    "action": "Send to manager",
+    "done": "{{count}} days sent to your manager."
+  },
+  "sheet": {
+    "title": "Attendance and allowance sheet",
+    "subtitle": "Allowance sheet",
+    "combinedSubtitle": "Combined allowance sheet",
+    "combinedTitle": "Combined sheet",
+    "combinedHint": "Choose who appears - one line of totals per person.",
+    "selectAll": "Everyone",
+    "selectNone": "No one",
+    "employeeName": "Employee",
+    "employee": "Employee",
+    "employeesCount": "{{count}} employees",
+    "periodFrom": "Period from",
+    "periodTo": "to",
+    "day": "Day",
+    "date": "Date",
+    "in": "In",
+    "out": "Out",
+    "site": "Site",
+    "extraDays": "Extra days",
+    "overtimeHours": "Overtime hours",
+    "managerApproval": "Project manager's approval",
+    "total": "Total",
+    "grandTotal": "Total due",
+    "extraDaysValue": "Extra days",
+    "overtimeValue": "Overtime hours",
+    "days": "Days",
+    "allowances": "Allowances",
+    "extra": "Overtime",
+    "noSite": "No site",
+    "employeeSignature": "Employee's signature",
+    "projectManager": "Project manager",
+    "accounts": "Accounts"
+  },
+  "sheets": {
+    "title": "Allowance sheets waiting for you",
+    "hint": "Each sheet holds every day an employee sent - approve or reject it in one go. Open it to see the days.",
+    "line": "{{from}} - {{to}} · {{days}} days · total {{total}}",
+    "openAction": "Open"
   }
 }

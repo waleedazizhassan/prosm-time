@@ -84,6 +84,9 @@ export interface PendingReviewItem {
   offlineTime?: { action: string; deviceTime: string; receivedAt: string };
   // mock_location only (audit 2.4): clock in or out, and when.
   mockLocation?: { eventType: string; occurredAt: string };
+  // Owner 2026-10-20: shown in the reader's language (the summary text was English).
+  geofence?: { distanceMeters: number; reason: string };
+  correction?: { eventType: string; correctTime: string; reason: string };
 }
 
 interface RawMockLocationRow {
@@ -463,6 +466,7 @@ class ManagerRepository {
           id: row.id,
           userFullName: user?.full_name ?? "",
           summary: `${Math.round(row.distance_meters)} m outside area - ${row.employee_reason ?? ""}`,
+          geofence: { distanceMeters: Math.round(row.distance_meters), reason: row.employee_reason ?? "" },
           createdAt: row.created_at,
         };
       });
@@ -474,6 +478,7 @@ class ManagerRepository {
           id: row.id,
           userFullName: user?.full_name ?? "",
           summary: `${row.proposed_event_type} -> ${new Date(row.proposed_correct_time).toLocaleString()} - ${row.reason}`,
+          correction: { eventType: row.proposed_event_type, correctTime: row.proposed_correct_time, reason: row.reason },
           createdAt: row.created_at,
         };
       });

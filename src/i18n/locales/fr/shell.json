@@ -148,7 +148,10 @@
       "approvedTitle": "Indemnités approuvées",
       "approvedBody": "Vos indemnités du {{date}} ont été approuvées.",
       "rejectedTitle": "Indemnités refusées",
-      "rejectedBody": "Vos indemnités du {{date}} ont été refusées. Vous pouvez les modifier et les renvoyer."
+      "rejectedBody": "Vos indemnités du {{date}} ont été refusées. Vous pouvez les modifier et les renvoyer.",
+      "sheetSubmittedBody": "{{name}} a envoyé ses indemnités pour {{days}} jours ({{start}} - {{end}}).",
+      "sheetApprovedBody": "Vos indemnités du {{start}} au {{end}} ont été approuvées.",
+      "sheetRejectedBody": "Vos indemnités du {{start}} au {{end}} ont été refusées. Corrigez-les et renvoyez-les."
     }
   },
   "items": {

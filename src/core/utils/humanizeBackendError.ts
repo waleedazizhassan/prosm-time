@@ -64,6 +64,10 @@ function unwrap(message: string): string {
 }
 
 const BACKEND_ERROR_KEYS: Record<string, string> = {
+  "THIS ALLOWANCE SHEET IS NOT AWAITING APPROVAL": "sheetNotWaiting",
+  "REVIEW THE WHOLE ALLOWANCE SHEET": "reviewWholeSheet",
+  "NO ALLOWANCES TO SEND": "noAllowancesToSend",
+  "THE OWNER HAS NO ALLOWANCES": "ownerHasNoAllowances",
   // Owner 2026-10-20: the server's newer refusals, in the reader's language.
   "A CATEGORY NEEDS A NAME": "categoryNeedsName",
   "A CATEGORY WITH THIS NAME ALREADY EXISTS": "categoryNameTaken",

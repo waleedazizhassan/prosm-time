@@ -71,6 +71,12 @@
         "approved": "als echter Standort behandelt (z. B. GPS-Fehler).",
         "rejected": "als gefälschter Standort erfasst; sonst ändert sich nichts automatisch - mit dem Mitarbeiter klären."
       }
+    },
+    "geofence": {
+      "summary": "{{distance}} m außerhalb des Arbeitsbereichs · Grund: {{reason}}"
+    },
+    "correction": {
+      "summary": "{{action}} um {{time}} · {{reason}}"
     }
   },
   "leave": {

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../core/context/AuthContext";
-import AllowanceRepository, { type AllowanceEntry, type AllowanceEntryInput } from "../../core/repositories/AllowanceRepository";
+import AllowanceRepository, { type AllowanceEntry, type AllowanceEntryInput, type AllowanceSheet } from "../../core/repositories/AllowanceRepository";
 import AllowanceRatesRepository, { RATE_FIELDS, type MySiteRates } from "../../core/repositories/AllowanceRatesRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
@@ -20,9 +20,11 @@ import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
 import Textarea from "../../components/common/Textarea";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
-import { buildAllowancesPdf } from "./allowancesPdf";
+import { buildCombinedAllowanceSheetPdf, buildEmployeeAllowanceSheetPdf } from "./allowancesPdf";
 import allowancesHeaderImage from "../../assets/illustrations/allowances.svg";
 import PageBanner from "../../components/common/PageBanner";
+import Toggle from "../../components/common/Toggle";
+import HintText from "../../components/common/HintText";
 
 const ALL_EMPLOYEES = "";
 
@@ -130,12 +132,12 @@ export default function AllowancesPage() {
   const [detailEntry, setDetailEntry] = useState<AllowanceEntry | null>(null);
   const [formInput, setFormInput] = useState<AllowanceEntryInput>(EMPTY_INPUT);
   const [saving, setSaving] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
   const [detailError, setDetailError] = useState("");
   const [reviewNotes, setReviewNotes] = useState("");
   const [reviewing, setReviewing] = useState<"approved" | "rejected" | null>(null);
 
   const [organizationLogoUrl, setOrganizationLogoUrl] = useState<string | null>(null);
+  const [organizationName, setOrganizationName] = useState("");
   const [exportingPdf, setExportingPdf] = useState(false);
 
   const load = useCallback(async () => {
@@ -164,6 +166,37 @@ export default function AllowancesPage() {
   }, [isOwner]);
 
   // Owner 2026-10-20: every day worked in the period, filled from the prices in one tap.
+  // Owner 2026-10-20: auto-fill after each shift, and send the period's drafts to the manager at once.
+  const [autoFill, setAutoFill] = useState(false);
+  const [sending, setSending] = useState(false);
+  useEffect(() => {
+    if (isOwner) return;
+    AllowanceRepository.getAutoFill().then((result) => setAutoFill(Boolean(result.data)));
+  }, [isOwner]);
+
+  const handleAutoFill = async (enabled: boolean) => {
+    setAutoFill(enabled);
+    const result = await AllowanceRepository.setAutoFill(enabled);
+    if (!result.success) {
+      setAutoFill(!enabled);
+      setAddError(humanizeBackendError(result.message, t) ?? t("saveError"));
+    }
+  };
+
+  const handleSendAll = async () => {
+    setSending(true);
+    setAddError("");
+    setFillMessage("");
+    const result = await AllowanceRepository.submitPeriod(startDate, endDate);
+    setSending(false);
+    if (!result.success) {
+      setAddError(humanizeBackendError(result.message, t) ?? t("submitError"));
+      return;
+    }
+    setFillMessage(t("sendAll.done", { count: result.data?.sent ?? 0 }));
+    await load();
+  };
+
   const handleFill = async () => {
     setFilling(true);
     setFillMessage("");
@@ -181,6 +214,7 @@ export default function AllowancesPage() {
   useEffect(() => {
     OrganizationRepository.getCurrentOrganization().then((result) => {
       setOrganizationLogoUrl(result.success ? (result.data?.logoUrl ?? null) : null);
+      setOrganizationName(result.success ? (result.data?.name ?? "") : "");
     });
   }, []);
 
@@ -238,12 +272,10 @@ export default function AllowancesPage() {
   const closeDetail = () => setDetailEntry(null);
 
   const isOwnEntry = detailEntry ? detailEntry.userId === profile?.id : false;
-  const isDraft = detailEntry?.status === "draft";
   const isSubmitted = detailEntry?.status === "submitted";
   // Owner 2026-10-18: editable until approved (a submitted entry stays waiting for review).
   const canEditDetail = isOwnEntry && detailEntry?.status !== "approved";
-  const canSubmitDetail = isOwnEntry && (isDraft || detailEntry?.status === "rejected");
-  const canReviewDetail = canApprove && isSubmitted && !isOwnEntry;
+  const canReviewDetail = canApprove && isSubmitted && !isOwnEntry && !detailEntry?.sheetId;
 
   const handleSaveDetail = async () => {
     if (!detailEntry) return;
@@ -259,19 +291,6 @@ export default function AllowancesPage() {
     await load();
   };
 
-  const handleSubmitDetail = async () => {
-    if (!detailEntry) return;
-    setSubmitting(true);
-    setDetailError("");
-    const result = await AllowanceRepository.submitEntry(detailEntry.id);
-    setSubmitting(false);
-    if (!result.success) {
-      setDetailError(humanizeBackendError(result.message, t) ?? t("submitError"));
-      return;
-    }
-    closeDetail();
-    await load();
-  };
 
   const handleReview = async (action: "approved" | "rejected") => {
     if (!detailEntry) return;
@@ -287,15 +306,77 @@ export default function AllowancesPage() {
     await load();
   };
 
+  // Owner 2026-10-20: one person's entries print as their detailed sheet; several
+  // people as a combined sheet of totals, for the people the reader picks.
+  const sheetContext = () => ({ startDate, endDate, languageCode: i18n.language, t, organizationName, organizationLogoUrl });
+  const peopleInView = useMemo(() => Array.from(new Set(filteredEntries.map((entry) => entry.userFullName))), [filteredEntries]);
+  const [combinedOpen, setCombinedOpen] = useState(false);
+  const [combinedPeople, setCombinedPeople] = useState<string[]>([]);
+  const [combinedMode, setCombinedMode] = useState<"save" | "print">("save");
+
   const handleExportPdf = async (mode: "save" | "print" = "save") => {
+    if (peopleInView.length > 1) {
+      setCombinedPeople(peopleInView);
+      setCombinedMode(mode);
+      setCombinedOpen(true);
+      return;
+    }
     setExportingPdf(true);
     try {
-      const doc = await buildAllowancesPdf(filteredEntries, startDate, endDate, i18n.language, t, organizationLogoUrl);
-      if (mode === "print") await printPdfDocument(doc, `allowances-${startDate}-${endDate}.pdf`);
-      else await savePdfDocument(doc, `allowances-${startDate}-${endDate}.pdf`, "allowances", startDate, endDate);
+      const name = peopleInView[0] ?? profile?.fullName ?? "";
+      const doc = await buildEmployeeAllowanceSheetPdf(filteredEntries, name, sheetContext());
+      const file = `allowances-${name}-${startDate}-${endDate}.pdf`;
+      if (mode === "print") await printPdfDocument(doc, file);
+      else await savePdfDocument(doc, file, "allowances", startDate, endDate);
     } finally {
       setExportingPdf(false);
     }
+  };
+
+  const handleExportCombined = async () => {
+    setExportingPdf(true);
+    try {
+      const chosen = filteredEntries.filter((entry) => combinedPeople.includes(entry.userFullName));
+      const doc = await buildCombinedAllowanceSheetPdf(chosen, sheetContext());
+      const file = `allowances-combined-${startDate}-${endDate}.pdf`;
+      if (combinedMode === "print") await printPdfDocument(doc, file);
+      else await savePdfDocument(doc, file, "allowances", startDate, endDate);
+      setCombinedOpen(false);
+    } finally {
+      setExportingPdf(false);
+    }
+  };
+
+  // Sheets waiting for the reader's decision (one decision per sheet).
+  const [sheets, setSheets] = useState<AllowanceSheet[]>([]);
+  const [sheetNotes, setSheetNotes] = useState<Record<string, string>>({});
+  const [sheetBusy, setSheetBusy] = useState<string | null>(null);
+  const [sheetError, setSheetError] = useState("");
+  const loadSheets = useCallback(async () => {
+    if (!canApprove && !isOwner) return;
+    const result = await AllowanceRepository.listSheets("submitted");
+    setSheets(result.success ? (result.data ?? []).filter((sheet) => sheet.userId !== profile?.id) : []);
+  }, [canApprove, isOwner, profile?.id]);
+  useEffect(() => {
+    loadSheets();
+  }, [loadSheets]);
+
+  const decideSheet = async (sheet: AllowanceSheet, action: "approved" | "rejected") => {
+    setSheetBusy(sheet.id);
+    setSheetError("");
+    const result = await AllowanceRepository.reviewSheet(sheet.id, action, sheetNotes[sheet.id]?.trim() || undefined);
+    setSheetBusy(null);
+    if (!result.success) {
+      setSheetError(humanizeBackendError(result.message, t) ?? t("reviewError"));
+      return;
+    }
+    await Promise.all([loadSheets(), load()]);
+  };
+
+  const openSheet = (sheet: AllowanceSheet) => {
+    setStartDate(sheet.periodStart);
+    setEndDate(sheet.periodEnd);
+    setEmployeeFilter(sheet.userFullName);
   };
 
   const columns: TableColumn<AllowanceEntry>[] = [
@@ -359,8 +440,89 @@ export default function AllowancesPage() {
               {t("addEntry.action")}
             </Button>
           </div>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--space-3)", flexWrap: "wrap", marginTop: "var(--space-4)", paddingTop: "var(--space-4)", borderTop: "1px solid var(--border-light)" }}>
+            <label style={{ display: "flex", alignItems: "center", gap: "var(--space-3)", fontSize: "var(--font-sm)" }}>
+              <Toggle checked={autoFill} onChange={handleAutoFill} label={t("autoFill.label")} />
+              <span>
+                <strong>{t("autoFill.label")}</strong>
+                <HintText small>{t("autoFill.hint")}</HintText>
+              </span>
+            </label>
+            <Button onClick={handleSendAll} loading={sending} disabled={!entries.some((entry) => entry.userId === profile?.id && (entry.status === "draft" || entry.status === "rejected"))}>
+              {t("sendAll.action")}
+            </Button>
+          </div>
         </Card>
       )}
+
+      {sheets.length > 0 ? (
+        <Card title={t("sheets.title")} subtitle={t("sheets.hint")}>
+          <ErrorText>{sheetError}</ErrorText>
+          <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)" }}>
+            {sheets.map((sheet) => (
+              <div key={sheet.id} style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "var(--space-3)", padding: "var(--space-3)", border: "1px solid var(--border-light)", borderRadius: "var(--radius-md)" }}>
+                <div style={{ flex: "1 1 220px" }}>
+                  <strong>{sheet.userFullName}</strong>
+                  <HintText small>
+                    {t("sheets.line", { from: formatDateOnly(sheet.periodStart, i18n.language), to: formatDateOnly(sheet.periodEnd, i18n.language), days: sheet.days, total: sheet.total.toLocaleString(i18n.language) })}
+                  </HintText>
+                </div>
+                <input
+                  aria-label={t("detail.reviewNotesLabel")}
+                  placeholder={t("detail.reviewNotesLabel")}
+                  value={sheetNotes[sheet.id] ?? ""}
+                  onChange={(event) => setSheetNotes((current) => ({ ...current, [sheet.id]: event.target.value }))}
+                  style={{ flex: "1 1 180px", minHeight: 36, padding: "0 var(--space-3)", border: "1px solid var(--border-medium)", borderRadius: "var(--radius-sm)", background: "var(--surface-raised)", color: "var(--text-primary)", font: "inherit" }}
+                />
+                <div style={{ display: "flex", gap: "var(--space-2)" }}>
+                  <Button size="sm" variant="ghost" onClick={() => openSheet(sheet)}>
+                    {t("sheets.openAction")}
+                  </Button>
+                  <Button size="sm" variant="danger" onClick={() => decideSheet(sheet, "rejected")} loading={sheetBusy === sheet.id}>
+                    {t("detail.rejectAction")}
+                  </Button>
+                  <Button size="sm" onClick={() => decideSheet(sheet, "approved")} loading={sheetBusy === sheet.id}>
+                    {t("detail.approveAction")}
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      ) : null}
+
+      <Modal
+        isOpen={combinedOpen}
+        onClose={() => setCombinedOpen(false)}
+        title={t("sheet.combinedTitle")}
+        footer={
+          <Button onClick={handleExportCombined} loading={exportingPdf} disabled={combinedPeople.length === 0}>
+            {combinedMode === "print" ? t("common:actions.print") : t("exportPdfAction")}
+          </Button>
+        }
+      >
+        <HintText small>{t("sheet.combinedHint")}</HintText>
+        <div style={{ display: "flex", gap: "var(--space-2)", marginBottom: "var(--space-3)" }}>
+          <Button size="xs" variant="ghost" onClick={() => setCombinedPeople(peopleInView)}>
+            {t("sheet.selectAll")}
+          </Button>
+          <Button size="xs" variant="ghost" onClick={() => setCombinedPeople([])}>
+            {t("sheet.selectNone")}
+          </Button>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
+          {peopleInView.map((name) => (
+            <label key={name} style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", fontSize: "var(--font-sm)" }}>
+              <input
+                type="checkbox"
+                checked={combinedPeople.includes(name)}
+                onChange={(event) => setCombinedPeople((current) => (event.target.checked ? [...current, name] : current.filter((other) => other !== name)))}
+              />
+              {name}
+            </label>
+          ))}
+        </div>
+      </Modal>
 
       <Card flush>
         <ErrorText>{loadError}</ErrorText>
@@ -408,11 +570,6 @@ export default function AllowancesPage() {
               {canEditDetail ? (
                 <Button variant="ghost" onClick={handleSaveDetail} loading={saving}>
                   {t("detail.saveAction")}
-                </Button>
-              ) : null}
-              {canSubmitDetail ? (
-                <Button onClick={handleSubmitDetail} loading={submitting}>
-                  {t("detail.submitAction")}
                 </Button>
               ) : null}
               {canReviewDetail ? (

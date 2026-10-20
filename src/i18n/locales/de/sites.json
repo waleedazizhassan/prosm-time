@@ -74,10 +74,10 @@
     "presenceMonitoringEnabledHint": "Überprüft den Standort während einer Schicht an diesem Standort regelmäßig erneut und meldet, wenn jemand nach dem Einstempeln den Bereich verlässt. Standardmäßig deaktiviert.",
     "cameraRequiredLabel": "Kamera erforderlich",
     "activeLabel": "Standort aktiv",
-    "sitePolicyMovedHint": "GPS-Genauigkeit, Kulanzzeit, Schichtzeiten, laufende Anwesenheitsüberwachung und ausgenommene Mitarbeitende werden auf der Seite des Standorts eingestellt.",
+    "sitePolicyMovedHint": "GPS-Genauigkeit, Kulanzzeit, Schichtzeiten, laufende Anwesenheitsüberwachung und ausgenommene Mitarbeitende werden auf der Seite Einstellungen eingestellt.",
     "confirm": "Standort speichern",
     "genericError": "Dieser Standort konnte nicht gespeichert werden.",
-    "openSiteSettings": "Seite des Standorts öffnen",
+    "openSiteSettings": "Regeln des Standorts öffnen",
     "blockSelfClockInOutsideLabel": "Selbst-Einstempeln außerhalb des Arbeitsbereichs dieses Standorts sperren (stattdessen Einstempeln durch eine Führungskraft)",
     "locationLabel": "Standort",
     "locationHint": "Stellen Sie sich an den Standort und tippen Sie auf \"Meinen aktuellen Standort verwenden\" - oder geben Sie die Koordinaten unter Weitere Optionen ein.",
@@ -137,7 +137,10 @@
     },
     "manageProjectAssignmentsAction": "Zuweisungen verwalten",
     "workforceMovedHint": "Externe Arbeiter werden jetzt einmal für die ganze Organisation auf der Seite „Externe Arbeiter“ angelegt. Jeder erhält eine 6-stellige Nummer von der App und stempelt damit am Kiosk dieses oder jedes anderen Standorts.",
-    "workforceOpenAction": "Externe Arbeiter öffnen"
+    "workforceOpenAction": "Externe Arbeiter öffnen",
+    "rulesTitle": "Standortregeln",
+    "rulesHint": "GPS-Toleranz, Kulanz, Schichtzeiten, Überstunden, Pausen und Ausnahmen - auf der Seite Einstellungen.",
+    "rulesAction": "Regeln des Standorts öffnen"
   },
   "projectAssignments": {
     "title": "Projektzuweisungen",

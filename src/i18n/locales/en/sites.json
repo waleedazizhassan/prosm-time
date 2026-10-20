@@ -74,10 +74,10 @@
     "presenceMonitoringEnabledHint": "Re-checks location periodically during a shift at this site and reports if someone leaves the area after clocking in. Off by default.",
     "cameraRequiredLabel": "Camera required",
     "activeLabel": "Site active",
-    "sitePolicyMovedHint": "GPS accuracy margin, grace period, shift times, ongoing presence monitoring and exempt employees are set on the site's page.",
+    "sitePolicyMovedHint": "GPS accuracy margin, grace period, shift times, ongoing presence monitoring and exempt employees are set on the Settings page.",
     "confirm": "Save site",
     "genericError": "Unable to save this site.",
-    "openSiteSettings": "Open the site's page",
+    "openSiteSettings": "Open the site's rules",
     "blockSelfClockInOutsideLabel": "Block self clock-in outside this site's work area (require a manager-assisted clock-in instead)",
     "locationLabel": "Location",
     "locationHint": "Stand at the site and press \"Use my current location\" - or enter the coordinates under More options.",
@@ -137,7 +137,10 @@
     },
     "manageProjectAssignmentsAction": "Manage assignments",
     "workforceMovedHint": "External workers are now added once for the whole organisation, on the Workers page. Each gets a 6-digit number made by the app and can clock in and out with it at this site's kiosk or any other.",
-    "workforceOpenAction": "Open Workers"
+    "workforceOpenAction": "Open Workers",
+    "rulesTitle": "Site rules",
+    "rulesHint": "GPS tolerance, grace, shift times, overtime, breaks and who is exempt - set on the Settings page.",
+    "rulesAction": "Open the site's rules"
   },
   "projectAssignments": {
     "title": "Project assignments",

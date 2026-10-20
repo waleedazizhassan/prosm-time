@@ -198,7 +198,11 @@
     "removeBelowYou": "You can only remove people below you from a site you manage.",
     "scheduleBelowYou": "You can only schedule people below you.",
     "categoryBelowYou": "You can only set the category of people below you at sites you manage.",
-    "pinBelowYou": "You can only set the PIN of people below you at sites you manage."
+    "pinBelowYou": "You can only set the PIN of people below you at sites you manage.",
+    "ownerHasNoAllowances": "The Owner has no allowances of their own.",
+    "noAllowancesToSend": "There is nothing to send for this period.",
+    "reviewWholeSheet": "This day belongs to a sheet - approve or reject the whole sheet.",
+    "sheetNotWaiting": "This sheet has already been decided."
   },
   "pageLoad": {
     "title": "This page needs a connection",

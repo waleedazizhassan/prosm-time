@@ -7,6 +7,7 @@ import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
 import MockLocationSettingsCard from "./MockLocationSettingsCard";
 import settingsHeaderImage from "../../assets/illustrations/settings.svg";
 import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
+import SitePolicySettingsCard from "./SitePolicySettingsCard";
 import PageBanner from "../../components/common/PageBanner";
 // PayrollIntegrationCard intentionally not rendered below - § user-
 // directed, 2026-09-13: "hide it, not delete it, until we know how
@@ -25,9 +26,14 @@ import PageBanner from "../../components/common/PageBanner";
 // Dashboard cards per an earlier pass) - a genuinely good existing
 // home, not something misplaced.
 export default function OrganizationSettingsPage() {
-  const { profile } = useAuth();
+  const { profile, hasPermission } = useAuth();
+  const isOwner = Boolean(profile?.isOwner);
 
-  if (!profile?.isOwner) {
+  // Owner 2026-10-20 ("move every setting, the sites' too, to the Settings
+  // page"): each site's rules are chosen here from a site list - managers
+  // see the sites they manage - and the organisation-wide settings follow
+  // for the Owner.
+  if (!isOwner && !hasPermission("sites.manage")) {
     return <Navigate to="/dashboard" replace />;
   }
 
@@ -35,9 +41,14 @@ export default function OrganizationSettingsPage() {
     <PageShell title="">
       <PageBanner pageId="settings" illustration={settingsHeaderImage} />
 
-      <NoSiteRadiusSettingsCard />
-      <MockLocationSettingsCard />
-      <SiteDefaultsSettingsCard />
+      <SitePolicySettingsCard />
+      {isOwner ? (
+        <>
+          <NoSiteRadiusSettingsCard />
+          <MockLocationSettingsCard />
+          <SiteDefaultsSettingsCard />
+        </>
+      ) : null}
       {/* <PayrollIntegrationCard /> - see the hidden import's own comment above */}
     </PageShell>
   );

@@ -121,5 +121,52 @@
   "pdf": {
     "employeeSignature": "Firma del dipendente",
     "managerApproval": "Approvazione del capo progetto"
+  },
+  "autoFill": {
+    "label": "Compila automaticamente dopo ogni turno",
+    "hint": "All'uscita le indennità del giorno vengono aggiunte dalle tue tariffe. Le controlli e le invii tu."
+  },
+  "sendAll": {
+    "action": "Invia al responsabile",
+    "done": "{{count}} giorni inviati al tuo responsabile."
+  },
+  "sheet": {
+    "title": "Foglio presenze e indennità",
+    "subtitle": "Foglio indennità",
+    "combinedSubtitle": "Foglio indennità riepilogativo",
+    "combinedTitle": "Foglio riepilogativo",
+    "combinedHint": "Scegli chi compare - una riga di totali per persona.",
+    "selectAll": "Tutti",
+    "selectNone": "Nessuno",
+    "employeeName": "Dipendente",
+    "employee": "Dipendente",
+    "employeesCount": "{{count}} dipendenti",
+    "periodFrom": "Periodo dal",
+    "periodTo": "al",
+    "day": "Giorno",
+    "date": "Data",
+    "in": "Entrata",
+    "out": "Uscita",
+    "site": "Sede",
+    "extraDays": "Giorni extra",
+    "overtimeHours": "Ore straordinarie",
+    "managerApproval": "Visto capo progetto",
+    "total": "Totale",
+    "grandTotal": "Totale dovuto",
+    "extraDaysValue": "Giorni extra",
+    "overtimeValue": "Ore straordinarie",
+    "days": "Giorni",
+    "allowances": "Indennità",
+    "extra": "Straordinari",
+    "noSite": "Nessuna sede",
+    "employeeSignature": "Firma del dipendente",
+    "projectManager": "Capo progetto",
+    "accounts": "Contabilità"
+  },
+  "sheets": {
+    "title": "Fogli indennità da approvare",
+    "hint": "Ogni foglio contiene tutti i giorni inviati - approvalo o rifiutalo in una volta. Aprilo per vedere i giorni.",
+    "line": "{{from}} - {{to}} · {{days}} giorni · totale {{total}}",
+    "openAction": "Apri"
   }
 }

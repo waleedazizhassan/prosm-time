@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import { useAppLayout } from "./LayoutContext";
@@ -11,6 +11,7 @@ import SidebarRadio from "./SidebarRadio";
 import { APP_VERSION } from "../../core/appVersion";
 import styles from "./Sidebar.module.css";
 
+const OPEN_SECTIONS_KEY = "prosm_time_sidebar_open_v1";
 const FOCUSABLE_SELECTOR = 'button:not(:disabled), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
 // PROSM Time - the application shell's left Sidebar navigation (§
@@ -76,6 +77,27 @@ export default function Sidebar() {
   // item in it permission-gated away) simply renders no heading.
   const sections = NAV_SECTION_ORDER.map((section) => ({ section, items: visibleItems.filter((item) => item.section === section) })).filter((group) => group.items.length > 0);
 
+  // Which tree branches the person opened or closed (remembered on this device).
+  const location = useLocation();
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>(() => {
+    try {
+      return JSON.parse(localStorage.getItem(OPEN_SECTIONS_KEY) ?? "{}") as Record<string, boolean>;
+    } catch {
+      return {};
+    }
+  });
+  const toggleSection = (section: string, open: boolean) => {
+    setOpenSections((current) => {
+      const next = { ...current, [section]: open };
+      try {
+        localStorage.setItem(OPEN_SECTIONS_KEY, JSON.stringify(next));
+      } catch {
+        // storage unavailable - the tree still works for this visit
+      }
+      return next;
+    });
+  };
+
   return (
     <>
       {mobileSidebarOpen ? <div className={styles.mobileBackdrop} onClick={closeMobileSidebar} aria-hidden="true" /> : null}
@@ -115,28 +137,46 @@ export default function Sidebar() {
         </div>
 
         <nav className={styles.navigation} aria-label={t("navigationLabel")}>
-          {sections.map((group) => (
-            <div key={group.section} className={styles.navSection}>
-              {!sidebarCollapsed ? <p className={styles.navSectionLabel}>{t(`sections.${group.section}`)}</p> : null}
-              {group.items.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <NavLink
-                    key={item.id}
-                    to={item.path}
-                    end
-                    className={({ isActive }) => [styles.item, isActive ? styles.active : ""].filter(Boolean).join(" ")}
-                    title={sidebarCollapsed ? t(item.labelKey) : undefined}
-                  >
-                    <span className={styles.itemIcon}>
-                      <Icon size={18} strokeWidth={2} />
-                    </span>
-                    {!sidebarCollapsed ? <span className={styles.itemLabel}>{t(item.labelKey)}</span> : null}
-                  </NavLink>
-                );
-              })}
-            </div>
-          ))}
+          {sections.map((group) => {
+            const renderItem = (item: (typeof group.items)[number]) => {
+              const Icon = item.icon;
+              return (
+                <NavLink
+                  key={item.id}
+                  to={item.path}
+                  end
+                  className={({ isActive }) => [styles.item, isActive ? styles.active : ""].filter(Boolean).join(" ")}
+                  title={sidebarCollapsed ? t(item.labelKey) : undefined}
+                >
+                  <span className={styles.itemIcon}>
+                    <Icon size={18} strokeWidth={2} />
+                  </span>
+                  {!sidebarCollapsed ? <span className={styles.itemLabel}>{t(item.labelKey)}</span> : null}
+                </NavLink>
+              );
+            };
+            // The rail, and a group of one, show the items themselves.
+            if (sidebarCollapsed || group.items.length === 1) {
+              return (
+                <div key={group.section} className={styles.navSection}>
+                  {group.items.map(renderItem)}
+                </div>
+              );
+            }
+            // Owner 2026-10-20: a tree - each group opens and closes; the one holding the current page opens itself.
+            const holdsCurrent = group.items.some((item) => location.pathname === item.path || location.pathname.startsWith(`${item.path}/`));
+            const open = openSections[group.section] ?? holdsCurrent;
+            return (
+              <div key={group.section} className={styles.navSection}>
+                <button type="button" className={[styles.branch, holdsCurrent ? styles.branchCurrent : ""].filter(Boolean).join(" ")} aria-expanded={open} onClick={() => toggleSection(group.section, !open)}>
+                  <ChevronDown size={14} className={[styles.branchChevron, open ? styles.branchChevronOpen : ""].filter(Boolean).join(" ")} />
+                  <span>{t(`sections.${group.section}`)}</span>
+                  <span className={styles.branchCount}>{group.items.length}</span>
+                </button>
+                {open ? <div className={styles.branchItems}>{group.items.map(renderItem)}</div> : null}
+              </div>
+            );
+          })}
         </nav>
 
         {/* § live UX review, user-directed - "on mobile, take the

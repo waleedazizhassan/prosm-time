@@ -17,7 +17,6 @@ import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
 import Table, { type TableColumn } from "../../components/common/Table";
 import SiteFormModal from "./SiteFormModal";
-import SitePolicySettingsCard from "../settings/SitePolicySettingsCard";
 import AssignSiteMemberModal from "./AssignSiteMemberModal";
 import ProjectFormModal from "./ProjectFormModal";
 import ProjectAssignmentsModal from "./ProjectAssignmentsModal";
@@ -188,14 +187,11 @@ export default function SiteDetailPage() {
       {/* Owner 2026-10-19: external workers belong to the organisation, not
           to one site; they are added (with an app-generated number) on the
           Workers page and clock in at the kiosk of any site. */}
-      {/* Owner 2026-10-20 (simpler settings): the site's working rules are here, on its own page. */}
-      <SitePolicySettingsCard siteId={site.id} />
-
-      <Card title={t("detail.workforceTitle")}>
-        <HintText>{t("detail.workforceMovedHint")}</HintText>
-        <Link to="/workers">
+      {/* Owner 2026-10-20: every setting is on the Settings page - the site's rules open there, already chosen. */}
+      <Card title={t("detail.rulesTitle")} subtitle={t("detail.rulesHint")}>
+        <Link to={`/settings?site=${site.id}`}>
           <Button variant="ghost" size="sm">
-            {t("detail.workforceOpenAction")}
+            {t("detail.rulesAction")}
           </Button>
         </Link>
       </Card>
