@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../core/context/AuthContext";
 import AllowanceRepository, { type AllowanceEntry, type AllowanceEntryInput } from "../../core/repositories/AllowanceRepository";
+import AllowanceRatesRepository, { RATE_FIELDS, type MySiteRates } from "../../core/repositories/AllowanceRatesRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import savePdfDocument, { printPdfDocument } from "../../core/utils/savePdfDocument";
@@ -40,6 +42,31 @@ const EMPTY_INPUT: AllowanceEntryInput = {
   otherAllowance: 0,
   otherAllowanceNote: null,
 };
+
+// Owner 2026-10-20: a day's allowances in money - the amounts plus priced overtime and extra days.
+function entryTotal(entry: AllowanceEntry): number {
+  return (
+    entry.mealAllowance +
+    entry.expatriationAllowance +
+    entry.transportationAllowance +
+    entry.housingAllowance +
+    entry.travelAllowance +
+    entry.otherAllowance +
+    entry.overtimeAmount +
+    entry.extraDaysAmount
+  );
+}
+
+const TOTALS: [string, (entry: AllowanceEntry) => number][] = [
+  ["meal", (entry) => entry.mealAllowance],
+  ["expatriation", (entry) => entry.expatriationAllowance],
+  ["transportation", (entry) => entry.transportationAllowance],
+  ["housing", (entry) => entry.housingAllowance],
+  ["travel", (entry) => entry.travelAllowance],
+  ["other", (entry) => entry.otherAllowance],
+  ["overtimeAmount", (entry) => entry.overtimeAmount + entry.extraDaysAmount],
+  ["total", entryTotal],
+];
 
 function isoDate(date: Date): string {
   return date.toISOString().slice(0, 10);
@@ -79,7 +106,12 @@ function parseAmountInput(raw: string): number {
 export default function AllowancesPage() {
   const { t, i18n } = useTranslation("allowances");
   const { profile, hasPermission } = useAuth();
+  const navigate = useNavigate();
   const canApprove = hasPermission("allowances.approve");
+  const isOwner = Boolean(profile?.isOwner);
+  const [myRates, setMyRates] = useState<MySiteRates[]>([]);
+  const [filling, setFilling] = useState(false);
+  const [fillMessage, setFillMessage] = useState("");
 
   const today = new Date();
   const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -124,6 +156,27 @@ export default function AllowancesPage() {
   useEffect(() => {
     load();
   }, [load]);
+
+  // The prices that apply to the reader (the Owner does not clock in, so has none).
+  useEffect(() => {
+    if (isOwner) return;
+    AllowanceRatesRepository.myRates().then((result) => setMyRates(result.success ? (result.data ?? []) : []));
+  }, [isOwner]);
+
+  // Owner 2026-10-20: every day worked in the period, filled from the prices in one tap.
+  const handleFill = async () => {
+    setFilling(true);
+    setFillMessage("");
+    setAddError("");
+    const result = await AllowanceRepository.fillFromAttendance(startDate, endDate);
+    setFilling(false);
+    if (!result.success) {
+      setAddError(humanizeBackendError(result.message, t) ?? t("addError"));
+      return;
+    }
+    setFillMessage(t("fill.done", { count: result.data?.filled ?? 0 }));
+    await load();
+  };
 
   useEffect(() => {
     OrganizationRepository.getCurrentOrganization().then((result) => {
@@ -260,6 +313,8 @@ export default function AllowancesPage() {
     { key: "housing", header: t("columns.housing"), render: (entry) => entry.housingAllowance.toFixed(2) },
     { key: "travel", header: t("columns.travel"), render: (entry) => entry.travelAllowance.toFixed(2) },
     { key: "other", header: t("columns.other"), render: (entry) => entry.otherAllowance.toFixed(2) },
+    { key: "overtimeAmount", header: t("columns.overtimeAmount"), render: (entry) => (entry.overtimeAmount + entry.extraDaysAmount).toFixed(2) },
+    { key: "total", header: t("columns.total"), render: (entry) => <strong>{entryTotal(entry).toFixed(2)}</strong> },
     { key: "status", header: t("columns.status"), render: (entry) => <StatusBadge status={STATUS_BADGE_KEY[entry.status]}>{t(`status.${entry.status}`)}</StatusBadge> },
   ];
 
@@ -267,7 +322,12 @@ export default function AllowancesPage() {
     <PageShell title="">
       <PageBanner pageId="allowances" illustration={allowancesHeaderImage} />
 
-      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "var(--space-4)" }}>
+      <div style={{ display: "flex", justifyContent: "flex-end", flexWrap: "wrap", gap: "var(--space-2)", marginBottom: "var(--space-4)" }}>
+        {canApprove || isOwner ? (
+          <Button variant="ghost" onClick={() => navigate("/allowances/prices")}>
+            {t("prices.openAction")}
+          </Button>
+        ) : null}
         <Button variant="ghost" onClick={() => handleExportPdf("print")} loading={exportingPdf} disabled={filteredEntries.length === 0}>
           {t("common:actions.print")}
         </Button>
@@ -286,21 +346,57 @@ export default function AllowancesPage() {
         </div>
       </Card>
 
-      <Card title={t("addEntry.title")}>
-        <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("addEntry.hint")}</p>
-        <ErrorText>{addError}</ErrorText>
-        <div style={{ display: "flex", gap: "var(--space-3)", alignItems: "flex-end" }}>
-          <Input label={t("addEntry.dateLabel")} name="newAllowanceEntryDate" type="date" value={newEntryDate} onChange={(event) => setNewEntryDate(event.target.value)} />
-          <Button onClick={handleAddEntry} loading={addingEntry} disabled={!newEntryDate}>
-            {t("addEntry.action")}
-          </Button>
-        </div>
-      </Card>
+      {isOwner ? null : (
+        <Card title={t("addEntry.title")} subtitle={t("fill.hint")}>
+          <ErrorText>{addError}</ErrorText>
+          {fillMessage ? <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-sm)", color: "var(--status-success-text)" }}>{fillMessage}</p> : null}
+          <div style={{ display: "flex", gap: "var(--space-3)", alignItems: "flex-end", flexWrap: "wrap" }}>
+            <Button onClick={handleFill} loading={filling}>
+              {t("fill.action")}
+            </Button>
+            <Input label={t("addEntry.dateLabel")} name="newAllowanceEntryDate" type="date" value={newEntryDate} onChange={(event) => setNewEntryDate(event.target.value)} />
+            <Button variant="ghost" onClick={handleAddEntry} loading={addingEntry} disabled={!newEntryDate}>
+              {t("addEntry.action")}
+            </Button>
+          </div>
+        </Card>
+      )}
 
-      <Card>
+      <Card flush>
         <ErrorText>{loadError}</ErrorText>
         <Table columns={columns} data={filteredEntries} getRowId={(entry) => entry.id} loading={loading} emptyMessage={t("empty")} onRowClick={openDetail} />
       </Card>
+
+      {filteredEntries.length > 0 ? (
+        <Card title={t("totals.title")}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: "var(--space-3)" }}>
+            {TOTALS.map(([key, pick]) => (
+              <div key={key} style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", background: key === "total" ? "var(--brand-gradient-soft), var(--surface-sunken)" : "var(--surface-sunken)" }}>
+                <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t(`columns.${key}`)}</div>
+                <div style={{ fontSize: "var(--font-lg)", fontWeight: 700 }}>{filteredEntries.reduce((sum, entry) => sum + pick(entry), 0).toFixed(2)}</div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      ) : null}
+
+      {myRates.length > 0 ? (
+        <Card title={t("myPrices.title")} subtitle={t("myPrices.hint")} flush>
+          <Table
+            columns={[
+              { key: "site", header: t("columns.site"), render: (row: MySiteRates) => row.siteName },
+              ...RATE_FIELDS.map((field) => ({
+                key: field,
+                header: t(`prices.field.${field}`),
+                render: (row: MySiteRates) => (row.rates[field] === null || row.rates[field] === undefined ? "—" : Number(row.rates[field]).toFixed(2)),
+              })),
+            ]}
+            data={myRates}
+            getRowId={(row) => row.siteId}
+            emptyMessage=""
+          />
+        </Card>
+      ) : null}
 
       <Modal
         isOpen={Boolean(detailEntry)}
@@ -352,6 +448,9 @@ export default function AllowancesPage() {
             ) : null}
             <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>
               {t("detail.overtimeLine", { hours: detailEntry.overtimeHours.toFixed(2), days: detailEntry.overtimeDays.toFixed(1) })}
+              {detailEntry.overtimeAmount + detailEntry.extraDaysAmount > 0
+                ? ` · ${t("detail.overtimeValueLine", { amount: (detailEntry.overtimeAmount + detailEntry.extraDaysAmount).toFixed(2) })}`
+                : ""}
             </p>
 
             <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>

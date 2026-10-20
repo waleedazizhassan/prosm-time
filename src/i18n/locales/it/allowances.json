@@ -36,7 +36,9 @@
     "housing": "Alloggio",
     "travel": "Viaggio",
     "other": "Altro",
-    "status": "Stato"
+    "status": "Stato",
+    "overtimeAmount": "Valore straordinari",
+    "total": "Totale"
   },
   "status": {
     "draft": "Bozza",
@@ -57,6 +59,67 @@
     "totalsLabel": "Totali",
     "reviewNotesLabel": "Note di revisione (facoltativo)",
     "daySessionsLine": "{{count}} sessioni in questo giorno · {{hours}} h {{minutes}} min lavorati",
-    "reviewNotesLine": "Nota del revisore: {{notes}}"
+    "reviewNotesLine": "Nota del revisore: {{notes}}",
+    "overtimeValueLine": "del valore di {{amount}}"
+  },
+  "totals": {
+    "title": "Totali del periodo"
+  },
+  "fill": {
+    "hint": "Un tocco compila ogni giorno lavorato nel periodo dalle tue tariffe - aggiungi solo ciò che non ha tariffa (il viaggio, per esempio) e invia.",
+    "action": "Compila dalle mie presenze",
+    "done": "{{count}} giorni compilati."
+  },
+  "myPrices": {
+    "title": "Le mie tariffe",
+    "hint": "Con cosa si compila ogni giorno lavorato, per sede. Un trattino: lo inserisci tu."
+  },
+  "prices": {
+    "openAction": "Tariffe",
+    "title": "Tariffe delle indennità",
+    "howItWorks": "Ogni giorno lavorato si compila da queste tariffe. Prima la tariffa della sede, poi della categoria, poi quella personale - vale l'ultima. Lascia vuoto per ereditare; un'indennità senza tariffa la inserisce il dipendente.",
+    "backToAllowances": "Torna alle indennità",
+    "sitesTitle": "Tariffe per sede",
+    "sitesHint": "La tariffa giornaliera di ogni indennità in ogni sede, e il prezzo di un'ora di straordinario e di un giorno extra.",
+    "noSites": "Nessuna sede ancora.",
+    "categoriesTitle": "Categorie",
+    "categoriesHint": "Gruppi di personale con tariffe proprie - ingegneri, tecnici, operai... - per tutte le sedi o per una.",
+    "addCategory": "Aggiungi categoria",
+    "noCategories": "Nessuna categoria. Esempio: i \"Tecnici\" hanno 200 di trasferta alla Capitale e 150 in Fabbrica.",
+    "editAction": "Tariffe",
+    "renameAction": "Rinomina",
+    "deleteAction": "Elimina",
+    "deleteCategoryConfirm": "Eliminare la categoria \"{{name}}\" e le sue tariffe? I suoi membri tornano alle tariffe delle sedi.",
+    "peopleTitle": "Persone",
+    "peopleHint": "Metti ogni persona in una categoria, o dai a qualcuno tariffe proprie.",
+    "noPeople": "Nessuna persona ancora.",
+    "categoryColumn": "Categoria",
+    "noCategory": "Nessuna categoria",
+    "personalAction": "Tariffe proprie",
+    "editTitle": "Tariffe - {{name}}",
+    "saveAction": "Salva",
+    "blankInherits": "Una tariffa vuota è presa dal livello precedente (sede, poi categoria).",
+    "categoryName": "Nome della categoria",
+    "categoryExample": "Ingegneri",
+    "everySite": "Tutte le sedi",
+    "forColumn": "Per",
+    "invalidPrice": "Una tariffa deve essere un numero pari o superiore a zero.",
+    "saveError": "Impossibile salvare le tariffe.",
+    "loadError": "Impossibile caricare le tariffe.",
+    "notAllowed": "Solo il titolare e chi approva le indennità imposta le tariffe.",
+    "field": {
+      "meal": "Vitto",
+      "expatriation": "Trasferta",
+      "transportation": "Trasporto",
+      "housing": "Alloggio",
+      "travel": "Viaggio",
+      "other": "Altro",
+      "overtimeHour": "Ora di straordinario",
+      "extraDay": "Giorno extra"
+    }
+  },
+  "pdf": {
+    "employeeSignature": "Firma del dipendente",
+    "managerApproval": "Approvazione del capo progetto"
   }
 }

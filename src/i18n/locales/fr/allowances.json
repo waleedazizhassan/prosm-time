@@ -36,7 +36,9 @@
     "housing": "Logement",
     "travel": "Voyage",
     "other": "Autre",
-    "status": "Statut"
+    "status": "Statut",
+    "overtimeAmount": "Valeur des heures sup.",
+    "total": "Total"
   },
   "status": {
     "draft": "Brouillon",
@@ -57,6 +59,67 @@
     "totalsLabel": "Totaux",
     "reviewNotesLabel": "Notes de révision (facultatif)",
     "daySessionsLine": "{{count}} sessions ce jour · {{hours}} h {{minutes}} min travaillées",
-    "reviewNotesLine": "Note du réviseur : {{notes}}"
+    "reviewNotesLine": "Note du réviseur : {{notes}}",
+    "overtimeValueLine": "d'une valeur de {{amount}}"
+  },
+  "totals": {
+    "title": "Totaux de la période"
+  },
+  "fill": {
+    "hint": "Un seul geste remplit chaque jour travaillé de la période à partir de vos tarifs - ajoutez seulement ce qui n'a pas de tarif (le déplacement, par exemple), puis envoyez.",
+    "action": "Remplir depuis ma présence",
+    "done": "{{count}} jours remplis."
+  },
+  "myPrices": {
+    "title": "Mes tarifs d'indemnités",
+    "hint": "Ce qui remplit chaque jour travaillé, par site. Un tiret : vous le saisissez vous-même."
+  },
+  "prices": {
+    "openAction": "Tarifs",
+    "title": "Tarifs des indemnités",
+    "howItWorks": "Chaque jour travaillé se remplit à partir de ces tarifs. D'abord le tarif du site, puis celui de la catégorie, puis celui de la personne - le dernier l'emporte. Laissez vide pour hériter ; une indemnité sans tarif est saisie par l'employé.",
+    "backToAllowances": "Retour aux indemnités",
+    "sitesTitle": "Tarifs par site",
+    "sitesHint": "Le tarif journalier de chaque indemnité sur chaque site, et le prix d'une heure supplémentaire et d'un jour supplémentaire.",
+    "noSites": "Aucun site pour l'instant.",
+    "categoriesTitle": "Catégories",
+    "categoriesHint": "Des groupes de personnel avec leurs propres tarifs - ingénieurs, techniciens, ouvriers... - pour tous les sites ou un seul.",
+    "addCategory": "Ajouter une catégorie",
+    "noCategories": "Aucune catégorie. Exemple : les « Techniciens » ont 200 d'expatriation à la Capitale et 150 à l'Usine.",
+    "editAction": "Tarifs",
+    "renameAction": "Renommer",
+    "deleteAction": "Supprimer",
+    "deleteCategoryConfirm": "Supprimer la catégorie « {{name}} » et ses tarifs ? Ses membres reviennent aux tarifs des sites.",
+    "peopleTitle": "Personnes",
+    "peopleHint": "Placez chaque personne dans une catégorie, ou donnez à quelqu'un ses propres tarifs.",
+    "noPeople": "Aucune personne pour l'instant.",
+    "categoryColumn": "Catégorie",
+    "noCategory": "Sans catégorie",
+    "personalAction": "Tarifs propres",
+    "editTitle": "Tarifs - {{name}}",
+    "saveAction": "Enregistrer",
+    "blankInherits": "Un tarif vide est repris du niveau précédent (site, puis catégorie).",
+    "categoryName": "Nom de la catégorie",
+    "categoryExample": "Ingénieurs",
+    "everySite": "Tous les sites",
+    "forColumn": "Pour",
+    "invalidPrice": "Un tarif doit être un nombre supérieur ou égal à zéro.",
+    "saveError": "Impossible d'enregistrer les tarifs.",
+    "loadError": "Impossible de charger les tarifs.",
+    "notAllowed": "Seuls le propriétaire et ceux qui approuvent les indemnités fixent les tarifs.",
+    "field": {
+      "meal": "Repas",
+      "expatriation": "Expatriation",
+      "transportation": "Transport",
+      "housing": "Logement",
+      "travel": "Déplacement",
+      "other": "Autre",
+      "overtimeHour": "Heure supplémentaire",
+      "extraDay": "Jour supplémentaire"
+    }
+  },
+  "pdf": {
+    "employeeSignature": "Signature de l'employé",
+    "managerApproval": "Approbation du chef de projet"
   }
 }

@@ -17,7 +17,10 @@ const byOrg = "select id from %t where organization_id = $1";
 const byUser = "select id from %t where user_id in (select id from users where organization_id = $1)";
 const TABLES: Record<string, string> = {
   admin_on_behalf_actions: byOrg,
+  allowance_categories: byOrg,
+  allowance_category_members: "select user_id as id from allowance_category_members where organization_id = $1",
   allowance_entries: byOrg,
+  allowance_rates: byOrg,
   api_keys: byOrg,
   attendance_events: "select id from attendance_events where session_id in (select id from attendance_sessions where organization_id = $1)",
   attendance_sessions: byOrg,

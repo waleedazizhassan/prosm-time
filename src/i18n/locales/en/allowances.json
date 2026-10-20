@@ -36,7 +36,9 @@
     "housing": "Housing",
     "travel": "Travel",
     "other": "Other",
-    "status": "Status"
+    "status": "Status",
+    "overtimeAmount": "Overtime value",
+    "total": "Total"
   },
   "status": {
     "draft": "Draft",
@@ -57,6 +59,67 @@
     "totalsLabel": "Totals",
     "reviewNotesLabel": "Review notes (optional)",
     "daySessionsLine": "{{count}} sessions this day · {{hours}} h {{minutes}} min worked",
-    "reviewNotesLine": "Reviewer's note: {{notes}}"
+    "reviewNotesLine": "Reviewer's note: {{notes}}",
+    "overtimeValueLine": "worth {{amount}}"
+  },
+  "totals": {
+    "title": "Totals for this period"
+  },
+  "fill": {
+    "hint": "One tap fills every day you worked in this period from your allowance prices - add only what has no price (travel, for example), then submit.",
+    "action": "Fill from my attendance",
+    "done": "{{count}} days filled."
+  },
+  "myPrices": {
+    "title": "My allowance prices",
+    "hint": "What each worked day is filled with, by site. A dash means you type it yourself."
+  },
+  "prices": {
+    "openAction": "Prices",
+    "title": "Allowance prices",
+    "howItWorks": "Each worked day fills itself from these prices. The site's price comes first, then the category's, then the person's own - the later wins. Leave a price blank to inherit it; an allowance priced at nothing is typed by the employee.",
+    "backToAllowances": "Back to allowances",
+    "sitesTitle": "Site prices",
+    "sitesHint": "The daily price of each allowance at each site, and the price of an overtime hour and an extra day.",
+    "noSites": "No sites yet.",
+    "categoriesTitle": "Categories",
+    "categoriesHint": "Groups of staff with their own prices - engineers, technicians, workers... - for every site or for one site.",
+    "addCategory": "Add category",
+    "noCategories": "No categories yet. Example: \"Technicians\" get 200 expatriation at the Capital and 150 at the Factory.",
+    "editAction": "Prices",
+    "renameAction": "Rename",
+    "deleteAction": "Delete",
+    "deleteCategoryConfirm": "Delete the category \"{{name}}\" and its prices? Its people go back to the site prices.",
+    "peopleTitle": "People",
+    "peopleHint": "Put each person in a category, or give someone their own prices.",
+    "noPeople": "No people yet.",
+    "categoryColumn": "Category",
+    "noCategory": "No category",
+    "personalAction": "Own prices",
+    "editTitle": "Prices - {{name}}",
+    "saveAction": "Save",
+    "blankInherits": "A blank price is taken from the level before (site, then category).",
+    "categoryName": "Category name",
+    "categoryExample": "Engineers",
+    "everySite": "Every site",
+    "forColumn": "For",
+    "invalidPrice": "A price must be a number of zero or more.",
+    "saveError": "Unable to save the prices.",
+    "loadError": "Unable to load the prices.",
+    "notAllowed": "Only the Owner and those who approve allowances set prices.",
+    "field": {
+      "meal": "Meal",
+      "expatriation": "Expatriation",
+      "transportation": "Transportation",
+      "housing": "Housing",
+      "travel": "Travel",
+      "other": "Other",
+      "overtimeHour": "Overtime hour",
+      "extraDay": "Extra day"
+    }
+  },
+  "pdf": {
+    "employeeSignature": "Employee's signature",
+    "managerApproval": "Project manager's approval"
   }
 }

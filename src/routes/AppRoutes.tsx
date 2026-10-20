@@ -34,6 +34,7 @@ const AttendanceLogPage = lazy(() => import("../modules/attendance/AttendanceLog
 const TimesheetsPage = lazy(() => import("../modules/timesheets/TimesheetsPage"));
 const TimesheetReportPage = lazy(() => import("../modules/timesheets/TimesheetReportPage"));
 const AllowancesPage = lazy(() => import("../modules/allowances/AllowancesPage"));
+const AllowancePricesPage = lazy(() => import("../modules/allowances/AllowancePricesPage"));
 const LeaveRequestsPage = lazy(() => import("../modules/leave/LeaveRequestsPage"));
 const SchedulePage = lazy(() => import("../modules/schedule/SchedulePage"));
 const EmergencyLogPage = lazy(() => import("../modules/emergency/EmergencyLogPage"));
@@ -127,6 +128,7 @@ export default function AppRoutes() {
             <Route path="/timesheets" element={<TimesheetsPage />} />
             <Route path="/timesheets/:timesheetId/report" element={<TimesheetReportPage />} />
             <Route path="/allowances" element={<AllowancesPage />} />
+            <Route path="/allowances/prices" element={<AllowancePricesPage />} />
             <Route path="/leave" element={<LeaveRequestsPage />} />
             <Route path="/schedule" element={<SchedulePage />} />
             <Route path="/emergency-log" element={<EmergencyLogPage />} />

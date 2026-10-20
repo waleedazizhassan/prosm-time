@@ -30,6 +30,9 @@ export interface AllowanceEntry {
   otherAllowanceNote: string | null;
   overtimeHours: number;
   overtimeDays: number;
+  // Owner 2026-10-20: overtime hours and extra days priced from the allowance prices.
+  overtimeAmount: number;
+  extraDaysAmount: number;
   status: AllowanceEntryStatus;
   submittedAt: string | null;
   approvedAt: string | null;
@@ -68,6 +71,8 @@ interface AllowanceEntryRow {
   other_allowance_note: string | null;
   overtime_hours: number;
   overtime_days: number;
+  overtime_amount?: number;
+  extra_days_amount?: number;
   status: AllowanceEntryStatus;
   submitted_at: string | null;
   approved_at: string | null;
@@ -102,6 +107,8 @@ function mapEntryRow(row: AllowanceEntryRow): AllowanceEntry {
     otherAllowanceNote: row.other_allowance_note,
     overtimeHours: row.overtime_hours,
     overtimeDays: row.overtime_days,
+    overtimeAmount: Number(row.overtime_amount ?? 0),
+    extraDaysAmount: Number(row.extra_days_amount ?? 0),
     status: row.status,
     submittedAt: row.submitted_at,
     approvedAt: row.approved_at,
@@ -138,7 +145,7 @@ function localDate(iso: string): string {
 }
 
 const ENTRY_SELECT =
-  "id, user_id, entry_date, meal_allowance, expatriation_allowance, transportation_allowance, housing_allowance, travel_allowance, other_allowance, other_allowance_note, overtime_hours, overtime_days, status, submitted_at, approved_at, review_notes, users!allowance_entries_user_id_fkey(full_name), attendance_sessions(clock_in_at, clock_out_at, manual_location_label, sites!attendance_sessions_site_id_fkey(name))";
+  "id, user_id, entry_date, meal_allowance, expatriation_allowance, transportation_allowance, housing_allowance, travel_allowance, other_allowance, other_allowance_note, overtime_hours, overtime_days, overtime_amount, extra_days_amount, status, submitted_at, approved_at, review_notes, users!allowance_entries_user_id_fkey(full_name), attendance_sessions(clock_in_at, clock_out_at, manual_location_label, sites!attendance_sessions_site_id_fkey(name))";
 
 // PROSM Time - Allowances (2026-09-02 plan). Reads are RLS-scoped
 // (self always; a Manager's own managed sites' people; everyone for
@@ -216,6 +223,18 @@ class AllowanceRepository {
       }
       if (data?.success === false) return createError(data?.error?.message ?? "Unable to save this allowance entry.");
       return createSuccess({ entryId: data.data.entryId });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Allowances service unavailable.");
+    }
+  }
+
+  // Owner 2026-10-20: every day worked in the period, filled from the allowance prices
+  // (days already started are left as they are).
+  async fillFromAttendance(from: string, to: string): Promise<ServiceResult<{ filled: number }>> {
+    try {
+      const { data, error } = await this.client.rpc("fill_prosm_time_allowances", { p_from: from, p_to: to });
+      if (error) return createError(error.message);
+      return createSuccess({ filled: Number((data as { filled?: number } | null)?.filled ?? 0) });
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Allowances service unavailable.");
     }
