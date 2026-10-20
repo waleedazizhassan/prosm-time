@@ -45,7 +45,8 @@ describe("notificationTarget", () => {
       expect(notificationTarget({ type }, supervisor)).toBe("/manager");
     }
     expect(notificationTarget({ type: "out_of_zone_employee" }, employee)).toBe("/dashboard");
-    expect(notificationTarget({ type: "trial_ending" }, owner)).toBe("/settings");
+    expect(notificationTarget({ type: "trial_ending" }, owner)).toBe("/activate");
+    expect(notificationTarget({ type: "allowance_rejected" }, supervisor)).toBe("/allowances");
     expect(notificationTarget({ type: "trial_ended" }, supervisor)).toBe("/dashboard");
     expect(notificationTarget({ type: "break_exceeded" }, employee)).toBe("/dashboard");
     expect(notificationTarget(undefined, employee)).toBe("/dashboard");

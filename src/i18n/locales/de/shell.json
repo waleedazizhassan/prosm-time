@@ -141,6 +141,14 @@
       "rejected": "Abgelehnt",
       "acknowledged": "Zur Kenntnis genommen",
       "clarification_requested": "Klärung angefordert"
+    },
+    "allowance": {
+      "submittedTitle": "Zulagen warten auf Freigabe",
+      "submittedBody": "{{name}} hat Zulagen für den {{date}} eingereicht.",
+      "approvedTitle": "Zulagen genehmigt",
+      "approvedBody": "Ihre Zulagen für den {{date}} wurden genehmigt.",
+      "rejectedTitle": "Zulagen abgelehnt",
+      "rejectedBody": "Ihre Zulagen für den {{date}} wurden abgelehnt. Sie können sie bearbeiten und erneut einreichen."
     }
   },
   "items": {

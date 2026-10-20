@@ -141,6 +141,14 @@
       "rejected": "Rejected",
       "acknowledged": "Acknowledged",
       "clarification_requested": "Clarification requested"
+    },
+    "allowance": {
+      "submittedTitle": "Allowances waiting for approval",
+      "submittedBody": "{{name}} submitted allowances for {{date}}.",
+      "approvedTitle": "Allowances approved",
+      "approvedBody": "Your allowances for {{date}} were approved.",
+      "rejectedTitle": "Allowances rejected",
+      "rejectedBody": "Your allowances for {{date}} were rejected. You can edit them and send them again."
     }
   },
   "items": {

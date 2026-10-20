@@ -33,6 +33,8 @@ export interface AllowanceEntry {
   status: AllowanceEntryStatus;
   submittedAt: string | null;
   approvedAt: string | null;
+  // Owner 2026-10-20: the reviewer's note on the decision (why it was rejected).
+  reviewNotes: string | null;
 }
 
 export interface AllowanceEntryInput {
@@ -69,6 +71,7 @@ interface AllowanceEntryRow {
   status: AllowanceEntryStatus;
   submitted_at: string | null;
   approved_at: string | null;
+  review_notes: string | null;
   users: { full_name: string } | { full_name: string }[] | null;
   attendance_sessions:
     | { clock_in_at: string; clock_out_at: string | null; manual_location_label: string | null; sites: { name: string } | { name: string }[] | null }
@@ -102,6 +105,7 @@ function mapEntryRow(row: AllowanceEntryRow): AllowanceEntry {
     status: row.status,
     submittedAt: row.submitted_at,
     approvedAt: row.approved_at,
+    reviewNotes: row.review_notes ?? null,
   };
 }
 
@@ -134,7 +138,7 @@ function localDate(iso: string): string {
 }
 
 const ENTRY_SELECT =
-  "id, user_id, entry_date, meal_allowance, expatriation_allowance, transportation_allowance, housing_allowance, travel_allowance, other_allowance, other_allowance_note, overtime_hours, overtime_days, status, submitted_at, approved_at, users!allowance_entries_user_id_fkey(full_name), attendance_sessions(clock_in_at, clock_out_at, manual_location_label, sites(name))";
+  "id, user_id, entry_date, meal_allowance, expatriation_allowance, transportation_allowance, housing_allowance, travel_allowance, other_allowance, other_allowance_note, overtime_hours, overtime_days, status, submitted_at, approved_at, review_notes, users!allowance_entries_user_id_fkey(full_name), attendance_sessions(clock_in_at, clock_out_at, manual_location_label, sites(name))";
 
 // PROSM Time - Allowances (2026-09-02 plan). Reads are RLS-scoped
 // (self always; a Manager's own managed sites' people; everyone for

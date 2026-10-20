@@ -88,6 +88,14 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "rejected": "تم الرفض",
         "acknowledged": "تم الاطلاع",
         "clarification_requested": "مطلوب توضيح"
+      },
+      "allowance": {
+        "submittedTitle": "بدلات بانتظار الاعتماد",
+        "submittedBody": "أرسل {{name}} بدلات يوم {{date}} للاعتماد.",
+        "approvedTitle": "تم اعتماد البدلات",
+        "approvedBody": "تم اعتماد بدلاتك ليوم {{date}}.",
+        "rejectedTitle": "تم رفض البدلات",
+        "rejectedBody": "تم رفض بدلاتك ليوم {{date}}. يمكنك تعديلها وإرسالها مرة أخرى."
       }
     },
     "leaveTypes": {
@@ -184,6 +192,14 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "rejected": "Rejected",
         "acknowledged": "Acknowledged",
         "clarification_requested": "Clarification requested"
+      },
+      "allowance": {
+        "submittedTitle": "Allowances waiting for approval",
+        "submittedBody": "{{name}} submitted allowances for {{date}}.",
+        "approvedTitle": "Allowances approved",
+        "approvedBody": "Your allowances for {{date}} were approved.",
+        "rejectedTitle": "Allowances rejected",
+        "rejectedBody": "Your allowances for {{date}} were rejected. You can edit them and send them again."
       }
     },
     "leaveTypes": {
@@ -280,6 +296,14 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "rejected": "Abgelehnt",
         "acknowledged": "Zur Kenntnis genommen",
         "clarification_requested": "Klärung angefordert"
+      },
+      "allowance": {
+        "submittedTitle": "Zulagen warten auf Freigabe",
+        "submittedBody": "{{name}} hat Zulagen für den {{date}} eingereicht.",
+        "approvedTitle": "Zulagen genehmigt",
+        "approvedBody": "Ihre Zulagen für den {{date}} wurden genehmigt.",
+        "rejectedTitle": "Zulagen abgelehnt",
+        "rejectedBody": "Ihre Zulagen für den {{date}} wurden abgelehnt. Sie können sie bearbeiten und erneut einreichen."
       }
     },
     "leaveTypes": {
@@ -376,6 +400,14 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "rejected": "Rejeté",
         "acknowledged": "Pris en compte",
         "clarification_requested": "Clarification demandée"
+      },
+      "allowance": {
+        "submittedTitle": "Indemnités en attente d'approbation",
+        "submittedBody": "{{name}} a soumis des indemnités pour le {{date}}.",
+        "approvedTitle": "Indemnités approuvées",
+        "approvedBody": "Vos indemnités du {{date}} ont été approuvées.",
+        "rejectedTitle": "Indemnités refusées",
+        "rejectedBody": "Vos indemnités du {{date}} ont été refusées. Vous pouvez les modifier et les renvoyer."
       }
     },
     "leaveTypes": {
@@ -472,6 +504,14 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "rejected": "Rifiutato",
         "acknowledged": "Preso atto",
         "clarification_requested": "Chiarimento richiesto"
+      },
+      "allowance": {
+        "submittedTitle": "Indennità in attesa di approvazione",
+        "submittedBody": "{{name}} ha inviato le indennità del {{date}}.",
+        "approvedTitle": "Indennità approvate",
+        "approvedBody": "Le tue indennità del {{date}} sono state approvate.",
+        "rejectedTitle": "Indennità rifiutate",
+        "rejectedBody": "Le tue indennità del {{date}} sono state rifiutate. Puoi modificarle e inviarle di nuovo."
       }
     },
     "leaveTypes": {

@@ -56,6 +56,7 @@
     "otherNoteLabel": "Notiz (für „Sonstiges“)",
     "totalsLabel": "Summen",
     "reviewNotesLabel": "Prüfnotizen (optional)",
-    "daySessionsLine": "{{count}} Sitzungen an diesem Tag · {{hours}} Std. {{minutes}} Min. gearbeitet"
+    "daySessionsLine": "{{count}} Sitzungen an diesem Tag · {{hours}} Std. {{minutes}} Min. gearbeitet",
+    "reviewNotesLine": "Anmerkung des Prüfers: {{notes}}"
   }
 }

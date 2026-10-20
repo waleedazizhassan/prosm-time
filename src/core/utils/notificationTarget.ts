@@ -39,12 +39,14 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
       return "/schedule";
     case "trial_ending":
     case "trial_ended":
-      return viewer.isOwner ? "/settings" : "/dashboard";
+      // The activation code is entered on its own page.
+      return viewer.isOwner ? "/activate" : "/dashboard";
     case "out_of_zone_employee":
       return "/dashboard";
   }
   // timesheet_ready/submitted/approved/rejected and timesheet_correction_*:
   // the Timesheets page (not the read-only report).
   if (type.startsWith("timesheet_")) return "/timesheets";
+  if (type.startsWith("allowance_")) return "/allowances";
   return "/dashboard";
 }

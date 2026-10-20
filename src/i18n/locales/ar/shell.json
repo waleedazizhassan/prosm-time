@@ -141,6 +141,14 @@
       "rejected": "تم الرفض",
       "acknowledged": "تم الاطلاع",
       "clarification_requested": "مطلوب توضيح"
+    },
+    "allowance": {
+      "submittedTitle": "بدلات بانتظار الاعتماد",
+      "submittedBody": "أرسل {{name}} بدلات يوم {{date}} للاعتماد.",
+      "approvedTitle": "تم اعتماد البدلات",
+      "approvedBody": "تم اعتماد بدلاتك ليوم {{date}}.",
+      "rejectedTitle": "تم رفض البدلات",
+      "rejectedBody": "تم رفض بدلاتك ليوم {{date}}. يمكنك تعديلها وإرسالها مرة أخرى."
     }
   },
   "items": {

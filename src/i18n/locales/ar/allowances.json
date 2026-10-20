@@ -56,6 +56,7 @@
     "otherNoteLabel": "ملاحظة (لبند \"أخرى\")",
     "totalsLabel": "الإجمالي",
     "reviewNotesLabel": "ملاحظات المراجعة (اختياري)",
-    "daySessionsLine": "{{count}} جلسات في هذا اليوم · {{hours}} س {{minutes}} د عمل"
+    "daySessionsLine": "{{count}} جلسات في هذا اليوم · {{hours}} س {{minutes}} د عمل",
+    "reviewNotesLine": "ملاحظة المراجع: {{notes}}"
   }
 }

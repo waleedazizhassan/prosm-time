@@ -141,6 +141,14 @@
       "rejected": "Rejeté",
       "acknowledged": "Pris en compte",
       "clarification_requested": "Clarification demandée"
+    },
+    "allowance": {
+      "submittedTitle": "Indemnités en attente d'approbation",
+      "submittedBody": "{{name}} a soumis des indemnités pour le {{date}}.",
+      "approvedTitle": "Indemnités approuvées",
+      "approvedBody": "Vos indemnités du {{date}} ont été approuvées.",
+      "rejectedTitle": "Indemnités refusées",
+      "rejectedBody": "Vos indemnités du {{date}} ont été refusées. Vous pouvez les modifier et les renvoyer."
     }
   },
   "items": {

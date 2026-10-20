@@ -56,6 +56,7 @@
     "otherNoteLabel": "Note (pour « Autre »)",
     "totalsLabel": "Totaux",
     "reviewNotesLabel": "Notes de révision (facultatif)",
-    "daySessionsLine": "{{count}} sessions ce jour · {{hours}} h {{minutes}} min travaillées"
+    "daySessionsLine": "{{count}} sessions ce jour · {{hours}} h {{minutes}} min travaillées",
+    "reviewNotesLine": "Note du réviseur : {{notes}}"
   }
 }

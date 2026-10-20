@@ -118,6 +118,20 @@ export default function localizeNotification(notification: AppNotification, t: T
       return { title: t("shell:notifications.timesheet.correctionApprovedTitle"), body: withNotes(t("shell:notifications.timesheet.correctionApprovedBody")) };
     case "timesheet_correction_rejected":
       return { title: t("shell:notifications.timesheet.correctionRejectedTitle"), body: withNotes(t("shell:notifications.timesheet.correctionRejectedBody")) };
+    // Owner 2026-10-20: allowances are notified like timesheets (submitted to the approvers, the decision to the employee).
+    case "allowance_submitted": {
+      const name = typeof data.employeeName === "string" ? data.employeeName : null;
+      const date = typeof data.entryDate === "string" ? data.entryDate : null;
+      if (!name || !date) break;
+      return { title: t("shell:notifications.allowance.submittedTitle"), body: t("shell:notifications.allowance.submittedBody", { name, date }) };
+    }
+    case "allowance_approved":
+    case "allowance_rejected": {
+      const date = typeof data.entryDate === "string" ? data.entryDate : null;
+      if (!date) break;
+      const which = notification.type === "allowance_approved" ? "approved" : "rejected";
+      return { title: t(`shell:notifications.allowance.${which}Title`), body: withNotes(t(`shell:notifications.allowance.${which}Body`, { date })) };
+    }
     // Owner 2026-10-20: the trial notices were stored in Arabic and English together; a fixed text in the reader's language.
     case "trial_ending":
       return { title: t("shell:notifications.trial.endingTitle"), body: t("shell:notifications.trial.endingBody") };

@@ -335,6 +335,11 @@ export default function AllowancesPage() {
       >
         {detailEntry ? (
           <>
+            {detailEntry.reviewNotes && detailEntry.status !== "submitted" ? (
+              <p style={{ fontSize: "var(--font-sm)", color: detailEntry.status === "rejected" ? "var(--brand-danger)" : "var(--text-secondary)" }}>
+                {t("detail.reviewNotesLine", { notes: detailEntry.reviewNotes })}
+              </p>
+            ) : null}
             <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>
               {t("detail.siteLine", { site: detailEntry.siteName || "—" })}
               {detailEntry.clockInAt ? ` · ${t("detail.clockInLine", { time: formatTimeOnly(detailEntry.clockInAt, i18n.language) })}` : ""}

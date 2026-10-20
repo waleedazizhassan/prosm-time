@@ -106,6 +106,16 @@ export function localizePush(type: string, data: Data, language: string, fallbac
     case "timesheet_correction_rejected":
       result = withNotes("timesheet.correctionRejectedTitle", "timesheet.correctionRejectedBody");
       break;
+    case "allowance_submitted":
+      if (str(data.employeeName) && str(data.entryDate))
+        result = pair("allowance.submittedTitle", "allowance.submittedBody", { name: data.employeeName, date: data.entryDate });
+      break;
+    case "allowance_approved":
+      if (str(data.entryDate)) result = withNotes("allowance.approvedTitle", "allowance.approvedBody", { date: data.entryDate });
+      break;
+    case "allowance_rejected":
+      if (str(data.entryDate)) result = withNotes("allowance.rejectedTitle", "allowance.rejectedBody", { date: data.entryDate });
+      break;
     case "trial_ending":
       result = pair("trial.endingTitle", "trial.endingBody");
       break;

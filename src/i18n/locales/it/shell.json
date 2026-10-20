@@ -141,6 +141,14 @@
       "rejected": "Rifiutato",
       "acknowledged": "Preso atto",
       "clarification_requested": "Chiarimento richiesto"
+    },
+    "allowance": {
+      "submittedTitle": "Indennità in attesa di approvazione",
+      "submittedBody": "{{name}} ha inviato le indennità del {{date}}.",
+      "approvedTitle": "Indennità approvate",
+      "approvedBody": "Le tue indennità del {{date}} sono state approvate.",
+      "rejectedTitle": "Indennità rifiutate",
+      "rejectedBody": "Le tue indennità del {{date}} sono state rifiutate. Puoi modificarle e inviarle di nuovo."
     }
   },
   "items": {
