@@ -12,7 +12,7 @@ import ClockInOutCard from "./ClockInOutCard";
 import { PERIODS, formatHours, periodHours, periodRange } from "../attendance/periods";
 import heroStyles from "./AdminOverviewCard.module.css";
 import styles from "./EmployeeHome.module.css";
-import homeArt from "../../assets/illustrations/clockIn.svg";
+import homeArt from "../../assets/illustrations/employeeHome.svg";
 
 // Owner 2026-10-19: the employee's page is light and easy - clock in and
 // out, see their own time by day / week / month, and reach their own
