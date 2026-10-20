@@ -219,5 +219,11 @@
       "title": "Time to clock in",
       "body": "Your shift at {{site}} starts at {{time}}. Clock in when you arrive."
     }
+  },
+  "auth": {
+    "tagline": "Attendance you can trust - on site, on time.",
+    "point1": "Clock in only where the work is, with GPS and a photo",
+    "point2": "Works offline and keeps the real time and place",
+    "point3": "Timesheets, allowances and reports in five languages"
   }
 }

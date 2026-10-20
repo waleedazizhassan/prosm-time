@@ -5,6 +5,10 @@ import "../../i18n";
 import InviteEmployeeModal from "./InviteEmployeeModal";
 import EmployeeRepository from "../../core/repositories/EmployeeRepository";
 
+vi.mock("../../core/context/AuthContext", () => ({
+  useAuth: () => ({ profile: { id: "owner-1", isOwner: true, roleKey: "manager" } }),
+}));
+
 vi.mock("../../core/repositories/EmployeeRepository", () => ({
   default: { inviteUser: vi.fn() },
 }));

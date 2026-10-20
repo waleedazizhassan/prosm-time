@@ -1,66 +1,20 @@
-/* PROSM Time - § live UX review, user-directed: "check the mobile
-   situation from splash through Welcome." AuthHeader is desktop-only
-   (no mobile nav bar exists in this design), so phones need their own
-   Sign in / Create organization entry points - this mobile-only card
-   (hidden once the desktop header takes over at >=861px) mirrors
-   AuthLayout's own mobile split-card shape exactly. */
-.mobileCard {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 420px;
-  margin: 0 auto;
-
-  display: grid;
-  grid-template-rows: 180px auto;
-
-  background: var(--surface-card);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  overflow: hidden;
-}
-
-.photoBand {
-  position: relative;
-  background-color: #0b1220;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-/* § user-directed, 2026-09-13 - language + theme controls, floating
-   over the photo's own top-right corner (a physical corner, not a
-   logical/RTL-flipping one - this is page chrome sitting on an image,
-   not flowing content, and the user pointed at this exact physical
-   corner while looking at the app in Arabic). */
+/* Welcome (Aurora, owner 2026-10-20) - the page itself is AuthLayout's.
+   Language and theme controls for phones, at the card's top end (the
+   desktop header has its own). */
 .topControls {
-  position: absolute;
-  top: var(--space-3);
-  right: var(--space-3);
-  z-index: 1;
-
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: var(--space-2);
-}
-
-.body {
-  padding: var(--space-8);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  margin-bottom: var(--space-4);
 }
 
 .mobileLanguageSelect {
   padding: var(--space-1) var(--space-2);
-
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--border-medium);
   border-radius: var(--radius-md);
-
-  background: rgba(11, 18, 32, 0.55);
-  backdrop-filter: blur(4px);
-  color: #ffffff;
+  background: var(--surface-raised);
+  color: var(--text-primary);
   font-size: var(--font-xs);
   cursor: pointer;
 }
@@ -69,52 +23,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border-medium);
   border-radius: 50%;
-
-  background: rgba(11, 18, 32, 0.55);
-  backdrop-filter: blur(4px);
-  color: #ffffff;
+  background: var(--surface-raised);
+  color: var(--text-primary);
   cursor: pointer;
 }
 
-.title {
-  margin: 0 0 var(--space-1);
-  font-size: var(--font-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
-}
-
-.subtitle {
-  margin: 0 0 var(--space-6);
-  font-size: var(--font-sm);
-  color: var(--text-secondary);
-}
-
 @media (min-width: 861px) {
-  .mobileCard {
+  .topControls {
     display: none;
   }
-}
-
-/* § live UX review, user-directed - "the version number on this page
-   belongs at the bottom, not the header" (AuthHeader gets
-   showVersion={false} here for exactly that reason). Centered at the
-   page's own bottom edge on both breakpoints - .page is always
-   position: relative and full-height/width, mobile included. */
-.versionFooter {
-  position: absolute;
-  z-index: 1;
-  bottom: var(--space-4);
-  /* physical `left`, not a logical inset - centering via translateX
-     is itself a physical transform, so pairing it with a logical
-     inset would mis-center under dir="rtl" */
-  left: 50%;
-  transform: translateX(-50%);
-
-  color: rgba(226, 232, 240, 0.5);
-  font-size: var(--font-xs);
 }

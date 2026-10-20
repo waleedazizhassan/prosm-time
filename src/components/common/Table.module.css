@@ -1,3 +1,6 @@
+/* Aurora tables (owner 2026-10-20): a calm card, a quiet header row, roomy
+   rows with a soft hover, numbers aligned (tabular figures come from the
+   global tokens). On a phone the table scrolls sideways inside its card. */
 .wrapper {
   width: 100%;
   display: flex;
@@ -8,42 +11,46 @@
 .tableScroll {
   width: 100%;
   overflow-x: auto;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  -webkit-overflow-scrolling: touch;
 }
 
 .table {
   width: 100%;
   min-width: 480px;
-  border-collapse: collapse;
-
-  background: var(--surface-card);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-
-  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: transparent;
 }
 
 .headerCell {
+  position: sticky;
+  top: 0;
   padding: var(--space-3) var(--space-4);
 
   text-align: start;
   font-size: var(--font-xs);
   font-weight: var(--font-weight-semibold);
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  color: var(--text-tertiary);
+  letter-spacing: 0.02em;
 
-  background: var(--surface-app);
+  background: var(--surface-sunken);
   border-bottom: 1px solid var(--border-light);
 
   white-space: nowrap;
 }
 
 .row {
-  border-bottom: 1px solid var(--border-light);
   transition: background-color var(--transition-fast);
 }
 
-.row:last-child {
+.row > .cell {
+  border-bottom: 1px solid var(--border-light);
+}
+
+.row:last-child > .cell {
   border-bottom: none;
 }
 

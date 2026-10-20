@@ -36,7 +36,20 @@
   margin: 0;
   font-size: var(--font-2xl);
   font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
   color: var(--text-primary);
+}
+
+/* Aurora (owner 2026-10-20): the same gradient mark as the page banners. */
+.title::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 3px;
+  margin-top: var(--space-2);
+  border-radius: 3px;
+  background: var(--brand-gradient);
 }
 
 .pageHeaderCompact {

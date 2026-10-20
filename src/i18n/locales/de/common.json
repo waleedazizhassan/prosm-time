@@ -219,5 +219,11 @@
       "title": "Zeit zum Einstempeln",
       "body": "Ihre Schicht in {{site}} beginnt um {{time}}. Stempeln Sie bei Ankunft ein."
     }
+  },
+  "auth": {
+    "tagline": "Zeiterfassung, der Sie vertrauen - vor Ort, pünktlich.",
+    "point1": "Einstempeln nur am Einsatzort, mit GPS und Foto",
+    "point2": "Funktioniert offline und speichert echte Zeit und echten Ort",
+    "point3": "Stundenzettel, Zulagen und Berichte in fünf Sprachen"
   }
 }

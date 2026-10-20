@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { useAuth } from "../../core/context/AuthContext";
 import EmployeeRepository, { type InviteInput, type InviteResultData } from "../../core/repositories/EmployeeRepository";
+import { roleRank } from "../../core/utils/roleRank";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import Modal from "../../components/common/Modal";
@@ -24,6 +26,11 @@ interface InviteEmployeeModalProps {
 // this codebase) - real email delivery is WP-13's job, not faked here.
 export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: InviteEmployeeModalProps) {
   const { t } = useTranslation("people");
+  const { profile } = useAuth();
+  // Security review 2026-10-20: only roles below the inviter's own (the Owner: any) - the server refuses the rest.
+  const roleOptions = ROLE_OPTIONS.filter(
+    (key) => !profile || profile.isOwner || roleRank({ isOwner: false, roleKey: key }) < roleRank({ isOwner: false, roleKey: profile.roleKey }),
+  );
 
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
@@ -110,7 +117,7 @@ export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: Invi
         value={roleKey}
         onChange={(event) => setRoleKey(event.target.value as InviteInput["roleKey"])}
         disabled={submitting}
-        options={ROLE_OPTIONS.map((key) => ({ value: key, label: t(`invite.role.${key}`) }))}
+        options={roleOptions.map((key) => ({ value: key, label: t(`invite.role.${key}`) }))}
       />
       <ErrorText>{error}</ErrorText>
     </Modal>

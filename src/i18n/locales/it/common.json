@@ -219,5 +219,11 @@
       "title": "È ora di timbrare",
       "body": "Il tuo turno a {{site}} inizia alle {{time}}. Timbra l'entrata quando arrivi."
     }
+  },
+  "auth": {
+    "tagline": "Presenze affidabili - in sede, in orario.",
+    "point1": "Timbratura solo sul luogo di lavoro, con GPS e foto",
+    "point2": "Funziona offline e conserva ora e luogo reali",
+    "point3": "Fogli ore, indennità e report in cinque lingue"
   }
 }

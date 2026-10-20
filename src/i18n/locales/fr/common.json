@@ -219,5 +219,11 @@
       "title": "C'est l'heure de pointer",
       "body": "Votre service à {{site}} commence à {{time}}. Pointez votre entrée en arrivant."
     }
+  },
+  "auth": {
+    "tagline": "Une présence fiable - sur site, à l'heure.",
+    "point1": "Pointage uniquement sur le lieu de travail, avec GPS et photo",
+    "point2": "Fonctionne hors ligne et garde l'heure et le lieu réels",
+    "point3": "Feuilles de temps, indemnités et rapports en cinq langues"
   }
 }
