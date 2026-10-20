@@ -12,6 +12,7 @@ import AttendanceRepository from "../../core/repositories/AttendanceRepository";
 import LeaveRepository from "../../core/repositories/LeaveRepository";
 import TimesheetRepository from "../../core/repositories/TimesheetRepository";
 import ShiftRepository from "../../core/repositories/ShiftRepository";
+import DashboardRepository, { type DashboardSummary } from "../../core/repositories/DashboardRepository";
 import Card from "../../components/common/Card";
 import LoadingState from "../../components/common/LoadingState";
 import Modal from "../../components/common/Modal";
@@ -121,13 +122,8 @@ export default function AdminOverviewCard() {
   const [siteNamesByUser, setSiteNamesByUser] = useState<Record<string, string[]>>({});
   const [leaveToday, setLeaveToday] = useState<{ id: string; userId: string; employeeName: string; leaveType: string; endDate: string }[]>([]);
   const [onBreak, setOnBreak] = useState<{ id: string; userId: string; userFullName: string; startedAt: string }[]>([]);
-  // § real reference screenshots the user sent (Jibble), 2026-09-11 -
-  // "Tracked Hours" week chart and a live "Who's In/Out" roster.
-  // weeklyHistory reuses ManagerRepository.listAttendanceHistory(), an
-  // existing RLS-scoped query Attendance Record's own page already
-  // calls for a date range - no new RPC, just the same query pointed
-  // at the last 7 days and aggregated client-side into hours/day.
-  const [weeklyHistory, setWeeklyHistory] = useState<TodayAttendanceRow[]>([]);
+  // Owner 2026-10-20: every figure comes from one server read (DashboardRepository).
+  const [summary, setSummary] = useState<DashboardSummary | null>(null);
   // Owner 2026-10-20: a dashboard that could not load showed zeros as if nobody came; now it says so.
   const [loadError, setLoadError] = useState<string | null>(null);
   // § real reference screenshots (Deputy), 2026-09-11 - a single
@@ -155,7 +151,7 @@ export default function AdminOverviewCard() {
     const weekStartIso = isoDate(weekStart);
     const weekEndIso = isoDate(today);
 
-    const [sitesResult, attendanceResult, pendingResult, membersResult, assignmentsResult, leaveTodayResult, onBreakResult, weeklyResult, pendingLeaveResult, pendingTimesheetResult] =
+    const [sitesResult, attendanceResult, pendingResult, membersResult, assignmentsResult, leaveTodayResult, onBreakResult, summaryResult, pendingLeaveResult, pendingTimesheetResult] =
       await Promise.all([
         SiteRepository.listSites(),
         ManagerRepository.listTodayAttendance(),
@@ -164,7 +160,7 @@ export default function AdminOverviewCard() {
         SiteRepository.listAllAssignedSiteNames(),
         LeaveRepository.listToday(),
         AttendanceRepository.listOnBreakNow(),
-        ManagerRepository.listAttendanceHistory(weekStartIso, weekEndIso),
+        DashboardRepository.getSummary(),
         LeaveRepository.listPendingReview(),
         TimesheetRepository.listPendingApprovals(),
       ]);
@@ -186,9 +182,9 @@ export default function AdminOverviewCard() {
     // breaks left open after their shifts had ended showed for a week).
     const openShiftUserIds = new Set((attendanceResult.success ? attendanceResult.data ?? [] : []).filter((row) => row.status === "clocked_in").map((row) => row.userId));
     setOnBreak(onBreakResult.success ? (onBreakResult.data ?? []).filter((row) => openShiftUserIds.has(row.userId)) : []);
-    setWeeklyHistory(weeklyResult.success ? (weeklyResult.data ?? []) : []);
-    const failed = [attendanceResult, weeklyResult, membersResult, pendingResult].find((result) => !result.success);
-    setLoadError(failed ? failed.message ?? "" : null);
+    // The figures come from the summary; a list that failed to load only leaves its drill-down short.
+    if (summaryResult.success) setSummary(summaryResult.data);
+    setLoadError(summaryResult.success ? null : summaryResult.message ?? "");
     setPendingLeaveCount(pendingLeaveResult.success ? (pendingLeaveResult.data ?? []).length : 0);
     setPendingTimesheetCount(pendingTimesheetResult.success ? (pendingTimesheetResult.data ?? []).length : 0);
 
@@ -236,33 +232,23 @@ export default function AdminOverviewCard() {
   const presentUserIds = useMemo(() => new Set(presentRows.map((row) => row.userId)), [presentRows]);
   const onBreakUserIds = useMemo(() => new Set(onBreak.map((row) => row.userId)), [onBreak]);
 
-  // § real hours-per-day totals for the last 7 days, from the same
-  // weeklyHistory read above - clamps an open (still clocked-in)
-  // session's duration at "now" rather than leaving it out, so today's
-  // own bar isn't understated while someone's still on shift.
+  // Worked hours per day, Sunday to Saturday (owner 2026-10-19), counted on the
+  // server in the reader's time zone - an open shift counts up to now.
   const weeklyBars = useMemo(() => {
-    // Owner 2026-10-19: the week runs Sunday to Saturday; days still to come stay empty.
     const days: { key: string; label: string; hours: number }[] = [];
     const now = new Date();
     const sunday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay());
+    const minutesByDay = new Map((summary?.week ?? []).map((d) => [d.day, d.minutes]));
     for (let i = 0; i < 7; i += 1) {
       const d = new Date(sunday.getFullYear(), sunday.getMonth(), sunday.getDate() + i);
-      days.push({ key: localDayKey(d), label: d.toLocaleDateString(i18n.language, { weekday: "short" }), hours: 0 });
-    }
-    const byKey = new Map(days.map((d) => [d.key, d]));
-    for (const row of weeklyHistory) {
-      const key = localDayKey(new Date(row.clockInAt));
-      const bucket = byKey.get(key);
-      if (!bucket) continue;
-      const end = row.clockOutAt ? new Date(row.clockOutAt) : now;
-      const hours = Math.max(0, (end.getTime() - new Date(row.clockInAt).getTime()) / (1000 * 60 * 60));
-      bucket.hours += hours;
+      const key = localDayKey(d);
+      days.push({ key, label: d.toLocaleDateString(i18n.language, { weekday: "short" }), hours: (minutesByDay.get(key) ?? 0) / 60 });
     }
     return days;
-  }, [weeklyHistory, i18n.language]);
+  }, [summary, i18n.language]);
   const weeklyMaxHours = Math.max(1, ...weeklyBars.map((d) => d.hours));
   const weeklyTotalHours = weeklyBars.reduce((sum, d) => sum + d.hours, 0);
-  const totalNeedsAttention = pending.length + pendingLeaveCount + pendingTimesheetCount;
+  const totalNeedsAttention = summary?.waiting ?? pending.length + pendingLeaveCount + pendingTimesheetCount;
 
   // § real fix for the "blank offline Dashboard" complaint (2026-09-15)
   // - same reasoning as ClockInOutCard's own identical fix: `return
@@ -285,8 +271,9 @@ export default function AdminOverviewCard() {
   // reads as healthy, "under half" is the one state worth a warning
   // color rather than the brand-neutral tone every other tile uses.
   // The Owner does not clock in (owner 2026-10-18): presence is counted over the team only.
-  const teamSize = members.filter((member) => !member.isOwner && member.isActive).length;
-  const presencePercent = teamSize > 0 ? Math.min(100, Math.round((presentRows.length / teamSize) * 100)) : 0;
+  const teamSize = summary?.team ?? members.filter((member) => !member.isOwner && member.isActive).length;
+  const presentCount = summary?.present ?? presentRows.length;
+  const presencePercent = teamSize > 0 ? Math.min(100, Math.round((presentCount / teamSize) * 100)) : 0;
   const presenceLevel: "good" | "watch" | "low" = teamSize === 0 ? "good" : presencePercent >= 70 ? "good" : presencePercent >= 40 ? "watch" : "low";
   const hour = new Date().getHours();
   const greetingKey = hour < 12 ? "overview.greetingMorning" : hour < 17 ? "overview.greetingAfternoon" : "overview.greetingEvening";
@@ -352,7 +339,7 @@ export default function AdminOverviewCard() {
           </span>
           <span className={styles.statLabel}>{t("overview.stat.present")}</span>
           <span className={styles.statValue}>
-            {presentRows.length}
+            {presentCount}
             <span className={styles.statOf}>{t("overview.stat.of", { total: teamSize })}</span>
           </span>
           <span className={styles.statTrack}>
@@ -364,14 +351,14 @@ export default function AdminOverviewCard() {
             <Coffee size={18} />
           </span>
           <span className={styles.statLabel}>{t("overview.stat.onBreak")}</span>
-          <span className={styles.statValue}>{onBreak.length}</span>
+          <span className={styles.statValue}>{summary?.onBreak ?? onBreak.length}</span>
         </button>
         <button type="button" className={styles.stat} onClick={() => setDrilldown("employees")}>
           <span className={`${styles.statIcon} ${styles.statIconSlate}`}>
             <UserX size={18} />
           </span>
           <span className={styles.statLabel}>{t("overview.stat.notIn")}</span>
-          <span className={styles.statValue}>{Math.max(0, teamSize - presentRows.length)}</span>
+          <span className={styles.statValue}>{summary?.absent ?? Math.max(0, teamSize - presentRows.length)}</span>
         </button>
         <button type="button" className={styles.stat} onClick={() => navigate("/manager")}>
           <span className={`${styles.statIcon} ${totalNeedsAttention > 0 ? styles.statIconRed : styles.statIconGreen}`}>
