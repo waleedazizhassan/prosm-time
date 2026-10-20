@@ -8,7 +8,7 @@
     },
     "attendance": {
       "title": "Timbrare entrata e uscita",
-      "body": "Scegli la sede (e il progetto) prima di timbrare, oppure lascia vuota la sede e descrivi dove ti trovi. Alcune sedi richiedono una foto: tieni ferma la fotocamera un istante per confermare una ripresa dal vivo. Prima dell'invio, una schermata mostra esattamente cosa verrà registrato - foto, posizione, luogo e ora - con nota e attività facoltative visibili al responsabile. L'ora registrata è sempre quella del server, non del telefono. La timbratura è bloccata nei giorni di ferie approvate."
+      "body": "Scegli la sede (e il progetto) prima di timbrare, oppure lascia vuota la sede e descrivi dove ti trovi. Alcune sedi richiedono una foto: tieni ferma la fotocamera un istante per confermare una ripresa dal vivo. Prima dell'invio, una schermata mostra esattamente cosa verrà registrato - foto, posizione, luogo e ora - con nota e attività facoltative visibili al responsabile. L'ora registrata è sempre quella del server, non del telefono. La timbratura è bloccata nei giorni di ferie approvate. Nell'app per telefono PROSM Time te lo ricorda anche da solo - anche ad app chiusa: poco dopo la fine del turno se sei ancora timbrato, e qualche minuto prima del prossimo turno programmato."
     },
     "walkInGeofence": {
       "title": "Lavorare in una sede a cui non sei assegnato",

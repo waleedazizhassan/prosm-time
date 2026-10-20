@@ -209,5 +209,15 @@
       "signOut": "Sign out",
       "error": "Couldn't save. Check your connection and try again."
     }
+  },
+  "reminders": {
+    "clockOut": {
+      "title": "Don't forget to clock out",
+      "body": "Your shift ended at {{time}}. Clock out in PROSM Time when you leave."
+    },
+    "clockIn": {
+      "title": "Time to clock in",
+      "body": "Your shift at {{site}} starts at {{time}}. Clock in when you arrive."
+    }
   }
 }

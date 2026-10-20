@@ -9,6 +9,7 @@ import BottomNav from "./BottomNav";
 import InstallationStatusBanner from "./InstallationStatusBanner";
 import OfflineBanner from "./OfflineBanner";
 import PresenceTrackingLoop from "./PresenceTrackingLoop";
+import ClockReminderLoop from "./ClockReminderLoop";
 import { LayoutProvider } from "./LayoutContext";
 import styles from "./AppShell.module.css";
 import TrialBanner from "./TrialBanner";
@@ -32,6 +33,7 @@ export default function AppShell() {
         <OfflineBanner />
         <AttendanceSyncStatus />
         <PresenceTrackingLoop />
+        <ClockReminderLoop />
         <Header />
         <div className={styles.body}>
           <Sidebar />

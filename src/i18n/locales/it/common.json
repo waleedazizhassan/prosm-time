@@ -209,5 +209,15 @@
       "signOut": "Esci",
       "error": "Impossibile salvare. Controlla la connessione e riprova."
     }
+  },
+  "reminders": {
+    "clockOut": {
+      "title": "Non dimenticare di timbrare l'uscita",
+      "body": "Il tuo turno è finito alle {{time}}. Timbra l'uscita in PROSM Time quando esci."
+    },
+    "clockIn": {
+      "title": "È ora di timbrare",
+      "body": "Il tuo turno a {{site}} inizia alle {{time}}. Timbra l'entrata quando arrivi."
+    }
   }
 }

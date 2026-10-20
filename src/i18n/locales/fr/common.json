@@ -209,5 +209,15 @@
       "signOut": "Se déconnecter",
       "error": "Enregistrement impossible. Vérifiez la connexion et réessayez."
     }
+  },
+  "reminders": {
+    "clockOut": {
+      "title": "N'oubliez pas de pointer la sortie",
+      "body": "Votre service s'est terminé à {{time}}. Pointez votre sortie dans PROSM Time en partant."
+    },
+    "clockIn": {
+      "title": "C'est l'heure de pointer",
+      "body": "Votre service à {{site}} commence à {{time}}. Pointez votre entrée en arrivant."
+    }
   }
 }

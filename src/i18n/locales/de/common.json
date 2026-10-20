@@ -209,5 +209,15 @@
       "signOut": "Abmelden",
       "error": "Speichern nicht möglich. Prüfen Sie die Verbindung und versuchen Sie es erneut."
     }
+  },
+  "reminders": {
+    "clockOut": {
+      "title": "Ausstempeln nicht vergessen",
+      "body": "Ihre Schicht endete um {{time}}. Stempeln Sie beim Gehen in PROSM Time aus."
+    },
+    "clockIn": {
+      "title": "Zeit zum Einstempeln",
+      "body": "Ihre Schicht in {{site}} beginnt um {{time}}. Stempeln Sie bei Ankunft ein."
+    }
   }
 }

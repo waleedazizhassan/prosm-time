@@ -8,7 +8,7 @@
     },
     "attendance": {
       "title": "Ein- und Ausstempeln",
-      "body": "Wählen Sie vor dem Einstempeln Ihren Standort (und ggf. das Projekt) - oder lassen Sie den Standort leer und beschreiben Sie, wo Sie tatsächlich sind. Manche Standorte verlangen ein Foto; halten Sie die Kamera kurz ruhig, damit die App eine Live-Aufnahme erkennt. Vor dem Senden zeigt ein Bestätigungsbildschirm genau, was erfasst wird - Foto, Standort, Arbeitsort und Uhrzeit - mit zwei optionalen Feldern (Notiz und Tätigkeit), die Ihre Führungskraft sieht. Erfasst wird immer die Uhrzeit des Servers, nicht die Ihres Telefons. An Tagen mit genehmigtem Urlaub ist das Einstempeln gesperrt."
+      "body": "Wählen Sie vor dem Einstempeln Ihren Standort (und ggf. das Projekt) - oder lassen Sie den Standort leer und beschreiben Sie, wo Sie tatsächlich sind. Manche Standorte verlangen ein Foto; halten Sie die Kamera kurz ruhig, damit die App eine Live-Aufnahme erkennt. Vor dem Senden zeigt ein Bestätigungsbildschirm genau, was erfasst wird - Foto, Standort, Arbeitsort und Uhrzeit - mit zwei optionalen Feldern (Notiz und Tätigkeit), die Ihre Führungskraft sieht. Erfasst wird immer die Uhrzeit des Servers, nicht die Ihres Telefons. An Tagen mit genehmigtem Urlaub ist das Einstempeln gesperrt. In der Handy-App erinnert PROSM Time Sie auch selbst - selbst wenn die App geschlossen ist: kurz nach Schichtende, wenn Sie noch eingestempelt sind, und einige Minuten vor Ihrer nächsten geplanten Schicht."
     },
     "walkInGeofence": {
       "title": "Arbeiten an einem Standort, dem Sie nicht zugewiesen sind",

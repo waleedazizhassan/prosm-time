@@ -8,7 +8,7 @@
     },
     "attendance": {
       "title": "Clocking In & Out",
-      "body": "Choose your site (and project, if applicable) before clocking in - or leave Site empty and describe where you actually are if you're not at a registered location. Some sites require a photo, held steady for a moment so the app can confirm it's a live capture, not an old or static image. Right before anything is submitted, a confirmation screen shows exactly what's about to be recorded - your photo (if one was taken), your GPS location, the site/workplace and the time - with two optional fields, a note and your activity, which your manager can see. The time recorded is always the server's time, not your phone's clock. Clocking in is blocked on a day your approved leave covers."
+      "body": "Choose your site (and project, if applicable) before clocking in - or leave Site empty and describe where you actually are if you're not at a registered location. Some sites require a photo, held steady for a moment so the app can confirm it's a live capture, not an old or static image. Right before anything is submitted, a confirmation screen shows exactly what's about to be recorded - your photo (if one was taken), your GPS location, the site/workplace and the time - with two optional fields, a note and your activity, which your manager can see. The time recorded is always the server's time, not your phone's clock. Clocking in is blocked on a day your approved leave covers. On the phone app, PROSM Time also reminds you itself - even when the app is closed: shortly after your shift's end if you're still clocked in, and a few minutes before your next scheduled shift."
     },
     "walkInGeofence": {
       "title": "Working at a Site You're Not Assigned To",

@@ -8,7 +8,7 @@
     },
     "attendance": {
       "title": "Pointer l'arrivée et le départ",
-      "body": "Choisissez votre site (et projet le cas échéant) avant de pointer, ou laissez le site vide et décrivez où vous êtes. Certains sites exigent une photo : tenez la caméra immobile un instant pour confirmer une prise en direct. Avant l'envoi, un écran de confirmation montre exactement ce qui sera enregistré - photo, position, lieu et heure - avec une note et une activité facultatives visibles par votre responsable. L'heure enregistrée est toujours celle du serveur, pas celle de votre téléphone. Le pointage est bloqué un jour de congé approuvé."
+      "body": "Choisissez votre site (et projet le cas échéant) avant de pointer, ou laissez le site vide et décrivez où vous êtes. Certains sites exigent une photo : tenez la caméra immobile un instant pour confirmer une prise en direct. Avant l'envoi, un écran de confirmation montre exactement ce qui sera enregistré - photo, position, lieu et heure - avec une note et une activité facultatives visibles par votre responsable. L'heure enregistrée est toujours celle du serveur, pas celle de votre téléphone. Le pointage est bloqué un jour de congé approuvé. Dans l'application mobile, PROSM Time vous le rappelle aussi lui-même - même application fermée : peu après la fin de votre service si vous êtes encore pointé, et quelques minutes avant votre prochain service planifié."
     },
     "walkInGeofence": {
       "title": "Travailler sur un site auquel vous n'êtes pas affecté",
