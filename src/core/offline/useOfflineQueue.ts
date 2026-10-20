@@ -16,7 +16,7 @@ export function useOfflineQueue(userId: string | undefined): OfflineQueueItem[] 
 
   useEffect(() => {
     const attemptFlush = () => {
-      OfflineQueueService.flush();
+      OfflineQueueService.flush(userId);
     };
     attemptFlush();
     window.addEventListener("online", attemptFlush);
@@ -25,7 +25,7 @@ export function useOfflineQueue(userId: string | undefined): OfflineQueueItem[] 
       window.removeEventListener("online", attemptFlush);
       clearInterval(interval);
     };
-  }, []);
+  }, [userId]);
 
   return items;
 }

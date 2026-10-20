@@ -119,6 +119,19 @@ serve(async (request: Request) => {
       return errorResponse("roleKey must be one of manager, supervisor, employee, read_only.", 400, "INVALID_REQUEST");
     }
 
+    // Security review 2026-10-20: nobody creates an account ranked at or above their own
+    // (a delegated supervisor could invite managers); the Owner may invite any role.
+    const { data: callerRank } = await serviceClient
+      .from("users")
+      .select("is_owner, roles(role_key)")
+      .eq("id", callerRow.id)
+      .maybeSingle();
+    const callerRole = (Array.isArray(callerRank?.roles) ? callerRank?.roles[0] : callerRank?.roles) as { role_key?: string } | null | undefined;
+    const rankOf = (key: string | undefined) => (key === "manager" ? 3 : key === "supervisor" ? 2 : 1);
+    if (!callerRank?.is_owner && rankOf(roleKey) >= rankOf(callerRole?.role_key)) {
+      return errorResponse("You can only invite people below your own role.", 403, "FORBIDDEN");
+    }
+
     const normalizedEmail = email.trim().toLowerCase();
     const trimmedFullName = fullName.trim();
 

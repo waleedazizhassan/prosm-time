@@ -167,19 +167,23 @@ class OfflineQueueService {
   async retry(id: string): Promise<void> {
     await setStatus(id, { status: "pending", errorMessage: null });
     await this.notify();
-    await this.flush();
+    const item = (await this.list()).find((i) => i.id === id);
+    if (item) await this.flush(item.userId);
   }
 
   // Auto-invoked on app start, on the browser's `online` event, and on a light interval
   // fallback (§25: browsers don't always fire `online` reliably on flaky connections).
-  async flush(): Promise<void> {
-    if (this.flushing) return;
+  // Security review 2026-10-20: only the signed-in person's own items are sent - on a
+  // shared phone, someone else's offline clock-in must never be recorded under this session.
+  // Theirs wait until they sign in again.
+  async flush(userId: string | null | undefined): Promise<void> {
+    if (!userId || this.flushing) return;
     this.flushing = true;
     try {
       const items = await this.list();
       const stopped = new Set<string>();
       for (const item of items) {
-        if (stopped.has(item.userId)) continue;
+        if (item.userId !== userId || stopped.has(item.userId)) continue;
         if (item.status === "failed") {
           stopped.add(item.userId);
           continue;

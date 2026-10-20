@@ -20,7 +20,7 @@ export default function AttendanceSyncStatus() {
   useEffect(() => OfflineQueueService.subscribe((all) => setItems(profile?.id ? all.filter((i) => i.userId === profile.id) : [])), [profile?.id]);
 
   useEffect(() => {
-    const attempt = () => void OfflineQueueService.flush();
+    const attempt = () => void OfflineQueueService.flush(profile?.id);
     attempt();
     window.addEventListener("online", attempt);
     const interval = setInterval(attempt, 30000);
@@ -28,7 +28,7 @@ export default function AttendanceSyncStatus() {
       window.removeEventListener("online", attempt);
       clearInterval(interval);
     };
-  }, []);
+  }, [profile?.id]);
 
   if (items.length === 0) return null;
   const failed = items.some((i) => i.status === "failed");
