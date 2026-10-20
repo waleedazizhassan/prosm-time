@@ -1,19 +1,23 @@
+/* Owner 2026-10-20: pinned to the top of the screen until the app is updated. */
 .banner {
+  position: sticky;
+  top: 0;
+  z-index: calc(var(--z-header, 1000) + 1);
   display: flex;
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-2) var(--space-4);
   font-size: var(--font-sm);
-  font-weight: var(--font-weight-medium);
-  background: var(--status-info-bg, #d6e9ff);
-  color: var(--status-info-text, #0b4a8f);
+  font-weight: var(--font-weight-semibold);
+  background: var(--brand-primary, #16a34a);
+  color: #fff;
 }
 
 .action {
   margin-inline-start: auto;
-  border: 1px solid currentColor;
-  background: transparent;
-  color: inherit;
+  border: 0;
+  background: #fff;
+  color: var(--brand-primary, #16a34a);
   font-size: var(--font-xs);
   font-weight: var(--font-weight-semibold);
   padding: var(--space-1) var(--space-3);
@@ -22,5 +26,5 @@
 }
 
 .action:hover {
-  background: rgba(255, 255, 255, 0.25);
+  opacity: 0.9;
 }

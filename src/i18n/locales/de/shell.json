@@ -38,7 +38,8 @@
     "action": "Jetzt aktualisieren",
     "checkAction": "Nach Update suchen",
     "checking": "Wird überprüft...",
-    "upToDate": "Sie haben die neueste Version."
+    "upToDate": "Sie haben die neueste Version.",
+    "noticeTitle": "PROSM Time-Update"
   },
   "offline": {
     "message": "Kein Problem - Ein- und Ausstempeln und Pausen funktionieren weiter und werden gesendet, sobald Sie wieder online sind.",

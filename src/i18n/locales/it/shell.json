@@ -38,7 +38,8 @@
     "action": "Aggiorna ora",
     "checkAction": "Controlla aggiornamenti",
     "checking": "Verifica in corso...",
-    "upToDate": "Hai la versione più recente."
+    "upToDate": "Hai la versione più recente.",
+    "noticeTitle": "Aggiornamento di PROSM Time"
   },
   "offline": {
     "message": "Nessun problema: timbrature e pause funzionano comunque e verranno inviate appena torni online.",

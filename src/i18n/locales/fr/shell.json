@@ -38,7 +38,8 @@
     "action": "Mettre à jour",
     "checkAction": "Vérifier les mises à jour",
     "checking": "Vérification...",
-    "upToDate": "Vous avez la dernière version."
+    "upToDate": "Vous avez la dernière version.",
+    "noticeTitle": "Mise à jour de PROSM Time"
   },
   "offline": {
     "message": "Pas d'inquiétude : les pointages et les pauses fonctionnent toujours et seront envoyés dès le retour de la connexion.",

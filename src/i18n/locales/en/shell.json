@@ -38,7 +38,8 @@
     "action": "Update now",
     "checkAction": "Check for update",
     "checking": "Checking...",
-    "upToDate": "You're on the latest version."
+    "upToDate": "You're on the latest version.",
+    "noticeTitle": "PROSM Time update"
   },
   "offline": {
     "message": "No worries - clock in, clock out and breaks still work, and we'll send them as soon as you're back online.",

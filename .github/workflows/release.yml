@@ -420,6 +420,20 @@ jobs:
           echo "Stable mirror URLs (paste into prosm.net's own download buttons):"
           echo "  $public_base/PROSM-Time.apk"
 
+  pages:
+    name: Publish the web version on GitHub Pages (time.prosm.net)
+    needs: deploy-web
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
   deploy-web:
     name: Build web, attach it to the Release, publish latest-version.json
     # user-directed 2026-09-10: GitHub Pages needs a paid plan on a
@@ -458,6 +472,19 @@ jobs:
 
       - name: Also publish a versioned-filename copy (see the APK/EXE step's own comment)
         run: cp PROSM-Time-Web.zip "PROSM-Time-Web-v${{ needs.create-release.outputs.version }}.zip"
+
+      # Owner 2026-10-20: the web version is also published on GitHub Pages
+      # at time.prosm.net with every release (the copy inside prosm.net's
+      # site could not be updated from here, and that host sometimes
+      # answered app files with its HTML page). 404.html is the app itself,
+      # so links straight to a page (time.prosm.net/dashboard) open it.
+      - name: Prepare the web build for GitHub Pages
+        run: |
+          cp dist/index.html dist/404.html
+          printf 'time.prosm.net' > dist/CNAME
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
 
       - name: Attach the web zip to the existing release
         uses: softprops/action-gh-release@v2

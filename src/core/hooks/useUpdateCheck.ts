@@ -2,7 +2,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { BUILD_RELEASED_AT } from "../buildInfo";
 
-const SYNC_INTERVAL_MS = 6 * 60 * 60 * 1000; // matches InstallationStatusBanner's own established polling cadence
+// Owner 2026-10-20: a new version is noticed within half an hour, and as
+// soon as the app is opened again or comes back to the front (was 6 hours).
+const SYNC_INTERVAL_MS = 30 * 60 * 1000;
+const RECHECK_ON_RETURN_MS = 5 * 60 * 1000;
 
 // release.yml commits this manifest to public/latest-version.json on
 // every real release, and sets VITE_UPDATE_MANIFEST_URL to its
@@ -58,9 +61,19 @@ export function useUpdateCheck() {
     cancelledRef.current = false;
     checkNow();
     const interval = setInterval(checkNow, SYNC_INTERVAL_MS);
+    let lastCheck = Date.now();
+    const onReturn = () => {
+      if (document.visibilityState !== "visible" || Date.now() - lastCheck < RECHECK_ON_RETURN_MS) return;
+      lastCheck = Date.now();
+      checkNow();
+    };
+    document.addEventListener("visibilitychange", onReturn);
+    window.addEventListener("focus", onReturn);
     return () => {
       cancelledRef.current = true;
       clearInterval(interval);
+      document.removeEventListener("visibilitychange", onReturn);
+      window.removeEventListener("focus", onReturn);
     };
   }, [checkNow]);
 

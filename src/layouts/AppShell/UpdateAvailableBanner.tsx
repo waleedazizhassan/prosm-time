@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Capacitor } from "@capacitor/core";
+import { LocalNotifications } from "@capacitor/local-notifications";
 import { Download } from "lucide-react";
 
 import { useUpdateCheck } from "../../core/hooks/useUpdateCheck";
@@ -23,9 +25,34 @@ import styles from "./UpdateAvailableBanner.module.css";
 // itself has no auto-update wiring yet, so its own button instead
 // opens the Windows installer download like the web fallback does,
 // since a reload cannot update a locally-installed desktop binary.
+const UPDATE_NOTICE_ID = 7101;
+
 export default function UpdateAvailableBanner() {
   const { t } = useTranslation("shell");
   const { manifest } = useUpdateCheck();
+  const pendingVersion = manifest?.version ?? null;
+
+  // Owner 2026-10-20: on the phone, a notification that can't be swiped away
+  // stays in the notification bar until the app is updated (it goes as soon
+  // as this build is the newest); tapping it opens the app, where this
+  // banner's button downloads the update. The banner itself has no close button.
+  useEffect(() => {
+    if (!Capacitor.isNativePlatform()) return;
+    const run = async () => {
+      try {
+        await LocalNotifications.cancel({ notifications: [{ id: UPDATE_NOTICE_ID }] });
+        if (!pendingVersion) return;
+        const permission = await LocalNotifications.checkPermissions();
+        if (permission.display !== "granted") return;
+        await LocalNotifications.schedule({
+          notifications: [{ id: UPDATE_NOTICE_ID, title: t("update.noticeTitle"), body: t("update.available", { version: pendingVersion }), ongoing: true, autoCancel: false }],
+        });
+      } catch {
+        // notifications unavailable - the banner still shows
+      }
+    };
+    void run();
+  }, [pendingVersion, t]);
 
   if (!manifest) return null;
 
@@ -46,7 +73,7 @@ export default function UpdateAvailableBanner() {
   };
 
   return (
-    <div className={styles.banner}>
+    <div className={styles.banner} role="status">
       <Download size={16} />
       <span>{t("update.available", { version: manifest.version })}</span>
       <button type="button" className={styles.action} onClick={handleUpdate}>
