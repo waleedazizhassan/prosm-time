@@ -74,9 +74,9 @@
       "title": "Permessi e timbratura per conto (amministratori)",
       "body": "La pagina di ogni persona in Persone mostra i suoi permessi; chi può modificarli può concederne, revocarne o ripristinarne uno, con un motivo. Il titolare ha tutti i permessi e può darne qualsiasi a chiunque sotto di lui. Un responsabile può dare a un supervisore delle sue sedi un permesso che possiede, e toglierlo. Approvare le ferie e timbrare per conto di qualcuno sono solo per il titolare e i responsabili - mai per se stessi, e solo per le persone sotto di sé nelle sedi che gestiscono. Ogni modifica viene registrata con il suo autore."
     },
-    "desktopApp": {
-      "title": "App desktop per Windows",
-      "body": "Lo stesso PROSM Time che già conosci, installato come vero programma Windows. Si apre a schermo pieno; F11 passa alla modalità schermo intero reale e Esc riporta sempre alla finestra normale con il suo pulsante di chiusura. Il tuo accesso resta memorizzato tra un avvio e l'altro, esattamente come sul telefono o nel browser."
+    "getTheApp": {
+      "title": "Usare PROSM Time",
+      "body": "Su un telefono Android scarica l'APK da prosm.net e installalo - l'app ti avvisa quando c'è un aggiornamento. Su qualsiasi computer, tablet o iPhone apri https://time.prosm.net nel browser (puoi aggiungerlo alla schermata Home); si aggiorna da solo. È lo stesso PROSM Time, con lo stesso account."
     },
     "liveMap": {
       "title": "Mappa in tempo reale",

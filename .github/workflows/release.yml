@@ -2,34 +2,17 @@ name: PROSM Time Release
 
 # PROSM Time - user-directed: "any real update should build and publish
 # automatically." Triggers on every push to main (not just tags) -
-# builds Web/Android/Windows, publishes a GitHub Release tagged with
-# package.json's own version, with all three artifacts (APK, Windows
-# installer, web build zip) attached to that same release, and
-# publishes latest-version.json for UpdateAvailableBanner.tsx to poll.
-# cancel-in-progress avoids a pileup of superseded builds when several
-# commits land close together (this repo has seen many commits per
-# hour in real sessions).
+# builds the Android APK (attached to a GitHub Release and mirrored to
+# PROSM's own Storage) and the web version (published at
+# https://time.prosm.net), and publishes latest-version.json for
+# UpdateAvailableBanner.tsx to poll. Owner 2026-10-20: PROSM Time is an
+# APK to download and a web version to open - no desktop installer and
+# no web zip any more. cancel-in-progress avoids a pileup of superseded
+# builds when several commits land close together.
 #
-# Web is a downloadable zip, not a live hosted URL: GitHub Pages
-# requires a paid plan on a PRIVATE repository (confirmed live -
-# "Your current plan does not support GitHub Pages for this
-# repository", HTTP 422). Rather than pay for Pages or add an external
-# host, the repo itself went PUBLIC instead (user-directed, 2026-09-11)
-# - a public repo's Release assets are downloadable by anyone with a
-# plain browser, no GitHub account or login required, which was the
-# user's actual real requirement all along. The web build is still
-# distributed the same way as the APK/EXE (a zip attached to the
-# Release) rather than a live hosted URL, since Pages itself still
-# needs a paid plan regardless of visibility.
-#
-# Every artifact is uploaded under a FIXED filename (PROSM-Time.apk /
-# PROSM-Time-Setup.exe / PROSM-Time-Web.zip), not one that embeds the
-# version number, specifically so prosm.net's own download buttons can
-# point at GitHub's own stable "always the newest release" URL pattern
-# once and never need editing again on any future release:
-#   https://github.com/<owner>/prosm-time/releases/latest/download/PROSM-Time.apk
-#   https://github.com/<owner>/prosm-time/releases/latest/download/PROSM-Time-Setup.exe
-#   https://github.com/<owner>/prosm-time/releases/latest/download/PROSM-Time-Web.zip
+# The APK keeps a FIXED filename (PROSM-Time.apk) beside a versioned copy,
+# so prosm.net's download button points at one URL forever:
+#   https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/public/app-releases/PROSM-Time.apk
 #
 # GitHub is the build/distribution source only - installed clients
 # never update themselves from source, they read the published
@@ -276,54 +259,9 @@ jobs:
           name: prosm-time-android
           path: ${{ steps.apk.outputs.path }}
 
-  windows:
-    name: Build Windows installer
-    needs: test
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: "22", cache: npm }
-      - run: npm ci
-
-      - name: Set this release's version in package.json
-        # windows-latest defaults unmarked run: steps to PowerShell -
-        # explicit shell: bash here keeps this one-liner's quoting
-        # identical (and identically safe) across all 3 jobs that run
-        # it, rather than trusting PowerShell's own single-quote rules
-        # to behave the same way.
-        shell: bash
-        env:
-          NEXT_VERSION: ${{ needs.test.outputs.nextVersion }}
-        run: node -e 'const fs=require("fs"); const p=require("./package.json"); p.version=process.env.NEXT_VERSION; fs.writeFileSync("package.json", JSON.stringify(p, null, 2) + "\n");'
-
-      - run: npm run build
-        env:
-          VITE_BUILD_RELEASED_AT: ${{ needs.test.outputs.releasedAt }}
-      # electron-builder auto-detects CI and implicitly tries to publish
-      # (needs a GH_TOKEN it doesn't have here) unless told not to - the
-      # "Publish GitHub Release" job handles uploading the built .exe
-      # itself, so this build step must never attempt its own publish.
-      - run: npx electron-builder --win --publish never
-
-      - name: Locate the built installer
-        id: exe
-        shell: bash
-        run: |
-          set -e
-          found=$(find release -maxdepth 1 -name "*.exe" | head -1)
-          if [ -z "$found" ]; then echo "No installer produced."; exit 1; fi
-          echo "path=$found" >> "$GITHUB_OUTPUT"
-          echo "name=$(basename "$found")" >> "$GITHUB_OUTPUT"
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: prosm-time-windows
-          path: ${{ steps.exe.outputs.path }}
-
   create-release:
     name: Publish GitHub Release
-    needs: [android, windows, test]
+    needs: [android, test]
     runs-on: ubuntu-latest
     outputs:
       # § user-directed, 2026-09-11 - real automatic version numbering.
@@ -335,7 +273,6 @@ jobs:
       # of this checkout's unpatched package.json.
       version: ${{ needs.test.outputs.nextVersion }}
       android_url: ${{ steps.urls.outputs.android_url }}
-      windows_url: ${{ steps.urls.outputs.windows_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
@@ -356,7 +293,6 @@ jobs:
         run: |
           set -e
           cp artifacts/prosm-time-android/PROSM-Time.apk "artifacts/prosm-time-android/PROSM-Time-v${{ needs.test.outputs.nextVersion }}.apk"
-          cp artifacts/prosm-time-windows/PROSM-Time-Setup.exe "artifacts/prosm-time-windows/PROSM-Time-Setup-v${{ needs.test.outputs.nextVersion }}.exe"
 
       - name: Publish (or update) the release for this version
         uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2, pinned by commit (security review 2026-10-20: a moved tag cannot change what runs next to the release secrets)
@@ -366,18 +302,15 @@ jobs:
           generate_release_notes: true
           files: |
             artifacts/prosm-time-android/*.apk
-            artifacts/prosm-time-windows/*.exe
 
       - id: urls
         run: |
           set -e
           android_name=$(basename "$(find artifacts/prosm-time-android -name '*.apk' | head -1)")
-          windows_name=$(basename "$(find artifacts/prosm-time-windows -name '*.exe' | head -1)")
           base="${{ github.server_url }}/${{ github.repository }}/releases/download/v${{ needs.test.outputs.nextVersion }}"
           echo "android_url=$base/$android_name" >> "$GITHUB_OUTPUT"
-          echo "windows_url=$base/$windows_name" >> "$GITHUB_OUTPUT"
 
-      - name: Also mirror both APK files and both EXE files to a PROSM-owned URL (no github.com)
+      - name: Also mirror both APK files to a PROSM-owned URL (no github.com)
         # § user-directed, 2026-09-16 - "ميتمش التحويل لصفحة جيتهاب ويبقى
         # التحميل ثابت من جوة السايت بتاعة بروسم": prosm.net is a
         # separate, disconnected project this session can't edit
@@ -413,9 +346,6 @@ jobs:
           }
           upload "artifacts/prosm-time-android/PROSM-Time.apk" "PROSM-Time.apk"
           upload "artifacts/prosm-time-android/PROSM-Time-v${{ needs.test.outputs.nextVersion }}.apk" "PROSM-Time-v${{ needs.test.outputs.nextVersion }}.apk"
-          # The Windows installer (~130 MB) is above Supabase Storage's 50 MB
-          # per-file limit (checked 2026-10-13: 413 EntityTooLarge), so it
-          # stays on the GitHub Release only - see AUDIT_FIXES_REPORT.md, 2.3.
           public_base="https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/public/app-releases"
           echo "Stable mirror URLs (paste into prosm.net's own download buttons):"
           echo "  $public_base/PROSM-Time.apk"
@@ -435,7 +365,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
   deploy-web:
-    name: Build web, attach it to the Release, publish latest-version.json
+    name: Build web for time.prosm.net, publish latest-version.json
     # user-directed 2026-09-10: GitHub Pages needs a paid plan on a
     # PRIVATE repo (confirmed live - "Your current plan does not
     # support GitHub Pages for this repository", HTTP 422) and the
@@ -464,15 +394,6 @@ jobs:
         env:
           VITE_BUILD_RELEASED_AT: ${{ needs.test.outputs.releasedAt }}
 
-      # Fixed filename (not e.g. "prosm-time-web-v2.3.2.zip") - same
-      # reasoning as the APK's own fixed name above, so
-      # releases/latest/download/PROSM-Time-Web.zip never changes.
-      - name: Zip the web build
-        run: cd dist && zip -r ../PROSM-Time-Web.zip .
-
-      - name: Also publish a versioned-filename copy (see the APK/EXE step's own comment)
-        run: cp PROSM-Time-Web.zip "PROSM-Time-Web-v${{ needs.create-release.outputs.version }}.zip"
-
       # Owner 2026-10-20: the web version is also published on GitHub Pages
       # at time.prosm.net with every release (the copy inside prosm.net's
       # site could not be updated from here, and that host sometimes
@@ -485,36 +406,6 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
-
-      - name: Attach the web zip to the existing release
-        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2, pinned by commit (security review 2026-10-20: a moved tag cannot change what runs next to the release secrets)
-        with:
-          tag_name: v${{ needs.create-release.outputs.version }}
-          files: |
-            PROSM-Time-Web.zip
-            PROSM-Time-Web-v${{ needs.create-release.outputs.version }}.zip
-
-      - name: Also mirror the web zip to a PROSM-owned URL (no github.com)
-        # Same reasoning/pattern as create-release's own mirror step.
-        env:
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: |
-          set -e
-          if [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
-            echo "::error::SUPABASE_SERVICE_ROLE_KEY is not set - the update manifest's download links point to app-releases."
-            exit 1
-          fi
-          base="https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/app-releases"
-          upload() {
-            curl -sf -X POST "$base/$2" \
-              -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
-              -H "x-upsert: true" \
-              -H "Content-Type: application/zip" \
-              --data-binary "@$1"
-            echo ""
-          }
-          upload "PROSM-Time-Web.zip" "PROSM-Time-Web.zip"
-          upload "PROSM-Time-Web-v${{ needs.create-release.outputs.version }}.zip" "PROSM-Time-Web-v${{ needs.create-release.outputs.version }}.zip"
 
       # releasedAt below is the SAME value (needs.test.outputs.releasedAt,
       # via the RELEASED_AT env var) every builder job already baked into
@@ -530,11 +421,12 @@ jobs:
         env:
           RELEASE_VERSION: ${{ needs.create-release.outputs.version }}
           RELEASED_AT: ${{ needs.test.outputs.releasedAt }}
-          # Audit 2.3: Android and web from PROSM's Storage (uploaded above, before
-          # this job runs); Windows stays on the GitHub Release (over 50 MB).
+          # Owner 2026-10-20: PROSM Time is an APK to download and a web version
+          # to open at time.prosm.net - no desktop installer, no web zip. Older
+          # desktop installs are sent to the web version.
           ANDROID_URL: https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/public/app-releases/PROSM-Time-v${{ needs.create-release.outputs.version }}.apk
-          WINDOWS_URL: ${{ needs.create-release.outputs.windows_url }}
-          WEB_URL: https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/public/app-releases/PROSM-Time-Web-v${{ needs.create-release.outputs.version }}.zip
+          WINDOWS_URL: https://time.prosm.net
+          WEB_URL: https://time.prosm.net
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
           set -e

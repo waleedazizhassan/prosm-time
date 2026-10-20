@@ -74,9 +74,9 @@
       "title": "Berechtigungen und Stempeln im Auftrag (Administratoren)",
       "body": "Die Seite jeder Person unter Personen zeigt ihre Berechtigungen; wer sie ändern darf, kann eine mit Begründung vergeben, entziehen oder zurücksetzen. Der Inhaber hat alle Berechtigungen und kann jede davon an jeden unter ihm vergeben. Ein Manager kann einem Supervisor an seinen Standorten eine Berechtigung geben, die er selbst hat, und sie wieder entziehen. Urlaub genehmigen und jemanden in dessen Namen ein- oder ausstempeln dürfen nur der Inhaber und Manager - nie für sich selbst und nur für Personen unter ihnen an ihren Standorten. Jede Änderung wird mit ihrem Urheber festgehalten."
     },
-    "desktopApp": {
-      "title": "Windows-Desktop-App",
-      "body": "Dasselbe PROSM Time, das Sie bereits kennen, installiert als echtes Windows-Programm. Es öffnet sich bildschirmfüllend; F11 wechselt in den echten Vollbildmodus, und Escape bringt immer das normale Fenster mit seinem Schließen-Button zurück. Ihre Anmeldung bleibt zwischen den Starts gespeichert, genau wie auf Ihrem Smartphone oder im Browser."
+    "getTheApp": {
+      "title": "PROSM Time nutzen",
+      "body": "Auf einem Android-Telefon laden Sie die APK von prosm.net und installieren sie - die App meldet, wenn ein Update bereitsteht. Auf jedem Computer, Tablet oder iPhone öffnen Sie https://time.prosm.net im Browser (auch auf dem Startbildschirm ablegbar); es aktualisiert sich selbst. Beides ist dasselbe PROSM Time mit demselben Konto."
     },
     "liveMap": {
       "title": "Live-Karte",

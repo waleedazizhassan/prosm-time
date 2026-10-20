@@ -45,7 +45,7 @@ export default function HelpPage() {
     // be needed if that card is ever brought back for real.
     "permissions",
     "calendar",
-    "desktopApp",
+    "getTheApp",
     "liveMap",
     "radio",
     "privacy",

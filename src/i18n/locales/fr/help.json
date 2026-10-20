@@ -74,9 +74,9 @@
       "title": "Autorisations et pointage pour autrui (administrateurs)",
       "body": "La page de chaque personne dans Personnes affiche ses autorisations ; qui peut les modifier peut en accorder, retirer ou réinitialiser une, avec un motif. Le propriétaire a toutes les autorisations et peut en donner à toute personne en dessous de lui. Un responsable peut donner à un superviseur de ses sites une autorisation qu'il possède, et la retirer. Approuver les congés et pointer pour le compte de quelqu'un sont réservés au propriétaire et aux responsables - jamais pour soi-même, et seulement pour les personnes en dessous de soi sur ses sites. Chaque modification est enregistrée avec son auteur."
     },
-    "desktopApp": {
-      "title": "Application de bureau Windows",
-      "body": "Le même PROSM Time que vous connaissez déjà, installé comme un véritable programme Windows. Il s'ouvre en occupant tout l'écran ; F11 bascule en plein écran véritable et Échap ramène toujours la fenêtre normale avec son bouton de fermeture. Votre connexion reste mémorisée d'un lancement à l'autre, exactement comme sur votre téléphone ou dans un navigateur."
+    "getTheApp": {
+      "title": "Utiliser PROSM Time",
+      "body": "Sur un téléphone Android, téléchargez l'APK depuis prosm.net et installez-le - l'application vous prévient quand une mise à jour est prête. Sur tout ordinateur, tablette ou iPhone, ouvrez https://time.prosm.net dans le navigateur (vous pouvez l'ajouter à l'écran d'accueil) ; il se met à jour seul. C'est le même PROSM Time, avec le même compte."
     },
     "liveMap": {
       "title": "Carte en direct",

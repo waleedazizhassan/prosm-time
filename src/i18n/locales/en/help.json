@@ -74,9 +74,9 @@
       "title": "Permissions and Clocking On Behalf (Administrators)",
       "body": "Each person's page under People shows their permissions; whoever may change them can grant, revoke or reset one, with a reason. The Owner has every permission and can give any of them to anyone below. A Manager can give a Supervisor at their own sites a permission the Manager holds, and take it back. Approving leave and clocking someone in or out on their behalf are for the Owner and Managers only - never for oneself, and only for people below you at the sites you manage. Every change is recorded with who made it."
     },
-    "desktopApp": {
-      "title": "Windows Desktop App",
-      "body": "The same PROSM Time as a Windows program. It opens filling your screen; F11 switches to fullscreen and Escape brings back the normal window. Your sign-in is remembered between launches."
+    "getTheApp": {
+      "title": "Getting PROSM Time",
+      "body": "On an Android phone, download the APK from prosm.net and install it - the app tells you when an update is ready. On any computer, tablet or iPhone, open https://time.prosm.net in the browser (you can add it to the home screen); it updates itself. Both are the same PROSM Time with the same account."
     },
     "liveMap": {
       "title": "Live Map",
