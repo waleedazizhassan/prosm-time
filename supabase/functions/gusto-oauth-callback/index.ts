@@ -25,7 +25,13 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 
 const HTML_HEADERS = { "Content-Type": "text/html; charset=utf-8" };
 
-function resultPage(title: string, message: string, ok: boolean): Response {
+// Security review 2026-10-20: the page shows text from the query string (?error=) - escaped.
+const escapeHtml = (text: string) =>
+  text.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] as string);
+
+function resultPage(rawTitle: string, rawMessage: string, ok: boolean): Response {
+  const title = escapeHtml(rawTitle);
+  const message = escapeHtml(rawMessage);
   const color = ok ? "#1b7a4d" : "#b3261e";
   const html = `<!doctype html><html><head><meta charset="utf-8"><title>${title}</title>
 <style>body{font-family:system-ui,sans-serif;background:#0f1115;color:#e8e8e8;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}

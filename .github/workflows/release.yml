@@ -359,7 +359,7 @@ jobs:
           cp artifacts/prosm-time-windows/PROSM-Time-Setup.exe "artifacts/prosm-time-windows/PROSM-Time-Setup-v${{ needs.test.outputs.nextVersion }}.exe"
 
       - name: Publish (or update) the release for this version
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2, pinned by commit (security review 2026-10-20: a moved tag cannot change what runs next to the release secrets)
         with:
           tag_name: v${{ needs.test.outputs.nextVersion }}
           name: PROSM Time v${{ needs.test.outputs.nextVersion }}
@@ -487,7 +487,7 @@ jobs:
           path: dist
 
       - name: Attach the web zip to the existing release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2, pinned by commit (security review 2026-10-20: a moved tag cannot change what runs next to the release secrets)
         with:
           tag_name: v${{ needs.create-release.outputs.version }}
           files: |

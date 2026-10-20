@@ -8,12 +8,9 @@
 //
 // § real gap fix, 14-point live-audit - a session-less endpoint
 // guessing a 6-digit code needs a server-side rate limit; added here.
-// Deliberately NOT collapsed to one generic failure message the way
-// password-reset was (20260910150000): "invitation not found / already
-// used / expired / wrong code" are real, currently-translated, useful
-// distinctions for a legitimately invited employee, and the email
-// address here is already known to whoever sent the invite - a
-// separate, lower-severity call than the password-reset case.
+// Security review 2026-10-20 (20261020200000): every failure now gives the
+// same answer - the distinct ones told a stranger whether an email had a
+// pending invitation - and five wrong codes lock the invitation.
 // deno-lint-ignore-file no-explicit-any
 
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
@@ -63,7 +60,8 @@ serve(async (request: Request) => {
     });
 
     if (redeemError || !redeemResult?.success) {
-      return errorResponse(redeemError?.message ?? "Unable to redeem this invitation.", 400, "REDEEM_FAILED");
+      if (redeemError) console.error("redeem_prosm_time_invitation failed", redeemError.message);
+      return errorResponse("INVALID VERIFICATION CODE", 400, "REDEEM_FAILED");
     }
 
     const { error: updatePasswordError } = await serviceClient.auth.admin.updateUserById(redeemResult.authUserId, {

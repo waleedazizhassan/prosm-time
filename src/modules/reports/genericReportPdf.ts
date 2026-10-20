@@ -48,7 +48,7 @@ export function buildGenericReportPdf(
         <div style="font-size:19px;font-weight:700;">${escapeHtml(title)}</div>
         <div style="font-size:12px;color:#64748b;margin-top:2px;">${escapeHtml(dateRangeLabel)}</div>
       </div>
-      ${organizationLogoUrl ? `<img src="${organizationLogoUrl}" style="height:44px;max-width:80px;object-fit:contain;" />` : `<div style="width:44px;"></div>`}
+      ${organizationLogoUrl ? `<img src="${escapeHtml(organizationLogoUrl)}" style="height:44px;max-width:80px;object-fit:contain;" />` : `<div style="width:44px;"></div>`}
     </div>
 
     <table style="width:100%;border-collapse:collapse;font-size:11.5px;">

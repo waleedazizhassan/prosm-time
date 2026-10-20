@@ -16,17 +16,21 @@ export interface RateLimitRule {
 }
 
 /**
- * Best-effort caller identity for rate limiting. Supabase Edge Functions
- * sit behind the platform proxy, so the client address arrives in
- * x-forwarded-for; the first hop is the closest thing to a real client IP.
+ * Best-effort caller identity for rate limiting. Security review 2026-10-20:
+ * the first x-forwarded-for entry is whatever the client sent, so a caller
+ * could pick a fresh "IP" per request. cf-connecting-ip is set by the edge
+ * network in front of the platform (a client value is overwritten); failing
+ * that, the last x-forwarded-for hop is the one the platform proxy added.
  */
 export function clientIdentifier(request: Request): string {
+  const edge = request.headers.get("cf-connecting-ip")?.trim();
+  if (edge) return edge;
   const forwarded = request.headers.get("x-forwarded-for");
   if (forwarded) {
-    const first = forwarded.split(",")[0]?.trim();
-    if (first) return first;
+    const hops = forwarded.split(",").map((hop) => hop.trim()).filter(Boolean);
+    if (hops.length > 0) return hops[hops.length - 1];
   }
-  return request.headers.get("cf-connecting-ip")?.trim() || "unknown";
+  return "unknown";
 }
 
 /**

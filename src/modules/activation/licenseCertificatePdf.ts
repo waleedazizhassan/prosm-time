@@ -44,7 +44,7 @@ export function buildLicenseCertificatePdf(data: LicenseCertificateData, languag
         <div style="font-size:22px;font-weight:700;">${escapeHtml(t("common:appName"))}</div>
         <div style="font-size:13px;color:#64748b;margin-top:4px;">${escapeHtml(t("activation.certificate.title"))}</div>
       </div>
-      ${organizationLogoUrl ? `<img src="${organizationLogoUrl}" style="height:52px;max-width:96px;object-fit:contain;" />` : `<div style="width:52px;"></div>`}
+      ${organizationLogoUrl ? `<img src="${escapeHtml(organizationLogoUrl)}" style="height:52px;max-width:96px;object-fit:contain;" />` : `<div style="width:52px;"></div>`}
     </div>
 
     <table style="width:100%;border-collapse:collapse;font-size:13px;">
