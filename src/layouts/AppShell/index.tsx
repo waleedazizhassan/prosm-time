@@ -5,6 +5,7 @@ import PageLoadBoundary from "../../components/common/PageLoadBoundary";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Main from "./Main";
+import BottomNav from "./BottomNav";
 import InstallationStatusBanner from "./InstallationStatusBanner";
 import OfflineBanner from "./OfflineBanner";
 import PresenceTrackingLoop from "./PresenceTrackingLoop";
@@ -42,6 +43,7 @@ export default function AppShell() {
             </PageLoadBoundary>
           </Main>
         </div>
+        <BottomNav />
       </div>
     </LayoutProvider>
   );

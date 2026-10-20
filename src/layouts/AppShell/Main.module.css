@@ -13,6 +13,13 @@
   overflow-y: auto;
 }
 
+/* Room for the phone's bottom bar (BottomNav). */
+@media (max-width: 900px) {
+  .main {
+    padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 @media print {
   .main {
     min-height: 0;
