@@ -38,7 +38,8 @@
     "sites.manage": "Gérer les sites",
     "timesheets.approve": "Approuver les feuilles de temps",
     "timesheets.generate": "Générer les feuilles de temps",
-    "leave.approve": "Approuver les congés"
+    "leave.approve": "Approuver les congés",
+    "people.unassigned": "Employés sans site"
   },
   "invite": {
     "actionLabel": "Inviter un employé",

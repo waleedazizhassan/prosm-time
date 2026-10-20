@@ -43,7 +43,9 @@
   "notes": {
     "clockIn": "Clock in: {{note}}",
     "clockOut": "Clock out: {{note}}",
-    "earlyLeave": "Left early: {{reason}}"
+    "earlyLeave": "Left early: {{reason}}",
+    "mockClockIn": "Clock-in from a fake (simulated) location",
+    "mockClockOut": "Clock-out from a fake (simulated) location"
   },
   "periods": {
     "today": "Today",

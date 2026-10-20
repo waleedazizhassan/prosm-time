@@ -12,5 +12,8 @@ export function attendanceNoteLines(row: TodayAttendanceRow, t: TFunc): string[]
     row.clockOutNote ? t("notes.clockOut", { note: row.clockOutNote }) : null,
     row.clockOutActivity && row.clockOutActivity !== row.clockInActivity ? t("activityLabel", { activity: row.clockOutActivity }) : null,
     row.earlyLeaveReason ? t("notes.earlyLeave", { reason: row.earlyLeaveReason }) : null,
+    // Owner 2026-10-20: a fake location stays on record here; the hours still count.
+    row.clockInMockLocation ? t("notes.mockClockIn") : null,
+    row.clockOutMockLocation ? t("notes.mockClockOut") : null,
   ].filter((line): line is string => Boolean(line));
 }

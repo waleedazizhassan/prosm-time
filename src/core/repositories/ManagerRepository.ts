@@ -52,6 +52,10 @@ export interface TodayAttendanceRow {
   // later), not the server; a manager reviews it.
   clockInDeviceTime: boolean;
   clockOutDeviceTime: boolean;
+  // Owner 2026-10-20: a fake (simulated) location doesn't cancel the hours,
+  // it stays on record in the notes.
+  clockInMockLocation: boolean;
+  clockOutMockLocation: boolean;
   // Recorded by the former early-leave prompt (until 2026-10-18); shown with the notes.
   earlyLeaveReason: string | null;
   // § live UX review, user-directed - "Change Site" mid-shift: show the
@@ -115,6 +119,7 @@ interface RawAttendanceEventRow {
   note: string | null;
   activity: string | null;
   time_source: "server" | "device_offline" | null;
+  is_mock_location: boolean | null;
   recorded_by_user: { full_name: string } | { full_name: string }[] | null;
 }
 
@@ -279,10 +284,11 @@ class ManagerRepository {
       const clockInRecordedByBySession = new Map<string, string>();
       const clockOutRecordedByBySession = new Map<string, string>();
       const deviceTimeEvents = new Set<string>();
+      const mockLocationEvents = new Set<string>();
       if (sessionIds.length > 0) {
         const eventsResult = await this.client
           .from("attendance_events")
-          .select("id, session_id, event_type, latitude, longitude, within_geofence, note, activity, time_source, recorded_by_user:users!attendance_events_recorded_by_fkey(full_name)")
+          .select("id, session_id, event_type, latitude, longitude, within_geofence, note, activity, time_source, is_mock_location, recorded_by_user:users!attendance_events_recorded_by_fkey(full_name)")
           .in("session_id", sessionIds)
           .in("event_type", ["clock_in", "clock_out"]);
         if (eventsResult.error) return createError(eventsResult.error.message);
@@ -321,6 +327,7 @@ class ManagerRepository {
             else clockOutActivityBySession.set(event.session_id, event.activity);
           }
           if (event.time_source === "device_offline") deviceTimeEvents.add(`${event.session_id}:${event.event_type}`);
+          if (event.is_mock_location === true) mockLocationEvents.add(`${event.session_id}:${event.event_type}`);
           const recordedByUser = Array.isArray(event.recorded_by_user) ? event.recorded_by_user[0] : event.recorded_by_user;
           if (recordedByUser?.full_name) {
             if (event.event_type === "clock_in") clockInRecordedByBySession.set(event.session_id, recordedByUser.full_name);
@@ -379,6 +386,8 @@ class ManagerRepository {
           clockOutRecordedByName: clockOutRecordedByBySession.get(row.id) ?? null,
           clockInDeviceTime: deviceTimeEvents.has(`${row.id}:clock_in`),
           clockOutDeviceTime: deviceTimeEvents.has(`${row.id}:clock_out`),
+          clockInMockLocation: mockLocationEvents.has(`${row.id}:clock_in`),
+          clockOutMockLocation: mockLocationEvents.has(`${row.id}:clock_out`),
           earlyLeaveReason: row.early_leave_reason ?? null,
           siteChanges: siteChangesBySession.get(row.id) ?? [],
         };

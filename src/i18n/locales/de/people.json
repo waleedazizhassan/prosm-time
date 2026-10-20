@@ -38,7 +38,8 @@
     "sites.manage": "Standorte verwalten",
     "timesheets.approve": "Stundenzettel genehmigen",
     "timesheets.generate": "Stundenzettel erstellen",
-    "leave.approve": "Urlaub genehmigen"
+    "leave.approve": "Urlaub genehmigen",
+    "people.unassigned": "Mitarbeitende ohne Standort"
   },
   "invite": {
     "actionLabel": "Mitarbeiter einladen",

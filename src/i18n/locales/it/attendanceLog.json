@@ -43,7 +43,9 @@
   "notes": {
     "clockIn": "Entrata: {{note}}",
     "clockOut": "Uscita: {{note}}",
-    "earlyLeave": "Uscita anticipata: {{reason}}"
+    "earlyLeave": "Uscita anticipata: {{reason}}",
+    "mockClockIn": "Entrata timbrata da una posizione falsa",
+    "mockClockOut": "Uscita timbrata da una posizione falsa"
   },
   "periods": {
     "today": "Oggi",

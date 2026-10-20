@@ -43,7 +43,9 @@
   "notes": {
     "clockIn": "الحضور: {{note}}",
     "clockOut": "الانصراف: {{note}}",
-    "earlyLeave": "انصراف مبكر: {{reason}}"
+    "earlyLeave": "انصراف مبكر: {{reason}}",
+    "mockClockIn": "تسجيل الحضور من موقع مزيف",
+    "mockClockOut": "تسجيل الانصراف من موقع مزيف"
   },
   "periods": {
     "today": "اليوم",

@@ -38,7 +38,8 @@
     "sites.manage": "Manage sites",
     "timesheets.approve": "Approve timesheets",
     "timesheets.generate": "Generate timesheets",
-    "leave.approve": "Approve leave"
+    "leave.approve": "Approve leave",
+    "people.unassigned": "Employees not tied to a site"
   },
   "invite": {
     "actionLabel": "Invite employee",

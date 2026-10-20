@@ -38,7 +38,8 @@
     "sites.manage": "إدارة المواقع",
     "timesheets.approve": "اعتماد كشوف الدوام",
     "timesheets.generate": "توليد كشوف الدوام",
-    "leave.approve": "الموافقة على الإجازات"
+    "leave.approve": "الموافقة على الإجازات",
+    "people.unassigned": "الموظفون غير المرتبطين بموقع"
   },
   "invite": {
     "actionLabel": "دعوة موظف",

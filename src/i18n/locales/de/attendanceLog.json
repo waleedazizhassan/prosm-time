@@ -43,7 +43,9 @@
   "notes": {
     "clockIn": "Einstempeln: {{note}}",
     "clockOut": "Ausstempeln: {{note}}",
-    "earlyLeave": "Früher gegangen: {{reason}}"
+    "earlyLeave": "Früher gegangen: {{reason}}",
+    "mockClockIn": "Einstempeln von einem gefälschten Standort",
+    "mockClockOut": "Ausstempeln von einem gefälschten Standort"
   },
   "periods": {
     "today": "Heute",

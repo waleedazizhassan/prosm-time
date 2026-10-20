@@ -38,7 +38,8 @@
     "sites.manage": "Gestisci sedi",
     "timesheets.approve": "Approva fogli ore",
     "timesheets.generate": "Genera fogli ore",
-    "leave.approve": "Approvare le ferie"
+    "leave.approve": "Approvare le ferie",
+    "people.unassigned": "Dipendenti senza sede"
   },
   "invite": {
     "actionLabel": "Invita dipendente",
