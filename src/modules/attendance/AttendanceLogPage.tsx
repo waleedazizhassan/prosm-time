@@ -24,6 +24,7 @@ import { buildAttendanceLogPdf } from "./attendanceLogPdf";
 import PageBanner from "../../components/common/PageBanner";
 import { PERIODS, formatHours, isPeriod, periodRange, sessionHours, type Period } from "./periods";
 import { attendanceNoteLines } from "./attendanceNotes";
+import HintText from "../../components/common/HintText";
 
 const ALL_EMPLOYEES = "";
 
@@ -351,7 +352,7 @@ export default function AttendanceLogPage() {
 
       <Modal isOpen={Boolean(evidenceModalTitle)} onClose={closeEvidence} title={evidenceModalTitle ?? t("photoModalTitle")}>
         {evidenceLoading ? (
-          <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("photoLoading")}</p>
+          <HintText>{t("photoLoading")}</HintText>
         ) : evidenceError ? (
           <ErrorText>{evidenceError}</ErrorText>
         ) : evidenceUrl ? (

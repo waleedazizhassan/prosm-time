@@ -9,6 +9,7 @@ import Card from "../../components/common/Card";
 import Select from "../../components/common/Select";
 import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
+import HintText from "../../components/common/HintText";
 
 interface PayrollStatus {
   connected: boolean;
@@ -136,7 +137,7 @@ function ProviderPanel({ provider, providerKey }: { provider: PayrollProviderRep
 
   return (
     <div>
-      <p style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t(`${providerKey}.hint`)}</p>
+      <HintText>{t(`${providerKey}.hint`)}</HintText>
 
       {status?.connected ? (
         <div style={{ marginBottom: "var(--space-2)" }}>
@@ -172,7 +173,7 @@ function ProviderPanel({ provider, providerKey }: { provider: PayrollProviderRep
         </div>
       ) : (
         <div style={{ marginBottom: "var(--space-2)" }}>
-          <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)", marginBottom: "var(--space-3)" }}>{t(`${providerKey}.notConnected`)}</p>
+          <HintText>{t(`${providerKey}.notConnected`)}</HintText>
           {notConfigured ? (
             <p style={{ fontSize: "var(--font-sm)", color: "var(--warning-text, #b3261e)", marginBottom: "var(--space-3)" }}>{t("payroll.notConfigured")}</p>
           ) : (

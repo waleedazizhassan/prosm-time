@@ -5,6 +5,7 @@ import Card from "../../components/common/Card";
 import helpHeaderImage from "../../assets/illustrations/help.svg";
 import PageBanner from "../../components/common/PageBanner";
 import LegalLinks from "../legal/LegalLinks";
+import HintText from "../../components/common/HintText";
 
 // PROSM Time WP-21/§32 - "A dedicated Help area must exist, providing:
 // product help, basic usage guidance, FAQ where implemented, support
@@ -70,13 +71,13 @@ export default function HelpPage() {
         {faqEntries.map((entry) => (
           <div key={entry} style={{ padding: "var(--space-3) 0", borderTop: entry === 1 ? "none" : "1px solid var(--border-light)" }}>
             <p style={{ margin: "0 0 var(--space-1)", fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)" }}>{t(`faq.q${entry}.question`)}</p>
-            <p style={{ margin: 0, fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t(`faq.q${entry}.answer`)}</p>
+            <HintText>{t(`faq.q${entry}.answer`)}</HintText>
           </div>
         ))}
       </Card>
 
       <Card title={t("contact.title")}>
-        <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("contact.body")}</p>
+        <HintText>{t("contact.body")}</HintText>
         <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-1)" }}>
           <span style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>
             {t("contact.infoLabel")}{" "}

@@ -12,6 +12,7 @@ import Select from "../../components/common/Select";
 import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
 import Modal from "../../components/common/Modal";
+import HintText from "../../components/common/HintText";
 
 // PROSM Time - § user-directed: a real integration key so sibling
 // PROSM products (PROSM Projects first) can pull verified attendance
@@ -104,7 +105,7 @@ export default function IntegrationsSettingsCard() {
 
   return (
     <Card title={t("integrations.title")}>
-      <p style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("integrations.hint")}</p>
+      <HintText>{t("integrations.hint")}</HintText>
 
       {activeKeys.length > 0 ? (
         <div style={{ marginBottom: "var(--space-4)" }}>
@@ -136,7 +137,7 @@ export default function IntegrationsSettingsCard() {
           ))}
         </div>
       ) : (
-        <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)", marginBottom: "var(--space-4)" }}>{t("integrations.empty")}</p>
+        <HintText>{t("integrations.empty")}</HintText>
       )}
 
       <div style={{ display: "flex", gap: "var(--space-2)", alignItems: "flex-end", flexWrap: "wrap" }}>
@@ -171,7 +172,7 @@ export default function IntegrationsSettingsCard() {
       <ErrorText>{error}</ErrorText>
 
       <Modal isOpen={newKeyValue !== null} onClose={() => setNewKeyValue(null)} title={t("integrations.newKeyTitle")}>
-        <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)", marginBottom: "var(--space-3)" }}>{t("integrations.newKeyWarning")}</p>
+        <HintText>{t("integrations.newKeyWarning")}</HintText>
         <div style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}>
           <input
             readOnly

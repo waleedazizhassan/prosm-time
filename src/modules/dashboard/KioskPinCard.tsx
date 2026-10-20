@@ -8,6 +8,7 @@ import Card from "../../components/common/Card";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
+import HintText from "../../components/common/HintText";
 
 // PROSM Time WP-18/§13.1 - self-service kiosk PIN setup. Every
 // employee who might ever use a shared kiosk device needs their own
@@ -38,7 +39,7 @@ export default function KioskPinCard() {
 
   return (
     <Card title={t("kioskPin.title")}>
-      <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("kioskPin.hint")}</p>
+      <HintText small>{t("kioskPin.hint")}</HintText>
       <ErrorText>{error}</ErrorText>
       {success ? <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("kioskPin.success")}</p> : null}
       <Input label={t("kioskPin.pinLabel")} name="kioskPin" type="password" value={pin} onChange={(event) => setPin(event.target.value.replace(/[^0-9]/g, "").slice(0, 6))} disabled={submitting} />

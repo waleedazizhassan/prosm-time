@@ -9,6 +9,7 @@ import Input from "../../components/common/Input";
 import Select from "../../components/common/Select";
 import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
+import HintText from "../../components/common/HintText";
 
 type BreakRoundingMode = Organization["defaultBreakRoundingMode"];
 
@@ -72,7 +73,7 @@ export default function SiteDefaultsSettingsCard() {
 
   return (
     <Card title={t("siteDefaults.title")}>
-      <p style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("siteDefaults.hint")}</p>
+      <HintText>{t("siteDefaults.hint")}</HintText>
 
       <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
         <div style={{ maxWidth: 220 }}>

@@ -25,6 +25,7 @@ import Textarea from "../../components/common/Textarea";
 import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
 import AdminAttendanceCard from "./AdminAttendanceCard";
+import HintText from "../../components/common/HintText";
 
 const MANAGER_ONLY_PERMISSIONS = ["leave.approve", "attendance.clock_in_on_behalf", "attendance.clock_out_on_behalf"];
 
@@ -341,45 +342,45 @@ export default function PersonDetailPage() {
         {t("detail.backToList")}
       </Link>
 
-      {!member.isActive ? (
+      {/* Owner 2026-10-20 ("nothing repeated"): one Account card - stop or
+          restore access (reversible), or remove the person for good
+          (their sign-in account too) - instead of two separate cards. */}
+      {!member.isActive || (canDeactivate && !member.isOwner) ? (
         <Card title={t("detail.accessTitle")}>
-          <StatusBadge status="deactivated">{t("detail.deactivatedBadge")}</StatusBadge>
+          {!member.isActive ? <StatusBadge status="deactivated">{t("detail.deactivatedBadge")}</StatusBadge> : null}
+          {canDeactivate && !member.isOwner ? (
+            <>
+              <HintText small>{member.isActive ? t("detail.deactivateHint") : null}</HintText>
+              <HintText small>{t("detail.removeHint")}</HintText>
+            </>
+          ) : null}
           <ErrorText>{reactivateError}</ErrorText>
           {canDeactivate ? (
-            <div style={{ display: "flex", gap: "var(--space-2)", marginTop: "var(--space-3)" }}>
-              <Button onClick={handleReactivate} loading={reactivateSubmitting}>
-                {t("detail.reactivateAction")}
-              </Button>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)", marginTop: "var(--space-3)" }}>
+              {member.isActive ? (
+                member.isOwner ? null : (
+                  <Button variant="ghost" onClick={() => setDeactivateModalOpen(true)}>
+                    {t("detail.deactivateAction")}
+                  </Button>
+                )
+              ) : (
+                <Button onClick={handleReactivate} loading={reactivateSubmitting}>
+                  {t("detail.reactivateAction")}
+                </Button>
+              )}
+              {member.isOwner ? null : (
+                <Button variant="danger" onClick={() => setRemoveModalOpen(true)}>
+                  {t("detail.removeAction")}
+                </Button>
+              )}
             </div>
           ) : null}
-        </Card>
-      ) : canDeactivate && !member.isOwner ? (
-        <Card title={t("detail.accessTitle")}>
-          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.deactivateHint")}</p>
-          <Button variant="danger" onClick={() => setDeactivateModalOpen(true)}>
-            {t("detail.deactivateAction")}
-          </Button>
-        </Card>
-      ) : null}
-
-      {/* § live UX review, user-directed correction - "I asked for a
-          button to remove an employee from the application, not just
-          deactivate them." Permanent (users row + their real sign-in
-          account both deleted) - available regardless of active/
-          deactivated state, deliberately separate from the reversible
-          deactivate action above. */}
-      {canDeactivate && !member.isOwner ? (
-        <Card title={t("detail.removeTitle")}>
-          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.removeHint")}</p>
-          <Button variant="danger" onClick={() => setRemoveModalOpen(true)}>
-            {t("detail.removeAction")}
-          </Button>
         </Card>
       ) : null}
 
       {canManagePermissions ? (
         <Card title={t("detail.permissionsTitle")}>
-          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.permissionsHint")}</p>
+          <HintText small>{t("detail.permissionsHint")}</HintText>
 
           {member.isOwner ? (
             <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>
@@ -423,7 +424,7 @@ export default function PersonDetailPage() {
       ) : null}
 
       <Card title={t("detail.devicesTitle")}>
-        <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.devicesHint")}</p>
+        <HintText small>{t("detail.devicesHint")}</HintText>
         <ErrorText>{deviceActionError}</ErrorText>
         {devices.length === 0 ? (
           <EmptyState message={t("detail.noDevices")} />
@@ -454,7 +455,7 @@ export default function PersonDetailPage() {
       {/* Hidden while the kiosk is for external workers only (FEATURES.employeeKiosk). */}
       {canManageDevices && FEATURES.employeeKiosk ? (
         <Card title={t("detail.kioskPinTitle")}>
-          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.kioskPinHint")}</p>
+          <HintText small>{t("detail.kioskPinHint")}</HintText>
           <ErrorText>{kioskPinError}</ErrorText>
           {kioskPinSuccess ? <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("detail.kioskPinSuccess")}</p> : null}
           <Input label={t("detail.kioskPinLabel")} name="kioskPin" type="password" value={kioskPin} onChange={(event) => setKioskPin(event.target.value.replace(/[^0-9]/g, "").slice(0, 6))} disabled={kioskPinSubmitting} />
@@ -466,7 +467,7 @@ export default function PersonDetailPage() {
 
       {canEditLeaveEntitlement ? (
         <Card title={t("detail.leaveEntitlementTitle")}>
-          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.leaveEntitlementHint")}</p>
+          <HintText small>{t("detail.leaveEntitlementHint")}</HintText>
           {annualEntitlement != null ? (
             <p style={{ fontSize: "var(--font-sm)", margin: "0 0 var(--space-2)" }}>{t("detail.leaveEntitlementCurrent", { days: annualEntitlement })}</p>
           ) : null}
@@ -488,7 +489,7 @@ export default function PersonDetailPage() {
 
       {canEditPayRate ? (
         <Card title={t("detail.payRateTitle")}>
-          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.payRateHint")}</p>
+          <HintText small>{t("detail.payRateHint")}</HintText>
           {currentPayRate ? (
             <p style={{ fontSize: "var(--font-sm)", margin: "0 0 var(--space-2)" }}>
               {t("detail.payRateCurrent", { amount: currentPayRate.rateAmount, currency: currentPayRate.currency, type: t(`detail.payRateType.${currentPayRate.rateType}`) })}
@@ -516,7 +517,7 @@ export default function PersonDetailPage() {
 
       {canManageDevices ? (
         <Card title={t("detail.dataRightsTitle")}>
-          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.dataRightsHint")}</p>
+          <HintText small>{t("detail.dataRightsHint")}</HintText>
           <div style={{ display: "flex", gap: "var(--space-2)" }}>
             <Button variant="danger" onClick={() => setDeleteModalOpen(true)}>
               {t("detail.deleteDataAction")}
@@ -537,7 +538,7 @@ export default function PersonDetailPage() {
           </Button>
         }
       >
-        <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("detail.deactivateWarning")}</p>
+        <HintText>{t("detail.deactivateWarning")}</HintText>
         <ErrorText>{deactivateError}</ErrorText>
         <Textarea label={t("detail.reasonLabel")} name="deactivateReason" value={deactivateReason} onChange={(event) => setDeactivateReason(event.target.value)} disabled={deactivateSubmitting} required />
       </Modal>
@@ -552,7 +553,7 @@ export default function PersonDetailPage() {
           </Button>
         }
       >
-        <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("detail.removeWarning")}</p>
+        <HintText>{t("detail.removeWarning")}</HintText>
         <ErrorText>{removeError}</ErrorText>
         <Textarea label={t("detail.reasonLabel")} name="removeReason" value={removeReason} onChange={(event) => setRemoveReason(event.target.value)} disabled={removeSubmitting} required />
       </Modal>
@@ -567,7 +568,7 @@ export default function PersonDetailPage() {
           </Button>
         }
       >
-        <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("detail.deleteDataWarning")}</p>
+        <HintText>{t("detail.deleteDataWarning")}</HintText>
         <ErrorText>{deleteError}</ErrorText>
         <Textarea label={t("detail.deleteReasonLabel")} name="deleteReason" value={deleteReason} onChange={(event) => setDeleteReason(event.target.value)} disabled={deleteSubmitting} required />
       </Modal>

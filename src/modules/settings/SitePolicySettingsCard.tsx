@@ -11,6 +11,7 @@ import Select from "../../components/common/Select";
 import Button from "../../components/common/Button";
 import Toggle from "../../components/common/Toggle";
 import ErrorText from "../../components/common/ErrorText";
+import HintText from "../../components/common/HintText";
 
 const BREAK_ROUNDING_MODE_OPTIONS: BreakRoundingMode[] = ["cumulative", "full_hour"];
 
@@ -163,7 +164,7 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
 
   return (
     <Card title={t("sitePolicy.title")}>
-      <p style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("sitePolicy.hint")}</p>
+      <HintText>{t("sitePolicy.hint")}</HintText>
 
       {siteId ? null : (
       <div style={{ maxWidth: 320 }}>
@@ -178,7 +179,7 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
       </div>
       )}
 
-      {!siteId && !sitesLoading && sites.length === 0 ? <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("sitePolicy.noSites")}</p> : null}
+      {!siteId && !sitesLoading && sites.length === 0 ? <HintText>{t("sitePolicy.noSites")}</HintText> : null}
 
       <ErrorText>{loadError}</ErrorText>
 
@@ -216,7 +217,7 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
           <h3 style={{ fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)", margin: "var(--space-4) 0 var(--space-1)" }}>
             {t("sites:form.shiftPolicyTitle")}
           </h3>
-          <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("sites:form.shiftPolicyHint")}</p>
+          <HintText small>{t("sites:form.shiftPolicyHint")}</HintText>
 
           <div style={{ display: "flex", gap: "var(--space-3)" }}>
             <Input
@@ -328,14 +329,14 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
               label={t("sites:form.presenceMonitoringEnabledLabel")}
             />
           </div>
-          <p style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("sites:form.presenceMonitoringEnabledHint")}</p>
+          <HintText small>{t("sites:form.presenceMonitoringEnabledHint")}</HintText>
 
           {assignments.length > 0 ? (
             <div style={{ margin: "var(--space-3) 0" }}>
               <h3 style={{ fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)", margin: "0 0 var(--space-1)" }}>
                 {t("sites:form.exemptEmployeesTitle")}
               </h3>
-              <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("sites:form.exemptEmployeesHint")}</p>
+              <HintText small>{t("sites:form.exemptEmployeesHint")}</HintText>
 
               {nonExemptAssignments.length > 0 ? (
                 <div style={{ display: "flex", gap: "var(--space-2)", alignItems: "flex-end" }}>
@@ -370,13 +371,13 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
                   ))}
                 </ul>
               ) : (
-                <p style={{ margin: "var(--space-2) 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("sites:form.exemptEmployeesEmpty")}</p>
+                <HintText small>{t("sites:form.exemptEmployeesEmpty")}</HintText>
               )}
 
               <ErrorText>{exemptionError}</ErrorText>
             </div>
           ) : (
-            <p style={{ margin: "var(--space-3) 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("sitePolicy.noAssignmentsYet")}</p>
+            <HintText small>{t("sitePolicy.noAssignmentsYet")}</HintText>
           )}
 
           <div style={{ marginTop: "var(--space-3)" }}>

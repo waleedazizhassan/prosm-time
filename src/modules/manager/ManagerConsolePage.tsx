@@ -18,6 +18,7 @@ import ListRow from "../../components/common/ListRow";
 import { formatTimeOnly, formatDateOnly } from "../../core/utils/formatDate";
 import managerConsoleHeaderImage from "../../assets/illustrations/manager.svg";
 import PageBanner from "../../components/common/PageBanner";
+import HintText from "../../components/common/HintText";
 
 type ReviewAction = "approved" | "rejected" | "acknowledged" | "clarification_requested";
 // Owner 2026-10-20 ("what is the right action for each reason?"): only the
@@ -329,7 +330,7 @@ export default function ManagerConsolePage() {
 
       {canApproveLeave ? (
         <Card title={t("leave.revokeTitle")}>
-          <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("leave.revokeHint")}</p>
+          <HintText small>{t("leave.revokeHint")}</HintText>
           {approvedLeave.length === 0 ? (
             <EmptyState message={t("leave.revokeEmpty")} />
           ) : (

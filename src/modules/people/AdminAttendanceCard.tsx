@@ -14,6 +14,7 @@ import Textarea from "../../components/common/Textarea";
 import Button from "../../components/common/Button";
 import { formatTimeOnly } from "../../core/utils/formatDate";
 import ErrorText from "../../components/common/ErrorText";
+import HintText from "../../components/common/HintText";
 
 interface AdminAttendanceCardProps {
   subjectUserId: string;
@@ -150,7 +151,7 @@ export default function AdminAttendanceCard({ subjectUserId, subjectFullName }: 
 
   return (
     <Card title={t("detail.attendance.title")}>
-      <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.attendance.hint")}</p>
+      <HintText small>{t("detail.attendance.hint")}</HintText>
 
       <div style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--surface-hover)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
         {t("detail.attendance.actorSubjectNotice", { actor: profile?.fullName ?? "", subject: subjectFullName })}
@@ -160,7 +161,7 @@ export default function AdminAttendanceCard({ subjectUserId, subjectFullName }: 
 
       {session ? (
         <>
-          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("detail.attendance.clockedInSince", { time: formatTimeOnly(session.clockInAt, i18n.language) })}</p>
+          <HintText>{t("detail.attendance.clockedInSince", { time: formatTimeOnly(session.clockInAt, i18n.language) })}</HintText>
           {canClockOut ? (
             <>
               <Textarea label={t("detail.attendance.reasonLabel")} name="adminClockOutReason" value={reason} onChange={(event) => setReason(event.target.value)} required disabled={submitting} />
@@ -172,7 +173,7 @@ export default function AdminAttendanceCard({ subjectUserId, subjectFullName }: 
         </>
       ) : canClockIn ? (
         sites.length === 0 ? (
-          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("detail.attendance.noAssignedSites")}</p>
+          <HintText>{t("detail.attendance.noAssignedSites")}</HintText>
         ) : (
           <>
             <Select label={t("detail.attendance.siteLabel")} name="adminClockInSite" value={siteId} onChange={(event) => setSiteId(event.target.value)} disabled={submitting} options={sites.map((site) => ({ value: site.id, label: site.name }))} />
@@ -191,7 +192,7 @@ export default function AdminAttendanceCard({ subjectUserId, subjectFullName }: 
           </>
         )
       ) : (
-        <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("detail.attendance.notClockedIn")}</p>
+        <HintText>{t("detail.attendance.notClockedIn")}</HintText>
       )}
     </Card>
   );

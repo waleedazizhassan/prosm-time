@@ -17,6 +17,7 @@ import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
 import leaveHeaderImage from "../../assets/illustrations/leave.svg";
 import PageBanner from "../../components/common/PageBanner";
+import HintText from "../../components/common/HintText";
 
 const LEAVE_TYPES: LeaveType[] = ["annual", "sick", "unpaid", "emergency", "other"];
 
@@ -184,9 +185,9 @@ export default function LeaveRequestsPage() {
                 </p>
               )}
               {entry.entitledDays !== null ? (
-                <p style={{ margin: "2px 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("balanceDetail", { used: entry.usedDays, pending: entry.pendingDays, entitled: entry.entitledDays })}</p>
+                <HintText small>{t("balanceDetail", { used: entry.usedDays, pending: entry.pendingDays, entitled: entry.entitledDays })}</HintText>
               ) : entry.pendingDays > 0 ? (
-                <p style={{ margin: "2px 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("pendingSuffix", { pending: entry.pendingDays })}</p>
+                <HintText small>{t("pendingSuffix", { pending: entry.pendingDays })}</HintText>
               ) : null}
             </div>
           ))}
@@ -206,7 +207,7 @@ export default function LeaveRequestsPage() {
           <Input label={t("startDateLabel")} name="leaveStartDate" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} disabled={submitting} />
           <Input label={t("endDateLabel")} name="leaveEndDate" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} disabled={submitting} />
         </div>
-        {isOwner ? <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("ownerAutoApproveHint")}</p> : null}
+        {isOwner ? <HintText>{t("ownerAutoApproveHint")}</HintText> : null}
         <Textarea label={t("reasonLabel")} name="leaveReason" value={reason} onChange={(event) => setReason(event.target.value)} disabled={submitting} rows={2} />
         <ErrorText>{submitError}</ErrorText>
         {submitSuccess ? <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-sm)", color: "var(--status-success-text)" }}>{t("ownerAutoApprovedMessage")}</p> : null}

@@ -8,6 +8,7 @@ import Card from "../../components/common/Card";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
+import HintText from "../../components/common/HintText";
 
 // PROSM Time - § live UX review, user-directed: "control every
 // employee the same way, whether they clocked in at a registered site
@@ -58,7 +59,7 @@ export default function NoSiteRadiusSettingsCard() {
 
   return (
     <Card title={t("noSiteRadius.title")}>
-      <p style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("noSiteRadius.hint")}</p>
+      <HintText>{t("noSiteRadius.hint")}</HintText>
       <div style={{ maxWidth: 220 }}>
         <Input
           label={t("noSiteRadius.radiusLabel")}

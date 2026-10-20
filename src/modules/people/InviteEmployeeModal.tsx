@@ -11,6 +11,7 @@ import Input from "../../components/common/Input";
 import Select from "../../components/common/Select";
 import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
+import HintText from "../../components/common/HintText";
 
 const ROLE_OPTIONS: InviteInput["roleKey"][] = ["manager", "supervisor", "employee", "read_only"];
 
@@ -88,7 +89,7 @@ export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: Invi
         <p style={{ marginTop: "var(--space-4)" }}>
           <strong>{t("invite.codeLabel")}:</strong> <span style={{ fontFamily: "monospace", fontSize: "var(--font-lg)" }}>{result.verificationCode}</span>
         </p>
-        <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{result.email}</p>
+        <HintText>{result.email}</HintText>
       </Modal>
     );
   }

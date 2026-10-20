@@ -12,6 +12,7 @@ import Select from "../../components/common/Select";
 import Textarea from "../../components/common/Textarea";
 import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
+import HintText from "../../components/common/HintText";
 
 const REASON_CATEGORIES = ["purchasing_food", "restroom", "work_assignment", "emergency", "other"];
 const REFRESH_INTERVAL_MS = 60 * 1000;
@@ -110,7 +111,7 @@ export default function ExceptionsCard() {
 
   return (
     <Card title={t("exceptions.title")}>
-      <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("exceptions.hint")}</p>
+      <HintText small>{t("exceptions.hint")}</HintText>
       <ErrorText>{error}</ErrorText>
 
       {exceptions.map((exception) => (

@@ -21,6 +21,7 @@ import SitePolicySettingsCard from "../settings/SitePolicySettingsCard";
 import AssignSiteMemberModal from "./AssignSiteMemberModal";
 import ProjectFormModal from "./ProjectFormModal";
 import ProjectAssignmentsModal from "./ProjectAssignmentsModal";
+import HintText from "../../components/common/HintText";
 
 // PROSM Time WP-05/§13/§14 - Site detail: full configuration, assigned
 // employees/managers, and the site's projects. Project management is
@@ -145,7 +146,7 @@ export default function SiteDetailPage() {
       </Link>
 
       <Card title={t("detail.assignmentsTitle")}>
-        <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.assignmentsHint")}</p>
+        <HintText small>{t("detail.assignmentsHint")}</HintText>
 
         {canManageSites ? (
           <Button variant="ghost" size="sm" onClick={() => setAssignOpen(true)}>
@@ -173,7 +174,7 @@ export default function SiteDetailPage() {
       </Card>
 
       <Card title={t("detail.projectsTitle")}>
-        <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("detail.projectsHint")}</p>
+        <HintText small>{t("detail.projectsHint")}</HintText>
 
         {canManageProjects ? (
           <Button variant="ghost" size="sm" onClick={() => setProjectFormState({ open: true })}>
@@ -191,7 +192,7 @@ export default function SiteDetailPage() {
       <SitePolicySettingsCard siteId={site.id} />
 
       <Card title={t("detail.workforceTitle")}>
-        <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)", marginTop: 0 }}>{t("detail.workforceMovedHint")}</p>
+        <HintText>{t("detail.workforceMovedHint")}</HintText>
         <Link to="/workers">
           <Button variant="ghost" size="sm">
             {t("detail.workforceOpenAction")}

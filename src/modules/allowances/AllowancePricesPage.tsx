@@ -17,6 +17,7 @@ import Select from "../../components/common/Select";
 import Table, { type TableColumn } from "../../components/common/Table";
 import ErrorText from "../../components/common/ErrorText";
 import allowancesHeaderImage from "../../assets/illustrations/allowances.svg";
+import HintText from "../../components/common/HintText";
 
 const EVERY_SITE = "";
 
@@ -258,7 +259,7 @@ export default function AllowancePricesPage() {
         }
       >
         {categories.length === 0 ? (
-          <p style={{ margin: 0, color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{t("prices.noCategories")}</p>
+          <HintText>{t("prices.noCategories")}</HintText>
         ) : (
           <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
             {categories.map((category) => (
@@ -308,7 +309,7 @@ export default function AllowancePricesPage() {
         {editing?.chooseSite ? (
           <Select label={t("columns.site")} name="priceSite" value={formSiteId} onChange={(event) => changeFormSite(event.target.value)} options={siteOptions} />
         ) : null}
-        <p style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("prices.blankInherits")}</p>
+        <HintText small>{t("prices.blankInherits")}</HintText>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: "var(--space-3)" }}>
           {RATE_FIELDS.map((field) => (
             <Input

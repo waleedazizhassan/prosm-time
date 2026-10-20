@@ -17,6 +17,7 @@ import ErrorText from "../../components/common/ErrorText";
 import StatusBadge from "../../components/common/StatusBadge";
 import Table, { type TableColumn } from "../../components/common/Table";
 import workersArt from "../../assets/illustrations/workers.svg";
+import HintText from "../../components/common/HintText";
 
 // Owner 2026-10-18/19: external workers (contractors without an app
 // account) are added here for the whole organisation. The app generates
@@ -155,7 +156,7 @@ export default function ExternalWorkersPage() {
       <PageBanner pageId="workers" illustration={workersArt} />
 
       <Card title={t("addTitle")}>
-        <p style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("addHint")}</p>
+        <HintText>{t("addHint")}</HintText>
         <div style={{ display: "flex", gap: "var(--space-2)", alignItems: "flex-end", flexWrap: "wrap" }}>
           <div style={{ minWidth: 200, flex: "1 1 200px" }}>
             <Input label={t("nameLabel")} name="workerName" value={name} onChange={(event) => setName(event.target.value)} disabled={adding} />

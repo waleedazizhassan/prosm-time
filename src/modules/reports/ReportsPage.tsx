@@ -30,6 +30,7 @@ import reportsHeaderImage from "../../assets/illustrations/reports.svg";
 import { REPORT_TYPE_ICONS } from "./reportTypeIcons";
 import styles from "./ReportsPage.module.css";
 import PageBanner from "../../components/common/PageBanner";
+import HintText from "../../components/common/HintText";
 
 const ALL_EMPLOYEES = "";
 const ALL_SITES = "";
@@ -451,7 +452,7 @@ export default function ReportsPage() {
       <PageBanner pageId="reports" illustration={reportsHeaderImage} />
 
       {visibleReportTypes.length === 0 ? (
-        <p style={{ margin: "0 0 var(--space-4)", fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("ownExportsHint")}</p>
+        <HintText>{t("ownExportsHint")}</HintText>
       ) : (
       <Card>
         <div className={styles.typeGrid}>

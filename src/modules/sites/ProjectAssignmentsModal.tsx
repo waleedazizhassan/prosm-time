@@ -11,6 +11,7 @@ import Button from "../../components/common/Button";
 import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
 import ErrorText from "../../components/common/ErrorText";
+import HintText from "../../components/common/HintText";
 
 interface ProjectAssignmentsModalProps {
   isOpen: boolean;
@@ -77,7 +78,7 @@ export default function ProjectAssignmentsModal({ isOpen, onClose, project }: Pr
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={`${t("projectAssignments.title")} - ${project.name}`} footer={<Button onClick={onClose}>{t("projectAssignments.close")}</Button>}>
-      <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)", marginTop: 0 }}>{t("projectAssignments.hint")}</p>
+      <HintText small>{t("projectAssignments.hint")}</HintText>
 
       {unassignedMembers.length > 0 ? (
         <div style={{ display: "flex", gap: "var(--space-2)", alignItems: "flex-end" }}>

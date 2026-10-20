@@ -29,6 +29,7 @@ import FormGrid from "../../components/common/FormGrid";
 import { formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
 import timesheetsHeaderImage from "../../assets/illustrations/timesheets.svg";
 import PageBanner from "../../components/common/PageBanner";
+import HintText from "../../components/common/HintText";
 
 function toDateInput(date: Date): string {
   return date.toISOString().slice(0, 10);
@@ -484,7 +485,7 @@ export default function TimesheetsPage() {
       >
         {correctionReviewTarget ? (
           <>
-            <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{correctionReviewTarget.reason}</p>
+            <HintText>{correctionReviewTarget.reason}</HintText>
             <Textarea label={t("detail.notesLabel")} name="correctionReviewNotes" value={correctionReviewNotes} onChange={(event) => setCorrectionReviewNotes(event.target.value)} disabled={Boolean(correctionReviewSubmitting)} />
           </>
         ) : null}

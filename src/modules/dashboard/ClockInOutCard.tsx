@@ -30,6 +30,7 @@ import ClockOutSummaryModal from "../../components/common/ClockOutSummaryModal";
 import LiveLocationMap from "../../components/common/LiveLocationMap";
 import ErrorText from "../../components/common/ErrorText";
 import styles from "./ClockInOutCard.module.css";
+import HintText from "../../components/common/HintText";
 
 const CHANGE_SITE_NO_SITE_VALUE = "__no_site__";
 
@@ -1072,7 +1073,7 @@ export default function ClockInOutCard() {
               (a clock-in still waiting in the offline queue has none). */}
           {session ? (
             <div style={{ marginTop: "var(--space-4)", paddingTop: "var(--space-4)", borderTop: "1px solid var(--border-light)" }}>
-              {presenceSession ? <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)" }}>{t("attendance.presenceActive")}</p> : null}
+              {presenceSession ? <HintText small>{t("attendance.presenceActive")}</HintText> : null}
               {sosSent ? (
                 <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("attendance.sosSent")}</p>
               ) : (

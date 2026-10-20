@@ -20,6 +20,7 @@ import Textarea from "../../components/common/Textarea";
 import ErrorText from "../../components/common/ErrorText";
 import emergencyHeaderImage from "../../assets/illustrations/emergencyLog.svg";
 import PageBanner from "../../components/common/PageBanner";
+import HintText from "../../components/common/HintText";
 
 const ALL_EMPLOYEES = "";
 
@@ -204,24 +205,24 @@ export default function EmergencyLogPage() {
             <StatusBadge status={selectedAlert.status === "active" ? "sosActive" : "sosResolved"}>{t(`status.${selectedAlert.status}`)}</StatusBadge>
 
             <div>
-              <p style={{ margin: 0, fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("detail.employeeLabel")}</p>
+              <HintText small>{t("detail.employeeLabel")}</HintText>
               <p style={{ margin: 0, fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{selectedAlert.userFullName}</p>
-              {selectedAlert.userEmail ? <p style={{ margin: 0, fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{selectedAlert.userEmail}</p> : null}
+              {selectedAlert.userEmail ? <HintText small>{selectedAlert.userEmail}</HintText> : null}
             </div>
 
             <div>
-              <p style={{ margin: 0, fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("detail.siteLabel")}</p>
+              <HintText small>{t("detail.siteLabel")}</HintText>
               <p style={{ margin: 0, fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{selectedAlert.siteName || "—"}</p>
-              {selectedAlert.siteDisplayAddress ? <p style={{ margin: 0, fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{selectedAlert.siteDisplayAddress}</p> : null}
+              {selectedAlert.siteDisplayAddress ? <HintText small>{selectedAlert.siteDisplayAddress}</HintText> : null}
             </div>
 
             <div>
-              <p style={{ margin: 0, fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("detail.triggeredAtLabel")}</p>
+              <HintText small>{t("detail.triggeredAtLabel")}</HintText>
               <p style={{ margin: 0, fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{formatDateTime(selectedAlert.triggeredAt, i18n.language)}</p>
             </div>
 
             <div>
-              <p style={{ margin: 0, fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("detail.locationLabel")}</p>
+              <HintText small>{t("detail.locationLabel")}</HintText>
               {selectedAlert.latitude !== null && selectedAlert.longitude !== null ? (
                 <a
                   href={`https://www.google.com/maps?q=${selectedAlert.latitude},${selectedAlert.longitude}`}
@@ -236,13 +237,13 @@ export default function EmergencyLogPage() {
                 <p style={{ margin: 0, fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>—</p>
               )}
               {selectedAlert.accuracyMeters !== null ? (
-                <p style={{ margin: 0, fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("detail.accuracyLabel", { meters: Math.round(selectedAlert.accuracyMeters) })}</p>
+                <HintText small>{t("detail.accuracyLabel", { meters: Math.round(selectedAlert.accuracyMeters) })}</HintText>
               ) : null}
             </div>
 
             {selectedAlert.status === "resolved" ? (
               <div>
-                <p style={{ margin: 0, fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("detail.resolvedAtLabel")}</p>
+                <HintText small>{t("detail.resolvedAtLabel")}</HintText>
                 <p style={{ margin: 0, fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{selectedAlert.resolvedAt ? formatDateTime(selectedAlert.resolvedAt, i18n.language) : "—"}</p>
                 {selectedAlert.resolutionNotes ? <p style={{ margin: "var(--space-1) 0 0", fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{selectedAlert.resolutionNotes}</p> : null}
               </div>

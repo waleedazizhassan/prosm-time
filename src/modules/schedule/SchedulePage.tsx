@@ -19,6 +19,7 @@ import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
 import shiftsHeaderImage from "../../assets/illustrations/schedule.svg";
 import PageBanner from "../../components/common/PageBanner";
+import HintText from "../../components/common/HintText";
 
 function isoDate(date: Date): string {
   return date.toISOString().slice(0, 10);
@@ -218,7 +219,7 @@ export default function SchedulePage() {
           </Card>
 
           <Card title={t("templatesTitle")}>
-            <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("templatesHint")}</p>
+            <HintText small>{t("templatesHint")}</HintText>
             <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap", marginBottom: "var(--space-3)" }}>
               {templates.map((template) => (
                 <span
