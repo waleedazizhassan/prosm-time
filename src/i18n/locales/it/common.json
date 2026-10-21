@@ -204,7 +204,8 @@
     "reviewWholeSheet": "Questo giorno fa parte di un foglio - approva o rifiuta l'intero foglio.",
     "sheetNotWaiting": "Questo foglio è già stato deciso.",
     "leaveOverlapsAttendance": "Queste ferie non possono essere approvate: il dipendente ha timbrato in quei giorni. Rifiutale o chiedi di richiedere solo gli altri giorni.",
-    "leaveRequestOverlapsAttendance": "Hai timbrato in alcuni di questi giorni - richiedi solo gli altri giorni."
+    "leaveRequestOverlapsAttendance": "Hai timbrato in alcuni di questi giorni - richiedi solo gli altri giorni.",
+    "workerHasAttendance": "Questo lavoratore ha già presenze e non può essere eliminato - fermalo invece."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

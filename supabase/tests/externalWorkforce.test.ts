@@ -66,4 +66,17 @@ describe("external workforce", () => {
     expect((await t.as(org.owner.authId, "select public.update_prosm_time_external_worker($1, 'Sami Adel', null, 'inactive')", [created?.workerId])).error).toBeNull();
     expect((await kiosk(org.owner, "in", tower, created?.workerNumber ?? "")).error).toMatch(/NOT ACTIVE/);
   });
+
+  it("deletes a worker with no attendance, and stops instead of deleting one who has (owner 2026-10-21)", async () => {
+    const remove = (workerId: string) => t.as(org.owner.authId, "select public.delete_prosm_time_external_worker($1)", [workerId]);
+    const mistake = (await create(org.owner, "Added By Mistake")).rows?.[0].r;
+    expect((await t.as(employee.authId, "select public.delete_prosm_time_external_worker($1)", [mistake?.workerId])).error).toMatch(/NOT AUTHORIZED/);
+    expect((await remove(mistake?.workerId ?? "")).error).toBeNull();
+    const [gone] = await t.su<{ n: number }>("select count(*)::int as n from site_workers where id = $1", [mistake?.workerId]);
+    expect(gone.n).toBe(0);
+
+    const worked = (await create(org.owner, "Has Hours")).rows?.[0].r;
+    expect((await kiosk(org.owner, "in", tower, worked?.workerNumber ?? "")).error).toBeNull();
+    expect((await remove(worked?.workerId ?? "")).error).toMatch(/STOP THEM INSTEAD/);
+  });
 });

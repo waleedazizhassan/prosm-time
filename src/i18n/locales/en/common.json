@@ -204,7 +204,8 @@
     "reviewWholeSheet": "This day belongs to a sheet - approve or reject the whole sheet.",
     "sheetNotWaiting": "This sheet has already been decided.",
     "leaveOverlapsAttendance": "This leave can't be approved: the employee clocked in on these days. Reject it, or ask them to request leave for the other days only.",
-    "leaveRequestOverlapsAttendance": "You clocked in on some of these days - request leave for the other days only."
+    "leaveRequestOverlapsAttendance": "You clocked in on some of these days - request leave for the other days only.",
+    "workerHasAttendance": "This worker already has attendance, so they can't be deleted - stop them instead."
   },
   "pageLoad": {
     "title": "This page needs a connection",

@@ -29,5 +29,10 @@
   "clockOutAction": "Clock out",
   "deactivateAction": "Deactivate",
   "activateAction": "Activate",
-  "overrideReasonLabel": "Reason for clocking this worker out"
+  "overrideReasonLabel": "Reason for clocking this worker out",
+  "editAction": "Edit",
+  "deleteAction": "Delete",
+  "editTitle": "Edit worker",
+  "editHint": "The kiosk number {{number}} stays the same.",
+  "deleteConfirm": "Delete {{name}} for good? A worker who already has attendance can't be deleted - stop them instead."
 }

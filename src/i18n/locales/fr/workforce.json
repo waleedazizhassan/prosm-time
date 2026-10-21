@@ -29,5 +29,10 @@
   "clockOutAction": "Pointer la sortie",
   "deactivateAction": "Désactiver",
   "activateAction": "Activer",
-  "overrideReasonLabel": "Motif du pointage de sortie"
+  "overrideReasonLabel": "Motif du pointage de sortie",
+  "editAction": "Modifier",
+  "deleteAction": "Supprimer",
+  "editTitle": "Modifier l'ouvrier",
+  "editHint": "Le numéro de borne {{number}} reste le même.",
+  "deleteConfirm": "Supprimer {{name}} définitivement ? Un ouvrier qui a déjà des présences ne peut pas être supprimé - arrêtez-le plutôt."
 }

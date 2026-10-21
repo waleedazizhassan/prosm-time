@@ -204,7 +204,8 @@
     "reviewWholeSheet": "Ce jour fait partie d'une feuille - validez ou refusez toute la feuille.",
     "sheetNotWaiting": "Cette feuille a déjà été traitée.",
     "leaveOverlapsAttendance": "Ce congé ne peut pas être approuvé : l'employé a pointé ces jours-là. Refusez-le ou demandez-lui de ne poser que les autres jours.",
-    "leaveRequestOverlapsAttendance": "Vous avez pointé certains de ces jours - ne demandez que les autres jours."
+    "leaveRequestOverlapsAttendance": "Vous avez pointé certains de ces jours - ne demandez que les autres jours.",
+    "workerHasAttendance": "Cet ouvrier a déjà des présences et ne peut pas être supprimé - arrêtez-le plutôt."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

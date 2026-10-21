@@ -16,6 +16,7 @@ import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
 import StatusBadge from "../../components/common/StatusBadge";
 import Table, { type TableColumn } from "../../components/common/Table";
+import Modal from "../../components/common/Modal";
 import workersArt from "../../assets/illustrations/workers.svg";
 import HintText from "../../components/common/HintText";
 
@@ -40,6 +41,10 @@ export default function ExternalWorkersPage() {
   const [busyId, setBusyId] = useState<string | null>(null);
   const [overrideDraft, setOverrideDraft] = useState<{ workerId: string; reason: string } | null>(null);
   const [rowError, setRowError] = useState("");
+  // Owner 2026-10-21: edit a worker's name and contractor, or delete one added by mistake.
+  const [editing, setEditing] = useState<{ worker: ExternalWorker; name: string; contractor: string } | null>(null);
+  const [editError, setEditError] = useState("");
+  const [savingEdit, setSavingEdit] = useState(false);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -97,6 +102,33 @@ export default function ExternalWorkersPage() {
     void load();
   };
 
+  const saveEdit = async () => {
+    if (!editing || !editing.name.trim()) return;
+    setSavingEdit(true);
+    setEditError("");
+    const result = await SiteWorkerRepository.updateExternal(editing.worker.id, editing.name.trim(), editing.contractor.trim() || null, editing.worker.status);
+    setSavingEdit(false);
+    if (!result.success) {
+      setEditError(humanizeBackendError(result.message, t) ?? t("updateError"));
+      return;
+    }
+    setEditing(null);
+    void load();
+  };
+
+  const removeWorker = async (worker: ExternalWorker) => {
+    if (!window.confirm(t("deleteConfirm", { name: worker.fullName }))) return;
+    setBusyId(worker.id);
+    setRowError("");
+    const result = await SiteWorkerRepository.deleteExternal(worker.id);
+    setBusyId(null);
+    if (!result.success) {
+      setRowError(humanizeBackendError(result.message, t) ?? t("updateError"));
+      return;
+    }
+    void load();
+  };
+
   const handleOverride = async () => {
     if (!overrideDraft || !overrideDraft.reason.trim()) return;
     setBusyId(overrideDraft.workerId);
@@ -143,8 +175,14 @@ export default function ExternalWorkersPage() {
               {t("clockOutAction")}
             </Button>
           ) : null}
+          <Button variant="ghost" size="xs" onClick={() => setEditing({ worker, name: worker.fullName, contractor: worker.contractorName ?? "" })} disabled={busyId === worker.id}>
+            {t("editAction")}
+          </Button>
           <Button variant="ghost" size="xs" onClick={() => setStatus(worker, worker.status === "active" ? "inactive" : "active")} loading={busyId === worker.id}>
             {worker.status === "active" ? t("deactivateAction") : t("activateAction")}
+          </Button>
+          <Button variant="danger" size="xs" onClick={() => removeWorker(worker)} disabled={busyId === worker.id}>
+            {t("deleteAction")}
           </Button>
         </span>
       ),
@@ -205,6 +243,22 @@ export default function ExternalWorkersPage() {
         ) : null}
         <Table columns={columns} data={workers} getRowId={(worker) => worker.id} loading={loading} emptyMessage={t("empty")} />
       </Card>
+
+      <Modal
+        isOpen={Boolean(editing)}
+        onClose={() => setEditing(null)}
+        title={t("editTitle")}
+        footer={
+          <Button onClick={saveEdit} loading={savingEdit} disabled={!editing?.name.trim()}>
+            {t("common:save")}
+          </Button>
+        }
+      >
+        <HintText small>{t("editHint", { number: editing?.worker.workerNumber ?? "" })}</HintText>
+        <Input label={t("nameLabel")} name="editWorkerName" value={editing?.name ?? ""} onChange={(event) => setEditing((current) => (current ? { ...current, name: event.target.value } : current))} />
+        <Input label={t("contractorLabel")} name="editWorkerContractor" value={editing?.contractor ?? ""} onChange={(event) => setEditing((current) => (current ? { ...current, contractor: event.target.value } : current))} />
+        <ErrorText>{editError}</ErrorText>
+      </Modal>
     </PageShell>
   );
 }

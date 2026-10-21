@@ -204,7 +204,8 @@
     "reviewWholeSheet": "Dieser Tag gehört zu einem Blatt - das ganze Blatt freigeben oder ablehnen.",
     "sheetNotWaiting": "Über dieses Blatt wurde bereits entschieden.",
     "leaveOverlapsAttendance": "Dieser Urlaub kann nicht genehmigt werden: Die Person hat an diesen Tagen eingestempelt. Ablehnen oder nur für die übrigen Tage beantragen lassen.",
-    "leaveRequestOverlapsAttendance": "Sie haben an einigen dieser Tage eingestempelt - beantragen Sie nur die übrigen Tage."
+    "leaveRequestOverlapsAttendance": "Sie haben an einigen dieser Tage eingestempelt - beantragen Sie nur die übrigen Tage.",
+    "workerHasAttendance": "Dieser Arbeiter hat bereits Anwesenheiten und kann nicht gelöscht werden - stattdessen stoppen."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

@@ -29,5 +29,10 @@
   "clockOutAction": "Ausstempeln",
   "deactivateAction": "Deaktivieren",
   "activateAction": "Aktivieren",
-  "overrideReasonLabel": "Grund für das Ausstempeln"
+  "overrideReasonLabel": "Grund für das Ausstempeln",
+  "editAction": "Bearbeiten",
+  "deleteAction": "Löschen",
+  "editTitle": "Arbeiter bearbeiten",
+  "editHint": "Die Terminal-Nummer {{number}} bleibt gleich.",
+  "deleteConfirm": "{{name}} endgültig löschen? Wer schon Anwesenheiten hat, kann nicht gelöscht werden - stattdessen stoppen."
 }

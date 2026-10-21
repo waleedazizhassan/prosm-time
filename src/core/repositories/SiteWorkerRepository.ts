@@ -202,6 +202,16 @@ class SiteWorkerRepository {
     }
   }
 
+  // Owner 2026-10-21: a worker with no attendance can be deleted (one with attendance is stopped instead).
+  async deleteExternal(workerId: string): Promise<ServiceResult> {
+    try {
+      const { error } = await this.client.rpc("delete_prosm_time_external_worker", { p_worker_id: workerId });
+      return error ? createError(error.message) : createSuccess(null);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Workforce service unavailable.");
+    }
+  }
+
   async updateExternal(workerId: string, fullName: string, contractorName: string | null, status: "active" | "inactive"): Promise<ServiceResult> {
     try {
       const { data, error } = await this.client.rpc("update_prosm_time_external_worker", { p_worker_id: workerId, p_full_name: fullName, p_contractor_name: contractorName, p_status: status });

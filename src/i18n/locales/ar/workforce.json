@@ -29,5 +29,10 @@
   "clockOutAction": "تسجيل انصراف",
   "deactivateAction": "إيقاف",
   "activateAction": "تفعيل",
-  "overrideReasonLabel": "سبب تسجيل انصراف هذا العامل"
+  "overrideReasonLabel": "سبب تسجيل انصراف هذا العامل",
+  "editAction": "تعديل",
+  "deleteAction": "حذف",
+  "editTitle": "تعديل بيانات العامل",
+  "editHint": "رقم الكشك {{number}} يفضل زي ما هو.",
+  "deleteConfirm": "حذف {{name}} نهائيًا؟ العامل اللي ليه حضور مسجّل مينفعش يتحذف - أوقفه بدل كده."
 }

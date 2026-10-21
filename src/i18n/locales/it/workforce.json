@@ -29,5 +29,10 @@
   "clockOutAction": "Timbra uscita",
   "deactivateAction": "Disattiva",
   "activateAction": "Attiva",
-  "overrideReasonLabel": "Motivo della timbratura di uscita"
+  "overrideReasonLabel": "Motivo della timbratura di uscita",
+  "editAction": "Modifica",
+  "deleteAction": "Elimina",
+  "editTitle": "Modifica lavoratore",
+  "editHint": "Il numero del chiosco {{number}} resta lo stesso.",
+  "deleteConfirm": "Eliminare {{name}} definitivamente? Chi ha già presenze non può essere eliminato - fermalo invece."
 }
