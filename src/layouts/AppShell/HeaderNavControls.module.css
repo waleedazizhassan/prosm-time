@@ -84,3 +84,10 @@
     height: 20px;
   }
 }
+
+/* Owner 2026-10-21: on a phone its own back button does this; the header room goes to the organisation. */
+@media (max-width: 640px) {
+  .container {
+    display: none;
+  }
+}

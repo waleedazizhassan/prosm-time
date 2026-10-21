@@ -10,6 +10,7 @@ import CommandPalette from "./CommandPalette";
 import HeaderGreeting from "./HeaderGreeting";
 import HeaderRadio from "./HeaderRadio";
 import HeaderOrganizationCard from "./HeaderOrganizationCard";
+import WeatherMiniPanel from "./WeatherMiniPanel";
 import styles from "./Header.module.css";
 
 // PROSM Time - the application shell's Header (§ final visual
@@ -45,6 +46,8 @@ export default function Header() {
           <span className={styles.brandName}>{t("common:appName")}</span>
         </Link>
 
+        {/* Owner 2026-10-21: the organisation - its logo and name - sits in the header; tapping it shows the licence. */}
+        <HeaderOrganizationCard />
         <HeaderNavControls />
       </div>
 
@@ -53,8 +56,8 @@ export default function Header() {
       </div>
 
       <div className={styles.rightSection}>
-        <HeaderOrganizationCard />
         <HeaderRadio />
+        <WeatherMiniPanel />
         <HeaderGreeting />
         <NotificationBell />
       </div>

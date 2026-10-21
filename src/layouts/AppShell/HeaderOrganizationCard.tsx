@@ -196,7 +196,8 @@ function HeaderOrganizationCard() {
         aria-label={organization.name}
         title={organization.name}
       >
-        {organization.logoUrl ? <img src={organization.logoUrl} alt={organization.name} className={styles.logoImage} /> : <span className={styles.logo}>{initial}</span>}
+        {organization.logoUrl ? <img src={organization.logoUrl} alt="" className={styles.logoImage} /> : <span className={styles.logo}>{initial}</span>}
+        <span className={styles.triggerName}>{organization.name}</span>
       </button>
 
       {panelOpen &&

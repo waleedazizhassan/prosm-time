@@ -5,12 +5,10 @@ import { CalendarDays, ChevronLeft, ChevronRight, Clock, FileText, MapPin, Walle
 
 import { useAuth } from "../../core/context/AuthContext";
 import ManagerRepository, { type TodayAttendanceRow } from "../../core/repositories/ManagerRepository";
-import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import SiteRepository from "../../core/repositories/SiteRepository";
 import Card from "../../components/common/Card";
 import ClockInOutCard from "./ClockInOutCard";
 import { PERIODS, formatHours, periodHours, periodRange } from "../attendance/periods";
-import WeatherMiniPanel from "../../layouts/AppShell/WeatherMiniPanel";
 import heroStyles from "./AdminOverviewCard.module.css";
 import styles from "./EmployeeHome.module.css";
 import homeArt from "../../assets/illustrations/employeeHome.svg";
@@ -24,7 +22,6 @@ export default function EmployeeHome() {
   const { profile } = useAuth();
   const profileId = profile?.id;
   const [rows, setRows] = useState<TodayAttendanceRow[]>([]);
-  const [organizationName, setOrganizationName] = useState("");
   const [siteNames, setSiteNames] = useState<string[]>([]);
 
   useEffect(() => {
@@ -34,11 +31,9 @@ export default function EmployeeHome() {
     const start = week.start < month.start ? week.start : month.start;
     Promise.all([
       ManagerRepository.listAttendanceHistory(start, month.end),
-      OrganizationRepository.getCurrentOrganization(),
       SiteRepository.listAllAssignedSiteNames(),
-    ]).then(([history, organization, assigned]) => {
+    ]).then(([history, assigned]) => {
       setRows(history.success ? (history.data ?? []).filter((row) => row.userId === profileId) : []);
-      setOrganizationName(organization.success ? organization.data?.name ?? "" : "");
       setSiteNames(assigned.success ? assigned.data?.[profileId] ?? [] : []);
     });
   }, [profileId]);
@@ -47,7 +42,8 @@ export default function EmployeeHome() {
   const greetingKey = hour < 12 ? "overview.greetingMorning" : hour < 17 ? "overview.greetingAfternoon" : "overview.greetingEvening";
   const firstName = (profile?.fullName ?? "").trim().split(/\s+/)[0] ?? "";
   const todayLabel = new Date().toLocaleDateString(i18n.language, { weekday: "long", day: "numeric", month: "long" });
-  const scope = [organizationName, siteNames.join(i18n.dir() === "rtl" ? "، " : ", ")].filter(Boolean).join(" · ");
+  // The organisation is in the header (owner 2026-10-21); here, the person's sites.
+  const scope = siteNames.join(i18n.dir() === "rtl" ? "، " : ", ");
   const Chevron = i18n.dir() === "rtl" ? ChevronLeft : ChevronRight;
 
   const links = [
@@ -63,10 +59,6 @@ export default function EmployeeHome() {
         <div className={heroStyles.heroText}>
           <h2 className={heroStyles.heroTitle}>{t(greetingKey, { name: firstName })}</h2>
           <span className={heroStyles.heroDate}>{todayLabel}</span>
-          {/* Owner 2026-10-21: the weather moved from the header to the dashboard. */}
-          <div className={heroStyles.heroWeather}>
-            <WeatherMiniPanel />
-          </div>
           {scope ? (
             <span className={heroStyles.heroScope}>
               <MapPin size={13} />

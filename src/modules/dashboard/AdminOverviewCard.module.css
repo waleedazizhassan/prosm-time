@@ -715,8 +715,9 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
-  min-height: 88px;
-  padding: var(--space-3) var(--space-4);
+  /* Owner 2026-10-21: a lower greeting card. */
+  min-height: 0;
+  padding: var(--space-2) var(--space-4);
   margin-bottom: var(--space-4);
   background: var(--surface-card);
   border: 1px solid var(--border-light);
@@ -770,8 +771,8 @@
 .heroArt {
   display: block;
   flex-shrink: 0;
-  width: 130px;
-  height: 72px;
+  width: 96px;
+  height: 56px;
   object-fit: contain;
 }
 

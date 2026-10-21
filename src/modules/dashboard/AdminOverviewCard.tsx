@@ -5,7 +5,6 @@ import { MapPin, UserCheck, UserX, Users, CalendarDays, Coffee, CheckCircle2, Cl
 
 import { useAuth } from "../../core/context/AuthContext";
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
-import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import ManagerRepository, { type TodayAttendanceRow, type PendingReviewItem } from "../../core/repositories/ManagerRepository";
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
 import AttendanceRepository from "../../core/repositories/AttendanceRepository";
@@ -22,7 +21,6 @@ import EmptyState from "../../components/common/EmptyState";
 import ErrorText from "../../components/common/ErrorText";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
-import WeatherMiniPanel from "../../layouts/AppShell/WeatherMiniPanel";
 import styles from "./AdminOverviewCard.module.css";
 import dashboardArt from "../../assets/illustrations/dashboard.svg";
 
@@ -116,7 +114,6 @@ export default function AdminOverviewCard() {
   const profileId = profile?.id;
   const isOwner = Boolean(profile?.isOwner);
   const roleKey = profile?.roleKey ?? "";
-  const [organizationName, setOrganizationName] = useState("");
   const [managedSiteNames, setManagedSiteNames] = useState<string[]>([]);
   const [todayAttendance, setTodayAttendance] = useState<TodayAttendanceRow[]>([]);
   const [pending, setPending] = useState<PendingReviewItem[]>([]);
@@ -168,11 +165,7 @@ export default function AdminOverviewCard() {
       ]);
     const realSites = sitesResult.success ? (sitesResult.data ?? []) : [];
     setSites(realSites);
-    const [organizationResult, managedResult] = await Promise.all([
-      OrganizationRepository.getCurrentOrganization(),
-      isOwner || !profileId ? null : SiteRepository.listManagedSiteIds(profileId),
-    ]);
-    setOrganizationName(organizationResult.success ? organizationResult.data?.name ?? "" : "");
+    const managedResult = isOwner || !profileId ? null : await SiteRepository.listManagedSiteIds(profileId);
     const managedIds = managedResult && managedResult.success ? new Set(managedResult.data ?? []) : null;
     setManagedSiteNames(managedIds ? realSites.filter((site) => managedIds.has(site.id)).map((site) => site.name) : []);
     setTodayAttendance(attendanceResult.success ? (attendanceResult.data ?? []) : []);
@@ -325,14 +318,10 @@ export default function AdminOverviewCard() {
         <div className={styles.heroText}>
           <h2 className={styles.heroTitle}>{t(greetingKey, { name: firstName })}</h2>
           <span className={styles.heroDate}>{todayLabel}</span>
-          {/* Owner 2026-10-21: the weather moved from the header to the dashboard. */}
-          <div className={styles.heroWeather}>
-            <WeatherMiniPanel />
-          </div>
-          {organizationName || managedSiteNames.length > 0 ? (
+          {managedSiteNames.length > 0 ? (
             <span className={styles.heroScope}>
               <MapPin size={13} />
-              <span className={styles.heroScopeText}>{[organizationName, managedSiteNames.join(i18n.dir() === "rtl" ? "، " : ", ")].filter(Boolean).join(" · ")}</span>
+              <span className={styles.heroScopeText}>{managedSiteNames.join(i18n.dir() === "rtl" ? "، " : ", ")}</span>
             </span>
           ) : null}
         </div>
