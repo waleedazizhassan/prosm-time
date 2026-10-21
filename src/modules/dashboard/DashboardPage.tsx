@@ -4,6 +4,7 @@ import PageShell from "../../components/common/PageShell";
 import EmployeeHome from "./EmployeeHome";
 import ExceptionsCard from "./ExceptionsCard";
 import AdminOverviewCard from "./AdminOverviewCard";
+import PersonalRemindersCard from "./PersonalRemindersCard";
 
 // PROSM Time Implementation Master File V3.0, WP-03/§21/§37 - "Admin
 // Dashboard." Deliberately minimal and operational: real-time
@@ -48,6 +49,8 @@ export default function DashboardPage() {
     <PageShell compact>
       {hasManagementScope ? <AdminOverviewCard /> : <EmployeeHome />}
       <ExceptionsCard />
+      {/* Owner 2026-10-21: each person sets their own clock-in/out reminders (not the Owner). */}
+      <PersonalRemindersCard />
     </PageShell>
   );
 }

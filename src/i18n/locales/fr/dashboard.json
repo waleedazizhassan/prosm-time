@@ -239,5 +239,23 @@
       "leaveHint": "Demander un congé et voir votre solde"
     }
   },
-  "loadFailed": "Certains chiffres du jour n'ont pas pu être chargés et peuvent donc s'afficher à zéro. Nouvel essai chaque minute ; rouvrir l’application aide aussi. {{reason}}"
+  "loadFailed": "Certains chiffres du jour n'ont pas pu être chargés et peuvent donc s'afficher à zéro. Nouvel essai chaque minute ; rouvrir l’application aide aussi. {{reason}}",
+  "reminders": {
+    "title": "Mes rappels de pointage",
+    "hint": "Votre téléphone vous le rappelle à ces heures, les jours choisis - même application fermée ou sans internet.",
+    "phoneOnly": "Les rappels se règlent dans l'application mobile PROSM Time et arrivent même application fermée.",
+    "enable": "Me le rappeler",
+    "clockInAt": "Rappel d'entrée",
+    "clockOutAt": "Rappel de sortie",
+    "daysLabel": "Ces jours-là",
+    "saveAction": "Enregistrer les rappels",
+    "saved": "Enregistré - rappel {{count}} jours par semaine.",
+    "off": "Rappels désactivés.",
+    "saveError": "Impossible de régler les rappels sur ce téléphone.",
+    "permissionNeeded": "Autorisez les notifications de PROSM Time dans les réglages du téléphone, puis enregistrez à nouveau.",
+    "clockInTitle": "C'est l'heure de pointer",
+    "clockInBody": "Pointez dans PROSM Time à votre arrivée.",
+    "clockOutTitle": "N'oubliez pas de pointer la sortie",
+    "clockOutBody": "Pointez la sortie dans PROSM Time avant de partir."
+  }
 }

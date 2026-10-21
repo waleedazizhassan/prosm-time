@@ -239,5 +239,23 @@
       "leaveHint": "Urlaub beantragen und Restanspruch sehen"
     }
   },
-  "loadFailed": "Einige Zahlen von heute konnten nicht geladen werden und erscheinen daher evtl. als null. Es wird jede Minute erneut versucht; die App neu zu öffnen hilft auch. {{reason}}"
+  "loadFailed": "Einige Zahlen von heute konnten nicht geladen werden und erscheinen daher evtl. als null. Es wird jede Minute erneut versucht; die App neu zu öffnen hilft auch. {{reason}}",
+  "reminders": {
+    "title": "Meine Stempel-Erinnerungen",
+    "hint": "Ihr Telefon erinnert Sie zu diesen Zeiten an den gewählten Tagen - auch bei geschlossener App oder ohne Internet.",
+    "phoneOnly": "Erinnerungen stellen Sie in der PROSM Time App auf dem Telefon ein; sie kommen auch bei geschlossener App.",
+    "enable": "Erinnere mich",
+    "clockInAt": "Erinnerung Kommen",
+    "clockOutAt": "Erinnerung Gehen",
+    "daysLabel": "An diesen Tagen",
+    "saveAction": "Erinnerungen speichern",
+    "saved": "Gespeichert - Erinnerung an {{count}} Tagen pro Woche.",
+    "off": "Erinnerungen sind aus.",
+    "saveError": "Die Erinnerungen konnten auf diesem Telefon nicht gesetzt werden.",
+    "permissionNeeded": "Erlauben Sie PROSM Time in den Telefoneinstellungen Mitteilungen und speichern Sie erneut.",
+    "clockInTitle": "Zeit zum Einstempeln",
+    "clockInBody": "Stempeln Sie bei Ankunft in PROSM Time ein.",
+    "clockOutTitle": "Ausstempeln nicht vergessen",
+    "clockOutBody": "Stempeln Sie vor dem Gehen in PROSM Time aus."
+  }
 }

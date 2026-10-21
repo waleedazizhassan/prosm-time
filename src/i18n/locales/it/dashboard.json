@@ -239,5 +239,23 @@
       "leaveHint": "Richiedi ferie e vedi il saldo"
     }
   },
-  "loadFailed": "Alcuni dati di oggi non sono stati caricati e potrebbero apparire a zero. Si riprova ogni minuto; anche riaprire l’app aiuta. {{reason}}"
+  "loadFailed": "Alcuni dati di oggi non sono stati caricati e potrebbero apparire a zero. Si riprova ogni minuto; anche riaprire l’app aiuta. {{reason}}",
+  "reminders": {
+    "title": "I miei promemoria di timbratura",
+    "hint": "Il telefono ti avvisa a questi orari nei giorni scelti - anche ad app chiusa o senza internet.",
+    "phoneOnly": "I promemoria si impostano nell'app PROSM Time sul telefono e arrivano anche ad app chiusa.",
+    "enable": "Ricordamelo",
+    "clockInAt": "Promemoria entrata",
+    "clockOutAt": "Promemoria uscita",
+    "daysLabel": "In questi giorni",
+    "saveAction": "Salva i promemoria",
+    "saved": "Salvato - promemoria {{count}} giorni a settimana.",
+    "off": "Promemoria disattivati.",
+    "saveError": "Impossibile impostare i promemoria su questo telefono.",
+    "permissionNeeded": "Consenti le notifiche di PROSM Time nelle impostazioni del telefono, poi salva di nuovo.",
+    "clockInTitle": "È ora di timbrare l'entrata",
+    "clockInBody": "Timbra in PROSM Time quando arrivi.",
+    "clockOutTitle": "Non dimenticare di timbrare l'uscita",
+    "clockOutBody": "Timbra l'uscita in PROSM Time prima di andare."
+  }
 }

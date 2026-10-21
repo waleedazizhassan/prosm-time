@@ -239,5 +239,23 @@
       "leaveHint": "Request leave and see your balance"
     }
   },
-  "loadFailed": "Some of today's figures could not be loaded, so they may show as zero. It tries again every minute; reopening the app also helps. {{reason}}"
+  "loadFailed": "Some of today's figures could not be loaded, so they may show as zero. It tries again every minute; reopening the app also helps. {{reason}}",
+  "reminders": {
+    "title": "My clock-in reminders",
+    "hint": "Your phone reminds you at these times on the days you choose - even with the app closed or no internet.",
+    "phoneOnly": "Reminders are set in the PROSM Time phone app, where they arrive even when it is closed.",
+    "enable": "Remind me",
+    "clockInAt": "Clock-in reminder",
+    "clockOutAt": "Clock-out reminder",
+    "daysLabel": "On these days",
+    "saveAction": "Save reminders",
+    "saved": "Saved - you'll be reminded on {{count}} days a week.",
+    "off": "Reminders are off.",
+    "saveError": "The reminders could not be set on this phone.",
+    "permissionNeeded": "Allow PROSM Time to show notifications in the phone's settings, then save again.",
+    "clockInTitle": "Time to clock in",
+    "clockInBody": "Clock in in PROSM Time when you arrive.",
+    "clockOutTitle": "Don't forget to clock out",
+    "clockOutBody": "Clock out in PROSM Time before you leave."
+  }
 }
