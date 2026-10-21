@@ -202,7 +202,9 @@
     "ownerHasNoAllowances": "The Owner has no allowances of their own.",
     "noAllowancesToSend": "There is nothing to send for this period.",
     "reviewWholeSheet": "This day belongs to a sheet - approve or reject the whole sheet.",
-    "sheetNotWaiting": "This sheet has already been decided."
+    "sheetNotWaiting": "This sheet has already been decided.",
+    "leaveOverlapsAttendance": "This leave can't be approved: the employee clocked in on these days. Reject it, or ask them to request leave for the other days only.",
+    "leaveRequestOverlapsAttendance": "You clocked in on some of these days - request leave for the other days only."
   },
   "pageLoad": {
     "title": "This page needs a connection",

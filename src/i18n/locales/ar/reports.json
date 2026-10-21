@@ -4,7 +4,7 @@
   "loadError": "تعذر تحميل بيانات هذا التقرير.",
   "types": {
     "attendance": "سجل الحضور",
-    "allowances": "البدلات",
+    "allowances": "كشف البدلات المجمّع",
     "timesheets": "كشوف الدوام",
     "timesheet": "كشف الدوام",
     "workforce": "موظفين الشركة",
@@ -81,7 +81,7 @@
       "name": "الموظف",
       "site": "الموقع",
       "date": "التاريخ",
-      "shift": "الشيفت المجدول"
+      "shift": "الوردية المجدولة"
     },
     "managerOverrides": {
       "actor": "تم بواسطة",

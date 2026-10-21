@@ -7,7 +7,7 @@ import ManagerRepository, { type TodayAttendanceRow, type AttendanceEventLocatio
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
-import savePdfDocument, { printPdfDocument } from "../../core/utils/savePdfDocument";
+import savePdfDocument, { exportFileName, printPdfDocument } from "../../core/utils/savePdfDocument";
 import ErrorText from "../../components/common/ErrorText";
 
 import PageShell from "../../components/common/PageShell";
@@ -25,6 +25,7 @@ import PageBanner from "../../components/common/PageBanner";
 import { PERIODS, formatHours, isPeriod, periodRange, sessionHours, type Period } from "./periods";
 import { attendanceNoteLines } from "./attendanceNotes";
 import HintText from "../../components/common/HintText";
+import DateRange from "../../components/common/DateRange";
 
 const ALL_EMPLOYEES = "";
 
@@ -200,8 +201,8 @@ export default function AttendanceLogPage() {
     setExportingPdf(true);
     try {
       const doc = await buildAttendanceLogPdf(filteredRows, startDate, endDate, i18n.language, t, organizationLogoUrl);
-      if (mode === "print") await printPdfDocument(doc, `attendance-record-${startDate}-${endDate}.pdf`);
-      else await savePdfDocument(doc, `attendance-record-${startDate}-${endDate}.pdf`, "attendance", startDate, endDate);
+      if (mode === "print") await printPdfDocument(doc, exportFileName(t("title"), startDate, endDate));
+      else await savePdfDocument(doc, exportFileName(t("title"), startDate, endDate), "attendance", startDate, endDate);
     } finally {
       setExportingPdf(false);
     }
@@ -332,8 +333,10 @@ export default function AttendanceLogPage() {
           ))}
         </div>
         <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
-          <Input label={t("filters.fromLabel")} name="attendanceLogFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />
-          <Input label={t("filters.toLabel")} name="attendanceLogTo" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
+          <DateRange>
+            <Input label={t("filters.fromLabel")} name="attendanceLogFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />
+            <Input label={t("filters.toLabel")} name="attendanceLogTo" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
+          </DateRange>
           {showEmployeeFilter ? (
             <Select label={t("filters.employeeLabel")} name="attendanceLogEmployee" value={employeeFilter} onChange={(event) => setEmployeeFilter(event.target.value)} options={employeeOptions} />
           ) : null}

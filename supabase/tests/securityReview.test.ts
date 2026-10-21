@@ -40,25 +40,15 @@ beforeAll(async () => {
   await assignToSite(t, siteA, coworker);
 });
 
-describe("kiosk (H1) and PIN hashes (H2)", () => {
-  it("refuses anyone but the Owner or the site's manager operating a kiosk", async () => {
-    const kioskIn = (caller: TestMember, siteId: string) =>
-      t.as(caller.authId, "select public.kiosk_clock_in_prosm_time_attendance($1, $2, '1234', gen_random_uuid()::text)", [siteId, coworker.userId]);
-    expect((await kioskIn(employee, siteA)).error).toMatch(/MAY OPERATE ITS KIOSK/);
-    expect((await kioskIn(managerB, siteA)).error).toMatch(/MAY OPERATE ITS KIOSK/);
-    // The site's manager gets past the door (and is stopped by the PIN, which isn't set).
-    expect((await kioskIn(managerA, siteA)).error).not.toMatch(/MAY OPERATE ITS KIOSK/);
-  });
-
-  it("never lets an app user read a kiosk PIN hash, theirs included", async () => {
-    expect((await t.as(managerA.authId, "select kiosk_pin_hash from users where id = $1", [employee.userId])).error).toMatch(/permission denied/);
-    expect((await t.as(employee.authId, "select kiosk_pin_hash from users where id = $1", [employee.userId])).error).toMatch(/permission denied/);
+describe("employee kiosk removed (H1, H2)", () => {
+  it("has no employee kiosk functions and no PIN column left (owner 2026-10-21)", async () => {
+    const [fns] = await t.su<{ n: number }>(
+      "select count(*)::int as n from pg_proc p join pg_namespace n on n.oid = p.pronamespace where n.nspname = 'public' and (p.proname like 'kiosk_clock_%_prosm_time_attendance%' or p.proname like '%kiosk_pin%' or p.proname = 'list_prosm_time_kiosk_roster')",
+    );
+    expect(fns.n).toBe(0);
+    const [col] = await t.su<{ n: number }>("select count(*)::int as n from information_schema.columns where table_schema = 'public' and table_name = 'users' and column_name = 'kiosk_pin_hash'");
+    expect(col.n).toBe(0);
     expect((await t.as(employee.authId, "select full_name from users where id = $1", [employee.userId])).error).toBeNull();
-  });
-
-  it("the unchecked kiosk functions are not callable from the app", async () => {
-    const result = await t.as(managerA.authId, "select public.kiosk_clock_in_prosm_time_attendance_unchecked($1, $2, '1234', 'x')", [siteA, coworker.userId]);
-    expect(result.error).toMatch(/permission denied/);
   });
 });
 
@@ -98,10 +88,9 @@ describe("account actions (M1, M2)", () => {
     expect((await remove(managerA, org.owner)).error).toMatch(/BELOW YOUR ROLE/);
   });
 
-  it("refuses exporting, deleting or re-PINning the Owner or a peer, and audits what it allows", async () => {
+  it("refuses exporting or deleting the Owner or a peer, and audits what it allows", async () => {
     expect((await t.as(managerA.authId, "select public.export_prosm_time_employee_data($1)", [org.owner.userId])).error).toMatch(/NOT AUTHORIZED/);
     expect((await t.as(managerA.authId, "select public.authorize_prosm_time_employee_data_deletion($1)", [peerA.userId])).error).toMatch(/NOT AUTHORIZED/);
-    expect((await t.as(managerA.authId, "select public.admin_set_prosm_time_kiosk_pin($1, '4821')", [peerA.userId])).error).toMatch(/BELOW YOUR ROLE/);
     expect((await t.as(managerB.authId, "select public.export_prosm_time_employee_data($1)", [employee.userId])).error).toMatch(/NOT AUTHORIZED/);
 
     expect((await t.as(managerA.authId, "select public.export_prosm_time_employee_data($1)", [employee.userId])).error).toBeNull();

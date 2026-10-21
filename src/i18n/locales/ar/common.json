@@ -26,7 +26,7 @@
   },
   "backendErrors": {
     "shiftEndEqualsStart": "وقت النهاية لازم يكون مختلف عن وقت البداية.",
-    "shiftOverlap": "الموظف ده عنده شيفت متداخل بالفعل في نفس اليوم.",
+    "shiftOverlap": "الموظف ده عنده وردية متداخل بالفعل في نفس اليوم.",
     "breakAlreadyActive": "توجد استراحة نشطة بالفعل لهذه الجلسة.",
     "correctionRequiresLockedTimesheet": "لا يمكن طلب تصحيح إلا على كشف دوام معتمد ومغلق.",
     "aReasonRequired": "السبب مطلوب.",
@@ -202,7 +202,9 @@
     "ownerHasNoAllowances": "المالك ليس له بدلات خاصة به.",
     "noAllowancesToSend": "لا توجد بدلات لإرسالها في هذه الفترة.",
     "reviewWholeSheet": "هذا اليوم جزء من كشف - اعتمد الكشف كله أو ارفضه.",
-    "sheetNotWaiting": "تم البت في هذا الكشف بالفعل."
+    "sheetNotWaiting": "تم البت في هذا الكشف بالفعل.",
+    "leaveOverlapsAttendance": "لا يمكن اعتماد هذه الإجازة: الموظف سجّل حضورًا في هذه الأيام. ارفض الطلب، أو اطلب منه تقديم إجازة للأيام الأخرى فقط.",
+    "leaveRequestOverlapsAttendance": "سجّلت حضورًا في بعض هذه الأيام - قدّم الإجازة للأيام الأخرى فقط."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

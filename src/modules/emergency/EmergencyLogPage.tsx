@@ -21,6 +21,7 @@ import ErrorText from "../../components/common/ErrorText";
 import emergencyHeaderImage from "../../assets/illustrations/emergencyLog.svg";
 import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
+import DateRange from "../../components/common/DateRange";
 
 const ALL_EMPLOYEES = "";
 
@@ -186,8 +187,10 @@ export default function EmergencyLogPage() {
 
       <Card title={t("filters.title")}>
         <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
-          <Input label={t("filters.fromLabel")} name="emergencyLogFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />
-          <Input label={t("filters.toLabel")} name="emergencyLogTo" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
+          <DateRange>
+            <Input label={t("filters.fromLabel")} name="emergencyLogFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />
+            <Input label={t("filters.toLabel")} name="emergencyLogTo" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
+          </DateRange>
           {showEmployeeFilter ? (
             <Select label={t("filters.employeeLabel")} name="emergencyLogEmployee" value={employeeFilter} onChange={(event) => setEmployeeFilter(event.target.value)} options={employeeOptions} />
           ) : null}

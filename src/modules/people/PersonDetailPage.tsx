@@ -6,11 +6,9 @@ import { useAuth } from "../../core/context/AuthContext";
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
 import PermissionRepository, { type Permission } from "../../core/repositories/PermissionRepository";
 import DeviceBindingRepository, { type DeviceBinding } from "../../core/repositories/DeviceBindingRepository";
-import KioskRepository from "../../core/repositories/KioskRepository";
 import LeaveRepository from "../../core/repositories/LeaveRepository";
 import PayRateRepository, { type PayRate, type PayRateType } from "../../core/repositories/PayRateRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
-import { FEATURES } from "../../config/features";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
@@ -62,10 +60,6 @@ export default function PersonDetailPage() {
 
   const [deviceActionError, setDeviceActionError] = useState("");
 
-  const [kioskPin, setKioskPin] = useState("");
-  const [kioskPinSubmitting, setKioskPinSubmitting] = useState(false);
-  const [kioskPinError, setKioskPinError] = useState("");
-  const [kioskPinSuccess, setKioskPinSuccess] = useState(false);
 
   const [annualEntitlement, setAnnualEntitlement] = useState<number | null>(null);
   const [annualEntitlementInput, setAnnualEntitlementInput] = useState("");
@@ -249,20 +243,6 @@ export default function PersonDetailPage() {
     await load();
   };
 
-  const handleSetKioskPin = async () => {
-    if (!member) return;
-    setKioskPinSubmitting(true);
-    setKioskPinError("");
-    setKioskPinSuccess(false);
-    const result = await KioskRepository.adminSetPin(member.id, kioskPin);
-    setKioskPinSubmitting(false);
-    if (!result.success) {
-      setKioskPinError(humanizeBackendError(result.message, t) ?? t("detail.kioskPinError"));
-      return;
-    }
-    setKioskPin("");
-    setKioskPinSuccess(true);
-  };
 
   const handleDeactivate = async () => {
     if (!member || !deactivateReason.trim()) return;
@@ -451,19 +431,6 @@ export default function PersonDetailPage() {
           ))
         )}
       </Card>
-
-      {/* Hidden while the kiosk is for external workers only (FEATURES.employeeKiosk). */}
-      {canManageDevices && FEATURES.employeeKiosk ? (
-        <Card title={t("detail.kioskPinTitle")}>
-          <HintText small>{t("detail.kioskPinHint")}</HintText>
-          <ErrorText>{kioskPinError}</ErrorText>
-          {kioskPinSuccess ? <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("detail.kioskPinSuccess")}</p> : null}
-          <Input label={t("detail.kioskPinLabel")} name="kioskPin" type="password" value={kioskPin} onChange={(event) => setKioskPin(event.target.value.replace(/[^0-9]/g, "").slice(0, 6))} disabled={kioskPinSubmitting} />
-          <Button onClick={handleSetKioskPin} loading={kioskPinSubmitting} disabled={kioskPin.length < 4}>
-            {t("detail.kioskPinAction")}
-          </Button>
-        </Card>
-      ) : null}
 
       {canEditLeaveEntitlement ? (
         <Card title={t("detail.leaveEntitlementTitle")}>

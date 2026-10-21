@@ -8,7 +8,6 @@ import NotificationBell from "./NotificationBell";
 import HeaderNavControls from "./HeaderNavControls";
 import CommandPalette from "./CommandPalette";
 import HeaderGreeting from "./HeaderGreeting";
-import WeatherMiniPanel from "./WeatherMiniPanel";
 import HeaderRadio from "./HeaderRadio";
 import HeaderOrganizationCard from "./HeaderOrganizationCard";
 import styles from "./Header.module.css";
@@ -56,7 +55,6 @@ export default function Header() {
       <div className={styles.rightSection}>
         <HeaderOrganizationCard />
         <HeaderRadio />
-        <WeatherMiniPanel />
         <HeaderGreeting />
         <NotificationBell />
       </div>

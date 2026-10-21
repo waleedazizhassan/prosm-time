@@ -4,7 +4,7 @@
   "loadError": "Impossible de charger les données de ce rapport.",
   "types": {
     "attendance": "Registre de présence",
-    "allowances": "Indemnités",
+    "allowances": "Feuille d'indemnités regroupée",
     "timesheets": "Feuilles de temps",
     "timesheet": "Feuille de temps",
     "workforce": "Employés de l'entreprise",

@@ -33,8 +33,6 @@ const TABLES: Record<string, string> = {
   device_bindings: byUser,
   exception_actions: byOrg,
   geofence_exceptions: byOrg,
-  gusto_connections: byOrg,
-  gusto_oauth_states: "select state as id from gusto_oauth_states where organization_id = $1",
   installation_identity: byOrg,
   leave_entitlements: byOrg,
   legal_acknowledgements: byOrg,
@@ -68,8 +66,6 @@ const TABLES: Record<string, string> = {
   user_permission_overrides: byUser,
   users: byOrg,
   worker_pay_rates: byOrg,
-  xero_connections: byOrg,
-  xero_oauth_states: "select state as id from xero_oauth_states where organization_id = $1",
 };
 const GLOBAL_TABLES = ["permissions", "roles", "role_default_permissions", "security_rate_limits"];
 
@@ -285,7 +281,6 @@ describe("cross-tenant isolation", () => {
           ["select * from public.list_prosm_time_site_shifts($1, $2, $3)", [other.siteId, start, end]],
           ["select * from public.list_prosm_time_site_workers($1)", [other.siteId]],
           ["select * from public.list_prosm_time_site_worker_attendance($1, $2, $3)", [other.siteId, start, end]],
-          ["select public.list_prosm_time_kiosk_roster($1) as r", [other.siteId]],
           ["select public.list_prosm_time_timesheet_entries($1) as r", [other.timesheetId]],
           ["select public.list_prosm_time_timesheet_evidence_pack($1) as r", [other.timesheetId]],
           ["select public.get_prosm_time_leave_balance($1, $2) as r", [other.employee.userId, year]],

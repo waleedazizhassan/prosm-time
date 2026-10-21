@@ -4,7 +4,7 @@
   "loadError": "Die Daten für diesen Bericht konnten nicht geladen werden.",
   "types": {
     "attendance": "Anwesenheitsprotokoll",
-    "allowances": "Zulagen",
+    "allowances": "Zulagen-Sammelblatt",
     "timesheets": "Stundenzettel",
     "timesheet": "Stundenzettel",
     "workforce": "Unternehmensmitarbeiter",

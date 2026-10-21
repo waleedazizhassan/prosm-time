@@ -150,26 +150,6 @@ enabled = true
 verify_jwt = true
 entrypoint = "./functions/approve-allowance-entry/index.ts"
 
-[functions.kiosk-clock-in]
-enabled = true
-verify_jwt = true
-entrypoint = "./functions/kiosk-clock-in/index.ts"
-
-[functions.kiosk-clock-out]
-enabled = true
-verify_jwt = true
-entrypoint = "./functions/kiosk-clock-out/index.ts"
-
-[functions.set-kiosk-pin]
-enabled = true
-verify_jwt = true
-entrypoint = "./functions/set-kiosk-pin/index.ts"
-
-[functions.admin-set-kiosk-pin]
-enabled = true
-verify_jwt = true
-entrypoint = "./functions/admin-set-kiosk-pin/index.ts"
-
 [functions.export-employee-data]
 enabled = true
 verify_jwt = true
@@ -200,7 +180,7 @@ verify_jwt = false
 entrypoint = "./functions/export-attendance/index.ts"
 
 # External/contractor workforce kiosk (user-directed). kiosk-worker-*
-# mirror kiosk-clock-in/out's own posture exactly (verify_jwt=true -
+# keep the kiosk's posture (verify_jwt=true -
 # the caller is whoever is signed into the operating kiosk device, the
 # WORKER's own identity is proven by their 6-digit number inside the
 # RPC, not the caller's session). export-worker-attendance mirrors
@@ -264,40 +244,6 @@ entrypoint = "./functions/export-payroll-deductions/index.ts"
 # (user-directed - PROSM Finance now computes payroll natively via its
 # own PROSM Time API-key bridge, so no external payroll software is
 # needed at all). See prosm_time_quickbooks_removal_pending in memory.
-
-# Xero and Gusto payroll integrations - additional providers, same
-# verify_jwt posture per function role as QuickBooks used to have.
-# Both are deliberately dormant until XERO_CLIENT_ID/XERO_CLIENT_SECRET
-# and GUSTO_CLIENT_ID/GUSTO_CLIENT_SECRET exist as real secrets.
-[functions.xero-authorize]
-enabled = true
-verify_jwt = true
-entrypoint = "./functions/xero-authorize/index.ts"
-
-[functions.xero-oauth-callback]
-enabled = true
-verify_jwt = false
-entrypoint = "./functions/xero-oauth-callback/index.ts"
-
-[functions.sync-xero-timesheets]
-enabled = true
-verify_jwt = true
-entrypoint = "./functions/sync-xero-timesheets/index.ts"
-
-[functions.gusto-authorize]
-enabled = true
-verify_jwt = true
-entrypoint = "./functions/gusto-authorize/index.ts"
-
-[functions.gusto-oauth-callback]
-enabled = true
-verify_jwt = false
-entrypoint = "./functions/gusto-oauth-callback/index.ts"
-
-[functions.sync-gusto-hours]
-enabled = true
-verify_jwt = true
-entrypoint = "./functions/sync-gusto-hours/index.ts"
 
 # send-trial-notices is verify_jwt = false: it is called by pg_cron (no user
 # session) and checks its own private secret (x-trial-secret) instead.

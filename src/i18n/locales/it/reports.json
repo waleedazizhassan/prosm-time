@@ -4,7 +4,7 @@
   "loadError": "Impossibile caricare i dati di questo report.",
   "types": {
     "attendance": "Registro presenze",
-    "allowances": "Indennità",
+    "allowances": "Foglio indennità riepilogativo",
     "timesheets": "Fogli ore",
     "timesheet": "Foglio ore",
     "workforce": "Dipendenti aziendali",

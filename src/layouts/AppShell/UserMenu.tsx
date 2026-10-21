@@ -11,7 +11,6 @@ import { useCalendar, setCalendarSystem, type CalendarSystem } from "../../core/
 import { useUpdateCheck } from "../../core/hooks/useUpdateCheck";
 import { LANGUAGES } from "../../i18n/languages";
 import UserRepository from "../../core/repositories/UserRepository";
-import { FEATURES } from "../../config/features";
 import sidebarStyles from "./Sidebar.module.css";
 import styles from "./UserMenu.module.css";
 
@@ -86,29 +85,6 @@ export default function UserMenu({ collapsed }: { collapsed: boolean }) {
   // upload a profile picture."
   const [avatarUploading, setAvatarUploading] = useState(false);
   const [avatarError, setAvatarError] = useState("");
-  // § user-directed, 2026-09-12 - "the kiosk PIN must be chosen by the
-  // employee themselves." set_prosm_time_kiosk_pin already existed
-  // server-side with no frontend caller anywhere - this is that
-  // missing self-service UI.
-  const [kioskPin, setKioskPin] = useState("");
-  const [kioskPinSaving, setKioskPinSaving] = useState(false);
-  const [kioskPinMessage, setKioskPinMessage] = useState("");
-  const [kioskPinError, setKioskPinError] = useState("");
-
-  const handleSaveKioskPin = async () => {
-    setKioskPinSaving(true);
-    setKioskPinError("");
-    setKioskPinMessage("");
-    const result = await UserRepository.setKioskPin(kioskPin);
-    setKioskPinSaving(false);
-    if (!result.success) {
-      setKioskPinError(result.message ?? t("kioskPinLabel"));
-      return;
-    }
-    setKioskPin("");
-    setKioskPinMessage(t("kioskPinSaved"));
-  };
-
   const handleAvatarFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     event.target.value = "";
@@ -242,38 +218,6 @@ export default function UserMenu({ collapsed }: { collapsed: boolean }) {
               <option value="light">{t("theme.light")}</option>
               <option value="system">{t("theme.system")}</option>
             </select>
-            {/* Hidden while the kiosk is for external workers only (FEATURES.employeeKiosk). */}
-            {FEATURES.employeeKiosk ? (
-            <>
-            <label className={styles.languageLabel} htmlFor="userMenuKioskPin">
-              {t("kioskPinLabel")}
-            </label>
-            <div style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}>
-              <input
-                id="userMenuKioskPin"
-                type="password"
-                inputMode="numeric"
-                maxLength={6}
-                value={kioskPin}
-                onChange={(event) => setKioskPin(event.target.value.replace(/[^0-9]/g, ""))}
-                className={styles.languageSelect}
-                style={{ flex: 1 }}
-                disabled={kioskPinSaving}
-              />
-              <button
-                type="button"
-                className={styles.signOutButton}
-                style={{ width: "auto", padding: "0 var(--space-3)" }}
-                onClick={handleSaveKioskPin}
-                disabled={kioskPinSaving || kioskPin.length < 4}
-              >
-                {t("common:save")}
-              </button>
-            </div>
-            {kioskPinError ? <span className={styles.avatarError}>{kioskPinError}</span> : null}
-            {kioskPinMessage ? <span className={styles.email}>{kioskPinMessage}</span> : null}
-            </>
-            ) : null}
             <label className={styles.languageLabel} htmlFor="userMenuCalendar">
               {t("calendarLabel")}
             </label>

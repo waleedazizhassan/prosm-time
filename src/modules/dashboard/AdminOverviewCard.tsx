@@ -22,6 +22,7 @@ import EmptyState from "../../components/common/EmptyState";
 import ErrorText from "../../components/common/ErrorText";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
+import WeatherMiniPanel from "../../layouts/AppShell/WeatherMiniPanel";
 import styles from "./AdminOverviewCard.module.css";
 import dashboardArt from "../../assets/illustrations/dashboard.svg";
 
@@ -324,6 +325,10 @@ export default function AdminOverviewCard() {
         <div className={styles.heroText}>
           <h2 className={styles.heroTitle}>{t(greetingKey, { name: firstName })}</h2>
           <span className={styles.heroDate}>{todayLabel}</span>
+          {/* Owner 2026-10-21: the weather moved from the header to the dashboard. */}
+          <div className={styles.heroWeather}>
+            <WeatherMiniPanel />
+          </div>
           {organizationName || managedSiteNames.length > 0 ? (
             <span className={styles.heroScope}>
               <MapPin size={13} />

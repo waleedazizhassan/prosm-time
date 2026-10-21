@@ -10,6 +10,7 @@ import SiteRepository from "../../core/repositories/SiteRepository";
 import Card from "../../components/common/Card";
 import ClockInOutCard from "./ClockInOutCard";
 import { PERIODS, formatHours, periodHours, periodRange } from "../attendance/periods";
+import WeatherMiniPanel from "../../layouts/AppShell/WeatherMiniPanel";
 import heroStyles from "./AdminOverviewCard.module.css";
 import styles from "./EmployeeHome.module.css";
 import homeArt from "../../assets/illustrations/employeeHome.svg";
@@ -62,6 +63,10 @@ export default function EmployeeHome() {
         <div className={heroStyles.heroText}>
           <h2 className={heroStyles.heroTitle}>{t(greetingKey, { name: firstName })}</h2>
           <span className={heroStyles.heroDate}>{todayLabel}</span>
+          {/* Owner 2026-10-21: the weather moved from the header to the dashboard. */}
+          <div className={heroStyles.heroWeather}>
+            <WeatherMiniPanel />
+          </div>
           {scope ? (
             <span className={heroStyles.heroScope}>
               <MapPin size={13} />

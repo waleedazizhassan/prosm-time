@@ -202,7 +202,9 @@
     "ownerHasNoAllowances": "Der Inhaber hat keine eigenen Zulagen.",
     "noAllowancesToSend": "Für diesen Zeitraum gibt es nichts zu senden.",
     "reviewWholeSheet": "Dieser Tag gehört zu einem Blatt - das ganze Blatt freigeben oder ablehnen.",
-    "sheetNotWaiting": "Über dieses Blatt wurde bereits entschieden."
+    "sheetNotWaiting": "Über dieses Blatt wurde bereits entschieden.",
+    "leaveOverlapsAttendance": "Dieser Urlaub kann nicht genehmigt werden: Die Person hat an diesen Tagen eingestempelt. Ablehnen oder nur für die übrigen Tage beantragen lassen.",
+    "leaveRequestOverlapsAttendance": "Sie haben an einigen dieser Tage eingestempelt - beantragen Sie nur die übrigen Tage."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

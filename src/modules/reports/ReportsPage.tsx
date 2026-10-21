@@ -10,7 +10,7 @@ import ReportRepository, { type AbsenceRow } from "../../core/repositories/Repor
 import ReportExportRepository, { type ReportExport } from "../../core/repositories/ReportExportRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { formatDateOnly, formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
-import savePdfDocument, { printPdfDocument } from "../../core/utils/savePdfDocument";
+import savePdfDocument, { exportFileName, printPdfDocument } from "../../core/utils/savePdfDocument";
 import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
 import { buildAttendanceLogPdf } from "../attendance/attendanceLogPdf";
 import { buildCombinedAllowanceSheetPdf } from "../allowances/allowancesPdf";
@@ -31,6 +31,7 @@ import { REPORT_TYPE_ICONS } from "./reportTypeIcons";
 import styles from "./ReportsPage.module.css";
 import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
+import DateRange from "../../components/common/DateRange";
 
 const ALL_EMPLOYEES = "";
 const ALL_SITES = "";
@@ -93,7 +94,8 @@ export default function ReportsPage() {
       // Owner 2026-10-20 (no duplicates): the attendance record, allowances and
       // timesheets are exported - and printed - from their own pages; Reports
       // keeps the reports found only here, and the archive of every export.
-      (["workforce", "contractor", "site", "late", "missingCheckouts", "leaveConflicts", "absences", "managerOverrides", "locationViolations", "sos"] as ReportType[]).filter(
+      // Owner 2026-10-21: the combined allowance sheet (totals per person) is here too, for those who manage.
+      ([...(hasManagementScope ? (["allowances"] as ReportType[]) : []), "workforce", "contractor", "site", "late", "missingCheckouts", "leaveConflicts", "absences", "managerOverrides", "locationViolations", "sos"] as ReportType[]).filter(
         (type) => hasManagementScope || !MANAGEMENT_SCOPED_TYPES.includes(type),
       ),
     [hasManagementScope],
@@ -146,8 +148,13 @@ export default function ReportsPage() {
 
   const recentExportsColumns: TableColumn<ReportExport>[] = [
     { key: "type", header: t("recentExports.typeColumn"), render: (row) => t(`types.${row.reportType}`, { defaultValue: row.reportType }) },
-    { key: "fileName", header: t("recentExports.fileColumn"), render: (row) => row.fileName },
-    { key: "period", header: t("recentExports.periodColumn"), render: (row) => (row.periodStart && row.periodEnd ? `${row.periodStart} — ${row.periodEnd}` : "—") },
+    // Owner 2026-10-21: in the reader's language - the period as dates, not the stored file name.
+    {
+      key: "period",
+      header: t("recentExports.periodColumn"),
+      render: (row) =>
+        row.periodStart && row.periodEnd ? `${formatDateOnly(row.periodStart, i18n.language)} — ${formatDateOnly(row.periodEnd, i18n.language)}` : "—",
+    },
     { key: "exportedBy", header: t("recentExports.exportedByColumn"), render: (row) => row.exportedByName },
     { key: "createdAt", header: t("recentExports.createdAtColumn"), render: (row) => formatDateTime(row.createdAt, i18n.language) },
     {
@@ -424,10 +431,10 @@ export default function ReportsPage() {
       const isRtl = i18n.language === "ar";
       if (reportType === "attendance") {
         const doc = await buildAttendanceLogPdf(filteredAttendanceRows, startDate, endDate, i18n.language, tAttendance, organizationLogoUrl);
-        await deliver(doc, `attendance-record-${startDate}-${endDate}.pdf`, "attendance");
+        await deliver(doc, exportFileName(t("types.attendance"), startDate, endDate), "attendance");
       } else if (reportType === "allowances") {
         const doc = await buildCombinedAllowanceSheetPdf(filteredAllowanceEntries, { startDate, endDate, languageCode: i18n.language, t: tAllowances, organizationName: "", organizationLogoUrl });
-        await deliver(doc, `allowances-${startDate}-${endDate}.pdf`, "allowances");
+        await deliver(doc, exportFileName(t("types.allowances"), startDate, endDate), "allowances");
       } else if (reportType !== "timesheets") {
         const cfg = genericConfig[reportType];
         const doc = await buildGenericReportPdf(
@@ -439,7 +446,7 @@ export default function ReportsPage() {
           isRtl,
           organizationLogoUrl,
         );
-        await deliver(doc, `${reportType}-${startDate}-${endDate}.pdf`, reportType);
+        await deliver(doc, exportFileName(t(`types.${reportType}`), startDate, endDate), reportType);
       }
       if (mode === "save") loadRecentExports();
     } finally {
@@ -483,8 +490,10 @@ export default function ReportsPage() {
         ) : (
           <>
             <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap", alignItems: "flex-end" }}>
-              <Input label={t("filters.fromLabel")} name="reportsFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />
-              <Input label={t("filters.toLabel")} name="reportsTo" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
+              <DateRange>
+                <Input label={t("filters.fromLabel")} name="reportsFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />
+                <Input label={t("filters.toLabel")} name="reportsTo" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
+              </DateRange>
               {employeeNames.length > 1 ? (
                 <Select label={t("filters.employeeLabel")} name="reportsEmployee" value={employeeFilter} onChange={(event) => setEmployeeFilter(event.target.value)} options={employeeOptions} />
               ) : null}

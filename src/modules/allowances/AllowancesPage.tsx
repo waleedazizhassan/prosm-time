@@ -7,7 +7,7 @@ import AllowanceRepository, { type AllowanceEntry, type AllowanceEntryInput, typ
 import AllowanceRatesRepository, { RATE_FIELDS, type MySiteRates } from "../../core/repositories/AllowanceRatesRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
-import savePdfDocument, { printPdfDocument } from "../../core/utils/savePdfDocument";
+import savePdfDocument, { exportFileName, printPdfDocument } from "../../core/utils/savePdfDocument";
 import ErrorText from "../../components/common/ErrorText";
 
 import PageShell from "../../components/common/PageShell";
@@ -25,6 +25,7 @@ import allowancesHeaderImage from "../../assets/illustrations/allowances.svg";
 import PageBanner from "../../components/common/PageBanner";
 import Toggle from "../../components/common/Toggle";
 import HintText from "../../components/common/HintText";
+import DateRange from "../../components/common/DateRange";
 
 const ALL_EMPLOYEES = "";
 
@@ -183,6 +184,8 @@ export default function AllowancesPage() {
     }
   };
 
+  const unsentDays = entries.filter((entry) => entry.userId === profile?.id && (entry.status === "draft" || entry.status === "rejected")).length;
+
   const handleSendAll = async () => {
     setSending(true);
     setAddError("");
@@ -325,7 +328,7 @@ export default function AllowancesPage() {
     try {
       const name = peopleInView[0] ?? profile?.fullName ?? "";
       const doc = await buildEmployeeAllowanceSheetPdf(filteredEntries, name, sheetContext());
-      const file = `allowances-${name}-${startDate}-${endDate}.pdf`;
+      const file = exportFileName(t("sheet.subtitle"), name, startDate, endDate);
       if (mode === "print") await printPdfDocument(doc, file);
       else await savePdfDocument(doc, file, "allowances", startDate, endDate);
     } finally {
@@ -338,7 +341,7 @@ export default function AllowancesPage() {
     try {
       const chosen = filteredEntries.filter((entry) => combinedPeople.includes(entry.userFullName));
       const doc = await buildCombinedAllowanceSheetPdf(chosen, sheetContext());
-      const file = `allowances-combined-${startDate}-${endDate}.pdf`;
+      const file = exportFileName(t("sheet.combinedSubtitle"), startDate, endDate);
       if (combinedMode === "print") await printPdfDocument(doc, file);
       else await savePdfDocument(doc, file, "allowances", startDate, endDate);
       setCombinedOpen(false);
@@ -419,8 +422,10 @@ export default function AllowancesPage() {
 
       <Card title={t("filters.title")}>
         <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
-          <Input label={t("filters.fromLabel")} name="allowancesFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />
-          <Input label={t("filters.toLabel")} name="allowancesTo" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
+          <DateRange>
+            <Input label={t("filters.fromLabel")} name="allowancesFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />
+            <Input label={t("filters.toLabel")} name="allowancesTo" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
+          </DateRange>
           {showEmployeeFilter ? (
             <Select label={t("filters.employeeLabel")} name="allowancesEmployee" value={employeeFilter} onChange={(event) => setEmployeeFilter(event.target.value)} options={employeeOptions} />
           ) : null}
@@ -430,28 +435,32 @@ export default function AllowancesPage() {
       {isOwner ? null : (
         <Card title={t("addEntry.title")} subtitle={t("fill.hint")}>
           <ErrorText>{addError}</ErrorText>
-          {fillMessage ? <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-sm)", color: "var(--status-success-text)" }}>{fillMessage}</p> : null}
-          <div style={{ display: "flex", gap: "var(--space-3)", alignItems: "flex-end", flexWrap: "wrap" }}>
-            <Button onClick={handleFill} loading={filling}>
+          {fillMessage ? <p style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-sm)", color: "var(--status-success-text)" }}>{fillMessage}</p> : null}
+          {/* Owner 2026-10-21 ("the buttons and the layout"): the two main actions side by side, the same size;
+              then adding a single day on one row; then auto-fill. */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-3)" }}>
+            <Button fullWidth onClick={handleFill} loading={filling}>
               {t("fill.action")}
             </Button>
-            <Input label={t("addEntry.dateLabel")} name="newAllowanceEntryDate" type="date" value={newEntryDate} onChange={(event) => setNewEntryDate(event.target.value)} />
+            <Button fullWidth variant="ghost" onClick={handleSendAll} loading={sending} disabled={unsentDays === 0}>
+              {unsentDays > 0 ? `${t("sendAll.action")} (${unsentDays})` : t("sendAll.action")}
+            </Button>
+          </div>
+          <div style={{ display: "flex", alignItems: "flex-end", gap: "var(--space-3)", marginTop: "var(--space-4)" }}>
+            <div style={{ flex: 1, minWidth: 0, marginBottom: "calc(-1 * var(--space-4))" }}>
+              <Input label={t("addEntry.dateLabel")} name="newAllowanceEntryDate" type="date" value={newEntryDate} onChange={(event) => setNewEntryDate(event.target.value)} />
+            </div>
             <Button variant="ghost" onClick={handleAddEntry} loading={addingEntry} disabled={!newEntryDate}>
               {t("addEntry.action")}
             </Button>
           </div>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--space-3)", flexWrap: "wrap", marginTop: "var(--space-4)", paddingTop: "var(--space-4)", borderTop: "1px solid var(--border-light)" }}>
-            <label style={{ display: "flex", alignItems: "center", gap: "var(--space-3)", fontSize: "var(--font-sm)" }}>
-              <Toggle checked={autoFill} onChange={handleAutoFill} label={t("autoFill.label")} />
-              <span>
-                <strong>{t("autoFill.label")}</strong>
-                <HintText small>{t("autoFill.hint")}</HintText>
-              </span>
-            </label>
-            <Button onClick={handleSendAll} loading={sending} disabled={!entries.some((entry) => entry.userId === profile?.id && (entry.status === "draft" || entry.status === "rejected"))}>
-              {t("sendAll.action")}
-            </Button>
-          </div>
+          <label style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-3)", marginTop: "var(--space-5)", paddingTop: "var(--space-4)", borderTop: "1px solid var(--border-light)", fontSize: "var(--font-sm)" }}>
+            <Toggle checked={autoFill} onChange={handleAutoFill} label={t("autoFill.label")} />
+            <span>
+              <strong>{t("autoFill.label")}</strong>
+              <HintText small>{t("autoFill.hint")}</HintText>
+            </span>
+          </label>
         </Card>
       )}
 

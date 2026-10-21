@@ -19,6 +19,7 @@ import Table, { type TableColumn } from "../../components/common/Table";
 import SiteFormModal from "./SiteFormModal";
 import AssignSiteMemberModal from "./AssignSiteMemberModal";
 import ProjectFormModal from "./ProjectFormModal";
+import { FEATURES } from "../../config/features";
 import ProjectAssignmentsModal from "./ProjectAssignmentsModal";
 import HintText from "../../components/common/HintText";
 
@@ -172,17 +173,20 @@ export default function SiteDetailPage() {
         )}
       </Card>
 
+      {/* Owner 2026-10-21: projects are hidden until a client asks for them (FEATURES.projects). */}
+      {FEATURES.projects ? (
       <Card title={t("detail.projectsTitle")}>
-        <HintText small>{t("detail.projectsHint")}</HintText>
-
-        {canManageProjects ? (
-          <Button variant="ghost" size="sm" onClick={() => setProjectFormState({ open: true })}>
-            {t("detail.addProjectAction")}
-          </Button>
-        ) : null}
-
-        <Table columns={projectColumns} data={projects} getRowId={(project) => project.id} loading={false} emptyMessage={t("detail.noProjects")} />
-      </Card>
+          <HintText small>{t("detail.projectsHint")}</HintText>
+  
+          {canManageProjects ? (
+            <Button variant="ghost" size="sm" onClick={() => setProjectFormState({ open: true })}>
+              {t("detail.addProjectAction")}
+            </Button>
+          ) : null}
+  
+          <Table columns={projectColumns} data={projects} getRowId={(project) => project.id} loading={false} emptyMessage={t("detail.noProjects")} />
+        </Card>
+      ) : null}
 
       {/* Owner 2026-10-19: external workers belong to the organisation, not
           to one site; they are added (with an app-generated number) on the

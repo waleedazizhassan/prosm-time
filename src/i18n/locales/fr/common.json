@@ -202,7 +202,9 @@
     "ownerHasNoAllowances": "Le propriétaire n'a pas d'indemnités propres.",
     "noAllowancesToSend": "Rien à envoyer pour cette période.",
     "reviewWholeSheet": "Ce jour fait partie d'une feuille - validez ou refusez toute la feuille.",
-    "sheetNotWaiting": "Cette feuille a déjà été traitée."
+    "sheetNotWaiting": "Cette feuille a déjà été traitée.",
+    "leaveOverlapsAttendance": "Ce congé ne peut pas être approuvé : l'employé a pointé ces jours-là. Refusez-le ou demandez-lui de ne poser que les autres jours.",
+    "leaveRequestOverlapsAttendance": "Vous avez pointé certains de ces jours - ne demandez que les autres jours."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

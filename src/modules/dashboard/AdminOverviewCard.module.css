@@ -742,6 +742,12 @@
   color: var(--text-secondary);
 }
 
+/* The weather chip (moved from the header, owner 2026-10-21). */
+.heroWeather {
+  display: flex;
+  margin: 2px 0;
+}
+
 .heroScope {
   display: inline-flex;
   align-items: center;

@@ -110,3 +110,22 @@
   padding: var(--space-4) var(--space-6);
   border-top: 1px solid var(--border-light);
 }
+
+/* Owner 2026-10-21 ("the buttons are badly arranged"): on a phone the footer's
+   buttons share the row evenly - two side by side, three in one row - instead
+   of wrapping at their own widths. */
+@media (max-width: 640px) {
+  .footer {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .footer > * {
+    width: 100%;
+    min-width: 0;
+    padding-inline: var(--space-2);
+  }
+}

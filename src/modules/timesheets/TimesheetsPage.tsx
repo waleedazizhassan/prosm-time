@@ -10,7 +10,7 @@ import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import { formatMinutes, buildTimesheetPdf } from "./timesheetPdf";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
-import savePdfDocument from "../../core/utils/savePdfDocument";
+import savePdfDocument, { exportFileName } from "../../core/utils/savePdfDocument";
 
 import PageShell from "../../components/common/PageShell";
 import ErrorText from "../../components/common/ErrorText";
@@ -30,6 +30,7 @@ import { formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
 import timesheetsHeaderImage from "../../assets/illustrations/timesheets.svg";
 import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
+import DateRange from "../../components/common/DateRange";
 
 function toDateInput(date: Date): string {
   return date.toISOString().slice(0, 10);
@@ -127,7 +128,7 @@ export default function TimesheetsPage() {
     setPendingCorrections(correctionsResult.success ? correctionsResult.data ?? [] : []);
     const memberList = membersResult.success ? membersResult.data ?? [] : [];
     setMembers(memberList);
-    setGenerateUserId((current) => current || memberList[0]?.id || "");
+    setGenerateUserId((current) => current || (canGenerate ? memberList[0]?.id : profile?.id) || "");
     setLoading(false);
   }, [profile, canApprove, canCorrect, canGenerate, t]);
 
@@ -214,7 +215,7 @@ export default function TimesheetsPage() {
     }
     try {
       const doc = await buildTimesheetPdf(result.data, i18n.language, t, organizationLogoUrl);
-      await savePdfDocument(doc, `timesheet-${detailTimesheet.userFullName.replace(/\s+/g, "-")}-${detailTimesheet.periodStart}.pdf`, "timesheet", detailTimesheet.periodStart, detailTimesheet.periodEnd);
+      await savePdfDocument(doc, exportFileName(t("title"), detailTimesheet.userFullName, detailTimesheet.periodStart), "timesheet", detailTimesheet.periodStart, detailTimesheet.periodEnd);
     } finally {
       setExportingPdf(false);
     }
@@ -302,7 +303,8 @@ export default function TimesheetsPage() {
 
       <ErrorText>{error}</ErrorText>
 
-      {canGenerate ? (
+      {/* Owner 2026-10-21: everyone produces their own timesheet; generating for others takes timesheets.generate. */}
+      {canGenerate || (profile && !profile.isOwner) ? (
         <Card title={t("generate.title")}>
           <FormGrid columns={4} gap="sm" alignItems="end">
             {/* § live UX review - two accounts with near-identical names
@@ -312,16 +314,20 @@ export default function TimesheetsPage() {
                 for the selected user, correctly showing 0 worked
                 minutes, because THAT account had never actually
                 clocked in). Email now disambiguates every option. */}
-            <Select
-              label={t("generate.employeeLabel")}
-              name="generateUserId"
-              value={generateUserId}
-              onChange={(event) => setGenerateUserId(event.target.value)}
-              options={members.map((member) => ({ value: member.id, label: `${member.fullName} (${member.email})` }))}
-              disabled={generating}
-            />
-            <Input label={t("generate.periodStartLabel")} name="periodStart" type="date" value={period.start} onChange={(event) => setPeriod((current) => ({ ...current, start: event.target.value }))} disabled={generating} />
-            <Input label={t("generate.periodEndLabel")} name="periodEnd" type="date" value={period.end} onChange={(event) => setPeriod((current) => ({ ...current, end: event.target.value }))} disabled={generating} />
+            {canGenerate ? (
+              <Select
+                label={t("generate.employeeLabel")}
+                name="generateUserId"
+                value={generateUserId}
+                onChange={(event) => setGenerateUserId(event.target.value)}
+                options={members.map((member) => ({ value: member.id, label: `${member.fullName} (${member.email})` }))}
+                disabled={generating}
+              />
+            ) : null}
+            <DateRange>
+              <Input label={t("generate.periodStartLabel")} name="periodStart" type="date" value={period.start} onChange={(event) => setPeriod((current) => ({ ...current, start: event.target.value }))} disabled={generating} />
+              <Input label={t("generate.periodEndLabel")} name="periodEnd" type="date" value={period.end} onChange={(event) => setPeriod((current) => ({ ...current, end: event.target.value }))} disabled={generating} />
+            </DateRange>
             <Button onClick={handleGenerate} loading={generating} disabled={!generateUserId}>
               {t("generate.action")}
             </Button>

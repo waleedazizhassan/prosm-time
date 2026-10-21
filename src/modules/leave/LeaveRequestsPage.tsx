@@ -18,6 +18,7 @@ import ErrorText from "../../components/common/ErrorText";
 import leaveHeaderImage from "../../assets/illustrations/leave.svg";
 import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
+import DateRange from "../../components/common/DateRange";
 
 const LEAVE_TYPES: LeaveType[] = ["annual", "sick", "unpaid", "emergency", "other"];
 
@@ -204,8 +205,10 @@ export default function LeaveRequestsPage() {
             disabled={submitting}
             options={LEAVE_TYPES.map((type) => ({ value: type, label: t(`types.${type}`) }))}
           />
-          <Input label={t("startDateLabel")} name="leaveStartDate" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} disabled={submitting} />
-          <Input label={t("endDateLabel")} name="leaveEndDate" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} disabled={submitting} />
+          <DateRange>
+            <Input label={t("startDateLabel")} name="leaveStartDate" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} disabled={submitting} />
+            <Input label={t("endDateLabel")} name="leaveEndDate" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} disabled={submitting} />
+          </DateRange>
         </div>
         {isOwner ? <HintText>{t("ownerAutoApproveHint")}</HintText> : null}
         <Textarea label={t("reasonLabel")} name="leaveReason" value={reason} onChange={(event) => setReason(event.target.value)} disabled={submitting} rows={2} />

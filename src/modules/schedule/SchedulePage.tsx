@@ -20,6 +20,7 @@ import ErrorText from "../../components/common/ErrorText";
 import shiftsHeaderImage from "../../assets/illustrations/schedule.svg";
 import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
+import DateRange from "../../components/common/DateRange";
 
 function isoDate(date: Date): string {
   return date.toISOString().slice(0, 10);
@@ -211,8 +212,10 @@ export default function SchedulePage() {
           <Card title={t("manageTitle")}>
             <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap", marginBottom: "var(--space-3)" }}>
               <Select label={t("siteLabel")} name="scheduleSite" value={selectedSiteId} onChange={(event) => setSelectedSiteId(event.target.value)} options={sites.map((site) => ({ value: site.id, label: site.name }))} />
-              <Input label={t("rangeStartLabel")} name="scheduleRangeStart" type="date" value={rangeStart} onChange={(event) => setRangeStart(event.target.value)} />
-              <Input label={t("rangeEndLabel")} name="scheduleRangeEnd" type="date" value={rangeEnd} onChange={(event) => setRangeEnd(event.target.value)} />
+              <DateRange>
+                <Input label={t("rangeStartLabel")} name="scheduleRangeStart" type="date" value={rangeStart} onChange={(event) => setRangeStart(event.target.value)} />
+                <Input label={t("rangeEndLabel")} name="scheduleRangeEnd" type="date" value={rangeEnd} onChange={(event) => setRangeEnd(event.target.value)} />
+              </DateRange>
             </div>
 
             <Table columns={siteColumns} data={siteShifts} getRowId={(row) => row.id} loading={siteShiftsLoading} emptyMessage={t("emptySite")} />

@@ -58,11 +58,11 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "readyBody": "راجع كشف دوامك للفترة من {{start}} إلى {{end}} ثم أرسله."
       },
       "shiftAssigned": {
-        "title": "تم جدولة شيفت جديد لك",
+        "title": "تمت جدولة وردية جديدة لك",
         "body": "أنت مجدول يوم {{date}} من {{startTime}} إلى {{endTime}}.",
         "bodyOvernight": "أنت مجدول يوم {{date}} من {{startTime}} إلى {{endTime}} (اليوم التالي).",
-        "cancelledTitle": "تم إلغاء شيفت مجدول",
-        "cancelledBody": "تم إلغاء شيفتك يوم {{date}}."
+        "cancelledTitle": "تم إلغاء وردية مجدول",
+        "cancelledBody": "تم إلغاء ورديتك يوم {{date}}."
       },
       "siteChangeAlert": {
         "title": "الموظف غيّر الموقع أثناء الوردية",

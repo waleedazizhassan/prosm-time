@@ -9,12 +9,6 @@ import settingsHeaderImage from "../../assets/illustrations/settings.svg";
 import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
 import PageBanner from "../../components/common/PageBanner";
-// PayrollIntegrationCard intentionally not rendered below - § user-
-// directed, 2026-09-13: "hide it, not delete it, until we know how
-// we'll actually use it." Component and its own QuickBooks RPCs are
-// untouched - uncomment the import and the render below to bring it
-// back.
-// import PayrollIntegrationCard from "./PayrollIntegrationCard";
 
 // PROSM Time - § live UX review, user-directed: "a professional
 // reorganization" - org-wide settings (today: the no-site geofence
@@ -49,7 +43,6 @@ export default function OrganizationSettingsPage() {
           <SiteDefaultsSettingsCard />
         </>
       ) : null}
-      {/* <PayrollIntegrationCard /> - see the hidden import's own comment above */}
     </PageShell>
   );
 }

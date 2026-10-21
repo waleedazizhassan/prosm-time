@@ -1,0 +1,17 @@
+.range {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 520px;
+}
+
+/* The fields' own bottom margin is the row's; no second gap under them. */
+.range.range > * {
+  margin-bottom: 0;
+  min-width: 0;
+}
+
+.range + * {
+  margin-top: var(--space-3);
+}

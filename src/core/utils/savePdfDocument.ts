@@ -19,6 +19,16 @@ import ReportExportRepository from "../repositories/ReportExportRepository";
 // reportType is optional only so this utility still has a valid
 // signature for a hypothetical future non-report PDF - every real
 // caller today always passes one.
+// Owner 2026-10-21 ("an Arabic page exports files with English names"): a file
+// name in the reader's language - the report's title, then any name and the
+// period, joined with dashes (characters a file system refuses are dropped).
+export function exportFileName(...parts: (string | null | undefined)[]): string {
+  const clean = parts
+    .filter((part): part is string => Boolean(part && part.trim()))
+    .map((part) => part.trim().replace(/[\\/:*?"<>|]+/g, "").replace(/\s+/g, "-"));
+  return `${clean.join("-")}.pdf`;
+}
+
 export default async function savePdfDocument(doc: jsPDF, filename: string, reportType?: string, periodStart?: string, periodEnd?: string): Promise<void> {
   if (!Capacitor.isNativePlatform()) {
     doc.save(filename);

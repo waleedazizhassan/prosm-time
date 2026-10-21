@@ -35,14 +35,6 @@ export default function HelpPage() {
     "sites",
     "workers",
     "settingsCenter",
-    // "payrollIntegration" removed 2026-09-15 along with QuickBooks
-    // itself (user-directed - PROSM Finance now computes payroll
-    // natively, no external payroll software needed). The Payroll
-    // Integration card (OrganizationSettingsPage.tsx) is still hidden
-    // regardless - Xero/Gusto remain dormant - so this list entry and
-    // its help.json content were both deleted rather than left stale.
-    // A new guide (Xero/Gusto-specific, not a QuickBooks rewrite) would
-    // be needed if that card is ever brought back for real.
     "permissions",
     "calendar",
     "getTheApp",

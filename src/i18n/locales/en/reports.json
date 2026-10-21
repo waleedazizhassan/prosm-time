@@ -4,7 +4,7 @@
   "loadError": "Unable to load this report's data.",
   "types": {
     "attendance": "Attendance Record",
-    "allowances": "Allowances",
+    "allowances": "Combined allowance sheet",
     "timesheets": "Timesheets",
     "timesheet": "Timesheet",
     "workforce": "Company Employees",
