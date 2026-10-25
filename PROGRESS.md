@@ -23,7 +23,7 @@
 | 16 | 26 التخطيط المرن والقايمة الجانبية | تمت جزئياً (محلياً) | انظر git log | الفحص المرئي على المقاسات → الخطوة 21 |
 | 17 | 5/4 الداشبورد | تمت (محلياً) | انظر git log | migration `20261025240000` مطبّقة؛ الفحص المرئي → الخطوة 21 |
 | 18 | 16 التصدير | تمت (محلياً) | انظر git log | migration `20261025250000` مطبّقة؛ تجربة Android على جهاز فعلي → الخطوة 21 |
-| 19 | 12/13/1 Android | تمت (محلياً) — بناء Android لم يُتحقق منه | انظر git log | send-push منشورة؛ `assembleDebug` اتوقف لنقص الذاكرة → يُعاد |
+| 19 | 12/13/1 Android | تمت (محلياً) — بناء debug ناجح 2026-10-26 | انظر git log | send-push منشورة؛ بناء release موقّع وتجربة على جهاز فعلي → الخطوتان 21/22 |
 | 20 | 3 بانر الأوفلاين | تمت (محلياً) | انظر git log | تجربة على جهاز Android فعلي → الخطوة 21 |
 | 21 | التدقيق الشامل | لم تبدأ | | |
 | 22 | الإصدار | لم تبدأ | | |
@@ -325,7 +325,7 @@
 2. **الـ manifest (بند 12):** خدمة الراديو `mediaPlayback` + `FOREGROUND_SERVICE_MEDIA_PLAYBACK` (الكود والـ manifest، وشيل `specialUse|microphone` ونص SIP)؛ خدمة التتبع `exported=false` (`tools:replace`)؛ شيل `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS` (مش مستخدم في الويب ولا النيتف)؛ `gps required=false` (`tools:replace`) ورسالة الموقع غير المتاح بقت بتقول تعمل إيه؛ المنبّهات الدقيقة: البلجن بيرجع لمنبّه غير دقيق لوحده، وكارت التذكيرات بيقول ده وفيه زرار «السماح بالمنبّهات الدقيقة». `latest-version.json`: سكربت واحد `scripts/write-release-manifest.mjs` بيكتبه من رقم الإصدار قبل بناء الـ APK والويب وقبل النشر — فالرقم في الـ APK والمنشور واحد.
 3. **الأخطاء الصامتة (بند 13):** بدء التتبع بيسجّل الخطأ ويفرّق بين «الصلاحية مرفوضة» (زرار فتح الإعدادات) و«الخدمة ما اشتغلتش» (محاولة تلقائية بعد 30 ثانية) ونافذة فيها «حاول مرة أخرى»؛ جدولة التذكيرات وإشعار التحديث والراديو بيسجّلوا الخطأ بدل `catch{}` الفاضي؛ إشعار التحديث (7101) بقى قابل للسحب.
 
-**الاختبارات:** `BackgroundLocationService.test.ts` 2/2؛ YAML الـ workflow سليم؛ السكربت اتجرّب. **لم يتحقق بعد:** `gradlew assembleDebug` (دمج الـ manifest وتجميع الـ Java المعدّل) — اتوقف لنقص ذاكرة الجهاز، يُعاد قبل الإصدار؛ وتجربة على جهاز فعلي (Android 14/15/16) في الخطوة 21.
+**الاختبارات:** `BackgroundLocationService.test.ts` 2/2؛ YAML الـ workflow سليم؛ السكربت اتجرّب. **بناء Android (2026-10-26، بعد ما المالك فضّى ذاكرة):** `npx cap sync android` ثم `gradlew :app:assembleDebug --no-daemon` = **BUILD SUCCESSFUL in 2m 23s** (210 مهمة، 21 نُفّذت). الدليل من المخرجات: الـ manifest المدموج فيه `BackgroundGeolocationService exported="false"`، و`BackgroundModeService foregroundServiceType="mediaPlayback"`، و`FOREGROUND_SERVICE_MEDIA_PLAYBACK`، و`location.gps required="false"`، ومفيش `SPECIAL_USE` ولا `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS`؛ و`javap` على الكلاسات المجمّعة: `startForeground(..., 2)` (= `FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK`) وقناة `prosm-tracking` وحذف القناة القديمة. ملف `app-debug.apk` (16.9MB). ملحوظة: `build.gradle` المحلي فيه `versionName "2.3.2"`/`versionCode 3` (قيم قديمة، الـ CI بيكتب رقم الإصدار وقت البناء). **لم يتم بعد:** بناء release موقّع (يحتاج مفاتيح التوقيع — في الـ CI) وتجربة على جهاز فعلي (Android 14/15/16) → الخطوتان 21/22.
 
 ---
 
