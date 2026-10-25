@@ -42,7 +42,8 @@
     "people.unassigned": "Employés sans site",
     "attendance.override_block": "Pointer malgré un blocage du site (journalisé)",
     "sessions.review_pending": "Vérifier les heures en attente et prolonger",
-    "settings.session_policy": "Alerte et fermeture des sessions ouvertes"
+    "settings.session_policy": "Alerte et fermeture des sessions ouvertes",
+    "calendar.manage": "Gérer le calendrier et les jours fériés"
   },
   "invite": {
     "actionLabel": "Inviter un employé",

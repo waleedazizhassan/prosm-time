@@ -182,7 +182,8 @@
     "settings": "Settings",
     "integrations": "Integrations",
     "help": "Help",
-    "workers": "Workers"
+    "workers": "Workers",
+    "calendar": "Calendar and holidays"
   },
   "sosOverlay": {
     "title": "SOS/Emergency alert",
@@ -277,7 +278,8 @@
     "settings": "Organisation-wide rules",
     "integrations": "Payroll and other systems",
     "timesheets": "Hours for review and approval",
-    "workers": "External workers and their kiosk numbers"
+    "workers": "External workers and their kiosk numbers",
+    "calendar": "Public holidays, weekly rest days and exceptional days - the hours and overtime follow them."
   },
   "backgroundDisclosure": {
     "title": "Location during your shift",

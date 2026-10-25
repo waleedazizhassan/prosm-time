@@ -182,7 +182,8 @@
     "settings": "Einstellungen",
     "integrations": "Integrationen",
     "help": "Hilfe",
-    "workers": "Externe Arbeiter"
+    "workers": "Externe Arbeiter",
+    "calendar": "Kalender und Feiertage"
   },
   "sosOverlay": {
     "title": "SOS-/Notfallalarm",
@@ -277,7 +278,8 @@
     "settings": "Regeln für die ganze Organisation",
     "integrations": "Lohnabrechnung und andere Systeme",
     "timesheets": "Stunden zur Prüfung und Freigabe",
-    "workers": "Externe Arbeiter und ihre Kiosk-Nummern"
+    "workers": "Externe Arbeiter und ihre Kiosk-Nummern",
+    "calendar": "Feiertage, Ruhetage und Ausnahmetage - Stunden und Überstunden richten sich danach."
   },
   "backgroundDisclosure": {
     "title": "Standort während Ihrer Schicht",

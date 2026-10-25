@@ -1,0 +1,60 @@
+{
+  "loadError": "Could not load the calendar.",
+  "genericError": "Could not save.",
+  "save": "Save",
+  "edit": "Edit",
+  "delete": "Delete",
+  "from": "From",
+  "to": "To",
+  "weekdays": {
+    "0": "Sunday",
+    "1": "Monday",
+    "2": "Tuesday",
+    "3": "Wednesday",
+    "4": "Thursday",
+    "5": "Friday",
+    "6": "Saturday"
+  },
+  "scope": {
+    "label": "Applies to",
+    "organisation": "The whole organisation",
+    "site": "A site",
+    "person": "One person"
+  },
+  "restDays": {
+    "title": "Weekly rest days",
+    "hint": "Tap a day to make it a rest day or a working day. Work on a rest day counts as overtime. A site without its own days follows the organisation's (faded).",
+    "inherit": "as the organisation",
+    "none": "no rest day",
+    "useOrganisation": "Use the organisation's days",
+    "current": "Organisation: {{days}}"
+  },
+  "holidays": {
+    "title": "Public holidays",
+    "hint": "Work on a public holiday counts as overtime; the day is not counted as an absence or as leave.",
+    "add": "Add a holiday",
+    "editTitle": "Edit the holiday",
+    "empty": "No holidays in the coming year yet.",
+    "name": "Name",
+    "paid": "paid",
+    "unpaid": "unpaid",
+    "paidLabel": "Paid holiday",
+    "required": "Enter the name and the date."
+  },
+  "exceptions": {
+    "title": "Exceptional days",
+    "hint": "A day with other hours (for example, everyone leaves at 4 pm on Thursday) or a day off, for the organisation, a site or one person. With \"no deduction\", nothing is deducted for lateness or early leave that day.",
+    "add": "Add an exceptional day",
+    "empty": "No exceptional days.",
+    "dayOff": "day off",
+    "from": "from {{time}}",
+    "to": "to {{time}}",
+    "noDeduction": "no deduction",
+    "dayOffLabel": "A day off",
+    "startTime": "Start time (optional)",
+    "endTime": "End time (optional)",
+    "noDeductionLabel": "No deduction this day",
+    "reason": "Reason (required)",
+    "required": "Enter the date and the reason."
+  }
+}

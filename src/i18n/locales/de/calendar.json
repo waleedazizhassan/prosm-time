@@ -1,0 +1,60 @@
+{
+  "loadError": "Der Kalender konnte nicht geladen werden.",
+  "genericError": "Speichern fehlgeschlagen.",
+  "save": "Speichern",
+  "edit": "Bearbeiten",
+  "delete": "Löschen",
+  "from": "Von",
+  "to": "Bis",
+  "weekdays": {
+    "0": "Sonntag",
+    "1": "Montag",
+    "2": "Dienstag",
+    "3": "Mittwoch",
+    "4": "Donnerstag",
+    "5": "Freitag",
+    "6": "Samstag"
+  },
+  "scope": {
+    "label": "Gilt für",
+    "organisation": "Die ganze Organisation",
+    "site": "Einen Standort",
+    "person": "Eine Person"
+  },
+  "restDays": {
+    "title": "Wöchentliche Ruhetage",
+    "hint": "Tippen Sie auf einen Tag, um ihn zum Ruhe- oder Arbeitstag zu machen. Arbeit an einem Ruhetag zählt als Überstunden.",
+    "inherit": "wie die Organisation",
+    "none": "kein Ruhetag",
+    "useOrganisation": "Tage der Organisation verwenden",
+    "current": "Organisation: {{days}}"
+  },
+  "holidays": {
+    "title": "Feiertage",
+    "hint": "Arbeit an einem Feiertag zählt als Überstunden.",
+    "add": "Feiertag hinzufügen",
+    "editTitle": "Feiertag bearbeiten",
+    "empty": "Noch keine Feiertage im kommenden Jahr.",
+    "name": "Name",
+    "paid": "bezahlt",
+    "unpaid": "unbezahlt",
+    "paidLabel": "Bezahlter Feiertag",
+    "required": "Bitte Name und Datum angeben."
+  },
+  "exceptions": {
+    "title": "Ausnahmetage",
+    "hint": "Ein Tag mit anderen Zeiten oder ein freier Tag, für die Organisation, einen Standort oder eine Person. Mit „kein Abzug“ wird an diesem Tag nichts für Verspätung oder früheres Gehen abgezogen.",
+    "add": "Ausnahmetag hinzufügen",
+    "empty": "Keine Ausnahmetage.",
+    "dayOff": "freier Tag",
+    "from": "ab {{time}}",
+    "to": "bis {{time}}",
+    "noDeduction": "kein Abzug",
+    "dayOffLabel": "Freier Tag",
+    "startTime": "Beginn (optional)",
+    "endTime": "Ende (optional)",
+    "noDeductionLabel": "Kein Abzug an diesem Tag",
+    "reason": "Grund (Pflicht)",
+    "required": "Bitte Datum und Grund angeben."
+  }
+}

@@ -42,7 +42,8 @@
     "people.unassigned": "Employees not tied to a site",
     "attendance.override_block": "Clock in past a site block (audited)",
     "sessions.review_pending": "Review pending hours and extend shifts",
-    "settings.session_policy": "Open-shift alert and automatic close"
+    "settings.session_policy": "Open-shift alert and automatic close",
+    "calendar.manage": "Manage the calendar and holidays"
   },
   "invite": {
     "actionLabel": "Invite employee",

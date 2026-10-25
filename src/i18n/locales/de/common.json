@@ -216,7 +216,16 @@
     "sessionPolicyRequired": "Sie dürfen diese Regel nicht ändern.",
     "invalidOpenShiftHours": "Der Hinweis muss vor dem Schließen kommen (1 bis 72 Stunden).",
     "shiftNotOpen": "Diese Schicht ist nicht mehr offen.",
-    "invalidExtensionTime": "Bitte eine künftige Zeit innerhalb von 72 Stunden nach dem Einstempeln wählen."
+    "invalidExtensionTime": "Bitte eine künftige Zeit innerhalb von 72 Stunden nach dem Einstempeln wählen.",
+    "calendarManageRequired": "Sie dürfen den Kalender nicht ändern.",
+    "calendarOrgOwnerOnly": "Nur der Inhaber ändert den Kalender der ganzen Organisation.",
+    "invalidHolidayDates": "Bitte Daten prüfen (höchstens 31 Tage).",
+    "invalidExceptionDates": "Bitte Daten prüfen (höchstens 3 Monate).",
+    "invalidWeekdays": "Bitte gültige Wochentage wählen.",
+    "chooseOneScope": "Wählen Sie die Organisation, einen Standort oder eine Person.",
+    "holidayNotFound": "Feiertag nicht gefunden.",
+    "scheduleExceptionNotFound": "Ausnahmetag nicht gefunden.",
+    "periodUpToYear": "Bitte einen Zeitraum von höchstens einem Jahr wählen."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

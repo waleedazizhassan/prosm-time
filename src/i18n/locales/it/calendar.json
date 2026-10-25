@@ -1,0 +1,60 @@
+{
+  "loadError": "Impossibile caricare il calendario.",
+  "genericError": "Salvataggio non riuscito.",
+  "save": "Salva",
+  "edit": "Modifica",
+  "delete": "Elimina",
+  "from": "Dal",
+  "to": "Al",
+  "weekdays": {
+    "0": "Domenica",
+    "1": "Lunedì",
+    "2": "Martedì",
+    "3": "Mercoledì",
+    "4": "Giovedì",
+    "5": "Venerdì",
+    "6": "Sabato"
+  },
+  "scope": {
+    "label": "Si applica a",
+    "organisation": "Tutta l'organizzazione",
+    "site": "Una sede",
+    "person": "Una persona"
+  },
+  "restDays": {
+    "title": "Giorni di riposo settimanali",
+    "hint": "Tocca un giorno per renderlo di riposo o lavorativo. Il lavoro in un giorno di riposo conta come straordinario.",
+    "inherit": "come l'organizzazione",
+    "none": "nessun riposo",
+    "useOrganisation": "Usa i giorni dell'organizzazione",
+    "current": "Organizzazione: {{days}}"
+  },
+  "holidays": {
+    "title": "Festività",
+    "hint": "Il lavoro in una festività conta come straordinario.",
+    "add": "Aggiungi festività",
+    "editTitle": "Modifica festività",
+    "empty": "Ancora nessuna festività nel prossimo anno.",
+    "name": "Nome",
+    "paid": "retribuita",
+    "unpaid": "non retribuita",
+    "paidLabel": "Festività retribuita",
+    "required": "Inserisci nome e data."
+  },
+  "exceptions": {
+    "title": "Giorni eccezionali",
+    "hint": "Un giorno con altri orari o un giorno libero, per l'organizzazione, una sede o una persona. Con «nessuna trattenuta» non si trattiene nulla per ritardi o uscite anticipate quel giorno.",
+    "add": "Aggiungi giorno eccezionale",
+    "empty": "Nessun giorno eccezionale.",
+    "dayOff": "giorno libero",
+    "from": "dalle {{time}}",
+    "to": "alle {{time}}",
+    "noDeduction": "nessuna trattenuta",
+    "dayOffLabel": "Giorno libero",
+    "startTime": "Inizio (facoltativo)",
+    "endTime": "Fine (facoltativo)",
+    "noDeductionLabel": "Nessuna trattenuta oggi",
+    "reason": "Motivo (obbligatorio)",
+    "required": "Inserisci data e motivo."
+  }
+}

@@ -20,3 +20,8 @@
 - **السياق:** نظام الصلاحيات الحالي: كتالوج `permissions` + `role_default_permissions` + `user_permission_overrides` (بدون عمود نطاق). النطاق يُحسب من `site_assignments.role_at_site = 'manager'` (`current_prosm_time_managed_site_ids`) و`prosm_time_caller_has_authority_over`.
 - **القرار:** كل صلاحية جديدة تتفحص بـ `prosm_time_user_has_permission_internal` **و**بنطاق المواقع الذي يديره المستدعي (أو الأونر). لا نضيف جدول نطاق موازياً.
 - **ملاحظة:** الصلاحيات «للمديرين فقط» (`prosm_time_manager_only_permissions`: الإجازات، التسجيل بالنيابة) قرار مالك 2026-10-19 ويبقى، رغم أن البرومت يقول «لأي دور».
+
+## D-04 — الشغل في العطلة = إضافي كامل، والأيام بتوقيت الموقع
+- **القرار:** في `generate_prosm_time_timesheet` أي دقائق في عطلة أسبوعية أو رسمية = إضافي، ولا خصم تأخير فيها. اليوم يُحسب بتوقيت الموقع (`prosm_time_work_date`، الاحتياطي `organization_settings.timezone` = Africa/Cairo) بدل `clock_in_at::date` (UTC) — جلسة تبدأ 1 صباحاً بالقاهرة كانت بتتحسب على اليوم اللي قبله.
+- **السبب:** قاعدة البند 7/8 + قرار التوقيت في جدول القرارات. «الوردية الليلية تُحسب على يوم بدايتها» (قرار مالك سابق) محفوظ.
+- **حد:** التأخير يُقاس من أول حضور في اليوم (كان من آخر جلسة).

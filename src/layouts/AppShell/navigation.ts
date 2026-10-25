@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, MonitorSmartphone, UserCog, LogIn, Plug, HardHat } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, LogIn, Plug, HardHat } from "lucide-react";
 
 import { FEATURES } from "../../config/features";
 
@@ -142,6 +142,8 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // actively depend on keys generated here (attendance:read/
   // payroll:read) for their own cross-product data bridges, so the
   // "how we'll use it" question is answered.
+  // v2.3.43 step 3 (items 7/8): public holidays, weekly rest days and exceptional days.
+  { id: "calendar", labelKey: "items.calendar", path: "/calendar", icon: CalendarRange, requiredPermission: "calendar.manage", section: "settings" },
   { id: "integrations", labelKey: "items.integrations", path: "/integrations", icon: Plug, requiredPermission: null, ownerOnly: true, section: "settings" },
   { id: "help", labelKey: "items.help", path: "/help", icon: HelpCircle, requiredPermission: null, section: "help" },
 ];

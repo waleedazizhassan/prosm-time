@@ -1,0 +1,60 @@
+{
+  "loadError": "Impossible de charger le calendrier.",
+  "genericError": "Enregistrement impossible.",
+  "save": "Enregistrer",
+  "edit": "Modifier",
+  "delete": "Supprimer",
+  "from": "Du",
+  "to": "Au",
+  "weekdays": {
+    "0": "Dimanche",
+    "1": "Lundi",
+    "2": "Mardi",
+    "3": "Mercredi",
+    "4": "Jeudi",
+    "5": "Vendredi",
+    "6": "Samedi"
+  },
+  "scope": {
+    "label": "S'applique à",
+    "organisation": "Toute l'organisation",
+    "site": "Un site",
+    "person": "Une personne"
+  },
+  "restDays": {
+    "title": "Jours de repos hebdomadaires",
+    "hint": "Touchez un jour pour en faire un jour de repos ou de travail. Le travail un jour de repos compte en heures supplémentaires.",
+    "inherit": "comme l'organisation",
+    "none": "aucun jour de repos",
+    "useOrganisation": "Utiliser les jours de l'organisation",
+    "current": "Organisation : {{days}}"
+  },
+  "holidays": {
+    "title": "Jours fériés",
+    "hint": "Le travail un jour férié compte en heures supplémentaires.",
+    "add": "Ajouter un jour férié",
+    "editTitle": "Modifier le jour férié",
+    "empty": "Aucun jour férié pour l'année à venir.",
+    "name": "Nom",
+    "paid": "payé",
+    "unpaid": "non payé",
+    "paidLabel": "Jour férié payé",
+    "required": "Indiquez le nom et la date."
+  },
+  "exceptions": {
+    "title": "Jours exceptionnels",
+    "hint": "Un jour avec d'autres horaires ou un jour chômé, pour l'organisation, un site ou une personne. Avec « sans retenue », aucun retard ni départ anticipé n'est retenu ce jour-là.",
+    "add": "Ajouter un jour exceptionnel",
+    "empty": "Aucun jour exceptionnel.",
+    "dayOff": "jour chômé",
+    "from": "de {{time}}",
+    "to": "à {{time}}",
+    "noDeduction": "sans retenue",
+    "dayOffLabel": "Jour chômé",
+    "startTime": "Heure de début (facultatif)",
+    "endTime": "Heure de fin (facultatif)",
+    "noDeductionLabel": "Sans retenue ce jour",
+    "reason": "Motif (obligatoire)",
+    "required": "Indiquez la date et le motif."
+  }
+}

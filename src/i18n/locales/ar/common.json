@@ -216,7 +216,16 @@
     "sessionPolicyRequired": "ليست لديك صلاحية تغيير سياسة الجلسات المفتوحة.",
     "invalidOpenShiftHours": "التنبيه لازم يكون قبل الإغلاق التلقائي (من 1 إلى 72 ساعة).",
     "shiftNotOpen": "هذه الجلسة لم تعد مفتوحة.",
-    "invalidExtensionTime": "اختر وقتاً في المستقبل خلال 72 ساعة من الحضور."
+    "invalidExtensionTime": "اختر وقتاً في المستقبل خلال 72 ساعة من الحضور.",
+    "calendarManageRequired": "ليست لديك صلاحية تعديل التقويم.",
+    "calendarOrgOwnerOnly": "تقويم المنظمة كلها للأونر فقط - اختر موقعاً تديره.",
+    "invalidHolidayDates": "راجع التواريخ (حتى 31 يوماً).",
+    "invalidExceptionDates": "راجع التواريخ (حتى 3 شهور).",
+    "invalidWeekdays": "اختر أياماً صحيحة.",
+    "chooseOneScope": "اختر المنظمة أو موقعاً واحداً أو شخصاً واحداً.",
+    "holidayNotFound": "العطلة غير موجودة.",
+    "scheduleExceptionNotFound": "اليوم الاستثنائي غير موجود.",
+    "periodUpToYear": "اختر فترة حتى سنة."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

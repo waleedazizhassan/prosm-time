@@ -216,7 +216,16 @@
     "sessionPolicyRequired": "Vous n'avez pas le droit de modifier cette règle.",
     "invalidOpenShiftHours": "L'alerte doit précéder la fermeture (1 à 72 heures).",
     "shiftNotOpen": "Cette session n'est plus ouverte.",
-    "invalidExtensionTime": "Choisissez une heure future, dans les 72 heures après l'arrivée."
+    "invalidExtensionTime": "Choisissez une heure future, dans les 72 heures après l'arrivée.",
+    "calendarManageRequired": "Vous n'avez pas le droit de modifier le calendrier.",
+    "calendarOrgOwnerOnly": "Seul le propriétaire modifie le calendrier de toute l'organisation.",
+    "invalidHolidayDates": "Vérifiez les dates (31 jours au plus).",
+    "invalidExceptionDates": "Vérifiez les dates (3 mois au plus).",
+    "invalidWeekdays": "Choisissez des jours valides.",
+    "chooseOneScope": "Choisissez l'organisation, un site ou une personne.",
+    "holidayNotFound": "Jour férié introuvable.",
+    "scheduleExceptionNotFound": "Jour exceptionnel introuvable.",
+    "periodUpToYear": "Choisissez une période d'un an au plus."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

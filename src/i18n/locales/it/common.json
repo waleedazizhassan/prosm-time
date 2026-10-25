@@ -216,7 +216,16 @@
     "sessionPolicyRequired": "Non hai il permesso di modificare questa regola.",
     "invalidOpenShiftHours": "L'avviso deve precedere la chiusura (da 1 a 72 ore).",
     "shiftNotOpen": "Questo turno non è più aperto.",
-    "invalidExtensionTime": "Scegli un orario futuro entro 72 ore dall'entrata."
+    "invalidExtensionTime": "Scegli un orario futuro entro 72 ore dall'entrata.",
+    "calendarManageRequired": "Non hai il permesso di modificare il calendario.",
+    "calendarOrgOwnerOnly": "Solo il titolare modifica il calendario dell'intera organizzazione.",
+    "invalidHolidayDates": "Controlla le date (massimo 31 giorni).",
+    "invalidExceptionDates": "Controlla le date (massimo 3 mesi).",
+    "invalidWeekdays": "Scegli giorni validi.",
+    "chooseOneScope": "Scegli l'organizzazione, una sede o una persona.",
+    "holidayNotFound": "Festività non trovata.",
+    "scheduleExceptionNotFound": "Giorno eccezionale non trovato.",
+    "periodUpToYear": "Scegli un periodo di massimo un anno."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

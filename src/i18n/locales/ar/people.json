@@ -42,7 +42,8 @@
     "people.unassigned": "الموظفون غير المرتبطين بموقع",
     "attendance.override_block": "تجاوز حجب تسجيل الحضور (مع تسجيل في السجل)",
     "sessions.review_pending": "مراجعة الساعات المعلّقة وتمديد الجلسات",
-    "settings.session_policy": "تنبيه وإغلاق الجلسات المفتوحة"
+    "settings.session_policy": "تنبيه وإغلاق الجلسات المفتوحة",
+    "calendar.manage": "إدارة التقويم والعطلات"
   },
   "invite": {
     "actionLabel": "دعوة موظف",

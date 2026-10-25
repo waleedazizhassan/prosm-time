@@ -216,7 +216,16 @@
     "sessionPolicyRequired": "You don't have permission to change the open-shift policy.",
     "invalidOpenShiftHours": "The alert must come before the automatic close (1 to 72 hours).",
     "shiftNotOpen": "This shift is no longer open.",
-    "invalidExtensionTime": "Choose a time in the future, within 72 hours of the clock-in."
+    "invalidExtensionTime": "Choose a time in the future, within 72 hours of the clock-in.",
+    "calendarManageRequired": "You don't have permission to change the calendar.",
+    "calendarOrgOwnerOnly": "Only the Owner changes the organisation-wide calendar - choose a site you manage.",
+    "invalidHolidayDates": "Check the dates (up to 31 days).",
+    "invalidExceptionDates": "Check the dates (up to 3 months).",
+    "invalidWeekdays": "Choose valid weekdays.",
+    "chooseOneScope": "Choose the organisation, one site or one person.",
+    "holidayNotFound": "This holiday was not found.",
+    "scheduleExceptionNotFound": "This exceptional day was not found.",
+    "periodUpToYear": "Choose a period of up to a year."
   },
   "pageLoad": {
     "title": "This page needs a connection",

@@ -42,7 +42,8 @@
     "people.unassigned": "Mitarbeitende ohne Standort",
     "attendance.override_block": "Trotz Standortsperre einstempeln (protokolliert)",
     "sessions.review_pending": "Offene Stunden prüfen und Schichten verlängern",
-    "settings.session_policy": "Hinweis und Schließen offener Schichten"
+    "settings.session_policy": "Hinweis und Schließen offener Schichten",
+    "calendar.manage": "Kalender und Feiertage verwalten"
   },
   "invite": {
     "actionLabel": "Mitarbeiter einladen",

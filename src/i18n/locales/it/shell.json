@@ -182,7 +182,8 @@
     "settings": "Impostazioni",
     "integrations": "Integrazioni",
     "help": "Assistenza",
-    "workers": "Lavoratori esterni"
+    "workers": "Lavoratori esterni",
+    "calendar": "Calendario e festività"
   },
   "sosOverlay": {
     "title": "Allarme SOS/Emergenza",
@@ -277,7 +278,8 @@
     "settings": "Regole di tutta l'organizzazione",
     "integrations": "Buste paga e altri sistemi",
     "timesheets": "Ore da verificare e approvare",
-    "workers": "Lavoratori esterni e i loro numeri per il chiosco"
+    "workers": "Lavoratori esterni e i loro numeri per il chiosco",
+    "calendar": "Festività, giorni di riposo e giorni eccezionali - ore e straordinari ne dipendono."
   },
   "backgroundDisclosure": {
     "title": "Posizione durante il turno",

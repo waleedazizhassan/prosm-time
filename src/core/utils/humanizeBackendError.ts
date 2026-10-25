@@ -263,4 +263,14 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "INVALID OPEN SHIFT HOURS": "invalidOpenShiftHours",
   "THIS SHIFT IS NOT OPEN": "shiftNotOpen",
   "INVALID EXTENSION TIME": "invalidExtensionTime",
+  // v2.3.43 step 3: the work calendar.
+  "CALENDAR.MANAGE AUTHORITY REQUIRED": "calendarManageRequired",
+  "ONLY THE OWNER CHANGES THE ORGANISATION-WIDE CALENDAR": "calendarOrgOwnerOnly",
+  "INVALID HOLIDAY DATES": "invalidHolidayDates",
+  "INVALID EXCEPTION DATES": "invalidExceptionDates",
+  "INVALID WEEKDAYS": "invalidWeekdays",
+  "CHOOSE ONE SCOPE": "chooseOneScope",
+  "HOLIDAY NOT FOUND": "holidayNotFound",
+  "SCHEDULE EXCEPTION NOT FOUND": "scheduleExceptionNotFound",
+  "CHOOSE A PERIOD OF UP TO A YEAR": "periodUpToYear",
 };
