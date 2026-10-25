@@ -36,6 +36,11 @@ export interface MySiteRates {
   rates: Rates;
 }
 
+// v2.3.43 step 4 (item 6): how each daily allowance is calculated for the organisation.
+export const BASIS_FIELDS = ["meal", "expatriation", "transportation", "housing", "travel", "other"] as const;
+export type BasisField = (typeof BASIS_FIELDS)[number];
+export type AllowanceBasis = "fixed_per_day" | "per_hour" | "per_extra_day";
+
 export const EMPTY_RATES: Rates = { meal: null, expatriation: null, transportation: null, housing: null, travel: null, other: null, overtimeHour: null, extraDay: null };
 
 interface RawRateRow {
@@ -163,6 +168,27 @@ class AllowanceRatesRepository {
       const { data, error } = await this.client.rpc("get_prosm_time_my_allowance_rates");
       if (error) return fail(error.message);
       return ok((data ?? []) as MySiteRates[]);
+    } catch (error) {
+      return fail(error instanceof Error ? error.message : "Allowances service unavailable.");
+    }
+  }
+
+  async getBasis(): Promise<ServiceResult<Record<BasisField, AllowanceBasis>>> {
+    try {
+      const { data, error } = await this.client.from("allowance_basis").select("allowance_key, basis");
+      if (error) return fail(error.message);
+      const basis = Object.fromEntries(BASIS_FIELDS.map((field) => [field, "fixed_per_day"])) as Record<BasisField, AllowanceBasis>;
+      for (const row of (data ?? []) as { allowance_key: BasisField; basis: AllowanceBasis }[]) basis[row.allowance_key] = row.basis;
+      return ok(basis);
+    } catch (error) {
+      return fail(error instanceof Error ? error.message : "Allowances service unavailable.");
+    }
+  }
+
+  async setBasis(field: BasisField, basis: AllowanceBasis): Promise<ServiceResult> {
+    try {
+      const { error } = await this.client.rpc("set_prosm_time_allowance_basis", { p_allowance_key: field, p_basis: basis });
+      return error ? fail(error.message) : ok();
     } catch (error) {
       return fail(error instanceof Error ? error.message : "Allowances service unavailable.");
     }

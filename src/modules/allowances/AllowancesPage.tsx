@@ -106,6 +106,12 @@ function parseAmountInput(raw: string): number {
 // confirmation. No permission gate on the nav item itself (same
 // reasoning as Timesheets/Attendance Record) - allowance_entries' own
 // RLS already returns exactly what the caller may see.
+// v2.3.43 step 4: overtime is kept in minutes - shown as h:mm (0:15, 8:20).
+function formatMinutes(minutes: number): string {
+  const total = Math.round(minutes);
+  return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, "0")}`;
+}
+
 export default function AllowancesPage() {
   const { t, i18n } = useTranslation("allowances");
   const { profile, hasPermission } = useAuth();
@@ -392,7 +398,7 @@ export default function AllowancesPage() {
     { key: "meal", header: t("columns.meal"), render: (entry) => entry.mealAllowance.toFixed(2) },
     { key: "expatriation", header: t("columns.expatriation"), render: (entry) => entry.expatriationAllowance.toFixed(2) },
     { key: "transportation", header: t("columns.transportation"), render: (entry) => entry.transportationAllowance.toFixed(2) },
-    { key: "overtimeHours", header: t("columns.overtimeHours"), render: (entry) => entry.overtimeHours.toFixed(2) },
+    { key: "overtimeHours", header: t("columns.overtimeHours"), render: (entry) => formatMinutes(entry.overtimeMinutes) },
     { key: "overtimeDays", header: t("columns.overtimeDays"), render: (entry) => entry.overtimeDays.toFixed(1) },
     { key: "housing", header: t("columns.housing"), render: (entry) => entry.housingAllowance.toFixed(2) },
     { key: "travel", header: t("columns.travel"), render: (entry) => entry.travelAllowance.toFixed(2) },
@@ -613,7 +619,7 @@ export default function AllowancesPage() {
               </p>
             ) : null}
             <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>
-              {t("detail.overtimeLine", { hours: detailEntry.overtimeHours.toFixed(2), days: detailEntry.overtimeDays.toFixed(1) })}
+              {t("detail.overtimeLine", { hours: formatMinutes(detailEntry.overtimeMinutes), days: detailEntry.overtimeDays.toFixed(1) })}
               {detailEntry.overtimeAmount + detailEntry.extraDaysAmount > 0
                 ? ` · ${t("detail.overtimeValueLine", { amount: (detailEntry.overtimeAmount + detailEntry.extraDaysAmount).toFixed(2) })}`
                 : ""}

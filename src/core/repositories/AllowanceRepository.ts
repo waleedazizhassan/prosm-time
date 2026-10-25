@@ -29,6 +29,8 @@ export interface AllowanceEntry {
   otherAllowance: number;
   otherAllowanceNote: string | null;
   overtimeHours: number;
+  // v2.3.43 step 4: the exact overtime minutes (the amount is rate x minutes / 60).
+  overtimeMinutes: number;
   overtimeDays: number;
   // Owner 2026-10-20: overtime hours and extra days priced from the allowance prices.
   overtimeAmount: number;
@@ -85,6 +87,8 @@ interface AllowanceEntryRow {
   other_allowance_note: string | null;
   overtime_hours: number;
   overtime_days: number;
+  overtime_minutes?: number;
+  worked_minutes?: number;
   overtime_amount?: number;
   extra_days_amount?: number;
   status: AllowanceEntryStatus;
@@ -112,7 +116,7 @@ function mapEntryRow(row: AllowanceEntryRow): AllowanceEntry {
     clockInAt: session?.clock_in_at ?? null,
     clockOutAt: session?.clock_out_at ?? null,
     sessionCount: session ? 1 : 0,
-    workedMinutes: session?.clock_out_at ? Math.max(0, Math.round((new Date(session.clock_out_at).getTime() - new Date(session.clock_in_at).getTime()) / 60000)) : 0,
+    workedMinutes: row.worked_minutes ? Math.round(Number(row.worked_minutes)) : session?.clock_out_at ? Math.max(0, Math.round((new Date(session.clock_out_at).getTime() - new Date(session.clock_in_at).getTime()) / 60000)) : 0,
     mealAllowance: row.meal_allowance,
     expatriationAllowance: row.expatriation_allowance,
     transportationAllowance: row.transportation_allowance,
@@ -120,8 +124,9 @@ function mapEntryRow(row: AllowanceEntryRow): AllowanceEntry {
     travelAllowance: row.travel_allowance,
     otherAllowance: row.other_allowance,
     otherAllowanceNote: row.other_allowance_note,
-    overtimeHours: row.overtime_hours,
-    overtimeDays: row.overtime_days,
+    overtimeHours: Number(row.overtime_hours),
+    overtimeMinutes: Number(row.overtime_minutes ?? Number(row.overtime_hours) * 60),
+    overtimeDays: Number(row.overtime_days),
     overtimeAmount: Number(row.overtime_amount ?? 0),
     extraDaysAmount: Number(row.extra_days_amount ?? 0),
     status: row.status,
@@ -161,7 +166,7 @@ function localDate(iso: string): string {
 }
 
 const ENTRY_SELECT =
-  "id, user_id, entry_date, meal_allowance, expatriation_allowance, transportation_allowance, housing_allowance, travel_allowance, other_allowance, other_allowance_note, overtime_hours, overtime_days, overtime_amount, extra_days_amount, status, submitted_at, approved_at, review_notes, sheet_id, users!allowance_entries_user_id_fkey(full_name), attendance_sessions(clock_in_at, clock_out_at, manual_location_label, sites!attendance_sessions_site_id_fkey(name))";
+  "id, user_id, entry_date, meal_allowance, expatriation_allowance, transportation_allowance, housing_allowance, travel_allowance, other_allowance, other_allowance_note, overtime_hours, overtime_minutes, worked_minutes, overtime_days, overtime_amount, extra_days_amount, status, submitted_at, approved_at, review_notes, sheet_id, users!allowance_entries_user_id_fkey(full_name), attendance_sessions(clock_in_at, clock_out_at, manual_location_label, sites!attendance_sessions_site_id_fkey(name))";
 
 // PROSM Time - Allowances (2026-09-02 plan). Reads are RLS-scoped
 // (self always; a Manager's own managed sites' people; everyone for

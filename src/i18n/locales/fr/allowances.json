@@ -31,8 +31,8 @@
     "meal": "Repas",
     "expatriation": "Expatriation",
     "transportation": "Transport",
-    "overtimeHours": "Heures sup. (h)",
-    "overtimeDays": "Heures sup. (jours)",
+    "overtimeHours": "Heures sup. (h:mm)",
+    "overtimeDays": "Jours supp.",
     "housing": "Logement",
     "travel": "Voyage",
     "other": "Autre",
@@ -54,7 +54,7 @@
     "siteLine": "Site : {{site}}",
     "clockInLine": "Entrée {{time}}",
     "clockOutLine": "Sortie {{time}}",
-    "overtimeLine": "Heures sup. : {{hours}} h ({{days}} j)",
+    "overtimeLine": "Heures sup. : {{hours}} (h:mm) · jours supp. : {{days}}",
     "otherNoteLabel": "Note (pour « Autre »)",
     "totalsLabel": "Totaux",
     "reviewNotesLabel": "Notes de révision (facultatif)",
@@ -168,5 +168,15 @@
     "hint": "Chaque feuille contient tous les jours envoyés - validez ou refusez en une fois. Ouvrez-la pour voir les jours.",
     "line": "{{from}} - {{to}} · {{days}} jours · total {{total}}",
     "openAction": "Ouvrir"
+  },
+  "basis": {
+    "title": "Calcul de chaque indemnité",
+    "hint": "Par jour : le prix une fois par jour travaillé. Par heure : le prix pour chaque heure réellement travaillée, à la minute. Par jour supplémentaire : le prix pour chaque jour travaillé un jour de repos ou férié. Les heures supplémentaires sont toujours payées à la minute.",
+    "genericError": "Enregistrement impossible.",
+    "option": {
+      "fixed_per_day": "Par jour travaillé",
+      "per_hour": "Par heure travaillée (à la minute)",
+      "per_extra_day": "Par jour supplémentaire (repos / férié)"
+    }
   }
 }

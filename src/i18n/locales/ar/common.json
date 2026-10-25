@@ -225,7 +225,10 @@
     "chooseOneScope": "اختر المنظمة أو موقعاً واحداً أو شخصاً واحداً.",
     "holidayNotFound": "العطلة غير موجودة.",
     "scheduleExceptionNotFound": "اليوم الاستثنائي غير موجود.",
-    "periodUpToYear": "اختر فترة حتى سنة."
+    "periodUpToYear": "اختر فترة حتى سنة.",
+    "basisOwnerOnly": "الأونر فقط يحدد طريقة حساب البدل.",
+    "invalidAllowance": "بدل غير معروف.",
+    "invalidCalculationBasis": "اختر طريقة حساب صحيحة."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

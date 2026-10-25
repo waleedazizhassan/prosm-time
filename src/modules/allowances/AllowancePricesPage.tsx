@@ -18,6 +18,7 @@ import Table, { type TableColumn } from "../../components/common/Table";
 import ErrorText from "../../components/common/ErrorText";
 import allowancesHeaderImage from "../../assets/illustrations/allowances.svg";
 import HintText from "../../components/common/HintText";
+import AllowanceBasisCard from "./AllowanceBasisCard";
 
 const EVERY_SITE = "";
 
@@ -244,6 +245,8 @@ export default function AllowancePricesPage() {
       >
         <ErrorText>{loadError}</ErrorText>
       </Card>
+
+      {isOwner ? <AllowanceBasisCard /> : null}
 
       <Card title={t("prices.sitesTitle")} subtitle={t("prices.sitesHint")} flush>
         <Table columns={siteColumns} data={priceableSites} getRowId={(site) => site.id} emptyMessage={t("prices.noSites")} />

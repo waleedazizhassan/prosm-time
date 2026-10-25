@@ -31,8 +31,8 @@
     "meal": "Verpflegung",
     "expatriation": "Auslandszulage",
     "transportation": "Fahrtkosten",
-    "overtimeHours": "Überstunden (Std.)",
-    "overtimeDays": "Überstunden (Tage)",
+    "overtimeHours": "Überstunden (h:mm)",
+    "overtimeDays": "Zusatztage",
     "housing": "Wohnen",
     "travel": "Reise",
     "other": "Sonstiges",
@@ -54,7 +54,7 @@
     "siteLine": "Standort: {{site}}",
     "clockInLine": "Kommen {{time}}",
     "clockOutLine": "Gehen {{time}}",
-    "overtimeLine": "Überstunden: {{hours}} Std. ({{days}} Tage)",
+    "overtimeLine": "Überstunden: {{hours}} (h:mm) · Zusatztage: {{days}}",
     "otherNoteLabel": "Notiz (für „Sonstiges“)",
     "totalsLabel": "Summen",
     "reviewNotesLabel": "Prüfnotizen (optional)",
@@ -168,5 +168,15 @@
     "hint": "Jedes Blatt enthält alle gesendeten Tage - auf einmal freigeben oder ablehnen. Öffnen, um die Tage zu sehen.",
     "line": "{{from}} - {{to}} · {{days}} Tage · gesamt {{total}}",
     "openAction": "Öffnen"
+  },
+  "basis": {
+    "title": "Berechnung jeder Zulage",
+    "hint": "Pro Tag: der Preis einmal pro Arbeitstag. Pro Stunde: der Preis für jede tatsächlich gearbeitete Stunde, minutengenau. Pro Zusatztag: der Preis für jeden an einem Ruhe- oder Feiertag gearbeiteten Tag. Überstunden werden immer minutengenau bezahlt.",
+    "genericError": "Speichern fehlgeschlagen.",
+    "option": {
+      "fixed_per_day": "Pro Arbeitstag",
+      "per_hour": "Pro Arbeitsstunde (minutengenau)",
+      "per_extra_day": "Pro Zusatztag (Ruhe-/Feiertag)"
+    }
   }
 }

@@ -225,7 +225,10 @@
     "chooseOneScope": "Choose the organisation, one site or one person.",
     "holidayNotFound": "This holiday was not found.",
     "scheduleExceptionNotFound": "This exceptional day was not found.",
-    "periodUpToYear": "Choose a period of up to a year."
+    "periodUpToYear": "Choose a period of up to a year.",
+    "basisOwnerOnly": "Only the Owner sets how an allowance is calculated.",
+    "invalidAllowance": "Unknown allowance.",
+    "invalidCalculationBasis": "Choose a valid calculation."
   },
   "pageLoad": {
     "title": "This page needs a connection",

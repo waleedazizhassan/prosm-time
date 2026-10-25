@@ -31,8 +31,8 @@
     "meal": "Pasto",
     "expatriation": "Indennità estero",
     "transportation": "Trasporto",
-    "overtimeHours": "Straordinario (ore)",
-    "overtimeDays": "Straordinario (giorni)",
+    "overtimeHours": "Straordinari (h:mm)",
+    "overtimeDays": "Giorni extra",
     "housing": "Alloggio",
     "travel": "Viaggio",
     "other": "Altro",
@@ -54,7 +54,7 @@
     "siteLine": "Sede: {{site}}",
     "clockInLine": "Entrata {{time}}",
     "clockOutLine": "Uscita {{time}}",
-    "overtimeLine": "Straordinario: {{hours}} ore ({{days}} giorni)",
+    "overtimeLine": "Straordinari: {{hours}} (h:mm) · giorni extra: {{days}}",
     "otherNoteLabel": "Nota (per \"Altro\")",
     "totalsLabel": "Totali",
     "reviewNotesLabel": "Note di revisione (facoltativo)",
@@ -168,5 +168,15 @@
     "hint": "Ogni foglio contiene tutti i giorni inviati - approvalo o rifiutalo in una volta. Aprilo per vedere i giorni.",
     "line": "{{from}} - {{to}} · {{days}} giorni · totale {{total}}",
     "openAction": "Apri"
+  },
+  "basis": {
+    "title": "Come si calcola ogni indennità",
+    "hint": "Al giorno: il prezzo una volta per giorno lavorato. All'ora: il prezzo per ogni ora effettivamente lavorata, al minuto. Per giorno extra: il prezzo per ogni giorno lavorato in riposo o festività. Gli straordinari sono sempre pagati al minuto.",
+    "genericError": "Salvataggio non riuscito.",
+    "option": {
+      "fixed_per_day": "Per giorno lavorato",
+      "per_hour": "Per ora lavorata (al minuto)",
+      "per_extra_day": "Per giorno extra (riposo / festività)"
+    }
   }
 }

@@ -273,4 +273,8 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "HOLIDAY NOT FOUND": "holidayNotFound",
   "SCHEDULE EXCEPTION NOT FOUND": "scheduleExceptionNotFound",
   "CHOOSE A PERIOD OF UP TO A YEAR": "periodUpToYear",
+  // v2.3.43 step 4: allowance calculation basis.
+  "ONLY THE OWNER SETS HOW AN ALLOWANCE IS CALCULATED": "basisOwnerOnly",
+  "INVALID ALLOWANCE": "invalidAllowance",
+  "INVALID CALCULATION BASIS": "invalidCalculationBasis",
 };

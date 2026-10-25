@@ -567,7 +567,7 @@ begin
     if not (
         v_org_id = public.current_prosm_time_organization_id()
         and (
-            public.current_prosm_time_user_is_owner()
+            public.current_prosm_time_user_is_owner() or p_user_id = v_caller_id
             or (
                 'timesheets.generate' = any(coalesce(public.get_prosm_time_effective_permissions(v_caller_id), array[]::text[]))
                 and public.prosm_time_caller_has_authority_over(p_user_id)
@@ -829,7 +829,7 @@ begin
         union all select user_id from mock_location_flags where organization_id = v_org and status = 'pending_review'
         union all select user_id from leave_requests where organization_id = v_org and status = 'pending'
         union all select user_id from timesheets where organization_id = v_org and status = 'submitted'
-        union all select user_id from allowance_entries where organization_id = v_org and status = 'submitted'
+        union all select user_id from allowance_sheets where organization_id = v_org and status = 'submitted'
         union all select user_id from attendance_sessions where organization_id = v_org and hours_review_status = 'pending'
     )
     select jsonb_build_object(

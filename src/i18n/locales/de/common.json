@@ -225,7 +225,10 @@
     "chooseOneScope": "Wählen Sie die Organisation, einen Standort oder eine Person.",
     "holidayNotFound": "Feiertag nicht gefunden.",
     "scheduleExceptionNotFound": "Ausnahmetag nicht gefunden.",
-    "periodUpToYear": "Bitte einen Zeitraum von höchstens einem Jahr wählen."
+    "periodUpToYear": "Bitte einen Zeitraum von höchstens einem Jahr wählen.",
+    "basisOwnerOnly": "Nur der Inhaber legt die Berechnung fest.",
+    "invalidAllowance": "Unbekannte Zulage.",
+    "invalidCalculationBasis": "Bitte eine gültige Berechnung wählen."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

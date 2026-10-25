@@ -225,7 +225,10 @@
     "chooseOneScope": "Scegli l'organizzazione, una sede o una persona.",
     "holidayNotFound": "Festività non trovata.",
     "scheduleExceptionNotFound": "Giorno eccezionale non trovato.",
-    "periodUpToYear": "Scegli un periodo di massimo un anno."
+    "periodUpToYear": "Scegli un periodo di massimo un anno.",
+    "basisOwnerOnly": "Solo il titolare sceglie il calcolo.",
+    "invalidAllowance": "Indennità sconosciuta.",
+    "invalidCalculationBasis": "Scegli un calcolo valido."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

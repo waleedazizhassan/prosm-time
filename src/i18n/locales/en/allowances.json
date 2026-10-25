@@ -31,8 +31,8 @@
     "meal": "Meal",
     "expatriation": "Expatriation",
     "transportation": "Transportation",
-    "overtimeHours": "Overtime (hrs)",
-    "overtimeDays": "Overtime (days)",
+    "overtimeHours": "Overtime (h:mm)",
+    "overtimeDays": "Extra days",
     "housing": "Housing",
     "travel": "Travel",
     "other": "Other",
@@ -54,7 +54,7 @@
     "siteLine": "Site: {{site}}",
     "clockInLine": "In {{time}}",
     "clockOutLine": "Out {{time}}",
-    "overtimeLine": "Overtime: {{hours}} hrs ({{days}} days)",
+    "overtimeLine": "Overtime: {{hours}} (h:mm) · extra days: {{days}}",
     "otherNoteLabel": "Note (for \"Other\")",
     "totalsLabel": "Totals",
     "reviewNotesLabel": "Review notes (optional)",
@@ -168,5 +168,15 @@
     "hint": "Each sheet holds every day an employee sent - approve or reject it in one go. Open it to see the days.",
     "line": "{{from}} - {{to}} · {{days}} days · total {{total}}",
     "openAction": "Open"
+  },
+  "basis": {
+    "title": "How each allowance is calculated",
+    "hint": "Per day: the price once for each day worked. Per hour: the price for each hour actually worked that day, by the minute (a quarter of an hour = a quarter of the price). Per extra day: the price for each day worked on a rest day or a holiday. Overtime is always paid by the minute.",
+    "genericError": "Could not save.",
+    "option": {
+      "fixed_per_day": "Per day worked",
+      "per_hour": "Per hour worked (by the minute)",
+      "per_extra_day": "Per extra day (rest day / holiday)"
+    }
   }
 }

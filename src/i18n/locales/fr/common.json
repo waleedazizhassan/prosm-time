@@ -225,7 +225,10 @@
     "chooseOneScope": "Choisissez l'organisation, un site ou une personne.",
     "holidayNotFound": "Jour férié introuvable.",
     "scheduleExceptionNotFound": "Jour exceptionnel introuvable.",
-    "periodUpToYear": "Choisissez une période d'un an au plus."
+    "periodUpToYear": "Choisissez une période d'un an au plus.",
+    "basisOwnerOnly": "Seul le propriétaire choisit le mode de calcul.",
+    "invalidAllowance": "Indemnité inconnue.",
+    "invalidCalculationBasis": "Choisissez un calcul valide."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",
