@@ -75,7 +75,7 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
       if (site.latitude === null || site.longitude === null) continue;
       const color = site.sos ? "#dc2626" : "#16a34a";
       const circle = L.circle([site.latitude, site.longitude], { radius: site.radius, color, fillColor: color, fillOpacity: 0.12, weight: 1.5 });
-      circle.bindTooltip(`${escapeHtml(site.name)} · ${site.present}${site.expected ? ` / ${site.expected}` : ""}`, { permanent: true, direction: "top", className: "" });
+      circle.bindTooltip(`${escapeHtml(site.name)} · ${site.present}${site.expected ? ` / ${site.expected}` : ""}${site.external?.presentNow ? ` · ${escapeHtml(t("manager.map.external", { count: site.external.presentNow }))}` : ""}`, { permanent: true, direction: "top", className: "" });
       circle.addTo(layer);
       bounds.extend(circle.getBounds());
     }
@@ -92,7 +92,7 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
       map.fitBounds(bounds, { padding: [28, 28], maxZoom: 16 });
       fittedRef.current = true;
     }
-  }, [sites, people]);
+  }, [sites, people, t]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => mapRef.current?.invalidateSize(), 120);

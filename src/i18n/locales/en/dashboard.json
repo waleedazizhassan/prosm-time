@@ -313,7 +313,8 @@
       "people": "People by role",
       "chart": "Scheduled vs actual",
       "cost": "Allowances and cost",
-      "audit": "Action log"
+      "audit": "Action log",
+      "external": "External workers"
     },
     "sos": {
       "text": "SOS from {{name}} at {{site}} since {{time}}",
@@ -349,12 +350,15 @@
       "pendingExcluded": "{{hours}} h awaiting review, not counted",
       "cost": "Estimated cost",
       "costNote": "estimate from pay rates",
-      "vsPrevious": "{{change}} vs previous period"
+      "vsPrevious": "{{change}} vs previous period",
+      "external": "External workers now",
+      "externalSites": "at {{count}} site(s)"
     },
     "map": {
       "title": "Sites now",
       "fullScreen": "Full screen",
-      "exitFullScreen": "Exit full screen"
+      "exitFullScreen": "Exit full screen",
+      "external": "{{count}} external"
     },
     "present": {
       "title": "Here now ({{count}})",
@@ -471,6 +475,14 @@
         "settings": "Settings",
         "other": "Other"
       }
+    },
+    "external": {
+      "title": "External workers here now ({{count}})",
+      "here": "Here now ({{count}})",
+      "notHere": "Not clocked in ({{count}})",
+      "noneHere": "None of this contractor's workers are here now.",
+      "present": "Here",
+      "absent": "Not here"
     }
   }
 }

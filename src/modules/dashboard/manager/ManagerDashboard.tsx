@@ -20,6 +20,7 @@ import ErrorText from "../../../components/common/ErrorText";
 import Avatar from "../../../components/common/Avatar";
 import PeopleByRole from "../../people/PeopleByRole";
 import ApprovalsQueue from "./ApprovalsQueue";
+import ExternalWorkersWidget from "./ExternalWorkersWidget";
 import SitesMap from "./SitesMap";
 import styles from "./ManagerDashboard.module.css";
 import { auditLabel, DEFAULT_ORDER, iso, mergeOrder, periodRange, trend, type Period, type WidgetId } from "./dashboardLogic";
@@ -166,6 +167,10 @@ export default function ManagerDashboard() {
     { key: "permissions", to: "/manager" },
   ].filter((chip) => (priorities[chip.key] ?? 0) > 0);
 
+  // External workers are counted apart from the employees (never in "here now").
+  const externalNow = (data?.sites ?? []).reduce((sum, site) => sum + (site.external?.presentNow ?? 0), 0);
+  const externalSites = (data?.sites ?? []).filter((site) => (site.external?.presentNow ?? 0) > 0).length;
+
   const workedTrend = trend(kpi?.workedMinutes ?? 0, kpi?.previous?.workedMinutes);
   const overtimeTrend = trend(kpi?.overtimeMinutes ?? 0, kpi?.previous?.overtimeMinutes, true);
   const lateTrend = trend(kpi?.lateCount ?? 0, kpi?.previous?.lateCount, true);
@@ -174,6 +179,7 @@ export default function ManagerDashboard() {
     if (hidden.includes(id)) return false;
     if (id === "cost") return Boolean(data?.canViewCost);
     if (id === "audit") return Boolean(data?.canViewAudit);
+    if (id === "external") return Boolean(data?.canViewExternal);
     return true;
   };
 
@@ -265,6 +271,12 @@ export default function ManagerDashboard() {
                 </table>
               )}
             </div>
+          </section>
+        );
+      case "external":
+        return (
+          <section key={id} id="dash-external" className={`${styles.widget} ${styles.span12}`} style={{ order: order.indexOf(id) }}>
+            {data ? <ExternalWorkersWidget sites={data.sites} refreshKey={data.asOf} /> : <div className={styles.skeleton} style={{ height: 120 }} />}
           </section>
         );
       case "approvals":
@@ -491,6 +503,13 @@ export default function ManagerDashboard() {
             <span className={styles.kpiHint}>{kpi.pendingMinutes ? t("manager.kpi.pendingExcluded", { hours: hours(kpi.pendingMinutes) }) : t("manager.hoursUnit")}</span>
             <Trend value={overtimeTrend} t={t} />
           </button>
+          {data?.canViewExternal ? (
+            <button type="button" className={styles.kpi} onClick={() => document.getElementById("dash-external")?.scrollIntoView({ behavior: "smooth", block: "start" })}>
+              <span className={styles.kpiLabel}>{t("manager.kpi.external")}</span>
+              <span className={styles.kpiValue}>{externalNow}</span>
+              <span className={styles.kpiHint}>{t("manager.kpi.externalSites", { count: externalSites })}</span>
+            </button>
+          ) : null}
           {data?.canViewCost && kpi.estimatedCost !== null ? (
             <button type="button" className={styles.kpi} onClick={() => navigate("/allowances")}>
               <span className={styles.kpiLabel}>{t("manager.kpi.cost")}</span>

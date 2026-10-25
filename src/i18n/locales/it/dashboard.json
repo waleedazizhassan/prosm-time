@@ -313,7 +313,8 @@
       "people": "Persone per ruolo",
       "chart": "Previsto vs effettivo",
       "cost": "Indennità e costi",
-      "audit": "Registro delle azioni"
+      "audit": "Registro delle azioni",
+      "external": "Lavoratori esterni"
     },
     "sos": {
       "text": "SOS da {{name}} a {{site}} dalle {{time}}",
@@ -349,12 +350,15 @@
       "pendingExcluded": "{{hours}} h in revisione, non conteggiate",
       "cost": "Costo stimato",
       "costNote": "stima dalle tariffe",
-      "vsPrevious": "{{change}} rispetto al periodo precedente"
+      "vsPrevious": "{{change}} rispetto al periodo precedente",
+      "external": "Lavoratori esterni ora",
+      "externalSites": "in {{count}} sito/i"
     },
     "map": {
       "title": "I siti ora",
       "fullScreen": "Schermo intero",
-      "exitFullScreen": "Esci da schermo intero"
+      "exitFullScreen": "Esci da schermo intero",
+      "external": "{{count}} esterni"
     },
     "present": {
       "title": "Presenti ora ({{count}})",
@@ -471,6 +475,14 @@
         "settings": "Impostazioni",
         "other": "Altro"
       }
+    },
+    "external": {
+      "title": "Lavoratori esterni presenti ({{count}})",
+      "here": "Presenti ({{count}})",
+      "notHere": "Non timbrati ({{count}})",
+      "noneHere": "Nessun lavoratore di questo appaltatore è presente.",
+      "present": "Presente",
+      "absent": "Assente"
     }
   }
 }

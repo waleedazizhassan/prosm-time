@@ -313,7 +313,8 @@
       "people": "Personnes par rôle",
       "chart": "Prévu vs réel",
       "cost": "Indemnités et coût",
-      "audit": "Journal des actions"
+      "audit": "Journal des actions",
+      "external": "Travailleurs externes"
     },
     "sos": {
       "text": "SOS de {{name}} à {{site}} depuis {{time}}",
@@ -349,12 +350,15 @@
       "pendingExcluded": "{{hours}} h en attente, non comptées",
       "cost": "Coût estimé",
       "costNote": "estimation d'après les taux",
-      "vsPrevious": "{{change}} vs période précédente"
+      "vsPrevious": "{{change}} vs période précédente",
+      "external": "Travailleurs externes présents",
+      "externalSites": "sur {{count}} site(s)"
     },
     "map": {
       "title": "Les sites maintenant",
       "fullScreen": "Plein écran",
-      "exitFullScreen": "Quitter le plein écran"
+      "exitFullScreen": "Quitter le plein écran",
+      "external": "{{count}} externes"
     },
     "present": {
       "title": "Présents maintenant ({{count}})",
@@ -471,6 +475,14 @@
         "settings": "Paramètres",
         "other": "Autre"
       }
+    },
+    "external": {
+      "title": "Travailleurs externes présents ({{count}})",
+      "here": "Présents ({{count}})",
+      "notHere": "Non pointés ({{count}})",
+      "noneHere": "Aucun travailleur de ce sous-traitant n'est présent.",
+      "present": "Présent",
+      "absent": "Absent"
     }
   }
 }

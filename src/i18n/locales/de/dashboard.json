@@ -313,7 +313,8 @@
       "people": "Personen nach Rolle",
       "chart": "Geplant vs. tatsächlich",
       "cost": "Zulagen und Kosten",
-      "audit": "Aktionsprotokoll"
+      "audit": "Aktionsprotokoll",
+      "external": "Externe Arbeitskräfte"
     },
     "sos": {
       "text": "SOS von {{name}} bei {{site}} seit {{time}}",
@@ -349,12 +350,15 @@
       "pendingExcluded": "{{hours}} Std. in Prüfung, nicht gezählt",
       "cost": "Geschätzte Kosten",
       "costNote": "Schätzung nach Sätzen",
-      "vsPrevious": "{{change}} ggü. Vorperiode"
+      "vsPrevious": "{{change}} ggü. Vorperiode",
+      "external": "Externe Kräfte jetzt",
+      "externalSites": "an {{count}} Standort(en)"
     },
     "map": {
       "title": "Standorte jetzt",
       "fullScreen": "Vollbild",
-      "exitFullScreen": "Vollbild beenden"
+      "exitFullScreen": "Vollbild beenden",
+      "external": "{{count}} extern"
     },
     "present": {
       "title": "Jetzt anwesend ({{count}})",
@@ -471,6 +475,14 @@
         "settings": "Einstellungen",
         "other": "Sonstiges"
       }
+    },
+    "external": {
+      "title": "Externe Kräfte jetzt anwesend ({{count}})",
+      "here": "Anwesend ({{count}})",
+      "notHere": "Nicht eingestempelt ({{count}})",
+      "noneHere": "Keine Kräfte dieses Auftragnehmers anwesend.",
+      "present": "Anwesend",
+      "absent": "Nicht da"
     }
   }
 }
