@@ -264,5 +264,12 @@
     "stillWorking": "Sto ancora lavorando",
     "clockOut": "Registra la mia uscita",
     "error": "Impossibile salvare la risposta."
+  },
+  "exitPrompt": {
+    "title": "Hai lasciato la sede",
+    "body": "Il turno è ancora aperto. Registri l'uscita?",
+    "clockOut": "Esci ora",
+    "stillWorking": "Sto ancora lavorando",
+    "error": "Impossibile salvare la risposta."
   }
 }

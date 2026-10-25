@@ -14,6 +14,7 @@ import Toggle from "../../components/common/Toggle";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
 import SiteIntegritySettings from "./SiteIntegritySettings";
+import SiteExitPolicySettings from "./SiteExitPolicySettings";
 
 const BREAK_ROUNDING_MODE_OPTIONS: BreakRoundingMode[] = ["cumulative", "full_hour"];
 const OUTSIDE_ZONE_POLICY_OPTIONS: OutsideZonePolicy[] = ["ALLOW_WITH_EXCEPTION", "BLOCK"];
@@ -317,6 +318,7 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
           />
           <HintText small>{t("sites:form.clockOutOutsideNote")}</HintText>
           {selectedSiteId && (isOwner || hasPermission("sites.manage_integrity")) ? <SiteIntegritySettings siteId={selectedSiteId} /> : null}
+          {selectedSiteId && (isOwner || hasPermission("sites.manage_exit_policy")) ? <SiteExitPolicySettings siteId={selectedSiteId} /> : null}
           <div style={toggleRowStyle}>
             <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("sites:form.presenceMonitoringEnabledLabel")}</span>
             <Toggle

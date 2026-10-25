@@ -269,7 +269,9 @@
     "manageIntegrityRequired": "Non hai il permesso di modificare queste impostazioni.",
     "invalidLivenessMode": "Controlla le impostazioni.",
     "reviewIntegrityRequired": "Non hai il permesso di verificare queste timbrature.",
-    "reviewItemNotFound": "Elemento non trovato."
+    "reviewItemNotFound": "Elemento non trovato.",
+    "manageExitPolicyRequired": "Non hai il permesso di modificare questa impostazione.",
+    "invalidExitPolicy": "Controlla le impostazioni."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

@@ -269,7 +269,9 @@
     "manageIntegrityRequired": "Vous n'avez pas le droit de modifier ces réglages.",
     "invalidLivenessMode": "Vérifiez les réglages.",
     "reviewIntegrityRequired": "Vous n'avez pas le droit de vérifier ces pointages.",
-    "reviewItemNotFound": "Élément introuvable."
+    "reviewItemNotFound": "Élément introuvable.",
+    "manageExitPolicyRequired": "Vous n'avez pas le droit de modifier ce réglage.",
+    "invalidExitPolicy": "Vérifiez les réglages."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

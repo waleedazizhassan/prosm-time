@@ -26,6 +26,7 @@ import AdminAttendanceCard from "./AdminAttendanceCard";
 import HintText from "../../components/common/HintText";
 import EmploymentDetailsCard from "./EmploymentDetailsCard";
 import LivenessExemptionCard from "./LivenessExemptionCard";
+import FieldWorkerCard from "./FieldWorkerCard";
 
 const MANAGER_ONLY_PERMISSIONS = ["leave.approve", "attendance.clock_in_on_behalf", "attendance.clock_out_on_behalf"];
 
@@ -439,6 +440,7 @@ export default function PersonDetailPage() {
       ) : null}
 
       {userId && userId !== profile?.id && (hasPermission("attendance.review_integrity_flags") || hasPermission("sites.manage_integrity")) ? <LivenessExemptionCard userId={userId} /> : null}
+      {userId && userId !== profile?.id && hasPermission("sites.manage_exit_policy") ? <FieldWorkerCard userId={userId} /> : null}
 
       {canEditLeaveEntitlement ? (
         <Card title={t("detail.leaveEntitlementTitle")}>

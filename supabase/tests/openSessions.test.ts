@@ -27,7 +27,8 @@ const run = () => t.su<{ r: { alerted: number; closed: number } }>("select publi
 beforeAll(async () => {
   t = await buildDatabase();
   org = await createOrg(t, "Giza");
-  site = await createSite(t, org, "Yard");
+  // presence monitoring on: the automatic close also ends the presence session (end_reason auto_closed)
+  site = await createSite(t, org, "Yard", { presenceMonitoring: true });
   ahmed = await addMember(t, org, "employee", "Ahmed Omar");
   sara = await addMember(t, org, "employee", "Sara Adel");
   manager = await addMember(t, org, "manager", "Yard Manager");

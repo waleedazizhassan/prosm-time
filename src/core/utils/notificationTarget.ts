@@ -37,7 +37,10 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
     case "session_auto_closed":
       return viewer.isOwner || ref?.kind === "manager" ? "/manager" : "/dashboard";
     case "long_session_check":
+    case "exit_site_prompt":
       return "/dashboard";
+    case "auto_checkout_geofence":
+      return ref?.kind === "manager" ? "/attendance?period=today" : "/dashboard";
     // The employee's exceptions card lives on the dashboard.
     case "correction_reviewed":
       return isLeave ? "/leave" : "/dashboard";

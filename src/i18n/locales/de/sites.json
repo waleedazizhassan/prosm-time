@@ -169,5 +169,20 @@
     "save": "Speichern",
     "saved": "Gespeichert.",
     "genericError": "Speichern fehlgeschlagen."
+  },
+  "exitPolicy": {
+    "title": "Standort verlassen",
+    "hint": "Wenn jemand den Bereich mit offener Schicht verlässt. Nur gute GPS-Werte zählen.",
+    "label": "Beim Verlassen",
+    "option": {
+      "OFF": "Nichts",
+      "PROMPT": "Fragen „ausstempeln?“",
+      "AUTO": "Fragen, dann automatisch ausstempeln"
+    },
+    "minutesLabel": "Automatisch ausstempeln nach (Minuten draußen)",
+    "fieldSiteLabel": "Außendienst-Standort (nie fragen)",
+    "save": "Speichern",
+    "saved": "Gespeichert.",
+    "genericError": "Speichern fehlgeschlagen."
   }
 }

@@ -170,6 +170,16 @@
       "bodyEmployee": "Il tuo turno è stato chiuso dopo {{hours}} ore senza uscita. Le ore attendono la verifica del responsabile.",
       "titleManager": "Un turno è stato chiuso automaticamente",
       "bodyManager": "Il turno di {{name}} è stato chiuso dopo {{hours}} ore senza uscita. Verifica le ore."
+    },
+    "exitSitePrompt": {
+      "title": "Hai lasciato la sede",
+      "body": "Turno ancora aperto - registri l'uscita?"
+    },
+    "autoCheckoutGeofence": {
+      "titleEmployee": "Uscita registrata",
+      "bodyEmployee": "Hai lasciato la sede; l'uscita è registrata all'ora in cui sei uscito.",
+      "titleManager": "Uscita automatica",
+      "bodyManager": "{{name}} ha lasciato la sede; uscita registrata automaticamente."
     }
   },
   "items": {
@@ -304,5 +314,9 @@
     "allowances": "Indennità",
     "leave": "Ferie",
     "menu": "Menu"
+  },
+  "exitPrompt": {
+    "title": "Hai lasciato la sede",
+    "body": "Il turno è ancora aperto. Registri l'uscita?"
   }
 }

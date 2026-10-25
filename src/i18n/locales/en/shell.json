@@ -170,6 +170,16 @@
       "bodyEmployee": "Your shift was closed after {{hours}} hours with no clock-out. Its hours wait for your manager's review.",
       "titleManager": "A shift was closed automatically",
       "bodyManager": "{{name}}'s shift was closed after {{hours}} hours with no clock-out. Review its hours."
+    },
+    "exitSitePrompt": {
+      "title": "You left the site",
+      "body": "Your shift is still open - clock out?"
+    },
+    "autoCheckoutGeofence": {
+      "titleEmployee": "You were clocked out",
+      "bodyEmployee": "You left the site and were clocked out at the time you left. Ask your manager if this is wrong.",
+      "titleManager": "Clocked out on leaving the site",
+      "bodyManager": "{{name}} left the site and was clocked out automatically."
     }
   },
   "items": {
@@ -304,5 +314,9 @@
     "allowances": "Allowances",
     "leave": "Leave",
     "menu": "Menu"
+  },
+  "exitPrompt": {
+    "title": "You left the site",
+    "body": "Your shift is still open. Clock out now?"
   }
 }

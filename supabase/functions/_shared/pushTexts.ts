@@ -117,6 +117,16 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyEmployee": "اتقفلت جلستك بعد {{hours}} ساعة من غير انصراف. ساعاتها تنتظر مراجعة المدير.",
         "titleManager": "جلسة اتقفلت تلقائياً",
         "bodyManager": "جلسة {{name}} اتقفلت بعد {{hours}} ساعة من غير انصراف. راجع ساعاتها."
+      },
+      "exitSitePrompt": {
+        "title": "خرجت من الموقع",
+        "body": "جلستك لسه مفتوحة - تسجّل انصرافك؟"
+      },
+      "autoCheckoutGeofence": {
+        "titleEmployee": "تم تسجيل انصرافك",
+        "bodyEmployee": "خرجت من الموقع واتسجّل انصرافك بوقت خروجك. كلّم مديرك لو فيه خطأ.",
+        "titleManager": "انصراف تلقائي عند مغادرة الموقع",
+        "bodyManager": "{{name}} خرج من الموقع واتسجّل انصرافه تلقائياً."
       }
     },
     "leaveTypes": {
@@ -245,6 +255,16 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyEmployee": "Your shift was closed after {{hours}} hours with no clock-out. Its hours wait for your manager's review.",
         "titleManager": "A shift was closed automatically",
         "bodyManager": "{{name}}'s shift was closed after {{hours}} hours with no clock-out. Review its hours."
+      },
+      "exitSitePrompt": {
+        "title": "You left the site",
+        "body": "Your shift is still open - clock out?"
+      },
+      "autoCheckoutGeofence": {
+        "titleEmployee": "You were clocked out",
+        "bodyEmployee": "You left the site and were clocked out at the time you left. Ask your manager if this is wrong.",
+        "titleManager": "Clocked out on leaving the site",
+        "bodyManager": "{{name}} left the site and was clocked out automatically."
       }
     },
     "leaveTypes": {
@@ -373,6 +393,16 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyEmployee": "Ihre Schicht wurde nach {{hours}} Stunden ohne Ausstempeln geschlossen. Die Stunden warten auf die Prüfung.",
         "titleManager": "Eine Schicht wurde automatisch geschlossen",
         "bodyManager": "Die Schicht von {{name}} wurde nach {{hours}} Stunden ohne Ausstempeln geschlossen. Bitte Stunden prüfen."
+      },
+      "exitSitePrompt": {
+        "title": "Standort verlassen",
+        "body": "Schicht noch offen - ausstempeln?"
+      },
+      "autoCheckoutGeofence": {
+        "titleEmployee": "Sie wurden ausgestempelt",
+        "bodyEmployee": "Sie haben den Standort verlassen und wurden zur Zeit des Verlassens ausgestempelt.",
+        "titleManager": "Automatisch ausgestempelt",
+        "bodyManager": "{{name}} hat den Standort verlassen und wurde automatisch ausgestempelt."
       }
     },
     "leaveTypes": {
@@ -501,6 +531,16 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyEmployee": "Votre session a été fermée après {{hours}} heures sans départ. Ses heures attendent la vérification de votre responsable.",
         "titleManager": "Une session a été fermée automatiquement",
         "bodyManager": "La session de {{name}} a été fermée après {{hours}} heures sans départ. Vérifiez ses heures."
+      },
+      "exitSitePrompt": {
+        "title": "Vous avez quitté le site",
+        "body": "Session encore ouverte - pointer le départ ?"
+      },
+      "autoCheckoutGeofence": {
+        "titleEmployee": "Départ pointé",
+        "bodyEmployee": "Vous avez quitté le site ; le départ a été pointé à l'heure de sortie.",
+        "titleManager": "Départ automatique",
+        "bodyManager": "{{name}} a quitté le site ; départ pointé automatiquement."
       }
     },
     "leaveTypes": {
@@ -629,6 +669,16 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyEmployee": "Il tuo turno è stato chiuso dopo {{hours}} ore senza uscita. Le ore attendono la verifica del responsabile.",
         "titleManager": "Un turno è stato chiuso automaticamente",
         "bodyManager": "Il turno di {{name}} è stato chiuso dopo {{hours}} ore senza uscita. Verifica le ore."
+      },
+      "exitSitePrompt": {
+        "title": "Hai lasciato la sede",
+        "body": "Turno ancora aperto - registri l'uscita?"
+      },
+      "autoCheckoutGeofence": {
+        "titleEmployee": "Uscita registrata",
+        "bodyEmployee": "Hai lasciato la sede; l'uscita è registrata all'ora in cui sei uscito.",
+        "titleManager": "Uscita automatica",
+        "bodyManager": "{{name}} ha lasciato la sede; uscita registrata automaticamente."
       }
     },
     "leaveTypes": {

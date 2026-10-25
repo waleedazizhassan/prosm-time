@@ -50,7 +50,8 @@
     "leave.manage_types": "Gestire i tipi di permesso",
     "leave.set_deduction": "Impostare la trattenuta del permesso non retribuito",
     "sites.manage_integrity": "Impostazioni verifica e foto",
-    "attendance.review_integrity_flags": "Verificare timbrature sospette"
+    "attendance.review_integrity_flags": "Verificare timbrature sospette",
+    "sites.manage_exit_policy": "Uscita lasciando la sede"
   },
   "invite": {
     "actionLabel": "Invita dipendente",
@@ -186,6 +187,11 @@
     "reasonLabel": "Motivo (obbligatorio)",
     "save": "Salva",
     "saved": "Salvato.",
+    "genericError": "Salvataggio non riuscito."
+  },
+  "fieldWorker": {
+    "title": "Lavoratore sul campo",
+    "hint": "Si sposta per lavoro: mai domande né uscita automatica.",
     "genericError": "Salvataggio non riuscito."
   }
 }

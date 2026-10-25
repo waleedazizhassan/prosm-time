@@ -170,6 +170,14 @@ export function localizePush(type: string, data: Data, language: string, fallbac
         ? pair("sessionAutoClosed.titleManager", "sessionAutoClosed.bodyManager", { name: data.employeeName, hours: data.maxHours })
         : pair("sessionAutoClosed.titleEmployee", "sessionAutoClosed.bodyEmployee", { hours: data.maxHours });
       break;
+    case "exit_site_prompt":
+      result = pair("exitSitePrompt.title", "exitSitePrompt.body");
+      break;
+    case "auto_checkout_geofence":
+      result = str(data.employeeName)
+        ? pair("autoCheckoutGeofence.titleManager", "autoCheckoutGeofence.bodyManager", { name: data.employeeName })
+        : pair("autoCheckoutGeofence.titleEmployee", "autoCheckoutGeofence.bodyEmployee");
+      break;
     case "location_plausibility_flag":
       if (str(data.employeeName) && num(data.impliedSpeedKmh) !== null)
         result = pair("locationPlausibilityFlag.title", "locationPlausibilityFlag.body", { name: data.employeeName, speed: data.impliedSpeedKmh });

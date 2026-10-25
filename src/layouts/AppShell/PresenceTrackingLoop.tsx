@@ -64,9 +64,25 @@ function writeBackgroundConsent(value: "accepted" | "declined") {
   }
 }
 
+const EXIT_PROMPT_NOTIFICATION_ID = 7201;
+
+async function notifyLeftSite(title: string, body: string) {
+  try {
+    const { Capacitor } = await import("@capacitor/core");
+    if (!Capacitor.isNativePlatform()) return;
+    const { LocalNotifications } = await import("@capacitor/local-notifications");
+    await LocalNotifications.schedule({ notifications: [{ id: EXIT_PROMPT_NOTIFICATION_ID, title, body, smallIcon: "ic_stat_prosm", iconColor: "#1E6FD9" }] });
+  } catch {
+    // no permission or plugin: the in-app question on the dashboard still shows
+  }
+}
+
 export default function PresenceTrackingLoop() {
   const { profile } = useAuth();
   const { t } = useTranslation("shell");
+  // The exit notification's texts, read from a ref so recordSample stays stable for the tracking effects.
+  const tRef = useRef(t);
+  tRef.current = t;
   const presenceSessionRef = useRef<PresenceSession | null>(null);
   const [activePresenceSessionId, setActivePresenceSessionId] = useState<string | null>(null);
   // Prominent disclosure before background location (owner 2026-10-13,
@@ -109,6 +125,9 @@ export default function PresenceTrackingLoop() {
     if (!current) return;
     const result = await PresenceRepository.recordSample(current.id, latitude, longitude, accuracyMeters);
     if (result.success && result.data?.exceptionCreated) playAlertSound();
+    // v2.3.43 step 12 (item 24): "You left the site - clock out?" on the phone at once,
+    // even without push (the server asks once per time outside).
+    if (result.success && result.data?.exitPrompted) void notifyLeftSite(tRef.current("exitPrompt.title"), tRef.current("exitPrompt.body"));
   };
 
   // Native path - real background tracking, only after the in-app

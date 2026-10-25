@@ -269,7 +269,9 @@
     "manageIntegrityRequired": "You don't have permission to change the live check settings.",
     "invalidLivenessMode": "Check the live check settings.",
     "reviewIntegrityRequired": "You don't have permission to review suspicious check-ins.",
-    "reviewItemNotFound": "This item was not found."
+    "reviewItemNotFound": "This item was not found.",
+    "manageExitPolicyRequired": "You don't have permission to change what happens when someone leaves the site.",
+    "invalidExitPolicy": "Check the leaving-the-site settings."
   },
   "pageLoad": {
     "title": "This page needs a connection",

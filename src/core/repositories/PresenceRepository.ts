@@ -54,7 +54,12 @@ class PresenceRepository {
     }
   }
 
-  async recordSample(presenceSessionId: string, latitude: number, longitude: number, accuracyMeters: number | null): Promise<ServiceResult<{ exceptionCreated: boolean }>> {
+  async recordSample(
+    presenceSessionId: string,
+    latitude: number,
+    longitude: number,
+    accuracyMeters: number | null,
+  ): Promise<ServiceResult<{ exceptionCreated: boolean; exitPrompted: boolean; autoCheckout: boolean }>> {
     try {
       const { data, error } = await this.client.rpc("record_prosm_time_presence_sample", {
         p_presence_session_id: presenceSessionId,
@@ -65,7 +70,34 @@ class PresenceRepository {
       });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to record this location sample.");
-      return createSuccess({ exceptionCreated: data?.exceptionCreated === true });
+      // v2.3.43 step 12 (item 24): the server says when the person has just left the site (or was clocked out for it).
+      return createSuccess({ exceptionCreated: data?.exceptionCreated === true, exitPrompted: data?.exit?.prompted === true, autoCheckout: data?.exit?.autoCheckout === true });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Presence service unavailable.");
+    }
+  }
+
+  // v2.3.43 step 12: the open "you left the site" question, if any.
+  async pendingExitPrompt(userId: string): Promise<boolean> {
+    try {
+      const { data } = await this.client
+        .from("presence_sessions")
+        .select("id")
+        .eq("user_id", userId)
+        .eq("status", "active")
+        .not("exit_prompted_at", "is", null)
+        .is("exit_dismissed_at", null)
+        .limit(1);
+      return (data ?? []).length > 0;
+    } catch {
+      return false;
+    }
+  }
+
+  async answerExitPrompt(): Promise<ServiceResult> {
+    try {
+      const { error } = await this.client.rpc("respond_prosm_time_site_exit", { p_action: "still_working" });
+      return error ? createError(error.message) : createSuccess();
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Presence service unavailable.");
     }

@@ -45,6 +45,10 @@ alter table public.attendance_sessions add constraint attendance_sessions_hours_
     check (hours_review_status in ('none', 'pending', 'reviewed'));
 create index if not exists attendance_sessions_pending_hours_idx on public.attendance_sessions (organization_id) where hours_review_status = 'pending';
 
+alter table public.presence_sessions drop constraint if exists presence_sessions_end_reason_check;
+alter table public.presence_sessions add constraint presence_sessions_end_reason_check
+    check (end_reason in ('clock_out', 'manual_termination', 'orphan_auto_closed', 'auto_closed', 'auto_checkout_geofence'));
+
 alter table public.attendance_events drop constraint if exists attendance_events_time_source_check;
 alter table public.attendance_events add constraint attendance_events_time_source_check
     check (time_source in ('server', 'device_offline', 'auto_closed', 'auto_geofence'));

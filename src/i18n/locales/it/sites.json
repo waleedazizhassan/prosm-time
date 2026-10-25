@@ -169,5 +169,20 @@
     "save": "Salva",
     "saved": "Salvato.",
     "genericError": "Salvataggio non riuscito."
+  },
+  "exitPolicy": {
+    "title": "Lasciare la sede",
+    "hint": "Quando qualcuno lascia l'area con il turno aperto. Contano solo letture GPS buone.",
+    "label": "Quando qualcuno esce",
+    "option": {
+      "OFF": "Niente",
+      "PROMPT": "Chiedere «registrare l'uscita?»",
+      "AUTO": "Chiedere, poi uscita automatica"
+    },
+    "minutesLabel": "Uscita automatica dopo (minuti fuori)",
+    "fieldSiteLabel": "Sede sul campo (non chiedere mai)",
+    "save": "Salva",
+    "saved": "Salvato.",
+    "genericError": "Salvataggio non riuscito."
   }
 }

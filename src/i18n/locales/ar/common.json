@@ -269,7 +269,9 @@
     "manageIntegrityRequired": "ليست لديك صلاحية تغيير إعدادات التحقق الحي.",
     "invalidLivenessMode": "راجع إعدادات التحقق الحي.",
     "reviewIntegrityRequired": "ليست لديك صلاحية مراجعة التسجيلات المشبوهة.",
-    "reviewItemNotFound": "العنصر غير موجود."
+    "reviewItemNotFound": "العنصر غير موجود.",
+    "manageExitPolicyRequired": "ليست لديك صلاحية تغيير إعداد مغادرة الموقع.",
+    "invalidExitPolicy": "راجع إعداد مغادرة الموقع."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

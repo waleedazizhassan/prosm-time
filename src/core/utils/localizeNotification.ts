@@ -212,6 +212,15 @@ export default function localizeNotification(notification: AppNotification, t: T
         ? { title: t("shell:notifications.sessionAutoClosed.titleManager"), body: t("shell:notifications.sessionAutoClosed.bodyManager", { name, hours }) }
         : { title: t("shell:notifications.sessionAutoClosed.titleEmployee"), body: t("shell:notifications.sessionAutoClosed.bodyEmployee", { hours }) };
     }
+    // v2.3.43 step 12: leaving the site with the shift open.
+    case "exit_site_prompt":
+      return { title: t("shell:notifications.exitSitePrompt.title"), body: t("shell:notifications.exitSitePrompt.body") };
+    case "auto_checkout_geofence": {
+      const name = typeof data.employeeName === "string" ? data.employeeName : null;
+      return name
+        ? { title: t("shell:notifications.autoCheckoutGeofence.titleManager"), body: t("shell:notifications.autoCheckoutGeofence.bodyManager", { name }) }
+        : { title: t("shell:notifications.autoCheckoutGeofence.titleEmployee"), body: t("shell:notifications.autoCheckoutGeofence.bodyEmployee") };
+    }
     case "location_plausibility_flag": {
       const name = typeof data.employeeName === "string" ? data.employeeName : null;
       const speed = typeof data.impliedSpeedKmh === "number" ? data.impliedSpeedKmh : null;

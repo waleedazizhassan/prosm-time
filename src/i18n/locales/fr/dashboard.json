@@ -264,5 +264,12 @@
     "stillWorking": "Toujours au travail",
     "clockOut": "Pointer mon départ",
     "error": "Impossible d'enregistrer votre réponse."
+  },
+  "exitPrompt": {
+    "title": "Vous avez quitté le site",
+    "body": "Votre session est encore ouverte. Pointer le départ ?",
+    "clockOut": "Pointer maintenant",
+    "stillWorking": "Toujours au travail",
+    "error": "Impossible d'enregistrer la réponse."
   }
 }

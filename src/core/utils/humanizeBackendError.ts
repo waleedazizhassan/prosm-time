@@ -333,4 +333,7 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "INVALID LIVENESS MODE": "invalidLivenessMode",
   "ATTENDANCE.REVIEW_INTEGRITY_FLAGS AUTHORITY REQUIRED": "reviewIntegrityRequired",
   "REVIEW ITEM NOT FOUND": "reviewItemNotFound",
+  // v2.3.43 step 12: leaving the site.
+  "SITES.MANAGE_EXIT_POLICY AUTHORITY REQUIRED": "manageExitPolicyRequired",
+  "INVALID EXIT POLICY": "invalidExitPolicy",
 };

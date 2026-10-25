@@ -264,5 +264,12 @@
     "stillWorking": "Still working",
     "clockOut": "Clock me out",
     "error": "Could not save your answer."
+  },
+  "exitPrompt": {
+    "title": "You left the site",
+    "body": "Your shift is still open. Clock out now?",
+    "clockOut": "Clock out now",
+    "stillWorking": "Still working",
+    "error": "Could not save your answer."
   }
 }

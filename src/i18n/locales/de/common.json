@@ -269,7 +269,9 @@
     "manageIntegrityRequired": "Sie dürfen diese Einstellungen nicht ändern.",
     "invalidLivenessMode": "Bitte Einstellungen prüfen.",
     "reviewIntegrityRequired": "Sie dürfen diese Stempelungen nicht prüfen.",
-    "reviewItemNotFound": "Eintrag nicht gefunden."
+    "reviewItemNotFound": "Eintrag nicht gefunden.",
+    "manageExitPolicyRequired": "Sie dürfen diese Einstellung nicht ändern.",
+    "invalidExitPolicy": "Bitte Einstellungen prüfen."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

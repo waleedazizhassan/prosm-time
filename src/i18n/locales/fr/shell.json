@@ -170,6 +170,16 @@
       "bodyEmployee": "Votre session a été fermée après {{hours}} heures sans départ. Ses heures attendent la vérification de votre responsable.",
       "titleManager": "Une session a été fermée automatiquement",
       "bodyManager": "La session de {{name}} a été fermée après {{hours}} heures sans départ. Vérifiez ses heures."
+    },
+    "exitSitePrompt": {
+      "title": "Vous avez quitté le site",
+      "body": "Session encore ouverte - pointer le départ ?"
+    },
+    "autoCheckoutGeofence": {
+      "titleEmployee": "Départ pointé",
+      "bodyEmployee": "Vous avez quitté le site ; le départ a été pointé à l'heure de sortie.",
+      "titleManager": "Départ automatique",
+      "bodyManager": "{{name}} a quitté le site ; départ pointé automatiquement."
     }
   },
   "items": {
@@ -304,5 +314,9 @@
     "allowances": "Indemnités",
     "leave": "Congés",
     "menu": "Menu"
+  },
+  "exitPrompt": {
+    "title": "Vous avez quitté le site",
+    "body": "Votre session est encore ouverte. Pointer le départ ?"
   }
 }

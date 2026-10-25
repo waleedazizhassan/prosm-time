@@ -33,6 +33,7 @@ import styles from "./ClockInOutCard.module.css";
 import HintText from "../../components/common/HintText";
 import SessionReviewRepository from "../../core/repositories/SessionReviewRepository";
 import LongSessionPrompt from "./LongSessionPrompt";
+import ExitSitePrompt from "./ExitSitePrompt";
 
 const CHANGE_SITE_NO_SITE_VALUE = "__no_site__";
 
@@ -987,6 +988,7 @@ export default function ClockInOutCard() {
             {view.activeBreakId ? t("attendance.timerPausedOnBreak") : t("attendance.clockedInSince", { time: formatTimeOnly(view.session.clockInAt, i18n.language) })}
           </p>
           {view.session.id.startsWith("q:") ? null : <LongSessionPrompt clockInAt={view.session.clockInAt} now={now} onClockOut={handleClockOutTap} />}
+          {view.session.id.startsWith("q:") ? null : <ExitSitePrompt onClockOut={handleClockOutTap} />}
         </div>
       ) : null}
 

@@ -50,7 +50,8 @@
     "leave.manage_types": "إدارة أنواع الإجازات",
     "leave.set_deduction": "تحديد خصم الإجازة بدون أجر",
     "sites.manage_integrity": "إعدادات التحقق الحي والصورة",
-    "attendance.review_integrity_flags": "مراجعة التسجيلات المشبوهة"
+    "attendance.review_integrity_flags": "مراجعة التسجيلات المشبوهة",
+    "sites.manage_exit_policy": "الانصراف عند مغادرة الموقع"
   },
   "invite": {
     "actionLabel": "دعوة موظف",
@@ -186,6 +187,11 @@
     "reasonLabel": "السبب (إلزامي)",
     "save": "حفظ",
     "saved": "تم الحفظ.",
+    "genericError": "تعذّر الحفظ."
+  },
+  "fieldWorker": {
+    "title": "موظف ميداني",
+    "hint": "بيتحرك للشغل: مغادرة الموقع لا تسأله ولا تسجّل انصرافه.",
     "genericError": "تعذّر الحفظ."
   }
 }

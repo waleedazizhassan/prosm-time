@@ -169,5 +169,20 @@
     "save": "Save",
     "saved": "Saved.",
     "genericError": "Could not save."
+  },
+  "exitPolicy": {
+    "title": "Leaving the site",
+    "hint": "When someone leaves the work area with the shift still open. Only good GPS readings count, and two in a row are needed.",
+    "label": "When someone leaves",
+    "option": {
+      "OFF": "Do nothing",
+      "PROMPT": "Ask \"clock out?\"",
+      "AUTO": "Ask, then clock out automatically"
+    },
+    "minutesLabel": "Clock out automatically after (minutes outside)",
+    "fieldSiteLabel": "Field site (people move around - never ask)",
+    "save": "Save",
+    "saved": "Saved.",
+    "genericError": "Could not save."
   }
 }

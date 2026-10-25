@@ -50,7 +50,8 @@
     "leave.manage_types": "Gérer les types de congé",
     "leave.set_deduction": "Fixer la retenue du congé sans solde",
     "sites.manage_integrity": "Réglages de vérification et photo",
-    "attendance.review_integrity_flags": "Vérifier les pointages suspects"
+    "attendance.review_integrity_flags": "Vérifier les pointages suspects",
+    "sites.manage_exit_policy": "Départ en quittant le site"
   },
   "invite": {
     "actionLabel": "Inviter un employé",
@@ -186,6 +187,11 @@
     "reasonLabel": "Motif (obligatoire)",
     "save": "Enregistrer",
     "saved": "Enregistré.",
+    "genericError": "Enregistrement impossible."
+  },
+  "fieldWorker": {
+    "title": "Travailleur de terrain",
+    "hint": "Se déplace pour le travail : jamais de question ni de départ automatique.",
     "genericError": "Enregistrement impossible."
   }
 }

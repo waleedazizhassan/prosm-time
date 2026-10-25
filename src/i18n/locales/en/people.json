@@ -50,7 +50,8 @@
     "leave.manage_types": "Manage leave types",
     "leave.set_deduction": "Set the unpaid-leave deduction",
     "sites.manage_integrity": "Live check and photo settings",
-    "attendance.review_integrity_flags": "Review suspicious check-ins"
+    "attendance.review_integrity_flags": "Review suspicious check-ins",
+    "sites.manage_exit_policy": "Clock-out when leaving the site"
   },
   "invite": {
     "actionLabel": "Invite employee",
@@ -186,6 +187,11 @@
     "reasonLabel": "Reason (required)",
     "save": "Save",
     "saved": "Saved.",
+    "genericError": "Could not save."
+  },
+  "fieldWorker": {
+    "title": "Field worker",
+    "hint": "Moves around for work: leaving a site never asks them or clocks them out.",
     "genericError": "Could not save."
   }
 }

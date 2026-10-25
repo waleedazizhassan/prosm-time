@@ -169,5 +169,20 @@
     "save": "Enregistrer",
     "saved": "Enregistré.",
     "genericError": "Enregistrement impossible."
+  },
+  "exitPolicy": {
+    "title": "Quitter le site",
+    "hint": "Quand quelqu'un quitte la zone avec la session ouverte. Seules les bonnes lectures GPS comptent.",
+    "label": "Quand quelqu'un sort",
+    "option": {
+      "OFF": "Rien",
+      "PROMPT": "Demander « pointer le départ ? »",
+      "AUTO": "Demander, puis pointer automatiquement"
+    },
+    "minutesLabel": "Départ automatique après (minutes dehors)",
+    "fieldSiteLabel": "Site de terrain (ne jamais demander)",
+    "save": "Enregistrer",
+    "saved": "Enregistré.",
+    "genericError": "Enregistrement impossible."
   }
 }

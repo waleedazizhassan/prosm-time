@@ -50,7 +50,8 @@
     "leave.manage_types": "Urlaubsarten verwalten",
     "leave.set_deduction": "Abzug für unbezahlten Urlaub festlegen",
     "sites.manage_integrity": "Einstellungen Live-Prüfung und Foto",
-    "attendance.review_integrity_flags": "Verdächtige Stempelungen prüfen"
+    "attendance.review_integrity_flags": "Verdächtige Stempelungen prüfen",
+    "sites.manage_exit_policy": "Ausstempeln beim Verlassen"
   },
   "invite": {
     "actionLabel": "Mitarbeiter einladen",
@@ -186,6 +187,11 @@
     "reasonLabel": "Grund (Pflicht)",
     "save": "Speichern",
     "saved": "Gespeichert.",
+    "genericError": "Speichern fehlgeschlagen."
+  },
+  "fieldWorker": {
+    "title": "Außendienst",
+    "hint": "Unterwegs für die Arbeit: nie gefragt, nie automatisch ausgestempelt.",
     "genericError": "Speichern fehlgeschlagen."
   }
 }

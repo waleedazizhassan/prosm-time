@@ -264,5 +264,12 @@
     "stillWorking": "Noch bei der Arbeit",
     "clockOut": "Mich ausstempeln",
     "error": "Ihre Antwort konnte nicht gespeichert werden."
+  },
+  "exitPrompt": {
+    "title": "Sie haben den Standort verlassen",
+    "body": "Ihre Schicht ist noch offen. Jetzt ausstempeln?",
+    "clockOut": "Jetzt ausstempeln",
+    "stillWorking": "Noch bei der Arbeit",
+    "error": "Antwort konnte nicht gespeichert werden."
   }
 }

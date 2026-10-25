@@ -15,6 +15,7 @@
 | `20261025180000_unpaid_leave_deduction.sql` | 9 (بند 19) | صلاحية `leave.set_deduction`؛ `unpaid_leave_divisor`؛ أعمدة الخصم؛ `payroll_adjustments` (+RLS)؛ الاقتراح والتسجيل والعكس والتعديل والقائمة؛ `review_prosm_time_leave` بمعامل الخصم (يحذف نسخة الـ 3 معاملات). |
 | `20261025190000_on_behalf_time_and_place.sql` | 10 (بند 9) | `admin_clock_in/out_prosm_time_attendance` بوقت ومكان؛ `time_source` يقبل `admin_set`. |
 | `20261025200000_capture_integrity.sql` | 11 (بند 22) | صلاحيتان؛ إعدادات الحيوية للموقع والاستثناء؛ أعمدة على `camera_evidence`؛ `capture_tokens`, `integrity_flags` (+RLS)؛ إصدار الرمز وتسجيل السلامة؛ trigger الإحداثيات؛ الإعدادات والمراجعة والقائمة؛ عدّاد الداشبورد. |
+| `20261025210000_exit_site_checkout.sql` | 12 (بند 24) | صلاحية `sites.manage_exit_policy`؛ أعمدة السياسة والميداني؛ أعمدة الخروج على `presence_sessions`؛ نوعا إشعار؛ تتبع الخروج والانصراف التلقائي؛ cron `prosm-time-site-exits` كل 5 دقائق؛ الرد والإعدادات. |
 
 ## Edge Functions تحتاج إعادة نشر
 - `send-push` (الخطوتان 2 و6): نصوص الإشعارين الجديدين (`_shared/pushTexts.ts`, `_shared/localizePush.ts`) وحقل `kind` في بيانات الإشعار — `npx supabase functions deploy send-push`.
