@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Capacitor } from "@capacitor/core";
 import { LocalNotifications } from "@capacitor/local-notifications";
+import { ensureAlertChannel, NOTIFICATION_STYLE } from "../../core/services/notificationStyle";
 
 import { useAuth } from "../../core/context/AuthContext";
 import AttendanceRepository from "../../core/repositories/AttendanceRepository";
@@ -50,6 +51,7 @@ export default function ClockReminderLoop() {
           const permission = await LocalNotifications.checkPermissions();
           const display = permission.display === "granted" ? "granted" : (await LocalNotifications.requestPermissions()).display;
           if (display !== "granted") return;
+          await ensureAlertChannel();
           await LocalNotifications.schedule({
             notifications: [
               {
@@ -57,15 +59,15 @@ export default function ClockReminderLoop() {
                 title: t(`reminders.${reminder.kind}.title`),
                 body: t(`reminders.${reminder.kind}.body`, { time: reminder.time, site: reminder.siteName ?? "" }),
                 schedule: { at: reminder.at, allowWhileIdle: true },
-                // The full-colour app icon beside the reminder (owner 2026-10-20).
-                largeIcon: "ic_notification_large",
+                ...NOTIFICATION_STYLE,
               },
             ],
           });
         }
         scheduledKey.current = key;
-      } catch {
-        // no notification permission or plugin - nothing to remind with
+      } catch (error) {
+        // no notification permission or plugin - nothing to remind with (logged, step 19)
+        console.warn("[reminders] could not schedule the clock reminder", error);
       }
     };
 

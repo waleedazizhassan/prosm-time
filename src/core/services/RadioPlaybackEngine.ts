@@ -108,10 +108,12 @@ class RadioPlaybackEngine {
   private async enableBackgroundMode(stationName: string) {
     if (!Capacitor.isNativePlatform()) return;
     try {
-      await BackgroundMode.enable({ title: "PROSM Time", text: stationName, silent: true });
-    } catch {
+      // v2.3.43 step 19 (item 1): the PROSM notification icon and colour, not the default square.
+      await BackgroundMode.enable({ title: "PROSM Time", text: stationName, silent: true, icon: "ic_stat_prosm", color: "1E6FD9" });
+    } catch (error) {
       // Missing notification permission or similar - playback itself
       // still proceeds normally in the foreground either way.
+      console.warn("[radio] could not keep playing in the background", error);
     }
   }
 

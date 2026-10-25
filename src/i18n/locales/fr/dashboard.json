@@ -160,7 +160,7 @@
     "offlineQueueError": "Impossible de mettre cette action en file d'attente pour une synchronisation hors ligne.",
     "locationDetecting": "Détection de votre position actuelle...",
     "locationAccuracy": "±{{meters}}m",
-    "locationUnavailable": "Position actuelle indisponible",
+    "locationUnavailable": "Position actuelle indisponible - activez la localisation du téléphone (ou rapprochez-vous d'un espace dégagé) et réessayez.",
     "confirmClockInTitle": "Confirmer l'arrivée",
     "confirmClockOutTitle": "Confirmer le départ",
     "confirmPhotoLabel": "Photo",
@@ -258,7 +258,9 @@
     "clockInTitle": "C'est l'heure de pointer",
     "clockInBody": "Pointez dans PROSM Time à votre arrivée.",
     "clockOutTitle": "N'oubliez pas de pointer la sortie",
-    "clockOutBody": "Pointez la sortie dans PROSM Time avant de partir."
+    "clockOutBody": "Pointez la sortie dans PROSM Time avant de partir.",
+    "inexactNotice": "Le téléphone n'autorise pas les alarmes exactes pour PROSM Time ; un rappel peut arriver avec quelques minutes de retard.",
+    "allowExact": "Autoriser les alarmes exactes"
   },
   "longSession": {
     "title": "Toujours au travail ?",

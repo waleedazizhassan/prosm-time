@@ -160,7 +160,7 @@
     "offlineQueueError": "تعذر وضع هذا الإجراء في قائمة انتظار المزامنة دون اتصال.",
     "locationDetecting": "جارٍ تحديد موقعك الحالي...",
     "locationAccuracy": "±{{meters}} م",
-    "locationUnavailable": "الموقع الحالي غير متاح",
+    "locationUnavailable": "الموقع الحالي غير متاح — شغّل الموقع في الهاتف (أو اقترب من مكان مفتوح) وحاول مرة أخرى.",
     "confirmClockInTitle": "تأكيد تسجيل الحضور",
     "confirmClockOutTitle": "تأكيد تسجيل الانصراف",
     "confirmPhotoLabel": "الصورة",
@@ -262,7 +262,9 @@
     "clockInTitle": "وقت تسجيل الحضور",
     "clockInBody": "سجّل حضورك في PROSM Time أول ما توصل.",
     "clockOutTitle": "متنساش تسجّل انصرافك",
-    "clockOutBody": "سجّل انصرافك في PROSM Time قبل ما تمشي."
+    "clockOutBody": "سجّل انصرافك في PROSM Time قبل ما تمشي.",
+    "inexactNotice": "الهاتف لا يسمح بالمنبّهات الدقيقة لبروسم تايم، فقد يصل التذكير متأخرًا بضع دقائق.",
+    "allowExact": "السماح بالمنبّهات الدقيقة"
   },
   "longSession": {
     "title": "لسه شغال؟",

@@ -4,4 +4,9 @@
     <string name="title_activity_main">PROSM Time</string>
     <string name="package_name">net.prosm.time</string>
     <string name="custom_url_scheme">net.prosm.time</string>
+    <!-- v2.3.43 step 19 (item 1): the background-location notice uses the PROSM
+         notification icon and colour, on its own quiet channel. -->
+    <string name="capacitor_background_geolocation_notification_icon">drawable/ic_stat_prosm</string>
+    <string name="capacitor_background_geolocation_notification_color">#1E6FD9</string>
+    <string name="capacitor_background_geolocation_notification_channel_name">PROSM Time · attendance</string>
 </resources>

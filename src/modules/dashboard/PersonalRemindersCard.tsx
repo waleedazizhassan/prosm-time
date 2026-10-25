@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Capacitor } from "@capacitor/core";
 import { LocalNotifications } from "@capacitor/local-notifications";
+import { ensureAlertChannel, exactAlarmsAllowed, NOTIFICATION_STYLE, openExactAlarmSetting } from "../../core/services/notificationStyle";
 
 import { useAuth } from "../../core/context/AuthContext";
 import { ALL_REMINDER_IDS, loadReminders, remindersToSchedule, storeReminders, type PersonalReminders } from "../../core/services/personalReminders";
@@ -28,6 +29,12 @@ export default function PersonalRemindersCard() {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  // v2.3.43 step 19 (item 12): Android 14+ may refuse exact alarms; the reminder then comes a few minutes late.
+  const [exactAllowed, setExactAllowed] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    if (onPhone && settings.enabled) void exactAlarmsAllowed().then(setExactAllowed);
+  }, [onPhone, settings.enabled]);
 
   useEffect(() => {
     if (userId) setSettings(loadReminders(userId));
@@ -55,19 +62,21 @@ export default function PersonalRemindersCard() {
       await LocalNotifications.cancel({ notifications: ALL_REMINDER_IDS.map((id) => ({ id })) });
       const scheduled = remindersToSchedule(settings);
       if (scheduled.length > 0) {
+        await ensureAlertChannel();
         await LocalNotifications.schedule({
           notifications: scheduled.map((reminder) => ({
             id: reminder.id,
             title: t(reminder.kind === "clockIn" ? "reminders.clockInTitle" : "reminders.clockOutTitle"),
             body: t(reminder.kind === "clockIn" ? "reminders.clockInBody" : "reminders.clockOutBody"),
-            largeIcon: "ic_notification_large",
+            ...NOTIFICATION_STYLE,
             schedule: { on: { weekday: reminder.weekday, hour: reminder.hour, minute: reminder.minute }, allowWhileIdle: true },
           })),
         });
       }
       storeReminders(userId, settings);
       setMessage(settings.enabled ? t("reminders.saved", { count: settings.days.length }) : t("reminders.off"));
-    } catch {
+    } catch (error) {
+      console.warn("[reminders] could not save the reminders", error);
       setError(t("reminders.saveError"));
     }
     setSaving(false);
@@ -118,6 +127,14 @@ export default function PersonalRemindersCard() {
                 })}
               </div>
             </>
+          ) : null}
+          {settings.enabled && exactAllowed === false ? (
+            <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "var(--space-2)", marginBottom: "var(--space-3)" }}>
+              <HintText small>{t("reminders.inexactNotice")}</HintText>
+              <Button size="sm" variant="ghost" onClick={() => void openExactAlarmSetting().then(setExactAllowed)}>
+                {t("reminders.allowExact")}
+              </Button>
+            </div>
           ) : null}
           <ErrorText>{error}</ErrorText>
           {message ? <HintText small>{message}</HintText> : null}

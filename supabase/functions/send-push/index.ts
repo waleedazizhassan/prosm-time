@@ -122,11 +122,10 @@ serve(async (request: Request) => {
                 default_vibrate_timings: true,
                 notification_priority: urgent ? "PRIORITY_MAX" : "PRIORITY_HIGH",
                 visibility: "PUBLIC",
+                // v2.3.43 step 19 (item 1): the same small icon and colour as every
+                // notification the app shows itself; no picture thumbnail.
                 icon: "ic_stat_prosm",
                 color: "#1E6FD9",
-                // Owner 2026-10-20: the app's full-colour icon beside the notification
-                // (Android shows the image as a thumbnail next to the text).
-                image: "https://time.prosm.net/prosm-logo.png",
               },
             },
           },

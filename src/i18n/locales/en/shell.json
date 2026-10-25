@@ -15,8 +15,8 @@
   "signOutAction": "Sign out",
   "kioskPinLabel": "Kiosk PIN (4-6 digits)",
   "kioskPinSaved": "Kiosk PIN saved.",
-  "backgroundTrackingTitle": "PROSM Time is tracking your location",
-  "backgroundTrackingMessage": "Location is being recorded while you're clocked in. Cancel to stop.",
+  "backgroundTrackingTitle": "PROSM Time · clocked in",
+  "backgroundTrackingMessage": "Location is recorded only while you are clocked in.",
   "languageLabel": "Language",
   "themeLabel": "Appearance",
   "theme": {
@@ -318,5 +318,13 @@
   "exitPrompt": {
     "title": "You left the site",
     "body": "Your shift is still open. Clock out now?"
+  },
+  "trackingError": {
+    "title": "Location tracking did not start",
+    "permission": "PROSM Time is not allowed to use your location. Allow location (\"Allow all the time\") in the app settings, then try again. Your clock-in is still recorded.",
+    "failed": "The phone's location service did not start (location may be off). It will be tried again automatically; you can also try now. Your clock-in is still recorded.",
+    "later": "Later",
+    "openSettings": "Open settings",
+    "retry": "Try again"
   }
 }

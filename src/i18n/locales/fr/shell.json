@@ -15,8 +15,8 @@
   "signOutAction": "Se déconnecter",
   "kioskPinLabel": "Code PIN du kiosque (4 à 6 chiffres)",
   "kioskPinSaved": "Code PIN enregistré.",
-  "backgroundTrackingTitle": "PROSM Time suit votre position",
-  "backgroundTrackingMessage": "Votre position est enregistrée tant que vous êtes pointé. Annulez pour arrêter.",
+  "backgroundTrackingTitle": "PROSM Time · présence enregistrée",
+  "backgroundTrackingMessage": "La position n'est enregistrée que pendant la présence.",
   "languageLabel": "Langue",
   "themeLabel": "Apparence",
   "theme": {
@@ -318,5 +318,13 @@
   "exitPrompt": {
     "title": "Vous avez quitté le site",
     "body": "Votre session est encore ouverte. Pointer le départ ?"
+  },
+  "trackingError": {
+    "title": "Le suivi de position n'a pas démarré",
+    "permission": "PROSM Time n'a pas accès à votre position. Autorisez la position (« Toujours autoriser ») dans les paramètres de l'appli, puis réessayez. Votre pointage est bien enregistré.",
+    "failed": "Le service de position du téléphone n'a pas démarré (la position est peut-être désactivée). Un nouvel essai aura lieu automatiquement ; vous pouvez aussi réessayer. Votre pointage est enregistré.",
+    "later": "Plus tard",
+    "openSettings": "Ouvrir les paramètres",
+    "retry": "Réessayer"
   }
 }

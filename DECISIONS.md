@@ -47,3 +47,10 @@
 
 ## D-11 — الصورة الشخصية: bucket عام، والرابط لا يخرج إلا للنطاق المسموح
 - `user-avatars` عام من قبل (20260903180000)، والرابط فيه UUID المستخدم. القائمة الوحيدة اللي بتوزّع الروابط (`list_prosm_time_people_directory`) مقيّدة بنفس نطاق رؤية الأشخاص؛ مفيش أي قائمة بترجع صور منظمة تانية. تحويله لخاص بروابط موقّعة مؤجَّل في ROADMAP.
+
+## D-12 — تعديل محلي (patch-package) لاثنين من plugins Android
+- **السبب:** `@anuradev/capacitor-background-mode` بيبدأ خدمته في الكود بنوع `specialUse|microphone` (نص «SIP servers») — تغيير الـ manifest وحده لـ `mediaPlayback` كان هيوقّع التطبيق عند `startForeground` على Android 14+. و`@capacitor-community/background-geolocation` بيحط إشعار التتبع على قناة بأهمية DEFAULT وأولوية HIGH بدون طريقة لتغييرها من الخيارات.
+- **القرار:** `patches/@anuradev+capacitor-background-mode+8.1.0.patch`: الخدمة `mediaPlayback` في الـ manifest والكود، وشيل إذن `FOREGROUND_SERVICE_SPECIAL_USE` و`REQUEST_IGNORE_BATTERY_OPTIMIZATIONS` (مش مستخدم في أي مكان). `patches/@capacitor-community+background-geolocation+1.2.26.patch`: قناة مستقلة `prosm-tracking` بأهمية LOW (بلا صوت/اهتزاز/شارة/heads-up)، أولوية LOW، وحذف القناة القديمة. الأيقونة واللون والنص من `strings.xml` (`ic_stat_prosm`، `#1E6FD9`، «PROSM Time · الحضور مسجّل»). خدمة التتبع `exported=false` بـ `tools:replace` (التطبيق نفسه بس اللي بيربطها). الـ patches بتتطبّق تلقائياً مع `npm ci` (`postinstall: patch-package`)؛ عند ترقية أي plugin منهم لازم إعادة إنشاء الـ patch.
+
+## D-13 — توحيد شكل الإشعارات: أيقونة صغيرة فقط
+- كل الإشعارات (التذكيرات، إشعار التحديث، «غادرت الموقع»، الراديو، التتبع، وإشعارات السيرفر FCM) بأيقونة `ic_stat_prosm` ولون `#1E6FD9` وقناة `prosm-alerts` (التتبع على `prosm-tracking`). اتشال `largeIcon` من المحلية و`image` (الصورة المصغّرة) من FCM عشان الشكل يبقى واحد — طلب البند 1 بدل قرار 2026-10-20 بالأيقونة الملونة جنب النص. إشعار التحديث بقى قابل للسحب.

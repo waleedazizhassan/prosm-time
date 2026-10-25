@@ -160,7 +160,7 @@
     "offlineQueueError": "Diese Aktion konnte nicht für die Offline-Synchronisierung eingereiht werden.",
     "locationDetecting": "Ihr aktueller Standort wird ermittelt...",
     "locationAccuracy": "±{{meters}} m",
-    "locationUnavailable": "Aktueller Standort nicht verfügbar",
+    "locationUnavailable": "Aktueller Standort nicht verfügbar - Standort am Telefon einschalten (oder ins Freie gehen) und erneut versuchen.",
     "confirmClockInTitle": "Einstempeln bestätigen",
     "confirmClockOutTitle": "Ausstempeln bestätigen",
     "confirmPhotoLabel": "Foto",
@@ -258,7 +258,9 @@
     "clockInTitle": "Zeit zum Einstempeln",
     "clockInBody": "Stempeln Sie bei Ankunft in PROSM Time ein.",
     "clockOutTitle": "Ausstempeln nicht vergessen",
-    "clockOutBody": "Stempeln Sie vor dem Gehen in PROSM Time aus."
+    "clockOutBody": "Stempeln Sie vor dem Gehen in PROSM Time aus.",
+    "inexactNotice": "Das Telefon erlaubt PROSM Time keine exakten Wecker; eine Erinnerung kann einige Minuten später kommen.",
+    "allowExact": "Exakte Wecker erlauben"
   },
   "longSession": {
     "title": "Noch bei der Arbeit?",

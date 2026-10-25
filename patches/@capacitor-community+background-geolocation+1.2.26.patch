@@ -1,0 +1,52 @@
+diff --git a/node_modules/@capacitor-community/background-geolocation/android/src/main/java/com/equimaps/capacitor_background_geolocation/BackgroundGeolocation.java b/node_modules/@capacitor-community/background-geolocation/android/src/main/java/com/equimaps/capacitor_background_geolocation/BackgroundGeolocation.java
+index a92fcf9..9236ba7 100644
+--- a/node_modules/@capacitor-community/background-geolocation/android/src/main/java/com/equimaps/capacitor_background_geolocation/BackgroundGeolocation.java
++++ b/node_modules/@capacitor-community/background-geolocation/android/src/main/java/com/equimaps/capacitor_background_geolocation/BackgroundGeolocation.java
+@@ -49,6 +49,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+         }
+ )
+ public class BackgroundGeolocation extends Plugin {
++    private static final String TRACKING_CHANNEL_ID = "prosm-tracking";
+     private BackgroundGeolocationService.LocalBinder service = null;
+     private Boolean stoppedWithoutPermissions = false;
+ 
+@@ -103,7 +104,8 @@ public class BackgroundGeolocation extends Plugin {
+                     )
+                     .setContentText(backgroundMessage)
+                     .setOngoing(true)
+-                    .setPriority(Notification.PRIORITY_HIGH)
++                    // PROSM Time (patch-package): the smallest the required notice can be.
++                    .setPriority(Notification.PRIORITY_LOW)
+                     .setWhen(System.currentTimeMillis());
+ 
+             try {
+@@ -151,7 +153,7 @@ public class BackgroundGeolocation extends Plugin {
+ 
+             // Set the Channel ID for Android O.
+             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+-                builder.setChannelId(BackgroundGeolocationService.class.getPackage().getName());
++                builder.setChannelId(TRACKING_CHANNEL_ID);
+             }
+ 
+             backgroundNotification = builder.build();
+@@ -286,14 +288,18 @@ public class BackgroundGeolocation extends Plugin {
+             NotificationManager manager = (NotificationManager) getContext().getSystemService(
+                     Context.NOTIFICATION_SERVICE
+             );
++            // PROSM Time (patch-package): a separate silent, low-importance channel
++            // (no sound, vibration, badge or heads-up); the old default one is removed.
++            manager.deleteNotificationChannel(BackgroundGeolocationService.class.getPackage().getName());
+             NotificationChannel channel = new NotificationChannel(
+-                    BackgroundGeolocationService.class.getPackage().getName(),
++                    TRACKING_CHANNEL_ID,
+                     getAppString(
+                             "capacitor_background_geolocation_notification_channel_name",
+                             "Background Tracking"
+                     ),
+-                    NotificationManager.IMPORTANCE_DEFAULT
++                    NotificationManager.IMPORTANCE_LOW
+             );
++            channel.setShowBadge(false);
+             channel.enableLights(false);
+             channel.enableVibration(false);
+             channel.setSound(null, null);

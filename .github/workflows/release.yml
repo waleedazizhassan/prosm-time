@@ -193,6 +193,12 @@ jobs:
             echo "::warning::GOOGLE_SERVICES_JSON is not set - this APK has no push notifications."
           fi
 
+      # step 19: the manifest bundled in the APK is this release's (one source).
+      - name: Write this release's manifest into the build
+        env:
+          RELEASED_AT: ${{ needs.test.outputs.releasedAt }}
+        run: node scripts/write-release-manifest.mjs
+
       - run: npm run build
         env:
           VITE_BUILD_RELEASED_AT: ${{ needs.test.outputs.releasedAt }}
@@ -390,6 +396,11 @@ jobs:
           NEXT_VERSION: ${{ needs.test.outputs.nextVersion }}
         run: node -e 'const fs=require("fs"); const p=require("./package.json"); p.version=process.env.NEXT_VERSION; fs.writeFileSync("package.json", JSON.stringify(p, null, 2) + "\n");'
 
+      - name: Write this release's manifest into the build
+        env:
+          RELEASED_AT: ${{ needs.test.outputs.releasedAt }}
+        run: node scripts/write-release-manifest.mjs
+
       - run: npm run build
         env:
           VITE_BUILD_RELEASED_AT: ${{ needs.test.outputs.releasedAt }}
@@ -421,30 +432,11 @@ jobs:
         env:
           RELEASE_VERSION: ${{ needs.create-release.outputs.version }}
           RELEASED_AT: ${{ needs.test.outputs.releasedAt }}
-          # Owner 2026-10-20: PROSM Time is an APK to download and a web version
-          # to open at time.prosm.net - no desktop installer, no web zip. Older
-          # desktop installs are sent to the web version.
-          ANDROID_URL: https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/public/app-releases/PROSM-Time-v${{ needs.create-release.outputs.version }}.apk
-          WINDOWS_URL: https://time.prosm.net
-          WEB_URL: https://time.prosm.net
+          # The download links come from scripts/write-release-manifest.mjs (step 19).
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
           set -e
-          base="${{ github.server_url }}/${{ github.repository }}/releases/download/v${RELEASE_VERSION}"
-          node -e '
-            const fs = require("fs");
-            const manifest = {
-              version: process.env.RELEASE_VERSION,
-              releasedAt: process.env.RELEASED_AT,
-              downloads: {
-                windows: process.env.WINDOWS_URL,
-                android: process.env.ANDROID_URL,
-                web: process.env.WEB_URL,
-              },
-            };
-            fs.writeFileSync("public/latest-version.json", JSON.stringify(manifest, null, 2));
-            console.log(JSON.stringify(manifest, null, 2));
-          '
+          node scripts/write-release-manifest.mjs
           # Audit 2.3: the copy installed apps read (short cache so a new release shows within minutes).
           curl -sf -X POST "https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/app-releases/latest-version.json" \
             -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \

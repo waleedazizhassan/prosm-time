@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Capacitor } from "@capacitor/core";
 import { LocalNotifications } from "@capacitor/local-notifications";
+import { ensureAlertChannel, NOTIFICATION_STYLE } from "../../core/services/notificationStyle";
 import { Download } from "lucide-react";
 
 import { useUpdateCheck } from "../../core/hooks/useUpdateCheck";
@@ -32,10 +33,10 @@ export default function UpdateAvailableBanner() {
   const { manifest } = useUpdateCheck();
   const pendingVersion = manifest?.version ?? null;
 
-  // Owner 2026-10-20: on the phone, a notification that can't be swiped away
-  // stays in the notification bar until the app is updated (it goes as soon
-  // as this build is the newest); tapping it opens the app, where this
-  // banner's button downloads the update. The banner itself has no close button.
+  // Owner 2026-10-20: on the phone, a notification stays in the notification
+  // bar until the app is updated (it goes as soon as this build is the
+  // newest); tapping it opens the app, where this banner's button downloads
+  // the update. v2.3.43 step 19 (item 13): it can now be swiped away.
   useEffect(() => {
     if (!Capacitor.isNativePlatform()) return;
     const run = async () => {
@@ -44,11 +45,13 @@ export default function UpdateAvailableBanner() {
         if (!pendingVersion) return;
         const permission = await LocalNotifications.checkPermissions();
         if (permission.display !== "granted") return;
+        await ensureAlertChannel();
         await LocalNotifications.schedule({
-          notifications: [{ id: UPDATE_NOTICE_ID, title: t("update.noticeTitle"), body: t("update.available", { version: pendingVersion }), ongoing: true, autoCancel: false, largeIcon: "ic_notification_large" }],
+          notifications: [{ id: UPDATE_NOTICE_ID, title: t("update.noticeTitle"), body: t("update.available", { version: pendingVersion }), autoCancel: true, ...NOTIFICATION_STYLE }],
         });
-      } catch {
+      } catch (error) {
         // notifications unavailable - the banner still shows
+        console.warn("[update] could not show the update notification", error);
       }
     };
     void run();

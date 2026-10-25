@@ -15,8 +15,8 @@
   "signOutAction": "Esci",
   "kioskPinLabel": "PIN del chiosco (4-6 cifre)",
   "kioskPinSaved": "PIN salvato.",
-  "backgroundTrackingTitle": "PROSM Time sta monitorando la tua posizione",
-  "backgroundTrackingMessage": "La posizione viene registrata mentre sei in servizio. Annulla per interrompere.",
+  "backgroundTrackingTitle": "PROSM Time · presenza registrata",
+  "backgroundTrackingMessage": "La posizione è registrata solo durante la presenza.",
   "languageLabel": "Lingua",
   "themeLabel": "Aspetto",
   "theme": {
@@ -318,5 +318,13 @@
   "exitPrompt": {
     "title": "Hai lasciato la sede",
     "body": "Il turno è ancora aperto. Registri l'uscita?"
+  },
+  "trackingError": {
+    "title": "Il rilevamento della posizione non è partito",
+    "permission": "PROSM Time non può usare la tua posizione. Consenti la posizione («Consenti sempre») nelle impostazioni dell'app, poi riprova. La tua timbratura è registrata.",
+    "failed": "Il servizio di posizione del telefono non è partito (forse è disattivato). Verrà ritentato automaticamente; puoi anche riprovare ora. La tua timbratura è registrata.",
+    "later": "Più tardi",
+    "openSettings": "Apri impostazioni",
+    "retry": "Riprova"
   }
 }

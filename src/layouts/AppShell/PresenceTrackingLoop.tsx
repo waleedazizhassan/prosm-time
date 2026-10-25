@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { useAuth } from "../../core/context/AuthContext";
 import PresenceRepository, { type PresenceSession } from "../../core/repositories/PresenceRepository";
-import BackgroundLocationService from "../../core/services/BackgroundLocationService";
+import BackgroundLocationService, { type TrackingFailure } from "../../core/services/BackgroundLocationService";
 import { getCurrentPosition } from "../../core/utils/geo";
 import playAlertSound from "../../core/utils/playAlertSound";
 import Modal from "../../components/common/Modal";
@@ -71,11 +71,15 @@ async function notifyLeftSite(title: string, body: string) {
     const { Capacitor } = await import("@capacitor/core");
     if (!Capacitor.isNativePlatform()) return;
     const { LocalNotifications } = await import("@capacitor/local-notifications");
-    await LocalNotifications.schedule({ notifications: [{ id: EXIT_PROMPT_NOTIFICATION_ID, title, body, smallIcon: "ic_stat_prosm", iconColor: "#1E6FD9" }] });
+    const { ensureAlertChannel, NOTIFICATION_STYLE } = await import("../../core/services/notificationStyle");
+    await ensureAlertChannel();
+    await LocalNotifications.schedule({ notifications: [{ id: EXIT_PROMPT_NOTIFICATION_ID, title, body, ...NOTIFICATION_STYLE }] });
   } catch {
     // no permission or plugin: the in-app question on the dashboard still shows
   }
 }
+
+const TRACKING_RETRY_MS = 30_000;
 
 export default function PresenceTrackingLoop() {
   const { profile } = useAuth();
@@ -89,6 +93,8 @@ export default function PresenceTrackingLoop() {
   // Google Play policy): asked once; the answer is remembered on the device.
   const [backgroundConsent, setBackgroundConsent] = useState<BackgroundConsent>(readBackgroundConsent);
   const [disclosureOpen, setDisclosureOpen] = useState(false);
+  const [trackingFailure, setTrackingFailure] = useState<TrackingFailure | null>(null);
+  const [trackingAttempt, setTrackingAttempt] = useState(0);
 
   const answerDisclosure = (answer: "accepted" | "declined") => {
     writeBackgroundConsent(answer);
@@ -141,14 +147,36 @@ export default function PresenceTrackingLoop() {
       return undefined;
     }
 
-    BackgroundLocationService.start(t("backgroundTrackingTitle"), t("backgroundTrackingMessage"), (latitude, longitude, accuracyMeters) => {
-      recordSample(latitude, longitude, accuracyMeters);
-    });
+    // v2.3.43 step 19 (item 13): a failure is shown, and a service failure is retried once.
+    let retryTimer: number | undefined;
+    let stopped = false;
+    const begin = async (attempt: number) => {
+      const fail = (reason: TrackingFailure) => {
+        if (stopped) return;
+        setTrackingFailure(reason);
+        if (reason === "failed" && attempt === 0) {
+          retryTimer = window.setTimeout(() => void BackgroundLocationService.stop().then(() => begin(1)), TRACKING_RETRY_MS);
+        }
+      };
+      const failure = await BackgroundLocationService.start(
+        t("backgroundTrackingTitle"),
+        t("backgroundTrackingMessage"),
+        (latitude, longitude, accuracyMeters) => {
+          setTrackingFailure(null);
+          recordSample(latitude, longitude, accuracyMeters);
+        },
+        fail,
+      );
+      if (failure) fail(failure);
+    };
+    void begin(0);
 
     return () => {
+      stopped = true;
+      window.clearTimeout(retryTimer);
       BackgroundLocationService.stop();
     };
-  }, [activePresenceSessionId, backgroundConsent, t]);
+  }, [activePresenceSessionId, backgroundConsent, t, trackingAttempt]);
 
   // Web fallback path - foreground-tab-only JS interval, unchanged
   // from before. Skipped entirely on native, where the background
@@ -172,6 +200,32 @@ export default function PresenceTrackingLoop() {
 
     return () => clearInterval(sampleInterval);
   }, [activePresenceSessionId, backgroundConsent]);
+
+  if (trackingFailure && !disclosureOpen) {
+    return (
+      <Modal isOpen onClose={() => setTrackingFailure(null)} title={t("trackingError.title")}>
+        <p style={{ margin: "0 0 var(--space-4)", fontSize: "var(--font-sm)", lineHeight: 1.7, color: "var(--text-primary)" }}>{t(`trackingError.${trackingFailure}`)}</p>
+        <div style={{ display: "flex", justifyContent: "flex-end", flexWrap: "wrap", gap: "var(--space-2)" }}>
+          <Button variant="ghost" onClick={() => setTrackingFailure(null)}>
+            {t("trackingError.later")}
+          </Button>
+          {trackingFailure === "permission" ? (
+            <Button variant="ghost" onClick={() => void BackgroundLocationService.openSettings()}>
+              {t("trackingError.openSettings")}
+            </Button>
+          ) : null}
+          <Button
+            onClick={() => {
+              setTrackingFailure(null);
+              setTrackingAttempt((value) => value + 1);
+            }}
+          >
+            {t("trackingError.retry")}
+          </Button>
+        </div>
+      </Modal>
+    );
+  }
 
   if (!disclosureOpen) return null;
   return (

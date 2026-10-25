@@ -160,7 +160,7 @@
     "offlineQueueError": "Unable to queue this action for offline sync.",
     "locationDetecting": "Detecting your current location...",
     "locationAccuracy": "±{{meters}}m",
-    "locationUnavailable": "Current location unavailable",
+    "locationUnavailable": "Current location unavailable - turn on location on the phone (or move to an open area) and try again.",
     "confirmClockInTitle": "Confirm Clock In",
     "confirmClockOutTitle": "Confirm Clock Out",
     "confirmPhotoLabel": "Photo",
@@ -258,7 +258,9 @@
     "clockInTitle": "Time to clock in",
     "clockInBody": "Clock in in PROSM Time when you arrive.",
     "clockOutTitle": "Don't forget to clock out",
-    "clockOutBody": "Clock out in PROSM Time before you leave."
+    "clockOutBody": "Clock out in PROSM Time before you leave.",
+    "inexactNotice": "The phone does not allow exact alarms for PROSM Time, so a reminder may come a few minutes late.",
+    "allowExact": "Allow exact alarms"
   },
   "longSession": {
     "title": "Still working?",

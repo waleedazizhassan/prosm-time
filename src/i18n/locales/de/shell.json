@@ -15,8 +15,8 @@
   "signOutAction": "Abmelden",
   "kioskPinLabel": "Kiosk-PIN (4-6 Ziffern)",
   "kioskPinSaved": "Kiosk-PIN gespeichert.",
-  "backgroundTrackingTitle": "PROSM Time verfolgt Ihren Standort",
-  "backgroundTrackingMessage": "Der Standort wird erfasst, solange Sie eingestempelt sind. Zum Beenden abbrechen.",
+  "backgroundTrackingTitle": "PROSM Time · eingestempelt",
+  "backgroundTrackingMessage": "Der Standort wird nur während der Anwesenheit erfasst.",
   "languageLabel": "Sprache",
   "themeLabel": "Erscheinungsbild",
   "theme": {
@@ -318,5 +318,13 @@
   "exitPrompt": {
     "title": "Sie haben den Standort verlassen",
     "body": "Ihre Schicht ist noch offen. Jetzt ausstempeln?"
+  },
+  "trackingError": {
+    "title": "Standortverfolgung nicht gestartet",
+    "permission": "PROSM Time darf Ihren Standort nicht verwenden. Erlauben Sie den Standort („Immer zulassen“) in den App-Einstellungen und versuchen Sie es erneut. Ihre Erfassung ist gespeichert.",
+    "failed": "Der Standortdienst des Telefons ist nicht gestartet (Standort evtl. aus). Es wird automatisch erneut versucht; Sie können es auch jetzt versuchen. Ihre Erfassung ist gespeichert.",
+    "later": "Später",
+    "openSettings": "Einstellungen öffnen",
+    "retry": "Erneut versuchen"
   }
 }

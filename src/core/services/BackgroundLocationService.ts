@@ -22,6 +22,15 @@ const BackgroundGeolocation = registerPlugin<BackgroundGeolocationPlugin>("Backg
 // never gets background samples; this never blocks Clock In/Out or
 // any other flow, matching this app's existing "location capture is
 // always best-effort" posture everywhere else.
+export type TrackingFailure = "permission" | "failed";
+
+// The plugin reports a refused permission as NOT_AUTHORIZED.
+export function trackingFailureOf(error: unknown): TrackingFailure {
+  const code = (error as { code?: string } | null)?.code ?? "";
+  const message = error instanceof Error ? error.message : String(error ?? "");
+  return code === "NOT_AUTHORIZED" || /permission|authori[sz]ed/i.test(message) ? "permission" : "failed";
+}
+
 class BackgroundLocationService {
   private watcherId: string | null = null;
 
@@ -29,25 +38,43 @@ class BackgroundLocationService {
     return Capacitor.isNativePlatform();
   }
 
+  // v2.3.43 step 19 (item 13): a failure is no longer swallowed - it is
+  // logged and reported (no location permission, or the service could not
+  // start) so the person is told and can try again. Clock in/out is never
+  // blocked by it.
   async start(
     backgroundTitle: string,
     backgroundMessage: string,
     onSample: (latitude: number, longitude: number, accuracyMeters: number | null) => void,
-  ): Promise<void> {
-    if (!this.isSupported() || this.watcherId) return;
+    onFailure?: (reason: TrackingFailure) => void,
+  ): Promise<TrackingFailure | null> {
+    if (!this.isSupported() || this.watcherId) return null;
     try {
       this.watcherId = await BackgroundGeolocation.addWatcher(
         { backgroundTitle, backgroundMessage, requestPermissions: true, stale: false, distanceFilter: 50 },
-        (location?: BackgroundLocation, error?: Error) => {
-          if (error || !location) return;
+        (location?: BackgroundLocation, error?: Error & { code?: string }) => {
+          if (error) {
+            console.warn("[tracking] the location watcher reported an error", error);
+            onFailure?.(trackingFailureOf(error));
+            return;
+          }
+          if (!location) return;
           onSample(location.latitude, location.longitude, location.accuracy ?? null);
         },
       );
-    } catch {
-      // Best-effort only, same posture as every other geolocation
-      // capture in this app - permission denied or plugin failure
-      // never breaks anything else.
+      return null;
+    } catch (error) {
+      console.warn("[tracking] could not start background location", error);
       this.watcherId = null;
+      return trackingFailureOf(error);
+    }
+  }
+
+  async openSettings(): Promise<void> {
+    try {
+      await BackgroundGeolocation.openSettings();
+    } catch (error) {
+      console.warn("[tracking] could not open the app settings", error);
     }
   }
 

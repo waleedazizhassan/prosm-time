@@ -1,0 +1,55 @@
+diff --git a/node_modules/@anuradev/capacitor-background-mode/android/src/main/AndroidManifest.xml b/node_modules/@anuradev/capacitor-background-mode/android/src/main/AndroidManifest.xml
+index 3788fec..461360a 100644
+--- a/node_modules/@anuradev/capacitor-background-mode/android/src/main/AndroidManifest.xml
++++ b/node_modules/@anuradev/capacitor-background-mode/android/src/main/AndroidManifest.xml
+@@ -2,8 +2,7 @@
+ 
+     <uses-permission android:name="android.permission.WAKE_LOCK" />
+     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
++    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+     <application>
+ 
+@@ -11,11 +10,7 @@
+             android:name=".BackgroundModeService"
+             android:enabled="true"
+             android:exported="false"
+-            android:foregroundServiceType="specialUse|microphone">
+-            <property
+-                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+-                android:value="Needed to keep app alive to be able to receive messages and calls from third party SIP servers for which push notifications aren't available" />
+-        </service>
++            android:foregroundServiceType="mediaPlayback" />
+ 
+         <receiver
+             android:name=".BackgroundModeCloseReceiver"
+diff --git a/node_modules/@anuradev/capacitor-background-mode/android/src/main/java/ar/com/anura/plugins/backgroundmode/BackgroundModeService.java b/node_modules/@anuradev/capacitor-background-mode/android/src/main/java/ar/com/anura/plugins/backgroundmode/BackgroundModeService.java
+index 4a13443..b38677b 100644
+--- a/node_modules/@anuradev/capacitor-background-mode/android/src/main/java/ar/com/anura/plugins/backgroundmode/BackgroundModeService.java
++++ b/node_modules/@anuradev/capacitor-background-mode/android/src/main/java/ar/com/anura/plugins/backgroundmode/BackgroundModeService.java
+@@ -1,7 +1,6 @@
+ package ar.com.anura.plugins.backgroundmode;
+ 
+-import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE;
+-import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE;
++import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK;
+ import static android.os.PowerManager.PARTIAL_WAKE_LOCK;
+ 
+ import android.annotation.SuppressLint;
+@@ -104,12 +103,8 @@ public class BackgroundModeService extends Service {
+     @SuppressLint("WakelockTimeout")
+     private void keepAwake(final BackgroundModeSettings settings) {
+         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+-            int foregroundServiceType = FOREGROUND_SERVICE_TYPE_SPECIAL_USE;
+-            if (settings.isAllowMicrophoneInBackground()) {
+-                foregroundServiceType |= FOREGROUND_SERVICE_TYPE_MICROPHONE;
+-            }
+-
+-            startForeground(NOTIFICATION_ID, createNotification(settings), foregroundServiceType);
++            // PROSM Time (patch-package): the service keeps the radio playing - media playback, not SIP/microphone.
++            startForeground(NOTIFICATION_ID, createNotification(settings), FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK);
+         } else {
+             startForeground(NOTIFICATION_ID, createNotification(settings));
+         }
