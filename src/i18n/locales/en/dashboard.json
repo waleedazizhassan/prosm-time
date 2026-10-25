@@ -257,5 +257,12 @@
     "clockInBody": "Clock in in PROSM Time when you arrive.",
     "clockOutTitle": "Don't forget to clock out",
     "clockOutBody": "Clock out in PROSM Time before you leave."
+  },
+  "longSession": {
+    "title": "Still working?",
+    "body": "You have been clocked in for {{hours}} hours.",
+    "stillWorking": "Still working",
+    "clockOut": "Clock me out",
+    "error": "Could not save your answer."
   }
 }

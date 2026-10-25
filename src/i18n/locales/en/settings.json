@@ -59,5 +59,15 @@
     "label": "Reject clock in/out from a fake location",
     "hint": "Android reports when a location comes from a mock-location (fake GPS) app. Off: it is recorded and sent to managers for review. On: the clock in or out is refused.",
     "genericError": "Unable to change this setting."
+  },
+  "sessionPolicy": {
+    "title": "Shifts left open",
+    "hint": "Nothing closes at the end of a shift. After the first number of hours the employee is asked \"still working?\" and the managers are told once; after the second the shift is closed automatically and its hours wait for a manager's review.",
+    "alertHoursLabel": "Alert after (hours)",
+    "maxHoursLabel": "Close automatically after (hours)",
+    "invalid": "The alert must come before the close (1 to 72 hours).",
+    "genericError": "Could not save.",
+    "saved": "Saved.",
+    "save": "Save"
   }
 }

@@ -152,6 +152,16 @@
       "sheetSubmittedBody": "{{name}} a envoyé ses indemnités pour {{days}} jours ({{start}} - {{end}}).",
       "sheetApprovedBody": "Vos indemnités du {{start}} au {{end}} ont été approuvées.",
       "sheetRejectedBody": "Vos indemnités du {{start}} au {{end}} ont été refusées. Corrigez-les et renvoyez-les."
+    },
+    "longSessionCheck": {
+      "title": "Toujours au travail ?",
+      "body": "Vous êtes pointé depuis {{hours}} heures. Toujours au travail, ou pointer le départ ?"
+    },
+    "sessionAutoClosed": {
+      "titleEmployee": "Votre session a été fermée automatiquement",
+      "bodyEmployee": "Votre session a été fermée après {{hours}} heures sans départ. Ses heures attendent la vérification de votre responsable.",
+      "titleManager": "Une session a été fermée automatiquement",
+      "bodyManager": "La session de {{name}} a été fermée après {{hours}} heures sans départ. Vérifiez ses heures."
     }
   },
   "items": {

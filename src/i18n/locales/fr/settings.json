@@ -59,5 +59,15 @@
     "label": "Refuser le pointage depuis une position falsifiée",
     "hint": "Android signale quand une position provient d'une application de position fictive (faux GPS). Désactivé : elle est enregistrée et envoyée aux responsables pour vérification. Activé : le pointage est refusé.",
     "genericError": "Impossible de modifier ce paramètre."
+  },
+  "sessionPolicy": {
+    "title": "Sessions restées ouvertes",
+    "hint": "Rien ne se ferme à la fin du poste. Après le premier nombre d'heures, l'employé reçoit « Toujours au travail ? » et les responsables sont prévenus une fois ; après le second, la session est fermée automatiquement et ses heures attendent la vérification d'un responsable.",
+    "alertHoursLabel": "Alerte après (heures)",
+    "maxHoursLabel": "Fermeture automatique après (heures)",
+    "invalid": "L'alerte doit précéder la fermeture (1 à 72 heures).",
+    "genericError": "Enregistrement impossible.",
+    "saved": "Enregistré.",
+    "save": "Enregistrer"
   }
 }

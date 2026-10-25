@@ -59,5 +59,15 @@
     "label": "Rifiuta timbrature da posizione falsa",
     "hint": "Android segnala quando una posizione proviene da un'app di posizione fittizia (GPS falso). Disattivato: viene registrata e inviata ai responsabili per la verifica. Attivato: la timbratura viene rifiutata.",
     "genericError": "Impossibile modificare questa impostazione."
+  },
+  "sessionPolicy": {
+    "title": "Turni rimasti aperti",
+    "hint": "Nulla si chiude a fine turno. Dopo il primo numero di ore il dipendente riceve «Stai ancora lavorando?» e i responsabili vengono avvisati una volta; dopo il secondo il turno si chiude automaticamente e le ore attendono la verifica.",
+    "alertHoursLabel": "Avviso dopo (ore)",
+    "maxHoursLabel": "Chiusura automatica dopo (ore)",
+    "invalid": "L'avviso deve precedere la chiusura (da 1 a 72 ore).",
+    "genericError": "Salvataggio non riuscito.",
+    "saved": "Salvato.",
+    "save": "Salva"
   }
 }

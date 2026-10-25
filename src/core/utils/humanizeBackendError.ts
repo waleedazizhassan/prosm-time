@@ -252,4 +252,15 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   // Offline replays (audit 1.4).
   "OFFLINE TIME IS BEFORE YOUR LAST RECORDED ACTION": "offlineTimeBeforeLastAction",
   "OFFLINE TIME FALLS ON A DAY OF APPROVED LEAVE": "offlineTimeOnLeaveDay",
+  // v2.3.43 steps 1-2: out-of-zone policy, open shifts and pending hours.
+  "INVALID OUTSIDE ZONE POLICY": "invalidOutsideZonePolicy",
+  "SESSIONS.REVIEW_PENDING AUTHORITY REQUIRED": "sessionsReviewPendingRequired",
+  "YOU CANNOT REVIEW YOUR OWN SHIFT": "cannotReviewOwnShift",
+  "THIS SHIFT IS NOT WAITING FOR REVIEW": "shiftNotPendingReview",
+  "INVALID CLOCK OUT TIME": "invalidClockOutTime",
+  "THE TIMESHEET FOR THIS PERIOD IS ALREADY APPROVED": "timesheetPeriodApproved",
+  "SETTINGS.SESSION_POLICY AUTHORITY REQUIRED": "sessionPolicyRequired",
+  "INVALID OPEN SHIFT HOURS": "invalidOpenShiftHours",
+  "THIS SHIFT IS NOT OPEN": "shiftNotOpen",
+  "INVALID EXTENSION TIME": "invalidExtensionTime",
 };

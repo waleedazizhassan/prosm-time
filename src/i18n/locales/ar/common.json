@@ -36,7 +36,7 @@
     "allowancesApproveAuthorityRequired": "ليس لديك صلاحية اعتماد بدلات هذا الموظف.",
     "attendanceEventNotFound": "تعذر العثور على حدث الحضور هذا.",
     "attendanceNotAllowedAtSite": "تسجيل الحضور غير مسموح في هذا الموقع.",
-    "attendanceSessionNotFound": "تعذر العثور على جلسة الحضور هذه.",
+    "attendanceSessionNotFound": "الجلسة غير موجودة.",
     "orphanedPresenceSession": "جلسة عملك السابقة لم تُغلق بالكامل. حاول تسجيل الحضور مرة أخرى - وإذا استمرت المشكلة، تواصل مع مديرك.",
     "clockInOnBehalfAuthorityRequired": "ليس لديك صلاحية تسجيل حضور هذا الموظف نيابة عنه.",
     "clockOutOnBehalfAuthorityRequired": "ليس لديك صلاحية تسجيل انصراف هذا الموظف نيابة عنه.",
@@ -205,7 +205,18 @@
     "sheetNotWaiting": "تم البت في هذا الكشف بالفعل.",
     "leaveOverlapsAttendance": "لا يمكن اعتماد هذه الإجازة: الموظف سجّل حضورًا في هذه الأيام. ارفض الطلب، أو اطلب منه تقديم إجازة للأيام الأخرى فقط.",
     "leaveRequestOverlapsAttendance": "سجّلت حضورًا في بعض هذه الأيام - قدّم الإجازة للأيام الأخرى فقط.",
-    "workerHasAttendance": "العامل ده ليه حضور مسجّل فمينفعش يتحذف - أوقفه بدل كده."
+    "workerHasAttendance": "العامل ده ليه حضور مسجّل فمينفعش يتحذف - أوقفه بدل كده.",
+    "invalidOutsideZonePolicy": "اختر سياسة صحيحة للتسجيل خارج النطاق.",
+    "reasonRequired": "السبب إلزامي.",
+    "sessionsReviewPendingRequired": "ليست لديك صلاحية مراجعة الساعات المعلّقة.",
+    "cannotReviewOwnShift": "لا يمكنك مراجعة جلستك بنفسك.",
+    "shiftNotPendingReview": "هذه الجلسة لم تعد تنتظر المراجعة.",
+    "invalidClockOutTime": "وقت الانصراف لازم يكون بعد الحضور ومش في المستقبل.",
+    "timesheetPeriodApproved": "كشف هذه الفترة معتمد بالفعل - أعد فتحه أولاً.",
+    "sessionPolicyRequired": "ليست لديك صلاحية تغيير سياسة الجلسات المفتوحة.",
+    "invalidOpenShiftHours": "التنبيه لازم يكون قبل الإغلاق التلقائي (من 1 إلى 72 ساعة).",
+    "shiftNotOpen": "هذه الجلسة لم تعد مفتوحة.",
+    "invalidExtensionTime": "اختر وقتاً في المستقبل خلال 72 ساعة من الحضور."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

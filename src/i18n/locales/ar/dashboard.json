@@ -261,5 +261,12 @@
     "clockInBody": "سجّل حضورك في PROSM Time أول ما توصل.",
     "clockOutTitle": "متنساش تسجّل انصرافك",
     "clockOutBody": "سجّل انصرافك في PROSM Time قبل ما تمشي."
+  },
+  "longSession": {
+    "title": "لسه شغال؟",
+    "body": "مسجّل حضورك من {{hours}} ساعة.",
+    "stillWorking": "لسه شغال",
+    "clockOut": "سجّل انصرافي",
+    "error": "تعذّر حفظ ردك."
   }
 }

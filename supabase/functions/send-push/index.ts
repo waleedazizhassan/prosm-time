@@ -107,6 +107,8 @@ serve(async (request: Request) => {
               type: String(message.type ?? ""),
               entityType: String(message.entityType ?? ""),
               entityId: String(message.entityId ?? ""),
+              // v2.3.43: which reader a shared type is for (e.g. "manager"), for the tap's destination.
+              kind: String((message.data as Record<string, unknown> | undefined)?.kind ?? ""),
             },
             // Owner 2026-10-20 ("no sound"): channels with sound and vibration
             // (the first ones were created silent and Android keeps a channel's

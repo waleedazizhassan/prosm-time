@@ -40,7 +40,9 @@
     "timesheets.generate": "Genera fogli ore",
     "leave.approve": "Approvare le ferie",
     "people.unassigned": "Dipendenti senza sede",
-    "attendance.override_block": "Timbrare nonostante un blocco della sede (registrato)"
+    "attendance.override_block": "Timbrare nonostante un blocco della sede (registrato)",
+    "sessions.review_pending": "Verificare ore in sospeso e prolungare turni",
+    "settings.session_policy": "Avviso e chiusura dei turni aperti"
   },
   "invite": {
     "actionLabel": "Invita dipendente",

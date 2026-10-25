@@ -5,6 +5,7 @@ import { useAuth } from "../../core/context/AuthContext";
 import PageShell from "../../components/common/PageShell";
 import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
 import MockLocationSettingsCard from "./MockLocationSettingsCard";
+import SessionPolicySettingsCard from "./SessionPolicySettingsCard";
 import settingsHeaderImage from "../../assets/illustrations/settings.svg";
 import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
@@ -36,6 +37,7 @@ export default function OrganizationSettingsPage() {
       <PageBanner pageId="settings" illustration={settingsHeaderImage} />
 
       <SitePolicySettingsCard />
+      {hasPermission("settings.session_policy") ? <SessionPolicySettingsCard /> : null}
       {isOwner ? (
         <>
           <NoSiteRadiusSettingsCard />

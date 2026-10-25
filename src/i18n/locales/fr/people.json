@@ -40,7 +40,9 @@
     "timesheets.generate": "Générer les feuilles de temps",
     "leave.approve": "Approuver les congés",
     "people.unassigned": "Employés sans site",
-    "attendance.override_block": "Pointer malgré un blocage du site (journalisé)"
+    "attendance.override_block": "Pointer malgré un blocage du site (journalisé)",
+    "sessions.review_pending": "Vérifier les heures en attente et prolonger",
+    "settings.session_policy": "Alerte et fermeture des sessions ouvertes"
   },
   "invite": {
     "actionLabel": "Inviter un employé",

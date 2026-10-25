@@ -20,6 +20,9 @@ export interface Organization {
   noSiteAllowedRadiusMeters: number;
   // Audit 2.4 - refuse a clock in/out from a location the device reports as simulated.
   rejectMockLocation: boolean;
+  // v2.3.43 step 2: an open shift raises an alert after this many hours and is closed (hours pending review) after the second.
+  openSessionAlertHours: number;
+  openSessionMaxHours: number;
   // § live UX review, user-directed - "the site Edit form has things
   // that deserve to be in Settings." Org-wide defaults a new site's
   // create form pre-fills from - still fully overridable per site.
@@ -51,7 +54,7 @@ class OrganizationRepository {
       const { data, error } = await this.client
         .from("organizations")
         .select(
-          "id, organization_code, name, status, logo_url, organization_settings(default_language, default_theme, no_site_allowed_radius_meters, reject_mock_location, default_gps_accuracy_tolerance_meters, default_break_rounding_mode, default_grace_tolerance_minutes)",
+          "id, organization_code, name, status, logo_url, organization_settings(default_language, default_theme, no_site_allowed_radius_meters, reject_mock_location, open_session_alert_hours, open_session_max_hours, default_gps_accuracy_tolerance_meters, default_break_rounding_mode, default_grace_tolerance_minutes)",
         )
         .maybeSingle();
 
@@ -70,6 +73,8 @@ class OrganizationRepository {
         logoUrl: data.logo_url ?? null,
         noSiteAllowedRadiusMeters: settings?.no_site_allowed_radius_meters ?? 500,
         rejectMockLocation: settings?.reject_mock_location ?? false,
+        openSessionAlertHours: settings?.open_session_alert_hours ?? 12,
+        openSessionMaxHours: settings?.open_session_max_hours ?? 24,
         defaultGpsAccuracyToleranceMeters: settings?.default_gps_accuracy_tolerance_meters ?? 50,
         defaultBreakRoundingMode: settings?.default_break_rounding_mode ?? "cumulative",
         defaultGraceToleranceMinutes: settings?.default_grace_tolerance_minutes ?? 5,
@@ -142,6 +147,16 @@ class OrganizationRepository {
   }
 
   // Audit 2.4 - Owner only, checked server-side.
+  async setSessionPolicy(alertHours: number, maxHours: number): Promise<ServiceResult> {
+    try {
+      const { error } = await this.client.rpc("set_prosm_time_session_policy", { p_alert_hours: alertHours, p_max_hours: maxHours });
+      if (error) return createError(error.message);
+      return createSuccess();
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Organization service unavailable.");
+    }
+  }
+
   async setRejectMockLocation(reject: boolean): Promise<ServiceResult> {
     try {
       const { data, error } = await this.client.rpc("set_prosm_time_reject_mock_location", { p_reject: reject });

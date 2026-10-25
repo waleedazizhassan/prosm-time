@@ -152,6 +152,16 @@
       "sheetSubmittedBody": "{{name}} ha inviato le indennità di {{days}} giorni ({{start}} - {{end}}).",
       "sheetApprovedBody": "Le tue indennità dal {{start}} al {{end}} sono state approvate.",
       "sheetRejectedBody": "Le tue indennità dal {{start}} al {{end}} sono state rifiutate. Correggile e inviale di nuovo."
+    },
+    "longSessionCheck": {
+      "title": "Stai ancora lavorando?",
+      "body": "Sei in servizio da {{hours}} ore. Stai ancora lavorando o registri l'uscita?"
+    },
+    "sessionAutoClosed": {
+      "titleEmployee": "Il tuo turno è stato chiuso automaticamente",
+      "bodyEmployee": "Il tuo turno è stato chiuso dopo {{hours}} ore senza uscita. Le ore attendono la verifica del responsabile.",
+      "titleManager": "Un turno è stato chiuso automaticamente",
+      "bodyManager": "Il turno di {{name}} è stato chiuso dopo {{hours}} ore senza uscita. Verifica le ore."
     }
   },
   "items": {

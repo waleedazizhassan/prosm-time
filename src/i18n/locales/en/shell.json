@@ -152,6 +152,16 @@
       "sheetSubmittedBody": "{{name}} sent allowances for {{days}} days ({{start}} - {{end}}).",
       "sheetApprovedBody": "Your allowances for {{start}} - {{end}} were approved.",
       "sheetRejectedBody": "Your allowances for {{start}} - {{end}} were rejected. Fix them and send them again."
+    },
+    "longSessionCheck": {
+      "title": "Still working?",
+      "body": "You have been clocked in for {{hours}} hours. Still working, or clock out?"
+    },
+    "sessionAutoClosed": {
+      "titleEmployee": "Your shift was closed automatically",
+      "bodyEmployee": "Your shift was closed after {{hours}} hours with no clock-out. Its hours wait for your manager's review.",
+      "titleManager": "A shift was closed automatically",
+      "bodyManager": "{{name}}'s shift was closed after {{hours}} hours with no clock-out. Review its hours."
     }
   },
   "items": {

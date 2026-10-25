@@ -59,5 +59,15 @@
     "label": "Ein-/Ausstempeln von gefälschtem Standort ablehnen",
     "hint": "Android meldet, wenn ein Standort von einer Mock-Location-App (falsches GPS) stammt. Aus: wird erfasst und den Vorgesetzten zur Prüfung gesendet. An: das Ein- oder Ausstempeln wird abgelehnt.",
     "genericError": "Diese Einstellung konnte nicht geändert werden."
+  },
+  "sessionPolicy": {
+    "title": "Offen gebliebene Schichten",
+    "hint": "Am Schichtende wird nichts geschlossen. Nach der ersten Stundenzahl wird die Person gefragt „Noch bei der Arbeit?“ und die Führungskräfte werden einmal informiert; nach der zweiten wird die Schicht automatisch geschlossen und ihre Stunden warten auf die Prüfung.",
+    "alertHoursLabel": "Hinweis nach (Stunden)",
+    "maxHoursLabel": "Automatisch schließen nach (Stunden)",
+    "invalid": "Der Hinweis muss vor dem Schließen kommen (1 bis 72 Stunden).",
+    "genericError": "Speichern fehlgeschlagen.",
+    "saved": "Gespeichert.",
+    "save": "Speichern"
   }
 }

@@ -257,5 +257,12 @@
     "clockInBody": "Pointez dans PROSM Time à votre arrivée.",
     "clockOutTitle": "N'oubliez pas de pointer la sortie",
     "clockOutBody": "Pointez la sortie dans PROSM Time avant de partir."
+  },
+  "longSession": {
+    "title": "Toujours au travail ?",
+    "body": "Vous êtes pointé depuis {{hours}} heures.",
+    "stillWorking": "Toujours au travail",
+    "clockOut": "Pointer mon départ",
+    "error": "Impossible d'enregistrer votre réponse."
   }
 }

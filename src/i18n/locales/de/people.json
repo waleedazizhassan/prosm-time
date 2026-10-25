@@ -40,7 +40,9 @@
     "timesheets.generate": "Stundenzettel erstellen",
     "leave.approve": "Urlaub genehmigen",
     "people.unassigned": "Mitarbeitende ohne Standort",
-    "attendance.override_block": "Trotz Standortsperre einstempeln (protokolliert)"
+    "attendance.override_block": "Trotz Standortsperre einstempeln (protokolliert)",
+    "sessions.review_pending": "Offene Stunden prüfen und Schichten verlängern",
+    "settings.session_policy": "Hinweis und Schließen offener Schichten"
   },
   "invite": {
     "actionLabel": "Mitarbeiter einladen",

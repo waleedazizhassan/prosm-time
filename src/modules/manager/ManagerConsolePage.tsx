@@ -19,6 +19,7 @@ import { formatTimeOnly, formatDateOnly } from "../../core/utils/formatDate";
 import managerConsoleHeaderImage from "../../assets/illustrations/manager.svg";
 import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
+import PendingHoursCard from "./PendingHoursCard";
 
 type ReviewAction = "approved" | "rejected" | "acknowledged" | "clarification_requested";
 // Owner 2026-10-20 ("what is the right action for each reason?"): only the
@@ -209,6 +210,8 @@ export default function ManagerConsolePage() {
           {t("attendance.openToday")}
         </Link>
       </p>
+
+      {hasPermission("sessions.review_pending") ? <PendingHoursCard /> : null}
 
       <Card title={t("pending.title")}>
         <ErrorText>{error}</ErrorText>

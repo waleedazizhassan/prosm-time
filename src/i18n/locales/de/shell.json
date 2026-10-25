@@ -152,6 +152,16 @@
       "sheetSubmittedBody": "{{name}} hat Zulagen für {{days}} Tage gesendet ({{start}} - {{end}}).",
       "sheetApprovedBody": "Ihre Zulagen für {{start}} - {{end}} wurden genehmigt.",
       "sheetRejectedBody": "Ihre Zulagen für {{start}} - {{end}} wurden abgelehnt. Korrigieren und erneut senden."
+    },
+    "longSessionCheck": {
+      "title": "Noch bei der Arbeit?",
+      "body": "Sie sind seit {{hours}} Stunden eingestempelt. Noch bei der Arbeit oder ausstempeln?"
+    },
+    "sessionAutoClosed": {
+      "titleEmployee": "Ihre Schicht wurde automatisch geschlossen",
+      "bodyEmployee": "Ihre Schicht wurde nach {{hours}} Stunden ohne Ausstempeln geschlossen. Die Stunden warten auf die Prüfung.",
+      "titleManager": "Eine Schicht wurde automatisch geschlossen",
+      "bodyManager": "Die Schicht von {{name}} wurde nach {{hours}} Stunden ohne Ausstempeln geschlossen. Bitte Stunden prüfen."
     }
   },
   "items": {

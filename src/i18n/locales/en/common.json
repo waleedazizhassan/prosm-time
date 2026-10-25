@@ -36,7 +36,7 @@
     "allowancesApproveAuthorityRequired": "You don't have authority to approve allowances for this employee.",
     "attendanceEventNotFound": "This attendance event could not be found.",
     "attendanceNotAllowedAtSite": "Attendance isn't allowed at this site.",
-    "attendanceSessionNotFound": "This attendance session could not be found.",
+    "attendanceSessionNotFound": "This shift was not found.",
     "orphanedPresenceSession": "Your previous work session wasn't fully closed. Please try clocking in again - if this keeps happening, contact your manager.",
     "clockInOnBehalfAuthorityRequired": "You don't have authority to clock this employee in.",
     "clockOutOnBehalfAuthorityRequired": "You don't have authority to clock this employee out.",
@@ -205,7 +205,18 @@
     "sheetNotWaiting": "This sheet has already been decided.",
     "leaveOverlapsAttendance": "This leave can't be approved: the employee clocked in on these days. Reject it, or ask them to request leave for the other days only.",
     "leaveRequestOverlapsAttendance": "You clocked in on some of these days - request leave for the other days only.",
-    "workerHasAttendance": "This worker already has attendance, so they can't be deleted - stop them instead."
+    "workerHasAttendance": "This worker already has attendance, so they can't be deleted - stop them instead.",
+    "invalidOutsideZonePolicy": "Choose a valid out-of-zone policy.",
+    "reasonRequired": "A reason is required.",
+    "sessionsReviewPendingRequired": "You don't have permission to review pending hours.",
+    "cannotReviewOwnShift": "You cannot review your own shift.",
+    "shiftNotPendingReview": "This shift is no longer waiting for review.",
+    "invalidClockOutTime": "The clock-out time must be after the clock-in and not in the future.",
+    "timesheetPeriodApproved": "The timesheet for this period is already approved - reopen it first.",
+    "sessionPolicyRequired": "You don't have permission to change the open-shift policy.",
+    "invalidOpenShiftHours": "The alert must come before the automatic close (1 to 72 hours).",
+    "shiftNotOpen": "This shift is no longer open.",
+    "invalidExtensionTime": "Choose a time in the future, within 72 hours of the clock-in."
   },
   "pageLoad": {
     "title": "This page needs a connection",

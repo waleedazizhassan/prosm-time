@@ -31,6 +31,8 @@ import LiveLocationMap from "../../components/common/LiveLocationMap";
 import ErrorText from "../../components/common/ErrorText";
 import styles from "./ClockInOutCard.module.css";
 import HintText from "../../components/common/HintText";
+import SessionReviewRepository from "../../core/repositories/SessionReviewRepository";
+import LongSessionPrompt from "./LongSessionPrompt";
 
 const CHANGE_SITE_NO_SITE_VALUE = "__no_site__";
 
@@ -780,6 +782,12 @@ export default function ClockInOutCard() {
 
   const handleDiscardOfflineItem = async () => {
     if (!failedOfflineItem) return;
+    // v2.3.43 step 2: discarding a saved action leaves a trace on the server.
+    void SessionReviewRepository.logOfflineDiscard(failedOfflineItem.type, {
+      clientReportedAt: failedOfflineItem.clientReportedAt,
+      siteId: failedOfflineItem.siteId,
+      errorMessage: failedOfflineItem.errorMessage,
+    });
     await OfflineQueueService.discard(failedOfflineItem.id);
   };
 
@@ -978,6 +986,7 @@ export default function ClockInOutCard() {
           <p style={{ margin: "var(--space-1) 0 0", color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>
             {view.activeBreakId ? t("attendance.timerPausedOnBreak") : t("attendance.clockedInSince", { time: formatTimeOnly(view.session.clockInAt, i18n.language) })}
           </p>
+          {view.session.id.startsWith("q:") ? null : <LongSessionPrompt clockInAt={view.session.clockInAt} now={now} onClockOut={handleClockOutTap} />}
         </div>
       ) : null}
 

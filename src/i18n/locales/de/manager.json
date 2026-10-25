@@ -98,5 +98,24 @@
     "revokeEmpty": "Kein genehmigter bevorstehender Urlaub zum Widerrufen.",
     "revokeAction": "Widerrufen",
     "revokeReasonLabel": "Grund (erforderlich)"
+  },
+  "pendingHours": {
+    "title_one": "Stunden zur Prüfung ({{count}})",
+    "title_other": "Stunden zur Prüfung ({{count}})",
+    "hint": "Diese Schichten wurden automatisch geschlossen, weil niemand ausgestempelt hat. Ihre Stunden zählen nirgends, bis Sie das tatsächliche Ende festlegen.",
+    "loadError": "Die Schichten zur Prüfung konnten nicht geladen werden.",
+    "summary": "Eingestempelt {{clockIn}} · automatisch geschlossen {{clockOut}}",
+    "reviewAction": "Ende festlegen",
+    "modalTitle": "Ende der Schicht festlegen",
+    "modalBody": "Eingestempelt {{clockIn}}. Letzte Aktivität: {{lastActivity}}.",
+    "clockOutLabel": "Tatsächliche Ausstempelzeit",
+    "reasonLabel": "Grund (Pflicht)",
+    "reasonRequired": "Bitte einen Grund angeben.",
+    "invalidTime": "Bitte eine gültige Zeit wählen.",
+    "genericError": "Speichern fehlgeschlagen.",
+    "save": "Speichern und Stunden zählen",
+    "staleTitle": "Alte, noch offene Schichten",
+    "staleHint": "Vor der automatischen Schließung geöffnet - werden nicht automatisch geschlossen. Stempeln Sie die Person mit der richtigen Zeit aus.",
+    "staleSummary": "Offen seit {{clockIn}} ({{hours}} h)"
   }
 }

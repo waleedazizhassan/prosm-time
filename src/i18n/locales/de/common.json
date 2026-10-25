@@ -36,7 +36,7 @@
     "allowancesApproveAuthorityRequired": "Sie sind nicht berechtigt, Zulagen für diesen Mitarbeiter zu genehmigen.",
     "attendanceEventNotFound": "Dieses Anwesenheitsereignis wurde nicht gefunden.",
     "attendanceNotAllowedAtSite": "Anwesenheitserfassung ist an diesem Standort nicht zulässig.",
-    "attendanceSessionNotFound": "Diese Anwesenheitssitzung wurde nicht gefunden.",
+    "attendanceSessionNotFound": "Schicht nicht gefunden.",
     "orphanedPresenceSession": "Ihre vorherige Arbeitssitzung wurde nicht vollständig beendet. Bitte versuchen Sie erneut, sich einzuchecken - falls dies weiterhin auftritt, wenden Sie sich an Ihren Vorgesetzten.",
     "clockInOnBehalfAuthorityRequired": "Sie sind nicht berechtigt, diesen Mitarbeiter einzustempeln.",
     "clockOutOnBehalfAuthorityRequired": "Sie sind nicht berechtigt, diesen Mitarbeiter auszustempeln.",
@@ -205,7 +205,18 @@
     "sheetNotWaiting": "Über dieses Blatt wurde bereits entschieden.",
     "leaveOverlapsAttendance": "Dieser Urlaub kann nicht genehmigt werden: Die Person hat an diesen Tagen eingestempelt. Ablehnen oder nur für die übrigen Tage beantragen lassen.",
     "leaveRequestOverlapsAttendance": "Sie haben an einigen dieser Tage eingestempelt - beantragen Sie nur die übrigen Tage.",
-    "workerHasAttendance": "Dieser Arbeiter hat bereits Anwesenheiten und kann nicht gelöscht werden - stattdessen stoppen."
+    "workerHasAttendance": "Dieser Arbeiter hat bereits Anwesenheiten und kann nicht gelöscht werden - stattdessen stoppen.",
+    "invalidOutsideZonePolicy": "Bitte eine gültige Regel für außerhalb des Bereichs wählen.",
+    "reasonRequired": "Ein Grund ist erforderlich.",
+    "sessionsReviewPendingRequired": "Sie dürfen offene Stunden nicht prüfen.",
+    "cannotReviewOwnShift": "Sie können Ihre eigene Schicht nicht prüfen.",
+    "shiftNotPendingReview": "Diese Schicht wartet nicht mehr auf Prüfung.",
+    "invalidClockOutTime": "Die Ausstempelzeit muss nach dem Einstempeln und nicht in der Zukunft liegen.",
+    "timesheetPeriodApproved": "Der Stundenzettel dieses Zeitraums ist bereits genehmigt.",
+    "sessionPolicyRequired": "Sie dürfen diese Regel nicht ändern.",
+    "invalidOpenShiftHours": "Der Hinweis muss vor dem Schließen kommen (1 bis 72 Stunden).",
+    "shiftNotOpen": "Diese Schicht ist nicht mehr offen.",
+    "invalidExtensionTime": "Bitte eine künftige Zeit innerhalb von 72 Stunden nach dem Einstempeln wählen."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

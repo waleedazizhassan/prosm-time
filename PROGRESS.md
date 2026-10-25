@@ -6,7 +6,7 @@
 | الخطوة | البند | الحالة | commit | ملاحظة |
 |---|---|---|---|---|
 | 1 | 10 تجاوز المدير + سياسة خارج النطاق | تمت (محلياً) | انظر git log | migration لم تُطبَّق على السيرفر — BLOCKERS B-01 |
-| 2 | 11 الجلسات المفتوحة | لم تبدأ | | |
+| 2 | 11 الجلسات المفتوحة | تمت (محلياً) | انظر git log | migration لم تُطبَّق — B-01؛ send-push يحتاج إعادة نشر |
 | 3 | 7/8 التقويم والعطلات | لم تبدأ | | |
 | 4 | 6 البدلات بالزمن الفعلي | لم تبدأ | | |
 | 5 | 21 تعديل البدلات أثناء المراجعة | لم تبدأ | | |
@@ -45,3 +45,22 @@
 - `npx vitest run --config vitest.db.config.ts supabase/tests/overrideBlock.test.ts` → 10/10 ناجح (موظف/مشرف/مدير/أونر × داخل/خارج/بعد السماح × دخول/انصراف، مدير موقع آخر، مشرف بصلاحية ممنوحة بدون إدارة الموقع، ضابط السياسة وتدقيقه).
 - `npm run lint` نظيف · `npm run check:i18n` 1276 مفتاح في 5 لغات · `npm test` 85/85 · `npm run test:db` 41 ملف / 170 اختبار ناجح · `npm run build` ناجح.
 - **لم يُختبر:** التطبيق على قاعدة Supabase الحية (`supabase db push` مرفوض من مصنّف الصلاحيات — B-01).
+
+---
+
+## الخطوة 2 — بند 11: الجلسات المفتوحة
+
+**الخطة:**
+1. إعدادات منظمة `open_session_alert_hours`(12) و`open_session_max_hours`(24) و`open_session_policy_since`؛ أعمدة جلسة: `long_session_alerted_at`, `still_working_at`, `last_activity_at`, `extended_until`, `auto_closed`, `hours_review_status` (none/pending/reviewed).
+2. وظيفة cron كل 15 دقيقة `process_prosm_time_open_sessions` (بدل وظيفة الـ 6 ساعات اللي كانت بتكرر الإشعار): تنبيه مرة واحدة، إغلاق تلقائي عند آخر نشاط بساعات معلّقة + audit.
+3. RPCs: `respond_prosm_time_long_session`, `touch_prosm_time_session_activity`, `extend_prosm_time_session`, `review_prosm_time_pending_session`, `list_prosm_time_pending_sessions`, `list_prosm_time_stale_open_sessions`, `set_prosm_time_session_policy`, `log_prosm_time_offline_discard`؛ صلاحيات `sessions.review_pending` و`settings.session_policy`.
+4. استبعاد المعلّق والمفتوح من: `generate_prosm_time_timesheet`، `get_prosm_time_dashboard_summary`، `list_prosm_time_report_site_summary` (وإصلاح تكرار الساعات فيه)، وتعبئة البدلات التلقائية.
+5. الواجهة: `LongSessionPrompt` في كارت الحضور، `PendingHoursCard` في لوحة المدير، `SessionPolicySettingsCard` في الإعدادات، تسجيل «تجاهل» الأوفلاين، ترجمة وتوجيه نوعي الإشعار الجديدين (الواجهة والـ push).
+
+**اكتشافات أثناء التنفيذ:**
+- `generate_prosm_time_timesheet` كان بيحسب الجلسة المفتوحة لحد `now()` — ده سبب الـ 100 ساعة أسبوعياً. اتصلح.
+- `list_prosm_time_report_site_summary` كان بيضرب ساعات كل جلسة في عدد أحداثها (join مع events). اتصلح.
+- وظيفة cron القديمة كانت بتبعت نفس الإشعار كل 6 ساعات لكل جلسة > 12 ساعة. اتشالت، والمكرر القديم اتمسح.
+
+**الاختبارات (فعلية):** `supabase/tests/openSessions.test.ts` 10/10 (تنبيه مرة واحدة، «لسه شغال»، إغلاق عند آخر نشاط، استبعاد من الكشف، مراجعة بصلاحية ونطاق وسبب، التمديد، الجلسات القديمة تُعرض ولا تُغلق، الإعداد وتدقيقه، تسجيل التجاهل) · `freshDatabase` ناجح · `npm run lint` نظيف · `check:i18n` 1311 مفتاح · `npm test` 85/85 · `npm run build` ناجح.
+**لم يُختبر:** الـ cron الفعلي على Supabase، الـ push الحقيقي على جهاز (يحتاج نشر `send-push`)، والتطبيق على القاعدة الحية (B-01).

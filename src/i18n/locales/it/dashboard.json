@@ -257,5 +257,12 @@
     "clockInBody": "Timbra in PROSM Time quando arrivi.",
     "clockOutTitle": "Non dimenticare di timbrare l'uscita",
     "clockOutBody": "Timbra l'uscita in PROSM Time prima di andare."
+  },
+  "longSession": {
+    "title": "Stai ancora lavorando?",
+    "body": "Sei in servizio da {{hours}} ore.",
+    "stillWorking": "Sto ancora lavorando",
+    "clockOut": "Registra la mia uscita",
+    "error": "Impossibile salvare la risposta."
   }
 }

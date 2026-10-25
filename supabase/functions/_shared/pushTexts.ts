@@ -99,6 +99,16 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "sheetSubmittedBody": "أرسل {{name}} بدلات {{days}} يوم ({{start}} - {{end}}).",
         "sheetApprovedBody": "تم اعتماد بدلاتك عن الفترة {{start}} - {{end}}.",
         "sheetRejectedBody": "تم رفض بدلاتك عن الفترة {{start}} - {{end}}. عدّلها وأرسلها مرة أخرى."
+      },
+      "longSessionCheck": {
+        "title": "لسه شغال؟",
+        "body": "مسجّل حضورك من {{hours}} ساعة. لسه شغال ولا تسجّل انصرافك؟"
+      },
+      "sessionAutoClosed": {
+        "titleEmployee": "اتقفلت جلستك تلقائياً",
+        "bodyEmployee": "اتقفلت جلستك بعد {{hours}} ساعة من غير انصراف. ساعاتها تنتظر مراجعة المدير.",
+        "titleManager": "جلسة اتقفلت تلقائياً",
+        "bodyManager": "جلسة {{name}} اتقفلت بعد {{hours}} ساعة من غير انصراف. راجع ساعاتها."
       }
     },
     "leaveTypes": {
@@ -206,6 +216,16 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "sheetSubmittedBody": "{{name}} sent allowances for {{days}} days ({{start}} - {{end}}).",
         "sheetApprovedBody": "Your allowances for {{start}} - {{end}} were approved.",
         "sheetRejectedBody": "Your allowances for {{start}} - {{end}} were rejected. Fix them and send them again."
+      },
+      "longSessionCheck": {
+        "title": "Still working?",
+        "body": "You have been clocked in for {{hours}} hours. Still working, or clock out?"
+      },
+      "sessionAutoClosed": {
+        "titleEmployee": "Your shift was closed automatically",
+        "bodyEmployee": "Your shift was closed after {{hours}} hours with no clock-out. Its hours wait for your manager's review.",
+        "titleManager": "A shift was closed automatically",
+        "bodyManager": "{{name}}'s shift was closed after {{hours}} hours with no clock-out. Review its hours."
       }
     },
     "leaveTypes": {
@@ -313,6 +333,16 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "sheetSubmittedBody": "{{name}} hat Zulagen für {{days}} Tage gesendet ({{start}} - {{end}}).",
         "sheetApprovedBody": "Ihre Zulagen für {{start}} - {{end}} wurden genehmigt.",
         "sheetRejectedBody": "Ihre Zulagen für {{start}} - {{end}} wurden abgelehnt. Korrigieren und erneut senden."
+      },
+      "longSessionCheck": {
+        "title": "Noch bei der Arbeit?",
+        "body": "Sie sind seit {{hours}} Stunden eingestempelt. Noch bei der Arbeit oder ausstempeln?"
+      },
+      "sessionAutoClosed": {
+        "titleEmployee": "Ihre Schicht wurde automatisch geschlossen",
+        "bodyEmployee": "Ihre Schicht wurde nach {{hours}} Stunden ohne Ausstempeln geschlossen. Die Stunden warten auf die Prüfung.",
+        "titleManager": "Eine Schicht wurde automatisch geschlossen",
+        "bodyManager": "Die Schicht von {{name}} wurde nach {{hours}} Stunden ohne Ausstempeln geschlossen. Bitte Stunden prüfen."
       }
     },
     "leaveTypes": {
@@ -420,6 +450,16 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "sheetSubmittedBody": "{{name}} a envoyé ses indemnités pour {{days}} jours ({{start}} - {{end}}).",
         "sheetApprovedBody": "Vos indemnités du {{start}} au {{end}} ont été approuvées.",
         "sheetRejectedBody": "Vos indemnités du {{start}} au {{end}} ont été refusées. Corrigez-les et renvoyez-les."
+      },
+      "longSessionCheck": {
+        "title": "Toujours au travail ?",
+        "body": "Vous êtes pointé depuis {{hours}} heures. Toujours au travail, ou pointer le départ ?"
+      },
+      "sessionAutoClosed": {
+        "titleEmployee": "Votre session a été fermée automatiquement",
+        "bodyEmployee": "Votre session a été fermée après {{hours}} heures sans départ. Ses heures attendent la vérification de votre responsable.",
+        "titleManager": "Une session a été fermée automatiquement",
+        "bodyManager": "La session de {{name}} a été fermée après {{hours}} heures sans départ. Vérifiez ses heures."
       }
     },
     "leaveTypes": {
@@ -527,6 +567,16 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "sheetSubmittedBody": "{{name}} ha inviato le indennità di {{days}} giorni ({{start}} - {{end}}).",
         "sheetApprovedBody": "Le tue indennità dal {{start}} al {{end}} sono state approvate.",
         "sheetRejectedBody": "Le tue indennità dal {{start}} al {{end}} sono state rifiutate. Correggile e inviale di nuovo."
+      },
+      "longSessionCheck": {
+        "title": "Stai ancora lavorando?",
+        "body": "Sei in servizio da {{hours}} ore. Stai ancora lavorando o registri l'uscita?"
+      },
+      "sessionAutoClosed": {
+        "titleEmployee": "Il tuo turno è stato chiuso automaticamente",
+        "bodyEmployee": "Il tuo turno è stato chiuso dopo {{hours}} ore senza uscita. Le ore attendono la verifica del responsabile.",
+        "titleManager": "Un turno è stato chiuso automaticamente",
+        "bodyManager": "Il turno di {{name}} è stato chiuso dopo {{hours}} ore senza uscita. Verifica le ore."
       }
     },
     "leaveTypes": {

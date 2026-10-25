@@ -257,5 +257,12 @@
     "clockInBody": "Stempeln Sie bei Ankunft in PROSM Time ein.",
     "clockOutTitle": "Ausstempeln nicht vergessen",
     "clockOutBody": "Stempeln Sie vor dem Gehen in PROSM Time aus."
+  },
+  "longSession": {
+    "title": "Noch bei der Arbeit?",
+    "body": "Sie sind seit {{hours}} Stunden eingestempelt.",
+    "stillWorking": "Noch bei der Arbeit",
+    "clockOut": "Mich ausstempeln",
+    "error": "Ihre Antwort konnte nicht gespeichert werden."
   }
 }

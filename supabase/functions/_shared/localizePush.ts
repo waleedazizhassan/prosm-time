@@ -152,6 +152,15 @@ export function localizePush(type: string, data: Data, language: string, fallbac
       if (str(data.employeeName) && num(data.hoursSinceClockIn) !== null)
         result = pair("missingClockOut.title", "missingClockOut.body", { name: data.employeeName, hours: data.hoursSinceClockIn });
       break;
+    case "long_session_check":
+      if (num(data.hoursSinceClockIn) !== null) result = pair("longSessionCheck.title", "longSessionCheck.body", { hours: data.hoursSinceClockIn });
+      break;
+    case "session_auto_closed":
+      if (num(data.maxHours) === null) break;
+      result = str(data.employeeName)
+        ? pair("sessionAutoClosed.titleManager", "sessionAutoClosed.bodyManager", { name: data.employeeName, hours: data.maxHours })
+        : pair("sessionAutoClosed.titleEmployee", "sessionAutoClosed.bodyEmployee", { hours: data.maxHours });
+      break;
     case "location_plausibility_flag":
       if (str(data.employeeName) && num(data.impliedSpeedKmh) !== null)
         result = pair("locationPlausibilityFlag.title", "locationPlausibilityFlag.body", { name: data.employeeName, speed: data.impliedSpeedKmh });

@@ -98,5 +98,24 @@
     "revokeEmpty": "Aucun congé approuvé à venir à révoquer.",
     "revokeAction": "Révoquer",
     "revokeReasonLabel": "Motif (obligatoire)"
+  },
+  "pendingHours": {
+    "title_one": "Heures à vérifier ({{count}})",
+    "title_other": "Heures à vérifier ({{count}})",
+    "hint": "Ces sessions ont été fermées automatiquement faute de pointage de départ. Leurs heures ne comptent nulle part tant que vous n'avez pas fixé la vraie fin.",
+    "loadError": "Impossible de charger les sessions à vérifier.",
+    "summary": "Arrivée {{clockIn}} · fermée automatiquement {{clockOut}}",
+    "reviewAction": "Fixer la fin",
+    "modalTitle": "Fixer la fin de la session",
+    "modalBody": "Arrivée {{clockIn}}. Dernière activité : {{lastActivity}}.",
+    "clockOutLabel": "Heure de départ réelle",
+    "reasonLabel": "Motif (obligatoire)",
+    "reasonRequired": "Indiquez le motif.",
+    "invalidTime": "Choisissez une heure valide.",
+    "genericError": "Enregistrement impossible.",
+    "save": "Enregistrer et compter les heures",
+    "staleTitle": "Anciennes sessions encore ouvertes",
+    "staleHint": "Ouvertes avant la fermeture automatique - non fermées automatiquement. Pointez le départ pour l'employé à la bonne heure.",
+    "staleSummary": "Ouverte depuis {{clockIn}} ({{hours}} h)"
   }
 }

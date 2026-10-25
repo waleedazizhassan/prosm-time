@@ -178,6 +178,20 @@ export default function localizeNotification(notification: AppNotification, t: T
       if (!name || hours === null) break;
       return { title: t("shell:notifications.missingClockOut.title"), body: t("shell:notifications.missingClockOut.body", { name, hours }) };
     }
+    // v2.3.43 step 2: the long-shift question, and a shift closed automatically.
+    case "long_session_check": {
+      const hours = typeof data.hoursSinceClockIn === "number" ? data.hoursSinceClockIn : null;
+      if (hours === null) break;
+      return { title: t("shell:notifications.longSessionCheck.title"), body: t("shell:notifications.longSessionCheck.body", { hours }) };
+    }
+    case "session_auto_closed": {
+      const hours = typeof data.maxHours === "number" ? data.maxHours : null;
+      if (hours === null) break;
+      const name = typeof data.employeeName === "string" ? data.employeeName : null;
+      return name
+        ? { title: t("shell:notifications.sessionAutoClosed.titleManager"), body: t("shell:notifications.sessionAutoClosed.bodyManager", { name, hours }) }
+        : { title: t("shell:notifications.sessionAutoClosed.titleEmployee"), body: t("shell:notifications.sessionAutoClosed.bodyEmployee", { hours }) };
+    }
     case "location_plausibility_flag": {
       const name = typeof data.employeeName === "string" ? data.employeeName : null;
       const speed = typeof data.impliedSpeedKmh === "number" ? data.impliedSpeedKmh : null;

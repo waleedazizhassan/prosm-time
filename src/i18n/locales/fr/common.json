@@ -36,7 +36,7 @@
     "allowancesApproveAuthorityRequired": "Vous n'avez pas l'autorité pour approuver les indemnités de cet employé.",
     "attendanceEventNotFound": "Cet événement de présence est introuvable.",
     "attendanceNotAllowedAtSite": "La présence n'est pas autorisée sur ce site.",
-    "attendanceSessionNotFound": "Cette session de présence est introuvable.",
+    "attendanceSessionNotFound": "Session introuvable.",
     "orphanedPresenceSession": "Votre session de travail précédente n'a pas été entièrement clôturée. Réessayez de pointer votre arrivée - si le problème persiste, contactez votre responsable.",
     "clockInOnBehalfAuthorityRequired": "Vous n'avez pas l'autorité pour pointer l'arrivée de cet employé.",
     "clockOutOnBehalfAuthorityRequired": "Vous n'avez pas l'autorité pour pointer le départ de cet employé.",
@@ -205,7 +205,18 @@
     "sheetNotWaiting": "Cette feuille a déjà été traitée.",
     "leaveOverlapsAttendance": "Ce congé ne peut pas être approuvé : l'employé a pointé ces jours-là. Refusez-le ou demandez-lui de ne poser que les autres jours.",
     "leaveRequestOverlapsAttendance": "Vous avez pointé certains de ces jours - ne demandez que les autres jours.",
-    "workerHasAttendance": "Cet ouvrier a déjà des présences et ne peut pas être supprimé - arrêtez-le plutôt."
+    "workerHasAttendance": "Cet ouvrier a déjà des présences et ne peut pas être supprimé - arrêtez-le plutôt.",
+    "invalidOutsideZonePolicy": "Choisissez une règle valide hors zone.",
+    "reasonRequired": "Un motif est obligatoire.",
+    "sessionsReviewPendingRequired": "Vous n'avez pas le droit de vérifier les heures en attente.",
+    "cannotReviewOwnShift": "Vous ne pouvez pas vérifier votre propre session.",
+    "shiftNotPendingReview": "Cette session n'attend plus de vérification.",
+    "invalidClockOutTime": "L'heure de départ doit suivre l'arrivée et ne pas être future.",
+    "timesheetPeriodApproved": "La feuille de temps de cette période est déjà approuvée.",
+    "sessionPolicyRequired": "Vous n'avez pas le droit de modifier cette règle.",
+    "invalidOpenShiftHours": "L'alerte doit précéder la fermeture (1 à 72 heures).",
+    "shiftNotOpen": "Cette session n'est plus ouverte.",
+    "invalidExtensionTime": "Choisissez une heure future, dans les 72 heures après l'arrivée."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

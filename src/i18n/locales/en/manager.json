@@ -98,5 +98,24 @@
     "revokeEmpty": "No approved upcoming leave to revoke.",
     "revokeAction": "Revoke",
     "revokeReasonLabel": "Reason (required)"
+  },
+  "pendingHours": {
+    "title_one": "Hours waiting for review ({{count}})",
+    "title_other": "Hours waiting for review ({{count}})",
+    "hint": "These shifts were closed automatically because nobody clocked out. Their hours count nowhere (timesheet, totals, allowances, overtime, cost) until you set the real end.",
+    "loadError": "Could not load the shifts waiting for review.",
+    "summary": "In {{clockIn}} · closed automatically at {{clockOut}}",
+    "reviewAction": "Set the end",
+    "modalTitle": "Set the end of the shift",
+    "modalBody": "Clocked in {{clockIn}}. Last activity seen: {{lastActivity}}.",
+    "clockOutLabel": "Real clock-out time",
+    "reasonLabel": "Reason (required)",
+    "reasonRequired": "Write the reason.",
+    "invalidTime": "Choose a valid time.",
+    "genericError": "Could not save.",
+    "save": "Save and count the hours",
+    "staleTitle": "Old shifts still open",
+    "staleHint": "Opened before the automatic close existed - not closed automatically. Clock the employee out on their behalf with the right time.",
+    "staleSummary": "Open since {{clockIn}} ({{hours}} h)"
   }
 }

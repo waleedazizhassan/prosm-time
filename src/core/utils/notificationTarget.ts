@@ -32,6 +32,12 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
     case "out_of_zone_manager":
     case "missing_clock_out":
       return "/manager";
+    // v2.3.43 step 2: the manager reviews an automatically closed shift on the
+    // Manager Console; the employee answers "still working?" on the dashboard.
+    case "session_auto_closed":
+      return viewer.isOwner || ref?.kind === "manager" ? "/manager" : "/dashboard";
+    case "long_session_check":
+      return "/dashboard";
     // The employee's exceptions card lives on the dashboard.
     case "correction_reviewed":
       return isLeave ? "/leave" : "/dashboard";
