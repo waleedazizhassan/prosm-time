@@ -68,7 +68,14 @@
       "hoursOpen": "Hours open",
       "status": "Status",
       "stillOpen": "Still open",
-      "eventuallyClosed": "Eventually closed"
+      "eventuallyClosed": "Eventually closed",
+      "states": {
+        "open": "Still open",
+        "pending_review": "Closed automatically, awaiting review (not counted)",
+        "reviewed": "Reviewed by the manager",
+        "auto_closed": "Closed automatically",
+        "closed": "Eventually closed"
+      }
     },
     "leaveConflicts": {
       "name": "Employee",
@@ -138,7 +145,24 @@
     "overrideAction": {
       "ADMIN_CLOCK_IN_ON_BEHALF": "Clocked in on behalf",
       "ADMIN_CLOCK_OUT_ON_BEHALF": "Clocked out on behalf",
-      "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "Clocked out contractor on behalf"
+      "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "Clocked out contractor on behalf",
+      "attendance": {
+        "override_block": "Clock-in block overridden",
+        "review_pending_hours": "Pending hours reviewed",
+        "extend_session": "Session extended",
+        "overtime_approved": "Overtime approved",
+        "day_adjusted": "Day adjusted",
+        "permission_granted": "Permission added by the manager"
+      },
+      "allowances": {
+        "edit_during_review": "Allowance edited during review",
+        "reopen_approved": "Approved allowance sheet reopened"
+      },
+      "leave": {
+        "approved_cancelled": "Approved leave cancelled",
+        "deduction_set": "Leave deduction set",
+        "deduction_changed": "Leave deduction changed"
+      }
     }
   },
   "recentExports": {

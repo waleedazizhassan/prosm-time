@@ -68,7 +68,14 @@
       "hoursOpen": "Heures ouvertes",
       "status": "Statut",
       "stillOpen": "Toujours ouvert",
-      "eventuallyClosed": "Finalement fermé"
+      "eventuallyClosed": "Finalement fermé",
+      "states": {
+        "open": "Toujours ouverte",
+        "pending_review": "Fermée automatiquement, en attente (non comptée)",
+        "reviewed": "Revue par le responsable",
+        "auto_closed": "Fermée automatiquement",
+        "closed": "Fermée plus tard"
+      }
     },
     "leaveConflicts": {
       "name": "Employé",
@@ -138,7 +145,24 @@
     "overrideAction": {
       "ADMIN_CLOCK_IN_ON_BEHALF": "Pointage d'arrivée au nom de",
       "ADMIN_CLOCK_OUT_ON_BEHALF": "Pointage de départ au nom de",
-      "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "Pointage de départ d'un sous-traitant au nom de"
+      "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "Pointage de départ d'un sous-traitant au nom de",
+      "attendance": {
+        "override_block": "Blocage de pointage levé",
+        "review_pending_hours": "Heures en attente revues",
+        "extend_session": "Session prolongée",
+        "overtime_approved": "Heures sup. approuvées",
+        "day_adjusted": "Journée ajustée",
+        "permission_granted": "Autorisation ajoutée par le responsable"
+      },
+      "allowances": {
+        "edit_during_review": "Indemnité modifiée en revue",
+        "reopen_approved": "Fiche d'indemnités approuvée rouverte"
+      },
+      "leave": {
+        "approved_cancelled": "Congé approuvé annulé",
+        "deduction_set": "Retenue de congé fixée",
+        "deduction_changed": "Retenue de congé modifiée"
+      }
     }
   },
   "recentExports": {

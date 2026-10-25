@@ -20,6 +20,7 @@
 | `20261025210000_exit_site_checkout.sql` | 12 (بند 24) | صلاحية `sites.manage_exit_policy`؛ أعمدة السياسة والميداني؛ أعمدة الخروج على `presence_sessions`؛ نوعا إشعار؛ تتبع الخروج والانصراف التلقائي؛ cron `prosm-time-site-exits` كل 5 دقائق؛ الرد والإعدادات. |
 | `20261025230000_people_directory.sql` | 14-15 (بند 17/18) | `roles.sort_order`؛ `list_prosm_time_people_directory()`. **لم تُطبَّق بعد.** |
 | `20261025240000_manager_dashboard.sql` | 17 (بند 5/4) | 6 صلاحيات (`dashboard.view`, `payroll.view_cost`, `external_labor.view`, `audit.view`, `sos.acknowledge`, `reports.export`)؛ `dashboard_preferences` (+RLS) و`save_prosm_time_dashboard_layout`؛ `get_prosm_time_manager_dashboard`؛ `resolve_prosm_time_sos_alert` يقبل `sos.acknowledge`. **لم تُطبَّق بعد.** |
+| `20261025250000_report_exports_accuracy.sql` | 18 (بند 16) | `list_prosm_time_report_missing_checkouts` (عمود `review_state`، يُحذف ويُعاد إنشاؤه)؛ `list_prosm_time_report_absences` (أيام العمل فقط وبيوم الموقع)؛ `list_prosm_time_report_manager_overrides` (الإجراءات الجديدة). **لم تُطبَّق بعد.** |
 
 ## Edge Functions تحتاج إعادة نشر
 - `send-push` (الخطوتان 2 و6): نصوص الإشعارين الجديدين (`_shared/pushTexts.ts`, `_shared/localizePush.ts`) وحقل `kind` في بيانات الإشعار — `npx supabase functions deploy send-push`.

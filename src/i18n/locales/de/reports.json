@@ -68,7 +68,14 @@
       "hoursOpen": "Offene Stunden",
       "status": "Status",
       "stillOpen": "Noch offen",
-      "eventuallyClosed": "Später geschlossen"
+      "eventuallyClosed": "Später geschlossen",
+      "states": {
+        "open": "Noch offen",
+        "pending_review": "Automatisch beendet, in Prüfung (nicht gezählt)",
+        "reviewed": "Vom Vorgesetzten geprüft",
+        "auto_closed": "Automatisch beendet",
+        "closed": "Später beendet"
+      }
     },
     "leaveConflicts": {
       "name": "Mitarbeiter",
@@ -138,7 +145,24 @@
     "overrideAction": {
       "ADMIN_CLOCK_IN_ON_BEHALF": "Im Auftrag eingestempelt",
       "ADMIN_CLOCK_OUT_ON_BEHALF": "Im Auftrag ausgestempelt",
-      "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "Subunternehmer im Auftrag ausgestempelt"
+      "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "Subunternehmer im Auftrag ausgestempelt",
+      "attendance": {
+        "override_block": "Erfassungssperre aufgehoben",
+        "review_pending_hours": "Offene Stunden geprüft",
+        "extend_session": "Sitzung verlängert",
+        "overtime_approved": "Überstunden genehmigt",
+        "day_adjusted": "Tag angepasst",
+        "permission_granted": "Freigabe vom Vorgesetzten erteilt"
+      },
+      "allowances": {
+        "edit_during_review": "Zulage in Prüfung geändert",
+        "reopen_approved": "Genehmigtes Zulagenblatt wieder geöffnet"
+      },
+      "leave": {
+        "approved_cancelled": "Genehmigter Urlaub storniert",
+        "deduction_set": "Urlaubsabzug festgelegt",
+        "deduction_changed": "Urlaubsabzug geändert"
+      }
     }
   },
   "recentExports": {

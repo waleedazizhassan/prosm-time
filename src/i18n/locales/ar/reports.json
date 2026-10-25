@@ -68,7 +68,14 @@
       "hoursOpen": "الساعات المفتوحة",
       "status": "الحالة",
       "stillOpen": "ما زالت مفتوحة",
-      "eventuallyClosed": "أُغلقت لاحقًا"
+      "eventuallyClosed": "أُغلقت لاحقًا",
+      "states": {
+        "open": "ما زالت مفتوحة",
+        "pending_review": "أُغلقت تلقائيًا، بانتظار المراجعة (غير محسوبة)",
+        "reviewed": "راجعها المدير",
+        "auto_closed": "أُغلقت تلقائيًا",
+        "closed": "أُغلقت لاحقًا"
+      }
     },
     "leaveConflicts": {
       "name": "الموظف",
@@ -138,7 +145,24 @@
     "overrideAction": {
       "ADMIN_CLOCK_IN_ON_BEHALF": "تسجيل حضور بالنيابة",
       "ADMIN_CLOCK_OUT_ON_BEHALF": "تسجيل انصراف بالنيابة",
-      "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "تسجيل انصراف عامل مؤقت بالنيابة"
+      "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "تسجيل انصراف عامل مؤقت بالنيابة",
+      "attendance": {
+        "override_block": "تجاوز منع التسجيل",
+        "review_pending_hours": "مراجعة ساعات معلّقة",
+        "extend_session": "تمديد جلسة",
+        "overtime_approved": "اعتماد إضافي",
+        "day_adjusted": "تعديل يوم",
+        "permission_granted": "إذن أضافه المدير"
+      },
+      "allowances": {
+        "edit_during_review": "تعديل بدل أثناء المراجعة",
+        "reopen_approved": "إعادة فتح كشف بدلات معتمد"
+      },
+      "leave": {
+        "approved_cancelled": "إلغاء إجازة معتمدة",
+        "deduction_set": "تحديد خصم إجازة",
+        "deduction_changed": "تعديل خصم إجازة"
+      }
     }
   },
   "recentExports": {

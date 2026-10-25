@@ -28,9 +28,37 @@ export default async function saveGeneratedFile(filename: string, blob: Blob): P
     return;
   }
 
-  const base64 = await blobToBase64(blob);
-  const written = await Filesystem.writeFile({ path: filename, data: base64, directory: Directory.Cache });
-  await Share.share({ title: filename, url: written.uri });
+  // v2.3.43 step 18 (item 16): a long report can be tens of MB - written in
+  // pieces so no single base64 string crosses the native bridge whole (one
+  // huge string ran phones out of memory).
+  const ranges = chunkRanges(blob.size, WRITE_CHUNK_BYTES);
+  let uri = "";
+  for (const [index, [start, end]] of ranges.entries()) {
+    const data = await blobToBase64(blob.slice(start, end));
+    if (index === 0) uri = (await Filesystem.writeFile({ path: filename, data, directory: Directory.Cache })).uri;
+    else await Filesystem.appendFile({ path: filename, data, directory: Directory.Cache });
+  }
+  try {
+    await Share.share({ title: filename, url: uri });
+  } catch (error) {
+    // Closing the share sheet without choosing an app is not a failure.
+    if (!isShareCancel(error)) throw error;
+  }
+}
+
+// A multiple of 3 so each piece is whole base64 (no padding mid-file).
+const WRITE_CHUNK_BYTES = 3 * 1024 * 1024;
+
+export function chunkRanges(size: number, chunk: number): [number, number][] {
+  if (size <= 0) return [[0, 0]];
+  const ranges: [number, number][] = [];
+  for (let start = 0; start < size; start += chunk) ranges.push([start, Math.min(size, start + chunk)]);
+  return ranges;
+}
+
+export function isShareCancel(error: unknown): boolean {
+  const message = error instanceof Error ? error.message : String(error ?? "");
+  return /cancel/i.test(message);
 }
 
 function blobToBase64(blob: Blob): Promise<string> {

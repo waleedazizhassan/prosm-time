@@ -233,7 +233,7 @@ export default function ReportsPage() {
             row.siteName,
             `${formatDateOnly(row.clockInAt, locale)} ${formatTimeOnly(row.clockInAt, locale)}`,
             String(row.hoursOpen),
-            row.stillOpen ? t("columns.missingCheckouts.stillOpen") : t("columns.missingCheckouts.eventuallyClosed"),
+            t(`columns.missingCheckouts.states.${row.reviewState}`),
           ],
           employeeName: row.userFullName,
           siteName: row.siteName,

@@ -161,7 +161,15 @@
     "noSite": "Nessuna sede",
     "employeeSignature": "Firma del dipendente",
     "projectManager": "Capo progetto",
-    "accounts": "Contabilità"
+    "accounts": "Contabilità",
+    "editsTitle": "Modificato dal responsabile in revisione",
+    "line": "Voce",
+    "before": "Prima",
+    "after": "Dopo",
+    "reason": "Motivo",
+    "deductionsTitle": "Trattenute per ferie non retribuite",
+    "deductionsNote": "Trattenute dalla paga, non dalle indennità sopra.",
+    "amount": "Importo"
   },
   "sheets": {
     "title": "Fogli indennità da approvare",

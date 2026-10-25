@@ -161,7 +161,15 @@
     "noSite": "بدون موقع",
     "employeeSignature": "توقيع الموظف",
     "projectManager": "مدير المشروع",
-    "accounts": "الحسابات"
+    "accounts": "الحسابات",
+    "editsTitle": "عُدّلت بواسطة المدير أثناء المراجعة",
+    "line": "البند",
+    "before": "قبل",
+    "after": "بعد",
+    "reason": "السبب",
+    "deductionsTitle": "خصومات الإجازة بدون أجر",
+    "deductionsNote": "تُخصم من الراتب، وليس من البدلات أعلاه.",
+    "amount": "المبلغ"
   },
   "sheets": {
     "title": "كشوف بدلات بانتظار اعتمادك",

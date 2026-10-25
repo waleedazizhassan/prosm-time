@@ -161,7 +161,15 @@
     "noSite": "No site",
     "employeeSignature": "Employee's signature",
     "projectManager": "Project manager",
-    "accounts": "Accounts"
+    "accounts": "Accounts",
+    "editsTitle": "Changed by the manager during review",
+    "line": "Item",
+    "before": "Before",
+    "after": "After",
+    "reason": "Reason",
+    "deductionsTitle": "Unpaid leave deductions",
+    "deductionsNote": "Taken from pay, not from the allowances above.",
+    "amount": "Amount"
   },
   "sheets": {
     "title": "Allowance sheets waiting for you",

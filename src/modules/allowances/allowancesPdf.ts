@@ -1,5 +1,5 @@
 import type { jsPDF } from "jspdf";
-import type { AllowanceEntry } from "../../core/repositories/AllowanceRepository";
+import type { AllowanceEntry, AllowanceLine } from "../../core/repositories/AllowanceRepository";
 import { formatTimeOnly } from "../../core/utils/formatDate";
 import { renderHtmlToPdf, escapeHtml } from "../../core/utils/htmlToPdf";
 import prosmLogo from "../../assets/prosm-logo-pdf.png";
@@ -13,6 +13,10 @@ export interface SheetContext {
   t: TFunc;
   organizationName: string;
   organizationLogoUrl?: string | null;
+  // v2.3.43 step 18 (item 16): public holidays in the period, and the
+  // person's unpaid-leave deductions (taken from pay, not from allowances).
+  holidays?: { name: string; startDate: string; endDate: string }[];
+  deductions?: { workDate: string; amount: number; currency: string }[];
 }
 
 // Owner 2026-10-20 ("the allowance sheet should look like this when I export
@@ -113,24 +117,28 @@ export function buildEmployeeAllowanceSheetPdf(entries: AllowanceEntry[], employ
     .map((iso) => {
       const entry = byDay.get(iso);
       const weekday = new Date(`${iso}T00:00:00`).toLocaleDateString(languageCode, { weekday: "long" });
-      const shade = entry ? "" : "background:#f1f5f9;";
+      const holiday = holidayOn(ctx, iso);
+      const shade = holiday ? "background:#fef9c3;" : entry ? "" : "background:#f1f5f9;";
+      // a value the manager changed during review carries a mark (step 5)
+      const edited = (line: AllowanceLine, text: string) => (entry?.manualOverrides[line] ? `${text}${EDIT_MARK}` : text);
       const values = entry
         ? [
             entry.clockInAt ? escapeHtml(formatTimeOnly(entry.clockInAt, languageCode)) : "",
             entry.clockOutAt ? escapeHtml(formatTimeOnly(entry.clockOutAt, languageCode)) : "",
             escapeHtml(entry.siteName ?? ""),
-            entry.overtimeDays ? String(entry.overtimeDays) : "",
-            money(entry.expatriationAllowance, languageCode),
-            money(entry.transportationAllowance, languageCode),
-            money(entry.travelAllowance, languageCode),
-            money(entry.mealAllowance, languageCode),
-            ...(showHousing ? [money(entry.housingAllowance, languageCode)] : []),
-            ...(showOther ? [money(entry.otherAllowance, languageCode)] : []),
-            entry.overtimeHours ? String(Number(entry.overtimeHours.toFixed(2))) : "",
+            edited("extraDays", entry.overtimeDays ? String(entry.overtimeDays) : ""),
+            edited("expatriation", money(entry.expatriationAllowance, languageCode)),
+            edited("transportation", money(entry.transportationAllowance, languageCode)),
+            edited("travel", money(entry.travelAllowance, languageCode)),
+            edited("meal", money(entry.mealAllowance, languageCode)),
+            ...(showHousing ? [edited("housing", money(entry.housingAllowance, languageCode))] : []),
+            ...(showOther ? [edited("other", money(entry.otherAllowance, languageCode))] : []),
+            edited("overtime", entry.overtimeHours ? String(Number(entry.overtimeHours.toFixed(2))) : ""),
             "",
           ]
         : Array.from({ length: columns.length - 2 }, () => "");
-      return `<tr>${cell(escapeHtml(weekday), shade + "text-align:start;")}${cell(shortDate(iso), shade)}${values.map((value) => cell(value, shade)).join("")}</tr>`;
+      const dayLabel = holiday ? `${escapeHtml(weekday)}<div style="font-size:9px;color:#854d0e;">${escapeHtml(holiday)}</div>` : escapeHtml(weekday);
+      return `<tr>${cell(dayLabel, shade + "text-align:start;")}${cell(shortDate(iso), shade)}${values.map((value) => cell(value, shade)).join("")}</tr>`;
     })
     .join("");
 
@@ -221,9 +229,55 @@ export function buildEmployeeAllowanceSheetPdf(entries: AllowanceEntry[], employ
           .join("")}
       </tbody>
     </table>
+    ${sheetNotes(entries, ctx)}
     ${footer(ctx)}
   `;
   return renderHtmlToPdf(container);
+}
+
+const EDIT_MARK = `<sup style="color:#b45309;font-weight:800;">*</sup>`;
+
+function holidayOn(ctx: SheetContext, iso: string): string | null {
+  return ctx.holidays?.find((holiday) => iso >= holiday.startDate && iso <= holiday.endDate)?.name ?? null;
+}
+
+// The changes made during review (each with the value it replaced and the
+// reason) and the unpaid-leave deductions, under the sheet.
+function sheetNotes(entries: AllowanceEntry[], ctx: SheetContext): string {
+  const { t, languageCode } = ctx;
+  const edits = entries.flatMap((entry) =>
+    Object.entries(entry.manualOverrides).map(([line, change]) => ({ date: entry.entryDate, line, ...change })),
+  );
+  const deductions = ctx.deductions ?? [];
+  if (edits.length === 0 && deductions.length === 0) return "";
+  const editRows = edits
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .map((edit) => `<tr>${cell(shortDate(edit.date))}${cell(escapeHtml(t(`sheetEdit.line.${edit.line}`)))}${cell(moneyAlways(edit.original, languageCode))}${cell(moneyAlways(edit.value, languageCode))}${cell(escapeHtml(edit.reason ?? "—"), "text-align:start;")}</tr>`)
+    .join("");
+  const deductionTotal = deductions.reduce((sum, row) => sum + row.amount, 0);
+  return `
+    ${
+      edits.length
+        ? `<div style="margin-top:16px;font-size:12px;font-weight:800;">${EDIT_MARK} ${escapeHtml(t("sheet.editsTitle"))}</div>
+    <table style="width:100%;margin-top:6px;border-collapse:collapse;font-size:10.5px;">
+      <thead><tr>${[t("sheet.date"), t("sheet.line"), t("sheet.before"), t("sheet.after"), t("sheet.reason")].map(head).join("")}</tr></thead>
+      <tbody>${editRows}</tbody>
+    </table>`
+        : ""
+    }
+    ${
+      deductions.length
+        ? `<div style="margin-top:14px;font-size:12px;font-weight:800;">${escapeHtml(t("sheet.deductionsTitle"))}</div>
+    <div style="font-size:10.5px;color:#475569;margin-top:2px;">${escapeHtml(t("sheet.deductionsNote"))}</div>
+    <table style="width:60%;margin-top:6px;border-collapse:collapse;font-size:10.5px;">
+      <thead><tr>${[t("sheet.date"), t("sheet.amount")].map(head).join("")}</tr></thead>
+      <tbody>
+        ${deductions.map((row) => `<tr>${cell(shortDate(row.workDate))}${cell(`${moneyAlways(row.amount, languageCode)} ${escapeHtml(row.currency)}`)}</tr>`).join("")}
+        <tr style="font-weight:800;">${cell(escapeHtml(t("sheet.total")))}${cell(`${moneyAlways(deductionTotal, languageCode)} ${escapeHtml(deductions[0].currency)}`)}</tr>
+      </tbody>
+    </table>`
+        : ""
+    }`;
 }
 
 /** A manager's combined sheet: one line of totals per chosen employee. */

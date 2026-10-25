@@ -6,6 +6,8 @@ import { useAuth } from "../../core/context/AuthContext";
 import AllowanceRepository, { type AllowanceEntry, type AllowanceEntryInput, type AllowanceSheet } from "../../core/repositories/AllowanceRepository";
 import AllowanceRatesRepository, { RATE_FIELDS, type MySiteRates } from "../../core/repositories/AllowanceRatesRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
+import CalendarRepository from "../../core/repositories/CalendarRepository";
+import LeaveRepository from "../../core/repositories/LeaveRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import savePdfDocument, { exportFileName, printPdfDocument } from "../../core/utils/savePdfDocument";
 import ErrorText from "../../components/common/ErrorText";
@@ -336,7 +338,17 @@ export default function AllowancesPage() {
     setExportingPdf(true);
     try {
       const name = peopleInView[0] ?? profile?.fullName ?? "";
-      const doc = await buildEmployeeAllowanceSheetPdf(filteredEntries, name, sheetContext());
+      // step 18: the holidays of the period and the person's unpaid-leave deductions go on the sheet
+      const personId = filteredEntries[0]?.userId ?? profile?.id ?? null;
+      const [calendar, deductions] = await Promise.all([
+        CalendarRepository.getCalendar(startDate, endDate),
+        personId ? LeaveRepository.listPayrollAdjustments(personId, startDate, endDate) : Promise.resolve({ success: true, message: null, data: [] }),
+      ]);
+      const doc = await buildEmployeeAllowanceSheetPdf(filteredEntries, name, {
+        ...sheetContext(),
+        holidays: (calendar.data?.holidays ?? []).map((holiday) => ({ name: holiday.name, startDate: holiday.startDate, endDate: holiday.endDate })),
+        deductions: (deductions.data ?? []).filter((row) => row.amount > 0),
+      });
       const file = exportFileName(t("sheet.subtitle"), name, startDate, endDate);
       if (mode === "print") await printPdfDocument(doc, file);
       else await savePdfDocument(doc, file, "allowances", startDate, endDate);

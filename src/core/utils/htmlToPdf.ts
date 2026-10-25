@@ -19,6 +19,10 @@ import html2canvas from "html2canvas";
 // caller - this function owns wrapping it in a zero-size hidden host,
 // appending that host to the page, capturing, and removing it again
 // (even on failure).
+const PDF_SCALE = 1.4;
+// Tallest single capture, in canvas pixels: safe on Android WebViews too.
+const MAX_CAPTURE_PX = 12000;
+
 export async function renderHtmlToPdf(container: HTMLElement): Promise<jsPDF> {
   const wrapper = document.createElement("div");
   wrapper.style.cssText = "position:fixed;top:0;left:0;width:0;height:0;overflow:hidden;";
@@ -29,15 +33,15 @@ export async function renderHtmlToPdf(container: HTMLElement): Promise<jsPDF> {
     // Owner 2026-10-19 (reports review): a page ends between rows, never
     // through one - the bottoms of table rows and of the document's blocks,
     // measured before the capture, are the allowed places to break.
-    const top = container.getBoundingClientRect().top;
-    const cssHeight = container.getBoundingClientRect().height || 1;
+    const box = container.getBoundingClientRect();
+    const top = box.top;
+    const cssWidth = box.width || 1;
+    const cssHeight = box.height || 1;
     const bottoms = Array.from(container.querySelectorAll<HTMLElement>("tr, :scope > *, :scope > * > *")).map((el) => el.getBoundingClientRect().bottom - top);
     // The first table's header row is repeated at the top of each page the table continues onto.
     const thead = container.querySelector("thead");
     const headBox = thead?.getBoundingClientRect();
     const tableBox = thead?.closest("table")?.getBoundingClientRect();
-
-    const canvas = await html2canvas(container, { scale: 1.4, useCORS: true, backgroundColor: "#ffffff" });
 
     const doc = new jsPDF({ unit: "pt", format: "a4" });
     const marginX = 20;
@@ -47,34 +51,52 @@ export async function renderHtmlToPdf(container: HTMLElement): Promise<jsPDF> {
     const pageHeightPt = 841.89;
     const pageContentHeightPt = pageHeightPt - marginY * 2 - footerPt;
 
-    const pxPerPt = canvas.width / contentWidthPt;
-    const pageContentHeightPx = pageContentHeightPt * pxPerPt;
-    const cssToCanvas = canvas.height / cssHeight;
+    // Breaks are chosen in CSS pixels over the whole document.
+    const cssPerPt = cssWidth / contentWidthPt;
     const repeat: RepeatedHeader | undefined =
-      headBox && tableBox
-        ? { top: Math.round((headBox.top - top) * cssToCanvas), from: Math.round((headBox.bottom - top) * cssToCanvas), to: Math.round((tableBox.bottom - top) * cssToCanvas) }
-        : undefined;
-    const breaks = choosePageBreaks(canvas.height, pageContentHeightPx, bottoms.map((bottom) => bottom * cssToCanvas), repeat);
+      headBox && tableBox ? { top: Math.round(headBox.top - top), from: Math.round(headBox.bottom - top), to: Math.round(tableBox.bottom - top) } : undefined;
+    const breaks = choosePageBreaks(Math.ceil(cssHeight), pageContentHeightPt * cssPerPt, bottoms, repeat);
 
-    let renderedPx = 0;
+    // v2.3.43 step 18 (item 16): a long period with many people used to be
+    // one canvas tens of thousands of pixels tall - past what a browser (and
+    // far past what an Android WebView) can draw, so the PDF came out blank
+    // or failed. The document is now captured a few pages at a time, each
+    // capture well under those limits.
+    const capture = (y: number, height: number) => html2canvas(container, { scale: PDF_SCALE, useCORS: true, backgroundColor: "#ffffff", y, height });
+    const header = repeat ? await capture(repeat.top, repeat.from - repeat.top) : null;
+    const headerCssHeight = repeat ? repeat.from - repeat.top : 0;
+
+    let pageStart = 0;
     let firstPage = true;
-    for (const breakPx of breaks) {
-      const sliceHeightPx = breakPx - renderedPx;
-      const headPx = repeat && !firstPage && renderedPx >= repeat.from && renderedPx < repeat.to ? repeat.from - repeat.top : 0;
+    for (const group of groupPages(breaks, MAX_CAPTURE_PX / PDF_SCALE)) {
+      const chunk = await capture(group.from, group.to - group.from);
+      const canvasPerCss = chunk.height / (group.to - group.from);
+      for (const pageEnd of group.breaks) {
+        const sliceCss = pageEnd - pageStart;
+        const headCss = repeat && header && !firstPage && pageStart >= repeat.from && pageStart < repeat.to ? headerCssHeight : 0;
 
-      const sliceCanvas = document.createElement("canvas");
-      sliceCanvas.width = canvas.width;
-      sliceCanvas.height = headPx + sliceHeightPx;
-      const sliceCtx = sliceCanvas.getContext("2d");
-      if (!sliceCtx) break;
-      if (headPx > 0 && repeat) sliceCtx.drawImage(canvas, 0, repeat.top, canvas.width, headPx, 0, 0, canvas.width, headPx);
-      sliceCtx.drawImage(canvas, 0, renderedPx, canvas.width, sliceHeightPx, 0, headPx, canvas.width, sliceHeightPx);
+        const page = document.createElement("canvas");
+        page.width = chunk.width;
+        page.height = Math.max(1, Math.round((headCss + sliceCss) * canvasPerCss));
+        const ctx = page.getContext("2d");
+        if (!ctx) break;
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, page.width, page.height);
+        const headPx = Math.round(headCss * canvasPerCss);
+        if (headPx > 0 && header) ctx.drawImage(header, 0, 0, header.width, header.height, 0, 0, page.width, headPx);
+        ctx.drawImage(chunk, 0, Math.round((pageStart - group.from) * canvasPerCss), chunk.width, Math.round(sliceCss * canvasPerCss), 0, headPx, page.width, Math.round(sliceCss * canvasPerCss));
 
-      if (!firstPage) doc.addPage();
-      doc.addImage(sliceCanvas.toDataURL("image/jpeg", 0.92), "JPEG", marginX, marginY, contentWidthPt, (headPx + sliceHeightPx) / pxPerPt);
+        if (!firstPage) doc.addPage();
+        doc.addImage(page.toDataURL("image/jpeg", 0.85), "JPEG", marginX, marginY, contentWidthPt, (headCss + sliceCss) / cssPerPt);
+        // free the page's memory at once (long reports on phones)
+        page.width = 0;
+        page.height = 0;
 
-      renderedPx += sliceHeightPx;
-      firstPage = false;
+        pageStart = pageEnd;
+        firstPage = false;
+      }
+      chunk.width = 0;
+      chunk.height = 0;
     }
 
     // Page numbers ("2 / 5") at the foot of every page.
@@ -121,6 +143,27 @@ export function choosePageBreaks(totalPx: number, pagePx: number, candidatesPx: 
     start = end;
   }
   return breaks;
+}
+
+/**
+ * Consecutive pages captured together: as many as fit in `maxCss` CSS
+ * pixels (always at least one page, however tall).
+ */
+export function groupPages(breaks: number[], maxCss: number): { from: number; to: number; breaks: number[] }[] {
+  const groups: { from: number; to: number; breaks: number[] }[] = [];
+  let from = 0;
+  let current: number[] = [];
+  for (const end of breaks) {
+    if (current.length > 0 && end - from > maxCss) {
+      const to = current[current.length - 1];
+      groups.push({ from, to, breaks: current });
+      from = to;
+      current = [];
+    }
+    current.push(end);
+  }
+  if (current.length > 0) groups.push({ from, to: current[current.length - 1], breaks: current });
+  return groups;
 }
 
 export function escapeHtml(value: string): string {

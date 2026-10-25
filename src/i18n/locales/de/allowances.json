@@ -161,7 +161,15 @@
     "noSite": "Kein Standort",
     "employeeSignature": "Unterschrift Mitarbeiter",
     "projectManager": "Projektleitung",
-    "accounts": "Buchhaltung"
+    "accounts": "Buchhaltung",
+    "editsTitle": "Vom Vorgesetzten in der Prüfung geändert",
+    "line": "Posten",
+    "before": "Vorher",
+    "after": "Nachher",
+    "reason": "Grund",
+    "deductionsTitle": "Abzüge für unbezahlten Urlaub",
+    "deductionsNote": "Vom Lohn abgezogen, nicht von den Zulagen oben.",
+    "amount": "Betrag"
   },
   "sheets": {
     "title": "Zulagenblätter zur Freigabe",

@@ -161,7 +161,15 @@
     "noSite": "Sans site",
     "employeeSignature": "Signature de l'employé",
     "projectManager": "Chef de projet",
-    "accounts": "Comptabilité"
+    "accounts": "Comptabilité",
+    "editsTitle": "Modifié par le responsable pendant la revue",
+    "line": "Poste",
+    "before": "Avant",
+    "after": "Après",
+    "reason": "Motif",
+    "deductionsTitle": "Retenues pour congé sans solde",
+    "deductionsNote": "Retenues sur la paie, pas sur les indemnités ci-dessus.",
+    "amount": "Montant"
   },
   "sheets": {
     "title": "Feuilles d'indemnités à valider",

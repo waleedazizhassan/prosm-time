@@ -41,6 +41,8 @@ export interface LateRow {
   minutesLate: number;
 }
 
+export type MissingCheckoutState = "open" | "pending_review" | "reviewed" | "auto_closed" | "closed";
+
 export interface MissingCheckoutRow {
   sessionId: string;
   userFullName: string;
@@ -48,6 +50,7 @@ export interface MissingCheckoutRow {
   clockInAt: string;
   hoursOpen: number;
   stillOpen: boolean;
+  reviewState: MissingCheckoutState;
 }
 
 export interface AbsenceRow {
@@ -169,13 +172,15 @@ class ReportRepository {
       const { data, error } = await this.client.rpc("list_prosm_time_report_missing_checkouts", { p_start_date: startDate, p_end_date: endDate });
       if (error) return createError(error.message);
       return createSuccess(
-        (data ?? []).map((row: { session_id: string; user_full_name: string; site_name: string; clock_in_at: string; hours_open: number; still_open: boolean }) => ({
+        (data ?? []).map((row: { session_id: string; user_full_name: string; site_name: string; clock_in_at: string; hours_open: number; still_open: boolean; review_state?: MissingCheckoutState | null }) => ({
           sessionId: row.session_id,
           userFullName: row.user_full_name,
           siteName: row.site_name,
           clockInAt: row.clock_in_at,
           hoursOpen: row.hours_open,
           stillOpen: row.still_open,
+          // step 18: closed automatically and waiting for review is not the same as closed
+          reviewState: row.review_state ?? (row.still_open ? "open" : "closed"),
         })),
       );
     } catch (error) {

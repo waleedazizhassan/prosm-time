@@ -68,7 +68,14 @@
       "hoursOpen": "Ore aperte",
       "status": "Stato",
       "stillOpen": "Ancora aperta",
-      "eventuallyClosed": "Chiusa successivamente"
+      "eventuallyClosed": "Chiusa successivamente",
+      "states": {
+        "open": "Ancora aperta",
+        "pending_review": "Chiusa automaticamente, in revisione (non conteggiata)",
+        "reviewed": "Rivista dal responsabile",
+        "auto_closed": "Chiusa automaticamente",
+        "closed": "Chiusa in seguito"
+      }
     },
     "leaveConflicts": {
       "name": "Dipendente",
@@ -138,7 +145,24 @@
     "overrideAction": {
       "ADMIN_CLOCK_IN_ON_BEHALF": "Entrata timbrata per conto di",
       "ADMIN_CLOCK_OUT_ON_BEHALF": "Uscita timbrata per conto di",
-      "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "Uscita lavoratore esterno timbrata per conto di"
+      "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "Uscita lavoratore esterno timbrata per conto di",
+      "attendance": {
+        "override_block": "Blocco timbratura superato",
+        "review_pending_hours": "Ore in sospeso riviste",
+        "extend_session": "Sessione prolungata",
+        "overtime_approved": "Straordinari approvati",
+        "day_adjusted": "Giornata modificata",
+        "permission_granted": "Permesso aggiunto dal responsabile"
+      },
+      "allowances": {
+        "edit_during_review": "Indennità modificata in revisione",
+        "reopen_approved": "Foglio indennità approvato riaperto"
+      },
+      "leave": {
+        "approved_cancelled": "Ferie approvate annullate",
+        "deduction_set": "Trattenuta ferie impostata",
+        "deduction_changed": "Trattenuta ferie modificata"
+      }
     }
   },
   "recentExports": {
