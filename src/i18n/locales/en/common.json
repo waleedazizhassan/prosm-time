@@ -245,7 +245,19 @@
     "overtimePolicyOwnerOnly": "Only the Owner sets the overtime policy.",
     "invalidOvertimePolicy": "Check the values (multipliers 0-10, minutes 0-1440).",
     "invalidBreakRules": "Check the minutes (1 to 600).",
-    "periodUpToThreeMonths": "Choose a period of up to three months."
+    "periodUpToThreeMonths": "Choose a period of up to three months.",
+    "leaveNeedsDocument": "This leave needs a document (e.g. a medical report).",
+    "invalidDocument": "The document is not valid.",
+    "notEnoughLeaveBalance": "Not enough balance for this leave.",
+    "manageLeaveTypesRequired": "You don't have permission to manage leave types.",
+    "leaveTypeNotFound": "This leave type was not found.",
+    "invalidLeaveTypeSettings": "Check the values of this leave type.",
+    "leaveTypeKeyExists": "A leave type with this code already exists.",
+    "employeesEditRequired": "You don't have permission to edit this employee.",
+    "hireDateFuture": "The hire date cannot be in the future.",
+    "leaveMaxDaysPerRequest": "This leave allows at most {{count}} days at a time.",
+    "leaveMinServiceYears": "This leave needs {{count}} years of service.",
+    "leaveMaxTimesInService": "This leave can be taken at most {{count}} times in the whole service."
   },
   "pageLoad": {
     "title": "This page needs a connection",

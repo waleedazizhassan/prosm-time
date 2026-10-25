@@ -90,8 +90,11 @@
       "annual": "Annuel",
       "sick": "Maladie",
       "unpaid": "Sans solde",
-      "emergency": "Urgence",
-      "other": "Autre"
+      "emergency": "Congé exceptionnel",
+      "other": "Autre",
+      "hajj": "Hajj ou Omra",
+      "bereavement": "Deuil",
+      "paternity": "Paternité"
     },
     "revokeTitle": "Révoquer un congé approuvé",
     "revokeHint": "Congés à venir déjà approuvés - utilisez ceci si les plans ont changé et que le congé doit être annulé après coup.",

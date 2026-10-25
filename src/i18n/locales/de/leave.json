@@ -33,8 +33,11 @@
     "annual": "Jahresurlaub",
     "sick": "Krankheit",
     "unpaid": "Unbezahlt",
-    "emergency": "Notfall",
-    "other": "Sonstiges"
+    "emergency": "Sonderurlaub",
+    "other": "Sonstiges",
+    "hajj": "Hadsch oder Umra",
+    "bereavement": "Trauerfall",
+    "paternity": "Vaterschaft"
   },
   "status": {
     "pending": "Ausstehend",
@@ -67,5 +70,16 @@
       "rejected": "abgelehnt",
       "cancelled": "zurückgezogen"
     }
-  }
+  },
+  "typeRules": {
+    "paid": "bezahlt",
+    "unpaid": "unbezahlt",
+    "maxPerRequest": "höchstens {{days}} Tage am Stück",
+    "maxTimes": "höchstens {{times}}-mal",
+    "minService": "nach {{years}} Dienstjahren",
+    "document": "Nachweis erforderlich"
+  },
+  "documentLabel": "Nachweis (ärztliches Attest)",
+  "documentUploadError": "Nachweis konnte nicht hochgeladen werden.",
+  "balanceDiffers": "Von Hand gesetzt; die Regeln ergeben {{computed}}."
 }

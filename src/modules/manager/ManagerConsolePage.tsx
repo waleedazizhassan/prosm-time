@@ -21,6 +21,7 @@ import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
 import PendingHoursCard from "./PendingHoursCard";
 import PermissionsQueueCard from "./PermissionsQueueCard";
+import leaveTypeLabel from "../leave/leaveTypeLabel";
 
 type ReviewAction = "approved" | "rejected" | "acknowledged" | "clarification_requested";
 // Owner 2026-10-20 ("what is the right action for each reason?"): only the
@@ -288,7 +289,7 @@ export default function ManagerConsolePage() {
               <ListRow key={item.id}>
                 <div>
                   <div style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)", fontWeight: "var(--font-weight-semibold)" }}>
-                    {item.employeeName} — {t(`leave.types.${item.leaveType}`)}
+                    {item.employeeName} — {leaveTypeLabel(t, item.leaveType)}
                   </div>
                   <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
                     {formatDateOnly(item.startDate, i18n.language)} — {formatDateOnly(item.endDate, i18n.language)} ({item.daysCount} {t("leave.daysSuffix")})
@@ -315,7 +316,7 @@ export default function ManagerConsolePage() {
       <Modal
         isOpen={Boolean(leaveReviewTarget)}
         onClose={() => setLeaveReviewTarget(null)}
-        title={leaveReviewTarget ? `${leaveReviewTarget.employeeName} — ${t(`leave.types.${leaveReviewTarget.leaveType}`)}` : ""}
+        title={leaveReviewTarget ? `${leaveReviewTarget.employeeName} — ${leaveTypeLabel(t, leaveReviewTarget.leaveType)}` : ""}
         footer={
           <>
             <Button variant="danger" onClick={() => handleLeaveReview("rejected")} loading={leaveSubmitting === "rejected"}>
@@ -341,7 +342,7 @@ export default function ManagerConsolePage() {
               <ListRow key={item.id}>
                 <div>
                   <div style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)", fontWeight: "var(--font-weight-semibold)" }}>
-                    {item.employeeName} — {t(`leave.types.${item.leaveType}`)}
+                    {item.employeeName} — {leaveTypeLabel(t, item.leaveType)}
                   </div>
                   <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
                     {formatDateOnly(item.startDate, i18n.language)} — {formatDateOnly(item.endDate, i18n.language)} ({item.daysCount} {t("leave.daysSuffix")})

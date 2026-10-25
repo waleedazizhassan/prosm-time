@@ -46,7 +46,8 @@
     "calendar.manage": "Kalender und Feiertage verwalten",
     "allowances.edit_during_review": "Zulagen in der Prüfung bearbeiten",
     "allowances.reopen_approved": "Genehmigte Abrechnungen wieder öffnen",
-    "attendance.manage_permissions": "Genehmigungen, Überstundenfreigabe und Tagesanpassungen"
+    "attendance.manage_permissions": "Genehmigungen, Überstundenfreigabe und Tagesanpassungen",
+    "leave.manage_types": "Urlaubsarten verwalten"
   },
   "invite": {
     "actionLabel": "Mitarbeiter einladen",
@@ -160,5 +161,15 @@
     "pickEmployeeTitle": "Mitarbeiter auswählen",
     "employeeLabel": "Mitarbeiter",
     "employeePlaceholder": "Mitarbeiter auswählen…"
+  },
+  "employment": {
+    "title": "Beschäftigung",
+    "hint": "Urlaubsansprüche folgen den Dienstjahren ab dem Eintrittsdatum.",
+    "serviceYears": "{{years}} Dienstjahre",
+    "hireDate": "Eintrittsdatum",
+    "specialNeeds": "Anspruch bei besonderen Bedürfnissen",
+    "save": "Speichern",
+    "saved": "Gespeichert.",
+    "genericError": "Speichern fehlgeschlagen."
   }
 }

@@ -245,7 +245,19 @@
     "overtimePolicyOwnerOnly": "Nur der Inhaber legt diese Regel fest.",
     "invalidOvertimePolicy": "Bitte Werte prüfen.",
     "invalidBreakRules": "Bitte Minuten prüfen (1 bis 600).",
-    "periodUpToThreeMonths": "Bitte höchstens drei Monate wählen."
+    "periodUpToThreeMonths": "Bitte höchstens drei Monate wählen.",
+    "leaveNeedsDocument": "Für diesen Urlaub ist ein Nachweis nötig.",
+    "invalidDocument": "Ungültiger Nachweis.",
+    "notEnoughLeaveBalance": "Nicht genug Resturlaub.",
+    "manageLeaveTypesRequired": "Sie dürfen Urlaubsarten nicht verwalten.",
+    "leaveTypeNotFound": "Urlaubsart nicht gefunden.",
+    "invalidLeaveTypeSettings": "Bitte Werte prüfen.",
+    "leaveTypeKeyExists": "Dieser Code existiert bereits.",
+    "employeesEditRequired": "Sie dürfen diese Person nicht bearbeiten.",
+    "hireDateFuture": "Das Eintrittsdatum darf nicht in der Zukunft liegen.",
+    "leaveMaxDaysPerRequest": "Höchstens {{count}} Tage am Stück.",
+    "leaveMinServiceYears": "Dafür sind {{count}} Dienstjahre nötig.",
+    "leaveMaxTimesInService": "Höchstens {{count}}-mal insgesamt."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

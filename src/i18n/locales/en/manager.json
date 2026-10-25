@@ -90,8 +90,11 @@
       "annual": "Annual",
       "sick": "Sick",
       "unpaid": "Unpaid",
-      "emergency": "Emergency",
-      "other": "Other"
+      "emergency": "Casual",
+      "other": "Other",
+      "hajj": "Hajj or Umrah",
+      "bereavement": "Bereavement",
+      "paternity": "Paternity"
     },
     "revokeTitle": "Revoke Approved Leave",
     "revokeHint": "Already-approved, upcoming leave - use this if plans changed and the leave needs to be cancelled after the fact.",

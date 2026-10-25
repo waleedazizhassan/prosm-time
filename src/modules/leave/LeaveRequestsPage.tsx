@@ -2,7 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useAuth } from "../../core/context/AuthContext";
-import LeaveRepository, { type LeaveRequestRow, type OrgWideLeaveRow, type LeaveBalanceEntry, type LeaveType } from "../../core/repositories/LeaveRepository";
+import leaveTypeLabel from "./leaveTypeLabel";
+import LeaveRepository, { type LeaveRequestRow, type OrgWideLeaveRow, type LeaveBalanceEntry, type LeaveType, type LeaveTypeSetting } from "../../core/repositories/LeaveRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { formatDateOnly } from "../../core/utils/formatDate";
 
@@ -21,7 +22,6 @@ import HintText from "../../components/common/HintText";
 import DateRange from "../../components/common/DateRange";
 import PermissionRequestCard from "./PermissionRequestCard";
 
-const LEAVE_TYPES: LeaveType[] = ["annual", "sick", "unpaid", "emergency", "other"];
 
 function isoDate(date: Date): string {
   return date.toISOString().slice(0, 10);
@@ -55,6 +55,11 @@ export default function LeaveRequestsPage() {
   const [loadError, setLoadError] = useState("");
 
   const [leaveType, setLeaveType] = useState<LeaveType>("annual");
+  // v2.3.43 step 7: the organisation's leave types, and a document when the type needs one.
+  const [leaveTypes, setLeaveTypes] = useState<LeaveTypeSetting[]>([]);
+  const [documentFile, setDocumentFile] = useState<File | null>(null);
+  const selectedType = leaveTypes.find((type) => type.key === leaveType) ?? null;
+  const typeLabel = (key: string) => leaveTypeLabel(t, key, leaveTypes.find((type) => type.key === key)?.name);
   const [startDate, setStartDate] = useState(isoDate(today));
   const [endDate, setEndDate] = useState(isoDate(today));
   const [reason, setReason] = useState("");
@@ -95,18 +100,33 @@ export default function LeaveRequestsPage() {
     load();
   }, [load]);
 
+  useEffect(() => {
+    LeaveRepository.listTypes().then((result) => setLeaveTypes((result.data ?? []).filter((type) => type.isActive)));
+  }, []);
+
   const handleSubmit = async () => {
     if (!startDate || !endDate) return;
     setSubmitting(true);
     setSubmitError("");
     setSubmitSuccess(false);
-    const result = await LeaveRepository.request(leaveType, startDate, endDate, reason);
+    let documentPath: string | null = null;
+    if (documentFile && profile?.organizationId && profile.id) {
+      const upload = await LeaveRepository.uploadDocument(profile.organizationId, profile.id, documentFile);
+      if (!upload.success) {
+        setSubmitting(false);
+        setSubmitError(humanizeBackendError(upload.message, t) ?? t("documentUploadError"));
+        return;
+      }
+      documentPath = upload.data;
+    }
+    const result = await LeaveRepository.request(leaveType, startDate, endDate, reason, documentPath);
     setSubmitting(false);
     if (!result.success) {
       setSubmitError(humanizeBackendError(result.message, t) ?? t("submitError"));
       return;
     }
     setReason("");
+    setDocumentFile(null);
     setSubmitSuccess(Boolean(result.data?.autoApproved));
     await load();
   };
@@ -124,7 +144,7 @@ export default function LeaveRequestsPage() {
   };
 
   const columns: TableColumn<LeaveRequestRow>[] = [
-    { key: "type", header: t("columns.type"), render: (row) => t(`types.${row.leaveType}`) },
+    { key: "type", header: t("columns.type"), render: (row) => typeLabel(row.leaveType) },
     { key: "dates", header: t("columns.dates"), render: (row) => `${formatDateOnly(row.startDate, i18n.language)} — ${formatDateOnly(row.endDate, i18n.language)}` },
     { key: "days", header: t("columns.days"), render: (row) => row.daysCount },
     { key: "reason", header: t("columns.reason"), render: (row) => row.reason ?? "—" },
@@ -149,7 +169,7 @@ export default function LeaveRequestsPage() {
   // self-requests.
   const orgWideColumns: TableColumn<OrgWideLeaveRow>[] = [
     { key: "employee", header: t("columns.employee"), render: (row) => row.employeeName },
-    { key: "type", header: t("columns.type"), render: (row) => t(`types.${row.leaveType}`) },
+    { key: "type", header: t("columns.type"), render: (row) => typeLabel(row.leaveType) },
     { key: "dates", header: t("columns.dates"), render: (row) => `${formatDateOnly(row.startDate, i18n.language)} — ${formatDateOnly(row.endDate, i18n.language)}` },
     { key: "days", header: t("columns.days"), render: (row) => row.daysCount },
     { key: "reason", header: t("columns.reason"), render: (row) => row.reason ?? "—" },
@@ -175,7 +195,7 @@ export default function LeaveRequestsPage() {
               }}
             >
               <p style={{ margin: 0, fontSize: "var(--font-xs)", fontWeight: "var(--font-weight-bold)", textTransform: "uppercase", letterSpacing: "0.04em", color: "var(--text-secondary)" }}>
-                {t(`types.${entry.leaveType}`)}
+                {leaveTypeLabel(t, entry.leaveType, entry.name)}
               </p>
               {entry.remainingDays !== null ? (
                 <p style={{ margin: "var(--space-1) 0 0", fontSize: "var(--font-xl)", fontWeight: "var(--font-weight-bold)", fontVariantNumeric: "tabular-nums" }}>
@@ -186,6 +206,7 @@ export default function LeaveRequestsPage() {
                   {entry.usedDays} <span style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)", fontWeight: "var(--font-weight-normal)" }}>{t("daysTakenSuffix")}</span>
                 </p>
               )}
+              {entry.differs ? <HintText small>{t("balanceDiffers", { computed: entry.computedDays })}</HintText> : null}
               {entry.entitledDays !== null ? (
                 <HintText small>{t("balanceDetail", { used: entry.usedDays, pending: entry.pendingDays, entitled: entry.entitledDays })}</HintText>
               ) : entry.pendingDays > 0 ? (
@@ -204,13 +225,32 @@ export default function LeaveRequestsPage() {
             value={leaveType}
             onChange={(event) => setLeaveType(event.target.value as LeaveType)}
             disabled={submitting}
-            options={LEAVE_TYPES.map((type) => ({ value: type, label: t(`types.${type}`) }))}
+            options={(leaveTypes.length > 0 ? leaveTypes : [{ key: "annual", name: "" } as LeaveTypeSetting]).map((type) => ({ value: type.key, label: leaveTypeLabel(t, type.key, type.name) }))}
           />
           <DateRange>
             <Input label={t("startDateLabel")} name="leaveStartDate" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} disabled={submitting} />
             <Input label={t("endDateLabel")} name="leaveEndDate" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} disabled={submitting} />
           </DateRange>
         </div>
+        {selectedType ? (
+          <HintText small>
+            {[
+              selectedType.isPaid ? t("typeRules.paid") : t("typeRules.unpaid"),
+              selectedType.maxDaysPerRequest ? t("typeRules.maxPerRequest", { days: selectedType.maxDaysPerRequest }) : null,
+              selectedType.maxTimesInService ? t("typeRules.maxTimes", { times: selectedType.maxTimesInService }) : null,
+              selectedType.minServiceYears ? t("typeRules.minService", { years: selectedType.minServiceYears }) : null,
+              selectedType.requiresDocument ? t("typeRules.document") : null,
+            ]
+              .filter(Boolean)
+              .join(" · ")}
+          </HintText>
+        ) : null}
+        {selectedType?.requiresDocument ? (
+          <label style={{ display: "grid", gap: 4, fontSize: "var(--font-sm)", margin: "var(--space-2) 0" }}>
+            {t("documentLabel")}
+            <input type="file" accept="image/*,application/pdf" onChange={(event) => setDocumentFile(event.target.files?.[0] ?? null)} disabled={submitting} />
+          </label>
+        ) : null}
         {isOwner ? <HintText>{t("ownerAutoApproveHint")}</HintText> : null}
         <Textarea label={t("reasonLabel")} name="leaveReason" value={reason} onChange={(event) => setReason(event.target.value)} disabled={submitting} rows={2} />
         <ErrorText>{submitError}</ErrorText>

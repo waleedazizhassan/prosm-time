@@ -245,7 +245,19 @@
     "overtimePolicyOwnerOnly": "الأونر فقط يحدد سياسة الإضافي.",
     "invalidOvertimePolicy": "راجع القيم (المعاملات 0-10، الدقائق 0-1440).",
     "invalidBreakRules": "راجع الدقائق (1 إلى 600).",
-    "periodUpToThreeMonths": "اختر فترة حتى 3 شهور."
+    "periodUpToThreeMonths": "اختر فترة حتى 3 شهور.",
+    "leaveNeedsDocument": "هذه الإجازة تحتاج مستنداً (مثل تقرير طبي).",
+    "invalidDocument": "المستند غير صالح.",
+    "notEnoughLeaveBalance": "الرصيد لا يكفي لهذه الإجازة.",
+    "manageLeaveTypesRequired": "ليست لديك صلاحية إدارة أنواع الإجازات.",
+    "leaveTypeNotFound": "نوع الإجازة غير موجود.",
+    "invalidLeaveTypeSettings": "راجع قيم نوع الإجازة.",
+    "leaveTypeKeyExists": "يوجد نوع إجازة بنفس الكود.",
+    "employeesEditRequired": "ليست لديك صلاحية تعديل بيانات هذا الموظف.",
+    "hireDateFuture": "تاريخ التعيين لا يكون في المستقبل.",
+    "leaveMaxDaysPerRequest": "هذه الإجازة بحد أقصى {{count}} يوم في المرة.",
+    "leaveMinServiceYears": "هذه الإجازة تحتاج {{count}} سنوات خدمة.",
+    "leaveMaxTimesInService": "هذه الإجازة بحد أقصى {{count}} مرات خلال الخدمة كلها."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

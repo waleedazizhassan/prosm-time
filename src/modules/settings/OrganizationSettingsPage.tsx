@@ -7,6 +7,7 @@ import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
 import MockLocationSettingsCard from "./MockLocationSettingsCard";
 import SessionPolicySettingsCard from "./SessionPolicySettingsCard";
 import OvertimePolicySettingsCard from "./OvertimePolicySettingsCard";
+import LeaveTypesSettingsCard from "./LeaveTypesSettingsCard";
 import settingsHeaderImage from "../../assets/illustrations/settings.svg";
 import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
@@ -39,6 +40,7 @@ export default function OrganizationSettingsPage() {
 
       <SitePolicySettingsCard />
       {hasPermission("settings.session_policy") ? <SessionPolicySettingsCard /> : null}
+      {hasPermission("leave.manage_types") ? <LeaveTypesSettingsCard /> : null}
       {isOwner ? (
         <>
           <OvertimePolicySettingsCard />

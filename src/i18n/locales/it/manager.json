@@ -90,8 +90,11 @@
       "annual": "Annuali",
       "sick": "Malattia",
       "unpaid": "Non retribuite",
-      "emergency": "Emergenza",
-      "other": "Altro"
+      "emergency": "Permesso straordinario",
+      "other": "Altro",
+      "hajj": "Hajj o Umra",
+      "bereavement": "Lutto",
+      "paternity": "Paternità"
     },
     "revokeTitle": "Revoca ferie approvate",
     "revokeHint": "Ferie future già approvate - usa questa opzione se i piani sono cambiati e le ferie devono essere annullate a posteriori.",

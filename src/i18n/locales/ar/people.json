@@ -46,7 +46,8 @@
     "calendar.manage": "إدارة التقويم والعطلات",
     "allowances.edit_during_review": "تعديل البدلات أثناء المراجعة",
     "allowances.reopen_approved": "إعادة فتح شيت بدلات معتمد",
-    "attendance.manage_permissions": "الأذونات وموافقة الإضافي وتعديل اليوم"
+    "attendance.manage_permissions": "الأذونات وموافقة الإضافي وتعديل اليوم",
+    "leave.manage_types": "إدارة أنواع الإجازات"
   },
   "invite": {
     "actionLabel": "دعوة موظف",
@@ -160,5 +161,15 @@
     "pickEmployeeTitle": "اختار الموظف",
     "employeeLabel": "الموظف",
     "employeePlaceholder": "اختر موظفًا…"
+  },
+  "employment": {
+    "title": "بيانات التعيين",
+    "hint": "استحقاق الإجازات بيتحسب من سنوات الخدمة من تاريخ التعيين.",
+    "serviceYears": "{{years}} سنة خدمة",
+    "hireDate": "تاريخ التعيين",
+    "specialNeeds": "استحقاق ذوي الاحتياجات الخاصة (أو من يعول قريباً من الدرجة الأولى منهم)",
+    "save": "حفظ",
+    "saved": "تم الحفظ.",
+    "genericError": "تعذّر الحفظ."
   }
 }

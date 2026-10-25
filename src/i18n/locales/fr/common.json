@@ -245,7 +245,19 @@
     "overtimePolicyOwnerOnly": "Seul le propriétaire fixe cette règle.",
     "invalidOvertimePolicy": "Vérifiez les valeurs.",
     "invalidBreakRules": "Vérifiez les minutes (1 à 600).",
-    "periodUpToThreeMonths": "Choisissez une période de trois mois au plus."
+    "periodUpToThreeMonths": "Choisissez une période de trois mois au plus.",
+    "leaveNeedsDocument": "Ce congé nécessite un justificatif.",
+    "invalidDocument": "Justificatif non valide.",
+    "notEnoughLeaveBalance": "Solde insuffisant.",
+    "manageLeaveTypesRequired": "Vous n'avez pas le droit de gérer les types de congé.",
+    "leaveTypeNotFound": "Type introuvable.",
+    "invalidLeaveTypeSettings": "Vérifiez les valeurs.",
+    "leaveTypeKeyExists": "Ce code existe déjà.",
+    "employeesEditRequired": "Vous n'avez pas le droit de modifier cet employé.",
+    "hireDateFuture": "La date d'embauche ne peut pas être future.",
+    "leaveMaxDaysPerRequest": "Ce congé est limité à {{count}} jours à la fois.",
+    "leaveMinServiceYears": "Ce congé demande {{count}} ans d'ancienneté.",
+    "leaveMaxTimesInService": "Ce congé est limité à {{count}} fois."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

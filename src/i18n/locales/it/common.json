@@ -245,7 +245,19 @@
     "overtimePolicyOwnerOnly": "Solo il titolare imposta questa regola.",
     "invalidOvertimePolicy": "Controlla i valori.",
     "invalidBreakRules": "Controlla i minuti (da 1 a 600).",
-    "periodUpToThreeMonths": "Scegli un periodo di massimo tre mesi."
+    "periodUpToThreeMonths": "Scegli un periodo di massimo tre mesi.",
+    "leaveNeedsDocument": "Questo permesso richiede un documento.",
+    "invalidDocument": "Documento non valido.",
+    "notEnoughLeaveBalance": "Saldo insufficiente.",
+    "manageLeaveTypesRequired": "Non hai il permesso di gestire i tipi di permesso.",
+    "leaveTypeNotFound": "Tipo non trovato.",
+    "invalidLeaveTypeSettings": "Controlla i valori.",
+    "leaveTypeKeyExists": "Questo codice esiste già.",
+    "employeesEditRequired": "Non hai il permesso di modificare questo dipendente.",
+    "hireDateFuture": "La data di assunzione non può essere futura.",
+    "leaveMaxDaysPerRequest": "Al massimo {{count}} giorni alla volta.",
+    "leaveMinServiceYears": "Servono {{count}} anni di servizio.",
+    "leaveMaxTimesInService": "Al massimo {{count}} volte in tutto."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

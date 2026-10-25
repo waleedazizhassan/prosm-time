@@ -25,6 +25,11 @@ export default function humanizeBackendError(rawMessage: string | null | undefin
   const trimmed = rawMessage.trim();
   const key = BACKEND_ERROR_KEYS[trimmed] ?? BACKEND_ERROR_KEYS[unwrap(trimmed)];
   if (key) return t(`common:backendErrors.${key}`);
+  // v2.3.43 step 7: refusals that carry a number (a leave type's limits).
+  for (const [pattern, patternKey] of NUMBERED_ERRORS) {
+    const match = pattern.exec(unwrap(trimmed));
+    if (match) return t(`common:backendErrors.${patternKey}`, { count: Number(match[1]) });
+  }
   // § 2026-09-08 real bug fix, defense in depth: the orphaned-
   // presence-session bug (admin_clock_out never closed it, now fixed
   // and self-healing) surfaced as this exact raw Postgres constraint
@@ -44,6 +49,12 @@ export default function humanizeBackendError(rawMessage: string | null | undefin
   }
   return null;
 }
+
+const NUMBERED_ERRORS: [RegExp, string][] = [
+  [/^THIS LEAVE TYPE ALLOWS AT MOST ([\d.]+) DAYS AT A TIME$/, "leaveMaxDaysPerRequest"],
+  [/^THIS LEAVE TYPE NEEDS ([\d.]+) YEARS OF SERVICE$/, "leaveMinServiceYears"],
+  [/^THIS LEAVE TYPE CAN BE TAKEN AT MOST ([\d.]+) TIMES IN THE SERVICE$/, "leaveMaxTimesInService"],
+];
 
 // Raw backend message -> common:backendErrors.<key>. Keys use a
 // single apostrophe (') for any raw message that contains one - SQL's
@@ -296,4 +307,14 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "INVALID OVERTIME POLICY": "invalidOvertimePolicy",
   "INVALID BREAK RULES": "invalidBreakRules",
   "CHOOSE A PERIOD OF UP TO THREE MONTHS": "periodUpToThreeMonths",
+  // v2.3.43 step 7: leave types and their rules.
+  "THIS LEAVE TYPE NEEDS A DOCUMENT": "leaveNeedsDocument",
+  "INVALID DOCUMENT": "invalidDocument",
+  "NOT ENOUGH LEAVE BALANCE": "notEnoughLeaveBalance",
+  "LEAVE.MANAGE_TYPES AUTHORITY REQUIRED": "manageLeaveTypesRequired",
+  "LEAVE TYPE NOT FOUND": "leaveTypeNotFound",
+  "INVALID LEAVE TYPE SETTINGS": "invalidLeaveTypeSettings",
+  "A LEAVE TYPE WITH THIS KEY ALREADY EXISTS": "leaveTypeKeyExists",
+  "EMPLOYEES.EDIT AUTHORITY REQUIRED": "employeesEditRequired",
+  "THE HIRE DATE CANNOT BE IN THE FUTURE": "hireDateFuture",
 };

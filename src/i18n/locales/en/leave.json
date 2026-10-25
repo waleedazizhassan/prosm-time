@@ -33,8 +33,11 @@
     "annual": "Annual",
     "sick": "Sick",
     "unpaid": "Unpaid",
-    "emergency": "Emergency",
-    "other": "Other"
+    "emergency": "Casual",
+    "other": "Other",
+    "hajj": "Hajj or Umrah",
+    "bereavement": "Bereavement",
+    "paternity": "Paternity"
   },
   "status": {
     "pending": "Pending",
@@ -67,5 +70,16 @@
       "rejected": "rejected",
       "cancelled": "withdrawn"
     }
-  }
+  },
+  "typeRules": {
+    "paid": "paid",
+    "unpaid": "unpaid",
+    "maxPerRequest": "at most {{days}} days at a time",
+    "maxTimes": "at most {{times}} times in the service",
+    "minService": "after {{years}} years of service",
+    "document": "a document is required"
+  },
+  "documentLabel": "Document (medical report)",
+  "documentUploadError": "Could not upload the document.",
+  "balanceDiffers": "Set by hand; the rules give {{computed}} - ask your manager if this looks wrong."
 }

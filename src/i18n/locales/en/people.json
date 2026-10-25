@@ -46,7 +46,8 @@
     "calendar.manage": "Manage the calendar and holidays",
     "allowances.edit_during_review": "Edit allowances during review",
     "allowances.reopen_approved": "Reopen approved allowance sheets",
-    "attendance.manage_permissions": "Permissions, overtime approval and day adjustments"
+    "attendance.manage_permissions": "Permissions, overtime approval and day adjustments",
+    "leave.manage_types": "Manage leave types"
   },
   "invite": {
     "actionLabel": "Invite employee",
@@ -160,5 +161,15 @@
     "pickEmployeeTitle": "Choose employee",
     "employeeLabel": "Employee",
     "employeePlaceholder": "Select an employee…"
+  },
+  "employment": {
+    "title": "Employment",
+    "hint": "Leave entitlements follow the years of service from the hire date.",
+    "serviceYears": "{{years}} years of service",
+    "hireDate": "Hire date",
+    "specialNeeds": "Special-needs entitlement (has, or supports, a first-degree relative with special needs)",
+    "save": "Save",
+    "saved": "Saved.",
+    "genericError": "Could not save."
   }
 }

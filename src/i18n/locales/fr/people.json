@@ -46,7 +46,8 @@
     "calendar.manage": "Gérer le calendrier et les jours fériés",
     "allowances.edit_during_review": "Modifier les indemnités en vérification",
     "allowances.reopen_approved": "Rouvrir une feuille approuvée",
-    "attendance.manage_permissions": "Autorisations, accord des heures sup. et ajustements"
+    "attendance.manage_permissions": "Autorisations, accord des heures sup. et ajustements",
+    "leave.manage_types": "Gérer les types de congé"
   },
   "invite": {
     "actionLabel": "Inviter un employé",
@@ -160,5 +161,15 @@
     "pickEmployeeTitle": "Choisir l'employé",
     "employeeLabel": "Employé",
     "employeePlaceholder": "Sélectionner un employé…"
+  },
+  "employment": {
+    "title": "Emploi",
+    "hint": "Les droits à congé suivent l'ancienneté depuis la date d'embauche.",
+    "serviceYears": "{{years}} ans d'ancienneté",
+    "hireDate": "Date d'embauche",
+    "specialNeeds": "Droit pour besoins particuliers",
+    "save": "Enregistrer",
+    "saved": "Enregistré.",
+    "genericError": "Enregistrement impossible."
   }
 }

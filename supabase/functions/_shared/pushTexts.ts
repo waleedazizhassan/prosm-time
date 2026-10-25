@@ -120,8 +120,11 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "annual": "سنوية",
       "sick": "مرضية",
       "unpaid": "بدون أجر",
-      "emergency": "طارئة",
-      "other": "أخرى"
+      "emergency": "عارضة",
+      "other": "أخرى",
+      "hajj": "حج أو عمرة",
+      "bereavement": "وفاة",
+      "paternity": "أبوة"
     }
   },
   "en": {
@@ -242,8 +245,11 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "annual": "Annual",
       "sick": "Sick",
       "unpaid": "Unpaid",
-      "emergency": "Emergency",
-      "other": "Other"
+      "emergency": "Casual",
+      "other": "Other",
+      "hajj": "Hajj or Umrah",
+      "bereavement": "Bereavement",
+      "paternity": "Paternity"
     }
   },
   "de": {
@@ -364,8 +370,11 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "annual": "Jahresurlaub",
       "sick": "Krankheit",
       "unpaid": "Unbezahlt",
-      "emergency": "Notfall",
-      "other": "Sonstiges"
+      "emergency": "Sonderurlaub",
+      "other": "Sonstiges",
+      "hajj": "Hadsch oder Umra",
+      "bereavement": "Trauerfall",
+      "paternity": "Vaterschaft"
     }
   },
   "fr": {
@@ -486,8 +495,11 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "annual": "Annuel",
       "sick": "Maladie",
       "unpaid": "Sans solde",
-      "emergency": "Urgence",
-      "other": "Autre"
+      "emergency": "Congé exceptionnel",
+      "other": "Autre",
+      "hajj": "Hajj ou Omra",
+      "bereavement": "Deuil",
+      "paternity": "Paternité"
     }
   },
   "it": {
@@ -608,8 +620,11 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "annual": "Annuali",
       "sick": "Malattia",
       "unpaid": "Non retribuite",
-      "emergency": "Emergenza",
-      "other": "Altro"
+      "emergency": "Permesso straordinario",
+      "other": "Altro",
+      "hajj": "Hajj o Umra",
+      "bereavement": "Lutto",
+      "paternity": "Paternità"
     }
   }
 };

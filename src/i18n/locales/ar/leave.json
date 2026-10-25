@@ -33,8 +33,11 @@
     "annual": "سنوية",
     "sick": "مرضية",
     "unpaid": "بدون أجر",
-    "emergency": "طارئة",
-    "other": "أخرى"
+    "emergency": "عارضة",
+    "other": "أخرى",
+    "hajj": "حج أو عمرة",
+    "bereavement": "وفاة",
+    "paternity": "أبوة"
   },
   "status": {
     "pending": "قيد المراجعة",
@@ -67,5 +70,16 @@
       "rejected": "مرفوض",
       "cancelled": "مسحوب"
     }
-  }
+  },
+  "typeRules": {
+    "paid": "مدفوعة",
+    "unpaid": "بدون أجر",
+    "maxPerRequest": "بحد أقصى {{days}} يوم في المرة",
+    "maxTimes": "بحد أقصى {{times}} مرات خلال الخدمة",
+    "minService": "بعد {{years}} سنوات خدمة",
+    "document": "مستند مطلوب"
+  },
+  "documentLabel": "المستند (تقرير طبي)",
+  "documentUploadError": "تعذّر رفع المستند.",
+  "balanceDiffers": "محدد يدوياً؛ القواعد تعطي {{computed}} - راجع المدير لو فيه خطأ."
 }

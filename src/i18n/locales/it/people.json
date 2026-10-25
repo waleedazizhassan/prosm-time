@@ -46,7 +46,8 @@
     "calendar.manage": "Gestire calendario e festività",
     "allowances.edit_during_review": "Modificare indennità in verifica",
     "allowances.reopen_approved": "Riaprire fogli approvati",
-    "attendance.manage_permissions": "Permessi, approvazione straordinari e modifiche"
+    "attendance.manage_permissions": "Permessi, approvazione straordinari e modifiche",
+    "leave.manage_types": "Gestire i tipi di permesso"
   },
   "invite": {
     "actionLabel": "Invita dipendente",
@@ -160,5 +161,15 @@
     "pickEmployeeTitle": "Scegli il dipendente",
     "employeeLabel": "Dipendente",
     "employeePlaceholder": "Seleziona un dipendente…"
+  },
+  "employment": {
+    "title": "Impiego",
+    "hint": "I diritti a permesso seguono l'anzianità dalla data di assunzione.",
+    "serviceYears": "{{years}} anni di servizio",
+    "hireDate": "Data di assunzione",
+    "specialNeeds": "Diritto per bisogni speciali",
+    "save": "Salva",
+    "saved": "Salvato.",
+    "genericError": "Salvataggio non riuscito."
   }
 }

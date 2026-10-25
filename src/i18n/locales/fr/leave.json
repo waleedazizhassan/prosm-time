@@ -33,8 +33,11 @@
     "annual": "Annuel",
     "sick": "Maladie",
     "unpaid": "Sans solde",
-    "emergency": "Urgence",
-    "other": "Autre"
+    "emergency": "Congé exceptionnel",
+    "other": "Autre",
+    "hajj": "Hajj ou Omra",
+    "bereavement": "Deuil",
+    "paternity": "Paternité"
   },
   "status": {
     "pending": "En attente",
@@ -67,5 +70,16 @@
       "rejected": "refusée",
       "cancelled": "retirée"
     }
-  }
+  },
+  "typeRules": {
+    "paid": "payé",
+    "unpaid": "non payé",
+    "maxPerRequest": "au plus {{days}} jours à la fois",
+    "maxTimes": "au plus {{times}} fois",
+    "minService": "après {{years}} ans d'ancienneté",
+    "document": "justificatif requis"
+  },
+  "documentLabel": "Justificatif (certificat médical)",
+  "documentUploadError": "Impossible d'envoyer le justificatif.",
+  "balanceDiffers": "Fixé à la main ; les règles donnent {{computed}}."
 }

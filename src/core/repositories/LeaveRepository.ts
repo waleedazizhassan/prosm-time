@@ -6,7 +6,28 @@ export interface ServiceResult<T = null> {
   data: T | null;
 }
 
-export type LeaveType = "annual" | "sick" | "unpaid" | "emergency" | "other";
+// v2.3.43 step 7 (item 25): leave types are the organisation's settings
+// (leave_types); the built-in keys are annual, emergency (casual), sick,
+// unpaid, hajj, bereavement, paternity and other, and an Owner may add more.
+export type LeaveType = string;
+
+export interface LeaveTypeSetting {
+  id: string;
+  key: string;
+  name: string;
+  isPaid: boolean;
+  annualDays: number | null;
+  serviceTiers: { minYears: number; days: number }[] | null;
+  specialNeedsDays: number | null;
+  enforceBalance: boolean;
+  maxDaysPerRequest: number | null;
+  maxTimesInService: number | null;
+  minServiceYears: number | null;
+  requiresDocument: boolean;
+  isActive: boolean;
+  sortOrder: number;
+  legalNote: string | null;
+}
 export type LeaveStatus = "pending" | "approved" | "rejected" | "cancelled";
 
 export interface LeaveRequestRow {
@@ -64,7 +85,12 @@ export interface ApprovedLeaveRow {
 
 export interface LeaveBalanceEntry {
   leaveType: LeaveType;
+  name?: string;
   entitledDays: number | null;
+  // v2.3.43 step 7: the entitlement from the type's rules, the one set by hand (wins), and whether they differ.
+  computedDays?: number | null;
+  setDays?: number | null;
+  differs?: boolean;
   usedDays: number;
   pendingDays: number;
   remainingDays: number | null;
@@ -182,8 +208,12 @@ class LeaveRepository {
       if (data?.success === false) return createError("Unable to load your leave balance.");
       return createSuccess({
         year: data.year,
-        balances: (data.balances ?? []).map((entry: { leaveType: LeaveType; entitledDays: number | null; usedDays: number; pendingDays: number; remainingDays: number | null }) => ({
+        balances: (data.balances ?? []).map((entry: LeaveBalanceEntry) => ({
           leaveType: entry.leaveType,
+          name: entry.name,
+          computedDays: entry.computedDays ?? null,
+          setDays: entry.setDays ?? null,
+          differs: Boolean(entry.differs),
           entitledDays: entry.entitledDays,
           usedDays: entry.usedDays,
           pendingDays: entry.pendingDays,
@@ -195,13 +225,90 @@ class LeaveRepository {
     }
   }
 
-  async request(leaveType: LeaveType, startDate: string, endDate: string, reason?: string): Promise<ServiceResult<{ requestId: string; daysCount: number; autoApproved: boolean }>> {
+  async listTypes(): Promise<ServiceResult<LeaveTypeSetting[]>> {
+    try {
+      const { data, error } = await this.client.from("leave_types").select("*").order("sort_order", { ascending: true });
+      if (error) return createError(error.message);
+      return createSuccess(
+        ((data ?? []) as Record<string, unknown>[]).map((row) => ({
+          id: String(row.id),
+          key: String(row.key),
+          name: String(row.name),
+          isPaid: Boolean(row.is_paid),
+          annualDays: row.annual_days === null ? null : Number(row.annual_days),
+          serviceTiers: (row.service_tiers as LeaveTypeSetting["serviceTiers"]) ?? null,
+          specialNeedsDays: row.special_needs_days === null ? null : Number(row.special_needs_days),
+          enforceBalance: Boolean(row.enforce_balance),
+          maxDaysPerRequest: row.max_days_per_request === null ? null : Number(row.max_days_per_request),
+          maxTimesInService: row.max_times_in_service === null ? null : Number(row.max_times_in_service),
+          minServiceYears: row.min_service_years === null ? null : Number(row.min_service_years),
+          requiresDocument: Boolean(row.requires_document),
+          isActive: Boolean(row.is_active),
+          sortOrder: Number(row.sort_order),
+          legalNote: (row.legal_note as string | null) ?? null,
+        })),
+      );
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Leave service unavailable.");
+    }
+  }
+
+  async saveType(id: string | null, key: string, type: Partial<LeaveTypeSetting>): Promise<ServiceResult> {
+    try {
+      const { error } = await this.client.rpc("save_prosm_time_leave_type", { p_id: id, p_key: key, p_type: type });
+      return error ? createError(error.message) : createSuccess();
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Leave service unavailable.");
+    }
+  }
+
+  // A medical report or other document, in the person's own private folder.
+  async uploadDocument(organizationId: string, userId: string, file: File): Promise<ServiceResult<string>> {
+    try {
+      const extension = file.name.includes(".") ? file.name.split(".").pop() : "pdf";
+      const path = `${organizationId}/${userId}/${crypto.randomUUID()}.${extension}`;
+      const { error } = await this.client.storage.from("leave-documents").upload(path, file, { contentType: file.type || "application/pdf", upsert: false });
+      return error ? createError(error.message) : createSuccess(path);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Leave service unavailable.");
+    }
+  }
+
+  async documentUrl(path: string): Promise<ServiceResult<string>> {
+    try {
+      const { data, error } = await this.client.storage.from("leave-documents").createSignedUrl(path, 300);
+      return error || !data ? createError(error?.message ?? "Document unavailable.") : createSuccess(data.signedUrl);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Leave service unavailable.");
+    }
+  }
+
+  async getEmploymentDetails(userId: string): Promise<ServiceResult<{ hireDate: string | null; specialNeeds: boolean; serviceYears: number | null }>> {
+    try {
+      const { data, error } = await this.client.rpc("get_prosm_time_employment_details", { p_user_id: userId });
+      return error ? createError(error.message) : createSuccess(data as { hireDate: string | null; specialNeeds: boolean; serviceYears: number | null });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Leave service unavailable.");
+    }
+  }
+
+  async setEmploymentDetails(userId: string, hireDate: string | null, specialNeeds: boolean): Promise<ServiceResult> {
+    try {
+      const { error } = await this.client.rpc("set_prosm_time_employment_details", { p_user_id: userId, p_hire_date: hireDate, p_special_needs: specialNeeds });
+      return error ? createError(error.message) : createSuccess();
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Leave service unavailable.");
+    }
+  }
+
+  async request(leaveType: LeaveType, startDate: string, endDate: string, reason?: string, documentPath?: string | null): Promise<ServiceResult<{ requestId: string; daysCount: number; autoApproved: boolean }>> {
     try {
       const { data, error } = await this.client.rpc("request_prosm_time_leave", {
         p_leave_type: leaveType,
         p_start_date: startDate,
         p_end_date: endDate,
         p_reason: reason?.trim() || null,
+        p_document_path: documentPath ?? null,
       });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to submit this leave request.");

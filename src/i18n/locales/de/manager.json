@@ -90,8 +90,11 @@
       "annual": "Jahresurlaub",
       "sick": "Krankheit",
       "unpaid": "Unbezahlt",
-      "emergency": "Notfall",
-      "other": "Sonstiges"
+      "emergency": "Sonderurlaub",
+      "other": "Sonstiges",
+      "hajj": "Hadsch oder Umra",
+      "bereavement": "Trauerfall",
+      "paternity": "Vaterschaft"
     },
     "revokeTitle": "Genehmigten Urlaub widerrufen",
     "revokeHint": "Bereits genehmigter, bevorstehender Urlaub - verwenden Sie dies, wenn sich die Pläne geändert haben und der Urlaub nachträglich storniert werden muss.",

@@ -24,6 +24,7 @@ import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
 import AdminAttendanceCard from "./AdminAttendanceCard";
 import HintText from "../../components/common/HintText";
+import EmploymentDetailsCard from "./EmploymentDetailsCard";
 
 const MANAGER_ONLY_PERMISSIONS = ["leave.approve", "attendance.clock_in_on_behalf", "attendance.clock_out_on_behalf"];
 
@@ -431,6 +432,10 @@ export default function PersonDetailPage() {
           ))
         )}
       </Card>
+
+      {userId && (canEditLeaveEntitlement || hasPermission("employees.edit")) ? (
+        <EmploymentDetailsCard userId={userId} canEdit={Boolean(profile?.isOwner) || hasPermission("employees.edit")} />
+      ) : null}
 
       {canEditLeaveEntitlement ? (
         <Card title={t("detail.leaveEntitlementTitle")}>
