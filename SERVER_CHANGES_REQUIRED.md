@@ -1,5 +1,7 @@
 # تغييرات السيرفر المطلوبة — PROSM Time v2.3.43
 
+> **الحالة 2026-10-25:** كل الـ migrations حتى `20261025220000` مطبّقة على السيرفر، والـ Edge Functions المذكورة تحت منشورة. أي migration جديدة بعد كده بتتضاف تحت.
+
 كل البنود ملفات migration في `supabase/migrations/` (تُطبَّق بالترتيب بـ `npx supabase db push --linked`)، ومختبرة على قاعدة PGlite من كل الـ migrations (`npm run test:db`). لا تعديل لأي migration مطبّقة سابقاً.
 
 | Migration | الخطوة | المحتوى |
