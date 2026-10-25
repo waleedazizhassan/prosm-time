@@ -13,19 +13,32 @@
   background: var(--surface-app);
 }
 
+/* v2.3.43 step 20 (item 3): everything below the fixed header - first the
+   notices (offline, trial, installation, sync), then the sidebar and the
+   page. The notices used to sit above the header in the flow, so the fixed
+   header covered their first line and the page's own top margin left a gap
+   under them. */
+.stage {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  min-height: 0;
+
+  margin-top: var(--shell-top);
+}
+
+.notices {
+  flex: none;
+}
+
+.notices:empty {
+  display: none;
+}
+
 .body {
   display: flex;
   flex: 1;
 
   min-height: 0;
-
-  margin-top: 64px;
-}
-
-/* Matches Header.module.css's own 56px mobile height at the same
-   breakpoint. */
-@media (max-width: 640px) {
-  .body {
-    margin-top: 56px;
-  }
 }

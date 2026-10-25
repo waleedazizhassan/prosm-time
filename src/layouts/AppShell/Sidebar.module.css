@@ -15,8 +15,9 @@
      its bottom) sit below the visible fold even though the flexbox
      math inside was already correct. vh stays first as the fallback
      for the few browsers that don't support dvh at all. */
-  height: calc(100vh - 64px);
-  height: calc(100dvh - 64px);
+  /* step 20: as tall as the area under the header and the notices */
+  align-self: stretch;
+  height: auto;
 
   display: flex;
   flex-direction: column;
@@ -410,7 +411,7 @@
 
 .mobileBackdrop {
   position: fixed;
-  inset: 64px 0 0 0;
+  inset: var(--shell-top) 0 0 0;
 
   background: rgba(15, 23, 42, 0.4);
   z-index: var(--z-dropdown);
@@ -425,11 +426,11 @@
 @media (max-width: 900px) {
   .sidebar {
     position: fixed;
-    top: 64px;
+    top: var(--shell-top);
     inset-inline-start: 0;
 
-    height: calc(100vh - 64px);
-    height: calc(100dvh - 64px);
+    height: calc(100vh - var(--shell-top));
+    height: calc(100dvh - var(--shell-top));
     width: 280px;
 
     transform: translateX(-100%);
@@ -499,20 +500,7 @@
   }
 }
 
-/* Header shrinks to 56px at this same breakpoint (Header.module.css)
-   - the mobile drawer/backdrop must match, since both position
-   themselves relative to the header's real height. */
-@media (max-width: 640px) {
-  .mobileBackdrop {
-    inset: 56px 0 0 0;
-  }
-
-  .sidebar {
-    top: 56px;
-    height: calc(100vh - 56px);
-    height: calc(100dvh - 56px);
-  }
-}
+/* The 56px phone header is in --shell-top (design-tokens.css, step 20). */
 
 /* § live UX review, user-directed - the radio only lives here on
    mobile (the drawer); desktop keeps it in the Header

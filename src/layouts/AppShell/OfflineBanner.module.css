@@ -44,3 +44,17 @@
   font-size: var(--font-xs);
   line-height: 1.6;
 }
+
+/* v2.3.43 step 20 (item 3): on a phone the card stays whole and compact -
+   the title and the message both visible, no large picture. */
+@media (max-width: 640px) {
+  .banner {
+    margin: var(--space-2) var(--space-3) 0;
+    padding: var(--space-2);
+  }
+
+  .art {
+    width: 44px;
+    height: 36px;
+  }
+}

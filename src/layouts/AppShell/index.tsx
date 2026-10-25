@@ -29,23 +29,27 @@ export default function AppShell() {
   return (
     <LayoutProvider>
       <div className={styles.layout}>
-        <InstallationStatusBanner />
-        <TrialBanner />
-        <OfflineBanner />
-        <AttendanceSyncStatus />
         <PresenceTrackingLoop />
         <ClockReminderLoop />
         <PushRegistration />
         <Header />
-        <div className={styles.body}>
-          <Sidebar />
-          <Main>
-            <PageLoadBoundary resetKey={location.pathname}>
-              <Suspense fallback={null}>
-                <Outlet />
-              </Suspense>
-            </PageLoadBoundary>
-          </Main>
+        <div className={styles.stage}>
+          <div className={styles.notices}>
+            <InstallationStatusBanner />
+            <TrialBanner />
+            <OfflineBanner />
+            <AttendanceSyncStatus />
+          </div>
+          <div className={styles.body}>
+            <Sidebar />
+            <Main>
+              <PageLoadBoundary resetKey={location.pathname}>
+                <Suspense fallback={null}>
+                  <Outlet />
+                </Suspense>
+              </PageLoadBoundary>
+            </Main>
+          </div>
         </div>
         <BottomNav />
       </div>
