@@ -60,7 +60,6 @@
     "lateDeductionStartTimeLabel": "Début de la déduction pour retard",
     "breakRoundingModeLabel": "Arrondi du temps de pause",
     "blockSelfClockInLabel": "Bloquer le pointage automatique après la période de tolérance (nécessite un pointage assisté par un responsable)",
-    "blockSelfClockOutLabel": "Bloquer le départ automatique en dehors de la zone de travail de ce site (nécessite un départ assisté par un responsable)",
     "exemptEmployeesTitle": "Employés exemptés",
     "exemptEmployeesHint": "Les employés ajoutés ici ignorent à la fois le blocage du pointage après la période de tolérance et le blocage du départ hors zone pour ce site.",
     "exemptEmployeesAddLabel": "Ajouter un employé exempté",
@@ -78,11 +77,12 @@
     "confirm": "Enregistrer le site",
     "genericError": "Impossible d'enregistrer ce site.",
     "openSiteSettings": "Ouvrir les règles du site",
-    "blockSelfClockInOutsideLabel": "Bloquer le pointage d'arrivée en dehors de la zone de travail de ce site (pointage par un responsable à la place)",
     "locationLabel": "Emplacement",
     "locationHint": "Placez-vous sur le site et appuyez sur « Utiliser ma position actuelle » - ou saisissez les coordonnées dans Plus d'options.",
     "locationSet": "Emplacement défini : {{latitude}}, {{longitude}}",
-    "moreOptions": "Plus d'options"
+    "moreOptions": "Plus d'options",
+    "outsideZonePolicyLabel": "Pointage d'arrivée hors de la zone de travail",
+    "clockOutOutsideNote": "Le pointage de départ hors de la zone est toujours autorisé : il est enregistré et un motif est demandé, pour qu'aucune session ne reste ouverte."
   },
   "detail": {
     "backToList": "Retour aux sites",
@@ -150,5 +150,9 @@
     "removeAssignmentAction": "Retirer",
     "close": "Fermer",
     "genericError": "Impossible de mettre à jour les assignations de ce projet."
+  },
+  "outsideZonePolicy": {
+    "ALLOW_WITH_EXCEPTION": "Autoriser, l'employé donne un motif et un responsable le vérifie",
+    "BLOCK": "Refuser (un responsable du site peut toujours pointer, ou pointer pour l'employé)"
   }
 }

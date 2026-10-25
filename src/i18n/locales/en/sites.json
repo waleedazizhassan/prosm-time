@@ -60,7 +60,6 @@
     "lateDeductionStartTimeLabel": "Lateness deduction starts at",
     "breakRoundingModeLabel": "Break time rounding",
     "blockSelfClockInLabel": "Block self clock-in past the grace period (require a manager-assisted clock-in instead)",
-    "blockSelfClockOutLabel": "Block self clock-out outside this site's work area (require a manager-assisted clock-out instead)",
     "exemptEmployeesTitle": "Exempt employees",
     "exemptEmployeesHint": "Employees added here skip both the after-grace clock-in block and the outside-geofence clock-out block for this site.",
     "exemptEmployeesAddLabel": "Add an exempt employee",
@@ -78,11 +77,12 @@
     "confirm": "Save site",
     "genericError": "Unable to save this site.",
     "openSiteSettings": "Open the site's rules",
-    "blockSelfClockInOutsideLabel": "Block self clock-in outside this site's work area (require a manager-assisted clock-in instead)",
     "locationLabel": "Location",
     "locationHint": "Stand at the site and press \"Use my current location\" - or enter the coordinates under More options.",
     "locationSet": "Location set: {{latitude}}, {{longitude}}",
-    "moreOptions": "More options"
+    "moreOptions": "More options",
+    "outsideZonePolicyLabel": "Clock-in from outside the work area",
+    "clockOutOutsideNote": "Clocking out from outside the work area is always allowed: it is recorded and the employee is asked for a reason, so nobody is left clocked in."
   },
   "detail": {
     "backToList": "Back to sites",
@@ -150,5 +150,9 @@
     "removeAssignmentAction": "Remove",
     "close": "Close",
     "genericError": "Unable to update this project's assignments."
+  },
+  "outsideZonePolicy": {
+    "ALLOW_WITH_EXCEPTION": "Allow, the employee gives a reason and a manager reviews it",
+    "BLOCK": "Refuse (a manager at this site can still clock in, or clock the employee in)"
   }
 }

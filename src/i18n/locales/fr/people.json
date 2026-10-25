@@ -39,7 +39,8 @@
     "timesheets.approve": "Approuver les feuilles de temps",
     "timesheets.generate": "Générer les feuilles de temps",
     "leave.approve": "Approuver les congés",
-    "people.unassigned": "Employés sans site"
+    "people.unassigned": "Employés sans site",
+    "attendance.override_block": "Pointer malgré un blocage du site (journalisé)"
   },
   "invite": {
     "actionLabel": "Inviter un employé",

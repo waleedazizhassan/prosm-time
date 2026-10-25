@@ -60,7 +60,6 @@
     "lateDeductionStartTimeLabel": "Verspätungsabzug beginnt um",
     "breakRoundingModeLabel": "Pausenzeit-Rundung",
     "blockSelfClockInLabel": "Selbst-Einstempeln nach der Kulanzzeit blockieren (erfordert stattdessen ein von einem Manager unterstütztes Einstempeln)",
-    "blockSelfClockOutLabel": "Selbst-Ausstempeln außerhalb des Arbeitsbereichs dieses Standorts blockieren (erfordert stattdessen ein von einem Manager unterstütztes Ausstempeln)",
     "exemptEmployeesTitle": "Befreite Mitarbeiter",
     "exemptEmployeesHint": "Hier hinzugefügte Mitarbeiter überspringen sowohl die Einstempel-Blockierung nach der Kulanzzeit als auch die Ausstempel-Blockierung außerhalb des Bereichs für diesen Standort.",
     "exemptEmployeesAddLabel": "Befreiten Mitarbeiter hinzufügen",
@@ -78,11 +77,12 @@
     "confirm": "Standort speichern",
     "genericError": "Dieser Standort konnte nicht gespeichert werden.",
     "openSiteSettings": "Regeln des Standorts öffnen",
-    "blockSelfClockInOutsideLabel": "Selbst-Einstempeln außerhalb des Arbeitsbereichs dieses Standorts sperren (stattdessen Einstempeln durch eine Führungskraft)",
     "locationLabel": "Standort",
     "locationHint": "Stellen Sie sich an den Standort und tippen Sie auf \"Meinen aktuellen Standort verwenden\" - oder geben Sie die Koordinaten unter Weitere Optionen ein.",
     "locationSet": "Standort festgelegt: {{latitude}}, {{longitude}}",
-    "moreOptions": "Weitere Optionen"
+    "moreOptions": "Weitere Optionen",
+    "outsideZonePolicyLabel": "Einstempeln außerhalb des Arbeitsbereichs",
+    "clockOutOutsideNote": "Ausstempeln außerhalb des Arbeitsbereichs ist immer erlaubt: Es wird erfasst und ein Grund wird abgefragt, damit keine Schicht offen bleibt."
   },
   "detail": {
     "backToList": "Zurück zu Standorten",
@@ -150,5 +150,9 @@
     "removeAssignmentAction": "Entfernen",
     "close": "Schließen",
     "genericError": "Die Zuweisungen dieses Projekts konnten nicht aktualisiert werden."
+  },
+  "outsideZonePolicy": {
+    "ALLOW_WITH_EXCEPTION": "Erlauben, die Person gibt einen Grund an und eine Führungskraft prüft ihn",
+    "BLOCK": "Ablehnen (eine Führungskraft dieses Standorts kann trotzdem einstempeln oder für die Person einstempeln)"
   }
 }

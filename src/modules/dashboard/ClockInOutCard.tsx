@@ -410,6 +410,7 @@ export default function ClockInOutCard() {
                 blockSelfClockInAfterGrace: false,
                 blockSelfClockOutOutsideGeofence: false,
                 blockSelfClockInOutsideGeofence: false,
+                outsideZonePolicy: "ALLOW_WITH_EXCEPTION" as const,
                 presenceMonitoringEnabled: false,
                 createdAt: new Date().toISOString(),
               }));

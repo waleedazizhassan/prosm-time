@@ -39,7 +39,8 @@
     "timesheets.approve": "Stundenzettel genehmigen",
     "timesheets.generate": "Stundenzettel erstellen",
     "leave.approve": "Urlaub genehmigen",
-    "people.unassigned": "Mitarbeitende ohne Standort"
+    "people.unassigned": "Mitarbeitende ohne Standort",
+    "attendance.override_block": "Trotz Standortsperre einstempeln (protokolliert)"
   },
   "invite": {
     "actionLabel": "Mitarbeiter einladen",

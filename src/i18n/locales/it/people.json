@@ -39,7 +39,8 @@
     "timesheets.approve": "Approva fogli ore",
     "timesheets.generate": "Genera fogli ore",
     "leave.approve": "Approvare le ferie",
-    "people.unassigned": "Dipendenti senza sede"
+    "people.unassigned": "Dipendenti senza sede",
+    "attendance.override_block": "Timbrare nonostante un blocco della sede (registrato)"
   },
   "invite": {
     "actionLabel": "Invita dipendente",

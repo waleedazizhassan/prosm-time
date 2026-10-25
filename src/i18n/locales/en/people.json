@@ -39,7 +39,8 @@
     "timesheets.approve": "Approve timesheets",
     "timesheets.generate": "Generate timesheets",
     "leave.approve": "Approve leave",
-    "people.unassigned": "Employees not tied to a site"
+    "people.unassigned": "Employees not tied to a site",
+    "attendance.override_block": "Clock in past a site block (audited)"
   },
   "invite": {
     "actionLabel": "Invite employee",

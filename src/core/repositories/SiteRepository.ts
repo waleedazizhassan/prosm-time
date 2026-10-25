@@ -8,6 +8,7 @@ export interface ServiceResult<T = null> {
 
 export type KioskMode = "personal_device_only" | "kiosk_only" | "both_allowed";
 export type BreakRoundingMode = "cumulative" | "full_hour";
+export type OutsideZonePolicy = "ALLOW_WITH_EXCEPTION" | "BLOCK";
 
 export interface Site {
   id: string;
@@ -37,12 +38,15 @@ export interface Site {
   lateDeductionStartTime: string | null;
   breakRoundingMode: BreakRoundingMode;
   blockSelfClockInAfterGrace: boolean;
-  // § live UX review, user-directed - self clock-out outside this
-  // site's geofence is blocked outright (not just recorded as an
-  // exception) when this is on, mirroring blockSelfClockInAfterGrace.
+  // v2.3.43 step 1: no longer blocks - a clock-out outside the work area
+  // is always recorded with an exception (always false from the server).
   blockSelfClockOutOutsideGeofence: boolean;
-  // Audit 2.1 (owner 2026-10-13) - the same for a self clock-in.
+  // Audit 2.1 (owner 2026-10-13) - the same for a self clock-in; mirrors
+  // outsideZonePolicy === "BLOCK".
   blockSelfClockInOutsideGeofence: boolean;
+  // v2.3.43 step 1 (item 10): a self clock-in from outside the work area is
+  // allowed with an exception, or refused (a manager at the site still may).
+  outsideZonePolicy: OutsideZonePolicy;
   // § real bug fix, 2026-09-07 - gates ongoing GPS re-checks during a
   // shift, the SOS button, and geofence-exit-during-shift
   // notifications (WP-10's presence_sessions are only opened for a
@@ -142,6 +146,7 @@ interface SiteRow {
   block_self_clock_in_after_grace: boolean;
   block_self_clock_out_outside_geofence: boolean;
   block_self_clock_in_outside_geofence?: boolean;
+  outside_zone_policy?: OutsideZonePolicy;
   presence_monitoring_enabled: boolean;
   created_at: string;
 }
@@ -178,6 +183,7 @@ function mapSiteRow(row: SiteRow): Site {
     blockSelfClockInAfterGrace: row.block_self_clock_in_after_grace,
     blockSelfClockOutOutsideGeofence: row.block_self_clock_out_outside_geofence,
     blockSelfClockInOutsideGeofence: row.block_self_clock_in_outside_geofence ?? false,
+    outsideZonePolicy: row.outside_zone_policy ?? (row.block_self_clock_in_outside_geofence ? "BLOCK" : "ALLOW_WITH_EXCEPTION"),
     presenceMonitoringEnabled: row.presence_monitoring_enabled,
     createdAt: row.created_at,
   };
@@ -416,6 +422,17 @@ class SiteRepository {
   async setBlockSelfClockInOutsideGeofence(siteId: string, block: boolean): Promise<ServiceResult> {
     try {
       const { data, error } = await this.client.rpc("set_prosm_time_site_block_clock_in_outside", { p_site_id: siteId, p_block: block });
+      if (error) return createError(error.message);
+      if (data?.success === false) return createError("Unable to save this setting.");
+      return createSuccess();
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Site service unavailable.");
+    }
+  }
+
+  async setOutsideZonePolicy(siteId: string, policy: OutsideZonePolicy): Promise<ServiceResult> {
+    try {
+      const { data, error } = await this.client.rpc("set_prosm_time_site_outside_zone_policy", { p_site_id: siteId, p_policy: policy });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to save this setting.");
       return createSuccess();

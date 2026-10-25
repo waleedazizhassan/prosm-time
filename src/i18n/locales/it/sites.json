@@ -60,7 +60,6 @@
     "lateDeductionStartTimeLabel": "Inizio detrazione per ritardo",
     "breakRoundingModeLabel": "Arrotondamento tempo di pausa",
     "blockSelfClockInLabel": "Blocca la timbratura autonoma oltre il periodo di tolleranza (richiede invece una timbratura assistita dal manager)",
-    "blockSelfClockOutLabel": "Blocca l'uscita autonoma al di fuori dell'area di lavoro di questa sede (richiede invece un'uscita assistita dal manager)",
     "exemptEmployeesTitle": "Dipendenti esentati",
     "exemptEmployeesHint": "I dipendenti aggiunti qui saltano sia il blocco della timbratura dopo il periodo di tolleranza sia il blocco dell'uscita fuori area per questa sede.",
     "exemptEmployeesAddLabel": "Aggiungi un dipendente esentato",
@@ -78,11 +77,12 @@
     "confirm": "Salva sede",
     "genericError": "Impossibile salvare questa sede.",
     "openSiteSettings": "Apri le regole della sede",
-    "blockSelfClockInOutsideLabel": "Blocca la timbratura di entrata fuori dall'area di lavoro di questa sede (timbratura da parte di un responsabile)",
     "locationLabel": "Posizione",
     "locationHint": "Mettiti nella sede e premi \"Usa la mia posizione attuale\" - oppure inserisci le coordinate in Altre opzioni.",
     "locationSet": "Posizione impostata: {{latitude}}, {{longitude}}",
-    "moreOptions": "Altre opzioni"
+    "moreOptions": "Altre opzioni",
+    "outsideZonePolicyLabel": "Timbratura di entrata fuori dall'area di lavoro",
+    "clockOutOutsideNote": "L'uscita fuori dall'area è sempre consentita: viene registrata e viene chiesto un motivo, così nessun turno resta aperto."
   },
   "detail": {
     "backToList": "Torna alle sedi",
@@ -150,5 +150,9 @@
     "removeAssignmentAction": "Rimuovi",
     "close": "Chiudi",
     "genericError": "Impossibile aggiornare le assegnazioni di questo progetto."
+  },
+  "outsideZonePolicy": {
+    "ALLOW_WITH_EXCEPTION": "Consenti, il dipendente indica un motivo e un responsabile lo verifica",
+    "BLOCK": "Rifiuta (un responsabile della sede può comunque timbrare, o timbrare per il dipendente)"
   }
 }

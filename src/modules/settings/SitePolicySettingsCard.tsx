@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import { useAuth } from "../../core/context/AuthContext";
 
-import SiteRepository, { type Site, type SiteAssignment, type BreakRoundingMode } from "../../core/repositories/SiteRepository";
+import SiteRepository, { type Site, type SiteAssignment, type BreakRoundingMode, type OutsideZonePolicy } from "../../core/repositories/SiteRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import Card from "../../components/common/Card";
@@ -15,6 +15,7 @@ import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
 
 const BREAK_ROUNDING_MODE_OPTIONS: BreakRoundingMode[] = ["cumulative", "full_hour"];
+const OUTSIDE_ZONE_POLICY_OPTIONS: OutsideZonePolicy[] = ["ALLOW_WITH_EXCEPTION", "BLOCK"];
 
 const toggleRowStyle = {
   display: "flex",
@@ -57,8 +58,7 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
   const [lateDeductionStartTime, setLateDeductionStartTime] = useState("");
   const [breakRoundingMode, setBreakRoundingMode] = useState<BreakRoundingMode>("cumulative");
   const [blockSelfClockInAfterGrace, setBlockSelfClockInAfterGrace] = useState(false);
-  const [blockSelfClockOutOutsideGeofence, setBlockSelfClockOutOutsideGeofence] = useState(false);
-  const [blockSelfClockInOutsideGeofence, setBlockSelfClockInOutsideGeofence] = useState(false);
+  const [outsideZonePolicy, setOutsideZonePolicy] = useState<OutsideZonePolicy>("ALLOW_WITH_EXCEPTION");
   const [presenceMonitoringEnabled, setPresenceMonitoringEnabled] = useState(false);
 
   const [assignments, setAssignments] = useState<SiteAssignment[]>([]);
@@ -111,8 +111,7 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
       setLateDeductionStartTime(loaded.lateDeductionStartTime ?? "");
       setBreakRoundingMode(loaded.breakRoundingMode);
       setBlockSelfClockInAfterGrace(loaded.blockSelfClockInAfterGrace);
-      setBlockSelfClockOutOutsideGeofence(loaded.blockSelfClockOutOutsideGeofence);
-      setBlockSelfClockInOutsideGeofence(loaded.blockSelfClockInOutsideGeofence);
+      setOutsideZonePolicy(loaded.outsideZonePolicy);
       setPresenceMonitoringEnabled(loaded.presenceMonitoringEnabled);
       setAssignments(assignmentsResult.success ? assignmentsResult.data ?? [] : []);
     });
@@ -157,17 +156,19 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
       lateDeductionStartTime: lateDeductionStartTime || null,
       breakRoundingMode,
       blockSelfClockInAfterGrace,
-      blockSelfClockOutOutsideGeofence,
+      blockSelfClockOutOutsideGeofence: false,
       presenceMonitoringEnabled,
     });
-    // Audit 2.1 - its own call, same authority as the site update.
-    const clockInResult = result.success ? await SiteRepository.setBlockSelfClockInOutsideGeofence(selectedSiteId, blockSelfClockInOutsideGeofence) : result;
+    // Audit 2.1 / v2.3.43 step 1 - its own call (audited), same authority as the site update.
+    const clockInResult =
+      result.success && site && site.outsideZonePolicy !== outsideZonePolicy ? await SiteRepository.setOutsideZonePolicy(selectedSiteId, outsideZonePolicy) : result;
 
     setSaving(false);
     if (!clockInResult.success) {
       setSaveError(humanizeBackendError(clockInResult.message, t) ?? t("sitePolicy.genericError"));
       return;
     }
+    setSite((current) => (current ? { ...current, outsideZonePolicy } : current));
     setSaved(true);
   };
 
@@ -302,30 +303,18 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
               label={t("sites:form.blockSelfClockInLabel")}
             />
           </div>
-          <div style={toggleRowStyle}>
-            <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("sites:form.blockSelfClockInOutsideLabel")}</span>
-            <Toggle
-              checked={blockSelfClockInOutsideGeofence}
-              onChange={(checked) => {
-                setBlockSelfClockInOutsideGeofence(checked);
-                setSaved(false);
-              }}
-              disabled={saving}
-              label={t("sites:form.blockSelfClockInOutsideLabel")}
-            />
-          </div>
-          <div style={toggleRowStyle}>
-            <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("sites:form.blockSelfClockOutLabel")}</span>
-            <Toggle
-              checked={blockSelfClockOutOutsideGeofence}
-              onChange={(checked) => {
-                setBlockSelfClockOutOutsideGeofence(checked);
-                setSaved(false);
-              }}
-              disabled={saving}
-              label={t("sites:form.blockSelfClockOutLabel")}
-            />
-          </div>
+          <Select
+            label={t("sites:form.outsideZonePolicyLabel")}
+            name="policyOutsideZone"
+            value={outsideZonePolicy}
+            onChange={(event) => {
+              setOutsideZonePolicy(event.target.value as OutsideZonePolicy);
+              setSaved(false);
+            }}
+            disabled={saving}
+            options={OUTSIDE_ZONE_POLICY_OPTIONS.map((policy) => ({ value: policy, label: t(`sites:outsideZonePolicy.${policy}`) }))}
+          />
+          <HintText small>{t("sites:form.clockOutOutsideNote")}</HintText>
           <div style={toggleRowStyle}>
             <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("sites:form.presenceMonitoringEnabledLabel")}</span>
             <Toggle
