@@ -193,5 +193,27 @@
     "title": "Field worker",
     "hint": "Moves around for work: leaving a site never asks them or clocks them out.",
     "genericError": "Could not save."
+  },
+  "byRole": {
+    "search": "Search",
+    "searchPlaceholder": "Name, role or site",
+    "site": "Site",
+    "status": "Status",
+    "shift": "Shift",
+    "all": "All",
+    "shiftToday": "Has a shift today",
+    "noShift": "No shift today",
+    "noResults": "No one matches.",
+    "presence": {
+      "in": "In",
+      "break": "On break",
+      "out": "Out"
+    },
+    "groups": {
+      "managers": "Managers",
+      "supervisors": "Supervisors",
+      "employees": "Employees",
+      "viewers": "Viewers"
+    }
   }
 }

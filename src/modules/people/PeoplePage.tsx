@@ -15,6 +15,7 @@ import ErrorText from "../../components/common/ErrorText";
 import peopleHeaderImage from "../../assets/illustrations/people.svg";
 import PageBanner from "../../components/common/PageBanner";
 import PersonName from "../../components/common/PersonName";
+import PeopleByRole from "./PeopleByRole";
 
 // PROSM Time Implementation Master File V3.0, WP-04/§37 - "Employee
 // Management." Real org-member list (RLS-scoped) with an Invite action
@@ -24,7 +25,7 @@ import PersonName from "../../components/common/PersonName";
 export default function PeoplePage() {
   const { t } = useTranslation("people");
   const navigate = useNavigate();
-  const { hasPermission } = useAuth();
+  const { hasPermission, profile } = useAuth();
 
   const [members, setMembers] = useState<OrgMember[]>([]);
   const [loading, setLoading] = useState(true);
@@ -90,7 +91,13 @@ export default function PeoplePage() {
 
       <ErrorText>{loadError}</ErrorText>
 
-      <Table columns={columns} data={members} getRowId={(member) => member.id} loading={loading} emptyMessage="—" onRowClick={(member) => navigate(`/people/${member.id}`)} />
+      {/* v2.3.43 step 15 (item 18): grouped by role, with search and filters;
+          the plain table stays as a fallback when the grouped list cannot load. */}
+      {loadError ? (
+        <Table columns={columns} data={members} getRowId={(member) => member.id} loading={loading} emptyMessage="—" onRowClick={(member) => navigate(`/people/${member.id}`)} />
+      ) : (
+        <PeopleByRole compact={!profile?.isOwner} onOpen={(person) => navigate(`/people/${person.id}`)} />
+      )}
 
       <InviteEmployeeModal isOpen={inviteOpen} onClose={() => setInviteOpen(false)} onInvited={load} />
     </PageShell>

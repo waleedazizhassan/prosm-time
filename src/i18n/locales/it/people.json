@@ -193,5 +193,27 @@
     "title": "Lavoratore sul campo",
     "hint": "Si sposta per lavoro: mai domande né uscita automatica.",
     "genericError": "Salvataggio non riuscito."
+  },
+  "byRole": {
+    "search": "Cerca",
+    "searchPlaceholder": "Nome, ruolo o sede",
+    "site": "Sede",
+    "status": "Stato",
+    "shift": "Turno",
+    "all": "Tutti",
+    "shiftToday": "Ha un turno oggi",
+    "noShift": "Nessun turno oggi",
+    "noResults": "Nessun risultato.",
+    "presence": {
+      "in": "Presente",
+      "break": "In pausa",
+      "out": "Assente"
+    },
+    "groups": {
+      "managers": "Responsabili",
+      "supervisors": "Supervisori",
+      "employees": "Dipendenti",
+      "viewers": "Osservatori"
+    }
   }
 }

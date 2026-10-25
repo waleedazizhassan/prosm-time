@@ -193,5 +193,27 @@
     "title": "Außendienst",
     "hint": "Unterwegs für die Arbeit: nie gefragt, nie automatisch ausgestempelt.",
     "genericError": "Speichern fehlgeschlagen."
+  },
+  "byRole": {
+    "search": "Suchen",
+    "searchPlaceholder": "Name, Rolle oder Standort",
+    "site": "Standort",
+    "status": "Status",
+    "shift": "Schicht",
+    "all": "Alle",
+    "shiftToday": "Hat heute Schicht",
+    "noShift": "Heute keine Schicht",
+    "noResults": "Keine Treffer.",
+    "presence": {
+      "in": "Anwesend",
+      "break": "Pause",
+      "out": "Abwesend"
+    },
+    "groups": {
+      "managers": "Führungskräfte",
+      "supervisors": "Vorarbeiter",
+      "employees": "Mitarbeitende",
+      "viewers": "Betrachter"
+    }
   }
 }

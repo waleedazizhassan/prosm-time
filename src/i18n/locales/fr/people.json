@@ -193,5 +193,27 @@
     "title": "Travailleur de terrain",
     "hint": "Se déplace pour le travail : jamais de question ni de départ automatique.",
     "genericError": "Enregistrement impossible."
+  },
+  "byRole": {
+    "search": "Rechercher",
+    "searchPlaceholder": "Nom, rôle ou site",
+    "site": "Site",
+    "status": "Statut",
+    "shift": "Poste",
+    "all": "Tous",
+    "shiftToday": "A un poste aujourd'hui",
+    "noShift": "Sans poste aujourd'hui",
+    "noResults": "Aucun résultat.",
+    "presence": {
+      "in": "Présent",
+      "break": "En pause",
+      "out": "Absent"
+    },
+    "groups": {
+      "managers": "Responsables",
+      "supervisors": "Superviseurs",
+      "employees": "Employés",
+      "viewers": "Lecteurs"
+    }
   }
 }
