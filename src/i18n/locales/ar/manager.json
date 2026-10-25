@@ -162,5 +162,28 @@
     "overtimeMinutesLabel": "دقائق الإضافي",
     "lateMinutesLabel": "دقائق التأخير",
     "save": "حفظ"
+  },
+  "integrity": {
+    "title_one": "تسجيلات تحتاج مراجعة ({{count}})",
+    "title_other": "تسجيلات تحتاج مراجعة ({{count}})",
+    "hint": "دي ماحجبتش الحضور أو الانصراف. اقبل أو ارفض (بسبب) أو اطلب توضيح.",
+    "loadError": "تعذّر تحميل التسجيلات المشبوهة.",
+    "genericError": "تعذّر الحفظ.",
+    "notesLabel": "ملاحظة للموظف (إلزامية للرفض أو طلب التوضيح)",
+    "kind": {
+      "liveness_failed": "فشل التحقق الحي",
+      "liveness_unavailable": "التحقق الحي غير متاح على الجهاز",
+      "unverified_capture": "صورة من ملف وليست من الكاميرا",
+      "stale_capture": "صورة قديمة",
+      "reused_token": "صورة مستخدمة قبل كده",
+      "missing_token": "صورة بدون رمز من السيرفر",
+      "repeated_coordinates": "نفس الموقع بالظبط تاني",
+      "suspicious_accuracy": "دقة موقع مثالية بشكل مريب"
+    },
+    "explain": {
+      "liveness_failed": "الشخص ماعملش الحركة المطلوبة قدام الكاميرا.",
+      "unverified_capture": "الكاميرا ماشتغلتش فاتاختارت صورة من الموبايل.",
+      "repeated_coordinates": "نفس النقطة بخطأ GPS شبه صفر - علامة شائعة لتطبيقات الموقع الوهمي."
+    }
   }
 }

@@ -5,6 +5,8 @@ import { Camera, RefreshCw, Upload, X, SwitchCamera } from "lucide-react";
 import Modal from "./Modal";
 import Button from "./Button";
 import { LivenessGate } from "../../core/utils/livenessCheck";
+import DatabaseManager from "../../core/database/DatabaseManager";
+import { runLivenessChallenge, tagCapture, type LivenessChallenge, type LivenessResult } from "../../core/utils/captureIntegrity";
 import styles from "./CameraCaptureModal.module.css";
 
 // Low-res sampling for the liveness check below - a full-resolution frame
@@ -18,7 +20,17 @@ interface CameraCaptureModalProps {
   isOpen: boolean;
   onClose: () => void;
   onCapture: (file: File) => void;
+  // v2.3.43 step 11: the site of the clock in/out (the server decides the liveness challenge from it).
+  siteId?: string | null;
 }
+
+interface CaptureToken {
+  token: string;
+  challengeRequired: boolean;
+  challenge: LivenessChallenge | null;
+}
+
+const MAX_CHALLENGE_ATTEMPTS = 3;
 
 type FacingMode = "environment" | "user";
 
@@ -61,7 +73,7 @@ async function openCamera(facingMode: FacingMode): Promise<MediaStream> {
 // a separate always-visible button) - reachable only once getUserMedia
 // has actually failed, so evidence capture is never a hard dead end
 // even without a standalone Camera control anywhere in the UI.
-export default function CameraCaptureModal({ isOpen, onClose, onCapture }: CameraCaptureModalProps) {
+export default function CameraCaptureModal({ isOpen, onClose, onCapture, siteId = null }: CameraCaptureModalProps) {
   const { t } = useTranslation("camera");
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
@@ -82,6 +94,55 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
   // the CSS's own header comment); the switch button still reaches the
   // rear camera when needed.
   const [facingMode, setFacingMode] = useState<FacingMode>("user");
+
+  // v2.3.43 step 11 (item 22): a one-time token from the server for this
+  // photo, and - when the site asks for it - a short movement the person
+  // makes in front of the camera (checked here, on the device).
+  const [captureToken, setCaptureToken] = useState<CaptureToken | null>(null);
+  const [challengeState, setChallengeState] = useState<"idle" | "running" | "passed" | "failed" | "unavailable">("idle");
+  const [challengeAttempts, setChallengeAttempts] = useState(0);
+  const [challengeResult, setChallengeResult] = useState<{ result: LivenessResult; confidence: number | null }>({ result: "not_required", confidence: null });
+  const challengeAbortRef = useRef<AbortController | null>(null);
+
+  useEffect(() => {
+    if (!isOpen) {
+      challengeAbortRef.current?.abort();
+      setCaptureToken(null);
+      setChallengeState("idle");
+      setChallengeAttempts(0);
+      setChallengeResult({ result: "not_required", confidence: null });
+      return;
+    }
+    let cancelled = false;
+    void (async () => {
+      try {
+        const { data, error } = await DatabaseManager.getClient().rpc("issue_prosm_time_capture_token", { p_site_id: siteId });
+        if (!cancelled && !error && data) setCaptureToken(data as CaptureToken);
+      } catch {
+        // offline: no token - the photo is still taken and the server flags it for review
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [isOpen, siteId]);
+
+  const runChallenge = async () => {
+    const video = videoRef.current;
+    if (!video || !captureToken?.challenge) return;
+    challengeAbortRef.current?.abort();
+    const controller = new AbortController();
+    challengeAbortRef.current = controller;
+    setChallengeState("running");
+    const outcome = await runLivenessChallenge(video, captureToken.challenge, facingMode === "user", controller.signal);
+    if (controller.signal.aborted) return;
+    setChallengeAttempts((count) => count + 1);
+    setChallengeResult(outcome);
+    setChallengeState(outcome.result);
+  };
+
+  const challengePending =
+    Boolean(captureToken?.challengeRequired) && challengeState !== "passed" && challengeState !== "unavailable" && challengeAttempts < MAX_CHALLENGE_ATTEMPTS;
 
   const stopStream = () => {
     streamRef.current?.getTracks().forEach((track) => track.stop());
@@ -182,6 +243,13 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
     const response = await fetch(capturedDataUrl);
     const blob = await response.blob();
     const file = new File([blob], `camera-capture-${Date.now()}.jpg`, { type: "image/jpeg" });
+    tagCapture(file, {
+      token: captureToken?.token ?? null,
+      captureSource: "live_camera",
+      livenessResult: captureToken?.challengeRequired ? challengeResult.result : "not_required",
+      challenge: captureToken?.challenge ?? null,
+      confidence: challengeResult.confidence,
+    });
     onCapture(file);
     onClose();
   };
@@ -193,6 +261,14 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
   const handleFileFallback = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
+    // Not from the live camera: kept, and marked for a manager to review.
+    tagCapture(file, {
+      token: captureToken?.token ?? null,
+      captureSource: "file_fallback",
+      livenessResult: captureToken?.challengeRequired ? "unavailable" : "not_required",
+      challenge: captureToken?.challenge ?? null,
+      confidence: null,
+    });
     onCapture(file);
     onClose();
   };
@@ -227,9 +303,15 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
             <Button variant="ghost" onClick={onClose}>
               {t("cancel")}
             </Button>
-            <Button variant="primary" onClick={handleCapture} disabled={!livenessReady}>
-              <Camera size={14} /> {t("capture")}
-            </Button>
+            {challengePending ? (
+              <Button variant="primary" onClick={runChallenge} loading={challengeState === "running"}>
+                {challengeAttempts === 0 ? t("challenge.start") : t("challenge.retry")}
+              </Button>
+            ) : (
+              <Button variant="primary" onClick={handleCapture} disabled={!livenessReady}>
+                <Camera size={14} /> {t("capture")}
+              </Button>
+            )}
           </>
         )
       }
@@ -247,11 +329,23 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
           <>
             <video ref={videoRef} autoPlay playsInline muted className={`${styles.video} ${facingMode === "user" ? styles.videoMirrored : ""}`} />
             <div className={styles.faceGuide} aria-hidden="true" />
-            {!livenessReady && (
+            {captureToken?.challengeRequired && captureToken.challenge ? (
+              <div className={styles.livenessHint} aria-live="polite">
+                {challengeState === "passed"
+                  ? t("challenge.passed")
+                  : challengeState === "unavailable"
+                  ? t("challenge.unavailable")
+                  : challengeState === "failed"
+                  ? challengeAttempts >= MAX_CHALLENGE_ATTEMPTS
+                    ? t("challenge.failedFinal")
+                    : t("challenge.failed", { left: MAX_CHALLENGE_ATTEMPTS - challengeAttempts })
+                  : t(`challenge.instruction.${captureToken.challenge}`)}
+              </div>
+            ) : !livenessReady ? (
               <div className={styles.livenessHint} aria-live="polite">
                 {t("verifyingLiveness")}
               </div>
-            )}
+            ) : null}
             <button type="button" className={styles.switchCameraButton} onClick={handleSwitchCamera} aria-label={t("switchCamera")} title={t("switchCamera")}>
               <SwitchCamera size={18} />
             </button>
@@ -259,10 +353,13 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture }: Camer
         )}
       </div>
 
+      {captureToken?.challengeRequired ? <p style={{ margin: "var(--space-2) 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("challenge.privacy")}</p> : null}
+
       <input
         ref={fileInputRef}
         type="file"
         accept="image/*"
+        capture="user"
         onChange={handleFileFallback}
         className={styles.hiddenInput}
         tabIndex={-1}

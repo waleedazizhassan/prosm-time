@@ -162,5 +162,28 @@
     "overtimeMinutesLabel": "Überstundenminuten",
     "lateMinutesLabel": "Verspätungsminuten",
     "save": "Speichern"
+  },
+  "integrity": {
+    "title_one": "Verdächtige Stempelungen ({{count}})",
+    "title_other": "Verdächtige Stempelungen ({{count}})",
+    "hint": "Sie haben das Stempeln nicht blockiert. Annehmen, ablehnen (mit Grund) oder nachfragen.",
+    "loadError": "Laden fehlgeschlagen.",
+    "genericError": "Speichern fehlgeschlagen.",
+    "notesLabel": "Notiz (Pflicht zum Ablehnen oder Nachfragen)",
+    "kind": {
+      "liveness_failed": "Live-Prüfung fehlgeschlagen",
+      "liveness_unavailable": "Live-Prüfung nicht möglich",
+      "unverified_capture": "Foto aus einer Datei",
+      "stale_capture": "Foto zu alt",
+      "reused_token": "Foto wiederverwendet",
+      "missing_token": "Foto ohne Server-Token",
+      "repeated_coordinates": "Exakt derselbe Ort",
+      "suspicious_accuracy": "Zu perfekte Genauigkeit"
+    },
+    "explain": {
+      "liveness_failed": "Die geforderte Bewegung wurde nicht ausgeführt.",
+      "unverified_capture": "Die Kamera ließ sich nicht öffnen.",
+      "repeated_coordinates": "Gleicher Punkt ohne GPS-Fehler - typisch für Fake-GPS."
+    }
   }
 }

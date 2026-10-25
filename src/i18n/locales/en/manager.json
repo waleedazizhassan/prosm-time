@@ -162,5 +162,28 @@
     "overtimeMinutesLabel": "Overtime minutes",
     "lateMinutesLabel": "Late minutes",
     "save": "Save"
+  },
+  "integrity": {
+    "title_one": "Suspicious check-ins ({{count}})",
+    "title_other": "Suspicious check-ins ({{count}})",
+    "hint": "These did not block the clock in/out. Accept, reject (with a reason) or ask the employee.",
+    "loadError": "Could not load suspicious check-ins.",
+    "genericError": "Could not save.",
+    "notesLabel": "Note to the employee (required to reject or ask)",
+    "kind": {
+      "liveness_failed": "Live check failed",
+      "liveness_unavailable": "Live check not possible on the phone",
+      "unverified_capture": "Photo chosen from a file",
+      "stale_capture": "Photo too old",
+      "reused_token": "Photo reused",
+      "missing_token": "Photo without a server token",
+      "repeated_coordinates": "Exactly the same location again",
+      "suspicious_accuracy": "Location accuracy too perfect"
+    },
+    "explain": {
+      "liveness_failed": "The person did not complete the requested movement in front of the camera.",
+      "unverified_capture": "The camera could not open, so a picture was chosen from the phone.",
+      "repeated_coordinates": "The same point with almost no GPS error - a common sign of a fake-location app."
+    }
   }
 }

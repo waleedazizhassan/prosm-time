@@ -10,5 +10,19 @@
   "permissionDenied": "Camera access was denied or is unavailable on this device.",
   "alternativeHint": "You can choose a file instead.",
   "previewAlt": "Captured photo preview",
-  "verifyingLiveness": "Verifying you're live - hold still for a moment"
+  "verifyingLiveness": "Verifying you're live - hold still for a moment",
+  "challenge": {
+    "start": "Start the check",
+    "retry": "Try again",
+    "instruction": {
+      "turn_left": "Live check: tap Start, then slowly turn your head to the left.",
+      "turn_right": "Live check: tap Start, then slowly turn your head to the right.",
+      "move_closer": "Live check: tap Start, then bring the phone closer to your face."
+    },
+    "passed": "Done - take the photo.",
+    "unavailable": "This phone cannot run the check - take the photo; your manager may review it.",
+    "failed": "Not detected. Better light helps. Attempts left: {{left}}.",
+    "failedFinal": "Not detected - take the photo; your manager will review it.",
+    "privacy": "The check runs on this phone only: no video is sent and no face is stored. It only confirms a live person is in front of the camera."
+  }
 }

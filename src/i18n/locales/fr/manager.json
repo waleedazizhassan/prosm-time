@@ -162,5 +162,28 @@
     "overtimeMinutesLabel": "Minutes sup.",
     "lateMinutesLabel": "Minutes de retard",
     "save": "Enregistrer"
+  },
+  "integrity": {
+    "title_one": "Pointages suspects ({{count}})",
+    "title_other": "Pointages suspects ({{count}})",
+    "hint": "Ils n'ont pas bloqué le pointage. Acceptez, refusez (avec motif) ou demandez.",
+    "loadError": "Chargement impossible.",
+    "genericError": "Enregistrement impossible.",
+    "notesLabel": "Note (obligatoire pour refuser ou demander)",
+    "kind": {
+      "liveness_failed": "Vérification échouée",
+      "liveness_unavailable": "Vérification impossible",
+      "unverified_capture": "Photo issue d'un fichier",
+      "stale_capture": "Photo trop ancienne",
+      "reused_token": "Photo réutilisée",
+      "missing_token": "Photo sans jeton serveur",
+      "repeated_coordinates": "Même position exacte",
+      "suspicious_accuracy": "Précision trop parfaite"
+    },
+    "explain": {
+      "liveness_failed": "Le mouvement demandé n'a pas été fait.",
+      "unverified_capture": "La caméra n'a pas pu s'ouvrir.",
+      "repeated_coordinates": "Même point sans erreur GPS - signe fréquent de fausse position."
+    }
   }
 }

@@ -91,7 +91,8 @@
       "titleOfflineTime": "Ihre Offline-Zeit wurde geprüft",
       "notesSuffix": "Anmerkung: „{{notes}}“",
       "titlePermission": "Ihre Genehmigung wurde geprüft",
-      "titlePendingHours": "Die Stunden Ihrer Schicht wurden geprüft"
+      "titlePendingHours": "Die Stunden Ihrer Schicht wurden geprüft",
+      "titleIntegrity": "Ihre Stempelung wurde geprüft"
     },
     "breakExceeded": {
       "title": "Pausendauer überschritten",

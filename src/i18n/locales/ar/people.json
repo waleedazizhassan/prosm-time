@@ -48,7 +48,9 @@
     "allowances.reopen_approved": "إعادة فتح شيت بدلات معتمد",
     "attendance.manage_permissions": "الأذونات وموافقة الإضافي وتعديل اليوم",
     "leave.manage_types": "إدارة أنواع الإجازات",
-    "leave.set_deduction": "تحديد خصم الإجازة بدون أجر"
+    "leave.set_deduction": "تحديد خصم الإجازة بدون أجر",
+    "sites.manage_integrity": "إعدادات التحقق الحي والصورة",
+    "attendance.review_integrity_flags": "مراجعة التسجيلات المشبوهة"
   },
   "invite": {
     "actionLabel": "دعوة موظف",
@@ -173,6 +175,15 @@
     "serviceYears": "{{years}} سنة خدمة",
     "hireDate": "تاريخ التعيين",
     "specialNeeds": "استحقاق ذوي الاحتياجات الخاصة (أو من يعول قريباً من الدرجة الأولى منهم)",
+    "save": "حفظ",
+    "saved": "تم الحفظ.",
+    "genericError": "تعذّر الحفظ."
+  },
+  "liveness": {
+    "title": "التحقق الحي",
+    "hint": "استثناء شخص التحقق الحي مش مناسب له (مثلاً إعاقة). السبب بيتسجل.",
+    "exemptLabel": "مستثنى من التحقق الحي",
+    "reasonLabel": "السبب (إلزامي)",
     "save": "حفظ",
     "saved": "تم الحفظ.",
     "genericError": "تعذّر الحفظ."

@@ -1,4 +1,5 @@
 import DatabaseManager from "../database/DatabaseManager";
+import { captureIntegrityOf } from "../utils/captureIntegrity";
 
 export interface ServiceResult<T = null> {
   success: boolean;
@@ -77,6 +78,26 @@ class EvidenceRepository {
 
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to attach this evidence.");
+
+      // v2.3.43 step 11 (item 22): how the photo was captured (token, live
+      // camera or file, liveness result). Best effort - it only adds review
+      // flags on the server and never undoes the clock in/out.
+      const integrity = captureIntegrityOf(file);
+      if (integrity) {
+        await this.client
+          .rpc("record_prosm_time_capture_integrity", {
+            p_attendance_event_id: attendanceEventId,
+            p_token: integrity.token,
+            p_capture_source: integrity.captureSource,
+            p_liveness_result: integrity.livenessResult,
+            p_challenge: integrity.challenge,
+            p_confidence: integrity.confidence,
+          })
+          .then(
+            () => undefined,
+            () => undefined,
+          );
+      }
 
       return createSuccess({ evidenceId: data.evidenceId });
     } catch (error) {

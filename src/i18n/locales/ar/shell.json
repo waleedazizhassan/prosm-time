@@ -91,7 +91,8 @@
       "titleOfflineTime": "تمت مراجعة وقتك المسجَّل دون اتصال",
       "notesSuffix": "ملاحظة المراجِع: «{{notes}}»",
       "titlePermission": "تمت مراجعة إذنك",
-      "titlePendingHours": "تمت مراجعة ساعات جلستك"
+      "titlePendingHours": "تمت مراجعة ساعات جلستك",
+      "titleIntegrity": "تمت مراجعة تسجيلك"
     },
     "breakExceeded": {
       "title": "تجاوزت مدة الاستراحة",

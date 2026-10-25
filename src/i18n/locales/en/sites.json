@@ -154,5 +154,20 @@
   "outsideZonePolicy": {
     "ALLOW_WITH_EXCEPTION": "Allow, the employee gives a reason and a manager reviews it",
     "BLOCK": "Refuse (a manager at this site can still clock in, or clock the employee in)"
+  },
+  "integrity": {
+    "title": "Live check and photo",
+    "hint": "A short movement in front of the camera at clock in/out. It never blocks: a failure goes to the manager for review. Two failures in a day turn it on for that person for the rest of the day.",
+    "modeLabel": "Live check",
+    "mode": {
+      "OFF": "Off",
+      "RANDOM": "Sometimes (random)",
+      "ALWAYS": "Every time"
+    },
+    "percentLabel": "How often (%)",
+    "maxAgeLabel": "Maximum photo age (seconds)",
+    "save": "Save",
+    "saved": "Saved.",
+    "genericError": "Could not save."
   }
 }

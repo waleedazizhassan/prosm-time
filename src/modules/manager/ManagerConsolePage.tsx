@@ -22,6 +22,7 @@ import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
 import PendingHoursCard from "./PendingHoursCard";
 import PermissionsQueueCard from "./PermissionsQueueCard";
+import IntegrityFlagsCard from "./IntegrityFlagsCard";
 import leaveTypeLabel from "../leave/leaveTypeLabel";
 
 type ReviewAction = "approved" | "rejected" | "acknowledged" | "clarification_requested";
@@ -239,6 +240,7 @@ export default function ManagerConsolePage() {
 
       {hasPermission("sessions.review_pending") ? <PendingHoursCard /> : null}
       {hasPermission("attendance.manage_permissions") ? <PermissionsQueueCard /> : null}
+      {hasPermission("attendance.review_integrity_flags") ? <IntegrityFlagsCard /> : null}
 
       <Card title={t("pending.title")}>
         <ErrorText>{error}</ErrorText>

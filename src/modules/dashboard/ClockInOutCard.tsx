@@ -1166,7 +1166,7 @@ export default function ClockInOutCard() {
         </>
       )}
 
-      <CameraCaptureModal isOpen={cameraFor !== null} onClose={handleCameraClose} onCapture={handleCameraCapture} />
+      <CameraCaptureModal isOpen={cameraFor !== null} onClose={handleCameraClose} onCapture={handleCameraCapture} siteId={(cameraFor === "clockOut" ? view.session?.siteId : siteId) || null} />
 
       {confirmAction ? (
         <AttendanceConfirmModal

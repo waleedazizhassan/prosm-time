@@ -265,7 +265,11 @@
     "onlyApprovedUnpaidDeduction": "Solo il permesso non retribuito approvato ha una trattenuta.",
     "onBehalfTimeWindow": "L'ora deve essere negli ultimi 7 giorni e non futura.",
     "onBehalfOverlap": "Questo orario si sovrappone a un turno registrato.",
-    "onBehalfClockOutTime": "L'uscita deve essere dopo l'entrata e non futura."
+    "onBehalfClockOutTime": "L'uscita deve essere dopo l'entrata e non futura.",
+    "manageIntegrityRequired": "Non hai il permesso di modificare queste impostazioni.",
+    "invalidLivenessMode": "Controlla le impostazioni.",
+    "reviewIntegrityRequired": "Non hai il permesso di verificare queste timbrature.",
+    "reviewItemNotFound": "Elemento non trovato."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

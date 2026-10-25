@@ -95,6 +95,7 @@ export default function localizeNotification(notification: AppNotification, t: T
         // v2.3.43: an attendance permission (step 6) and pending hours (step 2).
         permission: "shell:notifications.correctionReviewed.titlePermission",
         pending_hours: "shell:notifications.correctionReviewed.titlePendingHours",
+        integrity: "shell:notifications.correctionReviewed.titleIntegrity",
       };
       const titleKey = typeof data.kind === "string" ? titleKeys[data.kind] : undefined;
       const actionType = typeof data.actionType === "string" ? data.actionType : null;

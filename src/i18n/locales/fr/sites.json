@@ -154,5 +154,20 @@
   "outsideZonePolicy": {
     "ALLOW_WITH_EXCEPTION": "Autoriser, l'employé donne un motif et un responsable le vérifie",
     "BLOCK": "Refuser (un responsable du site peut toujours pointer, ou pointer pour l'employé)"
+  },
+  "integrity": {
+    "title": "Vérification et photo",
+    "hint": "Un court mouvement devant la caméra. Ne bloque jamais : un échec va en vérification.",
+    "modeLabel": "Vérification",
+    "mode": {
+      "OFF": "Désactivée",
+      "RANDOM": "Parfois (aléatoire)",
+      "ALWAYS": "À chaque fois"
+    },
+    "percentLabel": "Fréquence (%)",
+    "maxAgeLabel": "Âge maximum de la photo (secondes)",
+    "save": "Enregistrer",
+    "saved": "Enregistré.",
+    "genericError": "Enregistrement impossible."
   }
 }

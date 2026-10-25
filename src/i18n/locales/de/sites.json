@@ -154,5 +154,20 @@
   "outsideZonePolicy": {
     "ALLOW_WITH_EXCEPTION": "Erlauben, die Person gibt einen Grund an und eine Führungskraft prüft ihn",
     "BLOCK": "Ablehnen (eine Führungskraft dieses Standorts kann trotzdem einstempeln oder für die Person einstempeln)"
+  },
+  "integrity": {
+    "title": "Live-Prüfung und Foto",
+    "hint": "Eine kurze Bewegung vor der Kamera. Blockiert nie: ein Fehlschlag geht zur Prüfung.",
+    "modeLabel": "Live-Prüfung",
+    "mode": {
+      "OFF": "Aus",
+      "RANDOM": "Manchmal (zufällig)",
+      "ALWAYS": "Jedes Mal"
+    },
+    "percentLabel": "Häufigkeit (%)",
+    "maxAgeLabel": "Maximales Fotoalter (Sekunden)",
+    "save": "Speichern",
+    "saved": "Gespeichert.",
+    "genericError": "Speichern fehlgeschlagen."
   }
 }

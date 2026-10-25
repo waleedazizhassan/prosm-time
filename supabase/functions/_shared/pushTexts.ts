@@ -38,7 +38,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "titleOfflineTime": "تمت مراجعة وقتك المسجَّل دون اتصال",
         "notesSuffix": "ملاحظة المراجِع: «{{notes}}»",
         "titlePermission": "تمت مراجعة إذنك",
-        "titlePendingHours": "تمت مراجعة ساعات جلستك"
+        "titlePendingHours": "تمت مراجعة ساعات جلستك",
+        "titleIntegrity": "تمت مراجعة تسجيلك"
       },
       "breakExceeded": {
         "title": "تجاوزت مدة الاستراحة",
@@ -165,7 +166,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "titleOfflineTime": "Your offline time was reviewed",
         "notesSuffix": "Note: \"{{notes}}\"",
         "titlePermission": "Your permission was reviewed",
-        "titlePendingHours": "Your shift's hours were reviewed"
+        "titlePendingHours": "Your shift's hours were reviewed",
+        "titleIntegrity": "Your check-in was reviewed"
       },
       "breakExceeded": {
         "title": "Break duration exceeded",
@@ -292,7 +294,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "titleOfflineTime": "Ihre Offline-Zeit wurde geprüft",
         "notesSuffix": "Anmerkung: „{{notes}}“",
         "titlePermission": "Ihre Genehmigung wurde geprüft",
-        "titlePendingHours": "Die Stunden Ihrer Schicht wurden geprüft"
+        "titlePendingHours": "Die Stunden Ihrer Schicht wurden geprüft",
+        "titleIntegrity": "Ihre Stempelung wurde geprüft"
       },
       "breakExceeded": {
         "title": "Pausendauer überschritten",
@@ -419,7 +422,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "titleOfflineTime": "Votre temps hors ligne a été examiné",
         "notesSuffix": "Remarque : « {{notes}} »",
         "titlePermission": "Votre autorisation a été examinée",
-        "titlePendingHours": "Les heures de votre session ont été vérifiées"
+        "titlePendingHours": "Les heures de votre session ont été vérifiées",
+        "titleIntegrity": "Votre pointage a été examiné"
       },
       "breakExceeded": {
         "title": "Durée de pause dépassée",
@@ -546,7 +550,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "titleOfflineTime": "Il tuo tempo offline è stato esaminato",
         "notesSuffix": "Nota: «{{notes}}»",
         "titlePermission": "Il tuo permesso è stato esaminato",
-        "titlePendingHours": "Le ore del tuo turno sono state verificate"
+        "titlePendingHours": "Le ore del tuo turno sono state verificate",
+        "titleIntegrity": "La tua timbratura è stata verificata"
       },
       "breakExceeded": {
         "title": "Durata della pausa superata",

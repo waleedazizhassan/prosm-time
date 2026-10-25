@@ -10,5 +10,19 @@
   "permissionDenied": "Der Kamerazugriff wurde verweigert oder ist auf diesem Gerät nicht verfügbar.",
   "alternativeHint": "Sie können stattdessen eine Datei auswählen.",
   "previewAlt": "Vorschau des aufgenommenen Fotos",
-  "verifyingLiveness": "Es wird überprüft, dass Sie live vor der Kamera sind - bitte einen Moment stillhalten"
+  "verifyingLiveness": "Es wird überprüft, dass Sie live vor der Kamera sind - bitte einen Moment stillhalten",
+  "challenge": {
+    "start": "Prüfung starten",
+    "retry": "Erneut versuchen",
+    "instruction": {
+      "turn_left": "Live-Prüfung: Start tippen, dann den Kopf langsam nach links drehen.",
+      "turn_right": "Live-Prüfung: Start tippen, dann den Kopf langsam nach rechts drehen.",
+      "move_closer": "Live-Prüfung: Start tippen, dann das Telefon näher ans Gesicht."
+    },
+    "passed": "Fertig - Foto aufnehmen.",
+    "unavailable": "Dieses Telefon kann die Prüfung nicht ausführen - Foto aufnehmen.",
+    "failed": "Nicht erkannt. Mehr Licht hilft. Verbleibende Versuche: {{left}}.",
+    "failedFinal": "Nicht erkannt - Foto aufnehmen; die Führungskraft prüft es.",
+    "privacy": "Die Prüfung läuft nur auf diesem Telefon: kein Video wird gesendet, kein Gesicht gespeichert."
+  }
 }

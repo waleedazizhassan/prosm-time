@@ -48,7 +48,9 @@
     "allowances.reopen_approved": "Riaprire fogli approvati",
     "attendance.manage_permissions": "Permessi, approvazione straordinari e modifiche",
     "leave.manage_types": "Gestire i tipi di permesso",
-    "leave.set_deduction": "Impostare la trattenuta del permesso non retribuito"
+    "leave.set_deduction": "Impostare la trattenuta del permesso non retribuito",
+    "sites.manage_integrity": "Impostazioni verifica e foto",
+    "attendance.review_integrity_flags": "Verificare timbrature sospette"
   },
   "invite": {
     "actionLabel": "Invita dipendente",
@@ -173,6 +175,15 @@
     "serviceYears": "{{years}} anni di servizio",
     "hireDate": "Data di assunzione",
     "specialNeeds": "Diritto per bisogni speciali",
+    "save": "Salva",
+    "saved": "Salvato.",
+    "genericError": "Salvataggio non riuscito."
+  },
+  "liveness": {
+    "title": "Verifica in diretta",
+    "hint": "Esenta una persona per cui la verifica non è adatta. Il motivo viene registrato.",
+    "exemptLabel": "Esente",
+    "reasonLabel": "Motivo (obbligatorio)",
     "save": "Salva",
     "saved": "Salvato.",
     "genericError": "Salvataggio non riuscito."

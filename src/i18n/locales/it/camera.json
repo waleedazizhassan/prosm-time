@@ -10,5 +10,19 @@
   "permissionDenied": "L'accesso alla fotocamera è stato negato o non è disponibile su questo dispositivo.",
   "alternativeHint": "Puoi scegliere un file in alternativa.",
   "previewAlt": "Anteprima della foto scattata",
-  "verifyingLiveness": "Verifica che tu sia in diretta - resta fermo per un momento"
+  "verifyingLiveness": "Verifica che tu sia in diretta - resta fermo per un momento",
+  "challenge": {
+    "start": "Avvia la verifica",
+    "retry": "Riprova",
+    "instruction": {
+      "turn_left": "Verifica: tocca Avvia e gira lentamente la testa a sinistra.",
+      "turn_right": "Verifica: tocca Avvia e gira lentamente la testa a destra.",
+      "move_closer": "Verifica: tocca Avvia e avvicina il telefono al viso."
+    },
+    "passed": "Fatto - scatta la foto.",
+    "unavailable": "Questo telefono non può fare la verifica - scatta la foto.",
+    "failed": "Non rilevato. Più luce aiuta. Tentativi rimasti: {{left}}.",
+    "failedFinal": "Non rilevato - scatta la foto; il responsabile la verificherà.",
+    "privacy": "La verifica avviene solo su questo telefono: nessun video inviato, nessun volto salvato."
+  }
 }

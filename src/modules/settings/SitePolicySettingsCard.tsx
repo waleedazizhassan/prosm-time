@@ -13,6 +13,7 @@ import Button from "../../components/common/Button";
 import Toggle from "../../components/common/Toggle";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
+import SiteIntegritySettings from "./SiteIntegritySettings";
 
 const BREAK_ROUNDING_MODE_OPTIONS: BreakRoundingMode[] = ["cumulative", "full_hour"];
 const OUTSIDE_ZONE_POLICY_OPTIONS: OutsideZonePolicy[] = ["ALLOW_WITH_EXCEPTION", "BLOCK"];
@@ -72,7 +73,7 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
 
   // Owner 2026-10-20 ("every setting on the Settings page"): the picker lists the
   // sites the reader manages (the Owner: every site); the first is chosen.
-  const { profile } = useAuth();
+  const { profile, hasPermission } = useAuth();
   const isOwner = Boolean(profile?.isOwner);
   const profileId = profile?.id;
   useEffect(() => {
@@ -315,6 +316,7 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
             options={OUTSIDE_ZONE_POLICY_OPTIONS.map((policy) => ({ value: policy, label: t(`sites:outsideZonePolicy.${policy}`) }))}
           />
           <HintText small>{t("sites:form.clockOutOutsideNote")}</HintText>
+          {selectedSiteId && (isOwner || hasPermission("sites.manage_integrity")) ? <SiteIntegritySettings siteId={selectedSiteId} /> : null}
           <div style={toggleRowStyle}>
             <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("sites:form.presenceMonitoringEnabledLabel")}</span>
             <Toggle

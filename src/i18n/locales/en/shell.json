@@ -91,7 +91,8 @@
       "titleOfflineTime": "Your offline time was reviewed",
       "notesSuffix": "Note: \"{{notes}}\"",
       "titlePermission": "Your permission was reviewed",
-      "titlePendingHours": "Your shift's hours were reviewed"
+      "titlePendingHours": "Your shift's hours were reviewed",
+      "titleIntegrity": "Your check-in was reviewed"
     },
     "breakExceeded": {
       "title": "Break duration exceeded",

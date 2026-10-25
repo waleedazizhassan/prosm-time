@@ -162,5 +162,28 @@
     "overtimeMinutesLabel": "Minuti di straordinario",
     "lateMinutesLabel": "Minuti di ritardo",
     "save": "Salva"
+  },
+  "integrity": {
+    "title_one": "Timbrature sospette ({{count}})",
+    "title_other": "Timbrature sospette ({{count}})",
+    "hint": "Non hanno bloccato la timbratura. Accetta, rifiuta (con motivo) o chiedi.",
+    "loadError": "Caricamento non riuscito.",
+    "genericError": "Salvataggio non riuscito.",
+    "notesLabel": "Nota (obbligatoria per rifiutare o chiedere)",
+    "kind": {
+      "liveness_failed": "Verifica fallita",
+      "liveness_unavailable": "Verifica non possibile",
+      "unverified_capture": "Foto da file",
+      "stale_capture": "Foto troppo vecchia",
+      "reused_token": "Foto riutilizzata",
+      "missing_token": "Foto senza token",
+      "repeated_coordinates": "Stessa posizione esatta",
+      "suspicious_accuracy": "Precisione troppo perfetta"
+    },
+    "explain": {
+      "liveness_failed": "Il movimento richiesto non è stato fatto.",
+      "unverified_capture": "La fotocamera non si è aperta.",
+      "repeated_coordinates": "Stesso punto senza errore GPS - tipico del GPS falso."
+    }
   }
 }

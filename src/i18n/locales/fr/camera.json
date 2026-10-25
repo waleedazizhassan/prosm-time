@@ -10,5 +10,19 @@
   "permissionDenied": "L'accès à l'appareil photo a été refusé ou n'est pas disponible sur cet appareil.",
   "alternativeHint": "Vous pouvez choisir un fichier à la place.",
   "previewAlt": "Aperçu de la photo capturée",
-  "verifyingLiveness": "Vérification que vous êtes bien en direct - restez immobile un instant"
+  "verifyingLiveness": "Vérification que vous êtes bien en direct - restez immobile un instant",
+  "challenge": {
+    "start": "Lancer la vérification",
+    "retry": "Réessayer",
+    "instruction": {
+      "turn_left": "Vérification : appuyez sur Lancer puis tournez lentement la tête à gauche.",
+      "turn_right": "Vérification : appuyez sur Lancer puis tournez lentement la tête à droite.",
+      "move_closer": "Vérification : appuyez sur Lancer puis rapprochez le téléphone."
+    },
+    "passed": "C'est fait - prenez la photo.",
+    "unavailable": "Ce téléphone ne peut pas faire la vérification - prenez la photo.",
+    "failed": "Non détecté. Plus de lumière aide. Essais restants : {{left}}.",
+    "failedFinal": "Non détecté - prenez la photo ; votre responsable la vérifiera.",
+    "privacy": "La vérification se fait sur ce téléphone : aucune vidéo envoyée, aucun visage conservé."
+  }
 }

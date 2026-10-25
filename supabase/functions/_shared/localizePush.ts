@@ -82,7 +82,7 @@ export function localizePush(type: string, data: Data, language: string, fallbac
       const kind = str(data.kind);
       const action = str(data.actionType);
       if (!kind || !action) break;
-      const suffix = ({ exception: "Exception", correction: "Correction", leave: "Leave", mock_location: "MockLocation", offline_time: "OfflineTime", permission: "Permission", pending_hours: "PendingHours" } as Record<string, string>)[kind];
+      const suffix = ({ exception: "Exception", correction: "Correction", leave: "Leave", mock_location: "MockLocation", offline_time: "OfflineTime", permission: "Permission", pending_hours: "PendingHours", integrity: "Integrity" } as Record<string, string>)[kind];
       const decision = t(`decision.${action}`) ?? action;
       if (suffix) result = withNotes(`correctionReviewed.title${suffix}`, "correctionReviewed.body", { decision });
       break;

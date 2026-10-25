@@ -265,7 +265,11 @@
     "onlyApprovedUnpaidDeduction": "الخصم للإجازة بدون أجر المعتمدة فقط.",
     "onBehalfTimeWindow": "الوقت لازم يكون خلال آخر 7 أيام ومش في المستقبل.",
     "onBehalfOverlap": "الوقت ده متداخل مع جلسة مسجّلة.",
-    "onBehalfClockOutTime": "وقت الانصراف لازم يكون بعد الحضور ومش في المستقبل."
+    "onBehalfClockOutTime": "وقت الانصراف لازم يكون بعد الحضور ومش في المستقبل.",
+    "manageIntegrityRequired": "ليست لديك صلاحية تغيير إعدادات التحقق الحي.",
+    "invalidLivenessMode": "راجع إعدادات التحقق الحي.",
+    "reviewIntegrityRequired": "ليست لديك صلاحية مراجعة التسجيلات المشبوهة.",
+    "reviewItemNotFound": "العنصر غير موجود."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

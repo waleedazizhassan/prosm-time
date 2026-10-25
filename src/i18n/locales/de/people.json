@@ -48,7 +48,9 @@
     "allowances.reopen_approved": "Genehmigte Abrechnungen wieder öffnen",
     "attendance.manage_permissions": "Genehmigungen, Überstundenfreigabe und Tagesanpassungen",
     "leave.manage_types": "Urlaubsarten verwalten",
-    "leave.set_deduction": "Abzug für unbezahlten Urlaub festlegen"
+    "leave.set_deduction": "Abzug für unbezahlten Urlaub festlegen",
+    "sites.manage_integrity": "Einstellungen Live-Prüfung und Foto",
+    "attendance.review_integrity_flags": "Verdächtige Stempelungen prüfen"
   },
   "invite": {
     "actionLabel": "Mitarbeiter einladen",
@@ -173,6 +175,15 @@
     "serviceYears": "{{years}} Dienstjahre",
     "hireDate": "Eintrittsdatum",
     "specialNeeds": "Anspruch bei besonderen Bedürfnissen",
+    "save": "Speichern",
+    "saved": "Gespeichert.",
+    "genericError": "Speichern fehlgeschlagen."
+  },
+  "liveness": {
+    "title": "Live-Prüfung",
+    "hint": "Befreien Sie eine Person, für die die Prüfung nicht passt. Der Grund wird erfasst.",
+    "exemptLabel": "Befreit",
+    "reasonLabel": "Grund (Pflicht)",
     "save": "Speichern",
     "saved": "Gespeichert.",
     "genericError": "Speichern fehlgeschlagen."

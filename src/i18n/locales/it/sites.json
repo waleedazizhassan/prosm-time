@@ -154,5 +154,20 @@
   "outsideZonePolicy": {
     "ALLOW_WITH_EXCEPTION": "Consenti, il dipendente indica un motivo e un responsabile lo verifica",
     "BLOCK": "Rifiuta (un responsabile della sede può comunque timbrare, o timbrare per il dipendente)"
+  },
+  "integrity": {
+    "title": "Verifica e foto",
+    "hint": "Un breve movimento davanti alla fotocamera. Non blocca mai: un fallimento va in verifica.",
+    "modeLabel": "Verifica",
+    "mode": {
+      "OFF": "Disattivata",
+      "RANDOM": "A volte (casuale)",
+      "ALWAYS": "Ogni volta"
+    },
+    "percentLabel": "Frequenza (%)",
+    "maxAgeLabel": "Età massima foto (secondi)",
+    "save": "Salva",
+    "saved": "Salvato.",
+    "genericError": "Salvataggio non riuscito."
   }
 }

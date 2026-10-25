@@ -48,7 +48,9 @@
     "allowances.reopen_approved": "Rouvrir une feuille approuvée",
     "attendance.manage_permissions": "Autorisations, accord des heures sup. et ajustements",
     "leave.manage_types": "Gérer les types de congé",
-    "leave.set_deduction": "Fixer la retenue du congé sans solde"
+    "leave.set_deduction": "Fixer la retenue du congé sans solde",
+    "sites.manage_integrity": "Réglages de vérification et photo",
+    "attendance.review_integrity_flags": "Vérifier les pointages suspects"
   },
   "invite": {
     "actionLabel": "Inviter un employé",
@@ -173,6 +175,15 @@
     "serviceYears": "{{years}} ans d'ancienneté",
     "hireDate": "Date d'embauche",
     "specialNeeds": "Droit pour besoins particuliers",
+    "save": "Enregistrer",
+    "saved": "Enregistré.",
+    "genericError": "Enregistrement impossible."
+  },
+  "liveness": {
+    "title": "Vérification en direct",
+    "hint": "Exemptez une personne pour qui la vérification ne convient pas. Le motif est enregistré.",
+    "exemptLabel": "Exempté",
+    "reasonLabel": "Motif (obligatoire)",
     "save": "Enregistrer",
     "saved": "Enregistré.",
     "genericError": "Enregistrement impossible."

@@ -265,7 +265,11 @@
     "onlyApprovedUnpaidDeduction": "Nur genehmigter unbezahlter Urlaub hat einen Abzug.",
     "onBehalfTimeWindow": "Die Zeit muss in den letzten 7 Tagen liegen und darf nicht in der Zukunft sein.",
     "onBehalfOverlap": "Diese Zeit überschneidet sich mit einer erfassten Schicht.",
-    "onBehalfClockOutTime": "Die Ausstempelzeit muss nach dem Einstempeln liegen."
+    "onBehalfClockOutTime": "Die Ausstempelzeit muss nach dem Einstempeln liegen.",
+    "manageIntegrityRequired": "Sie dürfen diese Einstellungen nicht ändern.",
+    "invalidLivenessMode": "Bitte Einstellungen prüfen.",
+    "reviewIntegrityRequired": "Sie dürfen diese Stempelungen nicht prüfen.",
+    "reviewItemNotFound": "Eintrag nicht gefunden."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

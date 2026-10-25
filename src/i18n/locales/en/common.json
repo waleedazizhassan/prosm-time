@@ -265,7 +265,11 @@
     "onlyApprovedUnpaidDeduction": "Only approved unpaid leave has a deduction.",
     "onBehalfTimeWindow": "The time must be within the last 7 days and not in the future.",
     "onBehalfOverlap": "This time overlaps a shift already recorded.",
-    "onBehalfClockOutTime": "The clock-out time must be after the clock-in and not in the future."
+    "onBehalfClockOutTime": "The clock-out time must be after the clock-in and not in the future.",
+    "manageIntegrityRequired": "You don't have permission to change the live check settings.",
+    "invalidLivenessMode": "Check the live check settings.",
+    "reviewIntegrityRequired": "You don't have permission to review suspicious check-ins.",
+    "reviewItemNotFound": "This item was not found."
   },
   "pageLoad": {
     "title": "This page needs a connection",

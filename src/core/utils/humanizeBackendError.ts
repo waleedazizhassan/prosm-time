@@ -328,4 +328,9 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "THE TIME MUST BE WITHIN THE LAST 7 DAYS AND NOT IN THE FUTURE": "onBehalfTimeWindow",
   "THIS TIME OVERLAPS A RECORDED SHIFT": "onBehalfOverlap",
   "THE CLOCK-OUT TIME MUST BE AFTER THE CLOCK-IN AND NOT IN THE FUTURE": "onBehalfClockOutTime",
+  // v2.3.43 step 11: capture integrity.
+  "SITES.MANAGE_INTEGRITY AUTHORITY REQUIRED": "manageIntegrityRequired",
+  "INVALID LIVENESS MODE": "invalidLivenessMode",
+  "ATTENDANCE.REVIEW_INTEGRITY_FLAGS AUTHORITY REQUIRED": "reviewIntegrityRequired",
+  "REVIEW ITEM NOT FOUND": "reviewItemNotFound",
 };

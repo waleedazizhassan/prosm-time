@@ -48,7 +48,9 @@
     "allowances.reopen_approved": "Reopen approved allowance sheets",
     "attendance.manage_permissions": "Permissions, overtime approval and day adjustments",
     "leave.manage_types": "Manage leave types",
-    "leave.set_deduction": "Set the unpaid-leave deduction"
+    "leave.set_deduction": "Set the unpaid-leave deduction",
+    "sites.manage_integrity": "Live check and photo settings",
+    "attendance.review_integrity_flags": "Review suspicious check-ins"
   },
   "invite": {
     "actionLabel": "Invite employee",
@@ -173,6 +175,15 @@
     "serviceYears": "{{years}} years of service",
     "hireDate": "Hire date",
     "specialNeeds": "Special-needs entitlement (has, or supports, a first-degree relative with special needs)",
+    "save": "Save",
+    "saved": "Saved.",
+    "genericError": "Could not save."
+  },
+  "liveness": {
+    "title": "Live check",
+    "hint": "Exempt a person the live check does not suit (for example a disability). The reason is recorded.",
+    "exemptLabel": "Exempt from the live check",
+    "reasonLabel": "Reason (required)",
     "save": "Save",
     "saved": "Saved.",
     "genericError": "Could not save."
