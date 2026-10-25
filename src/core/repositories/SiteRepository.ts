@@ -63,6 +63,10 @@ export interface NearbySite {
   displayAddress: string | null;
   distanceMeters: number;
   cameraRequired: boolean;
+  // v2.3.43 step 13: the site's own centre and radius (the caller stands inside it).
+  latitude: number | null;
+  longitude: number | null;
+  allowedRadiusMeters: number | null;
 }
 
 export interface SiteAssignment {
@@ -247,9 +251,27 @@ class SiteRepository {
         p_accuracy_meters: accuracyMeters,
       });
       if (error) return createError(error.message);
-      const rows = (data ?? []) as { id: string; name: string; display_address: string | null; distance_meters: number; camera_required: boolean }[];
+      const rows = (data ?? []) as {
+        id: string;
+        name: string;
+        display_address: string | null;
+        distance_meters: number;
+        camera_required: boolean;
+        latitude?: number | null;
+        longitude?: number | null;
+        allowed_radius_meters?: number | null;
+      }[];
       return createSuccess(
-        rows.map((row) => ({ id: row.id, name: row.name, displayAddress: row.display_address, distanceMeters: row.distance_meters, cameraRequired: row.camera_required })),
+        rows.map((row) => ({
+          id: row.id,
+          name: row.name,
+          displayAddress: row.display_address,
+          distanceMeters: row.distance_meters,
+          cameraRequired: row.camera_required,
+          latitude: row.latitude ?? null,
+          longitude: row.longitude ?? null,
+          allowedRadiusMeters: row.allowed_radius_meters ?? null,
+        })),
       );
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Site service unavailable.");
