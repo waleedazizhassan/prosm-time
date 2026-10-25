@@ -27,7 +27,8 @@
     "days": "Jours",
     "reason": "Motif",
     "status": "Statut",
-    "reviewedBy": "Examiné par"
+    "reviewedBy": "Examiné par",
+    "deduction": "Retenue"
   },
   "types": {
     "annual": "Annuel",

@@ -27,7 +27,8 @@
     "days": "Days",
     "reason": "Reason",
     "status": "Status",
-    "reviewedBy": "Reviewed by"
+    "reviewedBy": "Reviewed by",
+    "deduction": "Deduction"
   },
   "types": {
     "annual": "Annual",

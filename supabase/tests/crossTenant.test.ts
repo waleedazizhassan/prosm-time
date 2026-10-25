@@ -23,6 +23,7 @@ const TABLES: Record<string, string> = {
   attendance_day_adjustments: byOrg,
   attendance_permissions: byOrg,
   overtime_policies: byOrg,
+  payroll_adjustments: byOrg,
   public_holidays: byOrg,
   schedule_exceptions: byOrg,
   allowance_category_members: "select user_id as id from allowance_category_members where organization_id = $1",
@@ -42,6 +43,7 @@ const TABLES: Record<string, string> = {
   geofence_exceptions: byOrg,
   installation_identity: byOrg,
   leave_entitlements: byOrg,
+  leave_types: byOrg,
   legal_acknowledgements: byOrg,
   push_devices: byOrg,
   leave_requests: byOrg,
@@ -85,7 +87,7 @@ const MUST_BE_SEEDED = [
   "timesheet_approvals", "timesheets", "user_permission_overrides", "users", "worker_pay_rates",
   // v2.3.43
   "allowance_basis", "public_holidays", "schedule_exceptions", "allowance_entry_adjustments", "overtime_policies",
-  "attendance_permissions", "attendance_day_adjustments",
+  "attendance_permissions", "attendance_day_adjustments", "payroll_adjustments", "leave_types",
 ];
 
 const today = () => new Date().toISOString().slice(0, 10);
@@ -205,6 +207,10 @@ async function seedOrg(name: string): Promise<SeededOrg> {
   );
   await t.su("insert into overtime_policies (organization_id, approval_mode) values ($1, 'automatic')", [org.id]);
   await t.su("insert into attendance_permissions (organization_id, user_id, work_date, kind, reason) values ($1, $2, $3, 'late_arrival', 'doctor')", [org.id, employee.userId, today()]);
+  await t.su(
+    "insert into payroll_adjustments (organization_id, user_id, kind, work_date, amount, source_type, source_id) values ($1, $2, 'unpaid_leave_deduction', $3, -300, 'leave_requests', $4)",
+    [org.id, employee.userId, today(), entry.id],
+  );
   await t.su("insert into attendance_day_adjustments (organization_id, user_id, work_date, late_minutes, reason) values ($1, $2, $3, 0, 'x')", [org.id, employee.userId, today()]);
   const [worker] = await t.su<{ id: string }>(
     "insert into site_workers (organization_id, site_id, full_name, worker_number) values ($1, $2, $3, '482913') returning id",

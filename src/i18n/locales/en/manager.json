@@ -101,7 +101,11 @@
     "revokeEmpty": "No approved upcoming leave to revoke.",
     "revokeAction": "Revoke",
     "revokeReasonLabel": "Reason (required)",
-    "startedCannotCancel": "Started - cannot be cancelled"
+    "startedCannotCancel": "Started - cannot be cancelled",
+    "deductionLabel": "Deduction per day ({{currency}}) - required",
+    "deductionTotal": "{{days}} working days deducted (rest days and holidays excluded): {{total}} {{currency}}",
+    "deductionHint": "Weekly rest days and public holidays are not deducted.",
+    "deductionRequired": "Enter the deduction per day (0 or more)."
   },
   "pendingHours": {
     "title_one": "Hours waiting for review ({{count}})",

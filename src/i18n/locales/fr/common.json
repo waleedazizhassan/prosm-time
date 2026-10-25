@@ -258,7 +258,11 @@
     "leaveMaxDaysPerRequest": "Ce congé est limité à {{count}} jours à la fois.",
     "leaveMinServiceYears": "Ce congé demande {{count}} ans d'ancienneté.",
     "leaveMaxTimesInService": "Ce congé est limité à {{count}} fois.",
-    "leaveStartedCannotCancel": "Ce congé a commencé et ne peut plus être annulé."
+    "leaveStartedCannotCancel": "Ce congé a commencé et ne peut plus être annulé.",
+    "leaveSetDeductionRequired": "Vous n'avez pas le droit de fixer cette retenue.",
+    "deductionPerDayRequired": "Saisissez la retenue par jour.",
+    "deductionOwnerOnly": "Seul le propriétaire modifie une retenue enregistrée.",
+    "onlyApprovedUnpaidDeduction": "Seul un congé sans solde approuvé a une retenue."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

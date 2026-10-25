@@ -27,7 +27,8 @@
     "days": "Giorni",
     "reason": "Motivo",
     "status": "Stato",
-    "reviewedBy": "Esaminata da"
+    "reviewedBy": "Esaminata da",
+    "deduction": "Trattenuta"
   },
   "types": {
     "annual": "Annuali",

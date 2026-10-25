@@ -258,7 +258,11 @@
     "leaveMaxDaysPerRequest": "Höchstens {{count}} Tage am Stück.",
     "leaveMinServiceYears": "Dafür sind {{count}} Dienstjahre nötig.",
     "leaveMaxTimesInService": "Höchstens {{count}}-mal insgesamt.",
-    "leaveStartedCannotCancel": "Dieser Urlaub hat begonnen und kann nicht mehr storniert werden."
+    "leaveStartedCannotCancel": "Dieser Urlaub hat begonnen und kann nicht mehr storniert werden.",
+    "leaveSetDeductionRequired": "Sie dürfen diesen Abzug nicht festlegen.",
+    "deductionPerDayRequired": "Bitte Abzug pro Tag angeben.",
+    "deductionOwnerOnly": "Nur der Inhaber ändert einen erfassten Abzug.",
+    "onlyApprovedUnpaidDeduction": "Nur genehmigter unbezahlter Urlaub hat einen Abzug."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

@@ -258,7 +258,11 @@
     "leaveMaxDaysPerRequest": "هذه الإجازة بحد أقصى {{count}} يوم في المرة.",
     "leaveMinServiceYears": "هذه الإجازة تحتاج {{count}} سنوات خدمة.",
     "leaveMaxTimesInService": "هذه الإجازة بحد أقصى {{count}} مرات خلال الخدمة كلها.",
-    "leaveStartedCannotCancel": "الإجازة بدأت ولا يمكن إلغاؤها."
+    "leaveStartedCannotCancel": "الإجازة بدأت ولا يمكن إلغاؤها.",
+    "leaveSetDeductionRequired": "ليست لديك صلاحية تحديد خصم الإجازة بدون أجر.",
+    "deductionPerDayRequired": "اكتب قيمة الخصم عن اليوم للإجازة بدون أجر.",
+    "deductionOwnerOnly": "الأونر فقط يعدّل خصماً مسجلاً.",
+    "onlyApprovedUnpaidDeduction": "الخصم للإجازة بدون أجر المعتمدة فقط."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

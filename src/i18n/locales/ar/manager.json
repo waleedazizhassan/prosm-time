@@ -101,7 +101,11 @@
     "revokeEmpty": "لا توجد إجازات معتمدة قادمة لإلغائها.",
     "revokeAction": "إلغاء الإجازة",
     "revokeReasonLabel": "السبب (مطلوب)",
-    "startedCannotCancel": "الإجازة بدأت ولا يمكن إلغاؤها"
+    "startedCannotCancel": "الإجازة بدأت ولا يمكن إلغاؤها",
+    "deductionLabel": "قيمة الخصم عن اليوم ({{currency}}) - إلزامي",
+    "deductionTotal": "{{days}} يوم عمل مخصوم (بدون العطلات الأسبوعية والرسمية): {{total}} {{currency}}",
+    "deductionHint": "العطلات الأسبوعية والرسمية لا تُخصم.",
+    "deductionRequired": "اكتب قيمة الخصم عن اليوم (صفر أو أكثر)."
   },
   "pendingHours": {
     "title_one": "ساعات تنتظر المراجعة ({{count}})",

@@ -101,7 +101,11 @@
     "revokeEmpty": "Aucun congé approuvé à venir à révoquer.",
     "revokeAction": "Révoquer",
     "revokeReasonLabel": "Motif (obligatoire)",
-    "startedCannotCancel": "Commencé - impossible d'annuler"
+    "startedCannotCancel": "Commencé - impossible d'annuler",
+    "deductionLabel": "Retenue par jour ({{currency}}) - obligatoire",
+    "deductionTotal": "{{days}} jours ouvrés retenus : {{total}} {{currency}}",
+    "deductionHint": "Les jours de repos et fériés ne sont pas retenus.",
+    "deductionRequired": "Saisissez la retenue par jour."
   },
   "pendingHours": {
     "title_one": "Heures à vérifier ({{count}})",

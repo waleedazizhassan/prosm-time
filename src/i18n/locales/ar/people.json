@@ -47,7 +47,8 @@
     "allowances.edit_during_review": "تعديل البدلات أثناء المراجعة",
     "allowances.reopen_approved": "إعادة فتح شيت بدلات معتمد",
     "attendance.manage_permissions": "الأذونات وموافقة الإضافي وتعديل اليوم",
-    "leave.manage_types": "إدارة أنواع الإجازات"
+    "leave.manage_types": "إدارة أنواع الإجازات",
+    "leave.set_deduction": "تحديد خصم الإجازة بدون أجر"
   },
   "invite": {
     "actionLabel": "دعوة موظف",

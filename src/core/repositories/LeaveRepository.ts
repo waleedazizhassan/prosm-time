@@ -41,6 +41,9 @@ export interface LeaveRequestRow {
   reviewedAt: string | null;
   reviewNotes: string | null;
   createdAt: string;
+  // v2.3.43 step 9: the unpaid-leave deduction the employee sees.
+  deductionTotal: number | null;
+  deductionCurrency: string | null;
 }
 
 export interface OrgWideLeaveRow {
@@ -116,6 +119,8 @@ interface LeaveRequestRowRaw {
   reviewed_at: string | null;
   review_notes: string | null;
   created_at: string;
+  deduction_total?: number | null;
+  deduction_currency?: string | null;
 }
 
 function mapRow(row: LeaveRequestRowRaw): LeaveRequestRow {
@@ -130,6 +135,8 @@ function mapRow(row: LeaveRequestRowRaw): LeaveRequestRow {
     reviewedAt: row.reviewed_at,
     reviewNotes: row.review_notes,
     createdAt: row.created_at,
+    deductionTotal: row.deduction_total === null || row.deduction_total === undefined ? null : Number(row.deduction_total),
+    deductionCurrency: row.deduction_currency ?? null,
   };
 }
 
@@ -150,7 +157,7 @@ class LeaveRepository {
     try {
       const { data, error } = await this.client
         .from("leave_requests")
-        .select("id, leave_type, start_date, end_date, days_count, reason, status, reviewed_at, review_notes, created_at")
+        .select("id, leave_type, start_date, end_date, days_count, reason, status, reviewed_at, review_notes, created_at, deduction_total, deduction_currency")
         .eq("user_id", userId)
         .order("created_at", { ascending: false });
       if (error) return createError(error.message);
@@ -320,6 +327,33 @@ class LeaveRepository {
     }
   }
 
+  async suggestDeduction(requestId: string): Promise<ServiceResult<{ perDay: number | null; currency: string; days: number; rateType: string | null }>> {
+    try {
+      const { data, error } = await this.client.rpc("suggest_prosm_time_leave_deduction", { p_request_id: requestId });
+      return error ? createError(error.message) : createSuccess(data as { perDay: number | null; currency: string; days: number; rateType: string | null });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Leave service unavailable.");
+    }
+  }
+
+  async listPayrollAdjustments(userId: string | null, from: string, to: string): Promise<ServiceResult<{ userId: string; workDate: string; amount: number; currency: string; kind: string }[]>> {
+    try {
+      const { data, error } = await this.client.rpc("list_prosm_time_payroll_adjustments", { p_user_id: userId, p_from: from, p_to: to });
+      if (error) return createError(error.message);
+      return createSuccess(
+        ((data ?? []) as { user_id: string; work_date: string; amount: number; currency: string; kind: string }[]).map((row) => ({
+          userId: row.user_id,
+          workDate: row.work_date,
+          amount: Number(row.amount),
+          currency: row.currency,
+          kind: row.kind,
+        })),
+      );
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Leave service unavailable.");
+    }
+  }
+
   async cancel(requestId: string): Promise<ServiceResult> {
     try {
       const { data, error } = await this.client.rpc("cancel_prosm_time_leave_request", { p_request_id: requestId });
@@ -353,9 +387,15 @@ class LeaveRepository {
     }
   }
 
-  async review(requestId: string, action: "approved" | "rejected", notes?: string): Promise<ServiceResult> {
+  // v2.3.43 step 9 (item 19): unpaid leave is approved with its deduction per day.
+  async review(requestId: string, action: "approved" | "rejected", notes?: string, deductionPerDay?: number | null): Promise<ServiceResult> {
     try {
-      const { data, error } = await this.client.rpc("review_prosm_time_leave", { p_request_id: requestId, p_action: action, p_notes: notes?.trim() || null });
+      const { data, error } = await this.client.rpc("review_prosm_time_leave", {
+        p_request_id: requestId,
+        p_action: action,
+        p_notes: notes?.trim() || null,
+        p_deduction_per_day: deductionPerDay ?? null,
+      });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to review this leave request.");
       return createSuccess();

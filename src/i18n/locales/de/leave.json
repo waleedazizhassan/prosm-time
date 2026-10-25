@@ -27,7 +27,8 @@
     "days": "Tage",
     "reason": "Grund",
     "status": "Status",
-    "reviewedBy": "Geprüft von"
+    "reviewedBy": "Geprüft von",
+    "deduction": "Abzug"
   },
   "types": {
     "annual": "Jahresurlaub",

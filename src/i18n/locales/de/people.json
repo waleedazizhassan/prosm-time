@@ -47,7 +47,8 @@
     "allowances.edit_during_review": "Zulagen in der Prüfung bearbeiten",
     "allowances.reopen_approved": "Genehmigte Abrechnungen wieder öffnen",
     "attendance.manage_permissions": "Genehmigungen, Überstundenfreigabe und Tagesanpassungen",
-    "leave.manage_types": "Urlaubsarten verwalten"
+    "leave.manage_types": "Urlaubsarten verwalten",
+    "leave.set_deduction": "Abzug für unbezahlten Urlaub festlegen"
   },
   "invite": {
     "actionLabel": "Mitarbeiter einladen",

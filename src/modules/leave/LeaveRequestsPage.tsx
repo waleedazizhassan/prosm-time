@@ -149,6 +149,12 @@ export default function LeaveRequestsPage() {
     { key: "days", header: t("columns.days"), render: (row) => row.daysCount },
     { key: "reason", header: t("columns.reason"), render: (row) => row.reason ?? "—" },
     { key: "status", header: t("columns.status"), render: (row) => <StatusBadge status={STATUS_BADGE_KEY[row.status]}>{t(`status.${row.status}`)}</StatusBadge> },
+    // v2.3.43 step 9 (item 19): the deduction of an approved unpaid leave.
+    {
+      key: "deduction",
+      header: t("columns.deduction"),
+      render: (row) => (row.deductionTotal ? `${row.deductionTotal.toLocaleString(i18n.language)} ${row.deductionCurrency ?? ""}` : "—"),
+    },
     {
       key: "actions",
       header: t("common:actions.label"),

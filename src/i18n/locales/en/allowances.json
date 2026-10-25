@@ -206,5 +206,10 @@
     "reopenAction": "Reopen",
     "reopenTitle": "Reopen an approved sheet",
     "reopenHint": "The sheet goes back to review so it can be corrected and approved again. The employee is told."
+  },
+  "deductions": {
+    "title": "Deductions in this period",
+    "hint": "Unpaid leave approved for these days, deducted from pay.",
+    "line": "unpaid leave deduction"
   }
 }

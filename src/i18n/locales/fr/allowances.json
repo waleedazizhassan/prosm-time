@@ -206,5 +206,10 @@
     "reopenAction": "Rouvrir",
     "reopenTitle": "Rouvrir une feuille approuvée",
     "reopenHint": "La feuille revient en vérification. L'employé est prévenu."
+  },
+  "deductions": {
+    "title": "Retenues de la période",
+    "hint": "Congé sans solde approuvé ces jours-là.",
+    "line": "retenue congé sans solde"
   }
 }

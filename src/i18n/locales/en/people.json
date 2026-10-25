@@ -47,7 +47,8 @@
     "allowances.edit_during_review": "Edit allowances during review",
     "allowances.reopen_approved": "Reopen approved allowance sheets",
     "attendance.manage_permissions": "Permissions, overtime approval and day adjustments",
-    "leave.manage_types": "Manage leave types"
+    "leave.manage_types": "Manage leave types",
+    "leave.set_deduction": "Set the unpaid-leave deduction"
   },
   "invite": {
     "actionLabel": "Invite employee",

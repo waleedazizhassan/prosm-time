@@ -26,6 +26,7 @@ import PageBanner from "../../components/common/PageBanner";
 import Toggle from "../../components/common/Toggle";
 import HintText from "../../components/common/HintText";
 import AllowanceSheetEditModal from "./AllowanceSheetEditModal";
+import PeriodDeductionsCard from "./PeriodDeductionsCard";
 import DateRange from "../../components/common/DateRange";
 
 const ALL_EMPLOYEES = "";
@@ -544,6 +545,8 @@ export default function AllowancesPage() {
           </div>
         </Card>
       ) : null}
+
+      <PeriodDeductionsCard from={startDate} to={endDate} />
 
       {approvedSheets.length > 0 ? (
         <Card title={t("sheetEdit.approvedTitle")} subtitle={t("sheetEdit.approvedHint")}>

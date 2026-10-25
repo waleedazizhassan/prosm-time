@@ -27,7 +27,8 @@
     "days": "الأيام",
     "reason": "السبب",
     "status": "الحالة",
-    "reviewedBy": "تمت المراجعة بواسطة"
+    "reviewedBy": "تمت المراجعة بواسطة",
+    "deduction": "الخصم"
   },
   "types": {
     "annual": "سنوية",

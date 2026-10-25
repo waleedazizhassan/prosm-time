@@ -13,6 +13,7 @@ import Button from "../../components/common/Button";
 import Modal from "../../components/common/Modal";
 import ErrorText from "../../components/common/ErrorText";
 import Textarea from "../../components/common/Textarea";
+import Input from "../../components/common/Input";
 import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
 import { formatTimeOnly, formatDateOnly } from "../../core/utils/formatDate";
@@ -79,6 +80,23 @@ export default function ManagerConsolePage() {
   const [revokeReason, setRevokeReason] = useState("");
   const [revokeSubmitting, setRevokeSubmitting] = useState(false);
   const [revokeError, setRevokeError] = useState("");
+
+  // v2.3.43 step 9 (item 19): unpaid leave - the deduction per day, suggested from the pay rate.
+  const [deductionInput, setDeductionInput] = useState("");
+  const [deductionDays, setDeductionDays] = useState<number | null>(null);
+  const [deductionCurrency, setDeductionCurrency] = useState("EGP");
+  useEffect(() => {
+    if (!leaveReviewTarget || leaveReviewTarget.leaveType !== "unpaid") return;
+    setDeductionInput("");
+    setDeductionDays(null);
+    LeaveRepository.suggestDeduction(leaveReviewTarget.id).then((result) => {
+      if (!result.success || !result.data) return;
+      if (result.data.perDay !== null) setDeductionInput(String(result.data.perDay));
+      setDeductionDays(result.data.days);
+      setDeductionCurrency(result.data.currency);
+    });
+  }, [leaveReviewTarget]);
+
 
   const canManageExceptions = hasPermission("exceptions.manage");
   // Owner 2026-10-19: approving leave is its own permission (Managers and the Owner).
@@ -151,7 +169,13 @@ export default function ManagerConsolePage() {
     setLeaveSubmitting(action);
     setLeaveError("");
 
-    const result = await LeaveRepository.review(leaveReviewTarget.id, action, leaveReviewNotes.trim() || undefined);
+    const isUnpaid = leaveReviewTarget.leaveType === "unpaid";
+    if (action === "approved" && isUnpaid && (deductionInput.trim() === "" || Number(deductionInput) < 0 || Number.isNaN(Number(deductionInput)))) {
+      setLeaveSubmitting(null);
+      setLeaveError(t("leave.deductionRequired"));
+      return;
+    }
+    const result = await LeaveRepository.review(leaveReviewTarget.id, action, leaveReviewNotes.trim() || undefined, action === "approved" && isUnpaid ? Number(deductionInput) : null);
 
     setLeaveSubmitting(null);
 
@@ -328,6 +352,20 @@ export default function ManagerConsolePage() {
           </>
         }
       >
+        {leaveReviewTarget?.leaveType === "unpaid" ? (
+          <>
+            <Input label={t("leave.deductionLabel", { currency: deductionCurrency })} name="leaveDeduction" type="number" value={deductionInput} onChange={(event) => setDeductionInput(event.target.value)} disabled={Boolean(leaveSubmitting)} />
+            <HintText small>
+              {deductionDays !== null
+                ? t("leave.deductionTotal", {
+                    days: deductionDays,
+                    total: (Number(deductionInput || 0) * deductionDays).toLocaleString(i18n.language, { maximumFractionDigits: 2 }),
+                    currency: deductionCurrency,
+                  })
+                : t("leave.deductionHint")}
+            </HintText>
+          </>
+        ) : null}
         <Textarea label={t("pending.notesLabel")} name="leaveReviewNotes" value={leaveReviewNotes} onChange={(event) => setLeaveReviewNotes(event.target.value)} disabled={Boolean(leaveSubmitting)} />
         <ErrorText>{leaveError}</ErrorText>
       </Modal>

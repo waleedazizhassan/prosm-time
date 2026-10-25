@@ -206,5 +206,10 @@
     "reopenAction": "Riapri",
     "reopenTitle": "Riapri un foglio approvato",
     "reopenHint": "Il foglio torna in verifica. Il dipendente viene avvisato."
+  },
+  "deductions": {
+    "title": "Trattenute del periodo",
+    "hint": "Permesso non retribuito approvato in questi giorni.",
+    "line": "trattenuta permesso non retribuito"
   }
 }

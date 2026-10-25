@@ -258,7 +258,11 @@
     "leaveMaxDaysPerRequest": "Al massimo {{count}} giorni alla volta.",
     "leaveMinServiceYears": "Servono {{count}} anni di servizio.",
     "leaveMaxTimesInService": "Al massimo {{count}} volte in tutto.",
-    "leaveStartedCannotCancel": "Questo permesso è iniziato e non può più essere annullato."
+    "leaveStartedCannotCancel": "Questo permesso è iniziato e non può più essere annullato.",
+    "leaveSetDeductionRequired": "Non hai il permesso di impostare questa trattenuta.",
+    "deductionPerDayRequired": "Inserisci la trattenuta al giorno.",
+    "deductionOwnerOnly": "Solo il titolare modifica una trattenuta registrata.",
+    "onlyApprovedUnpaidDeduction": "Solo il permesso non retribuito approvato ha una trattenuta."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

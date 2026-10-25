@@ -319,4 +319,9 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "THE HIRE DATE CANNOT BE IN THE FUTURE": "hireDateFuture",
   // v2.3.43 step 8: approved leave is cancelled only before it starts.
   "THIS LEAVE HAS STARTED AND CAN NO LONGER BE CANCELLED": "leaveStartedCannotCancel",
+  // v2.3.43 step 9: unpaid leave deduction.
+  "LEAVE.SET_DEDUCTION AUTHORITY REQUIRED": "leaveSetDeductionRequired",
+  "THE DEDUCTION PER DAY IS REQUIRED FOR UNPAID LEAVE": "deductionPerDayRequired",
+  "ONLY THE OWNER CHANGES A RECORDED DEDUCTION": "deductionOwnerOnly",
+  "ONLY APPROVED UNPAID LEAVE HAS A DEDUCTION": "onlyApprovedUnpaidDeduction",
 };

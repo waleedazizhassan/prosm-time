@@ -258,7 +258,11 @@
     "leaveMaxDaysPerRequest": "This leave allows at most {{count}} days at a time.",
     "leaveMinServiceYears": "This leave needs {{count}} years of service.",
     "leaveMaxTimesInService": "This leave can be taken at most {{count}} times in the whole service.",
-    "leaveStartedCannotCancel": "This leave has started and can no longer be cancelled."
+    "leaveStartedCannotCancel": "This leave has started and can no longer be cancelled.",
+    "leaveSetDeductionRequired": "You don't have permission to set the unpaid-leave deduction.",
+    "deductionPerDayRequired": "Enter the deduction per day for unpaid leave.",
+    "deductionOwnerOnly": "Only the Owner changes a recorded deduction.",
+    "onlyApprovedUnpaidDeduction": "Only approved unpaid leave has a deduction."
   },
   "pageLoad": {
     "title": "This page needs a connection",

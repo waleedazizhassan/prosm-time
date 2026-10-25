@@ -101,7 +101,11 @@
     "revokeEmpty": "Nessuna ferie futura approvata da revocare.",
     "revokeAction": "Revoca",
     "revokeReasonLabel": "Motivo (obbligatorio)",
-    "startedCannotCancel": "Iniziato - non annullabile"
+    "startedCannotCancel": "Iniziato - non annullabile",
+    "deductionLabel": "Trattenuta al giorno ({{currency}}) - obbligatoria",
+    "deductionTotal": "{{days}} giorni lavorativi trattenuti: {{total}} {{currency}}",
+    "deductionHint": "Riposi e festività non sono trattenuti.",
+    "deductionRequired": "Inserisci la trattenuta al giorno."
   },
   "pendingHours": {
     "title_one": "Ore da verificare ({{count}})",

@@ -206,5 +206,10 @@
     "reopenAction": "Wieder öffnen",
     "reopenTitle": "Genehmigte Abrechnung wieder öffnen",
     "reopenHint": "Die Abrechnung geht zurück in die Prüfung. Die Person wird informiert."
+  },
+  "deductions": {
+    "title": "Abzüge in diesem Zeitraum",
+    "hint": "Genehmigter unbezahlter Urlaub an diesen Tagen.",
+    "line": "Abzug unbezahlter Urlaub"
   }
 }

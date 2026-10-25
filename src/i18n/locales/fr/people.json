@@ -47,7 +47,8 @@
     "allowances.edit_during_review": "Modifier les indemnités en vérification",
     "allowances.reopen_approved": "Rouvrir une feuille approuvée",
     "attendance.manage_permissions": "Autorisations, accord des heures sup. et ajustements",
-    "leave.manage_types": "Gérer les types de congé"
+    "leave.manage_types": "Gérer les types de congé",
+    "leave.set_deduction": "Fixer la retenue du congé sans solde"
   },
   "invite": {
     "actionLabel": "Inviter un employé",

@@ -101,7 +101,11 @@
     "revokeEmpty": "Kein genehmigter bevorstehender Urlaub zum Widerrufen.",
     "revokeAction": "Widerrufen",
     "revokeReasonLabel": "Grund (erforderlich)",
-    "startedCannotCancel": "Begonnen - nicht stornierbar"
+    "startedCannotCancel": "Begonnen - nicht stornierbar",
+    "deductionLabel": "Abzug pro Tag ({{currency}}) - Pflicht",
+    "deductionTotal": "{{days}} Arbeitstage abgezogen: {{total}} {{currency}}",
+    "deductionHint": "Ruhe- und Feiertage werden nicht abgezogen.",
+    "deductionRequired": "Bitte Abzug pro Tag angeben."
   },
   "pendingHours": {
     "title_one": "Stunden zur Prüfung ({{count}})",
