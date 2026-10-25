@@ -81,5 +81,6 @@
   },
   "documentLabel": "المستند (تقرير طبي)",
   "documentUploadError": "تعذّر رفع المستند.",
-  "balanceDiffers": "محدد يدوياً؛ القواعد تعطي {{computed}} - راجع المدير لو فيه خطأ."
+  "balanceDiffers": "محدد يدوياً؛ القواعد تعطي {{computed}} - راجع المدير لو فيه خطأ.",
+  "startedCannotCancel": "الإجازة بدأت ولا يمكن إلغاؤها"
 }

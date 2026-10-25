@@ -317,4 +317,6 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "A LEAVE TYPE WITH THIS KEY ALREADY EXISTS": "leaveTypeKeyExists",
   "EMPLOYEES.EDIT AUTHORITY REQUIRED": "employeesEditRequired",
   "THE HIRE DATE CANNOT BE IN THE FUTURE": "hireDateFuture",
+  // v2.3.43 step 8: approved leave is cancelled only before it starts.
+  "THIS LEAVE HAS STARTED AND CAN NO LONGER BE CANCELLED": "leaveStartedCannotCancel",
 };

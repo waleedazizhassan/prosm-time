@@ -257,7 +257,8 @@
     "hireDateFuture": "تاريخ التعيين لا يكون في المستقبل.",
     "leaveMaxDaysPerRequest": "هذه الإجازة بحد أقصى {{count}} يوم في المرة.",
     "leaveMinServiceYears": "هذه الإجازة تحتاج {{count}} سنوات خدمة.",
-    "leaveMaxTimesInService": "هذه الإجازة بحد أقصى {{count}} مرات خلال الخدمة كلها."
+    "leaveMaxTimesInService": "هذه الإجازة بحد أقصى {{count}} مرات خلال الخدمة كلها.",
+    "leaveStartedCannotCancel": "الإجازة بدأت ولا يمكن إلغاؤها."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

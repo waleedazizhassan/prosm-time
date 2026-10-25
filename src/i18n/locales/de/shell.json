@@ -78,7 +78,9 @@
       "bodyLeaveReasonSuffix": "Grund: {{reason}}.",
       "titlePermission": "Genehmigung wartet",
       "bodyPermission": "{{name}} beantragt {{kind}} am {{date}}.",
-      "bodyPermissionShort": "{{name}} beantragt eine Genehmigung am {{date}}."
+      "bodyPermissionShort": "{{name}} beantragt eine Genehmigung am {{date}}.",
+      "titleLeaveCancelled": "Genehmigter Urlaub storniert",
+      "bodyLeaveCancelled": "{{name}} hat den genehmigten Urlaub storniert ({{startDate}} - {{endDate}})."
     },
     "correctionReviewed": {
       "titleException": "Ihre Ausnahme wurde geprüft",

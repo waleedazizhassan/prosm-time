@@ -257,7 +257,8 @@
     "hireDateFuture": "The hire date cannot be in the future.",
     "leaveMaxDaysPerRequest": "This leave allows at most {{count}} days at a time.",
     "leaveMinServiceYears": "This leave needs {{count}} years of service.",
-    "leaveMaxTimesInService": "This leave can be taken at most {{count}} times in the whole service."
+    "leaveMaxTimesInService": "This leave can be taken at most {{count}} times in the whole service.",
+    "leaveStartedCannotCancel": "This leave has started and can no longer be cancelled."
   },
   "pageLoad": {
     "title": "This page needs a connection",

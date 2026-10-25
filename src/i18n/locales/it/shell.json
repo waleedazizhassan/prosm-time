@@ -78,7 +78,9 @@
       "bodyLeaveReasonSuffix": "Motivo: {{reason}}.",
       "titlePermission": "Permesso in attesa",
       "bodyPermission": "{{name}} ha chiesto {{kind}} il {{date}}.",
-      "bodyPermissionShort": "{{name}} ha chiesto un permesso il {{date}}."
+      "bodyPermissionShort": "{{name}} ha chiesto un permesso il {{date}}.",
+      "titleLeaveCancelled": "Permesso approvato annullato",
+      "bodyLeaveCancelled": "{{name}} ha annullato il permesso approvato ({{startDate}} - {{endDate}})."
     },
     "correctionReviewed": {
       "titleException": "La tua eccezione è stata esaminata",

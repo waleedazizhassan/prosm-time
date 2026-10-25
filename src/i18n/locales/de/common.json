@@ -257,7 +257,8 @@
     "hireDateFuture": "Das Eintrittsdatum darf nicht in der Zukunft liegen.",
     "leaveMaxDaysPerRequest": "Höchstens {{count}} Tage am Stück.",
     "leaveMinServiceYears": "Dafür sind {{count}} Dienstjahre nötig.",
-    "leaveMaxTimesInService": "Höchstens {{count}}-mal insgesamt."
+    "leaveMaxTimesInService": "Höchstens {{count}}-mal insgesamt.",
+    "leaveStartedCannotCancel": "Dieser Urlaub hat begonnen und kann nicht mehr storniert werden."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

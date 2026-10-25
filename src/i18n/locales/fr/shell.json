@@ -78,7 +78,9 @@
       "bodyLeaveReasonSuffix": "Motif : {{reason}}.",
       "titlePermission": "Autorisation en attente",
       "bodyPermission": "{{name}} demande : {{kind}} le {{date}}.",
-      "bodyPermissionShort": "{{name}} demande une autorisation le {{date}}."
+      "bodyPermissionShort": "{{name}} demande une autorisation le {{date}}.",
+      "titleLeaveCancelled": "Congé approuvé annulé",
+      "bodyLeaveCancelled": "{{name}} a annulé son congé approuvé ({{startDate}} - {{endDate}})."
     },
     "correctionReviewed": {
       "titleException": "Votre exception a été examinée",

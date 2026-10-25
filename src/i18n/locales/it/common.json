@@ -257,7 +257,8 @@
     "hireDateFuture": "La data di assunzione non può essere futura.",
     "leaveMaxDaysPerRequest": "Al massimo {{count}} giorni alla volta.",
     "leaveMinServiceYears": "Servono {{count}} anni di servizio.",
-    "leaveMaxTimesInService": "Al massimo {{count}} volte in tutto."
+    "leaveMaxTimesInService": "Al massimo {{count}} volte in tutto.",
+    "leaveStartedCannotCancel": "Questo permesso è iniziato e non può più essere annullato."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

@@ -81,5 +81,6 @@
   },
   "documentLabel": "Documento (certificato medico)",
   "documentUploadError": "Impossibile caricare il documento.",
-  "balanceDiffers": "Impostato a mano; le regole danno {{computed}}."
+  "balanceDiffers": "Impostato a mano; le regole danno {{computed}}.",
+  "startedCannotCancel": "Iniziato - non annullabile"
 }

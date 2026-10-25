@@ -66,6 +66,10 @@ export function localizePush(type: string, data: Data, language: string, fallbac
         break;
       }
       // v2.3.43 step 6: an attendance permission asked by an employee (the kind's label is not in the push texts; the date is).
+      if (kind === "leave_cancelled") {
+        result = pair("exceptionPendingReview.titleLeaveCancelled", "exceptionPendingReview.bodyLeaveCancelled", { name, startDate: data.startDate ?? "", endDate: data.endDate ?? "" });
+        break;
+      }
       if (kind === "permission") {
         result = pair("exceptionPendingReview.titlePermission", "exceptionPendingReview.bodyPermissionShort", { name, date: data.workDate ?? "" });
         break;

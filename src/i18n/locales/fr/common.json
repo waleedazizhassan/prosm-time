@@ -257,7 +257,8 @@
     "hireDateFuture": "La date d'embauche ne peut pas être future.",
     "leaveMaxDaysPerRequest": "Ce congé est limité à {{count}} jours à la fois.",
     "leaveMinServiceYears": "Ce congé demande {{count}} ans d'ancienneté.",
-    "leaveMaxTimesInService": "Ce congé est limité à {{count}} fois."
+    "leaveMaxTimesInService": "Ce congé est limité à {{count}} fois.",
+    "leaveStartedCannotCancel": "Ce congé a commencé et ne peut plus être annulé."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

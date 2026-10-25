@@ -100,7 +100,8 @@
     "revokeHint": "Bereits genehmigter, bevorstehender Urlaub - verwenden Sie dies, wenn sich die Pläne geändert haben und der Urlaub nachträglich storniert werden muss.",
     "revokeEmpty": "Kein genehmigter bevorstehender Urlaub zum Widerrufen.",
     "revokeAction": "Widerrufen",
-    "revokeReasonLabel": "Grund (erforderlich)"
+    "revokeReasonLabel": "Grund (erforderlich)",
+    "startedCannotCancel": "Begonnen - nicht stornierbar"
   },
   "pendingHours": {
     "title_one": "Stunden zur Prüfung ({{count}})",

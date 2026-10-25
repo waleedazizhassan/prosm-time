@@ -100,7 +100,8 @@
     "revokeHint": "Already-approved, upcoming leave - use this if plans changed and the leave needs to be cancelled after the fact.",
     "revokeEmpty": "No approved upcoming leave to revoke.",
     "revokeAction": "Revoke",
-    "revokeReasonLabel": "Reason (required)"
+    "revokeReasonLabel": "Reason (required)",
+    "startedCannotCancel": "Started - cannot be cancelled"
   },
   "pendingHours": {
     "title_one": "Hours waiting for review ({{count}})",

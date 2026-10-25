@@ -81,5 +81,6 @@
   },
   "documentLabel": "Nachweis (ärztliches Attest)",
   "documentUploadError": "Nachweis konnte nicht hochgeladen werden.",
-  "balanceDiffers": "Von Hand gesetzt; die Regeln ergeben {{computed}}."
+  "balanceDiffers": "Von Hand gesetzt; die Regeln ergeben {{computed}}.",
+  "startedCannotCancel": "Begonnen - nicht stornierbar"
 }

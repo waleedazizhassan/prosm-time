@@ -100,7 +100,8 @@
     "revokeHint": "Congés à venir déjà approuvés - utilisez ceci si les plans ont changé et que le congé doit être annulé après coup.",
     "revokeEmpty": "Aucun congé approuvé à venir à révoquer.",
     "revokeAction": "Révoquer",
-    "revokeReasonLabel": "Motif (obligatoire)"
+    "revokeReasonLabel": "Motif (obligatoire)",
+    "startedCannotCancel": "Commencé - impossible d'annuler"
   },
   "pendingHours": {
     "title_one": "Heures à vérifier ({{count}})",

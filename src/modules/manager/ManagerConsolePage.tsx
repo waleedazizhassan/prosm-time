@@ -348,17 +348,24 @@ export default function ManagerConsolePage() {
                     {formatDateOnly(item.startDate, i18n.language)} — {formatDateOnly(item.endDate, i18n.language)} ({item.daysCount} {t("leave.daysSuffix")})
                   </div>
                 </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => {
-                    setRevokeTarget(item);
-                    setRevokeReason("");
-                    setRevokeError("");
-                  }}
-                >
-                  {t("leave.revokeAction")}
-                </Button>
+                {item.canCancel ? (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      setRevokeTarget(item);
+                      setRevokeReason("");
+                      setRevokeError("");
+                    }}
+                  >
+                    {t("leave.revokeAction")}
+                  </Button>
+                ) : (
+                  // v2.3.43 step 8 (item 20): from its first day an approved leave can no longer be cancelled.
+                  <Button variant="ghost" size="sm" disabled title={t("leave.startedCannotCancel")}>
+                    {t("leave.startedCannotCancel")}
+                  </Button>
+                )}
               </ListRow>
             ))
           )}
@@ -368,7 +375,7 @@ export default function ManagerConsolePage() {
       <Modal
         isOpen={Boolean(revokeTarget)}
         onClose={() => setRevokeTarget(null)}
-        title={revokeTarget ? `${revokeTarget.employeeName} — ${t(`leave.types.${revokeTarget.leaveType}`)}` : ""}
+        title={revokeTarget ? `${revokeTarget.employeeName} — ${leaveTypeLabel(t, revokeTarget.leaveType)}` : ""}
         footer={
           <Button variant="danger" onClick={handleRevoke} loading={revokeSubmitting} disabled={!revokeReason.trim()}>
             {t("leave.revokeAction")}

@@ -25,7 +25,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyLeaveReasonSuffix": "السبب: {{reason}}.",
         "titlePermission": "إذن ينتظر موافقتك",
         "bodyPermission": "{{name}} طلب {{kind}} يوم {{date}}.",
-        "bodyPermissionShort": "{{name}} طلب إذن يوم {{date}}."
+        "bodyPermissionShort": "{{name}} طلب إذن يوم {{date}}.",
+        "titleLeaveCancelled": "إلغاء إجازة معتمدة",
+        "bodyLeaveCancelled": "{{name}} ألغى إجازته المعتمدة ({{startDate}} - {{endDate}})."
       },
       "correctionReviewed": {
         "titleException": "تمت مراجعة الاستثناء الخاص بك",
@@ -150,7 +152,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyLeaveReasonSuffix": "Reason: {{reason}}.",
         "titlePermission": "Permission waiting for your approval",
         "bodyPermission": "{{name}} asked for {{kind}} on {{date}}.",
-        "bodyPermissionShort": "{{name}} asked for a permission on {{date}}."
+        "bodyPermissionShort": "{{name}} asked for a permission on {{date}}.",
+        "titleLeaveCancelled": "Approved leave cancelled",
+        "bodyLeaveCancelled": "{{name}} cancelled their approved leave ({{startDate}} - {{endDate}})."
       },
       "correctionReviewed": {
         "titleException": "Your exception was reviewed",
@@ -275,7 +279,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyLeaveReasonSuffix": "Grund: {{reason}}.",
         "titlePermission": "Genehmigung wartet",
         "bodyPermission": "{{name}} beantragt {{kind}} am {{date}}.",
-        "bodyPermissionShort": "{{name}} beantragt eine Genehmigung am {{date}}."
+        "bodyPermissionShort": "{{name}} beantragt eine Genehmigung am {{date}}.",
+        "titleLeaveCancelled": "Genehmigter Urlaub storniert",
+        "bodyLeaveCancelled": "{{name}} hat den genehmigten Urlaub storniert ({{startDate}} - {{endDate}})."
       },
       "correctionReviewed": {
         "titleException": "Ihre Ausnahme wurde geprüft",
@@ -400,7 +406,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyLeaveReasonSuffix": "Motif : {{reason}}.",
         "titlePermission": "Autorisation en attente",
         "bodyPermission": "{{name}} demande : {{kind}} le {{date}}.",
-        "bodyPermissionShort": "{{name}} demande une autorisation le {{date}}."
+        "bodyPermissionShort": "{{name}} demande une autorisation le {{date}}.",
+        "titleLeaveCancelled": "Congé approuvé annulé",
+        "bodyLeaveCancelled": "{{name}} a annulé son congé approuvé ({{startDate}} - {{endDate}})."
       },
       "correctionReviewed": {
         "titleException": "Votre exception a été examinée",
@@ -525,7 +533,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyLeaveReasonSuffix": "Motivo: {{reason}}.",
         "titlePermission": "Permesso in attesa",
         "bodyPermission": "{{name}} ha chiesto {{kind}} il {{date}}.",
-        "bodyPermissionShort": "{{name}} ha chiesto un permesso il {{date}}."
+        "bodyPermissionShort": "{{name}} ha chiesto un permesso il {{date}}.",
+        "titleLeaveCancelled": "Permesso approvato annullato",
+        "bodyLeaveCancelled": "{{name}} ha annullato il permesso approvato ({{startDate}} - {{endDate}})."
       },
       "correctionReviewed": {
         "titleException": "La tua eccezione è stata esaminata",

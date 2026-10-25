@@ -78,7 +78,9 @@
       "bodyLeaveReasonSuffix": "السبب: {{reason}}.",
       "titlePermission": "إذن ينتظر موافقتك",
       "bodyPermission": "{{name}} طلب {{kind}} يوم {{date}}.",
-      "bodyPermissionShort": "{{name}} طلب إذن يوم {{date}}."
+      "bodyPermissionShort": "{{name}} طلب إذن يوم {{date}}.",
+      "titleLeaveCancelled": "إلغاء إجازة معتمدة",
+      "bodyLeaveCancelled": "{{name}} ألغى إجازته المعتمدة ({{startDate}} - {{endDate}})."
     },
     "correctionReviewed": {
       "titleException": "تمت مراجعة الاستثناء الخاص بك",

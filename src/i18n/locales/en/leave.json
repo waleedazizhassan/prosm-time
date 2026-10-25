@@ -81,5 +81,6 @@
   },
   "documentLabel": "Document (medical report)",
   "documentUploadError": "Could not upload the document.",
-  "balanceDiffers": "Set by hand; the rules give {{computed}} - ask your manager if this looks wrong."
+  "balanceDiffers": "Set by hand; the rules give {{computed}} - ask your manager if this looks wrong.",
+  "startedCannotCancel": "Started - cannot be cancelled"
 }

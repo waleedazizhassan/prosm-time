@@ -81,6 +81,8 @@ export interface ApprovedLeaveRow {
   reason: string | null;
   reviewedByName: string | null;
   reviewedAt: string | null;
+  // v2.3.43 step 8 (item 20): false from the first day of the leave on.
+  canCancel: boolean;
 }
 
 export interface LeaveBalanceEntry {
@@ -379,6 +381,7 @@ class LeaveRepository {
             reason: string | null;
             reviewed_by_name: string | null;
             reviewed_at: string | null;
+            can_cancel?: boolean | null;
           }) => ({
             id: row.id,
             userId: row.user_id,
@@ -390,6 +393,7 @@ class LeaveRepository {
             reason: row.reason,
             reviewedByName: row.reviewed_by_name,
             reviewedAt: row.reviewed_at,
+            canCancel: row.can_cancel ?? false,
           }),
         ),
       );

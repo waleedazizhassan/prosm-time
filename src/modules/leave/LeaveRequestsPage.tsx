@@ -153,10 +153,13 @@ export default function LeaveRequestsPage() {
       key: "actions",
       header: t("common:actions.label"),
       render: (row) =>
-        row.status === "pending" ? (
+        row.status === "pending" || (row.status === "approved" && row.startDate > isoDate(new Date())) ? (
           <Button variant="ghost" size="sm" onClick={() => handleCancel(row.id)} loading={cancellingId === row.id}>
             {t("cancelAction")}
           </Button>
+        ) : row.status === "approved" ? (
+          // v2.3.43 step 8 (item 20): no cancelling from the leave's first day (the server decides; this only explains).
+          <span style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("startedCannotCancel")}</span>
         ) : null,
     },
   ];

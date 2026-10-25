@@ -33,8 +33,15 @@ export default function localizeNotification(notification: AppNotification, t: T
     }
     case "exception_pending_review": {
       const name = typeof data.employeeName === "string" ? data.employeeName : null;
-      const kind = data.kind === "exception" || data.kind === "correction" || data.kind === "early_leave" || data.kind === "leave" || data.kind === "permission" ? data.kind : null;
+      const kind = data.kind === "exception" || data.kind === "correction" || data.kind === "early_leave" || data.kind === "leave" || data.kind === "permission" || data.kind === "leave_cancelled" ? data.kind : null;
       if (!name || !kind) break;
+      // v2.3.43 step 8: an employee cancelled approved leave before it started.
+      if (kind === "leave_cancelled") {
+        return {
+          title: t("shell:notifications.exceptionPendingReview.titleLeaveCancelled"),
+          body: t("shell:notifications.exceptionPendingReview.bodyLeaveCancelled", { name, startDate: String(data.startDate ?? ""), endDate: String(data.endDate ?? "") }),
+        };
+      }
       // v2.3.43 step 6: an attendance permission asked by an employee.
       if (kind === "permission") {
         const date = typeof data.workDate === "string" ? data.workDate : "";

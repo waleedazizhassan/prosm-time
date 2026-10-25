@@ -100,7 +100,8 @@
     "revokeHint": "إجازات معتمدة قادمة - استخدم ده لو الخطط اتغيرت والإجازة محتاجة تتلغي بعد ما كانت معتمدة.",
     "revokeEmpty": "لا توجد إجازات معتمدة قادمة لإلغائها.",
     "revokeAction": "إلغاء الإجازة",
-    "revokeReasonLabel": "السبب (مطلوب)"
+    "revokeReasonLabel": "السبب (مطلوب)",
+    "startedCannotCancel": "الإجازة بدأت ولا يمكن إلغاؤها"
   },
   "pendingHours": {
     "title_one": "ساعات تنتظر المراجعة ({{count}})",

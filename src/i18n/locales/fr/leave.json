@@ -81,5 +81,6 @@
   },
   "documentLabel": "Justificatif (certificat médical)",
   "documentUploadError": "Impossible d'envoyer le justificatif.",
-  "balanceDiffers": "Fixé à la main ; les règles donnent {{computed}}."
+  "balanceDiffers": "Fixé à la main ; les règles donnent {{computed}}.",
+  "startedCannotCancel": "Commencé - impossible d'annuler"
 }

@@ -78,7 +78,9 @@
       "bodyLeaveReasonSuffix": "Reason: {{reason}}.",
       "titlePermission": "Permission waiting for your approval",
       "bodyPermission": "{{name}} asked for {{kind}} on {{date}}.",
-      "bodyPermissionShort": "{{name}} asked for a permission on {{date}}."
+      "bodyPermissionShort": "{{name}} asked for a permission on {{date}}.",
+      "titleLeaveCancelled": "Approved leave cancelled",
+      "bodyLeaveCancelled": "{{name}} cancelled their approved leave ({{startDate}} - {{endDate}})."
     },
     "correctionReviewed": {
       "titleException": "Your exception was reviewed",

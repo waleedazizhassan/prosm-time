@@ -100,7 +100,8 @@
     "revokeHint": "Ferie future già approvate - usa questa opzione se i piani sono cambiati e le ferie devono essere annullate a posteriori.",
     "revokeEmpty": "Nessuna ferie futura approvata da revocare.",
     "revokeAction": "Revoca",
-    "revokeReasonLabel": "Motivo (obbligatorio)"
+    "revokeReasonLabel": "Motivo (obbligatorio)",
+    "startedCannotCancel": "Iniziato - non annullabile"
   },
   "pendingHours": {
     "title_one": "Ore da verificare ({{count}})",

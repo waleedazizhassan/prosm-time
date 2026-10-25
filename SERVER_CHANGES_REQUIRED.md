@@ -11,6 +11,7 @@
 | `20261025140000_allowance_review_edits.sql` | 5 (بند 21) | صلاحيات `allowances.edit_during_review`/`allowances.reopen_approved`؛ `manual_overrides`؛ `allowance_entry_adjustments`؛ trigger إجمالي الشيت؛ `adjust_prosm_time_allowance_entry`؛ `reopen_prosm_time_allowance_sheet`. |
 | `20261025150000_overtime_permissions_control.sql` | 6 (بند 23) | صلاحية `attendance.manage_permissions`؛ `overtime_policies`, `attendance_permissions`, `attendance_day_adjustments` (+RLS)؛ قواعد استراحة الورديات؛ `prosm_time_day_summary`؛ RPCs الأذونات والتعديل والطابور والسياسة؛ الكشف والبدلات من المحرك؛ عدّاد الداشبورد؛ إعادة حساب غير المعتمد. |
 | `20261025160000_leave_types.sql` | 7 (بند 25) | صلاحية `leave.manage_types`؛ `users.hire_date`/`special_needs_entitlement`؛ `leave_types` + زرع + trigger؛ bucket `leave-documents` + سياساته؛ قواعد الطلب والرصيد؛ إدارة الأنواع وبيانات التعيين. |
+| `20261025170000_leave_cancel_before_start.sql` | 8 (بند 20) | `prosm_time_leave_started`, `prosm_time_after_leave_cancelled`؛ `cancel_prosm_time_leave_request` للمعتمدة قبل يومها؛ تعديل `review_prosm_time_leave`؛ `list_prosm_time_approved_leave_requests` + `can_cancel`. |
 
 ## Edge Functions تحتاج إعادة نشر
 - `send-push` (الخطوتان 2 و6): نصوص الإشعارين الجديدين (`_shared/pushTexts.ts`, `_shared/localizePush.ts`) وحقل `kind` في بيانات الإشعار — `npx supabase functions deploy send-push`.
