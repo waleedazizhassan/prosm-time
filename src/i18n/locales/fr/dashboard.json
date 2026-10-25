@@ -273,5 +273,204 @@
     "clockOut": "Pointer maintenant",
     "stillWorking": "Toujours au travail",
     "error": "Impossible d'enregistrer la réponse."
+  },
+  "manager": {
+    "title": "Tableau de bord du responsable",
+    "subtitle": "Mis à jour à {{time}} · actualisé chaque minute",
+    "nextHoliday": "Prochain jour férié : {{name}} ({{date}})",
+    "loadError": "Impossible de charger le tableau de bord.",
+    "scopeLabel": "Portée",
+    "scope": {
+      "org": "Organisation",
+      "mine": "Mes sites",
+      "me": "Moi"
+    },
+    "periodLabel": "Période",
+    "period": {
+      "day": "Aujourd'hui",
+      "week": "Semaine",
+      "month": "Mois",
+      "custom": "Personnalisé"
+    },
+    "from": "Du",
+    "to": "Au",
+    "siteFilter": "Site",
+    "allSites": "Tous les sites",
+    "proxyClock": "Pointer pour un employé",
+    "customize": "Personnaliser les widgets",
+    "customizeHint": "Glissez ou utilisez les flèches pour réordonner ; désactivez un widget pour le masquer. Enregistré sur votre compte.",
+    "moveUp": "Monter",
+    "moveDown": "Descendre",
+    "viewAll": "Tout voir",
+    "liveNote": "En direct, non filtré par période",
+    "hoursUnit": "heures",
+    "hoursValue": "{{hours}} h",
+    "widgets": {
+      "map": "Carte des sites",
+      "present": "Présents maintenant",
+      "sites": "Sites",
+      "approvals": "Approbations",
+      "people": "Personnes par rôle",
+      "chart": "Prévu vs réel",
+      "cost": "Indemnités et coût",
+      "audit": "Journal des actions"
+    },
+    "sos": {
+      "text": "SOS de {{name}} à {{site}} depuis {{time}}",
+      "map": "Ouvrir sur la carte",
+      "acknowledge": "Prendre en charge",
+      "acknowledgeTitle": "Prendre en charge le SOS",
+      "notes": "Ce qui a été fait (facultatif)"
+    },
+    "priorities": {
+      "longSessions": "Sessions longues",
+      "pendingHours": "Heures à revoir",
+      "outsideZone": "Hors zone",
+      "outsideExceptions": "Demandes hors zone",
+      "leave": "Demandes de congé",
+      "allowanceSheets": "Fiches d'indemnités",
+      "corrections": "Corrections",
+      "timesheets": "Feuilles de temps",
+      "integrity": "Pointages suspects",
+      "permissions": "Autorisations et heures sup."
+    },
+    "kpi": {
+      "present": "Présents",
+      "ofExpected": "sur {{expected}} attendus aujourd'hui",
+      "ofTeam": "sur {{team}} dans l'équipe",
+      "hours": "Heures travaillées",
+      "scheduled": "sur {{hours}} h prévues",
+      "noSchedule": "aucun planning",
+      "late": "En retard aujourd'hui",
+      "lateInPeriod": "{{count}} retards sur la période",
+      "absent": "Absents aujourd'hui",
+      "onLeave": "{{count}} en congé",
+      "overtime": "Heures sup.",
+      "pendingExcluded": "{{hours}} h en attente, non comptées",
+      "cost": "Coût estimé",
+      "costNote": "estimation d'après les taux",
+      "vsPrevious": "{{change}} vs période précédente"
+    },
+    "map": {
+      "title": "Les sites maintenant",
+      "fullScreen": "Plein écran",
+      "exitFullScreen": "Quitter le plein écran"
+    },
+    "present": {
+      "title": "Présents maintenant ({{count}})",
+      "empty": "Personne n'est pointé pour l'instant.",
+      "since": "depuis {{time}}",
+      "status": {
+        "in": "Au travail",
+        "break": "En pause",
+        "outside": "Hors zone",
+        "long": "Session longue"
+      }
+    },
+    "sites": {
+      "title": "Sites",
+      "hint": "Cliquez sur un site pour filtrer",
+      "empty": "Aucun site dans cette portée.",
+      "columns": {
+        "name": "Site",
+        "present": "Présents",
+        "late": "Retards",
+        "absent": "Absents",
+        "workedMinutes": "Heures",
+        "overtimeMinutes": "Heures sup.",
+        "status": "État"
+      },
+      "statusOk": "Normal",
+      "statusOutside": "{{count}} hors zone",
+      "statusSos": "SOS",
+      "external": "Travailleurs externes",
+      "externalSummary": "{{present}} présents, {{today}} aujourd'hui, {{hours}} h",
+      "noExternal": "Aucun travailleur externe aujourd'hui.",
+      "noContractor": "Sans sous-traitant"
+    },
+    "queue": {
+      "title": "En attente de décision ({{count}})",
+      "empty": "Rien ne vous attend.",
+      "open": "Ouvrir",
+      "edit": "Revoir et modifier",
+      "kinds": {
+        "review": "Exceptions",
+        "leave": "Congés",
+        "allowances": "Indemnités",
+        "permissions": "Autorisations",
+        "overtime": "Heures sup.",
+        "sessions": "Heures à revoir",
+        "timesheets": "Feuilles de temps",
+        "integrity": "Suspects"
+      },
+      "leaveSummary": "{{days}} jour(s) à partir du {{from}}",
+      "sheetSummary": "{{from}} – {{to}} · total {{total}}",
+      "overtimeSummary": "{{hours}} h sup.",
+      "sessionSummary": "Session fermée automatiquement",
+      "timesheetSummary": "{{from}} – {{to}}"
+    },
+    "people": {
+      "title": "Personnes"
+    },
+    "chart": {
+      "title": "Prévu vs réel",
+      "week": "Semaine",
+      "month": "Mois",
+      "year": "Année",
+      "empty": "Aucune heure sur cette période.",
+      "legend": "Plein : travaillé · pointillé : prévu · clair : en attente"
+    },
+    "cost": {
+      "title": "Indemnités et coût",
+      "estimated": "Estimé",
+      "allowances": "Indemnités",
+      "overtime": "Montant heures sup.",
+      "noSites": "Aucun coût de site sur cette période.",
+      "note": "Une estimation d'après les taux ; la paie fait foi."
+    },
+    "audit": {
+      "title": "Journal des actions",
+      "empty": "Aucune action sur cette période.",
+      "system": "Système",
+      "columns": {
+        "time": "Heure",
+        "actor": "Par",
+        "action": "Action",
+        "subject": "Personne",
+        "reason": "Motif",
+        "device": "Appareil"
+      },
+      "named": {
+        "SOS_ALERT_TRIGGERED": "SOS envoyé",
+        "SOS_ALERT_RESOLVED": "SOS pris en charge",
+        "ADMIN_CLOCK_IN_ON_BEHALF": "Pointage d'entrée pour un employé",
+        "ADMIN_CLOCK_OUT_ON_BEHALF": "Pointage de sortie pour un employé",
+        "PERMISSION_GRANTED": "Droit accordé",
+        "PERMISSION_REVOKED": "Droit retiré",
+        "EMPLOYEE_DEACTIVATED": "Employé désactivé",
+        "EMPLOYEE_REMOVED": "Employé supprimé",
+        "USER_INVITED": "Personne invitée",
+        "attendance_override_block": "Blocage de pointage levé",
+        "attendance_day_adjusted": "Journée ajustée",
+        "attendance_overtime_approved": "Heures sup. approuvées",
+        "attendance_auto_close": "Session fermée automatiquement",
+        "allowances_edit_during_review": "Indemnité modifiée en revue",
+        "leave_approved_cancelled": "Congé approuvé annulé"
+      },
+      "groups": {
+        "sos": "SOS",
+        "attendance": "Présence",
+        "sites": "Sites",
+        "permissions": "Droits",
+        "leave": "Congés",
+        "allowances": "Indemnités",
+        "calendar": "Calendrier",
+        "projects": "Projets",
+        "people": "Personnes",
+        "devices": "Appareils et photos",
+        "settings": "Paramètres",
+        "other": "Autre"
+      }
+    }
   }
 }

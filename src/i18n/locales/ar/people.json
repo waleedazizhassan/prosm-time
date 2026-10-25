@@ -51,7 +51,13 @@
     "leave.set_deduction": "تحديد خصم الإجازة بدون أجر",
     "sites.manage_integrity": "إعدادات التحقق الحي والصورة",
     "attendance.review_integrity_flags": "مراجعة التسجيلات المشبوهة",
-    "sites.manage_exit_policy": "الانصراف عند مغادرة الموقع"
+    "sites.manage_exit_policy": "الانصراف عند مغادرة الموقع",
+    "dashboard.view": "عرض لوحة التحكم",
+    "payroll.view_cost": "عرض التكلفة التقديرية",
+    "external_labor.view": "عرض العمالة الخارجية",
+    "audit.view": "عرض سجل الإجراءات",
+    "sos.acknowledge": "التعامل مع الاستغاثة",
+    "reports.export": "تصدير التقارير"
   },
   "invite": {
     "actionLabel": "دعوة موظف",

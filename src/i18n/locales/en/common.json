@@ -271,7 +271,9 @@
     "reviewIntegrityRequired": "You don't have permission to review suspicious check-ins.",
     "reviewItemNotFound": "This item was not found.",
     "manageExitPolicyRequired": "You don't have permission to change what happens when someone leaves the site.",
-    "invalidExitPolicy": "Check the leaving-the-site settings."
+    "invalidExitPolicy": "Check the leaving-the-site settings.",
+    "dashboardViewRequired": "You do not have access to the dashboard.",
+    "invalidLayout": "The widget layout could not be saved."
   },
   "pageLoad": {
     "title": "This page needs a connection",

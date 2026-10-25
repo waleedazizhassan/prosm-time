@@ -273,5 +273,204 @@
     "clockOut": "Jetzt ausstempeln",
     "stillWorking": "Noch bei der Arbeit",
     "error": "Antwort konnte nicht gespeichert werden."
+  },
+  "manager": {
+    "title": "Manager-Dashboard",
+    "subtitle": "Aktualisiert {{time}} · jede Minute neu",
+    "nextHoliday": "Nächster Feiertag: {{name}} ({{date}})",
+    "loadError": "Dashboard konnte nicht geladen werden.",
+    "scopeLabel": "Bereich",
+    "scope": {
+      "org": "Organisation",
+      "mine": "Meine Standorte",
+      "me": "Ich"
+    },
+    "periodLabel": "Zeitraum",
+    "period": {
+      "day": "Heute",
+      "week": "Woche",
+      "month": "Monat",
+      "custom": "Benutzerdefiniert"
+    },
+    "from": "Von",
+    "to": "Bis",
+    "siteFilter": "Standort",
+    "allSites": "Alle Standorte",
+    "proxyClock": "Für Mitarbeiter erfassen",
+    "customize": "Widgets anpassen",
+    "customizeHint": "Ziehen oder Pfeile zum Umsortieren nutzen; Widget ausschalten, um es auszublenden. Wird in Ihrem Konto gespeichert.",
+    "moveUp": "Nach oben",
+    "moveDown": "Nach unten",
+    "viewAll": "Alle anzeigen",
+    "liveNote": "Live, nicht nach Zeitraum gefiltert",
+    "hoursUnit": "Stunden",
+    "hoursValue": "{{hours}} Std.",
+    "widgets": {
+      "map": "Standortkarte",
+      "present": "Jetzt anwesend",
+      "sites": "Standorte",
+      "approvals": "Genehmigungen",
+      "people": "Personen nach Rolle",
+      "chart": "Geplant vs. tatsächlich",
+      "cost": "Zulagen und Kosten",
+      "audit": "Aktionsprotokoll"
+    },
+    "sos": {
+      "text": "SOS von {{name}} bei {{site}} seit {{time}}",
+      "map": "Auf der Karte öffnen",
+      "acknowledge": "Bestätigen",
+      "acknowledgeTitle": "SOS bestätigen",
+      "notes": "Was unternommen wurde (optional)"
+    },
+    "priorities": {
+      "longSessions": "Lange Sitzungen",
+      "pendingHours": "Zu prüfende Stunden",
+      "outsideZone": "Außerhalb des Bereichs",
+      "outsideExceptions": "Anfragen außerhalb",
+      "leave": "Urlaubsanträge",
+      "allowanceSheets": "Zulagenblätter",
+      "corrections": "Korrekturen",
+      "timesheets": "Stundenzettel",
+      "integrity": "Verdächtige Erfassungen",
+      "permissions": "Freigaben und Überstunden"
+    },
+    "kpi": {
+      "present": "Anwesend",
+      "ofExpected": "von {{expected}} erwartet heute",
+      "ofTeam": "von {{team}} im Team",
+      "hours": "Gearbeitete Stunden",
+      "scheduled": "von {{hours}} Std. geplant",
+      "noSchedule": "kein Plan",
+      "late": "Heute verspätet",
+      "lateInPeriod": "{{count}} Verspätungen im Zeitraum",
+      "absent": "Heute abwesend",
+      "onLeave": "{{count}} im Urlaub",
+      "overtime": "Überstunden",
+      "pendingExcluded": "{{hours}} Std. in Prüfung, nicht gezählt",
+      "cost": "Geschätzte Kosten",
+      "costNote": "Schätzung nach Sätzen",
+      "vsPrevious": "{{change}} ggü. Vorperiode"
+    },
+    "map": {
+      "title": "Standorte jetzt",
+      "fullScreen": "Vollbild",
+      "exitFullScreen": "Vollbild beenden"
+    },
+    "present": {
+      "title": "Jetzt anwesend ({{count}})",
+      "empty": "Derzeit ist niemand eingestempelt.",
+      "since": "seit {{time}}",
+      "status": {
+        "in": "Arbeitet",
+        "break": "In Pause",
+        "outside": "Außerhalb",
+        "long": "Lange Sitzung"
+      }
+    },
+    "sites": {
+      "title": "Standorte",
+      "hint": "Standort anklicken, um zu filtern",
+      "empty": "Keine Standorte in diesem Bereich.",
+      "columns": {
+        "name": "Standort",
+        "present": "Anwesend",
+        "late": "Verspätet",
+        "absent": "Abwesend",
+        "workedMinutes": "Stunden",
+        "overtimeMinutes": "Überstunden",
+        "status": "Status"
+      },
+      "statusOk": "Normal",
+      "statusOutside": "{{count}} außerhalb",
+      "statusSos": "SOS",
+      "external": "Externe Arbeitskräfte",
+      "externalSummary": "{{present}} anwesend, {{today}} heute, {{hours}} Std.",
+      "noExternal": "Heute keine externen Kräfte.",
+      "noContractor": "Ohne Auftragnehmer"
+    },
+    "queue": {
+      "title": "Wartet auf Entscheidung ({{count}})",
+      "empty": "Nichts wartet auf Sie.",
+      "open": "Öffnen",
+      "edit": "Prüfen und bearbeiten",
+      "kinds": {
+        "review": "Ausnahmen",
+        "leave": "Urlaub",
+        "allowances": "Zulagen",
+        "permissions": "Freigaben",
+        "overtime": "Überstunden",
+        "sessions": "Zu prüfende Stunden",
+        "timesheets": "Stundenzettel",
+        "integrity": "Verdächtig"
+      },
+      "leaveSummary": "{{days}} Tag(e) ab {{from}}",
+      "sheetSummary": "{{from}} – {{to}} · gesamt {{total}}",
+      "overtimeSummary": "{{hours}} Std. Überstunden",
+      "sessionSummary": "Sitzung automatisch beendet",
+      "timesheetSummary": "{{from}} – {{to}}"
+    },
+    "people": {
+      "title": "Personen"
+    },
+    "chart": {
+      "title": "Geplant vs. tatsächlich",
+      "week": "Woche",
+      "month": "Monat",
+      "year": "Jahr",
+      "empty": "Noch keine Stunden in diesem Zeitraum.",
+      "legend": "Gefüllt: gearbeitet · gestrichelt: geplant · hell: in Prüfung"
+    },
+    "cost": {
+      "title": "Zulagen und Kosten",
+      "estimated": "Geschätzt",
+      "allowances": "Zulagen",
+      "overtime": "Überstundenbetrag",
+      "noSites": "Keine Standortkosten im Zeitraum.",
+      "note": "Eine Schätzung nach den Sätzen; maßgeblich ist die Lohnabrechnung."
+    },
+    "audit": {
+      "title": "Aktionsprotokoll",
+      "empty": "Keine Aktionen im Zeitraum.",
+      "system": "System",
+      "columns": {
+        "time": "Zeit",
+        "actor": "Von",
+        "action": "Aktion",
+        "subject": "Person",
+        "reason": "Grund",
+        "device": "Gerät"
+      },
+      "named": {
+        "SOS_ALERT_TRIGGERED": "SOS gesendet",
+        "SOS_ALERT_RESOLVED": "SOS bearbeitet",
+        "ADMIN_CLOCK_IN_ON_BEHALF": "Einstempeln im Auftrag",
+        "ADMIN_CLOCK_OUT_ON_BEHALF": "Ausstempeln im Auftrag",
+        "PERMISSION_GRANTED": "Recht erteilt",
+        "PERMISSION_REVOKED": "Recht entzogen",
+        "EMPLOYEE_DEACTIVATED": "Mitarbeiter deaktiviert",
+        "EMPLOYEE_REMOVED": "Mitarbeiter entfernt",
+        "USER_INVITED": "Person eingeladen",
+        "attendance_override_block": "Erfassungssperre aufgehoben",
+        "attendance_day_adjusted": "Tag angepasst",
+        "attendance_overtime_approved": "Überstunden genehmigt",
+        "attendance_auto_close": "Sitzung automatisch beendet",
+        "allowances_edit_during_review": "Zulage in Prüfung geändert",
+        "leave_approved_cancelled": "Genehmigter Urlaub storniert"
+      },
+      "groups": {
+        "sos": "SOS",
+        "attendance": "Anwesenheit",
+        "sites": "Standorte",
+        "permissions": "Rechte",
+        "leave": "Urlaub",
+        "allowances": "Zulagen",
+        "calendar": "Kalender",
+        "projects": "Projekte",
+        "people": "Personen",
+        "devices": "Geräte und Fotos",
+        "settings": "Einstellungen",
+        "other": "Sonstiges"
+      }
+    }
   }
 }

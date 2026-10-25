@@ -51,7 +51,13 @@
     "leave.set_deduction": "Fixer la retenue du congé sans solde",
     "sites.manage_integrity": "Réglages de vérification et photo",
     "attendance.review_integrity_flags": "Vérifier les pointages suspects",
-    "sites.manage_exit_policy": "Départ en quittant le site"
+    "sites.manage_exit_policy": "Départ en quittant le site",
+    "dashboard.view": "Voir le tableau de bord",
+    "payroll.view_cost": "Voir le coût estimé",
+    "external_labor.view": "Voir les travailleurs externes",
+    "audit.view": "Voir le journal des actions",
+    "sos.acknowledge": "Prendre en charge un SOS",
+    "reports.export": "Exporter les rapports"
   },
   "invite": {
     "actionLabel": "Inviter un employé",

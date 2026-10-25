@@ -5,6 +5,7 @@ import EmployeeHome from "./EmployeeHome";
 import ExceptionsCard from "./ExceptionsCard";
 import AdminOverviewCard from "./AdminOverviewCard";
 import PersonalRemindersCard from "./PersonalRemindersCard";
+import ManagerDashboard from "./manager/ManagerDashboard";
 
 // PROSM Time Implementation Master File V3.0, WP-03/§21/§37 - "Admin
 // Dashboard." Deliberately minimal and operational: real-time
@@ -37,6 +38,7 @@ export default function DashboardPage() {
   // both hold it, plain Employee/read_only don't. Owner/Manager still
   // reach the exact same widget via the new /clock-in sidebar entry.
   const hasManagementScope = Boolean(profile?.isOwner) || hasPermission("exceptions.manage");
+  const showFullDashboard = Boolean(profile?.isOwner) || hasPermission("dashboard.view");
 
   // § user-directed, 2026-09-11 - AdminOverviewCard already carries its
   // own complete greeting banner for the Owner/Manager view; PageShell's
@@ -47,7 +49,9 @@ export default function DashboardPage() {
   // Supervisors; everyone else gets their own light home page.
   return (
     <PageShell compact>
-      {hasManagementScope ? <AdminOverviewCard /> : <EmployeeHome />}
+      {/* v2.3.43 step 17: the Owner and whoever holds dashboard.view get the
+          full dashboard; other management roles keep the light overview. */}
+      {showFullDashboard ? <ManagerDashboard /> : hasManagementScope ? <AdminOverviewCard /> : <EmployeeHome />}
       <ExceptionsCard />
       {/* Owner 2026-10-21: each person sets their own clock-in/out reminders (not the Owner). */}
       <PersonalRemindersCard />

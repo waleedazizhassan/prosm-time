@@ -271,7 +271,9 @@
     "reviewIntegrityRequired": "Non hai il permesso di verificare queste timbrature.",
     "reviewItemNotFound": "Elemento non trovato.",
     "manageExitPolicyRequired": "Non hai il permesso di modificare questa impostazione.",
-    "invalidExitPolicy": "Controlla le impostazioni."
+    "invalidExitPolicy": "Controlla le impostazioni.",
+    "dashboardViewRequired": "Non hai accesso alla dashboard.",
+    "invalidLayout": "Impossibile salvare la disposizione dei widget."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

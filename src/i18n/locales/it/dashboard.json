@@ -273,5 +273,204 @@
     "clockOut": "Esci ora",
     "stillWorking": "Sto ancora lavorando",
     "error": "Impossibile salvare la risposta."
+  },
+  "manager": {
+    "title": "Dashboard del responsabile",
+    "subtitle": "Aggiornato alle {{time}} · si aggiorna ogni minuto",
+    "nextHoliday": "Prossima festività: {{name}} ({{date}})",
+    "loadError": "Impossibile caricare la dashboard.",
+    "scopeLabel": "Ambito",
+    "scope": {
+      "org": "Organizzazione",
+      "mine": "I miei siti",
+      "me": "Io"
+    },
+    "periodLabel": "Periodo",
+    "period": {
+      "day": "Oggi",
+      "week": "Settimana",
+      "month": "Mese",
+      "custom": "Personalizzato"
+    },
+    "from": "Dal",
+    "to": "Al",
+    "siteFilter": "Sito",
+    "allSites": "Tutti i siti",
+    "proxyClock": "Registra per un dipendente",
+    "customize": "Personalizza i widget",
+    "customizeHint": "Trascina o usa le frecce per riordinare; disattiva un widget per nasconderlo. Salvato nel tuo account.",
+    "moveUp": "Sposta su",
+    "moveDown": "Sposta giù",
+    "viewAll": "Vedi tutto",
+    "liveNote": "In diretta, non filtrato per periodo",
+    "hoursUnit": "ore",
+    "hoursValue": "{{hours}} h",
+    "widgets": {
+      "map": "Mappa dei siti",
+      "present": "Presenti ora",
+      "sites": "Siti",
+      "approvals": "Approvazioni",
+      "people": "Persone per ruolo",
+      "chart": "Previsto vs effettivo",
+      "cost": "Indennità e costi",
+      "audit": "Registro delle azioni"
+    },
+    "sos": {
+      "text": "SOS da {{name}} a {{site}} dalle {{time}}",
+      "map": "Apri sulla mappa",
+      "acknowledge": "Prendi in carico",
+      "acknowledgeTitle": "Prendi in carico l'SOS",
+      "notes": "Cosa è stato fatto (facoltativo)"
+    },
+    "priorities": {
+      "longSessions": "Sessioni lunghe",
+      "pendingHours": "Ore da rivedere",
+      "outsideZone": "Fuori area",
+      "outsideExceptions": "Richieste fuori area",
+      "leave": "Richieste di ferie",
+      "allowanceSheets": "Fogli indennità",
+      "corrections": "Correzioni",
+      "timesheets": "Fogli presenze",
+      "integrity": "Timbrature sospette",
+      "permissions": "Permessi e straordinari"
+    },
+    "kpi": {
+      "present": "Presenti",
+      "ofExpected": "su {{expected}} attesi oggi",
+      "ofTeam": "su {{team}} nel team",
+      "hours": "Ore lavorate",
+      "scheduled": "su {{hours}} h previste",
+      "noSchedule": "nessun turno",
+      "late": "In ritardo oggi",
+      "lateInPeriod": "{{count}} ritardi nel periodo",
+      "absent": "Assenti oggi",
+      "onLeave": "{{count}} in ferie",
+      "overtime": "Straordinari (ore)",
+      "pendingExcluded": "{{hours}} h in revisione, non conteggiate",
+      "cost": "Costo stimato",
+      "costNote": "stima dalle tariffe",
+      "vsPrevious": "{{change}} rispetto al periodo precedente"
+    },
+    "map": {
+      "title": "I siti ora",
+      "fullScreen": "Schermo intero",
+      "exitFullScreen": "Esci da schermo intero"
+    },
+    "present": {
+      "title": "Presenti ora ({{count}})",
+      "empty": "Nessuno ha timbrato al momento.",
+      "since": "dalle {{time}}",
+      "status": {
+        "in": "Al lavoro",
+        "break": "In pausa",
+        "outside": "Fuori area",
+        "long": "Sessione lunga"
+      }
+    },
+    "sites": {
+      "title": "Siti",
+      "hint": "Clicca un sito per filtrare",
+      "empty": "Nessun sito in questo ambito.",
+      "columns": {
+        "name": "Sito",
+        "present": "Presenti",
+        "late": "Ritardi",
+        "absent": "Assenti",
+        "workedMinutes": "Ore",
+        "overtimeMinutes": "Straordinari",
+        "status": "Stato"
+      },
+      "statusOk": "Normale",
+      "statusOutside": "{{count}} fuori",
+      "statusSos": "SOS",
+      "external": "Lavoratori esterni",
+      "externalSummary": "{{present}} presenti, {{today}} oggi, {{hours}} h",
+      "noExternal": "Nessun lavoratore esterno oggi.",
+      "noContractor": "Senza appaltatore"
+    },
+    "queue": {
+      "title": "In attesa di decisione ({{count}})",
+      "empty": "Niente in attesa.",
+      "open": "Apri",
+      "edit": "Rivedi e modifica",
+      "kinds": {
+        "review": "Eccezioni",
+        "leave": "Ferie",
+        "allowances": "Indennità",
+        "permissions": "Permessi",
+        "overtime": "Straordinari",
+        "sessions": "Ore da rivedere",
+        "timesheets": "Fogli presenze",
+        "integrity": "Sospette"
+      },
+      "leaveSummary": "{{days}} giorno/i dal {{from}}",
+      "sheetSummary": "{{from}} – {{to}} · totale {{total}}",
+      "overtimeSummary": "{{hours}} h di straordinario",
+      "sessionSummary": "Sessione chiusa automaticamente",
+      "timesheetSummary": "{{from}} – {{to}}"
+    },
+    "people": {
+      "title": "Persone"
+    },
+    "chart": {
+      "title": "Previsto vs effettivo",
+      "week": "Settimana",
+      "month": "Mese",
+      "year": "Anno",
+      "empty": "Nessuna ora in questo periodo.",
+      "legend": "Pieno: lavorato · tratteggiato: previsto · chiaro: in revisione"
+    },
+    "cost": {
+      "title": "Indennità e costi",
+      "estimated": "Stimato",
+      "allowances": "Indennità",
+      "overtime": "Importo straordinari",
+      "noSites": "Nessun costo dei siti nel periodo.",
+      "note": "Una stima dalle tariffe; fa fede la busta paga."
+    },
+    "audit": {
+      "title": "Registro delle azioni",
+      "empty": "Nessuna azione nel periodo.",
+      "system": "Sistema",
+      "columns": {
+        "time": "Ora",
+        "actor": "Da",
+        "action": "Azione",
+        "subject": "Persona",
+        "reason": "Motivo",
+        "device": "Dispositivo"
+      },
+      "named": {
+        "SOS_ALERT_TRIGGERED": "SOS inviato",
+        "SOS_ALERT_RESOLVED": "SOS gestito",
+        "ADMIN_CLOCK_IN_ON_BEHALF": "Entrata per conto di",
+        "ADMIN_CLOCK_OUT_ON_BEHALF": "Uscita per conto di",
+        "PERMISSION_GRANTED": "Permesso concesso",
+        "PERMISSION_REVOKED": "Permesso revocato",
+        "EMPLOYEE_DEACTIVATED": "Dipendente disattivato",
+        "EMPLOYEE_REMOVED": "Dipendente rimosso",
+        "USER_INVITED": "Persona invitata",
+        "attendance_override_block": "Blocco timbratura superato",
+        "attendance_day_adjusted": "Giornata modificata",
+        "attendance_overtime_approved": "Straordinari approvati",
+        "attendance_auto_close": "Sessione chiusa automaticamente",
+        "allowances_edit_during_review": "Indennità modificata in revisione",
+        "leave_approved_cancelled": "Ferie approvate annullate"
+      },
+      "groups": {
+        "sos": "SOS",
+        "attendance": "Presenze",
+        "sites": "Siti",
+        "permissions": "Permessi",
+        "leave": "Ferie",
+        "allowances": "Indennità",
+        "calendar": "Calendario",
+        "projects": "Progetti",
+        "people": "Persone",
+        "devices": "Dispositivi e foto",
+        "settings": "Impostazioni",
+        "other": "Altro"
+      }
+    }
   }
 }

@@ -336,4 +336,7 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   // v2.3.43 step 12: leaving the site.
   "SITES.MANAGE_EXIT_POLICY AUTHORITY REQUIRED": "manageExitPolicyRequired",
   "INVALID EXIT POLICY": "invalidExitPolicy",
+  // v2.3.43 step 17: the manager dashboard
+  "DASHBOARD.VIEW AUTHORITY REQUIRED": "dashboardViewRequired",
+  "INVALID LAYOUT": "invalidLayout",
 };

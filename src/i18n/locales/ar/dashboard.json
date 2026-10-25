@@ -277,5 +277,204 @@
     "clockOut": "انصراف الآن",
     "stillWorking": "لسه شغال",
     "error": "تعذّر حفظ ردك."
+  },
+  "manager": {
+    "title": "لوحة المدير",
+    "subtitle": "آخر تحديث {{time}} · يتجدد كل دقيقة",
+    "nextHoliday": "الإجازة القادمة: {{name}} ({{date}})",
+    "loadError": "تعذّر تحميل لوحة التحكم.",
+    "scopeLabel": "النطاق",
+    "scope": {
+      "org": "المؤسسة",
+      "mine": "مواقعي",
+      "me": "أنا"
+    },
+    "periodLabel": "الفترة",
+    "period": {
+      "day": "اليوم",
+      "week": "الأسبوع",
+      "month": "الشهر",
+      "custom": "مخصص"
+    },
+    "from": "من",
+    "to": "إلى",
+    "siteFilter": "الموقع",
+    "allSites": "كل المواقع",
+    "proxyClock": "تسجيل نيابة عن موظف",
+    "customize": "تخصيص البطاقات",
+    "customizeHint": "اسحب أو استخدم الأسهم لإعادة الترتيب، وأوقف البطاقة لإخفائها. يُحفظ على حسابك.",
+    "moveUp": "تحريك لأعلى",
+    "moveDown": "تحريك لأسفل",
+    "viewAll": "عرض الكل",
+    "liveNote": "مباشر الآن، لا يتأثر بالفترة",
+    "hoursUnit": "ساعة",
+    "hoursValue": "{{hours}} س",
+    "widgets": {
+      "map": "خريطة المواقع",
+      "present": "الموجودون الآن",
+      "sites": "المواقع",
+      "approvals": "الموافقات",
+      "people": "الأشخاص حسب الدور",
+      "chart": "المخطط مقابل الفعلي",
+      "cost": "البدلات والتكلفة",
+      "audit": "سجل الإجراءات"
+    },
+    "sos": {
+      "text": "استغاثة من {{name}} في {{site}} منذ {{time}}",
+      "map": "افتح على الخريطة",
+      "acknowledge": "تم التعامل",
+      "acknowledgeTitle": "تأكيد التعامل مع الاستغاثة",
+      "notes": "ما الذي تم (اختياري)"
+    },
+    "priorities": {
+      "longSessions": "جلسات طويلة",
+      "pendingHours": "ساعات للمراجعة",
+      "outsideZone": "خارج النطاق",
+      "outsideExceptions": "طلبات خارج النطاق",
+      "leave": "طلبات إجازة",
+      "allowanceSheets": "كشوف بدلات",
+      "corrections": "تصحيحات",
+      "timesheets": "كشوف الساعات",
+      "integrity": "تسجيلات مشبوهة",
+      "permissions": "الأذونات والإضافي"
+    },
+    "kpi": {
+      "present": "الموجودون الآن",
+      "ofExpected": "من {{expected}} متوقعين اليوم",
+      "ofTeam": "من {{team}} في الفريق",
+      "hours": "ساعات العمل",
+      "scheduled": "من {{hours}} س مخططة",
+      "noSchedule": "لا يوجد جدول",
+      "late": "متأخرون اليوم",
+      "lateInPeriod": "{{count}} تأخير في الفترة",
+      "absent": "غائبون اليوم",
+      "onLeave": "{{count}} في إجازة",
+      "overtime": "الإضافي (ساعات)",
+      "pendingExcluded": "{{hours}} س بانتظار المراجعة، غير محسوبة",
+      "cost": "التكلفة التقديرية",
+      "costNote": "تقدير من معدلات الأجر",
+      "vsPrevious": "{{change}} عن الفترة السابقة"
+    },
+    "map": {
+      "title": "المواقع الآن",
+      "fullScreen": "ملء الشاشة",
+      "exitFullScreen": "الخروج من ملء الشاشة"
+    },
+    "present": {
+      "title": "الموجودون الآن ({{count}})",
+      "empty": "لا أحد مسجّل حضور الآن.",
+      "since": "منذ {{time}}",
+      "status": {
+        "in": "يعمل",
+        "break": "في استراحة",
+        "outside": "خارج النطاق",
+        "long": "جلسة طويلة"
+      }
+    },
+    "sites": {
+      "title": "المواقع",
+      "hint": "اضغط على موقع لتصفية اللوحة به",
+      "empty": "لا توجد مواقع في هذا النطاق.",
+      "columns": {
+        "name": "الموقع",
+        "present": "موجود",
+        "late": "متأخر",
+        "absent": "غائب",
+        "workedMinutes": "الساعات",
+        "overtimeMinutes": "الإضافي",
+        "status": "الحالة"
+      },
+      "statusOk": "طبيعي",
+      "statusOutside": "{{count}} خارج النطاق",
+      "statusSos": "استغاثة",
+      "external": "العمالة الخارجية",
+      "externalSummary": "{{present}} موجود، {{today}} اليوم، {{hours}} س",
+      "noExternal": "لا توجد عمالة خارجية اليوم.",
+      "noContractor": "بدون مقاول"
+    },
+    "queue": {
+      "title": "بانتظار قرار ({{count}})",
+      "empty": "لا يوجد شيء بانتظارك.",
+      "open": "فتح",
+      "edit": "مراجعة وتعديل",
+      "kinds": {
+        "review": "الاستثناءات",
+        "leave": "الإجازات",
+        "allowances": "البدلات",
+        "permissions": "الأذونات",
+        "overtime": "الإضافي",
+        "sessions": "ساعات للمراجعة",
+        "timesheets": "كشوف الساعات",
+        "integrity": "مشبوهة"
+      },
+      "leaveSummary": "{{days}} يوم من {{from}}",
+      "sheetSummary": "{{from}} – {{to}} · الإجمالي {{total}}",
+      "overtimeSummary": "{{hours}} س إضافي",
+      "sessionSummary": "جلسة أُغلقت تلقائيًا",
+      "timesheetSummary": "{{from}} – {{to}}"
+    },
+    "people": {
+      "title": "الأشخاص"
+    },
+    "chart": {
+      "title": "المخطط مقابل الفعلي",
+      "week": "أسبوع",
+      "month": "شهر",
+      "year": "سنة",
+      "empty": "لا توجد ساعات في هذه الفترة بعد.",
+      "legend": "ممتلئ: فعلي · متقطع: مخطط · فاتح: بانتظار المراجعة"
+    },
+    "cost": {
+      "title": "البدلات والتكلفة",
+      "estimated": "تقديري",
+      "allowances": "البدلات",
+      "overtime": "قيمة الإضافي",
+      "noSites": "لا توجد تكلفة مواقع في هذه الفترة.",
+      "note": "تقدير من معدلات الأجر؛ المرجع هو كشف الرواتب."
+    },
+    "audit": {
+      "title": "سجل الإجراءات",
+      "empty": "لا توجد إجراءات في هذه الفترة.",
+      "system": "النظام",
+      "columns": {
+        "time": "الوقت",
+        "actor": "بواسطة",
+        "action": "الإجراء",
+        "subject": "الشخص",
+        "reason": "السبب",
+        "device": "الجهاز"
+      },
+      "named": {
+        "SOS_ALERT_TRIGGERED": "إرسال استغاثة",
+        "SOS_ALERT_RESOLVED": "تم التعامل مع استغاثة",
+        "ADMIN_CLOCK_IN_ON_BEHALF": "تسجيل حضور نيابة",
+        "ADMIN_CLOCK_OUT_ON_BEHALF": "تسجيل انصراف نيابة",
+        "PERMISSION_GRANTED": "منح صلاحية",
+        "PERMISSION_REVOKED": "سحب صلاحية",
+        "EMPLOYEE_DEACTIVATED": "إيقاف موظف",
+        "EMPLOYEE_REMOVED": "حذف موظف",
+        "USER_INVITED": "دعوة شخص",
+        "attendance_override_block": "تجاوز منع التسجيل",
+        "attendance_day_adjusted": "تعديل يوم",
+        "attendance_overtime_approved": "اعتماد إضافي",
+        "attendance_auto_close": "إغلاق جلسة تلقائيًا",
+        "allowances_edit_during_review": "تعديل بدل أثناء المراجعة",
+        "leave_approved_cancelled": "إلغاء إجازة معتمدة"
+      },
+      "groups": {
+        "sos": "استغاثة",
+        "attendance": "الحضور",
+        "sites": "المواقع",
+        "permissions": "الصلاحيات",
+        "leave": "الإجازات",
+        "allowances": "البدلات",
+        "calendar": "التقويم",
+        "projects": "المشروعات",
+        "people": "الأشخاص",
+        "devices": "الأجهزة والصور",
+        "settings": "الإعدادات",
+        "other": "أخرى"
+      }
+    }
   }
 }

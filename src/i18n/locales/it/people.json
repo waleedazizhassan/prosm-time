@@ -51,7 +51,13 @@
     "leave.set_deduction": "Impostare la trattenuta del permesso non retribuito",
     "sites.manage_integrity": "Impostazioni verifica e foto",
     "attendance.review_integrity_flags": "Verificare timbrature sospette",
-    "sites.manage_exit_policy": "Uscita lasciando la sede"
+    "sites.manage_exit_policy": "Uscita lasciando la sede",
+    "dashboard.view": "Vedere la dashboard",
+    "payroll.view_cost": "Vedere il costo stimato",
+    "external_labor.view": "Vedere i lavoratori esterni",
+    "audit.view": "Vedere il registro delle azioni",
+    "sos.acknowledge": "Prendere in carico un SOS",
+    "reports.export": "Esportare i report"
   },
   "invite": {
     "actionLabel": "Invita dipendente",

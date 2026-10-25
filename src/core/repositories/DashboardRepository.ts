@@ -22,6 +22,109 @@ export interface DashboardSummary {
   week: { day: string; minutes: number }[];
 }
 
+export type DashboardScope = "org" | "mine" | "me";
+export type PresenceState = "in" | "break" | "outside" | "long";
+
+export interface DashboardSos {
+  id: string;
+  userId: string;
+  name: string;
+  siteName: string | null;
+  triggeredAt: string;
+  latitude: number | null;
+  longitude: number | null;
+}
+
+export interface DashboardPresent {
+  userId: string;
+  name: string;
+  avatarUrl: string | null;
+  clockInAt: string;
+  siteId: string | null;
+  siteName: string | null;
+  status: PresenceState;
+  latitude: number | null;
+  longitude: number | null;
+  lastLatitude: number | null;
+  lastLongitude: number | null;
+  timezone: string;
+}
+
+export interface DashboardSite {
+  id: string;
+  name: string;
+  latitude: number;
+  longitude: number;
+  radius: number;
+  present: number;
+  expected: number;
+  late: number;
+  absent: number;
+  workedMinutes: number;
+  overtimeMinutes: number;
+  sos: boolean;
+  outside: number;
+  cost: number | null;
+  external: { presentNow: number; today: number; minutesToday: number; contractors: { name: string; present: number; today: number }[] } | null;
+}
+
+export interface DashboardKpi {
+  presentNow: number;
+  expectedToday: number;
+  hasSchedule: boolean;
+  onLeaveToday: number;
+  lateToday: number;
+  absentToday: number;
+  workedMinutes: number;
+  scheduledMinutes: number;
+  overtimeMinutes: number;
+  lateCount: number;
+  pendingMinutes: number;
+  previous: { workedMinutes: number; overtimeMinutes: number; lateCount: number } | null;
+  estimatedCost: number | null;
+}
+
+export interface DashboardChartDay {
+  day: string;
+  workedMinutes: number;
+  scheduledMinutes: number;
+  pendingMinutes: number;
+  late: number;
+  absent: number;
+}
+
+export interface DashboardAuditRow {
+  id: string;
+  created_at: string;
+  action: string;
+  reason: string | null;
+  description: string | null;
+  actor_name: string | null;
+  subject_name: string | null;
+  subject_id: string | null;
+  site_id: string | null;
+  device: string | null;
+}
+
+export interface ManagerDashboard {
+  asOf: string;
+  scope: DashboardScope;
+  canViewCost: boolean;
+  canViewExternal: boolean;
+  canViewAudit: boolean;
+  teamSize: number;
+  sos: DashboardSos[];
+  priorities: Record<string, number>;
+  kpi: DashboardKpi;
+  presentNow: DashboardPresent[];
+  sites: DashboardSite[];
+  chart: DashboardChartDay[];
+  chartMonthly: { month: string; workedMinutes: number; overtimeMinutes: number; late: number }[];
+  allowances: { total: number; overtimeAmount: number; overtimeMinutes: number; deductions: number } | null;
+  audit: DashboardAuditRow[] | null;
+  holidays: { name: string; startDate: string; endDate: string }[];
+}
+
 const RETRIES = 2;
 
 class DashboardRepository {
@@ -46,6 +149,53 @@ class DashboardRepository {
       if (attempt < RETRIES) await new Promise((resolve) => setTimeout(resolve, 800 * (attempt + 1)));
     }
     return { success: false, message: lastError, data: null };
+  }
+
+  // v2.3.43 step 17 (items 5, 4): the full manager dashboard in one read
+  // (scoped; cost and external workers only with their permissions - all
+  // decided on the server).
+  async load(from: string, to: string, scope: DashboardScope, siteId: string | null): Promise<ServiceResult<ManagerDashboard>> {
+    try {
+      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Africa/Cairo";
+      const { data, error } = await this.client.rpc("get_prosm_time_manager_dashboard", {
+        p_from: from,
+        p_to: to,
+        p_scope: scope,
+        p_site_id: siteId,
+        p_time_zone: timeZone,
+      });
+      if (error) return { success: false, message: error.message, data: null };
+      return { success: true, message: null, data: data as ManagerDashboard };
+    } catch (error) {
+      return { success: false, message: error instanceof Error ? error.message : "Dashboard unavailable.", data: null };
+    }
+  }
+
+  async loadLayout(): Promise<{ hidden: string[]; order: string[] } | null> {
+    try {
+      const { data } = await this.client.from("dashboard_preferences").select("layout").maybeSingle();
+      const layout = (data?.layout ?? null) as { hidden?: string[]; order?: string[] } | null;
+      return layout ? { hidden: layout.hidden ?? [], order: layout.order ?? [] } : null;
+    } catch {
+      return null;
+    }
+  }
+
+  async saveLayout(layout: { hidden: string[]; order: string[] }): Promise<void> {
+    try {
+      await this.client.rpc("save_prosm_time_dashboard_layout", { p_layout: layout });
+    } catch {
+      // the local copy still applies on this device
+    }
+  }
+
+  async acknowledgeSos(id: string, notes: string): Promise<ServiceResult<null>> {
+    try {
+      const { error } = await this.client.rpc("resolve_prosm_time_sos_alert", { p_sos_alert_id: id, p_resolution_notes: notes || null });
+      return error ? { success: false, message: error.message, data: null } : { success: true, message: null, data: null };
+    } catch (error) {
+      return { success: false, message: error instanceof Error ? error.message : "SOS service unavailable.", data: null };
+    }
   }
 }
 

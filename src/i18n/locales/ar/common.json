@@ -271,7 +271,9 @@
     "reviewIntegrityRequired": "ليست لديك صلاحية مراجعة التسجيلات المشبوهة.",
     "reviewItemNotFound": "العنصر غير موجود.",
     "manageExitPolicyRequired": "ليست لديك صلاحية تغيير إعداد مغادرة الموقع.",
-    "invalidExitPolicy": "راجع إعداد مغادرة الموقع."
+    "invalidExitPolicy": "راجع إعداد مغادرة الموقع.",
+    "dashboardViewRequired": "ليست لديك صلاحية عرض لوحة التحكم.",
+    "invalidLayout": "تعذّر حفظ ترتيب البطاقات."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

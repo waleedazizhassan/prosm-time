@@ -51,7 +51,13 @@
     "leave.set_deduction": "Set the unpaid-leave deduction",
     "sites.manage_integrity": "Live check and photo settings",
     "attendance.review_integrity_flags": "Review suspicious check-ins",
-    "sites.manage_exit_policy": "Clock-out when leaving the site"
+    "sites.manage_exit_policy": "Clock-out when leaving the site",
+    "dashboard.view": "View the dashboard",
+    "payroll.view_cost": "View estimated cost",
+    "external_labor.view": "View external workers",
+    "audit.view": "View the action log",
+    "sos.acknowledge": "Acknowledge SOS",
+    "reports.export": "Export reports"
   },
   "invite": {
     "actionLabel": "Invite employee",

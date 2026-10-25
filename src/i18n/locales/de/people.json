@@ -51,7 +51,13 @@
     "leave.set_deduction": "Abzug für unbezahlten Urlaub festlegen",
     "sites.manage_integrity": "Einstellungen Live-Prüfung und Foto",
     "attendance.review_integrity_flags": "Verdächtige Stempelungen prüfen",
-    "sites.manage_exit_policy": "Ausstempeln beim Verlassen"
+    "sites.manage_exit_policy": "Ausstempeln beim Verlassen",
+    "dashboard.view": "Dashboard anzeigen",
+    "payroll.view_cost": "Geschätzte Kosten anzeigen",
+    "external_labor.view": "Externe Kräfte anzeigen",
+    "audit.view": "Aktionsprotokoll anzeigen",
+    "sos.acknowledge": "SOS bestätigen",
+    "reports.export": "Berichte exportieren"
   },
   "invite": {
     "actionLabel": "Mitarbeiter einladen",

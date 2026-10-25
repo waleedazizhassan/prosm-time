@@ -271,7 +271,9 @@
     "reviewIntegrityRequired": "Vous n'avez pas le droit de vérifier ces pointages.",
     "reviewItemNotFound": "Élément introuvable.",
     "manageExitPolicyRequired": "Vous n'avez pas le droit de modifier ce réglage.",
-    "invalidExitPolicy": "Vérifiez les réglages."
+    "invalidExitPolicy": "Vérifiez les réglages.",
+    "dashboardViewRequired": "Vous n'avez pas accès au tableau de bord.",
+    "invalidLayout": "La disposition des widgets n'a pas pu être enregistrée."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

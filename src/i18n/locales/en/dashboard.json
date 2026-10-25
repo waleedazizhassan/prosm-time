@@ -273,5 +273,204 @@
     "clockOut": "Clock out now",
     "stillWorking": "Still working",
     "error": "Could not save your answer."
+  },
+  "manager": {
+    "title": "Manager dashboard",
+    "subtitle": "Updated {{time}} · refreshes every minute",
+    "nextHoliday": "Next holiday: {{name}} ({{date}})",
+    "loadError": "Could not load the dashboard.",
+    "scopeLabel": "Scope",
+    "scope": {
+      "org": "Organisation",
+      "mine": "My sites",
+      "me": "Me"
+    },
+    "periodLabel": "Period",
+    "period": {
+      "day": "Today",
+      "week": "Week",
+      "month": "Month",
+      "custom": "Custom"
+    },
+    "from": "From",
+    "to": "To",
+    "siteFilter": "Site",
+    "allSites": "All sites",
+    "proxyClock": "Record for an employee",
+    "customize": "Customise widgets",
+    "customizeHint": "Drag or use the arrows to reorder; switch a widget off to hide it. Saved to your account.",
+    "moveUp": "Move up",
+    "moveDown": "Move down",
+    "viewAll": "View all",
+    "liveNote": "Live now, not filtered by period",
+    "hoursUnit": "hours",
+    "hoursValue": "{{hours}} h",
+    "widgets": {
+      "map": "Sites map",
+      "present": "Here now",
+      "sites": "Sites",
+      "approvals": "Approvals",
+      "people": "People by role",
+      "chart": "Scheduled vs actual",
+      "cost": "Allowances and cost",
+      "audit": "Action log"
+    },
+    "sos": {
+      "text": "SOS from {{name}} at {{site}} since {{time}}",
+      "map": "Open on the map",
+      "acknowledge": "Acknowledge",
+      "acknowledgeTitle": "Acknowledge the SOS",
+      "notes": "What was done (optional)"
+    },
+    "priorities": {
+      "longSessions": "Long sessions",
+      "pendingHours": "Hours to review",
+      "outsideZone": "Outside the area",
+      "outsideExceptions": "Outside-area requests",
+      "leave": "Leave requests",
+      "allowanceSheets": "Allowance sheets",
+      "corrections": "Corrections",
+      "timesheets": "Timesheets",
+      "integrity": "Suspicious check-ins",
+      "permissions": "Permissions and overtime"
+    },
+    "kpi": {
+      "present": "Here now",
+      "ofExpected": "of {{expected}} expected today",
+      "ofTeam": "of {{team}} in the team",
+      "hours": "Hours worked",
+      "scheduled": "of {{hours}} h scheduled",
+      "noSchedule": "no schedule set",
+      "late": "Late today",
+      "lateInPeriod": "{{count}} late in the period",
+      "absent": "Absent today",
+      "onLeave": "{{count}} on leave",
+      "overtime": "Overtime (hours)",
+      "pendingExcluded": "{{hours}} h awaiting review, not counted",
+      "cost": "Estimated cost",
+      "costNote": "estimate from pay rates",
+      "vsPrevious": "{{change}} vs previous period"
+    },
+    "map": {
+      "title": "Sites now",
+      "fullScreen": "Full screen",
+      "exitFullScreen": "Exit full screen"
+    },
+    "present": {
+      "title": "Here now ({{count}})",
+      "empty": "Nobody is clocked in right now.",
+      "since": "since {{time}}",
+      "status": {
+        "in": "Working",
+        "break": "On break",
+        "outside": "Outside the area",
+        "long": "Long session"
+      }
+    },
+    "sites": {
+      "title": "Sites",
+      "hint": "Click a site to filter the dashboard by it",
+      "empty": "No sites in this scope.",
+      "columns": {
+        "name": "Site",
+        "present": "Here",
+        "late": "Late",
+        "absent": "Absent",
+        "workedMinutes": "Hours",
+        "overtimeMinutes": "Overtime",
+        "status": "Status"
+      },
+      "statusOk": "Normal",
+      "statusOutside": "{{count}} outside",
+      "statusSos": "SOS",
+      "external": "External workers",
+      "externalSummary": "{{present}} here, {{today}} today, {{hours}} h",
+      "noExternal": "No external workers today.",
+      "noContractor": "No contractor"
+    },
+    "queue": {
+      "title": "Waiting for a decision ({{count}})",
+      "empty": "Nothing is waiting for you.",
+      "open": "Open",
+      "edit": "Review and edit",
+      "kinds": {
+        "review": "Exceptions",
+        "leave": "Leave",
+        "allowances": "Allowances",
+        "permissions": "Permissions",
+        "overtime": "Overtime",
+        "sessions": "Hours to review",
+        "timesheets": "Timesheets",
+        "integrity": "Suspicious"
+      },
+      "leaveSummary": "{{days}} day(s) from {{from}}",
+      "sheetSummary": "{{from}} – {{to}} · total {{total}}",
+      "overtimeSummary": "{{hours}} h overtime",
+      "sessionSummary": "Session closed automatically",
+      "timesheetSummary": "{{from}} – {{to}}"
+    },
+    "people": {
+      "title": "People"
+    },
+    "chart": {
+      "title": "Scheduled vs actual",
+      "week": "Week",
+      "month": "Month",
+      "year": "Year",
+      "empty": "No hours in this period yet.",
+      "legend": "Filled: worked · dashed: scheduled · light: awaiting review"
+    },
+    "cost": {
+      "title": "Allowances and cost",
+      "estimated": "Estimated",
+      "allowances": "Allowances",
+      "overtime": "Overtime amount",
+      "noSites": "No site cost in this period.",
+      "note": "An estimate from the pay rates; the payroll is the reference."
+    },
+    "audit": {
+      "title": "Action log",
+      "empty": "No actions in this period.",
+      "system": "System",
+      "columns": {
+        "time": "Time",
+        "actor": "By",
+        "action": "Action",
+        "subject": "Person",
+        "reason": "Reason",
+        "device": "Device"
+      },
+      "named": {
+        "SOS_ALERT_TRIGGERED": "SOS sent",
+        "SOS_ALERT_RESOLVED": "SOS handled",
+        "ADMIN_CLOCK_IN_ON_BEHALF": "Clock-in on behalf",
+        "ADMIN_CLOCK_OUT_ON_BEHALF": "Clock-out on behalf",
+        "PERMISSION_GRANTED": "Permission granted",
+        "PERMISSION_REVOKED": "Permission removed",
+        "EMPLOYEE_DEACTIVATED": "Employee deactivated",
+        "EMPLOYEE_REMOVED": "Employee removed",
+        "USER_INVITED": "Person invited",
+        "attendance_override_block": "Clock-in block overridden",
+        "attendance_day_adjusted": "Day adjusted",
+        "attendance_overtime_approved": "Overtime approved",
+        "attendance_auto_close": "Session closed automatically",
+        "allowances_edit_during_review": "Allowance edited in review",
+        "leave_approved_cancelled": "Approved leave cancelled"
+      },
+      "groups": {
+        "sos": "SOS",
+        "attendance": "Attendance",
+        "sites": "Sites",
+        "permissions": "Permissions",
+        "leave": "Leave",
+        "allowances": "Allowances",
+        "calendar": "Calendar",
+        "projects": "Projects",
+        "people": "People",
+        "devices": "Devices and photos",
+        "settings": "Settings",
+        "other": "Other"
+      }
+    }
   }
 }
