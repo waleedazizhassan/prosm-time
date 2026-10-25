@@ -191,7 +191,9 @@
       "start_break": "Pausenbeginn",
       "end_break": "Pausenende",
       "change_site": "Standortwechsel"
-    }
+    },
+    "insideSiteArea": "Im Arbeitsbereich von {{site}}",
+    "outsideSiteArea": "{{meters}} m außerhalb des Bereichs von {{site}}"
   },
   "kioskPin": {
     "title": "Kiosk-PIN",

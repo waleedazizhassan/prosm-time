@@ -9,9 +9,7 @@ import SiteRepository from "../../core/repositories/SiteRepository";
 import Card from "../../components/common/Card";
 import ClockInOutCard from "./ClockInOutCard";
 import { PERIODS, formatHours, periodHours, periodRange } from "../attendance/periods";
-import heroStyles from "./AdminOverviewCard.module.css";
 import styles from "./EmployeeHome.module.css";
-import homeArt from "../../assets/illustrations/employeeHome.svg";
 
 // Owner 2026-10-19: the employee's page is light and easy - clock in and
 // out, see their own time by day / week / month, and reach their own
@@ -55,21 +53,20 @@ export default function EmployeeHome() {
 
   return (
     <>
-      <div className={heroStyles.hero}>
-        <div className={heroStyles.heroText}>
-          <h2 className={heroStyles.heroTitle}>{t(greetingKey, { name: firstName })}</h2>
-          <span className={heroStyles.heroDate}>{todayLabel}</span>
-          {scope ? (
-            <span className={heroStyles.heroScope}>
-              <MapPin size={13} />
-              <span className={heroStyles.heroScopeText}>{scope}</span>
-            </span>
-          ) : null}
-        </div>
-        <img src={homeArt} alt="" className={heroStyles.heroArt} />
-      </div>
-
+      {/* v2.3.43 step 13 (item 14): one main action at the top - clock in/out
+          with the status and the time so far; the greeting is a small line under it. */}
       <ClockInOutCard />
+
+      <p className={styles.greetingLine}>
+        <span className={styles.greetingText}>{t(greetingKey, { name: firstName })}</span>
+        <span>{todayLabel}</span>
+        {scope ? (
+          <span className={styles.greetingScope}>
+            <MapPin size={12} />
+            {scope}
+          </span>
+        ) : null}
+      </p>
 
       <Card title={t("employeeHome.hoursTitle")}>
         <div className={styles.hours}>

@@ -191,7 +191,9 @@
       "start_break": "Inizio pausa",
       "end_break": "Fine pausa",
       "change_site": "Cambio sede"
-    }
+    },
+    "insideSiteArea": "Nell'area di {{site}}",
+    "outsideSiteArea": "Fuori dall'area di {{site}} di {{meters}} m"
   },
   "kioskPin": {
     "title": "PIN chiosco",

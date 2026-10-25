@@ -94,3 +94,26 @@
   flex-shrink: 0;
   color: var(--text-secondary);
 }
+
+/* v2.3.43 step 13 (item 14): the greeting, small and under the main action. */
+.greetingLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-3);
+  margin: var(--space-2) 0 var(--space-4);
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.greetingText {
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.greetingScope {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}

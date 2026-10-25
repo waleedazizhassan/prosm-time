@@ -191,7 +191,9 @@
       "start_break": "Début de pause",
       "end_break": "Fin de pause",
       "change_site": "Changement de site"
-    }
+    },
+    "insideSiteArea": "Dans la zone de {{site}}",
+    "outsideSiteArea": "Hors de la zone de {{site}} de {{meters}} m"
   },
   "kioskPin": {
     "title": "Code PIN kiosque",

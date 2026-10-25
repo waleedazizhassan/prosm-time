@@ -34,6 +34,7 @@ import HintText from "../../components/common/HintText";
 import SessionReviewRepository from "../../core/repositories/SessionReviewRepository";
 import LongSessionPrompt from "./LongSessionPrompt";
 import ExitSitePrompt from "./ExitSitePrompt";
+import { nearestSite } from "./siteProximity";
 
 const CHANGE_SITE_NO_SITE_VALUE = "__no_site__";
 
@@ -236,6 +237,13 @@ export default function ClockInOutCard() {
   // separately so it's clear this is a detected walk-in, not a formal
   // assignment.
   const [nearbySiteIds, setNearbySiteIds] = useState<Set<string>>(new Set());
+  // v2.3.43 step 13 (item 15): a site the employee picked by hand is kept; otherwise the one they stand in is chosen.
+  const siteTouchedRef = useRef(false);
+  useEffect(() => {
+    if (!currentLocation || session || siteTouchedRef.current) return;
+    const here = nearestSite(sites.filter((site) => site.allowedRadiusMeters > 0), currentLocation.latitude, currentLocation.longitude, currentLocation.accuracyMeters);
+    if (here?.inside) setSiteId(here.siteId);
+  }, [currentLocation, sites, session]);
   const [lastCompletedSession, setLastCompletedSession] = useState<AttendanceSession | null>(initialCache?.lastCompletedSession ?? null);
   // § live UX review, user-directed - a real confirmation screen shown
   // right before every clock-in/out actually submits (photo if any,
@@ -394,9 +402,10 @@ export default function ClockInOutCard() {
                 // see 20260903170100's own policy change) and unused by
                 // anything client-side except cameraRequired, which the
                 // nearby-sites RPC deliberately does return.
-                latitude: position.latitude,
-                longitude: position.longitude,
-                allowedRadiusMeters: 0,
+                // v2.3.43 step 13: the site's real centre and radius (the person is inside it).
+                latitude: nearby.latitude ?? position.latitude,
+                longitude: nearby.longitude ?? position.longitude,
+                allowedRadiusMeters: nearby.allowedRadiusMeters ?? 0,
                 gpsAccuracyToleranceMeters: 0,
                 timezone: "UTC",
                 isActive: true,
@@ -960,7 +969,19 @@ export default function ClockInOutCard() {
   const changeSiteOptions = sites
     .filter((site) => site.id !== view.currentSite?.id)
     .map((site) => ({ value: site.id, label: nearbySiteIds.has(site.id) ? t("attendance.nearbySiteOption", { name: site.name }) : site.name }));
-  const mapRelevantSite = view.session ? view.currentSite : selectedSite;
+  // v2.3.43 step 13 (item 15): where the person stands - inside a site (green
+  // circle), or how far outside the nearest one (orange circle).
+  const proximity =
+    currentLocation && !view.session
+      ? nearestSite(sites.filter((site) => site.allowedRadiusMeters > 0), currentLocation.latitude, currentLocation.longitude, currentLocation.accuracyMeters)
+      : null;
+  const proximitySite = proximity ? sites.find((site) => site.id === proximity.siteId) ?? null : null;
+  const mapRelevantSite = view.session ? view.currentSite : selectedSite ?? proximitySite;
+  const mapSiteProximity =
+    mapRelevantSite && currentLocation && mapRelevantSite.allowedRadiusMeters > 0
+      ? nearestSite([mapRelevantSite], currentLocation.latitude, currentLocation.longitude, currentLocation.accuracyMeters)
+      : null;
+  const mapTone: "inside" | "outside" | "neutral" = mapSiteProximity ? (mapSiteProximity.inside ? "inside" : "outside") : "neutral";
   const confirmSiteName =
     confirmAction === "clockOut"
       ? view.currentSite?.name ?? view.session?.manualLocationLabel ?? ""
@@ -991,45 +1012,6 @@ export default function ClockInOutCard() {
           {view.session.id.startsWith("q:") ? null : <ExitSitePrompt onClockOut={handleClockOutTap} />}
         </div>
       ) : null}
-
-      <div style={{ marginTop: "var(--space-3)" }}>
-        <LiveLocationMap
-          latitude={currentLocation?.latitude ?? null}
-          longitude={currentLocation?.longitude ?? null}
-          site={
-            mapRelevantSite
-              ? { name: mapRelevantSite.name, latitude: mapRelevantSite.latitude, longitude: mapRelevantSite.longitude, allowedRadiusMeters: mapRelevantSite.allowedRadiusMeters }
-              : null
-          }
-        />
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "var(--space-2)",
-          margin: "var(--space-3) 0",
-          padding: "var(--space-2) var(--space-3)",
-          borderRadius: "var(--radius-md)",
-          background: "var(--surface-hover)",
-          color: locationStatus === "unavailable" ? "var(--status-warning-text)" : "var(--text-secondary)",
-          fontSize: "var(--font-xs)",
-        }}
-      >
-        <MapPin size={14} style={{ flexShrink: 0, color: locationStatus === "available" ? "var(--brand-primary)" : undefined }} />
-        {locationStatus === "detecting" ? (
-          <span>{t("attendance.locationDetecting")}</span>
-        ) : locationStatus === "available" && currentLocation ? (
-          <span>
-            {placeName ?? `${currentLocation.latitude.toFixed(5)}, ${currentLocation.longitude.toFixed(5)}`}
-            {" "}
-            ({t("attendance.locationAccuracy", { meters: Math.round(currentLocation.accuracyMeters) })})
-          </span>
-        ) : (
-          <span>{t("attendance.locationUnavailable")}</span>
-        )}
-      </div>
 
       <ErrorText>{error}</ErrorText>
       {evidenceWarning ? <p style={{ color: "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>{evidenceWarning}</p> : null}
@@ -1132,6 +1114,7 @@ export default function ClockInOutCard() {
             name="clockInSite"
             value={siteId}
             onChange={(event) => {
+              siteTouchedRef.current = true;
               setSiteId(event.target.value);
               if (event.target.value) setManualLocationLabel("");
             }}
@@ -1167,6 +1150,57 @@ export default function ClockInOutCard() {
           </Button>
         </>
       )}
+
+      {/* v2.3.43 step 13 (item 14): the main action comes first; the map and the
+          place below it confirm where the clock in/out is recorded. */}
+      <div style={{ marginTop: "var(--space-3)" }}>
+        <LiveLocationMap
+          latitude={currentLocation?.latitude ?? null}
+          longitude={currentLocation?.longitude ?? null}
+          site={
+            mapRelevantSite
+              ? { name: mapRelevantSite.name, latitude: mapRelevantSite.latitude, longitude: mapRelevantSite.longitude, allowedRadiusMeters: mapRelevantSite.allowedRadiusMeters }
+              : null
+          }
+          siteTone={mapTone}
+          accuracyMeters={currentLocation?.accuracyMeters ?? null}
+        />
+        {mapRelevantSite && mapSiteProximity ? (
+          <p style={{ margin: "var(--space-1) 0 0", fontSize: "var(--font-xs)", fontWeight: "var(--font-weight-semibold)", color: mapSiteProximity.inside ? "var(--status-success-text)" : "var(--status-warning-text)" }}>
+            {mapSiteProximity.inside
+              ? t("attendance.insideSiteArea", { site: mapRelevantSite.name })
+              : t("attendance.outsideSiteArea", { site: mapRelevantSite.name, meters: mapSiteProximity.outsideByMeters })}
+          </p>
+        ) : null}
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "var(--space-2)",
+          margin: "var(--space-3) 0",
+          padding: "var(--space-2) var(--space-3)",
+          borderRadius: "var(--radius-md)",
+          background: "var(--surface-hover)",
+          color: locationStatus === "unavailable" ? "var(--status-warning-text)" : "var(--text-secondary)",
+          fontSize: "var(--font-xs)",
+        }}
+      >
+        <MapPin size={14} style={{ flexShrink: 0, color: locationStatus === "available" ? "var(--brand-primary)" : undefined }} />
+        {locationStatus === "detecting" ? (
+          <span>{t("attendance.locationDetecting")}</span>
+        ) : locationStatus === "available" && currentLocation ? (
+          <span>
+            {placeName ?? `${currentLocation.latitude.toFixed(5)}, ${currentLocation.longitude.toFixed(5)}`}
+            {" "}
+            ({t("attendance.locationAccuracy", { meters: Math.round(currentLocation.accuracyMeters) })})
+          </span>
+        ) : (
+          <span>{t("attendance.locationUnavailable")}</span>
+        )}
+      </div>
+
 
       <CameraCaptureModal isOpen={cameraFor !== null} onClose={handleCameraClose} onCapture={handleCameraCapture} siteId={(cameraFor === "clockOut" ? view.session?.siteId : siteId) || null} />
 

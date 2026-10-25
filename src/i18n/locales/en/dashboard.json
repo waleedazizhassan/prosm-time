@@ -191,7 +191,9 @@
       "start_break": "Break start",
       "end_break": "Break end",
       "change_site": "Site change"
-    }
+    },
+    "insideSiteArea": "Inside the work area of {{site}}",
+    "outsideSiteArea": "Outside the work area of {{site}} by {{meters}} m"
   },
   "kioskPin": {
     "title": "Kiosk PIN",

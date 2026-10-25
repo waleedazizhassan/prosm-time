@@ -44,15 +44,20 @@ interface LiveLocationMapProps {
   longitude: number | null;
   site?: { name: string; latitude: number; longitude: number; allowedRadiusMeters: number } | null;
   height?: number;
+  // v2.3.43 step 13 (item 15): green when the person is inside the site's
+  // area, orange when outside it; plus the reading's own accuracy circle.
+  siteTone?: "inside" | "outside" | "neutral";
+  accuracyMeters?: number | null;
 }
 
-export default function LiveLocationMap({ latitude, longitude, site = null, height = 200 }: LiveLocationMapProps) {
+export default function LiveLocationMap({ latitude, longitude, site = null, height = 200, siteTone = "neutral", accuracyMeters = null }: LiveLocationMapProps) {
   const { resolvedTheme } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
   const tileLayerRef = useRef<L.TileLayer | null>(null);
   const markerRef = useRef<L.Marker | null>(null);
   const circleRef = useRef<L.Circle | null>(null);
+  const accuracyRef = useRef<L.Circle | null>(null);
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
@@ -69,6 +74,7 @@ export default function LiveLocationMap({ latitude, longitude, site = null, heig
       tileLayerRef.current = null;
       markerRef.current = null;
       circleRef.current = null;
+      accuracyRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -98,9 +104,17 @@ export default function LiveLocationMap({ latitude, longitude, site = null, heig
       map.removeLayer(circleRef.current);
       circleRef.current = null;
     }
+    if (accuracyRef.current) {
+      map.removeLayer(accuracyRef.current);
+      accuracyRef.current = null;
+    }
 
     if (latitude !== null && longitude !== null) {
       markerRef.current = L.marker([latitude, longitude], { icon: buildMarkerIcon() }).addTo(map);
+      if (accuracyMeters && accuracyMeters > 0) {
+        const markerColor = getComputedStyle(document.documentElement).getPropertyValue("--brand-primary").trim() || "#2563eb";
+        accuracyRef.current = L.circle([latitude, longitude], { radius: accuracyMeters, color: markerColor, fillColor: markerColor, fillOpacity: 0.06, weight: 1, dashArray: "4 4", interactive: false }).addTo(map);
+      }
     }
 
     if (site) {
@@ -108,7 +122,13 @@ export default function LiveLocationMap({ latitude, longitude, site = null, heig
       // via a stylesheet - resolve the real token value at runtime
       // rather than passing a var(...) string, since attribute-context
       // custom-property resolution isn't reliable across WebViews.
-      const brandColor = getComputedStyle(document.documentElement).getPropertyValue("--brand-primary").trim() || "#2563eb";
+      const tokens = getComputedStyle(document.documentElement);
+      const brandColor =
+        siteTone === "inside"
+          ? "#16a34a"
+          : siteTone === "outside"
+          ? "#ea580c"
+          : tokens.getPropertyValue("--brand-primary").trim() || "#2563eb";
       circleRef.current = L.circle([site.latitude, site.longitude], {
         radius: site.allowedRadiusMeters,
         color: brandColor,
@@ -126,7 +146,7 @@ export default function LiveLocationMap({ latitude, longitude, site = null, heig
     } else if (latitude !== null && longitude !== null) {
       map.setView([latitude, longitude], 15);
     }
-  }, [latitude, longitude, site]);
+  }, [latitude, longitude, site, siteTone, accuracyMeters]);
 
   return <div ref={containerRef} className={styles.map} style={{ height }} />;
 }

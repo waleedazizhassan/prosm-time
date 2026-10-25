@@ -195,7 +195,9 @@
       "start_break": "بدء استراحة",
       "end_break": "إنهاء استراحة",
       "change_site": "تغيير الموقع"
-    }
+    },
+    "insideSiteArea": "داخل نطاق {{site}}",
+    "outsideSiteArea": "خارج نطاق {{site}} بـ {{meters}} متر"
   },
   "kioskPin": {
     "title": "رمز الكشك",
