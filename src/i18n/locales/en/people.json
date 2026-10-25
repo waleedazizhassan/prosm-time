@@ -153,7 +153,11 @@
       "clockedInSince": "Clocked in since {{time}}",
       "clockInError": "Unable to clock in this employee.",
       "clockOutError": "Unable to clock out this employee.",
-      "actorSubjectNotice": "Performed by {{actor}} on behalf of {{subject}}. Recorded with your identity as the actor, {{subject}} as the subject, and the reason below."
+      "actorSubjectNotice": "Performed by {{actor}} on behalf of {{subject}}. Recorded with your identity as the actor, {{subject}} as the subject, and the reason below.",
+      "timeLabel": "Time",
+      "timeHint": "Leave empty for now. Up to 7 days back.",
+      "noSiteOption": "No registered site (write the place)",
+      "placeNameLabel": "Place name"
     }
   },
   "onBehalf": {

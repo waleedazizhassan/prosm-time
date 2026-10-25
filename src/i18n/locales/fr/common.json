@@ -262,7 +262,10 @@
     "leaveSetDeductionRequired": "Vous n'avez pas le droit de fixer cette retenue.",
     "deductionPerDayRequired": "Saisissez la retenue par jour.",
     "deductionOwnerOnly": "Seul le propriétaire modifie une retenue enregistrée.",
-    "onlyApprovedUnpaidDeduction": "Seul un congé sans solde approuvé a une retenue."
+    "onlyApprovedUnpaidDeduction": "Seul un congé sans solde approuvé a une retenue.",
+    "onBehalfTimeWindow": "L'heure doit être dans les 7 derniers jours et pas dans le futur.",
+    "onBehalfOverlap": "Cette heure chevauche une session enregistrée.",
+    "onBehalfClockOutTime": "L'heure de départ doit suivre l'arrivée et ne pas être future."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

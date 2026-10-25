@@ -153,7 +153,11 @@
       "clockedInSince": "Présence pointée depuis {{time}}",
       "clockInError": "Impossible de pointer l'arrivée de cet employé.",
       "clockOutError": "Impossible de pointer le départ de cet employé.",
-      "actorSubjectNotice": "Effectué par {{actor}} au nom de {{subject}}. Enregistré avec votre identité comme auteur, {{subject}} comme sujet, et le motif ci-dessous."
+      "actorSubjectNotice": "Effectué par {{actor}} au nom de {{subject}}. Enregistré avec votre identité comme auteur, {{subject}} comme sujet, et le motif ci-dessous.",
+      "timeLabel": "Heure",
+      "timeHint": "Vide = maintenant. Jusqu'à 7 jours en arrière.",
+      "noSiteOption": "Aucun site enregistré (écrire le lieu)",
+      "placeNameLabel": "Nom du lieu"
     }
   },
   "onBehalf": {

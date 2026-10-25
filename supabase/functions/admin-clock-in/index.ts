@@ -52,13 +52,18 @@ serve(async (request: Request) => {
     }
 
     const payload = await request.json().catch(() => ({}));
-    const { subjectUserId, siteId, reason, projectId, idempotencyKey, latitude, longitude, accuracyMeters } = payload;
+    const { subjectUserId, siteId, reason, projectId, idempotencyKey, latitude, longitude, accuracyMeters, occurredAt, manualLocationLabel } = payload;
 
     if (!subjectUserId || typeof subjectUserId !== "string") {
       return errorResponse("subjectUserId is required.", 400, "INVALID_REQUEST");
     }
-    if (!siteId || typeof siteId !== "string") {
-      return errorResponse("siteId is required.", 400, "INVALID_REQUEST");
+    // v2.3.43 step 10 (item 9): a site, or a place name written by the manager.
+    const label = typeof manualLocationLabel === "string" && manualLocationLabel.trim() ? manualLocationLabel.trim().slice(0, 200) : null;
+    if ((!siteId || typeof siteId !== "string") && !label) {
+      return errorResponse("siteId or manualLocationLabel is required.", 400, "INVALID_REQUEST");
+    }
+    if (occurredAt !== undefined && occurredAt !== null && (typeof occurredAt !== "string" || Number.isNaN(Date.parse(occurredAt)))) {
+      return errorResponse("occurredAt must be an ISO date-time.", 400, "INVALID_REQUEST");
     }
     if (!reason || typeof reason !== "string" || reason.trim().length === 0) {
       return errorResponse("reason is required.", 400, "INVALID_REQUEST");
@@ -68,7 +73,7 @@ serve(async (request: Request) => {
 
     const { data, error } = await callerClient.rpc("admin_clock_in_prosm_time_attendance", {
       p_subject_user_id: subjectUserId,
-      p_site_id: siteId,
+      p_site_id: typeof siteId === "string" && siteId ? siteId : null,
       p_reason: reason.trim(),
       p_project_id: projectId ?? null,
       p_idempotency_key: idempotencyKey ?? null,
@@ -76,6 +81,8 @@ serve(async (request: Request) => {
       p_longitude: typeof longitude === "number" ? longitude : null,
       p_accuracy_meters: typeof accuracyMeters === "number" ? accuracyMeters : null,
       p_device_info: deviceInfo,
+      p_occurred_at: occurredAt ?? null,
+      p_manual_location_label: label,
     });
 
     if (error || !data?.success) {

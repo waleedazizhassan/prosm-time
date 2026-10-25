@@ -262,7 +262,10 @@
     "leaveSetDeductionRequired": "Non hai il permesso di impostare questa trattenuta.",
     "deductionPerDayRequired": "Inserisci la trattenuta al giorno.",
     "deductionOwnerOnly": "Solo il titolare modifica una trattenuta registrata.",
-    "onlyApprovedUnpaidDeduction": "Solo il permesso non retribuito approvato ha una trattenuta."
+    "onlyApprovedUnpaidDeduction": "Solo il permesso non retribuito approvato ha una trattenuta.",
+    "onBehalfTimeWindow": "L'ora deve essere negli ultimi 7 giorni e non futura.",
+    "onBehalfOverlap": "Questo orario si sovrappone a un turno registrato.",
+    "onBehalfClockOutTime": "L'uscita deve essere dopo l'entrata e non futura."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

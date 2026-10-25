@@ -13,6 +13,8 @@
 | `20261025160000_leave_types.sql` | 7 (بند 25) | صلاحية `leave.manage_types`؛ `users.hire_date`/`special_needs_entitlement`؛ `leave_types` + زرع + trigger؛ bucket `leave-documents` + سياساته؛ قواعد الطلب والرصيد؛ إدارة الأنواع وبيانات التعيين. |
 | `20261025170000_leave_cancel_before_start.sql` | 8 (بند 20) | `prosm_time_leave_started`, `prosm_time_after_leave_cancelled`؛ `cancel_prosm_time_leave_request` للمعتمدة قبل يومها؛ تعديل `review_prosm_time_leave`؛ `list_prosm_time_approved_leave_requests` + `can_cancel`. |
 | `20261025180000_unpaid_leave_deduction.sql` | 9 (بند 19) | صلاحية `leave.set_deduction`؛ `unpaid_leave_divisor`؛ أعمدة الخصم؛ `payroll_adjustments` (+RLS)؛ الاقتراح والتسجيل والعكس والتعديل والقائمة؛ `review_prosm_time_leave` بمعامل الخصم (يحذف نسخة الـ 3 معاملات). |
+| `20261025190000_on_behalf_time_and_place.sql` | 10 (بند 9) | `admin_clock_in/out_prosm_time_attendance` بوقت ومكان؛ `time_source` يقبل `admin_set`. |
 
 ## Edge Functions تحتاج إعادة نشر
 - `send-push` (الخطوتان 2 و6): نصوص الإشعارين الجديدين (`_shared/pushTexts.ts`, `_shared/localizePush.ts`) وحقل `kind` في بيانات الإشعار — `npx supabase functions deploy send-push`.
+- `admin-clock-in`, `admin-clock-out` (الخطوة 10): تمرير `occurredAt` و`manualLocationLabel` — `npx supabase functions deploy admin-clock-in admin-clock-out`.

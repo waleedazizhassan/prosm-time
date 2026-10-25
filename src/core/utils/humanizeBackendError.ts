@@ -324,4 +324,8 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "THE DEDUCTION PER DAY IS REQUIRED FOR UNPAID LEAVE": "deductionPerDayRequired",
   "ONLY THE OWNER CHANGES A RECORDED DEDUCTION": "deductionOwnerOnly",
   "ONLY APPROVED UNPAID LEAVE HAS A DEDUCTION": "onlyApprovedUnpaidDeduction",
+  // v2.3.43 step 10: on-behalf time and place.
+  "THE TIME MUST BE WITHIN THE LAST 7 DAYS AND NOT IN THE FUTURE": "onBehalfTimeWindow",
+  "THIS TIME OVERLAPS A RECORDED SHIFT": "onBehalfOverlap",
+  "THE CLOCK-OUT TIME MUST BE AFTER THE CLOCK-IN AND NOT IN THE FUTURE": "onBehalfClockOutTime",
 };

@@ -84,7 +84,11 @@ export interface ClockOutInput {
 
 export interface AdminClockInInput {
   subjectUserId: string;
-  siteId: string;
+  // v2.3.43 step 10 (item 9): null with a place name when there is no registered site.
+  siteId: string | null;
+  manualLocationLabel?: string | null;
+  // The time the manager sets (ISO); now when omitted.
+  occurredAt?: string | null;
   reason: string;
   projectId?: string | null;
   latitude?: number | null;
@@ -95,6 +99,7 @@ export interface AdminClockInInput {
 export interface AdminClockOutInput {
   subjectUserId: string;
   reason: string;
+  occurredAt?: string | null;
   latitude?: number | null;
   longitude?: number | null;
   accuracyMeters?: number | null;
@@ -258,6 +263,8 @@ class AttendanceRepository {
           latitude: input.latitude ?? null,
           longitude: input.longitude ?? null,
           accuracyMeters: input.accuracyMeters ?? null,
+          occurredAt: input.occurredAt ?? null,
+          manualLocationLabel: input.manualLocationLabel ?? null,
         },
       });
 
@@ -285,6 +292,7 @@ class AttendanceRepository {
           latitude: input.latitude ?? null,
           longitude: input.longitude ?? null,
           accuracyMeters: input.accuracyMeters ?? null,
+          occurredAt: input.occurredAt ?? null,
         },
       });
 

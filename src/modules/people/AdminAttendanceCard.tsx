@@ -11,6 +11,7 @@ import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import Card from "../../components/common/Card";
 import Select from "../../components/common/Select";
 import Textarea from "../../components/common/Textarea";
+import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import { formatTimeOnly } from "../../core/utils/formatDate";
 import ErrorText from "../../components/common/ErrorText";
@@ -40,6 +41,9 @@ interface AdminAttendanceCardProps {
 // actor is always "you" here, since only an authorized admin/manager
 // reaches this card at all - WP-07's ACTOR/SUBJECT distinction and its
 // server-side re-authorization are entirely unchanged).
+// v2.3.43 step 10: the "no registered site" choice (a place name is written instead).
+const NO_SITE = "__no_site__";
+
 export default function AdminAttendanceCard({ subjectUserId, subjectFullName }: AdminAttendanceCardProps) {
   const { t, i18n } = useTranslation("people");
   const { hasPermission, profile } = useAuth();
@@ -53,6 +57,9 @@ export default function AdminAttendanceCard({ subjectUserId, subjectFullName }: 
   const [siteId, setSiteId] = useState("");
   const [projectId, setProjectId] = useState("");
   const [reason, setReason] = useState("");
+  // v2.3.43 step 10 (item 9): the time (empty = now) and a place name when no site applies.
+  const [occurredAt, setOccurredAt] = useState("");
+  const [placeName, setPlaceName] = useState("");
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -64,7 +71,7 @@ export default function AdminAttendanceCard({ subjectUserId, subjectFullName }: 
     setSession(activeSession);
     const assignedSites = sitesResult.success ? sitesResult.data ?? [] : [];
     setSites(assignedSites);
-    setSiteId((current) => current || assignedSites[0]?.id || "");
+    setSiteId((current) => current || assignedSites[0]?.id || NO_SITE);
     setLoading(false);
   }, [subjectUserId]);
 
@@ -73,7 +80,7 @@ export default function AdminAttendanceCard({ subjectUserId, subjectFullName }: 
   }, [load]);
 
   useEffect(() => {
-    if (!siteId) {
+    if (!siteId || siteId === NO_SITE) {
       setProjects([]);
       setProjectId("");
       return;
@@ -88,7 +95,7 @@ export default function AdminAttendanceCard({ subjectUserId, subjectFullName }: 
   if (!canClockIn && !canClockOut) return null;
 
   const handleClockIn = async () => {
-    if (!siteId || !reason.trim()) return;
+    if (!siteId || !reason.trim() || (siteId === NO_SITE && !placeName.trim())) return;
     setSubmitting(true);
     setError("");
 
@@ -104,7 +111,17 @@ export default function AdminAttendanceCard({ subjectUserId, subjectFullName }: 
       // Best-effort only, same posture as the employee's own Clock In.
     }
 
-    const result = await AttendanceRepository.adminClockIn({ subjectUserId, siteId, projectId: projectId || null, reason: reason.trim(), latitude, longitude, accuracyMeters });
+    const result = await AttendanceRepository.adminClockIn({
+      subjectUserId,
+      siteId: siteId === NO_SITE ? null : siteId,
+      manualLocationLabel: siteId === NO_SITE ? placeName.trim() : null,
+      occurredAt: occurredAt ? new Date(occurredAt).toISOString() : null,
+      projectId: siteId === NO_SITE ? null : projectId || null,
+      reason: reason.trim(),
+      latitude,
+      longitude,
+      accuracyMeters,
+    });
 
     setSubmitting(false);
 
@@ -114,6 +131,8 @@ export default function AdminAttendanceCard({ subjectUserId, subjectFullName }: 
     }
 
     setReason("");
+    setOccurredAt("");
+    setPlaceName("");
     load();
   };
 
@@ -134,7 +153,14 @@ export default function AdminAttendanceCard({ subjectUserId, subjectFullName }: 
       // Best-effort only - see handleClockIn.
     }
 
-    const result = await AttendanceRepository.adminClockOut({ subjectUserId, reason: reason.trim(), latitude, longitude, accuracyMeters });
+    const result = await AttendanceRepository.adminClockOut({
+      subjectUserId,
+      reason: reason.trim(),
+      occurredAt: occurredAt ? new Date(occurredAt).toISOString() : null,
+      latitude,
+      longitude,
+      accuracyMeters,
+    });
 
     setSubmitting(false);
 
@@ -164,6 +190,7 @@ export default function AdminAttendanceCard({ subjectUserId, subjectFullName }: 
           <HintText>{t("detail.attendance.clockedInSince", { time: formatTimeOnly(session.clockInAt, i18n.language) })}</HintText>
           {canClockOut ? (
             <>
+              <Input label={t("detail.attendance.timeLabel")} name="adminClockOutTime" type="datetime-local" value={occurredAt} onChange={(event) => setOccurredAt(event.target.value)} helperText={t("detail.attendance.timeHint")} disabled={submitting} />
               <Textarea label={t("detail.attendance.reasonLabel")} name="adminClockOutReason" value={reason} onChange={(event) => setReason(event.target.value)} required disabled={submitting} />
               <Button onClick={handleClockOut} loading={submitting} disabled={!reason.trim()}>
                 {t("detail.attendance.clockOutAction")}
@@ -172,21 +199,30 @@ export default function AdminAttendanceCard({ subjectUserId, subjectFullName }: 
           ) : null}
         </>
       ) : canClockIn ? (
-        sites.length === 0 ? (
-          <HintText>{t("detail.attendance.noAssignedSites")}</HintText>
-        ) : (
+        (
           <>
-            <Select label={t("detail.attendance.siteLabel")} name="adminClockInSite" value={siteId} onChange={(event) => setSiteId(event.target.value)} disabled={submitting} options={sites.map((site) => ({ value: site.id, label: site.name }))} />
+            <Select
+              label={t("detail.attendance.siteLabel")}
+              name="adminClockInSite"
+              value={siteId}
+              onChange={(event) => setSiteId(event.target.value)}
+              disabled={submitting}
+              options={[...sites.map((site) => ({ value: site.id, label: site.name })), { value: NO_SITE, label: t("detail.attendance.noSiteOption") }]}
+            />
+            {siteId === NO_SITE ? (
+              <Input label={t("detail.attendance.placeNameLabel")} name="adminClockInPlace" value={placeName} onChange={(event) => setPlaceName(event.target.value)} required disabled={submitting} />
+            ) : null}
+            <Input label={t("detail.attendance.timeLabel")} name="adminClockInTime" type="datetime-local" value={occurredAt} onChange={(event) => setOccurredAt(event.target.value)} helperText={t("detail.attendance.timeHint")} disabled={submitting} />
             <Select
               label={t("detail.attendance.projectLabel")}
               name="adminClockInProject"
               value={projectId}
               onChange={(event) => setProjectId(event.target.value)}
-              disabled={submitting || projects.length === 0}
+              disabled={submitting || projects.length === 0 || siteId === NO_SITE}
               options={[{ value: "", label: t("detail.attendance.noProject") }, ...projects.map((project) => ({ value: project.id, label: project.name }))]}
             />
             <Textarea label={t("detail.attendance.reasonLabel")} name="adminClockInReason" value={reason} onChange={(event) => setReason(event.target.value)} required disabled={submitting} />
-            <Button onClick={handleClockIn} loading={submitting} disabled={!siteId || !reason.trim()}>
+            <Button onClick={handleClockIn} loading={submitting} disabled={!siteId || !reason.trim() || (siteId === NO_SITE && !placeName.trim())}>
               {t("detail.attendance.clockInAction")}
             </Button>
           </>

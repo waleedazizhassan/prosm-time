@@ -47,7 +47,7 @@ serve(async (request: Request) => {
     }
 
     const payload = await request.json().catch(() => ({}));
-    const { subjectUserId, reason, idempotencyKey, latitude, longitude, accuracyMeters } = payload;
+    const { subjectUserId, reason, idempotencyKey, latitude, longitude, accuracyMeters, occurredAt, manualLocationLabel } = payload;
 
     if (!subjectUserId || typeof subjectUserId !== "string") {
       return errorResponse("subjectUserId is required.", 400, "INVALID_REQUEST");
@@ -55,6 +55,11 @@ serve(async (request: Request) => {
     if (!reason || typeof reason !== "string" || reason.trim().length === 0) {
       return errorResponse("reason is required.", 400, "INVALID_REQUEST");
     }
+    // v2.3.43 step 10 (item 9): the time set by the manager (optional) and a place name.
+    if (occurredAt !== undefined && occurredAt !== null && (typeof occurredAt !== "string" || Number.isNaN(Date.parse(occurredAt)))) {
+      return errorResponse("occurredAt must be an ISO date-time.", 400, "INVALID_REQUEST");
+    }
+    const label = typeof manualLocationLabel === "string" && manualLocationLabel.trim() ? manualLocationLabel.trim().slice(0, 200) : null;
 
     const deviceInfo = request.headers.get("user-agent");
 
@@ -66,6 +71,8 @@ serve(async (request: Request) => {
       p_longitude: typeof longitude === "number" ? longitude : null,
       p_accuracy_meters: typeof accuracyMeters === "number" ? accuracyMeters : null,
       p_device_info: deviceInfo,
+      p_occurred_at: occurredAt ?? null,
+      p_manual_location_label: label,
     });
 
     if (error || !data?.success) {

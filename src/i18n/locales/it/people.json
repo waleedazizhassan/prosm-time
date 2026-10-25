@@ -153,7 +153,11 @@
       "clockedInSince": "In servizio dalle {{time}}",
       "clockInError": "Impossibile timbrare l'entrata di questo dipendente.",
       "clockOutError": "Impossibile timbrare l'uscita di questo dipendente.",
-      "actorSubjectNotice": "Eseguito da {{actor}} per conto di {{subject}}. Registrato con la tua identità come autore, {{subject}} come soggetto e il motivo qui sotto."
+      "actorSubjectNotice": "Eseguito da {{actor}} per conto di {{subject}}. Registrato con la tua identità come autore, {{subject}} come soggetto e il motivo qui sotto.",
+      "timeLabel": "Ora",
+      "timeHint": "Vuoto = adesso. Fino a 7 giorni indietro.",
+      "noSiteOption": "Nessuna sede registrata (scrivi il luogo)",
+      "placeNameLabel": "Nome del luogo"
     }
   },
   "onBehalf": {

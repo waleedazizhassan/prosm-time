@@ -153,7 +153,11 @@
       "clockedInSince": "Eingestempelt seit {{time}}",
       "clockInError": "Dieser Mitarbeiter konnte nicht eingestempelt werden.",
       "clockOutError": "Dieser Mitarbeiter konnte nicht ausgestempelt werden.",
-      "actorSubjectNotice": "Ausgeführt von {{actor}} im Namen von {{subject}}. Wird mit Ihrer Identität als ausführende Person, {{subject}} als betroffener Person und dem unten stehenden Grund erfasst."
+      "actorSubjectNotice": "Ausgeführt von {{actor}} im Namen von {{subject}}. Wird mit Ihrer Identität als ausführende Person, {{subject}} als betroffener Person und dem unten stehenden Grund erfasst.",
+      "timeLabel": "Zeit",
+      "timeHint": "Leer = jetzt. Bis zu 7 Tage zurück.",
+      "noSiteOption": "Kein registrierter Standort (Ort eingeben)",
+      "placeNameLabel": "Ortsname"
     }
   },
   "onBehalf": {
