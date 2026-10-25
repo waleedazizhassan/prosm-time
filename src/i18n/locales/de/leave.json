@@ -41,5 +41,31 @@
     "approved": "Genehmigt",
     "rejected": "Abgelehnt",
     "cancelled": "Storniert"
+  },
+  "permission": {
+    "title": "Genehmigung beantragen",
+    "hint": "Späteres Kommen, früheres Gehen oder Überstunden - vor dem Tag beantragen.",
+    "kindLabel": "Art",
+    "dateLabel": "Tag",
+    "minutesLabel": "Minuten (optional)",
+    "reasonLabel": "Grund (Pflicht)",
+    "submit": "An meine Führungskraft senden",
+    "required": "Bitte Tag und Grund angeben.",
+    "genericError": "Senden fehlgeschlagen.",
+    "cancel": "Zurückziehen",
+    "noDeduction": "kein Abzug",
+    "partialDeduction": "teilweiser Abzug",
+    "kind": {
+      "late_arrival": "Späteres Kommen",
+      "early_leave": "Früheres Gehen",
+      "approved_overtime": "Überstunden",
+      "no_overtime": "Keine Überstunden"
+    },
+    "status": {
+      "pending": "offen",
+      "approved": "genehmigt",
+      "rejected": "abgelehnt",
+      "cancelled": "zurückgezogen"
+    }
   }
 }

@@ -22,7 +22,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "titleLeave": "طلب إجازة بانتظار مراجعتك",
         "bodyLeave": "{{name}} طلب إجازة لمدة {{days}} يوم.",
         "bodyLeaveDetailed": "{{name}} طلب إجازة {{type}} لمدة {{days}} يوم (من {{startDate}} لـ {{endDate}}).",
-        "bodyLeaveReasonSuffix": "السبب: {{reason}}."
+        "bodyLeaveReasonSuffix": "السبب: {{reason}}.",
+        "titlePermission": "إذن ينتظر موافقتك",
+        "bodyPermission": "{{name}} طلب {{kind}} يوم {{date}}.",
+        "bodyPermissionShort": "{{name}} طلب إذن يوم {{date}}."
       },
       "correctionReviewed": {
         "titleException": "تمت مراجعة الاستثناء الخاص بك",
@@ -31,7 +34,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "body": "القرار: {{decision}}.",
         "titleMockLocation": "تمت مراجعة موقعك",
         "titleOfflineTime": "تمت مراجعة وقتك المسجَّل دون اتصال",
-        "notesSuffix": "ملاحظة المراجِع: «{{notes}}»"
+        "notesSuffix": "ملاحظة المراجِع: «{{notes}}»",
+        "titlePermission": "تمت مراجعة إذنك",
+        "titlePendingHours": "تمت مراجعة ساعات جلستك"
       },
       "breakExceeded": {
         "title": "تجاوزت مدة الاستراحة",
@@ -139,7 +144,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "titleLeave": "Leave request awaiting your review",
         "bodyLeave": "{{name}} requested {{days}} day(s) of leave.",
         "bodyLeaveDetailed": "{{name}} requested {{days}} day(s) of {{type}} leave ({{startDate}} to {{endDate}}).",
-        "bodyLeaveReasonSuffix": "Reason: {{reason}}."
+        "bodyLeaveReasonSuffix": "Reason: {{reason}}.",
+        "titlePermission": "Permission waiting for your approval",
+        "bodyPermission": "{{name}} asked for {{kind}} on {{date}}.",
+        "bodyPermissionShort": "{{name}} asked for a permission on {{date}}."
       },
       "correctionReviewed": {
         "titleException": "Your exception was reviewed",
@@ -148,7 +156,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "body": "Decision: {{decision}}.",
         "titleMockLocation": "Your location was reviewed",
         "titleOfflineTime": "Your offline time was reviewed",
-        "notesSuffix": "Note: \"{{notes}}\""
+        "notesSuffix": "Note: \"{{notes}}\"",
+        "titlePermission": "Your permission was reviewed",
+        "titlePendingHours": "Your shift's hours were reviewed"
       },
       "breakExceeded": {
         "title": "Break duration exceeded",
@@ -256,7 +266,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "titleLeave": "Urlaubsantrag wartet auf Ihre Prüfung",
         "bodyLeave": "{{name}} hat {{days}} Urlaubstag(e) beantragt.",
         "bodyLeaveDetailed": "{{name}} hat {{days}} Tag(e) {{type}} beantragt ({{startDate}} bis {{endDate}}).",
-        "bodyLeaveReasonSuffix": "Grund: {{reason}}."
+        "bodyLeaveReasonSuffix": "Grund: {{reason}}.",
+        "titlePermission": "Genehmigung wartet",
+        "bodyPermission": "{{name}} beantragt {{kind}} am {{date}}.",
+        "bodyPermissionShort": "{{name}} beantragt eine Genehmigung am {{date}}."
       },
       "correctionReviewed": {
         "titleException": "Ihre Ausnahme wurde geprüft",
@@ -265,7 +278,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "body": "Entscheidung: {{decision}}.",
         "titleMockLocation": "Ihr Standort wurde geprüft",
         "titleOfflineTime": "Ihre Offline-Zeit wurde geprüft",
-        "notesSuffix": "Anmerkung: „{{notes}}“"
+        "notesSuffix": "Anmerkung: „{{notes}}“",
+        "titlePermission": "Ihre Genehmigung wurde geprüft",
+        "titlePendingHours": "Die Stunden Ihrer Schicht wurden geprüft"
       },
       "breakExceeded": {
         "title": "Pausendauer überschritten",
@@ -373,7 +388,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "titleLeave": "Demande de congé en attente de votre validation",
         "bodyLeave": "{{name}} a demandé {{days}} jour(s) de congé.",
         "bodyLeaveDetailed": "{{name}} a demandé {{days}} jour(s) de congé {{type}} (du {{startDate}} au {{endDate}}).",
-        "bodyLeaveReasonSuffix": "Motif : {{reason}}."
+        "bodyLeaveReasonSuffix": "Motif : {{reason}}.",
+        "titlePermission": "Autorisation en attente",
+        "bodyPermission": "{{name}} demande : {{kind}} le {{date}}.",
+        "bodyPermissionShort": "{{name}} demande une autorisation le {{date}}."
       },
       "correctionReviewed": {
         "titleException": "Votre exception a été examinée",
@@ -382,7 +400,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "body": "Décision : {{decision}}.",
         "titleMockLocation": "Votre localisation a été examinée",
         "titleOfflineTime": "Votre temps hors ligne a été examiné",
-        "notesSuffix": "Remarque : « {{notes}} »"
+        "notesSuffix": "Remarque : « {{notes}} »",
+        "titlePermission": "Votre autorisation a été examinée",
+        "titlePendingHours": "Les heures de votre session ont été vérifiées"
       },
       "breakExceeded": {
         "title": "Durée de pause dépassée",
@@ -490,7 +510,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "titleLeave": "Richiesta di ferie in attesa della tua revisione",
         "bodyLeave": "{{name}} ha richiesto {{days}} giorno/i di ferie.",
         "bodyLeaveDetailed": "{{name}} ha richiesto {{days}} giorno/i di {{type}} (dal {{startDate}} al {{endDate}}).",
-        "bodyLeaveReasonSuffix": "Motivo: {{reason}}."
+        "bodyLeaveReasonSuffix": "Motivo: {{reason}}.",
+        "titlePermission": "Permesso in attesa",
+        "bodyPermission": "{{name}} ha chiesto {{kind}} il {{date}}.",
+        "bodyPermissionShort": "{{name}} ha chiesto un permesso il {{date}}."
       },
       "correctionReviewed": {
         "titleException": "La tua eccezione è stata esaminata",
@@ -499,7 +522,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "body": "Decisione: {{decision}}.",
         "titleMockLocation": "La tua posizione è stata esaminata",
         "titleOfflineTime": "Il tuo tempo offline è stato esaminato",
-        "notesSuffix": "Nota: «{{notes}}»"
+        "notesSuffix": "Nota: «{{notes}}»",
+        "titlePermission": "Il tuo permesso è stato esaminato",
+        "titlePendingHours": "Le ore del tuo turno sono state verificate"
       },
       "breakExceeded": {
         "title": "Durata della pausa superata",

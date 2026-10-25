@@ -75,7 +75,10 @@
       "titleLeave": "Urlaubsantrag wartet auf Ihre Prüfung",
       "bodyLeave": "{{name}} hat {{days}} Urlaubstag(e) beantragt.",
       "bodyLeaveDetailed": "{{name}} hat {{days}} Tag(e) {{type}} beantragt ({{startDate}} bis {{endDate}}).",
-      "bodyLeaveReasonSuffix": "Grund: {{reason}}."
+      "bodyLeaveReasonSuffix": "Grund: {{reason}}.",
+      "titlePermission": "Genehmigung wartet",
+      "bodyPermission": "{{name}} beantragt {{kind}} am {{date}}.",
+      "bodyPermissionShort": "{{name}} beantragt eine Genehmigung am {{date}}."
     },
     "correctionReviewed": {
       "titleException": "Ihre Ausnahme wurde geprüft",
@@ -84,7 +87,9 @@
       "body": "Entscheidung: {{decision}}.",
       "titleMockLocation": "Ihr Standort wurde geprüft",
       "titleOfflineTime": "Ihre Offline-Zeit wurde geprüft",
-      "notesSuffix": "Anmerkung: „{{notes}}“"
+      "notesSuffix": "Anmerkung: „{{notes}}“",
+      "titlePermission": "Ihre Genehmigung wurde geprüft",
+      "titlePendingHours": "Die Stunden Ihrer Schicht wurden geprüft"
     },
     "breakExceeded": {
       "title": "Pausendauer überschritten",

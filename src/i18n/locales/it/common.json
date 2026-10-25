@@ -233,7 +233,19 @@
     "cannotEditOwnAllowances": "Non puoi modificare le tue indennità.",
     "allowanceNotInReview": "Questo giorno non è in un foglio in attesa.",
     "allowancesReopenRequired": "Non hai il permesso di riaprire un foglio approvato.",
-    "onlyApprovedSheetReopen": "Solo un foglio approvato può essere riaperto."
+    "onlyApprovedSheetReopen": "Solo un foglio approvato può essere riaperto.",
+    "managePermissionsRequired": "Non hai il permesso di decidere sui permessi.",
+    "cannotDecideOwnPermission": "Non puoi decidere il tuo permesso.",
+    "invalidPermissionKind": "Scegli un tipo valido.",
+    "permissionBeforeDay": "Chiedi prima del giorno - per un giorno passato può aggiungerlo il responsabile.",
+    "permissionNotFound": "Permesso non trovato.",
+    "permissionAlreadyDecided": "Questo permesso è già stato deciso.",
+    "minutesNotNegative": "I minuti non possono essere negativi.",
+    "nothingToChange": "Niente da modificare.",
+    "overtimePolicyOwnerOnly": "Solo il titolare imposta questa regola.",
+    "invalidOvertimePolicy": "Controlla i valori.",
+    "invalidBreakRules": "Controlla i minuti (da 1 a 600).",
+    "periodUpToThreeMonths": "Scegli un periodo di massimo tre mesi."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

@@ -36,5 +36,15 @@
   "status": {
     "scheduled": "Scheduled",
     "cancelled": "Cancelled"
+  },
+  "breakRules": {
+    "open": "Break rules",
+    "title": "Break rules - {{name}}",
+    "hint": "Unpaid breaks come off the worked time. Minutes over the maximum are unpaid. With an automatic deduction, a day with no break loses those minutes.",
+    "paidLabel": "Breaks are paid",
+    "maxLabel": "Maximum break (minutes, optional)",
+    "autoLabel": "Deduct when no break was taken (minutes, optional)",
+    "genericError": "Could not save.",
+    "save": "Save"
   }
 }

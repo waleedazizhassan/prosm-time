@@ -117,5 +117,42 @@
     "staleTitle": "Old shifts still open",
     "staleHint": "Opened before the automatic close existed - not closed automatically. Clock the employee out on their behalf with the right time.",
     "staleSummary": "Open since {{clockIn}} ({{hours}} h)"
+  },
+  "permissions": {
+    "title_one": "Permissions and overtime ({{count}})",
+    "title_other": "Permissions and overtime ({{count}})",
+    "hint": "Permission requests, and days whose overtime waits for your approval. Overtime counts in no allowance or timesheet until approved.",
+    "empty": "Nothing waiting.",
+    "loadError": "Could not load permissions.",
+    "genericError": "Could not save.",
+    "grantAction": "Add a permission",
+    "adjustAction": "Adjust",
+    "adjustTitle": "Adjust the day",
+    "adjustHint": "Leave a box empty to keep the calculated value. The reason is required and the change is recorded.",
+    "approveOvertime": "Approve the overtime",
+    "approvedOvertimeReason": "Overtime approved by the manager",
+    "overtimeWaiting": "overtime {{time}} waiting",
+    "kind": {
+      "late_arrival": "Late arrival",
+      "early_leave": "Early leave",
+      "approved_overtime": "Approved overtime",
+      "no_overtime": "Not counted as overtime"
+    },
+    "dayType": {
+      "workday": "Workday",
+      "weekly_rest": "Weekly rest day",
+      "public_holiday": "Public holiday"
+    },
+    "paidLabel": "Paid (no deduction)",
+    "deductionPercentLabel": "Deduct this percent of the minutes",
+    "deductionMinutesLabel": "Deduction minutes",
+    "personLabel": "Person",
+    "dateLabel": "Day",
+    "kindLabel": "Kind",
+    "minutesLabel": "Minutes (optional)",
+    "reasonLabel": "Reason (required)",
+    "overtimeMinutesLabel": "Overtime minutes",
+    "lateMinutesLabel": "Late minutes",
+    "save": "Save"
   }
 }

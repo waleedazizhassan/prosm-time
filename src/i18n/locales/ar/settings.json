@@ -69,5 +69,40 @@
     "genericError": "تعذّر الحفظ.",
     "saved": "تم الحفظ.",
     "save": "حفظ"
+  },
+  "overtimePolicy": {
+    "title": "الإضافي والخصم",
+    "hint": "للمنظمة كلها. الخانة الفاضية = الافتراضي. المعاملات بتتضرب فوق سعر ساعة الإضافي؛ 1 يحافظ على المبالغ الحالية.",
+    "approvalModeLabel": "احتساب الإضافي",
+    "mode": {
+      "default": "الافتراضي (بعد موافقة المدير)",
+      "approval": "بعد موافقة المدير",
+      "automatic": "تلقائي"
+    },
+    "field": {
+      "minOvertimeMinutes": "الإضافي يتحسب بعد (دقيقة)",
+      "minLateMinutes": "التأخير يتحسب بعد (دقيقة)",
+      "maxDailyOvertimeMinutes": "أقصى إضافي في اليوم (دقيقة)",
+      "multiplierNormal": "المعامل - يوم عادي",
+      "multiplierNight": "المعامل - ليلي",
+      "multiplierWeeklyRest": "المعامل - عطلة أسبوعية",
+      "multiplierPublicHoliday": "المعامل - عطلة رسمية",
+      "nightStart": "بداية الليل",
+      "nightEnd": "نهاية الليل"
+    },
+    "placeholder": {
+      "minOvertimeMinutes": "0",
+      "minLateMinutes": "0",
+      "maxDailyOvertimeMinutes": "بدون حد",
+      "multiplierNormal": "1",
+      "multiplierNight": "1",
+      "multiplierWeeklyRest": "1",
+      "multiplierPublicHoliday": "1"
+    },
+    "legalNote": "الحدود القانونية الدنيا لازم تتراجع مع النص الرسمي لقانون العمل؛ البرنامج لا يحددها بدلاً منك.",
+    "invalid": "اكتب أرقاماً صفر أو أكثر.",
+    "genericError": "تعذّر الحفظ.",
+    "saved": "تم الحفظ.",
+    "save": "حفظ"
   }
 }

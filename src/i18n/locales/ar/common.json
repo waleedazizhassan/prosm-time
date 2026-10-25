@@ -233,7 +233,19 @@
     "cannotEditOwnAllowances": "لا يمكنك تعديل بدلاتك أنت أثناء المراجعة.",
     "allowanceNotInReview": "هذا اليوم ليس في شيت ينتظر الاعتماد.",
     "allowancesReopenRequired": "ليست لديك صلاحية إعادة فتح شيت معتمد.",
-    "onlyApprovedSheetReopen": "لا يُعاد فتح إلا الشيت المعتمد."
+    "onlyApprovedSheetReopen": "لا يُعاد فتح إلا الشيت المعتمد.",
+    "managePermissionsRequired": "ليست لديك صلاحية البت في الأذونات أو الإضافي.",
+    "cannotDecideOwnPermission": "لا يمكنك البت في إذنك أنت.",
+    "invalidPermissionKind": "اختر نوع إذن صحيح.",
+    "permissionBeforeDay": "اطلب الإذن قبل اليوم - لليوم اللي فات، المدير يقدر يضيفه.",
+    "permissionNotFound": "الإذن غير موجود.",
+    "permissionAlreadyDecided": "تم البت في هذا الإذن بالفعل.",
+    "minutesNotNegative": "الدقائق لا تكون سالبة.",
+    "nothingToChange": "لا يوجد ما يُعدَّل.",
+    "overtimePolicyOwnerOnly": "الأونر فقط يحدد سياسة الإضافي.",
+    "invalidOvertimePolicy": "راجع القيم (المعاملات 0-10، الدقائق 0-1440).",
+    "invalidBreakRules": "راجع الدقائق (1 إلى 600).",
+    "periodUpToThreeMonths": "اختر فترة حتى 3 شهور."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

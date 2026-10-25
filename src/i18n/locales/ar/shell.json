@@ -75,7 +75,10 @@
       "titleLeave": "طلب إجازة بانتظار مراجعتك",
       "bodyLeave": "{{name}} طلب إجازة لمدة {{days}} يوم.",
       "bodyLeaveDetailed": "{{name}} طلب إجازة {{type}} لمدة {{days}} يوم (من {{startDate}} لـ {{endDate}}).",
-      "bodyLeaveReasonSuffix": "السبب: {{reason}}."
+      "bodyLeaveReasonSuffix": "السبب: {{reason}}.",
+      "titlePermission": "إذن ينتظر موافقتك",
+      "bodyPermission": "{{name}} طلب {{kind}} يوم {{date}}.",
+      "bodyPermissionShort": "{{name}} طلب إذن يوم {{date}}."
     },
     "correctionReviewed": {
       "titleException": "تمت مراجعة الاستثناء الخاص بك",
@@ -84,7 +87,9 @@
       "body": "القرار: {{decision}}.",
       "titleMockLocation": "تمت مراجعة موقعك",
       "titleOfflineTime": "تمت مراجعة وقتك المسجَّل دون اتصال",
-      "notesSuffix": "ملاحظة المراجِع: «{{notes}}»"
+      "notesSuffix": "ملاحظة المراجِع: «{{notes}}»",
+      "titlePermission": "تمت مراجعة إذنك",
+      "titlePendingHours": "تمت مراجعة ساعات جلستك"
     },
     "breakExceeded": {
       "title": "تجاوزت مدة الاستراحة",

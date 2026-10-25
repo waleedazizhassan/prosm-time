@@ -17,7 +17,14 @@ const byOrg = "select id from %t where organization_id = $1";
 const byUser = "select id from %t where user_id in (select id from users where organization_id = $1)";
 const TABLES: Record<string, string> = {
   admin_on_behalf_actions: byOrg,
+  allowance_basis: "select organization_id::text || allowance_key as id from allowance_basis where organization_id = $1",
   allowance_categories: byOrg,
+  allowance_entry_adjustments: byOrg,
+  attendance_day_adjustments: byOrg,
+  attendance_permissions: byOrg,
+  overtime_policies: byOrg,
+  public_holidays: byOrg,
+  schedule_exceptions: byOrg,
   allowance_category_members: "select user_id as id from allowance_category_members where organization_id = $1",
   allowance_entries: byOrg,
   allowance_preferences: "select user_id as id from allowance_preferences where organization_id = $1",
@@ -76,6 +83,9 @@ const MUST_BE_SEEDED = [
   "mock_location_flags", "notifications", "offline_time_reviews", "presence_sessions", "project_assignments", "projects", "report_exports", "shift_assignments",
   "shift_templates", "site_assignments", "site_change_events", "site_worker_attendance", "site_workers", "sites", "sos_alerts",
   "timesheet_approvals", "timesheets", "user_permission_overrides", "users", "worker_pay_rates",
+  // v2.3.43
+  "allowance_basis", "public_holidays", "schedule_exceptions", "allowance_entry_adjustments", "overtime_policies",
+  "attendance_permissions", "attendance_day_adjustments",
 ];
 
 const today = () => new Date().toISOString().slice(0, 10);
@@ -184,6 +194,18 @@ async function seedOrg(name: string): Promise<SeededOrg> {
 
   // Everything else the app writes.
   await t.su("insert into allowance_entries (organization_id, user_id, attendance_session_id, entry_date, meal_allowance) values ($1, $2, $3, $4, 150)", [org.id, employee.userId, session.id, today()]);
+  // v2.3.43: the calendar, allowance basis and edits, overtime policy, permissions, day adjustments.
+  const [entry] = await t.su<{ id: string }>("select id from allowance_entries where user_id = $1", [employee.userId]);
+  await t.su("insert into allowance_basis (organization_id, allowance_key, basis) values ($1, 'meal', 'per_hour')", [org.id]);
+  await t.su("insert into public_holidays (organization_id, name, start_date, end_date) values ($1, $2, $3, $3)", [org.id, `${name} holiday`, today()]);
+  await t.su("insert into schedule_exceptions (organization_id, start_date, end_date, no_deduction, reason) values ($1, $2, $2, true, 'early leave')", [org.id, today()]);
+  await t.su(
+    "insert into allowance_entry_adjustments (organization_id, entry_id, user_id, field, previous_value, new_value, reason) values ($1, $2, $3, 'meal', 150, 100, 'x')",
+    [org.id, entry.id, employee.userId],
+  );
+  await t.su("insert into overtime_policies (organization_id, approval_mode) values ($1, 'automatic')", [org.id]);
+  await t.su("insert into attendance_permissions (organization_id, user_id, work_date, kind, reason) values ($1, $2, $3, 'late_arrival', 'doctor')", [org.id, employee.userId, today()]);
+  await t.su("insert into attendance_day_adjustments (organization_id, user_id, work_date, late_minutes, reason) values ($1, $2, $3, 0, 'x')", [org.id, employee.userId, today()]);
   const [worker] = await t.su<{ id: string }>(
     "insert into site_workers (organization_id, site_id, full_name, worker_number) values ($1, $2, $3, '482913') returning id",
     [org.id, siteId, `${name} Worker`],

@@ -117,5 +117,42 @@
     "staleTitle": "جلسات قديمة ما زالت مفتوحة",
     "staleHint": "بدأت قبل تفعيل الإغلاق التلقائي ولن تُغلق تلقائياً. سجّل انصراف الموظف بالنيابة بالوقت الصحيح.",
     "staleSummary": "مفتوحة منذ {{clockIn}} ({{hours}} ساعة)"
+  },
+  "permissions": {
+    "title_one": "الأذونات والإضافي ({{count}})",
+    "title_other": "الأذونات والإضافي ({{count}})",
+    "hint": "طلبات الأذونات، والأيام اللي إضافيها مستني موافقتك. الإضافي مش بيدخل البدلات ولا الكشف قبل الموافقة.",
+    "empty": "لا يوجد شيء ينتظر.",
+    "loadError": "تعذّر تحميل الأذونات.",
+    "genericError": "تعذّر الحفظ.",
+    "grantAction": "إضافة إذن",
+    "adjustAction": "تعديل",
+    "adjustTitle": "تعديل اليوم",
+    "adjustHint": "سيب الخانة فاضية عشان تفضل القيمة المحسوبة. السبب إلزامي والتعديل يتسجل.",
+    "approveOvertime": "موافقة على الإضافي",
+    "approvedOvertimeReason": "موافقة المدير على الإضافي",
+    "overtimeWaiting": "إضافي {{time}} ينتظر",
+    "kind": {
+      "late_arrival": "إذن تأخير",
+      "early_leave": "إذن انصراف مبكر",
+      "approved_overtime": "إضافي معتمد",
+      "no_overtime": "بدون احتساب إضافي"
+    },
+    "dayType": {
+      "workday": "يوم عمل",
+      "weekly_rest": "عطلة أسبوعية",
+      "public_holiday": "عطلة رسمية"
+    },
+    "paidLabel": "مدفوع (بدون خصم)",
+    "deductionPercentLabel": "خصم نسبة من الدقائق (%)",
+    "deductionMinutesLabel": "دقائق الخصم",
+    "personLabel": "الشخص",
+    "dateLabel": "اليوم",
+    "kindLabel": "النوع",
+    "minutesLabel": "الدقائق (اختياري)",
+    "reasonLabel": "السبب (إلزامي)",
+    "overtimeMinutesLabel": "دقائق الإضافي",
+    "lateMinutesLabel": "دقائق التأخير",
+    "save": "حفظ"
   }
 }

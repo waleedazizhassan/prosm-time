@@ -75,7 +75,10 @@
       "titleLeave": "Richiesta di ferie in attesa della tua revisione",
       "bodyLeave": "{{name}} ha richiesto {{days}} giorno/i di ferie.",
       "bodyLeaveDetailed": "{{name}} ha richiesto {{days}} giorno/i di {{type}} (dal {{startDate}} al {{endDate}}).",
-      "bodyLeaveReasonSuffix": "Motivo: {{reason}}."
+      "bodyLeaveReasonSuffix": "Motivo: {{reason}}.",
+      "titlePermission": "Permesso in attesa",
+      "bodyPermission": "{{name}} ha chiesto {{kind}} il {{date}}.",
+      "bodyPermissionShort": "{{name}} ha chiesto un permesso il {{date}}."
     },
     "correctionReviewed": {
       "titleException": "La tua eccezione è stata esaminata",
@@ -84,7 +87,9 @@
       "body": "Decisione: {{decision}}.",
       "titleMockLocation": "La tua posizione è stata esaminata",
       "titleOfflineTime": "Il tuo tempo offline è stato esaminato",
-      "notesSuffix": "Nota: «{{notes}}»"
+      "notesSuffix": "Nota: «{{notes}}»",
+      "titlePermission": "Il tuo permesso è stato esaminato",
+      "titlePendingHours": "Le ore del tuo turno sono state verificate"
     },
     "breakExceeded": {
       "title": "Durata della pausa superata",

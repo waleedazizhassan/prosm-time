@@ -75,7 +75,10 @@
       "titleLeave": "Leave request awaiting your review",
       "bodyLeave": "{{name}} requested {{days}} day(s) of leave.",
       "bodyLeaveDetailed": "{{name}} requested {{days}} day(s) of {{type}} leave ({{startDate}} to {{endDate}}).",
-      "bodyLeaveReasonSuffix": "Reason: {{reason}}."
+      "bodyLeaveReasonSuffix": "Reason: {{reason}}.",
+      "titlePermission": "Permission waiting for your approval",
+      "bodyPermission": "{{name}} asked for {{kind}} on {{date}}.",
+      "bodyPermissionShort": "{{name}} asked for a permission on {{date}}."
     },
     "correctionReviewed": {
       "titleException": "Your exception was reviewed",
@@ -84,7 +87,9 @@
       "body": "Decision: {{decision}}.",
       "titleMockLocation": "Your location was reviewed",
       "titleOfflineTime": "Your offline time was reviewed",
-      "notesSuffix": "Note: \"{{notes}}\""
+      "notesSuffix": "Note: \"{{notes}}\"",
+      "titlePermission": "Your permission was reviewed",
+      "titlePendingHours": "Your shift's hours were reviewed"
     },
     "breakExceeded": {
       "title": "Break duration exceeded",

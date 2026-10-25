@@ -117,5 +117,42 @@
     "staleTitle": "Alte, noch offene Schichten",
     "staleHint": "Vor der automatischen Schließung geöffnet - werden nicht automatisch geschlossen. Stempeln Sie die Person mit der richtigen Zeit aus.",
     "staleSummary": "Offen seit {{clockIn}} ({{hours}} h)"
+  },
+  "permissions": {
+    "title_one": "Genehmigungen und Überstunden ({{count}})",
+    "title_other": "Genehmigungen und Überstunden ({{count}})",
+    "hint": "Anträge und Tage, deren Überstunden auf Ihre Genehmigung warten.",
+    "empty": "Nichts offen.",
+    "loadError": "Genehmigungen konnten nicht geladen werden.",
+    "genericError": "Speichern fehlgeschlagen.",
+    "grantAction": "Genehmigung hinzufügen",
+    "adjustAction": "Anpassen",
+    "adjustTitle": "Tag anpassen",
+    "adjustHint": "Leer lassen, um den berechneten Wert zu behalten. Ein Grund ist Pflicht.",
+    "approveOvertime": "Überstunden genehmigen",
+    "approvedOvertimeReason": "Überstunden von der Führungskraft genehmigt",
+    "overtimeWaiting": "Überstunden {{time}} offen",
+    "kind": {
+      "late_arrival": "Späteres Kommen",
+      "early_leave": "Früheres Gehen",
+      "approved_overtime": "Genehmigte Überstunden",
+      "no_overtime": "Keine Überstunden"
+    },
+    "dayType": {
+      "workday": "Arbeitstag",
+      "weekly_rest": "Ruhetag",
+      "public_holiday": "Feiertag"
+    },
+    "paidLabel": "Bezahlt (kein Abzug)",
+    "deductionPercentLabel": "Diesen Prozentsatz abziehen",
+    "deductionMinutesLabel": "Abzugsminuten",
+    "personLabel": "Person",
+    "dateLabel": "Tag",
+    "kindLabel": "Art",
+    "minutesLabel": "Minuten (optional)",
+    "reasonLabel": "Grund (Pflicht)",
+    "overtimeMinutesLabel": "Überstundenminuten",
+    "lateMinutesLabel": "Verspätungsminuten",
+    "save": "Speichern"
   }
 }

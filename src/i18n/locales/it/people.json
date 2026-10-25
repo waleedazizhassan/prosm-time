@@ -45,7 +45,8 @@
     "settings.session_policy": "Avviso e chiusura dei turni aperti",
     "calendar.manage": "Gestire calendario e festività",
     "allowances.edit_during_review": "Modificare indennità in verifica",
-    "allowances.reopen_approved": "Riaprire fogli approvati"
+    "allowances.reopen_approved": "Riaprire fogli approvati",
+    "attendance.manage_permissions": "Permessi, approvazione straordinari e modifiche"
   },
   "invite": {
     "actionLabel": "Invita dipendente",

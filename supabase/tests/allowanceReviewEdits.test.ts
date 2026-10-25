@@ -34,6 +34,8 @@ beforeAll(async () => {
   for (const member of [worker, supervisor]) await assignToSite(t, site, member);
   await t.su("insert into site_assignments (site_id, user_id, role_at_site) values ($1, $2, 'manager')", [site, manager.userId]);
   await t.su("insert into site_assignments (site_id, user_id, role_at_site) values ($1, $2, 'manager')", [otherSite, otherManager.userId]);
+  // These tests are about the amounts: overtime counts without a manager's approval (step 6 default is "approval").
+  await t.su("insert into overtime_policies (organization_id, approval_mode) values ($1, 'automatic')", [org.id]);
   await t.su("update sites set timezone = 'Africa/Cairo', overtime_start_time = '17:00' where id = $1", [site]);
   await t.as(org.owner.authId, "select public.set_prosm_time_allowance_rates($1, null, null, $2::jsonb)", [site, JSON.stringify({ overtimeHour: 100, meal: 50, transportation: 30 })]);
   await t.su(

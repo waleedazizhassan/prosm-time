@@ -86,6 +86,8 @@ as $function$
     end;
 $function$;
 
+revoke all on function public.prosm_time_allowance_line_column(text) from public, anon, authenticated;
+
 -- A sheet's total always matches its days (an edit while it is reviewed).
 create or replace function public.prosm_time_sync_allowance_sheet_total()
 returns trigger

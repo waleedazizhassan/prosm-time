@@ -88,6 +88,7 @@ as $function$
     select p_status = 'clocked_out' and coalesce(p_hours_review_status, 'none') <> 'pending';
 $function$;
 
+revoke all on function public.prosm_time_session_counts(text, text) from public, anon;
 grant execute on function public.prosm_time_session_counts(text, text) to authenticated, service_role;
 
 -- The last moment the employee was seen during this shift.

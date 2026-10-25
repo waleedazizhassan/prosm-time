@@ -233,7 +233,19 @@
     "cannotEditOwnAllowances": "Sie können Ihre eigenen Zulagen nicht bearbeiten.",
     "allowanceNotInReview": "Dieser Tag ist in keiner offenen Abrechnung.",
     "allowancesReopenRequired": "Sie dürfen genehmigte Abrechnungen nicht wieder öffnen.",
-    "onlyApprovedSheetReopen": "Nur genehmigte Abrechnungen können wieder geöffnet werden."
+    "onlyApprovedSheetReopen": "Nur genehmigte Abrechnungen können wieder geöffnet werden.",
+    "managePermissionsRequired": "Sie dürfen über Genehmigungen nicht entscheiden.",
+    "cannotDecideOwnPermission": "Sie können nicht über Ihre eigene Genehmigung entscheiden.",
+    "invalidPermissionKind": "Bitte eine gültige Art wählen.",
+    "permissionBeforeDay": "Vor dem Tag beantragen - für vergangene Tage kann die Führungskraft sie hinzufügen.",
+    "permissionNotFound": "Genehmigung nicht gefunden.",
+    "permissionAlreadyDecided": "Über diese Genehmigung wurde bereits entschieden.",
+    "minutesNotNegative": "Minuten dürfen nicht negativ sein.",
+    "nothingToChange": "Nichts zu ändern.",
+    "overtimePolicyOwnerOnly": "Nur der Inhaber legt diese Regel fest.",
+    "invalidOvertimePolicy": "Bitte Werte prüfen.",
+    "invalidBreakRules": "Bitte Minuten prüfen (1 bis 600).",
+    "periodUpToThreeMonths": "Bitte höchstens drei Monate wählen."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

@@ -69,5 +69,40 @@
     "genericError": "Salvataggio non riuscito.",
     "saved": "Salvato.",
     "save": "Salva"
+  },
+  "overtimePolicy": {
+    "title": "Straordinari e trattenute",
+    "hint": "Per tutta l'organizzazione. Vuoto = predefinito. 1 mantiene gli importi attuali.",
+    "approvalModeLabel": "Gli straordinari contano",
+    "mode": {
+      "default": "Predefinito (dopo approvazione)",
+      "approval": "Dopo l'approvazione",
+      "automatic": "Automaticamente"
+    },
+    "field": {
+      "minOvertimeMinutes": "Straordinari dopo (minuti)",
+      "minLateMinutes": "Ritardo dopo (minuti)",
+      "maxDailyOvertimeMinutes": "Massimo al giorno (minuti)",
+      "multiplierNormal": "Coefficiente - giorno normale",
+      "multiplierNight": "Coefficiente - notte",
+      "multiplierWeeklyRest": "Coefficiente - riposo",
+      "multiplierPublicHoliday": "Coefficiente - festività",
+      "nightStart": "Inizio notte",
+      "nightEnd": "Fine notte"
+    },
+    "placeholder": {
+      "minOvertimeMinutes": "0",
+      "minLateMinutes": "0",
+      "maxDailyOvertimeMinutes": "nessun limite",
+      "multiplierNormal": "1",
+      "multiplierNight": "1",
+      "multiplierWeeklyRest": "1",
+      "multiplierPublicHoliday": "1"
+    },
+    "legalNote": "I minimi di legge vanno verificati sul testo ufficiale.",
+    "invalid": "Inserisci numeri da 0 in su.",
+    "genericError": "Salvataggio non riuscito.",
+    "saved": "Salvato.",
+    "save": "Salva"
   }
 }

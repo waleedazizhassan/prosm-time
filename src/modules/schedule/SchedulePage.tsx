@@ -21,6 +21,7 @@ import shiftsHeaderImage from "../../assets/illustrations/schedule.svg";
 import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
 import DateRange from "../../components/common/DateRange";
+import BreakRulesModal from "./BreakRulesModal";
 
 function isoDate(date: Date): string {
   return date.toISOString().slice(0, 10);
@@ -56,6 +57,7 @@ export default function SchedulePage() {
   const [sites, setSites] = useState<Site[]>([]);
   const [members, setMembers] = useState<OrgMember[]>([]);
   const [templates, setTemplates] = useState<ShiftTemplate[]>([]);
+  const [breakTemplate, setBreakTemplate] = useState<ShiftTemplate | null>(null);
   const [selectedSiteId, setSelectedSiteId] = useState("");
   const [siteShifts, setSiteShifts] = useState<SiteShiftRow[]>([]);
   const [siteShiftsLoading, setSiteShiftsLoading] = useState(false);
@@ -225,9 +227,15 @@ export default function SchedulePage() {
             <HintText small>{t("templatesHint")}</HintText>
             <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap", marginBottom: "var(--space-3)" }}>
               {templates.map((template) => (
-                <span
+                <button
+                  type="button"
                   key={template.id}
+                  title={t("breakRules.open")}
+                  onClick={() => setBreakTemplate(template)}
                   style={{
+                    border: "1px solid var(--border-light)",
+                    cursor: "pointer",
+                    color: "var(--text-primary)",
                     padding: "var(--space-1) var(--space-3)",
                     borderRadius: "999px",
                     background: template.color ?? "var(--surface-hover)",
@@ -236,7 +244,7 @@ export default function SchedulePage() {
                   }}
                 >
                   {template.name} ({formatShiftTime(template.startTime, template.endTime, template.endTime <= template.startTime)})
-                </span>
+                </button>
               ))}
               {templates.length === 0 ? <span style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("noTemplates")}</span> : null}
             </div>
@@ -283,6 +291,7 @@ export default function SchedulePage() {
           </Card>
         </>
       ) : null}
+      <BreakRulesModal template={breakTemplate} onClose={() => setBreakTemplate(null)} onSaved={() => void loadSiteData()} />
     </PageShell>
   );
 }

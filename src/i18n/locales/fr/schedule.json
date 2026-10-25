@@ -36,5 +36,15 @@
   "status": {
     "scheduled": "Planifié",
     "cancelled": "Annulé"
+  },
+  "breakRules": {
+    "open": "Règles de pause",
+    "title": "Règles de pause - {{name}}",
+    "hint": "Les pauses non payées sont retirées du temps travaillé.",
+    "paidLabel": "Pauses payées",
+    "maxLabel": "Pause maximum (minutes)",
+    "autoLabel": "Retenue sans pause (minutes)",
+    "genericError": "Enregistrement impossible.",
+    "save": "Enregistrer"
   }
 }

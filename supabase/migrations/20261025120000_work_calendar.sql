@@ -37,6 +37,9 @@ as $function$
     select p_days is null or (cardinality(p_days) <= 7 and not exists (select 1 from unnest(p_days) d where d not between 0 and 6));
 $function$;
 
+revoke all on function public.prosm_time_valid_weekdays(smallint[]) from public, anon;
+grant execute on function public.prosm_time_valid_weekdays(smallint[]) to authenticated, service_role;
+
 alter table public.organization_settings drop constraint if exists organization_settings_rest_days_check;
 alter table public.organization_settings add constraint organization_settings_rest_days_check check (public.prosm_time_valid_weekdays(rest_days));
 alter table public.sites drop constraint if exists sites_rest_days_check;

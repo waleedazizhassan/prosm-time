@@ -45,7 +45,8 @@
     "settings.session_policy": "Hinweis und Schließen offener Schichten",
     "calendar.manage": "Kalender und Feiertage verwalten",
     "allowances.edit_during_review": "Zulagen in der Prüfung bearbeiten",
-    "allowances.reopen_approved": "Genehmigte Abrechnungen wieder öffnen"
+    "allowances.reopen_approved": "Genehmigte Abrechnungen wieder öffnen",
+    "attendance.manage_permissions": "Genehmigungen, Überstundenfreigabe und Tagesanpassungen"
   },
   "invite": {
     "actionLabel": "Mitarbeiter einladen",

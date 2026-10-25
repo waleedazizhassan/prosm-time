@@ -41,5 +41,31 @@
     "approved": "Approuvé",
     "rejected": "Rejeté",
     "cancelled": "Annulé"
+  },
+  "permission": {
+    "title": "Demander une autorisation",
+    "hint": "Arrivée tardive, départ anticipé ou heures sup. - demandez avant le jour.",
+    "kindLabel": "Type",
+    "dateLabel": "Jour",
+    "minutesLabel": "Minutes (facultatif)",
+    "reasonLabel": "Motif (obligatoire)",
+    "submit": "Envoyer à mon responsable",
+    "required": "Choisissez le jour et le motif.",
+    "genericError": "Envoi impossible.",
+    "cancel": "Retirer",
+    "noDeduction": "sans retenue",
+    "partialDeduction": "retenue partielle",
+    "kind": {
+      "late_arrival": "Arrivée tardive",
+      "early_leave": "Départ anticipé",
+      "approved_overtime": "Heures sup.",
+      "no_overtime": "Sans heures sup."
+    },
+    "status": {
+      "pending": "en attente",
+      "approved": "approuvée",
+      "rejected": "refusée",
+      "cancelled": "retirée"
+    }
   }
 }

@@ -41,5 +41,31 @@
     "approved": "موافق عليها",
     "rejected": "مرفوضة",
     "cancelled": "ملغاة"
+  },
+  "permission": {
+    "title": "طلب إذن",
+    "hint": "تأخير أو انصراف مبكر أو إضافي — اطلبه قبل اليوم، والمدير يحدد هل مدفوع أو بخصم. القرار يظهر هنا.",
+    "kindLabel": "النوع",
+    "dateLabel": "اليوم",
+    "minutesLabel": "الدقائق (اختياري)",
+    "reasonLabel": "السبب (إلزامي)",
+    "submit": "إرسال للمدير",
+    "required": "اختر اليوم واكتب السبب.",
+    "genericError": "تعذّر الإرسال.",
+    "cancel": "سحب",
+    "noDeduction": "بدون خصم",
+    "partialDeduction": "خصم جزئي",
+    "kind": {
+      "late_arrival": "إذن تأخير",
+      "early_leave": "إذن انصراف مبكر",
+      "approved_overtime": "إضافي",
+      "no_overtime": "بدون احتساب إضافي"
+    },
+    "status": {
+      "pending": "قيد الانتظار",
+      "approved": "موافق عليه",
+      "rejected": "مرفوض",
+      "cancelled": "مسحوب"
+    }
   }
 }

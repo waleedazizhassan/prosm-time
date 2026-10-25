@@ -69,5 +69,40 @@
     "genericError": "Enregistrement impossible.",
     "saved": "Enregistré.",
     "save": "Enregistrer"
+  },
+  "overtimePolicy": {
+    "title": "Heures sup. et retenues",
+    "hint": "Pour toute l'organisation. Vide = valeur par défaut. 1 garde les montants actuels.",
+    "approvalModeLabel": "Les heures sup. comptent",
+    "mode": {
+      "default": "Par défaut (après accord)",
+      "approval": "Après accord d'un responsable",
+      "automatic": "Automatiquement"
+    },
+    "field": {
+      "minOvertimeMinutes": "Heures sup. après (minutes)",
+      "minLateMinutes": "Retard après (minutes)",
+      "maxDailyOvertimeMinutes": "Maximum par jour (minutes)",
+      "multiplierNormal": "Coefficient - jour normal",
+      "multiplierNight": "Coefficient - nuit",
+      "multiplierWeeklyRest": "Coefficient - repos",
+      "multiplierPublicHoliday": "Coefficient - férié",
+      "nightStart": "Début de nuit",
+      "nightEnd": "Fin de nuit"
+    },
+    "placeholder": {
+      "minOvertimeMinutes": "0",
+      "minLateMinutes": "0",
+      "maxDailyOvertimeMinutes": "sans limite",
+      "multiplierNormal": "1",
+      "multiplierNight": "1",
+      "multiplierWeeklyRest": "1",
+      "multiplierPublicHoliday": "1"
+    },
+    "legalNote": "Les minimums légaux doivent être vérifiés dans le texte officiel du droit du travail.",
+    "invalid": "Saisissez des nombres positifs.",
+    "genericError": "Enregistrement impossible.",
+    "saved": "Enregistré.",
+    "save": "Enregistrer"
   }
 }

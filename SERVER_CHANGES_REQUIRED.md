@@ -9,6 +9,7 @@
 | `20261025120000_work_calendar.sql` | 3 (بند 7/8) | `public_holidays`, `schedule_exceptions` (+RLS)؛ `rest_days` للمنظمة/الموقع/الوردية، `week_start_day`, `timezone`؛ صلاحية `calendar.manage`؛ دوال نوع اليوم والاستثناء ويوم العمل؛ CRUD مدقق؛ `get_prosm_time_calendar`؛ `generate_prosm_time_timesheet` يقرأ التقويم. |
 | `20261025130000_allowances_from_minutes.sql` | 4 (بند 6) | `overtime_minutes`, `worked_minutes`, `day_type`؛ `allowance_basis` + `set_prosm_time_allowance_basis`؛ حقائق اليوم وإعادة الحساب؛ `upsert`/`start_day`/`fill`/trigger التعبئة؛ إعادة حساب السجلات غير المعتمدة. |
 | `20261025140000_allowance_review_edits.sql` | 5 (بند 21) | صلاحيات `allowances.edit_during_review`/`allowances.reopen_approved`؛ `manual_overrides`؛ `allowance_entry_adjustments`؛ trigger إجمالي الشيت؛ `adjust_prosm_time_allowance_entry`؛ `reopen_prosm_time_allowance_sheet`. |
+| `20261025150000_overtime_permissions_control.sql` | 6 (بند 23) | صلاحية `attendance.manage_permissions`؛ `overtime_policies`, `attendance_permissions`, `attendance_day_adjustments` (+RLS)؛ قواعد استراحة الورديات؛ `prosm_time_day_summary`؛ RPCs الأذونات والتعديل والطابور والسياسة؛ الكشف والبدلات من المحرك؛ عدّاد الداشبورد؛ إعادة حساب غير المعتمد. |
 
 ## Edge Functions تحتاج إعادة نشر
-- `send-push` (الخطوة 2): نصوص الإشعارين الجديدين (`_shared/pushTexts.ts`, `_shared/localizePush.ts`) وحقل `kind` في بيانات الإشعار — `npx supabase functions deploy send-push`.
+- `send-push` (الخطوتان 2 و6): نصوص الإشعارين الجديدين (`_shared/pushTexts.ts`, `_shared/localizePush.ts`) وحقل `kind` في بيانات الإشعار — `npx supabase functions deploy send-push`.

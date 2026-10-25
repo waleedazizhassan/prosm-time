@@ -69,5 +69,40 @@
     "genericError": "Could not save.",
     "saved": "Saved.",
     "save": "Save"
+  },
+  "overtimePolicy": {
+    "title": "Overtime and deductions",
+    "hint": "For the whole organisation. Blank = the default. Multipliers apply on top of the overtime-hour price; 1 keeps today's amounts.",
+    "approvalModeLabel": "Overtime counts",
+    "mode": {
+      "default": "Default (after a manager's approval)",
+      "approval": "After a manager's approval",
+      "automatic": "Automatically"
+    },
+    "field": {
+      "minOvertimeMinutes": "Overtime counts after (minutes)",
+      "minLateMinutes": "Lateness counts after (minutes)",
+      "maxDailyOvertimeMinutes": "Maximum overtime per day (minutes)",
+      "multiplierNormal": "Multiplier - normal day",
+      "multiplierNight": "Multiplier - night",
+      "multiplierWeeklyRest": "Multiplier - weekly rest day",
+      "multiplierPublicHoliday": "Multiplier - public holiday",
+      "nightStart": "Night starts",
+      "nightEnd": "Night ends"
+    },
+    "placeholder": {
+      "minOvertimeMinutes": "0",
+      "minLateMinutes": "0",
+      "maxDailyOvertimeMinutes": "no limit",
+      "multiplierNormal": "1",
+      "multiplierNight": "1",
+      "multiplierWeeklyRest": "1",
+      "multiplierPublicHoliday": "1"
+    },
+    "legalNote": "The legal minimum rates must be checked against the official text of the labour law; PROSM Time does not set them for you.",
+    "invalid": "Enter numbers of 0 or more.",
+    "genericError": "Could not save.",
+    "saved": "Saved.",
+    "save": "Save"
   }
 }

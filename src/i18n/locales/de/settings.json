@@ -69,5 +69,40 @@
     "genericError": "Speichern fehlgeschlagen.",
     "saved": "Gespeichert.",
     "save": "Speichern"
+  },
+  "overtimePolicy": {
+    "title": "Überstunden und Abzüge",
+    "hint": "Für die ganze Organisation. Leer = Standard. 1 behält die heutigen Beträge.",
+    "approvalModeLabel": "Überstunden zählen",
+    "mode": {
+      "default": "Standard (nach Genehmigung)",
+      "approval": "Nach Genehmigung",
+      "automatic": "Automatisch"
+    },
+    "field": {
+      "minOvertimeMinutes": "Überstunden ab (Minuten)",
+      "minLateMinutes": "Verspätung ab (Minuten)",
+      "maxDailyOvertimeMinutes": "Höchstens pro Tag (Minuten)",
+      "multiplierNormal": "Faktor - normaler Tag",
+      "multiplierNight": "Faktor - Nacht",
+      "multiplierWeeklyRest": "Faktor - Ruhetag",
+      "multiplierPublicHoliday": "Faktor - Feiertag",
+      "nightStart": "Nacht beginnt",
+      "nightEnd": "Nacht endet"
+    },
+    "placeholder": {
+      "minOvertimeMinutes": "0",
+      "minLateMinutes": "0",
+      "maxDailyOvertimeMinutes": "keine Grenze",
+      "multiplierNormal": "1",
+      "multiplierNight": "1",
+      "multiplierWeeklyRest": "1",
+      "multiplierPublicHoliday": "1"
+    },
+    "legalNote": "Gesetzliche Mindestsätze sind am offiziellen Gesetzestext zu prüfen.",
+    "invalid": "Bitte Zahlen ab 0 eingeben.",
+    "genericError": "Speichern fehlgeschlagen.",
+    "saved": "Gespeichert.",
+    "save": "Speichern"
   }
 }

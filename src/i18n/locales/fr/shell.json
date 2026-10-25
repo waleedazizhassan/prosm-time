@@ -75,7 +75,10 @@
       "titleLeave": "Demande de congé en attente de votre validation",
       "bodyLeave": "{{name}} a demandé {{days}} jour(s) de congé.",
       "bodyLeaveDetailed": "{{name}} a demandé {{days}} jour(s) de congé {{type}} (du {{startDate}} au {{endDate}}).",
-      "bodyLeaveReasonSuffix": "Motif : {{reason}}."
+      "bodyLeaveReasonSuffix": "Motif : {{reason}}.",
+      "titlePermission": "Autorisation en attente",
+      "bodyPermission": "{{name}} demande : {{kind}} le {{date}}.",
+      "bodyPermissionShort": "{{name}} demande une autorisation le {{date}}."
     },
     "correctionReviewed": {
       "titleException": "Votre exception a été examinée",
@@ -84,7 +87,9 @@
       "body": "Décision : {{decision}}.",
       "titleMockLocation": "Votre localisation a été examinée",
       "titleOfflineTime": "Votre temps hors ligne a été examiné",
-      "notesSuffix": "Remarque : « {{notes}} »"
+      "notesSuffix": "Remarque : « {{notes}} »",
+      "titlePermission": "Votre autorisation a été examinée",
+      "titlePendingHours": "Les heures de votre session ont été vérifiées"
     },
     "breakExceeded": {
       "title": "Durée de pause dépassée",

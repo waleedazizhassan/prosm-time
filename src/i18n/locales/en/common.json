@@ -233,7 +233,19 @@
     "cannotEditOwnAllowances": "You cannot edit your own allowances in review.",
     "allowanceNotInReview": "This day is not in a sheet waiting for approval.",
     "allowancesReopenRequired": "You don't have permission to reopen an approved sheet.",
-    "onlyApprovedSheetReopen": "Only an approved sheet can be reopened."
+    "onlyApprovedSheetReopen": "Only an approved sheet can be reopened.",
+    "managePermissionsRequired": "You don't have permission to decide permissions or overtime.",
+    "cannotDecideOwnPermission": "You cannot decide your own permission.",
+    "invalidPermissionKind": "Choose a valid kind of permission.",
+    "permissionBeforeDay": "Ask before the day - for a day that has passed, your manager can add it.",
+    "permissionNotFound": "This permission was not found.",
+    "permissionAlreadyDecided": "This permission has already been decided.",
+    "minutesNotNegative": "Minutes cannot be negative.",
+    "nothingToChange": "Nothing to change.",
+    "overtimePolicyOwnerOnly": "Only the Owner sets the overtime policy.",
+    "invalidOvertimePolicy": "Check the values (multipliers 0-10, minutes 0-1440).",
+    "invalidBreakRules": "Check the minutes (1 to 600).",
+    "periodUpToThreeMonths": "Choose a period of up to three months."
   },
   "pageLoad": {
     "title": "This page needs a connection",

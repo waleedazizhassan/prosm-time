@@ -45,7 +45,8 @@
     "settings.session_policy": "تنبيه وإغلاق الجلسات المفتوحة",
     "calendar.manage": "إدارة التقويم والعطلات",
     "allowances.edit_during_review": "تعديل البدلات أثناء المراجعة",
-    "allowances.reopen_approved": "إعادة فتح شيت بدلات معتمد"
+    "allowances.reopen_approved": "إعادة فتح شيت بدلات معتمد",
+    "attendance.manage_permissions": "الأذونات وموافقة الإضافي وتعديل اليوم"
   },
   "invite": {
     "actionLabel": "دعوة موظف",

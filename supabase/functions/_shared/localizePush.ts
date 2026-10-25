@@ -65,6 +65,11 @@ export function localizePush(type: string, data: Data, language: string, fallbac
         if (title && body) result = { title, body };
         break;
       }
+      // v2.3.43 step 6: an attendance permission asked by an employee (the kind's label is not in the push texts; the date is).
+      if (kind === "permission") {
+        result = pair("exceptionPendingReview.titlePermission", "exceptionPendingReview.bodyPermissionShort", { name, date: data.workDate ?? "" });
+        break;
+      }
       const suffix = kind === "exception" ? "Exception" : kind === "correction" ? "Correction" : kind === "early_leave" ? "EarlyLeave" : null;
       if (suffix) result = pair(`exceptionPendingReview.title${suffix}`, `exceptionPendingReview.body${suffix}`, { name });
       break;
@@ -73,7 +78,7 @@ export function localizePush(type: string, data: Data, language: string, fallbac
       const kind = str(data.kind);
       const action = str(data.actionType);
       if (!kind || !action) break;
-      const suffix = ({ exception: "Exception", correction: "Correction", leave: "Leave", mock_location: "MockLocation", offline_time: "OfflineTime" } as Record<string, string>)[kind];
+      const suffix = ({ exception: "Exception", correction: "Correction", leave: "Leave", mock_location: "MockLocation", offline_time: "OfflineTime", permission: "Permission", pending_hours: "PendingHours" } as Record<string, string>)[kind];
       const decision = t(`decision.${action}`) ?? action;
       if (suffix) result = withNotes(`correctionReviewed.title${suffix}`, "correctionReviewed.body", { decision });
       break;

@@ -36,5 +36,15 @@
   "status": {
     "scheduled": "Geplant",
     "cancelled": "Storniert"
+  },
+  "breakRules": {
+    "open": "Pausenregeln",
+    "title": "Pausenregeln - {{name}}",
+    "hint": "Unbezahlte Pausen werden von der Arbeitszeit abgezogen.",
+    "paidLabel": "Pausen bezahlt",
+    "maxLabel": "Höchstpause (Minuten)",
+    "autoLabel": "Abzug ohne Pause (Minuten)",
+    "genericError": "Speichern fehlgeschlagen.",
+    "save": "Speichern"
   }
 }

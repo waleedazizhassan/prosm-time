@@ -41,5 +41,31 @@
     "approved": "Approvata",
     "rejected": "Rifiutata",
     "cancelled": "Annullata"
+  },
+  "permission": {
+    "title": "Chiedi un permesso",
+    "hint": "Entrata posticipata, uscita anticipata o straordinari - chiedi prima del giorno.",
+    "kindLabel": "Tipo",
+    "dateLabel": "Giorno",
+    "minutesLabel": "Minuti (facoltativo)",
+    "reasonLabel": "Motivo (obbligatorio)",
+    "submit": "Invia al responsabile",
+    "required": "Scegli il giorno e il motivo.",
+    "genericError": "Invio non riuscito.",
+    "cancel": "Ritira",
+    "noDeduction": "nessuna trattenuta",
+    "partialDeduction": "trattenuta parziale",
+    "kind": {
+      "late_arrival": "Entrata posticipata",
+      "early_leave": "Uscita anticipata",
+      "approved_overtime": "Straordinari",
+      "no_overtime": "Senza straordinari"
+    },
+    "status": {
+      "pending": "in attesa",
+      "approved": "approvato",
+      "rejected": "rifiutato",
+      "cancelled": "ritirato"
+    }
   }
 }

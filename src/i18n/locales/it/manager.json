@@ -117,5 +117,42 @@
     "staleTitle": "Vecchi turni ancora aperti",
     "staleHint": "Aperti prima della chiusura automatica - non vengono chiusi automaticamente. Registra l'uscita per il dipendente all'ora giusta.",
     "staleSummary": "Aperto da {{clockIn}} ({{hours}} h)"
+  },
+  "permissions": {
+    "title_one": "Permessi e straordinari ({{count}})",
+    "title_other": "Permessi e straordinari ({{count}})",
+    "hint": "Richieste di permesso e giorni con straordinari in attesa della tua approvazione.",
+    "empty": "Niente in attesa.",
+    "loadError": "Impossibile caricare i permessi.",
+    "genericError": "Salvataggio non riuscito.",
+    "grantAction": "Aggiungi permesso",
+    "adjustAction": "Modifica",
+    "adjustTitle": "Modifica il giorno",
+    "adjustHint": "Lascia vuoto per tenere il valore calcolato. Il motivo è obbligatorio.",
+    "approveOvertime": "Approva gli straordinari",
+    "approvedOvertimeReason": "Straordinari approvati dal responsabile",
+    "overtimeWaiting": "straordinari {{time}} in attesa",
+    "kind": {
+      "late_arrival": "Entrata posticipata",
+      "early_leave": "Uscita anticipata",
+      "approved_overtime": "Straordinari approvati",
+      "no_overtime": "Senza straordinari"
+    },
+    "dayType": {
+      "workday": "Giorno lavorativo",
+      "weekly_rest": "Riposo settimanale",
+      "public_holiday": "Festività"
+    },
+    "paidLabel": "Retribuito (nessuna trattenuta)",
+    "deductionPercentLabel": "Trattieni questa percentuale",
+    "deductionMinutesLabel": "Minuti di trattenuta",
+    "personLabel": "Persona",
+    "dateLabel": "Giorno",
+    "kindLabel": "Tipo",
+    "minutesLabel": "Minuti (facoltativo)",
+    "reasonLabel": "Motivo (obbligatorio)",
+    "overtimeMinutesLabel": "Minuti di straordinario",
+    "lateMinutesLabel": "Minuti di ritardo",
+    "save": "Salva"
   }
 }

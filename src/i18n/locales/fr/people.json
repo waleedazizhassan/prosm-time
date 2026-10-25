@@ -45,7 +45,8 @@
     "settings.session_policy": "Alerte et fermeture des sessions ouvertes",
     "calendar.manage": "Gérer le calendrier et les jours fériés",
     "allowances.edit_during_review": "Modifier les indemnités en vérification",
-    "allowances.reopen_approved": "Rouvrir une feuille approuvée"
+    "allowances.reopen_approved": "Rouvrir une feuille approuvée",
+    "attendance.manage_permissions": "Autorisations, accord des heures sup. et ajustements"
   },
   "invite": {
     "actionLabel": "Inviter un employé",

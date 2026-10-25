@@ -33,8 +33,17 @@ export default function localizeNotification(notification: AppNotification, t: T
     }
     case "exception_pending_review": {
       const name = typeof data.employeeName === "string" ? data.employeeName : null;
-      const kind = data.kind === "exception" || data.kind === "correction" || data.kind === "early_leave" || data.kind === "leave" ? data.kind : null;
+      const kind = data.kind === "exception" || data.kind === "correction" || data.kind === "early_leave" || data.kind === "leave" || data.kind === "permission" ? data.kind : null;
       if (!name || !kind) break;
+      // v2.3.43 step 6: an attendance permission asked by an employee.
+      if (kind === "permission") {
+        const date = typeof data.workDate === "string" ? data.workDate : "";
+        const permissionKind = typeof data.permissionKind === "string" ? data.permissionKind : "late_arrival";
+        return {
+          title: t("shell:notifications.exceptionPendingReview.titlePermission"),
+          body: t("shell:notifications.exceptionPendingReview.bodyPermission", { name, date, kind: t(`manager:permissions.kind.${permissionKind}`) }),
+        };
+      }
       if (kind === "leave") {
         const days = typeof data.days === "number" ? data.days : null;
         const leaveType = typeof data.leaveType === "string" ? data.leaveType : null;
@@ -76,6 +85,9 @@ export default function localizeNotification(notification: AppNotification, t: T
         leave: "shell:notifications.correctionReviewed.titleLeave",
         mock_location: "shell:notifications.correctionReviewed.titleMockLocation",
         offline_time: "shell:notifications.correctionReviewed.titleOfflineTime",
+        // v2.3.43: an attendance permission (step 6) and pending hours (step 2).
+        permission: "shell:notifications.correctionReviewed.titlePermission",
+        pending_hours: "shell:notifications.correctionReviewed.titlePendingHours",
       };
       const titleKey = typeof data.kind === "string" ? titleKeys[data.kind] : undefined;
       const actionType = typeof data.actionType === "string" ? data.actionType : null;

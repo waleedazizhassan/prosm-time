@@ -19,6 +19,7 @@ import leaveHeaderImage from "../../assets/illustrations/leave.svg";
 import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
 import DateRange from "../../components/common/DateRange";
+import PermissionRequestCard from "./PermissionRequestCard";
 
 const LEAVE_TYPES: LeaveType[] = ["annual", "sick", "unpaid", "emergency", "other"];
 
@@ -218,6 +219,8 @@ export default function LeaveRequestsPage() {
           {t("submitAction")}
         </Button>
       </Card>
+
+      {isOwner ? null : <PermissionRequestCard />}
 
       <Card title={isOwner ? t("orgWideRequestsTitle") : t("myRequestsTitle")}>
         <ErrorText>{loadError}</ErrorText>

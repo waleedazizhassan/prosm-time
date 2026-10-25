@@ -45,7 +45,8 @@
     "settings.session_policy": "Open-shift alert and automatic close",
     "calendar.manage": "Manage the calendar and holidays",
     "allowances.edit_during_review": "Edit allowances during review",
-    "allowances.reopen_approved": "Reopen approved allowance sheets"
+    "allowances.reopen_approved": "Reopen approved allowance sheets",
+    "attendance.manage_permissions": "Permissions, overtime approval and day adjustments"
   },
   "invite": {
     "actionLabel": "Invite employee",

@@ -14,6 +14,10 @@ export interface ShiftTemplate {
   startTime: string;
   endTime: string;
   color: string | null;
+  // v2.3.43 step 6 (item 23): the template's break rules.
+  breakPaid: boolean;
+  breakMaxMinutes: number | null;
+  breakAutoDeductMinutes: number | null;
 }
 
 export interface MyShiftRow {
@@ -55,12 +59,19 @@ interface ShiftTemplateRowRaw {
   start_time: string;
   end_time: string;
   color: string | null;
+  break_paid?: boolean | null;
+  break_max_minutes?: number | null;
+  break_auto_deduct_minutes?: number | null;
   sites: { name: string } | { name: string }[] | null;
 }
 
 function mapTemplateRow(row: ShiftTemplateRowRaw): ShiftTemplate {
   const site = Array.isArray(row.sites) ? row.sites[0] : row.sites;
-  return { id: row.id, siteId: row.site_id, siteName: site?.name ?? null, name: row.name, startTime: row.start_time, endTime: row.end_time, color: row.color };
+  return { id: row.id, siteId: row.site_id, siteName: site?.name ?? null, name: row.name, startTime: row.start_time, endTime: row.end_time, color: row.color,
+    breakPaid: row.break_paid ?? true,
+    breakMaxMinutes: row.break_max_minutes ?? null,
+    breakAutoDeductMinutes: row.break_auto_deduct_minutes ?? null,
+  };
 }
 
 interface MyShiftRowRaw {
@@ -105,7 +116,7 @@ class ShiftRepository {
 
   async listTemplates(siteId?: string): Promise<ServiceResult<ShiftTemplate[]>> {
     try {
-      let query = this.client.from("shift_templates").select("id, site_id, name, start_time, end_time, color, sites(name)").order("name", { ascending: true });
+      let query = this.client.from("shift_templates").select("id, site_id, name, start_time, end_time, color, break_paid, break_max_minutes, break_auto_deduct_minutes, sites(name)").order("name", { ascending: true });
       if (siteId) query = query.eq("site_id", siteId);
       const { data, error } = await query;
       if (error) return createError(error.message);

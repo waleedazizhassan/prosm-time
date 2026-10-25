@@ -6,6 +6,7 @@ import PageShell from "../../components/common/PageShell";
 import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
 import MockLocationSettingsCard from "./MockLocationSettingsCard";
 import SessionPolicySettingsCard from "./SessionPolicySettingsCard";
+import OvertimePolicySettingsCard from "./OvertimePolicySettingsCard";
 import settingsHeaderImage from "../../assets/illustrations/settings.svg";
 import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
@@ -40,6 +41,7 @@ export default function OrganizationSettingsPage() {
       {hasPermission("settings.session_policy") ? <SessionPolicySettingsCard /> : null}
       {isOwner ? (
         <>
+          <OvertimePolicySettingsCard />
           <NoSiteRadiusSettingsCard />
           <MockLocationSettingsCard />
           <SiteDefaultsSettingsCard />

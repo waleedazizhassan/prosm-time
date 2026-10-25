@@ -36,5 +36,15 @@
   "status": {
     "scheduled": "Pianificato",
     "cancelled": "Annullato"
+  },
+  "breakRules": {
+    "open": "Regole pause",
+    "title": "Regole pause - {{name}}",
+    "hint": "Le pause non retribuite si tolgono dal tempo lavorato.",
+    "paidLabel": "Pause retribuite",
+    "maxLabel": "Pausa massima (minuti)",
+    "autoLabel": "Trattenuta senza pausa (minuti)",
+    "genericError": "Salvataggio non riuscito.",
+    "save": "Salva"
   }
 }

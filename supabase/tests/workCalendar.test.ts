@@ -47,6 +47,8 @@ beforeAll(async () => {
   await t.su("insert into site_assignments (site_id, user_id, role_at_site) values ($1, $2, 'manager')", [site, manager.userId]);
   await t.su("insert into site_assignments (site_id, user_id, role_at_site) values ($1, $2, 'manager')", [otherSite, otherManager.userId]);
   // Overtime after 17:00, late after 08:15 (Cairo).
+  // These tests are about the amounts: overtime counts without a manager's approval (step 6 default is "approval").
+  await t.su("insert into overtime_policies (organization_id, approval_mode) values ($1, 'automatic')", [org.id]);
   await t.su("update sites set timezone = 'Africa/Cairo', overtime_start_time = '17:00', late_deduction_start_time = '08:15' where id = $1", [site]);
 });
 

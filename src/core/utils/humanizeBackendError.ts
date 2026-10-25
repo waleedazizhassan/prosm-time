@@ -283,4 +283,17 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "THIS ALLOWANCE ENTRY IS NOT IN REVIEW": "allowanceNotInReview",
   "ALLOWANCES.REOPEN_APPROVED AUTHORITY REQUIRED": "allowancesReopenRequired",
   "ONLY AN APPROVED SHEET CAN BE REOPENED": "onlyApprovedSheetReopen",
+  // v2.3.43 step 6: permissions, overtime approval, day adjustments.
+  "ATTENDANCE.MANAGE_PERMISSIONS AUTHORITY REQUIRED": "managePermissionsRequired",
+  "YOU CANNOT DECIDE YOUR OWN PERMISSION": "cannotDecideOwnPermission",
+  "INVALID PERMISSION KIND": "invalidPermissionKind",
+  "ASK FOR A PERMISSION BEFORE THE DAY - A MANAGER CAN ADD ONE AFTERWARDS": "permissionBeforeDay",
+  "PERMISSION NOT FOUND": "permissionNotFound",
+  "THIS PERMISSION HAS ALREADY BEEN DECIDED": "permissionAlreadyDecided",
+  "MINUTES CANNOT BE NEGATIVE": "minutesNotNegative",
+  "NOTHING TO CHANGE": "nothingToChange",
+  "ONLY THE OWNER SETS THE OVERTIME POLICY": "overtimePolicyOwnerOnly",
+  "INVALID OVERTIME POLICY": "invalidOvertimePolicy",
+  "INVALID BREAK RULES": "invalidBreakRules",
+  "CHOOSE A PERIOD OF UP TO THREE MONTHS": "periodUpToThreeMonths",
 };

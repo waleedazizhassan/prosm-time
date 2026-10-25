@@ -187,6 +187,8 @@ as $function$
     end;
 $function$;
 
+revoke all on function public.prosm_time_allowance_amount(text, numeric, jsonb) from public, anon, authenticated;
+
 -- Recompute the time-based parts of a day that is not approved: overtime
 -- (minutes, hours, amount), extra days and their amount, and any allowance
 -- priced per hour or per extra day. Fixed daily allowances stay as entered.

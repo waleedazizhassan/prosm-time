@@ -41,5 +41,31 @@
     "approved": "Approved",
     "rejected": "Rejected",
     "cancelled": "Cancelled"
+  },
+  "permission": {
+    "title": "Ask for a permission",
+    "hint": "Late arrival, early leave or overtime - ask before the day; your manager decides whether it is paid. You will see the decision here.",
+    "kindLabel": "Kind",
+    "dateLabel": "Day",
+    "minutesLabel": "Minutes (optional)",
+    "reasonLabel": "Reason (required)",
+    "submit": "Send to my manager",
+    "required": "Choose the day and write the reason.",
+    "genericError": "Could not send.",
+    "cancel": "Withdraw",
+    "noDeduction": "no deduction",
+    "partialDeduction": "partial deduction",
+    "kind": {
+      "late_arrival": "Late arrival",
+      "early_leave": "Early leave",
+      "approved_overtime": "Overtime",
+      "no_overtime": "Not counted as overtime"
+    },
+    "status": {
+      "pending": "waiting",
+      "approved": "approved",
+      "rejected": "rejected",
+      "cancelled": "withdrawn"
+    }
   }
 }

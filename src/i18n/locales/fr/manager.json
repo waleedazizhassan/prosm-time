@@ -117,5 +117,42 @@
     "staleTitle": "Anciennes sessions encore ouvertes",
     "staleHint": "Ouvertes avant la fermeture automatique - non fermées automatiquement. Pointez le départ pour l'employé à la bonne heure.",
     "staleSummary": "Ouverte depuis {{clockIn}} ({{hours}} h)"
+  },
+  "permissions": {
+    "title_one": "Autorisations et heures sup. ({{count}})",
+    "title_other": "Autorisations et heures sup. ({{count}})",
+    "hint": "Demandes d'autorisation et jours dont les heures sup. attendent votre accord.",
+    "empty": "Rien en attente.",
+    "loadError": "Impossible de charger les autorisations.",
+    "genericError": "Enregistrement impossible.",
+    "grantAction": "Ajouter une autorisation",
+    "adjustAction": "Ajuster",
+    "adjustTitle": "Ajuster la journée",
+    "adjustHint": "Laissez vide pour garder la valeur calculée. Le motif est obligatoire.",
+    "approveOvertime": "Approuver les heures sup.",
+    "approvedOvertimeReason": "Heures sup. approuvées par le responsable",
+    "overtimeWaiting": "heures sup. {{time}} en attente",
+    "kind": {
+      "late_arrival": "Arrivée tardive",
+      "early_leave": "Départ anticipé",
+      "approved_overtime": "Heures sup. approuvées",
+      "no_overtime": "Sans heures sup."
+    },
+    "dayType": {
+      "workday": "Jour ouvré",
+      "weekly_rest": "Repos hebdomadaire",
+      "public_holiday": "Jour férié"
+    },
+    "paidLabel": "Payé (sans retenue)",
+    "deductionPercentLabel": "Retenir ce pourcentage des minutes",
+    "deductionMinutesLabel": "Minutes retenues",
+    "personLabel": "Personne",
+    "dateLabel": "Jour",
+    "kindLabel": "Type",
+    "minutesLabel": "Minutes (facultatif)",
+    "reasonLabel": "Motif (obligatoire)",
+    "overtimeMinutesLabel": "Minutes sup.",
+    "lateMinutesLabel": "Minutes de retard",
+    "save": "Enregistrer"
   }
 }

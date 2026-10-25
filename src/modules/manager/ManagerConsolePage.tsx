@@ -20,6 +20,7 @@ import managerConsoleHeaderImage from "../../assets/illustrations/manager.svg";
 import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
 import PendingHoursCard from "./PendingHoursCard";
+import PermissionsQueueCard from "./PermissionsQueueCard";
 
 type ReviewAction = "approved" | "rejected" | "acknowledged" | "clarification_requested";
 // Owner 2026-10-20 ("what is the right action for each reason?"): only the
@@ -212,6 +213,7 @@ export default function ManagerConsolePage() {
       </p>
 
       {hasPermission("sessions.review_pending") ? <PendingHoursCard /> : null}
+      {hasPermission("attendance.manage_permissions") ? <PermissionsQueueCard /> : null}
 
       <Card title={t("pending.title")}>
         <ErrorText>{error}</ErrorText>
