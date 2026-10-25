@@ -18,6 +18,7 @@
 | `20261025190000_on_behalf_time_and_place.sql` | 10 (بند 9) | `admin_clock_in/out_prosm_time_attendance` بوقت ومكان؛ `time_source` يقبل `admin_set`. |
 | `20261025200000_capture_integrity.sql` | 11 (بند 22) | صلاحيتان؛ إعدادات الحيوية للموقع والاستثناء؛ أعمدة على `camera_evidence`؛ `capture_tokens`, `integrity_flags` (+RLS)؛ إصدار الرمز وتسجيل السلامة؛ trigger الإحداثيات؛ الإعدادات والمراجعة والقائمة؛ عدّاد الداشبورد. |
 | `20261025210000_exit_site_checkout.sql` | 12 (بند 24) | صلاحية `sites.manage_exit_policy`؛ أعمدة السياسة والميداني؛ أعمدة الخروج على `presence_sessions`؛ نوعا إشعار؛ تتبع الخروج والانصراف التلقائي؛ cron `prosm-time-site-exits` كل 5 دقائق؛ الرد والإعدادات. |
+| `20261025230000_people_directory.sql` | 14-15 (بند 17/18) | `roles.sort_order`؛ `list_prosm_time_people_directory()`. **لم تُطبَّق بعد.** |
 
 ## Edge Functions تحتاج إعادة نشر
 - `send-push` (الخطوتان 2 و6): نصوص الإشعارين الجديدين (`_shared/pushTexts.ts`, `_shared/localizePush.ts`) وحقل `kind` في بيانات الإشعار — `npx supabase functions deploy send-push`.

@@ -26,6 +26,7 @@ import { PERIODS, formatHours, isPeriod, periodRange, sessionHours, type Period 
 import { attendanceNoteLines } from "./attendanceNotes";
 import HintText from "../../components/common/HintText";
 import DateRange from "../../components/common/DateRange";
+import PersonName from "../../components/common/PersonName";
 
 const ALL_EMPLOYEES = "";
 
@@ -230,7 +231,7 @@ export default function AttendanceLogPage() {
   };
 
   const columns: TableColumn<TodayAttendanceRow>[] = [
-    { key: "name", header: t("columns.employee"), render: (row) => row.userFullName },
+    { key: "name", header: t("columns.employee"), render: (row) => <PersonName name={row.userFullName} userId={row.userId} /> },
     {
       key: "site",
       header: t("columns.site"),

@@ -24,6 +24,7 @@ import PendingHoursCard from "./PendingHoursCard";
 import PermissionsQueueCard from "./PermissionsQueueCard";
 import IntegrityFlagsCard from "./IntegrityFlagsCard";
 import leaveTypeLabel from "../leave/leaveTypeLabel";
+import PersonName from "../../components/common/PersonName";
 
 type ReviewAction = "approved" | "rejected" | "acknowledged" | "clarification_requested";
 // Owner 2026-10-20 ("what is the right action for each reason?"): only the
@@ -251,7 +252,7 @@ export default function ManagerConsolePage() {
             <ListRow key={`${item.kind}-${item.id}`}>
               <div>
                 <div style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)", fontWeight: "var(--font-weight-semibold)" }}>
-                  {item.userFullName} — {t(`pending.kind.${item.kind}`)}
+                  <PersonName name={item.userFullName} userId={item.userId}>{item.userFullName} — {t(`pending.kind.${item.kind}`)}</PersonName>
                 </div>
                 <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{reviewSummary(item)}</div>
               </div>
@@ -315,7 +316,7 @@ export default function ManagerConsolePage() {
               <ListRow key={item.id}>
                 <div>
                   <div style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)", fontWeight: "var(--font-weight-semibold)" }}>
-                    {item.employeeName} — {leaveTypeLabel(t, item.leaveType)}
+                    <PersonName name={item.employeeName} userId={item.userId}>{item.employeeName} — {leaveTypeLabel(t, item.leaveType)}</PersonName>
                   </div>
                   <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
                     {formatDateOnly(item.startDate, i18n.language)} — {formatDateOnly(item.endDate, i18n.language)} ({item.daysCount} {t("leave.daysSuffix")})
@@ -382,7 +383,7 @@ export default function ManagerConsolePage() {
               <ListRow key={item.id}>
                 <div>
                   <div style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)", fontWeight: "var(--font-weight-semibold)" }}>
-                    {item.employeeName} — {leaveTypeLabel(t, item.leaveType)}
+                    <PersonName name={item.employeeName} userId={item.userId}>{item.employeeName} — {leaveTypeLabel(t, item.leaveType)}</PersonName>
                   </div>
                   <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
                     {formatDateOnly(item.startDate, i18n.language)} — {formatDateOnly(item.endDate, i18n.language)} ({item.daysCount} {t("leave.daysSuffix")})

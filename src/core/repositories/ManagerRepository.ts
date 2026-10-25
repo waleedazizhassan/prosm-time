@@ -77,6 +77,8 @@ export type PendingReviewKind = "geofence_exception" | "correction_request" | "o
 export interface PendingReviewItem {
   kind: PendingReviewKind;
   id: string;
+  // v2.3.43 step 14: for the avatar beside the name.
+  userId?: string;
   userFullName: string;
   summary: string;
   createdAt: string;
@@ -464,6 +466,7 @@ class ManagerRepository {
         return {
           kind: "geofence_exception" as const,
           id: row.id,
+          userId: (row as { user_id?: string }).user_id,
           userFullName: user?.full_name ?? "",
           summary: `${Math.round(row.distance_meters)} m outside area - ${row.employee_reason ?? ""}`,
           geofence: { distanceMeters: Math.round(row.distance_meters), reason: row.employee_reason ?? "" },
@@ -476,6 +479,7 @@ class ManagerRepository {
         return {
           kind: "correction_request" as const,
           id: row.id,
+          userId: (row as { user_id?: string }).user_id,
           userFullName: user?.full_name ?? "",
           summary: `${row.proposed_event_type} -> ${new Date(row.proposed_correct_time).toLocaleString()} - ${row.reason}`,
           correction: { eventType: row.proposed_event_type, correctTime: row.proposed_correct_time, reason: row.reason },
@@ -488,6 +492,7 @@ class ManagerRepository {
         return {
           kind: "offline_time" as const,
           id: row.id,
+          userId: (row as { user_id?: string }).user_id,
           userFullName: user?.full_name ?? "",
           summary: "",
           createdAt: row.created_at,
@@ -500,6 +505,7 @@ class ManagerRepository {
         return {
           kind: "mock_location" as const,
           id: row.id,
+          userId: (row as { user_id?: string }).user_id,
           userFullName: user?.full_name ?? "",
           summary: "",
           createdAt: row.created_at,
@@ -547,6 +553,7 @@ class ManagerRepository {
         const site = presenceSession ? (Array.isArray(presenceSession.sites) ? presenceSession.sites[0] : presenceSession.sites) : null;
         return {
           id: row.id,
+          userId: (row as { user_id?: string }).user_id,
           userFullName: user?.full_name ?? "",
           userEmail: user?.email ?? "",
           siteId: row.site_id ?? presenceSession?.site_id ?? null,

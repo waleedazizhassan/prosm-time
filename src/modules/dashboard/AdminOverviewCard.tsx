@@ -23,6 +23,8 @@ import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
 import styles from "./AdminOverviewCard.module.css";
 import dashboardArt from "../../assets/illustrations/dashboard.svg";
+import PersonName from "../../components/common/PersonName";
+import Avatar from "../../components/common/Avatar";
 
 type Drilldown = "sites" | "present" | "employees" | "pending" | "leaveToday" | "onBreak" | null;
 
@@ -284,14 +286,14 @@ export default function AdminOverviewCard() {
   ];
 
   const presentColumns: TableColumn<TodayAttendanceRow>[] = [
-    { key: "name", header: t("overview.drilldown.nameColumn"), render: (row) => row.userFullName },
+    { key: "name", header: t("overview.drilldown.nameColumn"), render: (row) => <PersonName name={row.userFullName} userId={row.userId} /> },
     { key: "date", header: t("overview.drilldown.dateColumn"), render: (row) => formatDateOnly(row.clockInAt, i18n.language) },
     { key: "time", header: t("overview.drilldown.timeColumn"), render: (row) => formatTimeOnly(row.clockInAt, i18n.language) },
     { key: "site", header: t("overview.drilldown.siteColumn"), render: (row) => row.siteName || "—" },
   ];
 
   const employeeColumns: TableColumn<OrgMember>[] = [
-    { key: "name", header: t("overview.drilldown.nameColumn"), render: (member) => member.fullName },
+    { key: "name", header: t("overview.drilldown.nameColumn"), render: (member) => <PersonName name={member.fullName} userId={member.id} /> },
     { key: "role", header: t("overview.drilldown.jobColumn"), render: (member) => member.roleName || "—" },
     { key: "site", header: t("overview.drilldown.siteColumn"), render: (member) => (siteNamesByUser[member.id]?.length ? siteNamesByUser[member.id].join(", ") : "—") },
     {
@@ -432,7 +434,7 @@ export default function AdminOverviewCard() {
             ) : (
               presentRows.slice(0, 6).map((row) => (
                 <li key={row.sessionId} className={styles.rosterRow}>
-                  <span className={styles.rosterAvatar}>{row.userFullName.trim().charAt(0).toUpperCase()}</span>
+                  <Avatar name={row.userFullName} userId={row.userId} size="md" />
                   <span className={styles.rosterInfo}>
                     <span className={styles.rosterName}>{row.userFullName}</span>
                     <span className={styles.rosterMeta}>{row.siteName || t("overview.drilldown.noSite")}</span>

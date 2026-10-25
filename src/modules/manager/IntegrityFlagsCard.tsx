@@ -12,6 +12,7 @@ import Textarea from "../../components/common/Textarea";
 import ListRow from "../../components/common/ListRow";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
+import PersonName from "../../components/common/PersonName";
 
 interface IntegrityFlag {
   id: string;
@@ -73,7 +74,7 @@ export default function IntegrityFlagsCard() {
         <ListRow key={flag.id}>
           <div>
             <div style={{ fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)" }}>
-              {flag.employee_name} — {t(`integrity.kind.${flag.kind}`, { defaultValue: flag.kind })}
+              <PersonName name={flag.employee_name} userId={flag.user_id}>{flag.employee_name} — {t(`integrity.kind.${flag.kind}`, { defaultValue: flag.kind })}</PersonName>
             </div>
             <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
               {[flag.site_name, when(flag.occurred_at ?? flag.created_at)].filter(Boolean).join(" · ")}

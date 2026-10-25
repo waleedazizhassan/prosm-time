@@ -28,6 +28,7 @@ import HintText from "../../components/common/HintText";
 import AllowanceSheetEditModal from "./AllowanceSheetEditModal";
 import PeriodDeductionsCard from "./PeriodDeductionsCard";
 import DateRange from "../../components/common/DateRange";
+import PersonName from "../../components/common/PersonName";
 
 const ALL_EMPLOYEES = "";
 
@@ -424,7 +425,7 @@ export default function AllowancesPage() {
   };
 
   const columns: TableColumn<AllowanceEntry>[] = [
-    { key: "employee", header: t("columns.employee"), render: (entry) => entry.userFullName },
+    { key: "employee", header: t("columns.employee"), render: (entry) => <PersonName name={entry.userFullName} userId={entry.userId} /> },
     { key: "date", header: t("columns.date"), render: (entry) => formatDateOnly(entry.entryDate, i18n.language) },
     { key: "day", header: t("columns.day"), render: (entry) => new Date(entry.entryDate).toLocaleDateString(i18n.language, { weekday: "long" }) },
     { key: "site", header: t("columns.site"), render: (entry) => entry.siteName || "—" },
@@ -512,7 +513,7 @@ export default function AllowancesPage() {
             {sheets.map((sheet) => (
               <div key={sheet.id} style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "var(--space-3)", padding: "var(--space-3)", border: "1px solid var(--border-light)", borderRadius: "var(--radius-md)" }}>
                 <div style={{ flex: "1 1 220px" }}>
-                  <strong>{sheet.userFullName}</strong>
+                  <strong><PersonName name={sheet.userFullName} userId={sheet.userId} /></strong>
                   <HintText small>
                     {t("sheets.line", { from: formatDateOnly(sheet.periodStart, i18n.language), to: formatDateOnly(sheet.periodEnd, i18n.language), days: sheet.days, total: sheet.total.toLocaleString(i18n.language) })}
                   </HintText>
@@ -553,7 +554,7 @@ export default function AllowancesPage() {
           {approvedSheets.map((sheet) => (
             <div key={sheet.id} style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "var(--space-2)", padding: "var(--space-2) 0", borderBottom: "1px solid var(--border-light)" }}>
               <span style={{ fontSize: "var(--font-sm)" }}>
-                <strong>{sheet.userFullName}</strong> ·{" "}
+                <strong><PersonName name={sheet.userFullName} userId={sheet.userId} /></strong> ·{" "}
                 {t("sheets.line", { from: formatDateOnly(sheet.periodStart, i18n.language), to: formatDateOnly(sheet.periodEnd, i18n.language), days: sheet.days, total: sheet.total.toLocaleString(i18n.language) })}
               </span>
               <Button size="sm" variant="ghost" onClick={() => { setReopenTarget(sheet); setReopenReason(""); setReopenError(""); }}>

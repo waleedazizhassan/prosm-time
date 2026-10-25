@@ -13,6 +13,7 @@ import Textarea from "../../components/common/Textarea";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
 import ListRow from "../../components/common/ListRow";
+import PersonName from "../../components/common/PersonName";
 
 // "2026-10-25T14:30" in the reader's own time zone, for <input type="datetime-local">.
 export function toLocalInputValue(iso: string): string {
@@ -89,8 +90,7 @@ export default function PendingHoursCard() {
         <ListRow key={row.sessionId}>
           <div>
             <div style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)", fontWeight: "var(--font-weight-semibold)" }}>
-              {row.employeeName}
-              {row.siteName ? ` — ${row.siteName}` : ""}
+              <PersonName name={row.employeeName} url={row.avatarUrl}>{row.employeeName}{row.siteName ? ` — ${row.siteName}` : ""}</PersonName>
             </div>
             <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
               {t("pendingHours.summary", { clockIn: when(row.clockInAt), clockOut: when(row.clockOutAt) })}

@@ -16,6 +16,7 @@ import Toggle from "../../components/common/Toggle";
 import ListRow from "../../components/common/ListRow";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
+import PersonName from "../../components/common/PersonName";
 
 const KINDS: PermissionKind[] = ["late_arrival", "early_leave", "approved_overtime", "no_overtime"];
 
@@ -93,7 +94,7 @@ export default function PermissionsQueueCard() {
         <ListRow key={request.id}>
           <div>
             <div style={{ fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)" }}>
-              {request.employeeName} — {t(`permissions.kind.${request.kind}`)} · {day(request.workDate)}
+              <PersonName name={request.employeeName} url={request.avatarUrl}>{request.employeeName} — {t(`permissions.kind.${request.kind}`)}</PersonName> · {day(request.workDate)}
               {request.minutes ? ` · ${formatHm(request.minutes)}` : ""}
             </div>
             <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{request.reason}</div>
@@ -113,7 +114,7 @@ export default function PermissionsQueueCard() {
         <ListRow key={`${row.userId}-${row.day}`}>
           <div>
             <div style={{ fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)" }}>
-              {row.employeeName} — {t("permissions.overtimeWaiting", { time: formatHm(row.overtimePendingApprovalMinutes) })} · {day(row.day)}
+              <PersonName name={row.employeeName} url={row.avatarUrl} />{" "}— {t("permissions.overtimeWaiting", { time: formatHm(row.overtimePendingApprovalMinutes) })} · {day(row.day)}
             </div>
             <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t(`permissions.dayType.${row.dayType}`)}</div>
           </div>
