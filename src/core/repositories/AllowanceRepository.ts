@@ -32,6 +32,8 @@ export interface AllowanceEntry {
   // v2.3.43 step 4: the exact overtime minutes (the amount is rate x minutes / 60).
   overtimeMinutes: number;
   overtimeDays: number;
+  // v2.3.43 step 5: lines a manager changed during review - the value set and the value it replaced.
+  manualOverrides: Record<string, { value: number; original: number; reason?: string }>;
   // Owner 2026-10-20: overtime hours and extra days priced from the allowance prices.
   overtimeAmount: number;
   extraDaysAmount: number;
@@ -43,6 +45,20 @@ export interface AllowanceEntry {
   // Owner 2026-10-20: the sheet the day was sent in (decided with it, never alone).
   sheetId: string | null;
 }
+
+// The lines a manager can change during review, and the entry field each one shows.
+export const ALLOWANCE_LINES = ["meal", "expatriation", "transportation", "housing", "travel", "other", "overtime", "extraDays"] as const;
+export type AllowanceLine = (typeof ALLOWANCE_LINES)[number];
+export const LINE_FIELD: Record<AllowanceLine, keyof AllowanceEntry> = {
+  meal: "mealAllowance",
+  expatriation: "expatriationAllowance",
+  transportation: "transportationAllowance",
+  housing: "housingAllowance",
+  travel: "travelAllowance",
+  other: "otherAllowance",
+  overtime: "overtimeAmount",
+  extraDays: "extraDaysAmount",
+};
 
 export interface AllowanceSheet {
   id: string;
@@ -88,6 +104,7 @@ interface AllowanceEntryRow {
   overtime_hours: number;
   overtime_days: number;
   overtime_minutes?: number;
+  manual_overrides?: Record<string, { value: number; original: number; reason?: string }> | null;
   worked_minutes?: number;
   overtime_amount?: number;
   extra_days_amount?: number;
@@ -127,6 +144,7 @@ function mapEntryRow(row: AllowanceEntryRow): AllowanceEntry {
     overtimeHours: Number(row.overtime_hours),
     overtimeMinutes: Number(row.overtime_minutes ?? Number(row.overtime_hours) * 60),
     overtimeDays: Number(row.overtime_days),
+    manualOverrides: row.manual_overrides ?? {},
     overtimeAmount: Number(row.overtime_amount ?? 0),
     extraDaysAmount: Number(row.extra_days_amount ?? 0),
     status: row.status,
@@ -166,7 +184,7 @@ function localDate(iso: string): string {
 }
 
 const ENTRY_SELECT =
-  "id, user_id, entry_date, meal_allowance, expatriation_allowance, transportation_allowance, housing_allowance, travel_allowance, other_allowance, other_allowance_note, overtime_hours, overtime_minutes, worked_minutes, overtime_days, overtime_amount, extra_days_amount, status, submitted_at, approved_at, review_notes, sheet_id, users!allowance_entries_user_id_fkey(full_name), attendance_sessions(clock_in_at, clock_out_at, manual_location_label, sites!attendance_sessions_site_id_fkey(name))";
+  "id, user_id, entry_date, meal_allowance, expatriation_allowance, transportation_allowance, housing_allowance, travel_allowance, other_allowance, other_allowance_note, overtime_hours, overtime_minutes, worked_minutes, manual_overrides, overtime_days, overtime_amount, extra_days_amount, status, submitted_at, approved_at, review_notes, sheet_id, users!allowance_entries_user_id_fkey(full_name), attendance_sessions(clock_in_at, clock_out_at, manual_location_label, sites!attendance_sessions_site_id_fkey(name))";
 
 // PROSM Time - Allowances (2026-09-02 plan). Reads are RLS-scoped
 // (self always; a Manager's own managed sites' people; everyone for
@@ -306,6 +324,37 @@ class AllowanceRepository {
           return { id: row.id, userId: row.user_id, userFullName: user?.full_name ?? "", periodStart: row.period_start, periodEnd: row.period_end, days: row.days, total: Number(row.total), status: row.status, submittedAt: row.submitted_at };
         }),
       );
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Allowances service unavailable.");
+    }
+  }
+
+  // v2.3.43 step 5 (item 21): the days of one sheet, for editing during review.
+  async listSheetEntries(sheetId: string): Promise<ServiceResult<AllowanceEntry[]>> {
+    try {
+      const { data, error } = await this.client.from("allowance_entries").select(ENTRY_SELECT).eq("sheet_id", sheetId).order("entry_date", { ascending: true });
+      if (error) return createError(error.message);
+      return createSuccess((data ?? []).map(mapEntryRow));
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Allowances service unavailable.");
+    }
+  }
+
+  // One line of a day in a sheet under review (reason required; audited on the server).
+  async adjustEntry(entryId: string, field: AllowanceLine, value: number, reason: string): Promise<ServiceResult<{ total: number }>> {
+    try {
+      const { data, error } = await this.client.rpc("adjust_prosm_time_allowance_entry", { p_entry_id: entryId, p_field: field, p_value: value, p_reason: reason });
+      if (error) return createError(error.message);
+      return createSuccess({ total: Number((data as { total?: number } | null)?.total ?? 0) });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Allowances service unavailable.");
+    }
+  }
+
+  async reopenSheet(sheetId: string, reason: string): Promise<ServiceResult> {
+    try {
+      const { error } = await this.client.rpc("reopen_prosm_time_allowance_sheet", { p_sheet_id: sheetId, p_reason: reason });
+      return error ? createError(error.message) : createSuccess();
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Allowances service unavailable.");
     }

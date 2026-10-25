@@ -178,5 +178,33 @@
       "per_hour": "Pro Arbeitsstunde (minutengenau)",
       "per_extra_day": "Pro Zusatztag (Ruhe-/Feiertag)"
     }
+  },
+  "sheetEdit": {
+    "action": "Zulagen bearbeiten",
+    "title": "Zulagen von {{name}} bearbeiten",
+    "hint": "Ändern Sie eine Zeile vor der Genehmigung. Ein Grund ist Pflicht und jede Änderung wird protokolliert.",
+    "line": {
+      "meal": "Verpflegung",
+      "expatriation": "Auslandszulage",
+      "transportation": "Fahrt",
+      "housing": "Unterkunft",
+      "travel": "Reise",
+      "other": "Sonstiges",
+      "overtime": "Überstunden",
+      "extraDays": "Zusatztage"
+    },
+    "changed": "geändert",
+    "computed": "berechnet: {{value}}",
+    "total": "Summe: {{total}}",
+    "reasonLabel": "Grund (Pflicht)",
+    "reasonRequired": "Bitte einen Grund angeben.",
+    "invalidValue": "Werte müssen Zahlen ab 0 sein.",
+    "save_one": "1 Änderung speichern",
+    "save_other": "{{count}} Änderungen speichern",
+    "approvedTitle": "Kürzlich genehmigte Abrechnungen",
+    "approvedHint": "Eine genehmigte Abrechnung wird nicht bearbeitet; zum Korrigieren erneut öffnen.",
+    "reopenAction": "Wieder öffnen",
+    "reopenTitle": "Genehmigte Abrechnung wieder öffnen",
+    "reopenHint": "Die Abrechnung geht zurück in die Prüfung. Die Person wird informiert."
   }
 }

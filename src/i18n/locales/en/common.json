@@ -32,7 +32,7 @@
     "aReasonRequired": "A reason is required.",
     "emailAlreadyExistsInOrganization": "A user with this email already exists in this organization.",
     "nameAlreadyExistsInOrganization": "A user with this name already exists in this organization. Please use a different name to avoid confusion.",
-    "allowanceEntryNotFound": "This allowance entry could not be found.",
+    "allowanceEntryNotFound": "This allowance day was not found.",
     "allowancesApproveAuthorityRequired": "You don't have authority to approve allowances for this employee.",
     "attendanceEventNotFound": "This attendance event could not be found.",
     "attendanceNotAllowedAtSite": "Attendance isn't allowed at this site.",
@@ -228,7 +228,12 @@
     "periodUpToYear": "Choose a period of up to a year.",
     "basisOwnerOnly": "Only the Owner sets how an allowance is calculated.",
     "invalidAllowance": "Unknown allowance.",
-    "invalidCalculationBasis": "Choose a valid calculation."
+    "invalidCalculationBasis": "Choose a valid calculation.",
+    "allowancesEditInReviewRequired": "You don't have permission to edit allowances during review.",
+    "cannotEditOwnAllowances": "You cannot edit your own allowances in review.",
+    "allowanceNotInReview": "This day is not in a sheet waiting for approval.",
+    "allowancesReopenRequired": "You don't have permission to reopen an approved sheet.",
+    "onlyApprovedSheetReopen": "Only an approved sheet can be reopened."
   },
   "pageLoad": {
     "title": "This page needs a connection",

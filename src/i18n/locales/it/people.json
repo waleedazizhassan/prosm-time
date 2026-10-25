@@ -43,7 +43,9 @@
     "attendance.override_block": "Timbrare nonostante un blocco della sede (registrato)",
     "sessions.review_pending": "Verificare ore in sospeso e prolungare turni",
     "settings.session_policy": "Avviso e chiusura dei turni aperti",
-    "calendar.manage": "Gestire calendario e festività"
+    "calendar.manage": "Gestire calendario e festività",
+    "allowances.edit_during_review": "Modificare indennità in verifica",
+    "allowances.reopen_approved": "Riaprire fogli approvati"
   },
   "invite": {
     "actionLabel": "Invita dipendente",

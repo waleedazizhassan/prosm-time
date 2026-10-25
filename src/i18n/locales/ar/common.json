@@ -32,7 +32,7 @@
     "aReasonRequired": "السبب مطلوب.",
     "emailAlreadyExistsInOrganization": "يوجد بالفعل مستخدم بهذا البريد الإلكتروني في هذه المؤسسة.",
     "nameAlreadyExistsInOrganization": "يوجد بالفعل مستخدم بهذا الاسم في هذه المؤسسة. الرجاء استخدام اسم مختلف لتجنب الالتباس.",
-    "allowanceEntryNotFound": "تعذر العثور على قيد البدل هذا.",
+    "allowanceEntryNotFound": "يوم البدلات غير موجود.",
     "allowancesApproveAuthorityRequired": "ليس لديك صلاحية اعتماد بدلات هذا الموظف.",
     "attendanceEventNotFound": "تعذر العثور على حدث الحضور هذا.",
     "attendanceNotAllowedAtSite": "تسجيل الحضور غير مسموح في هذا الموقع.",
@@ -228,7 +228,12 @@
     "periodUpToYear": "اختر فترة حتى سنة.",
     "basisOwnerOnly": "الأونر فقط يحدد طريقة حساب البدل.",
     "invalidAllowance": "بدل غير معروف.",
-    "invalidCalculationBasis": "اختر طريقة حساب صحيحة."
+    "invalidCalculationBasis": "اختر طريقة حساب صحيحة.",
+    "allowancesEditInReviewRequired": "ليست لديك صلاحية تعديل البدلات أثناء المراجعة.",
+    "cannotEditOwnAllowances": "لا يمكنك تعديل بدلاتك أنت أثناء المراجعة.",
+    "allowanceNotInReview": "هذا اليوم ليس في شيت ينتظر الاعتماد.",
+    "allowancesReopenRequired": "ليست لديك صلاحية إعادة فتح شيت معتمد.",
+    "onlyApprovedSheetReopen": "لا يُعاد فتح إلا الشيت المعتمد."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

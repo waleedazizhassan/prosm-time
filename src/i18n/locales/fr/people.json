@@ -43,7 +43,9 @@
     "attendance.override_block": "Pointer malgré un blocage du site (journalisé)",
     "sessions.review_pending": "Vérifier les heures en attente et prolonger",
     "settings.session_policy": "Alerte et fermeture des sessions ouvertes",
-    "calendar.manage": "Gérer le calendrier et les jours fériés"
+    "calendar.manage": "Gérer le calendrier et les jours fériés",
+    "allowances.edit_during_review": "Modifier les indemnités en vérification",
+    "allowances.reopen_approved": "Rouvrir une feuille approuvée"
   },
   "invite": {
     "actionLabel": "Inviter un employé",

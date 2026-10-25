@@ -32,7 +32,7 @@
     "aReasonRequired": "Ein Grund ist erforderlich.",
     "emailAlreadyExistsInOrganization": "In dieser Organisation existiert bereits ein Benutzer mit dieser E-Mail-Adresse.",
     "nameAlreadyExistsInOrganization": "In dieser Organisation existiert bereits ein Benutzer mit diesem Namen. Bitte verwenden Sie einen anderen Namen, um Verwechslungen zu vermeiden.",
-    "allowanceEntryNotFound": "Dieser Zulageneintrag wurde nicht gefunden.",
+    "allowanceEntryNotFound": "Tag nicht gefunden.",
     "allowancesApproveAuthorityRequired": "Sie sind nicht berechtigt, Zulagen für diesen Mitarbeiter zu genehmigen.",
     "attendanceEventNotFound": "Dieses Anwesenheitsereignis wurde nicht gefunden.",
     "attendanceNotAllowedAtSite": "Anwesenheitserfassung ist an diesem Standort nicht zulässig.",
@@ -228,7 +228,12 @@
     "periodUpToYear": "Bitte einen Zeitraum von höchstens einem Jahr wählen.",
     "basisOwnerOnly": "Nur der Inhaber legt die Berechnung fest.",
     "invalidAllowance": "Unbekannte Zulage.",
-    "invalidCalculationBasis": "Bitte eine gültige Berechnung wählen."
+    "invalidCalculationBasis": "Bitte eine gültige Berechnung wählen.",
+    "allowancesEditInReviewRequired": "Sie dürfen Zulagen in der Prüfung nicht bearbeiten.",
+    "cannotEditOwnAllowances": "Sie können Ihre eigenen Zulagen nicht bearbeiten.",
+    "allowanceNotInReview": "Dieser Tag ist in keiner offenen Abrechnung.",
+    "allowancesReopenRequired": "Sie dürfen genehmigte Abrechnungen nicht wieder öffnen.",
+    "onlyApprovedSheetReopen": "Nur genehmigte Abrechnungen können wieder geöffnet werden."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

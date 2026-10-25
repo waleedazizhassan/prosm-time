@@ -178,5 +178,33 @@
       "per_hour": "Per ora lavorata (al minuto)",
       "per_extra_day": "Per giorno extra (riposo / festività)"
     }
+  },
+  "sheetEdit": {
+    "action": "Modifica indennità",
+    "title": "Modifica le indennità di {{name}}",
+    "hint": "Modifica una riga prima di approvare. Il motivo è obbligatorio e ogni modifica viene registrata.",
+    "line": {
+      "meal": "Pasto",
+      "expatriation": "Trasferta estera",
+      "transportation": "Trasporto",
+      "housing": "Alloggio",
+      "travel": "Viaggio",
+      "other": "Altro",
+      "overtime": "Straordinari",
+      "extraDays": "Giorni extra"
+    },
+    "changed": "modificato",
+    "computed": "calcolato: {{value}}",
+    "total": "Totale: {{total}}",
+    "reasonLabel": "Motivo (obbligatorio)",
+    "reasonRequired": "Scrivi il motivo.",
+    "invalidValue": "I valori devono essere numeri da 0 in su.",
+    "save_one": "Salva 1 modifica",
+    "save_other": "Salva {{count}} modifiche",
+    "approvedTitle": "Fogli approvati di recente",
+    "approvedHint": "Un foglio approvato non si modifica; per correggerlo riaprilo.",
+    "reopenAction": "Riapri",
+    "reopenTitle": "Riapri un foglio approvato",
+    "reopenHint": "Il foglio torna in verifica. Il dipendente viene avvisato."
   }
 }

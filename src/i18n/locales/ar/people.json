@@ -43,7 +43,9 @@
     "attendance.override_block": "تجاوز حجب تسجيل الحضور (مع تسجيل في السجل)",
     "sessions.review_pending": "مراجعة الساعات المعلّقة وتمديد الجلسات",
     "settings.session_policy": "تنبيه وإغلاق الجلسات المفتوحة",
-    "calendar.manage": "إدارة التقويم والعطلات"
+    "calendar.manage": "إدارة التقويم والعطلات",
+    "allowances.edit_during_review": "تعديل البدلات أثناء المراجعة",
+    "allowances.reopen_approved": "إعادة فتح شيت بدلات معتمد"
   },
   "invite": {
     "actionLabel": "دعوة موظف",

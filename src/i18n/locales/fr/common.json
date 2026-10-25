@@ -32,7 +32,7 @@
     "aReasonRequired": "Un motif est requis.",
     "emailAlreadyExistsInOrganization": "Un utilisateur avec cet e-mail existe déjà dans cette organisation.",
     "nameAlreadyExistsInOrganization": "Un utilisateur portant ce nom existe déjà dans cette organisation. Veuillez utiliser un nom différent pour éviter toute confusion.",
-    "allowanceEntryNotFound": "Cette entrée d'indemnité est introuvable.",
+    "allowanceEntryNotFound": "Jour introuvable.",
     "allowancesApproveAuthorityRequired": "Vous n'avez pas l'autorité pour approuver les indemnités de cet employé.",
     "attendanceEventNotFound": "Cet événement de présence est introuvable.",
     "attendanceNotAllowedAtSite": "La présence n'est pas autorisée sur ce site.",
@@ -228,7 +228,12 @@
     "periodUpToYear": "Choisissez une période d'un an au plus.",
     "basisOwnerOnly": "Seul le propriétaire choisit le mode de calcul.",
     "invalidAllowance": "Indemnité inconnue.",
-    "invalidCalculationBasis": "Choisissez un calcul valide."
+    "invalidCalculationBasis": "Choisissez un calcul valide.",
+    "allowancesEditInReviewRequired": "Vous n'avez pas le droit de modifier les indemnités en vérification.",
+    "cannotEditOwnAllowances": "Vous ne pouvez pas modifier vos propres indemnités.",
+    "allowanceNotInReview": "Ce jour n'est pas dans une feuille en attente.",
+    "allowancesReopenRequired": "Vous n'avez pas le droit de rouvrir une feuille approuvée.",
+    "onlyApprovedSheetReopen": "Seule une feuille approuvée peut être rouverte."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

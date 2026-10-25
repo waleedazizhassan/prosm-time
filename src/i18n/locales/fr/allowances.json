@@ -178,5 +178,33 @@
       "per_hour": "Par heure travaillée (à la minute)",
       "per_extra_day": "Par jour supplémentaire (repos / férié)"
     }
+  },
+  "sheetEdit": {
+    "action": "Modifier les indemnités",
+    "title": "Modifier les indemnités de {{name}}",
+    "hint": "Modifiez une ligne avant d'approuver. Le motif est obligatoire et chaque changement est enregistré.",
+    "line": {
+      "meal": "Repas",
+      "expatriation": "Expatriation",
+      "transportation": "Transport",
+      "housing": "Logement",
+      "travel": "Voyage",
+      "other": "Autre",
+      "overtime": "Heures sup.",
+      "extraDays": "Jours supp."
+    },
+    "changed": "modifié",
+    "computed": "calculé : {{value}}",
+    "total": "Total de la feuille : {{total}}",
+    "reasonLabel": "Motif (obligatoire)",
+    "reasonRequired": "Indiquez le motif.",
+    "invalidValue": "Les valeurs doivent être des nombres positifs.",
+    "save_one": "Enregistrer 1 modification",
+    "save_other": "Enregistrer {{count}} modifications",
+    "approvedTitle": "Feuilles approuvées récemment",
+    "approvedHint": "Une feuille approuvée ne se modifie pas ; rouvrez-la pour la corriger.",
+    "reopenAction": "Rouvrir",
+    "reopenTitle": "Rouvrir une feuille approuvée",
+    "reopenHint": "La feuille revient en vérification. L'employé est prévenu."
   }
 }

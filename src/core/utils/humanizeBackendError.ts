@@ -277,4 +277,10 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "ONLY THE OWNER SETS HOW AN ALLOWANCE IS CALCULATED": "basisOwnerOnly",
   "INVALID ALLOWANCE": "invalidAllowance",
   "INVALID CALCULATION BASIS": "invalidCalculationBasis",
+  // v2.3.43 step 5: editing allowances during review, reopening.
+  "ALLOWANCES.EDIT_DURING_REVIEW AUTHORITY REQUIRED": "allowancesEditInReviewRequired",
+  "YOU CANNOT EDIT YOUR OWN ALLOWANCES IN REVIEW": "cannotEditOwnAllowances",
+  "THIS ALLOWANCE ENTRY IS NOT IN REVIEW": "allowanceNotInReview",
+  "ALLOWANCES.REOPEN_APPROVED AUTHORITY REQUIRED": "allowancesReopenRequired",
+  "ONLY AN APPROVED SHEET CAN BE REOPENED": "onlyApprovedSheetReopen",
 };

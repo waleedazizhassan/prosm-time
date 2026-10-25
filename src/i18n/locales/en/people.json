@@ -43,7 +43,9 @@
     "attendance.override_block": "Clock in past a site block (audited)",
     "sessions.review_pending": "Review pending hours and extend shifts",
     "settings.session_policy": "Open-shift alert and automatic close",
-    "calendar.manage": "Manage the calendar and holidays"
+    "calendar.manage": "Manage the calendar and holidays",
+    "allowances.edit_during_review": "Edit allowances during review",
+    "allowances.reopen_approved": "Reopen approved allowance sheets"
   },
   "invite": {
     "actionLabel": "Invite employee",

@@ -25,6 +25,7 @@ import allowancesHeaderImage from "../../assets/illustrations/allowances.svg";
 import PageBanner from "../../components/common/PageBanner";
 import Toggle from "../../components/common/Toggle";
 import HintText from "../../components/common/HintText";
+import AllowanceSheetEditModal from "./AllowanceSheetEditModal";
 import DateRange from "../../components/common/DateRange";
 
 const ALL_EMPLOYEES = "";
@@ -382,6 +383,39 @@ export default function AllowancesPage() {
     await Promise.all([loadSheets(), load()]);
   };
 
+  // v2.3.43 step 5 (item 21): edit lines during review; reopen an approved sheet.
+  const canEditInReview = hasPermission("allowances.edit_during_review");
+  const canReopen = hasPermission("allowances.reopen_approved");
+  const [editSheet, setEditSheet] = useState<AllowanceSheet | null>(null);
+  const [approvedSheets, setApprovedSheets] = useState<AllowanceSheet[]>([]);
+  const [reopenTarget, setReopenTarget] = useState<AllowanceSheet | null>(null);
+  const [reopenReason, setReopenReason] = useState("");
+  const [reopenError, setReopenError] = useState("");
+  const loadApprovedSheets = useCallback(async () => {
+    if (!canReopen) return;
+    const result = await AllowanceRepository.listSheets("approved");
+    setApprovedSheets(result.success ? (result.data ?? []).filter((sheet) => sheet.userId !== profile?.id).slice(-10).reverse() : []);
+  }, [canReopen, profile?.id]);
+  useEffect(() => {
+    loadApprovedSheets();
+  }, [loadApprovedSheets]);
+  const handleReopen = async () => {
+    if (!reopenTarget) return;
+    if (!reopenReason.trim()) {
+      setReopenError(t("sheetEdit.reasonRequired"));
+      return;
+    }
+    setSheetBusy(reopenTarget.id);
+    const result = await AllowanceRepository.reopenSheet(reopenTarget.id, reopenReason.trim());
+    setSheetBusy(null);
+    if (!result.success) {
+      setReopenError(humanizeBackendError(result.message, t) ?? t("reviewError"));
+      return;
+    }
+    setReopenTarget(null);
+    await Promise.all([loadSheets(), loadApprovedSheets(), load()]);
+  };
+
   const openSheet = (sheet: AllowanceSheet) => {
     setStartDate(sheet.periodStart);
     setEndDate(sheet.periodEnd);
@@ -493,6 +527,11 @@ export default function AllowancesPage() {
                   <Button size="sm" variant="ghost" onClick={() => openSheet(sheet)}>
                     {t("sheets.openAction")}
                   </Button>
+                  {canEditInReview ? (
+                    <Button size="sm" variant="ghost" onClick={() => setEditSheet(sheet)}>
+                      {t("sheetEdit.action")}
+                    </Button>
+                  ) : null}
                   <Button size="sm" variant="danger" onClick={() => decideSheet(sheet, "rejected")} loading={sheetBusy === sheet.id}>
                     {t("detail.rejectAction")}
                   </Button>
@@ -505,6 +544,39 @@ export default function AllowancesPage() {
           </div>
         </Card>
       ) : null}
+
+      {approvedSheets.length > 0 ? (
+        <Card title={t("sheetEdit.approvedTitle")} subtitle={t("sheetEdit.approvedHint")}>
+          {approvedSheets.map((sheet) => (
+            <div key={sheet.id} style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "var(--space-2)", padding: "var(--space-2) 0", borderBottom: "1px solid var(--border-light)" }}>
+              <span style={{ fontSize: "var(--font-sm)" }}>
+                <strong>{sheet.userFullName}</strong> ·{" "}
+                {t("sheets.line", { from: formatDateOnly(sheet.periodStart, i18n.language), to: formatDateOnly(sheet.periodEnd, i18n.language), days: sheet.days, total: sheet.total.toLocaleString(i18n.language) })}
+              </span>
+              <Button size="sm" variant="ghost" onClick={() => { setReopenTarget(sheet); setReopenReason(""); setReopenError(""); }}>
+                {t("sheetEdit.reopenAction")}
+              </Button>
+            </div>
+          ))}
+        </Card>
+      ) : null}
+
+      <AllowanceSheetEditModal sheet={editSheet} onClose={() => setEditSheet(null)} onChanged={() => void Promise.all([loadSheets(), load()])} />
+
+      <Modal
+        isOpen={Boolean(reopenTarget)}
+        onClose={() => setReopenTarget(null)}
+        title={t("sheetEdit.reopenTitle")}
+        footer={
+          <Button variant="danger" onClick={handleReopen} loading={Boolean(reopenTarget) && sheetBusy === reopenTarget?.id}>
+            {t("sheetEdit.reopenAction")}
+          </Button>
+        }
+      >
+        <HintText small>{t("sheetEdit.reopenHint")}</HintText>
+        <Textarea label={t("sheetEdit.reasonLabel")} name="reopenReason" value={reopenReason} onChange={(event) => setReopenReason(event.target.value)} />
+        <ErrorText>{reopenError}</ErrorText>
+      </Modal>
 
       <Modal
         isOpen={combinedOpen}
