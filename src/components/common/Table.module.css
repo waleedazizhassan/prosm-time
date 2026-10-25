@@ -68,3 +68,57 @@
 .emptyCell {
   padding: var(--space-3);
 }
+
+/* v2.3.43 step 16 (item 26): on a phone each row becomes a card - the
+   column name beside each value - instead of a table scrolling sideways. */
+@media (max-width: 767px) {
+  .tableScroll {
+    border: 0;
+    background: transparent;
+    overflow-x: visible;
+  }
+
+  .table {
+    min-width: 0;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table,
+  .table tbody,
+  .row,
+  .row > .cell {
+    display: block;
+    width: 100%;
+  }
+
+  .row {
+    margin-bottom: var(--space-3);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    background: var(--surface-card);
+  }
+
+  .row > .cell {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+    border-bottom: 1px solid var(--border-light);
+    text-align: end;
+  }
+
+  .row > .cell::before {
+    content: attr(data-label);
+    flex-shrink: 0;
+    font-size: var(--font-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-secondary);
+    text-align: start;
+  }
+
+  .row > .cell:not([data-label])::before {
+    content: none;
+  }
+}

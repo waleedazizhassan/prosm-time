@@ -104,17 +104,17 @@
   align-items: center;
   gap: var(--space-2);
   width: 100%;
-  min-height: 34px;
+  /* v2.3.43 step 16 (item 26): group titles as large as their items (>= 14px),
+     semibold, in the main text colour (contrast AA in both themes), a 40px row. */
+  min-height: 40px;
   padding: 0 var(--space-3);
   border: none;
   border-radius: var(--radius-sm);
   background: transparent;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   font: inherit;
-  font-size: var(--font-xs);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
   text-align: start;
   cursor: pointer;
 }
@@ -126,6 +126,7 @@
 
 .branchCurrent {
   color: var(--brand-primary);
+  background: var(--brand-primary-subtle, var(--surface-hover));
 }
 
 .branchChevron {
@@ -148,10 +149,11 @@
   min-width: 20px;
   padding: 0 6px;
   border-radius: var(--radius-full);
-  background: var(--surface-sunken);
-  color: var(--text-tertiary);
-  font-size: 11px;
-  line-height: 18px;
+  background: var(--brand-primary);
+  color: var(--text-on-brand, #fff);
+  font-size: 12px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 20px;
   text-align: center;
 }
 

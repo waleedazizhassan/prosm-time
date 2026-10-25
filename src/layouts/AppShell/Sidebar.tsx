@@ -8,7 +8,6 @@ import { useAppLayout } from "./LayoutContext";
 import { NAV_ITEMS, NAV_SECTION_ORDER } from "./navigation";
 import UserMenu from "./UserMenu";
 import SidebarRadio from "./SidebarRadio";
-import { APP_VERSION } from "../../core/appVersion";
 import styles from "./Sidebar.module.css";
 
 const OPEN_SECTIONS_KEY = "prosm_time_sidebar_open_v1";
@@ -169,7 +168,7 @@ export default function Sidebar() {
             return (
               <div key={group.section} className={styles.navSection}>
                 <button type="button" className={[styles.branch, holdsCurrent ? styles.branchCurrent : ""].filter(Boolean).join(" ")} aria-expanded={open} onClick={() => toggleSection(group.section, !open)}>
-                  <ChevronDown size={14} className={[styles.branchChevron, open ? styles.branchChevronOpen : ""].filter(Boolean).join(" ")} />
+                  <ChevronDown size={18} className={[styles.branchChevron, open ? styles.branchChevronOpen : ""].filter(Boolean).join(" ")} />
                   <span>{t(`sections.${group.section}`)}</span>
                   <span className={styles.branchCount}>{group.items.length}</span>
                 </button>
@@ -189,7 +188,7 @@ export default function Sidebar() {
         </div>
 
         <UserMenu collapsed={sidebarCollapsed} />
-        <p className={styles.versionLabel}>{t("common:versionLabel", { version: APP_VERSION })}</p>
+        {/* v2.3.43 step 16 (item 26): the version is on the Help page (and Settings), not here. */}
       </aside>
     </>
   );

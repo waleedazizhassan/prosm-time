@@ -167,5 +167,8 @@
     "body": "For product help or support, contact us at:",
     "infoLabel": "General inquiries:",
     "supportLabel": "Support:"
+  },
+  "about": {
+    "title": "About the app"
   }
 }

@@ -25,7 +25,10 @@ function HeaderGreeting() {
 
   return (
     <div className={styles.greeting} data-period={period}>
-      <Icon size={16} className={styles.icon} aria-hidden="true" />
+      {/* v2.3.43 (owner 2026-10-25): the time-of-day icon in its own soft round badge. */}
+      <span className={styles.iconBadge} aria-hidden="true">
+        <Icon size={15} strokeWidth={2.25} className={styles.icon} />
+      </span>
       <span className={styles.text}>
         {label}
         {displayName ? `, ${displayName}` : ""}

@@ -69,7 +69,7 @@ export default function Table<T>({ columns, data, getRowId, loading = false, emp
                   style={onRowClick ? { cursor: "pointer" } : undefined}
                 >
                   {columns.map((column) => (
-                    <td key={column.key} className={styles.cell}>
+                    <td key={column.key} className={styles.cell} data-label={typeof column.header === "string" ? column.header : undefined}>
                       {column.render(row)}
                     </td>
                   ))}

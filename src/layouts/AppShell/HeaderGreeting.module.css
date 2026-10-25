@@ -15,6 +15,48 @@
   flex-shrink: 0;
 }
 
+.iconBadge {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  box-shadow: 0 0 0 1px rgba(180, 83, 9, 0.18), 0 2px 6px rgba(180, 83, 9, 0.18);
+}
+
+.greeting[data-period="afternoon"] .iconBadge {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  box-shadow: 0 0 0 1px rgba(30, 111, 217, 0.18), 0 2px 6px rgba(30, 111, 217, 0.18);
+}
+
+.greeting[data-period="evening"] .iconBadge {
+  background: linear-gradient(135deg, #ede9fe, #fbcfe8);
+  box-shadow: 0 0 0 1px rgba(124, 58, 237, 0.18), 0 2px 6px rgba(124, 58, 237, 0.18);
+}
+
+.greeting[data-period="night"] .iconBadge {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.25), 0 2px 6px rgba(15, 23, 42, 0.3);
+}
+
+[data-theme="dark"] .iconBadge {
+  background: rgba(251, 191, 36, 0.16);
+  box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.3);
+}
+
+[data-theme="dark"] .greeting[data-period="afternoon"] .iconBadge {
+  background: rgba(96, 165, 250, 0.16);
+  box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.3);
+}
+
+[data-theme="dark"] .greeting[data-period="evening"] .iconBadge {
+  background: rgba(167, 139, 250, 0.16);
+  box-shadow: 0 0 0 1px rgba(167, 139, 250, 0.3);
+}
+
 .icon {
   flex-shrink: 0;
 
@@ -30,7 +72,7 @@
 }
 
 .greeting[data-period="night"] .icon {
-  color: var(--text-secondary);
+  color: #fde68a;
 }
 
 [data-theme="dark"] .greeting[data-period="morning"] .icon {

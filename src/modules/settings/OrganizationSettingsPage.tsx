@@ -1,4 +1,5 @@
 import { Navigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { useAuth } from "../../core/context/AuthContext";
 
@@ -12,6 +13,7 @@ import settingsHeaderImage from "../../assets/illustrations/settings.svg";
 import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
 import PageBanner from "../../components/common/PageBanner";
+import { APP_VERSION } from "../../core/appVersion";
 
 // PROSM Time - § live UX review, user-directed: "a professional
 // reorganization" - org-wide settings (today: the no-site geofence
@@ -23,6 +25,7 @@ import PageBanner from "../../components/common/PageBanner";
 // Dashboard cards per an earlier pass) - a genuinely good existing
 // home, not something misplaced.
 export default function OrganizationSettingsPage() {
+  const { t } = useTranslation("settings");
   const { profile, hasPermission } = useAuth();
   const isOwner = Boolean(profile?.isOwner);
 
@@ -49,6 +52,7 @@ export default function OrganizationSettingsPage() {
           <SiteDefaultsSettingsCard />
         </>
       ) : null}
+      <p style={{ margin: 0, fontSize: "var(--font-xs)", color: "var(--text-secondary)", textAlign: "center" }}>{t("common:versionLabel", { version: APP_VERSION })}</p>
     </PageShell>
   );
 }

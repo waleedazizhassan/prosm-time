@@ -25,10 +25,14 @@ const COLLAPSE_STORAGE_KEY = "prosm_time_sidebar_collapsed";
 export function LayoutProvider({ children }: { children: ReactNode }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
     try {
-      return localStorage.getItem(COLLAPSE_STORAGE_KEY) === "true";
+      const stored = localStorage.getItem(COLLAPSE_STORAGE_KEY);
+      if (stored !== null) return stored === "true";
     } catch {
-      return false;
+      // no storage: fall through to the screen size
     }
+    // v2.3.43 step 16 (item 26): open on a computer, icons only on a tablet
+    // (the phone uses the sliding drawer), until the person chooses.
+    return typeof window !== "undefined" && window.innerWidth >= 768 && window.innerWidth < 1280;
   });
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);

@@ -6,6 +6,7 @@ import helpHeaderImage from "../../assets/illustrations/help.svg";
 import PageBanner from "../../components/common/PageBanner";
 import LegalLinks from "../legal/LegalLinks";
 import HintText from "../../components/common/HintText";
+import { APP_VERSION } from "../../core/appVersion";
 
 // PROSM Time WP-21/§32 - "A dedicated Help area must exist, providing:
 // product help, basic usage guidance, FAQ where implemented, support
@@ -84,6 +85,10 @@ export default function HelpPage() {
             </a>
           </span>
         </div>
+      </Card>
+      {/* v2.3.43 step 16 (item 26): the version lives here (and in Settings), for support - not in the sidebar. */}
+      <Card title={t("about.title")}>
+        <p style={{ margin: 0, fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("common:versionLabel", { version: APP_VERSION })}</p>
       </Card>
     </PageShell>
   );
