@@ -16,3 +16,22 @@
   background: var(--danger-surface, #f8d7da);
   color: var(--danger-text, #842029);
 }
+
+/* v2.3.54: the trial banner's close button */
+.close {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.close:hover {
+  background: rgba(0, 0, 0, 0.08);
+}

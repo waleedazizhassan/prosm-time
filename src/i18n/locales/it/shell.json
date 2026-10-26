@@ -277,7 +277,10 @@
   },
   "trial": {
     "banner_one": "Versione di prova: 1 giorno rimasto (termina il {{date}}). I tuoi dati restano conservati - per continuare, acquista un codice di attivazione:",
-    "banner_other": "Versione di prova: {{count}} giorni rimasti (termina il {{date}}). I tuoi dati restano conservati - per continuare, acquista un codice di attivazione:"
+    "banner_other": "Versione di prova: {{count}} giorni rimasti (termina il {{date}}). I tuoi dati restano conservati - per continuare, acquista un codice di attivazione:",
+    "close": "Nascondi",
+    "footer_one": "Prova · 1 giorno rimasto",
+    "footer_other": "Prova · {{count}} giorni rimasti"
   },
   "offlineSync": {
     "waiting_one": "1 timbratura attende la connessione - verrà inviata automaticamente.",

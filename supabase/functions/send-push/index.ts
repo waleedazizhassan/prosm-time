@@ -14,6 +14,8 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
 import { localizePush } from "../_shared/localizePush.ts";
+import { sendEmail } from "../_shared/emailService.ts";
+import { renderLeaveEmails, type LeaveEmailData } from "../_shared/leaveEmail.ts";
 
 interface ServiceAccount {
   project_id: string;
@@ -81,8 +83,24 @@ serve(async (request: Request) => {
     // Service role only: anyone else gets "permission denied" here.
     const { data: message, error } = await client.rpc("get_prosm_time_push_message", { p_notification_id: notificationId });
     if (error) return errorResponse("This endpoint requires the service role key.", 401, "UNAUTHORIZED");
+    // v2.3.54 (owner 2026-10-26): a leave request and its answer also go by
+    // email, between the requester and whoever answered; an email that fails
+    // never stops the push.
+    let emailed = 0;
+    try {
+      const { data: leaveEmail } = await client.rpc("get_prosm_time_leave_email", { p_notification_id: notificationId });
+      if (leaveEmail) {
+        for (const email of renderLeaveEmails(leaveEmail as LeaveEmailData)) {
+          const result = await sendEmail({ ...email, supabase: client, organizationId: (leaveEmail as LeaveEmailData).organizationId });
+          if (result.sent) emailed += 1;
+        }
+      }
+    } catch {
+      // the email relay is a soft dependency (emailService.ts)
+    }
+
     const devices: { token: string; language: string }[] = message?.devices ?? [];
-    if (!message || devices.length === 0) return successResponse({ sent: 0 });
+    if (!message || devices.length === 0) return successResponse({ sent: 0, emailed });
 
     const rawAccount = Deno.env.get("FCM_SERVICE_ACCOUNT");
     if (!rawAccount) return successResponse({ sent: 0, skipped: "FCM_SERVICE_ACCOUNT is not set" });
@@ -141,7 +159,7 @@ serve(async (request: Request) => {
     }
     if (gone.length > 0) await client.rpc("forget_prosm_time_push_tokens", { p_tokens: gone });
 
-    return successResponse({ sent, forgotten: gone.length });
+    return successResponse({ sent, forgotten: gone.length, emailed });
   } catch (error: any) {
     return errorResponse(error?.message ?? "Push service unavailable.", 500, "INTERNAL_ERROR");
   }

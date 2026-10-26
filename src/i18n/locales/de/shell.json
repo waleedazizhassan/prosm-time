@@ -277,7 +277,10 @@
   },
   "trial": {
     "banner_one": "Demoversion: noch 1 Tag (endet {{date}}). Ihre Daten bleiben erhalten - zum Fortfahren einen Aktivierungscode kaufen:",
-    "banner_other": "Demoversion: noch {{count}} Tage (endet {{date}}). Ihre Daten bleiben erhalten - zum Fortfahren einen Aktivierungscode kaufen:"
+    "banner_other": "Demoversion: noch {{count}} Tage (endet {{date}}). Ihre Daten bleiben erhalten - zum Fortfahren einen Aktivierungscode kaufen:",
+    "close": "Ausblenden",
+    "footer_one": "Testversion · noch 1 Tag",
+    "footer_other": "Testversion · noch {{count}} Tage"
   },
   "offlineSync": {
     "waiting_one": "1 Zeiterfassung wartet auf die Verbindung - sie wird automatisch gesendet.",

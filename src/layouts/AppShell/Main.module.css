@@ -41,6 +41,16 @@
   color: var(--text-secondary);
 }
 
+/* the trial's days left, beside the legal links */
+.trial {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--status-warning-bg);
+  color: var(--status-warning-text);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+}
+
 @media print {
   .footer {
     display: none;
