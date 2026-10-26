@@ -353,3 +353,21 @@ table,
     --shell-header: 56px;
   }
 }
+
+/* v2.3.46 (owner 2026-10-26: "the lists that open are white - the data is
+   there but cannot be seen"): the browser's own controls (drop-down lists,
+   date pickers, scrollbars) follow the app's theme - dark lists in dark mode
+   instead of white ones with the app's light text. */
+:root {
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+select option,
+select optgroup {
+  background-color: var(--surface-card);
+  color: var(--text-primary);
+}

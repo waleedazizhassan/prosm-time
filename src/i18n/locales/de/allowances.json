@@ -219,5 +219,8 @@
     "title": "Abzüge in diesem Zeitraum",
     "hint": "Genehmigter unbezahlter Urlaub an diesen Tagen.",
     "line": "Abzug unbezahlter Urlaub"
+  },
+  "grid": {
+    "label": "Zulagenblatt"
   }
 }

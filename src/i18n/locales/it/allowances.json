@@ -219,5 +219,8 @@
     "title": "Trattenute del periodo",
     "hint": "Permesso non retribuito approvato in questi giorni.",
     "line": "trattenuta permesso non retribuito"
+  },
+  "grid": {
+    "label": "Foglio indennità"
   }
 }

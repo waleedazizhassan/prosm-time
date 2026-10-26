@@ -16,8 +16,7 @@ import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
 import Input from "../../components/common/Input";
 import Select from "../../components/common/Select";
-import Table, { type TableColumn } from "../../components/common/Table";
-import StatusBadge from "../../components/common/StatusBadge";
+import Table from "../../components/common/Table";
 import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
 import Textarea from "../../components/common/Textarea";
@@ -31,15 +30,9 @@ import AllowanceSheetEditModal from "./AllowanceSheetEditModal";
 import PeriodDeductionsCard from "./PeriodDeductionsCard";
 import DateRange from "../../components/common/DateRange";
 import PersonName from "../../components/common/PersonName";
+import AllowanceSheetGrid from "./AllowanceSheetGrid";
 
 const ALL_EMPLOYEES = "";
-
-const STATUS_BADGE_KEY: Record<AllowanceEntry["status"], string> = {
-  draft: "draft",
-  submitted: "pending",
-  approved: "approved",
-  rejected: "revoked",
-};
 
 const EMPTY_INPUT: AllowanceEntryInput = {
   mealAllowance: 0,
@@ -306,6 +299,18 @@ export default function AllowancesPage() {
   };
 
 
+  // A cell edited in the sheet: the same save as the day's detail window.
+  const saveCell = async (entry: AllowanceEntry, input: AllowanceEntryInput) => {
+    setLoadError("");
+    const result = await AllowanceRepository.upsertEntry(entry.entryDate, input);
+    if (!result.success) {
+      setLoadError(humanizeBackendError(result.message, t) ?? t("saveError"));
+      return false;
+    }
+    await load();
+    return true;
+  };
+
   const handleReview = async (action: "approved" | "rejected") => {
     if (!detailEntry) return;
     setReviewing(action);
@@ -436,25 +441,6 @@ export default function AllowancesPage() {
     setEmployeeFilter(sheet.userFullName);
   };
 
-  const columns: TableColumn<AllowanceEntry>[] = [
-    { key: "employee", header: t("columns.employee"), render: (entry) => <PersonName name={entry.userFullName} userId={entry.userId} /> },
-    { key: "date", header: t("columns.date"), render: (entry) => formatDateOnly(entry.entryDate, i18n.language) },
-    { key: "day", header: t("columns.day"), render: (entry) => new Date(entry.entryDate).toLocaleDateString(i18n.language, { weekday: "long" }) },
-    { key: "site", header: t("columns.site"), render: (entry) => entry.siteName || "—" },
-    { key: "clockIn", header: t("columns.clockIn"), render: (entry) => (entry.clockInAt ? formatTimeOnly(entry.clockInAt, i18n.language) : "—") },
-    { key: "clockOut", header: t("columns.clockOut"), render: (entry) => (entry.clockOutAt ? formatTimeOnly(entry.clockOutAt, i18n.language) : "—") },
-    { key: "meal", header: t("columns.meal"), render: (entry) => entry.mealAllowance.toFixed(2) },
-    { key: "expatriation", header: t("columns.expatriation"), render: (entry) => entry.expatriationAllowance.toFixed(2) },
-    { key: "transportation", header: t("columns.transportation"), render: (entry) => entry.transportationAllowance.toFixed(2) },
-    { key: "overtimeHours", header: t("columns.overtimeHours"), render: (entry) => formatMinutes(entry.overtimeMinutes) },
-    { key: "overtimeDays", header: t("columns.overtimeDays"), render: (entry) => entry.overtimeDays.toFixed(1) },
-    { key: "housing", header: t("columns.housing"), render: (entry) => entry.housingAllowance.toFixed(2) },
-    { key: "travel", header: t("columns.travel"), render: (entry) => entry.travelAllowance.toFixed(2) },
-    { key: "other", header: t("columns.other"), render: (entry) => entry.otherAllowance.toFixed(2) },
-    { key: "overtimeAmount", header: t("columns.overtimeAmount"), render: (entry) => (entry.overtimeAmount + entry.extraDaysAmount).toFixed(2) },
-    { key: "total", header: t("columns.total"), render: (entry) => <strong>{entryTotal(entry).toFixed(2)}</strong> },
-    { key: "status", header: t("columns.status"), render: (entry) => <StatusBadge status={STATUS_BADGE_KEY[entry.status]}>{t(`status.${entry.status}`)}</StatusBadge> },
-  ];
 
   return (
     <PageShell title="">
@@ -629,7 +615,8 @@ export default function AllowancesPage() {
 
       <Card flush>
         <ErrorText>{loadError}</ErrorText>
-        <Table columns={columns} data={filteredEntries} getRowId={(entry) => entry.id} loading={loading} emptyMessage={t("empty")} onRowClick={openDetail} />
+        {/* owner 2026-10-26: one sheet like the printed one, edited in its cells */}
+        <AllowanceSheetGrid entries={filteredEntries} ownUserId={profile?.id ?? null} loading={loading} emptyMessage={t("empty")} onOpen={openDetail} onSave={saveCell} />
       </Card>
 
       {filteredEntries.length > 0 ? (

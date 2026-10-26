@@ -219,5 +219,8 @@
     "title": "Retenues de la période",
     "hint": "Congé sans solde approuvé ces jours-là.",
     "line": "retenue congé sans solde"
+  },
+  "grid": {
+    "label": "Fiche des indemnités"
   }
 }

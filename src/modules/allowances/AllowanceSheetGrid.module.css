@@ -1,0 +1,128 @@
+/* v2.3.46 (owner 2026-10-26): the allowances as a sheet, like the printed
+   one - compact rows, scrolling sideways on a phone with the day column kept
+   in view (never one long card per day). */
+.scroller {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+}
+
+.sheet {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.sheet th,
+.sheet td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border-light);
+  border-inline-start: 1px solid var(--border-light);
+  color: var(--text-primary);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.sheet thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--surface-sunken);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+/* the day stays in view while the rest scrolls */
+.sticky {
+  position: sticky;
+  inset-inline-start: 0;
+  z-index: 1;
+  background: var(--surface-card);
+  border-inline-start: 0 !important;
+  box-shadow: inset -1px 0 0 var(--border-light);
+}
+
+.sheet thead .sticky {
+  z-index: 3;
+  background: var(--surface-sunken);
+}
+
+.dayButton {
+  display: grid;
+  gap: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--brand-primary);
+  font: inherit;
+  font-weight: var(--font-weight-semibold);
+  text-align: start;
+  cursor: pointer;
+}
+
+.date {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: normal;
+}
+
+.text {
+  max-width: 10rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* an editable cell looks like a spreadsheet cell */
+.cell {
+  width: 5.5rem;
+  min-height: 32px;
+  padding: 2px 6px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: var(--surface-app);
+  color: var(--text-primary);
+  font: inherit;
+  text-align: center;
+}
+
+.cell:hover {
+  border-color: var(--border-light);
+}
+
+.cell:focus {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: -1px;
+  background: var(--surface-card);
+}
+
+/* a value the manager changed during review */
+.edited {
+  background: var(--status-warning-bg);
+}
+
+.total {
+  font-weight: var(--font-weight-bold);
+}
+
+.sheet tfoot th,
+.sheet tfoot td {
+  border-bottom: 0;
+  background: var(--surface-sunken);
+  font-weight: var(--font-weight-bold);
+}
+
+.sheet tbody tr:hover > td,
+.sheet tbody tr:hover > th {
+  background: var(--surface-hover);
+}
+
+.sheet tbody tr[data-saving] {
+  opacity: 0.6;
+}

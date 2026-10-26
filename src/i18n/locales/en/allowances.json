@@ -219,5 +219,8 @@
     "title": "Deductions in this period",
     "hint": "Unpaid leave approved for these days, deducted from pay.",
     "line": "unpaid leave deduction"
+  },
+  "grid": {
+    "label": "Allowance sheet"
   }
 }
