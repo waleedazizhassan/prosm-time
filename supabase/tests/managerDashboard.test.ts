@@ -107,4 +107,26 @@ describe("manager dashboard", () => {
     const [row] = await t.su<{ status: string }>("select status from sos_alerts where id = $1", [alert.id]);
     expect(row.status).toBe("resolved");
   });
+
+  it("the same hours add up in the figures, the sites table and the chart (step 21 audit)", async () => {
+    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    const session = (user: string, site: string | null, from: string, to: string) =>
+      t.su("insert into attendance_sessions (organization_id, user_id, site_id, status, clock_in_at, clock_out_at) values ($1, $2, $3, 'clocked_out', $4, $5)", [org.id, user, site, from, to]);
+    await session(a1.userId, siteA, `${yesterday}T06:00:00Z`, `${yesterday}T10:00:00Z`);
+    await session(b1.userId, siteB, `${yesterday}T07:00:00Z`, `${yesterday}T09:30:00Z`);
+    await session(manager.userId, null, `${yesterday}T08:00:00Z`, `${yesterday}T09:00:00Z`);
+    const result = await t.as<{ d: { kpi: { workedMinutes: number }; sites: { workedMinutes: number }[]; chart: { workedMinutes: number }[] } }>(
+      org.owner.authId,
+      "select public.get_prosm_time_manager_dashboard($1, $1, 'org', null, 'Africa/Cairo') as d",
+      [yesterday],
+    );
+    expect(result.error).toBeNull();
+    const d = result.rows![0].d;
+    const sites = d.sites.reduce((sum, site) => sum + Number(site.workedMinutes), 0);
+    const chart = d.chart.reduce((sum, day) => sum + Number(day.workedMinutes), 0);
+    expect(Number(d.kpi.workedMinutes)).toBeGreaterThanOrEqual(390);
+    expect(chart).toBe(Number(d.kpi.workedMinutes));
+    // the sites table covers work at a site; the hour recorded with no site is the only difference
+    expect(Number(d.kpi.workedMinutes) - sites).toBe(60);
+  });
 });
