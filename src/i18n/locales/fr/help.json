@@ -119,7 +119,7 @@
       "body": "Chaque site décide de ce qui se passe si vous quittez sa zone en étant pointé : une notification vous demande si vous voulez pointer la sortie (vous pouvez répondre « je travaille encore », par exemple pour une course), ou la sortie est pointée automatiquement après le délai fixé par le site, à l'heure où vous êtes parti. Les travailleurs de terrain peuvent être dispensés. Chaque sortie automatique est enregistrée et peut être corrigée par un responsable. Sur Android, une petite notification « PROSM Time · présence enregistrée » reste visible pendant l'enregistrement de la position - seulement pendant votre service, sur un canal silencieux."
     },
     "managerDashboard": {
-      "title": "Le tableau de bord du responsable",
+      "title": "Le tableau de bord (propriétaire et responsables)",
       "body": "Le propriétaire et quiconque a « Voir le tableau de bord » voient : une barre SOS (jusqu'à prise en charge), des pastilles pour ce qui attend (seulement s'il y a quelque chose), les chiffres avec comparaison à la période précédente seulement si elle a des données, la carte des sites avec leur zone et les présents, le tableau des sites avec les travailleurs externes, la file d'approbations, les personnes par rôle, prévu vs réel, indemnités et coût estimé (seulement avec « Voir le coût estimé ») et le journal des actions. Choisissez l'organisation, vos sites ou vous-même, et la période ; la carte et « présents » sont en direct. Actualisation chaque minute ; « Personnaliser » masque ou réordonne les cartes."
     },
     "peopleAndPhotos": {

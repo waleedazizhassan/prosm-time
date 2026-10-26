@@ -119,7 +119,7 @@
       "body": "Each site decides what happens when you leave its work area while clocked in: you get a notification asking whether to clock out (you can answer \"still working\", for example for an errand), or you are clocked out automatically after the time the site sets, at the moment you left. Field workers can be exempted. Every automatic clock-out is recorded and can be corrected by a manager. On Android a small notification \"PROSM Time · clocked in\" stays visible while location is recorded - only during your shift, on its own silent channel."
     },
     "managerDashboard": {
-      "title": "The Manager Dashboard",
+      "title": "The Dashboard (Owner and managers)",
       "body": "The Owner and whoever holds \"View the dashboard\" see: an SOS bar (until someone acknowledges it), chips for what is waiting (only when there is something), the figures with a comparison to the previous period only when there is data for it, the sites map with each site's work area and who is there now, the sites table with external workers under each site, the approvals queue, people by role, scheduled vs actual, allowances and estimated cost (only with \"View estimated cost\") and the action log. Choose the organisation, your sites or yourself, and the period; the map and \"here now\" are live and not filtered by period. It refreshes every minute. \"Customise widgets\" hides or reorders cards, saved to your account."
     },
     "peopleAndPhotos": {

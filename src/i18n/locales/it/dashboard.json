@@ -277,7 +277,7 @@
     "error": "Impossibile salvare la risposta."
   },
   "manager": {
-    "title": "Dashboard del responsabile",
+    "title": "Dashboard",
     "subtitle": "Aggiornato alle {{time}} · si aggiorna ogni minuto",
     "nextHoliday": "Prossima festività: {{name}} ({{date}})",
     "loadError": "Impossibile caricare la dashboard.",

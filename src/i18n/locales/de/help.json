@@ -119,7 +119,7 @@
       "body": "Jeder Standort legt fest, was passiert, wenn Sie seinen Bereich eingestempelt verlassen: eine Benachrichtigung fragt, ob Sie ausstempeln (Antwort „arbeite noch“ z. B. für einen Botengang möglich), oder Sie werden nach der vom Standort festgelegten Zeit automatisch ausgestempelt, zum Zeitpunkt des Verlassens. Außendienstkräfte können befreit werden. Jedes automatische Ausstempeln wird protokolliert und kann vom Vorgesetzten korrigiert werden. Unter Android bleibt eine kleine Benachrichtigung „PROSM Time · eingestempelt“ sichtbar, solange der Standort erfasst wird - nur während Ihrer Schicht, auf einem stillen Kanal."
     },
     "managerDashboard": {
-      "title": "Das Manager-Dashboard",
+      "title": "Das Dashboard (Eigentümer und Leiter)",
       "body": "Der Eigentümer und alle mit „Dashboard anzeigen“ sehen: eine SOS-Leiste (bis jemand sie bestätigt), Chips für Wartendes (nur wenn vorhanden), die Kennzahlen mit Vergleich zur Vorperiode nur bei vorhandenen Daten, die Standortkarte mit Arbeitsbereich und Anwesenden, die Standorttabelle mit externen Kräften je Standort, die Genehmigungswarteschlange, Personen nach Rolle, Plan vs. Ist, Zulagen und geschätzte Kosten (nur mit „Geschätzte Kosten anzeigen“) und das Aktionsprotokoll. Wählen Sie Organisation, Ihre Standorte oder sich selbst und den Zeitraum; Karte und „Jetzt anwesend“ sind live. Aktualisierung jede Minute; „Widgets anpassen“ blendet aus oder sortiert um."
     },
     "peopleAndPhotos": {

@@ -119,7 +119,7 @@
       "body": "Ogni sito decide cosa succede se lasci la sua area mentre sei in servizio: una notifica ti chiede se timbrare l'uscita (puoi rispondere «sto ancora lavorando», ad esempio per una commissione), oppure l'uscita viene timbrata automaticamente dopo il tempo stabilito dal sito, all'ora in cui sei uscito. I lavoratori sul campo possono essere esentati. Ogni uscita automatica è registrata e può essere corretta da un responsabile. Su Android una piccola notifica «PROSM Time · presenza registrata» resta visibile mentre la posizione viene registrata - solo durante il turno, su un canale silenzioso."
     },
     "managerDashboard": {
-      "title": "La dashboard del responsabile",
+      "title": "La dashboard (titolare e responsabili)",
       "body": "Il titolare e chi ha «Vedere la dashboard» vedono: una barra SOS (finché qualcuno la prende in carico), chip per ciò che attende (solo se c'è qualcosa), i numeri con confronto con il periodo precedente solo se ci sono dati, la mappa dei siti con l'area e i presenti, la tabella dei siti con i lavoratori esterni, la coda delle approvazioni, le persone per ruolo, previsto vs effettivo, indennità e costo stimato (solo con «Vedere il costo stimato») e il registro delle azioni. Scegli organizzazione, i tuoi siti o te stesso, e il periodo; mappa e «presenti» sono in diretta. Si aggiorna ogni minuto; «Personalizza» nasconde o riordina le schede."
     },
     "peopleAndPhotos": {

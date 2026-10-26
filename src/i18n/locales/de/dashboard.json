@@ -277,7 +277,7 @@
     "error": "Antwort konnte nicht gespeichert werden."
   },
   "manager": {
-    "title": "Manager-Dashboard",
+    "title": "Dashboard",
     "subtitle": "Aktualisiert {{time}} · jede Minute neu",
     "nextHoliday": "Nächster Feiertag: {{name}} ({{date}})",
     "loadError": "Dashboard konnte nicht geladen werden.",

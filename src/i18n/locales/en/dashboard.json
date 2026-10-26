@@ -277,7 +277,7 @@
     "error": "Could not save your answer."
   },
   "manager": {
-    "title": "Manager dashboard",
+    "title": "Dashboard",
     "subtitle": "Updated {{time}} · refreshes every minute",
     "nextHoliday": "Next holiday: {{name}} ({{date}})",
     "loadError": "Could not load the dashboard.",
