@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Maximize2, Minimize2 } from "lucide-react";
+import { LocateFixed, Maximize2, Minimize2 } from "lucide-react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -41,6 +41,9 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
   const tileRef = useRef<L.TileLayer | null>(null);
   const layerRef = useRef<L.LayerGroup | null>(null);
   const fittedRef = useRef(false);
+  // owner 2026-10-26: back to every site at once, and a key under the map
+  const allBoundsRef = useRef<L.LatLngBounds | null>(null);
+  const circlesRef = useRef(new Map<string, L.Circle>());
   const [fullScreen, setFullScreen] = useState(false);
 
   useEffect(() => {
@@ -70,15 +73,18 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
     const layer = layerRef.current;
     if (!map || !layer) return;
     layer.clearLayers();
+    circlesRef.current.clear();
     const bounds = L.latLngBounds([]);
     for (const site of sites) {
       if (site.latitude === null || site.longitude === null) continue;
-      const color = site.sos ? "#dc2626" : "#16a34a";
+      // red with an SOS, green with people there now, grey when nobody is there
+      const color = siteColor(site);
       const circle = L.circle([site.latitude, site.longitude], { radius: site.radius, color, fillColor: color, fillOpacity: 0.12, weight: 1.5 });
       circle.bindTooltip(`${escapeHtml(site.name)} · ${site.present}${site.expected ? ` / ${site.expected}` : ""}${site.external?.presentNow ? ` · ${escapeHtml(t("manager.map.external", { count: site.external.presentNow }))}` : ""}`, { permanent: true, direction: "top", className: styles.siteLabel, interactive: true });
       // owner 2026-10-26: a click on the site's name (or its circle) zooms to the site
       circle.on("click", () => map.flyToBounds(circle.getBounds(), { padding: [24, 24], maxZoom: 17, duration: 0.6 }));
       circle.addTo(layer);
+      circlesRef.current.set(site.id, circle);
       bounds.extend(circle.getBounds());
     }
     for (const person of people) {
@@ -90,6 +96,7 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
         .addTo(layer);
       bounds.extend([lat, lng]);
     }
+    allBoundsRef.current = bounds.isValid() ? bounds : null;
     if (bounds.isValid() && !fittedRef.current) {
       map.fitBounds(bounds, { padding: [28, 28], maxZoom: 16 });
       fittedRef.current = true;
@@ -101,12 +108,41 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
     return () => window.clearTimeout(timer);
   }, [fullScreen]);
 
+  const showAll = () => {
+    if (allBoundsRef.current) mapRef.current?.flyToBounds(allBoundsRef.current, { padding: [28, 28], maxZoom: 16, duration: 0.6 });
+  };
+  const goTo = (siteId: string) => {
+    const circle = circlesRef.current.get(siteId);
+    if (circle) mapRef.current?.flyToBounds(circle.getBounds(), { padding: [24, 24], maxZoom: 17, duration: 0.6 });
+  };
+  // the key: every site on the map, the ones with people first
+  const keyed = sites.filter((site) => site.latitude !== null && site.longitude !== null).sort((a, b) => Number(b.sos) - Number(a.sos) || b.present - a.present);
+
   return (
     <div className={fullScreen ? styles.mapFullScreen : styles.mapBox}>
       <div ref={containerRef} className={styles.mapCanvas} />
       <button type="button" className={styles.mapButton} onClick={() => setFullScreen((value) => !value)} aria-label={fullScreen ? t("manager.map.exitFullScreen") : t("manager.map.fullScreen")}>
         {fullScreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
       </button>
+      <button type="button" className={`${styles.mapButton} ${styles.mapButtonSecond}`} onClick={showAll} aria-label={t("manager.map.showAll")} title={t("manager.map.showAll")}>
+        <LocateFixed size={16} />
+      </button>
+      {keyed.length > 0 ? (
+        <div className={styles.mapKey} role="group" aria-label={t("manager.map.keyLabel")}>
+          {keyed.map((site) => (
+            <button key={site.id} type="button" className={styles.mapKeyItem} onClick={() => goTo(site.id)} title={site.sos ? t("manager.map.stateSos") : site.present > 0 ? t("manager.map.stateActive") : t("manager.map.stateIdle")}>
+              <span className={styles.mapKeyDot} style={{ background: siteColor(site) }} aria-hidden="true" />
+              <span>{site.name}</span>
+              <b>{site.present}</b>
+            </button>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
+}
+
+function siteColor(site: DashboardSite): string {
+  if (site.sos) return "#dc2626";
+  return site.present > 0 ? "#16a34a" : "#94a3b8";
 }

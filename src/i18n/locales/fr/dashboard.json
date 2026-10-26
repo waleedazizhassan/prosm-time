@@ -362,7 +362,12 @@
       "title": "Les sites maintenant",
       "fullScreen": "Plein écran",
       "exitFullScreen": "Quitter le plein écran",
-      "external": "{{count}} externes"
+      "external": "{{count}} externes",
+      "showAll": "Voir tous les sites",
+      "keyLabel": "Sites sur la carte",
+      "stateActive": "Actif - des personnes sont présentes",
+      "stateIdle": "Inactif - personne pour l’instant",
+      "stateSos": "SOS"
     },
     "present": {
       "title": "Présents maintenant ({{count}})",

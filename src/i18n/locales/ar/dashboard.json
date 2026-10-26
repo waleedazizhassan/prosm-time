@@ -366,7 +366,12 @@
       "title": "المواقع الآن",
       "fullScreen": "ملء الشاشة",
       "exitFullScreen": "الخروج من ملء الشاشة",
-      "external": "{{count}} عمالة خارجية"
+      "external": "{{count}} عمالة خارجية",
+      "showAll": "عرض كل المواقع",
+      "keyLabel": "المواقع على الخريطة",
+      "stateActive": "نشط — فيه ناس الآن",
+      "stateIdle": "متوقف — لا أحد الآن",
+      "stateSos": "استغاثة"
     },
     "present": {
       "title": "الموجودون الآن ({{count}})",

@@ -362,7 +362,12 @@
       "title": "I siti ora",
       "fullScreen": "Schermo intero",
       "exitFullScreen": "Esci da schermo intero",
-      "external": "{{count}} esterni"
+      "external": "{{count}} esterni",
+      "showAll": "Mostra tutti i siti",
+      "keyLabel": "Siti sulla mappa",
+      "stateActive": "Attivo - persone presenti ora",
+      "stateIdle": "Inattivo - nessuno ora",
+      "stateSos": "SOS"
     },
     "present": {
       "title": "Presenti ora ({{count}})",

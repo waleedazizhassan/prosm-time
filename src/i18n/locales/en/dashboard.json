@@ -362,7 +362,12 @@
       "title": "Sites now",
       "fullScreen": "Full screen",
       "exitFullScreen": "Exit full screen",
-      "external": "{{count}} external"
+      "external": "{{count}} external",
+      "showAll": "Show all sites",
+      "keyLabel": "Sites on the map",
+      "stateActive": "Active - people are here now",
+      "stateIdle": "Inactive - nobody is here now",
+      "stateSos": "SOS"
     },
     "present": {
       "title": "Here now ({{count}})",

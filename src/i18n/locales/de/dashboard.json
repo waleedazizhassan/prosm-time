@@ -362,7 +362,12 @@
       "title": "Standorte jetzt",
       "fullScreen": "Vollbild",
       "exitFullScreen": "Vollbild beenden",
-      "external": "{{count}} extern"
+      "external": "{{count}} extern",
+      "showAll": "Alle Standorte zeigen",
+      "keyLabel": "Standorte auf der Karte",
+      "stateActive": "Aktiv - jetzt Personen vor Ort",
+      "stateIdle": "Inaktiv - niemand vor Ort",
+      "stateSos": "SOS"
     },
     "present": {
       "title": "Jetzt anwesend ({{count}})",
