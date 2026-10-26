@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- v2.3.43 step 21 (audit, OWASP MASVS-STORAGE): only the app's own cache
+     can be shared - every generated file (reports, allowance sheets) is
+     written there (saveGeneratedFile.ts). The former external-path "." let
+     the provider reference the whole shared storage. -->
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <external-path name="my_images" path="." />
     <cache-path name="my_cache_images" path="." />
 </paths>
