@@ -7,6 +7,7 @@
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
+import { clientIdentifier, enforceRateLimits, hashIdentifier } from "../_shared/rateLimit.ts";
 
 const MAX_WINDOW_DAYS = 90;
 const DEFAULT_WINDOW_DAYS = 30;
@@ -27,6 +28,13 @@ serve(async (request: Request) => {
     const serviceClient = createClient(supabaseUrl, serviceRoleKey, {
       auth: { autoRefreshToken: false, persistSession: false },
     });
+
+    // v2.3.43 step 21 (audit): the same key-guessing limit as every other export.
+    const exportRateLimited = await enforceRateLimits(serviceClient, [
+      { scope: "export_worker_attendance_ip", identifier: clientIdentifier(request), limit: 60, windowSeconds: 300, blockSeconds: 900 },
+      { scope: "export_worker_attendance_key", identifier: await hashIdentifier(rawKey), limit: 60, windowSeconds: 300, blockSeconds: 900 },
+    ]);
+    if (exportRateLimited) return exportRateLimited;
 
     const { data: organizationId, error: authError } = await serviceClient.rpc("authenticate_prosm_time_api_key", { p_raw_key: rawKey });
     if (authError) return errorResponse(authError.message, 500, "INTERNAL_ERROR");
