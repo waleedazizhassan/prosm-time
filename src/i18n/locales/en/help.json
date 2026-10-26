@@ -36,7 +36,7 @@
     },
     "allowances": {
       "title": "Allowances",
-      "body": "Tap \"Fill from my attendance\": every day you worked in the period is filled from your allowance prices (the site of that day, your category, your own prices). Add only what has no price - travel, for example - check the totals and submit; your manager approves or sends it back with a note. The Owner and those who approve allowances set the prices from Allowances > Prices: per site, per category of staff (engineers, technicians, workers...) and per person - the later wins, a blank price is inherited - plus the price of an overtime hour and an extra day. The PDF has the day totals and lines for your signature and the project manager's approval."
+      "body": "Press \"Fill from my attendance\": every day you attended is filled from your allowance prices (that day's site, then your category, then your own prices). Overtime is paid from the exact minutes (15 minutes at 100 an hour = 25), and hours still waiting for a manager's review are not counted. Add only what has no price, such as travel, check the totals and submit; your manager approves or returns it with a note. While reviewing, a manager with the right permission can change a line on the sheet - each change needs a reason, the totals update at once, and the change (before, after, who, why) is kept; nothing can be changed once the sheet is approved, unless an approved sheet is reopened with a reason. The PDF marks every changed value with *, lists the changes, highlights public holidays and shows any unpaid-leave deductions (taken from pay, not from allowances). Prices are set under Allowances > Prices: per site, per employee category and per person, plus the overtime hour and the extra day."
     },
     "kiosk": {
       "title": "Kiosk Mode",
@@ -59,8 +59,8 @@
       "body": "Settings holds only what applies to the whole organisation: the work-area radius for people who clock in without a site; whether a clock-in or clock-out from a fake location is refused; and the defaults a new site starts from. A site's own rules are on that site's page."
     },
     "leave": {
-      "title": "Leave (PTO)",
-      "body": "Request time off from the Leave page - pick a type (Annual, Sick, Unpaid, Emergency, Other), a date range and an optional reason (please don't include unnecessary health details). Only Annual leave tracks an entitled/used/remaining balance (21 days a year by default; the Owner can change an employee's entitlement from People). An employee's request goes to their site's manager (and the Owner); a manager's request goes to the Owner. Leave can't be approved over days that already have attendance. Approved leave counts toward your timesheet. Only the Owner and Managers approve leave: a Manager decides only for the people at the sites they manage, never for their own leave."
+      "title": "Leave",
+      "body": "Request leave from the Leave page: choose the type, the dates and, if you like, a reason (please leave out unnecessary health details). Types and their days are set by the Owner under Settings > Leave types, with starting values from Labour Law 14 of 2025 (annual 15 days in the first year, 21 after, 30 after 10 years of service, 45 for special needs; casual 7 days a year, at most 2 at a time; sick, unpaid, Hajj, bereavement, paternity and others) - check them against the official text. Your balance per type shows used and remaining days. An employee's request goes to the manager of their site (and the Owner); a manager's goes to the Owner. Approved leave can be cancelled only before its first day - from that day on, no one can cancel it, not even the Owner. Unpaid leave: the manager sets the deduction per day when approving; it is recorded automatically and shows in the payroll export and your allowance sheet, and it is reversed if the leave is cancelled before it starts."
     },
     "schedule": {
       "title": "Shift Roster",
@@ -97,13 +97,45 @@
     "privacy": {
       "title": "Your Privacy",
       "body": "PROSM Time records your location when you clock in or out, take a break, change site or send an SOS. Only if your organisation turns on presence monitoring is it also recorded about every 5 minutes during your shift - on Android also in the background, after telling you first and with a visible notification - and it always stops when you clock out. A photo is taken only where your site requires one; there's no facial recognition. Your organisation's managers see your records. Location samples are deleted after 30 days and photos after 90 days. You can withdraw location or camera permission in your device settings at any time. For your rights over your data, ask your organisation first, or write to info@prosm.net. Full details are in the Privacy Policy and Terms of Use below."
+    },
+    "workCalendar": {
+      "title": "Work Calendar: Holidays, Rest Days and Special Days",
+      "body": "From the Calendar page, those allowed set the public holidays (for the whole organisation or one site), the weekly rest days (organisation, site or shift) and special days (for example Ramadan hours or an early finish). Work on a public holiday or a rest day counts as overtime at the rate set for that kind of day, and nobody is marked absent or late on it. On a special day the start and end follow that day, so leaving early as agreed causes no deduction. Days are counted in the site's own time zone. Holidays also show on the dashboard and in reports and exports."
+    },
+    "longSessions": {
+      "title": "Long Sessions and Hours Awaiting Review",
+      "body": "If you are still clocked in after 12 hours (the Owner can change this), the app asks once whether you are still working; you can answer \"still working\" or clock out. After 24 hours the session is closed automatically - its hours are kept but marked as awaiting review: they are not counted in totals, pay, allowances or cost until a manager reviews them, sets the real clock-out time with a reason, or extends the session. They show in \"Needs review\" for managers and in the reports as \"closed automatically, awaiting review\"."
+    },
+    "overtimeControl": {
+      "title": "Overtime, Lateness and Permissions",
+      "body": "You can ask for permission to arrive late or leave early from your day's page; an approved permission (paid) means no deduction for that time. A manager can also mark time as \"not counted as overtime\". Depending on the Owner's setting, overtime counts at once or only after a manager approves it - until then it shows as waiting and is left out of totals and allowances. The overtime rates for a workday, a rest day, a public holiday and night work are settings. Every manual adjustment to a day needs a reason, is recorded, and nothing changes on a period that is already approved."
+    },
+    "liveCheck": {
+      "title": "Attendance Photo and Live Check",
+      "body": "Where a site asks for a photo, it is taken from the live camera only - not chosen from the gallery. Where the phone supports it, a short live check asks you to turn your head or move closer; nothing of your face is stored except the photo itself and the result, and no video is sent. If the check fails or the phone cannot do it, your clock-in is still recorded and simply marked for your manager to look at (as is a stale or reused photo, or a location that looks too exact). The manager accepts, rejects with a reason, or asks you about it. The Owner or a manager can exempt a person from the live check."
+    },
+    "leavingSite": {
+      "title": "Leaving the Site While Clocked In",
+      "body": "Each site decides what happens when you leave its work area while clocked in: you get a notification asking whether to clock out (you can answer \"still working\", for example for an errand), or you are clocked out automatically after the time the site sets, at the moment you left. Field workers can be exempted. Every automatic clock-out is recorded and can be corrected by a manager. On Android a small notification \"PROSM Time · clocked in\" stays visible while location is recorded - only during your shift, on its own silent channel."
+    },
+    "managerDashboard": {
+      "title": "The Manager Dashboard",
+      "body": "The Owner and whoever holds \"View the dashboard\" see: an SOS bar (until someone acknowledges it), chips for what is waiting (only when there is something), the figures with a comparison to the previous period only when there is data for it, the sites map with each site's work area and who is there now, the sites table with external workers under each site, the approvals queue, people by role, scheduled vs actual, allowances and estimated cost (only with \"View estimated cost\") and the action log. Choose the organisation, your sites or yourself, and the period; the map and \"here now\" are live and not filtered by period. It refreshes every minute. \"Customise widgets\" hides or reorders cards, saved to your account."
+    },
+    "peopleAndPhotos": {
+      "title": "People, Roles and Profile Photos",
+      "body": "The People page groups everyone by role - managers (with the Owner), supervisors, employees, viewers, then any custom role - each group with its count, which you can fold. One search and the site, status and shift filters work across all groups. Each person shows their profile photo (or their initial), role, site, shift and whether they are here now. A manager sees only the people at the sites they manage. Your profile photo is set from your profile; it is not the attendance photo, and it is shown only to people in your organisation."
+    },
+    "phoneNotifications": {
+      "title": "Notifications and Reminders on the Phone",
+      "body": "All PROSM Time notifications carry the same small PROSM icon. Your own clock-in/out reminders are set from the dashboard card. Android 14 and later may not allow exact alarms; a reminder can then arrive a few minutes late - the card says so and has a button to allow exact alarms. If location tracking cannot start (permission refused or location turned off), the app tells you and offers to try again or open the settings; your clock-in itself is never lost. The update notice can be swiped away."
     }
   },
   "faq": {
     "title": "Frequently Asked Questions",
     "q1": {
       "question": "I forgot to clock out - what do I do?",
-      "answer": "Contact an administrator or manager - they can record the correct Clock Out on your behalf, and the action is recorded as theirs, not yours. A manager can also submit a correction request on an already-recorded time, which - once approved - genuinely updates it."
+      "answer": "Contact your manager - they can record the correct Clock Out on your behalf (the action is recorded as theirs, not yours), or approve a correction. If you are still clocked in after 12 hours the app asks once whether you are still working; after 24 hours the session is closed automatically and its hours wait for your manager's review before they count."
     },
     "q2": {
       "question": "Why was my Clock In flagged as outside my work area?",
@@ -155,7 +187,7 @@
     },
     "q14": {
       "question": "Who can see my location and photos, and for how long?",
-      "answer": "You, your site's managers and your organisation's Owner. Location samples taken during a shift are deleted after 30 days and attendance photos after 90 days. The Privacy Policy explains the rest."
+      "answer": "You, your site's managers and your organisation's Owner. Location samples taken during a shift are deleted after 30 days and attendance photos after 90 days. The live check keeps no face data - only the photo itself and the result. Your profile photo is shown only inside your organisation. The Privacy Policy explains the rest."
     },
     "q15": {
       "question": "Does SOS call the ambulance or the police?",

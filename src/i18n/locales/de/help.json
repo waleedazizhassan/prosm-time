@@ -36,7 +36,7 @@
     },
     "allowances": {
       "title": "Zulagen",
-      "body": "Tippen Sie auf \"Aus meiner Anwesenheit füllen\": Jeder Arbeitstag des Zeitraums wird aus Ihren Zulagenpreisen gefüllt (Standort des Tages, Ihre Kategorie, Ihre eigenen Preise). Ergänzen Sie nur, was keinen Preis hat - etwa Reisen -, prüfen Sie die Summen und reichen Sie ein; Ihre Führungskraft genehmigt oder schickt es mit einer Notiz zurück. Inhaber und Genehmigende legen die Preise unter Zulagen > Preise fest: je Standort, je Mitarbeiterkategorie (Ingenieure, Techniker, Arbeiter...) und je Person - der spätere gilt, ein leerer Preis wird übernommen - sowie den Preis einer Überstunde und eines Zusatztags. Das PDF enthält die Tagessummen und Zeilen für Ihre Unterschrift und die Freigabe der Projektleitung."
+      "body": "Tippen Sie auf „Aus meiner Anwesenheit füllen“: Jeder Anwesenheitstag wird aus Ihren Zulagensätzen gefüllt (Standort des Tages, dann Ihre Kategorie, dann Ihre eigenen Sätze). Überstunden werden minutengenau bezahlt (15 Minuten zu 100 pro Stunde = 25); Stunden, die noch auf Prüfung warten, zählen nicht. Ergänzen Sie nur, was keinen Satz hat (z. B. Reisen), prüfen Sie die Summen und senden Sie; Ihr Vorgesetzter genehmigt oder gibt mit Hinweis zurück. Während der Prüfung kann ein berechtigter Vorgesetzter eine Zeile ändern - jede Änderung braucht einen Grund, die Summen aktualisieren sich sofort und die Änderung (vorher, nachher, wer, warum) bleibt erhalten; nach der Genehmigung ist nichts mehr änderbar, außer das Blatt wird mit Grund wieder geöffnet. Das PDF markiert geänderte Werte mit *, listet die Änderungen, hebt Feiertage hervor und zeigt Abzüge für unbezahlten Urlaub (vom Lohn, nicht von Zulagen). Sätze unter Zulagen > Sätze."
     },
     "kiosk": {
       "title": "Kioskmodus",
@@ -59,8 +59,8 @@
       "body": "Die Einstellungen enthalten nur, was für die ganze Organisation gilt: den Radius für Einstempeln ohne Standort, ob gefälschte Standorte abgelehnt werden, und die Startwerte neuer Standorte. Die Regeln eines Standorts stehen auf dessen Seite."
     },
     "leave": {
-      "title": "Urlaub (PTO)",
-      "body": "Beantragen Sie Urlaub über die Urlaubsseite - wählen Sie eine Art (Jahresurlaub, Krankheit, Unbezahlt, Notfall, Sonstiges), einen Zeitraum und einen optionalen Grund. Nur Jahresurlaub verfolgt ein echtes Guthaben (Anspruch/verbraucht/verbleibend) - standardmäßig 21 Tage pro Jahr; ein Inhaber kann den Jahresanspruch eines bestimmten Mitarbeiters über dessen Profil unter Personen erhöhen oder senken (z. B. für eine gesetzlich vorgeschriebene Erhöhung bei langer Betriebszugehörigkeit). Alle anderen Arten zeigen nur, wie viele Tage Sie dieses Jahr genommen haben, ohne feste Obergrenze. Ein Antrag eines gewöhnlichen, einem Standort zugewiesenen Mitarbeiters geht an den Manager dieses Standorts (und den Inhaber); ein Antrag eines Managers/Teamleiters selbst, oder von jemandem, der noch keinem Standort zugewiesen ist, geht direkt an den Inhaber. Ihr Prüfer sieht ausstehende Anträge über die Manager-Konsole und kann von dort aus auch einen bereits genehmigten Antrag widerrufen, falls sich Pläne ändern - Sie werden in beiden Fällen benachrichtigt. Die Genehmigung von Urlaub für einen Zeitraum, in dem bereits Anwesenheit erfasst wurde, ist gesperrt - der Anwesenheitseintrag muss zuerst geklärt werden. Der Inhaber beantragt über diese Seite keinen Urlaub - es gibt niemanden über ihm, der ihn prüfen könnte. Genehmigter Urlaub zählt zu Ihrem generierten Stundenzettel für diesen Zeitraum. Urlaub genehmigen nur der Inhaber und Manager: Ein Manager entscheidet nur für Personen an den Standorten, die er leitet, nie über seinen eigenen Urlaub."
+      "title": "Urlaub",
+      "body": "Beantragen Sie Urlaub auf der Seite Urlaub: Art, Zeitraum und optional einen Grund (bitte keine unnötigen Gesundheitsdetails). Die Arten und ihre Tage legt der Eigentümer unter Einstellungen > Urlaubsarten fest, mit Startwerten aus dem Arbeitsgesetz 14 von 2025 (Jahresurlaub 15 Tage im ersten Jahr, danach 21, 30 nach 10 Dienstjahren, 45 bei Behinderung; Gelegenheitsurlaub 7 Tage im Jahr, höchstens 2 am Stück; Krankheit, unbezahlt, Hadsch, Trauerfall, Vaterschaft u. a.) - bitte mit dem offiziellen Text abgleichen. Ihr Kontingent je Art zeigt genommene und verbleibende Tage. Der Antrag eines Mitarbeiters geht an den Leiter seines Standorts (und den Eigentümer), der eines Leiters an den Eigentümer. Genehmigter Urlaub kann nur vor dem ersten Tag storniert werden - ab diesem Tag von niemandem, auch nicht vom Eigentümer. Unbezahlter Urlaub: Der Leiter legt bei der Genehmigung den Abzug pro Tag fest; er wird automatisch erfasst, erscheint im Lohnexport und auf Ihrem Zulagenblatt und wird zurückgenommen, wenn der Urlaub vor Beginn storniert wird."
     },
     "schedule": {
       "title": "Dienstplan",
@@ -97,13 +97,45 @@
     "privacy": {
       "title": "Ihre Privatsphäre",
       "body": "PROSM Time erfasst Ihren Standort beim Ein- und Ausstempeln, bei Pausen, Standortwechsel und SOS. Nur wenn Ihre Organisation die Anwesenheitsüberwachung aktiviert, auch etwa alle 5 Minuten während der Schicht - unter Android auch im Hintergrund, nach vorheriger Information und mit sichtbarer Benachrichtigung - und immer nur bis zum Ausstempeln. Fotos nur, wo Ihr Standort sie verlangt; keine Gesichtserkennung. Standortpunkte werden nach 30 Tagen, Fotos nach 90 Tagen gelöscht. Berechtigungen können Sie jederzeit in den Geräteeinstellungen entziehen. Für Ihre Rechte wenden Sie sich zuerst an Ihre Organisation oder an info@prosm.net. Einzelheiten in der Datenschutzerklärung und den Nutzungsbedingungen unten."
+    },
+    "workCalendar": {
+      "title": "Arbeitskalender: Feiertage, Ruhetage und Sondertage",
+      "body": "Auf der Seite Kalender legen Berechtigte Feiertage (Organisation oder Standort), wöchentliche Ruhetage (Organisation, Standort oder Schicht) und Sondertage (z. B. Ramadan-Zeiten, früher Feierabend) fest. Arbeit an einem Feiertag oder Ruhetag zählt als Überstunde mit dem Faktor dieser Tagesart; an diesem Tag gibt es weder Abwesenheit noch Verspätung. An einem Sondertag gelten dessen Zeiten, ein vereinbart früheres Gehen führt zu keinem Abzug. Tage zählen in der Zeitzone des Standorts. Feiertage erscheinen auch im Dashboard, in Berichten und Exporten."
+    },
+    "longSessions": {
+      "title": "Lange Sitzungen und Stunden in Prüfung",
+      "body": "Sind Sie nach 12 Stunden (vom Eigentümer änderbar) noch eingestempelt, fragt die App einmal, ob Sie noch arbeiten; antworten Sie „arbeite noch“ oder stempeln Sie aus. Nach 24 Stunden wird die Sitzung automatisch beendet - die Stunden bleiben erhalten, warten aber auf Prüfung: Sie zählen nicht in Summen, Lohn, Zulagen oder Kosten, bis ein Vorgesetzter die echte Endzeit mit Grund einträgt oder die Sitzung verlängert. Sie erscheinen unter „Zu prüfen“ und in Berichten als „automatisch beendet, in Prüfung“."
+    },
+    "overtimeControl": {
+      "title": "Überstunden, Verspätung und Freigaben",
+      "body": "Auf der Seite Ihres Tages können Sie eine Freigabe für späteres Kommen oder früheres Gehen beantragen; eine genehmigte (bezahlte) Freigabe bedeutet keinen Abzug. Ein Vorgesetzter kann Zeit auch als „nicht als Überstunde gezählt“ markieren. Je nach Einstellung zählen Überstunden sofort oder erst nach Genehmigung - bis dahin sind sie aus Summen und Zulagen ausgenommen. Die Faktoren für Arbeitstag, Ruhetag, Feiertag und Nachtarbeit sind Einstellungen. Jede manuelle Anpassung braucht einen Grund, wird protokolliert, und an einem genehmigten Zeitraum ändert sich nichts."
+    },
+    "liveCheck": {
+      "title": "Anwesenheitsfoto und Live-Prüfung",
+      "body": "Verlangt ein Standort ein Foto, wird es nur mit der Live-Kamera aufgenommen - nicht aus der Galerie gewählt. Wo das Telefon es unterstützt, bittet eine kurze Live-Prüfung Sie, den Kopf zu drehen oder näher zu kommen; von Ihrem Gesicht wird nur das Foto selbst und das Ergebnis gespeichert, kein Video gesendet. Schlägt die Prüfung fehl oder ist sie nicht möglich, wird Ihre Erfassung trotzdem gespeichert und nur für Ihren Vorgesetzten markiert (ebenso ein altes oder wiederverwendetes Foto oder ein auffällig genauer Standort). Der Vorgesetzte akzeptiert, lehnt mit Grund ab oder fragt nach. Personen können von der Prüfung befreit werden."
+    },
+    "leavingSite": {
+      "title": "Den Standort eingestempelt verlassen",
+      "body": "Jeder Standort legt fest, was passiert, wenn Sie seinen Bereich eingestempelt verlassen: eine Benachrichtigung fragt, ob Sie ausstempeln (Antwort „arbeite noch“ z. B. für einen Botengang möglich), oder Sie werden nach der vom Standort festgelegten Zeit automatisch ausgestempelt, zum Zeitpunkt des Verlassens. Außendienstkräfte können befreit werden. Jedes automatische Ausstempeln wird protokolliert und kann vom Vorgesetzten korrigiert werden. Unter Android bleibt eine kleine Benachrichtigung „PROSM Time · eingestempelt“ sichtbar, solange der Standort erfasst wird - nur während Ihrer Schicht, auf einem stillen Kanal."
+    },
+    "managerDashboard": {
+      "title": "Das Manager-Dashboard",
+      "body": "Der Eigentümer und alle mit „Dashboard anzeigen“ sehen: eine SOS-Leiste (bis jemand sie bestätigt), Chips für Wartendes (nur wenn vorhanden), die Kennzahlen mit Vergleich zur Vorperiode nur bei vorhandenen Daten, die Standortkarte mit Arbeitsbereich und Anwesenden, die Standorttabelle mit externen Kräften je Standort, die Genehmigungswarteschlange, Personen nach Rolle, Plan vs. Ist, Zulagen und geschätzte Kosten (nur mit „Geschätzte Kosten anzeigen“) und das Aktionsprotokoll. Wählen Sie Organisation, Ihre Standorte oder sich selbst und den Zeitraum; Karte und „Jetzt anwesend“ sind live. Aktualisierung jede Minute; „Widgets anpassen“ blendet aus oder sortiert um."
+    },
+    "peopleAndPhotos": {
+      "title": "Personen, Rollen und Profilfotos",
+      "body": "Die Seite Personen gruppiert alle nach Rolle - Leiter (mit dem Eigentümer), Aufsichten, Mitarbeiter, Betrachter, dann eigene Rollen - jede Gruppe mit Anzahl, einklappbar. Eine Suche und die Filter Standort, Status und Schicht gelten für alle Gruppen. Jede Person zeigt Profilfoto (oder Initiale), Rolle, Standort, Schicht und Anwesenheit. Ein Leiter sieht nur Personen an seinen Standorten. Ihr Profilfoto stellen Sie im Profil ein; es ist nicht das Anwesenheitsfoto und nur in Ihrer Organisation sichtbar."
+    },
+    "phoneNotifications": {
+      "title": "Benachrichtigungen und Erinnerungen am Telefon",
+      "body": "Alle Benachrichtigungen von PROSM Time tragen dasselbe kleine PROSM-Symbol. Ihre eigenen Erinnerungen stellen Sie in der Dashboard-Karte ein. Android 14 und neuer erlauben exakte Wecker evtl. nicht; eine Erinnerung kann dann einige Minuten später kommen - die Karte sagt das und bietet an, exakte Wecker zu erlauben. Kann die Standortverfolgung nicht starten (Berechtigung verweigert oder Standort aus), informiert die App und bietet erneuten Versuch oder die Einstellungen an; Ihre Erfassung geht nie verloren. Die Update-Benachrichtigung lässt sich wegwischen."
     }
   },
   "faq": {
     "title": "Häufig gestellte Fragen",
     "q1": {
       "question": "Ich habe vergessen auszustempeln - was tue ich?",
-      "answer": "Wenden Sie sich an einen Administrator oder Manager - dieser kann das korrekte Ausstempeln in Ihrem Namen erfassen, und die Aktion wird als seine, nicht als Ihre, aufgezeichnet. Ein Manager kann auch einen Korrekturantrag für eine bereits erfasste Zeit einreichen, der - nach Genehmigung - diese tatsächlich aktualisiert."
+      "answer": "Wenden Sie sich an Ihren Vorgesetzten - er kann das richtige Ausstempeln für Sie erfassen (die Aktion wird auf seinen Namen protokolliert) oder eine Korrektur genehmigen. Sind Sie nach 12 Stunden noch eingestempelt, fragt die App einmal, ob Sie noch arbeiten; nach 24 Stunden wird die Sitzung automatisch beendet und die Stunden warten auf Prüfung, bevor sie zählen."
     },
     "q2": {
       "question": "Warum wurde mein Einstempeln als außerhalb meines Arbeitsbereichs markiert?",
@@ -155,7 +187,7 @@
     },
     "q14": {
       "question": "Wer sieht meinen Standort und meine Fotos, und wie lange?",
-      "answer": "Sie, die Vorgesetzten Ihres Standorts und der Inhaber. Standortpunkte werden nach 30 Tagen, Fotos nach 90 Tagen gelöscht."
+      "answer": "Sie, die Leiter Ihres Standorts und der Eigentümer Ihrer Organisation. Standortpunkte während der Schicht werden nach 30 Tagen gelöscht, Anwesenheitsfotos nach 90 Tagen. Die Live-Prüfung speichert keine Gesichtsdaten - nur das Foto und das Ergebnis. Ihr Profilfoto ist nur in Ihrer Organisation sichtbar. Der Rest steht in der Datenschutzerklärung."
     },
     "q15": {
       "question": "Ruft SOS den Rettungsdienst oder die Polizei?",

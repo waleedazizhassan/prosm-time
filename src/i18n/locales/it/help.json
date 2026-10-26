@@ -36,7 +36,7 @@
     },
     "allowances": {
       "title": "Indennità",
-      "body": "Tocca \"Compila dalle mie presenze\": ogni giorno lavorato nel periodo viene compilato dalle tue tariffe (la sede del giorno, la tua categoria, le tue tariffe proprie). Aggiungi solo ciò che non ha tariffa - il viaggio, per esempio -, controlla i totali e invia; il tuo responsabile approva o rimanda con una nota. Il titolare e chi approva impostano le tariffe da Indennità > Tariffe: per sede, per categoria di personale (ingegneri, tecnici, operai...) e per persona - vale l'ultima, una tariffa vuota è ereditata - oltre al prezzo di un'ora di straordinario e di un giorno extra. Il PDF riporta i totali giornalieri e le righe per la tua firma e l'approvazione del capo progetto."
+      "body": "Premi «Compila dalle mie presenze»: ogni giorno di presenza viene compilato dalle tue tariffe (sito del giorno, poi la tua categoria, poi le tue tariffe personali). Gli straordinari sono pagati al minuto (15 minuti a 100 l'ora = 25) e le ore ancora in attesa di revisione non contano. Aggiungi solo ciò che non ha tariffa (viaggi), controlla i totali e invia; il responsabile approva o restituisce con una nota. Durante la revisione un responsabile autorizzato può modificare una riga - ogni modifica richiede un motivo, i totali si aggiornano subito e la modifica (prima, dopo, chi, perché) viene conservata; dopo l'approvazione non si può modificare nulla, salvo riapertura motivata. Il PDF segna con * ogni valore modificato, elenca le modifiche, evidenzia le festività e mostra le trattenute per ferie non retribuite (dalla paga, non dalle indennità). Tariffe in Indennità > Tariffe."
     },
     "kiosk": {
       "title": "Modalità chiosco",
@@ -59,8 +59,8 @@
       "body": "Le impostazioni contengono solo ciò che vale per tutta l'organizzazione: il raggio per chi timbra senza sede, il rifiuto o meno delle posizioni false e i valori iniziali di una nuova sede. Le regole di una sede sono nella sua pagina."
     },
     "leave": {
-      "title": "Ferie (PTO)",
-      "body": "Richiedi un permesso dalla pagina Ferie - scegli un tipo (Annuali, Malattia, Non retribuite, Emergenza, Altro), un intervallo di date e un motivo facoltativo. Solo le ferie annuali tengono traccia di un vero saldo (maturato/utilizzato/residuo) - 21 giorni all'anno per impostazione predefinita; un proprietario può aumentare o ridurre le ferie maturate di un dipendente specifico dalla sua pagina profilo in Persone (ad es. per un aumento previsto per legge in base all'anzianità). Tutti gli altri tipi mostrano solo quanti giorni hai preso quest'anno, senza un tetto fisso. Una richiesta di un dipendente ordinario assegnato a una sede va al responsabile di quella sede (e al proprietario); una richiesta di un responsabile/team leader stesso, o di chi non è ancora assegnato a nessuna sede, va direttamente al proprietario. Chi la esamina vede le richieste in sospeso dalla Console manager, e può anche revocare da lì una richiesta già approvata se i piani cambiano - sarai avvisato in entrambi i casi. Approvare un permesso per un periodo in cui è già registrata una presenza è bloccato - la presenza va prima risolta. Il proprietario non richiede ferie da questa pagina - non c'è nessuno sopra di lui che possa esaminarle. Le ferie approvate contano nel foglio ore generato per quel periodo. Solo il titolare e i responsabili approvano le ferie: un responsabile decide solo per le persone delle sedi che gestisce, mai per le proprie ferie."
+      "title": "Ferie",
+      "body": "Richiedi le ferie dalla pagina Ferie: tipo, date e, se vuoi, un motivo (evita dettagli sanitari non necessari). I tipi e i loro giorni sono stabiliti dal titolare in Impostazioni > Tipi di ferie, con valori iniziali dalla legge sul lavoro 14 del 2025 (annuali 15 giorni il primo anno, poi 21, 30 dopo 10 anni di servizio, 45 per persone con disabilità; occasionali 7 giorni l'anno, massimo 2 alla volta; malattia, non retribuite, Hajj, lutto, paternità e altre) - verificali con il testo ufficiale. Il saldo per tipo mostra i giorni usati e rimanenti. La richiesta di un dipendente va al responsabile del suo sito (e al titolare); quella di un responsabile va al titolare. Le ferie approvate si possono annullare solo prima del primo giorno - da quel giorno nessuno può annullarle, nemmeno il titolare. Ferie non retribuite: il responsabile fissa la trattenuta giornaliera all'approvazione; viene registrata automaticamente, compare nell'export paghe e nel tuo foglio indennità, e viene annullata se le ferie sono annullate prima dell'inizio."
     },
     "schedule": {
       "title": "Turni",
@@ -97,13 +97,45 @@
     "privacy": {
       "title": "La tua privacy",
       "body": "PROSM Time registra la tua posizione a timbrature, pause, cambi sede e SOS. Solo se la tua organizzazione attiva il monitoraggio della presenza, anche circa ogni 5 minuti durante il turno - su Android anche in background, dopo avertelo comunicato e con una notifica visibile - e sempre solo fino all'uscita. Foto solo dove la sede la richiede; nessun riconoscimento facciale. Le posizioni sono eliminate dopo 30 giorni, le foto dopo 90 giorni. Puoi revocare i permessi nelle impostazioni del dispositivo. Per i tuoi diritti rivolgiti prima alla tua organizzazione o a info@prosm.net. Dettagli nell'Informativa sulla privacy e nelle Condizioni d'uso qui sotto."
+    },
+    "workCalendar": {
+      "title": "Calendario di lavoro: festività, riposi e giorni speciali",
+      "body": "Dalla pagina Calendario chi è autorizzato imposta le festività (organizzazione o sito), i riposi settimanali (organizzazione, sito o turno) e i giorni speciali (orari del Ramadan, uscita anticipata). Il lavoro in un giorno festivo o di riposo conta come straordinario con il coefficiente di quel tipo di giorno, senza assenze né ritardi. In un giorno speciale valgono i suoi orari: uscire prima come concordato non comporta trattenute. I giorni si contano nel fuso orario del sito. Le festività compaiono anche nella dashboard, nei report e negli export."
+    },
+    "longSessions": {
+      "title": "Sessioni lunghe e ore in revisione",
+      "body": "Se dopo 12 ore (modificabili dal titolare) risulti ancora in servizio, l'app ti chiede una volta se stai ancora lavorando; rispondi «sto ancora lavorando» o timbra l'uscita. Dopo 24 ore la sessione viene chiusa automaticamente - le ore restano ma in attesa di revisione: non contano in totali, paga, indennità o costi finché un responsabile non le rivede (ora di uscita reale con motivo) o prolunga la sessione. Compaiono in «Da rivedere» e nei report come «chiusa automaticamente, in revisione»."
+    },
+    "overtimeControl": {
+      "title": "Straordinari, ritardi e permessi",
+      "body": "Dalla pagina della tua giornata puoi chiedere un permesso di entrata posticipata o uscita anticipata; un permesso approvato (retribuito) significa nessuna trattenuta. Un responsabile può anche segnare un tempo come «non conteggiato come straordinario». In base all'impostazione del titolare, gli straordinari contano subito o solo dopo l'approvazione - fino ad allora sono esclusi da totali e indennità. I coefficienti (giorno lavorativo, riposo, festivo, notturno) sono impostazioni. Ogni modifica manuale richiede un motivo, viene registrata, e nulla cambia in un periodo già approvato."
+    },
+    "liveCheck": {
+      "title": "Foto di presenza e verifica dal vivo",
+      "body": "Se un sito richiede una foto, viene scattata solo dalla fotocamera dal vivo - non scelta dalla galleria. Dove il telefono lo consente, una breve verifica ti chiede di girare la testa o avvicinarti; del tuo volto non viene conservato nulla oltre alla foto e al risultato, e nessun video viene inviato. Se la verifica fallisce o non è possibile, la timbratura è comunque registrata e solo segnalata al responsabile (come una foto vecchia o riutilizzata, o una posizione troppo esatta). Il responsabile accetta, rifiuta con motivo o ti chiede spiegazioni. Una persona può essere esentata dalla verifica."
+    },
+    "leavingSite": {
+      "title": "Lasciare il sito in servizio",
+      "body": "Ogni sito decide cosa succede se lasci la sua area mentre sei in servizio: una notifica ti chiede se timbrare l'uscita (puoi rispondere «sto ancora lavorando», ad esempio per una commissione), oppure l'uscita viene timbrata automaticamente dopo il tempo stabilito dal sito, all'ora in cui sei uscito. I lavoratori sul campo possono essere esentati. Ogni uscita automatica è registrata e può essere corretta da un responsabile. Su Android una piccola notifica «PROSM Time · presenza registrata» resta visibile mentre la posizione viene registrata - solo durante il turno, su un canale silenzioso."
+    },
+    "managerDashboard": {
+      "title": "La dashboard del responsabile",
+      "body": "Il titolare e chi ha «Vedere la dashboard» vedono: una barra SOS (finché qualcuno la prende in carico), chip per ciò che attende (solo se c'è qualcosa), i numeri con confronto con il periodo precedente solo se ci sono dati, la mappa dei siti con l'area e i presenti, la tabella dei siti con i lavoratori esterni, la coda delle approvazioni, le persone per ruolo, previsto vs effettivo, indennità e costo stimato (solo con «Vedere il costo stimato») e il registro delle azioni. Scegli organizzazione, i tuoi siti o te stesso, e il periodo; mappa e «presenti» sono in diretta. Si aggiorna ogni minuto; «Personalizza» nasconde o riordina le schede."
+    },
+    "peopleAndPhotos": {
+      "title": "Persone, ruoli e foto profilo",
+      "body": "La pagina Persone raggruppa tutti per ruolo - responsabili (con il titolare), supervisori, dipendenti, osservatori, poi eventuali ruoli personalizzati - ogni gruppo con il conteggio, comprimibile. Una ricerca e i filtri sito, stato e turno valgono per tutti i gruppi. Ogni persona mostra foto profilo (o iniziale), ruolo, sito, turno e presenza. Un responsabile vede solo le persone dei suoi siti. La tua foto profilo si imposta dal profilo; non è la foto di presenza ed è visibile solo nella tua organizzazione."
+    },
+    "phoneNotifications": {
+      "title": "Notifiche e promemoria sul telefono",
+      "body": "Tutte le notifiche di PROSM Time hanno la stessa piccola icona PROSM. I tuoi promemoria di entrata e uscita si impostano dalla loro scheda nella dashboard. Android 14 e successivi possono non consentire allarmi esatti; un promemoria può allora arrivare con qualche minuto di ritardo - la scheda lo indica e offre di consentire gli allarmi esatti. Se il rilevamento della posizione non può partire (permesso negato o posizione disattivata), l'app te lo dice e propone di riprovare o aprire le impostazioni; la timbratura non va mai persa. La notifica di aggiornamento si può scorrere via."
     }
   },
   "faq": {
     "title": "Domande frequenti",
     "q1": {
       "question": "Ho dimenticato di timbrare l'uscita, cosa faccio?",
-      "answer": "Contatta un amministratore o un responsabile - può registrare la timbratura di uscita corretta per tuo conto, e l'azione viene registrata come sua, non tua. Un responsabile può anche inviare una richiesta di correzione su un orario già registrato, che - una volta approvata - lo aggiorna realmente."
+      "answer": "Contatta il tuo responsabile - può registrare l'uscita corretta per te (l'azione è registrata a suo nome) o approvare una correzione. Se dopo 12 ore risulti ancora in servizio, l'app ti chiede una volta se stai ancora lavorando; dopo 24 ore la sessione viene chiusa automaticamente e le ore attendono la revisione prima di contare."
     },
     "q2": {
       "question": "Perché la mia timbratura di entrata è stata segnalata come fuori dalla mia area di lavoro?",
@@ -155,7 +187,7 @@
     },
     "q14": {
       "question": "Chi vede la mia posizione e le mie foto, e per quanto tempo?",
-      "answer": "Tu, i responsabili della tua sede e il titolare. Le posizioni sono eliminate dopo 30 giorni, le foto dopo 90 giorni."
+      "answer": "Tu, i responsabili del tuo sito e il titolare della tua organizzazione. Le posizioni rilevate durante il turno vengono cancellate dopo 30 giorni e le foto di presenza dopo 90. La verifica dal vivo non conserva dati del volto - solo la foto e il risultato. La tua foto profilo è visibile solo nella tua organizzazione. L'informativa sulla privacy spiega il resto."
     },
     "q15": {
       "question": "Il SOS chiama ambulanza o polizia?",

@@ -36,7 +36,7 @@
     },
     "allowances": {
       "title": "Indemnités",
-      "body": "Touchez « Remplir depuis ma présence » : chaque jour travaillé de la période est rempli à partir de vos tarifs (le site du jour, votre catégorie, vos tarifs propres). Ajoutez seulement ce qui n'a pas de tarif - le déplacement, par exemple -, vérifiez les totaux et envoyez ; votre responsable approuve ou renvoie avec une note. Le propriétaire et ceux qui approuvent fixent les tarifs dans Indemnités > Tarifs : par site, par catégorie de personnel (ingénieurs, techniciens, ouvriers...) et par personne - le dernier l'emporte, un tarif vide est hérité - ainsi que le prix d'une heure et d'un jour supplémentaires. Le PDF comporte les totaux par jour et des lignes pour votre signature et l'approbation du chef de projet."
+      "body": "Appuyez sur « Remplir depuis ma présence » : chaque jour de présence est rempli selon vos tarifs d'indemnités (site du jour, puis votre catégorie, puis vos tarifs personnels). Les heures sup. sont payées à la minute près (15 minutes à 100 l'heure = 25), et les heures encore en attente de revue ne comptent pas. Ajoutez seulement ce qui n'a pas de tarif (déplacement), vérifiez les totaux et envoyez ; votre responsable approuve ou renvoie avec une note. Pendant la revue, un responsable autorisé peut modifier une ligne - chaque modification exige un motif, les totaux se mettent à jour et la modification (avant, après, qui, pourquoi) est conservée ; rien ne peut changer après l'approbation, sauf réouverture motivée. Le PDF marque chaque valeur modifiée d'un *, liste les modifications, met en évidence les jours fériés et montre les retenues pour congé sans solde (sur la paie, pas sur les indemnités). Les tarifs se règlent dans Indemnités > Tarifs."
     },
     "kiosk": {
       "title": "Mode kiosque",
@@ -59,8 +59,8 @@
       "body": "Les paramètres ne contiennent que ce qui vaut pour toute l'organisation : le rayon pour un pointage sans site, le refus ou non des fausses positions, et les valeurs de départ d'un nouveau site. Les règles d'un site sont sur la page du site."
     },
     "leave": {
-      "title": "Congés (PTO)",
-      "body": "Demandez un congé depuis la page Congés - choisissez un type (Annuel, Maladie, Sans solde, Urgence, Autre), une période et un motif facultatif. Seul le congé annuel suit un véritable solde (acquis/utilisé/restant) - 21 jours par an par défaut ; un propriétaire peut augmenter ou réduire le droit annuel d'un employé spécifique depuis sa fiche dans Personnes (par ex. pour une augmentation légale liée à l'ancienneté). Les autres types affichent seulement le nombre de jours pris cette année, sans plafond fixe. Une demande d'un employé ordinaire affecté à un site va au responsable de ce site (et au propriétaire) ; une demande d'un responsable/chef d'équipe lui-même, ou de quelqu'un non encore affecté à un site, va directement au propriétaire. Votre examinateur voit les demandes en attente depuis la Console gestionnaire, et peut aussi révoquer une demande déjà approuvée si les plans changent - vous serez notifié dans les deux cas. Approuver un congé pour une période où une présence est déjà enregistrée est bloqué - la présence doit d'abord être résolue. Le propriétaire ne demande pas de congé depuis cette page - personne au-dessus de lui ne pourrait l'examiner. Les congés approuvés sont comptabilisés dans votre feuille de temps générée pour cette période. Seuls le propriétaire et les responsables approuvent les congés : un responsable ne décide que pour les personnes des sites qu'il gère, jamais pour ses propres congés."
+      "title": "Congés",
+      "body": "Demandez un congé depuis la page Congés : type, dates et, si vous le souhaitez, un motif (évitez les détails de santé inutiles). Les types et leurs jours sont fixés par le propriétaire dans Paramètres > Types de congés, avec des valeurs initiales issues de la loi du travail 14 de 2025 (annuel 15 jours la première année, 21 ensuite, 30 après 10 ans, 45 pour les personnes handicapées ; occasionnel 7 jours par an, 2 au maximum à la fois ; maladie, sans solde, Hajj, deuil, paternité, etc.) - à vérifier avec le texte officiel. Votre solde par type indique les jours pris et restants. La demande d'un employé va au responsable de son site (et au propriétaire) ; celle d'un responsable va au propriétaire. Un congé approuvé ne peut être annulé qu'avant son premier jour - ensuite, personne ne peut l'annuler, pas même le propriétaire. Congé sans solde : le responsable fixe la retenue par jour à l'approbation ; elle est enregistrée automatiquement, apparaît dans l'export de paie et votre fiche d'indemnités, et est annulée si le congé l'est avant de commencer."
     },
     "schedule": {
       "title": "Planning des shifts",
@@ -97,13 +97,45 @@
     "privacy": {
       "title": "Votre vie privée",
       "body": "PROSM Time enregistre votre position lors des pointages, pauses, changements de site et SOS. Seulement si votre organisation active le suivi de présence, aussi environ toutes les 5 minutes pendant le poste - sur Android aussi en arrière-plan, après vous en avoir informé et avec une notification visible - et toujours jusqu'au départ seulement. Une photo uniquement si votre site l'exige ; pas de reconnaissance faciale. Les positions sont supprimées après 30 jours, les photos après 90 jours. Vous pouvez retirer les autorisations dans les réglages de l'appareil. Pour vos droits, adressez-vous d'abord à votre organisation ou à info@prosm.net. Détails dans la Politique de confidentialité et les Conditions d'utilisation ci-dessous."
+    },
+    "workCalendar": {
+      "title": "Calendrier de travail : jours fériés, repos et jours particuliers",
+      "body": "Depuis la page Calendrier, les personnes autorisées définissent les jours fériés (organisation ou site), les jours de repos hebdomadaires (organisation, site ou équipe) et les jours particuliers (horaires du Ramadan, sortie anticipée). Le travail un jour férié ou de repos compte en heures sup. au coefficient de ce type de jour, sans absence ni retard ce jour-là. Un jour particulier suit ses propres horaires : partir plus tôt comme convenu n'entraîne aucune retenue. Les jours sont comptés dans le fuseau du site. Les jours fériés apparaissent aussi dans le tableau de bord, les rapports et les exports."
+    },
+    "longSessions": {
+      "title": "Sessions longues et heures en attente de revue",
+      "body": "Si vous êtes toujours pointé après 12 heures (modifiable par le propriétaire), l'appli vous demande une fois si vous travaillez encore ; répondez « je travaille encore » ou pointez la sortie. Après 24 heures, la session est fermée automatiquement - ses heures sont conservées mais en attente de revue : elles ne comptent ni dans les totaux, ni la paie, ni les indemnités, ni le coût tant qu'un responsable ne les a pas revues (heure de sortie réelle avec motif) ou prolongées. Elles apparaissent dans « À revoir » et dans les rapports comme « fermée automatiquement, en attente de revue »."
+    },
+    "overtimeControl": {
+      "title": "Heures sup., retards et autorisations",
+      "body": "Vous pouvez demander une autorisation d'arriver en retard ou de partir plus tôt depuis la page de votre journée ; une autorisation approuvée (payée) évite toute retenue. Un responsable peut aussi marquer un temps comme « non compté en heures sup. ». Selon le réglage du propriétaire, les heures sup. comptent tout de suite ou seulement après approbation - en attendant, elles sont exclues des totaux et des indemnités. Les coefficients (jour ouvré, repos, férié, nuit) sont des réglages. Tout ajustement manuel exige un motif, est enregistré, et rien ne change sur une période déjà approuvée."
+    },
+    "liveCheck": {
+      "title": "Photo de présence et contrôle de présence réelle",
+      "body": "Lorsqu'un site demande une photo, elle est prise uniquement depuis la caméra en direct - pas depuis la galerie. Si le téléphone le permet, un court contrôle vous demande de tourner la tête ou de vous rapprocher ; rien de votre visage n'est conservé à part la photo et le résultat, et aucune vidéo n'est envoyée. Si le contrôle échoue ou n'est pas possible, votre pointage est bien enregistré et seulement signalé à votre responsable (de même pour une photo ancienne ou réutilisée, ou une position trop exacte). Le responsable accepte, refuse avec motif ou vous interroge. Une personne peut être dispensée du contrôle."
+    },
+    "leavingSite": {
+      "title": "Quitter le site en étant pointé",
+      "body": "Chaque site décide de ce qui se passe si vous quittez sa zone en étant pointé : une notification vous demande si vous voulez pointer la sortie (vous pouvez répondre « je travaille encore », par exemple pour une course), ou la sortie est pointée automatiquement après le délai fixé par le site, à l'heure où vous êtes parti. Les travailleurs de terrain peuvent être dispensés. Chaque sortie automatique est enregistrée et peut être corrigée par un responsable. Sur Android, une petite notification « PROSM Time · présence enregistrée » reste visible pendant l'enregistrement de la position - seulement pendant votre service, sur un canal silencieux."
+    },
+    "managerDashboard": {
+      "title": "Le tableau de bord du responsable",
+      "body": "Le propriétaire et quiconque a « Voir le tableau de bord » voient : une barre SOS (jusqu'à prise en charge), des pastilles pour ce qui attend (seulement s'il y a quelque chose), les chiffres avec comparaison à la période précédente seulement si elle a des données, la carte des sites avec leur zone et les présents, le tableau des sites avec les travailleurs externes, la file d'approbations, les personnes par rôle, prévu vs réel, indemnités et coût estimé (seulement avec « Voir le coût estimé ») et le journal des actions. Choisissez l'organisation, vos sites ou vous-même, et la période ; la carte et « présents » sont en direct. Actualisation chaque minute ; « Personnaliser » masque ou réordonne les cartes."
+    },
+    "peopleAndPhotos": {
+      "title": "Personnes, rôles et photos de profil",
+      "body": "La page Personnes regroupe chacun par rôle - responsables (avec le propriétaire), superviseurs, employés, observateurs, puis tout rôle personnalisé - chaque groupe avec son nombre, repliable. Une recherche et les filtres site, statut et équipe valent pour tous les groupes. Chaque personne affiche sa photo de profil (ou son initiale), son rôle, son site, son équipe et sa présence. Un responsable ne voit que les personnes de ses sites. Votre photo de profil se règle depuis votre profil ; ce n'est pas la photo de présence, et elle n'est visible que dans votre organisation."
+    },
+    "phoneNotifications": {
+      "title": "Notifications et rappels sur le téléphone",
+      "body": "Toutes les notifications PROSM Time portent la même petite icône PROSM. Vos rappels d'entrée et de sortie se règlent depuis leur carte du tableau de bord. Android 14 et suivants peuvent refuser les alarmes exactes ; un rappel peut alors arriver avec quelques minutes de retard - la carte l'indique et propose d'autoriser les alarmes exactes. Si le suivi de position ne peut pas démarrer (autorisation refusée ou localisation désactivée), l'appli vous le dit et propose de réessayer ou d'ouvrir les paramètres ; votre pointage n'est jamais perdu. La notification de mise à jour peut être balayée."
     }
   },
   "faq": {
     "title": "Questions fréquentes",
     "q1": {
       "question": "J'ai oublié de pointer mon départ, que dois-je faire ?",
-      "answer": "Contactez un administrateur ou un responsable - il peut enregistrer le bon pointage de départ en votre nom, et l'action est enregistrée comme la sienne, pas la vôtre. Un responsable peut aussi soumettre une demande de correction sur une heure déjà enregistrée, qui - une fois approuvée - la met réellement à jour."
+      "answer": "Contactez votre responsable - il peut enregistrer la bonne sortie à votre place (l'action est enregistrée à son nom), ou approuver une correction. Si vous êtes toujours pointé après 12 heures, l'appli vous demande une fois si vous travaillez encore ; après 24 heures, la session est fermée automatiquement et ses heures attendent la revue du responsable avant de compter."
     },
     "q2": {
       "question": "Pourquoi mon pointage d'arrivée a-t-il été signalé comme hors de ma zone de travail ?",
@@ -155,7 +187,7 @@
     },
     "q14": {
       "question": "Qui voit ma position et mes photos, et combien de temps ?",
-      "answer": "Vous, les responsables de votre site et le propriétaire. Les positions sont supprimées après 30 jours, les photos après 90 jours."
+      "answer": "Vous, les responsables de votre site et le propriétaire de votre organisation. Les positions relevées pendant le service sont supprimées après 30 jours et les photos de présence après 90 jours. Le contrôle de présence réelle ne conserve aucune donnée du visage - seulement la photo et le résultat. Votre photo de profil n'est visible que dans votre organisation. La politique de confidentialité explique le reste."
     },
     "q15": {
       "question": "Le SOS appelle-t-il une ambulance ou la police ?",
