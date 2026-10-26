@@ -273,7 +273,8 @@
     "manageExitPolicyRequired": "ليست لديك صلاحية تغيير إعداد مغادرة الموقع.",
     "invalidExitPolicy": "راجع إعداد مغادرة الموقع.",
     "dashboardViewRequired": "ليست لديك صلاحية عرض لوحة التحكم.",
-    "invalidLayout": "تعذّر حفظ ترتيب البطاقات."
+    "invalidLayout": "تعذّر حفظ ترتيب البطاقات.",
+    "trialSetupFailed": "تعذّر بدء النسخة التجريبية. حاول مرة أخرى."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

@@ -273,7 +273,8 @@
     "manageExitPolicyRequired": "Vous n'avez pas le droit de modifier ce réglage.",
     "invalidExitPolicy": "Vérifiez les réglages.",
     "dashboardViewRequired": "Vous n'avez pas accès au tableau de bord.",
-    "invalidLayout": "La disposition des widgets n'a pas pu être enregistrée."
+    "invalidLayout": "La disposition des widgets n'a pas pu être enregistrée.",
+    "trialSetupFailed": "L'essai n'a pas pu démarrer. Réessayez."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

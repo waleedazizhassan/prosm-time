@@ -339,4 +339,6 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   // v2.3.43 step 17: the manager dashboard
   "DASHBOARD.VIEW AUTHORITY REQUIRED": "dashboardViewRequired",
   "INVALID LAYOUT": "invalidLayout",
+  // v2.3.43 step 21: the trial could not be marked (fails closed)
+  "The trial could not be started. Please try again.": "trialSetupFailed",
 };

@@ -273,7 +273,8 @@
     "manageExitPolicyRequired": "Non hai il permesso di modificare questa impostazione.",
     "invalidExitPolicy": "Controlla le impostazioni.",
     "dashboardViewRequired": "Non hai accesso alla dashboard.",
-    "invalidLayout": "Impossibile salvare la disposizione dei widget."
+    "invalidLayout": "Impossibile salvare la disposizione dei widget.",
+    "trialSetupFailed": "Impossibile avviare la prova. Riprova."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

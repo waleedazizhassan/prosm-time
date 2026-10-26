@@ -273,7 +273,8 @@
     "manageExitPolicyRequired": "Sie dürfen diese Einstellung nicht ändern.",
     "invalidExitPolicy": "Bitte Einstellungen prüfen.",
     "dashboardViewRequired": "Sie haben keinen Zugriff auf das Dashboard.",
-    "invalidLayout": "Das Widget-Layout konnte nicht gespeichert werden."
+    "invalidLayout": "Das Widget-Layout konnte nicht gespeichert werden.",
+    "trialSetupFailed": "Die Testversion konnte nicht gestartet werden. Bitte erneut versuchen."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

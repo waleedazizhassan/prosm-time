@@ -273,7 +273,8 @@
     "manageExitPolicyRequired": "You don't have permission to change what happens when someone leaves the site.",
     "invalidExitPolicy": "Check the leaving-the-site settings.",
     "dashboardViewRequired": "You do not have access to the dashboard.",
-    "invalidLayout": "The widget layout could not be saved."
+    "invalidLayout": "The widget layout could not be saved.",
+    "trialSetupFailed": "The trial could not be started. Please try again."
   },
   "pageLoad": {
     "title": "This page needs a connection",

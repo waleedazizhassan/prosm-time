@@ -173,8 +173,22 @@ serve(async (request: Request) => {
 
     if (demo) {
       // The trial license is marked here; it locks (never deletes) when it ends.
-      const { error: trialError } = await serviceClient.rpc("mark_prosm_time_trial", { p_organization_id: bootstrapResult.organizationId });
-      if (trialError) console.error("[activate-organization] MARK TRIAL failed", trialError);
+      // v2.3.43 step 21 (audit): fail closed - an unmarked trial license would
+      // never lock (an unlimited trial). Tried twice; if it still fails, the
+      // Owner's account is removed (the organisation is left with no one able
+      // to sign in) and the person is asked to try again.
+      const markTrial = () => serviceClient.rpc("mark_prosm_time_trial", { p_organization_id: bootstrapResult.organizationId });
+      let { error: trialError } = await markTrial();
+      if (trialError) ({ error: trialError } = await markTrial());
+      if (trialError) {
+        console.error("[activate-organization] MARK TRIAL failed twice - trial not started", trialError);
+        try {
+          await serviceClient.auth.admin.deleteUser(authUserId);
+        } catch (rollbackError) {
+          console.error("[activate-organization] ROLLBACK AUTH USER failed", rollbackError);
+        }
+        return errorResponse("The trial could not be started. Please try again.", 500, "TRIAL_SETUP_FAILED");
+      }
     }
 
     return successResponse({
