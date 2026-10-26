@@ -76,6 +76,9 @@ export default function PeopleByRole({ compact = false, onOpen }: { compact?: bo
     <div className={styles.wrapper}>
       <div className={styles.filters}>
         <Input label={t("byRole.search")} name="peopleSearch" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={t("byRole.searchPlaceholder")} />
+        {/* the dashboard's short list keeps only the search (owner 2026-10-26) */}
+        {compact ? null : (
+          <>
         <Select label={t("byRole.site")} name="peopleSite" value={site} onChange={(event) => setSite(event.target.value)} options={[{ value: "", label: t("byRole.all") }, ...sites.map(([id, name]) => ({ value: id, label: name }))]} />
         <Select
           label={t("byRole.status")}
@@ -95,6 +98,8 @@ export default function PeopleByRole({ compact = false, onOpen }: { compact?: bo
             { value: "none", label: t("byRole.noShift") },
           ]}
         />
+          </>
+        )}
       </div>
 
       {groups.length === 0 ? <EmptyState kind="notFound" message={t("byRole.noResults")} /> : null}

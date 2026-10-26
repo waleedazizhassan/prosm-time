@@ -8,16 +8,52 @@
   gap: var(--space-4);
 }
 
-.toolbar {
-  position: sticky;
-  top: 0;
-  z-index: 5;
+/* Owner 2026-10-26: the top of the page scrolls with it (a stuck bar
+   covered the map and the cards), and it is two tidy lines: the title with
+   its actions, then one filter bar. */
+.head {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   gap: var(--space-2) var(--space-3);
-  padding: var(--space-2) 0;
+  padding: var(--space-2);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+}
+
+.siteSelect {
+  min-height: 34px;
+  min-width: 11rem;
+  margin-inline-start: auto;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
   background: var(--surface-app);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 0.8125rem;
+}
+
+.customRange {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 12rem));
+  gap: var(--space-3);
 }
 
 .titleBlock {
@@ -40,6 +76,7 @@
 
 .segmented {
   display: inline-flex;
+  flex: none;
   padding: 2px;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
@@ -47,6 +84,7 @@
 }
 
 .segmented button {
+  white-space: nowrap;
   min-height: 34px;
   padding: 0 var(--space-3);
   border: 0;
@@ -62,10 +100,6 @@
   background: var(--brand-primary);
   color: var(--text-on-brand, #fff);
   font-weight: var(--font-weight-semibold);
-}
-
-.filterSelect {
-  min-width: 10rem;
 }
 
 .chips {
@@ -124,10 +158,12 @@
   grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
+/* the figure cards share their row evenly: all in one row on a wide
+   screen, two even rows below 1280px, two columns on a phone */
 .kpis {
   display: grid;
   gap: var(--space-3);
-  grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr));
+  grid-template-columns: repeat(var(--kpi-count, 6), minmax(0, 1fr));
 }
 
 .kpi {
@@ -193,6 +229,34 @@
   background: var(--brand-primary);
 }
 
+/* figures inside a card, without a card around each (owner 2026-10-26) */
+.figures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.figures dt {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+
+.figures dd {
+  margin: 2px 0 0;
+  color: var(--text-primary);
+  font-size: 1.375rem;
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+.figures small {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: normal;
+}
+
 .widget {
   display: flex;
   flex-direction: column;
@@ -235,6 +299,8 @@
 }
 
 .mapBox {
+  /* the map's own layers stay inside its card */
+  isolation: isolate;
   position: relative;
   flex: 1;
   min-height: 260px;
@@ -409,6 +475,10 @@
 
 /* 768-1279px: two columns, every widget half or full width */
 @media (max-width: 1279px) {
+  .kpis {
+    grid-template-columns: repeat(var(--kpi-half, 3), minmax(0, 1fr));
+  }
+
   .span7,
   .span5,
   .span4 {
@@ -437,7 +507,70 @@
     min-height: 240px;
   }
 
-  .toolbar {
-    position: static;
+  .kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* an odd last figure takes the whole row */
+  .kpis > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .kpiValue {
+    font-size: 1.5rem;
+  }
+
+  /* the filters are one line that scrolls sideways, not a tall stack */
+  .filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .siteSelect {
+    flex: none;
+    min-width: 9rem;
+  }
+
+  .actionLabel {
+    display: none;
+  }
+
+  .customRange {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* tables become rows of cards (each value with its column name) */
+  .table thead {
+    display: none;
+  }
+
+  .table tr {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px var(--space-3);
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .table td {
+    padding: 0;
+    border: 0;
+  }
+
+  .table td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+  }
+
+  .table td:first-child {
+    grid-column: 1 / -1;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .subRow td {
+    grid-column: 1 / -1;
   }
 }

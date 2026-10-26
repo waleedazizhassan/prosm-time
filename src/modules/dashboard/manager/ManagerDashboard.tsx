@@ -13,7 +13,6 @@ import { formatDateOnly, formatTimeOnly } from "../../../core/utils/formatDate";
 import Button from "../../../components/common/Button";
 import Modal from "../../../components/common/Modal";
 import Input from "../../../components/common/Input";
-import Select from "../../../components/common/Select";
 import Toggle from "../../../components/common/Toggle";
 import Textarea from "../../../components/common/Textarea";
 import ErrorText from "../../../components/common/ErrorText";
@@ -172,6 +171,9 @@ export default function ManagerDashboard() {
   const externalNow = (data?.sites ?? []).reduce((sum, site) => sum + (site.external?.presentNow ?? 0), 0);
   const externalSites = (data?.sites ?? []).filter((site) => (site.external?.presentNow ?? 0) > 0).length;
 
+  // the figure cards share a row evenly (no 5 + 2 with a gap)
+  const kpiCount = 5 + (data?.canViewExternal ? 1 : 0) + (data?.canViewCost && kpi?.estimatedCost !== null ? 1 : 0);
+
   const workedTrend = trend(kpi?.workedMinutes ?? 0, kpi?.previous?.workedMinutes);
   const overtimeTrend = trend(kpi?.overtimeMinutes ?? 0, kpi?.previous?.overtimeMinutes, true);
   const lateTrend = trend(kpi?.lateCount ?? 0, kpi?.previous?.lateCount, true);
@@ -322,17 +324,19 @@ export default function ManagerDashboard() {
             </div>
             {data?.allowances ? (
               <>
-                <div className={styles.kpis}>
-                  <div className={styles.kpi}>
-                    <span className={styles.kpiLabel}>{t("manager.cost.allowances")}</span>
-                    <span className={styles.kpiValue}>{data.allowances.total.toLocaleString(i18n.language, { maximumFractionDigits: 0 })}</span>
+                <dl className={styles.figures}>
+                  <div>
+                    <dt>{t("manager.cost.allowances")}</dt>
+                    <dd>{data.allowances.total.toLocaleString(i18n.language, { maximumFractionDigits: 0 })}</dd>
                   </div>
-                  <div className={styles.kpi}>
-                    <span className={styles.kpiLabel}>{t("manager.cost.overtime")}</span>
-                    <span className={styles.kpiValue}>{data.allowances.overtimeAmount.toLocaleString(i18n.language, { maximumFractionDigits: 0 })}</span>
-                    <span className={styles.kpiHint}>{t("manager.hoursValue", { hours: hours(data.allowances.overtimeMinutes) })}</span>
+                  <div>
+                    <dt>{t("manager.cost.overtime")}</dt>
+                    <dd>
+                      {data.allowances.overtimeAmount.toLocaleString(i18n.language, { maximumFractionDigits: 0 })}
+                      <small>{t("manager.hoursValue", { hours: hours(data.allowances.overtimeMinutes) })}</small>
+                    </dd>
                   </div>
-                </div>
+                </dl>
                 <TopSitesCost sites={data.sites} t={t} language={i18n.language} />
                 <span className={styles.rowMeta}>{t("manager.cost.note")}</span>
               </>
@@ -371,11 +375,11 @@ export default function ManagerDashboard() {
                     {data.audit.map((row) => (
                       <tr key={row.id}>
                         <td>{`${formatDateOnly(row.created_at, i18n.language)} ${time(row.created_at)}`}</td>
-                        <td>{row.actor_name ?? t("manager.audit.system")}</td>
-                        <td>{auditLabel(row.action, t)}</td>
-                        <td>{row.subject_name ?? "—"}</td>
-                        <td>{row.device ?? "—"}</td>
-                        <td>{row.reason ?? "—"}</td>
+                        <td data-label={t("manager.audit.columns.actor")}>{row.actor_name ?? t("manager.audit.system")}</td>
+                        <td data-label={t("manager.audit.columns.action")}>{auditLabel(row.action, t)}</td>
+                        <td data-label={t("manager.audit.columns.subject")}>{row.subject_name ?? "—"}</td>
+                        <td data-label={t("manager.audit.columns.device")}>{row.device ?? "—"}</td>
+                        <td data-label={t("manager.audit.columns.reason")}>{row.reason ?? "—"}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -389,8 +393,9 @@ export default function ManagerDashboard() {
 
   return (
     <div className={styles.page}>
-      {/* row 0: title, filters, actions (sticky) */}
-      <div className={styles.toolbar}>
+      {/* row 0 (owner 2026-10-26: tidy, and not stuck to the top): the title
+          with its actions on one line, then one filter bar */}
+      <div className={styles.head}>
         <div className={styles.titleBlock}>
           <h1 className={styles.title}>{t("manager.title")}</h1>
           <p className={styles.subtitle}>
@@ -402,6 +407,19 @@ export default function ManagerDashboard() {
             ) : null}
           </p>
         </div>
+        <div className={styles.actions}>
+          {hasPermission("attendance.clock_in_on_behalf") ? (
+            <Button size="sm" onClick={() => navigate("/admin-clock")}>
+              <UserPlus size={14} /> {t("manager.proxyClock")}
+            </Button>
+          ) : null}
+          <Button size="sm" variant="ghost" onClick={() => setCustomizeOpen(true)} aria-label={t("manager.customize")} title={t("manager.customize")}>
+            <Settings2 size={14} /> <span className={styles.actionLabel}>{t("manager.customize")}</span>
+          </Button>
+        </div>
+      </div>
+
+      <div className={styles.filters}>
         <div className={styles.segmented} role="group" aria-label={t("manager.scopeLabel")}>
           {((isOwner ? ["org", "mine", "me"] : ["mine", "me"]) as DashboardScope[]).map((value) => (
             <button key={value} type="button" aria-pressed={scope === value} onClick={() => setScope(value)}>
@@ -416,24 +434,21 @@ export default function ManagerDashboard() {
             </button>
           ))}
         </div>
-        {period === "custom" ? (
-          <>
-            <Input label={t("manager.from")} name="dashFrom" type="date" value={custom.from} onChange={(event) => setCustom({ ...custom, from: event.target.value })} />
-            <Input label={t("manager.to")} name="dashTo" type="date" value={custom.to} onChange={(event) => setCustom({ ...custom, to: event.target.value })} />
-          </>
-        ) : null}
-        <div className={styles.filterSelect}>
-          <Select label={t("manager.siteFilter")} name="dashSite" value={siteFilter} onChange={(event) => setSiteFilter(event.target.value)} options={[{ value: "", label: t("manager.allSites") }, ...sites.map((site) => ({ value: site.id, label: site.name }))]} />
-        </div>
-        {hasPermission("attendance.clock_in_on_behalf") ? (
-          <Button size="sm" onClick={() => navigate("/admin-clock")}>
-            <UserPlus size={14} /> {t("manager.proxyClock")}
-          </Button>
-        ) : null}
-        <Button size="sm" variant="ghost" onClick={() => setCustomizeOpen(true)}>
-          <Settings2 size={14} /> {t("manager.customize")}
-        </Button>
+        <select className={styles.siteSelect} aria-label={t("manager.siteFilter")} value={siteFilter} onChange={(event) => setSiteFilter(event.target.value)}>
+          <option value="">{t("manager.allSites")}</option>
+          {sites.map((site) => (
+            <option key={site.id} value={site.id}>
+              {site.name}
+            </option>
+          ))}
+        </select>
       </div>
+      {period === "custom" ? (
+        <div className={styles.customRange}>
+          <Input label={t("manager.from")} name="dashFrom" type="date" value={custom.from} onChange={(event) => setCustom({ ...custom, from: event.target.value })} />
+          <Input label={t("manager.to")} name="dashTo" type="date" value={custom.to} onChange={(event) => setCustom({ ...custom, to: event.target.value })} />
+        </div>
+      ) : null}
 
       <ErrorText>{error}</ErrorText>
 
@@ -472,7 +487,7 @@ export default function ManagerDashboard() {
           ))}
         </div>
       ) : kpi ? (
-        <div className={styles.kpis}>
+        <div className={styles.kpis} style={{ ["--kpi-count" as string]: kpiCount, ["--kpi-half" as string]: Math.ceil(kpiCount / 2) }}>
           <button type="button" className={styles.kpi} onClick={() => navigate("/attendance?period=today")}>
             <span className={styles.kpiLabel}>{t("manager.kpi.present")}</span>
             <span className={styles.kpiValue}>{kpi.presentNow}</span>
@@ -585,12 +600,12 @@ function SiteRows({ site, t, externalOpen, onToggleExternal, onFilter }: { site:
     <>
       <tr onClick={onFilter} style={{ cursor: "pointer" }}>
         <td style={{ fontWeight: 600 }}>{site.name}</td>
-        <td>{site.expected ? `${site.present} / ${site.expected}` : site.present}</td>
-        <td>{site.late}</td>
-        <td>{site.absent}</td>
-        <td>{hours(site.workedMinutes)}</td>
-        <td>{hours(site.overtimeMinutes)}</td>
-        <td>
+        <td data-label={t("manager.sites.columns.present")}>{site.expected ? `${site.present} / ${site.expected}` : site.present}</td>
+        <td data-label={t("manager.sites.columns.late")}>{site.late}</td>
+        <td data-label={t("manager.sites.columns.absent")}>{site.absent}</td>
+        <td data-label={t("manager.sites.columns.workedMinutes")}>{hours(site.workedMinutes)}</td>
+        <td data-label={t("manager.sites.columns.overtimeMinutes")}>{hours(site.overtimeMinutes)}</td>
+        <td data-label={t("manager.sites.columns.status")}>
           {site.sos ? (
             <span className={styles.statusBad}>{t("manager.sites.statusSos")}</span>
           ) : site.outside > 0 ? (
