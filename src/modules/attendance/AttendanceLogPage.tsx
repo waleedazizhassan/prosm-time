@@ -152,6 +152,7 @@ export default function AttendanceLogPage() {
     setLoadError("");
     const result = await ManagerRepository.listAttendanceHistory(startDate, endDate);
     if (!result.success) {
+      console.warn("[attendance] could not load the records:", result.message);
       setLoadError(humanizeBackendError(result.message, t) ?? t("loadError"));
       setRows([]);
       setLoading(false);

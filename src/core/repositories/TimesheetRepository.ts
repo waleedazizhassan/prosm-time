@@ -1,4 +1,5 @@
 import DatabaseManager from "../database/DatabaseManager";
+import { selectInChunks } from "../database/inChunks";
 
 export interface ServiceResult<T = null> {
   success: boolean;
@@ -287,14 +288,18 @@ class TimesheetRepository {
       const clockOutEvidenceBySession = new Map<string, string>();
 
       if (sessionIds.length > 0) {
-        const eventsResult = await this.client.from("attendance_events").select("id, session_id, event_type").in("session_id", sessionIds).in("event_type", ["clock_in", "clock_out"]);
+        const eventsResult = await selectInChunks(sessionIds, (chunk) =>
+          this.client.from("attendance_events").select("id, session_id, event_type").in("session_id", chunk).in("event_type", ["clock_in", "clock_out"]),
+        );
         if (!eventsResult.error) {
           const events = (eventsResult.data ?? []) as Array<{ id: string; session_id: string; event_type: "clock_in" | "clock_out" }>;
           const eventIds = events.map((event) => event.id);
 
           const evidenceByEvent = new Map<string, string>();
           if (eventIds.length > 0) {
-            const evidenceResult = await this.client.from("camera_evidence").select("attendance_event_id, storage_path").in("attendance_event_id", eventIds).order("captured_at", { ascending: true });
+            const evidenceResult = await selectInChunks(eventIds, (chunk) =>
+              this.client.from("camera_evidence").select("attendance_event_id, storage_path").in("attendance_event_id", chunk).order("captured_at", { ascending: true }),
+            );
             if (!evidenceResult.error) {
               for (const evidenceRow of (evidenceResult.data ?? []) as Array<{ attendance_event_id: string; storage_path: string }>) {
                 if (!evidenceByEvent.has(evidenceRow.attendance_event_id)) evidenceByEvent.set(evidenceRow.attendance_event_id, evidenceRow.storage_path);

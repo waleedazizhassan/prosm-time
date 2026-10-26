@@ -1,5 +1,6 @@
 import DatabaseManager from "../database/DatabaseManager";
 import { roleRank } from "../utils/roleRank";
+import { selectInChunks } from "../database/inChunks";
 
 export interface ServiceResult<T = null> {
   success: boolean;
@@ -313,11 +314,13 @@ class ManagerRepository {
       const deviceTimeEvents = new Set<string>();
       const mockLocationEvents = new Set<string>();
       if (sessionIds.length > 0) {
-        const eventsResult = await this.client
-          .from("attendance_events")
-          .select("id, session_id, event_type, latitude, longitude, within_geofence, note, activity, time_source, is_mock_location, recorded_by_user:users!attendance_events_recorded_by_fkey(full_name)")
-          .in("session_id", sessionIds)
-          .in("event_type", ["clock_in", "clock_out"]);
+        const eventsResult = await selectInChunks(sessionIds, (chunk) =>
+          this.client
+            .from("attendance_events")
+            .select("id, session_id, event_type, latitude, longitude, within_geofence, note, activity, time_source, is_mock_location, recorded_by_user:users!attendance_events_recorded_by_fkey(full_name)")
+            .in("session_id", chunk)
+            .in("event_type", ["clock_in", "clock_out"]),
+        );
         if (eventsResult.error) return createError(eventsResult.error.message);
 
         const events = (eventsResult.data ?? []) as RawAttendanceEventRow[];
@@ -325,7 +328,9 @@ class ManagerRepository {
 
         const evidenceByEvent = new Map<string, string>();
         if (eventIds.length > 0) {
-          const evidenceResult = await this.client.from("camera_evidence").select("attendance_event_id, storage_path").in("attendance_event_id", eventIds).order("captured_at", { ascending: true });
+          const evidenceResult = await selectInChunks(eventIds, (chunk) =>
+            this.client.from("camera_evidence").select("attendance_event_id, storage_path").in("attendance_event_id", chunk).order("captured_at", { ascending: true }),
+          );
           if (evidenceResult.error) return createError(evidenceResult.error.message);
           for (const evidenceRow of (evidenceResult.data ?? []) as RawCameraEvidenceRow[]) {
             if (!evidenceByEvent.has(evidenceRow.attendance_event_id)) evidenceByEvent.set(evidenceRow.attendance_event_id, evidenceRow.storage_path);
@@ -368,11 +373,13 @@ class ManagerRepository {
       // for the sessions already being fetched).
       const siteChangesBySession = new Map<string, SiteChangeEntry[]>();
       if (sessionIds.length > 0) {
-        const changesResult = await this.client
-          .from("site_change_events")
-          .select("attendance_session_id, changed_at, old_site:sites!site_change_events_old_site_id_fkey(name), new_site:sites!site_change_events_new_site_id_fkey(name)")
-          .in("attendance_session_id", sessionIds)
-          .order("changed_at", { ascending: true });
+        const changesResult = await selectInChunks(sessionIds, (chunk) =>
+          this.client
+            .from("site_change_events")
+            .select("attendance_session_id, changed_at, old_site:sites!site_change_events_old_site_id_fkey(name), new_site:sites!site_change_events_new_site_id_fkey(name)")
+            .in("attendance_session_id", chunk)
+            .order("changed_at", { ascending: true }),
+        );
         if (changesResult.error) return createError(changesResult.error.message);
 
         for (const changeRow of (changesResult.data ?? []) as RawSiteChangeRow[]) {
