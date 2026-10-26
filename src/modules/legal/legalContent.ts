@@ -6,7 +6,7 @@
 //
 // When either text changes, raise LEGAL_VERSION: every user is asked to
 // read and acknowledge the new version once (LegalAcknowledgementGate).
-export const LEGAL_VERSION = "2026-10-20";
+export const LEGAL_VERSION = "2026-10-26";
 
 export interface LegalSection {
   heading: string;
@@ -25,7 +25,7 @@ export type LegalLanguage = "ar" | "en";
 
 const PRIVACY_EN: LegalDocument = {
   title: "Privacy Policy",
-  updated: "Last updated: 20 October 2026",
+  updated: "Last updated: 26 October 2026",
   intro: [
     "PROSM Time is an attendance, time and workforce-presence application provided by PROSM to organisations (\"the Organisation\") for their owners, managers, employees and site workers. This policy explains what personal data the application processes, why, who can see it, how long it is kept and what rights people have.",
     "PROSM Time records location and, where a site requires it, photos. We describe exactly when below. Please read it carefully.",
@@ -53,15 +53,14 @@ const PRIVACY_EN: LegalDocument = {
       paragraphs: ["Depending on how the Organisation sets up the application, the following data may be processed:"],
       bullets: [
         "Account data: name, email address, role, organisation, sites you are assigned to, an optional profile picture, and your language and theme choices.",
-        "Attendance data: clock-in and clock-out times, breaks, site changes, the site or workplace name, optional notes and activity, and who recorded an action on someone's behalf. Times are recorded by the server's clock. For an action made without a connection, the device's time is kept and marked for a manager's review.",
+        "Attendance data: clock-in and clock-out times, breaks, site changes, the site or workplace name, optional notes and activity, and who recorded an action on someone's behalf. Times are recorded by the server's clock. For an action made without a connection, the device's time is kept and marked for a manager's review. A session still open after 24 hours is closed automatically and its hours wait for a manager's review before they count; permissions to arrive late or leave early, overtime approvals and manual adjustments to a day are kept with their reasons.",
         "Location data (GPS): your position and its accuracy at the moment you clock in, clock out, start or end a break, change site, or send an SOS alert. A shared kiosk also records it when a site worker clocks in or out. Whether you are inside the site's work area and the distance from it are also recorded.",
-        "Location during a shift: only if the Organisation has turned on ongoing presence monitoring for the site, or when you clock in without a site. Your position is then recorded about every 5 minutes, only while you are clocked in, and it stops when you clock out. On Android this continues while the app is in the background or closed during your shift, and a notification stays visible the whole time.",
+        "Location during a shift: only if the Organisation has turned on ongoing presence monitoring for the site, or when you clock in without a site. Your position is then recorded about every 5 minutes, only while you are clocked in, and it stops when you clock out. On Android this continues while the app is in the background or closed during your shift, and a notification stays visible the whole time. Where the site uses it, leaving the site's work area while clocked in asks you whether to clock out, or clocks you out automatically at the time you left; a manager can correct it.",
         "Simulated location: on Android, whether your device reports the location as coming from a mock-location (fake GPS) app.",
-        "Photos: only when a site requires a photo at clock-in or clock-out, taken by you with the camera at that moment. Before the photo, the app checks on your device that the camera shows a live scene (not a still picture) by comparing a few low-resolution frames for movement. Those frames are not stored or sent. PROSM Time does not perform facial recognition and does not create biometric templates.",
-        "Leave, allowances and timesheets: leave requests (type, dates, reason), allowance entries, overtime, timesheets and their approvals. Please do not include unnecessary health details in a leave reason.",
-        "Exceptions and reviews: reasons you give for being outside a work area, correction requests, and managers' decisions and notes.",
+        "Photos: only when a site requires a photo at clock-in or clock-out, taken by you with the live camera at that moment (not chosen from the gallery). Where the phone supports it, a short live check on your device uses the phone's face detection only to see where a face is in the picture, and asks you to turn your head or move closer. The frames used for the check are not stored or sent; only the photo itself, which check was asked and its result are kept with it. A one-time code from the server is attached to each photo so that an old or reused photo can be recognised. PROSM Time does not identify people from their face and does not create biometric templates.",
+        "Leave, allowances and timesheets: leave requests (type, dates, reason) and any document you attach to one (for example a medical certificate, visible only to you and those who review your leave), your hire date and, if the Organisation records it, a special-needs entitlement used only to count leave days, allowance entries and changes made to them during review, overtime, deductions for unpaid leave, timesheets and their approvals. Please do not include unnecessary health details in a leave reason.",
+        "Exceptions and reviews: reasons you give for being outside a work area, correction requests, flags for a manager to look at (a live check that failed or could not run, an old or reused photo, a location that looks too exact or repeats exactly), and managers' decisions and notes.",
         "External worker data: name, contractor (if given), the 6-digit number the app generated, the site of each clock-in and clock-out, the times, the kiosk's location and, if the Organisation records it, the pay rate.",
-        "Kiosk PIN: stored only as a one-way cryptographic hash, never in readable form.",
         "Device and security data: a device identifier where the Organisation binds accounts to devices, the app installation and version, security and audit logs of important actions, and protection against repeated attempts, which stores only a scrambled (hashed) form of the network address.",
         "Data kept on your device: actions made without a connection are kept encrypted on your device until they are sent, then removed. The web version also keeps the app's own program files on the device (not your data), so that it can open without a connection.",
       ],
@@ -161,7 +160,7 @@ const PRIVACY_EN: LegalDocument = {
 
 const PRIVACY_AR: LegalDocument = {
   title: "سياسة الخصوصية",
-  updated: "آخر تحديث: 20 أكتوبر 2026",
+  updated: "آخر تحديث: 26 أكتوبر 2026",
   intro: [
     "PROSM Time تطبيق لتسجيل الحضور ووقت العمل ومتابعة وجود العاملين، تقدّمه PROSM للمؤسسات («المؤسسة») لاستخدامه من مالكيها ومديريها وموظفيها وعمال مواقعها. توضّح هذه السياسة البيانات الشخصية التي يعالجها التطبيق، وسبب معالجتها، ومن يطّلع عليها، ومدة الاحتفاظ بها، والحقوق المكفولة لأصحابها.",
     "يسجّل PROSM Time الموقع الجغرافي، ويلتقط الصور حين يشترط الموقع ذلك، ونبيّن أدناه متى يحدث ذلك بالضبط. نرجو قراءتها بعناية.",
@@ -189,15 +188,14 @@ const PRIVACY_AR: LegalDocument = {
       paragraphs: ["بحسب إعدادات المؤسسة للتطبيق، قد تُعالَج البيانات التالية:"],
       bullets: [
         "بيانات الحساب: الاسم، والبريد الإلكتروني، والدور، والمؤسسة، والمواقع المعيَّن عليها، وصورة شخصية اختيارية، وتفضيلات اللغة والمظهر.",
-        "بيانات الحضور: أوقات الحضور والانصراف، والاستراحات، وتغيير الموقع، واسم الموقع أو مكان العمل، والملاحظات والنشاط الاختياريين، ومن سجّل إجراءً نيابةً عن غيره. تُسجَّل الأوقات بساعة الخادم. أما الإجراء الذي يتم دون اتصال، فيُحفظ وقته من الجهاز ويُعلَّم لمراجعة المدير.",
+        "بيانات الحضور: أوقات الحضور والانصراف، والاستراحات، وتغيير الموقع، واسم الموقع أو مكان العمل، والملاحظات والنشاط الاختياريين، ومن سجّل إجراءً نيابةً عن غيره. تُسجَّل الأوقات بساعة الخادم. أما الإجراء الذي يتم دون اتصال، فيُحفظ وقته من الجهاز ويُعلَّم لمراجعة المدير. والجلسة التي تظل مفتوحة بعد 24 ساعة تُغلق تلقائياً وتنتظر ساعاتها مراجعة المدير قبل أن تُحتسب؛ وتُحفظ أذونات التأخير والانصراف المبكر، واعتمادات العمل الإضافي، والتعديلات اليدوية على اليوم مع أسبابها.",
         "بيانات الموقع (GPS): موقعك ودقته لحظة تسجيل الحضور أو الانصراف، أو بدء الاستراحة أو إنهائها، أو تغيير الموقع، أو إرسال تنبيه طوارئ SOS. ويسجّله جهاز الكشك المشترك أيضاً عند تسجيل حضور عامل الموقع أو انصرافه. ويُسجَّل كذلك ما إذا كنت داخل نطاق موقع العمل، ومدى بُعدك عنه.",
-        "الموقع أثناء الوردية: فقط إذا فعّلت المؤسسة المتابعة المستمرة للتواجد في الموقع، أو إذا سجّلت حضورك دون موقع مسجّل. عندها يُسجَّل موقعك كل 5 دقائق تقريباً، وذلك فقط أثناء وجودك في الوردية، ويتوقف عند تسجيل الانصراف. وعلى أندرويد يستمر ذلك أثناء الوردية والتطبيق في الخلفية أو مغلق، مع إشعار ظاهر طوال الوقت.",
+        "الموقع أثناء الوردية: فقط إذا فعّلت المؤسسة المتابعة المستمرة للتواجد في الموقع، أو إذا سجّلت حضورك دون موقع مسجّل. عندها يُسجَّل موقعك كل 5 دقائق تقريباً، وذلك فقط أثناء وجودك في الوردية، ويتوقف عند تسجيل الانصراف. وعلى أندرويد يستمر ذلك أثناء الوردية والتطبيق في الخلفية أو مغلق، مع إشعار ظاهر طوال الوقت. وحيث يستخدمه الموقع، فإن مغادرة نطاق العمل وأنت مسجّل حضور تسألك هل تسجّل الانصراف، أو تسجّل انصرافك تلقائياً بوقت مغادرتك؛ ويستطيع المدير تصحيح ذلك.",
         "الموقع المحاكى: على أندرويد، ما إذا كان جهازك يبلغ بأن الموقع صادر عن تطبيق موقع وهمي (GPS مزيف).",
-        "الصور: فقط عندما يشترط الموقع صورة عند الحضور أو الانصراف، وتلتقطها أنت بالكاميرا في تلك اللحظة. قبل الصورة يتحقق التطبيق على جهازك من أن الكاميرا تعرض مشهداً حياً لا صورة ثابتة، بمقارنة بضع لقطات منخفضة الدقة لرصد الحركة. هذه اللقطات لا تُحفظ ولا تُرسل. ولا يجري PROSM Time أي تعرّف على الوجوه، ولا يُنشئ أي بصمات حيوية (بيومترية).",
-        "الإجازات والبدلات والكشوف: طلبات الإجازة (النوع، والتواريخ، والسبب)، وإدخالات البدلات، والعمل الإضافي، والكشوف واعتماداتها. نرجو عدم ذكر تفاصيل صحية غير ضرورية في سبب الإجازة.",
-        "الاستثناءات والمراجعات: الأسباب التي تقدّمها عند وجودك خارج نطاق العمل، وطلبات التصحيح، وقرارات المديرين وملاحظاتهم.",
+        "الصور: فقط عندما يشترط الموقع صورة عند الحضور أو الانصراف، وتلتقطها أنت بالكاميرا المباشرة في تلك اللحظة (لا تُختار من المعرض). وحيث يدعم الهاتف ذلك، يستخدم تحقق حي قصير على جهازك خاصية اكتشاف الوجه في الهاتف فقط لمعرفة مكان الوجه في الصورة، ويطلب منك أن تلف رأسك أو تقترب. اللقطات المستخدمة في التحقق لا تُحفظ ولا تُرسل؛ ولا يُحفظ مع الصورة إلا الصورة نفسها ونوع التحقق المطلوب ونتيجته. ويُرفق بكل صورة رمز يُستخدم مرة واحدة من الخادم لتمييز الصورة القديمة أو المعاد استخدامها. ولا يتعرّف PROSM Time على الأشخاص من وجوههم، ولا يُنشئ أي بصمات حيوية (بيومترية).",
+        "الإجازات والبدلات والكشوف: طلبات الإجازة (النوع، والتواريخ، والسبب) وأي مستند ترفقه بها (مثل شهادة طبية، ولا يطّلع عليه إلا أنت ومن يراجع إجازتك)، وتاريخ تعيينك، وإن سجّلته المؤسسة استحقاق ذوي الهمم الذي يُستخدم فقط لحساب أيام الإجازة، وإدخالات البدلات وما عُدّل فيها أثناء المراجعة، والعمل الإضافي، وخصومات الإجازة بدون أجر، والكشوف واعتماداتها. نرجو عدم ذكر تفاصيل صحية غير ضرورية في سبب الإجازة.",
+        "الاستثناءات والمراجعات: الأسباب التي تقدّمها عند وجودك خارج نطاق العمل، وطلبات التصحيح، والتنبيهات التي يراجعها المدير (تحقق حي فشل أو تعذّر، أو صورة قديمة أو معاد استخدامها، أو موقع دقيق بشكل مريب أو متطابق تماماً)، وقرارات المديرين وملاحظاتهم.",
         "بيانات العمالة الخارجية: الاسم، والمقاول (إن ذُكر)، والرقم المكوّن من 6 أرقام الذي ولّده التطبيق، وموقع كل تسجيل حضور وانصراف، والأوقات، وموقع الكشك، والأجر إذا سجّلته المؤسسة.",
-        "رمز PIN للكشك: يُحفظ في صورة تجزئة مشفّرة باتجاه واحد فقط، ولا يُحفظ أبداً بصيغة مقروءة.",
         "بيانات الجهاز والأمان: معرّف الجهاز إذا ربطت المؤسسة الحسابات بالأجهزة، وتثبيت التطبيق وإصداره، وسجلات الأمان والتدقيق للإجراءات المهمة، والحماية من المحاولات المتكررة، التي تحفظ عنوان الشبكة في صورة مجزّأة غير مقروءة فقط.",
         "البيانات المحفوظة على جهازك: الإجراءات التي تتم دون اتصال تُحفظ مشفّرة على جهازك إلى أن تُرسل، ثم تُحذف منه. وتحفظ نسخة الويب أيضاً ملفات البرنامج نفسه على الجهاز (لا بياناتك) حتى تفتح دون اتصال.",
       ],
@@ -297,7 +295,7 @@ const PRIVACY_AR: LegalDocument = {
 
 const TERMS_EN: LegalDocument = {
   title: "Terms of Use",
-  updated: "Last updated: 20 October 2026",
+  updated: "Last updated: 26 October 2026",
   intro: [
     "These terms govern the use of PROSM Time, provided by PROSM. By activating an organisation account, signing in, or using a PROSM Time kiosk, you agree to them. The person who activates an account accepts these terms on behalf of the organisation (\"the Organisation\") and confirms that they have authority to do so.",
     "How personal data is handled is described in the Privacy Policy, which forms part of these terms.",
@@ -355,7 +353,8 @@ const TERMS_EN: LegalDocument = {
       heading: "6. Location, time and flags",
       paragraphs: [
         "GPS positions can be inaccurate, especially indoors. A time recorded without a connection comes from the device and is marked for review.",
-        "Flags such as \"outside the work area\", \"fake location\" or \"device time (offline)\" are information for a person to review, not decisions, and should not be used alone to discipline anyone.",
+        "Flags such as \"outside the work area\", \"fake location\", \"device time (offline)\" or a failed live check are information for a person to review, not decisions, and should not be used alone to discipline anyone.",
+        "Where the Organisation turns them on, the application can close a session left open for 24 hours (its hours then wait for a manager's review) and clock a person out when they leave the site's work area. These are recorded and can be corrected by a manager; the Organisation remains responsible for the final working time and pay.",
       ],
     },
     {
@@ -416,7 +415,7 @@ const TERMS_EN: LegalDocument = {
 
 const TERMS_AR: LegalDocument = {
   title: "شروط الاستخدام",
-  updated: "آخر تحديث: 20 أكتوبر 2026",
+  updated: "آخر تحديث: 26 أكتوبر 2026",
   intro: [
     "تنظّم هذه الشروط استخدام PROSM Time الذي تقدّمه PROSM. وبتفعيل حساب مؤسسة، أو تسجيل الدخول، أو استخدام كشك PROSM Time، فإنك توافق عليها. ومن يفعّل الحساب يقبل هذه الشروط نيابةً عن المؤسسة («المؤسسة»)، ويؤكد أنه مخوَّل بذلك.",
     "تُبيِّن سياسة الخصوصية طريقة التعامل مع البيانات الشخصية، وهي جزء من هذه الشروط.",
@@ -474,7 +473,8 @@ const TERMS_AR: LegalDocument = {
       heading: "6. الموقع والوقت والتنبيهات",
       paragraphs: [
         "قد لا تكون مواقع GPS دقيقة، خاصةً داخل المباني. والوقت المسجَّل دون اتصال مصدره الجهاز، ويُعلَّم للمراجعة.",
-        "التنبيهات مثل «خارج نطاق العمل» أو «موقع مزيف» أو «وقت من الجهاز (أوفلاين)» معلومات يراجعها شخص، لا قرارات، ولا ينبغي الاعتماد عليها وحدها لمعاقبة أحد.",
+        "التنبيهات مثل «خارج نطاق العمل» أو «موقع مزيف» أو «وقت من الجهاز (أوفلاين)» أو فشل التحقق الحي معلومات يراجعها شخص، لا قرارات، ولا ينبغي الاعتماد عليها وحدها لمعاقبة أحد.",
+        "حيث تفعّلها المؤسسة، يستطيع التطبيق إغلاق جلسة ظلت مفتوحة 24 ساعة (وتنتظر ساعاتها مراجعة المدير)، وتسجيل انصراف الشخص عند مغادرته نطاق عمل الموقع. ويُسجَّل ذلك ويستطيع المدير تصحيحه، وتظل المؤسسة مسؤولة عن وقت العمل والأجر النهائيين.",
       ],
     },
     {
