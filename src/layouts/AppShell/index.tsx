@@ -8,6 +8,7 @@ import Main from "./Main";
 import BottomNav from "./BottomNav";
 import InstallationStatusBanner from "./InstallationStatusBanner";
 import OfflineBanner from "./OfflineBanner";
+import UpdateAvailableBanner from "./UpdateAvailableBanner";
 import PresenceTrackingLoop from "./PresenceTrackingLoop";
 import ClockReminderLoop from "./ClockReminderLoop";
 import PushRegistration from "./PushRegistration";
@@ -35,6 +36,7 @@ export default function AppShell() {
         <Header />
         <div className={styles.stage}>
           <div className={styles.notices}>
+            <UpdateAvailableBanner placement="shell" />
             <InstallationStatusBanner />
             <TrialBanner />
             <OfflineBanner />

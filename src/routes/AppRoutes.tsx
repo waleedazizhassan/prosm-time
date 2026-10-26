@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import PageLoadBoundary from "../components/common/PageLoadBoundary";
 
 import { AuthProvider, useAuth } from "../core/context/AuthContext";
@@ -79,7 +79,7 @@ export default function AppRoutes() {
             the public ones, so it shows regardless of auth state -
             removed from AppShell/index.tsx so it doesn't double-mount
             on authenticated pages. */}
-        <UpdateAvailableBanner />
+        <PublicUpdateBanner />
         <PageLoadBoundary>
         <Suspense fallback={null}>
         <KioskLockGuard>
@@ -150,4 +150,14 @@ export default function AppRoutes() {
       </AuthProvider>
     </BrowserRouter>
   );
+}
+
+// v2.3.44 (owner 2026-10-26): before sign-in the update notice stays at the
+// top; inside the app shell it is one of the notices under the header.
+const OUTSIDE_SHELL = ["/", "/welcome", "/activate", "/login", "/forgot-password", "/reset-password", "/accept-invitation", "/privacy", "/terms"];
+
+function PublicUpdateBanner() {
+  const { pathname } = useLocation();
+  const outside = OUTSIDE_SHELL.includes(pathname) || pathname.startsWith("/kiosk/");
+  return outside ? <UpdateAvailableBanner /> : null;
 }

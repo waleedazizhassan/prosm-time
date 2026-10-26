@@ -28,7 +28,11 @@ import styles from "./UpdateAvailableBanner.module.css";
 // since a reload cannot update a locally-installed desktop binary.
 const UPDATE_NOTICE_ID = 7101;
 
-export default function UpdateAvailableBanner() {
+// v2.3.44 (owner 2026-10-26: "the app is too long, I can't reach the
+// notifications"): inside the app the notice sits under the header with the
+// other notices (it no longer adds a bar above a full-screen app);
+// before sign-in it stays at the top, below the phone's status bar.
+export default function UpdateAvailableBanner({ placement = "top" }: { placement?: "top" | "shell" }) {
   const { t } = useTranslation("shell");
   const { manifest } = useUpdateCheck();
   const pendingVersion = manifest?.version ?? null;
@@ -76,7 +80,7 @@ export default function UpdateAvailableBanner() {
   };
 
   return (
-    <div className={styles.banner} role="status">
+    <div className={placement === "shell" ? `${styles.banner} ${styles.inShell}` : styles.banner} role="status">
       <Download size={16} />
       <span>{t("update.available", { version: manifest.version })}</span>
       <button type="button" className={styles.action} onClick={handleUpdate}>

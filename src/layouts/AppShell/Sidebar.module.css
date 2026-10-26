@@ -431,6 +431,8 @@
 
     height: calc(100vh - var(--shell-top));
     height: calc(100dvh - var(--shell-top));
+    /* the last row (the user menu) stays above the phone's navigation bar */
+    padding-bottom: var(--safe-bottom);
     width: 280px;
 
     transform: translateX(-100%);
