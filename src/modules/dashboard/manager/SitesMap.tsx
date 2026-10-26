@@ -75,7 +75,9 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
       if (site.latitude === null || site.longitude === null) continue;
       const color = site.sos ? "#dc2626" : "#16a34a";
       const circle = L.circle([site.latitude, site.longitude], { radius: site.radius, color, fillColor: color, fillOpacity: 0.12, weight: 1.5 });
-      circle.bindTooltip(`${escapeHtml(site.name)} · ${site.present}${site.expected ? ` / ${site.expected}` : ""}${site.external?.presentNow ? ` · ${escapeHtml(t("manager.map.external", { count: site.external.presentNow }))}` : ""}`, { permanent: true, direction: "top", className: "" });
+      circle.bindTooltip(`${escapeHtml(site.name)} · ${site.present}${site.expected ? ` / ${site.expected}` : ""}${site.external?.presentNow ? ` · ${escapeHtml(t("manager.map.external", { count: site.external.presentNow }))}` : ""}`, { permanent: true, direction: "top", className: styles.siteLabel, interactive: true });
+      // owner 2026-10-26: a click on the site's name (or its circle) zooms to the site
+      circle.on("click", () => map.flyToBounds(circle.getBounds(), { padding: [24, 24], maxZoom: 17, duration: 0.6 }));
       circle.addTo(layer);
       bounds.extend(circle.getBounds());
     }

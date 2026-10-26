@@ -308,6 +308,12 @@
   overflow: hidden;
 }
 
+/* a site's name on the map is a button: it zooms to the site */
+.siteLabel {
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+}
+
 .mapFullScreen {
   position: fixed;
   inset: 0;
