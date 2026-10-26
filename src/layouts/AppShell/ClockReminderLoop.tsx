@@ -9,6 +9,7 @@ import AttendanceRepository from "../../core/repositories/AttendanceRepository";
 import ShiftRepository from "../../core/repositories/ShiftRepository";
 import SiteRepository from "../../core/repositories/SiteRepository";
 import { nextClockReminder } from "../../core/services/clockReminders";
+import { hasPushToken } from "../../core/services/PushService";
 
 const CHECK_INTERVAL_MS = 2 * 60 * 1000;
 const REMINDER_ID = 7001;
@@ -47,7 +48,10 @@ export default function ClockReminderLoop() {
 
       try {
         await LocalNotifications.cancel({ notifications: [{ id: REMINDER_ID }] });
-        if (reminder) {
+        // v2.3.48 (owner 2026-10-26): a phone that gets pushes is reminded by
+        // the server (it arrives with the app closed); a second copy from
+        // the phone itself would arrive twice.
+        if (reminder && !hasPushToken()) {
           const permission = await LocalNotifications.checkPermissions();
           const display = permission.display === "granted" ? "granted" : (await LocalNotifications.requestPermissions()).display;
           if (display !== "granted") return;

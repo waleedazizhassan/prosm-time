@@ -260,7 +260,9 @@
     "clockOutTitle": "Non dimenticare di timbrare l'uscita",
     "clockOutBody": "Timbra l'uscita in PROSM Time prima di andare.",
     "inexactNotice": "Il telefono non consente allarmi esatti a PROSM Time; un promemoria può arrivare con qualche minuto di ritardo.",
-    "allowExact": "Consenti allarmi esatti"
+    "allowExact": "Consenti allarmi esatti",
+    "backgroundHint": "Se un promemoria arriva solo aprendo l’app, il telefono limita PROSM Time in background: nelle impostazioni apri PROSM Time > Batteria e scegli «Senza restrizioni».",
+    "openAppSettings": "Apri impostazioni app"
   },
   "longSession": {
     "title": "Stai ancora lavorando?",

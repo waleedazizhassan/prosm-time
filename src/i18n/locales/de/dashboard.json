@@ -260,7 +260,9 @@
     "clockOutTitle": "Ausstempeln nicht vergessen",
     "clockOutBody": "Stempeln Sie vor dem Gehen in PROSM Time aus.",
     "inexactNotice": "Das Telefon erlaubt PROSM Time keine exakten Wecker; eine Erinnerung kann einige Minuten später kommen.",
-    "allowExact": "Exakte Wecker erlauben"
+    "allowExact": "Exakte Wecker erlauben",
+    "backgroundHint": "Kommt eine Erinnerung erst beim Öffnen der App, schränkt das Telefon PROSM Time im Hintergrund ein: in den Einstellungen PROSM Time > Akku öffnen und „Nicht eingeschränkt“ wählen.",
+    "openAppSettings": "App-Einstellungen öffnen"
   },
   "longSession": {
     "title": "Noch bei der Arbeit?",

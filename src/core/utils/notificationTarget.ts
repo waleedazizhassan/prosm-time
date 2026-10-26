@@ -38,6 +38,8 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
       return viewer.isOwner || ref?.kind === "manager" ? "/manager" : "/dashboard";
     case "long_session_check":
     case "exit_site_prompt":
+    case "clock_in_reminder":
+    case "clock_out_reminder":
       return "/dashboard";
     case "auto_checkout_geofence":
       return ref?.kind === "manager" ? "/attendance?period=today" : "/dashboard";

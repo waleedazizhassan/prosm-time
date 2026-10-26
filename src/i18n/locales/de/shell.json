@@ -180,6 +180,14 @@
       "bodyEmployee": "Sie haben den Standort verlassen und wurden zur Zeit des Verlassens ausgestempelt.",
       "titleManager": "Automatisch ausgestempelt",
       "bodyManager": "{{name}} hat den Standort verlassen und wurde automatisch ausgestempelt."
+    },
+    "clockInReminder": {
+      "title": "Zeit zum Einstempeln",
+      "body": "Ihre Schicht in {{site}} beginnt um {{time}}. Stempeln Sie bei Ankunft ein."
+    },
+    "clockOutReminder": {
+      "title": "Ausstempeln nicht vergessen",
+      "body": "Ihre Schicht endete um {{time}}. Stempeln Sie beim Gehen in PROSM Time aus."
     }
   },
   "items": {

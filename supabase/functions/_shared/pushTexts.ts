@@ -127,6 +127,14 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyEmployee": "خرجت من الموقع واتسجّل انصرافك بوقت خروجك. كلّم مديرك لو فيه خطأ.",
         "titleManager": "انصراف تلقائي عند مغادرة الموقع",
         "bodyManager": "{{name}} خرج من الموقع واتسجّل انصرافه تلقائياً."
+      },
+      "clockInReminder": {
+        "title": "حان وقت تسجيل الحضور",
+        "body": "ورديتك في {{site}} تبدأ الساعة {{time}}. سجّل حضورك عند الوصول."
+      },
+      "clockOutReminder": {
+        "title": "لا تنسَ تسجيل الانصراف",
+        "body": "ورديتك انتهت الساعة {{time}}. سجّل انصرافك في PROSM Time عند المغادرة."
       }
     },
     "leaveTypes": {
@@ -265,6 +273,14 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyEmployee": "You left the site and were clocked out at the time you left. Ask your manager if this is wrong.",
         "titleManager": "Clocked out on leaving the site",
         "bodyManager": "{{name}} left the site and was clocked out automatically."
+      },
+      "clockInReminder": {
+        "title": "Time to clock in",
+        "body": "Your shift at {{site}} starts at {{time}}. Clock in when you arrive."
+      },
+      "clockOutReminder": {
+        "title": "Don't forget to clock out",
+        "body": "Your shift ended at {{time}}. Clock out in PROSM Time when you leave."
       }
     },
     "leaveTypes": {
@@ -403,6 +419,14 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyEmployee": "Sie haben den Standort verlassen und wurden zur Zeit des Verlassens ausgestempelt.",
         "titleManager": "Automatisch ausgestempelt",
         "bodyManager": "{{name}} hat den Standort verlassen und wurde automatisch ausgestempelt."
+      },
+      "clockInReminder": {
+        "title": "Zeit zum Einstempeln",
+        "body": "Ihre Schicht in {{site}} beginnt um {{time}}. Stempeln Sie bei Ankunft ein."
+      },
+      "clockOutReminder": {
+        "title": "Ausstempeln nicht vergessen",
+        "body": "Ihre Schicht endete um {{time}}. Stempeln Sie beim Gehen in PROSM Time aus."
       }
     },
     "leaveTypes": {
@@ -541,6 +565,14 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyEmployee": "Vous avez quitté le site ; le départ a été pointé à l'heure de sortie.",
         "titleManager": "Départ automatique",
         "bodyManager": "{{name}} a quitté le site ; départ pointé automatiquement."
+      },
+      "clockInReminder": {
+        "title": "C'est l'heure de pointer",
+        "body": "Votre service à {{site}} commence à {{time}}. Pointez votre entrée en arrivant."
+      },
+      "clockOutReminder": {
+        "title": "N'oubliez pas de pointer la sortie",
+        "body": "Votre service s'est terminé à {{time}}. Pointez votre sortie dans PROSM Time en partant."
       }
     },
     "leaveTypes": {
@@ -679,6 +711,14 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyEmployee": "Hai lasciato la sede; l'uscita è registrata all'ora in cui sei uscito.",
         "titleManager": "Uscita automatica",
         "bodyManager": "{{name}} ha lasciato la sede; uscita registrata automaticamente."
+      },
+      "clockInReminder": {
+        "title": "È ora di timbrare",
+        "body": "Il tuo turno a {{site}} inizia alle {{time}}. Timbra l'entrata quando arrivi."
+      },
+      "clockOutReminder": {
+        "title": "Non dimenticare di timbrare l'uscita",
+        "body": "Il tuo turno è finito alle {{time}}. Timbra l'uscita in PROSM Time quando esci."
       }
     },
     "leaveTypes": {

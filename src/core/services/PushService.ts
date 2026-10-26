@@ -27,6 +27,11 @@ function remember(token: string | null) {
   }
 }
 
+/** v2.3.48: this phone receives pushes (the server then sends the shift reminders). */
+export function hasPushToken(): boolean {
+  return isPushSupported() && Boolean(remembered());
+}
+
 function remembered(): string | null {
   try {
     return localStorage.getItem(TOKEN_KEY);

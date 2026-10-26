@@ -180,6 +180,14 @@
       "bodyEmployee": "You left the site and were clocked out at the time you left. Ask your manager if this is wrong.",
       "titleManager": "Clocked out on leaving the site",
       "bodyManager": "{{name}} left the site and was clocked out automatically."
+    },
+    "clockInReminder": {
+      "title": "Time to clock in",
+      "body": "Your shift at {{site}} starts at {{time}}. Clock in when you arrive."
+    },
+    "clockOutReminder": {
+      "title": "Don't forget to clock out",
+      "body": "Your shift ended at {{time}}. Clock out in PROSM Time when you leave."
     }
   },
   "items": {

@@ -180,6 +180,14 @@
       "bodyEmployee": "Vous avez quitté le site ; le départ a été pointé à l'heure de sortie.",
       "titleManager": "Départ automatique",
       "bodyManager": "{{name}} a quitté le site ; départ pointé automatiquement."
+    },
+    "clockInReminder": {
+      "title": "C'est l'heure de pointer",
+      "body": "Votre service à {{site}} commence à {{time}}. Pointez votre entrée en arrivant."
+    },
+    "clockOutReminder": {
+      "title": "N'oubliez pas de pointer la sortie",
+      "body": "Votre service s'est terminé à {{time}}. Pointez votre sortie dans PROSM Time en partant."
     }
   },
   "items": {

@@ -260,7 +260,9 @@
     "clockOutTitle": "N'oubliez pas de pointer la sortie",
     "clockOutBody": "Pointez la sortie dans PROSM Time avant de partir.",
     "inexactNotice": "Le téléphone n'autorise pas les alarmes exactes pour PROSM Time ; un rappel peut arriver avec quelques minutes de retard.",
-    "allowExact": "Autoriser les alarmes exactes"
+    "allowExact": "Autoriser les alarmes exactes",
+    "backgroundHint": "Si un rappel n’arrive qu’à l’ouverture de l’appli, le téléphone limite PROSM Time en arrière-plan : dans les paramètres, ouvrez PROSM Time > Batterie et choisissez « Sans restriction ».",
+    "openAppSettings": "Ouvrir les paramètres de l’appli"
   },
   "longSession": {
     "title": "Toujours au travail ?",

@@ -260,7 +260,9 @@
     "clockOutTitle": "Don't forget to clock out",
     "clockOutBody": "Clock out in PROSM Time before you leave.",
     "inexactNotice": "The phone does not allow exact alarms for PROSM Time, so a reminder may come a few minutes late.",
-    "allowExact": "Allow exact alarms"
+    "allowExact": "Allow exact alarms",
+    "backgroundHint": "If a reminder only arrives when you open the app, the phone is limiting PROSM Time in the background: in the phone settings, open PROSM Time > Battery and choose \"Unrestricted\".",
+    "openAppSettings": "Open app settings"
   },
   "longSession": {
     "title": "Still working?",

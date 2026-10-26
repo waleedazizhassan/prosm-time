@@ -215,6 +215,11 @@ export default function localizeNotification(notification: AppNotification, t: T
     // v2.3.43 step 12: leaving the site with the shift open.
     case "exit_site_prompt":
       return { title: t("shell:notifications.exitSitePrompt.title"), body: t("shell:notifications.exitSitePrompt.body") };
+    // v2.3.48: the server's clock-in/out reminders
+    case "clock_in_reminder":
+      return { title: t("shell:notifications.clockInReminder.title"), body: t("shell:notifications.clockInReminder.body", { time: String(data.time ?? ""), site: String(data.siteName ?? "") }) };
+    case "clock_out_reminder":
+      return { title: t("shell:notifications.clockOutReminder.title"), body: t("shell:notifications.clockOutReminder.body", { time: String(data.time ?? "") }) };
     case "auto_checkout_geofence": {
       const name = typeof data.employeeName === "string" ? data.employeeName : null;
       return name

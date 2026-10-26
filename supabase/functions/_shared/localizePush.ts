@@ -173,6 +173,13 @@ export function localizePush(type: string, data: Data, language: string, fallbac
     case "exit_site_prompt":
       result = pair("exitSitePrompt.title", "exitSitePrompt.body");
       break;
+    // v2.3.48: the server's own clock-in/out reminders (they arrive with the app closed)
+    case "clock_in_reminder":
+      result = pair("clockInReminder.title", "clockInReminder.body", { time: data.time ?? "", site: data.siteName ?? "" });
+      break;
+    case "clock_out_reminder":
+      result = pair("clockOutReminder.title", "clockOutReminder.body", { time: data.time ?? "" });
+      break;
     case "auto_checkout_geofence":
       result = str(data.employeeName)
         ? pair("autoCheckoutGeofence.titleManager", "autoCheckoutGeofence.bodyManager", { name: data.employeeName })

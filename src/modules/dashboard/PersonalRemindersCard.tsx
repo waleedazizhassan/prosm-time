@@ -13,6 +13,7 @@ import Toggle from "../../components/common/Toggle";
 import HintText from "../../components/common/HintText";
 import ErrorText from "../../components/common/ErrorText";
 import DateRange from "../../components/common/DateRange";
+import BackgroundLocationService from "../../core/services/BackgroundLocationService";
 
 const DAYS = [0, 1, 2, 3, 4, 5, 6];
 
@@ -136,6 +137,13 @@ export default function PersonalRemindersCard() {
               </Button>
             </div>
           ) : null}
+          {/* v2.3.48 (owner 2026-10-26): a reminder held back until the app was opened */}
+          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "var(--space-2)", marginBottom: "var(--space-3)" }}>
+            <HintText small>{t("reminders.backgroundHint")}</HintText>
+            <Button size="sm" variant="ghost" onClick={() => void BackgroundLocationService.openSettings()}>
+              {t("reminders.openAppSettings")}
+            </Button>
+          </div>
           <ErrorText>{error}</ErrorText>
           {message ? <HintText small>{message}</HintText> : null}
           <Button onClick={save} loading={saving} disabled={settings.enabled && settings.days.length === 0}>

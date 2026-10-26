@@ -180,6 +180,14 @@
       "bodyEmployee": "Hai lasciato la sede; l'uscita è registrata all'ora in cui sei uscito.",
       "titleManager": "Uscita automatica",
       "bodyManager": "{{name}} ha lasciato la sede; uscita registrata automaticamente."
+    },
+    "clockInReminder": {
+      "title": "È ora di timbrare",
+      "body": "Il tuo turno a {{site}} inizia alle {{time}}. Timbra l'entrata quando arrivi."
+    },
+    "clockOutReminder": {
+      "title": "Non dimenticare di timbrare l'uscita",
+      "body": "Il tuo turno è finito alle {{time}}. Timbra l'uscita in PROSM Time quando esci."
     }
   },
   "items": {
