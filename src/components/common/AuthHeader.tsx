@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { LANGUAGES } from "../../i18n/languages";
 import { APP_VERSION } from "../../core/appVersion";
 import styles from "./AuthLayout.module.css";
+import Dropdown from "./Dropdown";
 
 // PROSM Platform's own product/plan/entitlement registry
 // (prosm_products/prosm_product_plans/prosm_entitlements, product_key
@@ -88,18 +89,13 @@ export default function AuthHeader({ showVersion = true }: { showVersion?: boole
       </nav>
 
       <div className={styles.headerActions}>
-        <select
+        <Dropdown
           className={styles.headerLanguageSelect}
           value={i18n.language}
-          onChange={(event) => i18n.changeLanguage(event.target.value)}
-          aria-label={t("authHeader.languageAriaLabel")}
-        >
-          {LANGUAGES.map((language) => (
-            <option key={language.code} value={language.code}>
-              {language.nativeLabel}
-            </option>
-          ))}
-        </select>
+          onChange={(next) => i18n.changeLanguage(next)}
+          ariaLabel={t("authHeader.languageAriaLabel")}
+          options={LANGUAGES.map((language) => ({ value: language.code, label: language.nativeLabel }))}
+        />
 
         <div ref={contactRef} className={styles.contactWrapper}>
           <button type="button" className={styles.headerHelpLink} onClick={() => setContactOpen((open) => !open)} aria-haspopup="true" aria-expanded={contactOpen}>

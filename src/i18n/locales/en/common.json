@@ -324,5 +324,13 @@
     "point1": "Clock in only where the work is, with GPS and a photo",
     "point2": "Works offline and keeps the real time and place",
     "point3": "Timesheets, allowances and reports in five languages"
+  },
+  "dateTime": {
+    "date": "Date",
+    "time": "Time"
+  },
+  "dropdown": {
+    "search": "Search…",
+    "noMatch": "No matches"
   }
 }

@@ -324,5 +324,13 @@
     "point1": "Pointage uniquement sur le lieu de travail, avec GPS et photo",
     "point2": "Fonctionne hors ligne et garde l'heure et le lieu réels",
     "point3": "Feuilles de temps, indemnités et rapports en cinq langues"
+  },
+  "dateTime": {
+    "date": "Date",
+    "time": "Heure"
+  },
+  "dropdown": {
+    "search": "Rechercher…",
+    "noMatch": "Aucun résultat"
   }
 }

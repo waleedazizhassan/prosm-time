@@ -12,6 +12,7 @@ import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
+import FieldRow from "../../components/common/FieldRow";
 
 interface ProjectAssignmentsModalProps {
   isOpen: boolean;
@@ -81,7 +82,7 @@ export default function ProjectAssignmentsModal({ isOpen, onClose, project }: Pr
       <HintText small>{t("projectAssignments.hint")}</HintText>
 
       {unassignedMembers.length > 0 ? (
-        <div style={{ display: "flex", gap: "var(--space-2)", alignItems: "flex-end" }}>
+        <FieldRow style={{ gap: "var(--space-2)", flexWrap: "nowrap" }}>
           <div style={{ flex: 1 }}>
             <Select
               label={t("detail.assignForm.employeeLabel")}
@@ -95,7 +96,7 @@ export default function ProjectAssignmentsModal({ isOpen, onClose, project }: Pr
           <Button variant="ghost" size="sm" onClick={handleAssign} disabled={submitting || !pickerUserId}>
             {t("projectAssignments.assignAction")}
           </Button>
-        </div>
+        </FieldRow>
       ) : null}
 
       <ErrorText>{error}</ErrorText>

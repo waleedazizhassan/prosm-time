@@ -25,6 +25,7 @@ import styles from "./ManagerDashboard.module.css";
 import { auditLabel, DEFAULT_ORDER, iso, mergeOrder, periodRange, trend, type Period, type WidgetId } from "./dashboardLogic";
 import EmptyState from "../../../components/common/EmptyState";
 import leaveTypeLabel from "../../leave/leaveTypeLabel";
+import Dropdown from "../../../components/common/Dropdown";
 
 const LAYOUT_KEY = "prosm_time_dashboard_layout_v1";
 const REFRESH_MS = 60000;
@@ -441,14 +442,13 @@ export default function ManagerDashboard() {
             </button>
           ))}
         </div>
-        <select className={styles.siteSelect} aria-label={t("manager.siteFilter")} value={siteFilter} onChange={(event) => setSiteFilter(event.target.value)}>
-          <option value="">{t("manager.allSites")}</option>
-          {sites.map((site) => (
-            <option key={site.id} value={site.id}>
-              {site.name}
-            </option>
-          ))}
-        </select>
+        <Dropdown
+          className={styles.siteSelect}
+          ariaLabel={t("manager.siteFilter")}
+          value={siteFilter}
+          onChange={setSiteFilter}
+          options={[{ value: "", label: t("manager.allSites") }, ...sites.map((site) => ({ value: site.id, label: site.name }))]}
+        />
       </div>
       {period === "custom" ? (
         <div className={styles.customRange}>

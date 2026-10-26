@@ -31,6 +31,16 @@
   gap: var(--space-7);
 }
 
+/* fields and a button aligned at the foot: as in FieldRow, the fields'
+   bottom margin goes under the grid instead (owner 2026-10-26) */
+.alignEnd {
+  margin-bottom: var(--space-4);
+}
+
+.alignEnd [data-form-field] {
+  margin-bottom: 0;
+}
+
 @media (max-width: 768px) {
   .columns2,
   .columns3,

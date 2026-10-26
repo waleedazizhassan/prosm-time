@@ -324,5 +324,13 @@
     "point1": "Einstempeln nur am Einsatzort, mit GPS und Foto",
     "point2": "Funktioniert offline und speichert echte Zeit und echten Ort",
     "point3": "Stundenzettel, Zulagen und Berichte in fünf Sprachen"
+  },
+  "dateTime": {
+    "date": "Datum",
+    "time": "Uhrzeit"
+  },
+  "dropdown": {
+    "search": "Suchen…",
+    "noMatch": "Keine Treffer"
   }
 }

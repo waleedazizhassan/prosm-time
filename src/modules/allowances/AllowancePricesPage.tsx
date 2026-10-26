@@ -20,6 +20,7 @@ import allowancesHeaderImage from "../../assets/illustrations/allowances.svg";
 import HintText from "../../components/common/HintText";
 import AllowanceBasisCard from "./AllowanceBasisCard";
 import useConfirm from "../../components/common/useConfirm";
+import Dropdown from "../../components/common/Dropdown";
 
 const EVERY_SITE = "";
 
@@ -199,14 +200,13 @@ export default function AllowancePricesPage() {
       key: "category",
       header: t("prices.categoryColumn"),
       render: (member) => (
-        <select style={{ minHeight: 36, padding: "0 var(--space-2)", border: "1px solid var(--border-medium)", borderRadius: "var(--radius-sm)", background: "var(--surface-raised)", color: "var(--text-primary)", font: "inherit" }} value={memberCategory[member.id] ?? ""} onChange={(event) => changeMemberCategory(member.id, event.target.value)} aria-label={t("prices.categoryColumn")}>
-          <option value="">{t("prices.noCategory")}</option>
-          {categories.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
+        <Dropdown
+          style={{ minHeight: 36, minWidth: 140, padding: "0 var(--space-2)", border: "1px solid var(--border-medium)", borderRadius: "var(--radius-sm)", background: "var(--surface-raised)", color: "var(--text-primary)", font: "inherit" }}
+          value={memberCategory[member.id] ?? ""}
+          onChange={(next) => changeMemberCategory(member.id, next)}
+          ariaLabel={t("prices.categoryColumn")}
+          options={[{ value: "", label: t("prices.noCategory") }, ...categories.map((category) => ({ value: category.id, label: category.name }))]}
+        />
       ),
     },
     {

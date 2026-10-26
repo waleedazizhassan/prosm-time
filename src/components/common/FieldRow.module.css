@@ -1,0 +1,15 @@
+/* A row of fields (and the button that acts on them) whose boxes line up:
+   the fields' own bottom margin is dropped inside the row - otherwise a
+   field and a button, or a date range and a list, sit at different heights
+   (owner 2026-10-26) - and the row keeps that margin under itself. */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.row [data-form-field] {
+  margin-bottom: 0;
+}

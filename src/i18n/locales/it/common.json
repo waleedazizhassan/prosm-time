@@ -324,5 +324,13 @@
     "point1": "Timbratura solo sul luogo di lavoro, con GPS e foto",
     "point2": "Funziona offline e conserva ora e luogo reali",
     "point3": "Fogli ore, indennità e report in cinque lingue"
+  },
+  "dateTime": {
+    "date": "Data",
+    "time": "Ora"
+  },
+  "dropdown": {
+    "search": "Cerca…",
+    "noMatch": "Nessun risultato"
   }
 }

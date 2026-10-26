@@ -8,12 +8,12 @@ import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
 import Card from "../../components/common/Card";
 import Button from "../../components/common/Button";
 import Modal from "../../components/common/Modal";
-import Input from "../../components/common/Input";
 import Textarea from "../../components/common/Textarea";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
 import ListRow from "../../components/common/ListRow";
 import PersonName from "../../components/common/PersonName";
+import DateTimeInput from "../../components/common/DateTimeInput";
 
 // "2026-10-25T14:30" in the reader's own time zone, for <input type="datetime-local">.
 export function toLocalInputValue(iso: string): string {
@@ -137,7 +137,7 @@ export default function PendingHoursCard() {
             <p style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>
               {t("pendingHours.modalBody", { clockIn: when(target.clockInAt), lastActivity: target.lastActivityAt ? when(target.lastActivityAt) : "—" })}
             </p>
-            <Input label={t("pendingHours.clockOutLabel")} name="pendingClockOut" type="datetime-local" value={clockOut} onChange={(event) => setClockOut(event.target.value)} disabled={saving} />
+            <DateTimeInput label={t("pendingHours.clockOutLabel")} name="pendingClockOut" value={clockOut} onChange={setClockOut} disabled={saving} />
             <Textarea label={t("pendingHours.reasonLabel")} name="pendingReason" value={reason} onChange={(event) => setReason(event.target.value)} disabled={saving} />
             <ErrorText>{error}</ErrorText>
           </>

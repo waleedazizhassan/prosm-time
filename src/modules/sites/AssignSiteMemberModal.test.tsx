@@ -36,9 +36,10 @@ describe("site role default (audit 4.3)", () => {
 
   it("assigns a Manager as site manager without changing the role by hand", async () => {
     render(<AssignSiteMemberModal isOpen onClose={vi.fn()} onAssigned={vi.fn()} siteId="site-1" />);
-    const person = (await screen.findAllByRole("combobox"))[0];
-    await waitFor(() => expect(screen.getByRole("option", { name: /Mona Manager/ })).toBeInTheDocument());
-    fireEvent.change(person, { target: { value: "u-mgr" } });
+    // the person list is the app's own drop-down (owner 2026-10-26)
+    const person = await waitFor(() => document.querySelector<HTMLElement>('[aria-haspopup="listbox"]')!);
+    fireEvent.click(person);
+    fireEvent.click(await screen.findByRole("option", { name: /Mona Manager/ }));
     fireEvent.click(screen.getByRole("button", { name: /Assign/i }));
     await waitFor(() => expect(SiteRepository.setSiteAssignment).toHaveBeenCalledWith("site-1", "u-mgr", "manager"));
   });

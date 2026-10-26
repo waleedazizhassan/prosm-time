@@ -13,6 +13,7 @@ import Button from "../../components/common/Button";
 import Toggle from "../../components/common/Toggle";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
+import FieldRow from "../../components/common/FieldRow";
 import SiteIntegritySettings from "./SiteIntegritySettings";
 import SiteExitPolicySettings from "./SiteExitPolicySettings";
 
@@ -341,7 +342,7 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
               <HintText small>{t("sites:form.exemptEmployeesHint")}</HintText>
 
               {nonExemptAssignments.length > 0 ? (
-                <div style={{ display: "flex", gap: "var(--space-2)", alignItems: "flex-end" }}>
+                <FieldRow style={{ gap: "var(--space-2)", flexWrap: "nowrap" }}>
                   <div style={{ flex: 1 }}>
                     <Select
                       label={t("sites:form.exemptEmployeesAddLabel")}
@@ -358,7 +359,7 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
                   <Button type="button" variant="ghost" size="sm" onClick={handleAddExemption} disabled={!employeeToExempt || exemptionSavingUserId !== null} style={{ marginBottom: "var(--space-4)" }}>
                     {t("sites:form.exemptEmployeesAddAction")}
                   </Button>
-                </div>
+                </FieldRow>
               ) : null}
 
               {exemptAssignments.length > 0 ? (

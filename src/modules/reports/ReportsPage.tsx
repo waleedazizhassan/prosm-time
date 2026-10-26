@@ -32,6 +32,7 @@ import styles from "./ReportsPage.module.css";
 import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
 import DateRange from "../../components/common/DateRange";
+import FieldRow from "../../components/common/FieldRow";
 
 const ALL_EMPLOYEES = "";
 const ALL_SITES = "";
@@ -489,7 +490,7 @@ export default function ReportsPage() {
           </p>
         ) : (
           <>
-            <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap", alignItems: "flex-end" }}>
+            <FieldRow>
               <DateRange>
                 <Input label={t("filters.fromLabel")} name="reportsFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />
                 <Input label={t("filters.toLabel")} name="reportsTo" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
@@ -500,7 +501,7 @@ export default function ReportsPage() {
               {siteNames.length > 1 ? (
                 <Select label={t("filters.siteLabel")} name="reportsSite" value={siteFilter} onChange={(event) => setSiteFilter(event.target.value)} options={siteOptions} />
               ) : null}
-            </div>
+            </FieldRow>
 
             <ErrorText>{loadError}</ErrorText>
 

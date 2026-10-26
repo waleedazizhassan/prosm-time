@@ -6,12 +6,9 @@
   max-width: 520px;
 }
 
-/* The fields' own bottom margin is the row's; no second gap under them. */
+/* owner 2026-10-26: the two fields keep the bottom margin every other field
+   has, so a range lines up with a list or a field beside it (it used to drop
+   it and push its neighbour down instead) */
 .range.range > * {
-  margin-bottom: 0;
   min-width: 0;
-}
-
-.range + * {
-  margin-top: var(--space-3);
 }

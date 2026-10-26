@@ -21,6 +21,7 @@ import shiftsHeaderImage from "../../assets/illustrations/schedule.svg";
 import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
 import DateRange from "../../components/common/DateRange";
+import FieldRow from "../../components/common/FieldRow";
 import BreakRulesModal from "./BreakRulesModal";
 
 function isoDate(date: Date): string {
@@ -248,19 +249,19 @@ export default function SchedulePage() {
               ))}
               {templates.length === 0 ? <span style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("noTemplates")}</span> : null}
             </div>
-            <div style={{ display: "flex", gap: "var(--space-2)", alignItems: "flex-end", flexWrap: "wrap" }}>
+            <FieldRow style={{ gap: "var(--space-2)" }}>
               <Input label={t("templateNameLabel")} name="templateName" value={templateName} onChange={(event) => setTemplateName(event.target.value)} disabled={templateSubmitting} />
               <Input label={t("startTimeLabel")} name="templateStart" type="time" value={templateStart} onChange={(event) => setTemplateStart(event.target.value)} disabled={templateSubmitting} />
               <Input label={t("endTimeLabel")} name="templateEnd" type="time" value={templateEnd} onChange={(event) => setTemplateEnd(event.target.value)} disabled={templateSubmitting} />
               <Button onClick={handleCreateTemplate} loading={templateSubmitting} disabled={!templateName.trim() || !selectedSiteId}>
                 {t("createTemplateAction")}
               </Button>
-            </div>
+            </FieldRow>
             <ErrorText>{templateError}</ErrorText>
           </Card>
 
           <Card title={t("assignTitle")}>
-            <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap", alignItems: "flex-end" }}>
+            <FieldRow style={{ gap: "var(--space-2)" }}>
               <Select
                 label={t("columns.employee")}
                 name="assignUser"
@@ -282,7 +283,7 @@ export default function SchedulePage() {
               <Input label={t("columns.date")} name="assignDate" type="date" value={assignDate} onChange={(event) => setAssignDate(event.target.value)} disabled={assignSubmitting} />
               <Input label={t("startTimeLabel")} name="assignStart" type="time" value={assignStart} onChange={(event) => setAssignStart(event.target.value)} disabled={assignSubmitting} />
               <Input label={t("endTimeLabel")} name="assignEnd" type="time" value={assignEnd} onChange={(event) => setAssignEnd(event.target.value)} disabled={assignSubmitting} />
-            </div>
+            </FieldRow>
             <Textarea label={t("notesLabel")} name="assignNotes" value={assignNotes} onChange={(event) => setAssignNotes(event.target.value)} disabled={assignSubmitting} rows={2} />
             <ErrorText>{assignError}</ErrorText>
             <Button onClick={handleAssign} loading={assignSubmitting} disabled={!assignUserId || !selectedSiteId || !assignDate}>

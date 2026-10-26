@@ -20,6 +20,7 @@ import Modal from "../../components/common/Modal";
 import workersArt from "../../assets/illustrations/workers.svg";
 import HintText from "../../components/common/HintText";
 import useConfirm from "../../components/common/useConfirm";
+import FieldRow from "../../components/common/FieldRow";
 
 // Owner 2026-10-18/19: external workers (contractors without an app
 // account) are added here for the whole organisation. The app generates
@@ -198,7 +199,7 @@ export default function ExternalWorkersPage() {
 
       <Card title={t("addTitle")}>
         <HintText>{t("addHint")}</HintText>
-        <div style={{ display: "flex", gap: "var(--space-2)", alignItems: "flex-end", flexWrap: "wrap" }}>
+        <FieldRow style={{ gap: "var(--space-2)" }}>
           <div style={{ minWidth: 200, flex: "1 1 200px" }}>
             <Input label={t("nameLabel")} name="workerName" value={name} onChange={(event) => setName(event.target.value)} disabled={adding} />
           </div>
@@ -208,7 +209,7 @@ export default function ExternalWorkersPage() {
           <Button onClick={handleAdd} loading={adding} disabled={!name.trim() || adding}>
             {t("addAction")}
           </Button>
-        </div>
+        </FieldRow>
         <ErrorText>{addError}</ErrorText>
         {added ? (
           <div role="status" style={{ marginTop: "var(--space-3)", padding: "var(--space-3)", borderRadius: 12, background: "var(--brand-primary-subtle, #f0fdf4)", border: "1px solid var(--brand-primary-subtle-border, #86efac)" }}>
@@ -227,7 +228,7 @@ export default function ExternalWorkersPage() {
       <Card title={t("listTitle")}>
         <ErrorText>{loadError || rowError}</ErrorText>
         {overrideDraft ? (
-          <div style={{ display: "flex", gap: "var(--space-2)", alignItems: "flex-end", flexWrap: "wrap", marginBottom: "var(--space-3)" }}>
+          <FieldRow style={{ gap: "var(--space-2)", marginBottom: "var(--space-3)" }}>
             <div style={{ minWidth: 240, flex: "1 1 240px" }}>
               <Input
                 label={t("overrideReasonLabel")}
@@ -242,7 +243,7 @@ export default function ExternalWorkersPage() {
             <Button variant="ghost" onClick={() => setOverrideDraft(null)}>
               {t("common:actions.cancel")}
             </Button>
-          </div>
+          </FieldRow>
         ) : null}
         <Table columns={columns} data={workers} getRowId={(worker) => worker.id} loading={loading} emptyMessage={t("empty")} />
       </Card>

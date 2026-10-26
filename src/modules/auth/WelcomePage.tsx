@@ -11,6 +11,7 @@ import { useTheme } from "../../core/context/ThemeContext";
 import pageStyles from "../../components/common/AuthLayout.module.css";
 import styles from "./WelcomePage.module.css";
 import LegalLinks from "../legal/LegalLinks";
+import Dropdown from "../../components/common/Dropdown";
 
 // PROSM Time - the first screen: Sign in, Create organization, or try the
 // 30-day demo (owner 2026-09-29). Aurora (owner 2026-10-20): the same navy,
@@ -40,18 +41,13 @@ export default function WelcomePage() {
 
           <div className={pageStyles.formPanel}>
             <div className={styles.topControls}>
-              <select
+              <Dropdown
                 className={styles.mobileLanguageSelect}
                 value={i18n.language}
-                onChange={(event) => i18n.changeLanguage(event.target.value)}
-                aria-label={t("authHeader.languageAriaLabel")}
-              >
-                {LANGUAGES.map((language) => (
-                  <option key={language.code} value={language.code}>
-                    {language.nativeLabel}
-                  </option>
-                ))}
-              </select>
+                onChange={(next) => i18n.changeLanguage(next)}
+                ariaLabel={t("authHeader.languageAriaLabel")}
+                options={LANGUAGES.map((language) => ({ value: language.code, label: language.nativeLabel }))}
+              />
               <button
                 type="button"
                 className={styles.themeToggle}

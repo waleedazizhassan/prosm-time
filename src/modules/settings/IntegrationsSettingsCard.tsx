@@ -13,6 +13,7 @@ import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
 import Modal from "../../components/common/Modal";
 import HintText from "../../components/common/HintText";
+import FieldRow from "../../components/common/FieldRow";
 
 // PROSM Time - § user-directed: a real integration key so sibling
 // PROSM products (PROSM Projects first) can pull verified attendance
@@ -140,7 +141,7 @@ export default function IntegrationsSettingsCard() {
         <HintText>{t("integrations.empty")}</HintText>
       )}
 
-      <div style={{ display: "flex", gap: "var(--space-2)", alignItems: "flex-end", flexWrap: "wrap" }}>
+      <FieldRow style={{ gap: "var(--space-2)" }}>
         <div style={{ maxWidth: 280, flex: 1 }}>
           <Input
             label={t("integrations.nameLabel")}
@@ -167,7 +168,7 @@ export default function IntegrationsSettingsCard() {
         <Button onClick={handleCreate} loading={creating} disabled={!name.trim()}>
           {t("integrations.createAction")}
         </Button>
-      </div>
+      </FieldRow>
 
       <ErrorText>{error}</ErrorText>
 

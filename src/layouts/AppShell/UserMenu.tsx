@@ -13,6 +13,7 @@ import { LANGUAGES } from "../../i18n/languages";
 import UserRepository from "../../core/repositories/UserRepository";
 import sidebarStyles from "./Sidebar.module.css";
 import styles from "./UserMenu.module.css";
+import Dropdown from "../../components/common/Dropdown";
 
 const PANEL_GAP = 8;
 const PANEL_WIDTH = 260;
@@ -206,28 +207,27 @@ export default function UserMenu({ collapsed }: { collapsed: boolean }) {
             <label className={styles.languageLabel} htmlFor="userMenuLanguage">
               {t("languageLabel")}
             </label>
-            <select id="userMenuLanguage" className={styles.languageSelect} value={i18n.language} onChange={(event) => i18n.changeLanguage(event.target.value)}>
-              {LANGUAGES.map((language) => (
-                <option key={language.code} value={language.code}>
-                  {language.nativeLabel}
-                </option>
-              ))}
-            </select>
+            <Dropdown id="userMenuLanguage" className={styles.languageSelect} value={i18n.language} onChange={(next) => i18n.changeLanguage(next)} options={LANGUAGES.map((language) => ({ value: language.code, label: language.nativeLabel }))} />
             <label className={styles.languageLabel} htmlFor="userMenuTheme">
               {t("themeLabel")}
             </label>
-            <select id="userMenuTheme" className={styles.languageSelect} value={theme} onChange={(event) => setTheme(event.target.value as ThemeMode)}>
-              <option value="dark">{t("theme.dark")}</option>
-              <option value="light">{t("theme.light")}</option>
-              <option value="system">{t("theme.system")}</option>
-            </select>
+            <Dropdown
+              id="userMenuTheme"
+              className={styles.languageSelect}
+              value={theme}
+              onChange={(next) => setTheme(next as ThemeMode)}
+              options={(["dark", "light", "system"] as const).map((mode) => ({ value: mode, label: t(`theme.${mode}`) }))}
+            />
             <label className={styles.languageLabel} htmlFor="userMenuCalendar">
               {t("calendarLabel")}
             </label>
-            <select id="userMenuCalendar" className={styles.languageSelect} value={calendarSystem} onChange={(event) => setCalendarSystem(event.target.value as CalendarSystem)}>
-              <option value="gregorian">{t("calendar.gregorian")}</option>
-              <option value="hijri">{t("calendar.hijri")}</option>
-            </select>
+            <Dropdown
+              id="userMenuCalendar"
+              className={styles.languageSelect}
+              value={calendarSystem}
+              onChange={(next) => setCalendarSystem(next as CalendarSystem)}
+              options={(["gregorian", "hijri"] as const).map((system) => ({ value: system, label: t(`calendar.${system}`) }))}
+            />
             <button type="button" className={styles.signOutButton} onClick={handleCheckForUpdate} disabled={updateChecking}>
               <RefreshCw size={16} className={updateChecking ? styles.avatarSpinner : undefined} />
               {t("update.checkAction")}

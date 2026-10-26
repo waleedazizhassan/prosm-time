@@ -35,7 +35,9 @@ describe("InviteEmployeeModal", () => {
 
     fireEvent.change(screen.getByLabelText(/Email/i), { target: { value: "morgan@acme.example" } });
     fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: "Morgan Manager" } });
-    fireEvent.change(screen.getByLabelText(/Role/i), { target: { value: "manager" } });
+    // the role list is the app's own drop-down (owner 2026-10-26)
+    fireEvent.click(screen.getByLabelText(/Role/i));
+    fireEvent.click(screen.getByRole("option", { name: /manager/i }));
     fireEvent.click(screen.getByRole("button", { name: /Send invitation/i }));
 
     await waitFor(() => {

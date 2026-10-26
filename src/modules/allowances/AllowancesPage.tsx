@@ -30,6 +30,7 @@ import AllowanceSheetEditModal from "./AllowanceSheetEditModal";
 import PeriodDeductionsCard from "./PeriodDeductionsCard";
 import DateRange from "../../components/common/DateRange";
 import PersonName from "../../components/common/PersonName";
+import FieldRow from "../../components/common/FieldRow";
 import AllowanceSheetGrid from "./AllowanceSheetGrid";
 
 const ALL_EMPLOYEES = "";
@@ -486,14 +487,14 @@ export default function AllowancesPage() {
               {unsentDays > 0 ? `${t("sendAll.action")} (${unsentDays})` : t("sendAll.action")}
             </Button>
           </div>
-          <div style={{ display: "flex", alignItems: "flex-end", gap: "var(--space-3)", marginTop: "var(--space-4)" }}>
-            <div style={{ flex: 1, minWidth: 0, marginBottom: "calc(-1 * var(--space-4))" }}>
+          <FieldRow style={{ marginTop: "var(--space-4)", marginBottom: 0, flexWrap: "nowrap" }}>
+            <div style={{ flex: 1, minWidth: 0 }}>
               <Input label={t("addEntry.dateLabel")} name="newAllowanceEntryDate" type="date" value={newEntryDate} onChange={(event) => setNewEntryDate(event.target.value)} />
             </div>
             <Button variant="ghost" onClick={handleAddEntry} loading={addingEntry} disabled={!newEntryDate}>
               {t("addEntry.action")}
             </Button>
-          </div>
+          </FieldRow>
           <label style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-3)", marginTop: "var(--space-5)", paddingTop: "var(--space-4)", borderTop: "1px solid var(--border-light)", fontSize: "var(--font-sm)" }}>
             <Toggle checked={autoFill} onChange={handleAutoFill} label={t("autoFill.label")} />
             <span>

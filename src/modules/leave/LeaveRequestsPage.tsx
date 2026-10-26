@@ -20,6 +20,7 @@ import leaveHeaderImage from "../../assets/illustrations/leave.svg";
 import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
 import DateRange from "../../components/common/DateRange";
+import FieldRow from "../../components/common/FieldRow";
 import PermissionRequestCard from "./PermissionRequestCard";
 
 
@@ -227,7 +228,7 @@ export default function LeaveRequestsPage() {
       </Card>
 
       <Card title={t("requestFormTitle")}>
-        <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap", alignItems: "flex-end" }}>
+        <FieldRow>
           <Select
             label={t("columns.type")}
             name="leaveType"
@@ -240,7 +241,7 @@ export default function LeaveRequestsPage() {
             <Input label={t("startDateLabel")} name="leaveStartDate" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} disabled={submitting} />
             <Input label={t("endDateLabel")} name="leaveEndDate" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} disabled={submitting} />
           </DateRange>
-        </div>
+        </FieldRow>
         {selectedType ? (
           <HintText small>
             {[

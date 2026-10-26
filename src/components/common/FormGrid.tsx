@@ -17,7 +17,7 @@ export default function FormGrid({ columns = 2, gap = "md", alignItems, children
   const gapClass = gap === "sm" ? styles.gapSm : gap === "lg" ? styles.gapLg : styles.gapMd;
   const columnsClass = styles[`columns${columns}` as const];
   return (
-    <div className={[styles.grid, columnsClass, gapClass].filter(Boolean).join(" ")} style={alignItems ? { alignItems } : undefined}>
+    <div className={[styles.grid, columnsClass, gapClass, alignItems === "end" ? styles.alignEnd : ""].filter(Boolean).join(" ")} style={alignItems ? { alignItems } : undefined}>
       {children}
     </div>
   );

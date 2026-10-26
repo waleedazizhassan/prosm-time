@@ -16,6 +16,7 @@ import Button from "../../components/common/Button";
 import { formatTimeOnly } from "../../core/utils/formatDate";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
+import DateTimeInput from "../../components/common/DateTimeInput";
 
 interface AdminAttendanceCardProps {
   subjectUserId: string;
@@ -190,7 +191,7 @@ export default function AdminAttendanceCard({ subjectUserId, subjectFullName }: 
           <HintText>{t("detail.attendance.clockedInSince", { time: formatTimeOnly(session.clockInAt, i18n.language) })}</HintText>
           {canClockOut ? (
             <>
-              <Input label={t("detail.attendance.timeLabel")} name="adminClockOutTime" type="datetime-local" value={occurredAt} onChange={(event) => setOccurredAt(event.target.value)} helperText={t("detail.attendance.timeHint")} disabled={submitting} />
+              <DateTimeInput label={t("detail.attendance.timeLabel")} name="adminClockOutTime" value={occurredAt} onChange={setOccurredAt} helperText={t("detail.attendance.timeHint")} disabled={submitting} />
               <Textarea label={t("detail.attendance.reasonLabel")} name="adminClockOutReason" value={reason} onChange={(event) => setReason(event.target.value)} required disabled={submitting} />
               <Button onClick={handleClockOut} loading={submitting} disabled={!reason.trim()}>
                 {t("detail.attendance.clockOutAction")}
@@ -212,7 +213,7 @@ export default function AdminAttendanceCard({ subjectUserId, subjectFullName }: 
             {siteId === NO_SITE ? (
               <Input label={t("detail.attendance.placeNameLabel")} name="adminClockInPlace" value={placeName} onChange={(event) => setPlaceName(event.target.value)} required disabled={submitting} />
             ) : null}
-            <Input label={t("detail.attendance.timeLabel")} name="adminClockInTime" type="datetime-local" value={occurredAt} onChange={(event) => setOccurredAt(event.target.value)} helperText={t("detail.attendance.timeHint")} disabled={submitting} />
+            <DateTimeInput label={t("detail.attendance.timeLabel")} name="adminClockInTime" value={occurredAt} onChange={setOccurredAt} helperText={t("detail.attendance.timeHint")} disabled={submitting} />
             <Select
               label={t("detail.attendance.projectLabel")}
               name="adminClockInProject"
