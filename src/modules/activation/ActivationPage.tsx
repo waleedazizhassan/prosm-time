@@ -12,7 +12,8 @@ import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import AuthLayout from "../../components/common/AuthLayout";
-import styles from "../../components/common/AuthLayout.module.css";
+import styles from "../../components/common/AuthLayout.module.css";
+import ErrorText from "../../components/common/ErrorText";
 
 // PROSM Time Implementation Master File V3.0, WP-03/§37 - "Activation /
 // Welcome." The one screen a brand-new customer reaches with no session
@@ -241,7 +242,7 @@ export default function ActivationPage() {
           </label>
         </div>
 
-        {error ? <p className={styles.errorText}>{error}</p> : null}
+        <ErrorText>{error}</ErrorText>
         {success ? <p className={styles.successText}>{t("auth:activation.successMessage")}</p> : null}
 
         <Button type="submit" fullWidth loading={submitting} disabled={success || !agreedToEmailPolicy}>

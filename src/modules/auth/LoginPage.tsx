@@ -10,6 +10,7 @@ import Button from "../../components/common/Button";
 import Divider from "../../components/common/Divider";
 import AuthLayout from "../../components/common/AuthLayout";
 import styles from "../../components/common/AuthLayout.module.css";
+import ErrorText from "../../components/common/ErrorText";
 
 // PROSM Time Implementation Master File V3.0, WP-03/§12/§37 - "secure
 // authentication." Plain Supabase Auth email/password sign-in - the
@@ -91,7 +92,7 @@ export default function LoginPage() {
           {t("login.forgotPassword")}
         </button>
 
-        {error ? <p className={styles.errorText}>{error}</p> : null}
+        <ErrorText kind="session">{error}</ErrorText>
 
         <Button type="submit" fullWidth loading={submitting}>
           {t("login.submitAction")}

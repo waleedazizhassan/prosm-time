@@ -33,3 +33,12 @@
 .action {
   margin-top: var(--space-2);
 }
+
+/* v2.3.43 step 21: the default small picture of an empty state. */
+.stateArt {
+  justify-self: center;
+  width: 120px;
+  max-width: 40%;
+  height: auto;
+  margin-bottom: var(--space-2);
+}

@@ -9,6 +9,7 @@ import { formatTimeOnly } from "../../../core/utils/formatDate";
 
 import Modal from "../../../components/common/Modal";
 import styles from "./ManagerDashboard.module.css";
+import EmptyState from "../../../components/common/EmptyState";
 
 const hours = (minutes: number) => Math.round((minutes / 60) * 10) / 10;
 
@@ -55,7 +56,7 @@ export default function ExternalWorkersWidget({ sites, refreshKey }: { sites: Da
       </div>
       <div className={styles.widgetBody}>
         {withExternal.length === 0 ? (
-          <p className={styles.empty}>{t("manager.sites.noExternal")}</p>
+          <EmptyState kind="empty" message={t("manager.sites.noExternal")} />
         ) : (
           <ul className={styles.rowList}>
             {withExternal.map((site) => {
@@ -91,7 +92,7 @@ export default function ExternalWorkersWidget({ sites, refreshKey }: { sites: Da
           <>
             <h3 className={styles.widgetTitle} style={{ fontSize: "var(--font-sm)" }}>{t("manager.external.here", { count: contractorWorkers.here.length })}</h3>
             {contractorWorkers.here.length === 0 ? (
-              <p className={styles.empty}>{t("manager.external.noneHere")}</p>
+              <EmptyState message={t("manager.external.noneHere")} />
             ) : (
               <ul className={styles.rowList}>
                 {contractorWorkers.here.map((worker) => (

@@ -97,7 +97,7 @@ export default function PeopleByRole({ compact = false, onOpen }: { compact?: bo
         />
       </div>
 
-      {groups.length === 0 ? <EmptyState message={t("byRole.noResults")} /> : null}
+      {groups.length === 0 ? <EmptyState kind="notFound" message={t("byRole.noResults")} /> : null}
 
       {groups.map((group) => {
         const isCollapsed = Boolean(collapsed[group.key]);

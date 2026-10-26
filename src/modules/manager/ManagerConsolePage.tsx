@@ -246,7 +246,7 @@ export default function ManagerConsolePage() {
       <Card title={t("pending.title")}>
         <ErrorText>{error}</ErrorText>
         {pendingItems.length === 0 ? (
-          <EmptyState message={t("pending.empty")} />
+          <EmptyState kind="success" message={t("pending.empty")} />
         ) : (
           pendingItems.map((item) => (
             <ListRow key={`${item.kind}-${item.id}`}>

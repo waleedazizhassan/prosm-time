@@ -1,0 +1,30 @@
+/* v2.3.43 step 21 (owner 2026-10-26): every error message carries a small
+   flat picture of what went wrong, beside the text - compact, never a big
+   card, so a form keeps its shape. */
+.message {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-2) 0;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--status-danger-border, #fecaca);
+  border-radius: var(--radius-md);
+  background: var(--status-danger-bg, #fef2f2);
+}
+
+.art {
+  flex: none;
+  width: 52px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  background: var(--palette-white, #fff);
+}
+
+.text {
+  margin: 0;
+  min-width: 0;
+  color: var(--status-danger-text, var(--brand-danger));
+  font-size: var(--font-sm);
+  line-height: 1.6;
+}

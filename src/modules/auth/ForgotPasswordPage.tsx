@@ -9,6 +9,7 @@ import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import AuthLayout from "../../components/common/AuthLayout";
 import styles from "../../components/common/AuthLayout.module.css";
+import ErrorText from "../../components/common/ErrorText";
 
 // PROSM Time - live UX review, user-directed: "there should be a
 // password-reset feature." The forgotten-password user's own entry
@@ -60,7 +61,7 @@ export default function ForgotPasswordPage() {
         <form onSubmit={handleSubmit}>
           <Input label={t("login.emailLabel")} name="email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} required disabled={submitting} autoComplete="email" />
 
-          {error ? <p className={styles.errorText}>{error}</p> : null}
+          <ErrorText kind="session">{error}</ErrorText>
 
           <Button type="submit" fullWidth loading={submitting}>
             {t("forgotPassword.submitAction")}

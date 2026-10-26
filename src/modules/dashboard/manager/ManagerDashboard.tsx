@@ -24,6 +24,7 @@ import ExternalWorkersWidget from "./ExternalWorkersWidget";
 import SitesMap from "./SitesMap";
 import styles from "./ManagerDashboard.module.css";
 import { auditLabel, DEFAULT_ORDER, iso, mergeOrder, periodRange, trend, type Period, type WidgetId } from "./dashboardLogic";
+import EmptyState from "../../../components/common/EmptyState";
 
 const LAYOUT_KEY = "prosm_time_dashboard_layout_v1";
 const REFRESH_MS = 60000;
@@ -209,7 +210,7 @@ export default function ManagerDashboard() {
               {!data ? (
                 <div className={styles.skeleton} style={{ height: 200 }} />
               ) : data.presentNow.length === 0 ? (
-                <p className={styles.empty}>{t("manager.present.empty")}</p>
+                <EmptyState message={t("manager.present.empty")} />
               ) : (
                 <ul className={styles.rowList}>
                   {data.presentNow.map((person) => (
@@ -242,7 +243,7 @@ export default function ManagerDashboard() {
               {!data ? (
                 <div className={styles.skeleton} style={{ height: 160 }} />
               ) : data.sites.length === 0 ? (
-                <p className={styles.empty}>{t("manager.sites.empty")}</p>
+                <EmptyState message={t("manager.sites.empty")} />
               ) : (
                 <table className={styles.table}>
                   <thead>
@@ -353,7 +354,7 @@ export default function ManagerDashboard() {
               {!data?.audit ? (
                 <div className={styles.skeleton} style={{ height: 120 }} />
               ) : data.audit.length === 0 ? (
-                <p className={styles.empty}>{t("manager.audit.empty")}</p>
+                <EmptyState message={t("manager.audit.empty")} />
               ) : (
                 <table className={styles.table}>
                   <thead>
@@ -627,7 +628,7 @@ function SiteRows({ site, t, externalOpen, onToggleExternal, onFilter }: { site:
 
 function TopSitesCost({ sites, t, language }: { sites: DashboardSite[]; t: T; language: string }) {
   const top = sites.filter((site) => (site.cost ?? 0) > 0).sort((a, b) => (b.cost ?? 0) - (a.cost ?? 0)).slice(0, 5);
-  if (top.length === 0) return <p className={styles.empty}>{t("manager.cost.noSites")}</p>;
+  if (top.length === 0) return <EmptyState message={t("manager.cost.noSites")} />;
   const max = top[0].cost ?? 1;
   return (
     <div style={{ display: "grid", gap: 6 }}>
@@ -655,7 +656,7 @@ function ScheduleChart({ data, mode, t, language }: { data: Dashboard | null; mo
           scheduled: day.scheduledMinutes,
           pending: day.pendingMinutes,
         }));
-  if (bars.length === 0 || bars.every((bar) => bar.worked === 0 && bar.scheduled === 0)) return <p className={styles.empty}>{t("manager.chart.empty")}</p>;
+  if (bars.length === 0 || bars.every((bar) => bar.worked === 0 && bar.scheduled === 0)) return <EmptyState message={t("manager.chart.empty")} />;
   const max = Math.max(...bars.map((bar) => Math.max(bar.worked + bar.pending, bar.scheduled)), 1);
   const width = 100 / bars.length;
   const rtl = isRtl(language);

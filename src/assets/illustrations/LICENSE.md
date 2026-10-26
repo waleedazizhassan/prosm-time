@@ -6,6 +6,14 @@ Katerina Limpitsouni, as published in the npm package
 PROSM green (#16a34a). One file per page, named after the page's navigation id;
 state-*.svg are used for the offline, back-online and error messages.
 
+v2.3.43 (2026-10-26): more state-*.svg from the same package and licence, one
+per kind of message (src/components/common/stateArt.ts), converted from the
+package's JSX sources to plain SVG and recoloured the same way:
+state-permission (SecurityOn), state-location (Navigation), state-camera
+(Selfie), state-not-found (Search), state-empty (NoData), state-success
+(Confirmation), state-waiting (TimeManagement), state-sync (InSync),
+state-upload (Upload), state-session (Login), state-server (ServerStatus).
+
 MIT License
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

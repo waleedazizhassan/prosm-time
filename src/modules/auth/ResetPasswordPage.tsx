@@ -10,6 +10,7 @@ import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import AuthLayout from "../../components/common/AuthLayout";
 import styles from "../../components/common/AuthLayout.module.css";
+import ErrorText from "../../components/common/ErrorText";
 
 // PROSM Time - live UX review, user-directed password-reset feature.
 // Reached from ForgotPasswordPage or directly from the emailed link
@@ -99,7 +100,7 @@ export default function ResetPasswordPage() {
           autoComplete="new-password"
         />
 
-        {error ? <p className={styles.errorText}>{error}</p> : null}
+        <ErrorText kind="session">{error}</ErrorText>
         {success ? <p className={styles.successText}>{t("resetPassword.successMessage")}</p> : null}
 
         <Button type="submit" fullWidth loading={submitting} disabled={success}>

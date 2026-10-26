@@ -15,6 +15,7 @@ import { formatDateOnly } from "../../../core/utils/formatDate";
 import Avatar from "../../../components/common/Avatar";
 import AllowanceSheetEditModal from "../../allowances/AllowanceSheetEditModal";
 import styles from "./ManagerDashboard.module.css";
+import EmptyState from "../../../components/common/EmptyState";
 
 type QueueKind = "review" | "leave" | "allowances" | "permissions" | "overtime" | "sessions" | "timesheets" | "integrity";
 
@@ -157,7 +158,7 @@ export default function ApprovalsQueue({ refreshKey, onChanged }: { refreshKey: 
         {!loaded ? (
           <div className={styles.skeleton} style={{ height: 160 }} />
         ) : rows.length === 0 ? (
-          <p className={styles.empty}>{t("manager.queue.empty")}</p>
+          <EmptyState kind="success" message={t("manager.queue.empty")} />
         ) : (
           <ul className={styles.rowList}>
             {rows.slice(0, 25).map((row) => (

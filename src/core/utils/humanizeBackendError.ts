@@ -1,5 +1,7 @@
 import type { TFunction } from "i18next";
 
+import { classifyBackendError, rememberErrorKind } from "./errorKind";
+
 // PROSM Time - § live UX review, user-directed: "a full error-message
 // audit." Every backend RPC in this app raises its exceptions as
 // literal ALL-CAPS English text (`raise exception 'YOU ARE ALREADY
@@ -22,7 +24,13 @@ import type { TFunction } from "i18next";
 // through to that same existing generic fallback, never raw text.
 export default function humanizeBackendError(rawMessage: string | null | undefined, t: TFunction): string | null {
   if (!rawMessage) return null;
-  const trimmed = rawMessage.trim();
+  const text = translate(rawMessage.trim(), t);
+  // v2.3.43 step 21: the kind of problem goes with the text, for its picture.
+  if (text) rememberErrorKind(text, classifyBackendError(unwrap(rawMessage.trim())));
+  return text;
+}
+
+function translate(trimmed: string, t: TFunction): string | null {
   const key = BACKEND_ERROR_KEYS[trimmed] ?? BACKEND_ERROR_KEYS[unwrap(trimmed)];
   if (key) return t(`common:backendErrors.${key}`);
   // v2.3.43 step 7: refusals that carry a number (a leave type's limits).

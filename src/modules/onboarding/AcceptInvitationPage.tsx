@@ -10,6 +10,7 @@ import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import AuthLayout from "../../components/common/AuthLayout";
 import styles from "../../components/common/AuthLayout.module.css";
+import ErrorText from "../../components/common/ErrorText";
 
 // PROSM Time Implementation Master File V3.0, WP-04/§12 - the invited
 // employee's own onboarding entry point. No session exists yet, same
@@ -92,7 +93,7 @@ export default function AcceptInvitationPage() {
           autoComplete="new-password"
         />
 
-        {error ? <p className={styles.errorText}>{error}</p> : null}
+        <ErrorText kind="session">{error}</ErrorText>
         {success ? <p className={styles.successText}>{t("activation.successMessage")}</p> : null}
 
         <Button type="submit" fullWidth loading={submitting} disabled={success}>
