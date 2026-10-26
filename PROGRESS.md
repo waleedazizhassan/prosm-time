@@ -25,8 +25,8 @@
 | 18 | 16 التصدير | تمت (محلياً) | انظر git log | migration `20261025250000` مطبّقة؛ تجربة Android على جهاز فعلي → الخطوة 21 |
 | 19 | 12/13/1 Android | تمت (محلياً) — بناء debug ناجح 2026-10-26 | انظر git log | send-push منشورة؛ بناء release موقّع وتجربة على جهاز فعلي → الخطوتان 21/22 |
 | 20 | 3 بانر الأوفلاين | تمت (محلياً) | انظر git log | تجربة على جهاز Android فعلي → الخطوة 21 |
-| 21 | التدقيق الشامل | تمت (محلياً) | انظر git log | `AUDIT_FINAL.md` و`ROADMAP.md`؛ migration `20261026100000` لم تُطبَّق |
-| 22 | الإصدار | لم تبدأ | | |
+| 21 | التدقيق الشامل | تمت (محلياً) | انظر git log | `AUDIT_FINAL.md` و`ROADMAP.md`؛ migration `20261026100000` مطبّقة |
+| 22 | الإصدار | جارية | انظر git log | |
 
 ### طلبات المالك الإضافية أثناء التنفيذ
 - 2026-10-25: «الأيقونة اللي جنب صباح الخير ومساء الخير خليها شكلها أحسن من الوضع الحالي» (`src/layouts/AppShell/HeaderGreeting.tsx`). **اتنفذت مع الخطوة 16:** الأيقونة جوه دائرة ناعمة بتدرج لون حسب وقت اليوم (صباح/ظهر/مغرب/ليل) والوضع الداكن.
@@ -354,3 +354,14 @@
 **النتيجة (الخطوة 21):** راجع `AUDIT_FINAL.md` (حكم لكل workflow، الأمان، البصري، المساعدة، الخصوصية) و`ROADMAP.md` (16 بنداً مؤجلاً بالأولوية). إصلاحات بـ commit منفصل: npm audit، مفتاح API ومنظمة التجربة المنتهية، بدء التجربة يفشل مغلقاً (منشور)، حد معدل تصدير العمالة (منشور)، FileProvider، المساعدة (10 أقسام × 5 لغات)، الخصوصية والشروط (إصدار 2026-10-26)، الرسوم 2D (D-14)، نافذة التأكيد. اختبارات جديدة: `selfEscalation`، `trialLockApiKey`، `errorKind`، `useConfirm`، تطابق أرقام الداشبورد. لا ثغرة حرجة مفتوحة. **لم يُختبر:** أجهزة حقيقية، والفحص البصري صفحة صفحة لكل دور بحسابات حية.
 
 **بناء Android release (قبل الإصدار، 2026-10-26):** `npm run build` ← `npx cap sync android` ← `gradlew :app:assembleRelease --no-daemon` = **BUILD SUCCESSFUL in 7m 19s** (375 مهمة، R8/التصغير مفعّل). `app-release.apk` = 10.9MB، **موقّع** (apksigner: Verifies، v2؛ الشهادة CN=PROSM Time, O=PROSM, L=Cairo؛ SHA-256 f5e747b8…3811880). الإصدار داخل هذا البناء المحلي: `versionName 2.3.2` / `versionCode 3` (قيم `build.gradle` القديمة — رقم 2.3.43 يُضبط من مصدر واحد في الخطوة 22). الأذونات النهائية بدون `SPECIAL_USE` ولا إعفاء البطارية، وفيها `FOREGROUND_SERVICE_MEDIA_PLAYBACK`؛ FileProvider في الـ release = الكاش فقط. **لم يُختبر:** تشغيل الـ APK على جهاز أو محاكي.
+
+---
+
+## الخطوة 22 — الإصدار 2.3.43 (الخطة)
+
+1. **الـ migrations:** كل الـ migrations حتى `20261026100000` مطبّقة على قاعدة Supabase المربوطة (اتطبّقت 2026-10-26، `migration list` متطابق)، والدوال `activate-organization` و`export-worker-attendance` و`send-push` منشورة.
+2. **رقم الإصدار من مصدر واحد:** `package.json` = 2.3.42، وخط الإصدار (`release.yml`) يرفع الرقم الأخير بواحد = **2.3.43**، ويكتبه في `package.json` وفي `build.gradle` (`versionName`، و`versionCode` = رقم التشغيل) وفي `latest-version.json` (السكربت الموحّد، الخطوة 19) قبل كل بناء.
+3. **النشر:** `git push origin main` (37 commit محلي) ← CI: الاختبارات وفحص الأنواع ← APK موقّع (`PROSM-Time.apk` و`PROSM-Time-v2.3.43.apk` على GitHub Release وتخزين PROSM) ← نسخة الويب على `time.prosm.net` (GitHub Pages) ← `latest-version.json` المنشور.
+4. **الديمو:** نفس التطبيق ونفس النشر (التجربة تبدأ من داخل التطبيق) — يتحدث مع الإصدار نفسه، ومنطق الـ 30 يوم كما هو.
+5. **صفحة المنتج («Work. Tracked.»):** خارج هذا المشروع (موقع PROSM الرئيسي) — راجع `BLOCKERS.md` B-02.
+6. **الفحص بعد الإصدار:** حالة الـ CI، و`latest-version.json` المنشور، والـ APK المنشور (الرقم والتوقيع والـ manifest)، وفتح `time.prosm.net`.
