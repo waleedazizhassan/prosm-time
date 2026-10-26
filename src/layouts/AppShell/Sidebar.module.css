@@ -544,3 +544,9 @@
     display: none !important;
   }
 }
+
+/* the employee's phone menu: their own menu first (owner 2026-10-26) */
+.simpleUser {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--border-light);
+}

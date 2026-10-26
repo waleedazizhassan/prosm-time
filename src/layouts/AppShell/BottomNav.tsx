@@ -6,6 +6,9 @@ import { useAuth } from "../../core/context/AuthContext";
 import { useAppLayout } from "./LayoutContext";
 import styles from "./BottomNav.module.css";
 
+// The employee's bar (owner 2026-10-19); the phone menu lists every other page.
+export const EMPLOYEE_BOTTOM_PATHS = ["/dashboard", "/attendance", "/allowances", "/leave"];
+
 interface BottomItem {
   to: string;
   label: string;

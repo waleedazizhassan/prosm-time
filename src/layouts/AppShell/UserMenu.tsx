@@ -134,7 +134,10 @@ export default function UserMenu({ collapsed }: { collapsed: boolean }) {
       if (!triggerRect || !panelEl) return;
 
       const panelHeight = panelEl.offsetHeight;
-      const top = Math.max(VIEWPORT_MARGIN, triggerRect.top - PANEL_GAP - panelHeight);
+      // opens above its button; below it when there is no room above
+      // (the employee's phone menu puts the button at the top, 2026-10-26)
+      const above = triggerRect.top - PANEL_GAP - panelHeight;
+      const top = above >= VIEWPORT_MARGIN ? above : Math.min(triggerRect.bottom + PANEL_GAP, Math.max(VIEWPORT_MARGIN, window.innerHeight - VIEWPORT_MARGIN - panelHeight));
 
       const isRtl = document.documentElement.dir === "rtl";
       let left = isRtl ? triggerRect.right - PANEL_WIDTH : triggerRect.left;

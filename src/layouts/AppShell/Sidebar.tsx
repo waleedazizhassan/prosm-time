@@ -8,6 +8,7 @@ import { useAppLayout } from "./LayoutContext";
 import { NAV_ITEMS, NAV_SECTION_ORDER } from "./navigation";
 import UserMenu from "./UserMenu";
 import SidebarRadio from "./SidebarRadio";
+import { EMPLOYEE_BOTTOM_PATHS } from "./BottomNav";
 import styles from "./Sidebar.module.css";
 
 const OPEN_SECTIONS_KEY = "prosm_time_sidebar_open_v1";
@@ -74,6 +75,13 @@ export default function Sidebar() {
   // under labeled sections (reference "Menu" screen's own grouping),
   // nothing new introduced - a section with no visible items (every
   // item in it permission-gated away) simply renders no heading.
+  // Owner 2026-10-26: on a phone an employee's Menu is one simple page - their
+  // own menu first, then only the pages the bottom bar does not have, then
+  // the radio; no groups. Managers and the Owner keep the grouped menu.
+  const manages = Boolean(profile?.isOwner) || hasPermission("exceptions.manage");
+  const simpleMenu = mobileSidebarOpen && !manages;
+  const otherPages = visibleItems.filter((item) => !EMPLOYEE_BOTTOM_PATHS.includes(item.path));
+
   const sections = NAV_SECTION_ORDER.map((section) => ({ section, items: visibleItems.filter((item) => item.section === section) })).filter((group) => group.items.length > 0);
 
   // Which tree branches the person opened or closed (remembered on this device).
@@ -135,8 +143,29 @@ export default function Sidebar() {
           </button>
         </div>
 
+        {simpleMenu ? (
+          <div className={styles.simpleUser}>
+            <UserMenu collapsed={false} />
+          </div>
+        ) : null}
+
         <nav className={styles.navigation} aria-label={t("navigationLabel")}>
-          {sections.map((group) => {
+          {simpleMenu ? (
+            <div className={styles.navSection}>
+              {otherPages.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <NavLink key={item.id} to={item.path} end className={({ isActive }) => [styles.item, isActive ? styles.active : ""].filter(Boolean).join(" ")}>
+                    <span className={styles.itemIcon}>
+                      <Icon size={18} strokeWidth={2} />
+                    </span>
+                    <span className={styles.itemLabel}>{t(item.labelKey)}</span>
+                  </NavLink>
+                );
+              })}
+            </div>
+          ) : null}
+          {simpleMenu ? null : sections.map((group) => {
             const renderItem = (item: (typeof group.items)[number]) => {
               const Icon = item.icon;
               return (
@@ -187,7 +216,7 @@ export default function Sidebar() {
           <SidebarRadio />
         </div>
 
-        <UserMenu collapsed={sidebarCollapsed} />
+        {simpleMenu ? null : <UserMenu collapsed={sidebarCollapsed} />}
         {/* v2.3.43 step 16 (item 26): the version is on the Help page (and Settings), not here. */}
       </aside>
     </>
