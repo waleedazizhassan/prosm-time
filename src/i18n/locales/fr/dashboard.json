@@ -193,7 +193,8 @@
       "change_site": "Changement de site"
     },
     "insideSiteArea": "Dans la zone de {{site}}",
-    "outsideSiteArea": "Hors de la zone de {{site}} de {{meters}} m"
+    "outsideSiteArea": "Hors de la zone de {{site}} de {{meters}} m",
+    "pendingCount_many": "{{count}} pointages enregistrés sur cet appareil"
   },
   "kioskPin": {
     "title": "Code PIN kiosque",

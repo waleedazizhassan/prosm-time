@@ -124,7 +124,8 @@
     "save": "Salva e conta le ore",
     "staleTitle": "Vecchi turni ancora aperti",
     "staleHint": "Aperti prima della chiusura automatica - non vengono chiusi automaticamente. Registra l'uscita per il dipendente all'ora giusta.",
-    "staleSummary": "Aperto da {{clockIn}} ({{hours}} h)"
+    "staleSummary": "Aperto da {{clockIn}} ({{hours}} h)",
+    "title_many": "Ore da verificare ({{count}})"
   },
   "permissions": {
     "title_one": "Permessi e straordinari ({{count}})",
@@ -161,7 +162,8 @@
     "reasonLabel": "Motivo (obbligatorio)",
     "overtimeMinutesLabel": "Minuti di straordinario",
     "lateMinutesLabel": "Minuti di ritardo",
-    "save": "Salva"
+    "save": "Salva",
+    "title_many": "Permessi e straordinari ({{count}})"
   },
   "integrity": {
     "title_one": "Timbrature sospette ({{count}})",
@@ -184,6 +186,7 @@
       "liveness_failed": "Il movimento richiesto non è stato fatto.",
       "unverified_capture": "La fotocamera non si è aperta.",
       "repeated_coordinates": "Stesso punto senza errore GPS - tipico del GPS falso."
-    }
+    },
+    "title_many": "Timbrature sospette ({{count}})"
   }
 }

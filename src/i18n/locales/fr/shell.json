@@ -280,7 +280,9 @@
     "banner_other": "Version d'essai : {{count}} jours restants (fin le {{date}}). Vos données sont conservées - pour continuer, achetez un code d'activation :",
     "close": "Masquer",
     "footer_one": "Essai · 1 jour restant",
-    "footer_other": "Essai · {{count}} jours restants"
+    "footer_other": "Essai · {{count}} jours restants",
+    "banner_many": "Version d'essai : {{count}} jours restants (fin le {{date}}). Vos données sont conservées - pour continuer, achetez un code d'activation :",
+    "footer_many": "Essai · {{count}} jours restants"
   },
   "offlineSync": {
     "waiting_one": "1 pointage attend la connexion - il sera envoyé automatiquement.",
@@ -288,7 +290,10 @@
     "syncing_one": "Envoi d'1 pointage…",
     "syncing_other": "Envoi de {{count}} pointages…",
     "failed_one": "Un pointage n'a pas pu être envoyé - ouvrez le tableau de bord pour réessayer ou l'abandonner.",
-    "failed_other": "Un pointage n'a pas pu être envoyé - ouvrez le tableau de bord pour réessayer ou l'abandonner ({{count}} en attente)."
+    "failed_other": "Un pointage n'a pas pu être envoyé - ouvrez le tableau de bord pour réessayer ou l'abandonner ({{count}} en attente).",
+    "waiting_many": "{{count}} pointages attendent la connexion - ils seront envoyés automatiquement.",
+    "syncing_many": "Envoi de {{count}} pointages…",
+    "failed_many": "Un pointage n'a pas pu être envoyé - ouvrez le tableau de bord pour réessayer ou l'abandonner ({{count}} en attente)."
   },
   "pageBanner": {
     "manager": "Présence du jour et éléments à vérifier",

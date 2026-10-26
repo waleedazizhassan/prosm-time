@@ -214,7 +214,8 @@
     "approvedHint": "Un foglio approvato non si modifica; per correggerlo riaprilo.",
     "reopenAction": "Riapri",
     "reopenTitle": "Riapri un foglio approvato",
-    "reopenHint": "Il foglio torna in verifica. Il dipendente viene avvisato."
+    "reopenHint": "Il foglio torna in verifica. Il dipendente viene avvisato.",
+    "save_many": "Salva {{count}} modifiche"
   },
   "deductions": {
     "title": "Trattenute del periodo",

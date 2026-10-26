@@ -66,6 +66,28 @@ for (const file of sourceFiles(join(root, "src"))) {
   }
 }
 
+// Owner 2026-10-26 (the manager console showed "permissions.title"): a plural
+// key needs every form its language uses - Arabic has six (zero, one, two, few,
+// many, other) and i18next shows the bare key when the one it needs is missing.
+for (const language of languages) {
+  const forms = new Intl.PluralRules(language).resolvedOptions().pluralCategories;
+  for (const [namespace, tree] of Object.entries(locales[language])) {
+    const walk = (node, path) => {
+      const bases = new Set();
+      for (const [key, value] of Object.entries(node)) {
+        if (value && typeof value === "object") walk(value, [...path, key]);
+        const plural = key.match(/^(.*)_(zero|one|two|few|many|other)$/);
+        if (plural) bases.add(plural[1]);
+      }
+      for (const base of bases) {
+        const missing = forms.filter((form) => node[`${base}_${form}`] === undefined);
+        if (missing.length > 0) problems.push(`${language}/${namespace}.json  ${[...path, base].join(".")}  missing plural form(s) ${missing.join(", ")}`);
+      }
+    };
+    walk(tree, []);
+  }
+}
+
 if (problems.length > 0) {
   console.error(problems.join("\n"));
   console.error(`\n${problems.length} missing translation(s).`);

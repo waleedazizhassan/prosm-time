@@ -193,7 +193,8 @@
       "change_site": "Cambio sede"
     },
     "insideSiteArea": "Nell'area di {{site}}",
-    "outsideSiteArea": "Fuori dall'area di {{site}} di {{meters}} m"
+    "outsideSiteArea": "Fuori dall'area di {{site}} di {{meters}} m",
+    "pendingCount_many": "{{count}} timbrature salvate su questo dispositivo"
   },
   "kioskPin": {
     "title": "PIN chiosco",

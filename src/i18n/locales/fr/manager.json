@@ -124,7 +124,8 @@
     "save": "Enregistrer et compter les heures",
     "staleTitle": "Anciennes sessions encore ouvertes",
     "staleHint": "Ouvertes avant la fermeture automatique - non fermées automatiquement. Pointez le départ pour l'employé à la bonne heure.",
-    "staleSummary": "Ouverte depuis {{clockIn}} ({{hours}} h)"
+    "staleSummary": "Ouverte depuis {{clockIn}} ({{hours}} h)",
+    "title_many": "Heures à vérifier ({{count}})"
   },
   "permissions": {
     "title_one": "Autorisations et heures sup. ({{count}})",
@@ -161,7 +162,8 @@
     "reasonLabel": "Motif (obligatoire)",
     "overtimeMinutesLabel": "Minutes sup.",
     "lateMinutesLabel": "Minutes de retard",
-    "save": "Enregistrer"
+    "save": "Enregistrer",
+    "title_many": "Autorisations et heures sup. ({{count}})"
   },
   "integrity": {
     "title_one": "Pointages suspects ({{count}})",
@@ -184,6 +186,7 @@
       "liveness_failed": "Le mouvement demandé n'a pas été fait.",
       "unverified_capture": "La caméra n'a pas pu s'ouvrir.",
       "repeated_coordinates": "Même point sans erreur GPS - signe fréquent de fausse position."
-    }
+    },
+    "title_many": "Pointages suspects ({{count}})"
   }
 }

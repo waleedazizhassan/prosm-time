@@ -214,7 +214,8 @@
     "approvedHint": "Une feuille approuvée ne se modifie pas ; rouvrez-la pour la corriger.",
     "reopenAction": "Rouvrir",
     "reopenTitle": "Rouvrir une feuille approuvée",
-    "reopenHint": "La feuille revient en vérification. L'employé est prévenu."
+    "reopenHint": "La feuille revient en vérification. L'employé est prévenu.",
+    "save_many": "Enregistrer {{count}} modifications"
   },
   "deductions": {
     "title": "Retenues de la période",
