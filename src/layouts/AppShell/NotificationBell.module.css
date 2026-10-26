@@ -117,6 +117,7 @@
 }
 
 .itemTime {
-  font-size: 10px;
+  /* step 21 audit: readable text, never below 12px */
+  font-size: 0.75rem;
   color: var(--text-disabled);
 }

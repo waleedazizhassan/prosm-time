@@ -18,7 +18,8 @@ import Table, { type TableColumn } from "../../components/common/Table";
 import ErrorText from "../../components/common/ErrorText";
 import allowancesHeaderImage from "../../assets/illustrations/allowances.svg";
 import HintText from "../../components/common/HintText";
-import AllowanceBasisCard from "./AllowanceBasisCard";
+import AllowanceBasisCard from "./AllowanceBasisCard";
+import useConfirm from "../../components/common/useConfirm";
 
 const EVERY_SITE = "";
 
@@ -35,7 +36,8 @@ interface Editing {
 // inherits, and an allowance priced at zero is typed by the employee. A
 // worked day fills itself from these prices (20261020260000).
 export default function AllowancePricesPage() {
-  const { t } = useTranslation("allowances");
+  const { t } = useTranslation("allowances");
+  const [confirm, confirmDialog] = useConfirm();
   const navigate = useNavigate();
   const { profile, hasPermission } = useAuth();
   const isOwner = Boolean(profile?.isOwner);
@@ -142,7 +144,7 @@ export default function AllowancePricesPage() {
   };
 
   const deleteCategory = async (category: AllowanceCategory) => {
-    if (!window.confirm(t("prices.deleteCategoryConfirm", { name: category.name }))) return;
+    if (!(await confirm(t("prices.deleteCategoryConfirm", { name: category.name })))) return;
     const result = await AllowanceRatesRepository.deleteCategory(category.id);
     if (!result.success) setLoadError(humanizeBackendError(result.message, t) ?? t("prices.saveError"));
     await load();
@@ -234,6 +236,7 @@ export default function AllowancePricesPage() {
   return (
     <PageShell title="">
       <PageBanner pageId="allowances" illustration={allowancesHeaderImage} />
+      {confirmDialog}
       <Card
         title={t("prices.title")}
         subtitle={t("prices.howItWorks")}
