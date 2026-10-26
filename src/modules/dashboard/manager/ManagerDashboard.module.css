@@ -526,6 +526,11 @@
     font-size: 1.5rem;
   }
 
+  /* on a phone, who is here comes before the map (the spec's phone order) */
+  .presentWidget {
+    order: -1 !important;
+  }
+
   /* the filters are one line that scrolls sideways, not a tall stack */
   .filters {
     flex-wrap: nowrap;

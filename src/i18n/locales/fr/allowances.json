@@ -169,7 +169,8 @@
     "reason": "Motif",
     "deductionsTitle": "Retenues pour congé sans solde",
     "deductionsNote": "Retenues sur la paie, pas sur les indemnités ci-dessus.",
-    "amount": "Montant"
+    "amount": "Montant",
+    "combinedEditsNote": "Certaines lignes de cette personne ont été modifiées en revue - le détail est sur sa propre fiche."
   },
   "sheets": {
     "title": "Feuilles d'indemnités à valider",

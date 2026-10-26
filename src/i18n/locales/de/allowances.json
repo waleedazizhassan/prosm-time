@@ -169,7 +169,8 @@
     "reason": "Grund",
     "deductionsTitle": "Abzüge für unbezahlten Urlaub",
     "deductionsNote": "Vom Lohn abgezogen, nicht von den Zulagen oben.",
-    "amount": "Betrag"
+    "amount": "Betrag",
+    "combinedEditsNote": "Einige Posten dieser Person wurden in der Prüfung geändert - Details auf ihrem eigenen Blatt."
   },
   "sheets": {
     "title": "Zulagenblätter zur Freigabe",

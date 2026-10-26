@@ -448,7 +448,8 @@
         "action": "الإجراء",
         "subject": "الشخص",
         "reason": "السبب",
-        "device": "الجهاز"
+        "device": "الجهاز",
+        "site": "الموقع"
       },
       "named": {
         "SOS_ALERT_TRIGGERED": "إرسال استغاثة",

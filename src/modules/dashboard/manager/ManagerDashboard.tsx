@@ -171,6 +171,9 @@ export default function ManagerDashboard() {
   const externalNow = (data?.sites ?? []).reduce((sum, site) => sum + (site.external?.presentNow ?? 0), 0);
   const externalSites = (data?.sites ?? []).filter((site) => (site.external?.presentNow ?? 0) > 0).length;
 
+  // the site of each logged action, by name (the dashboard's own sites)
+  const siteNames = useMemo(() => new Map((data?.sites ?? []).map((site) => [site.id, site.name])), [data]);
+
   // the figure cards share a row evenly (no 5 + 2 with a gap)
   const kpiCount = 5 + (data?.canViewExternal ? 1 : 0) + (data?.canViewCost && kpi?.estimatedCost !== null ? 1 : 0);
 
@@ -201,7 +204,7 @@ export default function ManagerDashboard() {
         );
       case "present":
         return (
-          <section key={id} className={`${styles.widget} ${styles.span5} ${styles.equal}`} style={{ order: order.indexOf(id) }}>
+          <section key={id} className={`${styles.widget} ${styles.span5} ${styles.equal} ${styles.presentWidget}`} style={{ order: order.indexOf(id) }}>
             <div className={styles.widgetHeader}>
               <h2 className={styles.widgetTitle}>{t("manager.present.title", { count: data?.presentNow.length ?? 0 })}</h2>
               <button type="button" className={styles.chip} onClick={() => navigate("/attendance?period=today")}>
@@ -367,6 +370,7 @@ export default function ManagerDashboard() {
                       <th>{t("manager.audit.columns.actor")}</th>
                       <th>{t("manager.audit.columns.action")}</th>
                       <th>{t("manager.audit.columns.subject")}</th>
+                      <th>{t("manager.audit.columns.site")}</th>
                       <th>{t("manager.audit.columns.device")}</th>
                       <th>{t("manager.audit.columns.reason")}</th>
                     </tr>
@@ -378,6 +382,7 @@ export default function ManagerDashboard() {
                         <td data-label={t("manager.audit.columns.actor")}>{row.actor_name ?? t("manager.audit.system")}</td>
                         <td data-label={t("manager.audit.columns.action")}>{auditLabel(row.action, t)}</td>
                         <td data-label={t("manager.audit.columns.subject")}>{row.subject_name ?? "—"}</td>
+                        <td data-label={t("manager.audit.columns.site")}>{(row.site_id && siteNames.get(row.site_id)) ?? "—"}</td>
                         <td data-label={t("manager.audit.columns.device")}>{row.device ?? "—"}</td>
                         <td data-label={t("manager.audit.columns.reason")}>{row.reason ?? "—"}</td>
                       </tr>

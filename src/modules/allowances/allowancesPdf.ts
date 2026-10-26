@@ -306,7 +306,9 @@ export function buildCombinedAllowanceSheetPdf(entries: AllowanceEntry[], ctx: S
       const list = people.get(name) ?? [];
       const days = list.filter((entry) => entry.clockInAt).length;
       const total = list.reduce((sum, entry) => sum + allowanceSum(entry) + extraSum(entry), 0);
-      return `<tr>${cell(String(index + 1))}${cell(escapeHtml(name), "text-align:start;")}${cell(String(days))}${used
+      // v2.3.47 (ROADMAP 13): someone with lines changed during review carries the mark
+      const edited = list.some((entry) => Object.keys(entry.manualOverrides ?? {}).length > 0);
+      return `<tr>${cell(String(index + 1))}${cell(escapeHtml(name) + (edited ? EDIT_MARK : ""), "text-align:start;")}${cell(String(days))}${used
         .map(([, pick]) => cell(moneyAlways(list.reduce((sum, entry) => sum + pick(entry), 0), languageCode)))
         .join("")}${cell(`<strong>${moneyAlways(total, languageCode)}</strong>`)}</tr>`;
     })
@@ -334,6 +336,7 @@ export function buildCombinedAllowanceSheetPdf(entries: AllowanceEntry[], ctx: S
       <div style="font-size:12px;opacity:0.9;">${escapeHtml(t("sheet.grandTotal"))}</div>
       <div style="font-size:20px;font-weight:800;">${moneyAlways(grand, languageCode)}</div>
     </div>
+    ${entries.some((entry) => Object.keys(entry.manualOverrides ?? {}).length > 0) ? `<div style="margin-top:8px;font-size:10.5px;color:#475569;">${EDIT_MARK} ${escapeHtml(t("sheet.combinedEditsNote"))}</div>` : ""}
     ${footer(ctx)}
   `;
   return renderHtmlToPdf(container);

@@ -444,7 +444,8 @@
         "action": "Aktion",
         "subject": "Person",
         "reason": "Grund",
-        "device": "Gerät"
+        "device": "Gerät",
+        "site": "Standort"
       },
       "named": {
         "SOS_ALERT_TRIGGERED": "SOS gesendet",

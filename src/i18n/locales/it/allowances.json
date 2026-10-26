@@ -169,7 +169,8 @@
     "reason": "Motivo",
     "deductionsTitle": "Trattenute per ferie non retribuite",
     "deductionsNote": "Trattenute dalla paga, non dalle indennità sopra.",
-    "amount": "Importo"
+    "amount": "Importo",
+    "combinedEditsNote": "Alcune voci di questa persona sono state modificate in revisione - i dettagli sono sul suo foglio."
   },
   "sheets": {
     "title": "Fogli indennità da approvare",
