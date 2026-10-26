@@ -63,6 +63,25 @@ async function accessToken(account: ServiceAccount): Promise<string> {
   return cachedToken.value;
 }
 
+// v2.3.54 (owner 2026-10-26): a leave request and its answer also go by email,
+// between the requester and whoever answered - after the push, which they never
+// hold up or stop (the email relay is a soft dependency, emailService.ts).
+async function sendLeaveEmails(client: any, notificationId: string): Promise<number> {
+  let emailed = 0;
+  try {
+    const { data } = await client.rpc("get_prosm_time_leave_email", { p_notification_id: notificationId });
+    if (!data) return 0;
+    const leave = data as LeaveEmailData;
+    for (const email of renderLeaveEmails(leave)) {
+      const result = await sendEmail({ ...email, supabase: client, organizationId: leave.organizationId });
+      if (result.sent) emailed += 1;
+    }
+  } catch {
+    // never the push's problem
+  }
+  return emailed;
+}
+
 serve(async (request: Request) => {
   if (request.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   if (request.method !== "POST") return errorResponse("Method not allowed.", 405, "METHOD_NOT_ALLOWED");
@@ -83,27 +102,11 @@ serve(async (request: Request) => {
     // Service role only: anyone else gets "permission denied" here.
     const { data: message, error } = await client.rpc("get_prosm_time_push_message", { p_notification_id: notificationId });
     if (error) return errorResponse("This endpoint requires the service role key.", 401, "UNAUTHORIZED");
-    // v2.3.54 (owner 2026-10-26): a leave request and its answer also go by
-    // email, between the requester and whoever answered; an email that fails
-    // never stops the push.
-    let emailed = 0;
-    try {
-      const { data: leaveEmail } = await client.rpc("get_prosm_time_leave_email", { p_notification_id: notificationId });
-      if (leaveEmail) {
-        for (const email of renderLeaveEmails(leaveEmail as LeaveEmailData)) {
-          const result = await sendEmail({ ...email, supabase: client, organizationId: (leaveEmail as LeaveEmailData).organizationId });
-          if (result.sent) emailed += 1;
-        }
-      }
-    } catch {
-      // the email relay is a soft dependency (emailService.ts)
-    }
-
     const devices: { token: string; language: string }[] = message?.devices ?? [];
-    if (!message || devices.length === 0) return successResponse({ sent: 0, emailed });
+    if (!message || devices.length === 0) return successResponse({ sent: 0, emailed: await sendLeaveEmails(client, notificationId) });
 
     const rawAccount = Deno.env.get("FCM_SERVICE_ACCOUNT");
-    if (!rawAccount) return successResponse({ sent: 0, skipped: "FCM_SERVICE_ACCOUNT is not set" });
+    if (!rawAccount) return successResponse({ sent: 0, skipped: "FCM_SERVICE_ACCOUNT is not set", emailed: await sendLeaveEmails(client, notificationId) });
     const account = JSON.parse(rawAccount) as ServiceAccount;
     const token = await accessToken(account);
 
@@ -159,7 +162,7 @@ serve(async (request: Request) => {
     }
     if (gone.length > 0) await client.rpc("forget_prosm_time_push_tokens", { p_tokens: gone });
 
-    return successResponse({ sent, forgotten: gone.length, emailed });
+    return successResponse({ sent, forgotten: gone.length, emailed: await sendLeaveEmails(client, notificationId) });
   } catch (error: any) {
     return errorResponse(error?.message ?? "Push service unavailable.", 500, "INTERNAL_ERROR");
   }

@@ -75,14 +75,17 @@ async function logEmailAttempt(
   }
 ) {
   if (!supabase) return;
+  const invitation = /invit/i.test(entry.purpose);
+  const label = invitation ? "Invitation" : entry.purpose;
 
   try {
     await supabase.from("audit_logs").insert({
       organization_id: entry.organizationId ?? null,
       subject_user_id: entry.userId ?? null,
-      action: entry.status === "sent" ? "INVITATION_EMAIL_SENT" : "INVITATION_EMAIL_FAILED",
-      entity_name: "user_invitations",
-      description: entry.status === "sent" ? `Invitation email sent to ${entry.recipientEmail}.` : `Invitation email to ${entry.recipientEmail} failed: ${entry.errorMessage}`,
+      // v2.3.54: named by its purpose (invitations keep their old names)
+      action: invitation ? (entry.status === "sent" ? "INVITATION_EMAIL_SENT" : "INVITATION_EMAIL_FAILED") : entry.status === "sent" ? "EMAIL_SENT" : "EMAIL_FAILED",
+      entity_name: invitation ? "user_invitations" : "emails",
+      description: entry.status === "sent" ? `${label} email sent to ${entry.recipientEmail}.` : `${label} email to ${entry.recipientEmail} failed: ${entry.errorMessage}`,
       context: { purpose: entry.purpose, subject: entry.subject, provider: "prosm-management-relay" },
     });
   } catch (logError) {
