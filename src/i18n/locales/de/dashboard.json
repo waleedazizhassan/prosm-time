@@ -493,6 +493,21 @@
       "noneHere": "Keine Kräfte dieses Auftragnehmers anwesend.",
       "present": "Anwesend",
       "absent": "Nicht da"
+    },
+    "absence": {
+      "title": "Heute abwesend: {{absent}} abwesend · {{leave}} im Urlaub",
+      "none": "Heute niemand abwesend oder im Urlaub",
+      "absent": "Abwesend",
+      "leave": "Im Urlaub",
+      "until": "bis {{date}}",
+      "shiftAt": "Schicht um {{time}} - nicht eingestempelt",
+      "notClockedIn": "Nicht eingestempelt",
+      "columns": {
+        "name": "Name",
+        "site": "Standort",
+        "status": "Status",
+        "details": "Details"
+      }
     }
   }
 }

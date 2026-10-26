@@ -493,6 +493,21 @@
       "noneHere": "Nessun lavoratore di questo appaltatore è presente.",
       "present": "Presente",
       "absent": "Assente"
+    },
+    "absence": {
+      "title": "Assenti oggi: {{absent}} assenti · {{leave}} in ferie",
+      "none": "Nessuno assente o in ferie oggi",
+      "absent": "Assente",
+      "leave": "In ferie",
+      "until": "fino al {{date}}",
+      "shiftAt": "Turno alle {{time}} - nessuna entrata",
+      "notClockedIn": "Nessuna entrata",
+      "columns": {
+        "name": "Nome",
+        "site": "Sito",
+        "status": "Stato",
+        "details": "Dettagli"
+      }
     }
   }
 }

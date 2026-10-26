@@ -68,6 +68,20 @@ export interface DashboardSite {
   external: { presentNow: number; today: number; minutesToday: number; contractors: { name: string; present: number; today: number }[] } | null;
 }
 
+// owner 2026-10-26: the sheet behind the absent-today card - each person
+// absent today (no attendance, no approved leave) and each on leave
+export interface DashboardAbsence {
+  userId: string;
+  name: string;
+  avatarUrl: string | null;
+  state: "absent" | "leave";
+  siteName: string | null;
+  shiftStart: string | null;
+  leaveType: string | null;
+  leaveTypeName: string | null;
+  leaveEnd: string | null;
+}
+
 export interface DashboardKpi {
   presentNow: number;
   expectedToday: number;
@@ -123,6 +137,7 @@ export interface ManagerDashboard {
   allowances: { total: number; overtimeAmount: number; overtimeMinutes: number; deductions: number } | null;
   audit: DashboardAuditRow[] | null;
   holidays: { name: string; startDate: string; endDate: string }[];
+  absence?: DashboardAbsence[];
 }
 
 const RETRIES = 2;

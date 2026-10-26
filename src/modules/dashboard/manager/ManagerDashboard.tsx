@@ -24,6 +24,7 @@ import SitesMap from "./SitesMap";
 import styles from "./ManagerDashboard.module.css";
 import { auditLabel, DEFAULT_ORDER, iso, mergeOrder, periodRange, trend, type Period, type WidgetId } from "./dashboardLogic";
 import EmptyState from "../../../components/common/EmptyState";
+import leaveTypeLabel from "../../leave/leaveTypeLabel";
 
 const LAYOUT_KEY = "prosm_time_dashboard_layout_v1";
 const REFRESH_MS = 60000;
@@ -57,6 +58,7 @@ export default function ManagerDashboard() {
   const [openExternal, setOpenExternal] = useState<Record<string, boolean>>({});
   const [sosTarget, setSosTarget] = useState<string | null>(null);
   const [sosNotes, setSosNotes] = useState("");
+  const [absenceOpen, setAbsenceOpen] = useState(false);
   const [chartMode, setChartMode] = useState<"week" | "month" | "year">("week");
   const dragRef = useRef<WidgetId | null>(null);
 
@@ -513,7 +515,7 @@ export default function ManagerDashboard() {
             <span className={styles.kpiHint}>{t("manager.kpi.lateInPeriod", { count: kpi.lateCount })}</span>
             <Trend value={lateTrend} t={t} />
           </button>
-          <button type="button" className={styles.kpi} onClick={() => navigate("/reports")}>
+          <button type="button" className={styles.kpi} onClick={() => setAbsenceOpen(true)}>
             <span className={styles.kpiLabel}>{t("manager.kpi.absent")}</span>
             <span className={styles.kpiValue}>{kpi.absentToday}</span>
             <span className={styles.kpiHint}>{t("manager.kpi.onLeave", { count: kpi.onLeaveToday })}</span>
@@ -543,6 +545,47 @@ export default function ManagerDashboard() {
 
       {/* rows 3-6: the widgets (order and visibility are the reader's own) */}
       <div className={styles.grid}>{order.map(renderWidget)}</div>
+
+      {/* owner 2026-10-26: the absent-today card opens the day's sheet - absent first, then on leave */}
+      <Modal isOpen={absenceOpen} onClose={() => setAbsenceOpen(false)} title={t("manager.absence.title", { absent: kpi?.absentToday ?? 0, leave: kpi?.onLeaveToday ?? 0 })} size="lg">
+        {(data?.absence ?? []).length === 0 ? (
+          <EmptyState message={t("manager.absence.none")} />
+        ) : (
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>{t("manager.absence.columns.name")}</th>
+                <th>{t("manager.absence.columns.site")}</th>
+                <th>{t("manager.absence.columns.status")}</th>
+                <th>{t("manager.absence.columns.details")}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(data?.absence ?? []).map((row) => (
+                <tr key={`${row.state}-${row.userId}`}>
+                  <td style={{ fontWeight: 600 }}>
+                    <span className={styles.personCell}>
+                      <Avatar name={row.name} url={row.avatarUrl} size="sm" />
+                      {row.name}
+                    </span>
+                  </td>
+                  <td data-label={t("manager.absence.columns.site")}>{row.siteName ?? "—"}</td>
+                  <td data-label={t("manager.absence.columns.status")}>
+                    {row.state === "absent" ? <span className={styles.statusBad}>{t("manager.absence.absent")}</span> : <span className={styles.statusWarn}>{t("manager.absence.leave")}</span>}
+                  </td>
+                  <td data-label={t("manager.absence.columns.details")}>
+                    {row.state === "leave"
+                      ? `${leaveTypeLabel(t, row.leaveType ?? "other", row.leaveTypeName)} · ${t("manager.absence.until", { date: formatDateOnly(row.leaveEnd ?? "", i18n.language) })}`
+                      : row.shiftStart
+                        ? t("manager.absence.shiftAt", { time: row.shiftStart })
+                        : t("manager.absence.notClockedIn")}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </Modal>
 
       <Modal isOpen={Boolean(sosTarget)} onClose={() => setSosTarget(null)} title={t("manager.sos.acknowledgeTitle")} footer={<Button variant="danger" onClick={acknowledgeSos}>{t("manager.sos.acknowledge")}</Button>}>
         <Textarea label={t("manager.sos.notes")} name="sosNotes" value={sosNotes} onChange={(event) => setSosNotes(event.target.value)} />

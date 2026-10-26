@@ -493,6 +493,21 @@
       "noneHere": "None of this contractor's workers are here now.",
       "present": "Here",
       "absent": "Not here"
+    },
+    "absence": {
+      "title": "Absent today: {{absent}} absent · {{leave}} on leave",
+      "none": "Nobody is absent or on leave today",
+      "absent": "Absent",
+      "leave": "On leave",
+      "until": "until {{date}}",
+      "shiftAt": "Shift at {{time}} - not clocked in",
+      "notClockedIn": "Not clocked in",
+      "columns": {
+        "name": "Name",
+        "site": "Site",
+        "status": "Status",
+        "details": "Details"
+      }
     }
   }
 }

@@ -434,6 +434,13 @@
   font-size: 0.75rem;
 }
 
+/* the absence sheet: the person's picture beside the name */
+.personCell {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
 .statusOk,
 .statusWarn,
 .statusBad {

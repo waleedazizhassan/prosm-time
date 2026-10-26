@@ -493,6 +493,21 @@
       "noneHere": "Aucun travailleur de ce sous-traitant n'est présent.",
       "present": "Présent",
       "absent": "Absent"
+    },
+    "absence": {
+      "title": "Absents aujourd’hui : {{absent}} absents · {{leave}} en congé",
+      "none": "Aucune absence ni congé aujourd’hui",
+      "absent": "Absent",
+      "leave": "En congé",
+      "until": "jusqu’au {{date}}",
+      "shiftAt": "Poste à {{time}} - pas pointé",
+      "notClockedIn": "Pas pointé",
+      "columns": {
+        "name": "Nom",
+        "site": "Site",
+        "status": "Statut",
+        "details": "Détails"
+      }
     }
   }
 }
