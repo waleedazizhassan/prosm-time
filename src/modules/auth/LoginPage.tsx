@@ -11,6 +11,7 @@ import Divider from "../../components/common/Divider";
 import AuthLayout from "../../components/common/AuthLayout";
 import styles from "../../components/common/AuthLayout.module.css";
 import ErrorText from "../../components/common/ErrorText";
+import { registerDevice, takeDeviceLimitBlocked } from "../../core/services/DeviceService";
 
 // PROSM Time Implementation Master File V3.0, WP-03/§12/§37 - "secure
 // authentication." Plain Supabase Auth email/password sign-in - the
@@ -24,7 +25,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>(() => (takeDeviceLimitBlocked() ? t("login.deviceLimit") : ""));
 
   if (!loading && isAuthenticated) {
     return <Navigate to="/dashboard" replace />;
@@ -36,6 +37,14 @@ export default function LoginPage() {
     setError("");
 
     const result = await AuthService.signIn(email.trim(), password);
+
+    // v2.3.55: a device the licence has no place for is refused at once
+    if (result.success && (await registerDevice()) === "limit") {
+      await AuthService.signOut();
+      setSubmitting(false);
+      setError(t("login.deviceLimit"));
+      return;
+    }
 
     setSubmitting(false);
 

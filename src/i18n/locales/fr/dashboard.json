@@ -115,7 +115,11 @@
     "seatsFull": "Toutes les licences sont utilisées",
     "seatsLeft_one": "1 utilisateur disponible",
     "seatsLeft_many": "{{count}} utilisateurs disponibles",
-    "seatsLeft_other": "{{count}} utilisateurs disponibles"
+    "seatsLeft_other": "{{count}} utilisateurs disponibles",
+    "devicesFull": "Tous les appareils de la licence sont utilisés",
+    "devicesLeft_one": "1 appareil disponible",
+    "devicesLeft_many": "{{count}} appareils disponibles",
+    "devicesLeft_other": "{{count}} appareils disponibles"
   },
   "attendance": {
     "title": "Présence",

@@ -118,7 +118,14 @@
     "seatsLeft_two": "متاح مستخدمان",
     "seatsLeft_few": "متاح {{count}} مستخدمين",
     "seatsLeft_many": "متاح {{count}} مستخدمًا",
-    "seatsLeft_other": "متاح {{count}} مستخدم"
+    "seatsLeft_other": "متاح {{count}} مستخدم",
+    "devicesFull": "اكتمل عدد الأجهزة المرخّص",
+    "devicesLeft_zero": "لا أجهزة متاحة",
+    "devicesLeft_one": "متاح جهاز واحد",
+    "devicesLeft_two": "متاح جهازان",
+    "devicesLeft_few": "متاح {{count}} أجهزة",
+    "devicesLeft_many": "متاح {{count}} جهازًا",
+    "devicesLeft_other": "متاح {{count}} جهاز"
   },
   "attendance": {
     "title": "الحضور",

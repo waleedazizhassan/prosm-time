@@ -114,7 +114,10 @@
     "seatsUnlimited": "{{used}} (no limit)",
     "seatsFull": "All licensed users in use",
     "seatsLeft_one": "1 user left",
-    "seatsLeft_other": "{{count}} users left"
+    "seatsLeft_other": "{{count}} users left",
+    "devicesFull": "All licensed devices in use",
+    "devicesLeft_one": "1 device left",
+    "devicesLeft_other": "{{count}} devices left"
   },
   "attendance": {
     "title": "Attendance",

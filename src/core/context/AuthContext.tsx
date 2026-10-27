@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState, ty
 
 import AuthService from "../auth/AuthService";
 import { stopPush } from "../services/PushService";
+import { forgetDevice, markDeviceLimitBlocked, registerDevice } from "../services/DeviceService";
 import UserRepository, { type CurrentUserProfile } from "../repositories/UserRepository";
 import PermissionRepository from "../repositories/PermissionRepository";
 import { STARTUP_CHECK_TIMEOUT_MS } from "../utils/startupCheck";
@@ -109,6 +110,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!profileResult.success) return;
     const nextProfile = profileResult.data;
     const nextPermissions = permissionsResult.success ? permissionsResult.data ?? [] : [];
+    // v2.3.55: this device counts against the licence's devices; a device the
+    // licence has no place for is signed out, and the sign-in page says why
+    if (nextProfile && (await registerDevice()) === "limit") {
+      markDeviceLimitBlocked();
+      await stopPush();
+      await AuthService.signOut();
+      setProfile(null);
+      setPermissions([]);
+      setIsAuthenticated(false);
+      writeCachedProfile(null);
+      return;
+    }
     setProfile(nextProfile);
     setPermissions(nextPermissions);
     if (nextProfile) writeCachedProfile({ profile: nextProfile, permissions: nextPermissions });
@@ -200,8 +213,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [loadProfile]);
 
   const signOut = useCallback(async () => {
-    // While still signed in: this phone stops receiving the person's notifications.
+    // While still signed in: this phone stops receiving the person's notifications,
+    // and no longer counts against the licence's devices.
     await stopPush();
+    await forgetDevice();
     await AuthService.signOut();
     setProfile(null);
     setPermissions([]);

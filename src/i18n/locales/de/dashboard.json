@@ -114,7 +114,10 @@
     "seatsUnlimited": "{{used}} (ohne Grenze)",
     "seatsFull": "Alle lizenzierten Nutzer belegt",
     "seatsLeft_one": "1 Nutzer frei",
-    "seatsLeft_other": "{{count}} Nutzer frei"
+    "seatsLeft_other": "{{count}} Nutzer frei",
+    "devicesFull": "Alle lizenzierten Geräte belegt",
+    "devicesLeft_one": "1 Gerät frei",
+    "devicesLeft_other": "{{count}} Geräte frei"
   },
   "attendance": {
     "title": "Anwesenheit",

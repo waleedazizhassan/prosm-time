@@ -24,6 +24,6 @@ describe("seat usage", () => {
     const seen = await t.as<{ s: { activeUsers: number; maxUsers: number } }>(org.owner.authId, "select public.get_prosm_time_seat_usage() as s");
     expect(seen.error).toBeNull();
     // the Owner, Mona, A and B - not the one who left, not the other company's
-    expect(seen.rows![0].s).toEqual({ activeUsers: 4, maxUsers: 10 });
+    expect(seen.rows![0].s).toMatchObject({ activeUsers: 4, maxUsers: 10 });
   });
 });

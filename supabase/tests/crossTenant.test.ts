@@ -27,6 +27,7 @@ const TABLES: Record<string, string> = {
   dashboard_preferences: "select user_id as id from dashboard_preferences where organization_id = $1",
   integrity_flags: byOrg,
   clock_reminder_log: byOrg,
+  signed_in_devices: byOrg,
   payroll_adjustments: byOrg,
   public_holidays: byOrg,
   schedule_exceptions: byOrg,
@@ -92,6 +93,8 @@ const MUST_BE_SEEDED = [
   // v2.3.43
   "allowance_basis", "public_holidays", "schedule_exceptions", "allowance_entry_adjustments", "overtime_policies",
   "attendance_permissions", "attendance_day_adjustments", "payroll_adjustments", "leave_types", "capture_tokens", "integrity_flags", "dashboard_preferences", "clock_reminder_log",
+  // v2.3.55
+  "signed_in_devices",
 ];
 
 const today = () => new Date().toISOString().slice(0, 10);
@@ -219,6 +222,7 @@ async function seedOrg(name: string): Promise<SeededOrg> {
   await t.su("insert into capture_tokens (organization_id, user_id, site_id) values ($1, $2, $3)", [org.id, employee.userId, siteId]);
   await t.su("insert into integrity_flags (organization_id, user_id, site_id, kind) values ($1, $2, $3, 'liveness_failed')", [org.id, employee.userId, siteId]);
   await t.su("insert into clock_reminder_log (organization_id, user_id, kind, ref_id) values ($1, $2, 'clock_in', gen_random_uuid())", [org.id, employee.userId]);
+  await must(t.as(employee.authId, "select public.register_prosm_time_device($1, 'android', 'Test phone')", [`device-${randomUUID()}`]), "device");
   await t.su("insert into attendance_day_adjustments (organization_id, user_id, work_date, late_minutes, reason) values ($1, $2, $3, 0, 'x')", [org.id, employee.userId, today()]);
   const [worker] = await t.su<{ id: string }>(
     "insert into site_workers (organization_id, site_id, full_name, worker_number) values ($1, $2, $3, '482913') returning id",

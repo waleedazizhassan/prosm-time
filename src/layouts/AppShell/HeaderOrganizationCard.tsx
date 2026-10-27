@@ -33,6 +33,7 @@ function HeaderOrganizationCard() {
   const [organization, setOrganization] = useState<Organization | null>(null);
   const [license, setLicense] = useState<LicenseState | null>(null);
   const [activeUsers, setActiveUsers] = useState<number | null>(null);
+  const [activeDevices, setActiveDevices] = useState<number | null>(null);
   const [panelOpen, setPanelOpen] = useState(false);
   const [panelPosition, setPanelPosition] = useState<{ top: number; left: number } | null>(null);
   const [refreshing, setRefreshing] = useState(false);
@@ -55,7 +56,10 @@ function HeaderOrganizationCard() {
     ]);
     if (orgResult.success) setOrganization(orgResult.data);
     if (licenseResult.success) setLicense(licenseResult.data);
-    if (seatsResult.success && seatsResult.data) setActiveUsers(seatsResult.data.activeUsers);
+    if (seatsResult.success && seatsResult.data) {
+      setActiveUsers(seatsResult.data.activeUsers);
+      setActiveDevices(seatsResult.data.activeDevices);
+    }
   }, [isOwner]);
 
   useEffect(() => {
@@ -277,10 +281,23 @@ function HeaderOrganizationCard() {
                     </span>
                   </div>
                 ) : null}
+                {/* owner 2026-10-27: devices with an account open on them, against the licence */}
                 <div className={styles.panelRow}>
                   <span className={styles.panelLabel}>{t("licenseCard.devicesLabel")}</span>
-                  <span className={styles.panelValue}>{license.maxDevices ?? "—"}</span>
+                  <span className={styles.panelValue}>
+                    {license.maxDevices ? t("licenseCard.seats", { used: activeDevices ?? "—", max: license.maxDevices }) : t("licenseCard.seatsUnlimited", { used: activeDevices ?? "—" })}
+                  </span>
                 </div>
+                {license.maxDevices && activeDevices !== null ? (
+                  <div className={styles.seatsRow}>
+                    <span className={styles.seatsBar} aria-hidden="true">
+                      <span className={activeDevices >= license.maxDevices ? styles.seatsFull : undefined} style={{ width: `${Math.min(100, Math.round((activeDevices / license.maxDevices) * 100))}%` }} />
+                    </span>
+                    <span className={styles.seatsLeft}>
+                      {activeDevices >= license.maxDevices ? t("licenseCard.devicesFull") : t("licenseCard.devicesLeft", { count: license.maxDevices - activeDevices })}
+                    </span>
+                  </div>
+                ) : null}
                 <div className={styles.panelRow}>
                   <span className={styles.panelLabel}>{t("licenseCard.expiresLabel")}</span>
                   <span className={styles.panelValue}>{license.expiresAt ? formatDateOnly(license.expiresAt, i18n.language) : t("licenseCard.noExpiry")}</span>
