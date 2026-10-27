@@ -48,7 +48,10 @@ export default function TrialEndedPage({ status, onReopened }: { status: TrialSt
   };
 
   return (
-    <AuthLayout title={t("auth:trial.endedTitle")} subtitle={t("auth:trial.endedSubtitle", { organization: status.organizationName ?? "", date: status.expiresAt ? formatDateOnly(status.expiresAt, i18n.language) : "" })}>
+    <AuthLayout
+      title={t(status.licenseEnded ? "auth:trial.licenseEndedTitle" : "auth:trial.endedTitle")}
+      subtitle={t(status.licenseEnded ? "auth:trial.licenseEndedSubtitle" : "auth:trial.endedSubtitle", { organization: status.organizationName ?? "", date: status.expiresAt ? formatDateOnly(status.expiresAt, i18n.language) : "" })}
+    >
       <p className={styles.consentNotice}>{t("auth:trial.dataKept")}</p>
       {status.isOwner ? (
         <form onSubmit={activate}>
@@ -62,7 +65,8 @@ export default function TrialEndedPage({ status, onReopened }: { status: TrialSt
         <p className={styles.consentNotice}>{t("auth:trial.askOwner")}</p>
       )}
       <p className={styles.consentNotice}>
-        {t("auth:trial.contactIntro", { license: status.licenseNumber ?? "" })}
+        {/* the licence number is the Owner's to see */}
+        {status.licenseNumber ? t("auth:trial.contactIntro", { license: status.licenseNumber }) : t("auth:trial.contactIntroNoNumber")}
         <br />
         <a href="mailto:sales@prosm.net">sales@prosm.net</a> · <a href="mailto:info@prosm.net">info@prosm.net</a> · <a href="mailto:support@prosm.net">support@prosm.net</a>
       </p>

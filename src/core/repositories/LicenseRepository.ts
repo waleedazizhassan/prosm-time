@@ -9,6 +9,8 @@ export interface ServiceResult<T = null> {
 export interface TrialStatus {
   isTrial: boolean;
   locked: boolean;
+  // v2.3.55: a paid licence that ended (or was suspended) locks like an ended trial
+  licenseEnded?: boolean;
   expiresAt?: string | null;
   daysLeft?: number | null;
   licenseNumber?: string;

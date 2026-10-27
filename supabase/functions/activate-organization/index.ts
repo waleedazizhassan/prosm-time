@@ -90,7 +90,10 @@ serve(async (request: Request) => {
     });
     const activationRateLimited = await enforceRateLimits(rateLimitClient, [
       { scope: "activate_organization_ip", identifier: clientIdentifier(request), limit: 10, windowSeconds: 3600, blockSeconds: 3600 },
-      // Demo: no code to guess; the per-address limit above still applies.
+      // v2.3.55 (security review: "can someone open free trials again and
+      // again with new emails?"): at most 2 trials a day from one address.
+      ...(demo ? [{ scope: "activate_demo_ip_day", identifier: clientIdentifier(request), limit: 2, windowSeconds: 86400, blockSeconds: 86400 }] : []),
+      // Demo: no code to guess; the per-address limits above still apply.
       ...(demo ? [] : [{ scope: "activate_organization_code", identifier: await hashIdentifier(activationCode.trim()), limit: 5, windowSeconds: 3600, blockSeconds: 3600 }]),
     ]);
     if (activationRateLimited) return activationRateLimited;
