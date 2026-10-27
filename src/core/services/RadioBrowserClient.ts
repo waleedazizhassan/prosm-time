@@ -166,6 +166,19 @@ class RadioBrowserClient {
   // above (country= replicates the old path-based /bycountry endpoint,
   // but actually honors bitrateMin - verified live, the path-based
   // version silently ignored it).
+  // Owner 2026-10-27: by ISO country code (EG, US, DE...) - the app's region.
+  async listByCountryCode(countryCode: string, limit = 20): Promise<RadioStation[]> {
+    const rows = await this.requestJson<RawStationRow[]>("/json/stations/search", {
+      countrycode: countryCode,
+      limit,
+      hidebroken: "true",
+      order: "clickcount",
+      reverse: "true",
+      bitrateMin: MIN_BITRATE_KBPS,
+    });
+    return (rows ?? []).map(mapStation);
+  }
+
   async listByCountry(country: string, limit = 20): Promise<RadioStation[]> {
     const rows = await this.requestJson<RawStationRow[]>("/json/stations/search", {
       country,
