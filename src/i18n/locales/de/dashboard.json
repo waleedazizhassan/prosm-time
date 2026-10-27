@@ -508,6 +508,45 @@
         "status": "Status",
         "details": "Details"
       }
+    },
+    "sheet": {
+      "title": {
+        "present": "Jetzt anwesend",
+        "hours": "Stunden pro Person",
+        "late": "Verspätungen",
+        "overtime": "Überstunden pro Person"
+      },
+      "open": {
+        "present": "Heutige Anwesenheit",
+        "hours": "Vollständiges Protokoll",
+        "late": "Verspätungsbericht",
+        "overtime": "Überstunden genehmigen",
+        "absent": "Abwesenheitsbericht"
+      },
+      "empty": {
+        "present": "Niemand ist eingestempelt.",
+        "hours": "Keine Stunden in diesem Zeitraum.",
+        "late": "Keine Verspätungen in diesem Zeitraum.",
+        "overtime": "Keine Überstunden in diesem Zeitraum."
+      },
+      "periodNote": "Für den oben gewählten Zeitraum.",
+      "lateBy": "{{minutes}} Min. · da um {{time}}",
+      "minutes_one": "1 Minute",
+      "minutes_other": "{{count}} Minuten",
+      "columns": {
+        "name": "Name",
+        "site": "Standort",
+        "since": "Seit",
+        "status": "Status",
+        "days": "Tage",
+        "worked": "Stunden",
+        "overtime": "Überstunden (h)",
+        "pending": "In Prüfung",
+        "today": "Heute",
+        "lateDays": "Verspätete Tage",
+        "lateTotal": "Verspätung gesamt",
+        "overtimeWaiting": "Wartet auf Freigabe"
+      }
     }
   }
 }

@@ -25,6 +25,7 @@ import styles from "./ManagerDashboard.module.css";
 import { auditLabel, DEFAULT_ORDER, iso, mergeOrder, periodRange, trend, type Period, type WidgetId } from "./dashboardLogic";
 import EmptyState from "../../../components/common/EmptyState";
 import leaveTypeLabel from "../../leave/leaveTypeLabel";
+import KpiSheet, { type KpiSheetKind } from "./KpiSheet";
 import Dropdown from "../../../components/common/Dropdown";
 
 const LAYOUT_KEY = "prosm_time_dashboard_layout_v1";
@@ -60,6 +61,18 @@ export default function ManagerDashboard() {
   const [sosTarget, setSosTarget] = useState<string | null>(null);
   const [sosNotes, setSosNotes] = useState("");
   const [absenceOpen, setAbsenceOpen] = useState(false);
+  // owner 2026-10-27: each figure opens the people behind it
+  const [sheet, setSheet] = useState<KpiSheetKind | null>(null);
+  const openPage = (kind: KpiSheetKind | "absent") => {
+    setSheet(null);
+    setAbsenceOpen(false);
+    const attendancePeriod = period === "day" ? "today" : period === "custom" ? "month" : period;
+    if (kind === "present") navigate("/attendance?period=today");
+    else if (kind === "hours") navigate(`/attendance?period=${attendancePeriod}`);
+    else if (kind === "late") navigate("/reports?type=late");
+    else if (kind === "absent") navigate("/reports?type=absences");
+    else navigate("/manager");
+  };
   const [chartMode, setChartMode] = useState<"week" | "month" | "year">("week");
   const dragRef = useRef<WidgetId | null>(null);
 
@@ -495,7 +508,7 @@ export default function ManagerDashboard() {
         </div>
       ) : kpi ? (
         <div className={styles.kpis} style={{ ["--kpi-count" as string]: kpiCount, ["--kpi-half" as string]: Math.ceil(kpiCount / 2) }}>
-          <button type="button" className={styles.kpi} onClick={() => navigate("/attendance?period=today")}>
+          <button type="button" className={styles.kpi} onClick={() => setSheet("present")}>
             <span className={styles.kpiLabel}>{t("manager.kpi.present")}</span>
             <span className={styles.kpiValue}>{kpi.presentNow}</span>
             <span className={styles.kpiHint}>{kpi.hasSchedule ? t("manager.kpi.ofExpected", { expected: kpi.expectedToday }) : t("manager.kpi.ofTeam", { team: data?.teamSize ?? 0 })}</span>
@@ -503,13 +516,13 @@ export default function ManagerDashboard() {
               <span style={{ width: `${Math.min(100, Math.round((kpi.presentNow / Math.max(1, kpi.hasSchedule ? kpi.expectedToday : data?.teamSize ?? 1)) * 100))}%` }} />
             </span>
           </button>
-          <button type="button" className={styles.kpi} onClick={() => navigate("/attendance")}>
+          <button type="button" className={styles.kpi} onClick={() => setSheet("hours")}>
             <span className={styles.kpiLabel}>{t("manager.kpi.hours")}</span>
             <span className={styles.kpiValue}>{hours(kpi.workedMinutes)}</span>
             <span className={styles.kpiHint}>{kpi.scheduledMinutes ? t("manager.kpi.scheduled", { hours: hours(kpi.scheduledMinutes) }) : t("manager.kpi.noSchedule")}</span>
             <Trend value={workedTrend} t={t} />
           </button>
-          <button type="button" className={styles.kpi} onClick={() => navigate("/reports")}>
+          <button type="button" className={styles.kpi} onClick={() => setSheet("late")}>
             <span className={styles.kpiLabel}>{t("manager.kpi.late")}</span>
             <span className={styles.kpiValue}>{kpi.lateToday}</span>
             <span className={styles.kpiHint}>{t("manager.kpi.lateInPeriod", { count: kpi.lateCount })}</span>
@@ -520,7 +533,7 @@ export default function ManagerDashboard() {
             <span className={styles.kpiValue}>{kpi.absentToday}</span>
             <span className={styles.kpiHint}>{t("manager.kpi.onLeave", { count: kpi.onLeaveToday })}</span>
           </button>
-          <button type="button" className={styles.kpi} onClick={() => navigate("/allowances")}>
+          <button type="button" className={styles.kpi} onClick={() => setSheet("overtime")}>
             <span className={styles.kpiLabel}>{t("manager.kpi.overtime")}</span>
             <span className={styles.kpiValue}>{hours(kpi.overtimeMinutes)}</span>
             <span className={styles.kpiHint}>{kpi.pendingMinutes ? t("manager.kpi.pendingExcluded", { hours: hours(kpi.pendingMinutes) }) : t("manager.hoursUnit")}</span>
@@ -547,7 +560,19 @@ export default function ManagerDashboard() {
       <div className={styles.grid}>{order.map(renderWidget)}</div>
 
       {/* owner 2026-10-26: the absent-today card opens the day's sheet - absent first, then on leave */}
-      <Modal isOpen={absenceOpen} onClose={() => setAbsenceOpen(false)} title={t("manager.absence.title", { absent: kpi?.absentToday ?? 0, leave: kpi?.onLeaveToday ?? 0 })} size="lg">
+      <KpiSheet kind={sheet} data={data} time={time} onClose={() => setSheet(null)} onOpenPage={openPage} />
+
+      <Modal
+        isOpen={absenceOpen}
+        onClose={() => setAbsenceOpen(false)}
+        title={t("manager.absence.title", { absent: kpi?.absentToday ?? 0, leave: kpi?.onLeaveToday ?? 0 })}
+        size="lg"
+        footer={
+          <Button variant="ghost" onClick={() => openPage("absent")}>
+            {t("manager.sheet.open.absent")}
+          </Button>
+        }
+      >
         {(data?.absence ?? []).length === 0 ? (
           <EmptyState message={t("manager.absence.none")} />
         ) : (

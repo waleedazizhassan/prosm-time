@@ -512,6 +512,49 @@
         "status": "الحالة",
         "details": "التفاصيل"
       }
+    },
+    "sheet": {
+      "title": {
+        "present": "الموجودون الآن",
+        "hours": "ساعات العمل لكل موظف",
+        "late": "التأخير",
+        "overtime": "الإضافي لكل موظف"
+      },
+      "open": {
+        "present": "سجل حضور اليوم",
+        "hours": "سجل الحضور الكامل",
+        "late": "تقرير التأخير",
+        "overtime": "اعتماد الإضافي",
+        "absent": "تقرير الغياب"
+      },
+      "empty": {
+        "present": "لا أحد مسجل حضور الآن.",
+        "hours": "لا ساعات مسجلة في هذه الفترة.",
+        "late": "لا تأخير في هذه الفترة.",
+        "overtime": "لا إضافي في هذه الفترة."
+      },
+      "periodNote": "عن الفترة المختارة في الأعلى.",
+      "lateBy": "{{minutes}} دقيقة · حضر {{time}}",
+      "minutes_zero": "0 دقيقة",
+      "minutes_one": "دقيقة واحدة",
+      "minutes_two": "دقيقتان",
+      "minutes_few": "{{count}} دقائق",
+      "minutes_many": "{{count}} دقيقة",
+      "minutes_other": "{{count}} دقيقة",
+      "columns": {
+        "name": "الاسم",
+        "site": "الموقع",
+        "since": "منذ",
+        "status": "الحالة",
+        "days": "الأيام",
+        "worked": "الساعات",
+        "overtime": "الإضافي (ساعات)",
+        "pending": "قيد المراجعة",
+        "today": "اليوم",
+        "lateDays": "أيام التأخير",
+        "lateTotal": "إجمالي التأخير",
+        "overtimeWaiting": "ينتظر الاعتماد"
+      }
     }
   }
 }

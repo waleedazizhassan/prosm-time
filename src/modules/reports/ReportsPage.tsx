@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import ManagerRepository, { type TodayAttendanceRow, type SosAlertRow } from "../../core/repositories/ManagerRepository";
 import AllowanceRepository, { type AllowanceEntry } from "../../core/repositories/AllowanceRepository";
@@ -102,7 +102,12 @@ export default function ReportsPage() {
     [hasManagementScope],
   );
 
-  const [reportType, setReportType] = useState<ReportType>(() => visibleReportTypes[0] ?? "late");
+  // owner 2026-10-27: the dashboard's cards open a report directly (?type=late)
+  const [searchParams] = useSearchParams();
+  const [reportType, setReportType] = useState<ReportType>(() => {
+    const requested = searchParams.get("type") as ReportType | null;
+    return requested && visibleReportTypes.includes(requested) ? requested : (visibleReportTypes[0] ?? "late");
+  });
 
   const today = new Date();
   const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);

@@ -509,6 +509,46 @@
         "status": "Stato",
         "details": "Dettagli"
       }
+    },
+    "sheet": {
+      "title": {
+        "present": "Presenti ora",
+        "hours": "Ore per persona",
+        "late": "Ritardi",
+        "overtime": "Straordinari per persona"
+      },
+      "open": {
+        "present": "Presenze di oggi",
+        "hours": "Registro completo",
+        "late": "Rapporto ritardi",
+        "overtime": "Approva straordinari",
+        "absent": "Rapporto assenze"
+      },
+      "empty": {
+        "present": "Nessuno ha timbrato.",
+        "hours": "Nessuna ora in questo periodo.",
+        "late": "Nessun ritardo in questo periodo.",
+        "overtime": "Nessuno straordinario in questo periodo."
+      },
+      "periodNote": "Per il periodo scelto sopra.",
+      "lateBy": "{{minutes}} min · entrato alle {{time}}",
+      "minutes_one": "1 minuto",
+      "minutes_many": "{{count}} minuti",
+      "minutes_other": "{{count}} minuti",
+      "columns": {
+        "name": "Nome",
+        "site": "Sito",
+        "since": "Da",
+        "status": "Stato",
+        "days": "Giorni",
+        "worked": "Ore",
+        "overtime": "Straordinari (h)",
+        "pending": "In verifica",
+        "today": "Oggi",
+        "lateDays": "Giorni di ritardo",
+        "lateTotal": "Ritardo totale",
+        "overtimeWaiting": "Da approvare"
+      }
     }
   }
 }

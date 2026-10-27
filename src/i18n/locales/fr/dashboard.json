@@ -509,6 +509,46 @@
         "status": "Statut",
         "details": "Détails"
       }
+    },
+    "sheet": {
+      "title": {
+        "present": "Présents",
+        "hours": "Heures par personne",
+        "late": "Retards",
+        "overtime": "Heures sup. par personne"
+      },
+      "open": {
+        "present": "Pointages du jour",
+        "hours": "Registre complet",
+        "late": "Rapport des retards",
+        "overtime": "Approuver les heures sup.",
+        "absent": "Rapport des absences"
+      },
+      "empty": {
+        "present": "Personne n'est pointé.",
+        "hours": "Aucune heure sur cette période.",
+        "late": "Aucun retard sur cette période.",
+        "overtime": "Aucune heure sup. sur cette période."
+      },
+      "periodNote": "Pour la période choisie en haut.",
+      "lateBy": "{{minutes}} min · arrivé à {{time}}",
+      "minutes_one": "1 minute",
+      "minutes_many": "{{count}} minutes",
+      "minutes_other": "{{count}} minutes",
+      "columns": {
+        "name": "Nom",
+        "site": "Site",
+        "since": "Depuis",
+        "status": "Statut",
+        "days": "Jours",
+        "worked": "Heures",
+        "overtime": "Heures sup. (h)",
+        "pending": "En vérification",
+        "today": "Aujourd'hui",
+        "lateDays": "Jours de retard",
+        "lateTotal": "Retard total",
+        "overtimeWaiting": "À approuver"
+      }
     }
   }
 }

@@ -82,6 +82,23 @@ export interface DashboardAbsence {
   leaveEnd: string | null;
 }
 
+// owner 2026-10-27: the people behind the hours, late and overtime cards (the period)
+export interface DashboardPersonFigures {
+  userId: string;
+  name: string;
+  avatarUrl: string | null;
+  siteName: string | null;
+  days: number;
+  workedMinutes: number;
+  overtimeMinutes: number;
+  overtimePendingMinutes: number;
+  lateDays: number;
+  lateMinutes: number;
+  lateTodayMinutes: number | null;
+  firstInToday: string | null;
+  pendingMinutes: number;
+}
+
 export interface DashboardKpi {
   presentNow: number;
   expectedToday: number;
@@ -138,6 +155,7 @@ export interface ManagerDashboard {
   audit: DashboardAuditRow[] | null;
   holidays: { name: string; startDate: string; endDate: string }[];
   absence?: DashboardAbsence[];
+  byPerson?: DashboardPersonFigures[];
 }
 
 const RETRIES = 2;

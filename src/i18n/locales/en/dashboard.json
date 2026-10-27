@@ -508,6 +508,45 @@
         "status": "Status",
         "details": "Details"
       }
+    },
+    "sheet": {
+      "title": {
+        "present": "Here now",
+        "hours": "Hours by person",
+        "late": "Lateness",
+        "overtime": "Overtime by person"
+      },
+      "open": {
+        "present": "Today's attendance record",
+        "hours": "Full attendance record",
+        "late": "Lateness report",
+        "overtime": "Approve overtime",
+        "absent": "Absence report"
+      },
+      "empty": {
+        "present": "Nobody is clocked in now.",
+        "hours": "No hours recorded in this period.",
+        "late": "Nobody was late in this period.",
+        "overtime": "No overtime in this period."
+      },
+      "periodNote": "For the period chosen above.",
+      "lateBy": "{{minutes}} min · in at {{time}}",
+      "minutes_one": "1 minute",
+      "minutes_other": "{{count}} minutes",
+      "columns": {
+        "name": "Name",
+        "site": "Site",
+        "since": "Since",
+        "status": "Status",
+        "days": "Days",
+        "worked": "Hours",
+        "overtime": "Overtime (h)",
+        "pending": "Under review",
+        "today": "Today",
+        "lateDays": "Late days",
+        "lateTotal": "Total late",
+        "overtimeWaiting": "Awaiting approval"
+      }
     }
   }
 }
