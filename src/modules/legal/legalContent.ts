@@ -6,7 +6,7 @@
 //
 // When either text changes, raise LEGAL_VERSION: every user is asked to
 // read and acknowledge the new version once (LegalAcknowledgementGate).
-export const LEGAL_VERSION = "2026-10-27";
+export const LEGAL_VERSION = "2026-10-27.2";
 
 export interface LegalSection {
   heading: string;
@@ -142,6 +142,7 @@ const PRIVACY_EN: LegalDocument = {
       heading: "11. How to use your rights",
       paragraphs: [
         "Send your request first to your employer or organisation, which controls your data. PROSM helps it respond. You can also write to info@prosm.net.",
+        "Deleting your account: in the app, open your user menu and choose \"Delete my account\" (your password is asked again). Your sign-in stops for good and your personal data is deleted at once - your name, email and picture, clock-in and clock-out photos, location trail, leave documents, devices and notifications. Your organisation keeps the work records that law and payroll require (attendance, timesheets, leave and allowances) without your name, as \"Deleted user\", for as long as section 8 says. The owner's account holds the organisation and is deleted on request to support@prosm.net.",
         "You may complain to the data protection authority in your country. In Egypt, that is the Personal Data Protection Center.",
       ],
     },
@@ -279,6 +280,7 @@ const PRIVACY_AR: LegalDocument = {
       heading: "11. كيفية ممارسة حقوقك",
       paragraphs: [
         "وجّه طلبك أولاً إلى جهة عملك أو المؤسسة المتحكمة في بياناتك، وتساعدها PROSM في الرد عليه. ويمكنك أيضاً مراسلة info@prosm.net.",
+        "حذف حسابك: من قائمة المستخدم في التطبيق اختر «حذف حسابي» (تُطلب كلمة المرور مرة أخرى). فيتوقف دخولك نهائياً وتُحذف بياناتك الشخصية فوراً - اسمك وبريدك وصورتك، وصور الحضور والانصراف، ومسار موقعك، ومستندات الإجازات، والأجهزة والإشعارات. وتحتفظ مؤسستك بسجلات العمل التي يلزمها القانون والرواتب (الحضور والكشوف والإجازات والبدلات) دون اسمك، باسم «مستخدم محذوف»، للمدة المذكورة في البند 8. أما حساب صاحب الشركة فتتبعه المؤسسة كلها، ويُحذف بطلب إلى support@prosm.net.",
         "ويحق لك تقديم شكوى إلى جهة حماية البيانات في بلدك. وفي مصر، هي مركز حماية البيانات الشخصية.",
       ],
     },

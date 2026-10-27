@@ -191,6 +191,10 @@
     "clockOutReminder": {
       "title": "Ausstempeln nicht vergessen",
       "body": "Ihre Schicht endete um {{time}}. Stempeln Sie beim Gehen in PROSM Time aus."
+    },
+    "accountDeleted": {
+      "title": "Ein Mitarbeiter hat sein Konto gelöscht",
+      "body": "{{name}} hat sein Konto gelöscht. Anwesenheit und Stundenzettel bleiben als „Gelöschter Nutzer\" erhalten."
     }
   },
   "items": {
@@ -340,5 +344,21 @@
     "later": "Später",
     "openSettings": "Einstellungen öffnen",
     "retry": "Erneut versuchen"
+  },
+  "deleteAccount": {
+    "menuAction": "Mein Konto löschen",
+    "title": "Ihr Konto löschen",
+    "whatGoes": "Ihr Konto wird endgültig gelöscht: Sie können sich nicht mehr damit anmelden, und Ihre persönlichen Daten werden entfernt - Name, E-Mail, Bild, Fotos beim Ein- und Ausstempeln, Standortverlauf, Urlaubsnachweise, Geräte und Benachrichtigungen.",
+    "whatStays": "Ihre Organisation behält die gesetzlich und für die Lohnabrechnung nötigen Arbeitsnachweise (Anwesenheit, Stundenzettel, Urlaub, Zulagen) unter „Gelöschter Nutzer\".",
+    "passwordLabel": "Passwort",
+    "confirmLabel": "Geben Sie „{{word}}\" zur Bestätigung ein",
+    "confirmWord": "LÖSCHEN",
+    "action": "Mein Konto endgültig löschen",
+    "wrongPassword": "Das Passwort ist falsch.",
+    "clockedIn": "Stempeln Sie zuerst aus, dann löschen Sie Ihr Konto.",
+    "failed": "Das Konto konnte nicht gelöscht werden. Versuchen Sie es erneut oder schreiben Sie an support@prosm.net.",
+    "ownerBody": "Dies ist das Konto des Inhabers - die ganze Organisation und ihre Daten hängen daran. Um es mit der Organisation zu löschen oder das Eigentum zu übertragen, schreiben Sie uns.",
+    "ownerAction": "Support schreiben",
+    "ownerSubject": "Antrag auf Löschung des Inhaberkontos"
   }
 }

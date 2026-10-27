@@ -135,6 +135,9 @@ export function localizePush(type: string, data: Data, language: string, fallbac
     case "trial_ended":
       result = pair("trial.endedTitle", "trial.endedBody");
       break;
+    case "correction_submitted":
+      if (str(data.kind) === "account_deleted") result = pair("accountDeleted.title", "accountDeleted.body", { name: str(data.employeeName) ?? "" });
+      break;
     case "license_ending":
       result = pair("trial.licenseEndingTitle", "trial.licenseEndingBody", { date: str(data.expiresAt)?.slice(0, 10) ?? "", license: str(data.licenseNumber) ?? "" });
       break;

@@ -138,6 +138,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "clockOutReminder": {
         "title": "لا تنسَ تسجيل الانصراف",
         "body": "ورديتك انتهت الساعة {{time}}. سجّل انصرافك في PROSM Time عند المغادرة."
+      },
+      "accountDeleted": {
+        "title": "موظف حذف حسابه",
+        "body": "حذف {{name}} حسابه. سجلات حضوره وكشوفه محفوظة باسم «مستخدم محذوف»."
       }
     },
     "leaveTypes": {
@@ -287,6 +291,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "clockOutReminder": {
         "title": "Don't forget to clock out",
         "body": "Your shift ended at {{time}}. Clock out in PROSM Time when you leave."
+      },
+      "accountDeleted": {
+        "title": "An employee deleted their account",
+        "body": "{{name}} deleted their account. Their attendance and timesheets are kept as \"Deleted user\"."
       }
     },
     "leaveTypes": {
@@ -436,6 +444,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "clockOutReminder": {
         "title": "Ausstempeln nicht vergessen",
         "body": "Ihre Schicht endete um {{time}}. Stempeln Sie beim Gehen in PROSM Time aus."
+      },
+      "accountDeleted": {
+        "title": "Ein Mitarbeiter hat sein Konto gelöscht",
+        "body": "{{name}} hat sein Konto gelöscht. Anwesenheit und Stundenzettel bleiben als „Gelöschter Nutzer\" erhalten."
       }
     },
     "leaveTypes": {
@@ -585,6 +597,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "clockOutReminder": {
         "title": "N'oubliez pas de pointer la sortie",
         "body": "Votre service s'est terminé à {{time}}. Pointez votre sortie dans PROSM Time en partant."
+      },
+      "accountDeleted": {
+        "title": "Un employé a supprimé son compte",
+        "body": "{{name}} a supprimé son compte. Ses pointages et feuilles de temps sont conservés sous « Utilisateur supprimé »."
       }
     },
     "leaveTypes": {
@@ -734,6 +750,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "clockOutReminder": {
         "title": "Non dimenticare di timbrare l'uscita",
         "body": "Il tuo turno è finito alle {{time}}. Timbra l'uscita in PROSM Time quando esci."
+      },
+      "accountDeleted": {
+        "title": "Un dipendente ha eliminato il suo account",
+        "body": "{{name}} ha eliminato il suo account. Presenze e fogli ore restano come \"Utente eliminato\"."
       }
     },
     "leaveTypes": {

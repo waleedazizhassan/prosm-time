@@ -191,6 +191,10 @@
     "clockOutReminder": {
       "title": "N'oubliez pas de pointer la sortie",
       "body": "Votre service s'est terminé à {{time}}. Pointez votre sortie dans PROSM Time en partant."
+    },
+    "accountDeleted": {
+      "title": "Un employé a supprimé son compte",
+      "body": "{{name}} a supprimé son compte. Ses pointages et feuilles de temps sont conservés sous « Utilisateur supprimé »."
     }
   },
   "items": {
@@ -345,5 +349,21 @@
     "later": "Plus tard",
     "openSettings": "Ouvrir les paramètres",
     "retry": "Réessayer"
+  },
+  "deleteAccount": {
+    "menuAction": "Supprimer mon compte",
+    "title": "Supprimer votre compte",
+    "whatGoes": "Votre compte sera supprimé définitivement : vous ne pourrez plus vous connecter, et vos données personnelles partent - nom, e-mail, photo, photos de pointage, trajet de localisation, justificatifs de congé, appareils et notifications.",
+    "whatStays": "Votre organisation garde les registres de travail exigés par la loi et la paie (pointages, feuilles de temps, congés, indemnités) sous « Utilisateur supprimé ».",
+    "passwordLabel": "Mot de passe",
+    "confirmLabel": "Tapez « {{word}} » pour confirmer",
+    "confirmWord": "SUPPRIMER",
+    "action": "Supprimer mon compte définitivement",
+    "wrongPassword": "Le mot de passe est incorrect.",
+    "clockedIn": "Pointez votre sortie d'abord, puis supprimez votre compte.",
+    "failed": "Le compte n'a pas pu être supprimé. Réessayez ou écrivez à support@prosm.net.",
+    "ownerBody": "C'est le compte du propriétaire : toute l'organisation et ses données en dépendent. Pour le supprimer avec l'organisation, ou transférer la propriété, écrivez-nous.",
+    "ownerAction": "Écrire au support",
+    "ownerSubject": "Demande de suppression du compte propriétaire"
   }
 }

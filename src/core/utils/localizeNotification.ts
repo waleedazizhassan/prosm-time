@@ -167,6 +167,12 @@ export default function localizeNotification(notification: AppNotification, t: T
       return { title: t("shell:notifications.trial.endingTitle"), body: t("shell:notifications.trial.endingBody") };
     case "trial_ended":
       return { title: t("shell:notifications.trial.endedTitle"), body: t("shell:notifications.trial.endedBody") };
+    // v2.3.55: an employee deleted their own account
+    case "correction_submitted":
+      if (data.kind === "account_deleted") {
+        return { title: t("shell:notifications.accountDeleted.title"), body: t("shell:notifications.accountDeleted.body", { name: typeof data.employeeName === "string" ? data.employeeName : "" }) };
+      }
+      break;
     // v2.3.55: a paid licence ends in a month, or a week
     case "license_ending": {
       const ends = typeof data.expiresAt === "string" ? data.expiresAt.slice(0, 10) : "";

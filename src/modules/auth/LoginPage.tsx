@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 
 import AuthService from "../../core/auth/AuthService";
 import { useAuth } from "../../core/context/AuthContext";
@@ -26,6 +26,9 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string>(() => (takeDeviceLimitBlocked() ? t("login.deviceLimit") : ""));
+  // v2.3.55: back here after deleting one's own account
+  const [searchParams] = useSearchParams();
+  const accountDeleted = searchParams.get("accountDeleted") === "1";
 
   if (!loading && isAuthenticated) {
     return <Navigate to="/dashboard" replace />;
@@ -101,6 +104,11 @@ export default function LoginPage() {
           {t("login.forgotPassword")}
         </button>
 
+        {accountDeleted && !error ? (
+          <p role="status" style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-sm)", color: "var(--status-success-text)" }}>
+            {t("login.accountDeleted")}
+          </p>
+        ) : null}
         <ErrorText kind="session">{error}</ErrorText>
 
         <Button type="submit" fullWidth loading={submitting}>

@@ -191,6 +191,10 @@
     "clockOutReminder": {
       "title": "Non dimenticare di timbrare l'uscita",
       "body": "Il tuo turno è finito alle {{time}}. Timbra l'uscita in PROSM Time quando esci."
+    },
+    "accountDeleted": {
+      "title": "Un dipendente ha eliminato il suo account",
+      "body": "{{name}} ha eliminato il suo account. Presenze e fogli ore restano come \"Utente eliminato\"."
     }
   },
   "items": {
@@ -345,5 +349,21 @@
     "later": "Più tardi",
     "openSettings": "Apri impostazioni",
     "retry": "Riprova"
+  },
+  "deleteAccount": {
+    "menuAction": "Elimina il mio account",
+    "title": "Elimina il tuo account",
+    "whatGoes": "Il tuo account sarà eliminato definitivamente: non potrai più accedere, e i tuoi dati personali saranno rimossi - nome, e-mail, foto, foto di entrata e uscita, percorso di posizione, documenti delle ferie, dispositivi e notifiche.",
+    "whatStays": "La tua organizzazione conserva i registri di lavoro richiesti dalla legge e dalle buste paga (presenze, fogli ore, ferie, indennità) come \"Utente eliminato\".",
+    "passwordLabel": "Password",
+    "confirmLabel": "Scrivi \"{{word}}\" per confermare",
+    "confirmWord": "ELIMINA",
+    "action": "Elimina il mio account definitivamente",
+    "wrongPassword": "La password non è corretta.",
+    "clockedIn": "Timbra prima l'uscita, poi elimina l'account.",
+    "failed": "Impossibile eliminare l'account. Riprova o scrivi a support@prosm.net.",
+    "ownerBody": "È l'account del titolare: tutta l'organizzazione e i suoi dati dipendono da esso. Per eliminarlo con l'organizzazione o passare la proprietà, scrivici.",
+    "ownerAction": "Scrivi al supporto",
+    "ownerSubject": "Richiesta di eliminazione dell'account titolare"
   }
 }

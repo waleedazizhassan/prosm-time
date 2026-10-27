@@ -191,6 +191,10 @@
     "clockOutReminder": {
       "title": "Don't forget to clock out",
       "body": "Your shift ended at {{time}}. Clock out in PROSM Time when you leave."
+    },
+    "accountDeleted": {
+      "title": "An employee deleted their account",
+      "body": "{{name}} deleted their account. Their attendance and timesheets are kept as \"Deleted user\"."
     }
   },
   "items": {
@@ -340,5 +344,21 @@
     "later": "Later",
     "openSettings": "Open settings",
     "retry": "Try again"
+  },
+  "deleteAccount": {
+    "menuAction": "Delete my account",
+    "title": "Delete your account",
+    "whatGoes": "Your account will be deleted for good: you cannot sign in with it again, and your personal data goes - your name, email and picture, your clock-in and clock-out photos, your location trail, leave documents, devices and notifications.",
+    "whatStays": "Your organisation keeps the work records the law and payroll require (attendance, timesheets, leave, allowances) under \"Deleted user\".",
+    "passwordLabel": "Password",
+    "confirmLabel": "Type \"{{word}}\" to confirm",
+    "confirmWord": "DELETE",
+    "action": "Delete my account for good",
+    "wrongPassword": "The password is not right.",
+    "clockedIn": "Clock out first, then delete your account.",
+    "failed": "The account could not be deleted. Try again or write to support@prosm.net.",
+    "ownerBody": "Yours is the owner's account, and the whole organisation and its data hang on it. To delete it with the organisation, or to hand ownership to someone else, write to us and we will take care of it.",
+    "ownerAction": "Write to support",
+    "ownerSubject": "Owner account deletion request"
   }
 }

@@ -259,3 +259,9 @@ entrypoint = "./functions/send-trial-notices/index.ts"
 enabled = true
 verify_jwt = false
 entrypoint = "./functions/send-push/index.ts"
+
+# v2.3.55: a signed-in person deletes their own account (Google Play).
+[functions.delete-my-account]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/delete-my-account/index.ts"

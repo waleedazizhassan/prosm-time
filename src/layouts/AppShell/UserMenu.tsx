@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState, type ChangeEvent } from "
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { Capacitor } from "@capacitor/core";
-import { ChevronDown, LogOut, Camera, Loader2, RefreshCw } from "lucide-react";
+import { ChevronDown, LogOut, Camera, Loader2, RefreshCw, UserX } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import { useAppLayout } from "./LayoutContext";
@@ -14,6 +14,7 @@ import UserRepository from "../../core/repositories/UserRepository";
 import sidebarStyles from "./Sidebar.module.css";
 import styles from "./UserMenu.module.css";
 import Dropdown from "../../components/common/Dropdown";
+import DeleteAccountModal from "./DeleteAccountModal";
 
 const PANEL_GAP = 8;
 const PANEL_WIDTH = 260;
@@ -46,6 +47,7 @@ const VIEWPORT_MARGIN = 8;
 export default function UserMenu({ collapsed }: { collapsed: boolean }) {
   const { t, i18n } = useTranslation("shell");
   const { profile, signOut, refreshProfile } = useAuth();
+  const [deleteOpen, setDeleteOpen] = useState(false);
   const { userMenuOpen, toggleUserMenu, closeUserMenu } = useAppLayout();
   const { theme, setTheme } = useTheme();
   const { calendarSystem } = useCalendar();
@@ -245,9 +247,15 @@ export default function UserMenu({ collapsed }: { collapsed: boolean }) {
               <LogOut size={16} />
               {t("signOutAction")}
             </button>
+            {/* v2.3.55 (Google Play): deleting one's own account */}
+            <button type="button" className={`${styles.signOutButton} ${styles.deleteAccountButton}`} onClick={() => setDeleteOpen(true)}>
+              <UserX size={16} />
+              {t("deleteAccount.menuAction")}
+            </button>
           </div>,
           document.body,
         )}
+      <DeleteAccountModal isOpen={deleteOpen} onClose={() => setDeleteOpen(false)} />
     </div>
   );
 }
