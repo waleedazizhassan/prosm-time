@@ -279,7 +279,8 @@
     "grantLeaveOverlap": "Dieser Mitarbeiter hat an diesen Tagen bereits beantragten oder genehmigten Urlaub.",
     "invalidLeaveType": "Diese Urlaubsart ist ungültig.",
     "notAuthorizedReviewLeave": "Sie dürfen keinen Urlaub genehmigen.",
-    "endBeforeStart": "Das Enddatum liegt vor dem Startdatum."
+    "endBeforeStart": "Das Enddatum liegt vor dem Startdatum.",
+    "chooseLeaveReviewer": "Wählen Sie jemanden, der Ihren Urlaub genehmigen darf."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

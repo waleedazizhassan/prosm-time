@@ -72,3 +72,41 @@ describe("leave emails", () => {
     expect((await t.as(manager.authId, "select public.get_prosm_time_leave_email($1)", [note.id])).error).toMatch(/permission denied/);
   });
 });
+
+// v2.3.55 (owner 2026-10-27): the requester chooses who receives the request;
+// a leave taken back after approval is "cancelled". Migration 20261027120000.
+describe("choosing the reviewer", () => {
+  it("lists the people who may approve, and sends the request only to the one chosen", async () => {
+    const list = await t.as<{ r: { id: string; isOwner: boolean }[] }>(employee.authId, "select public.list_prosm_time_leave_reviewers() as r");
+    const ids = list.rows![0].r.map((row) => row.id);
+    expect(ids).toEqual(expect.arrayContaining([manager.userId, org.owner.userId]));
+    expect(ids).not.toContain(employee.userId);
+
+    const result = await t.as(employee.authId, "select public.request_prosm_time_leave('annual', current_date + 80, current_date + 80, 'Chosen', null, $1)", [org.owner.userId]);
+    expect(result.error).toBeNull();
+    const [row] = await t.su<{ id: string; requested_reviewer_id: string }>("select id, requested_reviewer_id from leave_requests where reason = 'Chosen'");
+    expect(row.requested_reviewer_id).toBe(org.owner.userId);
+    const told = await t.su<{ user_id: string }>("select user_id from notifications where related_entity_id = $1", [row.id]);
+    expect(told.map((note) => note.user_id)).toEqual([org.owner.userId]);
+    const [note] = await t.su<{ id: string }>("select id from notifications where related_entity_id = $1", [row.id]);
+    expect((await emailFor(note.id) as unknown as { copyToRequester: boolean }).copyToRequester).toBe(true);
+  });
+
+  it("refuses someone who cannot approve the requester's leave", async () => {
+    const other = await addMember(t, org, "employee", "Not A Reviewer");
+    const result = await t.as(employee.authId, "select public.request_prosm_time_leave('annual', current_date + 90, current_date + 90, 'Wrong', null, $1)", [other.userId]);
+    expect(result.error).toMatch(/CHOOSE SOMEONE WHO CAN APPROVE/);
+  });
+
+  it("taking back an approved leave is notified and emailed as cancelled", async () => {
+    const [row] = await t.su<{ id: string }>("select id from leave_requests where reason = 'Chosen'");
+    expect((await t.as(org.owner.authId, "select public.review_prosm_time_leave($1, 'approved', null)", [row.id])).error).toBeNull();
+    expect((await t.as(org.owner.authId, "select public.review_prosm_time_leave($1, 'rejected', 'Plans changed')", [row.id])).error).toBeNull();
+    const [last] = await t.su<{ id: string; action: string }>(
+      "select id, data ->> 'actionType' as action from notifications where related_entity_id = $1 and type = 'correction_reviewed' order by created_at desc limit 1",
+      [row.id],
+    );
+    expect(last.action).toBe("cancelled");
+    expect((await emailFor(last.id))?.kind).toBe("cancelled");
+  });
+});

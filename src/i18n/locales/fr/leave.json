@@ -97,5 +97,7 @@
     "doneReopen_many": "Le congé de {{name}} est enregistré et approuvé. {{count}} feuilles de temps soumises couvrent ces jours - rouvrez-les pour qu'elles montrent le congé.",
     "doneReopen_other": "Le congé de {{name}} est enregistré et approuvé. {{count}} feuilles de temps soumises couvrent ces jours - rouvrez-les pour qu'elles montrent le congé.",
     "error": "Impossible d'enregistrer le congé."
-  }
+  },
+  "reviewerLabel": "Envoyer la demande à",
+  "reviewerOwner": "{{name}} (propriétaire)"
 }

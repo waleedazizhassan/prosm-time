@@ -148,7 +148,8 @@
       "approved": "Approved",
       "rejected": "Rejected",
       "acknowledged": "Acknowledged",
-      "clarification_requested": "Clarification requested"
+      "clarification_requested": "Clarification requested",
+      "cancelled": "Cancelled"
     },
     "allowance": {
       "submittedTitle": "Allowances waiting for approval",

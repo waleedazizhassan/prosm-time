@@ -39,16 +39,33 @@ describe("leave emails", () => {
       remainingDays: 18,
     });
     expect(emails.map((email) => email.to)).toEqual(["omar@acme.example", "mona@acme.example"]);
-    expect(emails[0].subject).toContain("تمت الموافقة");
+    expect(emails[0].html).toContain("تمت الموافقة");
     expect(emails[0].html).toContain("من 02/11/2026 إلى 04/11/2026");
     expect(emails[0].html).toContain("18 يوم");
     expect(emails[0].html).toContain("mailto:mona@acme.example");
-    expect(emails[1].subject.startsWith("نسخة")).toBe(true);
+    // one thread: the decision and its copy carry the request's own subject
+    const [request] = renderLeaveEmails(base);
+    expect(emails[0].subject).toBe(request.subject);
+    expect(emails[1].subject).toBe(request.subject);
+  });
+
+  it("the requester gets a copy of a request sent to the person they chose", () => {
+    const emails = renderLeaveEmails({ ...base, copyToRequester: true });
+    expect(emails.map((email) => email.to)).toEqual(["mona@acme.example", "omar@acme.example"]);
+    expect(emails[1].html).toContain("تم إرسال طلب إجازتك");
+    expect(emails[1].subject).toBe(emails[0].subject);
+  });
+
+  it("a leave taken back after approval says cancelled, not declined", () => {
+    const [email] = renderLeaveEmails({ ...base, kind: "cancelled", recipient: base.requester, reviewer: { id: "m", name: "Mona", email: "mona@acme.example" }, remainingDays: 21 });
+    expect(email.to).toBe("omar@acme.example");
+    expect(email.html).toContain("تم إلغاء إجازتك");
+    expect(email.html).not.toContain("لم تتم الموافقة");
   });
 
   it("English for a reader in another language; nothing without an address", () => {
     const [email] = renderLeaveEmails({ ...base, language: "de" });
-    expect(email.subject).toContain("Leave request from");
+    expect(email.subject).toContain("Leave request - ");
     expect(renderLeaveEmails({ ...base, recipient: { ...base.recipient, email: null } })).toEqual([]);
   });
 });

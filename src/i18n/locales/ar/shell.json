@@ -148,7 +148,8 @@
       "approved": "تمت الموافقة",
       "rejected": "تم الرفض",
       "acknowledged": "تم الاطلاع",
-      "clarification_requested": "مطلوب توضيح"
+      "clarification_requested": "مطلوب توضيح",
+      "cancelled": "تم الإلغاء"
     },
     "allowance": {
       "submittedTitle": "بدلات بانتظار الاعتماد",

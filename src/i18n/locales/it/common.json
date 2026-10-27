@@ -279,7 +279,8 @@
     "grantLeaveOverlap": "Questo dipendente ha già ferie in attesa o approvate in questi giorni.",
     "invalidLeaveType": "Questo tipo di ferie non è valido.",
     "notAuthorizedReviewLeave": "Non sei autorizzato ad approvare le ferie.",
-    "endBeforeStart": "La data di fine è prima della data di inizio."
+    "endBeforeStart": "La data di fine è prima della data di inizio.",
+    "chooseLeaveReviewer": "Scegli qualcuno che può approvare le tue ferie."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

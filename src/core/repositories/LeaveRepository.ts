@@ -310,7 +310,25 @@ class LeaveRepository {
     }
   }
 
-  async request(leaveType: LeaveType, startDate: string, endDate: string, reason?: string, documentPath?: string | null): Promise<ServiceResult<{ requestId: string; daysCount: number; autoApproved: boolean }>> {
+  /** v2.3.55 (owner 2026-10-27): the people who may approve my leave - the requester picks one. */
+  async listReviewers(): Promise<ServiceResult<{ id: string; name: string; isOwner: boolean }[]>> {
+    try {
+      const { data, error } = await this.client.rpc("list_prosm_time_leave_reviewers");
+      if (error) return createError(error.message);
+      return createSuccess(Array.isArray(data) ? data : []);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Leave service unavailable.");
+    }
+  }
+
+  async request(
+    leaveType: LeaveType,
+    startDate: string,
+    endDate: string,
+    reason?: string,
+    documentPath?: string | null,
+    reviewerId?: string | null,
+  ): Promise<ServiceResult<{ requestId: string; daysCount: number; autoApproved: boolean }>> {
     try {
       const { data, error } = await this.client.rpc("request_prosm_time_leave", {
         p_leave_type: leaveType,
@@ -318,6 +336,7 @@ class LeaveRepository {
         p_end_date: endDate,
         p_reason: reason?.trim() || null,
         p_document_path: documentPath ?? null,
+        p_reviewer_id: reviewerId || null,
       });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to submit this leave request.");

@@ -96,5 +96,7 @@
     "doneReopen_one": "{{name}}'s leave is recorded and approved. A submitted timesheet covers these days - reopen it for correction so it shows the leave.",
     "doneReopen_other": "{{name}}'s leave is recorded and approved. {{count}} submitted timesheets cover these days - reopen them for correction so they show the leave.",
     "error": "Could not record the leave."
-  }
+  },
+  "reviewerLabel": "Send the request to",
+  "reviewerOwner": "{{name}} (owner)"
 }

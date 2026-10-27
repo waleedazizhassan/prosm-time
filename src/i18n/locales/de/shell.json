@@ -148,7 +148,8 @@
       "approved": "Genehmigt",
       "rejected": "Abgelehnt",
       "acknowledged": "Zur Kenntnis genommen",
-      "clarification_requested": "Klärung angefordert"
+      "clarification_requested": "Klärung angefordert",
+      "cancelled": "Storniert"
     },
     "allowance": {
       "submittedTitle": "Zulagen warten auf Freigabe",

@@ -97,5 +97,7 @@
     "doneReopen_many": "Le ferie di {{name}} sono registrate e approvate. {{count}} fogli ore inviati coprono questi giorni - riaprili per correzione così mostrano le ferie.",
     "doneReopen_other": "Le ferie di {{name}} sono registrate e approvate. {{count}} fogli ore inviati coprono questi giorni - riaprili per correzione così mostrano le ferie.",
     "error": "Impossibile registrare le ferie."
-  }
+  },
+  "reviewerLabel": "Invia la richiesta a",
+  "reviewerOwner": "{{name}} (titolare)"
 }

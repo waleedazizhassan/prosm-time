@@ -5,7 +5,9 @@
 // deno-lint-ignore-file no-explicit-any
 
 export interface LeaveEmailData {
-  kind: "request" | "approved" | "rejected";
+  kind: "request" | "approved" | "rejected" | "cancelled" | "withdrawn";
+  requestId?: string;
+  copyToRequester?: boolean;
   organizationName: string;
   organizationId: string;
   language: string;
@@ -83,11 +85,17 @@ export function renderLeaveEmails(data: LeaveEmailData): RenderedEmail[] {
   ];
   if (data.leave.reason) baseRows.push([L("السبب", "Reason"), escape(data.leave.reason)]);
 
+  // v2.3.55 (owner 2026-10-27: "back and forth on the same thread"): every email
+  // of one request has this same subject, so mail apps keep them together.
+  const subject = L(`طلب إجازة - ${data.requester.name} - ${period}`, `Leave request - ${data.requester.name} - ${period}`);
+  const link = (email: string) => `<a href="mailto:${escape(email)}" style="color:#1e6fd9;font-weight:normal;">${escape(email)}</a>`;
+  const person = (who: { name: string; email: string | null }) => `${escape(who.name)}${who.email ? `<br>${link(who.email)}` : ""}`;
+  const answerLine = (label: string, email: string) => (email ? `<br>${escape(label)} ${link(email)}` : "");
+  const emails: RenderedEmail[] = [];
+
   if (data.kind === "request") {
-    if (!data.recipient.email) return [];
-    const subject = L(`طلب إجازة من ${data.requester.name} - ${period}`, `Leave request from ${data.requester.name} - ${period}`);
-    return [
-      {
+    if (data.recipient.email) {
+      emails.push({
         to: data.recipient.email,
         subject,
         purpose: "time-leave-request",
@@ -97,37 +105,64 @@ export function renderLeaveEmails(data: LeaveEmailData): RenderedEmail[] {
           escape(L(`${data.requester.name} طلب ${typeLabel} ${period}. راجعه ووافق أو ارفض من البرنامج.`, `${data.requester.name} asked for ${typeLabel.toLowerCase()}, ${period}. Review it in the app.`)),
           baseRows,
           { label: L("مراجعة الطلب", "Review the request"), href: `${APP_URL}/manager` },
-          footer + (requesterEmail ? `<br>${escape(L("للرد على الموظف مباشرة:", "To answer the employee directly:"))} <a href="mailto:${escape(requesterEmail)}">${escape(requesterEmail)}</a>` : ""),
+          footer + answerLine(L("للرد على الموظف مباشرة:", "To answer the employee directly:"), requesterEmail),
         ),
-      },
-    ];
+      });
+    }
+    // the requester's own copy: sent, and to whom
+    if (data.copyToRequester && requesterEmail && requesterEmail !== data.recipient.email) {
+      emails.push({
+        to: requesterEmail,
+        subject,
+        purpose: "time-leave-request-sent",
+        html: card(
+          dir,
+          L("تم إرسال طلب إجازتك", "Your leave request was sent"),
+          escape(L(`أرسلنا طلبك (${typeLabel} ${period}) إلى ${data.recipient.name}. هيوصلك الرد على نفس الرسالة.`, `Your request (${typeLabel.toLowerCase()}, ${period}) went to ${data.recipient.name}. The answer will come on this same thread.`)),
+          [...baseRows, [L("أُرسل إلى", "Sent to"), person(data.recipient)]],
+          { label: L("عرض إجازاتي", "View my leave"), href: `${APP_URL}/leave` },
+          footer,
+        ),
+      });
+    }
+    return emails;
+  }
+
+  if (data.kind === "withdrawn") {
+    // the requester took back an approved leave: whoever is told, and the requester's copy
+    const title = L("تم إلغاء إجازة معتمدة", "An approved leave was withdrawn");
+    const intro = escape(L(`${data.requester.name} ألغى ${typeLabel} ${period} بعد الموافقة عليها.`, `${data.requester.name} withdrew their approved ${typeLabel.toLowerCase()}, ${period}.`));
+    if (data.recipient.email) emails.push({ to: data.recipient.email, subject, purpose: "time-leave-withdrawn", html: card(dir, title, intro, baseRows, null, footer + answerLine(L("للرد على الموظف:", "To answer the employee:"), requesterEmail)) });
+    if (data.copyToRequester && requesterEmail && requesterEmail !== data.recipient.email) {
+      emails.push({ to: requesterEmail, subject, purpose: "time-leave-withdrawn-copy", html: card(dir, L("تم إلغاء إجازتك", "Your leave is cancelled"), escape(L(`ألغيت ${typeLabel} ${period}، ورجع رصيدها لك.`, `You withdrew your ${typeLabel.toLowerCase()}, ${period}; its days are back in your balance.`)), baseRows, null, footer) });
+    }
+    return emails;
   }
 
   const approved = data.kind === "approved";
+  const cancelled = data.kind === "cancelled";
   const rows = [...baseRows];
-  if (data.reviewer) rows.push([L(approved ? "وافق عليها" : "رفضها", approved ? "Approved by" : "Declined by"), `${escape(data.reviewer.name)}${reviewerEmail ? `<br><a href="mailto:${escape(reviewerEmail)}" style="color:#1e6fd9;font-weight:normal;">${escape(reviewerEmail)}</a>` : ""}`]);
+  if (data.reviewer) rows.push([L(approved ? "وافق عليها" : cancelled ? "ألغاها" : "رفضها", approved ? "Approved by" : cancelled ? "Cancelled by" : "Declined by"), person(data.reviewer)]);
   if (data.leave.notes) rows.push([L("ملاحظة", "Note"), escape(data.leave.notes)]);
-  if (approved && data.remainingDays !== null) rows.push([L(`المتبقي من رصيد ${typeLabel}`, `Remaining ${typeLabel.toLowerCase()} balance`), escape(L(`${num(data.remainingDays)} يوم`, `${num(data.remainingDays)} day(s)`))]);
+  if ((approved || cancelled) && data.remainingDays !== null) rows.push([L(`المتبقي من رصيد ${typeLabel}`, `Remaining ${typeLabel.toLowerCase()} balance`), escape(L(`${num(data.remainingDays)} يوم`, `${num(data.remainingDays)} day(s)`))]);
 
-  const title = approved ? L("تمت الموافقة على إجازتك 🎉", "Your leave is approved 🎉") : L("بخصوص طلب إجازتك", "About your leave request");
+  const title = approved
+    ? L("تمت الموافقة على إجازتك 🎉", "Your leave is approved 🎉")
+    : cancelled
+      ? L("تم إلغاء إجازتك", "Your leave is cancelled")
+      : L("لم تتم الموافقة على طلب إجازتك", "Your leave request was not approved");
   const intro = approved
     ? escape(L(`مبروك يا ${data.requester.name}! تمت الموافقة على ${typeLabel} ${period}${data.remainingDays !== null ? `، والمتبقي من رصيدك ${num(data.remainingDays)} يوم` : ""}. إجازة سعيدة.`, `Congratulations, ${data.requester.name}! Your ${typeLabel.toLowerCase()} is approved, ${period}${data.remainingDays !== null ? `; ${num(data.remainingDays)} day(s) of your balance remain` : ""}. Enjoy your time off.`))
-    : escape(L(`للأسف لم تتم الموافقة على ${typeLabel} ${period}.`, `Your ${typeLabel.toLowerCase()} request, ${period}, was not approved.`));
-  const subject = approved ? L(`تمت الموافقة على إجازتك - ${period}`, `Leave approved - ${period}`) : L(`لم تتم الموافقة على طلب الإجازة - ${period}`, `Leave not approved - ${period}`);
-  const replyLine = reviewerEmail ? `<br>${escape(L("للرد على صاحب القرار:", "To answer the person who decided:"))} <a href="mailto:${escape(reviewerEmail)}">${escape(reviewerEmail)}</a>` : "";
+    : cancelled
+      ? escape(L(`تم إلغاء ${typeLabel} ${period} بعد الموافقة عليها، ورجعت أيامها لرصيدك.`, `Your approved ${typeLabel.toLowerCase()}, ${period}, was cancelled; its days are back in your balance.`))
+      : escape(L(`للأسف لم تتم الموافقة على ${typeLabel} ${period}.`, `Your ${typeLabel.toLowerCase()} request, ${period}, was not approved.`));
 
-  const emails: RenderedEmail[] = [];
-  if (data.requester.email) {
-    emails.push({ to: data.requester.email, subject, purpose: `time-leave-${data.kind}`, html: card(dir, title, intro, rows, { label: L("عرض إجازاتي", "View my leave"), href: `${APP_URL}/leave` }, footer + replyLine) });
+  if (requesterEmail) {
+    emails.push({ to: requesterEmail, subject, purpose: `time-leave-${data.kind}`, html: card(dir, title, intro, rows, { label: L("عرض إجازاتي", "View my leave"), href: `${APP_URL}/leave` }, footer + answerLine(L("للرد على صاحب القرار:", "To answer the person who decided:"), reviewerEmail)) });
   }
-  // the copy for whoever decided, on the same subject
-  if (reviewerEmail && reviewerEmail !== data.requester.email) {
-    emails.push({
-      to: reviewerEmail,
-      subject: `${L("نسخة", "Copy")}: ${subject} - ${data.requester.name}`,
-      purpose: `time-leave-${data.kind}-copy`,
-      html: card(dir, title, intro, rows, null, footer + (requesterEmail ? `<br>${escape(L("للرد على الموظف:", "To answer the employee:"))} <a href="mailto:${escape(requesterEmail)}">${escape(requesterEmail)}</a>` : "")),
-    });
+  // the decider's copy, on the same thread
+  if (reviewerEmail && reviewerEmail !== requesterEmail) {
+    emails.push({ to: reviewerEmail, subject, purpose: `time-leave-${data.kind}-copy`, html: card(dir, title, intro, rows, null, footer + answerLine(L("للرد على الموظف:", "To answer the employee:"), requesterEmail)) });
   }
   return emails;
 }

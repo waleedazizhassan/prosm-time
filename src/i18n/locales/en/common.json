@@ -279,7 +279,8 @@
     "grantLeaveOverlap": "This employee already has pending or approved leave on these days.",
     "invalidLeaveType": "This leave type is not valid.",
     "notAuthorizedReviewLeave": "You are not allowed to approve leave.",
-    "endBeforeStart": "The end date is before the start date."
+    "endBeforeStart": "The end date is before the start date.",
+    "chooseLeaveReviewer": "Choose someone who can approve your leave."
   },
   "pageLoad": {
     "title": "This page needs a connection",

@@ -148,7 +148,8 @@
       "approved": "Approvato",
       "rejected": "Rifiutato",
       "acknowledged": "Preso atto",
-      "clarification_requested": "Chiarimento richiesto"
+      "clarification_requested": "Chiarimento richiesto",
+      "cancelled": "Annullato"
     },
     "allowance": {
       "submittedTitle": "Indennità in attesa di approvazione",

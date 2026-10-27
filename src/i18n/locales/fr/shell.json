@@ -148,7 +148,8 @@
       "approved": "Approuvé",
       "rejected": "Rejeté",
       "acknowledged": "Pris en compte",
-      "clarification_requested": "Clarification demandée"
+      "clarification_requested": "Clarification demandée",
+      "cancelled": "Annulé"
     },
     "allowance": {
       "submittedTitle": "Indemnités en attente d'approbation",

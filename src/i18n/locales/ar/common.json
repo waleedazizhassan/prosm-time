@@ -279,7 +279,8 @@
     "grantLeaveOverlap": "لدى هذا الموظف إجازة معلقة أو معتمدة في هذه الأيام.",
     "invalidLeaveType": "نوع الإجازة غير صحيح.",
     "notAuthorizedReviewLeave": "ليست لديك صلاحية اعتماد الإجازات.",
-    "endBeforeStart": "تاريخ النهاية قبل تاريخ البداية."
+    "endBeforeStart": "تاريخ النهاية قبل تاريخ البداية.",
+    "chooseLeaveReviewer": "اختر شخصاً يملك صلاحية اعتماد إجازتك."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

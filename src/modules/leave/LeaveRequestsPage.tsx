@@ -59,6 +59,9 @@ export default function LeaveRequestsPage() {
   // v2.3.43 step 7: the organisation's leave types, and a document when the type needs one.
   const [leaveTypes, setLeaveTypes] = useState<LeaveTypeSetting[]>([]);
   const [documentFile, setDocumentFile] = useState<File | null>(null);
+  // v2.3.55 (owner 2026-10-27): who receives the request - the Owner or one of the Managers
+  const [reviewers, setReviewers] = useState<{ id: string; name: string; isOwner: boolean }[]>([]);
+  const [reviewerId, setReviewerId] = useState("");
   const selectedType = leaveTypes.find((type) => type.key === leaveType) ?? null;
   const typeLabel = (key: string) => leaveTypeLabel(t, key, leaveTypes.find((type) => type.key === key)?.name);
   const [startDate, setStartDate] = useState(isoDate(today));
@@ -103,7 +106,15 @@ export default function LeaveRequestsPage() {
 
   useEffect(() => {
     LeaveRepository.listTypes().then((result) => setLeaveTypes((result.data ?? []).filter((type) => type.isActive)));
-  }, []);
+    if (!isOwner) {
+      LeaveRepository.listReviewers().then((result) => {
+        const list = result.data ?? [];
+        setReviewers(list);
+        // a manager of one's own site first; the Owner when there is none
+        setReviewerId((current) => current || (list.find((reviewer) => !reviewer.isOwner) ?? list[0])?.id || "");
+      });
+    }
+  }, [isOwner]);
 
   const handleSubmit = async () => {
     if (!startDate || !endDate) return;
@@ -120,7 +131,7 @@ export default function LeaveRequestsPage() {
       }
       documentPath = upload.data;
     }
-    const result = await LeaveRepository.request(leaveType, startDate, endDate, reason, documentPath);
+    const result = await LeaveRepository.request(leaveType, startDate, endDate, reason, documentPath, reviewerId || null);
     setSubmitting(false);
     if (!result.success) {
       setSubmitError(humanizeBackendError(result.message, t) ?? t("submitError"));
@@ -237,6 +248,16 @@ export default function LeaveRequestsPage() {
             disabled={submitting}
             options={(leaveTypes.length > 0 ? leaveTypes : [{ key: "annual", name: "" } as LeaveTypeSetting]).map((type) => ({ value: type.key, label: leaveTypeLabel(t, type.key, type.name) }))}
           />
+          {!isOwner && reviewers.length > 0 ? (
+            <Select
+              label={t("reviewerLabel")}
+              name="leaveReviewer"
+              value={reviewerId}
+              onChange={(event) => setReviewerId(event.target.value)}
+              disabled={submitting}
+              options={reviewers.map((reviewer) => ({ value: reviewer.id, label: reviewer.isOwner ? t("reviewerOwner", { name: reviewer.name }) : reviewer.name }))}
+            />
+          ) : null}
           <DateRange>
             <Input label={t("startDateLabel")} name="leaveStartDate" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} disabled={submitting} />
             <Input label={t("endDateLabel")} name="leaveEndDate" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} disabled={submitting} />

@@ -95,7 +95,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "approved": "تمت الموافقة",
         "rejected": "تم الرفض",
         "acknowledged": "تم الاطلاع",
-        "clarification_requested": "مطلوب توضيح"
+        "clarification_requested": "مطلوب توضيح",
+        "cancelled": "تم الإلغاء"
       },
       "allowance": {
         "submittedTitle": "بدلات بانتظار الاعتماد",
@@ -241,7 +242,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "approved": "Approved",
         "rejected": "Rejected",
         "acknowledged": "Acknowledged",
-        "clarification_requested": "Clarification requested"
+        "clarification_requested": "Clarification requested",
+        "cancelled": "Cancelled"
       },
       "allowance": {
         "submittedTitle": "Allowances waiting for approval",
@@ -387,7 +389,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "approved": "Genehmigt",
         "rejected": "Abgelehnt",
         "acknowledged": "Zur Kenntnis genommen",
-        "clarification_requested": "Klärung angefordert"
+        "clarification_requested": "Klärung angefordert",
+        "cancelled": "Storniert"
       },
       "allowance": {
         "submittedTitle": "Zulagen warten auf Freigabe",
@@ -533,7 +536,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "approved": "Approuvé",
         "rejected": "Rejeté",
         "acknowledged": "Pris en compte",
-        "clarification_requested": "Clarification demandée"
+        "clarification_requested": "Clarification demandée",
+        "cancelled": "Annulé"
       },
       "allowance": {
         "submittedTitle": "Indemnités en attente d'approbation",
@@ -679,7 +683,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "approved": "Approvato",
         "rejected": "Rifiutato",
         "acknowledged": "Preso atto",
-        "clarification_requested": "Chiarimento richiesto"
+        "clarification_requested": "Chiarimento richiesto",
+        "cancelled": "Annullato"
       },
       "allowance": {
         "submittedTitle": "Indennità in attesa di approvazione",

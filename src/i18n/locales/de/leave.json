@@ -96,5 +96,7 @@
     "doneReopen_one": "Der Urlaub von {{name}} ist eingetragen und genehmigt. Ein eingereichter Stundenzettel umfasst diese Tage - zur Korrektur öffnen, damit er den Urlaub zeigt.",
     "doneReopen_other": "Der Urlaub von {{name}} ist eingetragen und genehmigt. {{count}} eingereichte Stundenzettel umfassen diese Tage - zur Korrektur öffnen, damit sie den Urlaub zeigen.",
     "error": "Der Urlaub konnte nicht eingetragen werden."
-  }
+  },
+  "reviewerLabel": "Antrag senden an",
+  "reviewerOwner": "{{name}} (Inhaber)"
 }

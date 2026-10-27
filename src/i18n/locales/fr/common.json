@@ -279,7 +279,8 @@
     "grantLeaveOverlap": "Cet employé a déjà un congé en attente ou approuvé ces jours-là.",
     "invalidLeaveType": "Ce type de congé n'est pas valide.",
     "notAuthorizedReviewLeave": "Vous n'êtes pas autorisé à approuver les congés.",
-    "endBeforeStart": "La date de fin précède la date de début."
+    "endBeforeStart": "La date de fin précède la date de début.",
+    "chooseLeaveReviewer": "Choisissez une personne qui peut approuver votre congé."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",
