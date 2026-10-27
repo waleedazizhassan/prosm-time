@@ -45,12 +45,14 @@
     "clockOut": "الانصراف: {{note}}",
     "earlyLeave": "انصراف مبكر: {{reason}}",
     "mockClockIn": "تسجيل الحضور من موقع مزيف",
-    "mockClockOut": "تسجيل الانصراف من موقع مزيف"
+    "mockClockOut": "تسجيل الانصراف من موقع مزيف",
+    "siteChange": "تغيير الموقع: {{from}} ← {{to}} ({{time}})"
   },
   "periods": {
     "today": "اليوم",
     "week": "هذا الأسبوع",
     "month": "هذا الشهر"
   },
-  "totalHours": "الإجمالي {{hours}} ساعة · {{count}} وردية"
+  "totalHours": "الإجمالي {{hours}} ساعة · {{count}} وردية",
+  "noRegisteredSite": "بدون موقع مسجّل"
 }

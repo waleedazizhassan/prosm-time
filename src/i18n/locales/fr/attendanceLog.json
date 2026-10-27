@@ -45,12 +45,14 @@
     "clockOut": "Départ : {{note}}",
     "earlyLeave": "Départ anticipé : {{reason}}",
     "mockClockIn": "Entrée pointée depuis une fausse position",
-    "mockClockOut": "Sortie pointée depuis une fausse position"
+    "mockClockOut": "Sortie pointée depuis une fausse position",
+    "siteChange": "Changement de site : {{from}} → {{to}} ({{time}})"
   },
   "periods": {
     "today": "Aujourd'hui",
     "week": "Cette semaine",
     "month": "Ce mois-ci"
   },
-  "totalHours": "Total {{hours}} heures · {{count}} services"
+  "totalHours": "Total {{hours}} heures · {{count}} services",
+  "noRegisteredSite": "Sans site enregistré"
 }

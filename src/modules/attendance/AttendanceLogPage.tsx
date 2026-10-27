@@ -23,7 +23,7 @@ import { formatTimeOnly } from "../../core/utils/formatDate";
 import { buildAttendanceLogPdf } from "./attendanceLogPdf";
 import PageBanner from "../../components/common/PageBanner";
 import { PERIODS, formatHours, isPeriod, periodRange, sessionHours, type Period } from "./periods";
-import { attendanceNoteLines } from "./attendanceNotes";
+import { attendanceNoteLines, startingSiteName } from "./attendanceNotes";
 import HintText from "../../components/common/HintText";
 import DateRange from "../../components/common/DateRange";
 import PersonName from "../../components/common/PersonName";
@@ -78,8 +78,8 @@ function LocationCell({ location, t }: { location: AttendanceEventLocation | nul
 // Owner 2026-10-18: one Notes column for everything the employee wrote -
 // the clock-in and clock-out notes and activity, and a reason given by
 // the former early-leave prompt.
-function NotesCell({ row, t }: { row: TodayAttendanceRow; t: (key: string, options?: Record<string, unknown>) => string }) {
-  const lines = attendanceNoteLines(row, t);
+function NotesCell({ row, t, time }: { row: TodayAttendanceRow; t: (key: string, options?: Record<string, unknown>) => string; time: (iso: string) => string }) {
+  const lines = attendanceNoteLines(row, t, time);
   if (lines.length === 0) return <>—</>;
   return (
     <>
@@ -238,7 +238,7 @@ export default function AttendanceLogPage() {
       header: t("columns.site"),
       render: (row) => (
         <span>
-          {row.siteName || "—"}
+          {startingSiteName(row, t)}
           {row.siteChanges.map((change, index) => (
             <span key={index} style={{ display: "block", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
               {t("siteChangedTo", { site: change.toSiteName, time: formatTimeOnly(change.changedAt, i18n.language) })}
@@ -310,7 +310,7 @@ export default function AttendanceLogPage() {
     },
     { key: "status", header: t("columns.status"), render: (row) => <StatusBadge status={row.status === "clocked_in" ? "active" : "neutral"}>{t(`status.${row.status}`)}</StatusBadge> },
     { key: "workedHours", header: t("columns.workedHours"), render: (row) => formatWorkedHours(row.clockInAt, row.clockOutAt) },
-    { key: "notes", header: t("columns.notes"), render: (row) => <NotesCell row={row} t={t} /> },
+    { key: "notes", header: t("columns.notes"), render: (row) => <NotesCell row={row} t={t} time={(iso) => formatTimeOnly(iso, i18n.language)} /> },
   ];
 
   return (

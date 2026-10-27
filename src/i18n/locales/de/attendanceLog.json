@@ -45,12 +45,14 @@
     "clockOut": "Ausstempeln: {{note}}",
     "earlyLeave": "Früher gegangen: {{reason}}",
     "mockClockIn": "Einstempeln von einem gefälschten Standort",
-    "mockClockOut": "Ausstempeln von einem gefälschten Standort"
+    "mockClockOut": "Ausstempeln von einem gefälschten Standort",
+    "siteChange": "Standortwechsel: {{from}} → {{to}} ({{time}})"
   },
   "periods": {
     "today": "Heute",
     "week": "Diese Woche",
     "month": "Dieser Monat"
   },
-  "totalHours": "Gesamt {{hours}} Stunden · {{count}} Schichten"
+  "totalHours": "Gesamt {{hours}} Stunden · {{count}} Schichten",
+  "noRegisteredSite": "Kein registrierter Standort"
 }

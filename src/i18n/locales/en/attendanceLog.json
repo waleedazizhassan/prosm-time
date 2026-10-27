@@ -45,12 +45,14 @@
     "clockOut": "Clock out: {{note}}",
     "earlyLeave": "Left early: {{reason}}",
     "mockClockIn": "Clock-in from a fake (simulated) location",
-    "mockClockOut": "Clock-out from a fake (simulated) location"
+    "mockClockOut": "Clock-out from a fake (simulated) location",
+    "siteChange": "Site change: {{from}} → {{to}} ({{time}})"
   },
   "periods": {
     "today": "Today",
     "week": "This week",
     "month": "This month"
   },
-  "totalHours": "Total {{hours}} hours · {{count}} shifts"
+  "totalHours": "Total {{hours}} hours · {{count}} shifts",
+  "noRegisteredSite": "No registered site"
 }
