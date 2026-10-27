@@ -38,6 +38,10 @@ android {
         versionCode 3
         versionName "2.3.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // v2.3.55 (owner 2026-10-27, Google Play): a build for Play passes the
+        // certificate Google signs it with (Play Console > App integrity), so
+        // MainActivity's check accepts it too: -PprosmPlaySigningSha256=<hex>
+        buildConfigField "String", "PLAY_SIGNING_CERT_SHA256", "\"${(project.findProperty('prosmPlaySigningSha256') ?: '').toString().toLowerCase().replaceAll('[^0-9a-f]', '')}\""
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
              // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61

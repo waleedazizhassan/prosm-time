@@ -67,7 +67,9 @@ export default function UpdateAvailableBanner({ placement = "top" }: { placement
 
   const handleUpdate = () => {
     if (isAndroid) {
-      window.open(manifest.downloads.android, "_blank", "noopener,noreferrer");
+      // v2.3.55: the Google Play build updates through Play (an app from Play may
+      // not install another copy of itself from elsewhere)
+      window.open(import.meta.env.VITE_DISTRIBUTION === "play" ? "https://play.google.com/store/apps/details?id=net.prosm.time" : manifest.downloads.android, "_blank", "noopener,noreferrer");
       return;
     }
     if (window.location.protocol.startsWith("http")) {

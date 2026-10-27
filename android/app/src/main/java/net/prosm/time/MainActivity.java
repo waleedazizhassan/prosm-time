@@ -64,7 +64,9 @@ public class MainActivity extends BridgeActivity {
             if (signatures == null || signatures.length == 0) return true;
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             for (Signature signature : signatures) {
-                if (RELEASE_CERT_SHA256.equals(hex(digest.digest(signature.toByteArray())))) return true;
+                String hash = hex(digest.digest(signature.toByteArray()));
+                // ours, or - in the Google Play build - the key Google signs it with
+                if (RELEASE_CERT_SHA256.equals(hash) || (!BuildConfig.PLAY_SIGNING_CERT_SHA256.isEmpty() && BuildConfig.PLAY_SIGNING_CERT_SHA256.equals(hash))) return true;
             }
             return false;
         } catch (Exception error) {
