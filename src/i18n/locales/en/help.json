@@ -16,7 +16,7 @@
     },
     "siteChange": {
       "title": "Changing Sites Mid-Shift",
-      "body": "Change Site is its own button on the Dashboard whenever you're clocked in - no need to pause first. Pick where you've moved to (or leave Site empty), and the move is recorded with the time it happened. You're never clocked out in the process."
+      "body": "Change Site is its own button on the Dashboard whenever you're clocked in - no need to pause first. Pick where you've moved to (or leave Site empty), and the move is recorded with the time it happened. You're never clocked out in the process. The record keeps both sites: the first site, then each change with its time, also in the notes and the PDF. From the change on, \"inside / outside the work area\" is checked against the new site."
     },
     "sos": {
       "title": "SOS / Emergency",
@@ -60,7 +60,7 @@
     },
     "leave": {
       "title": "Leave",
-      "body": "Request leave from the Leave page: choose the type, the dates and, if you like, a reason (please leave out unnecessary health details). Types and their days are set by the Owner under Settings > Leave types, with starting values from Labour Law 14 of 2025 (annual 15 days in the first year, 21 after, 30 after 10 years of service, 45 for special needs; casual 7 days a year, at most 2 at a time; sick, unpaid, Hajj, bereavement, paternity and others) - check them against the official text. Your balance per type shows used and remaining days. An employee's request goes to the manager of their site (and the Owner); a manager's goes to the Owner. Approved leave can be cancelled only before its first day - from that day on, no one can cancel it, not even the Owner. Unpaid leave: the manager sets the deduction per day when approving; it is recorded automatically and shows in the payroll export and your allowance sheet, and it is reversed if the leave is cancelled before it starts."
+      "body": "Request leave from the Leave page: choose the type, the dates and, if you like, a reason (please leave out unnecessary health details). Types and their days are set by the Owner under Settings > Leave types, with starting values from Labour Law 14 of 2025 (annual 15 days in the first year, 21 after, 30 after 10 years of service, 45 for special needs; casual 7 days a year, at most 2 at a time; sick, unpaid, Hajj, bereavement, paternity and others) - check them against the official text. Your balance per type shows used and remaining days. When you request leave, choose who receives it - your site's manager or the Owner - from the list; only that person is notified and emailed, and you get a copy. Their answer - approved (with the dates and your remaining balance), declined, or cancelled after approval - comes back to you by notification and email, on the same email conversation. A manager can also turn an absence into leave from the dashboard's \"Absent today\" sheet (\"Make it leave\"), for example when you asked by phone: it is approved at once, past days too, and your timesheet follows. Approved leave can be cancelled only before its first day - from that day on, no one can cancel it, not even the Owner. Unpaid leave: the manager sets the deduction per day when approving; it is recorded automatically and shows in the payroll export and your allowance sheet, and it is reversed if the leave is cancelled before it starts."
     },
     "schedule": {
       "title": "Shift Roster",
@@ -84,7 +84,7 @@
     },
     "radio": {
       "title": "Why There's a Radio in PROSM Time",
-      "body": "Play a station on your way to work, and PROSM Time is already open when you arrive - a small nudge against the most common attendance mistake: forgetting to clock in. It sends no personal data."
+      "body": "Play a station on your way to work, and PROSM Time is already open when you arrive - a small nudge against the most common attendance mistake: forgetting to clock in. It sends no personal data. Its first list comes from the stations of the country your phone's time zone points to (Egypt, the Gulf, Europe, America...), kept for a day so it opens at once."
     },
     "offline": {
       "title": "Working Without Internet",
@@ -120,7 +120,7 @@
     },
     "managerDashboard": {
       "title": "The Dashboard (Owner and managers)",
-      "body": "The Owner and whoever holds \"View the dashboard\" see: an SOS bar (until someone acknowledges it), chips for what is waiting (only when there is something), the figures with a comparison to the previous period only when there is data for it, the sites map with each site's work area and who is there now, the sites table with external workers under each site, the approvals queue, people by role, scheduled vs actual, allowances and estimated cost (only with \"View estimated cost\") and the action log. Choose the organisation, your sites or yourself, and the period; the map and \"here now\" are live and not filtered by period. It refreshes every minute. \"Customise widgets\" hides or reorders cards, saved to your account."
+      "body": "The Owner and whoever holds \"View the dashboard\" see: an SOS bar (until someone acknowledges it), chips for what is waiting (only when there is something), the figures with a comparison to the previous period only when there is data for it, the sites map with each site's work area and who is there now, the sites table with external workers under each site, the approvals queue, people by role, scheduled vs actual, allowances and estimated cost (only with \"View estimated cost\") and the action log. Choose the organisation, your sites or yourself, and the period; the map and \"here now\" are live and not filtered by period. It refreshes every minute. \"Customise widgets\" hides or reorders cards, saved to your account. Each figure opens the people behind it - here now, hours by person, lateness, absent and on leave, overtime by person - with a button to the full page."
     },
     "peopleAndPhotos": {
       "title": "People, Roles and Profile Photos",

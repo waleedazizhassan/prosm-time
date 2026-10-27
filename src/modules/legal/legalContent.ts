@@ -6,7 +6,7 @@
 //
 // When either text changes, raise LEGAL_VERSION: every user is asked to
 // read and acknowledge the new version once (LegalAcknowledgementGate).
-export const LEGAL_VERSION = "2026-10-26";
+export const LEGAL_VERSION = "2026-10-27";
 
 export interface LegalSection {
   heading: string;
@@ -93,7 +93,8 @@ const PRIVACY_EN: LegalDocument = {
         "Cloudflare: delivery of the web version through prosm.net.",
         "Google Firebase Cloud Messaging: delivers notifications to the Android app, including when it is closed. It receives a device token for your phone and each notification's title and text. The token is removed when you sign out.",
         "Map, place and weather services that the app contacts directly from your device: OpenStreetMap (map images for the area shown), BigDataCloud (a town name from your approximate position) and Open-Meteo (weather for that position).",
-        "Radio Browser: only if you play the internet radio. No personal data is sent.",
+        "Email: invitations, password-reset codes, trial notices and leave emails are sent from noreply@prosm.net through PROSM's own email service (hosted by Zoho Mail). A leave email goes only between the person asking and the person who receives or answers the request, and contains their names and email addresses, the leave type, dates, days, reason, the decision with its note, and the remaining balance.",
+        "Radio Browser: only if you play the internet radio. It receives the country your device's time zone points to, to suggest that country's stations; no personal data is sent.",
         "Google Maps: only if you tap a link to open a position on the map.",
         "Authorities, when PROSM or the Organisation is legally required to disclose data.",
       ],
@@ -101,7 +102,7 @@ const PRIVACY_EN: LegalDocument = {
     {
       heading: "7. Transfers outside your country",
       paragraphs: [
-        "The application's data is stored in the European Union. Map, place and weather requests may be handled by those providers in other countries. Where data is transferred internationally, we rely on safeguards recognised by applicable law.",
+        "The application's data is stored in the European Union. Map, place and weather requests, and the delivery of emails, may be handled by those providers in other countries. Where data is transferred internationally, we rely on safeguards recognised by applicable law.",
       ],
     },
     {
@@ -228,7 +229,8 @@ const PRIVACY_AR: LegalDocument = {
         "Cloudflare: لتوصيل نسخة الويب عبر prosm.net.",
         "Google Firebase Cloud Messaging: لتوصيل الإشعارات إلى تطبيق أندرويد حتى وهو مغلق. ويتلقى رمزاً خاصاً بجهازك وعنوان كل إشعار ونصه. ويُحذف الرمز عند تسجيل خروجك.",
         "خدمات الخرائط والأماكن والطقس التي يتصل بها التطبيق مباشرةً من جهازك: OpenStreetMap (صور الخريطة للمنطقة المعروضة)، وBigDataCloud (اسم المدينة من موقعك التقريبي)، وOpen-Meteo (الطقس لذلك الموقع).",
-        "Radio Browser: فقط إذا شغّلت الراديو عبر الإنترنت، ولا تُرسل إليه أي بيانات شخصية.",
+        "البريد الإلكتروني: تُرسَل الدعوات وأكواد استعادة كلمة المرور وتنبيهات الفترة التجريبية ورسائل الإجازات من noreply@prosm.net عبر خدمة البريد الخاصة بـ PROSM (المستضافة لدى Zoho Mail). ورسالة الإجازة لا تتجاوز طالب الإجازة ومن يستلم الطلب أو يرد عليه، وتتضمن اسميهما وبريديهما ونوع الإجازة وتواريخها وعدد أيامها وسببها والقرار وملاحظته والرصيد المتبقي.",
+        "Radio Browser: فقط إذا شغّلت الراديو عبر الإنترنت. ويتلقى الدولة التي تشير إليها المنطقة الزمنية لجهازك لاقتراح محطاتها، ولا تُرسل إليه أي بيانات شخصية.",
         "خرائط Google: فقط إذا ضغطت رابطاً لفتح موقع على الخريطة.",
         "الجهات الرسمية، عندما تُلزَم PROSM أو المؤسسة قانوناً بالإفصاح عن البيانات.",
       ],
@@ -236,7 +238,7 @@ const PRIVACY_AR: LegalDocument = {
     {
       heading: "7. نقل البيانات خارج بلدك",
       paragraphs: [
-        "تُخزَّن بيانات التطبيق داخل الاتحاد الأوروبي. وقد تعالج خدمات الخرائط والأماكن والطقس الطلبات في دول أخرى. وعند نقل البيانات دولياً نعتمد ضمانات يقرّها القانون المطبَّق.",
+        "تُخزَّن بيانات التطبيق داخل الاتحاد الأوروبي. وقد تعالج خدمات الخرائط والأماكن والطقس الطلبات، ويُوصَّل البريد الإلكتروني، في دول أخرى. وعند نقل البيانات دولياً نعتمد ضمانات يقرّها القانون المطبَّق.",
       ],
     },
     {

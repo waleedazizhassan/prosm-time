@@ -16,7 +16,7 @@
     },
     "siteChange": {
       "title": "Cambiare sede a metà turno",
-      "body": "Cambia sede è ora un pulsante autonomo nella Dashboard non appena hai timbrato l'entrata - non serve più premere Pausa prima. Toccalo, scegli dove ti sei spostato (oppure lascia vuoto il campo Sede per uno spostamento realmente improvvisato, come timbrare l'entrata senza sede), e lo spostamento viene registrato nella tua cronologia presenze con l'orario esatto. Non vieni mai timbrato in uscita nel frattempo."
+      "body": "Cambia sede è ora un pulsante autonomo nella Dashboard non appena hai timbrato l'entrata - non serve più premere Pausa prima. Toccalo, scegli dove ti sei spostato (oppure lascia vuoto il campo Sede per uno spostamento realmente improvvisato, come timbrare l'entrata senza sede), e lo spostamento viene registrato nella tua cronologia presenze con l'orario esatto. Non vieni mai timbrato in uscita nel frattempo. Il registro conserva entrambi i siti: il primo, poi ogni cambio con l'orario, anche nelle note e nel PDF. Dal cambio in poi, \"dentro / fuori dall'area\" si verifica sul nuovo sito."
     },
     "sos": {
       "title": "SOS / Emergenza",
@@ -60,7 +60,7 @@
     },
     "leave": {
       "title": "Ferie",
-      "body": "Richiedi le ferie dalla pagina Ferie: tipo, date e, se vuoi, un motivo (evita dettagli sanitari non necessari). I tipi e i loro giorni sono stabiliti dal titolare in Impostazioni > Tipi di ferie, con valori iniziali dalla legge sul lavoro 14 del 2025 (annuali 15 giorni il primo anno, poi 21, 30 dopo 10 anni di servizio, 45 per persone con disabilità; occasionali 7 giorni l'anno, massimo 2 alla volta; malattia, non retribuite, Hajj, lutto, paternità e altre) - verificali con il testo ufficiale. Il saldo per tipo mostra i giorni usati e rimanenti. La richiesta di un dipendente va al responsabile del suo sito (e al titolare); quella di un responsabile va al titolare. Le ferie approvate si possono annullare solo prima del primo giorno - da quel giorno nessuno può annullarle, nemmeno il titolare. Ferie non retribuite: il responsabile fissa la trattenuta giornaliera all'approvazione; viene registrata automaticamente, compare nell'export paghe e nel tuo foglio indennità, e viene annullata se le ferie sono annullate prima dell'inizio."
+      "body": "Richiedi le ferie dalla pagina Ferie: tipo, date e, se vuoi, un motivo (evita dettagli sanitari non necessari). I tipi e i loro giorni sono stabiliti dal titolare in Impostazioni > Tipi di ferie, con valori iniziali dalla legge sul lavoro 14 del 2025 (annuali 15 giorni il primo anno, poi 21, 30 dopo 10 anni di servizio, 45 per persone con disabilità; occasionali 7 giorni l'anno, massimo 2 alla volta; malattia, non retribuite, Hajj, lutto, paternità e altre) - verificali con il testo ufficiale. Il saldo per tipo mostra i giorni usati e rimanenti. La richiesta di un dipendente va al responsabile del suo sito (e al titolare); quella di un responsabile va al titolare. Le ferie approvate si possono annullare solo prima del primo giorno - da quel giorno nessuno può annullarle, nemmeno il titolare. Ferie non retribuite: il responsabile fissa la trattenuta giornaliera all'approvazione; viene registrata automaticamente, compare nell'export paghe e nel tuo foglio indennità, e viene annullata se le ferie sono annullate prima dell'inizio. Quando chiedi ferie, scegli dall'elenco chi le riceve - il responsabile del tuo sito o il titolare: solo quella persona riceve notifica ed e-mail, e tu ne ricevi una copia. La risposta - approvate (con le date e il saldo residuo), rifiutate o annullate dopo l'approvazione - ti torna per notifica ed e-mail nella stessa conversazione. Un responsabile può anche trasformare un'assenza in ferie dalla lista \"Assenti oggi\" della dashboard (\"Segna come ferie\"), ad esempio se le hai chieste per telefono: approvate subito, anche per giorni passati, e il foglio ore segue."
     },
     "schedule": {
       "title": "Turni",
@@ -84,7 +84,7 @@
     },
     "radio": {
       "title": "Perché c'è una radio in PROSM Time",
-      "body": "La Radio non è una distrazione dalla presenza - è pensata proprio intorno ad essa. Ascolta una stazione durante il tragitto verso il lavoro, e PROSM Time è già aperto e presente nella tua mente nel momento in cui arrivi: invece di essere un'app che devi ricordarti di aprire una volta alla scrivania, è già lì, in mano, e Timbra entrata è proprio dove l'hai lasciata. Una piccola spinta deliberata contro l'errore di presenza più comune in assoluto - dimenticarsi semplicemente di timbrare in orario."
+      "body": "La Radio non è una distrazione dalla presenza - è pensata proprio intorno ad essa. Ascolta una stazione durante il tragitto verso il lavoro, e PROSM Time è già aperto e presente nella tua mente nel momento in cui arrivi: invece di essere un'app che devi ricordarti di aprire una volta alla scrivania, è già lì, in mano, e Timbra entrata è proprio dove l'hai lasciata. Una piccola spinta deliberata contro l'errore di presenza più comune in assoluto - dimenticarsi semplicemente di timbrare in orario. Il primo elenco viene dalle stazioni del paese indicato dal fuso orario del telefono (Egitto, Golfo, Europa, America...), conservato un giorno per aprirsi subito."
     },
     "offline": {
       "title": "Lavorare senza internet",
@@ -120,7 +120,7 @@
     },
     "managerDashboard": {
       "title": "La dashboard (titolare e responsabili)",
-      "body": "Il titolare e chi ha «Vedere la dashboard» vedono: una barra SOS (finché qualcuno la prende in carico), chip per ciò che attende (solo se c'è qualcosa), i numeri con confronto con il periodo precedente solo se ci sono dati, la mappa dei siti con l'area e i presenti, la tabella dei siti con i lavoratori esterni, la coda delle approvazioni, le persone per ruolo, previsto vs effettivo, indennità e costo stimato (solo con «Vedere il costo stimato») e il registro delle azioni. Scegli organizzazione, i tuoi siti o te stesso, e il periodo; mappa e «presenti» sono in diretta. Si aggiorna ogni minuto; «Personalizza» nasconde o riordina le schede."
+      "body": "Il titolare e chi ha «Vedere la dashboard» vedono: una barra SOS (finché qualcuno la prende in carico), chip per ciò che attende (solo se c'è qualcosa), i numeri con confronto con il periodo precedente solo se ci sono dati, la mappa dei siti con l'area e i presenti, la tabella dei siti con i lavoratori esterni, la coda delle approvazioni, le persone per ruolo, previsto vs effettivo, indennità e costo stimato (solo con «Vedere il costo stimato») e il registro delle azioni. Scegli organizzazione, i tuoi siti o te stesso, e il periodo; mappa e «presenti» sono in diretta. Si aggiorna ogni minuto; «Personalizza» nasconde o riordina le schede. Ogni cifra apre le persone che la compongono - presenti, ore per persona, ritardi, assenti e in ferie, straordinari per persona - con un pulsante verso la pagina completa."
     },
     "peopleAndPhotos": {
       "title": "Persone, ruoli e foto profilo",
