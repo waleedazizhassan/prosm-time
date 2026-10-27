@@ -28,6 +28,7 @@ const HOVER_CLOSE_DELAY_MS = 150;
 function HeaderOrganizationCard() {
   const { t, i18n } = useTranslation("dashboard");
   const { profile } = useAuth();
+  const isOwner = Boolean(profile?.isOwner);
 
   const [organization, setOrganization] = useState<Organization | null>(null);
   const [license, setLicense] = useState<LicenseState | null>(null);
@@ -46,15 +47,16 @@ function HeaderOrganizationCard() {
   const filePickerOpenRef = useRef(false);
 
   const load = useCallback(async () => {
+    // owner 2026-10-27: the licence - its number, users, devices, dates - is the Owner's to see
     const [orgResult, licenseResult, seatsResult] = await Promise.all([
       OrganizationRepository.getCurrentOrganization(),
-      LicenseRepository.getCurrentLicenseState(),
-      LicenseRepository.getSeatUsage(),
+      isOwner ? LicenseRepository.getCurrentLicenseState() : Promise.resolve({ success: false, message: null, data: null }),
+      isOwner ? LicenseRepository.getSeatUsage() : Promise.resolve({ success: false, message: null, data: null }),
     ]);
     if (orgResult.success) setOrganization(orgResult.data);
     if (licenseResult.success) setLicense(licenseResult.data);
     if (seatsResult.success && seatsResult.data) setActiveUsers(seatsResult.data.activeUsers);
-  }, []);
+  }, [isOwner]);
 
   useEffect(() => {
     load();
@@ -221,9 +223,11 @@ function HeaderOrganizationCard() {
             <div className={styles.panelHeader}>
               {organization.logoUrl ? <img src={organization.logoUrl} alt={organization.name} className={styles.panelLogoImage} /> : <span className={styles.panelLogo}>{initial}</span>}
               <div className={styles.panelName}>{organization.name}</div>
-              <button type="button" className={styles.refreshButton} onClick={handleRefresh} aria-label={t("licenseCard.refreshAction")} title={t("licenseCard.refreshAction")}>
-                <RefreshCw size={13} className={refreshing ? styles.spinning : undefined} />
-              </button>
+              {isOwner ? (
+                <button type="button" className={styles.refreshButton} onClick={handleRefresh} aria-label={t("licenseCard.refreshAction")} title={t("licenseCard.refreshAction")}>
+                  <RefreshCw size={13} className={refreshing ? styles.spinning : undefined} />
+                </button>
+              ) : null}
             </div>
 
             <div className={styles.panelRow}>
@@ -246,7 +250,7 @@ function HeaderOrganizationCard() {
               </>
             ) : null}
 
-            {license ? (
+            {isOwner && license ? (
               <>
                 <div className={styles.panelRow}>
                   <span className={styles.panelLabel}>{t("licenseCard.licenseNumberLabel")}</span>

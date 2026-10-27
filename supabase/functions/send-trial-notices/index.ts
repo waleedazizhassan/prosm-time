@@ -1,6 +1,7 @@
 // send-trial-notices - PROSM Time demo (owner 2026-09-29). Called hourly by pg_cron with a
 // private secret (x-trial-secret, kept in the vault and in this function's secrets - never in
-// the code). Claims the due trial notices (a week before the end, and when it ends), which also
+// the code). Claims the due trial notices (a week before the end, and when it ends) - and, since
+// v2.3.55, a paid licence's reminders a month and a week before it ends - which also
 // puts them in the owner's notifications, and emails each owner through PROSM Platform's relay.
 // deno-lint-ignore-file no-explicit-any
 
@@ -17,6 +18,14 @@ function render(kind: string, org: string, license: string, expiresAt: string): 
   const date = new Date(expiresAt).toISOString().slice(0, 10);
   const contacts = `<p><a href="mailto:sales@prosm.net">sales@prosm.net</a> · <a href="mailto:info@prosm.net">info@prosm.net</a> · <a href="mailto:support@prosm.net">support@prosm.net</a></p>`;
   const o = escapeHtml(org), l = escapeHtml(license);
+  // v2.3.55 (owner 2026-10-27): a paid licence ends in a month, or a week
+  if (kind === "LICENSE_MONTH" || kind === "LICENSE_WEEK") {
+    const when = kind === "LICENSE_WEEK" ? ["بعد أسبوع", "in a week"] : ["بعد شهر", "in a month"];
+    return {
+      subject: `ينتهي ترخيص PROSM Time في ${date} | Your PROSM Time licence ends on ${date}`,
+      html: `<div dir="rtl" style="font-family:Tahoma,Arial,sans-serif"><p>ينتهي ترخيص مؤسسة <b>${o}</b> (رقم الترخيص ${l}) ${when[0]}، في ${date}.</p><p>جدّد الترخيص قبل هذا التاريخ ليستمر البرنامج دون توقف، وتبقى كل بياناتك محفوظة:</p>${contacts}</div><hr><div dir="ltr" style="font-family:Arial,sans-serif"><p>The licence of <b>${o}</b> (licence ${l}) ends ${when[1]}, on ${date}.</p><p>Renew it before then so the app keeps running; all your data is kept:</p>${contacts}</div>`,
+    };
+  }
   if (kind === "ENDING") {
     return {
       subject: `تنتهي الفترة التجريبية لـ PROSM Time في ${date} | Your PROSM Time trial ends on ${date}`,

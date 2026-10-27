@@ -363,7 +363,9 @@
       "costNote": "stima dalle tariffe",
       "vsPrevious": "{{change}} rispetto al periodo precedente",
       "external": "Lavoratori esterni ora",
-      "externalSites": "in {{count}} sito/i"
+      "externalSites": "in {{count}} sito/i",
+      "overdue": "Uscita non timbrata",
+      "overdueHint": "Un'ora dopo la fine del turno"
     },
     "map": {
       "title": "I siti ora",
@@ -522,20 +524,23 @@
         "present": "Presenti ora",
         "hours": "Ore per persona",
         "late": "Ritardi",
-        "overtime": "Straordinari per persona"
+        "overtime": "Straordinari per persona",
+        "overdue": "Uscita non timbrata"
       },
       "open": {
         "present": "Presenze di oggi",
         "hours": "Registro completo",
         "late": "Rapporto ritardi",
         "overtime": "Approva straordinari",
-        "absent": "Rapporto assenze"
+        "absent": "Rapporto assenze",
+        "overdue": "Rapporto uscite mancanti"
       },
       "empty": {
         "present": "Nessuno ha timbrato.",
         "hours": "Nessuna ora in questo periodo.",
         "late": "Nessun ritardo in questo periodo.",
-        "overtime": "Nessuno straordinario in questo periodo."
+        "overtime": "Nessuno straordinario in questo periodo.",
+        "overdue": "Nessuno ha dimenticato di timbrare l'uscita."
       },
       "periodNote": "Per il periodo scelto sopra.",
       "lateBy": "{{minutes}} min · entrato alle {{time}}",
@@ -554,8 +559,16 @@
         "today": "Oggi",
         "lateDays": "Giorni di ritardo",
         "lateTotal": "Ritardo totale",
-        "overtimeWaiting": "Da approvare"
-      }
+        "overtimeWaiting": "Da approvare",
+        "shiftEnded": "Fine turno",
+        "overdueBy": "In ritardo"
+      },
+      "overdueFor": "{{hours}} h {{minutes}} min",
+      "clockOutAction": "Timbra uscita"
+    },
+    "export": {
+      "action": "Esporta PDF",
+      "asOf": "alle {{time}}"
     }
   }
 }

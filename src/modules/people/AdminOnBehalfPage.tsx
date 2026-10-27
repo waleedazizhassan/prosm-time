@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Navigate } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
 
 import { useAuth } from "../../core/context/AuthContext";
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
@@ -28,7 +28,9 @@ export default function AdminOnBehalfPage() {
 
   const [members, setMembers] = useState<OrgMember[]>([]);
   const [loading, setLoading] = useState(true);
-  const [subjectId, setSubjectId] = useState("");
+  // owner 2026-10-27: the dashboard's "didn't clock out" opens here with the person chosen
+  const [searchParams] = useSearchParams();
+  const [subjectId, setSubjectId] = useState(searchParams.get("user") ?? "");
 
   useEffect(() => {
     if (!canUse) return;

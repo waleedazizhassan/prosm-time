@@ -363,7 +363,9 @@
       "costNote": "estimation d'après les taux",
       "vsPrevious": "{{change}} vs période précédente",
       "external": "Travailleurs externes présents",
-      "externalSites": "sur {{count}} site(s)"
+      "externalSites": "sur {{count}} site(s)",
+      "overdue": "Sortie non pointée",
+      "overdueHint": "Une heure après la fin du poste"
     },
     "map": {
       "title": "Les sites maintenant",
@@ -522,20 +524,23 @@
         "present": "Présents",
         "hours": "Heures par personne",
         "late": "Retards",
-        "overtime": "Heures sup. par personne"
+        "overtime": "Heures sup. par personne",
+        "overdue": "Sortie non pointée"
       },
       "open": {
         "present": "Pointages du jour",
         "hours": "Registre complet",
         "late": "Rapport des retards",
         "overtime": "Approuver les heures sup.",
-        "absent": "Rapport des absences"
+        "absent": "Rapport des absences",
+        "overdue": "Rapport des sorties manquantes"
       },
       "empty": {
         "present": "Personne n'est pointé.",
         "hours": "Aucune heure sur cette période.",
         "late": "Aucun retard sur cette période.",
-        "overtime": "Aucune heure sup. sur cette période."
+        "overtime": "Aucune heure sup. sur cette période.",
+        "overdue": "Personne n'a oublié de pointer sa sortie."
       },
       "periodNote": "Pour la période choisie en haut.",
       "lateBy": "{{minutes}} min · arrivé à {{time}}",
@@ -554,8 +559,16 @@
         "today": "Aujourd'hui",
         "lateDays": "Jours de retard",
         "lateTotal": "Retard total",
-        "overtimeWaiting": "À approuver"
-      }
+        "overtimeWaiting": "À approuver",
+        "shiftEnded": "Fin du poste",
+        "overdueBy": "Retard"
+      },
+      "overdueFor": "{{hours}} h {{minutes}} min",
+      "clockOutAction": "Pointer la sortie"
+    },
+    "export": {
+      "action": "Exporter en PDF",
+      "asOf": "à {{time}}"
     }
   }
 }

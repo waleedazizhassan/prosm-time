@@ -16,7 +16,8 @@
     "absences": "Absences",
     "managerOverrides": "Interventions manager",
     "locationViolations": "Violations de localisation",
-    "sos": "Urgence (SOS)"
+    "sos": "Urgence (SOS)",
+    "dashboard": "Tableau de bord"
   },
   "timesheetsHint": "Les feuilles de temps sont générées et approuvées par employé et par période, pas par plage de dates.",
   "timesheetsLink": "Aller aux feuilles de temps",

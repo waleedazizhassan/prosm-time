@@ -16,7 +16,8 @@
     "absences": "Assenze",
     "managerOverrides": "Interventi manager",
     "locationViolations": "Violazioni di posizione",
-    "sos": "Emergenza (SOS)"
+    "sos": "Emergenza (SOS)",
+    "dashboard": "Dashboard"
   },
   "timesheetsHint": "I fogli ore vengono generati e approvati per dipendente e periodo, non per intervallo di date.",
   "timesheetsLink": "Vai ai fogli ore",

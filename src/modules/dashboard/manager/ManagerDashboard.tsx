@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { AlertTriangle, ArrowDown, ArrowUp, CalendarRange, GripVertical, Settings2, UserPlus } from "lucide-react";
+import { AlertTriangle, ArrowDown, ArrowUp, CalendarRange, FileDown, GripVertical, Settings2, UserPlus } from "lucide-react";
 
 import { useAuth } from "../../../core/context/AuthContext";
 import DashboardRepository, { type DashboardScope, type DashboardSite, type ManagerDashboard as Dashboard } from "../../../core/repositories/DashboardRepository";
@@ -26,6 +26,9 @@ import { auditLabel, DEFAULT_ORDER, iso, mergeOrder, periodRange, trend, type Pe
 import EmptyState from "../../../components/common/EmptyState";
 import leaveTypeLabel from "../../leave/leaveTypeLabel";
 import KpiSheet, { type KpiSheetKind } from "./KpiSheet";
+import { buildDashboardPdf } from "./dashboardPdf";
+import OrganizationRepository from "../../../core/repositories/OrganizationRepository";
+import savePdfDocument, { exportFileName } from "../../../core/utils/savePdfDocument";
 import GrantLeaveModal from "../../leave/GrantLeaveModal";
 import Dropdown from "../../../components/common/Dropdown";
 
@@ -68,6 +71,19 @@ export default function ManagerDashboard() {
   const [grantDone, setGrantDone] = useState("");
   // owner 2026-10-27: each figure opens the people behind it
   const [sheet, setSheet] = useState<KpiSheetKind | null>(null);
+  // owner 2026-10-27: the dashboard to PDF, for the chosen period
+  const [exporting, setExporting] = useState(false);
+  const exportPdf = async () => {
+    if (!data) return;
+    setExporting(true);
+    try {
+      const organization = await OrganizationRepository.getCurrentOrganization();
+      const doc = await buildDashboardPdf(data, range.from, range.to, i18n.language, t, time, organization.data?.logoUrl ?? null);
+      await savePdfDocument(doc, exportFileName(t("manager.title"), range.from, range.to), "dashboard", range.from, range.to);
+    } finally {
+      setExporting(false);
+    }
+  };
   const openPage = (kind: KpiSheetKind | "absent") => {
     setSheet(null);
     setAbsenceOpen(false);
@@ -75,6 +91,7 @@ export default function ManagerDashboard() {
     if (kind === "present") navigate("/attendance?period=today");
     else if (kind === "hours") navigate(`/attendance?period=${attendancePeriod}`);
     else if (kind === "late") navigate("/reports?type=late");
+    else if (kind === "overdue") navigate("/reports?type=missingCheckouts");
     else if (kind === "absent") navigate("/reports?type=absences");
     else navigate("/manager");
   };
@@ -196,7 +213,9 @@ export default function ManagerDashboard() {
   const siteNames = useMemo(() => new Map((data?.sites ?? []).map((site) => [site.id, site.name])), [data]);
 
   // the figure cards share a row evenly (no 5 + 2 with a gap)
-  const kpiCount = 5 + (data?.canViewExternal ? 1 : 0) + (data?.canViewCost && kpi?.estimatedCost !== null ? 1 : 0);
+  const kpiCount = 6 + (data?.canViewExternal ? 1 : 0) + (data?.canViewCost && kpi?.estimatedCost !== null ? 1 : 0);
+  const overdueCount = data?.overdue?.length ?? 0;
+  const canClockOutOthers = isOwner || hasPermission("attendance.clock_out_on_behalf");
 
   const workedTrend = trend(kpi?.workedMinutes ?? 0, kpi?.previous?.workedMinutes);
   const overtimeTrend = trend(kpi?.overtimeMinutes ?? 0, kpi?.previous?.overtimeMinutes, true);
@@ -439,6 +458,9 @@ export default function ManagerDashboard() {
               <UserPlus size={14} /> {t("manager.proxyClock")}
             </Button>
           ) : null}
+          <Button size="sm" variant="ghost" onClick={exportPdf} loading={exporting} disabled={!data} aria-label={t("manager.export.action")} title={t("manager.export.action")}>
+            <FileDown size={14} /> <span className={styles.actionLabel}>{t("manager.export.action")}</span>
+          </Button>
           <Button size="sm" variant="ghost" onClick={() => setCustomizeOpen(true)} aria-label={t("manager.customize")} title={t("manager.customize")}>
             <Settings2 size={14} /> <span className={styles.actionLabel}>{t("manager.customize")}</span>
           </Button>
@@ -538,6 +560,12 @@ export default function ManagerDashboard() {
             <span className={styles.kpiValue}>{kpi.absentToday}</span>
             <span className={styles.kpiHint}>{t("manager.kpi.onLeave", { count: kpi.onLeaveToday })}</span>
           </button>
+          {/* owner 2026-10-27: still clocked in an hour or more after the shift ended */}
+          <button type="button" className={`${styles.kpi} ${overdueCount > 0 ? styles.kpiAlert : ""}`} onClick={() => setSheet("overdue")}>
+            <span className={styles.kpiLabel}>{t("manager.kpi.overdue")}</span>
+            <span className={styles.kpiValue}>{overdueCount}</span>
+            <span className={styles.kpiHint}>{t("manager.kpi.overdueHint")}</span>
+          </button>
           <button type="button" className={styles.kpi} onClick={() => setSheet("overtime")}>
             <span className={styles.kpiLabel}>{t("manager.kpi.overtime")}</span>
             <span className={styles.kpiValue}>{hours(kpi.overtimeMinutes)}</span>
@@ -565,7 +593,14 @@ export default function ManagerDashboard() {
       <div className={styles.grid}>{order.map(renderWidget)}</div>
 
       {/* owner 2026-10-26: the absent-today card opens the day's sheet - absent first, then on leave */}
-      <KpiSheet kind={sheet} data={data} time={time} onClose={() => setSheet(null)} onOpenPage={openPage} />
+      <KpiSheet
+        kind={sheet}
+        data={data}
+        time={time}
+        onClose={() => setSheet(null)}
+        onOpenPage={openPage}
+        onClockOut={canClockOutOthers ? (userId) => navigate(`/admin-clock?user=${userId}`) : undefined}
+      />
       <GrantLeaveModal
         person={grantFor}
         onClose={() => setGrantFor(null)}

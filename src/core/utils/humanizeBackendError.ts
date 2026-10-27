@@ -321,6 +321,9 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "NOT ENOUGH LEAVE BALANCE": "notEnoughLeaveBalance",
   // v2.3.54: leave recorded on someone's behalf (grant_prosm_time_leave).
   "YOU CANNOT GRANT LEAVE TO YOURSELF": "grantLeaveSelf",
+  // v2.3.55: the licence's user limit, and licence details being the Owner's
+  "LICENSED USER LIMIT REACHED": "licensedUserLimit",
+  "ONLY THE OWNER CAN SEE THE LICENCE": "ownerOnlyLicence",
   "CHOOSE SOMEONE WHO CAN APPROVE YOUR LEAVE": "chooseLeaveReviewer",
   "THIS EMPLOYEE ALREADY HAS A PENDING OR APPROVED LEAVE ON THESE DATES": "grantLeaveOverlap",
   "INVALID LEAVE TYPE": "invalidLeaveType",

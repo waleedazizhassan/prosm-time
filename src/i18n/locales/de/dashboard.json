@@ -361,7 +361,9 @@
       "costNote": "Schätzung nach Sätzen",
       "vsPrevious": "{{change}} ggü. Vorperiode",
       "external": "Externe Kräfte jetzt",
-      "externalSites": "an {{count}} Standort(en)"
+      "externalSites": "an {{count}} Standort(en)",
+      "overdue": "Nicht ausgestempelt",
+      "overdueHint": "Eine Stunde nach Schichtende"
     },
     "map": {
       "title": "Standorte jetzt",
@@ -520,20 +522,23 @@
         "present": "Jetzt anwesend",
         "hours": "Stunden pro Person",
         "late": "Verspätungen",
-        "overtime": "Überstunden pro Person"
+        "overtime": "Überstunden pro Person",
+        "overdue": "Nicht ausgestempelt"
       },
       "open": {
         "present": "Heutige Anwesenheit",
         "hours": "Vollständiges Protokoll",
         "late": "Verspätungsbericht",
         "overtime": "Überstunden genehmigen",
-        "absent": "Abwesenheitsbericht"
+        "absent": "Abwesenheitsbericht",
+        "overdue": "Bericht fehlende Ausstempelungen"
       },
       "empty": {
         "present": "Niemand ist eingestempelt.",
         "hours": "Keine Stunden in diesem Zeitraum.",
         "late": "Keine Verspätungen in diesem Zeitraum.",
-        "overtime": "Keine Überstunden in diesem Zeitraum."
+        "overtime": "Keine Überstunden in diesem Zeitraum.",
+        "overdue": "Niemand hat das Ausstempeln vergessen."
       },
       "periodNote": "Für den oben gewählten Zeitraum.",
       "lateBy": "{{minutes}} Min. · da um {{time}}",
@@ -551,8 +556,16 @@
         "today": "Heute",
         "lateDays": "Verspätete Tage",
         "lateTotal": "Verspätung gesamt",
-        "overtimeWaiting": "Wartet auf Freigabe"
-      }
+        "overtimeWaiting": "Wartet auf Freigabe",
+        "shiftEnded": "Schicht endete",
+        "overdueBy": "Überfällig"
+      },
+      "overdueFor": "{{hours}} Std. {{minutes}} Min.",
+      "clockOutAction": "Ausstempeln"
+    },
+    "export": {
+      "action": "Als PDF exportieren",
+      "asOf": "Stand {{time}}"
     }
   }
 }

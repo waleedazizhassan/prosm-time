@@ -16,7 +16,8 @@
     "absences": "Abwesenheiten",
     "managerOverrides": "Manager-Eingriffe",
     "locationViolations": "Standortverstöße",
-    "sos": "Notfall (SOS)"
+    "sos": "Notfall (SOS)",
+    "dashboard": "Dashboard"
   },
   "timesheetsHint": "Stundenzettel werden pro Mitarbeiter und Zeitraum erstellt und genehmigt, nicht nach Datumsbereich.",
   "timesheetsLink": "Zu den Stundenzetteln",

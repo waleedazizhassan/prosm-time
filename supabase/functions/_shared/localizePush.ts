@@ -135,6 +135,9 @@ export function localizePush(type: string, data: Data, language: string, fallbac
     case "trial_ended":
       result = pair("trial.endedTitle", "trial.endedBody");
       break;
+    case "license_ending":
+      result = pair("trial.licenseEndingTitle", "trial.licenseEndingBody", { date: str(data.expiresAt)?.slice(0, 10) ?? "", license: str(data.licenseNumber) ?? "" });
+      break;
     case "shift_assigned": {
       const date = str(data.shiftDate);
       if (!date) break;

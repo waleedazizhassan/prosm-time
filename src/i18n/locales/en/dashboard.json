@@ -361,7 +361,9 @@
       "costNote": "estimate from pay rates",
       "vsPrevious": "{{change}} vs previous period",
       "external": "External workers now",
-      "externalSites": "at {{count}} site(s)"
+      "externalSites": "at {{count}} site(s)",
+      "overdue": "Not clocked out",
+      "overdueHint": "An hour after their shift ended"
     },
     "map": {
       "title": "Sites now",
@@ -520,20 +522,23 @@
         "present": "Here now",
         "hours": "Hours by person",
         "late": "Lateness",
-        "overtime": "Overtime by person"
+        "overtime": "Overtime by person",
+        "overdue": "Not clocked out"
       },
       "open": {
         "present": "Today's attendance record",
         "hours": "Full attendance record",
         "late": "Lateness report",
         "overtime": "Approve overtime",
-        "absent": "Absence report"
+        "absent": "Absence report",
+        "overdue": "Missing clock-outs report"
       },
       "empty": {
         "present": "Nobody is clocked in now.",
         "hours": "No hours recorded in this period.",
         "late": "Nobody was late in this period.",
-        "overtime": "No overtime in this period."
+        "overtime": "No overtime in this period.",
+        "overdue": "Nobody is overdue to clock out."
       },
       "periodNote": "For the period chosen above.",
       "lateBy": "{{minutes}} min · in at {{time}}",
@@ -551,8 +556,16 @@
         "today": "Today",
         "lateDays": "Late days",
         "lateTotal": "Total late",
-        "overtimeWaiting": "Awaiting approval"
-      }
+        "overtimeWaiting": "Awaiting approval",
+        "shiftEnded": "Shift ended",
+        "overdueBy": "Overdue"
+      },
+      "overdueFor": "{{hours}} h {{minutes}} min",
+      "clockOutAction": "Clock out"
+    },
+    "export": {
+      "action": "Export PDF",
+      "asOf": "as of {{time}}"
     }
   }
 }

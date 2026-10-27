@@ -8,7 +8,7 @@ import Modal from "../../../components/common/Modal";
 import type { ManagerDashboard as Dashboard } from "../../../core/repositories/DashboardRepository";
 import styles from "./ManagerDashboard.module.css";
 
-export type KpiSheetKind = "present" | "hours" | "late" | "overtime";
+export type KpiSheetKind = "present" | "hours" | "late" | "overtime" | "overdue";
 
 const hours = (minutes: number) => Math.round((Number(minutes) / 60) * 10) / 10;
 
@@ -21,12 +21,15 @@ export default function KpiSheet({
   time,
   onClose,
   onOpenPage,
+  onClockOut,
 }: {
   kind: KpiSheetKind | null;
   data: Dashboard | null;
   time: (value: string) => string;
   onClose: () => void;
   onOpenPage: (kind: KpiSheetKind) => void;
+  // owner 2026-10-27: clock someone out on their behalf (only for whoever may)
+  onClockOut?: (userId: string) => void;
 }) {
   const { t } = useTranslation("dashboard");
   if (!kind || !data) return null;
@@ -53,7 +56,34 @@ export default function KpiSheet({
 
   let rows: ReactNode = null;
   let count = 0;
-  if (kind === "present") {
+  if (kind === "overdue") {
+    const shown = data.overdue ?? [];
+    count = shown.length;
+    rows = (
+      <table className={styles.table}>
+        {head(col("name"), col("site"), col("shiftEnded"), col("overdueBy"), ...(onClockOut ? [""] : []))}
+        <tbody>
+          {shown.map((row) => (
+            <tr key={row.userId}>
+              {person(row.name, row.avatarUrl)}
+              <td data-label={col("site")}>{row.siteName ?? "—"}</td>
+              <td data-label={col("shiftEnded")}>{time(row.endedAt)}</td>
+              <td data-label={col("overdueBy")}>
+                <span className={styles.statusBad}>{t("manager.sheet.overdueFor", { hours: Math.floor(row.overdueMinutes / 60), minutes: Math.round(row.overdueMinutes % 60) })}</span>
+              </td>
+              {onClockOut ? (
+                <td>
+                  <Button size="sm" variant="ghost" onClick={() => onClockOut(row.userId)}>
+                    {t("manager.sheet.clockOutAction")}
+                  </Button>
+                </td>
+              ) : null}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  } else if (kind === "present") {
     count = data.presentNow.length;
     rows = (
       <table className={styles.table}>
@@ -147,7 +177,7 @@ export default function KpiSheet({
         </Button>
       }
     >
-      {kind !== "present" ? <p className={styles.rowMeta}>{t("manager.sheet.periodNote")}</p> : null}
+      {kind !== "present" && kind !== "overdue" ? <p className={styles.rowMeta}>{t("manager.sheet.periodNote")}</p> : null}
       {count === 0 ? <EmptyState message={t(`manager.sheet.empty.${kind}`)} /> : rows}
     </Modal>
   );

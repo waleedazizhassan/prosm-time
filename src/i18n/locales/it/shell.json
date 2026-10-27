@@ -142,7 +142,9 @@
       "endingTitle": "La tua prova di PROSM Time sta per scadere",
       "endingBody": "La tua prova scade tra una settimana. I tuoi dati sono conservati e non verranno eliminati. Per continuare, inserisci un codice di attivazione o contattaci a sales@prosm.net.",
       "endedTitle": "La tua prova di PROSM Time è terminata",
-      "endedBody": "L'app è in pausa e tutti i tuoi dati sono conservati. Inserisci un codice di attivazione o contattaci a sales@prosm.net e tutto tornerà come prima."
+      "endedBody": "L'app è in pausa e tutti i tuoi dati sono conservati. Inserisci un codice di attivazione o contattaci a sales@prosm.net e tutto tornerà come prima.",
+      "licenseEndingTitle": "La licenza PROSM Time scade presto",
+      "licenseEndingBody": "La licenza {{license}} scade il {{date}}. Rinnovala prima perché l'app continui; tutti i dati restano. Contatto: sales@prosm.net."
     },
     "decision": {
       "approved": "Approvato",

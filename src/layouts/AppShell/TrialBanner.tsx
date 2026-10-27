@@ -26,7 +26,8 @@ export default function TrialBanner() {
   const { status } = useTrialStatus(true);
   const today = new Date().toISOString().slice(0, 10);
   const [hidden, setHidden] = useState(readHidden());
-  if (!status?.isTrial || status.locked) return null;
+  // owner 2026-10-27: licence matters are the Owner's
+  if (!status?.isTrial || status.locked || !status.isOwner) return null;
   const closing = (status.daysLeft ?? 0) <= RETURNS_AT_DAYS;
   if (hidden && (!closing || hidden === today)) return null;
   const close = () => {

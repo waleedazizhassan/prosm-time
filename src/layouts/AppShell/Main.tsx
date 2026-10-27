@@ -15,7 +15,7 @@ export default function Main({ children }: { children: ReactNode }) {
   const { t } = useTranslation("common");
   const { t: tShell } = useTranslation("shell");
   const { status } = useTrialStatus(true);
-  const trial = status?.isTrial && !status.locked;
+  const trial = status?.isTrial && !status.locked && status.isOwner;
   return (
     <main className={styles.main}>
       {children}

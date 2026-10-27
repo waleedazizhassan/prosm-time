@@ -1,12 +1,12 @@
 // v2.3.55 (owner 2026-10-27): the company card shows the licence's users
-// against the organisation's active people, whoever reads it. Migration 20261027140000.
+// against the organisation's active people - the Owner's to see (20261027150000). Migration 20261027140000.
 import { describe, expect, it } from "vitest";
 
 import { buildDatabase } from "./support/db";
 import { addMember, assignToSite, createOrg, createSite } from "./support/fixtures";
 
 describe("seat usage", () => {
-  it("counts every active person of the organisation, for a manager too, and nobody else's", async () => {
+  it("counts every active person of the organisation, and nobody else's", async () => {
     const t = await buildDatabase();
     const org = await createOrg(t, "Seats Co");
     const other = await createOrg(t, "Other Co");
@@ -21,7 +21,7 @@ describe("seat usage", () => {
     await t.su("update users set is_active = false where id = $1", [gone.userId]);
     await t.su("update license_activation_state set max_users = 10 where organization_id = $1", [org.id]);
 
-    const seen = await t.as<{ s: { activeUsers: number; maxUsers: number } }>(manager.authId, "select public.get_prosm_time_seat_usage() as s");
+    const seen = await t.as<{ s: { activeUsers: number; maxUsers: number } }>(org.owner.authId, "select public.get_prosm_time_seat_usage() as s");
     expect(seen.error).toBeNull();
     // the Owner, Mona, A and B - not the one who left, not the other company's
     expect(seen.rows![0].s).toEqual({ activeUsers: 4, maxUsers: 10 });

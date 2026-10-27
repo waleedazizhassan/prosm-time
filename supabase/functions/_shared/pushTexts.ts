@@ -89,7 +89,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "endingTitle": "الفترة التجريبية لـ PROSM Time تنتهي قريبًا",
         "endingBody": "تنتهي الفترة التجريبية بعد أسبوع. بياناتك محفوظة ولن تُحذف. للاستمرار أدخل كود تفعيل أو تواصل معنا على sales@prosm.net.",
         "endedTitle": "انتهت الفترة التجريبية لـ PROSM Time",
-        "endedBody": "البرنامج متوقف مؤقتًا وكل بياناتك محفوظة. أدخل كود تفعيل أو تواصل معنا على sales@prosm.net وسيعود كل شيء كما كان."
+        "endedBody": "البرنامج متوقف مؤقتًا وكل بياناتك محفوظة. أدخل كود تفعيل أو تواصل معنا على sales@prosm.net وسيعود كل شيء كما كان.",
+        "licenseEndingTitle": "ترخيص PROSM Time ينتهي قريبًا",
+        "licenseEndingBody": "ينتهي الترخيص {{license}} في {{date}}. جدّده قبل هذا التاريخ ليستمر البرنامج دون توقف، وكل بياناتك محفوظة. تواصل معنا على sales@prosm.net."
       },
       "decision": {
         "approved": "تمت الموافقة",
@@ -236,7 +238,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "endingTitle": "Your PROSM Time trial ends soon",
         "endingBody": "Your trial ends in a week. Your data is kept and will not be deleted. To continue, enter an activation code or contact us at sales@prosm.net.",
         "endedTitle": "Your PROSM Time trial has ended",
-        "endedBody": "The app is paused and all your data is kept. Enter an activation code or contact us at sales@prosm.net and everything returns as it was."
+        "endedBody": "The app is paused and all your data is kept. Enter an activation code or contact us at sales@prosm.net and everything returns as it was.",
+        "licenseEndingTitle": "Your PROSM Time licence ends soon",
+        "licenseEndingBody": "Licence {{license}} ends on {{date}}. Renew it before then so the app keeps running; all your data is kept. Contact sales@prosm.net."
       },
       "decision": {
         "approved": "Approved",
@@ -383,7 +387,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "endingTitle": "Ihre PROSM Time-Testphase endet bald",
         "endingBody": "Ihre Testphase endet in einer Woche. Ihre Daten bleiben erhalten und werden nicht gelöscht. Um weiterzumachen, geben Sie einen Aktivierungscode ein oder kontaktieren Sie uns unter sales@prosm.net.",
         "endedTitle": "Ihre PROSM Time-Testphase ist beendet",
-        "endedBody": "Die App ist pausiert, alle Ihre Daten bleiben erhalten. Geben Sie einen Aktivierungscode ein oder kontaktieren Sie uns unter sales@prosm.net, und alles ist wieder wie vorher."
+        "endedBody": "Die App ist pausiert, alle Ihre Daten bleiben erhalten. Geben Sie einen Aktivierungscode ein oder kontaktieren Sie uns unter sales@prosm.net, und alles ist wieder wie vorher.",
+        "licenseEndingTitle": "Ihre PROSM Time Lizenz endet bald",
+        "licenseEndingBody": "Lizenz {{license}} endet am {{date}}. Verlängern Sie sie vorher, damit die App weiterläuft; alle Daten bleiben erhalten. Kontakt: sales@prosm.net."
       },
       "decision": {
         "approved": "Genehmigt",
@@ -530,7 +536,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "endingTitle": "Votre essai PROSM Time se termine bientôt",
         "endingBody": "Votre essai se termine dans une semaine. Vos données sont conservées et ne seront pas supprimées. Pour continuer, saisissez un code d'activation ou contactez-nous à sales@prosm.net.",
         "endedTitle": "Votre essai PROSM Time est terminé",
-        "endedBody": "L'application est en pause et toutes vos données sont conservées. Saisissez un code d'activation ou contactez-nous à sales@prosm.net et tout redeviendra comme avant."
+        "endedBody": "L'application est en pause et toutes vos données sont conservées. Saisissez un code d'activation ou contactez-nous à sales@prosm.net et tout redeviendra comme avant.",
+        "licenseEndingTitle": "Votre licence PROSM Time expire bientôt",
+        "licenseEndingBody": "La licence {{license}} expire le {{date}}. Renouvelez-la avant pour que l'application continue ; vos données sont conservées. Contact : sales@prosm.net."
       },
       "decision": {
         "approved": "Approuvé",
@@ -677,7 +685,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "endingTitle": "La tua prova di PROSM Time sta per scadere",
         "endingBody": "La tua prova scade tra una settimana. I tuoi dati sono conservati e non verranno eliminati. Per continuare, inserisci un codice di attivazione o contattaci a sales@prosm.net.",
         "endedTitle": "La tua prova di PROSM Time è terminata",
-        "endedBody": "L'app è in pausa e tutti i tuoi dati sono conservati. Inserisci un codice di attivazione o contattaci a sales@prosm.net e tutto tornerà come prima."
+        "endedBody": "L'app è in pausa e tutti i tuoi dati sono conservati. Inserisci un codice di attivazione o contattaci a sales@prosm.net e tutto tornerà come prima.",
+        "licenseEndingTitle": "La licenza PROSM Time scade presto",
+        "licenseEndingBody": "La licenza {{license}} scade il {{date}}. Rinnovala prima perché l'app continui; tutti i dati restano. Contatto: sales@prosm.net."
       },
       "decision": {
         "approved": "Approvato",

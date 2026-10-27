@@ -16,7 +16,8 @@
     "absences": "الغياب",
     "managerOverrides": "تدخلات المدير",
     "locationViolations": "مخالفات الموقع",
-    "sos": "الطوارئ"
+    "sos": "الطوارئ",
+    "dashboard": "لوحة التحكم"
   },
   "timesheetsHint": "كشوف الدوام تُنشأ وتُعتمد لكل موظف وفترة على حدة، مش بنطاق تاريخ.",
   "timesheetsLink": "الذهاب إلى كشوف الدوام",

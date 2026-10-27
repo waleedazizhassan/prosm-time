@@ -142,7 +142,9 @@
       "endingTitle": "Votre essai PROSM Time se termine bientôt",
       "endingBody": "Votre essai se termine dans une semaine. Vos données sont conservées et ne seront pas supprimées. Pour continuer, saisissez un code d'activation ou contactez-nous à sales@prosm.net.",
       "endedTitle": "Votre essai PROSM Time est terminé",
-      "endedBody": "L'application est en pause et toutes vos données sont conservées. Saisissez un code d'activation ou contactez-nous à sales@prosm.net et tout redeviendra comme avant."
+      "endedBody": "L'application est en pause et toutes vos données sont conservées. Saisissez un code d'activation ou contactez-nous à sales@prosm.net et tout redeviendra comme avant.",
+      "licenseEndingTitle": "Votre licence PROSM Time expire bientôt",
+      "licenseEndingBody": "La licence {{license}} expire le {{date}}. Renouvelez-la avant pour que l'application continue ; vos données sont conservées. Contact : sales@prosm.net."
     },
     "decision": {
       "approved": "Approuvé",

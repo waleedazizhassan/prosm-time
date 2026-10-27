@@ -280,7 +280,9 @@
     "invalidLeaveType": "Questo tipo di ferie non è valido.",
     "notAuthorizedReviewLeave": "Non sei autorizzato ad approvare le ferie.",
     "endBeforeStart": "La data di fine è prima della data di inizio.",
-    "chooseLeaveReviewer": "Scegli qualcuno che può approvare le tue ferie."
+    "chooseLeaveReviewer": "Scegli qualcuno che può approvare le tue ferie.",
+    "licensedUserLimit": "Il limite di utenti della licenza è raggiunto. Disattiva un account non più usato o contatta sales@prosm.net.",
+    "ownerOnlyLicence": "Solo il titolare può vedere la licenza."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

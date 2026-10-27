@@ -142,7 +142,9 @@
       "endingTitle": "Your PROSM Time trial ends soon",
       "endingBody": "Your trial ends in a week. Your data is kept and will not be deleted. To continue, enter an activation code or contact us at sales@prosm.net.",
       "endedTitle": "Your PROSM Time trial has ended",
-      "endedBody": "The app is paused and all your data is kept. Enter an activation code or contact us at sales@prosm.net and everything returns as it was."
+      "endedBody": "The app is paused and all your data is kept. Enter an activation code or contact us at sales@prosm.net and everything returns as it was.",
+      "licenseEndingTitle": "Your PROSM Time licence ends soon",
+      "licenseEndingBody": "Licence {{license}} ends on {{date}}. Renew it before then so the app keeps running; all your data is kept. Contact sales@prosm.net."
     },
     "decision": {
       "approved": "Approved",

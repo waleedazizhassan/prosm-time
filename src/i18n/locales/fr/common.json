@@ -280,7 +280,9 @@
     "invalidLeaveType": "Ce type de congé n'est pas valide.",
     "notAuthorizedReviewLeave": "Vous n'êtes pas autorisé à approuver les congés.",
     "endBeforeStart": "La date de fin précède la date de début.",
-    "chooseLeaveReviewer": "Choisissez une personne qui peut approuver votre congé."
+    "chooseLeaveReviewer": "Choisissez une personne qui peut approuver votre congé.",
+    "licensedUserLimit": "La limite d'utilisateurs de votre licence est atteinte. Désactivez un compte inutilisé ou contactez sales@prosm.net.",
+    "ownerOnlyLicence": "Seul le propriétaire peut voir la licence."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

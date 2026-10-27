@@ -280,7 +280,9 @@
     "invalidLeaveType": "This leave type is not valid.",
     "notAuthorizedReviewLeave": "You are not allowed to approve leave.",
     "endBeforeStart": "The end date is before the start date.",
-    "chooseLeaveReviewer": "Choose someone who can approve your leave."
+    "chooseLeaveReviewer": "Choose someone who can approve your leave.",
+    "licensedUserLimit": "Your licence's user limit is reached. Deactivate someone who no longer works here, or contact sales@prosm.net for more users.",
+    "ownerOnlyLicence": "Only the owner can see the licence."
   },
   "pageLoad": {
     "title": "This page needs a connection",

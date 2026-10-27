@@ -167,6 +167,11 @@ export default function localizeNotification(notification: AppNotification, t: T
       return { title: t("shell:notifications.trial.endingTitle"), body: t("shell:notifications.trial.endingBody") };
     case "trial_ended":
       return { title: t("shell:notifications.trial.endedTitle"), body: t("shell:notifications.trial.endedBody") };
+    // v2.3.55: a paid licence ends in a month, or a week
+    case "license_ending": {
+      const ends = typeof data.expiresAt === "string" ? data.expiresAt.slice(0, 10) : "";
+      return { title: t("shell:notifications.trial.licenseEndingTitle"), body: t("shell:notifications.trial.licenseEndingBody", { date: ends, license: typeof data.licenseNumber === "string" ? data.licenseNumber : "" }) };
+    }
     case "shift_assigned": {
       const shiftDate = typeof data.shiftDate === "string" ? data.shiftDate : null;
       if (!shiftDate) break;

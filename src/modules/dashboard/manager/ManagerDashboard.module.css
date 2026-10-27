@@ -638,3 +638,12 @@
     grid-column: 1 / -1;
   }
 }
+
+/* owner 2026-10-27: a figure that needs action now (someone still clocked in past their shift) */
+.kpi.kpiAlert {
+  border-color: var(--brand-danger);
+}
+
+.kpi.kpiAlert .kpiValue {
+  color: var(--brand-danger);
+}

@@ -16,7 +16,8 @@
     "absences": "Absences",
     "managerOverrides": "Manager Overrides",
     "locationViolations": "Location Violations",
-    "sos": "Emergency (SOS)"
+    "sos": "Emergency (SOS)",
+    "dashboard": "Dashboard"
   },
   "timesheetsHint": "Timesheets are generated and approved per employee and period, not by date range.",
   "timesheetsLink": "Go to Timesheets",
