@@ -274,7 +274,12 @@
     "invalidExitPolicy": "Controlla le impostazioni.",
     "dashboardViewRequired": "Non hai accesso alla dashboard.",
     "invalidLayout": "Impossibile salvare la disposizione dei widget.",
-    "trialSetupFailed": "Impossibile avviare la prova. Riprova."
+    "trialSetupFailed": "Impossibile avviare la prova. Riprova.",
+    "grantLeaveSelf": "Non puoi registrare ferie per te stesso qui.",
+    "grantLeaveOverlap": "Questo dipendente ha già ferie in attesa o approvate in questi giorni.",
+    "invalidLeaveType": "Questo tipo di ferie non è valido.",
+    "notAuthorizedReviewLeave": "Non sei autorizzato ad approvare le ferie.",
+    "endBeforeStart": "La data di fine è prima della data di inizio."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

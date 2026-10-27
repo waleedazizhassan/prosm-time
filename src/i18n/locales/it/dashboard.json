@@ -508,7 +508,8 @@
         "site": "Sito",
         "status": "Stato",
         "details": "Dettagli"
-      }
+      },
+      "grantAction": "Segna come ferie"
     },
     "sheet": {
       "title": {

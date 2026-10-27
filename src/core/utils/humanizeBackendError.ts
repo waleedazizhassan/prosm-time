@@ -319,6 +319,12 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "THIS LEAVE TYPE NEEDS A DOCUMENT": "leaveNeedsDocument",
   "INVALID DOCUMENT": "invalidDocument",
   "NOT ENOUGH LEAVE BALANCE": "notEnoughLeaveBalance",
+  // v2.3.54: leave recorded on someone's behalf (grant_prosm_time_leave).
+  "YOU CANNOT GRANT LEAVE TO YOURSELF": "grantLeaveSelf",
+  "THIS EMPLOYEE ALREADY HAS A PENDING OR APPROVED LEAVE ON THESE DATES": "grantLeaveOverlap",
+  "INVALID LEAVE TYPE": "invalidLeaveType",
+  "YOU ARE NOT AUTHORIZED TO REVIEW LEAVE REQUESTS": "notAuthorizedReviewLeave",
+  "END DATE MUST NOT BE BEFORE START DATE": "endBeforeStart",
   "LEAVE.MANAGE_TYPES AUTHORITY REQUIRED": "manageLeaveTypesRequired",
   "LEAVE TYPE NOT FOUND": "leaveTypeNotFound",
   "INVALID LEAVE TYPE SETTINGS": "invalidLeaveTypeSettings",

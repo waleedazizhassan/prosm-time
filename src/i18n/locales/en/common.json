@@ -274,7 +274,12 @@
     "invalidExitPolicy": "Check the leaving-the-site settings.",
     "dashboardViewRequired": "You do not have access to the dashboard.",
     "invalidLayout": "The widget layout could not be saved.",
-    "trialSetupFailed": "The trial could not be started. Please try again."
+    "trialSetupFailed": "The trial could not be started. Please try again.",
+    "grantLeaveSelf": "You cannot record leave for yourself here.",
+    "grantLeaveOverlap": "This employee already has pending or approved leave on these days.",
+    "invalidLeaveType": "This leave type is not valid.",
+    "notAuthorizedReviewLeave": "You are not allowed to approve leave.",
+    "endBeforeStart": "The end date is before the start date."
   },
   "pageLoad": {
     "title": "This page needs a connection",

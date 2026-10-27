@@ -388,6 +388,31 @@ class LeaveRepository {
   }
 
   // v2.3.43 step 9 (item 19): unpaid leave is approved with its deduction per day.
+  /** Owner 2026-10-27: an approved leave recorded on someone's behalf (asked by phone), past days included. */
+  async grant(
+    userId: string,
+    leaveType: string,
+    startDate: string,
+    endDate: string,
+    notes?: string,
+    deductionPerDay?: number | null,
+  ): Promise<ServiceResult<{ requestId: string; days: number; timesheetsUpdated: number; timesheetsToReopen: number }>> {
+    try {
+      const { data, error } = await this.client.rpc("grant_prosm_time_leave", {
+        p_user_id: userId,
+        p_leave_type: leaveType,
+        p_start_date: startDate,
+        p_end_date: endDate,
+        p_notes: notes?.trim() || null,
+        p_deduction_per_day: deductionPerDay ?? null,
+      });
+      if (error) return createError(error.message);
+      return createSuccess(data);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Leave service unavailable.");
+    }
+  }
+
   async review(requestId: string, action: "approved" | "rejected", notes?: string, deductionPerDay?: number | null): Promise<ServiceResult> {
     try {
       const { data, error } = await this.client.rpc("review_prosm_time_leave", {

@@ -83,5 +83,19 @@
   "documentLabel": "Documento (certificato medico)",
   "documentUploadError": "Impossibile caricare il documento.",
   "balanceDiffers": "Impostato a mano; le regole danno {{computed}}.",
-  "startedCannotCancel": "Iniziato - non annullabile"
+  "startedCannotCancel": "Iniziato - non annullabile",
+  "grant": {
+    "title": "Registra ferie per {{name}}",
+    "hint": "Se ha chiesto le ferie per telefono o era assente giustificato: registrale qui, sono approvate subito - l'assenza diventa ferie nella dashboard e nel foglio ore. Sono ammessi giorni passati.",
+    "typeLabel": "Tipo di ferie",
+    "notesLabel": "Nota (facoltativa)",
+    "deductionLabel": "Trattenuta al giorno",
+    "deductionHint": "Le ferie non retribuite sono approvate con una trattenuta al giorno.",
+    "action": "Registra e approva",
+    "done": "Le ferie di {{name}} sono registrate e approvate.",
+    "doneReopen_one": "Le ferie di {{name}} sono registrate e approvate. Un foglio ore inviato copre questi giorni - riaprilo per correzione così mostra le ferie.",
+    "doneReopen_many": "Le ferie di {{name}} sono registrate e approvate. {{count}} fogli ore inviati coprono questi giorni - riaprili per correzione così mostrano le ferie.",
+    "doneReopen_other": "Le ferie di {{name}} sono registrate e approvate. {{count}} fogli ore inviati coprono questi giorni - riaprili per correzione così mostrano le ferie.",
+    "error": "Impossibile registrare le ferie."
+  }
 }

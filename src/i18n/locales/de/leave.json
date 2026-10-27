@@ -83,5 +83,18 @@
   "documentLabel": "Nachweis (ärztliches Attest)",
   "documentUploadError": "Nachweis konnte nicht hochgeladen werden.",
   "balanceDiffers": "Von Hand gesetzt; die Regeln ergeben {{computed}}.",
-  "startedCannotCancel": "Begonnen - nicht stornierbar"
+  "startedCannotCancel": "Begonnen - nicht stornierbar",
+  "grant": {
+    "title": "Urlaub für {{name}} eintragen",
+    "hint": "Wenn er telefonisch Urlaub beantragt hat oder entschuldigt fehlte: hier eintragen, er ist sofort genehmigt - die Abwesenheit wird im Dashboard und im Stundenzettel zu Urlaub. Vergangene Tage sind möglich.",
+    "typeLabel": "Urlaubsart",
+    "notesLabel": "Notiz (optional)",
+    "deductionLabel": "Abzug pro Tag",
+    "deductionHint": "Unbezahlter Urlaub wird mit einem Abzug pro Tag genehmigt.",
+    "action": "Eintragen und genehmigen",
+    "done": "Der Urlaub von {{name}} ist eingetragen und genehmigt.",
+    "doneReopen_one": "Der Urlaub von {{name}} ist eingetragen und genehmigt. Ein eingereichter Stundenzettel umfasst diese Tage - zur Korrektur öffnen, damit er den Urlaub zeigt.",
+    "doneReopen_other": "Der Urlaub von {{name}} ist eingetragen und genehmigt. {{count}} eingereichte Stundenzettel umfassen diese Tage - zur Korrektur öffnen, damit sie den Urlaub zeigen.",
+    "error": "Der Urlaub konnte nicht eingetragen werden."
+  }
 }

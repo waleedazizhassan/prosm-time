@@ -507,7 +507,8 @@
         "site": "Standort",
         "status": "Status",
         "details": "Details"
-      }
+      },
+      "grantAction": "Als Urlaub eintragen"
     },
     "sheet": {
       "title": {

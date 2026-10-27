@@ -83,5 +83,19 @@
   "documentLabel": "Justificatif (certificat médical)",
   "documentUploadError": "Impossible d'envoyer le justificatif.",
   "balanceDiffers": "Fixé à la main ; les règles donnent {{computed}}.",
-  "startedCannotCancel": "Commencé - impossible d'annuler"
+  "startedCannotCancel": "Commencé - impossible d'annuler",
+  "grant": {
+    "title": "Enregistrer un congé pour {{name}}",
+    "hint": "S'il a demandé par téléphone ou était absent avec un motif : enregistrez-le ici, il est approuvé aussitôt - l'absence devient un congé au tableau de bord et dans la feuille de temps. Les jours passés sont permis.",
+    "typeLabel": "Type de congé",
+    "notesLabel": "Note (facultatif)",
+    "deductionLabel": "Retenue par jour",
+    "deductionHint": "Un congé sans solde est approuvé avec une retenue par jour.",
+    "action": "Enregistrer et approuver",
+    "done": "Le congé de {{name}} est enregistré et approuvé.",
+    "doneReopen_one": "Le congé de {{name}} est enregistré et approuvé. Une feuille de temps soumise couvre ces jours - rouvrez-la pour qu'elle montre le congé.",
+    "doneReopen_many": "Le congé de {{name}} est enregistré et approuvé. {{count}} feuilles de temps soumises couvrent ces jours - rouvrez-les pour qu'elles montrent le congé.",
+    "doneReopen_other": "Le congé de {{name}} est enregistré et approuvé. {{count}} feuilles de temps soumises couvrent ces jours - rouvrez-les pour qu'elles montrent le congé.",
+    "error": "Impossible d'enregistrer le congé."
+  }
 }

@@ -83,5 +83,18 @@
   "documentLabel": "Document (medical report)",
   "documentUploadError": "Could not upload the document.",
   "balanceDiffers": "Set by hand; the rules give {{computed}} - ask your manager if this looks wrong.",
-  "startedCannotCancel": "Started - cannot be cancelled"
+  "startedCannotCancel": "Started - cannot be cancelled",
+  "grant": {
+    "title": "Record leave for {{name}}",
+    "hint": "If they asked for leave by phone or were absent with a reason: record it here and it is approved at once - the absence becomes leave on the dashboard and in the timesheet. Past days are allowed.",
+    "typeLabel": "Leave type",
+    "notesLabel": "Note (optional)",
+    "deductionLabel": "Deduction per day",
+    "deductionHint": "Unpaid leave is approved with a deduction per day.",
+    "action": "Record and approve",
+    "done": "{{name}}'s leave is recorded and approved.",
+    "doneReopen_one": "{{name}}'s leave is recorded and approved. A submitted timesheet covers these days - reopen it for correction so it shows the leave.",
+    "doneReopen_other": "{{name}}'s leave is recorded and approved. {{count}} submitted timesheets cover these days - reopen them for correction so they show the leave.",
+    "error": "Could not record the leave."
+  }
 }

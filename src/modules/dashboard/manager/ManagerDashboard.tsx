@@ -26,6 +26,7 @@ import { auditLabel, DEFAULT_ORDER, iso, mergeOrder, periodRange, trend, type Pe
 import EmptyState from "../../../components/common/EmptyState";
 import leaveTypeLabel from "../../leave/leaveTypeLabel";
 import KpiSheet, { type KpiSheetKind } from "./KpiSheet";
+import GrantLeaveModal from "../../leave/GrantLeaveModal";
 import Dropdown from "../../../components/common/Dropdown";
 
 const LAYOUT_KEY = "prosm_time_dashboard_layout_v1";
@@ -43,6 +44,7 @@ export default function ManagerDashboard() {
   const navigate = useNavigate();
   const { profile, hasPermission } = useAuth();
   const isOwner = Boolean(profile?.isOwner);
+  const canGrantLeave = isOwner || hasPermission("leave.approve");
 
   const [scope, setScope] = useState<DashboardScope>(isOwner ? "org" : "mine");
   const [period, setPeriod] = useState<Period>("week");
@@ -61,6 +63,9 @@ export default function ManagerDashboard() {
   const [sosTarget, setSosTarget] = useState<string | null>(null);
   const [sosNotes, setSosNotes] = useState("");
   const [absenceOpen, setAbsenceOpen] = useState(false);
+  // owner 2026-10-27: an absence asked for by phone becomes leave
+  const [grantFor, setGrantFor] = useState<{ id: string; name: string } | null>(null);
+  const [grantDone, setGrantDone] = useState("");
   // owner 2026-10-27: each figure opens the people behind it
   const [sheet, setSheet] = useState<KpiSheetKind | null>(null);
   const openPage = (kind: KpiSheetKind | "absent") => {
@@ -561,10 +566,22 @@ export default function ManagerDashboard() {
 
       {/* owner 2026-10-26: the absent-today card opens the day's sheet - absent first, then on leave */}
       <KpiSheet kind={sheet} data={data} time={time} onClose={() => setSheet(null)} onOpenPage={openPage} />
+      <GrantLeaveModal
+        person={grantFor}
+        onClose={() => setGrantFor(null)}
+        onGranted={(message) => {
+          setGrantFor(null);
+          setGrantDone(message);
+          void load();
+        }}
+      />
 
       <Modal
         isOpen={absenceOpen}
-        onClose={() => setAbsenceOpen(false)}
+        onClose={() => {
+          setAbsenceOpen(false);
+          setGrantDone("");
+        }}
         title={t("manager.absence.title", { absent: kpi?.absentToday ?? 0, leave: kpi?.onLeaveToday ?? 0 })}
         size="lg"
         footer={
@@ -573,6 +590,7 @@ export default function ManagerDashboard() {
           </Button>
         }
       >
+        {grantDone ? <p className={styles.rowMeta} role="status">{grantDone}</p> : null}
         {(data?.absence ?? []).length === 0 ? (
           <EmptyState message={t("manager.absence.none")} />
         ) : (
@@ -583,6 +601,7 @@ export default function ManagerDashboard() {
                 <th>{t("manager.absence.columns.site")}</th>
                 <th>{t("manager.absence.columns.status")}</th>
                 <th>{t("manager.absence.columns.details")}</th>
+                {canGrantLeave ? <th aria-label={t("manager.absence.grantAction")} /> : null}
               </tr>
             </thead>
             <tbody>
@@ -605,6 +624,15 @@ export default function ManagerDashboard() {
                         ? t("manager.absence.shiftAt", { time: row.shiftStart })
                         : t("manager.absence.notClockedIn")}
                   </td>
+                  {canGrantLeave ? (
+                    <td>
+                      {row.state === "absent" ? (
+                        <Button size="sm" variant="ghost" onClick={() => setGrantFor({ id: row.userId, name: row.name })}>
+                          {t("manager.absence.grantAction")}
+                        </Button>
+                      ) : null}
+                    </td>
+                  ) : null}
                 </tr>
               ))}
             </tbody>

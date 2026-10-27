@@ -274,7 +274,12 @@
     "invalidExitPolicy": "راجع إعداد مغادرة الموقع.",
     "dashboardViewRequired": "ليست لديك صلاحية عرض لوحة التحكم.",
     "invalidLayout": "تعذّر حفظ ترتيب البطاقات.",
-    "trialSetupFailed": "تعذّر بدء النسخة التجريبية. حاول مرة أخرى."
+    "trialSetupFailed": "تعذّر بدء النسخة التجريبية. حاول مرة أخرى.",
+    "grantLeaveSelf": "لا يمكنك تسجيل إجازة لنفسك من هنا.",
+    "grantLeaveOverlap": "لدى هذا الموظف إجازة معلقة أو معتمدة في هذه الأيام.",
+    "invalidLeaveType": "نوع الإجازة غير صحيح.",
+    "notAuthorizedReviewLeave": "ليست لديك صلاحية اعتماد الإجازات.",
+    "endBeforeStart": "تاريخ النهاية قبل تاريخ البداية."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

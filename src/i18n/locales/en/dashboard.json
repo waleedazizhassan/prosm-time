@@ -507,7 +507,8 @@
         "site": "Site",
         "status": "Status",
         "details": "Details"
-      }
+      },
+      "grantAction": "Make it leave"
     },
     "sheet": {
       "title": {

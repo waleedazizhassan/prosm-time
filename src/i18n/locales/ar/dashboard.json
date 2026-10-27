@@ -511,7 +511,8 @@
         "site": "الموقع",
         "status": "الحالة",
         "details": "التفاصيل"
-      }
+      },
+      "grantAction": "تحويل لإجازة"
     },
     "sheet": {
       "title": {

@@ -274,7 +274,12 @@
     "invalidExitPolicy": "Vérifiez les réglages.",
     "dashboardViewRequired": "Vous n'avez pas accès au tableau de bord.",
     "invalidLayout": "La disposition des widgets n'a pas pu être enregistrée.",
-    "trialSetupFailed": "L'essai n'a pas pu démarrer. Réessayez."
+    "trialSetupFailed": "L'essai n'a pas pu démarrer. Réessayez.",
+    "grantLeaveSelf": "Vous ne pouvez pas vous enregistrer un congé ici.",
+    "grantLeaveOverlap": "Cet employé a déjà un congé en attente ou approuvé ces jours-là.",
+    "invalidLeaveType": "Ce type de congé n'est pas valide.",
+    "notAuthorizedReviewLeave": "Vous n'êtes pas autorisé à approuver les congés.",
+    "endBeforeStart": "La date de fin précède la date de début."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",
