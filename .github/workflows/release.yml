@@ -199,7 +199,10 @@ jobs:
           RELEASED_AT: ${{ needs.test.outputs.releasedAt }}
         run: node scripts/write-release-manifest.mjs
 
-      - run: npm run build
+      # v2.3.55 (owner 2026-10-27, "strong protection for the APK"): the app's
+      # own code inside the APK is obfuscated (scripts/obfuscate.mjs - only the
+      # app's chunks, so it stays fast); the web build stays as built.
+      - run: npm run build:obfuscated
         env:
           VITE_BUILD_RELEASED_AT: ${{ needs.test.outputs.releasedAt }}
       - run: npx cap sync android
