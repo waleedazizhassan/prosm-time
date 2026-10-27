@@ -109,7 +109,16 @@
       "SUSPENDED": "موقوف",
       "EXPIRED": "منتهي الصلاحية",
       "REVOKED": "ملغى"
-    }
+    },
+    "seats": "{{used}} من {{max}}",
+    "seatsUnlimited": "{{used}} (بدون حد)",
+    "seatsFull": "اكتمل العدد المرخّص",
+    "seatsLeft_zero": "لا مقاعد متاحة",
+    "seatsLeft_one": "متاح مستخدم واحد",
+    "seatsLeft_two": "متاح مستخدمان",
+    "seatsLeft_few": "متاح {{count}} مستخدمين",
+    "seatsLeft_many": "متاح {{count}} مستخدمًا",
+    "seatsLeft_other": "متاح {{count}} مستخدم"
   },
   "attendance": {
     "title": "الحضور",

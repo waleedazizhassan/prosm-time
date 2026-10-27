@@ -86,6 +86,17 @@ class LicenseRepository {
     }
   }
 
+  /** v2.3.55 (owner 2026-10-27): the organisation's active people against the licence's limit. */
+  async getSeatUsage(): Promise<ServiceResult<{ activeUsers: number; maxUsers: number | null }>> {
+    try {
+      const { data, error } = await this.client.rpc("get_prosm_time_seat_usage");
+      if (error) return createError(error.message);
+      return createSuccess({ activeUsers: Number(data?.activeUsers ?? 0), maxUsers: data?.maxUsers ?? null });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "License service unavailable.");
+    }
+  }
+
   /** The organisation's trial (owner 2026-09-29): days left, and whether it has ended (server time). */
   async getTrialStatus(): Promise<ServiceResult<TrialStatus>> {
     try {

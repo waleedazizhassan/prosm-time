@@ -109,7 +109,13 @@
       "SUSPENDED": "Sospesa",
       "EXPIRED": "Scaduta",
       "REVOKED": "Revocata"
-    }
+    },
+    "seats": "{{used}} su {{max}}",
+    "seatsUnlimited": "{{used}} (senza limite)",
+    "seatsFull": "Tutte le licenze in uso",
+    "seatsLeft_one": "1 utente disponibile",
+    "seatsLeft_many": "{{count}} utenti disponibili",
+    "seatsLeft_other": "{{count}} utenti disponibili"
   },
   "attendance": {
     "title": "Presenza",

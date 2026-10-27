@@ -266,3 +266,36 @@
     height: 34px;
   }
 }
+
+/* owner 2026-10-27: the licence's seats in use */
+.seatsRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0 0 6px;
+}
+
+.seatsBar {
+  flex: 1;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--surface-hover);
+}
+
+.seatsBar > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--brand-primary);
+}
+
+.seatsBar > .seatsFull {
+  background: var(--brand-danger);
+}
+
+.seatsLeft {
+  flex: none;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}

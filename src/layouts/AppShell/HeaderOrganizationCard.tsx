@@ -31,6 +31,7 @@ function HeaderOrganizationCard() {
 
   const [organization, setOrganization] = useState<Organization | null>(null);
   const [license, setLicense] = useState<LicenseState | null>(null);
+  const [activeUsers, setActiveUsers] = useState<number | null>(null);
   const [panelOpen, setPanelOpen] = useState(false);
   const [panelPosition, setPanelPosition] = useState<{ top: number; left: number } | null>(null);
   const [refreshing, setRefreshing] = useState(false);
@@ -45,9 +46,14 @@ function HeaderOrganizationCard() {
   const filePickerOpenRef = useRef(false);
 
   const load = useCallback(async () => {
-    const [orgResult, licenseResult] = await Promise.all([OrganizationRepository.getCurrentOrganization(), LicenseRepository.getCurrentLicenseState()]);
+    const [orgResult, licenseResult, seatsResult] = await Promise.all([
+      OrganizationRepository.getCurrentOrganization(),
+      LicenseRepository.getCurrentLicenseState(),
+      LicenseRepository.getSeatUsage(),
+    ]);
     if (orgResult.success) setOrganization(orgResult.data);
     if (licenseResult.success) setLicense(licenseResult.data);
+    if (seatsResult.success && seatsResult.data) setActiveUsers(seatsResult.data.activeUsers);
   }, []);
 
   useEffect(() => {
@@ -250,11 +256,26 @@ function HeaderOrganizationCard() {
                   <span className={styles.panelLabel}>{t("licenseCard.statusLabel")}</span>
                   <StatusBadge status={license.status}>{t(`licenseCard.status.${license.status}`, { defaultValue: license.status })}</StatusBadge>
                 </div>
+                {/* owner 2026-10-27: the people the licence allows, and how many there are */}
                 <div className={styles.panelRow}>
                   <span className={styles.panelLabel}>{t("licenseCard.usersLabel")}</span>
                   <span className={styles.panelValue}>
-                    {license.maxUsers ?? "—"} · {t("licenseCard.devicesLabel")}: {license.maxDevices ?? "—"}
+                    {license.maxUsers ? t("licenseCard.seats", { used: activeUsers ?? "—", max: license.maxUsers }) : t("licenseCard.seatsUnlimited", { used: activeUsers ?? "—" })}
                   </span>
+                </div>
+                {license.maxUsers && activeUsers !== null ? (
+                  <div className={styles.seatsRow}>
+                    <span className={styles.seatsBar} aria-hidden="true">
+                      <span className={activeUsers >= license.maxUsers ? styles.seatsFull : undefined} style={{ width: `${Math.min(100, Math.round((activeUsers / license.maxUsers) * 100))}%` }} />
+                    </span>
+                    <span className={styles.seatsLeft}>
+                      {activeUsers >= license.maxUsers ? t("licenseCard.seatsFull") : t("licenseCard.seatsLeft", { count: license.maxUsers - activeUsers })}
+                    </span>
+                  </div>
+                ) : null}
+                <div className={styles.panelRow}>
+                  <span className={styles.panelLabel}>{t("licenseCard.devicesLabel")}</span>
+                  <span className={styles.panelValue}>{license.maxDevices ?? "—"}</span>
                 </div>
                 <div className={styles.panelRow}>
                   <span className={styles.panelLabel}>{t("licenseCard.expiresLabel")}</span>

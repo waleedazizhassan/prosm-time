@@ -109,7 +109,12 @@
       "SUSPENDED": "Suspended",
       "EXPIRED": "Expired",
       "REVOKED": "Revoked"
-    }
+    },
+    "seats": "{{used}} of {{max}}",
+    "seatsUnlimited": "{{used}} (no limit)",
+    "seatsFull": "All licensed users in use",
+    "seatsLeft_one": "1 user left",
+    "seatsLeft_other": "{{count}} users left"
   },
   "attendance": {
     "title": "Attendance",
