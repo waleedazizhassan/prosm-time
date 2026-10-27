@@ -574,5 +574,23 @@
       "action": "Esporta PDF",
       "asOf": "alle {{time}}"
     }
+  },
+  "devices": {
+    "open": "Gestisci dispositivi",
+    "title": "Dispositivi della licenza",
+    "hint": "I dispositivi con un account aperto nella tua organizzazione. Un dispositivo conta una volta, chiunque acceda, e non conta più dopo 30 giorni senza uso. Rimuovi un dispositivo non più usato per liberarne subito il posto.",
+    "empty": "Nessun dispositivo per ora. Si registrano all'apertura dell'app.",
+    "loadError": "Impossibile caricare i dispositivi.",
+    "removeError": "Impossibile rimuovere il dispositivo.",
+    "remove": "Rimuovi",
+    "removeConfirm": "Rimuovere \"{{device}}\" dai dispositivi della licenza? Se è ancora in uso, si registra di nuovo all'apertura dell'app.",
+    "thisDevice": "Questo dispositivo",
+    "notCounted": "Non conteggiato",
+    "lastSeen": "Ultimo uso {{when}}",
+    "platform": {
+      "android": "Telefono Android",
+      "ios": "iPhone",
+      "web": "Browser"
+    }
   }
 }

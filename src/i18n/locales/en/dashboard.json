@@ -570,5 +570,23 @@
       "action": "Export PDF",
       "asOf": "as of {{time}}"
     }
+  },
+  "devices": {
+    "open": "Manage devices",
+    "title": "Licence devices",
+    "hint": "The devices with accounts open in your organisation. A device counts once, whoever signs in on it, and stops counting after 30 days unused. Remove one no longer in use to free its place at once.",
+    "empty": "No devices yet. Devices register when the app opens.",
+    "loadError": "Could not load the devices.",
+    "removeError": "Could not remove the device.",
+    "remove": "Remove",
+    "removeConfirm": "Remove \"{{device}}\" from the licence's devices? If it is still in use, it registers again when the app opens there.",
+    "thisDevice": "This device",
+    "notCounted": "Not counted",
+    "lastSeen": "Last used {{when}}",
+    "platform": {
+      "android": "Android phone",
+      "ios": "iPhone",
+      "web": "Browser"
+    }
   }
 }

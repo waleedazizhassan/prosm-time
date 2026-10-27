@@ -574,5 +574,23 @@
       "action": "Exporter en PDF",
       "asOf": "à {{time}}"
     }
+  },
+  "devices": {
+    "open": "Gérer les appareils",
+    "title": "Appareils de la licence",
+    "hint": "Les appareils où un compte est ouvert dans votre organisation. Un appareil compte une fois, quel que soit l'utilisateur, et ne compte plus après 30 jours sans usage. Retirez un appareil inutilisé pour libérer sa place tout de suite.",
+    "empty": "Aucun appareil pour l'instant. Ils s'enregistrent à l'ouverture de l'application.",
+    "loadError": "Impossible de charger les appareils.",
+    "removeError": "Impossible de retirer l'appareil.",
+    "remove": "Retirer",
+    "removeConfirm": "Retirer « {{device}} » des appareils de la licence ? S'il est encore utilisé, il se réenregistre à l'ouverture de l'application.",
+    "thisDevice": "Cet appareil",
+    "notCounted": "Non compté",
+    "lastSeen": "Dernier usage {{when}}",
+    "platform": {
+      "android": "Téléphone Android",
+      "ios": "iPhone",
+      "web": "Navigateur"
+    }
   }
 }

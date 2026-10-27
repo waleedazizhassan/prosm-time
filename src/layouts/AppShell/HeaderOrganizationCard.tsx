@@ -9,6 +9,7 @@ import LicenseRepository, { type LicenseState } from "../../core/repositories/Li
 import StatusBadge from "../../components/common/StatusBadge";
 import { formatDateOnly } from "../../core/utils/formatDate";
 import styles from "./HeaderOrganizationCard.module.css";
+import DevicesModal from "./DevicesModal";
 
 const PANEL_GAP = 8;
 const PANEL_WIDTH = 280;
@@ -34,6 +35,7 @@ function HeaderOrganizationCard() {
   const [license, setLicense] = useState<LicenseState | null>(null);
   const [activeUsers, setActiveUsers] = useState<number | null>(null);
   const [activeDevices, setActiveDevices] = useState<number | null>(null);
+  const [devicesOpen, setDevicesOpen] = useState(false);
   const [panelOpen, setPanelOpen] = useState(false);
   const [panelPosition, setPanelPosition] = useState<{ top: number; left: number } | null>(null);
   const [refreshing, setRefreshing] = useState(false);
@@ -298,6 +300,9 @@ function HeaderOrganizationCard() {
                     </span>
                   </div>
                 ) : null}
+                <button type="button" className={styles.devicesButton} onClick={() => setDevicesOpen(true)}>
+                  {t("devices.open")}
+                </button>
                 <div className={styles.panelRow}>
                   <span className={styles.panelLabel}>{t("licenseCard.expiresLabel")}</span>
                   <span className={styles.panelValue}>{license.expiresAt ? formatDateOnly(license.expiresAt, i18n.language) : t("licenseCard.noExpiry")}</span>
@@ -307,6 +312,7 @@ function HeaderOrganizationCard() {
           </div>,
           document.body,
         )}
+      {isOwner ? <DevicesModal isOpen={devicesOpen} onClose={() => setDevicesOpen(false)} onChanged={() => void load()} /> : null}
     </div>
   );
 }

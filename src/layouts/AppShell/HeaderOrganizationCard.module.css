@@ -299,3 +299,89 @@
   font-size: var(--font-xs);
   color: var(--text-secondary);
 }
+
+/* owner 2026-10-27: the licence's devices */
+.devicesButton {
+  width: 100%;
+  margin-top: 6px;
+  padding: 6px 10px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--brand-primary);
+  font: inherit;
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+}
+
+.devicesButton:hover {
+  background: var(--surface-hover);
+}
+
+.devicesHint {
+  margin: 0 0 var(--space-3);
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+.devicesList {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.deviceRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+}
+
+.deviceIcon {
+  display: inline-flex;
+  flex: none;
+  color: var(--text-secondary);
+}
+
+.deviceMain {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  gap: 2px;
+}
+
+.deviceName {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-weight: var(--font-weight-semibold);
+}
+
+.deviceMeta {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.deviceThis,
+.deviceIdle {
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+}
+
+.deviceThis {
+  background: var(--brand-primary-subtle);
+  color: var(--brand-primary);
+}
+
+.deviceIdle {
+  background: var(--surface-hover);
+  color: var(--text-secondary);
+}

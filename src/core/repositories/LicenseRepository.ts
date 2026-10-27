@@ -26,6 +26,17 @@ export interface InstallationStatus {
   outdatedVersion: boolean;
 }
 
+// owner 2026-10-27: a device counted against the licence (the Owner's list)
+export interface LicensedDevice {
+  deviceId: string;
+  platform: "android" | "ios" | "web";
+  label: string | null;
+  people: string[];
+  firstSeenAt: string;
+  lastSeenAt: string;
+  counted: boolean;
+}
+
 export interface LicenseState {
   licenseNumber: string;
   status: string;
@@ -83,6 +94,28 @@ class LicenseRepository {
       if (!data) return createError("No license activation state found.");
 
       return createSuccess(mapLicenseRow(data));
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "License service unavailable.");
+    }
+  }
+
+  /** v2.3.55: the Owner's list of devices counted against the licence. */
+  async listDevices(): Promise<ServiceResult<LicensedDevice[]>> {
+    try {
+      const { data, error } = await this.client.rpc("list_prosm_time_devices");
+      if (error) return createError(error.message);
+      return createSuccess(Array.isArray(data) ? (data as LicensedDevice[]) : []);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "License service unavailable.");
+    }
+  }
+
+  /** v2.3.55: the Owner frees a device's place. */
+  async removeDevice(deviceId: string): Promise<ServiceResult> {
+    try {
+      const { error } = await this.client.rpc("remove_prosm_time_device", { p_device_id: deviceId });
+      if (error) return createError(error.message);
+      return createSuccess();
     } catch (error) {
       return createError(error instanceof Error ? error.message : "License service unavailable.");
     }

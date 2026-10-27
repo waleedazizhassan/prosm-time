@@ -43,3 +43,28 @@ describe("licensed devices", () => {
     expect((await t.as(a.authId, "select public.register_prosm_time_device($1)", [id("new")])).error).toBeNull();
   });
 });
+
+// v2.3.55 (owner 2026-10-27): the Owner lists the devices and removes one. Migration 20261027190000.
+describe("the Owner's list of devices", () => {
+  it("lists each device once with who used it, removes it to free its place, and is the Owner's only", async () => {
+    const t = await buildDatabase();
+    const org = await createOrg(t, "List Co");
+    const a = await addMember(t, org, "employee", "Alaa");
+    const b = await addMember(t, org, "employee", "Basma");
+    await t.su("update license_activation_state set max_devices = 1 where organization_id = $1", [org.id]);
+    await t.as(a.authId, "select public.register_prosm_time_device($1, 'android', 'Android - V2529')", [id("shared")]);
+    await t.as(b.authId, "select public.register_prosm_time_device($1, 'android', 'Android - V2529')", [id("shared")]);
+
+    const list = await t.as<{ l: { deviceId: string; people: string[]; counted: boolean }[] }>(org.owner.authId, "select public.list_prosm_time_devices() as l");
+    expect(list.rows![0].l).toHaveLength(1);
+    expect(list.rows![0].l[0].people.sort()).toEqual(["Alaa", "Basma"]);
+    expect(list.rows![0].l[0].counted).toBe(true);
+
+    expect((await t.as(a.authId, "select public.list_prosm_time_devices()")).error).toMatch(/ONLY THE OWNER/);
+    expect((await t.as(a.authId, "select public.remove_prosm_time_device($1)", [id("shared")])).error).toMatch(/ONLY THE OWNER/);
+
+    expect((await t.as(b.authId, "select public.register_prosm_time_device($1)", [id("another")])).error).toMatch(/LICENSED DEVICE LIMIT REACHED/);
+    expect((await t.as(org.owner.authId, "select public.remove_prosm_time_device($1)", [id("shared")])).error).toBeNull();
+    expect((await t.as(b.authId, "select public.register_prosm_time_device($1)", [id("another")])).error).toBeNull();
+  });
+});

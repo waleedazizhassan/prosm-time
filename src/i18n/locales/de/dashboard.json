@@ -570,5 +570,23 @@
       "action": "Als PDF exportieren",
       "asOf": "Stand {{time}}"
     }
+  },
+  "devices": {
+    "open": "Geräte verwalten",
+    "title": "Lizenzgeräte",
+    "hint": "Die Geräte, auf denen in Ihrer Organisation ein Konto geöffnet ist. Ein Gerät zählt einmal, egal wer sich anmeldet, und zählt nach 30 Tagen ohne Nutzung nicht mehr. Entfernen Sie ein ungenutztes Gerät, um seinen Platz sofort freizugeben.",
+    "empty": "Noch keine Geräte. Geräte melden sich beim Öffnen der App an.",
+    "loadError": "Geräte konnten nicht geladen werden.",
+    "removeError": "Das Gerät konnte nicht entfernt werden.",
+    "remove": "Entfernen",
+    "removeConfirm": "„{{device}}\" aus den Lizenzgeräten entfernen? Wird es noch genutzt, meldet es sich beim Öffnen der App erneut an.",
+    "thisDevice": "Dieses Gerät",
+    "notCounted": "Nicht gezählt",
+    "lastSeen": "Zuletzt genutzt {{when}}",
+    "platform": {
+      "android": "Android-Telefon",
+      "ios": "iPhone",
+      "web": "Browser"
+    }
   }
 }
