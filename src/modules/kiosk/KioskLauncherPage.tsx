@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, Navigate } from "react-router-dom";
 
@@ -14,6 +14,7 @@ import ListRow from "../../components/common/ListRow";
 import checkInRemoteIllustration from "../../assets/illustration-checkin-remote.webp";
 import kioskHeaderImage from "../../assets/illustrations/kiosk.svg";
 import PageBanner from "../../components/common/PageBanner";
+import SiteFormModal from "../sites/SiteFormModal";
 
 // PROSM Time - § user-directed: bring Kiosk Mode back into the
 // sidebar (it was reachable only by a direct /kiosk/:siteId URL,
@@ -25,15 +26,20 @@ import PageBanner from "../../components/common/PageBanner";
 // KioskPage's own established posture).
 export default function KioskLauncherPage() {
   const { t } = useTranslation("kiosk");
-  const { profile } = useAuth();
+  const { t: tSites } = useTranslation("sites");
+  const { profile, hasPermission } = useAuth();
   const allowed = Boolean(profile?.isOwner) || profile?.roleKey === "manager";
   const [sites, setSites] = useState<Site[]>([]);
   const [loading, setLoading] = useState(true);
+  // Owner 2026-10-28: a site is added from here, without going to Settings; it
+  // uses the kiosk (and the app, like any site) and joins this list at once.
+  const [createOpen, setCreateOpen] = useState(false);
+  const canAddSite = hasPermission("sites.manage");
 
   // Owner 2026-10-19: the workers' kiosk is run by the Owner, or by a Manager at a site they manage.
-  useEffect(() => {
+  const load = useCallback(() => {
     if (!allowed || !profile) return;
-    Promise.all([SiteRepository.listSites(), profile.isOwner ? null : SiteRepository.listManagedSiteIds(profile.id)]).then(([result, managed]) => {
+    void Promise.all([SiteRepository.listSites(), profile.isOwner ? null : SiteRepository.listManagedSiteIds(profile.id)]).then(([result, managed]) => {
       const managedIds = managed && managed.success ? new Set(managed.data ?? []) : null;
       const usable = (result.success ? result.data ?? [] : []).filter((site) => site.kioskMode !== "personal_device_only");
       setSites(profile.isOwner ? usable : usable.filter((site) => managedIds?.has(site.id)));
@@ -41,13 +47,24 @@ export default function KioskLauncherPage() {
     });
   }, [allowed, profile]);
 
+  useEffect(() => load(), [load]);
+
   if (!allowed) return <Navigate to="/dashboard" replace />;
 
   return (
     <PageShell title="">
       <PageBanner pageId="kiosk" illustration={kioskHeaderImage} />
 
-      <Card title={t("launcher.title")}>
+      <Card
+        title={t("launcher.title")}
+        actions={
+          canAddSite ? (
+            <Button size="sm" variant="ghost" onClick={() => setCreateOpen(true)}>
+              {tSites("addAction")}
+            </Button>
+          ) : undefined
+        }
+      >
         {loading ? (
           <LoadingState />
         ) : sites.length === 0 ? (
@@ -67,6 +84,18 @@ export default function KioskLauncherPage() {
       <p style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)", lineHeight: 1.6, margin: "var(--space-3) var(--space-2) 0" }}>
         {t("launcher.explainerWorkers")}
       </p>
+      {canAddSite ? (
+        <SiteFormModal
+          key={createOpen ? "open" : "closed"}
+          isOpen={createOpen}
+          defaultKioskMode="both_allowed"
+          onClose={() => setCreateOpen(false)}
+          onSaved={() => {
+            setCreateOpen(false);
+            load();
+          }}
+        />
+      ) : null}
     </PageShell>
   );
 }

@@ -19,6 +19,8 @@ interface SiteFormModalProps {
   onClose: () => void;
   onSaved: () => void;
   site?: Site;
+  /** A new site's kiosk mode (the kiosk page adds sites that use the kiosk). */
+  defaultKioskMode?: KioskMode;
 }
 
 const KIOSK_MODE_OPTIONS: KioskMode[] = ["personal_device_only", "kiosk_only", "both_allowed"];
@@ -52,7 +54,7 @@ function deviceTimeZone(): string {
   }
 }
 
-export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFormModalProps) {
+export default function SiteFormModal({ isOpen, onClose, onSaved, site, defaultKioskMode = "personal_device_only" }: SiteFormModalProps) {
   const { t } = useTranslation("sites");
   const isEditing = Boolean(site);
 
@@ -64,7 +66,7 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site }: SiteFo
   // A new site starts in the device's own time zone (it was UTC, which put
   // shift times hours off in Egypt).
   const [timezone, setTimezone] = useState(site?.timezone ?? deviceTimeZone());
-  const [kioskMode, setKioskMode] = useState<KioskMode>(site?.kioskMode ?? "personal_device_only");
+  const [kioskMode, setKioskMode] = useState<KioskMode>(site?.kioskMode ?? defaultKioskMode);
   const [attendanceAllowed, setAttendanceAllowed] = useState(site?.attendanceAllowed ?? true);
   const [geofenceRequired, setGeofenceRequired] = useState(site?.geofenceRequired ?? true);
   const [cameraRequired, setCameraRequired] = useState(site?.cameraRequired ?? false);
