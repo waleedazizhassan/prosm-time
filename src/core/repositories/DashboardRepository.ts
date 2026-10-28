@@ -162,6 +162,15 @@ export interface ManagerDashboard {
 
 const RETRIES = 2;
 
+export interface AuditLogQuery {
+  from: string | null;
+  to: string | null;
+  userId: string | null;
+  pattern: string | null;
+  before: string | null;
+  limit: number;
+}
+
 class DashboardRepository {
   get client() {
     return DatabaseManager.getClient();
@@ -189,6 +198,24 @@ class DashboardRepository {
   // v2.3.43 step 17 (items 5, 4): the full manager dashboard in one read
   // (scoped; cost and external workers only with their permissions - all
   // decided on the server).
+  /** Owner 2026-10-28: the action log's own page, newest first, a page at a time. */
+  async listAuditLog(query: AuditLogQuery): Promise<ServiceResult<DashboardAuditRow[]>> {
+    try {
+      const { data, error } = await this.client.rpc("list_prosm_time_audit_log", {
+        p_from: query.from,
+        p_to: query.to,
+        p_user_id: query.userId,
+        p_action_pattern: query.pattern,
+        p_before: query.before,
+        p_limit: query.limit,
+      });
+      if (error) return { success: false, message: error.message, data: null };
+      return { success: true, message: null, data: Array.isArray(data) ? (data as DashboardAuditRow[]) : [] };
+    } catch (error) {
+      return { success: false, message: error instanceof Error ? error.message : "Dashboard service unavailable.", data: null };
+    }
+  }
+
   async load(from: string, to: string, scope: DashboardScope, siteId: string | null): Promise<ServiceResult<ManagerDashboard>> {
     try {
       const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Africa/Cairo";
@@ -206,7 +233,7 @@ class DashboardRepository {
     }
   }
 
-  async loadLayout(): Promise<{ hidden: string[]; order: string[] } | null> {
+  async loadLayout(): Promise<{ hidden: string[]; order: string[]; v?: number } | null> {
     try {
       const { data } = await this.client.from("dashboard_preferences").select("layout").maybeSingle();
       const layout = (data?.layout ?? null) as { hidden?: string[]; order?: string[] } | null;
@@ -216,7 +243,7 @@ class DashboardRepository {
     }
   }
 
-  async saveLayout(layout: { hidden: string[]; order: string[] }): Promise<void> {
+  async saveLayout(layout: { hidden: string[]; order: string[]; v?: number }): Promise<void> {
     try {
       await this.client.rpc("save_prosm_time_dashboard_layout", { p_layout: layout });
     } catch {

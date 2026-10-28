@@ -647,3 +647,21 @@
 .kpi.kpiAlert .kpiValue {
   color: var(--brand-danger);
 }
+
+/* owner 2026-10-28: the sites title clears the site filter; the chip says which site is shown */
+.titleButton {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--brand-primary);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.chip.chipActive {
+  border-color: var(--brand-primary);
+  background: var(--brand-primary-subtle);
+  color: var(--brand-primary);
+}

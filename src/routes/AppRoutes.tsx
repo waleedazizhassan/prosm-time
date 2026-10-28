@@ -26,6 +26,7 @@ import KioskLockGuard from "../modules/kiosk/KioskLockGuard";
 const PeoplePage = lazy(() => import("../modules/people/PeoplePage"));
 const PersonDetailPage = lazy(() => import("../modules/people/PersonDetailPage"));
 const AdminOnBehalfPage = lazy(() => import("../modules/people/AdminOnBehalfPage"));
+const AuditLogPage = lazy(() => import("../modules/audit/AuditLogPage"));
 const SitesPage = lazy(() => import("../modules/sites/SitesPage"));
 const SiteDetailPage = lazy(() => import("../modules/sites/SiteDetailPage"));
 const ExternalWorkersPage = lazy(() => import("../modules/workforce/ExternalWorkersPage"));
@@ -121,6 +122,7 @@ export default function AppRoutes() {
             <Route path="/people" element={<PeoplePage />} />
             <Route path="/people/:userId" element={<PersonDetailPage />} />
             <Route path="/admin-clock" element={<AdminOnBehalfPage />} />
+            <Route path="/audit-log" element={<AuditLogPage />} />
             <Route path="/sites" element={<SitesPage />} />
             <Route path="/sites/:siteId" element={<SiteDetailPage />} />
             <Route path="/workers" element={<ExternalWorkersPage />} />

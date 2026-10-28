@@ -17,7 +17,8 @@
     "managerOverrides": "Manager Overrides",
     "locationViolations": "Location Violations",
     "sos": "Emergency (SOS)",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "auditLog": "Action log"
   },
   "timesheetsHint": "Timesheets are generated and approved per employee and period, not by date range.",
   "timesheetsLink": "Go to Timesheets",

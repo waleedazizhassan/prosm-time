@@ -17,7 +17,8 @@
     "managerOverrides": "تدخلات المدير",
     "locationViolations": "مخالفات الموقع",
     "sos": "الطوارئ",
-    "dashboard": "لوحة التحكم"
+    "dashboard": "لوحة التحكم",
+    "auditLog": "سجل الإجراءات"
   },
   "timesheetsHint": "كشوف الدوام تُنشأ وتُعتمد لكل موظف وفترة على حدة، مش بنطاق تاريخ.",
   "timesheetsLink": "الذهاب إلى كشوف الدوام",

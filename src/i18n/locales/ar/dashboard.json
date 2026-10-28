@@ -421,7 +421,9 @@
       "external": "العمالة الخارجية",
       "externalSummary": "{{present}} موجود، {{today}} اليوم، {{hours}} س",
       "noExternal": "لا توجد عمالة خارجية اليوم.",
-      "noContractor": "بدون مقاول"
+      "noContractor": "بدون مقاول",
+      "showAll": "عرض كل المواقع",
+      "filteredBy": "{{site}} · كل المواقع"
     },
     "queue": {
       "title": "بانتظار قرار ({{count}})",
@@ -604,5 +606,18 @@
       "ios": "آيفون",
       "web": "متصفح"
     }
+  },
+  "auditPage": {
+    "title": "سجل الإجراءات",
+    "filters": "التصفية",
+    "from": "من",
+    "to": "إلى",
+    "person": "الشخص",
+    "everyone": "الكل",
+    "kind": "نوع الإجراء",
+    "allKinds": "كل الأنواع",
+    "exportPdf": "تصدير PDF",
+    "loadMore": "عرض المزيد",
+    "loadError": "تعذّر تحميل السجل."
   }
 }

@@ -216,7 +216,8 @@
     "integrations": "Integrazioni",
     "help": "Assistenza",
     "workers": "Lavoratori esterni",
-    "calendar": "Calendario e festività"
+    "calendar": "Calendario e festività",
+    "auditLog": "Registro azioni"
   },
   "sosOverlay": {
     "title": "Allarme SOS/Emergenza",
@@ -320,7 +321,8 @@
     "integrations": "Buste paga e altri sistemi",
     "timesheets": "Ore da verificare e approvare",
     "workers": "Lavoratori esterni e i loro numeri per il chiosco",
-    "calendar": "Festività, giorni di riposo e giorni eccezionali - ore e straordinari ne dipendono."
+    "calendar": "Festività, giorni di riposo e giorni eccezionali - ore e straordinari ne dipendono.",
+    "auditLog": "Tutto ciò che avviene nella tua organizzazione: chi ha fatto cosa, a chi, quando e perché."
   },
   "backgroundDisclosure": {
     "title": "Posizione durante il turno",

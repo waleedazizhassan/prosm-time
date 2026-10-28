@@ -409,7 +409,9 @@
       "external": "External workers",
       "externalSummary": "{{present}} here, {{today}} today, {{hours}} h",
       "noExternal": "No external workers today.",
-      "noContractor": "No contractor"
+      "noContractor": "No contractor",
+      "showAll": "Show all sites",
+      "filteredBy": "{{site}} · all sites"
     },
     "queue": {
       "title": "Waiting for a decision ({{count}})",
@@ -588,5 +590,18 @@
       "ios": "iPhone",
       "web": "Browser"
     }
+  },
+  "auditPage": {
+    "title": "Action log",
+    "filters": "Filters",
+    "from": "From",
+    "to": "To",
+    "person": "Person",
+    "everyone": "Everyone",
+    "kind": "Kind of action",
+    "allKinds": "All kinds",
+    "exportPdf": "Export PDF",
+    "loadMore": "Show more",
+    "loadError": "Could not load the log."
   }
 }

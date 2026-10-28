@@ -216,7 +216,8 @@
     "integrations": "Integrations",
     "help": "Help",
     "workers": "Workers",
-    "calendar": "Calendar and holidays"
+    "calendar": "Calendar and holidays",
+    "auditLog": "Action log"
   },
   "sosOverlay": {
     "title": "SOS/Emergency alert",
@@ -315,7 +316,8 @@
     "integrations": "Payroll and other systems",
     "timesheets": "Hours for review and approval",
     "workers": "External workers and their kiosk numbers",
-    "calendar": "Public holidays, weekly rest days and exceptional days - the hours and overtime follow them."
+    "calendar": "Public holidays, weekly rest days and exceptional days - the hours and overtime follow them.",
+    "auditLog": "Everything done in your organisation: who did what, to whom, when and why."
   },
   "backgroundDisclosure": {
     "title": "Location during your shift",

@@ -216,7 +216,8 @@
     "integrations": "Integrationen",
     "help": "Hilfe",
     "workers": "Externe Arbeiter",
-    "calendar": "Kalender und Feiertage"
+    "calendar": "Kalender und Feiertage",
+    "auditLog": "Aktionsprotokoll"
   },
   "sosOverlay": {
     "title": "SOS-/Notfallalarm",
@@ -315,7 +316,8 @@
     "integrations": "Lohnabrechnung und andere Systeme",
     "timesheets": "Stunden zur Prüfung und Freigabe",
     "workers": "Externe Arbeiter und ihre Kiosk-Nummern",
-    "calendar": "Feiertage, Ruhetage und Ausnahmetage - Stunden und Überstunden richten sich danach."
+    "calendar": "Feiertage, Ruhetage und Ausnahmetage - Stunden und Überstunden richten sich danach.",
+    "auditLog": "Alles, was in Ihrer Organisation geschieht: wer was für wen, wann und warum getan hat."
   },
   "backgroundDisclosure": {
     "title": "Standort während Ihrer Schicht",

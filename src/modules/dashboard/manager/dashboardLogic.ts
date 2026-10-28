@@ -52,6 +52,12 @@ const AUDIT_GROUPS: [RegExp, string][] = [
   [/^settings\.|^schedules\.|^ORGANIZATION_|^LICENSE_|^API_KEY|_DISCONNECTED$/, "settings"],
 ];
 
+// owner 2026-10-28: the action log page filters by kind on the server with these same patterns
+export const AUDIT_GROUP_PATTERNS: Record<string, string> = Object.fromEntries(AUDIT_GROUPS.map(([pattern, group]) => [group, pattern.source]));
+
+// owner 2026-10-28: the action log has its own page; on the dashboard its card shows only when chosen
+export const DEFAULT_HIDDEN: WidgetId[] = ["audit"];
+
 export function auditLabel(action: string, t: (key: string) => string): string {
   if (AUDIT_NAMED.has(action)) return t(`manager.audit.named.${action.replace(/\./g, "_")}`);
   const group = AUDIT_GROUPS.find(([pattern]) => pattern.test(action))?.[1] ?? "other";

@@ -409,7 +409,9 @@
       "external": "Externe Arbeitskräfte",
       "externalSummary": "{{present}} anwesend, {{today}} heute, {{hours}} Std.",
       "noExternal": "Heute keine externen Kräfte.",
-      "noContractor": "Ohne Auftragnehmer"
+      "noContractor": "Ohne Auftragnehmer",
+      "showAll": "Alle Standorte zeigen",
+      "filteredBy": "{{site}} · alle Standorte"
     },
     "queue": {
       "title": "Wartet auf Entscheidung ({{count}})",
@@ -588,5 +590,18 @@
       "ios": "iPhone",
       "web": "Browser"
     }
+  },
+  "auditPage": {
+    "title": "Aktionsprotokoll",
+    "filters": "Filter",
+    "from": "Von",
+    "to": "Bis",
+    "person": "Person",
+    "everyone": "Alle",
+    "kind": "Art der Aktion",
+    "allKinds": "Alle Arten",
+    "exportPdf": "Als PDF exportieren",
+    "loadMore": "Mehr anzeigen",
+    "loadError": "Das Protokoll konnte nicht geladen werden."
   }
 }

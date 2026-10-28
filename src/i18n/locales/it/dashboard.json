@@ -412,7 +412,9 @@
       "external": "Lavoratori esterni",
       "externalSummary": "{{present}} presenti, {{today}} oggi, {{hours}} h",
       "noExternal": "Nessun lavoratore esterno oggi.",
-      "noContractor": "Senza appaltatore"
+      "noContractor": "Senza appaltatore",
+      "showAll": "Mostra tutti i siti",
+      "filteredBy": "{{site}} · tutti i siti"
     },
     "queue": {
       "title": "In attesa di decisione ({{count}})",
@@ -592,5 +594,18 @@
       "ios": "iPhone",
       "web": "Browser"
     }
+  },
+  "auditPage": {
+    "title": "Registro azioni",
+    "filters": "Filtri",
+    "from": "Dal",
+    "to": "Al",
+    "person": "Persona",
+    "everyone": "Tutti",
+    "kind": "Tipo di azione",
+    "allKinds": "Tutti i tipi",
+    "exportPdf": "Esporta PDF",
+    "loadMore": "Mostra altro",
+    "loadError": "Impossibile caricare il registro."
   }
 }

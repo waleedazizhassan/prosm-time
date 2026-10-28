@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, LogIn, Plug, HardHat } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, LogIn, Plug, HardHat, ScrollText } from "lucide-react";
 
 import { FEATURES } from "../../config/features";
 
@@ -125,6 +125,8 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // page's own report-type selector gates each report by the exact
   // same permission its original source page already used.
   { id: "reports", labelKey: "items.reports", path: "/reports", icon: FileBarChart, requiredPermission: null, section: "reports" },
+  // Owner 2026-10-28: the action log on its own page (it left the dashboard).
+  { id: "auditLog", labelKey: "items.auditLog", path: "/audit-log", icon: ScrollText, requiredPermission: "audit.view", section: "reports" },
   // § live UX review, user-directed - a real home for org-wide
   // settings (today: the no-site geofence radius) instead of living
   // inside an unrelated page. Owner-only, matching that setting's own

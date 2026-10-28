@@ -22,7 +22,7 @@ import ApprovalsQueue from "./ApprovalsQueue";
 import ExternalWorkersWidget from "./ExternalWorkersWidget";
 import SitesMap from "./SitesMap";
 import styles from "./ManagerDashboard.module.css";
-import { auditLabel, DEFAULT_ORDER, iso, mergeOrder, periodRange, trend, type Period, type WidgetId } from "./dashboardLogic";
+import { auditLabel, DEFAULT_HIDDEN, DEFAULT_ORDER, iso, mergeOrder, periodRange, trend, type Period, type WidgetId } from "./dashboardLogic";
 import EmptyState from "../../../components/common/EmptyState";
 import leaveTypeLabel from "../../leave/leaveTypeLabel";
 import KpiSheet, { type KpiSheetKind } from "./KpiSheet";
@@ -57,7 +57,7 @@ export default function ManagerDashboard() {
   const [data, setData] = useState<Dashboard | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
-  const [hidden, setHidden] = useState<WidgetId[]>([]);
+  const [hidden, setHidden] = useState<WidgetId[]>(DEFAULT_HIDDEN);
   const [order, setOrder] = useState<WidgetId[]>(DEFAULT_ORDER);
   const [customizeOpen, setCustomizeOpen] = useState(false);
   const [sortKey, setSortKey] = useState<keyof DashboardSite>("name");
@@ -130,19 +130,21 @@ export default function ManagerDashboard() {
 
   useEffect(() => {
     SiteRepository.listSites().then((result) => setSites((result.data ?? []).map((site) => ({ id: site.id, name: site.name }))));
-    let local: { hidden: WidgetId[]; order: WidgetId[] } | null = null;
+    // owner 2026-10-28: a layout saved before the action log moved gets its card hidden once (v2)
+    const settled = (saved: { hidden?: WidgetId[]; v?: number }) => (saved.v === 2 ? saved.hidden ?? [] : [...new Set([...(saved.hidden ?? []), ...DEFAULT_HIDDEN])]);
+    let local: { hidden: WidgetId[]; order: WidgetId[]; v?: number } | null = null;
     try {
       local = JSON.parse(localStorage.getItem(LAYOUT_KEY) ?? "null");
     } catch {
       local = null;
     }
     if (local) {
-      setHidden(local.hidden ?? []);
+      setHidden(settled(local));
       setOrder(mergeOrder(local.order ?? []));
     }
     DashboardRepository.loadLayout().then((server) => {
       if (!server) return;
-      setHidden(server.hidden as WidgetId[]);
+      setHidden(settled(server as { hidden?: WidgetId[]; v?: number }));
       setOrder(mergeOrder(server.order as WidgetId[]));
     });
   }, []);
@@ -151,11 +153,11 @@ export default function ManagerDashboard() {
     setHidden(nextHidden);
     setOrder(nextOrder);
     try {
-      localStorage.setItem(LAYOUT_KEY, JSON.stringify({ hidden: nextHidden, order: nextOrder }));
+      localStorage.setItem(LAYOUT_KEY, JSON.stringify({ hidden: nextHidden, order: nextOrder, v: 2 }));
     } catch {
       // private mode: the server copy still applies
     }
-    void DashboardRepository.saveLayout({ hidden: nextHidden, order: nextOrder });
+    void DashboardRepository.saveLayout({ hidden: nextHidden, order: nextOrder, v: 2 });
   };
 
   const acknowledgeSos = async () => {
@@ -281,8 +283,22 @@ export default function ManagerDashboard() {
         return (
           <section key={id} className={`${styles.widget} ${styles.span7}`} style={{ order: order.indexOf(id) }}>
             <div className={styles.widgetHeader}>
-              <h2 className={styles.widgetTitle}>{t("manager.sites.title")}</h2>
-              <span className={styles.rowMeta}>{t("manager.sites.hint")}</span>
+              {/* owner 2026-10-28: after choosing a site down here, back to all of them without scrolling up */}
+              {siteFilter ? (
+                <>
+                  <button type="button" className={`${styles.widgetTitle} ${styles.titleButton}`} onClick={() => setSiteFilter("")} title={t("manager.sites.showAll")}>
+                    {t("manager.sites.title")}
+                  </button>
+                  <button type="button" className={`${styles.chip} ${styles.chipActive}`} onClick={() => setSiteFilter("")}>
+                    {t("manager.sites.filteredBy", { site: sites.find((site) => site.id === siteFilter)?.name ?? "" })} <span aria-hidden="true">✕</span>
+                  </button>
+                </>
+              ) : (
+                <>
+                  <h2 className={styles.widgetTitle}>{t("manager.sites.title")}</h2>
+                  <span className={styles.rowMeta}>{t("manager.sites.hint")}</span>
+                </>
+              )}
             </div>
             <div className={styles.widgetBody}>
               {!data ? (
@@ -310,7 +326,7 @@ export default function ManagerDashboard() {
                         t={t}
                         externalOpen={Boolean(openExternal[site.id])}
                         onToggleExternal={() => setOpenExternal((all) => ({ ...all, [site.id]: !all[site.id] }))}
-                        onFilter={() => setSiteFilter(site.id)}
+                        onFilter={() => setSiteFilter((current) => (current === site.id ? "" : site.id))}
                       />
                     ))}
                   </tbody>
@@ -393,7 +409,7 @@ export default function ManagerDashboard() {
           <section key={id} className={`${styles.widget} ${styles.span12}`} style={{ order: order.indexOf(id) }}>
             <div className={styles.widgetHeader}>
               <h2 className={styles.widgetTitle}>{t("manager.audit.title")}</h2>
-              <button type="button" className={styles.chip} onClick={() => navigate("/reports")}>
+              <button type="button" className={styles.chip} onClick={() => navigate("/audit-log")}>
                 {t("manager.viewAll")}
               </button>
             </div>

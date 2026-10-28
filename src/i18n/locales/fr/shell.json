@@ -216,7 +216,8 @@
     "integrations": "Intégrations",
     "help": "Aide",
     "workers": "Intervenants externes",
-    "calendar": "Calendrier et jours fériés"
+    "calendar": "Calendrier et jours fériés",
+    "auditLog": "Journal des actions"
   },
   "sosOverlay": {
     "title": "Alerte SOS/Urgence",
@@ -320,7 +321,8 @@
     "integrations": "Paie et autres systèmes",
     "timesheets": "Heures à vérifier et approuver",
     "workers": "Intervenants externes et leur numéro de borne",
-    "calendar": "Jours fériés, jours de repos et jours exceptionnels - les heures et heures supplémentaires en dépendent."
+    "calendar": "Jours fériés, jours de repos et jours exceptionnels - les heures et heures supplémentaires en dépendent.",
+    "auditLog": "Tout ce qui se fait dans votre organisation : qui a fait quoi, pour qui, quand et pourquoi."
   },
   "backgroundDisclosure": {
     "title": "Position pendant votre poste",

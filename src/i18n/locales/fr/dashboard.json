@@ -412,7 +412,9 @@
       "external": "Travailleurs externes",
       "externalSummary": "{{present}} présents, {{today}} aujourd'hui, {{hours}} h",
       "noExternal": "Aucun travailleur externe aujourd'hui.",
-      "noContractor": "Sans sous-traitant"
+      "noContractor": "Sans sous-traitant",
+      "showAll": "Voir tous les sites",
+      "filteredBy": "{{site}} · tous les sites"
     },
     "queue": {
       "title": "En attente de décision ({{count}})",
@@ -592,5 +594,18 @@
       "ios": "iPhone",
       "web": "Navigateur"
     }
+  },
+  "auditPage": {
+    "title": "Journal des actions",
+    "filters": "Filtres",
+    "from": "Du",
+    "to": "Au",
+    "person": "Personne",
+    "everyone": "Tout le monde",
+    "kind": "Type d'action",
+    "allKinds": "Tous les types",
+    "exportPdf": "Exporter en PDF",
+    "loadMore": "Afficher plus",
+    "loadError": "Impossible de charger le journal."
   }
 }
