@@ -33,6 +33,28 @@ describe("licensed devices", () => {
     expect((await register(a, "laptop")).error).toBeNull();
   });
 
+  // v2.3.59 (owner 2026-10-28): clearing the app's data gave his phone a new id each time. Migration 20261028130000.
+  it("the same person's phone of the same model with a new id replaces the old one, it is not another device", async () => {
+    const t = await buildDatabase();
+    const org = await createOrg(t, "Phone Co");
+    const a = await addMember(t, org, "employee", "A");
+    const b = await addMember(t, org, "employee", "B");
+    await t.su("update license_activation_state set max_devices = 2 where organization_id = $1", [org.id]);
+    const register = (member: typeof a, device: string, platform: string, label: string | null) =>
+      t.as(member.authId, "select public.register_prosm_time_device($1, $2, $3)", [id(device), platform, label]);
+    const count = async () => (await t.su<{ n: number }>("select count(*)::int as n from signed_in_devices where organization_id = $1", [org.id]))[0].n;
+
+    expect((await register(a, "first", "android", "Android - X1")).error).toBeNull();
+    expect((await register(b, "other", "android", "Android - Z9")).error).toBeNull();
+    // full - A's phone after its data was cleared still gets in, in its old place
+    for (const fresh of ["second", "third", "fourth"]) expect((await register(a, fresh, "android", "Android - X1")).error).toBeNull();
+    expect(await count()).toBe(2);
+    // a different model, the web, or another person is a new device as before
+    expect((await register(a, "tablet", "android", "Android - T5")).error).toMatch(/LICENSED DEVICE LIMIT REACHED/);
+    expect((await register(a, "browser", "web", "Android - X1")).error).toMatch(/LICENSED DEVICE LIMIT REACHED/);
+    expect((await register(b, "b-new", "android", "Android - X1")).error).toMatch(/LICENSED DEVICE LIMIT REACHED/);
+  });
+
   it("a device unused for 30 days stops counting", async () => {
     const t = await buildDatabase();
     const org = await createOrg(t, "Old Co");
