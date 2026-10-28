@@ -28,6 +28,12 @@ android {
                 storePassword keystoreProperties['storePassword']
                 keyAlias keystoreProperties['keyAlias']
                 keyPassword keystoreProperties['keyPassword']
+                // v2.3.57 (security review 2026-10-28): the newer signature schemes too -
+                // v3 allows rotating the signing key later without breaking updates
+                enableV1Signing true
+                enableV2Signing true
+                enableV3Signing true
+                enableV4Signing true
             }
         }
     }
