@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Notfall",
-      "body": "Die SOS-Schaltfläche steht während jeder Schicht auf dem Dashboard, sobald Ihr Einstempeln bestätigt ist. Sie sendet einen dringenden Alarm mit Ihrem Standort an die Vorgesetzten Ihres Standorts, den Inhaber und die Kollegen vor Ort und wird im Notfallprotokoll erfasst. SOS ist kein Notruf - es ruft weder Polizei noch Rettungsdienst. Rufen Sie im Notfall immer die örtliche Notrufnummer an (in Ägypten: Rettung 123, Polizei 122, Feuerwehr 180). Es braucht eine Internetverbindung. Wenn Sie ohne gewählten Standort arbeiten, erhalten ihn die Manager des nächstgelegenen Standorts."
+      "body": "Die SOS-Schaltfläche steht während jeder Schicht auf dem Dashboard, sobald Ihr Einstempeln bestätigt ist. Sie sendet einen dringenden Alarm mit Ihrem Standort an die Vorgesetzten Ihres Standorts, den Inhaber und die Kollegen vor Ort und wird im Notfallprotokoll erfasst. SOS ist kein Notruf - es ruft weder Polizei noch Rettungsdienst. Rufen Sie im Notfall immer die örtliche Notrufnummer an. Es braucht eine Internetverbindung. Wenn Sie ohne gewählten Standort arbeiten, erhalten ihn die Manager des nächstgelegenen Standorts."
     },
     "notifications": {
       "title": "Wie Benachrichtigungen die richtige Person erreichen",
@@ -60,7 +60,7 @@
     },
     "leave": {
       "title": "Urlaub",
-      "body": "Beantragen Sie Urlaub auf der Seite Urlaub: Art, Zeitraum und optional einen Grund (bitte keine unnötigen Gesundheitsdetails). Die Arten und ihre Tage legt der Eigentümer unter Einstellungen > Urlaubsarten fest, mit Startwerten aus dem Arbeitsgesetz 14 von 2025 (Jahresurlaub 15 Tage im ersten Jahr, danach 21, 30 nach 10 Dienstjahren, 45 bei Behinderung; Gelegenheitsurlaub 7 Tage im Jahr, höchstens 2 am Stück; Krankheit, unbezahlt, Hadsch, Trauerfall, Vaterschaft u. a.) - bitte mit dem offiziellen Text abgleichen. Ihr Kontingent je Art zeigt genommene und verbleibende Tage. Der Antrag eines Mitarbeiters geht an den Leiter seines Standorts (und den Eigentümer), der eines Leiters an den Eigentümer. Genehmigter Urlaub kann nur vor dem ersten Tag storniert werden - ab diesem Tag von niemandem, auch nicht vom Eigentümer. Unbezahlter Urlaub: Der Leiter legt bei der Genehmigung den Abzug pro Tag fest; er wird automatisch erfasst, erscheint im Lohnexport und auf Ihrem Zulagenblatt und wird zurückgenommen, wenn der Urlaub vor Beginn storniert wird. Wählen Sie beim Urlaubsantrag aus der Liste, wer ihn erhält - den Leiter Ihres Standorts oder den Inhaber: nur diese Person wird benachrichtigt und per E-Mail informiert, Sie erhalten eine Kopie. Die Antwort - genehmigt (mit den Daten und Ihrem Resturlaub), abgelehnt oder nach der Genehmigung storniert - kommt per Benachrichtigung und E-Mail im selben Verlauf zu Ihnen zurück. Ein Leiter kann eine Abwesenheit auch im Dashboard unter „Heute abwesend\" als Urlaub eintragen („Als Urlaub eintragen\"), etwa wenn Sie telefonisch gefragt haben: sofort genehmigt, auch für vergangene Tage, und Ihr Stundenzettel folgt."
+      "body": "Beantragen Sie Urlaub auf der Seite Urlaub: Art, Zeitraum und optional einen Grund (bitte keine unnötigen Gesundheitsdetails). Die Arten und ihre Tage legt der Eigentümer unter Einstellungen > Urlaubsarten fest. Ihr Kontingent je Art zeigt genommene und verbleibende Tage. Der Antrag eines Mitarbeiters geht an den Leiter seines Standorts (und den Eigentümer), der eines Leiters an den Eigentümer. Genehmigter Urlaub kann nur vor dem ersten Tag storniert werden - ab diesem Tag von niemandem, auch nicht vom Eigentümer. Unbezahlter Urlaub: Der Leiter legt bei der Genehmigung den Abzug pro Tag fest; er wird automatisch erfasst, erscheint im Lohnexport und auf Ihrem Zulagenblatt und wird zurückgenommen, wenn der Urlaub vor Beginn storniert wird. Wählen Sie beim Urlaubsantrag aus der Liste, wer ihn erhält - den Leiter Ihres Standorts oder den Inhaber: nur diese Person wird benachrichtigt und per E-Mail informiert, Sie erhalten eine Kopie. Die Antwort - genehmigt (mit den Daten und Ihrem Resturlaub), abgelehnt oder nach der Genehmigung storniert - kommt per Benachrichtigung und E-Mail im selben Verlauf zu Ihnen zurück. Ein Leiter kann eine Abwesenheit auch im Dashboard unter „Heute abwesend\" als Urlaub eintragen („Als Urlaub eintragen\"), etwa wenn Sie telefonisch gefragt haben: sofort genehmigt, auch für vergangene Tage, und Ihr Stundenzettel folgt."
     },
     "schedule": {
       "title": "Dienstplan",
@@ -191,7 +191,7 @@
     },
     "q15": {
       "question": "Ruft SOS den Rettungsdienst oder die Polizei?",
-      "answer": "Nein. Es alarmiert Ihre Vorgesetzten, den Inhaber und Kollegen vor Ort mit Ihrem Standort. Rufen Sie im Notfall selbst die Notrufnummer an (in Ägypten: Rettung 123, Polizei 122, Feuerwehr 180)."
+      "answer": "Nein. Es alarmiert Ihre Vorgesetzten, den Inhaber und Kollegen vor Ort mit Ihrem Standort. Rufen Sie im Notfall selbst die Notrufnummer an."
     }
   },
   "contact": {

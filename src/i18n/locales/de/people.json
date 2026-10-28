@@ -108,7 +108,7 @@
     "kioskPinError": "Die PIN dieses Mitarbeiters konnte nicht festgelegt werden.",
     "kioskPinSuccess": "PIN aktualisiert.",
     "leaveEntitlementTitle": "Jahresurlaubsanspruch",
-    "leaveEntitlementHint": "Überschreiben Sie den Jahresurlaubsanspruch dieses Mitarbeiters für dieses Jahr - z. B. für eine gesetzlich vorgeschriebene Erhöhung bei langer Betriebszugehörigkeit (10+ Jahre Sozialversicherung berechtigen zu 30 statt der standardmäßigen 21 Tage).",
+    "leaveEntitlementHint": "Überschreiben Sie den Jahresurlaubsanspruch dieses Mitarbeiters für dieses Jahr.",
     "leaveEntitlementCurrent": "Aktuell: {{days}} Tag(e) dieses Jahr.",
     "leaveEntitlementLabel": "Jahresanspruch (Tage)",
     "leaveEntitlementAction": "Speichern",

@@ -90,7 +90,6 @@ export default function OvertimePolicySettingsCard() {
         <Input label={t("overtimePolicy.field.nightStart")} name="overtime-nightStart" type="time" value={draft.nightStart ?? ""} onChange={(event) => set("nightStart", event.target.value)} />
         <Input label={t("overtimePolicy.field.nightEnd")} name="overtime-nightEnd" type="time" value={draft.nightEnd ?? ""} onChange={(event) => set("nightEnd", event.target.value)} />
       </div>
-      <HintText small>{t("overtimePolicy.legalNote")}</HintText>
       <ErrorText>{error}</ErrorText>
       {saved ? <HintText small>{t("overtimePolicy.saved")}</HintText> : null}
       <Button onClick={handleSave} loading={saving}>

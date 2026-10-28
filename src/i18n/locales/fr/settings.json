@@ -99,7 +99,6 @@
       "multiplierWeeklyRest": "1",
       "multiplierPublicHoliday": "1"
     },
-    "legalNote": "Les minimums légaux doivent être vérifiés dans le texte officiel du droit du travail.",
     "invalid": "Saisissez des nombres positifs.",
     "genericError": "Enregistrement impossible.",
     "saved": "Enregistré.",
@@ -107,7 +106,7 @@
   },
   "leaveTypes": {
     "title": "Types de congé",
-    "hint": "Valeurs initiales issues d'articles de presse sur la loi 14/2025 - à vérifier dans le texte officiel. Les soldes déjà fixés sont conservés.",
+    "hint": "Les modifications valent pour les droits à venir ; les soldes déjà fixés sont conservés.",
     "add": "Ajouter un type",
     "edit": "Modifier",
     "save": "Enregistrer",
@@ -134,5 +133,9 @@
     "active": "Utilisé",
     "invalidTiers": "Écrivez années:jours séparés par des virgules.",
     "genericError": "Enregistrement impossible."
+  },
+  "siteFocus": {
+    "backToSite": "← Retour au site",
+    "allSettings": "Tous les paramètres"
   }
 }

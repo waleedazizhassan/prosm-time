@@ -108,7 +108,7 @@
     "kioskPinError": "تعذر تعيين رمز هذا الموظف.",
     "kioskPinSuccess": "تم تحديث الرمز.",
     "leaveEntitlementTitle": "رصيد الإجازة السنوية",
-    "leaveEntitlementHint": "عدّل عدد أيام الإجازة السنوية لهذا الموظف للسنة الحالية - مثلاً لزيادة مستحقة قانونيًا لصاحب أقدمية تأمينية طويلة (10 سنين تأمينات فأكتر بيستحق 30 يوم، مش الـ21 الافتراضية).",
+    "leaveEntitlementHint": "عدّل عدد أيام الإجازة السنوية لهذا الموظف للسنة الحالية.",
     "leaveEntitlementCurrent": "الحالي: {{days}} يوم هذه السنة.",
     "leaveEntitlementLabel": "رصيد الإجازة السنوية (بالأيام)",
     "leaveEntitlementAction": "حفظ",

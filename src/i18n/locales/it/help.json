@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Emergenza",
-      "body": "Il pulsante SOS è sulla dashboard durante ogni turno, una volta confermata la timbratura. Invia un allarme prioritario con la tua posizione ai responsabili della sede, al titolare e ai colleghi presenti, e viene registrato nel registro emergenze. SOS non è un servizio di emergenza: non chiama polizia o ambulanza. In emergenza chiama sempre il numero locale (in Egitto: ambulanza 123, polizia 122, vigili del fuoco 180). Richiede una connessione internet. Se lavori senza una sede scelta, lo ricevono i responsabili della sede più vicina."
+      "body": "Il pulsante SOS è sulla dashboard durante ogni turno, una volta confermata la timbratura. Invia un allarme prioritario con la tua posizione ai responsabili della sede, al titolare e ai colleghi presenti, e viene registrato nel registro emergenze. SOS non è un servizio di emergenza: non chiama polizia o ambulanza. In emergenza chiama sempre il numero locale. Richiede una connessione internet. Se lavori senza una sede scelta, lo ricevono i responsabili della sede più vicina."
     },
     "notifications": {
       "title": "Come le notifiche raggiungono la persona giusta",
@@ -60,7 +60,7 @@
     },
     "leave": {
       "title": "Ferie",
-      "body": "Richiedi le ferie dalla pagina Ferie: tipo, date e, se vuoi, un motivo (evita dettagli sanitari non necessari). I tipi e i loro giorni sono stabiliti dal titolare in Impostazioni > Tipi di ferie, con valori iniziali dalla legge sul lavoro 14 del 2025 (annuali 15 giorni il primo anno, poi 21, 30 dopo 10 anni di servizio, 45 per persone con disabilità; occasionali 7 giorni l'anno, massimo 2 alla volta; malattia, non retribuite, Hajj, lutto, paternità e altre) - verificali con il testo ufficiale. Il saldo per tipo mostra i giorni usati e rimanenti. La richiesta di un dipendente va al responsabile del suo sito (e al titolare); quella di un responsabile va al titolare. Le ferie approvate si possono annullare solo prima del primo giorno - da quel giorno nessuno può annullarle, nemmeno il titolare. Ferie non retribuite: il responsabile fissa la trattenuta giornaliera all'approvazione; viene registrata automaticamente, compare nell'export paghe e nel tuo foglio indennità, e viene annullata se le ferie sono annullate prima dell'inizio. Quando chiedi ferie, scegli dall'elenco chi le riceve - il responsabile del tuo sito o il titolare: solo quella persona riceve notifica ed e-mail, e tu ne ricevi una copia. La risposta - approvate (con le date e il saldo residuo), rifiutate o annullate dopo l'approvazione - ti torna per notifica ed e-mail nella stessa conversazione. Un responsabile può anche trasformare un'assenza in ferie dalla lista \"Assenti oggi\" della dashboard (\"Segna come ferie\"), ad esempio se le hai chieste per telefono: approvate subito, anche per giorni passati, e il foglio ore segue."
+      "body": "Richiedi le ferie dalla pagina Ferie: tipo, date e, se vuoi, un motivo (evita dettagli sanitari non necessari). I tipi e i loro giorni sono stabiliti dal titolare in Impostazioni > Tipi di ferie. Il saldo per tipo mostra i giorni usati e rimanenti. La richiesta di un dipendente va al responsabile del suo sito (e al titolare); quella di un responsabile va al titolare. Le ferie approvate si possono annullare solo prima del primo giorno - da quel giorno nessuno può annullarle, nemmeno il titolare. Ferie non retribuite: il responsabile fissa la trattenuta giornaliera all'approvazione; viene registrata automaticamente, compare nell'export paghe e nel tuo foglio indennità, e viene annullata se le ferie sono annullate prima dell'inizio. Quando chiedi ferie, scegli dall'elenco chi le riceve - il responsabile del tuo sito o il titolare: solo quella persona riceve notifica ed e-mail, e tu ne ricevi una copia. La risposta - approvate (con le date e il saldo residuo), rifiutate o annullate dopo l'approvazione - ti torna per notifica ed e-mail nella stessa conversazione. Un responsabile può anche trasformare un'assenza in ferie dalla lista \"Assenti oggi\" della dashboard (\"Segna come ferie\"), ad esempio se le hai chieste per telefono: approvate subito, anche per giorni passati, e il foglio ore segue."
     },
     "schedule": {
       "title": "Turni",
@@ -191,7 +191,7 @@
     },
     "q15": {
       "question": "Il SOS chiama ambulanza o polizia?",
-      "answer": "No. Avvisa i responsabili, il titolare e i colleghi presenti con la tua posizione. In emergenza chiama tu il numero locale (in Egitto: ambulanza 123, polizia 122, vigili del fuoco 180)."
+      "answer": "No. Avvisa i responsabili, il titolare e i colleghi presenti con la tua posizione. In emergenza chiama tu il numero locale."
     }
   },
   "contact": {

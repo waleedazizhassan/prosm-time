@@ -108,7 +108,7 @@
     "kioskPinError": "Unable to set this employee's PIN.",
     "kioskPinSuccess": "PIN updated.",
     "leaveEntitlementTitle": "Annual Leave Entitlement",
-    "leaveEntitlementHint": "Override this employee's annual leave days for this year - e.g. legally-required increases for long tenure (10+ years of social insurance entitles 30 days, not the default 21).",
+    "leaveEntitlementHint": "Override this employee's annual leave days for this year.",
     "leaveEntitlementCurrent": "Current: {{days}} day(s) this year.",
     "leaveEntitlementLabel": "Annual entitlement (days)",
     "leaveEntitlementAction": "Save",

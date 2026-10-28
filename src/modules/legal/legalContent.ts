@@ -6,7 +6,7 @@
 //
 // When either text changes, raise LEGAL_VERSION: every user is asked to
 // read and acknowledge the new version once (LegalAcknowledgementGate).
-export const LEGAL_VERSION = "2026-10-27.2";
+export const LEGAL_VERSION = "2026-10-28";
 
 export interface LegalSection {
   heading: string;
@@ -143,7 +143,7 @@ const PRIVACY_EN: LegalDocument = {
       paragraphs: [
         "Send your request first to your employer or organisation, which controls your data. PROSM helps it respond. You can also write to info@prosm.net.",
         "Deleting your account: in the app, open your user menu and choose \"Delete my account\" (your password is asked again). Your sign-in stops for good and your personal data is deleted at once - your name, email and picture, clock-in and clock-out photos, location trail, leave documents, devices and notifications. Your organisation keeps the work records that law and payroll require (attendance, timesheets, leave and allowances) without your name, as \"Deleted user\", for as long as section 8 says. The owner's account holds the organisation and is deleted on request to support@prosm.net.",
-        "You may complain to the data protection authority in your country. In Egypt, that is the Personal Data Protection Center.",
+        "You may complain to the data protection authority in your country.",
       ],
     },
     {
@@ -281,7 +281,7 @@ const PRIVACY_AR: LegalDocument = {
       paragraphs: [
         "وجّه طلبك أولاً إلى جهة عملك أو المؤسسة المتحكمة في بياناتك، وتساعدها PROSM في الرد عليه. ويمكنك أيضاً مراسلة info@prosm.net.",
         "حذف حسابك: من قائمة المستخدم في التطبيق اختر «حذف حسابي» (تُطلب كلمة المرور مرة أخرى). فيتوقف دخولك نهائياً وتُحذف بياناتك الشخصية فوراً - اسمك وبريدك وصورتك، وصور الحضور والانصراف، ومسار موقعك، ومستندات الإجازات، والأجهزة والإشعارات. وتحتفظ مؤسستك بسجلات العمل التي يلزمها القانون والرواتب (الحضور والكشوف والإجازات والبدلات) دون اسمك، باسم «مستخدم محذوف»، للمدة المذكورة في البند 8. أما حساب صاحب الشركة فتتبعه المؤسسة كلها، ويُحذف بطلب إلى support@prosm.net.",
-        "ويحق لك تقديم شكوى إلى جهة حماية البيانات في بلدك. وفي مصر، هي مركز حماية البيانات الشخصية.",
+        "ويحق لك تقديم شكوى إلى جهة حماية البيانات في بلدك.",
       ],
     },
     {
@@ -351,7 +351,7 @@ const TERMS_EN: LegalDocument = {
       heading: "5. SOS alerts",
       paragraphs: [
         "The SOS button sends an alert with your location to your site's managers, the Organisation's owner and co-workers clocked in at the same site. If you work without a chosen site, the managers of the nearest site receive it.",
-        "It is not an emergency service and does not contact the police, an ambulance or the fire service. In an emergency, always call your local emergency number. In Egypt: ambulance 123, police 122, fire 180.",
+        "It is not an emergency service and does not contact the police, an ambulance or the fire service. In an emergency, always call your local emergency number.",
         "An alert needs an internet connection and a shift confirmed by the server, and its delivery cannot be guaranteed. Use SOS for real emergencies only.",
       ],
     },
@@ -471,7 +471,7 @@ const TERMS_AR: LegalDocument = {
       heading: "5. تنبيهات الطوارئ SOS",
       paragraphs: [
         "يرسل زر SOS تنبيهاً بموقعك إلى مديري موقعك، ومالك المؤسسة، والزملاء المسجَّل حضورهم في الموقع نفسه. وإذا كنت تعمل دون اختيار موقع، يصل التنبيه إلى مديري أقرب موقع.",
-        "زر SOS ليس خدمة طوارئ، ولا يتصل بالشرطة أو الإسعاف أو الإطفاء. وفي حالات الطوارئ اتصل دائماً برقم الطوارئ المحلي. في مصر: الإسعاف 123، والشرطة 122، والمطافئ 180.",
+        "زر SOS ليس خدمة طوارئ، ولا يتصل بالشرطة أو الإسعاف أو الإطفاء. وفي حالات الطوارئ اتصل دائماً برقم الطوارئ المحلي.",
         "يحتاج التنبيه إلى اتصال بالإنترنت ووردية مؤكدة من الخادم، ولا يمكن ضمان وصوله. استخدم SOS في الطوارئ الحقيقية فقط.",
       ],
     },

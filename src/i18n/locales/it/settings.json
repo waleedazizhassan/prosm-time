@@ -99,7 +99,6 @@
       "multiplierWeeklyRest": "1",
       "multiplierPublicHoliday": "1"
     },
-    "legalNote": "I minimi di legge vanno verificati sul testo ufficiale.",
     "invalid": "Inserisci numeri da 0 in su.",
     "genericError": "Salvataggio non riuscito.",
     "saved": "Salvato.",
@@ -107,7 +106,7 @@
   },
   "leaveTypes": {
     "title": "Tipi di permesso",
-    "hint": "Valori iniziali da articoli di stampa sulla legge 14/2025 - da verificare sul testo ufficiale. I saldi già impostati restano.",
+    "hint": "Le modifiche valgono per i diritti futuri; i saldi già impostati restano.",
     "add": "Aggiungi tipo",
     "edit": "Modifica",
     "save": "Salva",
@@ -134,5 +133,9 @@
     "active": "In uso",
     "invalidTiers": "Scrivi anni:giorni separati da virgole.",
     "genericError": "Salvataggio non riuscito."
+  },
+  "siteFocus": {
+    "backToSite": "← Torna al sito",
+    "allSettings": "Tutte le impostazioni"
   }
 }

@@ -99,7 +99,6 @@
       "multiplierWeeklyRest": "1",
       "multiplierPublicHoliday": "1"
     },
-    "legalNote": "The legal minimum rates must be checked against the official text of the labour law; PROSM Time does not set them for you.",
     "invalid": "Enter numbers of 0 or more.",
     "genericError": "Could not save.",
     "saved": "Saved.",
@@ -107,7 +106,7 @@
   },
   "leaveTypes": {
     "title": "Leave types",
-    "hint": "Starting values come from press reports on Labour Law No. 14 of 2025 - check them against the official text. Changes apply to coming entitlements; balances already set are kept.",
+    "hint": "Changes apply to coming entitlements; balances already set are kept.",
     "add": "Add a leave type",
     "edit": "Edit",
     "save": "Save",
@@ -134,5 +133,9 @@
     "active": "In use",
     "invalidTiers": "Write the tiers as years:days separated by commas.",
     "genericError": "Could not save."
+  },
+  "siteFocus": {
+    "backToSite": "← Back to the site",
+    "allSettings": "All settings"
   }
 }

@@ -99,7 +99,6 @@
       "multiplierWeeklyRest": "1",
       "multiplierPublicHoliday": "1"
     },
-    "legalNote": "Gesetzliche Mindestsätze sind am offiziellen Gesetzestext zu prüfen.",
     "invalid": "Bitte Zahlen ab 0 eingeben.",
     "genericError": "Speichern fehlgeschlagen.",
     "saved": "Gespeichert.",
@@ -107,7 +106,7 @@
   },
   "leaveTypes": {
     "title": "Urlaubsarten",
-    "hint": "Startwerte aus Presseberichten zum Arbeitsgesetz Nr. 14/2025 - am offiziellen Text prüfen. Bereits gesetzte Salden bleiben.",
+    "hint": "Änderungen gelten für künftige Ansprüche; bereits gesetzte Salden bleiben.",
     "add": "Urlaubsart hinzufügen",
     "edit": "Bearbeiten",
     "save": "Speichern",
@@ -134,5 +133,9 @@
     "active": "Verwendet",
     "invalidTiers": "Jahre:Tage durch Kommas getrennt eingeben.",
     "genericError": "Speichern fehlgeschlagen."
+  },
+  "siteFocus": {
+    "backToSite": "← Zurück zum Standort",
+    "allSettings": "Alle Einstellungen"
   }
 }

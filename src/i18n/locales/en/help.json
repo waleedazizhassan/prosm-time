@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Emergency",
-      "body": "The SOS button is on the Dashboard during every shift once your clock-in is confirmed. Pressing it sends a high-priority alert with your location to your site's managers, the Owner and co-workers clocked in at the same site, and it's logged in the Emergency Log. SOS is not an emergency service - it doesn't call the police or an ambulance. In an emergency, always call your local emergency number (in Egypt: ambulance 123, police 122, fire 180). It needs an internet connection. If you work without a chosen site, the managers of the nearest site receive it."
+      "body": "The SOS button is on the Dashboard during every shift once your clock-in is confirmed. Pressing it sends a high-priority alert with your location to your site's managers, the Owner and co-workers clocked in at the same site, and it's logged in the Emergency Log. SOS is not an emergency service - it doesn't call the police or an ambulance. In an emergency, always call your local emergency number. It needs an internet connection. If you work without a chosen site, the managers of the nearest site receive it."
     },
     "notifications": {
       "title": "How Notifications Reach the Right Person",
@@ -60,7 +60,7 @@
     },
     "leave": {
       "title": "Leave",
-      "body": "Request leave from the Leave page: choose the type, the dates and, if you like, a reason (please leave out unnecessary health details). Types and their days are set by the Owner under Settings > Leave types, with starting values from Labour Law 14 of 2025 (annual 15 days in the first year, 21 after, 30 after 10 years of service, 45 for special needs; casual 7 days a year, at most 2 at a time; sick, unpaid, Hajj, bereavement, paternity and others) - check them against the official text. Your balance per type shows used and remaining days. When you request leave, choose who receives it - your site's manager or the Owner - from the list; only that person is notified and emailed, and you get a copy. Their answer - approved (with the dates and your remaining balance), declined, or cancelled after approval - comes back to you by notification and email, on the same email conversation. A manager can also turn an absence into leave from the dashboard's \"Absent today\" sheet (\"Make it leave\"), for example when you asked by phone: it is approved at once, past days too, and your timesheet follows. Approved leave can be cancelled only before its first day - from that day on, no one can cancel it, not even the Owner. Unpaid leave: the manager sets the deduction per day when approving; it is recorded automatically and shows in the payroll export and your allowance sheet, and it is reversed if the leave is cancelled before it starts."
+      "body": "Request leave from the Leave page: choose the type, the dates and, if you like, a reason (please leave out unnecessary health details). Types and their days are set by the Owner under Settings > Leave types. Your balance per type shows used and remaining days. When you request leave, choose who receives it - your site's manager or the Owner - from the list; only that person is notified and emailed, and you get a copy. Their answer - approved (with the dates and your remaining balance), declined, or cancelled after approval - comes back to you by notification and email, on the same email conversation. A manager can also turn an absence into leave from the dashboard's \"Absent today\" sheet (\"Make it leave\"), for example when you asked by phone: it is approved at once, past days too, and your timesheet follows. Approved leave can be cancelled only before its first day - from that day on, no one can cancel it, not even the Owner. Unpaid leave: the manager sets the deduction per day when approving; it is recorded automatically and shows in the payroll export and your allowance sheet, and it is reversed if the leave is cancelled before it starts."
     },
     "schedule": {
       "title": "Shift Roster",
@@ -191,7 +191,7 @@
     },
     "q15": {
       "question": "Does SOS call the ambulance or the police?",
-      "answer": "No. It alerts your site's managers, the Owner and co-workers on site, with your location. In an emergency, call your local emergency number yourself (in Egypt: ambulance 123, police 122, fire 180)."
+      "answer": "No. It alerts your site's managers, the Owner and co-workers on site, with your location. In an emergency, call your local emergency number yourself."
     }
   },
   "contact": {

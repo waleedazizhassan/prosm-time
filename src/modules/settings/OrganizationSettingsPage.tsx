@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Link, Navigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { useAuth } from "../../core/context/AuthContext";
@@ -28,6 +28,10 @@ export default function OrganizationSettingsPage() {
   const { t } = useTranslation("settings");
   const { profile, hasPermission } = useAuth();
   const isOwner = Boolean(profile?.isOwner);
+  // owner 2026-10-28 ("from a site, 'open the site's rules' sent me to all the
+  // settings"): opened for one site, the page shows that site's rules only
+  const [searchParams] = useSearchParams();
+  const focusedSite = searchParams.get("site");
 
   // Owner 2026-10-20 ("move every setting, the sites' too, to the Settings
   // page"): each site's rules are chosen here from a site list - managers
@@ -35,6 +39,19 @@ export default function OrganizationSettingsPage() {
   // for the Owner.
   if (!isOwner && !hasPermission("sites.manage")) {
     return <Navigate to="/dashboard" replace />;
+  }
+
+  if (focusedSite) {
+    return (
+      <PageShell title="">
+        <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap", fontSize: "var(--font-sm)" }}>
+          <Link to={`/sites/${focusedSite}`}>{t("siteFocus.backToSite")}</Link>
+          <span aria-hidden="true">·</span>
+          <Link to="/settings">{t("siteFocus.allSettings")}</Link>
+        </div>
+        <SitePolicySettingsCard key={focusedSite} />
+      </PageShell>
+    );
   }
 
   return (

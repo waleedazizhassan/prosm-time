@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Urgence",
-      "body": "Le bouton SOS est sur le tableau de bord pendant chaque poste, une fois votre pointage confirmé. Il envoie une alerte prioritaire avec votre position aux responsables de votre site, au propriétaire et aux collègues présents, et l'enregistre dans le journal des urgences. SOS n'est pas un service d'urgence : il n'appelle ni la police ni une ambulance. En cas d'urgence, appelez toujours le numéro local (en Égypte : ambulance 123, police 122, pompiers 180). Il nécessite une connexion internet. Si vous travaillez sans site choisi, les responsables du site le plus proche la reçoivent."
+      "body": "Le bouton SOS est sur le tableau de bord pendant chaque poste, une fois votre pointage confirmé. Il envoie une alerte prioritaire avec votre position aux responsables de votre site, au propriétaire et aux collègues présents, et l'enregistre dans le journal des urgences. SOS n'est pas un service d'urgence : il n'appelle ni la police ni une ambulance. En cas d'urgence, appelez toujours le numéro local. Il nécessite une connexion internet. Si vous travaillez sans site choisi, les responsables du site le plus proche la reçoivent."
     },
     "notifications": {
       "title": "Comment les notifications atteignent la bonne personne",
@@ -60,7 +60,7 @@
     },
     "leave": {
       "title": "Congés",
-      "body": "Demandez un congé depuis la page Congés : type, dates et, si vous le souhaitez, un motif (évitez les détails de santé inutiles). Les types et leurs jours sont fixés par le propriétaire dans Paramètres > Types de congés, avec des valeurs initiales issues de la loi du travail 14 de 2025 (annuel 15 jours la première année, 21 ensuite, 30 après 10 ans, 45 pour les personnes handicapées ; occasionnel 7 jours par an, 2 au maximum à la fois ; maladie, sans solde, Hajj, deuil, paternité, etc.) - à vérifier avec le texte officiel. Votre solde par type indique les jours pris et restants. La demande d'un employé va au responsable de son site (et au propriétaire) ; celle d'un responsable va au propriétaire. Un congé approuvé ne peut être annulé qu'avant son premier jour - ensuite, personne ne peut l'annuler, pas même le propriétaire. Congé sans solde : le responsable fixe la retenue par jour à l'approbation ; elle est enregistrée automatiquement, apparaît dans l'export de paie et votre fiche d'indemnités, et est annulée si le congé l'est avant de commencer. Lors d'une demande de congé, choisissez dans la liste qui la reçoit - le responsable de votre site ou le propriétaire : seule cette personne est notifiée et reçoit un e-mail, et vous recevez une copie. Sa réponse - approuvé (avec les dates et votre solde restant), refusé ou annulé après approbation - vous revient par notification et par e-mail, dans la même conversation. Un responsable peut aussi transformer une absence en congé depuis la liste « Absents aujourd'hui » du tableau de bord (« Passer en congé »), par exemple si vous l'avez demandé par téléphone : il est approuvé aussitôt, jours passés compris, et votre feuille de temps suit."
+      "body": "Demandez un congé depuis la page Congés : type, dates et, si vous le souhaitez, un motif (évitez les détails de santé inutiles). Les types et leurs jours sont fixés par le propriétaire dans Paramètres > Types de congés. Votre solde par type indique les jours pris et restants. La demande d'un employé va au responsable de son site (et au propriétaire) ; celle d'un responsable va au propriétaire. Un congé approuvé ne peut être annulé qu'avant son premier jour - ensuite, personne ne peut l'annuler, pas même le propriétaire. Congé sans solde : le responsable fixe la retenue par jour à l'approbation ; elle est enregistrée automatiquement, apparaît dans l'export de paie et votre fiche d'indemnités, et est annulée si le congé l'est avant de commencer. Lors d'une demande de congé, choisissez dans la liste qui la reçoit - le responsable de votre site ou le propriétaire : seule cette personne est notifiée et reçoit un e-mail, et vous recevez une copie. Sa réponse - approuvé (avec les dates et votre solde restant), refusé ou annulé après approbation - vous revient par notification et par e-mail, dans la même conversation. Un responsable peut aussi transformer une absence en congé depuis la liste « Absents aujourd'hui » du tableau de bord (« Passer en congé »), par exemple si vous l'avez demandé par téléphone : il est approuvé aussitôt, jours passés compris, et votre feuille de temps suit."
     },
     "schedule": {
       "title": "Planning des shifts",
@@ -191,7 +191,7 @@
     },
     "q15": {
       "question": "Le SOS appelle-t-il une ambulance ou la police ?",
-      "answer": "Non. Il alerte vos responsables, le propriétaire et les collègues sur place avec votre position. En cas d'urgence, appelez vous-même le numéro local (en Égypte : ambulance 123, police 122, pompiers 180)."
+      "answer": "Non. Il alerte vos responsables, le propriétaire et les collègues sur place avec votre position. En cas d'urgence, appelez vous-même le numéro local."
     }
   },
   "contact": {
