@@ -29,7 +29,7 @@ describe("leave emails", () => {
     expect(email.html).not.toContain("Omar <b>");
   });
 
-  it("an approval congratulates the requester with the dates and the balance, and copies whoever approved", () => {
+  it("an approval congratulates the requester with the dates and the balance", () => {
     const emails = renderLeaveEmails({
       ...base,
       kind: "approved",
@@ -38,15 +38,14 @@ describe("leave emails", () => {
       leave: { ...base.leave, notes: "Enjoy" },
       remainingDays: 18,
     });
-    expect(emails.map((email) => email.to)).toEqual(["omar@acme.example", "mona@acme.example"]);
+    expect(emails[0].to).toBe("omar@acme.example");
     expect(emails[0].html).toContain("تمت الموافقة");
     expect(emails[0].html).toContain("من 02/11/2026 إلى 04/11/2026");
     expect(emails[0].html).toContain("18 يوم");
     expect(emails[0].html).toContain("mailto:mona@acme.example");
-    // one thread: the decision and its copy carry the request's own subject
+    // one thread: the decision carries the request's own subject
     const [request] = renderLeaveEmails(base);
     expect(emails[0].subject).toBe(request.subject);
-    expect(emails[1].subject).toBe(request.subject);
   });
 
   it("the requester gets a copy of a request sent to the person they chose", () => {
@@ -63,29 +62,13 @@ describe("leave emails", () => {
     expect(email.html).not.toContain("لم تتم الموافقة");
   });
 
-  // v2.3.59 (owner 2026-10-28: a real review of the leave email workflow)
-  it("the person who decided gets their own record, not the employee's congratulations", () => {
-    const emails = renderLeaveEmails({ ...base, kind: "approved", recipient: base.requester, reviewer: { id: "m", name: "Mona", email: "mona@acme.example" }, remainingDays: 18 });
-    expect(emails[0].html).toContain("مبروك");
-    expect(emails[1].to).toBe("mona@acme.example");
-    expect(emails[1].html).toContain("وافقت على إجازة Omar &lt;b&gt;");
-    expect(emails[1].html).not.toContain("مبروك");
-    const declined = renderLeaveEmails({ ...base, kind: "rejected", recipient: base.requester, reviewer: { id: "m", name: "Mona", email: "mona@acme.example" } });
-    expect(declined[1].html).toContain("رفضت طلب إجازة");
-  });
-
-  it("the person a request was sent to hears when someone else decided it", () => {
-    const emails = renderLeaveEmails({
-      ...base,
-      kind: "approved",
-      recipient: base.requester,
-      reviewer: { id: "o", name: "Owner", email: "owner@acme.example" },
-      chosenReviewer: { id: "m", name: "Mona", email: "mona@acme.example" },
-      remainingDays: 18,
-    });
-    expect(emails.map((email) => email.to)).toEqual(["omar@acme.example", "owner@acme.example", "mona@acme.example"]);
-    expect(emails[2].html).toContain("Owner وافق على طلب");
-    expect(new Set(emails.map((email) => email.subject)).size).toBe(1);
+  // v2.3.61 (owner 2026-10-28): "approved, cancelled or declined - the email goes to employee 1 only, not to manager 2"
+  it("a decision - approved, declined or cancelled - is emailed to the employee only, never to whoever decided", () => {
+    const mona = { id: "m", name: "Mona", email: "mona@acme.example" };
+    for (const kind of ["approved", "rejected", "cancelled"] as const) {
+      const emails = renderLeaveEmails({ ...base, kind, recipient: base.requester, reviewer: mona, remainingDays: 18 });
+      expect(emails.map((email) => email.to)).toEqual(["omar@acme.example"]);
+    }
   });
 
   it("a request withdrawn before an answer tells the reviewer, with the requester's copy", () => {
@@ -96,18 +79,12 @@ describe("leave emails", () => {
   });
 
   it("each reader in their own language, on one thread in the requester's language", () => {
-    const emails = renderLeaveEmails({
-      ...base,
-      kind: "approved",
-      recipient: base.requester,
-      reviewer: { id: "m", name: "Mona", email: "mona@acme.example" },
-      languages: { e: "ar", m: "en" },
-      remainingDays: 18,
-    });
-    expect(emails[0].html).toContain("تمت الموافقة");
-    expect(emails[1].html).toContain("You approved");
-    expect(emails[1].subject).toBe(emails[0].subject);
-    expect(emails[1].subject).toContain("طلب إجازة");
+    const emails = renderLeaveEmails({ ...base, copyToRequester: true, languages: { e: "ar", m: "en" } });
+    expect(emails[0].to).toBe("mona@acme.example");
+    expect(emails[0].html).toContain("A leave request awaits your review");
+    expect(emails[1].html).toContain("تم إرسال طلب إجازتك");
+    expect(emails[0].subject).toBe(emails[1].subject);
+    expect(emails[0].subject).toContain("طلب إجازة");
   });
 
   it("English for a reader in another language; nothing without an address", () => {

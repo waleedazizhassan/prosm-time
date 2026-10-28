@@ -1,13 +1,14 @@
-// v2.3.54 (owner 2026-10-26): the emails of a leave request - to the
-// reviewer when it is asked for, to the requester (with a copy to whoever
-// decided) when it is answered. Arabic for an Arabic reader, English
-// otherwise; the same branded card as the other PROSM Time emails.
+// v2.3.54 (owner 2026-10-26): the emails of a leave request, in the same
+// branded card as the other PROSM Time emails.
 //
-// v2.3.59 (owner 2026-10-28: "a real review of the workflow"): each email is
-// written for its reader - the person who decided gets "you approved X's
-// leave", not the employee's congratulations; the person a request was sent
-// to hears when someone else decided it, or when the requester withdrew it
-// before anyone answered; and each reader gets their own language.
+// v2.3.61 (owner 2026-10-28, the workflow he set out):
+//   - a request: to the person it is sent to ("awaiting your review"), with a
+//     copy to the employee ("your request was sent");
+//   - a decision - approved, declined, or cancelled after approval: to the
+//     employee only (no copy to whoever decided);
+//   - withdrawn by the employee: the person it was sent to (or who approved
+//     it) is told, with the employee's copy.
+// Each reader gets their own language, all on one thread.
 // deno-lint-ignore-file no-explicit-any
 
 type Person = { id: string; name: string; email: string | null };
@@ -23,7 +24,6 @@ export interface LeaveEmailData {
   recipient: Person;
   requester: Person;
   reviewer: Person | null;
-  chosenReviewer?: Person | null;
   leave: { type: string; typeName: string | null; isPaid: boolean | null; startDate: string; endDate: string; days: number; reason: string | null; notes: string | null };
   remainingDays: number | null;
 }
@@ -197,7 +197,10 @@ export function renderLeaveEmails(data: LeaveEmailData): RenderedEmail[] {
     return emails;
   }
 
-  // a decision: approved, rejected, or cancelled after approval
+  // a decision: approved, rejected, or cancelled after approval.
+  // v2.3.61 (owner 2026-10-28): it goes to the employee only - "the manager who
+  // decided must not get it, only employee 1" - no copy to whoever decided,
+  // nor to the person the request was sent to.
   const kind = data.kind;
   const approved = kind === "approved";
   const cancelled = kind === "cancelled";
@@ -209,9 +212,6 @@ export function renderLeaveEmails(data: LeaveEmailData): RenderedEmail[] {
     if ((approved || cancelled) && data.remainingDays !== null) rows.push([w.L(`المتبقي من رصيد ${w.typeLabel}`, `Remaining ${w.typeLower} balance`), escape(w.L(`${num(data.remainingDays)} يوم`, `${num(data.remainingDays)} day(s)`))]);
     return rows;
   };
-  const verb = (w: ReturnType<typeof wording>) => w.L(approved ? "وافق على" : cancelled ? "ألغى" : "رفض", approved ? "approved" : cancelled ? "cancelled" : "declined");
-
-  // 1. the requester
   push(requester.email, requester.id, `time-leave-${kind}`, (w) => {
     const title = approved
       ? w.L("تمت الموافقة على إجازتك 🎉", "Your leave is approved 🎉")
@@ -226,34 +226,5 @@ export function renderLeaveEmails(data: LeaveEmailData): RenderedEmail[] {
         : w.L(`للأسف لم تتم الموافقة على ${w.typeLabel} ${w.period}.`, `Your ${w.typeLower} request, ${w.period}, was not approved.`);
     return card(w.dir, title, escape(intro), decisionRows(w), { label: w.L("عرض إجازاتي", "View my leave"), href: `${APP_URL}/leave` }, w.footer + w.answerLine("للرد على صاحب القرار:", "To answer the person who decided:", decider?.email ?? null));
   });
-
-  // 2. the person who decided: a record of their own decision, not the employee's email
-  if (decider) {
-    push(decider.email, decider.id, `time-leave-${kind}-copy`, (w) =>
-      card(
-        w.dir,
-        approved ? w.L(`وافقت على إجازة ${requester.name}`, `You approved ${requester.name}'s leave`) : cancelled ? w.L(`ألغيت إجازة ${requester.name}`, `You cancelled ${requester.name}'s leave`) : w.L(`رفضت طلب إجازة ${requester.name}`, `You declined ${requester.name}'s leave request`),
-        escape(w.L(`تم إبلاغ ${requester.name} بقرارك في البرنامج وعلى الإيميل.`, `${requester.name} has been told of your decision in the app and by email.`)),
-        decisionRows(w),
-        null,
-        w.footer + w.answerLine("للرد على الموظف:", "To answer the employee:", requester.email),
-      ),
-    );
-  }
-
-  // 3. the person it was sent to, when someone else decided it
-  const chosen = data.chosenReviewer;
-  if (chosen && decider) {
-    push(chosen.email, chosen.id, `time-leave-${kind}-info`, (w) =>
-      card(
-        w.dir,
-        w.L(`تم الرد على طلب إجازة ${requester.name}`, `${requester.name}'s leave request was answered`),
-        escape(w.L(`${decider.name} ${verb(w)} طلب ${w.typeLabel} ${w.period} اللي اتبعت لك. مش مطلوب منك أي إجراء.`, `${decider.name} ${verb(w)} the ${w.typeLower} request, ${w.period}, that was sent to you. Nothing is needed from you.`)),
-        decisionRows(w),
-        null,
-        w.footer,
-      ),
-    );
-  }
   return emails;
 }
