@@ -6,7 +6,7 @@
 //
 // When either text changes, raise LEGAL_VERSION: every user is asked to
 // read and acknowledge the new version once (LegalAcknowledgementGate).
-export const LEGAL_VERSION = "2026-10-28";
+export const LEGAL_VERSION = "2026-10-28.2";
 
 export interface LegalSection {
   heading: string;
@@ -406,7 +406,7 @@ const TERMS_EN: LegalDocument = {
     {
       heading: "13. Governing law",
       paragraphs: [
-        "These terms are governed by the laws of the Arab Republic of Egypt, and the courts of Cairo have jurisdiction, unless mandatory law where you live gives you other rights.",
+        "These terms are governed by the laws of the Arab Republic of Egypt, and the courts of Alexandria have jurisdiction, unless mandatory law where you live gives you other rights.",
       ],
     },
     {
@@ -526,7 +526,7 @@ const TERMS_AR: LegalDocument = {
     {
       heading: "13. القانون الحاكم",
       paragraphs: [
-        "تخضع هذه الشروط لقوانين جمهورية مصر العربية، وتختص محاكم القاهرة بنظر أي نزاع ينشأ عنها، ما لم تمنحك القوانين الآمرة في بلد إقامتك حقوقاً أخرى.",
+        "تخضع هذه الشروط لقوانين جمهورية مصر العربية، وتختص محاكم الإسكندرية بنظر أي نزاع ينشأ عنها، ما لم تمنحك القوانين الآمرة في بلد إقامتك حقوقاً أخرى.",
       ],
     },
     {
