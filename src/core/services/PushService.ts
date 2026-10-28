@@ -42,8 +42,8 @@ function remembered(): string | null {
 
 let started = false;
 
-/** Asks for permission (once), registers this phone and hands a tapped notification's data to `onTap` (which opens its page). */
-export async function startPush(onTap: (data: Record<string, unknown> | undefined) => void): Promise<void> {
+/** Asks for permission (once, unless `ask` is false), registers this phone and hands a tapped notification's data to `onTap` (which opens its page). */
+export async function startPush(onTap: (data: Record<string, unknown> | undefined) => void, ask = true): Promise<void> {
   if (!isPushSupported() || started) return;
   started = true;
   try {
@@ -62,7 +62,7 @@ export async function startPush(onTap: (data: Record<string, unknown> | undefine
     });
     await PushNotifications.addListener("pushNotificationActionPerformed", ({ notification }) => onTap(notification.data));
     let permission = await PushNotifications.checkPermissions();
-    if (permission.receive === "prompt" || permission.receive === "prompt-with-rationale") permission = await PushNotifications.requestPermissions();
+    if (ask && (permission.receive === "prompt" || permission.receive === "prompt-with-rationale")) permission = await PushNotifications.requestPermissions();
     if (permission.receive !== "granted") return;
     await PushNotifications.register();
   } catch {

@@ -9,6 +9,7 @@ import AttendanceRepository from "../../core/repositories/AttendanceRepository";
 import ShiftRepository from "../../core/repositories/ShiftRepository";
 import SiteRepository from "../../core/repositories/SiteRepository";
 import { nextClockReminder } from "../../core/services/clockReminders";
+import { readStartupPermissions } from "../../core/services/StartupPermissions";
 import { hasPushToken } from "../../core/services/PushService";
 
 const CHECK_INTERVAL_MS = 2 * 60 * 1000;
@@ -53,7 +54,9 @@ export default function ClockReminderLoop() {
         // the phone itself would arrive twice.
         if (reminder && !hasPushToken()) {
           const permission = await LocalNotifications.checkPermissions();
-          const display = permission.display === "granted" ? "granted" : (await LocalNotifications.requestPermissions()).display;
+          // owner 2026-10-28: the start screen asks first (StartupPermissions)
+          const askNow = permission.display !== "granted" && readStartupPermissions() !== "unknown";
+          const display = permission.display === "granted" ? "granted" : askNow ? (await LocalNotifications.requestPermissions()).display : permission.display;
           if (display !== "granted") return;
           await ensureAlertChannel();
           await LocalNotifications.schedule({

@@ -326,7 +326,7 @@
   },
   "backgroundDisclosure": {
     "title": "Posizione durante il turno",
-    "body": "PROSM Time raccoglie la tua posizione circa ogni 5 minuti per confermare che sei sul luogo di lavoro, anche quando l'app è chiusa o non in uso, ma solo mentre hai timbrato l'entrata. Si ferma quando timbri l'uscita. La posizione è condivisa con i responsabili della tua organizzazione ed eliminata dopo 30 giorni. Nella schermata successiva scegli \"Consenti sempre\".",
+    "body": "PROSM Time raccoglie la tua posizione circa ogni 5 minuti per confermare che sei sul luogo di lavoro, anche quando l'app è chiusa o non in uso, ma solo mentre hai timbrato l'entrata. Si ferma quando timbri l'uscita. La posizione è condivisa con i responsabili della tua organizzazione ed eliminata dopo 30 giorni. Nella schermata successiva scegli «Mentre usi l'app» perché funzioni.",
     "accept": "Continua",
     "decline": "Non ora"
   },
@@ -367,5 +367,24 @@
     "ownerBody": "È l'account del titolare: tutta l'organizzazione e i suoi dati dipendono da esso. Per eliminarlo con l'organizzazione o passare la proprietà, scrivici.",
     "ownerAction": "Scrivi al supporto",
     "ownerSubject": "Richiesta di eliminazione dell'account titolare"
+  },
+  "startupPermissions": {
+    "title": "Autorizzazioni di PROSM Time",
+    "intro": "L'app ha bisogno di tre autorizzazioni per funzionare del tutto. Ecco a cosa serve ciascuna:",
+    "location": {
+      "title": "Posizione",
+      "body": "Serve a confermare che sei nel luogo di lavoro quando timbri l'entrata e l'uscita. Nei luoghi in cui la tua organizzazione ha attivato il monitoraggio della presenza, e solo mentre hai timbrato l'entrata, PROSM Time rileva la tua posizione circa ogni 5 minuti, anche quando l'app è chiusa o non in uso, con una notifica fissa per tutto il tempo, e si ferma quando timbri l'uscita. La tua posizione è visibile ai responsabili della tua organizzazione e viene eliminata dopo 30 giorni."
+    },
+    "camera": {
+      "title": "Fotocamera",
+      "body": "Per scattare una foto quando timbri l'entrata o l'uscita, solo nei luoghi che la richiedono. La fotocamera si apre solo quando scatti tu la foto."
+    },
+    "notifications": {
+      "title": "Notifiche",
+      "body": "Per ricevere le risposte alle richieste di ferie e le approvazioni, i promemoria di timbratura, gli avvisi urgenti e la notifica del turno mentre hai timbrato l'entrata."
+    },
+    "footer": "Dopo «Continua», Android chiede ogni autorizzazione a turno: scegli «Consenti» o «Mentre usi l'app». Puoi cambiare ogni autorizzazione più tardi nelle impostazioni del telefono.",
+    "accept": "Continua",
+    "decline": "Non ora"
   }
 }

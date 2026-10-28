@@ -326,7 +326,7 @@
   },
   "backgroundDisclosure": {
     "title": "Position pendant votre poste",
-    "body": "PROSM Time collecte votre position environ toutes les 5 minutes pour confirmer que vous êtes sur votre site de travail, même lorsque l'application est fermée ou non utilisée, mais uniquement pendant que vous êtes pointé. Cela s'arrête quand vous pointez votre départ. Votre position est partagée avec les responsables de votre organisation et supprimée après 30 jours. À l'écran suivant, choisissez « Toujours autoriser ».",
+    "body": "PROSM Time collecte votre position environ toutes les 5 minutes pour confirmer que vous êtes sur votre site de travail, même lorsque l'application est fermée ou non utilisée, mais uniquement pendant que vous êtes pointé. Cela s'arrête quand vous pointez votre départ. Votre position est partagée avec les responsables de votre organisation et supprimée après 30 jours. À l'écran suivant, choisissez « Lorsque vous utilisez l'application » pour que cela fonctionne.",
     "accept": "Continuer",
     "decline": "Pas maintenant"
   },
@@ -367,5 +367,24 @@
     "ownerBody": "C'est le compte du propriétaire : toute l'organisation et ses données en dépendent. Pour le supprimer avec l'organisation, ou transférer la propriété, écrivez-nous.",
     "ownerAction": "Écrire au support",
     "ownerSubject": "Demande de suppression du compte propriétaire"
+  },
+  "startupPermissions": {
+    "title": "Autorisations de PROSM Time",
+    "intro": "L'application a besoin de trois autorisations pour fonctionner pleinement. Voici à quoi sert chacune :",
+    "location": {
+      "title": "Position",
+      "body": "Sert à confirmer que vous êtes sur votre site de travail lorsque vous pointez. Sur les sites où votre organisation a activé le suivi de présence, et uniquement pendant que vous êtes pointé, PROSM Time relève votre position environ toutes les 5 minutes, même lorsque l'application est fermée ou inutilisée, avec une notification permanente tout ce temps, et s'arrête lorsque vous dépointez. Votre position est visible par les responsables de votre organisation et supprimée après 30 jours."
+    },
+    "camera": {
+      "title": "Appareil photo",
+      "body": "Pour prendre une photo au pointage d'entrée ou de sortie, uniquement sur les sites qui l'exigent. L'appareil photo ne s'ouvre que lorsque vous prenez la photo vous-même."
+    },
+    "notifications": {
+      "title": "Notifications",
+      "body": "Pour recevoir les réponses à vos demandes de congé et les validations, les rappels de pointage, les alertes urgentes et la notification de service pendant que vous êtes pointé."
+    },
+    "footer": "Après « Continuer », Android demande chaque autorisation tour à tour : choisissez « Autoriser » ou « Lorsque vous utilisez l'application ». Vous pouvez modifier chaque autorisation plus tard dans les réglages du téléphone.",
+    "accept": "Continuer",
+    "decline": "Plus tard"
   }
 }

@@ -8,6 +8,7 @@ import { getCurrentPosition } from "../../core/utils/geo";
 import playAlertSound from "../../core/utils/playAlertSound";
 import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
+import { readBackgroundConsent, writeBackgroundConsent, STARTUP_PERMISSIONS_EVENT, type BackgroundConsent } from "../../core/services/StartupPermissions";
 
 const PRESENCE_SAMPLE_INTERVAL_MS = 5 * 60 * 1000;
 // Cheap "is a presence session active right now" recheck - much
@@ -44,26 +45,6 @@ const PRESENCE_SESSION_POLL_MS = 30 * 1000;
 // remains exactly as it was for the web build, where no such native
 // capability exists - foreground-tab sampling only, same disclosed
 // limitation as before there.
-type BackgroundConsent = "unknown" | "accepted" | "declined";
-const BACKGROUND_CONSENT_KEY = "prosm_time_background_location_disclosure_v1";
-
-function readBackgroundConsent(): BackgroundConsent {
-  try {
-    const value = localStorage.getItem(BACKGROUND_CONSENT_KEY);
-    return value === "accepted" || value === "declined" ? value : "unknown";
-  } catch {
-    return "unknown";
-  }
-}
-
-function writeBackgroundConsent(value: "accepted" | "declined") {
-  try {
-    localStorage.setItem(BACKGROUND_CONSENT_KEY, value);
-  } catch {
-    // storage unavailable - asked again next time
-  }
-}
-
 const EXIT_PROMPT_NOTIFICATION_ID = 7201;
 
 async function notifyLeftSite(title: string, body: string) {
@@ -101,6 +82,13 @@ export default function PresenceTrackingLoop() {
     setBackgroundConsent(answer);
     setDisclosureOpen(false);
   };
+
+  // Accepted on the start screen (StartupPermissions): not asked again at clock-in.
+  useEffect(() => {
+    const sync = () => setBackgroundConsent(readBackgroundConsent());
+    window.addEventListener(STARTUP_PERMISSIONS_EVENT, sync);
+    return () => window.removeEventListener(STARTUP_PERMISSIONS_EVENT, sync);
+  }, []);
 
   // Keeps activePresenceSessionId (and the ref every sampling path
   // reads from) in sync with the real server-side state - both the

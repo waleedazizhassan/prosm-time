@@ -12,6 +12,7 @@ import UpdateAvailableBanner from "./UpdateAvailableBanner";
 import PresenceTrackingLoop from "./PresenceTrackingLoop";
 import ClockReminderLoop from "./ClockReminderLoop";
 import PushRegistration from "./PushRegistration";
+import StartupPermissionsPrompt from "./StartupPermissionsPrompt";
 import { LayoutProvider } from "./LayoutContext";
 import styles from "./AppShell.module.css";
 import TrialBanner from "./TrialBanner";
@@ -33,6 +34,7 @@ export default function AppShell() {
         <PresenceTrackingLoop />
         <ClockReminderLoop />
         <PushRegistration />
+        <StartupPermissionsPrompt />
         <Header />
         <div className={styles.stage}>
           <div className={styles.notices}>

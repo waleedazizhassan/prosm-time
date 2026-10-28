@@ -321,7 +321,7 @@
   },
   "backgroundDisclosure": {
     "title": "Standort während Ihrer Schicht",
-    "body": "PROSM Time erfasst Ihren Standort etwa alle 5 Minuten, um zu bestätigen, dass Sie am Arbeitsort sind, auch wenn die App geschlossen ist oder nicht verwendet wird - jedoch nur, solange Sie eingestempelt sind. Beim Ausstempeln endet dies. Ihr Standort wird mit den Vorgesetzten Ihrer Organisation geteilt und nach 30 Tagen gelöscht. Wählen Sie im nächsten Schritt \"Immer zulassen\".",
+    "body": "PROSM Time erfasst Ihren Standort etwa alle 5 Minuten, um zu bestätigen, dass Sie am Arbeitsort sind, auch wenn die App geschlossen ist oder nicht verwendet wird - jedoch nur, solange Sie eingestempelt sind. Beim Ausstempeln endet dies. Ihr Standort wird mit den Vorgesetzten Ihrer Organisation geteilt und nach 30 Tagen gelöscht. Wählen Sie auf dem nächsten Bildschirm „Während der App-Nutzung“, damit das funktioniert.",
     "accept": "Weiter",
     "decline": "Nicht jetzt"
   },
@@ -362,5 +362,24 @@
     "ownerBody": "Dies ist das Konto des Inhabers - die ganze Organisation und ihre Daten hängen daran. Um es mit der Organisation zu löschen oder das Eigentum zu übertragen, schreiben Sie uns.",
     "ownerAction": "Support schreiben",
     "ownerSubject": "Antrag auf Löschung des Inhaberkontos"
+  },
+  "startupPermissions": {
+    "title": "Berechtigungen von PROSM Time",
+    "intro": "Die App braucht drei Berechtigungen, um vollständig zu funktionieren. Wofür jede verwendet wird:",
+    "location": {
+      "title": "Standort",
+      "body": "Bestätigt beim Ein- und Ausstempeln, dass Sie an Ihrem Arbeitsort sind. An Orten, für die Ihre Organisation die Anwesenheitsüberwachung eingeschaltet hat, und nur solange Sie eingestempelt sind, erfasst PROSM Time Ihren Standort etwa alle 5 Minuten, auch wenn die App geschlossen ist oder nicht verwendet wird, mit einer dauerhaften Benachrichtigung während der ganzen Zeit, und hört beim Ausstempeln auf. Ihr Standort ist für die Vorgesetzten Ihrer Organisation sichtbar und wird nach 30 Tagen gelöscht."
+    },
+    "camera": {
+      "title": "Kamera",
+      "body": "Für ein Foto beim Ein- oder Ausstempeln, nur an Orten, die eines verlangen. Die Kamera öffnet sich nur, wenn Sie das Foto selbst aufnehmen."
+    },
+    "notifications": {
+      "title": "Benachrichtigungen",
+      "body": "Für Antworten auf Ihre Urlaubsanträge und Freigaben, Erinnerungen ans Ein- und Ausstempeln, dringende Hinweise und die Schicht-Benachrichtigung, solange Sie eingestempelt sind."
+    },
+    "footer": "Nach „Weiter“ fragt Android jede Berechtigung einzeln ab: Wählen Sie „Zulassen“ oder „Während der App-Nutzung“. Sie können jede Berechtigung später in den Telefoneinstellungen ändern.",
+    "accept": "Weiter",
+    "decline": "Nicht jetzt"
   }
 }
