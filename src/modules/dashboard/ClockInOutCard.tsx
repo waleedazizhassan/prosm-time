@@ -981,7 +981,10 @@ export default function ClockInOutCard() {
     mapRelevantSite && currentLocation && mapRelevantSite.allowedRadiusMeters > 0
       ? nearestSite([mapRelevantSite], currentLocation.latitude, currentLocation.longitude, currentLocation.accuracyMeters)
       : null;
-  const mapTone: "inside" | "outside" | "neutral" = mapSiteProximity ? (mapSiteProximity.inside ? "inside" : "outside") : "neutral";
+  // owner 2026-10-28: a site with no work-area check takes clock-in from
+  // anywhere, so being far from its pin is not a warning
+  const mapSiteAnyLocation = Boolean(mapRelevantSite && !mapRelevantSite.geofenceRequired);
+  const mapTone: "inside" | "outside" | "neutral" = mapSiteProximity && !mapSiteAnyLocation ? (mapSiteProximity.inside ? "inside" : "outside") : "neutral";
   const confirmSiteName =
     confirmAction === "clockOut"
       ? view.currentSite?.name ?? view.session?.manualLocationLabel ?? ""
@@ -1165,7 +1168,9 @@ export default function ClockInOutCard() {
           siteTone={mapTone}
           accuracyMeters={currentLocation?.accuracyMeters ?? null}
         />
-        {mapRelevantSite && mapSiteProximity ? (
+        {mapRelevantSite && mapSiteAnyLocation ? (
+          <p style={{ margin: "var(--space-1) 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("attendance.anyLocationSite", { site: mapRelevantSite.name })}</p>
+        ) : mapRelevantSite && mapSiteProximity ? (
           <p style={{ margin: "var(--space-1) 0 0", fontSize: "var(--font-xs)", fontWeight: "var(--font-weight-semibold)", color: mapSiteProximity.inside ? "var(--status-success-text)" : "var(--status-warning-text)" }}>
             {mapSiteProximity.inside
               ? t("attendance.insideSiteArea", { site: mapRelevantSite.name })

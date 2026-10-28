@@ -213,7 +213,8 @@
       "change_site": "تغيير الموقع"
     },
     "insideSiteArea": "داخل نطاق {{site}}",
-    "outsideSiteArea": "خارج نطاق {{site}} بـ {{meters}} متر"
+    "outsideSiteArea": "خارج نطاق {{site}} بـ {{meters}} متر",
+    "anyLocationSite": "{{site}} يقبل تسجيل الحضور من أي مكان"
   },
   "kioskPin": {
     "title": "رمز الكشك",

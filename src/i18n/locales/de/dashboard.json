@@ -201,7 +201,8 @@
       "change_site": "Standortwechsel"
     },
     "insideSiteArea": "Im Arbeitsbereich von {{site}}",
-    "outsideSiteArea": "{{meters}} m außerhalb des Bereichs von {{site}}"
+    "outsideSiteArea": "{{meters}} m außerhalb des Bereichs von {{site}}",
+    "anyLocationSite": "{{site}} erlaubt das Einstempeln von überall"
   },
   "kioskPin": {
     "title": "Kiosk-PIN",

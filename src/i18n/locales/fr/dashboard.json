@@ -204,6 +204,7 @@
     },
     "insideSiteArea": "Dans la zone de {{site}}",
     "outsideSiteArea": "Hors de la zone de {{site}} de {{meters}} m",
+    "anyLocationSite": "{{site}} accepte le pointage depuis n'importe où",
     "pendingCount_many": "{{count}} pointages enregistrés sur cet appareil"
   },
   "kioskPin": {

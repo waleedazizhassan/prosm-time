@@ -204,6 +204,7 @@
     },
     "insideSiteArea": "Nell'area di {{site}}",
     "outsideSiteArea": "Fuori dall'area di {{site}} di {{meters}} m",
+    "anyLocationSite": "{{site}} accetta la timbratura da qualsiasi luogo",
     "pendingCount_many": "{{count}} timbrature salvate su questo dispositivo"
   },
   "kioskPin": {

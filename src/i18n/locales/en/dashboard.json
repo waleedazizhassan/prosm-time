@@ -201,7 +201,8 @@
       "change_site": "Site change"
     },
     "insideSiteArea": "Inside the work area of {{site}}",
-    "outsideSiteArea": "Outside the work area of {{site}} by {{meters}} m"
+    "outsideSiteArea": "Outside the work area of {{site}} by {{meters}} m",
+    "anyLocationSite": "{{site}} accepts clock-in from any location"
   },
   "kioskPin": {
     "title": "Kiosk PIN",
