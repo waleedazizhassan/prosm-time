@@ -80,7 +80,9 @@
       "bodyPermission": "{{name}} demande : {{kind}} le {{date}}.",
       "bodyPermissionShort": "{{name}} demande une autorisation le {{date}}.",
       "titleLeaveCancelled": "Congé approuvé annulé",
-      "bodyLeaveCancelled": "{{name}} a annulé son congé approuvé ({{startDate}} - {{endDate}})."
+      "bodyLeaveCancelled": "{{name}} a annulé son congé approuvé ({{startDate}} - {{endDate}}).",
+      "titleLeaveRequestWithdrawn": "Demande de congé retirée",
+      "bodyLeaveRequestWithdrawn": "{{name}} a retiré sa demande de congé ({{startDate}} - {{endDate}}) avant la réponse."
     },
     "correctionReviewed": {
       "titleException": "Votre exception a été examinée",

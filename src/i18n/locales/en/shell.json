@@ -80,7 +80,9 @@
       "bodyPermission": "{{name}} asked for {{kind}} on {{date}}.",
       "bodyPermissionShort": "{{name}} asked for a permission on {{date}}.",
       "titleLeaveCancelled": "Approved leave cancelled",
-      "bodyLeaveCancelled": "{{name}} cancelled their approved leave ({{startDate}} - {{endDate}})."
+      "bodyLeaveCancelled": "{{name}} cancelled their approved leave ({{startDate}} - {{endDate}}).",
+      "titleLeaveRequestWithdrawn": "Leave request withdrawn",
+      "bodyLeaveRequestWithdrawn": "{{name}} withdrew their leave request ({{startDate}} - {{endDate}}) before it was answered."
     },
     "correctionReviewed": {
       "titleException": "Your exception was reviewed",

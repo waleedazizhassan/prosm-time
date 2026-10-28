@@ -80,7 +80,9 @@
       "bodyPermission": "{{name}} طلب {{kind}} يوم {{date}}.",
       "bodyPermissionShort": "{{name}} طلب إذن يوم {{date}}.",
       "titleLeaveCancelled": "إلغاء إجازة معتمدة",
-      "bodyLeaveCancelled": "{{name}} ألغى إجازته المعتمدة ({{startDate}} - {{endDate}})."
+      "bodyLeaveCancelled": "{{name}} ألغى إجازته المعتمدة ({{startDate}} - {{endDate}}).",
+      "titleLeaveRequestWithdrawn": "تم سحب طلب إجازة",
+      "bodyLeaveRequestWithdrawn": "{{name}} سحب طلب الإجازة ({{startDate}} - {{endDate}}) قبل الرد عليه."
     },
     "correctionReviewed": {
       "titleException": "تمت مراجعة الاستثناء الخاص بك",

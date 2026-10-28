@@ -80,7 +80,9 @@
       "bodyPermission": "{{name}} beantragt {{kind}} am {{date}}.",
       "bodyPermissionShort": "{{name}} beantragt eine Genehmigung am {{date}}.",
       "titleLeaveCancelled": "Genehmigter Urlaub storniert",
-      "bodyLeaveCancelled": "{{name}} hat den genehmigten Urlaub storniert ({{startDate}} - {{endDate}})."
+      "bodyLeaveCancelled": "{{name}} hat den genehmigten Urlaub storniert ({{startDate}} - {{endDate}}).",
+      "titleLeaveRequestWithdrawn": "Urlaubsantrag zurückgezogen",
+      "bodyLeaveRequestWithdrawn": "{{name}} hat den Urlaubsantrag ({{startDate}} - {{endDate}}) vor der Antwort zurückgezogen."
     },
     "correctionReviewed": {
       "titleException": "Ihre Ausnahme wurde geprüft",

@@ -66,6 +66,11 @@ export function localizePush(type: string, data: Data, language: string, fallbac
         break;
       }
       // v2.3.43 step 6: an attendance permission asked by an employee (the kind's label is not in the push texts; the date is).
+      // v2.3.59: a leave request withdrawn before anyone answered it.
+      if (kind === "leave_request_withdrawn") {
+        result = pair("exceptionPendingReview.titleLeaveRequestWithdrawn", "exceptionPendingReview.bodyLeaveRequestWithdrawn", { name, startDate: data.startDate ?? "", endDate: data.endDate ?? "" });
+        break;
+      }
       if (kind === "leave_cancelled") {
         result = pair("exceptionPendingReview.titleLeaveCancelled", "exceptionPendingReview.bodyLeaveCancelled", { name, startDate: data.startDate ?? "", endDate: data.endDate ?? "" });
         break;

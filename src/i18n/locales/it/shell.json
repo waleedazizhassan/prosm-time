@@ -80,7 +80,9 @@
       "bodyPermission": "{{name}} ha chiesto {{kind}} il {{date}}.",
       "bodyPermissionShort": "{{name}} ha chiesto un permesso il {{date}}.",
       "titleLeaveCancelled": "Permesso approvato annullato",
-      "bodyLeaveCancelled": "{{name}} ha annullato il permesso approvato ({{startDate}} - {{endDate}})."
+      "bodyLeaveCancelled": "{{name}} ha annullato il permesso approvato ({{startDate}} - {{endDate}}).",
+      "titleLeaveRequestWithdrawn": "Richiesta di permesso ritirata",
+      "bodyLeaveRequestWithdrawn": "{{name}} ha ritirato la richiesta di permesso ({{startDate}} - {{endDate}}) prima della risposta."
     },
     "correctionReviewed": {
       "titleException": "La tua eccezione è stata esaminata",

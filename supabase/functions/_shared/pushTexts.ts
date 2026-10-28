@@ -27,7 +27,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyPermission": "{{name}} طلب {{kind}} يوم {{date}}.",
         "bodyPermissionShort": "{{name}} طلب إذن يوم {{date}}.",
         "titleLeaveCancelled": "إلغاء إجازة معتمدة",
-        "bodyLeaveCancelled": "{{name}} ألغى إجازته المعتمدة ({{startDate}} - {{endDate}})."
+        "bodyLeaveCancelled": "{{name}} ألغى إجازته المعتمدة ({{startDate}} - {{endDate}}).",
+        "titleLeaveRequestWithdrawn": "تم سحب طلب إجازة",
+        "bodyLeaveRequestWithdrawn": "{{name}} سحب طلب الإجازة ({{startDate}} - {{endDate}}) قبل الرد عليه."
       },
       "correctionReviewed": {
         "titleException": "تمت مراجعة الاستثناء الخاص بك",
@@ -180,7 +182,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyPermission": "{{name}} asked for {{kind}} on {{date}}.",
         "bodyPermissionShort": "{{name}} asked for a permission on {{date}}.",
         "titleLeaveCancelled": "Approved leave cancelled",
-        "bodyLeaveCancelled": "{{name}} cancelled their approved leave ({{startDate}} - {{endDate}})."
+        "bodyLeaveCancelled": "{{name}} cancelled their approved leave ({{startDate}} - {{endDate}}).",
+        "titleLeaveRequestWithdrawn": "Leave request withdrawn",
+        "bodyLeaveRequestWithdrawn": "{{name}} withdrew their leave request ({{startDate}} - {{endDate}}) before it was answered."
       },
       "correctionReviewed": {
         "titleException": "Your exception was reviewed",
@@ -333,7 +337,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyPermission": "{{name}} beantragt {{kind}} am {{date}}.",
         "bodyPermissionShort": "{{name}} beantragt eine Genehmigung am {{date}}.",
         "titleLeaveCancelled": "Genehmigter Urlaub storniert",
-        "bodyLeaveCancelled": "{{name}} hat den genehmigten Urlaub storniert ({{startDate}} - {{endDate}})."
+        "bodyLeaveCancelled": "{{name}} hat den genehmigten Urlaub storniert ({{startDate}} - {{endDate}}).",
+        "titleLeaveRequestWithdrawn": "Urlaubsantrag zurückgezogen",
+        "bodyLeaveRequestWithdrawn": "{{name}} hat den Urlaubsantrag ({{startDate}} - {{endDate}}) vor der Antwort zurückgezogen."
       },
       "correctionReviewed": {
         "titleException": "Ihre Ausnahme wurde geprüft",
@@ -486,7 +492,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyPermission": "{{name}} demande : {{kind}} le {{date}}.",
         "bodyPermissionShort": "{{name}} demande une autorisation le {{date}}.",
         "titleLeaveCancelled": "Congé approuvé annulé",
-        "bodyLeaveCancelled": "{{name}} a annulé son congé approuvé ({{startDate}} - {{endDate}})."
+        "bodyLeaveCancelled": "{{name}} a annulé son congé approuvé ({{startDate}} - {{endDate}}).",
+        "titleLeaveRequestWithdrawn": "Demande de congé retirée",
+        "bodyLeaveRequestWithdrawn": "{{name}} a retiré sa demande de congé ({{startDate}} - {{endDate}}) avant la réponse."
       },
       "correctionReviewed": {
         "titleException": "Votre exception a été examinée",
@@ -639,7 +647,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "bodyPermission": "{{name}} ha chiesto {{kind}} il {{date}}.",
         "bodyPermissionShort": "{{name}} ha chiesto un permesso il {{date}}.",
         "titleLeaveCancelled": "Permesso approvato annullato",
-        "bodyLeaveCancelled": "{{name}} ha annullato il permesso approvato ({{startDate}} - {{endDate}})."
+        "bodyLeaveCancelled": "{{name}} ha annullato il permesso approvato ({{startDate}} - {{endDate}}).",
+        "titleLeaveRequestWithdrawn": "Richiesta di permesso ritirata",
+        "bodyLeaveRequestWithdrawn": "{{name}} ha ritirato la richiesta di permesso ({{startDate}} - {{endDate}}) prima della risposta."
       },
       "correctionReviewed": {
         "titleException": "La tua eccezione è stata esaminata",
