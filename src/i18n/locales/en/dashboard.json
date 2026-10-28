@@ -570,7 +570,7 @@
       "clockOutAction": "Clock out"
     },
     "export": {
-      "action": "Export PDF",
+      "action": "Export dashboard PDF",
       "asOf": "as of {{time}}"
     }
   },

@@ -570,7 +570,7 @@
       "clockOutAction": "Ausstempeln"
     },
     "export": {
-      "action": "Als PDF exportieren",
+      "action": "Dashboard als PDF exportieren",
       "asOf": "Stand {{time}}"
     }
   },

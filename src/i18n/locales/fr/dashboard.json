@@ -574,7 +574,7 @@
       "clockOutAction": "Pointer la sortie"
     },
     "export": {
-      "action": "Exporter en PDF",
+      "action": "Exporter le tableau de bord en PDF",
       "asOf": "à {{time}}"
     }
   },

@@ -574,7 +574,7 @@
       "clockOutAction": "Timbra uscita"
     },
     "export": {
-      "action": "Esporta PDF",
+      "action": "Esporta la dashboard in PDF",
       "asOf": "alle {{time}}"
     }
   },

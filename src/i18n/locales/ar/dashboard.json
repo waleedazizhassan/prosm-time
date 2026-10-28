@@ -586,7 +586,7 @@
       "clockOutAction": "تسجيل انصراف"
     },
     "export": {
-      "action": "تصدير PDF",
+      "action": "تصدير لوحة التحكم PDF",
       "asOf": "حتى {{time}}"
     }
   },
