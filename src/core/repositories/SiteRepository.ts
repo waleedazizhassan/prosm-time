@@ -296,6 +296,19 @@ class SiteRepository {
     }
   }
 
+  // v2.3.59 (owner 2026-10-28): anyone may clock in at any active site of the
+  // organisation, so the Clock In picker offers them all - the person's own
+  // assigned sites first.
+  async listClockInSites(): Promise<ServiceResult<Site[]>> {
+    try {
+      const { data, error } = await this.client.rpc("list_prosm_time_clock_in_sites");
+      if (error) return createError(error.message);
+      return createSuccess(((data ?? []) as Parameters<typeof mapSiteRow>[0][]).map(mapSiteRow));
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Site service unavailable.");
+    }
+  }
+
   async getSite(siteId: string): Promise<ServiceResult<Site>> {
     try {
       const { data, error } = await this.client.from("sites").select("*").eq("id", siteId).maybeSingle();

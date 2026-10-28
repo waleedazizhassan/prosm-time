@@ -284,7 +284,7 @@ export default function ClockInOutCard() {
       if (!silent) setLoading(true);
       const [sessionResult, sitesResult, presenceResult] = await Promise.all([
         AttendanceRepository.getCurrentSession(profile.id),
-        SiteRepository.listAssignedSites(profile.id),
+        SiteRepository.listClockInSites(),
         PresenceRepository.getActiveSession(profile.id),
       ]);
       // Offline (owner 2026-09-29): when the server cannot be reached, keep the last known state -
