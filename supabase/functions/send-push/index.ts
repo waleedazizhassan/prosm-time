@@ -111,6 +111,8 @@ serve(async (request: Request) => {
     const token = await accessToken(account);
 
     const urgent = message.priority === "high" || message.type === "sos_alert";
+    // v2.3.61 (owner 2026-10-28): clock-in and clock-out reminders ring with the alarm tone (MainActivity's channel)
+    const reminder = message.type === "clock_in_reminder" || message.type === "clock_out_reminder";
     const gone: string[] = [];
     let sent = 0;
     for (const { token: deviceToken, language } of devices) {
@@ -137,7 +139,7 @@ serve(async (request: Request) => {
             android: {
               priority: "HIGH",
               notification: {
-                channel_id: urgent ? "prosm-sos" : "prosm-alerts",
+                channel_id: urgent ? "prosm-sos" : reminder ? "prosm-reminders" : "prosm-alerts",
                 sound: "default",
                 default_sound: true,
                 default_vibrate_timings: true,

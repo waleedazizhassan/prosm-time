@@ -9,4 +9,7 @@
     <string name="capacitor_background_geolocation_notification_icon">drawable/ic_stat_prosm</string>
     <string name="capacitor_background_geolocation_notification_color">#1E6FD9</string>
     <string name="capacitor_background_geolocation_notification_channel_name">PROSM Time · attendance</string>
+    <!-- v2.3.61 (owner 2026-10-28): the clock-in and clock-out reminders ring with the alarm tone. -->
+    <string name="reminder_channel_name">Clock-in and clock-out reminders</string>
+    <string name="reminder_channel_description">Rings with your alarm tone, also when the phone is on silent.</string>
 </resources>

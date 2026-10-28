@@ -7,6 +7,10 @@ import { LocalNotifications } from "@capacitor/local-notifications";
 // channel. No large icon anywhere (they were mixed before).
 export const ALERT_CHANNEL_ID = "prosm-alerts";
 export const NOTIFICATION_STYLE = { smallIcon: "ic_stat_prosm", iconColor: "#1E6FD9", channelId: ALERT_CHANNEL_ID } as const;
+// v2.3.61 (owner 2026-10-28): the clock-in and clock-out reminders ring with the
+// phone's alarm tone - their own channel, made by the Android app at start
+// (MainActivity), which the server's reminder pushes use too.
+export const REMINDER_STYLE = { ...NOTIFICATION_STYLE, channelId: "prosm-reminders" } as const;
 
 let channelReady: Promise<void> | null = null;
 

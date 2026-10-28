@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="capacitor_background_geolocation_notification_channel_name">PROSM Time · الحضور</string>
+    <string name="reminder_channel_name">تذكير الحضور والانصراف</string>
+    <string name="reminder_channel_description">يرن بنغمة المنبه، حتى لو الموبايل صامت.</string>
 </resources>

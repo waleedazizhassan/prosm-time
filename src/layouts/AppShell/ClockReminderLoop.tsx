@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Capacitor } from "@capacitor/core";
 import { LocalNotifications } from "@capacitor/local-notifications";
-import { ensureAlertChannel, NOTIFICATION_STYLE } from "../../core/services/notificationStyle";
+import { ensureAlertChannel, REMINDER_STYLE } from "../../core/services/notificationStyle";
 
 import { useAuth } from "../../core/context/AuthContext";
 import AttendanceRepository from "../../core/repositories/AttendanceRepository";
@@ -66,7 +66,7 @@ export default function ClockReminderLoop() {
                 title: t(`reminders.${reminder.kind}.title`),
                 body: t(`reminders.${reminder.kind}.body`, { time: reminder.time, site: reminder.siteName ?? "" }),
                 schedule: { at: reminder.at, allowWhileIdle: true },
-                ...NOTIFICATION_STYLE,
+                ...REMINDER_STYLE,
               },
             ],
           });

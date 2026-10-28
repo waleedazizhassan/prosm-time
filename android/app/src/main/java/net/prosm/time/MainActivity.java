@@ -1,10 +1,15 @@
 package net.prosm.time;
 
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.media.AudioAttributes;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,6 +33,9 @@ import java.security.MessageDigest;
  *    (the only way to install a modified APK) has another certificate, and
  *    refuses to run, pointing to the official download instead;
  *  - touches are ignored while another app draws over this one (tapjacking).
+ * v2.3.61 (owner 2026-10-28): the clock-in and clock-out reminders have their
+ * own channel that rings with the phone's alarm tone on the alarm stream (so
+ * also on silent), in debug builds too.
  * Debug builds are untouched.
  */
 public class MainActivity extends BridgeActivity {
@@ -38,6 +46,7 @@ public class MainActivity extends BridgeActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        createReminderChannel();
         if (BuildConfig.DEBUG) return;
 
         WebView.setWebContentsDebuggingEnabled(false);
@@ -46,6 +55,33 @@ public class MainActivity extends BridgeActivity {
         }
         if (!signedByProsm()) {
             refuseModifiedCopy();
+        }
+    }
+
+    // The id the server's reminder pushes and the app's own reminders use
+    // (send-push, ClockReminderLoop). Android keeps a channel's sound once it
+    // is made; the person can change or silence it in the app's notification settings.
+    static final String REMINDER_CHANNEL_ID = "prosm-reminders";
+
+    private void createReminderChannel() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return;
+        try {
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            if (manager == null || manager.getNotificationChannel(REMINDER_CHANNEL_ID) != null) return;
+            NotificationChannel channel = new NotificationChannel(REMINDER_CHANNEL_ID, getString(R.string.reminder_channel_name), NotificationManager.IMPORTANCE_HIGH);
+            channel.setDescription(getString(R.string.reminder_channel_description));
+            Uri tone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+            if (tone == null) tone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            channel.setSound(tone, new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ALARM)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build());
+            channel.enableVibration(true);
+            channel.setVibrationPattern(new long[] {0, 600, 400, 600, 400, 600});
+            channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+            manager.createNotificationChannel(channel);
+        } catch (Exception error) {
+            // without it the reminder still arrives, on the regular channel
         }
     }
 

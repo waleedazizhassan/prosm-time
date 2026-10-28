@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Capacitor } from "@capacitor/core";
 import { LocalNotifications } from "@capacitor/local-notifications";
-import { ensureAlertChannel, exactAlarmsAllowed, NOTIFICATION_STYLE, openExactAlarmSetting } from "../../core/services/notificationStyle";
+import { ensureAlertChannel, exactAlarmsAllowed, openExactAlarmSetting, REMINDER_STYLE } from "../../core/services/notificationStyle";
 
 import { useAuth } from "../../core/context/AuthContext";
 import { ALL_REMINDER_IDS, loadReminders, remindersToSchedule, storeReminders, type PersonalReminders } from "../../core/services/personalReminders";
@@ -69,7 +69,7 @@ export default function PersonalRemindersCard() {
             id: reminder.id,
             title: t(reminder.kind === "clockIn" ? "reminders.clockInTitle" : "reminders.clockOutTitle"),
             body: t(reminder.kind === "clockIn" ? "reminders.clockInBody" : "reminders.clockOutBody"),
-            ...NOTIFICATION_STYLE,
+            ...REMINDER_STYLE,
             schedule: { on: { weekday: reminder.weekday, hour: reminder.hour, minute: reminder.minute }, allowWhileIdle: true },
           })),
         });
