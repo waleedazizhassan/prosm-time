@@ -61,23 +61,17 @@
          from the network, and clock-in explains when none is available). -->
     <uses-feature android:name="android.hardware.location.gps" android:required="false" tools:replace="android:required" />
 
-    <!-- § user-directed, 2026-09-13 - real geofence-exit tracking must
-         keep working even while the app is backgrounded (screen
-         locked, another app in front), not just while this app's own
-         screen is on top - @capacitor-community/background-geolocation
-         drives this, only ever active while a real presence session
-         is open (clocked in at a monitored site), and only ever with
-         the user's own explicit consent via the plugin's own
-         permission dialogs. ACCESS_BACKGROUND_LOCATION is Android's
-         own separate "Allow all the time" consent step (distinct from
-         the foreground ACCESS_FINE_LOCATION above); FOREGROUND_SERVICE/
-         FOREGROUND_SERVICE_LOCATION and POST_NOTIFICATIONS are what let
-         Android keep the tracking alive with a real, visible, always-
-         cancellable notification while backgrounded - required as of
-         Android 14/13 respectively, and Google Play's own review
-         requires this exact "visible ongoing notification" pattern for
-         any app requesting background location. -->
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <!-- Shift presence tracking (@capacitor-community/background-geolocation)
+         runs only while someone is clocked in at a monitored site, as a
+         foreground service of type location with a visible, ongoing
+         notification - started from the app on screen, so Android's
+         "while using the app" location permission covers it, also with the
+         screen locked. Owner 2026-10-28: the app never asks for "Allow all
+         the time", so ACCESS_BACKGROUND_LOCATION is removed (also from any
+         library) and Google Play reviews no background-location use.
+         FOREGROUND_SERVICE_LOCATION and POST_NOTIFICATIONS keep the service
+         and its notification (Android 14 / 13). -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" tools:node="remove" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
