@@ -13,3 +13,9 @@
 .row [data-form-field] {
   margin-bottom: 0;
 }
+
+/* a field in the row never pushes the row past the card on a phone */
+.row > * {
+  min-width: 0;
+  max-width: 100%;
+}

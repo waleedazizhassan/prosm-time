@@ -3,8 +3,15 @@
   width: 100%;
 }
 
+/* owner 2026-10-28 (the timesheet form ran off the card on a phone): a
+   field with a long value - a name and email in a list - shrinks with the
+   column and cuts its text, instead of widening the whole grid */
+.grid > * {
+  min-width: 0;
+}
+
 .columns1 {
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .columns2 {
@@ -45,6 +52,6 @@
   .columns2,
   .columns3,
   .columns4 {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
