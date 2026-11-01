@@ -55,5 +55,9 @@
   },
   "totalHours": "Total {{hours}} hours · {{count}} shifts",
   "noRegisteredSite": "No registered site",
-  "noLocation": "No location (older record or permission not given)"
+  "noLocation": "No location (older record or permission not given)",
+  "view": {
+    "month": "Month view",
+    "list": "List view"
+  }
 }

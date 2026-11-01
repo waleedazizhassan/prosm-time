@@ -55,5 +55,9 @@
   },
   "totalHours": "Totale {{hours}} ore · {{count}} turni",
   "noRegisteredSite": "Nessun sito registrato",
-  "noLocation": "Senza posizione (record precedente o permesso non concesso)"
+  "noLocation": "Senza posizione (record precedente o permesso non concesso)",
+  "view": {
+    "month": "Vista mensile",
+    "list": "Vista elenco"
+  }
 }
