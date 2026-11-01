@@ -59,6 +59,9 @@ describe("allowance sheets", () => {
     // Rejected days go back with the next sheet.
     const again = await t.as<{ r: { sent: number } }>(employee.authId, "select public.submit_prosm_time_allowances('2026-03-01', '2026-03-31') as r");
     expect(again.rows![0].r.sent).toBe(3);
+    // ... and that sheet says it was sent again, with the total it had
+    const [latest] = await t.su<{ revision: number; previous_total: string }>("select revision, previous_total from allowance_sheets order by submitted_at desc limit 1");
+    expect(latest).toEqual({ revision: 2, previous_total: "150.00" });
   });
 
   it("shows a sheet to the employee and their reviewers only", async () => {

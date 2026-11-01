@@ -967,6 +967,11 @@ export default function ClockInOutCard() {
       // geofence itself and rejects when it can't confirm presence).
       // For the no-site path a real sample is mandatory - the server
       // itself will reject a missing sample there.
+      if (requireGps) {
+        setLocationBlocked(true);
+        setChangeSiteSubmitting(false);
+        return;
+      }
     }
 
     const queueChange = async () => {

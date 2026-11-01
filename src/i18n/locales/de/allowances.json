@@ -176,7 +176,8 @@
     "title": "Zulagenblätter zur Freigabe",
     "hint": "Jedes Blatt enthält alle gesendeten Tage - auf einmal freigeben oder ablehnen. Öffnen, um die Tage zu sehen.",
     "line": "{{from}} - {{to}} · {{days}} Tage · gesamt {{total}}",
-    "openAction": "Öffnen"
+    "openAction": "Öffnen",
+    "resubmitted": "Nach Ablehnung erneut gesendet · vorherige Summe {{total}}"
   },
   "basis": {
     "title": "Berechnung jeder Zulage",

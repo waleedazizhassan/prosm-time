@@ -70,6 +70,9 @@ export interface AllowanceSheet {
   total: number;
   status: "submitted" | "approved" | "rejected";
   submittedAt: string;
+  // Sent again after a rejection: 2 or more, and the total it had.
+  revision: number;
+  previousTotal: number | null;
 }
 
 export interface AllowanceEntryInput {
@@ -313,15 +316,15 @@ class AllowanceRepository {
     try {
       const { data, error } = await this.client
         .from("allowance_sheets")
-        .select("id, user_id, period_start, period_end, days, total, status, submitted_at, users!allowance_sheets_user_id_fkey(full_name)")
+        .select("id, user_id, period_start, period_end, days, total, status, submitted_at, revision, previous_total, users!allowance_sheets_user_id_fkey(full_name)")
         .eq("status", status)
         .order("submitted_at", { ascending: true });
       if (error) return createError(error.message);
-      type Row = { id: string; user_id: string; period_start: string; period_end: string; days: number; total: number; status: AllowanceSheet["status"]; submitted_at: string; users: { full_name: string } | { full_name: string }[] | null };
+      type Row = { id: string; user_id: string; period_start: string; period_end: string; days: number; total: number; status: AllowanceSheet["status"]; submitted_at: string; revision: number; previous_total: number | null; users: { full_name: string } | { full_name: string }[] | null };
       return createSuccess(
         ((data ?? []) as Row[]).map((row) => {
           const user = Array.isArray(row.users) ? row.users[0] : row.users;
-          return { id: row.id, userId: row.user_id, userFullName: user?.full_name ?? "", periodStart: row.period_start, periodEnd: row.period_end, days: row.days, total: Number(row.total), status: row.status, submittedAt: row.submitted_at };
+          return { id: row.id, userId: row.user_id, userFullName: user?.full_name ?? "", periodStart: row.period_start, periodEnd: row.period_end, days: row.days, total: Number(row.total), status: row.status, submittedAt: row.submitted_at, revision: row.revision, previousTotal: row.previous_total === null ? null : Number(row.previous_total) };
         }),
       );
     } catch (error) {

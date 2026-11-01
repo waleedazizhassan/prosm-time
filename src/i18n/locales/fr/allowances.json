@@ -176,7 +176,8 @@
     "title": "Feuilles d'indemnités à valider",
     "hint": "Chaque feuille contient tous les jours envoyés - validez ou refusez en une fois. Ouvrez-la pour voir les jours.",
     "line": "{{from}} - {{to}} · {{days}} jours · total {{total}}",
-    "openAction": "Ouvrir"
+    "openAction": "Ouvrir",
+    "resubmitted": "Renvoyée après refus · total précédent {{total}}"
   },
   "basis": {
     "title": "Calcul de chaque indemnité",

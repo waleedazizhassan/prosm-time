@@ -517,6 +517,7 @@ export default function AllowancesPage() {
                   <HintText small>
                     {t("sheets.line", { from: formatDateOnly(sheet.periodStart, i18n.language), to: formatDateOnly(sheet.periodEnd, i18n.language), days: sheet.days, total: sheet.total.toLocaleString(i18n.language) })}
                   </HintText>
+                  {sheet.revision > 1 ? <HintText small>{t("sheets.resubmitted", { total: sheet.previousTotal ?? 0 })}</HintText> : null}
                 </div>
                 <input
                   aria-label={t("detail.reviewNotesLabel")}
