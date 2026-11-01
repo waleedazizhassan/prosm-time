@@ -50,6 +50,7 @@ const TABLES: Record<string, string> = {
   leave_entitlements: byOrg,
   leave_types: byOrg,
   legal_acknowledgements: byOrg,
+  data_deletion_log: byOrg,
   entitlements: byOrg,
   entitlement_events: byOrg,
   data_consents: byOrg,

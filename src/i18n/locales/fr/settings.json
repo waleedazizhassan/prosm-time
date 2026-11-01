@@ -157,5 +157,14 @@
       "business": "Business",
       "pro": "Pro"
     }
+  },
+  "retention": {
+    "title": "Conservation des données",
+    "subtitle": "Vous pouvez seulement raccourcir ces durées. Une durée plus courte s'applique aussi aux données conservées, et ce qui est plus ancien est supprimé automatiquement.",
+    "location": "Points de position : jours (jusqu'à {{max}})",
+    "photo": "Photos de pointage : jours (jusqu'à {{max}})",
+    "save": "Enregistrer",
+    "saved": "Enregistré.",
+    "saveFailed": "Enregistrement impossible."
   }
 }

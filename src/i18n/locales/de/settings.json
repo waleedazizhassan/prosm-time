@@ -157,5 +157,14 @@
       "business": "Business",
       "pro": "Pro"
     }
+  },
+  "retention": {
+    "title": "Datenaufbewahrung",
+    "subtitle": "Sie können diese Fristen nur verkürzen. Eine kürzere Frist gilt auch für gespeicherte Daten, Älteres wird automatisch gelöscht.",
+    "location": "Standortpunkte: Tage (bis {{max}})",
+    "photo": "Anwesenheitsfotos: Tage (bis {{max}})",
+    "save": "Speichern",
+    "saved": "Gespeichert.",
+    "saveFailed": "Speichern nicht möglich."
   }
 }

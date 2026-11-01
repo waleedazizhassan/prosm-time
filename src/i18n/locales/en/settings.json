@@ -157,5 +157,14 @@
       "business": "Business",
       "pro": "Pro"
     }
+  },
+  "retention": {
+    "title": "Data retention",
+    "subtitle": "You can only shorten these. A shorter period also applies to stored data, and anything older is deleted automatically.",
+    "location": "Location points: days (up to {{max}})",
+    "photo": "Attendance photos: days (up to {{max}})",
+    "save": "Save",
+    "saved": "Saved.",
+    "saveFailed": "Could not save."
   }
 }
