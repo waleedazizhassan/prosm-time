@@ -25,6 +25,7 @@ const ASSET_CACHE = "prosm-time-assets-v2";
 const OLD_CACHES = ["prosm-time-assets"];
 const INDEX_URL = SCOPE + "index.html";
 const META_CACHE = "prosm-time-meta";
+const STATIC_PAGES = ["privacy", "terms", "delete-account"].map((page) => SCOPE + page);
 const ATTEMPTS = 5;
 
 const isHtml = (response) => (response.headers.get("content-type") || "").includes("text/html");
@@ -112,6 +113,10 @@ self.addEventListener("fetch", (event) => {
   if (request.method !== "GET") return;
   const url = new URL(request.url);
   if (url.origin !== self.location.origin || !url.pathname.startsWith(SCOPE)) return;
+
+  // The static legal pages are not the app: leave them to the network, or the
+  // copy kept for offline use would become that page.
+  if (STATIC_PAGES.includes(url.pathname)) return;
 
   if (request.mode === "navigate") {
     event.respondWith(
