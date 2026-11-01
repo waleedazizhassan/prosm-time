@@ -118,19 +118,19 @@ describe("server time for live attendance (audit 1.4)", () => {
     const sessionId = await openSessionId(t, emp);
 
     // Live break start sent with an old time: server time.
-    expect((await t.as(emp.authId, "select public.start_prosm_time_break($1, $2, $3)", [sessionId, randomUUID(), hoursAgo(1)])).error).toBeNull();
+    expect((await t.as(emp.authId, "select public.start_prosm_time_break($1, $2, $3, false, 30.02125, 31.75812, 8)", [sessionId, randomUUID(), hoursAgo(1)])).error).toBeNull();
     const [liveBreak] = await t.su<{ id: string; started_at: string; start_time_source: string }>("select id, started_at::text, start_time_source from break_events where user_id = $1", [emp.userId]);
     expect(secondsFromNow(liveBreak.started_at)).toBeLessThan(60);
     expect(liveBreak.start_time_source).toBe("server");
-    expect((await t.as(emp.authId, "select public.end_prosm_time_break($1, $2)", [liveBreak.id, randomUUID()])).error).toBeNull();
+    expect((await t.as(emp.authId, "select public.end_prosm_time_break($1, $2, null, false, 30.02125, 31.75812, 8)", [liveBreak.id, randomUUID()])).error).toBeNull();
 
     // A second user whose break and clock-out were made offline.
     const off = await employee("Offline Breaks Nour");
     expect((await clockInAt(off, hoursAgo(5), true)).error).toBeNull();
     const offSession = await openSessionId(t, off);
-    expect((await t.as(off.authId, "select public.start_prosm_time_break($1, $2, $3, true)", [offSession, randomUUID(), hoursAgo(3)])).error).toBeNull();
+    expect((await t.as(off.authId, "select public.start_prosm_time_break($1, $2, $3, true, 30.02125, 31.75812, 8)", [offSession, randomUUID(), hoursAgo(3)])).error).toBeNull();
     const [offBreak] = await t.su<{ id: string }>("select id from break_events where user_id = $1", [off.userId]);
-    expect((await t.as(off.authId, "select public.end_prosm_time_break($1, $2, $3, true)", [offBreak.id, randomUUID(), hoursAgo(2.5)])).error).toBeNull();
+    expect((await t.as(off.authId, "select public.end_prosm_time_break($1, $2, $3, true, 30.02125, 31.75812, 8)", [offBreak.id, randomUUID(), hoursAgo(2.5)])).error).toBeNull();
     expect((await clockOutAt(off, hoursAgo(1), true)).error).toBeNull();
 
     const [ended] = await t.su<{ start_time_source: string; end_time_source: string }>("select start_time_source, end_time_source from break_events where id = $1", [offBreak.id]);

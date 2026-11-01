@@ -237,12 +237,12 @@ class OfflineQueueService {
       } else if (item.type === "start_break") {
         const sessionId = await this.resolve(item.sessionRef, "sessionId");
         if (!sessionId || sessionId === "missing") return fail("The clock in this break belongs to was not sent.");
-        result = await AttendanceRepository.startBreak(sessionId, options);
+        result = await AttendanceRepository.startBreak(sessionId, { ...options, latitude: item.latitude, longitude: item.longitude, accuracyMeters: item.accuracyMeters });
         if (result.success && result.data) await setValue(REFS_STORE, item.id, { breakId: (result.data as { breakId: string }).breakId });
       } else if (item.type === "end_break") {
         const breakId = await this.resolve(item.breakRef, "breakId");
         if (!breakId || breakId === "missing") return fail("The break start this end belongs to was not sent.");
-        result = await AttendanceRepository.endBreak(breakId, options);
+        result = await AttendanceRepository.endBreak(breakId, { ...options, latitude: item.latitude, longitude: item.longitude, accuracyMeters: item.accuracyMeters });
       } else {
         const breakId = await this.resolve(item.breakRef, "breakId");
         if (breakId === "missing") return fail("The break start this site change belongs to was not sent.");

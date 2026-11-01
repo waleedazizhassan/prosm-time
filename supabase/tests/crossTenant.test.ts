@@ -144,9 +144,9 @@ async function seedOrg(name: string): Promise<SeededOrg> {
   // Attendance: a shift with a break, then still clocked in; a far clock-in (geofence exception).
   await must(clockIn(t, employee, siteId), "clock in");
   const [session] = await t.su<{ id: string }>("select id from attendance_sessions where user_id = $1 and status = 'clocked_in'", [employee.userId]);
-  await must(t.as(employee.authId, "select public.start_prosm_time_break($1, $2)", [session.id, randomUUID()]), "start break");
+  await must(t.as(employee.authId, "select public.start_prosm_time_break($1, $2, null, false, 30.02125, 31.75812, 8)", [session.id, randomUUID()]), "start break");
   const [activeBreak] = await t.su<{ id: string }>("select id from break_events where user_id = $1 and status = 'active'", [employee.userId]);
-  await must(t.as(employee.authId, "select public.end_prosm_time_break($1, $2)", [activeBreak.id, randomUUID()]), "end break");
+  await must(t.as(employee.authId, "select public.end_prosm_time_break($1, $2, null, false, 30.02125, 31.75812, 8)", [activeBreak.id, randomUUID()]), "end break");
   await must(clockIn(t, farEmployee, siteId, { latitude: 30.3, longitude: 31.9 }), "far clock in");
   // An offline clock-in replayed an hour later (audit 1.4: a pending review).
   const offlineEmployee = await addMember(t, org, "employee", `${name} Offline Employee`);

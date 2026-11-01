@@ -43,6 +43,22 @@ describe("require_gps", () => {
     expect((await clockOut(t, worker)).error).toBeNull();
   });
 
+  it("a break needs a location to start and end, and keeps it", async () => {
+    const { t, site, worker } = await setup("Break Co");
+    expect((await clockIn(t, worker, site, 30.02125, 31.75812, 8)).error).toBeNull();
+    const [session] = await t.su<{ id: string }>("select id from attendance_sessions where user_id = $1", [worker.userId]);
+    const start = "select public.start_prosm_time_break($1, $2, null, false, $3, $4, $5) as r";
+    expect((await t.as(worker.authId, start, [session.id, randomUUID(), null, null, null])).error).toMatch(/LOCATION_REQUIRED/);
+    const started = await t.as<{ r: { breakId: string } }>(worker.authId, start, [session.id, randomUUID(), 30.02125, 31.75812, 8]);
+    expect(started.error).toBeNull();
+    const breakId = started.rows![0].r.breakId;
+    const end = "select public.end_prosm_time_break($1, $2, null, false, $3, $4, $5)";
+    expect((await t.as(worker.authId, end, [breakId, randomUUID(), null, null, null])).error).toMatch(/LOCATION_REQUIRED/);
+    expect((await t.as(worker.authId, end, [breakId, randomUUID(), 30.02126, 31.75813, 9])).error).toBeNull();
+    const [row] = await t.su<{ start_latitude: number; end_latitude: number }>("select start_latitude, end_latitude from break_events where id = $1", [breakId]);
+    expect(row).toMatchObject({ start_latitude: 30.02125, end_latitude: 30.02126 });
+  });
+
   it("an organisation with it off keeps working without a location", async () => {
     const { t, org, site, worker } = await setup("Legacy Gps Co");
     await t.su("update organization_settings set require_gps = false where organization_id = $1", [org.id]);

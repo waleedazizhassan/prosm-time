@@ -870,9 +870,22 @@ export default function ClockInOutCard() {
     setError("");
     setBreakWarning("");
 
+    // Plan stage 4.7: a break records where it started and ended.
+    let breakLocation: { latitude: number | null; longitude: number | null; accuracyMeters: number | null } = { latitude: null, longitude: null, accuracyMeters: null };
+    try {
+      const position = await getCurrentPosition();
+      breakLocation = { latitude: position.latitude, longitude: position.longitude, accuracyMeters: position.accuracyMeters };
+    } catch {
+      if (requireGps) {
+        setLocationBlocked(true);
+        setBreakSubmitting(false);
+        return;
+      }
+    }
+
     const endingBreakId = view.activeBreakId;
     const queueBreak = async () => {
-      await queueOffline(endingBreakId ? "end_break" : "start_break", { sessionRef: view.session?.id ?? null, breakRef: endingBreakId, latitude: null, longitude: null, accuracyMeters: null }, null);
+      await queueOffline(endingBreakId ? "end_break" : "start_break", { sessionRef: view.session?.id ?? null, breakRef: endingBreakId, ...breakLocation }, null);
       setBreakSubmitting(false);
     };
     if (shouldQueue() || view.session.id.startsWith("q:") || endingBreakId?.startsWith("q:")) {
@@ -881,7 +894,7 @@ export default function ClockInOutCard() {
     }
 
     if (endingBreakId) {
-      const result = await AttendanceRepository.endBreak(endingBreakId);
+      const result = await AttendanceRepository.endBreak(endingBreakId, breakLocation);
       if (result.networkError) {
         await queueBreak();
         return;
@@ -896,7 +909,7 @@ export default function ClockInOutCard() {
       }
       await load();
     } else {
-      const result = await AttendanceRepository.startBreak(view.session.id);
+      const result = await AttendanceRepository.startBreak(view.session.id, breakLocation);
       if (result.networkError) {
         await queueBreak();
         return;

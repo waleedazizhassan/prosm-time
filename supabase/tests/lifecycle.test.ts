@@ -66,10 +66,10 @@ describe("attendance lifecycle", () => {
 
   it("T04-T06 breaks: start and end; a colleague cannot end it", async () => {
     const session = await openSession(emp);
-    expect((await t.as(emp.authId, "select public.start_prosm_time_break($1, $2)", [session.id, randomUUID()])).error).toBeNull();
+    expect((await t.as(emp.authId, "select public.start_prosm_time_break($1, $2, null, false, 30.02125, 31.75812, 8)", [session.id, randomUUID()])).error).toBeNull();
     const [activeBreak] = await t.su<{ id: string }>("select id from break_events where user_id = $1 and status = 'active'", [emp.userId]);
-    expect((await t.as(emp2.authId, "select public.end_prosm_time_break($1, $2)", [activeBreak.id, randomUUID()])).error).toMatch(/BREAK NOT FOUND/);
-    expect((await t.as(emp.authId, "select public.end_prosm_time_break($1, $2)", [activeBreak.id, randomUUID()])).error).toBeNull();
+    expect((await t.as(emp2.authId, "select public.end_prosm_time_break($1, $2, null, false, 30.02125, 31.75812, 8)", [activeBreak.id, randomUUID()])).error).toMatch(/BREAK NOT FOUND/);
+    expect((await t.as(emp.authId, "select public.end_prosm_time_break($1, $2, null, false, 30.02125, 31.75812, 8)", [activeBreak.id, randomUUID()])).error).toBeNull();
     expect(await t.su("select 1 from break_events where user_id = $1 and status = 'active'", [emp.userId])).toHaveLength(0);
   });
 
