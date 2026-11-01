@@ -19,7 +19,7 @@
     "electron:start": "electron .",
     "electron:build": "npm run build && electron-builder --win",
     "test:db": "vitest run --config vitest.db.config.ts",
-    "check:i18n": "node scripts/check-i18n.mjs"
+    "check:i18n": "node scripts/check-i18n.mjs && node scripts/check-hardcoded-text.mjs"
   },
   "dependencies": {
     "@anuradev/capacitor-background-mode": "^8.1.0",
