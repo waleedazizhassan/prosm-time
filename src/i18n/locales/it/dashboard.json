@@ -205,7 +205,12 @@
     "insideSiteArea": "Nell'area di {{site}}",
     "outsideSiteArea": "Fuori dall'area di {{site}} di {{meters}} m",
     "anyLocationSite": "{{site}} accetta la timbratura da qualsiasi luogo",
-    "pendingCount_many": "{{count}} timbrature salvate su questo dispositivo"
+    "pendingCount_many": "{{count}} timbrature salvate su questo dispositivo",
+    "locationRequired": {
+      "title": "La posizione è richiesta per timbrare",
+      "body": "Non è possibile registrare senza una posizione dal telefono. Consenti la posizione all'app nelle impostazioni, attiva il GPS e riprova. Questa lettura non richiede Internet.",
+      "close": "Riprova"
+    }
   },
   "kioskPin": {
     "title": "PIN chiosco",

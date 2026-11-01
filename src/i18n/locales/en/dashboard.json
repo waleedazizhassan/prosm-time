@@ -202,7 +202,12 @@
     },
     "insideSiteArea": "Inside the work area of {{site}}",
     "outsideSiteArea": "Outside the work area of {{site}} by {{meters}} m",
-    "anyLocationSite": "{{site}} accepts clock-in from any location"
+    "anyLocationSite": "{{site}} accepts clock-in from any location",
+    "locationRequired": {
+      "title": "Location is required to clock in",
+      "body": "You cannot record this without a location reading from your phone. Allow location for the app in your phone's settings, turn on location (GPS), and try again. This reading does not need internet.",
+      "close": "Try again"
+    }
   },
   "kioskPin": {
     "title": "Kiosk PIN",

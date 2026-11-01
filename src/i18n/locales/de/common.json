@@ -286,7 +286,8 @@
     "planSiteLimit": "Ihr Plan hat die Grenze an Standorten erreicht.",
     "planEmployeeLimit": "Ihr Plan hat die Grenze an Mitarbeitern erreicht.",
     "tooManyCodeAttempts": "Zu viele Versuche. Versuchen Sie es später erneut.",
-    "invalidActivationCode": "Der Code ist falsch oder bereits verwendet."
+    "invalidActivationCode": "Der Code ist falsch oder bereits verwendet.",
+    "locationRequired": "Ohne gültigen Standort ist keine Erfassung möglich. Schalten Sie den Standort ein und versuchen Sie es erneut."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

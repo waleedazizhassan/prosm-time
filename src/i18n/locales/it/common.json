@@ -286,7 +286,8 @@
     "planSiteLimit": "Il tuo piano ha raggiunto il limite di sedi.",
     "planEmployeeLimit": "Il tuo piano ha raggiunto il limite di dipendenti.",
     "tooManyCodeAttempts": "Troppi tentativi. Riprova più tardi.",
-    "invalidActivationCode": "Il codice è errato o già utilizzato."
+    "invalidActivationCode": "Il codice è errato o già utilizzato.",
+    "locationRequired": "Non è possibile registrare senza una posizione valida. Attiva la posizione e riprova."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

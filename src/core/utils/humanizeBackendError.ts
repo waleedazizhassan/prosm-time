@@ -324,6 +324,7 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   // v2.3.55: the licence's user limit, and licence details being the Owner's
   "LICENSED USER LIMIT REACHED": "licensedUserLimit",
   "PLAN SITE LIMIT REACHED": "planSiteLimit",
+  LOCATION_REQUIRED: "locationRequired",
   "PLAN EMPLOYEE LIMIT REACHED": "planEmployeeLimit",
   "TOO MANY ATTEMPTS": "tooManyCodeAttempts",
   "INVALID ACTIVATION CODE": "invalidActivationCode",

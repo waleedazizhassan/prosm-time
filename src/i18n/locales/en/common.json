@@ -286,7 +286,8 @@
     "planSiteLimit": "Your plan has reached its limit of sites.",
     "planEmployeeLimit": "Your plan has reached its limit of employees.",
     "tooManyCodeAttempts": "Too many attempts. Try again later.",
-    "invalidActivationCode": "The code is wrong or already used."
+    "invalidActivationCode": "The code is wrong or already used.",
+    "locationRequired": "This cannot be recorded without a valid location. Turn on location and try again."
   },
   "pageLoad": {
     "title": "This page needs a connection",

@@ -205,7 +205,12 @@
     "insideSiteArea": "Dans la zone de {{site}}",
     "outsideSiteArea": "Hors de la zone de {{site}} de {{meters}} m",
     "anyLocationSite": "{{site}} accepte le pointage depuis n'importe où",
-    "pendingCount_many": "{{count}} pointages enregistrés sur cet appareil"
+    "pendingCount_many": "{{count}} pointages enregistrés sur cet appareil",
+    "locationRequired": {
+      "title": "La position est requise pour pointer",
+      "body": "Impossible d'enregistrer sans une position de votre téléphone. Autorisez la position pour l'application dans les réglages, activez la localisation (GPS), puis réessayez. Cette lecture ne nécessite pas Internet.",
+      "close": "Réessayer"
+    }
   },
   "kioskPin": {
     "title": "Code PIN kiosque",

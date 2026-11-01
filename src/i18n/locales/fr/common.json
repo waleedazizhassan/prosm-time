@@ -286,7 +286,8 @@
     "planSiteLimit": "Votre formule a atteint sa limite de sites.",
     "planEmployeeLimit": "Votre formule a atteint sa limite d'employés.",
     "tooManyCodeAttempts": "Trop de tentatives. Réessayez plus tard.",
-    "invalidActivationCode": "Le code est incorrect ou déjà utilisé."
+    "invalidActivationCode": "Le code est incorrect ou déjà utilisé.",
+    "locationRequired": "Impossible d'enregistrer sans position valide. Activez la localisation et réessayez."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

@@ -25,6 +25,7 @@ import Button from "../../components/common/Button";
 import StatusBadge from "../../components/common/StatusBadge";
 import CameraCaptureModal from "../../components/common/CameraCaptureModal";
 import Modal from "../../components/common/Modal";
+import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import AttendanceConfirmModal from "../../components/common/AttendanceConfirmModal";
 import ClockOutSummaryModal from "../../components/common/ClockOutSummaryModal";
 import LiveLocationMap from "../../components/common/LiveLocationMap";
@@ -162,6 +163,8 @@ function applyQueuedActions(base: AttendanceView, items: OfflineQueueItem[], sit
 // a bare title, matching the "clear primary action + useful status
 // information" hierarchy the reference material demonstrated, rendered
 // entirely in PROSM's own StatusBadge/Button/token language.
+const REQUIRE_GPS_KEY = "prosm_time_require_gps";
+
 export default function ClockInOutCard() {
   const { t, i18n } = useTranslation("dashboard");
   const { profile } = useAuth();
@@ -183,6 +186,27 @@ export default function ClockInOutCard() {
   const [cameraFor, setCameraFor] = useState<"clockIn" | "clockOut" | null>(null);
   const [loading, setLoading] = useState(initialCache === null);
   const [submitting, setSubmitting] = useState(false);
+  // Plan stage 4.7: with require_gps, nothing is recorded or queued without a
+  // reading from the phone's own sensors. The setting is kept for offline use.
+  const [requireGps, setRequireGps] = useState(() => {
+    try {
+      return localStorage.getItem(REQUIRE_GPS_KEY) === "1";
+    } catch {
+      return false;
+    }
+  });
+  const [locationBlocked, setLocationBlocked] = useState(false);
+  useEffect(() => {
+    void OrganizationRepository.getCurrentOrganization().then((result) => {
+      if (!result.success || !result.data) return;
+      setRequireGps(result.data.requireGps);
+      try {
+        localStorage.setItem(REQUIRE_GPS_KEY, result.data.requireGps ? "1" : "0");
+      } catch {
+        // storage unavailable: the server still refuses
+      }
+    });
+  }, []);
   const [error, setError] = useState("");
   const [evidenceWarning, setEvidenceWarning] = useState("");
   const [sosSubmitting, setSosSubmitting] = useState(false);
@@ -534,8 +558,12 @@ export default function ClockInOutCard() {
       longitude = position.longitude;
       accuracyMeters = position.accuracyMeters;
     } catch {
-      // Best-effort only (see file header) - proceed without a
-      // location sample rather than blocking the Clock In.
+      // Best-effort only (see file header), unless the organisation requires it.
+      if (requireGps) {
+        setLocationBlocked(true);
+        setSubmitting(false);
+        return;
+      }
     }
 
     const isMockLocation = await mockCheck;
@@ -676,6 +704,11 @@ export default function ClockInOutCard() {
       accuracyMeters = position.accuracyMeters;
     } catch {
       // Best-effort only - see performClockIn.
+      if (requireGps) {
+        setLocationBlocked(true);
+        setSubmitting(false);
+        return;
+      }
     }
 
     const isMockLocation = await mockCheck;
@@ -1237,6 +1270,10 @@ export default function ClockInOutCard() {
         />
       ) : null}
 
+      <Modal isOpen={locationBlocked} onClose={() => setLocationBlocked(false)} title={t("attendance.locationRequired.title")}>
+        <p style={{ margin: "0 0 var(--space-4)", fontSize: "var(--font-sm)", lineHeight: 1.7 }}>{t("attendance.locationRequired.body")}</p>
+        <Button onClick={() => setLocationBlocked(false)}>{t("attendance.locationRequired.close")}</Button>
+      </Modal>
       <Modal
         isOpen={changeSiteModalOpen}
         onClose={handleCloseChangeSiteModal}
