@@ -16,7 +16,7 @@ create table public.sensitive_access_log (
 create index sensitive_access_log_org_idx on public.sensitive_access_log (organization_id, accessed_at desc);
 
 alter table public.sensitive_access_log enable row level security;
-revoke all on public.sensitive_access_log from anon;
+revoke all on public.sensitive_access_log from anon, authenticated;
 grant select on public.sensitive_access_log to authenticated;
 
 create policy "the owner sees who opened sensitive data" on public.sensitive_access_log

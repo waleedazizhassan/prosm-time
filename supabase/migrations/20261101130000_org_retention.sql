@@ -20,7 +20,7 @@ create table public.data_deletion_log (
 );
 
 alter table public.data_deletion_log enable row level security;
-revoke all on public.data_deletion_log from anon;
+revoke all on public.data_deletion_log from anon, authenticated;
 grant select on public.data_deletion_log to authenticated;
 
 create policy "the owner sees the organisation's deletions" on public.data_deletion_log
