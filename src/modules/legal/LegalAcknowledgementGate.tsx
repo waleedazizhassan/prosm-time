@@ -39,6 +39,7 @@ export default function LegalAcknowledgementGate({ children }: { children: React
   const userId = profile?.id ?? null;
   const [status, setStatus] = useState<"checking" | "needed" | "done">(() => (userId && readCache(userId) ? "done" : "checking"));
   const [checked, setChecked] = useState(false);
+  const [euChecked, setEuChecked] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
@@ -75,7 +76,8 @@ export default function LegalAcknowledgementGate({ children }: { children: React
   const handleAccept = async () => {
     setSaving(true);
     setError("");
-    const result = await LegalRepository.acknowledge(LEGAL_VERSION);
+    const consent = await LegalRepository.recordConsents(LEGAL_VERSION, ["eu_storage"]);
+    const result = consent.success ? await LegalRepository.acknowledge(LEGAL_VERSION) : consent;
     setSaving(false);
     if (!result.success) {
       setError(t("legal.gate.error"));
@@ -106,12 +108,16 @@ export default function LegalAcknowledgementGate({ children }: { children: React
           <input type="checkbox" checked={checked} onChange={(event) => setChecked(event.target.checked)} />
           <span>{profile?.isOwner ? t("legal.gate.confirmOwner") : t("legal.gate.confirmMember")}</span>
         </label>
+        <label className={styles.confirm}>
+          <input type="checkbox" checked={euChecked} onChange={(event) => setEuChecked(event.target.checked)} />
+          <span>{t("legal.gate.confirmEuStorage")}</span>
+        </label>
         <ErrorText>{error}</ErrorText>
         <div className={styles.actions}>
           <Button variant="ghost" onClick={() => signOut()} disabled={saving}>
             {t("legal.gate.signOut")}
           </Button>
-          <Button onClick={handleAccept} loading={saving} disabled={!checked || saving}>
+          <Button onClick={handleAccept} loading={saving} disabled={!checked || !euChecked || saving}>
             {t("legal.gate.accept")}
           </Button>
         </div>

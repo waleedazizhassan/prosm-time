@@ -37,3 +37,96 @@
     display: none;
   }
 }
+
+/* The Google Play first screen (2026-11-01) */
+.trialButton,
+.plansButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+  min-height: 56px;
+  margin-top: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  background: transparent;
+  cursor: pointer;
+}
+
+.trialButton {
+  border: 1px solid var(--status-success-text);
+  color: var(--status-success-text);
+}
+
+.plansButton {
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+}
+
+.choiceTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.choiceHint {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.freeBadge {
+  padding: 1px var(--space-2);
+  border-radius: var(--radius-full, 999px);
+  background: var(--status-success-text);
+  color: var(--surface-base, #0b1220);
+  font-size: var(--font-xs);
+}
+
+.webNote {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  color: var(--text-secondary);
+  font-size: var(--font-xs);
+  line-height: 1.6;
+}
+
+.webNote svg {
+  flex-shrink: 0;
+}
+
+.webNote p {
+  margin: 0;
+}
+
+.webNote a {
+  color: var(--text-link);
+  font-weight: var(--font-weight-semibold);
+}
+
+.salesText {
+  margin: 0 0 var(--space-4);
+  color: var(--text-primary);
+  font-size: var(--font-sm);
+  line-height: 1.7;
+}
+
+.salesActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.salesLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  color: var(--text-link);
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+}

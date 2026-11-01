@@ -245,7 +245,7 @@ jobs:
         working-directory: android
         run: |
           chmod +x gradlew
-          ./gradlew assembleRelease --no-daemon
+          ./gradlew assembleDirectRelease --no-daemon
 
       - name: Locate the built APK and give it a fixed, version-less name
         # Fixed filename (not e.g. "app-release.apk") so prosm.net's own
@@ -256,7 +256,7 @@ jobs:
         id: apk
         run: |
           set -e
-          found=$(find android/app/build/outputs/apk/release -name "*.apk" | head -1)
+          found=$(find android/app/build/outputs/apk/direct/release -name "*.apk" | head -1)
           if [ -z "$found" ]; then echo "No APK produced."; exit 1; fi
           fixed="$(dirname "$found")/PROSM-Time.apk"
           mv "$found" "$fixed"
@@ -342,6 +342,11 @@ jobs:
             # Audit 2.3: the update manifest's download links point here, so this is required now.
             echo "::error::SUPABASE_SERVICE_ROLE_KEY is not set - the update manifest's download links point to app-releases."
             exit 1
+          fi
+          # The APK kill switch (scripts/stop-apk-distribution.sh): after Google approves.
+          if [ "${{ vars.APK_DISTRIBUTION_ENABLED }}" = "false" ]; then
+            echo "APK distribution is off: nothing published to app-releases."
+            exit 0
           fi
           base="https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/app-releases"
           upload() {
@@ -441,6 +446,10 @@ jobs:
           set -e
           node scripts/write-release-manifest.mjs
           # Audit 2.3: the copy installed apps read (short cache so a new release shows within minutes).
+          if [ "${{ vars.APK_DISTRIBUTION_ENABLED }}" = "false" ]; then
+            echo "APK distribution is off: the update manifest stays as it is."
+            exit 0
+          fi
           curl -sf -X POST "https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/app-releases/latest-version.json" \
             -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
             -H "x-upsert: true" \

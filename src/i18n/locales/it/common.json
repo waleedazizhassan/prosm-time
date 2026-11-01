@@ -314,7 +314,8 @@
       "confirmOwner": "Accetto le Condizioni d'uso per conto della mia organizzazione e confermo che i nostri dipendenti sono informati di come PROSM Time registra presenza, posizione e foto.",
       "accept": "Continua",
       "signOut": "Esci",
-      "error": "Impossibile salvare. Controlla la connessione e riprova."
+      "error": "Impossibile salvare. Controlla la connessione e riprova.",
+      "confirmEuStorage": "Acconsento espressamente alla conservazione dei miei dati su server nell'Unione europea, come spiegato nella sezione 7 dell'Informativa sulla privacy."
     }
   },
   "reminders": {

@@ -14,7 +14,7 @@ vi.mock("../../core/context/AuthContext", () => ({
   useAuth: () => ({ profile: { id: "user-1", isOwner }, signOut: vi.fn() }),
 }));
 vi.mock("../../core/repositories/LegalRepository", () => ({
-  default: { hasAcknowledged: vi.fn(), acknowledge: vi.fn() },
+  default: { hasAcknowledged: vi.fn(), acknowledge: vi.fn(), recordConsents: vi.fn() },
 }));
 
 const renderGate = () =>
@@ -32,6 +32,8 @@ describe("legal acknowledgement", () => {
     isOwner = false;
     vi.mocked(LegalRepository.hasAcknowledged).mockReset();
     vi.mocked(LegalRepository.acknowledge).mockReset();
+    vi.mocked(LegalRepository.recordConsents).mockReset();
+    vi.mocked(LegalRepository.recordConsents).mockResolvedValue({ success: true, message: null, data: null });
   });
 
   it("asks once, records the current version, then opens the app", async () => {
@@ -42,10 +44,11 @@ describe("legal acknowledgement", () => {
     expect(screen.queryByText("app-content")).toBeNull();
     const accept = screen.getByRole("button", { name: "Continue" });
     expect(accept).toBeDisabled();
-    fireEvent.click(screen.getByRole("checkbox"));
+    screen.getAllByRole("checkbox").forEach((box) => fireEvent.click(box));
     fireEvent.click(accept);
     expect(await screen.findByText("app-content")).toBeInTheDocument();
     expect(LegalRepository.acknowledge).toHaveBeenCalledWith(LEGAL_VERSION);
+    expect(LegalRepository.recordConsents).toHaveBeenCalledWith(LEGAL_VERSION, ["eu_storage"]);
   });
 
   it("asks the Owner to accept for the organisation", async () => {

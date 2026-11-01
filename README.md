@@ -114,3 +114,20 @@ migration — verify the plan/retention window there, not in this repo.
 automatic schedule wired up yet — invoke manually with the service
 role key, or configure a scheduler (e.g. `pg_cron` or an external
 cron hitting the function URL) when ready to automate retention.
+
+## Google Play
+
+The `play` flavor is run-only. It has no self-update code, no prices and no way
+to pay: the app offers sign-in, a free 30-day trial, and contact with sales by
+email (Google Play's payments policy forbids steering users to other payment
+methods from inside the app). Paid organisations are opened by the sales team.
+
+Build it with `scripts/build-play-aab.sh <versionName> <versionCode>`. The outputs
+stay on the machine that built them: never commit an AAB, mapping file or keystore.
+
+**App access text for Play Console:** sign in with the employee reviewer account
+given in the form, choose the site "Field Team (any location)" and tap Clock in.
+A notification shows during the shift, and Clock out stops all location use.
+
+`apk_distribution_enabled` stays true until the owner decides otherwise. To stop
+APKs: set it false in the Platform Manager and run `scripts/stop-apk-distribution.sh`.

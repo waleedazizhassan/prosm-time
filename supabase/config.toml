@@ -265,3 +265,9 @@ entrypoint = "./functions/send-push/index.ts"
 enabled = true
 verify_jwt = true
 entrypoint = "./functions/delete-my-account/index.ts"
+
+# 2026-11-01: public on purpose - only the two switches the first screen reads.
+[functions.public-config]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/public-config/index.ts"

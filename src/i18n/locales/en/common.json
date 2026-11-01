@@ -314,7 +314,8 @@
       "confirmOwner": "I accept the Terms of Use on behalf of my organisation, and I confirm that our employees are informed of how PROSM Time records their attendance, location and photos.",
       "accept": "Continue",
       "signOut": "Sign out",
-      "error": "Couldn't save. Check your connection and try again."
+      "error": "Couldn't save. Check your connection and try again.",
+      "confirmEuStorage": "I explicitly agree to my data being stored on servers in the European Union, as section 7 of the Privacy Policy explains."
     }
   },
   "reminders": {

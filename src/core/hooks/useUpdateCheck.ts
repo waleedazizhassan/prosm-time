@@ -15,7 +15,9 @@ const RECHECK_ON_RETURN_MS = 5 * 60 * 1000;
 // build compiled AFTER that env var was added - an already-installed
 // older binary has no way to retroactively gain the ability to check
 // for updates.
-const MANIFEST_URL = import.meta.env.VITE_UPDATE_MANIFEST_URL ?? "";
+// The Google Play build never looks for an update: Play updates it, and the
+// manifest's URL is not in that build at all.
+const MANIFEST_URL = import.meta.env.VITE_DISTRIBUTION === "play" ? "" : import.meta.env.VITE_UPDATE_MANIFEST_URL ?? "";
 
 export interface ReleaseManifest {
   version: string;
@@ -58,6 +60,7 @@ export function useUpdateCheck() {
   }, []);
 
   useEffect(() => {
+    if (!MANIFEST_URL) return undefined;
     cancelledRef.current = false;
     checkNow();
     const interval = setInterval(checkNow, SYNC_INTERVAL_MS);
