@@ -7,6 +7,7 @@ import Button from "../../components/common/Button";
 import Card from "../../components/common/Card";
 import ErrorText from "../../components/common/ErrorText";
 import Input from "../../components/common/Input";
+import { appLocale } from "../../core/utils/formatDate";
 
 // The Owner's plan: which one, what is used, when it ends, and a code PROSM
 // issued. In the Google Play build too: it shows state and takes no payment.
@@ -26,7 +27,7 @@ export default function PlanSettingsCard() {
   if (!status) return null;
 
   const usage = (used: number, max: number | null) => (max === null ? String(used) : t("plan.usage", { used, max }));
-  const date = status.endsAt ? new Date(status.endsAt).toLocaleDateString(i18n.language) : t("plan.noEnd");
+  const date = status.endsAt ? new Date(status.endsAt).toLocaleDateString(appLocale(i18n.language)) : t("plan.noEnd");
 
   const redeem = async () => {
     setSaving(true);

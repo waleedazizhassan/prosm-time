@@ -21,7 +21,7 @@ import Modal from "../../components/common/Modal";
 import ActionBar from "../../components/common/ActionBar";
 import Button from "../../components/common/Button";
 import Textarea from "../../components/common/Textarea";
-import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
+import { formatDateOnly, formatTimeOnly, appLocale } from "../../core/utils/formatDate";
 import { buildCombinedAllowanceSheetPdf, buildEmployeeAllowanceSheetPdf } from "./allowancesPdf";
 import allowancesHeaderImage from "../../assets/illustrations/allowances.svg";
 import PageBanner from "../../components/common/PageBanner";
@@ -515,7 +515,7 @@ export default function AllowancesPage() {
                 <div style={{ flex: "1 1 220px" }}>
                   <strong><PersonName name={sheet.userFullName} userId={sheet.userId} /></strong>
                   <HintText small>
-                    {t("sheets.line", { from: formatDateOnly(sheet.periodStart, i18n.language), to: formatDateOnly(sheet.periodEnd, i18n.language), days: sheet.days, total: sheet.total.toLocaleString(i18n.language) })}
+                    {t("sheets.line", { from: formatDateOnly(sheet.periodStart, i18n.language), to: formatDateOnly(sheet.periodEnd, i18n.language), days: sheet.days, total: sheet.total.toLocaleString(appLocale(i18n.language)) })}
                   </HintText>
                   {sheet.revision > 1 ? <HintText small>{t("sheets.resubmitted", { total: sheet.previousTotal ?? 0 })}</HintText> : null}
                 </div>
@@ -556,7 +556,7 @@ export default function AllowancesPage() {
             <div key={sheet.id} style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "var(--space-2)", padding: "var(--space-2) 0", borderBottom: "1px solid var(--border-light)" }}>
               <span style={{ fontSize: "var(--font-sm)" }}>
                 <strong><PersonName name={sheet.userFullName} userId={sheet.userId} /></strong> ·{" "}
-                {t("sheets.line", { from: formatDateOnly(sheet.periodStart, i18n.language), to: formatDateOnly(sheet.periodEnd, i18n.language), days: sheet.days, total: sheet.total.toLocaleString(i18n.language) })}
+                {t("sheets.line", { from: formatDateOnly(sheet.periodStart, i18n.language), to: formatDateOnly(sheet.periodEnd, i18n.language), days: sheet.days, total: sheet.total.toLocaleString(appLocale(i18n.language)) })}
               </span>
               <Button size="sm" variant="ghost" onClick={() => { setReopenTarget(sheet); setReopenReason(""); setReopenError(""); }}>
                 {t("sheetEdit.reopenAction")}

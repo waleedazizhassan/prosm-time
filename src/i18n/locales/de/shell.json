@@ -383,5 +383,10 @@
     "footer": "Nach „Weiter“ fragt Android jede Berechtigung einzeln ab: Wählen Sie „Zulassen“ oder „Während der App-Nutzung“. Sie können jede Berechtigung später in den Telefoneinstellungen ändern.",
     "accept": "Weiter",
     "decline": "Nicht jetzt"
+  },
+  "numerals": {
+    "label": "Ziffern",
+    "latn": "Lateinische Ziffern (123)",
+    "arab": "Arabische Ziffern (١٢٣)"
   }
 }

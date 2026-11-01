@@ -388,5 +388,10 @@
     "footer": "Après « Continuer », Android demande chaque autorisation tour à tour : choisissez « Autoriser » ou « Lorsque vous utilisez l'application ». Vous pouvez modifier chaque autorisation plus tard dans les réglages du téléphone.",
     "accept": "Continuer",
     "decline": "Plus tard"
+  },
+  "numerals": {
+    "label": "Chiffres",
+    "latn": "Chiffres latins (123)",
+    "arab": "Chiffres arabes (١٢٣)"
   }
 }

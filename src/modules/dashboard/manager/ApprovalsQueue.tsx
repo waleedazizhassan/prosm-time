@@ -10,7 +10,7 @@ import AllowanceRepository, { type AllowanceSheet } from "../../../core/reposito
 import AttendanceControlRepository from "../../../core/repositories/AttendanceControlRepository";
 import SessionReviewRepository from "../../../core/repositories/SessionReviewRepository";
 import TimesheetRepository from "../../../core/repositories/TimesheetRepository";
-import { formatDateOnly } from "../../../core/utils/formatDate";
+import { formatDateOnly, appLocale } from "../../../core/utils/formatDate";
 
 import Avatar from "../../../components/common/Avatar";
 import AllowanceSheetEditModal from "../../allowances/AllowanceSheetEditModal";
@@ -82,7 +82,7 @@ export default function ApprovalsQueue({ refreshKey, onChanged }: { refreshKey: 
               id: row.id,
               userId: row.userId,
               name: row.userFullName,
-              summary: t("manager.queue.sheetSummary", { from: formatDateOnly(row.periodStart, i18n.language), to: formatDateOnly(row.periodEnd, i18n.language), total: row.total.toLocaleString(i18n.language) }),
+              summary: t("manager.queue.sheetSummary", { from: formatDateOnly(row.periodStart, i18n.language), to: formatDateOnly(row.periodEnd, i18n.language), total: row.total.toLocaleString(appLocale(i18n.language)) }),
               date: row.submittedAt,
               sheet: row,
             }));

@@ -1,6 +1,6 @@
 import type { jsPDF } from "jspdf";
 import type { AllowanceEntry, AllowanceLine } from "../../core/repositories/AllowanceRepository";
-import { formatTimeOnly } from "../../core/utils/formatDate";
+import { formatTimeOnly, appLocale } from "../../core/utils/formatDate";
 import { renderHtmlToPdf, escapeHtml } from "../../core/utils/htmlToPdf";
 import prosmLogo from "../../assets/prosm-logo-pdf.png";
 
@@ -29,8 +29,8 @@ export interface SheetContext {
 const BRAND = "#1e6fd9";
 const LINE = "#cbd5e1";
 
-const money = (value: number, locale: string) => (value === 0 ? "" : value.toLocaleString(locale, { maximumFractionDigits: 2 }));
-const moneyAlways = (value: number, locale: string) => value.toLocaleString(locale, { maximumFractionDigits: 2 });
+const money = (value: number, locale: string) => (value === 0 ? "" : value.toLocaleString(appLocale(locale), { maximumFractionDigits: 2 }));
+const moneyAlways = (value: number, locale: string) => value.toLocaleString(appLocale(locale), { maximumFractionDigits: 2 });
 
 function allowanceSum(entry: AllowanceEntry): number {
   return entry.mealAllowance + entry.expatriationAllowance + entry.transportationAllowance + entry.housingAllowance + entry.travelAllowance + entry.otherAllowance;
@@ -82,7 +82,7 @@ function footer(ctx: SheetContext): string {
         .map((label) => `<div style="flex:1;text-align:center;"><div style="border-top:1px solid #0f172a;margin-bottom:6px;"></div>${escapeHtml(label)}</div>`)
         .join("")}
     </div>
-    <div style="text-align:center;margin-top:14px;font-size:10px;color:#94a3b8;">${escapeHtml(new Date().toLocaleString(languageCode))} · PROSM Time</div>`;
+    <div style="text-align:center;margin-top:14px;font-size:10px;color:#94a3b8;">${escapeHtml(new Date().toLocaleString(appLocale(languageCode)))} · PROSM Time</div>`;
 }
 
 const cell = (content: string, extra = "") => `<td style="padding:4px 6px;border:1px solid ${LINE};text-align:center;${extra}">${content}</td>`;
@@ -116,7 +116,7 @@ export function buildEmployeeAllowanceSheetPdf(entries: AllowanceEntry[], employ
   const rows = dayList(startDate, endDate)
     .map((iso) => {
       const entry = byDay.get(iso);
-      const weekday = new Date(`${iso}T00:00:00`).toLocaleDateString(languageCode, { weekday: "long" });
+      const weekday = new Date(`${iso}T00:00:00`).toLocaleDateString(appLocale(languageCode), { weekday: "long" });
       const holiday = holidayOn(ctx, iso);
       const shade = holiday ? "background:#fef9c3;" : entry ? "" : "background:#f1f5f9;";
       // a value the manager changed during review carries a mark (step 5)

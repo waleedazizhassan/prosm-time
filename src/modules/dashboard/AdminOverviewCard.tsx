@@ -20,7 +20,7 @@ import StatusBadge from "../../components/common/StatusBadge";
 import EmptyState from "../../components/common/EmptyState";
 import ErrorText from "../../components/common/ErrorText";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
-import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
+import { formatDateOnly, formatTimeOnly, appLocale } from "../../core/utils/formatDate";
 import styles from "./AdminOverviewCard.module.css";
 import dashboardArt from "../../assets/illustrations/dashboard.svg";
 import PersonName from "../../components/common/PersonName";
@@ -240,7 +240,7 @@ export default function AdminOverviewCard() {
     for (let i = 0; i < 7; i += 1) {
       const d = new Date(sunday.getFullYear(), sunday.getMonth(), sunday.getDate() + i);
       const key = localDayKey(d);
-      days.push({ key, label: d.toLocaleDateString(i18n.language, { weekday: "short" }), hours: (minutesByDay.get(key) ?? 0) / 60 });
+      days.push({ key, label: d.toLocaleDateString(appLocale(i18n.language), { weekday: "short" }), hours: (minutesByDay.get(key) ?? 0) / 60 });
     }
     return days;
   }, [summary, i18n.language]);
@@ -276,7 +276,7 @@ export default function AdminOverviewCard() {
   const hour = new Date().getHours();
   const greetingKey = hour < 12 ? "overview.greetingMorning" : hour < 17 ? "overview.greetingAfternoon" : "overview.greetingEvening";
   const firstName = (profile?.fullName ?? "").trim().split(/\s+/)[0] ?? "";
-  const todayLabel = new Date().toLocaleDateString(i18n.language, { weekday: "long", day: "numeric", month: "long" });
+  const todayLabel = new Date().toLocaleDateString(appLocale(i18n.language), { weekday: "long", day: "numeric", month: "long" });
 
   const secondaryKpis: Kpi[] = [
     { key: "sites", icon: MapPin, value: sites.length, label: t("overview.sites") },

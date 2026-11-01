@@ -388,5 +388,10 @@
     "footer": "Dopo «Continua», Android chiede ogni autorizzazione a turno: scegli «Consenti» o «Mentre usi l'app». Puoi cambiare ogni autorizzazione più tardi nelle impostazioni del telefono.",
     "accept": "Continua",
     "decline": "Non ora"
+  },
+  "numerals": {
+    "label": "Cifre",
+    "latn": "Cifre latine (123)",
+    "arab": "Cifre arabe (١٢٣)"
   }
 }

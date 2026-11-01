@@ -14,6 +14,7 @@ import HintText from "../../components/common/HintText";
 import ErrorText from "../../components/common/ErrorText";
 import DateRange from "../../components/common/DateRange";
 import BackgroundLocationService from "../../core/services/BackgroundLocationService";
+import { appLocale } from "../../core/utils/formatDate";
 
 const DAYS = [0, 1, 2, 3, 4, 5, 6];
 
@@ -41,7 +42,7 @@ export default function PersonalRemindersCard() {
     if (userId) setSettings(loadReminders(userId));
   }, [userId]);
 
-  const weekdayName = (day: number) => new Date(2026, 0, 4 + day).toLocaleDateString(i18n.language, { weekday: "short" }); // 4 Jan 2026 is a Sunday
+  const weekdayName = (day: number) => new Date(2026, 0, 4 + day).toLocaleDateString(appLocale(i18n.language), { weekday: "short" }); // 4 Jan 2026 is a Sunday
 
   const toggleDay = (day: number) =>
     setSettings((current) => ({ ...current, days: current.days.includes(day) ? current.days.filter((d) => d !== day) : [...current.days, day] }));

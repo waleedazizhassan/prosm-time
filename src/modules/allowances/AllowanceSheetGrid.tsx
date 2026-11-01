@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import type { AllowanceEntry, AllowanceEntryInput } from "../../core/repositories/AllowanceRepository";
-import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
+import { formatDateOnly, formatTimeOnly, appLocale } from "../../core/utils/formatDate";
 import StatusBadge from "../../components/common/StatusBadge";
 import EmptyState from "../../components/common/EmptyState";
 import styles from "./AllowanceSheetGrid.module.css";
@@ -68,7 +68,7 @@ export default function AllowanceSheetGrid({
   const [drafts, setDrafts] = useState<Record<string, string>>({});
   const severalPeople = new Set(entries.map((entry) => entry.userId)).size > 1;
   const sorted = [...entries].sort((a, b) => a.entryDate.localeCompare(b.entryDate) || a.userFullName.localeCompare(b.userFullName));
-  const money = (value: number) => value.toLocaleString(i18n.language, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const money = (value: number) => value.toLocaleString(appLocale(i18n.language), { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   if (!loading && sorted.length === 0) return <EmptyState message={emptyMessage} />;
 
@@ -118,7 +118,7 @@ export default function AllowanceSheetGrid({
               <tr key={entry.id} data-saving={savingId === entry.id || undefined}>
                 <th className={styles.sticky} scope="row">
                   <button type="button" className={styles.dayButton} onClick={() => onOpen(entry)}>
-                    <span>{new Date(`${entry.entryDate}T00:00:00`).toLocaleDateString(i18n.language, { weekday: "short" })}</span>
+                    <span>{new Date(`${entry.entryDate}T00:00:00`).toLocaleDateString(appLocale(i18n.language), { weekday: "short" })}</span>
                     <span className={styles.date}>{formatDateOnly(entry.entryDate, i18n.language)}</span>
                   </button>
                 </th>

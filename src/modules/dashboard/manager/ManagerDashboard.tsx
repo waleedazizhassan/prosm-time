@@ -8,7 +8,7 @@ import DashboardRepository, { type DashboardScope, type DashboardSite, type Mana
 import SiteRepository from "../../../core/repositories/SiteRepository";
 import { isRtl } from "../../../i18n/direction";
 import humanizeBackendError from "../../../core/utils/humanizeBackendError";
-import { formatDateOnly, formatTimeOnly } from "../../../core/utils/formatDate";
+import { formatDateOnly, formatTimeOnly, appLocale } from "../../../core/utils/formatDate";
 
 import Button from "../../../components/common/Button";
 import Modal from "../../../components/common/Modal";
@@ -386,12 +386,12 @@ export default function ManagerDashboard() {
                 <dl className={styles.figures}>
                   <div>
                     <dt>{t("manager.cost.allowances")}</dt>
-                    <dd>{data.allowances.total.toLocaleString(i18n.language, { maximumFractionDigits: 0 })}</dd>
+                    <dd>{data.allowances.total.toLocaleString(appLocale(i18n.language), { maximumFractionDigits: 0 })}</dd>
                   </div>
                   <div>
                     <dt>{t("manager.cost.overtime")}</dt>
                     <dd>
-                      {data.allowances.overtimeAmount.toLocaleString(i18n.language, { maximumFractionDigits: 0 })}
+                      {data.allowances.overtimeAmount.toLocaleString(appLocale(i18n.language), { maximumFractionDigits: 0 })}
                       <small>{t("manager.hoursValue", { hours: hours(data.allowances.overtimeMinutes) })}</small>
                     </dd>
                   </div>
@@ -598,7 +598,7 @@ export default function ManagerDashboard() {
           {data?.canViewCost && kpi.estimatedCost !== null ? (
             <button type="button" className={styles.kpi} onClick={() => navigate("/allowances")}>
               <span className={styles.kpiLabel}>{t("manager.kpi.cost")}</span>
-              <span className={styles.kpiValue}>{kpi.estimatedCost.toLocaleString(i18n.language, { maximumFractionDigits: 0 })}</span>
+              <span className={styles.kpiValue}>{kpi.estimatedCost.toLocaleString(appLocale(i18n.language), { maximumFractionDigits: 0 })}</span>
               <span className={styles.kpiHint}>{t("manager.kpi.costNote")}</span>
             </button>
           ) : null}
@@ -805,7 +805,7 @@ function TopSitesCost({ sites, t, language }: { sites: DashboardSite[]; t: T; la
           <span className={styles.bar}>
             <span style={{ width: `${Math.round(((site.cost ?? 0) / max) * 100)}%` }} />
           </span>
-          <span>{(site.cost ?? 0).toLocaleString(language, { maximumFractionDigits: 0 })}</span>
+          <span>{(site.cost ?? 0).toLocaleString(appLocale(language), { maximumFractionDigits: 0 })}</span>
         </div>
       ))}
     </div>
@@ -816,9 +816,9 @@ function ScheduleChart({ data, mode, t, language }: { data: Dashboard | null; mo
   if (!data) return <div className={styles.skeleton} style={{ height: 220 }} />;
   const bars =
     mode === "year"
-      ? data.chartMonthly.map((month) => ({ label: new Date(`${month.month}-01`).toLocaleDateString(language, { month: "short" }), worked: month.workedMinutes, scheduled: 0, pending: 0 }))
+      ? data.chartMonthly.map((month) => ({ label: new Date(`${month.month}-01`).toLocaleDateString(appLocale(language), { month: "short" }), worked: month.workedMinutes, scheduled: 0, pending: 0 }))
       : data.chart.map((day) => ({
-          label: new Date(day.day).toLocaleDateString(language, mode === "week" ? { weekday: "short" } : { day: "numeric" }),
+          label: new Date(day.day).toLocaleDateString(appLocale(language), mode === "week" ? { weekday: "short" } : { day: "numeric" }),
           worked: day.workedMinutes,
           scheduled: day.scheduledMinutes,
           pending: day.pendingMinutes,

@@ -10,6 +10,7 @@ import Card from "../../components/common/Card";
 import ClockInOutCard from "./ClockInOutCard";
 import { PERIODS, formatHours, periodHours, periodRange } from "../attendance/periods";
 import styles from "./EmployeeHome.module.css";
+import { appLocale } from "../../core/utils/formatDate";
 
 // Owner 2026-10-19: the employee's page is light and easy - clock in and
 // out, see their own time by day / week / month, and reach their own
@@ -39,7 +40,7 @@ export default function EmployeeHome() {
   const hour = new Date().getHours();
   const greetingKey = hour < 12 ? "overview.greetingMorning" : hour < 17 ? "overview.greetingAfternoon" : "overview.greetingEvening";
   const firstName = (profile?.fullName ?? "").trim().split(/\s+/)[0] ?? "";
-  const todayLabel = new Date().toLocaleDateString(i18n.language, { weekday: "long", day: "numeric", month: "long" });
+  const todayLabel = new Date().toLocaleDateString(appLocale(i18n.language), { weekday: "long", day: "numeric", month: "long" });
   // The organisation is in the header (owner 2026-10-21); here, the person's sites.
   const scope = siteNames.join(i18n.dir() === "rtl" ? "، " : ", ");
   const Chevron = i18n.dir() === "rtl" ? ChevronLeft : ChevronRight;
