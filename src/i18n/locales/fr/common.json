@@ -287,7 +287,8 @@
     "planEmployeeLimit": "Votre formule a atteint sa limite d'employés.",
     "tooManyCodeAttempts": "Trop de tentatives. Réessayez plus tard.",
     "invalidActivationCode": "Le code est incorrect ou déjà utilisé.",
-    "locationRequired": "Impossible d'enregistrer sans position valide. Activez la localisation et réessayez."
+    "locationRequired": "Impossible d'enregistrer sans position valide. Activez la localisation et réessayez.",
+    "rejectReasonRequired": "Indiquez le motif, pour que l'employé le voie."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

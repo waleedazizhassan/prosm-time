@@ -49,6 +49,8 @@ describe("allowance sheets", () => {
     expect((await t.as(manager.authId, "select public.approve_prosm_time_allowance_entry($1, 'approved')", [entry.id])).error).toMatch(/WHOLE ALLOWANCE SHEET/);
     expect((await t.as(employee.authId, "select public.review_prosm_time_allowance_sheet($1, 'approved')", [sheetId])).error).toMatch(/AUTHORITY REQUIRED/);
 
+    // v2.3.64 plan stage 4.8: a decline needs a reason
+    expect((await t.as(manager.authId, "select public.review_prosm_time_allowance_sheet($1, 'rejected', '  ')", [sheetId])).error).toMatch(/A REASON IS REQUIRED TO REJECT/);
     expect((await t.as(manager.authId, "select public.review_prosm_time_allowance_sheet($1, 'rejected', 'Receipts missing')", [sheetId])).error).toBeNull();
     const statuses = await t.su<{ status: string; review_notes: string }>("select distinct status, review_notes from allowance_entries where sheet_id = $1", [sheetId]);
     expect(statuses).toEqual([{ status: "rejected", review_notes: "Receipts missing" }]);

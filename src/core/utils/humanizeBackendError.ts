@@ -325,6 +325,7 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "LICENSED USER LIMIT REACHED": "licensedUserLimit",
   "PLAN SITE LIMIT REACHED": "planSiteLimit",
   LOCATION_REQUIRED: "locationRequired",
+  "A REASON IS REQUIRED TO REJECT": "rejectReasonRequired",
   "PLAN EMPLOYEE LIMIT REACHED": "planEmployeeLimit",
   "TOO MANY ATTEMPTS": "tooManyCodeAttempts",
   "INVALID ACTIVATION CODE": "invalidActivationCode",

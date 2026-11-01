@@ -533,7 +533,7 @@ export default function AllowancesPage() {
                       {t("sheetEdit.action")}
                     </Button>
                   ) : null}
-                  <Button size="sm" variant="danger" onClick={() => decideSheet(sheet, "rejected")} loading={sheetBusy === sheet.id}>
+                  <Button size="sm" variant="danger" onClick={() => decideSheet(sheet, "rejected")} loading={sheetBusy === sheet.id} disabled={!sheetNotes[sheet.id]?.trim()}>
                     {t("detail.rejectAction")}
                   </Button>
                   <Button size="sm" onClick={() => decideSheet(sheet, "approved")} loading={sheetBusy === sheet.id}>
@@ -665,7 +665,7 @@ export default function AllowancesPage() {
               ) : null}
               {canReviewDetail ? (
                 <>
-                  <Button variant="danger" onClick={() => handleReview("rejected")} loading={reviewing === "rejected"}>
+                  <Button variant="danger" onClick={() => handleReview("rejected")} loading={reviewing === "rejected"} disabled={!reviewNotes.trim()}>
                     {t("detail.rejectAction")}
                   </Button>
                   <Button onClick={() => handleReview("approved")} loading={reviewing === "approved"}>
