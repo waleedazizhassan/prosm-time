@@ -13,6 +13,7 @@ let employee: TestMember;
 beforeAll(async () => {
   t = await buildDatabase();
   org = await createOrg(t, "Nile");
+  await t.su("update organization_settings set require_gps = false where organization_id = $1", [org.id]);
   siteId = await createSite(t, org, "Tower B");
   employee = await addMember(t, org, "employee", "Lido");
   await assignToSite(t, siteId, employee);

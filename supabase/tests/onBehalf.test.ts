@@ -21,6 +21,7 @@ const onBehalfOut = (caller: TestMember, subject: TestMember) =>
 beforeAll(async () => {
   t = await buildDatabase();
   org = await createOrg(t, "Nile");
+  await t.su("update organization_settings set require_gps = false where organization_id = $1", [org.id]);
   siteId = await createSite(t, org, "Tower B");
   manager = await addMember(t, org, "manager", "Mona Manager");
   supervisor = await addMember(t, org, "supervisor", "Sami Supervisor");

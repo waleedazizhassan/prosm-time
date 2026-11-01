@@ -25,6 +25,7 @@ const clockOut = (member: TestMember, at: string | null) =>
 beforeAll(async () => {
   t = await buildDatabase();
   org = await createOrg(t, "Ismailia");
+  await t.su("update organization_settings set require_gps = false where organization_id = $1", [org.id]);
   site = await createSite(t, org, "Dock");
   worker = await addMember(t, org, "employee", "Tarek Samy");
   manager = await addMember(t, org, "manager", "Dock Manager");

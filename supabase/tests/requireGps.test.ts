@@ -59,6 +59,14 @@ describe("require_gps", () => {
     expect(row).toMatchObject({ start_latitude: 30.02125, end_latitude: 30.02126 });
   });
 
+  it("refuses recording on someone's behalf without a location from the device recording it", async () => {
+    const { t, org, site, worker } = await setup("Behalf Co");
+    const manager = await addMember(t, org, "manager", "Manager");
+    await t.su("insert into site_assignments (site_id, user_id, role_at_site) values ($1, $2, 'manager')", [site, manager.userId]);
+    const result = await t.as(manager.authId, "select public.admin_clock_in_prosm_time_attendance($1, $2, 'Phone broken', null, $3)", [worker.userId, site, randomUUID()]);
+    expect(result.error).toMatch(/LOCATION_REQUIRED/);
+  });
+
   it("an organisation with it off keeps working without a location", async () => {
     const { t, org, site, worker } = await setup("Legacy Gps Co");
     await t.su("update organization_settings set require_gps = false where organization_id = $1", [org.id]);

@@ -52,6 +52,7 @@ const notifications = (member: TestMember, type: string) =>
 beforeAll(async () => {
   t = await buildDatabase();
   org = await createOrg(t, "Nile");
+  await t.su("update organization_settings set require_gps = false where organization_id = $1", [org.id]);
   siteA = await createSite(t, org, "Site A");
   siteB = await createSite(t, org, "Site B", { latitude: 30.3, longitude: 31.9 });
   managerA = await siteManager("Manager A", siteA);
