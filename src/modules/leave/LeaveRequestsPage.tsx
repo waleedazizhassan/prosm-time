@@ -296,9 +296,9 @@ export default function LeaveRequestsPage() {
       <Card title={isOwner ? t("orgWideRequestsTitle") : t("myRequestsTitle")}>
         <ErrorText>{loadError}</ErrorText>
         {isOwner ? (
-          <Table columns={orgWideColumns} data={orgWideRequests} getRowId={(row) => row.id} loading={loading} emptyMessage={t("empty")} />
+          <Table grid columns={orgWideColumns} data={orgWideRequests} getRowId={(row) => row.id} loading={loading} emptyMessage={t("empty")} />
         ) : (
-          <Table columns={columns} data={requests} getRowId={(row) => row.id} loading={loading} emptyMessage={t("empty")} />
+          <Table grid columns={columns} data={requests} getRowId={(row) => row.id} loading={loading} emptyMessage={t("empty")} />
         )}
       </Card>
     </PageShell>

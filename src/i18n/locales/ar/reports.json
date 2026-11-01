@@ -61,7 +61,9 @@
       "site": "الموقع",
       "shiftStart": "بداية الوردية",
       "clockIn": "وقت الحضور",
-      "minutesLate": "دقائق التأخير"
+      "minutesLate": "دقائق التأخير",
+      "date": "التاريخ",
+      "employeeTotal": "إجمالي الموظف (دقيقة)"
     },
     "missingCheckouts": {
       "name": "الموظف",

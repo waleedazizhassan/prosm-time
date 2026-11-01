@@ -337,7 +337,7 @@ export default function TimesheetsPage() {
 
       {canApprove ? (
         <Card title={t("pendingApprovals.title")}>
-          <Table columns={timesheetColumns(true)} data={pendingApprovals} getRowId={(row) => row.id} loading={loading} emptyMessage={t("pendingApprovals.empty")} onRowClick={openDetail} />
+          <Table grid columns={timesheetColumns(true)} data={pendingApprovals} getRowId={(row) => row.id} loading={loading} emptyMessage={t("pendingApprovals.empty")} onRowClick={openDetail} />
         </Card>
       ) : null}
 
@@ -364,7 +364,7 @@ export default function TimesheetsPage() {
       ) : null}
 
       <Card title={t("myTimesheets.title")}>
-        <Table columns={timesheetColumns(false)} data={myTimesheets} getRowId={(row) => row.id} loading={loading} emptyMessage={t("myTimesheets.empty")} onRowClick={openDetail} />
+        <Table grid columns={timesheetColumns(false)} data={myTimesheets} getRowId={(row) => row.id} loading={loading} emptyMessage={t("myTimesheets.empty")} onRowClick={openDetail} />
       </Card>
 
       <Modal

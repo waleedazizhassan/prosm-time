@@ -54,5 +54,6 @@
     "month": "Ce mois-ci"
   },
   "totalHours": "Total {{hours}} heures · {{count}} services",
-  "noRegisteredSite": "Sans site enregistré"
+  "noRegisteredSite": "Sans site enregistré",
+  "noLocation": "Sans position (ancien relevé ou autorisation non accordée)"
 }

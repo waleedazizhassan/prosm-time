@@ -636,6 +636,7 @@ export default function AllowancesPage() {
       {myRates.length > 0 ? (
         <Card title={t("myPrices.title")} subtitle={t("myPrices.hint")} flush>
           <Table
+            grid
             columns={[
               { key: "site", header: t("columns.site"), render: (row: MySiteRates) => row.siteName },
               ...RATE_FIELDS.map((field) => ({

@@ -18,7 +18,7 @@ import StatusBadge from "../../components/common/StatusBadge";
 import Table, { type TableColumn } from "../../components/common/Table";
 import Modal from "../../components/common/Modal";
 import workersArt from "../../assets/illustrations/workers.svg";
-import HintText from "../../components/common/HintText";
+import HintText from "../../components/common/HintText";
 import useConfirm from "../../components/common/useConfirm";
 import FieldRow from "../../components/common/FieldRow";
 
@@ -27,7 +27,7 @@ import FieldRow from "../../components/common/FieldRow";
 // each worker's 6-digit number; the worker clocks in and out with it at
 // the kiosk of any site. Owner and sites.manage only (checked server-side).
 export default function ExternalWorkersPage() {
-  const { t, i18n } = useTranslation("workforce");
+  const { t, i18n } = useTranslation("workforce");
   const [confirm, confirmDialog] = useConfirm();
   const { profile, hasPermission } = useAuth();
   const allowed = Boolean(profile?.isOwner) || hasPermission("sites.manage");
@@ -245,7 +245,7 @@ export default function ExternalWorkersPage() {
             </Button>
           </FieldRow>
         ) : null}
-        <Table columns={columns} data={workers} getRowId={(worker) => worker.id} loading={loading} emptyMessage={t("empty")} />
+        <Table grid columns={columns} data={workers} getRowId={(worker) => worker.id} loading={loading} emptyMessage={t("empty")} />
       </Card>
 
       <Modal

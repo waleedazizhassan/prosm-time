@@ -44,7 +44,7 @@ function formatWorkedHours(clockInAt: string, clockOutAt: string | null): string
 // geocoding provider exists in this codebase, and coordinates are
 // already the real, verifiable source of truth an admin can act on.
 function LocationCell({ location, t }: { location: AttendanceEventLocation | null; t: (key: string) => string }) {
-  if (!location) return <>—</>;
+  if (!location) return <span style={{ color: "var(--text-secondary)" }}>{t("noLocation")}</span>;
   const mapsUrl = `https://www.google.com/maps?q=${location.latitude},${location.longitude}`;
   return (
     <span style={{ display: "inline-flex", alignItems: "center", gap: "var(--space-1)" }}>
@@ -232,7 +232,7 @@ export default function AttendanceLogPage() {
   };
 
   const columns: TableColumn<TodayAttendanceRow>[] = [
-    { key: "name", header: t("columns.employee"), render: (row) => <PersonName name={row.userFullName} userId={row.userId} /> },
+    { key: "name", header: t("columns.employee"), sortValue: (row) => row.userFullName, render: (row) => <PersonName name={row.userFullName} userId={row.userId} /> },
     {
       key: "site",
       header: t("columns.site"),
@@ -251,6 +251,7 @@ export default function AttendanceLogPage() {
     { key: "clockOutLocation", header: t("columns.clockOutLocation"), render: (row) => <LocationCell location={row.clockOutLocation} t={t} /> },
     {
       key: "clockInAt",
+      sortValue: (row) => row.clockInAt,
       header: t("columns.clockInAt"),
       render: (row) => (
         <span style={{ display: "block" }}>
@@ -347,7 +348,7 @@ export default function AttendanceLogPage() {
 
       <Card>
         <ErrorText>{loadError}</ErrorText>
-        <Table columns={columns} data={filteredRows} getRowId={(row) => row.sessionId} loading={loading} emptyMessage={t("empty")} />
+        <Table grid columns={columns} data={filteredRows} getRowId={(row) => row.sessionId} loading={loading} emptyMessage={t("empty")} />
         {!loading && filteredRows.length > 0 ? (
           <p style={{ margin: "var(--space-3) 0 0", fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)" }}>
             {t("totalHours", { hours: formatHours(filteredRows.reduce((sum, row) => sum + sessionHours(row), 0)), count: filteredRows.length })}

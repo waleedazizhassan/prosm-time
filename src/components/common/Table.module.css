@@ -122,3 +122,84 @@
     content: none;
   }
 }
+
+/* Plan stage 4.2: the spreadsheet look. */
+.gridScroll {
+  max-height: 70vh;
+  overflow: auto;
+}
+
+.grid {
+  min-width: 640px;
+}
+
+.grid .headerCell {
+  z-index: 2;
+  padding: var(--space-2) var(--space-3);
+}
+
+.grid .cell {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--font-xs);
+  white-space: nowrap;
+}
+
+.grid th:first-child,
+.grid td:first-child {
+  position: sticky;
+  inset-inline-start: 0;
+  z-index: 1;
+  background: var(--surface-card);
+}
+
+.grid th:first-child {
+  z-index: 3;
+  background: var(--surface-sunken);
+}
+
+.sortButton {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* The spreadsheet look stays a table on a phone and scrolls sideways. */
+@media (max-width: 767px) {
+  .gridScroll {
+    border: 1px solid var(--border-light);
+    background: var(--surface-card);
+    overflow: auto;
+  }
+
+  .table.grid {
+    display: table;
+    min-width: 640px;
+  }
+
+  .grid thead {
+    display: table-header-group;
+  }
+
+  .grid tbody {
+    display: table-row-group;
+  }
+
+  .grid .row {
+    display: table-row;
+    margin: 0;
+    border: 0;
+  }
+
+  .grid .row > .cell {
+    display: table-cell;
+    text-align: start;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .grid .row > .cell::before {
+    content: none;
+  }
+}

@@ -54,5 +54,6 @@
     "month": "This month"
   },
   "totalHours": "Total {{hours}} hours · {{count}} shifts",
-  "noRegisteredSite": "No registered site"
+  "noRegisteredSite": "No registered site",
+  "noLocation": "No location (older record or permission not given)"
 }

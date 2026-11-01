@@ -54,5 +54,6 @@
     "month": "Dieser Monat"
   },
   "totalHours": "Gesamt {{hours}} Stunden · {{count}} Schichten",
-  "noRegisteredSite": "Kein registrierter Standort"
+  "noRegisteredSite": "Kein registrierter Standort",
+  "noLocation": "Kein Standort (älterer Eintrag oder keine Berechtigung)"
 }

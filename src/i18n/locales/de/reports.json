@@ -61,7 +61,9 @@
       "site": "Standort",
       "shiftStart": "Schichtbeginn",
       "clockIn": "Eingestempelt",
-      "minutesLate": "Minuten zu spät"
+      "minutesLate": "Minuten zu spät",
+      "date": "Datum",
+      "employeeTotal": "Summe Mitarbeiter (Min.)"
     },
     "missingCheckouts": {
       "name": "Mitarbeiter",
