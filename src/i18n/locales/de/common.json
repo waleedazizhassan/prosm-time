@@ -314,7 +314,8 @@
       "confirmOwner": "Ich akzeptiere die Nutzungsbedingungen im Namen meiner Organisation und bestätige, dass unsere Mitarbeiter darüber informiert sind, wie PROSM Time ihre Anwesenheit, ihren Standort und Fotos erfasst.",
       "accept": "Weiter",
       "signOut": "Abmelden",
-      "error": "Speichern nicht möglich. Prüfen Sie die Verbindung und versuchen Sie es erneut."
+      "error": "Speichern nicht möglich. Prüfen Sie die Verbindung und versuchen Sie es erneut.",
+      "confirmEuStorage": "Ich stimme ausdrücklich zu, dass meine Daten auf Servern in der Europäischen Union gespeichert werden, wie Abschnitt 7 der Datenschutzerklärung erläutert."
     }
   },
   "reminders": {

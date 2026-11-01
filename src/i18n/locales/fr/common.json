@@ -314,7 +314,8 @@
       "confirmOwner": "J'accepte les Conditions d'utilisation au nom de mon organisation et je confirme que nos employés sont informés de la façon dont PROSM Time enregistre leur présence, leur position et leurs photos.",
       "accept": "Continuer",
       "signOut": "Se déconnecter",
-      "error": "Enregistrement impossible. Vérifiez la connexion et réessayez."
+      "error": "Enregistrement impossible. Vérifiez la connexion et réessayez.",
+      "confirmEuStorage": "J'accepte expressément que mes données soient stockées sur des serveurs situés dans l'Union européenne, comme l'explique la section 7 de la Politique de confidentialité."
     }
   },
   "reminders": {

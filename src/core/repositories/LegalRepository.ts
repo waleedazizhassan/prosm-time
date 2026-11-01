@@ -24,6 +24,17 @@ class LegalRepository {
     }
   }
 
+  // Privacy Policy v2, section 7: consent to storage in the EU, apart from reading the policy.
+  async recordConsents(version: string, kinds: ("eu_storage" | "location" | "photo")[]): Promise<ServiceResult> {
+    try {
+      const { error } = await this.client.rpc("record_prosm_time_consents", { p_version: version, p_kinds: kinds });
+      if (error) return { success: false, message: error.message, data: null };
+      return { success: true, message: null, data: null };
+    } catch (error) {
+      return { success: false, message: error instanceof Error ? error.message : "Unavailable.", data: null, networkError: true };
+    }
+  }
+
   async acknowledge(version: string): Promise<ServiceResult> {
     try {
       const { data, error } = await this.client.rpc("acknowledge_prosm_time_legal", { p_version: version });
