@@ -175,7 +175,7 @@
     },
     "q11": {
       "question": "Comment fonctionne la démo de 30 jours ?",
-      "answer": "Sur la page d’accueil, « Utiliser la version d’essai » ouvre l’activation habituelle sans code d’activation ; l’organisation et son propriétaire sont créés aussitôt. L’essai dure 30 jours (heure du serveur) et une barre indique les jours restants. Une semaine avant la fin, le propriétaire reçoit une notification et un e-mail avec sales@prosm.net, info@prosm.net et support@prosm.net. Ensuite l’application est mise en pause, rien n’est supprimé : saisissez un code d’activation acheté ou demandez à PROSM de renouveler la licence - tout reprend avec vos données. Un essai par e-mail."
+      "answer": "Sur la page d’accueil, « Utiliser la version d’essai » ouvre l’activation habituelle sans code d’activation ; l’organisation et son propriétaire sont créés aussitôt. L’essai dure 30 jours (heure du serveur) et une barre indique les jours restants. Une semaine avant la fin, le propriétaire reçoit une notification et un e-mail avec sales@prosm.net, info@prosm.net et support@prosm.net. Ensuite l’application est mise en pause, rien n’est supprimé : saisissez un code d’activation ou demandez à PROSM de renouveler la licence - tout reprend avec vos données. Un essai par e-mail."
     },
     "q12": {
       "question": "Le pointage fonctionne-t-il sans internet ?",

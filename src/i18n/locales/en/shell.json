@@ -286,8 +286,8 @@
     "loadingStations": "Loading stations…"
   },
   "trial": {
-    "banner_one": "Demo version: 1 day left (ends {{date}}). Your data is kept afterwards - to continue, buy an activation code:",
-    "banner_other": "Demo version: {{count}} days left (ends {{date}}). Your data is kept afterwards - to continue, buy an activation code:",
+    "banner_one": "Demo version: 1 day left (ends {{date}}). Your data is kept afterwards - to continue, contact the sales team:",
+    "banner_other": "Demo version: {{count}} days left (ends {{date}}). Your data is kept afterwards - to continue, contact the sales team:",
     "close": "Hide",
     "footer_one": "Trial · 1 day left",
     "footer_other": "Trial · {{count}} days left"

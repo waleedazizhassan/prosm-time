@@ -286,12 +286,12 @@
     "loadingStations": "Chargement des stations…"
   },
   "trial": {
-    "banner_one": "Version d'essai : 1 jour restant (fin le {{date}}). Vos données sont conservées - pour continuer, achetez un code d'activation :",
-    "banner_other": "Version d'essai : {{count}} jours restants (fin le {{date}}). Vos données sont conservées - pour continuer, achetez un code d'activation :",
+    "banner_one": "Version d'essai : 1 jour restant (fin le {{date}}). Vos données sont conservées - pour continuer, contactez l'équipe commerciale :",
+    "banner_other": "Version d'essai : {{count}} jours restants (fin le {{date}}). Vos données sont conservées - pour continuer, contactez l'équipe commerciale :",
     "close": "Masquer",
     "footer_one": "Essai · 1 jour restant",
     "footer_other": "Essai · {{count}} jours restants",
-    "banner_many": "Version d'essai : {{count}} jours restants (fin le {{date}}). Vos données sont conservées - pour continuer, achetez un code d'activation :",
+    "banner_many": "Version d'essai : {{count}} jours restants (fin le {{date}}). Vos données sont conservées - pour continuer, contactez l'équipe commerciale :",
     "footer_many": "Essai · {{count}} jours restants"
   },
   "offlineSync": {
