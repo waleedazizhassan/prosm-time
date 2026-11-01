@@ -22,7 +22,7 @@ async function setup(name: string) {
 describe("require_gps", () => {
   it("is on for a new organisation and refuses every bad reading", async () => {
     const { t, site, worker } = await setup("Gps Co");
-    for (const [lat, lng, accuracy] of [[null, null, null], [0, 0, 10], [95, 31, 10], [30, 190, 10], [30, 31, null], [30, 31, 0], [30, 31, 9000]] as const) {
+    for (const [lat, lng, accuracy] of [[null, null, null], [0, 0, 10], [95, 31, 10], [30, 190, 10], [30, 31, null], [30, 31, -1], [30, 31, 9000]] as const) {
       expect((await clockIn(t, worker, site, lat, lng, accuracy)).error).toMatch(/LOCATION_REQUIRED/);
     }
     expect((await clockIn(t, worker, site, 30.02125, 31.75812, 8)).error).toBeNull();

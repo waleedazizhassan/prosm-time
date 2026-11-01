@@ -22,7 +22,7 @@ begin
     if p_latitude is null or p_longitude is null
        or p_latitude not between -90 and 90 or p_longitude not between -180 and 180
        or (p_latitude = 0 and p_longitude = 0)
-       or p_accuracy is null or p_accuracy <= 0 or p_accuracy > 5000 then
+       or p_accuracy is null or p_accuracy < 0 or p_accuracy > 5000 then
         raise exception 'LOCATION_REQUIRED';
     end if;
 end;
