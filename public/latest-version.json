@@ -1,9 +1,9 @@
 {
-  "version": "2.3.61",
-  "releasedAt": "2026-10-28T07:28:28.748Z",
+  "version": "2.3.62",
+  "releasedAt": "2026-11-01T17:13:22.968Z",
   "downloads": {
     "windows": "https://time.prosm.net",
-    "android": "https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/public/app-releases/PROSM-Time-v2.3.61.apk",
+    "android": "https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/public/app-releases/PROSM-Time-v2.3.62.apk",
     "web": "https://time.prosm.net"
   }
 }
