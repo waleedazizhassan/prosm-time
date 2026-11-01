@@ -22,14 +22,12 @@ restore() { git checkout -- android/app/build.gradle public/latest-version.json 
 trap restore EXIT
 
 node scripts/write-release-manifest.mjs > /dev/null
-npm run build:obfuscated > /dev/null
+npx vite build > /dev/null
+node scripts/check-play-bundle.mjs dist
 
+npm run build:obfuscated > /dev/null
 # The update manifest must not ship in this bundle.
 rm -f dist/latest-version.json
-if grep -rqE 'latest-version\.json|PROSM-Time\.apk|app-releases' dist --include='*.js'; then
-  echo "self-update code found in the Play bundle" >&2
-  exit 1
-fi
 
 npx cap sync android > /dev/null
 sed -i "s/versionCode 3\$/versionCode ${VERSION_CODE}/; s/versionName \"2.3.2\"/versionName \"${VERSION_NAME}\"/" android/app/build.gradle
