@@ -18,6 +18,7 @@ import Input from "../../components/common/Input";
 import Select from "../../components/common/Select";
 import Table from "../../components/common/Table";
 import Modal from "../../components/common/Modal";
+import ActionBar from "../../components/common/ActionBar";
 import Button from "../../components/common/Button";
 import Textarea from "../../components/common/Textarea";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
@@ -524,7 +525,13 @@ export default function AllowancesPage() {
                   onChange={(event) => setSheetNotes((current) => ({ ...current, [sheet.id]: event.target.value }))}
                   style={{ flex: "1 1 180px", minHeight: 36, padding: "0 var(--space-3)", border: "1px solid var(--border-medium)", borderRadius: "var(--radius-sm)", background: "var(--surface-raised)", color: "var(--text-primary)", font: "inherit" }}
                 />
-                <div style={{ display: "flex", gap: "var(--space-2)" }}>
+                <ActionBar>
+                  <Button size="sm" onClick={() => decideSheet(sheet, "approved")} loading={sheetBusy === sheet.id}>
+                    {t("detail.approveAction")}
+                  </Button>
+                  <Button size="sm" variant="danger" onClick={() => decideSheet(sheet, "rejected")} loading={sheetBusy === sheet.id} disabled={!sheetNotes[sheet.id]?.trim()}>
+                    {t("detail.rejectAction")}
+                  </Button>
                   <Button size="sm" variant="ghost" onClick={() => openSheet(sheet)}>
                     {t("sheets.openAction")}
                   </Button>
@@ -533,13 +540,7 @@ export default function AllowancesPage() {
                       {t("sheetEdit.action")}
                     </Button>
                   ) : null}
-                  <Button size="sm" variant="danger" onClick={() => decideSheet(sheet, "rejected")} loading={sheetBusy === sheet.id} disabled={!sheetNotes[sheet.id]?.trim()}>
-                    {t("detail.rejectAction")}
-                  </Button>
-                  <Button size="sm" onClick={() => decideSheet(sheet, "approved")} loading={sheetBusy === sheet.id}>
-                    {t("detail.approveAction")}
-                  </Button>
-                </div>
+                </ActionBar>
               </div>
             ))}
           </div>
