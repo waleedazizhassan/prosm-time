@@ -25,7 +25,7 @@ const ASSET_CACHE = "prosm-time-assets-v2";
 const OLD_CACHES = ["prosm-time-assets"];
 const INDEX_URL = SCOPE + "index.html";
 const META_CACHE = "prosm-time-meta";
-const STATIC_PAGES = ["privacy", "terms", "delete-account"].map((page) => SCOPE + page);
+const STATIC_PAGES = ["privacy", "privacy-policy", "terms", "delete-account"].map((page) => SCOPE + page);
 const ATTEMPTS = 5;
 
 const isHtml = (response) => (response.headers.get("content-type") || "").includes("text/html");

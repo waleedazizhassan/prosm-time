@@ -3,7 +3,7 @@
 // GitHub Pages serves dist/privacy.html at /privacy with no redirect. The legal
 // text comes from the same source the app shows.
 // Usage, after the web build: node scripts/build-static-pages.mjs [dist]
-import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { copyFileSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -103,4 +103,6 @@ const deletion = `<article lang="ar" dir="rtl" id="ar">
 <p>A company owner's account governs the whole organisation and is deleted on request to support@prosm.net.</p>
 </article>`;
 writeFileSync(join(dist, "delete-account.html"), page("Delete your PROSM Time account | حذف حساب PROSM Time", "How to delete your PROSM Time account and data", deletion));
+// The same page at a second address, for Google Play.
+copyFileSync(join(dist, "privacy.html"), join(dist, "privacy-policy.html"));
 console.log("static pages written");
