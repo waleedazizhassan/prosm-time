@@ -282,7 +282,11 @@
     "endBeforeStart": "The end date is before the start date.",
     "chooseLeaveReviewer": "Choose someone who can approve your leave.",
     "licensedUserLimit": "Your licence's user limit is reached. Deactivate someone who no longer works here, or contact sales@prosm.net for more users.",
-    "ownerOnlyLicence": "Only the owner can see the licence."
+    "ownerOnlyLicence": "Only the owner can see the licence.",
+    "planSiteLimit": "Your plan has reached its limit of sites.",
+    "planEmployeeLimit": "Your plan has reached its limit of employees.",
+    "tooManyCodeAttempts": "Too many attempts. Try again later.",
+    "invalidActivationCode": "The code is wrong or already used."
   },
   "pageLoad": {
     "title": "This page needs a connection",

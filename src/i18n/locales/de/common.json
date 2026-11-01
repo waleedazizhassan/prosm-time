@@ -282,7 +282,11 @@
     "endBeforeStart": "Das Enddatum liegt vor dem Startdatum.",
     "chooseLeaveReviewer": "Wählen Sie jemanden, der Ihren Urlaub genehmigen darf.",
     "licensedUserLimit": "Die Nutzergrenze Ihrer Lizenz ist erreicht. Deaktivieren Sie ein ungenutztes Konto oder kontaktieren Sie sales@prosm.net.",
-    "ownerOnlyLicence": "Nur der Inhaber kann die Lizenz sehen."
+    "ownerOnlyLicence": "Nur der Inhaber kann die Lizenz sehen.",
+    "planSiteLimit": "Ihr Plan hat die Grenze an Standorten erreicht.",
+    "planEmployeeLimit": "Ihr Plan hat die Grenze an Mitarbeitern erreicht.",
+    "tooManyCodeAttempts": "Zu viele Versuche. Versuchen Sie es später erneut.",
+    "invalidActivationCode": "Der Code ist falsch oder bereits verwendet."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

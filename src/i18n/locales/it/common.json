@@ -282,7 +282,11 @@
     "endBeforeStart": "La data di fine è prima della data di inizio.",
     "chooseLeaveReviewer": "Scegli qualcuno che può approvare le tue ferie.",
     "licensedUserLimit": "Il limite di utenti della licenza è raggiunto. Disattiva un account non più usato o contatta sales@prosm.net.",
-    "ownerOnlyLicence": "Solo il titolare può vedere la licenza."
+    "ownerOnlyLicence": "Solo il titolare può vedere la licenza.",
+    "planSiteLimit": "Il tuo piano ha raggiunto il limite di sedi.",
+    "planEmployeeLimit": "Il tuo piano ha raggiunto il limite di dipendenti.",
+    "tooManyCodeAttempts": "Troppi tentativi. Riprova più tardi.",
+    "invalidActivationCode": "Il codice è errato o già utilizzato."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

@@ -137,5 +137,25 @@
   "siteFocus": {
     "backToSite": "← Retour au site",
     "allSettings": "Tous les paramètres"
+  },
+  "plan": {
+    "title": "Formule",
+    "current": "Formule",
+    "trial": "Essai gratuit",
+    "employees": "Employés",
+    "sites": "Sites",
+    "ends": "Se termine le",
+    "noEnd": "Sans date de fin",
+    "usage": "{{used}} sur {{max}}",
+    "codeLabel": "Code d'activation",
+    "redeem": "Activer le code",
+    "redeemed": "Le code est activé.",
+    "redeemFailed": "Le code est incorrect ou déjà utilisé.",
+    "names": {
+      "legacy": "Formule actuelle",
+      "starter": "Starter",
+      "business": "Business",
+      "pro": "Pro"
+    }
   }
 }

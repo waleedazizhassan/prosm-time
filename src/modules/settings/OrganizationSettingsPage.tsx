@@ -12,6 +12,7 @@ import LeaveTypesSettingsCard from "./LeaveTypesSettingsCard";
 import settingsHeaderImage from "../../assets/illustrations/settings.svg";
 import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
+import PlanSettingsCard from "./PlanSettingsCard";
 import PageBanner from "../../components/common/PageBanner";
 import { APP_VERSION } from "../../core/appVersion";
 
@@ -63,6 +64,7 @@ export default function OrganizationSettingsPage() {
       {hasPermission("leave.manage_types") ? <LeaveTypesSettingsCard /> : null}
       {isOwner ? (
         <>
+          <PlanSettingsCard />
           <OvertimePolicySettingsCard />
           <NoSiteRadiusSettingsCard />
           <MockLocationSettingsCard />

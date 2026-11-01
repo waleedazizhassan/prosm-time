@@ -137,5 +137,25 @@
   "siteFocus": {
     "backToSite": "← رجوع للموقع",
     "allSettings": "كل الإعدادات"
+  },
+  "plan": {
+    "title": "الباقة",
+    "current": "الباقة",
+    "trial": "تجربة مجانية",
+    "employees": "الموظفون",
+    "sites": "المواقع",
+    "ends": "تنتهي في",
+    "noEnd": "بدون تاريخ انتهاء",
+    "usage": "{{used}} من {{max}}",
+    "codeLabel": "كود التفعيل",
+    "redeem": "تفعيل الكود",
+    "redeemed": "تم تفعيل الكود.",
+    "redeemFailed": "الكود غير صحيح أو مستخدم من قبل.",
+    "names": {
+      "legacy": "الباقة الحالية",
+      "starter": "Starter",
+      "business": "Business",
+      "pro": "Pro"
+    }
   }
 }

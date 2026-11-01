@@ -137,5 +137,25 @@
   "siteFocus": {
     "backToSite": "← Torna al sito",
     "allSettings": "Tutte le impostazioni"
+  },
+  "plan": {
+    "title": "Piano",
+    "current": "Piano",
+    "trial": "Prova gratuita",
+    "employees": "Dipendenti",
+    "sites": "Sedi",
+    "ends": "Termina il",
+    "noEnd": "Senza data di fine",
+    "usage": "{{used}} su {{max}}",
+    "codeLabel": "Codice di attivazione",
+    "redeem": "Attiva il codice",
+    "redeemed": "Il codice è attivato.",
+    "redeemFailed": "Il codice è errato o già utilizzato.",
+    "names": {
+      "legacy": "Piano attuale",
+      "starter": "Starter",
+      "business": "Business",
+      "pro": "Pro"
+    }
   }
 }
