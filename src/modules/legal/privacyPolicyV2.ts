@@ -273,7 +273,7 @@ export const PRIVACY_V2_AR: LegalDocument = {
       "blocks": [
         {
           "type": "paragraph",
-          "text": "تُشفَّر البيانات أثناء انتقالها، ويُضبط الاطلاع حسب الدور داخل قاعدة البيانات نفسها. وتُحفظ الصور في تخزين خاص، ولا تُفتح إلا عبر روابط قصيرة الصلاحية. وتُخزَّن رموز PIN مجزّأة، وتُشفَّر الإجراءات المنتظرة على جهازك، وتُسجَّل الإجراءات المهمة، ويُقفَل جهاز الكشك المشترك على شاشة الكشك."
+          "text": "تُشفَّر البيانات أثناء انتقالها، ويُضبط الاطلاع حسب الدور داخل قاعدة البيانات نفسها. وتُحفظ الصور في تخزين خاص، ولا يفتحها إلا من سجّل الدخول وله صلاحية الاطلاع عليها. وتُخزَّن رموز PIN مجزّأة، وتُشفَّر الإجراءات المنتظرة على جهازك، وتُسجَّل الإجراءات المهمة، ويُقفَل جهاز الكشك المشترك على شاشة الكشك."
         },
         {
           "type": "paragraph",
@@ -632,7 +632,7 @@ export const PRIVACY_V2_EN: LegalDocument = {
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Data is encrypted in transit, and access is controlled by role inside the database. Photos are kept in private storage and opened only through short-lived links. PINs are stored hashed, pending actions are encrypted on your device, important actions are logged, and the shared kiosk device is locked to the kiosk screen."
+          "text": "Data is encrypted in transit, and access is controlled by role inside the database. Photos are kept in private storage and can be opened only by signed-in people allowed to see them. PINs are stored hashed, pending actions are encrypted on your device, important actions are logged, and the shared kiosk device is locked to the kiosk screen."
         },
         {
           "type": "paragraph",
