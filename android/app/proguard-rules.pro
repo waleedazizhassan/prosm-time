@@ -38,3 +38,12 @@
 # --- Hide original source file names in stack traces ---
 -renamesourcefileattribute SourceFile
 -keepattributes SourceFile,LineNumberTable
+
+# --- Plugins and Firebase (2026-11-01, the Play build's R8) ---
+-keep class com.equimaps.capacitor_background_geolocation.** { *; }
+-keep class com.capacitorjs.plugins.** { *; }
+-keep class ar.com.anura.plugins.backgroundmode.** { *; }
+-keep class com.google.firebase.** { *; }
+-keep class com.google.android.gms.** { *; }
+-dontwarn com.google.firebase.**
+-dontwarn com.google.android.gms.**

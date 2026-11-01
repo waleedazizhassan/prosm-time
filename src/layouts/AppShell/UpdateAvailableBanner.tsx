@@ -33,6 +33,12 @@ const UPDATE_NOTICE_ID = 7101;
 // other notices (it no longer adds a bar above a full-screen app);
 // before sign-in it stays at the top, below the phone's status bar.
 export default function UpdateAvailableBanner({ placement = "top" }: { placement?: "top" | "shell" }) {
+  // Google Play updates its own build: nothing here reaches that bundle.
+  if (import.meta.env.VITE_DISTRIBUTION === "play") return null;
+  return <SelfUpdateBanner placement={placement} />;
+}
+
+function SelfUpdateBanner({ placement }: { placement: "top" | "shell" }) {
   const { t } = useTranslation("shell");
   const { manifest } = useUpdateCheck();
   const pendingVersion = manifest?.version ?? null;
@@ -67,9 +73,7 @@ export default function UpdateAvailableBanner({ placement = "top" }: { placement
 
   const handleUpdate = () => {
     if (isAndroid) {
-      // v2.3.55: the Google Play build updates through Play (an app from Play may
-      // not install another copy of itself from elsewhere)
-      window.open(import.meta.env.VITE_DISTRIBUTION === "play" ? "https://play.google.com/store/apps/details?id=net.prosm.time" : manifest.downloads.android, "_blank", "noopener,noreferrer");
+      window.open(manifest.downloads.android, "_blank", "noopener,noreferrer");
       return;
     }
     if (window.location.protocol.startsWith("http")) {

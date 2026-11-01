@@ -374,7 +374,8 @@
   justify-content: center;
   align-items: center;
   gap: 4px 10px;
-  padding: 0 var(--space-4) var(--space-5);
+  /* 2026-11-01: above Android's navigation bar (edge-to-edge, targetSdk 36) */
+  padding: 0 var(--space-4) calc(var(--space-5) + env(safe-area-inset-bottom, 0px));
   text-align: center;
 
   color: rgba(226, 232, 240, 0.6);

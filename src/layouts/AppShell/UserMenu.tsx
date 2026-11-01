@@ -230,18 +230,23 @@ export default function UserMenu({ collapsed }: { collapsed: boolean }) {
               onChange={(next) => setCalendarSystem(next as CalendarSystem)}
               options={(["gregorian", "hijri"] as const).map((system) => ({ value: system, label: t(`calendar.${system}`) }))}
             />
-            <button type="button" className={styles.signOutButton} onClick={handleCheckForUpdate} disabled={updateChecking}>
-              <RefreshCw size={16} className={updateChecking ? styles.avatarSpinner : undefined} />
-              {t("update.checkAction")}
-            </button>
-            {updateChecking ? (
-              <span className={styles.email}>{t("update.checking")}</span>
-            ) : updateManifest ? (
-              <button type="button" className={styles.signOutButton} onClick={handleGoToUpdate}>
-                {t("update.available", { version: updateManifest.version })} — {t("update.action")}
-              </button>
-            ) : justChecked ? (
-              <span className={styles.email}>{t("update.upToDate")}</span>
+            {/* Google Play updates its own build */}
+            {import.meta.env.VITE_DISTRIBUTION !== "play" ? (
+              <>
+                <button type="button" className={styles.signOutButton} onClick={handleCheckForUpdate} disabled={updateChecking}>
+                  <RefreshCw size={16} className={updateChecking ? styles.avatarSpinner : undefined} />
+                  {t("update.checkAction")}
+                </button>
+                {updateChecking ? (
+                  <span className={styles.email}>{t("update.checking")}</span>
+                ) : updateManifest ? (
+                  <button type="button" className={styles.signOutButton} onClick={handleGoToUpdate}>
+                    {t("update.available", { version: updateManifest.version })} — {t("update.action")}
+                  </button>
+                ) : justChecked ? (
+                  <span className={styles.email}>{t("update.upToDate")}</span>
+                ) : null}
+              </>
             ) : null}
             <button type="button" className={styles.signOutButton} onClick={signOut}>
               <LogOut size={16} />

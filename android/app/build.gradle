@@ -44,14 +44,22 @@ android {
         versionCode 3
         versionName "2.3.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        // v2.3.55 (owner 2026-10-27, Google Play): a build for Play passes the
-        // certificate Google signs it with (Play Console > App integrity), so
-        // MainActivity's check accepts it too: -PprosmPlaySigningSha256=<hex>
-        buildConfigField "String", "PLAY_SIGNING_CERT_SHA256", "\"${(project.findProperty('prosmPlaySigningSha256') ?: '').toString().toLowerCase().replaceAll('[^0-9a-f]', '')}\""
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
              // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+        }
+    }
+    // Play: run-only, no self-update, built as an AAB. direct: the APK published
+    // through the release workflow, with self-update. One dimension, same id,
+    // so a Play install and an APK install are the same app to Android.
+    flavorDimensions = ["distribution"]
+    productFlavors {
+        direct {
+            dimension "distribution"
+        }
+        play {
+            dimension "distribution"
         }
     }
     buildTypes {
@@ -69,8 +77,16 @@ android {
             // (real signing is untouched and stays on - that part is
             // proven safe). Re-enable only after a real device confirms
             // it no longer crashes with R8 on.
-            minifyEnabled false
-            shrinkResources false
+            //
+            // 2026-11-01: on only when asked for (-PprosmR8=true, the Play AAB),
+            // so the APK Ratomag runs is untouched until a device confirms it.
+            def useR8 = (project.findProperty('prosmR8') ?: 'false').toString() == 'true'
+            minifyEnabled useR8
+            shrinkResources useR8
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            ndk {
+                debugSymbolLevel 'FULL'
+            }
             debuggable false
             if (hasSigningConfig) {
                 signingConfig signingConfigs.release

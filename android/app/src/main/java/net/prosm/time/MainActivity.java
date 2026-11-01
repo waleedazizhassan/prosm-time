@@ -42,6 +42,8 @@ public class MainActivity extends BridgeActivity {
     // SHA-256 of PROSM Time's release signing certificate (CN=PROSM Time, O=PROSM, C=EG),
     // checked against the published APK with apksigner on 2026-10-27.
     private static final String RELEASE_CERT_SHA256 = "f5e747b81cc3d4490b6c60d2cc5cb7edcea730c3578dada5bf4b56bbb3811880";
+    // SHA-256 of the key Google Play signs the store build with (Play Console > App integrity).
+    private static final String PLAY_APP_SIGNING_CERT_SHA256 = "8aacba7cb0a96f15b2e0d90cd8f0162c733a2b408bb5f8ee1dad39c92d463eb5";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,7 +104,7 @@ public class MainActivity extends BridgeActivity {
             for (Signature signature : signatures) {
                 String hash = hex(digest.digest(signature.toByteArray()));
                 // ours, or - in the Google Play build - the key Google signs it with
-                if (RELEASE_CERT_SHA256.equals(hash) || (!BuildConfig.PLAY_SIGNING_CERT_SHA256.isEmpty() && BuildConfig.PLAY_SIGNING_CERT_SHA256.equals(hash))) return true;
+                if (RELEASE_CERT_SHA256.equals(hash) || PLAY_APP_SIGNING_CERT_SHA256.equals(hash)) return true;
             }
             return false;
         } catch (Exception error) {
