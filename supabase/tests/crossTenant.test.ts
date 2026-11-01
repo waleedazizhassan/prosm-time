@@ -50,6 +50,8 @@ const TABLES: Record<string, string> = {
   leave_entitlements: byOrg,
   leave_types: byOrg,
   legal_acknowledgements: byOrg,
+  entitlements: byOrg,
+  entitlement_events: byOrg,
   data_consents: byOrg,
   push_devices: byOrg,
   leave_requests: byOrg,
@@ -82,7 +84,7 @@ const TABLES: Record<string, string> = {
   users: byOrg,
   worker_pay_rates: byOrg,
 };
-const GLOBAL_TABLES = ["permissions", "roles", "role_default_permissions", "security_rate_limits", "platform_settings"];
+const GLOBAL_TABLES = ["permissions", "roles", "role_default_permissions", "security_rate_limits", "platform_settings", "plans", "activation_codes"];
 
 // Tables the seed below must actually fill, so their check is not vacuous.
 const MUST_BE_SEEDED = [
