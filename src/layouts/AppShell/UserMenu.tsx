@@ -8,6 +8,7 @@ import { useAuth } from "../../core/context/AuthContext";
 import { useAppLayout } from "./LayoutContext";
 import { useTheme, type ThemeMode } from "../../core/context/ThemeContext";
 import { useCalendar, setCalendarSystem, type CalendarSystem } from "../../core/context/CalendarContext";
+import { NUMERALS_STORAGE_KEY, readStoredNumerals } from "../../core/utils/formatDate";
 import { useUpdateCheck } from "../../core/hooks/useUpdateCheck";
 import { LANGUAGES } from "../../i18n/languages";
 import UserRepository from "../../core/repositories/UserRepository";
@@ -229,6 +230,20 @@ export default function UserMenu({ collapsed }: { collapsed: boolean }) {
               value={calendarSystem}
               onChange={(next) => setCalendarSystem(next as CalendarSystem)}
               options={(["gregorian", "hijri"] as const).map((system) => ({ value: system, label: t(`calendar.${system}`) }))}
+            />
+            <Dropdown
+              className={styles.languageSelect}
+              value={readStoredNumerals()}
+              onChange={(next) => {
+                try {
+                  localStorage.setItem(NUMERALS_STORAGE_KEY, next);
+                } catch {
+                  // storage unavailable
+                }
+                window.location.reload();
+              }}
+              ariaLabel={t("numerals.label")}
+              options={(["latn", "arab"] as const).map((system) => ({ value: system, label: t(`numerals.${system}`) }))}
             />
             {/* Google Play updates its own build */}
             {import.meta.env.VITE_DISTRIBUTION !== "play" ? (

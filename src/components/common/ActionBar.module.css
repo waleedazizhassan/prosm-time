@@ -1,0 +1,26 @@
+/* A card's row of actions: inside the card always, 44px to touch on a phone,
+   two across there, with the deciding actions first in reading order. */
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  min-width: 0;
+  max-width: 100%;
+}
+
+.bar > * {
+  min-width: 0;
+}
+
+@media (max-width: 767px) {
+  .bar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .bar > * {
+    width: 100%;
+    min-height: 44px;
+  }
+}

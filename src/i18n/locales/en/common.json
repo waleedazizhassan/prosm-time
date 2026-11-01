@@ -282,7 +282,13 @@
     "endBeforeStart": "The end date is before the start date.",
     "chooseLeaveReviewer": "Choose someone who can approve your leave.",
     "licensedUserLimit": "Your licence's user limit is reached. Deactivate someone who no longer works here, or contact sales@prosm.net for more users.",
-    "ownerOnlyLicence": "Only the owner can see the licence."
+    "ownerOnlyLicence": "Only the owner can see the licence.",
+    "planSiteLimit": "Your plan has reached its limit of sites.",
+    "planEmployeeLimit": "Your plan has reached its limit of employees.",
+    "tooManyCodeAttempts": "Too many attempts. Try again later.",
+    "invalidActivationCode": "The code is wrong or already used.",
+    "locationRequired": "This cannot be recorded without a valid location. Turn on location and try again.",
+    "rejectReasonRequired": "Write the reason, so the employee sees it."
   },
   "pageLoad": {
     "title": "This page needs a connection",
@@ -315,7 +321,8 @@
       "accept": "Continue",
       "signOut": "Sign out",
       "error": "Couldn't save. Check your connection and try again.",
-      "confirmEuStorage": "I explicitly agree to my data being stored on servers in the European Union, as section 7 of the Privacy Policy explains."
+      "confirmEuStorage": "I explicitly agree to my data being stored on servers in the European Union, as section 7 of the Privacy Policy explains.",
+      "confirmCapture": "I agree to my location being recorded when I clock in and out, and to a photo at sites that require one."
     }
   },
   "reminders": {

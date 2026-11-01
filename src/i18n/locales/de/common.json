@@ -282,7 +282,13 @@
     "endBeforeStart": "Das Enddatum liegt vor dem Startdatum.",
     "chooseLeaveReviewer": "Wählen Sie jemanden, der Ihren Urlaub genehmigen darf.",
     "licensedUserLimit": "Die Nutzergrenze Ihrer Lizenz ist erreicht. Deaktivieren Sie ein ungenutztes Konto oder kontaktieren Sie sales@prosm.net.",
-    "ownerOnlyLicence": "Nur der Inhaber kann die Lizenz sehen."
+    "ownerOnlyLicence": "Nur der Inhaber kann die Lizenz sehen.",
+    "planSiteLimit": "Ihr Plan hat die Grenze an Standorten erreicht.",
+    "planEmployeeLimit": "Ihr Plan hat die Grenze an Mitarbeitern erreicht.",
+    "tooManyCodeAttempts": "Zu viele Versuche. Versuchen Sie es später erneut.",
+    "invalidActivationCode": "Der Code ist falsch oder bereits verwendet.",
+    "locationRequired": "Ohne gültigen Standort ist keine Erfassung möglich. Schalten Sie den Standort ein und versuchen Sie es erneut.",
+    "rejectReasonRequired": "Geben Sie den Grund an, damit der Mitarbeiter ihn sieht."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",
@@ -315,7 +321,8 @@
       "accept": "Weiter",
       "signOut": "Abmelden",
       "error": "Speichern nicht möglich. Prüfen Sie die Verbindung und versuchen Sie es erneut.",
-      "confirmEuStorage": "Ich stimme ausdrücklich zu, dass meine Daten auf Servern in der Europäischen Union gespeichert werden, wie Abschnitt 7 der Datenschutzerklärung erläutert."
+      "confirmEuStorage": "Ich stimme ausdrücklich zu, dass meine Daten auf Servern in der Europäischen Union gespeichert werden, wie Abschnitt 7 der Datenschutzerklärung erläutert.",
+      "confirmCapture": "Ich stimme zu, dass mein Standort beim Ein- und Ausstempeln erfasst wird und an Orten, die es verlangen, ein Foto aufgenommen wird."
     }
   },
   "reminders": {

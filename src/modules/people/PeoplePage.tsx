@@ -94,7 +94,7 @@ export default function PeoplePage() {
       {/* v2.3.43 step 15 (item 18): grouped by role, with search and filters;
           the plain table stays as a fallback when the grouped list cannot load. */}
       {loadError ? (
-        <Table columns={columns} data={members} getRowId={(member) => member.id} loading={loading} emptyMessage="—" onRowClick={(member) => navigate(`/people/${member.id}`)} />
+        <Table grid columns={columns} data={members} getRowId={(member) => member.id} loading={loading} emptyMessage="—" onRowClick={(member) => navigate(`/people/${member.id}`)} />
       ) : (
         <PeopleByRole compact={!profile?.isOwner} onOpen={(person) => navigate(`/people/${person.id}`)} />
       )}

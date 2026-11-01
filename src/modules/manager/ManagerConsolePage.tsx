@@ -16,7 +16,7 @@ import Textarea from "../../components/common/Textarea";
 import Input from "../../components/common/Input";
 import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
-import { formatTimeOnly, formatDateOnly } from "../../core/utils/formatDate";
+import { formatTimeOnly, formatDateOnly, appLocale } from "../../core/utils/formatDate";
 import managerConsoleHeaderImage from "../../assets/illustrations/manager.svg";
 import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
@@ -138,7 +138,7 @@ export default function ManagerConsolePage() {
             time: `${formatDateOnly(item.mockLocation.occurredAt, i18n.language)} ${formatTimeOnly(item.mockLocation.occurredAt, i18n.language)}`,
           })
         : item.geofence
-          ? t("pending.geofence.summary", { distance: item.geofence.distanceMeters.toLocaleString(i18n.language), reason: item.geofence.reason || "—" })
+          ? t("pending.geofence.summary", { distance: item.geofence.distanceMeters.toLocaleString(appLocale(i18n.language)), reason: item.geofence.reason || "—" })
           : item.correction
             ? t("pending.correction.summary", {
                 action: t(`pending.offlineTime.action.${item.correction.eventType}`),
@@ -362,7 +362,7 @@ export default function ManagerConsolePage() {
               {deductionDays !== null
                 ? t("leave.deductionTotal", {
                     days: deductionDays,
-                    total: (Number(deductionInput || 0) * deductionDays).toLocaleString(i18n.language, { maximumFractionDigits: 2 }),
+                    total: (Number(deductionInput || 0) * deductionDays).toLocaleString(appLocale(i18n.language), { maximumFractionDigits: 2 }),
                     currency: deductionCurrency,
                   })
                 : t("leave.deductionHint")}

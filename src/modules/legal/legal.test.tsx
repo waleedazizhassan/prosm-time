@@ -48,7 +48,7 @@ describe("legal acknowledgement", () => {
     fireEvent.click(accept);
     expect(await screen.findByText("app-content")).toBeInTheDocument();
     expect(LegalRepository.acknowledge).toHaveBeenCalledWith(LEGAL_VERSION);
-    expect(LegalRepository.recordConsents).toHaveBeenCalledWith(LEGAL_VERSION, ["eu_storage"]);
+    expect(LegalRepository.recordConsents).toHaveBeenCalledWith(LEGAL_VERSION, ["eu_storage", "location", "photo"]);
   });
 
   it("asks the Owner to accept for the organisation", async () => {

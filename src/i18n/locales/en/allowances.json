@@ -176,7 +176,8 @@
     "title": "Allowance sheets waiting for you",
     "hint": "Each sheet holds every day an employee sent - approve or reject it in one go. Open it to see the days.",
     "line": "{{from}} - {{to}} · {{days}} days · total {{total}}",
-    "openAction": "Open"
+    "openAction": "Open",
+    "resubmitted": "Sent again after rejection · earlier total {{total}}"
   },
   "basis": {
     "title": "How each allowance is calculated",

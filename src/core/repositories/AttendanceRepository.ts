@@ -32,6 +32,10 @@ export interface OfflineReplayOptions {
   // live action at its own time and keeps the device's time only for an
   // offline replay (flagged for a manager's review when it differs).
   offlineReplay?: boolean;
+  // A break's own reading, for start_ and end_prosm_time_break.
+  latitude?: number | null;
+  longitude?: number | null;
+  accuracyMeters?: number | null;
 }
 
 export interface ClockInInput {
@@ -381,7 +385,7 @@ class AttendanceRepository {
   async startBreak(attendanceSessionId: string, options?: OfflineReplayOptions): Promise<ServiceResult<{ breakId: string }>> {
     try {
       const { data, error } = await this.client.functions.invoke("start-break", {
-        body: { attendanceSessionId, idempotencyKey: options?.idempotencyKey ?? crypto.randomUUID(), clientReportedAt: options?.clientReportedAt ?? null, offlineReplay: options?.offlineReplay === true },
+        body: { attendanceSessionId, latitude: options?.latitude, longitude: options?.longitude, accuracyMeters: options?.accuracyMeters, idempotencyKey: options?.idempotencyKey ?? crypto.randomUUID(), clientReportedAt: options?.clientReportedAt ?? null, offlineReplay: options?.offlineReplay === true },
       });
       if (error) {
         if (error.name === "FunctionsFetchError") return { success: false, message: null, data: null, networkError: true };
@@ -398,7 +402,7 @@ class AttendanceRepository {
   async endBreak(breakId: string, options?: OfflineReplayOptions): Promise<ServiceResult<{ maxDurationExceeded: boolean }>> {
     try {
       const { data, error } = await this.client.functions.invoke("end-break", {
-        body: { breakId, idempotencyKey: options?.idempotencyKey ?? null, clientReportedAt: options?.clientReportedAt ?? null, offlineReplay: options?.offlineReplay === true },
+        body: { breakId, latitude: options?.latitude, longitude: options?.longitude, accuracyMeters: options?.accuracyMeters, idempotencyKey: options?.idempotencyKey ?? null, clientReportedAt: options?.clientReportedAt ?? null, offlineReplay: options?.offlineReplay === true },
       });
       if (error) {
         if (error.name === "FunctionsFetchError") return { success: false, message: null, data: null, networkError: true };

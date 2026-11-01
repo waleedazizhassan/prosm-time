@@ -222,10 +222,20 @@ export default function ReportsPage() {
         }),
       },
       late: {
-        columns: [t("columns.late.name"), t("columns.late.site"), t("columns.late.shiftStart"), t("columns.late.clockIn"), t("columns.late.minutesLate")],
-        fetch: () => ReportRepository.late(startDate, endDate),
-        toRow: (row: import("../../core/repositories/ReportRepository").LateRow) => ({
-          cells: [row.userFullName, row.siteName, row.shiftStartTime.slice(0, 5), formatTimeOnly(row.clockInAt, locale), String(row.minutesLate)],
+        columns: [t("columns.late.date"), t("columns.late.name"), t("columns.late.site"), t("columns.late.shiftStart"), t("columns.late.clockIn"), t("columns.late.minutesLate"), t("columns.late.employeeTotal")],
+        // Plan stage 4.3: by date, then employee, with each employee's total for the period.
+        fetch: async () => {
+          const result = await ReportRepository.late(startDate, endDate);
+          if (!result.success || !result.data) return result;
+          const totals = new Map<string, number>();
+          for (const row of result.data) totals.set(row.userFullName, (totals.get(row.userFullName) ?? 0) + row.minutesLate);
+          const rows = [...result.data]
+            .sort((a, b) => a.clockInAt.slice(0, 10).localeCompare(b.clockInAt.slice(0, 10)) || a.userFullName.localeCompare(b.userFullName))
+            .map((row) => ({ ...row, employeeTotal: totals.get(row.userFullName) ?? row.minutesLate }));
+          return { ...result, data: rows };
+        },
+        toRow: (row: import("../../core/repositories/ReportRepository").LateRow & { employeeTotal: number }) => ({
+          cells: [formatDateOnly(row.clockInAt, locale), row.userFullName, row.siteName, row.shiftStartTime.slice(0, 5), formatTimeOnly(row.clockInAt, locale), String(row.minutesLate), String(row.employeeTotal)],
           employeeName: row.userFullName,
           siteName: row.siteName,
         }),
@@ -529,6 +539,7 @@ export default function ReportsPage() {
 
       <Card title={t("recentExports.title")}>
         <Table
+          grid
           columns={recentExportsColumns}
           data={recentExports}
           getRowId={(row) => row.id}

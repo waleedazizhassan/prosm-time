@@ -8,7 +8,7 @@
 // read and acknowledge the new version once (LegalAcknowledgementGate).
 import { PRIVACY_V2_AR, PRIVACY_V2_EN } from "./privacyPolicyV2";
 
-export const LEGAL_VERSION = "2026-10-31.2";
+export const LEGAL_VERSION = "2026-11-01";
 
 export type LegalBlock = { type: "paragraph"; text: string } | { type: "bullets"; items: string[] } | { type: "table"; head: string[]; rows: string[][] };
 

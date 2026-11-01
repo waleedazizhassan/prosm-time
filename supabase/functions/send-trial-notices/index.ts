@@ -19,17 +19,17 @@ function render(kind: string, org: string, license: string, expiresAt: string): 
   const contacts = `<p><a href="mailto:sales@prosm.net">sales@prosm.net</a> · <a href="mailto:info@prosm.net">info@prosm.net</a> · <a href="mailto:support@prosm.net">support@prosm.net</a></p>`;
   const o = escapeHtml(org), l = escapeHtml(license);
   // v2.3.55 (owner 2026-10-27): a paid licence ends in a month, or a week
-  if (kind === "LICENSE_MONTH" || kind === "LICENSE_WEEK") {
-    const when = kind === "LICENSE_WEEK" ? ["بعد أسبوع", "in a week"] : ["بعد شهر", "in a month"];
+  if (kind === "LICENSE_DAY" || kind === "LICENSE_MONTH" || kind === "LICENSE_WEEK") {
+    const when = kind === "LICENSE_DAY" ? ["غدًا", "tomorrow"] : kind === "LICENSE_WEEK" ? ["بعد أسبوع", "in a week"] : ["بعد شهر", "in a month"];
     return {
       subject: `ينتهي ترخيص PROSM Time في ${date} | Your PROSM Time licence ends on ${date}`,
       html: `<div dir="rtl" style="font-family:Tahoma,Arial,sans-serif"><p>ينتهي ترخيص مؤسسة <b>${o}</b> (رقم الترخيص ${l}) ${when[0]}، في ${date}.</p><p>جدّد الترخيص قبل هذا التاريخ ليستمر البرنامج دون توقف، وتبقى كل بياناتك محفوظة:</p>${contacts}</div><hr><div dir="ltr" style="font-family:Arial,sans-serif"><p>The licence of <b>${o}</b> (licence ${l}) ends ${when[1]}, on ${date}.</p><p>Renew it before then so the app keeps running; all your data is kept:</p>${contacts}</div>`,
     };
   }
-  if (kind === "ENDING") {
+  if (kind === "ENDING" || kind === "ENDING_DAY") {
     return {
       subject: `تنتهي الفترة التجريبية لـ PROSM Time في ${date} | Your PROSM Time trial ends on ${date}`,
-      html: `<div dir="rtl" style="font-family:Tahoma,Arial,sans-serif"><p>تنتهي الفترة التجريبية لمؤسسة <b>${o}</b> في ${date}. بياناتك محفوظة ولن تُحذف.</p><p>للاستمرار اشترِ كود تفعيل وأدخله في البرنامج، أو تواصل معنا لتجديد الترخيص (رقم الترخيص ${l}):</p>${contacts}</div><hr><div dir="ltr" style="font-family:Arial,sans-serif"><p>The PROSM Time trial of <b>${o}</b> ends on ${date}. Your data is kept and will not be deleted.</p><p>To continue, buy an activation code and enter it in the app, or contact us to renew the license (license ${l}):</p>${contacts}</div>`,
+      html: `<div dir="rtl" style="font-family:Tahoma,Arial,sans-serif"><p>تنتهي الفترة التجريبية لمؤسسة <b>${o}</b> في ${date}. بياناتك محفوظة ولن تُحذف.</p><p>للاستمرار تواصل مع فريق المبيعات لتجديد الترخيص (رقم الترخيص ${l}):</p>${contacts}</div><hr><div dir="ltr" style="font-family:Arial,sans-serif"><p>The PROSM Time trial of <b>${o}</b> ends on ${date}. Your data is kept and will not be deleted.</p><p>To continue, contact the sales team to renew the license (license ${l}):</p>${contacts}</div>`,
     };
   }
   return {

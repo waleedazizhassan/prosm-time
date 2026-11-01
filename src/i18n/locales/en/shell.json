@@ -286,8 +286,8 @@
     "loadingStations": "Loading stations…"
   },
   "trial": {
-    "banner_one": "Demo version: 1 day left (ends {{date}}). Your data is kept afterwards - to continue, buy an activation code:",
-    "banner_other": "Demo version: {{count}} days left (ends {{date}}). Your data is kept afterwards - to continue, buy an activation code:",
+    "banner_one": "Demo version: 1 day left (ends {{date}}). Your data is kept afterwards - to continue, contact the sales team:",
+    "banner_other": "Demo version: {{count}} days left (ends {{date}}). Your data is kept afterwards - to continue, contact the sales team:",
     "close": "Hide",
     "footer_one": "Trial · 1 day left",
     "footer_other": "Trial · {{count}} days left"
@@ -383,5 +383,10 @@
     "footer": "After \"Continue\", Android asks for each permission in turn: choose \"Allow\" or \"While using the app\". You can change any permission later in the phone's settings.",
     "accept": "Continue",
     "decline": "Not now"
+  },
+  "numerals": {
+    "label": "Numbers",
+    "latn": "Latin digits (123)",
+    "arab": "Arabic digits (١٢٣)"
   }
 }

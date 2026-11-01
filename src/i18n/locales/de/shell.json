@@ -286,8 +286,8 @@
     "loadingStations": "Sender werden geladen …"
   },
   "trial": {
-    "banner_one": "Demoversion: noch 1 Tag (endet {{date}}). Ihre Daten bleiben erhalten - zum Fortfahren einen Aktivierungscode kaufen:",
-    "banner_other": "Demoversion: noch {{count}} Tage (endet {{date}}). Ihre Daten bleiben erhalten - zum Fortfahren einen Aktivierungscode kaufen:",
+    "banner_one": "Demoversion: noch 1 Tag (endet {{date}}). Ihre Daten bleiben erhalten - zum Fortfahren das Vertriebsteam kontaktieren:",
+    "banner_other": "Demoversion: noch {{count}} Tage (endet {{date}}). Ihre Daten bleiben erhalten - zum Fortfahren das Vertriebsteam kontaktieren:",
     "close": "Ausblenden",
     "footer_one": "Testversion · noch 1 Tag",
     "footer_other": "Testversion · noch {{count}} Tage"
@@ -383,5 +383,10 @@
     "footer": "Nach „Weiter“ fragt Android jede Berechtigung einzeln ab: Wählen Sie „Zulassen“ oder „Während der App-Nutzung“. Sie können jede Berechtigung später in den Telefoneinstellungen ändern.",
     "accept": "Weiter",
     "decline": "Nicht jetzt"
+  },
+  "numerals": {
+    "label": "Ziffern",
+    "latn": "Lateinische Ziffern (123)",
+    "arab": "Arabische Ziffern (١٢٣)"
   }
 }

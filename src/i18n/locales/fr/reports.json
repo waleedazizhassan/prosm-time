@@ -61,7 +61,9 @@
       "site": "Site",
       "shiftStart": "Début de service",
       "clockIn": "Pointé",
-      "minutesLate": "Minutes de retard"
+      "minutesLate": "Minutes de retard",
+      "date": "Date",
+      "employeeTotal": "Total de l'employé (min)"
     },
     "missingCheckouts": {
       "name": "Employé",

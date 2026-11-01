@@ -137,5 +137,34 @@
   "siteFocus": {
     "backToSite": "← Zurück zum Standort",
     "allSettings": "Alle Einstellungen"
+  },
+  "plan": {
+    "title": "Plan",
+    "current": "Plan",
+    "trial": "Kostenlose Testphase",
+    "employees": "Mitarbeiter",
+    "sites": "Standorte",
+    "ends": "Endet am",
+    "noEnd": "Kein Enddatum",
+    "usage": "{{used}} von {{max}}",
+    "codeLabel": "Aktivierungscode",
+    "redeem": "Code aktivieren",
+    "redeemed": "Der Code ist aktiviert.",
+    "redeemFailed": "Der Code ist falsch oder bereits verwendet.",
+    "names": {
+      "legacy": "Aktueller Plan",
+      "starter": "Starter",
+      "business": "Business",
+      "pro": "Pro"
+    }
+  },
+  "retention": {
+    "title": "Datenaufbewahrung",
+    "subtitle": "Sie können diese Fristen nur verkürzen. Eine kürzere Frist gilt auch für gespeicherte Daten, Älteres wird automatisch gelöscht.",
+    "location": "Standortpunkte: Tage (bis {{max}})",
+    "photo": "Anwesenheitsfotos: Tage (bis {{max}})",
+    "save": "Speichern",
+    "saved": "Gespeichert.",
+    "saveFailed": "Speichern nicht möglich."
   }
 }

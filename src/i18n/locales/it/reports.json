@@ -61,7 +61,9 @@
       "site": "Sito",
       "shiftStart": "Inizio turno",
       "clockIn": "Entrata registrata",
-      "minutesLate": "Minuti di ritardo"
+      "minutesLate": "Minuti di ritardo",
+      "date": "Data",
+      "employeeTotal": "Totale dipendente (min)"
     },
     "missingCheckouts": {
       "name": "Dipendente",

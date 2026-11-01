@@ -133,7 +133,7 @@ export default function AuditLogPage() {
 
       <Card>
         <ErrorText>{error}</ErrorText>
-        <Table columns={columns} data={rows} getRowId={(row) => row.id} loading={loading && rows.length === 0} emptyMessage={t("manager.audit.empty")} />
+        <Table grid columns={columns} data={rows} getRowId={(row) => row.id} loading={loading && rows.length === 0} emptyMessage={t("manager.audit.empty")} />
         {more ? (
           <div style={{ marginTop: "var(--space-3)", textAlign: "center" }}>
             <Button variant="ghost" onClick={() => load(rows[rows.length - 1]?.created_at ?? null)} loading={loading}>

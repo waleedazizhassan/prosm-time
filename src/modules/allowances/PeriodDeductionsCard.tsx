@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import LeaveRepository from "../../core/repositories/LeaveRepository";
 import EmployeeRepository from "../../core/repositories/EmployeeRepository";
-import { formatDateOnly } from "../../core/utils/formatDate";
+import { formatDateOnly, appLocale } from "../../core/utils/formatDate";
 
 import Card from "../../components/common/Card";
 import ListRow from "../../components/common/ListRow";
@@ -51,7 +51,7 @@ export default function PeriodDeductionsCard({ from, to }: { from: string; to: s
             <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{entry.days.map((day) => formatDateOnly(day, i18n.language)).join("، ")}</div>
           </div>
           <strong style={{ fontVariantNumeric: "tabular-nums", color: "var(--status-danger-text, var(--text-primary))" }}>
-            {entry.total.toLocaleString(i18n.language, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} {entry.currency}
+            {entry.total.toLocaleString(appLocale(i18n.language), { minimumFractionDigits: 2, maximumFractionDigits: 2 })} {entry.currency}
           </strong>
         </ListRow>
       ))}

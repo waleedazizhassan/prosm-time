@@ -5,7 +5,7 @@ import { useAuth } from "../../core/context/AuthContext";
 import leaveTypeLabel from "./leaveTypeLabel";
 import LeaveRepository, { type LeaveRequestRow, type OrgWideLeaveRow, type LeaveBalanceEntry, type LeaveType, type LeaveTypeSetting } from "../../core/repositories/LeaveRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
-import { formatDateOnly } from "../../core/utils/formatDate";
+import { formatDateOnly, appLocale } from "../../core/utils/formatDate";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
@@ -165,7 +165,7 @@ export default function LeaveRequestsPage() {
     {
       key: "deduction",
       header: t("columns.deduction"),
-      render: (row) => (row.deductionTotal ? `${row.deductionTotal.toLocaleString(i18n.language)} ${row.deductionCurrency ?? ""}` : "—"),
+      render: (row) => (row.deductionTotal ? `${row.deductionTotal.toLocaleString(appLocale(i18n.language))} ${row.deductionCurrency ?? ""}` : "—"),
     },
     {
       key: "actions",
@@ -296,9 +296,9 @@ export default function LeaveRequestsPage() {
       <Card title={isOwner ? t("orgWideRequestsTitle") : t("myRequestsTitle")}>
         <ErrorText>{loadError}</ErrorText>
         {isOwner ? (
-          <Table columns={orgWideColumns} data={orgWideRequests} getRowId={(row) => row.id} loading={loading} emptyMessage={t("empty")} />
+          <Table grid columns={orgWideColumns} data={orgWideRequests} getRowId={(row) => row.id} loading={loading} emptyMessage={t("empty")} />
         ) : (
-          <Table columns={columns} data={requests} getRowId={(row) => row.id} loading={loading} emptyMessage={t("empty")} />
+          <Table grid columns={columns} data={requests} getRowId={(row) => row.id} loading={loading} emptyMessage={t("empty")} />
         )}
       </Card>
     </PageShell>

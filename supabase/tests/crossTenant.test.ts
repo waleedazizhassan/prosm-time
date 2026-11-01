@@ -50,6 +50,10 @@ const TABLES: Record<string, string> = {
   leave_entitlements: byOrg,
   leave_types: byOrg,
   legal_acknowledgements: byOrg,
+  sensitive_access_log: byOrg,
+  data_deletion_log: byOrg,
+  entitlements: byOrg,
+  entitlement_events: byOrg,
   data_consents: byOrg,
   push_devices: byOrg,
   leave_requests: byOrg,
@@ -82,7 +86,7 @@ const TABLES: Record<string, string> = {
   users: byOrg,
   worker_pay_rates: byOrg,
 };
-const GLOBAL_TABLES = ["permissions", "roles", "role_default_permissions", "security_rate_limits", "platform_settings"];
+const GLOBAL_TABLES = ["permissions", "roles", "role_default_permissions", "security_rate_limits", "platform_settings", "plans", "activation_codes"];
 
 // Tables the seed below must actually fill, so their check is not vacuous.
 const MUST_BE_SEEDED = [
@@ -140,9 +144,9 @@ async function seedOrg(name: string): Promise<SeededOrg> {
   // Attendance: a shift with a break, then still clocked in; a far clock-in (geofence exception).
   await must(clockIn(t, employee, siteId), "clock in");
   const [session] = await t.su<{ id: string }>("select id from attendance_sessions where user_id = $1 and status = 'clocked_in'", [employee.userId]);
-  await must(t.as(employee.authId, "select public.start_prosm_time_break($1, $2)", [session.id, randomUUID()]), "start break");
+  await must(t.as(employee.authId, "select public.start_prosm_time_break($1, $2, null, false, 30.02125, 31.75812, 8)", [session.id, randomUUID()]), "start break");
   const [activeBreak] = await t.su<{ id: string }>("select id from break_events where user_id = $1 and status = 'active'", [employee.userId]);
-  await must(t.as(employee.authId, "select public.end_prosm_time_break($1, $2)", [activeBreak.id, randomUUID()]), "end break");
+  await must(t.as(employee.authId, "select public.end_prosm_time_break($1, $2, null, false, 30.02125, 31.75812, 8)", [activeBreak.id, randomUUID()]), "end break");
   await must(clockIn(t, farEmployee, siteId, { latitude: 30.3, longitude: 31.9 }), "far clock in");
   // An offline clock-in replayed an hour later (audit 1.4: a pending review).
   const offlineEmployee = await addMember(t, org, "employee", `${name} Offline Employee`);

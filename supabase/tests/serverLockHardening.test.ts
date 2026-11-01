@@ -16,7 +16,7 @@ describe("server lock", () => {
     const visible = () => t.as<{ n: number }>(worker.authId, "select count(*)::int as n from organizations");
     expect((await visible()).rows![0].n).toBeGreaterThan(0);
 
-    await t.su("update license_activation_state set is_trial = false, expires_at = now() - interval '1 day' where organization_id = $1", [org.id]);
+    await t.su("update license_activation_state set is_trial = false, expires_at = now() - interval '8 days' where organization_id = $1", [org.id]);
     expect((await visible()).rows![0].n).toBe(0);
     const status = await t.as<{ s: { locked: boolean; licenseEnded: boolean } }>(org.owner.authId, "select public.get_prosm_time_trial_status() as s");
     expect(status.rows![0].s).toMatchObject({ locked: true, licenseEnded: true });

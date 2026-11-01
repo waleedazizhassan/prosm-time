@@ -199,7 +199,7 @@ export default function EmergencyLogPage() {
 
       <Card>
         <ErrorText>{loadError}</ErrorText>
-        <Table columns={columns} data={filteredRows} getRowId={(row) => row.id} loading={loading} emptyMessage={t("empty")} onRowClick={openDetail} />
+        <Table grid columns={columns} data={filteredRows} getRowId={(row) => row.id} loading={loading} emptyMessage={t("empty")} onRowClick={openDetail} />
       </Card>
 
       <Modal isOpen={Boolean(selectedAlert)} onClose={closeDetail} title={t("detail.title")}>

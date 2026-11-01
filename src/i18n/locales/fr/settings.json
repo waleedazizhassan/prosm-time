@@ -137,5 +137,34 @@
   "siteFocus": {
     "backToSite": "← Retour au site",
     "allSettings": "Tous les paramètres"
+  },
+  "plan": {
+    "title": "Formule",
+    "current": "Formule",
+    "trial": "Essai gratuit",
+    "employees": "Employés",
+    "sites": "Sites",
+    "ends": "Se termine le",
+    "noEnd": "Sans date de fin",
+    "usage": "{{used}} sur {{max}}",
+    "codeLabel": "Code d'activation",
+    "redeem": "Activer le code",
+    "redeemed": "Le code est activé.",
+    "redeemFailed": "Le code est incorrect ou déjà utilisé.",
+    "names": {
+      "legacy": "Formule actuelle",
+      "starter": "Starter",
+      "business": "Business",
+      "pro": "Pro"
+    }
+  },
+  "retention": {
+    "title": "Conservation des données",
+    "subtitle": "Vous pouvez seulement raccourcir ces durées. Une durée plus courte s'applique aussi aux données conservées, et ce qui est plus ancien est supprimé automatiquement.",
+    "location": "Points de position : jours (jusqu'à {{max}})",
+    "photo": "Photos de pointage : jours (jusqu'à {{max}})",
+    "save": "Enregistrer",
+    "saved": "Enregistré.",
+    "saveFailed": "Enregistrement impossible."
   }
 }

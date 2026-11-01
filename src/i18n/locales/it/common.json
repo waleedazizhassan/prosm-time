@@ -282,7 +282,13 @@
     "endBeforeStart": "La data di fine è prima della data di inizio.",
     "chooseLeaveReviewer": "Scegli qualcuno che può approvare le tue ferie.",
     "licensedUserLimit": "Il limite di utenti della licenza è raggiunto. Disattiva un account non più usato o contatta sales@prosm.net.",
-    "ownerOnlyLicence": "Solo il titolare può vedere la licenza."
+    "ownerOnlyLicence": "Solo il titolare può vedere la licenza.",
+    "planSiteLimit": "Il tuo piano ha raggiunto il limite di sedi.",
+    "planEmployeeLimit": "Il tuo piano ha raggiunto il limite di dipendenti.",
+    "tooManyCodeAttempts": "Troppi tentativi. Riprova più tardi.",
+    "invalidActivationCode": "Il codice è errato o già utilizzato.",
+    "locationRequired": "Non è possibile registrare senza una posizione valida. Attiva la posizione e riprova.",
+    "rejectReasonRequired": "Indica il motivo, così il dipendente lo vede."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",
@@ -315,7 +321,8 @@
       "accept": "Continua",
       "signOut": "Esci",
       "error": "Impossibile salvare. Controlla la connessione e riprova.",
-      "confirmEuStorage": "Acconsento espressamente alla conservazione dei miei dati su server nell'Unione europea, come spiegato nella sezione 7 dell'Informativa sulla privacy."
+      "confirmEuStorage": "Acconsento espressamente alla conservazione dei miei dati su server nell'Unione europea, come spiegato nella sezione 7 dell'Informativa sulla privacy.",
+      "confirmCapture": "Acconsento alla registrazione della mia posizione alla timbratura e a una foto nei luoghi che la richiedono."
     }
   },
   "reminders": {

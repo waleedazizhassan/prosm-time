@@ -13,7 +13,7 @@ const save = (date: string, meal: number) => t.as(emp.authId, "select public.ups
 const entry = async (date: string) =>
   (await t.su<{ id: string; status: string; meal_allowance: number }>("select id, status, meal_allowance::float8 as meal_allowance from allowance_entries where user_id = $1 and entry_date = $2", [emp.userId, date]))[0];
 const submit = async (date: string) => t.as(emp.authId, "select public.submit_prosm_time_allowance_entry($1)", [(await entry(date)).id]);
-const review = async (date: string, action: "approved" | "rejected") => t.as(org.owner.authId, "select public.approve_prosm_time_allowance_entry($1, $2, null)", [(await entry(date)).id, action]);
+const review = async (date: string, action: "approved" | "rejected") => t.as(org.owner.authId, "select public.approve_prosm_time_allowance_entry($1, $2, $3)", [(await entry(date)).id, action, action === "rejected" ? "Fix the amount" : null]);
 
 beforeAll(async () => {
   t = await buildDatabase();

@@ -323,6 +323,12 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "YOU CANNOT GRANT LEAVE TO YOURSELF": "grantLeaveSelf",
   // v2.3.55: the licence's user limit, and licence details being the Owner's
   "LICENSED USER LIMIT REACHED": "licensedUserLimit",
+  "PLAN SITE LIMIT REACHED": "planSiteLimit",
+  LOCATION_REQUIRED: "locationRequired",
+  "A REASON IS REQUIRED TO REJECT": "rejectReasonRequired",
+  "PLAN EMPLOYEE LIMIT REACHED": "planEmployeeLimit",
+  "TOO MANY ATTEMPTS": "tooManyCodeAttempts",
+  "INVALID ACTIVATION CODE": "invalidActivationCode",
   "ONLY THE OWNER CAN SEE THE LICENCE": "ownerOnlyLicence",
   "CHOOSE SOMEONE WHO CAN APPROVE YOUR LEAVE": "chooseLeaveReviewer",
   "THIS EMPLOYEE ALREADY HAS A PENDING OR APPROVED LEAVE ON THESE DATES": "grantLeaveOverlap",

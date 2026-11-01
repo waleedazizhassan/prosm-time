@@ -30,22 +30,40 @@ export function readStoredCalendarSystem(): CalendarSystem {
   }
 }
 
+// Plan stage 4.4: one choice of digits everywhere, on screen, in PDFs and reports.
+export type NumeralSystem = "latn" | "arab";
+export const NUMERALS_STORAGE_KEY = "prosm_time_numerals";
+
+export function readStoredNumerals(): NumeralSystem {
+  if (typeof window === "undefined") return "latn";
+  try {
+    return window.localStorage.getItem(NUMERALS_STORAGE_KEY) === "arab" ? "arab" : "latn";
+  } catch {
+    return "latn";
+  }
+}
+
+// The locale for every number, date and time the app shows.
+export function appLocale(languageCode: string): string {
+  return `${getLocale(languageCode)}-u-nu-${readStoredNumerals()}`;
+}
+
 function icuCalendar(system: CalendarSystem): "gregory" | "islamic-umalqura" {
   return system === "hijri" ? "islamic-umalqura" : "gregory";
 }
 
 export function formatDateTime(value: string | Date, languageCode: string): string {
-  const locale = `${getLocale(languageCode)}-u-ca-${icuCalendar(readStoredCalendarSystem())}`;
+  const locale = `${getLocale(languageCode)}-u-ca-${icuCalendar(readStoredCalendarSystem())}-nu-${readStoredNumerals()}`;
   return new Date(value).toLocaleString(locale);
 }
 
 export function formatDateOnly(value: string | Date, languageCode: string): string {
-  const locale = `${getLocale(languageCode)}-u-ca-${icuCalendar(readStoredCalendarSystem())}`;
+  const locale = `${getLocale(languageCode)}-u-ca-${icuCalendar(readStoredCalendarSystem())}-nu-${readStoredNumerals()}`;
   return new Date(value).toLocaleDateString(locale);
 }
 
 export function formatTimeOnly(value: string | Date, languageCode: string): string {
   // Time-of-day has no calendar system of its own - always plain
   // Gregorian locale formatting, matching the previous behavior.
-  return new Date(value).toLocaleTimeString(getLocale(languageCode));
+  return new Date(value).toLocaleTimeString(appLocale(languageCode));
 }

@@ -3,6 +3,7 @@ import type { jsPDF } from "jspdf";
 import type { ManagerDashboard } from "../../../core/repositories/DashboardRepository";
 import { escapeHtml, renderHtmlToPdf } from "../../../core/utils/htmlToPdf";
 import prosmLogo from "../../../assets/prosm-logo-pdf.png";
+import { appLocale } from "../../../core/utils/formatDate";
 
 type TFunc = (key: string, options?: Record<string, unknown>) => string;
 
@@ -43,7 +44,7 @@ export function buildDashboardPdf(
     [t("manager.kpi.overdue"), data.overdue?.length ?? 0, ""],
     [t("manager.kpi.overtime"), hours(kpi.overtimeMinutes), t("manager.hoursUnit")],
   ];
-  if (data.canViewCost && kpi.estimatedCost !== null) tiles.push([t("manager.kpi.cost"), Math.round(kpi.estimatedCost).toLocaleString(languageCode), t("manager.kpi.costNote")]);
+  if (data.canViewCost && kpi.estimatedCost !== null) tiles.push([t("manager.kpi.cost"), Math.round(kpi.estimatedCost).toLocaleString(appLocale(languageCode)), t("manager.kpi.costNote")]);
   const tileHtml = tiles
     .map(
       ([label, value, hint]) => `<div style="border:1px solid #e2e8f0;border-radius:8px;padding:10px;">

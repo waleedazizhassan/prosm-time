@@ -49,6 +49,8 @@ describe("allowance sheets", () => {
     expect((await t.as(manager.authId, "select public.approve_prosm_time_allowance_entry($1, 'approved')", [entry.id])).error).toMatch(/WHOLE ALLOWANCE SHEET/);
     expect((await t.as(employee.authId, "select public.review_prosm_time_allowance_sheet($1, 'approved')", [sheetId])).error).toMatch(/AUTHORITY REQUIRED/);
 
+    // v2.3.64 plan stage 4.8: a decline needs a reason
+    expect((await t.as(manager.authId, "select public.review_prosm_time_allowance_sheet($1, 'rejected', '  ')", [sheetId])).error).toMatch(/A REASON IS REQUIRED TO REJECT/);
     expect((await t.as(manager.authId, "select public.review_prosm_time_allowance_sheet($1, 'rejected', 'Receipts missing')", [sheetId])).error).toBeNull();
     const statuses = await t.su<{ status: string; review_notes: string }>("select distinct status, review_notes from allowance_entries where sheet_id = $1", [sheetId]);
     expect(statuses).toEqual([{ status: "rejected", review_notes: "Receipts missing" }]);
@@ -57,6 +59,9 @@ describe("allowance sheets", () => {
     // Rejected days go back with the next sheet.
     const again = await t.as<{ r: { sent: number } }>(employee.authId, "select public.submit_prosm_time_allowances('2026-03-01', '2026-03-31') as r");
     expect(again.rows![0].r.sent).toBe(3);
+    // ... and that sheet says it was sent again, with the total it had
+    const [latest] = await t.su<{ revision: number; previous_total: string }>("select revision, previous_total from allowance_sheets order by submitted_at desc limit 1");
+    expect(latest).toEqual({ revision: 2, previous_total: "150.00" });
   });
 
   it("shows a sheet to the employee and their reviewers only", async () => {

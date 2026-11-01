@@ -54,5 +54,10 @@
     "month": "هذا الشهر"
   },
   "totalHours": "الإجمالي {{hours}} ساعة · {{count}} وردية",
-  "noRegisteredSite": "بدون موقع مسجّل"
+  "noRegisteredSite": "بدون موقع مسجّل",
+  "noLocation": "بدون موقع (سجل قديم أو لم يُمنح الإذن)",
+  "view": {
+    "month": "عرض شهري",
+    "list": "عرض القائمة"
+  }
 }

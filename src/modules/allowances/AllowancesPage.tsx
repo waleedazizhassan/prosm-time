@@ -18,9 +18,10 @@ import Input from "../../components/common/Input";
 import Select from "../../components/common/Select";
 import Table from "../../components/common/Table";
 import Modal from "../../components/common/Modal";
+import ActionBar from "../../components/common/ActionBar";
 import Button from "../../components/common/Button";
 import Textarea from "../../components/common/Textarea";
-import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
+import { formatDateOnly, formatTimeOnly, appLocale } from "../../core/utils/formatDate";
 import { buildCombinedAllowanceSheetPdf, buildEmployeeAllowanceSheetPdf } from "./allowancesPdf";
 import allowancesHeaderImage from "../../assets/illustrations/allowances.svg";
 import PageBanner from "../../components/common/PageBanner";
@@ -514,8 +515,9 @@ export default function AllowancesPage() {
                 <div style={{ flex: "1 1 220px" }}>
                   <strong><PersonName name={sheet.userFullName} userId={sheet.userId} /></strong>
                   <HintText small>
-                    {t("sheets.line", { from: formatDateOnly(sheet.periodStart, i18n.language), to: formatDateOnly(sheet.periodEnd, i18n.language), days: sheet.days, total: sheet.total.toLocaleString(i18n.language) })}
+                    {t("sheets.line", { from: formatDateOnly(sheet.periodStart, i18n.language), to: formatDateOnly(sheet.periodEnd, i18n.language), days: sheet.days, total: sheet.total.toLocaleString(appLocale(i18n.language)) })}
                   </HintText>
+                  {sheet.revision > 1 ? <HintText small>{t("sheets.resubmitted", { total: sheet.previousTotal ?? 0 })}</HintText> : null}
                 </div>
                 <input
                   aria-label={t("detail.reviewNotesLabel")}
@@ -524,7 +526,13 @@ export default function AllowancesPage() {
                   onChange={(event) => setSheetNotes((current) => ({ ...current, [sheet.id]: event.target.value }))}
                   style={{ flex: "1 1 180px", minHeight: 36, padding: "0 var(--space-3)", border: "1px solid var(--border-medium)", borderRadius: "var(--radius-sm)", background: "var(--surface-raised)", color: "var(--text-primary)", font: "inherit" }}
                 />
-                <div style={{ display: "flex", gap: "var(--space-2)" }}>
+                <ActionBar>
+                  <Button size="sm" onClick={() => decideSheet(sheet, "approved")} loading={sheetBusy === sheet.id}>
+                    {t("detail.approveAction")}
+                  </Button>
+                  <Button size="sm" variant="danger" onClick={() => decideSheet(sheet, "rejected")} loading={sheetBusy === sheet.id} disabled={!sheetNotes[sheet.id]?.trim()}>
+                    {t("detail.rejectAction")}
+                  </Button>
                   <Button size="sm" variant="ghost" onClick={() => openSheet(sheet)}>
                     {t("sheets.openAction")}
                   </Button>
@@ -533,13 +541,7 @@ export default function AllowancesPage() {
                       {t("sheetEdit.action")}
                     </Button>
                   ) : null}
-                  <Button size="sm" variant="danger" onClick={() => decideSheet(sheet, "rejected")} loading={sheetBusy === sheet.id}>
-                    {t("detail.rejectAction")}
-                  </Button>
-                  <Button size="sm" onClick={() => decideSheet(sheet, "approved")} loading={sheetBusy === sheet.id}>
-                    {t("detail.approveAction")}
-                  </Button>
-                </div>
+                </ActionBar>
               </div>
             ))}
           </div>
@@ -554,7 +556,7 @@ export default function AllowancesPage() {
             <div key={sheet.id} style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "var(--space-2)", padding: "var(--space-2) 0", borderBottom: "1px solid var(--border-light)" }}>
               <span style={{ fontSize: "var(--font-sm)" }}>
                 <strong><PersonName name={sheet.userFullName} userId={sheet.userId} /></strong> ·{" "}
-                {t("sheets.line", { from: formatDateOnly(sheet.periodStart, i18n.language), to: formatDateOnly(sheet.periodEnd, i18n.language), days: sheet.days, total: sheet.total.toLocaleString(i18n.language) })}
+                {t("sheets.line", { from: formatDateOnly(sheet.periodStart, i18n.language), to: formatDateOnly(sheet.periodEnd, i18n.language), days: sheet.days, total: sheet.total.toLocaleString(appLocale(i18n.language)) })}
               </span>
               <Button size="sm" variant="ghost" onClick={() => { setReopenTarget(sheet); setReopenReason(""); setReopenError(""); }}>
                 {t("sheetEdit.reopenAction")}
@@ -636,6 +638,7 @@ export default function AllowancesPage() {
       {myRates.length > 0 ? (
         <Card title={t("myPrices.title")} subtitle={t("myPrices.hint")} flush>
           <Table
+            grid
             columns={[
               { key: "site", header: t("columns.site"), render: (row: MySiteRates) => row.siteName },
               ...RATE_FIELDS.map((field) => ({
@@ -665,7 +668,7 @@ export default function AllowancesPage() {
               ) : null}
               {canReviewDetail ? (
                 <>
-                  <Button variant="danger" onClick={() => handleReview("rejected")} loading={reviewing === "rejected"}>
+                  <Button variant="danger" onClick={() => handleReview("rejected")} loading={reviewing === "rejected"} disabled={!reviewNotes.trim()}>
                     {t("detail.rejectAction")}
                   </Button>
                   <Button onClick={() => handleReview("approved")} loading={reviewing === "approved"}>

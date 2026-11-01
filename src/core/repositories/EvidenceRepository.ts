@@ -119,6 +119,10 @@ class EvidenceRepository {
     try {
       const { data, error } = await this.client.storage.from(BUCKET).download(storagePath);
       if (error) return createError(error.message);
+      // Plan stage 7.5: who opened which photo. Never holds up showing it.
+      void this.client.rpc("log_prosm_time_sensitive_access", { p_kind: "attendance_photo", p_object_ref: storagePath }).then(({ error: logError }) => {
+        if (logError) console.warn("[evidence] could not record the access", logError.message);
+      });
       return createSuccess(URL.createObjectURL(data));
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Evidence service unavailable.");

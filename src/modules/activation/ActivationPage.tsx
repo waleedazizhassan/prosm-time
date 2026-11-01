@@ -14,6 +14,7 @@ import Button from "../../components/common/Button";
 import AuthLayout from "../../components/common/AuthLayout";
 import styles from "../../components/common/AuthLayout.module.css";
 import ErrorText from "../../components/common/ErrorText";
+import { appLocale } from "../../core/utils/formatDate";
 
 // PROSM Time Implementation Master File V3.0, WP-03/§37 - "Activation /
 // Welcome." The one screen a brand-new customer reaches with no session
@@ -129,7 +130,7 @@ export default function ActivationPage() {
             maxUsers: license.maxUsers,
             maxDevices: license.maxDevices,
             expiresAt: license.expiresAt,
-            activatedAt: new Date().toLocaleDateString(i18n.language),
+            activatedAt: new Date().toLocaleDateString(appLocale(i18n.language)),
           },
           i18n.language,
           t,

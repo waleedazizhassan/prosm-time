@@ -137,5 +137,34 @@
   "siteFocus": {
     "backToSite": "← Back to the site",
     "allSettings": "All settings"
+  },
+  "plan": {
+    "title": "Plan",
+    "current": "Plan",
+    "trial": "Free trial",
+    "employees": "Employees",
+    "sites": "Sites",
+    "ends": "Ends on",
+    "noEnd": "No end date",
+    "usage": "{{used}} of {{max}}",
+    "codeLabel": "Activation code",
+    "redeem": "Activate the code",
+    "redeemed": "The code is activated.",
+    "redeemFailed": "The code is wrong or already used.",
+    "names": {
+      "legacy": "Current plan",
+      "starter": "Starter",
+      "business": "Business",
+      "pro": "Pro"
+    }
+  },
+  "retention": {
+    "title": "Data retention",
+    "subtitle": "You can only shorten these. A shorter period also applies to stored data, and anything older is deleted automatically.",
+    "location": "Location points: days (up to {{max}})",
+    "photo": "Attendance photos: days (up to {{max}})",
+    "save": "Save",
+    "saved": "Saved.",
+    "saveFailed": "Could not save."
   }
 }

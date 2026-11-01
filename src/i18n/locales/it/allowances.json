@@ -176,7 +176,8 @@
     "title": "Fogli indennità da approvare",
     "hint": "Ogni foglio contiene tutti i giorni inviati - approvalo o rifiutalo in una volta. Aprilo per vedere i giorni.",
     "line": "{{from}} - {{to}} · {{days}} giorni · totale {{total}}",
-    "openAction": "Apri"
+    "openAction": "Apri",
+    "resubmitted": "Reinviato dopo il rifiuto · totale precedente {{total}}"
   },
   "basis": {
     "title": "Come si calcola ogni indennità",

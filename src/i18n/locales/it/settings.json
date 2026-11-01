@@ -137,5 +137,34 @@
   "siteFocus": {
     "backToSite": "← Torna al sito",
     "allSettings": "Tutte le impostazioni"
+  },
+  "plan": {
+    "title": "Piano",
+    "current": "Piano",
+    "trial": "Prova gratuita",
+    "employees": "Dipendenti",
+    "sites": "Sedi",
+    "ends": "Termina il",
+    "noEnd": "Senza data di fine",
+    "usage": "{{used}} su {{max}}",
+    "codeLabel": "Codice di attivazione",
+    "redeem": "Attiva il codice",
+    "redeemed": "Il codice è attivato.",
+    "redeemFailed": "Il codice è errato o già utilizzato.",
+    "names": {
+      "legacy": "Piano attuale",
+      "starter": "Starter",
+      "business": "Business",
+      "pro": "Pro"
+    }
+  },
+  "retention": {
+    "title": "Conservazione dei dati",
+    "subtitle": "Puoi solo accorciare questi periodi. Un periodo più breve vale anche per i dati conservati, e ciò che è più vecchio viene eliminato automaticamente.",
+    "location": "Punti di posizione: giorni (fino a {{max}})",
+    "photo": "Foto di presenza: giorni (fino a {{max}})",
+    "save": "Salva",
+    "saved": "Salvato.",
+    "saveFailed": "Impossibile salvare."
   }
 }

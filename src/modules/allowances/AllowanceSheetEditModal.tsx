@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import AllowanceRepository, { ALLOWANCE_LINES, LINE_FIELD, type AllowanceEntry, type AllowanceLine, type AllowanceSheet } from "../../core/repositories/AllowanceRepository";
 import AllowanceRatesRepository, { type AllowanceBasis, type BasisField } from "../../core/repositories/AllowanceRatesRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
-import { formatDateOnly } from "../../core/utils/formatDate";
+import { formatDateOnly, appLocale } from "../../core/utils/formatDate";
 
 import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
@@ -128,7 +128,7 @@ export default function AllowanceSheetEditModal({ sheet, onClose, onChanged }: {
                         disabled={saving}
                         style={{ minHeight: 36, padding: "0 var(--space-2)", border: "1px solid var(--border-medium)", borderRadius: "var(--radius-sm)", background: "var(--surface-raised)", color: "var(--text-primary)", font: "inherit", fontSize: "var(--font-sm)" }}
                       />
-                      {override ? <span>{t("sheetEdit.computed", { value: override.original.toLocaleString(i18n.language) })}</span> : null}
+                      {override ? <span>{t("sheetEdit.computed", { value: override.original.toLocaleString(appLocale(i18n.language)) })}</span> : null}
                     </label>
                   );
                 })}
@@ -137,7 +137,7 @@ export default function AllowanceSheetEditModal({ sheet, onClose, onChanged }: {
           ))}
         </div>
       )}
-      <p style={{ margin: "var(--space-3) 0", fontWeight: "var(--font-weight-semibold)" }}>{t("sheetEdit.total", { total: total.toLocaleString(i18n.language, { maximumFractionDigits: 2 }) })}</p>
+      <p style={{ margin: "var(--space-3) 0", fontWeight: "var(--font-weight-semibold)" }}>{t("sheetEdit.total", { total: total.toLocaleString(appLocale(i18n.language), { maximumFractionDigits: 2 }) })}</p>
       <Textarea label={t("sheetEdit.reasonLabel")} name="sheetEditReason" value={reason} onChange={(event) => setReason(event.target.value)} disabled={saving} />
       <ErrorText>{error}</ErrorText>
     </Modal>
