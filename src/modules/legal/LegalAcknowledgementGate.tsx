@@ -40,6 +40,8 @@ export default function LegalAcknowledgementGate({ children }: { children: React
   const [status, setStatus] = useState<"checking" | "needed" | "done">(() => (userId && readCache(userId) ? "done" : "checking"));
   const [checked, setChecked] = useState(false);
   const [euChecked, setEuChecked] = useState(false);
+  // Plan stage 7.3: location and photo apart from the policy, dated, before the first clock-in.
+  const [captureChecked, setCaptureChecked] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
@@ -76,7 +78,7 @@ export default function LegalAcknowledgementGate({ children }: { children: React
   const handleAccept = async () => {
     setSaving(true);
     setError("");
-    const consent = await LegalRepository.recordConsents(LEGAL_VERSION, ["eu_storage"]);
+    const consent = await LegalRepository.recordConsents(LEGAL_VERSION, ["eu_storage", "location", "photo"]);
     const result = consent.success ? await LegalRepository.acknowledge(LEGAL_VERSION) : consent;
     setSaving(false);
     if (!result.success) {
@@ -112,12 +114,16 @@ export default function LegalAcknowledgementGate({ children }: { children: React
           <input type="checkbox" checked={euChecked} onChange={(event) => setEuChecked(event.target.checked)} />
           <span>{t("legal.gate.confirmEuStorage")}</span>
         </label>
+        <label className={styles.confirm}>
+          <input type="checkbox" checked={captureChecked} onChange={(event) => setCaptureChecked(event.target.checked)} />
+          <span>{t("legal.gate.confirmCapture")}</span>
+        </label>
         <ErrorText>{error}</ErrorText>
         <div className={styles.actions}>
           <Button variant="ghost" onClick={() => signOut()} disabled={saving}>
             {t("legal.gate.signOut")}
           </Button>
-          <Button onClick={handleAccept} loading={saving} disabled={!checked || !euChecked || saving}>
+          <Button onClick={handleAccept} loading={saving} disabled={!checked || !euChecked || !captureChecked || saving}>
             {t("legal.gate.accept")}
           </Button>
         </div>

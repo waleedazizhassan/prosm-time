@@ -321,7 +321,8 @@
       "accept": "Continuer",
       "signOut": "Se déconnecter",
       "error": "Enregistrement impossible. Vérifiez la connexion et réessayez.",
-      "confirmEuStorage": "J'accepte expressément que mes données soient stockées sur des serveurs situés dans l'Union européenne, comme l'explique la section 7 de la Politique de confidentialité."
+      "confirmEuStorage": "J'accepte expressément que mes données soient stockées sur des serveurs situés dans l'Union européenne, comme l'explique la section 7 de la Politique de confidentialité.",
+      "confirmCapture": "J'accepte l'enregistrement de ma position au pointage, et une photo sur les sites qui l'exigent."
     }
   },
   "reminders": {

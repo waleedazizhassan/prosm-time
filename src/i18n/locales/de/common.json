@@ -321,7 +321,8 @@
       "accept": "Weiter",
       "signOut": "Abmelden",
       "error": "Speichern nicht möglich. Prüfen Sie die Verbindung und versuchen Sie es erneut.",
-      "confirmEuStorage": "Ich stimme ausdrücklich zu, dass meine Daten auf Servern in der Europäischen Union gespeichert werden, wie Abschnitt 7 der Datenschutzerklärung erläutert."
+      "confirmEuStorage": "Ich stimme ausdrücklich zu, dass meine Daten auf Servern in der Europäischen Union gespeichert werden, wie Abschnitt 7 der Datenschutzerklärung erläutert.",
+      "confirmCapture": "Ich stimme zu, dass mein Standort beim Ein- und Ausstempeln erfasst wird und an Orten, die es verlangen, ein Foto aufgenommen wird."
     }
   },
   "reminders": {

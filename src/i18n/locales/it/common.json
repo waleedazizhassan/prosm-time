@@ -321,7 +321,8 @@
       "accept": "Continua",
       "signOut": "Esci",
       "error": "Impossibile salvare. Controlla la connessione e riprova.",
-      "confirmEuStorage": "Acconsento espressamente alla conservazione dei miei dati su server nell'Unione europea, come spiegato nella sezione 7 dell'Informativa sulla privacy."
+      "confirmEuStorage": "Acconsento espressamente alla conservazione dei miei dati su server nell'Unione europea, come spiegato nella sezione 7 dell'Informativa sulla privacy.",
+      "confirmCapture": "Acconsento alla registrazione della mia posizione alla timbratura e a una foto nei luoghi che la richiedono."
     }
   },
   "reminders": {
