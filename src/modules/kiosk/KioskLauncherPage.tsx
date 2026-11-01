@@ -15,6 +15,7 @@ import checkInRemoteIllustration from "../../assets/illustration-checkin-remote.
 import kioskHeaderImage from "../../assets/illustrations/kiosk.svg";
 import PageBanner from "../../components/common/PageBanner";
 import SiteFormModal from "../sites/SiteFormModal";
+import KioskAddSiteModal from "./KioskAddSiteModal";
 
 // PROSM Time - § user-directed: bring Kiosk Mode back into the
 // sidebar (it was reachable only by a direct /kiosk/:siteId URL,
@@ -34,6 +35,9 @@ export default function KioskLauncherPage() {
   // Owner 2026-10-28: a site is added from here, without going to Settings; it
   // uses the kiosk (and the app, like any site) and joins this list at once.
   const [createOpen, setCreateOpen] = useState(false);
+  // Plan stage 4.1: first the sites already registered, then a new one.
+  const [addOpen, setAddOpen] = useState(false);
+  const [otherSites, setOtherSites] = useState<Site[]>([]);
   const canAddSite = hasPermission("sites.manage");
 
   // Owner 2026-10-19: the workers' kiosk is run by the Owner, or by a Manager at a site they manage.
@@ -41,8 +45,9 @@ export default function KioskLauncherPage() {
     if (!allowed || !profile) return;
     void Promise.all([SiteRepository.listSites(), profile.isOwner ? null : SiteRepository.listManagedSiteIds(profile.id)]).then(([result, managed]) => {
       const managedIds = managed && managed.success ? new Set(managed.data ?? []) : null;
-      const usable = (result.success ? result.data ?? [] : []).filter((site) => site.kioskMode !== "personal_device_only");
-      setSites(profile.isOwner ? usable : usable.filter((site) => managedIds?.has(site.id)));
+      const all = (result.success ? result.data ?? [] : []).filter((site) => profile.isOwner || managedIds?.has(site.id));
+      setSites(all.filter((site) => site.kioskMode !== "personal_device_only"));
+      setOtherSites(all.filter((site) => site.kioskMode === "personal_device_only" && site.isActive));
       setLoading(false);
     });
   }, [allowed, profile]);
@@ -59,7 +64,7 @@ export default function KioskLauncherPage() {
         title={t("launcher.title")}
         actions={
           canAddSite ? (
-            <Button size="sm" variant="ghost" onClick={() => setCreateOpen(true)}>
+            <Button size="sm" variant="ghost" onClick={() => setAddOpen(true)}>
               {tSites("addAction")}
             </Button>
           ) : undefined
@@ -84,6 +89,22 @@ export default function KioskLauncherPage() {
       <p style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)", lineHeight: 1.6, margin: "var(--space-3) var(--space-2) 0" }}>
         {t("launcher.explainerWorkers")}
       </p>
+      {canAddSite ? (
+        <KioskAddSiteModal
+          key={addOpen ? "add-open" : "add-closed"}
+          isOpen={addOpen}
+          sites={otherSites}
+          onClose={() => setAddOpen(false)}
+          onAdded={() => {
+            setAddOpen(false);
+            load();
+          }}
+          onCreateNew={() => {
+            setAddOpen(false);
+            setCreateOpen(true);
+          }}
+        />
+      ) : null}
       {canAddSite ? (
         <SiteFormModal
           key={createOpen ? "open" : "closed"}
