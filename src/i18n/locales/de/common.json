@@ -353,5 +353,12 @@
     "previous": "Zurück",
     "next": "Weiter",
     "page": "Seite {{page}} von {{pages}}"
+  },
+  "roles": {
+    "owner": "Inhaber",
+    "manager": "Manager",
+    "supervisor": "Vorarbeiter",
+    "employee": "Mitarbeiter",
+    "read_only": "Betrachter"
   }
 }

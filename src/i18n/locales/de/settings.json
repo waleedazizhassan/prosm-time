@@ -156,7 +156,7 @@
     "redeemed": "Der Code ist aktiviert.",
     "redeemFailed": "Der Code ist falsch oder bereits verwendet.",
     "names": {
-      "legacy": "Aktueller Plan",
+      "legacy": "Ihr aktueller Tarif",
       "starter": "Starter",
       "business": "Business",
       "pro": "Pro"
@@ -176,5 +176,12 @@
     "subtitle": "Wer die App an einem Standort öffnet, wird gefragt, ob er einstempeln möchte. Ohne Antwort wird nichts erfasst, danach folgt das normale Einstempeln, und es wird kein Hintergrundstandort verwendet.",
     "label": "Die Person zum Einstempeln fragen",
     "failed": "Diese Einstellung konnte nicht gespeichert werden."
+  },
+  "sections": {
+    "subscription": "Abonnement",
+    "sites": "Standorte und Stempeln",
+    "time": "Arbeitszeit und Überstunden",
+    "leave": "Urlaub",
+    "privacy": "Daten und Datenschutz"
   }
 }

@@ -205,7 +205,7 @@ export default function UserMenu({ collapsed }: { collapsed: boolean }) {
               {avatarError ? <span className={styles.avatarError}>{avatarError}</span> : null}
               <span className={styles.name}>{profile?.fullName}</span>
               <span className={styles.email}>{profile?.email}</span>
-              <span className={styles.role}>{profile?.roleName}</span>
+              <span className={styles.role}>{profile ? t(`common:roles.${profile.roleKey}`, { defaultValue: profile.roleName }) : null}</span>
             </div>
             <label className={styles.languageLabel} htmlFor="userMenuLanguage">
               {t("languageLabel")}

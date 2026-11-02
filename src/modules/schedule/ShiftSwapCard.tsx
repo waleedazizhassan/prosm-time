@@ -69,7 +69,7 @@ export default function ShiftSwapCard({ shifts, onChanged }: { shifts: MyShiftRo
       header: t("common:actions.label"),
       render: (row) =>
         row.canDecide ? (
-          <div style={{ display: "flex", gap: "var(--space-1)" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-1)" }}>
             <Button size="sm" onClick={() => decide(row.id, true)}>
               {t("swap.approve")}
             </Button>

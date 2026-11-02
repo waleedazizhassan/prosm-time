@@ -17,6 +17,8 @@ interface AttendanceConfirmModalProps {
   accuracyMeters: number | null;
   placeName: string | null;
   siteName: string;
+  // Owner 2026-11-02: how far outside the chosen site's area the person stands, said before they confirm.
+  outsideByMeters?: number | null;
   submitting: boolean;
   error: string;
   onCancel: () => void;
@@ -43,6 +45,7 @@ export default function AttendanceConfirmModal({
   accuracyMeters,
   placeName,
   siteName,
+  outsideByMeters = null,
   submitting,
   error,
   onCancel,
@@ -98,16 +101,21 @@ export default function AttendanceConfirmModal({
         <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)", marginBottom: "var(--space-3)" }}>{t("attendance.confirmNoPhoto")}</p>
       )}
 
+      {outsideByMeters ? (
+        <p role="alert" style={{ margin: "0 0 var(--space-3)", padding: "var(--space-2) var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--status-warning-bg)", color: "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>
+          {t("attendance.confirmOutside", { site: siteName, meters: outsideByMeters })}
+        </p>
+      ) : null}
       <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", marginBottom: "var(--space-4)", fontSize: "var(--font-sm)" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", gap: "var(--space-3)" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "var(--space-3)" }}>
           <span style={{ color: "var(--text-secondary)" }}>{t("attendance.siteLabel")}</span>
           <span style={{ fontWeight: "var(--font-weight-medium)", textAlign: "end" }}>{siteName}</span>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between", gap: "var(--space-3)" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "var(--space-3)" }}>
           <span style={{ color: "var(--text-secondary)" }}>{t("attendance.confirmTimeLabel")}</span>
           <span style={{ fontWeight: "var(--font-weight-medium)" }}>{formatTimeOnly(new Date().toISOString(), i18n.language)}</span>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "var(--space-3)" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", alignItems: "flex-start", gap: "var(--space-3)" }}>
           <span style={{ color: "var(--text-secondary)", flexShrink: 0 }}>{t("attendance.confirmLocationLabel")}</span>
           {latitude !== null && longitude !== null ? (
             <span style={{ textAlign: "end" }}>

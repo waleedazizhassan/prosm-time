@@ -101,7 +101,22 @@
     "noEvidence": "No camera evidence in this period.",
     "viewEvidence": "View",
     "approvalTrailTitle": "Approval Trail",
-    "noApprovalTrail": "No approval activity yet."
+    "noApprovalTrail": "No approval activity yet.",
+    "columns": {
+      "clockIn": "Clock in",
+      "clockOut": "Clock out",
+      "site": "Site",
+      "project": "Project",
+      "when": "When",
+      "distance": "Distance",
+      "category": "Category",
+      "reason": "Reason",
+      "kind": "Type",
+      "action": "Action",
+      "notes": "Notes"
+    },
+    "meters": "{{value}} m",
+    "photo": "Photo"
   },
   "values": {
     "leaveType": {

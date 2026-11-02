@@ -5,12 +5,13 @@ import { Link, useParams } from "react-router-dom";
 import TimesheetRepository, { type EvidencePack, type TimesheetStatus } from "../../core/repositories/TimesheetRepository";
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
-import { formatMinutes, buildTimesheetPdf } from "./timesheetPdf";
+import { buildTimesheetPdf } from "./timesheetPdf";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import savePdfDocument, { printPdfDocument } from "../../core/utils/savePdfDocument";
 import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
 
 import PageShell from "../../components/common/PageShell";
+import Table from "../../components/common/Table";
 import Card from "../../components/common/Card";
 import LoadingState from "../../components/common/LoadingState";
 import Button from "../../components/common/Button";
@@ -27,6 +28,12 @@ const STATUS_BADGE_KEY: Record<TimesheetStatus, string> = {
   approved: "approved",
   rejected: "revoked",
 };
+
+// Hours and minutes as 6:09, readable in every language without a unit letter.
+function hoursAndMinutes(minutes: number): string {
+  const total = Math.round(minutes);
+  return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, "0")}`;
+}
 
 function csvEscape(value: string): string {
   return `"${value.replace(/"/g, '""')}"`;
@@ -144,9 +151,9 @@ export default function TimesheetReportPage() {
   return (
     <PageShell
       title={t("report.title")}
-      subtitle={`${pack.employee.fullName} — ${pack.timesheet.periodStart} — ${pack.timesheet.periodEnd}`}
+      subtitle={`${pack.employee.fullName} · ${formatDateOnly(pack.timesheet.periodStart, i18n.language)} – ${formatDateOnly(pack.timesheet.periodEnd, i18n.language)}`}
       actions={
-        <div className={styles.noPrint} style={{ display: "flex", gap: "var(--space-2)" }}>
+        <div className={styles.noPrint} style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
           <Link to="/timesheets">
             <Button variant="ghost" size="sm">
               {t("report.backLink")}
@@ -154,9 +161,6 @@ export default function TimesheetReportPage() {
           </Link>
           <Button variant="ghost" size="sm" onClick={handleExportCsv}>
             {t("report.exportCsvAction")}
-          </Button>
-          <Button variant="ghost" size="sm" onClick={() => window.print()}>
-            {t("report.printAction")}
           </Button>
           <Button variant="ghost" size="sm" onClick={() => handleExportPdf("print")} loading={exportingPdf}>
             {t("common:actions.print")}
@@ -187,15 +191,15 @@ export default function TimesheetReportPage() {
           </div>
           <div className={styles.summaryItem}>
             {t("report.worked")}
-            <span className={styles.summaryValue}>{formatMinutes(pack.timesheet.totalWorkedMinutes)}</span>
+            <span className={styles.summaryValue}>{hoursAndMinutes(pack.timesheet.totalWorkedMinutes)}</span>
           </div>
           <div className={styles.summaryItem}>
             {t("report.breaks")}
-            <span className={styles.summaryValue}>{formatMinutes(pack.timesheet.totalBreakMinutes)}</span>
+            <span className={styles.summaryValue}>{hoursAndMinutes(pack.timesheet.totalBreakMinutes)}</span>
           </div>
           <div className={styles.summaryItem}>
             {t("report.overtime")}
-            <span className={styles.summaryValue}>{formatMinutes(pack.timesheet.totalOvertimeMinutes)}</span>
+            <span className={styles.summaryValue}>{hoursAndMinutes(pack.timesheet.totalOvertimeMinutes)}</span>
           </div>
           <div className={styles.summaryItem}>
             {t("report.approver")}
@@ -213,91 +217,96 @@ export default function TimesheetReportPage() {
       </Card>
 
       <Card title={t("report.entriesTitle")}>
-        {pack.entries.length === 0 ? (
-          <p className={styles.emptyRow}>{t("detail.noEntries")}</p>
-        ) : (
-          pack.entries.map((entry) => (
-            <div key={entry.sessionId} className={styles.row}>
-              <span>{formatDateTime(entry.clockInAt, i18n.language)}</span>
-              <span>{entry.clockOutAt ? formatTimeOnly(entry.clockOutAt, i18n.language) : t("detail.stillOpen")}</span>
-              <span>{entry.siteName ?? "—"}</span>
-              <span>{entry.projectName ?? "—"}</span>
-              <span>{formatMinutes(entry.workedMinutes)}</span>
-            </div>
-          ))
-        )}
+        <Table
+          grid
+          columns={[
+            { key: "in", header: t("report.columns.clockIn"), render: (entry) => formatDateTime(entry.clockInAt, i18n.language) },
+            { key: "out", header: t("report.columns.clockOut"), render: (entry) => (entry.clockOutAt ? formatTimeOnly(entry.clockOutAt, i18n.language) : t("detail.stillOpen")) },
+            { key: "site", header: t("report.columns.site"), render: (entry) => entry.siteName ?? "—" },
+            { key: "project", header: t("report.columns.project"), render: (entry) => entry.projectName ?? "—" },
+            { key: "worked", header: t("report.worked"), render: (entry) => <span style={{ whiteSpace: "nowrap" }}>{hoursAndMinutes(entry.workedMinutes)}</span> },
+          ]}
+          data={pack.entries}
+          getRowId={(entry) => entry.sessionId}
+          emptyMessage={t("detail.noEntries")}
+        />
       </Card>
 
       <Card title={t("report.exceptionsTitle")}>
-        {pack.exceptions.length === 0 ? (
-          <p className={styles.emptyRow}>{t("report.noExceptions")}</p>
-        ) : (
-          pack.exceptions.map((exception) => (
-            <div key={exception.id} className={styles.row}>
-              <span>{formatDateTime(exception.createdAt, i18n.language)}</span>
-              <span>{Math.round(exception.distanceMeters)} m</span>
-              <span>{exception.reasonCategory ?? "—"}</span>
-              <span>{exception.employeeReason ?? "—"}</span>
-              <span>{exception.status}</span>
-            </div>
-          ))
-        )}
+        <Table
+          grid
+          columns={[
+            { key: "when", header: t("report.columns.when"), render: (exception) => formatDateTime(exception.createdAt, i18n.language) },
+            { key: "distance", header: t("report.columns.distance"), render: (exception) => <span style={{ whiteSpace: "nowrap" }}>{t("report.meters", { value: Math.round(exception.distanceMeters) })}</span> },
+            { key: "category", header: t("report.columns.category"), render: (exception) => (exception.reasonCategory ? t(`dashboard:exceptions.category.${exception.reasonCategory}`, { defaultValue: exception.reasonCategory }) : "—") },
+            { key: "reason", header: t("report.columns.reason"), render: (exception) => exception.employeeReason ?? "—" },
+            { key: "status", header: t("report.status"), render: (exception) => t(`reports:columns.locationViolations.statuses.${exception.status}`, { defaultValue: exception.status }) },
+          ]}
+          data={pack.exceptions}
+          getRowId={(exception) => exception.id}
+          emptyMessage={t("report.noExceptions")}
+        />
       </Card>
 
       <Card title={t("report.correctionsTitle")}>
-        {pack.corrections.length === 0 && pack.timesheetCorrections.length === 0 ? (
-          <p className={styles.emptyRow}>{t("report.noCorrections")}</p>
-        ) : (
-          <>
-            {pack.corrections.map((correction) => (
-              <div key={correction.id} className={styles.row}>
-                <span>{formatDateTime(correction.createdAt, i18n.language)}</span>
-                <span>{correction.proposedEventType}</span>
-                <span>{correction.reason}</span>
-                <span>{correction.status}</span>
-              </div>
-            ))}
-            {pack.timesheetCorrections.map((correction) => (
-              <div key={correction.id} className={styles.row}>
-                <span>{formatDateTime(correction.createdAt, i18n.language)}</span>
-                <span>{t("report.timesheetLevelCorrection")}</span>
-                <span>{correction.reason}</span>
-                <span>{correction.status}</span>
-              </div>
-            ))}
-          </>
-        )}
+        <Table
+          grid
+          columns={[
+            { key: "when", header: t("report.columns.when"), render: (row) => formatDateTime(row.createdAt, i18n.language) },
+            { key: "kind", header: t("report.columns.kind"), render: (row) => row.kind },
+            { key: "reason", header: t("report.columns.reason"), render: (row) => row.reason },
+            { key: "status", header: t("report.status"), render: (row) => t(`reports:columns.locationViolations.statuses.${row.status}`, { defaultValue: t(`status.${row.status}`, { defaultValue: row.status }) }) },
+          ]}
+          data={[
+            ...pack.corrections.map((correction) => ({
+              id: correction.id,
+              createdAt: correction.createdAt,
+              kind: correction.proposedEventType === "clock_out" ? t("report.columns.clockOut") : correction.proposedEventType === "clock_in" ? t("report.columns.clockIn") : correction.proposedEventType,
+              reason: correction.reason,
+              status: correction.status,
+            })),
+            ...pack.timesheetCorrections.map((correction) => ({ id: correction.id, createdAt: correction.createdAt, kind: t("report.timesheetLevelCorrection"), reason: correction.reason, status: correction.status })),
+          ]}
+          getRowId={(row) => row.id}
+          emptyMessage={t("report.noCorrections")}
+        />
       </Card>
 
       <Card title={t("report.evidenceTitle")}>
-        {pack.evidenceReferences.length === 0 ? (
-          <p className={styles.emptyRow}>{t("report.noEvidence")}</p>
-        ) : (
-          pack.evidenceReferences.map((evidence) => (
-            <div key={evidence.id} className={styles.row}>
-              <span>{formatDateTime(evidence.capturedAt, i18n.language)}</span>
-              <span>{evidence.contentType}</span>
-              <button type="button" className={styles.noPrint} onClick={() => handleViewEvidence(evidence.storagePath)} style={{ background: "none", border: "none", color: "var(--text-link)", cursor: "pointer", padding: 0, font: "inherit" }}>
-                {t("report.viewEvidence")}
-              </button>
-            </div>
-          ))
-        )}
+        <Table
+          grid
+          columns={[
+            { key: "when", header: t("report.columns.when"), render: (evidence) => formatDateTime(evidence.capturedAt, i18n.language) },
+            { key: "type", header: t("report.columns.kind"), render: (evidence) => (evidence.contentType.startsWith("image/") ? t("report.photo") : evidence.contentType) },
+            {
+              key: "view",
+              header: "",
+              render: (evidence) => (
+                <button type="button" className={styles.noPrint} onClick={() => handleViewEvidence(evidence.storagePath)} style={{ background: "none", border: "none", color: "var(--text-link)", cursor: "pointer", padding: 0, font: "inherit" }}>
+                  {t("report.viewEvidence")}
+                </button>
+              ),
+            },
+          ]}
+          data={pack.evidenceReferences}
+          getRowId={(evidence) => evidence.id}
+          emptyMessage={t("report.noEvidence")}
+        />
       </Card>
 
       <Card title={t("report.approvalTrailTitle")}>
-        {pack.approvalTrail.length === 0 ? (
-          <p className={styles.emptyRow}>{t("report.noApprovalTrail")}</p>
-        ) : (
-          pack.approvalTrail.map((row, index) => (
-            <div key={index} className={styles.row}>
-              <span>{formatDateTime(row.createdAt, i18n.language)}</span>
-              <span>{row.actorName}</span>
-              <span>{row.action}</span>
-              <span>{row.notes ?? "—"}</span>
-            </div>
-          ))
-        )}
+        <Table
+          grid
+          columns={[
+            { key: "when", header: t("report.columns.when"), render: (row) => formatDateTime(row.createdAt, i18n.language) },
+            { key: "actor", header: t("report.approver"), render: (row) => row.actorName },
+            { key: "action", header: t("report.columns.action"), render: (row) => t(`status.${row.action}`, { defaultValue: row.action }) },
+            { key: "notes", header: t("report.columns.notes"), render: (row) => row.notes ?? "—" },
+          ]}
+          data={pack.approvalTrail.map((row, index) => ({ ...row, id: String(index) }))}
+          getRowId={(row) => row.id}
+          emptyMessage={t("report.noApprovalTrail")}
+        />
       </Card>
     </PageShell>
   );

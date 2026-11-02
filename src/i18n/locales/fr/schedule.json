@@ -66,5 +66,44 @@
       "rejected": "Refusé",
       "cancelled": "Annulé"
     }
+  },
+  "cost": {
+    "title": "Coût du planning",
+    "subtitle": "Les postes affichés, au taux de chacun. Au-delà du seuil journalier : heures sup.",
+    "regular": "Normal",
+    "overtime": "Heures sup. prévues",
+    "total": "Total",
+    "hours": "{{hours}} h",
+    "unpriced": "{{count}} postes sans taux ne sont pas comptés."
+  },
+  "open": {
+    "title": "Postes ouverts",
+    "subtitle": "Des postes sans personne. Demandez-en un ; un responsable décide.",
+    "none": "Aucun poste ouvert.",
+    "noRequests": "Personne n'a encore demandé.",
+    "give": "Attribuer le poste",
+    "cancel": "Annuler le poste",
+    "ask": "Demander ce poste",
+    "post": "Publier un poste ouvert",
+    "failed": "Action impossible.",
+    "status": {
+      "open": "Ouvert",
+      "filled": "Pourvu",
+      "cancelled": "Annulé"
+    },
+    "mine": {
+      "pending": "Demandé. En attente du responsable.",
+      "approved": "Il est à vous.",
+      "rejected": "Attribué à quelqu’un d’autre."
+    }
+  },
+  "checklist": {
+    "title": "Liste de fin de poste",
+    "subtitle": "Affichée avant le départ sur ce site. Un élément par ligne ; vide pour aucun.",
+    "label": "Éléments",
+    "save": "Enregistrer",
+    "saved": "Enregistré.",
+    "failed": "Impossible d’enregistrer la liste.",
+    "tooMany": "Vingt éléments au plus."
   }
 }

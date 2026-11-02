@@ -55,7 +55,7 @@ export default function EmploymentDetailsCard({ userId, canEdit }: { userId: str
       <HintText small>{t("employment.hint")}</HintText>
       {serviceYears !== null ? <p style={{ fontSize: "var(--font-sm)", margin: "0 0 var(--space-2)" }}>{t("employment.serviceYears", { years: serviceYears })}</p> : null}
       <Input label={t("employment.hireDate")} name="hireDate" type="date" value={hireDate} onChange={(event) => { setHireDate(event.target.value); setSaved(false); }} disabled={!canEdit || saving} />
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "var(--space-2) 0" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", padding: "var(--space-2) 0" }}>
         <span style={{ fontSize: "var(--font-sm)" }}>{t("employment.specialNeeds")}</span>
         <Toggle checked={specialNeeds} onChange={(value) => { setSpecialNeeds(value); setSaved(false); }} disabled={!canEdit || saving} label={t("employment.specialNeeds")} />
       </div>

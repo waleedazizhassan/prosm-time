@@ -156,7 +156,7 @@
     "redeemed": "Le code est activé.",
     "redeemFailed": "Le code est incorrect ou déjà utilisé.",
     "names": {
-      "legacy": "Formule actuelle",
+      "legacy": "Votre offre actuelle",
       "starter": "Starter",
       "business": "Business",
       "pro": "Pro"
@@ -176,5 +176,12 @@
     "subtitle": "Quand une personne ouvre l'application sur un site, elle lui demande si elle veut pointer. Rien n'est enregistré sans sa réponse, le pointage habituel suit, et aucune localisation en arrière-plan n'est utilisée.",
     "label": "Demander à la personne de pointer",
     "failed": "Impossible d'enregistrer ce réglage."
+  },
+  "sections": {
+    "subscription": "Abonnement",
+    "sites": "Sites et pointage",
+    "time": "Temps de travail et heures sup.",
+    "leave": "Congés",
+    "privacy": "Données et confidentialité"
   }
 }

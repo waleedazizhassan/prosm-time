@@ -182,7 +182,7 @@
     "confirmPhotoLabel": "الصورة",
     "confirmNoPhoto": "لا يوجد تصوير مطلوب.",
     "confirmTimeLabel": "الوقت",
-    "confirmLocationLabel": "الموقع",
+    "confirmLocationLabel": "مكانك الآن",
     "noteLabel": "إضافة ملاحظة",
     "activityLabel": "النشاط",
     "optionalPlaceholder": "اختياري",
@@ -223,7 +223,8 @@
     },
     "suggestSite": "أنت في {{site}}. تسجّل حضورك الآن؟",
     "suggestSiteAction": "نعم، سجّل حضوري",
-    "suggestSiteDismiss": "ليس الآن"
+    "suggestSiteDismiss": "ليس الآن",
+    "confirmOutside": "أنت خارج نطاق {{site}} بـ {{meters}} م. سيُسجَّل استثناءً ويراجعه مديرك."
   },
   "kioskPin": {
     "title": "رمز الكشك",
@@ -348,7 +349,8 @@
       "chart": "المخطط مقابل الفعلي",
       "cost": "البدلات والتكلفة",
       "audit": "سجل الإجراءات",
-      "external": "العمالة الخارجية"
+      "external": "العمالة الخارجية",
+      "insights": "مؤشرات الحضور"
     },
     "sos": {
       "text": "استغاثة من {{name}} في {{site}} منذ {{time}}",
@@ -597,6 +599,16 @@
     "export": {
       "action": "تصدير لوحة التحكم PDF",
       "asOf": "حتى {{time}}"
+    },
+    "insights": {
+      "rate": "نسبة الحضور",
+      "rateHint": "{{attended}} من {{scheduled}} وردية مجدولة",
+      "repeatLate": "يتأخرون كثيراً",
+      "repeatOvertime": "إضافي متكرر",
+      "lateMeta": "{{days}} أيام · {{minutes}} دقيقة",
+      "overtimeMeta": "{{days}} أيام · {{minutes}} دقيقة",
+      "none": "لا أحد في هذه الفترة.",
+      "unavailable": "اختر فترة لا تزيد عن شهرين."
     }
   },
   "devices": {
@@ -629,5 +641,10 @@
     "exportPdf": "تصدير PDF",
     "loadMore": "عرض المزيد",
     "loadError": "تعذّر تحميل السجل."
+  },
+  "checklist": {
+    "title": "قبل الانصراف",
+    "continue": "متابعة الانصراف",
+    "continueIncomplete": "انصراف مع مهام لم تُنجز"
   }
 }

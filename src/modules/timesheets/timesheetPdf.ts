@@ -8,7 +8,7 @@ export function formatMinutes(minutes: number): string {
   const totalMinutes = Math.round(minutes);
   const hours = Math.floor(totalMinutes / 60);
   const mins = totalMinutes % 60;
-  return `${hours}h ${mins}m`;
+  return `${hours}:${String(mins).padStart(2, "0")}`;
 }
 
 type TFunc = (key: string, options?: Record<string, unknown>) => string;
@@ -84,7 +84,7 @@ export function buildTimesheetPdf(pack: EvidencePack, languageCode: string, t: T
     .map(
       (exception) => `
       <div style="font-size:11px;color:#334155;padding:4px 0;border-top:1px solid #f1f5f9;">
-        ${escapeHtml(formatDateTime(exception.createdAt, locale))} · ${Math.round(exception.distanceMeters)} m · ${escapeHtml(exception.reasonCategory ?? "—")} · ${escapeHtml(exception.employeeReason ?? "—")} · ${escapeHtml(exception.status)}
+        ${escapeHtml(formatDateTime(exception.createdAt, locale))} · ${escapeHtml(t("report.meters", { value: Math.round(exception.distanceMeters) }))} · ${escapeHtml(exception.reasonCategory ? t(`dashboard:exceptions.category.${exception.reasonCategory}`, { defaultValue: exception.reasonCategory }) : "—")} · ${escapeHtml(exception.employeeReason ?? "—")} · ${escapeHtml(t(`reports:columns.locationViolations.statuses.${exception.status}`, { defaultValue: t(`status.${exception.status}`, { defaultValue: exception.status }) }))}
       </div>`
     )
     .join("");
@@ -93,13 +93,13 @@ export function buildTimesheetPdf(pack: EvidencePack, languageCode: string, t: T
     ...pack.corrections.map(
       (correction) => `
       <div style="font-size:11px;color:#334155;padding:4px 0;border-top:1px solid #f1f5f9;">
-        ${escapeHtml(formatDateTime(correction.createdAt, locale))} · ${escapeHtml(correction.proposedEventType)} · ${escapeHtml(correction.reason)} · ${escapeHtml(correction.status)}
+        ${escapeHtml(formatDateTime(correction.createdAt, locale))} · ${escapeHtml(correction.proposedEventType === "clock_out" ? t("report.columns.clockOut") : correction.proposedEventType === "clock_in" ? t("report.columns.clockIn") : correction.proposedEventType)} · ${escapeHtml(correction.reason)} · ${escapeHtml(t(`reports:columns.locationViolations.statuses.${correction.status}`, { defaultValue: t(`status.${correction.status}`, { defaultValue: correction.status }) }))}
       </div>`
     ),
     ...pack.timesheetCorrections.map(
       (correction) => `
       <div style="font-size:11px;color:#334155;padding:4px 0;border-top:1px solid #f1f5f9;">
-        ${escapeHtml(formatDateTime(correction.createdAt, locale))} · ${escapeHtml(t("report.timesheetLevelCorrection"))} · ${escapeHtml(correction.reason)} · ${escapeHtml(correction.status)}
+        ${escapeHtml(formatDateTime(correction.createdAt, locale))} · ${escapeHtml(t("report.timesheetLevelCorrection"))} · ${escapeHtml(correction.reason)} · ${escapeHtml(t(`reports:columns.locationViolations.statuses.${correction.status}`, { defaultValue: t(`status.${correction.status}`, { defaultValue: correction.status }) }))}
       </div>`
     ),
   ].join("");
@@ -127,7 +127,7 @@ export function buildTimesheetPdf(pack: EvidencePack, languageCode: string, t: T
     .map(
       (row) => `
       <div style="font-size:11px;color:#334155;padding:4px 0;border-top:1px solid #f1f5f9;">
-        ${escapeHtml(formatDateTime(row.createdAt, locale))} · ${escapeHtml(row.actorName)} · ${escapeHtml(row.action)} · ${escapeHtml(row.notes ?? "—")}
+        ${escapeHtml(formatDateTime(row.createdAt, locale))} · ${escapeHtml(row.actorName)} · ${escapeHtml(t(`status.${row.action}`, { defaultValue: row.action }))} · ${escapeHtml(row.notes ?? "—")}
       </div>`
     )
     .join("");

@@ -116,7 +116,7 @@ export default function LeaveTypesSettingsCard() {
   };
 
   const toggleRow = (label: string, checked: boolean, onChange: (value: boolean) => void) => (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "var(--space-1) 0" }}>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", padding: "var(--space-1) 0" }}>
       <span style={{ fontSize: "var(--font-sm)" }}>{label}</span>
       <Toggle checked={checked} onChange={onChange} label={label} />
     </div>

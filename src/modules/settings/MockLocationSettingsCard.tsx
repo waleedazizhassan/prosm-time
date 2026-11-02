@@ -44,7 +44,7 @@ export default function MockLocationSettingsCard() {
 
   return (
     <Card title={t("rejectMockLocation.label")}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--space-3)" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "var(--space-3)" }}>
         <HintText>{t("rejectMockLocation.hint")}</HintText>
         <Toggle checked={reject} onChange={handleChange} disabled={saving} label={t("rejectMockLocation.label")} />
       </div>

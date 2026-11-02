@@ -353,5 +353,12 @@
     "previous": "السابق",
     "next": "التالي",
     "page": "صفحة {{page}} من {{pages}}"
+  },
+  "roles": {
+    "owner": "المالك",
+    "manager": "مدير",
+    "supervisor": "مشرف",
+    "employee": "موظف",
+    "read_only": "مشاهد"
   }
 }

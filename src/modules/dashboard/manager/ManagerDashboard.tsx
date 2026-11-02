@@ -20,6 +20,7 @@ import Avatar from "../../../components/common/Avatar";
 import PeopleByRole from "../../people/PeopleByRole";
 import ApprovalsQueue from "./ApprovalsQueue";
 import ExternalWorkersWidget from "./ExternalWorkersWidget";
+import InsightsWidget from "./InsightsWidget";
 import SitesMap from "./SitesMap";
 import styles from "./ManagerDashboard.module.css";
 import { auditLabel, DEFAULT_HIDDEN, DEFAULT_ORDER, iso, mergeOrder, periodRange, trend, type Period, type WidgetId } from "./dashboardLogic";
@@ -336,6 +337,8 @@ export default function ManagerDashboard() {
           </section>
         );
       case "external":
+        // Owner 2026-11-02 (a calmer dashboard): no contractors' workers today, no empty card.
+        if (data && !data.sites.some((site) => site.external && (site.external.today > 0 || site.external.presentNow > 0))) return null;
         return (
           <section key={id} id="dash-external" className={`${styles.widget} ${styles.span12}`} style={{ order: order.indexOf(id) }}>
             {data ? <ExternalWorkersWidget sites={data.sites} refreshKey={data.asOf} /> : <div className={styles.skeleton} style={{ height: 120 }} />}
@@ -372,6 +375,15 @@ export default function ManagerDashboard() {
               </div>
             </div>
             <ScheduleChart data={chartData} mode={chartMode} t={t} language={i18n.language} />
+          </section>
+        );
+      case "insights":
+        return (
+          <section key={id} className={`${styles.widget} ${styles.span12}`} style={{ order: order.indexOf(id) }}>
+            <div className={styles.widgetHeader}>
+              <h2 className={styles.widgetTitle}>{t("manager.widgets.insights")}</h2>
+            </div>
+            <InsightsWidget from={range.from} to={range.to} />
           </section>
         );
       case "cost":
@@ -767,7 +779,7 @@ function SiteRows({ site, t, externalOpen, onToggleExternal, onFilter }: { site:
           )}
         </td>
       </tr>
-      {site.external ? (
+      {site.external && (site.external.today > 0 || site.external.presentNow > 0) ? (
         <tr className={styles.subRow}>
           <td colSpan={7}>
             <button type="button" className={styles.chip} onClick={onToggleExternal} aria-expanded={externalOpen}>
@@ -848,7 +860,7 @@ function ScheduleChart({ data, mode, t, language }: { data: Dashboard | null; mo
           );
         })}
       </svg>
-      <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem", color: "var(--text-secondary)" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", fontSize: "0.75rem", color: "var(--text-secondary)" }}>
         {bars.map((bar, index) => (
           <span key={index} style={{ width: `${width}%`, textAlign: "center", overflow: "hidden" }}>
             {bars.length > 16 && index % 3 ? "" : bar.label}

@@ -211,7 +211,8 @@
     },
     "suggestSite": "You are at {{site}}. Clock in now?",
     "suggestSiteAction": "Yes, clock in",
-    "suggestSiteDismiss": "Not now"
+    "suggestSiteDismiss": "Not now",
+    "confirmOutside": "You are {{meters}} m outside the area of {{site}}. It will be recorded as an exception and your manager will review it."
   },
   "kioskPin": {
     "title": "Kiosk PIN",
@@ -336,7 +337,8 @@
       "chart": "Scheduled vs actual",
       "cost": "Allowances and cost",
       "audit": "Action log",
-      "external": "External workers"
+      "external": "External workers",
+      "insights": "Attendance insights"
     },
     "sos": {
       "text": "SOS from {{name}} at {{site}} since {{time}}",
@@ -581,6 +583,16 @@
     "export": {
       "action": "Export dashboard PDF",
       "asOf": "as of {{time}}"
+    },
+    "insights": {
+      "rate": "Attendance rate",
+      "rateHint": "{{attended}} of {{scheduled}} scheduled shifts",
+      "repeatLate": "Often late",
+      "repeatOvertime": "Often on overtime",
+      "lateMeta": "{{days}} days · {{minutes}} min",
+      "overtimeMeta": "{{days}} days · {{minutes}} min",
+      "none": "Nobody this period.",
+      "unavailable": "Choose a period of two months at most."
     }
   },
   "devices": {
@@ -613,5 +625,10 @@
     "exportPdf": "Export PDF",
     "loadMore": "Show more",
     "loadError": "Could not load the log."
+  },
+  "checklist": {
+    "title": "Before you clock out",
+    "continue": "Continue to clock out",
+    "continueIncomplete": "Clock out with items not done"
   }
 }

@@ -219,5 +219,18 @@
       "overtimeAmount": "Betrag Überstunden und Zusatztage",
       "currency": "Währung"
     }
+  },
+  "budgets": {
+    "title": "Projektbudgets",
+    "subtitle": "Bisherige Personalkosten jedes Projekts im Vergleich zum Budget.",
+    "project": "Projekt",
+    "spent": "Personal bisher",
+    "budget": "Budget",
+    "used": "Verbraucht",
+    "save": "Speichern",
+    "placeholder": "Festlegen",
+    "invalid": "Zahl eingeben oder leer lassen.",
+    "failed": "Budget konnte nicht gespeichert werden.",
+    "unpriced": "Stunden von Personen ohne Lohnsatz sind nicht enthalten."
   }
 }

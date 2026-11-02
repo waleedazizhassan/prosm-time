@@ -66,5 +66,44 @@
       "rejected": "Rejected",
       "cancelled": "Cancelled"
     }
+  },
+  "cost": {
+    "title": "Roster cost",
+    "subtitle": "The shifts shown, at each person's rate. Past the daily threshold counts as overtime.",
+    "regular": "Regular",
+    "overtime": "Expected overtime",
+    "total": "Total",
+    "hours": "{{hours}} h",
+    "unpriced": "{{count}} shifts have no pay rate and are not counted."
+  },
+  "open": {
+    "title": "Open shifts",
+    "subtitle": "Shifts with no one on them yet. Ask for one; a manager decides.",
+    "none": "No open shifts.",
+    "noRequests": "No one has asked yet.",
+    "give": "Give the shift",
+    "cancel": "Cancel the shift",
+    "ask": "Ask for this shift",
+    "post": "Post an open shift",
+    "failed": "Unable to complete this.",
+    "status": {
+      "open": "Open",
+      "filled": "Filled",
+      "cancelled": "Cancelled"
+    },
+    "mine": {
+      "pending": "You asked for it. Waiting for a manager.",
+      "approved": "It is yours.",
+      "rejected": "It went to someone else."
+    }
+  },
+  "checklist": {
+    "title": "End-of-shift checklist",
+    "subtitle": "Shown before clock-out at this site. One item per line; leave empty for none.",
+    "label": "Items",
+    "save": "Save checklist",
+    "saved": "Saved.",
+    "failed": "Unable to save the checklist.",
+    "tooMany": "Twenty items at most."
   }
 }

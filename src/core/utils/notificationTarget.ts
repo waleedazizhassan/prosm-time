@@ -37,6 +37,8 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
     case "session_auto_closed":
       return viewer.isOwner || ref?.kind === "manager" ? "/manager" : "/dashboard";
     case "long_session_check":
+    case "overtime_soon":
+    case "daily_digest":
     case "new_device_login":
     case "exit_site_prompt":
     case "clock_in_reminder":
@@ -49,6 +51,8 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
       return isLeave ? "/leave" : "/dashboard";
     case "shift_assigned":
       return "/schedule";
+    case "shift_no_show":
+      return "/attendance?period=today";
     case "trial_ending":
     case "trial_ended":
       // The activation code is entered on its own page.

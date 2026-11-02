@@ -42,7 +42,7 @@ export default function FieldWorkerCard({ userId }: { userId: string }) {
 
   return (
     <Card title={t("fieldWorker.title")}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--space-3)" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "var(--space-3)" }}>
         <HintText small>{t("fieldWorker.hint")}</HintText>
         <Toggle checked={fieldWorker} onChange={(value) => void handleChange(value)} disabled={saving} label={t("fieldWorker.title")} />
       </div>

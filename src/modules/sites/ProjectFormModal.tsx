@@ -73,7 +73,7 @@ export default function ProjectFormModal({ isOpen, onClose, onSaved, siteId, pro
       <Textarea label={t("detail.projectForm.descriptionLabel")} name="projectDescription" value={description} onChange={(event) => setDescription(event.target.value)} disabled={submitting} />
 
       {isEditing ? (
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "var(--space-2) 0" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", padding: "var(--space-2) 0" }}>
           <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("detail.projectForm.activeLabel")}</span>
           <Toggle checked={isActive} onChange={setIsActive} disabled={submitting} label={t("detail.projectForm.activeLabel")} />
         </div>

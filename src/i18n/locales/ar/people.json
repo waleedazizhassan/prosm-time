@@ -221,5 +221,10 @@
       "employees": "الموظفون",
       "viewers": "المشاهدون"
     }
+  },
+  "deviceStatus": {
+    "pending": "في الانتظار",
+    "approved": "معتمد",
+    "blocked": "محظور"
   }
 }

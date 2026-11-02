@@ -353,5 +353,12 @@
     "previous": "Précédent",
     "next": "Suivant",
     "page": "Page {{page}} sur {{pages}}"
+  },
+  "roles": {
+    "owner": "Propriétaire",
+    "manager": "Responsable",
+    "supervisor": "Superviseur",
+    "employee": "Employé",
+    "read_only": "Lecteur"
   }
 }

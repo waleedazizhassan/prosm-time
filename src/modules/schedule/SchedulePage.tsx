@@ -24,6 +24,9 @@ import DateRange from "../../components/common/DateRange";
 import FieldRow from "../../components/common/FieldRow";
 import BreakRulesModal from "./BreakRulesModal";
 import ShiftSwapCard from "./ShiftSwapCard";
+import ScheduleCostCard from "./ScheduleCostCard";
+import OpenShiftsCard from "./OpenShiftsCard";
+import ChecklistSettingsCard from "./ChecklistSettingsCard";
 
 function isoDate(date: Date): string {
   return date.toISOString().slice(0, 10);
@@ -64,6 +67,7 @@ export default function SchedulePage() {
   const [siteShifts, setSiteShifts] = useState<SiteShiftRow[]>([]);
   const [actuals, setActuals] = useState<ShiftActual[]>([]);
   const [siteShiftsLoading, setSiteShiftsLoading] = useState(false);
+  const [costKey, setCostKey] = useState(0);
   const [rangeStart, setRangeStart] = useState(isoDate(today));
   const [rangeEnd, setRangeEnd] = useState(isoDate(new Date(today.getTime() + 13 * 24 * 60 * 60 * 1000)));
 
@@ -126,6 +130,7 @@ export default function SchedulePage() {
     setTemplates(templatesResult.success ? templatesResult.data ?? [] : []);
     setSiteShifts(shiftsResult.success ? shiftsResult.data ?? [] : []);
     setSiteShiftsLoading(false);
+    setCostKey((current) => current + 1);
   }, [canManage, selectedSiteId, rangeStart, rangeEnd]);
 
   useEffect(() => {
@@ -218,10 +223,21 @@ export default function SchedulePage() {
     <PageShell title="">
       <PageBanner pageId="schedule" illustration={shiftsHeaderImage} />
 
-      <Card title={t("myShiftsTitle")}>
-        <ErrorText>{loadError}</ErrorText>
-        <Table columns={myColumns} data={myShifts} getRowId={(row) => row.id} loading={loading} emptyMessage={t("emptyMine")} />
-      </Card>
+      {/* The owner works no shifts: their own list is left out. */}
+      {profile?.isOwner ? null : (
+        <Card title={t("myShiftsTitle")}>
+          <ErrorText>{loadError}</ErrorText>
+          <Table columns={myColumns} data={myShifts} getRowId={(row) => row.id} loading={loading} emptyMessage={t("emptyMine")} />
+        </Card>
+      )}
+
+      <OpenShiftsCard
+        manageSiteId={canManage && selectedSiteId ? selectedSiteId : null}
+        onFilled={() => {
+          void loadMine();
+          void loadSiteData();
+        }}
+      />
 
       <ShiftSwapCard
         shifts={myShifts}
@@ -244,6 +260,9 @@ export default function SchedulePage() {
 
             <Table columns={siteColumns} data={siteShifts} getRowId={(row) => row.id} loading={siteShiftsLoading} emptyMessage={t("emptySite")} />
           </Card>
+
+          <ScheduleCostCard siteId={selectedSiteId} startDate={rangeStart} endDate={rangeEnd} refreshKey={costKey} />
+          {selectedSiteId ? <ChecklistSettingsCard siteId={selectedSiteId} /> : null}
 
           <Card title={t("templatesTitle")}>
             <HintText small>{t("templatesHint")}</HintText>

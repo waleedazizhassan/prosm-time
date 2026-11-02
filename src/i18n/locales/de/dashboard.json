@@ -174,7 +174,7 @@
     "confirmPhotoLabel": "Foto",
     "confirmNoPhoto": "Kein Foto erforderlich.",
     "confirmTimeLabel": "Uhrzeit",
-    "confirmLocationLabel": "Standort",
+    "confirmLocationLabel": "Ihre Position",
     "noteLabel": "Notiz hinzufügen",
     "activityLabel": "Tätigkeit",
     "optionalPlaceholder": "Optional",
@@ -211,7 +211,8 @@
     },
     "suggestSite": "Sie sind bei {{site}}. Jetzt einstempeln?",
     "suggestSiteAction": "Ja, einstempeln",
-    "suggestSiteDismiss": "Nicht jetzt"
+    "suggestSiteDismiss": "Nicht jetzt",
+    "confirmOutside": "Sie sind {{meters}} m außerhalb des Bereichs von {{site}}. Das wird als Ausnahme erfasst und von Ihrem Vorgesetzten geprüft."
   },
   "kioskPin": {
     "title": "Kiosk-PIN",
@@ -336,7 +337,8 @@
       "chart": "Geplant vs. tatsächlich",
       "cost": "Zulagen und Kosten",
       "audit": "Aktionsprotokoll",
-      "external": "Externe Arbeitskräfte"
+      "external": "Externe Arbeitskräfte",
+      "insights": "Anwesenheitskennzahlen"
     },
     "sos": {
       "text": "SOS von {{name}} bei {{site}} seit {{time}}",
@@ -581,6 +583,16 @@
     "export": {
       "action": "Dashboard als PDF exportieren",
       "asOf": "Stand {{time}}"
+    },
+    "insights": {
+      "rate": "Anwesenheitsquote",
+      "rateHint": "{{attended}} von {{scheduled}} geplanten Schichten",
+      "repeatLate": "Oft verspätet",
+      "repeatOvertime": "Oft Überstunden",
+      "lateMeta": "{{days}} Tage · {{minutes}} Min.",
+      "overtimeMeta": "{{days}} Tage · {{minutes}} Min.",
+      "none": "Niemand in diesem Zeitraum.",
+      "unavailable": "Wählen Sie höchstens zwei Monate."
     }
   },
   "devices": {
@@ -613,5 +625,10 @@
     "exportPdf": "Als PDF exportieren",
     "loadMore": "Mehr anzeigen",
     "loadError": "Das Protokoll konnte nicht geladen werden."
+  },
+  "checklist": {
+    "title": "Vor dem Ausstempeln",
+    "continue": "Weiter zum Ausstempeln",
+    "continueIncomplete": "Mit offenen Punkten ausstempeln"
   }
 }

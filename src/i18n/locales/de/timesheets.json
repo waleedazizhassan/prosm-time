@@ -101,7 +101,22 @@
     "noEvidence": "Keine Kamerabelege in diesem Zeitraum.",
     "viewEvidence": "Anzeigen",
     "approvalTrailTitle": "Genehmigungsverlauf",
-    "noApprovalTrail": "Noch keine Genehmigungsaktivität."
+    "noApprovalTrail": "Noch keine Genehmigungsaktivität.",
+    "columns": {
+      "clockIn": "Kommen",
+      "clockOut": "Gehen",
+      "site": "Standort",
+      "project": "Projekt",
+      "when": "Wann",
+      "distance": "Entfernung",
+      "category": "Kategorie",
+      "reason": "Grund",
+      "kind": "Art",
+      "action": "Aktion",
+      "notes": "Notizen"
+    },
+    "meters": "{{value}} m",
+    "photo": "Foto"
   },
   "values": {
     "leaveType": {

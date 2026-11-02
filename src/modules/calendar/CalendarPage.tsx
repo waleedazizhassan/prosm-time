@@ -228,7 +228,7 @@ export default function CalendarPage() {
                     </div>
                   </div>
                   {canEditSite(row.siteId) ? (
-                    <div style={{ display: "flex", gap: "var(--space-1)" }}>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-1)" }}>
                       <Button size="sm" variant="ghost" onClick={() => { setError(""); setHoliday({ id: row.id, siteId: row.siteId ?? "", name: row.name, startDate: row.startDate, endDate: row.endDate, isPaid: row.isPaid }); }}>
                         {t("edit")}
                       </Button>
@@ -298,7 +298,7 @@ export default function CalendarPage() {
               onChange={(event) => setHoliday({ ...holiday, siteId: event.target.value })}
               options={[...(isOwner ? [{ value: "", label: t("scope.organisation") }] : []), ...editableSites.map((site) => ({ value: site.id, label: site.name }))]}
             />
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "var(--space-2) 0" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", padding: "var(--space-2) 0" }}>
               <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("holidays.paidLabel")}</span>
               <Toggle checked={holiday.isPaid} onChange={(checked) => setHoliday({ ...holiday, isPaid: checked })} label={t("holidays.paidLabel")} />
             </div>
@@ -344,7 +344,7 @@ export default function CalendarPage() {
             ) : null}
             <Input label={t("from")} name="exceptionStart" type="date" value={exception.startDate} onChange={(event) => setException({ ...exception, startDate: event.target.value })} />
             <Input label={t("to")} name="exceptionEnd" type="date" value={exception.endDate} onChange={(event) => setException({ ...exception, endDate: event.target.value })} />
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "var(--space-2) 0" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", padding: "var(--space-2) 0" }}>
               <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("exceptions.dayOffLabel")}</span>
               <Toggle checked={exception.isDayOff} onChange={(checked) => setException({ ...exception, isDayOff: checked })} label={t("exceptions.dayOffLabel")} />
             </div>
@@ -354,7 +354,7 @@ export default function CalendarPage() {
                 <Input label={t("exceptions.endTime")} name="exceptionEndTime" type="time" value={exception.endTime} onChange={(event) => setException({ ...exception, endTime: event.target.value })} />
               </>
             ) : null}
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "var(--space-2) 0" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", padding: "var(--space-2) 0" }}>
               <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("exceptions.noDeductionLabel")}</span>
               <Toggle checked={exception.noDeduction} onChange={(checked) => setException({ ...exception, noDeduction: checked })} label={t("exceptions.noDeductionLabel")} />
             </div>

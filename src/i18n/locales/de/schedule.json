@@ -66,5 +66,44 @@
       "rejected": "Abgelehnt",
       "cancelled": "Storniert"
     }
+  },
+  "cost": {
+    "title": "Kosten des Dienstplans",
+    "subtitle": "Die angezeigten Schichten zum Satz jeder Person. Über der Tagesgrenze zählt als Überstunden.",
+    "regular": "Regulär",
+    "overtime": "Erwartete Überstunden",
+    "total": "Gesamt",
+    "hours": "{{hours}} Std.",
+    "unpriced": "{{count}} Schichten ohne Lohnsatz sind nicht gezählt."
+  },
+  "open": {
+    "title": "Offene Schichten",
+    "subtitle": "Schichten ohne Besetzung. Fragen Sie an; ein Vorgesetzter entscheidet.",
+    "none": "Keine offenen Schichten.",
+    "noRequests": "Noch keine Anfrage.",
+    "give": "Schicht vergeben",
+    "cancel": "Schicht absagen",
+    "ask": "Diese Schicht anfragen",
+    "post": "Offene Schicht ausschreiben",
+    "failed": "Das war nicht möglich.",
+    "status": {
+      "open": "Offen",
+      "filled": "Besetzt",
+      "cancelled": "Abgesagt"
+    },
+    "mine": {
+      "pending": "Angefragt. Wartet auf den Vorgesetzten.",
+      "approved": "Sie gehört Ihnen.",
+      "rejected": "An jemand anderen vergeben."
+    }
+  },
+  "checklist": {
+    "title": "Checkliste zum Schichtende",
+    "subtitle": "Wird vor dem Ausstempeln an diesem Standort gezeigt. Ein Punkt pro Zeile; leer für keine.",
+    "label": "Punkte",
+    "save": "Checkliste speichern",
+    "saved": "Gespeichert.",
+    "failed": "Checkliste konnte nicht gespeichert werden.",
+    "tooMany": "Höchstens zwanzig Punkte."
   }
 }

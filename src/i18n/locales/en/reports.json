@@ -219,5 +219,18 @@
       "overtimeAmount": "Overtime and extra days amount",
       "currency": "Currency"
     }
+  },
+  "budgets": {
+    "title": "Project budgets",
+    "subtitle": "What each project's labour has cost so far, against its budget.",
+    "project": "Project",
+    "spent": "Labour so far",
+    "budget": "Budget",
+    "used": "Used",
+    "save": "Save",
+    "placeholder": "Set",
+    "invalid": "Enter a number, or leave it empty.",
+    "failed": "Unable to save the budget.",
+    "unpriced": "Hours of people with no pay rate are not in the cost."
   }
 }

@@ -232,7 +232,7 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
           </h3>
           <HintText small>{t("sites:form.shiftPolicyHint")}</HintText>
 
-          <div style={{ display: "flex", gap: "var(--space-3)" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-3)" }}>
             <Input
               label={t("sites:form.shiftStartTimeLabel")}
               name="policyShiftStartTime"
@@ -257,7 +257,7 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
             />
           </div>
 
-          <div style={{ display: "flex", gap: "var(--space-3)" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-3)" }}>
             <Input
               label={t("sites:form.overtimeStartTimeLabel")}
               name="policyOvertimeStartTime"

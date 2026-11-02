@@ -221,5 +221,10 @@
       "employees": "Employees",
       "viewers": "Viewers"
     }
+  },
+  "deviceStatus": {
+    "pending": "Waiting",
+    "approved": "Approved",
+    "blocked": "Blocked"
   }
 }

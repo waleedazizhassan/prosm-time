@@ -17,7 +17,7 @@ function formatMinutes(minutes: number): string {
   const total = Math.round(minutes);
   const hours = Math.floor(total / 60);
   const mins = total % 60;
-  return `${hours}h ${mins}m`;
+  return `${hours}:${String(mins).padStart(2, "0")}`;
 }
 
 // PROSM Time - § live UX review, user-directed: a real summary shown
@@ -47,20 +47,20 @@ export default function ClockOutSummaryModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={t("attendance.summaryTitle")} size="md">
       <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", marginBottom: "var(--space-4)", fontSize: "var(--font-sm)" }}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
           <span style={{ color: "var(--text-secondary)" }}>{t("attendance.summaryWorked")}</span>
           <span style={{ fontWeight: "var(--font-weight-medium)", fontVariantNumeric: "tabular-nums" }}>{formatMinutes(workedMinutes)}</span>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
           <span style={{ color: "var(--text-secondary)" }}>{t("attendance.summaryBreak")}</span>
           <span style={{ fontWeight: "var(--font-weight-medium)", fontVariantNumeric: "tabular-nums" }}>{formatMinutes(breakMinutes)}</span>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
           <span style={{ color: "var(--text-secondary)" }}>{t("attendance.summaryOvertime")}</span>
           <span style={{ fontWeight: "var(--font-weight-medium)", fontVariantNumeric: "tabular-nums" }}>{formatMinutes(overtimeMinutes)}</span>
         </div>
         {exceptionsCount > 0 ? (
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
             <span style={{ color: "var(--status-warning-text)" }}>{t("attendance.summaryExceptions")}</span>
             <span style={{ fontWeight: "var(--font-weight-medium)" }}>{exceptionsCount}</span>
           </div>

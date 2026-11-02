@@ -99,7 +99,7 @@ export default function PermissionsQueueCard() {
             </div>
             <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{request.reason}</div>
           </div>
-          <div style={{ display: "flex", gap: "var(--space-1)" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-1)" }}>
             <Button size="sm" variant="ghost" onClick={() => { setDecision({ request, action: "rejected" }); setNotes(""); }}>
               {t("pending.action.rejected")}
             </Button>
@@ -118,7 +118,7 @@ export default function PermissionsQueueCard() {
             </div>
             <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t(`permissions.dayType.${row.dayType}`)}</div>
           </div>
-          <div style={{ display: "flex", gap: "var(--space-1)" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-1)" }}>
             <Button size="sm" variant="ghost" onClick={() => setAdjust({ userId: row.userId, name: row.employeeName, workDate: row.day, overtime: String(Math.round(row.overtimePendingApprovalMinutes)), late: "", deduction: "", reason: "" })}>
               {t("permissions.adjustAction")}
             </Button>
@@ -155,7 +155,7 @@ export default function PermissionsQueueCard() {
       >
         {decision?.action === "approved" && (decision.request.kind === "late_arrival" || decision.request.kind === "early_leave") ? (
           <>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "var(--space-2) 0" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", padding: "var(--space-2) 0" }}>
               <span style={{ fontSize: "var(--font-sm)" }}>{t("permissions.paidLabel")}</span>
               <Toggle checked={paid} onChange={setPaid} label={t("permissions.paidLabel")} />
             </div>
@@ -203,7 +203,7 @@ export default function PermissionsQueueCard() {
             <Input label={t("permissions.minutesLabel")} name="grantMinutes" type="number" value={grant.minutes} onChange={(event) => setGrant({ ...grant, minutes: event.target.value })} />
             {grant.kind === "late_arrival" || grant.kind === "early_leave" ? (
               <>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "var(--space-2) 0" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", padding: "var(--space-2) 0" }}>
                   <span style={{ fontSize: "var(--font-sm)" }}>{t("permissions.paidLabel")}</span>
                   <Toggle checked={grant.paid} onChange={(checked) => setGrant({ ...grant, paid: checked })} label={t("permissions.paidLabel")} />
                 </div>

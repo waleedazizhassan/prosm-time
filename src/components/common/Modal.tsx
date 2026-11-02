@@ -28,7 +28,7 @@ export default function Modal({ isOpen, onClose, title, children, footer, size =
         if (event.target === event.currentTarget) onClose();
       }}
     >
-      <div className={[styles.panel, styles[size]].filter(Boolean).join(" ")}>
+      <div role="dialog" aria-modal="true" aria-label={title} className={[styles.panel, styles[size]].filter(Boolean).join(" ")}>
         <div className={styles.header}>
           <h2 className={styles.title}>{title}</h2>
           <button type="button" onClick={onClose} aria-label={t("actions.close")} className={styles.closeButton}>

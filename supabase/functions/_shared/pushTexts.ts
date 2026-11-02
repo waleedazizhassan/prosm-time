@@ -149,6 +149,18 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "title": "دخول من جهاز جديد",
         "body": "تم فتح حسابك على جهاز جديد: {{device}}. إن لم تكن أنت، غيّر كلمة المرور.",
         "ownerBody": "دخل {{name}} من جهاز جديد: {{device}}."
+      },
+      "noShow": {
+        "title": "لم يسجّل حضوره لوردية",
+        "body": "لم يسجّل {{name}} حضوره لوردية {{time}} في {{site}}."
+      },
+      "overtimeSoon": {
+        "title": "إضافي قريب",
+        "body": "{{name}} ما زال مسجّلاً حضوره؛ يبدأ الإضافي {{time}}."
+      },
+      "dailyDigest": {
+        "title": "ملخص أمس",
+        "body": "عمل {{present}}، وغاب عن ورديته {{noShows}}. بانتظارك: {{leave}} إجازة و{{exceptions}} استثناء. الحاضرون الآن: {{open}}."
       }
     },
     "leaveTypes": {
@@ -309,6 +321,18 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "title": "New device signed in",
         "body": "Your account was opened on a new device: {{device}}. If this was not you, change your password.",
         "ownerBody": "{{name}} signed in on a new device: {{device}}."
+      },
+      "noShow": {
+        "title": "Not clocked in for a shift",
+        "body": "{{name}} has not clocked in for the {{time}} shift at {{site}}."
+      },
+      "overtimeSoon": {
+        "title": "Overtime soon",
+        "body": "{{name}} is still clocked in; overtime starts at {{time}}."
+      },
+      "dailyDigest": {
+        "title": "Yesterday at a glance",
+        "body": "{{present}} worked, {{noShows}} missed a shift. Waiting: {{leave}} leave, {{exceptions}} exceptions. Clocked in now: {{open}}."
       }
     },
     "leaveTypes": {
@@ -469,6 +493,18 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "title": "Anmeldung auf neuem Gerät",
         "body": "Ihr Konto wurde auf einem neuen Gerät geöffnet: {{device}}. Wenn Sie das nicht waren, ändern Sie Ihr Passwort.",
         "ownerBody": "{{name}} hat sich auf einem neuen Gerät angemeldet: {{device}}."
+      },
+      "noShow": {
+        "title": "Nicht zur Schicht eingestempelt",
+        "body": "{{name}} hat sich nicht für die Schicht um {{time}} in {{site}} eingestempelt."
+      },
+      "overtimeSoon": {
+        "title": "Bald Überstunden",
+        "body": "{{name}} ist noch eingestempelt; Überstunden beginnen um {{time}}."
+      },
+      "dailyDigest": {
+        "title": "Gestern im Überblick",
+        "body": "{{present}} haben gearbeitet, {{noShows}} haben eine Schicht verpasst. Offen: {{leave}} Urlaub, {{exceptions}} Ausnahmen. Jetzt eingestempelt: {{open}}."
       }
     },
     "leaveTypes": {
@@ -629,6 +665,18 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "title": "Connexion depuis un nouvel appareil",
         "body": "Votre compte a été ouvert sur un nouvel appareil : {{device}}. Si ce n'était pas vous, changez votre mot de passe.",
         "ownerBody": "{{name}} s'est connecté depuis un nouvel appareil : {{device}}."
+      },
+      "noShow": {
+        "title": "Pas pointé pour un poste",
+        "body": "{{name}} n'a pas pointé pour le poste de {{time}} à {{site}}."
+      },
+      "overtimeSoon": {
+        "title": "Heures sup. bientôt",
+        "body": "{{name}} est toujours pointé ; les heures sup. commencent à {{time}}."
+      },
+      "dailyDigest": {
+        "title": "Hier en bref",
+        "body": "{{present}} ont travaillé, {{noShows}} ont manqué un poste. En attente : {{leave}} congés, {{exceptions}} exceptions. Pointés maintenant : {{open}}."
       }
     },
     "leaveTypes": {
@@ -789,6 +837,18 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "title": "Accesso da un nuovo dispositivo",
         "body": "Il tuo account è stato aperto su un nuovo dispositivo: {{device}}. Se non sei stato tu, cambia la password.",
         "ownerBody": "{{name}} ha effettuato l'accesso da un nuovo dispositivo: {{device}}."
+      },
+      "noShow": {
+        "title": "Non timbrato per un turno",
+        "body": "{{name}} non ha timbrato per il turno delle {{time}} a {{site}}."
+      },
+      "overtimeSoon": {
+        "title": "Straordinario a breve",
+        "body": "{{name}} è ancora in servizio; lo straordinario inizia alle {{time}}."
+      },
+      "dailyDigest": {
+        "title": "Ieri in breve",
+        "body": "{{present}} hanno lavorato, {{noShows}} hanno saltato un turno. In attesa: {{leave}} ferie, {{exceptions}} eccezioni. In servizio ora: {{open}}."
       }
     },
     "leaveTypes": {
