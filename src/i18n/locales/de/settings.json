@@ -82,6 +82,8 @@
     "field": {
       "minOvertimeMinutes": "Überstunden ab (Minuten)",
       "minLateMinutes": "Verspätung ab (Minuten)",
+      "minEarlyLeaveMinutes": "Früheres Gehen zählt nach (Minuten)",
+      "roundMinutes": "Tägliche Arbeitszeit runden auf (Minuten)",
       "maxDailyOvertimeMinutes": "Höchstens pro Tag (Minuten)",
       "multiplierNormal": "Faktor - normaler Tag",
       "multiplierNight": "Faktor - Nacht",
@@ -93,6 +95,8 @@
     "placeholder": {
       "minOvertimeMinutes": "0",
       "minLateMinutes": "0",
+      "minEarlyLeaveMinutes": "0",
+      "roundMinutes": "1",
       "maxDailyOvertimeMinutes": "keine Grenze",
       "multiplierNormal": "1",
       "multiplierNight": "1",

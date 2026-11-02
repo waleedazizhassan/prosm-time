@@ -58,6 +58,8 @@ export interface OvertimePolicy {
   approvalMode: OvertimeApprovalMode | null;
   minOvertimeMinutes: number | null;
   minLateMinutes: number | null;
+  minEarlyLeaveMinutes: number | null;
+  roundMinutes: number | null;
   maxDailyOvertimeMinutes: number | null;
   multiplierNormal: number | null;
   multiplierNight: number | null;
@@ -71,6 +73,8 @@ export const EMPTY_POLICY: OvertimePolicy = {
   approvalMode: null,
   minOvertimeMinutes: null,
   minLateMinutes: null,
+  minEarlyLeaveMinutes: null,
+  roundMinutes: null,
   maxDailyOvertimeMinutes: null,
   multiplierNormal: null,
   multiplierNight: null,
@@ -208,6 +212,8 @@ class AttendanceControlRepository {
         approvalMode: data.approval_mode,
         minOvertimeMinutes: num(data.min_overtime_minutes),
         minLateMinutes: num(data.min_late_minutes),
+        minEarlyLeaveMinutes: num(data.min_early_leave_minutes),
+        roundMinutes: num(data.round_minutes),
         maxDailyOvertimeMinutes: num(data.max_daily_overtime_minutes),
         multiplierNormal: num(data.multiplier_normal),
         multiplierNight: num(data.multiplier_night),

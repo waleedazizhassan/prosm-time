@@ -11,8 +11,8 @@ import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
 
-type NumberField = "minOvertimeMinutes" | "minLateMinutes" | "maxDailyOvertimeMinutes" | "multiplierNormal" | "multiplierNight" | "multiplierWeeklyRest" | "multiplierPublicHoliday";
-const NUMBER_FIELDS: NumberField[] = ["minOvertimeMinutes", "minLateMinutes", "maxDailyOvertimeMinutes", "multiplierNormal", "multiplierNight", "multiplierWeeklyRest", "multiplierPublicHoliday"];
+type NumberField = "minOvertimeMinutes" | "minLateMinutes" | "minEarlyLeaveMinutes" | "roundMinutes" | "maxDailyOvertimeMinutes" | "multiplierNormal" | "multiplierNight" | "multiplierWeeklyRest" | "multiplierPublicHoliday";
+const NUMBER_FIELDS: NumberField[] = ["minOvertimeMinutes", "minLateMinutes", "minEarlyLeaveMinutes", "roundMinutes", "maxDailyOvertimeMinutes", "multiplierNormal", "multiplierNight", "multiplierWeeklyRest", "multiplierPublicHoliday"];
 
 // v2.3.43 step 6 (item 23): the organisation's overtime policy (the Owner's):
 // automatic or after a manager's approval (the default), thresholds, a daily

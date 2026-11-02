@@ -82,6 +82,8 @@
     "field": {
       "minOvertimeMinutes": "Heures sup. après (minutes)",
       "minLateMinutes": "Retard après (minutes)",
+      "minEarlyLeaveMinutes": "Le départ anticipé compte après (minutes)",
+      "roundMinutes": "Arrondir le temps travaillé du jour à (minutes)",
       "maxDailyOvertimeMinutes": "Maximum par jour (minutes)",
       "multiplierNormal": "Coefficient - jour normal",
       "multiplierNight": "Coefficient - nuit",
@@ -93,6 +95,8 @@
     "placeholder": {
       "minOvertimeMinutes": "0",
       "minLateMinutes": "0",
+      "minEarlyLeaveMinutes": "0",
+      "roundMinutes": "1",
       "maxDailyOvertimeMinutes": "sans limite",
       "multiplierNormal": "1",
       "multiplierNight": "1",

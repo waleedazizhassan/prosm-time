@@ -82,6 +82,8 @@
     "field": {
       "minOvertimeMinutes": "Overtime counts after (minutes)",
       "minLateMinutes": "Lateness counts after (minutes)",
+      "minEarlyLeaveMinutes": "Early leave counts after (minutes)",
+      "roundMinutes": "Round each day's worked time to (minutes)",
       "maxDailyOvertimeMinutes": "Maximum overtime per day (minutes)",
       "multiplierNormal": "Multiplier - normal day",
       "multiplierNight": "Multiplier - night",
@@ -93,6 +95,8 @@
     "placeholder": {
       "minOvertimeMinutes": "0",
       "minLateMinutes": "0",
+      "minEarlyLeaveMinutes": "0",
+      "roundMinutes": "1",
       "maxDailyOvertimeMinutes": "no limit",
       "multiplierNormal": "1",
       "multiplierNight": "1",
