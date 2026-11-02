@@ -18,7 +18,8 @@
     "locationViolations": "Location Violations",
     "sos": "Emergency (SOS)",
     "dashboard": "Dashboard",
-    "auditLog": "Action log"
+    "auditLog": "Action log",
+    "laborCost": "Labour cost"
   },
   "timesheetsHint": "Timesheets are generated and approved per employee and period, not by date range.",
   "timesheetsLink": "Go to Timesheets",
@@ -131,6 +132,14 @@
       "status": "Status",
       "active": "Active",
       "resolved": "Resolved"
+    },
+    "laborCost": {
+      "project": "Project",
+      "site": "Site",
+      "name": "Employee",
+      "hours": "Hours",
+      "cost": "Cost",
+      "noRate": "No rate"
     }
   },
   "values": {

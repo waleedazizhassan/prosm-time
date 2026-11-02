@@ -18,7 +18,8 @@
     "locationViolations": "Violazioni di posizione",
     "sos": "Emergenza (SOS)",
     "dashboard": "Dashboard",
-    "auditLog": "Registro azioni"
+    "auditLog": "Registro azioni",
+    "laborCost": "Costo del lavoro"
   },
   "timesheetsHint": "I fogli ore vengono generati e approvati per dipendente e periodo, non per intervallo di date.",
   "timesheetsLink": "Vai ai fogli ore",
@@ -131,6 +132,14 @@
       "status": "Stato",
       "active": "Attivo",
       "resolved": "Risolto"
+    },
+    "laborCost": {
+      "project": "Progetto",
+      "site": "Sede",
+      "name": "Dipendente",
+      "hours": "Ore",
+      "cost": "Costo",
+      "noRate": "Nessuna tariffa"
     }
   },
   "values": {

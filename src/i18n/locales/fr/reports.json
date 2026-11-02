@@ -18,7 +18,8 @@
     "locationViolations": "Violations de localisation",
     "sos": "Urgence (SOS)",
     "dashboard": "Tableau de bord",
-    "auditLog": "Journal des actions"
+    "auditLog": "Journal des actions",
+    "laborCost": "Coût de main-d'œuvre"
   },
   "timesheetsHint": "Les feuilles de temps sont générées et approuvées par employé et par période, pas par plage de dates.",
   "timesheetsLink": "Aller aux feuilles de temps",
@@ -131,6 +132,14 @@
       "status": "Statut",
       "active": "Actif",
       "resolved": "Résolu"
+    },
+    "laborCost": {
+      "project": "Projet",
+      "site": "Site",
+      "name": "Employé",
+      "hours": "Heures",
+      "cost": "Coût",
+      "noRate": "Sans taux"
     }
   },
   "values": {

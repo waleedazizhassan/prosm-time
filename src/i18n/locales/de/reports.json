@@ -18,7 +18,8 @@
     "locationViolations": "Standortverstöße",
     "sos": "Notfall (SOS)",
     "dashboard": "Dashboard",
-    "auditLog": "Aktionsprotokoll"
+    "auditLog": "Aktionsprotokoll",
+    "laborCost": "Personalkosten"
   },
   "timesheetsHint": "Stundenzettel werden pro Mitarbeiter und Zeitraum erstellt und genehmigt, nicht nach Datumsbereich.",
   "timesheetsLink": "Zu den Stundenzetteln",
@@ -131,6 +132,14 @@
       "status": "Status",
       "active": "Aktiv",
       "resolved": "Behoben"
+    },
+    "laborCost": {
+      "project": "Projekt",
+      "site": "Standort",
+      "name": "Mitarbeiter",
+      "hours": "Stunden",
+      "cost": "Kosten",
+      "noRate": "Kein Satz"
     }
   },
   "values": {
