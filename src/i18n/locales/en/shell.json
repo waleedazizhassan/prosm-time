@@ -405,5 +405,10 @@
     "label": "Numbers",
     "latn": "Latin digits (123)",
     "arab": "Arabic digits (١٢٣)"
+  },
+  "readOnly": {
+    "banner": "Your organisation is read-only: its licence ended. You can see everything; changes are paused, and nothing is deleted.",
+    "reopen": "Enter an activation code",
+    "askOwner": "Your organisation owner can reopen it."
   }
 }

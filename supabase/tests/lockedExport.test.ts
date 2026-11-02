@@ -8,7 +8,7 @@ import { addMember, createOrg, createSite } from "./support/fixtures";
 const read = "select * from public.export_prosm_time_locked_attendance()";
 
 describe("locked organisation export", () => {
-  it("is for the owner, only once locked, and the lock itself holds", async () => {
+  it("is for the owner, only once locked, and the record stays readable", async () => {
     const t = await buildDatabase();
     const org = await createOrg(t, "Locked Co");
     const site = await createSite(t, org, "Yard");
@@ -25,6 +25,7 @@ describe("locked organisation export", () => {
     expect(error).toBeNull();
     expect(rows!.map((row) => row.employee)).toEqual(["Worker"]);
     expect((await t.as(worker.authId, read)).error).toMatch(/ONLY THE OWNER/);
-    expect((await t.as(org.owner.authId, "select id from attendance_sessions")).rows ?? []).toHaveLength(0);
+    // read-only (20261102210000): the record stays readable in the app too
+    expect((await t.as(org.owner.authId, "select id from attendance_sessions")).rows ?? []).toHaveLength(1);
   });
 });

@@ -288,7 +288,8 @@
     "tooManyCodeAttempts": "Too many attempts. Try again later.",
     "invalidActivationCode": "The code is wrong or already used.",
     "locationRequired": "This cannot be recorded without a valid location. Turn on location and try again.",
-    "rejectReasonRequired": "Write the reason, so the employee sees it."
+    "rejectReasonRequired": "Write the reason, so the employee sees it.",
+    "organizationReadOnly": "Your organisation is read-only until its licence is renewed."
   },
   "pageLoad": {
     "title": "This page needs a connection",

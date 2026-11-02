@@ -288,7 +288,8 @@
     "tooManyCodeAttempts": "Trop de tentatives. Réessayez plus tard.",
     "invalidActivationCode": "Le code est incorrect ou déjà utilisé.",
     "locationRequired": "Impossible d'enregistrer sans position valide. Activez la localisation et réessayez.",
-    "rejectReasonRequired": "Indiquez le motif, pour que l'employé le voie."
+    "rejectReasonRequired": "Indiquez le motif, pour que l'employé le voie.",
+    "organizationReadOnly": "Votre organisation est en lecture seule jusqu’au renouvellement de sa licence."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

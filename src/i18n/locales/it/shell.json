@@ -410,5 +410,10 @@
     "label": "Cifre",
     "latn": "Cifre latine (123)",
     "arab": "Cifre arabe (١٢٣)"
+  },
+  "readOnly": {
+    "banner": "La tua organizzazione è in sola lettura: la licenza è scaduta. Vedi tutto; le modifiche sono sospese e nulla viene eliminato.",
+    "reopen": "Inserisci un codice di attivazione",
+    "askOwner": "Il titolare può riaprirla."
   }
 }

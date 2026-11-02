@@ -29,7 +29,8 @@ export default function ProtectedRoute({ children }: { children: ReactNode }) {
     return <Navigate to="/login" replace />;
   }
 
-  if (trial.status?.locked) {
+  // Plan stage 3.3: a read-only organisation opens normally, under a banner.
+  if (trial.status?.locked && !trial.status.readOnly) {
     return <TrialEndedPage status={trial.status} onReopened={() => window.location.assign("/dashboard")} />;
   }
 

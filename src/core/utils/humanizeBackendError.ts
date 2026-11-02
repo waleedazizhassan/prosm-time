@@ -98,6 +98,7 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "ALLOWANCES.APPROVE AUTHORITY REQUIRED": "allowancesApproveAuthorityRequired",
   "ATTENDANCE.VIEW AUTHORITY REQUIRED": "attendanceViewRequired",
   "CATEGORY NOT FOUND": "categoryNotFound",
+  "ORGANIZATION IS READ ONLY": "organizationReadOnly",
   "CHOOSE A CATEGORY OR A PERSON, NOT BOTH": "categoryOrPerson",
   "CHOOSE A PERIOD OF UP TO TWO MONTHS": "periodUpToTwoMonths",
   "CHOOSE A SITE, A CATEGORY OR A PERSON": "chooseScope",

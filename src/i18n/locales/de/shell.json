@@ -405,5 +405,10 @@
     "label": "Ziffern",
     "latn": "Lateinische Ziffern (123)",
     "arab": "Arabische Ziffern (١٢٣)"
+  },
+  "readOnly": {
+    "banner": "Ihre Organisation ist schreibgeschützt: Die Lizenz ist abgelaufen. Alles bleibt sichtbar; Änderungen sind pausiert, nichts wird gelöscht.",
+    "reopen": "Aktivierungscode eingeben",
+    "askOwner": "Der Inhaber kann sie wieder öffnen."
   }
 }
