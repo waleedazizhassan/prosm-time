@@ -101,7 +101,22 @@
     "noEvidence": "لا توجد أدلة مصورة في هذه الفترة.",
     "viewEvidence": "عرض",
     "approvalTrailTitle": "سجل الاعتماد",
-    "noApprovalTrail": "لا يوجد نشاط اعتماد بعد."
+    "noApprovalTrail": "لا يوجد نشاط اعتماد بعد.",
+    "columns": {
+      "clockIn": "الحضور",
+      "clockOut": "الانصراف",
+      "site": "الموقع",
+      "project": "المشروع",
+      "when": "الوقت",
+      "distance": "المسافة",
+      "category": "الفئة",
+      "reason": "السبب",
+      "kind": "النوع",
+      "action": "الإجراء",
+      "notes": "ملاحظات"
+    },
+    "meters": "{{value}} م",
+    "photo": "صورة"
   },
   "values": {
     "leaveType": {

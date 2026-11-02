@@ -8,7 +8,7 @@ export function formatMinutes(minutes: number): string {
   const totalMinutes = Math.round(minutes);
   const hours = Math.floor(totalMinutes / 60);
   const mins = totalMinutes % 60;
-  return `${hours}h ${mins}m`;
+  return `${hours}:${String(mins).padStart(2, "0")}`;
 }
 
 type TFunc = (key: string, options?: Record<string, unknown>) => string;

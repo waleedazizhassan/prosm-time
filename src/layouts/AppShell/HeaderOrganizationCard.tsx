@@ -242,7 +242,7 @@ function HeaderOrganizationCard() {
             </div>
             <div className={styles.panelRow}>
               <span className={styles.panelLabel}>{t("organizationCard.statusLabel")}</span>
-              <StatusBadge status={organization.status}>{organization.status}</StatusBadge>
+              <StatusBadge status={organization.status}>{t(`people:status.${organization.status.toLowerCase()}`, { defaultValue: organization.status })}</StatusBadge>
             </div>
 
             {profile?.isOwner ? (

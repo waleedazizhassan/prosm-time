@@ -38,7 +38,7 @@ export default function PageShell({ title, subtitle, bannerSrc, actions, wide = 
   return (
     <div className={[styles.container, wide ? styles.wide : ""].filter(Boolean).join(" ")}>
       {title || actions ? (
-        <div className={[styles.pageHeader, compact ? styles.pageHeaderCompact : ""].filter(Boolean).join(" ")}>
+        <div className={[styles.pageHeader, compact ? styles.pageHeaderCompact : "", actions ? styles.pageHeaderWithActions : ""].filter(Boolean).join(" ")}>
           {title ? (
             <div className={styles.titleBlock}>
               <h1 className={[styles.title, compact ? styles.titleCompact : ""].filter(Boolean).join(" ")}>{title}</h1>

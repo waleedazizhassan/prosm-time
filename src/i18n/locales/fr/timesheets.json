@@ -101,7 +101,22 @@
     "noEvidence": "Aucune preuve photo dans cette période.",
     "viewEvidence": "Voir",
     "approvalTrailTitle": "Historique des approbations",
-    "noApprovalTrail": "Aucune activité d'approbation pour le moment."
+    "noApprovalTrail": "Aucune activité d'approbation pour le moment.",
+    "columns": {
+      "clockIn": "Arrivée",
+      "clockOut": "Départ",
+      "site": "Site",
+      "project": "Projet",
+      "when": "Quand",
+      "distance": "Distance",
+      "category": "Catégorie",
+      "reason": "Motif",
+      "kind": "Type",
+      "action": "Action",
+      "notes": "Notes"
+    },
+    "meters": "{{value}} m",
+    "photo": "Photo"
   },
   "values": {
     "leaveType": {

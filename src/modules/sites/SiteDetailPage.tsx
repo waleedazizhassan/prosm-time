@@ -97,7 +97,7 @@ export default function SiteDetailPage() {
       key: "actions",
       header: "",
       render: (project) => (
-        <div style={{ display: "flex", gap: "var(--space-2)" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
           {canManageProjects ? (
             <Button variant="ghost" size="xs" onClick={() => setProjectFormState({ open: true, project })}>
               {t("detail.editAction")}

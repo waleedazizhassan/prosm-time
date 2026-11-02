@@ -382,7 +382,7 @@ export default function PersonDetailPage() {
                     <StatusBadge status={isGranted ? "active" : "neutral"}>{isGranted ? t("detail.grantedLabel") : t("detail.notGrantedLabel")}</StatusBadge>
                   </div>
                   {canChangePermission(permission.permissionKey) ? (
-                  <div style={{ display: "flex", gap: "var(--space-2)" }}>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
                     {!isGranted ? (
                       <Button variant="ghost" size="xs" onClick={() => openChange(permission, "grant")}>
                         {t("detail.grantAction")}
@@ -416,9 +416,9 @@ export default function PersonDetailPage() {
             <ListRow key={device.id}>
               <div>
                 <div style={{ color: "var(--text-primary)", fontSize: "var(--font-sm)" }}>{device.deviceLabel ?? device.deviceIdentifier}</div>
-                <StatusBadge status={device.status}>{device.status}</StatusBadge>
+                <StatusBadge status={device.status}>{t(`deviceStatus.${device.status}`, { defaultValue: device.status })}</StatusBadge>
               </div>
-              <div style={{ display: "flex", gap: "var(--space-2)" }}>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
                 {canManageDevices && device.status !== "approved" ? (
                   <Button variant="ghost" size="xs" onClick={() => handleDeviceStatus(device.id, "approved")}>
                     {t("detail.approveAction")}
@@ -495,7 +495,7 @@ export default function PersonDetailPage() {
       {canManageDevices ? (
         <Card title={t("detail.dataRightsTitle")}>
           <HintText small>{t("detail.dataRightsHint")}</HintText>
-          <div style={{ display: "flex", gap: "var(--space-2)" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
             <Button variant="danger" onClick={() => setDeleteModalOpen(true)}>
               {t("detail.deleteDataAction")}
             </Button>

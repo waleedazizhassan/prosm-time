@@ -113,3 +113,19 @@
     padding: 20px 16px 32px;
   }
 }
+
+/* Owner 2026-11-02: on a phone, a page's buttons take their own row under the
+   title instead of squeezing it into a narrow column. */
+@media (max-width: 720px) {
+  .pageHeaderWithActions {
+    flex-wrap: wrap;
+  }
+
+  .pageHeaderWithActions .headerExtras {
+    flex: 1 1 100%;
+  }
+
+  .actions {
+    flex-wrap: wrap;
+  }
+}

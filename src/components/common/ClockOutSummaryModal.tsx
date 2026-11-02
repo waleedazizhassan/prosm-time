@@ -17,7 +17,7 @@ function formatMinutes(minutes: number): string {
   const total = Math.round(minutes);
   const hours = Math.floor(total / 60);
   const mins = total % 60;
-  return `${hours}h ${mins}m`;
+  return `${hours}:${String(mins).padStart(2, "0")}`;
 }
 
 // PROSM Time - § live UX review, user-directed: a real summary shown

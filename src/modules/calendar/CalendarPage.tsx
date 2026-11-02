@@ -228,7 +228,7 @@ export default function CalendarPage() {
                     </div>
                   </div>
                   {canEditSite(row.siteId) ? (
-                    <div style={{ display: "flex", gap: "var(--space-1)" }}>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-1)" }}>
                       <Button size="sm" variant="ghost" onClick={() => { setError(""); setHoliday({ id: row.id, siteId: row.siteId ?? "", name: row.name, startDate: row.startDate, endDate: row.endDate, isPaid: row.isPaid }); }}>
                         {t("edit")}
                       </Button>

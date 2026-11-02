@@ -221,5 +221,10 @@
       "employees": "Dipendenti",
       "viewers": "Osservatori"
     }
+  },
+  "deviceStatus": {
+    "pending": "In attesa",
+    "approved": "Approvato",
+    "blocked": "Bloccato"
   }
 }
