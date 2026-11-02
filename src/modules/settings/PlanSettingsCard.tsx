@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import LicenseRepository from "../../core/repositories/LicenseRepository";
 import PlanRepository, { type PlanStatus } from "../../core/repositories/PlanRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import Button from "../../components/common/Button";
@@ -33,7 +34,9 @@ export default function PlanSettingsCard() {
     setSaving(true);
     setError("");
     setSaved(false);
-    const result = await PlanRepository.redeem(code);
+    // Platform Manager issues the codes: the licence path first, then a code held in this project.
+    const license = await LicenseRepository.activateWithCode(code.trim());
+    const result = license.success ? { success: true, error: undefined } : await PlanRepository.redeem(code);
     setSaving(false);
     if (!result.success) {
       setError(humanizeBackendError(result.error, t) ?? t("plan.redeemFailed"));
