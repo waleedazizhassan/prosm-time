@@ -20,6 +20,7 @@ import Avatar from "../../../components/common/Avatar";
 import PeopleByRole from "../../people/PeopleByRole";
 import ApprovalsQueue from "./ApprovalsQueue";
 import ExternalWorkersWidget from "./ExternalWorkersWidget";
+import InsightsWidget from "./InsightsWidget";
 import SitesMap from "./SitesMap";
 import styles from "./ManagerDashboard.module.css";
 import { auditLabel, DEFAULT_HIDDEN, DEFAULT_ORDER, iso, mergeOrder, periodRange, trend, type Period, type WidgetId } from "./dashboardLogic";
@@ -374,6 +375,15 @@ export default function ManagerDashboard() {
               </div>
             </div>
             <ScheduleChart data={chartData} mode={chartMode} t={t} language={i18n.language} />
+          </section>
+        );
+      case "insights":
+        return (
+          <section key={id} className={`${styles.widget} ${styles.span12}`} style={{ order: order.indexOf(id) }}>
+            <div className={styles.widgetHeader}>
+              <h2 className={styles.widgetTitle}>{t("manager.widgets.insights")}</h2>
+            </div>
+            <InsightsWidget from={range.from} to={range.to} />
           </section>
         );
       case "cost":

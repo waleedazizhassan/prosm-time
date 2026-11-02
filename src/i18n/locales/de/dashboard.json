@@ -337,7 +337,8 @@
       "chart": "Geplant vs. tatsächlich",
       "cost": "Zulagen und Kosten",
       "audit": "Aktionsprotokoll",
-      "external": "Externe Arbeitskräfte"
+      "external": "Externe Arbeitskräfte",
+      "insights": "Anwesenheitskennzahlen"
     },
     "sos": {
       "text": "SOS von {{name}} bei {{site}} seit {{time}}",
@@ -582,6 +583,16 @@
     "export": {
       "action": "Dashboard als PDF exportieren",
       "asOf": "Stand {{time}}"
+    },
+    "insights": {
+      "rate": "Anwesenheitsquote",
+      "rateHint": "{{attended}} von {{scheduled}} geplanten Schichten",
+      "repeatLate": "Oft verspätet",
+      "repeatOvertime": "Oft Überstunden",
+      "lateMeta": "{{days}} Tage · {{minutes}} Min.",
+      "overtimeMeta": "{{days}} Tage · {{minutes}} Min.",
+      "none": "Niemand in diesem Zeitraum.",
+      "unavailable": "Wählen Sie höchstens zwei Monate."
     }
   },
   "devices": {

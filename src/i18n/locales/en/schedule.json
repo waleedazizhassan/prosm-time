@@ -66,5 +66,14 @@
       "rejected": "Rejected",
       "cancelled": "Cancelled"
     }
+  },
+  "cost": {
+    "title": "Roster cost",
+    "subtitle": "The shifts shown, at each person's rate. Past the daily threshold counts as overtime.",
+    "regular": "Regular",
+    "overtime": "Expected overtime",
+    "total": "Total",
+    "hours": "{{hours}} h",
+    "unpriced": "{{count}} shifts have no pay rate and are not counted."
   }
 }

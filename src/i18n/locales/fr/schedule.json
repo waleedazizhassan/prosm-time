@@ -66,5 +66,14 @@
       "rejected": "Refusé",
       "cancelled": "Annulé"
     }
+  },
+  "cost": {
+    "title": "Coût du planning",
+    "subtitle": "Les postes affichés, au taux de chacun. Au-delà du seuil journalier : heures sup.",
+    "regular": "Normal",
+    "overtime": "Heures sup. prévues",
+    "total": "Total",
+    "hours": "{{hours}} h",
+    "unpriced": "{{count}} postes sans taux ne sont pas comptés."
   }
 }

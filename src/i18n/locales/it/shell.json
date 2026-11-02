@@ -202,6 +202,18 @@
       "title": "Accesso da un nuovo dispositivo",
       "body": "Il tuo account è stato aperto su un nuovo dispositivo: {{device}}. Se non sei stato tu, cambia la password.",
       "ownerBody": "{{name}} ha effettuato l'accesso da un nuovo dispositivo: {{device}}."
+    },
+    "noShow": {
+      "title": "Non timbrato per un turno",
+      "body": "{{name}} non ha timbrato per il turno delle {{time}} a {{site}}."
+    },
+    "overtimeSoon": {
+      "title": "Straordinario a breve",
+      "body": "{{name}} è ancora in servizio; lo straordinario inizia alle {{time}}."
+    },
+    "dailyDigest": {
+      "title": "Ieri in breve",
+      "body": "{{present}} hanno lavorato, {{noShows}} hanno saltato un turno. In attesa: {{leave}} ferie, {{exceptions}} eccezioni. In servizio ora: {{open}}."
     }
   },
   "items": {

@@ -219,5 +219,18 @@
       "overtimeAmount": "Montant heures et jours supplémentaires",
       "currency": "Devise"
     }
+  },
+  "budgets": {
+    "title": "Budgets des projets",
+    "subtitle": "Le coût de main-d'œuvre de chaque projet à ce jour, face à son budget.",
+    "project": "Projet",
+    "spent": "Main-d'œuvre à ce jour",
+    "budget": "Budget",
+    "used": "Utilisé",
+    "save": "Enregistrer",
+    "placeholder": "Définir",
+    "invalid": "Saisissez un nombre ou laissez vide.",
+    "failed": "Impossible d'enregistrer le budget.",
+    "unpriced": "Les heures des personnes sans taux ne sont pas comptées."
   }
 }

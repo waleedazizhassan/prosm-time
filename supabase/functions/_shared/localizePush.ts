@@ -191,6 +191,15 @@ export function localizePush(type: string, data: Data, language: string, fallbac
       result = pair("exitSitePrompt.title", "exitSitePrompt.body");
       break;
     // v2.3.48: the server's own clock-in/out reminders (they arrive with the app closed)
+    case "shift_no_show":
+      result = pair("noShow.title", "noShow.body", { name: data.name ?? "", time: data.time ?? "", site: data.siteName ?? "" });
+      break;
+    case "overtime_soon":
+      result = pair("overtimeSoon.title", "overtimeSoon.body", { name: data.name ?? "", time: data.time ?? "" });
+      break;
+    case "daily_digest":
+      result = pair("dailyDigest.title", "dailyDigest.body", { present: data.present ?? 0, noShows: data.noShows ?? 0, leave: data.leave ?? 0, exceptions: data.exceptions ?? 0, open: data.open ?? 0 });
+      break;
     case "clock_in_reminder":
       result = pair("clockInReminder.title", "clockInReminder.body", { time: data.time ?? "", site: data.siteName ?? "" });
       break;

@@ -239,6 +239,15 @@ export default function localizeNotification(notification: AppNotification, t: T
     case "exit_site_prompt":
       return { title: t("shell:notifications.exitSitePrompt.title"), body: t("shell:notifications.exitSitePrompt.body") };
     // v2.3.48: the server's clock-in/out reminders
+    case "shift_no_show":
+      return { title: t("shell:notifications.noShow.title"), body: t("shell:notifications.noShow.body", { name: String(data.name ?? ""), time: String(data.time ?? ""), site: String(data.siteName ?? "") }) };
+    case "overtime_soon":
+      return { title: t("shell:notifications.overtimeSoon.title"), body: t("shell:notifications.overtimeSoon.body", { name: String(data.name ?? ""), time: String(data.time ?? "") }) };
+    case "daily_digest":
+      return {
+        title: t("shell:notifications.dailyDigest.title"),
+        body: t("shell:notifications.dailyDigest.body", { present: Number(data.present ?? 0), noShows: Number(data.noShows ?? 0), leave: Number(data.leave ?? 0), exceptions: Number(data.exceptions ?? 0), open: Number(data.open ?? 0) }),
+      };
     case "clock_in_reminder":
       return { title: t("shell:notifications.clockInReminder.title"), body: t("shell:notifications.clockInReminder.body", { time: String(data.time ?? ""), site: String(data.siteName ?? "") }) };
     case "clock_out_reminder":

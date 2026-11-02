@@ -202,6 +202,18 @@
       "title": "Connexion depuis un nouvel appareil",
       "body": "Votre compte a été ouvert sur un nouvel appareil : {{device}}. Si ce n'était pas vous, changez votre mot de passe.",
       "ownerBody": "{{name}} s'est connecté depuis un nouvel appareil : {{device}}."
+    },
+    "noShow": {
+      "title": "Pas pointé pour un poste",
+      "body": "{{name}} n'a pas pointé pour le poste de {{time}} à {{site}}."
+    },
+    "overtimeSoon": {
+      "title": "Heures sup. bientôt",
+      "body": "{{name}} est toujours pointé ; les heures sup. commencent à {{time}}."
+    },
+    "dailyDigest": {
+      "title": "Hier en bref",
+      "body": "{{present}} ont travaillé, {{noShows}} ont manqué un poste. En attente : {{leave}} congés, {{exceptions}} exceptions. Pointés maintenant : {{open}}."
     }
   },
   "items": {

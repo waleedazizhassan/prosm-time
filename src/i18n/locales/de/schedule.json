@@ -66,5 +66,14 @@
       "rejected": "Abgelehnt",
       "cancelled": "Storniert"
     }
+  },
+  "cost": {
+    "title": "Kosten des Dienstplans",
+    "subtitle": "Die angezeigten Schichten zum Satz jeder Person. Über der Tagesgrenze zählt als Überstunden.",
+    "regular": "Regulär",
+    "overtime": "Erwartete Überstunden",
+    "total": "Gesamt",
+    "hours": "{{hours}} Std.",
+    "unpriced": "{{count}} Schichten ohne Lohnsatz sind nicht gezählt."
   }
 }

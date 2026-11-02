@@ -340,7 +340,8 @@
       "chart": "Previsto vs effettivo",
       "cost": "Indennità e costi",
       "audit": "Registro delle azioni",
-      "external": "Lavoratori esterni"
+      "external": "Lavoratori esterni",
+      "insights": "Indicatori di presenza"
     },
     "sos": {
       "text": "SOS da {{name}} a {{site}} dalle {{time}}",
@@ -586,6 +587,16 @@
     "export": {
       "action": "Esporta la dashboard in PDF",
       "asOf": "alle {{time}}"
+    },
+    "insights": {
+      "rate": "Tasso di presenza",
+      "rateHint": "{{attended}} su {{scheduled}} turni pianificati",
+      "repeatLate": "Spesso in ritardo",
+      "repeatOvertime": "Spesso in straordinario",
+      "lateMeta": "{{days}} giorni · {{minutes}} min",
+      "overtimeMeta": "{{days}} giorni · {{minutes}} min",
+      "none": "Nessuno in questo periodo.",
+      "unavailable": "Scegli al massimo due mesi."
     }
   },
   "devices": {

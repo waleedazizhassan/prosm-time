@@ -17,6 +17,7 @@ import { buildAttendanceLogPdf } from "../attendance/attendanceLogPdf";
 import { buildCombinedAllowanceSheetPdf } from "../allowances/allowancesPdf";
 import { buildGenericReportPdf } from "./genericReportPdf";
 import PayrollExportCard from "./PayrollExportCard";
+import ProjectBudgetsCard from "./ProjectBudgetsCard";
 
 import { useAuth } from "../../core/context/AuthContext";
 
@@ -551,6 +552,7 @@ export default function ReportsPage() {
       )}
 
       <PayrollExportCard startDate={startDate} endDate={endDate} />
+      {canSeePay ? <ProjectBudgetsCard /> : null}
 
       <Card title={t("recentExports.title")}>
         <Table

@@ -340,7 +340,8 @@
       "chart": "Prévu vs réel",
       "cost": "Indemnités et coût",
       "audit": "Journal des actions",
-      "external": "Travailleurs externes"
+      "external": "Travailleurs externes",
+      "insights": "Indicateurs de présence"
     },
     "sos": {
       "text": "SOS de {{name}} à {{site}} depuis {{time}}",
@@ -586,6 +587,16 @@
     "export": {
       "action": "Exporter le tableau de bord en PDF",
       "asOf": "à {{time}}"
+    },
+    "insights": {
+      "rate": "Taux de présence",
+      "rateHint": "{{attended}} sur {{scheduled}} postes planifiés",
+      "repeatLate": "Souvent en retard",
+      "repeatOvertime": "Souvent en heures sup.",
+      "lateMeta": "{{days}} jours · {{minutes}} min",
+      "overtimeMeta": "{{days}} jours · {{minutes}} min",
+      "none": "Personne sur cette période.",
+      "unavailable": "Choisissez deux mois au plus."
     }
   },
   "devices": {

@@ -66,5 +66,14 @@
       "rejected": "Rifiutato",
       "cancelled": "Annullato"
     }
+  },
+  "cost": {
+    "title": "Costo del turno",
+    "subtitle": "I turni mostrati, alla tariffa di ciascuno. Oltre la soglia giornaliera è straordinario.",
+    "regular": "Ordinario",
+    "overtime": "Straordinario previsto",
+    "total": "Totale",
+    "hours": "{{hours}} h",
+    "unpriced": "{{count}} turni senza tariffa non sono conteggiati."
   }
 }

@@ -219,5 +219,18 @@
       "overtimeAmount": "Importo straordinari e giorni extra",
       "currency": "Valuta"
     }
+  },
+  "budgets": {
+    "title": "Budget dei progetti",
+    "subtitle": "Il costo del lavoro di ogni progetto finora, rispetto al budget.",
+    "project": "Progetto",
+    "spent": "Lavoro finora",
+    "budget": "Budget",
+    "used": "Utilizzato",
+    "save": "Salva",
+    "placeholder": "Imposta",
+    "invalid": "Inserisci un numero o lascia vuoto.",
+    "failed": "Impossibile salvare il budget.",
+    "unpriced": "Le ore di chi non ha tariffa non sono nel costo."
   }
 }

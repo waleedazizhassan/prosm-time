@@ -202,6 +202,18 @@
       "title": "New device signed in",
       "body": "Your account was opened on a new device: {{device}}. If this was not you, change your password.",
       "ownerBody": "{{name}} signed in on a new device: {{device}}."
+    },
+    "noShow": {
+      "title": "Not clocked in for a shift",
+      "body": "{{name}} has not clocked in for the {{time}} shift at {{site}}."
+    },
+    "overtimeSoon": {
+      "title": "Overtime soon",
+      "body": "{{name}} is still clocked in; overtime starts at {{time}}."
+    },
+    "dailyDigest": {
+      "title": "Yesterday at a glance",
+      "body": "{{present}} worked, {{noShows}} missed a shift. Waiting: {{leave}} leave, {{exceptions}} exceptions. Clocked in now: {{open}}."
     }
   },
   "items": {
