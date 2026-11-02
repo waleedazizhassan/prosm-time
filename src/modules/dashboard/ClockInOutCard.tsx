@@ -35,7 +35,7 @@ import HintText from "../../components/common/HintText";
 import SessionReviewRepository from "../../core/repositories/SessionReviewRepository";
 import LongSessionPrompt from "./LongSessionPrompt";
 import ExitSitePrompt from "./ExitSitePrompt";
-import { nearestSite } from "./siteProximity";
+import { nearestSite, orderSitesByDistance } from "./siteProximity";
 
 const CHANGE_SITE_NO_SITE_VALUE = "__no_site__";
 
@@ -103,6 +103,18 @@ interface AttendanceView {
 // the actions queued on this device applied on top, in order (stopping at one the server refused).
 // A queued clock in / break start gets a local id "q:<queue id>", resolved to the server's id when
 // it is sent - so a break or a clock out can follow an offline clock in before any of it is sent.
+// Owner 2026-11-02: kept so a linked employee offline still starts on their own site.
+const assignedSitesKey = (userId: string | undefined) => `prosm-time-assigned-sites:${userId ?? ""}`;
+
+function readAssignedSites(userId: string | undefined): Set<string> | null {
+  try {
+    const stored = localStorage.getItem(assignedSitesKey(userId));
+    return stored ? new Set(JSON.parse(stored) as string[]) : null;
+  } catch {
+    return null;
+  }
+}
+
 function applyQueuedActions(base: AttendanceView, items: OfflineQueueItem[], sites: Site[]): AttendanceView {
   const view = { ...base };
   const endBreakAt = (at: string) => {
@@ -181,6 +193,7 @@ export default function ClockInOutCard() {
   const [sites, setSites] = useState<Site[]>(initialCache?.sites ?? []);
   const [projects, setProjects] = useState<Project[]>([]);
   const [siteId, setSiteId] = useState("");
+  const [assignedSiteIds, setAssignedSiteIds] = useState<Set<string> | null>(() => readAssignedSites(profile?.id));
   const [manualLocationLabel, setManualLocationLabel] = useState("");
   const [projectId, setProjectId] = useState("");
   const [cameraFor, setCameraFor] = useState<"clockIn" | "clockOut" | null>(null);
@@ -196,10 +209,13 @@ export default function ClockInOutCard() {
     }
   });
   const [locationBlocked, setLocationBlocked] = useState(false);
+  const [suggestClockIn, setSuggestClockIn] = useState(false);
+  const [suggestionDismissed, setSuggestionDismissed] = useState(false);
   useEffect(() => {
     void OrganizationRepository.getCurrentOrganization().then((result) => {
       if (!result.success || !result.data) return;
       setRequireGps(result.data.requireGps);
+      setSuggestClockIn(result.data.suggestClockIn);
       try {
         localStorage.setItem(REQUIRE_GPS_KEY, result.data.requireGps ? "1" : "0");
       } catch {
@@ -265,9 +281,10 @@ export default function ClockInOutCard() {
   const siteTouchedRef = useRef(false);
   useEffect(() => {
     if (!currentLocation || session || siteTouchedRef.current) return;
-    const here = nearestSite(sites.filter((site) => site.allowedRadiusMeters > 0), currentLocation.latitude, currentLocation.longitude, currentLocation.accuracyMeters);
+    // Owner 2026-11-02: only among the person's own sites. Someone linked to no site starts on "no site" and picks from the list.
+    const here = nearestSite(sites.filter((site) => site.allowedRadiusMeters > 0 && assignedSiteIds?.has(site.id)), currentLocation.latitude, currentLocation.longitude, currentLocation.accuracyMeters);
     if (here?.inside) setSiteId(here.siteId);
-  }, [currentLocation, sites, session]);
+  }, [currentLocation, sites, session, assignedSiteIds]);
   const [lastCompletedSession, setLastCompletedSession] = useState<AttendanceSession | null>(initialCache?.lastCompletedSession ?? null);
   // § live UX review, user-directed - a real confirmation screen shown
   // right before every clock-in/out actually submits (photo if any,
@@ -306,10 +323,11 @@ export default function ClockInOutCard() {
     async (silent = false) => {
       if (!profile) return;
       if (!silent) setLoading(true);
-      const [sessionResult, sitesResult, presenceResult] = await Promise.all([
+      const [sessionResult, sitesResult, presenceResult, ownSitesResult] = await Promise.all([
         AttendanceRepository.getCurrentSession(profile.id),
         SiteRepository.listClockInSites(),
         PresenceRepository.getActiveSession(profile.id),
+        SiteRepository.listAssignedSites(profile.id),
       ]);
       // Offline (owner 2026-09-29): when the server cannot be reached, keep the last known state -
       // the worker's session, sites and break - instead of replacing it with empty values, so a
@@ -324,7 +342,16 @@ export default function ClockInOutCard() {
       setPresenceSession(activePresence);
       const assignedSites = sitesResult.success ? sitesResult.data ?? [] : [];
       setSites(assignedSites);
-      setSiteId((current) => current || assignedSites[0]?.id || "");
+      const ownSiteIds = ownSitesResult.success ? new Set((ownSitesResult.data ?? []).map((site) => site.id)) : readAssignedSites(profile.id);
+      if (ownSitesResult.success) {
+        setAssignedSiteIds(ownSiteIds);
+        try {
+          localStorage.setItem(assignedSitesKey(profile.id), JSON.stringify([...(ownSiteIds ?? [])]));
+        } catch {
+          // a convenience only
+        }
+      }
+      setSiteId((current) => current || assignedSites.find((site) => ownSiteIds?.has(site.id))?.id || "");
 
       let resolvedCurrentSite: Site | null = null;
       let resolvedActiveBreakId: string | null = null;
@@ -765,13 +792,14 @@ export default function ClockInOutCard() {
     }
   };
 
-  const handleClockInTap = () => {
-    if (!siteId && !manualLocationLabel.trim()) {
+  // Plan stage 8.4: a "yes" passes the site it was asked about, as its selection reaches this render only after the tap.
+  const handleClockInTap = (suggested?: Site) => {
+    if (!suggested && !siteId && !manualLocationLabel.trim()) {
       setError(t("attendance.manualLocationRequired"));
       return;
     }
     setError("");
-    if (clockInCameraRequired) {
+    if (suggested ? suggested.cameraRequired : clockInCameraRequired) {
       setCameraFor("clockIn");
       return;
     }
@@ -1017,9 +1045,9 @@ export default function ClockInOutCard() {
   };
 
   const statusKey = view.activeBreakId ? "onBreak" : view.session ? "clockedIn" : "notClockedIn";
-  const changeSiteOptions = sites
-    .filter((site) => site.id !== view.currentSite?.id)
-    .map((site) => ({ value: site.id, label: nearbySiteIds.has(site.id) ? t("attendance.nearbySiteOption", { name: site.name }) : site.name }));
+  // Owner 2026-11-02: by distance, the site the person stands in first and marked.
+  const siteOptions = orderSitesByDistance(sites, currentLocation).map(({ site, inside }) => ({ value: site.id, label: inside || nearbySiteIds.has(site.id) ? t("attendance.nearbySiteOption", { name: site.name }) : site.name }));
+  const changeSiteOptions = siteOptions.filter((option) => option.value !== view.currentSite?.id);
   // v2.3.43 step 13 (item 15): where the person stands - inside a site (green
   // circle), or how far outside the nearest one (orange circle).
   const proximity =
@@ -1175,7 +1203,7 @@ export default function ClockInOutCard() {
             disabled={submitting}
             options={[
               { value: "", label: t("attendance.noSiteOption") },
-              ...sites.map((site) => ({ value: site.id, label: nearbySiteIds.has(site.id) ? t("attendance.nearbySiteOption", { name: site.name }) : site.name })),
+              ...siteOptions,
             ]}
           />
           {!siteId ? (
@@ -1199,7 +1227,30 @@ export default function ClockInOutCard() {
               options={[{ value: "", label: t("attendance.noProject") }, ...projects.map((project) => ({ value: project.id, label: project.name }))]}
             />
           ) : null}
-          <Button fullWidth onClick={handleClockInTap} loading={submitting} disabled={!siteId && !manualLocationLabel.trim()}>
+          {/* Plan stage 8.4: a question only. Nothing is recorded until the person agrees and completes the clock-in. */}
+          {suggestClockIn && !suggestionDismissed && proximity?.inside && proximitySite ? (
+            <div role="alert" style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-strong)" }}>
+              <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-sm)" }}>{t("attendance.suggestSite", { site: proximitySite.name })}</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    siteTouchedRef.current = true;
+                    setManualLocationLabel("");
+                    setSuggestionDismissed(true);
+                    setSiteId(proximitySite.id);
+                    handleClockInTap(proximitySite);
+                  }}
+                >
+                  {t("attendance.suggestSiteAction")}
+                </Button>
+                <Button size="sm" variant="ghost" onClick={() => setSuggestionDismissed(true)}>
+                  {t("attendance.suggestSiteDismiss")}
+                </Button>
+              </div>
+            </div>
+          ) : null}
+          <Button fullWidth onClick={() => handleClockInTap()} loading={submitting} disabled={!siteId && !manualLocationLabel.trim()}>
             {t("attendance.clockInAction")}
           </Button>
         </>
@@ -1290,7 +1341,12 @@ export default function ClockInOutCard() {
 
       <Modal isOpen={locationBlocked} onClose={() => setLocationBlocked(false)} title={t("attendance.locationRequired.title")}>
         <p style={{ margin: "0 0 var(--space-4)", fontSize: "var(--font-sm)", lineHeight: 1.7 }}>{t("attendance.locationRequired.body")}</p>
-        <Button onClick={() => setLocationBlocked(false)}>{t("attendance.locationRequired.close")}</Button>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
+          <Button onClick={() => setLocationBlocked(false)}>{t("attendance.locationRequired.close")}</Button>
+          <Button variant="ghost" onClick={() => void BackgroundLocationService.openSettings()}>
+            {t("attendance.locationRequired.openSettings")}
+          </Button>
+        </div>
       </Modal>
       <Modal
         isOpen={changeSiteModalOpen}

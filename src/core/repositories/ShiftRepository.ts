@@ -45,6 +45,30 @@ export interface SiteShiftRow {
   cancelledReason: string | null;
 }
 
+export interface ShiftSwap {
+  id: string;
+  status: "pending" | "approved" | "rejected" | "cancelled";
+  reason: string | null;
+  shiftDate: string;
+  startTime: string;
+  endTime: string;
+  siteName: string;
+  fromName: string | null;
+  toName: string | null;
+  canDecide: boolean;
+}
+
+export interface SwapColleague {
+  userId: string;
+  fullName: string;
+}
+
+export interface ShiftActual {
+  assignmentId: string;
+  firstIn: string;
+  lastOut: string | null;
+}
+
 function createSuccess<T>(data: T | null = null): ServiceResult<T> {
   return { success: true, message: null, data };
 }
@@ -152,6 +176,42 @@ class ShiftRepository {
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Schedule service unavailable.");
     }
+  }
+
+  async listSwaps(): Promise<ShiftSwap[]> {
+    const { data } = await this.client.rpc("list_prosm_time_shift_swaps");
+    return ((data ?? []) as Record<string, never>[]).map((row) => ({
+      id: row.id,
+      status: row.status,
+      reason: row.reason,
+      shiftDate: row.shift_date,
+      startTime: row.start_time,
+      endTime: row.end_time,
+      siteName: row.site_name,
+      fromName: row.from_name,
+      toName: row.to_name,
+      canDecide: row.can_decide,
+    }));
+  }
+
+  async listSwapColleagues(assignmentId: string): Promise<SwapColleague[]> {
+    const { data } = await this.client.rpc("list_prosm_time_swap_colleagues", { p_assignment_id: assignmentId });
+    return ((data ?? []) as { user_id: string; full_name: string }[]).map((row) => ({ userId: row.user_id, fullName: row.full_name }));
+  }
+
+  async requestSwap(assignmentId: string, toUserId: string, reason: string): Promise<boolean> {
+    const { error } = await this.client.rpc("request_prosm_time_shift_swap", { p_assignment_id: assignmentId, p_to_user_id: toUserId, p_reason: reason.trim() || null });
+    return !error;
+  }
+
+  async decideSwap(id: string, approve: boolean): Promise<boolean> {
+    const { error } = await this.client.rpc("decide_prosm_time_shift_swap", { p_id: id, p_approve: approve });
+    return !error;
+  }
+
+  async listActuals(siteId: string, startDate: string, endDate: string): Promise<ShiftActual[]> {
+    const { data } = await this.client.rpc("list_prosm_time_shift_actuals", { p_site_id: siteId, p_start_date: startDate, p_end_date: endDate });
+    return ((data ?? []) as { assignment_id: string; first_in: string; last_out: string | null }[]).map((row) => ({ assignmentId: row.assignment_id, firstIn: row.first_in, lastOut: row.last_out }));
   }
 
   // Audit 1.2 - "My upcoming shifts" must filter on the caller's own

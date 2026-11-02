@@ -18,7 +18,8 @@
     "locationViolations": "مخالفات الموقع",
     "sos": "الطوارئ",
     "dashboard": "لوحة التحكم",
-    "auditLog": "سجل الإجراءات"
+    "auditLog": "سجل الإجراءات",
+    "laborCost": "تكلفة العمالة"
   },
   "timesheetsHint": "كشوف الدوام تُنشأ وتُعتمد لكل موظف وفترة على حدة، مش بنطاق تاريخ.",
   "timesheetsLink": "الذهاب إلى كشوف الدوام",
@@ -131,6 +132,14 @@
       "status": "الحالة",
       "active": "نشط",
       "resolved": "تم الحل"
+    },
+    "laborCost": {
+      "project": "المشروع",
+      "site": "الموقع",
+      "name": "الموظف",
+      "hours": "الساعات",
+      "cost": "التكلفة",
+      "noRate": "لا يوجد أجر"
     }
   },
   "values": {
@@ -179,5 +188,36 @@
     "createdAtColumn": "تاريخ التصدير",
     "downloadAction": "تحميل"
   },
-  "ownExportsHint": "سجل حضورك وبدلاتك وكشوف دوامك بتتنزّل وتتطبع من صفحاتها. وكل PDF بتصدّره بيتحفظ هنا، فتقدر تنزّله تاني في أي وقت."
+  "ownExportsHint": "سجل حضورك وبدلاتك وكشوف دوامك بتتنزّل وتتطبع من صفحاتها. وكل PDF بتصدّره بيتحفظ هنا، فتقدر تنزّله تاني في أي وقت.",
+  "payroll": {
+    "title": "تصدير المرتبات",
+    "subtitle": "صف لكل شخص عن الفترة، لمحاسب المؤسسة. يجمع ما في التطبيق ولا يحسب مرتبات.",
+    "allColumns": "كل الأعمدة",
+    "template": "القالب",
+    "templateName": "اسم قالب جديد",
+    "saveTemplate": "حفظ القالب",
+    "deleteTemplate": "حذف القالب",
+    "templateFailed": "تعذر حفظ هذا القالب.",
+    "excel": "تنزيل Excel",
+    "csv": "تنزيل CSV",
+    "periodTooLong": "اختر فترة لا تزيد عن 3 أشهر.",
+    "columns": {
+      "name": "الاسم",
+      "email": "البريد",
+      "daysWorked": "أيام العمل",
+      "workedHours": "ساعات العمل",
+      "overtimeHours": "ساعات الإضافي",
+      "weightedOvertimeHours": "ساعات الإضافي بعد المعاملات",
+      "lateMinutes": "دقائق التأخير",
+      "earlyLeaveMinutes": "دقائق الانصراف المبكر",
+      "deductionMinutes": "دقائق الخصم",
+      "absenceDays": "أيام الغياب",
+      "paidLeaveDays": "أيام إجازة مدفوعة",
+      "unpaidLeaveDays": "أيام إجازة بدون أجر",
+      "leaveDeduction": "خصم الإجازة بدون أجر",
+      "allowances": "البدلات",
+      "overtimeAmount": "مبلغ الإضافي والأيام الزائدة",
+      "currency": "العملة"
+    }
+  }
 }

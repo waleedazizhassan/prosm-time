@@ -4,6 +4,9 @@ import { useTranslation } from "react-i18next";
 import LicenseRepository, { type TrialStatus } from "../../core/repositories/LicenseRepository";
 import { useAuth } from "../../core/context/AuthContext";
 import { formatDateOnly } from "../../core/utils/formatDate";
+import { requireSupabaseClient } from "../../core/api/supabaseClient";
+import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
+import { toCsv, type Cell } from "../../core/utils/spreadsheet";
 
 import AuthLayout from "../../components/common/AuthLayout";
 import Input from "../../components/common/Input";
@@ -18,7 +21,7 @@ export default function TrialEndedPage({ status, onReopened }: { status: TrialSt
   const { t, i18n } = useTranslation(["auth", "common"]);
   const { signOut } = useAuth();
   const [code, setCode] = useState("");
-  const [busy, setBusy] = useState<"" | "code" | "check">("");
+  const [busy, setBusy] = useState<"" | "code" | "check" | "export">("");
   const [error, setError] = useState("");
   const [note, setNote] = useState("");
 
@@ -45,6 +48,23 @@ export default function TrialEndedPage({ status, onReopened }: { status: TrialSt
     setBusy("");
     if (after.success && after.data && !after.data.locked) onReopened();
     else setNote(t("auth:trial.stillEnded"));
+  };
+
+  // Plan stage 3.3: the organisation is locked, its record is still the owner's to read.
+  const exportAttendance = async () => {
+    setBusy("export");
+    setError("");
+    const { data, error: failed } = await requireSupabaseClient().rpc("export_prosm_time_locked_attendance");
+    if (failed) setError(t("auth:trial.exportFailed"));
+    else {
+      const rows = (data ?? []) as { employee: string; site: string | null; clock_in_at: string; clock_out_at: string | null }[];
+      const table: Cell[][] = [
+        [t("auth:trial.exportEmployee"), t("auth:trial.exportSite"), t("auth:trial.exportIn"), t("auth:trial.exportOut")],
+        ...rows.map((row) => [row.employee, row.site ?? "", row.clock_in_at, row.clock_out_at ?? ""]),
+      ];
+      await saveGeneratedFile(`${t("auth:trial.exportFile")}.csv`, new Blob([toCsv(table)], { type: "text/csv;charset=utf-8" }));
+    }
+    setBusy("");
   };
 
   return (
@@ -75,6 +95,11 @@ export default function TrialEndedPage({ status, onReopened }: { status: TrialSt
         <Button variant="ghost" loading={busy === "check"} disabled={!!busy} onClick={checkAgain}>
           {t("auth:trial.checkAgain")}
         </Button>
+        {status.isOwner ? (
+          <Button variant="ghost" loading={busy === "export"} disabled={!!busy} onClick={exportAttendance}>
+            {t("auth:trial.exportAction")}
+          </Button>
+        ) : null}
         <Button variant="ghost" onClick={() => void signOut()}>
           {t("auth:trial.signOut")}
         </Button>

@@ -82,6 +82,8 @@
     "field": {
       "minOvertimeMinutes": "الإضافي يتحسب بعد (دقيقة)",
       "minLateMinutes": "التأخير يتحسب بعد (دقيقة)",
+      "minEarlyLeaveMinutes": "يُحتسب الانصراف المبكر بعد (دقيقة)",
+      "roundMinutes": "تقريب وقت عمل اليوم إلى (دقيقة)",
       "maxDailyOvertimeMinutes": "أقصى إضافي في اليوم (دقيقة)",
       "multiplierNormal": "المعامل - يوم عادي",
       "multiplierNight": "المعامل - ليلي",
@@ -93,6 +95,8 @@
     "placeholder": {
       "minOvertimeMinutes": "0",
       "minLateMinutes": "0",
+      "minEarlyLeaveMinutes": "0",
+      "roundMinutes": "1",
       "maxDailyOvertimeMinutes": "بدون حد",
       "multiplierNormal": "1",
       "multiplierNight": "1",
@@ -166,5 +170,11 @@
     "save": "حفظ",
     "saved": "تم الحفظ.",
     "saveFailed": "تعذر الحفظ."
+  },
+  "clockSuggestion": {
+    "title": "السؤال عند فتح التطبيق داخل موقع",
+    "subtitle": "عندما يفتح الشخص التطبيق داخل موقع، يسأله هل يسجّل حضوره. لا يُسجَّل شيء دون موافقته، ثم يكمل التسجيل المعتاد، ولا يُستخدم الموقع في الخلفية.",
+    "label": "سؤال الشخص عن تسجيل الحضور",
+    "failed": "تعذر حفظ هذا الإعداد."
   }
 }

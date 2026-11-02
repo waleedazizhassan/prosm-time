@@ -8,6 +8,8 @@ export interface ServiceResult<T = null> {
   data: T | null;
 }
 
+const SESSION_PAGE = 1000;
+
 export interface AttendanceEventLocation {
   latitude: number;
   longitude: number;
@@ -262,10 +264,13 @@ class ManagerRepository {
   // shaping are otherwise identical.
   private async fetchAttendanceRows(fromIso: string, toIso?: string, includeOpenSessions = false): Promise<ServiceResult<TodayAttendanceRow[]>> {
     try {
-      let sessionsQuery = this.client
+      const sessionsQuery = (first: number) => {
+        let query = this.client
         .from("attendance_sessions")
         .select("id, user_id, status, clock_in_at, clock_out_at, manual_location_label, early_leave_reason, users!attendance_sessions_user_id_fkey(full_name), sites!attendance_sessions_site_id_fkey(name)")
-        .order("clock_in_at", { ascending: false });
+        .order("clock_in_at", { ascending: false })
+        .order("id")
+        .range(first, first + SESSION_PAGE - 1);
 
       // Real bug fix - listTodayAttendance's own "Currently present" KPI
       // used a plain clock_in_at >= startOfDay filter, so anyone who
@@ -278,18 +283,24 @@ class ManagerRepository {
       // happened - only listAttendanceHistory's own caller-picked range
       // (includeOpenSessions left false) should stay a strict date filter.
       if (includeOpenSessions) {
-        sessionsQuery = sessionsQuery.or(`clock_in_at.gte.${fromIso},status.eq.clocked_in`);
+        query = query.or(`clock_in_at.gte.${fromIso},status.eq.clocked_in`);
       } else {
-        sessionsQuery = sessionsQuery.gte("clock_in_at", fromIso);
+        query = query.gte("clock_in_at", fromIso);
       }
-      if (toIso) sessionsQuery = sessionsQuery.lte("clock_in_at", toIso);
+      if (toIso) query = query.lte("clock_in_at", toIso);
+      return query;
+      };
 
-      const [sessionsResult, presenceResult] = await Promise.all([
-        sessionsQuery,
-        this.client.from("presence_sessions").select("attendance_session_id").eq("status", "active"),
-      ]);
-
-      if (sessionsResult.error) return createError(sessionsResult.error.message);
+      // Plan stage 4.2: the server returns 1000 rows at most; a long period is read page by page, or totals and exports would stop short.
+      const sessionRows: unknown[] = [];
+      for (let first = 0; ; first += SESSION_PAGE) {
+        const page = await sessionsQuery(first);
+        if (page.error) return createError(page.error.message);
+        sessionRows.push(...(page.data ?? []));
+        if ((page.data ?? []).length < SESSION_PAGE) break;
+      }
+      const sessionsResult = { data: sessionRows };
+      const presenceResult = await this.client.from("presence_sessions").select("attendance_session_id").eq("status", "active");
 
       const activePresenceIds = new Set((presenceResult.data ?? []).map((row: { attendance_session_id: string }) => row.attendance_session_id));
 

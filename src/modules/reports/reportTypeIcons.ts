@@ -20,6 +20,7 @@ import {
 // would be better." One icon per report type, purely presentational -
 // no change to what any report type actually does or returns.
 export const REPORT_TYPE_ICONS: Record<string, LucideIcon> = {
+  laborCost: Wallet,
   attendance: Clock,
   allowances: Wallet,
   timesheets: FileText,

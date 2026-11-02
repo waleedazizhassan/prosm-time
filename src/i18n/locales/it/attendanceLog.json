@@ -59,5 +59,11 @@
   "view": {
     "month": "Vista mensile",
     "list": "Vista elenco"
+  },
+  "group": {
+    "label": "Raggruppa per",
+    "none": "Nessun gruppo",
+    "employee": "Dipendente",
+    "day": "Giorno"
   }
 }

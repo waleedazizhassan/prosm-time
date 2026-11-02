@@ -32,3 +32,20 @@ export function nearestSite(sites: ProximitySite[], latitude: number, longitude:
   }
   return best;
 }
+
+// Owner 2026-11-02: the clock-in list by distance: the site the person stands in
+// first, then the nearest. A site with no position, or no reading yet, keeps its
+// place at the end, in the order it came.
+export function orderSitesByDistance<T extends { id: string; latitude: number | null; longitude: number | null; allowedRadiusMeters: number; gpsAccuracyToleranceMeters?: number }>(
+  sites: T[],
+  position: { latitude: number; longitude: number; accuracyMeters: number | null } | null,
+): { site: T; inside: boolean }[] {
+  if (!position) return sites.map((site) => ({ site, inside: false }));
+  const measured = sites.map((site) => {
+    if (site.latitude === null || site.longitude === null) return { site, inside: false, distance: Infinity };
+    const distance = haversineDistanceMeters(position.latitude, position.longitude, site.latitude, site.longitude);
+    const slack = Math.min(position.accuracyMeters ?? 0, site.gpsAccuracyToleranceMeters ?? 50);
+    return { site, inside: site.allowedRadiusMeters > 0 && distance <= site.allowedRadiusMeters + slack, distance };
+  });
+  return measured.sort((a, b) => Number(b.inside) - Number(a.inside) || a.distance - b.distance).map(({ site, inside }) => ({ site, inside }));
+}

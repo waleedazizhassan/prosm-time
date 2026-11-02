@@ -197,6 +197,11 @@
     "accountDeleted": {
       "title": "Un employé a supprimé son compte",
       "body": "{{name}} a supprimé son compte. Ses pointages et feuilles de temps sont conservés sous « Utilisateur supprimé »."
+    },
+    "newDevice": {
+      "title": "Connexion depuis un nouvel appareil",
+      "body": "Votre compte a été ouvert sur un nouvel appareil : {{device}}. Si ce n'était pas vous, changez votre mot de passe.",
+      "ownerBody": "{{name}} s'est connecté depuis un nouvel appareil : {{device}}."
     }
   },
   "items": {

@@ -209,8 +209,12 @@
     "locationRequired": {
       "title": "La posizione è richiesta per timbrare",
       "body": "Non è possibile registrare senza una posizione dal telefono. Consenti la posizione all'app nelle impostazioni, attiva il GPS e riprova. Questa lettura non richiede Internet.",
-      "close": "Riprova"
-    }
+      "close": "Riprova",
+      "openSettings": "Apri impostazioni"
+    },
+    "suggestSite": "Sei a {{site}}. Timbrare ora?",
+    "suggestSiteAction": "Sì, timbra",
+    "suggestSiteDismiss": "Non ora"
   },
   "kioskPin": {
     "title": "PIN chiosco",

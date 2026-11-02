@@ -206,8 +206,12 @@
     "locationRequired": {
       "title": "Standort zum Einstempeln erforderlich",
       "body": "Ohne Standort von Ihrem Telefon ist keine Erfassung möglich. Erlauben Sie den Standort für die App in den Telefoneinstellungen, schalten Sie GPS ein und versuchen Sie es erneut. Dafür ist kein Internet nötig.",
-      "close": "Erneut versuchen"
-    }
+      "close": "Erneut versuchen",
+      "openSettings": "Einstellungen öffnen"
+    },
+    "suggestSite": "Sie sind bei {{site}}. Jetzt einstempeln?",
+    "suggestSiteAction": "Ja, einstempeln",
+    "suggestSiteDismiss": "Nicht jetzt"
   },
   "kioskPin": {
     "title": "Kiosk-PIN",

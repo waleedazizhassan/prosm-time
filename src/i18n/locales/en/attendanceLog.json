@@ -59,5 +59,11 @@
   "view": {
     "month": "Month view",
     "list": "List view"
+  },
+  "group": {
+    "label": "Group by",
+    "none": "No grouping",
+    "employee": "Employee",
+    "day": "Day"
   }
 }

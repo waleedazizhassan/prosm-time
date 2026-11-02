@@ -197,6 +197,11 @@
     "accountDeleted": {
       "title": "Un dipendente ha eliminato il suo account",
       "body": "{{name}} ha eliminato il suo account. Presenze e fogli ore restano come \"Utente eliminato\"."
+    },
+    "newDevice": {
+      "title": "Accesso da un nuovo dispositivo",
+      "body": "Il tuo account è stato aperto su un nuovo dispositivo: {{device}}. Se non sei stato tu, cambia la password.",
+      "ownerBody": "{{name}} ha effettuato l'accesso da un nuovo dispositivo: {{device}}."
     }
   },
   "items": {

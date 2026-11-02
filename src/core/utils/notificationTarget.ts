@@ -37,6 +37,7 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
     case "session_auto_closed":
       return viewer.isOwner || ref?.kind === "manager" ? "/manager" : "/dashboard";
     case "long_session_check":
+    case "new_device_login":
     case "exit_site_prompt":
     case "clock_in_reminder":
     case "clock_out_reminder":

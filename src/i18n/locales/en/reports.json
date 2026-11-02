@@ -18,7 +18,8 @@
     "locationViolations": "Location Violations",
     "sos": "Emergency (SOS)",
     "dashboard": "Dashboard",
-    "auditLog": "Action log"
+    "auditLog": "Action log",
+    "laborCost": "Labour cost"
   },
   "timesheetsHint": "Timesheets are generated and approved per employee and period, not by date range.",
   "timesheetsLink": "Go to Timesheets",
@@ -131,6 +132,14 @@
       "status": "Status",
       "active": "Active",
       "resolved": "Resolved"
+    },
+    "laborCost": {
+      "project": "Project",
+      "site": "Site",
+      "name": "Employee",
+      "hours": "Hours",
+      "cost": "Cost",
+      "noRate": "No rate"
     }
   },
   "values": {
@@ -179,5 +188,36 @@
     "createdAtColumn": "Exported",
     "downloadAction": "Download"
   },
-  "ownExportsHint": "Your attendance record, allowances and timesheets are downloaded and printed from their own pages. Every PDF you export is kept here, so you can download it again any time."
+  "ownExportsHint": "Your attendance record, allowances and timesheets are downloaded and printed from their own pages. Every PDF you export is kept here, so you can download it again any time.",
+  "payroll": {
+    "title": "Payroll export",
+    "subtitle": "One row per person for the period, for your accountant. It adds up what the app holds and calculates no salary.",
+    "allColumns": "All columns",
+    "template": "Template",
+    "templateName": "New template name",
+    "saveTemplate": "Save template",
+    "deleteTemplate": "Delete template",
+    "templateFailed": "Unable to save this template.",
+    "excel": "Download Excel",
+    "csv": "Download CSV",
+    "periodTooLong": "Choose a period of 3 months at most.",
+    "columns": {
+      "name": "Name",
+      "email": "Email",
+      "daysWorked": "Days worked",
+      "workedHours": "Worked hours",
+      "overtimeHours": "Overtime hours",
+      "weightedOvertimeHours": "Overtime hours after multipliers",
+      "lateMinutes": "Late minutes",
+      "earlyLeaveMinutes": "Early leave minutes",
+      "deductionMinutes": "Deduction minutes",
+      "absenceDays": "Absence days",
+      "paidLeaveDays": "Paid leave days",
+      "unpaidLeaveDays": "Unpaid leave days",
+      "leaveDeduction": "Unpaid leave deduction",
+      "allowances": "Allowances",
+      "overtimeAmount": "Overtime and extra days amount",
+      "currency": "Currency"
+    }
+  }
 }

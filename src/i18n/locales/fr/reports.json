@@ -18,7 +18,8 @@
     "locationViolations": "Violations de localisation",
     "sos": "Urgence (SOS)",
     "dashboard": "Tableau de bord",
-    "auditLog": "Journal des actions"
+    "auditLog": "Journal des actions",
+    "laborCost": "Coût de main-d'œuvre"
   },
   "timesheetsHint": "Les feuilles de temps sont générées et approuvées par employé et par période, pas par plage de dates.",
   "timesheetsLink": "Aller aux feuilles de temps",
@@ -131,6 +132,14 @@
       "status": "Statut",
       "active": "Actif",
       "resolved": "Résolu"
+    },
+    "laborCost": {
+      "project": "Projet",
+      "site": "Site",
+      "name": "Employé",
+      "hours": "Heures",
+      "cost": "Coût",
+      "noRate": "Sans taux"
     }
   },
   "values": {
@@ -179,5 +188,36 @@
     "createdAtColumn": "Exporté le",
     "downloadAction": "Télécharger"
   },
-  "ownExportsHint": "Vos pointages, indemnités et feuilles de temps se téléchargent et s'impriment depuis leurs pages. Chaque PDF exporté est conservé ici pour être retéléchargé à tout moment."
+  "ownExportsHint": "Vos pointages, indemnités et feuilles de temps se téléchargent et s'impriment depuis leurs pages. Chaque PDF exporté est conservé ici pour être retéléchargé à tout moment.",
+  "payroll": {
+    "title": "Export paie",
+    "subtitle": "Une ligne par personne pour la période, pour votre comptable. Il additionne les données de l'application et ne calcule aucun salaire.",
+    "allColumns": "Toutes les colonnes",
+    "template": "Modèle",
+    "templateName": "Nom du nouveau modèle",
+    "saveTemplate": "Enregistrer le modèle",
+    "deleteTemplate": "Supprimer le modèle",
+    "templateFailed": "Impossible d'enregistrer ce modèle.",
+    "excel": "Télécharger Excel",
+    "csv": "Télécharger CSV",
+    "periodTooLong": "Choisissez une période de 3 mois maximum.",
+    "columns": {
+      "name": "Nom",
+      "email": "E-mail",
+      "daysWorked": "Jours travaillés",
+      "workedHours": "Heures travaillées",
+      "overtimeHours": "Heures supplémentaires",
+      "weightedOvertimeHours": "Heures supplémentaires majorées",
+      "lateMinutes": "Minutes de retard",
+      "earlyLeaveMinutes": "Minutes de départ anticipé",
+      "deductionMinutes": "Minutes déduites",
+      "absenceDays": "Jours d'absence",
+      "paidLeaveDays": "Jours de congé payé",
+      "unpaidLeaveDays": "Jours de congé sans solde",
+      "leaveDeduction": "Retenue congé sans solde",
+      "allowances": "Indemnités",
+      "overtimeAmount": "Montant heures et jours supplémentaires",
+      "currency": "Devise"
+    }
+  }
 }

@@ -82,6 +82,8 @@
     "field": {
       "minOvertimeMinutes": "Straordinari dopo (minuti)",
       "minLateMinutes": "Ritardo dopo (minuti)",
+      "minEarlyLeaveMinutes": "L'uscita anticipata conta dopo (minuti)",
+      "roundMinutes": "Arrotonda il tempo lavorato del giorno a (minuti)",
       "maxDailyOvertimeMinutes": "Massimo al giorno (minuti)",
       "multiplierNormal": "Coefficiente - giorno normale",
       "multiplierNight": "Coefficiente - notte",
@@ -93,6 +95,8 @@
     "placeholder": {
       "minOvertimeMinutes": "0",
       "minLateMinutes": "0",
+      "minEarlyLeaveMinutes": "0",
+      "roundMinutes": "1",
       "maxDailyOvertimeMinutes": "nessun limite",
       "multiplierNormal": "1",
       "multiplierNight": "1",
@@ -166,5 +170,11 @@
     "save": "Salva",
     "saved": "Salvato.",
     "saveFailed": "Impossibile salvare."
+  },
+  "clockSuggestion": {
+    "title": "Chiedi all'apertura in una sede",
+    "subtitle": "Quando una persona apre l'app in una sede, le viene chiesto se timbrare. Non viene registrato nulla senza risposta, segue la timbratura normale e non si usa la posizione in background.",
+    "label": "Chiedi alla persona di timbrare",
+    "failed": "Impossibile salvare questa impostazione."
   }
 }

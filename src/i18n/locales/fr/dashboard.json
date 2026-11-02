@@ -209,8 +209,12 @@
     "locationRequired": {
       "title": "La position est requise pour pointer",
       "body": "Impossible d'enregistrer sans une position de votre téléphone. Autorisez la position pour l'application dans les réglages, activez la localisation (GPS), puis réessayez. Cette lecture ne nécessite pas Internet.",
-      "close": "Réessayer"
-    }
+      "close": "Réessayer",
+      "openSettings": "Ouvrir les réglages"
+    },
+    "suggestSite": "Vous êtes à {{site}}. Pointer maintenant ?",
+    "suggestSiteAction": "Oui, pointer",
+    "suggestSiteDismiss": "Pas maintenant"
   },
   "kioskPin": {
     "title": "Code PIN kiosque",

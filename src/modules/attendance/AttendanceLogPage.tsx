@@ -20,7 +20,7 @@ import StatusBadge from "../../components/common/StatusBadge";
 import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
 import attendanceHeaderImage from "../../assets/illustrations/attendance.svg";
-import { formatTimeOnly } from "../../core/utils/formatDate";
+import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
 import { buildAttendanceLogPdf } from "./attendanceLogPdf";
 import PageBanner from "../../components/common/PageBanner";
 import { PERIODS, formatHours, isPeriod, periodRange, sessionHours, type Period } from "./periods";
@@ -196,6 +196,7 @@ export default function AttendanceLogPage() {
   }, [rows, employeeFilter]);
 
   const [monthView, setMonthView] = useState(false);
+  const [grouping, setGrouping] = useState<"" | "employee" | "day">("");
 
   const filteredRows = useMemo(
     () => (employeeFilter === ALL_EMPLOYEES ? rows : rows.filter((row) => row.userFullName === employeeFilter)),
@@ -233,6 +234,12 @@ export default function AttendanceLogPage() {
     setEvidenceUrl(null);
     setEvidenceError("");
   };
+
+  const groupRow = useMemo(() => {
+    if (grouping === "employee") return (row: TodayAttendanceRow) => row.userFullName;
+    if (grouping === "day") return (row: TodayAttendanceRow) => formatDateOnly(row.clockInAt, i18n.language);
+    return undefined;
+  }, [grouping, i18n.language]);
 
   const columns: TableColumn<TodayAttendanceRow>[] = [
     { key: "name", header: t("columns.employee"), sortValue: (row) => row.userFullName, render: (row) => <PersonName name={row.userFullName} userId={row.userId} /> },
@@ -351,13 +358,28 @@ export default function AttendanceLogPage() {
 
       <Card>
         <ErrorText>{loadError}</ErrorText>
-        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "var(--space-2)" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "var(--space-2)", marginBottom: "var(--space-2)" }}>
+          {!monthView ? (
+            <Select
+              label={t("group.label")}
+              name="attendanceLogGrouping"
+              value={grouping}
+              onChange={(event) => setGrouping(event.target.value as typeof grouping)}
+              options={[
+                { value: "", label: t("group.none") },
+                { value: "employee", label: t("group.employee") },
+                { value: "day", label: t("group.day") },
+              ]}
+            />
+          ) : (
+            <span />
+          )}
           <Button size="sm" variant="ghost" onClick={() => setMonthView((current) => !current)}>
             {t(monthView ? "view.list" : "view.month")}
           </Button>
         </div>
         {monthView ? <AttendanceMonthGrid sessions={filteredRows} startDate={startDate} endDate={endDate} employeeHeader={t("columns.employee")} emptyMessage={t("empty")} /> : null}
-        {!monthView ? <Table grid columns={columns} data={filteredRows} getRowId={(row) => row.sessionId} loading={loading} emptyMessage={t("empty")} /> : null}
+        {!monthView ? <Table grid columns={columns} data={filteredRows} getRowId={(row) => row.sessionId} loading={loading} emptyMessage={t("empty")} groupBy={groupRow} /> : null}
         {!loading && filteredRows.length > 0 ? (
           <p style={{ margin: "var(--space-3) 0 0", fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)" }}>
             {t("totalHours", { hours: formatHours(filteredRows.reduce((sum, row) => sum + sessionHours(row), 0)), count: filteredRows.length })}

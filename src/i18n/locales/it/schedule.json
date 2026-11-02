@@ -31,7 +31,8 @@
     "site": "Sede",
     "date": "Data",
     "time": "Orario",
-    "notes": "Note"
+    "notes": "Note",
+    "actual": "Effettivo"
   },
   "status": {
     "scheduled": "Pianificato",
@@ -46,5 +47,24 @@
     "autoLabel": "Trattenuta senza pausa (minuti)",
     "genericError": "Salvataggio non riuscito.",
     "save": "Salva"
+  },
+  "swap": {
+    "title": "Scambi di turno",
+    "shift": "Il mio turno",
+    "chooseShift": "Scegli un turno",
+    "chooseColleague": "Scegli un collega",
+    "from": "Da",
+    "to": "A",
+    "reason": "Motivo",
+    "request": "Chiedi lo scambio",
+    "approve": "Approva",
+    "reject": "Rifiuta",
+    "failed": "Impossibile completare. Il collega potrebbe essere in ferie o avere già un turno.",
+    "status": {
+      "pending": "In attesa",
+      "approved": "Approvato",
+      "rejected": "Rifiutato",
+      "cancelled": "Annullato"
+    }
   }
 }

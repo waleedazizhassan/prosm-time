@@ -21,6 +21,7 @@ export interface Organization {
   // Audit 2.4 - refuse a clock in/out from a location the device reports as simulated.
   rejectMockLocation: boolean;
   requireGps: boolean;
+  suggestClockIn: boolean;
   // v2.3.43 step 2: an open shift raises an alert after this many hours and is closed (hours pending review) after the second.
   openSessionAlertHours: number;
   openSessionMaxHours: number;
@@ -55,7 +56,7 @@ class OrganizationRepository {
       const { data, error } = await this.client
         .from("organizations")
         .select(
-          "id, organization_code, name, status, logo_url, organization_settings(default_language, default_theme, no_site_allowed_radius_meters, require_gps, reject_mock_location, open_session_alert_hours, open_session_max_hours, default_gps_accuracy_tolerance_meters, default_break_rounding_mode, default_grace_tolerance_minutes)",
+          "id, organization_code, name, status, logo_url, organization_settings(default_language, default_theme, no_site_allowed_radius_meters, require_gps, suggest_clock_in, reject_mock_location, open_session_alert_hours, open_session_max_hours, default_gps_accuracy_tolerance_meters, default_break_rounding_mode, default_grace_tolerance_minutes)",
         )
         .maybeSingle();
 
@@ -75,6 +76,7 @@ class OrganizationRepository {
         noSiteAllowedRadiusMeters: settings?.no_site_allowed_radius_meters ?? 500,
         rejectMockLocation: settings?.reject_mock_location ?? false,
         requireGps: settings?.require_gps ?? false,
+        suggestClockIn: settings?.suggest_clock_in ?? false,
         openSessionAlertHours: settings?.open_session_alert_hours ?? 12,
         openSessionMaxHours: settings?.open_session_max_hours ?? 24,
         defaultGpsAccuracyToleranceMeters: settings?.default_gps_accuracy_tolerance_meters ?? 50,

@@ -31,7 +31,8 @@
     "site": "Site",
     "date": "Date",
     "time": "Time",
-    "notes": "Notes"
+    "notes": "Notes",
+    "actual": "Actual"
   },
   "status": {
     "scheduled": "Scheduled",
@@ -46,5 +47,24 @@
     "autoLabel": "Deduct when no break was taken (minutes, optional)",
     "genericError": "Could not save.",
     "save": "Save"
+  },
+  "swap": {
+    "title": "Shift swaps",
+    "shift": "My shift",
+    "chooseShift": "Choose a shift",
+    "chooseColleague": "Choose a colleague",
+    "from": "From",
+    "to": "To",
+    "reason": "Reason",
+    "request": "Ask to swap",
+    "approve": "Approve",
+    "reject": "Reject",
+    "failed": "Unable to complete this. The colleague may be on leave or already have a shift.",
+    "status": {
+      "pending": "Waiting",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "cancelled": "Cancelled"
+    }
   }
 }

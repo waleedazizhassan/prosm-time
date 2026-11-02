@@ -197,6 +197,11 @@
     "accountDeleted": {
       "title": "Ein Mitarbeiter hat sein Konto gelöscht",
       "body": "{{name}} hat sein Konto gelöscht. Anwesenheit und Stundenzettel bleiben als „Gelöschter Nutzer\" erhalten."
+    },
+    "newDevice": {
+      "title": "Anmeldung auf neuem Gerät",
+      "body": "Ihr Konto wurde auf einem neuen Gerät geöffnet: {{device}}. Wenn Sie das nicht waren, ändern Sie Ihr Passwort.",
+      "ownerBody": "{{name}} hat sich auf einem neuen Gerät angemeldet: {{device}}."
     }
   },
   "items": {

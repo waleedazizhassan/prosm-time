@@ -348,5 +348,10 @@
   "dropdown": {
     "search": "Suchen…",
     "noMatch": "Keine Treffer"
+  },
+  "table": {
+    "previous": "Zurück",
+    "next": "Weiter",
+    "page": "Seite {{page}} von {{pages}}"
   }
 }

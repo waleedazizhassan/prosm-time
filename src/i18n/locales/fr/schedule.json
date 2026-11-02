@@ -31,7 +31,8 @@
     "site": "Site",
     "date": "Date",
     "time": "Horaire",
-    "notes": "Notes"
+    "notes": "Notes",
+    "actual": "Réel"
   },
   "status": {
     "scheduled": "Planifié",
@@ -46,5 +47,24 @@
     "autoLabel": "Retenue sans pause (minutes)",
     "genericError": "Enregistrement impossible.",
     "save": "Enregistrer"
+  },
+  "swap": {
+    "title": "Échanges de postes",
+    "shift": "Mon poste",
+    "chooseShift": "Choisir un poste",
+    "chooseColleague": "Choisir un collègue",
+    "from": "De",
+    "to": "À",
+    "reason": "Motif",
+    "request": "Demander un échange",
+    "approve": "Approuver",
+    "reject": "Refuser",
+    "failed": "Action impossible. Le collègue est peut-être en congé ou a déjà un poste.",
+    "status": {
+      "pending": "En attente",
+      "approved": "Approuvé",
+      "rejected": "Refusé",
+      "cancelled": "Annulé"
+    }
   }
 }

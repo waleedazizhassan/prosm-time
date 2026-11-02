@@ -7,6 +7,7 @@ import AllowanceRepository, { type AllowanceEntry } from "../../core/repositorie
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import SiteWorkerRepository, { type SiteWorkerAttendanceRow } from "../../core/repositories/SiteWorkerRepository";
 import ReportRepository, { type AbsenceRow } from "../../core/repositories/ReportRepository";
+import PayrollRepository, { type LaborCostRow } from "../../core/repositories/PayrollRepository";
 import ReportExportRepository, { type ReportExport } from "../../core/repositories/ReportExportRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { formatDateOnly, formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
@@ -15,6 +16,7 @@ import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
 import { buildAttendanceLogPdf } from "../attendance/attendanceLogPdf";
 import { buildCombinedAllowanceSheetPdf } from "../allowances/allowancesPdf";
 import { buildGenericReportPdf } from "./genericReportPdf";
+import PayrollExportCard from "./PayrollExportCard";
 
 import { useAuth } from "../../core/context/AuthContext";
 
@@ -45,7 +47,7 @@ const ALL_SITES = "";
 // different columns - so they share one config-driven path instead of
 // 8 near-duplicate branches.
 type BespokeReportType = "attendance" | "allowances" | "timesheets";
-type GenericReportType = "workforce" | "contractor" | "site" | "late" | "missingCheckouts" | "leaveConflicts" | "absences" | "managerOverrides" | "locationViolations" | "sos";
+type GenericReportType = "laborCost" | "workforce" | "contractor" | "site" | "late" | "missingCheckouts" | "leaveConflicts" | "absences" | "managerOverrides" | "locationViolations" | "sos";
 type ReportType = BespokeReportType | GenericReportType;
 
 // § point 2, 2026-09-11 - "an Employee sees report buttons that don't
@@ -56,6 +58,7 @@ type ReportType = BespokeReportType | GenericReportType;
 // Gated the same way DashboardPage.tsx now gates the ClockInOutCard
 // widget: Owner, or 'exceptions.manage' holders (Manager/Supervisor).
 const MANAGEMENT_SCOPED_TYPES: ReportType[] = [
+  "laborCost",
   "workforce",
   "contractor",
   "site",
@@ -90,16 +93,17 @@ export default function ReportsPage() {
   // (Employee, read_only) only sees the 3 that are actually about
   // their own, self-scoped data.
   const hasManagementScope = Boolean(profile?.isOwner) || hasPermission("exceptions.manage");
+  const canSeePay = Boolean(profile?.isOwner) || hasPermission("payroll.view_cost");
   const visibleReportTypes = useMemo<ReportType[]>(
     () =>
       // Owner 2026-10-20 (no duplicates): the attendance record, allowances and
       // timesheets are exported - and printed - from their own pages; Reports
       // keeps the reports found only here, and the archive of every export.
       // Owner 2026-10-21: the combined allowance sheet (totals per person) is here too, for those who manage.
-      ([...(hasManagementScope ? (["allowances"] as ReportType[]) : []), "workforce", "contractor", "site", "late", "missingCheckouts", "leaveConflicts", "absences", "managerOverrides", "locationViolations", "sos"] as ReportType[]).filter(
+      ([...(canSeePay ? (["laborCost"] as ReportType[]) : []), ...(hasManagementScope ? (["allowances"] as ReportType[]) : []), "workforce", "contractor", "site", "late", "missingCheckouts", "leaveConflicts", "absences", "managerOverrides", "locationViolations", "sos"] as ReportType[]).filter(
         (type) => hasManagementScope || !MANAGEMENT_SCOPED_TYPES.includes(type),
       ),
-    [hasManagementScope],
+    [hasManagementScope, canSeePay],
   );
 
   // owner 2026-10-27: the dashboard's cards open a report directly (?type=late)
@@ -194,6 +198,15 @@ export default function ReportsPage() {
         toRow: (row: never) => { cells: string[]; employeeName: string | null; siteName: string | null };
       }
     > = {
+      laborCost: {
+        columns: [t("columns.laborCost.project"), t("columns.laborCost.site"), t("columns.laborCost.name"), t("columns.laborCost.hours"), t("columns.laborCost.cost")],
+        fetch: () => PayrollRepository.laborCost(startDate, endDate),
+        toRow: (row: LaborCostRow) => ({
+          cells: [row.projectName ?? "—", row.siteName ?? "—", row.userFullName, String(row.hours), row.cost === null ? t("columns.laborCost.noRate") : `${row.cost} ${row.currency ?? ""}`.trim()],
+          employeeName: row.userFullName,
+          siteName: row.siteName,
+        }),
+      },
       workforce: {
         columns: [t("columns.workforce.name"), t("columns.workforce.email"), t("columns.workforce.role"), t("columns.workforce.sites"), t("columns.workforce.status")],
         fetch: () => ReportRepository.workforce(),
@@ -536,6 +549,8 @@ export default function ReportsPage() {
         )}
       </Card>
       )}
+
+      <PayrollExportCard startDate={startDate} endDate={endDate} />
 
       <Card title={t("recentExports.title")}>
         <Table

@@ -82,6 +82,8 @@
     "field": {
       "minOvertimeMinutes": "Überstunden ab (Minuten)",
       "minLateMinutes": "Verspätung ab (Minuten)",
+      "minEarlyLeaveMinutes": "Früheres Gehen zählt nach (Minuten)",
+      "roundMinutes": "Tägliche Arbeitszeit runden auf (Minuten)",
       "maxDailyOvertimeMinutes": "Höchstens pro Tag (Minuten)",
       "multiplierNormal": "Faktor - normaler Tag",
       "multiplierNight": "Faktor - Nacht",
@@ -93,6 +95,8 @@
     "placeholder": {
       "minOvertimeMinutes": "0",
       "minLateMinutes": "0",
+      "minEarlyLeaveMinutes": "0",
+      "roundMinutes": "1",
       "maxDailyOvertimeMinutes": "keine Grenze",
       "multiplierNormal": "1",
       "multiplierNight": "1",
@@ -166,5 +170,11 @@
     "save": "Speichern",
     "saved": "Gespeichert.",
     "saveFailed": "Speichern nicht möglich."
+  },
+  "clockSuggestion": {
+    "title": "Beim Öffnen am Standort fragen",
+    "subtitle": "Wer die App an einem Standort öffnet, wird gefragt, ob er einstempeln möchte. Ohne Antwort wird nichts erfasst, danach folgt das normale Einstempeln, und es wird kein Hintergrundstandort verwendet.",
+    "label": "Die Person zum Einstempeln fragen",
+    "failed": "Diese Einstellung konnte nicht gespeichert werden."
   }
 }
