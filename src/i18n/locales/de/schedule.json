@@ -31,7 +31,8 @@
     "site": "Standort",
     "date": "Datum",
     "time": "Uhrzeit",
-    "notes": "Notizen"
+    "notes": "Notizen",
+    "actual": "Tatsächlich"
   },
   "status": {
     "scheduled": "Geplant",
@@ -46,5 +47,24 @@
     "autoLabel": "Abzug ohne Pause (Minuten)",
     "genericError": "Speichern fehlgeschlagen.",
     "save": "Speichern"
+  },
+  "swap": {
+    "title": "Schichttausch",
+    "shift": "Meine Schicht",
+    "chooseShift": "Schicht wählen",
+    "chooseColleague": "Kollegen wählen",
+    "from": "Von",
+    "to": "An",
+    "reason": "Grund",
+    "request": "Tausch anfragen",
+    "approve": "Genehmigen",
+    "reject": "Ablehnen",
+    "failed": "Das war nicht möglich. Der Kollege hat vielleicht Urlaub oder schon eine Schicht.",
+    "status": {
+      "pending": "Wartend",
+      "approved": "Genehmigt",
+      "rejected": "Abgelehnt",
+      "cancelled": "Storniert"
+    }
   }
 }

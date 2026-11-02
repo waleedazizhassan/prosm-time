@@ -19,6 +19,7 @@ const TABLES: Record<string, string> = {
   admin_on_behalf_actions: byOrg,
   allowance_basis: "select organization_id::text || allowance_key as id from allowance_basis where organization_id = $1",
   allowance_categories: byOrg,
+  shift_swap_requests: byOrg,
   payroll_export_templates: byOrg,
   allowance_entry_adjustments: byOrg,
   attendance_day_adjustments: byOrg,

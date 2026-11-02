@@ -2,11 +2,11 @@ import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useAuth } from "../../core/context/AuthContext";
-import ShiftRepository, { type MyShiftRow, type ShiftTemplate, type SiteShiftRow } from "../../core/repositories/ShiftRepository";
+import ShiftRepository, { type MyShiftRow, type ShiftActual, type ShiftTemplate, type SiteShiftRow } from "../../core/repositories/ShiftRepository";
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
-import { formatDateOnly } from "../../core/utils/formatDate";
+import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
@@ -23,6 +23,7 @@ import HintText from "../../components/common/HintText";
 import DateRange from "../../components/common/DateRange";
 import FieldRow from "../../components/common/FieldRow";
 import BreakRulesModal from "./BreakRulesModal";
+import ShiftSwapCard from "./ShiftSwapCard";
 
 function isoDate(date: Date): string {
   return date.toISOString().slice(0, 10);
@@ -61,6 +62,7 @@ export default function SchedulePage() {
   const [breakTemplate, setBreakTemplate] = useState<ShiftTemplate | null>(null);
   const [selectedSiteId, setSelectedSiteId] = useState("");
   const [siteShifts, setSiteShifts] = useState<SiteShiftRow[]>([]);
+  const [actuals, setActuals] = useState<ShiftActual[]>([]);
   const [siteShiftsLoading, setSiteShiftsLoading] = useState(false);
   const [rangeStart, setRangeStart] = useState(isoDate(today));
   const [rangeEnd, setRangeEnd] = useState(isoDate(new Date(today.getTime() + 13 * 24 * 60 * 60 * 1000)));
@@ -115,10 +117,12 @@ export default function SchedulePage() {
   const loadSiteData = useCallback(async () => {
     if (!canManage || !selectedSiteId) return;
     setSiteShiftsLoading(true);
-    const [templatesResult, shiftsResult] = await Promise.all([
+    const [templatesResult, shiftsResult, actualRows] = await Promise.all([
       ShiftRepository.listTemplates(selectedSiteId),
       ShiftRepository.listForSite(selectedSiteId, rangeStart, rangeEnd),
+      ShiftRepository.listActuals(selectedSiteId, rangeStart, rangeEnd),
     ]);
+    setActuals(actualRows);
     setTemplates(templatesResult.success ? templatesResult.data ?? [] : []);
     setSiteShifts(shiftsResult.success ? shiftsResult.data ?? [] : []);
     setSiteShiftsLoading(false);
@@ -188,6 +192,15 @@ export default function SchedulePage() {
     { key: "employee", header: t("columns.employee"), render: (row) => row.employeeName },
     { key: "date", header: t("columns.date"), render: (row) => formatDateOnly(row.shiftDate, i18n.language) },
     { key: "time", header: t("columns.time"), render: (row) => formatShiftTime(row.startTime, row.endTime, row.crossesMidnight) },
+    {
+      key: "actual",
+      header: t("columns.actual"),
+      render: (row) => {
+        const actual = actuals.find((entry) => entry.assignmentId === row.id);
+        if (!actual) return "—";
+        return `${formatTimeOnly(actual.firstIn, i18n.language)} — ${actual.lastOut ? formatTimeOnly(actual.lastOut, i18n.language) : "…"}`;
+      },
+    },
     { key: "status", header: t("common:status"), render: (row) => <StatusBadge status={row.status === "scheduled" ? "active" : "revoked"}>{t(`status.${row.status}`)}</StatusBadge> },
     {
       key: "actions",
@@ -209,6 +222,14 @@ export default function SchedulePage() {
         <ErrorText>{loadError}</ErrorText>
         <Table columns={myColumns} data={myShifts} getRowId={(row) => row.id} loading={loading} emptyMessage={t("emptyMine")} />
       </Card>
+
+      <ShiftSwapCard
+        shifts={myShifts}
+        onChanged={() => {
+          void loadMine();
+          void loadSiteData();
+        }}
+      />
 
       {canManage ? (
         <>
