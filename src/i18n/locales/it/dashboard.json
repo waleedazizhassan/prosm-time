@@ -214,7 +214,8 @@
     },
     "suggestSite": "Sei a {{site}}. Timbrare ora?",
     "suggestSiteAction": "Sì, timbra",
-    "suggestSiteDismiss": "Non ora"
+    "suggestSiteDismiss": "Non ora",
+    "confirmOutside": "Sei a {{meters}} m fuori dall'area di {{site}}. Sarà registrato come eccezione e il tuo responsabile lo verificherà."
   },
   "kioskPin": {
     "title": "PIN chiosco",

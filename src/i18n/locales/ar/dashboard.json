@@ -182,7 +182,7 @@
     "confirmPhotoLabel": "الصورة",
     "confirmNoPhoto": "لا يوجد تصوير مطلوب.",
     "confirmTimeLabel": "الوقت",
-    "confirmLocationLabel": "الموقع",
+    "confirmLocationLabel": "مكانك الآن",
     "noteLabel": "إضافة ملاحظة",
     "activityLabel": "النشاط",
     "optionalPlaceholder": "اختياري",
@@ -223,7 +223,8 @@
     },
     "suggestSite": "أنت في {{site}}. تسجّل حضورك الآن؟",
     "suggestSiteAction": "نعم، سجّل حضوري",
-    "suggestSiteDismiss": "ليس الآن"
+    "suggestSiteDismiss": "ليس الآن",
+    "confirmOutside": "أنت خارج نطاق {{site}} بـ {{meters}} م. سيُسجَّل استثناءً ويراجعه مديرك."
   },
   "kioskPin": {
     "title": "رمز الكشك",

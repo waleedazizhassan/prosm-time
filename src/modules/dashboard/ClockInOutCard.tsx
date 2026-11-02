@@ -1,3 +1,4 @@
+import { Capacitor } from "@capacitor/core";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MapPin, Siren } from "lucide-react";
@@ -1321,6 +1322,7 @@ export default function ClockInOutCard() {
           accuracyMeters={currentLocation?.accuracyMeters ?? null}
           placeName={placeName}
           siteName={confirmSiteName}
+          outsideByMeters={mapSiteProximity && !mapSiteAnyLocation && !mapSiteProximity.inside ? mapSiteProximity.outsideByMeters : null}
           submitting={submitting}
           error={confirmError}
           onCancel={handleConfirmCancel}
@@ -1343,9 +1345,11 @@ export default function ClockInOutCard() {
         <p style={{ margin: "0 0 var(--space-4)", fontSize: "var(--font-sm)", lineHeight: 1.7 }}>{t("attendance.locationRequired.body")}</p>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
           <Button onClick={() => setLocationBlocked(false)}>{t("attendance.locationRequired.close")}</Button>
-          <Button variant="ghost" onClick={() => void BackgroundLocationService.openSettings()}>
-            {t("attendance.locationRequired.openSettings")}
-          </Button>
+          {Capacitor.isNativePlatform() ? (
+            <Button variant="ghost" onClick={() => void BackgroundLocationService.openSettings()}>
+              {t("attendance.locationRequired.openSettings")}
+            </Button>
+          ) : null}
         </div>
       </Modal>
       <Modal

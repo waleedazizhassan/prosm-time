@@ -174,7 +174,7 @@
     "confirmPhotoLabel": "Foto",
     "confirmNoPhoto": "Kein Foto erforderlich.",
     "confirmTimeLabel": "Uhrzeit",
-    "confirmLocationLabel": "Standort",
+    "confirmLocationLabel": "Ihre Position",
     "noteLabel": "Notiz hinzufügen",
     "activityLabel": "Tätigkeit",
     "optionalPlaceholder": "Optional",
@@ -211,7 +211,8 @@
     },
     "suggestSite": "Sie sind bei {{site}}. Jetzt einstempeln?",
     "suggestSiteAction": "Ja, einstempeln",
-    "suggestSiteDismiss": "Nicht jetzt"
+    "suggestSiteDismiss": "Nicht jetzt",
+    "confirmOutside": "Sie sind {{meters}} m außerhalb des Bereichs von {{site}}. Das wird als Ausnahme erfasst und von Ihrem Vorgesetzten geprüft."
   },
   "kioskPin": {
     "title": "Kiosk-PIN",

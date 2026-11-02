@@ -214,7 +214,8 @@
     },
     "suggestSite": "Vous êtes à {{site}}. Pointer maintenant ?",
     "suggestSiteAction": "Oui, pointer",
-    "suggestSiteDismiss": "Pas maintenant"
+    "suggestSiteDismiss": "Pas maintenant",
+    "confirmOutside": "Vous êtes à {{meters}} m hors de la zone de {{site}}. Ce sera enregistré comme exception et revu par votre responsable."
   },
   "kioskPin": {
     "title": "Code PIN kiosque",
