@@ -74,3 +74,15 @@ describe("plans and entitlements", () => {
     expect((await t.as(org.owner.authId, "select * from activation_codes")).error).not.toBeNull();
   });
 });
+
+describe("a trial that becomes paid", () => {
+  it("leaves the trial state", async () => {
+    const t = await buildDatabase();
+    const org = await createOrg(t, "Convert Co");
+    await t.su("update license_activation_state set is_trial = true where organization_id = $1", [org.id]);
+    expect((await t.su<{ status: string }>("select status from entitlements where organization_id = $1", [org.id]))[0].status).toBe("trial");
+    await t.su("update license_activation_state set is_trial = false, expires_at = now() + interval '1 year' where organization_id = $1", [org.id]);
+    const [row] = await t.su<{ plan: string; status: string }>("select plan, status from entitlements where organization_id = $1", [org.id]);
+    expect(row).toMatchObject({ plan: "legacy", status: "active" });
+  });
+});
