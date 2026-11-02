@@ -641,5 +641,10 @@
     "exportPdf": "تصدير PDF",
     "loadMore": "عرض المزيد",
     "loadError": "تعذّر تحميل السجل."
+  },
+  "checklist": {
+    "title": "قبل الانصراف",
+    "continue": "متابعة الانصراف",
+    "continueIncomplete": "انصراف مع مهام لم تُنجز"
   }
 }

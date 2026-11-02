@@ -625,5 +625,10 @@
     "exportPdf": "Als PDF exportieren",
     "loadMore": "Mehr anzeigen",
     "loadError": "Das Protokoll konnte nicht geladen werden."
+  },
+  "checklist": {
+    "title": "Vor dem Ausstempeln",
+    "continue": "Weiter zum Ausstempeln",
+    "continueIncomplete": "Mit offenen Punkten ausstempeln"
   }
 }

@@ -75,5 +75,35 @@
     "total": "Totale",
     "hours": "{{hours}} h",
     "unpriced": "{{count}} turni senza tariffa non sono conteggiati."
+  },
+  "open": {
+    "title": "Turni aperti",
+    "subtitle": "Turni senza nessuno. Chiedine uno; decide un responsabile.",
+    "none": "Nessun turno aperto.",
+    "noRequests": "Nessuna richiesta finora.",
+    "give": "Assegna il turno",
+    "cancel": "Annulla il turno",
+    "ask": "Chiedi questo turno",
+    "post": "Pubblica un turno aperto",
+    "failed": "Impossibile completare.",
+    "status": {
+      "open": "Aperto",
+      "filled": "Assegnato",
+      "cancelled": "Annullato"
+    },
+    "mine": {
+      "pending": "Richiesto. In attesa del responsabile.",
+      "approved": "È tuo.",
+      "rejected": "Assegnato ad altri."
+    }
+  },
+  "checklist": {
+    "title": "Lista di fine turno",
+    "subtitle": "Mostrata prima dell'uscita in questa sede. Una voce per riga; vuota se nessuna.",
+    "label": "Voci",
+    "save": "Salva lista",
+    "saved": "Salvato.",
+    "failed": "Impossibile salvare la lista.",
+    "tooMany": "Al massimo venti voci."
   }
 }

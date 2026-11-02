@@ -625,5 +625,10 @@
     "exportPdf": "Export PDF",
     "loadMore": "Show more",
     "loadError": "Could not load the log."
+  },
+  "checklist": {
+    "title": "Before you clock out",
+    "continue": "Continue to clock out",
+    "continueIncomplete": "Clock out with items not done"
   }
 }

@@ -629,5 +629,10 @@
     "exportPdf": "Exporter en PDF",
     "loadMore": "Afficher plus",
     "loadError": "Impossible de charger le journal."
+  },
+  "checklist": {
+    "title": "Avant de partir",
+    "continue": "Continuer le départ",
+    "continueIncomplete": "Partir avec des éléments non faits"
   }
 }

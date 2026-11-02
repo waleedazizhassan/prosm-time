@@ -25,6 +25,8 @@ import FieldRow from "../../components/common/FieldRow";
 import BreakRulesModal from "./BreakRulesModal";
 import ShiftSwapCard from "./ShiftSwapCard";
 import ScheduleCostCard from "./ScheduleCostCard";
+import OpenShiftsCard from "./OpenShiftsCard";
+import ChecklistSettingsCard from "./ChecklistSettingsCard";
 
 function isoDate(date: Date): string {
   return date.toISOString().slice(0, 10);
@@ -226,6 +228,14 @@ export default function SchedulePage() {
         <Table columns={myColumns} data={myShifts} getRowId={(row) => row.id} loading={loading} emptyMessage={t("emptyMine")} />
       </Card>
 
+      <OpenShiftsCard
+        manageSiteId={canManage && selectedSiteId ? selectedSiteId : null}
+        onFilled={() => {
+          void loadMine();
+          void loadSiteData();
+        }}
+      />
+
       <ShiftSwapCard
         shifts={myShifts}
         onChanged={() => {
@@ -249,6 +259,7 @@ export default function SchedulePage() {
           </Card>
 
           <ScheduleCostCard siteId={selectedSiteId} startDate={rangeStart} endDate={rangeEnd} refreshKey={costKey} />
+          {selectedSiteId ? <ChecklistSettingsCard siteId={selectedSiteId} /> : null}
 
           <Card title={t("templatesTitle")}>
             <HintText small>{t("templatesHint")}</HintText>

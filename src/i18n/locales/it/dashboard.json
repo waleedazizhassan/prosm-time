@@ -629,5 +629,10 @@
     "exportPdf": "Esporta PDF",
     "loadMore": "Mostra altro",
     "loadError": "Impossibile caricare il registro."
+  },
+  "checklist": {
+    "title": "Prima dell'uscita",
+    "continue": "Continua l'uscita",
+    "continueIncomplete": "Esci con voci non fatte"
   }
 }

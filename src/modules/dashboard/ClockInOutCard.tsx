@@ -26,6 +26,8 @@ import Button from "../../components/common/Button";
 import StatusBadge from "../../components/common/StatusBadge";
 import CameraCaptureModal from "../../components/common/CameraCaptureModal";
 import Modal from "../../components/common/Modal";
+import ShiftExtrasRepository, { type ChecklistItem } from "../../core/repositories/ShiftExtrasRepository";
+import ShiftChecklistModal from "./ShiftChecklistModal";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import AttendanceConfirmModal from "../../components/common/AttendanceConfirmModal";
 import ClockOutSummaryModal from "../../components/common/ClockOutSummaryModal";
@@ -212,6 +214,8 @@ export default function ClockInOutCard() {
   const [locationBlocked, setLocationBlocked] = useState(false);
   const [suggestClockIn, setSuggestClockIn] = useState(false);
   const [suggestionDismissed, setSuggestionDismissed] = useState(false);
+  const [checklist, setChecklist] = useState<ChecklistItem[] | null>(null);
+  const checklistAnsweredRef = useRef<string | null>(null);
   useEffect(() => {
     void OrganizationRepository.getCurrentOrganization().then((result) => {
       if (!result.success || !result.data) return;
@@ -282,8 +286,11 @@ export default function ClockInOutCard() {
   const siteTouchedRef = useRef(false);
   useEffect(() => {
     if (!currentLocation || session || siteTouchedRef.current) return;
-    // Owner 2026-11-02: only among the person's own sites. Someone linked to no site starts on "no site" and picks from the list.
-    const here = nearestSite(sites.filter((site) => site.allowedRadiusMeters > 0 && assignedSiteIds?.has(site.id)), currentLocation.latitude, currentLocation.longitude, currentLocation.accuracyMeters);
+    // Owner 2026-11-02 (second word): a person linked to sites starts on theirs, and on the one of
+    // them they stand in. A person linked to none starts on the registered site they stand in
+    // (marked "you're here today"), and on "no site" when they are inside none.
+    const own = assignedSiteIds && assignedSiteIds.size > 0 ? sites.filter((site) => assignedSiteIds.has(site.id)) : sites;
+    const here = nearestSite(own.filter((site) => site.allowedRadiusMeters > 0), currentLocation.latitude, currentLocation.longitude, currentLocation.accuracyMeters);
     if (here?.inside) setSiteId(here.siteId);
   }, [currentLocation, sites, session, assignedSiteIds]);
   const [lastCompletedSession, setLastCompletedSession] = useState<AttendanceSession | null>(initialCache?.lastCompletedSession ?? null);
@@ -810,7 +817,20 @@ export default function ClockInOutCard() {
     setConfirmModalOpen(true);
   };
 
-  const handleClockOutTap = () => {
+  // docs/IDEAS.md 6: the site's end-of-shift checklist comes first, once per shift.
+  const handleClockOutTap = async () => {
+    const session = view.session;
+    if (session && session.siteId && !session.id.startsWith("q:") && checklistAnsweredRef.current !== session.id && navigator.onLine) {
+      const items = await ShiftExtrasRepository.siteChecklist(session.siteId);
+      if (items.length > 0) {
+        setChecklist(items);
+        return;
+      }
+    }
+    continueClockOut();
+  };
+
+  const continueClockOut = () => {
     if (clockOutCameraRequired) {
       setCameraFor("clockOut");
       return;
@@ -1310,6 +1330,19 @@ export default function ClockInOutCard() {
       </div>
 
 
+      {checklist && view.session ? (
+        <ShiftChecklistModal
+          items={checklist}
+          onCancel={() => setChecklist(null)}
+          onDone={(doneIds) => {
+            const sessionId = view.session?.id ?? "";
+            setChecklist(null);
+            checklistAnsweredRef.current = sessionId;
+            void ShiftExtrasRepository.recordSessionChecklist(sessionId, doneIds);
+            continueClockOut();
+          }}
+        />
+      ) : null}
       <CameraCaptureModal isOpen={cameraFor !== null} onClose={handleCameraClose} onCapture={handleCameraCapture} siteId={(cameraFor === "clockOut" ? view.session?.siteId : siteId) || null} />
 
       {confirmAction ? (
