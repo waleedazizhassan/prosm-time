@@ -54,7 +54,7 @@ export default function LivenessExemptionCard({ userId }: { userId: string }) {
   return (
     <Card title={t("liveness.title")}>
       <HintText small>{t("liveness.hint")}</HintText>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "var(--space-2) 0" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", padding: "var(--space-2) 0" }}>
         <span style={{ fontSize: "var(--font-sm)" }}>{t("liveness.exemptLabel")}</span>
         <Toggle checked={exempt} onChange={(value) => { setExempt(value); setSaved(false); }} disabled={saving} label={t("liveness.exemptLabel")} />
       </div>

@@ -99,15 +99,15 @@ export default function AttendanceConfirmModal({
       )}
 
       <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", marginBottom: "var(--space-4)", fontSize: "var(--font-sm)" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", gap: "var(--space-3)" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "var(--space-3)" }}>
           <span style={{ color: "var(--text-secondary)" }}>{t("attendance.siteLabel")}</span>
           <span style={{ fontWeight: "var(--font-weight-medium)", textAlign: "end" }}>{siteName}</span>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between", gap: "var(--space-3)" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "var(--space-3)" }}>
           <span style={{ color: "var(--text-secondary)" }}>{t("attendance.confirmTimeLabel")}</span>
           <span style={{ fontWeight: "var(--font-weight-medium)" }}>{formatTimeOnly(new Date().toISOString(), i18n.language)}</span>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "var(--space-3)" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", alignItems: "flex-start", gap: "var(--space-3)" }}>
           <span style={{ color: "var(--text-secondary)", flexShrink: 0 }}>{t("attendance.confirmLocationLabel")}</span>
           {latitude !== null && longitude !== null ? (
             <span style={{ textAlign: "end" }}>

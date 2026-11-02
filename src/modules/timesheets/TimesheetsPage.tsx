@@ -26,7 +26,7 @@ import LoadingState from "../../components/common/LoadingState";
 import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
 import FormGrid from "../../components/common/FormGrid";
-import { formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
+import { formatDateOnly, formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
 import timesheetsHeaderImage from "../../assets/illustrations/timesheets.svg";
 import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
@@ -285,7 +285,7 @@ export default function TimesheetsPage() {
   // "View Report" below - not duplicated as a quick per-row shortcut.
   const timesheetColumns = (showEmployee: boolean): TableColumn<Timesheet>[] => [
     ...(showEmployee ? [{ key: "employee", header: t("columns.employee"), render: (row: Timesheet) => row.userFullName } as TableColumn<Timesheet>] : []),
-    { key: "period", header: t("columns.period"), render: (row) => `${row.periodStart} — ${row.periodEnd}` },
+    { key: "period", header: t("columns.period"), render: (row) => `${formatDateOnly(row.periodStart, i18n.language)} – ${formatDateOnly(row.periodEnd, i18n.language)}` },
     { key: "status", header: t("columns.status"), render: (row) => <StatusBadge status={STATUS_BADGE_KEY[row.status]}>{t(`status.${row.status}`)}</StatusBadge> },
     { key: "worked", header: t("columns.worked"), render: (row) => formatMinutes(row.totalWorkedMinutes) },
     { key: "overtime", header: t("columns.overtime"), render: (row) => formatMinutes(row.totalOvertimeMinutes) },
@@ -350,7 +350,7 @@ export default function TimesheetsPage() {
               <ListRow key={correction.id}>
                 <div>
                   <div style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)", fontWeight: "var(--font-weight-semibold)" }}>
-                    {correction.userFullName} — {correction.periodStart} — {correction.periodEnd}
+                    {correction.userFullName} · {formatDateOnly(correction.periodStart, i18n.language)} – {formatDateOnly(correction.periodEnd, i18n.language)}
                   </div>
                   <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{correction.reason}</div>
                 </div>
@@ -370,7 +370,7 @@ export default function TimesheetsPage() {
       <Modal
         isOpen={Boolean(detailTimesheet)}
         onClose={closeDetail}
-        title={detailTimesheet ? `${detailTimesheet.userFullName} — ${detailTimesheet.periodStart} — ${detailTimesheet.periodEnd}` : ""}
+        title={detailTimesheet ? `${detailTimesheet.userFullName} · ${formatDateOnly(detailTimesheet.periodStart, i18n.language)} – ${formatDateOnly(detailTimesheet.periodEnd, i18n.language)}` : ""}
         footer={
           detailTimesheet ? (
             <>

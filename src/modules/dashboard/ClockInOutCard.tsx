@@ -1071,7 +1071,7 @@ export default function ClockInOutCard() {
 
   return (
     <Card>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--space-2)" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "var(--space-2)" }}>
         <span style={{ fontSize: "var(--font-xs)", fontWeight: "var(--font-weight-bold)", letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--text-secondary)" }}>
           {t("attendance.title")}
         </span>

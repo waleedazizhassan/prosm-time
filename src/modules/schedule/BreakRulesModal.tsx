@@ -57,7 +57,7 @@ export default function BreakRulesModal({ template, onClose, onSaved }: { templa
       }
     >
       <HintText small>{t("breakRules.hint")}</HintText>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "var(--space-2) 0" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", padding: "var(--space-2) 0" }}>
         <span style={{ fontSize: "var(--font-sm)" }}>{t("breakRules.paidLabel")}</span>
         <Toggle checked={paid} onChange={setPaid} label={t("breakRules.paidLabel")} />
       </div>

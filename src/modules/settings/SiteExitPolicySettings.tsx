@@ -69,7 +69,7 @@ export default function SiteExitPolicySettings({ siteId }: { siteId: string }) {
         options={(["OFF", "PROMPT", "AUTO"] as Policy[]).map((value) => ({ value, label: t(`exitPolicy.option.${value}`) }))}
       />
       {policy === "AUTO" ? <Input label={t("exitPolicy.minutesLabel")} name="exitMinutes" type="number" value={minutes} onChange={(event) => setMinutes(event.target.value)} /> : null}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "var(--space-2) 0" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", padding: "var(--space-2) 0" }}>
         <span style={{ fontSize: "var(--font-sm)" }}>{t("exitPolicy.fieldSiteLabel")}</span>
         <Toggle checked={fieldSite} onChange={(value) => { setFieldSite(value); setSaved(false); }} label={t("exitPolicy.fieldSiteLabel")} />
       </div>

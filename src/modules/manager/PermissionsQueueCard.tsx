@@ -155,7 +155,7 @@ export default function PermissionsQueueCard() {
       >
         {decision?.action === "approved" && (decision.request.kind === "late_arrival" || decision.request.kind === "early_leave") ? (
           <>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "var(--space-2) 0" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", padding: "var(--space-2) 0" }}>
               <span style={{ fontSize: "var(--font-sm)" }}>{t("permissions.paidLabel")}</span>
               <Toggle checked={paid} onChange={setPaid} label={t("permissions.paidLabel")} />
             </div>
@@ -203,7 +203,7 @@ export default function PermissionsQueueCard() {
             <Input label={t("permissions.minutesLabel")} name="grantMinutes" type="number" value={grant.minutes} onChange={(event) => setGrant({ ...grant, minutes: event.target.value })} />
             {grant.kind === "late_arrival" || grant.kind === "early_leave" ? (
               <>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "var(--space-2) 0" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", padding: "var(--space-2) 0" }}>
                   <span style={{ fontSize: "var(--font-sm)" }}>{t("permissions.paidLabel")}</span>
                   <Toggle checked={grant.paid} onChange={(checked) => setGrant({ ...grant, paid: checked })} label={t("permissions.paidLabel")} />
                 </div>

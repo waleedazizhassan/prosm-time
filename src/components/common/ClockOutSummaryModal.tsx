@@ -47,20 +47,20 @@ export default function ClockOutSummaryModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={t("attendance.summaryTitle")} size="md">
       <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", marginBottom: "var(--space-4)", fontSize: "var(--font-sm)" }}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
           <span style={{ color: "var(--text-secondary)" }}>{t("attendance.summaryWorked")}</span>
           <span style={{ fontWeight: "var(--font-weight-medium)", fontVariantNumeric: "tabular-nums" }}>{formatMinutes(workedMinutes)}</span>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
           <span style={{ color: "var(--text-secondary)" }}>{t("attendance.summaryBreak")}</span>
           <span style={{ fontWeight: "var(--font-weight-medium)", fontVariantNumeric: "tabular-nums" }}>{formatMinutes(breakMinutes)}</span>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
           <span style={{ color: "var(--text-secondary)" }}>{t("attendance.summaryOvertime")}</span>
           <span style={{ fontWeight: "var(--font-weight-medium)", fontVariantNumeric: "tabular-nums" }}>{formatMinutes(overtimeMinutes)}</span>
         </div>
         {exceptionsCount > 0 ? (
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
             <span style={{ color: "var(--status-warning-text)" }}>{t("attendance.summaryExceptions")}</span>
             <span style={{ fontWeight: "var(--font-weight-medium)" }}>{exceptionsCount}</span>
           </div>

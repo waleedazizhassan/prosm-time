@@ -848,7 +848,7 @@ function ScheduleChart({ data, mode, t, language }: { data: Dashboard | null; mo
           );
         })}
       </svg>
-      <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem", color: "var(--text-secondary)" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", fontSize: "0.75rem", color: "var(--text-secondary)" }}>
         {bars.map((bar, index) => (
           <span key={index} style={{ width: `${width}%`, textAlign: "center", overflow: "hidden" }}>
             {bars.length > 16 && index % 3 ? "" : bar.label}
