@@ -35,7 +35,7 @@ import HintText from "../../components/common/HintText";
 import SessionReviewRepository from "../../core/repositories/SessionReviewRepository";
 import LongSessionPrompt from "./LongSessionPrompt";
 import ExitSitePrompt from "./ExitSitePrompt";
-import { nearestSite } from "./siteProximity";
+import { nearestSite, orderSitesByDistance } from "./siteProximity";
 
 const CHANGE_SITE_NO_SITE_VALUE = "__no_site__";
 
@@ -103,6 +103,18 @@ interface AttendanceView {
 // the actions queued on this device applied on top, in order (stopping at one the server refused).
 // A queued clock in / break start gets a local id "q:<queue id>", resolved to the server's id when
 // it is sent - so a break or a clock out can follow an offline clock in before any of it is sent.
+// Owner 2026-11-02: kept so a linked employee offline still starts on their own site.
+const assignedSitesKey = (userId: string | undefined) => `prosm-time-assigned-sites:${userId ?? ""}`;
+
+function readAssignedSites(userId: string | undefined): Set<string> | null {
+  try {
+    const stored = localStorage.getItem(assignedSitesKey(userId));
+    return stored ? new Set(JSON.parse(stored) as string[]) : null;
+  } catch {
+    return null;
+  }
+}
+
 function applyQueuedActions(base: AttendanceView, items: OfflineQueueItem[], sites: Site[]): AttendanceView {
   const view = { ...base };
   const endBreakAt = (at: string) => {
@@ -181,6 +193,7 @@ export default function ClockInOutCard() {
   const [sites, setSites] = useState<Site[]>(initialCache?.sites ?? []);
   const [projects, setProjects] = useState<Project[]>([]);
   const [siteId, setSiteId] = useState("");
+  const [assignedSiteIds, setAssignedSiteIds] = useState<Set<string> | null>(() => readAssignedSites(profile?.id));
   const [manualLocationLabel, setManualLocationLabel] = useState("");
   const [projectId, setProjectId] = useState("");
   const [cameraFor, setCameraFor] = useState<"clockIn" | "clockOut" | null>(null);
@@ -265,9 +278,10 @@ export default function ClockInOutCard() {
   const siteTouchedRef = useRef(false);
   useEffect(() => {
     if (!currentLocation || session || siteTouchedRef.current) return;
-    const here = nearestSite(sites.filter((site) => site.allowedRadiusMeters > 0), currentLocation.latitude, currentLocation.longitude, currentLocation.accuracyMeters);
+    // Owner 2026-11-02: only among the person's own sites. Someone linked to no site starts on "no site" and picks from the list.
+    const here = nearestSite(sites.filter((site) => site.allowedRadiusMeters > 0 && assignedSiteIds?.has(site.id)), currentLocation.latitude, currentLocation.longitude, currentLocation.accuracyMeters);
     if (here?.inside) setSiteId(here.siteId);
-  }, [currentLocation, sites, session]);
+  }, [currentLocation, sites, session, assignedSiteIds]);
   const [lastCompletedSession, setLastCompletedSession] = useState<AttendanceSession | null>(initialCache?.lastCompletedSession ?? null);
   // § live UX review, user-directed - a real confirmation screen shown
   // right before every clock-in/out actually submits (photo if any,
@@ -306,10 +320,11 @@ export default function ClockInOutCard() {
     async (silent = false) => {
       if (!profile) return;
       if (!silent) setLoading(true);
-      const [sessionResult, sitesResult, presenceResult] = await Promise.all([
+      const [sessionResult, sitesResult, presenceResult, ownSitesResult] = await Promise.all([
         AttendanceRepository.getCurrentSession(profile.id),
         SiteRepository.listClockInSites(),
         PresenceRepository.getActiveSession(profile.id),
+        SiteRepository.listAssignedSites(profile.id),
       ]);
       // Offline (owner 2026-09-29): when the server cannot be reached, keep the last known state -
       // the worker's session, sites and break - instead of replacing it with empty values, so a
@@ -324,7 +339,16 @@ export default function ClockInOutCard() {
       setPresenceSession(activePresence);
       const assignedSites = sitesResult.success ? sitesResult.data ?? [] : [];
       setSites(assignedSites);
-      setSiteId((current) => current || assignedSites[0]?.id || "");
+      const ownSiteIds = ownSitesResult.success ? new Set((ownSitesResult.data ?? []).map((site) => site.id)) : readAssignedSites(profile.id);
+      if (ownSitesResult.success) {
+        setAssignedSiteIds(ownSiteIds);
+        try {
+          localStorage.setItem(assignedSitesKey(profile.id), JSON.stringify([...(ownSiteIds ?? [])]));
+        } catch {
+          // a convenience only
+        }
+      }
+      setSiteId((current) => current || assignedSites.find((site) => ownSiteIds?.has(site.id))?.id || "");
 
       let resolvedCurrentSite: Site | null = null;
       let resolvedActiveBreakId: string | null = null;
@@ -1017,9 +1041,9 @@ export default function ClockInOutCard() {
   };
 
   const statusKey = view.activeBreakId ? "onBreak" : view.session ? "clockedIn" : "notClockedIn";
-  const changeSiteOptions = sites
-    .filter((site) => site.id !== view.currentSite?.id)
-    .map((site) => ({ value: site.id, label: nearbySiteIds.has(site.id) ? t("attendance.nearbySiteOption", { name: site.name }) : site.name }));
+  // Owner 2026-11-02: by distance, the site the person stands in first and marked.
+  const siteOptions = orderSitesByDistance(sites, currentLocation).map(({ site, inside }) => ({ value: site.id, label: inside || nearbySiteIds.has(site.id) ? t("attendance.nearbySiteOption", { name: site.name }) : site.name }));
+  const changeSiteOptions = siteOptions.filter((option) => option.value !== view.currentSite?.id);
   // v2.3.43 step 13 (item 15): where the person stands - inside a site (green
   // circle), or how far outside the nearest one (orange circle).
   const proximity =
@@ -1175,7 +1199,7 @@ export default function ClockInOutCard() {
             disabled={submitting}
             options={[
               { value: "", label: t("attendance.noSiteOption") },
-              ...sites.map((site) => ({ value: site.id, label: nearbySiteIds.has(site.id) ? t("attendance.nearbySiteOption", { name: site.name }) : site.name })),
+              ...siteOptions,
             ]}
           />
           {!siteId ? (
