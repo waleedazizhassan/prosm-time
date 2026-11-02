@@ -170,5 +170,11 @@
     "save": "Save",
     "saved": "Saved.",
     "saveFailed": "Could not save."
+  },
+  "clockSuggestion": {
+    "title": "Ask when the app opens inside a site",
+    "subtitle": "When someone opens the app inside a site, it asks whether to clock in. Nothing is recorded without their answer, the ordinary clock-in follows, and no background location is used.",
+    "label": "Ask the person to clock in",
+    "failed": "Unable to save this setting."
   }
 }

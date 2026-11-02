@@ -14,6 +14,7 @@ import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
 import PlanSettingsCard from "./PlanSettingsCard";
 import RetentionSettingsCard from "./RetentionSettingsCard";
+import ClockSuggestionCard from "./ClockSuggestionCard";
 import PageBanner from "../../components/common/PageBanner";
 import { APP_VERSION } from "../../core/appVersion";
 
@@ -67,6 +68,7 @@ export default function OrganizationSettingsPage() {
         <>
           <PlanSettingsCard />
           <RetentionSettingsCard />
+          <ClockSuggestionCard />
           <OvertimePolicySettingsCard />
           <NoSiteRadiusSettingsCard />
           <MockLocationSettingsCard />

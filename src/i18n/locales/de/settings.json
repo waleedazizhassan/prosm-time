@@ -170,5 +170,11 @@
     "save": "Speichern",
     "saved": "Gespeichert.",
     "saveFailed": "Speichern nicht möglich."
+  },
+  "clockSuggestion": {
+    "title": "Beim Öffnen am Standort fragen",
+    "subtitle": "Wer die App an einem Standort öffnet, wird gefragt, ob er einstempeln möchte. Ohne Antwort wird nichts erfasst, danach folgt das normale Einstempeln, und es wird kein Hintergrundstandort verwendet.",
+    "label": "Die Person zum Einstempeln fragen",
+    "failed": "Diese Einstellung konnte nicht gespeichert werden."
   }
 }

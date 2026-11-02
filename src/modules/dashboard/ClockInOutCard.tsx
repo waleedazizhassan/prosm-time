@@ -209,10 +209,14 @@ export default function ClockInOutCard() {
     }
   });
   const [locationBlocked, setLocationBlocked] = useState(false);
+  const [suggestClockIn, setSuggestClockIn] = useState(false);
+  const [suggestionDismissed, setSuggestionDismissed] = useState(false);
+  const [acceptedSuggestion, setAcceptedSuggestion] = useState<string | null>(null);
   useEffect(() => {
     void OrganizationRepository.getCurrentOrganization().then((result) => {
       if (!result.success || !result.data) return;
       setRequireGps(result.data.requireGps);
+      setSuggestClockIn(result.data.suggestClockIn);
       try {
         localStorage.setItem(REQUIRE_GPS_KEY, result.data.requireGps ? "1" : "0");
       } catch {
@@ -805,6 +809,13 @@ export default function ClockInOutCard() {
     setConfirmModalOpen(true);
   };
 
+  // Plan stage 8.4: "yes" goes through the ordinary clock-in (photo, confirmation), once the site is selected.
+  useEffect(() => {
+    if (!acceptedSuggestion || siteId !== acceptedSuggestion) return;
+    setAcceptedSuggestion(null);
+    handleClockInTap();
+  });
+
   const handleClockOutTap = () => {
     if (clockOutCameraRequired) {
       setCameraFor("clockOut");
@@ -1222,6 +1233,29 @@ export default function ClockInOutCard() {
               disabled={submitting || projects.length === 0}
               options={[{ value: "", label: t("attendance.noProject") }, ...projects.map((project) => ({ value: project.id, label: project.name }))]}
             />
+          ) : null}
+          {/* Plan stage 8.4: a question only. Nothing is recorded until the person agrees and completes the clock-in. */}
+          {suggestClockIn && !suggestionDismissed && proximity?.inside && proximitySite ? (
+            <div role="alert" style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-strong)" }}>
+              <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-sm)" }}>{t("attendance.suggestSite", { site: proximitySite.name })}</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    siteTouchedRef.current = true;
+                    setManualLocationLabel("");
+                    setSuggestionDismissed(true);
+                    setSiteId(proximitySite.id);
+                    setAcceptedSuggestion(proximitySite.id);
+                  }}
+                >
+                  {t("attendance.suggestSiteAction")}
+                </Button>
+                <Button size="sm" variant="ghost" onClick={() => setSuggestionDismissed(true)}>
+                  {t("attendance.suggestSiteDismiss")}
+                </Button>
+              </div>
+            </div>
           ) : null}
           <Button fullWidth onClick={handleClockInTap} loading={submitting} disabled={!siteId && !manualLocationLabel.trim()}>
             {t("attendance.clockInAction")}

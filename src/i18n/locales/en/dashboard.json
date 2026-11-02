@@ -207,7 +207,10 @@
       "title": "Location is required to clock in",
       "body": "You cannot record this without a location reading from your phone. Allow location for the app in your phone's settings, turn on location (GPS), and try again. This reading does not need internet.",
       "close": "Try again"
-    }
+    },
+    "suggestSite": "You are at {{site}}. Clock in now?",
+    "suggestSiteAction": "Yes, clock in",
+    "suggestSiteDismiss": "Not now"
   },
   "kioskPin": {
     "title": "Kiosk PIN",
