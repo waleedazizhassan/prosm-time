@@ -1341,7 +1341,12 @@ export default function ClockInOutCard() {
 
       <Modal isOpen={locationBlocked} onClose={() => setLocationBlocked(false)} title={t("attendance.locationRequired.title")}>
         <p style={{ margin: "0 0 var(--space-4)", fontSize: "var(--font-sm)", lineHeight: 1.7 }}>{t("attendance.locationRequired.body")}</p>
-        <Button onClick={() => setLocationBlocked(false)}>{t("attendance.locationRequired.close")}</Button>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
+          <Button onClick={() => setLocationBlocked(false)}>{t("attendance.locationRequired.close")}</Button>
+          <Button variant="ghost" onClick={() => void BackgroundLocationService.openSettings()}>
+            {t("attendance.locationRequired.openSettings")}
+          </Button>
+        </div>
       </Modal>
       <Modal
         isOpen={changeSiteModalOpen}
