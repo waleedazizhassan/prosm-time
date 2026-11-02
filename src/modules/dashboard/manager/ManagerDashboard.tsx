@@ -336,6 +336,8 @@ export default function ManagerDashboard() {
           </section>
         );
       case "external":
+        // Owner 2026-11-02 (a calmer dashboard): no contractors' workers today, no empty card.
+        if (data && !data.sites.some((site) => site.external && (site.external.today > 0 || site.external.presentNow > 0))) return null;
         return (
           <section key={id} id="dash-external" className={`${styles.widget} ${styles.span12}`} style={{ order: order.indexOf(id) }}>
             {data ? <ExternalWorkersWidget sites={data.sites} refreshKey={data.asOf} /> : <div className={styles.skeleton} style={{ height: 120 }} />}
@@ -767,7 +769,7 @@ function SiteRows({ site, t, externalOpen, onToggleExternal, onFilter }: { site:
           )}
         </td>
       </tr>
-      {site.external ? (
+      {site.external && (site.external.today > 0 || site.external.presentNow > 0) ? (
         <tr className={styles.subRow}>
           <td colSpan={7}>
             <button type="button" className={styles.chip} onClick={onToggleExternal} aria-expanded={externalOpen}>
