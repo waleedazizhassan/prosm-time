@@ -179,5 +179,36 @@
     "createdAtColumn": "Esportato il",
     "downloadAction": "Scarica"
   },
-  "ownExportsHint": "Presenze, indennità e fogli ore si scaricano e stampano dalle loro pagine. Ogni PDF esportato resta qui, da scaricare di nuovo quando vuoi."
+  "ownExportsHint": "Presenze, indennità e fogli ore si scaricano e stampano dalle loro pagine. Ogni PDF esportato resta qui, da scaricare di nuovo quando vuoi.",
+  "payroll": {
+    "title": "Esportazione paghe",
+    "subtitle": "Una riga per persona per il periodo, per il tuo contabile. Somma i dati dell'app e non calcola stipendi.",
+    "allColumns": "Tutte le colonne",
+    "template": "Modello",
+    "templateName": "Nome del nuovo modello",
+    "saveTemplate": "Salva modello",
+    "deleteTemplate": "Elimina modello",
+    "templateFailed": "Impossibile salvare questo modello.",
+    "excel": "Scarica Excel",
+    "csv": "Scarica CSV",
+    "periodTooLong": "Scegli un periodo di massimo 3 mesi.",
+    "columns": {
+      "name": "Nome",
+      "email": "E-mail",
+      "daysWorked": "Giorni lavorati",
+      "workedHours": "Ore lavorate",
+      "overtimeHours": "Ore di straordinario",
+      "weightedOvertimeHours": "Ore di straordinario maggiorate",
+      "lateMinutes": "Minuti di ritardo",
+      "earlyLeaveMinutes": "Minuti di uscita anticipata",
+      "deductionMinutes": "Minuti di trattenuta",
+      "absenceDays": "Giorni di assenza",
+      "paidLeaveDays": "Giorni di ferie pagate",
+      "unpaidLeaveDays": "Giorni di permesso non retribuito",
+      "leaveDeduction": "Trattenuta permesso non retribuito",
+      "allowances": "Indennità",
+      "overtimeAmount": "Importo straordinari e giorni extra",
+      "currency": "Valuta"
+    }
+  }
 }

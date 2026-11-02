@@ -15,6 +15,7 @@ import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
 import { buildAttendanceLogPdf } from "../attendance/attendanceLogPdf";
 import { buildCombinedAllowanceSheetPdf } from "../allowances/allowancesPdf";
 import { buildGenericReportPdf } from "./genericReportPdf";
+import PayrollExportCard from "./PayrollExportCard";
 
 import { useAuth } from "../../core/context/AuthContext";
 
@@ -536,6 +537,8 @@ export default function ReportsPage() {
         )}
       </Card>
       )}
+
+      <PayrollExportCard startDate={startDate} endDate={endDate} />
 
       <Card title={t("recentExports.title")}>
         <Table
