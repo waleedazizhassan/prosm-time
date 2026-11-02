@@ -185,6 +185,11 @@ export default function localizeNotification(notification: AppNotification, t: T
       const ends = typeof data.expiresAt === "string" ? data.expiresAt.slice(0, 10) : "";
       return { title: t("shell:notifications.trial.licenseEndingTitle"), body: t("shell:notifications.trial.licenseEndingBody", { date: ends, license: typeof data.licenseNumber === "string" ? data.licenseNumber : "" }) };
     }
+    case "new_device_login": {
+      const device = typeof data.device === "string" ? data.device : "";
+      const name = typeof data.name === "string" ? data.name : null;
+      return { title: t("shell:notifications.newDevice.title"), body: name ? t("shell:notifications.newDevice.ownerBody", { name, device }) : t("shell:notifications.newDevice.body", { device }) };
+    }
     case "shift_assigned": {
       const shiftDate = typeof data.shiftDate === "string" ? data.shiftDate : null;
       if (!shiftDate) break;

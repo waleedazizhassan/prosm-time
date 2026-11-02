@@ -197,6 +197,11 @@
     "accountDeleted": {
       "title": "An employee deleted their account",
       "body": "{{name}} deleted their account. Their attendance and timesheets are kept as \"Deleted user\"."
+    },
+    "newDevice": {
+      "title": "New device signed in",
+      "body": "Your account was opened on a new device: {{device}}. If this was not you, change your password.",
+      "ownerBody": "{{name}} signed in on a new device: {{device}}."
     }
   },
   "items": {
