@@ -16,7 +16,7 @@ describe("manager insights", () => {
     await t.su("insert into site_assignments (site_id, user_id, role_at_site) values ($1, $2, 'manager')", [site, manager.userId]);
     await t.su("update sites set timezone = 'UTC' where id = $1", [site]);
     await t.su(
-      "insert into shift_assignments (organization_id, user_id, site_id, shift_date, start_time, end_time) values ($1, $2, $3, (now() - interval '40 minutes')::date, (now() - interval '40 minutes')::time, (now() + interval '6 hours')::time)",
+      "insert into shift_assignments (organization_id, user_id, site_id, shift_date, start_time, end_time) values ($1, $2, $3, ((now() at time zone 'UTC') - interval '40 minutes')::date, ((now() at time zone 'UTC') - interval '40 minutes')::time, ((now() at time zone 'UTC') + interval '6 hours')::time)",
       [org.id, worker.userId, site],
     );
     await t.su("select public.process_prosm_time_manager_alerts()");
@@ -31,7 +31,7 @@ describe("manager insights", () => {
     const site = await createSite(t, org, "Yard");
     const worker = await addMember(t, org, "employee", "Busy Worker");
     await assignToSite(t, site, worker);
-    await t.su("update sites set timezone = 'UTC', shift_end_time = (now() + interval '20 minutes')::time where id = $1", [site]);
+    await t.su("update sites set shift_end_time = ((now() at time zone public.prosm_time_site_timezone(id, organization_id)) + interval '20 minutes')::time where id = $1", [site]);
     await t.su("insert into attendance_sessions (organization_id, user_id, site_id, status, clock_in_at) values ($1, $2, $3, 'clocked_in', now() - interval '7 hours')", [org.id, worker.userId, site]);
     await t.su("select public.process_prosm_time_manager_alerts()");
     expect(await t.su("select id from notifications where type = 'overtime_soon' and user_id = $1", [org.owner.userId])).toHaveLength(1);
