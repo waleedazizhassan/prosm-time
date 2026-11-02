@@ -59,5 +59,11 @@
   "view": {
     "month": "Monatsansicht",
     "list": "Listenansicht"
+  },
+  "group": {
+    "label": "Gruppieren nach",
+    "none": "Keine Gruppierung",
+    "employee": "Mitarbeiter",
+    "day": "Tag"
   }
 }

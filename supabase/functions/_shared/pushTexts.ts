@@ -144,6 +144,11 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "accountDeleted": {
         "title": "موظف حذف حسابه",
         "body": "حذف {{name}} حسابه. سجلات حضوره وكشوفه محفوظة باسم «مستخدم محذوف»."
+      },
+      "newDevice": {
+        "title": "دخول من جهاز جديد",
+        "body": "تم فتح حسابك على جهاز جديد: {{device}}. إن لم تكن أنت، غيّر كلمة المرور.",
+        "ownerBody": "دخل {{name}} من جهاز جديد: {{device}}."
       }
     },
     "leaveTypes": {
@@ -299,6 +304,11 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "accountDeleted": {
         "title": "An employee deleted their account",
         "body": "{{name}} deleted their account. Their attendance and timesheets are kept as \"Deleted user\"."
+      },
+      "newDevice": {
+        "title": "New device signed in",
+        "body": "Your account was opened on a new device: {{device}}. If this was not you, change your password.",
+        "ownerBody": "{{name}} signed in on a new device: {{device}}."
       }
     },
     "leaveTypes": {
@@ -454,6 +464,11 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "accountDeleted": {
         "title": "Ein Mitarbeiter hat sein Konto gelöscht",
         "body": "{{name}} hat sein Konto gelöscht. Anwesenheit und Stundenzettel bleiben als „Gelöschter Nutzer\" erhalten."
+      },
+      "newDevice": {
+        "title": "Anmeldung auf neuem Gerät",
+        "body": "Ihr Konto wurde auf einem neuen Gerät geöffnet: {{device}}. Wenn Sie das nicht waren, ändern Sie Ihr Passwort.",
+        "ownerBody": "{{name}} hat sich auf einem neuen Gerät angemeldet: {{device}}."
       }
     },
     "leaveTypes": {
@@ -609,6 +624,11 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "accountDeleted": {
         "title": "Un employé a supprimé son compte",
         "body": "{{name}} a supprimé son compte. Ses pointages et feuilles de temps sont conservés sous « Utilisateur supprimé »."
+      },
+      "newDevice": {
+        "title": "Connexion depuis un nouvel appareil",
+        "body": "Votre compte a été ouvert sur un nouvel appareil : {{device}}. Si ce n'était pas vous, changez votre mot de passe.",
+        "ownerBody": "{{name}} s'est connecté depuis un nouvel appareil : {{device}}."
       }
     },
     "leaveTypes": {
@@ -764,6 +784,11 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "accountDeleted": {
         "title": "Un dipendente ha eliminato il suo account",
         "body": "{{name}} ha eliminato il suo account. Presenze e fogli ore restano come \"Utente eliminato\"."
+      },
+      "newDevice": {
+        "title": "Accesso da un nuovo dispositivo",
+        "body": "Il tuo account è stato aperto su un nuovo dispositivo: {{device}}. Se non sei stato tu, cambia la password.",
+        "ownerBody": "{{name}} ha effettuato l'accesso da un nuovo dispositivo: {{device}}."
       }
     },
     "leaveTypes": {

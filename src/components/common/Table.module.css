@@ -203,3 +203,38 @@
     content: none;
   }
 }
+
+/* Plan stage 4.2: pages and groups for long lists. */
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-2);
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+.pagerButton {
+  min-height: 36px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.pagerButton:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.groupCell {
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-hover);
+  color: var(--text-primary);
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+  text-align: start;
+}

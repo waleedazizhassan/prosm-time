@@ -1,4 +1,5 @@
-import { useMemo, useState, type ReactNode } from "react";
+import { Fragment, useMemo, useState, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import LoadingState from "./LoadingState";
 import EmptyState from "./EmptyState";
 import styles from "./Table.module.css";
@@ -27,6 +28,10 @@ interface TableProps<T> {
   // Plan stage 4.2, the spreadsheet look for long lists: compact rows, the header
   // and the first column stay in view, and it scrolls sideways on a phone.
   grid?: boolean;
+  // Rows per page; a grid defaults to 50. A long list stays quick on a phone.
+  pageSize?: number;
+  // Rows of the same group together, each group under its own heading.
+  groupBy?: (row: T) => string;
 }
 
 // PROSM Time - a lighter port of PROSM Platform's own Table component
@@ -38,9 +43,11 @@ interface TableProps<T> {
 // selection/density are PROSM Platform's own Table features this
 // product doesn't need yet - the shape (columns + render) is what's
 // shared, not every capability.
-export default function Table<T>({ columns, data, getRowId, loading = false, emptyTitle, emptyMessage, emptyIllustrationSrc, onRowClick, grid = false }: TableProps<T>) {
+export default function Table<T>({ columns, data, getRowId, loading = false, emptyTitle, emptyMessage, emptyIllustrationSrc, onRowClick, grid = false, pageSize, groupBy }: TableProps<T>) {
+  const { t } = useTranslation("common");
+  const [page, setPage] = useState(0);
   const [sort, setSort] = useState<{ key: string; direction: 1 | -1 } | null>(null);
-  const rows = useMemo(() => {
+  const sorted = useMemo(() => {
     const column = sort && columns.find((candidate) => candidate.key === sort.key);
     if (!sort || !column?.sortValue) return data;
     const value = column.sortValue;
@@ -53,6 +60,16 @@ export default function Table<T>({ columns, data, getRowId, loading = false, emp
       return (left < right ? -1 : 1) * sort.direction;
     });
   }, [columns, data, sort]);
+  const grouped = useMemo(() => {
+    if (!groupBy) return sorted;
+    const groups = new Map<string, T[]>();
+    for (const row of sorted) groups.set(groupBy(row), [...(groups.get(groupBy(row)) ?? []), row]);
+    return [...groups.values()].flat();
+  }, [sorted, groupBy]);
+  const perPage = pageSize ?? (grid ? 50 : grouped.length || 1);
+  const pages = Math.max(1, Math.ceil(grouped.length / perPage));
+  const current = Math.min(page, pages - 1);
+  const rows = grouped.slice(current * perPage, (current + 1) * perPage);
   const toggleSort = (key: string) => setSort((current) => (current?.key === key ? { key, direction: current.direction === 1 ? -1 : 1 } : { key, direction: 1 }));
 
   return (
@@ -89,9 +106,16 @@ export default function Table<T>({ columns, data, getRowId, loading = false, emp
                 </td>
               </tr>
             ) : (
-              rows.map((row) => (
+              rows.map((row, index) => (
+                <Fragment key={getRowId(row)}>
+                  {groupBy && (index === 0 || groupBy(rows[index - 1]) !== groupBy(row)) ? (
+                    <tr>
+                      <th scope="colgroup" colSpan={columns.length} className={styles.groupCell}>
+                        {groupBy(row)}
+                      </th>
+                    </tr>
+                  ) : null}
                 <tr
-                  key={getRowId(row)}
                   className={styles.row}
                   onClick={onRowClick ? () => onRowClick(row) : undefined}
                   style={onRowClick ? { cursor: "pointer" } : undefined}
@@ -102,11 +126,23 @@ export default function Table<T>({ columns, data, getRowId, loading = false, emp
                     </td>
                   ))}
                 </tr>
+                </Fragment>
               ))
             )}
           </tbody>
         </table>
       </div>
+      {pages > 1 ? (
+        <div className={styles.pager}>
+          <button type="button" className={styles.pagerButton} disabled={current === 0} onClick={() => setPage(current - 1)}>
+            {t("table.previous")}
+          </button>
+          <span>{t("table.page", { page: current + 1, pages })}</span>
+          <button type="button" className={styles.pagerButton} disabled={current >= pages - 1} onClick={() => setPage(current + 1)}>
+            {t("table.next")}
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 }

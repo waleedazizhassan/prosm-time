@@ -348,5 +348,10 @@
   "dropdown": {
     "search": "ابحث…",
     "noMatch": "لا نتائج"
+  },
+  "table": {
+    "previous": "السابق",
+    "next": "التالي",
+    "page": "صفحة {{page}} من {{pages}}"
   }
 }
