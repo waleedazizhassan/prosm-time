@@ -223,10 +223,13 @@ export default function SchedulePage() {
     <PageShell title="">
       <PageBanner pageId="schedule" illustration={shiftsHeaderImage} />
 
-      <Card title={t("myShiftsTitle")}>
-        <ErrorText>{loadError}</ErrorText>
-        <Table columns={myColumns} data={myShifts} getRowId={(row) => row.id} loading={loading} emptyMessage={t("emptyMine")} />
-      </Card>
+      {/* The owner works no shifts: their own list is left out. */}
+      {profile?.isOwner ? null : (
+        <Card title={t("myShiftsTitle")}>
+          <ErrorText>{loadError}</ErrorText>
+          <Table columns={myColumns} data={myShifts} getRowId={(row) => row.id} loading={loading} emptyMessage={t("emptyMine")} />
+        </Card>
+      )}
 
       <OpenShiftsCard
         manageSiteId={canManage && selectedSiteId ? selectedSiteId : null}
