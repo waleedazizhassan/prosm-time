@@ -211,7 +211,6 @@ export default function ClockInOutCard() {
   const [locationBlocked, setLocationBlocked] = useState(false);
   const [suggestClockIn, setSuggestClockIn] = useState(false);
   const [suggestionDismissed, setSuggestionDismissed] = useState(false);
-  const [acceptedSuggestion, setAcceptedSuggestion] = useState<string | null>(null);
   useEffect(() => {
     void OrganizationRepository.getCurrentOrganization().then((result) => {
       if (!result.success || !result.data) return;
@@ -793,13 +792,14 @@ export default function ClockInOutCard() {
     }
   };
 
-  const handleClockInTap = () => {
-    if (!siteId && !manualLocationLabel.trim()) {
+  // Plan stage 8.4: a "yes" passes the site it was asked about, as its selection reaches this render only after the tap.
+  const handleClockInTap = (suggested?: Site) => {
+    if (!suggested && !siteId && !manualLocationLabel.trim()) {
       setError(t("attendance.manualLocationRequired"));
       return;
     }
     setError("");
-    if (clockInCameraRequired) {
+    if (suggested ? suggested.cameraRequired : clockInCameraRequired) {
       setCameraFor("clockIn");
       return;
     }
@@ -808,13 +808,6 @@ export default function ClockInOutCard() {
     setConfirmAction("clockIn");
     setConfirmModalOpen(true);
   };
-
-  // Plan stage 8.4: "yes" goes through the ordinary clock-in (photo, confirmation), once the site is selected.
-  useEffect(() => {
-    if (!acceptedSuggestion || siteId !== acceptedSuggestion) return;
-    setAcceptedSuggestion(null);
-    handleClockInTap();
-  });
 
   const handleClockOutTap = () => {
     if (clockOutCameraRequired) {
@@ -1246,7 +1239,7 @@ export default function ClockInOutCard() {
                     setManualLocationLabel("");
                     setSuggestionDismissed(true);
                     setSiteId(proximitySite.id);
-                    setAcceptedSuggestion(proximitySite.id);
+                    handleClockInTap(proximitySite);
                   }}
                 >
                   {t("attendance.suggestSiteAction")}
@@ -1257,7 +1250,7 @@ export default function ClockInOutCard() {
               </div>
             </div>
           ) : null}
-          <Button fullWidth onClick={handleClockInTap} loading={submitting} disabled={!siteId && !manualLocationLabel.trim()}>
+          <Button fullWidth onClick={() => handleClockInTap()} loading={submitting} disabled={!siteId && !manualLocationLabel.trim()}>
             {t("attendance.clockInAction")}
           </Button>
         </>
