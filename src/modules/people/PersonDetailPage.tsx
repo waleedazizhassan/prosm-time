@@ -320,7 +320,7 @@ export default function PersonDetailPage() {
   }
 
   return (
-    <PageShell title={member.fullName} subtitle={`${member.email} · ${member.roleName}`}>
+    <PageShell title={member.fullName} subtitle={`${member.email} · ${t(`common:roles.${member.roleKey}`, { defaultValue: member.roleName })}`}>
       <Link to="/people" style={{ color: "var(--text-link)", fontSize: "var(--font-sm)" }}>
         {t("detail.backToList")}
       </Link>

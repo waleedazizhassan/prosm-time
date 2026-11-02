@@ -122,7 +122,7 @@ export default function PeopleByRole({ compact = false, onOpen }: { compact?: bo
                       <span className={styles.main}>
                         <span className={styles.name}>{person.fullName}</span>
                         <span className={styles.meta}>
-                          {[person.isOwner ? t("ownerBadge") : person.roleName, person.currentSiteName ?? person.siteNames.join("، "), person.shiftStart ? `${person.shiftStart}–${person.shiftEnd}` : null]
+                          {[person.isOwner ? t("ownerBadge") : t(`common:roles.${person.roleKey}`, { defaultValue: person.roleName }), person.currentSiteName ?? person.siteNames.join("، "), person.shiftStart ? `${person.shiftStart}–${person.shiftEnd}` : null]
                             .filter(Boolean)
                             .join(" · ")}
                         </span>

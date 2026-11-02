@@ -156,7 +156,7 @@
     "redeemed": "The code is activated.",
     "redeemFailed": "The code is wrong or already used.",
     "names": {
-      "legacy": "Current plan",
+      "legacy": "Your current plan",
       "starter": "Starter",
       "business": "Business",
       "pro": "Pro"
@@ -176,5 +176,12 @@
     "subtitle": "When someone opens the app inside a site, it asks whether to clock in. Nothing is recorded without their answer, the ordinary clock-in follows, and no background location is used.",
     "label": "Ask the person to clock in",
     "failed": "Unable to save this setting."
+  },
+  "sections": {
+    "subscription": "Subscription",
+    "sites": "Sites and clocking",
+    "time": "Working time and overtime",
+    "leave": "Leave",
+    "privacy": "Data and privacy"
   }
 }

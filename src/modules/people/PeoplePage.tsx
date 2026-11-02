@@ -66,7 +66,7 @@ export default function PeoplePage() {
       ),
     },
     { key: "email", header: t("columns.email"), render: (member) => member.email },
-    { key: "role", header: t("columns.role"), render: (member) => member.roleName },
+    { key: "role", header: t("columns.role"), render: (member) => t(`common:roles.${member.roleKey}`, { defaultValue: member.roleName }) },
     {
       key: "status",
       header: t("columns.status"),

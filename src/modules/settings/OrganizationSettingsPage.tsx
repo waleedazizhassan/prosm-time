@@ -27,6 +27,10 @@ import { APP_VERSION } from "../../core/appVersion";
 // PROSM Platform's own Header/OrganizationCard, replaced bulkier
 // Dashboard cards per an earlier pass) - a genuinely good existing
 // home, not something misplaced.
+function SectionHeading({ children }: { children: string }) {
+  return <h2 style={{ margin: "var(--space-2) 0 calc(var(--space-2) * -1)", fontSize: "var(--font-lg)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)" }}>{children}</h2>;
+}
+
 export default function OrganizationSettingsPage() {
   const { t } = useTranslation("settings");
   const { profile, hasPermission } = useAuth();
@@ -61,18 +65,40 @@ export default function OrganizationSettingsPage() {
     <PageShell title="">
       <PageBanner pageId="settings" illustration={settingsHeaderImage} />
 
-      <SitePolicySettingsCard />
-      {hasPermission("settings.session_policy") ? <SessionPolicySettingsCard /> : null}
-      {hasPermission("leave.manage_types") ? <LeaveTypesSettingsCard /> : null}
+      {/* Owner 2026-11-02: grouped, the plan first and apart from the sites' rules. */}
       {isOwner ? (
         <>
+          <SectionHeading>{t("sections.subscription")}</SectionHeading>
           <PlanSettingsCard />
-          <RetentionSettingsCard />
-          <ClockSuggestionCard />
-          <OvertimePolicySettingsCard />
+        </>
+      ) : null}
+
+      <SectionHeading>{t("sections.sites")}</SectionHeading>
+      <SitePolicySettingsCard />
+      {isOwner ? (
+        <>
+          <SiteDefaultsSettingsCard />
           <NoSiteRadiusSettingsCard />
           <MockLocationSettingsCard />
-          <SiteDefaultsSettingsCard />
+          <ClockSuggestionCard />
+        </>
+      ) : null}
+
+      {hasPermission("settings.session_policy") || isOwner ? <SectionHeading>{t("sections.time")}</SectionHeading> : null}
+      {hasPermission("settings.session_policy") ? <SessionPolicySettingsCard /> : null}
+      {isOwner ? <OvertimePolicySettingsCard /> : null}
+
+      {hasPermission("leave.manage_types") ? (
+        <>
+          <SectionHeading>{t("sections.leave")}</SectionHeading>
+          <LeaveTypesSettingsCard />
+        </>
+      ) : null}
+
+      {isOwner ? (
+        <>
+          <SectionHeading>{t("sections.privacy")}</SectionHeading>
+          <RetentionSettingsCard />
         </>
       ) : null}
       <p style={{ margin: 0, fontSize: "var(--font-xs)", color: "var(--text-secondary)", textAlign: "center" }}>{t("common:versionLabel", { version: APP_VERSION })}</p>
