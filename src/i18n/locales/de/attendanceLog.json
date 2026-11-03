@@ -19,7 +19,8 @@
     "clockOutAt": "Gehen",
     "status": "Status",
     "workedHours": "Geleistete Stunden",
-    "notes": "Notizen"
+    "notes": "Notizen",
+    "date": "Datum"
   },
   "status": {
     "clocked_in": "Eingestempelt",

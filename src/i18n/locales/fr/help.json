@@ -8,11 +8,11 @@
     },
     "attendance": {
       "title": "Pointer l'arrivée et le départ",
-      "body": "Choisissez votre site (et projet le cas échéant) avant de pointer, ou laissez le site vide et décrivez où vous êtes. Certains sites exigent une photo : tenez la caméra immobile un instant pour confirmer une prise en direct. Avant l'envoi, un écran de confirmation montre exactement ce qui sera enregistré - photo, position, lieu et heure - avec une note et une activité facultatives visibles par votre responsable. L'heure enregistrée est toujours celle du serveur, pas celle de votre téléphone. Le pointage est bloqué un jour de congé approuvé. Dans l'application mobile, PROSM Time vous le rappelle aussi lui-même - même application fermée : peu après la fin de votre service si vous êtes encore pointé, et quelques minutes avant votre prochain service planifié."
+      "body": "Choisissez votre site (et projet le cas échéant) avant de pointer, ou laissez le site vide et décrivez où vous êtes. Certains sites exigent une photo : tenez la caméra immobile un instant pour confirmer une prise en direct. Avant l'envoi, un écran de confirmation montre exactement ce qui sera enregistré - photo, position, lieu et heure - avec une note et une activité facultatives visibles par votre responsable. L'heure enregistrée est toujours celle du serveur, pas celle de votre téléphone. Le pointage est bloqué un jour de congé approuvé. Dans l'application mobile, PROSM Time vous le rappelle aussi lui-même - même application fermée : peu après la fin de votre service si vous êtes encore pointé, et quelques minutes avant votre prochain service planifié. Si votre organisation l’a activé, ouvrir l’application dans un site enregistré demande « Vous êtes à …. Pointer maintenant ? » ; rien n’est enregistré sans votre réponse, et si vous acceptez vous suivez les étapes habituelles (et la photo, si elle est requise). Si votre site a des tâches de fin de poste, leur liste apparaît avant le départ."
     },
     "walkInGeofence": {
       "title": "Travailler sur un site auquel vous n'êtes pas affecté",
-      "body": "Si vous vous trouvez physiquement dans le géorepérage d'un site enregistré aujourd'hui sans y être formellement affecté, cela vous est suggéré automatiquement dans la liste des sites (marqué « vous êtes ici aujourd'hui ») - utile si vous travaillez réellement sur un site différent chaque jour. Pointer sans aucun site fonctionne aussi : votre propre point de pointage devient le centre d'un rayon à l'échelle de l'organisation pour le reste du poste, vous offrant la même protection en temps réel qu'un site enregistré, même dans un lieu jamais configuré comme site."
+      "body": "La liste des sites commence par le plus adapté : le site auquel vous êtes affecté ; sinon, si vous êtes dans un site enregistré, ce site, marqué « vous êtes ici aujourd’hui » ; sinon « Sans site ». Les autres suivent, du plus proche au plus loin. Le pointage sans site reste possible, et votre point d’arrivée devient alors le centre de la zone de travail de l’organisation pour le reste du poste."
     },
     "siteChange": {
       "title": "Changer de site en cours de poste",
@@ -44,7 +44,7 @@
     },
     "reportsCenter": {
       "title": "Centre de rapports",
-      "body": "Choisissez un type de rapport, une période et, si besoin, un employé ou un site, puis exportez en PDF. Rapports : présence (les heures hors ligne sont marquées), indemnités, effectifs, sous-traitants, site, retards, départs manquants, conflits de congés, interventions des responsables et violations de position - qui regroupe désormais la sortie de zone (avec motif et statut), les positions invraisemblables et les fausses positions. Un responsable ne voit que ses sites. À côté de chaque téléchargement PDF se trouve un bouton Imprimer. Dans le PDF, aucune ligne n'est coupée entre deux pages, les en-têtes de colonnes se répètent sur chaque page et les pages sont numérotées."
+      "body": "Choisissez un type de rapport, une période et, si besoin, un employé ou un site, puis exportez en PDF. Rapports : présence (les heures hors ligne sont marquées), indemnités, effectifs, sous-traitants, site, retards, départs manquants, conflits de congés, interventions des responsables et violations de position - qui regroupe désormais la sortie de zone (avec motif et statut), les positions invraisemblables et les fausses positions. Un responsable ne voit que ses sites. À côté de chaque téléchargement PDF se trouve un bouton Imprimer. Dans le PDF, aucune ligne n'est coupée entre deux pages, les en-têtes de colonnes se répètent sur chaque page et les pages sont numérotées. La même page propose l’export de paie en Excel ou CSV avec des modèles enregistrés, le coût de la main-d’œuvre à partir des taux horaires, et le budget de chaque projet face aux dépenses."
     },
     "sites": {
       "title": "Sites (administrateurs)",
@@ -56,7 +56,7 @@
     },
     "settingsCenter": {
       "title": "Paramètres (propriétaire)",
-      "body": "Les paramètres ne contiennent que ce qui vaut pour toute l'organisation : le rayon pour un pointage sans site, le refus ou non des fausses positions, et les valeurs de départ d'un nouveau site. Les règles d'un site sont sur la page du site."
+      "body": "Les paramètres (pour le propriétaire) sont en sections : Abonnement (offre et code d’activation) d’abord, puis Sites et pointage (zone de travail sans site, refus des fausses positions, question de pointage à l’ouverture dans un site, valeurs de départ des nouveaux sites), puis Temps, puis Congés et leurs types, puis Données et confidentialité (conservation). Les règles de chaque site sont sur la page du site."
     },
     "leave": {
       "title": "Congés",
@@ -64,7 +64,7 @@
     },
     "schedule": {
       "title": "Planning des shifts",
-      "body": "Consultez vos prochains shifts depuis la page Planning des shifts dans la barre latérale - chacun voit les siens. Les responsables ayant l'autorité de planification peuvent en plus créer des modèles de shifts réutilisables par site (ex. « Matin », « Nuit ») et affecter des employés spécifiques à des shifts précis, y compris de véritables shifts de nuit traversant minuit (affichés avec un repère « (+1) ») - le système détecte automatiquement les chevauchements, même à travers minuit."
+      "body": "Consultez vos prochains postes sur la page Planning. Les responsables autorisés créent des postes types par site et y affectent des personnes, y compris des postes de nuit (marqués « (+1) ») ; les chevauchements sont refusés. La même page propose les postes ouverts (un responsable publie un poste vacant, les personnes du site le demandent, il en choisit une), l’échange de poste avec un collègue après accord du responsable, le coût estimé du planning et les tâches de fin de poste de chaque site."
     },
     "calendar": {
       "title": "Calendrier hégirien ou grégorien",
@@ -76,7 +76,7 @@
     },
     "getTheApp": {
       "title": "Utiliser PROSM Time",
-      "body": "Sur un téléphone Android, téléchargez l'APK depuis prosm.net et installez-le - l'application vous prévient quand une mise à jour est prête. Sur tout ordinateur, tablette ou iPhone, ouvrez https://time.prosm.net dans le navigateur (vous pouvez l'ajouter à l'écran d'accueil) ; il se met à jour seul. C'est le même PROSM Time, avec le même compte."
+      "body": "Sur un téléphone Android : installez PROSM Time depuis Google Play, ou téléchargez l’APK sur prosm.net (cette version signale elle-même les mises à jour). Sur tout ordinateur, tablette ou iPhone : ouvrez https://time.prosm.net dans le navigateur (vous pouvez l’ajouter à l’écran d’accueil) ; il se met à jour seul. C’est le même PROSM Time avec le même compte."
     },
     "liveMap": {
       "title": "Carte en direct",
@@ -96,7 +96,7 @@
     },
     "privacy": {
       "title": "Votre vie privée",
-      "body": "PROSM Time enregistre votre position lors des pointages, pauses, changements de site et SOS. Seulement si votre organisation active le suivi de présence, aussi environ toutes les 5 minutes pendant le poste - sur Android aussi en arrière-plan, après vous en avoir informé et avec une notification visible - et toujours jusqu'au départ seulement. Une photo uniquement si votre site l'exige ; pas de reconnaissance faciale. Les positions sont supprimées après 30 jours, les photos après 90 jours. Vous pouvez retirer les autorisations dans les réglages de l'appareil. Pour vos droits, adressez-vous d'abord à votre organisation ou à info@prosm.net. Détails dans la Politique de confidentialité et les Conditions d'utilisation ci-dessous."
+      "body": "PROSM Time enregistre votre position lors des pointages, pauses, changements de site et SOS. Seulement si votre organisation active le suivi de présence, aussi environ toutes les 5 minutes pendant le poste - sur Android aussi en arrière-plan, après vous en avoir informé et avec une notification visible - et toujours jusqu'au départ seulement. Une photo uniquement si votre site l'exige ; pas de reconnaissance faciale. Les positions sont supprimées après 30 jours, les photos après 90 jours. Vous pouvez retirer les autorisations dans les réglages de l'appareil. Pour vos droits, adressez-vous d'abord à votre organisation ou à info@prosm.net. Détails dans la Politique de confidentialité et les Conditions d'utilisation ci-dessous. Le propriétaire peut raccourcir la conservation dans Paramètres > Données et confidentialité. Quand votre compte se connecte depuis un nouvel appareil, vous êtes alerté, ainsi que le propriétaire."
     },
     "workCalendar": {
       "title": "Calendrier de travail : jours fériés, repos et jours particuliers",
@@ -120,7 +120,7 @@
     },
     "managerDashboard": {
       "title": "Le tableau de bord (propriétaire et responsables)",
-      "body": "Le propriétaire et quiconque a « Voir le tableau de bord » voient : une barre SOS (jusqu'à prise en charge), des pastilles pour ce qui attend (seulement s'il y a quelque chose), les chiffres avec comparaison à la période précédente seulement si elle a des données, la carte des sites avec leur zone et les présents, le tableau des sites avec les travailleurs externes, la file d'approbations, les personnes par rôle, prévu vs réel, indemnités et coût estimé (seulement avec « Voir le coût estimé ») et le journal des actions. Choisissez l'organisation, vos sites ou vous-même, et la période ; la carte et « présents » sont en direct. Actualisation chaque minute ; « Personnaliser » masque ou réordonne les cartes. Chaque chiffre ouvre les personnes concernées - présents, heures par personne, retards, absents et en congé, heures sup. par personne - avec un bouton vers la page complète."
+      "body": "Le propriétaire et quiconque a « Voir le tableau de bord » voient : une barre SOS (jusqu'à prise en charge), des pastilles pour ce qui attend (seulement s'il y a quelque chose), les chiffres avec comparaison à la période précédente seulement si elle a des données, la carte des sites avec leur zone et les présents, le tableau des sites avec les travailleurs externes, la file d'approbations, les personnes par rôle, prévu vs réel, indemnités et coût estimé (seulement avec « Voir le coût estimé ») et le journal des actions. Choisissez l'organisation, vos sites ou vous-même, et la période ; la carte et « présents » sont en direct. Actualisation chaque minute ; « Personnaliser » masque ou réordonne les cartes. Chaque chiffre ouvre les personnes concernées - présents, heures par personne, retards, absents et en congé, heures sup. par personne - avec un bouton vers la page complète. La carte « Indicateurs » montre ponctualité, retards et absences. Le propriétaire reçoit un résumé du matin à 7 h (heure du site), une alerte si quelqu’un manque son poste et une alerte avant qu’une personne passe en heures supplémentaires."
     },
     "peopleAndPhotos": {
       "title": "Personnes, rôles et photos de profil",
@@ -129,6 +129,10 @@
     "phoneNotifications": {
       "title": "Notifications et rappels sur le téléphone",
       "body": "Toutes les notifications PROSM Time portent la même petite icône PROSM. Vos rappels d'entrée et de sortie se règlent depuis leur carte du tableau de bord. Android 14 et suivants peuvent refuser les alarmes exactes ; un rappel peut alors arriver avec quelques minutes de retard - la carte l'indique et propose d'autoriser les alarmes exactes. Si le suivi de position ne peut pas démarrer (autorisation refusée ou localisation désactivée), l'appli vous le dit et propose de réessayer ou d'ouvrir les paramètres ; votre pointage n'est jamais perdu. La notification de mise à jour peut être balayée."
+    },
+    "subscription": {
+      "title": "Offre et abonnement (propriétaire)",
+      "body": "Paramètres > Abonnement affiche votre offre, les employés par rapport à la limite, les sites et la date de fin, avec une case pour le code d’activation : saisissez le code acheté et appuyez sur « Activer le code » ; l’offre change aussitôt. Vous êtes prévenu avant la fin de la licence. Une fois la licence échue et le délai de grâce passé, l’organisation passe en lecture seule : tout le monde peut ouvrir l’application et tout voir, les modifications et le pointage sont suspendus jusqu’au renouvellement, et rien n’est supprimé."
     }
   },
   "faq": {
@@ -175,7 +179,7 @@
     },
     "q11": {
       "question": "Comment fonctionne la démo de 30 jours ?",
-      "answer": "Sur la page d’accueil, « Utiliser la version d’essai » ouvre l’activation habituelle sans code d’activation ; l’organisation et son propriétaire sont créés aussitôt. L’essai dure 30 jours (heure du serveur) et une barre indique les jours restants. Une semaine avant la fin, le propriétaire reçoit une notification et un e-mail avec sales@prosm.net, info@prosm.net et support@prosm.net. Ensuite l’application est mise en pause, rien n’est supprimé : saisissez un code d’activation ou demandez à PROSM de renouveler la licence - tout reprend avec vos données. Un essai par e-mail."
+      "answer": "Sur la page d’accueil, « Utiliser l’essai » ouvre les étapes d’activation habituelles sans code, et crée aussitôt l’organisation et son propriétaire. L’essai dure 30 jours (heure du serveur) et une barre affiche les jours restants. Une semaine avant la fin, le propriétaire reçoit une notification et un e-mail avec sales@prosm.net, info@prosm.net et support@prosm.net. À la fin, l’organisation passe en lecture seule sans rien supprimer : saisissez un code d’activation dans Paramètres > Abonnement, ou demandez à PROSM de renouveler la licence, et tout reprend comme avant. Un essai par e-mail."
     },
     "q12": {
       "question": "Le pointage fonctionne-t-il sans internet ?",
@@ -187,7 +191,7 @@
     },
     "q14": {
       "question": "Qui voit ma position et mes photos, et combien de temps ?",
-      "answer": "Vous, les responsables de votre site et le propriétaire de votre organisation. Les positions relevées pendant le service sont supprimées après 30 jours et les photos de présence après 90 jours. Le contrôle de présence réelle ne conserve aucune donnée du visage - seulement la photo et le résultat. Votre photo de profil n'est visible que dans votre organisation. La politique de confidentialité explique le reste."
+      "answer": "Vous, les responsables de votre site et le propriétaire de l’organisation. Les positions pendant le poste sont supprimées après 30 jours et les photos de pointage après 90 jours, ou plus tôt si le propriétaire a raccourci ces durées. La vérification en direct ne conserve aucune donnée du visage — seulement la photo et le résultat. Votre photo de profil n’est visible que dans votre organisation. La politique de confidentialité précise le reste."
     },
     "q15": {
       "question": "Le SOS appelle-t-il une ambulance ou la police ?",
@@ -199,8 +203,5 @@
     "body": "Pour toute aide produit ou assistance, contactez-nous à :",
     "infoLabel": "Demandes générales :",
     "supportLabel": "Assistance :"
-  },
-  "about": {
-    "title": "À propos"
   }
 }

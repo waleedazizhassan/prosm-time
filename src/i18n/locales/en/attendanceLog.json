@@ -19,7 +19,8 @@
     "clockOutAt": "Clock Out",
     "status": "Status",
     "workedHours": "Hours Worked",
-    "notes": "Notes"
+    "notes": "Notes",
+    "date": "Date"
   },
   "status": {
     "clocked_in": "Clocked In",

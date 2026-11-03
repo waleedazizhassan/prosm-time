@@ -16,7 +16,6 @@ import PlanSettingsCard from "./PlanSettingsCard";
 import RetentionSettingsCard from "./RetentionSettingsCard";
 import ClockSuggestionCard from "./ClockSuggestionCard";
 import PageBanner from "../../components/common/PageBanner";
-import { APP_VERSION } from "../../core/appVersion";
 
 // PROSM Time - § live UX review, user-directed: "a professional
 // reorganization" - org-wide settings (today: the no-site geofence
@@ -101,7 +100,6 @@ export default function OrganizationSettingsPage() {
           <RetentionSettingsCard />
         </>
       ) : null}
-      <p style={{ margin: 0, fontSize: "var(--font-xs)", color: "var(--text-secondary)", textAlign: "center" }}>{t("common:versionLabel", { version: APP_VERSION })}</p>
     </PageShell>
   );
 }

@@ -45,7 +45,8 @@ function formatWorkedHours(clockInAt: string, clockOutAt: string | null): string
 // geocoding provider exists in this codebase, and coordinates are
 // already the real, verifiable source of truth an admin can act on.
 function LocationCell({ location, t }: { location: AttendanceEventLocation | null; t: (key: string) => string }) {
-  if (!location) return <span style={{ color: "var(--text-secondary)" }}>{t("noLocation")}</span>;
+  // owner 2026-11-03: the long "no location" note wraps, so the table fits a laptop with the new date column
+  if (!location) return <span style={{ display: "inline-block", maxWidth: 150, whiteSpace: "normal", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("noLocation")}</span>;
   const mapsUrl = `https://www.google.com/maps?q=${location.latitude},${location.longitude}`;
   return (
     <span style={{ display: "inline-flex", alignItems: "center", gap: "var(--space-1)" }}>
@@ -243,6 +244,8 @@ export default function AttendanceLogPage() {
 
   const columns: TableColumn<TodayAttendanceRow>[] = [
     { key: "name", header: t("columns.employee"), sortValue: (row) => row.userFullName, render: (row) => <PersonName name={row.userFullName} userId={row.userId} /> },
+    // owner 2026-11-03: the day of each record, so a week or a month reads without grouping
+    ...(grouping === "day" ? [] : [{ key: "date", header: t("columns.date"), sortValue: (row: TodayAttendanceRow) => row.clockInAt, render: (row: TodayAttendanceRow) => <span style={{ whiteSpace: "nowrap" }}>{formatDateOnly(row.clockInAt, i18n.language)}</span> }]),
     {
       key: "site",
       header: t("columns.site"),

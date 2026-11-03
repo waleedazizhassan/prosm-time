@@ -70,8 +70,10 @@ export default function PlanSettingsCard() {
           <dd style={{ margin: 0 }}>{date}</dd>
         </div>
       </dl>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)", alignItems: "flex-end", marginTop: "var(--space-4)" }}>
+      <div style={{ marginTop: "var(--space-4)", maxWidth: 420 }}>
         <Input name="activationCode" label={t("plan.codeLabel")} value={code} onChange={(event) => setCode(event.target.value)} autoComplete="off" />
+      </div>
+      <div style={{ display: "flex", justifyContent: "flex-start", marginTop: "var(--space-3)" }}>
         <Button onClick={redeem} loading={saving} disabled={!code.trim() || saving}>
           {t("plan.redeem")}
         </Button>

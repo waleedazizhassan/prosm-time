@@ -8,11 +8,11 @@
     },
     "attendance": {
       "title": "Timbrare entrata e uscita",
-      "body": "Scegli la sede (e il progetto) prima di timbrare, oppure lascia vuota la sede e descrivi dove ti trovi. Alcune sedi richiedono una foto: tieni ferma la fotocamera un istante per confermare una ripresa dal vivo. Prima dell'invio, una schermata mostra esattamente cosa verrà registrato - foto, posizione, luogo e ora - con nota e attività facoltative visibili al responsabile. L'ora registrata è sempre quella del server, non del telefono. La timbratura è bloccata nei giorni di ferie approvate. Nell'app per telefono PROSM Time te lo ricorda anche da solo - anche ad app chiusa: poco dopo la fine del turno se sei ancora timbrato, e qualche minuto prima del prossimo turno programmato."
+      "body": "Scegli la sede (e il progetto) prima di timbrare, oppure lascia vuota la sede e descrivi dove ti trovi. Alcune sedi richiedono una foto: tieni ferma la fotocamera un istante per confermare una ripresa dal vivo. Prima dell'invio, una schermata mostra esattamente cosa verrà registrato - foto, posizione, luogo e ora - con nota e attività facoltative visibili al responsabile. L'ora registrata è sempre quella del server, non del telefono. La timbratura è bloccata nei giorni di ferie approvate. Nell'app per telefono PROSM Time te lo ricorda anche da solo - anche ad app chiusa: poco dopo la fine del turno se sei ancora timbrato, e qualche minuto prima del prossimo turno programmato. Se la tua organizzazione l’ha attivato, aprendo l’app dentro una sede registrata ti chiede «Sei a …. Timbri ora l’entrata?»; senza la tua risposta non viene registrato nulla, e se accetti segui i soliti passaggi (e la foto, se richiesta). Se la tua sede ha attività di fine turno, l’elenco compare prima dell’uscita."
     },
     "walkInGeofence": {
       "title": "Lavorare in una sede a cui non sei assegnato",
-      "body": "Se oggi ti trovi fisicamente dentro il geofence di una sede registrata senza esservi formalmente assegnato, ti viene suggerita automaticamente nell'elenco delle sedi (contrassegnata come \"sei qui oggi\") - utile se lavori davvero in una sede diversa ogni giorno. Anche timbrare senza alcuna sede funziona: il tuo stesso punto di timbratura diventa il centro di un raggio a livello di organizzazione per il resto del turno, offrendoti la stessa protezione in tempo reale di una sede registrata, anche in un luogo mai configurato come sede."
+      "body": "L’elenco delle sedi parte dalla più adatta: la sede a cui sei assegnato; altrimenti, se ti trovi in una sede registrata, quella, segnata «sei qui oggi»; altrimenti «Nessuna sede». Le altre seguono, dalla più vicina. Timbrare senza sede resta possibile, e il punto di entrata diventa il centro dell’area di lavoro dell’organizzazione per il resto del turno."
     },
     "siteChange": {
       "title": "Cambiare sede a metà turno",
@@ -44,7 +44,7 @@
     },
     "reportsCenter": {
       "title": "Centro report",
-      "body": "Scegli tipo di report, periodo ed eventualmente dipendente o sede, poi esporta in PDF. Report: presenze (gli orari offline sono contrassegnati), indennità, forza lavoro, collaboratori, sede, ritardi, uscite mancanti, conflitti ferie, interventi dei responsabili e violazioni di posizione - che ora riunisce l'uscita dall'area (con motivo e stato), posizioni non plausibili e posizioni false. Un responsabile vede solo le sue sedi. Accanto a ogni download PDF c'è un pulsante Stampa. Nel PDF nessuna riga viene divisa tra due pagine, le intestazioni delle colonne si ripetono su ogni pagina e le pagine sono numerate."
+      "body": "Scegli tipo di report, periodo ed eventualmente dipendente o sede, poi esporta in PDF. Report: presenze (gli orari offline sono contrassegnati), indennità, forza lavoro, collaboratori, sede, ritardi, uscite mancanti, conflitti ferie, interventi dei responsabili e violazioni di posizione - che ora riunisce l'uscita dall'area (con motivo e stato), posizioni non plausibili e posizioni false. Un responsabile vede solo le sue sedi. Accanto a ogni download PDF c'è un pulsante Stampa. Nel PDF nessuna riga viene divisa tra due pagine, le intestazioni delle colonne si ripetono su ogni pagina e le pagine sono numerate. Nella stessa pagina: esportazione paghe in Excel o CSV con modelli salvati, costo del lavoro dalle tariffe orarie e il budget di ogni progetto rispetto alla spesa."
     },
     "sites": {
       "title": "Sedi (amministratori)",
@@ -56,7 +56,7 @@
     },
     "settingsCenter": {
       "title": "Impostazioni (titolare)",
-      "body": "Le impostazioni contengono solo ciò che vale per tutta l'organizzazione: il raggio per chi timbra senza sede, il rifiuto o meno delle posizioni false e i valori iniziali di una nuova sede. Le regole di una sede sono nella sua pagina."
+      "body": "Le impostazioni (per il titolare) sono a sezioni: prima Abbonamento (piano e codice di attivazione), poi Sedi e timbrature (area di lavoro senza sede, rifiuto delle posizioni false, la domanda di timbratura all’apertura in una sede, valori iniziali delle nuove sedi), poi Orari, poi Ferie e tipi, poi Dati e privacy (conservazione). Le regole di ogni sede sono nella pagina della sede."
     },
     "leave": {
       "title": "Ferie",
@@ -64,7 +64,7 @@
     },
     "schedule": {
       "title": "Turni",
-      "body": "Consulta i tuoi turni futuri dalla pagina Turni nella barra laterale - ognuno vede i propri. I responsabili con autorità di pianificazione possono inoltre creare modelli di turno riutilizzabili per sede (es. \"Mattina\", \"Notte\") e assegnare dipendenti specifici a turni specifici, compresi veri turni notturni che superano la mezzanotte (mostrati con un indicatore \"(+1)\") - il sistema controlla automaticamente le sovrapposizioni, anche oltre la mezzanotte."
+      "body": "Vedi i prossimi turni nella pagina Turni. I responsabili autorizzati creano turni tipo per sede e vi assegnano persone, anche notturni (segnati «(+1)»); le sovrapposizioni vengono rifiutate. Nella stessa pagina: turni aperti (un responsabile pubblica un turno scoperto, le persone della sede lo chiedono, lui ne sceglie una), scambio di turno con un collega con l’approvazione del responsabile, il costo stimato dei turni e le attività di fine turno di ogni sede."
     },
     "calendar": {
       "title": "Calendario Hijri o Gregoriano",
@@ -76,7 +76,7 @@
     },
     "getTheApp": {
       "title": "Usare PROSM Time",
-      "body": "Su un telefono Android scarica l'APK da prosm.net e installalo - l'app ti avvisa quando c'è un aggiornamento. Su qualsiasi computer, tablet o iPhone apri https://time.prosm.net nel browser (puoi aggiungerlo alla schermata Home); si aggiorna da solo. È lo stesso PROSM Time, con lo stesso account."
+      "body": "Su un telefono Android: installa PROSM Time da Google Play, oppure scarica l’APK da prosm.net (questa versione avvisa da sola degli aggiornamenti). Su qualsiasi computer, tablet o iPhone: apri https://time.prosm.net nel browser (puoi aggiungerlo alla schermata Home); si aggiorna da solo. È sempre lo stesso PROSM Time con lo stesso account."
     },
     "liveMap": {
       "title": "Mappa in tempo reale",
@@ -96,7 +96,7 @@
     },
     "privacy": {
       "title": "La tua privacy",
-      "body": "PROSM Time registra la tua posizione a timbrature, pause, cambi sede e SOS. Solo se la tua organizzazione attiva il monitoraggio della presenza, anche circa ogni 5 minuti durante il turno - su Android anche in background, dopo avertelo comunicato e con una notifica visibile - e sempre solo fino all'uscita. Foto solo dove la sede la richiede; nessun riconoscimento facciale. Le posizioni sono eliminate dopo 30 giorni, le foto dopo 90 giorni. Puoi revocare i permessi nelle impostazioni del dispositivo. Per i tuoi diritti rivolgiti prima alla tua organizzazione o a info@prosm.net. Dettagli nell'Informativa sulla privacy e nelle Condizioni d'uso qui sotto."
+      "body": "PROSM Time registra la tua posizione a timbrature, pause, cambi sede e SOS. Solo se la tua organizzazione attiva il monitoraggio della presenza, anche circa ogni 5 minuti durante il turno - su Android anche in background, dopo avertelo comunicato e con una notifica visibile - e sempre solo fino all'uscita. Foto solo dove la sede la richiede; nessun riconoscimento facciale. Le posizioni sono eliminate dopo 30 giorni, le foto dopo 90 giorni. Puoi revocare i permessi nelle impostazioni del dispositivo. Per i tuoi diritti rivolgiti prima alla tua organizzazione o a info@prosm.net. Dettagli nell'Informativa sulla privacy e nelle Condizioni d'uso qui sotto. Il titolare può ridurre la conservazione in Impostazioni > Dati e privacy. Quando il tuo account accede da un nuovo dispositivo, ricevi un avviso, e lo riceve anche il titolare."
     },
     "workCalendar": {
       "title": "Calendario di lavoro: festività, riposi e giorni speciali",
@@ -120,7 +120,7 @@
     },
     "managerDashboard": {
       "title": "La dashboard (titolare e responsabili)",
-      "body": "Il titolare e chi ha «Vedere la dashboard» vedono: una barra SOS (finché qualcuno la prende in carico), chip per ciò che attende (solo se c'è qualcosa), i numeri con confronto con il periodo precedente solo se ci sono dati, la mappa dei siti con l'area e i presenti, la tabella dei siti con i lavoratori esterni, la coda delle approvazioni, le persone per ruolo, previsto vs effettivo, indennità e costo stimato (solo con «Vedere il costo stimato») e il registro delle azioni. Scegli organizzazione, i tuoi siti o te stesso, e il periodo; mappa e «presenti» sono in diretta. Si aggiorna ogni minuto; «Personalizza» nasconde o riordina le schede. Ogni cifra apre le persone che la compongono - presenti, ore per persona, ritardi, assenti e in ferie, straordinari per persona - con un pulsante verso la pagina completa."
+      "body": "Il titolare e chi ha «Vedere la dashboard» vedono: una barra SOS (finché qualcuno la prende in carico), chip per ciò che attende (solo se c'è qualcosa), i numeri con confronto con il periodo precedente solo se ci sono dati, la mappa dei siti con l'area e i presenti, la tabella dei siti con i lavoratori esterni, la coda delle approvazioni, le persone per ruolo, previsto vs effettivo, indennità e costo stimato (solo con «Vedere il costo stimato») e il registro delle azioni. Scegli organizzazione, i tuoi siti o te stesso, e il periodo; mappa e «presenti» sono in diretta. Si aggiorna ogni minuto; «Personalizza» nasconde o riordina le schede. Ogni cifra apre le persone che la compongono - presenti, ore per persona, ritardi, assenti e in ferie, straordinari per persona - con un pulsante verso la pagina completa. La scheda «Indicatori» mostra puntualità, ritardi e assenze. Il titolare riceve un riepilogo alle 7 (ora della sede), un avviso quando qualcuno salta un turno e un avviso prima che qualcuno entri in straordinario."
     },
     "peopleAndPhotos": {
       "title": "Persone, ruoli e foto profilo",
@@ -129,6 +129,10 @@
     "phoneNotifications": {
       "title": "Notifiche e promemoria sul telefono",
       "body": "Tutte le notifiche di PROSM Time hanno la stessa piccola icona PROSM. I tuoi promemoria di entrata e uscita si impostano dalla loro scheda nella dashboard. Android 14 e successivi possono non consentire allarmi esatti; un promemoria può allora arrivare con qualche minuto di ritardo - la scheda lo indica e offre di consentire gli allarmi esatti. Se il rilevamento della posizione non può partire (permesso negato o posizione disattivata), l'app te lo dice e propone di riprovare o aprire le impostazioni; la timbratura non va mai persa. La notifica di aggiornamento si può scorrere via."
+    },
+    "subscription": {
+      "title": "Piano e abbonamento (titolare)",
+      "body": "Impostazioni > Abbonamento mostra il piano, i dipendenti rispetto al limite, le sedi e la data di scadenza, con un campo per il codice di attivazione: scrivi il codice acquistato e premi «Attiva codice»; il piano cambia subito. Vieni avvisato prima della scadenza della licenza. Scaduta la licenza e il periodo di tolleranza, l’organizzazione diventa di sola lettura: tutti possono aprire l’app e vedere tutto, modifiche e timbrature sono sospese fino al rinnovo, e nulla viene eliminato."
     }
   },
   "faq": {
@@ -175,7 +179,7 @@
     },
     "q11": {
       "question": "Come funziona la demo di 30 giorni?",
-      "answer": "Nella pagina di benvenuto, “Usa la versione di prova” apre la normale attivazione senza codice; organizzazione e proprietario vengono creati subito. La prova dura 30 giorni (ora del server) e una barra mostra i giorni rimasti. Una settimana prima della fine il proprietario riceve una notifica e un’e-mail con sales@prosm.net, info@prosm.net e support@prosm.net. Poi l’app viene sospesa senza eliminare nulla: inserisci un codice di attivazione o chiedi a PROSM di rinnovare la licenza e tutto riprende con i tuoi dati. Una prova per e-mail."
+      "answer": "Nella pagina di benvenuto, «Usa la prova» apre i soliti passaggi di attivazione senza codice e crea subito l’organizzazione e il titolare. La prova dura 30 giorni (ora del server) e una barra mostra i giorni rimasti. Una settimana prima della fine il titolare riceve una notifica e un’e-mail con sales@prosm.net, info@prosm.net e support@prosm.net. Alla fine l’organizzazione diventa di sola lettura senza eliminare nulla: inserisci un codice in Impostazioni > Abbonamento, o chiedi a PROSM di rinnovare la licenza, e tutto riprende come prima. Una prova per e-mail."
     },
     "q12": {
       "question": "La timbratura funziona senza internet?",
@@ -187,7 +191,7 @@
     },
     "q14": {
       "question": "Chi vede la mia posizione e le mie foto, e per quanto tempo?",
-      "answer": "Tu, i responsabili del tuo sito e il titolare della tua organizzazione. Le posizioni rilevate durante il turno vengono cancellate dopo 30 giorni e le foto di presenza dopo 90. La verifica dal vivo non conserva dati del volto - solo la foto e il risultato. La tua foto profilo è visibile solo nella tua organizzazione. L'informativa sulla privacy spiega il resto."
+      "answer": "Tu, i responsabili della tua sede e il titolare dell’organizzazione. Le posizioni durante il turno vengono eliminate dopo 30 giorni e le foto di timbratura dopo 90, o prima se il titolare ha ridotto i tempi. La verifica dal vivo non conserva dati del volto — solo la foto e l’esito. La foto profilo è visibile solo nella tua organizzazione. L’informativa privacy spiega il resto."
     },
     "q15": {
       "question": "Il SOS chiama ambulanza o polizia?",
@@ -199,8 +203,5 @@
     "body": "Per assistenza sul prodotto, contattaci a:",
     "infoLabel": "Richieste generali:",
     "supportLabel": "Assistenza:"
-  },
-  "about": {
-    "title": "Informazioni"
   }
 }
