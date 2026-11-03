@@ -197,6 +197,18 @@ export function localizePush(type: string, data: Data, language: string, fallbac
     case "overtime_soon":
       result = pair("overtimeSoon.title", "overtimeSoon.body", { name: data.name ?? "", time: data.time ?? "" });
       break;
+    case "license_changed": {
+      const unlimited = t("licenseChanged.unlimited") ?? "-";
+      const value = (v: unknown) => (typeof v === "number" ? String(v) : unlimited);
+      const parts: string[] = [];
+      if (data.usersChanged) parts.push(t("licenseChanged.users", { from: value(data.usersFrom), to: value(data.usersTo) }) ?? "");
+      if (data.devicesChanged) parts.push(t("licenseChanged.devices", { from: value(data.devicesFrom), to: value(data.devicesTo) }) ?? "");
+      if (data.expiryChanged) parts.push(t("licenseChanged.ends", { date: typeof data.expiresAt === "string" ? data.expiresAt.slice(0, 10) : unlimited }) ?? "");
+      if (data.statusChanged) parts.push(t("licenseChanged.status", { status: String(data.status ?? "") }) ?? "");
+      if (data.planChanged) parts.push(t("licenseChanged.plan") ?? "");
+      result = pair("licenseChanged.title", "licenseChanged.body", { changes: parts.join(" · ") });
+      break;
+    }
     case "daily_digest":
       result = pair("dailyDigest.title", "dailyDigest.body", { present: data.present ?? 0, noShows: data.noShows ?? 0, leave: data.leave ?? 0, exceptions: data.exceptions ?? 0, open: data.open ?? 0 });
       break;

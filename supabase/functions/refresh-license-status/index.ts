@@ -19,6 +19,7 @@ interface LicenseStatusResult {
     maxUsers: number | null;
     maxDevices: number | null;
     expiresAt: string | null;
+    planId?: string | null;
   };
   error?: { message: string; code?: string };
 }
@@ -134,6 +135,8 @@ serve(async (request: Request) => {
       p_max_users: statusResult.data.maxUsers,
       p_max_devices: statusResult.data.maxDevices,
       p_expires_at: statusResult.data.expiresAt,
+      // 2026-11-03: the plan follows Platform Manager too (empty limits now mean no limit)
+      p_plan_id: statusResult.data.planId ?? null,
     });
 
     if (refreshError || !refreshResult?.success) {

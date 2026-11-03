@@ -214,6 +214,16 @@
     "dailyDigest": {
       "title": "Gestern im Überblick",
       "body": "{{present}} haben gearbeitet, {{noShows}} haben eine Schicht verpasst. Offen: {{leave}} Urlaub, {{exceptions}} Ausnahmen. Jetzt eingestempelt: {{open}}."
+    },
+    "licenseChanged": {
+      "title": "Ihre Lizenz wurde geändert",
+      "body": "PROSM hat Ihre Lizenz geändert: {{changes}}.",
+      "users": "Benutzer {{from}} → {{to}}",
+      "devices": "Geräte {{from}} → {{to}}",
+      "ends": "endet {{date}}",
+      "status": "Status {{status}}",
+      "plan": "Paket geändert",
+      "unlimited": "unbegrenzt"
     }
   },
   "items": {
@@ -236,7 +246,8 @@
     "help": "Hilfe",
     "workers": "Externe Arbeiter",
     "calendar": "Kalender und Feiertage",
-    "auditLog": "Aktionsprotokoll"
+    "auditLog": "Aktionsprotokoll",
+    "dailySummary": "Tageszusammenfassung"
   },
   "sosOverlay": {
     "title": "SOS-/Notfallalarm",
@@ -336,7 +347,8 @@
     "timesheets": "Stunden zur Prüfung und Freigabe",
     "workers": "Externe Arbeiter und ihre Kiosk-Nummern",
     "calendar": "Feiertage, Ruhetage und Ausnahmetage - Stunden und Überstunden richten sich danach.",
-    "auditLog": "Alles, was in Ihrer Organisation geschieht: wer was für wen, wann und warum getan hat."
+    "auditLog": "Alles, was in Ihrer Organisation geschieht: wer was für wen, wann und warum getan hat.",
+    "dailySummary": "Ein Tag Ihrer Organisation: wer gearbeitet hat, zu spät, abwesend oder im Urlaub war"
   },
   "backgroundDisclosure": {
     "title": "Standort während Ihrer Schicht",

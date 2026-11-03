@@ -15,6 +15,7 @@ const PANEL_GAP = 8;
 const PANEL_WIDTH = 280;
 const VIEWPORT_MARGIN = 8;
 const HOVER_CLOSE_DELAY_MS = 150;
+const LICENSE_REFRESH_MS = 30 * 60 * 1000;
 
 // Ported from PROSM Platform's own Header/OrganizationCard (§ final
 // visual consistency pass, correction - "The large Organization and
@@ -66,6 +67,35 @@ function HeaderOrganizationCard() {
 
   useEffect(() => {
     load();
+  }, [load]);
+
+  // owner 2026-11-03: a change in Platform Manager (users, devices, plan, end date) reached
+  // Time only when someone pressed refresh here. Now the licence is re-read on opening the
+  // app, at most every 30 minutes per device, and the card reloads with it.
+  useEffect(() => {
+    const key = "prosm-time-license-refreshed-at";
+    let last = 0;
+    try {
+      last = Number(localStorage.getItem(key) ?? 0);
+    } catch {
+      last = 0;
+    }
+    if (Date.now() - last < LICENSE_REFRESH_MS) return undefined;
+    let cancelled = false;
+    void LicenseRepository.refreshCurrentLicenseStatus().then((result) => {
+      if (cancelled) return;
+      if (result.success) {
+        try {
+          localStorage.setItem(key, String(Date.now()));
+        } catch {
+          /* private mode: refresh again next time */
+        }
+      }
+      void load();
+    });
+    return () => {
+      cancelled = true;
+    };
   }, [load]);
 
   const updatePosition = () => {

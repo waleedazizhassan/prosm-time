@@ -232,5 +232,42 @@
     "invalid": "Saisissez un nombre ou laissez vide.",
     "failed": "Impossible d'enregistrer le budget.",
     "unpriced": "Les heures des personnes sans taux ne sont pas comptées."
+  },
+  "dailySummary": {
+    "loadError": "Impossible de charger le résumé.",
+    "ownerOnly": "Le résumé du jour est réservé au propriétaire.",
+    "day": "Jour affiché",
+    "previousDay": "Jour précédent",
+    "nextDay": "Jour suivant",
+    "yesterday": "Hier",
+    "today": "Aujourd’hui",
+    "worked": "Ont travaillé",
+    "totalHours": "Heures totales",
+    "late": "En retard",
+    "noShows": "Poste manqué",
+    "onLeave": "En congé",
+    "peopleTitle": "Qui a travaillé",
+    "nobodyWorked": "Personne n’a pointé ce jour-là.",
+    "noShowsTitle": "Poste planifié manqué",
+    "noNoShows": "Aucun poste manqué.",
+    "leaveTitle": "En congé",
+    "noLeave": "Personne en congé.",
+    "waitingTitle": "En attente maintenant",
+    "waitingHint": "Chiffres actuels, pas ceux du jour affiché.",
+    "waitingLeave": "Demandes de congé : {{count}}",
+    "waitingExceptions": "Exceptions : {{count}}",
+    "clockedInNow": "Pointés maintenant : {{count}}",
+    "noSite": "Sans site",
+    "stillIn": "Toujours présent",
+    "autoClosed": "fermé automatiquement",
+    "lateBy": "retard {{time}}",
+    "columns": {
+      "name": "Nom",
+      "site": "Site",
+      "in": "Arrivée",
+      "out": "Départ",
+      "hours": "Heures",
+      "late": "Retard"
+    }
   }
 }

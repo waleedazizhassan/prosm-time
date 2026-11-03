@@ -214,6 +214,16 @@
     "dailyDigest": {
       "title": "Yesterday at a glance",
       "body": "{{present}} worked, {{noShows}} missed a shift. Waiting: {{leave}} leave, {{exceptions}} exceptions. Clocked in now: {{open}}."
+    },
+    "licenseChanged": {
+      "title": "Your licence changed",
+      "body": "PROSM changed your licence: {{changes}}.",
+      "users": "users {{from}} → {{to}}",
+      "devices": "devices {{from}} → {{to}}",
+      "ends": "ends {{date}}",
+      "status": "status {{status}}",
+      "plan": "plan changed",
+      "unlimited": "no limit"
     }
   },
   "items": {
@@ -236,7 +246,8 @@
     "help": "Help",
     "workers": "Workers",
     "calendar": "Calendar and holidays",
-    "auditLog": "Action log"
+    "auditLog": "Action log",
+    "dailySummary": "Daily summary"
   },
   "sosOverlay": {
     "title": "SOS/Emergency alert",
@@ -336,7 +347,8 @@
     "timesheets": "Hours for review and approval",
     "workers": "External workers and their kiosk numbers",
     "calendar": "Public holidays, weekly rest days and exceptional days - the hours and overtime follow them.",
-    "auditLog": "Everything done in your organisation: who did what, to whom, when and why."
+    "auditLog": "Everything done in your organisation: who did what, to whom, when and why.",
+    "dailySummary": "One day of your organisation: who worked, who was late, who was absent, who was on leave"
   },
   "backgroundDisclosure": {
     "title": "Location during your shift",

@@ -232,5 +232,42 @@
     "invalid": "Zahl eingeben oder leer lassen.",
     "failed": "Budget konnte nicht gespeichert werden.",
     "unpriced": "Stunden von Personen ohne Lohnsatz sind nicht enthalten."
+  },
+  "dailySummary": {
+    "loadError": "Zusammenfassung konnte nicht geladen werden.",
+    "ownerOnly": "Die Tageszusammenfassung ist für den Inhaber.",
+    "day": "Angezeigter Tag",
+    "previousDay": "Vorheriger Tag",
+    "nextDay": "Nächster Tag",
+    "yesterday": "Gestern",
+    "today": "Heute",
+    "worked": "Gearbeitet",
+    "totalHours": "Stunden gesamt",
+    "late": "Verspätet",
+    "noShows": "Schicht verpasst",
+    "onLeave": "Im Urlaub",
+    "peopleTitle": "Wer gearbeitet hat",
+    "nobodyWorked": "An diesem Tag hat niemand eingestempelt.",
+    "noShowsTitle": "Geplante Schicht verpasst",
+    "noNoShows": "Niemand hat eine Schicht verpasst.",
+    "leaveTitle": "Im Urlaub",
+    "noLeave": "Niemand war im Urlaub.",
+    "waitingTitle": "Wartet jetzt auf Sie",
+    "waitingHint": "Aktuelle Zahlen, nicht die des angezeigten Tages.",
+    "waitingLeave": "Urlaubsanträge: {{count}}",
+    "waitingExceptions": "Ausnahmen: {{count}}",
+    "clockedInNow": "Jetzt eingestempelt: {{count}}",
+    "noSite": "Kein Standort",
+    "stillIn": "Noch da",
+    "autoClosed": "automatisch beendet",
+    "lateBy": "{{time}} zu spät",
+    "columns": {
+      "name": "Name",
+      "site": "Standort",
+      "in": "Kommen",
+      "out": "Gehen",
+      "hours": "Stunden",
+      "late": "Verspätung"
+    }
   }
 }

@@ -214,6 +214,16 @@
     "dailyDigest": {
       "title": "Ieri in breve",
       "body": "{{present}} hanno lavorato, {{noShows}} hanno saltato un turno. In attesa: {{leave}} ferie, {{exceptions}} eccezioni. In servizio ora: {{open}}."
+    },
+    "licenseChanged": {
+      "title": "La tua licenza è cambiata",
+      "body": "PROSM ha modificato la tua licenza: {{changes}}.",
+      "users": "utenti {{from}} → {{to}}",
+      "devices": "dispositivi {{from}} → {{to}}",
+      "ends": "scade il {{date}}",
+      "status": "stato {{status}}",
+      "plan": "piano cambiato",
+      "unlimited": "senza limite"
     }
   },
   "items": {
@@ -236,7 +246,8 @@
     "help": "Assistenza",
     "workers": "Lavoratori esterni",
     "calendar": "Calendario e festività",
-    "auditLog": "Registro azioni"
+    "auditLog": "Registro azioni",
+    "dailySummary": "Riepilogo del giorno"
   },
   "sosOverlay": {
     "title": "Allarme SOS/Emergenza",
@@ -341,7 +352,8 @@
     "timesheets": "Ore da verificare e approvare",
     "workers": "Lavoratori esterni e i loro numeri per il chiosco",
     "calendar": "Festività, giorni di riposo e giorni eccezionali - ore e straordinari ne dipendono.",
-    "auditLog": "Tutto ciò che avviene nella tua organizzazione: chi ha fatto cosa, a chi, quando e perché."
+    "auditLog": "Tutto ciò che avviene nella tua organizzazione: chi ha fatto cosa, a chi, quando e perché.",
+    "dailySummary": "Un giorno della tua organizzazione: chi ha lavorato, chi era in ritardo, assente o in ferie"
   },
   "backgroundDisclosure": {
     "title": "Posizione durante il turno",

@@ -44,6 +44,7 @@ const ReportsPage = lazy(() => import("../modules/reports/ReportsPage"));
 const OrganizationSettingsPage = lazy(() => import("../modules/settings/OrganizationSettingsPage"));
 const IntegrationsPage = lazy(() => import("../modules/settings/IntegrationsPage"));
 const HelpPage = lazy(() => import("../modules/help/HelpPage"));
+const DailySummaryPage = lazy(() => import("../modules/reports/DailySummaryPage"));
 const LegalPage = lazy(() => import("../modules/legal/LegalPage"));
 
 // PROSM Time route map. /activate, /login, /accept-invitation are
@@ -137,6 +138,7 @@ export default function AppRoutes() {
             <Route path="/calendar" element={<CalendarPage />} />
             <Route path="/emergency-log" element={<EmergencyLogPage />} />
             <Route path="/reports" element={<ReportsPage />} />
+            <Route path="/daily-summary" element={<DailySummaryPage />} />
             <Route path="/settings" element={<OrganizationSettingsPage />} />
             {/* Hidden while FEATURES.integrations is off (owner 2026-10-13). */}
             <Route path="/integrations" element={FEATURES.integrations ? <IntegrationsPage /> : <Navigate to="/dashboard" replace />} />

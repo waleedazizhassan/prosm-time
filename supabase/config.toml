@@ -271,3 +271,11 @@ entrypoint = "./functions/delete-my-account/index.ts"
 enabled = true
 verify_jwt = false
 entrypoint = "./functions/public-config/index.ts"
+
+# sync-all-licenses (owner 2026-11-03): pg_cron mirrors every organisation's licence
+# from PROSM Platform every 10 minutes with the service role key; the
+# service-role-only RPCs inside are the real authorization check.
+[functions.sync-all-licenses]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/sync-all-licenses/index.ts"

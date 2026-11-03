@@ -232,5 +232,42 @@
     "invalid": "Enter a number, or leave it empty.",
     "failed": "Unable to save the budget.",
     "unpriced": "Hours of people with no pay rate are not in the cost."
+  },
+  "dailySummary": {
+    "loadError": "Unable to load the summary.",
+    "ownerOnly": "The daily summary is for the organisation’s owner.",
+    "day": "Day shown",
+    "previousDay": "Previous day",
+    "nextDay": "Next day",
+    "yesterday": "Yesterday",
+    "today": "Today",
+    "worked": "Worked",
+    "totalHours": "Total hours",
+    "late": "Late",
+    "noShows": "Missed their shift",
+    "onLeave": "On leave",
+    "peopleTitle": "Who worked",
+    "nobodyWorked": "Nobody clocked in that day.",
+    "noShowsTitle": "Missed a scheduled shift",
+    "noNoShows": "Nobody missed a shift.",
+    "leaveTitle": "On leave",
+    "noLeave": "Nobody was on leave.",
+    "waitingTitle": "Waiting for you now",
+    "waitingHint": "These are today’s figures, not the day shown.",
+    "waitingLeave": "Leave requests: {{count}}",
+    "waitingExceptions": "Exceptions: {{count}}",
+    "clockedInNow": "Clocked in now: {{count}}",
+    "noSite": "No site",
+    "stillIn": "Still in",
+    "autoClosed": "closed automatically",
+    "lateBy": "late {{time}}",
+    "columns": {
+      "name": "Name",
+      "site": "Site",
+      "in": "In",
+      "out": "Out",
+      "hours": "Hours",
+      "late": "Late"
+    }
   }
 }

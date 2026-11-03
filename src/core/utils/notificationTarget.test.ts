@@ -51,4 +51,11 @@ describe("notificationTarget", () => {
     expect(notificationTarget({ type: "break_exceeded" }, employee)).toBe("/dashboard");
     expect(notificationTarget(undefined, employee)).toBe("/dashboard");
   });
+  it("opens the daily summary of the day it is about, and the plan card for a licence change (owner 2026-11-03)", () => {
+    expect(notificationTarget({ type: "daily_digest", date: "2026-11-02" }, owner)).toBe("/daily-summary?date=2026-11-02");
+    expect(notificationTarget({ type: "daily_digest" }, owner)).toBe("/daily-summary");
+    expect(notificationTarget({ type: "daily_digest", date: "x" }, owner)).toBe("/daily-summary");
+    expect(notificationTarget({ type: "license_changed" }, owner)).toBe("/settings");
+    expect(notificationTarget({ type: "license_changed" }, employee)).toBe("/dashboard");
+  });
 });

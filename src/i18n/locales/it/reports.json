@@ -232,5 +232,42 @@
     "invalid": "Inserisci un numero o lascia vuoto.",
     "failed": "Impossibile salvare il budget.",
     "unpriced": "Le ore di chi non ha tariffa non sono nel costo."
+  },
+  "dailySummary": {
+    "loadError": "Impossibile caricare il riepilogo.",
+    "ownerOnly": "Il riepilogo del giorno è per il titolare.",
+    "day": "Giorno mostrato",
+    "previousDay": "Giorno precedente",
+    "nextDay": "Giorno successivo",
+    "yesterday": "Ieri",
+    "today": "Oggi",
+    "worked": "Hanno lavorato",
+    "totalHours": "Ore totali",
+    "late": "In ritardo",
+    "noShows": "Turno saltato",
+    "onLeave": "In ferie",
+    "peopleTitle": "Chi ha lavorato",
+    "nobodyWorked": "Nessuno ha timbrato quel giorno.",
+    "noShowsTitle": "Turno programmato saltato",
+    "noNoShows": "Nessuno ha saltato un turno.",
+    "leaveTitle": "In ferie",
+    "noLeave": "Nessuno era in ferie.",
+    "waitingTitle": "In attesa ora",
+    "waitingHint": "Numeri di adesso, non del giorno mostrato.",
+    "waitingLeave": "Richieste di ferie: {{count}}",
+    "waitingExceptions": "Eccezioni: {{count}}",
+    "clockedInNow": "Timbrati ora: {{count}}",
+    "noSite": "Nessuna sede",
+    "stillIn": "Ancora presente",
+    "autoClosed": "chiuso automaticamente",
+    "lateBy": "ritardo {{time}}",
+    "columns": {
+      "name": "Nome",
+      "site": "Sede",
+      "in": "Entrata",
+      "out": "Uscita",
+      "hours": "Ore",
+      "late": "Ritardo"
+    }
   }
 }

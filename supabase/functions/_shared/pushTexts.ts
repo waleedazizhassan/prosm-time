@@ -161,6 +161,16 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "dailyDigest": {
         "title": "ملخص أمس",
         "body": "عمل {{present}}، وغاب عن ورديته {{noShows}}. بانتظارك: {{leave}} إجازة و{{exceptions}} استثناء. الحاضرون الآن: {{open}}."
+      },
+      "licenseChanged": {
+        "title": "تغيّر ترخيصك",
+        "body": "عدّلت PROSM ترخيصك: {{changes}}.",
+        "users": "المستخدمون {{from}} ← {{to}}",
+        "devices": "الأجهزة {{from}} ← {{to}}",
+        "ends": "ينتهي في {{date}}",
+        "status": "الحالة {{status}}",
+        "plan": "الباقة تغيّرت",
+        "unlimited": "بلا حد"
       }
     },
     "leaveTypes": {
@@ -333,6 +343,16 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "dailyDigest": {
         "title": "Yesterday at a glance",
         "body": "{{present}} worked, {{noShows}} missed a shift. Waiting: {{leave}} leave, {{exceptions}} exceptions. Clocked in now: {{open}}."
+      },
+      "licenseChanged": {
+        "title": "Your licence changed",
+        "body": "PROSM changed your licence: {{changes}}.",
+        "users": "users {{from}} → {{to}}",
+        "devices": "devices {{from}} → {{to}}",
+        "ends": "ends {{date}}",
+        "status": "status {{status}}",
+        "plan": "plan changed",
+        "unlimited": "no limit"
       }
     },
     "leaveTypes": {
@@ -505,6 +525,16 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "dailyDigest": {
         "title": "Gestern im Überblick",
         "body": "{{present}} haben gearbeitet, {{noShows}} haben eine Schicht verpasst. Offen: {{leave}} Urlaub, {{exceptions}} Ausnahmen. Jetzt eingestempelt: {{open}}."
+      },
+      "licenseChanged": {
+        "title": "Ihre Lizenz wurde geändert",
+        "body": "PROSM hat Ihre Lizenz geändert: {{changes}}.",
+        "users": "Benutzer {{from}} → {{to}}",
+        "devices": "Geräte {{from}} → {{to}}",
+        "ends": "endet {{date}}",
+        "status": "Status {{status}}",
+        "plan": "Paket geändert",
+        "unlimited": "unbegrenzt"
       }
     },
     "leaveTypes": {
@@ -677,6 +707,16 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "dailyDigest": {
         "title": "Hier en bref",
         "body": "{{present}} ont travaillé, {{noShows}} ont manqué un poste. En attente : {{leave}} congés, {{exceptions}} exceptions. Pointés maintenant : {{open}}."
+      },
+      "licenseChanged": {
+        "title": "Votre licence a changé",
+        "body": "PROSM a modifié votre licence : {{changes}}.",
+        "users": "utilisateurs {{from}} → {{to}}",
+        "devices": "appareils {{from}} → {{to}}",
+        "ends": "fin le {{date}}",
+        "status": "statut {{status}}",
+        "plan": "offre modifiée",
+        "unlimited": "sans limite"
       }
     },
     "leaveTypes": {
@@ -849,6 +889,16 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "dailyDigest": {
         "title": "Ieri in breve",
         "body": "{{present}} hanno lavorato, {{noShows}} hanno saltato un turno. In attesa: {{leave}} ferie, {{exceptions}} eccezioni. In servizio ora: {{open}}."
+      },
+      "licenseChanged": {
+        "title": "La tua licenza è cambiata",
+        "body": "PROSM ha modificato la tua licenza: {{changes}}.",
+        "users": "utenti {{from}} → {{to}}",
+        "devices": "dispositivi {{from}} → {{to}}",
+        "ends": "scade il {{date}}",
+        "status": "stato {{status}}",
+        "plan": "piano cambiato",
+        "unlimited": "senza limite"
       }
     },
     "leaveTypes": {
