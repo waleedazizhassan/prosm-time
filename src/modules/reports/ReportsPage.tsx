@@ -18,6 +18,8 @@ import { buildCombinedAllowanceSheetPdf } from "../allowances/allowancesPdf";
 import { buildGenericReportPdf } from "./genericReportPdf";
 import PayrollExportCard from "./PayrollExportCard";
 import ProjectBudgetsCard from "./ProjectBudgetsCard";
+import usePlanFeatures from "../../core/hooks/usePlanFeatures";
+import PlanLockedNote from "../../components/common/PlanLockedNote";
 
 import { useAuth } from "../../core/context/AuthContext";
 
@@ -87,6 +89,8 @@ export default function ReportsPage() {
   const { t: tAttendance } = useTranslation("attendanceLog");
   const { t: tAllowances } = useTranslation("allowances");
   const { profile, hasPermission } = useAuth();
+  const { allows } = usePlanFeatures(profile?.id);
+  const canExport = allows("export");
 
   // § point 2, 2026-09-11 - same authority test as DashboardPage.tsx's
   // ClockInOutCard gate: Owner, or 'exceptions.manage' holders
@@ -101,10 +105,10 @@ export default function ReportsPage() {
       // timesheets are exported - and printed - from their own pages; Reports
       // keeps the reports found only here, and the archive of every export.
       // Owner 2026-10-21: the combined allowance sheet (totals per person) is here too, for those who manage.
-      ([...(canSeePay ? (["laborCost"] as ReportType[]) : []), ...(hasManagementScope ? (["allowances"] as ReportType[]) : []), "workforce", "contractor", "site", "late", "missingCheckouts", "leaveConflicts", "absences", "managerOverrides", "locationViolations", "sos"] as ReportType[]).filter(
+      ([...(canSeePay && allows("labor_cost") ? (["laborCost"] as ReportType[]) : []), ...(hasManagementScope ? (["allowances"] as ReportType[]) : []), "workforce", "contractor", "site", "late", "missingCheckouts", "leaveConflicts", "absences", "managerOverrides", "locationViolations", "sos"] as ReportType[]).filter(
         (type) => hasManagementScope || !MANAGEMENT_SCOPED_TYPES.includes(type),
       ),
-    [hasManagementScope, canSeePay],
+    [hasManagementScope, canSeePay, allows],
   );
 
   // owner 2026-10-27: the dashboard's cards open a report directly (?type=late)
@@ -538,11 +542,12 @@ export default function ReportsPage() {
               {loading ? t("loadingRows") : t("rowCount", { count: rowCount })}
             </p>
 
+            {!canExport ? <PlanLockedNote plan="business" /> : null}
             <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>
-              <Button onClick={() => handleExport()} loading={exporting} disabled={loading || rowCount === 0}>
+              <Button onClick={() => handleExport()} loading={exporting} disabled={loading || rowCount === 0 || !canExport}>
                 {t("exportAction")}
               </Button>
-              <Button variant="ghost" onClick={() => handleExport("print")} loading={exporting} disabled={loading || rowCount === 0}>
+              <Button variant="ghost" onClick={() => handleExport("print")} loading={exporting} disabled={loading || rowCount === 0 || !canExport}>
                 {t("common:actions.print")}
               </Button>
             </div>
@@ -551,8 +556,8 @@ export default function ReportsPage() {
       </Card>
       )}
 
-      <PayrollExportCard startDate={startDate} endDate={endDate} />
-      {canSeePay ? <ProjectBudgetsCard /> : null}
+      {allows("payroll_export") ? <PayrollExportCard startDate={startDate} endDate={endDate} /> : null}
+      {canSeePay && allows("labor_cost") ? <ProjectBudgetsCard /> : null}
 
       <Card title={t("recentExports.title")}>
         <Table

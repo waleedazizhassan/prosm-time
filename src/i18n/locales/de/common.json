@@ -289,7 +289,8 @@
     "invalidActivationCode": "Der Code ist falsch oder bereits verwendet.",
     "locationRequired": "Ohne gültigen Standort ist keine Erfassung möglich. Schalten Sie den Standort ein und versuchen Sie es erneut.",
     "rejectReasonRequired": "Geben Sie den Grund an, damit der Mitarbeiter ihn sieht.",
-    "organizationReadOnly": "Ihre Organisation ist schreibgeschützt, bis die Lizenz verlängert wird."
+    "organizationReadOnly": "Ihre Organisation ist schreibgeschützt, bis die Lizenz verlängert wird.",
+    "featureNotInPlan": "Diese Funktion ist nicht im Paket Ihrer Organisation."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",
@@ -361,5 +362,10 @@
     "supervisor": "Vorarbeiter",
     "employee": "Mitarbeiter",
     "read_only": "Betrachter"
+  },
+  "planLocked": {
+    "text": "Diese Funktion gehört zum Paket {{plan}}.",
+    "seePlan": "Paket ansehen",
+    "askOwner": "Fragen Sie den Inhaber."
   }
 }

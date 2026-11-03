@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
+import usePlanFeatures from "../../core/hooks/usePlanFeatures";
 import { useAppLayout } from "./LayoutContext";
 import { NAV_ITEMS, NAV_SECTION_ORDER } from "./navigation";
 import UserMenu from "./UserMenu";
@@ -26,6 +27,7 @@ const FOCUSABLE_SELECTOR = 'button:not(:disabled), [href], input, select, textar
 export default function Sidebar() {
   const { t } = useTranslation(["shell", "common"]);
   const { hasPermission, profile } = useAuth();
+  const { allows } = usePlanFeatures(profile?.id);
   const { sidebarCollapsed, toggleSidebarCollapsed, mobileSidebarOpen, closeMobileSidebar } = useAppLayout();
   const asideRef = useRef<HTMLElement>(null);
 
@@ -69,7 +71,8 @@ export default function Sidebar() {
       (item.requiredPermission === null || hasPermission(item.requiredPermission)) &&
       (!item.ownerOnly || profile?.isOwner) &&
       (!item.hiddenFromOwner || !profile?.isOwner) &&
-      (!item.ownerOrManagerOnly || profile?.isOwner || profile?.roleKey === "manager")
+      (!item.ownerOrManagerOnly || profile?.isOwner || profile?.roleKey === "manager") &&
+          allows(item.planFeature)
   );
   // § live UX review, user-directed - group the same flat item list
   // under labeled sections (reference "Menu" screen's own grouping),

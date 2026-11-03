@@ -88,7 +88,7 @@ describe("a trial that becomes paid", () => {
 });
 
 describe("a Platform Manager plan", () => {
-  it("sets the matching plan, and leaves organisations from before plans alone", async () => {
+  it("sets the matching plan, for an organisation from before plans too (owner 2026-11-03); a renewal alone keeps it", async () => {
     const t = await buildDatabase();
     const fresh = await createOrg(t, "Fresh Co");
     await t.su("update entitlements set notes = null where organization_id = $1", [fresh.id]);
@@ -97,7 +97,9 @@ describe("a Platform Manager plan", () => {
 
     const old = await createOrg(t, "Old Co");
     await t.su("update entitlements set notes = 'existing before plans', plan = 'legacy' where organization_id = $1", [old.id]);
-    await t.su("update license_activation_state set plan_id = 'd6ff925e-5008-4fe0-899d-5a87453bc3f8', expires_at = now() + interval '2 years' where organization_id = $1", [old.id]);
+    await t.su("update license_activation_state set expires_at = now() + interval '2 years' where organization_id = $1", [old.id]);
     expect((await t.su<{ plan: string }>("select plan from entitlements where organization_id = $1", [old.id]))[0].plan).toBe("legacy");
+    await t.su("update license_activation_state set plan_id = 'd6ff925e-5008-4fe0-899d-5a87453bc3f8' where organization_id = $1", [old.id]);
+    expect((await t.su<{ plan: string }>("select plan from entitlements where organization_id = $1", [old.id]))[0].plan).toBe("starter");
   });
 });

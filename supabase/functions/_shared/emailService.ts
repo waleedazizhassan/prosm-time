@@ -27,7 +27,13 @@
 // deno-lint-ignore no-explicit-any
 type SupabaseClient = any;
 
-async function relayViaProsmManagement({ to, subject, html, purpose }: { to: string; subject: string; html: string; purpose: string }) {
+// 2026-11-03: an optional sender (support@prosm.net) and attachments, relayed by Platform.
+export interface EmailAttachment {
+  name: string;
+  contentBase64: string;
+}
+
+async function relayViaProsmManagement({ to, subject, html, purpose, fromAddress, attachments }: { to: string; subject: string; html: string; purpose: string; fromAddress?: string; attachments?: EmailAttachment[] }) {
   const apiUrl = Deno.env.get("PROSM_MANAGEMENT_API_URL");
   const apiKey = Deno.env.get("PROSM_MANAGEMENT_API_KEY");
 
@@ -38,7 +44,7 @@ async function relayViaProsmManagement({ to, subject, html, purpose }: { to: str
   const response = await fetch(apiUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json", "x-prosm-api-key": apiKey },
-    body: JSON.stringify({ action: "sendEmail", to, subject, html, purpose }),
+    body: JSON.stringify({ action: "sendEmail", to, subject, html, purpose, fromAddress, attachments }),
   });
 
   const json = await response.json().catch(() => null);
@@ -103,6 +109,8 @@ export async function sendEmail({
   supabase,
   organizationId,
   userId,
+  fromAddress,
+  attachments,
 }: {
   to: string;
   subject: string;
@@ -111,13 +119,15 @@ export async function sendEmail({
   supabase?: SupabaseClient;
   organizationId?: string | null;
   userId?: string | null;
+  fromAddress?: string;
+  attachments?: EmailAttachment[];
 }): Promise<{ sent: boolean; error?: string }> {
   const maxAttempts = 2;
   let lastError: unknown;
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
-      await relayViaProsmManagement({ to, subject, html, purpose });
+      await relayViaProsmManagement({ to, subject, html, purpose, fromAddress, attachments });
 
       await logEmailAttempt(supabase ?? null, {
         purpose,

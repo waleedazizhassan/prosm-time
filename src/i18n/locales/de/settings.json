@@ -156,11 +156,35 @@
     "redeemed": "Der Code ist aktiviert.",
     "redeemFailed": "Der Code ist falsch oder bereits verwendet.",
     "names": {
-      "legacy": "Ihr aktueller Tarif",
+      "legacy": "Alles (Kunde von vor den Paketen)",
       "starter": "Starter",
       "business": "Business",
       "pro": "Pro"
-    }
+    },
+    "includes": "Was Ihr Paket enthält",
+    "always": "In jedem Paket: Stempeln am Standort, Arbeitsbereich, Foto, offline arbeiten, Karte, Basisberichte und 5 Sprachen.",
+    "included": "enthalten",
+    "notIncluded": "nicht in Ihrem Paket",
+    "features": {
+      "on_behalf": "Stempeln für Mitarbeiter",
+      "kiosk": "Kiosk und externe Kräfte",
+      "leave": "Urlaub",
+      "allowances": "Zulagen, Abrechnungen und Freigaben",
+      "export": "Berichtsexport (PDF)",
+      "payroll_export": "Lohnexport (Excel / CSV)",
+      "clock_rules": "Stempelregeln (früher Feierabend, Runden)",
+      "scheduling": "Schichtplanung, offene Schichten und Tausch",
+      "roles_manager": "Rollen Manager und Vorgesetzter",
+      "audit": "Vollständiges Prüfprotokoll",
+      "sos": "SOS-Notruf",
+      "roles_all": "Leserolle und persönliche Rechte",
+      "clock_suggestion": "Stempelfrage bei Ankunft",
+      "labor_cost": "Personalkosten und Projektbudgets",
+      "daily_summary": "Tageszusammenfassung",
+      "manager_alerts": "Manager-Hinweise (Fehlen, Überstunden, Morgenübersicht)",
+      "integrations": "Integrationen (API)"
+    },
+    "managedByProsm": "Änderungen und Verlängerungen Ihrer Lizenz nimmt PROSM vor; Sie erhalten eine Benachrichtigung und eine E-Mail mit der neuen Lizenz. Änderungen: sales@prosm.net."
   },
   "retention": {
     "title": "Datenaufbewahrung",

@@ -156,11 +156,35 @@
     "redeemed": "Il codice è attivato.",
     "redeemFailed": "Il codice è errato o già utilizzato.",
     "names": {
-      "legacy": "Il tuo piano attuale",
+      "legacy": "Tutto incluso (cliente prima dei piani)",
       "starter": "Starter",
       "business": "Business",
       "pro": "Pro"
-    }
+    },
+    "includes": "Cosa include il tuo piano",
+    "always": "In ogni piano: timbratura in sede, area di lavoro, foto, offline, mappa, report di base e 5 lingue.",
+    "included": "incluso",
+    "notIncluded": "non incluso nel tuo piano",
+    "features": {
+      "on_behalf": "Timbratura per un dipendente",
+      "kiosk": "Chiosco e lavoratori esterni",
+      "leave": "Ferie",
+      "allowances": "Indennità, prospetti e approvazioni",
+      "export": "Esportazione report (PDF)",
+      "payroll_export": "Esportazione paghe (Excel / CSV)",
+      "clock_rules": "Regole di timbratura (uscita anticipata, arrotondamento)",
+      "scheduling": "Turni, turni aperti e scambi",
+      "roles_manager": "Ruoli responsabile e supervisore",
+      "audit": "Registro di audit completo",
+      "sos": "Emergenza SOS",
+      "roles_all": "Ruolo lettore e permessi personali",
+      "clock_suggestion": "Domanda di timbratura all’arrivo",
+      "labor_cost": "Costo del lavoro e budget di progetto",
+      "daily_summary": "Riepilogo del giorno",
+      "manager_alerts": "Avvisi ai responsabili (assenza, straordinario, riepilogo)",
+      "integrations": "Integrazioni (API)"
+    },
+    "managedByProsm": "Ogni modifica o rinnovo della licenza è fatto da PROSM; ricevi una notifica e un’e-mail con la nuova licenza. Per modificarla scrivi a sales@prosm.net."
   },
   "retention": {
     "title": "Conservazione dei dati",

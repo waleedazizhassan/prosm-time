@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../../core/context/AuthContext";
+import usePlanFeatures from "../../core/hooks/usePlanFeatures";
 import { Camera, MapPin, Check, X } from "lucide-react";
 
 import ManagerRepository, { type TodayAttendanceRow, type AttendanceEventLocation } from "../../core/repositories/ManagerRepository";
@@ -117,6 +119,8 @@ function DeviceTimeBadge({ label, hint }: { label: string; hint: string }) {
 
 export default function AttendanceLogPage() {
   const { t, i18n } = useTranslation("attendanceLog");
+  const { profile } = useAuth();
+  const { allows } = usePlanFeatures(profile?.id);
 
   // Owner 2026-10-19: quick day / week (from Sunday) / month views; the
   // employee's home page links here with ?period=today|week|month.
@@ -332,10 +336,10 @@ export default function AttendanceLogPage() {
       <PageBanner pageId="attendance" illustration={attendanceHeaderImage} />
 
       <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "var(--space-4)" }}>
-        <Button variant="ghost" onClick={() => handleExportPdf("print")} loading={exportingPdf} disabled={filteredRows.length === 0}>
+        <Button variant="ghost" onClick={() => handleExportPdf("print")} loading={exportingPdf} disabled={filteredRows.length === 0 || !allows("export")} title={allows("export") ? undefined : t("common:planLocked.text", { plan: "Business" })}>
           {t("common:actions.print")}
         </Button>
-        <Button onClick={() => handleExportPdf()} loading={exportingPdf} disabled={filteredRows.length === 0}>
+        <Button onClick={() => handleExportPdf()} loading={exportingPdf} disabled={filteredRows.length === 0 || !allows("export")} title={allows("export") ? undefined : t("common:planLocked.text", { plan: "Business" })}>
           {t("exportPdfAction")}
         </Button>
       </div>

@@ -52,6 +52,8 @@ function translate(trimmed: string, t: TFunction): string | null {
   if (/failed to fetch|networkerror|network request failed|load failed|fetch failed|failed to send a request|err_internet_disconnected|timed? ?out/i.test(trimmed)) {
     return t("common:backendErrors.networkProblem");
   }
+  // Owner 2026-11-03: a feature outside the organisation's plan.
+  if (trimmed.includes("FEATURE NOT IN PLAN")) return t("common:backendErrors.featureNotInPlan");
   if (trimmed.includes("presence_sessions_one_active_per_user")) {
     return t("common:backendErrors.orphanedPresenceSession");
   }

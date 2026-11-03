@@ -289,7 +289,8 @@
     "invalidActivationCode": "الكود غير صحيح أو مستخدم من قبل.",
     "locationRequired": "لا يمكن التسجيل بدون موقع صالح. فعّل الموقع وحاول مرة أخرى.",
     "rejectReasonRequired": "اكتب سبب الرفض، ليصل إلى الموظف.",
-    "organizationReadOnly": "مؤسستك للقراءة فقط حتى يُجدَّد ترخيصها."
+    "organizationReadOnly": "مؤسستك للقراءة فقط حتى يُجدَّد ترخيصها.",
+    "featureNotInPlan": "هذه الميزة ليست ضمن باقة مؤسستك."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",
@@ -361,5 +362,10 @@
     "supervisor": "مشرف",
     "employee": "موظف",
     "read_only": "مشاهد"
+  },
+  "planLocked": {
+    "text": "هذه الميزة ضمن باقة {{plan}}.",
+    "seePlan": "اعرض الباقة",
+    "askOwner": "اطلبها من مالك المؤسسة."
   }
 }

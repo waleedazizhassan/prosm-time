@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import usePlanFeatures from "../../core/hooks/usePlanFeatures";
+import { useAuth } from "../../core/context/AuthContext";
 
 import AttendanceControlRepository, { EMPTY_POLICY, type OvertimeApprovalMode, type OvertimePolicy } from "../../core/repositories/AttendanceControlRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
@@ -19,6 +21,8 @@ const NUMBER_FIELDS: NumberField[] = ["minOvertimeMinutes", "minLateMinutes", "m
 // cap, the multipliers per kind of day (1.0 = today's behaviour) and the night
 // window. Blank = the default.
 export default function OvertimePolicySettingsCard() {
+  const { profile } = useAuth();
+  const clockRules = usePlanFeatures(profile?.id).allows("clock_rules");
   const { t } = useTranslation("settings");
   const [policy, setPolicy] = useState<OvertimePolicy | null>(null);
   const [draft, setDraft] = useState<Record<string, string>>({});
@@ -84,7 +88,7 @@ export default function OvertimePolicySettingsCard() {
         ]}
       />
       <div style={{ display: "grid", gap: "var(--space-2)", gridTemplateColumns: "repeat(auto-fit, minmax(13rem, 1fr))" }}>
-        {NUMBER_FIELDS.map((field) => (
+        {NUMBER_FIELDS.filter((field) => clockRules || (field !== "minEarlyLeaveMinutes" && field !== "roundMinutes")).map((field) => (
           <Input key={field} label={t(`overtimePolicy.field.${field}`)} name={`overtime-${field}`} type="number" value={draft[field] ?? ""} placeholder={t(`overtimePolicy.placeholder.${field}`)} onChange={(event) => set(field, event.target.value)} />
         ))}
         <Input label={t("overtimePolicy.field.nightStart")} name="overtime-nightStart" type="time" value={draft.nightStart ?? ""} onChange={(event) => set("nightStart", event.target.value)} />
