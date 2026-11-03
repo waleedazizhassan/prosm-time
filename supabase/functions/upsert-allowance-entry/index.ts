@@ -29,7 +29,10 @@ serve(async (request: Request) => {
     if (!authUser) return errorResponse("Invalid or expired session.", 401, "UNAUTHORIZED");
 
     const payload = await request.json().catch(() => ({}));
-    const { entryDate, mealAllowance, expatriationAllowance, transportationAllowance, housingAllowance, travelAllowance, otherAllowance, otherAllowanceNote } = payload;
+    const { entryDate, mealAllowance, expatriationAllowance, transportationAllowance, housingAllowance, travelAllowance, otherAllowance, otherAllowanceNote, siteId } = payload;
+    // Owner 2026-11-03: a day without attendance can have its own site (siteId: a site, or null
+    // to clear it; left out = unchanged).
+    const setSite = siteId === null || typeof siteId === "string";
     if (!entryDate || typeof entryDate !== "string") return errorResponse("entryDate is required.", 400, "INVALID_REQUEST");
 
     const { data, error } = await callerClient.rpc("upsert_prosm_time_allowance_entry", {
@@ -41,6 +44,8 @@ serve(async (request: Request) => {
       p_travel_allowance: typeof travelAllowance === "number" ? travelAllowance : 0,
       p_other_allowance: typeof otherAllowance === "number" ? otherAllowance : 0,
       p_other_allowance_note: otherAllowanceNote ?? null,
+      p_site_id: typeof siteId === "string" ? siteId : null,
+      p_set_site: setSite,
     });
 
     if (error || !data?.success) return errorResponse(error?.message ?? "Unable to save this allowance entry.", 400, "UPSERT_FAILED");

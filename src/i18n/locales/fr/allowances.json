@@ -19,7 +19,11 @@
     "title": "Ajouter une entrée",
     "hint": "La date, le site et les heures de pointage sont importés automatiquement - complétez les montants après l'ajout.",
     "dateLabel": "Date",
-    "action": "Ajouter"
+    "action": "Ajouter",
+    "siteLabel": "Site",
+    "siteFromAttendance": "Selon la présence",
+    "siteNone": "Aucun site",
+    "siteHint": "Pour un jour sans pointage (déplacement, course) : choisissez son site et ses tarifs se remplissent. Un jour pointé prend le site de son pointage."
   },
   "columns": {
     "employee": "Employé",
@@ -225,5 +229,13 @@
   },
   "grid": {
     "label": "Fiche des indemnités"
+  },
+  "exportXlsxAction": "Exporter Excel",
+  "reprice": {
+    "action": "Appliquer les tarifs actuels",
+    "hint": "Recalcule vos jours ouverts avec les tarifs du jour - ce qui n'a pas de tarif, et ce qu'un responsable a modifié, reste tel quel.",
+    "done_one": "{{count}} jour recalculé.",
+    "done_many": "{{count}} jours recalculés.",
+    "done_other": "{{count}} jours recalculés."
   }
 }

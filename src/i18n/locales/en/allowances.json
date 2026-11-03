@@ -19,7 +19,11 @@
     "title": "Add an entry",
     "hint": "Date, site, and clock-in/out are imported automatically - fill in the allowance amounts after adding.",
     "dateLabel": "Date",
-    "action": "Add"
+    "action": "Add",
+    "siteLabel": "Site",
+    "siteFromAttendance": "From attendance",
+    "siteNone": "No site",
+    "siteHint": "For a day without attendance (travel, an errand): choose its site and its prices fill in. A day with attendance takes its attendance's site."
   },
   "columns": {
     "employee": "Employee",
@@ -224,5 +228,12 @@
   },
   "grid": {
     "label": "Allowance sheet"
+  },
+  "exportXlsxAction": "Export Excel",
+  "reprice": {
+    "action": "Apply the current prices",
+    "hint": "Prices your open days again from today's prices - what has no price, and what a manager changed, stay as they are.",
+    "done_one": "{{count}} day priced again.",
+    "done_other": "{{count}} days priced again."
   }
 }

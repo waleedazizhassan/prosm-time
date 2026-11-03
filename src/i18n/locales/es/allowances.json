@@ -19,7 +19,11 @@
     "title": "Añadir una línea",
     "hint": "La fecha, la sede y la entrada/salida se importan automáticamente; rellena los importes de los pluses después de añadirla.",
     "dateLabel": "Fecha",
-    "action": "Añadir"
+    "action": "Añadir",
+    "siteLabel": "Sede",
+    "siteFromAttendance": "Según la asistencia",
+    "siteNone": "Sin sede",
+    "siteHint": "Para un día sin asistencia (viaje, recado): elige su sede y sus precios se rellenan. Un día con asistencia toma la sede de su asistencia."
   },
   "columns": {
     "employee": "Empleado",
@@ -225,5 +229,13 @@
   },
   "grid": {
     "label": "Hoja de pluses"
+  },
+  "exportXlsxAction": "Exportar Excel",
+  "reprice": {
+    "action": "Aplicar los precios actuales",
+    "hint": "Vuelve a calcular tus días abiertos con los precios de hoy; lo que no tiene precio y lo que cambió un responsable se mantienen.",
+    "done_one": "{{count}} día recalculado.",
+    "done_many": "{{count}} días recalculados.",
+    "done_other": "{{count}} días recalculados."
   }
 }

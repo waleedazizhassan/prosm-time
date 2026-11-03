@@ -19,7 +19,11 @@
     "title": "添加记录",
     "hint": "日期、工地和上下班时间会自动导入；添加后再填写补贴金额。",
     "dateLabel": "日期",
-    "action": "添加"
+    "action": "添加",
+    "siteLabel": "地点",
+    "siteFromAttendance": "按考勤",
+    "siteNone": "无地点",
+    "siteHint": "没有考勤的日子（出差、外出办事）：选择地点，价格会自动填入。有考勤的日子使用考勤的地点。"
   },
   "columns": {
     "employee": "员工",
@@ -223,5 +227,11 @@
   },
   "grid": {
     "label": "补贴表"
+  },
+  "exportXlsxAction": "导出 Excel",
+  "reprice": {
+    "action": "应用当前价格",
+    "hint": "按今天的价格重新计算您未批准的日子；没有价格的项目和主管修改过的项目保持不变。",
+    "done_other": "已重新计算 {{count}} 天。"
   }
 }

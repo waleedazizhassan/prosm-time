@@ -32,7 +32,10 @@ import PeriodDeductionsCard from "./PeriodDeductionsCard";
 import DateRange from "../../components/common/DateRange";
 import PersonName from "../../components/common/PersonName";
 import FieldRow from "../../components/common/FieldRow";
-import AllowanceSheetGrid from "./AllowanceSheetGrid";
+import AllowanceSheetGrid, { entryInput } from "./AllowanceSheetGrid";
+import { allowanceSheetTable } from "./allowanceSheetTable";
+import { toXlsx } from "../../core/utils/spreadsheet";
+import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
 
 const ALL_EMPLOYEES = "";
 
@@ -133,6 +136,9 @@ export default function AllowancesPage() {
   const [employeeFilter, setEmployeeFilter] = useState(ALL_EMPLOYEES);
 
   const [newEntryDate, setNewEntryDate] = useState(isoDate(today));
+  // Owner 2026-11-03: a day without attendance (travel, an errand) at a site, priced at it.
+  const [newEntrySite, setNewEntrySite] = useState("");
+  const [repricing, setRepricing] = useState(false);
   const [addingEntry, setAddingEntry] = useState(false);
   const [addError, setAddError] = useState("");
 
@@ -254,7 +260,7 @@ export default function AllowancesPage() {
     if (!newEntryDate) return;
     setAddingEntry(true);
     setAddError("");
-    const result = await AllowanceRepository.upsertEntry(newEntryDate, EMPTY_INPUT);
+    const result = await AllowanceRepository.upsertEntry(newEntryDate, EMPTY_INPUT, newEntrySite || undefined);
     setAddingEntry(false);
     if (!result.success) {
       setAddError(humanizeBackendError(result.message, t) ?? t("addError"));
@@ -300,6 +306,50 @@ export default function AllowancesPage() {
     await load();
   };
 
+
+  const siteOptions = useMemo(() => myRates.map((rate) => ({ value: rate.siteId, label: rate.siteName })), [myRates]);
+
+  // The site of a day without attendance: its prices follow.
+  const saveSite = async (entry: AllowanceEntry, siteId: string | null) => {
+    setLoadError("");
+    const result = await AllowanceRepository.upsertEntry(entry.entryDate, entryInput(entry), siteId);
+    if (!result.success) {
+      setLoadError(humanizeBackendError(result.message, t) ?? t("saveError"));
+      return false;
+    }
+    await load();
+    if (detailEntry?.id === entry.id) setDetailEntry(null);
+    return true;
+  };
+
+  // Owner 2026-11-03 (his PROSM Allow app): price the open days again from the current prices.
+  const handleReprice = async () => {
+    setRepricing(true);
+    setAddError("");
+    setFillMessage("");
+    const result = await AllowanceRepository.repriceOpenDays(startDate, endDate);
+    setRepricing(false);
+    if (!result.success) {
+      setAddError(humanizeBackendError(result.message, t) ?? t("saveError"));
+      return;
+    }
+    setFillMessage(t("reprice.done", { count: result.data?.priced ?? 0 }));
+    await load();
+  };
+
+  // The sheet as an Excel file, the same columns and totals as on screen, in the app's language.
+  const [exportingXlsx, setExportingXlsx] = useState(false);
+  const handleExportXlsx = async () => {
+    setExportingXlsx(true);
+    try {
+      const rows = allowanceSheetTable(filteredEntries, { t, language: i18n.language, organizationName, startDate, endDate });
+      const blob = new Blob([toXlsx(rows, i18n.language === "ar").slice().buffer as ArrayBuffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+      const who = peopleInView.length === 1 ? ` ${peopleInView[0]}` : "";
+      await saveGeneratedFile(`${t("title")}${who} ${startDate} ${endDate}.xlsx`, blob);
+    } finally {
+      setExportingXlsx(false);
+    }
+  };
 
   // A cell edited in the sheet: the same save as the day's detail window.
   const saveCell = async (entry: AllowanceEntry, input: AllowanceEntryInput) => {
@@ -454,6 +504,9 @@ export default function AllowancesPage() {
             {t("prices.openAction")}
           </Button>
         ) : null}
+        <Button variant="ghost" onClick={handleExportXlsx} loading={exportingXlsx} disabled={filteredEntries.length === 0}>
+          {t("exportXlsxAction")}
+        </Button>
         <Button variant="ghost" onClick={() => handleExportPdf("print")} loading={exportingPdf} disabled={filteredEntries.length === 0}>
           {t("common:actions.print")}
         </Button>
@@ -488,14 +541,34 @@ export default function AllowancesPage() {
               {unsentDays > 0 ? `${t("sendAll.action")} (${unsentDays})` : t("sendAll.action")}
             </Button>
           </div>
-          <FieldRow style={{ marginTop: "var(--space-4)", marginBottom: 0, flexWrap: "nowrap" }}>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <Input label={t("addEntry.dateLabel")} name="newAllowanceEntryDate" type="date" value={newEntryDate} onChange={(event) => setNewEntryDate(event.target.value)} />
-            </div>
-            <Button variant="ghost" onClick={handleAddEntry} loading={addingEntry} disabled={!newEntryDate}>
-              {t("addEntry.action")}
+          {siteOptions.length > 0 ? (
+            // a date and its site side by side, the button under them (a phone has no room for three)
+            <>
+              <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)", gap: "var(--space-3)", marginTop: "var(--space-4)" }}>
+                <Input label={t("addEntry.dateLabel")} name="newAllowanceEntryDate" type="date" value={newEntryDate} onChange={(event) => setNewEntryDate(event.target.value)} />
+                <Select label={t("addEntry.siteLabel")} name="newAllowanceEntrySite" value={newEntrySite} onChange={(event) => setNewEntrySite(event.target.value)} options={[{ value: "", label: t("addEntry.siteFromAttendance") }, ...siteOptions]} />
+              </div>
+              <HintText small>{t("addEntry.siteHint")}</HintText>
+              <Button fullWidth variant="ghost" onClick={handleAddEntry} loading={addingEntry} disabled={!newEntryDate}>
+                {t("addEntry.action")}
+              </Button>
+            </>
+          ) : (
+            <FieldRow style={{ marginTop: "var(--space-4)", marginBottom: 0, flexWrap: "nowrap" }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <Input label={t("addEntry.dateLabel")} name="newAllowanceEntryDate" type="date" value={newEntryDate} onChange={(event) => setNewEntryDate(event.target.value)} />
+              </div>
+              <Button variant="ghost" onClick={handleAddEntry} loading={addingEntry} disabled={!newEntryDate}>
+                {t("addEntry.action")}
+              </Button>
+            </FieldRow>
+          )}
+          <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "var(--space-3)", marginTop: "var(--space-3)" }}>
+            <Button size="sm" variant="ghost" onClick={handleReprice} loading={repricing} disabled={unsentDays === 0 && !entries.some((entry) => entry.userId === profile?.id && entry.status === "submitted")}>
+              {t("reprice.action")}
             </Button>
-          </FieldRow>
+            <HintText small>{t("reprice.hint")}</HintText>
+          </div>
           <label style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-3)", marginTop: "var(--space-5)", paddingTop: "var(--space-4)", borderTop: "1px solid var(--border-light)", fontSize: "var(--font-sm)" }}>
             <Toggle checked={autoFill} onChange={handleAutoFill} label={t("autoFill.label")} />
             <span>
@@ -619,7 +692,16 @@ export default function AllowancesPage() {
       <Card flush>
         <ErrorText>{loadError}</ErrorText>
         {/* owner 2026-10-26: one sheet like the printed one, edited in its cells */}
-        <AllowanceSheetGrid entries={filteredEntries} ownUserId={profile?.id ?? null} loading={loading} emptyMessage={t("empty")} onOpen={openDetail} onSave={saveCell} />
+        <AllowanceSheetGrid
+          entries={filteredEntries}
+          ownUserId={profile?.id ?? null}
+          loading={loading}
+          emptyMessage={t("empty")}
+          onOpen={openDetail}
+          onSave={saveCell}
+          siteOptions={siteOptions}
+          onSetSite={saveSite}
+        />
       </Card>
 
       {filteredEntries.length > 0 ? (
@@ -688,10 +770,19 @@ export default function AllowancesPage() {
               </p>
             ) : null}
             <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>
-              {t("detail.siteLine", { site: detailEntry.siteName || "—" })}
+              {canEditDetail && detailEntry.sessionCount === 0 && siteOptions.length > 0 ? null : t("detail.siteLine", { site: detailEntry.siteName || "—" })}
               {detailEntry.clockInAt ? ` · ${t("detail.clockInLine", { time: formatTimeOnly(detailEntry.clockInAt, i18n.language) })}` : ""}
               {detailEntry.clockOutAt ? ` · ${t("detail.clockOutLine", { time: formatTimeOnly(detailEntry.clockOutAt, i18n.language) })}` : ""}
             </p>
+            {canEditDetail && detailEntry.sessionCount === 0 && siteOptions.length > 0 ? (
+              <Select
+                label={t("addEntry.siteLabel")}
+                name="detailAllowanceSite"
+                value={detailEntry.siteId ?? ""}
+                onChange={(event) => void saveSite(detailEntry, event.target.value || null)}
+                options={[{ value: "", label: t("addEntry.siteNone") }, ...siteOptions]}
+              />
+            ) : null}
             {detailEntry.sessionCount > 1 ? (
               <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>
                 {t("detail.daySessionsLine", { count: detailEntry.sessionCount, hours: Math.floor(detailEntry.workedMinutes / 60), minutes: detailEntry.workedMinutes % 60 })}

@@ -19,7 +19,11 @@
     "title": "Adicionar um lançamento",
     "hint": "A data, a unidade e a entrada/saída são importadas automaticamente; preencha os valores dos adicionais depois de adicionar.",
     "dateLabel": "Data",
-    "action": "Adicionar"
+    "action": "Adicionar",
+    "siteLabel": "Local",
+    "siteFromAttendance": "Pela frequência",
+    "siteNone": "Sem local",
+    "siteHint": "Para um dia sem frequência (viagem, serviço externo): escolha o local e os valores são preenchidos. Um dia com frequência usa o local da frequência."
   },
   "columns": {
     "employee": "Funcionário",
@@ -225,5 +229,13 @@
   },
   "grid": {
     "label": "Planilha de adicionais"
+  },
+  "exportXlsxAction": "Exportar Excel",
+  "reprice": {
+    "action": "Aplicar os valores atuais",
+    "hint": "Recalcula seus dias em aberto com os valores de hoje - o que não tem valor e o que um gestor alterou continuam como estão.",
+    "done_one": "{{count}} dia recalculado.",
+    "done_many": "{{count}} dias recalculados.",
+    "done_other": "{{count}} dias recalculados."
   }
 }

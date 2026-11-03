@@ -19,7 +19,11 @@
     "title": "Eintrag hinzufügen",
     "hint": "Datum, Standort und Kommen/Gehen werden automatisch übernommen - füllen Sie die Zulagenbeträge nach dem Hinzufügen aus.",
     "dateLabel": "Datum",
-    "action": "Hinzufügen"
+    "action": "Hinzufügen",
+    "siteLabel": "Standort",
+    "siteFromAttendance": "Aus der Anwesenheit",
+    "siteNone": "Kein Standort",
+    "siteHint": "Für einen Tag ohne Anwesenheit (Reise, Besorgung): Standort wählen, die Sätze werden eingetragen. Ein Tag mit Anwesenheit übernimmt deren Standort."
   },
   "columns": {
     "employee": "Mitarbeiter",
@@ -224,5 +228,12 @@
   },
   "grid": {
     "label": "Zulagenblatt"
+  },
+  "exportXlsxAction": "Excel exportieren",
+  "reprice": {
+    "action": "Aktuelle Sätze anwenden",
+    "hint": "Berechnet Ihre offenen Tage mit den heutigen Sätzen neu - was keinen Satz hat und was eine Führungskraft geändert hat, bleibt unverändert.",
+    "done_one": "{{count}} Tag neu berechnet.",
+    "done_other": "{{count}} Tage neu berechnet."
   }
 }

@@ -12,7 +12,7 @@ describe("summarizeDay", () => {
         { clockInAt: "2026-10-12T06:00:00.000Z", clockOutAt: "2026-10-12T09:30:00.000Z" },
         { clockInAt: "2026-10-12T10:00:00.000Z", clockOutAt: "2026-10-12T12:10:00.000Z" },
       ]),
-    ).toEqual({ clockInAt: "2026-10-12T06:00:00.000Z", clockOutAt: "2026-10-12T16:00:00.000Z", sessionCount: 3, workedMinutes: 520 });
+    ).toEqual({ clockInAt: "2026-10-12T06:00:00.000Z", clockOutAt: "2026-10-12T16:00:00.000Z", sessionCount: 3, workedMinutes: 520, siteNames: [] });
   });
 
   it("has no last clock-out while a session is still open", () => {
@@ -21,6 +21,16 @@ describe("summarizeDay", () => {
         { clockInAt: "2026-10-12T06:00:00.000Z", clockOutAt: "2026-10-12T09:00:00.000Z" },
         { clockInAt: "2026-10-12T10:00:00.000Z", clockOutAt: null },
       ]),
-    ).toEqual({ clockInAt: "2026-10-12T06:00:00.000Z", clockOutAt: null, sessionCount: 2, workedMinutes: 180 });
+    ).toEqual({ clockInAt: "2026-10-12T06:00:00.000Z", clockOutAt: null, sessionCount: 2, workedMinutes: 180, siteNames: [] });
+  });
+
+  // Owner 2026-11-03: "the site box doesn't fill" - the day shows its attendance's sites.
+  it("names every site of the day, in the order worked", () => {
+    const day = summarizeDay([
+      { clockInAt: "2026-10-12T13:00:00.000Z", clockOutAt: "2026-10-12T16:00:00.000Z", siteName: "Plant" },
+      { clockInAt: "2026-10-12T06:00:00.000Z", clockOutAt: "2026-10-12T09:30:00.000Z", siteName: "Capital" },
+      { clockInAt: "2026-10-12T10:00:00.000Z", clockOutAt: "2026-10-12T12:10:00.000Z", siteName: "Capital" },
+    ]);
+    expect(day.siteNames).toEqual(["Capital", "Plant"]);
   });
 });
