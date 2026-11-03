@@ -83,14 +83,14 @@ async function sendLeaveEmails(client: any, notificationId: string): Promise<num
   return emailed;
 }
 
-// Owner 2026-11-03: a licence change is emailed to the owner from support@, with the licence PDF.
+// Owner 2026-11-03: a licence change is emailed to the owner (from noreply@, owner's choice) with the licence PDF.
 async function sendLicenceEmail(client: any, notificationId: string): Promise<number> {
   try {
     const { data } = await client.rpc("get_prosm_time_license_email", { p_notification_id: notificationId });
     if (!data) return 0;
     const row = data as LicenceEmailRow;
     const email = await renderLicenceEmail(row);
-    const result = await sendEmail({ ...email, purpose: "licence_changed", fromAddress: "support@prosm.net", supabase: client, organizationId: row.organizationId });
+    const result = await sendEmail({ ...email, purpose: "licence_changed", supabase: client, organizationId: row.organizationId });
     return result.sent ? 1 : 0;
   } catch (error) {
     console.error("LICENCE EMAIL FAILED:", error);

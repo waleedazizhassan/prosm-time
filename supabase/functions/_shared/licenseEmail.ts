@@ -1,5 +1,5 @@
 // Owner 2026-11-03: a licence change made in PROSM Platform Manager is emailed to each
-// owner from support@prosm.net, with the new licence as a PDF.
+// owner (from the default noreply@ sender), with the new licence as a PDF.
 // deno-lint-ignore-file no-explicit-any
 import { PDFDocument, StandardFonts, rgb } from "npm:pdf-lib@1.17.1";
 import fontkit from "npm:@pdf-lib/fontkit@1.1.1";

@@ -132,7 +132,7 @@
     },
     "subscription": {
       "title": "Piano e abbonamento (titolare)",
-      "body": "Impostazioni > Abbonamento mostra il piano e cosa include, i dipendenti rispetto al limite, le sedi, la scadenza e quanto indietro si vedono i dati. Ogni modifica o rinnovo è fatto da PROSM: ricevi una notifica e un’e-mail da support@prosm.net con la nuova licenza in PDF, valida subito. Il campo del codice di attivazione compare solo in prova o dopo la scadenza. Scaduta la licenza e il periodo di tolleranza, l’organizzazione diventa di sola lettura: tutti vedono tutto, modifiche e timbrature sono sospese fino al rinnovo, nulla viene eliminato."
+      "body": "Impostazioni > Abbonamento mostra il piano e cosa include, i dipendenti rispetto al limite, le sedi, la scadenza e quanto indietro si vedono i dati. Ogni modifica o rinnovo è fatto da PROSM: ricevi una notifica e un’e-mail con la nuova licenza in PDF, valida subito. Il campo del codice di attivazione compare solo in prova o dopo la scadenza. Scaduta la licenza e il periodo di tolleranza, l’organizzazione diventa di sola lettura: tutti vedono tutto, modifiche e timbrature sono sospese fino al rinnovo, nulla viene eliminato."
     }
   },
   "faq": {
