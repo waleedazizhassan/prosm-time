@@ -1,0 +1,227 @@
+{
+  "title": "补贴",
+  "subtitle": "与考勤关联的餐补、交通、住房等补贴，仅限您有权查看的范围。",
+  "loadError": "无法加载补贴记录。",
+  "exportPdfAction": "导出 PDF",
+  "empty": "此期间没有补贴记录。",
+  "addError": "无法添加此记录。",
+  "saveError": "无法保存此记录。",
+  "submitError": "无法提交此记录。",
+  "reviewError": "无法审核此记录。",
+  "filters": {
+    "title": "期间",
+    "fromLabel": "从",
+    "toLabel": "至",
+    "employeeLabel": "员工",
+    "allEmployees": "全部员工"
+  },
+  "addEntry": {
+    "title": "添加记录",
+    "hint": "日期、工地和上下班时间会自动导入；添加后再填写补贴金额。",
+    "dateLabel": "日期",
+    "action": "添加"
+  },
+  "columns": {
+    "employee": "员工",
+    "date": "日期",
+    "day": "星期",
+    "site": "工地",
+    "clockIn": "上班",
+    "clockOut": "下班",
+    "meal": "餐补",
+    "expatriation": "外派补贴",
+    "transportation": "交通",
+    "overtimeHours": "加班（时:分）",
+    "overtimeDays": "额外工作日",
+    "housing": "住房",
+    "travel": "差旅",
+    "other": "其他",
+    "status": "状态",
+    "overtimeAmount": "加班金额",
+    "total": "合计"
+  },
+  "status": {
+    "draft": "草稿",
+    "submitted": "已提交",
+    "approved": "已批准",
+    "rejected": "已拒绝"
+  },
+  "detail": {
+    "saveAction": "保存",
+    "submitAction": "提交",
+    "approveAction": "批准",
+    "rejectAction": "拒绝",
+    "siteLine": "工地：{{site}}",
+    "clockInLine": "上班 {{time}}",
+    "clockOutLine": "下班 {{time}}",
+    "overtimeLine": "加班：{{hours}}（时:分）· 额外工作日：{{days}}",
+    "otherNoteLabel": "备注（用于“其他”）",
+    "totalsLabel": "合计",
+    "reviewNotesLabel": "审核备注（可选）",
+    "daySessionsLine": "当天 {{count}} 个班次 · 工作 {{hours}} 小时 {{minutes}} 分钟",
+    "reviewNotesLine": "审核人备注：{{notes}}",
+    "overtimeValueLine": "金额 {{amount}}"
+  },
+  "totals": {
+    "title": "本期合计"
+  },
+  "fill": {
+    "hint": "一键按您的补贴价格填写本期每个出勤日，只需补充没有价格的项目（如差旅），然后提交。",
+    "action": "按我的考勤填写",
+    "done": "已填写 {{count}} 天。"
+  },
+  "myPrices": {
+    "title": "我的补贴价格",
+    "hint": "每个出勤日按工地自动填写的金额。短横表示需要您自己填写。"
+  },
+  "prices": {
+    "openAction": "价格",
+    "title": "补贴价格",
+    "howItWorks": "每个出勤日按这些价格自动填写。先取工地价格，再取类别价格，最后取个人价格，以后者为准。价格留空则沿用上一级；没有价格的补贴由员工自己填写。",
+    "backToAllowances": "返回补贴",
+    "sitesTitle": "工地价格",
+    "sitesHint": "各工地每项补贴的日价格，以及加班一小时和额外工作日的价格。",
+    "noSites": "还没有工地。",
+    "categoriesTitle": "类别",
+    "categoriesHint": "拥有自己价格的员工组（工程师、技术员、工人等），适用于所有工地或某一个工地。",
+    "addCategory": "添加类别",
+    "noCategories": "还没有类别。例如：“技术员”在首都外派补贴为 200，在工厂为 150。",
+    "editAction": "价格",
+    "renameAction": "重命名",
+    "deleteAction": "删除",
+    "deleteCategoryConfirm": "删除类别“{{name}}”及其价格？其人员将恢复使用工地价格。",
+    "peopleTitle": "人员",
+    "peopleHint": "把每个人放进一个类别，或给某人设置专属价格。",
+    "noPeople": "还没有人员。",
+    "categoryColumn": "类别",
+    "noCategory": "无类别",
+    "personalAction": "专属价格",
+    "editTitle": "价格 - {{name}}",
+    "saveAction": "保存",
+    "blankInherits": "留空的价格取自上一级（先工地，后类别）。",
+    "categoryName": "类别名称",
+    "categoryExample": "工程师",
+    "everySite": "所有工地",
+    "forColumn": "适用于",
+    "invalidPrice": "价格必须是零或以上的数字。",
+    "saveError": "无法保存价格。",
+    "loadError": "无法加载价格。",
+    "notAllowed": "只有所有者和有补贴审批权的人可以设置价格。",
+    "field": {
+      "meal": "餐补",
+      "expatriation": "外派补贴",
+      "transportation": "交通",
+      "housing": "住房",
+      "travel": "差旅",
+      "other": "其他",
+      "overtimeHour": "加班一小时",
+      "extraDay": "额外工作日"
+    }
+  },
+  "pdf": {
+    "employeeSignature": "员工签名",
+    "managerApproval": "项目经理审批"
+  },
+  "autoFill": {
+    "label": "每个班次结束后自动填写",
+    "hint": "下班打卡时，按您的价格添加当天的补贴。您仍需检查并提交。"
+  },
+  "sendAll": {
+    "action": "发送给经理",
+    "done": "已将 {{count}} 天发送给您的经理。"
+  },
+  "sheet": {
+    "title": "考勤与补贴表",
+    "subtitle": "补贴表",
+    "combinedSubtitle": "补贴汇总表",
+    "combinedTitle": "汇总表",
+    "combinedHint": "选择要显示的人员：每人一行合计。",
+    "selectAll": "全部",
+    "selectNone": "不选",
+    "employeeName": "员工",
+    "employee": "员工",
+    "employeesCount": "{{count}} 名员工",
+    "periodFrom": "期间从",
+    "periodTo": "至",
+    "day": "星期",
+    "date": "日期",
+    "in": "上班",
+    "out": "下班",
+    "site": "工地",
+    "extraDays": "额外工作日",
+    "overtimeHours": "加班时长",
+    "managerApproval": "项目经理审批",
+    "total": "合计",
+    "grandTotal": "应付总额",
+    "extraDaysValue": "额外工作日",
+    "overtimeValue": "加班时长",
+    "days": "天数",
+    "allowances": "补贴",
+    "extra": "加班",
+    "noSite": "无工地",
+    "employeeSignature": "员工签名",
+    "projectManager": "项目经理",
+    "accounts": "财务",
+    "editsTitle": "审核中由经理修改",
+    "line": "项目",
+    "before": "修改前",
+    "after": "修改后",
+    "reason": "原因",
+    "deductionsTitle": "无薪假扣款",
+    "deductionsNote": "从工资中扣除，而不是从上面的补贴中扣除。",
+    "amount": "金额",
+    "combinedEditsNote": "此人的部分条目在审核中被修改，详情见其个人补贴表。"
+  },
+  "sheets": {
+    "title": "等待您处理的补贴表",
+    "hint": "每张表包含员工提交的所有日期，可一次批准或拒绝。打开即可查看各天。",
+    "line": "{{from}} - {{to}} · {{days}} 天 · 合计 {{total}}",
+    "openAction": "打开",
+    "resubmitted": "被拒后重新提交 · 之前合计 {{total}}"
+  },
+  "basis": {
+    "title": "各项补贴的计算方式",
+    "hint": "按天：每个出勤日计一次价格。按小时：按当天实际工作时长计价，精确到分钟（一刻钟 = 价格的四分之一）。按额外工作日：在休息日或节假日每工作一天计一次价格。加班始终按分钟计算。",
+    "genericError": "无法保存。",
+    "option": {
+      "fixed_per_day": "按出勤日",
+      "per_hour": "按工作小时（精确到分钟）",
+      "per_extra_day": "按额外工作日（休息日 / 节假日）"
+    }
+  },
+  "sheetEdit": {
+    "action": "修改补贴",
+    "title": "修改 {{name}} 的补贴",
+    "hint": "批准前可修改任何条目。必须填写原因，每次修改都会被记录（谁、修改前、修改后、原因）。",
+    "line": {
+      "meal": "餐补",
+      "expatriation": "外派补贴",
+      "transportation": "交通",
+      "housing": "住房",
+      "travel": "差旅",
+      "other": "其他",
+      "overtime": "加班",
+      "extraDays": "额外工作日"
+    },
+    "changed": "已修改",
+    "computed": "计算值：{{value}}",
+    "total": "表合计：{{total}}",
+    "reasonLabel": "原因（必填）",
+    "reasonRequired": "请填写原因。",
+    "invalidValue": "数值必须是 0 或以上的数字。",
+    "save_other": "保存 {{count}} 处修改",
+    "approvedTitle": "最近批准的补贴表",
+    "approvedHint": "已批准的表不能修改；如需更正，请重新打开审核（会记录原因）。",
+    "reopenAction": "重新打开",
+    "reopenTitle": "重新打开已批准的补贴表",
+    "reopenHint": "该表将回到审核状态，以便更正后再次批准。会通知员工。"
+  },
+  "deductions": {
+    "title": "本期扣款",
+    "hint": "这些日期已批准的无薪假，从工资中扣除。",
+    "line": "无薪假扣款"
+  },
+  "grid": {
+    "label": "补贴表"
+  }
+}

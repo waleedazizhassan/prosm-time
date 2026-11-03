@@ -1,0 +1,186 @@
+{
+  "title": "经理控制台",
+  "subtitle": "今天全机构的考勤，以及待审核的例外和更正。",
+  "linkPeople": "前往人员",
+  "linkSites": "前往工地",
+  "reviewError": "无法审核此项。",
+  "attendance": {
+    "title": "今日考勤",
+    "employee": "员工",
+    "site": "工地",
+    "status": "状态",
+    "workedHours": "工作时长",
+    "clockInAt": "上班",
+    "clockOutAt": "下班",
+    "clocked_in": "已上班",
+    "clocked_out": "已下班",
+    "empty": "今天没有考勤记录。",
+    "viewPhoto": "查看照片",
+    "photoModalTitle": "考勤照片",
+    "photoLoading": "正在加载照片…",
+    "photoAlt": "考勤凭证照片",
+    "photoLoadError": "无法加载这张照片。",
+    "openToday": "今日考勤 → 考勤记录"
+  },
+  "pending": {
+    "title": "待审核",
+    "empty": "没有待审核的例外或更正。",
+    "kind": {
+      "geofence_exception": "地理围栏例外",
+      "correction_request": "更正申请",
+      "offline_time": "离线时间",
+      "mock_location": "虚假位置"
+    },
+    "reviewAction": "审核",
+    "notesLabel": "备注（可选）",
+    "submittedAtLabel": "提交时间",
+    "action": {
+      "approved": "批准",
+      "rejected": "拒绝",
+      "acknowledged": "已知悉",
+      "clarification_requested": "要求说明"
+    },
+    "offlineTime": {
+      "summary": "{{action}} 在离线时按设备时间 {{deviceTime}} 记录；于 {{receivedAt}} 到达服务器。",
+      "action": {
+        "clock_in": "上班打卡",
+        "clock_out": "下班打卡",
+        "break_start": "开始休息",
+        "break_end": "结束休息",
+        "site_change": "更换工地"
+      }
+    },
+    "mockLocation": {
+      "summary": "{{action}}，{{time}}，设备报告的位置为模拟（虚假 GPS）。"
+    },
+    "effect": {
+      "geofence_exception": {
+        "approved": "接受原因：该班次的工时全部计入。",
+        "rejected": "从离开工作区域时起停止计算工时（考勤表扣除该班次的剩余部分）。",
+        "clarification_requested": "退回员工，并以您的备注作为问题，请其再次说明；对方回复后会回到这里。"
+      },
+      "correction_request": {
+        "approved": "上班或下班时间改为申请的时间。",
+        "rejected": "保留原记录时间。"
+      },
+      "offline_time": {
+        "approved": "接受手机在离线时记录的时间。",
+        "rejected": "标记为不接受；时间本身不变，如有错误请在考勤记录中更正。"
+      },
+      "mock_location": {
+        "approved": "视为真实位置（如 GPS 误差）。",
+        "rejected": "记录为虚假位置；其他内容不会自动改变，请与员工沟通。"
+      }
+    },
+    "geofence": {
+      "summary": "超出工作区域 {{distance}} 米 · 原因：{{reason}}"
+    },
+    "correction": {
+      "summary": "{{action}}，{{time}} · {{reason}}"
+    }
+  },
+  "leave": {
+    "title": "待审核的请假申请",
+    "empty": "没有待审核的请假申请。",
+    "daysSuffix": "天",
+    "approveAction": "批准",
+    "rejectAction": "拒绝",
+    "reviewError": "无法审核此请假申请。",
+    "types": {
+      "annual": "年假",
+      "sick": "病假",
+      "unpaid": "无薪假",
+      "emergency": "事假",
+      "other": "其他",
+      "hajj": "朝觐或副朝",
+      "bereavement": "丧假",
+      "paternity": "陪产假"
+    },
+    "revokeTitle": "撤销已批准的请假",
+    "revokeHint": "已批准且尚未开始的请假：如计划有变，需要事后取消时使用。",
+    "revokeEmpty": "没有可撤销的已批准请假。",
+    "revokeAction": "撤销",
+    "revokeReasonLabel": "原因（必填）",
+    "startedCannotCancel": "已开始，无法取消",
+    "deductionLabel": "每日扣款（{{currency}}）- 必填",
+    "deductionTotal": "扣除 {{days}} 个工作日（不含休息日和节假日）：{{total}} {{currency}}",
+    "deductionHint": "每周休息日和法定节假日不扣款。",
+    "deductionRequired": "请输入每日扣款（0 或以上）。"
+  },
+  "pendingHours": {
+    "title_other": "待审核工时（{{count}}）",
+    "hint": "这些班次因无人下班打卡而被自动关闭。在您设置真实结束时间之前，其工时不计入任何地方（考勤表、合计、补贴、加班、成本）。",
+    "loadError": "无法加载待审核的班次。",
+    "summary": "上班 {{clockIn}} · 于 {{clockOut}} 自动关闭",
+    "reviewAction": "设置结束时间",
+    "modalTitle": "设置班次结束时间",
+    "modalBody": "上班 {{clockIn}}。最后一次活动：{{lastActivity}}。",
+    "clockOutLabel": "真实下班时间",
+    "reasonLabel": "原因（必填）",
+    "reasonRequired": "请填写原因。",
+    "invalidTime": "请选择有效时间。",
+    "genericError": "无法保存。",
+    "save": "保存并计入工时",
+    "staleTitle": "仍未关闭的旧班次",
+    "staleHint": "在自动关闭功能上线前打开，未被自动关闭。请按正确时间代员工下班打卡。",
+    "staleSummary": "自 {{clockIn}} 起未关闭（{{hours}} 小时）"
+  },
+  "permissions": {
+    "title_other": "许可和加班（{{count}}）",
+    "hint": "许可申请，以及加班等待您批准的日期。加班在批准前不计入任何补贴或考勤表。",
+    "empty": "没有待处理事项。",
+    "loadError": "无法加载许可。",
+    "genericError": "无法保存。",
+    "grantAction": "添加许可",
+    "adjustAction": "调整",
+    "adjustTitle": "调整当天",
+    "adjustHint": "留空则保留计算值。必须填写原因，调整会被记录。",
+    "approveOvertime": "批准加班",
+    "approvedOvertimeReason": "经理已批准加班",
+    "overtimeWaiting": "加班 {{time}} 待批",
+    "kind": {
+      "late_arrival": "迟到",
+      "early_leave": "早退",
+      "approved_overtime": "已批准加班",
+      "no_overtime": "不计为加班"
+    },
+    "dayType": {
+      "workday": "工作日",
+      "weekly_rest": "每周休息日",
+      "public_holiday": "法定节假日"
+    },
+    "paidLabel": "带薪（不扣款）",
+    "deductionPercentLabel": "按此百分比扣除分钟数",
+    "deductionMinutesLabel": "扣除分钟数",
+    "personLabel": "人员",
+    "dateLabel": "日期",
+    "kindLabel": "类型",
+    "minutesLabel": "分钟（可选）",
+    "reasonLabel": "原因（必填）",
+    "overtimeMinutesLabel": "加班分钟数",
+    "lateMinutesLabel": "迟到分钟数",
+    "save": "保存"
+  },
+  "integrity": {
+    "title_other": "可疑打卡（{{count}}）",
+    "hint": "这些情况没有阻止打卡。请接受、拒绝（需说明原因）或询问员工。",
+    "loadError": "无法加载可疑打卡。",
+    "genericError": "无法保存。",
+    "notesLabel": "给员工的备注（拒绝或询问时必填）",
+    "kind": {
+      "liveness_failed": "活体检测失败",
+      "liveness_unavailable": "手机无法进行活体检测",
+      "unverified_capture": "照片选自文件",
+      "stale_capture": "照片过旧",
+      "reused_token": "照片被重复使用",
+      "missing_token": "照片缺少服务器令牌",
+      "repeated_coordinates": "位置与之前完全相同",
+      "suspicious_accuracy": "定位精度过于完美"
+    },
+    "explain": {
+      "liveness_failed": "此人没有在镜头前完成要求的动作。",
+      "unverified_capture": "相机无法打开，因此从手机中选择了一张图片。",
+      "repeated_coordinates": "同一位置且几乎没有 GPS 误差，这是虚假定位应用的常见迹象。"
+    }
+  }
+}

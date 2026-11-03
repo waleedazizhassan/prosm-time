@@ -1,0 +1,101 @@
+{
+  "title": "请假",
+  "subtitle": "申请休假并查看假期余额。",
+  "loadError": "无法加载您的请假申请。",
+  "submitError": "无法提交此请假申请。",
+  "cancelError": "无法取消此请假申请。",
+  "cancelAction": "取消",
+  "balanceTitle": "余额（{{year}}）",
+  "daysRemainingSuffix": "天剩余",
+  "daysTakenSuffix": "天已休",
+  "balanceDetail": "已用 {{used}}，待批 {{pending}}，额度 {{entitled}}",
+  "pendingSuffix": "待批 {{pending}}",
+  "requestFormTitle": "申请请假",
+  "startDateLabel": "开始日期",
+  "endDateLabel": "结束日期",
+  "reasonLabel": "原因（可选）",
+  "submitAction": "提交申请",
+  "myRequestsTitle": "我的申请",
+  "orgWideRequestsTitle": "全机构请假",
+  "ownerAutoApproveHint": "作为所有者，您自己的申请会立即批准，因为没有更高层级的审批人。",
+  "ownerAutoApprovedMessage": "已立即批准。",
+  "empty": "还没有请假申请。",
+  "columns": {
+    "employee": "员工",
+    "type": "类型",
+    "dates": "日期",
+    "days": "天数",
+    "reason": "原因",
+    "status": "状态",
+    "reviewedBy": "审批人",
+    "deduction": "扣款"
+  },
+  "types": {
+    "annual": "年假",
+    "sick": "病假",
+    "unpaid": "无薪假",
+    "emergency": "事假",
+    "other": "其他",
+    "hajj": "朝觐或副朝",
+    "bereavement": "丧假",
+    "paternity": "陪产假"
+  },
+  "status": {
+    "pending": "待批",
+    "approved": "已批准",
+    "rejected": "已拒绝",
+    "cancelled": "已取消"
+  },
+  "permission": {
+    "title": "申请许可",
+    "hint": "迟到、早退或加班：请在当天之前申请；由您的经理决定是否计薪。您会在这里看到决定。",
+    "kindLabel": "类型",
+    "dateLabel": "日期",
+    "minutesLabel": "分钟（可选）",
+    "reasonLabel": "原因（必填）",
+    "submit": "发送给我的经理",
+    "required": "请选择日期并填写原因。",
+    "genericError": "无法发送。",
+    "cancel": "撤回",
+    "noDeduction": "不扣款",
+    "partialDeduction": "部分扣款",
+    "kind": {
+      "late_arrival": "迟到",
+      "early_leave": "早退",
+      "approved_overtime": "加班",
+      "no_overtime": "不计为加班"
+    },
+    "status": {
+      "pending": "等待中",
+      "approved": "已批准",
+      "rejected": "已拒绝",
+      "cancelled": "已撤回"
+    }
+  },
+  "typeRules": {
+    "paid": "带薪",
+    "unpaid": "无薪",
+    "maxPerRequest": "每次最多 {{days}} 天",
+    "maxTimes": "在职期间最多 {{times}} 次",
+    "minService": "工作满 {{years}} 年后",
+    "document": "需要证明文件"
+  },
+  "documentLabel": "证明文件（医疗报告）",
+  "documentUploadError": "无法上传文件。",
+  "balanceDiffers": "此为手动设置；按规则应为 {{computed}}，如有疑问请询问您的经理。",
+  "startedCannotCancel": "已开始，无法取消",
+  "grant": {
+    "title": "为 {{name}} 登记请假",
+    "hint": "如果对方电话请假或有理由缺勤：在这里登记即可立即批准，缺勤会在仪表板和考勤表中变为请假。可登记过去的日期。",
+    "typeLabel": "请假类型",
+    "notesLabel": "备注（可选）",
+    "deductionLabel": "每日扣款",
+    "deductionHint": "无薪假在批准时按天扣款。",
+    "action": "登记并批准",
+    "done": "{{name}} 的请假已登记并批准。",
+    "doneReopen_other": "{{name}} 的请假已登记并批准。有 {{count}} 份已提交的考勤表涵盖这些日期，请重新打开以便更正，使其显示请假。",
+    "error": "无法登记请假。"
+  },
+  "reviewerLabel": "将申请发送给",
+  "reviewerOwner": "{{name}}（所有者）"
+}

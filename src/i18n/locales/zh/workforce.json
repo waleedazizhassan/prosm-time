@@ -1,0 +1,38 @@
+{
+  "addTitle": "添加工人",
+  "addHint": "用于没有应用账户的工人（分包商、临时工）。应用会为每位工人生成一个 6 位号码；他们在任一工地的自助终端输入该号码即可打卡上下班。",
+  "nameLabel": "工人姓名",
+  "contractorLabel": "分包商（可选）",
+  "addAction": "添加工人",
+  "addError": "无法添加该工人。",
+  "addedFor": "已添加 {{name}}。其终端号码：",
+  "addedHint": "把这个号码交给工人。您随时可以在下面的列表中查看。",
+  "copyAction": "复制",
+  "copied": "已复制",
+  "listTitle": "全部工人",
+  "empty": "还没有外部工人。",
+  "loadError": "无法加载工人。",
+  "updateError": "无法更新该工人。",
+  "columns": {
+    "name": "姓名",
+    "number": "终端号码",
+    "contractor": "分包商",
+    "now": "当前",
+    "status": "状态",
+    "actions": "操作"
+  },
+  "atSite": "在 {{site}}",
+  "status": {
+    "active": "启用",
+    "inactive": "停用"
+  },
+  "clockOutAction": "打卡下班",
+  "deactivateAction": "停用",
+  "activateAction": "启用",
+  "overrideReasonLabel": "为该工人打卡下班的原因",
+  "editAction": "编辑",
+  "deleteAction": "删除",
+  "editTitle": "编辑工人",
+  "editHint": "终端号码 {{number}} 保持不变。",
+  "deleteConfirm": "确定永久删除 {{name}}？已有考勤记录的工人无法删除，请改为停用。"
+}

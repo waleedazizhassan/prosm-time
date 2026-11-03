@@ -1,0 +1,109 @@
+{
+  "title": "排班表",
+  "subtitle": "提前为您的团队安排班次。",
+  "loadError": "无法加载您的班次。",
+  "myShiftsTitle": "我接下来的班次",
+  "emptyMine": "还没有为您安排班次。",
+  "manageTitle": "工地排班",
+  "siteLabel": "工地",
+  "rangeStartLabel": "从",
+  "rangeEndLabel": "至",
+  "emptySite": "此期间该工地没有安排班次。",
+  "cancelAction": "取消",
+  "cancelError": "无法取消此班次。",
+  "templatesTitle": "班次模板",
+  "templatesHint": "此工地可重复使用的时段（如早班、夜班）：在下方选择一个模板来预填新排班，或设置自定义时间。",
+  "noTemplates": "此工地还没有模板。",
+  "templateNameLabel": "模板名称",
+  "startTimeLabel": "开始时间",
+  "endTimeLabel": "结束时间",
+  "createTemplateAction": "添加模板",
+  "templateError": "无法创建此班次模板。",
+  "assignTitle": "安排班次",
+  "selectEmployeePlaceholder": "选择员工",
+  "templateLabel": "模板",
+  "customTimeOption": "自定义时间",
+  "notesLabel": "备注（可选）",
+  "assignAction": "安排班次",
+  "assignError": "无法安排此班次。",
+  "columns": {
+    "employee": "员工",
+    "site": "工地",
+    "date": "日期",
+    "time": "时间",
+    "notes": "备注",
+    "actual": "实际"
+  },
+  "status": {
+    "scheduled": "已排班",
+    "cancelled": "已取消"
+  },
+  "breakRules": {
+    "open": "休息规则",
+    "title": "休息规则 - {{name}}",
+    "hint": "无薪休息从工作时间中扣除。超过上限的分钟不计薪。启用自动扣除后，当天没有休息也会扣除这些分钟。",
+    "paidLabel": "休息带薪",
+    "maxLabel": "最长休息（分钟，可选）",
+    "autoLabel": "未休息时扣除（分钟，可选）",
+    "genericError": "无法保存。",
+    "save": "保存"
+  },
+  "swap": {
+    "title": "换班",
+    "shift": "我的班次",
+    "chooseShift": "选择班次",
+    "chooseColleague": "选择同事",
+    "from": "从",
+    "to": "给",
+    "reason": "原因",
+    "request": "申请换班",
+    "approve": "批准",
+    "reject": "拒绝",
+    "failed": "无法完成。该同事可能在休假或已有班次。",
+    "status": {
+      "pending": "等待中",
+      "approved": "已批准",
+      "rejected": "已拒绝",
+      "cancelled": "已取消"
+    }
+  },
+  "cost": {
+    "title": "排班成本",
+    "subtitle": "按每人的费率计算所示班次。超过每日阈值的部分计为加班。",
+    "regular": "正常",
+    "overtime": "预计加班",
+    "total": "合计",
+    "hours": "{{hours}} 小时",
+    "unpriced": "{{count}} 个班次没有费率，未计入。"
+  },
+  "open": {
+    "title": "空缺班次",
+    "subtitle": "还没有人负责的班次。可以申请，由经理决定。",
+    "none": "没有空缺班次。",
+    "noRequests": "还没有人申请。",
+    "give": "分配班次",
+    "cancel": "取消班次",
+    "ask": "申请这个班次",
+    "post": "发布空缺班次",
+    "failed": "无法完成。",
+    "status": {
+      "open": "空缺",
+      "filled": "已安排",
+      "cancelled": "已取消"
+    },
+    "mine": {
+      "pending": "您已申请，等待经理决定。",
+      "approved": "这个班次是您的了。",
+      "rejected": "已安排给其他人。"
+    }
+  },
+  "checklist": {
+    "title": "下班检查清单",
+    "subtitle": "在此工地下班打卡前显示。每行一项；留空表示没有。",
+    "label": "检查项",
+    "save": "保存清单",
+    "saved": "已保存。",
+    "failed": "无法保存清单。",
+    "tooMany": "最多二十项。"
+  }
+}

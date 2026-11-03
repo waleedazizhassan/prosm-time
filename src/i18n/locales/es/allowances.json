@@ -1,0 +1,229 @@
+{
+  "title": "Pluses",
+  "subtitle": "Pluses de comida, transporte, alojamiento y otros junto a tu asistencia, limitados a lo que puedes ver.",
+  "loadError": "No se pudieron cargar los pluses.",
+  "exportPdfAction": "Exportar PDF",
+  "empty": "No hay pluses en este período.",
+  "addError": "No se pudo añadir esta línea.",
+  "saveError": "No se pudo guardar esta línea.",
+  "submitError": "No se pudo enviar esta línea.",
+  "reviewError": "No se pudo revisar esta línea.",
+  "filters": {
+    "title": "Período",
+    "fromLabel": "Desde",
+    "toLabel": "Hasta",
+    "employeeLabel": "Empleado",
+    "allEmployees": "Todos los empleados"
+  },
+  "addEntry": {
+    "title": "Añadir una línea",
+    "hint": "La fecha, la sede y la entrada/salida se importan automáticamente; rellena los importes de los pluses después de añadirla.",
+    "dateLabel": "Fecha",
+    "action": "Añadir"
+  },
+  "columns": {
+    "employee": "Empleado",
+    "date": "Fecha",
+    "day": "Día",
+    "site": "Sede",
+    "clockIn": "Entrada",
+    "clockOut": "Salida",
+    "meal": "Comida",
+    "expatriation": "Desplazamiento",
+    "transportation": "Transporte",
+    "overtimeHours": "Horas extra (h:mm)",
+    "overtimeDays": "Días extra",
+    "housing": "Alojamiento",
+    "travel": "Viaje",
+    "other": "Otro",
+    "status": "Estado",
+    "overtimeAmount": "Valor de las horas extra",
+    "total": "Total"
+  },
+  "status": {
+    "draft": "Borrador",
+    "submitted": "Enviado",
+    "approved": "Aprobado",
+    "rejected": "Rechazado"
+  },
+  "detail": {
+    "saveAction": "Guardar",
+    "submitAction": "Enviar",
+    "approveAction": "Aprobar",
+    "rejectAction": "Rechazar",
+    "siteLine": "Sede: {{site}}",
+    "clockInLine": "Entrada {{time}}",
+    "clockOutLine": "Salida {{time}}",
+    "overtimeLine": "Horas extra: {{hours}} (h:mm) · días extra: {{days}}",
+    "otherNoteLabel": "Nota (para «Otro»)",
+    "totalsLabel": "Totales",
+    "reviewNotesLabel": "Notas de revisión (opcional)",
+    "daySessionsLine": "{{count}} jornadas este día · {{hours}} h {{minutes}} min trabajados",
+    "reviewNotesLine": "Nota del revisor: {{notes}}",
+    "overtimeValueLine": "por valor de {{amount}}"
+  },
+  "totals": {
+    "title": "Totales del período"
+  },
+  "fill": {
+    "hint": "Con un toque se rellenan todos los días trabajados del período con tus precios de pluses: añade solo lo que no tiene precio (viajes, por ejemplo) y envía.",
+    "action": "Rellenar desde mi asistencia",
+    "done": "{{count}} días rellenados."
+  },
+  "myPrices": {
+    "title": "Mis precios de pluses",
+    "hint": "Con qué se rellena cada día trabajado, por sede. Un guion significa que lo escribes tú."
+  },
+  "prices": {
+    "openAction": "Precios",
+    "title": "Precios de pluses",
+    "howItWorks": "Cada día trabajado se rellena con estos precios. Primero el precio de la sede, luego el de la categoría y luego el de la persona: gana el último. Deja un precio vacío para heredarlo; un plus sin precio lo escribe el empleado.",
+    "backToAllowances": "Volver a los pluses",
+    "sitesTitle": "Precios por sede",
+    "sitesHint": "El precio diario de cada plus en cada sede, y el precio de la hora extra y del día extra.",
+    "noSites": "Todavía no hay sedes.",
+    "categoriesTitle": "Categorías",
+    "categoriesHint": "Grupos de personal con sus propios precios (ingenieros, técnicos, operarios…) para todas las sedes o para una.",
+    "addCategory": "Añadir categoría",
+    "noCategories": "Todavía no hay categorías. Ejemplo: los «Técnicos» cobran 200 de desplazamiento en la Capital y 150 en la Fábrica.",
+    "editAction": "Precios",
+    "renameAction": "Renombrar",
+    "deleteAction": "Eliminar",
+    "deleteCategoryConfirm": "¿Eliminar la categoría «{{name}}» y sus precios? Sus personas vuelven a los precios de la sede.",
+    "peopleTitle": "Personas",
+    "peopleHint": "Pon a cada persona en una categoría o dale a alguien sus propios precios.",
+    "noPeople": "Todavía no hay personas.",
+    "categoryColumn": "Categoría",
+    "noCategory": "Sin categoría",
+    "personalAction": "Precios propios",
+    "editTitle": "Precios - {{name}}",
+    "saveAction": "Guardar",
+    "blankInherits": "Un precio vacío se toma del nivel anterior (sede y luego categoría).",
+    "categoryName": "Nombre de la categoría",
+    "categoryExample": "Ingenieros",
+    "everySite": "Todas las sedes",
+    "forColumn": "Para",
+    "invalidPrice": "Un precio debe ser un número igual o mayor que cero.",
+    "saveError": "No se pudieron guardar los precios.",
+    "loadError": "No se pudieron cargar los precios.",
+    "notAllowed": "Solo el propietario y quienes aprueban pluses fijan precios.",
+    "field": {
+      "meal": "Comida",
+      "expatriation": "Desplazamiento",
+      "transportation": "Transporte",
+      "housing": "Alojamiento",
+      "travel": "Viaje",
+      "other": "Otro",
+      "overtimeHour": "Hora extra",
+      "extraDay": "Día extra"
+    }
+  },
+  "pdf": {
+    "employeeSignature": "Firma del empleado",
+    "managerApproval": "Aprobación del jefe de proyecto"
+  },
+  "autoFill": {
+    "label": "Rellenar automáticamente tras cada turno",
+    "hint": "Al fichar la salida, se añaden los pluses de ese día con tus precios. Tú los revisas y los envías."
+  },
+  "sendAll": {
+    "action": "Enviar al responsable",
+    "done": "{{count}} días enviados a tu responsable."
+  },
+  "sheet": {
+    "title": "Hoja de asistencia y pluses",
+    "subtitle": "Hoja de pluses",
+    "combinedSubtitle": "Hoja combinada de pluses",
+    "combinedTitle": "Hoja combinada",
+    "combinedHint": "Elige quién aparece: una línea de totales por persona.",
+    "selectAll": "Todos",
+    "selectNone": "Nadie",
+    "employeeName": "Empleado",
+    "employee": "Empleado",
+    "employeesCount": "{{count}} empleados",
+    "periodFrom": "Período del",
+    "periodTo": "al",
+    "day": "Día",
+    "date": "Fecha",
+    "in": "Entrada",
+    "out": "Salida",
+    "site": "Sede",
+    "extraDays": "Días extra",
+    "overtimeHours": "Horas extra",
+    "managerApproval": "Aprobación del jefe de proyecto",
+    "total": "Total",
+    "grandTotal": "Total a pagar",
+    "extraDaysValue": "Días extra",
+    "overtimeValue": "Horas extra",
+    "days": "Días",
+    "allowances": "Pluses",
+    "extra": "Horas extra",
+    "noSite": "Sin sede",
+    "employeeSignature": "Firma del empleado",
+    "projectManager": "Jefe de proyecto",
+    "accounts": "Contabilidad",
+    "editsTitle": "Cambiado por el responsable durante la revisión",
+    "line": "Concepto",
+    "before": "Antes",
+    "after": "Después",
+    "reason": "Motivo",
+    "deductionsTitle": "Descuentos por ausencias no retribuidas",
+    "deductionsNote": "Se descuentan del salario, no de los pluses anteriores.",
+    "amount": "Importe",
+    "combinedEditsNote": "Algunas líneas de esta persona se cambiaron durante la revisión: el detalle está en su propia hoja."
+  },
+  "sheets": {
+    "title": "Hojas de pluses que te esperan",
+    "hint": "Cada hoja reúne todos los días que envió un empleado: apruébala o recházala de una vez. Ábrela para ver los días.",
+    "line": "{{from}} - {{to}} · {{days}} días · total {{total}}",
+    "openAction": "Abrir",
+    "resubmitted": "Reenviada tras un rechazo · total anterior {{total}}"
+  },
+  "basis": {
+    "title": "Cómo se calcula cada plus",
+    "hint": "Por día: el precio una vez por cada día trabajado. Por hora: el precio por cada hora realmente trabajada ese día, al minuto (un cuarto de hora = un cuarto del precio). Por día extra: el precio por cada día trabajado en descanso o festivo. Las horas extra se pagan siempre al minuto.",
+    "genericError": "No se pudo guardar.",
+    "option": {
+      "fixed_per_day": "Por día trabajado",
+      "per_hour": "Por hora trabajada (al minuto)",
+      "per_extra_day": "Por día extra (descanso / festivo)"
+    }
+  },
+  "sheetEdit": {
+    "action": "Editar pluses",
+    "title": "Editar los pluses de {{name}}",
+    "hint": "Cambia cualquier línea antes de aprobar. El motivo es obligatorio y cada cambio queda registrado (quién, antes, después, por qué).",
+    "line": {
+      "meal": "Comida",
+      "expatriation": "Desplazamiento",
+      "transportation": "Transporte",
+      "housing": "Alojamiento",
+      "travel": "Viaje",
+      "other": "Otro",
+      "overtime": "Horas extra",
+      "extraDays": "Días extra"
+    },
+    "changed": "cambiado",
+    "computed": "calculado: {{value}}",
+    "total": "Total de la hoja: {{total}}",
+    "reasonLabel": "Motivo (obligatorio)",
+    "reasonRequired": "Escribe el motivo.",
+    "invalidValue": "Los valores deben ser números de 0 o más.",
+    "save_one": "Guardar 1 cambio",
+    "save_other": "Guardar {{count}} cambios",
+    "approvedTitle": "Hojas aprobadas recientemente",
+    "approvedHint": "Una hoja aprobada no se edita; para corregirla, reábrela para revisión (queda registrado con el motivo).",
+    "reopenAction": "Reabrir",
+    "reopenTitle": "Reabrir una hoja aprobada",
+    "reopenHint": "La hoja vuelve a revisión para corregirla y aprobarla de nuevo. Se avisa al empleado.",
+    "save_many": "Guardar {{count}} cambios"
+  },
+  "deductions": {
+    "title": "Descuentos en este período",
+    "hint": "Ausencias no retribuidas aprobadas en estos días, descontadas del salario.",
+    "line": "descuento por ausencia no retribuida"
+  },
+  "grid": {
+    "label": "Hoja de pluses"
+  }
+}

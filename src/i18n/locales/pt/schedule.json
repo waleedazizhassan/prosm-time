@@ -1,0 +1,109 @@
+{
+  "title": "Escala de turnos",
+  "subtitle": "Planejamento antecipado dos turnos da sua equipe.",
+  "loadError": "Não foi possível carregar seus turnos.",
+  "myShiftsTitle": "Meus próximos turnos",
+  "emptyMine": "Ainda não há turnos programados para você.",
+  "manageTitle": "Escala da unidade",
+  "siteLabel": "Unidade",
+  "rangeStartLabel": "De",
+  "rangeEndLabel": "Até",
+  "emptySite": "Nenhum turno programado para esta unidade neste período.",
+  "cancelAction": "Cancelar",
+  "cancelError": "Não foi possível cancelar este turno.",
+  "templatesTitle": "Modelos de turno",
+  "templatesHint": "Horários reutilizáveis desta unidade (ex.: Manhã, Noite): escolha um abaixo para preencher uma nova escala ou defina um horário personalizado.",
+  "noTemplates": "Ainda não há modelos para esta unidade.",
+  "templateNameLabel": "Nome do modelo",
+  "startTimeLabel": "Horário de início",
+  "endTimeLabel": "Horário de término",
+  "createTemplateAction": "Adicionar modelo",
+  "templateError": "Não foi possível criar este modelo de turno.",
+  "assignTitle": "Escalar um turno",
+  "selectEmployeePlaceholder": "Selecione um funcionário",
+  "templateLabel": "Modelo",
+  "customTimeOption": "Horário personalizado",
+  "notesLabel": "Observações (opcional)",
+  "assignAction": "Escalar turno",
+  "assignError": "Não foi possível escalar este turno.",
+  "columns": {
+    "employee": "Funcionário",
+    "site": "Unidade",
+    "date": "Data",
+    "time": "Horário",
+    "notes": "Observações",
+    "actual": "Realizado"
+  },
+  "status": {
+    "scheduled": "Programado",
+    "cancelled": "Cancelado"
+  },
+  "breakRules": {
+    "open": "Regras de intervalo",
+    "title": "Regras de intervalo - {{name}}",
+    "hint": "Intervalos não remunerados são descontados do tempo trabalhado. Os minutos acima do máximo não são pagos. Com desconto automático, um dia sem intervalo perde esses minutos.",
+    "paidLabel": "Intervalos são remunerados",
+    "maxLabel": "Intervalo máximo (minutos, opcional)",
+    "autoLabel": "Descontar quando não houver intervalo (minutos, opcional)",
+    "genericError": "Não foi possível salvar.",
+    "save": "Salvar"
+  },
+  "swap": {
+    "title": "Trocas de turno",
+    "shift": "Meu turno",
+    "chooseShift": "Escolha um turno",
+    "chooseColleague": "Escolha um colega",
+    "from": "De",
+    "to": "Para",
+    "reason": "Motivo",
+    "request": "Pedir troca",
+    "approve": "Aprovar",
+    "reject": "Recusar",
+    "failed": "Não foi possível concluir. O colega pode estar de licença ou já ter um turno.",
+    "status": {
+      "pending": "Aguardando",
+      "approved": "Aprovada",
+      "rejected": "Recusada",
+      "cancelled": "Cancelada"
+    }
+  },
+  "cost": {
+    "title": "Custo da escala",
+    "subtitle": "Os turnos exibidos, pelo valor de cada pessoa. O que passar do limite diário conta como hora extra.",
+    "regular": "Normal",
+    "overtime": "Horas extras previstas",
+    "total": "Total",
+    "hours": "{{hours}} h",
+    "unpriced": "{{count}} turnos não têm valor/hora e não são contados."
+  },
+  "open": {
+    "title": "Turnos em aberto",
+    "subtitle": "Turnos que ainda não têm ninguém. Peça um; o gestor decide.",
+    "none": "Nenhum turno em aberto.",
+    "noRequests": "Ninguém pediu ainda.",
+    "give": "Dar o turno",
+    "cancel": "Cancelar o turno",
+    "ask": "Pedir este turno",
+    "post": "Publicar um turno em aberto",
+    "failed": "Não foi possível concluir.",
+    "status": {
+      "open": "Em aberto",
+      "filled": "Preenchido",
+      "cancelled": "Cancelado"
+    },
+    "mine": {
+      "pending": "Você pediu. Aguardando o gestor.",
+      "approved": "É seu.",
+      "rejected": "Ficou com outra pessoa."
+    }
+  },
+  "checklist": {
+    "title": "Checklist de fim de turno",
+    "subtitle": "Aparece antes de registrar a saída nesta unidade. Um item por linha; deixe vazio para nenhum.",
+    "label": "Itens",
+    "save": "Salvar checklist",
+    "saved": "Salvo.",
+    "failed": "Não foi possível salvar o checklist.",
+    "tooMany": "No máximo vinte itens."
+  }
+}

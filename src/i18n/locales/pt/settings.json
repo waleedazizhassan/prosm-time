@@ -1,0 +1,214 @@
+{
+  "title": "Configurações",
+  "subtitle": "Configuração de toda a organização.",
+  "siteDefaults": {
+    "title": "Padrões das unidades",
+    "hint": "Aplicados a cada nova unidade criada: decisões quase sempre iguais em toda a organização, não um atributo real de cada unidade. As unidades existentes mantêm o valor salvo; você ainda pode mudar qualquer um para uma unidade no formulário de edição dela.",
+    "gpsAccuracyToleranceLabel": "Tolerância de precisão do GPS (metros)",
+    "graceToleranceLabel": "Tolerância (minutos)",
+    "breakRoundingModeLabel": "Arredondamento do intervalo",
+    "breakRoundingMode": {
+      "cumulative": "Acumulado (tempo exato de intervalo)",
+      "full_hour": "Arredonda para a hora cheia"
+    },
+    "saveAction": "Salvar",
+    "saveSuccess": "Padrões das unidades atualizados.",
+    "invalidGpsTolerance": "Informe uma tolerância de GPS maior que zero.",
+    "invalidGraceTolerance": "A tolerância não pode ser negativa.",
+    "genericError": "Não foi possível atualizar os padrões das unidades."
+  },
+  "sitePolicy": {
+    "title": "Regras da unidade",
+    "hint": "A tolerância de GPS desta unidade, a tolerância de horário, os horários de turno, as horas extras e o desconto por atraso, o arredondamento do intervalo, o acompanhamento de presença, os isentos e os bloqueios de autoatendimento.",
+    "siteSelectLabel": "Unidade",
+    "siteSelectPlaceholder": "Selecione uma unidade…",
+    "noSites": "Ainda não há unidades: adicione uma em Unidades primeiro.",
+    "loadError": "Não foi possível carregar a política desta unidade.",
+    "noAssignmentsYet": "Ainda não há ninguém vinculado a esta unidade, então não há quem isentar.",
+    "saveAction": "Salvar",
+    "saveSuccess": "Política da unidade atualizada.",
+    "genericError": "Não foi possível atualizar a política desta unidade."
+  },
+  "integrations": {
+    "title": "Integrações",
+    "hint": "Uma chave somente leitura para que outro produto PROSM (como PROSM Projects ou PROSM Finance) obtenha o ponto real e verificado da sua equipe - e dados de folha também, se a chave tiver esse escopo - em vez de digitá-los. Esta chave nunca grava nada no PROSM Time.",
+    "nameLabel": "Nome da chave",
+    "namePlaceholder": "ex.: PROSM Projects ou PROSM Finance",
+    "createAction": "Criar chave",
+    "createError": "Não foi possível criar esta chave de API.",
+    "revokeAction": "Revogar",
+    "revokeError": "Não foi possível revogar esta chave de API.",
+    "empty": "Ainda não há chaves de integração.",
+    "lastUsed": "usada por último {{time}}",
+    "neverUsed": "nunca usada",
+    "newKeyTitle": "Sua nova chave de API",
+    "newKeyWarning": "Copie agora: ela não será exibida de novo. Depois, só o prefixo fica guardado.",
+    "scopeLabel": "Acesso",
+    "scope": {
+      "attendanceRead": "Ponto (somente leitura)",
+      "payrollRead": "Valores/hora (somente leitura)"
+    }
+  },
+  "payroll": {
+    "title": "Integração com a folha de pagamento",
+    "providerLabel": "Fornecedor",
+    "providers": {},
+    "notConfigured": "Esta integração ainda não está configurada: peça ao seu administrador para adicionar as credenciais de API."
+  },
+  "rejectMockLocation": {
+    "label": "Recusar ponto de uma localização falsa",
+    "hint": "O Android informa quando a localização vem de um aplicativo de localização simulada (GPS falso). Desligado: fica registrado e vai para análise dos gestores. Ligado: o registro de ponto é recusado.",
+    "genericError": "Não foi possível alterar esta configuração."
+  },
+  "sessionPolicy": {
+    "title": "Turnos deixados abertos",
+    "hint": "Nada fecha ao fim do turno. Depois da primeira quantidade de horas, o funcionário recebe “ainda trabalhando?” e os gestores são avisados uma vez; depois da segunda, o turno é fechado automaticamente e as horas aguardam a análise de um gestor.",
+    "alertHoursLabel": "Avisar depois de (horas)",
+    "maxHoursLabel": "Fechar automaticamente depois de (horas)",
+    "invalid": "O aviso deve vir antes do fechamento (de 1 a 72 horas).",
+    "genericError": "Não foi possível salvar.",
+    "saved": "Salvo.",
+    "save": "Salvar"
+  },
+  "overtimePolicy": {
+    "title": "Horas extras e descontos",
+    "hint": "Para toda a organização. Vazio = o padrão. Os multiplicadores valem sobre o valor da hora extra; 1 mantém os valores atuais.",
+    "approvalModeLabel": "As horas extras contam",
+    "mode": {
+      "default": "Padrão (após aprovação de um gestor)",
+      "approval": "Após aprovação de um gestor",
+      "automatic": "Automaticamente"
+    },
+    "field": {
+      "minOvertimeMinutes": "A hora extra conta a partir de (minutos)",
+      "minLateMinutes": "O atraso conta a partir de (minutos)",
+      "minEarlyLeaveMinutes": "A saída antecipada conta a partir de (minutos)",
+      "roundMinutes": "Arredondar o tempo trabalhado de cada dia para (minutos)",
+      "maxDailyOvertimeMinutes": "Máximo de horas extras por dia (minutos)",
+      "multiplierNormal": "Multiplicador - dia normal",
+      "multiplierNight": "Multiplicador - noite",
+      "multiplierWeeklyRest": "Multiplicador - folga semanal",
+      "multiplierPublicHoliday": "Multiplicador - feriado",
+      "nightStart": "A noite começa",
+      "nightEnd": "A noite termina"
+    },
+    "placeholder": {
+      "minOvertimeMinutes": "0",
+      "minLateMinutes": "0",
+      "minEarlyLeaveMinutes": "0",
+      "roundMinutes": "1",
+      "maxDailyOvertimeMinutes": "sem limite",
+      "multiplierNormal": "1",
+      "multiplierNight": "1",
+      "multiplierWeeklyRest": "1",
+      "multiplierPublicHoliday": "1"
+    },
+    "invalid": "Informe números de 0 ou mais.",
+    "genericError": "Não foi possível salvar.",
+    "saved": "Salvo.",
+    "save": "Salvar"
+  },
+  "leaveTypes": {
+    "title": "Tipos de ausência",
+    "hint": "As alterações valem para os próximos direitos; os saldos já definidos são mantidos.",
+    "add": "Adicionar um tipo de ausência",
+    "edit": "Editar",
+    "save": "Salvar",
+    "inactive": "fora de uso",
+    "paid": "remunerada",
+    "unpaid": "não remunerada",
+    "tiersSummary": "por tempo de serviço {{tiers}}",
+    "daysSummary": "{{days}} dias por ano",
+    "maxPerRequestSummary": "no máximo {{days}} por vez",
+    "documentSummary": "exige documento",
+    "key": "Código",
+    "keyHint": "Letras minúsculas e _, ex.: estudo",
+    "name": "Nome",
+    "paidLabel": "Remunerada",
+    "annualDays": "Dias por ano (fixo)",
+    "tiers": "Dias por tempo de serviço",
+    "tiersHint": "anos:dias, ex.: 0:15, 1:21, 10:30",
+    "specialNeedsDays": "Dias para necessidades especiais",
+    "enforceBalance": "Recusar pedido acima do saldo",
+    "maxDaysPerRequest": "Máximo de dias por vez",
+    "maxTimesInService": "Máximo de vezes em todo o serviço",
+    "minServiceYears": "Mínimo de anos de serviço",
+    "requiresDocument": "Exige um documento",
+    "active": "Em uso",
+    "invalidTiers": "Escreva as faixas como anos:dias separados por vírgulas.",
+    "genericError": "Não foi possível salvar."
+  },
+  "siteFocus": {
+    "backToSite": "← Voltar à unidade",
+    "allSettings": "Todas as configurações"
+  },
+  "plan": {
+    "title": "Plano",
+    "current": "Plano",
+    "trial": "Teste grátis",
+    "employees": "Funcionários",
+    "sites": "Unidades",
+    "ends": "Termina em",
+    "noEnd": "Sem data de término",
+    "usage": "{{used}} de {{max}}",
+    "codeLabel": "Código de ativação",
+    "redeem": "Ativar o código",
+    "redeemed": "O código foi ativado.",
+    "redeemFailed": "O código está errado ou já foi usado.",
+    "names": {
+      "legacy": "Tudo incluído (cliente de antes dos planos)",
+      "starter": "Starter",
+      "business": "Business",
+      "pro": "Pro"
+    },
+    "includes": "O que o seu plano inclui",
+    "always": "Em todos os planos: ponto na unidade, área de trabalho, foto, uso offline, mapa, relatórios básicos e 9 idiomas.",
+    "included": "incluído",
+    "notIncluded": "não incluído no seu plano",
+    "features": {
+      "on_behalf": "Ponto em nome de um funcionário",
+      "kiosk": "Quiosque e trabalhadores externos",
+      "leave": "Ausências",
+      "allowances": "Adicionais, planilhas e aprovações",
+      "export": "Exportação de relatórios (PDF)",
+      "payroll_export": "Exportação para a folha (Excel / CSV)",
+      "clock_rules": "Regras de ponto (tolerância de saída, arredondamento)",
+      "scheduling": "Escalas, turnos em aberto e trocas",
+      "roles_manager": "Funções de gestor e supervisor",
+      "audit": "Registro de auditoria completo",
+      "sos": "Emergência SOS",
+      "roles_all": "Função de leitor e permissões pessoais",
+      "clock_suggestion": "Pergunta de ponto ao chegar",
+      "labor_cost": "Custo de mão de obra e orçamentos de projeto",
+      "daily_summary": "Resumo diário",
+      "manager_alerts": "Alertas aos gestores (falta, hora extra, resumo da manhã)"
+    },
+    "managedByProsm": "Qualquer alteração ou renovação da sua licença é feita pela PROSM; você recebe uma notificação e um e-mail com a nova licença. Para alterar, escreva para sales@prosm.net.",
+    "historyAll": "Registros de ponto exibidos: todos. Pontos de localização e fotos são apagados automaticamente após o prazo em “Retenção de dados”.",
+    "history_one": "Registros de ponto exibidos e nos relatórios: o último ano. Os mais antigos ficam guardados e voltam com um plano superior. Pontos de localização e fotos são apagados automaticamente após o prazo em “Retenção de dados”.",
+    "history_other": "Registros de ponto exibidos e nos relatórios: os últimos {{count}} anos. Os mais antigos ficam guardados e voltam com um plano superior. Pontos de localização e fotos são apagados automaticamente após o prazo em “Retenção de dados”.",
+    "history_many": "Registros de ponto exibidos e nos relatórios: os últimos {{count}} anos. Os mais antigos ficam guardados e voltam com um plano superior. Pontos de localização e fotos são apagados automaticamente após o prazo em “Retenção de dados”."
+  },
+  "retention": {
+    "title": "Retenção de dados",
+    "subtitle": "Você só pode encurtar estes prazos. Um prazo menor também vale para os dados guardados, e o que for mais antigo é apagado automaticamente.",
+    "location": "Pontos de localização: dias (até {{max}})",
+    "photo": "Fotos do ponto: dias (até {{max}})",
+    "save": "Salvar",
+    "saved": "Salvo.",
+    "saveFailed": "Não foi possível salvar."
+  },
+  "clockSuggestion": {
+    "title": "Perguntar ao abrir o aplicativo dentro de uma unidade",
+    "subtitle": "Quando alguém abre o aplicativo dentro de uma unidade, o aplicativo pergunta se quer registrar a entrada. Nada é registrado sem resposta, segue o registro normal e não se usa localização em segundo plano.",
+    "label": "Perguntar se a pessoa quer registrar a entrada",
+    "failed": "Não foi possível salvar esta configuração."
+  },
+  "sections": {
+    "subscription": "Assinatura",
+    "sites": "Unidades e ponto",
+    "time": "Jornada e horas extras",
+    "leave": "Ausências",
+    "privacy": "Dados e privacidade"
+  }
+}

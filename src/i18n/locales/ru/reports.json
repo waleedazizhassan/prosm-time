@@ -1,0 +1,276 @@
+{
+  "title": "Отчёты",
+  "subtitle": "Получите любой нужный отчёт за любой период.",
+  "loadError": "Не удалось загрузить данные отчёта.",
+  "types": {
+    "attendance": "Журнал посещаемости",
+    "allowances": "Сводная ведомость надбавок",
+    "timesheets": "Табели",
+    "timesheet": "Табель",
+    "workforce": "Сотрудники компании",
+    "contractor": "Временный персонал",
+    "site": "Сводка по объектам",
+    "late": "Опоздания",
+    "missingCheckouts": "Неотмеченные уходы",
+    "leaveConflicts": "Конфликты с отпусками",
+    "absences": "Прогулы",
+    "managerOverrides": "Действия руководителей",
+    "locationViolations": "Нарушения по местоположению",
+    "sos": "Экстренные сигналы (SOS)",
+    "dashboard": "Главная",
+    "auditLog": "Журнал действий",
+    "laborCost": "Стоимость труда"
+  },
+  "timesheetsHint": "Табели формируются и утверждаются по сотруднику и периоду, а не по диапазону дат.",
+  "timesheetsLink": "Перейти к табелям",
+  "filters": {
+    "fromLabel": "С",
+    "toLabel": "По",
+    "employeeLabel": "Сотрудник",
+    "allEmployees": "Все сотрудники",
+    "siteLabel": "Объект",
+    "allSites": "Все объекты"
+  },
+  "loadingRows": "Загрузка…",
+  "rowCount_one": "{{count}} строка готова к экспорту.",
+  "rowCount_few": "{{count}} строки готовы к экспорту.",
+  "rowCount_many": "{{count}} строк готово к экспорту.",
+  "rowCount_other": "{{count}} строки готовы к экспорту.",
+  "exportAction": "Экспорт PDF",
+  "empty": "За этот период строк нет.",
+  "columns": {
+    "workforce": {
+      "name": "Имя",
+      "email": "E-mail",
+      "role": "Роль",
+      "owner": "Владелец",
+      "sites": "Объекты",
+      "status": "Статус"
+    },
+    "contractor": {
+      "name": "Работник",
+      "number": "Номер",
+      "site": "Объект",
+      "clockIn": "Приход",
+      "clockOut": "Уход"
+    },
+    "site": {
+      "name": "Объект",
+      "employees": "Сотрудники",
+      "hours": "Всего часов",
+      "exceptions": "Исключения"
+    },
+    "late": {
+      "name": "Сотрудник",
+      "site": "Объект",
+      "shiftStart": "Начало смены",
+      "clockIn": "Приход",
+      "minutesLate": "Минуты опоздания",
+      "date": "Дата",
+      "employeeTotal": "Итого по сотруднику (мин)"
+    },
+    "missingCheckouts": {
+      "name": "Сотрудник",
+      "site": "Объект",
+      "clockIn": "Приход",
+      "hoursOpen": "Часов открыта",
+      "status": "Статус",
+      "stillOpen": "Ещё открыта",
+      "eventuallyClosed": "Закрыта позже",
+      "states": {
+        "open": "Ещё открыта",
+        "pending_review": "Закрыта автоматически, ждёт проверки (не учитывается)",
+        "reviewed": "Проверена руководителем",
+        "auto_closed": "Закрыта автоматически",
+        "closed": "Закрыта позже"
+      }
+    },
+    "leaveConflicts": {
+      "name": "Сотрудник",
+      "site": "Объект",
+      "clockIn": "Приход",
+      "leaveType": "Тип отпуска",
+      "leaveRange": "Даты отпуска"
+    },
+    "absences": {
+      "name": "Сотрудник",
+      "site": "Объект",
+      "date": "Дата",
+      "shift": "Запланированная смена"
+    },
+    "managerOverrides": {
+      "actor": "Кто выполнил",
+      "subject": "За кого",
+      "action": "Действие",
+      "reason": "Причина",
+      "when": "Когда"
+    },
+    "locationViolations": {
+      "name": "Сотрудник",
+      "site": "Объект",
+      "speed": "Расчётная скорость",
+      "distance": "Расстояние",
+      "when": "Когда",
+      "type": "Тип",
+      "reason": "Причина сотрудника",
+      "status": "Проверка",
+      "types": {
+        "outside_work_area": "Вне рабочей зоны",
+        "implausible_location": "Невозможное местоположение",
+        "mock_location": "Поддельное местоположение (GPS-приложение)"
+      },
+      "statuses": {
+        "pending_reason": "Ждёт причину",
+        "pending_review": "Ждёт проверки",
+        "resolved": "Проверено",
+        "approved": "Одобрено",
+        "rejected": "Отклонено",
+        "acknowledged": "Принято к сведению"
+      }
+    },
+    "sos": {
+      "name": "Сотрудник",
+      "site": "Объект",
+      "triggeredAt": "Время сигнала",
+      "status": "Статус",
+      "active": "Активен",
+      "resolved": "Решён"
+    },
+    "laborCost": {
+      "project": "Проект",
+      "site": "Объект",
+      "name": "Сотрудник",
+      "hours": "Часы",
+      "cost": "Стоимость",
+      "noRate": "Нет ставки"
+    }
+  },
+  "values": {
+    "memberStatus": {
+      "active": "Активен",
+      "invited": "Приглашён",
+      "suspended": "Приостановлен"
+    },
+    "leaveType": {
+      "annual": "Ежегодный",
+      "sick": "Больничный",
+      "unpaid": "Без оплаты",
+      "emergency": "Экстренный",
+      "other": "Другой"
+    },
+    "overrideAction": {
+      "ADMIN_CLOCK_IN_ON_BEHALF": "Приход отмечен за сотрудника",
+      "ADMIN_CLOCK_OUT_ON_BEHALF": "Уход отмечен за сотрудника",
+      "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "Уход подрядчика отмечен за него",
+      "attendance": {
+        "override_block": "Запрет на приход снят",
+        "review_pending_hours": "Часы на рассмотрении проверены",
+        "extend_session": "Смена продлена",
+        "overtime_approved": "Сверхурочные одобрены",
+        "day_adjusted": "День скорректирован",
+        "permission_granted": "Разрешение добавлено руководителем"
+      },
+      "allowances": {
+        "edit_during_review": "Надбавка изменена при проверке",
+        "reopen_approved": "Утверждённая ведомость надбавок открыта снова"
+      },
+      "leave": {
+        "approved_cancelled": "Одобренный отпуск отменён",
+        "deduction_set": "Задано удержание за отпуск",
+        "deduction_changed": "Изменено удержание за отпуск"
+      }
+    }
+  },
+  "recentExports": {
+    "title": "Недавние экспорты",
+    "empty": "Экспортов пока нет - каждый экспортированный PDF автоматически сохраняется здесь.",
+    "typeColumn": "Тип",
+    "fileColumn": "Файл",
+    "periodColumn": "Период",
+    "exportedByColumn": "Кто экспортировал",
+    "createdAtColumn": "Экспортировано",
+    "downloadAction": "Скачать"
+  },
+  "ownExportsHint": "Журнал посещаемости, надбавки и табели скачиваются и печатаются на своих страницах. Каждый экспортированный PDF хранится здесь, чтобы его можно было скачать снова.",
+  "payroll": {
+    "title": "Экспорт для расчёта зарплаты",
+    "subtitle": "Одна строка на человека за период - для вашего бухгалтера. Суммирует данные приложения и не рассчитывает зарплату.",
+    "allColumns": "Все столбцы",
+    "template": "Шаблон",
+    "templateName": "Название нового шаблона",
+    "saveTemplate": "Сохранить шаблон",
+    "deleteTemplate": "Удалить шаблон",
+    "templateFailed": "Не удалось сохранить шаблон.",
+    "excel": "Скачать Excel",
+    "csv": "Скачать CSV",
+    "periodTooLong": "Выберите период не больше 3 месяцев.",
+    "columns": {
+      "name": "Имя",
+      "email": "E-mail",
+      "daysWorked": "Отработано дней",
+      "workedHours": "Отработано часов",
+      "overtimeHours": "Сверхурочные часы",
+      "weightedOvertimeHours": "Сверхурочные часы с коэффициентами",
+      "lateMinutes": "Минуты опоздания",
+      "earlyLeaveMinutes": "Минуты раннего ухода",
+      "deductionMinutes": "Минуты удержания",
+      "absenceDays": "Дни прогулов",
+      "paidLeaveDays": "Дни оплачиваемого отпуска",
+      "unpaidLeaveDays": "Дни отпуска без оплаты",
+      "leaveDeduction": "Удержание за отпуск без оплаты",
+      "allowances": "Надбавки",
+      "overtimeAmount": "Сумма сверхурочных и доп. дней",
+      "currency": "Валюта"
+    }
+  },
+  "budgets": {
+    "title": "Бюджеты проектов",
+    "subtitle": "Сколько пока стоил труд по каждому проекту в сравнении с бюджетом.",
+    "project": "Проект",
+    "spent": "Затраты на труд",
+    "budget": "Бюджет",
+    "used": "Использовано",
+    "save": "Сохранить",
+    "placeholder": "Задать",
+    "invalid": "Введите число или оставьте поле пустым.",
+    "failed": "Не удалось сохранить бюджет.",
+    "unpriced": "Часы людей без ставки в стоимость не входят."
+  },
+  "dailySummary": {
+    "loadError": "Не удалось загрузить сводку.",
+    "ownerOnly": "Ежедневная сводка доступна владельцу организации.",
+    "day": "Показанный день",
+    "previousDay": "Предыдущий день",
+    "nextDay": "Следующий день",
+    "yesterday": "Вчера",
+    "today": "Сегодня",
+    "worked": "Работали",
+    "totalHours": "Всего часов",
+    "late": "Опоздали",
+    "noShows": "Не вышли на смену",
+    "onLeave": "В отпуске",
+    "peopleTitle": "Кто работал",
+    "nobodyWorked": "В этот день никто не отметил приход.",
+    "noShowsTitle": "Не вышли на запланированную смену",
+    "noNoShows": "Все вышли на свои смены.",
+    "leaveTitle": "В отпуске",
+    "noLeave": "Никто не был в отпуске.",
+    "waitingTitle": "Ждёт вас сейчас",
+    "waitingHint": "Это цифры на сейчас, а не за показанный день.",
+    "waitingLeave": "Заявки на отпуск: {{count}}",
+    "waitingExceptions": "Исключения: {{count}}",
+    "clockedInNow": "Сейчас на работе: {{count}}",
+    "noSite": "Без объекта",
+    "stillIn": "Ещё на работе",
+    "autoClosed": "закрыта автоматически",
+    "lateBy": "опоздание {{time}}",
+    "columns": {
+      "name": "Имя",
+      "site": "Объект",
+      "in": "Приход",
+      "out": "Уход",
+      "hours": "Часы",
+      "late": "Опоздание"
+    }
+  }
+}

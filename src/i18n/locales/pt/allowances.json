@@ -1,0 +1,229 @@
+{
+  "title": "Adicionais",
+  "subtitle": "Adicionais de refeição, transporte, moradia e outros junto ao seu ponto, limitados ao que você pode ver.",
+  "loadError": "Não foi possível carregar os adicionais.",
+  "exportPdfAction": "Exportar PDF",
+  "empty": "Nenhum adicional neste período.",
+  "addError": "Não foi possível adicionar este lançamento.",
+  "saveError": "Não foi possível salvar este lançamento.",
+  "submitError": "Não foi possível enviar este lançamento.",
+  "reviewError": "Não foi possível analisar este lançamento.",
+  "filters": {
+    "title": "Período",
+    "fromLabel": "De",
+    "toLabel": "Até",
+    "employeeLabel": "Funcionário",
+    "allEmployees": "Todos os funcionários"
+  },
+  "addEntry": {
+    "title": "Adicionar um lançamento",
+    "hint": "A data, a unidade e a entrada/saída são importadas automaticamente; preencha os valores dos adicionais depois de adicionar.",
+    "dateLabel": "Data",
+    "action": "Adicionar"
+  },
+  "columns": {
+    "employee": "Funcionário",
+    "date": "Data",
+    "day": "Dia",
+    "site": "Unidade",
+    "clockIn": "Entrada",
+    "clockOut": "Saída",
+    "meal": "Refeição",
+    "expatriation": "Deslocamento",
+    "transportation": "Transporte",
+    "overtimeHours": "Horas extras (h:mm)",
+    "overtimeDays": "Dias extras",
+    "housing": "Moradia",
+    "travel": "Viagem",
+    "other": "Outro",
+    "status": "Situação",
+    "overtimeAmount": "Valor das horas extras",
+    "total": "Total"
+  },
+  "status": {
+    "draft": "Rascunho",
+    "submitted": "Enviado",
+    "approved": "Aprovado",
+    "rejected": "Recusado"
+  },
+  "detail": {
+    "saveAction": "Salvar",
+    "submitAction": "Enviar",
+    "approveAction": "Aprovar",
+    "rejectAction": "Recusar",
+    "siteLine": "Unidade: {{site}}",
+    "clockInLine": "Entrada {{time}}",
+    "clockOutLine": "Saída {{time}}",
+    "overtimeLine": "Horas extras: {{hours}} (h:mm) · dias extras: {{days}}",
+    "otherNoteLabel": "Observação (para “Outro”)",
+    "totalsLabel": "Totais",
+    "reviewNotesLabel": "Observações da análise (opcional)",
+    "daySessionsLine": "{{count}} jornadas neste dia · {{hours}} h {{minutes}} min trabalhados",
+    "reviewNotesLine": "Observação do analista: {{notes}}",
+    "overtimeValueLine": "valendo {{amount}}"
+  },
+  "totals": {
+    "title": "Totais do período"
+  },
+  "fill": {
+    "hint": "Um toque preenche todos os dias trabalhados no período com os seus valores de adicionais; adicione só o que não tem valor (viagem, por exemplo) e envie.",
+    "action": "Preencher pelo meu ponto",
+    "done": "{{count}} dias preenchidos."
+  },
+  "myPrices": {
+    "title": "Meus valores de adicionais",
+    "hint": "Com o que cada dia trabalhado é preenchido, por unidade. Um traço significa que você digita."
+  },
+  "prices": {
+    "openAction": "Valores",
+    "title": "Valores dos adicionais",
+    "howItWorks": "Cada dia trabalhado é preenchido com estes valores. Primeiro o valor da unidade, depois o da categoria e depois o da pessoa: vale o último. Deixe um valor vazio para herdar; um adicional sem valor é digitado pelo funcionário.",
+    "backToAllowances": "Voltar aos adicionais",
+    "sitesTitle": "Valores por unidade",
+    "sitesHint": "O valor diário de cada adicional em cada unidade, e o valor da hora extra e do dia extra.",
+    "noSites": "Ainda não há unidades.",
+    "categoriesTitle": "Categorias",
+    "categoriesHint": "Grupos de pessoal com valores próprios (engenheiros, técnicos, operários…) para todas as unidades ou para uma.",
+    "addCategory": "Adicionar categoria",
+    "noCategories": "Ainda não há categorias. Exemplo: “Técnicos” recebem 200 de deslocamento na Capital e 150 na Fábrica.",
+    "editAction": "Valores",
+    "renameAction": "Renomear",
+    "deleteAction": "Excluir",
+    "deleteCategoryConfirm": "Excluir a categoria “{{name}}” e seus valores? As pessoas voltam aos valores da unidade.",
+    "peopleTitle": "Pessoas",
+    "peopleHint": "Coloque cada pessoa em uma categoria ou dê a alguém valores próprios.",
+    "noPeople": "Ainda não há pessoas.",
+    "categoryColumn": "Categoria",
+    "noCategory": "Sem categoria",
+    "personalAction": "Valores próprios",
+    "editTitle": "Valores - {{name}}",
+    "saveAction": "Salvar",
+    "blankInherits": "Um valor vazio vem do nível anterior (unidade e depois categoria).",
+    "categoryName": "Nome da categoria",
+    "categoryExample": "Engenheiros",
+    "everySite": "Todas as unidades",
+    "forColumn": "Para",
+    "invalidPrice": "O valor deve ser um número igual ou maior que zero.",
+    "saveError": "Não foi possível salvar os valores.",
+    "loadError": "Não foi possível carregar os valores.",
+    "notAllowed": "Somente o proprietário e quem aprova adicionais definem valores.",
+    "field": {
+      "meal": "Refeição",
+      "expatriation": "Deslocamento",
+      "transportation": "Transporte",
+      "housing": "Moradia",
+      "travel": "Viagem",
+      "other": "Outro",
+      "overtimeHour": "Hora extra",
+      "extraDay": "Dia extra"
+    }
+  },
+  "pdf": {
+    "employeeSignature": "Assinatura do funcionário",
+    "managerApproval": "Aprovação do gerente do projeto"
+  },
+  "autoFill": {
+    "label": "Preencher automaticamente após cada turno",
+    "hint": "Ao registrar a saída, os adicionais do dia são lançados com os seus valores. Você ainda revisa e envia."
+  },
+  "sendAll": {
+    "action": "Enviar ao gestor",
+    "done": "{{count}} dias enviados ao seu gestor."
+  },
+  "sheet": {
+    "title": "Planilha de ponto e adicionais",
+    "subtitle": "Planilha de adicionais",
+    "combinedSubtitle": "Planilha combinada de adicionais",
+    "combinedTitle": "Planilha combinada",
+    "combinedHint": "Escolha quem aparece: uma linha de totais por pessoa.",
+    "selectAll": "Todos",
+    "selectNone": "Ninguém",
+    "employeeName": "Funcionário",
+    "employee": "Funcionário",
+    "employeesCount": "{{count}} funcionários",
+    "periodFrom": "Período de",
+    "periodTo": "a",
+    "day": "Dia",
+    "date": "Data",
+    "in": "Entrada",
+    "out": "Saída",
+    "site": "Unidade",
+    "extraDays": "Dias extras",
+    "overtimeHours": "Horas extras",
+    "managerApproval": "Aprovação do gerente do projeto",
+    "total": "Total",
+    "grandTotal": "Total a pagar",
+    "extraDaysValue": "Dias extras",
+    "overtimeValue": "Horas extras",
+    "days": "Dias",
+    "allowances": "Adicionais",
+    "extra": "Horas extras",
+    "noSite": "Sem unidade",
+    "employeeSignature": "Assinatura do funcionário",
+    "projectManager": "Gerente do projeto",
+    "accounts": "Contabilidade",
+    "editsTitle": "Alterado pelo gestor durante a análise",
+    "line": "Item",
+    "before": "Antes",
+    "after": "Depois",
+    "reason": "Motivo",
+    "deductionsTitle": "Descontos de ausência não remunerada",
+    "deductionsNote": "Descontados do salário, não dos adicionais acima.",
+    "amount": "Valor",
+    "combinedEditsNote": "Algumas linhas desta pessoa foram alteradas na análise: os detalhes estão na planilha dela."
+  },
+  "sheets": {
+    "title": "Planilhas de adicionais aguardando você",
+    "hint": "Cada planilha reúne todos os dias que um funcionário enviou: aprove ou recuse de uma vez. Abra para ver os dias.",
+    "line": "{{from}} - {{to}} · {{days}} dias · total {{total}}",
+    "openAction": "Abrir",
+    "resubmitted": "Reenviada após recusa · total anterior {{total}}"
+  },
+  "basis": {
+    "title": "Como cada adicional é calculado",
+    "hint": "Por dia: o valor uma vez por dia trabalhado. Por hora: o valor por hora realmente trabalhada no dia, por minuto (um quarto de hora = um quarto do valor). Por dia extra: o valor por dia trabalhado em folga ou feriado. Horas extras são sempre pagas por minuto.",
+    "genericError": "Não foi possível salvar.",
+    "option": {
+      "fixed_per_day": "Por dia trabalhado",
+      "per_hour": "Por hora trabalhada (por minuto)",
+      "per_extra_day": "Por dia extra (folga / feriado)"
+    }
+  },
+  "sheetEdit": {
+    "action": "Editar adicionais",
+    "title": "Editar os adicionais de {{name}}",
+    "hint": "Altere qualquer linha antes de aprovar. O motivo é obrigatório e cada alteração fica registrada (quem, antes, depois, por quê).",
+    "line": {
+      "meal": "Refeição",
+      "expatriation": "Deslocamento",
+      "transportation": "Transporte",
+      "housing": "Moradia",
+      "travel": "Viagem",
+      "other": "Outro",
+      "overtime": "Horas extras",
+      "extraDays": "Dias extras"
+    },
+    "changed": "alterado",
+    "computed": "calculado: {{value}}",
+    "total": "Total da planilha: {{total}}",
+    "reasonLabel": "Motivo (obrigatório)",
+    "reasonRequired": "Escreva o motivo.",
+    "invalidValue": "Os valores devem ser números de 0 ou mais.",
+    "save_one": "Salvar 1 alteração",
+    "save_other": "Salvar {{count}} alterações",
+    "approvedTitle": "Planilhas aprovadas recentemente",
+    "approvedHint": "Uma planilha aprovada não é editada; para corrigir, reabra para análise (registrado com o motivo).",
+    "reopenAction": "Reabrir",
+    "reopenTitle": "Reabrir uma planilha aprovada",
+    "reopenHint": "A planilha volta para análise para ser corrigida e aprovada de novo. O funcionário é avisado.",
+    "save_many": "Salvar {{count}} alterações"
+  },
+  "deductions": {
+    "title": "Descontos neste período",
+    "hint": "Ausências não remuneradas aprovadas nestes dias, descontadas do salário.",
+    "line": "desconto de ausência não remunerada"
+  },
+  "grid": {
+    "label": "Planilha de adicionais"
+  }
+}

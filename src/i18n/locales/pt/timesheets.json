@@ -1,0 +1,130 @@
+{
+  "title": "Folhas de ponto",
+  "subtitle": "Revise, envie, aprove e corrija os períodos mensais de ponto.",
+  "loadError": "Não foi possível carregar as folhas de ponto.",
+  "generateError": "Não foi possível gerar esta folha de ponto.",
+  "viewPhoto": "Ver foto",
+  "photoLoadError": "Não foi possível carregar esta foto.",
+  "submitError": "Não foi possível enviar esta folha de ponto.",
+  "approveError": "Não foi possível analisar esta folha de ponto.",
+  "correctionRequestError": "Não foi possível pedir esta correção.",
+  "correctionReviewError": "Não foi possível analisar esta correção.",
+  "columns": {
+    "employee": "Funcionário",
+    "period": "Período",
+    "date": "Data",
+    "site": "Unidade",
+    "status": "Situação",
+    "worked": "Trabalhado",
+    "overtime": "Horas extras",
+    "leave": "Ausências",
+    "leaveDays": "{{count}} dia(s)",
+    "clockIn": "Entrada",
+    "clockOut": "Saída"
+  },
+  "status": {
+    "draft": "Rascunho",
+    "submitted": "Enviada",
+    "approved": "Aprovada e fechada",
+    "rejected": "Recusada"
+  },
+  "generate": {
+    "title": "Gerar folha de ponto",
+    "employeeLabel": "Funcionário",
+    "periodStartLabel": "Início do período",
+    "periodEndLabel": "Fim do período",
+    "action": "Gerar"
+  },
+  "pendingApprovals": {
+    "title": "Aprovações pendentes",
+    "empty": "Nenhuma folha de ponto aguardando aprovação."
+  },
+  "pendingCorrections": {
+    "title": "Correções pendentes",
+    "empty": "Nenhuma correção aguardando análise.",
+    "reviewAction": "Analisar",
+    "reviewTitle": "Pedido de correção"
+  },
+  "myTimesheets": {
+    "title": "Minhas folhas de ponto",
+    "empty": "Ainda não foi gerada nenhuma folha de ponto para você. Um administrador gera uma para cada período de pagamento quando ele termina."
+  },
+  "detail": {
+    "status": "Situação",
+    "worked": "Trabalhado",
+    "breaks": "Intervalos",
+    "overtime": "Horas extras",
+    "leave": "Ausências",
+    "exceptions": "Exceções",
+    "corrections": "Correções",
+    "noEntries": "Nenhum registro de ponto neste período.",
+    "stillOpen": "ainda aberto",
+    "notesLabel": "Observações (opcional)",
+    "correctionReasonLabel": "Motivo da correção",
+    "submitAction": "Enviar para aprovação",
+    "approveAction": "Aprovar",
+    "rejectAction": "Recusar",
+    "requestCorrectionAction": "Pedir correção",
+    "submitCorrectionAction": "Enviar pedido de correção",
+    "viewReportAction": "Ver relatório"
+  },
+  "report": {
+    "title": "Relatório da folha de ponto",
+    "loadError": "Não foi possível carregar este relatório.",
+    "backLink": "Voltar às folhas de ponto",
+    "exportCsvAction": "Exportar CSV",
+    "exportPdfAction": "Exportar PDF",
+    "printAction": "Imprimir / Salvar como PDF",
+    "summaryTitle": "Resumo",
+    "organization": "Organização",
+    "employee": "Funcionário",
+    "status": "Situação",
+    "worked": "Trabalhado",
+    "breaks": "Intervalos",
+    "overtime": "Horas extras",
+    "approver": "Aprovador",
+    "approvedAt": "Aprovada em",
+    "lockStatus": "Fechamento",
+    "locked": "Fechada",
+    "unlocked": "Não fechada",
+    "entriesTitle": "Registros de ponto",
+    "leaveTitle": "Ausências",
+    "noLeave": "Nenhuma ausência aprovada neste período.",
+    "leaveDaysLabel": "Dias de ausência",
+    "leaveDays": "{{count}} dia(s)",
+    "exceptionsTitle": "Exceções de cerca virtual (resumo da validação GPS)",
+    "noExceptions": "Nenhuma exceção de cerca virtual neste período.",
+    "correctionsTitle": "Correções",
+    "noCorrections": "Nenhuma correção neste período.",
+    "timesheetLevelCorrection": "Correção da folha de ponto",
+    "evidenceTitle": "Fotos de comprovação",
+    "noEvidence": "Nenhuma foto de comprovação neste período.",
+    "viewEvidence": "Ver",
+    "approvalTrailTitle": "Histórico de aprovação",
+    "noApprovalTrail": "Ainda não há atividade de aprovação.",
+    "columns": {
+      "clockIn": "Entrada",
+      "clockOut": "Saída",
+      "site": "Unidade",
+      "project": "Projeto",
+      "when": "Quando",
+      "distance": "Distância",
+      "category": "Categoria",
+      "reason": "Motivo",
+      "kind": "Tipo",
+      "action": "Ação",
+      "notes": "Observações"
+    },
+    "meters": "{{value}} m",
+    "photo": "Foto"
+  },
+  "values": {
+    "leaveType": {
+      "annual": "Férias",
+      "sick": "Médica",
+      "unpaid": "Não remunerada",
+      "emergency": "Emergência",
+      "other": "Outra"
+    }
+  }
+}

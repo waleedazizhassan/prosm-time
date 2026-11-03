@@ -1,0 +1,60 @@
+{
+  "loadError": "Não foi possível carregar o calendário.",
+  "genericError": "Não foi possível salvar.",
+  "save": "Salvar",
+  "edit": "Editar",
+  "delete": "Excluir",
+  "from": "De",
+  "to": "Até",
+  "weekdays": {
+    "0": "Domingo",
+    "1": "Segunda-feira",
+    "2": "Terça-feira",
+    "3": "Quarta-feira",
+    "4": "Quinta-feira",
+    "5": "Sexta-feira",
+    "6": "Sábado"
+  },
+  "scope": {
+    "label": "Vale para",
+    "organisation": "Toda a organização",
+    "site": "Uma unidade",
+    "person": "Uma pessoa"
+  },
+  "restDays": {
+    "title": "Folgas semanais",
+    "hint": "Toque em um dia para torná-lo folga ou dia útil. Trabalhar em dia de folga conta como hora extra. Uma unidade sem dias próprios segue os da organização (esmaecidos).",
+    "inherit": "como a organização",
+    "none": "sem folga",
+    "useOrganisation": "Usar os dias da organização",
+    "current": "Organização: {{days}}"
+  },
+  "holidays": {
+    "title": "Feriados",
+    "hint": "Trabalhar em um feriado conta como hora extra; o dia não conta como falta nem como ausência.",
+    "add": "Adicionar um feriado",
+    "editTitle": "Editar o feriado",
+    "empty": "Ainda não há feriados no próximo ano.",
+    "name": "Nome",
+    "paid": "remunerado",
+    "unpaid": "não remunerado",
+    "paidLabel": "Feriado remunerado",
+    "required": "Informe o nome e a data."
+  },
+  "exceptions": {
+    "title": "Dias excepcionais",
+    "hint": "Um dia com outro horário (por exemplo, todos saem às 16h na quinta) ou um dia de folga, para a organização, uma unidade ou uma pessoa. Com “sem desconto”, nada é descontado por atraso ou saída antecipada nesse dia.",
+    "add": "Adicionar um dia excepcional",
+    "empty": "Nenhum dia excepcional.",
+    "dayOff": "folga",
+    "from": "a partir das {{time}}",
+    "to": "até as {{time}}",
+    "noDeduction": "sem desconto",
+    "dayOffLabel": "Dia de folga",
+    "startTime": "Horário de início (opcional)",
+    "endTime": "Horário de término (opcional)",
+    "noDeductionLabel": "Sem desconto neste dia",
+    "reason": "Motivo (obrigatório)",
+    "required": "Informe a data e o motivo."
+  }
+}

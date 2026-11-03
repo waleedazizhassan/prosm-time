@@ -1,0 +1,36 @@
+{
+  "title": "Журнал экстренных сигналов",
+  "subtitle": "Каждый сигнал SOS: точное местоположение GPS, время, сотрудник и объект.",
+  "loadError": "Не удалось загрузить журнал экстренных сигналов.",
+  "filters": {
+    "title": "Период",
+    "fromLabel": "С",
+    "toLabel": "По",
+    "employeeLabel": "Сотрудник",
+    "allEmployees": "Все сотрудники"
+  },
+  "columns": {
+    "employee": "Сотрудник",
+    "site": "Объект",
+    "triggeredAt": "Время сигнала",
+    "location": "Местоположение",
+    "status": "Статус"
+  },
+  "status": {
+    "active": "Активен",
+    "resolved": "Решён"
+  },
+  "empty": "За этот период экстренных сигналов нет.",
+  "detail": {
+    "title": "Экстренный сигнал",
+    "employeeLabel": "Сотрудник",
+    "siteLabel": "Рабочий объект",
+    "triggeredAtLabel": "Время сигнала",
+    "locationLabel": "Точное местоположение GPS",
+    "accuracyLabel": "Точность GPS: ±{{meters}} м",
+    "resolvedAtLabel": "Решён",
+    "resolutionNotesLabel": "Комментарий к решению",
+    "resolveAction": "Отметить как решённый",
+    "resolveError": "Не удалось закрыть этот сигнал."
+  }
+}

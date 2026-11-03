@@ -1,0 +1,70 @@
+{
+  "title": "Журнал посещаемости",
+  "subtitle": "История приходов и уходов - только по людям и объектам, которые вам доступны.",
+  "loadError": "Не удалось загрузить записи посещаемости.",
+  "exportPdfAction": "Экспорт в PDF",
+  "filters": {
+    "title": "Период",
+    "fromLabel": "С",
+    "toLabel": "По",
+    "employeeLabel": "Сотрудник",
+    "allEmployees": "Все сотрудники"
+  },
+  "columns": {
+    "employee": "Сотрудник",
+    "site": "Объект",
+    "clockInLocation": "Фактическое место прихода",
+    "clockOutLocation": "Фактическое место ухода",
+    "clockInAt": "Приход",
+    "clockOutAt": "Уход",
+    "status": "Статус",
+    "workedHours": "Отработано часов",
+    "notes": "Примечания",
+    "date": "Дата"
+  },
+  "status": {
+    "clocked_in": "На работе",
+    "clocked_out": "Ушёл"
+  },
+  "empty": "За этот период записей посещаемости нет.",
+  "viewPhoto": "Посмотреть фото",
+  "viewOnMap": "Показать на карте",
+  "siteChangedTo": "→ {{site}} в {{time}}",
+  "recordedByOnBehalf": "Отмечено за сотрудника: {{name}}",
+  "noteLabel": "Примечание: {{note}}",
+  "activityLabel": "Работа: {{activity}}",
+  "locationMatch": "В пределах геозоны объекта",
+  "locationMismatch": "Вне геозоны объекта",
+  "photoModalTitle": "Фото отметки",
+  "photoLoading": "Загрузка фото…",
+  "photoAlt": "Фото-подтверждение отметки",
+  "photoLoadError": "Не удалось загрузить это фото.",
+  "deviceTimeBadge": "Время устройства (офлайн)",
+  "deviceTimeHint": "Записано без связи по времени устройства сотрудника; ожидает проверки руководителем.",
+  "notes": {
+    "clockIn": "Приход: {{note}}",
+    "clockOut": "Уход: {{note}}",
+    "earlyLeave": "Ранний уход: {{reason}}",
+    "mockClockIn": "Приход с поддельного (имитированного) местоположения",
+    "mockClockOut": "Уход с поддельного (имитированного) местоположения",
+    "siteChange": "Смена объекта: {{from}} → {{to}} ({{time}})"
+  },
+  "periods": {
+    "today": "Сегодня",
+    "week": "Эта неделя",
+    "month": "Этот месяц"
+  },
+  "totalHours": "Всего часов: {{hours}} · смен: {{count}}",
+  "noRegisteredSite": "Объект не зарегистрирован",
+  "noLocation": "Нет местоположения (старая запись или разрешение не дано)",
+  "view": {
+    "month": "По месяцам",
+    "list": "Списком"
+  },
+  "group": {
+    "label": "Группировать",
+    "none": "Без группировки",
+    "employee": "По сотруднику",
+    "day": "По дню"
+  }
+}

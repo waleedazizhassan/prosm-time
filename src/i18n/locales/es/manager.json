@@ -1,0 +1,192 @@
+{
+  "title": "Consola del responsable",
+  "subtitle": "La asistencia de hoy en tu organización y las excepciones y correcciones pendientes de revisión.",
+  "linkPeople": "Ir a Personas",
+  "linkSites": "Ir a Sedes",
+  "reviewError": "No se pudo revisar este elemento.",
+  "attendance": {
+    "title": "Asistencia de hoy",
+    "employee": "Empleado",
+    "site": "Sede",
+    "status": "Estado",
+    "workedHours": "Horas trabajadas",
+    "clockInAt": "Entrada",
+    "clockOutAt": "Salida",
+    "clocked_in": "Dentro",
+    "clocked_out": "Fuera",
+    "empty": "Hoy no hay actividad de asistencia.",
+    "viewPhoto": "Ver foto",
+    "photoModalTitle": "Foto de asistencia",
+    "photoLoading": "Cargando foto…",
+    "photoAlt": "Foto de prueba de asistencia",
+    "photoLoadError": "No se pudo cargar esta foto.",
+    "openToday": "Asistencia de hoy → Registro de asistencia"
+  },
+  "pending": {
+    "title": "Pendiente de revisión",
+    "empty": "No hay excepciones ni correcciones pendientes.",
+    "kind": {
+      "geofence_exception": "Excepción de geovalla",
+      "correction_request": "Solicitud de corrección",
+      "offline_time": "Hora sin conexión",
+      "mock_location": "Ubicación falsa"
+    },
+    "reviewAction": "Revisar",
+    "notesLabel": "Notas (opcional)",
+    "submittedAtLabel": "Enviada",
+    "action": {
+      "approved": "Aprobar",
+      "rejected": "Rechazar",
+      "acknowledged": "Dar por vista",
+      "clarification_requested": "Pedir aclaración"
+    },
+    "offlineTime": {
+      "summary": "{{action}} registrado sin conexión a la hora del dispositivo {{deviceTime}}; llegó al servidor a las {{receivedAt}}.",
+      "action": {
+        "clock_in": "Entrada",
+        "clock_out": "Salida",
+        "break_start": "Inicio de descanso",
+        "break_end": "Fin de descanso",
+        "site_change": "Cambio de sede"
+      }
+    },
+    "mockLocation": {
+      "summary": "{{action}} a las {{time}} desde una ubicación que el dispositivo informó como simulada (GPS falso)."
+    },
+    "effect": {
+      "geofence_exception": {
+        "approved": "se acepta el motivo: las horas del turno cuentan completas.",
+        "rejected": "las horas dejan de contar desde que salió de la zona de trabajo (la hoja de horas descuenta el resto de ese turno).",
+        "clarification_requested": "vuelve al empleado, con tu nota como pregunta, para que lo explique de nuevo; regresa aquí cuando responda."
+      },
+      "correction_request": {
+        "approved": "la hora de entrada o salida se cambia a la solicitada.",
+        "rejected": "la hora registrada se queda como está."
+      },
+      "offline_time": {
+        "approved": "se acepta la hora que el teléfono registró sin conexión.",
+        "rejected": "se marca como no aceptada; la hora no cambia: corrígela desde el Registro de asistencia si está mal."
+      },
+      "mock_location": {
+        "approved": "se trata como una ubicación real (p. ej., un error de GPS).",
+        "rejected": "se registra como ubicación falsa; nada más cambia automáticamente: háblalo con el empleado."
+      }
+    },
+    "geofence": {
+      "summary": "{{distance}} m fuera de la zona de trabajo · motivo: {{reason}}"
+    },
+    "correction": {
+      "summary": "{{action}} a las {{time}} · {{reason}}"
+    }
+  },
+  "leave": {
+    "title": "Solicitudes de ausencia pendientes",
+    "empty": "No hay solicitudes de ausencia pendientes.",
+    "daysSuffix": "día(s)",
+    "approveAction": "Aprobar",
+    "rejectAction": "Rechazar",
+    "reviewError": "No se pudo revisar esta solicitud.",
+    "types": {
+      "annual": "Vacaciones",
+      "sick": "Enfermedad",
+      "unpaid": "No retribuida",
+      "emergency": "Asuntos propios",
+      "other": "Otra",
+      "hajj": "Hajj o Umrah",
+      "bereavement": "Fallecimiento",
+      "paternity": "Paternidad"
+    },
+    "revokeTitle": "Anular una ausencia aprobada",
+    "revokeHint": "Ausencias ya aprobadas y próximas: úsalo si cambiaron los planes y hay que cancelarla después.",
+    "revokeEmpty": "No hay ausencias aprobadas próximas que anular.",
+    "revokeAction": "Anular",
+    "revokeReasonLabel": "Motivo (obligatorio)",
+    "startedCannotCancel": "Iniciada: no se puede cancelar",
+    "deductionLabel": "Descuento por día ({{currency}}), obligatorio",
+    "deductionTotal": "{{days}} días laborables descontados (sin días de descanso ni festivos): {{total}} {{currency}}",
+    "deductionHint": "No se descuentan los días de descanso semanal ni los festivos.",
+    "deductionRequired": "Escribe el descuento por día (0 o más)."
+  },
+  "pendingHours": {
+    "title_one": "Horas pendientes de revisión ({{count}})",
+    "title_other": "Horas pendientes de revisión ({{count}})",
+    "hint": "Estos turnos se cerraron automáticamente porque nadie fichó la salida. Sus horas no cuentan en ningún sitio (hoja de horas, totales, pluses, horas extra, coste) hasta que pongas la hora real de fin.",
+    "loadError": "No se pudieron cargar los turnos pendientes de revisión.",
+    "summary": "Entrada {{clockIn}} · cerrado automáticamente a las {{clockOut}}",
+    "reviewAction": "Poner la hora de fin",
+    "modalTitle": "Hora de fin del turno",
+    "modalBody": "Entrada {{clockIn}}. Última actividad vista: {{lastActivity}}.",
+    "clockOutLabel": "Hora real de salida",
+    "reasonLabel": "Motivo (obligatorio)",
+    "reasonRequired": "Escribe el motivo.",
+    "invalidTime": "Elige una hora válida.",
+    "genericError": "No se pudo guardar.",
+    "save": "Guardar y contar las horas",
+    "staleTitle": "Turnos antiguos todavía abiertos",
+    "staleHint": "Se abrieron antes de existir el cierre automático y no se cerraron solos. Ficha la salida del empleado en su nombre con la hora correcta.",
+    "staleSummary": "Abierto desde {{clockIn}} ({{hours}} h)",
+    "title_many": "Horas pendientes de revisión ({{count}})"
+  },
+  "permissions": {
+    "title_one": "Permisos y horas extra ({{count}})",
+    "title_other": "Permisos y horas extra ({{count}})",
+    "hint": "Solicitudes de permiso y días cuyas horas extra esperan tu aprobación. Las horas extra no cuentan en pluses ni en la hoja de horas hasta que se aprueban.",
+    "empty": "Nada pendiente.",
+    "loadError": "No se pudieron cargar los permisos.",
+    "genericError": "No se pudo guardar.",
+    "grantAction": "Añadir un permiso",
+    "adjustAction": "Ajustar",
+    "adjustTitle": "Ajustar el día",
+    "adjustHint": "Deja una casilla vacía para mantener el valor calculado. El motivo es obligatorio y el cambio queda registrado.",
+    "approveOvertime": "Aprobar las horas extra",
+    "approvedOvertimeReason": "Horas extra aprobadas por el responsable",
+    "overtimeWaiting": "horas extra {{time}} pendientes",
+    "kind": {
+      "late_arrival": "Llegada tarde",
+      "early_leave": "Salida anticipada",
+      "approved_overtime": "Horas extra aprobadas",
+      "no_overtime": "No cuenta como horas extra"
+    },
+    "dayType": {
+      "workday": "Día laborable",
+      "weekly_rest": "Descanso semanal",
+      "public_holiday": "Festivo"
+    },
+    "paidLabel": "Retribuido (sin descuento)",
+    "deductionPercentLabel": "Descontar este porcentaje de los minutos",
+    "deductionMinutesLabel": "Minutos de descuento",
+    "personLabel": "Persona",
+    "dateLabel": "Día",
+    "kindLabel": "Tipo",
+    "minutesLabel": "Minutos (opcional)",
+    "reasonLabel": "Motivo (obligatorio)",
+    "overtimeMinutesLabel": "Minutos de horas extra",
+    "lateMinutesLabel": "Minutos de retraso",
+    "save": "Guardar",
+    "title_many": "Permisos y horas extra ({{count}})"
+  },
+  "integrity": {
+    "title_one": "Fichajes sospechosos ({{count}})",
+    "title_other": "Fichajes sospechosos ({{count}})",
+    "hint": "No bloquearon el fichaje. Acéptalos, recházalos (con motivo) o pregunta al empleado.",
+    "loadError": "No se pudieron cargar los fichajes sospechosos.",
+    "genericError": "No se pudo guardar.",
+    "notesLabel": "Nota al empleado (obligatoria para rechazar o preguntar)",
+    "kind": {
+      "liveness_failed": "Falló la comprobación en vivo",
+      "liveness_unavailable": "Comprobación en vivo no posible en el teléfono",
+      "unverified_capture": "Foto elegida de un archivo",
+      "stale_capture": "Foto demasiado antigua",
+      "reused_token": "Foto reutilizada",
+      "missing_token": "Foto sin token del servidor",
+      "repeated_coordinates": "Exactamente la misma ubicación otra vez",
+      "suspicious_accuracy": "Precisión de ubicación demasiado perfecta"
+    },
+    "explain": {
+      "liveness_failed": "La persona no completó el movimiento pedido frente a la cámara.",
+      "unverified_capture": "La cámara no se pudo abrir, así que se eligió una imagen del teléfono.",
+      "repeated_coordinates": "El mismo punto casi sin error de GPS: una señal habitual de una aplicación de ubicación falsa."
+    },
+    "title_many": "Fichajes sospechosos ({{count}})"
+  }
+}

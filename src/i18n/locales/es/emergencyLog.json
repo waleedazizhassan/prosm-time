@@ -1,0 +1,36 @@
+{
+  "title": "Registro de emergencias",
+  "subtitle": "Cada alerta SOS/de emergencia: ubicación GPS exacta, hora, empleado y sede.",
+  "loadError": "No se pudo cargar el registro de emergencias.",
+  "filters": {
+    "title": "Período",
+    "fromLabel": "Desde",
+    "toLabel": "Hasta",
+    "employeeLabel": "Empleado",
+    "allEmployees": "Todos los empleados"
+  },
+  "columns": {
+    "employee": "Empleado",
+    "site": "Sede",
+    "triggeredAt": "Activada",
+    "location": "Ubicación",
+    "status": "Estado"
+  },
+  "status": {
+    "active": "Activa",
+    "resolved": "Resuelta"
+  },
+  "empty": "No hay alertas de emergencia en este período.",
+  "detail": {
+    "title": "Alerta de emergencia",
+    "employeeLabel": "Empleado",
+    "siteLabel": "Sede de trabajo",
+    "triggeredAtLabel": "Activada",
+    "locationLabel": "Ubicación GPS exacta",
+    "accuracyLabel": "Precisión GPS: ±{{meters}} m",
+    "resolvedAtLabel": "Resuelta",
+    "resolutionNotesLabel": "Notas de resolución",
+    "resolveAction": "Marcar como resuelta",
+    "resolveError": "No se pudo resolver esta alerta."
+  }
+}

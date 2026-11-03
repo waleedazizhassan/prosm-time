@@ -1,0 +1,36 @@
+{
+  "title": "紧急记录",
+  "subtitle": "每一条 SOS/紧急警报：精确 GPS 位置、时间、员工和工地。",
+  "loadError": "无法加载紧急记录。",
+  "filters": {
+    "title": "期间",
+    "fromLabel": "从",
+    "toLabel": "至",
+    "employeeLabel": "员工",
+    "allEmployees": "全部员工"
+  },
+  "columns": {
+    "employee": "员工",
+    "site": "工地",
+    "triggeredAt": "触发时间",
+    "location": "位置",
+    "status": "状态"
+  },
+  "status": {
+    "active": "进行中",
+    "resolved": "已处理"
+  },
+  "empty": "此期间没有紧急警报。",
+  "detail": {
+    "title": "紧急警报",
+    "employeeLabel": "员工",
+    "siteLabel": "工作地点",
+    "triggeredAtLabel": "触发时间",
+    "locationLabel": "精确 GPS 位置",
+    "accuracyLabel": "GPS 精度：±{{meters}} 米",
+    "resolvedAtLabel": "处理时间",
+    "resolutionNotesLabel": "处理说明",
+    "resolveAction": "标记为已处理",
+    "resolveError": "无法处理此警报。"
+  }
+}

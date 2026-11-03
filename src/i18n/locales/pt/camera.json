@@ -1,0 +1,28 @@
+{
+  "title": "Câmera",
+  "openCameraAction": "Abrir câmera",
+  "capture": "Capturar",
+  "switchCamera": "Trocar câmera",
+  "retake": "Tirar de novo",
+  "usePhoto": "Usar foto",
+  "cancel": "Cancelar",
+  "chooseFileAction": "Ou escolha um arquivo",
+  "permissionDenied": "O acesso à câmera foi negado ou não está disponível neste aparelho.",
+  "alternativeHint": "Você pode escolher um arquivo.",
+  "previewAlt": "Prévia da foto",
+  "verifyingLiveness": "Verificando que é você ao vivo: fique parado por um instante",
+  "challenge": {
+    "start": "Iniciar a verificação",
+    "retry": "Tentar de novo",
+    "instruction": {
+      "turn_left": "Verificação ao vivo: toque em Iniciar e vire a cabeça devagar para a esquerda.",
+      "turn_right": "Verificação ao vivo: toque em Iniciar e vire a cabeça devagar para a direita.",
+      "move_closer": "Verificação ao vivo: toque em Iniciar e aproxime o celular do rosto."
+    },
+    "passed": "Pronto: tire a foto.",
+    "unavailable": "Este celular não consegue fazer a verificação: tire a foto; seu gestor poderá revisá-la.",
+    "failed": "Não detectado. Mais luz ajuda. Tentativas restantes: {{left}}.",
+    "failedFinal": "Não detectado: tire a foto; seu gestor vai revisá-la.",
+    "privacy": "A verificação acontece só neste celular: nenhum vídeo é enviado e nenhum rosto é guardado. Ela apenas confirma que há uma pessoa real na frente da câmera."
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "title": "Hojas de horas",
+  "subtitle": "Revisa, envía, aprueba y corrige los periodos mensuales de asistencia.",
+  "loadError": "No se pudieron cargar las hojas de horas.",
+  "generateError": "No se pudo generar esta hoja de horas.",
+  "viewPhoto": "Ver foto",
+  "photoLoadError": "No se pudo cargar esta foto.",
+  "submitError": "No se pudo enviar esta hoja de horas.",
+  "approveError": "No se pudo revisar esta hoja de horas.",
+  "correctionRequestError": "No se pudo pedir esta corrección.",
+  "correctionReviewError": "No se pudo revisar esta corrección.",
+  "columns": {
+    "employee": "Empleado",
+    "period": "Período",
+    "date": "Fecha",
+    "site": "Sede",
+    "status": "Estado",
+    "worked": "Trabajado",
+    "overtime": "Horas extra",
+    "leave": "Ausencias",
+    "leaveDays": "{{count}} día(s)",
+    "clockIn": "Entrada",
+    "clockOut": "Salida"
+  },
+  "status": {
+    "draft": "Borrador",
+    "submitted": "Enviada",
+    "approved": "Aprobada y cerrada",
+    "rejected": "Rechazada"
+  },
+  "generate": {
+    "title": "Generar hoja de horas",
+    "employeeLabel": "Empleado",
+    "periodStartLabel": "Inicio del período",
+    "periodEndLabel": "Fin del período",
+    "action": "Generar"
+  },
+  "pendingApprovals": {
+    "title": "Pendientes de aprobación",
+    "empty": "No hay hojas de horas pendientes de aprobación."
+  },
+  "pendingCorrections": {
+    "title": "Correcciones pendientes",
+    "empty": "No hay correcciones pendientes de revisión.",
+    "reviewAction": "Revisar",
+    "reviewTitle": "Solicitud de corrección"
+  },
+  "myTimesheets": {
+    "title": "Mis hojas de horas",
+    "empty": "Todavía no se ha generado ninguna hoja de horas para ti. Un administrador genera una para cada período de pago cuando termina."
+  },
+  "detail": {
+    "status": "Estado",
+    "worked": "Trabajado",
+    "breaks": "Descansos",
+    "overtime": "Horas extra",
+    "leave": "Ausencias",
+    "exceptions": "Excepciones",
+    "corrections": "Correcciones",
+    "noEntries": "No hay jornadas en este período.",
+    "stillOpen": "aún abierta",
+    "notesLabel": "Notas (opcional)",
+    "correctionReasonLabel": "Motivo de la corrección",
+    "submitAction": "Enviar para aprobación",
+    "approveAction": "Aprobar",
+    "rejectAction": "Rechazar",
+    "requestCorrectionAction": "Pedir corrección",
+    "submitCorrectionAction": "Enviar la solicitud de corrección",
+    "viewReportAction": "Ver informe"
+  },
+  "report": {
+    "title": "Informe de hoja de horas",
+    "loadError": "No se pudo cargar este informe.",
+    "backLink": "Volver a las hojas de horas",
+    "exportCsvAction": "Exportar CSV",
+    "exportPdfAction": "Exportar PDF",
+    "printAction": "Imprimir / Guardar como PDF",
+    "summaryTitle": "Resumen",
+    "organization": "Organización",
+    "employee": "Empleado",
+    "status": "Estado",
+    "worked": "Trabajado",
+    "breaks": "Descansos",
+    "overtime": "Horas extra",
+    "approver": "Aprobador",
+    "approvedAt": "Aprobada",
+    "lockStatus": "Bloqueo",
+    "locked": "Cerrada",
+    "unlocked": "Sin cerrar",
+    "entriesTitle": "Registros de asistencia",
+    "leaveTitle": "Ausencias",
+    "noLeave": "No hay ausencias aprobadas en este período.",
+    "leaveDaysLabel": "Días de ausencia",
+    "leaveDays": "{{count}} día(s)",
+    "exceptionsTitle": "Excepciones de geovalla (resumen de validación GPS)",
+    "noExceptions": "No hay excepciones de geovalla en este período.",
+    "correctionsTitle": "Correcciones",
+    "noCorrections": "No hay correcciones en este período.",
+    "timesheetLevelCorrection": "Corrección de la hoja de horas",
+    "evidenceTitle": "Fotos de prueba",
+    "noEvidence": "No hay fotos de prueba en este período.",
+    "viewEvidence": "Ver",
+    "approvalTrailTitle": "Historial de aprobación",
+    "noApprovalTrail": "Todavía no hay actividad de aprobación.",
+    "columns": {
+      "clockIn": "Entrada",
+      "clockOut": "Salida",
+      "site": "Sede",
+      "project": "Proyecto",
+      "when": "Cuándo",
+      "distance": "Distancia",
+      "category": "Categoría",
+      "reason": "Motivo",
+      "kind": "Tipo",
+      "action": "Acción",
+      "notes": "Notas"
+    },
+    "meters": "{{value}} m",
+    "photo": "Foto"
+  },
+  "values": {
+    "leaveType": {
+      "annual": "Vacaciones",
+      "sick": "Enfermedad",
+      "unpaid": "No retribuida",
+      "emergency": "Emergencia",
+      "other": "Otra"
+    }
+  }
+}

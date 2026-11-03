@@ -1,0 +1,38 @@
+{
+  "addTitle": "Añadir un trabajador",
+  "addHint": "Para trabajadores sin cuenta en la aplicación (subcontratas, jornaleros). La aplicación crea un número de 6 cifras para cada trabajador; lo escribe en el quiosco de cualquier sede para fichar la entrada y la salida.",
+  "nameLabel": "Nombre del trabajador",
+  "contractorLabel": "Subcontrata (opcional)",
+  "addAction": "Añadir trabajador",
+  "addError": "No se pudo añadir este trabajador.",
+  "addedFor": "Se añadió a {{name}}. Su número de quiosco:",
+  "addedHint": "Da este número al trabajador. Siempre lo puedes ver en la lista de abajo.",
+  "copyAction": "Copiar",
+  "copied": "Copiado",
+  "listTitle": "Todos los trabajadores",
+  "empty": "Aún no hay trabajadores externos.",
+  "loadError": "No se pudieron cargar los trabajadores.",
+  "updateError": "No se pudo actualizar este trabajador.",
+  "columns": {
+    "name": "Nombre",
+    "number": "Número de quiosco",
+    "contractor": "Subcontrata",
+    "now": "Ahora",
+    "status": "Estado",
+    "actions": "Acciones"
+  },
+  "atSite": "En {{site}}",
+  "status": {
+    "active": "Activo",
+    "inactive": "Inactivo"
+  },
+  "clockOutAction": "Fichar salida",
+  "deactivateAction": "Desactivar",
+  "activateAction": "Activar",
+  "overrideReasonLabel": "Motivo para fichar la salida de este trabajador",
+  "editAction": "Editar",
+  "deleteAction": "Eliminar",
+  "editTitle": "Editar trabajador",
+  "editHint": "El número de quiosco {{number}} no cambia.",
+  "deleteConfirm": "¿Eliminar a {{name}} definitivamente? Un trabajador que ya tiene fichajes no se puede eliminar: desactívalo."
+}

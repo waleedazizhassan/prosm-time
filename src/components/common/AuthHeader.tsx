@@ -11,11 +11,12 @@ import Dropdown from "./Dropdown";
 // "prosm-time") - the real, currently-active plans, in their real
 // sort order. `null` max sites = the "max_sites" entitlement's own
 // limit_value is effectively unlimited (999999) on that plan.
-const PLAN_KEYS = ["free", "professional", "enterprise"] as const;
+// Owner 2026-11-03: the plans PROSM Time really has (the plans sheet).
+const PLAN_KEYS = ["starter", "business", "pro"] as const;
 const PLAN_MAX_SITES: Record<(typeof PLAN_KEYS)[number], number | null> = {
-  free: 1,
-  professional: 10,
-  enterprise: null,
+  starter: 3,
+  business: null,
+  pro: null,
 };
 
 // PROSM Time - the desktop-only header shared by every session-less

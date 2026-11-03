@@ -1,0 +1,70 @@
+{
+  "title": "Registro de ponto",
+  "subtitle": "Histórico de entradas e saídas, limitado às pessoas e unidades que você pode ver.",
+  "loadError": "Não foi possível carregar os registros de ponto.",
+  "exportPdfAction": "Exportar PDF",
+  "filters": {
+    "title": "Período",
+    "fromLabel": "De",
+    "toLabel": "Até",
+    "employeeLabel": "Funcionário",
+    "allEmployees": "Todos os funcionários"
+  },
+  "columns": {
+    "employee": "Funcionário",
+    "site": "Unidade",
+    "clockInLocation": "Local real da entrada",
+    "clockOutLocation": "Local real da saída",
+    "clockInAt": "Entrada",
+    "clockOutAt": "Saída",
+    "status": "Situação",
+    "workedHours": "Horas trabalhadas",
+    "notes": "Observações",
+    "date": "Data"
+  },
+  "status": {
+    "clocked_in": "Em serviço",
+    "clocked_out": "Saiu"
+  },
+  "empty": "Nenhum registro de ponto neste período.",
+  "viewPhoto": "Ver foto",
+  "viewOnMap": "Ver no mapa",
+  "siteChangedTo": "→ {{site}} às {{time}}",
+  "recordedByOnBehalf": "Registrado em nome por {{name}}",
+  "noteLabel": "Observação: {{note}}",
+  "activityLabel": "Atividade: {{activity}}",
+  "locationMatch": "Dentro da cerca virtual da unidade",
+  "locationMismatch": "Fora da cerca virtual da unidade",
+  "photoModalTitle": "Foto do ponto",
+  "photoLoading": "Carregando foto…",
+  "photoAlt": "Foto de comprovação do ponto",
+  "photoLoadError": "Não foi possível carregar esta foto.",
+  "deviceTimeBadge": "Horário do aparelho (offline)",
+  "deviceTimeHint": "Registrado sem conexão com o horário do aparelho do funcionário; aguardando a revisão de um gestor.",
+  "notes": {
+    "clockIn": "Entrada: {{note}}",
+    "clockOut": "Saída: {{note}}",
+    "earlyLeave": "Saída antecipada: {{reason}}",
+    "mockClockIn": "Entrada de uma localização falsa (simulada)",
+    "mockClockOut": "Saída de uma localização falsa (simulada)",
+    "siteChange": "Troca de unidade: {{from}} → {{to}} ({{time}})"
+  },
+  "periods": {
+    "today": "Hoje",
+    "week": "Esta semana",
+    "month": "Este mês"
+  },
+  "totalHours": "Total de {{hours}} horas · {{count}} turnos",
+  "noRegisteredSite": "Sem unidade cadastrada",
+  "noLocation": "Sem localização (registro antigo ou permissão não concedida)",
+  "view": {
+    "month": "Visão mensal",
+    "list": "Visão em lista"
+  },
+  "group": {
+    "label": "Agrupar por",
+    "none": "Sem agrupamento",
+    "employee": "Funcionário",
+    "day": "Dia"
+  }
+}

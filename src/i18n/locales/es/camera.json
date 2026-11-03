@@ -1,0 +1,28 @@
+{
+  "title": "Cámara",
+  "openCameraAction": "Abrir cámara",
+  "capture": "Capturar",
+  "switchCamera": "Cambiar cámara",
+  "retake": "Repetir",
+  "usePhoto": "Usar foto",
+  "cancel": "Cancelar",
+  "chooseFileAction": "O elige un archivo",
+  "permissionDenied": "Se denegó el acceso a la cámara o no está disponible en este dispositivo.",
+  "alternativeHint": "Puedes elegir un archivo.",
+  "previewAlt": "Vista previa de la foto",
+  "verifyingLiveness": "Comprobando que eres tú en vivo: quédate quieto un momento",
+  "challenge": {
+    "start": "Iniciar la comprobación",
+    "retry": "Intentar de nuevo",
+    "instruction": {
+      "turn_left": "Comprobación en vivo: toca Iniciar y gira despacio la cabeza a la izquierda.",
+      "turn_right": "Comprobación en vivo: toca Iniciar y gira despacio la cabeza a la derecha.",
+      "move_closer": "Comprobación en vivo: toca Iniciar y acerca el teléfono a tu cara."
+    },
+    "passed": "Listo: toma la foto.",
+    "unavailable": "Este teléfono no puede hacer la comprobación: toma la foto; tu responsable podrá revisarla.",
+    "failed": "No detectado. Ayuda tener mejor luz. Intentos restantes: {{left}}.",
+    "failedFinal": "No detectado: toma la foto; tu responsable la revisará.",
+    "privacy": "La comprobación se hace solo en este teléfono: no se envía vídeo ni se guarda ningún rostro. Solo confirma que hay una persona real frente a la cámara."
+  }
+}
