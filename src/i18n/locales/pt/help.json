@@ -1,0 +1,207 @@
+{
+  "title": "Ajuda e suporte",
+  "subtitle": "Ajuda do produto, orientações de uso e contato com o suporte.",
+  "guides": {
+    "gettingStarted": {
+      "title": "Primeiros passos",
+      "body": "Entre com o e-mail e a senha que o seu administrador configurou para você. Na primeira vez (e sempre que mudarem), você vê o que o PROSM Time registra sobre você e precisa aceitar a Política de Privacidade e os Termos de Uso. No Painel, use Registrar entrada para começar o turno e Registrar saída para terminá-lo - um mapa ao vivo mostra sua posição atual e, quando for o caso, a área de trabalho do local. O app abre no idioma do seu dispositivo quando é um dos nove disponíveis; você pode mudá-lo quando quiser no menu do usuário. Funcionários abrem a própria página inicial: registrar entrada e saída, suas horas de hoje, desta semana (a partir de domingo) e deste mês, e links para frequência, adicionais, folhas de ponto e afastamentos. O proprietário, os gestores e os supervisores abrem o Painel. O proprietário não registra ponto."
+    },
+    "attendance": {
+      "title": "Registrar entrada e saída",
+      "body": "Escolha seu local (e o projeto, se houver) antes de registrar a entrada - ou deixe o local vazio e descreva onde você realmente está se não estiver em um local cadastrado. Alguns locais exigem foto, mantida parada por um instante para o app confirmar que é uma captura ao vivo, e não uma imagem antiga ou estática. Logo antes de enviar, uma tela de confirmação mostra exatamente o que será registrado - sua foto (se houver), sua localização GPS, o local ou lugar de trabalho e o horário - com dois campos opcionais, uma observação e sua atividade, que seu gestor pode ver. O horário registrado é sempre o do servidor, não o relógio do celular. Não é possível registrar a entrada em um dia coberto por afastamento aprovado. No app do celular, o PROSM Time também lembra você sozinho - mesmo com o app fechado: pouco depois do fim do turno se você ainda estiver com o ponto aberto, e alguns minutos antes do próximo turno agendado. Se sua organização ativou, abrir o app dentro de um local cadastrado pergunta \"Você está em …. Registrar a entrada agora?\"; nada é registrado sem sua resposta e, se você aceitar, segue as etapas de sempre (e a foto, se exigida). Se seu local tiver tarefas de fim de turno, a lista aparece antes de registrar a saída."
+    },
+    "walkInGeofence": {
+      "title": "Trabalhar em um local ao qual você não está atribuído",
+      "body": "A lista de locais começa pela melhor opção para você: o local ao qual você está atribuído; se não estiver atribuído e estiver dentro de um local cadastrado, esse local, marcado \"você está aqui hoje\"; caso contrário, \"Sem local\". Os outros locais vêm em seguida, do mais próximo ao mais distante. Registrar ponto sem local continua disponível, e então o ponto de entrada passa a ser o centro da área de trabalho da organização pelo resto do turno."
+    },
+    "siteChange": {
+      "title": "Trocar de local no meio do turno",
+      "body": "Trocar de local é um botão próprio no Painel sempre que seu ponto está aberto - não é preciso pausar antes. Escolha para onde você foi (ou deixe o local vazio) e a troca é registrada com o horário em que aconteceu. Sua saída nunca é registrada nesse processo. O registro guarda os dois locais: o primeiro e depois cada troca com seu horário, também nas observações e no PDF. A partir da troca, \"dentro / fora da área de trabalho\" é verificado em relação ao novo local."
+    },
+    "sos": {
+      "title": "SOS / Emergência",
+      "body": "O botão SOS fica no Painel em todo turno, depois que sua entrada é confirmada. Ao tocá-lo, um alerta de alta prioridade com sua localização vai para os gestores do seu local, o proprietário e os colegas com ponto aberto no mesmo local, e fica no Registro de emergências. O SOS não é um serviço de emergência - não chama a polícia nem uma ambulância. Em uma emergência, ligue sempre para o número de emergência local. Ele precisa de internet. Se você trabalha sem local escolhido, os gestores do local mais próximo recebem o alerta."
+    },
+    "notifications": {
+      "title": "Como as notificações chegam à pessoa certa",
+      "body": "Se você registra entrada ou saída - ou se move durante o turno - fora da sua área de trabalho, precisa explicar o motivo, e a pessoa certa é avisada: a situação de um funcionário chega ao gestor daquele local (e ao proprietário); a de um gestor vai direto ao proprietário. Toque em uma notificação para ir ao assunto dela."
+    },
+    "timesheets": {
+      "title": "Folhas de ponto",
+      "body": "Quando seu gestor gera uma folha de ponto para um período, ela aparece em Folhas de ponto para você revisar e enviar para aprovação. Tempo trabalhado, intervalos e horas extras aparecem como totais separados - o intervalo nunca é descontado das horas trabalhadas, e a hora extra começa no horário que a política do seu local define. Depois de aprovada, a folha fica bloqueada; se precisar de correção, peça na página da folha."
+    },
+    "exceptions": {
+      "title": "Análises - exceções, correções, horários offline e localizações falsas",
+      "body": "Tudo o que precisa da decisão de um gestor aparece no Console do gestor, em Aguardando análise: exceções fora da área (com o seu motivo), pedidos de correção, ações registradas offline com o horário do dispositivo e localizações apontadas como falsas. Se uma exceção é aprovada, você é considerado presente o tempo todo. Se é rejeitada, o tempo efetivamente trabalhado é limitado ao momento em que a situação foi detectada pela primeira vez. Os alertas são informação para uma pessoa analisar com justiça - não decisões automáticas."
+    },
+    "allowances": {
+      "title": "Adicionais",
+      "body": "Toque em \"Preencher pela minha frequência\": cada dia em que você compareceu é preenchido com seus preços de adicionais (o local daquele dia, depois sua categoria, depois seus próprios preços). A hora extra é paga pelos minutos exatos (15 minutos a 100 por hora = 25), e as horas que ainda aguardam análise de um gestor não contam. Adicione só o que não tem preço, como deslocamento, confira os totais e envie; seu gestor aprova ou devolve com uma observação. Durante a análise, um gestor com a permissão certa pode alterar uma linha da folha - cada alteração precisa de motivo, os totais se atualizam na hora e a alteração (antes, depois, quem, por quê) fica guardada; nada pode ser alterado depois que a folha é aprovada, a não ser que ela seja reaberta com um motivo. O PDF marca com * cada valor alterado, lista as alterações, destaca os feriados e mostra os descontos de afastamento não remunerado (tirados do salário, não dos adicionais). Os preços são definidos em Adicionais > Preços: por local, por categoria de funcionário e por pessoa, além da hora extra e do dia extra."
+    },
+    "kiosk": {
+      "title": "Modo quiosque",
+      "body": "Abra o Modo quiosque na barra lateral e escolha um local para transformar um tablet ou computador compartilhado na tela de ponto dos trabalhadores externos (pessoas sem conta no app - quem tem conta registra o ponto pelo app). O trabalhador digita o número de 6 dígitos que o app criou para ele na página Trabalhadores e toca Registrar entrada ou Registrar saída; a tela volta ao teclado após cada ação. Enquanto o quiosque está aberto, o dispositivo fica preso a ele: não há menu, as outras páginas e o botão voltar levam de volta ao quiosque, e sair exige a senha da conta que o abriu (botão Sair do quiosque). O Modo quiosque é aberto pelo proprietário, ou por um gestor para um local que ele gerencia."
+    },
+    "reportsCenter": {
+      "title": "Central de relatórios",
+      "body": "Escolha um tipo de relatório, um período e, quando for o caso, um funcionário ou local, e exporte em PDF. Os relatórios incluem Frequência (com os horários offline do dispositivo marcados), Adicionais, Equipe, Empreiteira, Local, Atrasos, Saídas não registradas, Conflitos de afastamento, Intervenções de gestores e Violações de localização - que agora reúne estar fora da área de trabalho (com o motivo do funcionário e o status da análise), localizações improváveis e localizações falsas. Um gestor vê só os locais que gerencia; o proprietário vê toda a organização. Ao lado de cada download de PDF há um botão Imprimir. No PDF, uma página nunca corta uma linha, os títulos das colunas se repetem em cada página e as páginas são numeradas. A mesma página tem a exportação da folha de pagamento para Excel ou CSV com modelos salvos, o custo de mão de obra pelas taxas por hora e o orçamento de cada projeto comparado ao gasto."
+    },
+    "sites": {
+      "title": "Locais (administradores)",
+      "body": "Em Locais você configura os locais de trabalho e atribui as pessoas. Para adicionar um local basta um nome, a localização - fique lá e toque em Usar minha localização atual -, o raio e se a foto é exigida; todo o resto fica em Mais opções. Um novo local usa o fuso horário do seu dispositivo. Ao atribuir alguém, a função no local parte da função na organização - um gestor ou supervisor passa a ser gestor do local, para ver as pessoas dele. Todo o resto de um local fica na página dele, em Regras do local: tolerância de GPS, tolerância de atraso, horário do turno, horários de hora extra e de desconto por atraso, arredondamento de intervalos, controle de presença contínuo, funcionários dispensados e os bloqueios de autoatendimento (após a tolerância, saída fora da área de trabalho, entrada fora da área de trabalho)."
+    },
+    "workers": {
+      "title": "Trabalhadores externos",
+      "body": "Trabalhadores (na barra lateral, para o proprietário e quem gerencia locais) é onde você adiciona quem trabalha para você sem conta no app - empreiteiros ou diaristas. Digite o nome (e a empreiteira, se houver) e toque em Adicionar: o app cria o número de 6 dígitos do trabalhador e o mostra para você copiar e entregar a ele. Os trabalhadores pertencem a toda a organização, não a um local: registram entrada e saída com o número no quiosque de qualquer local, e a lista mostra onde cada um está com o ponto aberto agora. Você pode forçar uma saída (com motivo) se alguém esqueceu, e desativar um trabalhador - um número desativado para de funcionar no quiosque."
+    },
+    "settingsCenter": {
+      "title": "Configurações (proprietário)",
+      "body": "As configurações (para o proprietário) vêm em seções: primeiro Assinatura (plano e código de ativação), depois Locais e ponto (a área de trabalho para registrar ponto sem local, recusar localizações falsas, a pergunta de ponto ao abrir o app dentro de um local e os valores com que cada novo local começa), depois Horário, depois Afastamentos e seus tipos, depois Dados e privacidade (retenção). As regras próprias de cada local ficam na página daquele local."
+    },
+    "leave": {
+      "title": "Afastamentos",
+      "body": "Peça um afastamento na página Afastamentos: escolha o tipo, as datas e, se quiser, um motivo (evite detalhes de saúde desnecessários). Os tipos e seus dias são definidos pelo proprietário em Configurações > Tipos de afastamento. Seu saldo por tipo mostra os dias usados e restantes. Ao pedir, escolha na lista quem recebe o pedido - o gestor do seu local ou o proprietário; só essa pessoa é notificada e recebe e-mail, e você recebe uma cópia. A resposta - aprovado (com as datas e o saldo restante), recusado ou cancelado após a aprovação - volta para você por notificação e e-mail, na mesma conversa de e-mail. Um gestor também pode transformar uma falta em afastamento pela folha \"Faltas hoje\" do painel (\"Converter em afastamento\"), por exemplo quando você pediu por telefone: é aprovado na hora, inclusive para dias passados, e sua folha de ponto acompanha. Um afastamento aprovado só pode ser cancelado antes do primeiro dia - a partir desse dia, ninguém pode cancelá-lo, nem o proprietário. Afastamento não remunerado: o gestor define o desconto por dia ao aprovar; ele é registrado automaticamente, aparece na exportação da folha de pagamento e na sua folha de adicionais, e é desfeito se o afastamento for cancelado antes de começar."
+    },
+    "schedule": {
+      "title": "Escala de turnos",
+      "body": "Veja seus próximos turnos na página Escala. Gestores autorizados criam turnos prontos por local e atribuem pessoas, inclusive turnos noturnos (marcados \"(+1)\"); turnos sobrepostos são recusados. A mesma página tem turnos abertos (um gestor publica um turno sem ninguém, as pessoas do local se candidatam e o gestor escolhe uma), a troca de turno com um colega com aprovação do gestor, o custo estimado da escala e as tarefas de fim de turno de cada local."
+    },
+    "calendar": {
+      "title": "Calendário hegírico ou gregoriano",
+      "body": "Cada data pode aparecer no calendário gregoriano ou hegírico - escolha no menu do usuário, ao lado de Idioma e Aparência. É uma preferência por dispositivo."
+    },
+    "permissions": {
+      "title": "Permissões e ponto por outra pessoa (administradores)",
+      "body": "A página de cada pessoa em Pessoas mostra as permissões dela; quem pode alterá-las pode conceder, remover ou redefinir uma, com motivo. O proprietário tem todas as permissões e pode concedê-las a qualquer pessoa abaixo. Um gestor pode dar a um supervisor dos seus próprios locais uma permissão que ele mesmo tenha, e retirá-la. Aprovar afastamentos e registrar entrada ou saída por alguém são só para o proprietário e os gestores - nunca para si mesmo, e só para pessoas abaixo de você nos locais que você gerencia. Cada alteração fica registrada com quem a fez."
+    },
+    "getTheApp": {
+      "title": "Como obter o PROSM Time",
+      "body": "Em um celular Android: baixe o APK em prosm.net e instale (em breve no Google Play); essa versão avisa sobre atualizações sozinha. Em qualquer computador, tablet ou iPhone: abra https://time.prosm.net no navegador (você pode adicioná-lo à tela inicial); ele se atualiza sozinho. Todos são o mesmo PROSM Time com a mesma conta."
+    },
+    "liveMap": {
+      "title": "Mapa ao vivo",
+      "body": "O Painel mostra um mapa com sua posição atual e, quando seu ponto está aberto ou há um local escolhido, um círculo marcando a área de trabalho desse local, para você ver onde está antes de registrar o ponto."
+    },
+    "radio": {
+      "title": "Por que há um rádio no PROSM Time",
+      "body": "Coloque uma estação a caminho do trabalho e o PROSM Time já estará aberto quando você chegar - um pequeno empurrão contra o erro de frequência mais comum: esquecer de registrar a entrada. Ele não envia dados pessoais. A primeira lista vem das estações do país indicado pelo fuso horário do seu celular (Egito, Golfo, Europa, América...), guardada por um dia para abrir na hora."
+    },
+    "offline": {
+      "title": "Trabalhar sem internet",
+      "body": "No celular, Registrar entrada, Registrar saída, intervalos e Trocar de local funcionam sem conexão; um pequeno cartão avisa que você está offline e uma barra mostra quantas ações estão aguardando. Elas ficam criptografadas no dispositivo e são enviadas automaticamente, uma única vez, quando a conexão volta. Como foram registradas sem o servidor, mantêm o horário do dispositivo: se ele diferir do servidor em mais de 2 minutos, a ação é marcada como \"Horário do dispositivo (offline)\" e seu gestor analisa. Um horário anterior à sua última ação registrada, ou em um dia de afastamento aprovado, é recusado - peça ao seu gestor para corrigir. As outras páginas precisam de conexão; se uma não carregar, o app avisa e deixa tentar de novo."
+    },
+    "locationChecks": {
+      "title": "Áreas de trabalho e localizações falsas",
+      "body": "Cada local tem uma área de trabalho (um círculo no mapa). Registrar entrada ou saída fora dela é registrado como exceção e você precisa explicar o motivo; um só motivo cobre o trajeto todo, mesmo que a saída e a próxima entrada tenham sido fora. Um local também pode ser configurado para recusar o registro próprio de fora da área - então peça ao seu gestor para registrar por você. No Android, o PROSM Time percebe quando a localização vem de um app de localização simulada (GPS falso): isso é registrado e analisado pelo seu gestor, e sua organização pode optar por recusar. Falsificar sua localização ou o horário do celular viola os Termos de Uso."
+    },
+    "privacy": {
+      "title": "Sua privacidade",
+      "body": "O PROSM Time registra sua localização quando você registra entrada ou saída, faz um intervalo, troca de local ou envia um SOS. Somente se sua organização ativar o controle de presença ela também é registrada a cada 5 minutos, aproximadamente, durante o turno - no Android também em segundo plano, depois de avisar você e com uma notificação visível - e sempre para quando você registra a saída. Uma foto só é tirada onde o local exige; não há reconhecimento facial. Os gestores da sua organização veem seus registros. As localizações são apagadas após 30 dias e as fotos após 90 dias. Você pode retirar a permissão de localização ou câmera nas configurações do dispositivo a qualquer momento. Para exercer seus direitos sobre seus dados, fale primeiro com sua organização ou escreva para info@prosm.net. Os detalhes completos estão na Política de Privacidade e nos Termos de Uso abaixo. O proprietário pode encurtar a retenção em Configurações > Dados e privacidade. Quando sua conta entra por um novo dispositivo, você é avisado, e o proprietário também."
+    },
+    "workCalendar": {
+      "title": "Calendário de trabalho: feriados, dias de descanso e dias especiais",
+      "body": "Na página Calendário, quem tem permissão define os feriados (para toda a organização ou um local), os dias de descanso semanal (organização, local ou turno) e os dias especiais (por exemplo, horário de Ramadã ou saída antecipada). Trabalhar em feriado ou dia de descanso conta como hora extra pela taxa definida para aquele tipo de dia, e ninguém aparece como faltando ou atrasado nesse dia. Em um dia especial, a entrada e a saída seguem aquele dia, então sair mais cedo conforme combinado não gera desconto. Os dias são contados no fuso horário do próprio local. Os feriados também aparecem no painel e nos relatórios e exportações."
+    },
+    "longSessions": {
+      "title": "Sessões longas e horas aguardando análise",
+      "body": "Se você ainda estiver com o ponto aberto após 12 horas (o proprietário pode mudar isso), o app pergunta uma vez se você ainda está trabalhando; você pode responder \"ainda trabalhando\" ou registrar a saída. Após 24 horas a sessão é encerrada automaticamente - as horas ficam guardadas, mas marcadas como aguardando análise: não contam nos totais, no salário, nos adicionais nem no custo até um gestor analisá-las, definir o horário real de saída com um motivo ou estender a sessão. Elas aparecem em \"Precisa de análise\" para os gestores e nos relatórios como \"encerrada automaticamente, aguardando análise\"."
+    },
+    "overtimeControl": {
+      "title": "Horas extras, atrasos e permissões",
+      "body": "Você pode pedir permissão para chegar mais tarde ou sair mais cedo na página do seu dia; uma permissão aprovada (remunerada) significa nenhum desconto por esse tempo. Um gestor também pode marcar um tempo como \"não conta como hora extra\". Conforme a configuração do proprietário, a hora extra conta na hora ou só depois que um gestor aprova - até lá aparece como aguardando e fica fora dos totais e dos adicionais. As taxas de hora extra para dia útil, dia de descanso, feriado e trabalho noturno são configurações. Todo ajuste manual de um dia precisa de motivo, fica registrado e nada muda em um período já aprovado."
+    },
+    "liveCheck": {
+      "title": "Foto de frequência e verificação ao vivo",
+      "body": "Quando um local pede foto, ela é tirada só da câmera ao vivo - não escolhida da galeria. Quando o celular permite, uma breve verificação ao vivo pede que você vire a cabeça ou se aproxime; nada do seu rosto é guardado além da própria foto e do resultado, e nenhum vídeo é enviado. Se a verificação falhar ou o celular não conseguir fazê-la, sua entrada é registrada mesmo assim e apenas marcada para o gestor olhar (assim como uma foto antiga ou reutilizada, ou uma localização exata demais). O gestor aceita, rejeita com um motivo ou pergunta a você. O proprietário ou um gestor pode dispensar uma pessoa da verificação ao vivo."
+    },
+    "leavingSite": {
+      "title": "Sair do local com o ponto aberto",
+      "body": "Cada local decide o que acontece quando você sai da área de trabalho com o ponto aberto: você recebe uma notificação perguntando se quer registrar a saída (pode responder \"ainda trabalhando\", por exemplo para uma tarefa externa), ou sua saída é registrada automaticamente após o tempo que o local define, no momento em que você saiu. Trabalhadores de campo podem ser dispensados. Toda saída automática fica registrada e pode ser corrigida por um gestor. No Android, uma pequena notificação \"PROSM Time · ponto aberto\" fica visível enquanto a localização é registrada - só durante o turno, em um canal silencioso próprio."
+    },
+    "managerDashboard": {
+      "title": "O painel (proprietário e gestores)",
+      "body": "O proprietário e quem tem \"Ver o painel\" veem: uma barra de SOS (até alguém atender), etiquetas com o que está aguardando (só quando há algo), os números com comparação com o período anterior só quando há dados para isso, o mapa dos locais com a área de trabalho de cada um e quem está lá agora, a tabela de locais com os trabalhadores externos de cada local, a fila de aprovações, pessoas por função, agendado x real, adicionais e custo estimado (só com \"Ver custo estimado\") e o registro de ações. Escolha a organização, seus locais ou você mesmo, e o período; o mapa e \"presentes agora\" são ao vivo e não são filtrados por período. Ele atualiza a cada minuto. \"Personalizar widgets\" oculta ou reordena os cartões, e isso fica salvo na sua conta. Cada número abre as pessoas por trás dele - presentes agora, horas por pessoa, atrasos, faltas e afastados, hora extra por pessoa - com um botão para a página completa. O cartão de análise mostra pontualidade, atrasos e faltas. O proprietário recebe um resumo pela manhã às 7h no horário do local, um alerta quando alguém falta a um turno e um alerta antes de alguém entrar em hora extra."
+    },
+    "peopleAndPhotos": {
+      "title": "Pessoas, funções e fotos de perfil",
+      "body": "A página Pessoas agrupa todos por função - gestores (com o proprietário), supervisores, funcionários, leitores e depois qualquer função personalizada - cada grupo com sua contagem, e você pode recolhê-los. Uma única pesquisa e os filtros de local, status e turno funcionam em todos os grupos. Cada pessoa mostra a foto de perfil (ou a inicial), a função, o local, o turno e se está presente agora. Um gestor vê só as pessoas dos locais que gerencia. Sua foto de perfil é definida no seu perfil; ela não é a foto de frequência e só aparece para as pessoas da sua organização."
+    },
+    "phoneNotifications": {
+      "title": "Notificações e lembretes no celular",
+      "body": "Todas as notificações do PROSM Time têm o mesmo pequeno ícone PROSM. Seus próprios lembretes de entrada e saída são configurados no cartão do painel. O Android 14 e posteriores podem não permitir alarmes exatos; então um lembrete pode chegar alguns minutos atrasado - o cartão avisa e tem um botão para permitir alarmes exatos. Se o rastreamento de localização não puder começar (permissão negada ou localização desligada), o app avisa e oferece tentar de novo ou abrir as configurações; sua entrada nunca se perde. O aviso de atualização pode ser deslizado para fechar."
+    },
+    "subscription": {
+      "title": "Plano e assinatura (proprietário)",
+      "body": "Configurações > Assinatura mostra seu plano e o que ele inclui, os funcionários em relação ao limite, os locais, a data de término e até quando os registros são exibidos. Qualquer alteração ou renovação da licença é feita pela PROSM: você recebe uma notificação e um e-mail com a nova licença em PDF, e ela vale na hora. A caixa do código de ativação só aparece no teste ou depois que a licença terminou. Quando ela termina e o período de carência passa, a organização fica somente leitura: todos veem tudo, alterações e registros de ponto ficam pausados até a renovação, e nada é apagado."
+    }
+  },
+  "faq": {
+    "title": "Perguntas frequentes",
+    "q1": {
+      "question": "Esqueci de registrar a saída - o que faço?",
+      "answer": "Fale com seu gestor - ele pode registrar a saída correta por você (a ação fica registrada como dele, não sua) ou aprovar uma correção. Se você ainda estiver com o ponto aberto após 12 horas, o app pergunta uma vez se você ainda está trabalhando; após 24 horas a sessão é encerrada automaticamente e as horas aguardam a análise do gestor antes de contar."
+    },
+    "q2": {
+      "question": "Por que minha entrada foi marcada como fora da área de trabalho?",
+      "answer": "Seu local tem uma cerca virtual e uma tolerância de precisão de GPS configuradas (ou, sem local escolhido, o raio sem local da sua organização em volta de onde você registrou). Se a localização ficou fora dessa área, você precisa explicar o motivo para o gestor certo analisar - se ele aprovar, o alerta some por completo; se rejeitar, o tempo trabalhado é limitado àquele momento."
+    },
+    "q3": {
+      "question": "Qual horário é registrado quando registro a entrada?",
+      "answer": "Sempre o do servidor - mudar o relógio do celular não tem efeito. A única exceção é uma ação feita sem conexão: ela mantém o horário do dispositivo e, se ele diferir do servidor em mais de 2 minutos, é marcada para o gestor analisar."
+    },
+    "q4": {
+      "question": "Como mudo o idioma ou o tema?",
+      "answer": "Abra o menu do usuário (no fim da barra lateral) - Idioma e Aparência (Escuro/Claro/Sistema) podem ser alterados ali a qualquer momento, e você também pode definir sua foto de perfil no mesmo menu."
+    },
+    "q5": {
+      "question": "Registrei a entrada sem escolher um local - por que pediu um \"local de trabalho\"?",
+      "answer": "O local é opcional para você poder registrar a frequência da sua localização real mesmo que não seja um local cadastrado - mas nesse caso é preciso uma breve descrição de onde você está, para os relatórios nunca mostrarem um local em branco. O raio sem local da sua organização continua protegendo essa sessão do mesmo jeito que a cerca virtual de um local real."
+    },
+    "q6": {
+      "question": "Qual a diferença entre Frequência e Folhas de ponto?",
+      "answer": "A Frequência é um histórico ao vivo, por datas, das entradas e saídas - não há nada para aprovar. As Folhas de ponto são um documento gerado por período (totais de trabalho, intervalos e horas extras) que passa por um fluxo real de envio e aprovação e fica bloqueado depois de aprovado."
+    },
+    "q7": {
+      "question": "Posso exportar minha frequência ou folha de ponto em PDF?",
+      "answer": "Sim - Frequência, Folhas de ponto e Adicionais têm cada um a sua ação Exportar PDF, limitada ao que você está vendo, e Relatórios também reúne as exportações de frequência e adicionais em um só lugar. Cada um também tem um botão Imprimir, e sua página inicial tem links para todos."
+    },
+    "q8": {
+      "question": "Por que não vejo alguns funcionários em Pessoas ou na Frequência?",
+      "answer": "Você só vê você mesmo e - se gerencia um local - as pessoas atribuídas a ele. O proprietário vê todos. Isso é imposto pelo servidor, não apenas escondido na interface."
+    },
+    "q9": {
+      "question": "O app de computador me desconecta toda vez que eu o fecho?",
+      "answer": "Não - sua sessão é lembrada entre as aberturas, do mesmo jeito que no celular ou no navegador."
+    },
+    "q10": {
+      "question": "Posso continuar ouvindo o rádio com o ponto aberto?",
+      "answer": "Sim - ele continua tocando em segundo plano, seja qual for o seu status de frequência. Ele fica na linha Mídia da barra lateral (toque para abrir a lista de estações e pesquisar), não no cabeçalho, e ocupa muito pouco espaço recolhido."
+    },
+    "q11": {
+      "question": "Como funciona a demonstração de 30 dias?",
+      "answer": "Na página de boas-vindas, \"Usar o teste\" abre as etapas normais de ativação sem código, criando na hora a organização e seu proprietário. O teste dura 30 dias (horário do servidor) e uma barra mostra os dias restantes. Uma semana antes do fim, o proprietário recebe uma notificação e um e-mail com sales@prosm.net, info@prosm.net e support@prosm.net. Quando termina, a organização fica somente leitura, sem apagar nada: insira um código de ativação em Configurações > Assinatura ou peça à PROSM para renovar a licença, e tudo volta a funcionar como antes. Um teste por e-mail."
+    },
+    "q12": {
+      "question": "A frequência funciona sem internet?",
+      "answer": "Sim. No celular, Registrar entrada, Registrar saída, intervalos e Trocar de local funcionam sem conexão, com a foto e a localização tiradas naquele momento. Ficam criptografados no dispositivo, em ordem, e são enviados automaticamente uma vez quando a conexão volta - nunca duas vezes. Horários diferentes do servidor são marcados para análise. As outras páginas precisam de conexão."
+    },
+    "q13": {
+      "question": "Por que meu registro diz \"Horário do dispositivo (offline)\"?",
+      "answer": "Essa ação foi feita sem conexão e registrada com o horário do celular, que diferia do servidor em mais de 2 minutos. Seu gestor a vê em Aguardando análise e pode aprová-la ou corrigi-la."
+    },
+    "q14": {
+      "question": "Quem pode ver minha localização e minhas fotos, e por quanto tempo?",
+      "answer": "Você, os gestores do seu local e o proprietário da sua organização. As localizações durante o turno são apagadas após 30 dias e as fotos de frequência após 90 dias, ou antes se o proprietário encurtou. A verificação ao vivo não guarda dados do rosto - só a própria foto e o resultado. Sua foto de perfil só aparece dentro da sua organização. A política de privacidade cobre o resto."
+    },
+    "q15": {
+      "question": "O SOS chama a ambulância ou a polícia?",
+      "answer": "Não. Ele avisa os gestores do seu local, o proprietário e os colegas no local, com a sua localização. Em uma emergência, ligue você mesmo para o número de emergência local."
+    }
+  },
+  "contact": {
+    "title": "Contato",
+    "body": "Para ajuda com o produto ou suporte, fale conosco em:",
+    "infoLabel": "Dúvidas gerais:",
+    "supportLabel": "Suporte:"
+  }
+}
