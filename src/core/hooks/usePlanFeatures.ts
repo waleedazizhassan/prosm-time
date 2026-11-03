@@ -36,10 +36,13 @@ export interface PlanFeatures {
 
 let cached: Promise<PlanFeatures | null> | null = null;
 let cachedFor: string | null = null;
+let cachedAt = 0;
+const MAX_AGE_MS = 5 * 60 * 1000;
 
 function load(userKey: string): Promise<PlanFeatures | null> {
-  if (cached && cachedFor === userKey) return cached;
+  if (cached && cachedFor === userKey && Date.now() - cachedAt < MAX_AGE_MS) return cached;
   cachedFor = userKey;
+  cachedAt = Date.now();
   cached = Promise.resolve(DatabaseManager.getClient().rpc("get_prosm_time_plan_features")).then(({ data, error }) => (error ? null : (data as PlanFeatures)));
   return cached;
 }

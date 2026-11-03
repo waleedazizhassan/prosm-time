@@ -76,7 +76,7 @@
     },
     "getTheApp": {
       "title": "PROSM Time nutzen",
-      "body": "Auf einem Android-Handy: PROSM Time aus Google Play installieren oder die APK von prosm.net laden (diese Version meldet Updates selbst). Auf jedem Computer, Tablet oder iPhone: https://time.prosm.net im Browser öffnen (zum Startbildschirm hinzufügbar); es aktualisiert sich selbst. Alles dasselbe PROSM Time mit demselben Konto."
+      "body": "Auf einem Android-Handy: die APK von prosm.net laden und installieren (bald bei Google Play); diese Version meldet Updates selbst. Auf jedem Computer, Tablet oder iPhone: https://time.prosm.net im Browser öffnen (zum Startbildschirm hinzufügbar); es aktualisiert sich selbst. Alles dasselbe PROSM Time mit demselben Konto."
     },
     "liveMap": {
       "title": "Live-Karte",

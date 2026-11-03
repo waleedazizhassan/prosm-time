@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useAuth } from "../../core/context/AuthContext";
+import usePlanFeatures from "../../core/hooks/usePlanFeatures";
 import EmployeeRepository, { type InviteInput, type InviteResultData } from "../../core/repositories/EmployeeRepository";
 import { roleRank } from "../../core/utils/roleRank";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
@@ -28,8 +29,11 @@ interface InviteEmployeeModalProps {
 export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: InviteEmployeeModalProps) {
   const { t } = useTranslation("people");
   const { profile } = useAuth();
+  const { allows } = usePlanFeatures(profile?.id);
   // Security review 2026-10-20: only roles below the inviter's own (the Owner: any) - the server refuses the rest.
-  const roleOptions = ROLE_OPTIONS.filter(
+  const roleOptions = ROLE_OPTIONS.filter((key) => (key !== "manager" && key !== "supervisor") || allows("roles_manager"))
+    .filter((key) => key !== "read_only" || allows("roles_all"))
+    .filter(
     (key) => !profile || profile.isOwner || roleRank({ isOwner: false, roleKey: key }) < roleRank({ isOwner: false, roleKey: profile.roleKey }),
   );
 

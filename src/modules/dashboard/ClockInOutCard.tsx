@@ -1251,7 +1251,7 @@ export default function ClockInOutCard() {
             />
           ) : null}
           {/* Plan stage 8.4: a question only. Nothing is recorded until the person agrees and completes the clock-in. */}
-          {suggestClockIn && !suggestionDismissed && proximity?.inside && proximitySite ? (
+          {suggestClockIn && planAllows("clock_suggestion") && !suggestionDismissed && proximity?.inside && proximitySite ? (
             <div role="alert" style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-strong)" }}>
               <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-sm)" }}>{t("attendance.suggestSite", { site: proximitySite.name })}</p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>

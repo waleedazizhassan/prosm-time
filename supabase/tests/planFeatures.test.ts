@@ -5,7 +5,7 @@
 import { describe, expect, it } from "vitest";
 
 import { buildDatabase } from "./support/db";
-import { addMember, createOrg } from "./support/fixtures";
+import { addMember, createOrg, createSite } from "./support/fixtures";
 
 const setPlan = (plan: string) => `update entitlements set plan = '${plan}', status = 'active', notes = null where organization_id = $1`;
 
@@ -47,6 +47,34 @@ describe("plan features", () => {
     await t.su(setPlan("pro"), [org.id]);
     expect((await t.as(worker.authId, "select id from attendance_sessions")).rows).toHaveLength(2);
     expect(await t.su("select id from attendance_sessions where organization_id = $1", [org.id])).toHaveLength(2);
+  });
+
+  it("follows the plan Platform Manager sets, by itself (the licence sync writes plan_id)", async () => {
+    const t = await buildDatabase();
+    const org = await createOrg(t, "Switching Co");
+    await t.su("update entitlements set plan = 'legacy', status = 'active', notes = 'existing before plans' where organization_id = $1", [org.id]);
+    await t.su("update license_activation_state set is_trial = false where organization_id = $1", [org.id]);
+    const allows = async (feature: string) => (await t.su<{ ok: boolean }>("select public.prosm_time_plan_allows($1, $2) as ok", [org.id, feature]))[0].ok;
+    const plan = async () => (await t.su<{ plan: string }>("select plan from entitlements where organization_id = $1", [org.id]))[0].plan;
+    const setPlatformPlan = (id: string) => t.su("update license_activation_state set plan_id = $2 where organization_id = $1", [org.id, id]);
+
+    await setPlatformPlan("d6ff925e-5008-4fe0-899d-5a87453bc3f8");
+    expect(await plan()).toBe("starter");
+    expect(await allows("leave")).toBe(false);
+    const existing = (await t.su("select id from sites where organization_id = $1", [org.id])).length;
+    for (let i = existing; i < 3; i += 1) await createSite(t, org, `Site ${i}`);
+    await expect(createSite(t, org, "D")).rejects.toThrow(/PLAN SITE LIMIT REACHED/);
+    expect(await t.su("select id from sites where organization_id = $1", [org.id])).toHaveLength(3);
+
+    await setPlatformPlan("be13be26-7496-47b4-b088-43eaf3079f74");
+    expect(await plan()).toBe("business");
+    expect(await allows("leave")).toBe(true);
+    expect(await allows("sos")).toBe(false);
+
+    await setPlatformPlan("8fc0af08-e6ca-4f39-a9e8-d9c2a981c660");
+    expect(await plan()).toBe("pro");
+    expect(await allows("sos")).toBe(true);
+    expect(await allows("integrations")).toBe(false);
   });
 
   it("keeps everything for organisations from before plans and for trials", async () => {

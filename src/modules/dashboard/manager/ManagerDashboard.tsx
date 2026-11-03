@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AlertTriangle, ArrowDown, ArrowUp, CalendarRange, FileDown, GripVertical, Settings2, UserPlus } from "lucide-react";
 
 import { useAuth } from "../../../core/context/AuthContext";
+import usePlanFeatures from "../../../core/hooks/usePlanFeatures";
 import DashboardRepository, { type DashboardScope, type DashboardSite, type ManagerDashboard as Dashboard } from "../../../core/repositories/DashboardRepository";
 import SiteRepository from "../../../core/repositories/SiteRepository";
 import { isRtl } from "../../../i18n/direction";
@@ -47,6 +48,7 @@ export default function ManagerDashboard() {
   const { t, i18n } = useTranslation("dashboard");
   const navigate = useNavigate();
   const { profile, hasPermission } = useAuth();
+  const { allows } = usePlanFeatures(profile?.id);
   const isOwner = Boolean(profile?.isOwner);
   const canGrantLeave = isOwner || hasPermission("leave.approve");
 
@@ -486,7 +488,7 @@ export default function ManagerDashboard() {
               <UserPlus size={14} /> {t("manager.proxyClock")}
             </Button>
           ) : null}
-          <Button size="sm" variant="ghost" onClick={exportPdf} loading={exporting} disabled={!data} aria-label={t("manager.export.action")} title={t("manager.export.action")}>
+          <Button size="sm" variant="ghost" onClick={exportPdf} loading={exporting} disabled={!data || !allows("export")} aria-label={t("manager.export.action")} title={t("manager.export.action")}>
             <FileDown size={14} /> <span className={styles.actionLabel}>{t("manager.export.action")}</span>
           </Button>
           <Button size="sm" variant="ghost" onClick={() => setCustomizeOpen(true)} aria-label={t("manager.customize")} title={t("manager.customize")}>
