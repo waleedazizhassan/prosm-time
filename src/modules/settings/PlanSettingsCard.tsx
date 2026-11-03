@@ -14,7 +14,7 @@ import { useAuth } from "../../core/context/AuthContext";
 import usePlanFeatures, { resetPlanFeatures, type PlanFeature } from "../../core/hooks/usePlanFeatures";
 
 // Owner 2026-11-03: what the plan includes, in the order of the plans sheet.
-const FEATURE_ROWS: PlanFeature[] = ["on_behalf", "kiosk", "leave", "allowances", "export", "payroll_export", "clock_rules", "scheduling", "roles_manager", "audit", "sos", "roles_all", "clock_suggestion", "labor_cost", "daily_summary", "manager_alerts", "integrations"];
+const FEATURE_ROWS: PlanFeature[] = ["on_behalf", "kiosk", "leave", "allowances", "export", "payroll_export", "clock_rules", "scheduling", "roles_manager", "audit", "sos", "roles_all", "clock_suggestion", "labor_cost", "daily_summary", "manager_alerts"];
 
 // The Owner's plan: which one, what is used, when it ends, and a code PROSM
 // issued. In the Google Play build too: it shows state and takes no payment.
@@ -90,6 +90,9 @@ export default function PlanSettingsCard() {
         <div style={{ marginTop: "var(--space-4)" }}>
           <p style={{ margin: "0 0 var(--space-2)", fontWeight: "var(--font-weight-semibold)" }}>{t("plan.includes")}</p>
           <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("plan.always")}</p>
+          <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-sm)" }}>
+            {features.historyDays ? t("plan.history", { count: Math.round(features.historyDays / 365) }) : t("plan.historyAll")}
+          </p>
           <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(240px, 100%), 1fr))", gap: "var(--space-1) var(--space-4)" }}>
             {FEATURE_ROWS.map((feature) => {
               const on = features.features[feature] === true;

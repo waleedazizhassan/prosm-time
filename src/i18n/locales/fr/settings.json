@@ -181,10 +181,13 @@
       "clock_suggestion": "Question de pointage à l’arrivée",
       "labor_cost": "Coût de main-d’œuvre et budgets de projet",
       "daily_summary": "Résumé du jour",
-      "manager_alerts": "Alertes responsables (absence, heures sup., résumé du matin)",
-      "integrations": "Intégrations (API)"
+      "manager_alerts": "Alertes responsables (absence, heures sup., résumé du matin)"
     },
-    "managedByProsm": "Toute modification ou tout renouvellement de votre licence est fait par PROSM ; vous recevez une notification et un e-mail avec la nouvelle licence. Pour la modifier : sales@prosm.net."
+    "managedByProsm": "Toute modification ou tout renouvellement de votre licence est fait par PROSM ; vous recevez une notification et un e-mail avec la nouvelle licence. Pour la modifier : sales@prosm.net.",
+    "historyAll": "Pointages affichés : tous. Positions et photos sont supprimées automatiquement après la durée de « Conservation ».",
+    "history_one": "Pointages affichés et rapportés : les 1 dernières années. Les plus anciens sont conservés et reviennent avec une offre supérieure. Positions et photos sont supprimées automatiquement après la durée de « Conservation ».",
+    "history_other": "Pointages affichés et rapportés : les {{count}} dernières années. Les plus anciens sont conservés et reviennent avec une offre supérieure. Positions et photos sont supprimées automatiquement après la durée de « Conservation ».",
+    "history_many": "Pointages affichés et rapportés : les {{count}} dernières années. Les plus anciens sont conservés et reviennent avec une offre supérieure. Positions et photos sont supprimées automatiquement après la durée de « Conservation »."
   },
   "retention": {
     "title": "Conservation des données",

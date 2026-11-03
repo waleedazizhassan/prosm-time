@@ -181,10 +181,12 @@
       "clock_suggestion": "Clock-in question on arrival",
       "labor_cost": "Labour cost and project budgets",
       "daily_summary": "Daily summary",
-      "manager_alerts": "Manager alerts (missed shift, overtime, morning summary)",
-      "integrations": "Integrations (API)"
+      "manager_alerts": "Manager alerts (missed shift, overtime, morning summary)"
     },
-    "managedByProsm": "Any change or renewal of your licence is made by PROSM; you get a notification and an email with the new licence. To change it, write to sales@prosm.net."
+    "managedByProsm": "Any change or renewal of your licence is made by PROSM; you get a notification and an email with the new licence. To change it, write to sales@prosm.net.",
+    "historyAll": "Attendance records shown: all of them. Location points and photos are deleted automatically after the period in “Data retention”.",
+    "history_one": "Attendance records shown and reported: the last year. Older records are kept and come back with a higher plan. Location points and photos are deleted automatically after the period in “Data retention”.",
+    "history_other": "Attendance records shown and reported: the last {{count}} years. Older records are kept and come back with a higher plan. Location points and photos are deleted automatically after the period in “Data retention”."
   },
   "retention": {
     "title": "Data retention",

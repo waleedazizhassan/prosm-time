@@ -29,6 +29,8 @@ export type PlanFeature = (typeof PLAN_FEATURES)[number];
 export interface PlanFeatures {
   plan: string;
   status: string;
+  /** Days of records shown and reported; null = all (migration 20261103170000). */
+  historyDays: number | null;
   features: Partial<Record<PlanFeature, boolean>>;
 }
 

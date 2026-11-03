@@ -132,7 +132,7 @@
     },
     "subscription": {
       "title": "Paket und Abonnement (Inhaber)",
-      "body": "Einstellungen > Abonnement zeigt Ihr Paket, Mitarbeiter gegenüber dem Limit, Standorte und das Enddatum, mit einem Feld für den Aktivierungscode: gekauften Code eingeben und „Code aktivieren“ drücken; das Paket ändert sich sofort. Vor Ablauf der Lizenz werden Sie benachrichtigt. Ist sie abgelaufen und die Kulanzzeit vorbei, wird die Organisation schreibgeschützt: Alle können die App öffnen und alles sehen, Änderungen und Stempeln ruhen bis zur Verlängerung, gelöscht wird nichts."
+      "body": "Einstellungen > Abonnement zeigt Ihr Paket und was es enthält, Mitarbeiter gegenüber dem Limit, Standorte, das Enddatum und wie weit Datensätze zurück angezeigt werden. Änderungen und Verlängerungen nimmt PROSM vor: Sie erhalten eine Benachrichtigung und eine E-Mail von support@prosm.net mit der neuen Lizenz als PDF; sie gilt sofort. Das Feld für den Aktivierungscode erscheint nur in der Testphase oder nach Ablauf der Lizenz. Nach Ablauf und Kulanzzeit wird die Organisation schreibgeschützt: Alle sehen alles, Änderungen und Stempeln ruhen bis zur Verlängerung, gelöscht wird nichts."
     }
   },
   "faq": {

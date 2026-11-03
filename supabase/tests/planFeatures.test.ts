@@ -35,6 +35,20 @@ describe("plan features", () => {
     expect((await t.as(org.owner.authId, "select public.get_prosm_time_daily_summary(current_date - 1)")).error).toBeNull();
   });
 
+  it("shows a plan's history window and keeps the older records (migration 20261103170000)", async () => {
+    const t = await buildDatabase();
+    const org = await createOrg(t, "History Co");
+    const worker = await addMember(t, org, "employee", "Worker");
+    for (const ago of ["3 years", "1 year"]) {
+      await t.su(`insert into attendance_sessions (organization_id, user_id, status, clock_in_at, clock_out_at, manual_location_label) values ($1, $2, 'clocked_out', now() - interval '${ago}', now() - interval '${ago}' + interval '8 hours', 'Yard')`, [org.id, worker.userId]);
+    }
+    await t.su(setPlan("starter"), [org.id]);
+    expect((await t.as(worker.authId, "select id from attendance_sessions")).rows).toHaveLength(1);
+    await t.su(setPlan("pro"), [org.id]);
+    expect((await t.as(worker.authId, "select id from attendance_sessions")).rows).toHaveLength(2);
+    expect(await t.su("select id from attendance_sessions where organization_id = $1", [org.id])).toHaveLength(2);
+  });
+
   it("keeps everything for organisations from before plans and for trials", async () => {
     const t = await buildDatabase();
     const org = await createOrg(t, "Old Co");

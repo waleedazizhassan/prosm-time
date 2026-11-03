@@ -132,7 +132,7 @@
     },
     "subscription": {
       "title": "Offre et abonnement (propriétaire)",
-      "body": "Paramètres > Abonnement affiche votre offre, les employés par rapport à la limite, les sites et la date de fin, avec une case pour le code d’activation : saisissez le code acheté et appuyez sur « Activer le code » ; l’offre change aussitôt. Vous êtes prévenu avant la fin de la licence. Une fois la licence échue et le délai de grâce passé, l’organisation passe en lecture seule : tout le monde peut ouvrir l’application et tout voir, les modifications et le pointage sont suspendus jusqu’au renouvellement, et rien n’est supprimé."
+      "body": "Paramètres > Abonnement affiche votre offre et ce qu’elle comprend, les employés par rapport à la limite, les sites, la date de fin et l’historique affiché. Toute modification ou tout renouvellement est fait par PROSM : vous recevez une notification et un e-mail de support@prosm.net avec la nouvelle licence en PDF, appliquée aussitôt. La case du code d’activation n’apparaît qu’en essai ou après la fin de la licence. Après la fin et le délai de grâce, l’organisation passe en lecture seule : tout reste visible, modifications et pointage sont suspendus jusqu’au renouvellement, rien n’est supprimé."
     }
   },
   "faq": {

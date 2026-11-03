@@ -181,10 +181,13 @@
       "clock_suggestion": "Domanda di timbratura all’arrivo",
       "labor_cost": "Costo del lavoro e budget di progetto",
       "daily_summary": "Riepilogo del giorno",
-      "manager_alerts": "Avvisi ai responsabili (assenza, straordinario, riepilogo)",
-      "integrations": "Integrazioni (API)"
+      "manager_alerts": "Avvisi ai responsabili (assenza, straordinario, riepilogo)"
     },
-    "managedByProsm": "Ogni modifica o rinnovo della licenza è fatto da PROSM; ricevi una notifica e un’e-mail con la nuova licenza. Per modificarla scrivi a sales@prosm.net."
+    "managedByProsm": "Ogni modifica o rinnovo della licenza è fatto da PROSM; ricevi una notifica e un’e-mail con la nuova licenza. Per modificarla scrivi a sales@prosm.net.",
+    "historyAll": "Timbrature mostrate: tutte. Posizioni e foto si eliminano automaticamente dopo il periodo in «Conservazione dei dati».",
+    "history_one": "Timbrature mostrate e nei report: gli ultimi 1 anni. Le più vecchie restano salvate e tornano con un piano superiore. Posizioni e foto si eliminano automaticamente dopo il periodo in «Conservazione dei dati».",
+    "history_other": "Timbrature mostrate e nei report: gli ultimi {{count}} anni. Le più vecchie restano salvate e tornano con un piano superiore. Posizioni e foto si eliminano automaticamente dopo il periodo in «Conservazione dei dati».",
+    "history_many": "Timbrature mostrate e nei report: gli ultimi {{count}} anni. Le più vecchie restano salvate e tornano con un piano superiore. Posizioni e foto si eliminano automaticamente dopo il periodo in «Conservazione dei dati»."
   },
   "retention": {
     "title": "Conservazione dei dati",

@@ -181,10 +181,12 @@
       "clock_suggestion": "Stempelfrage bei Ankunft",
       "labor_cost": "Personalkosten und Projektbudgets",
       "daily_summary": "Tageszusammenfassung",
-      "manager_alerts": "Manager-Hinweise (Fehlen, Überstunden, Morgenübersicht)",
-      "integrations": "Integrationen (API)"
+      "manager_alerts": "Manager-Hinweise (Fehlen, Überstunden, Morgenübersicht)"
     },
-    "managedByProsm": "Änderungen und Verlängerungen Ihrer Lizenz nimmt PROSM vor; Sie erhalten eine Benachrichtigung und eine E-Mail mit der neuen Lizenz. Änderungen: sales@prosm.net."
+    "managedByProsm": "Änderungen und Verlängerungen Ihrer Lizenz nimmt PROSM vor; Sie erhalten eine Benachrichtigung und eine E-Mail mit der neuen Lizenz. Änderungen: sales@prosm.net.",
+    "historyAll": "Angezeigte Stempelungen: alle. Standortpunkte und Fotos werden nach der Frist unter „Aufbewahrung“ automatisch gelöscht.",
+    "history_one": "Angezeigte und berichtete Stempelungen: die letzten 1 Jahre. Ältere bleiben gespeichert und kommen mit einem höheren Paket zurück. Standortpunkte und Fotos werden nach der Frist unter „Aufbewahrung“ automatisch gelöscht.",
+    "history_other": "Angezeigte und berichtete Stempelungen: die letzten {{count}} Jahre. Ältere bleiben gespeichert und kommen mit einem höheren Paket zurück. Standortpunkte und Fotos werden nach der Frist unter „Aufbewahrung“ automatisch gelöscht."
   },
   "retention": {
     "title": "Datenaufbewahrung",
