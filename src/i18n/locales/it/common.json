@@ -288,7 +288,8 @@
     "tooManyCodeAttempts": "Troppi tentativi. Riprova più tardi.",
     "invalidActivationCode": "Il codice è errato o già utilizzato.",
     "locationRequired": "Non è possibile registrare senza una posizione valida. Attiva la posizione e riprova.",
-    "rejectReasonRequired": "Indica il motivo, così il dipendente lo vede."
+    "rejectReasonRequired": "Indica il motivo, così il dipendente lo vede.",
+    "organizationReadOnly": "La tua organizzazione è in sola lettura fino al rinnovo della licenza."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

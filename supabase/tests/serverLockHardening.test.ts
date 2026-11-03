@@ -11,6 +11,8 @@ describe("server lock", () => {
   it("an ended paid licence locks the organisation on the server, and a renewal reopens it", async () => {
     const t = await buildDatabase();
     const org = await createOrg(t, "Paid Co");
+    // the full lock, with read-only switched off (20261102210000; lockedReadOnly.test.ts covers it on)
+    await t.su("update platform_settings set value = 'false'::jsonb where key = 'locked_organizations_read_only'");
     await createSite(t, org, "Main");
     const worker = await addMember(t, org, "employee", "Worker");
     const visible = () => t.as<{ n: number }>(worker.authId, "select count(*)::int as n from organizations");
@@ -28,6 +30,8 @@ describe("server lock", () => {
   it("a suspended licence locks too", async () => {
     const t = await buildDatabase();
     const org = await createOrg(t, "Suspended Co");
+    // the full lock, with read-only switched off (20261102210000; lockedReadOnly.test.ts covers it on)
+    await t.su("update platform_settings set value = 'false'::jsonb where key = 'locked_organizations_read_only'");
     await createSite(t, org, "Main");
     await t.su("update license_activation_state set status = 'SUSPENDED' where organization_id = $1", [org.id]);
     expect((await t.as<{ n: number }>(org.owner.authId, "select count(*)::int as n from organizations")).rows![0].n).toBe(0);

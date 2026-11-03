@@ -288,7 +288,8 @@
     "tooManyCodeAttempts": "محاولات كثيرة. حاول مرة أخرى لاحقًا.",
     "invalidActivationCode": "الكود غير صحيح أو مستخدم من قبل.",
     "locationRequired": "لا يمكن التسجيل بدون موقع صالح. فعّل الموقع وحاول مرة أخرى.",
-    "rejectReasonRequired": "اكتب سبب الرفض، ليصل إلى الموظف."
+    "rejectReasonRequired": "اكتب سبب الرفض، ليصل إلى الموظف.",
+    "organizationReadOnly": "مؤسستك للقراءة فقط حتى يُجدَّد ترخيصها."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

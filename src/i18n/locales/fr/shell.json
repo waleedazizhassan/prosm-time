@@ -410,5 +410,10 @@
     "label": "Chiffres",
     "latn": "Chiffres latins (123)",
     "arab": "Chiffres arabes (١٢٣)"
+  },
+  "readOnly": {
+    "banner": "Votre organisation est en lecture seule : sa licence a pris fin. Tout reste visible ; les modifications sont suspendues et rien n’est supprimé.",
+    "reopen": "Saisir un code d’activation",
+    "askOwner": "Le propriétaire peut la rouvrir."
   }
 }
