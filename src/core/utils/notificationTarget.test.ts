@@ -55,7 +55,7 @@ describe("notificationTarget", () => {
     expect(notificationTarget({ type: "daily_digest", date: "2026-11-02" }, owner)).toBe("/daily-summary?date=2026-11-02");
     expect(notificationTarget({ type: "daily_digest" }, owner)).toBe("/daily-summary");
     expect(notificationTarget({ type: "daily_digest", date: "x" }, owner)).toBe("/daily-summary");
-    expect(notificationTarget({ type: "license_changed" }, owner)).toBe("/settings");
+    expect(notificationTarget({ type: "license_changed" }, owner)).toBe("/settings#plan");
     expect(notificationTarget({ type: "license_changed" }, employee)).toBe("/dashboard");
   });
 });

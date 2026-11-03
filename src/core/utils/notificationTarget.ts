@@ -56,7 +56,7 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
     case "daily_digest":
       return viewer.isOwner ? (typeof ref?.date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(ref.date) ? `/daily-summary?date=${ref.date}` : "/daily-summary") : "/dashboard";
     case "license_changed":
-      return viewer.isOwner ? "/settings" : "/dashboard";
+      return viewer.isOwner ? "/settings#plan" : "/dashboard";
     case "shift_no_show":
       return "/attendance?period=today";
     case "trial_ending":

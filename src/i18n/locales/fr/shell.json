@@ -223,7 +223,8 @@
       "ends": "fin le {{date}}",
       "status": "statut {{status}}",
       "plan": "offre modifiée",
-      "unlimited": "sans limite"
+      "unlimited": "sans limite",
+      "planTo": "offre {{plan}}"
     }
   },
   "items": {

@@ -223,7 +223,8 @@
       "ends": "ينتهي في {{date}}",
       "status": "الحالة {{status}}",
       "plan": "الباقة تغيّرت",
-      "unlimited": "بلا حد"
+      "unlimited": "بلا حد",
+      "planTo": "الباقة {{plan}}"
     }
   },
   "items": {

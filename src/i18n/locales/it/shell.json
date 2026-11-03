@@ -223,7 +223,8 @@
       "ends": "scade il {{date}}",
       "status": "stato {{status}}",
       "plan": "piano cambiato",
-      "unlimited": "senza limite"
+      "unlimited": "senza limite",
+      "planTo": "piano {{plan}}"
     }
   },
   "items": {

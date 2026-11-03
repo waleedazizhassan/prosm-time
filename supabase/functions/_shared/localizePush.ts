@@ -205,7 +205,7 @@ export function localizePush(type: string, data: Data, language: string, fallbac
       if (data.devicesChanged) parts.push(t("licenseChanged.devices", { from: value(data.devicesFrom), to: value(data.devicesTo) }) ?? "");
       if (data.expiryChanged) parts.push(t("licenseChanged.ends", { date: typeof data.expiresAt === "string" ? data.expiresAt.slice(0, 10) : unlimited }) ?? "");
       if (data.statusChanged) parts.push(t("licenseChanged.status", { status: String(data.status ?? "") }) ?? "");
-      if (data.planChanged) parts.push(t("licenseChanged.plan") ?? "");
+      if (data.planChanged) parts.push(typeof data.plan === "string" ? t("licenseChanged.planTo", { plan: data.plan.charAt(0).toUpperCase() + data.plan.slice(1) }) ?? "" : t("licenseChanged.plan") ?? "");
       result = pair("licenseChanged.title", "licenseChanged.body", { changes: parts.join(" · ") });
       break;
     }

@@ -170,7 +170,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "ends": "ينتهي في {{date}}",
         "status": "الحالة {{status}}",
         "plan": "الباقة تغيّرت",
-        "unlimited": "بلا حد"
+        "unlimited": "بلا حد",
+        "planTo": "الباقة {{plan}}"
       }
     },
     "leaveTypes": {
@@ -352,7 +353,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "ends": "ends {{date}}",
         "status": "status {{status}}",
         "plan": "plan changed",
-        "unlimited": "no limit"
+        "unlimited": "no limit",
+        "planTo": "plan {{plan}}"
       }
     },
     "leaveTypes": {
@@ -534,7 +536,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "ends": "endet {{date}}",
         "status": "Status {{status}}",
         "plan": "Paket geändert",
-        "unlimited": "unbegrenzt"
+        "unlimited": "unbegrenzt",
+        "planTo": "Paket {{plan}}"
       }
     },
     "leaveTypes": {
@@ -716,7 +719,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "ends": "fin le {{date}}",
         "status": "statut {{status}}",
         "plan": "offre modifiée",
-        "unlimited": "sans limite"
+        "unlimited": "sans limite",
+        "planTo": "offre {{plan}}"
       }
     },
     "leaveTypes": {
@@ -898,7 +902,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "ends": "scade il {{date}}",
         "status": "stato {{status}}",
         "plan": "piano cambiato",
-        "unlimited": "senza limite"
+        "unlimited": "senza limite",
+        "planTo": "piano {{plan}}"
       }
     },
     "leaveTypes": {

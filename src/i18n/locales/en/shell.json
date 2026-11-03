@@ -223,7 +223,8 @@
       "ends": "ends {{date}}",
       "status": "status {{status}}",
       "plan": "plan changed",
-      "unlimited": "no limit"
+      "unlimited": "no limit",
+      "planTo": "plan {{plan}}"
     }
   },
   "items": {

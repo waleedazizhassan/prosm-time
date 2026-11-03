@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
 import LicenseRepository from "../../core/repositories/LicenseRepository";
 import PlanRepository, { type PlanStatus } from "../../core/repositories/PlanRepository";
@@ -19,6 +20,12 @@ export default function PlanSettingsCard() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [saved, setSaved] = useState(false);
+
+  const location = useLocation();
+  // owner 2026-11-03: a licence-change notification opens this card itself
+  useEffect(() => {
+    if (status && location.hash === "#plan") document.getElementById("plan")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [status, location.hash]);
 
   const load = useCallback(() => {
     void PlanRepository.getStatus().then(setStatus);
@@ -48,6 +55,7 @@ export default function PlanSettingsCard() {
   };
 
   return (
+    <div id="plan" style={{ scrollMarginTop: 80 }}>
     <Card title={t("plan.title")}>
       <dl style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: "var(--space-3)", margin: 0 }}>
         <div>
@@ -81,5 +89,6 @@ export default function PlanSettingsCard() {
       <ErrorText>{error}</ErrorText>
       {saved ? <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("plan.redeemed")}</p> : null}
     </Card>
+    </div>
   );
 }

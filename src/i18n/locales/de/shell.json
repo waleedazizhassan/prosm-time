@@ -223,7 +223,8 @@
       "ends": "endet {{date}}",
       "status": "Status {{status}}",
       "plan": "Paket geändert",
-      "unlimited": "unbegrenzt"
+      "unlimited": "unbegrenzt",
+      "planTo": "Paket {{plan}}"
     }
   },
   "items": {

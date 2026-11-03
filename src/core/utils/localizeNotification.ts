@@ -244,14 +244,15 @@ export default function localizeNotification(notification: AppNotification, t: T
     case "overtime_soon":
       return { title: t("shell:notifications.overtimeSoon.title"), body: t("shell:notifications.overtimeSoon.body", { name: String(data.name ?? ""), time: String(data.time ?? "") }) };
     case "license_changed": {
-      const unlimited = ((key: string, vars?: Record<string, unknown>) => t(`shell:notifications.${key}`, vars))("licenseChanged.unlimited");
+      const tn = (key: string, vars?: Record<string, unknown>) => t(`shell:notifications.${key}`, vars);
+      const unlimited = tn("licenseChanged.unlimited");
       const value = (v: unknown) => (typeof v === "number" ? String(v) : unlimited);
       const parts: string[] = [];
-      if (data.usersChanged) parts.push(((key: string, vars?: Record<string, unknown>) => t(`shell:notifications.${key}`, vars))("licenseChanged.users", { from: value(data.usersFrom), to: value(data.usersTo) }));
-      if (data.devicesChanged) parts.push(((key: string, vars?: Record<string, unknown>) => t(`shell:notifications.${key}`, vars))("licenseChanged.devices", { from: value(data.devicesFrom), to: value(data.devicesTo) }));
-      if (data.expiryChanged) parts.push(((key: string, vars?: Record<string, unknown>) => t(`shell:notifications.${key}`, vars))("licenseChanged.ends", { date: typeof data.expiresAt === "string" ? data.expiresAt.slice(0, 10) : unlimited }));
-      if (data.statusChanged) parts.push(((key: string, vars?: Record<string, unknown>) => t(`shell:notifications.${key}`, vars))("licenseChanged.status", { status: String(data.status ?? "") }));
-      if (data.planChanged) parts.push(((key: string, vars?: Record<string, unknown>) => t(`shell:notifications.${key}`, vars))("licenseChanged.plan"));
+      if (data.usersChanged) parts.push(tn("licenseChanged.users", { from: value(data.usersFrom), to: value(data.usersTo) }));
+      if (data.devicesChanged) parts.push(tn("licenseChanged.devices", { from: value(data.devicesFrom), to: value(data.devicesTo) }));
+      if (data.expiryChanged) parts.push(tn("licenseChanged.ends", { date: typeof data.expiresAt === "string" ? data.expiresAt.slice(0, 10) : unlimited }));
+      if (data.statusChanged) parts.push(tn("licenseChanged.status", { status: String(data.status ?? "") }));
+      if (data.planChanged) parts.push(typeof data.plan === "string" ? tn("licenseChanged.planTo", { plan: data.plan.charAt(0).toUpperCase() + data.plan.slice(1) }) : tn("licenseChanged.plan"));
       return { title: t("shell:notifications.licenseChanged.title"), body: t("shell:notifications.licenseChanged.body", { changes: parts.join(" · ") }) };
     }
     case "daily_digest":
