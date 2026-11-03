@@ -2,9 +2,10 @@ import { Capacitor } from "@capacitor/core";
 import { PushNotifications } from "@capacitor/push-notifications";
 
 import i18n from "../../i18n";
+import { LANGUAGE_CODES } from "../../i18n/languages";
 import { requireSupabaseClient } from "../api/supabaseClient";
 
-const currentLanguage = () => (["ar", "en", "de", "fr", "it"].includes(i18n.language?.slice(0, 2)) ? i18n.language.slice(0, 2) : "ar");
+const currentLanguage = () => (LANGUAGE_CODES.includes(i18n.language?.slice(0, 2)) ? i18n.language.slice(0, 2) : "ar");
 
 // Owner 2026-10-18/20: notifications reach the phone even when the app is
 // closed (Firebase Cloud Messaging). The Android app registers its token

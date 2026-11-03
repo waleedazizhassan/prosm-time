@@ -1,0 +1,153 @@
+{
+  "common": {
+    "footer": "{{org}} · PROSM Time - un messaggio automatico del sistema presenze.",
+    "signature": "PROSM Time",
+    "contacts": "Contattaci:",
+    "days_one": "{{count}} giorno",
+    "days_many": "{{count}} giorni",
+    "days_other": "{{count}} giorni"
+  },
+  "leave": {
+    "types": {
+      "annual": "Ferie annuali",
+      "sick": "Malattia",
+      "unpaid": "Permesso non retribuito",
+      "emergency": "Permesso straordinario",
+      "other": "Altro permesso"
+    },
+    "unpaid": " (non retribuito)",
+    "period": "dal {{from}} al {{to}}",
+    "subject": "Richiesta di ferie - {{name}} - {{period}}",
+    "rows": {
+      "employee": "Dipendente",
+      "type": "Tipo di assenza",
+      "period": "Periodo",
+      "days": "Giorni",
+      "reason": "Motivo",
+      "sentTo": "Inviata a",
+      "approvedBy": "Approvata da",
+      "cancelledBy": "Annullata da",
+      "declinedBy": "Rifiutata da",
+      "note": "Nota",
+      "remaining": "Saldo residuo ({{type}})"
+    },
+    "answerEmployee": "Per rispondere direttamente al dipendente:",
+    "answerEmployeeShort": "Per rispondere al dipendente:",
+    "answerDecider": "Per rispondere a chi ha deciso:",
+    "viewMine": "Vedi le mie ferie",
+    "request": {
+      "title": "Una richiesta di ferie attende la tua decisione",
+      "intro": "{{name}} ha chiesto {{type}}, {{period}}. Esaminala nell’app.",
+      "action": "Esamina la richiesta"
+    },
+    "sent": {
+      "title": "La tua richiesta di ferie è stata inviata",
+      "intro": "La tua richiesta ({{type}}, {{period}}) è stata inviata a {{to}}. La risposta arriverà in questa stessa conversazione."
+    },
+    "requestWithdrawn": {
+      "title": "Una richiesta di ferie è stata ritirata",
+      "intro": "{{name}} ha ritirato la richiesta di {{type}}, {{period}}, prima di una risposta. Non serve nulla da parte tua.",
+      "copyTitle": "La tua richiesta di ferie è stata ritirata",
+      "copyIntro": "Hai ritirato la richiesta di {{type}}, {{period}}; {{to}} è stato avvisato."
+    },
+    "withdrawn": {
+      "title": "Un’assenza approvata è stata annullata",
+      "intro": "{{name}} ha annullato la richiesta approvata di {{type}}, {{period}}; i giorni tornano nel suo saldo. Non serve nulla da parte tua.",
+      "copyTitle": "La tua assenza è annullata",
+      "copyIntro": "Hai annullato la richiesta di {{type}}, {{period}}; i giorni tornano nel tuo saldo."
+    },
+    "approved": {
+      "title": "La tua richiesta è approvata 🎉",
+      "intro": "Congratulazioni, {{name}}! La tua richiesta di {{type}}, {{period}}, è approvata. Buon riposo.",
+      "introBalance": "Congratulazioni, {{name}}! La tua richiesta di {{type}}, {{period}}, è approvata; saldo residuo: {{remaining}}. Buon riposo."
+    },
+    "cancelled": {
+      "title": "La tua assenza è annullata",
+      "intro": "La tua richiesta approvata di {{type}}, {{period}}, è stata annullata; i giorni tornano nel tuo saldo."
+    },
+    "rejected": {
+      "title": "La tua richiesta di ferie non è stata approvata",
+      "intro": "La tua richiesta di {{type}}, {{period}}, non è stata approvata."
+    }
+  },
+  "invite": {
+    "subject": "Sei invitato a unirti a {{org}} su PROSM Time",
+    "title": "Sei invitato a {{org}} su PROSM Time",
+    "body": "Ciao {{name}}, sei stato invitato a unirti a {{org}} su PROSM Time come {{role}}. Inserisci il codice qui sotto nell’app per accettare l’invito e configurare il tuo account.",
+    "codeLabel": "Il tuo codice di verifica:",
+    "expires_one": "Questo invito scade tra {{count}} giorno.",
+    "expires_many": "Questo invito scade tra {{count}} giorni.",
+    "expires_other": "Questo invito scade tra {{count}} giorni.",
+    "ignore": "Se non aspettavi questo invito, puoi ignorare questa e-mail.",
+    "roles": {
+      "manager": "Responsabile / Responsabile di sede",
+      "supervisor": "Supervisore / Caposquadra",
+      "employee": "Dipendente",
+      "read_only": "Sola lettura / Report"
+    },
+    "yourOrganization": "la tua organizzazione"
+  },
+  "reset": {
+    "subject": "Reimposta la password di PROSM Time",
+    "title": "Reimposta la password di PROSM Time",
+    "body": "Ciao {{name}}, abbiamo ricevuto una richiesta di reimpostazione della tua password di PROSM Time. Inserisci il codice qui sotto nell’app per sceglierne una nuova.",
+    "codeLabel": "Il tuo codice di reimpostazione:",
+    "expires_one": "Questo codice scade tra {{count}} minuto.",
+    "expires_many": "Questo codice scade tra {{count}} minuti.",
+    "expires_other": "Questo codice scade tra {{count}} minuti.",
+    "ignore": "Se non l’hai richiesto, ignora questa e-mail: la tua password non cambierà.",
+    "there": ""
+  },
+  "trial": {
+    "licenseSubject": "La tua licenza PROSM Time scade il {{date}}",
+    "licenseBody": "La licenza di {{org}} (licenza {{license}}) scade {{when}}, il {{date}}.",
+    "licenseRenew": "Rinnovala prima di allora perché l’app continui a funzionare; tutti i tuoi dati restano salvati:",
+    "whenDay": "domani",
+    "whenWeek": "tra una settimana",
+    "whenMonth": "tra un mese",
+    "endingSubject": "La tua prova di PROSM Time scade il {{date}}",
+    "endingBody": "La prova di PROSM Time di {{org}} scade il {{date}}. I tuoi dati restano salvati e non verranno eliminati.",
+    "endingContinue": "Per continuare, contatta il team commerciale per rinnovare la licenza (licenza {{license}}):",
+    "endedSubject": "La tua prova di PROSM Time è terminata",
+    "endedBody": "La prova di PROSM Time di {{org}} è terminata. L’organizzazione è ora in sola lettura: tutti continuano a vedere tutto e tutti i tuoi dati restano salvati.",
+    "endedContinue": "Inserisci un codice di attivazione in Impostazioni > Abbonamento dopo l’accesso, oppure contattaci, e tutto torna come prima (licenza {{license}}):"
+  },
+  "licence": {
+    "subject": "PROSM Time - licenza di {{org}} modificata",
+    "greeting": "Ciao {{name}},",
+    "intro": "PROSM ha modificato la licenza di {{org}} in PROSM Time (numero {{license}}):",
+    "noChanges": "I dati della licenza sono stati aggiornati.",
+    "applied": "La modifica è già attiva nell’app. La nuova licenza è allegata in PDF e la trovi anche in Impostazioni > Abbonamento.",
+    "contact": "Domande:",
+    "pdf": {
+      "title": "Certificato di licenza PROSM Time",
+      "tagline": "Work, tracked.",
+      "licenseNumber": "Numero di licenza: {{license}}",
+      "plan": "Piano",
+      "status": "Stato",
+      "users": "Utenti",
+      "devices": "Dispositivi",
+      "validUntil": "Valida fino al",
+      "whatChanged": "Cosa è cambiato",
+      "footer": "Emesso automaticamente da PROSM alla modifica della licenza. Domande: support@prosm.net",
+      "issued": "Emesso il {{date}} UTC",
+      "unlimited": "Illimitati",
+      "noEnd": "Senza scadenza",
+      "usersOf": "{{used}} su {{max}}",
+      "planAll": "Tutto incluso",
+      "change": {
+        "users": "Utenti",
+        "devices": "Dispositivi",
+        "expiry": "Scadenza",
+        "status": "Stato",
+        "plan": "Piano"
+      },
+      "statuses": {
+        "ACTIVE": "Attiva",
+        "SUSPENDED": "Sospesa",
+        "EXPIRED": "Scaduta",
+        "REVOKED": "Revocata"
+      }
+    }
+  }
+}

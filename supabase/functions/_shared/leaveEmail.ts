@@ -10,6 +10,7 @@
 //     it) is told, with the employee's copy.
 // Each reader gets their own language, all on one thread.
 // deno-lint-ignore-file no-explicit-any
+import { emailLanguage, emailT, inSentence, isRtl } from "./emailI18n.ts";
 
 type Person = { id: string; name: string; email: string | null };
 
@@ -29,14 +30,6 @@ export interface LeaveEmailData {
 }
 
 const APP_URL = "https://time.prosm.net";
-
-const TYPES: Record<string, { ar: string; en: string }> = {
-  annual: { ar: "إجازة سنوية", en: "Annual leave" },
-  sick: { ar: "إجازة مرضية", en: "Sick leave" },
-  unpaid: { ar: "إجازة بدون أجر", en: "Unpaid leave" },
-  emergency: { ar: "إجازة طارئة", en: "Emergency leave" },
-  other: { ar: "إجازة أخرى", en: "Other leave" },
-};
 
 const escape = (value: unknown) =>
   String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]!);
@@ -79,33 +72,35 @@ export interface RenderedEmail {
 const link = (email: string) => `<a href="mailto:${escape(email)}" style="color:#1e6fd9;font-weight:normal;">${escape(email)}</a>`;
 const person = (who: { name: string; email: string | null }) => `${escape(who.name)}${who.email ? `<br>${link(who.email)}` : ""}`;
 
-/** The words of one language, for one leave request. */
-function wording(data: LeaveEmailData, language: string) {
-  const ar = language === "ar";
-  const L = (arText: string, enText: string) => (ar ? arText : enText);
-  const typeLabel = TYPES[data.leave.type]?.[ar ? "ar" : "en"] ?? data.leave.typeName ?? data.leave.type;
-  const typeLower = ar ? typeLabel : typeLabel.toLowerCase();
-  const period = L(`من ${day(data.leave.startDate)} إلى ${day(data.leave.endDate)}`, `${day(data.leave.startDate)} to ${day(data.leave.endDate)}`);
+/** The words of one language, for one leave request (owner 2026-11-03: any of the nine). */
+function wording(data: LeaveEmailData, readerLanguage: string) {
+  const language = emailLanguage(readerLanguage);
+  const T = (path: string, vars: Record<string, unknown> = {}) => emailT(language, path, vars);
+  const known = ["annual", "sick", "unpaid", "emergency", "other"].includes(data.leave.type);
+  const typeLabel = known ? T(`leave.types.${data.leave.type}`) : data.leave.typeName ?? data.leave.type;
+  const type = inSentence(language, typeLabel);
+  const period = T("leave.period", { from: day(data.leave.startDate), to: day(data.leave.endDate) });
+  const days = (value: number) => T("common.days", { count: Number(num(value)) });
   const rows: [string, string][] = [
-    [L("الموظف", "Employee"), person(data.requester)],
-    [L("نوع الإجازة", "Leave type"), escape(typeLabel) + (data.leave.isPaid === false ? escape(L(" (بدون أجر)", " (unpaid)")) : "")],
-    [L("المدة", "Period"), escape(period)],
-    [L("عدد الأيام", "Days"), escape(L(`${num(data.leave.days)} يوم`, `${num(data.leave.days)} day(s)`))],
+    [T("leave.rows.employee"), person(data.requester)],
+    [T("leave.rows.type"), escape(typeLabel) + (data.leave.isPaid === false ? escape(T("leave.unpaid")) : "")],
+    [T("leave.rows.period"), escape(period)],
+    [T("leave.rows.days"), escape(days(data.leave.days))],
   ];
-  if (data.leave.reason) rows.push([L("السبب", "Reason"), escape(data.leave.reason)]);
+  if (data.leave.reason) rows.push([T("leave.rows.reason"), escape(data.leave.reason)]);
   return {
-    ar,
-    L,
-    dir: (ar ? "rtl" : "ltr") as "rtl" | "ltr",
+    T,
+    days,
+    dir: (isRtl(language) ? "rtl" : "ltr") as "rtl" | "ltr",
     typeLabel,
-    typeLower,
+    type,
     period,
     rows,
     // v2.3.55 (owner 2026-10-27: "back and forth on the same thread"): every email
     // of one request has this same subject, so mail apps keep them together.
-    subject: L(`طلب إجازة - ${data.requester.name} - ${period}`, `Leave request - ${data.requester.name} - ${period}`),
-    footer: escape(L(`${data.organizationName} · PROSM Time - رسالة تلقائية من نظام الحضور.`, `${data.organizationName} · PROSM Time - an automatic message from the attendance system.`)),
-    answerLine: (arLabel: string, enLabel: string, email: string | null) => (email ? `<br>${escape(L(arLabel, enLabel))} ${link(email)}` : ""),
+    subject: T("leave.subject", { name: data.requester.name, period }),
+    footer: escape(T("common.footer", { org: data.organizationName })),
+    answerLine: (path: string, email: string | null) => (email ? `<br>${escape(T(path))} ${link(email)}` : ""),
   };
 }
 
@@ -127,11 +122,11 @@ export function renderLeaveEmails(data: LeaveEmailData): RenderedEmail[] {
     push(recipient.email, recipient.id, "time-leave-request", (w) =>
       card(
         w.dir,
-        w.L("طلب إجازة بانتظار موافقتك", "A leave request awaits your review"),
-        escape(w.L(`${requester.name} طلب ${w.typeLabel} ${w.period}. راجعه ووافق أو ارفض من البرنامج.`, `${requester.name} asked for ${w.typeLower}, ${w.period}. Review it in the app.`)),
+        w.T("leave.request.title"),
+        escape(w.T("leave.request.intro", { name: requester.name, type: w.type, period: w.period })),
         w.rows,
-        { label: w.L("مراجعة الطلب", "Review the request"), href: `${APP_URL}/manager` },
-        w.footer + w.answerLine("للرد على الموظف مباشرة:", "To answer the employee directly:", requester.email),
+        { label: w.T("leave.request.action"), href: `${APP_URL}/manager` },
+        w.footer + w.answerLine("leave.answerEmployee", requester.email),
       ),
     );
     // the requester's own copy: sent, and to whom
@@ -139,10 +134,10 @@ export function renderLeaveEmails(data: LeaveEmailData): RenderedEmail[] {
       push(requester.email, requester.id, "time-leave-request-sent", (w) =>
         card(
           w.dir,
-          w.L("تم إرسال طلب إجازتك", "Your leave request was sent"),
-          escape(w.L(`أرسلنا طلبك (${w.typeLabel} ${w.period}) إلى ${recipient.name}. هيوصلك الرد على نفس الرسالة.`, `Your request (${w.typeLower}, ${w.period}) went to ${recipient.name}. The answer will come on this same thread.`)),
-          [...w.rows, [w.L("أُرسل إلى", "Sent to"), person(recipient)]],
-          { label: w.L("عرض إجازاتي", "View my leave"), href: `${APP_URL}/leave` },
+          w.T("leave.sent.title"),
+          escape(w.T("leave.sent.intro", { type: w.type, period: w.period, to: recipient.name })),
+          [...w.rows, [w.T("leave.rows.sentTo"), person(recipient)]],
+          { label: w.T("leave.viewMine"), href: `${APP_URL}/leave` },
           w.footer,
         ),
       );
@@ -153,25 +148,11 @@ export function renderLeaveEmails(data: LeaveEmailData): RenderedEmail[] {
   if (data.kind === "request_withdrawn") {
     // withdrawn before anyone answered: nothing is left to decide
     push(recipient.email, recipient.id, "time-leave-request-withdrawn", (w) =>
-      card(
-        w.dir,
-        w.L("تم سحب طلب إجازة", "A leave request was withdrawn"),
-        escape(w.L(`${requester.name} سحب طلب ${w.typeLabel} ${w.period} قبل الرد عليه. مش مطلوب منك أي إجراء.`, `${requester.name} withdrew the request for ${w.typeLower}, ${w.period}, before it was answered. Nothing is needed from you.`)),
-        w.rows,
-        null,
-        w.footer,
-      ),
+      card(w.dir, w.T("leave.requestWithdrawn.title"), escape(w.T("leave.requestWithdrawn.intro", { name: requester.name, type: w.type, period: w.period })), w.rows, null, w.footer),
     );
     if (data.copyToRequester) {
       push(requester.email, requester.id, "time-leave-request-withdrawn-copy", (w) =>
-        card(
-          w.dir,
-          w.L("تم سحب طلب إجازتك", "Your leave request was withdrawn"),
-          escape(w.L(`سحبت طلب ${w.typeLabel} ${w.period}، وبلّغنا ${recipient.name}.`, `You withdrew your request for ${w.typeLower}, ${w.period}; ${recipient.name} has been told.`)),
-          w.rows,
-          null,
-          w.footer,
-        ),
+        card(w.dir, w.T("leave.requestWithdrawn.copyTitle"), escape(w.T("leave.requestWithdrawn.copyIntro", { type: w.type, period: w.period, to: recipient.name })), w.rows, null, w.footer),
       );
     }
     return emails;
@@ -182,16 +163,16 @@ export function renderLeaveEmails(data: LeaveEmailData): RenderedEmail[] {
     push(recipient.email, recipient.id, "time-leave-withdrawn", (w) =>
       card(
         w.dir,
-        w.L("تم إلغاء إجازة معتمدة", "An approved leave was withdrawn"),
-        escape(w.L(`${requester.name} ألغى ${w.typeLabel} ${w.period} بعد الموافقة عليها، ورجعت أيامها لرصيده. مش مطلوب منك أي إجراء.`, `${requester.name} withdrew their approved ${w.typeLower}, ${w.period}; its days are back in their balance. Nothing is needed from you.`)),
+        w.T("leave.withdrawn.title"),
+        escape(w.T("leave.withdrawn.intro", { name: requester.name, type: w.type, period: w.period })),
         w.rows,
         null,
-        w.footer + w.answerLine("للرد على الموظف:", "To answer the employee:", requester.email),
+        w.footer + w.answerLine("leave.answerEmployeeShort", requester.email),
       ),
     );
     if (data.copyToRequester) {
       push(requester.email, requester.id, "time-leave-withdrawn-copy", (w) =>
-        card(w.dir, w.L("تم إلغاء إجازتك", "Your leave is cancelled"), escape(w.L(`ألغيت ${w.typeLabel} ${w.period}، ورجع رصيدها لك.`, `You withdrew your ${w.typeLower}, ${w.period}; its days are back in your balance.`)), w.rows, null, w.footer),
+        card(w.dir, w.T("leave.withdrawn.copyTitle"), escape(w.T("leave.withdrawn.copyIntro", { type: w.type, period: w.period })), w.rows, null, w.footer),
       );
     }
     return emails;
@@ -207,24 +188,18 @@ export function renderLeaveEmails(data: LeaveEmailData): RenderedEmail[] {
   const decider = data.reviewer;
   const decisionRows = (w: ReturnType<typeof wording>) => {
     const rows = [...w.rows];
-    if (decider) rows.push([w.L(approved ? "وافق عليها" : cancelled ? "ألغاها" : "رفضها", approved ? "Approved by" : cancelled ? "Cancelled by" : "Declined by"), person(decider)]);
-    if (data.leave.notes) rows.push([w.L("ملاحظة", "Note"), escape(data.leave.notes)]);
-    if ((approved || cancelled) && data.remainingDays !== null) rows.push([w.L(`المتبقي من رصيد ${w.typeLabel}`, `Remaining ${w.typeLower} balance`), escape(w.L(`${num(data.remainingDays)} يوم`, `${num(data.remainingDays)} day(s)`))]);
+    if (decider) rows.push([w.T(approved ? "leave.rows.approvedBy" : cancelled ? "leave.rows.cancelledBy" : "leave.rows.declinedBy"), person(decider)]);
+    if (data.leave.notes) rows.push([w.T("leave.rows.note"), escape(data.leave.notes)]);
+    if ((approved || cancelled) && data.remainingDays !== null) rows.push([w.T("leave.rows.remaining", { type: w.type }), escape(w.days(data.remainingDays))]);
     return rows;
   };
   push(requester.email, requester.id, `time-leave-${kind}`, (w) => {
-    const title = approved
-      ? w.L("تمت الموافقة على إجازتك 🎉", "Your leave is approved 🎉")
-      : cancelled
-        ? w.L("تم إلغاء إجازتك", "Your leave is cancelled")
-        : w.L("لم تتم الموافقة على طلب إجازتك", "Your leave request was not approved");
-    const remaining = data.remainingDays !== null ? num(data.remainingDays) : null;
+    const title = w.T(approved ? "leave.approved.title" : cancelled ? "leave.cancelled.title" : "leave.rejected.title");
+    const vars = { name: requester.name, type: w.type, period: w.period, remaining: data.remainingDays !== null ? w.days(data.remainingDays) : "" };
     const intro = approved
-      ? w.L(`مبروك يا ${requester.name}! تمت الموافقة على ${w.typeLabel} ${w.period}${remaining !== null ? `، والمتبقي من رصيدك ${remaining} يوم` : ""}. إجازة سعيدة.`, `Congratulations, ${requester.name}! Your ${w.typeLower} is approved, ${w.period}${remaining !== null ? `; ${remaining} day(s) of your balance remain` : ""}. Enjoy your time off.`)
-      : cancelled
-        ? w.L(`تم إلغاء ${w.typeLabel} ${w.period} بعد الموافقة عليها، ورجعت أيامها لرصيدك.`, `Your approved ${w.typeLower}, ${w.period}, was cancelled; its days are back in your balance.`)
-        : w.L(`للأسف لم تتم الموافقة على ${w.typeLabel} ${w.period}.`, `Your ${w.typeLower} request, ${w.period}, was not approved.`);
-    return card(w.dir, title, escape(intro), decisionRows(w), { label: w.L("عرض إجازاتي", "View my leave"), href: `${APP_URL}/leave` }, w.footer + w.answerLine("للرد على صاحب القرار:", "To answer the person who decided:", decider?.email ?? null));
+      ? w.T(data.remainingDays !== null ? "leave.approved.introBalance" : "leave.approved.intro", vars)
+      : w.T(cancelled ? "leave.cancelled.intro" : "leave.rejected.intro", vars);
+    return card(w.dir, title, escape(intro), decisionRows(w), { label: w.T("leave.viewMine"), href: `${APP_URL}/leave` }, w.footer + w.answerLine("leave.answerDecider", decider?.email ?? null));
   });
   return emails;
 }

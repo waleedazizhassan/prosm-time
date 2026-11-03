@@ -1,0 +1,153 @@
+{
+  "common": {
+    "footer": "{{org}} · PROSM Time - un message automatique du système de pointage.",
+    "signature": "PROSM Time",
+    "contacts": "Nous contacter :",
+    "days_one": "{{count}} jour",
+    "days_many": "{{count}} jours",
+    "days_other": "{{count}} jours"
+  },
+  "leave": {
+    "types": {
+      "annual": "Congé annuel",
+      "sick": "Congé maladie",
+      "unpaid": "Congé sans solde",
+      "emergency": "Congé exceptionnel",
+      "other": "Autre congé"
+    },
+    "unpaid": " (sans solde)",
+    "period": "du {{from}} au {{to}}",
+    "subject": "Demande de congé - {{name}} - {{period}}",
+    "rows": {
+      "employee": "Employé",
+      "type": "Type de congé",
+      "period": "Période",
+      "days": "Jours",
+      "reason": "Motif",
+      "sentTo": "Envoyée à",
+      "approvedBy": "Approuvé par",
+      "cancelledBy": "Annulé par",
+      "declinedBy": "Refusé par",
+      "note": "Remarque",
+      "remaining": "Solde restant ({{type}})"
+    },
+    "answerEmployee": "Pour répondre directement à l’employé :",
+    "answerEmployeeShort": "Pour répondre à l’employé :",
+    "answerDecider": "Pour répondre à la personne qui a décidé :",
+    "viewMine": "Voir mes congés",
+    "request": {
+      "title": "Une demande de congé attend votre décision",
+      "intro": "{{name}} a demandé un {{type}}, {{period}}. Examinez-la dans l’application.",
+      "action": "Examiner la demande"
+    },
+    "sent": {
+      "title": "Votre demande de congé a été envoyée",
+      "intro": "Votre demande ({{type}}, {{period}}) a été envoyée à {{to}}. La réponse arrivera dans ce même fil."
+    },
+    "requestWithdrawn": {
+      "title": "Une demande de congé a été retirée",
+      "intro": "{{name}} a retiré sa demande de {{type}}, {{period}}, avant toute réponse. Aucune action n’est nécessaire.",
+      "copyTitle": "Votre demande de congé a été retirée",
+      "copyIntro": "Vous avez retiré votre demande de {{type}}, {{period}} ; {{to}} a été prévenu."
+    },
+    "withdrawn": {
+      "title": "Un congé approuvé a été annulé",
+      "intro": "{{name}} a annulé son {{type}} approuvé, {{period}} ; ses jours reviennent à son solde. Aucune action n’est nécessaire.",
+      "copyTitle": "Votre congé est annulé",
+      "copyIntro": "Vous avez annulé votre {{type}}, {{period}} ; ses jours reviennent à votre solde."
+    },
+    "approved": {
+      "title": "Votre congé est approuvé 🎉",
+      "intro": "Félicitations, {{name}} ! Votre {{type}} est approuvé, {{period}}. Bon repos.",
+      "introBalance": "Félicitations, {{name}} ! Votre {{type}} est approuvé, {{period}} ; il vous reste {{remaining}} de solde. Bon repos."
+    },
+    "cancelled": {
+      "title": "Votre congé est annulé",
+      "intro": "Votre {{type}} approuvé, {{period}}, a été annulé ; ses jours reviennent à votre solde."
+    },
+    "rejected": {
+      "title": "Votre demande de congé n’a pas été approuvée",
+      "intro": "Votre demande de {{type}}, {{period}}, n’a pas été approuvée."
+    }
+  },
+  "invite": {
+    "subject": "Vous êtes invité à rejoindre {{org}} sur PROSM Time",
+    "title": "Vous êtes invité à rejoindre {{org}} sur PROSM Time",
+    "body": "Bonjour {{name}}, vous êtes invité à rejoindre {{org}} sur PROSM Time en tant que {{role}}. Saisissez le code ci-dessous dans l’application pour accepter l’invitation et créer votre compte.",
+    "codeLabel": "Votre code de vérification :",
+    "expires_one": "Cette invitation expire dans {{count}} jour.",
+    "expires_many": "Cette invitation expire dans {{count}} jours.",
+    "expires_other": "Cette invitation expire dans {{count}} jours.",
+    "ignore": "Si vous n’attendiez pas cette invitation, vous pouvez ignorer cet e-mail.",
+    "roles": {
+      "manager": "Responsable / Responsable de site",
+      "supervisor": "Superviseur / Chef d’équipe",
+      "employee": "Employé",
+      "read_only": "Lecture seule / Rapports"
+    },
+    "yourOrganization": "votre organisation"
+  },
+  "reset": {
+    "subject": "Réinitialisez votre mot de passe PROSM Time",
+    "title": "Réinitialisez votre mot de passe PROSM Time",
+    "body": "Bonjour {{name}}, nous avons reçu une demande de réinitialisation de votre mot de passe PROSM Time. Saisissez le code ci-dessous dans l’application pour en choisir un nouveau.",
+    "codeLabel": "Votre code de réinitialisation :",
+    "expires_one": "Ce code expire dans {{count}} minute.",
+    "expires_many": "Ce code expire dans {{count}} minutes.",
+    "expires_other": "Ce code expire dans {{count}} minutes.",
+    "ignore": "Si vous n’êtes pas à l’origine de cette demande, ignorez cet e-mail : votre mot de passe ne changera pas.",
+    "there": ""
+  },
+  "trial": {
+    "licenseSubject": "Votre licence PROSM Time se termine le {{date}}",
+    "licenseBody": "La licence de {{org}} (licence {{license}}) se termine {{when}}, le {{date}}.",
+    "licenseRenew": "Renouvelez-la avant cette date pour que l’application continue de fonctionner ; toutes vos données sont conservées :",
+    "whenDay": "demain",
+    "whenWeek": "dans une semaine",
+    "whenMonth": "dans un mois",
+    "endingSubject": "Votre essai PROSM Time se termine le {{date}}",
+    "endingBody": "L’essai PROSM Time de {{org}} se termine le {{date}}. Vos données sont conservées et ne seront pas supprimées.",
+    "endingContinue": "Pour continuer, contactez l’équipe commerciale pour renouveler la licence (licence {{license}}) :",
+    "endedSubject": "Votre essai PROSM Time est terminé",
+    "endedBody": "L’essai PROSM Time de {{org}} est terminé. L’organisation est désormais en lecture seule : tout le monde voit tout, et toutes vos données sont conservées.",
+    "endedContinue": "Saisissez un code d’activation dans Paramètres > Abonnement après connexion, ou contactez-nous, et tout reprend comme avant (licence {{license}}) :"
+  },
+  "licence": {
+    "subject": "PROSM Time - licence de {{org}} modifiée",
+    "greeting": "Bonjour {{name}},",
+    "intro": "PROSM a modifié la licence de {{org}} dans PROSM Time (numéro {{license}}) :",
+    "noChanges": "Les informations de la licence ont été mises à jour.",
+    "applied": "La modification s’applique déjà dans l’application. La nouvelle licence est jointe en PDF ; vous la trouvez aussi dans Paramètres > Abonnement.",
+    "contact": "Questions :",
+    "pdf": {
+      "title": "Certificat de licence PROSM Time",
+      "tagline": "Work, tracked.",
+      "licenseNumber": "Numéro de licence : {{license}}",
+      "plan": "Offre",
+      "status": "Statut",
+      "users": "Utilisateurs",
+      "devices": "Appareils",
+      "validUntil": "Valable jusqu’au",
+      "whatChanged": "Ce qui a changé",
+      "footer": "Émis automatiquement par PROSM lors de la modification de la licence. Questions : support@prosm.net",
+      "issued": "Émis le {{date}} UTC",
+      "unlimited": "Illimité",
+      "noEnd": "Sans date de fin",
+      "usersOf": "{{used}} sur {{max}}",
+      "planAll": "Tout inclus",
+      "change": {
+        "users": "Utilisateurs",
+        "devices": "Appareils",
+        "expiry": "Date de fin",
+        "status": "Statut",
+        "plan": "Offre"
+      },
+      "statuses": {
+        "ACTIVE": "Active",
+        "SUSPENDED": "Suspendue",
+        "EXPIRED": "Expirée",
+        "REVOKED": "Révoquée"
+      }
+    }
+  }
+}
