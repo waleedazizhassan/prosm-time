@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="capacitor_background_geolocation_notification_channel_name">PROSM Time · Frequência</string>
+    <string name="reminder_channel_name">Lembretes de entrada e saída</string>
+    <string name="reminder_channel_description">Toca com o som do alarme, mesmo com o celular no silencioso.</string>
+</resources>

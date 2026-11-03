@@ -10,7 +10,11 @@ describe("initialLanguage", () => {
   });
 
   it("skips unsupported device languages, then falls back to English", () => {
-    expect(initialLanguage(null, ["es-ES", "de-DE"])).toBe("de");
+    expect(initialLanguage(null, ["ja-JP", "de-DE"])).toBe("de");
+    expect(initialLanguage(null, ["es-MX"])).toBe("es");
+    expect(initialLanguage(null, ["pt-BR"])).toBe("pt");
+    expect(initialLanguage(null, ["zh-Hans-CN"])).toBe("zh");
+    expect(initialLanguage(null, ["ru-RU"])).toBe("ru");
     expect(initialLanguage(null, ["ja-JP"])).toBe("en");
     expect(initialLanguage(null, [])).toBe("en");
   });

@@ -283,7 +283,7 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
       "contact": "Fragen:",
       "pdf": {
         "title": "PROSM Time Lizenzzertifikat",
-        "tagline": "Work, tracked.",
+        "tagline": "Zeiterfassung, der Sie vertrauen - vor Ort, pünktlich.",
         "licenseNumber": "Lizenznummer: {{license}}",
         "plan": "Paket",
         "status": "Status",
@@ -433,7 +433,7 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
       "contact": "Questions:",
       "pdf": {
         "title": "PROSM Time licence certificate",
-        "tagline": "Work, tracked.",
+        "tagline": "Attendance you can trust - on site, on time.",
         "licenseNumber": "Licence number: {{license}}",
         "plan": "Plan",
         "status": "Status",
@@ -586,7 +586,7 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
       "contact": "Dudas:",
       "pdf": {
         "title": "Certificado de licencia de PROSM Time",
-        "tagline": "Work, tracked.",
+        "tagline": "Asistencia en la que puedes confiar: en el lugar, a tiempo.",
         "licenseNumber": "Número de licencia: {{license}}",
         "plan": "Plan",
         "status": "Estado",
@@ -739,7 +739,7 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
       "contact": "Questions :",
       "pdf": {
         "title": "Certificat de licence PROSM Time",
-        "tagline": "Work, tracked.",
+        "tagline": "Une présence fiable - sur site, à l'heure.",
         "licenseNumber": "Numéro de licence : {{license}}",
         "plan": "Offre",
         "status": "Statut",
@@ -892,7 +892,7 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
       "contact": "Domande:",
       "pdf": {
         "title": "Certificato di licenza PROSM Time",
-        "tagline": "Work, tracked.",
+        "tagline": "Presenze affidabili - in sede, in orario.",
         "licenseNumber": "Numero di licenza: {{license}}",
         "plan": "Piano",
         "status": "Stato",
@@ -1045,7 +1045,7 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
       "contact": "Dúvidas:",
       "pdf": {
         "title": "Certificado de licença do PROSM Time",
-        "tagline": "Work, tracked.",
+        "tagline": "Frequência em que você pode confiar - no local, na hora.",
         "licenseNumber": "Número da licença: {{license}}",
         "plan": "Plano",
         "status": "Situação",
@@ -1201,7 +1201,7 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
       "contact": "Вопросы:",
       "pdf": {
         "title": "Сертификат лицензии PROSM Time",
-        "tagline": "Work, tracked.",
+        "tagline": "Учёт рабочего времени, которому можно доверять, - на месте и вовремя.",
         "licenseNumber": "Номер лицензии: {{license}}",
         "plan": "Тариф",
         "status": "Статус",
@@ -1348,7 +1348,7 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
       "contact": "如有疑问：",
       "pdf": {
         "title": "PROSM Time 许可证书",
-        "tagline": "Work, tracked.",
+        "tagline": "值得信赖的考勤 - 在现场，准时。",
         "licenseNumber": "许可证编号：{{license}}",
         "plan": "套餐",
         "status": "状态",

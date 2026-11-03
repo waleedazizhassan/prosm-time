@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="capacitor_background_geolocation_notification_channel_name">PROSM Time · Asistencia</string>
+    <string name="reminder_channel_name">Recordatorios de entrada y salida</string>
+    <string name="reminder_channel_description">Suena con el tono de alarma, aunque el teléfono esté en silencio.</string>
+</resources>

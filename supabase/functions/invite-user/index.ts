@@ -33,14 +33,8 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
 import { checkInstallationGate } from "../_shared/installationGate.ts";
 import { sendEmail } from "../_shared/emailService.ts";
-import { renderInvitationEmail } from "../_shared/emailTemplates.ts";
-
-const ROLE_LABELS: Record<string, string> = {
-  manager: "Manager / Site Manager",
-  supervisor: "Supervisor / Team Lead",
-  employee: "Employee",
-  read_only: "Read-only / Reporting",
-};
+import { invitationRoleLabel, invitationSubject, renderInvitationEmail } from "../_shared/emailTemplates.ts";
+import { emailLanguage, emailT } from "../_shared/emailI18n.ts";
 
 function generateVerificationCode(): string {
   const randomBuffer = new Uint32Array(1);
@@ -108,6 +102,8 @@ serve(async (request: Request) => {
 
     const payload = await request.json().catch(() => ({}));
     const { email, fullName, roleKey } = payload;
+    // Owner 2026-11-03: the invitation goes in the app's language - the one the inviter is using
+    // (sent by the app), else the inviter's own saved language.
 
     if (!email || typeof email !== "string" || !email.includes("@")) {
       return errorResponse("A valid email is required.", 400, "INVALID_REQUEST");
@@ -200,13 +196,20 @@ serve(async (request: Request) => {
     // reset emails is broken (points at localhost) - drop it, the code
     // is enough." No app URL is threaded through anywhere in this flow
     // any more; the verification code is the only real call to action.
+    let language = typeof payload.language === "string" ? payload.language : "";
+    if (!language) {
+      const { data: saved } = await serviceClient.rpc("prosm_time_user_language", { p_user: callerRow.id });
+      language = typeof saved === "string" ? saved : "en";
+    }
+    language = emailLanguage(language);
     const emailResult = await sendEmail({
       to: normalizedEmail,
-      subject: `You're invited to join ${organizationRow?.name ?? "your organization"} on PROSM Time`,
+      subject: invitationSubject(language, organizationRow?.name ?? null),
       html: renderInvitationEmail({
-        organizationName: organizationRow?.name ?? "your organization",
+        language,
+        organizationName: organizationRow?.name ?? emailT(language, "invite.yourOrganization"),
         inviteeName: fullName.trim(),
-        roleLabel: ROLE_LABELS[roleKey] ?? roleKey,
+        roleLabel: invitationRoleLabel(language, roleKey),
         verificationCode,
         expiryDays,
       }),

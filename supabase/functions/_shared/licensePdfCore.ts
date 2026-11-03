@@ -1,45 +1,105 @@
 // Owner 2026-11-03: every licence change made in PROSM Platform Manager reaches the owner
-// by email with the new licence as a PDF. The page itself, independent of where it runs
-// (the Edge Function passes pdf-lib and fontkit in). Arabic is drawn by fontkit, which
-// joins the letters and lays a right-to-left run out itself; a line that mixes Arabic with
-// numbers or Latin is cut into runs, each drawn in its own font, from the right.
+// by email with the new licence as a PDF, in the owner's language (any of the app's nine).
+// The page itself, independent of where it runs (the Edge Function passes pdf-lib and fontkit
+// in, and the texts already in the language). Each line is cut into script runs - Arabic,
+// Chinese, and the rest (Latin, Cyrillic, digits) - each drawn in its own font; fontkit joins
+// Arabic letters and lays an Arabic run out right to left itself. An Arabic page reads from
+// the right, the others from the left.
 // deno-lint-ignore-file no-explicit-any
 
-export interface LicencePdfData {
-  organizationName: string;
+export interface LicencePdfTexts {
+  title: string;
+  tagline: string;
   licenseNumber: string;
   plan: string;
   status: string;
-  maxUsers: number | null;
-  activeUsers: number | null;
-  maxDevices: number | null;
-  expiresAt: string | null;
+  users: string;
+  devices: string;
+  validUntil: string;
+  whatChanged: string;
+  noChanges: string;
+  footer: string;
+  issued: string;
+}
+
+export interface LicencePdfData {
+  rtl: boolean;
+  texts: LicencePdfTexts;
+  organizationName: string;
+  planValue: string;
+  statusValue: string;
+  usersValue: string;
+  devicesValue: string;
+  validUntilValue: string;
+  /** from is "" when there is nothing before (a new end date, a status). */
   changes: { label: string; from: string; to: string }[];
-  issuedAt: string;
 }
 
 export interface PdfLibs {
   PDFDocument: any;
-  StandardFonts: any;
   rgb: (r: number, g: number, b: number) => any;
   fontkit: any;
 }
 
-const ARABIC_CHAR = /[؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿]/;
-// An Arabic run keeps the spaces and Arabic punctuation between its words.
-const RUNS = /[؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿]+(?:[\s،؛]+[؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿]+)*|[^؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿]+/g;
+/** presubset: already cut down to the page's characters (see fontSubset.ts), so embedded whole. */
+type Pair = { regular: Uint8Array; bold: Uint8Array; presubset?: boolean };
+export interface LicencePdfFonts {
+  /** Latin, Cyrillic, Greek, digits (Noto Sans). */
+  latin: Pair;
+  /** Needed only when a text has Arabic letters (Noto Naskh Arabic). */
+  arabic?: Pair | null;
+  /** Needed only when a text has Chinese characters (Noto Sans SC, presubset). */
+  cjk?: Pair | null;
+}
 
-const PLAN_NAMES: Record<string, string> = { legacy: "كل المزايا", starter: "Starter", business: "Business", pro: "Pro" };
-const STATUS: Record<string, string> = { ACTIVE: "فعّال", SUSPENDED: "موقوف", EXPIRED: "منتهٍ", REVOKED: "ملغى" };
+const ARABIC = /[؀-ۿݐ-ݿࢠ-ࣿﭐ-﷿ﹰ-﻿]/;
+const CJK = /[⺀-⿟　-〿぀-ヿ㐀-䶿一-鿿豈-﫿＀-￯]/;
+const NEUTRAL = /[\s:.,;!?\-()\/·،؛]/;
+type Script = "arabic" | "cjk" | "latin";
 
-export async function buildLicencePdf(libs: PdfLibs, fonts: { regular: Uint8Array; bold: Uint8Array }, logoPng: Uint8Array | null, data: LicencePdfData): Promise<Uint8Array> {
-  const { PDFDocument, StandardFonts, rgb, fontkit } = libs;
+/** Which extra fonts these texts need - so a caller fetches only those. */
+export function scriptsNeeded(texts: string[]): { arabic: boolean; cjk: boolean } {
+  const all = texts.join(" ");
+  return { arabic: ARABIC.test(all), cjk: CJK.test(all) };
+}
+
+function runsOf(text: string): { run: string; script: Script }[] {
+  const chars = [...text];
+  const strong: (Script | null)[] = chars.map((ch) => (ARABIC.test(ch) ? "arabic" : CJK.test(ch) ? "cjk" : NEUTRAL.test(ch) ? null : "latin"));
+  // A space or mark between two letters of one script belongs to that script; anywhere else,
+  // to the Latin font.
+  const scripts = strong.map((s, i) => {
+    if (s) return s;
+    let before: Script | null = null;
+    for (let j = i - 1; j >= 0 && !before; j--) before = strong[j];
+    let after: Script | null = null;
+    for (let j = i + 1; j < chars.length && !after; j++) after = strong[j];
+    return before && before === after ? before : "latin";
+  });
+  const runs: { run: string; script: Script }[] = [];
+  chars.forEach((ch, i) => {
+    const last = runs[runs.length - 1];
+    if (last && last.script === scripts[i]) last.run += ch;
+    else runs.push({ run: ch, script: scripts[i] });
+  });
+  return runs;
+}
+
+export async function buildLicencePdf(libs: PdfLibs, fonts: LicencePdfFonts, logoPng: Uint8Array | null, data: LicencePdfData): Promise<Uint8Array> {
+  const { PDFDocument, rgb, fontkit } = libs;
   const doc = await PDFDocument.create();
   doc.registerFontkit(fontkit);
-  doc.setTitle(`PROSM Time licence ${data.licenseNumber}`);
+  doc.setTitle(data.texts.title);
   doc.setAuthor("PROSM");
-  const ar = { regular: await doc.embedFont(fonts.regular, { subset: true }), bold: await doc.embedFont(fonts.bold, { subset: true }) };
-  const la = { regular: await doc.embedFont(StandardFonts.Helvetica), bold: await doc.embedFont(StandardFonts.HelveticaBold) };
+  const embed = async (pair: Pair) => ({
+    regular: await doc.embedFont(pair.regular, { subset: !pair.presubset }),
+    bold: await doc.embedFont(pair.bold, { subset: !pair.presubset }),
+  });
+  const latin = await embed(fonts.latin);
+  const arabic = fonts.arabic ? await embed(fonts.arabic) : latin;
+  const cjk = fonts.cjk ? await embed(fonts.cjk) : latin;
+  const fontFor = { latin, arabic, cjk };
+
   const page = doc.addPage([595.28, 841.89]);
   const W = page.getWidth();
   const H = page.getHeight();
@@ -52,100 +112,124 @@ export async function buildLicencePdf(libs: PdfLibs, fonts: { regular: Uint8Arra
   const soft = rgb(0.95, 0.97, 0.99);
   const white = rgb(1, 1, 1);
   const margin = 44;
+  const rtl = data.rtl;
 
   type Weight = "regular" | "bold";
-  // In a right-to-left line, the spaces and marks a Latin run starts or ends with sit on
-  // the Arabic side: "رقم الترخيص: X" shows as "X :رقم الترخيص".
+  // In a right-to-left line, the spaces and marks a left-to-right run starts or ends with sit
+  // on the Arabic side: "رقم الترخيص: X" shows as "X :رقم الترخيص".
   const flip = (run: string) => {
     const match = run.match(/^([\s:.,;!?\-]*)([\s\S]*?)([\s:.,;!?\-]*)$/);
     if (!match) return run;
     const [, lead, core, trail] = match;
     return [...trail].reverse().join("") + core + [...lead].reverse().join("");
   };
-  const runsOf = (text: string) => {
-    const runs = (text.match(RUNS) ?? [text]).map((run) => ({ run, arabic: ARABIC_CHAR.test(run) }));
-    if (!runs.some((r) => r.arabic)) return runs;
-    return runs.map((r) => (r.arabic ? r : { run: flip(r.run), arabic: false }));
+  const laidOut = (text: string) => {
+    const runs = runsOf(text);
+    if (!rtl || !runs.some((r) => r.script === "arabic")) return runs;
+    return runs.map((r) => (r.script === "arabic" ? r : { ...r, run: flip(r.run) }));
   };
   const widthOf = (text: string, size: number, weight: Weight) =>
-    runsOf(text).reduce((sum, { run, arabic }) => sum + (arabic ? ar : la)[weight].widthOfTextAtSize(arabic ? run : run.replace(/[^\x20-\x7E -ÿ]/g, "?"), size), 0);
-  // Draws a line whose right edge is at x: Arabic lines read from the right.
-  const drawRight = (text: string, xRight: number, y: number, size: number, weight: Weight = "regular", color = ink) => {
-    let x = xRight;
-    for (const { run, arabic } of runsOf(text)) {
-      const font = (arabic ? ar : la)[weight];
-      const shown = arabic ? run : run.replace(/[^\x20-\x7E -ÿ]/g, "?");
-      const w = font.widthOfTextAtSize(shown, size);
-      x -= w;
-      page.drawText(shown, { x, y, size, font, color });
+    laidOut(text).reduce((sum, { run, script }) => sum + fontFor[script][weight].widthOfTextAtSize(run, size), 0);
+  const drawFrom = (text: string, xLeft: number, y: number, size: number, weight: Weight, color: any) => {
+    const runs = laidOut(text);
+    let x = xLeft;
+    // A right-to-left page puts the first run at the right end of the line.
+    for (const { run, script } of rtl ? [...runs].reverse() : runs) {
+      const font = fontFor[script][weight];
+      page.drawText(run, { x, y, size, font, color });
+      x += font.widthOfTextAtSize(run, size);
     }
   };
-  const drawLeft = (text: string, xLeft: number, y: number, size: number, weight: Weight = "regular", color = ink) =>
-    drawRight(text, xLeft + widthOf(text, size, weight), y, size, weight, color);
+  const drawLeft = (text: string, xLeft: number, y: number, size: number, weight: Weight = "regular", color = ink) => drawFrom(text, xLeft, y, size, weight, color);
+  const drawRight = (text: string, xRight: number, y: number, size: number, weight: Weight = "regular", color = ink) =>
+    drawFrom(text, xRight - widthOf(text, size, weight), y, size, weight, color);
+  // "start" is the side a line begins on: the right on an Arabic page, the left otherwise.
+  const drawStart = (text: string, inset: number, y: number, size: number, weight: Weight = "regular", color = ink) =>
+    rtl ? drawRight(text, W - inset, y, size, weight, color) : drawLeft(text, inset, y, size, weight, color);
+  const drawEnd = (text: string, inset: number, y: number, size: number, weight: Weight = "regular", color = ink) =>
+    rtl ? drawLeft(text, inset, y, size, weight, color) : drawRight(text, W - inset, y, size, weight, color);
+  const textWidth = (maxWidth: number, text: string, size: number, weight: Weight) => {
+    // Shrinks a long name so it stays on one line.
+    let s = size;
+    while (s > 8 && widthOf(text, s, weight) > maxWidth) s -= 0.5;
+    return s;
+  };
 
-  // header band
+  // header band: the logo on the end side, the title on the start side
   page.drawRectangle({ x: 0, y: H - 150, width: W, height: 150, color: navy });
   page.drawRectangle({ x: 0, y: H - 154, width: W * 0.62, height: 4, color: blue });
   page.drawRectangle({ x: W * 0.62, y: H - 154, width: W * 0.38, height: 4, color: green });
+  let logoWidth = 0;
   if (logoPng) {
     const logo = await doc.embedPng(logoPng);
     const h = 108;
-    page.drawImage(logo, { x: margin - 6, y: H - 132, width: (logo.width / logo.height) * h, height: h });
+    logoWidth = (logo.width / logo.height) * h;
+    page.drawImage(logo, { x: rtl ? margin - 6 : W - margin + 6 - logoWidth, y: H - 132, width: logoWidth, height: h });
   }
-  drawRight("شهادة ترخيص PROSM Time", W - margin, H - 66, 24, "bold", white);
-  drawRight("PROSM Time licence certificate", W - margin, H - 92, 12, "regular", rgb(0.8, 0.86, 0.95));
-  drawRight("حضور تثق فيه، في الموقع وفي الوقت.", W - margin, H - 118, 11, "regular", rgb(0.55, 0.92, 0.7));
+  const titleRoom = W - margin * 2 - logoWidth - 12;
+  drawStart(data.texts.title, margin, H - 72, textWidth(titleRoom, data.texts.title, 24, "bold"), "bold", white);
+  drawStart(data.texts.tagline, margin, H - 104, textWidth(titleRoom, data.texts.tagline, 12, "regular"), "regular", rgb(0.55, 0.92, 0.7));
 
   // the licence
   let y = H - 200;
-  drawRight(data.organizationName, W - margin, y, 20, "bold", navy);
+  drawStart(data.organizationName, margin, y, textWidth(W - margin * 2, data.organizationName, 20, "bold"), "bold", navy);
   y -= 22;
-  drawRight(`رقم الترخيص: ${data.licenseNumber}`, W - margin, y, 11, "regular", muted);
+  drawStart(data.texts.licenseNumber, margin, y, 11, "regular", muted);
   y -= 30;
 
-  const unlimited = "بلا حد";
-  const rows: [string, string, string][] = [
-    ["الباقة", "Plan", PLAN_NAMES[data.plan] ?? data.plan],
-    ["الحالة", "Status", STATUS[data.status] ?? data.status],
-    ["المستخدمون", "Users", data.maxUsers === null ? unlimited : data.activeUsers === null ? String(data.maxUsers) : `${data.activeUsers} / ${data.maxUsers}`],
-    ["الأجهزة", "Devices", data.maxDevices === null ? unlimited : String(data.maxDevices)],
-    ["ينتهي في", "Valid until", data.expiresAt ? data.expiresAt.slice(0, 10) : "بدون تاريخ انتهاء"],
+  const rows: [string, string][] = [
+    [data.texts.plan, data.planValue],
+    [data.texts.status, data.statusValue],
+    [data.texts.users, data.usersValue],
+    [data.texts.devices, data.devicesValue],
+    [data.texts.validUntil, data.validUntilValue],
   ];
   const rowH = 34;
   page.drawRectangle({ x: margin, y: y - rows.length * rowH + 8, width: W - margin * 2, height: rows.length * rowH, color: soft, borderColor: line, borderWidth: 1 });
-  rows.forEach(([arLabel, enLabel, value], index) => {
-    drawRight(arLabel, W - margin - 14, y - 14, 12.5, "bold", navy);
-    drawRight(enLabel, W - margin - 130, y - 14, 9, "regular", muted);
-    drawLeft(value, margin + 16, y - 14, 13, "bold", ink);
+  rows.forEach(([label, value], index) => {
+    drawStart(label, margin + 14, y - 14, 12.5, "bold", navy);
+    drawEnd(value, margin + 16, y - 14, 13, "bold", ink);
     y -= rowH;
     if (index < rows.length - 1) page.drawLine({ start: { x: margin + 10, y: y + 8 }, end: { x: W - margin - 10, y: y + 8 }, thickness: 0.6, color: line });
   });
 
-  // what changed
+  // what changed: label on the start side; "before -> after" read in the page's direction,
+  // ending at the end side
   y -= 26;
-  drawRight("ما الذي تغيّر", W - margin, y, 15, "bold", blue);
-  drawLeft("What changed", margin, y, 10, "regular", muted);
+  drawStart(data.texts.whatChanged, margin, y, 15, "bold", blue);
   y -= 10;
+  const arrow = (xFrom: number, xTo: number, yMid: number) => {
+    page.drawLine({ start: { x: xFrom, y: yMid }, end: { x: xTo, y: yMid }, thickness: 1, color: muted });
+    const dir = xTo > xFrom ? 1 : -1;
+    page.drawLine({ start: { x: xTo, y: yMid }, end: { x: xTo - dir * 4, y: yMid + 3 }, thickness: 1, color: muted });
+    page.drawLine({ start: { x: xTo, y: yMid }, end: { x: xTo - dir * 4, y: yMid - 3 }, thickness: 1, color: muted });
+  };
   for (const change of data.changes) {
     y -= 26;
-    page.drawCircle({ x: W - margin - 6, y: y + 4, size: 3.2, color: green });
-    drawRight(change.label, W - margin - 16, y, 12, "bold", ink);
-    // reads from the right: before, then the arrow, then after
-    drawLeft(`${change.to}`, margin + 16, y, 12, "bold", ink);
+    page.drawCircle({ x: rtl ? W - margin - 6 : margin + 6, y: y + 4, size: 3.2, color: green });
+    drawStart(change.label, margin + 16, y, 12, "bold", ink);
     const toWidth = widthOf(change.to, 12, "bold");
-    drawLeft("<-", margin + 24 + toWidth, y, 11, "regular", muted);
-    drawLeft(`${change.from}`, margin + 44 + toWidth, y, 12, "regular", muted);
+    drawEnd(change.to, margin + 16, y, 12, "bold", ink);
+    if (change.from) {
+      // on an Arabic page the line ends on the left: [after] <- [before]
+      const afterEdge = rtl ? margin + 16 + toWidth + 6 : W - margin - 16 - toWidth - 6;
+      const arrowLength = 16;
+      const beforeEdge = rtl ? afterEdge + arrowLength + 6 : afterEdge - arrowLength - 6;
+      arrow(rtl ? afterEdge + arrowLength : afterEdge - arrowLength, afterEdge, y + 4);
+      if (rtl) drawLeft(change.from, beforeEdge, y, 12, "regular", muted);
+      else drawRight(change.from, beforeEdge, y, 12, "regular", muted);
+    }
   }
   if (data.changes.length === 0) {
     y -= 26;
-    drawRight("تحديث بيانات الترخيص.", W - margin - 16, y, 12, "regular", ink);
+    drawStart(data.texts.noChanges, margin + 16, y, 12, "regular", ink);
   }
 
   // footer
   page.drawRectangle({ x: 0, y: 0, width: W, height: 70, color: soft });
   page.drawLine({ start: { x: 0, y: 70 }, end: { x: W, y: 70 }, thickness: 0.8, color: line });
-  drawRight("صادرة آليًا من PROSM عند تعديل الترخيص. للاستفسار: support@prosm.net", W - margin, 42, 10, "regular", muted);
-  drawLeft(`Issued ${data.issuedAt.slice(0, 16).replace("T", " ")} UTC  -  time.prosm.net`, margin, 22, 9, "regular", muted);
+  drawStart(data.texts.footer, margin, 42, textWidth(W - margin * 2, data.texts.footer, 10, "regular"), "regular", muted);
+  drawStart(`${data.texts.issued}  ·  time.prosm.net`, margin, 22, 9, "regular", muted);
 
   return await doc.save();
 }
