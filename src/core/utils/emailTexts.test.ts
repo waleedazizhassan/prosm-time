@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 import { emailLanguage, emailT, isRtl } from "../../../supabase/functions/_shared/emailI18n";
+// @ts-expect-error - plain .mjs build script
 import { buildEmailTexts, renderEmailTextsModule } from "../../../scripts/gen-push-texts.mjs";
 import { LANGUAGE_CODES } from "../../i18n/languages";
 
