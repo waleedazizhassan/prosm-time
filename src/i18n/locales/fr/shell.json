@@ -208,8 +208,8 @@
       "body": "{{name}} n'a pas pointé pour le poste de {{time}} à {{site}}."
     },
     "overtimeSoon": {
-      "title": "Heures sup. bientôt",
-      "body": "{{name}} est toujours pointé ; les heures sup. commencent à {{time}}."
+      "title": "Heures supplémentaires en cours",
+      "body": "{{name}} est toujours pointé ; le poste s'est terminé à {{time}}."
     },
     "dailyDigest": {
       "title": "Hier en bref",

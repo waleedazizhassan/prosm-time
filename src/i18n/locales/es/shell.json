@@ -208,8 +208,8 @@
       "body": "{{name}} no ha fichado la entrada para el turno de las {{time}} en {{site}}."
     },
     "overtimeSoon": {
-      "title": "Horas extra en breve",
-      "body": "{{name}} sigue con la entrada fichada; las horas extra empiezan a las {{time}}."
+      "title": "Haciendo horas extra",
+      "body": "{{name}} sigue con la entrada fichada; el turno terminó a las {{time}}."
     },
     "dailyDigest": {
       "title": "Resumen de ayer",

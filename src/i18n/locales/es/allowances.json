@@ -237,5 +237,21 @@
     "done_one": "{{count}} día recalculado.",
     "done_many": "{{count}} días recalculados.",
     "done_other": "{{count}} días recalculados."
+  },
+  "flow": {
+    "title": "Mis asignaciones",
+    "step1": "Rellenar desde tu asistencia",
+    "step1Hint": "Cada día que asististe se rellena con tus precios de una vez, o cada día por sí solo al fichar la salida.",
+    "step2": "Revisar la hoja",
+    "step2Hint": "Revisa la hoja de abajo y escribe solo lo que no tiene precio (un viaje, por ejemplo). ¿Un día sin asistencia? Añádelo aquí.",
+    "addDay": "+ Añadir un día",
+    "step3": "Enviar a tu responsable",
+    "step3Hint": "Los días del período van a tu responsable para aprobarlos. Puedes cambiarlos hasta que se aprueben.",
+    "status": {
+      "draft": "Borrador: {{count}}",
+      "sent": "En espera: {{count}}",
+      "approved": "Aprobados: {{count}}",
+      "total": "A cobrar: {{amount}}"
+    }
   }
 }

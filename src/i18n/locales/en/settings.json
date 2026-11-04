@@ -106,7 +106,10 @@
     "invalid": "Enter numbers of 0 or more.",
     "genericError": "Could not save.",
     "saved": "Saved.",
-    "save": "Save"
+    "save": "Save",
+    "alertLabel": "Overtime alert (minutes after the shift ends)",
+    "alertHint": "You are told when someone is still clocked in this many minutes after their shift ends. 15 by default; a negative number warns before the end.",
+    "alertSaved": "Saved."
   },
   "leaveTypes": {
     "title": "Leave types",

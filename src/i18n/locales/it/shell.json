@@ -208,8 +208,8 @@
       "body": "{{name}} non ha timbrato per il turno delle {{time}} a {{site}}."
     },
     "overtimeSoon": {
-      "title": "Straordinario a breve",
-      "body": "{{name}} è ancora in servizio; lo straordinario inizia alle {{time}}."
+      "title": "Sta facendo straordinari",
+      "body": "{{name}} risulta ancora in servizio; il turno è finito alle {{time}}."
     },
     "dailyDigest": {
       "title": "Ieri in breve",

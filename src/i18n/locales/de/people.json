@@ -220,6 +220,16 @@
       "supervisors": "Vorarbeiter",
       "employees": "Mitarbeitende",
       "viewers": "Betrachter"
+    },
+    "invitation": {
+      "pending": "Einladung noch nicht angenommen",
+      "expired": "Einladung abgelaufen"
+    },
+    "appVersion": "v{{version}} · {{platform}}",
+    "platform": {
+      "android": "Android",
+      "ios": "iPhone",
+      "web": "Browser / Computer"
     }
   },
   "deviceStatus": {

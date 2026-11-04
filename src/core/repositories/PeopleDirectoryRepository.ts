@@ -92,6 +92,25 @@ class PeopleDirectoryRepository {
   clear() {
     cache = null;
   }
+
+  // Owner 2026-11-04: whether each person accepted the invitation, and the app version they use
+  // (for the Owner and anyone who manages people; others get an empty list).
+  async status(): Promise<Map<string, PersonStatus>> {
+    const { data, error } = await DatabaseManager.getClient().rpc("list_prosm_time_people_status");
+    const map = new Map<string, PersonStatus>();
+    if (error || !Array.isArray(data)) return map;
+    for (const row of data as Array<{ user_id: string; invitation: PersonStatus["invitation"]; app_version: string | null; platform: string | null; last_seen_at: string | null }>) {
+      map.set(row.user_id, { invitation: row.invitation, appVersion: row.app_version, platform: row.platform, lastSeenAt: row.last_seen_at });
+    }
+    return map;
+  }
+}
+
+export interface PersonStatus {
+  invitation: "accepted" | "pending" | "expired";
+  appVersion: string | null;
+  platform: string | null;
+  lastSeenAt: string | null;
 }
 
 export default new PeopleDirectoryRepository();

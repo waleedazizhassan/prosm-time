@@ -155,8 +155,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "body": "لم يسجّل {{name}} حضوره لوردية {{time}} في {{site}}."
       },
       "overtimeSoon": {
-        "title": "إضافي قريب",
-        "body": "{{name}} ما زال مسجّلاً حضوره؛ يبدأ الإضافي {{time}}."
+        "title": "بيشتغل وقت إضافي",
+        "body": "{{name}} لسه مسجّل حضور؛ الوردية خلصت الساعة {{time}}."
       },
       "dailyDigest": {
         "title": "ملخص أمس",
@@ -338,8 +338,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "body": "{{name}} hat sich nicht für die Schicht um {{time}} in {{site}} eingestempelt."
       },
       "overtimeSoon": {
-        "title": "Bald Überstunden",
-        "body": "{{name}} ist noch eingestempelt; Überstunden beginnen um {{time}}."
+        "title": "Macht Überstunden",
+        "body": "{{name}} ist noch eingestempelt; die Schicht endete um {{time}}."
       },
       "dailyDigest": {
         "title": "Gestern im Überblick",
@@ -521,8 +521,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "body": "{{name}} has not clocked in for the {{time}} shift at {{site}}."
       },
       "overtimeSoon": {
-        "title": "Overtime soon",
-        "body": "{{name}} is still clocked in; overtime starts at {{time}}."
+        "title": "Working overtime",
+        "body": "{{name}} is still clocked in; the shift ended at {{time}}."
       },
       "dailyDigest": {
         "title": "Yesterday at a glance",
@@ -704,8 +704,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "body": "{{name}} no ha fichado la entrada para el turno de las {{time}} en {{site}}."
       },
       "overtimeSoon": {
-        "title": "Horas extra en breve",
-        "body": "{{name}} sigue con la entrada fichada; las horas extra empiezan a las {{time}}."
+        "title": "Haciendo horas extra",
+        "body": "{{name}} sigue con la entrada fichada; el turno terminó a las {{time}}."
       },
       "dailyDigest": {
         "title": "Resumen de ayer",
@@ -887,8 +887,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "body": "{{name}} n'a pas pointé pour le poste de {{time}} à {{site}}."
       },
       "overtimeSoon": {
-        "title": "Heures sup. bientôt",
-        "body": "{{name}} est toujours pointé ; les heures sup. commencent à {{time}}."
+        "title": "Heures supplémentaires en cours",
+        "body": "{{name}} est toujours pointé ; le poste s'est terminé à {{time}}."
       },
       "dailyDigest": {
         "title": "Hier en bref",
@@ -1070,8 +1070,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "body": "{{name}} non ha timbrato per il turno delle {{time}} a {{site}}."
       },
       "overtimeSoon": {
-        "title": "Straordinario a breve",
-        "body": "{{name}} è ancora in servizio; lo straordinario inizia alle {{time}}."
+        "title": "Sta facendo straordinari",
+        "body": "{{name}} risulta ancora in servizio; il turno è finito alle {{time}}."
       },
       "dailyDigest": {
         "title": "Ieri in breve",
@@ -1253,8 +1253,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "body": "{{name}} não registrou a entrada no turno das {{time}} em {{site}}."
       },
       "overtimeSoon": {
-        "title": "Hora extra em breve",
-        "body": "{{name}} continua com o ponto aberto; a hora extra começa às {{time}}."
+        "title": "Fazendo hora extra",
+        "body": "{{name}} continua com o ponto aberto; o turno terminou às {{time}}."
       },
       "dailyDigest": {
         "title": "Resumo de ontem",
@@ -1436,8 +1436,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "body": "{{name}} не отметил(а) приход на смену в {{time}} на {{site}}."
       },
       "overtimeSoon": {
-        "title": "Скоро сверхурочные",
-        "body": "{{name}} всё ещё на смене; сверхурочные начинаются в {{time}}."
+        "title": "Работает сверхурочно",
+        "body": "{{name}} всё ещё на смене; смена закончилась в {{time}}."
       },
       "dailyDigest": {
         "title": "Вчера коротко",
@@ -1619,8 +1619,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "body": "{{name}} 尚未为 {{site}} {{time}} 的班次上班打卡。"
       },
       "overtimeSoon": {
-        "title": "即将加班",
-        "body": "{{name}} 仍在上班打卡状态；加班从 {{time}} 开始。"
+        "title": "正在加班",
+        "body": "{{name}} 仍在岗；班次已于 {{time}} 结束。"
       },
       "dailyDigest": {
         "title": "昨日概览",

@@ -237,5 +237,21 @@
     "done_one": "{{count}} dia recalculado.",
     "done_many": "{{count}} dias recalculados.",
     "done_other": "{{count}} dias recalculados."
+  },
+  "flow": {
+    "title": "Meus adicionais",
+    "step1": "Preencher pela sua frequência",
+    "step1Hint": "Cada dia em que você compareceu é preenchido com seus valores de uma vez - ou cada dia sozinho depois de registrar a saída.",
+    "step2": "Conferir a folha",
+    "step2Hint": "Confira a folha abaixo e digite só o que não tem valor (uma viagem, por exemplo). Um dia sem frequência? Adicione aqui.",
+    "addDay": "+ Adicionar um dia",
+    "step3": "Enviar ao gestor",
+    "step3Hint": "Os dias do período vão para o seu gestor aprovar. Você ainda pode alterá-los até serem aprovados.",
+    "status": {
+      "draft": "Rascunho: {{count}}",
+      "sent": "Aguardando: {{count}}",
+      "approved": "Aprovados: {{count}}",
+      "total": "A receber: {{amount}}"
+    }
   }
 }

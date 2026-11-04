@@ -220,6 +220,16 @@
       "supervisors": "Начальники смен",
       "employees": "Сотрудники",
       "viewers": "Наблюдатели"
+    },
+    "invitation": {
+      "pending": "Приглашение ещё не принято",
+      "expired": "Приглашение истекло"
+    },
+    "appVersion": "v{{version}} · {{platform}}",
+    "platform": {
+      "android": "Android",
+      "ios": "iPhone",
+      "web": "Браузер / компьютер"
     }
   },
   "deviceStatus": {

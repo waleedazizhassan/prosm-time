@@ -106,7 +106,10 @@
     "invalid": "Inserisci numeri da 0 in su.",
     "genericError": "Salvataggio non riuscito.",
     "saved": "Salvato.",
-    "save": "Salva"
+    "save": "Salva",
+    "alertLabel": "Avviso straordinari (minuti dopo la fine del turno)",
+    "alertHint": "Ricevi un avviso quando qualcuno è ancora in servizio questi minuti dopo la fine del turno. 15 di default; un numero negativo avvisa prima della fine.",
+    "alertSaved": "Salvato."
   },
   "leaveTypes": {
     "title": "Tipi di permesso",

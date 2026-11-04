@@ -237,5 +237,21 @@
     "done_one": "{{count}} jour recalculé.",
     "done_many": "{{count}} jours recalculés.",
     "done_other": "{{count}} jours recalculés."
+  },
+  "flow": {
+    "title": "Mes indemnités",
+    "step1": "Remplir depuis vos pointages",
+    "step1Hint": "Chaque jour pointé est rempli avec vos tarifs, en une fois - ou chaque jour tout seul après votre départ.",
+    "step2": "Vérifier la feuille",
+    "step2Hint": "Parcourez la feuille ci-dessous et saisissez seulement ce qui n'a pas de tarif (un déplacement, par exemple). Un jour sans pointage ? Ajoutez-le ici.",
+    "addDay": "+ Ajouter un jour",
+    "step3": "Envoyer à votre responsable",
+    "step3Hint": "Les jours de la période partent à votre responsable pour validation. Vous pouvez encore les modifier jusqu'à leur validation.",
+    "status": {
+      "draft": "Brouillon : {{count}}",
+      "sent": "En attente : {{count}}",
+      "approved": "Validés : {{count}}",
+      "total": "Dû : {{amount}}"
+    }
   }
 }

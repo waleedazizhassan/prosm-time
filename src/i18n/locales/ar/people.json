@@ -220,6 +220,16 @@
       "supervisors": "المشرفون",
       "employees": "الموظفون",
       "viewers": "المشاهدون"
+    },
+    "invitation": {
+      "pending": "لسه ماقبلش الدعوة",
+      "expired": "الدعوة انتهت"
+    },
+    "appVersion": "إصدار {{version}} · {{platform}}",
+    "platform": {
+      "android": "أندرويد",
+      "ios": "آيفون",
+      "web": "متصفح / كمبيوتر"
     }
   },
   "deviceStatus": {

@@ -208,8 +208,8 @@
       "body": "{{name}} has not clocked in for the {{time}} shift at {{site}}."
     },
     "overtimeSoon": {
-      "title": "Overtime soon",
-      "body": "{{name}} is still clocked in; overtime starts at {{time}}."
+      "title": "Working overtime",
+      "body": "{{name}} is still clocked in; the shift ended at {{time}}."
     },
     "dailyDigest": {
       "title": "Yesterday at a glance",

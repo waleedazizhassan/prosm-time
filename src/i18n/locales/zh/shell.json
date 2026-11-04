@@ -208,8 +208,8 @@
       "body": "{{name}} 尚未为 {{site}} {{time}} 的班次上班打卡。"
     },
     "overtimeSoon": {
-      "title": "即将加班",
-      "body": "{{name}} 仍在上班打卡状态；加班从 {{time}} 开始。"
+      "title": "正在加班",
+      "body": "{{name}} 仍在岗；班次已于 {{time}} 结束。"
     },
     "dailyDigest": {
       "title": "昨日概览",

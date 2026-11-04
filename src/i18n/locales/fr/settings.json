@@ -106,7 +106,10 @@
     "invalid": "Saisissez des nombres positifs.",
     "genericError": "Enregistrement impossible.",
     "saved": "Enregistré.",
-    "save": "Enregistrer"
+    "save": "Enregistrer",
+    "alertLabel": "Alerte heures sup. (minutes après la fin du poste)",
+    "alertHint": "Vous êtes prévenu quand quelqu'un est encore pointé ce nombre de minutes après la fin de son poste. 15 par défaut ; un nombre négatif prévient avant la fin.",
+    "alertSaved": "Enregistré."
   },
   "leaveTypes": {
     "title": "Types de congé",

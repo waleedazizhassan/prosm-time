@@ -106,7 +106,10 @@
     "invalid": "Informe números de 0 ou mais.",
     "genericError": "Não foi possível salvar.",
     "saved": "Salvo.",
-    "save": "Salvar"
+    "save": "Salvar",
+    "alertLabel": "Alerta de hora extra (minutos após o fim do turno)",
+    "alertHint": "Você é avisado quando alguém continua com o ponto aberto esta quantidade de minutos após o fim do turno. Padrão 15; um número negativo avisa antes do fim.",
+    "alertSaved": "Salvo."
   },
   "leaveTypes": {
     "title": "Tipos de ausência",

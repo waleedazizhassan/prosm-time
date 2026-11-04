@@ -1,4 +1,5 @@
 import { Capacitor } from "@capacitor/core";
+import { APP_VERSION } from "../appVersion";
 
 import { requireSupabaseClient } from "../api/supabaseClient";
 
@@ -48,6 +49,8 @@ export async function registerDevice(): Promise<"ok" | "limit" | "error"> {
       p_device_id: deviceId(),
       p_platform: platform === "android" || platform === "ios" ? platform : "web",
       p_label: label(),
+      // owner 2026-11-04: People shows the version each person uses
+      p_app_version: APP_VERSION,
     });
     if (!error) return "ok";
     return error.message.includes(DEVICE_LIMIT_MESSAGE) ? "limit" : "error";

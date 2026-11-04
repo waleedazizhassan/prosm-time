@@ -106,7 +106,10 @@
     "invalid": "Escribe números de 0 o más.",
     "genericError": "No se pudo guardar.",
     "saved": "Guardado.",
-    "save": "Guardar"
+    "save": "Guardar",
+    "alertLabel": "Aviso de horas extra (minutos tras el fin del turno)",
+    "alertHint": "Te avisamos cuando alguien sigue con la entrada fichada estos minutos después del fin de su turno. 15 por defecto; un número negativo avisa antes del final.",
+    "alertSaved": "Guardado."
   },
   "leaveTypes": {
     "title": "Tipos de ausencia",

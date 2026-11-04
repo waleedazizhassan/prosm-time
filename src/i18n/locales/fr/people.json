@@ -220,6 +220,16 @@
       "supervisors": "Superviseurs",
       "employees": "Employés",
       "viewers": "Lecteurs"
+    },
+    "invitation": {
+      "pending": "Invitation pas encore acceptée",
+      "expired": "Invitation expirée"
+    },
+    "appVersion": "v{{version}} · {{platform}}",
+    "platform": {
+      "android": "Android",
+      "ios": "iPhone",
+      "web": "Navigateur / ordinateur"
     }
   },
   "deviceStatus": {

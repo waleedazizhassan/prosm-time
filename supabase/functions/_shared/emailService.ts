@@ -33,6 +33,18 @@ export interface EmailAttachment {
   contentBase64: string;
 }
 
+// Owner 2026-11-04: every email still comes from noreply@, but the sender's name says what it is
+// about - "PROSM Time Invitation", "PROSM Time Leave", "PROSM Time License"...
+export function senderName(purpose: string): string {
+  const key = purpose.toLowerCase();
+  if (/invit/.test(key)) return "PROSM Time Invitation";
+  if (/password|reset/.test(key)) return "PROSM Time Account";
+  if (/licen[cs]e/.test(key)) return "PROSM Time License";
+  if (/trial/.test(key)) return "PROSM Time Subscription";
+  if (/leave/.test(key)) return "PROSM Time Leave";
+  return "PROSM Time";
+}
+
 async function relayViaProsmManagement({ to, subject, html, purpose, fromAddress, attachments }: { to: string; subject: string; html: string; purpose: string; fromAddress?: string; attachments?: EmailAttachment[] }) {
   const apiUrl = Deno.env.get("PROSM_MANAGEMENT_API_URL");
   const apiKey = Deno.env.get("PROSM_MANAGEMENT_API_KEY");
@@ -44,7 +56,7 @@ async function relayViaProsmManagement({ to, subject, html, purpose, fromAddress
   const response = await fetch(apiUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json", "x-prosm-api-key": apiKey },
-    body: JSON.stringify({ action: "sendEmail", to, subject, html, purpose, fromAddress, attachments }),
+    body: JSON.stringify({ action: "sendEmail", to, subject, html, purpose, fromAddress, fromName: senderName(purpose), attachments }),
   });
 
   const json = await response.json().catch(() => null);

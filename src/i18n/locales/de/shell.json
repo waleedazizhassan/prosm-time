@@ -208,8 +208,8 @@
       "body": "{{name}} hat sich nicht für die Schicht um {{time}} in {{site}} eingestempelt."
     },
     "overtimeSoon": {
-      "title": "Bald Überstunden",
-      "body": "{{name}} ist noch eingestempelt; Überstunden beginnen um {{time}}."
+      "title": "Macht Überstunden",
+      "body": "{{name}} ist noch eingestempelt; die Schicht endete um {{time}}."
     },
     "dailyDigest": {
       "title": "Gestern im Überblick",

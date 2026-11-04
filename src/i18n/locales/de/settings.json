@@ -106,7 +106,10 @@
     "invalid": "Bitte Zahlen ab 0 eingeben.",
     "genericError": "Speichern fehlgeschlagen.",
     "saved": "Gespeichert.",
-    "save": "Speichern"
+    "save": "Speichern",
+    "alertLabel": "Überstunden-Hinweis (Minuten nach Schichtende)",
+    "alertHint": "Sie werden benachrichtigt, wenn jemand so viele Minuten nach Schichtende noch eingestempelt ist. Standard 15; eine negative Zahl warnt vor dem Ende.",
+    "alertSaved": "Gespeichert."
   },
   "leaveTypes": {
     "title": "Urlaubsarten",
