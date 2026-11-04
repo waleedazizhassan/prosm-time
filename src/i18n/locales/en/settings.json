@@ -139,7 +139,8 @@
     "requiresDocument": "A document is required",
     "active": "In use",
     "invalidTiers": "Write the tiers as years:days separated by commas.",
-    "genericError": "Could not save."
+    "genericError": "Could not save.",
+    "medicalReportNote": "With a medical report."
   },
   "siteFocus": {
     "backToSite": "← Back to the site",

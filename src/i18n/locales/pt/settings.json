@@ -139,7 +139,8 @@
     "requiresDocument": "Exige um documento",
     "active": "Em uso",
     "invalidTiers": "Escreva as faixas como anos:dias separados por vírgulas.",
-    "genericError": "Não foi possível salvar."
+    "genericError": "Não foi possível salvar.",
+    "medicalReportNote": "Com atestado médico."
   },
   "siteFocus": {
     "backToSite": "← Voltar à unidade",

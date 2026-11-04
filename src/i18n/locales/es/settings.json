@@ -139,7 +139,8 @@
     "requiresDocument": "Requiere un documento",
     "active": "En uso",
     "invalidTiers": "Escribe los tramos como años:días separados por comas.",
-    "genericError": "No se pudo guardar."
+    "genericError": "No se pudo guardar.",
+    "medicalReportNote": "Con informe médico."
   },
   "siteFocus": {
     "backToSite": "← Volver a la sede",

@@ -139,7 +139,8 @@
     "requiresDocument": "Documento richiesto",
     "active": "In uso",
     "invalidTiers": "Scrivi anni:giorni separati da virgole.",
-    "genericError": "Salvataggio non riuscito."
+    "genericError": "Salvataggio non riuscito.",
+    "medicalReportNote": "Con certificato medico."
   },
   "siteFocus": {
     "backToSite": "← Torna al sito",

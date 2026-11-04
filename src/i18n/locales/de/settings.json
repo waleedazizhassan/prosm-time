@@ -139,7 +139,8 @@
     "requiresDocument": "Nachweis erforderlich",
     "active": "Verwendet",
     "invalidTiers": "Jahre:Tage durch Kommas getrennt eingeben.",
-    "genericError": "Speichern fehlgeschlagen."
+    "genericError": "Speichern fehlgeschlagen.",
+    "medicalReportNote": "Mit ärztlichem Attest."
   },
   "siteFocus": {
     "backToSite": "← Zurück zum Standort",

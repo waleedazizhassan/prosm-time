@@ -139,7 +139,8 @@
     "requiresDocument": "مستند مطلوب",
     "active": "مستخدم",
     "invalidTiers": "اكتب الشرائح بصيغة سنوات:أيام مفصولة بفواصل.",
-    "genericError": "تعذّر الحفظ."
+    "genericError": "تعذّر الحفظ.",
+    "medicalReportNote": "بتقرير طبي."
   },
   "siteFocus": {
     "backToSite": "← رجوع للموقع",

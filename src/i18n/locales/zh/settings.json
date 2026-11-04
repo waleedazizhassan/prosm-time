@@ -139,7 +139,8 @@
     "requiresDocument": "需要证明文件",
     "active": "使用中",
     "invalidTiers": "请按 年:天 的格式填写，用逗号分隔。",
-    "genericError": "无法保存。"
+    "genericError": "无法保存。",
+    "medicalReportNote": "需提供医疗证明。"
   },
   "siteFocus": {
     "backToSite": "← 返回工地",

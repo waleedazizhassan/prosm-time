@@ -149,7 +149,12 @@ export default function LeaveTypesSettingsCard() {
                 .filter(Boolean)
                 .join(" · ")}
             </div>
-            {type.legalNote ? <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{type.legalNote}</div> : null}
+            {type.legalNote ? (
+              <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
+                {/* the built-in note, as seeded in English, in the reader's language */}
+                {type.legalNote === "With a medical report." ? t("leaveTypes.medicalReportNote") : type.legalNote}
+              </div>
+            ) : null}
           </div>
           <Button size="sm" variant="ghost" onClick={() => open(type)}>
             {t("leaveTypes.edit")}

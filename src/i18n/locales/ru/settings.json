@@ -139,7 +139,8 @@
     "requiresDocument": "Нужен документ",
     "active": "Используется",
     "invalidTiers": "Запишите ступени как годы:дни через запятую.",
-    "genericError": "Не удалось сохранить."
+    "genericError": "Не удалось сохранить.",
+    "medicalReportNote": "При наличии медицинской справки."
   },
   "siteFocus": {
     "backToSite": "← Назад к объекту",

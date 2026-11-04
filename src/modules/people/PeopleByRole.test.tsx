@@ -27,6 +27,7 @@ const person = (id: string, fullName: string, roleKey: string, extra: Partial<Di
 
 vi.mock("../../core/repositories/PeopleDirectoryRepository", () => ({
   default: {
+    status: vi.fn(async () => new Map()),
     list: vi.fn(async () => [
       person("e2", "Zeinab", "employee"),
       person("e1", "Amr", "employee", { presence: "in" }),

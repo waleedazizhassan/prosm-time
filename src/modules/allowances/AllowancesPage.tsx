@@ -32,7 +32,7 @@ import PeriodDeductionsCard from "./PeriodDeductionsCard";
 import DateRange from "../../components/common/DateRange";
 import PersonName from "../../components/common/PersonName";
 import AllowanceSheetGrid, { entryInput } from "./AllowanceSheetGrid";
-import { allowanceSheetTable, entryTotal } from "./allowanceSheetTable";
+import { allowanceSheetTable } from "./allowanceSheetTable";
 import { toXlsx } from "../../core/utils/spreadsheet";
 import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
 

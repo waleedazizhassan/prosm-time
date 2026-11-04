@@ -665,3 +665,86 @@
   background: var(--brand-primary-subtle);
   color: var(--brand-primary);
 }
+
+/* owner 2026-11-04: on a phone, smaller buttons and cards - more on one screen, less scrolling,
+   the same order and look */
+@media (max-width: 767px) {
+  .page,
+  .grid {
+    gap: var(--space-3);
+  }
+
+  .kpis {
+    gap: var(--space-2);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .kpis > :last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+
+  .kpi {
+    gap: 2px;
+    padding: var(--space-2);
+  }
+
+  .kpiLabel,
+  .kpiHint {
+    font-size: 0.6875rem;
+    line-height: 1.25;
+  }
+
+  .kpiValue {
+    font-size: 1.25rem;
+  }
+
+  .chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+
+  .chip {
+    flex: none;
+    min-height: 28px;
+    padding: 0 10px;
+    font-size: 0.75rem;
+  }
+
+  .chip b {
+    min-width: 1.25rem;
+    line-height: 1.2rem;
+    font-size: 0.6875rem;
+  }
+
+  .actions :global(button) {
+    min-height: 32px;
+    padding-inline: 10px;
+    font-size: 0.8125rem;
+  }
+
+  .widget {
+    gap: var(--space-2);
+    padding: var(--space-3);
+  }
+
+  .widgetTitle {
+    font-size: 0.9375rem;
+  }
+
+  .widgetHeader :global(button) {
+    min-height: 30px;
+    padding-inline: 10px;
+    font-size: 0.75rem;
+  }
+
+  .mapBox {
+    min-height: 200px;
+  }
+
+  .sos {
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+  }
+}

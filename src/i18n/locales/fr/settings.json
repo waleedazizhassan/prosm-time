@@ -139,7 +139,8 @@
     "requiresDocument": "Justificatif requis",
     "active": "Utilisé",
     "invalidTiers": "Écrivez années:jours séparés par des virgules.",
-    "genericError": "Enregistrement impossible."
+    "genericError": "Enregistrement impossible.",
+    "medicalReportNote": "Avec un certificat médical."
   },
   "siteFocus": {
     "backToSite": "← Retour au site",
