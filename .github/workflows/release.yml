@@ -145,6 +145,9 @@ jobs:
   android:
     name: Build Android APK (release, signed)
     needs: test
+    # Owner 2026-11-04: Android ships through Google Play only - no APK unless the owner asks
+    # (gh variable set APK_DISTRIBUTION_ENABLED --body true).
+    if: vars.APK_DISTRIBUTION_ENABLED != 'false'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -271,6 +274,8 @@ jobs:
   create-release:
     name: Publish GitHub Release
     needs: [android, test]
+    # runs without the APK too (Google Play only), so the version and the web still ship
+    if: ${{ always() && needs.test.result == 'success' && (needs.android.result == 'success' || needs.android.result == 'skipped') }}
     runs-on: ubuntu-latest
     outputs:
       # § user-directed, 2026-09-11 - real automatic version numbering.
@@ -285,9 +290,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
+        if: vars.APK_DISTRIBUTION_ENABLED != 'false'
         with: { path: artifacts }
 
       - name: Also publish a versioned-filename copy of each artifact
+        if: vars.APK_DISTRIBUTION_ENABLED != 'false'
         # § user-directed, 2026-09-16 - "عايز رقم الاصدار يبقى مكتوب في
         # جدول التحميل": someone downloading straight from the Releases
         # page (rather than through prosm.net's own stable-URL button)
@@ -313,6 +320,7 @@ jobs:
             artifacts/prosm-time-android/*.apk
 
       - id: urls
+        if: vars.APK_DISTRIBUTION_ENABLED != 'false'
         run: |
           set -e
           android_name=$(basename "$(find artifacts/prosm-time-android -name '*.apk' | head -1)")
@@ -448,10 +456,8 @@ jobs:
           set -e
           node scripts/write-release-manifest.mjs
           # Audit 2.3: the copy installed apps read (short cache so a new release shows within minutes).
-          if [ "${{ vars.APK_DISTRIBUTION_ENABLED }}" = "false" ]; then
-            echo "APK distribution is off: the update manifest stays as it is."
-            exit 0
-          fi
+          # Google Play only (owner 2026-11-04): the manifest still ships - the web and the desktop
+          # read it, and Android's link opens Google Play.
           curl -sf -X POST "https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/app-releases/latest-version.json" \
             -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
             -H "x-upsert: true" \

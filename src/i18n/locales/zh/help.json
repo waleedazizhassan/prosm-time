@@ -76,7 +76,7 @@
     },
     "getTheApp": {
       "title": "获取 PROSM Time",
-      "body": "在 Android 手机上：从 prosm.net 下载 APK 并安装（即将上架 Google Play）；该版本会自行提示更新。在任何电脑、平板或 iPhone 上：在浏览器中打开 https://time.prosm.net（可以添加到主屏幕）；它会自动更新。它们都是同一个 PROSM Time，使用同一个账户。"
+      "body": "在 Android 手机上：从 Google Play 安装 PROSM Time，并通过 Google Play 更新。如果您安装的是从 prosm.net 下载的旧版本，请先卸载，再从 Google Play 安装 - 您的数据保存在服务器上。在任何电脑、平板或 iPhone 上：在浏览器中打开 https://time.prosm.net（可以添加到主屏幕）；它会自动更新。它们都是同一个 PROSM Time，使用同一个账户。"
     },
     "liveMap": {
       "title": "实时地图",

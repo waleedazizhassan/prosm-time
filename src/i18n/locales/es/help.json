@@ -76,7 +76,7 @@
     },
     "getTheApp": {
       "title": "Obtener PROSM Time",
-      "body": "En un teléfono Android: descarga el APK desde prosm.net e instálalo (pronto en Google Play); esa versión te avisa ella misma de las actualizaciones. En cualquier ordenador, tableta o iPhone: abre https://time.prosm.net en el navegador (puedes añadirlo a la pantalla de inicio); se actualiza solo. Todas son el mismo PROSM Time con la misma cuenta."
+      "body": "En un teléfono Android: instala PROSM Time desde Google Play; se actualiza desde ahí. Si tienes la versión anterior descargada de prosm.net, desinstálala primero y luego instala desde Google Play: tus datos se conservan en el servidor. En cualquier ordenador, tableta o iPhone: abre https://time.prosm.net en el navegador (puedes añadirlo a la pantalla de inicio); se actualiza solo. Todos son el mismo PROSM Time con la misma cuenta."
     },
     "liveMap": {
       "title": "Mapa en vivo",
