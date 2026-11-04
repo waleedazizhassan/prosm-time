@@ -1,0 +1,432 @@
+{
+  "navigationLabel": "Navegação principal",
+  "nav": {
+    "back": "Voltar",
+    "forward": "Avançar",
+    "dashboard": "Painel"
+  },
+  "toggleSidebar": "Mostrar ou ocultar navegação",
+  "collapseSidebar": "Recolher barra lateral",
+  "expandSidebar": "Expandir barra lateral",
+  "closeSidebar": "Fechar menu",
+  "openUserMenu": "Abrir menu do usuário",
+  "changeAvatarAction": "Alterar foto do perfil",
+  "avatarUploadError": "Não foi possível enviar a foto do perfil. Tente novamente.",
+  "signOutAction": "Sair",
+  "kioskPinLabel": "PIN do quiosque (4-6 dígitos)",
+  "kioskPinSaved": "PIN do quiosque salvo.",
+  "backgroundTrackingTitle": "PROSM Time · ponto aberto",
+  "backgroundTrackingMessage": "A localização é registrada somente enquanto o seu ponto está aberto.",
+  "languageLabel": "Idioma",
+  "themeLabel": "Aparência",
+  "theme": {
+    "dark": "Escuro",
+    "light": "Claro",
+    "system": "Sistema"
+  },
+  "calendarLabel": "Calendário",
+  "calendar": {
+    "gregorian": "Gregoriano",
+    "hijri": "Hégira"
+  },
+  "installation": {
+    "grace": "Esta instalação não está coberta por uma licença válida. Ative uma licença até {{date}}.",
+    "blocked": "Esta instalação não está coberta por uma licença válida e o acesso foi suspenso. Fale com o seu administrador."
+  },
+  "update": {
+    "available": "Uma nova versão (v{{version}}) está disponível.",
+    "action": "Atualizar agora",
+    "checkAction": "Verificar atualização",
+    "checking": "Verificando...",
+    "upToDate": "Você está na versão mais recente.",
+    "noticeTitle": "Atualização do PROSM Time"
+  },
+  "offline": {
+    "message": "Tudo certo: entrada, saída e intervalos continuam funcionando, e vamos enviá-los assim que você voltar a ficar online.",
+    "title": "Você está offline",
+    "backOnline": "Você está online de novo - atualizando suas informações."
+  },
+  "commandPalette": {
+    "open": "Abrir pesquisa",
+    "placeholder": "Pesquisar páginas…",
+    "noResults": "Nenhum resultado encontrado.",
+    "categories": {
+      "pages": "Páginas"
+    }
+  },
+  "notificationsLabel": "Notificações",
+  "noNotifications": "Ainda não há notificações.",
+  "notifications": {
+    "outOfZoneEmployee": {
+      "title": "Você está fora da sua área de trabalho",
+      "body": "Explique o motivo. Distância: {{distance}} m."
+    },
+    "outOfZoneManager": {
+      "title": "Funcionário fora da área de trabalho",
+      "body": "{{name}} está fora da área atribuída (distância: {{distance}} m)."
+    },
+    "exceptionPendingReview": {
+      "titleException": "Exceção aguardando sua análise",
+      "bodyException": "{{name}} enviou um motivo para uma exceção fora da área.",
+      "titleCorrection": "Pedido de correção aguardando sua análise",
+      "bodyCorrection": "{{name}} enviou um pedido de correção.",
+      "titleEarlyLeave": "Motivo de saída antecipada enviado",
+      "bodyEarlyLeave": "{{name}} explicou por que saiu mais cedo.",
+      "titleLeave": "Pedido de afastamento aguardando sua análise",
+      "bodyLeave": "{{name}} pediu {{days}} dia(s) de afastamento.",
+      "bodyLeaveDetailed": "{{name}} pediu {{days}} dia(s) de {{type}} ({{startDate}} a {{endDate}}).",
+      "bodyLeaveReasonSuffix": "Motivo: {{reason}}.",
+      "titlePermission": "Permissão aguardando sua aprovação",
+      "bodyPermission": "{{name}} pediu {{kind}} em {{date}}.",
+      "bodyPermissionShort": "{{name}} pediu uma permissão em {{date}}.",
+      "titleLeaveCancelled": "Afastamento aprovado cancelado",
+      "bodyLeaveCancelled": "{{name}} cancelou o afastamento aprovado ({{startDate}} - {{endDate}}).",
+      "titleLeaveRequestWithdrawn": "Pedido de afastamento retirado",
+      "bodyLeaveRequestWithdrawn": "{{name}} retirou o pedido de afastamento ({{startDate}} - {{endDate}}) antes da resposta."
+    },
+    "correctionReviewed": {
+      "titleException": "Sua exceção foi analisada",
+      "titleCorrection": "Seu pedido de correção foi analisado",
+      "titleLeave": "Seu pedido de afastamento foi analisado",
+      "body": "Decisão: {{decision}}.",
+      "titleMockLocation": "Sua localização foi analisada",
+      "titleOfflineTime": "Seu tempo offline foi analisado",
+      "notesSuffix": "Observação: \"{{notes}}\"",
+      "titlePermission": "Sua permissão foi analisada",
+      "titlePendingHours": "As horas do seu turno foram analisadas",
+      "titleIntegrity": "Sua marcação de entrada foi analisada"
+    },
+    "breakExceeded": {
+      "title": "Duração do intervalo excedida",
+      "body": "Seu intervalo passou da duração máxima permitida."
+    },
+    "sosAlert": {
+      "title": "Alerta SOS/Emergência",
+      "body": "{{name}} acionou um alerta SOS/Emergência."
+    },
+    "timesheet": {
+      "submittedTitle": "Folha de ponto enviada para análise",
+      "submittedBody": "Uma folha de ponto foi enviada e aguarda sua aprovação.",
+      "approvedTitle": "Folha de ponto aprovada",
+      "approvedBody": "Sua folha de ponto foi aprovada e agora está bloqueada.",
+      "rejectedTitle": "Folha de ponto rejeitada",
+      "rejectedBody": "Sua folha de ponto foi rejeitada e voltou para rascunho.",
+      "correctionRequestedTitle": "Correção de folha de ponto solicitada",
+      "correctionRequestedBody": "Um funcionário pediu uma correção em uma folha de ponto bloqueada.",
+      "correctionApprovedTitle": "Correção de folha de ponto aprovada",
+      "correctionApprovedBody": "Sua correção foi aprovada e o período foi reaberto para novo envio.",
+      "correctionRejectedTitle": "Correção de folha de ponto rejeitada",
+      "correctionRejectedBody": "Seu pedido de correção da folha de ponto foi rejeitado.",
+      "readyTitle": "Sua folha de ponto está pronta",
+      "readyBody": "Revise sua folha de ponto de {{start}} a {{end}} e envie."
+    },
+    "shiftAssigned": {
+      "title": "Um novo turno foi agendado para você",
+      "body": "Você tem turno em {{date}} das {{startTime}} às {{endTime}}.",
+      "bodyOvernight": "Você tem turno em {{date}} das {{startTime}} às {{endTime}} (dia seguinte).",
+      "cancelledTitle": "Um turno agendado foi cancelado",
+      "cancelledBody": "Seu turno de {{date}} foi cancelado."
+    },
+    "siteChangeAlert": {
+      "title": "Funcionário trocou de local no meio do turno",
+      "body": "{{name}} trocou de local no meio do turno, de {{oldSite}} para {{newSite}}.",
+      "unregisteredLocation": "um local não cadastrado"
+    },
+    "missingClockOut": {
+      "title": "Funcionário não registrou a saída",
+      "body": "{{name}} está com o ponto aberto há mais de {{hours}} horas sem registrar a saída."
+    },
+    "locationPlausibilityFlag": {
+      "title": "Movimento de localização incomum",
+      "body": "A localização de {{name}} indica cerca de {{speed}} km/h desde a última posição conhecida - verifique."
+    },
+    "trial": {
+      "endingTitle": "Seu teste do PROSM Time termina em breve",
+      "endingBody": "Seu teste termina em uma semana. Seus dados ficam guardados e não serão apagados. Para continuar, insira um código de ativação ou fale conosco em sales@prosm.net.",
+      "endedTitle": "Seu teste do PROSM Time terminou",
+      "endedBody": "A organização agora está somente leitura e todos os seus dados ficam guardados. Insira um código de ativação ou fale conosco em sales@prosm.net e tudo volta a funcionar como antes.",
+      "licenseEndingTitle": "Sua licença do PROSM Time termina em breve",
+      "licenseEndingBody": "A licença {{license}} termina em {{date}}. Renove antes disso para o app continuar funcionando; todos os seus dados ficam guardados. Fale com sales@prosm.net."
+    },
+    "decision": {
+      "approved": "Aprovado",
+      "rejected": "Rejeitado",
+      "acknowledged": "Ciente",
+      "clarification_requested": "Esclarecimento solicitado",
+      "cancelled": "Cancelado"
+    },
+    "allowance": {
+      "submittedTitle": "Adicionais aguardando aprovação",
+      "submittedBody": "{{name}} enviou adicionais de {{date}}.",
+      "approvedTitle": "Adicionais aprovados",
+      "approvedBody": "Seus adicionais de {{date}} foram aprovados.",
+      "rejectedTitle": "Adicionais rejeitados",
+      "rejectedBody": "Seus adicionais de {{date}} foram rejeitados. Você pode editá-los e enviar de novo.",
+      "sheetSubmittedBody": "{{name}} enviou adicionais de {{days}} dias ({{start}} - {{end}}).",
+      "sheetApprovedBody": "Seus adicionais de {{start}} a {{end}} foram aprovados.",
+      "sheetRejectedBody": "Seus adicionais de {{start}} a {{end}} foram rejeitados. Corrija e envie de novo."
+    },
+    "longSessionCheck": {
+      "title": "Ainda trabalhando?",
+      "body": "Seu ponto está aberto há {{hours}} horas. Ainda trabalhando ou vai registrar a saída?"
+    },
+    "sessionAutoClosed": {
+      "titleEmployee": "Seu turno foi encerrado automaticamente",
+      "bodyEmployee": "Seu turno foi encerrado após {{hours}} horas sem registro de saída. As horas aguardam a análise do seu gestor.",
+      "titleManager": "Um turno foi encerrado automaticamente",
+      "bodyManager": "O turno de {{name}} foi encerrado após {{hours}} horas sem registro de saída. Analise as horas."
+    },
+    "exitSitePrompt": {
+      "title": "Você saiu do local",
+      "body": "Seu turno continua aberto - registrar a saída?"
+    },
+    "autoCheckoutGeofence": {
+      "titleEmployee": "Sua saída foi registrada",
+      "bodyEmployee": "Você saiu do local e a saída foi registrada no horário em que saiu. Fale com seu gestor se isso estiver errado.",
+      "titleManager": "Saída registrada ao deixar o local",
+      "bodyManager": "{{name}} saiu do local e a saída foi registrada automaticamente."
+    },
+    "clockInReminder": {
+      "title": "Hora de registrar a entrada",
+      "body": "Seu turno em {{site}} começa às {{time}}. Registre a entrada ao chegar."
+    },
+    "clockOutReminder": {
+      "title": "Não esqueça de registrar a saída",
+      "body": "Seu turno terminou às {{time}}. Registre a saída no PROSM Time ao sair."
+    },
+    "accountDeleted": {
+      "title": "Um funcionário excluiu a conta",
+      "body": "{{name}} excluiu a conta. A frequência e as folhas de ponto ficam guardadas como \"Usuário excluído\"."
+    },
+    "newDevice": {
+      "title": "Login em um novo dispositivo",
+      "body": "Sua conta foi aberta em um novo dispositivo: {{device}}. Se não foi você, altere sua senha.",
+      "ownerBody": "{{name}} entrou em um novo dispositivo: {{device}}."
+    },
+    "noShow": {
+      "title": "Sem registro de entrada no turno",
+      "body": "{{name}} não registrou a entrada no turno das {{time}} em {{site}}."
+    },
+    "overtimeSoon": {
+      "title": "Fazendo hora extra",
+      "body": "{{name}} continua com o ponto aberto; o turno terminou às {{time}}."
+    },
+    "dailyDigest": {
+      "title": "Resumo de ontem",
+      "body": "{{present}} trabalharam, {{noShows}} faltaram a um turno. Pendentes: {{leave}} afastamentos, {{exceptions}} exceções. Com ponto aberto agora: {{open}}."
+    },
+    "licenseChanged": {
+      "title": "Sua licença mudou",
+      "body": "A PROSM mudou sua licença: {{changes}}.",
+      "users": "usuários {{from}} → {{to}}",
+      "devices": "dispositivos {{from}} → {{to}}",
+      "ends": "termina em {{date}}",
+      "status": "status {{status}}",
+      "plan": "plano alterado",
+      "unlimited": "sem limite",
+      "planTo": "plano {{plan}}"
+    }
+  },
+  "items": {
+    "dashboard": "Painel",
+    "people": "Pessoas",
+    "sites": "Locais",
+    "clockIn": "Registrar entrada / saída",
+    "manager": "Console do gestor",
+    "attendance": "Registro de frequência",
+    "adminClock": "Registrar ponto por outra pessoa",
+    "emergencyLog": "Registro de emergências",
+    "timesheets": "Folhas de ponto",
+    "allowances": "Adicionais",
+    "leave": "Afastamentos",
+    "schedule": "Escala de turnos",
+    "kiosk": "Modo quiosque",
+    "reports": "Relatórios",
+    "settings": "Configurações",
+    "integrations": "Integrações",
+    "help": "Ajuda",
+    "workers": "Trabalhadores",
+    "calendar": "Calendário e feriados",
+    "auditLog": "Registro de ações",
+    "dailySummary": "Resumo diário"
+  },
+  "sosOverlay": {
+    "title": "Alerta SOS/Emergência",
+    "subtitle": "{{name}} acabou de acionar um alerta de emergência.",
+    "viewAction": "Ver registro de emergências",
+    "dismissAction": "Dispensar"
+  },
+  "sections": {
+    "attendance": "Frequência",
+    "people": "Pessoas e locais",
+    "payroll": "Folha de pagamento",
+    "reports": "Relatórios",
+    "settings": "Configurações",
+    "help": "Ajuda"
+  },
+  "weather": {
+    "loading": "Carregando o clima",
+    "unavailable": "Clima indisponível",
+    "locationUnavailable": "Localização indisponível",
+    "retryLocation": "Clique para tentar acessar a localização de novo",
+    "detailsLabel": "Detalhes do clima",
+    "yourLocation": "Sua localização",
+    "feelsLike": "Sensação térmica",
+    "humidity": "Umidade",
+    "wind": "Vento",
+    "uvIndex": "Índice UV",
+    "dailyHigh": "Máxima",
+    "dailyLow": "Mínima",
+    "sunrise": "Nascer do sol",
+    "sunset": "Pôr do sol",
+    "refresh": "Atualizar o clima",
+    "lastUpdated": "Atualizado {{time}}",
+    "genericError": "Não foi possível carregar o clima agora.",
+    "tryAgain": "Tentar de novo",
+    "categories": {
+      "clear": "Céu limpo",
+      "partly-cloudy": "Parcialmente nublado",
+      "cloudy": "Encoberto",
+      "fog": "Neblina",
+      "drizzle": "Garoa",
+      "rain": "Chuva",
+      "snow": "Neve",
+      "thunderstorm": "Tempestade",
+      "unknown": "Desconhecido"
+    }
+  },
+  "radio": {
+    "title": "Rádio",
+    "mediaSectionTitle": "Mídia",
+    "loading": "Carregando…",
+    "reconnecting": "Reconectando…",
+    "error": "Falha na reprodução.",
+    "paused": "Pausado",
+    "playing": "Tocando",
+    "pauseAction": "Pausar",
+    "playAction": "Tocar",
+    "stopAction": "Parar",
+    "muteAction": "Silenciar",
+    "unmuteAction": "Ativar som",
+    "volumeLabel": "Volume",
+    "searchPlaceholder": "Pesquisar estações…",
+    "searching": "Pesquisando…",
+    "noResults": "Nenhuma estação encontrada.",
+    "loadingStations": "Carregando estações…"
+  },
+  "trial": {
+    "banner_one": "Versão de demonstração: falta 1 dia (termina em {{date}}). Seus dados ficam guardados depois - para continuar, fale com a equipe de vendas:",
+    "banner_other": "Versão de demonstração: faltam {{count}} dias (termina em {{date}}). Seus dados ficam guardados depois - para continuar, fale com a equipe de vendas:",
+    "close": "Ocultar",
+    "footer_one": "Teste · falta 1 dia",
+    "footer_other": "Teste · faltam {{count}} dias",
+    "banner_many": "Versão de demonstração: faltam {{count}} dias (termina em {{date}}). Seus dados ficam guardados depois - para continuar, fale com a equipe de vendas:",
+    "footer_many": "Teste · faltam {{count}} dias"
+  },
+  "offlineSync": {
+    "waiting_one": "1 registro de ponto aguarda conexão - será enviado automaticamente.",
+    "waiting_other": "{{count}} registros de ponto aguardam conexão - serão enviados automaticamente.",
+    "syncing_one": "Enviando 1 registro de ponto…",
+    "syncing_other": "Enviando {{count}} registros de ponto…",
+    "failed_one": "Um registro de ponto não pôde ser enviado - abra o painel para tentar de novo ou descartá-lo.",
+    "failed_other": "Um registro de ponto não pôde ser enviado - abra o painel para tentar de novo ou descartá-lo ({{count}} aguardando).",
+    "waiting_many": "{{count}} registros de ponto aguardam conexão - serão enviados automaticamente.",
+    "syncing_many": "Enviando {{count}} registros de ponto…",
+    "failed_many": "Um registro de ponto não pôde ser enviado - abra o painel para tentar de novo ou descartá-lo ({{count}} aguardando)."
+  },
+  "pageBanner": {
+    "manager": "Frequência de hoje e itens aguardando análise",
+    "people": "Funcionários, funções e convites",
+    "leave": "Peça e acompanhe afastamentos",
+    "reports": "Relatórios e exportações de frequência",
+    "sites": "Locais de trabalho e suas áreas",
+    "attendance": "Cada entrada e saída",
+    "clockIn": "Comece e termine seu turno",
+    "schedule": "Próximos turnos",
+    "emergencyLog": "Alertas SOS e onde aconteceram",
+    "allowances": "Adicionais diários e horas extras",
+    "help": "Respostas e guias",
+    "kiosk": "Um dispositivo compartilhado para registrar o ponto",
+    "adminClock": "Registrar a entrada ou saída de alguém",
+    "settings": "Regras de toda a organização",
+    "integrations": "Folha de pagamento e outros sistemas",
+    "timesheets": "Horas para analisar e aprovar",
+    "workers": "Trabalhadores externos e seus números de quiosque",
+    "calendar": "Feriados, dias de descanso semanal e dias excepcionais - as horas e as horas extras seguem esses dias.",
+    "auditLog": "Tudo o que é feito na sua organização: quem fez o quê, com quem, quando e por quê.",
+    "dailySummary": "Um dia da sua organização: quem trabalhou, quem se atrasou, quem faltou e quem estava afastado"
+  },
+  "backgroundDisclosure": {
+    "title": "Localização durante o turno",
+    "body": "O PROSM Time coleta sua localização a cada 5 minutos, aproximadamente, para confirmar que você está no local de trabalho, mesmo com o app fechado ou sem uso, mas somente enquanto o seu ponto está aberto. A coleta para quando você registra a saída. Sua localização é compartilhada com os gestores da organização e apagada após 30 dias. Na próxima tela, escolha \"Durante o uso do app\" para que funcione.",
+    "accept": "Continuar",
+    "decline": "Agora não"
+  },
+  "bottomNav": {
+    "label": "Páginas principais",
+    "home": "Início",
+    "manager": "Console",
+    "people": "Pessoas",
+    "attendance": "Frequência",
+    "allowances": "Adicionais",
+    "leave": "Afastamentos",
+    "menu": "Menu"
+  },
+  "exitPrompt": {
+    "title": "Você saiu do local",
+    "body": "Seu turno continua aberto. Registrar a saída agora?"
+  },
+  "trackingError": {
+    "title": "O rastreamento de localização não começou",
+    "permission": "O PROSM Time não tem permissão para usar sua localização. Permita a localização (\"Permitir o tempo todo\") nas configurações do app e tente de novo. Sua entrada continua registrada.",
+    "failed": "O serviço de localização do celular não iniciou (a localização pode estar desligada). Ele será tentado de novo automaticamente; você também pode tentar agora. Sua entrada continua registrada.",
+    "later": "Depois",
+    "openSettings": "Abrir configurações",
+    "retry": "Tentar de novo"
+  },
+  "deleteAccount": {
+    "menuAction": "Excluir minha conta",
+    "title": "Excluir sua conta",
+    "whatGoes": "Sua conta será excluída de vez: você não poderá entrar com ela de novo, e seus dados pessoais são apagados - nome, e-mail e foto, fotos de entrada e saída, histórico de localização, documentos de afastamento, dispositivos e notificações.",
+    "whatStays": "Sua organização mantém os registros de trabalho exigidos por lei e pela folha de pagamento (frequência, folhas de ponto, afastamentos, adicionais) como \"Usuário excluído\".",
+    "passwordLabel": "Senha",
+    "confirmLabel": "Digite \"{{word}}\" para confirmar",
+    "confirmWord": "EXCLUIR",
+    "action": "Excluir minha conta de vez",
+    "wrongPassword": "A senha não está correta.",
+    "clockedIn": "Registre a saída primeiro e depois exclua sua conta.",
+    "failed": "Não foi possível excluir a conta. Tente de novo ou escreva para support@prosm.net.",
+    "ownerBody": "A sua é a conta do proprietário, e toda a organização e seus dados dependem dela. Para excluí-la junto com a organização, ou passar a propriedade para outra pessoa, escreva para nós e cuidaremos disso.",
+    "ownerAction": "Escrever para o suporte",
+    "ownerSubject": "Pedido de exclusão da conta do proprietário"
+  },
+  "startupPermissions": {
+    "title": "Permissões do PROSM Time",
+    "intro": "O app precisa de três permissões para funcionar por completo. Veja para que serve cada uma:",
+    "location": {
+      "title": "Localização",
+      "body": "Usada para confirmar que você está no local de trabalho ao registrar a entrada e a saída. Nos locais onde sua organização ativou o controle de presença, e somente enquanto o seu ponto está aberto, o PROSM Time coleta sua localização a cada 5 minutos, aproximadamente, mesmo com o app fechado ou sem uso, com uma notificação contínua o tempo todo, e para quando você registra a saída. Sua localização é compartilhada com os gestores da organização e apagada após 30 dias."
+    },
+    "camera": {
+      "title": "Câmera",
+      "body": "Para tirar uma foto ao registrar a entrada ou a saída, somente nos locais que exigem. A câmera só abre quando você mesmo tira a foto."
+    },
+    "notifications": {
+      "title": "Notificações",
+      "body": "Para respostas aos seus pedidos de afastamento e aprovações, lembretes de entrada e saída, alertas urgentes e a notificação do turno enquanto o seu ponto está aberto."
+    },
+    "footer": "Depois de \"Continuar\", o Android pede cada permissão por vez: escolha \"Permitir\" ou \"Durante o uso do app\". Você pode mudar qualquer permissão depois nas configurações do celular.",
+    "accept": "Continuar",
+    "decline": "Agora não"
+  },
+  "numerals": {
+    "label": "Números",
+    "latn": "Algarismos latinos (123)",
+    "arab": "Algarismos arábicos (١٢٣)"
+  },
+  "readOnly": {
+    "banner": "Sua organização está somente leitura: a licença terminou. Você pode ver tudo; as alterações estão pausadas e nada é apagado.",
+    "reopen": "Inserir um código de ativação",
+    "askOwner": "O proprietário da sua organização pode reabri-la."
+  }
+}

@@ -1,0 +1,422 @@
+{
+  "navigationLabel": "主导航",
+  "nav": {
+    "back": "返回",
+    "forward": "前进",
+    "dashboard": "仪表板"
+  },
+  "toggleSidebar": "显示或隐藏导航",
+  "collapseSidebar": "收起侧边栏",
+  "expandSidebar": "展开侧边栏",
+  "closeSidebar": "关闭菜单",
+  "openUserMenu": "打开用户菜单",
+  "changeAvatarAction": "更换头像",
+  "avatarUploadError": "无法上传头像，请重试。",
+  "signOutAction": "退出登录",
+  "kioskPinLabel": "考勤机 PIN（4-6 位数字）",
+  "kioskPinSaved": "考勤机 PIN 已保存。",
+  "backgroundTrackingTitle": "PROSM Time · 已上班打卡",
+  "backgroundTrackingMessage": "仅在您上班打卡期间记录位置。",
+  "languageLabel": "语言",
+  "themeLabel": "外观",
+  "theme": {
+    "dark": "深色",
+    "light": "浅色",
+    "system": "跟随系统"
+  },
+  "calendarLabel": "日历",
+  "calendar": {
+    "gregorian": "公历",
+    "hijri": "伊斯兰历"
+  },
+  "installation": {
+    "grace": "此安装未获得有效许可证。请在 {{date}} 前激活许可证。",
+    "blocked": "此安装未获得有效许可证，访问已被暂停。请联系您的管理员。"
+  },
+  "update": {
+    "available": "有新版本（v{{version}}）可用。",
+    "action": "立即更新",
+    "checkAction": "检查更新",
+    "checking": "正在检查...",
+    "upToDate": "您使用的是最新版本。",
+    "noticeTitle": "PROSM Time 更新"
+  },
+  "offline": {
+    "message": "别担心，上班、下班和休息打卡仍然可用，恢复联网后我们会立即发送。",
+    "title": "您已离线",
+    "backOnline": "您已恢复联网，正在更新您的信息。"
+  },
+  "commandPalette": {
+    "open": "打开搜索",
+    "placeholder": "搜索页面…",
+    "noResults": "未找到结果。",
+    "categories": {
+      "pages": "页面"
+    }
+  },
+  "notificationsLabel": "通知",
+  "noNotifications": "暂无通知。",
+  "notifications": {
+    "outOfZoneEmployee": {
+      "title": "您不在指定的工作区域内",
+      "body": "请说明原因。距离：{{distance}} 米。"
+    },
+    "outOfZoneManager": {
+      "title": "员工不在工作区域内",
+      "body": "{{name}} 不在指定区域内（距离：{{distance}} 米）。"
+    },
+    "exceptionPendingReview": {
+      "titleException": "有异常等待您审核",
+      "bodyException": "{{name}} 提交了区域外异常的原因。",
+      "titleCorrection": "有更正申请等待您审核",
+      "bodyCorrection": "{{name}} 提交了更正申请。",
+      "titleEarlyLeave": "已提交早退原因",
+      "bodyEarlyLeave": "{{name}} 说明了早退的原因。",
+      "titleLeave": "有请假申请等待您审核",
+      "bodyLeave": "{{name}} 申请了 {{days}} 天假期。",
+      "bodyLeaveDetailed": "{{name}} 申请了 {{days}} 天{{type}}（{{startDate}} 至 {{endDate}}）。",
+      "bodyLeaveReasonSuffix": "原因：{{reason}}。",
+      "titlePermission": "有许可等待您批准",
+      "bodyPermission": "{{name}} 申请了 {{date}} 的{{kind}}。",
+      "bodyPermissionShort": "{{name}} 申请了 {{date}} 的许可。",
+      "titleLeaveCancelled": "已批准的假期被取消",
+      "bodyLeaveCancelled": "{{name}} 取消了已批准的假期（{{startDate}} - {{endDate}}）。",
+      "titleLeaveRequestWithdrawn": "请假申请已撤回",
+      "bodyLeaveRequestWithdrawn": "{{name}} 在获得答复前撤回了请假申请（{{startDate}} - {{endDate}}）。"
+    },
+    "correctionReviewed": {
+      "titleException": "您的异常已审核",
+      "titleCorrection": "您的更正申请已审核",
+      "titleLeave": "您的请假申请已审核",
+      "body": "决定：{{decision}}。",
+      "titleMockLocation": "您的位置已审核",
+      "titleOfflineTime": "您的离线时间已审核",
+      "notesSuffix": "备注：“{{notes}}”",
+      "titlePermission": "您的许可已审核",
+      "titlePendingHours": "您班次的工时已审核",
+      "titleIntegrity": "您的打卡已审核"
+    },
+    "breakExceeded": {
+      "title": "休息时间超时",
+      "body": "您的休息时间超过了允许的最长时长。"
+    },
+    "sosAlert": {
+      "title": "SOS/紧急警报",
+      "body": "{{name}} 触发了 SOS/紧急警报。"
+    },
+    "timesheet": {
+      "submittedTitle": "工时表已提交审核",
+      "submittedBody": "有一份工时表已提交，等待您批准。",
+      "approvedTitle": "工时表已批准",
+      "approvedBody": "您的工时表已批准并锁定。",
+      "rejectedTitle": "工时表被驳回",
+      "rejectedBody": "您的工时表被驳回，已退回草稿。",
+      "correctionRequestedTitle": "已申请更正工时表",
+      "correctionRequestedBody": "有员工申请更正一份已锁定的工时表。",
+      "correctionApprovedTitle": "工时表更正已批准",
+      "correctionApprovedBody": "您的工时表更正已批准，该周期已重新开放以便再次提交。",
+      "correctionRejectedTitle": "工时表更正被驳回",
+      "correctionRejectedBody": "您的工时表更正申请被驳回。",
+      "readyTitle": "您的工时表已就绪",
+      "readyBody": "请核对 {{start}} - {{end}} 的工时表并提交。"
+    },
+    "shiftAssigned": {
+      "title": "为您安排了新班次",
+      "body": "您在 {{date}} 的班次为 {{startTime}} 至 {{endTime}}。",
+      "bodyOvernight": "您在 {{date}} 的班次为 {{startTime}} 至 {{endTime}}（次日）。",
+      "cancelledTitle": "已安排的班次被取消",
+      "cancelledBody": "您在 {{date}} 的班次已取消。"
+    },
+    "siteChangeAlert": {
+      "title": "员工在班次中更换了地点",
+      "body": "{{name}} 在班次中从 {{oldSite}} 换到了 {{newSite}}。",
+      "unregisteredLocation": "未登记的位置"
+    },
+    "missingClockOut": {
+      "title": "员工尚未下班打卡",
+      "body": "{{name}} 已上班打卡超过 {{hours}} 小时，仍未下班打卡。"
+    },
+    "locationPlausibilityFlag": {
+      "title": "检测到异常的位置移动",
+      "body": "根据 {{name}} 上次已知位置，其移动速度约为 {{speed}} 公里/小时，请核查。"
+    },
+    "trial": {
+      "endingTitle": "您的 PROSM Time 试用即将结束",
+      "endingBody": "您的试用将在一周后结束。您的数据会保留，不会被删除。如需继续，请输入激活码或发送邮件至 sales@prosm.net。",
+      "endedTitle": "您的 PROSM Time 试用已结束",
+      "endedBody": "该组织现为只读状态，所有数据均已保留。输入激活码或发送邮件至 sales@prosm.net，即可恢复全部功能。",
+      "licenseEndingTitle": "您的 PROSM Time 许可证即将到期",
+      "licenseEndingBody": "许可证 {{license}} 将于 {{date}} 到期。请在此之前续期，以保证应用继续运行；您的所有数据都会保留。请联系 sales@prosm.net。"
+    },
+    "decision": {
+      "approved": "已批准",
+      "rejected": "已驳回",
+      "acknowledged": "已知悉",
+      "clarification_requested": "需要说明",
+      "cancelled": "已取消"
+    },
+    "allowance": {
+      "submittedTitle": "津贴等待批准",
+      "submittedBody": "{{name}} 提交了 {{date}} 的津贴。",
+      "approvedTitle": "津贴已批准",
+      "approvedBody": "您 {{date}} 的津贴已批准。",
+      "rejectedTitle": "津贴被驳回",
+      "rejectedBody": "您 {{date}} 的津贴被驳回。您可以修改后重新提交。",
+      "sheetSubmittedBody": "{{name}} 提交了 {{days}} 天的津贴（{{start}} - {{end}}）。",
+      "sheetApprovedBody": "您 {{start}} - {{end}} 的津贴已批准。",
+      "sheetRejectedBody": "您 {{start}} - {{end}} 的津贴被驳回。请修改后重新提交。"
+    },
+    "longSessionCheck": {
+      "title": "还在工作吗？",
+      "body": "您已上班打卡 {{hours}} 小时。仍在工作，还是下班打卡？"
+    },
+    "sessionAutoClosed": {
+      "titleEmployee": "您的班次已自动关闭",
+      "bodyEmployee": "您的班次在 {{hours}} 小时未下班打卡后被关闭。其工时等待您的主管审核。",
+      "titleManager": "有班次被自动关闭",
+      "bodyManager": "{{name}} 的班次在 {{hours}} 小时未下班打卡后被关闭。请审核其工时。"
+    },
+    "exitSitePrompt": {
+      "title": "您已离开工作地点",
+      "body": "您的班次仍未结束，要下班打卡吗？"
+    },
+    "autoCheckoutGeofence": {
+      "titleEmployee": "已为您下班打卡",
+      "bodyEmployee": "您离开了工作地点，已按离开时间为您下班打卡。如有错误，请联系您的主管。",
+      "titleManager": "离开地点时自动下班打卡",
+      "bodyManager": "{{name}} 离开了工作地点，已自动下班打卡。"
+    },
+    "clockInReminder": {
+      "title": "该上班打卡了",
+      "body": "您在 {{site}} 的班次 {{time}} 开始。到达后请上班打卡。"
+    },
+    "clockOutReminder": {
+      "title": "别忘了下班打卡",
+      "body": "您的班次已于 {{time}} 结束。离开时请在 PROSM Time 中下班打卡。"
+    },
+    "accountDeleted": {
+      "title": "有员工删除了账户",
+      "body": "{{name}} 删除了账户。其考勤和工时表以“已删除用户”保留。"
+    },
+    "newDevice": {
+      "title": "新设备登录",
+      "body": "您的账户在新设备上登录：{{device}}。如果不是您本人，请修改密码。",
+      "ownerBody": "{{name}} 在新设备上登录：{{device}}。"
+    },
+    "noShow": {
+      "title": "班次未打卡",
+      "body": "{{name}} 尚未为 {{site}} {{time}} 的班次上班打卡。"
+    },
+    "overtimeSoon": {
+      "title": "正在加班",
+      "body": "{{name}} 仍在岗；班次已于 {{time}} 结束。"
+    },
+    "dailyDigest": {
+      "title": "昨日概览",
+      "body": "{{present}} 人出勤，{{noShows}} 人缺勤。待处理：{{leave}} 个请假，{{exceptions}} 个异常。当前在岗：{{open}}。"
+    },
+    "licenseChanged": {
+      "title": "您的许可证已变更",
+      "body": "PROSM 变更了您的许可证：{{changes}}。",
+      "users": "用户 {{from}} → {{to}}",
+      "devices": "设备 {{from}} → {{to}}",
+      "ends": "到期 {{date}}",
+      "status": "状态 {{status}}",
+      "plan": "套餐已变更",
+      "unlimited": "不限",
+      "planTo": "套餐 {{plan}}"
+    }
+  },
+  "items": {
+    "dashboard": "仪表板",
+    "people": "人员",
+    "sites": "地点",
+    "clockIn": "上下班打卡",
+    "manager": "主管控制台",
+    "attendance": "考勤记录",
+    "adminClock": "代为打卡",
+    "emergencyLog": "紧急日志",
+    "timesheets": "工时表",
+    "allowances": "津贴",
+    "leave": "请假",
+    "schedule": "排班表",
+    "kiosk": "考勤机模式",
+    "reports": "报表",
+    "settings": "设置",
+    "integrations": "集成",
+    "help": "帮助",
+    "workers": "工人",
+    "calendar": "日历与节假日",
+    "auditLog": "操作日志",
+    "dailySummary": "每日摘要"
+  },
+  "sosOverlay": {
+    "title": "SOS/紧急警报",
+    "subtitle": "{{name}} 刚刚触发了紧急警报。",
+    "viewAction": "查看紧急日志",
+    "dismissAction": "关闭"
+  },
+  "sections": {
+    "attendance": "考勤",
+    "people": "人员与地点",
+    "payroll": "薪资",
+    "reports": "报表",
+    "settings": "设置",
+    "help": "帮助"
+  },
+  "weather": {
+    "loading": "正在加载天气",
+    "unavailable": "天气不可用",
+    "locationUnavailable": "位置不可用",
+    "retryLocation": "点击重新获取位置",
+    "detailsLabel": "天气详情",
+    "yourLocation": "您的位置",
+    "feelsLike": "体感温度",
+    "humidity": "湿度",
+    "wind": "风",
+    "uvIndex": "紫外线指数",
+    "dailyHigh": "最高",
+    "dailyLow": "最低",
+    "sunrise": "日出",
+    "sunset": "日落",
+    "refresh": "刷新天气",
+    "lastUpdated": "更新于 {{time}}",
+    "genericError": "暂时无法加载天气。",
+    "tryAgain": "重试",
+    "categories": {
+      "clear": "晴",
+      "partly-cloudy": "多云",
+      "cloudy": "阴",
+      "fog": "雾",
+      "drizzle": "毛毛雨",
+      "rain": "雨",
+      "snow": "雪",
+      "thunderstorm": "雷暴",
+      "unknown": "未知"
+    }
+  },
+  "radio": {
+    "title": "电台",
+    "mediaSectionTitle": "媒体",
+    "loading": "正在加载…",
+    "reconnecting": "正在重新连接…",
+    "error": "播放失败。",
+    "paused": "已暂停",
+    "playing": "正在播放",
+    "pauseAction": "暂停",
+    "playAction": "播放",
+    "stopAction": "停止",
+    "muteAction": "静音",
+    "unmuteAction": "取消静音",
+    "volumeLabel": "音量",
+    "searchPlaceholder": "搜索电台…",
+    "searching": "正在搜索…",
+    "noResults": "未找到电台。",
+    "loadingStations": "正在加载电台…"
+  },
+  "trial": {
+    "banner_other": "演示版：剩余 {{count}} 天（{{date}} 结束）。之后您的数据仍会保留。如需继续，请联系销售团队：",
+    "close": "隐藏",
+    "footer_other": "试用 · 剩余 {{count}} 天"
+  },
+  "offlineSync": {
+    "waiting_other": "{{count}} 条考勤操作正在等待网络连接，将自动发送。",
+    "syncing_other": "正在发送 {{count}} 条考勤操作…",
+    "failed_other": "有考勤操作无法发送，请打开仪表板重试或放弃（{{count}} 条等待中）。"
+  },
+  "pageBanner": {
+    "manager": "今日考勤和待审核事项",
+    "people": "员工、角色和邀请",
+    "leave": "申请和跟进请假",
+    "reports": "考勤报表和导出",
+    "sites": "工作地点及其区域",
+    "attendance": "每一次上班和下班打卡",
+    "clockIn": "开始和结束您的班次",
+    "schedule": "即将到来的班次",
+    "emergencyLog": "SOS 警报及其发生位置",
+    "allowances": "每日津贴和加班",
+    "help": "解答和操作指南",
+    "kiosk": "一台共用的打卡设备",
+    "adminClock": "为他人上班或下班打卡",
+    "settings": "全组织规则",
+    "integrations": "薪资及其他系统",
+    "timesheets": "待审核和批准的工时",
+    "workers": "外部工人及其考勤机编号",
+    "calendar": "公共假日、每周休息日和特殊日期，工时和加班均据此计算。",
+    "auditLog": "组织内的所有操作：谁对谁做了什么、何时以及为何。",
+    "dailySummary": "组织的一天：谁上班、谁迟到、谁缺勤、谁在休假"
+  },
+  "backgroundDisclosure": {
+    "title": "班次期间的位置",
+    "body": "PROSM Time 大约每 5 分钟收集一次您的位置，以确认您在工作地点，即使应用已关闭或未在使用，但仅限您上班打卡期间。下班打卡后即停止。您的位置会与组织的主管共享，并在 30 天后删除。在下一个界面中，请选择“仅在使用应用期间”以使其正常工作。",
+    "accept": "继续",
+    "decline": "暂不"
+  },
+  "bottomNav": {
+    "label": "主要页面",
+    "home": "首页",
+    "manager": "控制台",
+    "people": "人员",
+    "attendance": "考勤",
+    "allowances": "津贴",
+    "leave": "请假",
+    "menu": "菜单"
+  },
+  "exitPrompt": {
+    "title": "您已离开工作地点",
+    "body": "您的班次仍未结束。现在下班打卡吗？"
+  },
+  "trackingError": {
+    "title": "位置跟踪未启动",
+    "permission": "PROSM Time 没有使用您位置的权限。请在应用设置中允许位置（“始终允许”），然后重试。您的上班打卡仍已记录。",
+    "failed": "手机的定位服务未启动（定位可能已关闭）。系统会自动重试，您也可以现在重试。您的上班打卡仍已记录。",
+    "later": "稍后",
+    "openSettings": "打开设置",
+    "retry": "重试"
+  },
+  "deleteAccount": {
+    "menuAction": "删除我的账户",
+    "title": "删除您的账户",
+    "whatGoes": "您的账户将被永久删除：您将无法再用它登录，您的个人数据也会被删除，包括姓名、邮箱和头像、上下班打卡照片、位置轨迹、请假文件、设备和通知。",
+    "whatStays": "您的组织会以“已删除用户”保留法律和薪资所需的工作记录（考勤、工时表、请假、津贴）。",
+    "passwordLabel": "密码",
+    "confirmLabel": "输入“{{word}}”以确认",
+    "confirmWord": "删除",
+    "action": "永久删除我的账户",
+    "wrongPassword": "密码不正确。",
+    "clockedIn": "请先下班打卡，再删除账户。",
+    "failed": "无法删除账户。请重试或发送邮件至 support@prosm.net。",
+    "ownerBody": "您的账户是所有者账户，整个组织及其数据都依赖于它。如需连同组织一起删除，或将所有权转交他人，请写信给我们，我们会为您处理。",
+    "ownerAction": "联系支持",
+    "ownerSubject": "所有者账户删除申请"
+  },
+  "startupPermissions": {
+    "title": "PROSM Time 权限",
+    "intro": "应用需要三项权限才能完整运行。各项权限的用途如下：",
+    "location": {
+      "title": "位置",
+      "body": "用于在上下班打卡时确认您在工作地点。在组织开启了在岗监控的地点，并且仅在您上班打卡期间，PROSM Time 大约每 5 分钟收集一次您的位置，即使应用已关闭或未在使用，期间会一直显示通知，下班打卡后即停止。您的位置会与组织的主管共享，并在 30 天后删除。"
+    },
+    "camera": {
+      "title": "相机",
+      "body": "仅在要求拍照的地点，用于上下班打卡时拍照。只有您亲自拍照时才会打开相机。"
+    },
+    "notifications": {
+      "title": "通知",
+      "body": "用于接收请假申请和审批的答复、上下班打卡提醒、紧急警报，以及上班打卡期间的班次通知。"
+    },
+    "footer": "点击“继续”后，Android 会依次请求每项权限：请选择“允许”或“仅在使用应用期间”。您之后可以在手机设置中更改任何权限。",
+    "accept": "继续",
+    "decline": "暂不"
+  },
+  "numerals": {
+    "label": "数字",
+    "latn": "拉丁数字 (123)",
+    "arab": "阿拉伯-印度数字 (١٢٣)"
+  },
+  "readOnly": {
+    "banner": "您的组织为只读状态：许可证已到期。您可以查看所有内容；修改已暂停，不会删除任何数据。",
+    "reopen": "输入激活码",
+    "askOwner": "组织所有者可以重新开放。"
+  }
+}

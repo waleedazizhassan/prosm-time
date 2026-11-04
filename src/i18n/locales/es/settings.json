@@ -1,0 +1,218 @@
+{
+  "title": "Ajustes",
+  "subtitle": "Configuración de toda la organización.",
+  "siteDefaults": {
+    "title": "Valores por defecto de las sedes",
+    "hint": "Se aplican a cada sede nueva que crees: son decisiones casi siempre iguales en toda la organización, no un atributo real de cada sede. Las sedes existentes conservan su valor; puedes cambiar cualquiera para una sede concreta desde su formulario de edición.",
+    "gpsAccuracyToleranceLabel": "Tolerancia de precisión GPS (metros)",
+    "graceToleranceLabel": "Margen de tolerancia (minutos)",
+    "breakRoundingModeLabel": "Redondeo del descanso",
+    "breakRoundingMode": {
+      "cumulative": "Acumulado (tiempo exacto de descanso)",
+      "full_hour": "Redondea a la hora completa"
+    },
+    "saveAction": "Guardar",
+    "saveSuccess": "Valores por defecto actualizados.",
+    "invalidGpsTolerance": "Escribe una tolerancia GPS mayor que cero.",
+    "invalidGraceTolerance": "El margen de tolerancia no puede ser negativo.",
+    "genericError": "No se pudieron actualizar los valores por defecto."
+  },
+  "sitePolicy": {
+    "title": "Reglas de la sede",
+    "hint": "La tolerancia GPS de esta sede, el margen, el horario de turno, las horas extra y el descuento por retraso, el redondeo del descanso, el seguimiento de presencia, los empleados exentos y los bloqueos de autoservicio.",
+    "siteSelectLabel": "Sede",
+    "siteSelectPlaceholder": "Selecciona una sede…",
+    "noSites": "Todavía no hay sedes: añade una primero desde Sedes.",
+    "loadError": "No se pudo cargar la política de esta sede.",
+    "noAssignmentsYet": "Todavía no hay nadie asignado a esta sede, así que no hay a quién eximir.",
+    "saveAction": "Guardar",
+    "saveSuccess": "Política de la sede actualizada.",
+    "genericError": "No se pudo actualizar la política de esta sede."
+  },
+  "integrations": {
+    "title": "Integraciones",
+    "hint": "Una clave de solo lectura para que otro producto PROSM (como PROSM Projects o PROSM Finance) obtenga la asistencia real y verificada de tu equipo, y también datos de nómina si la clave lo permite, en lugar de teclearlos. Esta clave nunca puede escribir nada en PROSM Time.",
+    "nameLabel": "Nombre de la clave",
+    "namePlaceholder": "p. ej., PROSM Projects o PROSM Finance",
+    "createAction": "Crear clave",
+    "createError": "No se pudo crear esta clave de API.",
+    "revokeAction": "Revocar",
+    "revokeError": "No se pudo revocar esta clave de API.",
+    "empty": "Todavía no hay claves de integración.",
+    "lastUsed": "usada por última vez {{time}}",
+    "neverUsed": "nunca usada",
+    "newKeyTitle": "Tu nueva clave de API",
+    "newKeyWarning": "Cópiala ahora: no se volverá a mostrar. Después solo se guarda su prefijo.",
+    "scopeLabel": "Acceso",
+    "scope": {
+      "attendanceRead": "Asistencia (solo lectura)",
+      "payrollRead": "Tarifas (solo lectura)"
+    }
+  },
+  "payroll": {
+    "title": "Integración de nóminas",
+    "providerLabel": "Proveedor",
+    "providers": {},
+    "notConfigured": "Esta integración aún no está configurada: pide a tu administrador que añada sus credenciales de API."
+  },
+  "rejectMockLocation": {
+    "label": "Rechazar fichajes desde una ubicación falsa",
+    "hint": "Android informa cuando una ubicación viene de una aplicación de ubicación simulada (GPS falso). Desactivado: se registra y se envía a los responsables para revisión. Activado: se rechaza el fichaje.",
+    "genericError": "No se pudo cambiar este ajuste."
+  },
+  "sessionPolicy": {
+    "title": "Turnos que quedan abiertos",
+    "hint": "Nada se cierra al terminar un turno. Tras el primer número de horas se pregunta al empleado «¿sigues trabajando?» y se avisa una vez a los responsables; tras el segundo, el turno se cierra automáticamente y sus horas esperan la revisión de un responsable.",
+    "alertHoursLabel": "Avisar tras (horas)",
+    "maxHoursLabel": "Cerrar automáticamente tras (horas)",
+    "invalid": "El aviso debe ir antes del cierre (de 1 a 72 horas).",
+    "genericError": "No se pudo guardar.",
+    "saved": "Guardado.",
+    "save": "Guardar"
+  },
+  "overtimePolicy": {
+    "title": "Horas extra y descuentos",
+    "hint": "Para toda la organización. Vacío = el valor por defecto. Los coeficientes se aplican sobre el precio de la hora extra; 1 mantiene los importes actuales.",
+    "approvalModeLabel": "Las horas extra cuentan",
+    "mode": {
+      "default": "Por defecto (tras la aprobación de un responsable)",
+      "approval": "Tras la aprobación de un responsable",
+      "automatic": "Automáticamente"
+    },
+    "field": {
+      "minOvertimeMinutes": "Las horas extra cuentan a partir de (minutos)",
+      "minLateMinutes": "El retraso cuenta a partir de (minutos)",
+      "minEarlyLeaveMinutes": "La salida anticipada cuenta a partir de (minutos)",
+      "roundMinutes": "Redondear el tiempo trabajado de cada día a (minutos)",
+      "maxDailyOvertimeMinutes": "Máximo de horas extra por día (minutos)",
+      "multiplierNormal": "Coeficiente - día normal",
+      "multiplierNight": "Coeficiente - noche",
+      "multiplierWeeklyRest": "Coeficiente - descanso semanal",
+      "multiplierPublicHoliday": "Coeficiente - festivo",
+      "nightStart": "La noche empieza",
+      "nightEnd": "La noche termina"
+    },
+    "placeholder": {
+      "minOvertimeMinutes": "0",
+      "minLateMinutes": "0",
+      "minEarlyLeaveMinutes": "0",
+      "roundMinutes": "1",
+      "maxDailyOvertimeMinutes": "sin límite",
+      "multiplierNormal": "1",
+      "multiplierNight": "1",
+      "multiplierWeeklyRest": "1",
+      "multiplierPublicHoliday": "1"
+    },
+    "invalid": "Escribe números de 0 o más.",
+    "genericError": "No se pudo guardar.",
+    "saved": "Guardado.",
+    "save": "Guardar",
+    "alertLabel": "Aviso de horas extra (minutos tras el fin del turno)",
+    "alertHint": "Te avisamos cuando alguien sigue con la entrada fichada estos minutos después del fin de su turno. 15 por defecto; un número negativo avisa antes del final.",
+    "alertSaved": "Guardado."
+  },
+  "leaveTypes": {
+    "title": "Tipos de ausencia",
+    "hint": "Los cambios se aplican a los derechos futuros; los saldos ya fijados se mantienen.",
+    "add": "Añadir un tipo de ausencia",
+    "edit": "Editar",
+    "save": "Guardar",
+    "inactive": "sin uso",
+    "paid": "retribuida",
+    "unpaid": "no retribuida",
+    "tiersSummary": "según años de servicio {{tiers}}",
+    "daysSummary": "{{days}} días al año",
+    "maxPerRequestSummary": "como máximo {{days}} cada vez",
+    "documentSummary": "requiere documento",
+    "key": "Código",
+    "keyHint": "Minúsculas y _, p. ej., estudio",
+    "name": "Nombre",
+    "paidLabel": "Retribuida",
+    "annualDays": "Días por año (fijo)",
+    "tiers": "Días según años de servicio",
+    "tiersHint": "años:días, p. ej., 0:15, 1:21, 10:30",
+    "specialNeedsDays": "Días por necesidades especiales",
+    "enforceBalance": "Rechazar solicitudes que superen el saldo",
+    "maxDaysPerRequest": "Máximo de días cada vez",
+    "maxTimesInService": "Máximo de veces en todo el servicio",
+    "minServiceYears": "Años mínimos de servicio",
+    "requiresDocument": "Requiere un documento",
+    "active": "En uso",
+    "invalidTiers": "Escribe los tramos como años:días separados por comas.",
+    "genericError": "No se pudo guardar.",
+    "medicalReportNote": "Con informe médico."
+  },
+  "siteFocus": {
+    "backToSite": "← Volver a la sede",
+    "allSettings": "Todos los ajustes"
+  },
+  "plan": {
+    "title": "Plan",
+    "current": "Plan",
+    "trial": "Prueba gratuita",
+    "employees": "Empleados",
+    "sites": "Sedes",
+    "ends": "Termina el",
+    "noEnd": "Sin fecha de fin",
+    "usage": "{{used}} de {{max}}",
+    "codeLabel": "Código de activación",
+    "redeem": "Activar el código",
+    "redeemed": "El código está activado.",
+    "redeemFailed": "El código es incorrecto o ya se usó.",
+    "names": {
+      "legacy": "Todo incluido (cliente anterior a los planes)",
+      "starter": "Starter",
+      "business": "Business",
+      "pro": "Pro"
+    },
+    "includes": "Qué incluye tu plan",
+    "always": "En todos los planes: fichaje en la sede, zona de trabajo, foto, sin conexión, mapa, informes básicos y 9 idiomas.",
+    "included": "incluido",
+    "notIncluded": "no incluido en tu plan",
+    "features": {
+      "on_behalf": "Fichar en nombre de un empleado",
+      "kiosk": "Quiosco y trabajadores externos",
+      "leave": "Ausencias",
+      "allowances": "Pluses, hojas y aprobaciones",
+      "export": "Exportación de informes (PDF)",
+      "payroll_export": "Exportación para nóminas (Excel / CSV)",
+      "clock_rules": "Reglas de fichaje (margen de salida, redondeo)",
+      "scheduling": "Cuadrantes, turnos abiertos y cambios",
+      "roles_manager": "Roles de responsable y supervisor",
+      "audit": "Registro de auditoría completo",
+      "sos": "Emergencias SOS",
+      "roles_all": "Rol de lector y permisos personales",
+      "clock_suggestion": "Pregunta para fichar al llegar",
+      "labor_cost": "Coste laboral y presupuestos de proyecto",
+      "daily_summary": "Resumen diario",
+      "manager_alerts": "Avisos a responsables (falta, horas extra, resumen de la mañana)"
+    },
+    "managedByProsm": "Cualquier cambio o renovación de tu licencia lo hace PROSM; recibes una notificación y un correo con la nueva licencia. Para cambiarla, escribe a sales@prosm.net.",
+    "historyAll": "Registros de asistencia visibles: todos. Los puntos de ubicación y las fotos se eliminan automáticamente tras el plazo de «Conservación de datos».",
+    "history_one": "Registros de asistencia visibles y en informes: el último año. Los anteriores se conservan y vuelven con un plan superior. Los puntos de ubicación y las fotos se eliminan automáticamente tras el plazo de «Conservación de datos».",
+    "history_other": "Registros de asistencia visibles y en informes: los últimos {{count}} años. Los anteriores se conservan y vuelven con un plan superior. Los puntos de ubicación y las fotos se eliminan automáticamente tras el plazo de «Conservación de datos».",
+    "history_many": "Registros de asistencia visibles y en informes: los últimos {{count}} años. Los anteriores se conservan y vuelven con un plan superior. Los puntos de ubicación y las fotos se eliminan automáticamente tras el plazo de «Conservación de datos»."
+  },
+  "retention": {
+    "title": "Conservación de datos",
+    "subtitle": "Solo puedes acortar estos plazos. Un plazo más corto también se aplica a los datos guardados y lo más antiguo se elimina automáticamente.",
+    "location": "Puntos de ubicación: días (hasta {{max}})",
+    "photo": "Fotos de asistencia: días (hasta {{max}})",
+    "save": "Guardar",
+    "saved": "Guardado.",
+    "saveFailed": "No se pudo guardar."
+  },
+  "clockSuggestion": {
+    "title": "Preguntar al abrir la aplicación dentro de una sede",
+    "subtitle": "Cuando alguien abre la aplicación dentro de una sede, se le pregunta si quiere fichar. No se registra nada sin su respuesta, sigue el fichaje normal y no se usa la ubicación en segundo plano.",
+    "label": "Preguntar a la persona si ficha",
+    "failed": "No se pudo guardar este ajuste."
+  },
+  "sections": {
+    "subscription": "Suscripción",
+    "sites": "Sedes y fichaje",
+    "time": "Jornada y horas extra",
+    "leave": "Ausencias",
+    "privacy": "Datos y privacidad"
+  }
+}

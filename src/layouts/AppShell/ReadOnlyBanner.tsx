@@ -16,7 +16,7 @@ export default function ReadOnlyBanner() {
       <Lock size={16} />
       <span style={{ flex: 1 }}>
         {t("readOnly.banner")}{" "}
-        {status.isOwner ? <Link to="/settings">{t("readOnly.reopen")}</Link> : t("readOnly.askOwner")}
+        {status.isOwner ? <Link to="/settings#plan">{t("readOnly.reopen")}</Link> : t("readOnly.askOwner")}
       </span>
     </div>
   );

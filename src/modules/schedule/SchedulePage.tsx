@@ -27,6 +27,8 @@ import ShiftSwapCard from "./ShiftSwapCard";
 import ScheduleCostCard from "./ScheduleCostCard";
 import OpenShiftsCard from "./OpenShiftsCard";
 import ChecklistSettingsCard from "./ChecklistSettingsCard";
+import usePlanFeatures from "../../core/hooks/usePlanFeatures";
+import PlanLockedNote from "../../components/common/PlanLockedNote";
 
 function isoDate(date: Date): string {
   return date.toISOString().slice(0, 10);
@@ -52,6 +54,8 @@ function formatShiftTime(startTime: string, endTime: string, crossesMidnight: bo
 export default function SchedulePage() {
   const { t, i18n } = useTranslation("schedule");
   const { hasPermission, profile } = useAuth();
+  const { allows } = usePlanFeatures(profile?.id);
+  const scheduling = allows("scheduling");
   const canManage = hasPermission("schedules.manage") || Boolean(profile?.isOwner);
 
   const today = new Date();
@@ -232,13 +236,14 @@ export default function SchedulePage() {
       )}
 
       <OpenShiftsCard
-        manageSiteId={canManage && selectedSiteId ? selectedSiteId : null}
+        manageSiteId={canManage && scheduling && selectedSiteId ? selectedSiteId : null}
         onFilled={() => {
           void loadMine();
           void loadSiteData();
         }}
       />
 
+      {scheduling ? (
       <ShiftSwapCard
         shifts={myShifts}
         onChanged={() => {
@@ -246,8 +251,15 @@ export default function SchedulePage() {
           void loadSiteData();
         }}
       />
+      ) : null}
 
-      {canManage ? (
+      {canManage && !scheduling ? (
+        <Card title={t("manageTitle")}>
+          <PlanLockedNote plan="business" />
+        </Card>
+      ) : null}
+
+      {canManage && scheduling ? (
         <>
           <Card title={t("manageTitle")}>
             <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap", marginBottom: "var(--space-3)" }}>
@@ -261,7 +273,7 @@ export default function SchedulePage() {
             <Table columns={siteColumns} data={siteShifts} getRowId={(row) => row.id} loading={siteShiftsLoading} emptyMessage={t("emptySite")} />
           </Card>
 
-          <ScheduleCostCard siteId={selectedSiteId} startDate={rangeStart} endDate={rangeEnd} refreshKey={costKey} />
+          {allows("labor_cost") ? <ScheduleCostCard siteId={selectedSiteId} startDate={rangeStart} endDate={rangeEnd} refreshKey={costKey} /> : null}
           {selectedSiteId ? <ChecklistSettingsCard siteId={selectedSiteId} /> : null}
 
           <Card title={t("templatesTitle")}>

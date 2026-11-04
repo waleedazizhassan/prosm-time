@@ -1,0 +1,273 @@
+{
+  "title": "报表",
+  "subtitle": "按任意日期范围导出所需报表。",
+  "loadError": "无法加载此报表的数据。",
+  "types": {
+    "attendance": "考勤记录",
+    "allowances": "补贴汇总表",
+    "timesheets": "考勤表",
+    "timesheet": "考勤表",
+    "workforce": "公司员工",
+    "contractor": "临时用工",
+    "site": "工地汇总",
+    "late": "迟到",
+    "missingCheckouts": "未打下班卡",
+    "leaveConflicts": "请假冲突",
+    "absences": "缺勤",
+    "managerOverrides": "经理干预",
+    "locationViolations": "位置异常",
+    "sos": "紧急（SOS）",
+    "dashboard": "仪表板",
+    "auditLog": "操作记录",
+    "laborCost": "人工成本"
+  },
+  "timesheetsHint": "考勤表按员工和周期生成与审批，而不是按日期范围。",
+  "timesheetsLink": "前往考勤表",
+  "filters": {
+    "fromLabel": "从",
+    "toLabel": "至",
+    "employeeLabel": "员工",
+    "allEmployees": "全部员工",
+    "siteLabel": "工地",
+    "allSites": "全部工地"
+  },
+  "loadingRows": "加载中…",
+  "rowCount": "{{count}} 行可导出。",
+  "exportAction": "导出 PDF",
+  "empty": "此范围内没有数据。",
+  "columns": {
+    "workforce": {
+      "name": "姓名",
+      "email": "邮箱",
+      "role": "角色",
+      "owner": "所有者",
+      "sites": "工地",
+      "status": "状态"
+    },
+    "contractor": {
+      "name": "工人",
+      "number": "号码",
+      "site": "工地",
+      "clockIn": "上班",
+      "clockOut": "下班"
+    },
+    "site": {
+      "name": "工地",
+      "employees": "员工",
+      "hours": "总工时",
+      "exceptions": "例外"
+    },
+    "late": {
+      "name": "员工",
+      "site": "工地",
+      "shiftStart": "班次开始",
+      "clockIn": "上班打卡",
+      "minutesLate": "迟到分钟",
+      "date": "日期",
+      "employeeTotal": "员工合计（分钟）"
+    },
+    "missingCheckouts": {
+      "name": "员工",
+      "site": "工地",
+      "clockIn": "上班打卡",
+      "hoursOpen": "未关闭时长",
+      "status": "状态",
+      "stillOpen": "仍未关闭",
+      "eventuallyClosed": "后来已关闭",
+      "states": {
+        "open": "仍未关闭",
+        "pending_review": "自动关闭，等待审核（不计入）",
+        "reviewed": "经理已审核",
+        "auto_closed": "自动关闭",
+        "closed": "后来已关闭"
+      }
+    },
+    "leaveConflicts": {
+      "name": "员工",
+      "site": "工地",
+      "clockIn": "上班打卡",
+      "leaveType": "请假类型",
+      "leaveRange": "请假日期"
+    },
+    "absences": {
+      "name": "员工",
+      "site": "工地",
+      "date": "日期",
+      "shift": "排定班次"
+    },
+    "managerOverrides": {
+      "actor": "操作人",
+      "subject": "对象",
+      "action": "操作",
+      "reason": "原因",
+      "when": "时间"
+    },
+    "locationViolations": {
+      "name": "员工",
+      "site": "工地",
+      "speed": "推算速度",
+      "distance": "距离",
+      "when": "时间",
+      "type": "类型",
+      "reason": "员工说明",
+      "status": "审核",
+      "types": {
+        "outside_work_area": "在工作区域外",
+        "implausible_location": "不可能的位置",
+        "mock_location": "虚假位置（GPS 应用）"
+      },
+      "statuses": {
+        "pending_reason": "等待说明",
+        "pending_review": "等待审核",
+        "resolved": "已审核",
+        "approved": "已批准",
+        "rejected": "已拒绝",
+        "acknowledged": "已知悉"
+      }
+    },
+    "sos": {
+      "name": "员工",
+      "site": "工地",
+      "triggeredAt": "触发时间",
+      "status": "状态",
+      "active": "进行中",
+      "resolved": "已处理"
+    },
+    "laborCost": {
+      "project": "项目",
+      "site": "工地",
+      "name": "员工",
+      "hours": "工时",
+      "cost": "成本",
+      "noRate": "无费率"
+    }
+  },
+  "values": {
+    "memberStatus": {
+      "active": "启用",
+      "invited": "已邀请",
+      "suspended": "已暂停"
+    },
+    "leaveType": {
+      "annual": "年假",
+      "sick": "病假",
+      "unpaid": "无薪假",
+      "emergency": "紧急事假",
+      "other": "其他"
+    },
+    "overrideAction": {
+      "ADMIN_CLOCK_IN_ON_BEHALF": "代为上班打卡",
+      "ADMIN_CLOCK_OUT_ON_BEHALF": "代为下班打卡",
+      "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "代分包工人下班打卡",
+      "attendance": {
+        "override_block": "解除上班打卡限制",
+        "review_pending_hours": "审核待定工时",
+        "extend_session": "延长班次",
+        "overtime_approved": "批准加班",
+        "day_adjusted": "调整当天",
+        "permission_granted": "经理添加许可"
+      },
+      "allowances": {
+        "edit_during_review": "审核中修改补贴",
+        "reopen_approved": "重新打开已批准的补贴表"
+      },
+      "leave": {
+        "approved_cancelled": "取消已批准的请假",
+        "deduction_set": "设置请假扣款",
+        "deduction_changed": "修改请假扣款"
+      }
+    }
+  },
+  "recentExports": {
+    "title": "最近导出",
+    "empty": "还没有导出记录：您导出的每个 PDF 都会自动保存在这里。",
+    "typeColumn": "类型",
+    "fileColumn": "文件",
+    "periodColumn": "期间",
+    "exportedByColumn": "导出人",
+    "createdAtColumn": "导出时间",
+    "downloadAction": "下载"
+  },
+  "ownExportsHint": "您的考勤记录、补贴和考勤表在各自页面下载和打印。您导出的每个 PDF 都保存在这里，可随时再次下载。",
+  "payroll": {
+    "title": "工资数据导出",
+    "subtitle": "每人一行，供您的会计使用。汇总应用中的数据，不计算工资。",
+    "allColumns": "全部列",
+    "template": "模板",
+    "templateName": "新模板名称",
+    "saveTemplate": "保存模板",
+    "deleteTemplate": "删除模板",
+    "templateFailed": "无法保存此模板。",
+    "excel": "下载 Excel",
+    "csv": "下载 CSV",
+    "periodTooLong": "请选择不超过 3 个月的期间。",
+    "columns": {
+      "name": "姓名",
+      "email": "邮箱",
+      "daysWorked": "出勤天数",
+      "workedHours": "工作时长",
+      "overtimeHours": "加班时长",
+      "weightedOvertimeHours": "按系数计算的加班时长",
+      "lateMinutes": "迟到分钟",
+      "earlyLeaveMinutes": "早退分钟",
+      "deductionMinutes": "扣除分钟",
+      "absenceDays": "缺勤天数",
+      "paidLeaveDays": "带薪假天数",
+      "unpaidLeaveDays": "无薪假天数",
+      "leaveDeduction": "无薪假扣款",
+      "allowances": "补贴",
+      "overtimeAmount": "加班和额外工作日金额",
+      "currency": "币种"
+    }
+  },
+  "budgets": {
+    "title": "项目预算",
+    "subtitle": "各项目目前的人工成本与预算对比。",
+    "project": "项目",
+    "spent": "目前人工成本",
+    "budget": "预算",
+    "used": "已用",
+    "save": "保存",
+    "placeholder": "设置",
+    "invalid": "请输入数字，或留空。",
+    "failed": "无法保存预算。",
+    "unpriced": "没有费率的人员工时不计入成本。"
+  },
+  "dailySummary": {
+    "loadError": "无法加载汇总。",
+    "ownerOnly": "每日汇总仅供机构所有者查看。",
+    "day": "显示日期",
+    "previousDay": "前一天",
+    "nextDay": "后一天",
+    "yesterday": "昨天",
+    "today": "今天",
+    "worked": "出勤",
+    "totalHours": "总工时",
+    "late": "迟到",
+    "noShows": "缺席排定班次",
+    "onLeave": "请假",
+    "peopleTitle": "出勤人员",
+    "nobodyWorked": "当天没有人上班打卡。",
+    "noShowsTitle": "缺席排定班次",
+    "noNoShows": "没有人缺席班次。",
+    "leaveTitle": "请假",
+    "noLeave": "没有人请假。",
+    "waitingTitle": "当前待处理",
+    "waitingHint": "这些是现在的数字，不是所显示日期的数字。",
+    "waitingLeave": "请假申请：{{count}}",
+    "waitingExceptions": "例外：{{count}}",
+    "clockedInNow": "当前在岗：{{count}}",
+    "noSite": "无工地",
+    "stillIn": "仍在岗",
+    "autoClosed": "已自动关闭",
+    "lateBy": "迟到 {{time}}",
+    "columns": {
+      "name": "姓名",
+      "site": "工地",
+      "in": "上班",
+      "out": "下班",
+      "hours": "工时",
+      "late": "迟到"
+    }
+  }
+}

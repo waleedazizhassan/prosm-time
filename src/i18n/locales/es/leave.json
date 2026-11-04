@@ -1,0 +1,103 @@
+{
+  "title": "Ausencias",
+  "subtitle": "Pide días libres y consulta tu saldo.",
+  "loadError": "No se pudieron cargar tus solicitudes.",
+  "submitError": "No se pudo enviar esta solicitud.",
+  "cancelError": "No se pudo cancelar esta solicitud.",
+  "cancelAction": "Cancelar",
+  "balanceTitle": "Saldo ({{year}})",
+  "daysRemainingSuffix": "días disponibles",
+  "daysTakenSuffix": "días disfrutados",
+  "balanceDetail": "{{used}} usados, {{pending}} pendientes, {{entitled}} asignados",
+  "pendingSuffix": "{{pending}} pendientes",
+  "requestFormTitle": "Pedir una ausencia",
+  "startDateLabel": "Fecha de inicio",
+  "endDateLabel": "Fecha de fin",
+  "reasonLabel": "Motivo (opcional)",
+  "submitAction": "Enviar solicitud",
+  "myRequestsTitle": "Mis solicitudes",
+  "orgWideRequestsTitle": "Ausencias de toda la organización",
+  "ownerAutoApproveHint": "Como propietario, tu solicitud se aprueba al instante: no hay nadie por encima de ti que la revise.",
+  "ownerAutoApprovedMessage": "Aprobada al instante.",
+  "empty": "Todavía no hay solicitudes.",
+  "columns": {
+    "employee": "Empleado",
+    "type": "Tipo",
+    "dates": "Fechas",
+    "days": "Días",
+    "reason": "Motivo",
+    "status": "Estado",
+    "reviewedBy": "Revisada por",
+    "deduction": "Descuento"
+  },
+  "types": {
+    "annual": "Vacaciones",
+    "sick": "Enfermedad",
+    "unpaid": "No retribuida",
+    "emergency": "Asuntos propios",
+    "other": "Otra",
+    "hajj": "Hajj o Umrah",
+    "bereavement": "Fallecimiento",
+    "paternity": "Paternidad"
+  },
+  "status": {
+    "pending": "Pendiente",
+    "approved": "Aprobada",
+    "rejected": "Rechazada",
+    "cancelled": "Cancelada"
+  },
+  "permission": {
+    "title": "Pedir un permiso",
+    "hint": "Llegada tarde, salida anticipada u horas extra: pídelo antes del día; tu responsable decide si se paga. Verás la decisión aquí.",
+    "kindLabel": "Tipo",
+    "dateLabel": "Día",
+    "minutesLabel": "Minutos (opcional)",
+    "reasonLabel": "Motivo (obligatorio)",
+    "submit": "Enviar a mi responsable",
+    "required": "Elige el día y escribe el motivo.",
+    "genericError": "No se pudo enviar.",
+    "cancel": "Retirar",
+    "noDeduction": "sin descuento",
+    "partialDeduction": "descuento parcial",
+    "kind": {
+      "late_arrival": "Llegada tarde",
+      "early_leave": "Salida anticipada",
+      "approved_overtime": "Horas extra",
+      "no_overtime": "No cuenta como horas extra"
+    },
+    "status": {
+      "pending": "pendiente",
+      "approved": "aprobado",
+      "rejected": "rechazado",
+      "cancelled": "retirado"
+    }
+  },
+  "typeRules": {
+    "paid": "retribuida",
+    "unpaid": "no retribuida",
+    "maxPerRequest": "como máximo {{days}} días cada vez",
+    "maxTimes": "como máximo {{times}} veces en el servicio",
+    "minService": "tras {{years}} años de servicio",
+    "document": "requiere un documento"
+  },
+  "documentLabel": "Documento (informe médico)",
+  "documentUploadError": "No se pudo subir el documento.",
+  "balanceDiffers": "Fijado a mano; las reglas dan {{computed}}: consulta a tu responsable si no parece correcto.",
+  "startedCannotCancel": "Iniciada: no se puede cancelar",
+  "grant": {
+    "title": "Registrar una ausencia de {{name}}",
+    "hint": "Si la pidió por teléfono o faltó con motivo: regístrala aquí y queda aprobada al momento; la falta pasa a ser ausencia en el panel y en la hoja de horas. Se admiten días pasados.",
+    "typeLabel": "Tipo de ausencia",
+    "notesLabel": "Nota (opcional)",
+    "deductionLabel": "Descuento por día",
+    "deductionHint": "La ausencia no retribuida se aprueba con un descuento por día.",
+    "action": "Registrar y aprobar",
+    "done": "Se registró y aprobó la ausencia de {{name}}.",
+    "doneReopen_one": "Se registró y aprobó la ausencia de {{name}}. Una hoja de horas enviada cubre estos días: reábrela para corrección y que muestre la ausencia.",
+    "doneReopen_other": "Se registró y aprobó la ausencia de {{name}}. {{count}} hojas de horas enviadas cubren estos días: reábrelas para corrección y que muestren la ausencia.",
+    "error": "No se pudo registrar la ausencia.",
+    "doneReopen_many": "Se registró y aprobó la ausencia de {{name}}. {{count}} hojas de horas enviadas cubren estos días: reábrelas para corrección y que muestren la ausencia."
+  },
+  "reviewerLabel": "Enviar la solicitud a",
+  "reviewerOwner": "{{name}} (propietario)"
+}

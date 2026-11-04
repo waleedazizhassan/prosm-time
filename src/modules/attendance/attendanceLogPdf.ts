@@ -1,6 +1,6 @@
 import type { jsPDF } from "jspdf";
 import type { TodayAttendanceRow } from "../../core/repositories/ManagerRepository";
-import { formatTimeOnly } from "../../core/utils/formatDate";
+import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
 import { renderHtmlToPdf, escapeHtml } from "../../core/utils/htmlToPdf";
 import { attendanceNoteLines, startingSiteName } from "./attendanceNotes";
 import prosmLogo from "../../assets/prosm-logo-pdf.png";
@@ -41,12 +41,13 @@ export function buildAttendanceLogPdf(
 
   const bodyRows =
     rows.length === 0
-      ? `<tr><td colspan="6" style="padding:14px;text-align:center;color:#64748b;">${escapeHtml(t("empty"))}</td></tr>`
+      ? `<tr><td colspan="8" style="padding:14px;text-align:center;color:#64748b;">${escapeHtml(t("empty"))}</td></tr>`
       : rows
           .map(
             (row) => `
         <tr>
           <td style="padding:6px 10px;border-top:1px solid #e2e8f0;">${escapeHtml(row.userFullName)}</td>
+          <td style="padding:6px 10px;border-top:1px solid #e2e8f0;white-space:nowrap;">${escapeHtml(formatDateOnly(row.clockInAt, locale))}</td>
           <td style="padding:6px 10px;border-top:1px solid #e2e8f0;">${escapeHtml(startingSiteName(row, t))}${row.siteChanges.map((change) => `<br/><span style="font-size:10px;color:#64748b;">${escapeHtml(t("siteChangedTo", { site: change.toSiteName || t("noRegisteredSite"), time: formatTimeOnly(change.changedAt, locale) }))}</span>`).join("")}</td>
           <td style="padding:6px 10px;border-top:1px solid #e2e8f0;">${escapeHtml(formatTimeOnly(row.clockInAt, locale))}${row.clockInRecordedByName ? `<br/><span style="font-size:10px;color:#64748b;">${escapeHtml(t("recordedByOnBehalf", { name: row.clockInRecordedByName }))}</span>` : ""}${row.clockInDeviceTime ? `<br/><span style="font-size:10px;color:#b45309;">${escapeHtml(t("deviceTimeBadge"))}</span>` : ""}</td>
           <td style="padding:6px 10px;border-top:1px solid #e2e8f0;">${row.clockOutAt ? escapeHtml(formatTimeOnly(row.clockOutAt, locale)) : "—"}${row.clockOutRecordedByName ? `<br/><span style="font-size:10px;color:#64748b;">${escapeHtml(t("recordedByOnBehalf", { name: row.clockOutRecordedByName }))}</span>` : ""}${row.clockOutDeviceTime ? `<br/><span style="font-size:10px;color:#b45309;">${escapeHtml(t("deviceTimeBadge"))}</span>` : ""}</td>
@@ -75,6 +76,7 @@ export function buildAttendanceLogPdf(
       <thead>
         <tr style="background:#f1f5f9;">
           <th style="padding:6px 10px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.employee"))}</th>
+          <th style="padding:6px 10px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.date"))}</th>
           <th style="padding:6px 10px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.site"))}</th>
           <th style="padding:6px 10px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.clockInAt"))}</th>
           <th style="padding:6px 10px;text-align:${isRtl ? "right" : "left"};">${escapeHtml(t("columns.clockOutAt"))}</th>

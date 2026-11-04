@@ -17,6 +17,7 @@ import { LayoutProvider } from "./LayoutContext";
 import styles from "./AppShell.module.css";
 import TrialBanner from "./TrialBanner";
 import ReadOnlyBanner from "./ReadOnlyBanner";
+import LanguageSync from "./LanguageSync";
 import AttendanceSyncStatus from "./AttendanceSyncStatus";
 
 // PROSM Time Implementation Master File V3.0, §30 ("Navigation must be
@@ -43,6 +44,7 @@ export default function AppShell() {
             <InstallationStatusBanner />
             <TrialBanner />
             <ReadOnlyBanner />
+            <LanguageSync />
             <OfflineBanner />
             <AttendanceSyncStatus />
           </div>

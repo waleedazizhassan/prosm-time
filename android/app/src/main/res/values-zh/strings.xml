@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="capacitor_background_geolocation_notification_channel_name">PROSM Time · 考勤</string>
+    <string name="reminder_channel_name">上下班打卡提醒</string>
+    <string name="reminder_channel_description">即使手机处于静音状态，也会以闹钟铃声响起。</string>
+</resources>

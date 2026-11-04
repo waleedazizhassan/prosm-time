@@ -1,0 +1,147 @@
+{
+  "common": {
+    "footer": "{{org}} · PROSM Time - 考勤系统自动发送的消息。",
+    "signature": "PROSM Time",
+    "contacts": "联系我们：",
+    "days_other": "{{count}} 天"
+  },
+  "leave": {
+    "types": {
+      "annual": "年假",
+      "sick": "病假",
+      "unpaid": "无薪假",
+      "emergency": "紧急事假",
+      "other": "其他假期"
+    },
+    "unpaid": "（无薪）",
+    "period": "{{from}} 至 {{to}}",
+    "subject": "请假申请 - {{name}} - {{period}}",
+    "rows": {
+      "employee": "员工",
+      "type": "假期类型",
+      "period": "期间",
+      "days": "天数",
+      "reason": "原因",
+      "sentTo": "提交给",
+      "approvedBy": "批准人",
+      "cancelledBy": "取消人",
+      "declinedBy": "拒绝人",
+      "note": "备注",
+      "remaining": "{{type}}剩余额度"
+    },
+    "answerEmployee": "直接回复员工：",
+    "answerEmployeeShort": "回复员工：",
+    "answerDecider": "回复做出决定的人：",
+    "viewMine": "查看我的假期",
+    "request": {
+      "title": "有一份请假申请等待您审批",
+      "intro": "{{name}} 申请了{{type}}，{{period}}。请在应用中审批。",
+      "action": "审批申请"
+    },
+    "sent": {
+      "title": "您的请假申请已提交",
+      "intro": "您的申请（{{type}}，{{period}}）已提交给 {{to}}。回复将出现在同一邮件会话中。"
+    },
+    "requestWithdrawn": {
+      "title": "一份请假申请已撤回",
+      "intro": "{{name}} 在得到答复前撤回了{{type}}申请，{{period}}。您无需任何操作。",
+      "copyTitle": "您的请假申请已撤回",
+      "copyIntro": "您已撤回{{type}}申请，{{period}}；已通知 {{to}}。"
+    },
+    "withdrawn": {
+      "title": "一项已批准的假期已撤回",
+      "intro": "{{name}} 撤回了已批准的{{type}}，{{period}}；天数已退回其额度。您无需任何操作。",
+      "copyTitle": "您的假期已取消",
+      "copyIntro": "您已撤回{{type}}，{{period}}；天数已退回您的额度。"
+    },
+    "approved": {
+      "title": "您的假期已获批准 🎉",
+      "intro": "恭喜，{{name}}！您的{{type}}已获批准，{{period}}。祝您休假愉快。",
+      "introBalance": "恭喜，{{name}}！您的{{type}}已获批准，{{period}}；剩余额度 {{remaining}}。祝您休假愉快。"
+    },
+    "cancelled": {
+      "title": "您的假期已取消",
+      "intro": "您已批准的{{type}}（{{period}}）已被取消；天数已退回您的额度。"
+    },
+    "rejected": {
+      "title": "您的请假申请未获批准",
+      "intro": "您的{{type}}申请（{{period}}）未获批准。"
+    }
+  },
+  "invite": {
+    "subject": "邀请您加入 PROSM Time 上的 {{org}}",
+    "title": "您受邀加入 PROSM Time 上的 {{org}}",
+    "body": "{{name}}，您好！您受邀以{{role}}身份加入 PROSM Time 上的 {{org}}。请在应用中输入下方验证码，接受邀请并设置账户。",
+    "codeLabel": "您的验证码：",
+    "expires_other": "此邀请将在 {{count}} 天后失效。",
+    "ignore": "如果您没有预期收到此邀请，可以忽略这封邮件。",
+    "roles": {
+      "manager": "经理 / 工地经理",
+      "supervisor": "主管 / 组长",
+      "employee": "员工",
+      "read_only": "只读 / 报表"
+    },
+    "yourOrganization": "您的机构"
+  },
+  "reset": {
+    "subject": "重置您的 PROSM Time 密码",
+    "title": "重置您的 PROSM Time 密码",
+    "body": "{{name}}，您好！我们收到了重置您 PROSM Time 密码的请求。请在应用中输入下方代码，设置新密码。",
+    "codeLabel": "您的重置代码：",
+    "expires_other": "此代码将在 {{count}} 分钟后失效。",
+    "ignore": "如果这不是您本人的请求，请忽略这封邮件，您的密码不会改变。",
+    "there": ""
+  },
+  "trial": {
+    "licenseSubject": "您的 PROSM Time 许可证将于 {{date}} 到期",
+    "licenseBody": "{{org}} 的许可证（编号 {{license}}）将于{{when}}到期，即 {{date}}。",
+    "licenseRenew": "请在此之前续期，以便应用继续运行；您的所有数据都会保留：",
+    "whenDay": "明天",
+    "whenWeek": "一周后",
+    "whenMonth": "一个月后",
+    "endingSubject": "您的 PROSM Time 试用将于 {{date}} 结束",
+    "endingBody": "{{org}} 的 PROSM Time 试用将于 {{date}} 结束。您的数据会保留，不会被删除。",
+    "endingContinue": "如需继续使用，请联系销售团队续订许可证（编号 {{license}}）：",
+    "endedSubject": "您的 PROSM Time 试用已结束",
+    "endedBody": "{{org}} 的 PROSM Time 试用已结束。机构现为只读状态：所有人仍可查看全部内容，您的所有数据都会保留。",
+    "endedContinue": "登录后在 设置 > 订阅 中输入激活码，或联系我们，一切即可恢复如初（许可证编号 {{license}}）："
+  },
+  "licence": {
+    "subject": "PROSM Time - {{org}} 的许可证已变更",
+    "greeting": "{{name}}，您好：",
+    "intro": "PROSM 已变更 {{org}} 在 PROSM Time 中的许可证（编号 {{license}}）：",
+    "noChanges": "许可证信息已更新。",
+    "applied": "变更已在应用中生效。新许可证以 PDF 附件形式附上，您也可以在 设置 > 订阅 中查看。",
+    "contact": "如有疑问：",
+    "pdf": {
+      "title": "PROSM Time 许可证书",
+      "tagline": "值得信赖的考勤 - 在现场，准时。",
+      "licenseNumber": "许可证编号：{{license}}",
+      "plan": "套餐",
+      "status": "状态",
+      "users": "用户",
+      "devices": "设备",
+      "validUntil": "有效期至",
+      "whatChanged": "变更内容",
+      "footer": "许可证变更时由 PROSM 自动签发。如有疑问：support@prosm.net",
+      "issued": "签发时间 {{date}} UTC",
+      "unlimited": "不限",
+      "noEnd": "无到期日",
+      "usersOf": "{{used}} / {{max}}",
+      "planAll": "全部功能",
+      "change": {
+        "users": "用户",
+        "devices": "设备",
+        "expiry": "到期日",
+        "status": "状态",
+        "plan": "套餐"
+      },
+      "statuses": {
+        "ACTIVE": "有效",
+        "SUSPENDED": "已暂停",
+        "EXPIRED": "已到期",
+        "REVOKED": "已撤销"
+      }
+    }
+  }
+}

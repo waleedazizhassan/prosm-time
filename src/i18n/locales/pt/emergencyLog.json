@@ -1,0 +1,36 @@
+{
+  "title": "Registro de emergências",
+  "subtitle": "Cada alerta de SOS/emergência: localização GPS exata, horário, funcionário e unidade.",
+  "loadError": "Não foi possível carregar o registro de emergências.",
+  "filters": {
+    "title": "Período",
+    "fromLabel": "De",
+    "toLabel": "Até",
+    "employeeLabel": "Funcionário",
+    "allEmployees": "Todos os funcionários"
+  },
+  "columns": {
+    "employee": "Funcionário",
+    "site": "Unidade",
+    "triggeredAt": "Acionado em",
+    "location": "Localização",
+    "status": "Situação"
+  },
+  "status": {
+    "active": "Ativo",
+    "resolved": "Resolvido"
+  },
+  "empty": "Nenhum alerta de emergência neste período.",
+  "detail": {
+    "title": "Alerta de emergência",
+    "employeeLabel": "Funcionário",
+    "siteLabel": "Unidade de trabalho",
+    "triggeredAtLabel": "Acionado em",
+    "locationLabel": "Localização GPS exata",
+    "accuracyLabel": "Precisão do GPS: ±{{meters}} m",
+    "resolvedAtLabel": "Resolvido em",
+    "resolutionNotesLabel": "Observações da resolução",
+    "resolveAction": "Marcar como resolvido",
+    "resolveError": "Não foi possível resolver este alerta."
+  }
+}

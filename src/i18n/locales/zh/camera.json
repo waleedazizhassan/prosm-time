@@ -1,0 +1,28 @@
+{
+  "title": "相机",
+  "openCameraAction": "打开相机",
+  "capture": "拍摄",
+  "switchCamera": "切换相机",
+  "retake": "重拍",
+  "usePhoto": "使用照片",
+  "cancel": "取消",
+  "chooseFileAction": "或者选择一个文件",
+  "permissionDenied": "相机权限被拒绝，或此设备上无法使用相机。",
+  "alternativeHint": "您可以改为选择一个文件。",
+  "previewAlt": "照片预览",
+  "verifyingLiveness": "正在确认是本人实时拍摄，请保持不动",
+  "challenge": {
+    "start": "开始检测",
+    "retry": "重试",
+    "instruction": {
+      "turn_left": "活体检测：点“开始”，然后慢慢向左转头。",
+      "turn_right": "活体检测：点“开始”，然后慢慢向右转头。",
+      "move_closer": "活体检测：点“开始”，然后把手机靠近脸部。"
+    },
+    "passed": "完成，请拍照。",
+    "unavailable": "此手机无法进行检测，请直接拍照；您的经理可能会审核。",
+    "failed": "未检测到。光线更好会有帮助。剩余次数：{{left}}。",
+    "failedFinal": "未检测到，请直接拍照；您的经理会审核。",
+    "privacy": "检测只在本手机上进行：不会发送视频，也不会保存人脸。它只确认镜头前是真人。"
+  }
+}

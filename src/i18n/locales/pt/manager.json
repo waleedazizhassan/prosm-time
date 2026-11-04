@@ -1,0 +1,192 @@
+{
+  "title": "Painel do gestor",
+  "subtitle": "O ponto de hoje na sua organização e as exceções e correções aguardando análise.",
+  "linkPeople": "Ir para Pessoas",
+  "linkSites": "Ir para Unidades",
+  "reviewError": "Não foi possível analisar este item.",
+  "attendance": {
+    "title": "Ponto de hoje",
+    "employee": "Funcionário",
+    "site": "Unidade",
+    "status": "Situação",
+    "workedHours": "Horas trabalhadas",
+    "clockInAt": "Entrada",
+    "clockOutAt": "Saída",
+    "clocked_in": "Em serviço",
+    "clocked_out": "Saiu",
+    "empty": "Nenhum registro de ponto hoje.",
+    "viewPhoto": "Ver foto",
+    "photoModalTitle": "Foto do ponto",
+    "photoLoading": "Carregando foto…",
+    "photoAlt": "Foto de comprovação do ponto",
+    "photoLoadError": "Não foi possível carregar esta foto.",
+    "openToday": "Ponto de hoje → Registro de ponto"
+  },
+  "pending": {
+    "title": "Aguardando análise",
+    "empty": "Nenhuma exceção ou correção aguardando análise.",
+    "kind": {
+      "geofence_exception": "Exceção de cerca virtual",
+      "correction_request": "Pedido de correção",
+      "offline_time": "Horário offline",
+      "mock_location": "Localização falsa"
+    },
+    "reviewAction": "Analisar",
+    "notesLabel": "Observações (opcional)",
+    "submittedAtLabel": "Enviado",
+    "action": {
+      "approved": "Aprovar",
+      "rejected": "Recusar",
+      "acknowledged": "Ciente",
+      "clarification_requested": "Pedir esclarecimento"
+    },
+    "offlineTime": {
+      "summary": "{{action}} registrado offline no horário do aparelho {{deviceTime}}; chegou ao servidor às {{receivedAt}}.",
+      "action": {
+        "clock_in": "Entrada",
+        "clock_out": "Saída",
+        "break_start": "Início do intervalo",
+        "break_end": "Fim do intervalo",
+        "site_change": "Troca de unidade"
+      }
+    },
+    "mockLocation": {
+      "summary": "{{action}} às {{time}} de uma localização que o aparelho informou como simulada (GPS falso)."
+    },
+    "effect": {
+      "geofence_exception": {
+        "approved": "o motivo é aceito: as horas do turno contam por completo.",
+        "rejected": "as horas deixam de contar a partir do momento em que saiu da área de trabalho (a folha de ponto desconta o resto desse turno).",
+        "clarification_requested": "volta para o funcionário, com sua observação como pergunta, para explicar de novo; retorna aqui quando ele responder."
+      },
+      "correction_request": {
+        "approved": "o horário de entrada ou saída é alterado para o pedido.",
+        "rejected": "o horário registrado continua como está."
+      },
+      "offline_time": {
+        "approved": "o horário que o celular registrou sem conexão é aceito.",
+        "rejected": "fica marcado como não aceito; o horário em si não muda - corrija no Registro de ponto se estiver errado."
+      },
+      "mock_location": {
+        "approved": "tratado como uma localização real (ex.: erro de GPS).",
+        "rejected": "registrado como localização falsa; nada mais muda automaticamente - converse com o funcionário."
+      }
+    },
+    "geofence": {
+      "summary": "{{distance}} m fora da área de trabalho · motivo: {{reason}}"
+    },
+    "correction": {
+      "summary": "{{action}} às {{time}} · {{reason}}"
+    }
+  },
+  "leave": {
+    "title": "Pedidos de ausência aguardando análise",
+    "empty": "Nenhum pedido de ausência aguardando análise.",
+    "daysSuffix": "dia(s)",
+    "approveAction": "Aprovar",
+    "rejectAction": "Recusar",
+    "reviewError": "Não foi possível analisar este pedido.",
+    "types": {
+      "annual": "Férias",
+      "sick": "Médica",
+      "unpaid": "Não remunerada",
+      "emergency": "Particular",
+      "other": "Outra",
+      "hajj": "Hajj ou Umrah",
+      "bereavement": "Luto",
+      "paternity": "Paternidade"
+    },
+    "revokeTitle": "Revogar ausência aprovada",
+    "revokeHint": "Ausências já aprovadas e futuras: use se os planos mudaram e a ausência precisa ser cancelada depois.",
+    "revokeEmpty": "Nenhuma ausência aprovada futura para revogar.",
+    "revokeAction": "Revogar",
+    "revokeReasonLabel": "Motivo (obrigatório)",
+    "startedCannotCancel": "Já começou: não pode ser cancelada",
+    "deductionLabel": "Desconto por dia ({{currency}}) - obrigatório",
+    "deductionTotal": "{{days}} dias úteis descontados (sem folgas e feriados): {{total}} {{currency}}",
+    "deductionHint": "Folgas semanais e feriados não são descontados.",
+    "deductionRequired": "Informe o desconto por dia (0 ou mais)."
+  },
+  "pendingHours": {
+    "title_one": "Horas aguardando análise ({{count}})",
+    "title_other": "Horas aguardando análise ({{count}})",
+    "hint": "Estes turnos foram fechados automaticamente porque ninguém registrou a saída. As horas não contam em lugar nenhum (folha, totais, adicionais, horas extras, custo) até você definir o fim real.",
+    "loadError": "Não foi possível carregar os turnos aguardando análise.",
+    "summary": "Entrada {{clockIn}} · fechado automaticamente às {{clockOut}}",
+    "reviewAction": "Definir o fim",
+    "modalTitle": "Definir o fim do turno",
+    "modalBody": "Entrada {{clockIn}}. Última atividade vista: {{lastActivity}}.",
+    "clockOutLabel": "Horário real de saída",
+    "reasonLabel": "Motivo (obrigatório)",
+    "reasonRequired": "Escreva o motivo.",
+    "invalidTime": "Escolha um horário válido.",
+    "genericError": "Não foi possível salvar.",
+    "save": "Salvar e contar as horas",
+    "staleTitle": "Turnos antigos ainda abertos",
+    "staleHint": "Abertos antes de existir o fechamento automático e não fechados sozinhos. Registre a saída do funcionário em nome dele com o horário certo.",
+    "staleSummary": "Aberto desde {{clockIn}} ({{hours}} h)",
+    "title_many": "Horas aguardando análise ({{count}})"
+  },
+  "permissions": {
+    "title_one": "Permissões e horas extras ({{count}})",
+    "title_other": "Permissões e horas extras ({{count}})",
+    "hint": "Pedidos de permissão e dias cujas horas extras aguardam sua aprovação. As horas extras não entram em adicionais nem na folha até serem aprovadas.",
+    "empty": "Nada pendente.",
+    "loadError": "Não foi possível carregar as permissões.",
+    "genericError": "Não foi possível salvar.",
+    "grantAction": "Adicionar uma permissão",
+    "adjustAction": "Ajustar",
+    "adjustTitle": "Ajustar o dia",
+    "adjustHint": "Deixe um campo vazio para manter o valor calculado. O motivo é obrigatório e a alteração fica registrada.",
+    "approveOvertime": "Aprovar as horas extras",
+    "approvedOvertimeReason": "Horas extras aprovadas pelo gestor",
+    "overtimeWaiting": "horas extras {{time}} aguardando",
+    "kind": {
+      "late_arrival": "Atraso",
+      "early_leave": "Saída antecipada",
+      "approved_overtime": "Hora extra aprovada",
+      "no_overtime": "Não conta como hora extra"
+    },
+    "dayType": {
+      "workday": "Dia útil",
+      "weekly_rest": "Folga semanal",
+      "public_holiday": "Feriado"
+    },
+    "paidLabel": "Remunerado (sem desconto)",
+    "deductionPercentLabel": "Descontar esta porcentagem dos minutos",
+    "deductionMinutesLabel": "Minutos de desconto",
+    "personLabel": "Pessoa",
+    "dateLabel": "Dia",
+    "kindLabel": "Tipo",
+    "minutesLabel": "Minutos (opcional)",
+    "reasonLabel": "Motivo (obrigatório)",
+    "overtimeMinutesLabel": "Minutos de hora extra",
+    "lateMinutesLabel": "Minutos de atraso",
+    "save": "Salvar",
+    "title_many": "Permissões e horas extras ({{count}})"
+  },
+  "integrity": {
+    "title_one": "Registros suspeitos ({{count}})",
+    "title_other": "Registros suspeitos ({{count}})",
+    "hint": "Não bloquearam o registro de ponto. Aceite, recuse (com motivo) ou pergunte ao funcionário.",
+    "loadError": "Não foi possível carregar os registros suspeitos.",
+    "genericError": "Não foi possível salvar.",
+    "notesLabel": "Observação ao funcionário (obrigatória para recusar ou perguntar)",
+    "kind": {
+      "liveness_failed": "Falhou a verificação ao vivo",
+      "liveness_unavailable": "Verificação ao vivo indisponível no celular",
+      "unverified_capture": "Foto escolhida de um arquivo",
+      "stale_capture": "Foto antiga demais",
+      "reused_token": "Foto reutilizada",
+      "missing_token": "Foto sem token do servidor",
+      "repeated_coordinates": "Exatamente a mesma localização de novo",
+      "suspicious_accuracy": "Precisão de localização perfeita demais"
+    },
+    "explain": {
+      "liveness_failed": "A pessoa não fez o movimento pedido diante da câmera.",
+      "unverified_capture": "A câmera não abriu, então uma imagem foi escolhida no celular.",
+      "repeated_coordinates": "O mesmo ponto quase sem erro de GPS: um sinal comum de aplicativo de localização falsa."
+    },
+    "title_many": "Registros suspeitos ({{count}})"
+  }
+}

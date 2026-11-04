@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { MapPin, Siren } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
+import usePlanFeatures from "../../core/hooks/usePlanFeatures";
 import AttendanceRepository, { type AttendanceSession } from "../../core/repositories/AttendanceRepository";
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
 import ProjectRepository, { type Project } from "../../core/repositories/ProjectRepository";
@@ -183,6 +184,7 @@ const REQUIRE_GPS_KEY = "prosm_time_require_gps";
 export default function ClockInOutCard() {
   const { t, i18n } = useTranslation("dashboard");
   const { profile } = useAuth();
+  const { allows: planAllows } = usePlanFeatures(profile?.id);
 
   // Read exactly once, on mount - React guarantees a useState lazy
   // initializer only ever runs the first time, so this one localStorage
@@ -1168,7 +1170,7 @@ export default function ClockInOutCard() {
           {/* SOS on every shift (owner 2026-10-13) - no longer tied to
               presence monitoring; needs the shift the server confirmed
               (a clock-in still waiting in the offline queue has none). */}
-          {session ? (
+          {session && planAllows("sos") ? (
             <div style={{ marginTop: "var(--space-4)", paddingTop: "var(--space-4)", borderTop: "1px solid var(--border-light)" }}>
               {presenceSession ? <HintText small>{t("attendance.presenceActive")}</HintText> : null}
               {sosSent ? (
@@ -1249,7 +1251,7 @@ export default function ClockInOutCard() {
             />
           ) : null}
           {/* Plan stage 8.4: a question only. Nothing is recorded until the person agrees and completes the clock-in. */}
-          {suggestClockIn && !suggestionDismissed && proximity?.inside && proximitySite ? (
+          {suggestClockIn && planAllows("clock_suggestion") && !suggestionDismissed && proximity?.inside && proximitySite ? (
             <div role="alert" style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-strong)" }}>
               <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-sm)" }}>{t("attendance.suggestSite", { site: proximitySite.name })}</p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>

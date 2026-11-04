@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../../core/context/AuthContext";
+import usePlanFeatures from "../../core/hooks/usePlanFeatures";
 import { Camera, MapPin, Check, X } from "lucide-react";
 
 import ManagerRepository, { type TodayAttendanceRow, type AttendanceEventLocation } from "../../core/repositories/ManagerRepository";
@@ -45,7 +47,8 @@ function formatWorkedHours(clockInAt: string, clockOutAt: string | null): string
 // geocoding provider exists in this codebase, and coordinates are
 // already the real, verifiable source of truth an admin can act on.
 function LocationCell({ location, t }: { location: AttendanceEventLocation | null; t: (key: string) => string }) {
-  if (!location) return <span style={{ color: "var(--text-secondary)" }}>{t("noLocation")}</span>;
+  // owner 2026-11-03: the long "no location" note wraps, so the table fits a laptop with the new date column
+  if (!location) return <span style={{ display: "inline-block", maxWidth: 150, whiteSpace: "normal", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("noLocation")}</span>;
   const mapsUrl = `https://www.google.com/maps?q=${location.latitude},${location.longitude}`;
   return (
     <span style={{ display: "inline-flex", alignItems: "center", gap: "var(--space-1)" }}>
@@ -116,6 +119,8 @@ function DeviceTimeBadge({ label, hint }: { label: string; hint: string }) {
 
 export default function AttendanceLogPage() {
   const { t, i18n } = useTranslation("attendanceLog");
+  const { profile } = useAuth();
+  const { allows } = usePlanFeatures(profile?.id);
 
   // Owner 2026-10-19: quick day / week (from Sunday) / month views; the
   // employee's home page links here with ?period=today|week|month.
@@ -243,6 +248,8 @@ export default function AttendanceLogPage() {
 
   const columns: TableColumn<TodayAttendanceRow>[] = [
     { key: "name", header: t("columns.employee"), sortValue: (row) => row.userFullName, render: (row) => <PersonName name={row.userFullName} userId={row.userId} /> },
+    // owner 2026-11-03: the day of each record, so a week or a month reads without grouping
+    ...(grouping === "day" ? [] : [{ key: "date", header: t("columns.date"), sortValue: (row: TodayAttendanceRow) => row.clockInAt, render: (row: TodayAttendanceRow) => <span style={{ whiteSpace: "nowrap" }}>{formatDateOnly(row.clockInAt, i18n.language)}</span> }]),
     {
       key: "site",
       header: t("columns.site"),
@@ -329,10 +336,10 @@ export default function AttendanceLogPage() {
       <PageBanner pageId="attendance" illustration={attendanceHeaderImage} />
 
       <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "var(--space-4)" }}>
-        <Button variant="ghost" onClick={() => handleExportPdf("print")} loading={exportingPdf} disabled={filteredRows.length === 0}>
+        <Button variant="ghost" onClick={() => handleExportPdf("print")} loading={exportingPdf} disabled={filteredRows.length === 0 || !allows("export")} title={allows("export") ? undefined : t("common:planLocked.text", { plan: "Business" })}>
           {t("common:actions.print")}
         </Button>
-        <Button onClick={() => handleExportPdf()} loading={exportingPdf} disabled={filteredRows.length === 0}>
+        <Button onClick={() => handleExportPdf()} loading={exportingPdf} disabled={filteredRows.length === 0 || !allows("export")} title={allows("export") ? undefined : t("common:planLocked.text", { plan: "Business" })}>
           {t("exportPdfAction")}
         </Button>
       </div>

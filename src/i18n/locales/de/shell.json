@@ -144,7 +144,7 @@
       "endingTitle": "Ihre PROSM Time-Testphase endet bald",
       "endingBody": "Ihre Testphase endet in einer Woche. Ihre Daten bleiben erhalten und werden nicht gelöscht. Um weiterzumachen, geben Sie einen Aktivierungscode ein oder kontaktieren Sie uns unter sales@prosm.net.",
       "endedTitle": "Ihre PROSM Time-Testphase ist beendet",
-      "endedBody": "Die App ist pausiert, alle Ihre Daten bleiben erhalten. Geben Sie einen Aktivierungscode ein oder kontaktieren Sie uns unter sales@prosm.net, und alles ist wieder wie vorher.",
+      "endedBody": "Die Organisation ist jetzt schreibgeschützt, alle Ihre Daten bleiben erhalten. Geben Sie einen Aktivierungscode ein oder schreiben Sie an sales@prosm.net, und alles läuft wie vorher.",
       "licenseEndingTitle": "Ihre PROSM Time Lizenz endet bald",
       "licenseEndingBody": "Lizenz {{license}} endet am {{date}}. Verlängern Sie sie vorher, damit die App weiterläuft; alle Daten bleiben erhalten. Kontakt: sales@prosm.net."
     },
@@ -208,12 +208,23 @@
       "body": "{{name}} hat sich nicht für die Schicht um {{time}} in {{site}} eingestempelt."
     },
     "overtimeSoon": {
-      "title": "Bald Überstunden",
-      "body": "{{name}} ist noch eingestempelt; Überstunden beginnen um {{time}}."
+      "title": "Macht Überstunden",
+      "body": "{{name}} ist noch eingestempelt; die Schicht endete um {{time}}."
     },
     "dailyDigest": {
       "title": "Gestern im Überblick",
       "body": "{{present}} haben gearbeitet, {{noShows}} haben eine Schicht verpasst. Offen: {{leave}} Urlaub, {{exceptions}} Ausnahmen. Jetzt eingestempelt: {{open}}."
+    },
+    "licenseChanged": {
+      "title": "Ihre Lizenz wurde geändert",
+      "body": "PROSM hat Ihre Lizenz geändert: {{changes}}.",
+      "users": "Benutzer {{from}} → {{to}}",
+      "devices": "Geräte {{from}} → {{to}}",
+      "ends": "endet {{date}}",
+      "status": "Status {{status}}",
+      "plan": "Paket geändert",
+      "unlimited": "unbegrenzt",
+      "planTo": "Paket {{plan}}"
     }
   },
   "items": {
@@ -236,7 +247,8 @@
     "help": "Hilfe",
     "workers": "Externe Arbeiter",
     "calendar": "Kalender und Feiertage",
-    "auditLog": "Aktionsprotokoll"
+    "auditLog": "Aktionsprotokoll",
+    "dailySummary": "Tageszusammenfassung"
   },
   "sosOverlay": {
     "title": "SOS-/Notfallalarm",
@@ -336,7 +348,8 @@
     "timesheets": "Stunden zur Prüfung und Freigabe",
     "workers": "Externe Arbeiter und ihre Kiosk-Nummern",
     "calendar": "Feiertage, Ruhetage und Ausnahmetage - Stunden und Überstunden richten sich danach.",
-    "auditLog": "Alles, was in Ihrer Organisation geschieht: wer was für wen, wann und warum getan hat."
+    "auditLog": "Alles, was in Ihrer Organisation geschieht: wer was für wen, wann und warum getan hat.",
+    "dailySummary": "Ein Tag Ihrer Organisation: wer gearbeitet hat, zu spät, abwesend oder im Urlaub war"
   },
   "backgroundDisclosure": {
     "title": "Standort während Ihrer Schicht",

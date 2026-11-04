@@ -87,9 +87,9 @@ describe("leave emails", () => {
     expect(emails[0].subject).toContain("طلب إجازة");
   });
 
-  it("English for a reader in another language; nothing without an address", () => {
-    const [email] = renderLeaveEmails({ ...base, language: "de" });
-    expect(email.subject).toContain("Leave request - ");
+  it("in any of the nine languages, English for another one; nothing without an address", () => {
+    expect(renderLeaveEmails({ ...base, language: "de" })[0].subject).toContain("Urlaubsantrag - ");
+    expect(renderLeaveEmails({ ...base, language: "ja" })[0].subject).toContain("Leave request - ");
     expect(renderLeaveEmails({ ...base, recipient: { ...base.recipient, email: null } })).toEqual([]);
   });
 });

@@ -1,7 +1,8 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, LogIn, Plug, HardHat, ScrollText } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, LogIn, Plug, HardHat, ScrollText, Sunrise } from "lucide-react";
 
 import { FEATURES } from "../../config/features";
+import type { PlanFeature } from "../../core/hooks/usePlanFeatures";
 
 // § live UX review, user-directed - "professional reorganization" of
 // the Sidebar into grouped sections/"centers" instead of one flat
@@ -39,6 +40,8 @@ export interface NavItem {
   hiddenFromOwner?: boolean;
   // Owner 2026-10-19: shown only to the Owner and Managers (e.g. the workers' kiosk).
   ownerOrManagerOnly?: boolean;
+  // Owner 2026-11-03: hidden when the organisation's plan does not include it.
+  planFeature?: PlanFeature;
   // § live UX review, user-directed - "Menu" screen reference material
   // grouped its items under labeled sections rather than one flat
   // list. Pure presentational grouping of the exact same items/
@@ -79,7 +82,7 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // reachable via a specific employee's own People > detail page. Same
   // AdminAttendanceCard, same authorization, just a picker in front of
   // it - no new capability.
-  { id: "adminClock", labelKey: "items.adminClock", path: "/admin-clock", icon: UserCog, requiredPermission: "attendance.clock_in_on_behalf", section: "attendance" },
+  { id: "adminClock", planFeature: "on_behalf", labelKey: "items.adminClock", path: "/admin-clock", icon: UserCog, requiredPermission: "attendance.clock_in_on_behalf", section: "attendance" },
   // § user-directed - real advance shift scheduling/rostering
   // (20260908220000). Self-access to one's own upcoming shifts needs
   // no special permission, same reasoning as Timesheets/Allowances/
@@ -91,18 +94,18 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // navigation). Open to every authenticated member, same reasoning as
   // Attendance Record above - the real identity check inside kiosk mode
   // is the PIN, not who launched the screen.
-  { id: "kiosk", labelKey: "items.kiosk", path: "/kiosk", icon: MonitorSmartphone, requiredPermission: null, ownerOrManagerOnly: true, section: "attendance" },
+  { id: "kiosk", planFeature: "kiosk", labelKey: "items.kiosk", path: "/kiosk", icon: MonitorSmartphone, requiredPermission: null, ownerOrManagerOnly: true, section: "attendance" },
   // § live UX review, user-directed - a real Emergency Log for SOS
   // alerts (exact GPS location, time, employee, site), reached from
   // both the sidebar and the notification bell/siren overlay. Gated on
   // the same permission sos_alerts' own RLS uses for org-wide
   // visibility - a plain employee sees nothing useful here (only their
   // own alerts, if any), same as Manager Console's own gate.
-  { id: "emergencyLog", labelKey: "items.emergencyLog", path: "/emergency-log", icon: Siren, requiredPermission: "attendance.view", section: "attendance" },
+  { id: "emergencyLog", planFeature: "sos", labelKey: "items.emergencyLog", path: "/emergency-log", icon: Siren, requiredPermission: "attendance.view", section: "attendance" },
   { id: "people", labelKey: "items.people", path: "/people", icon: Users, requiredPermission: "employees.view", section: "people" },
   { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage", section: "people" },
   // Owner 2026-10-18/19: external workers for the whole organisation (app-generated kiosk numbers).
-  { id: "workers", labelKey: "items.workers", path: "/workers", icon: HardHat, requiredPermission: "sites.manage", section: "people" },
+  { id: "workers", planFeature: "kiosk", labelKey: "items.workers", path: "/workers", icon: HardHat, requiredPermission: "sites.manage", section: "people" },
   // §22: "Employee reviews their period" - self-access to one's own
   // timesheets needs no special permission (same as Dashboard), so
   // this nav item is visible to every authenticated org member; the
@@ -113,20 +116,22 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // allowance entries needs no special permission, same reasoning as
   // Timesheets above; allowance_entries' own RLS is what actually
   // scopes what an approver sees.
-  { id: "allowances", labelKey: "items.allowances", path: "/allowances", icon: Wallet, requiredPermission: null, section: "payroll" },
+  { id: "allowances", planFeature: "allowances", labelKey: "items.allowances", path: "/allowances", icon: Wallet, requiredPermission: null, section: "payroll" },
   // § user-directed - real PTO/leave management (20260908200000).
   // Self-access to one's own leave requests/balance needs no special
   // permission, same reasoning as Timesheets/Allowances above -
   // leave_requests' own RLS is what actually scopes what a supervisor
   // sees (Manager Console's own new review section).
-  { id: "leave", labelKey: "items.leave", path: "/leave", icon: CalendarDays, requiredPermission: null, section: "payroll" },
+  { id: "leave", planFeature: "leave", labelKey: "items.leave", path: "/leave", icon: CalendarDays, requiredPermission: null, section: "payroll" },
   // § live UX review, user-directed - "a Reports Center where any PDF
   // can be pulled." No permission gate on the nav item itself - the
   // page's own report-type selector gates each report by the exact
   // same permission its original source page already used.
   { id: "reports", labelKey: "items.reports", path: "/reports", icon: FileBarChart, requiredPermission: null, section: "reports" },
+  // owner 2026-11-03: the morning summary opens here - one day, any day, with the names
+  { id: "dailySummary", planFeature: "daily_summary", labelKey: "items.dailySummary", path: "/daily-summary", icon: Sunrise, requiredPermission: null, ownerOnly: true, section: "reports" },
   // Owner 2026-10-28: the action log on its own page (it left the dashboard).
-  { id: "auditLog", labelKey: "items.auditLog", path: "/audit-log", icon: ScrollText, requiredPermission: "audit.view", section: "reports" },
+  { id: "auditLog", planFeature: "audit", labelKey: "items.auditLog", path: "/audit-log", icon: ScrollText, requiredPermission: "audit.view", section: "reports" },
   // § live UX review, user-directed - a real home for org-wide
   // settings (today: the no-site geofence radius) instead of living
   // inside an unrelated page. Owner-only, matching that setting's own
@@ -146,7 +151,7 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // "how we'll use it" question is answered.
   // v2.3.43 step 3 (items 7/8): public holidays, weekly rest days and exceptional days.
   { id: "calendar", labelKey: "items.calendar", path: "/calendar", icon: CalendarRange, requiredPermission: "calendar.manage", section: "settings" },
-  { id: "integrations", labelKey: "items.integrations", path: "/integrations", icon: Plug, requiredPermission: null, ownerOnly: true, section: "settings" },
+  { id: "integrations", planFeature: "integrations", labelKey: "items.integrations", path: "/integrations", icon: Plug, requiredPermission: null, ownerOnly: true, section: "settings" },
   { id: "help", labelKey: "items.help", path: "/help", icon: HelpCircle, requiredPermission: null, section: "help" },
 ];
 

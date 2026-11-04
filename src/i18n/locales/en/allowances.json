@@ -19,7 +19,11 @@
     "title": "Add an entry",
     "hint": "Date, site, and clock-in/out are imported automatically - fill in the allowance amounts after adding.",
     "dateLabel": "Date",
-    "action": "Add"
+    "action": "Add",
+    "siteLabel": "Site",
+    "siteFromAttendance": "From attendance",
+    "siteNone": "No site",
+    "siteHint": "For a day without attendance (travel, an errand): choose its site and its prices fill in. A day with attendance takes its attendance's site."
   },
   "columns": {
     "employee": "Employee",
@@ -224,5 +228,28 @@
   },
   "grid": {
     "label": "Allowance sheet"
+  },
+  "exportXlsxAction": "Export Excel",
+  "reprice": {
+    "action": "Apply the current prices",
+    "hint": "Prices your open days again from today's prices - what has no price, and what a manager changed, stay as they are.",
+    "done_one": "{{count}} day priced again.",
+    "done_other": "{{count}} days priced again."
+  },
+  "flow": {
+    "title": "My allowances",
+    "step1": "Fill from your attendance",
+    "step1Hint": "Every day you attended is filled from your prices, in one tap - or every day by itself after you clock out.",
+    "step2": "Check the sheet",
+    "step2Hint": "Look over the sheet below and type only what has no price (travel, for example). A day without attendance? Add it here.",
+    "addDay": "+ Add a day",
+    "step3": "Send to your manager",
+    "step3Hint": "The period's days go to your manager to approve. You can still change them until they are approved.",
+    "status": {
+      "draft": "Draft: {{count}}",
+      "sent": "Waiting: {{count}}",
+      "approved": "Approved: {{count}}",
+      "total": "Due: {{amount}}"
+    }
   }
 }

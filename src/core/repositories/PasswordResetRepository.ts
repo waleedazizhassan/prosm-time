@@ -1,4 +1,5 @@
 import DatabaseManager from "../database/DatabaseManager";
+import i18n from "../../i18n";
 
 export interface ServiceResult<T = null> {
   success: boolean;
@@ -25,7 +26,7 @@ class PasswordResetRepository {
 
   async requestReset(email: string): Promise<ServiceResult<{ message: string; email: string }>> {
     try {
-      const { data, error } = await this.client.functions.invoke("request-password-reset", { body: { email } });
+      const { data, error } = await this.client.functions.invoke("request-password-reset", { body: { email, language: i18n.language?.slice(0, 2) } });
 
       if (error) {
         const errorBody = await error.context?.json?.().catch(() => null);

@@ -19,7 +19,11 @@
     "title": "Aggiungi una voce",
     "hint": "Data, sede e orari di entrata/uscita vengono importati automaticamente - completa gli importi delle indennità dopo l'aggiunta.",
     "dateLabel": "Data",
-    "action": "Aggiungi"
+    "action": "Aggiungi",
+    "siteLabel": "Sede",
+    "siteFromAttendance": "Dalle presenze",
+    "siteNone": "Nessuna sede",
+    "siteHint": "Per un giorno senza presenza (trasferta, commissione): scegli la sede e le tariffe si compilano. Un giorno con presenza prende la sede della presenza."
   },
   "columns": {
     "employee": "Dipendente",
@@ -225,5 +229,29 @@
   },
   "grid": {
     "label": "Foglio indennità"
+  },
+  "exportXlsxAction": "Esporta Excel",
+  "reprice": {
+    "action": "Applica le tariffe attuali",
+    "hint": "Ricalcola i tuoi giorni aperti con le tariffe di oggi - ciò che non ha tariffa e ciò che un responsabile ha cambiato restano com'erano.",
+    "done_one": "{{count}} giorno ricalcolato.",
+    "done_many": "{{count}} giorni ricalcolati.",
+    "done_other": "{{count}} giorni ricalcolati."
+  },
+  "flow": {
+    "title": "Le mie indennità",
+    "step1": "Compila dalle presenze",
+    "step1Hint": "Ogni giorno di presenza si compila con le tue tariffe, con un tocco - oppure ogni giorno da solo dopo l'uscita.",
+    "step2": "Controlla il foglio",
+    "step2Hint": "Controlla il foglio qui sotto e scrivi solo ciò che non ha tariffa (una trasferta, per esempio). Un giorno senza presenza? Aggiungilo qui.",
+    "addDay": "+ Aggiungi un giorno",
+    "step3": "Invia al responsabile",
+    "step3Hint": "I giorni del periodo vanno al responsabile per l'approvazione. Puoi ancora modificarli finché non sono approvati.",
+    "status": {
+      "draft": "Bozza: {{count}}",
+      "sent": "In attesa: {{count}}",
+      "approved": "Approvati: {{count}}",
+      "total": "Dovuto: {{amount}}"
+    }
   }
 }

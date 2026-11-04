@@ -16,6 +16,7 @@ import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts"
 import { localizePush } from "../_shared/localizePush.ts";
 import { sendEmail } from "../_shared/emailService.ts";
 import { renderLeaveEmails, type LeaveEmailData } from "../_shared/leaveEmail.ts";
+import { renderLicenceEmail, type LicenceEmailRow } from "../_shared/licenseEmail.ts";
 
 interface ServiceAccount {
   project_id: string;
@@ -82,6 +83,25 @@ async function sendLeaveEmails(client: any, notificationId: string): Promise<num
   return emailed;
 }
 
+// Owner 2026-11-03: a licence change is emailed to the owner (from noreply@, owner's choice) with the licence PDF.
+async function sendLicenceEmail(client: any, notificationId: string): Promise<number> {
+  try {
+    const { data } = await client.rpc("get_prosm_time_license_email", { p_notification_id: notificationId });
+    if (!data) return 0;
+    const row = data as LicenceEmailRow;
+    const email = await renderLicenceEmail(row);
+    const result = await sendEmail({ ...email, purpose: "licence_changed", supabase: client, organizationId: row.organizationId });
+    return result.sent ? 1 : 0;
+  } catch (error) {
+    console.error("LICENCE EMAIL FAILED:", error);
+    return 0;
+  }
+}
+
+async function sendNotificationEmails(client: any, notificationId: string): Promise<number> {
+  return (await sendLeaveEmails(client, notificationId)) + (await sendLicenceEmail(client, notificationId));
+}
+
 serve(async (request: Request) => {
   if (request.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   if (request.method !== "POST") return errorResponse("Method not allowed.", 405, "METHOD_NOT_ALLOWED");
@@ -103,10 +123,10 @@ serve(async (request: Request) => {
     const { data: message, error } = await client.rpc("get_prosm_time_push_message", { p_notification_id: notificationId });
     if (error) return errorResponse("This endpoint requires the service role key.", 401, "UNAUTHORIZED");
     const devices: { token: string; language: string }[] = message?.devices ?? [];
-    if (!message || devices.length === 0) return successResponse({ sent: 0, emailed: await sendLeaveEmails(client, notificationId) });
+    if (!message || devices.length === 0) return successResponse({ sent: 0, emailed: await sendNotificationEmails(client, notificationId) });
 
     const rawAccount = Deno.env.get("FCM_SERVICE_ACCOUNT");
-    if (!rawAccount) return successResponse({ sent: 0, skipped: "FCM_SERVICE_ACCOUNT is not set", emailed: await sendLeaveEmails(client, notificationId) });
+    if (!rawAccount) return successResponse({ sent: 0, skipped: "FCM_SERVICE_ACCOUNT is not set", emailed: await sendNotificationEmails(client, notificationId) });
     const account = JSON.parse(rawAccount) as ServiceAccount;
     const token = await accessToken(account);
 
@@ -164,7 +184,7 @@ serve(async (request: Request) => {
     }
     if (gone.length > 0) await client.rpc("forget_prosm_time_push_tokens", { p_tokens: gone });
 
-    return successResponse({ sent, forgotten: gone.length, emailed: await sendLeaveEmails(client, notificationId) });
+    return successResponse({ sent, forgotten: gone.length, emailed: await sendNotificationEmails(client, notificationId) });
   } catch (error: any) {
     return errorResponse(error?.message ?? "Push service unavailable.", 500, "INTERNAL_ERROR");
   }

@@ -1,0 +1,109 @@
+{
+  "title": "Cuadrante de turnos",
+  "subtitle": "Planificación anticipada de turnos de tu equipo.",
+  "loadError": "No se pudieron cargar tus turnos.",
+  "myShiftsTitle": "Mis próximos turnos",
+  "emptyMine": "Todavía no tienes turnos programados.",
+  "manageTitle": "Cuadrante de la sede",
+  "siteLabel": "Sede",
+  "rangeStartLabel": "Desde",
+  "rangeEndLabel": "Hasta",
+  "emptySite": "No hay turnos programados para esta sede en este intervalo.",
+  "cancelAction": "Cancelar",
+  "cancelError": "No se pudo cancelar este turno.",
+  "templatesTitle": "Plantillas de turno",
+  "templatesHint": "Horarios reutilizables para esta sede (p. ej., Mañana, Noche): elige uno abajo para rellenar una asignación nueva o pon un horario personalizado.",
+  "noTemplates": "Todavía no hay plantillas para esta sede.",
+  "templateNameLabel": "Nombre de la plantilla",
+  "startTimeLabel": "Hora de inicio",
+  "endTimeLabel": "Hora de fin",
+  "createTemplateAction": "Añadir plantilla",
+  "templateError": "No se pudo crear esta plantilla de turno.",
+  "assignTitle": "Asignar un turno",
+  "selectEmployeePlaceholder": "Selecciona un empleado",
+  "templateLabel": "Plantilla",
+  "customTimeOption": "Horario personalizado",
+  "notesLabel": "Notas (opcional)",
+  "assignAction": "Asignar turno",
+  "assignError": "No se pudo asignar este turno.",
+  "columns": {
+    "employee": "Empleado",
+    "site": "Sede",
+    "date": "Fecha",
+    "time": "Horario",
+    "notes": "Notas",
+    "actual": "Real"
+  },
+  "status": {
+    "scheduled": "Programado",
+    "cancelled": "Cancelado"
+  },
+  "breakRules": {
+    "open": "Reglas de descanso",
+    "title": "Reglas de descanso - {{name}}",
+    "hint": "Los descansos no retribuidos se restan del tiempo trabajado. Los minutos por encima del máximo no se pagan. Con descuento automático, un día sin descanso pierde esos minutos.",
+    "paidLabel": "Los descansos son retribuidos",
+    "maxLabel": "Descanso máximo (minutos, opcional)",
+    "autoLabel": "Descontar si no se hizo descanso (minutos, opcional)",
+    "genericError": "No se pudo guardar.",
+    "save": "Guardar"
+  },
+  "swap": {
+    "title": "Cambios de turno",
+    "shift": "Mi turno",
+    "chooseShift": "Elige un turno",
+    "chooseColleague": "Elige un compañero",
+    "from": "De",
+    "to": "Para",
+    "reason": "Motivo",
+    "request": "Pedir el cambio",
+    "approve": "Aprobar",
+    "reject": "Rechazar",
+    "failed": "No se pudo completar. Puede que el compañero esté de permiso o ya tenga un turno.",
+    "status": {
+      "pending": "Pendiente",
+      "approved": "Aprobado",
+      "rejected": "Rechazado",
+      "cancelled": "Cancelado"
+    }
+  },
+  "cost": {
+    "title": "Coste del cuadrante",
+    "subtitle": "Los turnos mostrados, a la tarifa de cada persona. Lo que supera el umbral diario cuenta como horas extra.",
+    "regular": "Ordinario",
+    "overtime": "Horas extra previstas",
+    "total": "Total",
+    "hours": "{{hours}} h",
+    "unpriced": "{{count}} turnos no tienen tarifa y no se cuentan."
+  },
+  "open": {
+    "title": "Turnos abiertos",
+    "subtitle": "Turnos que aún no tienen a nadie. Pide uno; decide un responsable.",
+    "none": "No hay turnos abiertos.",
+    "noRequests": "Nadie lo ha pedido todavía.",
+    "give": "Dar el turno",
+    "cancel": "Cancelar el turno",
+    "ask": "Pedir este turno",
+    "post": "Publicar un turno abierto",
+    "failed": "No se pudo completar.",
+    "status": {
+      "open": "Abierto",
+      "filled": "Cubierto",
+      "cancelled": "Cancelado"
+    },
+    "mine": {
+      "pending": "Lo pediste. Pendiente de un responsable.",
+      "approved": "Es tuyo.",
+      "rejected": "Se le dio a otra persona."
+    }
+  },
+  "checklist": {
+    "title": "Lista de fin de turno",
+    "subtitle": "Se muestra antes de fichar la salida en esta sede. Un punto por línea; déjalo vacío si no hay ninguno.",
+    "label": "Puntos",
+    "save": "Guardar lista",
+    "saved": "Guardado.",
+    "failed": "No se pudo guardar la lista.",
+    "tooMany": "Veinte puntos como máximo."
+  }
+}

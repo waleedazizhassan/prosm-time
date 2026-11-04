@@ -1,0 +1,38 @@
+{
+  "addTitle": "Adicionar um trabalhador",
+  "addHint": "Para trabalhadores sem conta no aplicativo (terceirizados, diaristas). O aplicativo cria um número de 6 dígitos para cada trabalhador; ele digita esse número no quiosque de qualquer unidade para registrar entrada e saída.",
+  "nameLabel": "Nome do trabalhador",
+  "contractorLabel": "Empreiteira (opcional)",
+  "addAction": "Adicionar trabalhador",
+  "addError": "Não foi possível adicionar este trabalhador.",
+  "addedFor": "{{name}} foi adicionado. Número do quiosque:",
+  "addedHint": "Entregue este número ao trabalhador. Você sempre pode vê-lo na lista abaixo.",
+  "copyAction": "Copiar",
+  "copied": "Copiado",
+  "listTitle": "Todos os trabalhadores",
+  "empty": "Ainda não há trabalhadores externos.",
+  "loadError": "Não foi possível carregar os trabalhadores.",
+  "updateError": "Não foi possível atualizar este trabalhador.",
+  "columns": {
+    "name": "Nome",
+    "number": "Número do quiosque",
+    "contractor": "Empreiteira",
+    "now": "Agora",
+    "status": "Situação",
+    "actions": "Ações"
+  },
+  "atSite": "Em {{site}}",
+  "status": {
+    "active": "Ativo",
+    "inactive": "Inativo"
+  },
+  "clockOutAction": "Registrar saída",
+  "deactivateAction": "Desativar",
+  "activateAction": "Ativar",
+  "overrideReasonLabel": "Motivo para registrar a saída deste trabalhador",
+  "editAction": "Editar",
+  "deleteAction": "Excluir",
+  "editTitle": "Editar trabalhador",
+  "editHint": "O número do quiosque {{number}} continua o mesmo.",
+  "deleteConfirm": "Excluir {{name}} definitivamente? Um trabalhador que já tem registros de ponto não pode ser excluído: desative-o."
+}

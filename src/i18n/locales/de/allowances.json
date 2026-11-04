@@ -19,7 +19,11 @@
     "title": "Eintrag hinzufügen",
     "hint": "Datum, Standort und Kommen/Gehen werden automatisch übernommen - füllen Sie die Zulagenbeträge nach dem Hinzufügen aus.",
     "dateLabel": "Datum",
-    "action": "Hinzufügen"
+    "action": "Hinzufügen",
+    "siteLabel": "Standort",
+    "siteFromAttendance": "Aus der Anwesenheit",
+    "siteNone": "Kein Standort",
+    "siteHint": "Für einen Tag ohne Anwesenheit (Reise, Besorgung): Standort wählen, die Sätze werden eingetragen. Ein Tag mit Anwesenheit übernimmt deren Standort."
   },
   "columns": {
     "employee": "Mitarbeiter",
@@ -224,5 +228,28 @@
   },
   "grid": {
     "label": "Zulagenblatt"
+  },
+  "exportXlsxAction": "Excel exportieren",
+  "reprice": {
+    "action": "Aktuelle Sätze anwenden",
+    "hint": "Berechnet Ihre offenen Tage mit den heutigen Sätzen neu - was keinen Satz hat und was eine Führungskraft geändert hat, bleibt unverändert.",
+    "done_one": "{{count}} Tag neu berechnet.",
+    "done_other": "{{count}} Tage neu berechnet."
+  },
+  "flow": {
+    "title": "Meine Zulagen",
+    "step1": "Aus der Anwesenheit füllen",
+    "step1Hint": "Jeder Anwesenheitstag wird mit einem Tipp aus Ihren Sätzen gefüllt - oder jeder Tag von selbst nach dem Ausstempeln.",
+    "step2": "Blatt prüfen",
+    "step2Hint": "Sehen Sie das Blatt unten durch und tragen Sie nur ein, was keinen Satz hat (z. B. Reisen). Ein Tag ohne Anwesenheit? Hier hinzufügen.",
+    "addDay": "+ Tag hinzufügen",
+    "step3": "An die Führungskraft senden",
+    "step3Hint": "Die Tage des Zeitraums gehen zur Genehmigung an Ihre Führungskraft. Bis zur Genehmigung können Sie sie noch ändern.",
+    "status": {
+      "draft": "Entwurf: {{count}}",
+      "sent": "Wartend: {{count}}",
+      "approved": "Genehmigt: {{count}}",
+      "total": "Fällig: {{amount}}"
+    }
   }
 }

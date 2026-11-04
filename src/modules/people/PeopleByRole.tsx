@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ChevronDown } from "lucide-react";
 
-import PeopleDirectoryRepository, { type DirectoryPerson } from "../../core/repositories/PeopleDirectoryRepository";
+import PeopleDirectoryRepository, { type DirectoryPerson, type PersonStatus } from "../../core/repositories/PeopleDirectoryRepository";
 
 import Avatar from "../../components/common/Avatar";
 import Input from "../../components/common/Input";
@@ -38,8 +38,10 @@ export default function PeopleByRole({ compact = false, onOpen }: { compact?: bo
   const [shift, setShift] = useState("");
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
 
+  const [statuses, setStatuses] = useState<Map<string, PersonStatus>>(new Map());
   useEffect(() => {
     PeopleDirectoryRepository.list(true).then(setPeople);
+    PeopleDirectoryRepository.status().then(setStatuses);
   }, []);
 
   const collator = useMemo(() => new Intl.Collator(i18n.language), [i18n.language]);
@@ -126,8 +128,18 @@ export default function PeopleByRole({ compact = false, onOpen }: { compact?: bo
                             .filter(Boolean)
                             .join(" · ")}
                         </span>
+                        {/* owner 2026-11-04: the app version each person uses */}
+                        {statuses.get(person.id)?.appVersion ? (
+                          <span className={styles.meta}>
+                            {t("byRole.appVersion", { version: statuses.get(person.id)?.appVersion, platform: t(`byRole.platform.${statuses.get(person.id)?.platform ?? "web"}`) })}
+                          </span>
+                        ) : null}
                       </span>
-                      {person.isOwner ? null : <StatusBadge status={STATUS_BADGE[person.presence]}>{t(`byRole.presence.${person.presence}`)}</StatusBadge>}
+                      {person.isOwner ? null : statuses.get(person.id) && statuses.get(person.id)?.invitation !== "accepted" ? (
+                        <StatusBadge status={statuses.get(person.id)?.invitation === "pending" ? "pending" : "revoked"}>{t(`byRole.invitation.${statuses.get(person.id)?.invitation}`)}</StatusBadge>
+                      ) : (
+                        <StatusBadge status={STATUS_BADGE[person.presence]}>{t(`byRole.presence.${person.presence}`)}</StatusBadge>
+                      )}
                     </button>
                   </li>
                 ))}

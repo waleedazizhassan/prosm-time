@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="capacitor_background_geolocation_notification_channel_name">PROSM Time · Presenze</string>
+    <string name="reminder_channel_name">Promemoria di entrata e uscita</string>
+    <string name="reminder_channel_description">Suona con il tono della sveglia, anche se il telefono è silenzioso.</string>
+</resources>

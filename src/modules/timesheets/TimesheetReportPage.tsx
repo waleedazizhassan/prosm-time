@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../../core/context/AuthContext";
+import usePlanFeatures from "../../core/hooks/usePlanFeatures";
 import { Link, useParams } from "react-router-dom";
 
 import TimesheetRepository, { type EvidencePack, type TimesheetStatus } from "../../core/repositories/TimesheetRepository";
@@ -79,6 +81,8 @@ function downloadCsv(filename: string, content: string) {
 // (list_prosm_time_timesheet_evidence_pack).
 export default function TimesheetReportPage() {
   const { t, i18n } = useTranslation("timesheets");
+  const { profile } = useAuth();
+  const { allows } = usePlanFeatures(profile?.id);
   const { timesheetId } = useParams<{ timesheetId: string }>();
 
   const [pack, setPack] = useState<EvidencePack | null>(null);
@@ -159,13 +163,13 @@ export default function TimesheetReportPage() {
               {t("report.backLink")}
             </Button>
           </Link>
-          <Button variant="ghost" size="sm" onClick={handleExportCsv}>
+          <Button variant="ghost" size="sm" onClick={handleExportCsv} disabled={!allows("export")} title={allows("export") ? undefined : t("common:planLocked.text", { plan: "Business" })}>
             {t("report.exportCsvAction")}
           </Button>
-          <Button variant="ghost" size="sm" onClick={() => handleExportPdf("print")} loading={exportingPdf}>
+          <Button variant="ghost" size="sm" onClick={() => handleExportPdf("print")} loading={exportingPdf} disabled={!allows("export")} title={allows("export") ? undefined : t("common:planLocked.text", { plan: "Business" })}>
             {t("common:actions.print")}
           </Button>
-          <Button size="sm" onClick={() => handleExportPdf()} loading={exportingPdf}>
+          <Button size="sm" onClick={() => handleExportPdf()} loading={exportingPdf} disabled={!allows("export")} title={allows("export") ? undefined : t("common:planLocked.text", { plan: "Business" })}>
             {t("report.exportPdfAction")}
           </Button>
         </div>

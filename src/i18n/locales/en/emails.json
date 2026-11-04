@@ -1,0 +1,150 @@
+{
+  "common": {
+    "footer": "{{org}} · PROSM Time - an automatic message from the attendance system.",
+    "signature": "PROSM Time",
+    "contacts": "Contact us:",
+    "days_one": "{{count}} day",
+    "days_other": "{{count}} days"
+  },
+  "leave": {
+    "types": {
+      "annual": "Annual leave",
+      "sick": "Sick leave",
+      "unpaid": "Unpaid leave",
+      "emergency": "Emergency leave",
+      "other": "Other leave"
+    },
+    "unpaid": " (unpaid)",
+    "period": "{{from}} to {{to}}",
+    "subject": "Leave request - {{name}} - {{period}}",
+    "rows": {
+      "employee": "Employee",
+      "type": "Leave type",
+      "period": "Period",
+      "days": "Days",
+      "reason": "Reason",
+      "sentTo": "Sent to",
+      "approvedBy": "Approved by",
+      "cancelledBy": "Cancelled by",
+      "declinedBy": "Declined by",
+      "note": "Note",
+      "remaining": "Remaining {{type}} balance"
+    },
+    "answerEmployee": "To answer the employee directly:",
+    "answerEmployeeShort": "To answer the employee:",
+    "answerDecider": "To answer the person who decided:",
+    "viewMine": "View my leave",
+    "request": {
+      "title": "A leave request awaits your review",
+      "intro": "{{name}} asked for {{type}}, {{period}}. Review it in the app.",
+      "action": "Review the request"
+    },
+    "sent": {
+      "title": "Your leave request was sent",
+      "intro": "Your request ({{type}}, {{period}}) went to {{to}}. The answer will come on this same thread."
+    },
+    "requestWithdrawn": {
+      "title": "A leave request was withdrawn",
+      "intro": "{{name}} withdrew the request for {{type}}, {{period}}, before it was answered. Nothing is needed from you.",
+      "copyTitle": "Your leave request was withdrawn",
+      "copyIntro": "You withdrew your request for {{type}}, {{period}}; {{to}} has been told."
+    },
+    "withdrawn": {
+      "title": "An approved leave was withdrawn",
+      "intro": "{{name}} withdrew their approved {{type}}, {{period}}; its days are back in their balance. Nothing is needed from you.",
+      "copyTitle": "Your leave is cancelled",
+      "copyIntro": "You withdrew your {{type}}, {{period}}; its days are back in your balance."
+    },
+    "approved": {
+      "title": "Your leave is approved 🎉",
+      "intro": "Congratulations, {{name}}! Your {{type}} is approved, {{period}}. Enjoy your time off.",
+      "introBalance": "Congratulations, {{name}}! Your {{type}} is approved, {{period}}; {{remaining}} of your balance remain. Enjoy your time off."
+    },
+    "cancelled": {
+      "title": "Your leave is cancelled",
+      "intro": "Your approved {{type}}, {{period}}, was cancelled; its days are back in your balance."
+    },
+    "rejected": {
+      "title": "Your leave request was not approved",
+      "intro": "Your {{type}} request, {{period}}, was not approved."
+    }
+  },
+  "invite": {
+    "subject": "You're invited to join {{org}} on PROSM Time",
+    "title": "You're invited to {{org}} on PROSM Time",
+    "body": "Hi {{name}}, you've been invited to join {{org}} on PROSM Time as {{role}}. Enter the code below in the app to accept your invitation and set up your account.",
+    "codeLabel": "Your verification code:",
+    "expires_one": "This invitation expires in {{count}} day.",
+    "expires_other": "This invitation expires in {{count}} days.",
+    "ignore": "If you weren't expecting this invitation, you can safely ignore this email.",
+    "roles": {
+      "manager": "Manager / Site Manager",
+      "supervisor": "Supervisor / Team Lead",
+      "employee": "Employee",
+      "read_only": "Read-only / Reporting"
+    },
+    "yourOrganization": "your organization"
+  },
+  "reset": {
+    "subject": "Reset your PROSM Time password",
+    "title": "Reset your PROSM Time password",
+    "body": "Hi {{name}}, we received a request to reset your PROSM Time password. Enter the code below in the app to choose a new one.",
+    "codeLabel": "Your reset code:",
+    "expires_one": "This code expires in {{count}} minute.",
+    "expires_other": "This code expires in {{count}} minutes.",
+    "ignore": "If you didn't request this, you can safely ignore this email - your password will not change.",
+    "there": "there"
+  },
+  "trial": {
+    "licenseSubject": "Your PROSM Time licence ends on {{date}}",
+    "licenseBody": "The licence of {{org}} (licence {{license}}) ends {{when}}, on {{date}}.",
+    "licenseRenew": "Renew it before then so the app keeps running; all your data is kept:",
+    "whenDay": "tomorrow",
+    "whenWeek": "in a week",
+    "whenMonth": "in a month",
+    "endingSubject": "Your PROSM Time trial ends on {{date}}",
+    "endingBody": "The PROSM Time trial of {{org}} ends on {{date}}. Your data is kept and will not be deleted.",
+    "endingContinue": "To continue, contact the sales team to renew the licence (licence {{license}}):",
+    "endedSubject": "Your PROSM Time trial has ended",
+    "endedBody": "The PROSM Time trial of {{org}} has ended. The organisation is now read-only: everyone can still see everything, and all your data is kept.",
+    "endedContinue": "Enter an activation code in Settings > Subscription after signing in, or contact us, and everything works as before (licence {{license}}):"
+  },
+  "licence": {
+    "subject": "PROSM Time - licence of {{org}} changed",
+    "greeting": "Hello {{name}},",
+    "intro": "PROSM changed the licence of {{org}} in PROSM Time (number {{license}}):",
+    "noChanges": "The licence details were updated.",
+    "applied": "The change already applies in the app. The new licence is attached as a PDF, and you also find it in Settings > Subscription.",
+    "contact": "Questions:",
+    "pdf": {
+      "title": "PROSM Time licence certificate",
+      "tagline": "Attendance you can trust - on site, on time.",
+      "licenseNumber": "Licence number: {{license}}",
+      "plan": "Plan",
+      "status": "Status",
+      "users": "Users",
+      "devices": "Devices",
+      "validUntil": "Valid until",
+      "whatChanged": "What changed",
+      "footer": "Issued automatically by PROSM when the licence changed. Questions: support@prosm.net",
+      "issued": "Issued {{date}} UTC",
+      "unlimited": "No limit",
+      "noEnd": "No end date",
+      "usersOf": "{{used}} of {{max}}",
+      "planAll": "Everything",
+      "change": {
+        "users": "Users",
+        "devices": "Devices",
+        "expiry": "End date",
+        "status": "Status",
+        "plan": "Plan"
+      },
+      "statuses": {
+        "ACTIVE": "Active",
+        "SUSPENDED": "Suspended",
+        "EXPIRED": "Expired",
+        "REVOKED": "Revoked"
+      }
+    }
+  }
+}

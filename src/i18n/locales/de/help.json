@@ -8,11 +8,11 @@
     },
     "attendance": {
       "title": "Ein- und Ausstempeln",
-      "body": "Wählen Sie vor dem Einstempeln Ihren Standort (und ggf. das Projekt) - oder lassen Sie den Standort leer und beschreiben Sie, wo Sie tatsächlich sind. Manche Standorte verlangen ein Foto; halten Sie die Kamera kurz ruhig, damit die App eine Live-Aufnahme erkennt. Vor dem Senden zeigt ein Bestätigungsbildschirm genau, was erfasst wird - Foto, Standort, Arbeitsort und Uhrzeit - mit zwei optionalen Feldern (Notiz und Tätigkeit), die Ihre Führungskraft sieht. Erfasst wird immer die Uhrzeit des Servers, nicht die Ihres Telefons. An Tagen mit genehmigtem Urlaub ist das Einstempeln gesperrt. In der Handy-App erinnert PROSM Time Sie auch selbst - selbst wenn die App geschlossen ist: kurz nach Schichtende, wenn Sie noch eingestempelt sind, und einige Minuten vor Ihrer nächsten geplanten Schicht."
+      "body": "Wählen Sie vor dem Einstempeln Ihren Standort (und ggf. das Projekt) - oder lassen Sie den Standort leer und beschreiben Sie, wo Sie tatsächlich sind. Manche Standorte verlangen ein Foto; halten Sie die Kamera kurz ruhig, damit die App eine Live-Aufnahme erkennt. Vor dem Senden zeigt ein Bestätigungsbildschirm genau, was erfasst wird - Foto, Standort, Arbeitsort und Uhrzeit - mit zwei optionalen Feldern (Notiz und Tätigkeit), die Ihre Führungskraft sieht. Erfasst wird immer die Uhrzeit des Servers, nicht die Ihres Telefons. An Tagen mit genehmigtem Urlaub ist das Einstempeln gesperrt. In der Handy-App erinnert PROSM Time Sie auch selbst - selbst wenn die App geschlossen ist: kurz nach Schichtende, wenn Sie noch eingestempelt sind, und einige Minuten vor Ihrer nächsten geplanten Schicht. Hat Ihre Organisation es eingeschaltet, fragt die App beim Öffnen innerhalb eines registrierten Standorts „Sie sind bei …. Jetzt einstempeln?“; ohne Ihre Antwort wird nichts erfasst, und wenn Sie zustimmen, folgen die üblichen Schritte (und das Foto, falls nötig). Hat Ihr Standort Aufgaben zum Schichtende, erscheint deren Liste vor dem Ausstempeln."
     },
     "walkInGeofence": {
       "title": "Arbeiten an einem Standort, dem Sie nicht zugewiesen sind",
-      "body": "Wenn Sie sich heute physisch im Geofence eines registrierten Standorts befinden, ihm aber nicht formell zugewiesen sind, wird er Ihnen automatisch in der Standortliste vorgeschlagen (markiert als „heute hier“) - nützlich, wenn Sie tatsächlich jeden Tag an einem anderen Standort arbeiten. Einstempeln ganz ohne Standort funktioniert ebenfalls: Ihr eigener Einstempelpunkt wird für den Rest der Schicht zum Mittelpunkt eines organisationsweiten Radius und bietet Ihnen denselben Echtzeitschutz wie der Geofence eines registrierten Standorts - selbst an einem Ort, der nie als Standort eingerichtet wurde."
+      "body": "Die Standortliste beginnt mit dem passendsten: dem Standort, dem Sie zugewiesen sind; sonst, wenn Sie in einem registrierten Standort stehen, diesem, markiert mit „Sie sind heute hier“; sonst „Kein Standort“. Die übrigen folgen, nächste zuerst. Einstempeln ohne Standort bleibt möglich; Ihr Einstempelpunkt wird dann für den Rest der Schicht zum Mittelpunkt des Arbeitsbereichs der Organisation."
     },
     "siteChange": {
       "title": "Standort während der Schicht wechseln",
@@ -36,7 +36,7 @@
     },
     "allowances": {
       "title": "Zulagen",
-      "body": "Tippen Sie auf „Aus meiner Anwesenheit füllen“: Jeder Anwesenheitstag wird aus Ihren Zulagensätzen gefüllt (Standort des Tages, dann Ihre Kategorie, dann Ihre eigenen Sätze). Überstunden werden minutengenau bezahlt (15 Minuten zu 100 pro Stunde = 25); Stunden, die noch auf Prüfung warten, zählen nicht. Ergänzen Sie nur, was keinen Satz hat (z. B. Reisen), prüfen Sie die Summen und senden Sie; Ihr Vorgesetzter genehmigt oder gibt mit Hinweis zurück. Während der Prüfung kann ein berechtigter Vorgesetzter eine Zeile ändern - jede Änderung braucht einen Grund, die Summen aktualisieren sich sofort und die Änderung (vorher, nachher, wer, warum) bleibt erhalten; nach der Genehmigung ist nichts mehr änderbar, außer das Blatt wird mit Grund wieder geöffnet. Das PDF markiert geänderte Werte mit *, listet die Änderungen, hebt Feiertage hervor und zeigt Abzüge für unbezahlten Urlaub (vom Lohn, nicht von Zulagen). Sätze unter Zulagen > Sätze."
+      "body": "Tippen Sie auf „Aus meiner Anwesenheit füllen“: Jeder Anwesenheitstag wird aus Ihren Zulagensätzen gefüllt (Standort des Tages, dann Ihre Kategorie, dann Ihre eigenen Sätze). Überstunden werden minutengenau bezahlt (15 Minuten zu 100 pro Stunde = 25); Stunden, die noch auf Prüfung warten, zählen nicht. Ergänzen Sie nur, was keinen Satz hat (z. B. Reisen), prüfen Sie die Summen und senden Sie; Ihr Vorgesetzter genehmigt oder gibt mit Hinweis zurück. Während der Prüfung kann ein berechtigter Vorgesetzter eine Zeile ändern - jede Änderung braucht einen Grund, die Summen aktualisieren sich sofort und die Änderung (vorher, nachher, wer, warum) bleibt erhalten; nach der Genehmigung ist nichts mehr änderbar, außer das Blatt wird mit Grund wieder geöffnet. Das PDF markiert geänderte Werte mit *, listet die Änderungen, hebt Feiertage hervor und zeigt Abzüge für unbezahlten Urlaub (vom Lohn, nicht von Zulagen). Sätze unter Zulagen > Sätze. Einem Tag ohne Anwesenheit (Reise, Besorgung) kann ein Standort gegeben werden - in seiner Zelle oder seinen Details - und er wird zu dessen Sätzen berechnet. „Aktuelle Sätze anwenden“ berechnet Ihre offenen Tage nach einer Änderung der Sätze neu. Das Blatt lässt sich auch als Excel-Datei herunterladen."
     },
     "kiosk": {
       "title": "Kioskmodus",
@@ -44,7 +44,7 @@
     },
     "reportsCenter": {
       "title": "Berichtszentrale",
-      "body": "Wählen Sie Berichtstyp, Zeitraum und ggf. Mitarbeiter oder Standort und exportieren Sie als PDF. Dazu gehören Anwesenheit (Offline-Gerätezeiten sind markiert), Zulagen, Belegschaft, Auftragnehmer, Standort, Verspätungen, fehlende Ausstempelungen, Urlaubskonflikte, Manager-Eingriffe und Standortverstöße - jetzt mit Verlassen des Arbeitsbereichs (mit Grund und Prüfstatus), unplausiblen und gefälschten Standorten. Führungskräfte sehen nur ihre Standorte, der Inhaber die ganze Organisation. Neben jedem PDF-Download gibt es eine Schaltfläche Drucken. Im PDF wird keine Zeile über zwei Seiten getrennt, die Spaltenüberschriften stehen auf jeder Seite und die Seiten sind nummeriert."
+      "body": "Wählen Sie Berichtstyp, Zeitraum und ggf. Mitarbeiter oder Standort und exportieren Sie als PDF. Dazu gehören Anwesenheit (Offline-Gerätezeiten sind markiert), Zulagen, Belegschaft, Auftragnehmer, Standort, Verspätungen, fehlende Ausstempelungen, Urlaubskonflikte, Manager-Eingriffe und Standortverstöße - jetzt mit Verlassen des Arbeitsbereichs (mit Grund und Prüfstatus), unplausiblen und gefälschten Standorten. Führungskräfte sehen nur ihre Standorte, der Inhaber die ganze Organisation. Neben jedem PDF-Download gibt es eine Schaltfläche Drucken. Im PDF wird keine Zeile über zwei Seiten getrennt, die Spaltenüberschriften stehen auf jeder Seite und die Seiten sind nummeriert. Auf derselben Seite: Lohnexport als Excel oder CSV mit gespeicherten Vorlagen, Personalkosten aus Stundensätzen und das Budget jedes Projekts gegenüber den Ausgaben."
     },
     "sites": {
       "title": "Standorte (Administratoren)",
@@ -56,7 +56,7 @@
     },
     "settingsCenter": {
       "title": "Einstellungen (Inhaber)",
-      "body": "Die Einstellungen enthalten nur, was für die ganze Organisation gilt: den Radius für Einstempeln ohne Standort, ob gefälschte Standorte abgelehnt werden, und die Startwerte neuer Standorte. Die Regeln eines Standorts stehen auf dessen Seite."
+      "body": "Die Einstellungen (für den Inhaber) sind gegliedert: zuerst Abonnement (Paket und Aktivierungscode), dann Standorte und Stempeln (Arbeitsbereich ohne Standort, Ablehnen gefälschter Standorte, die Stempelfrage beim Öffnen in einem Standort, Startwerte neuer Standorte), dann Zeit, dann Urlaub und Urlaubsarten, dann Daten und Datenschutz (Aufbewahrung). Die Regeln jedes Standorts stehen auf dessen Seite."
     },
     "leave": {
       "title": "Urlaub",
@@ -64,7 +64,7 @@
     },
     "schedule": {
       "title": "Dienstplan",
-      "body": "Sehen Sie Ihre eigenen bevorstehenden Schichten über die Dienstplan-Seite in der Seitenleiste - jeder sieht seine eigenen. Manager mit Planungsbefugnis können zusätzlich wiederverwendbare Schichtvorlagen pro Standort erstellen (z. B. „Früh“, „Nacht“) und bestimmte Mitarbeiter bestimmten Schichten zuweisen, einschließlich echter Nachtschichten über Mitternacht hinweg (mit einer „(+1)“-Markierung angezeigt) - das System prüft automatisch auf Überschneidungen, auch über die Mitternachtsgrenze hinweg."
+      "body": "Ihre kommenden Schichten sehen Sie auf der Seite Schichtplan. Berechtigte Manager legen Schichtvorlagen je Standort an und weisen Personen zu, auch Nachtschichten (markiert mit „(+1)“); Überschneidungen werden abgelehnt. Auf derselben Seite: offene Schichten (ein Manager veröffentlicht eine unbesetzte Schicht, Personen am Standort fragen danach, er wählt eine), Schichttausch mit Kollegen nach Freigabe, die geschätzten Planungskosten und die Aufgaben zum Schichtende je Standort."
     },
     "calendar": {
       "title": "Hidschri- oder gregorianischer Kalender",
@@ -76,7 +76,7 @@
     },
     "getTheApp": {
       "title": "PROSM Time nutzen",
-      "body": "Auf einem Android-Telefon laden Sie die APK von prosm.net und installieren sie - die App meldet, wenn ein Update bereitsteht. Auf jedem Computer, Tablet oder iPhone öffnen Sie https://time.prosm.net im Browser (auch auf dem Startbildschirm ablegbar); es aktualisiert sich selbst. Beides ist dasselbe PROSM Time mit demselben Konto."
+      "body": "Auf einem Android-Handy: die APK von prosm.net laden und installieren (bald bei Google Play); diese Version meldet Updates selbst. Auf jedem Computer, Tablet oder iPhone: https://time.prosm.net im Browser öffnen (zum Startbildschirm hinzufügbar); es aktualisiert sich selbst. Alles dasselbe PROSM Time mit demselben Konto."
     },
     "liveMap": {
       "title": "Live-Karte",
@@ -96,7 +96,7 @@
     },
     "privacy": {
       "title": "Ihre Privatsphäre",
-      "body": "PROSM Time erfasst Ihren Standort beim Ein- und Ausstempeln, bei Pausen, Standortwechsel und SOS. Nur wenn Ihre Organisation die Anwesenheitsüberwachung aktiviert, auch etwa alle 5 Minuten während der Schicht - unter Android auch im Hintergrund, nach vorheriger Information und mit sichtbarer Benachrichtigung - und immer nur bis zum Ausstempeln. Fotos nur, wo Ihr Standort sie verlangt; keine Gesichtserkennung. Standortpunkte werden nach 30 Tagen, Fotos nach 90 Tagen gelöscht. Berechtigungen können Sie jederzeit in den Geräteeinstellungen entziehen. Für Ihre Rechte wenden Sie sich zuerst an Ihre Organisation oder an info@prosm.net. Einzelheiten in der Datenschutzerklärung und den Nutzungsbedingungen unten."
+      "body": "PROSM Time erfasst Ihren Standort beim Ein- und Ausstempeln, bei Pausen, Standortwechsel und SOS. Nur wenn Ihre Organisation die Anwesenheitsüberwachung aktiviert, auch etwa alle 5 Minuten während der Schicht - unter Android auch im Hintergrund, nach vorheriger Information und mit sichtbarer Benachrichtigung - und immer nur bis zum Ausstempeln. Fotos nur, wo Ihr Standort sie verlangt; keine Gesichtserkennung. Standortpunkte werden nach 30 Tagen, Fotos nach 90 Tagen gelöscht. Berechtigungen können Sie jederzeit in den Geräteeinstellungen entziehen. Für Ihre Rechte wenden Sie sich zuerst an Ihre Organisation oder an info@prosm.net. Einzelheiten in der Datenschutzerklärung und den Nutzungsbedingungen unten. Der Inhaber kann die Aufbewahrung unter Einstellungen > Daten und Datenschutz verkürzen. Meldet sich Ihr Konto auf einem neuen Gerät an, werden Sie und der Inhaber benachrichtigt."
     },
     "workCalendar": {
       "title": "Arbeitskalender: Feiertage, Ruhetage und Sondertage",
@@ -120,7 +120,7 @@
     },
     "managerDashboard": {
       "title": "Das Dashboard (Eigentümer und Leiter)",
-      "body": "Der Eigentümer und alle mit „Dashboard anzeigen“ sehen: eine SOS-Leiste (bis jemand sie bestätigt), Chips für Wartendes (nur wenn vorhanden), die Kennzahlen mit Vergleich zur Vorperiode nur bei vorhandenen Daten, die Standortkarte mit Arbeitsbereich und Anwesenden, die Standorttabelle mit externen Kräften je Standort, die Genehmigungswarteschlange, Personen nach Rolle, Plan vs. Ist, Zulagen und geschätzte Kosten (nur mit „Geschätzte Kosten anzeigen“) und das Aktionsprotokoll. Wählen Sie Organisation, Ihre Standorte oder sich selbst und den Zeitraum; Karte und „Jetzt anwesend“ sind live. Aktualisierung jede Minute; „Widgets anpassen“ blendet aus oder sortiert um. Jede Zahl öffnet die Personen dahinter - anwesend, Stunden pro Person, Verspätungen, abwesend und im Urlaub, Überstunden pro Person - mit einer Schaltfläche zur vollständigen Seite."
+      "body": "Der Eigentümer und alle mit „Dashboard anzeigen“ sehen: eine SOS-Leiste (bis jemand sie bestätigt), Chips für Wartendes (nur wenn vorhanden), die Kennzahlen mit Vergleich zur Vorperiode nur bei vorhandenen Daten, die Standortkarte mit Arbeitsbereich und Anwesenden, die Standorttabelle mit externen Kräften je Standort, die Genehmigungswarteschlange, Personen nach Rolle, Plan vs. Ist, Zulagen und geschätzte Kosten (nur mit „Geschätzte Kosten anzeigen“) und das Aktionsprotokoll. Wählen Sie Organisation, Ihre Standorte oder sich selbst und den Zeitraum; Karte und „Jetzt anwesend“ sind live. Aktualisierung jede Minute; „Widgets anpassen“ blendet aus oder sortiert um. Jede Zahl öffnet die Personen dahinter - anwesend, Stunden pro Person, Verspätungen, abwesend und im Urlaub, Überstunden pro Person - mit einer Schaltfläche zur vollständigen Seite. Die Karte „Kennzahlen“ zeigt Pünktlichkeit, Verspätungen und Abwesenheit. Der Inhaber erhält um 7 Uhr Standortzeit eine Morgenübersicht, eine Warnung, wenn jemand eine Schicht verpasst, und eine Warnung, wenn jemand nach Schichtende noch eingestempelt ist (standardmäßig nach 15 Minuten, in den Einstellungen änderbar)."
     },
     "peopleAndPhotos": {
       "title": "Personen, Rollen und Profilfotos",
@@ -129,6 +129,10 @@
     "phoneNotifications": {
       "title": "Benachrichtigungen und Erinnerungen am Telefon",
       "body": "Alle Benachrichtigungen von PROSM Time tragen dasselbe kleine PROSM-Symbol. Ihre eigenen Erinnerungen stellen Sie in der Dashboard-Karte ein. Android 14 und neuer erlauben exakte Wecker evtl. nicht; eine Erinnerung kann dann einige Minuten später kommen - die Karte sagt das und bietet an, exakte Wecker zu erlauben. Kann die Standortverfolgung nicht starten (Berechtigung verweigert oder Standort aus), informiert die App und bietet erneuten Versuch oder die Einstellungen an; Ihre Erfassung geht nie verloren. Die Update-Benachrichtigung lässt sich wegwischen."
+    },
+    "subscription": {
+      "title": "Paket und Abonnement (Inhaber)",
+      "body": "Einstellungen > Abonnement zeigt Ihr Paket und was es enthält, Mitarbeiter gegenüber dem Limit, Standorte, das Enddatum und wie weit Datensätze zurück angezeigt werden. Änderungen und Verlängerungen nimmt PROSM vor: Sie erhalten eine Benachrichtigung und eine E-Mail mit der neuen Lizenz als PDF; sie gilt sofort. Das Feld für den Aktivierungscode erscheint nur in der Testphase oder nach Ablauf der Lizenz. Nach Ablauf und Kulanzzeit wird die Organisation schreibgeschützt: Alle sehen alles, Änderungen und Stempeln ruhen bis zur Verlängerung, gelöscht wird nichts."
     }
   },
   "faq": {
@@ -175,7 +179,7 @@
     },
     "q11": {
       "question": "Wie funktioniert die 30-Tage-Demo?",
-      "answer": "Auf der Willkommensseite öffnet „Demoversion nutzen“ die übliche Aktivierung ohne Aktivierungscode; Organisation und Eigentümer werden sofort angelegt. Der Test dauert 30 Tage (Serverzeit), eine Leiste zeigt die verbleibenden Tage. Eine Woche vor Ende erhält der Eigentümer eine Mitteilung und eine E-Mail mit sales@prosm.net, info@prosm.net und support@prosm.net. Danach pausiert die App, nichts wird gelöscht: Geben Sie einen Aktivierungscode ein oder lassen Sie PROSM die Lizenz verlängern - dann geht alles mit Ihren Daten weiter. Ein Test pro E-Mail."
+      "answer": "Auf der Willkommensseite öffnet „Testversion nutzen“ die üblichen Aktivierungsschritte ohne Code und legt Organisation und Inhaber sofort an. Die Testphase dauert 30 Tage (Serverzeit), eine Leiste zeigt die verbleibenden Tage. Eine Woche vor Ende erhält der Inhaber eine Benachrichtigung und eine E-Mail mit sales@prosm.net, info@prosm.net und support@prosm.net. Danach wird die Organisation schreibgeschützt, ohne dass etwas gelöscht wird: Aktivierungscode unter Einstellungen > Abonnement eingeben oder PROSM um Verlängerung bitten, und alles läuft wie vorher. Eine Testphase pro E-Mail."
     },
     "q12": {
       "question": "Funktioniert die Anwesenheit ohne Internet?",
@@ -187,7 +191,7 @@
     },
     "q14": {
       "question": "Wer sieht meinen Standort und meine Fotos, und wie lange?",
-      "answer": "Sie, die Leiter Ihres Standorts und der Eigentümer Ihrer Organisation. Standortpunkte während der Schicht werden nach 30 Tagen gelöscht, Anwesenheitsfotos nach 90 Tagen. Die Live-Prüfung speichert keine Gesichtsdaten - nur das Foto und das Ergebnis. Ihr Profilfoto ist nur in Ihrer Organisation sichtbar. Der Rest steht in der Datenschutzerklärung."
+      "answer": "Sie, Ihre Standortmanager und der Inhaber Ihrer Organisation. Standortproben während der Schicht werden nach 30 Tagen gelöscht, Stempelfotos nach 90 Tagen, oder früher, wenn der Inhaber das verkürzt hat. Die Live-Prüfung speichert keine Gesichtsdaten — nur das Foto und das Ergebnis. Ihr Profilfoto ist nur in Ihrer Organisation sichtbar. Die Datenschutzerklärung regelt den Rest."
     },
     "q15": {
       "question": "Ruft SOS den Rettungsdienst oder die Polizei?",
@@ -199,8 +203,5 @@
     "body": "Für Produkthilfe oder Support kontaktieren Sie uns unter:",
     "infoLabel": "Allgemeine Anfragen:",
     "supportLabel": "Support:"
-  },
-  "about": {
-    "title": "Über die App"
   }
 }

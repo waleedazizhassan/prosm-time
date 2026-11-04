@@ -289,7 +289,8 @@
     "invalidActivationCode": "Le code est incorrect ou déjà utilisé.",
     "locationRequired": "Impossible d'enregistrer sans position valide. Activez la localisation et réessayez.",
     "rejectReasonRequired": "Indiquez le motif, pour que l'employé le voie.",
-    "organizationReadOnly": "Votre organisation est en lecture seule jusqu’au renouvellement de sa licence."
+    "organizationReadOnly": "Votre organisation est en lecture seule jusqu’au renouvellement de sa licence.",
+    "featureNotInPlan": "Cette fonction n’est pas incluse dans l’offre de votre organisation."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",
@@ -340,7 +341,7 @@
     "tagline": "Une présence fiable - sur site, à l'heure.",
     "point1": "Pointage uniquement sur le lieu de travail, avec GPS et photo",
     "point2": "Fonctionne hors ligne et garde l'heure et le lieu réels",
-    "point3": "Feuilles de temps, indemnités et rapports en cinq langues"
+    "point3": "Feuilles de temps, indemnités et rapports en neuf langues"
   },
   "dateTime": {
     "date": "Date",
@@ -361,5 +362,10 @@
     "supervisor": "Superviseur",
     "employee": "Employé",
     "read_only": "Lecteur"
+  },
+  "planLocked": {
+    "text": "Cette fonction fait partie de l’offre {{plan}}.",
+    "seePlan": "Voir l’offre",
+    "askOwner": "Demandez au propriétaire."
   }
 }

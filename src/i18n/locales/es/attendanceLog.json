@@ -1,0 +1,70 @@
+{
+  "title": "Registro de asistencia",
+  "subtitle": "Historial de entradas y salidas, limitado a las personas y sedes que puedes ver.",
+  "loadError": "No se pudieron cargar los registros de asistencia.",
+  "exportPdfAction": "Exportar PDF",
+  "filters": {
+    "title": "Período",
+    "fromLabel": "Desde",
+    "toLabel": "Hasta",
+    "employeeLabel": "Empleado",
+    "allEmployees": "Todos los empleados"
+  },
+  "columns": {
+    "employee": "Empleado",
+    "site": "Sede",
+    "clockInLocation": "Ubicación real de entrada",
+    "clockOutLocation": "Ubicación real de salida",
+    "clockInAt": "Entrada",
+    "clockOutAt": "Salida",
+    "status": "Estado",
+    "workedHours": "Horas trabajadas",
+    "notes": "Notas",
+    "date": "Fecha"
+  },
+  "status": {
+    "clocked_in": "Dentro",
+    "clocked_out": "Fuera"
+  },
+  "empty": "No hay registros de asistencia en este período.",
+  "viewPhoto": "Ver foto",
+  "viewOnMap": "Ver en el mapa",
+  "siteChangedTo": "→ {{site}} a las {{time}}",
+  "recordedByOnBehalf": "Registrado en su nombre por {{name}}",
+  "noteLabel": "Nota: {{note}}",
+  "activityLabel": "Actividad: {{activity}}",
+  "locationMatch": "Dentro de la geovalla de la sede",
+  "locationMismatch": "Fuera de la geovalla de la sede",
+  "photoModalTitle": "Foto de asistencia",
+  "photoLoading": "Cargando foto…",
+  "photoAlt": "Foto de prueba de asistencia",
+  "photoLoadError": "No se pudo cargar esta foto.",
+  "deviceTimeBadge": "Hora del dispositivo (sin conexión)",
+  "deviceTimeHint": "Registrado sin conexión con la hora del dispositivo del empleado; pendiente de revisión por un responsable.",
+  "notes": {
+    "clockIn": "Entrada: {{note}}",
+    "clockOut": "Salida: {{note}}",
+    "earlyLeave": "Salida anticipada: {{reason}}",
+    "mockClockIn": "Entrada desde una ubicación falsa (simulada)",
+    "mockClockOut": "Salida desde una ubicación falsa (simulada)",
+    "siteChange": "Cambio de sede: {{from}} → {{to}} ({{time}})"
+  },
+  "periods": {
+    "today": "Hoy",
+    "week": "Esta semana",
+    "month": "Este mes"
+  },
+  "totalHours": "Total {{hours}} horas · {{count}} turnos",
+  "noRegisteredSite": "Sin sede registrada",
+  "noLocation": "Sin ubicación (registro antiguo o permiso no concedido)",
+  "view": {
+    "month": "Vista mensual",
+    "list": "Vista de lista"
+  },
+  "group": {
+    "label": "Agrupar por",
+    "none": "Sin agrupar",
+    "employee": "Empleado",
+    "day": "Día"
+  }
+}

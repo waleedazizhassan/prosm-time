@@ -23,7 +23,7 @@ describe("the day-before notice", () => {
     expect((await t.su<{ kind: string }>(claim)).map((row) => row.kind)).toEqual(["ENDING"]);
     await t.su("update license_activation_state set expires_at = now() + interval '20 hours' where organization_id = $1", [org.id]);
     expect((await t.su<{ kind: string }>(claim)).map((row) => row.kind)).toEqual(["ENDING_DAY"]);
-    const notes = await t.su<{ body: string }>("select body from notifications where organization_id = $1", [org.id]);
+    const notes = await t.su<{ body: string }>("select body from notifications where organization_id = $1 and type <> 'license_changed'", [org.id]);
     expect(notes.length).toBe(2);
     expect(notes.map((note) => note.body).join(" ")).not.toMatch(/buy|اشتر/);
   });

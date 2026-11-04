@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import PlanRoute from "./PlanRoute";
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import PageLoadBoundary from "../components/common/PageLoadBoundary";
 
@@ -44,6 +45,7 @@ const ReportsPage = lazy(() => import("../modules/reports/ReportsPage"));
 const OrganizationSettingsPage = lazy(() => import("../modules/settings/OrganizationSettingsPage"));
 const IntegrationsPage = lazy(() => import("../modules/settings/IntegrationsPage"));
 const HelpPage = lazy(() => import("../modules/help/HelpPage"));
+const DailySummaryPage = lazy(() => import("../modules/reports/DailySummaryPage"));
 const LegalPage = lazy(() => import("../modules/legal/LegalPage"));
 
 // PROSM Time route map. /activate, /login, /accept-invitation are
@@ -103,9 +105,11 @@ export default function AppRoutes() {
             path="/kiosk/:siteId"
             element={
               <ProtectedRoute>
-                <KioskLayout>
-                  <KioskPage />
-                </KioskLayout>
+                <PlanRoute feature="kiosk">
+                  <KioskLayout>
+                    <KioskPage />
+                  </KioskLayout>
+                </PlanRoute>
               </ProtectedRoute>
             }
           />
@@ -121,26 +125,27 @@ export default function AppRoutes() {
             <Route path="/clock-in" element={<ClockInPage />} />
             <Route path="/people" element={<PeoplePage />} />
             <Route path="/people/:userId" element={<PersonDetailPage />} />
-            <Route path="/admin-clock" element={<AdminOnBehalfPage />} />
-            <Route path="/audit-log" element={<AuditLogPage />} />
+            <Route path="/admin-clock" element={<PlanRoute feature="on_behalf"><AdminOnBehalfPage /></PlanRoute>} />
+            <Route path="/audit-log" element={<PlanRoute feature="audit"><AuditLogPage /></PlanRoute>} />
             <Route path="/sites" element={<SitesPage />} />
             <Route path="/sites/:siteId" element={<SiteDetailPage />} />
-            <Route path="/workers" element={<ExternalWorkersPage />} />
+            <Route path="/workers" element={<PlanRoute feature="kiosk"><ExternalWorkersPage /></PlanRoute>} />
             <Route path="/manager" element={<ManagerConsolePage />} />
             <Route path="/attendance" element={<AttendanceLogPage />} />
             <Route path="/timesheets" element={<TimesheetsPage />} />
             <Route path="/timesheets/:timesheetId/report" element={<TimesheetReportPage />} />
-            <Route path="/allowances" element={<AllowancesPage />} />
-            <Route path="/allowances/prices" element={<AllowancePricesPage />} />
-            <Route path="/leave" element={<LeaveRequestsPage />} />
+            <Route path="/allowances" element={<PlanRoute feature="allowances"><AllowancesPage /></PlanRoute>} />
+            <Route path="/allowances/prices" element={<PlanRoute feature="allowances"><AllowancePricesPage /></PlanRoute>} />
+            <Route path="/leave" element={<PlanRoute feature="leave"><LeaveRequestsPage /></PlanRoute>} />
             <Route path="/schedule" element={<SchedulePage />} />
             <Route path="/calendar" element={<CalendarPage />} />
-            <Route path="/emergency-log" element={<EmergencyLogPage />} />
+            <Route path="/emergency-log" element={<PlanRoute feature="sos"><EmergencyLogPage /></PlanRoute>} />
             <Route path="/reports" element={<ReportsPage />} />
+            <Route path="/daily-summary" element={<PlanRoute feature="daily_summary"><DailySummaryPage /></PlanRoute>} />
             <Route path="/settings" element={<OrganizationSettingsPage />} />
             {/* Hidden while FEATURES.integrations is off (owner 2026-10-13). */}
             <Route path="/integrations" element={FEATURES.integrations ? <IntegrationsPage /> : <Navigate to="/dashboard" replace />} />
-            <Route path="/kiosk" element={<KioskLauncherPage />} />
+            <Route path="/kiosk" element={<PlanRoute feature="kiosk"><KioskLauncherPage /></PlanRoute>} />
             <Route path="/help" element={<HelpPage />} />
           </Route>
 

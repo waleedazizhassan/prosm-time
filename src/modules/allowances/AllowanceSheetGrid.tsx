@@ -5,6 +5,7 @@ import type { AllowanceEntry, AllowanceEntryInput } from "../../core/repositorie
 import { formatDateOnly, formatTimeOnly, appLocale } from "../../core/utils/formatDate";
 import StatusBadge from "../../components/common/StatusBadge";
 import EmptyState from "../../components/common/EmptyState";
+import Dropdown from "../../components/common/Dropdown";
 import styles from "./AllowanceSheetGrid.module.css";
 
 type Field = "mealAllowance" | "expatriationAllowance" | "transportationAllowance" | "housingAllowance" | "travelAllowance" | "otherAllowance";
@@ -55,6 +56,8 @@ export default function AllowanceSheetGrid({
   emptyMessage,
   onOpen,
   onSave,
+  siteOptions = [],
+  onSetSite,
 }: {
   entries: AllowanceEntry[];
   ownUserId: string | null;
@@ -62,6 +65,9 @@ export default function AllowanceSheetGrid({
   emptyMessage: string;
   onOpen: (entry: AllowanceEntry) => void;
   onSave: (entry: AllowanceEntry, input: AllowanceEntryInput) => Promise<boolean>;
+  /** The sites a day without attendance can be put at (owner 2026-11-03); its prices follow. */
+  siteOptions?: { value: string; label: string }[];
+  onSetSite?: (entry: AllowanceEntry, siteId: string | null) => Promise<boolean>;
 }) {
   const { t, i18n } = useTranslation("allowances");
   const [savingId, setSavingId] = useState<string | null>(null);
@@ -123,7 +129,25 @@ export default function AllowanceSheetGrid({
                   </button>
                 </th>
                 {severalPeople ? <td className={styles.text}>{entry.userFullName}</td> : null}
-                <td className={styles.text}>{entry.siteName || "—"}</td>
+                <td className={styles.text}>
+                  {canEdit && entry.sessionCount === 0 && onSetSite && siteOptions.length > 0 ? (
+                    <Dropdown
+                      className={styles.siteSelect}
+                      name={`site-${entry.id}`}
+                      ariaLabel={`${t("columns.site")} ${formatDateOnly(entry.entryDate, i18n.language)}`}
+                      value={entry.siteId ?? ""}
+                      disabled={savingId === entry.id}
+                      options={[{ value: "", label: t("addEntry.siteNone") }, ...siteOptions]}
+                      onChange={async (next) => {
+                        setSavingId(entry.id);
+                        await onSetSite(entry, next || null);
+                        setSavingId(null);
+                      }}
+                    />
+                  ) : (
+                    entry.siteName || "—"
+                  )}
+                </td>
                 <td>{entry.clockInAt ? formatTimeOnly(entry.clockInAt, i18n.language) : "—"}</td>
                 <td>{entry.clockOutAt ? formatTimeOnly(entry.clockOutAt, i18n.language) : "—"}</td>
                 {MONEY_COLUMNS.map((column) => {

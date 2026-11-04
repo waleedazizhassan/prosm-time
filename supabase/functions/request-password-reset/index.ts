@@ -24,7 +24,8 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
 import { sendEmail } from "../_shared/emailService.ts";
-import { renderPasswordResetEmail } from "../_shared/emailTemplates.ts";
+import { passwordResetSubject, renderPasswordResetEmail } from "../_shared/emailTemplates.ts";
+import { emailLanguage } from "../_shared/emailI18n.ts";
 import { clientIdentifier, enforceRateLimits, padResponseTime } from "../_shared/rateLimit.ts";
 
 const GENERIC_MESSAGE = "If an account exists for this email, a password reset code has been sent.";
@@ -48,7 +49,7 @@ serve(async (request: Request) => {
 
   try {
     const payload = await request.json().catch(() => ({}));
-    const { email } = payload;
+    const { email, language: requestLanguage } = payload;
 
     if (!email || typeof email !== "string" || !email.includes("@")) {
       return errorResponse("A valid email is required.", 400, "INVALID_REQUEST");
@@ -94,11 +95,20 @@ serve(async (request: Request) => {
       // § live UX review, user-directed - the reset link always
       // resolved to a dead localhost fallback; the code alone is the
       // real call to action now (see _shared/emailTemplates.ts).
+      // Owner 2026-11-03: in the app's language - the one on the screen that asked, else the
+      // person's own saved language.
+      let language = typeof requestLanguage === "string" ? requestLanguage : "";
+      if (!language && requestResult.userId) {
+        const { data: saved } = await serviceClient.rpc("prosm_time_user_language", { p_user: requestResult.userId });
+        language = typeof saved === "string" ? saved : "en";
+      }
+      language = emailLanguage(language);
       await sendEmail({
         to: normalizedEmail,
-        subject: "Reset your PROSM Time password",
+        subject: passwordResetSubject(language),
         html: renderPasswordResetEmail({
-          fullName: requestResult.fullName ?? "there",
+          language,
+          fullName: requestResult.fullName ?? null,
           verificationCode,
           expiryMinutes: EXPIRY_MINUTES,
         }),

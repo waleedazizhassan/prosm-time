@@ -91,7 +91,7 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "endingTitle": "الفترة التجريبية لـ PROSM Time تنتهي قريبًا",
         "endingBody": "تنتهي الفترة التجريبية بعد أسبوع. بياناتك محفوظة ولن تُحذف. للاستمرار أدخل كود تفعيل أو تواصل معنا على sales@prosm.net.",
         "endedTitle": "انتهت الفترة التجريبية لـ PROSM Time",
-        "endedBody": "البرنامج متوقف مؤقتًا وكل بياناتك محفوظة. أدخل كود تفعيل أو تواصل معنا على sales@prosm.net وسيعود كل شيء كما كان.",
+        "endedBody": "أصبحت المؤسسة للقراءة فقط وكل بياناتك محفوظة. أدخل كود تفعيل أو تواصل معنا على sales@prosm.net ويعود كل شيء كما كان.",
         "licenseEndingTitle": "ترخيص PROSM Time ينتهي قريبًا",
         "licenseEndingBody": "ينتهي الترخيص {{license}} في {{date}}. جدّده قبل هذا التاريخ ليستمر البرنامج دون توقف، وكل بياناتك محفوظة. تواصل معنا على sales@prosm.net."
       },
@@ -155,12 +155,23 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "body": "لم يسجّل {{name}} حضوره لوردية {{time}} في {{site}}."
       },
       "overtimeSoon": {
-        "title": "إضافي قريب",
-        "body": "{{name}} ما زال مسجّلاً حضوره؛ يبدأ الإضافي {{time}}."
+        "title": "بيشتغل وقت إضافي",
+        "body": "{{name}} لسه مسجّل حضور؛ الوردية خلصت الساعة {{time}}."
       },
       "dailyDigest": {
         "title": "ملخص أمس",
         "body": "عمل {{present}}، وغاب عن ورديته {{noShows}}. بانتظارك: {{leave}} إجازة و{{exceptions}} استثناء. الحاضرون الآن: {{open}}."
+      },
+      "licenseChanged": {
+        "title": "تغيّر ترخيصك",
+        "body": "عدّلت PROSM ترخيصك: {{changes}}.",
+        "users": "المستخدمون {{from}} ← {{to}}",
+        "devices": "الأجهزة {{from}} ← {{to}}",
+        "ends": "ينتهي في {{date}}",
+        "status": "الحالة {{status}}",
+        "plan": "الباقة تغيّرت",
+        "unlimited": "بلا حد",
+        "planTo": "الباقة {{plan}}"
       }
     },
     "leaveTypes": {
@@ -172,178 +183,6 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "hajj": "حج أو عمرة",
       "bereavement": "وفاة",
       "paternity": "أبوة"
-    }
-  },
-  "en": {
-    "notifications": {
-      "outOfZoneEmployee": {
-        "title": "You are outside your assigned work area",
-        "body": "Please explain why. Distance: {{distance}} m."
-      },
-      "outOfZoneManager": {
-        "title": "Employee outside their work area",
-        "body": "{{name}} is outside the assigned area (distance: {{distance}} m)."
-      },
-      "exceptionPendingReview": {
-        "titleException": "Exception awaiting your review",
-        "bodyException": "{{name}} submitted a reason for an out-of-zone exception.",
-        "titleCorrection": "Correction request awaiting your review",
-        "bodyCorrection": "{{name}} submitted a correction request.",
-        "titleEarlyLeave": "Early leave reason submitted",
-        "bodyEarlyLeave": "{{name}} explained why they left early.",
-        "titleLeave": "Leave request awaiting your review",
-        "bodyLeave": "{{name}} requested {{days}} day(s) of leave.",
-        "bodyLeaveDetailed": "{{name}} requested {{days}} day(s) of {{type}} leave ({{startDate}} to {{endDate}}).",
-        "bodyLeaveReasonSuffix": "Reason: {{reason}}.",
-        "titlePermission": "Permission waiting for your approval",
-        "bodyPermission": "{{name}} asked for {{kind}} on {{date}}.",
-        "bodyPermissionShort": "{{name}} asked for a permission on {{date}}.",
-        "titleLeaveCancelled": "Approved leave cancelled",
-        "bodyLeaveCancelled": "{{name}} cancelled their approved leave ({{startDate}} - {{endDate}}).",
-        "titleLeaveRequestWithdrawn": "Leave request withdrawn",
-        "bodyLeaveRequestWithdrawn": "{{name}} withdrew their leave request ({{startDate}} - {{endDate}}) before it was answered."
-      },
-      "correctionReviewed": {
-        "titleException": "Your exception was reviewed",
-        "titleCorrection": "Your correction request was reviewed",
-        "titleLeave": "Your leave request was reviewed",
-        "body": "Decision: {{decision}}.",
-        "titleMockLocation": "Your location was reviewed",
-        "titleOfflineTime": "Your offline time was reviewed",
-        "notesSuffix": "Note: \"{{notes}}\"",
-        "titlePermission": "Your permission was reviewed",
-        "titlePendingHours": "Your shift's hours were reviewed",
-        "titleIntegrity": "Your check-in was reviewed"
-      },
-      "breakExceeded": {
-        "title": "Break duration exceeded",
-        "body": "Your break exceeded the maximum allowed duration."
-      },
-      "sosAlert": {
-        "title": "SOS/Emergency alert",
-        "body": "{{name}} triggered an SOS/Emergency alert."
-      },
-      "timesheet": {
-        "submittedTitle": "Timesheet submitted for review",
-        "submittedBody": "A timesheet was submitted and is awaiting your approval.",
-        "approvedTitle": "Timesheet approved",
-        "approvedBody": "Your timesheet was approved and is now locked.",
-        "rejectedTitle": "Timesheet rejected",
-        "rejectedBody": "Your timesheet was rejected and returned to draft.",
-        "correctionRequestedTitle": "Timesheet correction requested",
-        "correctionRequestedBody": "An employee requested a correction on a locked timesheet.",
-        "correctionApprovedTitle": "Timesheet correction approved",
-        "correctionApprovedBody": "Your timesheet correction was approved and the period reopened for resubmission.",
-        "correctionRejectedTitle": "Timesheet correction rejected",
-        "correctionRejectedBody": "Your timesheet correction request was rejected.",
-        "readyTitle": "Your timesheet is ready",
-        "readyBody": "Review your timesheet for {{start}} - {{end}} and submit it."
-      },
-      "shiftAssigned": {
-        "title": "A new shift was scheduled for you",
-        "body": "You are scheduled on {{date}} from {{startTime}} to {{endTime}}.",
-        "bodyOvernight": "You are scheduled on {{date}} from {{startTime}} to {{endTime}} (next day).",
-        "cancelledTitle": "A scheduled shift was cancelled",
-        "cancelledBody": "Your shift on {{date}} was cancelled."
-      },
-      "siteChangeAlert": {
-        "title": "Employee changed site mid-shift",
-        "body": "{{name}} changed site mid-shift, from {{oldSite}} to {{newSite}}.",
-        "unregisteredLocation": "an unregistered location"
-      },
-      "missingClockOut": {
-        "title": "Employee has not clocked out",
-        "body": "{{name}} has been clocked in for over {{hours}} hours with no clock-out yet."
-      },
-      "locationPlausibilityFlag": {
-        "title": "Unusual location movement detected",
-        "body": "{{name}}'s location implies about {{speed}} km/h since their last known position - please review."
-      },
-      "trial": {
-        "endingTitle": "Your PROSM Time trial ends soon",
-        "endingBody": "Your trial ends in a week. Your data is kept and will not be deleted. To continue, enter an activation code or contact us at sales@prosm.net.",
-        "endedTitle": "Your PROSM Time trial has ended",
-        "endedBody": "The app is paused and all your data is kept. Enter an activation code or contact us at sales@prosm.net and everything returns as it was.",
-        "licenseEndingTitle": "Your PROSM Time licence ends soon",
-        "licenseEndingBody": "Licence {{license}} ends on {{date}}. Renew it before then so the app keeps running; all your data is kept. Contact sales@prosm.net."
-      },
-      "decision": {
-        "approved": "Approved",
-        "rejected": "Rejected",
-        "acknowledged": "Acknowledged",
-        "clarification_requested": "Clarification requested",
-        "cancelled": "Cancelled"
-      },
-      "allowance": {
-        "submittedTitle": "Allowances waiting for approval",
-        "submittedBody": "{{name}} submitted allowances for {{date}}.",
-        "approvedTitle": "Allowances approved",
-        "approvedBody": "Your allowances for {{date}} were approved.",
-        "rejectedTitle": "Allowances rejected",
-        "rejectedBody": "Your allowances for {{date}} were rejected. You can edit them and send them again.",
-        "sheetSubmittedBody": "{{name}} sent allowances for {{days}} days ({{start}} - {{end}}).",
-        "sheetApprovedBody": "Your allowances for {{start}} - {{end}} were approved.",
-        "sheetRejectedBody": "Your allowances for {{start}} - {{end}} were rejected. Fix them and send them again."
-      },
-      "longSessionCheck": {
-        "title": "Still working?",
-        "body": "You have been clocked in for {{hours}} hours. Still working, or clock out?"
-      },
-      "sessionAutoClosed": {
-        "titleEmployee": "Your shift was closed automatically",
-        "bodyEmployee": "Your shift was closed after {{hours}} hours with no clock-out. Its hours wait for your manager's review.",
-        "titleManager": "A shift was closed automatically",
-        "bodyManager": "{{name}}'s shift was closed after {{hours}} hours with no clock-out. Review its hours."
-      },
-      "exitSitePrompt": {
-        "title": "You left the site",
-        "body": "Your shift is still open - clock out?"
-      },
-      "autoCheckoutGeofence": {
-        "titleEmployee": "You were clocked out",
-        "bodyEmployee": "You left the site and were clocked out at the time you left. Ask your manager if this is wrong.",
-        "titleManager": "Clocked out on leaving the site",
-        "bodyManager": "{{name}} left the site and was clocked out automatically."
-      },
-      "clockInReminder": {
-        "title": "Time to clock in",
-        "body": "Your shift at {{site}} starts at {{time}}. Clock in when you arrive."
-      },
-      "clockOutReminder": {
-        "title": "Don't forget to clock out",
-        "body": "Your shift ended at {{time}}. Clock out in PROSM Time when you leave."
-      },
-      "accountDeleted": {
-        "title": "An employee deleted their account",
-        "body": "{{name}} deleted their account. Their attendance and timesheets are kept as \"Deleted user\"."
-      },
-      "newDevice": {
-        "title": "New device signed in",
-        "body": "Your account was opened on a new device: {{device}}. If this was not you, change your password.",
-        "ownerBody": "{{name}} signed in on a new device: {{device}}."
-      },
-      "noShow": {
-        "title": "Not clocked in for a shift",
-        "body": "{{name}} has not clocked in for the {{time}} shift at {{site}}."
-      },
-      "overtimeSoon": {
-        "title": "Overtime soon",
-        "body": "{{name}} is still clocked in; overtime starts at {{time}}."
-      },
-      "dailyDigest": {
-        "title": "Yesterday at a glance",
-        "body": "{{present}} worked, {{noShows}} missed a shift. Waiting: {{leave}} leave, {{exceptions}} exceptions. Clocked in now: {{open}}."
-      }
-    },
-    "leaveTypes": {
-      "annual": "Annual",
-      "sick": "Sick",
-      "unpaid": "Unpaid",
-      "emergency": "Casual",
-      "other": "Other",
-      "hajj": "Hajj or Umrah",
-      "bereavement": "Bereavement",
-      "paternity": "Paternity"
     }
   },
   "de": {
@@ -435,7 +274,7 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "endingTitle": "Ihre PROSM Time-Testphase endet bald",
         "endingBody": "Ihre Testphase endet in einer Woche. Ihre Daten bleiben erhalten und werden nicht gelöscht. Um weiterzumachen, geben Sie einen Aktivierungscode ein oder kontaktieren Sie uns unter sales@prosm.net.",
         "endedTitle": "Ihre PROSM Time-Testphase ist beendet",
-        "endedBody": "Die App ist pausiert, alle Ihre Daten bleiben erhalten. Geben Sie einen Aktivierungscode ein oder kontaktieren Sie uns unter sales@prosm.net, und alles ist wieder wie vorher.",
+        "endedBody": "Die Organisation ist jetzt schreibgeschützt, alle Ihre Daten bleiben erhalten. Geben Sie einen Aktivierungscode ein oder schreiben Sie an sales@prosm.net, und alles läuft wie vorher.",
         "licenseEndingTitle": "Ihre PROSM Time Lizenz endet bald",
         "licenseEndingBody": "Lizenz {{license}} endet am {{date}}. Verlängern Sie sie vorher, damit die App weiterläuft; alle Daten bleiben erhalten. Kontakt: sales@prosm.net."
       },
@@ -499,12 +338,23 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "body": "{{name}} hat sich nicht für die Schicht um {{time}} in {{site}} eingestempelt."
       },
       "overtimeSoon": {
-        "title": "Bald Überstunden",
-        "body": "{{name}} ist noch eingestempelt; Überstunden beginnen um {{time}}."
+        "title": "Macht Überstunden",
+        "body": "{{name}} ist noch eingestempelt; die Schicht endete um {{time}}."
       },
       "dailyDigest": {
         "title": "Gestern im Überblick",
         "body": "{{present}} haben gearbeitet, {{noShows}} haben eine Schicht verpasst. Offen: {{leave}} Urlaub, {{exceptions}} Ausnahmen. Jetzt eingestempelt: {{open}}."
+      },
+      "licenseChanged": {
+        "title": "Ihre Lizenz wurde geändert",
+        "body": "PROSM hat Ihre Lizenz geändert: {{changes}}.",
+        "users": "Benutzer {{from}} → {{to}}",
+        "devices": "Geräte {{from}} → {{to}}",
+        "ends": "endet {{date}}",
+        "status": "Status {{status}}",
+        "plan": "Paket geändert",
+        "unlimited": "unbegrenzt",
+        "planTo": "Paket {{plan}}"
       }
     },
     "leaveTypes": {
@@ -516,6 +366,372 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "hajj": "Hadsch oder Umra",
       "bereavement": "Trauerfall",
       "paternity": "Vaterschaft"
+    }
+  },
+  "en": {
+    "notifications": {
+      "outOfZoneEmployee": {
+        "title": "You are outside your assigned work area",
+        "body": "Please explain why. Distance: {{distance}} m."
+      },
+      "outOfZoneManager": {
+        "title": "Employee outside their work area",
+        "body": "{{name}} is outside the assigned area (distance: {{distance}} m)."
+      },
+      "exceptionPendingReview": {
+        "titleException": "Exception awaiting your review",
+        "bodyException": "{{name}} submitted a reason for an out-of-zone exception.",
+        "titleCorrection": "Correction request awaiting your review",
+        "bodyCorrection": "{{name}} submitted a correction request.",
+        "titleEarlyLeave": "Early leave reason submitted",
+        "bodyEarlyLeave": "{{name}} explained why they left early.",
+        "titleLeave": "Leave request awaiting your review",
+        "bodyLeave": "{{name}} requested {{days}} day(s) of leave.",
+        "bodyLeaveDetailed": "{{name}} requested {{days}} day(s) of {{type}} leave ({{startDate}} to {{endDate}}).",
+        "bodyLeaveReasonSuffix": "Reason: {{reason}}.",
+        "titlePermission": "Permission waiting for your approval",
+        "bodyPermission": "{{name}} asked for {{kind}} on {{date}}.",
+        "bodyPermissionShort": "{{name}} asked for a permission on {{date}}.",
+        "titleLeaveCancelled": "Approved leave cancelled",
+        "bodyLeaveCancelled": "{{name}} cancelled their approved leave ({{startDate}} - {{endDate}}).",
+        "titleLeaveRequestWithdrawn": "Leave request withdrawn",
+        "bodyLeaveRequestWithdrawn": "{{name}} withdrew their leave request ({{startDate}} - {{endDate}}) before it was answered."
+      },
+      "correctionReviewed": {
+        "titleException": "Your exception was reviewed",
+        "titleCorrection": "Your correction request was reviewed",
+        "titleLeave": "Your leave request was reviewed",
+        "body": "Decision: {{decision}}.",
+        "titleMockLocation": "Your location was reviewed",
+        "titleOfflineTime": "Your offline time was reviewed",
+        "notesSuffix": "Note: \"{{notes}}\"",
+        "titlePermission": "Your permission was reviewed",
+        "titlePendingHours": "Your shift's hours were reviewed",
+        "titleIntegrity": "Your check-in was reviewed"
+      },
+      "breakExceeded": {
+        "title": "Break duration exceeded",
+        "body": "Your break exceeded the maximum allowed duration."
+      },
+      "sosAlert": {
+        "title": "SOS/Emergency alert",
+        "body": "{{name}} triggered an SOS/Emergency alert."
+      },
+      "timesheet": {
+        "submittedTitle": "Timesheet submitted for review",
+        "submittedBody": "A timesheet was submitted and is awaiting your approval.",
+        "approvedTitle": "Timesheet approved",
+        "approvedBody": "Your timesheet was approved and is now locked.",
+        "rejectedTitle": "Timesheet rejected",
+        "rejectedBody": "Your timesheet was rejected and returned to draft.",
+        "correctionRequestedTitle": "Timesheet correction requested",
+        "correctionRequestedBody": "An employee requested a correction on a locked timesheet.",
+        "correctionApprovedTitle": "Timesheet correction approved",
+        "correctionApprovedBody": "Your timesheet correction was approved and the period reopened for resubmission.",
+        "correctionRejectedTitle": "Timesheet correction rejected",
+        "correctionRejectedBody": "Your timesheet correction request was rejected.",
+        "readyTitle": "Your timesheet is ready",
+        "readyBody": "Review your timesheet for {{start}} - {{end}} and submit it."
+      },
+      "shiftAssigned": {
+        "title": "A new shift was scheduled for you",
+        "body": "You are scheduled on {{date}} from {{startTime}} to {{endTime}}.",
+        "bodyOvernight": "You are scheduled on {{date}} from {{startTime}} to {{endTime}} (next day).",
+        "cancelledTitle": "A scheduled shift was cancelled",
+        "cancelledBody": "Your shift on {{date}} was cancelled."
+      },
+      "siteChangeAlert": {
+        "title": "Employee changed site mid-shift",
+        "body": "{{name}} changed site mid-shift, from {{oldSite}} to {{newSite}}.",
+        "unregisteredLocation": "an unregistered location"
+      },
+      "missingClockOut": {
+        "title": "Employee has not clocked out",
+        "body": "{{name}} has been clocked in for over {{hours}} hours with no clock-out yet."
+      },
+      "locationPlausibilityFlag": {
+        "title": "Unusual location movement detected",
+        "body": "{{name}}'s location implies about {{speed}} km/h since their last known position - please review."
+      },
+      "trial": {
+        "endingTitle": "Your PROSM Time trial ends soon",
+        "endingBody": "Your trial ends in a week. Your data is kept and will not be deleted. To continue, enter an activation code or contact us at sales@prosm.net.",
+        "endedTitle": "Your PROSM Time trial has ended",
+        "endedBody": "The organisation is now read-only and all your data is kept. Enter an activation code or contact us at sales@prosm.net and everything works as before.",
+        "licenseEndingTitle": "Your PROSM Time licence ends soon",
+        "licenseEndingBody": "Licence {{license}} ends on {{date}}. Renew it before then so the app keeps running; all your data is kept. Contact sales@prosm.net."
+      },
+      "decision": {
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "acknowledged": "Acknowledged",
+        "clarification_requested": "Clarification requested",
+        "cancelled": "Cancelled"
+      },
+      "allowance": {
+        "submittedTitle": "Allowances waiting for approval",
+        "submittedBody": "{{name}} submitted allowances for {{date}}.",
+        "approvedTitle": "Allowances approved",
+        "approvedBody": "Your allowances for {{date}} were approved.",
+        "rejectedTitle": "Allowances rejected",
+        "rejectedBody": "Your allowances for {{date}} were rejected. You can edit them and send them again.",
+        "sheetSubmittedBody": "{{name}} sent allowances for {{days}} days ({{start}} - {{end}}).",
+        "sheetApprovedBody": "Your allowances for {{start}} - {{end}} were approved.",
+        "sheetRejectedBody": "Your allowances for {{start}} - {{end}} were rejected. Fix them and send them again."
+      },
+      "longSessionCheck": {
+        "title": "Still working?",
+        "body": "You have been clocked in for {{hours}} hours. Still working, or clock out?"
+      },
+      "sessionAutoClosed": {
+        "titleEmployee": "Your shift was closed automatically",
+        "bodyEmployee": "Your shift was closed after {{hours}} hours with no clock-out. Its hours wait for your manager's review.",
+        "titleManager": "A shift was closed automatically",
+        "bodyManager": "{{name}}'s shift was closed after {{hours}} hours with no clock-out. Review its hours."
+      },
+      "exitSitePrompt": {
+        "title": "You left the site",
+        "body": "Your shift is still open - clock out?"
+      },
+      "autoCheckoutGeofence": {
+        "titleEmployee": "You were clocked out",
+        "bodyEmployee": "You left the site and were clocked out at the time you left. Ask your manager if this is wrong.",
+        "titleManager": "Clocked out on leaving the site",
+        "bodyManager": "{{name}} left the site and was clocked out automatically."
+      },
+      "clockInReminder": {
+        "title": "Time to clock in",
+        "body": "Your shift at {{site}} starts at {{time}}. Clock in when you arrive."
+      },
+      "clockOutReminder": {
+        "title": "Don't forget to clock out",
+        "body": "Your shift ended at {{time}}. Clock out in PROSM Time when you leave."
+      },
+      "accountDeleted": {
+        "title": "An employee deleted their account",
+        "body": "{{name}} deleted their account. Their attendance and timesheets are kept as \"Deleted user\"."
+      },
+      "newDevice": {
+        "title": "New device signed in",
+        "body": "Your account was opened on a new device: {{device}}. If this was not you, change your password.",
+        "ownerBody": "{{name}} signed in on a new device: {{device}}."
+      },
+      "noShow": {
+        "title": "Not clocked in for a shift",
+        "body": "{{name}} has not clocked in for the {{time}} shift at {{site}}."
+      },
+      "overtimeSoon": {
+        "title": "Working overtime",
+        "body": "{{name}} is still clocked in; the shift ended at {{time}}."
+      },
+      "dailyDigest": {
+        "title": "Yesterday at a glance",
+        "body": "{{present}} worked, {{noShows}} missed a shift. Waiting: {{leave}} leave, {{exceptions}} exceptions. Clocked in now: {{open}}."
+      },
+      "licenseChanged": {
+        "title": "Your licence changed",
+        "body": "PROSM changed your licence: {{changes}}.",
+        "users": "users {{from}} → {{to}}",
+        "devices": "devices {{from}} → {{to}}",
+        "ends": "ends {{date}}",
+        "status": "status {{status}}",
+        "plan": "plan changed",
+        "unlimited": "no limit",
+        "planTo": "plan {{plan}}"
+      }
+    },
+    "leaveTypes": {
+      "annual": "Annual",
+      "sick": "Sick",
+      "unpaid": "Unpaid",
+      "emergency": "Casual",
+      "other": "Other",
+      "hajj": "Hajj or Umrah",
+      "bereavement": "Bereavement",
+      "paternity": "Paternity"
+    }
+  },
+  "es": {
+    "notifications": {
+      "outOfZoneEmployee": {
+        "title": "Estás fuera de tu zona de trabajo asignada",
+        "body": "Explica el motivo. Distancia: {{distance}} m."
+      },
+      "outOfZoneManager": {
+        "title": "Empleado fuera de su zona de trabajo",
+        "body": "{{name}} está fuera de la zona asignada (distancia: {{distance}} m)."
+      },
+      "exceptionPendingReview": {
+        "titleException": "Excepción pendiente de tu revisión",
+        "bodyException": "{{name}} envió un motivo para una excepción fuera de zona.",
+        "titleCorrection": "Solicitud de corrección pendiente de tu revisión",
+        "bodyCorrection": "{{name}} envió una solicitud de corrección.",
+        "titleEarlyLeave": "Motivo de salida anticipada enviado",
+        "bodyEarlyLeave": "{{name}} explicó por qué salió antes.",
+        "titleLeave": "Solicitud de ausencia pendiente de tu revisión",
+        "bodyLeave": "{{name}} solicitó {{days}} día(s) de ausencia.",
+        "bodyLeaveDetailed": "{{name}} solicitó {{days}} día(s) de {{type}} ({{startDate}} a {{endDate}}).",
+        "bodyLeaveReasonSuffix": "Motivo: {{reason}}.",
+        "titlePermission": "Permiso pendiente de tu aprobación",
+        "bodyPermission": "{{name}} pidió {{kind}} el {{date}}.",
+        "bodyPermissionShort": "{{name}} pidió un permiso el {{date}}.",
+        "titleLeaveCancelled": "Ausencia aprobada cancelada",
+        "bodyLeaveCancelled": "{{name}} canceló su ausencia aprobada ({{startDate}} - {{endDate}}).",
+        "titleLeaveRequestWithdrawn": "Solicitud de ausencia retirada",
+        "bodyLeaveRequestWithdrawn": "{{name}} retiró su solicitud de ausencia ({{startDate}} - {{endDate}}) antes de recibir respuesta."
+      },
+      "correctionReviewed": {
+        "titleException": "Tu excepción fue revisada",
+        "titleCorrection": "Tu solicitud de corrección fue revisada",
+        "titleLeave": "Tu solicitud de ausencia fue revisada",
+        "body": "Decisión: {{decision}}.",
+        "titleMockLocation": "Tu ubicación fue revisada",
+        "titleOfflineTime": "Tu tiempo sin conexión fue revisado",
+        "notesSuffix": "Nota: \"{{notes}}\"",
+        "titlePermission": "Tu permiso fue revisado",
+        "titlePendingHours": "Las horas de tu turno fueron revisadas",
+        "titleIntegrity": "Tu fichaje fue revisado"
+      },
+      "breakExceeded": {
+        "title": "Duración del descanso superada",
+        "body": "Tu descanso superó la duración máxima permitida."
+      },
+      "sosAlert": {
+        "title": "Alerta SOS/Emergencia",
+        "body": "{{name}} activó una alerta SOS/Emergencia."
+      },
+      "timesheet": {
+        "submittedTitle": "Hoja de horas enviada para revisión",
+        "submittedBody": "Se envió una hoja de horas que espera tu aprobación.",
+        "approvedTitle": "Hoja de horas aprobada",
+        "approvedBody": "Tu hoja de horas fue aprobada y ahora está bloqueada.",
+        "rejectedTitle": "Hoja de horas rechazada",
+        "rejectedBody": "Tu hoja de horas fue rechazada y volvió a borrador.",
+        "correctionRequestedTitle": "Corrección de hoja de horas solicitada",
+        "correctionRequestedBody": "Un empleado solicitó una corrección en una hoja de horas bloqueada.",
+        "correctionApprovedTitle": "Corrección de hoja de horas aprobada",
+        "correctionApprovedBody": "Tu corrección fue aprobada y el período se reabrió para volver a enviarlo.",
+        "correctionRejectedTitle": "Corrección de hoja de horas rechazada",
+        "correctionRejectedBody": "Tu solicitud de corrección de la hoja de horas fue rechazada.",
+        "readyTitle": "Tu hoja de horas está lista",
+        "readyBody": "Revisa tu hoja de horas del {{start}} al {{end}} y envíala."
+      },
+      "shiftAssigned": {
+        "title": "Se te asignó un nuevo turno",
+        "body": "Tienes turno el {{date}} de {{startTime}} a {{endTime}}.",
+        "bodyOvernight": "Tienes turno el {{date}} de {{startTime}} a {{endTime}} (día siguiente).",
+        "cancelledTitle": "Se canceló un turno programado",
+        "cancelledBody": "Tu turno del {{date}} fue cancelado."
+      },
+      "siteChangeAlert": {
+        "title": "Empleado cambió de sede durante el turno",
+        "body": "{{name}} cambió de sede durante el turno, de {{oldSite}} a {{newSite}}.",
+        "unregisteredLocation": "una ubicación no registrada"
+      },
+      "missingClockOut": {
+        "title": "El empleado no ha fichado la salida",
+        "body": "{{name}} lleva más de {{hours}} horas con la entrada fichada y sin salida."
+      },
+      "locationPlausibilityFlag": {
+        "title": "Movimiento de ubicación inusual",
+        "body": "La ubicación de {{name}} implica unos {{speed}} km/h desde su última posición conocida; revísalo."
+      },
+      "trial": {
+        "endingTitle": "Tu prueba de PROSM Time termina pronto",
+        "endingBody": "Tu prueba termina en una semana. Tus datos se conservan y no se borrarán. Para continuar, introduce un código de activación o escríbenos a sales@prosm.net.",
+        "endedTitle": "Tu prueba de PROSM Time ha terminado",
+        "endedBody": "La organización está ahora en solo lectura y todos tus datos se conservan. Introduce un código de activación o escríbenos a sales@prosm.net y todo funcionará como antes.",
+        "licenseEndingTitle": "Tu licencia de PROSM Time termina pronto",
+        "licenseEndingBody": "La licencia {{license}} termina el {{date}}. Renuévala antes para que la app siga funcionando; todos tus datos se conservan. Escribe a sales@prosm.net."
+      },
+      "decision": {
+        "approved": "Aprobado",
+        "rejected": "Rechazado",
+        "acknowledged": "Visto",
+        "clarification_requested": "Aclaración solicitada",
+        "cancelled": "Cancelado"
+      },
+      "allowance": {
+        "submittedTitle": "Asignaciones pendientes de aprobación",
+        "submittedBody": "{{name}} envió asignaciones del {{date}}.",
+        "approvedTitle": "Asignaciones aprobadas",
+        "approvedBody": "Tus asignaciones del {{date}} fueron aprobadas.",
+        "rejectedTitle": "Asignaciones rechazadas",
+        "rejectedBody": "Tus asignaciones del {{date}} fueron rechazadas. Puedes editarlas y enviarlas de nuevo.",
+        "sheetSubmittedBody": "{{name}} envió asignaciones de {{days}} días ({{start}} - {{end}}).",
+        "sheetApprovedBody": "Tus asignaciones del {{start}} al {{end}} fueron aprobadas.",
+        "sheetRejectedBody": "Tus asignaciones del {{start}} al {{end}} fueron rechazadas. Corrígelas y envíalas de nuevo."
+      },
+      "longSessionCheck": {
+        "title": "¿Sigues trabajando?",
+        "body": "Llevas {{hours}} horas con la entrada fichada. ¿Sigues trabajando o fichas la salida?"
+      },
+      "sessionAutoClosed": {
+        "titleEmployee": "Tu turno se cerró automáticamente",
+        "bodyEmployee": "Tu turno se cerró tras {{hours}} horas sin fichar la salida. Sus horas esperan la revisión de tu responsable.",
+        "titleManager": "Un turno se cerró automáticamente",
+        "bodyManager": "El turno de {{name}} se cerró tras {{hours}} horas sin fichar la salida. Revisa sus horas."
+      },
+      "exitSitePrompt": {
+        "title": "Saliste de la sede",
+        "body": "Tu turno sigue abierto: ¿fichar la salida?"
+      },
+      "autoCheckoutGeofence": {
+        "titleEmployee": "Se fichó tu salida",
+        "bodyEmployee": "Saliste de la sede y se fichó tu salida a la hora en que te fuiste. Consulta a tu responsable si es un error.",
+        "titleManager": "Salida fichada al dejar la sede",
+        "bodyManager": "{{name}} salió de la sede y se fichó su salida automáticamente."
+      },
+      "clockInReminder": {
+        "title": "Hora de fichar la entrada",
+        "body": "Tu turno en {{site}} empieza a las {{time}}. Ficha la entrada al llegar."
+      },
+      "clockOutReminder": {
+        "title": "No olvides fichar la salida",
+        "body": "Tu turno terminó a las {{time}}. Ficha la salida en PROSM Time al irte."
+      },
+      "accountDeleted": {
+        "title": "Un empleado eliminó su cuenta",
+        "body": "{{name}} eliminó su cuenta. Su asistencia y hojas de horas se conservan como \"Usuario eliminado\"."
+      },
+      "newDevice": {
+        "title": "Inicio de sesión en un dispositivo nuevo",
+        "body": "Tu cuenta se abrió en un dispositivo nuevo: {{device}}. Si no fuiste tú, cambia tu contraseña.",
+        "ownerBody": "{{name}} inició sesión en un dispositivo nuevo: {{device}}."
+      },
+      "noShow": {
+        "title": "Sin fichar en un turno",
+        "body": "{{name}} no ha fichado la entrada para el turno de las {{time}} en {{site}}."
+      },
+      "overtimeSoon": {
+        "title": "Haciendo horas extra",
+        "body": "{{name}} sigue con la entrada fichada; el turno terminó a las {{time}}."
+      },
+      "dailyDigest": {
+        "title": "Resumen de ayer",
+        "body": "{{present}} trabajaron, {{noShows}} faltaron a un turno. Pendientes: {{leave}} ausencias, {{exceptions}} excepciones. Con entrada fichada ahora: {{open}}."
+      },
+      "licenseChanged": {
+        "title": "Tu licencia cambió",
+        "body": "PROSM cambió tu licencia: {{changes}}.",
+        "users": "usuarios {{from}} → {{to}}",
+        "devices": "dispositivos {{from}} → {{to}}",
+        "ends": "termina el {{date}}",
+        "status": "estado {{status}}",
+        "plan": "plan cambiado",
+        "unlimited": "sin límite",
+        "planTo": "plan {{plan}}"
+      }
+    },
+    "leaveTypes": {
+      "annual": "Vacaciones",
+      "sick": "Enfermedad",
+      "unpaid": "No retribuida",
+      "emergency": "Asuntos propios",
+      "other": "Otra",
+      "hajj": "Hajj o Umrah",
+      "bereavement": "Fallecimiento",
+      "paternity": "Paternidad"
     }
   },
   "fr": {
@@ -607,7 +823,7 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "endingTitle": "Votre essai PROSM Time se termine bientôt",
         "endingBody": "Votre essai se termine dans une semaine. Vos données sont conservées et ne seront pas supprimées. Pour continuer, saisissez un code d'activation ou contactez-nous à sales@prosm.net.",
         "endedTitle": "Votre essai PROSM Time est terminé",
-        "endedBody": "L'application est en pause et toutes vos données sont conservées. Saisissez un code d'activation ou contactez-nous à sales@prosm.net et tout redeviendra comme avant.",
+        "endedBody": "L’organisation est désormais en lecture seule et toutes vos données sont conservées. Saisissez un code d’activation ou écrivez à sales@prosm.net, et tout fonctionne comme avant.",
         "licenseEndingTitle": "Votre licence PROSM Time expire bientôt",
         "licenseEndingBody": "La licence {{license}} expire le {{date}}. Renouvelez-la avant pour que l'application continue ; vos données sont conservées. Contact : sales@prosm.net."
       },
@@ -671,12 +887,23 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "body": "{{name}} n'a pas pointé pour le poste de {{time}} à {{site}}."
       },
       "overtimeSoon": {
-        "title": "Heures sup. bientôt",
-        "body": "{{name}} est toujours pointé ; les heures sup. commencent à {{time}}."
+        "title": "Heures supplémentaires en cours",
+        "body": "{{name}} est toujours pointé ; le poste s'est terminé à {{time}}."
       },
       "dailyDigest": {
         "title": "Hier en bref",
         "body": "{{present}} ont travaillé, {{noShows}} ont manqué un poste. En attente : {{leave}} congés, {{exceptions}} exceptions. Pointés maintenant : {{open}}."
+      },
+      "licenseChanged": {
+        "title": "Votre licence a changé",
+        "body": "PROSM a modifié votre licence : {{changes}}.",
+        "users": "utilisateurs {{from}} → {{to}}",
+        "devices": "appareils {{from}} → {{to}}",
+        "ends": "fin le {{date}}",
+        "status": "statut {{status}}",
+        "plan": "offre modifiée",
+        "unlimited": "sans limite",
+        "planTo": "offre {{plan}}"
       }
     },
     "leaveTypes": {
@@ -779,7 +1006,7 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "endingTitle": "La tua prova di PROSM Time sta per scadere",
         "endingBody": "La tua prova scade tra una settimana. I tuoi dati sono conservati e non verranno eliminati. Per continuare, inserisci un codice di attivazione o contattaci a sales@prosm.net.",
         "endedTitle": "La tua prova di PROSM Time è terminata",
-        "endedBody": "L'app è in pausa e tutti i tuoi dati sono conservati. Inserisci un codice di attivazione o contattaci a sales@prosm.net e tutto tornerà come prima.",
+        "endedBody": "L’organizzazione è ora in sola lettura e tutti i tuoi dati restano salvati. Inserisci un codice di attivazione o scrivi a sales@prosm.net e tutto funziona come prima.",
         "licenseEndingTitle": "La licenza PROSM Time scade presto",
         "licenseEndingBody": "La licenza {{license}} scade il {{date}}. Rinnovala prima perché l'app continui; tutti i dati restano. Contatto: sales@prosm.net."
       },
@@ -843,12 +1070,23 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "body": "{{name}} non ha timbrato per il turno delle {{time}} a {{site}}."
       },
       "overtimeSoon": {
-        "title": "Straordinario a breve",
-        "body": "{{name}} è ancora in servizio; lo straordinario inizia alle {{time}}."
+        "title": "Sta facendo straordinari",
+        "body": "{{name}} risulta ancora in servizio; il turno è finito alle {{time}}."
       },
       "dailyDigest": {
         "title": "Ieri in breve",
         "body": "{{present}} hanno lavorato, {{noShows}} hanno saltato un turno. In attesa: {{leave}} ferie, {{exceptions}} eccezioni. In servizio ora: {{open}}."
+      },
+      "licenseChanged": {
+        "title": "La tua licenza è cambiata",
+        "body": "PROSM ha modificato la tua licenza: {{changes}}.",
+        "users": "utenti {{from}} → {{to}}",
+        "devices": "dispositivi {{from}} → {{to}}",
+        "ends": "scade il {{date}}",
+        "status": "stato {{status}}",
+        "plan": "piano cambiato",
+        "unlimited": "senza limite",
+        "planTo": "piano {{plan}}"
       }
     },
     "leaveTypes": {
@@ -860,6 +1098,555 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       "hajj": "Hajj o Umra",
       "bereavement": "Lutto",
       "paternity": "Paternità"
+    }
+  },
+  "pt": {
+    "notifications": {
+      "outOfZoneEmployee": {
+        "title": "Você está fora da sua área de trabalho",
+        "body": "Explique o motivo. Distância: {{distance}} m."
+      },
+      "outOfZoneManager": {
+        "title": "Funcionário fora da área de trabalho",
+        "body": "{{name}} está fora da área atribuída (distância: {{distance}} m)."
+      },
+      "exceptionPendingReview": {
+        "titleException": "Exceção aguardando sua análise",
+        "bodyException": "{{name}} enviou um motivo para uma exceção fora da área.",
+        "titleCorrection": "Pedido de correção aguardando sua análise",
+        "bodyCorrection": "{{name}} enviou um pedido de correção.",
+        "titleEarlyLeave": "Motivo de saída antecipada enviado",
+        "bodyEarlyLeave": "{{name}} explicou por que saiu mais cedo.",
+        "titleLeave": "Pedido de afastamento aguardando sua análise",
+        "bodyLeave": "{{name}} pediu {{days}} dia(s) de afastamento.",
+        "bodyLeaveDetailed": "{{name}} pediu {{days}} dia(s) de {{type}} ({{startDate}} a {{endDate}}).",
+        "bodyLeaveReasonSuffix": "Motivo: {{reason}}.",
+        "titlePermission": "Permissão aguardando sua aprovação",
+        "bodyPermission": "{{name}} pediu {{kind}} em {{date}}.",
+        "bodyPermissionShort": "{{name}} pediu uma permissão em {{date}}.",
+        "titleLeaveCancelled": "Afastamento aprovado cancelado",
+        "bodyLeaveCancelled": "{{name}} cancelou o afastamento aprovado ({{startDate}} - {{endDate}}).",
+        "titleLeaveRequestWithdrawn": "Pedido de afastamento retirado",
+        "bodyLeaveRequestWithdrawn": "{{name}} retirou o pedido de afastamento ({{startDate}} - {{endDate}}) antes da resposta."
+      },
+      "correctionReviewed": {
+        "titleException": "Sua exceção foi analisada",
+        "titleCorrection": "Seu pedido de correção foi analisado",
+        "titleLeave": "Seu pedido de afastamento foi analisado",
+        "body": "Decisão: {{decision}}.",
+        "titleMockLocation": "Sua localização foi analisada",
+        "titleOfflineTime": "Seu tempo offline foi analisado",
+        "notesSuffix": "Observação: \"{{notes}}\"",
+        "titlePermission": "Sua permissão foi analisada",
+        "titlePendingHours": "As horas do seu turno foram analisadas",
+        "titleIntegrity": "Sua marcação de entrada foi analisada"
+      },
+      "breakExceeded": {
+        "title": "Duração do intervalo excedida",
+        "body": "Seu intervalo passou da duração máxima permitida."
+      },
+      "sosAlert": {
+        "title": "Alerta SOS/Emergência",
+        "body": "{{name}} acionou um alerta SOS/Emergência."
+      },
+      "timesheet": {
+        "submittedTitle": "Folha de ponto enviada para análise",
+        "submittedBody": "Uma folha de ponto foi enviada e aguarda sua aprovação.",
+        "approvedTitle": "Folha de ponto aprovada",
+        "approvedBody": "Sua folha de ponto foi aprovada e agora está bloqueada.",
+        "rejectedTitle": "Folha de ponto rejeitada",
+        "rejectedBody": "Sua folha de ponto foi rejeitada e voltou para rascunho.",
+        "correctionRequestedTitle": "Correção de folha de ponto solicitada",
+        "correctionRequestedBody": "Um funcionário pediu uma correção em uma folha de ponto bloqueada.",
+        "correctionApprovedTitle": "Correção de folha de ponto aprovada",
+        "correctionApprovedBody": "Sua correção foi aprovada e o período foi reaberto para novo envio.",
+        "correctionRejectedTitle": "Correção de folha de ponto rejeitada",
+        "correctionRejectedBody": "Seu pedido de correção da folha de ponto foi rejeitado.",
+        "readyTitle": "Sua folha de ponto está pronta",
+        "readyBody": "Revise sua folha de ponto de {{start}} a {{end}} e envie."
+      },
+      "shiftAssigned": {
+        "title": "Um novo turno foi agendado para você",
+        "body": "Você tem turno em {{date}} das {{startTime}} às {{endTime}}.",
+        "bodyOvernight": "Você tem turno em {{date}} das {{startTime}} às {{endTime}} (dia seguinte).",
+        "cancelledTitle": "Um turno agendado foi cancelado",
+        "cancelledBody": "Seu turno de {{date}} foi cancelado."
+      },
+      "siteChangeAlert": {
+        "title": "Funcionário trocou de local no meio do turno",
+        "body": "{{name}} trocou de local no meio do turno, de {{oldSite}} para {{newSite}}.",
+        "unregisteredLocation": "um local não cadastrado"
+      },
+      "missingClockOut": {
+        "title": "Funcionário não registrou a saída",
+        "body": "{{name}} está com o ponto aberto há mais de {{hours}} horas sem registrar a saída."
+      },
+      "locationPlausibilityFlag": {
+        "title": "Movimento de localização incomum",
+        "body": "A localização de {{name}} indica cerca de {{speed}} km/h desde a última posição conhecida - verifique."
+      },
+      "trial": {
+        "endingTitle": "Seu teste do PROSM Time termina em breve",
+        "endingBody": "Seu teste termina em uma semana. Seus dados ficam guardados e não serão apagados. Para continuar, insira um código de ativação ou fale conosco em sales@prosm.net.",
+        "endedTitle": "Seu teste do PROSM Time terminou",
+        "endedBody": "A organização agora está somente leitura e todos os seus dados ficam guardados. Insira um código de ativação ou fale conosco em sales@prosm.net e tudo volta a funcionar como antes.",
+        "licenseEndingTitle": "Sua licença do PROSM Time termina em breve",
+        "licenseEndingBody": "A licença {{license}} termina em {{date}}. Renove antes disso para o app continuar funcionando; todos os seus dados ficam guardados. Fale com sales@prosm.net."
+      },
+      "decision": {
+        "approved": "Aprovado",
+        "rejected": "Rejeitado",
+        "acknowledged": "Ciente",
+        "clarification_requested": "Esclarecimento solicitado",
+        "cancelled": "Cancelado"
+      },
+      "allowance": {
+        "submittedTitle": "Adicionais aguardando aprovação",
+        "submittedBody": "{{name}} enviou adicionais de {{date}}.",
+        "approvedTitle": "Adicionais aprovados",
+        "approvedBody": "Seus adicionais de {{date}} foram aprovados.",
+        "rejectedTitle": "Adicionais rejeitados",
+        "rejectedBody": "Seus adicionais de {{date}} foram rejeitados. Você pode editá-los e enviar de novo.",
+        "sheetSubmittedBody": "{{name}} enviou adicionais de {{days}} dias ({{start}} - {{end}}).",
+        "sheetApprovedBody": "Seus adicionais de {{start}} a {{end}} foram aprovados.",
+        "sheetRejectedBody": "Seus adicionais de {{start}} a {{end}} foram rejeitados. Corrija e envie de novo."
+      },
+      "longSessionCheck": {
+        "title": "Ainda trabalhando?",
+        "body": "Seu ponto está aberto há {{hours}} horas. Ainda trabalhando ou vai registrar a saída?"
+      },
+      "sessionAutoClosed": {
+        "titleEmployee": "Seu turno foi encerrado automaticamente",
+        "bodyEmployee": "Seu turno foi encerrado após {{hours}} horas sem registro de saída. As horas aguardam a análise do seu gestor.",
+        "titleManager": "Um turno foi encerrado automaticamente",
+        "bodyManager": "O turno de {{name}} foi encerrado após {{hours}} horas sem registro de saída. Analise as horas."
+      },
+      "exitSitePrompt": {
+        "title": "Você saiu do local",
+        "body": "Seu turno continua aberto - registrar a saída?"
+      },
+      "autoCheckoutGeofence": {
+        "titleEmployee": "Sua saída foi registrada",
+        "bodyEmployee": "Você saiu do local e a saída foi registrada no horário em que saiu. Fale com seu gestor se isso estiver errado.",
+        "titleManager": "Saída registrada ao deixar o local",
+        "bodyManager": "{{name}} saiu do local e a saída foi registrada automaticamente."
+      },
+      "clockInReminder": {
+        "title": "Hora de registrar a entrada",
+        "body": "Seu turno em {{site}} começa às {{time}}. Registre a entrada ao chegar."
+      },
+      "clockOutReminder": {
+        "title": "Não esqueça de registrar a saída",
+        "body": "Seu turno terminou às {{time}}. Registre a saída no PROSM Time ao sair."
+      },
+      "accountDeleted": {
+        "title": "Um funcionário excluiu a conta",
+        "body": "{{name}} excluiu a conta. A frequência e as folhas de ponto ficam guardadas como \"Usuário excluído\"."
+      },
+      "newDevice": {
+        "title": "Login em um novo dispositivo",
+        "body": "Sua conta foi aberta em um novo dispositivo: {{device}}. Se não foi você, altere sua senha.",
+        "ownerBody": "{{name}} entrou em um novo dispositivo: {{device}}."
+      },
+      "noShow": {
+        "title": "Sem registro de entrada no turno",
+        "body": "{{name}} não registrou a entrada no turno das {{time}} em {{site}}."
+      },
+      "overtimeSoon": {
+        "title": "Fazendo hora extra",
+        "body": "{{name}} continua com o ponto aberto; o turno terminou às {{time}}."
+      },
+      "dailyDigest": {
+        "title": "Resumo de ontem",
+        "body": "{{present}} trabalharam, {{noShows}} faltaram a um turno. Pendentes: {{leave}} afastamentos, {{exceptions}} exceções. Com ponto aberto agora: {{open}}."
+      },
+      "licenseChanged": {
+        "title": "Sua licença mudou",
+        "body": "A PROSM mudou sua licença: {{changes}}.",
+        "users": "usuários {{from}} → {{to}}",
+        "devices": "dispositivos {{from}} → {{to}}",
+        "ends": "termina em {{date}}",
+        "status": "status {{status}}",
+        "plan": "plano alterado",
+        "unlimited": "sem limite",
+        "planTo": "plano {{plan}}"
+      }
+    },
+    "leaveTypes": {
+      "annual": "Férias",
+      "sick": "Médica",
+      "unpaid": "Não remunerada",
+      "emergency": "Particular",
+      "other": "Outra",
+      "hajj": "Hajj ou Umrah",
+      "bereavement": "Luto",
+      "paternity": "Paternidade"
+    }
+  },
+  "ru": {
+    "notifications": {
+      "outOfZoneEmployee": {
+        "title": "Вы вне назначенной рабочей зоны",
+        "body": "Объясните причину. Расстояние: {{distance}} м."
+      },
+      "outOfZoneManager": {
+        "title": "Сотрудник вне рабочей зоны",
+        "body": "{{name}} находится вне назначенной зоны (расстояние: {{distance}} м)."
+      },
+      "exceptionPendingReview": {
+        "titleException": "Исключение ждёт вашей проверки",
+        "bodyException": "{{name}} указал(а) причину исключения вне зоны.",
+        "titleCorrection": "Запрос на исправление ждёт вашей проверки",
+        "bodyCorrection": "{{name}} отправил(а) запрос на исправление.",
+        "titleEarlyLeave": "Указана причина раннего ухода",
+        "bodyEarlyLeave": "{{name}} объяснил(а), почему ушёл(ушла) раньше.",
+        "titleLeave": "Заявка на отпуск ждёт вашей проверки",
+        "bodyLeave": "{{name}} запросил(а) отпуск, дней: {{days}}.",
+        "bodyLeaveDetailed": "{{name}} запросил(а) {{type}}, дней: {{days}} ({{startDate}} - {{endDate}}).",
+        "bodyLeaveReasonSuffix": "Причина: {{reason}}.",
+        "titlePermission": "Разрешение ждёт вашего одобрения",
+        "bodyPermission": "{{name}} просит {{kind}} на {{date}}.",
+        "bodyPermissionShort": "{{name}} просит разрешение на {{date}}.",
+        "titleLeaveCancelled": "Одобренный отпуск отменён",
+        "bodyLeaveCancelled": "{{name}} отменил(а) одобренный отпуск ({{startDate}} - {{endDate}}).",
+        "titleLeaveRequestWithdrawn": "Заявка на отпуск отозвана",
+        "bodyLeaveRequestWithdrawn": "{{name}} отозвал(а) заявку на отпуск ({{startDate}} - {{endDate}}) до ответа."
+      },
+      "correctionReviewed": {
+        "titleException": "Ваше исключение рассмотрено",
+        "titleCorrection": "Ваш запрос на исправление рассмотрен",
+        "titleLeave": "Ваша заявка на отпуск рассмотрена",
+        "body": "Решение: {{decision}}.",
+        "titleMockLocation": "Ваше местоположение проверено",
+        "titleOfflineTime": "Ваше время без связи проверено",
+        "notesSuffix": "Примечание: «{{notes}}»",
+        "titlePermission": "Ваше разрешение рассмотрено",
+        "titlePendingHours": "Часы вашей смены проверены",
+        "titleIntegrity": "Ваша отметка прихода проверена"
+      },
+      "breakExceeded": {
+        "title": "Перерыв превышен",
+        "body": "Ваш перерыв превысил максимально допустимую длительность."
+      },
+      "sosAlert": {
+        "title": "Сигнал SOS/тревога",
+        "body": "{{name}} подал(а) сигнал SOS/тревоги."
+      },
+      "timesheet": {
+        "submittedTitle": "Табель отправлен на проверку",
+        "submittedBody": "Отправлен табель, который ждёт вашего одобрения.",
+        "approvedTitle": "Табель одобрен",
+        "approvedBody": "Ваш табель одобрен и теперь заблокирован.",
+        "rejectedTitle": "Табель отклонён",
+        "rejectedBody": "Ваш табель отклонён и возвращён в черновик.",
+        "correctionRequestedTitle": "Запрошено исправление табеля",
+        "correctionRequestedBody": "Сотрудник запросил исправление заблокированного табеля.",
+        "correctionApprovedTitle": "Исправление табеля одобрено",
+        "correctionApprovedBody": "Исправление одобрено, период снова открыт для повторной отправки.",
+        "correctionRejectedTitle": "Исправление табеля отклонено",
+        "correctionRejectedBody": "Ваш запрос на исправление табеля отклонён.",
+        "readyTitle": "Ваш табель готов",
+        "readyBody": "Проверьте табель за {{start}} - {{end}} и отправьте его."
+      },
+      "shiftAssigned": {
+        "title": "Вам назначена новая смена",
+        "body": "Ваша смена {{date}} с {{startTime}} до {{endTime}}.",
+        "bodyOvernight": "Ваша смена {{date}} с {{startTime}} до {{endTime}} (следующего дня).",
+        "cancelledTitle": "Запланированная смена отменена",
+        "cancelledBody": "Ваша смена {{date}} отменена."
+      },
+      "siteChangeAlert": {
+        "title": "Сотрудник сменил объект во время смены",
+        "body": "{{name}} сменил(а) объект во время смены: с {{oldSite}} на {{newSite}}.",
+        "unregisteredLocation": "незарегистрированное место"
+      },
+      "missingClockOut": {
+        "title": "Сотрудник не отметил уход",
+        "body": "{{name}} отмечен(а) на смене больше {{hours}} ч, ухода ещё нет."
+      },
+      "locationPlausibilityFlag": {
+        "title": "Необычное перемещение",
+        "body": "По местоположению {{name}} скорость с последней известной точки около {{speed}} км/ч - проверьте."
+      },
+      "trial": {
+        "endingTitle": "Пробный период PROSM Time скоро закончится",
+        "endingBody": "Пробный период закончится через неделю. Ваши данные сохраняются и не будут удалены. Чтобы продолжить, введите код активации или напишите нам на sales@prosm.net.",
+        "endedTitle": "Пробный период PROSM Time закончился",
+        "endedBody": "Организация теперь доступна только для чтения, все ваши данные сохранены. Введите код активации или напишите нам на sales@prosm.net, и всё заработает как прежде.",
+        "licenseEndingTitle": "Лицензия PROSM Time скоро закончится",
+        "licenseEndingBody": "Лицензия {{license}} заканчивается {{date}}. Продлите её заранее, чтобы приложение продолжало работать; все ваши данные сохраняются. Пишите на sales@prosm.net."
+      },
+      "decision": {
+        "approved": "Одобрено",
+        "rejected": "Отклонено",
+        "acknowledged": "Принято к сведению",
+        "clarification_requested": "Запрошено уточнение",
+        "cancelled": "Отменено"
+      },
+      "allowance": {
+        "submittedTitle": "Надбавки ждут одобрения",
+        "submittedBody": "{{name}} отправил(а) надбавки за {{date}}.",
+        "approvedTitle": "Надбавки одобрены",
+        "approvedBody": "Ваши надбавки за {{date}} одобрены.",
+        "rejectedTitle": "Надбавки отклонены",
+        "rejectedBody": "Ваши надбавки за {{date}} отклонены. Вы можете исправить их и отправить снова.",
+        "sheetSubmittedBody": "{{name}} отправил(а) надбавки за {{start}} - {{end}}, дней: {{days}}.",
+        "sheetApprovedBody": "Ваши надбавки за {{start}} - {{end}} одобрены.",
+        "sheetRejectedBody": "Ваши надбавки за {{start}} - {{end}} отклонены. Исправьте их и отправьте снова."
+      },
+      "longSessionCheck": {
+        "title": "Всё ещё работаете?",
+        "body": "Вы отмечены на смене уже {{hours}} ч. Продолжаете работать или отметить уход?"
+      },
+      "sessionAutoClosed": {
+        "titleEmployee": "Ваша смена закрыта автоматически",
+        "bodyEmployee": "Смена закрыта через {{hours}} ч без отметки ухода. Её часы ждут проверки руководителя.",
+        "titleManager": "Смена закрыта автоматически",
+        "bodyManager": "Смена {{name}} закрыта через {{hours}} ч без отметки ухода. Проверьте её часы."
+      },
+      "exitSitePrompt": {
+        "title": "Вы покинули объект",
+        "body": "Смена ещё открыта - отметить уход?"
+      },
+      "autoCheckoutGeofence": {
+        "titleEmployee": "Уход отмечен",
+        "bodyEmployee": "Вы покинули объект, и уход отмечен временем, когда вы ушли. Если это ошибка, обратитесь к руководителю.",
+        "titleManager": "Уход отмечен при выходе с объекта",
+        "bodyManager": "{{name}} покинул(а) объект, уход отмечен автоматически."
+      },
+      "clockInReminder": {
+        "title": "Пора отметить приход",
+        "body": "Ваша смена на {{site}} начинается в {{time}}. Отметьте приход, когда придёте."
+      },
+      "clockOutReminder": {
+        "title": "Не забудьте отметить уход",
+        "body": "Ваша смена закончилась в {{time}}. Уходя, отметьте уход в PROSM Time."
+      },
+      "accountDeleted": {
+        "title": "Сотрудник удалил свою учётную запись",
+        "body": "{{name}} удалил(а) учётную запись. Посещаемость и табели сохранены как «Удалённый пользователь»."
+      },
+      "newDevice": {
+        "title": "Вход с нового устройства",
+        "body": "В вашу учётную запись вошли с нового устройства: {{device}}. Если это были не вы, смените пароль.",
+        "ownerBody": "{{name}} вошёл(вошла) с нового устройства: {{device}}."
+      },
+      "noShow": {
+        "title": "Нет отметки на смене",
+        "body": "{{name}} не отметил(а) приход на смену в {{time}} на {{site}}."
+      },
+      "overtimeSoon": {
+        "title": "Работает сверхурочно",
+        "body": "{{name}} всё ещё на смене; смена закончилась в {{time}}."
+      },
+      "dailyDigest": {
+        "title": "Вчера коротко",
+        "body": "Работали: {{present}}, пропустили смену: {{noShows}}. Ожидают: отпуска - {{leave}}, исключения - {{exceptions}}. Сейчас на смене: {{open}}."
+      },
+      "licenseChanged": {
+        "title": "Ваша лицензия изменена",
+        "body": "PROSM изменил вашу лицензию: {{changes}}.",
+        "users": "пользователи {{from}} → {{to}}",
+        "devices": "устройства {{from}} → {{to}}",
+        "ends": "до {{date}}",
+        "status": "статус {{status}}",
+        "plan": "тариф изменён",
+        "unlimited": "без ограничений",
+        "planTo": "тариф {{plan}}"
+      }
+    },
+    "leaveTypes": {
+      "annual": "Ежегодный",
+      "sick": "Больничный",
+      "unpaid": "Без оплаты",
+      "emergency": "По обстоятельствам",
+      "other": "Другой",
+      "hajj": "Хадж или умра",
+      "bereavement": "В связи с утратой",
+      "paternity": "Отцовский"
+    }
+  },
+  "zh": {
+    "notifications": {
+      "outOfZoneEmployee": {
+        "title": "您不在指定的工作区域内",
+        "body": "请说明原因。距离：{{distance}} 米。"
+      },
+      "outOfZoneManager": {
+        "title": "员工不在工作区域内",
+        "body": "{{name}} 不在指定区域内（距离：{{distance}} 米）。"
+      },
+      "exceptionPendingReview": {
+        "titleException": "有异常等待您审核",
+        "bodyException": "{{name}} 提交了区域外异常的原因。",
+        "titleCorrection": "有更正申请等待您审核",
+        "bodyCorrection": "{{name}} 提交了更正申请。",
+        "titleEarlyLeave": "已提交早退原因",
+        "bodyEarlyLeave": "{{name}} 说明了早退的原因。",
+        "titleLeave": "有请假申请等待您审核",
+        "bodyLeave": "{{name}} 申请了 {{days}} 天假期。",
+        "bodyLeaveDetailed": "{{name}} 申请了 {{days}} 天{{type}}（{{startDate}} 至 {{endDate}}）。",
+        "bodyLeaveReasonSuffix": "原因：{{reason}}。",
+        "titlePermission": "有许可等待您批准",
+        "bodyPermission": "{{name}} 申请了 {{date}} 的{{kind}}。",
+        "bodyPermissionShort": "{{name}} 申请了 {{date}} 的许可。",
+        "titleLeaveCancelled": "已批准的假期被取消",
+        "bodyLeaveCancelled": "{{name}} 取消了已批准的假期（{{startDate}} - {{endDate}}）。",
+        "titleLeaveRequestWithdrawn": "请假申请已撤回",
+        "bodyLeaveRequestWithdrawn": "{{name}} 在获得答复前撤回了请假申请（{{startDate}} - {{endDate}}）。"
+      },
+      "correctionReviewed": {
+        "titleException": "您的异常已审核",
+        "titleCorrection": "您的更正申请已审核",
+        "titleLeave": "您的请假申请已审核",
+        "body": "决定：{{decision}}。",
+        "titleMockLocation": "您的位置已审核",
+        "titleOfflineTime": "您的离线时间已审核",
+        "notesSuffix": "备注：“{{notes}}”",
+        "titlePermission": "您的许可已审核",
+        "titlePendingHours": "您班次的工时已审核",
+        "titleIntegrity": "您的打卡已审核"
+      },
+      "breakExceeded": {
+        "title": "休息时间超时",
+        "body": "您的休息时间超过了允许的最长时长。"
+      },
+      "sosAlert": {
+        "title": "SOS/紧急警报",
+        "body": "{{name}} 触发了 SOS/紧急警报。"
+      },
+      "timesheet": {
+        "submittedTitle": "工时表已提交审核",
+        "submittedBody": "有一份工时表已提交，等待您批准。",
+        "approvedTitle": "工时表已批准",
+        "approvedBody": "您的工时表已批准并锁定。",
+        "rejectedTitle": "工时表被驳回",
+        "rejectedBody": "您的工时表被驳回，已退回草稿。",
+        "correctionRequestedTitle": "已申请更正工时表",
+        "correctionRequestedBody": "有员工申请更正一份已锁定的工时表。",
+        "correctionApprovedTitle": "工时表更正已批准",
+        "correctionApprovedBody": "您的工时表更正已批准，该周期已重新开放以便再次提交。",
+        "correctionRejectedTitle": "工时表更正被驳回",
+        "correctionRejectedBody": "您的工时表更正申请被驳回。",
+        "readyTitle": "您的工时表已就绪",
+        "readyBody": "请核对 {{start}} - {{end}} 的工时表并提交。"
+      },
+      "shiftAssigned": {
+        "title": "为您安排了新班次",
+        "body": "您在 {{date}} 的班次为 {{startTime}} 至 {{endTime}}。",
+        "bodyOvernight": "您在 {{date}} 的班次为 {{startTime}} 至 {{endTime}}（次日）。",
+        "cancelledTitle": "已安排的班次被取消",
+        "cancelledBody": "您在 {{date}} 的班次已取消。"
+      },
+      "siteChangeAlert": {
+        "title": "员工在班次中更换了地点",
+        "body": "{{name}} 在班次中从 {{oldSite}} 换到了 {{newSite}}。",
+        "unregisteredLocation": "未登记的位置"
+      },
+      "missingClockOut": {
+        "title": "员工尚未下班打卡",
+        "body": "{{name}} 已上班打卡超过 {{hours}} 小时，仍未下班打卡。"
+      },
+      "locationPlausibilityFlag": {
+        "title": "检测到异常的位置移动",
+        "body": "根据 {{name}} 上次已知位置，其移动速度约为 {{speed}} 公里/小时，请核查。"
+      },
+      "trial": {
+        "endingTitle": "您的 PROSM Time 试用即将结束",
+        "endingBody": "您的试用将在一周后结束。您的数据会保留，不会被删除。如需继续，请输入激活码或发送邮件至 sales@prosm.net。",
+        "endedTitle": "您的 PROSM Time 试用已结束",
+        "endedBody": "该组织现为只读状态，所有数据均已保留。输入激活码或发送邮件至 sales@prosm.net，即可恢复全部功能。",
+        "licenseEndingTitle": "您的 PROSM Time 许可证即将到期",
+        "licenseEndingBody": "许可证 {{license}} 将于 {{date}} 到期。请在此之前续期，以保证应用继续运行；您的所有数据都会保留。请联系 sales@prosm.net。"
+      },
+      "decision": {
+        "approved": "已批准",
+        "rejected": "已驳回",
+        "acknowledged": "已知悉",
+        "clarification_requested": "需要说明",
+        "cancelled": "已取消"
+      },
+      "allowance": {
+        "submittedTitle": "津贴等待批准",
+        "submittedBody": "{{name}} 提交了 {{date}} 的津贴。",
+        "approvedTitle": "津贴已批准",
+        "approvedBody": "您 {{date}} 的津贴已批准。",
+        "rejectedTitle": "津贴被驳回",
+        "rejectedBody": "您 {{date}} 的津贴被驳回。您可以修改后重新提交。",
+        "sheetSubmittedBody": "{{name}} 提交了 {{days}} 天的津贴（{{start}} - {{end}}）。",
+        "sheetApprovedBody": "您 {{start}} - {{end}} 的津贴已批准。",
+        "sheetRejectedBody": "您 {{start}} - {{end}} 的津贴被驳回。请修改后重新提交。"
+      },
+      "longSessionCheck": {
+        "title": "还在工作吗？",
+        "body": "您已上班打卡 {{hours}} 小时。仍在工作，还是下班打卡？"
+      },
+      "sessionAutoClosed": {
+        "titleEmployee": "您的班次已自动关闭",
+        "bodyEmployee": "您的班次在 {{hours}} 小时未下班打卡后被关闭。其工时等待您的主管审核。",
+        "titleManager": "有班次被自动关闭",
+        "bodyManager": "{{name}} 的班次在 {{hours}} 小时未下班打卡后被关闭。请审核其工时。"
+      },
+      "exitSitePrompt": {
+        "title": "您已离开工作地点",
+        "body": "您的班次仍未结束，要下班打卡吗？"
+      },
+      "autoCheckoutGeofence": {
+        "titleEmployee": "已为您下班打卡",
+        "bodyEmployee": "您离开了工作地点，已按离开时间为您下班打卡。如有错误，请联系您的主管。",
+        "titleManager": "离开地点时自动下班打卡",
+        "bodyManager": "{{name}} 离开了工作地点，已自动下班打卡。"
+      },
+      "clockInReminder": {
+        "title": "该上班打卡了",
+        "body": "您在 {{site}} 的班次 {{time}} 开始。到达后请上班打卡。"
+      },
+      "clockOutReminder": {
+        "title": "别忘了下班打卡",
+        "body": "您的班次已于 {{time}} 结束。离开时请在 PROSM Time 中下班打卡。"
+      },
+      "accountDeleted": {
+        "title": "有员工删除了账户",
+        "body": "{{name}} 删除了账户。其考勤和工时表以“已删除用户”保留。"
+      },
+      "newDevice": {
+        "title": "新设备登录",
+        "body": "您的账户在新设备上登录：{{device}}。如果不是您本人，请修改密码。",
+        "ownerBody": "{{name}} 在新设备上登录：{{device}}。"
+      },
+      "noShow": {
+        "title": "班次未打卡",
+        "body": "{{name}} 尚未为 {{site}} {{time}} 的班次上班打卡。"
+      },
+      "overtimeSoon": {
+        "title": "正在加班",
+        "body": "{{name}} 仍在岗；班次已于 {{time}} 结束。"
+      },
+      "dailyDigest": {
+        "title": "昨日概览",
+        "body": "{{present}} 人出勤，{{noShows}} 人缺勤。待处理：{{leave}} 个请假，{{exceptions}} 个异常。当前在岗：{{open}}。"
+      },
+      "licenseChanged": {
+        "title": "您的许可证已变更",
+        "body": "PROSM 变更了您的许可证：{{changes}}。",
+        "users": "用户 {{from}} → {{to}}",
+        "devices": "设备 {{from}} → {{to}}",
+        "ends": "到期 {{date}}",
+        "status": "状态 {{status}}",
+        "plan": "套餐已变更",
+        "unlimited": "不限",
+        "planTo": "套餐 {{plan}}"
+      }
+    },
+    "leaveTypes": {
+      "annual": "年假",
+      "sick": "病假",
+      "unpaid": "无薪假",
+      "emergency": "事假",
+      "other": "其他",
+      "hajj": "朝觐或副朝",
+      "bereavement": "丧假",
+      "paternity": "陪产假"
     }
   }
 };

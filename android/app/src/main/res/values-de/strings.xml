@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="capacitor_background_geolocation_notification_channel_name">PROSM Time · Anwesenheit</string>
+    <string name="reminder_channel_name">Erinnerungen ans Ein- und Ausstempeln</string>
+    <string name="reminder_channel_description">Klingelt mit dem Weckton, auch wenn das Telefon stumm ist.</string>
+</resources>

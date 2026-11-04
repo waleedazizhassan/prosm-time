@@ -1,0 +1,130 @@
+{
+  "title": "Табели",
+  "subtitle": "Проверяйте, отправляйте, утверждайте и исправляйте месячные периоды учёта.",
+  "loadError": "Не удалось загрузить табели.",
+  "generateError": "Не удалось сформировать табель.",
+  "viewPhoto": "Посмотреть фото",
+  "photoLoadError": "Не удалось загрузить это фото.",
+  "submitError": "Не удалось отправить табель.",
+  "approveError": "Не удалось рассмотреть табель.",
+  "correctionRequestError": "Не удалось запросить исправление.",
+  "correctionReviewError": "Не удалось рассмотреть исправление.",
+  "columns": {
+    "employee": "Сотрудник",
+    "period": "Период",
+    "date": "Дата",
+    "site": "Объект",
+    "status": "Статус",
+    "worked": "Отработано",
+    "overtime": "Сверхурочно",
+    "leave": "Отпуск",
+    "leaveDays": "{{count}} дн.",
+    "clockIn": "Приход",
+    "clockOut": "Уход"
+  },
+  "status": {
+    "draft": "Черновик",
+    "submitted": "Отправлен",
+    "approved": "Утверждён и закрыт",
+    "rejected": "Отклонён"
+  },
+  "generate": {
+    "title": "Сформировать табель",
+    "employeeLabel": "Сотрудник",
+    "periodStartLabel": "Начало периода",
+    "periodEndLabel": "Конец периода",
+    "action": "Сформировать"
+  },
+  "pendingApprovals": {
+    "title": "Ждут утверждения",
+    "empty": "Табелей на утверждении нет."
+  },
+  "pendingCorrections": {
+    "title": "Запросы на исправление",
+    "empty": "Запросов на исправление нет.",
+    "reviewAction": "Рассмотреть",
+    "reviewTitle": "Запрос на исправление"
+  },
+  "myTimesheets": {
+    "title": "Мои табели",
+    "empty": "Для вас пока не сформирован ни один табель. Администратор формирует табель по окончании каждого расчётного периода."
+  },
+  "detail": {
+    "status": "Статус",
+    "worked": "Отработано",
+    "breaks": "Перерывы",
+    "overtime": "Сверхурочно",
+    "leave": "Отпуск",
+    "exceptions": "Исключения",
+    "corrections": "Исправления",
+    "noEntries": "За этот период отметок нет.",
+    "stillOpen": "ещё открыта",
+    "notesLabel": "Примечание (необязательно)",
+    "correctionReasonLabel": "Причина исправления",
+    "submitAction": "Отправить на утверждение",
+    "approveAction": "Утвердить",
+    "rejectAction": "Отклонить",
+    "requestCorrectionAction": "Запросить исправление",
+    "submitCorrectionAction": "Отправить запрос на исправление",
+    "viewReportAction": "Открыть отчёт"
+  },
+  "report": {
+    "title": "Отчёт по табелю",
+    "loadError": "Не удалось загрузить отчёт.",
+    "backLink": "Назад к табелям",
+    "exportCsvAction": "Экспорт CSV",
+    "exportPdfAction": "Экспорт PDF",
+    "printAction": "Печать / Сохранить как PDF",
+    "summaryTitle": "Сводка",
+    "organization": "Организация",
+    "employee": "Сотрудник",
+    "status": "Статус",
+    "worked": "Отработано",
+    "breaks": "Перерывы",
+    "overtime": "Сверхурочно",
+    "approver": "Утвердил(а)",
+    "approvedAt": "Утверждён",
+    "lockStatus": "Закрытие",
+    "locked": "Закрыт",
+    "unlocked": "Не закрыт",
+    "entriesTitle": "Отметки посещаемости",
+    "leaveTitle": "Отпуск",
+    "noLeave": "За этот период одобренных отпусков нет.",
+    "leaveDaysLabel": "Дни отпуска",
+    "leaveDays": "{{count}} дн.",
+    "exceptionsTitle": "Исключения по геозоне (сводка проверки GPS)",
+    "noExceptions": "За этот период исключений по геозоне нет.",
+    "correctionsTitle": "Исправления",
+    "noCorrections": "За этот период исправлений нет.",
+    "timesheetLevelCorrection": "Исправление табеля",
+    "evidenceTitle": "Фото-подтверждения",
+    "noEvidence": "За этот период фото-подтверждений нет.",
+    "viewEvidence": "Посмотреть",
+    "approvalTrailTitle": "История утверждения",
+    "noApprovalTrail": "Действий по утверждению пока нет.",
+    "columns": {
+      "clockIn": "Приход",
+      "clockOut": "Уход",
+      "site": "Объект",
+      "project": "Проект",
+      "when": "Когда",
+      "distance": "Расстояние",
+      "category": "Категория",
+      "reason": "Причина",
+      "kind": "Тип",
+      "action": "Действие",
+      "notes": "Примечание"
+    },
+    "meters": "{{value}} м",
+    "photo": "Фото"
+  },
+  "values": {
+    "leaveType": {
+      "annual": "Ежегодный",
+      "sick": "Больничный",
+      "unpaid": "Без оплаты",
+      "emergency": "Экстренный",
+      "other": "Другой"
+    }
+  }
+}

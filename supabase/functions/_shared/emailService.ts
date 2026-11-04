@@ -27,7 +27,25 @@
 // deno-lint-ignore no-explicit-any
 type SupabaseClient = any;
 
-async function relayViaProsmManagement({ to, subject, html, purpose }: { to: string; subject: string; html: string; purpose: string }) {
+// 2026-11-03: an optional sender (support@prosm.net) and attachments, relayed by Platform.
+export interface EmailAttachment {
+  name: string;
+  contentBase64: string;
+}
+
+// Owner 2026-11-04: every email still comes from noreply@, but the sender's name says what it is
+// about - "PROSM Time Invitation", "PROSM Time Leave", "PROSM Time License"...
+export function senderName(purpose: string): string {
+  const key = purpose.toLowerCase();
+  if (/invit/.test(key)) return "PROSM Time Invitation";
+  if (/password|reset/.test(key)) return "PROSM Time Account";
+  if (/licen[cs]e/.test(key)) return "PROSM Time License";
+  if (/trial/.test(key)) return "PROSM Time Subscription";
+  if (/leave/.test(key)) return "PROSM Time Leave";
+  return "PROSM Time";
+}
+
+async function relayViaProsmManagement({ to, subject, html, purpose, fromAddress, attachments }: { to: string; subject: string; html: string; purpose: string; fromAddress?: string; attachments?: EmailAttachment[] }) {
   const apiUrl = Deno.env.get("PROSM_MANAGEMENT_API_URL");
   const apiKey = Deno.env.get("PROSM_MANAGEMENT_API_KEY");
 
@@ -38,7 +56,7 @@ async function relayViaProsmManagement({ to, subject, html, purpose }: { to: str
   const response = await fetch(apiUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json", "x-prosm-api-key": apiKey },
-    body: JSON.stringify({ action: "sendEmail", to, subject, html, purpose }),
+    body: JSON.stringify({ action: "sendEmail", to, subject, html, purpose, fromAddress, fromName: senderName(purpose), attachments }),
   });
 
   const json = await response.json().catch(() => null);
@@ -103,6 +121,8 @@ export async function sendEmail({
   supabase,
   organizationId,
   userId,
+  fromAddress,
+  attachments,
 }: {
   to: string;
   subject: string;
@@ -111,13 +131,15 @@ export async function sendEmail({
   supabase?: SupabaseClient;
   organizationId?: string | null;
   userId?: string | null;
+  fromAddress?: string;
+  attachments?: EmailAttachment[];
 }): Promise<{ sent: boolean; error?: string }> {
   const maxAttempts = 2;
   let lastError: unknown;
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
-      await relayViaProsmManagement({ to, subject, html, purpose });
+      await relayViaProsmManagement({ to, subject, html, purpose, fromAddress, attachments });
 
       await logEmailAttempt(supabase ?? null, {
         purpose,

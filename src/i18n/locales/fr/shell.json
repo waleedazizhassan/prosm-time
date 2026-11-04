@@ -144,7 +144,7 @@
       "endingTitle": "Votre essai PROSM Time se termine bientôt",
       "endingBody": "Votre essai se termine dans une semaine. Vos données sont conservées et ne seront pas supprimées. Pour continuer, saisissez un code d'activation ou contactez-nous à sales@prosm.net.",
       "endedTitle": "Votre essai PROSM Time est terminé",
-      "endedBody": "L'application est en pause et toutes vos données sont conservées. Saisissez un code d'activation ou contactez-nous à sales@prosm.net et tout redeviendra comme avant.",
+      "endedBody": "L’organisation est désormais en lecture seule et toutes vos données sont conservées. Saisissez un code d’activation ou écrivez à sales@prosm.net, et tout fonctionne comme avant.",
       "licenseEndingTitle": "Votre licence PROSM Time expire bientôt",
       "licenseEndingBody": "La licence {{license}} expire le {{date}}. Renouvelez-la avant pour que l'application continue ; vos données sont conservées. Contact : sales@prosm.net."
     },
@@ -208,12 +208,23 @@
       "body": "{{name}} n'a pas pointé pour le poste de {{time}} à {{site}}."
     },
     "overtimeSoon": {
-      "title": "Heures sup. bientôt",
-      "body": "{{name}} est toujours pointé ; les heures sup. commencent à {{time}}."
+      "title": "Heures supplémentaires en cours",
+      "body": "{{name}} est toujours pointé ; le poste s'est terminé à {{time}}."
     },
     "dailyDigest": {
       "title": "Hier en bref",
       "body": "{{present}} ont travaillé, {{noShows}} ont manqué un poste. En attente : {{leave}} congés, {{exceptions}} exceptions. Pointés maintenant : {{open}}."
+    },
+    "licenseChanged": {
+      "title": "Votre licence a changé",
+      "body": "PROSM a modifié votre licence : {{changes}}.",
+      "users": "utilisateurs {{from}} → {{to}}",
+      "devices": "appareils {{from}} → {{to}}",
+      "ends": "fin le {{date}}",
+      "status": "statut {{status}}",
+      "plan": "offre modifiée",
+      "unlimited": "sans limite",
+      "planTo": "offre {{plan}}"
     }
   },
   "items": {
@@ -236,7 +247,8 @@
     "help": "Aide",
     "workers": "Intervenants externes",
     "calendar": "Calendrier et jours fériés",
-    "auditLog": "Journal des actions"
+    "auditLog": "Journal des actions",
+    "dailySummary": "Résumé du jour"
   },
   "sosOverlay": {
     "title": "Alerte SOS/Urgence",
@@ -341,7 +353,8 @@
     "timesheets": "Heures à vérifier et approuver",
     "workers": "Intervenants externes et leur numéro de borne",
     "calendar": "Jours fériés, jours de repos et jours exceptionnels - les heures et heures supplémentaires en dépendent.",
-    "auditLog": "Tout ce qui se fait dans votre organisation : qui a fait quoi, pour qui, quand et pourquoi."
+    "auditLog": "Tout ce qui se fait dans votre organisation : qui a fait quoi, pour qui, quand et pourquoi.",
+    "dailySummary": "Une journée de votre organisation : qui a travaillé, en retard, absent ou en congé"
   },
   "backgroundDisclosure": {
     "title": "Position pendant votre poste",

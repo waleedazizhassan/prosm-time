@@ -5,6 +5,7 @@ import { requireSupabaseClient } from "../../core/api/supabaseClient";
 import Button from "../../components/common/Button";
 import Card from "../../components/common/Card";
 import ErrorText from "../../components/common/ErrorText";
+import FormGrid from "../../components/common/FormGrid";
 import Input from "../../components/common/Input";
 
 const MAX_LOCATION_DAYS = 30;
@@ -48,9 +49,11 @@ export default function RetentionSettingsCard() {
 
   return (
     <Card title={t("retention.title")} subtitle={t("retention.subtitle")}>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-3)", alignItems: "flex-end" }}>
+      <FormGrid columns={2} gap="sm">
         <Input name="locationRetention" type="number" label={t("retention.location", { max: MAX_LOCATION_DAYS })} value={locationDays} onChange={(event) => setLocationDays(event.target.value)} />
         <Input name="photoRetention" type="number" label={t("retention.photo", { max: MAX_PHOTO_DAYS })} value={photoDays} onChange={(event) => setPhotoDays(event.target.value)} />
+      </FormGrid>
+      <div style={{ display: "flex", justifyContent: "flex-start", marginTop: "var(--space-3)" }}>
         <Button onClick={save} loading={saving} disabled={!valid || saving}>
           {t("retention.save")}
         </Button>

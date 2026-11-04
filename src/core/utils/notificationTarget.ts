@@ -9,6 +9,8 @@ export interface NotificationRef {
   entityType?: unknown;
   /** The notification's data.kind, when known (the bell has it; a push tap doesn't). */
   kind?: unknown;
+  /** The day a daily summary is about (the bell has it; a push tap opens yesterday). */
+  date?: unknown;
 }
 
 export interface NotificationViewer {
@@ -38,7 +40,6 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
       return viewer.isOwner || ref?.kind === "manager" ? "/manager" : "/dashboard";
     case "long_session_check":
     case "overtime_soon":
-    case "daily_digest":
     case "new_device_login":
     case "exit_site_prompt":
     case "clock_in_reminder":
@@ -51,6 +52,11 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
       return isLeave ? "/leave" : "/dashboard";
     case "shift_assigned":
       return "/schedule";
+    // owner 2026-11-03: the morning summary opens the day it is about; a licence change, the plan card
+    case "daily_digest":
+      return viewer.isOwner ? (typeof ref?.date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(ref.date) ? `/daily-summary?date=${ref.date}` : "/daily-summary") : "/dashboard";
+    case "license_changed":
+      return viewer.isOwner ? "/settings#plan" : "/dashboard";
     case "shift_no_show":
       return "/attendance?period=today";
     case "trial_ending":

@@ -16,6 +16,11 @@ export const LANGUAGES: Language[] = [
   { code: "fr", label: "French", nativeLabel: "Français", dir: "ltr", locale: "fr-FR" },
   { code: "de", label: "German", nativeLabel: "Deutsch", dir: "ltr", locale: "de-DE" },
   { code: "it", label: "Italian", nativeLabel: "Italiano", dir: "ltr", locale: "it-IT" },
+  // Owner 2026-11-03: Spanish, Brazilian Portuguese, Simplified Chinese and Russian.
+  { code: "es", label: "Spanish", nativeLabel: "Español", dir: "ltr", locale: "es-ES" },
+  { code: "pt", label: "Portuguese (Brazil)", nativeLabel: "Português (Brasil)", dir: "ltr", locale: "pt-BR" },
+  { code: "zh", label: "Chinese (Simplified)", nativeLabel: "简体中文", dir: "ltr", locale: "zh-CN" },
+  { code: "ru", label: "Russian", nativeLabel: "Русский", dir: "ltr", locale: "ru-RU" },
 ];
 
 export const DEFAULT_LANGUAGE = "en";

@@ -19,7 +19,8 @@
     "clockOutAt": "Sortie",
     "status": "Statut",
     "workedHours": "Heures travaillées",
-    "notes": "Notes"
+    "notes": "Notes",
+    "date": "Date"
   },
   "status": {
     "clocked_in": "Présent",

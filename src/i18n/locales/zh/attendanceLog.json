@@ -1,0 +1,70 @@
+{
+  "title": "考勤记录",
+  "subtitle": "上下班打卡历史，仅限您有权查看的人员和工地。",
+  "loadError": "无法加载考勤记录。",
+  "exportPdfAction": "导出 PDF",
+  "filters": {
+    "title": "期间",
+    "fromLabel": "从",
+    "toLabel": "至",
+    "employeeLabel": "员工",
+    "allEmployees": "全部员工"
+  },
+  "columns": {
+    "employee": "员工",
+    "site": "工地",
+    "clockInLocation": "实际上班打卡位置",
+    "clockOutLocation": "实际下班打卡位置",
+    "clockInAt": "上班",
+    "clockOutAt": "下班",
+    "status": "状态",
+    "workedHours": "工作时长",
+    "notes": "备注",
+    "date": "日期"
+  },
+  "status": {
+    "clocked_in": "已上班",
+    "clocked_out": "已下班"
+  },
+  "empty": "此期间没有考勤记录。",
+  "viewPhoto": "查看照片",
+  "viewOnMap": "在地图上查看",
+  "siteChangedTo": "→ {{site}}，{{time}}",
+  "recordedByOnBehalf": "由 {{name}} 代为记录",
+  "noteLabel": "备注：{{note}}",
+  "activityLabel": "工作内容：{{activity}}",
+  "locationMatch": "在工地地理围栏内",
+  "locationMismatch": "不在工地地理围栏内",
+  "photoModalTitle": "考勤照片",
+  "photoLoading": "正在加载照片…",
+  "photoAlt": "考勤凭证照片",
+  "photoLoadError": "无法加载这张照片。",
+  "deviceTimeBadge": "设备时间（离线）",
+  "deviceTimeHint": "在无网络时按员工设备的时间记录；等待经理审核。",
+  "notes": {
+    "clockIn": "上班：{{note}}",
+    "clockOut": "下班：{{note}}",
+    "earlyLeave": "早退：{{reason}}",
+    "mockClockIn": "从虚假（模拟）位置打卡上班",
+    "mockClockOut": "从虚假（模拟）位置打卡下班",
+    "siteChange": "更换工地：{{from}} → {{to}}（{{time}}）"
+  },
+  "periods": {
+    "today": "今天",
+    "week": "本周",
+    "month": "本月"
+  },
+  "totalHours": "合计 {{hours}} 小时 · {{count}} 个班次",
+  "noRegisteredSite": "无登记工地",
+  "noLocation": "无位置（旧记录或未授予权限）",
+  "view": {
+    "month": "月视图",
+    "list": "列表视图"
+  },
+  "group": {
+    "label": "分组方式",
+    "none": "不分组",
+    "employee": "员工",
+    "day": "日期"
+  }
+}

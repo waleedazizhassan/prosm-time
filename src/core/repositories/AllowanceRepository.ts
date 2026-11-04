@@ -13,7 +13,10 @@ export interface AllowanceEntry {
   userId: string;
   userFullName: string;
   entryDate: string;
+  // Owner 2026-11-03: the day's site - its attendance's site(s), else the site chosen on a day
+  // without attendance (siteId).
   siteName: string | null;
+  siteId: string | null;
   // Audit 4.7 - the whole day, not only the session the entry is linked
   // to: the first clock-in, the last clock-out (null while one is still
   // open), how many sessions and the minutes worked in the closed ones.
@@ -104,6 +107,8 @@ interface AllowanceEntryRow {
   travel_allowance: number;
   other_allowance: number;
   other_allowance_note: string | null;
+  site_id?: string | null;
+  entry_site?: { name: string } | { name: string }[] | null;
   overtime_hours: number;
   overtime_days: number;
   overtime_minutes?: number;
@@ -127,12 +132,14 @@ function mapEntryRow(row: AllowanceEntryRow): AllowanceEntry {
   const user = Array.isArray(row.users) ? row.users[0] : row.users;
   const session = Array.isArray(row.attendance_sessions) ? row.attendance_sessions[0] : row.attendance_sessions;
   const site = session ? (Array.isArray(session.sites) ? session.sites[0] : session.sites) : null;
+  const ownSite = Array.isArray(row.entry_site) ? row.entry_site[0] : row.entry_site;
   return {
     id: row.id,
     userId: row.user_id,
     userFullName: user?.full_name ?? "",
     entryDate: row.entry_date,
-    siteName: site?.name ?? session?.manual_location_label ?? null,
+    siteName: site?.name ?? session?.manual_location_label ?? ownSite?.name ?? null,
+    siteId: row.site_id ?? null,
     clockInAt: session?.clock_in_at ?? null,
     clockOutAt: session?.clock_out_at ?? null,
     sessionCount: session ? 1 : 0,
@@ -166,11 +173,12 @@ function mapEntryRow(row: AllowanceEntryRow): AllowanceEntry {
 export interface DaySession {
   clockInAt: string;
   clockOutAt: string | null;
+  siteName?: string | null;
 }
 
 /** First clock-in, last clock-out (null while a session is open), count and closed minutes of one day. */
-export function summarizeDay(sessions: DaySession[]): Pick<AllowanceEntry, "clockInAt" | "clockOutAt" | "sessionCount" | "workedMinutes"> {
-  if (sessions.length === 0) return { clockInAt: null, clockOutAt: null, sessionCount: 0, workedMinutes: 0 };
+export function summarizeDay(sessions: DaySession[]): Pick<AllowanceEntry, "clockInAt" | "clockOutAt" | "sessionCount" | "workedMinutes"> & { siteNames: string[] } {
+  if (sessions.length === 0) return { clockInAt: null, clockOutAt: null, sessionCount: 0, workedMinutes: 0, siteNames: [] };
   const sorted = [...sessions].sort((a, b) => a.clockInAt.localeCompare(b.clockInAt));
   const open = sorted.some((session) => session.clockOutAt === null);
   const lastOut = sorted.reduce<string | null>((latest, session) => (session.clockOutAt && (!latest || session.clockOutAt > latest) ? session.clockOutAt : latest), null);
@@ -178,7 +186,9 @@ export function summarizeDay(sessions: DaySession[]): Pick<AllowanceEntry, "cloc
     (total, session) => total + (session.clockOutAt ? Math.max(0, Math.round((new Date(session.clockOutAt).getTime() - new Date(session.clockInAt).getTime()) / 60000)) : 0),
     0,
   );
-  return { clockInAt: sorted[0].clockInAt, clockOutAt: open ? null : lastOut, sessionCount: sorted.length, workedMinutes };
+  // every site of the day, in the order worked (a day that changed site shows both)
+  const siteNames = [...new Set(sorted.map((session) => session.siteName).filter((name): name is string => Boolean(name)))];
+  return { clockInAt: sorted[0].clockInAt, clockOutAt: open ? null : lastOut, sessionCount: sorted.length, workedMinutes, siteNames };
 }
 
 function localDate(iso: string): string {
@@ -187,7 +197,7 @@ function localDate(iso: string): string {
 }
 
 const ENTRY_SELECT =
-  "id, user_id, entry_date, meal_allowance, expatriation_allowance, transportation_allowance, housing_allowance, travel_allowance, other_allowance, other_allowance_note, overtime_hours, overtime_minutes, worked_minutes, manual_overrides, overtime_days, overtime_amount, extra_days_amount, status, submitted_at, approved_at, review_notes, sheet_id, users!allowance_entries_user_id_fkey(full_name), attendance_sessions(clock_in_at, clock_out_at, manual_location_label, sites!attendance_sessions_site_id_fkey(name))";
+  "id, user_id, entry_date, meal_allowance, expatriation_allowance, transportation_allowance, housing_allowance, travel_allowance, other_allowance, other_allowance_note, overtime_hours, overtime_minutes, worked_minutes, manual_overrides, overtime_days, overtime_amount, extra_days_amount, status, submitted_at, approved_at, review_notes, sheet_id, site_id, entry_site:sites!allowance_entries_site_id_fkey(name), users!allowance_entries_user_id_fkey(full_name), attendance_sessions(clock_in_at, clock_out_at, manual_location_label, sites!attendance_sessions_site_id_fkey(name))";
 
 // PROSM Time - Allowances (2026-09-02 plan). Reads are RLS-scoped
 // (self always; a Manager's own managed sites' people; everyone for
@@ -226,26 +236,31 @@ class AllowanceRepository {
     const to = new Date(`${endDate}T23:59:59.999`).toISOString();
     const { data, error } = await this.client
       .from("attendance_sessions")
-      .select("user_id, clock_in_at, clock_out_at")
+      .select("user_id, clock_in_at, clock_out_at, manual_location_label, sites!attendance_sessions_site_id_fkey(name)")
       .in("user_id", [...new Set(entries.map((entry) => entry.userId))])
       .gte("clock_in_at", from)
       .lte("clock_in_at", to);
     if (error || !data) return entries;
 
     const byDay = new Map<string, DaySession[]>();
-    for (const row of data as Array<{ user_id: string; clock_in_at: string; clock_out_at: string | null }>) {
+    type Row = { user_id: string; clock_in_at: string; clock_out_at: string | null; manual_location_label: string | null; sites: { name: string } | { name: string }[] | null };
+    for (const row of data as Row[]) {
       const key = `${row.user_id}:${localDate(row.clock_in_at)}`;
       const list = byDay.get(key) ?? [];
-      list.push({ clockInAt: row.clock_in_at, clockOutAt: row.clock_out_at });
+      const site = Array.isArray(row.sites) ? row.sites[0] : row.sites;
+      list.push({ clockInAt: row.clock_in_at, clockOutAt: row.clock_out_at, siteName: site?.name ?? row.manual_location_label ?? null });
       byDay.set(key, list);
     }
     return entries.map((entry) => {
       const sessions = byDay.get(`${entry.userId}:${entry.entryDate}`);
-      return sessions && sessions.length > 0 ? { ...entry, ...summarizeDay(sessions) } : entry;
+      if (!sessions || sessions.length === 0) return entry;
+      const { siteNames, ...day } = summarizeDay(sessions);
+      return { ...entry, ...day, siteName: siteNames.length > 0 ? siteNames.join(" / ") : entry.siteName };
     });
   }
 
-  async upsertEntry(entryDate: string, input: AllowanceEntryInput): Promise<ServiceResult<{ entryId: string }>> {
+  /** siteId: a site for a day without attendance, null to clear it; left out = unchanged. */
+  async upsertEntry(entryDate: string, input: AllowanceEntryInput, siteId?: string | null): Promise<ServiceResult<{ entryId: string }>> {
     try {
       const { data, error } = await this.client.functions.invoke("upsert-allowance-entry", {
         body: {
@@ -257,6 +272,7 @@ class AllowanceRepository {
           travelAllowance: input.travelAllowance,
           otherAllowance: input.otherAllowance,
           otherAllowanceNote: input.otherAllowanceNote,
+          ...(siteId === undefined ? {} : { siteId }),
         },
       });
       if (error) {
@@ -277,6 +293,18 @@ class AllowanceRepository {
       const { data, error } = await this.client.rpc("fill_prosm_time_allowances", { p_from: from, p_to: to });
       if (error) return createError(error.message);
       return createSuccess({ filled: Number((data as { filled?: number } | null)?.filled ?? 0) });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Allowances service unavailable.");
+    }
+  }
+
+  // Owner 2026-11-03 (his PROSM Allow app's button): every open day of the period priced again
+  // from the current prices - what has no price and what a reviewer changed are kept.
+  async repriceOpenDays(from: string, to: string): Promise<ServiceResult<{ priced: number }>> {
+    try {
+      const { data, error } = await this.client.rpc("reprice_prosm_time_allowances", { p_from: from, p_to: to });
+      if (error) return createError(error.message);
+      return createSuccess({ priced: Number((data as { priced?: number } | null)?.priced ?? 0) });
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Allowances service unavailable.");
     }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="capacitor_background_geolocation_notification_channel_name">PROSM Time · Посещаемость</string>
+    <string name="reminder_channel_name">Напоминания об отметках</string>
+    <string name="reminder_channel_description">Звучит сигналом будильника, даже если телефон на беззвучном режиме.</string>
+</resources>

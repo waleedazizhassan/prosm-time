@@ -39,25 +39,65 @@ export interface CurrentPosition {
 // Options are additive and optional so every existing real geofence
 // caller is byte-for-byte unaffected (same defaults as before);
 // WeatherMiniPanel is the only caller that opts into the fast path.
+// Owner 2026-11-04 ("the sites, the accuracy and the work areas"): a phone's first reading is
+// often a coarse network fix (300-400 m seen in real clock-ins). An attendance reading keeps
+// listening for a few seconds and takes the best one, stopping as soon as it is good enough.
+const GOOD_ENOUGH_METERS = 25;
+const REFINE_MS = 8000;
+
 export function getCurrentPosition(options?: { highAccuracy?: boolean; timeoutMs?: number }): Promise<CurrentPosition> {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
       reject(new Error("Geolocation is not available in this browser."));
       return;
     }
+    const highAccuracy = options?.highAccuracy ?? true;
+    const toPosition = (position: GeolocationPosition): CurrentPosition => ({
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
+      accuracyMeters: position.coords.accuracy,
+    });
 
-    navigator.geolocation.getCurrentPosition(
+    if (!highAccuracy || typeof navigator.geolocation.watchPosition !== "function") {
+      navigator.geolocation.getCurrentPosition(
+        (position) => resolve(toPosition(position)),
+        (error) => reject(new Error(error.message || "Unable to determine your location.")),
+        { enableHighAccuracy: highAccuracy, timeout: options?.timeoutMs ?? 10000 },
+      );
+      return;
+    }
+
+    let best: CurrentPosition | null = null;
+    let done = false;
+    let watchId: number | null = null;
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    const finish = (error?: Error) => {
+      if (done) return;
+      done = true;
+      if (watchId !== null) navigator.geolocation.clearWatch(watchId);
+      if (timer) clearTimeout(timer);
+      if (best) resolve(best);
+      else reject(error ?? new Error("Unable to determine your location."));
+    };
+    // the best reading within the refine window; with none yet, wait to the full timeout
+    const refineMs = Math.min(REFINE_MS, options?.timeoutMs ?? 10000);
+    const hardTimeout = Math.max(options?.timeoutMs ?? 10000, refineMs);
+    const started = Date.now();
+    watchId = navigator.geolocation.watchPosition(
       (position) => {
-        resolve({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          accuracyMeters: position.coords.accuracy,
-        });
+        const reading = toPosition(position);
+        if (!best || reading.accuracyMeters < best.accuracyMeters) best = reading;
+        if (reading.accuracyMeters <= GOOD_ENOUGH_METERS || Date.now() - started >= refineMs) finish();
       },
       (error) => {
-        reject(new Error(error.message || "Unable to determine your location."));
+        if (!best) finish(new Error(error.message || "Unable to determine your location."));
       },
-      { enableHighAccuracy: options?.highAccuracy ?? true, timeout: options?.timeoutMs ?? 10000 }
+      { enableHighAccuracy: true, timeout: hardTimeout, maximumAge: 0 },
     );
+    timer = setTimeout(() => finish(), best ? refineMs : hardTimeout);
+    // after the refine window, a reading already in hand is used at once
+    setTimeout(() => {
+      if (best) finish();
+    }, refineMs);
   });
 }

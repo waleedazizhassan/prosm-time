@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Camera, Download } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
+import usePlanFeatures from "../../core/hooks/usePlanFeatures";
 import TimesheetRepository, { type Timesheet, type TimesheetEntry, type TimesheetCorrection } from "../../core/repositories/TimesheetRepository";
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
 import EvidenceRepository from "../../core/repositories/EvidenceRepository";
@@ -63,6 +64,7 @@ const STATUS_BADGE_KEY: Record<Timesheet["status"], string> = {
 export default function TimesheetsPage() {
   const { t, i18n } = useTranslation("timesheets");
   const { profile, hasPermission } = useAuth();
+  const { allows } = usePlanFeatures(profile?.id);
 
   const canGenerate = hasPermission("timesheets.generate");
   const canApprove = hasPermission("timesheets.approve");
@@ -377,7 +379,7 @@ export default function TimesheetsPage() {
               <Link to={`/timesheets/${detailTimesheet.id}/report`}>
                 <Button variant="ghost">{t("detail.viewReportAction")}</Button>
               </Link>
-              <Button variant="ghost" onClick={handleExportPdf} loading={exportingPdf}>
+              <Button variant="ghost" onClick={handleExportPdf} loading={exportingPdf} disabled={!allows("export")} title={allows("export") ? undefined : t("common:planLocked.text", { plan: "Business" })}>
                 <Download size={13} /> {t("report.exportPdfAction")}
               </Button>
               {canSubmitDetail ? (

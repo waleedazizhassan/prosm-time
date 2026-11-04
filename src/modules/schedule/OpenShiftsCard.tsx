@@ -6,8 +6,8 @@ import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { formatDateOnly } from "../../core/utils/formatDate";
 import Button from "../../components/common/Button";
 import Card from "../../components/common/Card";
-import DateRange from "../../components/common/DateRange";
 import ErrorText from "../../components/common/ErrorText";
+import FormGrid from "../../components/common/FormGrid";
 import Input from "../../components/common/Input";
 
 // docs/IDEAS.md 5: a manager posts a shift with no one on it; people at the site ask
@@ -102,16 +102,18 @@ export default function OpenShiftsCard({ manageSiteId, onFilled }: { manageSiteI
         ))}
       </div>
       {manageSiteId ? (
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)", alignItems: "flex-end", marginTop: "var(--space-4)" }}>
-          <DateRange>
+        <div style={{ marginTop: "var(--space-4)" }}>
+          <FormGrid columns={4} gap="sm">
             <Input label={t("columns.date")} name="openShiftDate" type="date" value={date} onChange={(event) => setDate(event.target.value)} />
             <Input label={t("startTimeLabel")} name="openShiftStart" type="time" value={start} onChange={(event) => setStart(event.target.value)} />
-          </DateRange>
-          <Input label={t("endTimeLabel")} name="openShiftEnd" type="time" value={end} onChange={(event) => setEnd(event.target.value)} />
-          <Input label={t("notesLabel")} name="openShiftNotes" value={notes} onChange={(event) => setNotes(event.target.value)} />
-          <Button onClick={post} loading={busy} disabled={busy || !date}>
-            {t("open.post")}
-          </Button>
+            <Input label={t("endTimeLabel")} name="openShiftEnd" type="time" value={end} onChange={(event) => setEnd(event.target.value)} />
+            <Input label={t("notesLabel")} name="openShiftNotes" value={notes} onChange={(event) => setNotes(event.target.value)} />
+          </FormGrid>
+          <div style={{ display: "flex", justifyContent: "flex-start", marginTop: "var(--space-3)" }}>
+            <Button onClick={post} loading={busy} disabled={busy || !date}>
+              {t("open.post")}
+            </Button>
+          </div>
         </div>
       ) : null}
     </Card>

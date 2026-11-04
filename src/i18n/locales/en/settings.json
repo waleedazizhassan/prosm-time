@@ -106,7 +106,10 @@
     "invalid": "Enter numbers of 0 or more.",
     "genericError": "Could not save.",
     "saved": "Saved.",
-    "save": "Save"
+    "save": "Save",
+    "alertLabel": "Overtime alert (minutes after the shift ends)",
+    "alertHint": "You are told when someone is still clocked in this many minutes after their shift ends. 15 by default; a negative number warns before the end.",
+    "alertSaved": "Saved."
   },
   "leaveTypes": {
     "title": "Leave types",
@@ -136,7 +139,8 @@
     "requiresDocument": "A document is required",
     "active": "In use",
     "invalidTiers": "Write the tiers as years:days separated by commas.",
-    "genericError": "Could not save."
+    "genericError": "Could not save.",
+    "medicalReportNote": "With a medical report."
   },
   "siteFocus": {
     "backToSite": "← Back to the site",
@@ -156,11 +160,37 @@
     "redeemed": "The code is activated.",
     "redeemFailed": "The code is wrong or already used.",
     "names": {
-      "legacy": "Your current plan",
+      "legacy": "Everything (customer from before plans)",
       "starter": "Starter",
       "business": "Business",
       "pro": "Pro"
-    }
+    },
+    "includes": "What your plan includes",
+    "always": "In every plan: clocking at the site, the work area, the photo, working offline, the map, basic reports and 9 languages.",
+    "included": "included",
+    "notIncluded": "not in your plan",
+    "features": {
+      "on_behalf": "Clocking on behalf of an employee",
+      "kiosk": "Kiosk and external workers",
+      "leave": "Leave",
+      "allowances": "Allowances, sheets and approvals",
+      "export": "Report export (PDF)",
+      "payroll_export": "Payroll export (Excel / CSV)",
+      "clock_rules": "Clock rules (early-leave grace, rounding)",
+      "scheduling": "Shift scheduling, open shifts and swaps",
+      "roles_manager": "Manager and supervisor roles",
+      "audit": "Full audit log",
+      "sos": "SOS emergency",
+      "roles_all": "Viewer role and personal permissions",
+      "clock_suggestion": "Clock-in question on arrival",
+      "labor_cost": "Labour cost and project budgets",
+      "daily_summary": "Daily summary",
+      "manager_alerts": "Manager alerts (missed shift, overtime, morning summary)"
+    },
+    "managedByProsm": "Any change or renewal of your licence is made by PROSM; you get a notification and an email with the new licence. To change it, write to sales@prosm.net.",
+    "historyAll": "Attendance records shown: all of them. Location points and photos are deleted automatically after the period in “Data retention”.",
+    "history_one": "Attendance records shown and reported: the last year. Older records are kept and come back with a higher plan. Location points and photos are deleted automatically after the period in “Data retention”.",
+    "history_other": "Attendance records shown and reported: the last {{count}} years. Older records are kept and come back with a higher plan. Location points and photos are deleted automatically after the period in “Data retention”."
   },
   "retention": {
     "title": "Data retention",

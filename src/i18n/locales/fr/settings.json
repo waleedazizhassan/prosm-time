@@ -106,7 +106,10 @@
     "invalid": "Saisissez des nombres positifs.",
     "genericError": "Enregistrement impossible.",
     "saved": "Enregistré.",
-    "save": "Enregistrer"
+    "save": "Enregistrer",
+    "alertLabel": "Alerte heures sup. (minutes après la fin du poste)",
+    "alertHint": "Vous êtes prévenu quand quelqu'un est encore pointé ce nombre de minutes après la fin de son poste. 15 par défaut ; un nombre négatif prévient avant la fin.",
+    "alertSaved": "Enregistré."
   },
   "leaveTypes": {
     "title": "Types de congé",
@@ -136,7 +139,8 @@
     "requiresDocument": "Justificatif requis",
     "active": "Utilisé",
     "invalidTiers": "Écrivez années:jours séparés par des virgules.",
-    "genericError": "Enregistrement impossible."
+    "genericError": "Enregistrement impossible.",
+    "medicalReportNote": "Avec un certificat médical."
   },
   "siteFocus": {
     "backToSite": "← Retour au site",
@@ -156,11 +160,38 @@
     "redeemed": "Le code est activé.",
     "redeemFailed": "Le code est incorrect ou déjà utilisé.",
     "names": {
-      "legacy": "Votre offre actuelle",
+      "legacy": "Tout inclus (client d’avant les offres)",
       "starter": "Starter",
       "business": "Business",
       "pro": "Pro"
-    }
+    },
+    "includes": "Ce que comprend votre offre",
+    "always": "Dans toutes les offres : pointage sur site, zone de travail, photo, hors ligne, carte, rapports de base et 9 langues.",
+    "included": "inclus",
+    "notIncluded": "non inclus dans votre offre",
+    "features": {
+      "on_behalf": "Pointage pour un employé",
+      "kiosk": "Kiosque et travailleurs externes",
+      "leave": "Congés",
+      "allowances": "Indemnités, feuilles et validations",
+      "export": "Export des rapports (PDF)",
+      "payroll_export": "Export de paie (Excel / CSV)",
+      "clock_rules": "Règles de pointage (départ anticipé, arrondi)",
+      "scheduling": "Planning, postes ouverts et échanges",
+      "roles_manager": "Rôles responsable et superviseur",
+      "audit": "Journal d’audit complet",
+      "sos": "Urgence SOS",
+      "roles_all": "Rôle lecteur et droits personnels",
+      "clock_suggestion": "Question de pointage à l’arrivée",
+      "labor_cost": "Coût de main-d’œuvre et budgets de projet",
+      "daily_summary": "Résumé du jour",
+      "manager_alerts": "Alertes responsables (absence, heures sup., résumé du matin)"
+    },
+    "managedByProsm": "Toute modification ou tout renouvellement de votre licence est fait par PROSM ; vous recevez une notification et un e-mail avec la nouvelle licence. Pour la modifier : sales@prosm.net.",
+    "historyAll": "Pointages affichés : tous. Positions et photos sont supprimées automatiquement après la durée de « Conservation ».",
+    "history_one": "Pointages affichés et rapportés : les 1 dernières années. Les plus anciens sont conservés et reviennent avec une offre supérieure. Positions et photos sont supprimées automatiquement après la durée de « Conservation ».",
+    "history_other": "Pointages affichés et rapportés : les {{count}} dernières années. Les plus anciens sont conservés et reviennent avec une offre supérieure. Positions et photos sont supprimées automatiquement après la durée de « Conservation ».",
+    "history_many": "Pointages affichés et rapportés : les {{count}} dernières années. Les plus anciens sont conservés et reviennent avec une offre supérieure. Positions et photos sont supprimées automatiquement après la durée de « Conservation »."
   },
   "retention": {
     "title": "Conservation des données",

@@ -72,7 +72,8 @@ describe("allowance prices", () => {
     // Filling again leaves the started day alone; the employee's own edit stands.
     const again = await t.as<{ r: { filled: number } }>(engineer.authId, "select public.fill_prosm_time_allowances(current_date - 1, current_date + 1) as r");
     expect(again.rows![0].r.filled).toBe(0);
-    expect((await t.as(engineer.authId, "select public.upsert_prosm_time_allowance_entry(current_date, 0, 250, 30, 40, 120, 0, null)")).error).toBeNull();
+    expect((await t.as(engineer.authId, // the shift's own day (the site's time zone can already be tomorrow in UTC)
+      "select public.upsert_prosm_time_allowance_entry((select entry_date from allowance_entries where user_id = public.current_prosm_time_user_id()), 0, 250, 30, 40, 120, 0, null)")).error).toBeNull();
     const [edited] = await t.su<{ meal_allowance: string; travel_allowance: string }>("select meal_allowance, travel_allowance from allowance_entries where user_id = $1", [engineer.userId]);
     expect(edited).toEqual({ meal_allowance: "0.00", travel_allowance: "120.00" });
   });

@@ -1,0 +1,60 @@
+{
+  "loadError": "无法加载日历。",
+  "genericError": "无法保存。",
+  "save": "保存",
+  "edit": "编辑",
+  "delete": "删除",
+  "from": "从",
+  "to": "至",
+  "weekdays": {
+    "0": "星期日",
+    "1": "星期一",
+    "2": "星期二",
+    "3": "星期三",
+    "4": "星期四",
+    "5": "星期五",
+    "6": "星期六"
+  },
+  "scope": {
+    "label": "适用于",
+    "organisation": "整个机构",
+    "site": "一个工地",
+    "person": "一个人"
+  },
+  "restDays": {
+    "title": "每周休息日",
+    "hint": "点击某一天，可设为休息日或工作日。休息日工作计为加班。没有自己设置的工地沿用机构的休息日（浅色显示）。",
+    "inherit": "同机构",
+    "none": "无休息日",
+    "useOrganisation": "使用机构的休息日",
+    "current": "机构：{{days}}"
+  },
+  "holidays": {
+    "title": "法定节假日",
+    "hint": "法定节假日工作计为加班；当天不计为缺勤或请假。",
+    "add": "添加节假日",
+    "editTitle": "编辑节假日",
+    "empty": "未来一年还没有节假日。",
+    "name": "名称",
+    "paid": "带薪",
+    "unpaid": "无薪",
+    "paidLabel": "带薪节假日",
+    "required": "请输入名称和日期。"
+  },
+  "exceptions": {
+    "title": "特殊日期",
+    "hint": "某天的工作时间不同（例如周四全员 16:00 下班），或某天放假，可针对机构、工地或个人。选择“不扣款”后，当天的迟到或早退不扣款。",
+    "add": "添加特殊日期",
+    "empty": "没有特殊日期。",
+    "dayOff": "放假",
+    "from": "{{time}} 起",
+    "to": "至 {{time}}",
+    "noDeduction": "不扣款",
+    "dayOffLabel": "放假一天",
+    "startTime": "开始时间（可选）",
+    "endTime": "结束时间（可选）",
+    "noDeductionLabel": "当天不扣款",
+    "reason": "原因（必填）",
+    "required": "请输入日期和原因。"
+  }
+}

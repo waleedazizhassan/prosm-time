@@ -1,0 +1,150 @@
+{
+  "common": {
+    "footer": "{{org}} · PROSM Time - eine automatische Nachricht des Zeiterfassungssystems.",
+    "signature": "PROSM Time",
+    "contacts": "Kontakt:",
+    "days_one": "{{count}} Tag",
+    "days_other": "{{count}} Tage"
+  },
+  "leave": {
+    "types": {
+      "annual": "Jahresurlaub",
+      "sick": "Krankheitsurlaub",
+      "unpaid": "Unbezahlter Urlaub",
+      "emergency": "Sonderurlaub",
+      "other": "Sonstiger Urlaub"
+    },
+    "unpaid": " (unbezahlt)",
+    "period": "{{from}} bis {{to}}",
+    "subject": "Urlaubsantrag - {{name}} - {{period}}",
+    "rows": {
+      "employee": "Mitarbeiter",
+      "type": "Urlaubsart",
+      "period": "Zeitraum",
+      "days": "Tage",
+      "reason": "Grund",
+      "sentTo": "Gesendet an",
+      "approvedBy": "Genehmigt von",
+      "cancelledBy": "Storniert von",
+      "declinedBy": "Abgelehnt von",
+      "note": "Hinweis",
+      "remaining": "Restguthaben {{type}}"
+    },
+    "answerEmployee": "Direkt dem Mitarbeiter antworten:",
+    "answerEmployeeShort": "Dem Mitarbeiter antworten:",
+    "answerDecider": "Der entscheidenden Person antworten:",
+    "viewMine": "Meinen Urlaub ansehen",
+    "request": {
+      "title": "Ein Urlaubsantrag wartet auf Ihre Prüfung",
+      "intro": "{{name}} hat {{type}} beantragt, {{period}}. Prüfen Sie den Antrag in der App.",
+      "action": "Antrag prüfen"
+    },
+    "sent": {
+      "title": "Ihr Urlaubsantrag wurde gesendet",
+      "intro": "Ihr Antrag ({{type}}, {{period}}) ging an {{to}}. Die Antwort kommt in diesem Verlauf."
+    },
+    "requestWithdrawn": {
+      "title": "Ein Urlaubsantrag wurde zurückgezogen",
+      "intro": "{{name}} hat den Antrag auf {{type}}, {{period}}, vor einer Antwort zurückgezogen. Von Ihnen ist nichts nötig.",
+      "copyTitle": "Ihr Urlaubsantrag wurde zurückgezogen",
+      "copyIntro": "Sie haben Ihren Antrag auf {{type}}, {{period}}, zurückgezogen; {{to}} wurde informiert."
+    },
+    "withdrawn": {
+      "title": "Ein genehmigter Urlaub wurde zurückgezogen",
+      "intro": "{{name}} hat den genehmigten {{type}}, {{period}}, zurückgezogen; die Tage sind wieder im Guthaben. Von Ihnen ist nichts nötig.",
+      "copyTitle": "Ihr Urlaub ist storniert",
+      "copyIntro": "Sie haben Ihren {{type}}, {{period}}, zurückgezogen; die Tage sind wieder in Ihrem Guthaben."
+    },
+    "approved": {
+      "title": "Ihr Urlaub ist genehmigt 🎉",
+      "intro": "Herzlichen Glückwunsch, {{name}}! Ihr {{type}} ist genehmigt, {{period}}. Schöne freie Tage.",
+      "introBalance": "Herzlichen Glückwunsch, {{name}}! Ihr {{type}} ist genehmigt, {{period}}; Ihr Restguthaben: {{remaining}}. Schöne freie Tage."
+    },
+    "cancelled": {
+      "title": "Ihr Urlaub ist storniert",
+      "intro": "Ihr genehmigter {{type}}, {{period}}, wurde storniert; die Tage sind wieder in Ihrem Guthaben."
+    },
+    "rejected": {
+      "title": "Ihr Urlaubsantrag wurde nicht genehmigt",
+      "intro": "Ihr Antrag auf {{type}}, {{period}}, wurde nicht genehmigt."
+    }
+  },
+  "invite": {
+    "subject": "Einladung zu {{org}} bei PROSM Time",
+    "title": "Sie sind zu {{org}} bei PROSM Time eingeladen",
+    "body": "Hallo {{name}}, Sie wurden eingeladen, {{org}} bei PROSM Time als {{role}} beizutreten. Geben Sie den Code unten in der App ein, um die Einladung anzunehmen und Ihr Konto einzurichten.",
+    "codeLabel": "Ihr Bestätigungscode:",
+    "expires_one": "Diese Einladung läuft in {{count}} Tag ab.",
+    "expires_other": "Diese Einladung läuft in {{count}} Tagen ab.",
+    "ignore": "Wenn Sie diese Einladung nicht erwartet haben, können Sie diese E-Mail ignorieren.",
+    "roles": {
+      "manager": "Manager / Standortleiter",
+      "supervisor": "Vorgesetzter / Teamleiter",
+      "employee": "Mitarbeiter",
+      "read_only": "Nur Lesen / Berichte"
+    },
+    "yourOrganization": "Ihre Organisation"
+  },
+  "reset": {
+    "subject": "Setzen Sie Ihr PROSM Time Passwort zurück",
+    "title": "Setzen Sie Ihr PROSM Time Passwort zurück",
+    "body": "Hallo {{name}}, wir haben eine Anfrage zum Zurücksetzen Ihres PROSM Time Passworts erhalten. Geben Sie den Code unten in der App ein, um ein neues zu wählen.",
+    "codeLabel": "Ihr Code zum Zurücksetzen:",
+    "expires_one": "Dieser Code läuft in {{count}} Minute ab.",
+    "expires_other": "Dieser Code läuft in {{count}} Minuten ab.",
+    "ignore": "Wenn Sie das nicht angefordert haben, ignorieren Sie diese E-Mail - Ihr Passwort bleibt unverändert.",
+    "there": ""
+  },
+  "trial": {
+    "licenseSubject": "Ihre PROSM Time Lizenz endet am {{date}}",
+    "licenseBody": "Die Lizenz von {{org}} (Lizenz {{license}}) endet {{when}}, am {{date}}.",
+    "licenseRenew": "Verlängern Sie sie vorher, damit die App weiterläuft; alle Ihre Daten bleiben erhalten:",
+    "whenDay": "morgen",
+    "whenWeek": "in einer Woche",
+    "whenMonth": "in einem Monat",
+    "endingSubject": "Ihre PROSM Time Testphase endet am {{date}}",
+    "endingBody": "Die PROSM Time Testphase von {{org}} endet am {{date}}. Ihre Daten bleiben erhalten und werden nicht gelöscht.",
+    "endingContinue": "Um weiterzumachen, wenden Sie sich an den Vertrieb, um die Lizenz zu verlängern (Lizenz {{license}}):",
+    "endedSubject": "Ihre PROSM Time Testphase ist beendet",
+    "endedBody": "Die PROSM Time Testphase von {{org}} ist beendet. Die Organisation ist jetzt schreibgeschützt: Alle sehen weiterhin alles, und alle Ihre Daten bleiben erhalten.",
+    "endedContinue": "Geben Sie nach der Anmeldung unter Einstellungen > Abonnement einen Aktivierungscode ein oder kontaktieren Sie uns, und alles läuft wie vorher (Lizenz {{license}}):"
+  },
+  "licence": {
+    "subject": "PROSM Time - Lizenz von {{org}} geändert",
+    "greeting": "Hallo {{name}},",
+    "intro": "PROSM hat die Lizenz von {{org}} in PROSM Time geändert (Nummer {{license}}):",
+    "noChanges": "Die Lizenzdaten wurden aktualisiert.",
+    "applied": "Die Änderung gilt bereits in der App. Die neue Lizenz ist als PDF angehängt; Sie finden sie auch unter Einstellungen > Abonnement.",
+    "contact": "Fragen:",
+    "pdf": {
+      "title": "PROSM Time Lizenzzertifikat",
+      "tagline": "Zeiterfassung, der Sie vertrauen - vor Ort, pünktlich.",
+      "licenseNumber": "Lizenznummer: {{license}}",
+      "plan": "Paket",
+      "status": "Status",
+      "users": "Benutzer",
+      "devices": "Geräte",
+      "validUntil": "Gültig bis",
+      "whatChanged": "Was sich geändert hat",
+      "footer": "Automatisch von PROSM bei der Lizenzänderung ausgestellt. Fragen: support@prosm.net",
+      "issued": "Ausgestellt am {{date}} UTC",
+      "unlimited": "Unbegrenzt",
+      "noEnd": "Ohne Enddatum",
+      "usersOf": "{{used}} von {{max}}",
+      "planAll": "Alles enthalten",
+      "change": {
+        "users": "Benutzer",
+        "devices": "Geräte",
+        "expiry": "Enddatum",
+        "status": "Status",
+        "plan": "Paket"
+      },
+      "statuses": {
+        "ACTIVE": "Aktiv",
+        "SUSPENDED": "Gesperrt",
+        "EXPIRED": "Abgelaufen",
+        "REVOKED": "Widerrufen"
+      }
+    }
+  }
+}

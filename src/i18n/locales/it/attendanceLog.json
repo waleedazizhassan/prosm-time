@@ -19,7 +19,8 @@
     "clockOutAt": "Uscita",
     "status": "Stato",
     "workedHours": "Ore lavorate",
-    "notes": "Note"
+    "notes": "Note",
+    "date": "Data"
   },
   "status": {
     "clocked_in": "Presente",

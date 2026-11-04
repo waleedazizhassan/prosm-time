@@ -4,15 +4,15 @@
   "guides": {
     "gettingStarted": {
       "title": "Getting Started",
-      "body": "Sign in with the email and password your administrator set up for you. The first time (and whenever they change), you're shown what PROSM Time records about you and asked to acknowledge the Privacy Policy and Terms of Use. On the Dashboard, use Clock In to start your shift and Clock Out to end it - a live map shows your current position and, when relevant, the site's work area. The app opens in your device's language when it's one of the five supported; you can change it any time from the user menu. Employees open to their own home page: clock in and out, their hours today, this week (from Sunday) and this month, and links to their attendance record, allowances, timesheets and leave. The Owner, Managers and Supervisors open to the Dashboard. The Owner doesn't clock in or out."
+      "body": "Sign in with the email and password your administrator set up for you. The first time (and whenever they change), you're shown what PROSM Time records about you and asked to acknowledge the Privacy Policy and Terms of Use. On the Dashboard, use Clock In to start your shift and Clock Out to end it - a live map shows your current position and, when relevant, the site's work area. The app opens in your device's language when it's one of the nine supported; you can change it any time from the user menu. Employees open to their own home page: clock in and out, their hours today, this week (from Sunday) and this month, and links to their attendance record, allowances, timesheets and leave. The Owner, Managers and Supervisors open to the Dashboard. The Owner doesn't clock in or out."
     },
     "attendance": {
       "title": "Clocking In & Out",
-      "body": "Choose your site (and project, if applicable) before clocking in - or leave Site empty and describe where you actually are if you're not at a registered location. Some sites require a photo, held steady for a moment so the app can confirm it's a live capture, not an old or static image. Right before anything is submitted, a confirmation screen shows exactly what's about to be recorded - your photo (if one was taken), your GPS location, the site/workplace and the time - with two optional fields, a note and your activity, which your manager can see. The time recorded is always the server's time, not your phone's clock. Clocking in is blocked on a day your approved leave covers. On the phone app, PROSM Time also reminds you itself - even when the app is closed: shortly after your shift's end if you're still clocked in, and a few minutes before your next scheduled shift."
+      "body": "Choose your site (and project, if applicable) before clocking in - or leave Site empty and describe where you actually are if you're not at a registered location. Some sites require a photo, held steady for a moment so the app can confirm it's a live capture, not an old or static image. Right before anything is submitted, a confirmation screen shows exactly what's about to be recorded - your photo (if one was taken), your GPS location, the site/workplace and the time - with two optional fields, a note and your activity, which your manager can see. The time recorded is always the server's time, not your phone's clock. Clocking in is blocked on a day your approved leave covers. On the phone app, PROSM Time also reminds you itself - even when the app is closed: shortly after your shift's end if you're still clocked in, and a few minutes before your next scheduled shift. If your organisation turned it on, opening the app inside a registered site asks “You are at …. Clock in now?”; nothing is recorded without your answer, and if you agree you go through the usual steps (and the photo, if required). If your site has end-of-shift tasks, their list appears before you clock out."
     },
     "walkInGeofence": {
       "title": "Working at a Site You're Not Assigned To",
-      "body": "If you're physically inside a registered site's work area today but aren't assigned there, it's suggested to you in the Site list (marked \"you're here today\"). Clocking in with no site at all still works too: your clock-in point becomes the centre of your organisation's no-site radius for the rest of that shift."
+      "body": "The site list starts with the best match for you: the site you are assigned to; if you are not assigned and stand inside a registered site, that site, marked “you are here today”; otherwise “No site”. The other sites follow, nearest first. Clocking in without a site stays available, and your clock-in point then becomes the centre of the organisation’s work area for the rest of the shift."
     },
     "siteChange": {
       "title": "Changing Sites Mid-Shift",
@@ -36,7 +36,7 @@
     },
     "allowances": {
       "title": "Allowances",
-      "body": "Press \"Fill from my attendance\": every day you attended is filled from your allowance prices (that day's site, then your category, then your own prices). Overtime is paid from the exact minutes (15 minutes at 100 an hour = 25), and hours still waiting for a manager's review are not counted. Add only what has no price, such as travel, check the totals and submit; your manager approves or returns it with a note. While reviewing, a manager with the right permission can change a line on the sheet - each change needs a reason, the totals update at once, and the change (before, after, who, why) is kept; nothing can be changed once the sheet is approved, unless an approved sheet is reopened with a reason. The PDF marks every changed value with *, lists the changes, highlights public holidays and shows any unpaid-leave deductions (taken from pay, not from allowances). Prices are set under Allowances > Prices: per site, per employee category and per person, plus the overtime hour and the extra day."
+      "body": "Press \"Fill from my attendance\": every day you attended is filled from your allowance prices (that day's site, then your category, then your own prices). Overtime is paid from the exact minutes (15 minutes at 100 an hour = 25), and hours still waiting for a manager's review are not counted. Add only what has no price, such as travel, check the totals and submit; your manager approves or returns it with a note. While reviewing, a manager with the right permission can change a line on the sheet - each change needs a reason, the totals update at once, and the change (before, after, who, why) is kept; nothing can be changed once the sheet is approved, unless an approved sheet is reopened with a reason. The PDF marks every changed value with *, lists the changes, highlights public holidays and shows any unpaid-leave deductions (taken from pay, not from allowances). Prices are set under Allowances > Prices: per site, per employee category and per person, plus the overtime hour and the extra day. A day without attendance (travel, an errand) can be given its site - in its cell or its detail - and is priced at that site. \"Apply the current prices\" prices your open days again after the prices change. The sheet also downloads as an Excel file."
     },
     "kiosk": {
       "title": "Kiosk Mode",
@@ -44,7 +44,7 @@
     },
     "reportsCenter": {
       "title": "Reports Center",
-      "body": "Pick a report type, a date range and, where relevant, an employee or site, then export it as a PDF. Reports include Attendance Record (offline device times are marked), Allowances, Workforce, Contractor, Site, Late Arrivals, Missed Checkouts, Leave Conflicts, Manager Overrides and Location Violations - which now lists being outside the work area (with the employee's reason and review status), implausible locations and fake locations together. A Manager sees only the sites they manage; the Owner sees the whole organisation. Next to every PDF download there is a Print button. In the PDF, a page never cuts through a row, the column headings repeat on each page and the pages are numbered."
+      "body": "Pick a report type, a date range and, where relevant, an employee or site, then export it as a PDF. Reports include Attendance Record (offline device times are marked), Allowances, Workforce, Contractor, Site, Late Arrivals, Missed Checkouts, Leave Conflicts, Manager Overrides and Location Violations - which now lists being outside the work area (with the employee's reason and review status), implausible locations and fake locations together. A Manager sees only the sites they manage; the Owner sees the whole organisation. Next to every PDF download there is a Print button. In the PDF, a page never cuts through a row, the column headings repeat on each page and the pages are numbered. The same page has payroll export to Excel or CSV with saved templates, labour cost from hourly rates, and each project’s budget against what was spent."
     },
     "sites": {
       "title": "Sites (Administrators)",
@@ -56,7 +56,7 @@
     },
     "settingsCenter": {
       "title": "Settings (Owner)",
-      "body": "Settings holds only what applies to the whole organisation: the work-area radius for people who clock in without a site; whether a clock-in or clock-out from a fake location is refused; and the defaults a new site starts from. A site's own rules are on that site's page."
+      "body": "Settings (for the owner) come in sections: Subscription (plan and activation code) first, then Sites and clocking (the work area for clocking without a site, refusing fake locations, the clock-in question when the app opens inside a site, and the values every new site starts with), then Time, then Leave and its types, then Data and privacy (retention). Each site’s own rules are on that site’s page."
     },
     "leave": {
       "title": "Leave",
@@ -64,7 +64,7 @@
     },
     "schedule": {
       "title": "Shift Roster",
-      "body": "See your own upcoming shifts on the Shift Roster page. Managers with scheduling authority can create shift templates per site and assign people to shifts, including overnight shifts (marked \"(+1)\"); overlapping shifts are refused automatically."
+      "body": "See your upcoming shifts on the Schedule page. Authorised managers create ready-made shifts per site and assign people, including overnight shifts (marked “(+1)”); overlapping shifts are refused. The same page has open shifts (a manager posts a shift with no one on it, people at the site ask for it, the manager picks one), swapping a shift with a colleague with the manager’s approval, the schedule’s estimated cost, and each site’s end-of-shift tasks."
     },
     "calendar": {
       "title": "Hijri or Gregorian Calendar",
@@ -76,7 +76,7 @@
     },
     "getTheApp": {
       "title": "Getting PROSM Time",
-      "body": "On an Android phone, download the APK from prosm.net and install it - the app tells you when an update is ready. On any computer, tablet or iPhone, open https://time.prosm.net in the browser (you can add it to the home screen); it updates itself. Both are the same PROSM Time with the same account."
+      "body": "On an Android phone: download the APK from prosm.net and install it (Google Play coming soon); that version tells you about updates itself. On any computer, tablet or iPhone: open https://time.prosm.net in the browser (you can add it to the home screen); it updates itself. They are all the same PROSM Time with the same account."
     },
     "liveMap": {
       "title": "Live Map",
@@ -96,7 +96,7 @@
     },
     "privacy": {
       "title": "Your Privacy",
-      "body": "PROSM Time records your location when you clock in or out, take a break, change site or send an SOS. Only if your organisation turns on presence monitoring is it also recorded about every 5 minutes during your shift - on Android also in the background, after telling you first and with a visible notification - and it always stops when you clock out. A photo is taken only where your site requires one; there's no facial recognition. Your organisation's managers see your records. Location samples are deleted after 30 days and photos after 90 days. You can withdraw location or camera permission in your device settings at any time. For your rights over your data, ask your organisation first, or write to info@prosm.net. Full details are in the Privacy Policy and Terms of Use below."
+      "body": "PROSM Time records your location when you clock in or out, take a break, change site or send an SOS. Only if your organisation turns on presence monitoring is it also recorded about every 5 minutes during your shift - on Android also in the background, after telling you first and with a visible notification - and it always stops when you clock out. A photo is taken only where your site requires one; there's no facial recognition. Your organisation's managers see your records. Location samples are deleted after 30 days and photos after 90 days. You can withdraw location or camera permission in your device settings at any time. For your rights over your data, ask your organisation first, or write to info@prosm.net. Full details are in the Privacy Policy and Terms of Use below. The owner can shorten retention in Settings > Data and privacy. When your account signs in from a new device, you are alerted, and so is the owner."
     },
     "workCalendar": {
       "title": "Work Calendar: Holidays, Rest Days and Special Days",
@@ -120,7 +120,7 @@
     },
     "managerDashboard": {
       "title": "The Dashboard (Owner and managers)",
-      "body": "The Owner and whoever holds \"View the dashboard\" see: an SOS bar (until someone acknowledges it), chips for what is waiting (only when there is something), the figures with a comparison to the previous period only when there is data for it, the sites map with each site's work area and who is there now, the sites table with external workers under each site, the approvals queue, people by role, scheduled vs actual, allowances and estimated cost (only with \"View estimated cost\") and the action log. Choose the organisation, your sites or yourself, and the period; the map and \"here now\" are live and not filtered by period. It refreshes every minute. \"Customise widgets\" hides or reorders cards, saved to your account. Each figure opens the people behind it - here now, hours by person, lateness, absent and on leave, overtime by person - with a button to the full page."
+      "body": "The Owner and whoever holds \"View the dashboard\" see: an SOS bar (until someone acknowledges it), chips for what is waiting (only when there is something), the figures with a comparison to the previous period only when there is data for it, the sites map with each site's work area and who is there now, the sites table with external workers under each site, the approvals queue, people by role, scheduled vs actual, allowances and estimated cost (only with \"View estimated cost\") and the action log. Choose the organisation, your sites or yourself, and the period; the map and \"here now\" are live and not filtered by period. It refreshes every minute. \"Customise widgets\" hides or reorders cards, saved to your account. Each figure opens the people behind it - here now, hours by person, lateness, absent and on leave, overtime by person - with a button to the full page. The Insights card shows punctuality, lateness and absence. The owner gets a morning summary at 7 site time, an alert when someone misses a shift, and an alert when someone is still clocked in after their shift (15 minutes by default, set in Settings)."
     },
     "peopleAndPhotos": {
       "title": "People, Roles and Profile Photos",
@@ -129,6 +129,10 @@
     "phoneNotifications": {
       "title": "Notifications and Reminders on the Phone",
       "body": "All PROSM Time notifications carry the same small PROSM icon. Your own clock-in/out reminders are set from the dashboard card. Android 14 and later may not allow exact alarms; a reminder can then arrive a few minutes late - the card says so and has a button to allow exact alarms. If location tracking cannot start (permission refused or location turned off), the app tells you and offers to try again or open the settings; your clock-in itself is never lost. The update notice can be swiped away."
+    },
+    "subscription": {
+      "title": "Plan and subscription (owner)",
+      "body": "Settings > Subscription shows your plan and what it includes, employees against the limit, sites, the end date and how far back records are shown. Any change or renewal of the licence is made by PROSM: you get a notification and an email with the new licence as a PDF, and it applies at once. The activation code box appears only on a trial or after the licence ended. After it ends and the grace period passes, the organisation becomes read-only: everyone sees everything, changes and clocking are paused until renewal, and nothing is deleted."
     }
   },
   "faq": {
@@ -175,7 +179,7 @@
     },
     "q11": {
       "question": "How does the 30-day demo work?",
-      "answer": "On the Welcome page, Use the demo version opens the usual activation without the activation code; your organisation and owner are created at once. The trial lasts 30 days (server time) and a bar shows the days left. A week before the end the owner gets a notice and an email with sales@prosm.net, info@prosm.net and support@prosm.net. When it ends, the app pauses and nothing is deleted: enter an activation code on the page that appears, or ask PROSM to renew the license - then everything continues with all your data. One trial per email."
+      "answer": "On the welcome page, “Use the trial” opens the usual activation steps without a code, creating the organisation and its owner at once. The trial lasts 30 days (server time) and a bar shows the days left. A week before the end the owner gets a notification and an email with sales@prosm.net, info@prosm.net and support@prosm.net. When it ends the organisation becomes read-only, with nothing deleted: enter an activation code in Settings > Subscription, or ask PROSM to renew the licence, and everything works as before. One trial per email."
     },
     "q12": {
       "question": "Does attendance work without internet?",
@@ -187,7 +191,7 @@
     },
     "q14": {
       "question": "Who can see my location and photos, and for how long?",
-      "answer": "You, your site's managers and your organisation's Owner. Location samples taken during a shift are deleted after 30 days and attendance photos after 90 days. The live check keeps no face data - only the photo itself and the result. Your profile photo is shown only inside your organisation. The Privacy Policy explains the rest."
+      "answer": "You, your site managers and your organisation’s owner. Location samples during a shift are deleted after 30 days and attendance photos after 90 days, or sooner if the owner shortened it. The live check keeps no face data — only the photo itself and the result. Your profile photo shows only inside your organisation. The privacy policy covers the rest."
     },
     "q15": {
       "question": "Does SOS call the ambulance or the police?",
@@ -199,8 +203,5 @@
     "body": "For product help or support, contact us at:",
     "infoLabel": "General inquiries:",
     "supportLabel": "Support:"
-  },
-  "about": {
-    "title": "About the app"
   }
 }

@@ -19,7 +19,8 @@
     "clockOutAt": "وقت الانصراف",
     "status": "الحالة",
     "workedHours": "ساعات العمل",
-    "notes": "ملاحظات"
+    "notes": "ملاحظات",
+    "date": "التاريخ"
   },
   "status": {
     "clocked_in": "حاضر",

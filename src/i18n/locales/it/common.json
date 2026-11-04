@@ -289,7 +289,8 @@
     "invalidActivationCode": "Il codice è errato o già utilizzato.",
     "locationRequired": "Non è possibile registrare senza una posizione valida. Attiva la posizione e riprova.",
     "rejectReasonRequired": "Indica il motivo, così il dipendente lo vede.",
-    "organizationReadOnly": "La tua organizzazione è in sola lettura fino al rinnovo della licenza."
+    "organizationReadOnly": "La tua organizzazione è in sola lettura fino al rinnovo della licenza.",
+    "featureNotInPlan": "Questa funzione non è inclusa nel piano della tua organizzazione."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",
@@ -340,7 +341,7 @@
     "tagline": "Presenze affidabili - in sede, in orario.",
     "point1": "Timbratura solo sul luogo di lavoro, con GPS e foto",
     "point2": "Funziona offline e conserva ora e luogo reali",
-    "point3": "Fogli ore, indennità e report in cinque lingue"
+    "point3": "Fogli ore, indennità e report in nove lingue"
   },
   "dateTime": {
     "date": "Data",
@@ -361,5 +362,10 @@
     "supervisor": "Supervisore",
     "employee": "Dipendente",
     "read_only": "Osservatore"
+  },
+  "planLocked": {
+    "text": "Questa funzione fa parte del piano {{plan}}.",
+    "seePlan": "Vedi il piano",
+    "askOwner": "Chiedi al titolare."
   }
 }

@@ -1,0 +1,130 @@
+{
+  "title": "考勤表",
+  "subtitle": "审核、提交、批准和更正每月考勤周期。",
+  "loadError": "无法加载考勤表。",
+  "generateError": "无法生成此考勤表。",
+  "viewPhoto": "查看照片",
+  "photoLoadError": "无法加载这张照片。",
+  "submitError": "无法提交此考勤表。",
+  "approveError": "无法审核此考勤表。",
+  "correctionRequestError": "无法申请此更正。",
+  "correctionReviewError": "无法审核此更正。",
+  "columns": {
+    "employee": "员工",
+    "period": "周期",
+    "date": "日期",
+    "site": "工地",
+    "status": "状态",
+    "worked": "工作时长",
+    "overtime": "加班",
+    "leave": "请假",
+    "leaveDays": "{{count}} 天",
+    "clockIn": "上班",
+    "clockOut": "下班"
+  },
+  "status": {
+    "draft": "草稿",
+    "submitted": "已提交",
+    "approved": "已批准并锁定",
+    "rejected": "已拒绝"
+  },
+  "generate": {
+    "title": "生成考勤表",
+    "employeeLabel": "员工",
+    "periodStartLabel": "周期开始",
+    "periodEndLabel": "周期结束",
+    "action": "生成"
+  },
+  "pendingApprovals": {
+    "title": "待批准",
+    "empty": "没有等待批准的考勤表。"
+  },
+  "pendingCorrections": {
+    "title": "待审核的更正申请",
+    "empty": "没有等待审核的更正申请。",
+    "reviewAction": "审核",
+    "reviewTitle": "更正申请"
+  },
+  "myTimesheets": {
+    "title": "我的考勤表",
+    "empty": "还没有为您生成考勤表。每个工资周期结束后，管理员会生成考勤表。"
+  },
+  "detail": {
+    "status": "状态",
+    "worked": "工作时长",
+    "breaks": "休息",
+    "overtime": "加班",
+    "leave": "请假",
+    "exceptions": "例外",
+    "corrections": "更正",
+    "noEntries": "此周期没有考勤记录。",
+    "stillOpen": "仍在进行",
+    "notesLabel": "备注（可选）",
+    "correctionReasonLabel": "更正原因",
+    "submitAction": "提交审批",
+    "approveAction": "批准",
+    "rejectAction": "拒绝",
+    "requestCorrectionAction": "申请更正",
+    "submitCorrectionAction": "提交更正申请",
+    "viewReportAction": "查看报告"
+  },
+  "report": {
+    "title": "考勤表报告",
+    "loadError": "无法加载此报告。",
+    "backLink": "返回考勤表",
+    "exportCsvAction": "导出 CSV",
+    "exportPdfAction": "导出 PDF",
+    "printAction": "打印 / 另存为 PDF",
+    "summaryTitle": "摘要",
+    "organization": "机构",
+    "employee": "员工",
+    "status": "状态",
+    "worked": "工作时长",
+    "breaks": "休息",
+    "overtime": "加班",
+    "approver": "审批人",
+    "approvedAt": "批准时间",
+    "lockStatus": "锁定状态",
+    "locked": "已锁定",
+    "unlocked": "未锁定",
+    "entriesTitle": "考勤记录",
+    "leaveTitle": "请假",
+    "noLeave": "此周期没有已批准的请假。",
+    "leaveDaysLabel": "请假天数",
+    "leaveDays": "{{count}} 天",
+    "exceptionsTitle": "地理围栏例外（GPS 校验摘要）",
+    "noExceptions": "此周期没有地理围栏例外。",
+    "correctionsTitle": "更正",
+    "noCorrections": "此周期没有更正。",
+    "timesheetLevelCorrection": "考勤表更正",
+    "evidenceTitle": "拍照凭证",
+    "noEvidence": "此周期没有拍照凭证。",
+    "viewEvidence": "查看",
+    "approvalTrailTitle": "审批记录",
+    "noApprovalTrail": "还没有审批活动。",
+    "columns": {
+      "clockIn": "上班",
+      "clockOut": "下班",
+      "site": "工地",
+      "project": "项目",
+      "when": "时间",
+      "distance": "距离",
+      "category": "类别",
+      "reason": "原因",
+      "kind": "类型",
+      "action": "操作",
+      "notes": "备注"
+    },
+    "meters": "{{value}} 米",
+    "photo": "照片"
+  },
+  "values": {
+    "leaveType": {
+      "annual": "年假",
+      "sick": "病假",
+      "unpaid": "无薪假",
+      "emergency": "紧急事假",
+      "other": "其他"
+    }
+  }
+}

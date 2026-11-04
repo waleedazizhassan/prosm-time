@@ -1,0 +1,273 @@
+{
+  "title": "Informes",
+  "subtitle": "Saca el informe que necesites para cualquier intervalo de fechas.",
+  "loadError": "No se pudieron cargar los datos de este informe.",
+  "types": {
+    "attendance": "Registro de asistencia",
+    "allowances": "Hoja combinada de pluses",
+    "timesheets": "Hojas de horas",
+    "timesheet": "Hoja de horas",
+    "workforce": "Empleados de la empresa",
+    "contractor": "Personal temporal",
+    "site": "Resumen por sede",
+    "late": "Llegadas tarde",
+    "missingCheckouts": "Salidas sin fichar",
+    "leaveConflicts": "Conflictos con ausencias",
+    "absences": "Faltas",
+    "managerOverrides": "Intervenciones de responsables",
+    "locationViolations": "Incidencias de ubicación",
+    "sos": "Emergencias (SOS)",
+    "dashboard": "Panel",
+    "auditLog": "Registro de acciones",
+    "laborCost": "Coste laboral"
+  },
+  "timesheetsHint": "Las hojas de horas se generan y aprueban por empleado y período, no por intervalo de fechas.",
+  "timesheetsLink": "Ir a Hojas de horas",
+  "filters": {
+    "fromLabel": "Desde",
+    "toLabel": "Hasta",
+    "employeeLabel": "Empleado",
+    "allEmployees": "Todos los empleados",
+    "siteLabel": "Sede",
+    "allSites": "Todas las sedes"
+  },
+  "loadingRows": "Cargando…",
+  "rowCount": "{{count}} fila(s) listas para exportar.",
+  "exportAction": "Exportar PDF",
+  "empty": "No hay filas en este intervalo.",
+  "columns": {
+    "workforce": {
+      "name": "Nombre",
+      "email": "Correo",
+      "role": "Rol",
+      "owner": "Propietario",
+      "sites": "Sedes",
+      "status": "Estado"
+    },
+    "contractor": {
+      "name": "Trabajador",
+      "number": "Número",
+      "site": "Sede",
+      "clockIn": "Entrada",
+      "clockOut": "Salida"
+    },
+    "site": {
+      "name": "Sede",
+      "employees": "Empleados",
+      "hours": "Horas totales",
+      "exceptions": "Excepciones"
+    },
+    "late": {
+      "name": "Empleado",
+      "site": "Sede",
+      "shiftStart": "Inicio del turno",
+      "clockIn": "Entrada",
+      "minutesLate": "Minutos de retraso",
+      "date": "Fecha",
+      "employeeTotal": "Total del empleado (min)"
+    },
+    "missingCheckouts": {
+      "name": "Empleado",
+      "site": "Sede",
+      "clockIn": "Entrada",
+      "hoursOpen": "Horas abierta",
+      "status": "Estado",
+      "stillOpen": "Aún abierta",
+      "eventuallyClosed": "Cerrada después",
+      "states": {
+        "open": "Aún abierta",
+        "pending_review": "Cerrada automáticamente, pendiente de revisión (no cuenta)",
+        "reviewed": "Revisada por el responsable",
+        "auto_closed": "Cerrada automáticamente",
+        "closed": "Cerrada después"
+      }
+    },
+    "leaveConflicts": {
+      "name": "Empleado",
+      "site": "Sede",
+      "clockIn": "Entrada",
+      "leaveType": "Tipo de ausencia",
+      "leaveRange": "Fechas de la ausencia"
+    },
+    "absences": {
+      "name": "Empleado",
+      "site": "Sede",
+      "date": "Fecha",
+      "shift": "Turno programado"
+    },
+    "managerOverrides": {
+      "actor": "Realizada por",
+      "subject": "Afectado",
+      "action": "Acción",
+      "reason": "Motivo",
+      "when": "Cuándo"
+    },
+    "locationViolations": {
+      "name": "Empleado",
+      "site": "Sede",
+      "speed": "Velocidad implícita",
+      "distance": "Distancia",
+      "when": "Cuándo",
+      "type": "Tipo",
+      "reason": "Motivo del empleado",
+      "status": "Revisión",
+      "types": {
+        "outside_work_area": "Fuera de la zona de trabajo",
+        "implausible_location": "Ubicación imposible",
+        "mock_location": "Ubicación falsa (aplicación de GPS)"
+      },
+      "statuses": {
+        "pending_reason": "Esperando el motivo",
+        "pending_review": "Esperando revisión",
+        "resolved": "Revisada",
+        "approved": "Aprobada",
+        "rejected": "Rechazada",
+        "acknowledged": "Vista"
+      }
+    },
+    "sos": {
+      "name": "Empleado",
+      "site": "Sede",
+      "triggeredAt": "Activada",
+      "status": "Estado",
+      "active": "Activa",
+      "resolved": "Resuelta"
+    },
+    "laborCost": {
+      "project": "Proyecto",
+      "site": "Sede",
+      "name": "Empleado",
+      "hours": "Horas",
+      "cost": "Coste",
+      "noRate": "Sin tarifa"
+    }
+  },
+  "values": {
+    "memberStatus": {
+      "active": "Activo",
+      "invited": "Invitado",
+      "suspended": "Suspendido"
+    },
+    "leaveType": {
+      "annual": "Vacaciones",
+      "sick": "Enfermedad",
+      "unpaid": "No retribuida",
+      "emergency": "Emergencia",
+      "other": "Otra"
+    },
+    "overrideAction": {
+      "ADMIN_CLOCK_IN_ON_BEHALF": "Entrada fichada en su nombre",
+      "ADMIN_CLOCK_OUT_ON_BEHALF": "Salida fichada en su nombre",
+      "ADMIN_CLOCK_OUT_SITE_WORKER_ON_BEHALF": "Salida de subcontrata fichada en su nombre",
+      "attendance": {
+        "override_block": "Bloqueo de entrada anulado",
+        "review_pending_hours": "Horas pendientes revisadas",
+        "extend_session": "Jornada prolongada",
+        "overtime_approved": "Horas extra aprobadas",
+        "day_adjusted": "Día ajustado",
+        "permission_granted": "Permiso añadido por el responsable"
+      },
+      "allowances": {
+        "edit_during_review": "Plus editado durante la revisión",
+        "reopen_approved": "Hoja de pluses aprobada reabierta"
+      },
+      "leave": {
+        "approved_cancelled": "Ausencia aprobada cancelada",
+        "deduction_set": "Descuento de ausencia fijado",
+        "deduction_changed": "Descuento de ausencia cambiado"
+      }
+    }
+  },
+  "recentExports": {
+    "title": "Exportaciones recientes",
+    "empty": "Todavía no hay exportaciones: cada PDF que exportes se guarda aquí automáticamente.",
+    "typeColumn": "Tipo",
+    "fileColumn": "Archivo",
+    "periodColumn": "Período",
+    "exportedByColumn": "Exportado por",
+    "createdAtColumn": "Exportado",
+    "downloadAction": "Descargar"
+  },
+  "ownExportsHint": "Tu registro de asistencia, tus pluses y tus hojas de horas se descargan e imprimen desde sus propias páginas. Cada PDF que exportas se guarda aquí, para volver a descargarlo cuando quieras.",
+  "payroll": {
+    "title": "Exportación para nóminas",
+    "subtitle": "Una fila por persona para el período, para tu gestoría. Suma lo que tiene la aplicación y no calcula ningún salario.",
+    "allColumns": "Todas las columnas",
+    "template": "Plantilla",
+    "templateName": "Nombre de la plantilla nueva",
+    "saveTemplate": "Guardar plantilla",
+    "deleteTemplate": "Eliminar plantilla",
+    "templateFailed": "No se pudo guardar esta plantilla.",
+    "excel": "Descargar Excel",
+    "csv": "Descargar CSV",
+    "periodTooLong": "Elige un período de 3 meses como máximo.",
+    "columns": {
+      "name": "Nombre",
+      "email": "Correo",
+      "daysWorked": "Días trabajados",
+      "workedHours": "Horas trabajadas",
+      "overtimeHours": "Horas extra",
+      "weightedOvertimeHours": "Horas extra con coeficientes",
+      "lateMinutes": "Minutos de retraso",
+      "earlyLeaveMinutes": "Minutos de salida anticipada",
+      "deductionMinutes": "Minutos de descuento",
+      "absenceDays": "Días de falta",
+      "paidLeaveDays": "Días de ausencia retribuida",
+      "unpaidLeaveDays": "Días de ausencia no retribuida",
+      "leaveDeduction": "Descuento por ausencia no retribuida",
+      "allowances": "Pluses",
+      "overtimeAmount": "Importe de horas extra y días extra",
+      "currency": "Moneda"
+    }
+  },
+  "budgets": {
+    "title": "Presupuestos de proyectos",
+    "subtitle": "Lo que ha costado hasta ahora la mano de obra de cada proyecto, frente a su presupuesto.",
+    "project": "Proyecto",
+    "spent": "Mano de obra hasta ahora",
+    "budget": "Presupuesto",
+    "used": "Consumido",
+    "save": "Guardar",
+    "placeholder": "Fijar",
+    "invalid": "Escribe un número o déjalo vacío.",
+    "failed": "No se pudo guardar el presupuesto.",
+    "unpriced": "Las horas de personas sin tarifa no entran en el coste."
+  },
+  "dailySummary": {
+    "loadError": "No se pudo cargar el resumen.",
+    "ownerOnly": "El resumen diario es para el propietario de la organización.",
+    "day": "Día mostrado",
+    "previousDay": "Día anterior",
+    "nextDay": "Día siguiente",
+    "yesterday": "Ayer",
+    "today": "Hoy",
+    "worked": "Trabajaron",
+    "totalHours": "Horas totales",
+    "late": "Llegaron tarde",
+    "noShows": "Faltaron a su turno",
+    "onLeave": "De ausencia",
+    "peopleTitle": "Quién trabajó",
+    "nobodyWorked": "Nadie fichó la entrada ese día.",
+    "noShowsTitle": "Faltaron a un turno programado",
+    "noNoShows": "Nadie faltó a su turno.",
+    "leaveTitle": "De ausencia",
+    "noLeave": "Nadie estaba de ausencia.",
+    "waitingTitle": "Pendiente ahora",
+    "waitingHint": "Son las cifras de hoy, no del día mostrado.",
+    "waitingLeave": "Solicitudes de ausencia: {{count}}",
+    "waitingExceptions": "Excepciones: {{count}}",
+    "clockedInNow": "Dentro ahora: {{count}}",
+    "noSite": "Sin sede",
+    "stillIn": "Sigue dentro",
+    "autoClosed": "cerrada automáticamente",
+    "lateBy": "tarde {{time}}",
+    "columns": {
+      "name": "Nombre",
+      "site": "Sede",
+      "in": "Entrada",
+      "out": "Salida",
+      "hours": "Horas",
+      "late": "Retraso"
+    }
+  }
+}

@@ -106,7 +106,10 @@
     "invalid": "Bitte Zahlen ab 0 eingeben.",
     "genericError": "Speichern fehlgeschlagen.",
     "saved": "Gespeichert.",
-    "save": "Speichern"
+    "save": "Speichern",
+    "alertLabel": "Überstunden-Hinweis (Minuten nach Schichtende)",
+    "alertHint": "Sie werden benachrichtigt, wenn jemand so viele Minuten nach Schichtende noch eingestempelt ist. Standard 15; eine negative Zahl warnt vor dem Ende.",
+    "alertSaved": "Gespeichert."
   },
   "leaveTypes": {
     "title": "Urlaubsarten",
@@ -136,7 +139,8 @@
     "requiresDocument": "Nachweis erforderlich",
     "active": "Verwendet",
     "invalidTiers": "Jahre:Tage durch Kommas getrennt eingeben.",
-    "genericError": "Speichern fehlgeschlagen."
+    "genericError": "Speichern fehlgeschlagen.",
+    "medicalReportNote": "Mit ärztlichem Attest."
   },
   "siteFocus": {
     "backToSite": "← Zurück zum Standort",
@@ -156,11 +160,37 @@
     "redeemed": "Der Code ist aktiviert.",
     "redeemFailed": "Der Code ist falsch oder bereits verwendet.",
     "names": {
-      "legacy": "Ihr aktueller Tarif",
+      "legacy": "Alles (Kunde von vor den Paketen)",
       "starter": "Starter",
       "business": "Business",
       "pro": "Pro"
-    }
+    },
+    "includes": "Was Ihr Paket enthält",
+    "always": "In jedem Paket: Stempeln am Standort, Arbeitsbereich, Foto, offline arbeiten, Karte, Basisberichte und 9 Sprachen.",
+    "included": "enthalten",
+    "notIncluded": "nicht in Ihrem Paket",
+    "features": {
+      "on_behalf": "Stempeln für Mitarbeiter",
+      "kiosk": "Kiosk und externe Kräfte",
+      "leave": "Urlaub",
+      "allowances": "Zulagen, Abrechnungen und Freigaben",
+      "export": "Berichtsexport (PDF)",
+      "payroll_export": "Lohnexport (Excel / CSV)",
+      "clock_rules": "Stempelregeln (früher Feierabend, Runden)",
+      "scheduling": "Schichtplanung, offene Schichten und Tausch",
+      "roles_manager": "Rollen Manager und Vorgesetzter",
+      "audit": "Vollständiges Prüfprotokoll",
+      "sos": "SOS-Notruf",
+      "roles_all": "Leserolle und persönliche Rechte",
+      "clock_suggestion": "Stempelfrage bei Ankunft",
+      "labor_cost": "Personalkosten und Projektbudgets",
+      "daily_summary": "Tageszusammenfassung",
+      "manager_alerts": "Manager-Hinweise (Fehlen, Überstunden, Morgenübersicht)"
+    },
+    "managedByProsm": "Änderungen und Verlängerungen Ihrer Lizenz nimmt PROSM vor; Sie erhalten eine Benachrichtigung und eine E-Mail mit der neuen Lizenz. Änderungen: sales@prosm.net.",
+    "historyAll": "Angezeigte Stempelungen: alle. Standortpunkte und Fotos werden nach der Frist unter „Aufbewahrung“ automatisch gelöscht.",
+    "history_one": "Angezeigte und berichtete Stempelungen: die letzten 1 Jahre. Ältere bleiben gespeichert und kommen mit einem höheren Paket zurück. Standortpunkte und Fotos werden nach der Frist unter „Aufbewahrung“ automatisch gelöscht.",
+    "history_other": "Angezeigte und berichtete Stempelungen: die letzten {{count}} Jahre. Ältere bleiben gespeichert und kommen mit einem höheren Paket zurück. Standortpunkte und Fotos werden nach der Frist unter „Aufbewahrung“ automatisch gelöscht."
   },
   "retention": {
     "title": "Datenaufbewahrung",

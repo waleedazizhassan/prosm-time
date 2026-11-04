@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -31,8 +31,10 @@ import AllowanceSheetEditModal from "./AllowanceSheetEditModal";
 import PeriodDeductionsCard from "./PeriodDeductionsCard";
 import DateRange from "../../components/common/DateRange";
 import PersonName from "../../components/common/PersonName";
-import FieldRow from "../../components/common/FieldRow";
-import AllowanceSheetGrid from "./AllowanceSheetGrid";
+import AllowanceSheetGrid, { entryInput } from "./AllowanceSheetGrid";
+import { allowanceSheetTable } from "./allowanceSheetTable";
+import { toXlsx } from "../../core/utils/spreadsheet";
+import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
 
 const ALL_EMPLOYEES = "";
 
@@ -112,6 +114,22 @@ function formatMinutes(minutes: number): string {
   return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, "0")}`;
 }
 
+// One numbered step of the employee's allowance flow.
+function FlowStep({ number, title, hint, children }: { number: number; title: string; hint: string; children: ReactNode }) {
+  return (
+    <li style={{ display: "grid", gridTemplateColumns: "2rem minmax(0, 1fr)", gap: "var(--space-3)", alignItems: "start" }}>
+      <span aria-hidden="true" style={{ width: "2rem", height: "2rem", borderRadius: "50%", display: "grid", placeItems: "center", background: "var(--brand-primary)", color: "var(--text-on-brand, #fff)", fontWeight: 700 }}>
+        {number}
+      </span>
+      <div>
+        <strong style={{ display: "block", marginBottom: 2 }}>{title}</strong>
+        <HintText small>{hint}</HintText>
+        <div style={{ marginTop: "var(--space-2)" }}>{children}</div>
+      </div>
+    </li>
+  );
+}
+
 export default function AllowancesPage() {
   const { t, i18n } = useTranslation("allowances");
   const { profile, hasPermission } = useAuth();
@@ -133,6 +151,10 @@ export default function AllowancesPage() {
   const [employeeFilter, setEmployeeFilter] = useState(ALL_EMPLOYEES);
 
   const [newEntryDate, setNewEntryDate] = useState(isoDate(today));
+  // Owner 2026-11-03: a day without attendance (travel, an errand) at a site, priced at it.
+  const [newEntrySite, setNewEntrySite] = useState("");
+  const [repricing, setRepricing] = useState(false);
+  const [addOpen, setAddOpen] = useState(false);
   const [addingEntry, setAddingEntry] = useState(false);
   const [addError, setAddError] = useState("");
 
@@ -189,6 +211,17 @@ export default function AllowancesPage() {
       setAddError(humanizeBackendError(result.message, t) ?? t("saveError"));
     }
   };
+
+  // where the reader's own days of the period stand
+  const ownCounts = useMemo(() => {
+    const own = entries.filter((entry) => entry.userId === profile?.id);
+    return {
+      draft: own.filter((entry) => entry.status === "draft" || entry.status === "rejected").length,
+      sent: own.filter((entry) => entry.status === "submitted").length,
+      approved: own.filter((entry) => entry.status === "approved").length,
+      total: own.reduce((sum, entry) => sum + entryTotal(entry), 0),
+    };
+  }, [entries, profile?.id]);
 
   const unsentDays = entries.filter((entry) => entry.userId === profile?.id && (entry.status === "draft" || entry.status === "rejected")).length;
 
@@ -254,7 +287,7 @@ export default function AllowancesPage() {
     if (!newEntryDate) return;
     setAddingEntry(true);
     setAddError("");
-    const result = await AllowanceRepository.upsertEntry(newEntryDate, EMPTY_INPUT);
+    const result = await AllowanceRepository.upsertEntry(newEntryDate, EMPTY_INPUT, newEntrySite || undefined);
     setAddingEntry(false);
     if (!result.success) {
       setAddError(humanizeBackendError(result.message, t) ?? t("addError"));
@@ -300,6 +333,50 @@ export default function AllowancesPage() {
     await load();
   };
 
+
+  const siteOptions = useMemo(() => myRates.map((rate) => ({ value: rate.siteId, label: rate.siteName })), [myRates]);
+
+  // The site of a day without attendance: its prices follow.
+  const saveSite = async (entry: AllowanceEntry, siteId: string | null) => {
+    setLoadError("");
+    const result = await AllowanceRepository.upsertEntry(entry.entryDate, entryInput(entry), siteId);
+    if (!result.success) {
+      setLoadError(humanizeBackendError(result.message, t) ?? t("saveError"));
+      return false;
+    }
+    await load();
+    if (detailEntry?.id === entry.id) setDetailEntry(null);
+    return true;
+  };
+
+  // Owner 2026-11-03 (his PROSM Allow app): price the open days again from the current prices.
+  const handleReprice = async () => {
+    setRepricing(true);
+    setAddError("");
+    setFillMessage("");
+    const result = await AllowanceRepository.repriceOpenDays(startDate, endDate);
+    setRepricing(false);
+    if (!result.success) {
+      setAddError(humanizeBackendError(result.message, t) ?? t("saveError"));
+      return;
+    }
+    setFillMessage(t("reprice.done", { count: result.data?.priced ?? 0 }));
+    await load();
+  };
+
+  // The sheet as an Excel file, the same columns and totals as on screen, in the app's language.
+  const [exportingXlsx, setExportingXlsx] = useState(false);
+  const handleExportXlsx = async () => {
+    setExportingXlsx(true);
+    try {
+      const rows = allowanceSheetTable(filteredEntries, { t, language: i18n.language, organizationName, startDate, endDate });
+      const blob = new Blob([toXlsx(rows, i18n.language === "ar").slice().buffer as ArrayBuffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+      const who = peopleInView.length === 1 ? ` ${peopleInView[0]}` : "";
+      await saveGeneratedFile(`${t("title")}${who} ${startDate} ${endDate}.xlsx`, blob);
+    } finally {
+      setExportingXlsx(false);
+    }
+  };
 
   // A cell edited in the sheet: the same save as the day's detail window.
   const saveCell = async (entry: AllowanceEntry, input: AllowanceEntryInput) => {
@@ -454,6 +531,9 @@ export default function AllowancesPage() {
             {t("prices.openAction")}
           </Button>
         ) : null}
+        <Button variant="ghost" onClick={handleExportXlsx} loading={exportingXlsx} disabled={filteredEntries.length === 0}>
+          {t("exportXlsxAction")}
+        </Button>
         <Button variant="ghost" onClick={() => handleExportPdf("print")} loading={exportingPdf} disabled={filteredEntries.length === 0}>
           {t("common:actions.print")}
         </Button>
@@ -475,34 +555,63 @@ export default function AllowancesPage() {
       </Card>
 
       {isOwner ? null : (
-        <Card title={t("addEntry.title")} subtitle={t("fill.hint")}>
+        // Owner 2026-11-04: "a shorter workflow, and clearer" - three numbered steps and where the
+        // period stands, instead of a list of buttons.
+        <Card title={t("flow.title")}>
           <ErrorText>{addError}</ErrorText>
           {fillMessage ? <p style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-sm)", color: "var(--status-success-text)" }}>{fillMessage}</p> : null}
-          {/* Owner 2026-10-21 ("the buttons and the layout"): the two main actions side by side, the same size;
-              then adding a single day on one row; then auto-fill. */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-3)" }}>
-            <Button fullWidth onClick={handleFill} loading={filling}>
-              {t("fill.action")}
-            </Button>
-            <Button fullWidth variant="ghost" onClick={handleSendAll} loading={sending} disabled={unsentDays === 0}>
-              {unsentDays > 0 ? `${t("sendAll.action")} (${unsentDays})` : t("sendAll.action")}
-            </Button>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)", marginBottom: "var(--space-4)" }}>
+            {[
+              ["draft", t("flow.status.draft", { count: ownCounts.draft }), "var(--surface-sunken)"],
+              ["sent", t("flow.status.sent", { count: ownCounts.sent }), "var(--status-warning-bg, var(--surface-sunken))"],
+              ["approved", t("flow.status.approved", { count: ownCounts.approved }), "var(--status-success-bg, var(--surface-sunken))"],
+              ["total", t("flow.status.total", { amount: ownCounts.total.toLocaleString(appLocale(i18n.language), { maximumFractionDigits: 2 }) }), "var(--brand-gradient-soft), var(--surface-sunken)"],
+            ].map(([key, label, background]) => (
+              <span key={key} style={{ padding: "4px 10px", borderRadius: 999, background, fontSize: "var(--font-sm)", fontWeight: key === "total" ? 700 : 500 }}>
+                {label}
+              </span>
+            ))}
           </div>
-          <FieldRow style={{ marginTop: "var(--space-4)", marginBottom: 0, flexWrap: "nowrap" }}>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <Input label={t("addEntry.dateLabel")} name="newAllowanceEntryDate" type="date" value={newEntryDate} onChange={(event) => setNewEntryDate(event.target.value)} />
-            </div>
-            <Button variant="ghost" onClick={handleAddEntry} loading={addingEntry} disabled={!newEntryDate}>
-              {t("addEntry.action")}
-            </Button>
-          </FieldRow>
-          <label style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-3)", marginTop: "var(--space-5)", paddingTop: "var(--space-4)", borderTop: "1px solid var(--border-light)", fontSize: "var(--font-sm)" }}>
-            <Toggle checked={autoFill} onChange={handleAutoFill} label={t("autoFill.label")} />
-            <span>
-              <strong>{t("autoFill.label")}</strong>
-              <HintText small>{t("autoFill.hint")}</HintText>
-            </span>
-          </label>
+          <ol style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: "var(--space-4)" }}>
+            <FlowStep number={1} title={t("flow.step1")} hint={t("flow.step1Hint")}>
+              <Button fullWidth onClick={handleFill} loading={filling}>
+                {t("fill.action")}
+              </Button>
+              <label style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", marginTop: "var(--space-2)", fontSize: "var(--font-sm)" }}>
+                <Toggle checked={autoFill} onChange={handleAutoFill} label={t("autoFill.label")} />
+                <span>{t("autoFill.label")}</span>
+              </label>
+            </FlowStep>
+            <FlowStep number={2} title={t("flow.step2")} hint={t("flow.step2Hint")}>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
+                <Button size="sm" variant="ghost" onClick={() => setAddOpen((open) => !open)}>
+                  {t("flow.addDay")}
+                </Button>
+                <Button size="sm" variant="ghost" onClick={handleReprice} loading={repricing} disabled={ownCounts.draft + ownCounts.sent === 0}>
+                  {t("reprice.action")}
+                </Button>
+              </div>
+              {addOpen ? (
+                <div style={{ marginTop: "var(--space-3)" }}>
+                  <div style={{ display: "grid", gridTemplateColumns: siteOptions.length > 0 ? "minmax(0, 1fr) minmax(0, 1fr)" : "minmax(0, 1fr)", gap: "var(--space-3)" }}>
+                    <Input label={t("addEntry.dateLabel")} name="newAllowanceEntryDate" type="date" value={newEntryDate} onChange={(event) => setNewEntryDate(event.target.value)} />
+                    {siteOptions.length > 0 ? (
+                      <Select label={t("addEntry.siteLabel")} name="newAllowanceEntrySite" value={newEntrySite} onChange={(event) => setNewEntrySite(event.target.value)} options={[{ value: "", label: t("addEntry.siteFromAttendance") }, ...siteOptions]} />
+                    ) : null}
+                  </div>
+                  {siteOptions.length > 0 ? <HintText small>{t("addEntry.siteHint")}</HintText> : null}
+                  <Button fullWidth variant="ghost" onClick={handleAddEntry} loading={addingEntry} disabled={!newEntryDate}>
+                    {t("addEntry.action")}
+                  </Button>
+                </div>
+              ) : null}
+            </FlowStep>
+            <FlowStep number={3} title={t("flow.step3")} hint={t("flow.step3Hint")}>
+              <Button fullWidth onClick={handleSendAll} loading={sending} disabled={unsentDays === 0}>
+                {unsentDays > 0 ? `${t("sendAll.action")} (${unsentDays})` : t("sendAll.action")}
+              </Button>
+            </FlowStep>
+          </ol>
         </Card>
       )}
 
@@ -619,7 +728,16 @@ export default function AllowancesPage() {
       <Card flush>
         <ErrorText>{loadError}</ErrorText>
         {/* owner 2026-10-26: one sheet like the printed one, edited in its cells */}
-        <AllowanceSheetGrid entries={filteredEntries} ownUserId={profile?.id ?? null} loading={loading} emptyMessage={t("empty")} onOpen={openDetail} onSave={saveCell} />
+        <AllowanceSheetGrid
+          entries={filteredEntries}
+          ownUserId={profile?.id ?? null}
+          loading={loading}
+          emptyMessage={t("empty")}
+          onOpen={openDetail}
+          onSave={saveCell}
+          siteOptions={siteOptions}
+          onSetSite={saveSite}
+        />
       </Card>
 
       {filteredEntries.length > 0 ? (
@@ -688,10 +806,19 @@ export default function AllowancesPage() {
               </p>
             ) : null}
             <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>
-              {t("detail.siteLine", { site: detailEntry.siteName || "—" })}
+              {canEditDetail && detailEntry.sessionCount === 0 && siteOptions.length > 0 ? null : t("detail.siteLine", { site: detailEntry.siteName || "—" })}
               {detailEntry.clockInAt ? ` · ${t("detail.clockInLine", { time: formatTimeOnly(detailEntry.clockInAt, i18n.language) })}` : ""}
               {detailEntry.clockOutAt ? ` · ${t("detail.clockOutLine", { time: formatTimeOnly(detailEntry.clockOutAt, i18n.language) })}` : ""}
             </p>
+            {canEditDetail && detailEntry.sessionCount === 0 && siteOptions.length > 0 ? (
+              <Select
+                label={t("addEntry.siteLabel")}
+                name="detailAllowanceSite"
+                value={detailEntry.siteId ?? ""}
+                onChange={(event) => void saveSite(detailEntry, event.target.value || null)}
+                options={[{ value: "", label: t("addEntry.siteNone") }, ...siteOptions]}
+              />
+            ) : null}
             {detailEntry.sessionCount > 1 ? (
               <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>
                 {t("detail.daySessionsLine", { count: detailEntry.sessionCount, hours: Math.floor(detailEntry.workedMinutes / 60), minutes: detailEntry.workedMinutes % 60 })}

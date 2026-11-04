@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Search } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
+import usePlanFeatures from "../../core/hooks/usePlanFeatures";
 import { NAV_ITEMS } from "./navigation";
 import styles from "./CommandPalette.module.css";
 
@@ -28,6 +29,7 @@ function CommandPalette() {
   const { t } = useTranslation("shell");
   const navigate = useNavigate();
   const { hasPermission, profile } = useAuth();
+  const { allows } = usePlanFeatures(profile?.id);
 
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -45,9 +47,10 @@ function CommandPalette() {
           (item.requiredPermission === null || hasPermission(item.requiredPermission)) &&
           (!item.ownerOnly || profile?.isOwner) &&
           (!item.hiddenFromOwner || !profile?.isOwner) &&
-          (!item.ownerOrManagerOnly || profile?.isOwner || profile?.roleKey === "manager"),
+          (!item.ownerOrManagerOnly || profile?.isOwner || profile?.roleKey === "manager") &&
+          allows(item.planFeature),
       ).map((item) => ({ id: item.id, title: t(item.labelKey), path: item.path, Icon: item.icon })),
-    [hasPermission, profile?.isOwner, profile?.roleKey, t],
+    [hasPermission, profile?.isOwner, profile?.roleKey, t, allows],
   );
 
   const openPalette = useCallback(() => {

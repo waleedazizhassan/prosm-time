@@ -289,7 +289,8 @@
     "invalidActivationCode": "The code is wrong or already used.",
     "locationRequired": "This cannot be recorded without a valid location. Turn on location and try again.",
     "rejectReasonRequired": "Write the reason, so the employee sees it.",
-    "organizationReadOnly": "Your organisation is read-only until its licence is renewed."
+    "organizationReadOnly": "Your organisation is read-only until its licence is renewed.",
+    "featureNotInPlan": "This feature is not in your organisation’s plan."
   },
   "pageLoad": {
     "title": "This page needs a connection",
@@ -340,7 +341,7 @@
     "tagline": "Attendance you can trust - on site, on time.",
     "point1": "Clock in only where the work is, with GPS and a photo",
     "point2": "Works offline and keeps the real time and place",
-    "point3": "Timesheets, allowances and reports in five languages"
+    "point3": "Timesheets, allowances and reports in nine languages"
   },
   "dateTime": {
     "date": "Date",
@@ -361,5 +362,10 @@
     "supervisor": "Supervisor",
     "employee": "Employee",
     "read_only": "Viewer"
+  },
+  "planLocked": {
+    "text": "This is part of the {{plan}} plan.",
+    "seePlan": "See the plan",
+    "askOwner": "Ask your organisation’s owner."
   }
 }

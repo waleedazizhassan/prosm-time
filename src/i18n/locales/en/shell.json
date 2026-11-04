@@ -144,7 +144,7 @@
       "endingTitle": "Your PROSM Time trial ends soon",
       "endingBody": "Your trial ends in a week. Your data is kept and will not be deleted. To continue, enter an activation code or contact us at sales@prosm.net.",
       "endedTitle": "Your PROSM Time trial has ended",
-      "endedBody": "The app is paused and all your data is kept. Enter an activation code or contact us at sales@prosm.net and everything returns as it was.",
+      "endedBody": "The organisation is now read-only and all your data is kept. Enter an activation code or contact us at sales@prosm.net and everything works as before.",
       "licenseEndingTitle": "Your PROSM Time licence ends soon",
       "licenseEndingBody": "Licence {{license}} ends on {{date}}. Renew it before then so the app keeps running; all your data is kept. Contact sales@prosm.net."
     },
@@ -208,12 +208,23 @@
       "body": "{{name}} has not clocked in for the {{time}} shift at {{site}}."
     },
     "overtimeSoon": {
-      "title": "Overtime soon",
-      "body": "{{name}} is still clocked in; overtime starts at {{time}}."
+      "title": "Working overtime",
+      "body": "{{name}} is still clocked in; the shift ended at {{time}}."
     },
     "dailyDigest": {
       "title": "Yesterday at a glance",
       "body": "{{present}} worked, {{noShows}} missed a shift. Waiting: {{leave}} leave, {{exceptions}} exceptions. Clocked in now: {{open}}."
+    },
+    "licenseChanged": {
+      "title": "Your licence changed",
+      "body": "PROSM changed your licence: {{changes}}.",
+      "users": "users {{from}} → {{to}}",
+      "devices": "devices {{from}} → {{to}}",
+      "ends": "ends {{date}}",
+      "status": "status {{status}}",
+      "plan": "plan changed",
+      "unlimited": "no limit",
+      "planTo": "plan {{plan}}"
     }
   },
   "items": {
@@ -236,7 +247,8 @@
     "help": "Help",
     "workers": "Workers",
     "calendar": "Calendar and holidays",
-    "auditLog": "Action log"
+    "auditLog": "Action log",
+    "dailySummary": "Daily summary"
   },
   "sosOverlay": {
     "title": "SOS/Emergency alert",
@@ -336,7 +348,8 @@
     "timesheets": "Hours for review and approval",
     "workers": "External workers and their kiosk numbers",
     "calendar": "Public holidays, weekly rest days and exceptional days - the hours and overtime follow them.",
-    "auditLog": "Everything done in your organisation: who did what, to whom, when and why."
+    "auditLog": "Everything done in your organisation: who did what, to whom, when and why.",
+    "dailySummary": "One day of your organisation: who worked, who was late, who was absent, who was on leave"
   },
   "backgroundDisclosure": {
     "title": "Location during your shift",

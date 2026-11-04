@@ -1,0 +1,103 @@
+{
+  "title": "Ausências",
+  "subtitle": "Peça folgas e acompanhe seu saldo.",
+  "loadError": "Não foi possível carregar seus pedidos.",
+  "submitError": "Não foi possível enviar este pedido.",
+  "cancelError": "Não foi possível cancelar este pedido.",
+  "cancelAction": "Cancelar",
+  "balanceTitle": "Saldo ({{year}})",
+  "daysRemainingSuffix": "dias disponíveis",
+  "daysTakenSuffix": "dias usados",
+  "balanceDetail": "{{used}} usados, {{pending}} pendentes, {{entitled}} de direito",
+  "pendingSuffix": "{{pending}} pendentes",
+  "requestFormTitle": "Pedir ausência",
+  "startDateLabel": "Data de início",
+  "endDateLabel": "Data de término",
+  "reasonLabel": "Motivo (opcional)",
+  "submitAction": "Enviar pedido",
+  "myRequestsTitle": "Meus pedidos",
+  "orgWideRequestsTitle": "Ausências de toda a organização",
+  "ownerAutoApproveHint": "Como proprietário, seu pedido é aprovado na hora: não há ninguém acima de você para analisá-lo.",
+  "ownerAutoApprovedMessage": "Aprovado na hora.",
+  "empty": "Ainda não há pedidos.",
+  "columns": {
+    "employee": "Funcionário",
+    "type": "Tipo",
+    "dates": "Datas",
+    "days": "Dias",
+    "reason": "Motivo",
+    "status": "Situação",
+    "reviewedBy": "Analisado por",
+    "deduction": "Desconto"
+  },
+  "types": {
+    "annual": "Férias",
+    "sick": "Médica",
+    "unpaid": "Não remunerada",
+    "emergency": "Particular",
+    "other": "Outra",
+    "hajj": "Hajj ou Umrah",
+    "bereavement": "Luto",
+    "paternity": "Paternidade"
+  },
+  "status": {
+    "pending": "Pendente",
+    "approved": "Aprovado",
+    "rejected": "Recusado",
+    "cancelled": "Cancelado"
+  },
+  "permission": {
+    "title": "Pedir uma permissão",
+    "hint": "Atraso, saída antecipada ou hora extra: peça antes do dia; seu gestor decide se é pago. Você verá a decisão aqui.",
+    "kindLabel": "Tipo",
+    "dateLabel": "Dia",
+    "minutesLabel": "Minutos (opcional)",
+    "reasonLabel": "Motivo (obrigatório)",
+    "submit": "Enviar ao meu gestor",
+    "required": "Escolha o dia e escreva o motivo.",
+    "genericError": "Não foi possível enviar.",
+    "cancel": "Retirar",
+    "noDeduction": "sem desconto",
+    "partialDeduction": "desconto parcial",
+    "kind": {
+      "late_arrival": "Atraso",
+      "early_leave": "Saída antecipada",
+      "approved_overtime": "Hora extra",
+      "no_overtime": "Não conta como hora extra"
+    },
+    "status": {
+      "pending": "aguardando",
+      "approved": "aprovada",
+      "rejected": "recusada",
+      "cancelled": "retirada"
+    }
+  },
+  "typeRules": {
+    "paid": "remunerada",
+    "unpaid": "não remunerada",
+    "maxPerRequest": "no máximo {{days}} dias por vez",
+    "maxTimes": "no máximo {{times}} vezes no tempo de serviço",
+    "minService": "após {{years}} anos de serviço",
+    "document": "exige documento"
+  },
+  "documentLabel": "Documento (atestado médico)",
+  "documentUploadError": "Não foi possível enviar o documento.",
+  "balanceDiffers": "Definido manualmente; as regras dão {{computed}}: fale com seu gestor se parecer errado.",
+  "startedCannotCancel": "Já começou: não pode ser cancelada",
+  "grant": {
+    "title": "Registrar ausência de {{name}}",
+    "hint": "Se a pessoa pediu por telefone ou faltou com motivo: registre aqui e fica aprovado na hora; a falta vira ausência no painel e na folha de ponto. Dias passados são permitidos.",
+    "typeLabel": "Tipo de ausência",
+    "notesLabel": "Observação (opcional)",
+    "deductionLabel": "Desconto por dia",
+    "deductionHint": "A ausência não remunerada é aprovada com um desconto por dia.",
+    "action": "Registrar e aprovar",
+    "done": "A ausência de {{name}} foi registrada e aprovada.",
+    "doneReopen_one": "A ausência de {{name}} foi registrada e aprovada. Uma folha de ponto enviada cobre estes dias: reabra-a para correção para que mostre a ausência.",
+    "doneReopen_other": "A ausência de {{name}} foi registrada e aprovada. {{count}} folhas de ponto enviadas cobrem estes dias: reabra-as para correção para que mostrem a ausência.",
+    "error": "Não foi possível registrar a ausência.",
+    "doneReopen_many": "A ausência de {{name}} foi registrada e aprovada. {{count}} folhas de ponto enviadas cobrem estes dias: reabra-as para correção para que mostrem a ausência."
+  },
+  "reviewerLabel": "Enviar o pedido para",
+  "reviewerOwner": "{{name}} (proprietário)"
+}

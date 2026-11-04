@@ -234,6 +234,17 @@ class AttendanceControlRepository {
   setBreakRules(shiftTemplateId: string, paid: boolean, maxMinutes: number | null, autoDeductMinutes: number | null): Promise<ServiceResult> {
     return this.call("set_prosm_time_shift_break_rules", { p_shift_template_id: shiftTemplateId, p_paid: paid, p_max_minutes: maxMinutes, p_auto_deduct_minutes: autoDeductMinutes });
   }
+
+  // Owner 2026-11-04: the "working overtime" alert, minutes after the shift ends (15 by default).
+  async getOvertimeAlertMinutes(): Promise<number> {
+    const { data, error } = await this.client.rpc("get_prosm_time_overtime_alert_minutes");
+    return error || typeof data !== "number" ? 15 : data;
+  }
+
+  async setOvertimeAlertMinutes(minutes: number): Promise<string | null> {
+    const { error } = await this.client.rpc("set_prosm_time_overtime_alert_minutes", { p_minutes: minutes });
+    return error ? error.message : null;
+  }
 }
 
 export default new AttendanceControlRepository();

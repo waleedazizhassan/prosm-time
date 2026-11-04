@@ -1,4 +1,5 @@
 import DatabaseManager from "../database/DatabaseManager";
+import i18n from "../../i18n";
 
 export interface ServiceResult<T = null> {
   success: boolean;
@@ -147,7 +148,7 @@ class EmployeeRepository {
 
   async inviteUser(input: InviteInput): Promise<ServiceResult<InviteResultData>> {
     try {
-      const { data, error } = await this.client.functions.invoke("invite-user", { body: input });
+      const { data, error } = await this.client.functions.invoke("invite-user", { body: { ...input, language: i18n.language?.slice(0, 2) } });
 
       if (error) {
         const errorBody = await error.context?.json?.().catch(() => null);
