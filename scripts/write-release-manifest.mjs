@@ -19,7 +19,8 @@ const manifest = {
   downloads: {
     // Older desktop installs are sent to the web version (owner 2026-10-20).
     windows: web,
-    android: `https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/public/app-releases/PROSM-Time-v${version}.apk`,
+    // Owner 2026-11-04: Android is installed and updated from Google Play only.
+    android: "https://play.google.com/store/apps/details?id=net.prosm.time",
     web,
   },
 };
