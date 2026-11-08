@@ -149,5 +149,12 @@
         "REVOKED": "Revocata"
       }
     }
+  },
+  "payslip": {
+    "subject": "La tua busta paga - {{cycle}}",
+    "greeting": "Ciao {{name}},",
+    "intro": "Come richiesto, in allegato trovi in PDF la tua busta paga approvata di {{cycle}} di {{org}}.",
+    "version": "Versione del ciclo v{{version}} · n. {{serial}}.",
+    "private": "Questo documento è personale e riservato. Se non l'hai richiesto, avvisa il tuo responsabile."
   }
 }

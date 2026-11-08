@@ -146,5 +146,12 @@
         "REVOKED": "Revoked"
       }
     }
+  },
+  "payslip": {
+    "subject": "Your payslip - {{cycle}}",
+    "greeting": "Hello {{name}},",
+    "intro": "As you asked, your approved payslip for {{cycle}} from {{org}} is attached as a PDF.",
+    "version": "Cycle version v{{version}} · serial {{serial}}.",
+    "private": "This document is personal and confidential. If you did not ask for it, tell your manager."
   }
 }

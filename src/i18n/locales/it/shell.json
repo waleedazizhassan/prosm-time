@@ -231,6 +231,16 @@
       "grantedBody": "Il titolare ti ha dato tutte le sue autorizzazioni, notifiche ed e-mail finché non le ritira.",
       "revokedTitle": "L'autorità del titolare è stata ritirata",
       "revokedBody": "Torni al tuo ruolo e alle tue autorizzazioni."
+    },
+    "payslip": {
+      "requestedTitle": "Busta paga richiesta",
+      "requestedBody": "{{name}} ha richiesto la busta paga di {{cycle}}.",
+      "sentTitle": "La tua busta paga è stata inviata",
+      "sentBody": "La busta paga di {{cycle}} è stata inviata alla tua email.",
+      "failedTitle": "Invio della busta paga non riuscito",
+      "failedBody": "Non è stato possibile inviare la busta paga di {{cycle}}. Puoi riprovare.",
+      "publishedTitle": "La tua busta paga è disponibile",
+      "publishedBody": "È stata pubblicata una nuova busta paga. Puoi vederla o richiederla via email."
     }
   },
   "items": {

@@ -231,6 +231,16 @@
       "grantedBody": "The owner gave you all of the owner's permissions, notifications and emails until they withdraw it.",
       "revokedTitle": "The owner's authority was withdrawn",
       "revokedBody": "You are back to your own role and permissions."
+    },
+    "payslip": {
+      "requestedTitle": "Payslip requested",
+      "requestedBody": "{{name}} asked for their payslip of {{cycle}}.",
+      "sentTitle": "Your payslip was emailed",
+      "sentBody": "Your payslip of {{cycle}} was sent to your email.",
+      "failedTitle": "Payslip email failed",
+      "failedBody": "The payslip of {{cycle}} could not be sent. You can try again.",
+      "publishedTitle": "Your payslip is available",
+      "publishedBody": "A new payslip was published. You can view it or ask for it by email."
     }
   },
   "items": {

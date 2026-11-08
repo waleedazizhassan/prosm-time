@@ -231,6 +231,16 @@
       "grantedBody": "Le propriétaire vous a donné toutes ses autorisations, notifications et e-mails jusqu'à ce qu'il les retire.",
       "revokedTitle": "L'autorité du propriétaire a été retirée",
       "revokedBody": "Vous retrouvez votre rôle et vos autorisations."
+    },
+    "payslip": {
+      "requestedTitle": "Bulletin de paie demandé",
+      "requestedBody": "{{name}} a demandé son bulletin de paie de {{cycle}}.",
+      "sentTitle": "Votre bulletin de paie a été envoyé",
+      "sentBody": "Votre bulletin de paie de {{cycle}} a été envoyé à votre e-mail.",
+      "failedTitle": "Échec de l'envoi du bulletin de paie",
+      "failedBody": "Le bulletin de paie de {{cycle}} n'a pas pu être envoyé. Vous pouvez réessayer.",
+      "publishedTitle": "Votre bulletin de paie est disponible",
+      "publishedBody": "Un nouveau bulletin de paie a été publié. Vous pouvez le consulter ou le demander par e-mail."
     }
   },
   "items": {

@@ -290,3 +290,9 @@ entrypoint = "./functions/change-site/index.ts"
 enabled = true
 verify_jwt = true
 entrypoint = "./functions/remove-employee/index.ts"
+
+# 2026-11-08: a manager emails a requested, published payslip (the RPCs inside check scope).
+[functions.send-payslip-email]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/send-payslip-email/index.ts"

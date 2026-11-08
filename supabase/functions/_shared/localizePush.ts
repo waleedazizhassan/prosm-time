@@ -194,6 +194,18 @@ export function localizePush(type: string, data: Data, language: string, fallbac
     case "shift_no_show":
       result = pair("noShow.title", "noShow.body", { name: data.name ?? "", time: data.time ?? "", site: data.siteName ?? "" });
       break;
+    case "payslip_requested":
+      result = pair("payslip.requestedTitle", "payslip.requestedBody", { name: data.employeeName ?? "", cycle: data.cycleTitle ?? "" });
+      break;
+    case "payslip_sent":
+      result = pair("payslip.sentTitle", "payslip.sentBody", { cycle: data.cycleTitle ?? "" });
+      break;
+    case "payslip_send_failed":
+      result = pair("payslip.failedTitle", "payslip.failedBody", { cycle: data.cycleTitle ?? "" });
+      break;
+    case "payslip_published":
+      result = pair("payslip.publishedTitle", "payslip.publishedBody");
+      break;
     case "owner_authority_granted":
       result = pair("ownerAuthority.grantedTitle", "ownerAuthority.grantedBody");
       break;

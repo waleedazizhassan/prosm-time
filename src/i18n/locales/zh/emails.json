@@ -143,5 +143,12 @@
         "REVOKED": "已撤销"
       }
     }
+  },
+  "payslip": {
+    "subject": "您的工资单 - {{cycle}}",
+    "greeting": "{{name}}，您好：",
+    "intro": "应您的要求，附件为 {{org}} {{cycle}} 已核准工资单的 PDF。",
+    "version": "周期版本 v{{version}} · 编号 {{serial}}。",
+    "private": "本文件属个人机密。如果您未曾申请，请告知您的经理。"
   }
 }

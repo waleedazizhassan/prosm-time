@@ -231,6 +231,16 @@
       "grantedBody": "Der Inhaber hat Ihnen alle seine Berechtigungen, Benachrichtigungen und E-Mails gegeben, bis er sie entzieht.",
       "revokedTitle": "Die Befugnis des Inhabers wurde entzogen",
       "revokedBody": "Sie haben wieder Ihre eigene Rolle und Ihre Berechtigungen."
+    },
+    "payslip": {
+      "requestedTitle": "Gehaltsabrechnung angefordert",
+      "requestedBody": "{{name}} hat die Gehaltsabrechnung für {{cycle}} angefordert.",
+      "sentTitle": "Ihre Gehaltsabrechnung wurde gesendet",
+      "sentBody": "Ihre Gehaltsabrechnung für {{cycle}} wurde an Ihre E-Mail gesendet.",
+      "failedTitle": "E-Mail mit Gehaltsabrechnung fehlgeschlagen",
+      "failedBody": "Die Gehaltsabrechnung für {{cycle}} konnte nicht gesendet werden. Bitte erneut versuchen.",
+      "publishedTitle": "Ihre Gehaltsabrechnung ist verfügbar",
+      "publishedBody": "Eine neue Gehaltsabrechnung wurde veröffentlicht. Sie können sie ansehen oder per E-Mail anfordern."
     }
   },
   "items": {

@@ -161,6 +161,13 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
           "REVOKED": "ملغى"
         }
       }
+    },
+    "payslip": {
+      "subject": "مفردات مرتبك - {{cycle}}",
+      "greeting": "مرحبًا {{name}}،",
+      "intro": "بناءً على طلبك، مرفق ملف PDF بمفردات مرتبك المعتمدة عن {{cycle}} من {{org}}.",
+      "version": "إصدار الدورة v{{version}} · رقم الإصدار {{serial}}.",
+      "private": "هذا المستند شخصي وسري. إن لم تطلبه فأبلغ مديرك."
     }
   },
   "de": {
@@ -311,6 +318,13 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
           "REVOKED": "Widerrufen"
         }
       }
+    },
+    "payslip": {
+      "subject": "Ihre Gehaltsabrechnung - {{cycle}}",
+      "greeting": "Hallo {{name}},",
+      "intro": "Wie gewünscht finden Sie Ihre genehmigte Gehaltsabrechnung für {{cycle}} von {{org}} als PDF im Anhang.",
+      "version": "Abrechnungsversion v{{version}} · Nr. {{serial}}.",
+      "private": "Dieses Dokument ist persönlich und vertraulich. Wenn Sie es nicht angefordert haben, informieren Sie Ihre Führungskraft."
     }
   },
   "en": {
@@ -461,6 +475,13 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
           "REVOKED": "Revoked"
         }
       }
+    },
+    "payslip": {
+      "subject": "Your payslip - {{cycle}}",
+      "greeting": "Hello {{name}},",
+      "intro": "As you asked, your approved payslip for {{cycle}} from {{org}} is attached as a PDF.",
+      "version": "Cycle version v{{version}} · serial {{serial}}.",
+      "private": "This document is personal and confidential. If you did not ask for it, tell your manager."
     }
   },
   "es": {
@@ -614,6 +635,13 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
           "REVOKED": "Revocada"
         }
       }
+    },
+    "payslip": {
+      "subject": "Su recibo de nómina - {{cycle}}",
+      "greeting": "Hola {{name}}:",
+      "intro": "Como solicitó, adjuntamos en PDF su recibo de nómina aprobado de {{cycle}} de {{org}}.",
+      "version": "Versión del ciclo v{{version}} · n.º {{serial}}.",
+      "private": "Este documento es personal y confidencial. Si no lo solicitó, avise a su responsable."
     }
   },
   "fr": {
@@ -767,6 +795,13 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
           "REVOKED": "Révoquée"
         }
       }
+    },
+    "payslip": {
+      "subject": "Votre bulletin de paie - {{cycle}}",
+      "greeting": "Bonjour {{name}},",
+      "intro": "Comme demandé, vous trouverez ci-joint en PDF votre bulletin de paie approuvé pour {{cycle}} de {{org}}.",
+      "version": "Version du cycle v{{version}} · n° {{serial}}.",
+      "private": "Ce document est personnel et confidentiel. Si vous ne l'avez pas demandé, prévenez votre responsable."
     }
   },
   "it": {
@@ -920,6 +955,13 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
           "REVOKED": "Revocata"
         }
       }
+    },
+    "payslip": {
+      "subject": "La tua busta paga - {{cycle}}",
+      "greeting": "Ciao {{name}},",
+      "intro": "Come richiesto, in allegato trovi in PDF la tua busta paga approvata di {{cycle}} di {{org}}.",
+      "version": "Versione del ciclo v{{version}} · n. {{serial}}.",
+      "private": "Questo documento è personale e riservato. Se non l'hai richiesto, avvisa il tuo responsabile."
     }
   },
   "pt": {
@@ -1073,6 +1115,13 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
           "REVOKED": "Revogada"
         }
       }
+    },
+    "payslip": {
+      "subject": "O seu recibo de vencimento - {{cycle}}",
+      "greeting": "Olá {{name}},",
+      "intro": "Conforme pedido, segue em anexo, em PDF, o seu recibo de vencimento aprovado de {{cycle}} da {{org}}.",
+      "version": "Versão do ciclo v{{version}} · n.º {{serial}}.",
+      "private": "Este documento é pessoal e confidencial. Se não o pediu, avise o seu responsável."
     }
   },
   "ru": {
@@ -1229,6 +1278,13 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
           "REVOKED": "Отозвана"
         }
       }
+    },
+    "payslip": {
+      "subject": "Ваш расчётный листок - {{cycle}}",
+      "greeting": "Здравствуйте, {{name}}!",
+      "intro": "По вашему запросу во вложении PDF с утверждённым расчётным листком за {{cycle}} от {{org}}.",
+      "version": "Версия цикла v{{version}} · № {{serial}}.",
+      "private": "Документ личный и конфиденциальный. Если вы его не запрашивали, сообщите руководителю."
     }
   },
   "zh": {
@@ -1376,6 +1432,13 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
           "REVOKED": "已撤销"
         }
       }
+    },
+    "payslip": {
+      "subject": "您的工资单 - {{cycle}}",
+      "greeting": "{{name}}，您好：",
+      "intro": "应您的要求，附件为 {{org}} {{cycle}} 已核准工资单的 PDF。",
+      "version": "周期版本 v{{version}} · 编号 {{serial}}。",
+      "private": "本文件属个人机密。如果您未曾申请，请告知您的经理。"
     }
   }
 };

@@ -231,6 +231,16 @@
       "grantedBody": "所有者已将其全部权限、通知和邮件授予您，直到其撤回。",
       "revokedTitle": "所有者权限已撤回",
       "revokedBody": "您已恢复为原来的角色和权限。"
+    },
+    "payslip": {
+      "requestedTitle": "工资单申请",
+      "requestedBody": "{{name}} 申请了 {{cycle}} 的工资单。",
+      "sentTitle": "您的工资单已发送",
+      "sentBody": "{{cycle}} 的工资单已发送至您的邮箱。",
+      "failedTitle": "工资单发送失败",
+      "failedBody": "{{cycle}} 的工资单未能发送，您可以重试。",
+      "publishedTitle": "您的工资单已可查看",
+      "publishedBody": "新的工资单已发布，您可以查看或通过邮件申请。"
     }
   },
   "items": {

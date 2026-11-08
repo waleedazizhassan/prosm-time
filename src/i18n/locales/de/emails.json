@@ -146,5 +146,12 @@
         "REVOKED": "Widerrufen"
       }
     }
+  },
+  "payslip": {
+    "subject": "Ihre Gehaltsabrechnung - {{cycle}}",
+    "greeting": "Hallo {{name}},",
+    "intro": "Wie gewünscht finden Sie Ihre genehmigte Gehaltsabrechnung für {{cycle}} von {{org}} als PDF im Anhang.",
+    "version": "Abrechnungsversion v{{version}} · Nr. {{serial}}.",
+    "private": "Dieses Dokument ist persönlich und vertraulich. Wenn Sie es nicht angefordert haben, informieren Sie Ihre Führungskraft."
   }
 }

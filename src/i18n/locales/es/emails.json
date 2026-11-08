@@ -149,5 +149,12 @@
         "REVOKED": "Revocada"
       }
     }
+  },
+  "payslip": {
+    "subject": "Su recibo de nómina - {{cycle}}",
+    "greeting": "Hola {{name}}:",
+    "intro": "Como solicitó, adjuntamos en PDF su recibo de nómina aprobado de {{cycle}} de {{org}}.",
+    "version": "Versión del ciclo v{{version}} · n.º {{serial}}.",
+    "private": "Este documento es personal y confidencial. Si no lo solicitó, avise a su responsable."
   }
 }

@@ -242,6 +242,15 @@ export default function localizeNotification(notification: AppNotification, t: T
     case "shift_no_show":
       return { title: t("shell:notifications.noShow.title"), body: t("shell:notifications.noShow.body", { name: String(data.name ?? ""), time: String(data.time ?? ""), site: String(data.siteName ?? "") }) };
     // owner 2026-11-04: the owner's authority, granted and withdrawn
+    // owner 2026-11-08: payslips asked for, emailed, failed, published (never an amount)
+    case "payslip_requested":
+      return { title: t("shell:notifications.payslip.requestedTitle"), body: t("shell:notifications.payslip.requestedBody", { name: String(data.employeeName ?? ""), cycle: String(data.cycleTitle ?? "") }) };
+    case "payslip_sent":
+      return { title: t("shell:notifications.payslip.sentTitle"), body: t("shell:notifications.payslip.sentBody", { cycle: String(data.cycleTitle ?? "") }) };
+    case "payslip_send_failed":
+      return { title: t("shell:notifications.payslip.failedTitle"), body: t("shell:notifications.payslip.failedBody", { cycle: String(data.cycleTitle ?? "") }) };
+    case "payslip_published":
+      return { title: t("shell:notifications.payslip.publishedTitle"), body: t("shell:notifications.payslip.publishedBody") };
     case "owner_authority_granted":
       return { title: t("shell:notifications.ownerAuthority.grantedTitle"), body: t("shell:notifications.ownerAuthority.grantedBody") };
     case "owner_authority_revoked":

@@ -58,6 +58,13 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
     case "owner_authority_granted":
     case "owner_authority_revoked":
       return "/dashboard";
+    // owner 2026-11-08: payslip requests go to the requests list; the employee's to My payslips
+    case "payslip_requested":
+    case "payslip_send_failed":
+      return "/payroll/requests";
+    case "payslip_sent":
+    case "payslip_published":
+      return "/payslips";
     case "license_changed":
       return viewer.isOwner ? "/settings#plan" : "/dashboard";
     case "shift_no_show":

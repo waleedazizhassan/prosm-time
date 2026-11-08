@@ -37,6 +37,8 @@ export interface EmailAttachment {
 // about - "PROSM Time Invitation", "PROSM Time Leave", "PROSM Time License"...
 export function senderName(purpose: string): string {
   const key = purpose.toLowerCase();
+  // Owner 2026-11-08: every payslip email shows "PROSM Time Payroll" (the address stays Platform's noreply@).
+  if (/payslip|payroll/.test(key)) return "PROSM Time Payroll";
   if (/invit/.test(key)) return "PROSM Time Invitation";
   if (/password|reset/.test(key)) return "PROSM Time Account";
   if (/licen[cs]e/.test(key)) return "PROSM Time License";

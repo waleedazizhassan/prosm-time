@@ -231,6 +231,16 @@
       "grantedBody": "El propietario te dio todos sus permisos, notificaciones y correos hasta que los retire.",
       "revokedTitle": "Se retiró la autoridad del propietario",
       "revokedBody": "Vuelves a tu rol y tus permisos."
+    },
+    "payslip": {
+      "requestedTitle": "Recibo de nómina solicitado",
+      "requestedBody": "{{name}} pidió su recibo de nómina de {{cycle}}.",
+      "sentTitle": "Se envió su recibo de nómina",
+      "sentBody": "Su recibo de nómina de {{cycle}} se envió a su correo.",
+      "failedTitle": "Falló el envío del recibo de nómina",
+      "failedBody": "No se pudo enviar el recibo de nómina de {{cycle}}. Puede intentarlo de nuevo.",
+      "publishedTitle": "Su recibo de nómina está disponible",
+      "publishedBody": "Se publicó un nuevo recibo de nómina. Puede verlo o pedirlo por correo."
     }
   },
   "items": {

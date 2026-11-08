@@ -1416,13 +1416,12 @@ begin
         update payroll_cycles set published_version = cycle_version, published_at = now(), published_by = public.current_prosm_time_user_id(),
             publication_no = publication_no + 1, row_version = row_version + 1, updated_at = now()
         where id = p_cycle_id;
-        if exists (select 1 from payroll_settings where organization_id = v_cycle.organization_id and employee_self_service) then
-            for v_ce in select user_id from payroll_cycle_employees where cycle_id = p_cycle_id loop
-                -- no amounts in the notification
-                perform public.create_prosm_time_notification(v_cycle.organization_id, v_ce.user_id, 'payslip_published', 'normal',
-                    'Your payslip is available', 'A new payslip was published for ' || v_cycle.title || '.', 'payroll_cycles', p_cycle_id, '{}'::jsonb);
-            end loop;
-        end if;
+        -- everyone in the cycle is told (they view it in the app when self-service is on, or ask for it by email); no amounts
+        for v_ce in select user_id from payroll_cycle_employees where cycle_id = p_cycle_id loop
+            perform public.create_prosm_time_notification(v_cycle.organization_id, v_ce.user_id, 'payslip_published', 'normal',
+                'Your payslip is available', 'A new payslip was published for ' || v_cycle.title || '.', 'payroll_cycles', p_cycle_id,
+                jsonb_build_object('cycleTitle', v_cycle.title));
+        end loop;
     else
         update payroll_cycles set published_version = null, published_at = null, published_by = null, row_version = row_version + 1, updated_at = now()
         where id = p_cycle_id;

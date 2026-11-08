@@ -52,38 +52,10 @@ export interface LicencePdfFonts {
   cjk?: Pair | null;
 }
 
-const ARABIC = /[؀-ۿݐ-ݿࢠ-ࣿﭐ-﷿ﹰ-﻿]/;
-const CJK = /[⺀-⿟　-〿぀-ヿ㐀-䶿一-鿿豈-﫿＀-￯]/;
-const NEUTRAL = /[\s:.,;!?\-()\/·،؛]/;
-type Script = "arabic" | "cjk" | "latin";
+import { runsOf, scriptsNeeded } from "./pdfText.ts";
 
-/** Which extra fonts these texts need - so a caller fetches only those. */
-export function scriptsNeeded(texts: string[]): { arabic: boolean; cjk: boolean } {
-  const all = texts.join(" ");
-  return { arabic: ARABIC.test(all), cjk: CJK.test(all) };
-}
-
-function runsOf(text: string): { run: string; script: Script }[] {
-  const chars = [...text];
-  const strong: (Script | null)[] = chars.map((ch) => (ARABIC.test(ch) ? "arabic" : CJK.test(ch) ? "cjk" : NEUTRAL.test(ch) ? null : "latin"));
-  // A space or mark between two letters of one script belongs to that script; anywhere else,
-  // to the Latin font.
-  const scripts = strong.map((s, i) => {
-    if (s) return s;
-    let before: Script | null = null;
-    for (let j = i - 1; j >= 0 && !before; j--) before = strong[j];
-    let after: Script | null = null;
-    for (let j = i + 1; j < chars.length && !after; j++) after = strong[j];
-    return before && before === after ? before : "latin";
-  });
-  const runs: { run: string; script: Script }[] = [];
-  chars.forEach((ch, i) => {
-    const last = runs[runs.length - 1];
-    if (last && last.script === scripts[i]) last.run += ch;
-    else runs.push({ run: ch, script: scripts[i] });
-  });
-  return runs;
-}
+// 2026-11-08: the script runs and font needs moved to pdfText.ts (shared with the payslip PDF).
+export { scriptsNeeded };
 
 export async function buildLicencePdf(libs: PdfLibs, fonts: LicencePdfFonts, logoPng: Uint8Array | null, data: LicencePdfData): Promise<Uint8Array> {
   const { PDFDocument, rgb, fontkit } = libs;
