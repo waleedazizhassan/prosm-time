@@ -493,7 +493,9 @@
         "attendance_overtime_approved": "Überstunden genehmigt",
         "attendance_auto_close": "Sitzung automatisch beendet",
         "allowances_edit_during_review": "Zulage in Prüfung geändert",
-        "leave_approved_cancelled": "Genehmigter Urlaub storniert"
+        "leave_approved_cancelled": "Genehmigter Urlaub storniert",
+        "OWNER_AUTHORITY_GRANTED": "Befugnis des Inhabers erteilt",
+        "OWNER_AUTHORITY_REVOKED": "Befugnis des Inhabers entzogen"
       },
       "groups": {
         "sos": "SOS",

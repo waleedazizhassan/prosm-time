@@ -496,7 +496,9 @@
         "attendance_overtime_approved": "Hora extra aprovada",
         "attendance_auto_close": "Sessão encerrada automaticamente",
         "allowances_edit_during_review": "Adicional editado na análise",
-        "leave_approved_cancelled": "Afastamento aprovado cancelado"
+        "leave_approved_cancelled": "Afastamento aprovado cancelado",
+        "OWNER_AUTHORITY_GRANTED": "Autoridade do proprietário concedida",
+        "OWNER_AUTHORITY_REVOKED": "Autoridade do proprietário retirada"
       },
       "groups": {
         "sos": "SOS",

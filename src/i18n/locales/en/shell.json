@@ -225,6 +225,12 @@
       "plan": "plan changed",
       "unlimited": "no limit",
       "planTo": "plan {{plan}}"
+    },
+    "ownerAuthority": {
+      "grantedTitle": "You have the owner's authority",
+      "grantedBody": "The owner gave you all of the owner's permissions, notifications and emails until they withdraw it.",
+      "revokedTitle": "The owner's authority was withdrawn",
+      "revokedBody": "You are back to your own role and permissions."
     }
   },
   "items": {
@@ -248,7 +254,8 @@
     "workers": "Workers",
     "calendar": "Calendar and holidays",
     "auditLog": "Action log",
-    "dailySummary": "Daily summary"
+    "dailySummary": "Daily summary",
+    "grantPermissions": "Grant permissions"
   },
   "sosOverlay": {
     "title": "SOS/Emergency alert",
@@ -349,7 +356,8 @@
     "workers": "External workers and their kiosk numbers",
     "calendar": "Public holidays, weekly rest days and exceptional days - the hours and overtime follow them.",
     "auditLog": "Everything done in your organisation: who did what, to whom, when and why.",
-    "dailySummary": "One day of your organisation: who worked, who was late, who was absent, who was on leave"
+    "dailySummary": "One day of your organisation: who worked, who was late, who was absent, who was on leave",
+    "grantPermissions": "Who gets which permissions - and the owner's full authority"
   },
   "backgroundDisclosure": {
     "title": "Location during your shift",

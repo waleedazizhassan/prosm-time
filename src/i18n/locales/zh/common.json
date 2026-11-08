@@ -290,7 +290,11 @@
     "locationRequired": "没有有效位置无法记录。请打开定位后重试。",
     "rejectReasonRequired": "请填写原因，以便员工看到。",
     "organizationReadOnly": "在许可证续期之前，您的组织为只读状态。",
-    "featureNotInPlan": "此功能不在您组织的套餐中。"
+    "featureNotInPlan": "此功能不在您组织的套餐中。",
+    "ownerAuthorityOwnerOnly": "只有所有者可以授予或撤回所有者权限。",
+    "ownerAuthorityAlready": "此人已拥有所有者权限。",
+    "ownerAuthorityNone": "此人没有所有者权限。",
+    "ownerAuthorityInactive": "此人未启用。"
   },
   "pageLoad": {
     "title": "此页面需要网络连接",

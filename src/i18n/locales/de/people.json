@@ -236,5 +236,28 @@
     "pending": "Wartend",
     "approved": "Genehmigt",
     "blocked": "Gesperrt"
+  },
+  "ownerAuthority": {
+    "title": "Berechtigungen vergeben",
+    "hint": "Öffnen Sie die Berechtigungen einer Person, um eine zu erteilen oder zu entziehen, oder geben Sie ihr mit „Alles erteilen“ die volle Befugnis des Inhabers: alle Berechtigungen, die Aktionen nur für den Inhaber und jede Benachrichtigung und E-Mail, die Sie erhalten - ohne Ihre zu ändern. Entziehen Sie sie, hat die Person wieder ihre Rolle und ihre Berechtigungen.",
+    "search": "Nach Name suchen",
+    "nobody": "Niemand anzuzeigen.",
+    "since": "seit {{date}}",
+    "hasAll": "Hat die Befugnis des Inhabers",
+    "permissions": "Berechtigungen",
+    "grantAll": "Alles erteilen",
+    "revokeAll": "Alles entziehen",
+    "historyTitle": "Vergaben der Befugnis des Inhabers",
+    "historyHint": "Für die Governance aufbewahrt: wer, wann und warum.",
+    "grantedLine": "erteilt am {{date}} - {{reason}}",
+    "revokedLine": "entzogen am {{date}} - {{reason}}",
+    "stillActive": "hat sie noch",
+    "grantTitle": "{{name}} die Befugnis des Inhabers geben",
+    "revokeTitle": "{{name}} die Befugnis des Inhabers entziehen",
+    "grantExplain": "{{name}} erhält alle Berechtigungen und die Aktionen nur für den Inhaber sowie die Benachrichtigungen und E-Mails, die Sie erhalten, bis Sie sie entziehen. Die Person stempelt weiter und behält ihre Zulagen und ihren Urlaub. Nur Sie können sie erteilen oder entziehen, und es steht im Aktionsprotokoll.",
+    "revokeExplain": "Die Person hat sofort wieder ihre Rolle und ihre Berechtigungen und erhält Ihre Benachrichtigungen und E-Mails nicht mehr.",
+    "reasonLabel": "Grund (wird im Aktionsprotokoll gespeichert)",
+    "reasonRequired": "Geben Sie den Grund an.",
+    "failed": "Konnte nicht gespeichert werden. Versuchen Sie es erneut."
   }
 }

@@ -297,6 +297,11 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "CHOOSE A PERIOD OF UP TO A YEAR": "periodUpToYear",
   // v2.3.43 step 4: allowance calculation basis.
   "ONLY THE OWNER SETS HOW AN ALLOWANCE IS CALCULATED": "basisOwnerOnly",
+  // owner 2026-11-04: the owner's authority
+  "ONLY THE OWNER GRANTS THE OWNER'S AUTHORITY": "ownerAuthorityOwnerOnly",
+  "THIS PERSON ALREADY HAS THE OWNER'S AUTHORITY": "ownerAuthorityAlready",
+  "THIS PERSON DOES NOT HAVE THE OWNER'S AUTHORITY": "ownerAuthorityNone",
+  "THIS PERSON IS NOT ACTIVE": "ownerAuthorityInactive",
   "INVALID ALLOWANCE": "invalidAllowance",
   "INVALID CALCULATION BASIS": "invalidCalculationBasis",
   // v2.3.43 step 5: editing allowances during review, reopening.

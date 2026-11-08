@@ -496,7 +496,9 @@
         "attendance_overtime_approved": "Horas extra aprobadas",
         "attendance_auto_close": "Sesión cerrada automáticamente",
         "allowances_edit_during_review": "Asignación editada en revisión",
-        "leave_approved_cancelled": "Ausencia aprobada cancelada"
+        "leave_approved_cancelled": "Ausencia aprobada cancelada",
+        "OWNER_AUTHORITY_GRANTED": "Autoridad del propietario concedida",
+        "OWNER_AUTHORITY_REVOKED": "Autoridad del propietario retirada"
       },
       "groups": {
         "sos": "SOS",

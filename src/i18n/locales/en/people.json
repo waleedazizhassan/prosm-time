@@ -236,5 +236,28 @@
     "pending": "Waiting",
     "approved": "Approved",
     "blocked": "Blocked"
+  },
+  "ownerAuthority": {
+    "title": "Grant permissions",
+    "hint": "Open a person's permissions to grant or remove one, or give them all of the owner's authority with \"Grant all\": every permission, the owner-only actions, and every notification and email you receive - without changing yours. Withdraw it and they are back to their own role and permissions.",
+    "search": "Search by name",
+    "nobody": "Nobody to show.",
+    "since": "since {{date}}",
+    "hasAll": "Has the owner's authority",
+    "permissions": "Permissions",
+    "grantAll": "Grant all",
+    "revokeAll": "Withdraw all",
+    "historyTitle": "Grants of the owner's authority",
+    "historyHint": "Kept for governance: who, when and why.",
+    "grantedLine": "granted on {{date}} - {{reason}}",
+    "revokedLine": "withdrawn on {{date}} - {{reason}}",
+    "stillActive": "still holds it",
+    "grantTitle": "Give {{name}} the owner's authority",
+    "revokeTitle": "Withdraw the owner's authority from {{name}}",
+    "grantExplain": "{{name}} gets every permission and the owner-only actions, and receives the notifications and emails you receive, until you withdraw it. They still clock in and have their own allowances and leave. Only you can give or withdraw it, and it is in the action log.",
+    "revokeExplain": "They go back to their role and their own permissions at once, and stop receiving your notifications and emails.",
+    "reasonLabel": "Reason (kept in the action log)",
+    "reasonRequired": "Write the reason.",
+    "failed": "This could not be saved. Try again."
   }
 }

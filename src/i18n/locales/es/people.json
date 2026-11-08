@@ -236,5 +236,28 @@
     "pending": "Pendiente",
     "approved": "Aprobado",
     "blocked": "Bloqueado"
+  },
+  "ownerAuthority": {
+    "title": "Conceder permisos",
+    "hint": "Abre los permisos de una persona para conceder o quitar uno, o dale toda la autoridad del propietario con «Conceder todo»: todos los permisos, las acciones exclusivas del propietario y cada notificación y correo que recibes, sin cambiar los tuyos. Si la retiras, vuelve a su rol y sus permisos.",
+    "search": "Buscar por nombre",
+    "nobody": "No hay nadie que mostrar.",
+    "since": "desde el {{date}}",
+    "hasAll": "Tiene la autoridad del propietario",
+    "permissions": "Permisos",
+    "grantAll": "Conceder todo",
+    "revokeAll": "Retirar todo",
+    "historyTitle": "Concesiones de la autoridad del propietario",
+    "historyHint": "Se guarda para la gobernanza: quién, cuándo y por qué.",
+    "grantedLine": "concedida el {{date}} - {{reason}}",
+    "revokedLine": "retirada el {{date}} - {{reason}}",
+    "stillActive": "aún la tiene",
+    "grantTitle": "Dar a {{name}} la autoridad del propietario",
+    "revokeTitle": "Retirar a {{name}} la autoridad del propietario",
+    "grantExplain": "{{name}} recibe todos los permisos y las acciones exclusivas del propietario, y las notificaciones y correos que recibes tú, hasta que la retires. Sigue fichando y tiene sus asignaciones y ausencias. Solo tú puedes concederla o retirarla, y queda en el registro de acciones.",
+    "revokeExplain": "Vuelve al momento a su rol y sus permisos, y deja de recibir tus notificaciones y correos.",
+    "reasonLabel": "Motivo (se guarda en el registro de acciones)",
+    "reasonRequired": "Escribe el motivo.",
+    "failed": "No se pudo guardar. Inténtalo de nuevo."
   }
 }

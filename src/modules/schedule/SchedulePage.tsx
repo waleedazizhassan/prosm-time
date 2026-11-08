@@ -228,7 +228,7 @@ export default function SchedulePage() {
       <PageBanner pageId="schedule" illustration={shiftsHeaderImage} />
 
       {/* The owner works no shifts: their own list is left out. */}
-      {profile?.isOwner ? null : (
+      {profile?.isRealOwner ? null : (
         <Card title={t("myShiftsTitle")}>
           <ErrorText>{loadError}</ErrorText>
           <Table columns={myColumns} data={myShifts} getRowId={(row) => row.id} loading={loading} emptyMessage={t("emptyMine")} />

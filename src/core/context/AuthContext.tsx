@@ -141,7 +141,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // server read the moment a real connection exists.
     const cached = readCachedProfile();
     if (cached) {
-      setProfile(cached.profile);
+      // a profile saved before 2026-11-04 has no isRealOwner: the owner was the owner then
+      setProfile({ ...cached.profile, isRealOwner: cached.profile.isRealOwner ?? cached.profile.isOwner, isOwnerDelegate: cached.profile.isOwnerDelegate ?? false });
       setPermissions(cached.permissions);
     }
 

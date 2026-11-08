@@ -108,7 +108,7 @@ export default function LegalAcknowledgementGate({ children }: { children: React
         </p>
         <label className={styles.confirm}>
           <input type="checkbox" checked={checked} onChange={(event) => setChecked(event.target.checked)} />
-          <span>{profile?.isOwner ? t("legal.gate.confirmOwner") : t("legal.gate.confirmMember")}</span>
+          <span>{profile?.isRealOwner ? t("legal.gate.confirmOwner") : t("legal.gate.confirmMember")}</span>
         </label>
         <label className={styles.confirm}>
           <input type="checkbox" checked={euChecked} onChange={(event) => setEuChecked(event.target.checked)} />

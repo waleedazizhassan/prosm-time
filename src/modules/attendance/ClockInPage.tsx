@@ -15,7 +15,7 @@ import PageBanner from "../../components/common/PageBanner";
 export default function ClockInPage() {
   const { profile } = useAuth();
   // Owner 2026-10-18: the Owner does not clock in or out (refused by the server too).
-  if (profile?.isOwner) return <Navigate to="/dashboard" replace />;
+  if (profile?.isRealOwner) return <Navigate to="/dashboard" replace />;
 
   return (
     <PageShell title="">

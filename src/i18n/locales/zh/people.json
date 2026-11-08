@@ -236,5 +236,28 @@
     "pending": "等待中",
     "approved": "已批准",
     "blocked": "已封禁"
+  },
+  "ownerAuthority": {
+    "title": "授予权限",
+    "hint": "打开某人的权限以授予或移除某项权限，或用“全部授予”赋予其所有者的全部权限：所有权限、仅限所有者的操作，以及您收到的每一条通知和邮件 - 您自己的权限不受影响。撤回后，此人即恢复原来的角色和权限。",
+    "search": "按姓名搜索",
+    "nobody": "没有可显示的人员。",
+    "since": "自 {{date}} 起",
+    "hasAll": "拥有所有者权限",
+    "permissions": "权限",
+    "grantAll": "全部授予",
+    "revokeAll": "全部撤回",
+    "historyTitle": "所有者权限授予记录",
+    "historyHint": "为治理保留：谁、何时、为何。",
+    "grantedLine": "于 {{date}} 授予 - {{reason}}",
+    "revokedLine": "于 {{date}} 撤回 - {{reason}}",
+    "stillActive": "仍然拥有",
+    "grantTitle": "将所有者权限授予 {{name}}",
+    "revokeTitle": "撤回 {{name}} 的所有者权限",
+    "grantExplain": "在您撤回之前，{{name}} 将获得所有权限和仅限所有者的操作，并收到您收到的通知和邮件。此人仍需打卡，并保留自己的津贴和假期。只有您可以授予或撤回，且会记入操作日志。",
+    "revokeExplain": "此人会立即恢复原来的角色和权限，不再收到您的通知和邮件。",
+    "reasonLabel": "原因（保存在操作日志中）",
+    "reasonRequired": "请填写原因。",
+    "failed": "无法保存，请重试。"
   }
 }

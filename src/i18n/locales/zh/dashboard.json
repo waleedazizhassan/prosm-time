@@ -490,7 +490,9 @@
         "attendance_overtime_approved": "批准加班",
         "attendance_auto_close": "班次自动关闭",
         "allowances_edit_during_review": "审核中修改津贴",
-        "leave_approved_cancelled": "取消已批准的假期"
+        "leave_approved_cancelled": "取消已批准的假期",
+        "OWNER_AUTHORITY_GRANTED": "授予所有者权限",
+        "OWNER_AUTHORITY_REVOKED": "撤回所有者权限"
       },
       "groups": {
         "sos": "SOS",

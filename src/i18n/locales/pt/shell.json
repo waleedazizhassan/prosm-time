@@ -225,6 +225,12 @@
       "plan": "plano alterado",
       "unlimited": "sem limite",
       "planTo": "plano {{plan}}"
+    },
+    "ownerAuthority": {
+      "grantedTitle": "Você tem a autoridade do proprietário",
+      "grantedBody": "O proprietário lhe deu todas as permissões, notificações e e-mails dele até retirá-los.",
+      "revokedTitle": "A autoridade do proprietário foi retirada",
+      "revokedBody": "Você volta à sua função e às suas permissões."
     }
   },
   "items": {
@@ -248,7 +254,8 @@
     "workers": "Trabalhadores",
     "calendar": "Calendário e feriados",
     "auditLog": "Registro de ações",
-    "dailySummary": "Resumo diário"
+    "dailySummary": "Resumo diário",
+    "grantPermissions": "Conceder permissões"
   },
   "sosOverlay": {
     "title": "Alerta SOS/Emergência",
@@ -354,7 +361,8 @@
     "workers": "Trabalhadores externos e seus números de quiosque",
     "calendar": "Feriados, dias de descanso semanal e dias excepcionais - as horas e as horas extras seguem esses dias.",
     "auditLog": "Tudo o que é feito na sua organização: quem fez o quê, com quem, quando e por quê.",
-    "dailySummary": "Um dia da sua organização: quem trabalhou, quem se atrasou, quem faltou e quem estava afastado"
+    "dailySummary": "Um dia da sua organização: quem trabalhou, quem se atrasou, quem faltou e quem estava afastado",
+    "grantPermissions": "Quem tem quais permissões - e toda a autoridade do proprietário"
   },
   "backgroundDisclosure": {
     "title": "Localização durante o turno",

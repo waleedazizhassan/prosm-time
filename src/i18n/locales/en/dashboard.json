@@ -493,7 +493,9 @@
         "attendance_overtime_approved": "Overtime approved",
         "attendance_auto_close": "Session closed automatically",
         "allowances_edit_during_review": "Allowance edited in review",
-        "leave_approved_cancelled": "Approved leave cancelled"
+        "leave_approved_cancelled": "Approved leave cancelled",
+        "OWNER_AUTHORITY_GRANTED": "Owner's authority granted",
+        "OWNER_AUTHORITY_REVOKED": "Owner's authority withdrawn"
       },
       "groups": {
         "sos": "SOS",

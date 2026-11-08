@@ -290,7 +290,11 @@
     "locationRequired": "Não é possível registrar sem uma localização válida. Ative a localização e tente de novo.",
     "rejectReasonRequired": "Escreva o motivo, para que o funcionário veja.",
     "organizationReadOnly": "Sua organização está somente leitura até a licença ser renovada.",
-    "featureNotInPlan": "Este recurso não faz parte do plano da sua organização."
+    "featureNotInPlan": "Este recurso não faz parte do plano da sua organização.",
+    "ownerAuthorityOwnerOnly": "Só o proprietário concede ou retira a autoridade do proprietário.",
+    "ownerAuthorityAlready": "Esta pessoa já tem a autoridade do proprietário.",
+    "ownerAuthorityNone": "Esta pessoa não tem a autoridade do proprietário.",
+    "ownerAuthorityInactive": "Esta pessoa não está ativa."
   },
   "pageLoad": {
     "title": "Esta página precisa de conexão",

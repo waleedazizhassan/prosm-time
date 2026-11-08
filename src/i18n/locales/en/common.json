@@ -290,7 +290,11 @@
     "locationRequired": "This cannot be recorded without a valid location. Turn on location and try again.",
     "rejectReasonRequired": "Write the reason, so the employee sees it.",
     "organizationReadOnly": "Your organisation is read-only until its licence is renewed.",
-    "featureNotInPlan": "This feature is not in your organisation’s plan."
+    "featureNotInPlan": "This feature is not in your organisation’s plan.",
+    "ownerAuthorityOwnerOnly": "Only the owner gives or withdraws the owner's authority.",
+    "ownerAuthorityAlready": "This person already has the owner's authority.",
+    "ownerAuthorityNone": "This person does not have the owner's authority.",
+    "ownerAuthorityInactive": "This person is not active."
   },
   "pageLoad": {
     "title": "This page needs a connection",

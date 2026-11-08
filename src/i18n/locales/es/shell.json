@@ -225,6 +225,12 @@
       "plan": "plan cambiado",
       "unlimited": "sin límite",
       "planTo": "plan {{plan}}"
+    },
+    "ownerAuthority": {
+      "grantedTitle": "Tienes la autoridad del propietario",
+      "grantedBody": "El propietario te dio todos sus permisos, notificaciones y correos hasta que los retire.",
+      "revokedTitle": "Se retiró la autoridad del propietario",
+      "revokedBody": "Vuelves a tu rol y tus permisos."
     }
   },
   "items": {
@@ -248,7 +254,8 @@
     "workers": "Trabajadores",
     "calendar": "Calendario y festivos",
     "auditLog": "Registro de acciones",
-    "dailySummary": "Resumen diario"
+    "dailySummary": "Resumen diario",
+    "grantPermissions": "Conceder permisos"
   },
   "sosOverlay": {
     "title": "Alerta SOS/Emergencia",
@@ -354,7 +361,8 @@
     "workers": "Trabajadores externos y sus números de quiosco",
     "calendar": "Festivos, días de descanso semanal y días excepcionales: las horas y las horas extra los siguen.",
     "auditLog": "Todo lo que se hace en tu organización: quién hizo qué, a quién, cuándo y por qué.",
-    "dailySummary": "Un día de tu organización: quién trabajó, quién llegó tarde, quién faltó y quién estaba de ausencia"
+    "dailySummary": "Un día de tu organización: quién trabajó, quién llegó tarde, quién faltó y quién estaba de ausencia",
+    "grantPermissions": "Quién tiene qué permisos, y toda la autoridad del propietario"
   },
   "backgroundDisclosure": {
     "title": "Ubicación durante tu turno",

@@ -241,6 +241,11 @@ export default function localizeNotification(notification: AppNotification, t: T
     // v2.3.48: the server's clock-in/out reminders
     case "shift_no_show":
       return { title: t("shell:notifications.noShow.title"), body: t("shell:notifications.noShow.body", { name: String(data.name ?? ""), time: String(data.time ?? ""), site: String(data.siteName ?? "") }) };
+    // owner 2026-11-04: the owner's authority, granted and withdrawn
+    case "owner_authority_granted":
+      return { title: t("shell:notifications.ownerAuthority.grantedTitle"), body: t("shell:notifications.ownerAuthority.grantedBody") };
+    case "owner_authority_revoked":
+      return { title: t("shell:notifications.ownerAuthority.revokedTitle"), body: t("shell:notifications.ownerAuthority.revokedBody") };
     case "overtime_soon":
       return { title: t("shell:notifications.overtimeSoon.title"), body: t("shell:notifications.overtimeSoon.body", { name: String(data.name ?? ""), time: String(data.time ?? "") }) };
     case "license_changed": {

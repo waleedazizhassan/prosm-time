@@ -290,7 +290,11 @@
     "locationRequired": "Impossible d'enregistrer sans position valide. Activez la localisation et réessayez.",
     "rejectReasonRequired": "Indiquez le motif, pour que l'employé le voie.",
     "organizationReadOnly": "Votre organisation est en lecture seule jusqu’au renouvellement de sa licence.",
-    "featureNotInPlan": "Cette fonction n’est pas incluse dans l’offre de votre organisation."
+    "featureNotInPlan": "Cette fonction n’est pas incluse dans l’offre de votre organisation.",
+    "ownerAuthorityOwnerOnly": "Seul le propriétaire accorde ou retire l'autorité du propriétaire.",
+    "ownerAuthorityAlready": "Cette personne a déjà l'autorité du propriétaire.",
+    "ownerAuthorityNone": "Cette personne n'a pas l'autorité du propriétaire.",
+    "ownerAuthorityInactive": "Cette personne n'est pas active."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

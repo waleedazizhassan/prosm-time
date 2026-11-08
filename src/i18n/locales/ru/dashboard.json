@@ -499,7 +499,9 @@
         "attendance_overtime_approved": "Сверхурочные одобрены",
         "attendance_auto_close": "Смена закрыта автоматически",
         "allowances_edit_during_review": "Надбавка изменена при проверке",
-        "leave_approved_cancelled": "Одобренный отпуск отменён"
+        "leave_approved_cancelled": "Одобренный отпуск отменён",
+        "OWNER_AUTHORITY_GRANTED": "Выданы полномочия владельца",
+        "OWNER_AUTHORITY_REVOKED": "Отозваны полномочия владельца"
       },
       "groups": {
         "sos": "SOS",

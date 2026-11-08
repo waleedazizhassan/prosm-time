@@ -172,6 +172,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "plan": "الباقة تغيّرت",
         "unlimited": "بلا حد",
         "planTo": "الباقة {{plan}}"
+      },
+      "ownerAuthority": {
+        "grantedTitle": "معاك صلاحيات المالك",
+        "grantedBody": "المالك اداك كل صلاحياته وإشعاراته وإيميلاته لحد ما يسحبها.",
+        "revokedTitle": "اتسحبت صلاحيات المالك",
+        "revokedBody": "رجعت لدورك وصلاحياتك العادية."
       }
     },
     "leaveTypes": {
@@ -355,6 +361,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "plan": "Paket geändert",
         "unlimited": "unbegrenzt",
         "planTo": "Paket {{plan}}"
+      },
+      "ownerAuthority": {
+        "grantedTitle": "Sie haben die Befugnis des Inhabers",
+        "grantedBody": "Der Inhaber hat Ihnen alle seine Berechtigungen, Benachrichtigungen und E-Mails gegeben, bis er sie entzieht.",
+        "revokedTitle": "Die Befugnis des Inhabers wurde entzogen",
+        "revokedBody": "Sie haben wieder Ihre eigene Rolle und Ihre Berechtigungen."
       }
     },
     "leaveTypes": {
@@ -538,6 +550,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "plan": "plan changed",
         "unlimited": "no limit",
         "planTo": "plan {{plan}}"
+      },
+      "ownerAuthority": {
+        "grantedTitle": "You have the owner's authority",
+        "grantedBody": "The owner gave you all of the owner's permissions, notifications and emails until they withdraw it.",
+        "revokedTitle": "The owner's authority was withdrawn",
+        "revokedBody": "You are back to your own role and permissions."
       }
     },
     "leaveTypes": {
@@ -721,6 +739,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "plan": "plan cambiado",
         "unlimited": "sin límite",
         "planTo": "plan {{plan}}"
+      },
+      "ownerAuthority": {
+        "grantedTitle": "Tienes la autoridad del propietario",
+        "grantedBody": "El propietario te dio todos sus permisos, notificaciones y correos hasta que los retire.",
+        "revokedTitle": "Se retiró la autoridad del propietario",
+        "revokedBody": "Vuelves a tu rol y tus permisos."
       }
     },
     "leaveTypes": {
@@ -904,6 +928,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "plan": "offre modifiée",
         "unlimited": "sans limite",
         "planTo": "offre {{plan}}"
+      },
+      "ownerAuthority": {
+        "grantedTitle": "Vous avez l'autorité du propriétaire",
+        "grantedBody": "Le propriétaire vous a donné toutes ses autorisations, notifications et e-mails jusqu'à ce qu'il les retire.",
+        "revokedTitle": "L'autorité du propriétaire a été retirée",
+        "revokedBody": "Vous retrouvez votre rôle et vos autorisations."
       }
     },
     "leaveTypes": {
@@ -1087,6 +1117,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "plan": "piano cambiato",
         "unlimited": "senza limite",
         "planTo": "piano {{plan}}"
+      },
+      "ownerAuthority": {
+        "grantedTitle": "Hai l'autorità del titolare",
+        "grantedBody": "Il titolare ti ha dato tutte le sue autorizzazioni, notifiche ed e-mail finché non le ritira.",
+        "revokedTitle": "L'autorità del titolare è stata ritirata",
+        "revokedBody": "Torni al tuo ruolo e alle tue autorizzazioni."
       }
     },
     "leaveTypes": {
@@ -1270,6 +1306,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "plan": "plano alterado",
         "unlimited": "sem limite",
         "planTo": "plano {{plan}}"
+      },
+      "ownerAuthority": {
+        "grantedTitle": "Você tem a autoridade do proprietário",
+        "grantedBody": "O proprietário lhe deu todas as permissões, notificações e e-mails dele até retirá-los.",
+        "revokedTitle": "A autoridade do proprietário foi retirada",
+        "revokedBody": "Você volta à sua função e às suas permissões."
       }
     },
     "leaveTypes": {
@@ -1453,6 +1495,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "plan": "тариф изменён",
         "unlimited": "без ограничений",
         "planTo": "тариф {{plan}}"
+      },
+      "ownerAuthority": {
+        "grantedTitle": "У вас полномочия владельца",
+        "grantedBody": "Владелец передал вам все свои права, уведомления и письма, пока не отзовёт их.",
+        "revokedTitle": "Полномочия владельца отозваны",
+        "revokedBody": "Вы вернулись к своей роли и своим правам."
       }
     },
     "leaveTypes": {
@@ -1636,6 +1684,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "plan": "套餐已变更",
         "unlimited": "不限",
         "planTo": "套餐 {{plan}}"
+      },
+      "ownerAuthority": {
+        "grantedTitle": "您已获得所有者权限",
+        "grantedBody": "所有者已将其全部权限、通知和邮件授予您，直到其撤回。",
+        "revokedTitle": "所有者权限已撤回",
+        "revokedBody": "您已恢复为原来的角色和权限。"
       }
     },
     "leaveTypes": {

@@ -236,5 +236,28 @@
     "pending": "En attente",
     "approved": "Approuvé",
     "blocked": "Bloqué"
+  },
+  "ownerAuthority": {
+    "title": "Attribuer les autorisations",
+    "hint": "Ouvrez les autorisations d'une personne pour en accorder ou en retirer une, ou donnez-lui toute l'autorité du propriétaire avec « Tout accorder » : toutes les autorisations, les actions réservées au propriétaire et chaque notification et e-mail que vous recevez - sans changer les vôtres. Retirez-la et elle retrouve son rôle et ses autorisations.",
+    "search": "Rechercher par nom",
+    "nobody": "Personne à afficher.",
+    "since": "depuis le {{date}}",
+    "hasAll": "A l'autorité du propriétaire",
+    "permissions": "Autorisations",
+    "grantAll": "Tout accorder",
+    "revokeAll": "Tout retirer",
+    "historyTitle": "Attributions de l'autorité du propriétaire",
+    "historyHint": "Conservé pour la gouvernance : qui, quand et pourquoi.",
+    "grantedLine": "accordée le {{date}} - {{reason}}",
+    "revokedLine": "retirée le {{date}} - {{reason}}",
+    "stillActive": "la détient encore",
+    "grantTitle": "Donner l'autorité du propriétaire à {{name}}",
+    "revokeTitle": "Retirer l'autorité du propriétaire à {{name}}",
+    "grantExplain": "{{name}} reçoit toutes les autorisations et les actions réservées au propriétaire, ainsi que les notifications et e-mails que vous recevez, jusqu'à ce que vous les retiriez. La personne pointe toujours et garde ses indemnités et congés. Vous seul pouvez l'accorder ou la retirer, et c'est dans le journal des actions.",
+    "revokeExplain": "La personne retrouve aussitôt son rôle et ses autorisations, et ne reçoit plus vos notifications ni vos e-mails.",
+    "reasonLabel": "Motif (conservé dans le journal des actions)",
+    "reasonRequired": "Indiquez le motif.",
+    "failed": "Impossible d'enregistrer. Réessayez."
   }
 }

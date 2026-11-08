@@ -236,5 +236,28 @@
     "pending": "Aguardando",
     "approved": "Aprovado",
     "blocked": "Bloqueado"
+  },
+  "ownerAuthority": {
+    "title": "Conceder permissões",
+    "hint": "Abra as permissões de uma pessoa para conceder ou retirar uma, ou dê a ela toda a autoridade do proprietário com \"Conceder tudo\": todas as permissões, as ações exclusivas do proprietário e cada notificação e e-mail que você recebe - sem mudar as suas. Ao retirar, ela volta à sua função e às suas permissões.",
+    "search": "Pesquisar por nome",
+    "nobody": "Ninguém para mostrar.",
+    "since": "desde {{date}}",
+    "hasAll": "Tem a autoridade do proprietário",
+    "permissions": "Permissões",
+    "grantAll": "Conceder tudo",
+    "revokeAll": "Retirar tudo",
+    "historyTitle": "Concessões da autoridade do proprietário",
+    "historyHint": "Guardado para a governança: quem, quando e por quê.",
+    "grantedLine": "concedida em {{date}} - {{reason}}",
+    "revokedLine": "retirada em {{date}} - {{reason}}",
+    "stillActive": "ainda tem",
+    "grantTitle": "Dar a {{name}} a autoridade do proprietário",
+    "revokeTitle": "Retirar de {{name}} a autoridade do proprietário",
+    "grantExplain": "{{name}} recebe todas as permissões e as ações exclusivas do proprietário, e as notificações e e-mails que você recebe, até você retirar. A pessoa continua registrando o ponto e tem seus adicionais e afastamentos. Só você pode conceder ou retirar, e fica no registro de ações.",
+    "revokeExplain": "A pessoa volta na hora à sua função e às suas permissões, e deixa de receber suas notificações e e-mails.",
+    "reasonLabel": "Motivo (fica no registro de ações)",
+    "reasonRequired": "Escreva o motivo.",
+    "failed": "Não foi possível salvar. Tente de novo."
   }
 }

@@ -236,5 +236,28 @@
     "pending": "In attesa",
     "approved": "Approvato",
     "blocked": "Bloccato"
+  },
+  "ownerAuthority": {
+    "title": "Assegna autorizzazioni",
+    "hint": "Apri le autorizzazioni di una persona per concederne o toglierne una, oppure dalle tutta l'autorità del titolare con «Concedi tutto»: ogni autorizzazione, le azioni riservate al titolare e ogni notifica ed e-mail che ricevi - senza cambiare le tue. Ritirala e la persona torna al suo ruolo e alle sue autorizzazioni.",
+    "search": "Cerca per nome",
+    "nobody": "Nessuno da mostrare.",
+    "since": "dal {{date}}",
+    "hasAll": "Ha l'autorità del titolare",
+    "permissions": "Autorizzazioni",
+    "grantAll": "Concedi tutto",
+    "revokeAll": "Ritira tutto",
+    "historyTitle": "Concessioni dell'autorità del titolare",
+    "historyHint": "Conservato per la governance: chi, quando e perché.",
+    "grantedLine": "concessa il {{date}} - {{reason}}",
+    "revokedLine": "ritirata il {{date}} - {{reason}}",
+    "stillActive": "la ha ancora",
+    "grantTitle": "Dai a {{name}} l'autorità del titolare",
+    "revokeTitle": "Ritira a {{name}} l'autorità del titolare",
+    "grantExplain": "{{name}} riceve ogni autorizzazione e le azioni riservate al titolare, e le notifiche ed e-mail che ricevi tu, finché non la ritiri. Continua a timbrare e ha le sue indennità e ferie. Solo tu puoi concederla o ritirarla, ed è nel registro delle azioni.",
+    "revokeExplain": "Torna subito al suo ruolo e alle sue autorizzazioni e non riceve più le tue notifiche ed e-mail.",
+    "reasonLabel": "Motivo (conservato nel registro delle azioni)",
+    "reasonRequired": "Scrivi il motivo.",
+    "failed": "Impossibile salvare. Riprova."
   }
 }

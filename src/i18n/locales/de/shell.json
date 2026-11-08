@@ -225,6 +225,12 @@
       "plan": "Paket geändert",
       "unlimited": "unbegrenzt",
       "planTo": "Paket {{plan}}"
+    },
+    "ownerAuthority": {
+      "grantedTitle": "Sie haben die Befugnis des Inhabers",
+      "grantedBody": "Der Inhaber hat Ihnen alle seine Berechtigungen, Benachrichtigungen und E-Mails gegeben, bis er sie entzieht.",
+      "revokedTitle": "Die Befugnis des Inhabers wurde entzogen",
+      "revokedBody": "Sie haben wieder Ihre eigene Rolle und Ihre Berechtigungen."
     }
   },
   "items": {
@@ -248,7 +254,8 @@
     "workers": "Externe Arbeiter",
     "calendar": "Kalender und Feiertage",
     "auditLog": "Aktionsprotokoll",
-    "dailySummary": "Tageszusammenfassung"
+    "dailySummary": "Tageszusammenfassung",
+    "grantPermissions": "Berechtigungen vergeben"
   },
   "sosOverlay": {
     "title": "SOS-/Notfallalarm",
@@ -349,7 +356,8 @@
     "workers": "Externe Arbeiter und ihre Kiosk-Nummern",
     "calendar": "Feiertage, Ruhetage und Ausnahmetage - Stunden und Überstunden richten sich danach.",
     "auditLog": "Alles, was in Ihrer Organisation geschieht: wer was für wen, wann und warum getan hat.",
-    "dailySummary": "Ein Tag Ihrer Organisation: wer gearbeitet hat, zu spät, abwesend oder im Urlaub war"
+    "dailySummary": "Ein Tag Ihrer Organisation: wer gearbeitet hat, zu spät, abwesend oder im Urlaub war",
+    "grantPermissions": "Wer welche Berechtigungen hat - und die volle Befugnis des Inhabers"
   },
   "backgroundDisclosure": {
     "title": "Standort während Ihrer Schicht",

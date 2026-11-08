@@ -225,6 +225,12 @@
       "plan": "piano cambiato",
       "unlimited": "senza limite",
       "planTo": "piano {{plan}}"
+    },
+    "ownerAuthority": {
+      "grantedTitle": "Hai l'autorità del titolare",
+      "grantedBody": "Il titolare ti ha dato tutte le sue autorizzazioni, notifiche ed e-mail finché non le ritira.",
+      "revokedTitle": "L'autorità del titolare è stata ritirata",
+      "revokedBody": "Torni al tuo ruolo e alle tue autorizzazioni."
     }
   },
   "items": {
@@ -248,7 +254,8 @@
     "workers": "Lavoratori esterni",
     "calendar": "Calendario e festività",
     "auditLog": "Registro azioni",
-    "dailySummary": "Riepilogo del giorno"
+    "dailySummary": "Riepilogo del giorno",
+    "grantPermissions": "Assegna autorizzazioni"
   },
   "sosOverlay": {
     "title": "Allarme SOS/Emergenza",
@@ -354,7 +361,8 @@
     "workers": "Lavoratori esterni e i loro numeri per il chiosco",
     "calendar": "Festività, giorni di riposo e giorni eccezionali - ore e straordinari ne dipendono.",
     "auditLog": "Tutto ciò che avviene nella tua organizzazione: chi ha fatto cosa, a chi, quando e perché.",
-    "dailySummary": "Un giorno della tua organizzazione: chi ha lavorato, chi era in ritardo, assente o in ferie"
+    "dailySummary": "Un giorno della tua organizzazione: chi ha lavorato, chi era in ritardo, assente o in ferie",
+    "grantPermissions": "Chi ha quali autorizzazioni - e tutta l'autorità del titolare"
   },
   "backgroundDisclosure": {
     "title": "Posizione durante il turno",

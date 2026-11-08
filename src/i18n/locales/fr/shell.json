@@ -225,6 +225,12 @@
       "plan": "offre modifiée",
       "unlimited": "sans limite",
       "planTo": "offre {{plan}}"
+    },
+    "ownerAuthority": {
+      "grantedTitle": "Vous avez l'autorité du propriétaire",
+      "grantedBody": "Le propriétaire vous a donné toutes ses autorisations, notifications et e-mails jusqu'à ce qu'il les retire.",
+      "revokedTitle": "L'autorité du propriétaire a été retirée",
+      "revokedBody": "Vous retrouvez votre rôle et vos autorisations."
     }
   },
   "items": {
@@ -248,7 +254,8 @@
     "workers": "Intervenants externes",
     "calendar": "Calendrier et jours fériés",
     "auditLog": "Journal des actions",
-    "dailySummary": "Résumé du jour"
+    "dailySummary": "Résumé du jour",
+    "grantPermissions": "Attribuer les autorisations"
   },
   "sosOverlay": {
     "title": "Alerte SOS/Urgence",
@@ -354,7 +361,8 @@
     "workers": "Intervenants externes et leur numéro de borne",
     "calendar": "Jours fériés, jours de repos et jours exceptionnels - les heures et heures supplémentaires en dépendent.",
     "auditLog": "Tout ce qui se fait dans votre organisation : qui a fait quoi, pour qui, quand et pourquoi.",
-    "dailySummary": "Une journée de votre organisation : qui a travaillé, en retard, absent ou en congé"
+    "dailySummary": "Une journée de votre organisation : qui a travaillé, en retard, absent ou en congé",
+    "grantPermissions": "Qui a quelles autorisations - et toute l'autorité du propriétaire"
   },
   "backgroundDisclosure": {
     "title": "Position pendant votre poste",

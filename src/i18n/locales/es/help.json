@@ -72,7 +72,7 @@
     },
     "permissions": {
       "title": "Permisos y fichar en nombre de otros (administradores)",
-      "body": "La página de cada persona en Personas muestra sus permisos; quien puede cambiarlos puede conceder, retirar o restablecer uno, con un motivo. El propietario tiene todos los permisos y puede darlos a cualquiera por debajo. Un responsable puede dar a un supervisor de sus propias sedes un permiso que él tenga, y retirarlo. Aprobar ausencias y fichar la entrada o la salida en nombre de alguien es solo para el propietario y los responsables: nunca para uno mismo, y solo para personas por debajo de ti en las sedes que gestionas. Cada cambio queda registrado con quién lo hizo."
+      "body": "La página de cada persona en Personas muestra sus permisos; quien puede cambiarlos puede conceder, retirar o restablecer uno, con un motivo. El propietario tiene todos los permisos y puede darlos a cualquiera por debajo. Un responsable puede dar a un supervisor de sus propias sedes un permiso que él tenga, y retirarlo. Aprobar ausencias y fichar la entrada o la salida en nombre de alguien es solo para el propietario y los responsables: nunca para uno mismo, y solo para personas por debajo de ti en las sedes que gestionas. Cada cambio queda registrado con quién lo hizo. El propietario también puede dar a una persona toda su autoridad desde Conceder permisos («Conceder todo»): todos los permisos, las acciones exclusivas del propietario y cada notificación y correo que recibe, sin cambiar los suyos. Requiere un motivo, la persona recibe un aviso y queda en el registro de acciones; al retirarla, la persona vuelve a su rol y sus permisos."
     },
     "getTheApp": {
       "title": "Obtener PROSM Time",

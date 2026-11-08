@@ -55,6 +55,9 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
     // owner 2026-11-03: the morning summary opens the day it is about; a licence change, the plan card
     case "daily_digest":
       return viewer.isOwner ? (typeof ref?.date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(ref.date) ? `/daily-summary?date=${ref.date}` : "/daily-summary") : "/dashboard";
+    case "owner_authority_granted":
+    case "owner_authority_revoked":
+      return "/dashboard";
     case "license_changed":
       return viewer.isOwner ? "/settings#plan" : "/dashboard";
     case "shift_no_show":

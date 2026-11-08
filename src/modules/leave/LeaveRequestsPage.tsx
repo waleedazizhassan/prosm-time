@@ -46,6 +46,8 @@ export default function LeaveRequestsPage() {
   const { t, i18n } = useTranslation("leave");
   const { profile } = useAuth();
   const isOwner = Boolean(profile?.isOwner);
+  // the owner's own leave is approved at once; a person holding the owner's authority still asks someone
+  const isRealOwner = Boolean(profile?.isRealOwner);
 
   const today = new Date();
   const [requests, setRequests] = useState<LeaveRequestRow[]>([]);
@@ -106,7 +108,7 @@ export default function LeaveRequestsPage() {
 
   useEffect(() => {
     LeaveRepository.listTypes().then((result) => setLeaveTypes((result.data ?? []).filter((type) => type.isActive)));
-    if (!isOwner) {
+    if (!isRealOwner) {
       LeaveRepository.listReviewers().then((result) => {
         const list = result.data ?? [];
         setReviewers(list);
@@ -114,7 +116,7 @@ export default function LeaveRequestsPage() {
         setReviewerId((current) => current || (list.find((reviewer) => !reviewer.isOwner) ?? list[0])?.id || "");
       });
     }
-  }, [isOwner]);
+  }, [isRealOwner]);
 
   const handleSubmit = async () => {
     if (!startDate || !endDate) return;
@@ -248,7 +250,7 @@ export default function LeaveRequestsPage() {
             disabled={submitting}
             options={(leaveTypes.length > 0 ? leaveTypes : [{ key: "annual", name: "" } as LeaveTypeSetting]).map((type) => ({ value: type.key, label: leaveTypeLabel(t, type.key, type.name) }))}
           />
-          {!isOwner && reviewers.length > 0 ? (
+          {!isRealOwner && reviewers.length > 0 ? (
             <Select
               label={t("reviewerLabel")}
               name="leaveReviewer"
@@ -282,7 +284,7 @@ export default function LeaveRequestsPage() {
             <input type="file" accept="image/*,application/pdf" onChange={(event) => setDocumentFile(event.target.files?.[0] ?? null)} disabled={submitting} />
           </label>
         ) : null}
-        {isOwner ? <HintText>{t("ownerAutoApproveHint")}</HintText> : null}
+        {isRealOwner ? <HintText>{t("ownerAutoApproveHint")}</HintText> : null}
         <Textarea label={t("reasonLabel")} name="leaveReason" value={reason} onChange={(event) => setReason(event.target.value)} disabled={submitting} rows={2} />
         <ErrorText>{submitError}</ErrorText>
         {submitSuccess ? <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-sm)", color: "var(--status-success-text)" }}>{t("ownerAutoApprovedMessage")}</p> : null}

@@ -496,7 +496,9 @@
         "attendance_overtime_approved": "Straordinari approvati",
         "attendance_auto_close": "Sessione chiusa automaticamente",
         "allowances_edit_during_review": "Indennità modificata in revisione",
-        "leave_approved_cancelled": "Ferie approvate annullate"
+        "leave_approved_cancelled": "Ferie approvate annullate",
+        "OWNER_AUTHORITY_GRANTED": "Autorità del titolare concessa",
+        "OWNER_AUTHORITY_REVOKED": "Autorità del titolare ritirata"
       },
       "groups": {
         "sos": "SOS",

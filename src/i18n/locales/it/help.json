@@ -72,7 +72,7 @@
     },
     "permissions": {
       "title": "Permessi e timbratura per conto (amministratori)",
-      "body": "La pagina di ogni persona in Persone mostra i suoi permessi; chi può modificarli può concederne, revocarne o ripristinarne uno, con un motivo. Il titolare ha tutti i permessi e può darne qualsiasi a chiunque sotto di lui. Un responsabile può dare a un supervisore delle sue sedi un permesso che possiede, e toglierlo. Approvare le ferie e timbrare per conto di qualcuno sono solo per il titolare e i responsabili - mai per se stessi, e solo per le persone sotto di sé nelle sedi che gestiscono. Ogni modifica viene registrata con il suo autore."
+      "body": "La pagina di ogni persona in Persone mostra i suoi permessi; chi può modificarli può concederne, revocarne o ripristinarne uno, con un motivo. Il titolare ha tutti i permessi e può darne qualsiasi a chiunque sotto di lui. Un responsabile può dare a un supervisore delle sue sedi un permesso che possiede, e toglierlo. Approvare le ferie e timbrare per conto di qualcuno sono solo per il titolare e i responsabili - mai per se stessi, e solo per le persone sotto di sé nelle sedi che gestiscono. Ogni modifica viene registrata con il suo autore. Il titolare può anche dare a una persona tutta la sua autorità da Assegna autorizzazioni («Concedi tutto»): ogni autorizzazione, le azioni riservate al titolare e ogni notifica ed e-mail che riceve, senza cambiare le proprie. Serve un motivo, la persona viene avvisata ed è nel registro delle azioni; una volta ritirata, la persona torna al suo ruolo e alle sue autorizzazioni."
     },
     "getTheApp": {
       "title": "Usare PROSM Time",

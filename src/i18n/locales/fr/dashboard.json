@@ -496,7 +496,9 @@
         "attendance_overtime_approved": "Heures sup. approuvées",
         "attendance_auto_close": "Session fermée automatiquement",
         "allowances_edit_during_review": "Indemnité modifiée en revue",
-        "leave_approved_cancelled": "Congé approuvé annulé"
+        "leave_approved_cancelled": "Congé approuvé annulé",
+        "OWNER_AUTHORITY_GRANTED": "Autorité du propriétaire accordée",
+        "OWNER_AUTHORITY_REVOKED": "Autorité du propriétaire retirée"
       },
       "groups": {
         "sos": "SOS",

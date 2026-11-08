@@ -194,6 +194,12 @@ export function localizePush(type: string, data: Data, language: string, fallbac
     case "shift_no_show":
       result = pair("noShow.title", "noShow.body", { name: data.name ?? "", time: data.time ?? "", site: data.siteName ?? "" });
       break;
+    case "owner_authority_granted":
+      result = pair("ownerAuthority.grantedTitle", "ownerAuthority.grantedBody");
+      break;
+    case "owner_authority_revoked":
+      result = pair("ownerAuthority.revokedTitle", "ownerAuthority.revokedBody");
+      break;
     case "overtime_soon":
       result = pair("overtimeSoon.title", "overtimeSoon.body", { name: data.name ?? "", time: data.time ?? "" });
       break;

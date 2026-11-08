@@ -84,7 +84,7 @@ export default function PersonalRemindersCard() {
     setSaving(false);
   };
 
-  if (!profile || profile.isOwner) return null;
+  if (!profile || profile.isRealOwner) return null;
 
   return (
     <Card title={t("reminders.title")} subtitle={onPhone ? t("reminders.hint") : t("reminders.phoneOnly")}>

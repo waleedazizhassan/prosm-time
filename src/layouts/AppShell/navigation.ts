@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, LogIn, Plug, HardHat, ScrollText, Sunrise } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, KeyRound, LogIn, Plug, HardHat, ScrollText, Sunrise } from "lucide-react";
 
 import { FEATURES } from "../../config/features";
 import type { PlanFeature } from "../../core/hooks/usePlanFeatures";
@@ -38,6 +38,8 @@ export interface NavItem {
   // authenticated member, same as requiredPermission: null already
   // means for this one item).
   hiddenFromOwner?: boolean;
+  /** Only the owner as a person - not a person holding the owner's authority (owner 2026-11-04). */
+  realOwnerOnly?: boolean;
   // Owner 2026-10-19: shown only to the Owner and Managers (e.g. the workers' kiosk).
   ownerOrManagerOnly?: boolean;
   // Owner 2026-11-03: hidden when the organisation's plan does not include it.
@@ -137,6 +139,7 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // inside an unrelated page. Owner-only, matching that setting's own
   // existing RPC-level gate.
   // Owner 2026-10-20: every setting lives here - each site's rules too, so managers who manage sites see it.
+  { id: "grantPermissions", labelKey: "items.grantPermissions", path: "/permissions", icon: KeyRound, requiredPermission: null, ownerOnly: true, realOwnerOnly: true, section: "settings" },
   { id: "settings", labelKey: "items.settings", path: "/settings", icon: Settings, requiredPermission: "sites.manage", section: "settings" },
   // § user-directed 2026-09-09 - "API [keys] should appear on its own
   // in the sidebar, not inside Settings." Same Owner-only gate as

@@ -27,7 +27,7 @@ export default function ClockReminderLoop() {
   const { t } = useTranslation("common");
   const { profile } = useAuth();
   const profileId = profile?.id;
-  const enabled = Capacitor.isNativePlatform() && Boolean(profileId) && !profile?.isOwner;
+  const enabled = Capacitor.isNativePlatform() && Boolean(profileId) && !profile?.isRealOwner;
   const scheduledKey = useRef<string | null>(null);
   const siteEndTimes = useRef<Record<string, string | null>>({});
 

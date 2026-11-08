@@ -26,6 +26,7 @@ import KioskLockGuard from "../modules/kiosk/KioskLockGuard";
 // everything a worker needs offline stays in the main file.
 const PeoplePage = lazy(() => import("../modules/people/PeoplePage"));
 const PersonDetailPage = lazy(() => import("../modules/people/PersonDetailPage"));
+const GrantPermissionsPage = lazy(() => import("../modules/people/GrantPermissionsPage"));
 const AdminOnBehalfPage = lazy(() => import("../modules/people/AdminOnBehalfPage"));
 const AuditLogPage = lazy(() => import("../modules/audit/AuditLogPage"));
 const SitesPage = lazy(() => import("../modules/sites/SitesPage"));
@@ -125,6 +126,7 @@ export default function AppRoutes() {
             <Route path="/clock-in" element={<ClockInPage />} />
             <Route path="/people" element={<PeoplePage />} />
             <Route path="/people/:userId" element={<PersonDetailPage />} />
+            <Route path="/permissions" element={<GrantPermissionsPage />} />
             <Route path="/admin-clock" element={<PlanRoute feature="on_behalf"><AdminOnBehalfPage /></PlanRoute>} />
             <Route path="/audit-log" element={<PlanRoute feature="audit"><AuditLogPage /></PlanRoute>} />
             <Route path="/sites" element={<SitesPage />} />
