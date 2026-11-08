@@ -115,7 +115,7 @@
     "leaveEntitlementError": "No se pudo actualizar el derecho de vacaciones de este empleado.",
     "leaveEntitlementSuccess": "Derecho actualizado.",
     "payRateTitle": "Tarifa",
-    "payRateHint": "Datos de retribución usados para calcular el coste laboral en PROSM Finance. Una tarifa nueva conserva la anterior con sus propias fechas de vigencia: nunca borra el historial.",
+    "payRateHint": "Datos de retribución usados para calcular el coste laboral, en la nómina y en los sistemas conectados. Una tarifa nueva conserva la anterior con sus propias fechas de vigencia: nunca borra el historial.",
     "payRateCurrent": "Actual: {{amount}} {{currency}} ({{type}})",
     "payRateTypeLabel": "Tipo de tarifa",
     "payRateType": {

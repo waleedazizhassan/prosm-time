@@ -115,7 +115,7 @@
     "leaveEntitlementError": "Unable to update this employee's leave entitlement.",
     "leaveEntitlementSuccess": "Entitlement updated.",
     "payRateTitle": "Pay Rate",
-    "payRateHint": "Compensation data used for labor cost calculations in PROSM Finance. Setting a new rate keeps the old one on record with its own effective dates - it never overwrites history.",
+    "payRateHint": "Compensation data used for labor cost calculations, in payroll and in connected systems. Setting a new rate keeps the old one on record with its own effective dates - it never overwrites history.",
     "payRateCurrent": "Current: {{amount}} {{currency}} ({{type}})",
     "payRateTypeLabel": "Rate type",
     "payRateType": {

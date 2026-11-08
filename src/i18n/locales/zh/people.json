@@ -115,7 +115,7 @@
     "leaveEntitlementError": "无法更新此员工的年假额度。",
     "leaveEntitlementSuccess": "额度已更新。",
     "payRateTitle": "薪资费率",
-    "payRateHint": "用于 PROSM Finance 人工成本计算的薪酬数据。设置新费率会保留旧费率及其生效日期，绝不覆盖历史。",
+    "payRateHint": "用于人工成本计算的薪酬数据（工资及已连接的系统）。设置新费率会保留旧费率及其生效日期，绝不覆盖历史。",
     "payRateCurrent": "当前：{{amount}} {{currency}}（{{type}}）",
     "payRateTypeLabel": "费率类型",
     "payRateType": {

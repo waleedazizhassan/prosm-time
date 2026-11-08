@@ -31,9 +31,9 @@
   },
   "integrations": {
     "title": "Integrations",
-    "hint": "A read-only key so another PROSM product (like PROSM Projects or PROSM Finance) can pull your team's real, verified attendance - and payroll data too, if the key has payroll scope - instead of hand-typing it. This key can never write anything back into PROSM Time.",
+    "hint": "Read-only keys let another system - an ERP, accounting, HR or reporting tool - read your data through the PROSM Time API. Give each key only the scopes it needs. A key can never change anything in PROSM Time.",
     "nameLabel": "Key name",
-    "namePlaceholder": "e.g. PROSM Projects or PROSM Finance",
+    "namePlaceholder": "e.g. ERP, accounting system",
     "createAction": "Create key",
     "createError": "Unable to create this API key.",
     "revokeAction": "Revoke",
@@ -43,11 +43,30 @@
     "neverUsed": "never used",
     "newKeyTitle": "Your new API key",
     "newKeyWarning": "Copy this now - it will not be shown again. Only its prefix is kept afterward.",
-    "scopeLabel": "Access",
+    "scopeLabel": "What this key may read",
     "scope": {
-      "attendanceRead": "Attendance (read-only)",
-      "payrollRead": "Pay rates (read-only)"
-    }
+      "attendanceRead": "Attendance",
+      "payrollRead": "Payroll (locked cycles)",
+      "employeesRead": "Employees",
+      "employeesSensitive": "Employees' email addresses",
+      "sitesRead": "Sites",
+      "leavesRead": "Leave"
+    },
+    "endpoint": "API address:",
+    "expired": "Expired",
+    "requests7d": "{{n}} requests in 7 days",
+    "expiresOn": "expires {{time}}",
+    "noExpiry": "No expiry",
+    "expiryLabel": "Expires after",
+    "expiryDays": "{{n}} days",
+    "environmentLabel": "Environment",
+    "environment": {
+      "live": "Live",
+      "test": "Test"
+    },
+    "revokeTitle": "Revoke this key?",
+    "revokeWarning": "\"{{name}}\" stops working immediately and cannot be restored. The system using it will need a new key.",
+    "cancel": "Cancel"
   },
   "payroll": {
     "title": "Payroll Integration",

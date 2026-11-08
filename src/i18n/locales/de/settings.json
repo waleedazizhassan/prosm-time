@@ -31,9 +31,9 @@
   },
   "integrations": {
     "title": "Integrationen",
-    "hint": "Ein reiner Lese-Schlüssel, damit ein anderes PROSM-Produkt (wie PROSM Projects oder PROSM Finance) die echte, verifizierte Anwesenheit Ihres Teams - und bei Lohn-Berechtigung auch Gehaltsdaten - abrufen kann, statt sie manuell einzutippen. Dieser Schlüssel kann niemals etwas an PROSM Time zurückschreiben.",
+    "hint": "Schlüssel nur zum Lesen erlauben einem anderen System - ERP, Buchhaltung, Personal oder Berichte - Ihre Daten über die PROSM Time API zu lesen. Geben Sie jedem Schlüssel nur die nötigen Bereiche. Ein Schlüssel kann in PROSM Time nie etwas ändern.",
     "nameLabel": "Schlüsselname",
-    "namePlaceholder": "z. B. PROSM Projects oder PROSM Finance",
+    "namePlaceholder": "z. B. ERP, Buchhaltung",
     "createAction": "Schlüssel erstellen",
     "createError": "Dieser API-Schlüssel konnte nicht erstellt werden.",
     "revokeAction": "Widerrufen",
@@ -43,11 +43,30 @@
     "neverUsed": "nie verwendet",
     "newKeyTitle": "Ihr neuer API-Schlüssel",
     "newKeyWarning": "Kopieren Sie ihn jetzt - er wird nicht erneut angezeigt. Danach wird nur sein Präfix gespeichert.",
-    "scopeLabel": "Zugriff",
+    "scopeLabel": "Was dieser Schlüssel lesen darf",
     "scope": {
-      "attendanceRead": "Anwesenheit (nur lesen)",
-      "payrollRead": "Lohnsätze (nur lesen)"
-    }
+      "attendanceRead": "Anwesenheit",
+      "payrollRead": "Lohn (gesperrte Läufe)",
+      "employeesRead": "Mitarbeitende",
+      "employeesSensitive": "E-Mail-Adressen der Mitarbeitenden",
+      "sitesRead": "Standorte",
+      "leavesRead": "Urlaub"
+    },
+    "endpoint": "API-Adresse:",
+    "expired": "Abgelaufen",
+    "requests7d": "{{n}} Anfragen in 7 Tagen",
+    "expiresOn": "läuft ab {{time}}",
+    "noExpiry": "Kein Ablauf",
+    "expiryLabel": "Läuft ab nach",
+    "expiryDays": "{{n}} Tagen",
+    "environmentLabel": "Umgebung",
+    "environment": {
+      "live": "Live",
+      "test": "Test"
+    },
+    "revokeTitle": "Diesen Schlüssel widerrufen?",
+    "revokeWarning": "\"{{name}}\" funktioniert sofort nicht mehr und kann nicht wiederhergestellt werden. Das nutzende System braucht einen neuen Schlüssel.",
+    "cancel": "Abbrechen"
   },
   "payroll": {
     "title": "Lohnbuchhaltungs-Integration",

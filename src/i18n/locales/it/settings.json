@@ -31,9 +31,9 @@
   },
   "integrations": {
     "title": "Integrazioni",
-    "hint": "Una chiave di sola lettura per permettere a un altro prodotto PROSM (come PROSM Projects o PROSM Finance) di recuperare le presenze reali e verificate del tuo team - e i dati sulle paghe se la chiave ha l'ambito paghe - invece di digitarle a mano. Questa chiave non può mai scrivere nulla in PROSM Time.",
+    "hint": "Le chiavi di sola lettura consentono a un altro sistema (ERP, contabilità, HR o reportistica) di leggere i tuoi dati tramite l'API di PROSM Time. Assegna a ogni chiave solo gli ambiti necessari. Una chiave non può mai modificare nulla in PROSM Time.",
     "nameLabel": "Nome chiave",
-    "namePlaceholder": "es. PROSM Projects o PROSM Finance",
+    "namePlaceholder": "es. ERP, contabilità",
     "createAction": "Crea chiave",
     "createError": "Impossibile creare questa chiave API.",
     "revokeAction": "Revoca",
@@ -43,11 +43,30 @@
     "neverUsed": "mai utilizzata",
     "newKeyTitle": "La tua nuova chiave API",
     "newKeyWarning": "Copiala ora - non verrà più mostrata. In seguito verrà conservato solo il suo prefisso.",
-    "scopeLabel": "Accesso",
+    "scopeLabel": "Cosa può leggere questa chiave",
     "scope": {
-      "attendanceRead": "Presenze (sola lettura)",
-      "payrollRead": "Tariffe salariali (sola lettura)"
-    }
+      "attendanceRead": "Presenze",
+      "payrollRead": "Paghe (cicli bloccati)",
+      "employeesRead": "Dipendenti",
+      "employeesSensitive": "Email dei dipendenti",
+      "sitesRead": "Sedi",
+      "leavesRead": "Ferie"
+    },
+    "endpoint": "Indirizzo API:",
+    "expired": "Scaduta",
+    "requests7d": "{{n}} richieste in 7 giorni",
+    "expiresOn": "scade il {{time}}",
+    "noExpiry": "Nessuna scadenza",
+    "expiryLabel": "Scade dopo",
+    "expiryDays": "{{n}} giorni",
+    "environmentLabel": "Ambiente",
+    "environment": {
+      "live": "Produzione",
+      "test": "Test"
+    },
+    "revokeTitle": "Revocare questa chiave?",
+    "revokeWarning": "\"{{name}}\" smette subito di funzionare e non può essere ripristinata. Il sistema che la usa avrà bisogno di una nuova chiave.",
+    "cancel": "Annulla"
   },
   "payroll": {
     "title": "Integrazione buste paga",

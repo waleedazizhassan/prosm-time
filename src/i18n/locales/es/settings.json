@@ -31,9 +31,9 @@
   },
   "integrations": {
     "title": "Integraciones",
-    "hint": "Una clave de solo lectura para que otro producto PROSM (como PROSM Projects o PROSM Finance) obtenga la asistencia real y verificada de tu equipo, y también datos de nómina si la clave lo permite, en lugar de teclearlos. Esta clave nunca puede escribir nada en PROSM Time.",
+    "hint": "Las claves de solo lectura permiten que otro sistema (ERP, contabilidad, RR. HH. o informes) lea sus datos mediante la API de PROSM Time. Dé a cada clave solo los ámbitos que necesita. Una clave nunca puede cambiar nada en PROSM Time.",
     "nameLabel": "Nombre de la clave",
-    "namePlaceholder": "p. ej., PROSM Projects o PROSM Finance",
+    "namePlaceholder": "p. ej., ERP, contabilidad",
     "createAction": "Crear clave",
     "createError": "No se pudo crear esta clave de API.",
     "revokeAction": "Revocar",
@@ -43,11 +43,30 @@
     "neverUsed": "nunca usada",
     "newKeyTitle": "Tu nueva clave de API",
     "newKeyWarning": "Cópiala ahora: no se volverá a mostrar. Después solo se guarda su prefijo.",
-    "scopeLabel": "Acceso",
+    "scopeLabel": "Qué puede leer esta clave",
     "scope": {
-      "attendanceRead": "Asistencia (solo lectura)",
-      "payrollRead": "Tarifas (solo lectura)"
-    }
+      "attendanceRead": "Asistencia",
+      "payrollRead": "Nómina (ciclos cerrados)",
+      "employeesRead": "Empleados",
+      "employeesSensitive": "Correos de los empleados",
+      "sitesRead": "Sedes",
+      "leavesRead": "Permisos"
+    },
+    "endpoint": "Dirección de la API:",
+    "expired": "Caducada",
+    "requests7d": "{{n}} solicitudes en 7 días",
+    "expiresOn": "caduca {{time}}",
+    "noExpiry": "Sin caducidad",
+    "expiryLabel": "Caduca tras",
+    "expiryDays": "{{n}} días",
+    "environmentLabel": "Entorno",
+    "environment": {
+      "live": "Producción",
+      "test": "Prueba"
+    },
+    "revokeTitle": "¿Revocar esta clave?",
+    "revokeWarning": "\"{{name}}\" deja de funcionar de inmediato y no se puede restaurar. El sistema que la usa necesitará una clave nueva.",
+    "cancel": "Cancelar"
   },
   "payroll": {
     "title": "Integración de nóminas",

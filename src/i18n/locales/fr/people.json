@@ -115,7 +115,7 @@
     "leaveEntitlementError": "Impossible de mettre à jour le droit aux congés de cet employé.",
     "leaveEntitlementSuccess": "Droit mis à jour.",
     "payRateTitle": "Taux de rémunération",
-    "payRateHint": "Données de rémunération utilisées pour le calcul du coût de la main-d'œuvre dans PROSM Finance. Définir un nouveau taux conserve l'ancien dans l'historique avec ses propres dates d'effet - l'historique n'est jamais écrasé.",
+    "payRateHint": "Données de rémunération utilisées pour le calcul du coût de la main-d'œuvre, dans la paie et dans les systèmes connectés. Définir un nouveau taux conserve l'ancien dans l'historique avec ses propres dates d'effet - l'historique n'est jamais écrasé.",
     "payRateCurrent": "Actuel : {{amount}} {{currency}} ({{type}})",
     "payRateTypeLabel": "Type de taux",
     "payRateType": {

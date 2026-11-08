@@ -115,7 +115,7 @@
     "leaveEntitlementError": "Impossibile aggiornare le ferie di questo dipendente.",
     "leaveEntitlementSuccess": "Ferie aggiornate.",
     "payRateTitle": "Tariffa salariale",
-    "payRateHint": "Dati retributivi usati per il calcolo del costo del lavoro in PROSM Finance. Impostare una nuova tariffa mantiene quella precedente nello storico con le proprie date di validità - lo storico non viene mai sovrascritto.",
+    "payRateHint": "Dati retributivi usati per il calcolo del costo del lavoro, nelle paghe e nei sistemi collegati. Impostare una nuova tariffa mantiene quella precedente nello storico con le proprie date di validità - lo storico non viene mai sovrascritto.",
     "payRateCurrent": "Attuale: {{amount}} {{currency}} ({{type}})",
     "payRateTypeLabel": "Tipo di tariffa",
     "payRateType": {

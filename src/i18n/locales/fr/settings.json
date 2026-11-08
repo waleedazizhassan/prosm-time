@@ -31,9 +31,9 @@
   },
   "integrations": {
     "title": "Intégrations",
-    "hint": "Une clé en lecture seule pour qu'un autre produit PROSM (comme PROSM Projects ou PROSM Finance) puisse récupérer les présences réelles et vérifiées de votre équipe - et les données de paie si la clé a la portée paie - au lieu de les saisir à la main. Cette clé ne peut jamais rien écrire en retour dans PROSM Time.",
+    "hint": "Les clés en lecture seule permettent à un autre système (ERP, comptabilité, RH ou reporting) de lire vos données via l'API PROSM Time. Donnez à chaque clé uniquement les portées nécessaires. Une clé ne peut jamais rien modifier dans PROSM Time.",
     "nameLabel": "Nom de la clé",
-    "namePlaceholder": "ex. PROSM Projects ou PROSM Finance",
+    "namePlaceholder": "ex. ERP, comptabilité",
     "createAction": "Créer une clé",
     "createError": "Impossible de créer cette clé API.",
     "revokeAction": "Révoquer",
@@ -43,11 +43,30 @@
     "neverUsed": "jamais utilisée",
     "newKeyTitle": "Votre nouvelle clé API",
     "newKeyWarning": "Copiez-la maintenant - elle ne sera plus affichée. Seul son préfixe est conservé ensuite.",
-    "scopeLabel": "Accès",
+    "scopeLabel": "Ce que cette clé peut lire",
     "scope": {
-      "attendanceRead": "Présence (lecture seule)",
-      "payrollRead": "Taux de rémunération (lecture seule)"
-    }
+      "attendanceRead": "Présences",
+      "payrollRead": "Paie (cycles verrouillés)",
+      "employeesRead": "Employés",
+      "employeesSensitive": "E-mails des employés",
+      "sitesRead": "Sites",
+      "leavesRead": "Congés"
+    },
+    "endpoint": "Adresse de l'API :",
+    "expired": "Expirée",
+    "requests7d": "{{n}} requêtes en 7 jours",
+    "expiresOn": "expire le {{time}}",
+    "noExpiry": "Sans expiration",
+    "expiryLabel": "Expire après",
+    "expiryDays": "{{n}} jours",
+    "environmentLabel": "Environnement",
+    "environment": {
+      "live": "Production",
+      "test": "Test"
+    },
+    "revokeTitle": "Révoquer cette clé ?",
+    "revokeWarning": "« {{name}} » cesse de fonctionner immédiatement et ne peut pas être restaurée. Le système qui l'utilise aura besoin d'une nouvelle clé.",
+    "cancel": "Annuler"
   },
   "payroll": {
     "title": "Intégration de paie",

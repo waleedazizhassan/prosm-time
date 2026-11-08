@@ -115,7 +115,7 @@
     "leaveEntitlementError": "Não foi possível atualizar o direito de férias deste funcionário.",
     "leaveEntitlementSuccess": "Direito atualizado.",
     "payRateTitle": "Valor de pagamento",
-    "payRateHint": "Dados de remuneração usados no cálculo do custo de mão de obra no PROSM Finance. Um novo valor mantém o anterior registrado com as próprias datas de vigência: nunca apaga o histórico.",
+    "payRateHint": "Dados de remuneração usados no cálculo do custo de mão de obra, na folha e nos sistemas ligados. Um novo valor mantém o anterior registrado com as próprias datas de vigência: nunca apaga o histórico.",
     "payRateCurrent": "Atual: {{amount}} {{currency}} ({{type}})",
     "payRateTypeLabel": "Tipo de valor",
     "payRateType": {

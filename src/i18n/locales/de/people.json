@@ -115,7 +115,7 @@
     "leaveEntitlementError": "Der Urlaubsanspruch dieses Mitarbeiters konnte nicht aktualisiert werden.",
     "leaveEntitlementSuccess": "Anspruch aktualisiert.",
     "payRateTitle": "Lohnsatz",
-    "payRateHint": "Vergütungsdaten für die Arbeitskostenberechnung in PROSM Finance. Ein neuer Satz behält den alten mit seinen eigenen Gültigkeitsdaten - der Verlauf wird nie überschrieben.",
+    "payRateHint": "Vergütungsdaten für die Arbeitskostenberechnung, in der Lohnabrechnung und in verbundenen Systemen. Ein neuer Satz behält den alten mit seinen eigenen Gültigkeitsdaten - der Verlauf wird nie überschrieben.",
     "payRateCurrent": "Aktuell: {{amount}} {{currency}} ({{type}})",
     "payRateTypeLabel": "Satzart",
     "payRateType": {

@@ -27,6 +27,19 @@ const TABLES: Record<string, string> = {
   known_login_devices: byOrg,
   shift_swap_requests: byOrg,
   payroll_export_templates: byOrg,
+  payroll_settings: "select organization_id as id from %t where organization_id = $1",
+  payroll_components: byOrg,
+  payroll_profiles: byOrg,
+  payroll_profile_components: byOrg,
+  payroll_cycles: byOrg,
+  payroll_cycle_employees: byOrg,
+  payroll_cycle_lines: byOrg,
+  payroll_installment_plans: byOrg,
+  payroll_installment_payments: byOrg,
+  payroll_cycle_snapshots: byOrg,
+  payroll_exports: byOrg,
+  payslip_requests: byOrg,
+  api_request_log: byOrg,
   allowance_entry_adjustments: byOrg,
   attendance_day_adjustments: byOrg,
   attendance_permissions: byOrg,
@@ -306,7 +319,7 @@ describe("cross-tenant isolation", () => {
         for (const [table, template] of Object.entries(TABLES)) {
           const ids = (await t.su<{ id: string }>(template.replace("%t", table), [other.org.id])).map((row) => String(row.id));
           if (ids.length === 0) continue;
-          const keyColumn = template.startsWith("select state") ? "state" : "id";
+          const keyColumn = template.startsWith("select state") ? "state" : template.startsWith("select organization_id as id") ? "organization_id" : "id";
           const seen = await t.as<{ n: number }>(member.authId, `select count(*)::int as n from ${table} where ${keyColumn}::text = any($1)`, [ids]);
           if (seen.error) continue; // no grant at all is isolation too
           if (seen.rows![0].n > 0) leaks.push(`${table}=${seen.rows![0].n}`);

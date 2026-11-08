@@ -31,9 +31,9 @@
   },
   "integrations": {
     "title": "集成",
-    "hint": "一个只读密钥，供其他 PROSM 产品（如 PROSM Projects 或 PROSM Finance）读取您团队真实、经过验证的考勤数据（若密钥包含工资范围，也可读取工资数据），无需手工录入。此密钥永远无法向 PROSM Time 写入任何内容。",
+    "hint": "只读密钥允许其他系统（ERP、财务、人事或报表工具）通过 PROSM Time API 读取您的数据。每个密钥只授予所需的范围。密钥永远无法修改 PROSM Time 中的任何内容。",
     "nameLabel": "密钥名称",
-    "namePlaceholder": "例如 PROSM Projects 或 PROSM Finance",
+    "namePlaceholder": "例如：ERP、财务系统",
     "createAction": "创建密钥",
     "createError": "无法创建此 API 密钥。",
     "revokeAction": "撤销",
@@ -43,11 +43,30 @@
     "neverUsed": "从未使用",
     "newKeyTitle": "您的新 API 密钥",
     "newKeyWarning": "请立即复制，之后不会再显示。之后只保留其前缀。",
-    "scopeLabel": "访问权限",
+    "scopeLabel": "此密钥可读取的内容",
     "scope": {
-      "attendanceRead": "考勤（只读）",
-      "payrollRead": "工资费率（只读）"
-    }
+      "attendanceRead": "考勤",
+      "payrollRead": "工资（已锁定周期）",
+      "employeesRead": "员工",
+      "employeesSensitive": "员工电子邮箱",
+      "sitesRead": "站点",
+      "leavesRead": "请假"
+    },
+    "endpoint": "API 地址：",
+    "expired": "已过期",
+    "requests7d": "7 天内 {{n}} 次请求",
+    "expiresOn": "到期 {{time}}",
+    "noExpiry": "永不过期",
+    "expiryLabel": "有效期",
+    "expiryDays": "{{n}} 天",
+    "environmentLabel": "环境",
+    "environment": {
+      "live": "正式",
+      "test": "测试"
+    },
+    "revokeTitle": "撤销此密钥？",
+    "revokeWarning": "“{{name}}”将立即失效且无法恢复。使用它的系统需要新的密钥。",
+    "cancel": "取消"
   },
   "payroll": {
     "title": "工资集成",
