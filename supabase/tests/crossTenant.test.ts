@@ -40,6 +40,12 @@ const TABLES: Record<string, string> = {
   payroll_exports: byOrg,
   payslip_requests: byOrg,
   api_request_log: byOrg,
+  external_labor_settings: "select organization_id as id from %t where organization_id = $1",
+  external_labor_policy_items: byOrg,
+  external_labor_runs: byOrg,
+  external_labor_run_workers: byOrg,
+  external_labor_adjustments: byOrg,
+  external_labor_run_snapshots: "select run_id as id from %t where organization_id = $1",
   allowance_entry_adjustments: byOrg,
   attendance_day_adjustments: byOrg,
   attendance_permissions: byOrg,
@@ -319,7 +325,7 @@ describe("cross-tenant isolation", () => {
         for (const [table, template] of Object.entries(TABLES)) {
           const ids = (await t.su<{ id: string }>(template.replace("%t", table), [other.org.id])).map((row) => String(row.id));
           if (ids.length === 0) continue;
-          const keyColumn = template.startsWith("select state") ? "state" : template.startsWith("select organization_id as id") ? "organization_id" : "id";
+          const keyColumn = template.startsWith("select state") ? "state" : template.startsWith("select organization_id as id") ? "organization_id" : template.startsWith("select run_id as id") ? "run_id" : "id";
           const seen = await t.as<{ n: number }>(member.authId, `select count(*)::int as n from ${table} where ${keyColumn}::text = any($1)`, [ids]);
           if (seen.error) continue; // no grant at all is isolation too
           if (seen.rows![0].n > 0) leaks.push(`${table}=${seen.rows![0].n}`);
