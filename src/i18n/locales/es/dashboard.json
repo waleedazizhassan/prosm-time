@@ -381,7 +381,19 @@
       "external": "Trabajadores externos ahora",
       "externalSites": "en {{count}} sede(s)",
       "overdue": "Sin fichar salida",
-      "overdueHint": "Una hora después del fin de su turno"
+      "overdueHint": "Una hora después del fin de su turno",
+      "onLeaveCard": "De permiso hoy",
+      "def": {
+        "absentShort": "sin asistencia ni permiso aprobado",
+        "leaveShort": "permiso aprobado que incluye hoy",
+        "present": "Personas con entrada registrada ahora mismo, en su ámbito.",
+        "hours": "Horas trabajadas en el periodo elegido, de entrada a salida.",
+        "late": "Personas que entraron hoy después del inicio de su turno.",
+        "absent": "Esperados hoy, sin asistencia ni permiso aprobado. Quienes tienen permiso aprobado se cuentan aparte.",
+        "leave": "Personas cuyo permiso aprobado incluye hoy. No cuentan como ausentes.",
+        "overdue": "Siguen con entrada una hora después del fin de su turno (o del día de la sede), o abierta desde un día anterior.",
+        "overtime": "Horas extra aprobadas en el periodo. Las pendientes de revisión no cuentan."
+      }
     },
     "map": {
       "title": "Sedes ahora",
@@ -539,7 +551,12 @@
         "status": "Estado",
         "details": "Detalles"
       },
-      "grantAction": "Convertir en ausencia"
+      "grantAction": "Convertir en ausencia",
+      "absentTitle": "Ausentes hoy: {{absent}}",
+      "leaveTitle": "De permiso hoy: {{leave}}",
+      "noneAbsent": "Nadie está ausente hoy",
+      "noneLeave": "Nadie está de permiso hoy",
+      "openLeave": "Abrir solicitudes de permiso"
     },
     "sheet": {
       "title": {

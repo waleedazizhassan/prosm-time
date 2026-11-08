@@ -381,7 +381,19 @@
       "external": "Trabalhadores externos agora",
       "externalSites": "em {{count}} local(is)",
       "overdue": "Sem registro de saída",
-      "overdueHint": "Uma hora após o fim do turno"
+      "overdueHint": "Uma hora após o fim do turno",
+      "onLeaveCard": "De férias hoje",
+      "def": {
+        "absentShort": "sem presença nem férias aprovadas",
+        "leaveShort": "férias aprovadas que incluem hoje",
+        "present": "Pessoas com entrada registada agora, no seu âmbito.",
+        "hours": "Horas trabalhadas no período escolhido, da entrada à saída.",
+        "late": "Pessoas que entraram hoje depois do início do turno.",
+        "absent": "Esperados hoje, sem presença nem férias aprovadas. Quem está de férias aprovadas é contado à parte.",
+        "leave": "Pessoas cujas férias aprovadas incluem hoje. Não contam como ausentes.",
+        "overdue": "Ainda com entrada uma hora após o fim do turno (ou do dia do local), ou aberta desde um dia anterior.",
+        "overtime": "Horas extra aprovadas no período. As pendentes não contam."
+      }
     },
     "map": {
       "title": "Locais agora",
@@ -539,7 +551,12 @@
         "status": "Status",
         "details": "Detalhes"
       },
-      "grantAction": "Converter em afastamento"
+      "grantAction": "Converter em afastamento",
+      "absentTitle": "Ausentes hoje: {{absent}}",
+      "leaveTitle": "De férias hoje: {{leave}}",
+      "noneAbsent": "Ninguém está ausente hoje",
+      "noneLeave": "Ninguém está de férias hoje",
+      "openLeave": "Abrir pedidos de férias"
     },
     "sheet": {
       "title": {

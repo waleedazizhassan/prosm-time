@@ -381,7 +381,19 @@
       "external": "Travailleurs externes présents",
       "externalSites": "sur {{count}} site(s)",
       "overdue": "Sortie non pointée",
-      "overdueHint": "Une heure après la fin du poste"
+      "overdueHint": "Une heure après la fin du poste",
+      "onLeaveCard": "En congé aujourd'hui",
+      "def": {
+        "absentShort": "ni présence ni congé approuvé",
+        "leaveShort": "congé approuvé couvrant aujourd'hui",
+        "present": "Personnes pointées en ce moment, dans votre périmètre.",
+        "hours": "Heures travaillées sur la période choisie, de l'arrivée au départ.",
+        "late": "Personnes arrivées aujourd'hui après le début de leur poste.",
+        "absent": "Attendus aujourd'hui, sans présence ni congé approuvé. Les personnes en congé approuvé sont comptées à part.",
+        "leave": "Personnes dont le congé approuvé couvre aujourd'hui. Elles ne sont pas comptées absentes.",
+        "overdue": "Toujours pointés une heure après la fin de leur poste (ou de la journée du site), ou ouverts depuis un jour précédent.",
+        "overtime": "Heures supplémentaires approuvées sur la période. Celles en attente ne comptent pas."
+      }
     },
     "map": {
       "title": "Les sites maintenant",
@@ -539,7 +551,12 @@
         "status": "Statut",
         "details": "Détails"
       },
-      "grantAction": "Passer en congé"
+      "grantAction": "Passer en congé",
+      "absentTitle": "Absents aujourd'hui : {{absent}}",
+      "leaveTitle": "En congé aujourd'hui : {{leave}}",
+      "noneAbsent": "Personne n'est absent aujourd'hui",
+      "noneLeave": "Personne n'est en congé aujourd'hui",
+      "openLeave": "Ouvrir les demandes de congé"
     },
     "sheet": {
       "title": {

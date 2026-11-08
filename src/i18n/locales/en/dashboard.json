@@ -378,7 +378,19 @@
       "external": "External workers now",
       "externalSites": "at {{count}} site(s)",
       "overdue": "Not clocked out",
-      "overdueHint": "An hour after their shift ended"
+      "overdueHint": "An hour after their shift ended",
+      "onLeaveCard": "On leave today",
+      "def": {
+        "absentShort": "no attendance, no approved leave",
+        "leaveShort": "approved leave covering today",
+        "present": "People clocked in right now, within your scope.",
+        "hours": "Worked hours in the chosen period, from clock-in to clock-out.",
+        "late": "People who clocked in after their shift's start today.",
+        "absent": "Expected today, with no attendance and no approved leave. People on approved leave are counted separately.",
+        "leave": "People whose approved leave covers today. They are not counted as absent.",
+        "overdue": "Still clocked in an hour after their shift (or the site's day) ended, or still open from an earlier day.",
+        "overtime": "Approved overtime in the chosen period. Overtime awaiting review is not counted."
+      }
     },
     "map": {
       "title": "Sites now",
@@ -536,7 +548,12 @@
         "status": "Status",
         "details": "Details"
       },
-      "grantAction": "Make it leave"
+      "grantAction": "Make it leave",
+      "absentTitle": "Absent today: {{absent}}",
+      "leaveTitle": "On leave today: {{leave}}",
+      "noneAbsent": "Nobody is absent today",
+      "noneLeave": "Nobody is on leave today",
+      "openLeave": "Open leave requests"
     },
     "sheet": {
       "title": {

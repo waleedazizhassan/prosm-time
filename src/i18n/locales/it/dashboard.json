@@ -381,7 +381,19 @@
       "external": "Lavoratori esterni ora",
       "externalSites": "in {{count}} sito/i",
       "overdue": "Uscita non timbrata",
-      "overdueHint": "Un'ora dopo la fine del turno"
+      "overdueHint": "Un'ora dopo la fine del turno",
+      "onLeaveCard": "In ferie oggi",
+      "def": {
+        "absentShort": "nessuna presenza né ferie approvate",
+        "leaveShort": "ferie approvate che includono oggi",
+        "present": "Persone che hanno timbrato l'entrata adesso, nel tuo ambito.",
+        "hours": "Ore lavorate nel periodo scelto, dall'entrata all'uscita.",
+        "late": "Persone entrate oggi dopo l'inizio del turno.",
+        "absent": "Attesi oggi, senza presenza né ferie approvate. Chi è in ferie approvate è contato a parte.",
+        "leave": "Persone con ferie approvate che includono oggi. Non sono contate come assenti.",
+        "overdue": "Ancora in servizio un'ora dopo la fine del turno (o della giornata della sede), o aperti da un giorno precedente.",
+        "overtime": "Straordinari approvati nel periodo. Quelli in attesa non sono contati."
+      }
     },
     "map": {
       "title": "I siti ora",
@@ -539,7 +551,12 @@
         "status": "Stato",
         "details": "Dettagli"
       },
-      "grantAction": "Segna come ferie"
+      "grantAction": "Segna come ferie",
+      "absentTitle": "Assenti oggi: {{absent}}",
+      "leaveTitle": "In ferie oggi: {{leave}}",
+      "noneAbsent": "Nessuno è assente oggi",
+      "noneLeave": "Nessuno è in ferie oggi",
+      "openLeave": "Apri richieste di ferie"
     },
     "sheet": {
       "title": {

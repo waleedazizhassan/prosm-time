@@ -375,7 +375,19 @@
       "external": "当前外部工人",
       "externalSites": "分布在 {{count}} 个地点",
       "overdue": "未下班打卡",
-      "overdueHint": "班次结束一小时后"
+      "overdueHint": "班次结束一小时后",
+      "onLeaveCard": "今日休假",
+      "def": {
+        "absentShort": "无考勤且无已批准假期",
+        "leaveShort": "今日在已批准假期内",
+        "present": "您范围内当前已打卡的人员。",
+        "hours": "所选期间内从签到到签退的工作时长。",
+        "late": "今日在班次开始后才签到的人员。",
+        "absent": "今日应到但无考勤且无已批准假期。已批准休假的人员单独统计。",
+        "leave": "已批准假期包含今日的人员，不计为缺勤。",
+        "overdue": "班次（或站点工作日）结束一小时后仍未签退，或自前一天起仍未结束。",
+        "overtime": "所选期间内已批准的加班，待审核的不计入。"
+      }
     },
     "map": {
       "title": "当前地点",
@@ -533,7 +545,12 @@
         "status": "状态",
         "details": "详情"
       },
-      "grantAction": "改为请假"
+      "grantAction": "改为请假",
+      "absentTitle": "今日缺勤：{{absent}}",
+      "leaveTitle": "今日休假：{{leave}}",
+      "noneAbsent": "今日无人缺勤",
+      "noneLeave": "今日无人休假",
+      "openLeave": "打开请假申请"
     },
     "sheet": {
       "title": {

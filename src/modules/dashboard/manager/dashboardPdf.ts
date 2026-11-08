@@ -40,8 +40,9 @@ export function buildDashboardPdf(
     [t("manager.kpi.present"), kpi.presentNow, kpi.hasSchedule ? t("manager.kpi.ofExpected", { expected: kpi.expectedToday }) : t("manager.kpi.ofTeam", { team: data.teamSize })],
     [t("manager.kpi.hours"), hours(kpi.workedMinutes), kpi.scheduledMinutes ? t("manager.kpi.scheduled", { hours: hours(kpi.scheduledMinutes) }) : ""],
     [t("manager.kpi.late"), kpi.lateToday, t("manager.kpi.lateInPeriod", { count: kpi.lateCount })],
-    [t("manager.kpi.absent"), kpi.absentToday, t("manager.kpi.onLeave", { count: kpi.onLeaveToday })],
-    [t("manager.kpi.overdue"), data.overdue?.length ?? 0, ""],
+    [t("manager.kpi.absent"), kpi.absentToday, t("manager.kpi.def.absentShort")],
+    [t("manager.kpi.onLeaveCard"), kpi.onLeaveToday, t("manager.kpi.def.leaveShort")],
+    [t("manager.kpi.overdue"), data.overdue?.length ?? 0, t("manager.kpi.overdueHint")],
     [t("manager.kpi.overtime"), hours(kpi.overtimeMinutes), t("manager.hoursUnit")],
   ];
   if (data.canViewCost && kpi.estimatedCost !== null) tiles.push([t("manager.kpi.cost"), Math.round(kpi.estimatedCost).toLocaleString(appLocale(languageCode)), t("manager.kpi.costNote")]);
