@@ -98,5 +98,16 @@
     "error": "Der Urlaub konnte nicht eingetragen werden."
   },
   "reviewerLabel": "Antrag senden an",
-  "reviewerOwner": "{{name}} (Inhaber)"
+  "reviewerOwner": "{{name}} (Inhaber)",
+  "preview": {
+    "workingDays": "Vom Saldo abgezogene Arbeitstage: {{count}}",
+    "noWorkingDay": "Diese Tage enthalten keinen Arbeitstag - alles Ruhe- oder Feiertage - daher würde der Antrag abgelehnt.",
+    "notCounted": "Nicht gezählt:",
+    "remaining": "Verbleibender Saldo vor diesem Antrag: {{count}}",
+    "dayType": {
+      "weekly_rest": "wöchentlicher Ruhetag",
+      "public_holiday": "Feiertag",
+      "day_off": "freier Tag"
+    }
+  }
 }

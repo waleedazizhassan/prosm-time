@@ -99,5 +99,16 @@
     "doneReopen_many": "Se registró y aprobó la ausencia de {{name}}. {{count}} hojas de horas enviadas cubren estos días: reábrelas para corrección y que muestren la ausencia."
   },
   "reviewerLabel": "Enviar la solicitud a",
-  "reviewerOwner": "{{name}} (propietario)"
+  "reviewerOwner": "{{name}} (propietario)",
+  "preview": {
+    "workingDays": "Días laborables descontados del saldo: {{count}}",
+    "noWorkingDay": "Estas fechas no tienen ningún día laborable - todas son descanso o festivos - así que la solicitud se rechazaría.",
+    "notCounted": "No se cuentan:",
+    "remaining": "Saldo restante antes de esta solicitud: {{count}}",
+    "dayType": {
+      "weekly_rest": "descanso semanal",
+      "public_holiday": "festivo",
+      "day_off": "día libre"
+    }
+  }
 }

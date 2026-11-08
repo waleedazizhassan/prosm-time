@@ -98,5 +98,16 @@
     "error": "Could not record the leave."
   },
   "reviewerLabel": "Send the request to",
-  "reviewerOwner": "{{name}} (owner)"
+  "reviewerOwner": "{{name}} (owner)",
+  "preview": {
+    "workingDays": "Working days taken from the balance: {{count}}",
+    "noWorkingDay": "These dates have no working day - all are rest days or holidays - so the request would be refused.",
+    "notCounted": "Not counted:",
+    "remaining": "Balance left before this request: {{count}}",
+    "dayType": {
+      "weekly_rest": "weekly rest",
+      "public_holiday": "public holiday",
+      "day_off": "day off"
+    }
+  }
 }

@@ -97,5 +97,16 @@
     "error": "无法登记请假。"
   },
   "reviewerLabel": "将申请发送给",
-  "reviewerOwner": "{{name}}（所有者）"
+  "reviewerOwner": "{{name}}（所有者）",
+  "preview": {
+    "workingDays": "从余额中扣除的工作日：{{count}}",
+    "noWorkingDay": "这些日期没有工作日（均为休息日或节假日），申请将被拒绝。",
+    "notCounted": "不计入：",
+    "remaining": "本次申请前剩余余额：{{count}}",
+    "dayType": {
+      "weekly_rest": "每周休息日",
+      "public_holiday": "法定节假日",
+      "day_off": "休息日"
+    }
+  }
 }

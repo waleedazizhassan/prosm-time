@@ -99,5 +99,16 @@
     "doneReopen_many": "A ausência de {{name}} foi registrada e aprovada. {{count}} folhas de ponto enviadas cobrem estes dias: reabra-as para correção para que mostrem a ausência."
   },
   "reviewerLabel": "Enviar o pedido para",
-  "reviewerOwner": "{{name}} (proprietário)"
+  "reviewerOwner": "{{name}} (proprietário)",
+  "preview": {
+    "workingDays": "Dias úteis descontados do saldo: {{count}}",
+    "noWorkingDay": "Estas datas não têm nenhum dia útil - só descansos ou feriados - por isso o pedido seria recusado.",
+    "notCounted": "Não contados:",
+    "remaining": "Saldo restante antes deste pedido: {{count}}",
+    "dayType": {
+      "weekly_rest": "descanso semanal",
+      "public_holiday": "feriado",
+      "day_off": "dia de folga"
+    }
+  }
 }

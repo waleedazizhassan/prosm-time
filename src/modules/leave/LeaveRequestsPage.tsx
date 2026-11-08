@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { useAuth } from "../../core/context/AuthContext";
 import leaveTypeLabel from "./leaveTypeLabel";
-import LeaveRepository, { type LeaveRequestRow, type OrgWideLeaveRow, type LeaveBalanceEntry, type LeaveType, type LeaveTypeSetting } from "../../core/repositories/LeaveRepository";
+import LeaveRepository, { type LeaveRequestRow, type OrgWideLeaveRow, type LeaveBalanceEntry, type LeaveType, type LeaveTypeSetting, type LeavePreview } from "../../core/repositories/LeaveRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { formatDateOnly, appLocale } from "../../core/utils/formatDate";
 
@@ -69,6 +69,8 @@ export default function LeaveRequestsPage() {
   const [startDate, setStartDate] = useState(isoDate(today));
   const [endDate, setEndDate] = useState(isoDate(today));
   const [reason, setReason] = useState("");
+  // what the request would take - working days only, holidays and rest days shown apart
+  const [preview, setPreview] = useState<LeavePreview | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -105,6 +107,23 @@ export default function LeaveRequestsPage() {
   useEffect(() => {
     load();
   }, [load]);
+
+  useEffect(() => {
+    if (!startDate || !endDate || endDate < startDate) {
+      setPreview(null);
+      return;
+    }
+    let cancelled = false;
+    const timer = setTimeout(() => {
+      LeaveRepository.preview(leaveType, startDate, endDate).then((result) => {
+        if (!cancelled) setPreview(result.success ? result.data ?? null : null);
+      });
+    }, 250);
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [leaveType, startDate, endDate]);
 
   useEffect(() => {
     LeaveRepository.listTypes().then((result) => setLeaveTypes((result.data ?? []).filter((type) => type.isActive)));
@@ -277,6 +296,28 @@ export default function LeaveRequestsPage() {
               .filter(Boolean)
               .join(" · ")}
           </HintText>
+        ) : null}
+        {preview ? (
+          <div role="status" style={{ margin: "var(--space-2) 0", fontSize: "var(--font-sm)" }}>
+            {preview.accepted ? (
+              <strong>{t("preview.workingDays", { count: preview.workingDays })}</strong>
+            ) : (
+              <strong style={{ color: "var(--status-danger-text)" }}>{t("preview.noWorkingDay")}</strong>
+            )}
+            {preview.offDays.length > 0 ? (
+              <div style={{ color: "var(--text-secondary)" }}>
+                {t("preview.notCounted")}{" "}
+                {preview.offDays
+                  .map((day) => `${formatDateOnly(day.date, i18n.language)} (${day.name ?? t(`preview.dayType.${day.type}`)})`)
+                  .join(", ")}
+              </div>
+            ) : null}
+            {preview.remainingDays !== null ? (
+              <div style={{ color: preview.enforceBalance && preview.workingDays > preview.remainingDays ? "var(--status-danger-text)" : "var(--text-secondary)" }}>
+                {t("preview.remaining", { count: preview.remainingDays })}
+              </div>
+            ) : null}
+          </div>
         ) : null}
         {selectedType?.requiresDocument ? (
           <label style={{ display: "grid", gap: 4, fontSize: "var(--font-sm)", margin: "var(--space-2) 0" }}>

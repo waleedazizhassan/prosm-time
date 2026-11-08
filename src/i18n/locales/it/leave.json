@@ -99,5 +99,16 @@
     "error": "Impossibile registrare le ferie."
   },
   "reviewerLabel": "Invia la richiesta a",
-  "reviewerOwner": "{{name}} (titolare)"
+  "reviewerOwner": "{{name}} (titolare)",
+  "preview": {
+    "workingDays": "Giorni lavorativi scalati dal saldo: {{count}}",
+    "noWorkingDay": "Queste date non hanno giorni lavorativi - solo riposi o festività - quindi la richiesta verrebbe rifiutata.",
+    "notCounted": "Non conteggiati:",
+    "remaining": "Saldo residuo prima di questa richiesta: {{count}}",
+    "dayType": {
+      "weekly_rest": "riposo settimanale",
+      "public_holiday": "festività",
+      "day_off": "giorno libero"
+    }
+  }
 }
