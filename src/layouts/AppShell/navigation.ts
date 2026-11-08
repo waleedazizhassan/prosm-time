@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, KeyRound, LogIn, Plug, HardHat, ScrollText, Sunrise } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, KeyRound, LogIn, Plug, HardHat, ScrollText, Sunrise, Banknote, Receipt } from "lucide-react";
 
 import { FEATURES } from "../../config/features";
 import type { PlanFeature } from "../../core/hooks/usePlanFeatures";
@@ -124,6 +124,10 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // permission, same reasoning as Timesheets/Allowances above -
   // leave_requests' own RLS is what actually scopes what a supervisor
   // sees (Manager Console's own new review section).
+  // 2026-11-08: the payroll module (its own payroll.* permissions; the owner holds them all) and
+  // each person's own published payslips.
+  { id: "payroll", planFeature: "payroll", labelKey: "items.payroll", path: "/payroll", icon: Banknote, requiredPermission: "payroll.access", section: "payroll" },
+  { id: "payslips", planFeature: "payroll", labelKey: "items.payslips", path: "/payslips", icon: Receipt, requiredPermission: null, hiddenFromOwner: true, section: "payroll" },
   { id: "leave", planFeature: "leave", labelKey: "items.leave", path: "/leave", icon: CalendarDays, requiredPermission: null, section: "payroll" },
   // § live UX review, user-directed - "a Reports Center where any PDF
   // can be pulled." No permission gate on the nav item itself - the

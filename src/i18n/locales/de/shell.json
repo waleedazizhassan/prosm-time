@@ -265,7 +265,9 @@
     "calendar": "Kalender und Feiertage",
     "auditLog": "Aktionsprotokoll",
     "dailySummary": "Tageszusammenfassung",
-    "grantPermissions": "Berechtigungen vergeben"
+    "grantPermissions": "Berechtigungen vergeben",
+    "payroll": "Lohnabrechnung",
+    "payslips": "Meine Abrechnungen"
   },
   "sosOverlay": {
     "title": "SOS-/Notfallalarm",
@@ -367,7 +369,9 @@
     "calendar": "Feiertage, Ruhetage und Ausnahmetage - Stunden und Überstunden richten sich danach.",
     "auditLog": "Alles, was in Ihrer Organisation geschieht: wer was für wen, wann und warum getan hat.",
     "dailySummary": "Ein Tag Ihrer Organisation: wer gearbeitet hat, zu spät, abwesend oder im Urlaub war",
-    "grantPermissions": "Wer welche Berechtigungen hat - und die volle Befugnis des Inhabers"
+    "grantPermissions": "Wer welche Berechtigungen hat - und die volle Befugnis des Inhabers",
+    "payroll": "Abrechnungszeiträume, Profile, die drei Berichte und Abrechnungen - mit getrennten Rechten und gespeicherten Versionen.",
+    "payslips": "Ihre veröffentlichten Abrechnungen - ansehen oder per E-Mail anfordern."
   },
   "backgroundDisclosure": {
     "title": "Standort während Ihrer Schicht",

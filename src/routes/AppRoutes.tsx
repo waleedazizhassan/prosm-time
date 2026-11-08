@@ -48,6 +48,12 @@ const IntegrationsPage = lazy(() => import("../modules/settings/IntegrationsPage
 const HelpPage = lazy(() => import("../modules/help/HelpPage"));
 const DailySummaryPage = lazy(() => import("../modules/reports/DailySummaryPage"));
 const LegalPage = lazy(() => import("../modules/legal/LegalPage"));
+const PayrollHomePage = lazy(() => import("../modules/payroll/PayrollHomePage"));
+const PayrollCyclePage = lazy(() => import("../modules/payroll/PayrollCyclePage"));
+const PayrollProfilesPage = lazy(() => import("../modules/payroll/PayrollProfilesPage"));
+const PayrollSettingsPage = lazy(() => import("../modules/payroll/PayrollSettingsPage"));
+const PayslipRequestsPage = lazy(() => import("../modules/payroll/PayslipRequestsPage"));
+const MyPayslipsPage = lazy(() => import("../modules/payroll/MyPayslipsPage"));
 
 // PROSM Time route map. /activate, /login, /accept-invitation are
 // public (no session exists yet by definition at any of them) and
@@ -139,6 +145,12 @@ export default function AppRoutes() {
             <Route path="/allowances" element={<PlanRoute feature="allowances"><AllowancesPage /></PlanRoute>} />
             <Route path="/allowances/prices" element={<PlanRoute feature="allowances"><AllowancePricesPage /></PlanRoute>} />
             <Route path="/leave" element={<PlanRoute feature="leave"><LeaveRequestsPage /></PlanRoute>} />
+            <Route path="/payroll" element={<PlanRoute feature="payroll"><PayrollHomePage /></PlanRoute>} />
+            <Route path="/payroll/cycles/:cycleId" element={<PlanRoute feature="payroll"><PayrollCyclePage /></PlanRoute>} />
+            <Route path="/payroll/profiles" element={<PlanRoute feature="payroll"><PayrollProfilesPage /></PlanRoute>} />
+            <Route path="/payroll/settings" element={<PlanRoute feature="payroll"><PayrollSettingsPage /></PlanRoute>} />
+            <Route path="/payroll/requests" element={<PlanRoute feature="payroll"><PayslipRequestsPage /></PlanRoute>} />
+            <Route path="/payslips" element={<PlanRoute feature="payroll"><MyPayslipsPage /></PlanRoute>} />
             <Route path="/schedule" element={<SchedulePage />} />
             <Route path="/calendar" element={<CalendarPage />} />
             <Route path="/emergency-log" element={<PlanRoute feature="sos"><EmergencyLogPage /></PlanRoute>} />

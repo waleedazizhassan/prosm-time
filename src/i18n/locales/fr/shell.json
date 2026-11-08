@@ -265,7 +265,9 @@
     "calendar": "Calendrier et jours fériés",
     "auditLog": "Journal des actions",
     "dailySummary": "Résumé du jour",
-    "grantPermissions": "Attribuer les autorisations"
+    "grantPermissions": "Attribuer les autorisations",
+    "payroll": "Paie",
+    "payslips": "Mes bulletins"
   },
   "sosOverlay": {
     "title": "Alerte SOS/Urgence",
@@ -372,7 +374,9 @@
     "calendar": "Jours fériés, jours de repos et jours exceptionnels - les heures et heures supplémentaires en dépendent.",
     "auditLog": "Tout ce qui se fait dans votre organisation : qui a fait quoi, pour qui, quand et pourquoi.",
     "dailySummary": "Une journée de votre organisation : qui a travaillé, en retard, absent ou en congé",
-    "grantPermissions": "Qui a quelles autorisations - et toute l'autorité du propriétaire"
+    "grantPermissions": "Qui a quelles autorisations - et toute l'autorité du propriétaire",
+    "payroll": "Cycles de paie, dossiers, les trois rapports et les bulletins - avec des droits séparés et des versions conservées.",
+    "payslips": "Vos bulletins publiés - consultez-les ou demandez-les par e-mail."
   },
   "backgroundDisclosure": {
     "title": "Position pendant votre poste",

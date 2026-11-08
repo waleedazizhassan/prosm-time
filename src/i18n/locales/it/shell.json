@@ -265,7 +265,9 @@
     "calendar": "Calendario e festività",
     "auditLog": "Registro azioni",
     "dailySummary": "Riepilogo del giorno",
-    "grantPermissions": "Assegna autorizzazioni"
+    "grantPermissions": "Assegna autorizzazioni",
+    "payroll": "Paghe",
+    "payslips": "Le mie buste paga"
   },
   "sosOverlay": {
     "title": "Allarme SOS/Emergenza",
@@ -372,7 +374,9 @@
     "calendar": "Festività, giorni di riposo e giorni eccezionali - ore e straordinari ne dipendono.",
     "auditLog": "Tutto ciò che avviene nella tua organizzazione: chi ha fatto cosa, a chi, quando e perché.",
     "dailySummary": "Un giorno della tua organizzazione: chi ha lavorato, chi era in ritardo, assente o in ferie",
-    "grantPermissions": "Chi ha quali autorizzazioni - e tutta l'autorità del titolare"
+    "grantPermissions": "Chi ha quali autorizzazioni - e tutta l'autorità del titolare",
+    "payroll": "Cicli paghe, schede, i tre report e le buste paga - con permessi separati e versioni salvate.",
+    "payslips": "Le tue buste paga pubblicate: visualizzale o richiedile via email."
   },
   "backgroundDisclosure": {
     "title": "Posizione durante il turno",

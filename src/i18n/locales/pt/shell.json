@@ -265,7 +265,9 @@
     "calendar": "Calendário e feriados",
     "auditLog": "Registro de ações",
     "dailySummary": "Resumo diário",
-    "grantPermissions": "Conceder permissões"
+    "grantPermissions": "Conceder permissões",
+    "payroll": "Salários",
+    "payslips": "Os meus recibos"
   },
   "sosOverlay": {
     "title": "Alerta SOS/Emergência",
@@ -372,7 +374,9 @@
     "calendar": "Feriados, dias de descanso semanal e dias excepcionais - as horas e as horas extras seguem esses dias.",
     "auditLog": "Tudo o que é feito na sua organização: quem fez o quê, com quem, quando e por quê.",
     "dailySummary": "Um dia da sua organização: quem trabalhou, quem se atrasou, quem faltou e quem estava afastado",
-    "grantPermissions": "Quem tem quais permissões - e toda a autoridade do proprietário"
+    "grantPermissions": "Quem tem quais permissões - e toda a autoridade do proprietário",
+    "payroll": "Ciclos salariais, fichas, os três relatórios e os recibos - com permissões separadas e versões guardadas.",
+    "payslips": "Os seus recibos publicados - veja-os ou peça-os por e-mail."
   },
   "backgroundDisclosure": {
     "title": "Localização durante o turno",

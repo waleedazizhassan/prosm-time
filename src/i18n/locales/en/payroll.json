@@ -1,0 +1,108 @@
+{
+  "nav": { "back": "Back to payroll", "profiles": "Payroll profiles", "requests": "Payslip requests", "settings": "Payroll settings" },
+  "status": { "draft": "Draft", "in_review": "In review", "approved": "Approved", "locked": "Locked", "reopened": "Reopened", "cancelled": "Cancelled" },
+  "categories": { "earning": "Earnings", "allowance": "Allowances", "deduction": "Deductions", "installment": "Installments" },
+  "sources": { "fixed": "fixed", "variable": "this month", "installment": "installment", "attendance_suggestion": "from attendance", "import": "imported" },
+  "cycles": {
+    "newTitle": "New payroll cycle", "newHint": "People with an active payroll profile in the scope are included once; their fixed components are copied from the profiles.",
+    "start": "From", "end": "To", "scope": "Scope", "wholeOrganization": "The whole organisation", "titleOptional": "Title (optional)", "create": "Create the cycle",
+    "skipped": "Not included: {{names}}", "listTitle": "Payroll cycles", "empty": "No payroll cycles yet.", "title": "Cycle", "period": "Period", "status": "Status", "employees": "People", "net": "Net"
+  },
+  "cycle": {
+    "loading": "Payroll cycle", "employee": "Person", "empty": "Nobody in this cycle.", "people": "People ({{count}})", "manyCurrencies": "Several currencies: totals stay separate per currency.",
+    "noProfile": "No profile", "partial": "{{percent}}% of the period", "published": "Payslips published (v{{version}})", "recalculate": "Rebuild from the profiles", "reopenedBecause": "Reopened: {{reason}}"
+  },
+  "actions": { "submit": "Send for review", "return": "Return for changes", "approve": "Approve", "lock": "Lock", "reopen": "Reopen", "cancel": "Cancel the cycle", "publish": "Publish the payslips", "unpublish": "Withdraw the payslips", "reason": "Reason (kept in the log)" },
+  "actionHints": {
+    "submit": "The cycle is checked first; blocking errors stop it, warnings need your acknowledgement.",
+    "return": "The cycle goes back to the people who prepare it, with your reason.",
+    "approve": "The numbers are stored as a new version; installments in it are paid. Whoever sent it for review cannot approve it.",
+    "lock": "A locked cycle can be published to the employees.",
+    "reopen": "Published payslips are withdrawn and installments paid by this cycle are returned. Approving again creates a new version.",
+    "cancel": "A cancelled cycle is kept for the record and frees the period."
+  },
+  "checks": {
+    "title": "Checks", "acknowledge": "I have read the {{count}} warnings",
+    "NO_PROFILE": "No payroll profile", "NO_BASIC_SALARY": "No basic salary", "NEGATIVE_NET": "Negative net", "PERCENT_WITHOUT_BASE": "A percentage with no base", "DUPLICATE_LINE": "A component twice",
+    "ZERO_NET": "Zero net", "PARTIAL_PERIOD": "Joined or left during the period", "NET_CHANGED": "The net changed a lot from the previous cycle", "ATTENDANCE_CHANGED": "Attendance changed after a suggestion was accepted"
+  },
+  "suggestions": {
+    "title": "From attendance", "hint": "Nothing is added by itself: review each suggestion, choose the component and the amount, then accept it.",
+    "unpaid_leave": "unpaid leave: {{quantity}} days", "late_minutes": "lateness: {{quantity}} minutes", "overtime_minutes": "overtime: {{quantity}} minutes",
+    "review": "Review", "accept": "Add to the cycle", "accepted": "Added", "changed": "Changed since added"
+  },
+  "lines": {
+    "add": "Add a line", "edit": "Edit", "delete": "Delete", "save": "Save", "component": "Component", "amount": "Amount", "notes": "Note",
+    "outsideNet": "outside the net", "noVariableComponents": "Define a variable component in the payroll settings first."
+  },
+  "reports": {
+    "title": "Reports", "hint": "Each report shows only what it may: the payslip and the summary never show the extra allowances; the salary + allowances report is the only one with them.",
+    "payslip": "Payslips", "summary": "Payroll summary", "combined": "Salary + allowances", "draftNote": "Before approval the files are marked as a draft.", "excluded": "{{count}} people outside your scope were left out."
+  },
+  "import": {
+    "title": "Import from a spreadsheet", "hint": "Download the template, fill it in Excel, save it as CSV and choose it here. Every row is checked; nothing is saved unless every row is valid.",
+    "template": "Download the template", "templateName": "payroll-import-template", "ready": "{{count}} rows are valid.", "confirm": "Save {{count}} rows", "hasErrors": "Nothing was saved. Fix these rows:",
+    "rowError": "Row {{row}}: {{error}}",
+    "codes": { "EMPLOYEE_NOT_IN_CYCLE": "this person is not in the cycle", "OUT_OF_SCOPE": "outside your scope", "UNKNOWN_COMPONENT": "unknown component", "INVALID_AMOUNT": "invalid amount", "DUPLICATE_ROW": "repeated row" }
+  },
+  "doc": {
+    "period": "Period", "site": "Site", "wholeOrganization": "Whole organisation", "serial": "Serial", "version": "Cycle version", "amended": "Amended version", "issued": "Issued",
+    "draft": "DRAFT - NOT APPROVED", "employee": "Employee", "code": "Employee code", "earnings": "Earnings", "deductions": "Deductions", "installments": "Installments",
+    "totalEarnings": "Total earnings", "totalDeductions": "Total deductions", "totalInstallments": "Total installments", "net": "Net salary", "none": "None",
+    "basic": "Basic salary", "totalAllowances": "Total allowances", "combined": "Salary + allowances", "combinedNotNet": "Salary + allowances is not the net salary.",
+    "currency": "Currency", "total": "Total", "prepared": "Prepared by", "reviewed": "Reviewed by", "approved": "Approved by"
+  },
+  "profiles": {
+    "title": "People", "hint": "Each person's fixed components, with the date each value applies from - earlier cycles never change.", "person": "Person", "active": "Active", "inactive": "Inactive", "none": "No profile",
+    "empty": "Nobody in your scope.", "noFixedComponents": "Define fixed components (such as the basic salary) in the payroll settings.", "saveProfile": "Save the profile", "startDate": "Start date", "endDate": "End date", "notes": "Notes",
+    "fixedTitle": "Fixed components", "effectiveFrom": "From", "applyFrom": "Apply from this date", "historyHint": "A new value ends the previous one the day before; an empty amount ends the component."
+  },
+  "installments": {
+    "title": "Installments and advances", "hint": "Each cycle adds the installment due (\"installment 3 of 10\") and the plan ends at a zero balance.", "name": "Name", "total": "Total", "count": "Installments",
+    "start": "First period", "amountOptional": "Installment (optional)", "amount": "Installment", "add": "Add the plan", "empty": "No plans.", "progress": "Paid", "paidOf": "{{paid}} of {{count}}", "remaining": "Remaining",
+    "reschedule": "Reschedule", "settle": "Settle early", "cancel": "Cancel",
+    "status": { "active": "Active", "completed": "Completed", "cancelled": "Cancelled" }
+  },
+  "settings": {
+    "title": "Policies", "periodStartDay": "Period start day", "proration": "Proration", "prorationDivisor": "Fixed divisor (days)",
+    "prorations": { "none": "No proration", "calendar": "Calendar days", "working": "Working days", "fixed": "Fixed divisor" },
+    "currency": "Default currency", "dayDivisor": "Day rate divisor (days)", "hoursPerDay": "Hours per day", "overtimeMultiplier": "Overtime multiplier", "netChangeWarning": "Warn when the net changes by more than (%)",
+    "reportLanguage": "Report language", "languages": { "bilingual": "Arabic and English", "ar": "Arabic", "en": "English" },
+    "allowNegative": "Allow a negative net (with a reason)", "autoLock": "Lock a cycle when it is approved", "selfService": "Employees view their published payslips in the app",
+    "signatures": "Show the prepared / reviewed / approved boxes", "taxNotice": "Notice on reports", "footer": "Report footer",
+    "appliesToNew": "Changes apply to new cycles; every cycle keeps the policies it was created with.", "save": "Save", "saved": "Saved"
+  },
+  "components": {
+    "title": "Components", "hint": "Taxes and insurance are components you define: an amount, or a percentage of a base you choose. No country rates are built in.",
+    "add": "Add a component", "edit": "Edit the component", "save": "Save", "empty": "No components yet.", "name": "Name", "nameAr": "Name (Arabic)", "nameEn": "Name (English)", "nameRequired": "Write the name.",
+    "category": "Category", "source": "Kind", "sources": { "fixed": "Fixed (on the profile)", "variable": "Variable (entered each cycle)" },
+    "calc": "Calculation", "amountType": "Amount", "percentType": "Percentage", "percent": "Percentage", "base": "Base", "baseComponent": "Base component",
+    "bases": { "basic": "Basic salary", "component": "A component", "earnings": "Total earnings" },
+    "order": "Order", "inNet": "In the net", "yes": "Yes", "basic": "Basic", "prorated": "Prorated", "inCombined": "In salary + allowances", "inactive": "Inactive",
+    "inNetLabel": "Counts in the net salary (and shows on the payslip and the summary)", "outsideNetHint": "Outside the net it never shows on the payslip or the summary - only in the salary + allowances report.",
+    "inCombinedLabel": "Shows in the salary + allowances report", "isBasicLabel": "This is the basic salary", "prorateLabel": "Prorated for part of a period", "activeLabel": "Active",
+    "deductionPercentHint": "A percentage deduction is between 0 and 100."
+  },
+  "requests": {
+    "hint": "Payslips your team asked for. One click sends the approved, stored payslip as a PDF to the person's registered email - the same version, nothing recalculated.",
+    "employee": "Employee", "cycle": "Cycle", "asked": "Asked", "status": "Status", "empty": "No requests.",
+    "statuses": { "pending": "Pending", "sent": "Sent", "failed": "Failed" }, "sending": "Sending...",
+    "filters": { "open": "Open", "pending": "Pending", "failed": "Failed", "sent": "Sent", "all": "All" },
+    "send": "Send by email", "retry": "Try again", "confirmTitle": "Send the payslip",
+    "confirmBody": "The payslip of {{cycle}} will be sent as a PDF to {{name}} at {{email}}.",
+    "sentTo": "Sent to {{name}} ({{email}}).", "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}"
+  },
+  "mine": {
+    "empty": "No published payslips yet.", "view": "View", "download": "Download PDF", "askByEmail": "Ask for it by email", "waiting": "Request sent", "send": "Send the request",
+    "askBody": "Your manager will be told, and the payslip will come as a PDF to {{email}}.", "note": "Note (optional)", "asked": "Your request was sent.",
+    "statuses": { "pending": "Request pending", "sent": "Emailed", "failed": "Waiting to be sent again" }, "sentOn": "on {{date}} to {{email}}"
+  },
+  "errors": {
+    "generic": "Something went wrong. Try again.", "noAuthority": "You do not have this payroll permission for these people.", "notInPlan": "Payroll is not in your organisation's plan.",
+    "changedBySomeoneElse": "Someone else changed this meanwhile. The page was reloaded - try again.", "periodTaken": "A cycle already covers this period and scope.",
+    "blockingErrors": "Fix the blocking errors first.", "acknowledgeWarnings": "Acknowledge the warnings first.", "submitterCannotApprove": "Whoever sent the cycle for review cannot approve it.",
+    "notPublished": "This payslip is not published from a locked cycle.", "reasonRequired": "Write the reason.", "alreadyAsked": "You already asked for this payslip.", "alreadySent": "This payslip was already sent.",
+    "beingSent": "This payslip is being sent right now.", "noEmail": "This person has no email.", "profileFirst": "Save the payroll profile first.", "notEditable": "This cycle cannot be changed now.",
+    "ownRequest": "Nobody handles their own request.", "fileFailed": "The file could not be made. Try again."
+  }
+}

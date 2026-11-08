@@ -23,7 +23,16 @@ const PDF_SCALE = 1.4;
 // Tallest single capture, in canvas pixels: safe on Android WebViews too.
 const MAX_CAPTURE_PX = 12000;
 
-export async function renderHtmlToPdf(container: HTMLElement): Promise<jsPDF> {
+export interface RenderPdfOptions {
+  /** A4 landscape (wide payroll summaries); default portrait. */
+  landscape?: boolean;
+  /** Append to this document on a new page (one payslip per page) instead of starting one. */
+  doc?: jsPDF;
+  /** Write "2 / 5" page numbers when done; default true (pass false until the last part). */
+  numberPages?: boolean;
+}
+
+export async function renderHtmlToPdf(container: HTMLElement, options: RenderPdfOptions = {}): Promise<jsPDF> {
   const wrapper = document.createElement("div");
   wrapper.style.cssText = "position:fixed;top:0;left:0;width:0;height:0;overflow:hidden;";
   wrapper.appendChild(container);
@@ -43,12 +52,13 @@ export async function renderHtmlToPdf(container: HTMLElement): Promise<jsPDF> {
     const headBox = thead?.getBoundingClientRect();
     const tableBox = thead?.closest("table")?.getBoundingClientRect();
 
-    const doc = new jsPDF({ unit: "pt", format: "a4" });
+    const appending = Boolean(options.doc);
+    const doc = options.doc ?? new jsPDF({ unit: "pt", format: "a4", orientation: options.landscape ? "landscape" : "portrait" });
     const marginX = 20;
     const marginY = 20;
     const footerPt = 14;
-    const contentWidthPt = 555;
-    const pageHeightPt = 841.89;
+    const contentWidthPt = options.landscape ? 801.89 : 555;
+    const pageHeightPt = options.landscape ? 595.28 : 841.89;
     const pageContentHeightPt = pageHeightPt - marginY * 2 - footerPt;
 
     // Breaks are chosen in CSS pixels over the whole document.
@@ -67,7 +77,7 @@ export async function renderHtmlToPdf(container: HTMLElement): Promise<jsPDF> {
     const headerCssHeight = repeat ? repeat.from - repeat.top : 0;
 
     let pageStart = 0;
-    let firstPage = true;
+    let firstPage = !appending;
     for (const group of groupPages(breaks, MAX_CAPTURE_PX / PDF_SCALE)) {
       const chunk = await capture(group.from, group.to - group.from);
       const canvasPerCss = chunk.height / (group.to - group.from);
@@ -100,6 +110,7 @@ export async function renderHtmlToPdf(container: HTMLElement): Promise<jsPDF> {
     }
 
     // Page numbers ("2 / 5") at the foot of every page.
+    if (options.numberPages === false) return doc;
     const pages = doc.getNumberOfPages();
     doc.setFontSize(8);
     doc.setTextColor(100, 116, 139);

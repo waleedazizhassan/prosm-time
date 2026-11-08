@@ -23,6 +23,8 @@ export const PLAN_FEATURES = [
   "integrations",
   "daily_summary",
   "manager_alerts",
+  // 2026-11-08: the payroll module (Pro and the organisations from before plans)
+  "payroll",
 ] as const;
 export type PlanFeature = (typeof PLAN_FEATURES)[number];
 
