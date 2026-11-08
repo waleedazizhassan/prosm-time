@@ -65,8 +65,13 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
     case "payslip_sent":
     case "payslip_published":
       return "/payslips";
+    // B-10 (2026-11-08): the licence reminder opens the plan card too (it fell through to the dashboard)
     case "license_changed":
+    case "license_ending":
       return viewer.isOwner ? "/settings#plan" : "/dashboard";
+    // the employee's own break ran over: their dashboard
+    case "break_exceeded":
+      return "/dashboard";
     case "shift_no_show":
       return "/attendance?period=today";
     case "trial_ending":
