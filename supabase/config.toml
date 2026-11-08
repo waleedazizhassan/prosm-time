@@ -279,3 +279,14 @@ entrypoint = "./functions/public-config/index.ts"
 enabled = true
 verify_jwt = false
 entrypoint = "./functions/sync-all-licenses/index.ts"
+
+# 2026-11-08: listed explicitly (they already ran with the default verify_jwt = true).
+[functions.change-site]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/change-site/index.ts"
+
+[functions.remove-employee]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/remove-employee/index.ts"

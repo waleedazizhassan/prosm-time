@@ -45,17 +45,25 @@ serve(async (request: Request) => {
 
     const service = createClient(supabaseUrl, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, { auth: { autoRefreshToken: false, persistSession: false } });
 
-    // 1. their files
+    // 2026-11-08: the personal data first, the files after - a failure no longer leaves an
+    // account whose photos and documents are gone but whose data is still there.
     const evidence: string[] = prepared.evidencePaths ?? [];
     const documents: string[] = prepared.documentPaths ?? [];
     const avatar = avatarPath(prepared.avatarUrl ?? null);
-    if (evidence.length > 0) await service.storage.from("camera-evidence").remove(evidence);
-    if (documents.length > 0) await service.storage.from("leave-documents").remove(documents);
-    if (avatar) await service.storage.from("user-avatars").remove([avatar]);
 
-    // 2. their personal data; the work records stay anonymised
+    // 1. their personal data; the work records stay anonymised
     const { error: anonymiseError } = await service.rpc("anonymize_prosm_time_user", { p_user_id: prepared.userId });
     if (anonymiseError) return errorResponse(anonymiseError.message, 500, "DELETE_FAILED");
+
+    // 2. their files (a file that cannot be removed is an orphan to clean up, not a reason to stop)
+    const removals = [
+      evidence.length > 0 ? service.storage.from("camera-evidence").remove(evidence) : null,
+      documents.length > 0 ? service.storage.from("leave-documents").remove(documents) : null,
+      avatar ? service.storage.from("user-avatars").remove([avatar]) : null,
+    ].filter(Boolean);
+    for (const result of await Promise.all(removals)) {
+      if (result?.error) console.error("[delete-my-account] files left to clean up");
+    }
 
     // 3. the sign-in: no email, no password anyone knows, banned, signed out everywhere
     const { error: authError } = await service.auth.admin.updateUserById(prepared.authUserId, {
