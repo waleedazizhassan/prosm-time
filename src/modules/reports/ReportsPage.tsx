@@ -559,7 +559,7 @@ export default function ReportsPage() {
       {allows("payroll_export") ? <PayrollExportCard startDate={startDate} endDate={endDate} /> : null}
       {canSeePay && allows("labor_cost") ? <ProjectBudgetsCard /> : null}
       {/* 2026-11-08 B-07: the external labour pay report lives with its pay runs (own permissions, frozen on approval) */}
-      {allows("kiosk") && (profile?.isOwner || hasPermission("external_labor.view")) ? (
+      {allows("kiosk") && (profile?.isOwner || hasPermission("external_labor.view_pay")) ? (
         <Card title={t("externalPayCard.title")}>
           <HintText>{t("externalPayCard.hint")}</HintText>
           <Link to="/workers/pay">{t("externalPayCard.open")}</Link>

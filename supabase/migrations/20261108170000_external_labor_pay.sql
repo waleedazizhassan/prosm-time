@@ -21,15 +21,16 @@
 --   * Approval freezes a snapshot (rates, quantities, the policy and the rule used, results);
 --     changes after that need a reopen with a reason. A draft report is marked as a draft.
 --   * Totals are per currency; currencies are never added together.
---   * Permissions external_labor.view / manage / manage_policy / adjust / approve / export; the
---     Owner holds them; scope follows the worker's site for managers with managed sites.
+--   * Permissions external_labor.view_pay / manage / manage_policy / adjust / approve / export; the
+--     Owner holds them; scope follows the worker's site for managers with managed sites. The older
+--     external_labor.view (managers see the external workers on the dashboard) shows no pay.
 -- Tables are RPC-only (RLS on, no client grants).
 
 begin;
 
 -- Permissions -----------------------------------------------------------------------------------
 insert into public.permissions (permission_key, resource, action_type, name, description) values
-    ('external_labor.view', 'external_labor', 'VIEW', 'View external labour pay', 'See external workers'' rates, pay runs and reports in scope.'),
+    ('external_labor.view_pay', 'external_labor', 'VIEW', 'View external labour pay', 'See external workers'' rates, pay runs and reports in scope.'),
     ('external_labor.manage', 'external_labor', 'EDIT', 'Manage external labour pay', 'Set rates, prepare pay runs and enter work quantities.'),
     ('external_labor.manage_policy', 'external_labor', 'ADMINISTER', 'External labour pay policy', 'Deduction and addition items, and the day-rate rule.'),
     ('external_labor.adjust', 'external_labor', 'EDIT', 'Adjust external labour pay', 'Add an individual deduction or addition, with a reason.'),
@@ -39,7 +40,7 @@ on conflict (permission_key) do nothing;
 
 insert into public.role_default_permissions (role_id, permission_id)
 select r.id, p.id from roles r cross join permissions p
-where r.role_key = 'owner' and p.permission_key like 'external_labor.%'
+where r.role_key = 'owner' and p.permission_key like 'external_labor.%' and p.permission_key <> 'external_labor.view'
 on conflict (role_id, permission_id) do nothing;
 
 -- Rates -----------------------------------------------------------------------------------------
@@ -117,8 +118,8 @@ declare
     v_org uuid := public.current_prosm_time_organization_id();
     v_row external_labor_settings%rowtype;
 begin
-    if not (public.prosm_time_external_allows('external_labor.view', null) or public.prosm_time_external_allows('external_labor.manage_policy', null)
-            or exists (select 1 from unnest(public.current_prosm_time_managed_site_ids()) s where public.prosm_time_external_allows('external_labor.view', s))) then
+    if not (public.prosm_time_external_allows('external_labor.view_pay', null) or public.prosm_time_external_allows('external_labor.manage_policy', null)
+            or exists (select 1 from unnest(public.current_prosm_time_managed_site_ids()) s where public.prosm_time_external_allows('external_labor.view_pay', s))) then
         raise exception 'EXTERNAL LABOR AUTHORITY REQUIRED: external_labor.view';
     end if;
     insert into external_labor_settings (organization_id) values (v_org) on conflict do nothing;
@@ -208,7 +209,7 @@ as $$
     ) order by w.full_name), '[]'::jsonb)
     from site_workers w left join sites s on s.id = w.site_id
     where w.organization_id = public.current_prosm_time_organization_id()
-      and public.prosm_time_external_allows('external_labor.view', w.site_id);
+      and public.prosm_time_external_allows('external_labor.view_pay', w.site_id);
 $$;
 
 -- Policy ----------------------------------------------------------------------------------------
@@ -240,8 +241,8 @@ set search_path = public
 as $$
 begin
     if public.current_prosm_time_user_id() is null then raise exception 'NO AUTHENTICATED SESSION'; end if;
-    if not (public.prosm_time_external_allows('external_labor.view', null) or public.prosm_time_external_allows('external_labor.manage_policy', null)
-            or exists (select 1 from unnest(public.current_prosm_time_managed_site_ids()) s where public.prosm_time_external_allows('external_labor.view', s))) then
+    if not (public.prosm_time_external_allows('external_labor.view_pay', null) or public.prosm_time_external_allows('external_labor.manage_policy', null)
+            or exists (select 1 from unnest(public.current_prosm_time_managed_site_ids()) s where public.prosm_time_external_allows('external_labor.view_pay', s))) then
         raise exception 'EXTERNAL LABOR AUTHORITY REQUIRED: external_labor.view';
     end if;
     return coalesce((select jsonb_agg(jsonb_build_object('id', id, 'name', name, 'kind', kind, 'calc', calc, 'value', value, 'currency', currency,
@@ -668,8 +669,8 @@ declare
     v_data jsonb;
     v_workers jsonb;
 begin
-    if not exists (select 1 from external_labor_run_workers rw where rw.run_id = p_run_id and public.prosm_time_external_allows('external_labor.view', rw.site_id))
-       and not public.prosm_time_external_allows('external_labor.view', v_run.site_id) then
+    if not exists (select 1 from external_labor_run_workers rw where rw.run_id = p_run_id and public.prosm_time_external_allows('external_labor.view_pay', rw.site_id))
+       and not public.prosm_time_external_allows('external_labor.view_pay', v_run.site_id) then
         raise exception 'EXTERNAL LABOR AUTHORITY REQUIRED: external_labor.view';
     end if;
     if v_run.status = 'approved' then
@@ -680,7 +681,7 @@ begin
     -- only the workers in the reader's scope; totals per currency from those
     select coalesce(jsonb_agg(w), '[]'::jsonb) into v_workers
     from jsonb_array_elements(v_data -> 'workers') w
-    where public.prosm_time_external_allows('external_labor.view', nullif(w ->> 'siteId', '')::uuid);
+    where public.prosm_time_external_allows('external_labor.view_pay', nullif(w ->> 'siteId', '')::uuid);
     return jsonb_build_object(
         'run', jsonb_build_object('id', v_run.id, 'title', v_run.title, 'siteId', v_run.site_id, 'siteName', (select name from sites where id = v_run.site_id),
                                   'periodStart', v_run.period_start, 'periodEnd', v_run.period_end, 'status', v_run.status, 'runVersion', v_run.run_version,
@@ -712,8 +713,8 @@ as $$
                               order by r.period_start desc, r.created_at desc), '[]'::jsonb)
     from external_labor_runs r left join sites s on s.id = r.site_id
     where r.organization_id = public.current_prosm_time_organization_id()
-      and (public.prosm_time_external_allows('external_labor.view', r.site_id)
-           or exists (select 1 from external_labor_run_workers rw where rw.run_id = r.id and public.prosm_time_external_allows('external_labor.view', rw.site_id)));
+      and (public.prosm_time_external_allows('external_labor.view_pay', r.site_id)
+           or exists (select 1 from external_labor_run_workers rw where rw.run_id = r.id and public.prosm_time_external_allows('external_labor.view_pay', rw.site_id)));
 $$;
 
 create or replace function public.transition_prosm_time_external_run(p_run_id uuid, p_action text, p_reason text default null, p_expected_version integer default null)

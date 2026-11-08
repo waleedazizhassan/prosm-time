@@ -14,6 +14,7 @@ let siteA: string;
 let siteB: string;
 let managerA: TestMember;
 let accountant: TestMember;
+let plainManager: TestMember; // a site B manager with only the role's defaults (external_labor.view)
 let daily = "";
 let monthly = "";
 let yearly = "";
@@ -50,8 +51,9 @@ beforeAll(async () => {
   siteB = await createSite(t, org, "Yard B");
   managerA = await addMember(t, org, "manager", "Manager A");
   accountant = await addMember(t, org, "employee", "Accountant");
-  await t.su("insert into site_assignments (site_id, user_id, role_at_site) values ($1, $2, 'manager')", [siteA, managerA.userId]);
-  for (const key of ["external_labor.view", "external_labor.manage", "external_labor.adjust"]) {
+  plainManager = await addMember(t, org, "manager", "Plain Manager");
+  await t.su("insert into site_assignments (site_id, user_id, role_at_site) values ($1, $2, 'manager'), ($3, $4, 'manager')", [siteA, managerA.userId, siteB, plainManager.userId]);
+  for (const key of ["external_labor.view_pay", "external_labor.manage", "external_labor.adjust"]) {
     await ok(owner("select public.set_prosm_time_user_permission_override($1, $2, true, 'site A external pay')", [managerA.userId, key]));
   }
   await ok(owner("select public.set_prosm_time_user_permission_override($1, 'payroll.view', true, 'payroll only')", [accountant.userId]));
@@ -94,6 +96,9 @@ describe("rates", () => {
     expect((await t.as(managerA.authId, "select public.set_prosm_time_external_rate($1, 999, 'EGP', 'DAILY')", [atSiteB])).error).toMatch(/AUTHORITY REQUIRED/);
     const theirs = await ok<{ r: unknown[] }>(t.as(accountant.authId, "select public.list_prosm_time_external_rates() as r"));
     expect(theirs.r).toEqual([]);
+    // seeing external workers on the dashboard (a manager's default) shows no pay
+    const plain = await ok<{ r: unknown[] }>(t.as(plainManager.authId, "select public.list_prosm_time_external_rates() as r"));
+    expect(plain.r).toEqual([]);
     expect((await t.as(other.owner.authId, "select public.list_prosm_time_external_rates() as r")).rows![0]).toEqual({ r: [] });
   });
 });
