@@ -267,7 +267,8 @@
     "dailySummary": "Résumé du jour",
     "grantPermissions": "Attribuer les autorisations",
     "payroll": "Paie",
-    "payslips": "Mes bulletins"
+    "payslips": "Mes bulletins",
+    "externalPay": "Paie des externes"
   },
   "sosOverlay": {
     "title": "Alerte SOS/Urgence",
@@ -376,7 +377,8 @@
     "dailySummary": "Une journée de votre organisation : qui a travaillé, en retard, absent ou en congé",
     "grantPermissions": "Qui a quelles autorisations - et toute l'autorité du propriétaire",
     "payroll": "Cycles de paie, dossiers, les trois rapports et les bulletins - avec des droits séparés et des versions conservées.",
-    "payslips": "Vos bulletins publiés - consultez-les ou demandez-les par e-mail."
+    "payslips": "Vos bulletins publiés - consultez-les ou demandez-les par e-mail.",
+    "externalPay": "Taux à la journée, à la semaine, au mois ou à l'année, paies, règles et ajustements individuels - approuvés et figés, séparés de la paie des employés."
   },
   "backgroundDisclosure": {
     "title": "Position pendant votre poste",

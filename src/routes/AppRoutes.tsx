@@ -32,6 +32,8 @@ const AuditLogPage = lazy(() => import("../modules/audit/AuditLogPage"));
 const SitesPage = lazy(() => import("../modules/sites/SitesPage"));
 const SiteDetailPage = lazy(() => import("../modules/sites/SiteDetailPage"));
 const ExternalWorkersPage = lazy(() => import("../modules/workforce/ExternalWorkersPage"));
+const ExternalPayPage = lazy(() => import("../modules/workforce/ExternalPayPage"));
+const ExternalPayRunPage = lazy(() => import("../modules/workforce/ExternalPayRunPage"));
 const ManagerConsolePage = lazy(() => import("../modules/manager/ManagerConsolePage"));
 const AttendanceLogPage = lazy(() => import("../modules/attendance/AttendanceLogPage"));
 const TimesheetsPage = lazy(() => import("../modules/timesheets/TimesheetsPage"));
@@ -138,6 +140,8 @@ export default function AppRoutes() {
             <Route path="/sites" element={<SitesPage />} />
             <Route path="/sites/:siteId" element={<SiteDetailPage />} />
             <Route path="/workers" element={<PlanRoute feature="kiosk"><ExternalWorkersPage /></PlanRoute>} />
+            <Route path="/workers/pay" element={<PlanRoute feature="kiosk"><ExternalPayPage /></PlanRoute>} />
+            <Route path="/workers/pay/:runId" element={<PlanRoute feature="kiosk"><ExternalPayRunPage /></PlanRoute>} />
             <Route path="/manager" element={<ManagerConsolePage />} />
             <Route path="/attendance" element={<AttendanceLogPage />} />
             <Route path="/timesheets" element={<TimesheetsPage />} />

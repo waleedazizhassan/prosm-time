@@ -269,5 +269,10 @@
       "hours": "Ore",
       "late": "Ritardo"
     }
+  },
+  "externalPayCard": {
+    "title": "Paga lavoratori esterni",
+    "hint": "Tariffa, quantità, lordo, trattenute e aggiunte, netto e stato di approvazione di ogni lavoratore - per elaborazione, con totali per valuta. Esporta uno, una sede o tutti, in PDF o Excel.",
+    "open": "Apri paga esterni"
   }
 }

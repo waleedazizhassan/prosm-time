@@ -267,7 +267,8 @@
     "dailySummary": "每日摘要",
     "grantPermissions": "授予权限",
     "payroll": "薪资",
-    "payslips": "我的工资单"
+    "payslips": "我的工资单",
+    "externalPay": "外部工人薪酬"
   },
   "sosOverlay": {
     "title": "SOS/紧急警报",
@@ -366,7 +367,8 @@
     "dailySummary": "组织的一天：谁上班、谁迟到、谁缺勤、谁在休假",
     "grantPermissions": "谁拥有哪些权限 - 以及所有者的全部权限",
     "payroll": "薪资周期、档案、三份报表和工资单——权限分离、版本留存。",
-    "payslips": "您已发布的工资单——查看或通过邮件申请。"
+    "payslips": "您已发布的工资单——查看或通过邮件申请。",
+    "externalPay": "按天、周、月或年的费率、发薪批次、政策与个人调整——经批准后冻结，与员工工资分开。"
   },
   "backgroundDisclosure": {
     "title": "班次期间的位置",

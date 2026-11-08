@@ -267,7 +267,8 @@
     "dailySummary": "Daily summary",
     "grantPermissions": "Grant permissions",
     "payroll": "Payroll",
-    "payslips": "My payslips"
+    "payslips": "My payslips",
+    "externalPay": "External labour pay"
   },
   "sosOverlay": {
     "title": "SOS/Emergency alert",
@@ -371,7 +372,8 @@
     "dailySummary": "One day of your organisation: who worked, who was late, who was absent, who was on leave",
     "grantPermissions": "Who gets which permissions - and the owner's full authority",
     "payroll": "Payroll cycles, profiles, the three reports and payslips - with separate permissions and stored versions.",
-    "payslips": "Your published payslips - view them or ask for them by email."
+    "payslips": "Your published payslips - view them or ask for them by email.",
+    "externalPay": "Rates by day, week, month or year, pay runs, the policy and individual adjustments - approved and frozen, kept apart from payroll."
   },
   "backgroundDisclosure": {
     "title": "Location during your shift",

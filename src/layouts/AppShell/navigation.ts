@@ -127,6 +127,8 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // 2026-11-08: the payroll module (its own payroll.* permissions; the owner holds them all) and
   // each person's own published payslips.
   { id: "payroll", planFeature: "payroll", labelKey: "items.payroll", path: "/payroll", icon: Banknote, requiredPermission: "payroll.access", section: "payroll" },
+  // 2026-11-08 B-07: external labour pay - separate from payroll and its permissions.
+  { id: "externalPay", planFeature: "kiosk", labelKey: "items.externalPay", path: "/workers/pay", icon: HardHat, requiredPermission: "external_labor.view", section: "payroll" },
   { id: "payslips", planFeature: "payroll", labelKey: "items.payslips", path: "/payslips", icon: Receipt, requiredPermission: null, hiddenFromOwner: true, section: "payroll" },
   { id: "leave", planFeature: "leave", labelKey: "items.leave", path: "/leave", icon: CalendarDays, requiredPermission: null, section: "payroll" },
   // § live UX review, user-directed - "a Reports Center where any PDF

@@ -269,5 +269,10 @@
       "hours": "Heures",
       "late": "Retard"
     }
+  },
+  "externalPayCard": {
+    "title": "Paie des travailleurs externes",
+    "hint": "Taux, quantité, brut, retenues et ajouts, net et statut d'approbation de chaque travailleur - par paie, avec des totaux par devise. Exportez une personne, un site ou tous, en PDF ou Excel.",
+    "open": "Ouvrir la paie des externes"
   }
 }

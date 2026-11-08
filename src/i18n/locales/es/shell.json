@@ -267,7 +267,8 @@
     "dailySummary": "Resumen diario",
     "grantPermissions": "Conceder permisos",
     "payroll": "Nómina",
-    "payslips": "Mis recibos"
+    "payslips": "Mis recibos",
+    "externalPay": "Pago de externos"
   },
   "sosOverlay": {
     "title": "Alerta SOS/Emergencia",
@@ -376,7 +377,8 @@
     "dailySummary": "Un día de tu organización: quién trabajó, quién llegó tarde, quién faltó y quién estaba de ausencia",
     "grantPermissions": "Quién tiene qué permisos, y toda la autoridad del propietario",
     "payroll": "Ciclos, fichas, los tres informes y los recibos de nómina, con permisos separados y versiones guardadas.",
-    "payslips": "Sus recibos publicados: véalos o pídalos por correo."
+    "payslips": "Sus recibos publicados: véalos o pídalos por correo.",
+    "externalPay": "Tarifas por día, semana, mes o año, liquidaciones, la política y ajustes individuales: aprobados y congelados, separados de la nómina."
   },
   "backgroundDisclosure": {
     "title": "Ubicación durante tu turno",
