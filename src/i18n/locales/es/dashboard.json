@@ -392,7 +392,9 @@
       "keyLabel": "Sedes en el mapa",
       "stateActive": "Activa: hay personas ahora",
       "stateIdle": "Inactiva: no hay nadie ahora",
-      "stateSos": "SOS"
+      "stateSos": "SOS",
+      "zoomIn": "Acercar",
+      "zoomOut": "Alejar"
     },
     "present": {
       "title": "Presentes ahora ({{count}})",

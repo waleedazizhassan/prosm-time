@@ -392,7 +392,9 @@
       "keyLabel": "Siti sulla mappa",
       "stateActive": "Attivo - persone presenti ora",
       "stateIdle": "Inattivo - nessuno ora",
-      "stateSos": "SOS"
+      "stateSos": "SOS",
+      "zoomIn": "Ingrandisci",
+      "zoomOut": "Riduci"
     },
     "present": {
       "title": "Presenti ora ({{count}})",

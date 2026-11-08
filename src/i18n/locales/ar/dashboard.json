@@ -401,7 +401,9 @@
       "keyLabel": "المواقع على الخريطة",
       "stateActive": "نشط — فيه ناس الآن",
       "stateIdle": "متوقف — لا أحد الآن",
-      "stateSos": "استغاثة"
+      "stateSos": "استغاثة",
+      "zoomIn": "تكبير",
+      "zoomOut": "تصغير"
     },
     "present": {
       "title": "الموجودون الآن ({{count}})",

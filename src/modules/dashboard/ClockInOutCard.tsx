@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { MapPin, Siren } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
+import { useDashboardRefresh } from "../../core/hooks/useDashboardRefresh";
 import usePlanFeatures from "../../core/hooks/usePlanFeatures";
 import AttendanceRepository, { type AttendanceSession } from "../../core/repositories/AttendanceRepository";
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
@@ -413,6 +414,9 @@ export default function ClockInOutCard() {
   useEffect(() => {
     load(hydratedFromCacheRef.current);
   }, [load]);
+
+  // B-11: the logo refreshes the session quietly, without a spinner
+  useDashboardRefresh(() => void load(true));
 
   // WP-15 - once a queued action finally syncs (or a failed one is
   // discarded), the real session state on the server may have

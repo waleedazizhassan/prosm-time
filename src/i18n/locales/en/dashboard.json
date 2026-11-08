@@ -389,7 +389,9 @@
       "keyLabel": "Sites on the map",
       "stateActive": "Active - people are here now",
       "stateIdle": "Inactive - nobody is here now",
-      "stateSos": "SOS"
+      "stateSos": "SOS",
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out"
     },
     "present": {
       "title": "Here now ({{count}})",

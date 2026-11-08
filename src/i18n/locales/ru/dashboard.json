@@ -395,7 +395,9 @@
       "keyLabel": "Объекты на карте",
       "stateActive": "Активен - здесь сейчас есть люди",
       "stateIdle": "Неактивен - сейчас никого нет",
-      "stateSos": "SOS"
+      "stateSos": "SOS",
+      "zoomIn": "Приблизить",
+      "zoomOut": "Отдалить"
     },
     "present": {
       "title": "Сейчас на месте ({{count}})",

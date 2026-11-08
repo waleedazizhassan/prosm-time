@@ -389,7 +389,9 @@
       "keyLabel": "Standorte auf der Karte",
       "stateActive": "Aktiv - jetzt Personen vor Ort",
       "stateIdle": "Inaktiv - niemand vor Ort",
-      "stateSos": "SOS"
+      "stateSos": "SOS",
+      "zoomIn": "Vergrößern",
+      "zoomOut": "Verkleinern"
     },
     "present": {
       "title": "Jetzt anwesend ({{count}})",

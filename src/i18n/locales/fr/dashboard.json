@@ -392,7 +392,9 @@
       "keyLabel": "Sites sur la carte",
       "stateActive": "Actif - des personnes sont présentes",
       "stateIdle": "Inactif - personne pour l’instant",
-      "stateSos": "SOS"
+      "stateSos": "SOS",
+      "zoomIn": "Zoom avant",
+      "zoomOut": "Zoom arrière"
     },
     "present": {
       "title": "Présents maintenant ({{count}})",

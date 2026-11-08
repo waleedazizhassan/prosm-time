@@ -386,7 +386,9 @@
       "keyLabel": "地图上的地点",
       "stateActive": "活跃 - 当前有人在岗",
       "stateIdle": "不活跃 - 当前无人",
-      "stateSos": "SOS"
+      "stateSos": "SOS",
+      "zoomIn": "放大",
+      "zoomOut": "缩小"
     },
     "present": {
       "title": "当前在岗（{{count}}）",

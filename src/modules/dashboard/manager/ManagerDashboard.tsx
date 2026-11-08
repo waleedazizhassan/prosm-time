@@ -5,6 +5,7 @@ import { AlertTriangle, ArrowDown, ArrowUp, CalendarRange, FileDown, GripVertica
 
 import { useAuth } from "../../../core/context/AuthContext";
 import usePlanFeatures from "../../../core/hooks/usePlanFeatures";
+import { useDashboardRefresh } from "../../../core/hooks/useDashboardRefresh";
 import DashboardRepository, { type DashboardScope, type DashboardSite, type ManagerDashboard as Dashboard } from "../../../core/repositories/DashboardRepository";
 import SiteRepository from "../../../core/repositories/SiteRepository";
 import { isRtl } from "../../../i18n/direction";
@@ -127,9 +128,16 @@ export default function ManagerDashboard() {
     return () => window.clearInterval(interval);
   }, [load]);
 
+  const [chartTick, setChartTick] = useState(0);
   useEffect(() => {
     DashboardRepository.load(chartRange.from, chartRange.to, scope, siteFilter || null).then((result) => setChartData(result.data));
-  }, [chartRange, scope, siteFilter]);
+  }, [chartRange, scope, siteFilter, chartTick]);
+
+  // B-11: the logo reloads the figures in place, keeping the period, scope, site and layout
+  useDashboardRefresh(() => {
+    void load();
+    setChartTick((value) => value + 1);
+  });
 
   useEffect(() => {
     SiteRepository.listSites().then((result) => setSites((result.data ?? []).map((site) => ({ id: site.id, name: site.name }))));

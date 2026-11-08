@@ -392,7 +392,9 @@
       "keyLabel": "Locais no mapa",
       "stateActive": "Ativo - há pessoas aqui agora",
       "stateIdle": "Inativo - ninguém aqui agora",
-      "stateSos": "SOS"
+      "stateSos": "SOS",
+      "zoomIn": "Aproximar",
+      "zoomOut": "Afastar"
     },
     "present": {
       "title": "Presentes agora ({{count}})",

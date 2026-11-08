@@ -1,10 +1,11 @@
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Capacitor } from "@capacitor/core";
 import { ChevronLeft, ChevronRight, LayoutDashboard } from "lucide-react";
 
 import useAppHistory from "../../core/hooks/useAppHistory";
+import { requestDashboardRefresh } from "../../core/hooks/useDashboardRefresh";
 import styles from "./HeaderNavControls.module.css";
 
 // Ported from PROSM Platform's own Header/HeaderNavControls (§ visual
@@ -28,6 +29,7 @@ import styles from "./HeaderNavControls.module.css";
 function HeaderNavControls() {
   const { t } = useTranslation("shell");
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { canGoBack, canGoForward, goBack, goForward } = useAppHistory();
   const showDashboardButton = !Capacitor.isNativePlatform();
 
@@ -45,7 +47,7 @@ function HeaderNavControls() {
       </button>
 
       {showDashboardButton ? (
-        <button type="button" className={styles.button} onClick={() => navigate("/dashboard")} aria-label={t("nav.dashboard")} title={t("nav.dashboard")}>
+        <button type="button" className={styles.button} onClick={() => (pathname === "/dashboard" ? requestDashboardRefresh() : navigate("/dashboard"))} aria-label={t("nav.dashboard")} title={t("nav.dashboard")}>
           <LayoutDashboard size={20} />
         </button>
       ) : null}

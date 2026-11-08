@@ -5,6 +5,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 import { useTheme } from "../../../core/context/ThemeContext";
+import { isRtl } from "../../../i18n/direction";
 import type { DashboardPresent, DashboardSite } from "../../../core/repositories/DashboardRepository";
 import mapStyles from "../../../components/common/LiveLocationMap.module.css";
 import styles from "./ManagerDashboard.module.css";
@@ -34,8 +35,9 @@ function personIcon(person: DashboardPresent): L.DivIcon {
 // clocked in as their photo (ring colour = status, orange when outside the
 // area). Only real sites and real people; full-screen on demand.
 export default function SitesMap({ sites, people }: { sites: DashboardSite[]; people: DashboardPresent[] }) {
-  const { t } = useTranslation("dashboard");
+  const { t, i18n } = useTranslation("dashboard");
   const { resolvedTheme } = useTheme();
+  const rtl = isRtl(i18n.language);
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
   const tileRef = useRef<L.TileLayer | null>(null);
@@ -48,7 +50,7 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
-    const map = L.map(containerRef.current, { zoomControl: true, scrollWheelZoom: false });
+    const map = L.map(containerRef.current, { zoomControl: false, scrollWheelZoom: false });
     map.attributionControl.setPrefix(false);
     map.setView([30.0444, 31.2357], 11);
     mapRef.current = map;
@@ -60,6 +62,22 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
       tileRef.current = null;
     };
   }, []);
+
+  // B-08: our own buttons sit at the inline start (full screen, all sites); the zoom (+/-) sits at
+  // the inline end, so the two never overlap - and it moves when the language changes direction.
+  // Leaflet places controls by physical side, so the side is chosen from the direction here.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const zoom = L.control.zoom({ position: rtl ? "topleft" : "topright", zoomInTitle: t("manager.map.zoomIn"), zoomOutTitle: t("manager.map.zoomOut") }).addTo(map);
+    return () => {
+      try {
+        zoom.remove();
+      } catch {
+        // the map itself was already removed
+      }
+    };
+  }, [rtl, t]);
 
   useEffect(() => {
     const map = mapRef.current;
