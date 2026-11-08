@@ -239,7 +239,7 @@
   },
   "ownerAuthority": {
     "title": "Conceder permissões",
-    "hint": "Abra as permissões de uma pessoa para conceder ou retirar uma, ou dê a ela toda a autoridade do proprietário com \"Conceder tudo\": todas as permissões, as ações exclusivas do proprietário e cada notificação e e-mail que você recebe - sem mudar as suas. Ao retirar, ela volta à sua função e às suas permissões.",
+    "hint": "Abra as permissões de uma pessoa para conceder ou retirar uma, ou delegue a sua autoridade a alguém - por exemplo durante as suas férias: toda ou apenas as permissões escolhidas, de uma data de início até uma data de fim ou até a retirar. Encerrar a organização, o plano, a retenção de dados, as chaves de API e a própria delegação ficam sempre consigo.",
     "search": "Pesquisar por nome",
     "nobody": "Ninguém para mostrar.",
     "since": "desde {{date}}",
@@ -258,6 +258,21 @@
     "revokeExplain": "A pessoa volta na hora à sua função e às suas permissões, e deixa de receber suas notificações e e-mails.",
     "reasonLabel": "Motivo (fica no registro de ações)",
     "reasonRequired": "Escreva o motivo.",
-    "failed": "Não foi possível salvar. Tente de novo."
+    "failed": "Não foi possível salvar. Tente de novo.",
+    "hasSome": "Tem {{count}} permissões delegadas",
+    "scheduled": "Começa mais tarde",
+    "window": "de {{from}} a {{to}}",
+    "ended": "terminada",
+    "grantSomeExplain": "A pessoa recebe apenas as permissões escolhidas, para as datas definidas. Não recebe as suas ações de proprietário nem as suas notificações.",
+    "scopeLabel": "O que delegar",
+    "scopeFull": "Toda a minha autoridade",
+    "scopePartial": "Apenas permissões escolhidas",
+    "choosePermissionsLabel": "Permissões a delegar",
+    "choosePermissions": "Escolha pelo menos uma permissão.",
+    "startLabel": "A partir de (opcional - hoje se vazio)",
+    "endLabel": "Até (opcional - até retirar se vazio)",
+    "endBeforeStart": "A data de fim deve ser posterior à de início.",
+    "windowHint": "Começa e termina sozinha nessas datas. Pode retirá-la a qualquer momento.",
+    "neverDelegated": "Nunca delegado: encerrar a organização, o plano e códigos de ativação, a retenção de dados, as chaves de API, conceder a gestão de permissões e a própria delegação. Ninguém - nem o delegado - aprova o próprio pedido."
   }
 }

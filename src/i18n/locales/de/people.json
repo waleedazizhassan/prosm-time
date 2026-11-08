@@ -239,7 +239,7 @@
   },
   "ownerAuthority": {
     "title": "Berechtigungen vergeben",
-    "hint": "Öffnen Sie die Berechtigungen einer Person, um eine zu erteilen oder zu entziehen, oder geben Sie ihr mit „Alles erteilen“ die volle Befugnis des Inhabers: alle Berechtigungen, die Aktionen nur für den Inhaber und jede Benachrichtigung und E-Mail, die Sie erhalten - ohne Ihre zu ändern. Entziehen Sie sie, hat die Person wieder ihre Rolle und ihre Berechtigungen.",
+    "hint": "Öffnen Sie die Berechtigungen einer Person, um eine zu erteilen oder zu entziehen, oder übertragen Sie Ihre Befugnisse an jemanden - z. B. während Ihres Urlaubs: alle oder nur ausgewählte Berechtigungen, ab einem Startdatum bis zu einem Enddatum oder bis zum Widerruf. Schließen der Organisation, Tarif, Datenaufbewahrung, API-Schlüssel und die Übertragung selbst bleiben immer bei Ihnen.",
     "search": "Nach Name suchen",
     "nobody": "Niemand anzuzeigen.",
     "since": "seit {{date}}",
@@ -258,6 +258,21 @@
     "revokeExplain": "Die Person hat sofort wieder ihre Rolle und ihre Berechtigungen und erhält Ihre Benachrichtigungen und E-Mails nicht mehr.",
     "reasonLabel": "Grund (wird im Aktionsprotokoll gespeichert)",
     "reasonRequired": "Geben Sie den Grund an.",
-    "failed": "Konnte nicht gespeichert werden. Versuchen Sie es erneut."
+    "failed": "Konnte nicht gespeichert werden. Versuchen Sie es erneut.",
+    "hasSome": "Hat {{count}} übertragene Berechtigungen",
+    "scheduled": "Beginnt später",
+    "window": "vom {{from}} bis {{to}}",
+    "ended": "beendet",
+    "grantSomeExplain": "Die Person erhält nur die gewählten Berechtigungen für die angegebenen Daten - nicht Ihre Inhaber-Aktionen und nicht Ihre Benachrichtigungen.",
+    "scopeLabel": "Was übertragen wird",
+    "scopeFull": "Meine gesamten Befugnisse",
+    "scopePartial": "Nur ausgewählte Berechtigungen",
+    "choosePermissionsLabel": "Zu übertragende Berechtigungen",
+    "choosePermissions": "Wählen Sie mindestens eine Berechtigung.",
+    "startLabel": "Ab (optional - heute, wenn leer)",
+    "endLabel": "Bis (optional - bis zum Widerruf, wenn leer)",
+    "endBeforeStart": "Das Enddatum muss nach dem Startdatum liegen.",
+    "windowHint": "Sie beginnt und endet automatisch an diesen Daten. Sie können sie jederzeit widerrufen.",
+    "neverDelegated": "Nie übertragen: Schließen der Organisation, Tarif und Aktivierungscodes, Datenaufbewahrung, API-Schlüssel, Vergabe der Rechteverwaltung und die Übertragung selbst. Niemand - auch nicht die vertretende Person - genehmigt den eigenen Antrag."
   }
 }

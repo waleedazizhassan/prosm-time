@@ -239,7 +239,7 @@
   },
   "ownerAuthority": {
     "title": "Attribuer les autorisations",
-    "hint": "Ouvrez les autorisations d'une personne pour en accorder ou en retirer une, ou donnez-lui toute l'autorité du propriétaire avec « Tout accorder » : toutes les autorisations, les actions réservées au propriétaire et chaque notification et e-mail que vous recevez - sans changer les vôtres. Retirez-la et elle retrouve son rôle et ses autorisations.",
+    "hint": "Ouvrez les autorisations d'une personne pour en accorder ou en retirer une, ou déléguez votre autorité à quelqu'un - par exemple pendant vos congés : toute votre autorité ou seulement les autorisations choisies, d'une date de début à une date de fin ou jusqu'à son retrait. La fermeture de l'organisation, l'abonnement, la conservation des données, les clés API et la délégation elle-même restent toujours à vous.",
     "search": "Rechercher par nom",
     "nobody": "Personne à afficher.",
     "since": "depuis le {{date}}",
@@ -258,6 +258,21 @@
     "revokeExplain": "La personne retrouve aussitôt son rôle et ses autorisations, et ne reçoit plus vos notifications ni vos e-mails.",
     "reasonLabel": "Motif (conservé dans le journal des actions)",
     "reasonRequired": "Indiquez le motif.",
-    "failed": "Impossible d'enregistrer. Réessayez."
+    "failed": "Impossible d'enregistrer. Réessayez.",
+    "hasSome": "A {{count}} autorisations déléguées",
+    "scheduled": "Commence plus tard",
+    "window": "du {{from}} au {{to}}",
+    "ended": "terminée",
+    "grantSomeExplain": "La personne reçoit uniquement les autorisations choisies, pour les dates indiquées. Elle ne reçoit ni vos actions de propriétaire ni vos notifications.",
+    "scopeLabel": "Quoi déléguer",
+    "scopeFull": "Toute mon autorité",
+    "scopePartial": "Seulement des autorisations choisies",
+    "choosePermissionsLabel": "Autorisations à déléguer",
+    "choosePermissions": "Choisissez au moins une autorisation.",
+    "startLabel": "À partir du (facultatif - aujourd'hui si vide)",
+    "endLabel": "Jusqu'au (facultatif - jusqu'au retrait si vide)",
+    "endBeforeStart": "La date de fin doit être postérieure à la date de début.",
+    "windowHint": "Elle commence et se termine d'elle-même à ces dates. Vous pouvez la retirer à tout moment.",
+    "neverDelegated": "Jamais délégué : la fermeture de l'organisation, l'abonnement et les codes d'activation, la conservation des données, les clés API, l'octroi de la gestion des autorisations et la délégation elle-même. Personne - pas même le délégué - n'approuve sa propre demande."
   }
 }

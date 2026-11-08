@@ -93,6 +93,7 @@ const TABLES: Record<string, string> = {
   user_permission_overrides: byUser,
   users: byOrg,
   worker_pay_rates: byOrg,
+  owner_delegations: byOrg,
 };
 const GLOBAL_TABLES = ["permissions", "roles", "role_default_permissions", "security_rate_limits", "platform_settings", "plans", "activation_codes", "platform_plan_map"];
 
@@ -108,6 +109,8 @@ const MUST_BE_SEEDED = [
   "attendance_permissions", "attendance_day_adjustments", "payroll_adjustments", "leave_types", "capture_tokens", "integrity_flags", "dashboard_preferences", "clock_reminder_log",
   // v2.3.55
   "signed_in_devices",
+  // 2026-11-04 delegation
+  "owner_delegations",
 ];
 
 const today = () => new Date().toISOString().slice(0, 10);
@@ -148,6 +151,10 @@ async function seedOrg(name: string): Promise<SeededOrg> {
       [manager.userId, key],
     );
   }
+
+  // A person holding delegated authority (2026-11-04): sees their own organisation, never the other.
+  const delegate = await addMember(t, org, "supervisor", `${name} Delegate`);
+  await t.su("insert into owner_delegations (organization_id, user_id, granted_by, reason) values ($1, $2, $3, 'test')", [org.id, delegate.userId, org.owner.userId]);
 
   // Attendance: a shift with a break, then still clocked in; a far clock-in (geofence exception).
   await must(clockIn(t, employee, siteId), "clock in");

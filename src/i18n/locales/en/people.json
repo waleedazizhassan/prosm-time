@@ -239,7 +239,7 @@
   },
   "ownerAuthority": {
     "title": "Grant permissions",
-    "hint": "Open a person's permissions to grant or remove one, or give them all of the owner's authority with \"Grant all\": every permission, the owner-only actions, and every notification and email you receive - without changing yours. Withdraw it and they are back to their own role and permissions.",
+    "hint": "Open a person's permissions to grant or remove one, or delegate your authority to someone - for example while you are on leave: all of it, or only the permissions you choose, from a start date until an end date or until you withdraw it. Closing the organisation, the plan, data retention, API keys and the delegation itself always stay with you.",
     "search": "Search by name",
     "nobody": "Nobody to show.",
     "since": "since {{date}}",
@@ -258,6 +258,21 @@
     "revokeExplain": "They go back to their role and their own permissions at once, and stop receiving your notifications and emails.",
     "reasonLabel": "Reason (kept in the action log)",
     "reasonRequired": "Write the reason.",
-    "failed": "This could not be saved. Try again."
+    "failed": "This could not be saved. Try again.",
+    "hasSome": "Has {{count}} delegated permissions",
+    "scheduled": "Starts later",
+    "window": "from {{from}} to {{to}}",
+    "ended": "ended",
+    "grantSomeExplain": "The person gets only the permissions you choose, for the dates you set. They do not get your owner-only actions or your notifications.",
+    "scopeLabel": "What to delegate",
+    "scopeFull": "All of my authority",
+    "scopePartial": "Only chosen permissions",
+    "choosePermissionsLabel": "Permissions to delegate",
+    "choosePermissions": "Choose at least one permission.",
+    "startLabel": "From (optional - today if empty)",
+    "endLabel": "Until (optional - until withdrawn if empty)",
+    "endBeforeStart": "The end date must be after the start date.",
+    "windowHint": "It starts and ends by itself on these dates. You can withdraw it at any time.",
+    "neverDelegated": "Never delegated: closing the organisation, the plan and activation codes, data retention, API keys, granting permission management, and delegation itself. Nobody - including the delegate - approves their own request."
   }
 }
