@@ -410,7 +410,8 @@
       "zoomIn": "Zoom in",
       "zoomOut": "Zoom out",
       "noLocation": "Not on the map",
-      "noLocationHint": "Clocked in without coordinates (for example a device without GPS), so they cannot be placed."
+      "noLocationHint": "Clocked in without coordinates (for example a device without GPS), so they cannot be placed.",
+      "noLocationShort": "No location"
     },
     "present": {
       "title": "Here now ({{count}})",

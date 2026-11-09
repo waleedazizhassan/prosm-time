@@ -413,7 +413,8 @@
       "zoomIn": "Zoom avant",
       "zoomOut": "Zoom arrière",
       "noLocation": "Sans position sur la carte",
-      "noLocationHint": "Pointé sans coordonnées (par ex. appareil sans GPS), impossible à placer."
+      "noLocationHint": "Pointé sans coordonnées (par ex. appareil sans GPS), impossible à placer.",
+      "noLocationShort": "Sans position"
     },
     "present": {
       "title": "Présents maintenant ({{count}})",

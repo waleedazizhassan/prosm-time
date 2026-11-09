@@ -413,7 +413,8 @@
       "zoomIn": "Acercar",
       "zoomOut": "Alejar",
       "noLocation": "Sin ubicación en el mapa",
-      "noLocationHint": "Fichó sin coordenadas (p. ej., sin GPS), no se puede situar."
+      "noLocationHint": "Fichó sin coordenadas (p. ej., sin GPS), no se puede situar.",
+      "noLocationShort": "Sin ubicación"
     },
     "present": {
       "title": "Presentes ahora ({{count}})",

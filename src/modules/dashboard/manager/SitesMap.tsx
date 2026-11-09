@@ -137,6 +137,7 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
   };
   // the key: every site on the map, the ones with people first
   const keyed = sites.filter((site) => site.latitude !== null && site.longitude !== null).sort((a, b) => Number(b.sos) - Number(a.sos) || b.present - a.present);
+  const [showUnplaced, setShowUnplaced] = useState(false);
   const unplaced = people.filter((person) => {
     const site = person.siteId ? sites.find((x) => x.id === person.siteId) : undefined;
     return (person.lastLatitude ?? person.latitude ?? site?.latitude ?? null) === null;
@@ -151,7 +152,7 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
       <button type="button" className={`${styles.mapButton} ${styles.mapButtonSecond}`} onClick={showAll} aria-label={t("manager.map.showAll")} title={t("manager.map.showAll")}>
         <LocateFixed size={16} />
       </button>
-      {keyed.length > 0 ? (
+      {keyed.length > 0 || unplaced.length > 0 ? (
         <div className={styles.mapKey} role="group" aria-label={t("manager.map.keyLabel")}>
           {keyed.map((site) => (
             <button key={site.id} type="button" className={styles.mapKeyItem} onClick={() => goTo(site.id)} title={site.sos ? t("manager.map.stateSos") : site.present > 0 ? t("manager.map.stateActive") : t("manager.map.stateIdle")}>
@@ -160,17 +161,19 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
               <b>{site.present}</b>
             </button>
           ))}
+          {/* Owner 2026-11-09: people with no location are one small item like the sites; tap shows the names */}
+          {unplaced.length > 0 ? (
+            <button type="button" className={styles.mapKeyItem} onClick={() => setShowUnplaced((v) => !v)} title={unplaced.map((p) => p.name).join("، ")}>
+              <span className={styles.mapKeyDot} style={{ background: "#f59e0b" }} aria-hidden="true" />
+              <span>{t("manager.map.noLocationShort")}</span>
+              <b>{unplaced.length}</b>
+            </button>
+          ) : null}
         </div>
       ) : null}
-      {unplaced.length > 0 ? (
-        <div className={styles.mapKey} role="group" aria-label={t("manager.map.noLocation")} style={{ insetBlockEnd: keyed.length > 0 ? 58 : 22, alignItems: "center" }}>
-          <span style={{ fontSize: "var(--font-xs)", fontWeight: 600 }}>{t("manager.map.noLocation")}</span>
-          {unplaced.map((person) => (
-            <span key={person.userId} className={styles.mapKeyItem} title={t("manager.map.noLocationHint")}>
-              <span className={styles.mapKeyDot} style={{ background: "#f59e0b" }} aria-hidden="true" />
-              <span>{person.name}{person.siteName ? ` · ${person.siteName}` : ""}</span>
-            </span>
-          ))}
+      {showUnplaced && unplaced.length > 0 ? (
+        <div className={styles.mapUnplaced} role="status">
+          {unplaced.map((person) => <div key={person.userId}>{person.name}{person.siteName ? ` · ${person.siteName}` : ""}</div>)}
         </div>
       ) : null}
     </div>

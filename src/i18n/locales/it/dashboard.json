@@ -413,7 +413,8 @@
       "zoomIn": "Ingrandisci",
       "zoomOut": "Riduci",
       "noLocation": "Senza posizione sulla mappa",
-      "noLocationHint": "Ha timbrato senza coordinate (es. dispositivo senza GPS), non posizionabile."
+      "noLocationHint": "Ha timbrato senza coordinate (es. dispositivo senza GPS), non posizionabile.",
+      "noLocationShort": "Senza posizione"
     },
     "present": {
       "title": "Presenti ora ({{count}})",
