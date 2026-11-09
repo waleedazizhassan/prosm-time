@@ -375,6 +375,8 @@ jobs:
   pages:
     name: Publish the web version on GitHub Pages (time.prosm.net)
     needs: deploy-web
+    # 2026-11-09: run whenever the web was built (the skipped APK job must not cancel it)
+    if: ${{ always() && needs.deploy-web.result == 'success' }}
     runs-on: ubuntu-latest
     permissions:
       pages: write
@@ -400,6 +402,9 @@ jobs:
     # assets need a GitHub-authenticated download, same caveat that
     # already applies to the APK/EXE).
     needs: [create-release, test]
+    # 2026-11-09: Google Play only means the APK job is skipped; without this the skip spread here
+    # and the web was never published (release v2.3.72).
+    if: ${{ always() && needs.test.result == 'success' && needs.create-release.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
