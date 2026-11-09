@@ -30,8 +30,12 @@ beforeAll(async () => {
 });
 
 describe("block self clock-in outside the work area (audit 2.1)", () => {
-  it("is off by default: the clock-in is recorded with an exception, as before", async () => {
-    expect((await clockIn(t, mona, factory, far)).error).toBeNull();
+  it("is on for a new site (owner 2026-11-09), and off it records the clock-in with an exception", async () => {
+    const [{ d }] = await t.su<{ d: string }>("select column_default as d from information_schema.columns where table_name = 'sites' and column_name = 'outside_zone_policy'");
+    expect(d).toMatch(/BLOCK/);
+    const [{ r }] = await t.su<{ r: string }>("select column_default as r from information_schema.columns where table_name = 'sites' and column_name = 'allowed_radius_meters'");
+    expect(r).toBe("250");
+    expect((await clockIn(t, mona, factory, far)).error).toBeNull(); // this test site allows it
     await t.su("update attendance_sessions set status = 'clocked_out', clock_out_at = now() where user_id = $1", [mona.userId]);
   });
 

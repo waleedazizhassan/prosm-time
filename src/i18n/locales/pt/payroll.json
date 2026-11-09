@@ -216,7 +216,7 @@
     "insuranceExempt": "Não segurado",
     "taxExempt": "Isento de imposto",
     "insurableWage": "Salário segurável fixo (opcional)",
-    "statutoryHint": "Um salário segurável fixo substitui o salário base, dentro dos limites. As regras estão nas definições salariais."
+    "statutoryHint": "Isto não é o salário: indique-o acima em \"Salário base\". Um salário segurável fixo substitui o base só para a segurança social, dentro dos limites."
   },
   "installments": {
     "title": "Prestações e adiantamentos",

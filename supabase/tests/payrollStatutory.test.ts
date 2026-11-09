@@ -45,6 +45,17 @@ beforeAll(async () => {
   await ok(owner("select public.set_prosm_time_payroll_profile_component($1, $2, 800, null, '2027-01-01')", [people.mid.userId, transportId]));
 });
 
+describe("a new organisation", () => {
+  // 2026-11-09: there is always somewhere to enter the salary
+  it("starts with a Basic salary component", async () => {
+    await t.su("select public.prosm_time_seed_basic_component($1)", [org.id]); // the fixture removed the seeded one; seeding again is safe
+    const rows = await t.su<{ name_en: string }>("select name_en from payroll_components where organization_id = $1 and is_basic", [org.id]);
+    expect(rows).toHaveLength(1);
+    await t.su("select public.prosm_time_seed_basic_component($1)", [org.id]);
+    expect(await t.su("select 1 from payroll_components where organization_id = $1 and is_basic", [org.id])).toHaveLength(1);
+  });
+});
+
 describe("the Egyptian tax table", () => {
   it("brackets after the exemption, and the high-income tiers", async () => {
     expect(await tax(197956)).toBeCloseTo(29341.2, 2); // 1,500 + 2,250 + 25,591.20

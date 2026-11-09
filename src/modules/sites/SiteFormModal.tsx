@@ -63,7 +63,7 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site, defaultK
   const [displayAddress, setDisplayAddress] = useState(site?.displayAddress ?? "");
   const [latitude, setLatitude] = useState(site ? String(site.latitude) : "");
   const [longitude, setLongitude] = useState(site ? String(site.longitude) : "");
-  const [allowedRadiusMeters, setAllowedRadiusMeters] = useState(site ? String(site.allowedRadiusMeters) : "100");
+  const [allowedRadiusMeters, setAllowedRadiusMeters] = useState(site ? String(site.allowedRadiusMeters) : "250");
   // A new site starts in the device's own time zone (it was UTC, which put
   // shift times hours off in Egypt).
   const [timezone, setTimezone] = useState(site?.timezone ?? deviceTimeZone());

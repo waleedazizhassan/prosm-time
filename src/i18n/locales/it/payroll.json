@@ -216,7 +216,7 @@
     "insuranceExempt": "Non assicurato",
     "taxExempt": "Esente da imposta",
     "insurableWage": "Retribuzione assicurabile fissa (facoltativa)",
-    "statutoryHint": "Una retribuzione assicurabile fissa sostituisce la paga base, entro i limiti. Le regole sono nelle impostazioni paghe."
+    "statutoryHint": "Non è lo stipendio: inseriscilo sopra in \"Paga base\". Una retribuzione assicurabile fissa sostituisce la base solo per i contributi, entro i limiti."
   },
   "installments": {
     "title": "Rate e anticipi",

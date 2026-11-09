@@ -24,6 +24,9 @@ export async function createOrg(t: TestDatabase, name: string): Promise<TestOrg>
   );
   const [user] = await t.su<{ id: string; organization_id: string }>("select id, organization_id from users where auth_user_id = $1", [authId]);
   await t.su("update license_activation_state set status = 'active', expires_at = now() + interval '1 year' where organization_id = $1", [user.organization_id]).catch(() => undefined);
+  // Every organisation gets a "Basic salary" component (2026-11-09); payroll tests define their own,
+  // so the seeded one is removed here (tests/payrollStatutory checks the seeding itself).
+  await t.su("delete from payroll_components where organization_id = $1 and is_basic and name_en = 'Basic salary'", [user.organization_id]).catch(() => undefined);
   return { id: user.organization_id, owner: { authId, userId: user.id, email } };
 }
 
@@ -43,7 +46,7 @@ export async function createSite(
   t: TestDatabase,
   org: TestOrg,
   name: string,
-  options: { latitude?: number; longitude?: number; radius?: number; presenceMonitoring?: boolean } = {},
+  options: { latitude?: number; longitude?: number; radius?: number; presenceMonitoring?: boolean; blockOutside?: boolean } = {},
 ): Promise<string> {
   const latitude = options.latitude ?? 30.0212;
   const longitude = options.longitude ?? 31.7581;
@@ -51,6 +54,9 @@ export async function createSite(
   if (result.error) throw new Error(`create site failed: ${result.error}`);
   const [site] = await t.su<{ id: string }>("select id from sites where organization_id = $1 and name = $2", [org.id, name]);
   await t.su("update sites set presence_monitoring_enabled = $2 where id = $1", [site.id, options.presenceMonitoring ?? false]);
+  // Production refuses a clock-in outside the area by default since 2026-11-09; most tests exercise the
+  // recorded-exception path, so test sites allow it unless a test asks for the block.
+  if (!options.blockOutside) await t.su("update sites set outside_zone_policy = 'ALLOW_WITH_EXCEPTION' where id = $1", [site.id]);
   return site.id;
 }
 

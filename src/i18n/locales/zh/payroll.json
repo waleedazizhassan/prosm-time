@@ -216,7 +216,7 @@
     "insuranceExempt": "不参保",
     "taxExempt": "免税",
     "insurableWage": "固定参保工资（可选）",
-    "statutoryHint": "固定参保工资将替代基本工资计算社保（在上下限内）。规则本身在薪资设置中。"
+    "statutoryHint": "这不是工资——请在上方“基本工资”中填写工资。固定参保工资仅在社保计算中替代基本工资（在上下限内）。"
   },
   "installments": {
     "title": "分期与预支",

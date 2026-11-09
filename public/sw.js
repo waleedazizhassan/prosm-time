@@ -122,7 +122,9 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(
       (async () => {
         try {
-          const response = await fetch(request);
+          // 2026-11-09: never the browser's own copy of the page (the host lets it keep one for 10 minutes,
+          // so "update now" reloaded the old version and the notice stayed)
+          const response = await fetch(new Request(request.url, { cache: "no-store", credentials: "same-origin" }));
           if (response.ok) {
             const shell = await caches.open(SHELL_CACHE);
             await shell.put(INDEX_URL, response.clone());

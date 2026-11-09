@@ -216,7 +216,7 @@
     "insuranceExempt": "Non assuré",
     "taxExempt": "Exonéré d'impôt",
     "insurableWage": "Salaire assurable fixe (facultatif)",
-    "statutoryHint": "Un salaire assurable fixe remplace le salaire de base, dans les limites. Les règles sont dans les paramètres de paie."
+    "statutoryHint": "Ce n'est pas le salaire : saisissez-le plus haut dans \"Salaire de base\". Un salaire assurable fixe ne remplace le base que pour les cotisations, dans les limites."
   },
   "installments": {
     "title": "Échéances et avances",

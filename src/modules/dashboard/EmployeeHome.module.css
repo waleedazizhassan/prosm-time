@@ -162,10 +162,10 @@
 
 @media (max-width: 900px) {
   .floatingTools {
-    bottom: calc(64px + 150px + var(--safe-bottom, 0px));
+    bottom: calc(64px + 136px + var(--safe-bottom, 0px));
   }
 
   .hoursPopover {
-    bottom: calc(64px + 270px + var(--safe-bottom, 0px));
+    bottom: calc(64px + 256px + var(--safe-bottom, 0px));
   }
 }

@@ -216,7 +216,7 @@
     "insuranceExempt": "Nicht versichert",
     "taxExempt": "Steuerbefreit",
     "insurableWage": "Fester Versicherungslohn (optional)",
-    "statutoryHint": "Ein fester Versicherungslohn ersetzt das Grundgehalt, innerhalb der Grenzen. Die Regeln stehen in den Gehaltseinstellungen."
+    "statutoryHint": "Das ist nicht das Gehalt: Gehalt oben unter \"Grundgehalt\" eintragen. Ein fester Versicherungslohn ersetzt nur für die Versicherung das Grundgehalt, innerhalb der Grenzen."
   },
   "installments": {
     "title": "Raten und Vorschüsse",
