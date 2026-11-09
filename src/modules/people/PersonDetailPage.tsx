@@ -22,7 +22,6 @@ import Modal from "../../components/common/Modal";
 import Textarea from "../../components/common/Textarea";
 import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
-import AdminAttendanceCard from "./AdminAttendanceCard";
 import HintText from "../../components/common/HintText";
 import EmploymentDetailsCard from "./EmploymentDetailsCard";
 import LivenessExemptionCard from "./LivenessExemptionCard";
@@ -513,7 +512,7 @@ export default function PersonDetailPage() {
         </Card>
       ) : null}
 
-      <AdminAttendanceCard subjectUserId={member.id} subjectFullName={member.fullName} />
+      {/* Owner 2026-11-09: clocking in on someone's behalf lives on its own page in the sidebar only */}
 
       <Modal
         isOpen={deactivateModalOpen}

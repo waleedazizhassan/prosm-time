@@ -436,5 +436,22 @@
     "appliesToNew": "Le modifiche valgono solo per i nuovi cicli; i precedenti mantengono le loro regole.",
     "save": "Salva contributi e imposte",
     "saved": "Salvato."
+  },
+  "steps": {
+    "title": "Le paghe in 3 passi",
+    "hint": "Passi 1 e 2 una volta; il 3 ogni mese.",
+    "one": "Voci, contributi e imposte",
+    "oneTodo": "Definisci le voci (paga base, indennità, trattenute). Contributi e imposte sono pronti secondo la legge egiziana.",
+    "oneDone": "{{count}} voci definite.",
+    "statutoryOn": "Contributi e imposte sono calcolati in automatico.",
+    "statutoryOff": "Contributi e imposte sono disattivati.",
+    "oneAction": "Impostazioni",
+    "two": "Una scheda paghe per dipendente",
+    "twoTodo": "Nessuno ha ancora una scheda: il ciclo sarebbe vuoto. Inserisci la paga base di ognuno.",
+    "twoDone": "{{done}} dipendenti su {{total}} hanno una scheda.",
+    "twoNoAccess": "Le prepara chi gestisce le schede.",
+    "twoAction": "Schede paghe",
+    "three": "Il ciclo del mese",
+    "threeText": "Crea il ciclo qui sotto → inserisci le variabili e verifica i suggerimenti → invia → un'altra persona approva → blocca e pubblica."
   }
 }

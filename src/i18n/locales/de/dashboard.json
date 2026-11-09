@@ -404,7 +404,9 @@
       "stateIdle": "Inaktiv - niemand vor Ort",
       "stateSos": "SOS",
       "zoomIn": "Vergrößern",
-      "zoomOut": "Verkleinern"
+      "zoomOut": "Verkleinern",
+      "noLocation": "Ohne Standort auf der Karte",
+      "noLocationHint": "Ohne Koordinaten eingestempelt (z. B. Gerät ohne GPS) - kann nicht platziert werden."
     },
     "present": {
       "title": "Jetzt anwesend ({{count}})",

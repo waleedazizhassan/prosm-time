@@ -8,7 +8,7 @@
     "timesheets": "Timesheets",
     "timesheet": "Timesheet",
     "workforce": "Company Employees",
-    "contractor": "Temporary Workforce",
+    "contractor": "External labour attendance",
     "site": "Site Summary",
     "late": "Late Arrivals",
     "missingCheckouts": "Missing Checkouts",
@@ -19,7 +19,7 @@
     "sos": "Emergency (SOS)",
     "dashboard": "Dashboard",
     "auditLog": "Action log",
-    "laborCost": "Labour cost"
+    "laborCost": "External labour cost"
   },
   "timesheetsHint": "Timesheets are generated and approved per employee and period, not by date range.",
   "timesheetsLink": "Go to Timesheets",
@@ -49,7 +49,9 @@
       "number": "Number",
       "site": "Site",
       "clockIn": "Clock in",
-      "clockOut": "Clock out"
+      "clockOut": "Clock out",
+      "date": "Date",
+      "hours": "Hours"
     },
     "site": {
       "name": "Site",
@@ -136,10 +138,23 @@
     "laborCost": {
       "project": "Project",
       "site": "Site",
-      "name": "Employee",
+      "name": "Worker",
       "hours": "Hours",
       "cost": "Cost",
-      "noRate": "No rate"
+      "noRate": "No pay set",
+      "days": "Days",
+      "contractor": "Contractor",
+      "rate": "Pay",
+      "unit": "Paid per",
+      "amount": "Total for the period",
+      "total": "Total",
+      "units": {
+        "HOURLY": "Hour",
+        "DAILY": "Day",
+        "WEEKLY": "Week",
+        "MONTHLY": "Month",
+        "YEARLY": "Year"
+      }
     }
   },
   "values": {

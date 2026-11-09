@@ -436,5 +436,22 @@
     "appliesToNew": "Los cambios se aplican solo a ciclos nuevos; los anteriores conservan sus reglas.",
     "save": "Guardar seguridad social e impuestos",
     "saved": "Guardado."
+  },
+  "steps": {
+    "title": "La nómina en 3 pasos",
+    "hint": "Los pasos 1 y 2 una vez; el 3 cada mes.",
+    "one": "Conceptos, seguridad social e impuestos",
+    "oneTodo": "Defina los conceptos (salario base, complementos, deducciones). La seguridad social y los impuestos vienen según la ley egipcia.",
+    "oneDone": "{{count}} conceptos definidos.",
+    "statutoryOn": "La seguridad social y los impuestos se calculan solos.",
+    "statutoryOff": "La seguridad social y los impuestos están desactivados.",
+    "oneAction": "Ajustes",
+    "two": "Una ficha de nómina por empleado",
+    "twoTodo": "Nadie tiene ficha todavía: el ciclo saldría vacío. Abra las fichas y anote el salario base.",
+    "twoDone": "{{done}} de {{total}} empleados tienen ficha.",
+    "twoNoAccess": "Las prepara quien gestiona las fichas.",
+    "twoAction": "Fichas de nómina",
+    "three": "El ciclo del mes",
+    "threeText": "Cree el ciclo abajo → añada los variables y revise las sugerencias → envíe → otra persona aprueba → cierre y publique las nóminas."
   }
 }

@@ -436,5 +436,22 @@
     "appliesToNew": "Changes apply to new cycles only; earlier cycles keep their rules.",
     "save": "Save insurance and taxes",
     "saved": "Saved."
+  },
+  "steps": {
+    "title": "Payroll in 3 steps",
+    "hint": "Steps 1 and 2 once; step 3 every month.",
+    "one": "Components, insurance and taxes",
+    "oneTodo": "Define the components (basic salary, allowances, deductions). Insurance and taxes come ready under Egyptian law and can be changed.",
+    "oneDone": "{{count}} components defined.",
+    "statutoryOn": "Insurance and taxes are calculated automatically.",
+    "statutoryOff": "Insurance and taxes are switched off.",
+    "oneAction": "Settings",
+    "two": "A payroll file for each employee",
+    "twoTodo": "Nobody has a payroll file yet - a cycle would be empty. Open the files and enter each person's basic salary.",
+    "twoDone": "{{done}} of {{total}} employees have a payroll file.",
+    "twoNoAccess": "Prepared by whoever manages payroll files.",
+    "twoAction": "Payroll files",
+    "three": "The month's cycle",
+    "threeText": "Create the cycle below → add the variable amounts and review the attendance suggestions → submit → someone else approves → lock and publish the payslips."
   }
 }

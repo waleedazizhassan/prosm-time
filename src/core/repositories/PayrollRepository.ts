@@ -21,12 +21,19 @@ export interface PayrollRow {
 }
 
 export interface LaborCostRow {
-  projectName: string | null;
+  /** 2026-11-09 (owner): external labour only - employees have their payroll */
+  workerName: string;
+  workerNumber: string;
+  contractorName: string | null;
   siteName: string | null;
-  userFullName: string;
-  hours: number;
-  cost: number | null;
+  rateAmount: number | null;
+  rateUnit: "HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY" | "YEARLY" | null;
   currency: string | null;
+  days: number;
+  hours: number;
+  amount: number | null;
+  /** a totals row (per currency), added on the client */
+  isTotal?: boolean;
 }
 
 export interface PayrollTemplate {
@@ -73,14 +80,31 @@ class PayrollRepository {
   async laborCost(startDate: string, endDate: string): Promise<{ success: boolean; message: string | null; data: LaborCostRow[] | null }> {
     const { data, error } = await this.client.rpc("list_prosm_time_report_labor_cost", { p_start_date: startDate, p_end_date: endDate });
     if (error) return { success: false, message: error.message, data: null };
-    const rows = ((data ?? []) as { project_name: string | null; site_name: string | null; user_full_name: string; hours: number; cost: number | null; currency: string | null }[]).map((row) => ({
-      projectName: row.project_name,
+    const rows: LaborCostRow[] = ((data ?? []) as { worker_name: string; worker_number: string; contractor_name: string | null; site_name: string | null; rate_amount: number | null;
+      rate_unit: LaborCostRow["rateUnit"]; currency: string | null; days: number; hours: number; amount: number | null }[]).map((row) => ({
+      workerName: row.worker_name,
+      workerNumber: row.worker_number,
+      contractorName: row.contractor_name,
       siteName: row.site_name,
-      userFullName: row.user_full_name,
-      hours: Number(row.hours),
-      cost: row.cost === null ? null : Number(row.cost),
+      rateAmount: row.rate_amount === null ? null : Number(row.rate_amount),
+      rateUnit: row.rate_unit,
       currency: row.currency,
+      days: Number(row.days),
+      hours: Number(row.hours),
+      amount: row.amount === null ? null : Number(row.amount),
     }));
+    // the total for the period, per currency (amounts are never added across currencies)
+    const totals = new Map<string, LaborCostRow>();
+    for (const row of rows) {
+      if (row.amount === null) continue;
+      const key = row.currency ?? "";
+      const total = totals.get(key) ?? { workerName: "", workerNumber: "", contractorName: null, siteName: null, rateAmount: null, rateUnit: null, currency: row.currency, days: 0, hours: 0, amount: 0, isTotal: true };
+      total.days += row.days;
+      total.hours = Math.round((total.hours + row.hours) * 100) / 100;
+      total.amount = Math.round(((total.amount ?? 0) + row.amount) * 100) / 100;
+      totals.set(key, total);
+    }
+    rows.push(...totals.values());
     return { success: true, message: null, data: rows };
   }
 

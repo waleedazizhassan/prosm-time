@@ -204,5 +204,6 @@
     "noWorkers": "Esta folha não tem trabalhadores.",
     "cannotDelete": "Só se elimina um rascunho que nunca foi aprovado."
   },
-  "addRateFailed": "O trabalhador foi adicionado, mas a tarifa não foi guardada: {{error}}. Defina-a em Pagamento de mão de obra externa."
+  "addRateFailed": "O trabalhador foi adicionado, mas a tarifa não foi guardada: {{error}}. Defina-a em Pagamento de mão de obra externa.",
+  "addRate": "Pagamento"
 }

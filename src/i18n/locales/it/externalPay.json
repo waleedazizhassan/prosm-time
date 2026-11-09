@@ -204,5 +204,6 @@
     "noWorkers": "Questa elaborazione non ha lavoratori.",
     "cannotDelete": "Si può eliminare solo una bozza mai approvata."
   },
-  "addRateFailed": "Il lavoratore è stato aggiunto, ma la tariffa non è stata salvata: {{error}}. Impostala in Paga manodopera esterna."
+  "addRateFailed": "Il lavoratore è stato aggiunto, ma la tariffa non è stata salvata: {{error}}. Impostala in Paga manodopera esterna.",
+  "addRate": "Paga"
 }

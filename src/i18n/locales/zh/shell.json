@@ -285,6 +285,7 @@
   },
   "sections": {
     "attendance": "现场运营",
+    "sites": "站点与外部劳务",
     "people": "人力资源",
     "payroll": "薪资",
     "reports": "报表与分析",

@@ -106,8 +106,10 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
       bounds.extend(circle.getBounds());
     }
     for (const person of people) {
-      const lat = person.lastLatitude ?? person.latitude;
-      const lng = person.lastLongitude ?? person.longitude;
+      // 2026-11-09 (owner: "everyone visible"): no point of their own -> their site's centre; none at all -> the list below
+      const site = person.siteId ? sites.find((x) => x.id === person.siteId) : undefined;
+      const lat = person.lastLatitude ?? person.latitude ?? site?.latitude ?? null;
+      const lng = person.lastLongitude ?? person.longitude ?? site?.longitude ?? null;
       if (lat === null || lng === null) continue;
       L.marker([lat, lng], { icon: personIcon(person) })
         .bindTooltip(`${escapeHtml(person.name)}${person.siteName ? ` · ${escapeHtml(person.siteName)}` : ""}`)
@@ -135,6 +137,10 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
   };
   // the key: every site on the map, the ones with people first
   const keyed = sites.filter((site) => site.latitude !== null && site.longitude !== null).sort((a, b) => Number(b.sos) - Number(a.sos) || b.present - a.present);
+  const unplaced = people.filter((person) => {
+    const site = person.siteId ? sites.find((x) => x.id === person.siteId) : undefined;
+    return (person.lastLatitude ?? person.latitude ?? site?.latitude ?? null) === null;
+  });
 
   return (
     <div className={fullScreen ? styles.mapFullScreen : styles.mapBox}>
@@ -153,6 +159,17 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
               <span>{site.name}</span>
               <b>{site.present}</b>
             </button>
+          ))}
+        </div>
+      ) : null}
+      {unplaced.length > 0 ? (
+        <div className={styles.mapKey} role="group" aria-label={t("manager.map.noLocation")} style={{ insetBlockEnd: keyed.length > 0 ? 58 : 22, alignItems: "center" }}>
+          <span style={{ fontSize: "var(--font-xs)", fontWeight: 600 }}>{t("manager.map.noLocation")}</span>
+          {unplaced.map((person) => (
+            <span key={person.userId} className={styles.mapKeyItem} title={t("manager.map.noLocationHint")}>
+              <span className={styles.mapKeyDot} style={{ background: "#f59e0b" }} aria-hidden="true" />
+              <span>{person.name}{person.siteName ? ` · ${person.siteName}` : ""}</span>
+            </span>
           ))}
         </div>
       ) : null}

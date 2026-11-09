@@ -285,6 +285,7 @@
   },
   "sections": {
     "attendance": "Opérations terrain",
+    "sites": "Sites et main-d'œuvre externe",
     "people": "Ressources humaines",
     "payroll": "Paie",
     "reports": "Rapports et analyses",

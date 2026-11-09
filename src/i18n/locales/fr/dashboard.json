@@ -407,7 +407,9 @@
       "stateIdle": "Inactif - personne pour l’instant",
       "stateSos": "SOS",
       "zoomIn": "Zoom avant",
-      "zoomOut": "Zoom arrière"
+      "zoomOut": "Zoom arrière",
+      "noLocation": "Sans position sur la carte",
+      "noLocationHint": "Pointé sans coordonnées (par ex. appareil sans GPS), impossible à placer."
     },
     "present": {
       "title": "Présents maintenant ({{count}})",

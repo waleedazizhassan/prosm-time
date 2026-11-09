@@ -145,17 +145,10 @@
   transform: rotate(0deg);
 }
 
-.branchCount {
-  margin-inline-start: auto;
-  min-width: 20px;
-  padding: 0 6px;
-  border-radius: var(--radius-full);
-  background: var(--brand-primary);
-  color: var(--text-on-brand, #fff);
-  font-size: 12px;
-  font-weight: var(--font-weight-semibold);
-  line-height: 20px;
-  text-align: center;
+/* Owner 2026-11-09: the label takes the row, the chevron sits at the end */
+.branchLabel {
+  flex: 1;
+  min-width: 0;
 }
 
 .branchItems {

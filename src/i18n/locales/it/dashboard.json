@@ -407,7 +407,9 @@
       "stateIdle": "Inattivo - nessuno ora",
       "stateSos": "SOS",
       "zoomIn": "Ingrandisci",
-      "zoomOut": "Riduci"
+      "zoomOut": "Riduci",
+      "noLocation": "Senza posizione sulla mappa",
+      "noLocationHint": "Ha timbrato senza coordinate (es. dispositivo senza GPS), non posizionabile."
     },
     "present": {
       "title": "Presenti ora ({{count}})",

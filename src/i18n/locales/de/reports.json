@@ -8,7 +8,7 @@
     "timesheets": "Stundenzettel",
     "timesheet": "Stundenzettel",
     "workforce": "Unternehmensmitarbeiter",
-    "contractor": "Temporäre Arbeitskräfte",
+    "contractor": "Anwesenheit externer Kräfte",
     "site": "Standortübersicht",
     "late": "Verspätungen",
     "missingCheckouts": "Fehlende Abmeldungen",
@@ -19,7 +19,7 @@
     "sos": "Notfall (SOS)",
     "dashboard": "Dashboard",
     "auditLog": "Aktionsprotokoll",
-    "laborCost": "Personalkosten"
+    "laborCost": "Kosten externer Kräfte"
   },
   "timesheetsHint": "Stundenzettel werden pro Mitarbeiter und Zeitraum erstellt und genehmigt, nicht nach Datumsbereich.",
   "timesheetsLink": "Zu den Stundenzetteln",
@@ -49,7 +49,9 @@
       "number": "Nummer",
       "site": "Standort",
       "clockIn": "Einstempeln",
-      "clockOut": "Ausstempeln"
+      "clockOut": "Ausstempeln",
+      "date": "Datum",
+      "hours": "Stunden"
     },
     "site": {
       "name": "Standort",
@@ -136,10 +138,23 @@
     "laborCost": {
       "project": "Projekt",
       "site": "Standort",
-      "name": "Mitarbeiter",
+      "name": "Arbeitskraft",
       "hours": "Stunden",
       "cost": "Kosten",
-      "noRate": "Kein Satz"
+      "noRate": "Kein Satz",
+      "days": "Tage",
+      "contractor": "Auftragnehmer",
+      "rate": "Satz",
+      "unit": "Abrechnung",
+      "amount": "Summe im Zeitraum",
+      "total": "Gesamt",
+      "units": {
+        "HOURLY": "Stunde",
+        "DAILY": "Tag",
+        "WEEKLY": "Woche",
+        "MONTHLY": "Monat",
+        "YEARLY": "Jahr"
+      }
     }
   },
   "values": {

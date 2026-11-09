@@ -407,7 +407,9 @@
       "stateIdle": "Inactiva: no hay nadie ahora",
       "stateSos": "SOS",
       "zoomIn": "Acercar",
-      "zoomOut": "Alejar"
+      "zoomOut": "Alejar",
+      "noLocation": "Sin ubicación en el mapa",
+      "noLocationHint": "Fichó sin coordenadas (p. ej., sin GPS), no se puede situar."
     },
     "present": {
       "title": "Presentes ahora ({{count}})",

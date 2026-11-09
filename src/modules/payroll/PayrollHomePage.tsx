@@ -17,6 +17,7 @@ import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
 import illustration from "../../assets/illustrations/timesheets.svg";
+import PayrollStepsCard from "./PayrollStepsCard";
 import { STATUS_BADGE, defaultPeriod, money, payrollError } from "./payrollUi";
 
 // 2026-11-08: the payroll home - the cycles in the caller's scope, a new cycle, and the way to
@@ -82,6 +83,8 @@ export default function PayrollHomePage() {
         {can("payroll.export_payslips") ? <Button variant="ghost" onClick={() => navigate("/payroll/requests")}>{t("nav.requests")}</Button> : null}
         {can("payroll.manage_settings") ? <Button variant="ghost" onClick={() => navigate("/payroll/settings")}>{t("nav.settings")}</Button> : null}
       </div>
+
+      <PayrollStepsCard canSettings={can("payroll.manage_settings")} canProfiles={can("payroll.manage_profiles") || can("payroll.view")} cycles={cycles?.length ?? 0} />
 
       {can("payroll.edit_draft") ? (
         <Card title={t("cycles.newTitle")} subtitle={t("cycles.newHint")}>

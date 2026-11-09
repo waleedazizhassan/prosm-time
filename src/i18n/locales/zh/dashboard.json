@@ -401,7 +401,9 @@
       "stateIdle": "不活跃 - 当前无人",
       "stateSos": "SOS",
       "zoomIn": "放大",
-      "zoomOut": "缩小"
+      "zoomOut": "缩小",
+      "noLocation": "未在地图上",
+      "noLocationHint": "打卡时没有坐标（例如设备无 GPS），无法在地图上显示。"
     },
     "present": {
       "title": "当前在岗（{{count}}）",

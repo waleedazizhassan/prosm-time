@@ -31,6 +31,7 @@ import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
 import Table, { type TableColumn } from "../../components/common/Table";
 import { Download } from "lucide-react";
+import { FEATURES } from "../../config/features";
 import reportsHeaderImage from "../../assets/illustrations/reports.svg";
 import { REPORT_TYPE_ICONS } from "./reportTypeIcons";
 import styles from "./ReportsPage.module.css";
@@ -99,16 +100,18 @@ export default function ReportsPage() {
   // their own, self-scoped data.
   const hasManagementScope = Boolean(profile?.isOwner) || hasPermission("exceptions.manage");
   const canSeePay = Boolean(profile?.isOwner) || hasPermission("payroll.view_cost");
+  // 2026-11-09 (owner): labour cost = external labour
+  const canSeeExternalPay = allows("kiosk") && (Boolean(profile?.isOwner) || hasPermission("external_labor.view_pay"));
   const visibleReportTypes = useMemo<ReportType[]>(
     () =>
       // Owner 2026-10-20 (no duplicates): the attendance record, allowances and
       // timesheets are exported - and printed - from their own pages; Reports
       // keeps the reports found only here, and the archive of every export.
       // Owner 2026-10-21: the combined allowance sheet (totals per person) is here too, for those who manage.
-      ([...(canSeePay && allows("labor_cost") ? (["laborCost"] as ReportType[]) : []), ...(hasManagementScope ? (["allowances"] as ReportType[]) : []), "workforce", "contractor", "site", "late", "missingCheckouts", "leaveConflicts", "absences", "managerOverrides", "locationViolations", "sos"] as ReportType[]).filter(
+      ([...(canSeeExternalPay ? (["laborCost"] as ReportType[]) : []), ...(hasManagementScope ? (["allowances"] as ReportType[]) : []), "workforce", "contractor", "site", "late", "missingCheckouts", "leaveConflicts", "absences", "managerOverrides", "locationViolations", "sos"] as ReportType[]).filter(
         (type) => hasManagementScope || !MANAGEMENT_SCOPED_TYPES.includes(type),
       ),
-    [hasManagementScope, canSeePay, allows],
+    [hasManagementScope, canSeeExternalPay],
   );
 
   // owner 2026-10-27: the dashboard's cards open a report directly (?type=late)
@@ -204,11 +207,16 @@ export default function ReportsPage() {
       }
     > = {
       laborCost: {
-        columns: [t("columns.laborCost.project"), t("columns.laborCost.site"), t("columns.laborCost.name"), t("columns.laborCost.hours"), t("columns.laborCost.cost")],
+        columns: [t("columns.laborCost.name"), t("columns.laborCost.contractor"), t("columns.laborCost.site"), t("columns.laborCost.rate"), t("columns.laborCost.unit"),
+          t("columns.laborCost.days"), t("columns.laborCost.hours"), t("columns.laborCost.amount")],
         fetch: () => PayrollRepository.laborCost(startDate, endDate),
         toRow: (row: LaborCostRow) => ({
-          cells: [row.projectName ?? "—", row.siteName ?? "—", row.userFullName, String(row.hours), row.cost === null ? t("columns.laborCost.noRate") : `${row.cost} ${row.currency ?? ""}`.trim()],
-          employeeName: row.userFullName,
+          cells: row.isTotal
+            ? [t("columns.laborCost.total"), "", "", "", "", String(row.days), String(row.hours), `${row.amount} ${row.currency ?? ""}`.trim()]
+            : [row.workerName, row.contractorName ?? "—", row.siteName ?? "—", row.rateAmount === null ? t("columns.laborCost.noRate") : `${row.rateAmount} ${row.currency ?? ""}`.trim(),
+              row.rateUnit ? t(`columns.laborCost.units.${row.rateUnit}`) : "—", String(row.days), String(row.hours),
+              row.amount === null ? "—" : `${row.amount} ${row.currency ?? ""}`.trim()],
+          employeeName: row.isTotal ? null : row.workerName,
           siteName: row.siteName,
         }),
       },
@@ -222,10 +230,11 @@ export default function ReportsPage() {
         }),
       },
       contractor: {
-        columns: [t("columns.contractor.name"), t("columns.contractor.number"), t("columns.contractor.site"), t("columns.contractor.clockIn"), t("columns.contractor.clockOut")],
+        columns: [t("columns.contractor.date"), t("columns.contractor.name"), t("columns.contractor.number"), t("columns.contractor.site"), t("columns.contractor.clockIn"), t("columns.contractor.clockOut"), t("columns.contractor.hours")],
         fetch: () => SiteWorkerRepository.listAttendance(null, startDate, endDate),
         toRow: (row: SiteWorkerAttendanceRow) => ({
-          cells: [row.workerName, row.workerNumber, row.siteName, formatTimeOnly(row.clockInAt, locale), row.clockOutAt ? formatTimeOnly(row.clockOutAt, locale) : "—"],
+          cells: [formatDateOnly(row.clockInAt, locale), row.workerName, row.workerNumber, row.siteName, formatTimeOnly(row.clockInAt, locale), row.clockOutAt ? formatTimeOnly(row.clockOutAt, locale) : "—",
+            row.clockOutAt ? String(Math.round(((new Date(row.clockOutAt).getTime() - new Date(row.clockInAt).getTime()) / 36e5) * 100) / 100) : "—"],
           employeeName: row.workerName,
           siteName: row.siteName,
         }),
@@ -556,8 +565,10 @@ export default function ReportsPage() {
       </Card>
       )}
 
-      {allows("payroll_export") ? <PayrollExportCard startDate={startDate} endDate={endDate} /> : null}
-      {canSeePay && allows("labor_cost") ? <ProjectBudgetsCard /> : null}
+      {/* Owner 2026-11-09 (no duplicates): with the payroll module, its reports and exports are there;
+          project budgets follow the hidden projects feature */}
+      {allows("payroll_export") && !allows("payroll") ? <PayrollExportCard startDate={startDate} endDate={endDate} /> : null}
+      {FEATURES.projects && canSeePay && allows("labor_cost") ? <ProjectBudgetsCard /> : null}
       {/* 2026-11-08 B-07: the external labour pay report lives with its pay runs (own permissions, frozen on approval) */}
       {allows("kiosk") && (profile?.isOwner || hasPermission("external_labor.view_pay")) ? (
         <Card title={t("externalPayCard.title")}>

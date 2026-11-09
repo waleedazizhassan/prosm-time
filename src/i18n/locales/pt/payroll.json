@@ -436,5 +436,22 @@
     "appliesToNew": "As alterações aplicam-se só a novos ciclos; os anteriores mantêm as suas regras.",
     "save": "Guardar seguros e impostos",
     "saved": "Guardado."
+  },
+  "steps": {
+    "title": "Salários em 3 passos",
+    "hint": "Passos 1 e 2 uma vez; o 3 todos os meses.",
+    "one": "Componentes, seguros e impostos",
+    "oneTodo": "Defina os componentes (salário base, subsídios, descontos). Seguros e impostos vêm prontos segundo a lei egípcia.",
+    "oneDone": "{{count}} componentes definidos.",
+    "statutoryOn": "Seguros e impostos são calculados automaticamente.",
+    "statutoryOff": "Seguros e impostos estão desligados.",
+    "oneAction": "Definições",
+    "two": "Uma ficha salarial por trabalhador",
+    "twoTodo": "Ninguém tem ficha ainda - o ciclo ficaria vazio. Indique o salário base de cada pessoa.",
+    "twoDone": "{{done}} de {{total}} trabalhadores têm ficha.",
+    "twoNoAccess": "Preparadas por quem gere as fichas.",
+    "twoAction": "Fichas salariais",
+    "three": "O ciclo do mês",
+    "threeText": "Crie o ciclo abaixo → adicione os variáveis e reveja as sugestões → submeta → outra pessoa aprova → feche e publique."
   }
 }

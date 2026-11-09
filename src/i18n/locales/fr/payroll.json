@@ -436,5 +436,22 @@
     "appliesToNew": "Les changements s'appliquent aux nouveaux cycles ; les précédents gardent leurs règles.",
     "save": "Enregistrer cotisations et impôts",
     "saved": "Enregistré."
+  },
+  "steps": {
+    "title": "La paie en 3 étapes",
+    "hint": "Étapes 1 et 2 une fois ; l'étape 3 chaque mois.",
+    "one": "Éléments, cotisations et impôts",
+    "oneTodo": "Définissez les éléments (salaire de base, indemnités, retenues). Cotisations et impôts sont prêts selon la loi égyptienne.",
+    "oneDone": "{{count}} éléments définis.",
+    "statutoryOn": "Cotisations et impôts sont calculés automatiquement.",
+    "statutoryOff": "Cotisations et impôts sont désactivés.",
+    "oneAction": "Paramètres",
+    "two": "Un dossier de paie par employé",
+    "twoTodo": "Personne n'a encore de dossier : le cycle serait vide. Saisissez le salaire de base de chacun.",
+    "twoDone": "{{done}} employés sur {{total}} ont un dossier.",
+    "twoNoAccess": "Préparés par qui gère les dossiers de paie.",
+    "twoAction": "Dossiers de paie",
+    "three": "Le cycle du mois",
+    "threeText": "Créez le cycle ci-dessous → saisissez les variables et vérifiez les suggestions → soumettez → une autre personne approuve → verrouillez et publiez."
   }
 }

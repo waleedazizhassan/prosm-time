@@ -5,7 +5,7 @@ import { Copy } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import SiteWorkerRepository, { type ExternalWorker } from "../../core/repositories/SiteWorkerRepository";
-import ExternalLaborRepository, { type RateUnit } from "../../core/repositories/ExternalLaborRepository";
+import ExternalLaborRepository, { type ExternalRate, type RateUnit } from "../../core/repositories/ExternalLaborRepository";
 import Select from "../../components/common/Select";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { formatTimeOnly } from "../../core/utils/formatDate";
@@ -41,6 +41,8 @@ export default function ExternalWorkersPage() {
   const [contractor, setContractor] = useState("");
   // 2026-11-09 (owner): the pay is set when the worker is added - an amount per hour, day, week, month or year
   const canSetPay = Boolean(profile?.isOwner) || hasPermission("external_labor.manage");
+  const canSeePay = canSetPay || hasPermission("external_labor.view_pay");
+  const [rates, setRates] = useState<Record<string, ExternalRate | null>>({});
   const [rateAmount, setRateAmount] = useState("");
   const [rateUnit, setRateUnit] = useState<RateUnit>("DAILY");
   const [rateCurrency, setRateCurrency] = useState("EGP");
@@ -66,7 +68,12 @@ export default function ExternalWorkersPage() {
     }
     setLoadError("");
     setWorkers(result.data ?? []);
-  }, [t]);
+    // 2026-11-09: each worker's current pay, for those who may see it
+    if (canSeePay) {
+      const rates = await ExternalLaborRepository.listRates();
+      setRates(Object.fromEntries((rates.data ?? []).map((r) => [r.workerId, r.current])));
+    }
+  }, [t, canSeePay]);
 
   useEffect(() => {
     if (allowed) void load();
@@ -164,6 +171,10 @@ export default function ExternalWorkersPage() {
     { key: "name", header: t("columns.name"), render: (worker) => worker.fullName },
     { key: "number", header: t("columns.number"), render: (worker) => <span style={{ fontFamily: "monospace", letterSpacing: "0.12em" }}>{worker.workerNumber}</span> },
     { key: "contractor", header: t("columns.contractor"), render: (worker) => worker.contractorName ?? "—" },
+    ...(canSeePay ? [{ key: "pay", header: t("externalPay:addRate"), render: (worker: ExternalWorker) => {
+      const r = rates[worker.id];
+      return r ? `${r.amount} ${r.currency} / ${t(`externalPay:unit.${r.unit}`)}` : "—";
+    } }] : []),
     {
       key: "now",
       header: t("columns.now"),
@@ -223,7 +234,7 @@ export default function ExternalWorkersPage() {
           {canSetPay ? (
             <>
               <div style={{ minWidth: 120, flex: "0 1 140px" }}>
-                <Input label={t("externalPay:rates.amount")} name="workerRate" type="number" value={rateAmount} onChange={(event) => setRateAmount(event.target.value)} disabled={adding} />
+                <Input label={t("externalPay:addRate")} name="workerRate" type="number" value={rateAmount} onChange={(event) => setRateAmount(event.target.value)} disabled={adding} />
               </div>
               <div style={{ minWidth: 120, flex: "0 1 140px" }}>
                 <Select label={t("externalPay:rates.unit")} name="workerRateUnit" value={rateUnit} onChange={(event) => setRateUnit(event.target.value as RateUnit)} disabled={adding}

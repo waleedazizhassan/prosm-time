@@ -14,7 +14,7 @@ import type { PlanFeature } from "../../core/hooks/usePlanFeatures";
 // operations (attendance, sites, leave and holidays, shifts, kiosk), "people" Human resources,
 // "payroll" Payroll, "reports" Reports and analytics, "settings" Administration and governance.
 // The ids stay, so nothing that refers to them breaks; every path is unchanged.
-export type NavSection = "attendance" | "people" | "payroll" | "reports" | "settings" | "help";
+export type NavSection = "attendance" | "sites" | "people" | "payroll" | "reports" | "settings" | "help";
 
 export interface NavItem {
   id: string;
@@ -100,7 +100,7 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // navigation). Open to every authenticated member, same reasoning as
   // Attendance Record above - the real identity check inside kiosk mode
   // is the PIN, not who launched the screen.
-  { id: "kiosk", planFeature: "kiosk", labelKey: "items.kiosk", path: "/kiosk", icon: MonitorSmartphone, requiredPermission: null, ownerOrManagerOnly: true, section: "attendance" },
+  { id: "kiosk", planFeature: "kiosk", labelKey: "items.kiosk", path: "/kiosk", icon: MonitorSmartphone, requiredPermission: null, ownerOrManagerOnly: true, section: "sites" },
   // § live UX review, user-directed - a real Emergency Log for SOS
   // alerts (exact GPS location, time, employee, site), reached from
   // both the sidebar and the notification bell/siren overlay. Gated on
@@ -111,9 +111,9 @@ const ALL_NAV_ITEMS: NavItem[] = [
   { id: "people", labelKey: "items.people", path: "/people", icon: Users, requiredPermission: "employees.view", section: "people" },
   // 2026-11-09 Media Center: announcements and official statements - everyone reads what was addressed to them.
   { id: "announcements", labelKey: "items.announcements", path: "/announcements", icon: Megaphone, requiredPermission: null, section: "people" },
-  { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage", section: "attendance" },
+  { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage", section: "sites" },
   // Owner 2026-10-18/19: external workers for the whole organisation (app-generated kiosk numbers).
-  { id: "workers", planFeature: "kiosk", labelKey: "items.workers", path: "/workers", icon: HardHat, requiredPermission: "sites.manage", section: "people" },
+  { id: "workers", planFeature: "kiosk", labelKey: "items.workers", path: "/workers", icon: HardHat, requiredPermission: "sites.manage", section: "sites" },
   // §22: "Employee reviews their period" - self-access to one's own
   // timesheets needs no special permission (same as Dashboard), so
   // this nav item is visible to every authenticated org member; the
@@ -136,7 +136,7 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // 2026-11-08 B-07: external labour pay - separate from payroll and its permissions.
   { id: "externalPay", planFeature: "kiosk", labelKey: "items.externalPay", path: "/workers/pay", icon: HardHat, requiredPermission: "external_labor.view_pay", section: "payroll" },
   { id: "payslips", planFeature: "payroll", labelKey: "items.payslips", path: "/payslips", icon: Receipt, requiredPermission: null, hiddenFromOwner: true, section: "payroll" },
-  { id: "leave", planFeature: "leave", labelKey: "items.leave", path: "/leave", icon: CalendarDays, requiredPermission: null, section: "attendance" },
+  { id: "leave", planFeature: "leave", labelKey: "items.leave", path: "/leave", icon: CalendarDays, requiredPermission: null, section: "people" },
   // § live UX review, user-directed - "a Reports Center where any PDF
   // can be pulled." No permission gate on the nav item itself - the
   // page's own report-type selector gates each report by the exact
@@ -173,4 +173,6 @@ const ALL_NAV_ITEMS: NavItem[] = [
 // Hidden features (src/config/features.ts) leave the sidebar and the search.
 export const NAV_ITEMS: NavItem[] = ALL_NAV_ITEMS.filter((item) => item.id !== "integrations" || FEATURES.integrations);
 
-export const NAV_SECTION_ORDER: NavSection[] = ["attendance", "people", "payroll", "reports", "settings", "help"];
+// Owner 2026-11-09 ("the sidebar tree needs work"): daily operations, sites and external labour, people
+// (with leave and announcements), payroll, reports, management.
+export const NAV_SECTION_ORDER: NavSection[] = ["attendance", "sites", "people", "payroll", "reports", "settings", "help"];
