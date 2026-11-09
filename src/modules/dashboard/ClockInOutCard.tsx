@@ -1,7 +1,7 @@
 import { Capacitor } from "@capacitor/core";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Coffee, LogIn, LogOut, MapPin, Play, Repeat, Siren } from "lucide-react";
+import { Coffee, LogIn, LogOut, MapPin, Play, Repeat } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import { useDashboardRefresh } from "../../core/hooks/useDashboardRefresh";
@@ -36,7 +36,6 @@ import ClockOutSummaryModal from "../../components/common/ClockOutSummaryModal";
 import LiveLocationMap from "../../components/common/LiveLocationMap";
 import ErrorText from "../../components/common/ErrorText";
 import styles from "./ClockInOutCard.module.css";
-import HintText from "../../components/common/HintText";
 import SessionReviewRepository from "../../core/repositories/SessionReviewRepository";
 import LongSessionPrompt from "./LongSessionPrompt";
 import ExitSitePrompt from "./ExitSitePrompt";
@@ -1095,7 +1094,8 @@ export default function ClockInOutCard() {
       : null;
   const proximitySite = proximity ? sites.find((site) => site.id === proximity.siteId) ?? null : null;
   const suggestOnSite = Boolean(suggestClockIn && planAllows("clock_suggestion") && proximity?.inside && proximitySite);
-  const mapRelevantSite = view.session ? view.currentSite : selectedSite ?? proximitySite;
+  // 2026-11-09: with no site chosen, nobody is told they are outside a site they did not choose
+  const mapRelevantSite = view.session ? view.currentSite : siteId ? selectedSite : proximity?.inside ? proximitySite : null;
   const mapSiteProximity =
     mapRelevantSite && currentLocation && mapRelevantSite.allowedRadiusMeters > 0
       ? nearestSite([mapRelevantSite], currentLocation.latitude, currentLocation.longitude, currentLocation.accuracyMeters)
@@ -1158,22 +1158,6 @@ export default function ClockInOutCard() {
       {failedOfflineItem ? null : view.session ? (
         <>
 
-          {/* SOS on every shift (owner 2026-10-13) - no longer tied to
-              presence monitoring; needs the shift the server confirmed
-              (a clock-in still waiting in the offline queue has none). */}
-          {session && planAllows("sos") ? (
-            <div style={{ marginTop: "var(--space-4)", paddingTop: "var(--space-4)", borderTop: "1px solid var(--border-light)" }}>
-              {presenceSession ? <HintText small>{t("attendance.presenceActive")}</HintText> : null}
-              {sosSent ? (
-                <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("attendance.sosSent")}</p>
-              ) : (
-                <Button variant="danger" className={styles.sosButton} onClick={handleSos} loading={sosSubmitting}>
-                  <Siren size={18} />
-                  {t("attendance.sosAction")}
-                </Button>
-              )}
-            </div>
-          ) : null}
         </>
       ) : (
         <>
@@ -1206,6 +1190,12 @@ export default function ClockInOutCard() {
           accuracyMeters={currentLocation?.accuracyMeters ?? null}
           height={380}
         />
+        {/* Owner 2026-11-09: SOS floats above the hours and reminders buttons, the same size */}
+        {session && planAllows("sos") ? (
+          <button type="button" className={styles.sosFloat} onClick={handleSos} disabled={sosSubmitting || sosSent} aria-label={t("attendance.sosAction")} title={sosSent ? t("attendance.sosSent") : t("attendance.sosAction")}>
+            {sosSent ? "✓" : "🆘"}
+          </button>
+        ) : null}
         <div className={styles.mapInfo}>
           <div className={styles.mapInfoTop}>
             <StatusBadge status={statusKey}>{t(`attendance.status.${statusKey}`)}</StatusBadge>
@@ -1228,6 +1218,9 @@ export default function ClockInOutCard() {
                 : t("attendance.locationUnavailable")}
             </span>
           </div>
+          {view.session && presenceSession ? (
+            <div className={styles.mapInfoRow} style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)" }}>{t("attendance.presenceActive")}</div>
+          ) : null}
           {mapRelevantSite && mapSiteAnyLocation ? (
             <div className={styles.mapInfoRow}>{t("attendance.anyLocationSite", { site: mapRelevantSite.name })}</div>
           ) : mapRelevantSite && mapSiteProximity ? (
