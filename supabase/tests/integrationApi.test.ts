@@ -34,6 +34,8 @@ beforeAll(async () => {
   expect(t.failures).toEqual([]);
   org = await createOrg(t, "Api Co");
   other = await createOrg(t, "Other Co");
+  // the payroll figures here check the API, not the statutory deductions (they have their own tests)
+  await t.su("update payroll_settings set statutory = '{}'::jsonb");
   siteId = await createSite(t, org, "Plant");
   worker = await addMember(t, org, "employee", "Worker");
   manager = await addMember(t, org, "manager", "Manager");

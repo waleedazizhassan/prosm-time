@@ -24,7 +24,8 @@
     "variable": "este mes",
     "installment": "cuota",
     "attendance_suggestion": "de asistencia",
-    "import": "importado"
+    "import": "importado",
+    "statutory": "Legal"
   },
   "cycles": {
     "newTitle": "Nuevo ciclo de nómina",
@@ -210,7 +211,12 @@
     "fixedTitle": "Conceptos fijos",
     "effectiveFrom": "Desde",
     "applyFrom": "Aplicar desde esta fecha",
-    "historyHint": "Un valor nuevo termina el anterior el día previo; un importe vacío termina el concepto."
+    "historyHint": "Un valor nuevo termina el anterior el día previo; un importe vacío termina el concepto.",
+    "statutoryTitle": "Seguridad social e impuestos",
+    "insuranceExempt": "No asegurado",
+    "taxExempt": "Exento de impuesto",
+    "insurableWage": "Salario asegurable fijo (opcional)",
+    "statutoryHint": "Un salario asegurable fijo sustituye al base, dentro de los límites. Las reglas están en Ajustes de nómina."
   },
   "installments": {
     "title": "Cuotas y anticipos",
@@ -308,7 +314,12 @@
     "isBasicLabel": "Es el salario base",
     "prorateLabel": "Prorrateado en periodos parciales",
     "activeLabel": "Activo",
-    "deductionPercentHint": "Una deducción porcentual está entre 0 y 100."
+    "deductionPercentHint": "Una deducción porcentual está entre 0 y 100.",
+    "taxableLabel": "Sujeto a impuesto",
+    "insurableLabel": "Forma parte del salario asegurable",
+    "appliesToAllLabel": "Se aplica a todos los empleados",
+    "defaultAmount": "Importe por defecto",
+    "appliesToAllHint": "Se añade en cada ciclo nuevo a todos los que tienen ficha de nómina. Si la persona tiene un valor propio, se usa ese."
   },
   "requests": {
     "hint": "Recibos que pidió su equipo. Un clic envía el recibo aprobado y guardado en PDF al correo registrado: la misma versión, sin recalcular.",
@@ -372,7 +383,10 @@
     "profileFirst": "Guarde primero la ficha de nómina.",
     "notEditable": "Este ciclo no se puede cambiar ahora.",
     "ownRequest": "Nadie atiende su propia solicitud.",
-    "fileFailed": "No se pudo crear el archivo. Inténtelo de nuevo."
+    "fileFailed": "No se pudo crear el archivo. Inténtelo de nuevo.",
+    "statutoryRate": "El tipo debe estar entre 0 y 100.",
+    "statutoryBrackets": "Los tramos deben ir en orden creciente y el último sin límite.",
+    "statutoryWage": "El máximo no puede ser inferior al mínimo."
   },
   "exports": {
     "hint": "Los recibos de un ciclo aprobado o cerrado se preparan en el servidor en un ZIP, cada uno con su número. Puede salir de la página; el archivo queda disponible 7 días.",
@@ -389,5 +403,38 @@
     "scope": "Exportar para",
     "scopeAll": "Todos en este ciclo (su ámbito)",
     "scopeChosen": "Los {{count}} elegidos"
+  },
+  "statutory": {
+    "title": "Seguridad social e impuestos",
+    "hint": "Se calculan en cada ciclo nuevo según la ley del país elegido. Todas las cifras se pueden cambiar.",
+    "country": "País",
+    "reset": "Volver a los valores del país",
+    "resetDone": "Se restauraron los valores del país.",
+    "insurance": "Seguridad social",
+    "employeeRate": "Parte del empleado %",
+    "employerRate": "Parte del empleador %",
+    "minWage": "Salario asegurable mínimo (mensual)",
+    "maxWage": "Salario asegurable máximo (mensual)",
+    "base": "Salario asegurable a partir de",
+    "bases": {
+      "basic": "El salario base",
+      "earnings": "Todos los devengos",
+      "flagged": "Conceptos marcados como asegurables"
+    },
+    "incomeTax": "Impuesto sobre el salario",
+    "exemption": "Exención personal (anual)",
+    "insuranceDeductible": "Restar la seguridad social del empleado antes del impuesto",
+    "bracketsHint": "Tramos anuales sobre la renta imponible tras la exención. El último tramo no tiene límite.",
+    "upTo": "Hasta (anual)",
+    "above": "Por encima",
+    "rate": "Tipo %",
+    "remove": "Quitar",
+    "addBracket": "Añadir tramo",
+    "tiersHint": "También se aplica la regla de rentas altas ({{count}} niveles): por encima de un umbral desaparecen los tramos inferiores.",
+    "fund": "Fondo de los mártires",
+    "fundRate": "Tipo sobre el bruto %",
+    "appliesToNew": "Los cambios se aplican solo a ciclos nuevos; los anteriores conservan sus reglas.",
+    "save": "Guardar seguridad social e impuestos",
+    "saved": "Guardado."
   }
 }

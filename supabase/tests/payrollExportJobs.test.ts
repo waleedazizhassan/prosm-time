@@ -27,6 +27,8 @@ beforeAll(async () => {
   t = await buildDatabase();
   expect(t.failures).toEqual([]);
   org = await createOrg(t, "Bulk Co");
+  // these tests check the payroll arithmetic itself; the statutory deductions (2026-11-09) have their own tests
+  await t.su("update payroll_settings set statutory = '{}'::jsonb");
   siteA = await createSite(t, org, "A");
   siteB = await createSite(t, org, "B");
   managerA = await addMember(t, org, "manager", "Manager A");

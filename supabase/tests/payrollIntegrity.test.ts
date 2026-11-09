@@ -25,6 +25,8 @@ beforeAll(async () => {
   t = await buildDatabase();
   expect(t.failures).toEqual([]);
   org = await createOrg(t, "Match Co");
+  // these tests check the payroll arithmetic itself; the statutory deductions (2026-11-09) have their own tests
+  await t.su("update payroll_settings set statutory = '{}'::jsonb");
   const comp = async (c: Record<string, unknown>) => (await ok<{ r: { id: string } }>(owner("select public.save_prosm_time_payroll_component(null, $1) as r", [JSON.stringify(c)]))).r.id;
   const basic = await comp({ name_ar: "الأساسي", category: "earning", source: "fixed", is_basic: true });
   const housing = await comp({ name_ar: "سكن", category: "allowance", source: "fixed" });

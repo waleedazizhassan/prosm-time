@@ -14,10 +14,11 @@ import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
+import PayrollStatutoryCard from "./PayrollStatutoryCard";
 import { payrollError } from "./payrollUi";
 
 type Draft = Partial<PayrollComponent> & { name_ar: string };
-const EMPTY: Draft = { name_ar: "", name_en: "", category: "earning", source: "variable", calc_type: "amount", include_in_net: true, include_in_combined: false, prorate: false, is_basic: false, sort_order: 100, is_active: true };
+const EMPTY: Draft = { name_ar: "", name_en: "", category: "earning", source: "variable", calc_type: "amount", include_in_net: true, include_in_combined: false, prorate: false, is_basic: false, sort_order: 100, is_active: true, taxable: true, insurable: false, applies_to_all: false, default_amount: null };
 
 // 2026-11-08: payroll settings (period, proration, attendance rates, currency, checks, publishing,
 // report wording) and the components the organisation defines - no country tax tables: taxes and
@@ -111,6 +112,8 @@ export default function PayrollSettingsPage() {
         }}>{saved ? t("settings.saved") : t("settings.save")}</Button>
       </Card>
 
+      <PayrollStatutoryCard />
+
       <Card title={t("components.title")} subtitle={t("components.hint")} actions={<Button size="sm" onClick={() => setDraft({ id: null, value: { ...EMPTY } })}>{t("components.add")}</Button>}>
         <Table columns={columns} data={components} getRowId={(c) => c.id} emptyMessage={t("components.empty")}
           onRowClick={(c) => setDraft({ id: c.id, value: { ...c, name_en: c.name_en ?? "" } })} />
@@ -159,6 +162,34 @@ export default function PayrollSettingsPage() {
             <label style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}>
               <input type="checkbox" checked={Boolean(d.prorate)} onChange={(event) => setD({ prorate: event.target.checked })} /> {t("components.prorateLabel")}
             </label>
+            {(d.category === "earning" || d.category === "allowance") && d.include_in_net ? (
+              <>
+                <label style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}>
+                  <input type="checkbox" checked={d.taxable !== false} onChange={(event) => setD({ taxable: event.target.checked })} /> {t("components.taxableLabel")}
+                </label>
+                <label style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}>
+                  <input type="checkbox" checked={Boolean(d.insurable)} onChange={(event) => setD({ insurable: event.target.checked })} /> {t("components.insurableLabel")}
+                </label>
+              </>
+            ) : null}
+            {d.source === "fixed" && !d.is_basic ? (
+              <>
+                <label style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}>
+                  <input type="checkbox" checked={Boolean(d.applies_to_all)} onChange={(event) => setD({ applies_to_all: event.target.checked })} /> {t("components.appliesToAllLabel")}
+                </label>
+                {d.applies_to_all ? (
+                  <>
+                    {d.calc_type === "amount" ? (
+                      <div style={{ maxWidth: 220 }}>
+                        <Input label={t("components.defaultAmount")} name="defaultAmount" type="number" value={d.default_amount == null ? "" : String(d.default_amount)}
+                          onChange={(event) => setD({ default_amount: event.target.value === "" ? null : Number(event.target.value) })} />
+                      </div>
+                    ) : null}
+                    <HintText small>{t("components.appliesToAllHint")}</HintText>
+                  </>
+                ) : null}
+              </>
+            ) : null}
             <label style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}>
               <input type="checkbox" checked={d.is_active !== false} onChange={(event) => setD({ is_active: event.target.checked })} /> {t("components.activeLabel")}
             </label>

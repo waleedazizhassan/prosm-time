@@ -24,7 +24,8 @@
     "variable": "este mês",
     "installment": "prestação",
     "attendance_suggestion": "da assiduidade",
-    "import": "importado"
+    "import": "importado",
+    "statutory": "Legal"
   },
   "cycles": {
     "newTitle": "Novo ciclo salarial",
@@ -210,7 +211,12 @@
     "fixedTitle": "Rubricas fixas",
     "effectiveFrom": "A partir de",
     "applyFrom": "Aplicar a partir desta data",
-    "historyHint": "Um novo valor termina o anterior na véspera; um valor vazio termina a rubrica."
+    "historyHint": "Um novo valor termina o anterior na véspera; um valor vazio termina a rubrica.",
+    "statutoryTitle": "Seguros e impostos",
+    "insuranceExempt": "Não segurado",
+    "taxExempt": "Isento de imposto",
+    "insurableWage": "Salário segurável fixo (opcional)",
+    "statutoryHint": "Um salário segurável fixo substitui o salário base, dentro dos limites. As regras estão nas definições salariais."
   },
   "installments": {
     "title": "Prestações e adiantamentos",
@@ -308,7 +314,12 @@
     "isBasicLabel": "É o salário base",
     "prorateLabel": "Proporcional em períodos parciais",
     "activeLabel": "Ativa",
-    "deductionPercentHint": "Um desconto em percentagem fica entre 0 e 100."
+    "deductionPercentHint": "Um desconto em percentagem fica entre 0 e 100.",
+    "taxableLabel": "Tributável",
+    "insurableLabel": "Faz parte do salário segurável",
+    "appliesToAllLabel": "Aplica-se a todos os trabalhadores",
+    "defaultAmount": "Montante predefinido",
+    "appliesToAllHint": "Adicionado em cada novo ciclo para todos com ficha salarial. Se a pessoa tiver valor próprio, usa-se esse."
   },
   "requests": {
     "hint": "Recibos pedidos pela sua equipa. Um clique envia o recibo aprovado e guardado em PDF para o e-mail registado: a mesma versão, sem recalcular.",
@@ -372,7 +383,10 @@
     "profileFirst": "Guarde primeiro a ficha salarial.",
     "notEditable": "Este ciclo não pode ser alterado agora.",
     "ownRequest": "Ninguém trata o próprio pedido.",
-    "fileFailed": "Não foi possível criar o ficheiro. Tente de novo."
+    "fileFailed": "Não foi possível criar o ficheiro. Tente de novo.",
+    "statutoryRate": "A taxa tem de estar entre 0 e 100.",
+    "statutoryBrackets": "Os escalões têm de subir e o último não tem limite.",
+    "statutoryWage": "O máximo não pode ser inferior ao mínimo."
   },
   "exports": {
     "hint": "Os recibos de um ciclo aprovado ou fechado são preparados no servidor num ZIP, cada um com o seu número. Pode sair da página; o ficheiro fica disponível 7 dias.",
@@ -389,5 +403,38 @@
     "scope": "Exportar para",
     "scopeAll": "Todos neste ciclo (o seu âmbito)",
     "scopeChosen": "Os {{count}} escolhidos"
+  },
+  "statutory": {
+    "title": "Seguros e impostos",
+    "hint": "Calculados em cada novo ciclo segundo a lei do país escolhido. Todos os valores podem ser alterados.",
+    "country": "País",
+    "reset": "Voltar aos valores do país",
+    "resetDone": "Os valores do país foram repostos.",
+    "insurance": "Segurança social",
+    "employeeRate": "Parte do trabalhador %",
+    "employerRate": "Parte do empregador %",
+    "minWage": "Salário segurável mínimo (mensal)",
+    "maxWage": "Salário segurável máximo (mensal)",
+    "base": "Salário segurável a partir de",
+    "bases": {
+      "basic": "O salário base",
+      "earnings": "Todos os abonos",
+      "flagged": "Componentes marcados como seguráveis"
+    },
+    "incomeTax": "Imposto sobre o salário",
+    "exemption": "Isenção pessoal (anual)",
+    "insuranceDeductible": "Deduzir a segurança social do trabalhador antes do imposto",
+    "bracketsHint": "Escalões anuais sobre o rendimento tributável após a isenção. O último escalão não tem limite.",
+    "upTo": "Até (anual)",
+    "above": "Acima disso",
+    "rate": "Taxa %",
+    "remove": "Remover",
+    "addBracket": "Adicionar escalão",
+    "tiersHint": "Aplica-se também a regra dos rendimentos altos ({{count}} níveis): acima de um limite caem os escalões inferiores.",
+    "fund": "Fundo dos mártires",
+    "fundRate": "Taxa sobre o bruto %",
+    "appliesToNew": "As alterações aplicam-se só a novos ciclos; os anteriores mantêm as suas regras.",
+    "save": "Guardar seguros e impostos",
+    "saved": "Guardado."
   }
 }

@@ -93,7 +93,10 @@ env:
   # from GitHub, so the repository can be made private. The manifest is
   # still committed to public/latest-version.json as well, for builds
   # released before this change (they read the raw GitHub URL).
-  VITE_UPDATE_MANIFEST_URL: https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/public/app-releases/latest-version.json
+  # 2026-11-09 (owner): the web has its own manifest. latest-version.json is read by Android builds
+  # released before the Google Play flavour (2.3.71 and older on Play), so it moves only when the
+  # new bundle is live on Google Play (scripts/publish-play-manifest.sh) - never with the web.
+  VITE_UPDATE_MANIFEST_URL: https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/public/app-releases/latest-web.json
 
 jobs:
   # § real gap fix, 14-point live-audit gap #1: this workflow had no
@@ -463,7 +466,8 @@ jobs:
           # Audit 2.3: the copy installed apps read (short cache so a new release shows within minutes).
           # Google Play only (owner 2026-11-04): the manifest still ships - the web and the desktop
           # read it, and Android's link opens Google Play.
-          curl -sf -X POST "https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/app-releases/latest-version.json" \
+          # 2026-11-09: the web's own manifest; latest-version.json (old Android builds) is left alone.
+          curl -sf -X POST "https://wcfdhsxzeryqwpmftgay.supabase.co/storage/v1/object/app-releases/latest-web.json" \
             -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
             -H "x-upsert: true" \
             -H "Content-Type: application/json" \

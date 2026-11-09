@@ -5,6 +5,8 @@ import { Copy } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import SiteWorkerRepository, { type ExternalWorker } from "../../core/repositories/SiteWorkerRepository";
+import ExternalLaborRepository, { type RateUnit } from "../../core/repositories/ExternalLaborRepository";
+import Select from "../../components/common/Select";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { formatTimeOnly } from "../../core/utils/formatDate";
 
@@ -27,7 +29,7 @@ import FieldRow from "../../components/common/FieldRow";
 // each worker's 6-digit number; the worker clocks in and out with it at
 // the kiosk of any site. Owner and sites.manage only (checked server-side).
 export default function ExternalWorkersPage() {
-  const { t, i18n } = useTranslation("workforce");
+  const { t, i18n } = useTranslation(["workforce", "externalPay"]);
   const [confirm, confirmDialog] = useConfirm();
   const { profile, hasPermission } = useAuth();
   const allowed = Boolean(profile?.isOwner) || hasPermission("sites.manage");
@@ -37,6 +39,11 @@ export default function ExternalWorkersPage() {
   const [loadError, setLoadError] = useState("");
   const [name, setName] = useState("");
   const [contractor, setContractor] = useState("");
+  // 2026-11-09 (owner): the pay is set when the worker is added - an amount per hour, day, week, month or year
+  const canSetPay = Boolean(profile?.isOwner) || hasPermission("external_labor.manage");
+  const [rateAmount, setRateAmount] = useState("");
+  const [rateUnit, setRateUnit] = useState<RateUnit>("DAILY");
+  const [rateCurrency, setRateCurrency] = useState("EGP");
   const [adding, setAdding] = useState(false);
   const [addError, setAddError] = useState("");
   const [added, setAdded] = useState<{ name: string; number: string } | null>(null);
@@ -77,9 +84,16 @@ export default function ExternalWorkersPage() {
       setAddError(humanizeBackendError(result.message, t) ?? t("addError"));
       return;
     }
+    if (canSetPay && rateAmount.trim() !== "" && Number(rateAmount) > 0) {
+      const today = new Date();
+      const iso = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+      const rate = await ExternalLaborRepository.setRate(result.data.workerId, Number(rateAmount), rateCurrency.trim().toUpperCase() || "EGP", rateUnit, iso);
+      if (rate.error) setAddError(t("externalPay:addRateFailed", { error: humanizeBackendError(rate.error, t) ?? rate.error }));
+    }
     setAdded({ name: name.trim(), number: result.data.workerNumber });
     setName("");
     setContractor("");
+    setRateAmount("");
     void load();
   };
 
@@ -206,6 +220,20 @@ export default function ExternalWorkersPage() {
           <div style={{ minWidth: 180, flex: "1 1 180px" }}>
             <Input label={t("contractorLabel")} name="workerContractor" value={contractor} onChange={(event) => setContractor(event.target.value)} disabled={adding} />
           </div>
+          {canSetPay ? (
+            <>
+              <div style={{ minWidth: 120, flex: "0 1 140px" }}>
+                <Input label={t("externalPay:rates.amount")} name="workerRate" type="number" value={rateAmount} onChange={(event) => setRateAmount(event.target.value)} disabled={adding} />
+              </div>
+              <div style={{ minWidth: 120, flex: "0 1 140px" }}>
+                <Select label={t("externalPay:rates.unit")} name="workerRateUnit" value={rateUnit} onChange={(event) => setRateUnit(event.target.value as RateUnit)} disabled={adding}
+                  options={(["DAILY", "WEEKLY", "MONTHLY", "HOURLY", "YEARLY"] as RateUnit[]).map((u) => ({ value: u, label: t(`externalPay:unit.${u}`) }))} />
+              </div>
+              <div style={{ minWidth: 90, flex: "0 1 100px" }}>
+                <Input label={t("externalPay:rates.currency")} name="workerRateCurrency" value={rateCurrency} onChange={(event) => setRateCurrency(event.target.value.toUpperCase().slice(0, 3))} disabled={adding} />
+              </div>
+            </>
+          ) : null}
           <Button onClick={handleAdd} loading={adding} disabled={!name.trim() || adding}>
             {t("addAction")}
           </Button>

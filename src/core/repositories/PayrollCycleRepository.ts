@@ -43,6 +43,25 @@ export interface PayrollComponent {
   prorate: boolean;
   sort_order: number;
   is_active: boolean;
+  /** 2026-11-09: counted in taxable pay / in the insurable wage; added for everyone with a profile */
+  taxable?: boolean;
+  insurable?: boolean;
+  applies_to_all?: boolean;
+  default_amount?: number | null;
+}
+
+// 2026-11-09: statutory deductions (a country's rules, edited by the organisation)
+export interface StatutoryBracket { upTo: number | null; rate: number }
+export interface StatutoryConfig {
+  insurance?: { enabled: boolean; nameAr?: string; nameEn?: string; employerNameAr?: string; employerNameEn?: string; employeeRate: number; employerRate: number; minWage: number; maxWage: number | null; base: "basic" | "earnings" | "flagged" };
+  incomeTax?: { enabled: boolean; nameAr?: string; nameEn?: string; personalExemption: number; insuranceDeductible: boolean; brackets: StatutoryBracket[]; tiers: { above: number; startBracket: number }[] };
+  martyrsFund?: { enabled: boolean; nameAr?: string; nameEn?: string; rate: number };
+}
+export interface StatutoryState {
+  countryCode: string;
+  config: StatutoryConfig;
+  countryConfig: StatutoryConfig | null;
+  countries: { code: string; nameAr: string; nameEn: string; note: string | null }[];
 }
 
 export interface CycleLine {
@@ -51,7 +70,7 @@ export interface CycleLine {
   name_ar: string;
   name_en: string | null;
   category: LineCategory;
-  source: "fixed" | "variable" | "installment" | "attendance_suggestion" | "import";
+  source: "fixed" | "variable" | "installment" | "attendance_suggestion" | "import" | "statutory";
   calc_type: "amount" | "percent";
   percent: number | null;
   is_basic: boolean;
@@ -200,7 +219,7 @@ export interface PayrollPerson {
   isActive: boolean;
   siteId: string | null;
   siteName: string | null;
-  profile: { id: string; employee_code: string | null; currency: string; start_date: string | null; end_date: string | null; is_active: boolean; notes: string | null } | null;
+  profile: { id: string; employee_code: string | null; currency: string; start_date: string | null; end_date: string | null; is_active: boolean; notes: string | null; insurance_exempt?: boolean; insurable_wage?: number | null; tax_exempt?: boolean } | null;
   components: ProfileComponentValue[];
 }
 
@@ -283,6 +302,9 @@ class PayrollCycleRepository {
 
   // settings and components
   getSettings = () => this.call<PayrollSettings>("get_prosm_time_payroll_settings");
+  getStatutory = () => this.call<StatutoryState>("get_prosm_time_payroll_statutory");
+  saveStatutory = (config: StatutoryConfig) => this.call<{ success: boolean }>("save_prosm_time_payroll_statutory", { p_config: config });
+  resetStatutory = (countryCode: string) => this.call<{ config: StatutoryConfig }>("reset_prosm_time_payroll_statutory", { p_country_code: countryCode });
   saveSettings = (settings: Partial<PayrollSettings>) => this.call<{ success: boolean }>("save_prosm_time_payroll_settings", { p_settings: settings });
   listComponents = () => this.call<PayrollComponent[]>("list_prosm_time_payroll_components");
   saveComponent = (id: string | null, component: Partial<PayrollComponent>) =>

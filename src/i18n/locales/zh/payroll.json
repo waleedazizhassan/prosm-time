@@ -24,7 +24,8 @@
     "variable": "本月",
     "installment": "分期",
     "attendance_suggestion": "来自考勤",
-    "import": "导入"
+    "import": "导入",
+    "statutory": "法定"
   },
   "cycles": {
     "newTitle": "新建薪资周期",
@@ -210,7 +211,12 @@
     "fixedTitle": "固定项目",
     "effectiveFrom": "生效日",
     "applyFrom": "自此日期起生效",
-    "historyHint": "新金额在前一天结束旧金额；金额留空即结束该项目。"
+    "historyHint": "新金额在前一天结束旧金额；金额留空即结束该项目。",
+    "statutoryTitle": "社保与税",
+    "insuranceExempt": "不参保",
+    "taxExempt": "免税",
+    "insurableWage": "固定参保工资（可选）",
+    "statutoryHint": "固定参保工资将替代基本工资计算社保（在上下限内）。规则本身在薪资设置中。"
   },
   "installments": {
     "title": "分期与预支",
@@ -308,7 +314,12 @@
     "isBasicLabel": "这是基本工资",
     "prorateLabel": "部分期间按比例计算",
     "activeLabel": "有效",
-    "deductionPercentHint": "百分比扣款介于 0 和 100 之间。"
+    "deductionPercentHint": "百分比扣款介于 0 和 100 之间。",
+    "taxableLabel": "应税",
+    "insurableLabel": "计入参保工资",
+    "appliesToAllLabel": "适用于所有员工",
+    "defaultAmount": "默认金额",
+    "appliesToAllHint": "每个新周期为所有有薪资档案的人添加；个人设置了自己的值时以个人值为准。"
   },
   "requests": {
     "hint": "团队申请的工资单。一键将已核准并保存的工资单以 PDF 发送到登记邮箱——同一版本，不重新计算。",
@@ -372,7 +383,10 @@
     "profileFirst": "请先保存薪资档案。",
     "notEditable": "此周期现在无法修改。",
     "ownRequest": "任何人都不能处理自己的申请。",
-    "fileFailed": "无法生成文件，请重试。"
+    "fileFailed": "无法生成文件，请重试。",
+    "statutoryRate": "比例必须在 0 到 100 之间。",
+    "statutoryBrackets": "级距必须递增，最后一级无上限。",
+    "statutoryWage": "最高参保工资不能低于最低值。"
   },
   "exports": {
     "hint": "已批准或已锁定周期的工资单会在服务器上打包为一个 ZIP，每份都有独立编号。您可以离开此页面；文件保留 7 天。",
@@ -389,5 +403,38 @@
     "scope": "导出范围",
     "scopeAll": "本周期全部人员（您的范围）",
     "scopeChosen": "所选 {{count}} 人"
+  },
+  "statutory": {
+    "title": "社保与税",
+    "hint": "按所选国家的法规在每个新周期自动计算，所有数值均可修改。",
+    "country": "国家",
+    "reset": "恢复该国默认值",
+    "resetDone": "已恢复该国默认值。",
+    "insurance": "社会保险",
+    "employeeRate": "员工比例 %",
+    "employerRate": "雇主比例 %",
+    "minWage": "最低参保工资（月）",
+    "maxWage": "最高参保工资（月）",
+    "base": "参保工资取自",
+    "bases": {
+      "basic": "基本工资",
+      "earnings": "全部收入",
+      "flagged": "标记为参保的项目"
+    },
+    "incomeTax": "工资所得税",
+    "exemption": "个人免税额（年）",
+    "insuranceDeductible": "计税前扣除员工社保",
+    "bracketsHint": "按免税后的应税收入分年度级距，最后一级无上限。",
+    "upTo": "至（年）",
+    "above": "超出部分",
+    "rate": "税率 %",
+    "remove": "删除",
+    "addBracket": "添加级距",
+    "tiersHint": "同时适用高收入规则（{{count}} 级）：超过门槛后较低级距不再适用。",
+    "fund": "烈士基金",
+    "fundRate": "占应发工资比例 %",
+    "appliesToNew": "更改仅适用于新周期；之前的周期保留原规则。",
+    "save": "保存社保与税",
+    "saved": "已保存。"
   }
 }

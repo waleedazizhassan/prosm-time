@@ -1,10 +1,36 @@
 {
-  "views": { "runs": "Paies", "rates": "Taux", "policy": "Règles", "workers": "Travailleurs externes" },
-  "status": { "draft": "Brouillon", "approved": "Approuvée" },
-  "unit": { "HOURLY": "heure", "DAILY": "jour", "WEEKLY": "semaine", "MONTHLY": "mois", "YEARLY": "an" },
-  "unitQuantity": { "HOURLY": "heures", "DAILY": "jours", "WEEKLY": "semaines", "MONTHLY": "mois", "YEARLY": "ans" },
-  "adjustment": { "deduction": "Retenue", "addition": "Ajout" },
-  "skipReason": { "no_rate": "aucun taux", "in_other_run": "déjà dans une autre paie pour cette période" },
+  "views": {
+    "runs": "Paies",
+    "rates": "Taux",
+    "policy": "Règles",
+    "workers": "Travailleurs externes"
+  },
+  "status": {
+    "draft": "Brouillon",
+    "approved": "Approuvée"
+  },
+  "unit": {
+    "HOURLY": "heure",
+    "DAILY": "jour",
+    "WEEKLY": "semaine",
+    "MONTHLY": "mois",
+    "YEARLY": "an"
+  },
+  "unitQuantity": {
+    "HOURLY": "heures",
+    "DAILY": "jours",
+    "WEEKLY": "semaines",
+    "MONTHLY": "mois",
+    "YEARLY": "ans"
+  },
+  "adjustment": {
+    "deduction": "Retenue",
+    "addition": "Ajout"
+  },
+  "skipReason": {
+    "no_rate": "aucun taux",
+    "in_other_run": "déjà dans une autre paie pour cette période"
+  },
   "runs": {
     "newTitle": "Nouvelle paie",
     "newHint": "Inclut les travailleurs externes actifs de votre périmètre ayant un taux. Les quantités à la journée et à l'heure sont proposées depuis le kiosque ; les quantités hebdomadaires, mensuelles et annuelles sont saisies.",
@@ -45,7 +71,11 @@
     "ruleTitle": "Règle du taux journalier",
     "ruleHint": "Comment un taux mensuel ou annuel devient un taux journalier, pour les ajustements en jours.",
     "basis": "Taux journalier selon",
-    "basisOption": { "fixed": "un nombre fixe de jours", "calendar": "les jours calendaires de la période", "working": "les jours ouvrés de la période" },
+    "basisOption": {
+      "fixed": "un nombre fixe de jours",
+      "calendar": "les jours calendaires de la période",
+      "working": "les jours ouvrés de la période"
+    },
     "divisor": "Jours",
     "saveRule": "Enregistrer la règle",
     "ruleNote": "Mensuel : taux / jours. Annuel : taux / 12 / jours. La règle utilisée est conservée à chaque approbation.",
@@ -173,5 +203,6 @@
     "percentMax": "Un pourcentage ne peut pas dépasser 100.",
     "noWorkers": "Cette paie n'a aucun travailleur.",
     "cannotDelete": "Seul un brouillon jamais approuvé peut être supprimé."
-  }
+  },
+  "addRateFailed": "Le travailleur a été ajouté, mais le tarif n'a pas été enregistré : {{error}}. Réglez-le dans Paie de la main-d'œuvre externe."
 }

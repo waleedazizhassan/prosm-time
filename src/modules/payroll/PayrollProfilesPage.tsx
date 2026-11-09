@@ -31,7 +31,7 @@ export default function PayrollProfilesPage() {
   const [error, setError] = useState("");
   const [busy, setBusy] = useState("");
   const [editing, setEditing] = useState<PayrollPerson | null>(null);
-  const [form, setForm] = useState({ employee_code: "", currency: "", start_date: "", end_date: "", is_active: true, notes: "" });
+  const [form, setForm] = useState({ employee_code: "", currency: "", start_date: "", end_date: "", is_active: true, notes: "", insurance_exempt: false, insurable_wage: "", tax_exempt: false });
   const [values, setValues] = useState<Record<string, { amount: string; percent: string; from: string }>>({});
   const [plan, setPlan] = useState({ userId: "", name: "", total: "", count: "", start: today(), installment: "" });
   const [change, setChange] = useState<{ plan: InstallmentPlan; action: "settle" | "cancel" | "reschedule"; reason: string; installment: string } | null>(null);
@@ -57,6 +57,8 @@ export default function PayrollProfilesPage() {
     setForm({
       employee_code: person.profile?.employee_code ?? "", currency: person.profile?.currency ?? "", start_date: person.profile?.start_date ?? "",
       end_date: person.profile?.end_date ?? "", is_active: person.profile?.is_active ?? true, notes: person.profile?.notes ?? "",
+      insurance_exempt: Boolean(person.profile?.insurance_exempt), insurable_wage: person.profile?.insurable_wage != null ? String(person.profile.insurable_wage) : "",
+      tax_exempt: Boolean(person.profile?.tax_exempt),
     });
     setValues(Object.fromEntries(fixed.map((c) => {
       const current = person.components.filter((v) => v.componentId === c.id).sort((a, b) => b.effectiveFrom.localeCompare(a.effectiveFrom))[0];
@@ -129,6 +131,7 @@ export default function PayrollProfilesPage() {
       <Modal isOpen={Boolean(editing)} onClose={() => setEditing(null)} title={editing?.fullName ?? ""} size="lg"
         footer={<Button loading={busy === "profile"} onClick={() => editing && act("profile", () => PayrollCycleRepository.saveProfile(editing.userId, {
           employee_code: form.employee_code, currency: form.currency.toUpperCase() || null, start_date: form.start_date || null, end_date: form.end_date || null, is_active: form.is_active, notes: form.notes,
+          insurance_exempt: form.insurance_exempt, insurable_wage: form.insurable_wage === "" ? null : Number(form.insurable_wage), tax_exempt: form.tax_exempt,
         }))}>{t("profiles.saveProfile")}</Button>}>
         {editing ? (
           <>
@@ -142,6 +145,22 @@ export default function PayrollProfilesPage() {
               <input type="checkbox" checked={form.is_active} onChange={(event) => setForm({ ...form, is_active: event.target.checked })} /> {t("profiles.active")}
             </label>
             <Textarea label={t("profiles.notes")} name="profileNotes" value={form.notes} onChange={(event) => setForm({ ...form, notes: event.target.value })} rows={2} />
+            {/* 2026-11-09: this person's insurance and tax (the rules are in Payroll settings) */}
+            <h4>{t("profiles.statutoryTitle")}</h4>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-3)", alignItems: "flex-end" }}>
+              <label style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}>
+                <input type="checkbox" checked={form.insurance_exempt} onChange={(event) => setForm({ ...form, insurance_exempt: event.target.checked })} /> {t("profiles.insuranceExempt")}
+              </label>
+              <label style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}>
+                <input type="checkbox" checked={form.tax_exempt} onChange={(event) => setForm({ ...form, tax_exempt: event.target.checked })} /> {t("profiles.taxExempt")}
+              </label>
+              {!form.insurance_exempt ? (
+                <div style={{ maxWidth: 220 }}>
+                  <Input label={t("profiles.insurableWage")} name="insurableWage" type="number" value={form.insurable_wage} onChange={(event) => setForm({ ...form, insurable_wage: event.target.value })} />
+                </div>
+              ) : null}
+            </div>
+            <HintText small>{t("profiles.statutoryHint")}</HintText>
 
             <h4>{t("profiles.fixedTitle")}</h4>
             {!editing.profile ? <HintText small>{t("errors.profileFirst")}</HintText> : fixed.map((c) => {

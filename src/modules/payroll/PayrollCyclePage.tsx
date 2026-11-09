@@ -397,7 +397,7 @@ export default function PayrollCyclePage() {
                         <span style={{ color: "var(--text-secondary)" }}> · {t(`sources.${l.source}`)}{l.calc_type === "percent" ? ` · ${l.percent}%` : ""}{l.notes ? ` · ${l.notes}` : ""}</span>
                       </span>
                       <strong>{money(l.amount)}</strong>
-                      {editable && can.enterVariables && !["fixed", "installment"].includes(l.source) ? (
+                      {editable && can.enterVariables && !["fixed", "installment", "statutory"].includes(l.source) ? (
                         <>
                           <Button size="xs" variant="ghost" onClick={() => setLine({ id: l.id, componentId: l.component_id ?? "", amount: String(l.raw_amount), notes: l.notes ?? "", version: l.row_version })}>{t("lines.edit")}</Button>
                           <Button size="xs" variant="danger" onClick={() => run(`del-${l.id}`, () => PayrollCycleRepository.deleteLine(l.id, l.row_version))}>{t("lines.delete")}</Button>

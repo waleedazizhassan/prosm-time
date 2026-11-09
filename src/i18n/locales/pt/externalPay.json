@@ -1,10 +1,36 @@
 {
-  "views": { "runs": "Folhas de pagamento", "rates": "Valores", "policy": "Política", "workers": "Trabalhadores externos" },
-  "status": { "draft": "Rascunho", "approved": "Aprovada" },
-  "unit": { "HOURLY": "hora", "DAILY": "dia", "WEEKLY": "semana", "MONTHLY": "mês", "YEARLY": "ano" },
-  "unitQuantity": { "HOURLY": "horas", "DAILY": "dias", "WEEKLY": "semanas", "MONTHLY": "meses", "YEARLY": "anos" },
-  "adjustment": { "deduction": "Desconto", "addition": "Acréscimo" },
-  "skipReason": { "no_rate": "sem valor", "in_other_run": "já está noutra folha deste período" },
+  "views": {
+    "runs": "Folhas de pagamento",
+    "rates": "Valores",
+    "policy": "Política",
+    "workers": "Trabalhadores externos"
+  },
+  "status": {
+    "draft": "Rascunho",
+    "approved": "Aprovada"
+  },
+  "unit": {
+    "HOURLY": "hora",
+    "DAILY": "dia",
+    "WEEKLY": "semana",
+    "MONTHLY": "mês",
+    "YEARLY": "ano"
+  },
+  "unitQuantity": {
+    "HOURLY": "horas",
+    "DAILY": "dias",
+    "WEEKLY": "semanas",
+    "MONTHLY": "meses",
+    "YEARLY": "anos"
+  },
+  "adjustment": {
+    "deduction": "Desconto",
+    "addition": "Acréscimo"
+  },
+  "skipReason": {
+    "no_rate": "sem valor",
+    "in_other_run": "já está noutra folha deste período"
+  },
   "runs": {
     "newTitle": "Nova folha",
     "newHint": "Inclui os trabalhadores externos ativos do seu âmbito que têm valor. As quantidades por dia e por hora são sugeridas pelo quiosque; as semanais, mensais e anuais são introduzidas.",
@@ -45,7 +71,11 @@
     "ruleTitle": "Regra da diária",
     "ruleHint": "Como um valor mensal ou anual se torna diária, para ajustes em dias.",
     "basis": "Diária a partir de",
-    "basisOption": { "fixed": "um número fixo de dias", "calendar": "os dias de calendário do período", "working": "os dias úteis do período" },
+    "basisOption": {
+      "fixed": "um número fixo de dias",
+      "calendar": "os dias de calendário do período",
+      "working": "os dias úteis do período"
+    },
     "divisor": "Dias",
     "saveRule": "Guardar regra",
     "ruleNote": "Mensal: valor / dias. Anual: valor / 12 / dias. A regra usada fica guardada com cada aprovação.",
@@ -173,5 +203,6 @@
     "percentMax": "Uma percentagem não pode exceder 100.",
     "noWorkers": "Esta folha não tem trabalhadores.",
     "cannotDelete": "Só se elimina um rascunho que nunca foi aprovado."
-  }
+  },
+  "addRateFailed": "O trabalhador foi adicionado, mas a tarifa não foi guardada: {{error}}. Defina-a em Pagamento de mão de obra externa."
 }

@@ -24,7 +24,8 @@
     "variable": "questo mese",
     "installment": "rata",
     "attendance_suggestion": "dalle presenze",
-    "import": "importato"
+    "import": "importato",
+    "statutory": "Di legge"
   },
   "cycles": {
     "newTitle": "Nuovo ciclo paghe",
@@ -210,7 +211,12 @@
     "fixedTitle": "Voci fisse",
     "effectiveFrom": "Dal",
     "applyFrom": "Applica da questa data",
-    "historyHint": "Un nuovo valore chiude il precedente il giorno prima; un importo vuoto chiude la voce."
+    "historyHint": "Un nuovo valore chiude il precedente il giorno prima; un importo vuoto chiude la voce.",
+    "statutoryTitle": "Contributi e imposte",
+    "insuranceExempt": "Non assicurato",
+    "taxExempt": "Esente da imposta",
+    "insurableWage": "Retribuzione assicurabile fissa (facoltativa)",
+    "statutoryHint": "Una retribuzione assicurabile fissa sostituisce la paga base, entro i limiti. Le regole sono nelle impostazioni paghe."
   },
   "installments": {
     "title": "Rate e anticipi",
@@ -308,7 +314,12 @@
     "isBasicLabel": "È lo stipendio base",
     "prorateLabel": "A rateo per periodi parziali",
     "activeLabel": "Attiva",
-    "deductionPercentHint": "Una trattenuta percentuale è tra 0 e 100."
+    "deductionPercentHint": "Una trattenuta percentuale è tra 0 e 100.",
+    "taxableLabel": "Imponibile",
+    "insurableLabel": "Fa parte della retribuzione assicurabile",
+    "appliesToAllLabel": "Si applica a tutti i dipendenti",
+    "defaultAmount": "Importo predefinito",
+    "appliesToAllHint": "Aggiunto in ogni nuovo ciclo per chi ha un profilo paghe. Se la persona ha un proprio valore, vale quello."
   },
   "requests": {
     "hint": "Buste paga richieste dal tuo team. Un clic invia la busta paga approvata e salvata in PDF all'email registrata: stessa versione, nulla ricalcolato.",
@@ -372,7 +383,10 @@
     "profileFirst": "Salva prima la scheda paga.",
     "notEditable": "Questo ciclo non si può modificare ora.",
     "ownRequest": "Nessuno gestisce la propria richiesta.",
-    "fileFailed": "Impossibile creare il file. Riprova."
+    "fileFailed": "Impossibile creare il file. Riprova.",
+    "statutoryRate": "L'aliquota deve essere tra 0 e 100.",
+    "statutoryBrackets": "Gli scaglioni devono crescere e l'ultimo non ha limite.",
+    "statutoryWage": "Il massimo non può essere inferiore al minimo."
   },
   "exports": {
     "hint": "I cedolini di un ciclo approvato o bloccato vengono preparati sul server in un unico ZIP, ognuno con il suo numero. Puoi lasciare la pagina; il file resta disponibile 7 giorni.",
@@ -389,5 +403,38 @@
     "scope": "Esporta per",
     "scopeAll": "Tutti nel ciclo (il tuo ambito)",
     "scopeChosen": "I {{count}} scelti"
+  },
+  "statutory": {
+    "title": "Contributi e imposte",
+    "hint": "Calcolati in ogni nuovo ciclo secondo la legge del paese scelto. Ogni valore è modificabile.",
+    "country": "Paese",
+    "reset": "Torna ai valori del paese",
+    "resetDone": "I valori del paese sono stati ripristinati.",
+    "insurance": "Previdenza sociale",
+    "employeeRate": "Quota dipendente %",
+    "employerRate": "Quota datore %",
+    "minWage": "Retribuzione assicurabile minima (mensile)",
+    "maxWage": "Retribuzione assicurabile massima (mensile)",
+    "base": "Retribuzione assicurabile da",
+    "bases": {
+      "basic": "La paga base",
+      "earnings": "Tutte le competenze",
+      "flagged": "Voci segnate come assicurabili"
+    },
+    "incomeTax": "Imposta sul reddito da lavoro",
+    "exemption": "Esenzione personale (annuale)",
+    "insuranceDeductible": "Dedurre i contributi del dipendente prima dell'imposta",
+    "bracketsHint": "Scaglioni annuali sul reddito imponibile dopo l'esenzione. L'ultimo scaglione non ha limite.",
+    "upTo": "Fino a (annuale)",
+    "above": "Oltre",
+    "rate": "Aliquota %",
+    "remove": "Rimuovi",
+    "addBracket": "Aggiungi scaglione",
+    "tiersHint": "Si applica anche la regola dei redditi alti ({{count}} livelli): oltre una soglia cadono gli scaglioni inferiori.",
+    "fund": "Fondo dei martiri",
+    "fundRate": "Aliquota sul lordo %",
+    "appliesToNew": "Le modifiche valgono solo per i nuovi cicli; i precedenti mantengono le loro regole.",
+    "save": "Salva contributi e imposte",
+    "saved": "Salvato."
   }
 }

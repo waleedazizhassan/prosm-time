@@ -1,10 +1,36 @@
 {
-  "views": { "runs": "Lohnläufe", "rates": "Sätze", "policy": "Regeln", "workers": "Externe Arbeitskräfte" },
-  "status": { "draft": "Entwurf", "approved": "Genehmigt" },
-  "unit": { "HOURLY": "Stunde", "DAILY": "Tag", "WEEKLY": "Woche", "MONTHLY": "Monat", "YEARLY": "Jahr" },
-  "unitQuantity": { "HOURLY": "Stunden", "DAILY": "Tage", "WEEKLY": "Wochen", "MONTHLY": "Monate", "YEARLY": "Jahre" },
-  "adjustment": { "deduction": "Abzug", "addition": "Zuschlag" },
-  "skipReason": { "no_rate": "kein Satz", "in_other_run": "bereits in einem anderen Lauf für diesen Zeitraum" },
+  "views": {
+    "runs": "Lohnläufe",
+    "rates": "Sätze",
+    "policy": "Regeln",
+    "workers": "Externe Arbeitskräfte"
+  },
+  "status": {
+    "draft": "Entwurf",
+    "approved": "Genehmigt"
+  },
+  "unit": {
+    "HOURLY": "Stunde",
+    "DAILY": "Tag",
+    "WEEKLY": "Woche",
+    "MONTHLY": "Monat",
+    "YEARLY": "Jahr"
+  },
+  "unitQuantity": {
+    "HOURLY": "Stunden",
+    "DAILY": "Tage",
+    "WEEKLY": "Wochen",
+    "MONTHLY": "Monate",
+    "YEARLY": "Jahre"
+  },
+  "adjustment": {
+    "deduction": "Abzug",
+    "addition": "Zuschlag"
+  },
+  "skipReason": {
+    "no_rate": "kein Satz",
+    "in_other_run": "bereits in einem anderen Lauf für diesen Zeitraum"
+  },
   "runs": {
     "newTitle": "Neuer Lohnlauf",
     "newHint": "Umfasst die aktiven externen Arbeitskräfte in Ihrem Bereich mit einem Satz. Tages- und Stundenmengen werden aus dem Kiosk vorgeschlagen; Wochen-, Monats- und Jahresmengen werden eingegeben.",
@@ -45,7 +71,11 @@
     "ruleTitle": "Tagessatz-Regel",
     "ruleHint": "Wie ein Monats- oder Jahressatz zum Tagessatz wird, für Korrekturen in Tagen.",
     "basis": "Tagessatz aus",
-    "basisOption": { "fixed": "einer festen Anzahl Tage", "calendar": "den Kalendertagen des Zeitraums", "working": "den Arbeitstagen des Zeitraums" },
+    "basisOption": {
+      "fixed": "einer festen Anzahl Tage",
+      "calendar": "den Kalendertagen des Zeitraums",
+      "working": "den Arbeitstagen des Zeitraums"
+    },
     "divisor": "Tage",
     "saveRule": "Regel speichern",
     "ruleNote": "Monatlich: Satz / Tage. Jährlich: Satz / 12 / Tage. Die verwendete Regel wird mit jeder Genehmigung gespeichert.",
@@ -173,5 +203,6 @@
     "percentMax": "Ein Prozentsatz darf 100 nicht übersteigen.",
     "noWorkers": "Dieser Lohnlauf hat keine Arbeitskräfte.",
     "cannotDelete": "Nur ein nie genehmigter Entwurf kann gelöscht werden."
-  }
+  },
+  "addRateFailed": "Der Arbeiter wurde hinzugefügt, aber sein Satz wurde nicht gespeichert: {{error}}. Setzen Sie ihn unter Lohn externer Arbeitskräfte."
 }
