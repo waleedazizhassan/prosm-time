@@ -123,7 +123,7 @@ const TABLES: Record<string, string> = {
   worker_pay_rates: byOrg,
   owner_delegations: byOrg,
 };
-const GLOBAL_TABLES = ["permissions", "roles", "role_default_permissions", "security_rate_limits", "platform_settings", "plans", "activation_codes", "platform_plan_map"];
+const GLOBAL_TABLES = ["permissions", "roles", "role_default_permissions", "security_rate_limits", "platform_settings", "plans", "activation_codes", "platform_plan_map", "payroll_country_packs"];
 
 // Tables the seed below must actually fill, so their check is not vacuous.
 const MUST_BE_SEEDED = [

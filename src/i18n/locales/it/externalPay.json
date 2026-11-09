@@ -1,10 +1,36 @@
 {
-  "views": { "runs": "Elaborazioni paga", "rates": "Tariffe", "policy": "Regole", "workers": "Lavoratori esterni" },
-  "status": { "draft": "Bozza", "approved": "Approvata" },
-  "unit": { "HOURLY": "ora", "DAILY": "giorno", "WEEKLY": "settimana", "MONTHLY": "mese", "YEARLY": "anno" },
-  "unitQuantity": { "HOURLY": "ore", "DAILY": "giorni", "WEEKLY": "settimane", "MONTHLY": "mesi", "YEARLY": "anni" },
-  "adjustment": { "deduction": "Trattenuta", "addition": "Aggiunta" },
-  "skipReason": { "no_rate": "nessuna tariffa", "in_other_run": "già in un'altra elaborazione per questo periodo" },
+  "views": {
+    "runs": "Elaborazioni paga",
+    "rates": "Tariffe",
+    "policy": "Regole",
+    "workers": "Lavoratori esterni"
+  },
+  "status": {
+    "draft": "Bozza",
+    "approved": "Approvata"
+  },
+  "unit": {
+    "HOURLY": "ora",
+    "DAILY": "giorno",
+    "WEEKLY": "settimana",
+    "MONTHLY": "mese",
+    "YEARLY": "anno"
+  },
+  "unitQuantity": {
+    "HOURLY": "ore",
+    "DAILY": "giorni",
+    "WEEKLY": "settimane",
+    "MONTHLY": "mesi",
+    "YEARLY": "anni"
+  },
+  "adjustment": {
+    "deduction": "Trattenuta",
+    "addition": "Aggiunta"
+  },
+  "skipReason": {
+    "no_rate": "nessuna tariffa",
+    "in_other_run": "già in un'altra elaborazione per questo periodo"
+  },
   "runs": {
     "newTitle": "Nuova elaborazione",
     "newHint": "Include i lavoratori esterni attivi nel tuo ambito con una tariffa. Le quantità giornaliere e orarie sono proposte dal chiosco; quelle settimanali, mensili e annuali vanno inserite.",
@@ -45,7 +71,11 @@
     "ruleTitle": "Regola della paga giornaliera",
     "ruleHint": "Come una tariffa mensile o annuale diventa paga giornaliera, per le rettifiche in giorni.",
     "basis": "Paga giornaliera da",
-    "basisOption": { "fixed": "un numero fisso di giorni", "calendar": "i giorni di calendario del periodo", "working": "i giorni lavorativi del periodo" },
+    "basisOption": {
+      "fixed": "un numero fisso di giorni",
+      "calendar": "i giorni di calendario del periodo",
+      "working": "i giorni lavorativi del periodo"
+    },
     "divisor": "Giorni",
     "saveRule": "Salva regola",
     "ruleNote": "Mensile: tariffa / giorni. Annuale: tariffa / 12 / giorni. La regola usata viene salvata con ogni approvazione.",
@@ -173,5 +203,6 @@
     "percentMax": "Una percentuale non può superare 100.",
     "noWorkers": "Questa elaborazione non ha lavoratori.",
     "cannotDelete": "Si può eliminare solo una bozza mai approvata."
-  }
+  },
+  "addRateFailed": "Il lavoratore è stato aggiunto, ma la tariffa non è stata salvata: {{error}}. Impostala in Paga manodopera esterna."
 }

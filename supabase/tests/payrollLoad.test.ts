@@ -31,6 +31,8 @@ const owner = (sql: string, params: unknown[] = []) => t.as(org.owner.authId, sq
 beforeAll(async () => {
   t = await buildDatabase();
   org = await createOrg(t, "Load Co");
+  // these tests check the payroll arithmetic itself; the statutory deductions (2026-11-09) have their own tests
+  await t.su("update payroll_settings set statutory = '{}'::jsonb");
   await t.su("update license_activation_state set max_users = 0 where organization_id = $1", [org.id]);
   await timed("setup: 1,000 employees", () => t.su(
     `with a as (insert into auth.users (id, email) select gen_random_uuid(), 'load' || g || '@test.local' from generate_series(1, ${PEOPLE}) g returning id, email)

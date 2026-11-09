@@ -24,7 +24,8 @@
     "variable": "ce mois",
     "installment": "échéance",
     "attendance_suggestion": "depuis les présences",
-    "import": "importé"
+    "import": "importé",
+    "statutory": "Légal"
   },
   "cycles": {
     "newTitle": "Nouveau cycle de paie",
@@ -210,7 +211,12 @@
     "fixedTitle": "Éléments fixes",
     "effectiveFrom": "À partir du",
     "applyFrom": "Appliquer à partir de cette date",
-    "historyHint": "Une nouvelle valeur termine la précédente la veille ; un montant vide termine l'élément."
+    "historyHint": "Une nouvelle valeur termine la précédente la veille ; un montant vide termine l'élément.",
+    "statutoryTitle": "Cotisations et impôts",
+    "insuranceExempt": "Non assuré",
+    "taxExempt": "Exonéré d'impôt",
+    "insurableWage": "Salaire assurable fixe (facultatif)",
+    "statutoryHint": "Un salaire assurable fixe remplace le salaire de base, dans les limites. Les règles sont dans les paramètres de paie."
   },
   "installments": {
     "title": "Échéances et avances",
@@ -308,7 +314,12 @@
     "isBasicLabel": "C'est le salaire de base",
     "prorateLabel": "Au prorata d'une période partielle",
     "activeLabel": "Actif",
-    "deductionPercentHint": "Une retenue en pourcentage est comprise entre 0 et 100."
+    "deductionPercentHint": "Une retenue en pourcentage est comprise entre 0 et 100.",
+    "taxableLabel": "Imposable",
+    "insurableLabel": "Fait partie du salaire assurable",
+    "appliesToAllLabel": "S'applique à tous les employés",
+    "defaultAmount": "Montant par défaut",
+    "appliesToAllHint": "Ajouté dans chaque nouveau cycle pour toute personne ayant un profil de paie. Sa propre valeur, si elle existe, prime."
   },
   "requests": {
     "hint": "Bulletins demandés par votre équipe. Un clic envoie le bulletin approuvé et enregistré en PDF à l'e-mail enregistré - même version, rien n'est recalculé.",
@@ -372,7 +383,10 @@
     "profileFirst": "Enregistrez d'abord le dossier de paie.",
     "notEditable": "Ce cycle ne peut pas être modifié maintenant.",
     "ownRequest": "Personne ne traite sa propre demande.",
-    "fileFailed": "Le fichier n'a pas pu être créé. Réessayez."
+    "fileFailed": "Le fichier n'a pas pu être créé. Réessayez.",
+    "statutoryRate": "Un taux doit être entre 0 et 100.",
+    "statutoryBrackets": "Les tranches doivent croître et la dernière n'a pas de plafond.",
+    "statutoryWage": "Le maximum ne peut pas être inférieur au minimum."
   },
   "exports": {
     "hint": "Les bulletins d'un cycle approuvé ou verrouillé sont préparés sur le serveur dans un ZIP, chacun avec son numéro. Vous pouvez quitter la page ; le fichier reste disponible 7 jours.",
@@ -389,5 +403,38 @@
     "scope": "Exporter pour",
     "scopeAll": "Tout le cycle (votre périmètre)",
     "scopeChosen": "Les {{count}} sélectionnés"
+  },
+  "statutory": {
+    "title": "Cotisations et impôts",
+    "hint": "Calculés dans chaque nouveau cycle selon la loi du pays choisi. Tous les chiffres sont modifiables.",
+    "country": "Pays",
+    "reset": "Revenir aux valeurs du pays",
+    "resetDone": "Les valeurs du pays ont été rétablies.",
+    "insurance": "Sécurité sociale",
+    "employeeRate": "Part salariale %",
+    "employerRate": "Part patronale %",
+    "minWage": "Salaire assurable minimum (mensuel)",
+    "maxWage": "Salaire assurable maximum (mensuel)",
+    "base": "Salaire assurable calculé sur",
+    "bases": {
+      "basic": "Le salaire de base",
+      "earnings": "Tous les gains",
+      "flagged": "Éléments marqués assurables"
+    },
+    "incomeTax": "Impôt sur le salaire",
+    "exemption": "Abattement personnel (annuel)",
+    "insuranceDeductible": "Déduire la part salariale avant l'impôt",
+    "bracketsHint": "Tranches annuelles sur le revenu imposable après abattement. La dernière tranche n'a pas de plafond.",
+    "upTo": "Jusqu'à (annuel)",
+    "above": "Au-delà",
+    "rate": "Taux %",
+    "remove": "Retirer",
+    "addBracket": "Ajouter une tranche",
+    "tiersHint": "La règle des hauts revenus s'applique aussi ({{count}} niveaux) : au-delà d'un seuil, les tranches inférieures disparaissent.",
+    "fund": "Fonds des martyrs",
+    "fundRate": "Taux du brut %",
+    "appliesToNew": "Les changements s'appliquent aux nouveaux cycles ; les précédents gardent leurs règles.",
+    "save": "Enregistrer cotisations et impôts",
+    "saved": "Enregistré."
   }
 }

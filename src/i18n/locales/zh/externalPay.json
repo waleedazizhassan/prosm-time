@@ -1,10 +1,36 @@
 {
-  "views": { "runs": "发薪批次", "rates": "费率", "policy": "政策", "workers": "外部工人" },
-  "status": { "draft": "草稿", "approved": "已批准" },
-  "unit": { "HOURLY": "小时", "DAILY": "天", "WEEKLY": "周", "MONTHLY": "月", "YEARLY": "年" },
-  "unitQuantity": { "HOURLY": "小时", "DAILY": "天", "WEEKLY": "周", "MONTHLY": "个月", "YEARLY": "年" },
-  "adjustment": { "deduction": "扣款", "addition": "加项" },
-  "skipReason": { "no_rate": "无费率", "in_other_run": "已在同期另一批次中" },
+  "views": {
+    "runs": "发薪批次",
+    "rates": "费率",
+    "policy": "政策",
+    "workers": "外部工人"
+  },
+  "status": {
+    "draft": "草稿",
+    "approved": "已批准"
+  },
+  "unit": {
+    "HOURLY": "小时",
+    "DAILY": "天",
+    "WEEKLY": "周",
+    "MONTHLY": "月",
+    "YEARLY": "年"
+  },
+  "unitQuantity": {
+    "HOURLY": "小时",
+    "DAILY": "天",
+    "WEEKLY": "周",
+    "MONTHLY": "个月",
+    "YEARLY": "年"
+  },
+  "adjustment": {
+    "deduction": "扣款",
+    "addition": "加项"
+  },
+  "skipReason": {
+    "no_rate": "无费率",
+    "in_other_run": "已在同期另一批次中"
+  },
   "runs": {
     "newTitle": "新发薪批次",
     "newHint": "包含您范围内有费率的在职外部工人。按天和按小时的数量根据自助终端建议；按周、按月和按年的数量需手动输入。",
@@ -45,7 +71,11 @@
     "ruleTitle": "日薪规则",
     "ruleHint": "按天录入调整时，月费率或年费率如何换算为日薪。",
     "basis": "日薪依据",
-    "basisOption": { "fixed": "固定天数", "calendar": "期间的日历天数", "working": "期间的工作日" },
+    "basisOption": {
+      "fixed": "固定天数",
+      "calendar": "期间的日历天数",
+      "working": "期间的工作日"
+    },
     "divisor": "天数",
     "saveRule": "保存规则",
     "ruleNote": "月费率：费率 / 天数。年费率：费率 / 12 / 天数。每次批准都会保存所用规则。",
@@ -173,5 +203,6 @@
     "percentMax": "百分比不能超过 100。",
     "noWorkers": "此批次中没有工人。",
     "cannotDelete": "只能删除从未批准过的草稿。"
-  }
+  },
+  "addRateFailed": "已添加工人，但未能保存其费率：{{error}}。请在外部劳务工资中设置。"
 }

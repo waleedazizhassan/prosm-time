@@ -24,7 +24,8 @@
     "variable": "this month",
     "installment": "installment",
     "attendance_suggestion": "from attendance",
-    "import": "imported"
+    "import": "imported",
+    "statutory": "Statutory"
   },
   "cycles": {
     "newTitle": "New payroll cycle",
@@ -210,7 +211,12 @@
     "fixedTitle": "Fixed components",
     "effectiveFrom": "From",
     "applyFrom": "Apply from this date",
-    "historyHint": "A new value ends the previous one the day before; an empty amount ends the component."
+    "historyHint": "A new value ends the previous one the day before; an empty amount ends the component.",
+    "statutoryTitle": "Insurance and taxes",
+    "insuranceExempt": "Not insured",
+    "taxExempt": "Tax exempt",
+    "insurableWage": "Fixed insurable wage (optional)",
+    "statutoryHint": "A fixed insurable wage is used instead of the basic salary, within the limits. The rules themselves are in Payroll settings."
   },
   "installments": {
     "title": "Installments and advances",
@@ -308,7 +314,12 @@
     "isBasicLabel": "This is the basic salary",
     "prorateLabel": "Prorated for part of a period",
     "activeLabel": "Active",
-    "deductionPercentHint": "A percentage deduction is between 0 and 100."
+    "deductionPercentHint": "A percentage deduction is between 0 and 100.",
+    "taxableLabel": "Taxable",
+    "insurableLabel": "Part of the insurable wage",
+    "appliesToAllLabel": "Applies to every employee",
+    "defaultAmount": "Default amount",
+    "appliesToAllHint": "Added in every new cycle for everyone with a payroll profile. A person's own value, when set, is used instead."
   },
   "requests": {
     "hint": "Payslips your team asked for. One click sends the approved, stored payslip as a PDF to the person's registered email - the same version, nothing recalculated.",
@@ -372,7 +383,10 @@
     "profileFirst": "Save the payroll profile first.",
     "notEditable": "This cycle cannot be changed now.",
     "ownRequest": "Nobody handles their own request.",
-    "fileFailed": "The file could not be made. Try again."
+    "fileFailed": "The file could not be made. Try again.",
+    "statutoryRate": "A rate must be between 0 and 100.",
+    "statutoryBrackets": "Brackets must rise in order, and the last has no upper limit.",
+    "statutoryWage": "The maximum insurable wage must not be below the minimum."
   },
   "exports": {
     "hint": "Payslips of an approved or locked cycle are prepared on the server as one ZIP, each with its own serial number. You can leave the page; the file stays available for 7 days.",
@@ -389,5 +403,38 @@
     "scope": "Export for",
     "scopeAll": "Everyone in this cycle (your scope)",
     "scopeChosen": "The {{count}} chosen"
+  },
+  "statutory": {
+    "title": "Insurance and taxes",
+    "hint": "Calculated automatically in every new cycle under the chosen country's law. Every figure can be changed.",
+    "country": "Country",
+    "reset": "Back to the country's values",
+    "resetDone": "The country's values were restored.",
+    "insurance": "Social insurance",
+    "employeeRate": "Employee share %",
+    "employerRate": "Employer share %",
+    "minWage": "Minimum insurable wage (monthly)",
+    "maxWage": "Maximum insurable wage (monthly)",
+    "base": "Insurable wage taken from",
+    "bases": {
+      "basic": "The basic salary",
+      "earnings": "All earnings",
+      "flagged": "Components marked insurable"
+    },
+    "incomeTax": "Salary income tax",
+    "exemption": "Personal exemption (yearly)",
+    "insuranceDeductible": "Deduct the employee's insurance before tax",
+    "bracketsHint": "Yearly brackets on taxable income after the exemption. The last bracket has no upper limit.",
+    "upTo": "Up to (yearly)",
+    "above": "Above that",
+    "rate": "Rate %",
+    "remove": "Remove",
+    "addBracket": "Add a bracket",
+    "tiersHint": "The high-income rule also applies ({{count}} levels): above a threshold the lower brackets fall away.",
+    "fund": "Martyrs' fund",
+    "fundRate": "Rate of gross pay %",
+    "appliesToNew": "Changes apply to new cycles only; earlier cycles keep their rules.",
+    "save": "Save insurance and taxes",
+    "saved": "Saved."
   }
 }

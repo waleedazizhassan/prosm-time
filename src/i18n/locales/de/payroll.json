@@ -24,7 +24,8 @@
     "variable": "diesen Monat",
     "installment": "Rate",
     "attendance_suggestion": "aus Anwesenheit",
-    "import": "importiert"
+    "import": "importiert",
+    "statutory": "Gesetzlich"
   },
   "cycles": {
     "newTitle": "Neuer Abrechnungszeitraum",
@@ -210,7 +211,12 @@
     "fixedTitle": "Feste Bestandteile",
     "effectiveFrom": "Ab",
     "applyFrom": "Ab diesem Datum anwenden",
-    "historyHint": "Ein neuer Wert beendet den vorherigen am Vortag; ein leerer Betrag beendet den Bestandteil."
+    "historyHint": "Ein neuer Wert beendet den vorherigen am Vortag; ein leerer Betrag beendet den Bestandteil.",
+    "statutoryTitle": "Versicherung und Steuern",
+    "insuranceExempt": "Nicht versichert",
+    "taxExempt": "Steuerbefreit",
+    "insurableWage": "Fester Versicherungslohn (optional)",
+    "statutoryHint": "Ein fester Versicherungslohn ersetzt das Grundgehalt, innerhalb der Grenzen. Die Regeln stehen in den Gehaltseinstellungen."
   },
   "installments": {
     "title": "Raten und Vorschüsse",
@@ -308,7 +314,12 @@
     "isBasicLabel": "Dies ist das Grundgehalt",
     "prorateLabel": "Anteilig bei Teilzeiträumen",
     "activeLabel": "Aktiv",
-    "deductionPercentHint": "Ein prozentualer Abzug liegt zwischen 0 und 100."
+    "deductionPercentHint": "Ein prozentualer Abzug liegt zwischen 0 und 100.",
+    "taxableLabel": "Steuerpflichtig",
+    "insurableLabel": "Gehört zum Versicherungslohn",
+    "appliesToAllLabel": "Gilt für alle Mitarbeitenden",
+    "defaultAmount": "Standardbetrag",
+    "appliesToAllHint": "Wird in jedem neuen Zyklus für alle mit Gehaltsprofil hinzugefügt. Hat eine Person einen eigenen Wert, gilt dieser."
   },
   "requests": {
     "hint": "Von Ihrem Team angeforderte Abrechnungen. Ein Klick sendet die genehmigte, gespeicherte Abrechnung als PDF an die registrierte E-Mail - dieselbe Version, nichts wird neu berechnet.",
@@ -372,7 +383,10 @@
     "profileFirst": "Speichern Sie zuerst das Lohnprofil.",
     "notEditable": "Dieser Zeitraum kann jetzt nicht geändert werden.",
     "ownRequest": "Niemand bearbeitet die eigene Anfrage.",
-    "fileFailed": "Die Datei konnte nicht erstellt werden. Bitte erneut versuchen."
+    "fileFailed": "Die Datei konnte nicht erstellt werden. Bitte erneut versuchen.",
+    "statutoryRate": "Ein Satz muss zwischen 0 und 100 liegen.",
+    "statutoryBrackets": "Die Stufen müssen aufsteigen; die letzte hat keine Obergrenze.",
+    "statutoryWage": "Der Höchstlohn darf nicht unter dem Mindestlohn liegen."
   },
   "exports": {
     "hint": "Lohnzettel eines genehmigten oder gesperrten Laufs werden auf dem Server als ein ZIP erstellt, jeder mit eigener Nummer. Sie können die Seite verlassen; die Datei bleibt 7 Tage verfügbar.",
@@ -389,5 +403,38 @@
     "scope": "Exportieren für",
     "scopeAll": "Alle in diesem Lauf (Ihr Bereich)",
     "scopeChosen": "Die {{count}} Ausgewählten"
+  },
+  "statutory": {
+    "title": "Sozialversicherung und Steuern",
+    "hint": "Werden in jedem neuen Zyklus nach dem Recht des gewählten Landes berechnet. Alle Werte sind änderbar.",
+    "country": "Land",
+    "reset": "Werte des Landes wiederherstellen",
+    "resetDone": "Die Werte des Landes wurden wiederhergestellt.",
+    "insurance": "Sozialversicherung",
+    "employeeRate": "Arbeitnehmeranteil %",
+    "employerRate": "Arbeitgeberanteil %",
+    "minWage": "Mindestversicherungslohn (monatlich)",
+    "maxWage": "Höchstversicherungslohn (monatlich)",
+    "base": "Versicherungslohn aus",
+    "bases": {
+      "basic": "dem Grundgehalt",
+      "earnings": "allen Bezügen",
+      "flagged": "den als versichert markierten Bestandteilen"
+    },
+    "incomeTax": "Lohnsteuer",
+    "exemption": "Persönlicher Freibetrag (jährlich)",
+    "insuranceDeductible": "Arbeitnehmeranteil vor der Steuer abziehen",
+    "bracketsHint": "Jährliche Stufen auf das steuerpflichtige Einkommen nach dem Freibetrag. Die letzte Stufe hat keine Obergrenze.",
+    "upTo": "Bis (jährlich)",
+    "above": "Darüber",
+    "rate": "Satz %",
+    "remove": "Entfernen",
+    "addBracket": "Stufe hinzufügen",
+    "tiersHint": "Zusätzlich gilt die Regel für hohe Einkommen ({{count}} Stufen): oberhalb einer Grenze entfallen die unteren Stufen.",
+    "fund": "Märtyrerfonds",
+    "fundRate": "Satz vom Bruttolohn %",
+    "appliesToNew": "Änderungen gelten nur für neue Zyklen; frühere behalten ihre Regeln.",
+    "save": "Versicherung und Steuern speichern",
+    "saved": "Gespeichert."
   }
 }

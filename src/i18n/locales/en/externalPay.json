@@ -1,10 +1,36 @@
 {
-  "views": { "runs": "Pay runs", "rates": "Rates", "policy": "Policy", "workers": "External workers" },
-  "status": { "draft": "Draft", "approved": "Approved" },
-  "unit": { "HOURLY": "hour", "DAILY": "day", "WEEKLY": "week", "MONTHLY": "month", "YEARLY": "year" },
-  "unitQuantity": { "HOURLY": "hours", "DAILY": "days", "WEEKLY": "weeks", "MONTHLY": "months", "YEARLY": "years" },
-  "adjustment": { "deduction": "Deduction", "addition": "Addition" },
-  "skipReason": { "no_rate": "no rate", "in_other_run": "already in another run for this period" },
+  "views": {
+    "runs": "Pay runs",
+    "rates": "Rates",
+    "policy": "Policy",
+    "workers": "External workers"
+  },
+  "status": {
+    "draft": "Draft",
+    "approved": "Approved"
+  },
+  "unit": {
+    "HOURLY": "hour",
+    "DAILY": "day",
+    "WEEKLY": "week",
+    "MONTHLY": "month",
+    "YEARLY": "year"
+  },
+  "unitQuantity": {
+    "HOURLY": "hours",
+    "DAILY": "days",
+    "WEEKLY": "weeks",
+    "MONTHLY": "months",
+    "YEARLY": "years"
+  },
+  "adjustment": {
+    "deduction": "Deduction",
+    "addition": "Addition"
+  },
+  "skipReason": {
+    "no_rate": "no rate",
+    "in_other_run": "already in another run for this period"
+  },
   "runs": {
     "newTitle": "New pay run",
     "newHint": "Takes the active external workers in scope who have a rate. Daily and hourly quantities are suggested from the kiosk; weekly, monthly and yearly quantities are entered.",
@@ -45,7 +71,11 @@
     "ruleTitle": "Day rate rule",
     "ruleHint": "How a monthly or yearly rate becomes a day rate, for adjustments entered in days.",
     "basis": "Day rate from",
-    "basisOption": { "fixed": "a fixed number of days", "calendar": "the calendar days of the period", "working": "the working days of the period" },
+    "basisOption": {
+      "fixed": "a fixed number of days",
+      "calendar": "the calendar days of the period",
+      "working": "the working days of the period"
+    },
     "divisor": "Days",
     "saveRule": "Save rule",
     "ruleNote": "Monthly: rate / days. Yearly: rate / 12 / days. The rule used is stored with each approval.",
@@ -173,5 +203,6 @@
     "percentMax": "A percentage cannot exceed 100.",
     "noWorkers": "This pay run has no workers.",
     "cannotDelete": "Only a draft that was never approved can be deleted."
-  }
+  },
+  "addRateFailed": "The worker was added, but the rate was not saved: {{error}}. Set it under External labour pay."
 }

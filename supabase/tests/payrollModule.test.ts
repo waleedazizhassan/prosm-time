@@ -40,6 +40,8 @@ const report = async (member: TestMember, type: string, format = "preview") =>
 beforeAll(async () => {
   t = await buildDatabase();
   org = await createOrg(t, "Pay Co");
+  // these tests check the payroll arithmetic itself; the statutory deductions (2026-11-09) have their own tests
+  await t.su("update payroll_settings set statutory = '{}'::jsonb");
   other = await createOrg(t, "Other Co");
   siteA = await createSite(t, org, "A");
   siteB = await createSite(t, org, "B");

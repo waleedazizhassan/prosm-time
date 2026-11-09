@@ -1,10 +1,36 @@
 {
-  "views": { "runs": "Liquidaciones", "rates": "Tarifas", "policy": "Política", "workers": "Trabajadores externos" },
-  "status": { "draft": "Borrador", "approved": "Aprobada" },
-  "unit": { "HOURLY": "hora", "DAILY": "día", "WEEKLY": "semana", "MONTHLY": "mes", "YEARLY": "año" },
-  "unitQuantity": { "HOURLY": "horas", "DAILY": "días", "WEEKLY": "semanas", "MONTHLY": "meses", "YEARLY": "años" },
-  "adjustment": { "deduction": "Deducción", "addition": "Adición" },
-  "skipReason": { "no_rate": "sin tarifa", "in_other_run": "ya está en otra liquidación de este periodo" },
+  "views": {
+    "runs": "Liquidaciones",
+    "rates": "Tarifas",
+    "policy": "Política",
+    "workers": "Trabajadores externos"
+  },
+  "status": {
+    "draft": "Borrador",
+    "approved": "Aprobada"
+  },
+  "unit": {
+    "HOURLY": "hora",
+    "DAILY": "día",
+    "WEEKLY": "semana",
+    "MONTHLY": "mes",
+    "YEARLY": "año"
+  },
+  "unitQuantity": {
+    "HOURLY": "horas",
+    "DAILY": "días",
+    "WEEKLY": "semanas",
+    "MONTHLY": "meses",
+    "YEARLY": "años"
+  },
+  "adjustment": {
+    "deduction": "Deducción",
+    "addition": "Adición"
+  },
+  "skipReason": {
+    "no_rate": "sin tarifa",
+    "in_other_run": "ya está en otra liquidación de este periodo"
+  },
   "runs": {
     "newTitle": "Nueva liquidación",
     "newHint": "Incluye a los trabajadores externos activos de su ámbito que tienen tarifa. Las cantidades por día y por hora se proponen desde el quiosco; las semanales, mensuales y anuales se introducen.",
@@ -45,7 +71,11 @@
     "ruleTitle": "Regla del jornal",
     "ruleHint": "Cómo una tarifa mensual o anual se convierte en jornal, para ajustes en días.",
     "basis": "Jornal según",
-    "basisOption": { "fixed": "un número fijo de días", "calendar": "los días naturales del periodo", "working": "los días laborables del periodo" },
+    "basisOption": {
+      "fixed": "un número fijo de días",
+      "calendar": "los días naturales del periodo",
+      "working": "los días laborables del periodo"
+    },
     "divisor": "Días",
     "saveRule": "Guardar regla",
     "ruleNote": "Mensual: tarifa / días. Anual: tarifa / 12 / días. La regla usada se guarda con cada aprobación.",
@@ -173,5 +203,6 @@
     "percentMax": "Un porcentaje no puede superar 100.",
     "noWorkers": "Esta liquidación no tiene trabajadores.",
     "cannotDelete": "Solo se elimina un borrador que nunca se aprobó."
-  }
+  },
+  "addRateFailed": "Se añadió el trabajador, pero no se guardó la tarifa: {{error}}. Fíjala en Pago de mano de obra externa."
 }

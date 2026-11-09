@@ -25,6 +25,9 @@ export function payrollError(message: string | null | undefined, t: TFunction): 
   if (known && known !== message) return known;
   const codes: [RegExp, string][] = [
     [/PAYROLL AUTHORITY REQUIRED/, "noAuthority"],
+    [/A RATE MUST BE BETWEEN/, "statutoryRate"],
+    [/BRACKETS MUST RISE|LAST BRACKET HAS NO|AT LEAST ONE BRACKET/, "statutoryBrackets"],
+    [/MAXIMUM INSURABLE WAGE/, "statutoryWage"],
     [/FEATURE NOT IN PLAN: payroll/, "notInPlan"],
     [/CHANGED BY SOMEONE ELSE/, "changedBySomeoneElse"],
     [/ALREADY COVERS THIS PERIOD/, "periodTaken"],
