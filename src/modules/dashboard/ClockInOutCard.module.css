@@ -201,3 +201,38 @@
     z-index: 850;
   }
 }
+
+/* Owner 2026-11-09 (round 4): the card over the map is see-through; SOS is a round floating button
+   above the hours and reminders buttons, the same size. */
+.mapInfo {
+  background: color-mix(in srgb, var(--surface-card) 55%, transparent);
+  border-color: color-mix(in srgb, var(--border-light) 60%, transparent);
+  box-shadow: none;
+}
+
+.sosFloat {
+  position: fixed;
+  inset-inline-end: var(--space-4);
+  bottom: calc(var(--space-4) + 150px + 108px + var(--safe-bottom, 0px));
+  z-index: 800;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  background: #dc2626;
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.45);
+}
+
+.sosFloat:disabled {
+  opacity: 0.7;
+}
+
+@media (max-width: 900px) {
+  .sosFloat {
+    bottom: calc(64px + 136px + 108px + var(--safe-bottom, 0px));
+  }
+}
