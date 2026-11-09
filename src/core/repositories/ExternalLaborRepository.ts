@@ -119,6 +119,7 @@ export interface RunDetail {
     rowVersion: number;
     isDraft: boolean;
   };
+  organization?: { name: string; logoUrl: string | null };
   rules: { dayRateBasis: string; fixedDivisor: number };
   workers: RunWorker[];
   totals: { currency: string; gross: number; additions: number; deductions: number; net: number; workers: number }[];

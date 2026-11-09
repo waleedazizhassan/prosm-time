@@ -4,6 +4,7 @@ import type { TFunction } from "i18next";
 import { renderHtmlToPdf, escapeHtml } from "../../core/utils/htmlToPdf";
 import { toXlsx, type Cell } from "../../core/utils/spreadsheet";
 import { amountInWords, currencyLabel } from "../../core/utils/amountInWords";
+import { issuedViaHtml, prosmLogoHtml } from "../../core/utils/reportBrand";
 import type { CycleEmployee, CycleLine, PayrollReport } from "../../core/repositories/PayrollCycleRepository";
 
 // 2026-11-08/09: the three payroll reports as files, laid out like the owner's reference images
@@ -38,17 +39,15 @@ function issuedNow() {
 const bi = (t: T, key: string, isRtl: boolean, size = 10) =>
   `${escapeHtml(t(key))}${isRtl ? `<div style="font-size:${size}px;font-weight:400;opacity:.85;">${escapeHtml(en(t, key))}</div>` : ""}`;
 
+// owner 2026-11-09: PROSM Time's full logo, small - the document is the customer's
 function brand(): string {
-  return `<div dir="ltr" style="text-align:center;min-width:170px;">
-      <div style="font:italic 800 30px 'Segoe UI',Arial,sans-serif;color:${NAVY};letter-spacing:-.5px;line-height:1;">PROSM Time</div>
-      <div style="font:600 9px 'Segoe UI',Arial,sans-serif;color:${INK};letter-spacing:4px;margin-top:6px;">WORK, TRACKED.</div>
-    </div>`;
+  return `<div style="min-width:90px;text-align:center;">${prosmLogoHtml(64)}</div>`;
 }
 
 function organization(report: PayrollReport): string {
   return `<div style="flex:1;text-align:center;">
-      ${report.organization.logoUrl ? `<img src="${escapeHtml(report.organization.logoUrl)}" style="height:44px;max-width:180px;object-fit:contain;display:block;margin:0 auto 4px;" />` : ""}
-      <div style="font-size:16px;font-weight:700;color:${INK};">${escapeHtml(report.organization.name)}</div>
+      ${report.organization.logoUrl ? `<img src="${escapeHtml(report.organization.logoUrl)}" style="height:58px;max-width:220px;object-fit:contain;display:block;margin:0 auto 4px;" />` : ""}
+      <div style="font-size:17px;font-weight:700;color:${INK};">${escapeHtml(report.organization.name)}</div>
     </div>`;
 }
 
@@ -68,7 +67,7 @@ function versionLine(report: PayrollReport, t: T): string {
 
 function notesLine(report: PayrollReport): string {
   const notes = [report.settings.taxNotice, report.settings.footerNote].filter(Boolean).map((n) => `<div>${escapeHtml(String(n))}</div>`).join("");
-  return `<div style="margin-top:14px;border-top:1px solid ${RULE};padding-top:6px;font-size:9.5px;color:${MUTED};text-align:center;">${notes}<div dir="ltr">PROSM Time · Work, Tracked.</div></div>`;
+  return `<div style="margin-top:14px;border-top:1px solid ${RULE};padding-top:6px;font-size:9.5px;color:${MUTED};text-align:center;">${notes}${issuedViaHtml()}</div>`;
 }
 
 // ---- the payslip -------------------------------------------------------------------------------

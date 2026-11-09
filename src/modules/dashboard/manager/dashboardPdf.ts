@@ -2,7 +2,7 @@ import type { jsPDF } from "jspdf";
 
 import type { ManagerDashboard } from "../../../core/repositories/DashboardRepository";
 import { escapeHtml, renderHtmlToPdf } from "../../../core/utils/htmlToPdf";
-import prosmLogo from "../../../assets/prosm-logo-pdf.png";
+import { customerLogoHtml, issuedViaHtml, prosmLogoHtml } from "../../../core/utils/reportBrand";
 import { appLocale } from "../../../core/utils/formatDate";
 
 type TFunc = (key: string, options?: Record<string, unknown>) => string;
@@ -83,15 +83,16 @@ export function buildDashboardPdf(
   container.style.cssText = "width:780px;padding:36px;background:#ffffff;color:#0f172a;font-family:'Segoe UI',Tahoma,Arial,sans-serif;";
   container.innerHTML = `
     <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:3px solid #16a34a;padding-bottom:16px;margin-bottom:16px;">
-      <img src="${prosmLogo}" style="height:44px;width:44px;object-fit:contain;" />
+      ${customerLogoHtml(organizationLogoUrl)}
       <div style="text-align:center;flex:1;">
         <div style="font-size:19px;font-weight:700;">${escapeHtml(t("manager.title"))}</div>
         <div style="font-size:12px;color:#64748b;margin-top:2px;">${escapeHtml(from)} — ${escapeHtml(to)} · ${escapeHtml(t("manager.export.asOf", { time: time(data.asOf) }))}</div>
       </div>
-      ${organizationLogoUrl ? `<img src="${escapeHtml(organizationLogoUrl)}" style="height:44px;max-width:80px;object-fit:contain;" />` : `<div style="width:44px;"></div>`}
+      ${prosmLogoHtml()}
     </div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">${tileHtml}</div>
     ${sites}${people}${absence}${overdue}
   `;
+  container.insertAdjacentHTML("beforeend", issuedViaHtml());
   return renderHtmlToPdf(container);
 }

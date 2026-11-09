@@ -8,6 +8,7 @@
 // deno-lint-ignore-file no-explicit-any
 import { textKit, type FontSet, type Weight } from "./pdfText.ts";
 import { amountInWords, currencyLabel } from "./amountInWords.ts";
+import { PROSM_FULL_LOGO_PNG, PROSM_MARK_PNG } from "./brandAssets.ts";
 
 type FontPair = { regular: Uint8Array; bold: Uint8Array; presubset?: boolean };
 
@@ -78,6 +79,7 @@ const LABELS: Record<string, [string, string]> = {
   serial: ["رقم الإصدار", "Serial"],
   version: ["إصدار الدورة", "Cycle version"],
   amended: ["نسخة معدّلة", "Amended version"],
+  issuedVia: ["صادر من خلال", "Issued via"],
 };
 
 const money = (value: string | number) =>
@@ -89,7 +91,7 @@ const wordsLanguage = (data: PayslipData) => (data.language === "en" ? "en" : "a
 export function payslipTexts(data: PayslipData): string[] {
   return [
     ...Object.values(LABELS).flat(),
-    "PROSM Time", "WORK, TRACKED.",
+    "PROSM Time",
     data.organizationName, data.cycleTitle, data.employee.full_name, data.employee.employee_code ?? "", data.siteName ?? "",
     data.taxNotice ?? "", data.footerNote ?? "",
     amountInWords(data.employee.net_salary, data.employee.currency, wordsLanguage(data)),
@@ -143,12 +145,15 @@ export async function buildPayslipPdf(
   const box = (x: number, y: number, w: number, h: number, fill?: any, border = true) =>
     page.drawRectangle({ x, y, width: w, height: h, color: fill, borderColor: border ? rule : undefined, borderWidth: border ? 0.8 : 0 });
 
-  // ---- header: PROSM Time on the end side | the organisation in the middle | the issue on the start side
+  // ---- header: the organisation leads in the middle; PROSM Time's full logo stays small on the
+  // end side; the issue on the start side (owner 2026-11-09)
   let y = H - M;
-  const brandW = 150;
+  const brandW = 70;
   const brandX = rtl ? M : W - M - brandW;
-  k.center("PROSM Time", brandX + brandW / 2, y - 26, 24, "bold", navy);
-  k.center("W O R K ,   T R A C K E D .", brandX + brandW / 2, y - 42, 7.5, "regular", ink);
+  const fullLogo = await doc.embedPng(PROSM_FULL_LOGO_PNG);
+  const logoH = 58;
+  const logoW = (fullLogo.width / fullLogo.height) * logoH;
+  page.drawImage(fullLogo, { x: brandX + (brandW - logoW) / 2, y: y - logoH, width: logoW, height: logoH });
   const dividerX = rtl ? brandX + brandW + 12 : brandX - 12;
   page.drawLine({ start: { x: dividerX, y: y - 4 }, end: { x: dividerX, y: y - 60 }, thickness: 0.8, color: rule });
 
@@ -172,16 +177,16 @@ export async function buildPayslipPdf(
   if (orgLogo) {
     try {
       const image = orgLogo.type === "png" ? await doc.embedPng(orgLogo.bytes) : await doc.embedJpg(orgLogo.bytes);
-      const h = 34;
+      const h = 44;
       const w = Math.min((image.width / image.height) * h, midRight - midLeft);
       page.drawImage(image, { x: midCenter - w / 2, y: y - h, width: w, height: h });
-      nameY = y - 50;
+      nameY = y - 60;
     } catch {
       // an unreadable logo: the name alone
     }
   }
   k.center(data.organizationName, midCenter, nameY, k.fit(data.organizationName, midRight - midLeft, 14, "bold"), "bold", navy);
-  y -= 74;
+  y -= 80;
 
   // ---- title band
   box(M, y - 46, W - 2 * M, 46, band, false);
@@ -321,7 +326,18 @@ export async function buildPayslipPdf(
     k.center(note, W / 2, fy, k.fit(note, W - 2 * M, 8.5), "regular", muted);
     fy -= 13;
   }
-  k.center("PROSM Time  ·  Work, Tracked.", W / 2, 22, 8, "regular", muted);
+  // issued through PROSM Time, beside its small mark
+  const mark = await doc.embedPng(PROSM_MARK_PNG);
+  const via = `${L("issuedVia")} PROSM Time`;
+  const viaW = k.widthOf(via, 8.5, "regular");
+  const markSize = 12;
+  const totalW = viaW + 5 + markSize;
+  const startX = W / 2 - totalW / 2;
+  // the mark sits after the words in the reading direction
+  const textX = rtl ? startX + markSize + 5 : startX;
+  const markX = rtl ? startX : startX + viaW + 5;
+  k.left(via, textX, 22, 8.5, "regular", muted);
+  page.drawImage(mark, { x: markX, y: 19, width: markSize, height: markSize });
 
   return await doc.save();
 }

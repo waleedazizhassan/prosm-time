@@ -371,5 +371,6 @@
     "text": "Questa funzione fa parte del piano {{plan}}.",
     "seePlan": "Vedi il piano",
     "askOwner": "Chiedi al titolare."
-  }
+  },
+  "issuedVia": "Emesso tramite"
 }

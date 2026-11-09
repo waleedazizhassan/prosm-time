@@ -371,5 +371,6 @@
     "text": "Cette fonction fait partie de l’offre {{plan}}.",
     "seePlan": "Voir l’offre",
     "askOwner": "Demandez au propriétaire."
-  }
+  },
+  "issuedVia": "Émis via"
 }

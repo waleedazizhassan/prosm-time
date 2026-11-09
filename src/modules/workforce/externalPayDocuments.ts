@@ -4,7 +4,7 @@ import type { TFunction } from "i18next";
 import { escapeHtml, renderHtmlToPdf } from "../../core/utils/htmlToPdf";
 import { toXlsx, type Cell } from "../../core/utils/spreadsheet";
 import type { RunDetail, RunWorker } from "../../core/repositories/ExternalLaborRepository";
-import prosmLogo from "../../assets/prosm-logo-pdf.png";
+import { customerLogoHtml, issuedViaHtml, prosmLogoHtml } from "../../core/utils/reportBrand";
 
 // 2026-11-08 B-07: the external labour pay report as files - one worker (a statement with every
 // line) or many (one row each), PDF and Excel. The server computed every figure (from the frozen
@@ -30,17 +30,21 @@ function header(detail: RunDetail, t: T, title: string): string {
   ].filter(Boolean);
   return `
     <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid ${RULE};padding-bottom:12px;margin-bottom:14px;">
-      <div style="text-align:start;flex:1;">
+      <div style="text-align:start;min-width:200px;">
         <div style="font-size:20px;font-weight:700;color:${NAVY};">${escapeHtml(title)}</div>
         <div style="font-size:12px;color:#475569;">${escapeHtml(detail.run.title)}</div>
       </div>
-      <img src="${prosmLogo}" style="height:34px;width:34px;object-fit:contain;opacity:.85;" />
+      <div style="flex:1;text-align:center;">
+        <div style="display:inline-block;">${customerLogoHtml(detail.organization?.logoUrl, 54)}</div>
+        <div style="font-size:16px;font-weight:700;color:${NAVY};">${escapeHtml(detail.organization?.name ?? "")}</div>
+      </div>
+      ${prosmLogoHtml(54)}
     </div>
     ${detail.run.isDraft ? `<div style="border:1px dashed #b45309;color:#b45309;text-align:center;padding:6px;margin-bottom:10px;font-weight:700;">${escapeHtml(t("externalPay:doc.draft"))}</div>` : ""}
     <div style="display:flex;flex-wrap:wrap;gap:6px 18px;font-size:11px;color:#475569;margin-bottom:12px;">${meta.map((m) => `<span>${escapeHtml(String(m))}</span>`).join("")}</div>`;
 }
 
-const footer = () => `<div style="margin-top:16px;border-top:1px solid ${RULE};padding-top:8px;font-size:10px;color:#64748b;text-align:center;">PROSM Time · Work, Tracked.</div>`;
+const footer = () => `<div style="margin-top:16px;border-top:1px solid ${RULE};padding-top:4px;">${issuedViaHtml()}</div>`;
 
 function container(isRtl: boolean, width: number): HTMLDivElement {
   const el = document.createElement("div");

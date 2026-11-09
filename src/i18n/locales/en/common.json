@@ -371,5 +371,6 @@
     "text": "This is part of the {{plan}} plan.",
     "seePlan": "See the plan",
     "askOwner": "Ask your organisation’s owner."
-  }
+  },
+  "issuedVia": "Issued via"
 }

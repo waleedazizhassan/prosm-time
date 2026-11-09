@@ -371,5 +371,6 @@
     "text": "Diese Funktion gehört zum Paket {{plan}}.",
     "seePlan": "Paket ansehen",
     "askOwner": "Fragen Sie den Inhaber."
-  }
+  },
+  "issuedVia": "Erstellt mit"
 }

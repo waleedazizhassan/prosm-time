@@ -6,7 +6,9 @@ import { scriptsNeeded } from "./pdfText.ts";
 const NOTO = "https://cdn.jsdelivr.net/gh/notofonts/notofonts.github.io/fonts";
 const FONTS = {
   latin: [`${NOTO}/NotoSans/hinted/ttf/NotoSans-Regular.ttf`, `${NOTO}/NotoSans/hinted/ttf/NotoSans-Bold.ttf`],
-  arabic: [`${NOTO}/NotoNaskhArabic/hinted/ttf/NotoNaskhArabic-Regular.ttf`, `${NOTO}/NotoNaskhArabic/hinted/ttf/NotoNaskhArabic-Bold.ttf`],
+  // IBM Plex Sans Arabic (the app's own Arabic face): its letters carry their dots, so the PDF shows
+  // them in place - Noto Naskh draws dots as marks that pdf-lib cannot position (owner 2026-11-09).
+  arabic: ["https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/ibmplexsansarabic/IBMPlexSansArabic-Regular.ttf", "https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/ibmplexsansarabic/IBMPlexSansArabic-Bold.ttf"],
   // Noto Sans SC, whole TrueType files (Google Fonts serves them to plain clients).
   cjk: [
     "https://fonts.gstatic.com/s/notosanssc/v41/k3kCo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_FnYw.ttf",

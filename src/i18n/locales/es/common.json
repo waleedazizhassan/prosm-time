@@ -371,5 +371,6 @@
     "text": "Esto forma parte del plan {{plan}}.",
     "seePlan": "Ver el plan",
     "askOwner": "Pregunta al propietario de tu organización."
-  }
+  },
+  "issuedVia": "Emitido con"
 }
