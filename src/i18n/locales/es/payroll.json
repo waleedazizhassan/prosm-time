@@ -373,5 +373,18 @@
     "notEditable": "Este ciclo no se puede cambiar ahora.",
     "ownRequest": "Nadie atiende su propia solicitud.",
     "fileFailed": "No se pudo crear el archivo. Inténtelo de nuevo."
+  },
+  "exports": {
+    "hint": "Los recibos de un ciclo aprobado o cerrado se preparan en el servidor en un ZIP, cada uno con su número. Puede salir de la página; el archivo queda disponible 7 días.",
+    "status": {
+      "queued": "En espera",
+      "running": "Preparando {{done}} de {{total}}",
+      "done": "Listo - {{total}} recibos",
+      "failed": "Falló",
+      "expired": "Eliminado tras su plazo"
+    },
+    "until": "disponible hasta {{date}}",
+    "progress": "Progreso de la exportación",
+    "download": "Descargar"
   }
 }

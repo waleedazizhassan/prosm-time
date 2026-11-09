@@ -40,6 +40,7 @@ const TABLES: Record<string, string> = {
   payroll_exports: byOrg,
   payslip_requests: byOrg,
   api_request_log: byOrg,
+  payroll_export_jobs: byOrg,
   external_labor_settings: "select organization_id as id from %t where organization_id = $1",
   external_labor_policy_items: byOrg,
   external_labor_runs: byOrg,

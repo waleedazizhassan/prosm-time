@@ -373,5 +373,18 @@
     "notEditable": "Ce cycle ne peut pas être modifié maintenant.",
     "ownRequest": "Personne ne traite sa propre demande.",
     "fileFailed": "Le fichier n'a pas pu être créé. Réessayez."
+  },
+  "exports": {
+    "hint": "Les bulletins d'un cycle approuvé ou verrouillé sont préparés sur le serveur dans un ZIP, chacun avec son numéro. Vous pouvez quitter la page ; le fichier reste disponible 7 jours.",
+    "status": {
+      "queued": "En attente",
+      "running": "Préparation {{done}} sur {{total}}",
+      "done": "Prêt - {{total}} bulletins",
+      "failed": "Échec",
+      "expired": "Supprimé après sa durée de conservation"
+    },
+    "until": "disponible jusqu'au {{date}}",
+    "progress": "Progression de l'export",
+    "download": "Télécharger"
   }
 }

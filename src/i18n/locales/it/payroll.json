@@ -373,5 +373,18 @@
     "notEditable": "Questo ciclo non si può modificare ora.",
     "ownRequest": "Nessuno gestisce la propria richiesta.",
     "fileFailed": "Impossibile creare il file. Riprova."
+  },
+  "exports": {
+    "hint": "I cedolini di un ciclo approvato o bloccato vengono preparati sul server in un unico ZIP, ognuno con il suo numero. Puoi lasciare la pagina; il file resta disponibile 7 giorni.",
+    "status": {
+      "queued": "In attesa",
+      "running": "Preparazione {{done}} di {{total}}",
+      "done": "Pronto - {{total}} cedolini",
+      "failed": "Non riuscito",
+      "expired": "Eliminato dopo la scadenza"
+    },
+    "until": "disponibile fino al {{date}}",
+    "progress": "Avanzamento esportazione",
+    "download": "Scarica"
   }
 }

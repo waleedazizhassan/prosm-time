@@ -373,5 +373,18 @@
     "notEditable": "Dieser Zeitraum kann jetzt nicht geändert werden.",
     "ownRequest": "Niemand bearbeitet die eigene Anfrage.",
     "fileFailed": "Die Datei konnte nicht erstellt werden. Bitte erneut versuchen."
+  },
+  "exports": {
+    "hint": "Lohnzettel eines genehmigten oder gesperrten Laufs werden auf dem Server als ein ZIP erstellt, jeder mit eigener Nummer. Sie können die Seite verlassen; die Datei bleibt 7 Tage verfügbar.",
+    "status": {
+      "queued": "Wartet auf Start",
+      "running": "Wird erstellt: {{done}} von {{total}}",
+      "done": "Fertig - {{total}} Lohnzettel",
+      "failed": "Fehlgeschlagen",
+      "expired": "Nach Ablauf gelöscht"
+    },
+    "until": "verfügbar bis {{date}}",
+    "progress": "Exportfortschritt",
+    "download": "Herunterladen"
   }
 }

@@ -373,5 +373,18 @@
     "notEditable": "此周期现在无法修改。",
     "ownRequest": "任何人都不能处理自己的申请。",
     "fileFailed": "无法生成文件，请重试。"
+  },
+  "exports": {
+    "hint": "已批准或已锁定周期的工资单会在服务器上打包为一个 ZIP，每份都有独立编号。您可以离开此页面；文件保留 7 天。",
+    "status": {
+      "queued": "等待开始",
+      "running": "正在生成 {{done}}/{{total}}",
+      "done": "已就绪 - {{total}} 份工资单",
+      "failed": "失败",
+      "expired": "已到期删除"
+    },
+    "until": "可下载至 {{date}}",
+    "progress": "导出进度",
+    "download": "下载"
   }
 }

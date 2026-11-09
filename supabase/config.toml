@@ -304,3 +304,11 @@ entrypoint = "./functions/remove-employee/index.ts"
 enabled = true
 verify_jwt = true
 entrypoint = "./functions/send-payslip-email/index.ts"
+
+# payroll-export-job (2026-11-09, spec 15.11): bulk payslips in the background. Called by members
+# (their session is checked inside with auth.getUser) and by pg_cron's sweep with the service role
+# key (compared inside); the RPCs' own grants are the real authorization.
+[functions.payroll-export-job]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/payroll-export-job/index.ts"

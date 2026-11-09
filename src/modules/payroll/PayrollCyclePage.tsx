@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 
 import PayrollCycleRepository, {
+  type ExportJob,
   type CycleDetail, type CycleEmployee, type CycleLine, type PayrollComponent, type ReportType, type Suggestion, type ValidationItem,
 } from "../../core/repositories/PayrollCycleRepository";
 import { formatDateOnly } from "../../core/utils/formatDate";
@@ -53,6 +54,7 @@ export default function PayrollCyclePage() {
   const [chosen, setChosen] = useState<string[]>([]);
   const [bulk, setBulk] = useState<{ componentId: string; amount: string; notes: string } | null>(null);
   const [notice, setNotice] = useState("");
+  const [jobs, setJobs] = useState<ExportJob[]>([]);
   const [importResult, setImportResult] = useState<{ errors: { row: number; code: string }[]; valid: number; saved: boolean; rows: Record<string, unknown>[]; fileName: string } | null>(null);
 
   const load = useCallback(async () => {
@@ -72,6 +74,21 @@ export default function PayrollCyclePage() {
   useEffect(() => {
     void load();
   }, [load]);
+
+  // spec 15.11: the background exports of this cycle; refreshed while one is still working
+  const loadJobs = useCallback(async () => {
+    const result = await PayrollCycleRepository.listExportJobs(cycleId);
+    setJobs(result.data ?? []);
+  }, [cycleId]);
+  useEffect(() => {
+    void loadJobs();
+  }, [loadJobs]);
+  const working = jobs.some((job) => job.status === "queued" || job.status === "running");
+  useEffect(() => {
+    if (!working) return;
+    const timer = window.setInterval(() => void loadJobs(), 3000);
+    return () => window.clearInterval(timer);
+  }, [working, loadJobs]);
 
   // a line or a bulk line being typed is not lost by leaving the page by accident
   const dirty = Boolean((line && (line.amount || line.notes)) || (bulk && (bulk.amount || bulk.notes)));
@@ -265,13 +282,50 @@ export default function PayrollCyclePage() {
 
       <Card title={t("reports.title")} subtitle={t("reports.hint")}>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
-          {can.exportPayslips ? <Button size="sm" variant="ghost" loading={busy === "payslip-pdf"} onClick={() => exportReport("payslip", "pdf")}>{t("reports.payslip")} · PDF</Button> : null}
+          {can.exportPayslips && (cycle.status === "approved" || cycle.status === "locked") ? (
+            <Button size="sm" variant="ghost" loading={busy === "bulk-zip"} disabled={working} onClick={async () => {
+              setBusy("bulk-zip");
+              setError("");
+              const result = await PayrollCycleRepository.startExportJob(cycleId);
+              setBusy("");
+              if (result.error) setError(payrollError(result.error, t));
+              await loadJobs();
+            }}>{t("reports.payslip")} · ZIP</Button>
+          ) : can.exportPayslips ? <Button size="sm" variant="ghost" loading={busy === "payslip-pdf"} onClick={() => exportReport("payslip", "pdf")}>{t("reports.payslip")} · PDF</Button> : null}
           {can.exportSummary ? <Button size="sm" variant="ghost" loading={busy === "summary-pdf"} onClick={() => exportReport("summary", "pdf")}>{t("reports.summary")} · PDF</Button> : null}
           {can.exportSummary ? <Button size="sm" variant="ghost" loading={busy === "summary-xlsx"} onClick={() => exportReport("summary", "xlsx")}>{t("reports.summary")} · Excel</Button> : null}
           {can.exportCombined ? <Button size="sm" variant="ghost" loading={busy === "combined-pdf"} onClick={() => exportReport("combined", "pdf")}>{t("reports.combined")} · PDF</Button> : null}
           {can.exportCombined ? <Button size="sm" variant="ghost" loading={busy === "combined-xlsx"} onClick={() => exportReport("combined", "xlsx")}>{t("reports.combined")} · Excel</Button> : null}
         </div>
-        {cycle.status !== "approved" && cycle.status !== "locked" ? <HintText small>{t("reports.draftNote")}</HintText> : null}
+        {cycle.status !== "approved" && cycle.status !== "locked" ? <HintText small>{t("reports.draftNote")}</HintText> : <HintText small>{t("exports.hint")}</HintText>}
+        {jobs.length > 0 ? (
+          <div style={{ marginTop: "var(--space-2)" }}>
+            {jobs.slice(0, 5).map((job) => (
+              <div key={job.id} style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "var(--space-2)", padding: "6px 0", borderTop: "1px solid var(--border-light)", fontSize: "var(--font-sm)" }}>
+                <span style={{ flex: "1 1 14rem" }}>
+                  {formatDateOnly(job.createdAt, i18n.language)} · v{job.cycleVersion} · {t(`exports.status.${job.status}`, { done: job.done, total: job.total })}
+                  {job.status === "failed" && job.error ? <span style={{ color: "var(--status-danger-text)" }}> · {job.error}</span> : null}
+                  {job.status === "done" && job.expiresAt ? <span style={{ color: "var(--text-secondary)" }}> · {t("exports.until", { date: formatDateOnly(job.expiresAt, i18n.language) })}</span> : null}
+                </span>
+                {job.status === "running" || job.status === "queued" ? (
+                  <progress max={Math.max(job.total, 1)} value={job.done} style={{ width: 120 }} aria-label={t("exports.progress")} />
+                ) : null}
+                {job.status === "done" ? (
+                  <Button size="xs" loading={busy === `dl-${job.id}`} onClick={async () => {
+                    setBusy(`dl-${job.id}`);
+                    const result = await PayrollCycleRepository.downloadExportJob(job.id);
+                    setBusy("");
+                    if (result.error || !result.data) {
+                      setError(payrollError(result.error, t));
+                      return;
+                    }
+                    window.location.assign(result.data.url);
+                  }}>{t("exports.download")}</Button>
+                ) : null}
+              </div>
+            ))}
+          </div>
+        ) : null}
       </Card>
 
       {editable && can.import ? (

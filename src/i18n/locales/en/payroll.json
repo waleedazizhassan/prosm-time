@@ -373,5 +373,18 @@
     "notEditable": "This cycle cannot be changed now.",
     "ownRequest": "Nobody handles their own request.",
     "fileFailed": "The file could not be made. Try again."
+  },
+  "exports": {
+    "hint": "Payslips of an approved or locked cycle are prepared on the server as one ZIP, each with its own serial number. You can leave the page; the file stays available for 7 days.",
+    "status": {
+      "queued": "Waiting to start",
+      "running": "Preparing {{done}} of {{total}}",
+      "done": "Ready - {{total}} payslips",
+      "failed": "Failed",
+      "expired": "Deleted after its retention"
+    },
+    "until": "available until {{date}}",
+    "progress": "Export progress",
+    "download": "Download"
   }
 }

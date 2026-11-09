@@ -154,6 +154,19 @@ export interface Suggestion {
   changedSinceAccepted: boolean;
 }
 
+export interface ExportJob {
+  id: string;
+  status: "queued" | "running" | "done" | "failed" | "expired";
+  total: number;
+  done: number;
+  cycleVersion: number;
+  createdAt: string;
+  finishedAt: string | null;
+  expiresAt: string | null;
+  error: string | null;
+  mine: boolean;
+}
+
 export interface PayrollReport {
   reportType: ReportType;
   serial: number | null;
@@ -325,6 +338,36 @@ class PayrollCycleRepository {
   listRequests = (status: string | null = null) => this.call<PayslipRequest[]>("list_prosm_time_payslip_requests", { p_status: status });
 
   /** One click: the server builds the PDF from the stored payslip and emails it (send-payslip-email). */
+  // 2026-11-09 spec 15.11: bulk payslips as a background job (Edge Function payroll-export-job)
+  listExportJobs = (cycleId: string) => this.call<ExportJob[]>("list_prosm_time_payroll_export_jobs", { p_cycle_id: cycleId });
+
+  private async invokeExport<T>(body: Record<string, unknown>): Promise<Result<T>> {
+    try {
+      const { data, error } = await this.client.functions.invoke("payroll-export-job", { body });
+      if (error) {
+        let message = error.message;
+        try {
+          const parsed = await (error as { context?: Response }).context?.json();
+          message = parsed?.error?.message ?? message;
+        } catch {
+          // keep the transport message
+        }
+        return { data: null, error: message };
+      }
+      return { data: (data?.data ?? data) as T, error: null };
+    } catch (error) {
+      return { data: null, error: error instanceof Error ? error.message : "Export service unavailable." };
+    }
+  }
+
+  startExportJob(cycleId: string) {
+    return this.invokeExport<{ jobId: string; total: number }>({ action: "start", cycleId });
+  }
+
+  downloadExportJob(jobId: string) {
+    return this.invokeExport<{ url: string }>({ action: "download", jobId });
+  }
+
   async sendPayslip(requestId: string): Promise<Result<{ status: string; serial: number }>> {
     try {
       const { data, error } = await this.client.functions.invoke("send-payslip-email", { body: { requestId } });
