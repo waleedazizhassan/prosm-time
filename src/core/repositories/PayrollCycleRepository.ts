@@ -48,13 +48,15 @@ export interface PayrollComponent {
   insurable?: boolean;
   applies_to_all?: boolean;
   default_amount?: number | null;
+  /** 2026-11-09: a deduction taken off the taxable pay before the salary tax */
+  pre_tax?: boolean;
 }
 
 // 2026-11-09: statutory deductions (a country's rules, edited by the organisation)
 export interface StatutoryBracket { upTo: number | null; rate: number }
 export interface StatutoryConfig {
   insurance?: { enabled: boolean; nameAr?: string; nameEn?: string; employerNameAr?: string; employerNameEn?: string; employeeRate: number; employerRate: number; minWage: number; maxWage: number | null; base: "basic" | "earnings" | "flagged" };
-  incomeTax?: { enabled: boolean; nameAr?: string; nameEn?: string; personalExemption: number; insuranceDeductible: boolean; brackets: StatutoryBracket[]; tiers: { above: number; startBracket: number }[] };
+  incomeTax?: { enabled: boolean; nameAr?: string; nameEn?: string; personalExemption: number; insuranceDeductible: boolean; roundDown?: boolean; brackets: StatutoryBracket[]; tiers: { above: number; startBracket: number }[] };
   martyrsFund?: { enabled: boolean; nameAr?: string; nameEn?: string; rate: number };
 }
 export interface StatutoryState {

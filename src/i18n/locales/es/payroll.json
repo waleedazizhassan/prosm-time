@@ -319,7 +319,8 @@
     "insurableLabel": "Forma parte del salario asegurable",
     "appliesToAllLabel": "Se aplica a todos los empleados",
     "defaultAmount": "Importe por defecto",
-    "appliesToAllHint": "Se añade en cada ciclo nuevo a todos los que tienen ficha de nómina. Si la persona tiene un valor propio, se usa ese."
+    "appliesToAllHint": "Se añade en cada ciclo nuevo a todos los que tienen ficha de nómina. Si la persona tiene un valor propio, se usa ese.",
+    "preTaxLabel": "Se resta de la base imponible (antes del impuesto)"
   },
   "requests": {
     "hint": "Recibos que pidió su equipo. Un clic envía el recibo aprobado y guardado en PDF al correo registrado: la misma versión, sin recalcular.",
@@ -435,7 +436,8 @@
     "fundRate": "Tipo sobre el bruto %",
     "appliesToNew": "Los cambios se aplican solo a ciclos nuevos; los anteriores conservan sus reglas.",
     "save": "Guardar seguridad social e impuestos",
-    "saved": "Guardado."
+    "saved": "Guardado.",
+    "roundDown": "Redondear el impuesto mensual a la unidad inferior"
   },
   "steps": {
     "title": "La nómina en 3 pasos",

@@ -319,7 +319,8 @@
     "insurableLabel": "Gehört zum Versicherungslohn",
     "appliesToAllLabel": "Gilt für alle Mitarbeitenden",
     "defaultAmount": "Standardbetrag",
-    "appliesToAllHint": "Wird in jedem neuen Zyklus für alle mit Gehaltsprofil hinzugefügt. Hat eine Person einen eigenen Wert, gilt dieser."
+    "appliesToAllHint": "Wird in jedem neuen Zyklus für alle mit Gehaltsprofil hinzugefügt. Hat eine Person einen eigenen Wert, gilt dieser.",
+    "preTaxLabel": "Vor der Lohnsteuer abziehen"
   },
   "requests": {
     "hint": "Von Ihrem Team angeforderte Abrechnungen. Ein Klick sendet die genehmigte, gespeicherte Abrechnung als PDF an die registrierte E-Mail - dieselbe Version, nichts wird neu berechnet.",
@@ -435,7 +436,8 @@
     "fundRate": "Satz vom Bruttolohn %",
     "appliesToNew": "Änderungen gelten nur für neue Zyklen; frühere behalten ihre Regeln.",
     "save": "Versicherung und Steuern speichern",
-    "saved": "Gespeichert."
+    "saved": "Gespeichert.",
+    "roundDown": "Monatliche Steuer auf ganze Einheit abrunden"
   },
   "steps": {
     "title": "Gehaltsabrechnung in 3 Schritten",

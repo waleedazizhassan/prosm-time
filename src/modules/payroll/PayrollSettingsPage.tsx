@@ -174,6 +174,11 @@ export default function PayrollSettingsPage() {
                 </label>
               </>
             ) : null}
+            {d.category === "deduction" && d.include_in_net ? (
+              <label style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}>
+                <input type="checkbox" checked={Boolean(d.pre_tax)} onChange={(event) => setD({ pre_tax: event.target.checked })} /> {t("components.preTaxLabel")}
+              </label>
+            ) : null}
             {d.source === "fixed" && !d.is_basic ? (
               <>
                 <label style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}>
