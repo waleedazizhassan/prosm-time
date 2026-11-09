@@ -56,7 +56,7 @@
     },
     "settingsCenter": {
       "title": "Einstellungen (Inhaber)",
-      "body": "Die Einstellungen (für den Inhaber) sind gegliedert: zuerst Abonnement (Paket und Aktivierungscode), dann Standorte und Stempeln (Arbeitsbereich ohne Standort, Ablehnen gefälschter Standorte, die Stempelfrage beim Öffnen in einem Standort, Startwerte neuer Standorte), dann Zeit, dann Urlaub und Urlaubsarten, dann Daten und Datenschutz (Aufbewahrung). Die Regeln jedes Standorts stehen auf dessen Seite."
+      "body": "Die Seitenleiste ist gegliedert in Außendienst (Anwesenheit, Standorte, Urlaub und Feiertage, Schichten, Kiosk), Personal, Lohnabrechnung, Berichte und Analysen sowie Verwaltung und Governance; jede Seite behält ihre alte Adresse, gespeicherte Links und Benachrichtigungen funktionieren weiter. Die Einstellungen folgen derselben Ordnung: Organisation (Tarif und Aktivierungscode, Arbeitskalender), Standorte und Stempeln (Regeln je Standort, Bereich ohne Standort, Ablehnung gefälschter Standorte, Hinweis beim Öffnen der App an einem Standort, Startwerte neuer Standorte), Anwesenheit und Urlaub (Arbeitszeit, Überstunden, Urlaubsarten), Lohnabrechnung (Lohneinstellungen und Regeln für externe Kräfte) sowie Sicherheit und Governance (Berechtigungen und Delegation, Aktionsprotokoll, Aufbewahrung). Jeder Abschnitt zeigt nur, was Sie ändern dürfen."
     },
     "leave": {
       "title": "Urlaub",

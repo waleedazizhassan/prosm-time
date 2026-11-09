@@ -56,7 +56,7 @@
     },
     "settingsCenter": {
       "title": "Settings (Owner)",
-      "body": "Settings (for the owner) come in sections: Subscription (plan and activation code) first, then Sites and clocking (the work area for clocking without a site, refusing fake locations, the clock-in question when the app opens inside a site, and the values every new site starts with), then Time, then Leave and its types, then Data and privacy (retention). Each site’s own rules are on that site’s page."
+      "body": "The sidebar is grouped as Field operations (attendance, sites, leave and holidays, shifts, kiosk), Human resources, Payroll, Reports and analytics, and Administration and governance; every page keeps its old address, so saved links and notifications still open. Settings come in the same order: Organisation (the plan and activation code, the work calendar), Sites and clocking (each site's rules, the work area for clocking without a site, refusing fake locations, saying when someone opens the app inside a site, and the values every new site starts with), Attendance and leave (working time, overtime, leave types), Payroll (payroll settings and the external labour pay policy) and Security and governance (granting permissions and delegation, the action log, data retention). Each section shows only what you may change."
     },
     "leave": {
       "title": "Leave",

@@ -277,11 +277,11 @@
     "dismissAction": "Ausblenden"
   },
   "sections": {
-    "attendance": "Anwesenheit",
-    "people": "Personal & Standorte",
+    "attendance": "Außendienst",
+    "people": "Personal",
     "payroll": "Gehaltsabrechnung",
-    "reports": "Berichte",
-    "settings": "Einstellungen",
+    "reports": "Berichte und Analysen",
+    "settings": "Verwaltung und Governance",
     "help": "Hilfe"
   },
   "weather": {

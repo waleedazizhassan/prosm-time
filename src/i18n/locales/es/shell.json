@@ -277,11 +277,11 @@
     "dismissAction": "Descartar"
   },
   "sections": {
-    "attendance": "Asistencia",
-    "people": "Personas y sedes",
+    "attendance": "Operación de campo",
+    "people": "Recursos humanos",
     "payroll": "Nómina",
-    "reports": "Informes",
-    "settings": "Ajustes",
+    "reports": "Informes y análisis",
+    "settings": "Administración y gobierno",
     "help": "Ayuda"
   },
   "weather": {

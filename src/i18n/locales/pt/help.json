@@ -56,7 +56,7 @@
     },
     "settingsCenter": {
       "title": "Configurações (proprietário)",
-      "body": "As configurações (para o proprietário) vêm em seções: primeiro Assinatura (plano e código de ativação), depois Locais e ponto (a área de trabalho para registrar ponto sem local, recusar localizações falsas, a pergunta de ponto ao abrir o app dentro de um local e os valores com que cada novo local começa), depois Horário, depois Afastamentos e seus tipos, depois Dados e privacidade (retenção). As regras próprias de cada local ficam na página daquele local."
+      "body": "A barra lateral está agrupada em Operação no terreno (assiduidade, locais, férias e feriados, turnos, quiosque), Recursos humanos, Folha de salários, Relatórios e análises, e Administração e governação; cada página mantém o seu endereço, por isso ligações guardadas e notificações continuam a abrir. As definições seguem a mesma ordem: Organização (plano e código de ativação, calendário de trabalho), Locais e registos (regras de cada local, zona sem local, recusa de localizações falsas, aviso ao abrir a app num local, valores iniciais de novos locais), Assiduidade e férias (horário, horas extra, tipos de férias), Folha de salários (definições salariais e política de externos) e Segurança e governação (permissões e delegação, registo de ações, retenção de dados). Cada secção mostra só o que pode alterar."
     },
     "leave": {
       "title": "Afastamentos",

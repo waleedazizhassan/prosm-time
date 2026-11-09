@@ -277,11 +277,11 @@
     "dismissAction": "Ignorer"
   },
   "sections": {
-    "attendance": "Présence",
-    "people": "Personnel & sites",
+    "attendance": "Opérations terrain",
+    "people": "Ressources humaines",
     "payroll": "Paie",
-    "reports": "Rapports",
-    "settings": "Paramètres",
+    "reports": "Rapports et analyses",
+    "settings": "Administration et gouvernance",
     "help": "Aide"
   },
   "weather": {

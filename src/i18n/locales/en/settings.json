@@ -227,10 +227,32 @@
     "failed": "Unable to save this setting."
   },
   "sections": {
-    "subscription": "Subscription",
     "sites": "Sites and clocking",
-    "time": "Working time and overtime",
-    "leave": "Leave",
-    "privacy": "Data and privacy"
+    "organization": "Organisation",
+    "attendanceLeave": "Attendance and leave",
+    "payroll": "Payroll",
+    "governance": "Security and governance"
+  },
+  "links": {
+    "calendar": {
+      "title": "Work calendar",
+      "hint": "Public holidays, weekly rest days and exceptional days."
+    },
+    "payroll": {
+      "title": "Payroll settings",
+      "hint": "Components, proration, cycle periods, reports, publishing and export."
+    },
+    "externalPolicy": {
+      "title": "External labour pay policy",
+      "hint": "Deductions and additions, and the day-rate rule for monthly and yearly rates."
+    },
+    "permissions": {
+      "title": "Grant permissions and delegation",
+      "hint": "Give a person the owner's authority - all of it or chosen permissions, for a period."
+    },
+    "auditLog": {
+      "title": "Action log",
+      "hint": "Who did what and when, with the reason."
+    }
   }
 }

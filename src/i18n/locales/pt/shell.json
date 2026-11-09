@@ -277,11 +277,11 @@
     "dismissAction": "Dispensar"
   },
   "sections": {
-    "attendance": "Frequência",
-    "people": "Pessoas e locais",
+    "attendance": "Operação no terreno",
+    "people": "Recursos humanos",
     "payroll": "Folha de pagamento",
-    "reports": "Relatórios",
-    "settings": "Configurações",
+    "reports": "Relatórios e análises",
+    "settings": "Administração e governação",
     "help": "Ajuda"
   },
   "weather": {

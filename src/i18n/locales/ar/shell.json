@@ -277,11 +277,11 @@
     "dismissAction": "إغلاق"
   },
   "sections": {
-    "attendance": "الحضور",
-    "people": "الأفراد والمواقع",
+    "attendance": "التشغيل الميداني",
+    "people": "الموارد البشرية",
     "payroll": "الرواتب",
-    "reports": "التقارير",
-    "settings": "الإعدادات",
+    "reports": "التقارير والتحليلات",
+    "settings": "الإدارة والحوكمة",
     "help": "المساعدة"
   },
   "weather": {

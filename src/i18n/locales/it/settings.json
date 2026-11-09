@@ -228,10 +228,32 @@
     "failed": "Impossibile salvare questa impostazione."
   },
   "sections": {
-    "subscription": "Abbonamento",
     "sites": "Sedi e timbrature",
-    "time": "Orario e straordinari",
-    "leave": "Ferie",
-    "privacy": "Dati e privacy"
+    "organization": "Organizzazione",
+    "attendanceLeave": "Presenze e ferie",
+    "payroll": "Paghe",
+    "governance": "Sicurezza e governance"
+  },
+  "links": {
+    "calendar": {
+      "title": "Calendario di lavoro",
+      "hint": "Festività, riposi settimanali e giorni eccezionali."
+    },
+    "payroll": {
+      "title": "Impostazioni paghe",
+      "hint": "Voci, proporzionamento, periodi, report, pubblicazione ed esportazione."
+    },
+    "externalPolicy": {
+      "title": "Regole paga esterni",
+      "hint": "Trattenute e aggiunte, e la regola della paga giornaliera per tariffe mensili e annuali."
+    },
+    "permissions": {
+      "title": "Permessi e delega",
+      "hint": "Dai a una persona l'autorità del titolare - tutta o permessi scelti, per un periodo."
+    },
+    "auditLog": {
+      "title": "Registro azioni",
+      "hint": "Chi ha fatto cosa e quando, con il motivo."
+    }
   }
 }

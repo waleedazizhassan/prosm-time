@@ -227,10 +227,32 @@
     "failed": "Diese Einstellung konnte nicht gespeichert werden."
   },
   "sections": {
-    "subscription": "Abonnement",
     "sites": "Standorte und Stempeln",
-    "time": "Arbeitszeit und Überstunden",
-    "leave": "Urlaub",
-    "privacy": "Daten und Datenschutz"
+    "organization": "Organisation",
+    "attendanceLeave": "Anwesenheit und Urlaub",
+    "payroll": "Lohnabrechnung",
+    "governance": "Sicherheit und Governance"
+  },
+  "links": {
+    "calendar": {
+      "title": "Arbeitskalender",
+      "hint": "Feiertage, wöchentliche Ruhetage und Ausnahmetage."
+    },
+    "payroll": {
+      "title": "Lohneinstellungen",
+      "hint": "Bestandteile, Anteilsberechnung, Abrechnungszeiträume, Berichte, Veröffentlichung und Export."
+    },
+    "externalPolicy": {
+      "title": "Regeln für Lohn externer Kräfte",
+      "hint": "Abzüge und Zuschläge sowie die Tagessatz-Regel für Monats- und Jahressätze."
+    },
+    "permissions": {
+      "title": "Berechtigungen und Delegation",
+      "hint": "Einer Person die Befugnis des Inhabers geben - ganz oder ausgewählte Berechtigungen, befristet."
+    },
+    "auditLog": {
+      "title": "Aktionsprotokoll",
+      "hint": "Wer hat was wann getan, mit Begründung."
+    }
   }
 }

@@ -277,11 +277,11 @@
     "dismissAction": "关闭"
   },
   "sections": {
-    "attendance": "考勤",
-    "people": "人员与地点",
+    "attendance": "现场运营",
+    "people": "人力资源",
     "payroll": "薪资",
-    "reports": "报表",
-    "settings": "设置",
+    "reports": "报表与分析",
+    "settings": "管理与治理",
     "help": "帮助"
   },
   "weather": {

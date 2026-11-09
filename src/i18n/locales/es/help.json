@@ -56,7 +56,7 @@
     },
     "settingsCenter": {
       "title": "Ajustes (propietario)",
-      "body": "Los ajustes (para el propietario) van por secciones: primero Suscripción (plan y código de activación), luego Sedes y fichaje (la zona de trabajo para fichar sin sede, rechazar ubicaciones falsas, la pregunta de fichaje al abrir la app dentro de una sede y los valores con los que empieza cada sede nueva), luego Tiempo, luego Ausencias y sus tipos, y luego Datos y privacidad (conservación). Las reglas propias de cada sede están en la página de esa sede."
+      "body": "La barra lateral se agrupa en Operación de campo (asistencia, sedes, permisos y festivos, turnos, quiosco), Recursos humanos, Nómina, Informes y análisis, y Administración y gobierno; cada página conserva su dirección, así que los enlaces guardados y las notificaciones siguen abriendo. Los ajustes siguen el mismo orden: Organización (plan y código de activación, calendario laboral), Sedes y fichajes (reglas de cada sede, zona sin sede, rechazo de ubicaciones falsas, aviso al abrir la app en una sede, valores iniciales de cada sede nueva), Asistencia y permisos (jornada, horas extra, tipos de permiso), Nómina (ajustes de nómina y política de externos) y Seguridad y gobierno (permisos y delegación, registro de acciones, conservación de datos). Cada sección muestra solo lo que puede cambiar."
     },
     "leave": {
       "title": "Ausencias",

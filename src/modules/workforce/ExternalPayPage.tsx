@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import ExternalLaborRepository, {
   RATE_UNITS,
@@ -34,7 +34,8 @@ type View = "runs" | "rates" | "policy";
 export default function ExternalPayPage() {
   const { t, i18n } = useTranslation("externalPay");
   const navigate = useNavigate();
-  const [view, setView] = useState<View>("runs");
+  const [searchParams] = useSearchParams();
+  const [view, setView] = useState<View>(() => (["runs", "rates", "policy"].includes(searchParams.get("view") ?? "") ? (searchParams.get("view") as View) : "runs"));
   const [error, setError] = useState("");
   const [runs, setRuns] = useState<RunSummary[] | null>(null);
   const [rates, setRates] = useState<ExternalWorkerRates[] | null>(null);

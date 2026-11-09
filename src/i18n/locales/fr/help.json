@@ -56,7 +56,7 @@
     },
     "settingsCenter": {
       "title": "Paramètres (propriétaire)",
-      "body": "Les paramètres (pour le propriétaire) sont en sections : Abonnement (offre et code d’activation) d’abord, puis Sites et pointage (zone de travail sans site, refus des fausses positions, question de pointage à l’ouverture dans un site, valeurs de départ des nouveaux sites), puis Temps, puis Congés et leurs types, puis Données et confidentialité (conservation). Les règles de chaque site sont sur la page du site."
+      "body": "La barre latérale est groupée en Opérations terrain (présence, sites, congés et jours fériés, postes, kiosque), Ressources humaines, Paie, Rapports et analyses, et Administration et gouvernance ; chaque page garde son adresse, les liens enregistrés et les notifications s'ouvrent toujours. Les paramètres suivent le même ordre : Organisation (formule et code d'activation, calendrier de travail), Sites et pointage (règles de chaque site, zone sans site, refus des fausses positions, message à l'ouverture de l'app sur un site, valeurs de départ des nouveaux sites), Présence et congés (temps de travail, heures supplémentaires, types de congés), Paie (paramètres de paie et règles des externes) et Sécurité et gouvernance (autorisations et délégation, journal des actions, conservation des données). Chaque section ne montre que ce que vous pouvez modifier."
     },
     "leave": {
       "title": "Congés",

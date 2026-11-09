@@ -56,7 +56,7 @@
     },
     "settingsCenter": {
       "title": "Impostazioni (titolare)",
-      "body": "Le impostazioni (per il titolare) sono a sezioni: prima Abbonamento (piano e codice di attivazione), poi Sedi e timbrature (area di lavoro senza sede, rifiuto delle posizioni false, la domanda di timbratura all’apertura in una sede, valori iniziali delle nuove sedi), poi Orari, poi Ferie e tipi, poi Dati e privacy (conservazione). Le regole di ogni sede sono nella pagina della sede."
+      "body": "La barra laterale è raggruppata in Operatività sul campo (presenze, sedi, ferie e festività, turni, chiosco), Risorse umane, Paghe, Report e analisi, e Amministrazione e governance; ogni pagina mantiene il suo indirizzo, quindi link salvati e notifiche si aprono ancora. Le impostazioni seguono lo stesso ordine: Organizzazione (piano e codice di attivazione, calendario di lavoro), Sedi e timbrature (regole di ogni sede, area senza sede, rifiuto delle posizioni false, avviso all'apertura dell'app in una sede, valori iniziali delle nuove sedi), Presenze e ferie (orario, straordinari, tipi di ferie), Paghe (impostazioni paghe e regole degli esterni) e Sicurezza e governance (permessi e delega, registro azioni, conservazione dati). Ogni sezione mostra solo ciò che puoi modificare."
     },
     "leave": {
       "title": "Ferie",

@@ -277,11 +277,11 @@
     "dismissAction": "Закрыть"
   },
   "sections": {
-    "attendance": "Посещаемость",
-    "people": "Сотрудники и объекты",
+    "attendance": "Полевые операции",
+    "people": "Персонал",
     "payroll": "Зарплата",
-    "reports": "Отчёты",
-    "settings": "Настройки",
+    "reports": "Отчёты и аналитика",
+    "settings": "Администрирование",
     "help": "Справка"
   },
   "weather": {

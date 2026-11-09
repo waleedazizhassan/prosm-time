@@ -226,10 +226,32 @@
     "failed": "无法保存此设置。"
   },
   "sections": {
-    "subscription": "订阅",
-    "sites": "工地和打卡",
-    "time": "工作时间和加班",
-    "leave": "请假",
-    "privacy": "数据和隐私"
+    "sites": "站点设置",
+    "organization": "组织设置",
+    "attendanceLeave": "考勤与请假设置",
+    "payroll": "工资设置",
+    "governance": "安全与治理"
+  },
+  "links": {
+    "calendar": {
+      "title": "工作日历",
+      "hint": "公共假日、每周休息日和特殊日期。"
+    },
+    "payroll": {
+      "title": "工资设置与项目",
+      "hint": "工资项目、按比例计算、周期、报表、发布与导出。"
+    },
+    "externalPolicy": {
+      "title": "外部工人薪酬政策",
+      "hint": "扣款与加项，以及月薪/年薪换算日薪的规则。"
+    },
+    "permissions": {
+      "title": "授权与委托",
+      "hint": "将所有者的权限授予某人——全部或所选权限，并设定期限。"
+    },
+    "auditLog": {
+      "title": "操作日志",
+      "hint": "谁在何时做了什么，以及原因。"
+    }
   }
 }

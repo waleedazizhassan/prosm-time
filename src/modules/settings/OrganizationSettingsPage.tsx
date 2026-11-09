@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../../core/context/AuthContext";
 
 import PageShell from "../../components/common/PageShell";
+import Card from "../../components/common/Card";
 import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
 import MockLocationSettingsCard from "./MockLocationSettingsCard";
 import SessionPolicySettingsCard from "./SessionPolicySettingsCard";
@@ -31,6 +32,16 @@ function SectionHeading({ children }: { children: string }) {
   return <h2 style={{ margin: "var(--space-2) 0 calc(var(--space-2) * -1)", fontSize: "var(--font-lg)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)" }}>{children}</h2>;
 }
 
+// A setting that has its own page, reached from the settings tree.
+function SettingsLink({ to, title, hint }: { to: string; title: string; hint: string }) {
+  return (
+    <Card title={title}>
+      <p style={{ margin: "0 0 var(--space-2)", color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{hint}</p>
+      <Link to={to}>{title}</Link>
+    </Card>
+  );
+}
+
 export default function OrganizationSettingsPage() {
   const { t } = useTranslation("settings");
   const { profile, hasPermission } = useAuth();
@@ -49,6 +60,10 @@ export default function OrganizationSettingsPage() {
     return <Navigate to="/dashboard" replace />;
   }
 
+  const showPayroll = allows("payroll") && (isOwner || hasPermission("payroll.manage_settings"));
+  const showExternalPolicy = allows("kiosk") && (isOwner || hasPermission("external_labor.manage_policy"));
+  const showAudit = allows("audit") && (isOwner || hasPermission("audit.view"));
+
   if (focusedSite) {
     return (
       <PageShell title="">
@@ -66,13 +81,11 @@ export default function OrganizationSettingsPage() {
     <PageShell title="">
       <PageBanner pageId="settings" illustration={settingsHeaderImage} />
 
-      {/* Owner 2026-11-02: grouped, the plan first and apart from the sites' rules. */}
-      {isOwner ? (
-        <>
-          <SectionHeading>{t("sections.subscription")}</SectionHeading>
-          <PlanSettingsCard />
-        </>
-      ) : null}
+      {/* 2026-11-09 B-05: grouped like the target settings tree (spec 25.5); a section shows only
+          what the reader may change, and a setting that lives on its own page is linked from here. */}
+      {isOwner || hasPermission("calendar.manage") ? <SectionHeading>{t("sections.organization")}</SectionHeading> : null}
+      {isOwner ? <PlanSettingsCard /> : null}
+      {hasPermission("calendar.manage") ? <SettingsLink to="/calendar" title={t("links.calendar.title")} hint={t("links.calendar.hint")} /> : null}
 
       <SectionHeading>{t("sections.sites")}</SectionHeading>
       <SitePolicySettingsCard />
@@ -85,23 +98,19 @@ export default function OrganizationSettingsPage() {
         </>
       ) : null}
 
-      {hasPermission("settings.session_policy") || isOwner ? <SectionHeading>{t("sections.time")}</SectionHeading> : null}
+      {hasPermission("settings.session_policy") || isOwner || hasPermission("leave.manage_types") ? <SectionHeading>{t("sections.attendanceLeave")}</SectionHeading> : null}
       {hasPermission("settings.session_policy") ? <SessionPolicySettingsCard /> : null}
       {isOwner ? <OvertimePolicySettingsCard /> : null}
+      {hasPermission("leave.manage_types") ? <LeaveTypesSettingsCard /> : null}
 
-      {hasPermission("leave.manage_types") ? (
-        <>
-          <SectionHeading>{t("sections.leave")}</SectionHeading>
-          <LeaveTypesSettingsCard />
-        </>
-      ) : null}
+      {showPayroll || showExternalPolicy ? <SectionHeading>{t("sections.payroll")}</SectionHeading> : null}
+      {showPayroll ? <SettingsLink to="/payroll/settings" title={t("links.payroll.title")} hint={t("links.payroll.hint")} /> : null}
+      {showExternalPolicy ? <SettingsLink to="/workers/pay?view=policy" title={t("links.externalPolicy.title")} hint={t("links.externalPolicy.hint")} /> : null}
 
-      {isOwner ? (
-        <>
-          <SectionHeading>{t("sections.privacy")}</SectionHeading>
-          <RetentionSettingsCard />
-        </>
-      ) : null}
+      {profile?.isRealOwner || showAudit || isOwner ? <SectionHeading>{t("sections.governance")}</SectionHeading> : null}
+      {profile?.isRealOwner ? <SettingsLink to="/permissions" title={t("links.permissions.title")} hint={t("links.permissions.hint")} /> : null}
+      {showAudit ? <SettingsLink to="/audit-log" title={t("links.auditLog.title")} hint={t("links.auditLog.hint")} /> : null}
+      {isOwner ? <RetentionSettingsCard /> : null}
     </PageShell>
   );
 }

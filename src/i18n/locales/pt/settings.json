@@ -228,10 +228,32 @@
     "failed": "Não foi possível salvar esta configuração."
   },
   "sections": {
-    "subscription": "Assinatura",
-    "sites": "Unidades e ponto",
-    "time": "Jornada e horas extras",
-    "leave": "Ausências",
-    "privacy": "Dados e privacidade"
+    "sites": "Locais e registos",
+    "organization": "Organização",
+    "attendanceLeave": "Assiduidade e férias",
+    "payroll": "Folha de salários",
+    "governance": "Segurança e governação"
+  },
+  "links": {
+    "calendar": {
+      "title": "Calendário de trabalho",
+      "hint": "Feriados, descansos semanais e dias excecionais."
+    },
+    "payroll": {
+      "title": "Definições salariais",
+      "hint": "Itens, proporcionalidade, períodos, relatórios, publicação e exportação."
+    },
+    "externalPolicy": {
+      "title": "Política de pagamento de externos",
+      "hint": "Descontos e acréscimos, e a regra da diária para valores mensais e anuais."
+    },
+    "permissions": {
+      "title": "Permissões e delegação",
+      "hint": "Dê a uma pessoa a autoridade do proprietário - toda ou permissões escolhidas, por um período."
+    },
+    "auditLog": {
+      "title": "Registo de ações",
+      "hint": "Quem fez o quê e quando, com o motivo."
+    }
   }
 }

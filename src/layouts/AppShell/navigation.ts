@@ -10,6 +10,10 @@ import type { PlanFeature } from "../../core/hooks/usePlanFeatures";
 // group, "organization" - this actually splits it): attendance-facing
 // tools, people/sites, payroll (timesheets+allowances), a new Reports
 // Center, a new Settings section, and Help.
+// 2026-11-09 B-05: the groups follow the target sidebar tree (spec 25.4) - "attendance" is Field
+// operations (attendance, sites, leave and holidays, shifts, kiosk), "people" Human resources,
+// "payroll" Payroll, "reports" Reports and analytics, "settings" Administration and governance.
+// The ids stay, so nothing that refers to them breaks; every path is unchanged.
 export type NavSection = "attendance" | "people" | "payroll" | "reports" | "settings" | "help";
 
 export interface NavItem {
@@ -105,7 +109,7 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // own alerts, if any), same as Manager Console's own gate.
   { id: "emergencyLog", planFeature: "sos", labelKey: "items.emergencyLog", path: "/emergency-log", icon: Siren, requiredPermission: "attendance.view", section: "attendance" },
   { id: "people", labelKey: "items.people", path: "/people", icon: Users, requiredPermission: "employees.view", section: "people" },
-  { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage", section: "people" },
+  { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage", section: "attendance" },
   // Owner 2026-10-18/19: external workers for the whole organisation (app-generated kiosk numbers).
   { id: "workers", planFeature: "kiosk", labelKey: "items.workers", path: "/workers", icon: HardHat, requiredPermission: "sites.manage", section: "people" },
   // §22: "Employee reviews their period" - self-access to one's own
@@ -130,7 +134,7 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // 2026-11-08 B-07: external labour pay - separate from payroll and its permissions.
   { id: "externalPay", planFeature: "kiosk", labelKey: "items.externalPay", path: "/workers/pay", icon: HardHat, requiredPermission: "external_labor.view_pay", section: "payroll" },
   { id: "payslips", planFeature: "payroll", labelKey: "items.payslips", path: "/payslips", icon: Receipt, requiredPermission: null, hiddenFromOwner: true, section: "payroll" },
-  { id: "leave", planFeature: "leave", labelKey: "items.leave", path: "/leave", icon: CalendarDays, requiredPermission: null, section: "payroll" },
+  { id: "leave", planFeature: "leave", labelKey: "items.leave", path: "/leave", icon: CalendarDays, requiredPermission: null, section: "attendance" },
   // § live UX review, user-directed - "a Reports Center where any PDF
   // can be pulled." No permission gate on the nav item itself - the
   // page's own report-type selector gates each report by the exact
@@ -139,7 +143,7 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // owner 2026-11-03: the morning summary opens here - one day, any day, with the names
   { id: "dailySummary", planFeature: "daily_summary", labelKey: "items.dailySummary", path: "/daily-summary", icon: Sunrise, requiredPermission: null, ownerOnly: true, section: "reports" },
   // Owner 2026-10-28: the action log on its own page (it left the dashboard).
-  { id: "auditLog", planFeature: "audit", labelKey: "items.auditLog", path: "/audit-log", icon: ScrollText, requiredPermission: "audit.view", section: "reports" },
+  { id: "auditLog", planFeature: "audit", labelKey: "items.auditLog", path: "/audit-log", icon: ScrollText, requiredPermission: "audit.view", section: "settings" },
   // § live UX review, user-directed - a real home for org-wide
   // settings (today: the no-site geofence radius) instead of living
   // inside an unrelated page. Owner-only, matching that setting's own
