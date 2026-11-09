@@ -347,7 +347,9 @@
     "confirmTitle": "发送工资单",
     "confirmBody": "{{cycle}} 的工资单将以 PDF 发送给 {{name}}（{{email}}）。",
     "sentTo": "已发送给 {{name}}（{{email}}）。",
-    "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}"
+    "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}",
+    "sendInApp": "在应用内发送",
+    "sentInApp": "工资单已发送到 {{name}} 的应用中。"
   },
   "mine": {
     "empty": "暂无已发布的工资单。",
@@ -364,7 +366,9 @@
       "sent": "已通过邮件发送",
       "failed": "等待重新发送"
     },
-    "sentOn": "于 {{date}} 发送至 {{email}}"
+    "sentOn": "于 {{date}} 发送至 {{email}}",
+    "ask": "申请工资单",
+    "askBodyApp": "申请将发送给薪资负责人；发送后您可在此查看并保存为 PDF。"
   },
   "errors": {
     "generic": "出现问题，请重试。",

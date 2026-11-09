@@ -240,7 +240,9 @@
       "failedTitle": "Échec de l'envoi du bulletin de paie",
       "failedBody": "Le bulletin de paie de {{cycle}} n'a pas pu être envoyé. Vous pouvez réessayer.",
       "publishedTitle": "Votre bulletin de paie est disponible",
-      "publishedBody": "Un nouveau bulletin de paie a été publié. Vous pouvez le consulter ou le demander par e-mail."
+      "publishedBody": "Un nouveau bulletin de paie a été publié. Vous pouvez le consulter ou le demander par e-mail.",
+      "inAppTitle": "Votre bulletin est prêt",
+      "inAppBody": "Votre bulletin de {{cycle}} est dans Mes bulletins."
     },
     "announcement": {
       "publishedTitle": "Nouvelle annonce",
@@ -260,7 +262,7 @@
     "emergencyLog": "Journal des urgences",
     "timesheets": "Feuilles de temps",
     "allowances": "Indemnités",
-    "leave": "Congés",
+    "leave": "Congés et autorisations",
     "schedule": "Planning des shifts",
     "kiosk": "Mode Kiosque",
     "reports": "Rapports",
@@ -326,7 +328,7 @@
   },
   "radio": {
     "title": "Radio",
-    "mediaSectionTitle": "Médias",
+    "mediaSectionTitle": "Radio",
     "loading": "Chargement…",
     "reconnecting": "Reconnexion…",
     "error": "Échec de la lecture.",

@@ -347,7 +347,9 @@
     "confirmTitle": "Enviar el recibo",
     "confirmBody": "El recibo de {{cycle}} se enviará en PDF a {{name}} en {{email}}.",
     "sentTo": "Enviado a {{name}} ({{email}}).",
-    "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}"
+    "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}",
+    "sendInApp": "Enviar en la app",
+    "sentInApp": "La nómina ya está en la app de {{name}}."
   },
   "mine": {
     "empty": "Aún no hay recibos publicados.",
@@ -364,7 +366,9 @@
       "sent": "Enviado por correo",
       "failed": "Pendiente de reenvío"
     },
-    "sentOn": "el {{date}} a {{email}}"
+    "sentOn": "el {{date}} a {{email}}",
+    "ask": "Pedir tu nómina",
+    "askBodyApp": "Tu solicitud llega a nóminas; cuando la envíen la verás aquí y podrás guardarla en PDF."
   },
   "errors": {
     "generic": "Algo salió mal. Inténtelo de nuevo.",

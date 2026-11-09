@@ -240,7 +240,9 @@
       "failedTitle": "工资单发送失败",
       "failedBody": "{{cycle}} 的工资单未能发送，您可以重试。",
       "publishedTitle": "您的工资单已可查看",
-      "publishedBody": "新的工资单已发布，您可以查看或通过邮件申请。"
+      "publishedBody": "新的工资单已发布，您可以查看或通过邮件申请。",
+      "inAppTitle": "您的工资单已就绪",
+      "inAppBody": "{{cycle}} 的工资单已在“我的工资单”中。"
     },
     "announcement": {
       "publishedTitle": "新公告",
@@ -260,7 +262,7 @@
     "emergencyLog": "紧急日志",
     "timesheets": "工时表",
     "allowances": "津贴",
-    "leave": "请假",
+    "leave": "请假与许可",
     "schedule": "排班表",
     "kiosk": "考勤机模式",
     "reports": "报表",
@@ -326,7 +328,7 @@
   },
   "radio": {
     "title": "电台",
-    "mediaSectionTitle": "媒体",
+    "mediaSectionTitle": "电台",
     "loading": "正在加载…",
     "reconnecting": "正在重新连接…",
     "error": "播放失败。",

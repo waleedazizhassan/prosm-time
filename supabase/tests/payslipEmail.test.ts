@@ -140,3 +140,25 @@ describe("sending it", () => {
     expect((await t.as(managerB.authId, "select public.claim_prosm_time_payslip_email($1)", [other])).error).toMatch(/NOT PUBLISHED/);
   });
 });
+
+// 2026-11-09 (owner): answered in the app - nothing generated or stored; the person may open that payslip
+describe("answering in the app", () => {
+  it("lets the colleague open their payslip in the app even with self-service off, once", async () => {
+    await t.su("update payroll_settings set employee_self_service = false where organization_id = $1", [org.id]);
+    // a fresh, published cycle (the one above was reopened)
+    cycleId = (await ok<{ r: { cycleId: string } }>(owner("select public.create_prosm_time_payroll_cycle('2027-06-01', '2027-06-30') as r"))).r.cycleId;
+    await ok(owner("select public.transition_prosm_time_payroll_cycle($1, 'submit', null, null, true)", [cycleId]));
+    await ok(owner("select public.transition_prosm_time_payroll_cycle($1, 'approve')", [cycleId]));
+    await ok(owner("select public.transition_prosm_time_payroll_cycle($1, 'lock')", [cycleId]));
+    await ok(owner("select public.publish_prosm_time_payslips($1, true)", [cycleId]));
+    const id = (await ok<{ r: { id: string } }>(t.as(colleague.authId, "select public.request_prosm_time_payslip($1) as r", [cycleId]))).r.id;
+    expect((await t.as(colleague.authId, "select public.get_my_prosm_time_payslip($1)", [cycleId])).error).toMatch(/NOT AVAILABLE/);
+    expect((await t.as(managerA.authId, "select public.send_prosm_time_payslip_in_app($1)", [id])).error).toMatch(/AUTHORITY/);
+    await ok(owner("select public.send_prosm_time_payslip_in_app($1)", [id]));
+    expect((await t.as(colleague.authId, "select public.get_my_prosm_time_payslip($1)", [cycleId])).error).toBeNull();
+    const mine = await ok<{ r: { cycles: { canView: boolean }[] } }>(t.as(colleague.authId, "select public.list_my_prosm_time_payslip_cycles() as r"));
+    expect(mine.r.cycles[0].canView).toBe(true);
+    expect((await owner("select public.send_prosm_time_payslip_in_app($1)", [id])).error).toMatch(/ALREADY SENT/);
+    expect(await t.su("select 1 from notifications where user_id = $1 and type = 'payslip_sent' and data ->> 'channel' = 'app'", [colleague.userId])).toHaveLength(1);
+  });
+});

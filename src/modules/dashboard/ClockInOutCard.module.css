@@ -236,3 +236,16 @@
     bottom: calc(64px + 136px + 108px + var(--safe-bottom, 0px));
   }
 }
+
+/* Owner 2026-11-09: clock-out the same colour but see-through; break and change site see-through too */
+.fabOut {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.62), rgba(249, 115, 22, 0.62));
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.fabSmall {
+  background: color-mix(in srgb, var(--surface-card) 45%, transparent);
+  border-color: rgba(255, 255, 255, 0.22);
+}

@@ -347,7 +347,9 @@
     "confirmTitle": "Envoyer le bulletin",
     "confirmBody": "Le bulletin de {{cycle}} sera envoyé en PDF à {{name}} à l'adresse {{email}}.",
     "sentTo": "Envoyé à {{name}} ({{email}}).",
-    "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}"
+    "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}",
+    "sendInApp": "Envoyer dans l'app",
+    "sentInApp": "Le bulletin est dans l'app de {{name}}."
   },
   "mine": {
     "empty": "Aucun bulletin publié.",
@@ -364,7 +366,9 @@
       "sent": "Envoyé par e-mail",
       "failed": "En attente d'un nouvel envoi"
     },
-    "sentOn": "le {{date}} à {{email}}"
+    "sentOn": "le {{date}} à {{email}}",
+    "ask": "Demander votre bulletin",
+    "askBodyApp": "Votre demande part à la paie ; une fois envoyé, le bulletin sera ici, à consulter et enregistrer en PDF."
   },
   "errors": {
     "generic": "Une erreur s'est produite. Réessayez.",

@@ -240,7 +240,9 @@
       "failedTitle": "Invio della busta paga non riuscito",
       "failedBody": "Non è stato possibile inviare la busta paga di {{cycle}}. Puoi riprovare.",
       "publishedTitle": "La tua busta paga è disponibile",
-      "publishedBody": "È stata pubblicata una nuova busta paga. Puoi vederla o richiederla via email."
+      "publishedBody": "È stata pubblicata una nuova busta paga. Puoi vederla o richiederla via email.",
+      "inAppTitle": "La tua busta paga è pronta",
+      "inAppBody": "La busta paga di {{cycle}} è in Le mie buste paga."
     },
     "announcement": {
       "publishedTitle": "Nuovo annuncio",
@@ -260,7 +262,7 @@
     "emergencyLog": "Registro emergenze",
     "timesheets": "Fogli ore",
     "allowances": "Indennità",
-    "leave": "Ferie",
+    "leave": "Ferie e permessi",
     "schedule": "Turni",
     "kiosk": "Modalità Chiosco",
     "reports": "Report",
@@ -326,7 +328,7 @@
   },
   "radio": {
     "title": "Radio",
-    "mediaSectionTitle": "Media",
+    "mediaSectionTitle": "Radio",
     "loading": "Caricamento…",
     "reconnecting": "Riconnessione…",
     "error": "Riproduzione non riuscita.",

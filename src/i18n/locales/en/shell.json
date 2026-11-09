@@ -240,7 +240,9 @@
       "failedTitle": "Payslip email failed",
       "failedBody": "The payslip of {{cycle}} could not be sent. You can try again.",
       "publishedTitle": "Your payslip is available",
-      "publishedBody": "A new payslip was published. You can view it or ask for it by email."
+      "publishedBody": "A new payslip was published. You can view it or ask for it by email.",
+      "inAppTitle": "Your payslip is ready",
+      "inAppBody": "Your payslip of {{cycle}} is in My payslips."
     },
     "announcement": {
       "publishedTitle": "New announcement",
@@ -260,7 +262,7 @@
     "emergencyLog": "Emergency Log",
     "timesheets": "Timesheets",
     "allowances": "Allowances",
-    "leave": "Leave",
+    "leave": "Leave and permissions",
     "schedule": "Shift Roster",
     "kiosk": "Kiosk Mode",
     "reports": "Reports",
@@ -326,7 +328,7 @@
   },
   "radio": {
     "title": "Radio",
-    "mediaSectionTitle": "Media",
+    "mediaSectionTitle": "Radio",
     "loading": "Loading…",
     "reconnecting": "Reconnecting…",
     "error": "Playback failed.",
@@ -361,7 +363,7 @@
   "pageBanner": {
     "manager": "Today's attendance and items awaiting review",
     "people": "Employees, roles and invitations",
-    "leave": "Request and follow leave",
+    "leave": "Request and follow leave and permissions",
     "reports": "Attendance reports and exports",
     "sites": "Work sites and their areas",
     "attendance": "Every clock-in and clock-out",

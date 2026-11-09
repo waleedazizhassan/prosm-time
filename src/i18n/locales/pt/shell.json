@@ -240,7 +240,9 @@
       "failedTitle": "Falha ao enviar o recibo de vencimento",
       "failedBody": "Não foi possível enviar o recibo de vencimento de {{cycle}}. Pode tentar novamente.",
       "publishedTitle": "O seu recibo de vencimento está disponível",
-      "publishedBody": "Foi publicado um novo recibo de vencimento. Pode vê-lo ou pedi-lo por e-mail."
+      "publishedBody": "Foi publicado um novo recibo de vencimento. Pode vê-lo ou pedi-lo por e-mail.",
+      "inAppTitle": "O seu recibo está pronto",
+      "inAppBody": "O recibo de {{cycle}} está em Os meus recibos."
     },
     "announcement": {
       "publishedTitle": "Novo anúncio",
@@ -260,7 +262,7 @@
     "emergencyLog": "Registro de emergências",
     "timesheets": "Folhas de ponto",
     "allowances": "Adicionais",
-    "leave": "Afastamentos",
+    "leave": "Ausências e autorizações",
     "schedule": "Escala de turnos",
     "kiosk": "Modo quiosque",
     "reports": "Relatórios",
@@ -326,7 +328,7 @@
   },
   "radio": {
     "title": "Rádio",
-    "mediaSectionTitle": "Mídia",
+    "mediaSectionTitle": "Rádio",
     "loading": "Carregando…",
     "reconnecting": "Reconectando…",
     "error": "Falha na reprodução.",

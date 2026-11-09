@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu } from "lucide-react";
 
 import BrandMark from "../../components/common/BrandMark";
-import { requestDashboardRefresh } from "../../core/hooks/useDashboardRefresh";
 import { useAppLayout } from "./LayoutContext";
 import NotificationBell from "./NotificationBell";
 import HeaderNavControls from "./HeaderNavControls";
@@ -39,8 +38,8 @@ export default function Header() {
   const onBrandClick = (event: React.MouseEvent) => {
     if (pathname !== "/dashboard") return;
     event.preventDefault();
-    requestDashboardRefresh();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // owner 2026-11-09: a real refresh, back to the top
+    window.location.reload();
   };
 
   return (

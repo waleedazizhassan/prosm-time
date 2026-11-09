@@ -347,7 +347,9 @@
     "confirmTitle": "Enviar o recibo",
     "confirmBody": "O recibo de {{cycle}} será enviado em PDF a {{name}} para {{email}}.",
     "sentTo": "Enviado a {{name}} ({{email}}).",
-    "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}"
+    "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}",
+    "sendInApp": "Enviar na app",
+    "sentInApp": "O recibo já está na app de {{name}}."
   },
   "mine": {
     "empty": "Ainda não há recibos publicados.",
@@ -364,7 +366,9 @@
       "sent": "Enviado por e-mail",
       "failed": "A aguardar novo envio"
     },
-    "sentOn": "em {{date}} para {{email}}"
+    "sentOn": "em {{date}} para {{email}}",
+    "ask": "Pedir o recibo",
+    "askBodyApp": "O pedido vai para os salários; depois de enviado, encontra aqui o recibo para ver e guardar em PDF."
   },
   "errors": {
     "generic": "Algo correu mal. Tente de novo.",
