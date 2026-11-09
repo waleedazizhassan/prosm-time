@@ -275,7 +275,8 @@
     "payroll": "Lohnabrechnung",
     "payslips": "Meine Abrechnungen",
     "externalPay": "Lohn externer Kräfte",
-    "announcements": "Mitteilungen"
+    "announcements": "Mitteilungen",
+    "exceptions": "Meine Ausnahmen"
   },
   "sosOverlay": {
     "title": "SOS-/Notfallalarm",

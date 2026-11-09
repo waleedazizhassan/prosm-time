@@ -6,7 +6,7 @@ import Modal from "./Modal";
 import Button from "./Button";
 import Textarea from "./Textarea";
 import ErrorText from "./ErrorText";
-import { formatTimeOnly } from "../../core/utils/formatDate";
+import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
 
 interface AttendanceConfirmModalProps {
   isOpen: boolean;
@@ -23,6 +23,10 @@ interface AttendanceConfirmModalProps {
   error: string;
   onCancel: () => void;
   onConfirm: (note: string, activity: string) => void;
+  /** 2026-11-09 (owner): who, from which device, and the last clock-out - at the top of the screen */
+  personName?: string | null;
+  deviceLabel?: string | null;
+  lastClockOutLabel?: string | null;
 }
 
 // PROSM Time - § live UX review, user-directed: a real confirmation
@@ -50,6 +54,9 @@ export default function AttendanceConfirmModal({
   error,
   onCancel,
   onConfirm,
+  personName = null,
+  deviceLabel = null,
+  lastClockOutLabel = null,
 }: AttendanceConfirmModalProps) {
   const { t, i18n } = useTranslation("dashboard");
   const [note, setNote] = useState("");
@@ -69,16 +76,16 @@ export default function AttendanceConfirmModal({
       isOpen={isOpen}
       onClose={onCancel}
       title={t(action === "clockIn" ? "attendance.confirmClockInTitle" : "attendance.confirmClockOutTitle")}
-      size="md"
+      size="screen"
       footer={
-        <>
-          <Button variant="ghost" onClick={onCancel} disabled={submitting}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", width: "100%" }}>
+          <Button variant={action === "clockIn" ? "primary" : "danger"} fullWidth onClick={() => onConfirm(note, activity)} loading={submitting}>
+            {t(action === "clockIn" ? "attendance.confirmClockInAction" : "attendance.confirmClockOutAction")}
+          </Button>
+          <Button variant="ghost" fullWidth onClick={onCancel} disabled={submitting}>
             {t("common:actions.cancel")}
           </Button>
-          <Button variant="primary" onClick={() => onConfirm(note, activity)} loading={submitting}>
-            {t(action === "clockIn" ? "attendance.clockInAction" : "attendance.clockOutAction")}
-          </Button>
-        </>
+        </div>
       }
     >
       {/* § live UX review, user-directed - "the capture happens twice":
@@ -88,18 +95,29 @@ export default function AttendanceConfirmModal({
           reassurance that a photo was attached without repeating the
           review step - this is the note-adding screen, not another
           photo screen. */}
-      {photoPreviewUrl ? (
-        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", marginBottom: "var(--space-3)" }}>
-          <img
-            src={photoPreviewUrl}
-            alt={t("attendance.confirmPhotoLabel")}
-            style={{ width: 44, height: 44, objectFit: "cover", borderRadius: "var(--radius-md)", flexShrink: 0 }}
-          />
-          <span style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("attendance.confirmPhotoLabel")}</span>
+      {/* 2026-11-09 (owner): step 3 - who and when at a glance, the photo large and round */}
+      <div style={{ display: "flex", alignItems: "center", gap: "var(--space-4)", marginBottom: "var(--space-4)" }}>
+        {photoPreviewUrl ? (
+          <img src={photoPreviewUrl} alt={t("attendance.confirmPhotoLabel")}
+            style={{ width: 104, height: 104, objectFit: "cover", borderRadius: "50%", flexShrink: 0, border: "3px solid transparent", background: "var(--brand-gradient) border-box", padding: 2 }} />
+        ) : null}
+        <div style={{ minWidth: 0 }}>
+          {personName ? <div style={{ fontSize: "var(--font-xl)", fontWeight: "var(--font-weight-bold)", color: "var(--text-primary)" }}>{personName}</div> : null}
+          {deviceLabel ? <div style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("attendance.viaDevice", { device: deviceLabel })}</div> : null}
+          {lastClockOutLabel ? <div style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{lastClockOutLabel}</div> : null}
+          {!photoPreviewUrl ? <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("attendance.confirmNoPhoto")}</div> : null}
         </div>
-      ) : (
-        <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)", marginBottom: "var(--space-3)" }}>{t("attendance.confirmNoPhoto")}</p>
-      )}
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-2)", marginBottom: "var(--space-3)" }}>
+        <div style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--surface-hover)", textAlign: "center" }}>
+          <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("attendance.confirmDateLabel")}</div>
+          <div style={{ fontWeight: "var(--font-weight-bold)" }}>{formatDateOnly(new Date(), i18n.language)}</div>
+        </div>
+        <div style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--surface-hover)", textAlign: "center" }}>
+          <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("attendance.confirmTimeLabel")}</div>
+          <div style={{ fontWeight: "var(--font-weight-bold)", fontSize: "var(--font-lg)" }}>{formatTimeOnly(new Date().toISOString(), i18n.language)}</div>
+        </div>
+      </div>
 
       {outsideByMeters ? (
         <p role="alert" style={{ margin: "0 0 var(--space-3)", padding: "var(--space-2) var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--status-warning-bg)", color: "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>
@@ -110,10 +128,6 @@ export default function AttendanceConfirmModal({
         <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "var(--space-3)" }}>
           <span style={{ color: "var(--text-secondary)" }}>{t("attendance.siteLabel")}</span>
           <span style={{ fontWeight: "var(--font-weight-medium)", textAlign: "end" }}>{siteName}</span>
-        </div>
-        <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "var(--space-3)" }}>
-          <span style={{ color: "var(--text-secondary)" }}>{t("attendance.confirmTimeLabel")}</span>
-          <span style={{ fontWeight: "var(--font-weight-medium)" }}>{formatTimeOnly(new Date().toISOString(), i18n.language)}</span>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", alignItems: "flex-start", gap: "var(--space-3)" }}>
           <span style={{ color: "var(--text-secondary)", flexShrink: 0 }}>{t("attendance.confirmLocationLabel")}</span>

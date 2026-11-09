@@ -214,7 +214,10 @@
     "suggestSite": "Estás en {{site}}. ¿Fichar la entrada ahora?",
     "confirmOutside": "Estás a {{meters}} m fuera de la zona de {{site}}. Se registrará como excepción y tu responsable la revisará.",
     "pendingCount_many": "{{count}} acciones de asistencia guardadas en este dispositivo",
-    "clockInAt": "Fichar entrada en {{site}}"
+    "clockInAt": "Fichar entrada en {{site}}",
+    "confirmClockInAction": "Confirmar entrada",
+    "confirmClockOutAction": "Confirmar salida",
+    "confirmDateLabel": "Fecha"
   },
   "kioskPin": {
     "title": "PIN del quiosco",
@@ -240,7 +243,8 @@
       "other": "Otro"
     },
     "clarificationAsked": "Tu responsable te pidió que lo expliques de nuevo: \"{{question}}\"",
-    "clarificationAskedNoNote": "Tu responsable te pidió que lo expliques de nuevo."
+    "clarificationAskedNoNote": "Tu responsable te pidió que lo expliques de nuevo.",
+    "none": "Nada que explicar."
   },
   "employeeHome": {
     "hoursTitle": "Mis horas",

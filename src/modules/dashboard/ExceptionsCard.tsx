@@ -28,7 +28,7 @@ const REMINDER_INTERVAL_MS = 3 * 60 * 1000;
 // unresolved, re-plays the alert sound on a timer - the "scheduled
 // reminder" the same request asked for, reusing the one sound utility
 // rather than a second alert mechanism.
-export default function ExceptionsCard() {
+export default function ExceptionsCard({ showEmpty = false }: { showEmpty?: boolean } = {}) {
   const { t } = useTranslation("dashboard");
   const { profile } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -87,6 +87,10 @@ export default function ExceptionsCard() {
     return () => window.clearTimeout(timeout);
   }, [exceptions, targetExceptionId, searchParams, setSearchParams]);
 
+  // 2026-11-09: on its own page (sidebar) it says so when there is nothing to explain
+  if (showEmpty && profile && !loading && exceptions.length === 0) {
+    return <Card><p style={{ margin: 0, color: "var(--text-secondary)" }}>{t("exceptions.none")}</p></Card>;
+  }
   if (!profile || loading || exceptions.length === 0) return null;
 
   const handleSubmit = async (exceptionId: string) => {

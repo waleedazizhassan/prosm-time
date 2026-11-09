@@ -211,7 +211,10 @@
     },
     "suggestSite": "Sie sind bei {{site}}. Jetzt einstempeln?",
     "confirmOutside": "Sie sind {{meters}} m außerhalb des Bereichs von {{site}}. Das wird als Ausnahme erfasst und von Ihrem Vorgesetzten geprüft.",
-    "clockInAt": "Einstempeln bei {{site}}"
+    "clockInAt": "Einstempeln bei {{site}}",
+    "confirmClockInAction": "Einstempeln bestätigen",
+    "confirmClockOutAction": "Ausstempeln bestätigen",
+    "confirmDateLabel": "Datum"
   },
   "kioskPin": {
     "title": "Kiosk-PIN",
@@ -237,7 +240,8 @@
       "other": "Sonstiges"
     },
     "clarificationAsked": "Ihr Manager bittet um eine weitere Erklärung: \"{{question}}\"",
-    "clarificationAskedNoNote": "Ihr Manager bittet Sie, dies noch einmal zu erklären."
+    "clarificationAskedNoNote": "Ihr Manager bittet Sie, dies noch einmal zu erklären.",
+    "none": "Nichts zu erklären."
   },
   "employeeHome": {
     "hoursTitle": "Meine Stunden",

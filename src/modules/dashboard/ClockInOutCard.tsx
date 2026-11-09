@@ -1,7 +1,7 @@
 import { Capacitor } from "@capacitor/core";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { MapPin, Siren } from "lucide-react";
+import { Coffee, LogIn, LogOut, MapPin, Play, Repeat, Siren } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import { useDashboardRefresh } from "../../core/hooks/useDashboardRefresh";
@@ -1159,17 +1159,6 @@ export default function ClockInOutCard() {
       ) : null}
       {failedOfflineItem ? null : view.session ? (
         <>
-          <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
-            <Button variant="danger" fullWidth onClick={handleClockOutTap} loading={submitting}>
-              {t("attendance.clockOutAction")}
-            </Button>
-            <Button variant="ghost" fullWidth onClick={handleToggleBreak} loading={breakSubmitting}>
-              {view.activeBreakId ? t("attendance.breakEndAction") : t("attendance.breakStartAction")}
-            </Button>
-            <Button variant="ghost" fullWidth onClick={handleOpenChangeSiteModal}>
-              {t("attendance.changeSiteAction")}
-            </Button>
-          </div>
 
           {/* SOS on every shift (owner 2026-10-13) - no longer tied to
               presence monitoring; needs the shift the server confirmed
@@ -1199,16 +1188,83 @@ export default function ClockInOutCard() {
               submitted field: name/device are read straight from
               profile/navigator, last-out is one new small repository
               read (AttendanceRepository.getLastCompletedSession). */}
-          {profile ? (
-            <div style={{ margin: "0 0 var(--space-3)" }}>
-              <p style={{ margin: 0, fontSize: "var(--font-lg)", fontWeight: "var(--font-weight-bold)", color: "var(--text-primary)" }}>{profile.fullName}</p>
-              <p style={{ margin: "var(--space-1) 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
-                {t("attendance.viaDevice", { device: getDeviceLabel() })}
-                {lastCompletedSession?.clockOutAt ? ` · ${t("attendance.lastClockOut", { time: formatTimeOnly(lastCompletedSession.clockOutAt, i18n.language) })}` : ""}
-              </p>
+          {/* 2026-11-09: who, the device and the last clock-out are on the confirmation screen and the map card now */}
+
+        </>
+      )}
+
+      {/* 2026-11-09 (owner): step 1 - the map first, the work site's circle around it, where the person
+          stands said on a card over the map, and the clock-in/out buttons floating at its foot. */}
+      <div className={`${styles.mapStage} ${view.session ? styles.clockedIn : ""}`}>
+        <LiveLocationMap
+          latitude={currentLocation?.latitude ?? null}
+          longitude={currentLocation?.longitude ?? null}
+          site={
+            mapRelevantSite
+              ? { name: mapRelevantSite.name, latitude: mapRelevantSite.latitude, longitude: mapRelevantSite.longitude, allowedRadiusMeters: mapRelevantSite.allowedRadiusMeters }
+              : null
+          }
+          siteTone={mapTone}
+          accuracyMeters={currentLocation?.accuracyMeters ?? null}
+          height={380}
+        />
+        <div className={styles.mapInfo}>
+          <div className={styles.mapInfoRow}>
+            <MapPin size={15} style={{ flexShrink: 0, color: locationStatus === "available" ? "var(--brand-primary)" : "var(--status-warning-text)" }} />
+            <span>
+              {locationStatus === "detecting"
+                ? t("attendance.locationDetecting")
+                : locationStatus === "available" && currentLocation
+                ? `${placeName ?? `${currentLocation.latitude.toFixed(5)}, ${currentLocation.longitude.toFixed(5)}`} (${t("attendance.locationAccuracy", { meters: Math.round(currentLocation.accuracyMeters) })})`
+                : t("attendance.locationUnavailable")}
+            </span>
+          </div>
+          {mapRelevantSite && mapSiteAnyLocation ? (
+            <div className={styles.mapInfoRow}>{t("attendance.anyLocationSite", { site: mapRelevantSite.name })}</div>
+          ) : mapRelevantSite && mapSiteProximity ? (
+            <div className={styles.mapInfoRow} style={{ fontWeight: "var(--font-weight-semibold)", color: mapSiteProximity.inside ? "var(--status-success-text)" : "var(--status-warning-text)" }}>
+              {mapSiteProximity.inside
+                ? t("attendance.insideSiteArea", { site: mapRelevantSite.name })
+                : t("attendance.outsideSiteArea", { site: mapRelevantSite.name, meters: mapSiteProximity.outsideByMeters })}
             </div>
           ) : null}
+          {!view.session && lastCompletedSession?.clockOutAt ? (
+            <div className={styles.mapInfoRow} style={{ color: "var(--text-secondary)" }}>{t("attendance.lastClockOut", { time: formatTimeOnly(lastCompletedSession.clockOutAt, i18n.language) })}</div>
+          ) : null}
+        </div>
+        {failedOfflineItem ? null : (
+          <div className={styles.fabBar}>
+            {view.session ? (
+              <>
+                <button type="button" className={`${styles.fab} ${styles.fabOut}`} onClick={handleClockOutTap} disabled={submitting}>
+                  <LogOut size={20} />
+                  <span>{t("attendance.clockOutAction")}</span>
+                </button>
+                <div className={styles.fabRow}>
+                  <button type="button" className={styles.fabSmall} onClick={handleToggleBreak} disabled={breakSubmitting}>
+                    {view.activeBreakId ? <Play size={16} /> : <Coffee size={16} />}
+                    <span>{view.activeBreakId ? t("attendance.breakEndAction") : t("attendance.breakStartAction")}</span>
+                  </button>
+                  <button type="button" className={styles.fabSmall} onClick={handleOpenChangeSiteModal}>
+                    <Repeat size={16} />
+                    <span>{t("attendance.changeSiteAction")}</span>
+                  </button>
+                </div>
+              </>
+            ) : (
+              <button type="button" className={`${styles.fab} ${styles.fabIn}`} onClick={() => handleClockInTap()} disabled={submitting || (!siteId && !manualLocationLabel.trim())}>
+                <LogIn size={20} />
+                <span>{suggestOnSite && siteId === proximitySite!.id ? t("attendance.clockInAt", { site: proximitySite!.name }) : t("attendance.clockInAction")}</span>
+              </button>
+            )}
+          </div>
+        )}
+      </div>
 
+
+      {/* Owner 2026-11-09: the site and the place of work under the map */}
+      {!view.session && !failedOfflineItem ? (
+        <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", marginTop: "var(--space-3)" }}>
           {/* § live UX review, user-directed - "site should be optional;
               the important thing is registering attendance at the
               employee's actual current location, since they may be
@@ -1241,7 +1297,6 @@ export default function ClockInOutCard() {
               onChange={(event) => setManualLocationLabel(event.target.value)}
               disabled={submitting}
               required
-              helperText={t("attendance.manualLocationHint")}
             />
           ) : null}
           {siteId ? (
@@ -1262,64 +1317,8 @@ export default function ClockInOutCard() {
               {t("attendance.suggestSite", { site: proximitySite!.name })}
             </p>
           ) : null}
-          <Button fullWidth onClick={() => handleClockInTap()} loading={submitting} disabled={!siteId && !manualLocationLabel.trim()}>
-            {suggestOnSite && siteId === proximitySite!.id ? t("attendance.clockInAt", { site: proximitySite!.name }) : t("attendance.clockInAction")}
-          </Button>
-        </>
-      )}
-
-      {/* v2.3.43 step 13 (item 14): the main action comes first; the map and the
-          place below it confirm where the clock in/out is recorded. */}
-      <div style={{ marginTop: "var(--space-3)" }}>
-        <LiveLocationMap
-          latitude={currentLocation?.latitude ?? null}
-          longitude={currentLocation?.longitude ?? null}
-          site={
-            mapRelevantSite
-              ? { name: mapRelevantSite.name, latitude: mapRelevantSite.latitude, longitude: mapRelevantSite.longitude, allowedRadiusMeters: mapRelevantSite.allowedRadiusMeters }
-              : null
-          }
-          siteTone={mapTone}
-          accuracyMeters={currentLocation?.accuracyMeters ?? null}
-        />
-        {mapRelevantSite && mapSiteAnyLocation ? (
-          <p style={{ margin: "var(--space-1) 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("attendance.anyLocationSite", { site: mapRelevantSite.name })}</p>
-        ) : mapRelevantSite && mapSiteProximity ? (
-          <p style={{ margin: "var(--space-1) 0 0", fontSize: "var(--font-xs)", fontWeight: "var(--font-weight-semibold)", color: mapSiteProximity.inside ? "var(--status-success-text)" : "var(--status-warning-text)" }}>
-            {mapSiteProximity.inside
-              ? t("attendance.insideSiteArea", { site: mapRelevantSite.name })
-              : t("attendance.outsideSiteArea", { site: mapRelevantSite.name, meters: mapSiteProximity.outsideByMeters })}
-          </p>
-        ) : null}
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "var(--space-2)",
-          margin: "var(--space-3) 0",
-          padding: "var(--space-2) var(--space-3)",
-          borderRadius: "var(--radius-md)",
-          background: "var(--surface-hover)",
-          color: locationStatus === "unavailable" ? "var(--status-warning-text)" : "var(--text-secondary)",
-          fontSize: "var(--font-xs)",
-        }}
-      >
-        <MapPin size={14} style={{ flexShrink: 0, color: locationStatus === "available" ? "var(--brand-primary)" : undefined }} />
-        {locationStatus === "detecting" ? (
-          <span>{t("attendance.locationDetecting")}</span>
-        ) : locationStatus === "available" && currentLocation ? (
-          <span>
-            {placeName ?? `${currentLocation.latitude.toFixed(5)}, ${currentLocation.longitude.toFixed(5)}`}
-            {" "}
-            ({t("attendance.locationAccuracy", { meters: Math.round(currentLocation.accuracyMeters) })})
-          </span>
-        ) : (
-          <span>{t("attendance.locationUnavailable")}</span>
-        )}
-      </div>
-
+        </div>
+      ) : null}
 
       {checklist && view.session ? (
         <ShiftChecklistModal
@@ -1351,6 +1350,9 @@ export default function ClockInOutCard() {
           error={confirmError}
           onCancel={handleConfirmCancel}
           onConfirm={handleConfirmSubmit}
+          personName={profile?.fullName ?? null}
+          deviceLabel={getDeviceLabel()}
+          lastClockOutLabel={lastCompletedSession?.clockOutAt ? t("attendance.lastClockOut", { time: formatTimeOnly(lastCompletedSession.clockOutAt, i18n.language) }) : null}
         />
       ) : null}
 

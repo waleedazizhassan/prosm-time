@@ -82,7 +82,10 @@
     "locationSet": "Standort festgelegt: {{latitude}}, {{longitude}}",
     "moreOptions": "Weitere Optionen",
     "outsideZonePolicyLabel": "Einstempeln außerhalb des Arbeitsbereichs",
-    "clockOutOutsideNote": "Ausstempeln außerhalb des Arbeitsbereichs ist immer erlaubt: Es wird erfasst und ein Grund wird abgefragt, damit keine Schicht offen bleibt."
+    "clockOutOutsideNote": "Ausstempeln außerhalb des Arbeitsbereichs ist immer erlaubt: Es wird erfasst und ein Grund wird abgefragt, damit keine Schicht offen bleibt.",
+    "rangeTitle": "Bereich des Standorts",
+    "rangeNeedsLocation": "Erst den Standort setzen (\"Aktuellen Standort verwenden\"), dann erscheint der Kreis auf der Karte.",
+    "rangeHint": "Der Kreis ist der Bereich, in dem eingestempelt werden kann; dazu kommen {{meters}} m GPS-Toleranz."
   },
   "detail": {
     "backToList": "Zurück zu Standorten",

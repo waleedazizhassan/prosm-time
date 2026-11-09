@@ -37,3 +37,125 @@
     animation: none;
   }
 }
+
+/* 2026-11-09 (owner): step 1 - the map is the stage; a card over it says where the person stands,
+   and the clock-in/out buttons float at its foot in PROSM's own gradient (not a copy of any app). */
+.mapStage {
+  position: relative;
+  margin-top: var(--space-3);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.mapInfo {
+  position: absolute;
+  top: var(--space-3);
+  inset-inline: var(--space-3);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--surface-card) 88%, transparent);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-size: var(--font-sm);
+}
+
+.mapInfoRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.fabBar {
+  position: absolute;
+  bottom: var(--space-4);
+  inset-inline: var(--space-3);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-2);
+}
+
+.fab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 56px;
+  padding: 0 var(--space-5);
+  border: none;
+  border-radius: 999px;
+  color: #fff;
+  font: inherit;
+  font-size: var(--font-lg);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(6, 18, 48, 0.35);
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.fab:active {
+  transform: scale(0.98);
+}
+
+.fab:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.fabIn {
+  background: var(--brand-gradient, linear-gradient(135deg, #1e6fd9, #22c55e));
+}
+
+.fabOut {
+  background: linear-gradient(135deg, #dc2626, #f97316);
+}
+
+.fabRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+.fabSmall {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-card) 92%, transparent);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.fabSmall:disabled {
+  opacity: 0.55;
+}
+
+/* Owner 2026-11-09: on a phone the clock-in screen fits without scrolling - the map takes what the
+   header, the bottom bar and the site fields leave; the buttons float on it. */
+@media (max-width: 640px) {
+  .mapStage :global(.leaflet-container) {
+    height: max(230px, calc(100dvh - 470px)) !important;
+  }
+
+  .mapStage.clockedIn :global(.leaflet-container) {
+    height: max(230px, calc(100dvh - 400px)) !important;
+  }
+}

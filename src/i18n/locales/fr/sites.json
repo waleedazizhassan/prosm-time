@@ -82,7 +82,10 @@
     "locationSet": "Emplacement défini : {{latitude}}, {{longitude}}",
     "moreOptions": "Plus d'options",
     "outsideZonePolicyLabel": "Pointage d'arrivée hors de la zone de travail",
-    "clockOutOutsideNote": "Le pointage de départ hors de la zone est toujours autorisé : il est enregistré et un motif est demandé, pour qu'aucune session ne reste ouverte."
+    "clockOutOutsideNote": "Le pointage de départ hors de la zone est toujours autorisé : il est enregistré et un motif est demandé, pour qu'aucune session ne reste ouverte.",
+    "rangeTitle": "Périmètre du site",
+    "rangeNeedsLocation": "Définissez d'abord la position du site (\"Utiliser ma position\") pour voir le cercle.",
+    "rangeHint": "Le cercle est la zone où le pointage est permis ; {{meters}} m de tolérance GPS s'y ajoutent."
   },
   "detail": {
     "backToList": "Retour aux sites",

@@ -82,7 +82,10 @@
     "locationSet": "Ubicación fijada: {{latitude}}, {{longitude}}",
     "moreOptions": "Más opciones",
     "outsideZonePolicyLabel": "Fichar la entrada fuera de la zona de trabajo",
-    "clockOutOutsideNote": "Fichar la salida fuera de la zona de trabajo siempre está permitido: se registra y se pide el motivo al empleado, para que nadie se quede dentro sin fichar."
+    "clockOutOutsideNote": "Fichar la salida fuera de la zona de trabajo siempre está permitido: se registra y se pide el motivo al empleado, para que nadie se quede dentro sin fichar.",
+    "rangeTitle": "Radio de la sede",
+    "rangeNeedsLocation": "Primero fije la ubicación (\"Usar mi ubicación actual\") para ver el círculo.",
+    "rangeHint": "El círculo es donde se permite fichar; se suman {{meters}} m de tolerancia GPS."
   },
   "detail": {
     "backToList": "Volver a las sedes",

@@ -82,7 +82,7 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
       // The activation code is entered on its own page.
       return viewer.isOwner ? "/activate" : "/dashboard";
     case "out_of_zone_employee":
-      return "/dashboard";
+      return "/exceptions";
   }
   // timesheet_ready/submitted/approved/rejected and timesheet_correction_*:
   // the Timesheets page (not the read-only report).

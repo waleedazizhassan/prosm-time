@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { AlertTriangle, ArrowDown, ArrowUp, CalendarRange, FileDown, GripVertical, Settings2, UserPlus } from "lucide-react";
+import { AlertTriangle, ArrowDown, ArrowUp, CalendarRange, FileDown, GripVertical, Settings2 } from "lucide-react";
 
 import { useAuth } from "../../../core/context/AuthContext";
 import usePlanFeatures from "../../../core/hooks/usePlanFeatures";
@@ -498,11 +498,7 @@ export default function ManagerDashboard() {
           </p>
         </div>
         <div className={styles.actions}>
-          {hasPermission("attendance.clock_in_on_behalf") ? (
-            <Button size="sm" onClick={() => navigate("/admin-clock")}>
-              <UserPlus size={14} /> {t("manager.proxyClock")}
-            </Button>
-          ) : null}
+          {/* Owner 2026-11-09 (no duplicates): clocking in on someone's behalf is on its own page in the sidebar */}
           <Button size="sm" variant="ghost" onClick={exportPdf} loading={exporting} disabled={!data || !allows("export")} aria-label={t("manager.export.action")} title={t("manager.export.action")}>
             <FileDown size={14} /> <span className={styles.actionLabel}>{t("manager.export.action")}</span>
           </Button>

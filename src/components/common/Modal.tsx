@@ -9,7 +9,8 @@ interface ModalProps {
   title: string;
   children: ReactNode;
   footer?: ReactNode;
-  size?: "sm" | "md" | "lg";
+  /** "screen": the whole screen on a phone, md on wider screens (2026-11-09 clock-in steps) */
+  size?: "sm" | "md" | "lg" | "screen";
 }
 
 // PROSM Time - mirrors PROSM Platform's own Modal size variants

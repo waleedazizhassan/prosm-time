@@ -7,6 +7,9 @@ import { describe, expect, it, vi } from "vitest";
 import SiteFormModal from "./SiteFormModal";
 import type { Site } from "../../core/repositories/SiteRepository";
 
+// 2026-11-09: the range preview map (Leaflet + theme) is not under test here
+vi.mock("../../components/common/LiveLocationMap", () => ({ default: () => null }));
+
 vi.mock("../../core/repositories/OrganizationRepository", () => ({
   default: { getCurrentOrganization: () => Promise.resolve({ success: false, message: null, data: null }) },
 }));

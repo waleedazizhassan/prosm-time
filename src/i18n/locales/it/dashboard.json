@@ -214,7 +214,10 @@
     },
     "suggestSite": "Sei a {{site}}. Timbrare ora?",
     "confirmOutside": "Sei a {{meters}} m fuori dall'area di {{site}}. Sarà registrato come eccezione e il tuo responsabile lo verificherà.",
-    "clockInAt": "Timbra l'entrata a {{site}}"
+    "clockInAt": "Timbra l'entrata a {{site}}",
+    "confirmClockInAction": "Conferma entrata",
+    "confirmClockOutAction": "Conferma uscita",
+    "confirmDateLabel": "Data"
   },
   "kioskPin": {
     "title": "PIN chiosco",
@@ -240,7 +243,8 @@
       "other": "Altro"
     },
     "clarificationAsked": "Il tuo responsabile chiede un chiarimento: \"{{question}}\"",
-    "clarificationAskedNoNote": "Il tuo responsabile ti chiede di spiegarlo di nuovo."
+    "clarificationAskedNoNote": "Il tuo responsabile ti chiede di spiegarlo di nuovo.",
+    "none": "Niente da spiegare."
   },
   "employeeHome": {
     "hoursTitle": "Le mie ore",

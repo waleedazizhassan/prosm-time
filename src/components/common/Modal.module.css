@@ -53,6 +53,31 @@
   max-width: 960px;
 }
 
+/* 2026-11-09 (owner): the clock-in camera and confirmation take the whole phone screen */
+.screen {
+  max-width: 640px;
+}
+
+@media (max-width: 640px) {
+  .backdrop:has(.screen) {
+    padding: 0;
+  }
+
+  .screen {
+    max-width: none;
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
+    border-radius: 0;
+    border: none;
+  }
+
+  .screen .body {
+    flex: 1;
+    padding: var(--space-4);
+  }
+}
+
 .header {
   display: flex;
   align-items: center;

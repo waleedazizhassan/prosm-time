@@ -56,6 +56,7 @@ const PayrollProfilesPage = lazy(() => import("../modules/payroll/PayrollProfile
 const PayrollSettingsPage = lazy(() => import("../modules/payroll/PayrollSettingsPage"));
 const PayslipRequestsPage = lazy(() => import("../modules/payroll/PayslipRequestsPage"));
 const MyPayslipsPage = lazy(() => import("../modules/payroll/MyPayslipsPage"));
+const ExceptionsPage = lazy(() => import("../modules/dashboard/ExceptionsPage"));
 const AnnouncementsPage = lazy(() => import("../modules/announcements/AnnouncementsPage"));
 
 // PROSM Time route map. /activate, /login, /accept-invitation are
@@ -158,6 +159,7 @@ export default function AppRoutes() {
             <Route path="/payslips" element={<PlanRoute feature="payroll"><MyPayslipsPage /></PlanRoute>} />
             {/* 2026-11-09 Media Center: announcements for everyone; publishing is checked on the server */}
             <Route path="/announcements" element={<AnnouncementsPage />} />
+            <Route path="/exceptions" element={<ExceptionsPage />} />
             <Route path="/schedule" element={<SchedulePage />} />
             <Route path="/calendar" element={<CalendarPage />} />
             <Route path="/emergency-log" element={<PlanRoute feature="sos"><EmergencyLogPage /></PlanRoute>} />
