@@ -44,7 +44,7 @@ function CommandPalette() {
     () =>
       NAV_ITEMS.filter(
         (item) =>
-          (item.requiredPermission === null || hasPermission(item.requiredPermission)) &&
+          (item.requiredPermission === null || (Array.isArray(item.requiredPermission) ? item.requiredPermission.some((key) => hasPermission(key)) : hasPermission(item.requiredPermission))) &&
           (!item.ownerOnly || profile?.isOwner) &&
           (!item.hiddenFromOwner || !profile?.isRealOwner) &&
       (!item.realOwnerOnly || profile?.isRealOwner) &&

@@ -205,5 +205,6 @@
     "cannotDelete": "只能删除从未批准过的草稿。"
   },
   "addRateFailed": "已添加工人，但未能保存其费率：{{error}}。请在外部劳务工资中设置。",
-  "addRate": "工资"
+  "addRate": "工资",
+  "payTab": "工资"
 }

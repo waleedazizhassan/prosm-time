@@ -1,0 +1,19 @@
+/* Owner 2026-11-09: the person's cards close together, in an even order; two columns where there is
+   room, the permissions card (long) across both. */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: var(--space-3);
+  align-items: start;
+  margin-top: var(--space-3);
+}
+
+.cards > * {
+  margin: 0 !important;
+  min-width: 0;
+}
+
+.cards > :global(.wide),
+.cards > *:has(> [data-wide]) {
+  grid-column: 1 / -1;
+}

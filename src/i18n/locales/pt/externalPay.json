@@ -205,5 +205,6 @@
     "cannotDelete": "Só se elimina um rascunho que nunca foi aprovado."
   },
   "addRateFailed": "O trabalhador foi adicionado, mas a tarifa não foi guardada: {{error}}. Defina-a em Pagamento de mão de obra externa.",
-  "addRate": "Pagamento"
+  "addRate": "Pagamento",
+  "payTab": "Pagamentos"
 }

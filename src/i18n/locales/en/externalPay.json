@@ -205,5 +205,6 @@
     "cannotDelete": "Only a draft that was never approved can be deleted."
   },
   "addRateFailed": "The worker was added, but the rate was not saved: {{error}}. Set it under External labour pay.",
-  "addRate": "Pay"
+  "addRate": "Pay",
+  "payTab": "Pay"
 }

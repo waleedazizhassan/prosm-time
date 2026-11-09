@@ -205,5 +205,6 @@
     "cannotDelete": "Nur ein nie genehmigter Entwurf kann gelöscht werden."
   },
   "addRateFailed": "Der Arbeiter wurde hinzugefügt, aber sein Satz wurde nicht gespeichert: {{error}}. Setzen Sie ihn unter Lohn externer Arbeitskräfte.",
-  "addRate": "Lohn"
+  "addRate": "Lohn",
+  "payTab": "Löhne"
 }
