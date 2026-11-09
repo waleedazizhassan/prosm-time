@@ -294,7 +294,9 @@
     "body": "Your shift is still open. Clock out now?",
     "clockOut": "Clock out now",
     "stillWorking": "Still working",
-    "error": "Could not save your answer."
+    "error": "Could not save your answer.",
+    "bodyAtLeave": "Your shift is still open. Clock out at {{time}}, when you left?",
+    "clockOutAtLeave": "Clock out at {{time}}"
   },
   "manager": {
     "title": "Dashboard",

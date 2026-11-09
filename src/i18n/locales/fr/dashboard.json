@@ -297,7 +297,9 @@
     "body": "Votre session est encore ouverte. Pointer le départ ?",
     "clockOut": "Pointer maintenant",
     "stillWorking": "Toujours au travail",
-    "error": "Impossible d'enregistrer la réponse."
+    "error": "Impossible d'enregistrer la réponse.",
+    "bodyAtLeave": "Votre poste est toujours ouvert. Pointer le départ à {{time}}, quand vous êtes parti ?",
+    "clockOutAtLeave": "Départ à {{time}}"
   },
   "manager": {
     "title": "Tableau de bord",

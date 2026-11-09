@@ -177,9 +177,9 @@
     "option": {
       "OFF": "Não fazer nada",
       "PROMPT": "Perguntar “registrar saída?”",
-      "AUTO": "Perguntar e depois registrar a saída automaticamente"
+      "AUTO": "Perguntar, lembrar e registar a saída à hora em que saiu, após concordar"
     },
-    "minutesLabel": "Registrar a saída automaticamente após (minutos fora)",
+    "minutesLabel": "Lembrar após (minutos fora)",
     "fieldSiteLabel": "Unidade de campo (as pessoas se deslocam - nunca perguntar)",
     "save": "Salvar",
     "saved": "Salvo.",

@@ -297,7 +297,9 @@
     "body": "Seu turno continua aberto. Registrar a saída agora?",
     "clockOut": "Registrar saída agora",
     "stillWorking": "Ainda trabalhando",
-    "error": "Não foi possível salvar sua resposta."
+    "error": "Não foi possível salvar sua resposta.",
+    "bodyAtLeave": "O seu turno continua aberto. Registar a saída às {{time}}, quando saiu?",
+    "clockOutAtLeave": "Saída às {{time}}"
   },
   "manager": {
     "title": "Painel",

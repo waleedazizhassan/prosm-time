@@ -116,7 +116,7 @@
     },
     "leavingSite": {
       "title": "Sair do local com o ponto aberto",
-      "body": "Cada local decide o que acontece quando você sai da área de trabalho com o ponto aberto: você recebe uma notificação perguntando se quer registrar a saída (pode responder \"ainda trabalhando\", por exemplo para uma tarefa externa), ou sua saída é registrada automaticamente após o tempo que o local define, no momento em que você saiu. Trabalhadores de campo podem ser dispensados. Toda saída automática fica registrada e pode ser corrigida por um gestor. No Android, uma pequena notificação \"PROSM Time · ponto aberto\" fica visível enquanto a localização é registrada - só durante o turno, em um canal silencioso próprio."
+      "body": "Cada local decide o que acontece se sair da sua zona com entrada registada: uma notificação pergunta se quer registar a saída (pode responder \"ainda a trabalhar\", por exemplo para um recado). Nos locais configurados para registar a saída à hora em que saiu, chega um lembrete se não responder e, ao concordar, a saída fica registada no momento em que saiu - ninguém tem a saída registada sem concordar. Os trabalhadores de terreno podem ser dispensados. Cada saída deste tipo fica registada e um responsável pode corrigi-la. No Android fica visível uma pequena notificação \"PROSM Time · entrada registada\" enquanto a localização é registada, só durante o turno e num canal silencioso próprio."
     },
     "managerDashboard": {
       "title": "O painel (proprietário e gestores)",

@@ -1118,7 +1118,7 @@ export default function ClockInOutCard() {
             {view.activeBreakId ? t("attendance.timerPausedOnBreak") : t("attendance.clockedInSince", { time: formatTimeOnly(view.session.clockInAt, i18n.language) })}
           </p>
           {view.session.id.startsWith("q:") ? null : <LongSessionPrompt clockInAt={view.session.clockInAt} now={now} onClockOut={handleClockOutTap} />}
-          {view.session.id.startsWith("q:") ? null : <ExitSitePrompt onClockOut={handleClockOutTap} />}
+          {view.session.id.startsWith("q:") ? null : <ExitSitePrompt onClockOut={handleClockOutTap} onClockedOut={() => void load()} />}
         </div>
       ) : null}
 

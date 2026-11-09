@@ -116,7 +116,7 @@
     },
     "leavingSite": {
       "title": "Den Standort eingestempelt verlassen",
-      "body": "Jeder Standort legt fest, was passiert, wenn Sie seinen Bereich eingestempelt verlassen: eine Benachrichtigung fragt, ob Sie ausstempeln (Antwort „arbeite noch“ z. B. für einen Botengang möglich), oder Sie werden nach der vom Standort festgelegten Zeit automatisch ausgestempelt, zum Zeitpunkt des Verlassens. Außendienstkräfte können befreit werden. Jedes automatische Ausstempeln wird protokolliert und kann vom Vorgesetzten korrigiert werden. Unter Android bleibt eine kleine Benachrichtigung „PROSM Time · eingestempelt“ sichtbar, solange der Standort erfasst wird - nur während Ihrer Schicht, auf einem stillen Kanal."
+      "body": "Jeder Standort legt fest, was passiert, wenn Sie den Arbeitsbereich eingestempelt verlassen: Eine Benachrichtigung fragt, ob Sie ausstempeln möchten (Antwort \"arbeite noch\" möglich, z. B. bei einer Besorgung). Bei Standorten mit Ausstempeln zur Gehzeit folgt ohne Antwort eine Erinnerung, und mit Ihrer Zustimmung wird zum Zeitpunkt Ihres Gehens ausgestempelt - niemand wird je ohne Zustimmung ausgestempelt. Außendienstkräfte können ausgenommen werden. Jedes solche Ausstempeln wird protokolliert und kann von Vorgesetzten korrigiert werden. Unter Android bleibt während der Standorterfassung eine kleine Benachrichtigung \"PROSM Time · eingestempelt\" sichtbar - nur während der Schicht, auf einem eigenen stillen Kanal."
     },
     "managerDashboard": {
       "title": "Das Dashboard (Eigentümer und Leiter)",

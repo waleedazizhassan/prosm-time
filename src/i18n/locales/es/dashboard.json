@@ -297,7 +297,9 @@
     "body": "Tu turno sigue abierto. ¿Fichar la salida ahora?",
     "clockOut": "Fichar salida ahora",
     "stillWorking": "Sigo trabajando",
-    "error": "No se pudo guardar tu respuesta."
+    "error": "No se pudo guardar tu respuesta.",
+    "bodyAtLeave": "Tu turno sigue abierto. ¿Fichar la salida a las {{time}}, cuando te fuiste?",
+    "clockOutAtLeave": "Salida a las {{time}}"
   },
   "manager": {
     "title": "Panel",

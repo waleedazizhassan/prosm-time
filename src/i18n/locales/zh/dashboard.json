@@ -291,7 +291,9 @@
     "body": "您的班次仍未结束。现在下班打卡吗？",
     "clockOut": "立即下班打卡",
     "stillWorking": "还在工作",
-    "error": "无法保存您的回答。"
+    "error": "无法保存您的回答。",
+    "bodyAtLeave": "您的班次仍未结束。按您离开的时间 {{time}} 签退？",
+    "clockOutAtLeave": "按 {{time}} 签退"
   },
   "manager": {
     "title": "仪表板",

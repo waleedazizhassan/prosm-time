@@ -177,9 +177,9 @@
     "option": {
       "OFF": "No hacer nada",
       "PROMPT": "Preguntar «¿fichar la salida?»",
-      "AUTO": "Preguntar y luego fichar la salida automáticamente"
+      "AUTO": "Preguntar, recordar y fichar la salida a la hora en que se fue, cuando acepte"
     },
-    "minutesLabel": "Fichar la salida automáticamente tras (minutos fuera)",
+    "minutesLabel": "Recordar tras (minutos fuera)",
     "fieldSiteLabel": "Sede de campo (la gente se mueve: no preguntar nunca)",
     "save": "Guardar",
     "saved": "Guardado.",

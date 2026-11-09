@@ -116,7 +116,7 @@
     },
     "leavingSite": {
       "title": "Lasciare il sito in servizio",
-      "body": "Ogni sito decide cosa succede se lasci la sua area mentre sei in servizio: una notifica ti chiede se timbrare l'uscita (puoi rispondere «sto ancora lavorando», ad esempio per una commissione), oppure l'uscita viene timbrata automaticamente dopo il tempo stabilito dal sito, all'ora in cui sei uscito. I lavoratori sul campo possono essere esentati. Ogni uscita automatica è registrata e può essere corretta da un responsabile. Su Android una piccola notifica «PROSM Time · presenza registrata» resta visibile mentre la posizione viene registrata - solo durante il turno, su un canale silenzioso."
+      "body": "Ogni sede decide cosa succede se lasci la sua area in servizio: una notifica chiede se vuoi timbrare l'uscita (puoi rispondere \"sto ancora lavorando\", per esempio per una commissione). Nelle sedi impostate per timbrare all'ora di uscita, se non rispondi arriva un promemoria e, quando accetti, l'uscita viene registrata all'ora in cui sei uscito - nessuno viene mai timbrato in uscita senza consenso. I lavoratori sul campo possono essere esentati. Ogni uscita di questo tipo è registrata e un responsabile può correggerla. Su Android una piccola notifica \"PROSM Time · in servizio\" resta visibile mentre la posizione viene registrata, solo durante il turno e su un canale silenzioso dedicato."
     },
     "managerDashboard": {
       "title": "La dashboard (titolare e responsabili)",

@@ -116,7 +116,7 @@
     },
     "leavingSite": {
       "title": "Leaving the Site While Clocked In",
-      "body": "Each site decides what happens when you leave its work area while clocked in: you get a notification asking whether to clock out (you can answer \"still working\", for example for an errand), or you are clocked out automatically after the time the site sets, at the moment you left. Field workers can be exempted. Every automatic clock-out is recorded and can be corrected by a manager. On Android a small notification \"PROSM Time · clocked in\" stays visible while location is recorded - only during your shift, on its own silent channel."
+      "body": "Each site decides what happens when you leave its work area while clocked in: you get a notification asking whether to clock out (you can answer \"still working\", for example for an errand). On sites set to clock out at the time you left, a reminder follows if you do not answer, and when you agree your clock-out is recorded at the moment you left - nobody is ever clocked out without agreeing. Field workers can be exempted. Every such clock-out is recorded and can be corrected by a manager. On Android a small notification \"PROSM Time · clocked in\" stays visible while location is recorded - only during your shift, on its own silent channel."
     },
     "managerDashboard": {
       "title": "The Dashboard (Owner and managers)",

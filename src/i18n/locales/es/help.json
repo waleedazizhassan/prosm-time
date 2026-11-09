@@ -116,7 +116,7 @@
     },
     "leavingSite": {
       "title": "Salir de la sede con la entrada fichada",
-      "body": "Cada sede decide qué pasa cuando sales de su zona de trabajo con la entrada fichada: recibes una notificación que pregunta si quieres fichar la salida (puedes responder \"sigo trabajando\", por ejemplo para un recado), o se ficha tu salida automáticamente tras el tiempo que fija la sede, a la hora en que saliste. Los trabajadores de campo pueden quedar exentos. Toda salida automática queda registrada y un responsable puede corregirla. En Android, una pequeña notificación \"PROSM Time · fichaje activo\" permanece visible mientras se registra la ubicación, solo durante tu turno, en su propio canal silencioso."
+      "body": "Cada sede decide qué pasa si sales de su zona con la entrada fichada: una notificación pregunta si quieres fichar la salida (puedes responder \"sigo trabajando\", por ejemplo por un recado). En las sedes configuradas para fichar a la hora de salida, llega un recordatorio si no respondes y, al aceptar, la salida se registra a la hora en que te fuiste; nunca se ficha la salida de nadie sin su aceptación. Se puede eximir a los trabajadores de campo. Cada salida así queda registrada y un responsable puede corregirla. En Android se ve una pequeña notificación \"PROSM Time · entrada fichada\" mientras se registra la ubicación, solo durante el turno y en un canal silencioso propio."
     },
     "managerDashboard": {
       "title": "El panel (propietario y responsables)",

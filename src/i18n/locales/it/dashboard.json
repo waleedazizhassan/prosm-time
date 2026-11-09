@@ -297,7 +297,9 @@
     "body": "Il turno è ancora aperto. Registri l'uscita?",
     "clockOut": "Esci ora",
     "stillWorking": "Sto ancora lavorando",
-    "error": "Impossibile salvare la risposta."
+    "error": "Impossibile salvare la risposta.",
+    "bodyAtLeave": "Il turno è ancora aperto. Timbrare l'uscita alle {{time}}, quando sei uscito?",
+    "clockOutAtLeave": "Uscita alle {{time}}"
   },
   "manager": {
     "title": "Dashboard",

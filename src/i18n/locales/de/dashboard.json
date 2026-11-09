@@ -294,7 +294,9 @@
     "body": "Ihre Schicht ist noch offen. Jetzt ausstempeln?",
     "clockOut": "Jetzt ausstempeln",
     "stillWorking": "Noch bei der Arbeit",
-    "error": "Antwort konnte nicht gespeichert werden."
+    "error": "Antwort konnte nicht gespeichert werden.",
+    "bodyAtLeave": "Ihre Schicht ist noch offen. Ausstempeln um {{time}}, als Sie gegangen sind?",
+    "clockOutAtLeave": "Ausstempeln um {{time}}"
   },
   "manager": {
     "title": "Dashboard",

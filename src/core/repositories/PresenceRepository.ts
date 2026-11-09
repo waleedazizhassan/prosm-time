@@ -94,6 +94,27 @@ class PresenceRepository {
     }
   }
 
+  // 2026-11-09: the open question with the site's policy and when the person left (AUTO sites
+  // clock out at that time once the person agrees).
+  async getExitPrompt(): Promise<{ policy: "PROMPT" | "AUTO"; leftAt: string | null; reminded: boolean } | null> {
+    try {
+      const { data, error } = await this.client.rpc("get_prosm_time_exit_prompt");
+      if (error || !data) return null;
+      return data as { policy: "PROMPT" | "AUTO"; leftAt: string | null; reminded: boolean };
+    } catch {
+      return null;
+    }
+  }
+
+  async confirmExitAtLeaveTime(): Promise<ServiceResult> {
+    try {
+      const { error } = await this.client.rpc("confirm_prosm_time_site_exit");
+      return error ? createError(error.message) : createSuccess();
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Presence service unavailable.");
+    }
+  }
+
   async answerExitPrompt(): Promise<ServiceResult> {
     try {
       const { error } = await this.client.rpc("respond_prosm_time_site_exit", { p_action: "still_working" });
