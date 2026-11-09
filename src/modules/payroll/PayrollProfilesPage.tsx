@@ -187,14 +187,14 @@ export default function PayrollProfilesPage() {
           <Select label={t("profiles.person")} name="planUser" value={plan.userId} onChange={(event) => setPlan({ ...plan, userId: event.target.value })}
             options={[{ value: "", label: "-" }, ...(people ?? []).filter((p) => p.profile).map((p) => ({ value: p.userId, label: p.fullName }))]} />
           <Input label={t("installments.name")} name="planName" value={plan.name} onChange={(event) => setPlan({ ...plan, name: event.target.value })} />
-          <Input label={t("installments.total")} name="planTotal" type="number" value={plan.total} onChange={(event) => setPlan({ ...plan, total: event.target.value })} />
-          <Input label={t("installments.count")} name="planCount" type="number" value={plan.count} onChange={(event) => setPlan({ ...plan, count: event.target.value })} />
+          <Input label={t("installments.total")} name="planTotal" inputMode="decimal" value={plan.total} onChange={(event) => setPlan({ ...plan, total: event.target.value })} />
+          <Input label={t("installments.count")} name="planCount" inputMode="numeric" value={plan.count} onChange={(event) => setPlan({ ...plan, count: event.target.value })} />
           <Input label={t("installments.start")} name="planStart" type="date" value={plan.start} onChange={(event) => setPlan({ ...plan, start: event.target.value })} />
-          <Input label={t("installments.amountOptional")} name="planAmount" type="number" value={plan.installment} onChange={(event) => setPlan({ ...plan, installment: event.target.value })} />
+          <Input label={t("installments.amountOptional")} name="planAmount" inputMode="decimal" value={plan.installment} onChange={(event) => setPlan({ ...plan, installment: event.target.value })} />
         </div>
         <Button size="sm" loading={busy === "plan"} disabled={!plan.userId || !plan.name.trim() || !plan.total || !plan.count}
           onClick={async () => {
-            const ok = await act("plan", () => PayrollCycleRepository.saveInstallment(plan.userId, plan.name.trim(), Number(plan.total), Number(plan.count), plan.start, plan.installment ? Number(plan.installment) : null));
+            const ok = await act("plan", () => PayrollCycleRepository.saveInstallment(plan.userId, plan.name.trim(), parseAmount(plan.total) ?? 0, parseAmount(plan.count) ?? 0, plan.start, parseAmount(plan.installment)));
             if (ok) setPlan({ userId: "", name: "", total: "", count: "", start: today(), installment: "" });
           }}>{t("installments.add")}</Button>
         <Table columns={planColumns} data={plans} getRowId={(p) => p.id} emptyMessage={t("installments.empty")} />
@@ -273,10 +273,10 @@ export default function PayrollProfilesPage() {
         footer={<Button variant={change?.action === "cancel" ? "danger" : "primary"} loading={busy === "change"} onClick={async () => {
           if (!change) return;
           if (!change.reason.trim()) { setError(t("errors.reasonRequired")); return; }
-          const ok = await act("change", () => PayrollCycleRepository.changeInstallment(change.plan.id, change.action, change.reason.trim(), change.installment ? Number(change.installment) : null, null, change.plan.row_version));
+          const ok = await act("change", () => PayrollCycleRepository.changeInstallment(change.plan.id, change.action, change.reason.trim(), parseAmount(change.installment), null, change.plan.row_version));
           if (ok) setChange(null);
         }}>{change ? t(`installments.${change.action}`) : ""}</Button>}>
-        {change?.action === "reschedule" ? <Input label={t("installments.amount")} name="newInstallment" type="number" value={change.installment} onChange={(event) => setChange({ ...change, installment: event.target.value })} /> : null}
+        {change?.action === "reschedule" ? <Input label={t("installments.amount")} name="newInstallment" inputMode="decimal" value={change.installment} onChange={(event) => setChange({ ...change, installment: event.target.value })} /> : null}
         {change ? <Textarea label={t("actions.reason")} name="planReason" value={change.reason} onChange={(event) => setChange({ ...change, reason: event.target.value })} /> : null}
       </Modal>
     </PageShell>
