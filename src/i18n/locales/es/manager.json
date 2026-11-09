@@ -188,5 +188,26 @@
       "repeated_coordinates": "El mismo punto casi sin error de GPS: una señal habitual de una aplicación de ubicación falsa."
     },
     "title_many": "Fichajes sospechosos ({{count}})"
+  },
+  "imported": {
+    "title": "Asistencia recibida por la API ({{count}})",
+    "hint": "Enviada por un sistema conectado (lector de huella, sistema de RR. HH.). No cuenta hasta aprobarse; al aprobar, cada entrada y la siguiente salida forman un registro.",
+    "chooseAll": "Elegir todo",
+    "chooseNone": "Quitar selección",
+    "approve": "Aprobar ({{count}})",
+    "reject": "Rechazar",
+    "rejectTitle": "Rechazar {{count}} evento(s)",
+    "reason": "Motivo (obligatorio)",
+    "approved": "{{applied}} registro(s) creados; {{pending}} evento(s) siguen pendientes.",
+    "error": "No se pudo completar. Inténtelo de nuevo.",
+    "type": {
+      "clock_in": "Entrada",
+      "clock_out": "Salida"
+    },
+    "reasons": {
+      "no_matching_clock_out": "aún sin salida correspondiente",
+      "longer_than_24_hours": "más de 24 horas",
+      "overlaps_existing_attendance": "se solapa con asistencia registrada"
+    }
   }
 }

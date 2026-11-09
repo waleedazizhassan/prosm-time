@@ -145,6 +145,10 @@
     "externalPay": {
       "title": "Paga lavoratori esterni",
       "body": "La paga degli esterni è separata da dipendenti e paghe, con permessi propri (vedere gli esterni nella dashboard non mostra paghe). In Tariffe assegna a ogni lavoratore importo, valuta e unità - a giorno, settimana, mese o anno (o ora); una modifica vale dalla sua data. In Regole imposta trattenute e aggiunte (importo fisso in una valuta o percentuale del lordo) e la regola della paga giornaliera per tariffe mensili e annuali (giorni fissi, 30 di default, o giorni di calendario o lavorativi del periodo). Un'elaborazione copre un periodo: le quantità giornaliere e orarie arrivano dal chiosco, le altre si inseriscono, e una quantità diversa dal chiosco richiede un motivo. Aggiungi rettifiche individuali motivate - in giorni se la tariffa lo consente, altrimenti come importo. L'approvazione congela l'elaborazione; cambiarla richiede una riapertura motivata. Esporta uno, una sede o tutti in PDF o Excel; totali per valuta, bozze contrassegnate."
+    },
+    "importedAttendance": {
+      "title": "Presenze da sistemi collegati",
+      "body": "Un altro sistema (lettore di impronte o sistema HR) può inviare entrate e uscite tramite API con una chiave creata dal titolare. Inviare due volte lo stesso evento non cambia nulla. Gli eventi attendono nella console del responsabile sotto \"Presenze ricevute tramite API\" e non contano nulla (ore, paghe, dashboard, ferie) finché il titolare o un responsabile autorizzato non li approva. L'approvazione unisce ogni entrata e l'uscita successiva della stessa persona in un record, registrato nel registro azioni; sovrapposizioni o uscite mancanti restano con il motivo. Rifiutare richiede un motivo. I software di contabilità e HR possono anche leggere dipendenti, sedi, presenze, ferie e saldi, turni e paghe dei cicli bloccati tramite la stessa API."
     }
   },
   "faq": {

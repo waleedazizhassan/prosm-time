@@ -50,7 +50,9 @@
       "employeesRead": "الموظفون",
       "employeesSensitive": "البريد الإلكتروني للموظفين",
       "sitesRead": "المواقع",
-      "leavesRead": "الإجازات"
+      "leavesRead": "الإجازات",
+      "attendanceWrite": "إرسال الحضور (ينتظر الاعتماد)",
+      "shiftsRead": "الورديات"
     },
     "endpoint": "عنوان الواجهة البرمجية:",
     "expired": "منتهي",

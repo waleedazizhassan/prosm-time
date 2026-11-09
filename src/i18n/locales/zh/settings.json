@@ -50,7 +50,9 @@
       "employeesRead": "员工",
       "employeesSensitive": "员工电子邮箱",
       "sitesRead": "站点",
-      "leavesRead": "请假"
+      "leavesRead": "请假",
+      "attendanceWrite": "发送考勤（待批准）",
+      "shiftsRead": "排班"
     },
     "endpoint": "API 地址：",
     "expired": "已过期",

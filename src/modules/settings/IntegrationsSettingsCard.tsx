@@ -31,6 +31,8 @@ const SCOPE_LABEL_KEYS: Record<ApiKeyScope, string> = {
   "employees:read_sensitive": "integrations.scope.employeesSensitive",
   "sites:read": "integrations.scope.sitesRead",
   "attendance:read": "integrations.scope.attendanceRead",
+  "attendance:write": "integrations.scope.attendanceWrite",
+  "shifts:read": "integrations.scope.shiftsRead",
   "leaves:read": "integrations.scope.leavesRead",
   "payroll:read": "integrations.scope.payrollRead",
 };

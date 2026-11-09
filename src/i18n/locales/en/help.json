@@ -145,6 +145,10 @@
     "externalPay": {
       "title": "External labour pay",
       "body": "External labour pay is separate from employees and payroll, with its own permissions (seeing external workers on the dashboard shows no pay). Under Rates give each worker an amount, a currency and a unit - per day, week, month or year (or hour); a change applies from its date. Under Policy set the organisation's deductions and additions (a fixed amount in a currency, or a percentage of gross) and the day-rate rule for monthly and yearly rates (a fixed number of days, 30 by default, or the period's calendar or working days). A pay run covers a period: daily and hourly quantities come from the kiosk, weekly, monthly and yearly ones are entered, and a quantity unlike the kiosk needs a reason. Add individual deductions or additions with a reason - in days where the rate allows, otherwise as an amount. Approval freezes the run; changing it needs a reopen with a reason. Export one worker, a site or everyone in PDF or Excel; totals are per currency and drafts are marked."
+    },
+    "importedAttendance": {
+      "title": "Attendance from connected systems",
+      "body": "Another system - a fingerprint device or an HR system - can send clock-ins and clock-outs to PROSM Time through the API with a key the owner creates. Sending the same event twice does nothing. These events wait on the Manager Console under \"Attendance received through the API\" and count for nothing - not hours, payroll, the dashboard or leave - until the owner, or a manager who may correct that person's attendance, approves them. Approving turns each clock-in and the next clock-out of the same person into one attendance record, recorded in the action log; an event that overlaps attendance already recorded, or has no clock-out yet, stays with the reason. Rejecting needs a reason. Accounting and HR systems can also read employees, sites, attendance, leave and balances, shifts and the payroll of locked cycles through the same API."
     }
   },
   "faq": {

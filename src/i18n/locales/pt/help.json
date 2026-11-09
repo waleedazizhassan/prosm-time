@@ -145,6 +145,10 @@
     "externalPay": {
       "title": "Pagamento de trabalhadores externos",
       "body": "O pagamento de externos é separado de funcionários e folha, com permissões próprias (ver externos no painel não mostra pagamentos). Em Valores atribua a cada trabalhador montante, moeda e unidade - por dia, semana, mês ou ano (ou hora); uma alteração vale a partir da sua data. Em Política defina descontos e acréscimos (montante fixo numa moeda ou percentagem do bruto) e a regra da diária para valores mensais e anuais (dias fixos, 30 por omissão, ou dias de calendário ou úteis do período). Uma folha cobre um período: as quantidades por dia e hora vêm do quiosque, as restantes são introduzidas, e uma quantidade diferente do quiosque exige motivo. Adicione ajustes individuais com motivo - em dias se o valor permitir, senão como montante. A aprovação congela a folha; alterá-la exige reabrir com motivo. Exporte um, um local ou todos em PDF ou Excel; totais por moeda, rascunhos marcados."
+    },
+    "importedAttendance": {
+      "title": "Assiduidade de sistemas ligados",
+      "body": "Outro sistema (leitor biométrico ou sistema de RH) pode enviar entradas e saídas pela API com uma chave criada pelo proprietário. Enviar o mesmo evento duas vezes não duplica nada. Os eventos esperam na consola do gestor em \"Assiduidade recebida pela API\" e não contam para nada (horas, folha, painel, férias) até o proprietário ou um gestor autorizado os aprovar. Aprovar junta cada entrada e a saída seguinte da mesma pessoa num registo, anotado no registo de ações; sobreposições ou saídas em falta ficam com o motivo. Rejeitar exige motivo. Sistemas de contabilidade e RH também podem ler funcionários, locais, assiduidade, férias e saldos, turnos e a folha de ciclos fechados pela mesma API."
     }
   },
   "faq": {

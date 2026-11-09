@@ -9,7 +9,7 @@ export interface ServiceResult<T = null> {
 // 2026-11-08 general integration API (migration 20261108150000, Edge Function api-v1): a key
 // holds several read-only scopes, may expire, and is either live or test. Created and revoked by
 // the owner; the plaintext is returned once, from generate() only.
-export const API_SCOPES = ["employees:read", "employees:read_sensitive", "sites:read", "attendance:read", "leaves:read", "payroll:read"] as const;
+export const API_SCOPES = ["employees:read", "employees:read_sensitive", "sites:read", "attendance:read", "attendance:write", "leaves:read", "shifts:read", "payroll:read"] as const;
 export type ApiKeyScope = (typeof API_SCOPES)[number];
 export type ApiKeyEnvironment = "live" | "test";
 

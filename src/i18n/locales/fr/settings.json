@@ -50,7 +50,9 @@
       "employeesRead": "Employés",
       "employeesSensitive": "E-mails des employés",
       "sitesRead": "Sites",
-      "leavesRead": "Congés"
+      "leavesRead": "Congés",
+      "attendanceWrite": "Envoyer des présences (en attente d'approbation)",
+      "shiftsRead": "Postes"
     },
     "endpoint": "Adresse de l'API :",
     "expired": "Expirée",

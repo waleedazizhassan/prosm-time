@@ -50,7 +50,9 @@
       "employeesRead": "Dipendenti",
       "employeesSensitive": "Email dei dipendenti",
       "sitesRead": "Sedi",
-      "leavesRead": "Ferie"
+      "leavesRead": "Ferie",
+      "attendanceWrite": "Inviare presenze (in attesa di approvazione)",
+      "shiftsRead": "Turni"
     },
     "endpoint": "Indirizzo API:",
     "expired": "Scaduta",

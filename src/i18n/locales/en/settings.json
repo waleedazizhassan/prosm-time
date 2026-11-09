@@ -50,7 +50,9 @@
       "employeesRead": "Employees",
       "employeesSensitive": "Employees' email addresses",
       "sitesRead": "Sites",
-      "leavesRead": "Leave"
+      "leavesRead": "Leave",
+      "attendanceWrite": "Send attendance (pending until approved)",
+      "shiftsRead": "Shifts"
     },
     "endpoint": "API address:",
     "expired": "Expired",

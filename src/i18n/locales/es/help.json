@@ -145,6 +145,10 @@
     "externalPay": {
       "title": "Pago de trabajadores externos",
       "body": "El pago de externos está separado de empleados y nómina, con permisos propios (ver externos en el panel no muestra pagos). En Tarifas asigne a cada trabajador importe, moneda y unidad: por día, semana, mes o año (o hora); un cambio rige desde su fecha. En Política defina deducciones y adiciones (importe fijo en una moneda o porcentaje del bruto) y la regla del jornal para tarifas mensuales y anuales (días fijos, 30 por defecto, o días naturales o laborables del periodo). Una liquidación cubre un periodo: las cantidades por día y hora vienen del quiosco, las semanales, mensuales y anuales se introducen, y una cantidad distinta del quiosco requiere motivo. Añada deducciones o adiciones individuales con motivo, en días si la tarifa lo permite o como importe. La aprobación congela la liquidación; cambiarla requiere reabrir con motivo. Exporte uno, una sede o todos en PDF o Excel; totales por moneda y borradores marcados."
+    },
+    "importedAttendance": {
+      "title": "Asistencia de sistemas conectados",
+      "body": "Otro sistema (lector de huella o sistema de RR. HH.) puede enviar entradas y salidas por la API con una clave creada por el propietario. Enviar el mismo evento dos veces no duplica nada. Esperan en la consola del gestor en «Asistencia recibida por la API» y no cuentan para nada (horas, nómina, panel ni permisos) hasta que el propietario o un gestor autorizado los aprueba. Aprobar une cada entrada y la siguiente salida de la misma persona en un registro, anotado en el registro de acciones; lo que se solape o no tenga salida queda con el motivo. Rechazar requiere motivo. Los sistemas contables y de RR. HH. también pueden leer empleados, sedes, asistencia, permisos y saldos, turnos y la nómina de ciclos cerrados por la misma API."
     }
   },
   "faq": {

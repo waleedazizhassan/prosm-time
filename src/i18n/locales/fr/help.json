@@ -145,6 +145,10 @@
     "externalPay": {
       "title": "Paie des travailleurs externes",
       "body": "La paie des externes est séparée des employés et de la paie, avec ses propres autorisations (voir les externes sur le tableau de bord n'affiche aucune paie). Dans Taux, donnez à chaque travailleur un montant, une devise et une unité - à la journée, semaine, mois ou année (ou heure) ; un changement s'applique à partir de sa date. Dans Règles, définissez retenues et ajouts (montant fixe dans une devise ou pourcentage du brut) et la règle du taux journalier pour les taux mensuels et annuels (jours fixes, 30 par défaut, ou jours calendaires ou ouvrés de la période). Une paie couvre une période : les quantités journalières et horaires viennent du kiosque, les autres sont saisies, et une quantité différente du kiosque exige un motif. Ajoutez des retenues ou ajouts individuels motivés - en jours si le taux le permet, sinon en montant. L'approbation fige la paie ; la modifier exige une réouverture motivée. Exportez une personne, un site ou tous en PDF ou Excel ; totaux par devise, brouillons marqués."
+    },
+    "importedAttendance": {
+      "title": "Présences des systèmes connectés",
+      "body": "Un autre système (pointeuse biométrique, SIRH) peut envoyer arrivées et départs par l'API avec une clé créée par le propriétaire. Envoyer deux fois le même événement ne change rien. Ils attendent dans la console du responsable sous « Présences reçues par l'API » et ne comptent pour rien (heures, paie, tableau de bord, congés) avant approbation par le propriétaire ou un responsable habilité. L'approbation fait de chaque arrivée et du départ suivant de la même personne un enregistrement, tracé dans le journal ; un chevauchement ou un départ manquant reste avec le motif. Rejeter exige un motif. Les logiciels de comptabilité et RH peuvent aussi lire employés, sites, présences, congés et soldes, postes et la paie des cycles verrouillés par la même API."
     }
   },
   "faq": {

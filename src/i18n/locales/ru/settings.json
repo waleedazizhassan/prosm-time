@@ -50,7 +50,9 @@
       "employeesRead": "Сотрудники",
       "employeesSensitive": "Эл. почта сотрудников",
       "sitesRead": "Объекты",
-      "leavesRead": "Отпуска"
+      "leavesRead": "Отпуска",
+      "attendanceWrite": "Отправка отметок (до утверждения)",
+      "shiftsRead": "Смены"
     },
     "endpoint": "Адрес API:",
     "expired": "Истёк",

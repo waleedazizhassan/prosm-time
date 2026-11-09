@@ -145,6 +145,10 @@
     "externalPay": {
       "title": "Lohn externer Arbeitskräfte",
       "body": "Der Lohn externer Arbeitskräfte ist getrennt von Mitarbeitenden und Lohnabrechnung, mit eigenen Berechtigungen (externe Kräfte im Dashboard zu sehen zeigt keinen Lohn). Unter Sätze erhält jede Kraft Betrag, Währung und Einheit - pro Tag, Woche, Monat oder Jahr (oder Stunde); eine Änderung gilt ab ihrem Datum. Unter Regeln legen Sie Abzüge und Zuschläge fest (fester Betrag in einer Währung oder Prozent vom Brutto) und die Tagessatz-Regel für Monats- und Jahressätze (feste Tage, Standard 30, oder Kalender- bzw. Arbeitstage des Zeitraums). Ein Lohnlauf deckt einen Zeitraum ab: Tages- und Stundenmengen kommen vom Kiosk, Wochen-, Monats- und Jahresmengen werden eingegeben; Abweichungen vom Kiosk brauchen eine Begründung. Einzelkorrekturen mit Begründung - in Tagen, wo der Satz es erlaubt, sonst als Betrag. Die Genehmigung friert den Lauf ein; Änderungen erfordern ein begründetes Wiederöffnen. Export für eine Person, einen Standort oder alle als PDF oder Excel; Summen je Währung, Entwürfe gekennzeichnet."
+    },
+    "importedAttendance": {
+      "title": "Anwesenheit aus verbundenen Systemen",
+      "body": "Ein anderes System - Fingerabdruckgerät oder Personalsystem - kann Ein- und Ausstempelungen über die API mit einem Schlüssel des Inhabers senden. Doppelt gesendete Ereignisse ändern nichts. Sie warten in der Managerkonsole unter \"Über die API empfangene Anwesenheit\" und zählen nichts - weder Stunden, Lohn, Dashboard noch Urlaub -, bis der Inhaber oder eine berechtigte Führungskraft sie genehmigt. Die Genehmigung macht aus jedem Ein- und dem nächsten Ausstempeln derselben Person einen Eintrag (protokolliert); Überschneidungen oder fehlendes Ausstempeln bleiben mit Grund stehen. Ablehnen braucht eine Begründung. Buchhaltungs- und Personalsysteme können über dieselbe API auch Mitarbeitende, Standorte, Anwesenheit, Urlaub und Salden, Schichten und den Lohn gesperrter Läufe lesen."
     }
   },
   "faq": {

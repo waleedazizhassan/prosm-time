@@ -21,6 +21,7 @@ import managerConsoleHeaderImage from "../../assets/illustrations/manager.svg";
 import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
 import PendingHoursCard from "./PendingHoursCard";
+import ImportedAttendanceCard from "./ImportedAttendanceCard";
 import PermissionsQueueCard from "./PermissionsQueueCard";
 import IntegrityFlagsCard from "./IntegrityFlagsCard";
 import leaveTypeLabel from "../leave/leaveTypeLabel";
@@ -242,6 +243,8 @@ export default function ManagerConsolePage() {
       {hasPermission("sessions.review_pending") ? <PendingHoursCard /> : null}
       {hasPermission("attendance.manage_permissions") ? <PermissionsQueueCard /> : null}
       {hasPermission("attendance.review_integrity_flags") ? <IntegrityFlagsCard /> : null}
+      {/* 2026-11-09: attendance received through the API, waiting for approval */}
+      {profile?.isOwner || hasPermission("attendance.correct") ? <ImportedAttendanceCard /> : null}
 
       <Card title={t("pending.title")}>
         <ErrorText>{error}</ErrorText>

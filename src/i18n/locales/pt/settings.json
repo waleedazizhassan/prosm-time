@@ -50,7 +50,9 @@
       "employeesRead": "Funcionários",
       "employeesSensitive": "E-mails dos funcionários",
       "sitesRead": "Locais",
-      "leavesRead": "Férias"
+      "leavesRead": "Férias",
+      "attendanceWrite": "Enviar assiduidade (pendente de aprovação)",
+      "shiftsRead": "Turnos"
     },
     "endpoint": "Endereço da API:",
     "expired": "Expirada",

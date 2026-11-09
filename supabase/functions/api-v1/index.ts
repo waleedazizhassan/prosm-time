@@ -1,11 +1,16 @@
 // api-v1 - PROSM Time's general integration API (owner 2026-11-08: "an independent API any
-// system can integrate with"). Read-only, versioned, cursor-paginated, one envelope:
+// system can integrate with"). Versioned (v1), cursor-paginated, one envelope:
 //   GET /api-v1/me                       the key: organisation, scopes, environment
 //   GET /api-v1/employees?cursor&limit   employees:read (email only with employees:read_sensitive)
 //   GET /api-v1/sites?cursor&limit       sites:read
 //   GET /api-v1/attendance?since&until&cursor&limit   attendance:read (window up to 92 days)
 //   GET /api-v1/leaves?since&until&cursor&limit       leaves:read (dates, window up to 366 days)
 //   GET /api-v1/payroll-records?cycleId&cursor&limit  payroll:read (locked cycles only)
+//   GET /api-v1/shifts?since&until&cursor&limit       shifts:read (2026-11-09)
+//   GET /api-v1/leave-balances?year&cursor&limit      leaves:read (2026-11-09)
+//   POST /api-v1/attendance-events {events: [...]}     attendance:write - idempotent by externalId,
+//        imported as pending until approved in the app (2026-11-09)
+//   GET /api-v1/openapi.json                           the contract (public)
 // Authorization: "Bearer <api key>" (verify_jwt=false in config.toml - the caller is another
 // system, not a signed-in member). The organisation always comes from the key, never from the
 // request. Every request is rate limited before the key is looked up and written to
@@ -15,11 +20,12 @@
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { clientIdentifier, enforceRateLimits, hashIdentifier } from "../_shared/rateLimit.ts";
+import { OPENAPI } from "./openapi.ts";
 
 const CORS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-request-id, content-type",
-  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
   "Access-Control-Expose-Headers": "x-request-id",
 };
 const DAY = 24 * 60 * 60 * 1000;
@@ -33,7 +39,12 @@ const RESOURCES: Record<string, string | null> = {
   attendance: "attendance:read",
   leaves: "leaves:read",
   "payroll-records": "payroll:read",
+  shifts: "shifts:read",
+  "leave-balances": "leaves:read",
+  "attendance-events": "attendance:write",
 };
+// the one resource that is written to
+const WRITABLE = new Set(["attendance-events"]);
 
 class ApiError extends Error {
   constructor(public status: number, public code: string, message: string) {
@@ -113,8 +124,11 @@ serve(async (request: Request) => {
   const fail = (status: number, code: string, message: string) => finish({ error: { code, message }, requestId }, status);
 
   try {
-    if (request.method !== "GET") return await fail(405, "METHOD_NOT_ALLOWED", "This API is read-only: use GET.");
-    if (!(resource in RESOURCES)) return await fail(404, "NOT_FOUND", "Unknown resource. See /me, /employees, /sites, /attendance, /leaves, /payroll-records.");
+    // the contract, public: GET /api-v1/openapi.json
+    if (resource === "openapi.json" && request.method === "GET") return json(OPENAPI, 200, requestId);
+    if (!(resource in RESOURCES)) return await fail(404, "NOT_FOUND", "Unknown resource. See /openapi.json for the list.");
+    const allowed = WRITABLE.has(resource) ? "POST" : "GET";
+    if (request.method !== allowed) return await fail(405, "METHOD_NOT_ALLOWED", `Use ${allowed} for /${resource}.`);
 
     const header = request.headers.get("authorization") ?? "";
     if (!header.startsWith("Bearer ")) return await fail(401, "UNAUTHORIZED", "Send the API key as 'Authorization: Bearer <key>'.");
@@ -163,6 +177,26 @@ serve(async (request: Request) => {
       }
       case "payroll-records":
         return await page("api_v1_payroll_records", { p_cycle_id: uuidParam(url, "cycleId"), p_after: decodeCursor<string>(url) }, (last) => last.cursor);
+      case "shifts": {
+        const { since, until } = windowOf(url, 92, 14);
+        return await page("api_v1_shifts", { p_since: since.toISOString().slice(0, 10), p_until: until.toISOString().slice(0, 10), p_after: decodeCursor<string>(url) },
+          (last) => last.id);
+      }
+      case "leave-balances": {
+        const yearParam = url.searchParams.get("year");
+        const year = yearParam ? Number(yearParam) : new Date().getUTCFullYear();
+        if (!Number.isInteger(year) || year < 2000 || year > 2100) throw new ApiError(400, "INVALID_REQUEST", "'year' must be a year like 2026.");
+        return await page("api_v1_leave_balances", { p_year: year, p_after: decodeCursor<string>(url) }, (last) => last.employeeId);
+      }
+      case "attendance-events": {
+        const body = await request.json().catch(() => null);
+        if (!body || !Array.isArray(body.events)) throw new ApiError(400, "INVALID_REQUEST", "Send {\"events\": [...]} with 1 to 500 events.");
+        if (body.events.length === 0 || body.events.length > 500) throw new ApiError(400, "INVALID_REQUEST", "Send 1 to 500 events at a time.");
+        const { data: result, error: importError } = await service.rpc("api_v1_attendance_import", { p_org: org, p_key: auth.keyId, p_events: body.events });
+        if (importError) throw new ApiError(400, "INVALID_REQUEST", importError.message);
+        // 200 when everything was taken or already known; 207 when some events were refused
+        return await finish({ data: result, requestId }, (result as any).rejected > 0 ? 207 : 200);
+      }
     }
     return await fail(404, "NOT_FOUND", "Unknown resource.");
   } catch (error) {

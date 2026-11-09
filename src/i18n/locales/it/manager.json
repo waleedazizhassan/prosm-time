@@ -188,5 +188,26 @@
       "repeated_coordinates": "Stesso punto senza errore GPS - tipico del GPS falso."
     },
     "title_many": "Timbrature sospette ({{count}})"
+  },
+  "imported": {
+    "title": "Presenze ricevute tramite API ({{count}})",
+    "hint": "Inviate da un sistema collegato (lettore di impronte, sistema HR). Non contano finché non approvate; l'approvazione unisce ogni entrata e l'uscita successiva in un record.",
+    "chooseAll": "Scegli tutto",
+    "chooseNone": "Annulla la scelta",
+    "approve": "Approva ({{count}})",
+    "reject": "Rifiuta",
+    "rejectTitle": "Rifiuta {{count}} evento/i",
+    "reason": "Motivo (obbligatorio)",
+    "approved": "{{applied}} record creati; {{pending}} eventi ancora in attesa.",
+    "error": "Impossibile completare. Riprova.",
+    "type": {
+      "clock_in": "Entrata",
+      "clock_out": "Uscita"
+    },
+    "reasons": {
+      "no_matching_clock_out": "nessuna uscita corrispondente",
+      "longer_than_24_hours": "più di 24 ore",
+      "overlaps_existing_attendance": "si sovrappone a presenze registrate"
+    }
   }
 }

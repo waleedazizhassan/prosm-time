@@ -50,7 +50,9 @@
       "employeesRead": "Empleados",
       "employeesSensitive": "Correos de los empleados",
       "sitesRead": "Sedes",
-      "leavesRead": "Permisos"
+      "leavesRead": "Permisos",
+      "attendanceWrite": "Enviar asistencia (pendiente de aprobación)",
+      "shiftsRead": "Turnos"
     },
     "endpoint": "Dirección de la API:",
     "expired": "Caducada",

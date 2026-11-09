@@ -182,5 +182,26 @@
       "unverified_capture": "相机无法打开，因此从手机中选择了一张图片。",
       "repeated_coordinates": "同一位置且几乎没有 GPS 误差，这是虚假定位应用的常见迹象。"
     }
+  },
+  "imported": {
+    "title": "通过 API 接收的考勤（{{count}}）",
+    "hint": "由已连接系统（指纹机、人事系统）发送。批准前不计入任何统计；批准后，每次签到与其后的签退合并为一条考勤记录。",
+    "chooseAll": "全选",
+    "chooseNone": "取消选择",
+    "approve": "批准（{{count}}）",
+    "reject": "拒绝",
+    "rejectTitle": "拒绝 {{count}} 条记录",
+    "reason": "原因（必填）",
+    "approved": "已生成 {{applied}} 条考勤记录；仍有 {{pending}} 条待处理。",
+    "error": "无法完成，请重试。",
+    "type": {
+      "clock_in": "签到",
+      "clock_out": "签退"
+    },
+    "reasons": {
+      "no_matching_clock_out": "尚无对应的签退",
+      "longer_than_24_hours": "超过 24 小时",
+      "overlaps_existing_attendance": "与已有考勤重叠"
+    }
   }
 }
