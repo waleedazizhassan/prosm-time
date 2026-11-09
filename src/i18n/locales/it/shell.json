@@ -39,7 +39,8 @@
     "checkAction": "Controlla aggiornamenti",
     "checking": "Verifica in corso...",
     "upToDate": "Hai la versione più recente.",
-    "noticeTitle": "Aggiornamento di PROSM Time"
+    "noticeTitle": "Aggiornamento di PROSM Time",
+    "availablePlay": "Una nuova versione è disponibile su Google Play."
   },
   "offline": {
     "message": "Nessun problema: timbrature e pause funzionano comunque e verranno inviate appena torni online.",
