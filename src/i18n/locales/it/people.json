@@ -297,5 +297,17 @@
     "endBeforeStart": "La data di fine deve essere successiva a quella di inizio.",
     "windowHint": "Inizia e termina da sola in queste date. Puoi revocarla in qualsiasi momento.",
     "neverDelegated": "Mai delegati: chiusura dell'organizzazione, piano e codici di attivazione, conservazione dei dati, chiavi API, concessione della gestione dei permessi e la delega stessa. Nessuno - neanche il delegato - approva la propria richiesta."
+  },
+  "roleChange": {
+    "title": "Ruolo",
+    "hint": "I permessi seguono subito il ruolo. Sotto responsabile, la persona smette di gestire sedi; i permessi diretti restano e vengono elencati per la revisione. Registrato.",
+    "role": "Nuovo ruolo",
+    "reason": "Motivo (obbligatorio)",
+    "save": "Cambia ruolo",
+    "done": "Il ruolo è stato cambiato.",
+    "sitesRemoved": "Non gestisce più {{n}} sede/i.",
+    "grantsLeft": "Permessi diretti ancora attivi:",
+    "granted": "concesso",
+    "revoked": "revocato"
   }
 }

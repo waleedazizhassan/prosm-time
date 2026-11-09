@@ -297,5 +297,17 @@
     "endBeforeStart": "La date de fin doit être postérieure à la date de début.",
     "windowHint": "Elle commence et se termine d'elle-même à ces dates. Vous pouvez la retirer à tout moment.",
     "neverDelegated": "Jamais délégué : la fermeture de l'organisation, l'abonnement et les codes d'activation, la conservation des données, les clés API, l'octroi de la gestion des autorisations et la délégation elle-même. Personne - pas même le délégué - n'approuve sa propre demande."
+  },
+  "roleChange": {
+    "title": "Rôle",
+    "hint": "Les autorisations suivent le rôle immédiatement. En dessous de responsable, la personne ne gère plus de sites ; les autorisations directes restent et sont listées pour revue. Tracé dans le journal.",
+    "role": "Nouveau rôle",
+    "reason": "Motif (obligatoire)",
+    "save": "Changer de rôle",
+    "done": "Le rôle a été changé.",
+    "sitesRemoved": "Ne gère plus {{n}} site(s).",
+    "grantsLeft": "Autorisations directes encore en place :",
+    "granted": "accordée",
+    "revoked": "retirée"
   }
 }

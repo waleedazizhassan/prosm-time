@@ -297,5 +297,17 @@
     "endBeforeStart": "The end date must be after the start date.",
     "windowHint": "It starts and ends by itself on these dates. You can withdraw it at any time.",
     "neverDelegated": "Never delegated: closing the organisation, the plan and activation codes, data retention, API keys, granting permission management, and delegation itself. Nobody - including the delegate - approves their own request."
+  },
+  "roleChange": {
+    "title": "Role",
+    "hint": "Permissions follow the role at once. Below manager, the person stops managing sites; direct grants stay and are listed for you to review. Recorded in the action log.",
+    "role": "New role",
+    "reason": "Reason (required)",
+    "save": "Change role",
+    "done": "The role was changed.",
+    "sitesRemoved": "No longer manages {{n}} site(s).",
+    "grantsLeft": "Direct permissions still in place:",
+    "granted": "granted",
+    "revoked": "withheld"
   }
 }

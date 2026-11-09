@@ -297,5 +297,17 @@
     "endBeforeStart": "A data de fim deve ser posterior à de início.",
     "windowHint": "Começa e termina sozinha nessas datas. Pode retirá-la a qualquer momento.",
     "neverDelegated": "Nunca delegado: encerrar a organização, o plano e códigos de ativação, a retenção de dados, as chaves de API, conceder a gestão de permissões e a própria delegação. Ninguém - nem o delegado - aprova o próprio pedido."
+  },
+  "roleChange": {
+    "title": "Função",
+    "hint": "As permissões seguem a função de imediato. Abaixo de gestor, a pessoa deixa de gerir locais; as permissões diretas mantêm-se e são listadas para rever. Fica registado.",
+    "role": "Nova função",
+    "reason": "Motivo (obrigatório)",
+    "save": "Mudar função",
+    "done": "A função foi alterada.",
+    "sitesRemoved": "Deixou de gerir {{n}} local(is).",
+    "grantsLeft": "Permissões diretas ainda ativas:",
+    "granted": "concedida",
+    "revoked": "retirada"
   }
 }

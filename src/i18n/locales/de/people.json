@@ -297,5 +297,17 @@
     "endBeforeStart": "Das Enddatum muss nach dem Startdatum liegen.",
     "windowHint": "Sie beginnt und endet automatisch an diesen Daten. Sie können sie jederzeit widerrufen.",
     "neverDelegated": "Nie übertragen: Schließen der Organisation, Tarif und Aktivierungscodes, Datenaufbewahrung, API-Schlüssel, Vergabe der Rechteverwaltung und die Übertragung selbst. Niemand - auch nicht die vertretende Person - genehmigt den eigenen Antrag."
+  },
+  "roleChange": {
+    "title": "Rolle",
+    "hint": "Berechtigungen folgen sofort der Rolle. Unterhalb von Manager verwaltet die Person keine Standorte mehr; direkte Berechtigungen bleiben und werden zur Prüfung angezeigt. Wird protokolliert.",
+    "role": "Neue Rolle",
+    "reason": "Begründung (Pflicht)",
+    "save": "Rolle ändern",
+    "done": "Die Rolle wurde geändert.",
+    "sitesRemoved": "Verwaltet {{n}} Standort(e) nicht mehr.",
+    "grantsLeft": "Weiterhin direkte Berechtigungen:",
+    "granted": "erteilt",
+    "revoked": "entzogen"
   }
 }

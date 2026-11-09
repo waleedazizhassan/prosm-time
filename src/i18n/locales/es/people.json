@@ -297,5 +297,17 @@
     "endBeforeStart": "La fecha de fin debe ser posterior a la de inicio.",
     "windowHint": "Empieza y termina sola en esas fechas. Puede retirarla en cualquier momento.",
     "neverDelegated": "Nunca se delega: cerrar la organización, el plan y los códigos de activación, la retención de datos, las claves API, conceder la gestión de permisos y la propia delegación. Nadie, ni el delegado, aprueba su propia solicitud."
+  },
+  "roleChange": {
+    "title": "Rol",
+    "hint": "Los permisos siguen al rol al instante. Por debajo de gestor, deja de gestionar sedes; los permisos directos se mantienen y se muestran para revisarlos. Queda en el registro.",
+    "role": "Nuevo rol",
+    "reason": "Motivo (obligatorio)",
+    "save": "Cambiar rol",
+    "done": "Se cambió el rol.",
+    "sitesRemoved": "Ya no gestiona {{n}} sede(s).",
+    "grantsLeft": "Permisos directos que siguen vigentes:",
+    "granted": "concedido",
+    "revoked": "retirado"
   }
 }
