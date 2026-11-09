@@ -42,6 +42,10 @@ export default function HelpPage() {
     "settingsCenter",
     "subscription",
     "managerDashboard",
+    // 2026-11-08/09: payroll, each person's payslips and external labour pay
+    "payroll",
+    "payslips",
+    "externalPay",
     "peopleAndPhotos",
     "permissions",
     "calendar",
