@@ -12,7 +12,12 @@ export interface CurrentUserProfile {
   email: string;
   fullName: string;
   status: string;
+  /** The owner's authority: the owner, or a person the owner gave it to (owner 2026-11-04). */
   isOwner: boolean;
+  /** The owner as a person - the owner does not clock in, has no allowances. */
+  isRealOwner: boolean;
+  /** Holds the owner's authority by the owner's grant. */
+  isOwnerDelegate: boolean;
   roleKey: string;
   roleName: string;
   // § live UX review, user-directed - "a place in the user menu to
@@ -49,6 +54,8 @@ function mapCurrentUserRow(row: CurrentUserRow | null): CurrentUserProfile | nul
     fullName: row.full_name,
     status: row.status,
     isOwner: row.is_owner,
+    isRealOwner: row.is_owner,
+    isOwnerDelegate: false,
     roleKey: role?.role_key ?? "",
     roleName: role?.name ?? "",
     avatarUrl: row.avatar_url,
@@ -85,7 +92,16 @@ class UserRepository {
       if (error) return createError(error.message);
       if (!data) return createError("User profile not found.");
 
-      return createSuccess(mapCurrentUserRow(data));
+      const profile = mapCurrentUserRow(data);
+      if (profile && !profile.isRealOwner) {
+        // the owner's authority, granted by the owner (owner 2026-11-04)
+        const { data: standing } = await this.client.rpc("get_prosm_time_my_owner_authority");
+        if ((standing as { delegate?: boolean } | null)?.delegate) {
+          profile.isOwnerDelegate = true;
+          profile.isOwner = true;
+        }
+      }
+      return createSuccess(profile);
     } catch (error) {
       return createError(error instanceof Error ? error.message : "User service unavailable.");
     }

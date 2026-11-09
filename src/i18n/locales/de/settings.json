@@ -31,9 +31,9 @@
   },
   "integrations": {
     "title": "Integrationen",
-    "hint": "Ein reiner Lese-Schlüssel, damit ein anderes PROSM-Produkt (wie PROSM Projects oder PROSM Finance) die echte, verifizierte Anwesenheit Ihres Teams - und bei Lohn-Berechtigung auch Gehaltsdaten - abrufen kann, statt sie manuell einzutippen. Dieser Schlüssel kann niemals etwas an PROSM Time zurückschreiben.",
+    "hint": "Schlüssel nur zum Lesen erlauben einem anderen System - ERP, Buchhaltung, Personal oder Berichte - Ihre Daten über die PROSM Time API zu lesen. Geben Sie jedem Schlüssel nur die nötigen Bereiche. Ein Schlüssel kann in PROSM Time nie etwas ändern.",
     "nameLabel": "Schlüsselname",
-    "namePlaceholder": "z. B. PROSM Projects oder PROSM Finance",
+    "namePlaceholder": "z. B. ERP, Buchhaltung",
     "createAction": "Schlüssel erstellen",
     "createError": "Dieser API-Schlüssel konnte nicht erstellt werden.",
     "revokeAction": "Widerrufen",
@@ -43,10 +43,70 @@
     "neverUsed": "nie verwendet",
     "newKeyTitle": "Ihr neuer API-Schlüssel",
     "newKeyWarning": "Kopieren Sie ihn jetzt - er wird nicht erneut angezeigt. Danach wird nur sein Präfix gespeichert.",
-    "scopeLabel": "Zugriff",
+    "scopeLabel": "Was dieser Schlüssel lesen darf",
     "scope": {
-      "attendanceRead": "Anwesenheit (nur lesen)",
-      "payrollRead": "Lohnsätze (nur lesen)"
+      "attendanceRead": "Anwesenheit",
+      "payrollRead": "Lohn (gesperrte Läufe)",
+      "employeesRead": "Mitarbeitende",
+      "employeesSensitive": "E-Mail-Adressen der Mitarbeitenden",
+      "sitesRead": "Standorte",
+      "leavesRead": "Urlaub",
+      "attendanceWrite": "Anwesenheit senden (wartet auf Genehmigung)",
+      "shiftsRead": "Schichten"
+    },
+    "endpoint": "API-Adresse:",
+    "expired": "Abgelaufen",
+    "requests7d": "{{n}} Anfragen in 7 Tagen",
+    "expiresOn": "läuft ab {{time}}",
+    "noExpiry": "Kein Ablauf",
+    "expiryLabel": "Läuft ab nach",
+    "expiryDays": "{{n}} Tagen",
+    "environmentLabel": "Umgebung",
+    "environment": {
+      "live": "Live",
+      "test": "Test"
+    },
+    "revokeTitle": "Diesen Schlüssel widerrufen?",
+    "revokeWarning": "\"{{name}}\" funktioniert sofort nicht mehr und kann nicht wiederhergestellt werden. Das nutzende System braucht einen neuen Schlüssel.",
+    "cancel": "Abbrechen",
+    "webhooks": {
+      "title": "Sofortige Benachrichtigungen an andere Systeme (Webhooks)",
+      "hint": "Das andere System wird sofort benachrichtigt. Jede Nachricht ist mit einem einmal angezeigten Geheimnis signiert; ist das System nicht erreichbar, versucht PROSM Time es einen Tag lang mit wachsenden Abständen erneut. Keine Beträge oder Kontaktdaten.",
+      "url": "Adresse (https://)",
+      "description": "Beschreibung (optional)",
+      "add": "Hinzufügen",
+      "active": "Aktiv",
+      "off": {
+        "turned_off": "Aus",
+        "too_many_failures": "Nach 20 fehlgeschlagenen Zustellungen in Folge ausgeschaltet"
+      },
+      "counts": "Letzte 7 Tage: {{delivered}} zugestellt, {{dead}} fehlgeschlagen; {{pending}} wartend",
+      "deliveries": "Zustellungen",
+      "noDeliveries": "Noch nichts gesendet.",
+      "turnOff": "Ausschalten",
+      "turnOn": "Einschalten",
+      "delete": "Löschen",
+      "secretTitle": "Das Signaturgeheimnis",
+      "secretWarning": "Jetzt in das andere System kopieren - es wird nicht erneut angezeigt. Damit prüft es, dass jede Nachricht von PROSM Time stammt.",
+      "status": {
+        "pending": "wartend",
+        "sending": "wird gesendet",
+        "delivered": "zugestellt",
+        "dead": "fehlgeschlagen"
+      },
+      "attempts": "{{n}} Versuch(e)",
+      "sendAgain": "Erneut senden",
+      "event": {
+        "employee_created": "Mitarbeitende hinzugefügt",
+        "employee_updated": "Mitarbeitende geändert",
+        "employee_deactivated": "Mitarbeitende deaktiviert",
+        "attendance_clock_in": "Einstempeln",
+        "attendance_clock_out": "Ausstempeln",
+        "leave_requested": "Urlaub beantragt",
+        "leave_approved": "Urlaub genehmigt",
+        "leave_rejected": "Urlaub abgelehnt",
+        "leave_cancelled": "Urlaub storniert"
+      }
     }
   },
   "payroll": {
@@ -208,10 +268,36 @@
     "failed": "Diese Einstellung konnte nicht gespeichert werden."
   },
   "sections": {
-    "subscription": "Abonnement",
     "sites": "Standorte und Stempeln",
-    "time": "Arbeitszeit und Überstunden",
-    "leave": "Urlaub",
-    "privacy": "Daten und Datenschutz"
+    "organization": "Organisation",
+    "attendanceLeave": "Anwesenheit und Urlaub",
+    "payroll": "Lohnabrechnung",
+    "governance": "Sicherheit und Governance"
+  },
+  "links": {
+    "calendar": {
+      "title": "Arbeitskalender",
+      "hint": "Feiertage, wöchentliche Ruhetage und Ausnahmetage."
+    },
+    "payroll": {
+      "title": "Lohneinstellungen",
+      "hint": "Bestandteile, Anteilsberechnung, Abrechnungszeiträume, Berichte, Veröffentlichung und Export."
+    },
+    "externalPolicy": {
+      "title": "Regeln für Lohn externer Kräfte",
+      "hint": "Abzüge und Zuschläge sowie die Tagessatz-Regel für Monats- und Jahressätze."
+    },
+    "permissions": {
+      "title": "Berechtigungen und Delegation",
+      "hint": "Einer Person die Befugnis des Inhabers geben - ganz oder ausgewählte Berechtigungen, befristet."
+    },
+    "auditLog": {
+      "title": "Aktionsprotokoll",
+      "hint": "Wer hat was wann getan, mit Begründung."
+    },
+    "integrations": {
+      "title": "Integrationen und API",
+      "hint": "Schlüssel für Buchhaltung, HR und andere Systeme, Anwesenheitsimport und Webhooks."
+    }
   }
 }

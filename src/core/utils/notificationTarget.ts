@@ -55,8 +55,26 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
     // owner 2026-11-03: the morning summary opens the day it is about; a licence change, the plan card
     case "daily_digest":
       return viewer.isOwner ? (typeof ref?.date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(ref.date) ? `/daily-summary?date=${ref.date}` : "/daily-summary") : "/dashboard";
+    case "owner_authority_granted":
+    case "owner_authority_revoked":
+      return "/dashboard";
+    // owner 2026-11-08: payslip requests go to the requests list; the employee's to My payslips
+    case "payslip_requested":
+    case "payslip_send_failed":
+      return "/payroll/requests";
+    // 2026-11-09 Media Center: the employee's announcements
+    case "announcement_published":
+      return "/announcements";
+    case "payslip_sent":
+    case "payslip_published":
+      return "/payslips";
+    // B-10 (2026-11-08): the licence reminder opens the plan card too (it fell through to the dashboard)
     case "license_changed":
+    case "license_ending":
       return viewer.isOwner ? "/settings#plan" : "/dashboard";
+    // the employee's own break ran over: their dashboard
+    case "break_exceeded":
+      return "/dashboard";
     case "shift_no_show":
       return "/attendance?period=today";
     case "trial_ending":

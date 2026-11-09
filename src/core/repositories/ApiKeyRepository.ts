@@ -6,16 +6,31 @@ export interface ServiceResult<T = null> {
   data: T | null;
 }
 
-export type ApiKeyScope = "attendance:read" | "payroll:read";
+// 2026-11-08 general integration API (migration 20261108150000, Edge Function api-v1): a key
+// holds several read-only scopes, may expire, and is either live or test. Created and revoked by
+// the owner; the plaintext is returned once, from generate() only.
+export const API_SCOPES = ["employees:read", "employees:read_sensitive", "sites:read", "attendance:read", "attendance:write", "leaves:read", "shifts:read", "payroll:read"] as const;
+export type ApiKeyScope = (typeof API_SCOPES)[number];
+export type ApiKeyEnvironment = "live" | "test";
 
 export interface ApiKeySummary {
   id: string;
   name: string;
   keyPrefix: string;
-  scope: ApiKeyScope;
+  scopes: ApiKeyScope[];
+  environment: ApiKeyEnvironment;
+  expiresAt: string | null;
   createdAt: string;
   lastUsedAt: string | null;
   revokedAt: string | null;
+  requests7d: number;
+}
+
+export interface NewApiKey {
+  name: string;
+  scopes: ApiKeyScope[];
+  expiresAt: string | null;
+  environment: ApiKeyEnvironment;
 }
 
 function createSuccess<T>(data: T | null = null): ServiceResult<T> {
@@ -25,41 +40,11 @@ function createError<T>(message: string): ServiceResult<T> {
   return { success: false, message, data: null };
 }
 
-interface ApiKeyRow {
-  id: string;
-  name: string;
-  key_prefix: string;
-  scope: ApiKeyScope;
-  created_at: string;
-  last_used_at: string | null;
-  revoked_at: string | null;
+/** The address other systems call; the key goes in "Authorization: Bearer <key>". */
+export function apiBaseUrl(): string {
+  return `${String(import.meta.env.VITE_SUPABASE_URL ?? "").replace(/\/$/, "")}/functions/v1/api-v1`;
 }
 
-function mapRow(row: ApiKeyRow): ApiKeySummary {
-  return {
-    id: row.id,
-    name: row.name,
-    keyPrefix: row.key_prefix,
-    scope: row.scope,
-    createdAt: row.created_at,
-    lastUsedAt: row.last_used_at,
-    revokedAt: row.revoked_at,
-  };
-}
-
-// PROSM Time - § live UX review, user-directed: a real, Owner-only,
-// read-only integration key so sibling PROSM products (PROSM Projects
-// first) can pull verified attendance instead of hand-typing it
-// (export-attendance Edge Function, 20260908190000). The plaintext key
-// is only ever returned once, from generate() itself - list() only
-// ever returns metadata (name/prefix/timestamps), matching the same
-// one-time-display posture as the platform's own product API keys.
-//
-// Gained a scope param 2026-09-14 for PROSM Finance's compensation
-// bridge (payroll:read, export-worker-rates) - a key holds exactly one
-// scope (least privilege: a leaked attendance:read key still can't see
-// pay rates), so Finance will hold two separate keys, not one
-// combined key.
 class ApiKeyRepository {
   get client() {
     return DatabaseManager.getClient();
@@ -67,17 +52,22 @@ class ApiKeyRepository {
 
   async list(): Promise<ServiceResult<ApiKeySummary[]>> {
     try {
-      const { data, error } = await this.client.from("api_keys").select("id, name, key_prefix, scope, created_at, last_used_at, revoked_at").order("created_at", { ascending: false });
+      const { data, error } = await this.client.rpc("list_prosm_time_api_keys");
       if (error) return createError(error.message);
-      return createSuccess((data ?? []).map(mapRow));
+      return createSuccess(((data ?? []) as ApiKeySummary[]).map((key) => ({ ...key, requests7d: Number(key.requests7d ?? 0) })));
     } catch (error) {
       return createError(error instanceof Error ? error.message : "API key service unavailable.");
     }
   }
 
-  async generate(name: string, scope: ApiKeyScope = "attendance:read"): Promise<ServiceResult<{ keyId: string; apiKey: string }>> {
+  async generate(input: NewApiKey): Promise<ServiceResult<{ keyId: string; apiKey: string }>> {
     try {
-      const { data, error } = await this.client.rpc("generate_prosm_time_api_key", { p_name: name, p_scope: scope });
+      const { data, error } = await this.client.rpc("generate_prosm_time_api_key_v2", {
+        p_name: input.name,
+        p_scopes: input.scopes,
+        p_expires_at: input.expiresAt,
+        p_environment: input.environment,
+      });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to create this API key.");
       return createSuccess({ keyId: data.keyId, apiKey: data.apiKey });

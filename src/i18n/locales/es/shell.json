@@ -225,6 +225,28 @@
       "plan": "plan cambiado",
       "unlimited": "sin límite",
       "planTo": "plan {{plan}}"
+    },
+    "ownerAuthority": {
+      "grantedTitle": "Tienes la autoridad del propietario",
+      "grantedBody": "El propietario te dio todos sus permisos, notificaciones y correos hasta que los retire.",
+      "revokedTitle": "Se retiró la autoridad del propietario",
+      "revokedBody": "Vuelves a tu rol y tus permisos."
+    },
+    "payslip": {
+      "requestedTitle": "Recibo de nómina solicitado",
+      "requestedBody": "{{name}} pidió su recibo de nómina de {{cycle}}.",
+      "sentTitle": "Se envió su recibo de nómina",
+      "sentBody": "Su recibo de nómina de {{cycle}} se envió a su correo.",
+      "failedTitle": "Falló el envío del recibo de nómina",
+      "failedBody": "No se pudo enviar el recibo de nómina de {{cycle}}. Puede intentarlo de nuevo.",
+      "publishedTitle": "Su recibo de nómina está disponible",
+      "publishedBody": "Se publicó un nuevo recibo de nómina. Puede verlo o pedirlo por correo."
+    },
+    "announcement": {
+      "publishedTitle": "Nuevo anuncio",
+      "statementTitle": "Nuevo comunicado oficial",
+      "publishedBody": "{{title}}",
+      "ackBody": "{{title}} - confirma que lo has leído."
     }
   },
   "items": {
@@ -248,7 +270,12 @@
     "workers": "Trabajadores",
     "calendar": "Calendario y festivos",
     "auditLog": "Registro de acciones",
-    "dailySummary": "Resumen diario"
+    "dailySummary": "Resumen diario",
+    "grantPermissions": "Conceder permisos",
+    "payroll": "Nómina",
+    "payslips": "Mis recibos",
+    "externalPay": "Pago de externos",
+    "announcements": "Anuncios"
   },
   "sosOverlay": {
     "title": "Alerta SOS/Emergencia",
@@ -257,11 +284,11 @@
     "dismissAction": "Descartar"
   },
   "sections": {
-    "attendance": "Asistencia",
-    "people": "Personas y sedes",
+    "attendance": "Operación de campo",
+    "people": "Recursos humanos",
     "payroll": "Nómina",
-    "reports": "Informes",
-    "settings": "Ajustes",
+    "reports": "Informes y análisis",
+    "settings": "Administración y gobierno",
     "help": "Ayuda"
   },
   "weather": {
@@ -354,7 +381,12 @@
     "workers": "Trabajadores externos y sus números de quiosco",
     "calendar": "Festivos, días de descanso semanal y días excepcionales: las horas y las horas extra los siguen.",
     "auditLog": "Todo lo que se hace en tu organización: quién hizo qué, a quién, cuándo y por qué.",
-    "dailySummary": "Un día de tu organización: quién trabajó, quién llegó tarde, quién faltó y quién estaba de ausencia"
+    "dailySummary": "Un día de tu organización: quién trabajó, quién llegó tarde, quién faltó y quién estaba de ausencia",
+    "grantPermissions": "Quién tiene qué permisos, y toda la autoridad del propietario",
+    "payroll": "Ciclos, fichas, los tres informes y los recibos de nómina, con permisos separados y versiones guardadas.",
+    "payslips": "Sus recibos publicados: véalos o pídalos por correo.",
+    "externalPay": "Tarifas por día, semana, mes o año, liquidaciones, la política y ajustes individuales: aprobados y congelados, separados de la nómina.",
+    "announcements": "Anuncios y comunicados oficiales dirigidos a ti; confirma los que lo piden."
   },
   "backgroundDisclosure": {
     "title": "Ubicación durante tu turno",

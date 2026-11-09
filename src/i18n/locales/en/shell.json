@@ -225,6 +225,28 @@
       "plan": "plan changed",
       "unlimited": "no limit",
       "planTo": "plan {{plan}}"
+    },
+    "ownerAuthority": {
+      "grantedTitle": "You have the owner's authority",
+      "grantedBody": "The owner gave you all of the owner's permissions, notifications and emails until they withdraw it.",
+      "revokedTitle": "The owner's authority was withdrawn",
+      "revokedBody": "You are back to your own role and permissions."
+    },
+    "payslip": {
+      "requestedTitle": "Payslip requested",
+      "requestedBody": "{{name}} asked for their payslip of {{cycle}}.",
+      "sentTitle": "Your payslip was emailed",
+      "sentBody": "Your payslip of {{cycle}} was sent to your email.",
+      "failedTitle": "Payslip email failed",
+      "failedBody": "The payslip of {{cycle}} could not be sent. You can try again.",
+      "publishedTitle": "Your payslip is available",
+      "publishedBody": "A new payslip was published. You can view it or ask for it by email."
+    },
+    "announcement": {
+      "publishedTitle": "New announcement",
+      "statementTitle": "New official statement",
+      "publishedBody": "{{title}}",
+      "ackBody": "{{title}} - please confirm you have read it."
     }
   },
   "items": {
@@ -248,7 +270,12 @@
     "workers": "Workers",
     "calendar": "Calendar and holidays",
     "auditLog": "Action log",
-    "dailySummary": "Daily summary"
+    "dailySummary": "Daily summary",
+    "grantPermissions": "Grant permissions",
+    "payroll": "Payroll",
+    "payslips": "My payslips",
+    "externalPay": "External labour pay",
+    "announcements": "Announcements"
   },
   "sosOverlay": {
     "title": "SOS/Emergency alert",
@@ -257,11 +284,11 @@
     "dismissAction": "Dismiss"
   },
   "sections": {
-    "attendance": "Attendance",
-    "people": "People & Sites",
+    "attendance": "Field operations",
+    "people": "Human resources",
     "payroll": "Payroll",
-    "reports": "Reports",
-    "settings": "Settings",
+    "reports": "Reports and analytics",
+    "settings": "Administration and governance",
     "help": "Help"
   },
   "weather": {
@@ -349,7 +376,12 @@
     "workers": "External workers and their kiosk numbers",
     "calendar": "Public holidays, weekly rest days and exceptional days - the hours and overtime follow them.",
     "auditLog": "Everything done in your organisation: who did what, to whom, when and why.",
-    "dailySummary": "One day of your organisation: who worked, who was late, who was absent, who was on leave"
+    "dailySummary": "One day of your organisation: who worked, who was late, who was absent, who was on leave",
+    "grantPermissions": "Who gets which permissions - and the owner's full authority",
+    "payroll": "Payroll cycles, profiles, the three reports and payslips - with separate permissions and stored versions.",
+    "payslips": "Your published payslips - view them or ask for them by email.",
+    "externalPay": "Rates by day, week, month or year, pay runs, the policy and individual adjustments - approved and frozen, kept apart from payroll.",
+    "announcements": "Announcements and official statements addressed to you; confirm the ones that ask for it."
   },
   "backgroundDisclosure": {
     "title": "Location during your shift",

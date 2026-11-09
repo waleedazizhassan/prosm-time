@@ -290,7 +290,11 @@
     "locationRequired": "Ohne gültigen Standort ist keine Erfassung möglich. Schalten Sie den Standort ein und versuchen Sie es erneut.",
     "rejectReasonRequired": "Geben Sie den Grund an, damit der Mitarbeiter ihn sieht.",
     "organizationReadOnly": "Ihre Organisation ist schreibgeschützt, bis die Lizenz verlängert wird.",
-    "featureNotInPlan": "Diese Funktion ist nicht im Paket Ihrer Organisation."
+    "featureNotInPlan": "Diese Funktion ist nicht im Paket Ihrer Organisation.",
+    "ownerAuthorityOwnerOnly": "Nur der Inhaber erteilt oder entzieht die Befugnis des Inhabers.",
+    "ownerAuthorityAlready": "Diese Person hat die Befugnis des Inhabers bereits.",
+    "ownerAuthorityNone": "Diese Person hat die Befugnis des Inhabers nicht.",
+    "ownerAuthorityInactive": "Diese Person ist nicht aktiv."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",
@@ -367,5 +371,6 @@
     "text": "Diese Funktion gehört zum Paket {{plan}}.",
     "seePlan": "Paket ansehen",
     "askOwner": "Fragen Sie den Inhaber."
-  }
+  },
+  "issuedVia": "Erstellt mit"
 }

@@ -225,6 +225,28 @@
       "plan": "piano cambiato",
       "unlimited": "senza limite",
       "planTo": "piano {{plan}}"
+    },
+    "ownerAuthority": {
+      "grantedTitle": "Hai l'autorità del titolare",
+      "grantedBody": "Il titolare ti ha dato tutte le sue autorizzazioni, notifiche ed e-mail finché non le ritira.",
+      "revokedTitle": "L'autorità del titolare è stata ritirata",
+      "revokedBody": "Torni al tuo ruolo e alle tue autorizzazioni."
+    },
+    "payslip": {
+      "requestedTitle": "Busta paga richiesta",
+      "requestedBody": "{{name}} ha richiesto la busta paga di {{cycle}}.",
+      "sentTitle": "La tua busta paga è stata inviata",
+      "sentBody": "La busta paga di {{cycle}} è stata inviata alla tua email.",
+      "failedTitle": "Invio della busta paga non riuscito",
+      "failedBody": "Non è stato possibile inviare la busta paga di {{cycle}}. Puoi riprovare.",
+      "publishedTitle": "La tua busta paga è disponibile",
+      "publishedBody": "È stata pubblicata una nuova busta paga. Puoi vederla o richiederla via email."
+    },
+    "announcement": {
+      "publishedTitle": "Nuovo annuncio",
+      "statementTitle": "Nuovo comunicato ufficiale",
+      "publishedBody": "{{title}}",
+      "ackBody": "{{title}} - conferma di averlo letto."
     }
   },
   "items": {
@@ -248,7 +270,12 @@
     "workers": "Lavoratori esterni",
     "calendar": "Calendario e festività",
     "auditLog": "Registro azioni",
-    "dailySummary": "Riepilogo del giorno"
+    "dailySummary": "Riepilogo del giorno",
+    "grantPermissions": "Assegna autorizzazioni",
+    "payroll": "Paghe",
+    "payslips": "Le mie buste paga",
+    "externalPay": "Paga esterni",
+    "announcements": "Annunci"
   },
   "sosOverlay": {
     "title": "Allarme SOS/Emergenza",
@@ -257,11 +284,11 @@
     "dismissAction": "Ignora"
   },
   "sections": {
-    "attendance": "Presenze",
-    "people": "Personale e sedi",
+    "attendance": "Operatività sul campo",
+    "people": "Risorse umane",
     "payroll": "Retribuzione",
-    "reports": "Report",
-    "settings": "Impostazioni",
+    "reports": "Report e analisi",
+    "settings": "Amministrazione e governance",
     "help": "Assistenza"
   },
   "weather": {
@@ -354,7 +381,12 @@
     "workers": "Lavoratori esterni e i loro numeri per il chiosco",
     "calendar": "Festività, giorni di riposo e giorni eccezionali - ore e straordinari ne dipendono.",
     "auditLog": "Tutto ciò che avviene nella tua organizzazione: chi ha fatto cosa, a chi, quando e perché.",
-    "dailySummary": "Un giorno della tua organizzazione: chi ha lavorato, chi era in ritardo, assente o in ferie"
+    "dailySummary": "Un giorno della tua organizzazione: chi ha lavorato, chi era in ritardo, assente o in ferie",
+    "grantPermissions": "Chi ha quali autorizzazioni - e tutta l'autorità del titolare",
+    "payroll": "Cicli paghe, schede, i tre report e le buste paga - con permessi separati e versioni salvate.",
+    "payslips": "Le tue buste paga pubblicate: visualizzale o richiedile via email.",
+    "externalPay": "Tariffe a giorno, settimana, mese o anno, elaborazioni, regole e rettifiche individuali - approvate e congelate, separate dalle paghe.",
+    "announcements": "Annunci e comunicati ufficiali indirizzati a te; conferma quelli che lo richiedono."
   },
   "backgroundDisclosure": {
     "title": "Posizione durante il turno",

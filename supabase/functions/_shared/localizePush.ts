@@ -194,6 +194,27 @@ export function localizePush(type: string, data: Data, language: string, fallbac
     case "shift_no_show":
       result = pair("noShow.title", "noShow.body", { name: data.name ?? "", time: data.time ?? "", site: data.siteName ?? "" });
       break;
+    case "payslip_requested":
+      result = pair("payslip.requestedTitle", "payslip.requestedBody", { name: data.employeeName ?? "", cycle: data.cycleTitle ?? "" });
+      break;
+    case "payslip_sent":
+      result = pair("payslip.sentTitle", "payslip.sentBody", { cycle: data.cycleTitle ?? "" });
+      break;
+    case "payslip_send_failed":
+      result = pair("payslip.failedTitle", "payslip.failedBody", { cycle: data.cycleTitle ?? "" });
+      break;
+    case "announcement_published":
+      result = pair(data.kind === "statement" ? "announcement.statementTitle" : "announcement.publishedTitle", data.requiresAck ? "announcement.ackBody" : "announcement.publishedBody", { title: data.title ?? "" });
+      break;
+    case "payslip_published":
+      result = pair("payslip.publishedTitle", "payslip.publishedBody");
+      break;
+    case "owner_authority_granted":
+      result = pair("ownerAuthority.grantedTitle", "ownerAuthority.grantedBody");
+      break;
+    case "owner_authority_revoked":
+      result = pair("ownerAuthority.revokedTitle", "ownerAuthority.revokedBody");
+      break;
     case "overtime_soon":
       result = pair("overtimeSoon.title", "overtimeSoon.body", { name: data.name ?? "", time: data.time ?? "" });
       break;

@@ -11,7 +11,7 @@ import { LEGAL_DOCUMENTS, LEGAL_VERSION } from "./legalContent";
 
 let isOwner = false;
 vi.mock("../../core/context/AuthContext", () => ({
-  useAuth: () => ({ profile: { id: "user-1", isOwner }, signOut: vi.fn() }),
+  useAuth: () => ({ profile: { id: "user-1", isOwner, isRealOwner: isOwner }, signOut: vi.fn() }),
 }));
 vi.mock("../../core/repositories/LegalRepository", () => ({
   default: { hasAcknowledged: vi.fn(), acknowledge: vi.fn(), recordConsents: vi.fn() },

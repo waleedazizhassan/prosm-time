@@ -188,5 +188,26 @@
       "repeated_coordinates": "Même point sans erreur GPS - signe fréquent de fausse position."
     },
     "title_many": "Pointages suspects ({{count}})"
+  },
+  "imported": {
+    "title": "Présences reçues par l'API ({{count}})",
+    "hint": "Envoyée par un système connecté (pointeuse biométrique, SIRH). Elle ne compte pas avant approbation ; l'approbation fait de chaque arrivée et du départ suivant un enregistrement.",
+    "chooseAll": "Tout choisir",
+    "chooseNone": "Effacer la sélection",
+    "approve": "Approuver ({{count}})",
+    "reject": "Rejeter",
+    "rejectTitle": "Rejeter {{count}} événement(s)",
+    "reason": "Motif (obligatoire)",
+    "approved": "{{applied}} enregistrement(s) créé(s) ; {{pending}} événement(s) en attente.",
+    "error": "Impossible de terminer. Réessayez.",
+    "type": {
+      "clock_in": "Arrivée",
+      "clock_out": "Départ"
+    },
+    "reasons": {
+      "no_matching_clock_out": "pas encore de départ correspondant",
+      "longer_than_24_hours": "plus de 24 heures",
+      "overlaps_existing_attendance": "chevauche une présence déjà enregistrée"
+    }
   }
 }

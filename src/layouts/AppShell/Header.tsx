@@ -1,8 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Menu } from "lucide-react";
 
 import BrandMark from "../../components/common/BrandMark";
+import { requestDashboardRefresh } from "../../core/hooks/useDashboardRefresh";
 import { useAppLayout } from "./LayoutContext";
 import NotificationBell from "./NotificationBell";
 import HeaderNavControls from "./HeaderNavControls";
@@ -33,6 +34,14 @@ import styles from "./Header.module.css";
 export default function Header() {
   const { t } = useTranslation(["shell", "common"]);
   const { openMobileSidebar } = useAppLayout();
+  const { pathname } = useLocation();
+  // B-11: on the dashboard already, the logo refreshes it in place (filters and layout kept)
+  const onBrandClick = (event: React.MouseEvent) => {
+    if (pathname !== "/dashboard") return;
+    event.preventDefault();
+    requestDashboardRefresh();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <header className={styles.header}>
@@ -41,7 +50,7 @@ export default function Header() {
           <Menu size={20} />
         </button>
 
-        <Link to="/dashboard" className={styles.brand}>
+        <Link to="/dashboard" className={styles.brand} onClick={onBrandClick}>
           <BrandMark size={28} />
           <span className={styles.brandName}>{t("common:appName")}</span>
         </Link>

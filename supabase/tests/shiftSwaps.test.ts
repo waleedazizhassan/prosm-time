@@ -34,7 +34,7 @@ describe("shift swaps", () => {
     const asked = await request(t, giver, id, taker.userId);
     expect(asked.error).toBeNull();
     const swapId = asked.rows![0].id;
-    expect((await t.as(giver.authId, "select public.decide_prosm_time_shift_swap($1, true)", [swapId])).error).toMatch(/DO NOT MANAGE/);
+    expect((await t.as(giver.authId, "select public.decide_prosm_time_shift_swap($1, true)", [swapId])).error).toMatch(/YOUR OWN REQUEST|DO NOT MANAGE/);
     expect((await t.su<{ user_id: string }>("select user_id from shift_assignments where id = $1", [id]))[0].user_id).toBe(giver.userId);
 
     expect((await t.as(org.owner.authId, "select public.decide_prosm_time_shift_swap($1, true)", [swapId])).error).toBeNull();

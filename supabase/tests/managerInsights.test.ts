@@ -25,13 +25,15 @@ describe("manager insights", () => {
     expect(sent.map((row) => row.user_id).sort()).toEqual([manager.userId, org.owner.userId].sort());
   });
 
-  it("warns before a shift's end when the person is still in", async () => {
+  // Owner 2026-11-04 (20261104130000): the alert comes overtime_alert_minutes (default 15)
+  // AFTER the shift's end, not before it.
+  it("warns after a shift's end when the person is still in", async () => {
     const t = await buildDatabase();
     const org = await createOrg(t, "Soon Co");
     const site = await createSite(t, org, "Yard");
     const worker = await addMember(t, org, "employee", "Busy Worker");
     await assignToSite(t, site, worker);
-    await t.su("update sites set shift_end_time = ((now() at time zone public.prosm_time_site_timezone(id, organization_id)) + interval '20 minutes')::time where id = $1", [site]);
+    await t.su("update sites set shift_end_time = ((now() at time zone public.prosm_time_site_timezone(id, organization_id)) - interval '20 minutes')::time where id = $1", [site]);
     await t.su("insert into attendance_sessions (organization_id, user_id, site_id, status, clock_in_at) values ($1, $2, $3, 'clocked_in', now() - interval '7 hours')", [org.id, worker.userId, site]);
     await t.su("select public.process_prosm_time_manager_alerts()");
     expect(await t.su("select id from notifications where type = 'overtime_soon' and user_id = $1", [org.owner.userId])).toHaveLength(1);

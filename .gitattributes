@@ -1,0 +1,2 @@
+# Migrations patch function bodies by exact text: keep SQL line endings LF everywhere.
+*.sql text eol=lf

@@ -269,5 +269,10 @@
       "hours": "Horas",
       "late": "Atraso"
     }
+  },
+  "externalPayCard": {
+    "title": "Pagamento de trabalhadores externos",
+    "hint": "Valor, quantidade, bruto, descontos e acréscimos, líquido e estado de aprovação de cada trabalhador - por folha, com totais por moeda. Exporte um, um local ou todos, em PDF ou Excel.",
+    "open": "Abrir pagamento de externos"
   }
 }

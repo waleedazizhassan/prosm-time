@@ -2,7 +2,7 @@ import type { jsPDF } from "jspdf";
 import type { AllowanceEntry, AllowanceLine } from "../../core/repositories/AllowanceRepository";
 import { formatTimeOnly, appLocale } from "../../core/utils/formatDate";
 import { renderHtmlToPdf, escapeHtml } from "../../core/utils/htmlToPdf";
-import prosmLogo from "../../assets/prosm-logo-pdf.png";
+import { customerLogoHtml, issuedViaHtml, prosmLogoHtml } from "../../core/utils/reportBrand";
 
 type TFunc = (key: string, options?: Record<string, unknown>) => string;
 
@@ -65,12 +65,12 @@ function header(ctx: SheetContext, subtitle: string): string {
   const { t, organizationName, organizationLogoUrl } = ctx;
   return `
     <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:3px solid ${BRAND};padding-bottom:12px;margin-bottom:14px;">
-      ${organizationLogoUrl ? `<img src="${escapeHtml(organizationLogoUrl)}" style="height:52px;max-width:120px;object-fit:contain;" />` : `<div style="width:52px;"></div>`}
+      ${prosmLogoHtml()}
       <div style="text-align:center;flex:1;">
         <div style="font-size:22px;font-weight:800;">${escapeHtml(t("sheet.title"))}</div>
         <div style="font-size:12px;color:#475569;margin-top:2px;">${escapeHtml(subtitle)}${organizationName ? ` — ${escapeHtml(organizationName)}` : ""}</div>
       </div>
-      <img src="${prosmLogo}" style="height:52px;width:52px;object-fit:contain;" />
+      ${customerLogoHtml(organizationLogoUrl)}
     </div>`;
 }
 
@@ -82,7 +82,7 @@ function footer(ctx: SheetContext): string {
         .map((label) => `<div style="flex:1;text-align:center;"><div style="border-top:1px solid #0f172a;margin-bottom:6px;"></div>${escapeHtml(label)}</div>`)
         .join("")}
     </div>
-    <div style="text-align:center;margin-top:14px;font-size:10px;color:#94a3b8;">${escapeHtml(new Date().toLocaleString(appLocale(languageCode)))} · PROSM Time</div>`;
+    <div style="text-align:center;margin-top:14px;font-size:10px;color:#94a3b8;">${escapeHtml(new Date().toLocaleString(appLocale(languageCode)))}</div>`;
 }
 
 const cell = (content: string, extra = "") => `<td style="padding:4px 6px;border:1px solid ${LINE};text-align:center;${extra}">${content}</td>`;
@@ -232,6 +232,7 @@ export function buildEmployeeAllowanceSheetPdf(entries: AllowanceEntry[], employ
     ${sheetNotes(entries, ctx)}
     ${footer(ctx)}
   `;
+  container.insertAdjacentHTML("beforeend", issuedViaHtml());
   return renderHtmlToPdf(container);
 }
 
@@ -339,5 +340,6 @@ export function buildCombinedAllowanceSheetPdf(entries: AllowanceEntry[], ctx: S
     ${entries.some((entry) => Object.keys(entry.manualOverrides ?? {}).length > 0) ? `<div style="margin-top:8px;font-size:10.5px;color:#475569;">${EDIT_MARK} ${escapeHtml(t("sheet.combinedEditsNote"))}</div>` : ""}
     ${footer(ctx)}
   `;
+  container.insertAdjacentHTML("beforeend", issuedViaHtml());
   return renderHtmlToPdf(container);
 }

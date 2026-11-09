@@ -1,14 +1,14 @@
-// Owner 2026-10-13: integrations are hidden (not deleted) while
-// FEATURES.integrations is off.
+// Owner 2026-10-13 hid Integrations; owner 2026-11-09 turned it back on. The sidebar item
+// follows FEATURES.integrations (and, at run time, the plan's integrations flag).
 import { describe, expect, it } from "vitest";
 
 import { FEATURES } from "../../config/features";
 import { NAV_ITEMS } from "./navigation";
 
-describe("hidden features", () => {
-  it("keeps Integrations out of the sidebar and the search while it is off", () => {
-    expect(FEATURES.integrations).toBe(false);
-    expect(NAV_ITEMS.map((item) => item.id)).not.toContain("integrations");
+describe("feature switches", () => {
+  it("shows Integrations in the sidebar exactly when it is switched on", () => {
+    expect(FEATURES.integrations).toBe(true);
+    expect(NAV_ITEMS.map((item) => item.id)).toContain("integrations");
     expect(NAV_ITEMS.map((item) => item.id)).toContain("settings");
   });
 });

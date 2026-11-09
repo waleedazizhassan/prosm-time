@@ -28,6 +28,8 @@ const notesFor = (member: TestMember) =>
 beforeAll(async () => {
   t = await buildDatabase();
   org = await createOrg(t, "Mail Co");
+  // leave counts working days (20261108110000): no weekly rest here, so dates relative to today stay stable
+  await t.su("update organization_settings set rest_days = '{}'::smallint[] where organization_id = $1", [org.id]);
   const site = await createSite(t, org, "Main");
   manager = await addMember(t, org, "manager", "Mona Manager");
   employee = await addMember(t, org, "employee", "Omar Employee");

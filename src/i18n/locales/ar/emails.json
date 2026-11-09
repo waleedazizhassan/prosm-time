@@ -158,5 +158,21 @@
         "REVOKED": "ملغى"
       }
     }
+  },
+  "payslip": {
+    "subject": "مفردات مرتبك - {{cycle}}",
+    "greeting": "مرحبًا {{name}}،",
+    "intro": "بناءً على طلبك، مرفق ملف PDF بمفردات مرتبك المعتمدة عن {{cycle}} من {{org}}.",
+    "version": "إصدار الدورة v{{version}} · رقم الإصدار {{serial}}.",
+    "private": "هذا المستند شخصي وسري. إن لم تطلبه فأبلغ مديرك."
+  },
+  "announcement": {
+    "subject": "إعلان",
+    "statementSubject": "بيان رسمي",
+    "from": "إعلان من {{org}}",
+    "statementFrom": "بيان رسمي من {{org}}",
+    "links": "روابط:",
+    "confirm": "برجاء تأكيد القراءة من داخل PROSM Time.",
+    "files": "ملفات مرفقة: {{count}} - افتحها في PROSM Time."
   }
 }

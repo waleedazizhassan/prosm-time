@@ -31,9 +31,9 @@
   },
   "integrations": {
     "title": "集成",
-    "hint": "一个只读密钥，供其他 PROSM 产品（如 PROSM Projects 或 PROSM Finance）读取您团队真实、经过验证的考勤数据（若密钥包含工资范围，也可读取工资数据），无需手工录入。此密钥永远无法向 PROSM Time 写入任何内容。",
+    "hint": "只读密钥允许其他系统（ERP、财务、人事或报表工具）通过 PROSM Time API 读取您的数据。每个密钥只授予所需的范围。密钥永远无法修改 PROSM Time 中的任何内容。",
     "nameLabel": "密钥名称",
-    "namePlaceholder": "例如 PROSM Projects 或 PROSM Finance",
+    "namePlaceholder": "例如：ERP、财务系统",
     "createAction": "创建密钥",
     "createError": "无法创建此 API 密钥。",
     "revokeAction": "撤销",
@@ -43,10 +43,70 @@
     "neverUsed": "从未使用",
     "newKeyTitle": "您的新 API 密钥",
     "newKeyWarning": "请立即复制，之后不会再显示。之后只保留其前缀。",
-    "scopeLabel": "访问权限",
+    "scopeLabel": "此密钥可读取的内容",
     "scope": {
-      "attendanceRead": "考勤（只读）",
-      "payrollRead": "工资费率（只读）"
+      "attendanceRead": "考勤",
+      "payrollRead": "工资（已锁定周期）",
+      "employeesRead": "员工",
+      "employeesSensitive": "员工电子邮箱",
+      "sitesRead": "站点",
+      "leavesRead": "请假",
+      "attendanceWrite": "发送考勤（待批准）",
+      "shiftsRead": "排班"
+    },
+    "endpoint": "API 地址：",
+    "expired": "已过期",
+    "requests7d": "7 天内 {{n}} 次请求",
+    "expiresOn": "到期 {{time}}",
+    "noExpiry": "永不过期",
+    "expiryLabel": "有效期",
+    "expiryDays": "{{n}} 天",
+    "environmentLabel": "环境",
+    "environment": {
+      "live": "正式",
+      "test": "测试"
+    },
+    "revokeTitle": "撤销此密钥？",
+    "revokeWarning": "“{{name}}”将立即失效且无法恢复。使用它的系统需要新的密钥。",
+    "cancel": "取消",
+    "webhooks": {
+      "title": "即时通知其他系统（Webhook）",
+      "hint": "事件发生时立即通知对方系统。每条消息都用只显示一次的密钥签名；若对方系统不可用，PROSM Time 会在一天内以递增间隔重试。不会发送金额或联系方式。",
+      "url": "地址（https://）",
+      "description": "描述（可选）",
+      "add": "添加",
+      "active": "已启用",
+      "off": {
+        "turned_off": "已停用",
+        "too_many_failures": "连续 20 次投递失败后已停用"
+      },
+      "counts": "最近 7 天：已送达 {{delivered}}，失败 {{dead}}；等待中 {{pending}}",
+      "deliveries": "投递记录",
+      "noDeliveries": "尚未发送。",
+      "turnOff": "停用",
+      "turnOn": "启用",
+      "delete": "删除",
+      "secretTitle": "签名密钥",
+      "secretWarning": "请立即复制到对方系统——之后不再显示。用于验证每条消息确实来自 PROSM Time。",
+      "status": {
+        "pending": "等待中",
+        "sending": "发送中",
+        "delivered": "已送达",
+        "dead": "失败"
+      },
+      "attempts": "{{n}} 次尝试",
+      "sendAgain": "重新发送",
+      "event": {
+        "employee_created": "新增员工",
+        "employee_updated": "员工信息变更",
+        "employee_deactivated": "员工停用",
+        "attendance_clock_in": "签到",
+        "attendance_clock_out": "签退",
+        "leave_requested": "提交请假",
+        "leave_approved": "请假已批准",
+        "leave_rejected": "请假被拒",
+        "leave_cancelled": "请假已取消"
+      }
     }
   },
   "payroll": {
@@ -207,10 +267,36 @@
     "failed": "无法保存此设置。"
   },
   "sections": {
-    "subscription": "订阅",
-    "sites": "工地和打卡",
-    "time": "工作时间和加班",
-    "leave": "请假",
-    "privacy": "数据和隐私"
+    "sites": "站点设置",
+    "organization": "组织设置",
+    "attendanceLeave": "考勤与请假设置",
+    "payroll": "工资设置",
+    "governance": "安全与治理"
+  },
+  "links": {
+    "calendar": {
+      "title": "工作日历",
+      "hint": "公共假日、每周休息日和特殊日期。"
+    },
+    "payroll": {
+      "title": "工资设置与项目",
+      "hint": "工资项目、按比例计算、周期、报表、发布与导出。"
+    },
+    "externalPolicy": {
+      "title": "外部工人薪酬政策",
+      "hint": "扣款与加项，以及月薪/年薪换算日薪的规则。"
+    },
+    "permissions": {
+      "title": "授权与委托",
+      "hint": "将所有者的权限授予某人——全部或所选权限，并设定期限。"
+    },
+    "auditLog": {
+      "title": "操作日志",
+      "hint": "谁在何时做了什么，以及原因。"
+    },
+    "integrations": {
+      "title": "集成与 API",
+      "hint": "用于财务、人事等系统的密钥、考勤导入和 Webhook。"
+    }
   }
 }

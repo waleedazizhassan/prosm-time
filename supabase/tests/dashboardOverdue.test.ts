@@ -11,6 +11,8 @@ let site: string;
 let late: TestMember;
 let justEnded: TestMember;
 let working: TestMember;
+let forgotten: TestMember; // 2026-11-08 B-06: no shift, no site end time, open since yesterday
+let freshNoShift: TestMember;
 
 const tz = "public.prosm_time_site_timezone($2, $1)";
 const shift = (member: TestMember, startMinutesFromNow: number, endMinutesFromNow: number) =>
@@ -36,7 +38,10 @@ beforeAll(async () => {
   late = await addMember(t, org, "employee", "Still Here");
   justEnded = await addMember(t, org, "employee", "Just Ended");
   working = await addMember(t, org, "employee", "Mid Shift");
-  for (const member of [late, justEnded, working]) await assignToSite(t, site, member);
+  forgotten = await addMember(t, org, "employee", "Forgot Yesterday");
+  freshNoShift = await addMember(t, org, "employee", "No Shift Today");
+  for (const member of [late, justEnded, working, forgotten, freshNoShift]) await assignToSite(t, site, member);
+  await t.su("update sites set shift_end_time = null where id = $1", [site]);
   // ended 2 hours ago / 20 minutes ago / ends in 3 hours
   await shift(late, -600, -120);
   await clockedInSince(late, 600);
@@ -44,6 +49,8 @@ beforeAll(async () => {
   await clockedInSince(justEnded, 480);
   await shift(working, -120, 180);
   await clockedInSince(working, 120);
+  await clockedInSince(forgotten, 30 * 60);
+  await clockedInSince(freshNoShift, 30);
 });
 
 describe("didn't clock out", () => {
@@ -54,8 +61,19 @@ describe("didn't clock out", () => {
     );
     expect(result.error).toBeNull();
     const overdue = result.rows![0].d.overdue;
-    expect(overdue.map((row) => row.userId)).toEqual([late.userId]);
-    expect(overdue[0].overdueMinutes).toBeGreaterThanOrEqual(119);
-    expect(overdue[0].siteName).toBe("Main");
+    const mine = overdue.filter((row) => row.userId !== forgotten.userId);
+    expect(mine.map((row) => row.userId)).toEqual([late.userId]);
+    expect(mine[0].overdueMinutes).toBeGreaterThanOrEqual(119);
+    expect(mine[0].siteName).toBe("Main");
+  });
+
+  it("also lists a session left open from an earlier day where no end time is known (B-06)", async () => {
+    const result = await t.as<{ d: { overdue: { userId: string; endedAt: string }[] } }>(
+      org.owner.authId,
+      "select public.get_prosm_time_manager_dashboard(current_date, current_date, 'org', null, 'Africa/Cairo') as d",
+    );
+    const ids = result.rows![0].d.overdue.map((row) => row.userId);
+    expect(ids).toContain(forgotten.userId);
+    expect(ids).not.toContain(freshNoShift.userId);
   });
 });

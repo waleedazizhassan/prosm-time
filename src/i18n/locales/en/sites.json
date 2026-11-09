@@ -177,9 +177,9 @@
     "option": {
       "OFF": "Do nothing",
       "PROMPT": "Ask \"clock out?\"",
-      "AUTO": "Ask, then clock out automatically"
+      "AUTO": "Ask, remind, and clock out at the time they left once they agree"
     },
-    "minutesLabel": "Clock out automatically after (minutes outside)",
+    "minutesLabel": "Remind after (minutes outside)",
     "fieldSiteLabel": "Field site (people move around - never ask)",
     "save": "Save",
     "saved": "Saved.",

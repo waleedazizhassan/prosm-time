@@ -13,6 +13,11 @@ vi.mock("../../core/repositories/EmployeeRepository", () => ({
   default: { inviteUser: vi.fn() },
 }));
 
+// 2026-11-09: the form offers the organisation's departments (none here)
+vi.mock("../../core/repositories/AnnouncementRepository", () => ({
+  default: { departments: vi.fn().mockResolvedValue({ data: [], error: null }) },
+}));
+
 describe("InviteEmployeeModal", () => {
   beforeEach(() => {
     vi.mocked(EmployeeRepository.inviteUser).mockReset();
@@ -45,6 +50,7 @@ describe("InviteEmployeeModal", () => {
         email: "morgan@acme.example",
         fullName: "Morgan Manager",
         roleKey: "manager",
+        departmentId: null,
       });
     });
 

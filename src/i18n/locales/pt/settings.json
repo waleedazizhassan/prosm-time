@@ -31,9 +31,9 @@
   },
   "integrations": {
     "title": "Integrações",
-    "hint": "Uma chave somente leitura para que outro produto PROSM (como PROSM Projects ou PROSM Finance) obtenha o ponto real e verificado da sua equipe - e dados de folha também, se a chave tiver esse escopo - em vez de digitá-los. Esta chave nunca grava nada no PROSM Time.",
+    "hint": "As chaves somente leitura permitem que outro sistema (ERP, contabilidade, RH ou relatórios) leia os seus dados pela API do PROSM Time. Dê a cada chave apenas os escopos necessários. Uma chave nunca pode alterar nada no PROSM Time.",
     "nameLabel": "Nome da chave",
-    "namePlaceholder": "ex.: PROSM Projects ou PROSM Finance",
+    "namePlaceholder": "ex.: ERP, contabilidade",
     "createAction": "Criar chave",
     "createError": "Não foi possível criar esta chave de API.",
     "revokeAction": "Revogar",
@@ -43,10 +43,70 @@
     "neverUsed": "nunca usada",
     "newKeyTitle": "Sua nova chave de API",
     "newKeyWarning": "Copie agora: ela não será exibida de novo. Depois, só o prefixo fica guardado.",
-    "scopeLabel": "Acesso",
+    "scopeLabel": "O que esta chave pode ler",
     "scope": {
-      "attendanceRead": "Ponto (somente leitura)",
-      "payrollRead": "Valores/hora (somente leitura)"
+      "attendanceRead": "Assiduidade",
+      "payrollRead": "Folha (ciclos fechados)",
+      "employeesRead": "Funcionários",
+      "employeesSensitive": "E-mails dos funcionários",
+      "sitesRead": "Locais",
+      "leavesRead": "Férias",
+      "attendanceWrite": "Enviar assiduidade (pendente de aprovação)",
+      "shiftsRead": "Turnos"
+    },
+    "endpoint": "Endereço da API:",
+    "expired": "Expirada",
+    "requests7d": "{{n}} pedidos em 7 dias",
+    "expiresOn": "expira {{time}}",
+    "noExpiry": "Sem expiração",
+    "expiryLabel": "Expira após",
+    "expiryDays": "{{n}} dias",
+    "environmentLabel": "Ambiente",
+    "environment": {
+      "live": "Produção",
+      "test": "Teste"
+    },
+    "revokeTitle": "Revogar esta chave?",
+    "revokeWarning": "\"{{name}}\" deixa de funcionar imediatamente e não pode ser restaurada. O sistema que a usa precisará de uma nova chave.",
+    "cancel": "Cancelar",
+    "webhooks": {
+      "title": "Avisos imediatos a outros sistemas (webhooks)",
+      "hint": "O outro sistema é avisado no momento. Cada mensagem é assinada com um segredo mostrado uma vez; se o sistema estiver em baixo, o PROSM Time tenta de novo com esperas crescentes durante um dia. Não são enviados valores nem contactos.",
+      "url": "Endereço (https://)",
+      "description": "Descrição (opcional)",
+      "add": "Adicionar",
+      "active": "Ativo",
+      "off": {
+        "turned_off": "Desativado",
+        "too_many_failures": "Desativado após 20 entregas falhadas seguidas"
+      },
+      "counts": "Últimos 7 dias: {{delivered}} entregues, {{dead}} falhados; {{pending}} a aguardar",
+      "deliveries": "Entregas",
+      "noDeliveries": "Ainda nada enviado.",
+      "turnOff": "Desativar",
+      "turnOn": "Ativar",
+      "delete": "Eliminar",
+      "secretTitle": "O segredo de assinatura",
+      "secretWarning": "Copie-o agora para o outro sistema - não voltará a ser mostrado. Serve para confirmar que cada mensagem vem do PROSM Time.",
+      "status": {
+        "pending": "a aguardar",
+        "sending": "a enviar",
+        "delivered": "entregue",
+        "dead": "falhado"
+      },
+      "attempts": "{{n}} tentativa(s)",
+      "sendAgain": "Enviar de novo",
+      "event": {
+        "employee_created": "Funcionário adicionado",
+        "employee_updated": "Funcionário alterado",
+        "employee_deactivated": "Funcionário desativado",
+        "attendance_clock_in": "Entrada",
+        "attendance_clock_out": "Saída",
+        "leave_requested": "Férias pedidas",
+        "leave_approved": "Férias aprovadas",
+        "leave_rejected": "Férias recusadas",
+        "leave_cancelled": "Férias canceladas"
+      }
     }
   },
   "payroll": {
@@ -209,10 +269,36 @@
     "failed": "Não foi possível salvar esta configuração."
   },
   "sections": {
-    "subscription": "Assinatura",
-    "sites": "Unidades e ponto",
-    "time": "Jornada e horas extras",
-    "leave": "Ausências",
-    "privacy": "Dados e privacidade"
+    "sites": "Locais e registos",
+    "organization": "Organização",
+    "attendanceLeave": "Assiduidade e férias",
+    "payroll": "Folha de salários",
+    "governance": "Segurança e governação"
+  },
+  "links": {
+    "calendar": {
+      "title": "Calendário de trabalho",
+      "hint": "Feriados, descansos semanais e dias excecionais."
+    },
+    "payroll": {
+      "title": "Definições salariais",
+      "hint": "Itens, proporcionalidade, períodos, relatórios, publicação e exportação."
+    },
+    "externalPolicy": {
+      "title": "Política de pagamento de externos",
+      "hint": "Descontos e acréscimos, e a regra da diária para valores mensais e anuais."
+    },
+    "permissions": {
+      "title": "Permissões e delegação",
+      "hint": "Dê a uma pessoa a autoridade do proprietário - toda ou permissões escolhidas, por um período."
+    },
+    "auditLog": {
+      "title": "Registo de ações",
+      "hint": "Quem fez o quê e quando, com o motivo."
+    },
+    "integrations": {
+      "title": "Integrações e API",
+      "hint": "Chaves para contabilidade, RH e outros sistemas, receção de presenças e webhooks."
+    }
   }
 }

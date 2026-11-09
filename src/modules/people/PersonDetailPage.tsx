@@ -27,6 +27,8 @@ import HintText from "../../components/common/HintText";
 import EmploymentDetailsCard from "./EmploymentDetailsCard";
 import LivenessExemptionCard from "./LivenessExemptionCard";
 import FieldWorkerCard from "./FieldWorkerCard";
+import RoleChangeCard from "./RoleChangeCard";
+import DepartmentCard from "./DepartmentCard";
 
 const MANAGER_ONLY_PERMISSIONS = ["leave.approve", "attendance.clock_in_on_behalf", "attendance.clock_out_on_behalf"];
 
@@ -361,6 +363,11 @@ export default function PersonDetailPage() {
         </Card>
       ) : null}
 
+      {/* 2026-11-09 B-01: change the role (the server decides who may and for which role) */}
+      {!member.isOwner && member.id !== profile?.id && (profile?.isRealOwner || hasPermission("permissions.assign")) ? (
+        <RoleChangeCard key={member.roleKey} userId={member.id} currentRole={member.roleKey} onChanged={() => void load()} />
+      ) : null}
+
       {canManagePermissions ? (
         <Card title={t("detail.permissionsTitle")}>
           <HintText small>{t("detail.permissionsHint")}</HintText>
@@ -434,6 +441,9 @@ export default function PersonDetailPage() {
           ))
         )}
       </Card>
+
+      {/* 2026-11-09 Media Center: the person's department */}
+      {userId && !member.isOwner ? <DepartmentCard userId={userId} canEdit={hasPermission("employees.edit")} /> : null}
 
       {userId && (canEditLeaveEntitlement || hasPermission("employees.edit")) ? (
         <EmploymentDetailsCard userId={userId} canEdit={Boolean(profile?.isOwner) || hasPermission("employees.edit")} />

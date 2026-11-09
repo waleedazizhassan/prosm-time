@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, LogIn, Plug, HardHat, ScrollText, Sunrise } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, KeyRound, LogIn, Plug, HardHat, ScrollText, Sunrise, Banknote, Receipt, Megaphone } from "lucide-react";
 
 import { FEATURES } from "../../config/features";
 import type { PlanFeature } from "../../core/hooks/usePlanFeatures";
@@ -10,6 +10,10 @@ import type { PlanFeature } from "../../core/hooks/usePlanFeatures";
 // group, "organization" - this actually splits it): attendance-facing
 // tools, people/sites, payroll (timesheets+allowances), a new Reports
 // Center, a new Settings section, and Help.
+// 2026-11-09 B-05: the groups follow the target sidebar tree (spec 25.4) - "attendance" is Field
+// operations (attendance, sites, leave and holidays, shifts, kiosk), "people" Human resources,
+// "payroll" Payroll, "reports" Reports and analytics, "settings" Administration and governance.
+// The ids stay, so nothing that refers to them breaks; every path is unchanged.
 export type NavSection = "attendance" | "people" | "payroll" | "reports" | "settings" | "help";
 
 export interface NavItem {
@@ -38,6 +42,8 @@ export interface NavItem {
   // authenticated member, same as requiredPermission: null already
   // means for this one item).
   hiddenFromOwner?: boolean;
+  /** Only the owner as a person - not a person holding the owner's authority (owner 2026-11-04). */
+  realOwnerOnly?: boolean;
   // Owner 2026-10-19: shown only to the Owner and Managers (e.g. the workers' kiosk).
   ownerOrManagerOnly?: boolean;
   // Owner 2026-11-03: hidden when the organisation's plan does not include it.
@@ -103,7 +109,9 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // own alerts, if any), same as Manager Console's own gate.
   { id: "emergencyLog", planFeature: "sos", labelKey: "items.emergencyLog", path: "/emergency-log", icon: Siren, requiredPermission: "attendance.view", section: "attendance" },
   { id: "people", labelKey: "items.people", path: "/people", icon: Users, requiredPermission: "employees.view", section: "people" },
-  { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage", section: "people" },
+  // 2026-11-09 Media Center: announcements and official statements - everyone reads what was addressed to them.
+  { id: "announcements", labelKey: "items.announcements", path: "/announcements", icon: Megaphone, requiredPermission: null, section: "people" },
+  { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage", section: "attendance" },
   // Owner 2026-10-18/19: external workers for the whole organisation (app-generated kiosk numbers).
   { id: "workers", planFeature: "kiosk", labelKey: "items.workers", path: "/workers", icon: HardHat, requiredPermission: "sites.manage", section: "people" },
   // §22: "Employee reviews their period" - self-access to one's own
@@ -122,7 +130,13 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // permission, same reasoning as Timesheets/Allowances above -
   // leave_requests' own RLS is what actually scopes what a supervisor
   // sees (Manager Console's own new review section).
-  { id: "leave", planFeature: "leave", labelKey: "items.leave", path: "/leave", icon: CalendarDays, requiredPermission: null, section: "payroll" },
+  // 2026-11-08: the payroll module (its own payroll.* permissions; the owner holds them all) and
+  // each person's own published payslips.
+  { id: "payroll", planFeature: "payroll", labelKey: "items.payroll", path: "/payroll", icon: Banknote, requiredPermission: "payroll.access", section: "payroll" },
+  // 2026-11-08 B-07: external labour pay - separate from payroll and its permissions.
+  { id: "externalPay", planFeature: "kiosk", labelKey: "items.externalPay", path: "/workers/pay", icon: HardHat, requiredPermission: "external_labor.view_pay", section: "payroll" },
+  { id: "payslips", planFeature: "payroll", labelKey: "items.payslips", path: "/payslips", icon: Receipt, requiredPermission: null, hiddenFromOwner: true, section: "payroll" },
+  { id: "leave", planFeature: "leave", labelKey: "items.leave", path: "/leave", icon: CalendarDays, requiredPermission: null, section: "attendance" },
   // § live UX review, user-directed - "a Reports Center where any PDF
   // can be pulled." No permission gate on the nav item itself - the
   // page's own report-type selector gates each report by the exact
@@ -131,12 +145,13 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // owner 2026-11-03: the morning summary opens here - one day, any day, with the names
   { id: "dailySummary", planFeature: "daily_summary", labelKey: "items.dailySummary", path: "/daily-summary", icon: Sunrise, requiredPermission: null, ownerOnly: true, section: "reports" },
   // Owner 2026-10-28: the action log on its own page (it left the dashboard).
-  { id: "auditLog", planFeature: "audit", labelKey: "items.auditLog", path: "/audit-log", icon: ScrollText, requiredPermission: "audit.view", section: "reports" },
+  { id: "auditLog", planFeature: "audit", labelKey: "items.auditLog", path: "/audit-log", icon: ScrollText, requiredPermission: "audit.view", section: "settings" },
   // § live UX review, user-directed - a real home for org-wide
   // settings (today: the no-site geofence radius) instead of living
   // inside an unrelated page. Owner-only, matching that setting's own
   // existing RPC-level gate.
   // Owner 2026-10-20: every setting lives here - each site's rules too, so managers who manage sites see it.
+  { id: "grantPermissions", labelKey: "items.grantPermissions", path: "/permissions", icon: KeyRound, requiredPermission: null, ownerOnly: true, realOwnerOnly: true, section: "settings" },
   { id: "settings", labelKey: "items.settings", path: "/settings", icon: Settings, requiredPermission: "sites.manage", section: "settings" },
   // § user-directed 2026-09-09 - "API [keys] should appear on its own
   // in the sidebar, not inside Settings." Same Owner-only gate as

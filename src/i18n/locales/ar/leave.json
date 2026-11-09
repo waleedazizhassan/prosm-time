@@ -102,5 +102,16 @@
     "error": "تعذّر تسجيل الإجازة."
   },
   "reviewerLabel": "إرسال الطلب إلى",
-  "reviewerOwner": "{{name}} (صاحب الشركة)"
+  "reviewerOwner": "{{name}} (صاحب الشركة)",
+  "preview": {
+    "workingDays": "أيام العمل التي تُخصم من الرصيد: {{count}}",
+    "noWorkingDay": "هذه التواريخ ليس فيها يوم عمل - كلها راحة أو عطلات - لذلك سيُرفض الطلب.",
+    "notCounted": "لا تُحتسب:",
+    "remaining": "الرصيد المتبقي قبل هذا الطلب: {{count}}",
+    "dayType": {
+      "weekly_rest": "راحة أسبوعية",
+      "public_holiday": "عطلة رسمية",
+      "day_off": "يوم إجازة"
+    }
+  }
 }

@@ -185,5 +185,26 @@
       "unverified_capture": "Die Kamera ließ sich nicht öffnen.",
       "repeated_coordinates": "Gleicher Punkt ohne GPS-Fehler - typisch für Fake-GPS."
     }
+  },
+  "imported": {
+    "title": "Über die API empfangene Anwesenheit ({{count}})",
+    "hint": "Von einem verbundenen System gesendet (Fingerabdruckgerät, Personalsystem). Zählt nichts, bis genehmigt; die Genehmigung macht aus jedem Ein- und dem nächsten Ausstempeln einen Eintrag.",
+    "chooseAll": "Alle wählen",
+    "chooseNone": "Auswahl aufheben",
+    "approve": "Genehmigen ({{count}})",
+    "reject": "Ablehnen",
+    "rejectTitle": "{{count}} Ereignis(se) ablehnen",
+    "reason": "Begründung (Pflicht)",
+    "approved": "{{applied}} Einträge erstellt; {{pending}} Ereignisse warten noch.",
+    "error": "Konnte nicht abgeschlossen werden. Bitte erneut versuchen.",
+    "type": {
+      "clock_in": "Einstempeln",
+      "clock_out": "Ausstempeln"
+    },
+    "reasons": {
+      "no_matching_clock_out": "noch kein passendes Ausstempeln",
+      "longer_than_24_hours": "länger als 24 Stunden",
+      "overlaps_existing_attendance": "überschneidet sich mit erfasster Anwesenheit"
+    }
   }
 }

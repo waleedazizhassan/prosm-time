@@ -177,9 +177,9 @@
     "option": {
       "OFF": "Rien",
       "PROMPT": "Demander « pointer le départ ? »",
-      "AUTO": "Demander, puis pointer automatiquement"
+      "AUTO": "Demander, rappeler, puis pointer le départ à l'heure de sortie une fois accepté"
     },
-    "minutesLabel": "Départ automatique après (minutes dehors)",
+    "minutesLabel": "Rappeler après (minutes dehors)",
     "fieldSiteLabel": "Site de terrain (ne jamais demander)",
     "save": "Enregistrer",
     "saved": "Enregistré.",

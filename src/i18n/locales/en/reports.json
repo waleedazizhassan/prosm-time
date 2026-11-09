@@ -269,5 +269,10 @@
       "hours": "Hours",
       "late": "Late"
     }
+  },
+  "externalPayCard": {
+    "title": "External labour pay",
+    "hint": "Each worker's rate, quantity, gross, deductions and additions, net and approval status - per pay run, with totals per currency. Export one worker, a site or everyone, in PDF or Excel.",
+    "open": "Open external labour pay"
   }
 }

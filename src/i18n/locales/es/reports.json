@@ -269,5 +269,10 @@
       "hours": "Horas",
       "late": "Retraso"
     }
+  },
+  "externalPayCard": {
+    "title": "Pago de trabajadores externos",
+    "hint": "Tarifa, cantidad, bruto, deducciones y adiciones, neto y estado de aprobación de cada trabajador, por liquidación y con totales por moneda. Exporte uno, una sede o todos, en PDF o Excel.",
+    "open": "Abrir pago de externos"
   }
 }

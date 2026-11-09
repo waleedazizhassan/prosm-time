@@ -306,7 +306,7 @@ export default function TimesheetsPage() {
       <ErrorText>{error}</ErrorText>
 
       {/* Owner 2026-10-21: everyone produces their own timesheet; generating for others takes timesheets.generate. */}
-      {canGenerate || (profile && !profile.isOwner) ? (
+      {canGenerate || (profile && !profile.isRealOwner) ? (
         <Card title={t("generate.title")}>
           <FormGrid columns={4} gap="sm" alignItems="end">
             {/* § live UX review - two accounts with near-identical names

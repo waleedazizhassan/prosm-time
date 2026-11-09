@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { CalendarDays, ChevronLeft, ChevronRight, Clock, FileText, MapPin, Wallet } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
+import { useDashboardRefresh } from "../../core/hooks/useDashboardRefresh";
 import ManagerRepository, { type TodayAttendanceRow } from "../../core/repositories/ManagerRepository";
 import SiteRepository from "../../core/repositories/SiteRepository";
 import Card from "../../components/common/Card";
@@ -22,6 +23,8 @@ export default function EmployeeHome() {
   const profileId = profile?.id;
   const [rows, setRows] = useState<TodayAttendanceRow[]>([]);
   const [siteNames, setSiteNames] = useState<string[]>([]);
+  const [tick, setTick] = useState(0);
+  useDashboardRefresh(() => setTick((value) => value + 1));
 
   useEffect(() => {
     if (!profileId) return;
@@ -35,7 +38,7 @@ export default function EmployeeHome() {
       setRows(history.success ? (history.data ?? []).filter((row) => row.userId === profileId) : []);
       setSiteNames(assigned.success ? assigned.data?.[profileId] ?? [] : []);
     });
-  }, [profileId]);
+  }, [profileId, tick]);
 
   const hour = new Date().getHours();
   const greetingKey = hour < 12 ? "overview.greetingMorning" : hour < 17 ? "overview.greetingAfternoon" : "overview.greetingEvening";

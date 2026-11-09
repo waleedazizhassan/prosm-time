@@ -213,9 +213,8 @@
       "openSettings": "Apri impostazioni"
     },
     "suggestSite": "Sei a {{site}}. Timbrare ora?",
-    "suggestSiteAction": "Sì, timbra",
-    "suggestSiteDismiss": "Non ora",
-    "confirmOutside": "Sei a {{meters}} m fuori dall'area di {{site}}. Sarà registrato come eccezione e il tuo responsabile lo verificherà."
+    "confirmOutside": "Sei a {{meters}} m fuori dall'area di {{site}}. Sarà registrato come eccezione e il tuo responsabile lo verificherà.",
+    "clockInAt": "Timbra l'entrata a {{site}}"
   },
   "kioskPin": {
     "title": "PIN chiosco",
@@ -298,7 +297,9 @@
     "body": "Il turno è ancora aperto. Registri l'uscita?",
     "clockOut": "Esci ora",
     "stillWorking": "Sto ancora lavorando",
-    "error": "Impossibile salvare la risposta."
+    "error": "Impossibile salvare la risposta.",
+    "bodyAtLeave": "Il turno è ancora aperto. Timbrare l'uscita alle {{time}}, quando sei uscito?",
+    "clockOutAtLeave": "Uscita alle {{time}}"
   },
   "manager": {
     "title": "Dashboard",
@@ -381,7 +382,19 @@
       "external": "Lavoratori esterni ora",
       "externalSites": "in {{count}} sito/i",
       "overdue": "Uscita non timbrata",
-      "overdueHint": "Un'ora dopo la fine del turno"
+      "overdueHint": "Un'ora dopo la fine del turno",
+      "onLeaveCard": "In ferie oggi",
+      "def": {
+        "absentShort": "nessuna presenza né ferie approvate",
+        "leaveShort": "ferie approvate che includono oggi",
+        "present": "Persone che hanno timbrato l'entrata adesso, nel tuo ambito.",
+        "hours": "Ore lavorate nel periodo scelto, dall'entrata all'uscita.",
+        "late": "Persone entrate oggi dopo l'inizio del turno.",
+        "absent": "Attesi oggi, senza presenza né ferie approvate. Chi è in ferie approvate è contato a parte.",
+        "leave": "Persone con ferie approvate che includono oggi. Non sono contate come assenti.",
+        "overdue": "Ancora in servizio un'ora dopo la fine del turno (o della giornata della sede), o aperti da un giorno precedente.",
+        "overtime": "Straordinari approvati nel periodo. Quelli in attesa non sono contati."
+      }
     },
     "map": {
       "title": "I siti ora",
@@ -392,7 +405,9 @@
       "keyLabel": "Siti sulla mappa",
       "stateActive": "Attivo - persone presenti ora",
       "stateIdle": "Inattivo - nessuno ora",
-      "stateSos": "SOS"
+      "stateSos": "SOS",
+      "zoomIn": "Ingrandisci",
+      "zoomOut": "Riduci"
     },
     "present": {
       "title": "Presenti ora ({{count}})",
@@ -496,7 +511,9 @@
         "attendance_overtime_approved": "Straordinari approvati",
         "attendance_auto_close": "Sessione chiusa automaticamente",
         "allowances_edit_during_review": "Indennità modificata in revisione",
-        "leave_approved_cancelled": "Ferie approvate annullate"
+        "leave_approved_cancelled": "Ferie approvate annullate",
+        "OWNER_AUTHORITY_GRANTED": "Autorità del titolare concessa",
+        "OWNER_AUTHORITY_REVOKED": "Autorità del titolare ritirata"
       },
       "groups": {
         "sos": "SOS",
@@ -535,7 +552,12 @@
         "status": "Stato",
         "details": "Dettagli"
       },
-      "grantAction": "Segna come ferie"
+      "grantAction": "Segna come ferie",
+      "absentTitle": "Assenti oggi: {{absent}}",
+      "leaveTitle": "In ferie oggi: {{leave}}",
+      "noneAbsent": "Nessuno è assente oggi",
+      "noneLeave": "Nessuno è in ferie oggi",
+      "openLeave": "Apri richieste di ferie"
     },
     "sheet": {
       "title": {

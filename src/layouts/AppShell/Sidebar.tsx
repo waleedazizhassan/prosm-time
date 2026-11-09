@@ -70,7 +70,8 @@ export default function Sidebar() {
     (item) =>
       (item.requiredPermission === null || hasPermission(item.requiredPermission)) &&
       (!item.ownerOnly || profile?.isOwner) &&
-      (!item.hiddenFromOwner || !profile?.isOwner) &&
+      (!item.hiddenFromOwner || !profile?.isRealOwner) &&
+      (!item.realOwnerOnly || profile?.isRealOwner) &&
       (!item.ownerOrManagerOnly || profile?.isOwner || profile?.roleKey === "manager") &&
           allows(item.planFeature)
   );

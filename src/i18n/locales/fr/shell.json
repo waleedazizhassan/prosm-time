@@ -225,6 +225,28 @@
       "plan": "offre modifiée",
       "unlimited": "sans limite",
       "planTo": "offre {{plan}}"
+    },
+    "ownerAuthority": {
+      "grantedTitle": "Vous avez l'autorité du propriétaire",
+      "grantedBody": "Le propriétaire vous a donné toutes ses autorisations, notifications et e-mails jusqu'à ce qu'il les retire.",
+      "revokedTitle": "L'autorité du propriétaire a été retirée",
+      "revokedBody": "Vous retrouvez votre rôle et vos autorisations."
+    },
+    "payslip": {
+      "requestedTitle": "Bulletin de paie demandé",
+      "requestedBody": "{{name}} a demandé son bulletin de paie de {{cycle}}.",
+      "sentTitle": "Votre bulletin de paie a été envoyé",
+      "sentBody": "Votre bulletin de paie de {{cycle}} a été envoyé à votre e-mail.",
+      "failedTitle": "Échec de l'envoi du bulletin de paie",
+      "failedBody": "Le bulletin de paie de {{cycle}} n'a pas pu être envoyé. Vous pouvez réessayer.",
+      "publishedTitle": "Votre bulletin de paie est disponible",
+      "publishedBody": "Un nouveau bulletin de paie a été publié. Vous pouvez le consulter ou le demander par e-mail."
+    },
+    "announcement": {
+      "publishedTitle": "Nouvelle annonce",
+      "statementTitle": "Nouveau communiqué officiel",
+      "publishedBody": "{{title}}",
+      "ackBody": "{{title}} - merci de confirmer la lecture."
     }
   },
   "items": {
@@ -248,7 +270,12 @@
     "workers": "Intervenants externes",
     "calendar": "Calendrier et jours fériés",
     "auditLog": "Journal des actions",
-    "dailySummary": "Résumé du jour"
+    "dailySummary": "Résumé du jour",
+    "grantPermissions": "Attribuer les autorisations",
+    "payroll": "Paie",
+    "payslips": "Mes bulletins",
+    "externalPay": "Paie des externes",
+    "announcements": "Annonces"
   },
   "sosOverlay": {
     "title": "Alerte SOS/Urgence",
@@ -257,11 +284,11 @@
     "dismissAction": "Ignorer"
   },
   "sections": {
-    "attendance": "Présence",
-    "people": "Personnel & sites",
+    "attendance": "Opérations terrain",
+    "people": "Ressources humaines",
     "payroll": "Paie",
-    "reports": "Rapports",
-    "settings": "Paramètres",
+    "reports": "Rapports et analyses",
+    "settings": "Administration et gouvernance",
     "help": "Aide"
   },
   "weather": {
@@ -354,7 +381,12 @@
     "workers": "Intervenants externes et leur numéro de borne",
     "calendar": "Jours fériés, jours de repos et jours exceptionnels - les heures et heures supplémentaires en dépendent.",
     "auditLog": "Tout ce qui se fait dans votre organisation : qui a fait quoi, pour qui, quand et pourquoi.",
-    "dailySummary": "Une journée de votre organisation : qui a travaillé, en retard, absent ou en congé"
+    "dailySummary": "Une journée de votre organisation : qui a travaillé, en retard, absent ou en congé",
+    "grantPermissions": "Qui a quelles autorisations - et toute l'autorité du propriétaire",
+    "payroll": "Cycles de paie, dossiers, les trois rapports et les bulletins - avec des droits séparés et des versions conservées.",
+    "payslips": "Vos bulletins publiés - consultez-les ou demandez-les par e-mail.",
+    "externalPay": "Taux à la journée, à la semaine, au mois ou à l'année, paies, règles et ajustements individuels - approuvés et figés, séparés de la paie des employés.",
+    "announcements": "Annonces et communiqués officiels qui vous sont adressés ; confirmez ceux qui le demandent."
   },
   "backgroundDisclosure": {
     "title": "Position pendant votre poste",

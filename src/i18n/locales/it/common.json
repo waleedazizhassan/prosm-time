@@ -290,7 +290,11 @@
     "locationRequired": "Non è possibile registrare senza una posizione valida. Attiva la posizione e riprova.",
     "rejectReasonRequired": "Indica il motivo, così il dipendente lo vede.",
     "organizationReadOnly": "La tua organizzazione è in sola lettura fino al rinnovo della licenza.",
-    "featureNotInPlan": "Questa funzione non è inclusa nel piano della tua organizzazione."
+    "featureNotInPlan": "Questa funzione non è inclusa nel piano della tua organizzazione.",
+    "ownerAuthorityOwnerOnly": "Solo il titolare concede o ritira l'autorità del titolare.",
+    "ownerAuthorityAlready": "Questa persona ha già l'autorità del titolare.",
+    "ownerAuthorityNone": "Questa persona non ha l'autorità del titolare.",
+    "ownerAuthorityInactive": "Questa persona non è attiva."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",
@@ -367,5 +371,6 @@
     "text": "Questa funzione fa parte del piano {{plan}}.",
     "seePlan": "Vedi il piano",
     "askOwner": "Chiedi al titolare."
-  }
+  },
+  "issuedVia": "Emesso tramite"
 }

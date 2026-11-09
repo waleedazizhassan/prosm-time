@@ -27,6 +27,34 @@ const TABLES: Record<string, string> = {
   known_login_devices: byOrg,
   shift_swap_requests: byOrg,
   payroll_export_templates: byOrg,
+  payroll_settings: "select organization_id as id from %t where organization_id = $1",
+  payroll_components: byOrg,
+  payroll_profiles: byOrg,
+  payroll_profile_components: byOrg,
+  payroll_cycles: byOrg,
+  payroll_cycle_employees: byOrg,
+  payroll_cycle_lines: byOrg,
+  payroll_installment_plans: byOrg,
+  payroll_installment_payments: byOrg,
+  payroll_cycle_snapshots: byOrg,
+  payroll_exports: byOrg,
+  payslip_requests: byOrg,
+  api_request_log: byOrg,
+  payroll_export_jobs: byOrg,
+  api_attendance_imports: byOrg,
+  webhook_endpoints: byOrg,
+  webhook_outbox: byOrg,
+  webhook_deliveries: byOrg,
+  departments: byOrg,
+  announcements: byOrg,
+  announcement_attachments: byOrg,
+  announcement_recipients: "select organization_id as id from %t where organization_id = $1",
+  external_labor_settings: "select organization_id as id from %t where organization_id = $1",
+  external_labor_policy_items: byOrg,
+  external_labor_runs: byOrg,
+  external_labor_run_workers: byOrg,
+  external_labor_adjustments: byOrg,
+  external_labor_run_snapshots: "select run_id as id from %t where organization_id = $1",
   allowance_entry_adjustments: byOrg,
   attendance_day_adjustments: byOrg,
   attendance_permissions: byOrg,
@@ -93,6 +121,7 @@ const TABLES: Record<string, string> = {
   user_permission_overrides: byUser,
   users: byOrg,
   worker_pay_rates: byOrg,
+  owner_delegations: byOrg,
 };
 const GLOBAL_TABLES = ["permissions", "roles", "role_default_permissions", "security_rate_limits", "platform_settings", "plans", "activation_codes", "platform_plan_map"];
 
@@ -108,6 +137,8 @@ const MUST_BE_SEEDED = [
   "attendance_permissions", "attendance_day_adjustments", "payroll_adjustments", "leave_types", "capture_tokens", "integrity_flags", "dashboard_preferences", "clock_reminder_log",
   // v2.3.55
   "signed_in_devices",
+  // 2026-11-04 delegation
+  "owner_delegations",
 ];
 
 const today = () => new Date().toISOString().slice(0, 10);
@@ -148,6 +179,10 @@ async function seedOrg(name: string): Promise<SeededOrg> {
       [manager.userId, key],
     );
   }
+
+  // A person holding delegated authority (2026-11-04): sees their own organisation, never the other.
+  const delegate = await addMember(t, org, "supervisor", `${name} Delegate`);
+  await t.su("insert into owner_delegations (organization_id, user_id, granted_by, reason) values ($1, $2, $3, 'test')", [org.id, delegate.userId, org.owner.userId]);
 
   // Attendance: a shift with a break, then still clocked in; a far clock-in (geofence exception).
   await must(clockIn(t, employee, siteId), "clock in");
@@ -299,7 +334,7 @@ describe("cross-tenant isolation", () => {
         for (const [table, template] of Object.entries(TABLES)) {
           const ids = (await t.su<{ id: string }>(template.replace("%t", table), [other.org.id])).map((row) => String(row.id));
           if (ids.length === 0) continue;
-          const keyColumn = template.startsWith("select state") ? "state" : "id";
+          const keyColumn = template.startsWith("select state") ? "state" : template.startsWith("select organization_id as id") ? "organization_id" : template.startsWith("select run_id as id") ? "run_id" : "id";
           const seen = await t.as<{ n: number }>(member.authId, `select count(*)::int as n from ${table} where ${keyColumn}::text = any($1)`, [ids]);
           if (seen.error) continue; // no grant at all is isolation too
           if (seen.rows![0].n > 0) leaks.push(`${table}=${seen.rows![0].n}`);

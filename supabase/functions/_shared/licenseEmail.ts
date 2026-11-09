@@ -5,46 +5,11 @@
 import { PDFDocument, rgb } from "npm:pdf-lib@1.17.1";
 import fontkit from "npm:@pdf-lib/fontkit@1.1.1";
 
-import { buildLicencePdf, scriptsNeeded, type LicencePdfData } from "./licensePdfCore.ts";
+import { buildLicencePdf, type LicencePdfData } from "./licensePdfCore.ts";
 import { emailLanguage, emailLocale, emailT, isRtl } from "./emailI18n.ts";
-import { subsetFont } from "./fontSubset.ts";
+import { base64, fontsFor, prosmLogo } from "./pdfFonts.ts";
 
-const NOTO = "https://cdn.jsdelivr.net/gh/notofonts/notofonts.github.io/fonts";
-const FONTS = {
-  latin: [`${NOTO}/NotoSans/hinted/ttf/NotoSans-Regular.ttf`, `${NOTO}/NotoSans/hinted/ttf/NotoSans-Bold.ttf`],
-  arabic: [`${NOTO}/NotoNaskhArabic/hinted/ttf/NotoNaskhArabic-Regular.ttf`, `${NOTO}/NotoNaskhArabic/hinted/ttf/NotoNaskhArabic-Bold.ttf`],
-  // Noto Sans SC, whole TrueType files (Google Fonts serves them to plain clients).
-  cjk: [
-    "https://fonts.gstatic.com/s/notosanssc/v41/k3kCo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_FnYw.ttf",
-    "https://fonts.gstatic.com/s/notosanssc/v41/k3kCo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaGzjCnYw.ttf",
-  ],
-} as const;
-const LOGO = "https://time.prosm.net/prosm-logo.png";
-
-type Pair = { regular: Uint8Array; bold: Uint8Array };
-const fontCache: Partial<Record<keyof typeof FONTS, Pair>> = {};
-let logoCache: Uint8Array | null | undefined;
-
-async function bytes(url: string): Promise<Uint8Array> {
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`fetch ${url}: ${response.status}`);
-  return new Uint8Array(await response.arrayBuffer());
-}
-
-async function font(kind: keyof typeof FONTS): Promise<Pair> {
-  if (!fontCache[kind]) {
-    const [regular, bold] = await Promise.all(FONTS[kind].map(bytes));
-    fontCache[kind] = { regular, bold };
-  }
-  return fontCache[kind]!;
-}
-
-function base64(data: Uint8Array): string {
-  let binary = "";
-  for (let i = 0; i < data.length; i += 0x8000) binary += String.fromCharCode(...data.subarray(i, i + 0x8000));
-  return btoa(binary);
-}
-
+// 2026-11-08: fonts, logo and base64 moved to pdfFonts.ts (shared with the payslip PDF).
 const escape = (text: string) => text.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c] as string);
 const PLAN_NAMES: Record<string, string> = { starter: "Starter", business: "Business", pro: "Pro" };
 
@@ -124,20 +89,9 @@ export async function renderLicenceEmail(row: LicenceEmailRow) {
   const { T } = words(language);
   const data = licencePdfData(row, language);
   const pageTexts = [data.organizationName, ...Object.values(data.texts), data.planValue, data.statusValue, data.usersValue, data.devicesValue, data.validUntilValue, ...data.changes.flatMap((c) => [c.label, c.from, c.to])];
-  const needed = scriptsNeeded(pageTexts);
-  let cjk = null;
-  if (needed.cjk) {
-    const full = await font("cjk");
-    const chars = pageTexts.join("");
-    cjk = { regular: await subsetFont(full.regular, chars), bold: await subsetFont(full.bold, chars), presubset: true };
-  }
-  const fonts = {
-    latin: await font("latin"),
-    arabic: needed.arabic ? await font("arabic") : null,
-    cjk,
-  };
-  if (logoCache === undefined) logoCache = await bytes(LOGO).catch(() => null);
-  const pdf = await buildLicencePdf({ PDFDocument, rgb, fontkit } as any, fonts, logoCache, data);
+  const fonts = await fontsFor(pageTexts);
+  const logo = await prosmLogo();
+  const pdf = await buildLicencePdf({ PDFDocument, rgb, fontkit } as any, fonts, logo, data);
 
   const rtl = isRtl(language);
   const arrow = rtl ? "←" : "→";

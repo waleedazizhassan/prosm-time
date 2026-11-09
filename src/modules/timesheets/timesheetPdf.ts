@@ -2,7 +2,7 @@ import type { jsPDF } from "jspdf";
 import type { EvidencePack } from "../../core/repositories/TimesheetRepository";
 import { formatDateTime, formatTimeOnly, formatDateOnly } from "../../core/utils/formatDate";
 import { renderHtmlToPdf, escapeHtml, sectionHeadingStyle } from "../../core/utils/htmlToPdf";
-import prosmLogo from "../../assets/prosm-logo-pdf.png";
+import { customerLogoHtml, issuedViaHtml, prosmLogoHtml } from "../../core/utils/reportBrand";
 
 export function formatMinutes(minutes: number): string {
   const totalMinutes = Math.round(minutes);
@@ -149,12 +149,12 @@ export function buildTimesheetPdf(pack: EvidencePack, languageCode: string, t: T
 
   container.innerHTML = `
     <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:3px solid #16a34a;padding-bottom:16px;margin-bottom:20px;">
-      <img src="${prosmLogo}" style="height:44px;width:44px;object-fit:contain;" />
+      ${customerLogoHtml(organizationLogoUrl)}
       <div style="text-align:center;flex:1;">
         <div style="font-size:19px;font-weight:700;">${escapeHtml(t("report.title"))}</div>
         <div style="font-size:12px;color:#64748b;margin-top:2px;">${escapeHtml(pack.employee.fullName)} — ${escapeHtml(pack.timesheet.periodStart)} — ${escapeHtml(pack.timesheet.periodEnd)}</div>
       </div>
-      ${organizationLogoUrl ? `<img src="${escapeHtml(organizationLogoUrl)}" style="height:44px;max-width:80px;object-fit:contain;" />` : `<div style="width:44px;"></div>`}
+      ${prosmLogoHtml()}
     </div>
 
     <table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px;">
@@ -204,5 +204,6 @@ export function buildTimesheetPdf(pack: EvidencePack, languageCode: string, t: T
   // not using .html() at all - renderHtmlToPdf() (core/utils/
   // htmlToPdf.ts) captures `container` with html2canvas instead and
   // embeds the result as a plain image.
+  container.insertAdjacentHTML("beforeend", issuedViaHtml());
   return renderHtmlToPdf(container);
 }

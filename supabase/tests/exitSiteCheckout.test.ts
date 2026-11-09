@@ -1,7 +1,8 @@
 // v2.3.43 step 12 (item 24): leaving the site with the shift open - a quick
 // in/out changes nothing, a weak reading is ignored, PROMPT asks once,
-// "still working" stops AUTO, AUTO clocks out at the real exit time after
-// the timeout (audited), field workers are never touched.
+// "still working" stops AUTO, field workers are never touched. 2026-11-09:
+// AUTO reminds after the timeout and clocks out (at the time of leaving)
+// only when the person agrees.
 // Migration 20261025210000.
 import { beforeAll, describe, expect, it } from "vitest";
 
@@ -65,7 +66,8 @@ describe("leaving the site (item 24)", () => {
     expect(await prompts()).toBe(0);
   });
 
-  it("AUTO: after the timeout with no answer, clocked out at the time they left, audited", async () => {
+  // 2026-11-09 (owner): AUTO never clocks out by itself - a reminder, then the person's consent
+  it("AUTO: after the timeout a reminder, never a clock-out; agreeing clocks out at the time they left, audited", async () => {
     await t.as(org.owner.authId, "select public.set_prosm_time_site_exit_policy($1, 'AUTO', 10, null)", [site]);
     await freshShift();
     const sessionId = await openSessionId(t, worker);
@@ -74,6 +76,12 @@ describe("leaving the site (item 24)", () => {
     await sample(outside, 10);
     await t.su("update presence_sessions set exit_since = now() - interval '15 minutes' where id = $1", [await presenceId()]);
     expect((await t.su<{ n: number }>("select public.process_prosm_time_site_exits() as n"))[0].n).toBe(1);
+    expect((await t.su<{ n: number }>("select public.process_prosm_time_site_exits() as n"))[0].n).toBe(0);
+    expect(await openSessionId(t, worker)).toBe(sessionId);
+    expect(await prompts()).toBe(2);
+    const prompt = await t.as<{ r: { policy: string; reminded: boolean } }>(worker.authId, "select public.get_prosm_time_exit_prompt() as r");
+    expect(prompt.rows![0].r).toMatchObject({ policy: "AUTO", reminded: true });
+    expect((await t.as(worker.authId, "select public.confirm_prosm_time_site_exit()")).error).toBeNull();
     const [row] = await t.su<{ status: string; auto_checkout_geofence: boolean; ago: number }>(
       "select status, auto_checkout_geofence, extract(epoch from (now() - clock_out_at)) / 60 as ago from attendance_sessions where id = $1",
       [sessionId],
@@ -81,8 +89,17 @@ describe("leaving the site (item 24)", () => {
     expect(row.status).toBe("clocked_out");
     expect(row.auto_checkout_geofence).toBe(true);
     expect(Number(row.ago)).toBeCloseTo(15, 0);
-    expect(await t.su("select id from audit_logs where action = 'attendance.auto_checkout_geofence' and entity_id = $1", [sessionId])).toHaveLength(1);
-    expect(await t.su("select id from notifications where type = 'auto_checkout_geofence' and user_id = $1", [worker.userId])).toHaveLength(1);
+    expect(await t.su("select id from audit_logs where action = 'attendance.exit_confirmed' and entity_id = $1 and actor_user_id = $2", [sessionId, worker.userId])).toHaveLength(1);
+    expect(await t.su("select id from audit_logs where action = 'attendance.auto_checkout_geofence'")).toHaveLength(0);
+  });
+
+  it("PROMPT sites use the normal clock-out, not the confirm-at-leave-time one", async () => {
+    await t.as(org.owner.authId, "select public.set_prosm_time_site_exit_policy($1, 'PROMPT', null, null)", [site]);
+    await freshShift();
+    await sample(outside, 10);
+    await sample(outside, 10);
+    expect((await t.as(worker.authId, "select public.confirm_prosm_time_site_exit()")).error).toMatch(/NORMAL CLOCK-OUT/);
+    await t.as(org.owner.authId, "select public.set_prosm_time_site_exit_policy($1, 'AUTO', 10, null)", [site]);
   });
 
   it("'still working' stops the automatic clock-out", async () => {
@@ -107,6 +124,6 @@ describe("leaving the site (item 24)", () => {
     const manager = await addMember(t, org, "manager", "Marina Manager");
     await t.su("insert into site_assignments (site_id, user_id, role_at_site) values ($1, $2, 'manager')", [site, manager.userId]);
     expect((await t.as(manager.authId, "select public.set_prosm_time_site_exit_policy($1, 'OFF', null, null)", [site])).error).toMatch(/EXIT_POLICY/);
-    expect((await t.su("select id from audit_logs where action = 'sites.exit_policy'")).length).toBe(2);
+    expect((await t.su("select id from audit_logs where action = 'sites.exit_policy'")).length).toBe(4);
   });
 });

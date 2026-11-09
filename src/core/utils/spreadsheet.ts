@@ -98,7 +98,16 @@ function zip(files: { name: string; text: string }[]): Uint8Array {
   return output;
 }
 
-export function toXlsx(rows: Cell[][], rightToLeft = false): Uint8Array {
+export interface XlsxOptions {
+  /** Keep the first row visible while scrolling (2026-11-08, payroll reports). */
+  freezeHeader?: boolean;
+  /** Filter buttons on the first row. */
+  autoFilter?: boolean;
+  /** Sheet name (31 characters at most). */
+  sheetName?: string;
+}
+
+export function toXlsx(rows: Cell[][], rightToLeft = false, options: XlsxOptions = {}): Uint8Array {
   const sheetRows = rows
     .map((row, y) => {
       const cells = row
@@ -123,7 +132,7 @@ export function toXlsx(rows: Cell[][], rightToLeft = false): Uint8Array {
     },
     {
       name: "xl/workbook.xml",
-      text: `${head}<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Payroll" sheetId="1" r:id="rId1"/></sheets></workbook>`,
+      text: `${head}<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="${xml((options.sheetName ?? "Payroll").slice(0, 31))}" sheetId="1" r:id="rId1"/></sheets></workbook>`,
     },
     {
       name: "xl/_rels/workbook.xml.rels",
@@ -131,7 +140,7 @@ export function toXlsx(rows: Cell[][], rightToLeft = false): Uint8Array {
     },
     {
       name: "xl/worksheets/sheet1.xml",
-      text: `${head}<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0"${rightToLeft ? ' rightToLeft="1"' : ""}/></sheetViews><sheetData>${sheetRows}</sheetData></worksheet>`,
+      text: `${head}<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0"${rightToLeft ? ' rightToLeft="1"' : ""}>${options.freezeHeader && rows.length > 1 ? '<pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/>' : ""}</sheetView></sheetViews><sheetData>${sheetRows}</sheetData>${options.autoFilter && rows.length > 0 && rows[0].length > 0 ? `<autoFilter ref="A1:${columnName(rows[0].length - 1)}${rows.length}"/>` : ""}</worksheet>`,
     },
   ]);
 }

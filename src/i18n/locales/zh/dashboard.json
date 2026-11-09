@@ -207,9 +207,8 @@
       "openSettings": "打开设置"
     },
     "suggestSite": "您在 {{site}}。现在上班打卡吗？",
-    "suggestSiteAction": "是，上班打卡",
-    "suggestSiteDismiss": "暂不",
-    "confirmOutside": "您在 {{site}} 区域外 {{meters}} 米。此次打卡将记为异常，由您的主管审核。"
+    "confirmOutside": "您在 {{site}} 区域外 {{meters}} 米。此次打卡将记为异常，由您的主管审核。",
+    "clockInAt": "在{{site}}签到"
   },
   "kioskPin": {
     "title": "考勤机 PIN",
@@ -292,7 +291,9 @@
     "body": "您的班次仍未结束。现在下班打卡吗？",
     "clockOut": "立即下班打卡",
     "stillWorking": "还在工作",
-    "error": "无法保存您的回答。"
+    "error": "无法保存您的回答。",
+    "bodyAtLeave": "您的班次仍未结束。按您离开的时间 {{time}} 签退？",
+    "clockOutAtLeave": "按 {{time}} 签退"
   },
   "manager": {
     "title": "仪表板",
@@ -375,7 +376,19 @@
       "external": "当前外部工人",
       "externalSites": "分布在 {{count}} 个地点",
       "overdue": "未下班打卡",
-      "overdueHint": "班次结束一小时后"
+      "overdueHint": "班次结束一小时后",
+      "onLeaveCard": "今日休假",
+      "def": {
+        "absentShort": "无考勤且无已批准假期",
+        "leaveShort": "今日在已批准假期内",
+        "present": "您范围内当前已打卡的人员。",
+        "hours": "所选期间内从签到到签退的工作时长。",
+        "late": "今日在班次开始后才签到的人员。",
+        "absent": "今日应到但无考勤且无已批准假期。已批准休假的人员单独统计。",
+        "leave": "已批准假期包含今日的人员，不计为缺勤。",
+        "overdue": "班次（或站点工作日）结束一小时后仍未签退，或自前一天起仍未结束。",
+        "overtime": "所选期间内已批准的加班，待审核的不计入。"
+      }
     },
     "map": {
       "title": "当前地点",
@@ -386,7 +399,9 @@
       "keyLabel": "地图上的地点",
       "stateActive": "活跃 - 当前有人在岗",
       "stateIdle": "不活跃 - 当前无人",
-      "stateSos": "SOS"
+      "stateSos": "SOS",
+      "zoomIn": "放大",
+      "zoomOut": "缩小"
     },
     "present": {
       "title": "当前在岗（{{count}}）",
@@ -490,7 +505,9 @@
         "attendance_overtime_approved": "批准加班",
         "attendance_auto_close": "班次自动关闭",
         "allowances_edit_during_review": "审核中修改津贴",
-        "leave_approved_cancelled": "取消已批准的假期"
+        "leave_approved_cancelled": "取消已批准的假期",
+        "OWNER_AUTHORITY_GRANTED": "授予所有者权限",
+        "OWNER_AUTHORITY_REVOKED": "撤回所有者权限"
       },
       "groups": {
         "sos": "SOS",
@@ -529,7 +546,12 @@
         "status": "状态",
         "details": "详情"
       },
-      "grantAction": "改为请假"
+      "grantAction": "改为请假",
+      "absentTitle": "今日缺勤：{{absent}}",
+      "leaveTitle": "今日休假：{{leave}}",
+      "noneAbsent": "今日无人缺勤",
+      "noneLeave": "今日无人休假",
+      "openLeave": "打开请假申请"
     },
     "sheet": {
       "title": {

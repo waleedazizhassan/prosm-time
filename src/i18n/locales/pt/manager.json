@@ -188,5 +188,26 @@
       "repeated_coordinates": "O mesmo ponto quase sem erro de GPS: um sinal comum de aplicativo de localização falsa."
     },
     "title_many": "Registros suspeitos ({{count}})"
+  },
+  "imported": {
+    "title": "Assiduidade recebida pela API ({{count}})",
+    "hint": "Enviada por um sistema ligado (leitor biométrico, sistema de RH). Não conta até ser aprovada; aprovar junta cada entrada e a saída seguinte num registo.",
+    "chooseAll": "Escolher tudo",
+    "chooseNone": "Limpar seleção",
+    "approve": "Aprovar ({{count}})",
+    "reject": "Rejeitar",
+    "rejectTitle": "Rejeitar {{count}} evento(s)",
+    "reason": "Motivo (obrigatório)",
+    "approved": "{{applied}} registo(s) criado(s); {{pending}} evento(s) ainda pendentes.",
+    "error": "Não foi possível concluir. Tente novamente.",
+    "type": {
+      "clock_in": "Entrada",
+      "clock_out": "Saída"
+    },
+    "reasons": {
+      "no_matching_clock_out": "ainda sem saída correspondente",
+      "longer_than_24_hours": "mais de 24 horas",
+      "overlaps_existing_attendance": "sobrepõe-se a assiduidade registada"
+    }
   }
 }

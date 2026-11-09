@@ -212,10 +212,9 @@
       "openSettings": "Abrir configurações"
     },
     "suggestSite": "Você está em {{site}}. Registrar a entrada agora?",
-    "suggestSiteAction": "Sim, registrar entrada",
-    "suggestSiteDismiss": "Agora não",
     "confirmOutside": "Você está {{meters}} m fora da área de {{site}}. Isso será registrado como exceção e seu gestor vai analisar.",
-    "pendingCount_many": "{{count}} registros de ponto salvos neste dispositivo"
+    "pendingCount_many": "{{count}} registros de ponto salvos neste dispositivo",
+    "clockInAt": "Registar entrada em {{site}}"
   },
   "kioskPin": {
     "title": "PIN do quiosque",
@@ -298,7 +297,9 @@
     "body": "Seu turno continua aberto. Registrar a saída agora?",
     "clockOut": "Registrar saída agora",
     "stillWorking": "Ainda trabalhando",
-    "error": "Não foi possível salvar sua resposta."
+    "error": "Não foi possível salvar sua resposta.",
+    "bodyAtLeave": "O seu turno continua aberto. Registar a saída às {{time}}, quando saiu?",
+    "clockOutAtLeave": "Saída às {{time}}"
   },
   "manager": {
     "title": "Painel",
@@ -381,7 +382,19 @@
       "external": "Trabalhadores externos agora",
       "externalSites": "em {{count}} local(is)",
       "overdue": "Sem registro de saída",
-      "overdueHint": "Uma hora após o fim do turno"
+      "overdueHint": "Uma hora após o fim do turno",
+      "onLeaveCard": "De férias hoje",
+      "def": {
+        "absentShort": "sem presença nem férias aprovadas",
+        "leaveShort": "férias aprovadas que incluem hoje",
+        "present": "Pessoas com entrada registada agora, no seu âmbito.",
+        "hours": "Horas trabalhadas no período escolhido, da entrada à saída.",
+        "late": "Pessoas que entraram hoje depois do início do turno.",
+        "absent": "Esperados hoje, sem presença nem férias aprovadas. Quem está de férias aprovadas é contado à parte.",
+        "leave": "Pessoas cujas férias aprovadas incluem hoje. Não contam como ausentes.",
+        "overdue": "Ainda com entrada uma hora após o fim do turno (ou do dia do local), ou aberta desde um dia anterior.",
+        "overtime": "Horas extra aprovadas no período. As pendentes não contam."
+      }
     },
     "map": {
       "title": "Locais agora",
@@ -392,7 +405,9 @@
       "keyLabel": "Locais no mapa",
       "stateActive": "Ativo - há pessoas aqui agora",
       "stateIdle": "Inativo - ninguém aqui agora",
-      "stateSos": "SOS"
+      "stateSos": "SOS",
+      "zoomIn": "Aproximar",
+      "zoomOut": "Afastar"
     },
     "present": {
       "title": "Presentes agora ({{count}})",
@@ -496,7 +511,9 @@
         "attendance_overtime_approved": "Hora extra aprovada",
         "attendance_auto_close": "Sessão encerrada automaticamente",
         "allowances_edit_during_review": "Adicional editado na análise",
-        "leave_approved_cancelled": "Afastamento aprovado cancelado"
+        "leave_approved_cancelled": "Afastamento aprovado cancelado",
+        "OWNER_AUTHORITY_GRANTED": "Autoridade do proprietário concedida",
+        "OWNER_AUTHORITY_REVOKED": "Autoridade do proprietário retirada"
       },
       "groups": {
         "sos": "SOS",
@@ -535,7 +552,12 @@
         "status": "Status",
         "details": "Detalhes"
       },
-      "grantAction": "Converter em afastamento"
+      "grantAction": "Converter em afastamento",
+      "absentTitle": "Ausentes hoje: {{absent}}",
+      "leaveTitle": "De férias hoje: {{leave}}",
+      "noneAbsent": "Ninguém está ausente hoje",
+      "noneLeave": "Ninguém está de férias hoje",
+      "openLeave": "Abrir pedidos de férias"
     },
     "sheet": {
       "title": {

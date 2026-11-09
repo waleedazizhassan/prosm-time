@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useAuth } from "../../core/context/AuthContext";
 import usePlanFeatures from "../../core/hooks/usePlanFeatures";
 import EmployeeRepository, { type InviteInput, type InviteResultData } from "../../core/repositories/EmployeeRepository";
+import AnnouncementRepository, { type Department } from "../../core/repositories/AnnouncementRepository";
 import { roleRank } from "../../core/utils/roleRank";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
@@ -27,7 +28,7 @@ interface InviteEmployeeModalProps {
 // precedent already used for the activation code/API keys elsewhere in
 // this codebase) - real email delivery is WP-13's job, not faked here.
 export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: InviteEmployeeModalProps) {
-  const { t } = useTranslation("people");
+  const { t } = useTranslation(["people", "announcements"]);
   const { profile } = useAuth();
   const { allows } = usePlanFeatures(profile?.id);
   // Security review 2026-10-20: only roles below the inviter's own (the Owner: any) - the server refuses the rest.
@@ -40,6 +41,12 @@ export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: Invi
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [roleKey, setRoleKey] = useState<InviteInput["roleKey"]>("employee");
+  // 2026-11-09 Media Center: the department is chosen when the person is added
+  const [departmentId, setDepartmentId] = useState("");
+  const [departments, setDepartments] = useState<Department[]>([]);
+  useEffect(() => {
+    void AnnouncementRepository.departments().then((r) => setDepartments((r.data ?? []).filter((d) => d.isActive)));
+  }, []);
 
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -65,7 +72,7 @@ export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: Invi
     setSubmitting(true);
     setError("");
 
-    const inviteResult = await EmployeeRepository.inviteUser({ email: email.trim(), fullName: fullName.trim(), roleKey });
+    const inviteResult = await EmployeeRepository.inviteUser({ email: email.trim(), fullName: fullName.trim(), roleKey, departmentId: departmentId || null });
 
     setSubmitting(false);
 
@@ -124,6 +131,10 @@ export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: Invi
         disabled={submitting}
         options={roleOptions.map((key) => ({ value: key, label: t(`invite.role.${key}`) }))}
       />
+      {departments.length > 0 ? (
+        <Select label={t("announcements:departments.choose")} name="inviteDepartment" value={departmentId} onChange={(event) => setDepartmentId(event.target.value)} disabled={submitting}
+          options={[{ value: "", label: t("announcements:departments.noDepartment") }, ...departments.map((d) => ({ value: d.id, label: d.name }))]} />
+      ) : null}
       <ErrorText>{error}</ErrorText>
     </Modal>
   );

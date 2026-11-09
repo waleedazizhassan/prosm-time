@@ -26,11 +26,14 @@ import KioskLockGuard from "../modules/kiosk/KioskLockGuard";
 // everything a worker needs offline stays in the main file.
 const PeoplePage = lazy(() => import("../modules/people/PeoplePage"));
 const PersonDetailPage = lazy(() => import("../modules/people/PersonDetailPage"));
+const GrantPermissionsPage = lazy(() => import("../modules/people/GrantPermissionsPage"));
 const AdminOnBehalfPage = lazy(() => import("../modules/people/AdminOnBehalfPage"));
 const AuditLogPage = lazy(() => import("../modules/audit/AuditLogPage"));
 const SitesPage = lazy(() => import("../modules/sites/SitesPage"));
 const SiteDetailPage = lazy(() => import("../modules/sites/SiteDetailPage"));
 const ExternalWorkersPage = lazy(() => import("../modules/workforce/ExternalWorkersPage"));
+const ExternalPayPage = lazy(() => import("../modules/workforce/ExternalPayPage"));
+const ExternalPayRunPage = lazy(() => import("../modules/workforce/ExternalPayRunPage"));
 const ManagerConsolePage = lazy(() => import("../modules/manager/ManagerConsolePage"));
 const AttendanceLogPage = lazy(() => import("../modules/attendance/AttendanceLogPage"));
 const TimesheetsPage = lazy(() => import("../modules/timesheets/TimesheetsPage"));
@@ -47,6 +50,13 @@ const IntegrationsPage = lazy(() => import("../modules/settings/IntegrationsPage
 const HelpPage = lazy(() => import("../modules/help/HelpPage"));
 const DailySummaryPage = lazy(() => import("../modules/reports/DailySummaryPage"));
 const LegalPage = lazy(() => import("../modules/legal/LegalPage"));
+const PayrollHomePage = lazy(() => import("../modules/payroll/PayrollHomePage"));
+const PayrollCyclePage = lazy(() => import("../modules/payroll/PayrollCyclePage"));
+const PayrollProfilesPage = lazy(() => import("../modules/payroll/PayrollProfilesPage"));
+const PayrollSettingsPage = lazy(() => import("../modules/payroll/PayrollSettingsPage"));
+const PayslipRequestsPage = lazy(() => import("../modules/payroll/PayslipRequestsPage"));
+const MyPayslipsPage = lazy(() => import("../modules/payroll/MyPayslipsPage"));
+const AnnouncementsPage = lazy(() => import("../modules/announcements/AnnouncementsPage"));
 
 // PROSM Time route map. /activate, /login, /accept-invitation are
 // public (no session exists yet by definition at any of them) and
@@ -125,11 +135,14 @@ export default function AppRoutes() {
             <Route path="/clock-in" element={<ClockInPage />} />
             <Route path="/people" element={<PeoplePage />} />
             <Route path="/people/:userId" element={<PersonDetailPage />} />
+            <Route path="/permissions" element={<GrantPermissionsPage />} />
             <Route path="/admin-clock" element={<PlanRoute feature="on_behalf"><AdminOnBehalfPage /></PlanRoute>} />
             <Route path="/audit-log" element={<PlanRoute feature="audit"><AuditLogPage /></PlanRoute>} />
             <Route path="/sites" element={<SitesPage />} />
             <Route path="/sites/:siteId" element={<SiteDetailPage />} />
             <Route path="/workers" element={<PlanRoute feature="kiosk"><ExternalWorkersPage /></PlanRoute>} />
+            <Route path="/workers/pay" element={<PlanRoute feature="kiosk"><ExternalPayPage /></PlanRoute>} />
+            <Route path="/workers/pay/:runId" element={<PlanRoute feature="kiosk"><ExternalPayRunPage /></PlanRoute>} />
             <Route path="/manager" element={<ManagerConsolePage />} />
             <Route path="/attendance" element={<AttendanceLogPage />} />
             <Route path="/timesheets" element={<TimesheetsPage />} />
@@ -137,6 +150,14 @@ export default function AppRoutes() {
             <Route path="/allowances" element={<PlanRoute feature="allowances"><AllowancesPage /></PlanRoute>} />
             <Route path="/allowances/prices" element={<PlanRoute feature="allowances"><AllowancePricesPage /></PlanRoute>} />
             <Route path="/leave" element={<PlanRoute feature="leave"><LeaveRequestsPage /></PlanRoute>} />
+            <Route path="/payroll" element={<PlanRoute feature="payroll"><PayrollHomePage /></PlanRoute>} />
+            <Route path="/payroll/cycles/:cycleId" element={<PlanRoute feature="payroll"><PayrollCyclePage /></PlanRoute>} />
+            <Route path="/payroll/profiles" element={<PlanRoute feature="payroll"><PayrollProfilesPage /></PlanRoute>} />
+            <Route path="/payroll/settings" element={<PlanRoute feature="payroll"><PayrollSettingsPage /></PlanRoute>} />
+            <Route path="/payroll/requests" element={<PlanRoute feature="payroll"><PayslipRequestsPage /></PlanRoute>} />
+            <Route path="/payslips" element={<PlanRoute feature="payroll"><MyPayslipsPage /></PlanRoute>} />
+            {/* 2026-11-09 Media Center: announcements for everyone; publishing is checked on the server */}
+            <Route path="/announcements" element={<AnnouncementsPage />} />
             <Route path="/schedule" element={<SchedulePage />} />
             <Route path="/calendar" element={<CalendarPage />} />
             <Route path="/emergency-log" element={<PlanRoute feature="sos"><EmergencyLogPage /></PlanRoute>} />

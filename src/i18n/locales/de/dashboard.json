@@ -210,9 +210,8 @@
       "openSettings": "Einstellungen öffnen"
     },
     "suggestSite": "Sie sind bei {{site}}. Jetzt einstempeln?",
-    "suggestSiteAction": "Ja, einstempeln",
-    "suggestSiteDismiss": "Nicht jetzt",
-    "confirmOutside": "Sie sind {{meters}} m außerhalb des Bereichs von {{site}}. Das wird als Ausnahme erfasst und von Ihrem Vorgesetzten geprüft."
+    "confirmOutside": "Sie sind {{meters}} m außerhalb des Bereichs von {{site}}. Das wird als Ausnahme erfasst und von Ihrem Vorgesetzten geprüft.",
+    "clockInAt": "Einstempeln bei {{site}}"
   },
   "kioskPin": {
     "title": "Kiosk-PIN",
@@ -295,7 +294,9 @@
     "body": "Ihre Schicht ist noch offen. Jetzt ausstempeln?",
     "clockOut": "Jetzt ausstempeln",
     "stillWorking": "Noch bei der Arbeit",
-    "error": "Antwort konnte nicht gespeichert werden."
+    "error": "Antwort konnte nicht gespeichert werden.",
+    "bodyAtLeave": "Ihre Schicht ist noch offen. Ausstempeln um {{time}}, als Sie gegangen sind?",
+    "clockOutAtLeave": "Ausstempeln um {{time}}"
   },
   "manager": {
     "title": "Dashboard",
@@ -378,7 +379,19 @@
       "external": "Externe Kräfte jetzt",
       "externalSites": "an {{count}} Standort(en)",
       "overdue": "Nicht ausgestempelt",
-      "overdueHint": "Eine Stunde nach Schichtende"
+      "overdueHint": "Eine Stunde nach Schichtende",
+      "onLeaveCard": "Heute im Urlaub",
+      "def": {
+        "absentShort": "keine Anwesenheit, kein genehmigter Urlaub",
+        "leaveShort": "genehmigter Urlaub für heute",
+        "present": "Personen, die gerade eingestempelt sind, in Ihrem Bereich.",
+        "hours": "Gearbeitete Stunden im gewählten Zeitraum, vom Ein- bis zum Ausstempeln.",
+        "late": "Personen, die heute nach Schichtbeginn eingestempelt haben.",
+        "absent": "Heute erwartet, ohne Anwesenheit und ohne genehmigten Urlaub. Personen im genehmigten Urlaub werden getrennt gezählt.",
+        "leave": "Personen, deren genehmigter Urlaub heute gilt. Sie zählen nicht als abwesend.",
+        "overdue": "Noch eingestempelt eine Stunde nach Schicht- bzw. Standorttagende, oder seit einem früheren Tag offen.",
+        "overtime": "Genehmigte Überstunden im gewählten Zeitraum. Ungeprüfte werden nicht gezählt."
+      }
     },
     "map": {
       "title": "Standorte jetzt",
@@ -389,7 +402,9 @@
       "keyLabel": "Standorte auf der Karte",
       "stateActive": "Aktiv - jetzt Personen vor Ort",
       "stateIdle": "Inaktiv - niemand vor Ort",
-      "stateSos": "SOS"
+      "stateSos": "SOS",
+      "zoomIn": "Vergrößern",
+      "zoomOut": "Verkleinern"
     },
     "present": {
       "title": "Jetzt anwesend ({{count}})",
@@ -493,7 +508,9 @@
         "attendance_overtime_approved": "Überstunden genehmigt",
         "attendance_auto_close": "Sitzung automatisch beendet",
         "allowances_edit_during_review": "Zulage in Prüfung geändert",
-        "leave_approved_cancelled": "Genehmigter Urlaub storniert"
+        "leave_approved_cancelled": "Genehmigter Urlaub storniert",
+        "OWNER_AUTHORITY_GRANTED": "Befugnis des Inhabers erteilt",
+        "OWNER_AUTHORITY_REVOKED": "Befugnis des Inhabers entzogen"
       },
       "groups": {
         "sos": "SOS",
@@ -532,7 +549,12 @@
         "status": "Status",
         "details": "Details"
       },
-      "grantAction": "Als Urlaub eintragen"
+      "grantAction": "Als Urlaub eintragen",
+      "absentTitle": "Heute abwesend: {{absent}}",
+      "leaveTitle": "Heute im Urlaub: {{leave}}",
+      "noneAbsent": "Heute fehlt niemand",
+      "noneLeave": "Heute ist niemand im Urlaub",
+      "openLeave": "Urlaubsanträge öffnen"
     },
     "sheet": {
       "title": {

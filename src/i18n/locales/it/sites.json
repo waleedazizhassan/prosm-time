@@ -177,9 +177,9 @@
     "option": {
       "OFF": "Niente",
       "PROMPT": "Chiedere «registrare l'uscita?»",
-      "AUTO": "Chiedere, poi uscita automatica"
+      "AUTO": "Chiedere, ricordare e timbrare l'uscita all'ora in cui è uscito, dopo il consenso"
     },
-    "minutesLabel": "Uscita automatica dopo (minuti fuori)",
+    "minutesLabel": "Ricordare dopo (minuti fuori)",
     "fieldSiteLabel": "Sede sul campo (non chiedere mai)",
     "save": "Salva",
     "saved": "Salvato.",

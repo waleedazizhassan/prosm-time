@@ -269,5 +269,10 @@
       "hours": "Stunden",
       "late": "Verspätung"
     }
+  },
+  "externalPayCard": {
+    "title": "Lohn externer Arbeitskräfte",
+    "hint": "Satz, Menge, Brutto, Abzüge und Zuschläge, Netto und Genehmigungsstatus je Arbeitskraft - pro Lohnlauf, mit Summen je Währung. Export für eine Person, einen Standort oder alle, als PDF oder Excel.",
+    "open": "Lohn externer Arbeitskräfte öffnen"
   }
 }

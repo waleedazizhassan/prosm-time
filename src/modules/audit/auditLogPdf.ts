@@ -3,7 +3,7 @@ import type { jsPDF } from "jspdf";
 import type { DashboardAuditRow } from "../../core/repositories/DashboardRepository";
 import { escapeHtml, renderHtmlToPdf } from "../../core/utils/htmlToPdf";
 import { auditLabel } from "../dashboard/manager/dashboardLogic";
-import prosmLogo from "../../assets/prosm-logo-pdf.png";
+import { customerLogoHtml, issuedViaHtml, prosmLogoHtml } from "../../core/utils/reportBrand";
 
 type TFunc = (key: string, options?: Record<string, unknown>) => string;
 
@@ -32,17 +32,18 @@ export function buildAuditLogPdf(
   container.style.cssText = "width:780px;padding:36px;background:#ffffff;color:#0f172a;font-family:'Segoe UI',Tahoma,Arial,sans-serif;";
   container.innerHTML = `
     <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:3px solid #16a34a;padding-bottom:16px;margin-bottom:16px;">
-      <img src="${prosmLogo}" style="height:44px;width:44px;object-fit:contain;" />
+      ${customerLogoHtml(organizationLogoUrl)}
       <div style="text-align:center;flex:1;">
         <div style="font-size:19px;font-weight:700;">${escapeHtml(t("auditPage.title"))}</div>
         <div style="font-size:12px;color:#64748b;margin-top:2px;">${escapeHtml(from)} — ${escapeHtml(to)}</div>
       </div>
-      ${organizationLogoUrl ? `<img src="${escapeHtml(organizationLogoUrl)}" style="height:44px;max-width:80px;object-fit:contain;" />` : `<div style="width:44px;"></div>`}
+      ${prosmLogoHtml()}
     </div>
     <table style="width:100%;border-collapse:collapse;">
       <thead><tr style="background:#f1f5f9;">${[t("manager.audit.columns.time"), t("manager.audit.columns.actor"), t("manager.audit.columns.action"), t("manager.audit.columns.subject"), t("manager.audit.columns.site"), t("manager.audit.columns.reason")].map(th).join("")}</tr></thead>
       <tbody>${body || `<tr><td colspan="6" style="padding:14px;text-align:center;color:#64748b;">${escapeHtml(t("manager.audit.empty"))}</td></tr>`}</tbody>
     </table>
   `;
+  container.insertAdjacentHTML("beforeend", issuedViaHtml());
   return renderHtmlToPdf(container);
 }

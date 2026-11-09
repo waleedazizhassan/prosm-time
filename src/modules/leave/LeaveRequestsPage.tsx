@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { useAuth } from "../../core/context/AuthContext";
 import leaveTypeLabel from "./leaveTypeLabel";
-import LeaveRepository, { type LeaveRequestRow, type OrgWideLeaveRow, type LeaveBalanceEntry, type LeaveType, type LeaveTypeSetting } from "../../core/repositories/LeaveRepository";
+import LeaveRepository, { type LeaveRequestRow, type OrgWideLeaveRow, type LeaveBalanceEntry, type LeaveType, type LeaveTypeSetting, type LeavePreview } from "../../core/repositories/LeaveRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { formatDateOnly, appLocale } from "../../core/utils/formatDate";
 
@@ -46,6 +46,8 @@ export default function LeaveRequestsPage() {
   const { t, i18n } = useTranslation("leave");
   const { profile } = useAuth();
   const isOwner = Boolean(profile?.isOwner);
+  // the owner's own leave is approved at once; a person holding the owner's authority still asks someone
+  const isRealOwner = Boolean(profile?.isRealOwner);
 
   const today = new Date();
   const [requests, setRequests] = useState<LeaveRequestRow[]>([]);
@@ -67,6 +69,8 @@ export default function LeaveRequestsPage() {
   const [startDate, setStartDate] = useState(isoDate(today));
   const [endDate, setEndDate] = useState(isoDate(today));
   const [reason, setReason] = useState("");
+  // what the request would take - working days only, holidays and rest days shown apart
+  const [preview, setPreview] = useState<LeavePreview | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -105,8 +109,25 @@ export default function LeaveRequestsPage() {
   }, [load]);
 
   useEffect(() => {
+    if (!startDate || !endDate || endDate < startDate) {
+      setPreview(null);
+      return;
+    }
+    let cancelled = false;
+    const timer = setTimeout(() => {
+      LeaveRepository.preview(leaveType, startDate, endDate).then((result) => {
+        if (!cancelled) setPreview(result.success ? result.data ?? null : null);
+      });
+    }, 250);
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [leaveType, startDate, endDate]);
+
+  useEffect(() => {
     LeaveRepository.listTypes().then((result) => setLeaveTypes((result.data ?? []).filter((type) => type.isActive)));
-    if (!isOwner) {
+    if (!isRealOwner) {
       LeaveRepository.listReviewers().then((result) => {
         const list = result.data ?? [];
         setReviewers(list);
@@ -114,7 +135,7 @@ export default function LeaveRequestsPage() {
         setReviewerId((current) => current || (list.find((reviewer) => !reviewer.isOwner) ?? list[0])?.id || "");
       });
     }
-  }, [isOwner]);
+  }, [isRealOwner]);
 
   const handleSubmit = async () => {
     if (!startDate || !endDate) return;
@@ -248,7 +269,7 @@ export default function LeaveRequestsPage() {
             disabled={submitting}
             options={(leaveTypes.length > 0 ? leaveTypes : [{ key: "annual", name: "" } as LeaveTypeSetting]).map((type) => ({ value: type.key, label: leaveTypeLabel(t, type.key, type.name) }))}
           />
-          {!isOwner && reviewers.length > 0 ? (
+          {!isRealOwner && reviewers.length > 0 ? (
             <Select
               label={t("reviewerLabel")}
               name="leaveReviewer"
@@ -276,13 +297,35 @@ export default function LeaveRequestsPage() {
               .join(" · ")}
           </HintText>
         ) : null}
+        {preview ? (
+          <div role="status" style={{ margin: "var(--space-2) 0", fontSize: "var(--font-sm)" }}>
+            {preview.accepted ? (
+              <strong>{t("preview.workingDays", { count: preview.workingDays })}</strong>
+            ) : (
+              <strong style={{ color: "var(--status-danger-text)" }}>{t("preview.noWorkingDay")}</strong>
+            )}
+            {preview.offDays.length > 0 ? (
+              <div style={{ color: "var(--text-secondary)" }}>
+                {t("preview.notCounted")}{" "}
+                {preview.offDays
+                  .map((day) => `${formatDateOnly(day.date, i18n.language)} (${day.name ?? t(`preview.dayType.${day.type}`)})`)
+                  .join(", ")}
+              </div>
+            ) : null}
+            {preview.remainingDays !== null ? (
+              <div style={{ color: preview.enforceBalance && preview.workingDays > preview.remainingDays ? "var(--status-danger-text)" : "var(--text-secondary)" }}>
+                {t("preview.remaining", { count: preview.remainingDays })}
+              </div>
+            ) : null}
+          </div>
+        ) : null}
         {selectedType?.requiresDocument ? (
           <label style={{ display: "grid", gap: 4, fontSize: "var(--font-sm)", margin: "var(--space-2) 0" }}>
             {t("documentLabel")}
             <input type="file" accept="image/*,application/pdf" onChange={(event) => setDocumentFile(event.target.files?.[0] ?? null)} disabled={submitting} />
           </label>
         ) : null}
-        {isOwner ? <HintText>{t("ownerAutoApproveHint")}</HintText> : null}
+        {isRealOwner ? <HintText>{t("ownerAutoApproveHint")}</HintText> : null}
         <Textarea label={t("reasonLabel")} name="leaveReason" value={reason} onChange={(event) => setReason(event.target.value)} disabled={submitting} rows={2} />
         <ErrorText>{submitError}</ErrorText>
         {submitSuccess ? <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-sm)", color: "var(--status-success-text)" }}>{t("ownerAutoApprovedMessage")}</p> : null}

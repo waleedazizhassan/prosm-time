@@ -20,7 +20,7 @@ export default function DeleteAccountModal({ isOpen, onClose }: { isOpen: boolea
   const [confirmText, setConfirmText] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  const isOwner = Boolean(profile?.isOwner);
+  const isOwner = Boolean(profile?.isRealOwner);
   const word = t("deleteAccount.confirmWord");
 
   const close = () => {

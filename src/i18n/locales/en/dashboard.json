@@ -210,9 +210,8 @@
       "openSettings": "Open settings"
     },
     "suggestSite": "You are at {{site}}. Clock in now?",
-    "suggestSiteAction": "Yes, clock in",
-    "suggestSiteDismiss": "Not now",
-    "confirmOutside": "You are {{meters}} m outside the area of {{site}}. It will be recorded as an exception and your manager will review it."
+    "confirmOutside": "You are {{meters}} m outside the area of {{site}}. It will be recorded as an exception and your manager will review it.",
+    "clockInAt": "Clock in at {{site}}"
   },
   "kioskPin": {
     "title": "Kiosk PIN",
@@ -295,7 +294,9 @@
     "body": "Your shift is still open. Clock out now?",
     "clockOut": "Clock out now",
     "stillWorking": "Still working",
-    "error": "Could not save your answer."
+    "error": "Could not save your answer.",
+    "bodyAtLeave": "Your shift is still open. Clock out at {{time}}, when you left?",
+    "clockOutAtLeave": "Clock out at {{time}}"
   },
   "manager": {
     "title": "Dashboard",
@@ -378,7 +379,19 @@
       "external": "External workers now",
       "externalSites": "at {{count}} site(s)",
       "overdue": "Not clocked out",
-      "overdueHint": "An hour after their shift ended"
+      "overdueHint": "An hour after their shift ended",
+      "onLeaveCard": "On leave today",
+      "def": {
+        "absentShort": "no attendance, no approved leave",
+        "leaveShort": "approved leave covering today",
+        "present": "People clocked in right now, within your scope.",
+        "hours": "Worked hours in the chosen period, from clock-in to clock-out.",
+        "late": "People who clocked in after their shift's start today.",
+        "absent": "Expected today, with no attendance and no approved leave. People on approved leave are counted separately.",
+        "leave": "People whose approved leave covers today. They are not counted as absent.",
+        "overdue": "Still clocked in an hour after their shift (or the site's day) ended, or still open from an earlier day.",
+        "overtime": "Approved overtime in the chosen period. Overtime awaiting review is not counted."
+      }
     },
     "map": {
       "title": "Sites now",
@@ -389,7 +402,9 @@
       "keyLabel": "Sites on the map",
       "stateActive": "Active - people are here now",
       "stateIdle": "Inactive - nobody is here now",
-      "stateSos": "SOS"
+      "stateSos": "SOS",
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out"
     },
     "present": {
       "title": "Here now ({{count}})",
@@ -493,7 +508,9 @@
         "attendance_overtime_approved": "Overtime approved",
         "attendance_auto_close": "Session closed automatically",
         "allowances_edit_during_review": "Allowance edited in review",
-        "leave_approved_cancelled": "Approved leave cancelled"
+        "leave_approved_cancelled": "Approved leave cancelled",
+        "OWNER_AUTHORITY_GRANTED": "Owner's authority granted",
+        "OWNER_AUTHORITY_REVOKED": "Owner's authority withdrawn"
       },
       "groups": {
         "sos": "SOS",
@@ -532,7 +549,12 @@
         "status": "Status",
         "details": "Details"
       },
-      "grantAction": "Make it leave"
+      "grantAction": "Make it leave",
+      "absentTitle": "Absent today: {{absent}}",
+      "leaveTitle": "On leave today: {{leave}}",
+      "noneAbsent": "Nobody is absent today",
+      "noneLeave": "Nobody is on leave today",
+      "openLeave": "Open leave requests"
     },
     "sheet": {
       "title": {

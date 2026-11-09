@@ -146,6 +146,14 @@ function mapRow(row: LeaveRequestRowRaw): LeaveRequestRow {
 // remaining) is real only for 'annual' leave - see the migration's own
 // header comment for why the other types deliberately never show a
 // hard cap, only a "days taken this year" figure.
+export interface LeavePreview {
+  workingDays: number;
+  offDays: { date: string; type: "weekly_rest" | "public_holiday" | "day_off"; name: string | null }[];
+  remainingDays: number | null;
+  enforceBalance: boolean;
+  accepted: boolean;
+}
+
 class LeaveRepository {
   get client() {
     return DatabaseManager.getClient();
@@ -316,6 +324,23 @@ class LeaveRepository {
       const { data, error } = await this.client.rpc("list_prosm_time_leave_reviewers");
       if (error) return createError(error.message);
       return createSuccess(Array.isArray(data) ? data : []);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Leave service unavailable.");
+    }
+  }
+
+  /** What a request would take before it is sent: working days only (20261108110000). */
+  async preview(leaveType: LeaveType, startDate: string, endDate: string): Promise<ServiceResult<LeavePreview>> {
+    try {
+      const { data, error } = await this.client.rpc("preview_prosm_time_leave", { p_leave_type: leaveType, p_start_date: startDate, p_end_date: endDate });
+      if (error) return createError(error.message);
+      return createSuccess({
+        workingDays: Number(data?.workingDays ?? 0),
+        offDays: (data?.offDays ?? []) as LeavePreview["offDays"],
+        remainingDays: data?.remainingDays === null || data?.remainingDays === undefined ? null : Number(data.remainingDays),
+        enforceBalance: Boolean(data?.enforceBalance),
+        accepted: Boolean(data?.accepted),
+      });
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Leave service unavailable.");
     }

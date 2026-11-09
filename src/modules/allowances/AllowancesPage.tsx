@@ -135,7 +135,9 @@ export default function AllowancesPage() {
   const { profile, hasPermission } = useAuth();
   const navigate = useNavigate();
   const canApprove = hasPermission("allowances.approve");
-  const isOwner = Boolean(profile?.isOwner);
+  // the owner as a person has no allowances; the owner's authority (owner or delegate) prices them
+  const isOwner = Boolean(profile?.isRealOwner);
+  const ownerAuthority = Boolean(profile?.isOwner);
   const [myRates, setMyRates] = useState<MySiteRates[]>([]);
   const [filling, setFilling] = useState(false);
   const [fillMessage, setFillMessage] = useState("");
@@ -461,10 +463,10 @@ export default function AllowancesPage() {
   const [sheetBusy, setSheetBusy] = useState<string | null>(null);
   const [sheetError, setSheetError] = useState("");
   const loadSheets = useCallback(async () => {
-    if (!canApprove && !isOwner) return;
+    if (!canApprove && !ownerAuthority) return;
     const result = await AllowanceRepository.listSheets("submitted");
     setSheets(result.success ? (result.data ?? []).filter((sheet) => sheet.userId !== profile?.id) : []);
-  }, [canApprove, isOwner, profile?.id]);
+  }, [canApprove, ownerAuthority, profile?.id]);
   useEffect(() => {
     loadSheets();
   }, [loadSheets]);
@@ -526,7 +528,7 @@ export default function AllowancesPage() {
       <PageBanner pageId="allowances" illustration={allowancesHeaderImage} />
 
       <div style={{ display: "flex", justifyContent: "flex-end", flexWrap: "wrap", gap: "var(--space-2)", marginBottom: "var(--space-4)" }}>
-        {canApprove || isOwner ? (
+        {canApprove || ownerAuthority ? (
           <Button variant="ghost" onClick={() => navigate("/allowances/prices")}>
             {t("prices.openAction")}
           </Button>

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { MapPin, UserCheck, UserX, Users, CalendarDays, Coffee, CheckCircle2, ClipboardCheck, FileClock, CalendarClock } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
+import { useDashboardRefresh } from "../../core/hooks/useDashboardRefresh";
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
 import ManagerRepository, { type TodayAttendanceRow, type PendingReviewItem } from "../../core/repositories/ManagerRepository";
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
@@ -212,6 +213,10 @@ export default function AdminOverviewCard() {
 
   // Owner 2026-10-20 ("someone is clocked in and the card doesn't show it"):
   // the numbers refresh every minute and whenever the app comes back to the front.
+  useDashboardRefresh(() => {
+    if (canView) load();
+  });
+
   useEffect(() => {
     if (!canView) return;
     load();

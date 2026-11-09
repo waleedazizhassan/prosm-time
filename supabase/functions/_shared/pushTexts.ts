@@ -172,6 +172,28 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "plan": "الباقة تغيّرت",
         "unlimited": "بلا حد",
         "planTo": "الباقة {{plan}}"
+      },
+      "ownerAuthority": {
+        "grantedTitle": "معاك صلاحيات المالك",
+        "grantedBody": "المالك اداك كل صلاحياته وإشعاراته وإيميلاته لحد ما يسحبها.",
+        "revokedTitle": "اتسحبت صلاحيات المالك",
+        "revokedBody": "رجعت لدورك وصلاحياتك العادية."
+      },
+      "payslip": {
+        "requestedTitle": "طلب مفردات مرتب",
+        "requestedBody": "طلب {{name}} مفردات مرتبه عن {{cycle}}.",
+        "sentTitle": "أُرسلت مفردات مرتبك",
+        "sentBody": "أُرسلت مفردات مرتبك عن {{cycle}} إلى بريدك الإلكتروني.",
+        "failedTitle": "تعذر إرسال مفردات المرتب",
+        "failedBody": "تعذر إرسال مفردات المرتب عن {{cycle}}. يمكنك المحاولة مرة أخرى.",
+        "publishedTitle": "مفردات مرتبك متاحة",
+        "publishedBody": "نُشرت مفردات مرتب جديدة. يمكنك عرضها أو طلبها بالبريد الإلكتروني."
+      },
+      "announcement": {
+        "publishedTitle": "إعلان جديد",
+        "statementTitle": "بيان رسمي جديد",
+        "publishedBody": "{{title}}",
+        "ackBody": "{{title}} - برجاء تأكيد القراءة."
       }
     },
     "leaveTypes": {
@@ -355,6 +377,28 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "plan": "Paket geändert",
         "unlimited": "unbegrenzt",
         "planTo": "Paket {{plan}}"
+      },
+      "ownerAuthority": {
+        "grantedTitle": "Sie haben die Befugnis des Inhabers",
+        "grantedBody": "Der Inhaber hat Ihnen alle seine Berechtigungen, Benachrichtigungen und E-Mails gegeben, bis er sie entzieht.",
+        "revokedTitle": "Die Befugnis des Inhabers wurde entzogen",
+        "revokedBody": "Sie haben wieder Ihre eigene Rolle und Ihre Berechtigungen."
+      },
+      "payslip": {
+        "requestedTitle": "Gehaltsabrechnung angefordert",
+        "requestedBody": "{{name}} hat die Gehaltsabrechnung für {{cycle}} angefordert.",
+        "sentTitle": "Ihre Gehaltsabrechnung wurde gesendet",
+        "sentBody": "Ihre Gehaltsabrechnung für {{cycle}} wurde an Ihre E-Mail gesendet.",
+        "failedTitle": "E-Mail mit Gehaltsabrechnung fehlgeschlagen",
+        "failedBody": "Die Gehaltsabrechnung für {{cycle}} konnte nicht gesendet werden. Bitte erneut versuchen.",
+        "publishedTitle": "Ihre Gehaltsabrechnung ist verfügbar",
+        "publishedBody": "Eine neue Gehaltsabrechnung wurde veröffentlicht. Sie können sie ansehen oder per E-Mail anfordern."
+      },
+      "announcement": {
+        "publishedTitle": "Neue Mitteilung",
+        "statementTitle": "Neue offizielle Mitteilung",
+        "publishedBody": "{{title}}",
+        "ackBody": "{{title}} - bitte bestätigen Sie das Lesen."
       }
     },
     "leaveTypes": {
@@ -538,6 +582,28 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "plan": "plan changed",
         "unlimited": "no limit",
         "planTo": "plan {{plan}}"
+      },
+      "ownerAuthority": {
+        "grantedTitle": "You have the owner's authority",
+        "grantedBody": "The owner gave you all of the owner's permissions, notifications and emails until they withdraw it.",
+        "revokedTitle": "The owner's authority was withdrawn",
+        "revokedBody": "You are back to your own role and permissions."
+      },
+      "payslip": {
+        "requestedTitle": "Payslip requested",
+        "requestedBody": "{{name}} asked for their payslip of {{cycle}}.",
+        "sentTitle": "Your payslip was emailed",
+        "sentBody": "Your payslip of {{cycle}} was sent to your email.",
+        "failedTitle": "Payslip email failed",
+        "failedBody": "The payslip of {{cycle}} could not be sent. You can try again.",
+        "publishedTitle": "Your payslip is available",
+        "publishedBody": "A new payslip was published. You can view it or ask for it by email."
+      },
+      "announcement": {
+        "publishedTitle": "New announcement",
+        "statementTitle": "New official statement",
+        "publishedBody": "{{title}}",
+        "ackBody": "{{title}} - please confirm you have read it."
       }
     },
     "leaveTypes": {
@@ -721,6 +787,28 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "plan": "plan cambiado",
         "unlimited": "sin límite",
         "planTo": "plan {{plan}}"
+      },
+      "ownerAuthority": {
+        "grantedTitle": "Tienes la autoridad del propietario",
+        "grantedBody": "El propietario te dio todos sus permisos, notificaciones y correos hasta que los retire.",
+        "revokedTitle": "Se retiró la autoridad del propietario",
+        "revokedBody": "Vuelves a tu rol y tus permisos."
+      },
+      "payslip": {
+        "requestedTitle": "Recibo de nómina solicitado",
+        "requestedBody": "{{name}} pidió su recibo de nómina de {{cycle}}.",
+        "sentTitle": "Se envió su recibo de nómina",
+        "sentBody": "Su recibo de nómina de {{cycle}} se envió a su correo.",
+        "failedTitle": "Falló el envío del recibo de nómina",
+        "failedBody": "No se pudo enviar el recibo de nómina de {{cycle}}. Puede intentarlo de nuevo.",
+        "publishedTitle": "Su recibo de nómina está disponible",
+        "publishedBody": "Se publicó un nuevo recibo de nómina. Puede verlo o pedirlo por correo."
+      },
+      "announcement": {
+        "publishedTitle": "Nuevo anuncio",
+        "statementTitle": "Nuevo comunicado oficial",
+        "publishedBody": "{{title}}",
+        "ackBody": "{{title}} - confirma que lo has leído."
       }
     },
     "leaveTypes": {
@@ -904,6 +992,28 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "plan": "offre modifiée",
         "unlimited": "sans limite",
         "planTo": "offre {{plan}}"
+      },
+      "ownerAuthority": {
+        "grantedTitle": "Vous avez l'autorité du propriétaire",
+        "grantedBody": "Le propriétaire vous a donné toutes ses autorisations, notifications et e-mails jusqu'à ce qu'il les retire.",
+        "revokedTitle": "L'autorité du propriétaire a été retirée",
+        "revokedBody": "Vous retrouvez votre rôle et vos autorisations."
+      },
+      "payslip": {
+        "requestedTitle": "Bulletin de paie demandé",
+        "requestedBody": "{{name}} a demandé son bulletin de paie de {{cycle}}.",
+        "sentTitle": "Votre bulletin de paie a été envoyé",
+        "sentBody": "Votre bulletin de paie de {{cycle}} a été envoyé à votre e-mail.",
+        "failedTitle": "Échec de l'envoi du bulletin de paie",
+        "failedBody": "Le bulletin de paie de {{cycle}} n'a pas pu être envoyé. Vous pouvez réessayer.",
+        "publishedTitle": "Votre bulletin de paie est disponible",
+        "publishedBody": "Un nouveau bulletin de paie a été publié. Vous pouvez le consulter ou le demander par e-mail."
+      },
+      "announcement": {
+        "publishedTitle": "Nouvelle annonce",
+        "statementTitle": "Nouveau communiqué officiel",
+        "publishedBody": "{{title}}",
+        "ackBody": "{{title}} - merci de confirmer la lecture."
       }
     },
     "leaveTypes": {
@@ -1087,6 +1197,28 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "plan": "piano cambiato",
         "unlimited": "senza limite",
         "planTo": "piano {{plan}}"
+      },
+      "ownerAuthority": {
+        "grantedTitle": "Hai l'autorità del titolare",
+        "grantedBody": "Il titolare ti ha dato tutte le sue autorizzazioni, notifiche ed e-mail finché non le ritira.",
+        "revokedTitle": "L'autorità del titolare è stata ritirata",
+        "revokedBody": "Torni al tuo ruolo e alle tue autorizzazioni."
+      },
+      "payslip": {
+        "requestedTitle": "Busta paga richiesta",
+        "requestedBody": "{{name}} ha richiesto la busta paga di {{cycle}}.",
+        "sentTitle": "La tua busta paga è stata inviata",
+        "sentBody": "La busta paga di {{cycle}} è stata inviata alla tua email.",
+        "failedTitle": "Invio della busta paga non riuscito",
+        "failedBody": "Non è stato possibile inviare la busta paga di {{cycle}}. Puoi riprovare.",
+        "publishedTitle": "La tua busta paga è disponibile",
+        "publishedBody": "È stata pubblicata una nuova busta paga. Puoi vederla o richiederla via email."
+      },
+      "announcement": {
+        "publishedTitle": "Nuovo annuncio",
+        "statementTitle": "Nuovo comunicato ufficiale",
+        "publishedBody": "{{title}}",
+        "ackBody": "{{title}} - conferma di averlo letto."
       }
     },
     "leaveTypes": {
@@ -1270,6 +1402,28 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "plan": "plano alterado",
         "unlimited": "sem limite",
         "planTo": "plano {{plan}}"
+      },
+      "ownerAuthority": {
+        "grantedTitle": "Você tem a autoridade do proprietário",
+        "grantedBody": "O proprietário lhe deu todas as permissões, notificações e e-mails dele até retirá-los.",
+        "revokedTitle": "A autoridade do proprietário foi retirada",
+        "revokedBody": "Você volta à sua função e às suas permissões."
+      },
+      "payslip": {
+        "requestedTitle": "Recibo de vencimento pedido",
+        "requestedBody": "{{name}} pediu o recibo de vencimento de {{cycle}}.",
+        "sentTitle": "O seu recibo de vencimento foi enviado",
+        "sentBody": "O recibo de vencimento de {{cycle}} foi enviado para o seu e-mail.",
+        "failedTitle": "Falha ao enviar o recibo de vencimento",
+        "failedBody": "Não foi possível enviar o recibo de vencimento de {{cycle}}. Pode tentar novamente.",
+        "publishedTitle": "O seu recibo de vencimento está disponível",
+        "publishedBody": "Foi publicado um novo recibo de vencimento. Pode vê-lo ou pedi-lo por e-mail."
+      },
+      "announcement": {
+        "publishedTitle": "Novo anúncio",
+        "statementTitle": "Novo comunicado oficial",
+        "publishedBody": "{{title}}",
+        "ackBody": "{{title}} - confirme que leu."
       }
     },
     "leaveTypes": {
@@ -1453,6 +1607,28 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "plan": "тариф изменён",
         "unlimited": "без ограничений",
         "planTo": "тариф {{plan}}"
+      },
+      "ownerAuthority": {
+        "grantedTitle": "У вас полномочия владельца",
+        "grantedBody": "Владелец передал вам все свои права, уведомления и письма, пока не отзовёт их.",
+        "revokedTitle": "Полномочия владельца отозваны",
+        "revokedBody": "Вы вернулись к своей роли и своим правам."
+      },
+      "payslip": {
+        "requestedTitle": "Запрошен расчётный листок",
+        "requestedBody": "{{name}} запросил(а) расчётный листок за {{cycle}}.",
+        "sentTitle": "Расчётный листок отправлен",
+        "sentBody": "Расчётный листок за {{cycle}} отправлен на вашу почту.",
+        "failedTitle": "Не удалось отправить расчётный листок",
+        "failedBody": "Не удалось отправить расчётный листок за {{cycle}}. Попробуйте ещё раз.",
+        "publishedTitle": "Расчётный листок доступен",
+        "publishedBody": "Опубликован новый расчётный листок. Его можно посмотреть или запросить по почте."
+      },
+      "announcement": {
+        "publishedTitle": "Новое объявление",
+        "statementTitle": "Новое официальное заявление",
+        "publishedBody": "{{title}}",
+        "ackBody": "{{title}} - подтвердите прочтение."
       }
     },
     "leaveTypes": {
@@ -1636,6 +1812,28 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "plan": "套餐已变更",
         "unlimited": "不限",
         "planTo": "套餐 {{plan}}"
+      },
+      "ownerAuthority": {
+        "grantedTitle": "您已获得所有者权限",
+        "grantedBody": "所有者已将其全部权限、通知和邮件授予您，直到其撤回。",
+        "revokedTitle": "所有者权限已撤回",
+        "revokedBody": "您已恢复为原来的角色和权限。"
+      },
+      "payslip": {
+        "requestedTitle": "工资单申请",
+        "requestedBody": "{{name}} 申请了 {{cycle}} 的工资单。",
+        "sentTitle": "您的工资单已发送",
+        "sentBody": "{{cycle}} 的工资单已发送至您的邮箱。",
+        "failedTitle": "工资单发送失败",
+        "failedBody": "{{cycle}} 的工资单未能发送，您可以重试。",
+        "publishedTitle": "您的工资单已可查看",
+        "publishedBody": "新的工资单已发布，您可以查看或通过邮件申请。"
+      },
+      "announcement": {
+        "publishedTitle": "新公告",
+        "statementTitle": "新的正式声明",
+        "publishedBody": "{{title}}",
+        "ackBody": "{{title}} - 请确认已阅读。"
       }
     },
     "leaveTypes": {

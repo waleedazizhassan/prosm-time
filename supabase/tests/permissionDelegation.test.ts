@@ -50,7 +50,7 @@ describe("permission delegation", () => {
   it("refuses what the Manager doesn't hold or must keep, and people not theirs", async () => {
     expect((await grant(manager, supervisor, "settings.manage")).error).toMatch(/ONLY PASS ON PERMISSIONS THEY HOLD/);
     expect((await grant(manager, supervisor, "leave.approve")).error).toMatch(/ONLY PASS ON PERMISSIONS THEY HOLD/);
-    expect((await grant(manager, supervisor, "permissions.assign")).error).toMatch(/ONLY PASS ON PERMISSIONS THEY HOLD/);
+    expect((await grant(manager, supervisor, "permissions.assign")).error).toMatch(/ONLY THE OWNER GRANTS THIS PERMISSION|ONLY PASS ON PERMISSIONS THEY HOLD/);
     expect((await grant(manager, otherSupervisor, "schedules.manage")).error).toMatch(/SUPERVISORS AT THEIR SITES/);
     expect((await grant(manager, employee, "schedules.manage")).error).toMatch(/SUPERVISORS AT THEIR SITES/);
     expect((await grant(supervisor, employee, "reports.view")).error).toMatch(/PERMISSIONS.ASSIGN AUTHORITY REQUIRED/);

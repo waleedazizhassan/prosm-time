@@ -58,10 +58,10 @@ serve(async (request: Request) => {
       auth: { autoRefreshToken: false, persistSession: false },
     });
 
+    // 2026-11-08: the database first, the files after. A failed removal used to leave the person
+    // in place with their evidence photos already deleted; now nothing is deleted unless the
+    // removal itself succeeded, and a file that cannot be deleted is only an orphan to clean up.
     const evidence = (authData.evidence ?? []) as { id: string; storagePath: string }[];
-    for (const item of evidence) {
-      await serviceClient.storage.from(BUCKET).remove([item.storagePath]);
-    }
 
     const { data: removeData, error: removeError } = await serviceClient.rpc("remove_prosm_time_employee", {
       p_user_id: userId,
@@ -71,6 +71,11 @@ serve(async (request: Request) => {
 
     if (removeError || !removeData?.success) {
       return errorResponse(removeError?.message ?? "Unable to remove this employee.", 400, "REMOVE_FAILED");
+    }
+
+    if (evidence.length > 0) {
+      const { error: storageError } = await serviceClient.storage.from(BUCKET).remove(evidence.map((item) => item.storagePath));
+      if (storageError) console.error("[remove-employee] evidence files left to clean up", evidence.length);
     }
 
     if (removeData.authUserId) {

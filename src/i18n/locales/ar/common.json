@@ -290,7 +290,11 @@
     "locationRequired": "لا يمكن التسجيل بدون موقع صالح. فعّل الموقع وحاول مرة أخرى.",
     "rejectReasonRequired": "اكتب سبب الرفض، ليصل إلى الموظف.",
     "organizationReadOnly": "مؤسستك للقراءة فقط حتى يُجدَّد ترخيصها.",
-    "featureNotInPlan": "هذه الميزة ليست ضمن باقة مؤسستك."
+    "featureNotInPlan": "هذه الميزة ليست ضمن باقة مؤسستك.",
+    "ownerAuthorityOwnerOnly": "المالك بس هو اللي يمنح أو يسحب صلاحيات المالك.",
+    "ownerAuthorityAlready": "الشخص ده معاه صلاحيات المالك بالفعل.",
+    "ownerAuthorityNone": "الشخص ده مش معاه صلاحيات المالك.",
+    "ownerAuthorityInactive": "الشخص ده مش مفعّل."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",
@@ -367,5 +371,6 @@
     "text": "هذه الميزة ضمن باقة {{plan}}.",
     "seePlan": "اعرض الباقة",
     "askOwner": "اطلبها من مالك المؤسسة."
-  }
+  },
+  "issuedVia": "صادر من خلال"
 }

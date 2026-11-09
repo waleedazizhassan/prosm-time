@@ -185,5 +185,26 @@
       "unverified_capture": "The camera could not open, so a picture was chosen from the phone.",
       "repeated_coordinates": "The same point with almost no GPS error - a common sign of a fake-location app."
     }
+  },
+  "imported": {
+    "title": "Attendance received through the API ({{count}})",
+    "hint": "Sent by a connected system (a fingerprint device, an HR system). It counts for nothing until approved; approving makes one attendance record from each clock-in and the next clock-out.",
+    "chooseAll": "Choose all",
+    "chooseNone": "Clear the choice",
+    "approve": "Approve ({{count}})",
+    "reject": "Reject",
+    "rejectTitle": "Reject {{count}} event(s)",
+    "reason": "Reason (required)",
+    "approved": "{{applied}} attendance record(s) made; {{pending}} event(s) still waiting.",
+    "error": "Could not complete this. Try again.",
+    "type": {
+      "clock_in": "Clock-in",
+      "clock_out": "Clock-out"
+    },
+    "reasons": {
+      "no_matching_clock_out": "no matching clock-out yet",
+      "longer_than_24_hours": "longer than 24 hours",
+      "overlaps_existing_attendance": "overlaps attendance already recorded"
+    }
   }
 }

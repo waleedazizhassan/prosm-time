@@ -290,7 +290,11 @@
     "locationRequired": "No se puede registrar sin una ubicación válida. Activa la ubicación e inténtalo de nuevo.",
     "rejectReasonRequired": "Escribe el motivo para que el empleado lo vea.",
     "organizationReadOnly": "Tu organización está en solo lectura hasta que se renueve su licencia.",
-    "featureNotInPlan": "Esta función no está en el plan de tu organización."
+    "featureNotInPlan": "Esta función no está en el plan de tu organización.",
+    "ownerAuthorityOwnerOnly": "Solo el propietario concede o retira la autoridad del propietario.",
+    "ownerAuthorityAlready": "Esta persona ya tiene la autoridad del propietario.",
+    "ownerAuthorityNone": "Esta persona no tiene la autoridad del propietario.",
+    "ownerAuthorityInactive": "Esta persona no está activa."
   },
   "pageLoad": {
     "title": "Esta página necesita conexión",
@@ -367,5 +371,6 @@
     "text": "Esto forma parte del plan {{plan}}.",
     "seePlan": "Ver el plan",
     "askOwner": "Pregunta al propietario de tu organización."
-  }
+  },
+  "issuedVia": "Emitido con"
 }

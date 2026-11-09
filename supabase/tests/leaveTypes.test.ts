@@ -63,7 +63,8 @@ describe("leave types (item 25)", () => {
   it("casual leave: at most 2 days at a time and 7 a year", async () => {
     expect((await request(newcomer, "emergency", "2027-02-01", "2027-02-03")).error).toMatch(/AT MOST 2 DAYS AT A TIME/);
     for (const day of ["01", "08", "15"]) expect((await request(newcomer, "emergency", `2027-03-${day}`, `2027-03-${String(Number(day) + 1).padStart(2, "0")}`)).error).toBeNull();
-    expect((await request(newcomer, "emergency", "2027-04-01", "2027-04-02")).error).toMatch(/NOT ENOUGH LEAVE BALANCE/);
+    // 2027-04-04/05 are Sunday and Monday - two working days (leave counts working days, 20261108110000)
+    expect((await request(newcomer, "emergency", "2027-04-04", "2027-04-05")).error).toMatch(/NOT ENOUGH LEAVE BALANCE/);
     expect((await request(newcomer, "emergency", "2027-04-01", "2027-04-01")).error).toBeNull();
     expect((await balance(newcomer, "emergency", 2027)).remainingDays).toBe(0);
   });

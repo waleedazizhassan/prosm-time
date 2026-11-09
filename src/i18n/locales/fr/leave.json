@@ -99,5 +99,16 @@
     "error": "Impossible d'enregistrer le congé."
   },
   "reviewerLabel": "Envoyer la demande à",
-  "reviewerOwner": "{{name}} (propriétaire)"
+  "reviewerOwner": "{{name}} (propriétaire)",
+  "preview": {
+    "workingDays": "Jours ouvrés déduits du solde : {{count}}",
+    "noWorkingDay": "Ces dates ne comportent aucun jour ouvré - repos ou jours fériés uniquement - la demande serait donc refusée.",
+    "notCounted": "Non comptés :",
+    "remaining": "Solde restant avant cette demande : {{count}}",
+    "dayType": {
+      "weekly_rest": "repos hebdomadaire",
+      "public_holiday": "jour férié",
+      "day_off": "jour de congé"
+    }
+  }
 }
