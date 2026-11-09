@@ -119,6 +119,9 @@ export default function PayrollStatutoryCard() {
               <label style={{ display: "flex", gap: "var(--space-2)", alignItems: "center", margin: "var(--space-1) 0" }}>
                 <input type="checkbox" checked={tax.insuranceDeductible} onChange={(e) => setTax({ insuranceDeductible: e.target.checked })} /> {t("statutory.insuranceDeductible")}
               </label>
+              <label style={{ display: "flex", gap: "var(--space-2)", alignItems: "center", margin: "var(--space-1) 0" }}>
+                <input type="checkbox" checked={Boolean(tax.roundDown)} onChange={(e) => setTax({ roundDown: e.target.checked })} /> {t("statutory.roundDown")}
+              </label>
               <HintText small>{t("statutory.bracketsHint")}</HintText>
               <div style={{ display: "grid", gap: "var(--space-1)", maxWidth: 520 }}>
                 {tax.brackets.map((b, i) => (

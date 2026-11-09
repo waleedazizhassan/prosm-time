@@ -319,7 +319,8 @@
     "insurableLabel": "Faz parte do salário segurável",
     "appliesToAllLabel": "Aplica-se a todos os trabalhadores",
     "defaultAmount": "Montante predefinido",
-    "appliesToAllHint": "Adicionado em cada novo ciclo para todos com ficha salarial. Se a pessoa tiver valor próprio, usa-se esse."
+    "appliesToAllHint": "Adicionado em cada novo ciclo para todos com ficha salarial. Se a pessoa tiver valor próprio, usa-se esse.",
+    "preTaxLabel": "Deduzido da base tributável (antes do imposto)"
   },
   "requests": {
     "hint": "Recibos pedidos pela sua equipa. Um clique envia o recibo aprovado e guardado em PDF para o e-mail registado: a mesma versão, sem recalcular.",
@@ -435,7 +436,8 @@
     "fundRate": "Taxa sobre o bruto %",
     "appliesToNew": "As alterações aplicam-se só a novos ciclos; os anteriores mantêm as suas regras.",
     "save": "Guardar seguros e impostos",
-    "saved": "Guardado."
+    "saved": "Guardado.",
+    "roundDown": "Arredondar o imposto mensal para baixo à unidade"
   },
   "steps": {
     "title": "Salários em 3 passos",

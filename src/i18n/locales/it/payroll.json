@@ -319,7 +319,8 @@
     "insurableLabel": "Fa parte della retribuzione assicurabile",
     "appliesToAllLabel": "Si applica a tutti i dipendenti",
     "defaultAmount": "Importo predefinito",
-    "appliesToAllHint": "Aggiunto in ogni nuovo ciclo per chi ha un profilo paghe. Se la persona ha un proprio valore, vale quello."
+    "appliesToAllHint": "Aggiunto in ogni nuovo ciclo per chi ha un profilo paghe. Se la persona ha un proprio valore, vale quello.",
+    "preTaxLabel": "Dedotto dall'imponibile (prima dell'imposta)"
   },
   "requests": {
     "hint": "Buste paga richieste dal tuo team. Un clic invia la busta paga approvata e salvata in PDF all'email registrata: stessa versione, nulla ricalcolato.",
@@ -435,7 +436,8 @@
     "fundRate": "Aliquota sul lordo %",
     "appliesToNew": "Le modifiche valgono solo per i nuovi cicli; i precedenti mantengono le loro regole.",
     "save": "Salva contributi e imposte",
-    "saved": "Salvato."
+    "saved": "Salvato.",
+    "roundDown": "Arrotondare l'imposta mensile all'unità inferiore"
   },
   "steps": {
     "title": "Le paghe in 3 passi",

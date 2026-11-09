@@ -120,6 +120,31 @@ describe("a cycle under the Egyptian rules", () => {
   });
 });
 
+// 2026-11-09: the owner's real payslip (Ratomag, July 2026) - health insurance and the union fee come off
+// the taxable pay, the tax is rounded down to the pound: 2,287.00 exactly
+describe("the owner's real payslip", () => {
+  it("matches to the piastre", async () => {
+    const real = await addMember(t, org, "employee", "Real Slip");
+    await ok(owner("select public.save_prosm_time_payroll_profile($1, $2)", [real.userId, JSON.stringify({ currency: "EGP", insurance_exempt: true })]));
+    const comp = async (c: Record<string, unknown>) => (await ok<{ r: { id: string } }>(owner("select public.save_prosm_time_payroll_component(null, $1) as r", [JSON.stringify(c)]))).r.id;
+    const set = (id: string, amount: number) => ok(owner("select public.set_prosm_time_payroll_profile_component($1, $2, $3, null, '2027-01-01')", [real.userId, id, amount]));
+    await set(basicId, 4500);
+    for (const [name, amount] of [["Raises", 800 + 1840 + 2878 + 2500 + 3350], ["Meal", 1000]] as const) await set(await comp({ name_ar: name, category: "earning", source: "fixed" }), amount);
+    await set(transportId, 1000);
+    await set(await comp({ name_ar: "Union", category: "deduction", source: "fixed", pre_tax: true }), 6);
+    await set(await comp({ name_ar: "Health", category: "deduction", source: "fixed", pre_tax: true }), 487.47);
+    // transport is non-taxable in this file's setup; the real slip taxes it - make it taxable here
+    await t.su("update payroll_components set taxable = true where id = $1", [transportId]);
+    await t.su("update payroll_settings set statutory = jsonb_set(statutory, '{incomeTax,roundDown}', 'true') where organization_id = $1", [org.id]);
+    const cycleId = (await ok<{ r: { cycleId: string } }>(owner("select public.create_prosm_time_payroll_cycle('2027-07-01', '2027-07-31') as r"))).r.cycleId;
+    const lines = await linesOf(cycleId, real);
+    expect(Number(rule(lines, "income_tax")!.amount)).toBe(2287);
+    expect(Number(rule(lines, "martyrs_fund")!.amount)).toBe(8.93);
+    expect(await netOf(cycleId, real)).toBeCloseTo(17868 - 2789.4, 2);
+    await t.su("update payroll_components set taxable = false where id = $1", [transportId]);
+  });
+});
+
 describe("the rules are the organisation's", () => {
   it("can be changed, are checked, and go back to the country's values", async () => {
     const current = (await ok<{ r: { config: Record<string, Record<string, unknown>>; countries: { code: string }[] } }>(owner("select public.get_prosm_time_payroll_statutory() as r"))).r;
