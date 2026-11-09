@@ -222,9 +222,8 @@
       "openSettings": "فتح الإعدادات"
     },
     "suggestSite": "أنت في {{site}}. تسجّل حضورك الآن؟",
-    "suggestSiteAction": "نعم، سجّل حضوري",
-    "suggestSiteDismiss": "ليس الآن",
-    "confirmOutside": "أنت خارج نطاق {{site}} بـ {{meters}} م. سيُسجَّل استثناءً ويراجعه مديرك."
+    "confirmOutside": "أنت خارج نطاق {{site}} بـ {{meters}} م. سيُسجَّل استثناءً ويراجعه مديرك.",
+    "clockInAt": "سجّل حضورك في {{site}}"
   },
   "kioskPin": {
     "title": "رمز الكشك",

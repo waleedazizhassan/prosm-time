@@ -210,9 +210,8 @@
       "openSettings": "Open settings"
     },
     "suggestSite": "You are at {{site}}. Clock in now?",
-    "suggestSiteAction": "Yes, clock in",
-    "suggestSiteDismiss": "Not now",
-    "confirmOutside": "You are {{meters}} m outside the area of {{site}}. It will be recorded as an exception and your manager will review it."
+    "confirmOutside": "You are {{meters}} m outside the area of {{site}}. It will be recorded as an exception and your manager will review it.",
+    "clockInAt": "Clock in at {{site}}"
   },
   "kioskPin": {
     "title": "Kiosk PIN",

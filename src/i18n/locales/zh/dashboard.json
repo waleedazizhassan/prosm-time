@@ -207,9 +207,8 @@
       "openSettings": "打开设置"
     },
     "suggestSite": "您在 {{site}}。现在上班打卡吗？",
-    "suggestSiteAction": "是，上班打卡",
-    "suggestSiteDismiss": "暂不",
-    "confirmOutside": "您在 {{site}} 区域外 {{meters}} 米。此次打卡将记为异常，由您的主管审核。"
+    "confirmOutside": "您在 {{site}} 区域外 {{meters}} 米。此次打卡将记为异常，由您的主管审核。",
+    "clockInAt": "在{{site}}签到"
   },
   "kioskPin": {
     "title": "考勤机 PIN",

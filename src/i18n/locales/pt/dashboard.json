@@ -212,10 +212,9 @@
       "openSettings": "Abrir configurações"
     },
     "suggestSite": "Você está em {{site}}. Registrar a entrada agora?",
-    "suggestSiteAction": "Sim, registrar entrada",
-    "suggestSiteDismiss": "Agora não",
     "confirmOutside": "Você está {{meters}} m fora da área de {{site}}. Isso será registrado como exceção e seu gestor vai analisar.",
-    "pendingCount_many": "{{count}} registros de ponto salvos neste dispositivo"
+    "pendingCount_many": "{{count}} registros de ponto salvos neste dispositivo",
+    "clockInAt": "Registar entrada em {{site}}"
   },
   "kioskPin": {
     "title": "PIN do quiosque",

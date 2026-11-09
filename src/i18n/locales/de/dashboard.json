@@ -210,9 +210,8 @@
       "openSettings": "Einstellungen öffnen"
     },
     "suggestSite": "Sie sind bei {{site}}. Jetzt einstempeln?",
-    "suggestSiteAction": "Ja, einstempeln",
-    "suggestSiteDismiss": "Nicht jetzt",
-    "confirmOutside": "Sie sind {{meters}} m außerhalb des Bereichs von {{site}}. Das wird als Ausnahme erfasst und von Ihrem Vorgesetzten geprüft."
+    "confirmOutside": "Sie sind {{meters}} m außerhalb des Bereichs von {{site}}. Das wird als Ausnahme erfasst und von Ihrem Vorgesetzten geprüft.",
+    "clockInAt": "Einstempeln bei {{site}}"
   },
   "kioskPin": {
     "title": "Kiosk-PIN",

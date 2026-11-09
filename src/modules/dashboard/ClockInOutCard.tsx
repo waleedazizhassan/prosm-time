@@ -216,7 +216,6 @@ export default function ClockInOutCard() {
   });
   const [locationBlocked, setLocationBlocked] = useState(false);
   const [suggestClockIn, setSuggestClockIn] = useState(false);
-  const [suggestionDismissed, setSuggestionDismissed] = useState(false);
   const [checklist, setChecklist] = useState<ChecklistItem[] | null>(null);
   const checklistAnsweredRef = useRef<string | null>(null);
   useEffect(() => {
@@ -1082,6 +1081,7 @@ export default function ClockInOutCard() {
       ? nearestSite(sites.filter((site) => site.allowedRadiusMeters > 0), currentLocation.latitude, currentLocation.longitude, currentLocation.accuracyMeters)
       : null;
   const proximitySite = proximity ? sites.find((site) => site.id === proximity.siteId) ?? null : null;
+  const suggestOnSite = Boolean(suggestClockIn && planAllows("clock_suggestion") && proximity?.inside && proximitySite);
   const mapRelevantSite = view.session ? view.currentSite : selectedSite ?? proximitySite;
   const mapSiteProximity =
     mapRelevantSite && currentLocation && mapRelevantSite.allowedRadiusMeters > 0
@@ -1254,31 +1254,16 @@ export default function ClockInOutCard() {
               options={[{ value: "", label: t("attendance.noProject") }, ...projects.map((project) => ({ value: project.id, label: project.name }))]}
             />
           ) : null}
-          {/* Plan stage 8.4: a question only. Nothing is recorded until the person agrees and completes the clock-in. */}
-          {suggestClockIn && planAllows("clock_suggestion") && !suggestionDismissed && proximity?.inside && proximitySite ? (
-            <div role="alert" style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-strong)" }}>
-              <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-sm)" }}>{t("attendance.suggestSite", { site: proximitySite.name })}</p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
-                <Button
-                  size="sm"
-                  onClick={() => {
-                    siteTouchedRef.current = true;
-                    setManualLocationLabel("");
-                    setSuggestionDismissed(true);
-                    setSiteId(proximitySite.id);
-                    handleClockInTap(proximitySite);
-                  }}
-                >
-                  {t("attendance.suggestSiteAction")}
-                </Button>
-                <Button size="sm" variant="ghost" onClick={() => setSuggestionDismissed(true)}>
-                  {t("attendance.suggestSiteDismiss")}
-                </Button>
-              </div>
-            </div>
+          {/* Plan stage 8.4 / B-09 (2026-11-09): where the person stands is said in words; the one clock-in
+              button below does the clock-in (it names the site). No second button, nothing recorded
+              until the person presses it. */}
+          {suggestOnSite ? (
+            <p role="status" style={{ margin: 0, padding: "var(--space-2) var(--space-3)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-strong)", fontSize: "var(--font-sm)" }}>
+              {t("attendance.suggestSite", { site: proximitySite!.name })}
+            </p>
           ) : null}
           <Button fullWidth onClick={() => handleClockInTap()} loading={submitting} disabled={!siteId && !manualLocationLabel.trim()}>
-            {t("attendance.clockInAction")}
+            {suggestOnSite && siteId === proximitySite!.id ? t("attendance.clockInAt", { site: proximitySite!.name }) : t("attendance.clockInAction")}
           </Button>
         </>
       )}

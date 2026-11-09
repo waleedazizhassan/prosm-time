@@ -212,10 +212,9 @@
       "openSettings": "Abrir ajustes"
     },
     "suggestSite": "Estás en {{site}}. ¿Fichar la entrada ahora?",
-    "suggestSiteAction": "Sí, fichar entrada",
-    "suggestSiteDismiss": "Ahora no",
     "confirmOutside": "Estás a {{meters}} m fuera de la zona de {{site}}. Se registrará como excepción y tu responsable la revisará.",
-    "pendingCount_many": "{{count}} acciones de asistencia guardadas en este dispositivo"
+    "pendingCount_many": "{{count}} acciones de asistencia guardadas en este dispositivo",
+    "clockInAt": "Fichar entrada en {{site}}"
   },
   "kioskPin": {
     "title": "PIN del quiosco",

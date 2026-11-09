@@ -213,9 +213,8 @@
       "openSettings": "Apri impostazioni"
     },
     "suggestSite": "Sei a {{site}}. Timbrare ora?",
-    "suggestSiteAction": "Sì, timbra",
-    "suggestSiteDismiss": "Non ora",
-    "confirmOutside": "Sei a {{meters}} m fuori dall'area di {{site}}. Sarà registrato come eccezione e il tuo responsabile lo verificherà."
+    "confirmOutside": "Sei a {{meters}} m fuori dall'area di {{site}}. Sarà registrato come eccezione e il tuo responsabile lo verificherà.",
+    "clockInAt": "Timbra l'entrata a {{site}}"
   },
   "kioskPin": {
     "title": "PIN chiosco",
