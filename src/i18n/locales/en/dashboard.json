@@ -404,7 +404,9 @@
       "stateIdle": "Inactive - nobody is here now",
       "stateSos": "SOS",
       "zoomIn": "Zoom in",
-      "zoomOut": "Zoom out"
+      "zoomOut": "Zoom out",
+      "noLocation": "Not on the map",
+      "noLocationHint": "Clocked in without coordinates (for example a device without GPS), so they cannot be placed."
     },
     "present": {
       "title": "Here now ({{count}})",

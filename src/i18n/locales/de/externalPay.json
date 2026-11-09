@@ -204,5 +204,6 @@
     "noWorkers": "Dieser Lohnlauf hat keine Arbeitskräfte.",
     "cannotDelete": "Nur ein nie genehmigter Entwurf kann gelöscht werden."
   },
-  "addRateFailed": "Der Arbeiter wurde hinzugefügt, aber sein Satz wurde nicht gespeichert: {{error}}. Setzen Sie ihn unter Lohn externer Arbeitskräfte."
+  "addRateFailed": "Der Arbeiter wurde hinzugefügt, aber sein Satz wurde nicht gespeichert: {{error}}. Setzen Sie ihn unter Lohn externer Arbeitskräfte.",
+  "addRate": "Lohn"
 }

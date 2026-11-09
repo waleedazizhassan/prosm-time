@@ -8,7 +8,7 @@
     "timesheets": "Folhas de ponto",
     "timesheet": "Folha de ponto",
     "workforce": "Funcionários da empresa",
-    "contractor": "Mão de obra temporária",
+    "contractor": "Presença da mão de obra externa",
     "site": "Resumo por unidade",
     "late": "Atrasos",
     "missingCheckouts": "Saídas não registradas",
@@ -19,7 +19,7 @@
     "sos": "Emergências (SOS)",
     "dashboard": "Painel",
     "auditLog": "Registro de ações",
-    "laborCost": "Custo de mão de obra"
+    "laborCost": "Custo da mão de obra externa"
   },
   "timesheetsHint": "As folhas de ponto são geradas e aprovadas por funcionário e período, não por intervalo de datas.",
   "timesheetsLink": "Ir para Folhas de ponto",
@@ -49,7 +49,9 @@
       "number": "Número",
       "site": "Unidade",
       "clockIn": "Entrada",
-      "clockOut": "Saída"
+      "clockOut": "Saída",
+      "date": "Data",
+      "hours": "Horas"
     },
     "site": {
       "name": "Unidade",
@@ -136,10 +138,23 @@
     "laborCost": {
       "project": "Projeto",
       "site": "Unidade",
-      "name": "Funcionário",
+      "name": "Trabalhador",
       "hours": "Horas",
       "cost": "Custo",
-      "noRate": "Sem valor/hora"
+      "noRate": "Sem tarifa",
+      "days": "Dias",
+      "contractor": "Empreiteiro",
+      "rate": "Tarifa",
+      "unit": "Pago por",
+      "amount": "Total do período",
+      "total": "Total",
+      "units": {
+        "HOURLY": "Hora",
+        "DAILY": "Dia",
+        "WEEKLY": "Semana",
+        "MONTHLY": "Mês",
+        "YEARLY": "Ano"
+      }
     }
   },
   "values": {

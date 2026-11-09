@@ -8,7 +8,7 @@
     "timesheets": "Fogli ore",
     "timesheet": "Foglio ore",
     "workforce": "Dipendenti aziendali",
-    "contractor": "Personale temporaneo",
+    "contractor": "Presenze della manodopera esterna",
     "site": "Riepilogo sito",
     "late": "Ritardi",
     "missingCheckouts": "Uscite mancanti",
@@ -19,7 +19,7 @@
     "sos": "Emergenza (SOS)",
     "dashboard": "Dashboard",
     "auditLog": "Registro azioni",
-    "laborCost": "Costo del lavoro"
+    "laborCost": "Costo della manodopera esterna"
   },
   "timesheetsHint": "I fogli ore vengono generati e approvati per dipendente e periodo, non per intervallo di date.",
   "timesheetsLink": "Vai ai fogli ore",
@@ -49,7 +49,9 @@
       "number": "Numero",
       "site": "Sito",
       "clockIn": "Entrata",
-      "clockOut": "Uscita"
+      "clockOut": "Uscita",
+      "date": "Data",
+      "hours": "Ore"
     },
     "site": {
       "name": "Sito",
@@ -136,10 +138,23 @@
     "laborCost": {
       "project": "Progetto",
       "site": "Sede",
-      "name": "Dipendente",
+      "name": "Lavoratore",
       "hours": "Ore",
       "cost": "Costo",
-      "noRate": "Nessuna tariffa"
+      "noRate": "Nessuna tariffa",
+      "days": "Giorni",
+      "contractor": "Appaltatore",
+      "rate": "Tariffa",
+      "unit": "Pagato a",
+      "amount": "Totale del periodo",
+      "total": "Totale",
+      "units": {
+        "HOURLY": "Ora",
+        "DAILY": "Giorno",
+        "WEEKLY": "Settimana",
+        "MONTHLY": "Mese",
+        "YEARLY": "Anno"
+      }
     }
   },
   "values": {

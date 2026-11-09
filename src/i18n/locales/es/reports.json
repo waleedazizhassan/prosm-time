@@ -8,7 +8,7 @@
     "timesheets": "Hojas de horas",
     "timesheet": "Hoja de horas",
     "workforce": "Empleados de la empresa",
-    "contractor": "Personal temporal",
+    "contractor": "Asistencia de mano de obra externa",
     "site": "Resumen por sede",
     "late": "Llegadas tarde",
     "missingCheckouts": "Salidas sin fichar",
@@ -19,7 +19,7 @@
     "sos": "Emergencias (SOS)",
     "dashboard": "Panel",
     "auditLog": "Registro de acciones",
-    "laborCost": "Coste laboral"
+    "laborCost": "Coste de mano de obra externa"
   },
   "timesheetsHint": "Las hojas de horas se generan y aprueban por empleado y período, no por intervalo de fechas.",
   "timesheetsLink": "Ir a Hojas de horas",
@@ -49,7 +49,9 @@
       "number": "Número",
       "site": "Sede",
       "clockIn": "Entrada",
-      "clockOut": "Salida"
+      "clockOut": "Salida",
+      "date": "Fecha",
+      "hours": "Horas"
     },
     "site": {
       "name": "Sede",
@@ -136,10 +138,23 @@
     "laborCost": {
       "project": "Proyecto",
       "site": "Sede",
-      "name": "Empleado",
+      "name": "Trabajador",
       "hours": "Horas",
       "cost": "Coste",
-      "noRate": "Sin tarifa"
+      "noRate": "Sin tarifa",
+      "days": "Días",
+      "contractor": "Contratista",
+      "rate": "Tarifa",
+      "unit": "Se paga por",
+      "amount": "Total del periodo",
+      "total": "Total",
+      "units": {
+        "HOURLY": "Hora",
+        "DAILY": "Día",
+        "WEEKLY": "Semana",
+        "MONTHLY": "Mes",
+        "YEARLY": "Año"
+      }
     }
   },
   "values": {

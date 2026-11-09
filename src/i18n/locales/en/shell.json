@@ -285,6 +285,7 @@
   },
   "sections": {
     "attendance": "Field operations",
+    "sites": "Sites and external labour",
     "people": "Human resources",
     "payroll": "Payroll",
     "reports": "Reports and analytics",

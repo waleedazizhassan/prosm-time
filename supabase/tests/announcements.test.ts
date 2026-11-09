@@ -84,7 +84,7 @@ describe("publishing and reading", () => {
     siteNotice = (await ok<{ r: { id: string } }>(save(managerA.authId, { title: "Gate closed Friday", body: "Use gate 2.", audienceType: "sites", audienceIds: [siteA], requiresAck: true }))).r.id;
     expect((await mine(workerA)).items).toHaveLength(0); // a draft reaches nobody
     const r = await ok<{ r: { status: string; recipients: number } }>(publish(managerA.authId, siteNotice));
-    expect(r.r).toMatchObject({ status: "published", recipients: 2 }); // worker A and the manager
+    expect(r.r).toMatchObject({ status: "published", recipients: 1 }); // worker A - never the publisher (2026-11-09)
     const a = await mine(workerA);
     expect(a.items.map((x) => x.title)).toEqual(["Gate closed Friday"]);
     expect(a.unread).toBe(1);
@@ -107,7 +107,7 @@ describe("publishing and reading", () => {
 
   it("who read: the owner sees everyone, a manager their own people, an employee nobody", async () => {
     const reads = await ok<{ r: { name: string; acknowledgedAt: string | null }[] }>(owner("select public.get_prosm_time_announcement_reads($1) as r", [siteNotice]));
-    expect(reads.r.map((x) => x.name).sort()).toEqual(["Manager A", "Worker A"]);
+    expect(reads.r.map((x) => x.name).sort()).toEqual(["Worker A"]);
     expect((await t.as(workerA.authId, "select public.get_prosm_time_announcement_reads($1)", [siteNotice])).error).toMatch(/NOT ALLOWED/);
     expect((await t.as(other.owner.authId, "select public.get_prosm_time_announcement_reads($1)", [siteNotice])).error).toMatch(/NOT FOUND/);
   });
@@ -158,6 +158,8 @@ describe("schedule and expiry", () => {
     await t.su("select public.prosm_time_announcements_tick()");
     expect((await mine(workerB)).items.map((x) => x.title)).toContain("Holiday");
     expect((await mine(outsider)).items).toHaveLength(0);
+    // the owner sent it to everyone, and does not receive it
+    expect((await mine(org.owner)).items.map((x) => x.title)).not.toContain("Holiday");
     await t.su("update announcements set expires_at = now() - interval '1 second' where id = $1", [id]);
     await t.su("select public.prosm_time_announcements_tick()");
     expect((await mine(workerB)).items.map((x) => x.title)).not.toContain("Holiday");

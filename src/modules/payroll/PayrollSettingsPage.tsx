@@ -83,6 +83,15 @@ export default function PayrollSettingsPage() {
     <PageShell title={t("nav.settings")} wide>
       <Button variant="ghost" size="sm" onClick={() => navigate("/payroll")}>{t("nav.back")}</Button>
       <ErrorText>{error}</ErrorText>
+
+      <Card title={t("components.title")} subtitle={t("components.hint")} actions={<Button size="sm" onClick={() => setDraft({ id: null, value: { ...EMPTY } })}>{t("components.add")}</Button>}>
+        <Table columns={columns} data={components} getRowId={(c) => c.id} emptyMessage={t("components.empty")}
+          onRowClick={(c) => setDraft({ id: c.id, value: { ...c, name_en: c.name_en ?? "" } })} />
+      </Card>
+
+      <PayrollStatutoryCard />
+
+      {/* Owner 2026-11-09: what is used most first - components, insurance and taxes; the policies after */}
       <Card title={t("settings.title")}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(12rem, 1fr))", gap: "var(--space-3)" }}>
           {num("period_start_day", "settings.periodStartDay")}
@@ -110,13 +119,6 @@ export default function PayrollSettingsPage() {
           setBusy("");
           if (result.error) setError(payrollError(result.error, t)); else setSaved(true);
         }}>{saved ? t("settings.saved") : t("settings.save")}</Button>
-      </Card>
-
-      <PayrollStatutoryCard />
-
-      <Card title={t("components.title")} subtitle={t("components.hint")} actions={<Button size="sm" onClick={() => setDraft({ id: null, value: { ...EMPTY } })}>{t("components.add")}</Button>}>
-        <Table columns={columns} data={components} getRowId={(c) => c.id} emptyMessage={t("components.empty")}
-          onRowClick={(c) => setDraft({ id: c.id, value: { ...c, name_en: c.name_en ?? "" } })} />
       </Card>
 
       <Modal isOpen={Boolean(draft)} onClose={() => setDraft(null)} title={draft?.id ? t("components.edit") : t("components.add")} size="lg"

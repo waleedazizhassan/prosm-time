@@ -6,7 +6,11 @@ import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { useAuth } from "../../core/context/AuthContext";
 import usePlanFeatures from "../../core/hooks/usePlanFeatures";
 import { useAppLayout } from "./LayoutContext";
-import { NAV_ITEMS, NAV_SECTION_ORDER } from "./navigation";
+import { NAV_ITEMS, NAV_SECTION_ORDER, type NavSection } from "./navigation";
+import { Activity, Banknote, BarChart3, HelpCircle, MapPinned, ShieldCheck, Users as UsersIcon, type LucideIcon } from "lucide-react";
+
+// Owner 2026-11-09: each group has its own icon; no item counts (they read like notifications)
+const SECTION_ICONS: Record<NavSection, LucideIcon> = { attendance: Activity, sites: MapPinned, people: UsersIcon, payroll: Banknote, reports: BarChart3, settings: ShieldCheck, help: HelpCircle };
 import UserMenu from "./UserMenu";
 import SidebarRadio from "./SidebarRadio";
 import { EMPLOYEE_BOTTOM_PATHS } from "./BottomNav";
@@ -201,9 +205,12 @@ export default function Sidebar() {
             return (
               <div key={group.section} className={styles.navSection}>
                 <button type="button" className={[styles.branch, holdsCurrent ? styles.branchCurrent : ""].filter(Boolean).join(" ")} aria-expanded={open} onClick={() => toggleSection(group.section, !open)}>
-                  <ChevronDown size={18} className={[styles.branchChevron, open ? styles.branchChevronOpen : ""].filter(Boolean).join(" ")} />
-                  <span>{t(`sections.${group.section}`)}</span>
-                  <span className={styles.branchCount}>{group.items.length}</span>
+                  {(() => {
+                    const SectionIcon = SECTION_ICONS[group.section];
+                    return <span className={styles.itemIcon}><SectionIcon size={18} strokeWidth={2} /></span>;
+                  })()}
+                  <span className={styles.branchLabel}>{t(`sections.${group.section}`)}</span>
+                  <ChevronDown size={16} className={[styles.branchChevron, open ? styles.branchChevronOpen : ""].filter(Boolean).join(" ")} />
                 </button>
                 {open ? <div className={styles.branchItems}>{group.items.map(renderItem)}</div> : null}
               </div>

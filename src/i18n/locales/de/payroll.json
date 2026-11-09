@@ -436,5 +436,22 @@
     "appliesToNew": "Änderungen gelten nur für neue Zyklen; frühere behalten ihre Regeln.",
     "save": "Versicherung und Steuern speichern",
     "saved": "Gespeichert."
+  },
+  "steps": {
+    "title": "Gehaltsabrechnung in 3 Schritten",
+    "hint": "Schritt 1 und 2 einmal, Schritt 3 jeden Monat.",
+    "one": "Bestandteile, Versicherung und Steuern",
+    "oneTodo": "Bestandteile festlegen (Grundgehalt, Zulagen, Abzüge). Versicherung und Steuern sind nach ägyptischem Recht vorbereitet.",
+    "oneDone": "{{count}} Bestandteile festgelegt.",
+    "statutoryOn": "Versicherung und Steuern werden automatisch berechnet.",
+    "statutoryOff": "Versicherung und Steuern sind ausgeschaltet.",
+    "oneAction": "Einstellungen",
+    "two": "Gehaltsprofil je Person",
+    "twoTodo": "Noch niemand hat ein Gehaltsprofil - der Zyklus wäre leer. Grundgehalt je Person eintragen.",
+    "twoDone": "{{done}} von {{total}} Personen haben ein Profil.",
+    "twoNoAccess": "Wird von den Berechtigten vorbereitet.",
+    "twoAction": "Gehaltsprofile",
+    "three": "Der Monatszyklus",
+    "threeText": "Zyklus unten anlegen → Variable eintragen und Anwesenheitsvorschläge prüfen → einreichen → eine andere Person genehmigt → sperren und Gehaltszettel veröffentlichen."
   }
 }

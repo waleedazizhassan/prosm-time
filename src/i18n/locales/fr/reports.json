@@ -8,7 +8,7 @@
     "timesheets": "Feuilles de temps",
     "timesheet": "Feuille de temps",
     "workforce": "Employés de l'entreprise",
-    "contractor": "Main-d'œuvre temporaire",
+    "contractor": "Présence de la main-d'œuvre externe",
     "site": "Résumé par site",
     "late": "Retards",
     "missingCheckouts": "Sorties manquantes",
@@ -19,7 +19,7 @@
     "sos": "Urgence (SOS)",
     "dashboard": "Tableau de bord",
     "auditLog": "Journal des actions",
-    "laborCost": "Coût de main-d'œuvre"
+    "laborCost": "Coût de la main-d'œuvre externe"
   },
   "timesheetsHint": "Les feuilles de temps sont générées et approuvées par employé et par période, pas par plage de dates.",
   "timesheetsLink": "Aller aux feuilles de temps",
@@ -49,7 +49,9 @@
       "number": "Numéro",
       "site": "Site",
       "clockIn": "Entrée",
-      "clockOut": "Sortie"
+      "clockOut": "Sortie",
+      "date": "Date",
+      "hours": "Heures"
     },
     "site": {
       "name": "Site",
@@ -136,10 +138,23 @@
     "laborCost": {
       "project": "Projet",
       "site": "Site",
-      "name": "Employé",
+      "name": "Travailleur",
       "hours": "Heures",
       "cost": "Coût",
-      "noRate": "Sans taux"
+      "noRate": "Pas de tarif",
+      "days": "Jours",
+      "contractor": "Sous-traitant",
+      "rate": "Tarif",
+      "unit": "Payé à",
+      "amount": "Total de la période",
+      "total": "Total",
+      "units": {
+        "HOURLY": "Heure",
+        "DAILY": "Jour",
+        "WEEKLY": "Semaine",
+        "MONTHLY": "Mois",
+        "YEARLY": "Année"
+      }
     }
   },
   "values": {

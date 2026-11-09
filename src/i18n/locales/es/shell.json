@@ -285,6 +285,7 @@
   },
   "sections": {
     "attendance": "Operación de campo",
+    "sites": "Sedes y mano de obra externa",
     "people": "Recursos humanos",
     "payroll": "Nómina",
     "reports": "Informes y análisis",

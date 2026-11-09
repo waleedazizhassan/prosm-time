@@ -285,6 +285,7 @@
   },
   "sections": {
     "attendance": "Außendienst",
+    "sites": "Standorte und externe Kräfte",
     "people": "Personal",
     "payroll": "Gehaltsabrechnung",
     "reports": "Berichte und Analysen",
