@@ -294,6 +294,10 @@
     "auditLog": {
       "title": "Action log",
       "hint": "Who did what and when, with the reason."
+    },
+    "integrations": {
+      "title": "Integrations and API",
+      "hint": "Keys for accounting, HR and other systems, receiving attendance, and webhooks."
     }
   }
 }

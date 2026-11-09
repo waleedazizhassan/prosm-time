@@ -1,4 +1,5 @@
 import { Link, Navigate, useSearchParams } from "react-router-dom";
+import { FEATURES } from "../../config/features";
 import { useTranslation } from "react-i18next";
 
 import { useAuth } from "../../core/context/AuthContext";
@@ -111,6 +112,8 @@ export default function OrganizationSettingsPage() {
       {profile?.isRealOwner ? <SettingsLink to="/permissions" title={t("links.permissions.title")} hint={t("links.permissions.hint")} /> : null}
       {showAudit ? <SettingsLink to="/audit-log" title={t("links.auditLog.title")} hint={t("links.auditLog.hint")} /> : null}
       {isOwner ? <RetentionSettingsCard /> : null}
+      {/* 2026-11-09: the API is on again (owner) - keys and webhooks live on their own page */}
+      {FEATURES.integrations && isOwner && allows("integrations") ? <SettingsLink to="/integrations" title={t("links.integrations.title")} hint={t("links.integrations.hint")} /> : null}
     </PageShell>
   );
 }

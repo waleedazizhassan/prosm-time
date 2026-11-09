@@ -32,6 +32,8 @@ beforeAll(async () => {
 
 describe("webhooks", () => {
   it("need the plan, the real owner and an https address", async () => {
+    // every plan includes the API since 2026-11-09 (migration 20261109210000); start without it
+    await t.su("update plans set feature_flags = feature_flags - 'integrations'");
     expect((await owner("select public.create_prosm_time_webhook('https://erp.example.com/hook', array['employee.created'])")).error).toMatch(/FEATURE NOT IN PLAN/);
     await t.su("update plans set feature_flags = feature_flags || '{\"integrations\": true}'::jsonb");
     expect((await t.as(manager.authId, "select public.create_prosm_time_webhook('https://erp.example.com/hook', array['employee.created'])")).error).toMatch(/OWNER/);

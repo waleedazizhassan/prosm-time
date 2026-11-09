@@ -149,6 +149,10 @@
     "importedAttendance": {
       "title": "Asistencia de sistemas conectados",
       "body": "Otro sistema (lector de huella o sistema de RR. HH.) puede enviar entradas y salidas por la API con una clave creada por el propietario. Enviar el mismo evento dos veces no duplica nada. Esperan en la consola del gestor en «Asistencia recibida por la API» y no cuentan para nada (horas, nómina, panel ni permisos) hasta que el propietario o un gestor autorizado los aprueba. Aprobar une cada entrada y la siguiente salida de la misma persona en un registro, anotado en el registro de acciones; lo que se solape o no tenga salida queda con el motivo. Rechazar requiere motivo. Los sistemas contables y de RR. HH. también pueden leer empleados, sedes, asistencia, permisos y saldos, turnos y la nómina de ciclos cerrados por la misma API."
+    },
+    "integrationsApi": {
+      "title": "Integraciones y API",
+      "body": "El propietario abre Ajustes y luego Integraciones y API para crear una clave para un sistema contable, de RR. HH. u otro y elegir qué puede leer: empleados (los datos sensibles aparte), sedes, asistencia, turnos, ausencias y saldos, y la nómina de los ciclos cerrados; recibir asistencia es una opción aparte. La clave se muestra una vez, puede tener fecha de caducidad, y revocarse en cualquier momento. Los webhooks envían un aviso firmado a la dirección HTTPS del propietario cuando cambian empleados, asistencia o decisiones de ausencias; los envíos fallidos se reintentan y pueden reenviarse. La descripción técnica es el contrato de la API (openapi.json). Cada solicitud queda registrada."
     }
   },
   "faq": {

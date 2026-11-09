@@ -149,6 +149,10 @@
     "importedAttendance": {
       "title": "Attendance from connected systems",
       "body": "Another system - a fingerprint device or an HR system - can send clock-ins and clock-outs to PROSM Time through the API with a key the owner creates. Sending the same event twice does nothing. These events wait on the Manager Console under \"Attendance received through the API\" and count for nothing - not hours, payroll, the dashboard or leave - until the owner, or a manager who may correct that person's attendance, approves them. Approving turns each clock-in and the next clock-out of the same person into one attendance record, recorded in the action log; an event that overlaps attendance already recorded, or has no clock-out yet, stays with the reason. Rejecting needs a reason. Accounting and HR systems can also read employees, sites, attendance, leave and balances, shifts and the payroll of locked cycles through the same API."
+    },
+    "integrationsApi": {
+      "title": "Integrations and the API",
+      "body": "The owner opens Settings, then Integrations and API, to create a key for an accounting, HR or other system and choose what it may read: employees (sensitive fields separately), sites, attendance, shifts, leave and balances, and the payroll of locked cycles; receiving attendance is a separate choice. A key is shown once, can be given an expiry date, and can be revoked at any time. Webhooks send a signed notice to the owner's HTTPS address when employees, attendance or leave decisions change; failed deliveries are retried and can be sent again. The technical description for developers is the API contract (openapi.json). Every request is recorded."
     }
   },
   "faq": {

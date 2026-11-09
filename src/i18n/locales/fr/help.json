@@ -149,6 +149,10 @@
     "importedAttendance": {
       "title": "Présences des systèmes connectés",
       "body": "Un autre système (pointeuse biométrique, SIRH) peut envoyer arrivées et départs par l'API avec une clé créée par le propriétaire. Envoyer deux fois le même événement ne change rien. Ils attendent dans la console du responsable sous « Présences reçues par l'API » et ne comptent pour rien (heures, paie, tableau de bord, congés) avant approbation par le propriétaire ou un responsable habilité. L'approbation fait de chaque arrivée et du départ suivant de la même personne un enregistrement, tracé dans le journal ; un chevauchement ou un départ manquant reste avec le motif. Rejeter exige un motif. Les logiciels de comptabilité et RH peuvent aussi lire employés, sites, présences, congés et soldes, postes et la paie des cycles verrouillés par la même API."
+    },
+    "integrationsApi": {
+      "title": "Intégrations et API",
+      "body": "Le propriétaire ouvre Paramètres, puis Intégrations et API, pour créer une clé pour un logiciel de comptabilité, de RH ou autre et choisir ce qu'il peut lire : employés (champs sensibles à part), sites, présences, horaires, congés et soldes, et la paie des cycles verrouillés ; recevoir des présences est un choix distinct. La clé s'affiche une fois, peut recevoir une date d'expiration, et révoquée à tout moment. Les webhooks envoient un avis signé à l'adresse HTTPS du propriétaire quand les employés, les présences ou les décisions de congé changent ; les envois échoués sont réessayés et peuvent être renvoyés. La description technique est le contrat de l'API (openapi.json). Chaque requête est enregistrée."
     }
   },
   "faq": {

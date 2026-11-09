@@ -294,6 +294,10 @@
     "auditLog": {
       "title": "Aktionsprotokoll",
       "hint": "Wer hat was wann getan, mit Begründung."
+    },
+    "integrations": {
+      "title": "Integrationen und API",
+      "hint": "Schlüssel für Buchhaltung, HR und andere Systeme, Anwesenheitsimport und Webhooks."
     }
   }
 }

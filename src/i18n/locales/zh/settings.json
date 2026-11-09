@@ -293,6 +293,10 @@
     "auditLog": {
       "title": "操作日志",
       "hint": "谁在何时做了什么，以及原因。"
+    },
+    "integrations": {
+      "title": "集成与 API",
+      "hint": "用于财务、人事等系统的密钥、考勤导入和 Webhook。"
     }
   }
 }

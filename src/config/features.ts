@@ -5,7 +5,9 @@ export const FEATURES = {
   // API keys page) without removing them. The server side is unchanged:
   // existing API keys - used by PROSM Projects and PROSM Finance - keep
   // working; only managing keys from the app is hidden.
-  integrations: false,
+  // Owner 2026-11-09: the API is on and shown again; the plan that carries it is decided
+  // in the packages session (every plan includes it for now, migration 20261109210000).
+  integrations: true,
   // Owner 2026-10-21 (review: things we don't need): projects inside a site
   // are hidden until a client asks for them. Nothing is deleted.
   projects: false,

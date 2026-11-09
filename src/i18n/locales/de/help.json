@@ -149,6 +149,10 @@
     "importedAttendance": {
       "title": "Anwesenheit aus verbundenen Systemen",
       "body": "Ein anderes System - Fingerabdruckgerät oder Personalsystem - kann Ein- und Ausstempelungen über die API mit einem Schlüssel des Inhabers senden. Doppelt gesendete Ereignisse ändern nichts. Sie warten in der Managerkonsole unter \"Über die API empfangene Anwesenheit\" und zählen nichts - weder Stunden, Lohn, Dashboard noch Urlaub -, bis der Inhaber oder eine berechtigte Führungskraft sie genehmigt. Die Genehmigung macht aus jedem Ein- und dem nächsten Ausstempeln derselben Person einen Eintrag (protokolliert); Überschneidungen oder fehlendes Ausstempeln bleiben mit Grund stehen. Ablehnen braucht eine Begründung. Buchhaltungs- und Personalsysteme können über dieselbe API auch Mitarbeitende, Standorte, Anwesenheit, Urlaub und Salden, Schichten und den Lohn gesperrter Läufe lesen."
+    },
+    "integrationsApi": {
+      "title": "Integrationen und API",
+      "body": "Der Inhaber öffnet Einstellungen, dann Integrationen und API, um einen Schlüssel für Buchhaltung, HR oder ein anderes System zu erstellen und festzulegen, was es lesen darf: Mitarbeitende (sensible Felder separat), Standorte, Anwesenheit, Schichten, Urlaub und Salden sowie die Gehaltsabrechnung abgeschlossener Zyklen; Anwesenheit empfangen ist eine eigene Wahl. Ein Schlüssel wird einmal angezeigt, kann ein Ablaufdatum erhalten und jederzeit widerrufen werden. Webhooks senden bei Änderungen an Mitarbeitenden, Anwesenheit oder Urlaubsentscheidungen eine signierte Nachricht an die HTTPS-Adresse des Inhabers; fehlgeschlagene Zustellungen werden wiederholt und können erneut gesendet werden. Die technische Beschreibung ist der API-Vertrag (openapi.json). Jede Anfrage wird protokolliert."
     }
   },
   "faq": {

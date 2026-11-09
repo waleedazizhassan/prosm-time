@@ -74,7 +74,8 @@ describe("plan features", () => {
     await setPlatformPlan("8fc0af08-e6ca-4f39-a9e8-d9c2a981c660");
     expect(await plan()).toBe("pro");
     expect(await allows("sos")).toBe(true);
-    expect(await allows("integrations")).toBe(false);
+    // owner 2026-11-09: every plan includes the API until the packages session decides (20261109210000)
+    expect(await allows("integrations")).toBe(true);
   });
 
   it("keeps everything for organisations from before plans and for trials", async () => {

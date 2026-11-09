@@ -47,6 +47,7 @@ export default function HelpPage() {
     "payslips",
     "externalPay",
     "importedAttendance",
+    "integrationsApi",
     "peopleAndPhotos",
     "permissions",
     "calendar",

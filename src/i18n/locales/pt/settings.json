@@ -295,6 +295,10 @@
     "auditLog": {
       "title": "Registo de ações",
       "hint": "Quem fez o quê e quando, com o motivo."
+    },
+    "integrations": {
+      "title": "Integrações e API",
+      "hint": "Chaves para contabilidade, RH e outros sistemas, receção de presenças e webhooks."
     }
   }
 }

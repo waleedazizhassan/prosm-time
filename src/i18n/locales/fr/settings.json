@@ -295,6 +295,10 @@
     "auditLog": {
       "title": "Journal des actions",
       "hint": "Qui a fait quoi et quand, avec le motif."
+    },
+    "integrations": {
+      "title": "Intégrations et API",
+      "hint": "Clés pour la comptabilité, les RH et d'autres systèmes, réception des présences et webhooks."
     }
   }
 }

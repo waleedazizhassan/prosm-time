@@ -149,6 +149,10 @@
     "importedAttendance": {
       "title": "Presenze da sistemi collegati",
       "body": "Un altro sistema (lettore di impronte o sistema HR) può inviare entrate e uscite tramite API con una chiave creata dal titolare. Inviare due volte lo stesso evento non cambia nulla. Gli eventi attendono nella console del responsabile sotto \"Presenze ricevute tramite API\" e non contano nulla (ore, paghe, dashboard, ferie) finché il titolare o un responsabile autorizzato non li approva. L'approvazione unisce ogni entrata e l'uscita successiva della stessa persona in un record, registrato nel registro azioni; sovrapposizioni o uscite mancanti restano con il motivo. Rifiutare richiede un motivo. I software di contabilità e HR possono anche leggere dipendenti, sedi, presenze, ferie e saldi, turni e paghe dei cicli bloccati tramite la stessa API."
+    },
+    "integrationsApi": {
+      "title": "Integrazioni e API",
+      "body": "Il titolare apre Impostazioni, poi Integrazioni e API, per creare una chiave per un sistema contabile, HR o altro e scegliere cosa può leggere: dipendenti (dati sensibili a parte), sedi, presenze, turni, ferie e saldi e le buste paga dei cicli chiusi; ricevere presenze è una scelta separata. La chiave si vede una sola volta, può avere una scadenza e revocata in qualsiasi momento. I webhook inviano un avviso firmato all'indirizzo HTTPS del titolare quando cambiano dipendenti, presenze o decisioni sulle ferie; gli invii falliti vengono ritentati e si possono reinviare. La descrizione tecnica è il contratto dell'API (openapi.json). Ogni richiesta è registrata."
     }
   },
   "faq": {

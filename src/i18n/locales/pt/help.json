@@ -149,6 +149,10 @@
     "importedAttendance": {
       "title": "Assiduidade de sistemas ligados",
       "body": "Outro sistema (leitor biométrico ou sistema de RH) pode enviar entradas e saídas pela API com uma chave criada pelo proprietário. Enviar o mesmo evento duas vezes não duplica nada. Os eventos esperam na consola do gestor em \"Assiduidade recebida pela API\" e não contam para nada (horas, folha, painel, férias) até o proprietário ou um gestor autorizado os aprovar. Aprovar junta cada entrada e a saída seguinte da mesma pessoa num registo, anotado no registo de ações; sobreposições ou saídas em falta ficam com o motivo. Rejeitar exige motivo. Sistemas de contabilidade e RH também podem ler funcionários, locais, assiduidade, férias e saldos, turnos e a folha de ciclos fechados pela mesma API."
+    },
+    "integrationsApi": {
+      "title": "Integrações e API",
+      "body": "O proprietário abre Definições e depois Integrações e API para criar uma chave para um sistema de contabilidade, RH ou outro e escolher o que pode ler: funcionários (dados sensíveis à parte), locais, presenças, turnos, ausências e saldos, e os salários dos ciclos fechados; receber presenças é uma escolha separada. A chave aparece uma vez, pode ter uma data de validade e revogada a qualquer momento. Os webhooks enviam um aviso assinado para o endereço HTTPS do proprietário quando mudam funcionários, presenças ou decisões de ausência; os envios falhados são repetidos e podem ser reenviados. A descrição técnica é o contrato da API (openapi.json). Cada pedido fica registado."
     }
   },
   "faq": {
