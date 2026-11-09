@@ -216,7 +216,18 @@
     "insuranceExempt": "Not insured",
     "taxExempt": "Tax exempt",
     "insurableWage": "Fixed insurable wage (optional)",
-    "statutoryHint": "This is not the salary - enter the salary under \"Basic salary\" above. A fixed insurable wage replaces the basic salary for insurance only, within the limits."
+    "statutoryHint": "This is not the salary - enter the salary under \"Basic salary\" above. A fixed insurable wage replaces the basic salary for insurance only, within the limits.",
+    "editorTitle": "{{name}}'s salary",
+    "saveAll": "Save everything",
+    "savedAll": "Saved.",
+    "applyFromDate": "New values apply from",
+    "applyFromHint": "Usually the 1st of the month",
+    "salaryTitle": "Salary and fixed items",
+    "salaryHint": "Type the amounts - Arabic digits are accepted. Unchanged values are not saved again; an emptied box ends the item.",
+    "moreOptions": "More options (currency, dates, notes)",
+    "badNumber": "Invalid number in: {{field}}",
+    "search": "Search by name or code",
+    "tapToEdit": "Tap anyone to add or edit their whole salary."
   },
   "installments": {
     "title": "Installments and advances",

@@ -216,7 +216,18 @@
     "insuranceExempt": "Non assicurato",
     "taxExempt": "Esente da imposta",
     "insurableWage": "Retribuzione assicurabile fissa (facoltativa)",
-    "statutoryHint": "Non è lo stipendio: inseriscilo sopra in \"Paga base\". Una retribuzione assicurabile fissa sostituisce la base solo per i contributi, entro i limiti."
+    "statutoryHint": "Non è lo stipendio: inseriscilo sopra in \"Paga base\". Una retribuzione assicurabile fissa sostituisce la base solo per i contributi, entro i limiti.",
+    "editorTitle": "Stipendio di {{name}}",
+    "saveAll": "Salva tutto",
+    "savedAll": "Salvato.",
+    "applyFromDate": "I nuovi valori valgono dal",
+    "applyFromHint": "Di solito il 1° del mese",
+    "salaryTitle": "Stipendio e voci fisse",
+    "salaryHint": "Inserisci gli importi - le cifre arabe sono accettate. I valori invariati non vengono risalvati; una casella svuotata chiude la voce.",
+    "moreOptions": "Altre opzioni (valuta, date, note)",
+    "badNumber": "Numero non valido in: {{field}}",
+    "search": "Cerca per nome o codice",
+    "tapToEdit": "Tocca una persona per aggiungere o modificare tutto il suo stipendio."
   },
   "installments": {
     "title": "Rate e anticipi",

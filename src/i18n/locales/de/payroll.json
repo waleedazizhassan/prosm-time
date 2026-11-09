@@ -216,7 +216,18 @@
     "insuranceExempt": "Nicht versichert",
     "taxExempt": "Steuerbefreit",
     "insurableWage": "Fester Versicherungslohn (optional)",
-    "statutoryHint": "Das ist nicht das Gehalt: Gehalt oben unter \"Grundgehalt\" eintragen. Ein fester Versicherungslohn ersetzt nur für die Versicherung das Grundgehalt, innerhalb der Grenzen."
+    "statutoryHint": "Das ist nicht das Gehalt: Gehalt oben unter \"Grundgehalt\" eintragen. Ein fester Versicherungslohn ersetzt nur für die Versicherung das Grundgehalt, innerhalb der Grenzen.",
+    "editorTitle": "Gehalt von {{name}}",
+    "saveAll": "Alles speichern",
+    "savedAll": "Gespeichert.",
+    "applyFromDate": "Neue Werte gelten ab",
+    "applyFromHint": "Meist der 1. des Monats",
+    "salaryTitle": "Gehalt und feste Posten",
+    "salaryHint": "Beträge eingeben - arabische Ziffern werden akzeptiert. Unveränderte Werte werden nicht erneut gespeichert; ein geleertes Feld beendet den Posten.",
+    "moreOptions": "Weitere Optionen (Währung, Daten, Notizen)",
+    "badNumber": "Ungültige Zahl in: {{field}}",
+    "search": "Nach Name oder Code suchen",
+    "tapToEdit": "Tippen Sie auf eine Person, um ihr ganzes Gehalt anzulegen oder zu ändern."
   },
   "installments": {
     "title": "Raten und Vorschüsse",

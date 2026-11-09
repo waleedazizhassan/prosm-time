@@ -216,7 +216,18 @@
     "insuranceExempt": "No asegurado",
     "taxExempt": "Exento de impuesto",
     "insurableWage": "Salario asegurable fijo (opcional)",
-    "statutoryHint": "Esto no es el salario: anótelo arriba en \"Salario base\". Un salario asegurable fijo solo sustituye al base para la seguridad social, dentro de los límites."
+    "statutoryHint": "Esto no es el salario: anótelo arriba en \"Salario base\". Un salario asegurable fijo solo sustituye al base para la seguridad social, dentro de los límites.",
+    "editorTitle": "Salario de {{name}}",
+    "saveAll": "Guardar todo",
+    "savedAll": "Guardado.",
+    "applyFromDate": "Los nuevos valores rigen desde",
+    "applyFromHint": "Normalmente el día 1 del mes",
+    "salaryTitle": "Salario y conceptos fijos",
+    "salaryHint": "Escriba los importes - se aceptan dígitos árabes. Lo que no cambia no se vuelve a guardar; una casilla vacía termina el concepto.",
+    "moreOptions": "Más opciones (moneda, fechas, notas)",
+    "badNumber": "Número no válido en: {{field}}",
+    "search": "Buscar por nombre o código",
+    "tapToEdit": "Toque a cualquier persona para añadir o editar todo su salario."
   },
   "installments": {
     "title": "Cuotas y anticipos",
