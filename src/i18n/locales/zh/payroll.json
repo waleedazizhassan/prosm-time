@@ -54,7 +54,20 @@
     "partial": "期间的 {{percent}}%",
     "published": "工资单已发布（v{{version}}）",
     "recalculate": "按档案重建",
-    "reopenedBecause": "已重新打开：{{reason}}"
+    "reopenedBecause": "已重新打开：{{reason}}",
+    "search": "按姓名或编号搜索",
+    "sortBy": "排序方式",
+    "sort": {
+      "name": "姓名",
+      "code": "编号",
+      "net": "实发（从高到低）"
+    },
+    "copyVariables": "复制上一周期的变动项",
+    "copied": "已复制 {{copied}} 项为可编辑草稿；{{skipped}} 项已存在。",
+    "chooseAll": "全选当前显示",
+    "chooseNone": "取消选择",
+    "addToChosen": "为所选 {{count}} 人添加一项",
+    "bulkHint": "所选人员都会添加同一项；若其中有人无法添加（例如不在您的站点范围），则全部不添加。"
   },
   "actions": {
     "submit": "提交审核",

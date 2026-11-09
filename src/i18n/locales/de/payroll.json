@@ -54,7 +54,20 @@
     "partial": "{{percent}} % des Zeitraums",
     "published": "Abrechnungen veröffentlicht (v{{version}})",
     "recalculate": "Aus den Profilen neu aufbauen",
-    "reopenedBecause": "Wieder geöffnet: {{reason}}"
+    "reopenedBecause": "Wieder geöffnet: {{reason}}",
+    "search": "Nach Name oder Nummer suchen",
+    "sortBy": "Sortieren nach",
+    "sort": {
+      "name": "Name",
+      "code": "Nummer",
+      "net": "Netto (höchstes zuerst)"
+    },
+    "copyVariables": "Variablen des Vorlaufs übernehmen",
+    "copied": "{{copied}} Posten als Entwurf übernommen; {{skipped}} bereits vorhanden.",
+    "chooseAll": "Alle angezeigten wählen",
+    "chooseNone": "Auswahl aufheben",
+    "addToChosen": "Posten für {{count}} Ausgewählte",
+    "bulkHint": "Alle Ausgewählten erhalten denselben Posten - oder niemand, wenn es bei einer Person nicht geht (z. B. außerhalb Ihrer Standorte)."
   },
   "actions": {
     "submit": "Zur Prüfung senden",

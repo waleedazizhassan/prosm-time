@@ -47,6 +47,12 @@ export default function PayrollCyclePage() {
   const [reason, setReason] = useState("");
   const [acknowledge, setAcknowledge] = useState(false);
   const [accepting, setAccepting] = useState<{ s: Suggestion; componentId: string; amount: string } | null>(null);
+  // 2026-11-09 (spec 15.14): search, sort and choose people; one line for the chosen ones
+  const [search, setSearch] = useState("");
+  const [sortBy, setSortBy] = useState<"name" | "net" | "code">("name");
+  const [chosen, setChosen] = useState<string[]>([]);
+  const [bulk, setBulk] = useState<{ componentId: string; amount: string; notes: string } | null>(null);
+  const [notice, setNotice] = useState("");
   const [importResult, setImportResult] = useState<{ errors: { row: number; code: string }[]; valid: number; saved: boolean; rows: Record<string, unknown>[]; fileName: string } | null>(null);
 
   const load = useCallback(async () => {
@@ -67,6 +73,18 @@ export default function PayrollCyclePage() {
     void load();
   }, [load]);
 
+  // a line or a bulk line being typed is not lost by leaving the page by accident
+  const dirty = Boolean((line && (line.amount || line.notes)) || (bulk && (bulk.amount || bulk.notes)));
+  useEffect(() => {
+    if (!dirty) return;
+    const warn = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [dirty]);
+
   const run = async (key: string, task: () => Promise<{ error: string | null }>) => {
     setBusy(key);
     setError("");
@@ -83,6 +101,12 @@ export default function PayrollCyclePage() {
   const { cycle, can, employees } = detail;
   const editable = cycle.status === "draft" || cycle.status === "reopened";
   const currencies = [...new Set(employees.map((e) => e.currency))];
+  const needle = search.trim().toLowerCase();
+  const shown = employees
+    .filter((e) => !needle || e.full_name.toLowerCase().includes(needle) || (e.employee_code ?? "").toLowerCase().includes(needle))
+    .sort((x, y) => (sortBy === "net" ? Number(y.net_salary) - Number(x.net_salary) : sortBy === "code" ? (x.employee_code ?? "").localeCompare(y.employee_code ?? "", undefined, { numeric: true }) : x.full_name.localeCompare(y.full_name)));
+  const canBulk = editable && can.enterVariables;
+  const toggle = (id: string) => setChosen((current) => (current.includes(id) ? current.filter((x) => x !== id) : [...current, id]));
 
   const doAction = async () => {
     if (!action) return;
@@ -187,7 +211,38 @@ export default function PayrollCyclePage() {
       ) : null}
 
       <Card title={t("cycle.people", { count: employees.length })} subtitle={currencies.length > 1 ? t("cycle.manyCurrencies") : undefined}>
-        <Table columns={columns} data={employees} getRowId={(e) => e.id} emptyMessage={t("cycle.empty")} onRowClick={(e) => setOpen(e)} />
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)", alignItems: "flex-end", marginBottom: "var(--space-2)" }}>
+          <div style={{ flex: "1 1 14rem" }}>
+            <Input label={t("cycle.search")} name="cycleSearch" value={search} onChange={(event) => setSearch(event.target.value)} />
+          </div>
+          <div style={{ minWidth: 150 }}>
+            <Select label={t("cycle.sortBy")} name="cycleSort" value={sortBy} onChange={(event) => setSortBy(event.target.value as "name" | "net" | "code")}
+              options={(["name", "code", "net"] as const).map((key) => ({ value: key, label: t(`cycle.sort.${key}`) }))} />
+          </div>
+          {canBulk ? (
+            <>
+              <Button size="sm" variant="ghost" loading={busy === "copy"} onClick={async () => {
+                setNotice("");
+                setBusy("copy");
+                const result = await PayrollCycleRepository.copyVariables(cycleId);
+                setBusy("");
+                if (result.error || !result.data) setError(payrollError(result.error, t));
+                else setNotice(t("cycle.copied", { copied: result.data.copied, skipped: result.data.skipped }));
+                await load();
+              }}>{t("cycle.copyVariables")}</Button>
+              <Button size="sm" variant="ghost" onClick={() => setChosen(chosen.length === shown.length ? [] : shown.map((e) => e.id))}>
+                {chosen.length === shown.length && shown.length > 0 ? t("cycle.chooseNone") : t("cycle.chooseAll")}
+              </Button>
+              <Button size="sm" disabled={chosen.length === 0} onClick={() => setBulk({ componentId: variableComponents[0]?.id ?? "", amount: "", notes: "" })}>
+                {t("cycle.addToChosen", { count: chosen.length })}
+              </Button>
+            </>
+          ) : null}
+        </div>
+        {notice ? <HintText small>{notice}</HintText> : null}
+        <Table columns={canBulk ? [{ key: "choose", header: "", render: (e: CycleEmployee) => (
+            <input type="checkbox" aria-label={e.full_name} checked={chosen.includes(e.id)} onClick={(event) => event.stopPropagation()} onChange={() => toggle(e.id)} />
+          ) }, ...columns] : columns} data={shown} getRowId={(e) => e.id} emptyMessage={t("cycle.empty")} onRowClick={(e) => setOpen(e)} />
       </Card>
 
       {suggestions.length > 0 ? (
@@ -227,6 +282,27 @@ export default function PayrollCyclePage() {
           </div>
         </Card>
       ) : null}
+
+      {/* one line for the chosen people (all or nothing) */}
+      <Modal isOpen={bulk !== null} onClose={() => setBulk(null)} title={t("cycle.addToChosen", { count: chosen.length })}
+        footer={<Button loading={busy === "bulk"} disabled={!bulk?.componentId || bulk.amount === "" || Number(bulk.amount) < 0} onClick={async () => {
+          if (!bulk) return;
+          const okBulk = await run("bulk", () => PayrollCycleRepository.addLineBulk(cycleId, chosen, bulk.componentId, Number(bulk.amount), bulk.notes.trim() || null));
+          if (okBulk) {
+            setBulk(null);
+            setChosen([]);
+          }
+        }}>{t("lines.save")}</Button>}>
+        {bulk ? (
+          <div style={{ display: "grid", gap: "var(--space-3)" }}>
+            <Select label={t("lines.component")} name="bulkComponent" value={bulk.componentId} onChange={(event) => setBulk({ ...bulk, componentId: event.target.value })}
+              options={variableComponents.map((c) => ({ value: c.id, label: isRtl ? c.name_ar : c.name_en || c.name_ar }))} />
+            <Input label={t("lines.amount")} name="bulkAmount" type="number" value={bulk.amount} onChange={(event) => setBulk({ ...bulk, amount: event.target.value })} />
+            <Input label={t("lines.notes")} name="bulkNotes" value={bulk.notes} onChange={(event) => setBulk({ ...bulk, notes: event.target.value })} />
+            <HintText small>{t("cycle.bulkHint")}</HintText>
+          </div>
+        ) : null}
+      </Modal>
 
       {/* one person's lines */}
       <Modal isOpen={Boolean(open)} onClose={() => setOpen(null)} title={open ? open.full_name : ""} size="lg"

@@ -54,7 +54,20 @@
     "partial": "{{percent}} % de la période",
     "published": "Bulletins publiés (v{{version}})",
     "recalculate": "Reconstruire depuis les dossiers",
-    "reopenedBecause": "Rouvert : {{reason}}"
+    "reopenedBecause": "Rouvert : {{reason}}",
+    "search": "Rechercher par nom ou matricule",
+    "sortBy": "Trier par",
+    "sort": {
+      "name": "Nom",
+      "code": "Matricule",
+      "net": "Net (le plus élevé d'abord)"
+    },
+    "copyVariables": "Copier les variables du cycle précédent",
+    "copied": "{{copied}} ligne(s) copiée(s) en brouillon ; {{skipped}} déjà présente(s).",
+    "chooseAll": "Tout sélectionner",
+    "chooseNone": "Effacer la sélection",
+    "addToChosen": "Ajouter une ligne à {{count}} sélection(s)",
+    "bulkHint": "Toutes les personnes choisies reçoivent la même ligne, ou personne si l'une ne peut pas (par exemple hors de vos sites)."
   },
   "actions": {
     "submit": "Envoyer en revue",

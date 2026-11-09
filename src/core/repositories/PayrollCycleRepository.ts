@@ -299,6 +299,10 @@ class PayrollCycleRepository {
       p_cycle_employee_id: cycleEmployeeId, p_line_id: lineId, p_component_id: componentId, p_amount: amount, p_notes: notes,
       p_expected_version: expectedVersion, p_source: source, p_source_ref: sourceRef,
     });
+  // 2026-11-09 (spec 15.14): last cycle's variables as drafts; one line for several people
+  copyVariables = (cycleId: string) => this.call<{ copied: number; skipped: number }>("copy_prosm_time_payroll_variables", { p_cycle_id: cycleId });
+  addLineBulk = (cycleId: string, cycleEmployeeIds: string[], componentId: string, amount: number, notes: string | null) =>
+    this.call<{ added: number }>("add_prosm_time_payroll_line_bulk", { p_cycle_id: cycleId, p_cycle_employee_ids: cycleEmployeeIds, p_component_id: componentId, p_amount: amount, p_notes: notes });
   deleteLine = (lineId: string, expectedVersion: number) => this.call<{ success: boolean }>("delete_prosm_time_payroll_line", { p_line_id: lineId, p_expected_version: expectedVersion });
   suggestions = (cycleId: string) => this.call<Suggestion[]>("list_prosm_time_payroll_suggestions", { p_cycle_id: cycleId });
   validate = (cycleId: string) => this.call<{ errors: ValidationItem[]; warnings: ValidationItem[]; canSubmit: boolean }>("validate_prosm_time_payroll_cycle", { p_cycle_id: cycleId });

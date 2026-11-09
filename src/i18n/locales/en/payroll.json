@@ -54,7 +54,20 @@
     "partial": "{{percent}}% of the period",
     "published": "Payslips published (v{{version}})",
     "recalculate": "Rebuild from the profiles",
-    "reopenedBecause": "Reopened: {{reason}}"
+    "reopenedBecause": "Reopened: {{reason}}",
+    "search": "Search by name or code",
+    "sortBy": "Sort by",
+    "sort": {
+      "name": "Name",
+      "code": "Code",
+      "net": "Net (highest first)"
+    },
+    "copyVariables": "Copy last cycle's variables",
+    "copied": "{{copied}} line(s) copied as drafts to edit; {{skipped}} already here.",
+    "chooseAll": "Choose all shown",
+    "chooseNone": "Clear the choice",
+    "addToChosen": "Add a line to {{count}} chosen",
+    "bulkHint": "Everyone chosen gets the same line, or nobody does if one of them cannot (for example outside your sites)."
   },
   "actions": {
     "submit": "Send for review",

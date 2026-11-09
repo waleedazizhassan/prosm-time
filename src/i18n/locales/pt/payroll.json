@@ -54,7 +54,20 @@
     "partial": "{{percent}}% do período",
     "published": "Recibos publicados (v{{version}})",
     "recalculate": "Reconstruir a partir das fichas",
-    "reopenedBecause": "Reaberto: {{reason}}"
+    "reopenedBecause": "Reaberto: {{reason}}",
+    "search": "Pesquisar por nome ou código",
+    "sortBy": "Ordenar por",
+    "sort": {
+      "name": "Nome",
+      "code": "Código",
+      "net": "Líquido (maior primeiro)"
+    },
+    "copyVariables": "Copiar variáveis do ciclo anterior",
+    "copied": "{{copied}} linha(s) copiadas como rascunho; {{skipped}} já existiam.",
+    "chooseAll": "Escolher todos os mostrados",
+    "chooseNone": "Limpar seleção",
+    "addToChosen": "Adicionar linha a {{count}} escolhidos",
+    "bulkHint": "Todos os escolhidos recebem a mesma linha, ou ninguém se algum não puder (por exemplo fora dos seus locais)."
   },
   "actions": {
     "submit": "Enviar para revisão",

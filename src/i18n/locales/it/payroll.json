@@ -54,7 +54,20 @@
     "partial": "{{percent}}% del periodo",
     "published": "Buste paga pubblicate (v{{version}})",
     "recalculate": "Ricostruisci dalle schede",
-    "reopenedBecause": "Riaperto: {{reason}}"
+    "reopenedBecause": "Riaperto: {{reason}}",
+    "search": "Cerca per nome o matricola",
+    "sortBy": "Ordina per",
+    "sort": {
+      "name": "Nome",
+      "code": "Matricola",
+      "net": "Netto (più alto prima)"
+    },
+    "copyVariables": "Copia le variabili del ciclo precedente",
+    "copied": "{{copied}} voce/i copiate come bozza; {{skipped}} già presenti.",
+    "chooseAll": "Scegli tutti i mostrati",
+    "chooseNone": "Annulla la scelta",
+    "addToChosen": "Aggiungi una voce a {{count}} scelti",
+    "bulkHint": "Tutti i scelti ricevono la stessa voce, o nessuno se per uno non è possibile (per esempio fuori dalle tue sedi)."
   },
   "actions": {
     "submit": "Invia in revisione",
