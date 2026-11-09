@@ -80,7 +80,11 @@
     "payroll.import": "استيراد الرواتب",
     "payroll.manage_installments": "إدارة الأقساط",
     "payroll.publish_payslips": "نشر مفردات المرتب",
-    "payroll.view_audit_log": "عرض سجل الرواتب"
+    "payroll.view_audit_log": "عرض سجل الرواتب",
+    "announcements.publish": "نشر الإعلانات",
+    "announcements.manage": "إدارة كل الإعلانات",
+    "announcements.view_reads": "رؤية من قرأ الإعلانات",
+    "departments.manage": "إدارة الأقسام"
   },
   "invite": {
     "actionLabel": "دعوة موظف",

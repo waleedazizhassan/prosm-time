@@ -156,5 +156,14 @@
     "intro": "Conforme pedido, segue em anexo, em PDF, o seu recibo de vencimento aprovado de {{cycle}} da {{org}}.",
     "version": "Versão do ciclo v{{version}} · n.º {{serial}}.",
     "private": "Este documento é pessoal e confidencial. Se não o pediu, avise o seu responsável."
+  },
+  "announcement": {
+    "subject": "Anúncio",
+    "statementSubject": "Comunicado oficial",
+    "from": "Um anúncio de {{org}}",
+    "statementFrom": "Um comunicado oficial de {{org}}",
+    "links": "Ligações:",
+    "confirm": "Confirme no PROSM Time que o leu.",
+    "files": "Ficheiros anexos: {{count}} - abra-os no PROSM Time."
   }
 }

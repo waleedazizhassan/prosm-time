@@ -80,7 +80,11 @@
     "payroll.import": "Lohndaten importieren",
     "payroll.manage_installments": "Raten verwalten",
     "payroll.publish_payslips": "Lohnzettel veröffentlichen",
-    "payroll.view_audit_log": "Lohnprotokoll ansehen"
+    "payroll.view_audit_log": "Lohnprotokoll ansehen",
+    "announcements.publish": "Mitteilungen veröffentlichen",
+    "announcements.manage": "Alle Mitteilungen verwalten",
+    "announcements.view_reads": "Sehen, wer Mitteilungen gelesen hat",
+    "departments.manage": "Abteilungen verwalten"
   },
   "invite": {
     "actionLabel": "Mitarbeiter einladen",

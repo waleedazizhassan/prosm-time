@@ -186,6 +186,21 @@ serve(async (request: Request) => {
       return errorResponse(createError?.message ?? "Unable to invite this employee.", 500, "INVITE_FAILED");
     }
 
+    // 2026-11-09 Media Center: the department chosen in the form - only one of this organisation's
+    // active departments; anything else is ignored rather than failing the invitation.
+    if (typeof payload.departmentId === "string" && /^[0-9a-f-]{36}$/i.test(payload.departmentId)) {
+      const { data: department } = await serviceClient
+        .from("departments")
+        .select("id")
+        .eq("id", payload.departmentId)
+        .eq("organization_id", callerRow.organization_id)
+        .eq("is_active", true)
+        .maybeSingle();
+      if (department) {
+        await serviceClient.from("users").update({ department_id: department.id }).eq("auth_user_id", newAuthUserId).eq("organization_id", callerRow.organization_id);
+      }
+    }
+
     const { data: organizationRow } = await serviceClient
       .from("organizations")
       .select("name")

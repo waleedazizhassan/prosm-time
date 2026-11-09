@@ -249,6 +249,13 @@ export default function localizeNotification(notification: AppNotification, t: T
       return { title: t("shell:notifications.payslip.sentTitle"), body: t("shell:notifications.payslip.sentBody", { cycle: String(data.cycleTitle ?? "") }) };
     case "payslip_send_failed":
       return { title: t("shell:notifications.payslip.failedTitle"), body: t("shell:notifications.payslip.failedBody", { cycle: String(data.cycleTitle ?? "") }) };
+    case "announcement_published": {
+      const vars = { title: String(data.title ?? notification.body ?? "") };
+      return {
+        title: t(data.kind === "statement" ? "shell:notifications.announcement.statementTitle" : "shell:notifications.announcement.publishedTitle"),
+        body: t(data.requiresAck ? "shell:notifications.announcement.ackBody" : "shell:notifications.announcement.publishedBody", vars),
+      };
+    }
     case "payslip_published":
       return { title: t("shell:notifications.payslip.publishedTitle"), body: t("shell:notifications.payslip.publishedBody") };
     case "owner_authority_granted":

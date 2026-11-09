@@ -80,7 +80,11 @@
     "payroll.import": "Importar folha de salários",
     "payroll.manage_installments": "Gerir prestações",
     "payroll.publish_payslips": "Publicar recibos de vencimento",
-    "payroll.view_audit_log": "Ver registo salarial"
+    "payroll.view_audit_log": "Ver registo salarial",
+    "announcements.publish": "Publicar anúncios",
+    "announcements.manage": "Gerir todos os anúncios",
+    "announcements.view_reads": "Ver quem leu os anúncios",
+    "departments.manage": "Gerir departamentos"
   },
   "invite": {
     "actionLabel": "Convidar funcionário",

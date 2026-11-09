@@ -80,7 +80,11 @@
     "payroll.import": "Импорт зарплаты",
     "payroll.manage_installments": "Управление рассрочками",
     "payroll.publish_payslips": "Публикация расчётных листов",
-    "payroll.view_audit_log": "Журнал действий по зарплате"
+    "payroll.view_audit_log": "Журнал действий по зарплате",
+    "announcements.publish": "Публиковать объявления",
+    "announcements.manage": "Управлять всеми объявлениями",
+    "announcements.view_reads": "Видеть, кто прочитал объявления",
+    "departments.manage": "Управлять отделами"
   },
   "invite": {
     "actionLabel": "Пригласить сотрудника",

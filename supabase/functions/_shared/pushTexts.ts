@@ -188,6 +188,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "failedBody": "تعذر إرسال مفردات المرتب عن {{cycle}}. يمكنك المحاولة مرة أخرى.",
         "publishedTitle": "مفردات مرتبك متاحة",
         "publishedBody": "نُشرت مفردات مرتب جديدة. يمكنك عرضها أو طلبها بالبريد الإلكتروني."
+      },
+      "announcement": {
+        "publishedTitle": "إعلان جديد",
+        "statementTitle": "بيان رسمي جديد",
+        "publishedBody": "{{title}}",
+        "ackBody": "{{title}} - برجاء تأكيد القراءة."
       }
     },
     "leaveTypes": {
@@ -387,6 +393,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "failedBody": "Die Gehaltsabrechnung für {{cycle}} konnte nicht gesendet werden. Bitte erneut versuchen.",
         "publishedTitle": "Ihre Gehaltsabrechnung ist verfügbar",
         "publishedBody": "Eine neue Gehaltsabrechnung wurde veröffentlicht. Sie können sie ansehen oder per E-Mail anfordern."
+      },
+      "announcement": {
+        "publishedTitle": "Neue Mitteilung",
+        "statementTitle": "Neue offizielle Mitteilung",
+        "publishedBody": "{{title}}",
+        "ackBody": "{{title}} - bitte bestätigen Sie das Lesen."
       }
     },
     "leaveTypes": {
@@ -586,6 +598,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "failedBody": "The payslip of {{cycle}} could not be sent. You can try again.",
         "publishedTitle": "Your payslip is available",
         "publishedBody": "A new payslip was published. You can view it or ask for it by email."
+      },
+      "announcement": {
+        "publishedTitle": "New announcement",
+        "statementTitle": "New official statement",
+        "publishedBody": "{{title}}",
+        "ackBody": "{{title}} - please confirm you have read it."
       }
     },
     "leaveTypes": {
@@ -785,6 +803,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "failedBody": "No se pudo enviar el recibo de nómina de {{cycle}}. Puede intentarlo de nuevo.",
         "publishedTitle": "Su recibo de nómina está disponible",
         "publishedBody": "Se publicó un nuevo recibo de nómina. Puede verlo o pedirlo por correo."
+      },
+      "announcement": {
+        "publishedTitle": "Nuevo anuncio",
+        "statementTitle": "Nuevo comunicado oficial",
+        "publishedBody": "{{title}}",
+        "ackBody": "{{title}} - confirma que lo has leído."
       }
     },
     "leaveTypes": {
@@ -984,6 +1008,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "failedBody": "Le bulletin de paie de {{cycle}} n'a pas pu être envoyé. Vous pouvez réessayer.",
         "publishedTitle": "Votre bulletin de paie est disponible",
         "publishedBody": "Un nouveau bulletin de paie a été publié. Vous pouvez le consulter ou le demander par e-mail."
+      },
+      "announcement": {
+        "publishedTitle": "Nouvelle annonce",
+        "statementTitle": "Nouveau communiqué officiel",
+        "publishedBody": "{{title}}",
+        "ackBody": "{{title}} - merci de confirmer la lecture."
       }
     },
     "leaveTypes": {
@@ -1183,6 +1213,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "failedBody": "Non è stato possibile inviare la busta paga di {{cycle}}. Puoi riprovare.",
         "publishedTitle": "La tua busta paga è disponibile",
         "publishedBody": "È stata pubblicata una nuova busta paga. Puoi vederla o richiederla via email."
+      },
+      "announcement": {
+        "publishedTitle": "Nuovo annuncio",
+        "statementTitle": "Nuovo comunicato ufficiale",
+        "publishedBody": "{{title}}",
+        "ackBody": "{{title}} - conferma di averlo letto."
       }
     },
     "leaveTypes": {
@@ -1382,6 +1418,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "failedBody": "Não foi possível enviar o recibo de vencimento de {{cycle}}. Pode tentar novamente.",
         "publishedTitle": "O seu recibo de vencimento está disponível",
         "publishedBody": "Foi publicado um novo recibo de vencimento. Pode vê-lo ou pedi-lo por e-mail."
+      },
+      "announcement": {
+        "publishedTitle": "Novo anúncio",
+        "statementTitle": "Novo comunicado oficial",
+        "publishedBody": "{{title}}",
+        "ackBody": "{{title}} - confirme que leu."
       }
     },
     "leaveTypes": {
@@ -1581,6 +1623,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "failedBody": "Не удалось отправить расчётный листок за {{cycle}}. Попробуйте ещё раз.",
         "publishedTitle": "Расчётный листок доступен",
         "publishedBody": "Опубликован новый расчётный листок. Его можно посмотреть или запросить по почте."
+      },
+      "announcement": {
+        "publishedTitle": "Новое объявление",
+        "statementTitle": "Новое официальное заявление",
+        "publishedBody": "{{title}}",
+        "ackBody": "{{title}} - подтвердите прочтение."
       }
     },
     "leaveTypes": {
@@ -1780,6 +1828,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "failedBody": "{{cycle}} 的工资单未能发送，您可以重试。",
         "publishedTitle": "您的工资单已可查看",
         "publishedBody": "新的工资单已发布，您可以查看或通过邮件申请。"
+      },
+      "announcement": {
+        "publishedTitle": "新公告",
+        "statementTitle": "新的正式声明",
+        "publishedBody": "{{title}}",
+        "ackBody": "{{title}} - 请确认已阅读。"
       }
     },
     "leaveTypes": {

@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import { useAuth } from "../../core/context/AuthContext";
 
+import DepartmentsSettingsCard from "./DepartmentsSettingsCard";
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
 import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
@@ -84,9 +85,11 @@ export default function OrganizationSettingsPage() {
 
       {/* 2026-11-09 B-05: grouped like the target settings tree (spec 25.5); a section shows only
           what the reader may change, and a setting that lives on its own page is linked from here. */}
-      {isOwner || hasPermission("calendar.manage") ? <SectionHeading>{t("sections.organization")}</SectionHeading> : null}
+      {isOwner || hasPermission("calendar.manage") || hasPermission("departments.manage") ? <SectionHeading>{t("sections.organization")}</SectionHeading> : null}
       {isOwner ? <PlanSettingsCard /> : null}
       {hasPermission("calendar.manage") ? <SettingsLink to="/calendar" title={t("links.calendar.title")} hint={t("links.calendar.hint")} /> : null}
+      {/* 2026-11-09 Media Center: departments (announcements can be addressed to them) */}
+      {hasPermission("departments.manage") ? <DepartmentsSettingsCard /> : null}
 
       <SectionHeading>{t("sections.sites")}</SectionHeading>
       <SitePolicySettingsCard />

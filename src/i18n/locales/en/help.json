@@ -153,6 +153,14 @@
     "integrationsApi": {
       "title": "Integrations and the API",
       "body": "The owner opens Settings, then Integrations and API, to create a key for an accounting, HR or other system and choose what it may read: employees (sensitive fields separately), sites, attendance, shifts, leave and balances, and the payroll of locked cycles; receiving attendance is a separate choice. A key is shown once, can be given an expiry date, and can be revoked at any time. Webhooks send a signed notice to the owner's HTTPS address when employees, attendance or leave decisions change; failed deliveries are retried and can be sent again. The technical description for developers is the API contract (openapi.json). Every request is recorded."
+    },
+    "announcements": {
+      "title": "Announcements",
+      "body": "Under Announcements everyone sees what was addressed to them - announcements and official statements, with links and files - and confirms reading when asked. Whoever may publish (managers for the sites they manage and their people; the owner or whoever manages announcements for the whole organisation, departments or anyone) writes the text, chooses the recipients - the whole organisation, sites, departments or chosen people - adds links (videos as links) and images, PDF or Office files up to 10 MB, and either publishes now or sets a time, with an optional expiry. \"Publish only\" notifies in the app and on the phone; \"Publish with email\" also emails each recipient. Files are kept privately and open only for the recipients, through a link that works for a few minutes. \"Who read\" shows who opened and who confirmed, within the publisher's own people. A published announcement is not edited; it can be withdrawn with a reason, and everything is in the action log."
+    },
+    "departments": {
+      "title": "Departments",
+      "body": "The owner, or whoever manages departments, adds them in Settings. Each person belongs to one department at most: choose it when adding the person or on their page. Archiving a department keeps the people's history and stops it being chosen. Announcements can be addressed to departments."
     }
   },
   "faq": {

@@ -241,6 +241,12 @@
       "failedBody": "Non è stato possibile inviare la busta paga di {{cycle}}. Puoi riprovare.",
       "publishedTitle": "La tua busta paga è disponibile",
       "publishedBody": "È stata pubblicata una nuova busta paga. Puoi vederla o richiederla via email."
+    },
+    "announcement": {
+      "publishedTitle": "Nuovo annuncio",
+      "statementTitle": "Nuovo comunicato ufficiale",
+      "publishedBody": "{{title}}",
+      "ackBody": "{{title}} - conferma di averlo letto."
     }
   },
   "items": {
@@ -268,7 +274,8 @@
     "grantPermissions": "Assegna autorizzazioni",
     "payroll": "Paghe",
     "payslips": "Le mie buste paga",
-    "externalPay": "Paga esterni"
+    "externalPay": "Paga esterni",
+    "announcements": "Annunci"
   },
   "sosOverlay": {
     "title": "Allarme SOS/Emergenza",
@@ -378,7 +385,8 @@
     "grantPermissions": "Chi ha quali autorizzazioni - e tutta l'autorità del titolare",
     "payroll": "Cicli paghe, schede, i tre report e le buste paga - con permessi separati e versioni salvate.",
     "payslips": "Le tue buste paga pubblicate: visualizzale o richiedile via email.",
-    "externalPay": "Tariffe a giorno, settimana, mese o anno, elaborazioni, regole e rettifiche individuali - approvate e congelate, separate dalle paghe."
+    "externalPay": "Tariffe a giorno, settimana, mese o anno, elaborazioni, regole e rettifiche individuali - approvate e congelate, separate dalle paghe.",
+    "announcements": "Annunci e comunicati ufficiali indirizzati a te; conferma quelli che lo richiedono."
   },
   "backgroundDisclosure": {
     "title": "Posizione durante il turno",

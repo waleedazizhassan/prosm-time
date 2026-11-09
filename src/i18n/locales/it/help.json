@@ -153,6 +153,14 @@
     "integrationsApi": {
       "title": "Integrazioni e API",
       "body": "Il titolare apre Impostazioni, poi Integrazioni e API, per creare una chiave per un sistema contabile, HR o altro e scegliere cosa può leggere: dipendenti (dati sensibili a parte), sedi, presenze, turni, ferie e saldi e le buste paga dei cicli chiusi; ricevere presenze è una scelta separata. La chiave si vede una sola volta, può avere una scadenza e revocata in qualsiasi momento. I webhook inviano un avviso firmato all'indirizzo HTTPS del titolare quando cambiano dipendenti, presenze o decisioni sulle ferie; gli invii falliti vengono ritentati e si possono reinviare. La descrizione tecnica è il contratto dell'API (openapi.json). Ogni richiesta è registrata."
+    },
+    "announcements": {
+      "title": "Annunci",
+      "body": "In Annunci ognuno vede ciò che gli è stato indirizzato - annunci e comunicati ufficiali, con link e file - e conferma la lettura quando richiesto. Chi può pubblicare (i responsabili per le loro sedi e le loro persone; il titolare o chi gestisce gli annunci per tutta l'organizzazione, anche per reparti o chiunque) scrive il testo, sceglie i destinatari - tutta l'organizzazione, sedi, reparti o persone scelte -, aggiunge link (i video come link) e immagini, PDF o file Office fino a 10 MB, e pubblica subito o a un orario stabilito, con scadenza facoltativa. \"Solo pubblica\" avvisa nell'app e sul telefono; \"Pubblica con email\" invia anche un'email a ogni destinatario. I file sono conservati in privato e si aprono solo per i destinatari, con un link valido pochi minuti. \"Chi ha letto\" mostra chi ha aperto e chi ha confermato, tra le persone di chi pubblica. Un annuncio pubblicato non si modifica; si può ritirare con un motivo, e tutto è nel registro."
+    },
+    "departments": {
+      "title": "Reparti",
+      "body": "Il titolare, o chi gestisce i reparti, li aggiunge nelle Impostazioni. Ogni persona appartiene al massimo a un reparto: si sceglie quando la si aggiunge o nella sua pagina. Archiviare un reparto conserva lo storico e ne impedisce la scelta. Gli annunci possono essere rivolti ai reparti."
     }
   },
   "faq": {

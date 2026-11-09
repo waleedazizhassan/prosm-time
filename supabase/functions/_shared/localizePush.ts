@@ -203,6 +203,9 @@ export function localizePush(type: string, data: Data, language: string, fallbac
     case "payslip_send_failed":
       result = pair("payslip.failedTitle", "payslip.failedBody", { cycle: data.cycleTitle ?? "" });
       break;
+    case "announcement_published":
+      result = pair(data.kind === "statement" ? "announcement.statementTitle" : "announcement.publishedTitle", data.requiresAck ? "announcement.ackBody" : "announcement.publishedBody", { title: data.title ?? "" });
+      break;
     case "payslip_published":
       result = pair("payslip.publishedTitle", "payslip.publishedBody");
       break;

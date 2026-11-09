@@ -1,5 +1,6 @@
 import { useAuth } from "../../core/context/AuthContext";
 
+import UnreadAnnouncementsBanner from "../announcements/UnreadAnnouncementsBanner";
 import PageShell from "../../components/common/PageShell";
 import EmployeeHome from "./EmployeeHome";
 import ExceptionsCard from "./ExceptionsCard";
@@ -49,6 +50,8 @@ export default function DashboardPage() {
   // Supervisors; everyone else gets their own light home page.
   return (
     <PageShell compact>
+      {/* 2026-11-09 Media Center: announcements still to read or confirm */}
+      <UnreadAnnouncementsBanner />
       {/* v2.3.43 step 17: the Owner and whoever holds dashboard.view get the
           full dashboard; other management roles keep the light overview. */}
       {showFullDashboard ? <ManagerDashboard /> : hasManagementScope ? <AdminOverviewCard /> : <EmployeeHome />}

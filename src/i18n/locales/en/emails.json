@@ -153,5 +153,14 @@
     "intro": "As you asked, your approved payslip for {{cycle}} from {{org}} is attached as a PDF.",
     "version": "Cycle version v{{version}} · serial {{serial}}.",
     "private": "This document is personal and confidential. If you did not ask for it, tell your manager."
+  },
+  "announcement": {
+    "subject": "Announcement",
+    "statementSubject": "Official statement",
+    "from": "An announcement from {{org}}",
+    "statementFrom": "An official statement from {{org}}",
+    "links": "Links:",
+    "confirm": "Please confirm in PROSM Time that you have read it.",
+    "files": "Attached files: {{count}} - open them in PROSM Time."
   }
 }

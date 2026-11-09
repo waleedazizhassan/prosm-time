@@ -80,7 +80,11 @@
     "payroll.import": "Import payroll",
     "payroll.manage_installments": "Manage installments",
     "payroll.publish_payslips": "Publish payslips",
-    "payroll.view_audit_log": "View payroll log"
+    "payroll.view_audit_log": "View payroll log",
+    "announcements.publish": "Publish announcements",
+    "announcements.manage": "Manage all announcements",
+    "announcements.view_reads": "See who read announcements",
+    "departments.manage": "Manage departments"
   },
   "invite": {
     "actionLabel": "Invite employee",

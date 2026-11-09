@@ -241,6 +241,12 @@
       "failedBody": "No se pudo enviar el recibo de nómina de {{cycle}}. Puede intentarlo de nuevo.",
       "publishedTitle": "Su recibo de nómina está disponible",
       "publishedBody": "Se publicó un nuevo recibo de nómina. Puede verlo o pedirlo por correo."
+    },
+    "announcement": {
+      "publishedTitle": "Nuevo anuncio",
+      "statementTitle": "Nuevo comunicado oficial",
+      "publishedBody": "{{title}}",
+      "ackBody": "{{title}} - confirma que lo has leído."
     }
   },
   "items": {
@@ -268,7 +274,8 @@
     "grantPermissions": "Conceder permisos",
     "payroll": "Nómina",
     "payslips": "Mis recibos",
-    "externalPay": "Pago de externos"
+    "externalPay": "Pago de externos",
+    "announcements": "Anuncios"
   },
   "sosOverlay": {
     "title": "Alerta SOS/Emergencia",
@@ -378,7 +385,8 @@
     "grantPermissions": "Quién tiene qué permisos, y toda la autoridad del propietario",
     "payroll": "Ciclos, fichas, los tres informes y los recibos de nómina, con permisos separados y versiones guardadas.",
     "payslips": "Sus recibos publicados: véalos o pídalos por correo.",
-    "externalPay": "Tarifas por día, semana, mes o año, liquidaciones, la política y ajustes individuales: aprobados y congelados, separados de la nómina."
+    "externalPay": "Tarifas por día, semana, mes o año, liquidaciones, la política y ajustes individuales: aprobados y congelados, separados de la nómina.",
+    "announcements": "Anuncios y comunicados oficiales dirigidos a ti; confirma los que lo piden."
   },
   "backgroundDisclosure": {
     "title": "Ubicación durante tu turno",

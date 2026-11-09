@@ -153,6 +153,14 @@
     "integrationsApi": {
       "title": "Integrações e API",
       "body": "O proprietário abre Definições e depois Integrações e API para criar uma chave para um sistema de contabilidade, RH ou outro e escolher o que pode ler: funcionários (dados sensíveis à parte), locais, presenças, turnos, ausências e saldos, e os salários dos ciclos fechados; receber presenças é uma escolha separada. A chave aparece uma vez, pode ter uma data de validade e revogada a qualquer momento. Os webhooks enviam um aviso assinado para o endereço HTTPS do proprietário quando mudam funcionários, presenças ou decisões de ausência; os envios falhados são repetidos e podem ser reenviados. A descrição técnica é o contrato da API (openapi.json). Cada pedido fica registado."
+    },
+    "announcements": {
+      "title": "Anúncios",
+      "body": "Em Anúncios cada pessoa vê o que lhe foi dirigido - anúncios e comunicados oficiais, com ligações e ficheiros - e confirma a leitura quando pedido. Quem pode publicar (os gestores para os seus locais e pessoas; o proprietário ou quem gere os anúncios de toda a organização, também para departamentos ou qualquer pessoa) escreve o texto, escolhe os destinatários - toda a organização, locais, departamentos ou pessoas escolhidas -, adiciona ligações (vídeos como ligação) e imagens, PDF ou ficheiros Office até 10 MB, e publica já ou a uma hora marcada, com expiração opcional. \"Só publicar\" avisa na app e no telemóvel; \"Publicar com email\" também envia um email a cada destinatário. Os ficheiros são guardados em privado e só abrem para os destinatários, por uma ligação válida durante poucos minutos. \"Quem leu\" mostra quem abriu e quem confirmou, dentro das pessoas de quem publica. Um anúncio publicado não é editado; pode ser retirado com um motivo, e tudo fica no registo."
+    },
+    "departments": {
+      "title": "Departamentos",
+      "body": "O proprietário, ou quem gere os departamentos, adiciona-os nas Definições. Cada pessoa pertence no máximo a um departamento: escolhe-se ao adicioná-la ou na sua página. Arquivar um departamento mantém o histórico e impede que seja escolhido. Os anúncios podem ser dirigidos a departamentos."
     }
   },
   "faq": {

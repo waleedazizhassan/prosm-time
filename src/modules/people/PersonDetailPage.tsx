@@ -28,6 +28,7 @@ import EmploymentDetailsCard from "./EmploymentDetailsCard";
 import LivenessExemptionCard from "./LivenessExemptionCard";
 import FieldWorkerCard from "./FieldWorkerCard";
 import RoleChangeCard from "./RoleChangeCard";
+import DepartmentCard from "./DepartmentCard";
 
 const MANAGER_ONLY_PERMISSIONS = ["leave.approve", "attendance.clock_in_on_behalf", "attendance.clock_out_on_behalf"];
 
@@ -440,6 +441,9 @@ export default function PersonDetailPage() {
           ))
         )}
       </Card>
+
+      {/* 2026-11-09 Media Center: the person's department */}
+      {userId && !member.isOwner ? <DepartmentCard userId={userId} canEdit={hasPermission("employees.edit")} /> : null}
 
       {userId && (canEditLeaveEntitlement || hasPermission("employees.edit")) ? (
         <EmploymentDetailsCard userId={userId} canEdit={Boolean(profile?.isOwner) || hasPermission("employees.edit")} />

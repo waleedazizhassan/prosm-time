@@ -153,5 +153,14 @@
     "intro": "Wie gewünscht finden Sie Ihre genehmigte Gehaltsabrechnung für {{cycle}} von {{org}} als PDF im Anhang.",
     "version": "Abrechnungsversion v{{version}} · Nr. {{serial}}.",
     "private": "Dieses Dokument ist persönlich und vertraulich. Wenn Sie es nicht angefordert haben, informieren Sie Ihre Führungskraft."
+  },
+  "announcement": {
+    "subject": "Mitteilung",
+    "statementSubject": "Offizielle Mitteilung",
+    "from": "Eine Mitteilung von {{org}}",
+    "statementFrom": "Eine offizielle Mitteilung von {{org}}",
+    "links": "Links:",
+    "confirm": "Bitte bestätigen Sie in PROSM Time, dass Sie es gelesen haben.",
+    "files": "Angehängte Dateien: {{count}} - öffnen Sie sie in PROSM Time."
   }
 }

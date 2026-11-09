@@ -156,5 +156,14 @@
     "intro": "Come richiesto, in allegato trovi in PDF la tua busta paga approvata di {{cycle}} di {{org}}.",
     "version": "Versione del ciclo v{{version}} · n. {{serial}}.",
     "private": "Questo documento è personale e riservato. Se non l'hai richiesto, avvisa il tuo responsabile."
+  },
+  "announcement": {
+    "subject": "Annuncio",
+    "statementSubject": "Comunicato ufficiale",
+    "from": "Un annuncio di {{org}}",
+    "statementFrom": "Un comunicato ufficiale di {{org}}",
+    "links": "Link:",
+    "confirm": "Conferma in PROSM Time di averlo letto.",
+    "files": "File allegati: {{count}}; aprili in PROSM Time."
   }
 }

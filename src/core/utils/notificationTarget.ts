@@ -62,6 +62,9 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
     case "payslip_requested":
     case "payslip_send_failed":
       return "/payroll/requests";
+    // 2026-11-09 Media Center: the employee's announcements
+    case "announcement_published":
+      return "/announcements";
     case "payslip_sent":
     case "payslip_published":
       return "/payslips";

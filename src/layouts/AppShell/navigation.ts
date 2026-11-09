@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, KeyRound, LogIn, Plug, HardHat, ScrollText, Sunrise, Banknote, Receipt } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, KeyRound, LogIn, Plug, HardHat, ScrollText, Sunrise, Banknote, Receipt, Megaphone } from "lucide-react";
 
 import { FEATURES } from "../../config/features";
 import type { PlanFeature } from "../../core/hooks/usePlanFeatures";
@@ -109,6 +109,8 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // own alerts, if any), same as Manager Console's own gate.
   { id: "emergencyLog", planFeature: "sos", labelKey: "items.emergencyLog", path: "/emergency-log", icon: Siren, requiredPermission: "attendance.view", section: "attendance" },
   { id: "people", labelKey: "items.people", path: "/people", icon: Users, requiredPermission: "employees.view", section: "people" },
+  // 2026-11-09 Media Center: announcements and official statements - everyone reads what was addressed to them.
+  { id: "announcements", labelKey: "items.announcements", path: "/announcements", icon: Megaphone, requiredPermission: null, section: "people" },
   { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage", section: "attendance" },
   // Owner 2026-10-18/19: external workers for the whole organisation (app-generated kiosk numbers).
   { id: "workers", planFeature: "kiosk", labelKey: "items.workers", path: "/workers", icon: HardHat, requiredPermission: "sites.manage", section: "people" },

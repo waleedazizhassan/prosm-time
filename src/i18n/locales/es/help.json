@@ -153,6 +153,14 @@
     "integrationsApi": {
       "title": "Integraciones y API",
       "body": "El propietario abre Ajustes y luego Integraciones y API para crear una clave para un sistema contable, de RR. HH. u otro y elegir qué puede leer: empleados (los datos sensibles aparte), sedes, asistencia, turnos, ausencias y saldos, y la nómina de los ciclos cerrados; recibir asistencia es una opción aparte. La clave se muestra una vez, puede tener fecha de caducidad, y revocarse en cualquier momento. Los webhooks envían un aviso firmado a la dirección HTTPS del propietario cuando cambian empleados, asistencia o decisiones de ausencias; los envíos fallidos se reintentan y pueden reenviarse. La descripción técnica es el contrato de la API (openapi.json). Cada solicitud queda registrada."
+    },
+    "announcements": {
+      "title": "Anuncios",
+      "body": "En Anuncios cada persona ve lo que se le dirigió - anuncios y comunicados oficiales, con enlaces y archivos - y confirma la lectura cuando se le pide. Quien puede publicar (los gestores para sus sedes y su personal; el propietario o quien gestiona los anuncios de toda la organización, también para departamentos o cualquier persona) escribe el texto, elige los destinatarios - toda la organización, sedes, departamentos o personas elegidas -, añade enlaces (los vídeos como enlace) e imágenes, PDF o archivos de Office de hasta 10 MB, y publica ahora o a una hora fijada, con caducidad opcional. \"Solo publicar\" avisa en la app y en el teléfono; \"Publicar con correo\" además envía un correo a cada destinatario. Los archivos se guardan en privado y solo se abren para los destinatarios mediante un enlace que dura unos minutos. \"Quién lo leyó\" muestra quién abrió y quién confirmó, dentro de las personas a cargo de quien publica. Un anuncio publicado no se edita; se puede retirar con un motivo, y todo queda en el registro."
+    },
+    "departments": {
+      "title": "Departamentos",
+      "body": "El propietario, o quien gestiona los departamentos, los añade en Ajustes. Cada persona pertenece como mucho a un departamento: se elige al añadirla o en su página. Archivar un departamento conserva el historial y evita que se elija. Los anuncios pueden dirigirse a departamentos."
     }
   },
   "faq": {

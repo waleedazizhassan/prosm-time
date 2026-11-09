@@ -8,7 +8,7 @@ import { addMember, createOrg, type TestMember, type TestOrg } from "./support/f
 
 let t: TestDatabase;
 let org: TestOrg;
-let people: TestMember[] = [];
+const people: TestMember[] = [];
 let cycleId = "";
 
 async function ok<T>(result: Promise<{ rows: T[] | null; error: string | null }>): Promise<T> {

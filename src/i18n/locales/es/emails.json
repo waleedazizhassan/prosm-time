@@ -156,5 +156,14 @@
     "intro": "Como solicitó, adjuntamos en PDF su recibo de nómina aprobado de {{cycle}} de {{org}}.",
     "version": "Versión del ciclo v{{version}} · n.º {{serial}}.",
     "private": "Este documento es personal y confidencial. Si no lo solicitó, avise a su responsable."
+  },
+  "announcement": {
+    "subject": "Anuncio",
+    "statementSubject": "Comunicado oficial",
+    "from": "Un anuncio de {{org}}",
+    "statementFrom": "Un comunicado oficial de {{org}}",
+    "links": "Enlaces:",
+    "confirm": "Confirma en PROSM Time que lo has leído.",
+    "files": "Archivos adjuntos: {{count}}; ábrelos en PROSM Time."
   }
 }

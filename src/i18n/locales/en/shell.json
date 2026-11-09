@@ -241,6 +241,12 @@
       "failedBody": "The payslip of {{cycle}} could not be sent. You can try again.",
       "publishedTitle": "Your payslip is available",
       "publishedBody": "A new payslip was published. You can view it or ask for it by email."
+    },
+    "announcement": {
+      "publishedTitle": "New announcement",
+      "statementTitle": "New official statement",
+      "publishedBody": "{{title}}",
+      "ackBody": "{{title}} - please confirm you have read it."
     }
   },
   "items": {
@@ -268,7 +274,8 @@
     "grantPermissions": "Grant permissions",
     "payroll": "Payroll",
     "payslips": "My payslips",
-    "externalPay": "External labour pay"
+    "externalPay": "External labour pay",
+    "announcements": "Announcements"
   },
   "sosOverlay": {
     "title": "SOS/Emergency alert",
@@ -373,7 +380,8 @@
     "grantPermissions": "Who gets which permissions - and the owner's full authority",
     "payroll": "Payroll cycles, profiles, the three reports and payslips - with separate permissions and stored versions.",
     "payslips": "Your published payslips - view them or ask for them by email.",
-    "externalPay": "Rates by day, week, month or year, pay runs, the policy and individual adjustments - approved and frozen, kept apart from payroll."
+    "externalPay": "Rates by day, week, month or year, pay runs, the policy and individual adjustments - approved and frozen, kept apart from payroll.",
+    "announcements": "Announcements and official statements addressed to you; confirm the ones that ask for it."
   },
   "backgroundDisclosure": {
     "title": "Location during your shift",

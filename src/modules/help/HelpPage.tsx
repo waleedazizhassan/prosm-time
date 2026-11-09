@@ -48,6 +48,8 @@ export default function HelpPage() {
     "externalPay",
     "importedAttendance",
     "integrationsApi",
+    "announcements",
+    "departments",
     "peopleAndPhotos",
     "permissions",
     "calendar",

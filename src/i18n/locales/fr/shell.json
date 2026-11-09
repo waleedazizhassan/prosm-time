@@ -241,6 +241,12 @@
       "failedBody": "Le bulletin de paie de {{cycle}} n'a pas pu être envoyé. Vous pouvez réessayer.",
       "publishedTitle": "Votre bulletin de paie est disponible",
       "publishedBody": "Un nouveau bulletin de paie a été publié. Vous pouvez le consulter ou le demander par e-mail."
+    },
+    "announcement": {
+      "publishedTitle": "Nouvelle annonce",
+      "statementTitle": "Nouveau communiqué officiel",
+      "publishedBody": "{{title}}",
+      "ackBody": "{{title}} - merci de confirmer la lecture."
     }
   },
   "items": {
@@ -268,7 +274,8 @@
     "grantPermissions": "Attribuer les autorisations",
     "payroll": "Paie",
     "payslips": "Mes bulletins",
-    "externalPay": "Paie des externes"
+    "externalPay": "Paie des externes",
+    "announcements": "Annonces"
   },
   "sosOverlay": {
     "title": "Alerte SOS/Urgence",
@@ -378,7 +385,8 @@
     "grantPermissions": "Qui a quelles autorisations - et toute l'autorité du propriétaire",
     "payroll": "Cycles de paie, dossiers, les trois rapports et les bulletins - avec des droits séparés et des versions conservées.",
     "payslips": "Vos bulletins publiés - consultez-les ou demandez-les par e-mail.",
-    "externalPay": "Taux à la journée, à la semaine, au mois ou à l'année, paies, règles et ajustements individuels - approuvés et figés, séparés de la paie des employés."
+    "externalPay": "Taux à la journée, à la semaine, au mois ou à l'année, paies, règles et ajustements individuels - approuvés et figés, séparés de la paie des employés.",
+    "announcements": "Annonces et communiqués officiels qui vous sont adressés ; confirmez ceux qui le demandent."
   },
   "backgroundDisclosure": {
     "title": "Position pendant votre poste",

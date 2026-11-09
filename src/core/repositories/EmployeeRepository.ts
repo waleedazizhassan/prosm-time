@@ -28,6 +28,8 @@ export interface InviteInput {
   email: string;
   fullName: string;
   roleKey: "manager" | "supervisor" | "employee" | "read_only";
+  /** 2026-11-09: optional department, checked against the organisation on the server */
+  departmentId?: string | null;
 }
 
 export interface InviteResultData {

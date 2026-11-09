@@ -80,7 +80,11 @@
     "payroll.import": "Importar nómina",
     "payroll.manage_installments": "Gestionar cuotas",
     "payroll.publish_payslips": "Publicar recibos de nómina",
-    "payroll.view_audit_log": "Ver registro de nómina"
+    "payroll.view_audit_log": "Ver registro de nómina",
+    "announcements.publish": "Publicar anuncios",
+    "announcements.manage": "Gestionar todos los anuncios",
+    "announcements.view_reads": "Ver quién leyó los anuncios",
+    "departments.manage": "Gestionar departamentos"
   },
   "invite": {
     "actionLabel": "Invitar empleado",

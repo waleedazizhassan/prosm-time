@@ -241,6 +241,12 @@
       "failedBody": "{{cycle}} 的工资单未能发送，您可以重试。",
       "publishedTitle": "您的工资单已可查看",
       "publishedBody": "新的工资单已发布，您可以查看或通过邮件申请。"
+    },
+    "announcement": {
+      "publishedTitle": "新公告",
+      "statementTitle": "新的正式声明",
+      "publishedBody": "{{title}}",
+      "ackBody": "{{title}} - 请确认已阅读。"
     }
   },
   "items": {
@@ -268,7 +274,8 @@
     "grantPermissions": "授予权限",
     "payroll": "薪资",
     "payslips": "我的工资单",
-    "externalPay": "外部工人薪酬"
+    "externalPay": "外部工人薪酬",
+    "announcements": "公告"
   },
   "sosOverlay": {
     "title": "SOS/紧急警报",
@@ -368,7 +375,8 @@
     "grantPermissions": "谁拥有哪些权限 - 以及所有者的全部权限",
     "payroll": "薪资周期、档案、三份报表和工资单——权限分离、版本留存。",
     "payslips": "您已发布的工资单——查看或通过邮件申请。",
-    "externalPay": "按天、周、月或年的费率、发薪批次、政策与个人调整——经批准后冻结，与员工工资分开。"
+    "externalPay": "按天、周、月或年的费率、发薪批次、政策与个人调整——经批准后冻结，与员工工资分开。",
+    "announcements": "发给您的公告和正式声明；需要确认的请确认已读。"
   },
   "backgroundDisclosure": {
     "title": "班次期间的位置",

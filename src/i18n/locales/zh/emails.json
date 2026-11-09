@@ -150,5 +150,14 @@
     "intro": "应您的要求，附件为 {{org}} {{cycle}} 已核准工资单的 PDF。",
     "version": "周期版本 v{{version}} · 编号 {{serial}}。",
     "private": "本文件属个人机密。如果您未曾申请，请告知您的经理。"
+  },
+  "announcement": {
+    "subject": "公告",
+    "statementSubject": "正式声明",
+    "from": "来自 {{org}} 的公告",
+    "statementFrom": "来自 {{org}} 的正式声明",
+    "links": "链接：",
+    "confirm": "请在 PROSM Time 中确认已阅读。",
+    "files": "附件：{{count}} 个 - 请在 PROSM Time 中打开。"
   }
 }

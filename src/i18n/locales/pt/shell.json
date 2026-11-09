@@ -241,6 +241,12 @@
       "failedBody": "Não foi possível enviar o recibo de vencimento de {{cycle}}. Pode tentar novamente.",
       "publishedTitle": "O seu recibo de vencimento está disponível",
       "publishedBody": "Foi publicado um novo recibo de vencimento. Pode vê-lo ou pedi-lo por e-mail."
+    },
+    "announcement": {
+      "publishedTitle": "Novo anúncio",
+      "statementTitle": "Novo comunicado oficial",
+      "publishedBody": "{{title}}",
+      "ackBody": "{{title}} - confirme que leu."
     }
   },
   "items": {
@@ -268,7 +274,8 @@
     "grantPermissions": "Conceder permissões",
     "payroll": "Salários",
     "payslips": "Os meus recibos",
-    "externalPay": "Pagamento de externos"
+    "externalPay": "Pagamento de externos",
+    "announcements": "Anúncios"
   },
   "sosOverlay": {
     "title": "Alerta SOS/Emergência",
@@ -378,7 +385,8 @@
     "grantPermissions": "Quem tem quais permissões - e toda a autoridade do proprietário",
     "payroll": "Ciclos salariais, fichas, os três relatórios e os recibos - com permissões separadas e versões guardadas.",
     "payslips": "Os seus recibos publicados - veja-os ou peça-os por e-mail.",
-    "externalPay": "Valores por dia, semana, mês ou ano, folhas, a política e ajustes individuais - aprovados e congelados, separados da folha de salários."
+    "externalPay": "Valores por dia, semana, mês ou ano, folhas, a política e ajustes individuais - aprovados e congelados, separados da folha de salários.",
+    "announcements": "Anúncios e comunicados oficiais dirigidos a si; confirme os que o pedem."
   },
   "backgroundDisclosure": {
     "title": "Localização durante o turno",

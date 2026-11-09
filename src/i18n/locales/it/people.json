@@ -80,7 +80,11 @@
     "payroll.import": "Importare paghe",
     "payroll.manage_installments": "Gestire rate",
     "payroll.publish_payslips": "Pubblicare cedolini",
-    "payroll.view_audit_log": "Vedere registro paghe"
+    "payroll.view_audit_log": "Vedere registro paghe",
+    "announcements.publish": "Pubblicare annunci",
+    "announcements.manage": "Gestire tutti gli annunci",
+    "announcements.view_reads": "Vedere chi ha letto gli annunci",
+    "departments.manage": "Gestire i reparti"
   },
   "invite": {
     "actionLabel": "Invita dipendente",

@@ -44,6 +44,7 @@ export function senderName(purpose: string): string {
   if (/licen[cs]e/.test(key)) return "PROSM Time License";
   if (/trial/.test(key)) return "PROSM Time Subscription";
   if (/leave/.test(key)) return "PROSM Time Leave";
+  if (/announce/.test(key)) return "PROSM Time Announcements";
   return "PROSM Time";
 }
 

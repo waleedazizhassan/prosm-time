@@ -156,5 +156,14 @@
     "intro": "Comme demandé, vous trouverez ci-joint en PDF votre bulletin de paie approuvé pour {{cycle}} de {{org}}.",
     "version": "Version du cycle v{{version}} · n° {{serial}}.",
     "private": "Ce document est personnel et confidentiel. Si vous ne l'avez pas demandé, prévenez votre responsable."
+  },
+  "announcement": {
+    "subject": "Annonce",
+    "statementSubject": "Communiqué officiel",
+    "from": "Une annonce de {{org}}",
+    "statementFrom": "Un communiqué officiel de {{org}}",
+    "links": "Liens :",
+    "confirm": "Merci de confirmer la lecture dans PROSM Time.",
+    "files": "Fichiers joints : {{count}} - ouvrez-les dans PROSM Time."
   }
 }

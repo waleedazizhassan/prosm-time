@@ -80,7 +80,11 @@
     "payroll.import": "Importer la paie",
     "payroll.manage_installments": "Gérer les échéances",
     "payroll.publish_payslips": "Publier les bulletins de paie",
-    "payroll.view_audit_log": "Voir le journal de paie"
+    "payroll.view_audit_log": "Voir le journal de paie",
+    "announcements.publish": "Publier des annonces",
+    "announcements.manage": "Gérer toutes les annonces",
+    "announcements.view_reads": "Voir qui a lu les annonces",
+    "departments.manage": "Gérer les services"
   },
   "invite": {
     "actionLabel": "Inviter un employé",

@@ -80,7 +80,11 @@
     "payroll.import": "导入工资",
     "payroll.manage_installments": "管理分期",
     "payroll.publish_payslips": "发布工资单",
-    "payroll.view_audit_log": "查看工资日志"
+    "payroll.view_audit_log": "查看工资日志",
+    "announcements.publish": "发布公告",
+    "announcements.manage": "管理所有公告",
+    "announcements.view_reads": "查看公告阅读情况",
+    "departments.manage": "管理部门"
   },
   "invite": {
     "actionLabel": "邀请员工",

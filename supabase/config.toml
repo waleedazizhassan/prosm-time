@@ -319,3 +319,17 @@ entrypoint = "./functions/payroll-export-job/index.ts"
 enabled = true
 verify_jwt = false
 entrypoint = "./functions/webhook-dispatch/index.ts"
+
+# announcement-media (2026-11-09 Media Center): files of announcements - upload by whoever may edit,
+# a 5-minute link for recipients, removal; the caller's own session is checked by the RPCs inside.
+[functions.announcement-media]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/announcement-media/index.ts"
+
+# announcement-email (2026-11-09 Media Center): pg_cron posts every minute with the service role
+# key while "publish with email" messages wait; the service-role-only RPCs inside are the check.
+[functions.announcement-email]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/announcement-email/index.ts"
