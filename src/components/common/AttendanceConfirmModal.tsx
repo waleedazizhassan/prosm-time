@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { MapPin } from "lucide-react";
 
@@ -27,6 +27,8 @@ interface AttendanceConfirmModalProps {
   personName?: string | null;
   deviceLabel?: string | null;
   lastClockOutLabel?: string | null;
+  /** 2026-11-09: what the caller asks on this last step (the site / place of work) */
+  children?: ReactNode;
 }
 
 // PROSM Time - § live UX review, user-directed: a real confirmation
@@ -57,6 +59,7 @@ export default function AttendanceConfirmModal({
   personName = null,
   deviceLabel = null,
   lastClockOutLabel = null,
+  children = null,
 }: AttendanceConfirmModalProps) {
   const { t, i18n } = useTranslation("dashboard");
   const [note, setNote] = useState("");
@@ -158,6 +161,7 @@ export default function AttendanceConfirmModal({
         </div>
       </div>
 
+      {children}
       <Textarea label={t("attendance.noteLabel")} name="attendanceNote" value={note} onChange={(event) => setNote(event.target.value)} disabled={submitting} rows={2} placeholder={t("attendance.optionalPlaceholder")} />
       <div style={{ marginTop: "var(--space-3)" }}>
         <Textarea label={t("attendance.activityLabel")} name="attendanceActivity" value={activity} onChange={(event) => setActivity(event.target.value)} disabled={submitting} rows={2} placeholder={t("attendance.optionalPlaceholder")} />

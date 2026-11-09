@@ -226,7 +226,8 @@
     "clockInAt": "سجّل حضورك في {{site}}",
     "confirmClockInAction": "تأكيد الحضور",
     "confirmClockOutAction": "تأكيد الانصراف",
-    "confirmDateLabel": "التاريخ"
+    "confirmDateLabel": "التاريخ",
+    "locationStale": "موقعك مش واضح دلوقتي. اعمل تحديث للصفحة، أو اقفل التطبيق وافتحه من جديد، وبعدين سجّل."
   },
   "kioskPin": {
     "title": "رمز الكشك",

@@ -1,29 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import { CalendarDays, ChevronLeft, ChevronRight, Clock, FileText, MapPin, Wallet } from "lucide-react";
+import { BellRing, Hourglass } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import { useDashboardRefresh } from "../../core/hooks/useDashboardRefresh";
 import ManagerRepository, { type TodayAttendanceRow } from "../../core/repositories/ManagerRepository";
-import SiteRepository from "../../core/repositories/SiteRepository";
-import Card from "../../components/common/Card";
+import Modal from "../../components/common/Modal";
 import ClockInOutCard from "./ClockInOutCard";
+import PersonalRemindersCard from "./PersonalRemindersCard";
 import { PERIODS, formatHours, periodHours, periodRange } from "../attendance/periods";
 import styles from "./EmployeeHome.module.css";
-import { appLocale } from "../../core/utils/formatDate";
 
-// Owner 2026-10-19: the employee's page is light and easy - clock in and
-// out, see their own time by day / week / month, and reach their own
-// records (each with its PDF download): attendance, allowances,
-// timesheets and leave.
+const HOURS_VISIBLE_MS = 15000;
+
+// Owner 2026-11-09: the employee's page is one screen - the clock-in map. Their hours and their
+// reminders are two small floating buttons (hours show for 15 seconds); their records are in the
+// menu and the bottom bar, not repeated here.
 export default function EmployeeHome() {
-  const { t, i18n } = useTranslation("dashboard");
+  const { t } = useTranslation("dashboard");
   const { profile } = useAuth();
   const profileId = profile?.id;
   const [rows, setRows] = useState<TodayAttendanceRow[]>([]);
-  const [siteNames, setSiteNames] = useState<string[]>([]);
   const [tick, setTick] = useState(0);
+  const [showHours, setShowHours] = useState(false);
+  const [showReminders, setShowReminders] = useState(false);
+  const hideTimer = useRef<number | null>(null);
   useDashboardRefresh(() => setTick((value) => value + 1));
 
   useEffect(() => {
@@ -31,75 +32,56 @@ export default function EmployeeHome() {
     const week = periodRange("week");
     const month = periodRange("month");
     const start = week.start < month.start ? week.start : month.start;
-    Promise.all([
-      ManagerRepository.listAttendanceHistory(start, month.end),
-      SiteRepository.listAllAssignedSiteNames(),
-    ]).then(([history, assigned]) => {
+    void ManagerRepository.listAttendanceHistory(start, month.end).then((history) => {
       setRows(history.success ? (history.data ?? []).filter((row) => row.userId === profileId) : []);
-      setSiteNames(assigned.success ? assigned.data?.[profileId] ?? [] : []);
     });
   }, [profileId, tick]);
 
-  const hour = new Date().getHours();
-  const greetingKey = hour < 12 ? "overview.greetingMorning" : hour < 17 ? "overview.greetingAfternoon" : "overview.greetingEvening";
-  const firstName = (profile?.fullName ?? "").trim().split(/\s+/)[0] ?? "";
-  const todayLabel = new Date().toLocaleDateString(appLocale(i18n.language), { weekday: "long", day: "numeric", month: "long" });
-  // The organisation is in the header (owner 2026-10-21); here, the person's sites.
-  const scope = siteNames.join(i18n.dir() === "rtl" ? "، " : ", ");
-  const Chevron = i18n.dir() === "rtl" ? ChevronLeft : ChevronRight;
+  useEffect(() => () => {
+    if (hideTimer.current) window.clearTimeout(hideTimer.current);
+  }, []);
 
-  const links = [
-    { to: "/attendance", icon: Clock, label: t("employeeHome.links.attendance"), hint: t("employeeHome.links.attendanceHint") },
-    { to: "/allowances", icon: Wallet, label: t("employeeHome.links.allowances"), hint: t("employeeHome.links.allowancesHint") },
-    { to: "/timesheets", icon: FileText, label: t("employeeHome.links.timesheets"), hint: t("employeeHome.links.timesheetsHint") },
-    { to: "/leave", icon: CalendarDays, label: t("employeeHome.links.leave"), hint: t("employeeHome.links.leaveHint") },
-  ];
+  const toggleHours = () => {
+    if (hideTimer.current) window.clearTimeout(hideTimer.current);
+    if (showHours) {
+      setShowHours(false);
+      return;
+    }
+    setShowHours(true);
+    hideTimer.current = window.setTimeout(() => setShowHours(false), HOURS_VISIBLE_MS);
+  };
 
   return (
     <>
-      {/* v2.3.43 step 13 (item 14): one main action at the top - clock in/out
-          with the status and the time so far; the greeting is a small line under it. */}
       <ClockInOutCard />
 
-      <p className={styles.greetingLine}>
-        <span className={styles.greetingText}>{t(greetingKey, { name: firstName })}</span>
-        <span>{todayLabel}</span>
-        {scope ? (
-          <span className={styles.greetingScope}>
-            <MapPin size={12} />
-            {scope}
-          </span>
-        ) : null}
-      </p>
+      <div className={styles.floatingTools}>
+        <button type="button" className={styles.toolButton} onClick={toggleHours} aria-label={t("employeeHome.hoursTitle")} title={t("employeeHome.hoursTitle")} aria-expanded={showHours}>
+          <Hourglass size={20} />
+        </button>
+        <button type="button" className={styles.toolButton} onClick={() => setShowReminders(true)} aria-label={t("reminders.title")} title={t("reminders.title")}>
+          <BellRing size={20} />
+        </button>
+      </div>
 
-      <Card title={t("employeeHome.hoursTitle")}>
-        <div className={styles.hours}>
-          {PERIODS.map((period) => (
-            <Link key={period} to={`/attendance?period=${period}`} className={styles.hourTile}>
-              <span className={styles.hourLabel}>{t(`employeeHome.periods.${period}`)}</span>
-              <span className={styles.hourValue}>{formatHours(periodHours(rows, period))}</span>
-              <span className={styles.hourUnit}>{t("employeeHome.hoursUnit")}</span>
-            </Link>
-          ))}
+      {showHours ? (
+        <div className={styles.hoursPopover} role="status" onClick={toggleHours}>
+          <strong>{t("employeeHome.hoursTitle")}</strong>
+          <div className={styles.hours}>
+            {PERIODS.map((period) => (
+              <div key={period} className={styles.hourTile}>
+                <span className={styles.hourLabel}>{t(`employeeHome.periods.${period}`)}</span>
+                <span className={styles.hourValue}>{formatHours(periodHours(rows, period))}</span>
+                <span className={styles.hourUnit}>{t("employeeHome.hoursUnit")}</span>
+              </div>
+            ))}
+          </div>
         </div>
-      </Card>
+      ) : null}
 
-      <Card title={t("employeeHome.linksTitle")}>
-        <div className={styles.links}>
-          {links.map((link) => (
-            <Link key={link.to} to={link.to} className={styles.link}>
-              <span className={styles.linkIcon}>
-                <link.icon size={18} />
-              </span>
-              <span className={styles.linkText}>
-                <span className={styles.linkLabel}>{link.label}</span>
-                <span className={styles.linkHint}>{link.hint}</span>
-              </span>
-              <Chevron size={16} className={styles.linkChevron} />
-            </Link>
-          ))}
-        </div>
-      </Card>
+      <Modal isOpen={showReminders} onClose={() => setShowReminders(false)} title={t("reminders.title")}>
+        <PersonalRemindersCard />
+      </Modal>
     </>
   );
 }

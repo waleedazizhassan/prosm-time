@@ -220,7 +220,8 @@
     "clockInAt": "Отметить приход: {{site}}",
     "confirmClockInAction": "Подтвердить приход",
     "confirmClockOutAction": "Подтвердить уход",
-    "confirmDateLabel": "Дата"
+    "confirmDateLabel": "Дата",
+    "locationStale": "Ваше местоположение сейчас недоступно. Обновите страницу или перезапустите приложение и отметьтесь снова."
   },
   "kioskPin": {
     "title": "PIN киоска",

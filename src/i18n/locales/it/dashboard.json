@@ -217,7 +217,8 @@
     "clockInAt": "Timbra l'entrata a {{site}}",
     "confirmClockInAction": "Conferma entrata",
     "confirmClockOutAction": "Conferma uscita",
-    "confirmDateLabel": "Data"
+    "confirmDateLabel": "Data",
+    "locationStale": "La tua posizione non è disponibile ora. Aggiorna la pagina o chiudi e riapri l'app, poi timbra."
   },
   "kioskPin": {
     "title": "PIN chiosco",

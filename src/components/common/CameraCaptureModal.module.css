@@ -140,11 +140,13 @@
 
 /* 2026-11-09 (owner: "a big camera with a circle"): a taller view, a larger face circle in PROSM's
    gradient, and a round shutter at the bottom; on a phone the camera fills the screen. */
+/* the face stays visible inside the circle: only the ring is coloured (fixed 2026-11-09 - the
+   gradient background filled the whole circle and hid the face) */
 .faceGuide {
   width: min(78%, 340px);
-  border: 4px solid transparent;
-  background: linear-gradient(#0000, #0000) padding-box, var(--brand-gradient, linear-gradient(135deg, #22d3ee, #34d399)) border-box;
-  -webkit-mask: none;
+  border: 4px solid #22d3ee;
+  background: transparent;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(52, 211, 153, 0.55), 0 0 24px rgba(34, 211, 238, 0.45);
 }
 
 .shutter {

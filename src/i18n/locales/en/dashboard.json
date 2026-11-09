@@ -214,7 +214,8 @@
     "clockInAt": "Clock in at {{site}}",
     "confirmClockInAction": "Confirm clock-in",
     "confirmClockOutAction": "Confirm clock-out",
-    "confirmDateLabel": "Date"
+    "confirmDateLabel": "Date",
+    "locationStale": "Your location isn't available right now. Refresh the page, or close and reopen the app, then clock in."
   },
   "kioskPin": {
     "title": "Kiosk PIN",
