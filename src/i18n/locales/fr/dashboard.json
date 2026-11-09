@@ -217,7 +217,8 @@
     "clockInAt": "Pointer l'arrivée à {{site}}",
     "confirmClockInAction": "Confirmer l'arrivée",
     "confirmClockOutAction": "Confirmer le départ",
-    "confirmDateLabel": "Date"
+    "confirmDateLabel": "Date",
+    "locationStale": "Votre position n'est pas disponible. Actualisez la page ou fermez et rouvrez l'application, puis pointez."
   },
   "kioskPin": {
     "title": "Code PIN kiosque",

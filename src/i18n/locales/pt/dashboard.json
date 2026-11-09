@@ -217,7 +217,8 @@
     "clockInAt": "Registar entrada em {{site}}",
     "confirmClockInAction": "Confirmar entrada",
     "confirmClockOutAction": "Confirmar saída",
-    "confirmDateLabel": "Data"
+    "confirmDateLabel": "Data",
+    "locationStale": "A sua localização não está disponível agora. Atualize a página ou feche e reabra a app, depois registe."
   },
   "kioskPin": {
     "title": "PIN do quiosque",

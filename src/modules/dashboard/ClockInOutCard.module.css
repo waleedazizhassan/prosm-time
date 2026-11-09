@@ -148,14 +148,45 @@
   opacity: 0.55;
 }
 
-/* Owner 2026-11-09: on a phone the clock-in screen fits without scrolling - the map takes what the
-   header, the bottom bar and the site fields leave; the buttons float on it. */
+/* Owner 2026-11-09 (round 3): no card - the map is the screen. On a phone it runs edge to edge
+   between the header and the bottom bar; the status, timer and place sit on a small card over it. */
+.clockRoot {
+  position: relative;
+}
+
+.mapStage {
+  margin-top: 0;
+}
+
+.mapStage :global(.leaflet-container) {
+  height: min(640px, calc(100dvh - 220px)) !important;
+}
+
+.mapInfoTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.mapTimer {
+  font-size: var(--font-xl);
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+
 @media (max-width: 640px) {
-  .mapStage :global(.leaflet-container) {
-    height: max(230px, calc(100dvh - 470px)) !important;
+  .clockRoot {
+    margin-inline: calc(50% - 50vw);
+    margin-top: -20px;
   }
 
-  .mapStage.clockedIn :global(.leaflet-container) {
-    height: max(230px, calc(100dvh - 400px)) !important;
+  .mapStage {
+    border-radius: 0;
+  }
+
+  .mapStage :global(.leaflet-container) {
+    height: calc(100dvh - var(--header-height, 64px) - 64px - var(--safe-top, 0px) - var(--safe-bottom, 0px)) !important;
+    border-radius: 0 !important;
   }
 }

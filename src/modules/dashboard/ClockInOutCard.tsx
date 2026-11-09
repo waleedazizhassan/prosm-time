@@ -598,12 +598,11 @@ export default function ClockInOutCard() {
       longitude = position.longitude;
       accuracyMeters = position.accuracyMeters;
     } catch {
-      // Best-effort only (see file header), unless the organisation requires it.
-      if (requireGps) {
-        setLocationBlocked(true);
-        setSubmitting(false);
-        return;
-      }
+      // Owner 2026-11-09: never a clock-in without a location (a stuck location left people off the map)
+      if (requireGps) setLocationBlocked(true);
+      setConfirmError(t("attendance.locationStale"));
+      setSubmitting(false);
+      return;
     }
 
     const isMockLocation = await mockCheck;
@@ -807,8 +806,9 @@ export default function ClockInOutCard() {
 
   // Plan stage 8.4: a "yes" passes the site it was asked about, as its selection reaches this render only after the tap.
   const handleClockInTap = (suggested?: Site) => {
-    if (!suggested && !siteId && !manualLocationLabel.trim()) {
-      setError(t("attendance.manualLocationRequired"));
+    // Owner 2026-11-09: no clock-in on a stuck or missing location - refresh first
+    if (locationStatus !== "available" || !currentLocation) {
+      setError(t("attendance.locationStale"));
       return;
     }
     setError("");
@@ -868,7 +868,20 @@ export default function ClockInOutCard() {
   };
 
   const handleConfirmSubmit = (note: string, activity: string) => {
-    if (confirmAction === "clockIn") performClockIn(pendingEvidenceFile, note, activity);
+    if (confirmAction === "clockIn") {
+      // 2026-11-09: the site / place of work is chosen on this last step
+      if (!siteId && !manualLocationLabel.trim()) {
+        setConfirmError(t("attendance.manualLocationRequired"));
+        return;
+      }
+      // a site that needs a photo, chosen here after the camera was skipped: take it now
+      if (clockInCameraRequired && !pendingEvidenceFile) {
+        setConfirmModalOpen(false);
+        setCameraFor("clockIn");
+        return;
+      }
+      performClockIn(pendingEvidenceFile, note, activity);
+    }
     else if (confirmAction === "clockOut") performClockOut(pendingEvidenceFile, note, activity);
   };
 
@@ -1097,29 +1110,14 @@ export default function ClockInOutCard() {
       : selectedSite?.name ?? (manualLocationLabel.trim() || t("attendance.noSiteOption"));
 
   return (
-    <Card>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "var(--space-2)" }}>
-        <span style={{ fontSize: "var(--font-xs)", fontWeight: "var(--font-weight-bold)", letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--text-secondary)" }}>
-          {t("attendance.title")}
-        </span>
-        <StatusBadge status={statusKey}>{t(`attendance.status.${statusKey}`)}</StatusBadge>
-      </div>
+    // Owner 2026-11-09: no card - the clock-in screen is the map, full screen
+    <div className={styles.clockRoot}>
 
-      {view.session ? (
-        <div style={{ margin: "var(--space-3) 0" }}>
-          <div style={{ fontSize: "var(--font-3xl)", fontWeight: "var(--font-weight-bold)", color: "var(--text-primary)", fontVariantNumeric: "tabular-nums", lineHeight: 1.1 }}>
-            {formatElapsed(
-              Math.floor(
-                ((view.activeBreakId && view.activeBreakStartedAt ? new Date(view.activeBreakStartedAt).getTime() : now) - new Date(view.session.clockInAt).getTime()) / 1000,
-              ) - Math.floor(view.completedBreakSeconds),
-            )}
-          </div>
-          <p style={{ margin: "var(--space-1) 0 0", color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>
-            {view.activeBreakId ? t("attendance.timerPausedOnBreak") : t("attendance.clockedInSince", { time: formatTimeOnly(view.session.clockInAt, i18n.language) })}
-          </p>
-          {view.session.id.startsWith("q:") ? null : <LongSessionPrompt clockInAt={view.session.clockInAt} now={now} onClockOut={handleClockOutTap} />}
-          {view.session.id.startsWith("q:") ? null : <ExitSitePrompt onClockOut={handleClockOutTap} onClockedOut={() => void load()} />}
-        </div>
+      {view.session && !view.session.id.startsWith("q:") ? (
+        <>
+          <LongSessionPrompt clockInAt={view.session.clockInAt} now={now} onClockOut={handleClockOutTap} />
+          <ExitSitePrompt onClockOut={handleClockOutTap} onClockedOut={() => void load()} />
+        </>
       ) : null}
 
       <ErrorText>{error}</ErrorText>
@@ -1209,6 +1207,17 @@ export default function ClockInOutCard() {
           height={380}
         />
         <div className={styles.mapInfo}>
+          <div className={styles.mapInfoTop}>
+            <StatusBadge status={statusKey}>{t(`attendance.status.${statusKey}`)}</StatusBadge>
+            {view.session ? (
+              <span className={styles.mapTimer} title={view.activeBreakId ? t("attendance.timerPausedOnBreak") : t("attendance.clockedInSince", { time: formatTimeOnly(view.session.clockInAt, i18n.language) })}>
+                {formatElapsed(
+                  Math.floor(((view.activeBreakId && view.activeBreakStartedAt ? new Date(view.activeBreakStartedAt).getTime() : now) - new Date(view.session.clockInAt).getTime()) / 1000) -
+                    Math.floor(view.completedBreakSeconds),
+                )}
+              </span>
+            ) : null}
+          </div>
           <div className={styles.mapInfoRow}>
             <MapPin size={15} style={{ flexShrink: 0, color: locationStatus === "available" ? "var(--brand-primary)" : "var(--status-warning-text)" }} />
             <span>
@@ -1227,9 +1236,6 @@ export default function ClockInOutCard() {
                 ? t("attendance.insideSiteArea", { site: mapRelevantSite.name })
                 : t("attendance.outsideSiteArea", { site: mapRelevantSite.name, meters: mapSiteProximity.outsideByMeters })}
             </div>
-          ) : null}
-          {!view.session && lastCompletedSession?.clockOutAt ? (
-            <div className={styles.mapInfoRow} style={{ color: "var(--text-secondary)" }}>{t("attendance.lastClockOut", { time: formatTimeOnly(lastCompletedSession.clockOutAt, i18n.language) })}</div>
           ) : null}
         </div>
         {failedOfflineItem ? null : (
@@ -1252,7 +1258,7 @@ export default function ClockInOutCard() {
                 </div>
               </>
             ) : (
-              <button type="button" className={`${styles.fab} ${styles.fabIn}`} onClick={() => handleClockInTap()} disabled={submitting || (!siteId && !manualLocationLabel.trim())}>
+              <button type="button" className={`${styles.fab} ${styles.fabIn}`} onClick={() => handleClockInTap()} disabled={submitting}>
                 <LogIn size={20} />
                 <span>{suggestOnSite && siteId === proximitySite!.id ? t("attendance.clockInAt", { site: proximitySite!.name }) : t("attendance.clockInAction")}</span>
               </button>
@@ -1262,9 +1268,44 @@ export default function ClockInOutCard() {
       </div>
 
 
-      {/* Owner 2026-11-09: the site and the place of work under the map */}
-      {!view.session && !failedOfflineItem ? (
-        <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", marginTop: "var(--space-3)" }}>
+
+      {checklist && view.session ? (
+        <ShiftChecklistModal
+          items={checklist}
+          onCancel={() => setChecklist(null)}
+          onDone={(doneIds) => {
+            const sessionId = view.session?.id ?? "";
+            setChecklist(null);
+            checklistAnsweredRef.current = sessionId;
+            void ShiftExtrasRepository.recordSessionChecklist(sessionId, doneIds);
+            continueClockOut();
+          }}
+        />
+      ) : null}
+      <CameraCaptureModal isOpen={cameraFor !== null} onClose={handleCameraClose} onCapture={handleCameraCapture} siteId={(cameraFor === "clockOut" ? view.session?.siteId : siteId) || null} />
+
+      {confirmAction ? (
+        <AttendanceConfirmModal
+          isOpen={confirmModalOpen}
+          action={confirmAction}
+          photoPreviewUrl={pendingPhotoPreviewUrl}
+          latitude={currentLocation?.latitude ?? null}
+          longitude={currentLocation?.longitude ?? null}
+          accuracyMeters={currentLocation?.accuracyMeters ?? null}
+          placeName={placeName}
+          siteName={confirmSiteName}
+          outsideByMeters={mapSiteProximity && !mapSiteAnyLocation && !mapSiteProximity.inside ? mapSiteProximity.outsideByMeters : null}
+          submitting={submitting}
+          error={confirmError}
+          onCancel={handleConfirmCancel}
+          onConfirm={handleConfirmSubmit}
+          personName={profile?.fullName ?? null}
+          deviceLabel={getDeviceLabel()}
+          lastClockOutLabel={lastCompletedSession?.clockOutAt ? t("attendance.lastClockOut", { time: formatTimeOnly(lastCompletedSession.clockOutAt, i18n.language) }) : null}
+        >
+          {/* Owner 2026-11-09: the site and the place of work on this last step, not the first */}
+          {confirmAction === "clockIn" ? (
+        <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", marginBottom: "var(--space-3)" }}>
           {/* § live UX review, user-directed - "site should be optional;
               the important thing is registering attendance at the
               employee's actual current location, since they may be
@@ -1318,42 +1359,8 @@ export default function ClockInOutCard() {
             </p>
           ) : null}
         </div>
-      ) : null}
-
-      {checklist && view.session ? (
-        <ShiftChecklistModal
-          items={checklist}
-          onCancel={() => setChecklist(null)}
-          onDone={(doneIds) => {
-            const sessionId = view.session?.id ?? "";
-            setChecklist(null);
-            checklistAnsweredRef.current = sessionId;
-            void ShiftExtrasRepository.recordSessionChecklist(sessionId, doneIds);
-            continueClockOut();
-          }}
-        />
-      ) : null}
-      <CameraCaptureModal isOpen={cameraFor !== null} onClose={handleCameraClose} onCapture={handleCameraCapture} siteId={(cameraFor === "clockOut" ? view.session?.siteId : siteId) || null} />
-
-      {confirmAction ? (
-        <AttendanceConfirmModal
-          isOpen={confirmModalOpen}
-          action={confirmAction}
-          photoPreviewUrl={pendingPhotoPreviewUrl}
-          latitude={currentLocation?.latitude ?? null}
-          longitude={currentLocation?.longitude ?? null}
-          accuracyMeters={currentLocation?.accuracyMeters ?? null}
-          placeName={placeName}
-          siteName={confirmSiteName}
-          outsideByMeters={mapSiteProximity && !mapSiteAnyLocation && !mapSiteProximity.inside ? mapSiteProximity.outsideByMeters : null}
-          submitting={submitting}
-          error={confirmError}
-          onCancel={handleConfirmCancel}
-          onConfirm={handleConfirmSubmit}
-          personName={profile?.fullName ?? null}
-          deviceLabel={getDeviceLabel()}
-          lastClockOutLabel={lastCompletedSession?.clockOutAt ? t("attendance.lastClockOut", { time: formatTimeOnly(lastCompletedSession.clockOutAt, i18n.language) }) : null}
-        />
+          ) : null}
+        </AttendanceConfirmModal>
       ) : null}
 
       {clockOutSummary ? (
@@ -1418,6 +1425,6 @@ export default function ClockInOutCard() {
         ) : null}
         <ErrorText>{changeSiteError}</ErrorText>
       </Modal>
-    </Card>
+    </div>
   );
 }

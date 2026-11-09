@@ -55,7 +55,8 @@ export default function DashboardPage() {
           full dashboard; other management roles keep the light overview. */}
       {showFullDashboard ? <ManagerDashboard /> : hasManagementScope ? <AdminOverviewCard /> : <EmployeeHome />}
       {/* Owner 2026-10-21: each person sets their own clock-in/out reminders (not the Owner). */}
-      <PersonalRemindersCard />
+      {/* Owner 2026-11-09: an employee opens their reminders from a floating button on their map page */}
+      {showFullDashboard || hasManagementScope ? <PersonalRemindersCard /> : null}
     </PageShell>
   );
 }
