@@ -340,7 +340,7 @@
       "sites": "Standorte",
       "approvals": "Genehmigungen",
       "people": "Personen nach Rolle",
-      "chart": "Geplant vs. tatsächlich",
+      "chart": "Verlauf der Arbeitsstunden",
       "cost": "Zulagen und Kosten",
       "audit": "Aktionsprotokoll",
       "external": "Externe Arbeitskräfte",
@@ -396,7 +396,10 @@
         "leave": "Personen, deren genehmigter Urlaub heute gilt. Sie zählen nicht als abwesend.",
         "overdue": "Noch eingestempelt eine Stunde nach Schicht- bzw. Standorttagende, oder seit einem früheren Tag offen.",
         "overtime": "Genehmigte Überstunden im gewählten Zeitraum. Ungeprüfte werden nicht gezählt."
-      }
+      },
+      "hoursShort": "Std.",
+      "overtimeShort": "Überstunden",
+      "overtimeApproved": "Genehmigte Überstunden im Zeitraum"
     },
     "map": {
       "title": "Standorte jetzt",
@@ -473,12 +476,20 @@
       "title": "Personen"
     },
     "chart": {
-      "title": "Geplant vs. tatsächlich",
+      "title": "Verlauf der Arbeitsstunden",
       "week": "Woche",
       "month": "Monat",
       "year": "Jahr",
       "empty": "Noch keine Stunden in diesem Zeitraum.",
-      "legend": "Gefüllt: gearbeitet · gestrichelt: geplant · hell: in Prüfung"
+      "worked": "Ist",
+      "scheduled": "Geplant",
+      "pending": "Prüfung ausstehend",
+      "workedTotal": "Std. Ist",
+      "scheduledTotal": "Std. geplant",
+      "adherence": "Einhaltung {{rate}} %",
+      "tipWorked": "{{hours}} Std. Ist",
+      "tipScheduled": "{{hours}} Std. geplant",
+      "tipPending": "{{hours}} Std. ausstehend"
     },
     "cost": {
       "title": "Zulagen und Kosten",
@@ -622,7 +633,12 @@
       "lateMeta": "{{days}} Tage · {{minutes}} Min.",
       "overtimeMeta": "{{days}} Tage · {{minutes}} Min.",
       "none": "Niemand in diesem Zeitraum.",
-      "unavailable": "Wählen Sie höchstens zwei Monate."
+      "unavailable": "Wählen Sie höchstens zwei Monate.",
+      "noSchedule": "Keine geplanten Schichten in diesem Zeitraum - fügen Sie einen Schichtplan hinzu, um die Quote zu sehen.",
+      "lateTotal": "{{minutes}} Min. insgesamt",
+      "overtimeTotal": "{{hours}} Std. insgesamt",
+      "lateShort": "{{days}} T · {{minutes}} Min.",
+      "overtimeShort": "{{days}} T · {{minutes}} Min."
     }
   },
   "devices": {

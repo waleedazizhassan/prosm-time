@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { AlertTriangle, ArrowDown, ArrowUp, CalendarRange, FileDown, GripVertical, Settings2 } from "lucide-react";
+import { AlarmClock, AlertTriangle, ArrowDown, ArrowUp, CalendarRange, Clock3, FileDown, GripVertical, HardHat, LogOut, Palmtree, Settings2, Timer, TrendingDown, TrendingUp, Users, UserX, Wallet, type LucideIcon } from "lucide-react";
 
 import { useAuth } from "../../../core/context/AuthContext";
 import usePlanFeatures from "../../../core/hooks/usePlanFeatures";
@@ -576,61 +576,32 @@ export default function ManagerDashboard() {
         </div>
       ) : kpi ? (
         <div className={styles.kpis} style={{ ["--kpi-count" as string]: kpiCount, ["--kpi-half" as string]: Math.ceil(kpiCount / 2) }}>
-          <button type="button" className={styles.kpi} onClick={() => setSheet("present")} title={t("manager.kpi.def.present")}>
-            <span className={styles.kpiLabel}>{t("manager.kpi.present")}</span>
-            <span className={styles.kpiValue}>{kpi.presentNow}</span>
-            <span className={styles.kpiHint}>{kpi.hasSchedule ? t("manager.kpi.ofExpected", { expected: kpi.expectedToday }) : t("manager.kpi.ofTeam", { team: data?.teamSize ?? 0 })}</span>
-            <span className={styles.bar}>
-              <span style={{ width: `${Math.min(100, Math.round((kpi.presentNow / Math.max(1, kpi.hasSchedule ? kpi.expectedToday : data?.teamSize ?? 1)) * 100))}%` }} />
-            </span>
-          </button>
-          <button type="button" className={styles.kpi} onClick={() => setSheet("hours")} title={t("manager.kpi.def.hours")}>
-            <span className={styles.kpiLabel}>{t("manager.kpi.hours")}</span>
-            <span className={styles.kpiValue}>{hours(kpi.workedMinutes)}</span>
-            <span className={styles.kpiHint}>{kpi.scheduledMinutes ? t("manager.kpi.scheduled", { hours: hours(kpi.scheduledMinutes) }) : t("manager.kpi.noSchedule")}</span>
-            <Trend value={workedTrend} t={t} />
-          </button>
-          <button type="button" className={styles.kpi} onClick={() => setSheet("late")} title={t("manager.kpi.def.late")}>
-            <span className={styles.kpiLabel}>{t("manager.kpi.late")}</span>
-            <span className={styles.kpiValue}>{kpi.lateToday}</span>
-            <span className={styles.kpiHint}>{t("manager.kpi.lateInPeriod", { count: kpi.lateCount })}</span>
-            <Trend value={lateTrend} t={t} />
-          </button>
-          <button type="button" className={styles.kpi} onClick={() => setAbsenceView("absent")} title={t("manager.kpi.def.absent")}>
-            <span className={styles.kpiLabel}>{t("manager.kpi.absent")}</span>
-            <span className={styles.kpiValue}>{kpi.absentToday}</span>
-            <span className={styles.kpiHint}>{t("manager.kpi.def.absentShort")}</span>
-          </button>
-          <button type="button" className={styles.kpi} onClick={() => setAbsenceView("leave")} title={t("manager.kpi.def.leave")}>
-            <span className={styles.kpiLabel}>{t("manager.kpi.onLeaveCard")}</span>
-            <span className={styles.kpiValue}>{kpi.onLeaveToday}</span>
-            <span className={styles.kpiHint}>{t("manager.kpi.def.leaveShort")}</span>
-          </button>
+          {/* Owner 2026-11-09 (review the KPI cards): one shape for every card - icon and name, the figure
+              with its unit, one line of context, and a short trend or progress line at the bottom. */}
+          <Kpi icon={Users} label={t("manager.kpi.present")} value={kpi.presentNow} title={t("manager.kpi.def.present")} onClick={() => setSheet("present")}
+            hint={kpi.hasSchedule ? t("manager.kpi.ofExpected", { expected: kpi.expectedToday }) : t("manager.kpi.ofTeam", { team: data?.teamSize ?? 0 })}
+            progress={Math.min(100, Math.round((kpi.presentNow / Math.max(1, kpi.hasSchedule ? kpi.expectedToday : data?.teamSize ?? 1)) * 100))} />
+          <Kpi icon={Clock3} label={t("manager.kpi.hours")} value={hours(kpi.workedMinutes)} unit={t("manager.kpi.hoursShort")} title={t("manager.kpi.def.hours")} onClick={() => setSheet("hours")}
+            hint={kpi.scheduledMinutes ? t("manager.kpi.scheduled", { hours: hours(kpi.scheduledMinutes) }) : t("manager.kpi.noSchedule")}
+            trend={workedTrend} t={t} />
+          <Kpi icon={AlarmClock} label={t("manager.kpi.late")} value={kpi.lateToday} title={t("manager.kpi.def.late")} onClick={() => setSheet("late")} tone={kpi.lateToday > 0 ? "warn" : undefined}
+            hint={t("manager.kpi.lateInPeriod", { count: kpi.lateCount })} trend={lateTrend} t={t} />
+          <Kpi icon={UserX} label={t("manager.kpi.absent")} value={kpi.absentToday} title={t("manager.kpi.def.absent")} onClick={() => setAbsenceView("absent")} tone={kpi.absentToday > 0 ? "bad" : undefined}
+            hint={t("manager.kpi.def.absentShort")} />
+          <Kpi icon={Palmtree} label={t("manager.kpi.onLeaveCard")} value={kpi.onLeaveToday} title={t("manager.kpi.def.leave")} onClick={() => setAbsenceView("leave")}
+            hint={t("manager.kpi.def.leaveShort")} />
           {/* owner 2026-10-27: still clocked in an hour or more after the shift ended */}
-          <button type="button" className={`${styles.kpi} ${overdueCount > 0 ? styles.kpiAlert : ""}`} onClick={() => setSheet("overdue")} title={t("manager.kpi.def.overdue")}>
-            <span className={styles.kpiLabel}>{t("manager.kpi.overdue")}</span>
-            <span className={styles.kpiValue}>{overdueCount}</span>
-            <span className={styles.kpiHint}>{t("manager.kpi.overdueHint")}</span>
-          </button>
-          <button type="button" className={styles.kpi} onClick={() => setSheet("overtime")} title={t("manager.kpi.def.overtime")}>
-            <span className={styles.kpiLabel}>{t("manager.kpi.overtime")}</span>
-            <span className={styles.kpiValue}>{hours(kpi.overtimeMinutes)}</span>
-            <span className={styles.kpiHint}>{kpi.pendingMinutes ? t("manager.kpi.pendingExcluded", { hours: hours(kpi.pendingMinutes) }) : t("manager.hoursUnit")}</span>
-            <Trend value={overtimeTrend} t={t} />
-          </button>
+          <Kpi icon={LogOut} label={t("manager.kpi.overdue")} value={overdueCount} title={t("manager.kpi.def.overdue")} onClick={() => setSheet("overdue")} tone={overdueCount > 0 ? "bad" : undefined}
+            hint={t("manager.kpi.overdueHint")} />
+          <Kpi icon={Timer} label={t("manager.kpi.overtimeShort")} value={hours(kpi.overtimeMinutes)} unit={t("manager.kpi.hoursShort")} title={t("manager.kpi.def.overtime")} onClick={() => setSheet("overtime")}
+            hint={kpi.pendingMinutes ? t("manager.kpi.pendingExcluded", { hours: hours(kpi.pendingMinutes) }) : t("manager.kpi.overtimeApproved")}
+            trend={overtimeTrend} t={t} />
           {data?.canViewExternal ? (
-            <button type="button" className={styles.kpi} onClick={() => document.getElementById("dash-external")?.scrollIntoView({ behavior: "smooth", block: "start" })}>
-              <span className={styles.kpiLabel}>{t("manager.kpi.external")}</span>
-              <span className={styles.kpiValue}>{externalNow}</span>
-              <span className={styles.kpiHint}>{t("manager.kpi.externalSites", { count: externalSites })}</span>
-            </button>
+            <Kpi icon={HardHat} label={t("manager.kpi.external")} value={externalNow} hint={t("manager.kpi.externalSites", { count: externalSites })}
+              onClick={() => document.getElementById("dash-external")?.scrollIntoView({ behavior: "smooth", block: "start" })} />
           ) : null}
           {data?.canViewCost && kpi.estimatedCost !== null ? (
-            <button type="button" className={styles.kpi} onClick={() => navigate("/allowances")}>
-              <span className={styles.kpiLabel}>{t("manager.kpi.cost")}</span>
-              <span className={styles.kpiValue}>{kpi.estimatedCost.toLocaleString(appLocale(i18n.language), { maximumFractionDigits: 0 })}</span>
-              <span className={styles.kpiHint}>{t("manager.kpi.costNote")}</span>
-            </button>
+            <Kpi icon={Wallet} label={t("manager.kpi.cost")} value={kpi.estimatedCost.toLocaleString(appLocale(i18n.language), { maximumFractionDigits: 0 })} hint={t("manager.kpi.costNote")} onClick={() => navigate("/allowances")} />
           ) : null}
         </div>
       ) : null}
@@ -780,7 +751,33 @@ type T = ReturnType<typeof useTranslation>["t"];
 
 function Trend({ value, t }: { value: { change: number; good: boolean } | null; t: T }) {
   if (!value) return null;
-  return <span className={value.good ? styles.trendUp : styles.trendDown}>{t("manager.kpi.vsPrevious", { change: `${value.change > 0 ? "+" : ""}${value.change}%` })}</span>;
+  const Arrow = value.change >= 0 ? TrendingUp : TrendingDown;
+  const full = t("manager.kpi.vsPrevious", { change: `${value.change > 0 ? "+" : ""}${value.change}%` });
+  return (
+    <span className={value.good ? styles.trendUp : styles.trendDown} title={full} aria-label={full}>
+      <Arrow size={12} aria-hidden="true" /> {Math.abs(value.change)}%
+    </span>
+  );
+}
+
+function Kpi({ icon: Icon, label, value, unit, hint, title, onClick, trend: change, t, progress, tone }: {
+  icon: LucideIcon; label: string; value: string | number; unit?: string; hint: string; title?: string; onClick: () => void;
+  trend?: { change: number; good: boolean } | null; t?: T; progress?: number; tone?: "warn" | "bad";
+}) {
+  return (
+    <button type="button" className={`${styles.kpi} ${tone === "bad" ? styles.kpiAlert : tone === "warn" ? styles.kpiWarn : ""}`} onClick={onClick} title={title}>
+      <span className={styles.kpiHead}>
+        <span className={styles.kpiIcon} aria-hidden="true"><Icon size={14} /></span>
+        <span className={styles.kpiLabel}>{label}</span>
+      </span>
+      <span className={styles.kpiValue}>{value}{unit ? <small className={styles.kpiUnit}> {unit}</small> : null}</span>
+      <span className={styles.kpiHint}>{hint}</span>
+      <span className={styles.kpiFoot}>
+        {progress !== undefined ? <span className={styles.bar} style={{ flex: 1 }}><span style={{ width: `${progress}%` }} /></span> : null}
+        {change && t ? <Trend value={change} t={t} /> : null}
+      </span>
+    </button>
+  );
 }
 
 function SiteRows({ site, t, externalOpen, onToggleExternal, onFilter }: { site: DashboardSite; t: T; externalOpen: boolean; onToggleExternal: () => void; onFilter: () => void }) {
@@ -848,50 +845,73 @@ function TopSitesCost({ sites, t, language }: { sites: DashboardSite[]; t: T; la
   );
 }
 
+// Owner 2026-11-09: "planned vs actual" is renamed (Working hours trend); totals and the adherence on top,
+// light gridlines, today marked, and a legend of colour chips instead of a sentence.
 function ScheduleChart({ data, mode, t, language }: { data: Dashboard | null; mode: "week" | "month" | "year"; t: T; language: string }) {
   if (!data) return <div className={styles.skeleton} style={{ height: 220 }} />;
+  const todayIso = iso(new Date());
   const bars =
     mode === "year"
-      ? data.chartMonthly.map((month) => ({ label: new Date(`${month.month}-01`).toLocaleDateString(appLocale(language), { month: "short" }), worked: month.workedMinutes, scheduled: 0, pending: 0 }))
+      ? data.chartMonthly.map((month) => ({ key: month.month, label: new Date(`${month.month}-01`).toLocaleDateString(appLocale(language), { month: "short" }), worked: month.workedMinutes, scheduled: 0, pending: 0, today: todayIso.startsWith(month.month) }))
       : data.chart.map((day) => ({
+          key: day.day,
           label: new Date(day.day).toLocaleDateString(appLocale(language), mode === "week" ? { weekday: "short" } : { day: "numeric" }),
           worked: day.workedMinutes,
           scheduled: day.scheduledMinutes,
           pending: day.pendingMinutes,
+          today: day.day.slice(0, 10) === todayIso,
         }));
   if (bars.length === 0 || bars.every((bar) => bar.worked === 0 && bar.scheduled === 0)) return <EmptyState message={t("manager.chart.empty")} />;
   const max = Math.max(...bars.map((bar) => Math.max(bar.worked + bar.pending, bar.scheduled)), 1);
   const width = 100 / bars.length;
   const rtl = isRtl(language);
+  const totalWorked = bars.reduce((sum, bar) => sum + bar.worked, 0);
+  const totalScheduled = bars.reduce((sum, bar) => sum + bar.scheduled, 0);
+  const hasPending = bars.some((bar) => bar.pending > 0);
+  const adherence = totalScheduled > 0 ? Math.round((totalWorked / totalScheduled) * 100) : null;
   return (
     <>
+      <div className={styles.chartSummary}>
+        <span><b>{hours(totalWorked)}</b> {t("manager.chart.workedTotal")}</span>
+        {totalScheduled > 0 ? <span><b>{hours(totalScheduled)}</b> {t("manager.chart.scheduledTotal")}</span> : null}
+        {adherence !== null ? <span className={adherence >= 95 ? styles.trendUp : styles.trendDown}>{t("manager.chart.adherence", { rate: adherence })}</span> : null}
+      </div>
       <svg viewBox="0 0 100 60" preserveAspectRatio="none" className={styles.chart} role="img" aria-label={t("manager.chart.title")}>
+        {[0.25, 0.5, 0.75, 1].map((f) => (
+          <line key={f} x1="0" x2="100" y1={56 - f * 52} y2={56 - f * 52} stroke="var(--border-light)" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+        ))}
         {bars.map((bar, index) => {
           // the labels below follow the page direction; so do the bars (Sunday on the right in Arabic)
           const slot = rtl ? bars.length - 1 - index : index;
-          const x = slot * width + width * 0.15;
-          const w = width * 0.7;
+          const x = slot * width + width * 0.18;
+          const w = width * 0.64;
           const workedH = (bar.worked / max) * 52;
           const pendingH = (bar.pending / max) * 52;
           const scheduledH = (bar.scheduled / max) * 52;
           return (
-            <g key={index}>
-              {bar.scheduled ? <rect x={x} y={56 - scheduledH} width={w} height={scheduledH} fill="none" stroke="var(--text-tertiary, #94a3b8)" strokeDasharray="1 1" strokeWidth="0.3" /> : null}
-              <rect x={x} y={56 - workedH} width={w} height={workedH} fill="var(--brand-primary)" rx="0.6" />
-              {bar.pending ? <rect x={x} y={56 - workedH - pendingH} width={w} height={pendingH} fill="var(--status-warning-text, #b45309)" opacity="0.45" /> : null}
-              <title>{`${bar.label}: ${hours(bar.worked)}${bar.scheduled ? ` / ${hours(bar.scheduled)}` : ""}`}</title>
+            <g key={bar.key}>
+              {bar.today ? <rect x={slot * width} y="0" width={width} height="56" fill="var(--brand-primary)" opacity="0.07" /> : null}
+              {bar.scheduled ? <rect x={x} y={56 - scheduledH} width={w} height={scheduledH} fill="var(--text-tertiary, #94a3b8)" opacity="0.22" rx="0.6" /> : null}
+              <rect x={x + w * 0.15} y={56 - workedH} width={w * 0.7} height={workedH} fill="var(--brand-primary)" rx="0.6" />
+              {bar.pending ? <rect x={x + w * 0.15} y={56 - workedH - pendingH} width={w * 0.7} height={pendingH} fill="var(--status-warning-text, #b45309)" opacity="0.55" /> : null}
+              <title>{`${bar.label}: ${t("manager.chart.tipWorked", { hours: hours(bar.worked) })}${bar.scheduled ? ` · ${t("manager.chart.tipScheduled", { hours: hours(bar.scheduled) })}` : ""}${bar.pending ? ` · ${t("manager.chart.tipPending", { hours: hours(bar.pending) })}` : ""}`}</title>
             </g>
           );
         })}
+        <line x1="0" x2="100" y1="56" y2="56" stroke="var(--text-tertiary, #94a3b8)" strokeWidth="1" vectorEffect="non-scaling-stroke" />
       </svg>
-      <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", fontSize: "0.75rem", color: "var(--text-secondary)" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem", color: "var(--text-secondary)" }}>
         {bars.map((bar, index) => (
-          <span key={index} style={{ width: `${width}%`, textAlign: "center", overflow: "hidden" }}>
+          <span key={bar.key} style={{ width: `${width}%`, textAlign: "center", overflow: "hidden", fontWeight: bar.today ? 700 : undefined, color: bar.today ? "var(--text-primary)" : undefined }}>
             {bars.length > 16 && index % 3 ? "" : bar.label}
           </span>
         ))}
       </div>
-      <span className={styles.rowMeta}>{t("manager.chart.legend")}</span>
+      <div className={styles.legend}>
+        <span><i style={{ background: "var(--brand-primary)" }} /> {t("manager.chart.worked")}</span>
+        {totalScheduled > 0 ? <span><i style={{ background: "var(--text-tertiary, #94a3b8)", opacity: 0.4 }} /> {t("manager.chart.scheduled")}</span> : null}
+        {hasPending ? <span><i style={{ background: "var(--status-warning-text, #b45309)", opacity: 0.55 }} /> {t("manager.chart.pending")}</span> : null}
+      </div>
     </>
   );
 }

@@ -343,7 +343,7 @@
       "sites": "Siti",
       "approvals": "Approvazioni",
       "people": "Persone per ruolo",
-      "chart": "Previsto vs effettivo",
+      "chart": "Andamento delle ore lavorate",
       "cost": "Indennità e costi",
       "audit": "Registro delle azioni",
       "external": "Lavoratori esterni",
@@ -399,7 +399,10 @@
         "leave": "Persone con ferie approvate che includono oggi. Non sono contate come assenti.",
         "overdue": "Ancora in servizio un'ora dopo la fine del turno (o della giornata della sede), o aperti da un giorno precedente.",
         "overtime": "Straordinari approvati nel periodo. Quelli in attesa non sono contati."
-      }
+      },
+      "hoursShort": "h",
+      "overtimeShort": "Straordinari",
+      "overtimeApproved": "Straordinari approvati nel periodo"
     },
     "map": {
       "title": "I siti ora",
@@ -476,12 +479,20 @@
       "title": "Persone"
     },
     "chart": {
-      "title": "Previsto vs effettivo",
+      "title": "Andamento delle ore lavorate",
       "week": "Settimana",
       "month": "Mese",
       "year": "Anno",
       "empty": "Nessuna ora in questo periodo.",
-      "legend": "Pieno: lavorato · tratteggiato: previsto · chiaro: in revisione"
+      "worked": "Effettive",
+      "scheduled": "Pianificate",
+      "pending": "In attesa di revisione",
+      "workedTotal": "h effettive",
+      "scheduledTotal": "h pianificate",
+      "adherence": "Aderenza {{rate}}%",
+      "tipWorked": "{{hours}} h effettive",
+      "tipScheduled": "{{hours}} h pianificate",
+      "tipPending": "{{hours}} h in attesa"
     },
     "cost": {
       "title": "Indennità e costi",
@@ -626,7 +637,12 @@
       "lateMeta": "{{days}} giorni · {{minutes}} min",
       "overtimeMeta": "{{days}} giorni · {{minutes}} min",
       "none": "Nessuno in questo periodo.",
-      "unavailable": "Scegli al massimo due mesi."
+      "unavailable": "Scegli al massimo due mesi.",
+      "noSchedule": "Nessun turno pianificato in questo periodo - aggiungi una pianificazione per vedere il tasso.",
+      "lateTotal": "{{minutes}} min in totale",
+      "overtimeTotal": "{{hours}} h in totale",
+      "lateShort": "{{days}} g · {{minutes}} min",
+      "overtimeShort": "{{days}} g · {{minutes}} min"
     }
   },
   "devices": {

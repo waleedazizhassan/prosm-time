@@ -343,7 +343,7 @@
       "sites": "Sedes",
       "approvals": "Aprobaciones",
       "people": "Personas por rol",
-      "chart": "Programado vs. real",
+      "chart": "Tendencia de horas trabajadas",
       "cost": "Asignaciones y coste",
       "audit": "Registro de acciones",
       "external": "Trabajadores externos",
@@ -399,7 +399,10 @@
         "leave": "Personas cuyo permiso aprobado incluye hoy. No cuentan como ausentes.",
         "overdue": "Siguen con entrada una hora después del fin de su turno (o del día de la sede), o abierta desde un día anterior.",
         "overtime": "Horas extra aprobadas en el periodo. Las pendientes de revisión no cuentan."
-      }
+      },
+      "hoursShort": "h",
+      "overtimeShort": "Horas extra",
+      "overtimeApproved": "Horas extra aprobadas en el período"
     },
     "map": {
       "title": "Sedes ahora",
@@ -476,12 +479,20 @@
       "title": "Personas"
     },
     "chart": {
-      "title": "Programado vs. real",
+      "title": "Tendencia de horas trabajadas",
       "week": "Semana",
       "month": "Mes",
       "year": "Año",
       "empty": "Aún no hay horas en este período.",
-      "legend": "Relleno: trabajado · discontinuo: programado · claro: pendiente de revisión"
+      "worked": "Real",
+      "scheduled": "Programado",
+      "pending": "Pendiente de revisión",
+      "workedTotal": "h reales",
+      "scheduledTotal": "h programadas",
+      "adherence": "Cumplimiento {{rate}} %",
+      "tipWorked": "{{hours}} h reales",
+      "tipScheduled": "{{hours}} h programadas",
+      "tipPending": "{{hours}} h pendientes"
     },
     "cost": {
       "title": "Asignaciones y coste",
@@ -626,7 +637,12 @@
       "lateMeta": "{{days}} días · {{minutes}} min",
       "overtimeMeta": "{{days}} días · {{minutes}} min",
       "none": "Nadie en este período.",
-      "unavailable": "Elige un período de dos meses como máximo."
+      "unavailable": "Elige un período de dos meses como máximo.",
+      "noSchedule": "No hay turnos programados en este período - añada un horario de turnos para ver la tasa.",
+      "lateTotal": "{{minutes}} min en total",
+      "overtimeTotal": "{{hours}} h en total",
+      "lateShort": "{{days}} d · {{minutes}} min",
+      "overtimeShort": "{{days}} d · {{minutes}} min"
     }
   },
   "devices": {

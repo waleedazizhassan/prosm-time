@@ -340,7 +340,7 @@
       "sites": "Sites",
       "approvals": "Approvals",
       "people": "People by role",
-      "chart": "Scheduled vs actual",
+      "chart": "Working hours trend",
       "cost": "Allowances and cost",
       "audit": "Action log",
       "external": "External workers",
@@ -396,7 +396,10 @@
         "leave": "People whose approved leave covers today. They are not counted as absent.",
         "overdue": "Still clocked in an hour after their shift (or the site's day) ended, or still open from an earlier day.",
         "overtime": "Approved overtime in the chosen period. Overtime awaiting review is not counted."
-      }
+      },
+      "hoursShort": "h",
+      "overtimeShort": "Overtime",
+      "overtimeApproved": "Approved overtime in the period"
     },
     "map": {
       "title": "Sites now",
@@ -473,12 +476,20 @@
       "title": "People"
     },
     "chart": {
-      "title": "Scheduled vs actual",
+      "title": "Working hours trend",
       "week": "Week",
       "month": "Month",
       "year": "Year",
       "empty": "No hours in this period yet.",
-      "legend": "Filled: worked · dashed: scheduled · light: awaiting review"
+      "worked": "Actual",
+      "scheduled": "Scheduled",
+      "pending": "Pending review",
+      "workedTotal": "h actual",
+      "scheduledTotal": "h scheduled",
+      "adherence": "Adherence {{rate}}%",
+      "tipWorked": "{{hours}} h actual",
+      "tipScheduled": "{{hours}} h scheduled",
+      "tipPending": "{{hours}} h pending review"
     },
     "cost": {
       "title": "Allowances and cost",
@@ -622,7 +633,12 @@
       "lateMeta": "{{days}} days · {{minutes}} min",
       "overtimeMeta": "{{days}} days · {{minutes}} min",
       "none": "Nobody this period.",
-      "unavailable": "Choose a period of two months at most."
+      "unavailable": "Choose a period of two months at most.",
+      "noSchedule": "No scheduled shifts in this period - add a shift schedule to see the rate.",
+      "lateTotal": "{{minutes}} min in total",
+      "overtimeTotal": "{{hours}} h in total",
+      "lateShort": "{{days}} d · {{minutes}} min",
+      "overtimeShort": "{{days}} d · {{minutes}} min"
     }
   },
   "devices": {
