@@ -105,5 +105,20 @@
     "saved": "Saved.",
     "failed": "Unable to save the checklist.",
     "tooMany": "Twenty items at most."
+  },
+  "roster": {
+    "label": "Week roster",
+    "count": "{{count}} shifts",
+    "notWorked": "Not worked",
+    "addFor": "Add a shift for {{name}} on {{day}}",
+    "someoneElse": "Someone else",
+    "addOn": "Add a shift on {{day}}",
+    "empty": "No shifts this week. Press + under any day to add one.",
+    "previous": "Previous week",
+    "next": "Next week",
+    "thisWeek": "This week",
+    "hint": "Tap an empty cell to add a shift, or a shift to cancel it. The colour comes from the shift template; ✓ means it was worked.",
+    "days": "Days",
+    "assignDays": "Add {{count}} shifts"
   }
 }

@@ -105,5 +105,20 @@
     "saved": "Enregistré.",
     "failed": "Impossible d’enregistrer la liste.",
     "tooMany": "Vingt éléments au plus."
+  },
+  "roster": {
+    "label": "Planning de la semaine",
+    "count": "{{count}} quarts",
+    "notWorked": "Non travaillé",
+    "addFor": "Ajouter un quart pour {{name}} le {{day}}",
+    "someoneElse": "Quelqu'un d'autre",
+    "addOn": "Ajouter un quart le {{day}}",
+    "empty": "Aucun quart cette semaine. Touchez + sous un jour.",
+    "previous": "Semaine précédente",
+    "next": "Semaine suivante",
+    "thisWeek": "Cette semaine",
+    "hint": "Touchez une case vide pour ajouter un quart, ou un quart pour l'annuler. La couleur vient du modèle ; ✓ signifie travaillé.",
+    "days": "Jours",
+    "assignDays": "Ajouter {{count}} quarts"
   }
 }

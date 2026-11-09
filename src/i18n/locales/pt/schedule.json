@@ -105,5 +105,20 @@
     "saved": "Salvo.",
     "failed": "Não foi possível salvar o checklist.",
     "tooMany": "No máximo vinte itens."
+  },
+  "roster": {
+    "label": "Escala da semana",
+    "count": "{{count}} turnos",
+    "notWorked": "Não trabalhado",
+    "addFor": "Adicionar turno para {{name}} em {{day}}",
+    "someoneElse": "Outra pessoa",
+    "addOn": "Adicionar turno em {{day}}",
+    "empty": "Nenhum turno nesta semana. Toque em + sob qualquer dia.",
+    "previous": "Semana anterior",
+    "next": "Próxima semana",
+    "thisWeek": "Esta semana",
+    "hint": "Toque numa célula vazia para adicionar um turno, ou num turno para cancelá-lo. A cor vem do modelo; ✓ significa trabalhado.",
+    "days": "Dias",
+    "assignDays": "Adicionar {{count}} turnos"
   }
 }

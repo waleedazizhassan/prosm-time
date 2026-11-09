@@ -1,0 +1,137 @@
+/* owner 2026-11-09: the week as a roster, sideways on a phone with the names kept in view */
+.scroller {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+}
+
+.roster {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+  font-size: 0.8125rem;
+}
+
+.roster th,
+.roster td {
+  padding: 6px;
+  border-bottom: 1px solid var(--border-light);
+  border-inline-start: 1px solid var(--border-light);
+  vertical-align: top;
+}
+
+.roster thead th {
+  background: var(--surface-sunken);
+  text-align: center;
+  font-weight: var(--font-weight-semibold);
+}
+
+.personCol {
+  position: sticky;
+  inset-inline-start: 0;
+  z-index: 1;
+  width: 9.5rem;
+  border-inline-start: 0 !important;
+  background: var(--surface-card);
+  color: var(--text-primary);
+  font-weight: var(--font-weight-semibold);
+  text-align: start !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.roster thead .personCol {
+  z-index: 2;
+  background: var(--surface-sunken);
+  color: var(--text-secondary);
+}
+
+.dayName,
+.dayDate,
+.dayCount {
+  display: block;
+}
+
+.dayName {
+  color: var(--text-primary);
+}
+
+.dayDate,
+.dayCount {
+  color: var(--text-secondary);
+  font-size: 0.6875rem;
+  font-weight: normal;
+}
+
+.today {
+  background: color-mix(in srgb, var(--brand-primary) 7%, var(--surface-card));
+}
+
+.roster thead th.today {
+  background: color-mix(in srgb, var(--brand-primary) 18%, var(--surface-sunken));
+}
+
+.shift {
+  display: grid;
+  width: 100%;
+  gap: 2px;
+  margin-bottom: 4px;
+  padding: 4px 6px;
+  border: 1px solid var(--border-light);
+  border-inline-start: 4px solid var(--brand-primary);
+  border-radius: 8px;
+  background: var(--surface-raised, var(--surface-card));
+  color: var(--text-primary);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.shift:hover {
+  border-color: var(--brand-primary);
+}
+
+.shiftTime {
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.worked {
+  color: var(--status-success-text);
+  font-size: 0.6875rem;
+}
+
+.missed {
+  color: var(--status-danger-text, #991b1b);
+  font-size: 0.6875rem;
+}
+
+.add {
+  display: grid;
+  width: 100%;
+  min-height: 30px;
+  place-items: center;
+  border: 1px dashed var(--border-light);
+  border-radius: 8px;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  opacity: 0.55;
+}
+
+.add:hover,
+.add:focus-visible {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+  opacity: 1;
+}
+
+.addRow th {
+  color: var(--text-secondary);
+  font-weight: normal;
+}

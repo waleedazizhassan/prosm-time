@@ -105,5 +105,20 @@
     "saved": "Gespeichert.",
     "failed": "Checkliste konnte nicht gespeichert werden.",
     "tooMany": "Höchstens zwanzig Punkte."
+  },
+  "roster": {
+    "label": "Wochenplan",
+    "count": "{{count}} Schichten",
+    "notWorked": "Nicht gearbeitet",
+    "addFor": "Schicht für {{name}} am {{day}} hinzufügen",
+    "someoneElse": "Jemand anderes",
+    "addOn": "Schicht am {{day}} hinzufügen",
+    "empty": "Keine Schichten in dieser Woche. Tippen Sie auf + unter einem Tag.",
+    "previous": "Vorige Woche",
+    "next": "Nächste Woche",
+    "thisWeek": "Diese Woche",
+    "hint": "Leere Zelle antippen, um eine Schicht hinzuzufügen, oder eine Schicht, um sie zu stornieren. Die Farbe stammt aus der Vorlage; ✓ heißt gearbeitet.",
+    "days": "Tage",
+    "assignDays": "{{count}} Schichten hinzufügen"
   }
 }

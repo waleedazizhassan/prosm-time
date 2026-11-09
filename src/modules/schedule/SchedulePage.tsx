@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { useAuth } from "../../core/context/AuthContext";
@@ -6,7 +7,8 @@ import ShiftRepository, { type MyShiftRow, type ShiftActual, type ShiftTemplate,
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
-import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
+import { appLocale, formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
+import { isRtl } from "../../i18n/direction";
 
 import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
@@ -20,7 +22,8 @@ import ErrorText from "../../components/common/ErrorText";
 import shiftsHeaderImage from "../../assets/illustrations/schedule.svg";
 import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
-import DateRange from "../../components/common/DateRange";
+import Modal from "../../components/common/Modal";
+import ScheduleRoster, { isoDay, weekDays } from "./ScheduleRoster";
 import FieldRow from "../../components/common/FieldRow";
 import BreakRulesModal from "./BreakRulesModal";
 import ShiftSwapCard from "./ShiftSwapCard";
@@ -30,8 +33,14 @@ import ChecklistSettingsCard from "./ChecklistSettingsCard";
 import usePlanFeatures from "../../core/hooks/usePlanFeatures";
 import PlanLockedNote from "../../components/common/PlanLockedNote";
 
-function isoDate(date: Date): string {
-  return date.toISOString().slice(0, 10);
+// the week starts on Sunday (as the dashboard's chart)
+function startOfWeek(date: Date): string {
+  return isoDay(new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay()));
+}
+
+function shiftWeek(start: string, days: number): string {
+  const d = new Date(`${start}T00:00:00`);
+  return isoDay(new Date(d.getFullYear(), d.getMonth(), d.getDate() + days));
 }
 
 // end <= start means the shift crosses midnight and really ends the
@@ -72,8 +81,12 @@ export default function SchedulePage() {
   const [actuals, setActuals] = useState<ShiftActual[]>([]);
   const [siteShiftsLoading, setSiteShiftsLoading] = useState(false);
   const [costKey, setCostKey] = useState(0);
-  const [rangeStart, setRangeStart] = useState(isoDate(today));
-  const [rangeEnd, setRangeEnd] = useState(isoDate(new Date(today.getTime() + 13 * 24 * 60 * 60 * 1000)));
+  const [weekStart, setWeekStart] = useState(startOfWeek(today));
+  const rangeStart = weekStart;
+  const rangeEnd = shiftWeek(weekStart, 6);
+  const [assignOpen, setAssignOpen] = useState(false);
+  const [assignDays, setAssignDays] = useState<string[]>([]);
+  const [openShift, setOpenShift] = useState<SiteShiftRow | null>(null);
 
   const [templateName, setTemplateName] = useState("");
   const [templateStart, setTemplateStart] = useState("08:00");
@@ -83,7 +96,6 @@ export default function SchedulePage() {
 
   const [assignUserId, setAssignUserId] = useState("");
   const [assignTemplateId, setAssignTemplateId] = useState("");
-  const [assignDate, setAssignDate] = useState(isoDate(today));
   const [assignStart, setAssignStart] = useState("08:00");
   const [assignEnd, setAssignEnd] = useState("16:00");
   const [assignNotes, setAssignNotes] = useState("");
@@ -164,16 +176,31 @@ export default function SchedulePage() {
     }
   };
 
+  const openAssign = (userId: string | null, day: string) => {
+    setAssignUserId(userId ?? "");
+    setAssignDays([day]);
+    setAssignNotes("");
+    setAssignError("");
+    setAssignOpen(true);
+  };
+
+  // one shift per chosen day; stops at the first refusal and says which day
   const handleAssign = async () => {
-    if (!assignUserId || !selectedSiteId || !assignDate) return;
+    if (!assignUserId || !selectedSiteId || assignDays.length === 0) return;
     setAssignSubmitting(true);
     setAssignError("");
-    const result = await ShiftRepository.assign(assignUserId, selectedSiteId, assignDate, `${assignStart}:00`, `${assignEnd}:00`, assignTemplateId || undefined, assignNotes);
-    setAssignSubmitting(false);
-    if (!result.success) {
-      setAssignError(humanizeBackendError(result.message, t) ?? t("assignError"));
-      return;
+    for (const day of assignDays) {
+      const result = await ShiftRepository.assign(assignUserId, selectedSiteId, day, `${assignStart}:00`, `${assignEnd}:00`, assignTemplateId || undefined, assignNotes);
+      if (!result.success) {
+        setAssignSubmitting(false);
+        setAssignError(`${formatDateOnly(day, i18n.language)}: ${humanizeBackendError(result.message, t) ?? t("assignError")}`);
+        setAssignDays((all) => all.filter((d) => d >= day));
+        await loadSiteData();
+        return;
+      }
     }
+    setAssignSubmitting(false);
+    setAssignOpen(false);
     setAssignNotes("");
     await loadSiteData();
   };
@@ -197,31 +224,6 @@ export default function SchedulePage() {
     { key: "notes", header: t("columns.notes"), render: (row) => row.notes ?? "—" },
   ];
 
-  const siteColumns: TableColumn<SiteShiftRow>[] = [
-    { key: "employee", header: t("columns.employee"), render: (row) => row.employeeName },
-    { key: "date", header: t("columns.date"), render: (row) => formatDateOnly(row.shiftDate, i18n.language) },
-    { key: "time", header: t("columns.time"), render: (row) => formatShiftTime(row.startTime, row.endTime, row.crossesMidnight) },
-    {
-      key: "actual",
-      header: t("columns.actual"),
-      render: (row) => {
-        const actual = actuals.find((entry) => entry.assignmentId === row.id);
-        if (!actual) return "—";
-        return `${formatTimeOnly(actual.firstIn, i18n.language)} — ${actual.lastOut ? formatTimeOnly(actual.lastOut, i18n.language) : "…"}`;
-      },
-    },
-    { key: "status", header: t("common:status"), render: (row) => <StatusBadge status={row.status === "scheduled" ? "active" : "revoked"}>{t(`status.${row.status}`)}</StatusBadge> },
-    {
-      key: "actions",
-      header: t("common:actions.label"),
-      render: (row) =>
-        row.status === "scheduled" ? (
-          <Button variant="ghost" size="sm" onClick={() => handleCancel(row.id)} loading={cancellingId === row.id}>
-            {t("cancelAction")}
-          </Button>
-        ) : null,
-    },
-  ];
 
   return (
     <PageShell title="">
@@ -262,15 +264,33 @@ export default function SchedulePage() {
       {canManage && scheduling ? (
         <>
           <Card title={t("manageTitle")}>
-            <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap", marginBottom: "var(--space-3)" }}>
-              <Select label={t("siteLabel")} name="scheduleSite" value={selectedSiteId} onChange={(event) => setSelectedSiteId(event.target.value)} options={sites.map((site) => ({ value: site.id, label: site.name }))} />
-              <DateRange>
-                <Input label={t("rangeStartLabel")} name="scheduleRangeStart" type="date" value={rangeStart} onChange={(event) => setRangeStart(event.target.value)} />
-                <Input label={t("rangeEndLabel")} name="scheduleRangeEnd" type="date" value={rangeEnd} onChange={(event) => setRangeEnd(event.target.value)} />
-              </DateRange>
+            {/* owner 2026-11-09: the site and the week on one line, then the week as a roster */}
+            <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap", alignItems: "flex-end", marginBottom: "var(--space-3)" }}>
+              <div style={{ minWidth: 200 }}>
+                <Select label={t("siteLabel")} name="scheduleSite" value={selectedSiteId} onChange={(event) => setSelectedSiteId(event.target.value)} options={sites.map((site) => ({ value: site.id, label: site.name }))} />
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
+                <Button size="sm" variant="ghost" aria-label={t("roster.previous")} onClick={() => setWeekStart(shiftWeek(weekStart, -7))}>
+                  {isRtl(i18n.language) ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+                </Button>
+                <strong style={{ minWidth: "11rem", textAlign: "center", fontSize: "var(--font-sm)" }}>
+                  {formatDateOnly(rangeStart, i18n.language)} – {formatDateOnly(rangeEnd, i18n.language)}
+                </strong>
+                <Button size="sm" variant="ghost" aria-label={t("roster.next")} onClick={() => setWeekStart(shiftWeek(weekStart, 7))}>
+                  {isRtl(i18n.language) ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
+                </Button>
+                <Button size="sm" variant="ghost" onClick={() => setWeekStart(startOfWeek(new Date()))}>{t("roster.thisWeek")}</Button>
+              </div>
+              <div style={{ marginInlineStart: "auto" }}>
+                <Button onClick={() => openAssign(null, isoDay(new Date()) >= rangeStart && isoDay(new Date()) <= rangeEnd ? isoDay(new Date()) : rangeStart)} disabled={!selectedSiteId}>
+                  <Plus size={16} /> {t("assignTitle")}
+                </Button>
+              </div>
             </div>
-
-            <Table columns={siteColumns} data={siteShifts} getRowId={(row) => row.id} loading={siteShiftsLoading} emptyMessage={t("emptySite")} />
+            <ErrorText>{assignError && !assignOpen ? assignError : ""}</ErrorText>
+            <ScheduleRoster days={weekDays(weekStart)} shifts={siteShifts} actuals={actuals} templates={templates} loading={siteShiftsLoading}
+              onAdd={(userId, day) => openAssign(userId, day)} onOpen={setOpenShift} />
+            <HintText small>{t("roster.hint")}</HintText>
           </Card>
 
           {allows("labor_cost") ? <ScheduleCostCard siteId={selectedSiteId} startDate={rangeStart} endDate={rangeEnd} refreshKey={costKey} /> : null}
@@ -312,38 +332,78 @@ export default function SchedulePage() {
             <ErrorText>{templateError}</ErrorText>
           </Card>
 
-          <Card title={t("assignTitle")}>
-            <FieldRow style={{ gap: "var(--space-2)" }}>
-              <Select
-                label={t("columns.employee")}
-                name="assignUser"
-                value={assignUserId}
-                onChange={(event) => setAssignUserId(event.target.value)}
-                disabled={assignSubmitting}
-                options={[{ value: "", label: t("selectEmployeePlaceholder") }, ...members.map((member) => ({ value: member.id, label: member.fullName }))]}
-              />
-              {templates.length > 0 ? (
-                <Select
-                  label={t("templateLabel")}
-                  name="assignTemplate"
-                  value={assignTemplateId}
-                  onChange={(event) => applyTemplate(event.target.value)}
-                  disabled={assignSubmitting}
-                  options={[{ value: "", label: t("customTimeOption") }, ...templates.map((template) => ({ value: template.id, label: template.name }))]}
-                />
-              ) : null}
-              <Input label={t("columns.date")} name="assignDate" type="date" value={assignDate} onChange={(event) => setAssignDate(event.target.value)} disabled={assignSubmitting} />
-              <Input label={t("startTimeLabel")} name="assignStart" type="time" value={assignStart} onChange={(event) => setAssignStart(event.target.value)} disabled={assignSubmitting} />
-              <Input label={t("endTimeLabel")} name="assignEnd" type="time" value={assignEnd} onChange={(event) => setAssignEnd(event.target.value)} disabled={assignSubmitting} />
-            </FieldRow>
-            <Textarea label={t("notesLabel")} name="assignNotes" value={assignNotes} onChange={(event) => setAssignNotes(event.target.value)} disabled={assignSubmitting} rows={2} />
-            <ErrorText>{assignError}</ErrorText>
-            <Button onClick={handleAssign} loading={assignSubmitting} disabled={!assignUserId || !selectedSiteId || !assignDate}>
-              {t("assignAction")}
-            </Button>
-          </Card>
         </>
       ) : null}
+      {/* owner 2026-11-09: a shift is added from the roster - one person, one or several days of the week */}
+      <Modal isOpen={assignOpen} onClose={() => setAssignOpen(false)} title={t("assignTitle")}
+        footer={<Button onClick={handleAssign} loading={assignSubmitting} disabled={!assignUserId || !selectedSiteId || assignDays.length === 0}>
+          {assignDays.length > 1 ? t("roster.assignDays", { count: assignDays.length }) : t("assignAction")}
+        </Button>}>
+        <ErrorText>{assignError}</ErrorText>
+        <div style={{ display: "grid", gap: "var(--space-3)" }}>
+          <Select
+            label={t("columns.employee")}
+            name="assignUser"
+            value={assignUserId}
+            onChange={(event) => setAssignUserId(event.target.value)}
+            disabled={assignSubmitting}
+            options={[{ value: "", label: t("selectEmployeePlaceholder") }, ...members.map((member) => ({ value: member.id, label: member.fullName }))]}
+          />
+          {templates.length > 0 ? (
+            <Select
+              label={t("templateLabel")}
+              name="assignTemplate"
+              value={assignTemplateId}
+              onChange={(event) => applyTemplate(event.target.value)}
+              disabled={assignSubmitting}
+              options={[{ value: "", label: t("customTimeOption") }, ...templates.map((template) => ({ value: template.id, label: `${template.name} (${formatShiftTime(template.startTime, template.endTime, template.endTime <= template.startTime)})` }))]}
+            />
+          ) : null}
+          <FieldRow style={{ gap: "var(--space-2)" }}>
+            <Input label={t("startTimeLabel")} name="assignStart" type="time" value={assignStart} onChange={(event) => setAssignStart(event.target.value)} disabled={assignSubmitting} />
+            <Input label={t("endTimeLabel")} name="assignEnd" type="time" value={assignEnd} onChange={(event) => setAssignEnd(event.target.value)} disabled={assignSubmitting} />
+          </FieldRow>
+          <div>
+            <span style={{ display: "block", fontSize: "var(--font-sm)", fontWeight: 600, marginBottom: "var(--space-1)" }}>{t("roster.days")}</span>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-1)" }}>
+              {weekDays(weekStart).map((day) => {
+                const on = assignDays.includes(day);
+                const past = day < isoDay(new Date());
+                return (
+                  <button key={day} type="button" disabled={past || assignSubmitting} aria-pressed={on}
+                    onClick={() => setAssignDays((all) => (on ? all.filter((d) => d !== day) : [...all, day].sort()))}
+                    style={{ padding: "6px 10px", borderRadius: 999, border: `1px solid ${on ? "var(--brand-primary)" : "var(--border-light)"}`,
+                      background: on ? "var(--brand-primary)" : "transparent", color: on ? "var(--text-on-brand, #fff)" : "var(--text-primary)",
+                      opacity: past ? 0.4 : 1, cursor: past ? "default" : "pointer", font: "inherit", fontSize: "var(--font-xs)" }}>
+                    {new Date(`${day}T00:00:00`).toLocaleDateString(appLocale(i18n.language), { weekday: "short", day: "numeric" })}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          <Textarea label={t("notesLabel")} name="assignNotes" value={assignNotes} onChange={(event) => setAssignNotes(event.target.value)} disabled={assignSubmitting} rows={2} />
+        </div>
+      </Modal>
+
+      <Modal isOpen={Boolean(openShift)} onClose={() => setOpenShift(null)} title={openShift ? openShift.employeeName : ""}
+        footer={openShift ? (
+          <Button variant="danger" onClick={async () => { await handleCancel(openShift.id); setOpenShift(null); }} loading={cancellingId === openShift.id}>
+            {t("cancelAction")}
+          </Button>
+        ) : undefined}>
+        {openShift ? (
+          <div style={{ display: "grid", gap: "var(--space-2)", fontSize: "var(--font-sm)" }}>
+            <span>{formatDateOnly(openShift.shiftDate, i18n.language)} · {formatShiftTime(openShift.startTime, openShift.endTime, openShift.crossesMidnight)}</span>
+            {(() => {
+              const actual = actuals.find((entry) => entry.assignmentId === openShift.id);
+              return actual ? (
+                <span>{t("columns.actual")}: {formatTimeOnly(actual.firstIn, i18n.language)} — {actual.lastOut ? formatTimeOnly(actual.lastOut, i18n.language) : "…"}</span>
+              ) : null;
+            })()}
+            {openShift.notes ? <HintText small>{openShift.notes}</HintText> : null}
+          </div>
+        ) : null}
+      </Modal>
       <BreakRulesModal template={breakTemplate} onClose={() => setBreakTemplate(null)} onSaved={() => void loadSiteData()} />
     </PageShell>
   );
