@@ -216,7 +216,7 @@
     "insuranceExempt": "No asegurado",
     "taxExempt": "Exento de impuesto",
     "insurableWage": "Salario asegurable fijo (opcional)",
-    "statutoryHint": "Un salario asegurable fijo sustituye al base, dentro de los límites. Las reglas están en Ajustes de nómina."
+    "statutoryHint": "Esto no es el salario: anótelo arriba en \"Salario base\". Un salario asegurable fijo solo sustituye al base para la seguridad social, dentro de los límites."
   },
   "installments": {
     "title": "Cuotas y anticipos",

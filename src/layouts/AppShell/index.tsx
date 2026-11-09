@@ -5,7 +5,6 @@ import PageLoadBoundary from "../../components/common/PageLoadBoundary";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Main from "./Main";
-import FloatingClockButton from "./FloatingClockButton";
 import BottomNav from "./BottomNav";
 import InstallationStatusBanner from "./InstallationStatusBanner";
 import OfflineBanner from "./OfflineBanner";
@@ -61,8 +60,6 @@ export default function AppShell() {
           </div>
         </div>
         <BottomNav />
-        {/* Owner 2026-11-09: the floating clock-in / clock-out button */}
-        <FloatingClockButton />
       </div>
     </LayoutProvider>
   );

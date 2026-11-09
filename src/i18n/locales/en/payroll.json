@@ -216,7 +216,7 @@
     "insuranceExempt": "Not insured",
     "taxExempt": "Tax exempt",
     "insurableWage": "Fixed insurable wage (optional)",
-    "statutoryHint": "A fixed insurable wage is used instead of the basic salary, within the limits. The rules themselves are in Payroll settings."
+    "statutoryHint": "This is not the salary - enter the salary under \"Basic salary\" above. A fixed insurable wage replaces the basic salary for insurance only, within the limits."
   },
   "installments": {
     "title": "Installments and advances",
