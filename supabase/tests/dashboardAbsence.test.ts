@@ -32,6 +32,9 @@ beforeAll(async () => {
   onLeave = await addMember(t, org, "employee", "On Leave");
   missing = await addMember(t, org, "employee", "Not Here");
   for (const member of [present, onLeave, missing]) await assignToSite(t, site, member);
+  // 2026-11-09: absence needs a working day that has started - make today one, whatever the clock says
+  await t.su("update organization_settings set rest_days = '{}' where organization_id = $1", [org.id]);
+  await t.su("update sites set rest_days = null, shift_start_time = '00:00' where id = $1", [site]);
   expect((await clockIn(t, present, site)).error).toBeNull();
   await t.su(
     `insert into leave_requests (organization_id, user_id, leave_type, start_date, end_date, days_count, status)
@@ -52,12 +55,12 @@ describe("absent today", () => {
 
   it("with schedules: only the people with a shift today count as absent", async () => {
     await t.su(
-      `insert into shift_assignments (organization_id, user_id, site_id, shift_date, start_time, end_time) values ($1, $2, $3, ${cairoToday}, '08:00', '16:00')`,
+      `insert into shift_assignments (organization_id, user_id, site_id, shift_date, start_time, end_time) values ($1, $2, $3, ${cairoToday}, '00:00', '23:59')`,
       [org.id, missing.userId, site],
     );
     const d = await dash();
     expect(d.absence.filter((row) => row.state === "absent").map((row) => row.userId)).toEqual([missing.userId]);
-    expect(entry(d, missing)?.shiftStart).toBe("08:00");
+    expect(entry(d, missing)?.shiftStart).toBe("00:00");
     expect(d.kpi.absentToday).toBe(1);
   });
 
