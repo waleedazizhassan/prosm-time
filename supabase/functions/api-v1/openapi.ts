@@ -49,6 +49,18 @@ export const OPENAPI = {
       },
     },
   },
+  // instant notifications to your system (created by the owner in PROSM Time, Integrations)
+  webhooks: {
+    event: {
+      post: {
+        summary: "An event happened in PROSM Time",
+        description:
+          "PROSM Time posts JSON {id, type, createdAt, organizationId, environment, data} to your HTTPS address. Types: employee.created, employee.updated, employee.deactivated, attendance.clock_in, attendance.clock_out, leave.requested, leave.approved, leave.rejected, leave.cancelled. Check the header X-PROSM-Signature: t=<unix seconds>,v1=<hex HMAC-SHA256 of '<t>.<raw body>' with your signing secret>, and refuse old timestamps. Answer 2xx quickly; any other answer is retried after 1, 5 and 30 minutes, 2, 6, 12 and 24 hours. The same event may arrive twice: use its id to ignore repeats. data carries ids and states only (no amounts, no contact details).",
+        requestBody: { content: { "application/json": { schema: { type: "object", properties: { id: { type: "string" }, type: { type: "string" }, createdAt: { type: "string", format: "date-time" }, organizationId: { type: "string" }, environment: { type: "string" }, data: { type: "object" } } } } } },
+        responses: { "200": { description: "Received" } },
+      },
+    },
+  },
   paths: {
     "/me": {
       get: {

@@ -68,7 +68,46 @@
     },
     "revokeTitle": "Revoke this key?",
     "revokeWarning": "\"{{name}}\" stops working immediately and cannot be restored. The system using it will need a new key.",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "webhooks": {
+      "title": "Instant notifications to other systems (webhooks)",
+      "hint": "The other system is told the moment something happens. Each message is signed with a secret shown once; if the system is down, PROSM Time tries again with growing waits for a day. No amounts or contact details are sent.",
+      "url": "Address (https://)",
+      "description": "Description (optional)",
+      "add": "Add",
+      "active": "On",
+      "off": {
+        "turned_off": "Off",
+        "too_many_failures": "Turned off after 20 failed deliveries in a row"
+      },
+      "counts": "Last 7 days: {{delivered}} delivered, {{dead}} failed; {{pending}} waiting",
+      "deliveries": "Deliveries",
+      "noDeliveries": "Nothing sent yet.",
+      "turnOff": "Turn off",
+      "turnOn": "Turn on",
+      "delete": "Delete",
+      "secretTitle": "The signing secret",
+      "secretWarning": "Copy it now into the other system - it will not be shown again. It checks that each message came from PROSM Time.",
+      "status": {
+        "pending": "waiting",
+        "sending": "sending",
+        "delivered": "delivered",
+        "dead": "failed"
+      },
+      "attempts": "{{n}} attempt(s)",
+      "sendAgain": "Send again",
+      "event": {
+        "employee_created": "Employee added",
+        "employee_updated": "Employee changed",
+        "employee_deactivated": "Employee deactivated",
+        "attendance_clock_in": "Clock-in",
+        "attendance_clock_out": "Clock-out",
+        "leave_requested": "Leave requested",
+        "leave_approved": "Leave approved",
+        "leave_rejected": "Leave declined",
+        "leave_cancelled": "Leave cancelled"
+      }
+    }
   },
   "payroll": {
     "title": "Payroll Integration",

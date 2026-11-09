@@ -68,7 +68,46 @@
     },
     "revokeTitle": "Revocare questa chiave?",
     "revokeWarning": "\"{{name}}\" smette subito di funzionare e non può essere ripristinata. Il sistema che la usa avrà bisogno di una nuova chiave.",
-    "cancel": "Annulla"
+    "cancel": "Annulla",
+    "webhooks": {
+      "title": "Notifiche immediate ad altri sistemi (webhook)",
+      "hint": "L'altro sistema viene avvisato subito. Ogni messaggio è firmato con un segreto mostrato una volta; se il sistema non risponde, PROSM Time riprova con attese crescenti per un giorno. Nessun importo o contatto viene inviato.",
+      "url": "Indirizzo (https://)",
+      "description": "Descrizione (facoltativa)",
+      "add": "Aggiungi",
+      "active": "Attivo",
+      "off": {
+        "turned_off": "Disattivato",
+        "too_many_failures": "Disattivato dopo 20 consegne fallite di fila"
+      },
+      "counts": "Ultimi 7 giorni: {{delivered}} consegnati, {{dead}} falliti; {{pending}} in attesa",
+      "deliveries": "Consegne",
+      "noDeliveries": "Ancora nulla inviato.",
+      "turnOff": "Disattiva",
+      "turnOn": "Attiva",
+      "delete": "Elimina",
+      "secretTitle": "Il segreto di firma",
+      "secretWarning": "Copialo ora nell'altro sistema - non verrà più mostrato. Serve a verificare che ogni messaggio venga da PROSM Time.",
+      "status": {
+        "pending": "in attesa",
+        "sending": "invio",
+        "delivered": "consegnato",
+        "dead": "fallito"
+      },
+      "attempts": "{{n}} tentativo/i",
+      "sendAgain": "Invia di nuovo",
+      "event": {
+        "employee_created": "Dipendente aggiunto",
+        "employee_updated": "Dipendente modificato",
+        "employee_deactivated": "Dipendente disattivato",
+        "attendance_clock_in": "Entrata",
+        "attendance_clock_out": "Uscita",
+        "leave_requested": "Ferie richieste",
+        "leave_approved": "Ferie approvate",
+        "leave_rejected": "Ferie rifiutate",
+        "leave_cancelled": "Ferie annullate"
+      }
+    }
   },
   "payroll": {
     "title": "Integrazione buste paga",

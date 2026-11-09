@@ -68,7 +68,46 @@
     },
     "revokeTitle": "撤销此密钥？",
     "revokeWarning": "“{{name}}”将立即失效且无法恢复。使用它的系统需要新的密钥。",
-    "cancel": "取消"
+    "cancel": "取消",
+    "webhooks": {
+      "title": "即时通知其他系统（Webhook）",
+      "hint": "事件发生时立即通知对方系统。每条消息都用只显示一次的密钥签名；若对方系统不可用，PROSM Time 会在一天内以递增间隔重试。不会发送金额或联系方式。",
+      "url": "地址（https://）",
+      "description": "描述（可选）",
+      "add": "添加",
+      "active": "已启用",
+      "off": {
+        "turned_off": "已停用",
+        "too_many_failures": "连续 20 次投递失败后已停用"
+      },
+      "counts": "最近 7 天：已送达 {{delivered}}，失败 {{dead}}；等待中 {{pending}}",
+      "deliveries": "投递记录",
+      "noDeliveries": "尚未发送。",
+      "turnOff": "停用",
+      "turnOn": "启用",
+      "delete": "删除",
+      "secretTitle": "签名密钥",
+      "secretWarning": "请立即复制到对方系统——之后不再显示。用于验证每条消息确实来自 PROSM Time。",
+      "status": {
+        "pending": "等待中",
+        "sending": "发送中",
+        "delivered": "已送达",
+        "dead": "失败"
+      },
+      "attempts": "{{n}} 次尝试",
+      "sendAgain": "重新发送",
+      "event": {
+        "employee_created": "新增员工",
+        "employee_updated": "员工信息变更",
+        "employee_deactivated": "员工停用",
+        "attendance_clock_in": "签到",
+        "attendance_clock_out": "签退",
+        "leave_requested": "提交请假",
+        "leave_approved": "请假已批准",
+        "leave_rejected": "请假被拒",
+        "leave_cancelled": "请假已取消"
+      }
+    }
   },
   "payroll": {
     "title": "工资集成",

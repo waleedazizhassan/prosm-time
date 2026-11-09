@@ -68,7 +68,46 @@
     },
     "revokeTitle": "¿Revocar esta clave?",
     "revokeWarning": "\"{{name}}\" deja de funcionar de inmediato y no se puede restaurar. El sistema que la usa necesitará una clave nueva.",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "webhooks": {
+      "title": "Avisos inmediatos a otros sistemas (webhooks)",
+      "hint": "El otro sistema recibe el aviso al instante. Cada mensaje va firmado con un secreto que se muestra una vez; si el sistema está caído, PROSM Time reintenta con esperas crecientes durante un día. No se envían importes ni datos de contacto.",
+      "url": "Dirección (https://)",
+      "description": "Descripción (opcional)",
+      "add": "Añadir",
+      "active": "Activo",
+      "off": {
+        "turned_off": "Desactivado",
+        "too_many_failures": "Desactivado tras 20 entregas fallidas seguidas"
+      },
+      "counts": "Últimos 7 días: {{delivered}} entregados, {{dead}} fallidos; {{pending}} en espera",
+      "deliveries": "Entregas",
+      "noDeliveries": "Aún no se ha enviado nada.",
+      "turnOff": "Desactivar",
+      "turnOn": "Activar",
+      "delete": "Eliminar",
+      "secretTitle": "El secreto de firma",
+      "secretWarning": "Cópielo ahora en el otro sistema; no se volverá a mostrar. Sirve para comprobar que cada mensaje viene de PROSM Time.",
+      "status": {
+        "pending": "en espera",
+        "sending": "enviando",
+        "delivered": "entregado",
+        "dead": "fallido"
+      },
+      "attempts": "{{n}} intento(s)",
+      "sendAgain": "Reenviar",
+      "event": {
+        "employee_created": "Empleado añadido",
+        "employee_updated": "Empleado modificado",
+        "employee_deactivated": "Empleado desactivado",
+        "attendance_clock_in": "Entrada",
+        "attendance_clock_out": "Salida",
+        "leave_requested": "Permiso solicitado",
+        "leave_approved": "Permiso aprobado",
+        "leave_rejected": "Permiso rechazado",
+        "leave_cancelled": "Permiso cancelado"
+      }
+    }
   },
   "payroll": {
     "title": "Integración de nóminas",

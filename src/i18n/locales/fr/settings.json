@@ -68,7 +68,46 @@
     },
     "revokeTitle": "Révoquer cette clé ?",
     "revokeWarning": "« {{name}} » cesse de fonctionner immédiatement et ne peut pas être restaurée. Le système qui l'utilise aura besoin d'une nouvelle clé.",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "webhooks": {
+      "title": "Notifications instantanées vers d'autres systèmes (webhooks)",
+      "hint": "L'autre système est prévenu immédiatement. Chaque message est signé avec un secret affiché une seule fois ; si le système est indisponible, PROSM Time réessaie avec des délais croissants pendant une journée. Aucun montant ni coordonnée n'est envoyé.",
+      "url": "Adresse (https://)",
+      "description": "Description (facultatif)",
+      "add": "Ajouter",
+      "active": "Actif",
+      "off": {
+        "turned_off": "Désactivé",
+        "too_many_failures": "Désactivé après 20 échecs consécutifs"
+      },
+      "counts": "7 derniers jours : {{delivered}} livrés, {{dead}} en échec ; {{pending}} en attente",
+      "deliveries": "Livraisons",
+      "noDeliveries": "Rien n'a encore été envoyé.",
+      "turnOff": "Désactiver",
+      "turnOn": "Activer",
+      "delete": "Supprimer",
+      "secretTitle": "Le secret de signature",
+      "secretWarning": "Copiez-le maintenant dans l'autre système - il ne sera plus affiché. Il permet de vérifier que chaque message vient de PROSM Time.",
+      "status": {
+        "pending": "en attente",
+        "sending": "envoi",
+        "delivered": "livré",
+        "dead": "échec"
+      },
+      "attempts": "{{n}} tentative(s)",
+      "sendAgain": "Renvoyer",
+      "event": {
+        "employee_created": "Employé ajouté",
+        "employee_updated": "Employé modifié",
+        "employee_deactivated": "Employé désactivé",
+        "attendance_clock_in": "Arrivée",
+        "attendance_clock_out": "Départ",
+        "leave_requested": "Congé demandé",
+        "leave_approved": "Congé approuvé",
+        "leave_rejected": "Congé refusé",
+        "leave_cancelled": "Congé annulé"
+      }
+    }
   },
   "payroll": {
     "title": "Intégration de paie",

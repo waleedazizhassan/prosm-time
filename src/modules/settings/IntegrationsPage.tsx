@@ -4,6 +4,7 @@ import { useAuth } from "../../core/context/AuthContext";
 
 import PageShell from "../../components/common/PageShell";
 import IntegrationsSettingsCard from "./IntegrationsSettingsCard";
+import WebhooksSettingsCard from "./WebhooksSettingsCard";
 import integrationsHeaderImage from "../../assets/illustrations/integrations.svg";
 import PageBanner from "../../components/common/PageBanner";
 
@@ -23,6 +24,7 @@ export default function IntegrationsPage() {
       <PageBanner pageId="integrations" illustration={integrationsHeaderImage} />
 
       <IntegrationsSettingsCard />
+      <WebhooksSettingsCard />
     </PageShell>
   );
 }

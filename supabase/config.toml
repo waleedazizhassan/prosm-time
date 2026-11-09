@@ -312,3 +312,10 @@ entrypoint = "./functions/send-payslip-email/index.ts"
 enabled = true
 verify_jwt = false
 entrypoint = "./functions/payroll-export-job/index.ts"
+
+# webhook-dispatch (2026-11-09, integration API v1b): pg_cron posts the due webhook deliveries
+# every minute with the service role key; the service-role-only RPCs inside are the check.
+[functions.webhook-dispatch]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/webhook-dispatch/index.ts"

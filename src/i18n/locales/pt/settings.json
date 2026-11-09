@@ -68,7 +68,46 @@
     },
     "revokeTitle": "Revogar esta chave?",
     "revokeWarning": "\"{{name}}\" deixa de funcionar imediatamente e não pode ser restaurada. O sistema que a usa precisará de uma nova chave.",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "webhooks": {
+      "title": "Avisos imediatos a outros sistemas (webhooks)",
+      "hint": "O outro sistema é avisado no momento. Cada mensagem é assinada com um segredo mostrado uma vez; se o sistema estiver em baixo, o PROSM Time tenta de novo com esperas crescentes durante um dia. Não são enviados valores nem contactos.",
+      "url": "Endereço (https://)",
+      "description": "Descrição (opcional)",
+      "add": "Adicionar",
+      "active": "Ativo",
+      "off": {
+        "turned_off": "Desativado",
+        "too_many_failures": "Desativado após 20 entregas falhadas seguidas"
+      },
+      "counts": "Últimos 7 dias: {{delivered}} entregues, {{dead}} falhados; {{pending}} a aguardar",
+      "deliveries": "Entregas",
+      "noDeliveries": "Ainda nada enviado.",
+      "turnOff": "Desativar",
+      "turnOn": "Ativar",
+      "delete": "Eliminar",
+      "secretTitle": "O segredo de assinatura",
+      "secretWarning": "Copie-o agora para o outro sistema - não voltará a ser mostrado. Serve para confirmar que cada mensagem vem do PROSM Time.",
+      "status": {
+        "pending": "a aguardar",
+        "sending": "a enviar",
+        "delivered": "entregue",
+        "dead": "falhado"
+      },
+      "attempts": "{{n}} tentativa(s)",
+      "sendAgain": "Enviar de novo",
+      "event": {
+        "employee_created": "Funcionário adicionado",
+        "employee_updated": "Funcionário alterado",
+        "employee_deactivated": "Funcionário desativado",
+        "attendance_clock_in": "Entrada",
+        "attendance_clock_out": "Saída",
+        "leave_requested": "Férias pedidas",
+        "leave_approved": "Férias aprovadas",
+        "leave_rejected": "Férias recusadas",
+        "leave_cancelled": "Férias canceladas"
+      }
+    }
   },
   "payroll": {
     "title": "Integração com a folha de pagamento",

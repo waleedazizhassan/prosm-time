@@ -68,7 +68,46 @@
     },
     "revokeTitle": "Diesen Schlüssel widerrufen?",
     "revokeWarning": "\"{{name}}\" funktioniert sofort nicht mehr und kann nicht wiederhergestellt werden. Das nutzende System braucht einen neuen Schlüssel.",
-    "cancel": "Abbrechen"
+    "cancel": "Abbrechen",
+    "webhooks": {
+      "title": "Sofortige Benachrichtigungen an andere Systeme (Webhooks)",
+      "hint": "Das andere System wird sofort benachrichtigt. Jede Nachricht ist mit einem einmal angezeigten Geheimnis signiert; ist das System nicht erreichbar, versucht PROSM Time es einen Tag lang mit wachsenden Abständen erneut. Keine Beträge oder Kontaktdaten.",
+      "url": "Adresse (https://)",
+      "description": "Beschreibung (optional)",
+      "add": "Hinzufügen",
+      "active": "Aktiv",
+      "off": {
+        "turned_off": "Aus",
+        "too_many_failures": "Nach 20 fehlgeschlagenen Zustellungen in Folge ausgeschaltet"
+      },
+      "counts": "Letzte 7 Tage: {{delivered}} zugestellt, {{dead}} fehlgeschlagen; {{pending}} wartend",
+      "deliveries": "Zustellungen",
+      "noDeliveries": "Noch nichts gesendet.",
+      "turnOff": "Ausschalten",
+      "turnOn": "Einschalten",
+      "delete": "Löschen",
+      "secretTitle": "Das Signaturgeheimnis",
+      "secretWarning": "Jetzt in das andere System kopieren - es wird nicht erneut angezeigt. Damit prüft es, dass jede Nachricht von PROSM Time stammt.",
+      "status": {
+        "pending": "wartend",
+        "sending": "wird gesendet",
+        "delivered": "zugestellt",
+        "dead": "fehlgeschlagen"
+      },
+      "attempts": "{{n}} Versuch(e)",
+      "sendAgain": "Erneut senden",
+      "event": {
+        "employee_created": "Mitarbeitende hinzugefügt",
+        "employee_updated": "Mitarbeitende geändert",
+        "employee_deactivated": "Mitarbeitende deaktiviert",
+        "attendance_clock_in": "Einstempeln",
+        "attendance_clock_out": "Ausstempeln",
+        "leave_requested": "Urlaub beantragt",
+        "leave_approved": "Urlaub genehmigt",
+        "leave_rejected": "Urlaub abgelehnt",
+        "leave_cancelled": "Urlaub storniert"
+      }
+    }
   },
   "payroll": {
     "title": "Lohnbuchhaltungs-Integration",

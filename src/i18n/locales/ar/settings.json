@@ -68,7 +68,46 @@
     },
     "revokeTitle": "إلغاء هذا المفتاح؟",
     "revokeWarning": "سيتوقف \"{{name}}\" عن العمل فورًا ولا يمكن استعادته. سيحتاج النظام الذي يستخدمه إلى مفتاح جديد.",
-    "cancel": "إلغاء"
+    "cancel": "إلغاء",
+    "webhooks": {
+      "title": "إخطار فوري للأنظمة الأخرى",
+      "hint": "يُخطَر النظام الآخر فور حدوث الشيء. كل رسالة موقّعة بسر يظهر مرة واحدة؛ وإذا كان النظام متوقفًا يعيد PROSM Time المحاولة على فترات متزايدة لمدة يوم. لا تُرسل مبالغ ولا بيانات اتصال.",
+      "url": "العنوان (https://)",
+      "description": "الوصف (اختياري)",
+      "add": "إضافة",
+      "active": "مفعّل",
+      "off": {
+        "turned_off": "متوقف",
+        "too_many_failures": "أُوقف بعد 20 محاولة فاشلة متتالية"
+      },
+      "counts": "آخر 7 أيام: {{delivered}} وصل، {{dead}} فشل؛ {{pending}} في الانتظار",
+      "deliveries": "سجل الإرسال",
+      "noDeliveries": "لم يُرسل شيء بعد.",
+      "turnOff": "إيقاف",
+      "turnOn": "تفعيل",
+      "delete": "حذف",
+      "secretTitle": "سر التوقيع",
+      "secretWarning": "انسخه الآن في النظام الآخر - لن يظهر مرة أخرى. به يتأكد النظام أن كل رسالة من PROSM Time.",
+      "status": {
+        "pending": "في الانتظار",
+        "sending": "جارٍ الإرسال",
+        "delivered": "وصل",
+        "dead": "فشل"
+      },
+      "attempts": "{{n}} محاولة",
+      "sendAgain": "إعادة الإرسال",
+      "event": {
+        "employee_created": "إضافة موظف",
+        "employee_updated": "تعديل موظف",
+        "employee_deactivated": "إيقاف موظف",
+        "attendance_clock_in": "حضور",
+        "attendance_clock_out": "انصراف",
+        "leave_requested": "طلب إجازة",
+        "leave_approved": "اعتماد إجازة",
+        "leave_rejected": "رفض إجازة",
+        "leave_cancelled": "إلغاء إجازة"
+      }
+    }
   },
   "payroll": {
     "title": "تكامل المرتبات",
