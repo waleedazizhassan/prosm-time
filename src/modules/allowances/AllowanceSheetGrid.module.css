@@ -144,3 +144,17 @@
   outline: 2px solid var(--brand-primary);
   outline-offset: -1px;
 }
+
+/* owner 2026-11-09 (a PROSM look): the day's total stands out, the date column reads as a label */
+.sheet td.total {
+  background: color-mix(in srgb, var(--brand-primary) 9%, var(--surface-card));
+  color: var(--text-primary);
+}
+
+.sheet tfoot td.total {
+  background: color-mix(in srgb, var(--brand-primary) 18%, var(--surface-sunken));
+}
+
+.sheet thead th:first-child {
+  border-start-start-radius: var(--radius-md);
+}

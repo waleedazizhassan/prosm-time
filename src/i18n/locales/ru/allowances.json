@@ -255,5 +255,9 @@
       "approved": "Одобрено: {{count}}",
       "total": "К выплате: {{amount}}"
     }
+  },
+  "summary": {
+    "title": "Надбавки за период",
+    "days": "Дней: {{count}}"
   }
 }

@@ -253,5 +253,9 @@
       "approved": "Aprobados: {{count}}",
       "total": "A cobrar: {{amount}}"
     }
+  },
+  "summary": {
+    "title": "Asignaciones del período",
+    "days": "{{count}} días"
   }
 }

@@ -253,5 +253,9 @@
       "approved": "Approvati: {{count}}",
       "total": "Dovuto: {{amount}}"
     }
+  },
+  "summary": {
+    "title": "Indennità del periodo",
+    "days": "{{count}} giorni"
   }
 }

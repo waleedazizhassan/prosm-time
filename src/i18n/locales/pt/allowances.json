@@ -253,5 +253,9 @@
       "approved": "Aprovados: {{count}}",
       "total": "A receber: {{amount}}"
     }
+  },
+  "summary": {
+    "title": "Subsídios do período",
+    "days": "{{count}} dias"
   }
 }
