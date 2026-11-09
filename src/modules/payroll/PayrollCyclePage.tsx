@@ -6,6 +6,7 @@ import PayrollCycleRepository, {
   type ExportJob,
   type CycleDetail, type CycleEmployee, type CycleLine, type PayrollComponent, type ReportType, type Suggestion, type ValidationItem,
 } from "../../core/repositories/PayrollCycleRepository";
+import SiteRepository from "../../core/repositories/SiteRepository";
 import { formatDateOnly } from "../../core/utils/formatDate";
 import savePdfDocument, { exportFileName } from "../../core/utils/savePdfDocument";
 import { toCsv } from "../../core/utils/spreadsheet";
@@ -55,6 +56,9 @@ export default function PayrollCyclePage() {
   const [bulk, setBulk] = useState<{ componentId: string; amount: string; notes: string } | null>(null);
   const [notice, setNotice] = useState("");
   const [jobs, setJobs] = useState<ExportJob[]>([]);
+  // spec 8.1: export the organisation (the cycle's scope), one site, or the chosen people
+  const [exportScope, setExportScope] = useState<string>("all");
+  const [siteNames, setSiteNames] = useState<Record<string, string>>({});
   const [importResult, setImportResult] = useState<{ errors: { row: number; code: string }[]; valid: number; saved: boolean; rows: Record<string, unknown>[]; fileName: string } | null>(null);
 
   const load = useCallback(async () => {
@@ -76,6 +80,10 @@ export default function PayrollCyclePage() {
   }, [load]);
 
   // spec 15.11: the background exports of this cycle; refreshed while one is still working
+  useEffect(() => {
+    SiteRepository.listSites().then((result) => setSiteNames(Object.fromEntries((result.data ?? []).map((site) => [site.id, site.name]))));
+  }, []);
+
   const loadJobs = useCallback(async () => {
     const result = await PayrollCycleRepository.listExportJobs(cycleId);
     setJobs(result.data ?? []);
@@ -123,6 +131,10 @@ export default function PayrollCyclePage() {
     .filter((e) => !needle || e.full_name.toLowerCase().includes(needle) || (e.employee_code ?? "").toLowerCase().includes(needle))
     .sort((x, y) => (sortBy === "net" ? Number(y.net_salary) - Number(x.net_salary) : sortBy === "code" ? (x.employee_code ?? "").localeCompare(y.employee_code ?? "", undefined, { numeric: true }) : x.full_name.localeCompare(y.full_name)));
   const canBulk = editable && can.enterVariables;
+  const exportSites = [...new Set(employees.map((e) => e.site_id).filter((id): id is string => Boolean(id)))];
+  // the chosen rows are cycle-employee ids; the reports take people's ids
+  const exportUserIds = () => (exportScope === "chosen" ? employees.filter((e) => chosen.includes(e.id)).map((e) => e.user_id) : null);
+  const exportSiteUserIds = () => (exportScope.startsWith("site:") ? employees.filter((e) => e.site_id === exportScope.slice(5)).map((e) => e.user_id) : exportUserIds());
   const toggle = (id: string) => setChosen((current) => (current.includes(id) ? current.filter((x) => x !== id) : [...current, id]));
 
   const doAction = async () => {
@@ -142,7 +154,7 @@ export default function PayrollCyclePage() {
   const exportReport = async (type: ReportType, format: "pdf" | "xlsx") => {
     setBusy(`${type}-${format}`);
     setError("");
-    const result = await PayrollCycleRepository.report(cycleId, type, format);
+    const result = await PayrollCycleRepository.report(cycleId, type, format, exportUserIds(), exportScope.startsWith("site:") ? [exportScope.slice(5)] : null);
     if (result.error || !result.data) {
       setBusy("");
       setError(payrollError(result.error, t));
@@ -281,12 +293,20 @@ export default function PayrollCyclePage() {
       ) : null}
 
       <Card title={t("reports.title")} subtitle={t("reports.hint")}>
+        <div style={{ maxWidth: 320, marginBottom: "var(--space-2)" }}>
+          <Select label={t("exports.scope")} name="exportScope" value={exportScope} onChange={(event) => setExportScope(event.target.value)}
+            options={[
+              { value: "all", label: t("exports.scopeAll") },
+              ...exportSites.map((id) => ({ value: `site:${id}`, label: siteNames[id] ?? id })),
+              ...(chosen.length ? [{ value: "chosen", label: t("exports.scopeChosen", { count: chosen.length }) }] : []),
+            ]} />
+        </div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
           {can.exportPayslips && (cycle.status === "approved" || cycle.status === "locked") ? (
             <Button size="sm" variant="ghost" loading={busy === "bulk-zip"} disabled={working} onClick={async () => {
               setBusy("bulk-zip");
               setError("");
-              const result = await PayrollCycleRepository.startExportJob(cycleId);
+              const result = await PayrollCycleRepository.startExportJob(cycleId, exportSiteUserIds());
               setBusy("");
               if (result.error) setError(payrollError(result.error, t));
               await loadJobs();

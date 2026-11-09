@@ -385,6 +385,9 @@
     },
     "until": "available until {{date}}",
     "progress": "Export progress",
-    "download": "Download"
+    "download": "Download",
+    "scope": "Export for",
+    "scopeAll": "Everyone in this cycle (your scope)",
+    "scopeChosen": "The {{count}} chosen"
   }
 }

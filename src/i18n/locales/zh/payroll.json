@@ -385,6 +385,9 @@
     },
     "until": "可下载至 {{date}}",
     "progress": "导出进度",
-    "download": "下载"
+    "download": "下载",
+    "scope": "导出范围",
+    "scopeAll": "本周期全部人员（您的范围）",
+    "scopeChosen": "所选 {{count}} 人"
   }
 }

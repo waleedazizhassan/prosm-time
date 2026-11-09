@@ -324,8 +324,8 @@ class PayrollCycleRepository {
       p_cycle_id: cycleId, p_action: action, p_reason: reason, p_expected_version: expectedVersion, p_acknowledge_warnings: acknowledgeWarnings,
     });
   publish = (cycleId: string, publish: boolean) => this.call<{ success: boolean }>("publish_prosm_time_payslips", { p_cycle_id: cycleId, p_publish: publish });
-  report = (cycleId: string, reportType: ReportType, format: "preview" | "pdf" | "xlsx" | "zip", userIds: string[] | null = null) =>
-    this.call<PayrollReport>("get_prosm_time_payroll_report", { p_cycle_id: cycleId, p_report_type: reportType, p_user_ids: userIds, p_site_ids: null, p_format: format });
+  report = (cycleId: string, reportType: ReportType, format: "preview" | "pdf" | "xlsx" | "zip", userIds: string[] | null = null, siteIds: string[] | null = null) =>
+    this.call<PayrollReport>("get_prosm_time_payroll_report", { p_cycle_id: cycleId, p_report_type: reportType, p_user_ids: userIds, p_site_ids: siteIds, p_format: format });
   importLines = (cycleId: string, rows: Record<string, unknown>[], fileName: string, dryRun: boolean) =>
     this.call<{ rows: number; valid: number; errors: { row: number; code: string }[]; saved: boolean }>("import_prosm_time_payroll_lines", {
       p_cycle_id: cycleId, p_rows: rows, p_file_name: fileName, p_dry_run: dryRun,
@@ -360,8 +360,8 @@ class PayrollCycleRepository {
     }
   }
 
-  startExportJob(cycleId: string) {
-    return this.invokeExport<{ jobId: string; total: number }>({ action: "start", cycleId });
+  startExportJob(cycleId: string, userIds: string[] | null = null) {
+    return this.invokeExport<{ jobId: string; total: number }>({ action: "start", cycleId, userIds });
   }
 
   downloadExportJob(jobId: string) {
