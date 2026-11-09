@@ -83,6 +83,15 @@ describe("manager dashboard", () => {
     expect(d.kpi.previous).toBeNull();
   });
 
+  // 2026-11-09 (owner): clocked in far from the site, no tracking since -> shown outside, not "working"
+  it("a clock-in outside the area with no location since shows the person outside", async () => {
+    const [sess] = await t.su<{ id: string }>("select id from attendance_sessions where user_id = $1 and status = 'clocked_in'", [b1.userId]);
+    expect((await dash(org.owner)).presentNow.find((p) => p.userId === b1.userId)!.status).not.toBe("outside");
+    await t.su("update attendance_events set within_geofence = false where session_id = $1 and event_type = 'clock_in'", [sess.id]);
+    expect((await dash(org.owner)).presentNow.find((p) => p.userId === b1.userId)!.status).toBe("outside");
+    await t.su("update attendance_events set within_geofence = true where session_id = $1 and event_type = 'clock_in'", [sess.id]);
+  });
+
   it("an employee cannot open it", async () => {
     await expect(dash(a1)).rejects.toThrow(/DASHBOARD.VIEW/);
   });
