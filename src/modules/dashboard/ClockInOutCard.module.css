@@ -190,3 +190,14 @@
     border-radius: 0 !important;
   }
 }
+
+/* 2026-11-09 (owner: "the clock-in button is buried under the bottom bar"): on a phone the buttons are
+   pinned above the bottom bar, whatever else (a notice, a banner) takes room above the map. */
+@media (max-width: 900px) {
+  .fabBar {
+    position: fixed;
+    bottom: calc(64px + var(--space-3) + var(--safe-bottom, 0px));
+    inset-inline: var(--space-4);
+    z-index: 850;
+  }
+}

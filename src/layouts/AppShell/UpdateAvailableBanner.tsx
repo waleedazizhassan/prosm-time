@@ -77,7 +77,18 @@ function SelfUpdateBanner({ placement }: { placement: "top" | "shell" }) {
       return;
     }
     if (window.location.protocol.startsWith("http")) {
-      window.location.reload();
+      // 2026-11-09: a fresh page, not the browser's saved copy (the notice used to stay after updating)
+      void (async () => {
+        try {
+          const registration = await navigator.serviceWorker?.getRegistration();
+          await registration?.update();
+        } catch {
+          // no service worker: the address below is enough
+        }
+        const url = new URL(window.location.href);
+        url.searchParams.set("v", String(Date.now()));
+        window.location.replace(url.toString());
+      })();
       return;
     }
     // Electron (file:///app:// protocol) - can't self-update by reload,

@@ -41,6 +41,17 @@ export default function EmployeeHome() {
     if (hideTimer.current) window.clearTimeout(hideTimer.current);
   }, []);
 
+  // owner 2026-11-09: a tap anywhere on the screen closes the hours
+  useEffect(() => {
+    if (!showHours) return undefined;
+    const close = () => setShowHours(false);
+    const timer = window.setTimeout(() => document.addEventListener("pointerdown", close, { once: true }), 0);
+    return () => {
+      window.clearTimeout(timer);
+      document.removeEventListener("pointerdown", close);
+    };
+  }, [showHours]);
+
   const toggleHours = () => {
     if (hideTimer.current) window.clearTimeout(hideTimer.current);
     if (showHours) {
