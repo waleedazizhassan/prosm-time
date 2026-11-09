@@ -410,7 +410,8 @@
       "zoomIn": "Vergrößern",
       "zoomOut": "Verkleinern",
       "noLocation": "Ohne Standort auf der Karte",
-      "noLocationHint": "Ohne Koordinaten eingestempelt (z. B. Gerät ohne GPS) - kann nicht platziert werden."
+      "noLocationHint": "Ohne Koordinaten eingestempelt (z. B. Gerät ohne GPS) - kann nicht platziert werden.",
+      "noLocationShort": "Ohne Standort"
     },
     "present": {
       "title": "Jetzt anwesend ({{count}})",

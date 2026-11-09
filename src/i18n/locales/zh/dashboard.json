@@ -407,7 +407,8 @@
       "zoomIn": "放大",
       "zoomOut": "缩小",
       "noLocation": "未在地图上",
-      "noLocationHint": "打卡时没有坐标（例如设备无 GPS），无法在地图上显示。"
+      "noLocationHint": "打卡时没有坐标（例如设备无 GPS），无法在地图上显示。",
+      "noLocationShort": "无位置"
     },
     "present": {
       "title": "当前在岗（{{count}}）",
