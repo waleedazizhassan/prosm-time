@@ -2,13 +2,15 @@
 // service role key; it takes the due webhook deliveries (prosm_time_webhook_claim - service role
 // only, which is also how the caller is checked), posts each one signed, and records the result
 // (prosm_time_webhook_result decides retry, dead or delivered).
-// Signature: X-PROSM-Signature: t=<unix seconds>,v1=<hex HMAC-SHA256(secret, "<t>.<raw body>")>.
+// Signature: X-PROSM-Signature: t=<unix seconds>,kid=<key id>,v1=<hex HMAC-SHA256(secret, "<t>.<raw body>")>.
+// Outbound safety: every DNS answer of the address must be public, HTTPS on 443 only, no redirects.
 // The receiver recomputes it with its secret and rejects old timestamps (replay protection).
 // deno-lint-ignore-file no-explicit-any
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 import { successResponse, errorResponse } from "../_shared/http.ts";
+import { checkWebhookUrl } from "../_shared/ssrf.ts";
 
 const TIME_BUDGET_MS = 50_000;
 const TIMEOUT_MS = 10_000;
@@ -21,6 +23,8 @@ async function sign(secret: string, timestamp: number, body: string): Promise<st
 }
 
 async function deliver(item: any): Promise<{ status: number; error: string | null }> {
+  const problem = await checkWebhookUrl(item.url, (host, type) => Deno.resolveDns(host, type) as Promise<string[]>);
+  if (problem) return { status: 0, error: `blocked: ${problem}` };
   const body = JSON.stringify(item.body);
   const timestamp = Math.floor(Date.now() / 1000);
   const controller = new AbortController();
@@ -35,7 +39,7 @@ async function deliver(item: any): Promise<{ status: number; error: string | nul
         "User-Agent": "PROSM-Time-Webhooks/1.0",
         "X-PROSM-Event": item.body.type,
         "X-PROSM-Delivery": item.id,
-        "X-PROSM-Signature": `t=${timestamp},v1=${await sign(item.secret, timestamp, body)}`,
+        "X-PROSM-Signature": `t=${timestamp},kid=${item.keyId},v1=${await sign(item.secret, timestamp, body)}`,
       },
       body,
     });

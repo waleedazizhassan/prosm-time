@@ -37,6 +37,10 @@ describe("webhooks", () => {
     expect((await t.as(manager.authId, "select public.create_prosm_time_webhook('https://erp.example.com/hook', array['employee.created'])")).error).toMatch(/OWNER/);
     expect((await owner("select public.create_prosm_time_webhook('http://erp.example.com/hook', array['employee.created'])")).error).toMatch(/https/);
     expect((await owner("select public.create_prosm_time_webhook('https://erp.example.com/hook', array['payroll.paid'])")).error).toMatch(/VALID EVENTS/);
+    // 2026-11-09 hardening: public HTTPS on 443 only
+    for (const bad of ["https://10.0.0.5/hook", "https://192.168.1.4/hook", "https://localhost/hook", "https://printer.local/hook", "https://erp.example.com:8443/hook", "https://169.254.169.254/latest"]) {
+      expect((await owner("select public.create_prosm_time_webhook($1, array['employee.created'])", [bad])).error, bad).toMatch(/PUBLIC HTTPS ADDRESS/);
+    }
     const created = await ok<{ r: { id: string; secret: string } }>(owner(
       "select public.create_prosm_time_webhook('https://erp.example.com/hook', array['employee.created', 'attendance.clock_in', 'attendance.clock_out', 'leave.approved']) as r"));
     expect(created.r.secret).toMatch(/^whsec_/);
@@ -61,6 +65,7 @@ describe("webhooks", () => {
     const first = await claim();
     expect(first.length).toBe(3);
     expect(first[0].secret).toMatch(/^whsec_/);
+    expect((first[0] as unknown as { keyId: string }).keyId).toMatch(/^whsec_/);
     expect(await claim()).toEqual([]);
     const target = first[0].id;
     await t.su("select public.prosm_time_webhook_result($1, 200, null)", [first[1].id]);
@@ -92,5 +97,15 @@ describe("webhooks", () => {
     await t.su("update plans set feature_flags = feature_flags - 'integrations'");
     await addMember(t, org, "employee", "No Plan");
     expect(await outbox("employee.created")).toHaveLength(1);
+  });
+
+  it("keep data only for its stated time", async () => {
+    await t.su("insert into api_request_log (organization_id, method, path, status, created_at) values ($1, 'GET', '/old', 200, now() - interval '91 days'), ($1, 'GET', '/new', 200, now())", [org.id]);
+    await t.su("update webhook_outbox set created_at = now() - interval '31 days'");
+    await t.su("update webhook_deliveries set status = 'delivered'");
+    const r = (await t.su<{ r: { requestLog: number; webhookEvents: number } }>("select public.prosm_time_integration_retention() as r"))[0].r;
+    expect(r.requestLog).toBe(1);
+    expect(r.webhookEvents).toBeGreaterThan(0);
+    expect(await t.su("select id from api_request_log where path = '/new'")).toHaveLength(1);
   });
 });
