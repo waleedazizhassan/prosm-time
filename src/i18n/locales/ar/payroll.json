@@ -347,7 +347,9 @@
     "confirmTitle": "إرسال مفردات المرتب",
     "confirmBody": "ستُرسل مفردات {{cycle}} ملف PDF إلى {{name}} على {{email}}.",
     "sentTo": "أُرسلت إلى {{name}} ({{email}}).",
-    "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}"
+    "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}",
+    "sendInApp": "إرسال في التطبيق",
+    "sentInApp": "وصلت المفردات لـ {{name}} في التطبيق."
   },
   "mine": {
     "empty": "لا توجد مفردات منشورة بعد.",
@@ -364,7 +366,9 @@
       "sent": "أُرسلت بالبريد",
       "failed": "بانتظار إعادة الإرسال"
     },
-    "sentOn": "في {{date}} إلى {{email}}"
+    "sentOn": "في {{date}} إلى {{email}}",
+    "ask": "اطلب مفرداتك",
+    "askBodyApp": "هيوصل طلبك للمسؤول عن المرتبات، ولما يبعته هتلاقي المفردات هنا تقدر تشوفها وتنزّلها PDF."
   },
   "errors": {
     "generic": "حدث خطأ. حاول مرة أخرى.",

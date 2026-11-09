@@ -198,7 +198,9 @@ export function localizePush(type: string, data: Data, language: string, fallbac
       result = pair("payslip.requestedTitle", "payslip.requestedBody", { name: data.employeeName ?? "", cycle: data.cycleTitle ?? "" });
       break;
     case "payslip_sent":
-      result = pair("payslip.sentTitle", "payslip.sentBody", { cycle: data.cycleTitle ?? "" });
+      result = data.channel === "app"
+        ? pair("payslip.inAppTitle", "payslip.inAppBody", { cycle: data.cycleTitle ?? "" })
+        : pair("payslip.sentTitle", "payslip.sentBody", { cycle: data.cycleTitle ?? "" });
       break;
     case "payslip_send_failed":
       result = pair("payslip.failedTitle", "payslip.failedBody", { cycle: data.cycleTitle ?? "" });

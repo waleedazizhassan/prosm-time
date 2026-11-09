@@ -143,7 +143,8 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // can be pulled." No permission gate on the nav item itself - the
   // page's own report-type selector gates each report by the exact
   // same permission its original source page already used.
-  { id: "reports", labelKey: "items.reports", path: "/reports", icon: FileBarChart, requiredPermission: null, section: "reports" },
+  // Owner 2026-11-09: an employee takes every report from its own page; Reports is for those who manage
+  { id: "reports", labelKey: "items.reports", path: "/reports", icon: FileBarChart, requiredPermission: "exceptions.manage", section: "reports" },
   // owner 2026-11-03: the morning summary opens here - one day, any day, with the names
   { id: "dailySummary", planFeature: "daily_summary", labelKey: "items.dailySummary", path: "/daily-summary", icon: Sunrise, requiredPermission: null, ownerOnly: true, section: "reports" },
   // Owner 2026-10-28: the action log on its own page (it left the dashboard).

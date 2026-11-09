@@ -24,7 +24,7 @@
     "presenceOfTotal": "من {{total}} موظف",
     "pendingAllClear": "مفيش حاجة محتاجة مراجعتك دلوقتي",
     "attentionTitle": "محتاج مراجعتك",
-    "attentionTimesheets": "كشوف الدوام",
+    "attentionTimesheets": "كشوف الساعات",
     "attentionLeave": "طلبات الإجازة",
     "attentionExceptions": "الاستثناءات والتصحيحات",
     "weeklyHoursTitle": "ساعات العمل هذا الأسبوع",
@@ -270,7 +270,7 @@
       "attendanceHint": "كل تسجيلات الحضور والانصراف · PDF",
       "allowances": "بدلاتي",
       "allowancesHint": "أضف بدلاتك وتابعها · PDF",
-      "timesheets": "كشوف دوامي",
+      "timesheets": "كشوف ساعاتي",
       "timesheetsHint": "راجع وأرسل · PDF",
       "leave": "إجازاتي",
       "leaveHint": "اطلب إجازة واعرف رصيدك"

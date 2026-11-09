@@ -240,7 +240,9 @@
       "failedTitle": "E-Mail mit Gehaltsabrechnung fehlgeschlagen",
       "failedBody": "Die Gehaltsabrechnung für {{cycle}} konnte nicht gesendet werden. Bitte erneut versuchen.",
       "publishedTitle": "Ihre Gehaltsabrechnung ist verfügbar",
-      "publishedBody": "Eine neue Gehaltsabrechnung wurde veröffentlicht. Sie können sie ansehen oder per E-Mail anfordern."
+      "publishedBody": "Eine neue Gehaltsabrechnung wurde veröffentlicht. Sie können sie ansehen oder per E-Mail anfordern.",
+      "inAppTitle": "Ihr Gehaltszettel ist da",
+      "inAppBody": "Ihr Gehaltszettel für {{cycle}} ist unter \"Meine Gehaltszettel\"."
     },
     "announcement": {
       "publishedTitle": "Neue Mitteilung",
@@ -260,7 +262,7 @@
     "emergencyLog": "Notfallprotokoll",
     "timesheets": "Stundenzettel",
     "allowances": "Zulagen",
-    "leave": "Urlaub",
+    "leave": "Urlaub und Genehmigungen",
     "schedule": "Dienstplan",
     "kiosk": "Kiosk-Modus",
     "reports": "Berichte",
@@ -326,7 +328,7 @@
   },
   "radio": {
     "title": "Radio",
-    "mediaSectionTitle": "Medien",
+    "mediaSectionTitle": "Radio",
     "loading": "Wird geladen …",
     "reconnecting": "Verbindung wird wiederhergestellt …",
     "error": "Wiedergabe fehlgeschlagen.",

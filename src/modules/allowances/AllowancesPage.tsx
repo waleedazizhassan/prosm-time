@@ -533,12 +533,17 @@ export default function AllowancesPage() {
             {t("prices.openAction")}
           </Button>
         ) : null}
-        <Button variant="ghost" onClick={handleExportXlsx} loading={exportingXlsx} disabled={filteredEntries.length === 0}>
-          {t("exportXlsxAction")}
-        </Button>
-        <Button variant="ghost" onClick={() => handleExportPdf("print")} loading={exportingPdf} disabled={filteredEntries.length === 0}>
-          {t("common:actions.print")}
-        </Button>
+        {/* Owner 2026-11-09: an employee takes their sheet as PDF only - Excel and print are for those who manage */}
+        {canApprove || ownerAuthority ? (
+          <>
+            <Button variant="ghost" onClick={handleExportXlsx} loading={exportingXlsx} disabled={filteredEntries.length === 0}>
+              {t("exportXlsxAction")}
+            </Button>
+            <Button variant="ghost" onClick={() => handleExportPdf("print")} loading={exportingPdf} disabled={filteredEntries.length === 0}>
+              {t("common:actions.print")}
+            </Button>
+          </>
+        ) : null}
         <Button onClick={() => handleExportPdf()} loading={exportingPdf} disabled={filteredEntries.length === 0}>
           {t("exportPdfAction")}
         </Button>

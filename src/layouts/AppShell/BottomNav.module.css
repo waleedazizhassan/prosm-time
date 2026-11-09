@@ -73,3 +73,10 @@
     display: none;
   }
 }
+
+/* Owner 2026-11-09: home sits in the middle and stands out a little */
+.homeItem .icon {
+  background: var(--brand-gradient, var(--brand-primary));
+  color: #fff;
+  border-radius: 999px;
+}

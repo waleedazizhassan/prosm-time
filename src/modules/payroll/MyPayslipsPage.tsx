@@ -98,15 +98,17 @@ export default function MyPayslipsPage() {
               </HintText>
             ) : null}
             <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
-              {data.canViewInApp ? <Button size="sm" variant="ghost" loading={busy === `view-${cycle.cycleId}`} onClick={() => view(cycle)}>{t("mine.view")}</Button> : null}
-              <Button size="sm" disabled={Boolean(open)} onClick={() => { setAsking(cycle); setNote(""); }}>{open ? t("mine.waiting") : t("mine.askByEmail")}</Button>
+              {data.canViewInApp || cycle.canView ? <Button size="sm" loading={busy === `view-${cycle.cycleId}`} onClick={() => view(cycle)}>{t("mine.view")}</Button> : null}
+              {data.canViewInApp || cycle.canView ? null : (
+                <Button size="sm" variant="ghost" disabled={Boolean(open)} onClick={() => { setAsking(cycle); setNote(""); }}>{open ? t("mine.waiting") : t("mine.ask")}</Button>
+              )}
             </div>
           </Card>
         );
       })}
 
-      <Modal isOpen={Boolean(asking)} onClose={() => setAsking(null)} title={t("mine.askByEmail")} footer={<Button loading={busy === "ask"} onClick={ask}>{t("mine.send")}</Button>}>
-        <HintText>{t("mine.askBody", { email: data?.email ?? "" })}</HintText>
+      <Modal isOpen={Boolean(asking)} onClose={() => setAsking(null)} title={t("mine.ask")} footer={<Button loading={busy === "ask"} onClick={ask}>{t("mine.send")}</Button>}>
+        <HintText>{t("mine.askBodyApp")}</HintText>
         <Input label={t("mine.note")} name="payslipNote" value={note} onChange={(event) => setNote(event.target.value)} />
       </Modal>
 

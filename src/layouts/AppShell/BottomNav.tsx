@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { CalendarDays, Clock, Home, LayoutGrid, Menu, Users, Wallet, type LucideIcon } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
@@ -24,27 +24,36 @@ export default function BottomNav() {
   const { t } = useTranslation("shell");
   const { profile, hasPermission } = useAuth();
   const { openMobileSidebar } = useAppLayout();
+  const location = useLocation();
   if (!profile) return null;
 
   const manages = profile.isOwner || hasPermission("exceptions.manage");
+  // Owner 2026-11-09: home in the middle of the bar
+  const home: BottomItem = { to: "/dashboard", label: t("bottomNav.home"), icon: Home };
   const items: BottomItem[] = manages
     ? [
-        { to: "/dashboard", label: t("bottomNav.home"), icon: Home },
         { to: "/manager", label: t("bottomNav.manager"), icon: LayoutGrid },
         ...(profile.isOwner || hasPermission("employees.view") ? [{ to: "/people", label: t("bottomNav.people"), icon: Users }] : []),
+        home,
         { to: "/attendance", label: t("bottomNav.attendance"), icon: Clock },
       ]
     : [
-        { to: "/dashboard", label: t("bottomNav.home"), icon: Home },
         { to: "/attendance", label: t("bottomNav.attendance"), icon: Clock },
         { to: "/allowances", label: t("bottomNav.allowances"), icon: Wallet },
+        home,
         { to: "/leave", label: t("bottomNav.leave"), icon: CalendarDays },
       ];
+  // on the home page already, home refreshes it and goes back to the top
+  const onHome = (event: React.MouseEvent, to: string) => {
+    if (to !== "/dashboard" || location.pathname !== "/dashboard") return;
+    event.preventDefault();
+    window.location.reload();
+  };
 
   return (
     <nav className={styles.bar} aria-label={t("bottomNav.label")}>
       {items.map((item) => (
-        <NavLink key={item.to} to={item.to} className={({ isActive }) => `${styles.item} ${isActive ? styles.active : ""}`}>
+        <NavLink key={item.to} to={item.to} onClick={(event) => onHome(event, item.to)} className={({ isActive }) => `${styles.item} ${isActive ? styles.active : ""} ${item.to === "/dashboard" ? styles.homeItem : ""}`}>
           <span className={styles.icon}>
             <item.icon size={22} />
           </span>

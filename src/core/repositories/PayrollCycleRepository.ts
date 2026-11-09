@@ -249,6 +249,8 @@ export interface MyPayslipCycle {
   periodEnd: string;
   cycleVersion: number;
   publishedAt: string;
+  /** 2026-11-09: may open it in the app (self-service on, or the request answered in the app) */
+  canView?: boolean;
   request: { id: string; status: "pending" | "sent" | "failed"; createdAt: string; sentAt: string | null; cycleVersion: number | null } | null;
 }
 
@@ -391,6 +393,9 @@ class PayrollCycleRepository {
   downloadExportJob(jobId: string) {
     return this.invokeExport<{ url: string }>({ action: "download", jobId });
   }
+
+  /** 2026-11-09: answered in the app - the employee opens it in My payslips; nothing is generated or stored */
+  sendPayslipInApp = (requestId: string) => this.call<{ status: string }>("send_prosm_time_payslip_in_app", { p_request_id: requestId });
 
   async sendPayslip(requestId: string): Promise<Result<{ status: string; serial: number }>> {
     try {

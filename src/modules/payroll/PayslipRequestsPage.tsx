@@ -52,6 +52,17 @@ export default function PayslipRequestsPage() {
     await load();
   };
 
+  const sendInApp = async (request: PayslipRequest) => {
+    setSending(request.id);
+    setError("");
+    setNotice("");
+    const result = await PayrollCycleRepository.sendPayslipInApp(request.id);
+    setSending(null);
+    if (result.error) setError(payrollError(result.error, t));
+    else setNotice(t("requests.sentInApp", { name: request.fullName }));
+    await load();
+  };
+
   const shown = (requests ?? []).filter((r) => (filter === "open" ? r.status !== "sent" : filter === "all" ? true : r.status === filter));
   const columns: TableColumn<PayslipRequest>[] = [
     { key: "who", header: t("requests.employee"), render: (r) => <><strong>{r.fullName}</strong><HintText small>{r.email}</HintText></> },
@@ -65,9 +76,15 @@ export default function PayslipRequestsPage() {
       </>
     ) },
     { key: "action", header: "", render: (r) => (r.status === "sent" ? null : (
-      <Button size="sm" loading={sending === r.id} disabled={r.sending || !r.cyclePublished || Boolean(sending)} onClick={() => setConfirm(r)}>
-        {r.status === "failed" ? t("requests.retry") : t("requests.send")}
-      </Button>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-1)" }}>
+        {/* owner 2026-11-09: answered in the app first (nothing stored); email stays possible */}
+        <Button size="sm" loading={sending === r.id} disabled={r.sending || !r.cyclePublished || Boolean(sending)} onClick={() => void sendInApp(r)}>
+          {t("requests.sendInApp")}
+        </Button>
+        <Button size="sm" variant="ghost" disabled={r.sending || !r.cyclePublished || Boolean(sending)} onClick={() => setConfirm(r)}>
+          {r.status === "failed" ? t("requests.retry") : t("requests.send")}
+        </Button>
+      </div>
     )) },
   ];
 

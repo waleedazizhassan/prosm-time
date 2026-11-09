@@ -240,7 +240,9 @@
       "failedTitle": "Falló el envío del recibo de nómina",
       "failedBody": "No se pudo enviar el recibo de nómina de {{cycle}}. Puede intentarlo de nuevo.",
       "publishedTitle": "Su recibo de nómina está disponible",
-      "publishedBody": "Se publicó un nuevo recibo de nómina. Puede verlo o pedirlo por correo."
+      "publishedBody": "Se publicó un nuevo recibo de nómina. Puede verlo o pedirlo por correo.",
+      "inAppTitle": "Tu nómina está lista",
+      "inAppBody": "Tu nómina de {{cycle}} está en Mis nóminas."
     },
     "announcement": {
       "publishedTitle": "Nuevo anuncio",
@@ -260,7 +262,7 @@
     "emergencyLog": "Registro de emergencias",
     "timesheets": "Hojas de horas",
     "allowances": "Asignaciones",
-    "leave": "Ausencias",
+    "leave": "Ausencias y permisos",
     "schedule": "Cuadrante de turnos",
     "kiosk": "Modo quiosco",
     "reports": "Informes",
@@ -326,7 +328,7 @@
   },
   "radio": {
     "title": "Radio",
-    "mediaSectionTitle": "Multimedia",
+    "mediaSectionTitle": "Radio",
     "loading": "Cargando…",
     "reconnecting": "Reconectando…",
     "error": "Falló la reproducción.",

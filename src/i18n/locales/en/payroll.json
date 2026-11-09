@@ -347,7 +347,9 @@
     "confirmTitle": "Send the payslip",
     "confirmBody": "The payslip of {{cycle}} will be sent as a PDF to {{name}} at {{email}}.",
     "sentTo": "Sent to {{name}} ({{email}}).",
-    "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}"
+    "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}",
+    "sendInApp": "Send in the app",
+    "sentInApp": "The payslip is now in {{name}}'s app."
   },
   "mine": {
     "empty": "No published payslips yet.",
@@ -364,7 +366,9 @@
       "sent": "Emailed",
       "failed": "Waiting to be sent again"
     },
-    "sentOn": "on {{date}} to {{email}}"
+    "sentOn": "on {{date}} to {{email}}",
+    "ask": "Ask for your payslip",
+    "askBodyApp": "Your request goes to payroll; once it is sent you will find the payslip here to view and save as PDF."
   },
   "errors": {
     "generic": "Something went wrong. Try again.",

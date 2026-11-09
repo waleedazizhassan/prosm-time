@@ -347,7 +347,9 @@
     "confirmTitle": "Invia la busta paga",
     "confirmBody": "La busta paga di {{cycle}} sarà inviata in PDF a {{name}} all'indirizzo {{email}}.",
     "sentTo": "Inviata a {{name}} ({{email}}).",
-    "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}"
+    "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}",
+    "sendInApp": "Invia nell'app",
+    "sentInApp": "La busta paga è nell'app di {{name}}."
   },
   "mine": {
     "empty": "Ancora nessuna busta paga pubblicata.",
@@ -364,7 +366,9 @@
       "sent": "Inviata via email",
       "failed": "In attesa di nuovo invio"
     },
-    "sentOn": "il {{date}} a {{email}}"
+    "sentOn": "il {{date}} a {{email}}",
+    "ask": "Richiedi la busta paga",
+    "askBodyApp": "La richiesta va all'ufficio paghe; una volta inviata troverai qui la busta paga da vedere e salvare in PDF."
   },
   "errors": {
     "generic": "Qualcosa è andato storto. Riprova.",

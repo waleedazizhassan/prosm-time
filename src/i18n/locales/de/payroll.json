@@ -347,7 +347,9 @@
     "confirmTitle": "Abrechnung senden",
     "confirmBody": "Die Abrechnung für {{cycle}} wird als PDF an {{name}} ({{email}}) gesendet.",
     "sentTo": "An {{name}} ({{email}}) gesendet.",
-    "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}"
+    "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}",
+    "sendInApp": "In der App senden",
+    "sentInApp": "Der Gehaltszettel ist für {{name}} in der App."
   },
   "mine": {
     "empty": "Noch keine veröffentlichten Abrechnungen.",
@@ -364,7 +366,9 @@
       "sent": "Per E-Mail gesendet",
       "failed": "Wartet auf erneuten Versand"
     },
-    "sentOn": "am {{date}} an {{email}}"
+    "sentOn": "am {{date}} an {{email}}",
+    "ask": "Gehaltszettel anfordern",
+    "askBodyApp": "Ihre Anfrage geht an die Lohnbuchhaltung; danach finden Sie den Gehaltszettel hier und können ihn als PDF speichern."
   },
   "errors": {
     "generic": "Etwas ist schiefgelaufen. Bitte erneut versuchen.",

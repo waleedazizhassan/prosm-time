@@ -1,12 +1,12 @@
 {
-  "title": "كشوف الدوام",
+  "title": "كشوف الساعات",
   "subtitle": "مراجعة وتقديم واعتماد وتصحيح فترات الحضور الشهرية.",
-  "loadError": "تعذر تحميل كشوف الدوام.",
-  "generateError": "تعذر إنشاء كشف الدوام هذا.",
+  "loadError": "تعذر تحميل كشوف الساعات.",
+  "generateError": "تعذر إنشاء كشف الساعات هذا.",
   "viewPhoto": "عرض الصورة",
   "photoLoadError": "تعذّر تحميل هذه الصورة.",
-  "submitError": "تعذر تقديم كشف الدوام هذا.",
-  "approveError": "تعذرت مراجعة كشف الدوام هذا.",
+  "submitError": "تعذر تقديم كشف الساعات هذا.",
+  "approveError": "تعذرت مراجعة كشف الساعات هذا.",
   "correctionRequestError": "تعذر طلب هذا التصحيح.",
   "correctionReviewError": "تعذرت مراجعة هذا التصحيح.",
   "columns": {
@@ -46,7 +46,7 @@
     "reviewTitle": "طلب تصحيح"
   },
   "myTimesheets": {
-    "title": "كشوف دوامي",
+    "title": "كشوف ساعاتي",
     "empty": "لم يتم إنشاء أي كشف دوام لك بعد. يقوم المسؤول بإنشاء كشف دوام لكل فترة دفع بعد انتهائها."
   },
   "detail": {
@@ -69,9 +69,9 @@
     "viewReportAction": "عرض التقرير"
   },
   "report": {
-    "title": "تقرير كشف الدوام",
+    "title": "تقرير كشف الساعات",
     "loadError": "تعذر تحميل هذا التقرير.",
-    "backLink": "العودة إلى كشوف الدوام",
+    "backLink": "العودة إلى كشوف الساعات",
     "exportCsvAction": "تصدير CSV",
     "exportPdfAction": "تصدير PDF",
     "printAction": "طباعة / حفظ كـ PDF",
@@ -96,7 +96,7 @@
     "noExceptions": "لا توجد استثناءات نطاق جغرافي في هذه الفترة.",
     "correctionsTitle": "التصحيحات",
     "noCorrections": "لا توجد تصحيحات في هذه الفترة.",
-    "timesheetLevelCorrection": "تصحيح كشف الدوام",
+    "timesheetLevelCorrection": "تصحيح كشف الساعات",
     "evidenceTitle": "مراجع الأدلة المصورة",
     "noEvidence": "لا توجد أدلة مصورة في هذه الفترة.",
     "viewEvidence": "عرض",
