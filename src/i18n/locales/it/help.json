@@ -32,7 +32,7 @@
     },
     "exceptions": {
       "title": "Verifiche - eccezioni, correzioni, orari offline, posizioni false",
-      "body": "Tutto ciò che richiede una decisione compare nella console del responsabile in «In attesa di verifica»: eccezioni fuori area (con il tuo motivo), richieste di correzione, azioni offline con l'ora del dispositivo e posizioni segnalate come false. Un'eccezione approvata ti considera presente tutto il tempo; respinta, il tempo di lavoro si ferma al momento del primo rilevamento. Le segnalazioni sono informazioni da verificare equamente da una persona, non decisioni automatiche."
+      "body": "Tutto ciò che richiede una decisione compare nella console del responsabile in «In attesa di verifica»: eccezioni fuori area (con il tuo motivo), richieste di correzione, azioni offline con l'ora del dispositivo e posizioni segnalate come false. Un'eccezione approvata ti considera presente tutto il tempo; respinta, il tempo di lavoro si ferma al momento del primo rilevamento. Le segnalazioni sono informazioni da verificare equamente da una persona, non decisioni automatiche.\n\nNovità: la pagina «Le mie eccezioni» nel menu elenca le tue eccezioni e il loro stato (in revisione, approvata, respinta) e permette di inviare il motivo."
     },
     "allowances": {
       "title": "Indennità",
@@ -140,7 +140,7 @@
     },
     "payslips": {
       "title": "I miei cedolini",
-      "body": "Le mie buste paga mostra le buste pubblicate da cicli approvati e chiusi, se l'organizzazione lo consente. Altrimenti tocca «Richiedi la mia busta paga»: il responsabile paghe riceve un avviso e tocca «Invia nell'app»; la busta appare qui, ricevi un avviso e puoi salvarla in PDF. Sul server non viene conservato alcun nuovo file: si mostra la copia approvata senza ricalcolo. L'invio per e-mail resta disponibile. Nessun altro vede le tue buste paga."
+      "body": "Le mie buste paga mostra le buste pubblicate da cicli approvati e chiusi, se l'organizzazione lo consente. Altrimenti tocca «Richiedi la busta paga»: il responsabile paghe riceve un avviso e tocca «Invia nell'app»; la busta appare qui, ricevi un avviso e puoi salvarla in PDF. Sul server non viene conservato alcun nuovo file: si mostra la copia approvata senza ricalcolo. L'invio per e-mail resta disponibile. Nessun altro vede le tue buste paga."
     },
     "externalPay": {
       "title": "Paghe della manodopera esterna (dentro Manodopera esterna)",
@@ -161,6 +161,22 @@
     "departments": {
       "title": "Reparti",
       "body": "Il titolare, o chi gestisce i reparti, li aggiunge nelle Impostazioni. Ogni persona appartiene al massimo a un reparto: si sceglie quando la si aggiunge o nella sua pagina. Archiviare un reparto conserva lo storico e ne impedisce la scelta. Gli annunci possono essere rivolti ai reparti."
+    },
+    "employeeHome": {
+      "title": "La home del dipendente",
+      "body": "La home del dipendente è una sola schermata: la mappa di timbratura e i suoi pulsanti. Il pulsante flottante «Le mie ore» mostra le ore per 15 secondi e si chiude al tocco; «I miei promemoria di timbratura» apre i tuoi promemoria di entrata e uscita. Sul telefono, Home è al centro della barra inferiore; toccarla, o il logo PROSM, dalla home ricarica la pagina e torna in cima."
+    },
+    "headerTools": {
+      "title": "Meteo e ricerca rapida",
+      "body": "In alto: la temperatura attuale dove ti trovi - toccala per percepita, umidità, vento, indice UV, massima e minima del giorno e un pulsante per aggiornare. Il pulsante di ricerca (la lente, o Ctrl+K sul computer) apre qualsiasi pagina digitandone il nome."
+    },
+    "updates": {
+      "title": "Aggiornamenti",
+      "body": "Sul web: quando esce una nuova versione appare la barra «Nuova versione disponibile»; toccala e la pagina si apre subito sulla nuova versione. Su Android: gli aggiornamenti arrivano da Google Play. I tuoi dati restano sul server in entrambi i casi."
+    },
+    "personPage": {
+      "title": "La pagina della persona (per gli amministratori)",
+      "body": "Tocca qualcuno in Persone per aprire la sua pagina in schede ordinate: reparto, impiego, ferie, ruolo, permessi, verifiche, dispositivi (solo se registrati) e «Accesso all'applicazione», con il blocco dell'accesso e la cancellazione dei dati personali di presenza su richiesta. Lo stipendio si gestisce in Paghe, non nella sua pagina."
     }
   },
   "faq": {
@@ -224,6 +240,18 @@
     "q15": {
       "question": "Il SOS chiama ambulanza o polizia?",
       "answer": "No. Avvisa i responsabili, il titolare e i colleghi presenti con la tua posizione. In emergenza chiama tu il numero locale."
+    },
+    "q16": {
+      "question": "Perché non riesco a timbrare?",
+      "answer": "Di solito per uno di questi motivi: il telefono non fornisce una posizione in tempo reale (attiva la posizione e attendi), sei fuori da una sede che rifiuta le timbrature dall'esterno, oggi hai ferie approvate, o l'abbonamento è scaduto e l'organizzazione è in sola lettura. Il messaggio indica il motivo esatto."
+    },
+    "q17": {
+      "question": "Come chiedo la mia busta paga?",
+      "answer": "In «Le mie buste paga» tocca «Richiedi la busta paga». Il responsabile paghe riceve un avviso; quando la invia nell'app compare lì, ricevi un avviso e puoi salvarla in PDF."
+    },
+    "q18": {
+      "question": "Perché il mio responsabile mi vede «fuori» nella dashboard?",
+      "answer": "Perché l'ultima posizione inviata dal telefono durante il turno era fuori dalla zona, oppure hai timbrato da fuori e da allora non è arrivata una nuova posizione. Apri l'app in sede per aggiornarla; se eri fuori per un motivo, invialo da «Le mie eccezioni»."
     }
   },
   "contact": {

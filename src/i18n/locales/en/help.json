@@ -32,7 +32,7 @@
     },
     "exceptions": {
       "title": "Reviews - Exceptions, Corrections, Offline Times and Fake Locations",
-      "body": "Everything that needs a manager's decision appears in the Manager Console under Pending Review: out-of-zone exceptions (with your reason), correction requests, actions recorded offline with the device's time, and locations reported as fake. If an exception is approved you're treated as present the full time. If it's rejected, your effective worked time is capped at the moment the situation was first detected. Flags are information for a person to review fairly - not automatic decisions."
+      "body": "Everything that needs a manager's decision appears in the Manager Console under Pending Review: out-of-zone exceptions (with your reason), correction requests, actions recorded offline with the device's time, and locations reported as fake. If an exception is approved you're treated as present the full time. If it's rejected, your effective worked time is capped at the moment the situation was first detected. Flags are information for a person to review fairly - not automatic decisions.\n\nNew: the \"My exceptions\" page in the menu lists your exceptions and where each stands (pending review, approved, rejected), and lets you send your reason."
     },
     "allowances": {
       "title": "Allowances",
@@ -140,7 +140,7 @@
     },
     "payslips": {
       "title": "My payslips",
-      "body": "My payslips shows the payslips published to you from approved, locked cycles, where your organisation allows. If they are not open to you, press \"Request my payslip\": the payroll manager is notified, opens the request from the notification and presses \"Send in the app\" - it then appears in My payslips, you are notified, and you can save it as PDF on your device. No new file is kept on the server: the cycle's approved copy is shown as it is, never recalculated. Sending by email is still available. Nobody else sees your payslips."
+      "body": "My payslips shows the payslips published to you from approved, locked cycles, where your organisation allows. If they are not open to you, press \"Ask for your payslip\": the payroll manager is notified, opens the request from the notification and presses \"Send in the app\" - it then appears in My payslips, you are notified, and you can save it as PDF on your device. No new file is kept on the server: the cycle's approved copy is shown as it is, never recalculated. Sending by email is still available. Nobody else sees your payslips."
     },
     "externalPay": {
       "title": "External labour pay (inside External labour)",
@@ -161,6 +161,22 @@
     "departments": {
       "title": "Departments",
       "body": "The owner, or whoever manages departments, adds them in Settings. Each person belongs to one department at most: choose it when adding the person or on their page. Archiving a department keeps the people's history and stops it being chosen. Announcements can be addressed to departments."
+    },
+    "employeeHome": {
+      "title": "The employee's home",
+      "body": "An employee's home is one screen: the clock-in map and its buttons. The floating \"My hours\" button shows your hours for 15 seconds and closes on any tap; the \"My clock-in reminders\" button opens your own clock-in and clock-out reminders. On the phone, Home sits in the middle of the bottom bar; pressing it, or the PROSM logo, while on Home refreshes the page and takes you back to its top."
+    },
+    "headerTools": {
+      "title": "Weather and quick search",
+      "body": "At the top: the temperature where you are now - press it for feels-like, humidity, wind, UV index, the day's high and low, and a refresh button. The search button (the magnifier, or Ctrl+K on a computer) opens any page of the app as you type its name."
+    },
+    "updates": {
+      "title": "Updates",
+      "body": "On the web: when a new version is out a \"New version available\" bar appears; press it and the page reopens on the new version straight away. On Android: updates come from Google Play. Your data is kept on the server either way."
+    },
+    "personPage": {
+      "title": "The person page (for administrators)",
+      "body": "Press anyone in People to open their page in tidy cards: department, employment, leave, role, permissions, checks, devices (shown only when they have registered devices), and \"Application Access\", with blocking access and deleting their personal attendance data on request. A person's salary is managed in Payroll, not on their page."
     }
   },
   "faq": {
@@ -224,6 +240,18 @@
     "q15": {
       "question": "Does SOS call the ambulance or the police?",
       "answer": "No. It alerts your site's managers, the Owner and co-workers on site, with your location. In an emergency, call your local emergency number yourself."
+    },
+    "q16": {
+      "question": "Why can't I clock in?",
+      "answer": "Usually one of these: the phone is not giving a live location (turn location on and wait a moment), you are outside a site that refuses clock-ins from outside, you have approved leave today, or the organisation's subscription has ended and it is read-only. The message you see says exactly which."
+    },
+    "q17": {
+      "question": "How do I ask for my payslip?",
+      "answer": "In My payslips press \"Ask for your payslip\". The payroll manager is notified; when they send it in the app it appears in My payslips, you are notified, and you can save it as PDF."
+    },
+    "q18": {
+      "question": "Why does my manager see me as \"outside\" on the dashboard?",
+      "answer": "Because the last location your phone sent while clocked in was outside your site's zone, or you clocked in from outside and no new location has arrived since. Open the app at the site so your location updates; if you were outside for a reason, send it from \"My exceptions\"."
     }
   },
   "contact": {

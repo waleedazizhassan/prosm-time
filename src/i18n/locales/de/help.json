@@ -32,7 +32,7 @@
     },
     "exceptions": {
       "title": "Prüfungen - Ausnahmen, Korrekturen, Offline-Zeiten, gefälschte Standorte",
-      "body": "Alles, was eine Entscheidung braucht, erscheint in der Manager-Konsole unter Ausstehende Prüfung: Ausnahmen außerhalb des Bereichs (mit Ihrem Grund), Korrekturanträge, offline erfasste Aktionen mit Gerätezeit und als gefälscht gemeldete Standorte. Wird eine Ausnahme genehmigt, gelten Sie als die ganze Zeit anwesend; wird sie abgelehnt, zählt Ihre Arbeitszeit nur bis zum Zeitpunkt der ersten Erkennung. Markierungen sind Informationen für eine faire Prüfung durch einen Menschen - keine automatischen Entscheidungen."
+      "body": "Alles, was eine Entscheidung braucht, erscheint in der Manager-Konsole unter Ausstehende Prüfung: Ausnahmen außerhalb des Bereichs (mit Ihrem Grund), Korrekturanträge, offline erfasste Aktionen mit Gerätezeit und als gefälscht gemeldete Standorte. Wird eine Ausnahme genehmigt, gelten Sie als die ganze Zeit anwesend; wird sie abgelehnt, zählt Ihre Arbeitszeit nur bis zum Zeitpunkt der ersten Erkennung. Markierungen sind Informationen für eine faire Prüfung durch einen Menschen - keine automatischen Entscheidungen.\n\nNeu: Die Seite „Meine Ausnahmen“ im Menü zeigt Ihre Ausnahmen mit Status (zur Prüfung, genehmigt, abgelehnt) und lässt Sie Ihre Begründung senden."
     },
     "allowances": {
       "title": "Zulagen",
@@ -140,7 +140,7 @@
     },
     "payslips": {
       "title": "Meine Lohnzettel",
-      "body": "Meine Lohnabrechnungen zeigt die für Sie veröffentlichten Abrechnungen genehmigter, gesperrter Läufe, sofern Ihre Organisation es erlaubt. Sonst tippen Sie auf „Abrechnung anfordern“: Die Lohnverantwortlichen werden benachrichtigt und tippen auf „In der App senden“ - die Abrechnung erscheint dann hier, Sie werden benachrichtigt und können sie als PDF speichern. Auf dem Server wird keine neue Datei abgelegt; gezeigt wird die genehmigte Fassung ohne Neuberechnung. Der Versand per E-Mail bleibt möglich. Niemand sonst sieht Ihre Abrechnungen."
+      "body": "Meine Lohnabrechnungen zeigt die für Sie veröffentlichten Abrechnungen genehmigter, gesperrter Läufe, sofern Ihre Organisation es erlaubt. Sonst tippen Sie auf „Gehaltszettel anfordern“: Die Lohnverantwortlichen werden benachrichtigt und tippen auf „In der App senden“ - die Abrechnung erscheint dann hier, Sie werden benachrichtigt und können sie als PDF speichern. Auf dem Server wird keine neue Datei abgelegt; gezeigt wird die genehmigte Fassung ohne Neuberechnung. Der Versand per E-Mail bleibt möglich. Niemand sonst sieht Ihre Abrechnungen."
     },
     "externalPay": {
       "title": "Löhne externer Arbeitskräfte (unter Externe Arbeitskräfte)",
@@ -161,6 +161,22 @@
     "departments": {
       "title": "Abteilungen",
       "body": "Der Inhaber oder wer Abteilungen verwaltet, legt sie in den Einstellungen an. Jede Person gehört höchstens zu einer Abteilung: beim Hinzufügen oder auf ihrer Seite wählen. Eine archivierte Abteilung behält die Historie und kann nicht mehr gewählt werden. Mitteilungen können an Abteilungen gehen."
+    },
+    "employeeHome": {
+      "title": "Die Startseite für Mitarbeitende",
+      "body": "Die Startseite ist ein Bildschirm: die Einstempelkarte mit ihren Tasten. Die schwebende Taste „Meine Stunden“ zeigt Ihre Stunden 15 Sekunden lang und schließt sich bei jeder Berührung; „Meine Stempel-Erinnerungen“ öffnet Ihre Ein- und Ausstempel-Erinnerungen. Auf dem Telefon liegt „Start“ in der Mitte der unteren Leiste; ein Tipp darauf oder auf das PROSM-Logo auf der Startseite lädt die Seite neu und springt nach oben."
+    },
+    "headerTools": {
+      "title": "Wetter und Schnellsuche",
+      "body": "Oben: die aktuelle Temperatur an Ihrem Ort - antippen für gefühlte Temperatur, Luftfeuchte, Wind, UV-Index, Tageshöchst- und -tiefstwert sowie Aktualisieren. Die Suche (Lupe oder Strg+K am Computer) öffnet jede Seite der App, sobald Sie ihren Namen tippen."
+    },
+    "updates": {
+      "title": "Updates",
+      "body": "Im Web: Bei einer neuen Version erscheint die Leiste „Neue Version verfügbar“; ein Tipp öffnet die Seite sofort in der neuen Version. Unter Android: Updates kommen über Google Play. Ihre Daten bleiben in beiden Fällen auf dem Server."
+    },
+    "personPage": {
+      "title": "Die Personenseite (für Administratoren)",
+      "body": "Tippen Sie unter Personen auf jemanden, um seine Seite in geordneten Karten zu öffnen: Abteilung, Beschäftigung, Urlaub, Rolle, Berechtigungen, Prüfungen, Geräte (nur wenn Geräte registriert sind) und „Anwendungszugriff“ mit Zugangssperre und dem Löschen persönlicher Anwesenheitsdaten auf Antrag. Das Gehalt wird unter Lohn verwaltet, nicht auf der Personenseite."
     }
   },
   "faq": {
@@ -224,6 +240,18 @@
     "q15": {
       "question": "Ruft SOS den Rettungsdienst oder die Polizei?",
       "answer": "Nein. Es alarmiert Ihre Vorgesetzten, den Inhaber und Kollegen vor Ort mit Ihrem Standort. Rufen Sie im Notfall selbst die Notrufnummer an."
+    },
+    "q16": {
+      "question": "Warum kann ich nicht einstempeln?",
+      "answer": "Meist aus einem dieser Gründe: Das Telefon liefert keinen aktuellen Standort (Standort einschalten und kurz warten), Sie sind außerhalb eines Standorts, der das Einstempeln von außen ablehnt, Sie haben heute genehmigten Urlaub, oder das Abonnement ist abgelaufen und die Organisation ist schreibgeschützt. Die Meldung nennt den genauen Grund."
+    },
+    "q17": {
+      "question": "Wie fordere ich meine Lohnabrechnung an?",
+      "answer": "Unter „Meine Lohnabrechnungen“ auf „Gehaltszettel anfordern“ tippen. Die Lohnverantwortlichen werden benachrichtigt; senden sie sie in der App, erscheint sie dort, Sie werden benachrichtigt und können sie als PDF speichern."
+    },
+    "q18": {
+      "question": "Warum sieht mein Manager mich als „außerhalb“?",
+      "answer": "Weil der letzte Standort Ihres Telefons während der Arbeitszeit außerhalb der Zone lag oder Sie außerhalb eingestempelt haben und seitdem kein neuer Standort kam. Öffnen Sie die App am Standort, damit er sich aktualisiert; gab es einen Grund, senden Sie ihn unter „Meine Ausnahmen“."
     }
   },
   "contact": {

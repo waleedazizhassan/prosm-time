@@ -32,7 +32,7 @@
     },
     "exceptions": {
       "title": "Vérifications - exceptions, corrections, heures hors ligne, fausses positions",
-      "body": "Tout ce qui demande une décision apparaît dans la console du responsable sous « En attente de vérification » : exceptions hors zone (avec votre motif), demandes de correction, actions hors ligne avec l'heure de l'appareil et positions signalées comme fausses. Une exception approuvée vous compte présent tout le temps ; refusée, votre temps de travail s'arrête au moment de la première détection. Ces signalements sont des informations à vérifier équitablement par une personne, pas des décisions automatiques."
+      "body": "Tout ce qui demande une décision apparaît dans la console du responsable sous « En attente de vérification » : exceptions hors zone (avec votre motif), demandes de correction, actions hors ligne avec l'heure de l'appareil et positions signalées comme fausses. Une exception approuvée vous compte présent tout le temps ; refusée, votre temps de travail s'arrête au moment de la première détection. Ces signalements sont des informations à vérifier équitablement par une personne, pas des décisions automatiques.\n\nNouveau : la page « Mes exceptions » du menu liste vos exceptions et leur état (en attente, approuvée, refusée) et permet d'envoyer votre motif."
     },
     "allowances": {
       "title": "Indemnités",
@@ -140,7 +140,7 @@
     },
     "payslips": {
       "title": "Mes bulletins",
-      "body": "Mes bulletins affiche les bulletins publiés de cycles approuvés et clôturés, si votre organisation le permet. Sinon, touchez « Demander mon bulletin » : le gestionnaire de paie est averti et touche « Envoyer dans l'app » ; le bulletin apparaît ici, vous êtes averti et pouvez l'enregistrer en PDF. Aucun nouveau fichier n'est conservé sur le serveur : la copie approuvée est affichée sans recalcul. L'envoi par e-mail reste possible. Personne d'autre ne voit vos bulletins."
+      "body": "Mes bulletins affiche les bulletins publiés de cycles approuvés et clôturés, si votre organisation le permet. Sinon, touchez « Demander votre bulletin » : le gestionnaire de paie est averti et touche « Envoyer dans l'app » ; le bulletin apparaît ici, vous êtes averti et pouvez l'enregistrer en PDF. Aucun nouveau fichier n'est conservé sur le serveur : la copie approuvée est affichée sans recalcul. L'envoi par e-mail reste possible. Personne d'autre ne voit vos bulletins."
     },
     "externalPay": {
       "title": "Paie de la main-d'œuvre externe (dans Main-d'œuvre externe)",
@@ -161,6 +161,22 @@
     "departments": {
       "title": "Services",
       "body": "Le propriétaire, ou qui gère les services, les ajoute dans Paramètres. Chaque personne appartient au plus à un service : il se choisit à son ajout ou sur sa page. Archiver un service garde l'historique et empêche de le choisir. Les annonces peuvent viser des services."
+    },
+    "employeeHome": {
+      "title": "L'accueil du salarié",
+      "body": "L'accueil du salarié tient sur un écran : la carte de pointage et ses boutons. Le bouton flottant « Mes heures » affiche vos heures 15 secondes et se ferme au toucher ; « Mes rappels de pointage » ouvre vos rappels d'arrivée et de départ. Sur le téléphone, Accueil est au milieu de la barre du bas ; le toucher, ou le logo PROSM, depuis l'accueil recharge la page et remonte en haut."
+    },
+    "headerTools": {
+      "title": "Météo et recherche rapide",
+      "body": "En haut : la température actuelle là où vous êtes - touchez-la pour le ressenti, l'humidité, le vent, l'indice UV, les maximales et minimales du jour et un bouton d'actualisation. Le bouton de recherche (la loupe, ou Ctrl+K sur ordinateur) ouvre n'importe quelle page en tapant son nom."
+    },
+    "updates": {
+      "title": "Mises à jour",
+      "body": "Sur le web : quand une nouvelle version sort, la barre « Nouvelle version disponible » apparaît ; touchez-la et la page s'ouvre directement sur la nouvelle version. Sur Android : les mises à jour viennent de Google Play. Vos données restent sur le serveur dans les deux cas."
+    },
+    "personPage": {
+      "title": "La page d'une personne (pour les administrateurs)",
+      "body": "Touchez une personne dans Personnes pour ouvrir sa page en cartes ordonnées : service, emploi, congés, rôle, autorisations, vérifications, appareils (seulement s'il y en a) et « Accès à l'application », avec le blocage de l'accès et la suppression de ses données personnelles de présence sur demande. Le salaire se gère dans Paie, pas sur sa page."
     }
   },
   "faq": {
@@ -224,6 +240,18 @@
     "q15": {
       "question": "Le SOS appelle-t-il une ambulance ou la police ?",
       "answer": "Non. Il alerte vos responsables, le propriétaire et les collègues sur place avec votre position. En cas d'urgence, appelez vous-même le numéro local."
+    },
+    "q16": {
+      "question": "Pourquoi je ne peux pas pointer ?",
+      "answer": "En général pour l'une de ces raisons : le téléphone ne donne pas de position en direct (activez la localisation et patientez), vous êtes hors d'un site qui refuse le pointage extérieur, vous avez un congé approuvé aujourd'hui, ou l'abonnement a expiré et l'organisation est en lecture seule. Le message indique la raison exacte."
+    },
+    "q17": {
+      "question": "Comment demander mon bulletin de paie ?",
+      "answer": "Dans « Mes bulletins », touchez « Demander votre bulletin ». Le gestionnaire de paie est averti ; quand il l'envoie dans l'app, il apparaît dans « Mes bulletins », vous êtes averti et pouvez l'enregistrer en PDF."
+    },
+    "q18": {
+      "question": "Pourquoi mon responsable me voit « hors zone » ?",
+      "answer": "Parce que la dernière position envoyée par votre téléphone pendant le pointage était hors de la zone, ou vous avez pointé de l'extérieur sans nouvelle position depuis. Ouvrez l'app sur le site pour la mettre à jour ; si vous étiez dehors pour une raison, envoyez-la depuis « Mes exceptions »."
     }
   },
   "contact": {

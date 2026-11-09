@@ -32,7 +32,7 @@
     },
     "exceptions": {
       "title": "Análises - exceções, correções, horários offline e localizações falsas",
-      "body": "Tudo o que precisa da decisão de um gestor aparece no Console do gestor, em Aguardando análise: exceções fora da área (com o seu motivo), pedidos de correção, ações registradas offline com o horário do dispositivo e localizações apontadas como falsas. Se uma exceção é aprovada, você é considerado presente o tempo todo. Se é rejeitada, o tempo efetivamente trabalhado é limitado ao momento em que a situação foi detectada pela primeira vez. Os alertas são informação para uma pessoa analisar com justiça - não decisões automáticas."
+      "body": "Tudo o que precisa da decisão de um gestor aparece no Console do gestor, em Aguardando análise: exceções fora da área (com o seu motivo), pedidos de correção, ações registradas offline com o horário do dispositivo e localizações apontadas como falsas. Se uma exceção é aprovada, você é considerado presente o tempo todo. Se é rejeitada, o tempo efetivamente trabalhado é limitado ao momento em que a situação foi detectada pela primeira vez. Os alertas são informação para uma pessoa analisar com justiça - não decisões automáticas.\n\nNovo: a página «Minhas exceções» no menu lista suas exceções e a situação de cada uma (em revisão, aprovada, rejeitada) e permite enviar seu motivo."
     },
     "allowances": {
       "title": "Adicionais",
@@ -140,7 +140,7 @@
     },
     "payslips": {
       "title": "Os meus recibos",
-      "body": "Meus holerites mostra os holerites publicados de ciclos aprovados e fechados, se a organização permitir. Caso contrário, toque em «Solicitar meu holerite»: o responsável pela folha é avisado e toca em «Enviar no app»; o holerite aparece aqui, você é avisado e pode salvá-lo em PDF. Nenhum arquivo novo fica no servidor: a cópia aprovada é exibida sem recálculo. O envio por e-mail continua disponível. Ninguém mais vê seus holerites."
+      "body": "Meus holerites mostra os holerites publicados de ciclos aprovados e fechados, se a organização permitir. Caso contrário, toque em «Pedir o recibo»: o responsável pela folha é avisado e toca em «Enviar no app»; o holerite aparece aqui, você é avisado e pode salvá-lo em PDF. Nenhum arquivo novo fica no servidor: a cópia aprovada é exibida sem recálculo. O envio por e-mail continua disponível. Ninguém mais vê seus holerites."
     },
     "externalPay": {
       "title": "Pagamento de mão de obra externa (dentro de Mão de obra externa)",
@@ -161,6 +161,22 @@
     "departments": {
       "title": "Departamentos",
       "body": "O proprietário, ou quem gere os departamentos, adiciona-os nas Definições. Cada pessoa pertence no máximo a um departamento: escolhe-se ao adicioná-la ou na sua página. Arquivar um departamento mantém o histórico e impede que seja escolhido. Os anúncios podem ser dirigidos a departamentos."
+    },
+    "employeeHome": {
+      "title": "O início do funcionário",
+      "body": "O início do funcionário é uma só tela: o mapa de ponto e seus botões. O botão flutuante «Minhas horas» mostra suas horas por 15 segundos e fecha ao toque; «Meus lembretes de ponto» abre seus lembretes de entrada e saída. No telefone, Início fica no meio da barra inferior; tocá-lo, ou no logo PROSM, estando no início recarrega a página e volta ao topo."
+    },
+    "headerTools": {
+      "title": "Clima e busca rápida",
+      "body": "No topo: a temperatura atual onde você está - toque para ver sensação térmica, umidade, vento, índice UV, máxima e mínima do dia e um botão para atualizar. O botão de busca (a lupa, ou Ctrl+K no computador) abre qualquer página ao digitar o nome."
+    },
+    "updates": {
+      "title": "Atualizações",
+      "body": "Na web: quando sai uma versão nova aparece a barra «Nova versão disponível»; toque nela e a página abre direto na nova versão. No Android: as atualizações vêm do Google Play. Seus dados ficam no servidor em ambos os casos."
+    },
+    "personPage": {
+      "title": "A página da pessoa (para administradores)",
+      "body": "Toque em alguém em Pessoas para abrir a página em cartões organizados: departamento, vínculo, férias, função, permissões, verificações, dispositivos (só se houver registrados) e «Acesso ao aplicativo», com o bloqueio de acesso e a exclusão dos dados pessoais de ponto a pedido. O salário é gerido na Folha, não na página da pessoa."
     }
   },
   "faq": {
@@ -224,6 +240,18 @@
     "q15": {
       "question": "O SOS chama a ambulância ou a polícia?",
       "answer": "Não. Ele avisa os gestores do seu local, o proprietário e os colegas no local, com a sua localização. Em uma emergência, ligue você mesmo para o número de emergência local."
+    },
+    "q16": {
+      "question": "Por que não consigo registrar o ponto?",
+      "answer": "Geralmente por um destes motivos: o telefone não está dando localização ao vivo (ative a localização e aguarde), você está fora de um local que recusa registros de fora, tem férias aprovadas hoje, ou a assinatura terminou e a organização está somente leitura. A mensagem diz o motivo exato."
+    },
+    "q17": {
+      "question": "Como peço meu holerite?",
+      "answer": "Em «Meus holerites» toque em «Pedir o recibo». O responsável pela folha é avisado; quando ele envia no app, o holerite aparece ali, você é avisado e pode salvá-lo em PDF."
+    },
+    "q18": {
+      "question": "Por que meu gestor me vê «fora» no painel?",
+      "answer": "Porque a última localização enviada pelo telefone durante o turno estava fora da zona, ou você registrou o ponto de fora e nenhuma localização nova chegou desde então. Abra o app no local para atualizar; se estava fora por um motivo, envie-o em «Minhas exceções»."
     }
   },
   "contact": {

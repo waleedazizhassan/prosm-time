@@ -32,7 +32,7 @@
     },
     "exceptions": {
       "title": "Revisiones: excepciones, correcciones, horas sin conexión y ubicaciones falsas",
-      "body": "Todo lo que necesita la decisión de un responsable aparece en la Consola del responsable, en Pendiente de revisión: excepciones fuera de zona (con tu motivo), solicitudes de corrección, acciones registradas sin conexión con la hora del dispositivo y ubicaciones detectadas como falsas. Si se aprueba una excepción, se te considera presente todo el tiempo. Si se rechaza, tu tiempo trabajado efectivo se limita al momento en que se detectó la situación por primera vez. Los avisos son información para que una persona revise con justicia, no decisiones automáticas."
+      "body": "Todo lo que necesita la decisión de un responsable aparece en la Consola del responsable, en Pendiente de revisión: excepciones fuera de zona (con tu motivo), solicitudes de corrección, acciones registradas sin conexión con la hora del dispositivo y ubicaciones detectadas como falsas. Si se aprueba una excepción, se te considera presente todo el tiempo. Si se rechaza, tu tiempo trabajado efectivo se limita al momento en que se detectó la situación por primera vez. Los avisos son información para que una persona revise con justicia, no decisiones automáticas.\n\nNuevo: la página «Mis excepciones» del menú muestra sus excepciones y su estado (pendiente, aprobada, rechazada) y permite enviar su motivo."
     },
     "allowances": {
       "title": "Asignaciones",
@@ -140,7 +140,7 @@
     },
     "payslips": {
       "title": "Mis recibos",
-      "body": "Mis recibos muestra los recibos publicados de ciclos aprobados y cerrados, si su organización lo permite. Si no, pulse «Solicitar mi recibo»: el responsable de nómina recibe un aviso y pulsa «Enviar en la app»; el recibo aparece aquí, se le avisa y puede guardarlo en PDF en su dispositivo. No se guarda ningún archivo nuevo en el servidor: se muestra la copia aprobada sin recalcular. El envío por correo sigue disponible. Nadie más ve sus recibos."
+      "body": "Mis recibos muestra los recibos publicados de ciclos aprobados y cerrados, si su organización lo permite. Si no, pulse «Pedir tu nómina»: el responsable de nómina recibe un aviso y pulsa «Enviar en la app»; el recibo aparece aquí, se le avisa y puede guardarlo en PDF en su dispositivo. No se guarda ningún archivo nuevo en el servidor: se muestra la copia aprobada sin recalcular. El envío por correo sigue disponible. Nadie más ve sus recibos."
     },
     "externalPay": {
       "title": "Pago de mano de obra externa (dentro de Mano de obra externa)",
@@ -161,6 +161,22 @@
     "departments": {
       "title": "Departamentos",
       "body": "El propietario, o quien gestiona los departamentos, los añade en Ajustes. Cada persona pertenece como mucho a un departamento: se elige al añadirla o en su página. Archivar un departamento conserva el historial y evita que se elija. Los anuncios pueden dirigirse a departamentos."
+    },
+    "employeeHome": {
+      "title": "El inicio del empleado",
+      "body": "El inicio del empleado es una sola pantalla: el mapa de fichaje y sus botones. El botón flotante «Mis horas» muestra sus horas 15 segundos y se cierra al tocar; «Mis recordatorios de fichaje» abre sus recordatorios de entrada y salida. En el teléfono, Inicio está en el centro de la barra inferior; pulsarlo, o el logo de PROSM, estando en Inicio recarga la página y la lleva arriba."
+    },
+    "headerTools": {
+      "title": "El tiempo y la búsqueda rápida",
+      "body": "Arriba: la temperatura actual donde está - púlsela para ver sensación térmica, humedad, viento, índice UV, máxima y mínima del día y un botón para actualizar. El botón de búsqueda (la lupa, o Ctrl+K en el ordenador) abre cualquier página escribiendo su nombre."
+    },
+    "updates": {
+      "title": "Actualizaciones",
+      "body": "En la web: cuando sale una versión nueva aparece la barra «Nueva versión disponible»; púlsela y la página se abre en la versión nueva. En Android: las actualizaciones llegan por Google Play. Sus datos se guardan en el servidor en ambos casos."
+    },
+    "personPage": {
+      "title": "La página de la persona (para administradores)",
+      "body": "Pulse a cualquiera en Personas para abrir su página en tarjetas ordenadas: departamento, empleo, permisos, rol, autorizaciones, verificaciones, dispositivos (solo si tiene registrados) y «Acceso a la aplicación», con el bloqueo del acceso y el borrado de sus datos personales de asistencia a petición. El salario se gestiona en Nómina, no en su página."
     }
   },
   "faq": {
@@ -224,6 +240,18 @@
     "q15": {
       "question": "¿El SOS llama a la ambulancia o a la policía?",
       "answer": "No. Avisa a los responsables de tu sede, al propietario y a los compañeros en la sede, con tu ubicación. En una emergencia, llama tú mismo al número de emergencias local."
+    },
+    "q16": {
+      "question": "¿Por qué no puedo fichar?",
+      "answer": "Normalmente por una de estas razones: el teléfono no da una ubicación en vivo (active la ubicación y espere un momento), está fuera de un sitio que rechaza fichajes desde fuera, tiene un permiso aprobado hoy, o la suscripción terminó y la organización es de solo lectura. El mensaje indica el motivo exacto."
+    },
+    "q17": {
+      "question": "¿Cómo pido mi recibo de nómina?",
+      "answer": "En «Mis recibos» pulse «Pedir tu nómina». Se avisa al responsable de nómina; cuando lo envía en la app aparece en «Mis recibos», recibe un aviso y puede guardarlo en PDF."
+    },
+    "q18": {
+      "question": "¿Por qué mi responsable me ve «fuera» en el panel?",
+      "answer": "Porque la última ubicación de su teléfono mientras fichaba estaba fuera de la zona, o fichó desde fuera y no ha llegado una ubicación nueva. Abra la app en el sitio para actualizarla; si estaba fuera por un motivo, envíelo desde «Mis excepciones»."
     }
   },
   "contact": {
