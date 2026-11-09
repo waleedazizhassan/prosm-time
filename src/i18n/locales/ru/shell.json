@@ -275,7 +275,8 @@
     "payroll": "Зарплата",
     "payslips": "Мои листки",
     "externalPay": "Оплата внешних",
-    "announcements": "Объявления"
+    "announcements": "Объявления",
+    "exceptions": "Мои исключения"
   },
   "sosOverlay": {
     "title": "Сигнал SOS/тревога",

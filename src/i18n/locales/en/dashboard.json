@@ -211,7 +211,10 @@
     },
     "suggestSite": "You are at {{site}}. Clock in now?",
     "confirmOutside": "You are {{meters}} m outside the area of {{site}}. It will be recorded as an exception and your manager will review it.",
-    "clockInAt": "Clock in at {{site}}"
+    "clockInAt": "Clock in at {{site}}",
+    "confirmClockInAction": "Confirm clock-in",
+    "confirmClockOutAction": "Confirm clock-out",
+    "confirmDateLabel": "Date"
   },
   "kioskPin": {
     "title": "Kiosk PIN",
@@ -237,7 +240,8 @@
       "other": "Other"
     },
     "clarificationAsked": "Your manager asked you to explain again: \"{{question}}\"",
-    "clarificationAskedNoNote": "Your manager asked you to explain this again."
+    "clarificationAskedNoNote": "Your manager asked you to explain this again.",
+    "none": "Nothing to explain."
   },
   "employeeHome": {
     "hoursTitle": "My hours",

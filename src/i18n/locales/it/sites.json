@@ -82,7 +82,10 @@
     "locationSet": "Posizione impostata: {{latitude}}, {{longitude}}",
     "moreOptions": "Altre opzioni",
     "outsideZonePolicyLabel": "Timbratura di entrata fuori dall'area di lavoro",
-    "clockOutOutsideNote": "L'uscita fuori dall'area è sempre consentita: viene registrata e viene chiesto un motivo, così nessun turno resta aperto."
+    "clockOutOutsideNote": "L'uscita fuori dall'area è sempre consentita: viene registrata e viene chiesto un motivo, così nessun turno resta aperto.",
+    "rangeTitle": "Raggio della sede",
+    "rangeNeedsLocation": "Imposta prima la posizione (\"Usa la mia posizione\") per vedere il cerchio.",
+    "rangeHint": "Il cerchio è dove si può timbrare; si aggiungono {{meters}} m di tolleranza GPS."
   },
   "detail": {
     "backToList": "Torna alle sedi",

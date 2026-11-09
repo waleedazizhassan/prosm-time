@@ -208,7 +208,10 @@
     },
     "suggestSite": "您在 {{site}}。现在上班打卡吗？",
     "confirmOutside": "您在 {{site}} 区域外 {{meters}} 米。此次打卡将记为异常，由您的主管审核。",
-    "clockInAt": "在{{site}}签到"
+    "clockInAt": "在{{site}}签到",
+    "confirmClockInAction": "确认上班打卡",
+    "confirmClockOutAction": "确认下班打卡",
+    "confirmDateLabel": "日期"
   },
   "kioskPin": {
     "title": "考勤机 PIN",
@@ -234,7 +237,8 @@
       "other": "其他"
     },
     "clarificationAsked": "您的主管请您再次说明：“{{question}}”",
-    "clarificationAskedNoNote": "您的主管请您再次说明。"
+    "clarificationAskedNoNote": "您的主管请您再次说明。",
+    "none": "没有需要说明的事项。"
   },
   "employeeHome": {
     "hoursTitle": "我的工时",

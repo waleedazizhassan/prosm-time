@@ -223,7 +223,10 @@
     },
     "suggestSite": "أنت في {{site}}. تسجّل حضورك الآن؟",
     "confirmOutside": "أنت خارج نطاق {{site}} بـ {{meters}} م. سيُسجَّل استثناءً ويراجعه مديرك.",
-    "clockInAt": "سجّل حضورك في {{site}}"
+    "clockInAt": "سجّل حضورك في {{site}}",
+    "confirmClockInAction": "تأكيد الحضور",
+    "confirmClockOutAction": "تأكيد الانصراف",
+    "confirmDateLabel": "التاريخ"
   },
   "kioskPin": {
     "title": "رمز الكشك",
@@ -249,7 +252,8 @@
       "other": "أخرى"
     },
     "clarificationAsked": "مديرك طلب توضيحاً: \"{{question}}\"",
-    "clarificationAskedNoNote": "مديرك طلب منك توضيح هذا مرة أخرى."
+    "clarificationAskedNoNote": "مديرك طلب منك توضيح هذا مرة أخرى.",
+    "none": "لا توجد خروجات من نطاق العمل تحتاج توضيحًا."
   },
   "employeeHome": {
     "hoursTitle": "ساعاتي",

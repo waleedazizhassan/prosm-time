@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, KeyRound, LogIn, Plug, HardHat, ScrollText, Sunrise, Banknote, Receipt, Megaphone } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, KeyRound, LogIn, Plug, HardHat, ScrollText, Sunrise, Banknote, Receipt, Megaphone, AlertTriangle } from "lucide-react";
 
 import { FEATURES } from "../../config/features";
 import type { PlanFeature } from "../../core/hooks/usePlanFeatures";
@@ -83,6 +83,8 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // the Owner), so every authenticated member can open this item and
   // simply gets their own scope back.
   { id: "attendance", labelKey: "items.attendance", path: "/attendance", icon: Clock, requiredPermission: null, section: "attendance" },
+  // Owner 2026-11-09: the out-of-area moments to explain, on their own page
+  { id: "exceptions", labelKey: "items.exceptions", path: "/exceptions", icon: AlertTriangle, requiredPermission: null, hiddenFromOwner: true, section: "attendance" },
   // § user-directed follow-up - a direct sidebar entry for
   // Administrative Clock In/Out (On Behalf Of), previously only
   // reachable via a specific employee's own People > detail page. Same

@@ -275,7 +275,8 @@
     "payroll": "Payroll",
     "payslips": "My payslips",
     "externalPay": "External labour pay",
-    "announcements": "Announcements"
+    "announcements": "Announcements",
+    "exceptions": "My exceptions"
   },
   "sosOverlay": {
     "title": "SOS/Emergency alert",

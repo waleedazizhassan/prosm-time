@@ -11,6 +11,7 @@ import Modal from "../../components/common/Modal";
 import Input from "../../components/common/Input";
 import Select from "../../components/common/Select";
 import Button from "../../components/common/Button";
+import LiveLocationMap from "../../components/common/LiveLocationMap";
 import Toggle from "../../components/common/Toggle";
 import ErrorText from "../../components/common/ErrorText";
 
@@ -200,15 +201,25 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site, defaultK
         </p>
       ) : null}
 
-      <Input
-        label={t("form.allowedRadiusLabel")}
-        name="siteAllowedRadius"
-        type="number"
-        value={allowedRadiusMeters}
-        onChange={(event) => setAllowedRadiusMeters(event.target.value)}
-        required
-        disabled={submitting}
-      />
+      {/* Owner 2026-11-09: the site's range, clear - a slider, the number, and the circle on the map */}
+      <div style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-light)", margin: "var(--space-2) 0" }}>
+        <strong style={{ fontSize: "var(--font-sm)" }}>{t("form.rangeTitle")}</strong>
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)", marginTop: "var(--space-2)" }}>
+          <input type="range" min={20} max={2000} step={10} value={Number(allowedRadiusMeters) || 0} onChange={(event) => setAllowedRadiusMeters(event.target.value)}
+            disabled={submitting} aria-label={t("form.allowedRadiusLabel")} style={{ flex: 1, accentColor: "var(--brand-primary)" }} />
+          <div style={{ width: 120 }}>
+            <Input label={t("form.allowedRadiusLabel")} name="siteAllowedRadius" type="number" value={allowedRadiusMeters}
+              onChange={(event) => setAllowedRadiusMeters(event.target.value)} required disabled={submitting} />
+          </div>
+        </div>
+        {latitude && longitude ? (
+          <LiveLocationMap latitude={null} longitude={null} height={220}
+            site={{ name: name || t("form.rangeTitle"), latitude: Number(latitude), longitude: Number(longitude), allowedRadiusMeters: Number(allowedRadiusMeters) || 0 }} />
+        ) : (
+          <p style={{ margin: "var(--space-1) 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("form.rangeNeedsLocation")}</p>
+        )}
+        <p style={{ margin: "var(--space-1) 0 0", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("form.rangeHint", { meters: gpsAccuracyToleranceMeters })}</p>
+      </div>
 
       <div style={toggleRowStyle}>
         <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("form.cameraRequiredLabel")}</span>

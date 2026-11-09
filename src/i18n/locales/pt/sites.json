@@ -82,7 +82,10 @@
     "locationSet": "Localização definida: {{latitude}}, {{longitude}}",
     "moreOptions": "Mais opções",
     "outsideZonePolicyLabel": "Entrada fora da área de trabalho",
-    "clockOutOutsideNote": "Registrar a saída fora da área de trabalho é sempre permitido: fica registrado e o funcionário informa o motivo, para que ninguém fique com o ponto aberto."
+    "clockOutOutsideNote": "Registrar a saída fora da área de trabalho é sempre permitido: fica registrado e o funcionário informa o motivo, para que ninguém fique com o ponto aberto.",
+    "rangeTitle": "Raio do local",
+    "rangeNeedsLocation": "Defina primeiro a localização (\"Usar a minha localização\") para ver o círculo.",
+    "rangeHint": "O círculo é onde é permitido registar; somam-se {{meters}} m de tolerância GPS."
   },
   "detail": {
     "backToList": "Voltar às unidades",

@@ -3,7 +3,6 @@ import { useAuth } from "../../core/context/AuthContext";
 import UnreadAnnouncementsBanner from "../announcements/UnreadAnnouncementsBanner";
 import PageShell from "../../components/common/PageShell";
 import EmployeeHome from "./EmployeeHome";
-import ExceptionsCard from "./ExceptionsCard";
 import AdminOverviewCard from "./AdminOverviewCard";
 import PersonalRemindersCard from "./PersonalRemindersCard";
 import ManagerDashboard from "./manager/ManagerDashboard";
@@ -55,7 +54,6 @@ export default function DashboardPage() {
       {/* v2.3.43 step 17: the Owner and whoever holds dashboard.view get the
           full dashboard; other management roles keep the light overview. */}
       {showFullDashboard ? <ManagerDashboard /> : hasManagementScope ? <AdminOverviewCard /> : <EmployeeHome />}
-      <ExceptionsCard />
       {/* Owner 2026-10-21: each person sets their own clock-in/out reminders (not the Owner). */}
       <PersonalRemindersCard />
     </PageShell>

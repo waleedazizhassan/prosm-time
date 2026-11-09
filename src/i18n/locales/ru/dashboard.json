@@ -217,7 +217,10 @@
     },
     "suggestSite": "Вы на объекте {{site}}. Отметить приход?",
     "confirmOutside": "Вы в {{meters}} м за пределами зоны объекта {{site}}. Отметка будет записана как исключение, и руководитель её проверит.",
-    "clockInAt": "Отметить приход: {{site}}"
+    "clockInAt": "Отметить приход: {{site}}",
+    "confirmClockInAction": "Подтвердить приход",
+    "confirmClockOutAction": "Подтвердить уход",
+    "confirmDateLabel": "Дата"
   },
   "kioskPin": {
     "title": "PIN киоска",
@@ -243,7 +246,8 @@
       "other": "Другое"
     },
     "clarificationAsked": "Руководитель просит пояснить ещё раз: «{{question}}»",
-    "clarificationAskedNoNote": "Руководитель просит пояснить это ещё раз."
+    "clarificationAskedNoNote": "Руководитель просит пояснить это ещё раз.",
+    "none": "Пояснять нечего."
   },
   "employeeHome": {
     "hoursTitle": "Мои часы",

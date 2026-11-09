@@ -44,7 +44,7 @@ describe("notificationTarget", () => {
     for (const type of ["site_change_alert", "location_plausibility_flag", "out_of_zone_manager", "missing_clock_out"]) {
       expect(notificationTarget({ type }, supervisor)).toBe("/manager");
     }
-    expect(notificationTarget({ type: "out_of_zone_employee" }, employee)).toBe("/dashboard");
+    expect(notificationTarget({ type: "out_of_zone_employee" }, employee)).toBe("/exceptions");
     expect(notificationTarget({ type: "trial_ending" }, owner)).toBe("/activate");
     expect(notificationTarget({ type: "allowance_rejected" }, supervisor)).toBe("/allowances");
     expect(notificationTarget({ type: "trial_ended" }, supervisor)).toBe("/dashboard");

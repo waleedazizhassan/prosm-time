@@ -278,7 +278,7 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture, siteId 
       isOpen={isOpen}
       onClose={onClose}
       title={t("title")}
-      size="md"
+      size="screen"
       footer={
         capturedDataUrl ? (
           <>
@@ -349,6 +349,12 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture, siteId 
             <button type="button" className={styles.switchCameraButton} onClick={handleSwitchCamera} aria-label={t("switchCamera")} title={t("switchCamera")}>
               <SwitchCamera size={18} />
             </button>
+            {/* 2026-11-09 (owner): the round shutter in the middle, like any camera */}
+            {!challengePending ? (
+              <button type="button" className={styles.shutter} onClick={handleCapture} disabled={!livenessReady} aria-label={t("capture")} title={t("capture")}>
+                <span className={styles.shutterInner} />
+              </button>
+            ) : null}
           </>
         )}
       </div>

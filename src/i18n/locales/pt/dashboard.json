@@ -214,7 +214,10 @@
     "suggestSite": "Você está em {{site}}. Registrar a entrada agora?",
     "confirmOutside": "Você está {{meters}} m fora da área de {{site}}. Isso será registrado como exceção e seu gestor vai analisar.",
     "pendingCount_many": "{{count}} registros de ponto salvos neste dispositivo",
-    "clockInAt": "Registar entrada em {{site}}"
+    "clockInAt": "Registar entrada em {{site}}",
+    "confirmClockInAction": "Confirmar entrada",
+    "confirmClockOutAction": "Confirmar saída",
+    "confirmDateLabel": "Data"
   },
   "kioskPin": {
     "title": "PIN do quiosque",
@@ -240,7 +243,8 @@
       "other": "Outro"
     },
     "clarificationAsked": "Seu gestor pediu que você explique de novo: \"{{question}}\"",
-    "clarificationAskedNoNote": "Seu gestor pediu que você explique isso de novo."
+    "clarificationAskedNoNote": "Seu gestor pediu que você explique isso de novo.",
+    "none": "Nada para explicar."
   },
   "employeeHome": {
     "hoursTitle": "Minhas horas",

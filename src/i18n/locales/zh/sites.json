@@ -82,7 +82,10 @@
     "locationSet": "已设置位置：{{latitude}}，{{longitude}}",
     "moreOptions": "更多选项",
     "outsideZonePolicyLabel": "在工作区域外上班打卡",
-    "clockOutOutsideNote": "在工作区域外下班打卡始终允许：会被记录并要求员工说明原因，避免有人一直处于上班状态。"
+    "clockOutOutsideNote": "在工作区域外下班打卡始终允许：会被记录并要求员工说明原因，避免有人一直处于上班状态。",
+    "rangeTitle": "站点范围",
+    "rangeNeedsLocation": "请先设置站点位置（“使用我的当前位置”），即可在地图上看到范围圆。",
+    "rangeHint": "圆圈内允许打卡，另加 {{meters}} 米 GPS 容差。"
   },
   "detail": {
     "backToList": "返回工地列表",

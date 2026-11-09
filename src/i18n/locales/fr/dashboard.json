@@ -214,7 +214,10 @@
     },
     "suggestSite": "Vous êtes à {{site}}. Pointer maintenant ?",
     "confirmOutside": "Vous êtes à {{meters}} m hors de la zone de {{site}}. Ce sera enregistré comme exception et revu par votre responsable.",
-    "clockInAt": "Pointer l'arrivée à {{site}}"
+    "clockInAt": "Pointer l'arrivée à {{site}}",
+    "confirmClockInAction": "Confirmer l'arrivée",
+    "confirmClockOutAction": "Confirmer le départ",
+    "confirmDateLabel": "Date"
   },
   "kioskPin": {
     "title": "Code PIN kiosque",
@@ -240,7 +243,8 @@
       "other": "Autre"
     },
     "clarificationAsked": "Votre responsable demande une précision : « {{question}} »",
-    "clarificationAskedNoNote": "Votre responsable vous demande de réexpliquer ceci."
+    "clarificationAskedNoNote": "Votre responsable vous demande de réexpliquer ceci.",
+    "none": "Rien à expliquer."
   },
   "employeeHome": {
     "hoursTitle": "Mes heures",
