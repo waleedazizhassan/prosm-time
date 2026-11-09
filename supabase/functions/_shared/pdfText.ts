@@ -7,8 +7,8 @@
 
 export const ARABIC = /[؀-ۿݐ-ݿࢠ-ࣿﭐ-﷿ﹰ-﻿]/;
 export const CJK = /[⺀-⿟　-〿぀-ヿ㐀-䶿一-鿿豈-﫿＀-￯]/;
-// The hyphen and the middle dot are not in the Arabic font: they always take the Latin one.
-const NEUTRAL = /[\s:.,;!?()\/،؛]/;
+// The hyphen, the slash and the middle dot are not in the Arabic font: they always take the Latin one.
+const NEUTRAL = /[\s:.,;!?()،؛]/;
 export type Script = "arabic" | "cjk" | "latin";
 export type Weight = "regular" | "bold";
 

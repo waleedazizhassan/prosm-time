@@ -1588,6 +1588,9 @@ begin
                                        'showSignatures', coalesce((v_cycle.policy_snapshot ->> 'show_signatures')::boolean, true),
                                        'language', coalesce(v_cycle.policy_snapshot ->> 'report_language', 'bilingual')),
         'employees', v_employees,
+        -- each employee's site by name, for the payslip header and the report's site strip
+        'siteNames', coalesce((select jsonb_object_agg(s.id, s.name) from sites s
+                               where s.id in (select (e ->> 'site_id')::uuid from jsonb_array_elements(v_employees) e where e ->> 'site_id' is not null)), '{}'::jsonb),
         'excluded', v_excluded,
         'totals', coalesce((
             select jsonb_agg(jsonb_build_object('currency', currency, 'earnings', earnings, 'deductions', deductions, 'installments', installments,

@@ -162,6 +162,8 @@ export interface PayrollReport {
   organization: { name: string; logoUrl: string | null };
   settings: { taxNotice: string | null; footerNote: string | null; showSignatures: boolean; language: "ar" | "en" | "bilingual" };
   employees: CycleEmployee[];
+  /** site id -> name (2026-11-09) */
+  siteNames?: Record<string, string>;
   excluded: { userId: string; fullName: string; reason: string }[];
   totals: { currency: string; earnings: number; deductions: number; installments: number; net: number; base: number; allowances: number; combined: number; count: number }[];
 }

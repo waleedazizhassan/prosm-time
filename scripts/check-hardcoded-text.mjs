@@ -3,7 +3,8 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 
-const SKIP = /\.test\.|privacyPolicyV2|legalContent|\/locales\/|i18n\/languages\.ts|modules\/legal\/LegalPage\.tsx/;
+// amountInWords.ts holds the Arabic number words themselves (language data, like languages.ts).
+const SKIP = /\.test\.|privacyPolicyV2|legalContent|\/locales\/|i18n\/languages\.ts|modules\/legal\/LegalPage\.tsx|core\/utils\/amountInWords\.ts/;
 const ARABIC_WORD = /[؀-ۿ]{2,}/;
 const JSX_ENGLISH = />\s*[A-Z][a-z]+( [a-z]+)+\s*</;
 

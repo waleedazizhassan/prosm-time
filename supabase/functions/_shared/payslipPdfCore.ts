@@ -1,11 +1,13 @@
-// Owner 2026-11-08: the payslip a manager emails to an employee, built on the server from the
-// stored, approved snapshot of the published cycle version - never recalculated here. It shows
-// only the payslip lines (the lines in the net; never the extra allowances), so the visible
-// lines add up to the net. Runs anywhere: the caller passes pdf-lib/fontkit and the fonts.
-// Bilingual labels are drawn as two pieces (Arabic, then English) - never one mixed string,
-// whose direction would scramble.
+// Owner 2026-11-08/09: the payslip a manager emails to an employee, built on the server from the
+// stored, approved snapshot of the published cycle version - never recalculated here - and laid
+// out like the owner's reference payslip: PROSM Time | the organisation | issue date, time and
+// pages; the title band; the employee box; earnings, deductions and installments side by side,
+// each with its total; the net salary band with the amount in words; management approval.
+// Only the payslip lines are shown (the lines in the net; never the extra allowances), so the
+// visible lines add up to the net. Runs anywhere: the caller passes pdf-lib/fontkit and fonts.
 // deno-lint-ignore-file no-explicit-any
 import { textKit, type FontSet, type Weight } from "./pdfText.ts";
+import { amountInWords, currencyLabel } from "./amountInWords.ts";
 
 type FontPair = { regular: Uint8Array; bold: Uint8Array; presubset?: boolean };
 
@@ -25,6 +27,8 @@ export interface PayslipData {
   cycleVersion: number;
   serial: number | string;
   issuedAt: string;
+  /** HH:MM:SS, the time of issue */
+  issuedTime?: string;
   employee: {
     full_name: string;
     employee_code: string | null;
@@ -46,12 +50,18 @@ export interface PayslipPdfLibs {
   fontkit: any;
 }
 
+export interface PayslipLogo {
+  bytes: Uint8Array;
+  type: "png" | "jpg";
+}
+
 const LABELS: Record<string, [string, string]> = {
   title: ["مفردات مرتب", "Salary Payslip"],
+  month: ["الشهر", "Month"],
   period: ["الفترة", "Period"],
-  employee: ["اسم الموظف", "Employee"],
+  employee: ["اسم الموظف", "Employee name"],
   code: ["كود الموظف", "Employee code"],
-  site: ["الموقع", "Site"],
+  site: ["الإدارة / الموقع", "Department / Site"],
   earnings: ["الاستحقاقات", "Earnings"],
   deductions: ["الاستقطاعات", "Deductions"],
   installments: ["الأقساط", "Installments"],
@@ -60,23 +70,30 @@ const LABELS: Record<string, [string, string]> = {
   totalEarnings: ["إجمالي الاستحقاقات", "Total earnings"],
   totalDeductions: ["إجمالي الاستقطاعات", "Total deductions"],
   totalInstallments: ["إجمالي الأقساط", "Total installments"],
-  net: ["صافي المرتب", "Net salary"],
+  net: ["صافي المرتب", "Net Salary"],
+  issueDate: ["تاريخ الإصدار", "Issue date"],
+  issueTime: ["الوقت", "Time"],
+  pages: ["إجمالي الصفحات", "Total pages"],
+  approval: ["اعتماد الإدارة", "Management approval"],
   serial: ["رقم الإصدار", "Serial"],
   version: ["إصدار الدورة", "Cycle version"],
   amended: ["نسخة معدّلة", "Amended version"],
-  issued: ["تاريخ الإصدار", "Issued"],
-  none: ["لا يوجد", "None"],
 };
 
 const money = (value: string | number) =>
   Number(value ?? 0).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
+const wordsLanguage = (data: PayslipData) => (data.language === "en" ? "en" : "ar");
+
 /** Every text that will be drawn - so the caller fetches exactly the fonts it needs. */
 export function payslipTexts(data: PayslipData): string[] {
   return [
     ...Object.values(LABELS).flat(),
+    "PROSM Time", "WORK, TRACKED.",
     data.organizationName, data.cycleTitle, data.employee.full_name, data.employee.employee_code ?? "", data.siteName ?? "",
     data.taxNotice ?? "", data.footerNote ?? "",
+    amountInWords(data.employee.net_salary, data.employee.currency, wordsLanguage(data)),
+    ...currencyLabel(data.employee.currency),
     ...data.employee.lines.flatMap((line) => [line.name_ar, line.name_en ?? ""]),
   ];
 }
@@ -84,7 +101,7 @@ export function payslipTexts(data: PayslipData): string[] {
 export async function buildPayslipPdf(
   libs: PayslipPdfLibs,
   fonts: { latin: FontPair; arabic: FontPair | null; cjk: FontPair | null },
-  logoPng: Uint8Array | null,
+  orgLogo: PayslipLogo | null,
   data: PayslipData,
 ): Promise<Uint8Array> {
   const { PDFDocument, rgb, fontkit } = libs;
@@ -99,154 +116,206 @@ export async function buildPayslipPdf(
 
   const lang = data.language;
   const rtl = lang !== "en";
+  const L = (key: string) => (lang === "en" ? LABELS[key][1] : LABELS[key][0]);
   doc.setTitle(`${LABELS.title[1]} - ${data.employee.full_name} - ${data.cycleTitle}`);
   doc.setAuthor("PROSM Time Payroll");
 
-  const navy = rgb(0.06, 0.16, 0.32);
-  const ink = rgb(0.11, 0.15, 0.25);
-  const muted = rgb(0.4, 0.45, 0.55);
-  const rule = rgb(0.86, 0.89, 0.93);
-  const band = rgb(0.92, 0.95, 0.98);
+  const navy = rgb(0.07, 0.17, 0.33);
+  const ink = rgb(0.1, 0.13, 0.22);
+  const muted = rgb(0.38, 0.43, 0.52);
+  const rule = rgb(0.78, 0.82, 0.88);
+  const band = rgb(0.86, 0.91, 0.96);
+  const soft = rgb(0.94, 0.96, 0.98);
   const white = rgb(1, 1, 1);
-  const lightOnNavy = rgb(0.78, 0.84, 0.93);
 
   const page = doc.addPage([595.28, 841.89]);
   const H = page.getHeight();
   const k = textKit(page, fontFor, rtl);
   const W = k.W;
-  const M = 40;
-  const GAP = 6;
-
-  // one label: Arabic, English, or both as two pieces (the second smaller, in the secondary colour)
-  type Piece = { text: string; size: number; weight: Weight; color: any };
-  const pieces = (key: string, size: number, weight: Weight, color: any, second: any): Piece[] => {
-    const [ar, en] = LABELS[key];
-    if (lang === "ar") return [{ text: ar, size, weight, color }];
-    if (lang === "en") return [{ text: en, size, weight, color }];
-    return [{ text: ar, size, weight, color }, { text: en, size: size * 0.82, weight: "regular", color: second }];
-  };
-  const widthOf = (list: Piece[]) => list.reduce((sum, p) => sum + k.widthOf(p.text, p.size, p.weight), 0) + GAP * (list.length - 1);
-  // laid out from the start side: on an Arabic page the first piece is the rightmost
-  const drawPiecesFrom = (list: Piece[], xLeft: number, y: number) => {
-    let x = xLeft;
-    for (const p of rtl ? [...list].reverse() : list) {
-      k.left(p.text, x, y, p.size, p.weight, p.color);
-      x += k.widthOf(p.text, p.size, p.weight) + GAP;
-    }
-  };
-  const atStart = (list: Piece[], inset: number, y: number) => drawPiecesFrom(list, rtl ? W - inset - widthOf(list) : inset, y);
-  const atEnd = (list: Piece[], inset: number, y: number) => drawPiecesFrom(list, rtl ? inset : W - inset - widthOf(list), y);
-  const atCenter = (list: Piece[], xCenter: number, y: number) => drawPiecesFrom(list, xCenter - widthOf(list) / 2, y);
-  const one = (key: string) => (lang === "en" ? LABELS[key][1] : LABELS[key][0]);
+  const M = 34;
+  // x of a box laid out from the start side: on an Arabic page the first box is the rightmost
+  const boxX = (offsetFromStart: number, width: number) => (rtl ? W - M - offsetFromStart - width : M + offsetFromStart);
+  const startIn = (text: string, x: number, width: number, inset: number, y: number, size: number, weight: Weight, color: any) =>
+    rtl ? k.right(text, x + width - inset, y, size, weight, color) : k.left(text, x + inset, y, size, weight, color);
+  const endIn = (text: string, x: number, width: number, inset: number, y: number, size: number, weight: Weight, color: any) =>
+    rtl ? k.left(text, x + inset, y, size, weight, color) : k.right(text, x + width - inset, y, size, weight, color);
   const lineName = (line: PayslipLine) => (lang === "en" ? line.name_en || line.name_ar : line.name_ar);
+  const box = (x: number, y: number, w: number, h: number, fill?: any, border = true) =>
+    page.drawRectangle({ x, y, width: w, height: h, color: fill, borderColor: border ? rule : undefined, borderWidth: border ? 0.8 : 0 });
 
-  // header: the organisation on the start side, PROSM Time quietly on the end side
+  // ---- header: PROSM Time on the end side | the organisation in the middle | the issue on the start side
   let y = H - M;
-  if (logoPng) {
-    const logo = await doc.embedPng(logoPng);
-    const h = 34;
-    const w = (logo.width / logo.height) * h;
-    page.drawImage(logo, { x: rtl ? M : W - M - w, y: y - h, width: w, height: h });
-  } else {
-    k.end("PROSM Time", M, y - 22, 12, "bold", navy);
-  }
-  k.start(data.organizationName, M, y - 22, k.fit(data.organizationName, W / 2, 16, "bold"), "bold", navy);
-  y -= 50;
-  page.drawLine({ start: { x: M, y }, end: { x: W - M, y }, thickness: 0.8, color: rule });
+  const brandW = 150;
+  const brandX = rtl ? M : W - M - brandW;
+  k.center("PROSM Time", brandX + brandW / 2, y - 26, 24, "bold", navy);
+  k.center("W O R K ,   T R A C K E D .", brandX + brandW / 2, y - 42, 7.5, "regular", ink);
+  const dividerX = rtl ? brandX + brandW + 12 : brandX - 12;
+  page.drawLine({ start: { x: dividerX, y: y - 4 }, end: { x: dividerX, y: y - 60 }, thickness: 0.8, color: rule });
 
-  // title band and period
-  y -= 40;
-  page.drawRectangle({ x: M, y: y - 8, width: W - 2 * M, height: 40, color: band });
-  atCenter(pieces("title", 18, "bold", navy, muted), W / 2, y + 6);
-  y -= 28;
-  atCenter([...pieces("period", 10, "bold", muted, muted), { text: data.cycleTitle, size: 10, weight: "regular", color: ink }], W / 2, y);
-  y -= 14;
-  k.center(`${data.periodStart}  -  ${data.periodEnd}`, W / 2, y, 9.5, "regular", muted);
-
-  // employee box
-  y -= 18;
-  const boxH = 48;
-  page.drawRectangle({ x: M, y: y - boxH, width: W - 2 * M, height: boxH, borderColor: rule, borderWidth: 0.8 });
-  const cells: [string, string][] = [
-    ["employee", data.employee.full_name],
-    ["code", data.employee.employee_code ?? "-"],
-    ["site", data.siteName ?? "-"],
+  const metaW = 150;
+  const metaX = boxX(0, metaW);
+  const meta: [string, string][] = [
+    ["issueDate", data.issuedAt],
+    ["issueTime", data.issuedTime ?? ""],
+    ["pages", "1"],
   ];
-  const cellW = (W - 2 * M) / cells.length;
-  cells.forEach(([key, value], i) => {
-    // the first cell on the start side
-    const xCenter = rtl ? W - M - cellW * i - cellW / 2 : M + cellW * i + cellW / 2;
-    atCenter(pieces(key, 8.5, "regular", muted, muted), xCenter, y - 16);
-    k.center(value, xCenter, y - 35, k.fit(value, cellW - 10, 11.5, "bold"), "bold", ink);
+  meta.forEach(([key, value], i) => {
+    const ry = y - 14 - i * 17;
+    startIn(`${L(key)} :`, metaX, metaW, 0, ry, 9.5, "bold", ink);
+    endIn(value, metaX, metaW, 0, ry, 9.5, "regular", ink);
   });
-  y -= boxH + 18;
 
-  // the three blocks: earnings, deductions, installments - each with its total
-  const blocks = [
+  const midLeft = rtl ? dividerX + 12 : M + metaW + 12;
+  const midRight = rtl ? W - M - metaW - 12 : dividerX - 12;
+  const midCenter = (midLeft + midRight) / 2;
+  let nameY = y - 30;
+  if (orgLogo) {
+    try {
+      const image = orgLogo.type === "png" ? await doc.embedPng(orgLogo.bytes) : await doc.embedJpg(orgLogo.bytes);
+      const h = 34;
+      const w = Math.min((image.width / image.height) * h, midRight - midLeft);
+      page.drawImage(image, { x: midCenter - w / 2, y: y - h, width: w, height: h });
+      nameY = y - 50;
+    } catch {
+      // an unreadable logo: the name alone
+    }
+  }
+  k.center(data.organizationName, midCenter, nameY, k.fit(data.organizationName, midRight - midLeft, 14, "bold"), "bold", navy);
+  y -= 74;
+
+  // ---- title band
+  box(M, y - 46, W - 2 * M, 46, band, false);
+  if (lang === "bilingual") {
+    k.center(LABELS.title[0], W / 2, y - 24, 21, "bold", ink);
+    k.center(LABELS.title[1], W / 2, y - 39, 11, "regular", ink);
+  } else {
+    k.center(L("title"), W / 2, y - 30, 21, "bold", ink);
+  }
+  y -= 64;
+
+  // ---- the month, and the period on the end side
+  k.start(`${L("month")} :   ${data.cycleTitle}`, M + 10, y, 11, "bold", ink);
+  k.end(`${data.periodStart}  -  ${data.periodEnd}`, M + 10, y, 9.5, "regular", muted);
+  y -= 12;
+  page.drawLine({ start: { x: M, y }, end: { x: W - M, y }, thickness: 0.8, color: navy });
+  y -= 12;
+
+  // ---- the employee box: code | name | department / site
+  const empH = 48;
+  box(M, y - empH, W - 2 * M, empH);
+  const cells: [string, string, number][] = [
+    ["code", data.employee.employee_code ?? "-", 0.22],
+    ["employee", data.employee.full_name, 0.45],
+    ["site", data.siteName ?? "-", 0.33],
+  ];
+  let offset = 0;
+  for (const [i, [key, value, share]] of cells.entries()) {
+    const cw = (W - 2 * M) * share;
+    const cx = boxX(offset, cw);
+    k.center(L(key), cx + cw / 2, y - 17, 10, "bold", ink);
+    k.center(value, cx + cw / 2, y - 37, k.fit(value, cw - 12, 13, "bold"), "bold", ink);
+    if (i > 0) {
+      const lineX = rtl ? cx + cw : cx;
+      page.drawLine({ start: { x: lineX, y: y - 8 }, end: { x: lineX, y: y - empH + 8 }, thickness: 0.8, color: rule });
+    }
+    offset += cw;
+  }
+  y -= empH + 16;
+
+  // ---- earnings | deductions | installments, side by side, totals aligned
+  const columns = [
     { title: "earnings", total: "totalEarnings", lines: data.employee.lines.filter((l) => l.category === "earning" || l.category === "allowance"), totalValue: data.employee.total_earnings },
     { title: "deductions", total: "totalDeductions", lines: data.employee.lines.filter((l) => l.category === "deduction"), totalValue: data.employee.total_deductions },
     { title: "installments", total: "totalInstallments", lines: data.employee.lines.filter((l) => l.category === "installment"), totalValue: data.employee.total_installments },
   ];
-  const rowH = 17;
-  for (const block of blocks) {
-    const rows = Math.max(block.lines.length, 1);
-    const height = 22 + 16 + rows * rowH + 22;
-    page.drawRectangle({ x: M, y: y - height, width: W - 2 * M, height, borderColor: rule, borderWidth: 0.8 });
-    page.drawRectangle({ x: M, y: y - 22, width: W - 2 * M, height: 22, color: band });
-    atCenter(pieces(block.title, 11.5, "bold", navy, muted), W / 2, y - 15);
-    let ry = y - 22 - 13;
-    atStart(pieces("item", 8.5, "bold", muted, muted), M + 10, ry);
-    atEnd(pieces("value", 8.5, "bold", muted, muted), M + 10, ry);
-    ry -= 4;
-    if (block.lines.length === 0) {
-      ry -= rowH - 4;
-      k.start(one("none"), M + 10, ry, 9.5, "regular", muted);
-    }
-    for (const line of block.lines) {
-      ry -= rowH - 4;
+  const gap = 10;
+  const colW = (W - 2 * M - 2 * gap) / 3;
+  const headH = 26;
+  const subH = 20;
+  const totalH = 28;
+  const rows = Math.max(5, ...columns.map((c) => c.lines.length));
+  // shrink the rows on a payslip with many lines so everything stays on one page
+  const rowH = Math.max(13, Math.min(19, (y - 230 - headH - subH - totalH) / rows));
+  const colH = headH + subH + rows * rowH + totalH + 12;
+  columns.forEach((column, i) => {
+    const x = boxX(i * (colW + gap), colW);
+    box(x, y - colH, colW, colH);
+    box(x, y - headH, colW, headH, band, false);
+    k.center(L(column.title), x + colW / 2, y - 18, 13, "bold", ink);
+    const valueW = colW * 0.36;
+    const splitX = rtl ? x + valueW : x + colW - valueW;
+    box(x + 4, y - headH - subH, colW - 8, subH, soft, false);
+    let ry = y - headH - 14;
+    startIn(L("item"), x, colW - valueW, 0, ry, 10, "bold", ink);
+    k.center(L("value"), rtl ? x + valueW / 2 : x + colW - valueW / 2, ry, 10, "bold", ink);
+    ry = y - headH - subH;
+    for (const line of column.lines) {
       const name = lineName(line);
-      const second = lang === "bilingual" && line.name_en && line.name_en !== line.name_ar ? line.name_en : null;
-      const room = (W - 2 * M) * 0.7;
-      atStart(
-        second
-          ? [{ text: name, size: k.fit(name, room * 0.6, 10), weight: "regular", color: ink }, { text: second, size: k.fit(second, room * 0.4, 8.5), weight: "regular", color: muted }]
-          : [{ text: name, size: k.fit(name, room, 10), weight: "regular", color: ink }],
-        M + 10, ry);
-      k.end(money(line.amount), M + 10, ry, 10, "regular", ink);
-      ry -= 4;
-      page.drawLine({ start: { x: M + 8, y: ry }, end: { x: W - M - 8, y: ry }, thickness: 0.4, color: rule });
+      const nameX = rtl ? splitX : x;
+      startIn(name, nameX, colW - valueW, 8, ry - rowH + 5, k.fit(name, colW - valueW - 14, 10), "regular", ink);
+      k.center(money(line.amount), rtl ? x + valueW / 2 : x + colW - valueW / 2, ry - rowH + 5, k.fit(money(line.amount), valueW - 8, 10), "regular", ink);
+      ry -= rowH;
+      page.drawLine({ start: { x: x + 8, y: ry }, end: { x: x + colW - 8, y: ry }, thickness: 0.4, color: rule });
     }
-    const ty = y - height + 8;
-    atStart(pieces(block.total, 10, "bold", navy, muted), M + 10, ty);
-    k.end(money(block.totalValue), M + 10, ty, 10.5, "bold", navy);
-    y -= height + 12;
+    page.drawLine({ start: { x: splitX, y: y - headH - subH }, end: { x: splitX, y: y - headH - subH - rows * rowH }, thickness: 0.6, color: rule });
+    const ty = y - colH + 6;
+    box(x + 4, ty, colW - 8, totalH, soft, false);
+    startIn(L(column.total), x, colW, 10, ty + 10, k.fit(L(column.total), colW * 0.6, 10.5, "bold"), "bold", ink);
+    endIn(money(column.totalValue), x, colW, 10, ty + 10, 11.5, "bold", ink);
+  });
+  y -= colH + 16;
+
+  // ---- net salary: label box | amount | currency | the amount in words
+  const netH = 56;
+  box(M, y - netH, W - 2 * M, netH, soft, false);
+  const labelW = 120;
+  const labelX = boxX(0, labelW);
+  page.drawRectangle({ x: labelX, y: y - netH, width: labelW, height: netH, color: navy });
+  if (lang === "bilingual") {
+    k.center(LABELS.net[0], labelX + labelW / 2, y - 25, 15, "bold", white);
+    k.center(LABELS.net[1], labelX + labelW / 2, y - 42, 9.5, "regular", white);
+  } else {
+    k.center(L("net"), labelX + labelW / 2, y - 33, 15, "bold", white);
   }
-
-  // net salary, prominent, with its currency
-  const netH = 46;
-  page.drawRectangle({ x: M, y: y - netH, width: W - 2 * M, height: netH, color: navy });
-  atStart(pieces("net", 13, "bold", white, lightOnNavy), M + 14, y - 29);
-  k.end(`${money(data.employee.net_salary)} ${data.employee.currency}`, M + 14, y - 30, 17, "bold", white);
-  y -= netH + 18;
-
-  // which issue this is: its serial, the cycle version it comes from, the date
-  const meta: [string, string][] = [
-    ["serial", String(data.serial)],
-    ["version", `v${data.cycleVersion}`],
-    ["issued", data.issuedAt],
-  ];
-  const metaPieces: Piece[] = meta.flatMap(([key, value]) => [
-    { text: `${one(key)}:`, size: 8.5, weight: "regular" as Weight, color: muted },
-    { text: value, size: 8.5, weight: "bold" as Weight, color: ink },
-  ]);
-  atCenter(metaPieces, W / 2, y);
-  if (data.cycleVersion > 1) {
-    y -= 13;
-    atCenter(pieces("amended", 8.5, "bold", navy, muted), W / 2, y);
+  const amountText = money(data.employee.net_salary);
+  const amountW = 130;
+  const amountX = boxX(labelW + 10, amountW);
+  k.center(amountText, amountX + amountW / 2, y - 37, k.fit(amountText, amountW, 23, "bold"), "bold", ink);
+  const [curLocal, curCode] = currencyLabel(data.employee.currency);
+  const curW = 44;
+  const curX = boxX(labelW + 10 + amountW + 4, curW);
+  if (lang === "en") {
+    k.center(curCode, curX + curW / 2, y - 33, 11, "bold", ink);
+  } else {
+    k.center(curLocal, curX + curW / 2, y - 26, 11, "bold", ink);
+    k.center(curCode, curX + curW / 2, y - 40, 8.5, "regular", ink);
   }
+  const dividerAt = rtl ? curX - 6 : curX + curW + 6;
+  page.drawLine({ start: { x: dividerAt, y: y - 12 }, end: { x: dividerAt, y: y - netH + 12 }, thickness: 0.8, color: rule });
+  const words = amountInWords(data.employee.net_salary, data.employee.currency, wordsLanguage(data));
+  const wordsW = (W - 2 * M) - labelW - 10 - amountW - 4 - curW - 18;
+  const wordsX = rtl ? M : dividerAt + 6;
+  if (words) {
+    const size = k.fit(words, wordsW - 10, 11);
+    if (rtl) k.right(words, wordsX + wordsW - 4, y - 33, size, "regular", ink);
+    else k.left(words, wordsX + 4, y - 33, size, "regular", ink);
+  }
+  y -= netH + 14;
 
-  // footer
-  let fy = 54;
+  // ---- management approval, on the end side
+  page.drawLine({ start: { x: M, y }, end: { x: W - M, y }, thickness: 0.8, color: navy });
+  y -= 22;
+  const signW = 170;
+  const signX = rtl ? M + 10 : W - M - 10 - signW;
+  k.center(L("approval"), signX + signW / 2, y, 11, "bold", ink);
+  page.drawLine({ start: { x: signX, y: y - 24 }, end: { x: signX + signW, y: y - 24 }, thickness: 0.8, color: muted, dashArray: [1.5, 2] });
+
+  // which issue this is
+  const metaLine = `${L("serial")}: ${data.serial}   ·   ${L("version")}: v${data.cycleVersion}${data.cycleVersion > 1 ? `   ·   ${L("amended")}` : ""}`;
+  k.start(metaLine, M + 10, y - 10, 8.5, "regular", muted);
+
+  // footer: the organisation's notes and the product line
+  let fy = 56;
   page.drawLine({ start: { x: M, y: fy + 14 }, end: { x: W - M, y: fy + 14 }, thickness: 0.6, color: rule });
   for (const note of [data.taxNotice, data.footerNote].filter((value): value is string => Boolean(value && value.trim()))) {
     k.center(note, W / 2, fy, k.fit(note, W - 2 * M, 8.5), "regular", muted);

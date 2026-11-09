@@ -18,8 +18,8 @@ import fontkit from "npm:@pdf-lib/fontkit@1.1.1";
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
 import { sendEmail } from "../_shared/emailService.ts";
 import { emailLanguage, emailT, isRtl } from "../_shared/emailI18n.ts";
-import { base64, bytes, fontsFor, prosmLogo } from "../_shared/pdfFonts.ts";
-import { buildPayslipPdf, payslipTexts, type PayslipData } from "../_shared/payslipPdfCore.ts";
+import { base64, bytes, fontsFor } from "../_shared/pdfFonts.ts";
+import { buildPayslipPdf, payslipTexts, type PayslipData, type PayslipLogo } from "../_shared/payslipPdfCore.ts";
 
 const escape = (text: string) => text.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c] as string);
 const fileSafe = (text: string) => text.replace(/[^\p{L}\p{N}_-]+/gu, "-").replace(/-+/g, "-").slice(0, 40);
@@ -61,6 +61,13 @@ serve(async (request: Request) => {
     const language = emailLanguage(claim.language);
     const reportLanguage = claim.settings?.reportLanguage === "en" || claim.settings?.reportLanguage === "ar" ? claim.settings.reportLanguage : "bilingual";
     const employee = claim.employee;
+    // the date and time of issue in the organisation's time zone (Cairo when unknown)
+    const zone = typeof claim.timeZone === "string" && claim.timeZone ? claim.timeZone : "Africa/Cairo";
+    const now = new Date();
+    const issued = {
+      date: new Intl.DateTimeFormat("en-GB", { timeZone: zone, day: "2-digit", month: "2-digit", year: "numeric" }).format(now),
+      time: new Intl.DateTimeFormat("en-GB", { timeZone: zone, hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false }).format(now),
+    };
     const data: PayslipData = {
       language: reportLanguage,
       organizationName: claim.organization?.name ?? "",
@@ -69,17 +76,19 @@ serve(async (request: Request) => {
       periodEnd: claim.cycle.periodEnd,
       cycleVersion: Number(claim.cycle.cycleVersion),
       serial: claim.serial,
-      issuedAt: new Date().toISOString().slice(0, 10),
-      siteName: null,
+      issuedAt: issued.date,
+      issuedTime: issued.time,
+      siteName: claim.siteName ?? null,
       taxNotice: claim.settings?.taxNotice ?? null,
       footerNote: claim.settings?.footerNote ?? null,
       employee,
     };
     const fonts = await fontsFor(payslipTexts(data));
     const logo = claim.organization?.logoUrl ? await bytes(claim.organization.logoUrl).catch(() => null) : null;
-    // the organisation's logo when it is a PNG; else PROSM's
-    const png = logo && logo[0] === 0x89 && logo[1] === 0x50 ? logo : await prosmLogo();
-    const pdf = await buildPayslipPdf({ PDFDocument, rgb, fontkit } as any, fonts, png, data);
+    // the organisation's logo (PNG or JPEG) in the middle of the header; PROSM Time is drawn as text
+    const orgLogo: PayslipLogo | null = logo && logo[0] === 0x89 && logo[1] === 0x50 ? { bytes: logo, type: "png" }
+      : logo && logo[0] === 0xff && logo[1] === 0xd8 ? { bytes: logo, type: "jpg" } : null;
+    const pdf = await buildPayslipPdf({ PDFDocument, rgb, fontkit } as any, fonts, orgLogo, data);
 
     // 3. the email, server side, to the registered address
     const T = (path: string, vars: Record<string, unknown> = {}) => emailT(language, `payslip.${path}`, vars);

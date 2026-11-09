@@ -259,6 +259,8 @@ begin
         'language', coalesce(v_user.preferred_language, 'ar'),
         'serial', v_serial,
         'organization', (select jsonb_build_object('name', name, 'logoUrl', logo_url) from organizations where id = v_cycle.organization_id),
+        'siteName', (select name from sites where id = v_site),
+        'timeZone', (select os.timezone from organization_settings os where os.organization_id = v_cycle.organization_id),
         'cycle', jsonb_build_object('id', v_cycle.id, 'title', v_cycle.title, 'periodStart', v_cycle.period_start, 'periodEnd', v_cycle.period_end,
                                     'cycleVersion', v_cycle.published_version),
         'settings', jsonb_build_object('taxNotice', v_cycle.policy_snapshot ->> 'tax_notice', 'footerNote', v_cycle.policy_snapshot ->> 'footer_note',
