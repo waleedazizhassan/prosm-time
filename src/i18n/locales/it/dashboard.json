@@ -432,7 +432,7 @@
       "noLocation": "Senza posizione sulla mappa",
       "noLocationHint": "Ha timbrato senza coordinate (es. dispositivo senza GPS), non posizionabile.",
       "noLocationShort": "Senza posizione",
-      "elsewhere": "Altri luoghi"
+      "elsewhere": "Fuori dai siti"
     },
     "present": {
       "title": "Presenti ora ({{count}})",

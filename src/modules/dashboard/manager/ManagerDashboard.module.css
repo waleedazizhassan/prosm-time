@@ -943,3 +943,21 @@
   box-shadow: var(--shadow-md);
   font-size: var(--font-sm);
 }
+
+/* owner 2026-11-10: each name in the "outside the sites" list goes to that person on the map */
+.mapUnplacedName {
+  display: block;
+  width: 100%;
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  color: var(--brand-primary);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.mapUnplacedName:hover,
+.mapUnplacedName:focus-visible {
+  text-decoration: underline;
+}
