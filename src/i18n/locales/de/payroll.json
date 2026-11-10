@@ -245,7 +245,11 @@
     "deleteItem": "Löschen",
     "deleteItemLabel": "Posten {{name}} löschen",
     "deleteItemConfirm": "„{{name}}“ nur aus dem Gehalt dieser Person entfernen? Andere Mitarbeitende und genehmigte Abrechnungen bleiben unverändert.",
-    "itemDeleted": "Der Posten \"{{name}}\" wurde gelöscht."
+    "itemDeleted": "Der Posten \"{{name}}\" wurde gelöscht.",
+    "legalNameArabicLabel": "Name auf Arabisch (wie im Ausweis)",
+    "legalNameLabel": "Offizieller Name",
+    "legalNameHint": "Dieser Name steht auf der Gehaltsabrechnung, nicht der Benutzername ({{user}}).",
+    "legalNameMissing": "Offizieller Name fehlt"
   },
   "installments": {
     "title": "Raten und Vorschüsse",
@@ -422,7 +426,9 @@
     "statutoryBrackets": "Die Stufen müssen aufsteigen; die letzte hat keine Obergrenze.",
     "statutoryWage": "Der Höchstlohn darf nicht unter dem Mindestlohn liegen.",
     "chooseItem": "Wählen Sie zuerst den Posten.",
-    "basicCannotBeDeleted": "Das Grundgehalt kann nicht gelöscht werden."
+    "basicCannotBeDeleted": "Das Grundgehalt kann nicht gelöscht werden.",
+    "legalNameRequired": "Gib den offiziellen Namen ein - er steht auf der Gehaltsabrechnung.",
+    "legalNameArabic": "Schreib den Namen nur mit arabischen Buchstaben, wie im Ausweis."
   },
   "exports": {
     "hint": "Lohnzettel eines genehmigten oder gesperrten Laufs werden auf dem Server als ein ZIP erstellt, jeder mit eigener Nummer. Sie können die Seite verlassen; die Datei bleibt 7 Tage verfügbar.",

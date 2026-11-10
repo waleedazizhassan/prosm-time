@@ -221,7 +221,7 @@ export interface PayrollPerson {
   isActive: boolean;
   siteId: string | null;
   siteName: string | null;
-  profile: { id: string; employee_code: string | null; currency: string; start_date: string | null; end_date: string | null; is_active: boolean; notes: string | null; insurance_exempt?: boolean; insurable_wage?: number | null; tax_exempt?: boolean } | null;
+  profile: { id: string; legal_name?: string | null; employee_code: string | null; currency: string; start_date: string | null; end_date: string | null; is_active: boolean; notes: string | null; insurance_exempt?: boolean; insurable_wage?: number | null; tax_exempt?: boolean } | null;
   components: ProfileComponentValue[];
 }
 

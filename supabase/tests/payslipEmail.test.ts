@@ -48,7 +48,7 @@ beforeAll(async () => {
   const extra = await ok<{ r: { id: string } }>(owner("select public.save_prosm_time_payroll_component(null, $1) as r",
     [JSON.stringify({ name_ar: "بدل إضافي", category: "allowance", source: "fixed", include_in_net: false, include_in_combined: true })]));
   for (const member of [worker, colleague]) {
-    await ok(owner("select public.save_prosm_time_payroll_profile($1, '{\"currency\": \"EGP\"}')", [member.userId]));
+    await ok(owner("select public.save_prosm_time_payroll_profile($1, '{\"legal_name\": \"موظف تجريبي\", \"currency\": \"EGP\"}')", [member.userId]));
     await ok(owner("select public.set_prosm_time_payroll_profile_component($1, $2, 8000, null, '2026-01-01')", [member.userId, basic.r.id]));
     await ok(owner("select public.set_prosm_time_payroll_profile_component($1, $2, 900, null, '2026-01-01')", [member.userId, extra.r.id]));
   }

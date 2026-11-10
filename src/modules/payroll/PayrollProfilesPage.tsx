@@ -16,6 +16,7 @@ import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
 import { money, parseAmount, payrollError } from "./payrollUi";
 import SalaryItemsSection from "./SalaryItemsSection";
+import { legalNameProblem, nameMustBeArabic } from "./payrollUi";
 import usePayrollDigits from "./usePayrollDigits";
 import SuccessText from "../../components/common/SuccessText";
 
@@ -39,7 +40,13 @@ export default function PayrollProfilesPage() {
   const [error, setError] = useState("");
   const [busy, setBusy] = useState("");
   const [editing, setEditing] = useState<PayrollPerson | null>(null);
-  const [form, setForm] = useState({ employee_code: "", currency: "", start_date: "", end_date: "", is_active: true, notes: "", insurance_exempt: false, insurable_wage: "", tax_exempt: false });
+  // Owner 2026-11-10: the official name (in the language of the payroll's country - Arabic for an Arab
+  // country) is required on the card and is the name on the payslip; the user's own name may be a nickname.
+  const [nameInArabic, setNameInArabic] = useState(true);
+  useEffect(() => {
+    void PayrollCycleRepository.getStatutory().then((r) => setNameInArabic(nameMustBeArabic(r.data?.countryCode)));
+  }, []);
+  const [form, setForm] = useState({ legal_name: "", employee_code: "", currency: "", start_date: "", end_date: "", is_active: true, notes: "", insurance_exempt: false, insurable_wage: "", tax_exempt: false });
   const [values, setValues] = useState<Record<string, { amount: string; percent: string; from: string }>>({});
   const [initial, setInitial] = useState<Record<string, { amount: string; percent: string }>>({});
   const [valuesFrom, setValuesFrom] = useState(firstOfMonth());
@@ -85,7 +92,7 @@ export default function PayrollProfilesPage() {
     setSaved(false);
     setValuesFrom(firstOfMonth());
     setForm({
-      employee_code: person.profile?.employee_code ?? "", currency: person.profile?.currency ?? "", start_date: person.profile?.start_date ?? "",
+      legal_name: person.profile?.legal_name ?? "", employee_code: person.profile?.employee_code ?? "", currency: person.profile?.currency ?? "", start_date: person.profile?.start_date ?? "",
       end_date: person.profile?.end_date ?? "", is_active: person.profile?.is_active ?? true, notes: person.profile?.notes ?? "",
       insurance_exempt: Boolean(person.profile?.insurance_exempt), insurable_wage: person.profile?.insurable_wage != null ? String(person.profile.insurable_wage) : "",
       tax_exempt: Boolean(person.profile?.tax_exempt),
@@ -106,6 +113,12 @@ export default function PayrollProfilesPage() {
     if (!editing) return;
     setSaveError("");
     setSaved(false);
+    const legalName = form.legal_name.trim().replace(/\s+/g, " ");
+    const nameProblem = legalNameProblem(legalName, nameInArabic);
+    if (nameProblem) {
+      setSaveError(t(`errors.${nameProblem}`));
+      return;
+    }
     const insurable = parseAmount(form.insurable_wage);
     if (Number.isNaN(insurable)) {
       setSaveError(t("profiles.badNumber", { field: t("profiles.insurableWage") }));
@@ -128,7 +141,7 @@ export default function PayrollProfilesPage() {
     }
     setBusy("save-all");
     const profile = await PayrollCycleRepository.saveProfile(editing.userId, {
-      employee_code: form.employee_code, currency: form.currency.toUpperCase() || null, start_date: form.start_date || null, end_date: form.end_date || null,
+      legal_name: legalName, employee_code: form.employee_code, currency: form.currency.toUpperCase() || null, start_date: form.start_date || null, end_date: form.end_date || null,
       is_active: form.is_active, notes: form.notes, insurance_exempt: form.insurance_exempt, insurable_wage: insurable, tax_exempt: form.tax_exempt,
     });
     if (profile.error) {
@@ -222,7 +235,13 @@ export default function PayrollProfilesPage() {
   };
 
   const columns: TableColumn<PayrollPerson>[] = [
-    { key: "name", header: t("profiles.person"), render: (p) => <strong>{p.fullName}</strong> },
+    { key: "name", header: t("profiles.person"), render: (p) => (
+      <span style={{ display: "grid" }}>
+        <strong>{p.profile?.legal_name || p.fullName}</strong>
+        {p.profile?.legal_name && p.profile.legal_name !== p.fullName ? <small style={{ color: "var(--text-secondary)" }}>{p.fullName}</small> : null}
+        {!p.profile?.legal_name ? <small style={{ color: "var(--status-warning-text)" }}>{t("profiles.legalNameMissing")}</small> : null}
+      </span>
+    ) },
     { key: "site", header: t("doc.site"), render: (p) => p.siteName ?? "-" },
     { key: "code", header: t("doc.code"), render: (p) => p.profile?.employee_code ?? "-" },
     { key: "basic", header: t("doc.basic"), render: (p) => {
@@ -256,7 +275,7 @@ export default function PayrollProfilesPage() {
           <Input label={t("profiles.search")} name="profilesSearch" value={search} onChange={(event) => setSearch(event.target.value)} />
         </div>
         <HintText small>{t("profiles.tapToEdit")}</HintText>
-        <Table columns={columns} data={(people ?? []).filter((p) => !search.trim() || p.fullName.toLowerCase().includes(search.trim().toLowerCase()) || (p.profile?.employee_code ?? "").includes(search.trim()))}
+        <Table columns={columns} data={(people ?? []).filter((p) => !search.trim() || p.fullName.toLowerCase().includes(search.trim().toLowerCase()) || (p.profile?.legal_name ?? "").includes(search.trim()) || (p.profile?.employee_code ?? "").includes(search.trim()))}
           getRowId={(p) => p.userId} loading={people === null} emptyMessage={t("profiles.empty")} onRowClick={openPerson} />
       </Card>
 
@@ -288,6 +307,10 @@ export default function PayrollProfilesPage() {
             {saveError ? <div ref={(el) => el?.scrollIntoView({ block: "nearest" })}><ErrorText>{saveError}</ErrorText></div> : null}
             {saved ? <SuccessText>{t("profiles.savedAll")}</SuccessText> : null}
 
+            <Input label={nameInArabic ? t("profiles.legalNameArabicLabel") : t("profiles.legalNameLabel")} name="profileLegalName" required
+              value={form.legal_name} onChange={(event) => setForm({ ...form, legal_name: event.target.value })}
+              helperText={t("profiles.legalNameHint", { user: editing.fullName })}
+              error={form.legal_name.trim() && legalNameProblem(form.legal_name.trim(), nameInArabic) ? t(`errors.${legalNameProblem(form.legal_name.trim(), nameInArabic)}`) : undefined} />
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(10rem, 1fr))", gap: "var(--space-2)" }}>
               <Input label={t("doc.code")} name="profileCode" value={form.employee_code} onChange={(event) => setForm({ ...form, employee_code: event.target.value })} />
               <Input label={t("profiles.applyFromDate")} name="valuesFrom" type="date" value={valuesFrom} onChange={(event) => setValuesFrom(event.target.value)}

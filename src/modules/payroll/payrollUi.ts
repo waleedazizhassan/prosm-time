@@ -72,6 +72,9 @@ export function payrollError(message: string | null | undefined, t: TFunction): 
     [/BEING SENT/, "beingSent"],
     [/NO EMAIL/, "noEmail"],
     [/CREATE THE PAYROLL PROFILE FIRST/, "profileFirst"],
+    // 2026-11-10: the official name on the payslip
+    [/LEGAL NAME IS REQUIRED/, "legalNameRequired"],
+    [/LEGAL NAME MUST BE IN ARABIC/, "legalNameArabic"],
     [/CANNOT BE CHANGED IN STATUS/, "notEditable"],
     [/YOUR OWN REQUEST/, "ownRequest"],
     // 2026-11-10: a choice left empty (an item, a person) - never show the database's own words
@@ -124,4 +127,17 @@ export function parseCsv(text: string): string[][] {
   row.push(cell.trim());
   if (row.some((value) => value !== "")) rows.push(row);
   return rows.map((r) => r.map((value, index) => (index === 0 ? value.replace(/^\uFEFF/, "") : value)));
+}
+
+// Owner 2026-11-10: the official name on the payslip, in the language of the payroll's country - the
+// Arab League countries write it in Arabic letters (the server checks the same).
+const ARABIC_NAME_COUNTRIES = new Set(["EG", "SA", "SD", "IQ", "SY", "YE", "KW", "QA", "BH", "OM", "JO", "LB", "PS", "AE", "MA", "DZ", "TN", "LY", "MR", "SO", "DJ", "KM"]);
+export function nameMustBeArabic(countryCode: string | null | undefined): boolean {
+  return ARABIC_NAME_COUNTRIES.has((countryCode ?? "EG").toUpperCase());
+}
+/** null when the name is fine, else the error's key under payroll:errors. */
+export function legalNameProblem(name: string, inArabic: boolean): "legalNameRequired" | "legalNameArabic" | null {
+  if (!name.trim()) return "legalNameRequired";
+  if (inArabic && (/[A-Za-z]/.test(name) || !/[\u0600-\u06FF]/.test(name))) return "legalNameArabic";
+  return null;
 }

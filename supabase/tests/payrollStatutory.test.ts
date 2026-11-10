@@ -36,11 +36,11 @@ beforeAll(async () => {
   for (const [key, basic] of [["mid", 20000], ["low", 2000], ["high", 100000], ["exempt", 20000], ["fixedWage", 20000]] as const) {
     const m = await addMember(t, org, "employee", `Person ${key}`);
     people[key] = m;
-    await ok(owner("select public.save_prosm_time_payroll_profile($1, $2)", [m.userId, JSON.stringify({ currency: "EGP" })]));
+    await ok(owner("select public.save_prosm_time_payroll_profile($1, $2)", [m.userId, JSON.stringify({ legal_name: "موظف تجريبي", currency: "EGP" })]));
     await ok(owner("select public.set_prosm_time_payroll_profile_component($1, $2, $3, null, '2027-01-01')", [m.userId, basicId, basic]));
   }
-  await ok(owner("select public.save_prosm_time_payroll_profile($1, $2)", [people.exempt.userId, JSON.stringify({ currency: "EGP", insurance_exempt: true, tax_exempt: true })]));
-  await ok(owner("select public.save_prosm_time_payroll_profile($1, $2)", [people.fixedWage.userId, JSON.stringify({ currency: "EGP", insurable_wage: 5000 })]));
+  await ok(owner("select public.save_prosm_time_payroll_profile($1, $2)", [people.exempt.userId, JSON.stringify({ legal_name: "موظف تجريبي", currency: "EGP", insurance_exempt: true, tax_exempt: true })]));
+  await ok(owner("select public.save_prosm_time_payroll_profile($1, $2)", [people.fixedWage.userId, JSON.stringify({ legal_name: "موظف تجريبي", currency: "EGP", insurable_wage: 5000 })]));
   // one person has their own transport value, which wins over the default
   await ok(owner("select public.set_prosm_time_payroll_profile_component($1, $2, 800, null, '2027-01-01')", [people.mid.userId, transportId]));
 });
@@ -125,7 +125,7 @@ describe("a cycle under the Egyptian rules", () => {
 describe("the owner's real payslip", () => {
   it("matches to the piastre", async () => {
     const real = await addMember(t, org, "employee", "Real Slip");
-    await ok(owner("select public.save_prosm_time_payroll_profile($1, $2)", [real.userId, JSON.stringify({ currency: "EGP", insurance_exempt: true })]));
+    await ok(owner("select public.save_prosm_time_payroll_profile($1, $2)", [real.userId, JSON.stringify({ legal_name: "موظف تجريبي", currency: "EGP", insurance_exempt: true })]));
     const comp = async (c: Record<string, unknown>) => (await ok<{ r: { id: string } }>(owner("select public.save_prosm_time_payroll_component(null, $1) as r", [JSON.stringify(c)]))).r.id;
     const set = (id: string, amount: number) => ok(owner("select public.set_prosm_time_payroll_profile_component($1, $2, $3, null, '2027-01-01')", [real.userId, id, amount]));
     await set(basicId, 4500);

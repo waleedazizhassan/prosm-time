@@ -245,7 +245,11 @@
     "deleteItem": "Delete",
     "deleteItemLabel": "Delete the item {{name}}",
     "deleteItemConfirm": "Remove “{{name}}” from this employee’s pay only? Other employees and approved cycles do not change.",
-    "itemDeleted": "The item \"{{name}}\" was deleted."
+    "itemDeleted": "The item \"{{name}}\" was deleted.",
+    "legalNameArabicLabel": "Employee name in Arabic (as on the ID card)",
+    "legalNameLabel": "Employee's official name",
+    "legalNameHint": "This is the name on the payslip and payroll sheets, not the user name ({{user}}).",
+    "legalNameMissing": "Official name missing"
   },
   "installments": {
     "title": "Installments and advances",
@@ -422,7 +426,9 @@
     "statutoryBrackets": "Brackets must rise in order, and the last has no upper limit.",
     "statutoryWage": "The maximum insurable wage must not be below the minimum.",
     "chooseItem": "Choose the item first.",
-    "basicCannotBeDeleted": "The basic salary cannot be deleted."
+    "basicCannotBeDeleted": "The basic salary cannot be deleted.",
+    "legalNameRequired": "Enter the employee's official name - it is the name on the payslip.",
+    "legalNameArabic": "Write the name in Arabic letters only, as on the ID card."
   },
   "exports": {
     "hint": "Payslips of an approved or locked cycle are prepared on the server as one ZIP, each with its own serial number. You can leave the page; the file stays available for 7 days.",

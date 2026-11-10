@@ -245,7 +245,11 @@
     "deleteItem": "Eliminar",
     "deleteItemLabel": "Eliminar el concepto {{name}}",
     "deleteItemConfirm": "¿Quitar «{{name}}» solo de la nómina de esta persona? Los demás empleados y los ciclos aprobados no cambian.",
-    "itemDeleted": "Se eliminó el concepto «{{name}}»."
+    "itemDeleted": "Se eliminó el concepto «{{name}}».",
+    "legalNameArabicLabel": "Nombre en árabe (como en el documento)",
+    "legalNameLabel": "Nombre oficial",
+    "legalNameHint": "Este es el nombre de la nómina, no el nombre de usuario ({{user}}).",
+    "legalNameMissing": "Falta el nombre oficial"
   },
   "installments": {
     "title": "Cuotas y anticipos",
@@ -422,7 +426,9 @@
     "statutoryBrackets": "Los tramos deben ir en orden creciente y el último sin límite.",
     "statutoryWage": "El máximo no puede ser inferior al mínimo.",
     "chooseItem": "Elija primero el concepto.",
-    "basicCannotBeDeleted": "El salario básico no se puede eliminar."
+    "basicCannotBeDeleted": "El salario básico no se puede eliminar.",
+    "legalNameRequired": "Escribe el nombre oficial: es el que aparece en la nómina.",
+    "legalNameArabic": "Escribe el nombre solo con letras árabes, como en el documento."
   },
   "exports": {
     "hint": "Los recibos de un ciclo aprobado o cerrado se preparan en el servidor en un ZIP, cada uno con su número. Puede salir de la página; el archivo queda disponible 7 días.",

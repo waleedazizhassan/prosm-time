@@ -245,7 +245,11 @@
     "deleteItem": "Elimina",
     "deleteItemLabel": "Elimina la voce {{name}}",
     "deleteItemConfirm": "Rimuovere «{{name}}» solo dalla busta paga di questa persona? Gli altri dipendenti e i cicli approvati non cambiano.",
-    "itemDeleted": "La voce «{{name}}» è stata eliminata."
+    "itemDeleted": "La voce «{{name}}» è stata eliminata.",
+    "legalNameArabicLabel": "Nome in arabo (come sul documento)",
+    "legalNameLabel": "Nome ufficiale",
+    "legalNameHint": "È il nome sulla busta paga, non il nome utente ({{user}}).",
+    "legalNameMissing": "Manca il nome ufficiale"
   },
   "installments": {
     "title": "Rate e anticipi",
@@ -422,7 +426,9 @@
     "statutoryBrackets": "Gli scaglioni devono crescere e l'ultimo non ha limite.",
     "statutoryWage": "Il massimo non può essere inferiore al minimo.",
     "chooseItem": "Scegli prima la voce.",
-    "basicCannotBeDeleted": "Lo stipendio base non si può eliminare."
+    "basicCannotBeDeleted": "Lo stipendio base non si può eliminare.",
+    "legalNameRequired": "Inserisci il nome ufficiale: è quello sulla busta paga.",
+    "legalNameArabic": "Scrivi il nome solo in lettere arabe, come sul documento."
   },
   "exports": {
     "hint": "I cedolini di un ciclo approvato o bloccato vengono preparati sul server in un unico ZIP, ognuno con il suo numero. Puoi lasciare la pagina; il file resta disponibile 7 giorni.",

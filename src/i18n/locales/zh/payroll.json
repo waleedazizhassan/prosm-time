@@ -245,7 +245,11 @@
     "deleteItem": "删除",
     "deleteItemLabel": "删除项目 {{name}}",
     "deleteItemConfirm": "仅从此员工的工资中删除“{{name}}”？其他员工和已批准的周期不变。",
-    "itemDeleted": "已删除项目「{{name}}」。"
+    "itemDeleted": "已删除项目「{{name}}」。",
+    "legalNameArabicLabel": "阿拉伯文姓名（与证件一致）",
+    "legalNameLabel": "正式姓名",
+    "legalNameHint": "这是工资单上的姓名，而不是用户名（{{user}}）。",
+    "legalNameMissing": "缺少正式姓名"
   },
   "installments": {
     "title": "分期与预支",
@@ -422,7 +426,9 @@
     "statutoryBrackets": "级距必须递增，最后一级无上限。",
     "statutoryWage": "最高参保工资不能低于最低值。",
     "chooseItem": "请先选择项目。",
-    "basicCannotBeDeleted": "基本工资不能删除。"
+    "basicCannotBeDeleted": "基本工资不能删除。",
+    "legalNameRequired": "请填写正式姓名——工资单上显示此姓名。",
+    "legalNameArabic": "请仅用阿拉伯字母书写姓名，与证件一致。"
   },
   "exports": {
     "hint": "已批准或已锁定周期的工资单会在服务器上打包为一个 ZIP，每份都有独立编号。您可以离开此页面；文件保留 7 天。",

@@ -245,7 +245,11 @@
     "deleteItem": "Supprimer",
     "deleteItemLabel": "Supprimer l'élément {{name}}",
     "deleteItemConfirm": "Retirer « {{name}} » de la paie de cette personne seulement ? Les autres salariés et les cycles validés ne changent pas.",
-    "itemDeleted": "L'élément « {{name}} » a été supprimé."
+    "itemDeleted": "L'élément « {{name}} » a été supprimé.",
+    "legalNameArabicLabel": "Nom en arabe (comme sur la pièce d’identité)",
+    "legalNameLabel": "Nom officiel",
+    "legalNameHint": "C’est le nom sur la fiche de paie, pas le nom d’utilisateur ({{user}}).",
+    "legalNameMissing": "Nom officiel manquant"
   },
   "installments": {
     "title": "Échéances et avances",
@@ -422,7 +426,9 @@
     "statutoryBrackets": "Les tranches doivent croître et la dernière n'a pas de plafond.",
     "statutoryWage": "Le maximum ne peut pas être inférieur au minimum.",
     "chooseItem": "Choisissez d'abord l'élément.",
-    "basicCannotBeDeleted": "Le salaire de base ne peut pas être supprimé."
+    "basicCannotBeDeleted": "Le salaire de base ne peut pas être supprimé.",
+    "legalNameRequired": "Saisis le nom officiel : c’est celui de la fiche de paie.",
+    "legalNameArabic": "Écris le nom en lettres arabes seulement, comme sur la pièce d’identité."
   },
   "exports": {
     "hint": "Les bulletins d'un cycle approuvé ou verrouillé sont préparés sur le serveur dans un ZIP, chacun avec son numéro. Vous pouvez quitter la page ; le fichier reste disponible 7 jours.",
