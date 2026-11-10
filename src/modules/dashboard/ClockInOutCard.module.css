@@ -250,3 +250,11 @@
   background: color-mix(in srgb, var(--surface-card) 45%, transparent);
   border-color: rgba(255, 255, 255, 0.22);
 }
+
+/* Owner 2026-11-10: the clock-in button too - the same PROSM colours, see-through like clock-out. */
+.fabIn {
+  background: linear-gradient(135deg, rgba(30, 111, 217, 0.62), rgba(34, 197, 94, 0.62));
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
