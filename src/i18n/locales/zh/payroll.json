@@ -227,7 +227,21 @@
     "moreOptions": "更多选项（货币、日期、备注）",
     "badNumber": "数字无效：{{field}}",
     "search": "按姓名或编号搜索",
-    "tapToEdit": "点击任何人即可添加或编辑其全部工资。"
+    "tapToEdit": "点击任何人即可添加或编辑其全部工资。",
+    "earningsTitle": "应发项目",
+    "deductionsTitle": "扣除项目",
+    "earningsEmpty": "暂无应发项目。",
+    "deductionsEmpty": "暂无扣除项目。",
+    "earningsAdd": "添加应发项目",
+    "deductionsAdd": "添加扣除项目",
+    "newItemName": "项目名称",
+    "newItemAmount": "金额",
+    "newItemAdd": "添加",
+    "basicTag": "基本",
+    "netBeforeStatutory": "社保和税前净额",
+    "savedNotice": "已保存 {{name}} 的工资（{{count}} 项）。",
+    "savedNoticeFile": "已保存 {{name}} 的档案。",
+    "savedShort": "已保存。"
   },
   "installments": {
     "title": "分期与预支",
@@ -402,7 +416,8 @@
     "fileFailed": "无法生成文件，请重试。",
     "statutoryRate": "比例必须在 0 到 100 之间。",
     "statutoryBrackets": "级距必须递增，最后一级无上限。",
-    "statutoryWage": "最高参保工资不能低于最低值。"
+    "statutoryWage": "最高参保工资不能低于最低值。",
+    "chooseItem": "请先选择项目。"
   },
   "exports": {
     "hint": "已批准或已锁定周期的工资单会在服务器上打包为一个 ZIP，每份都有独立编号。您可以离开此页面；文件保留 7 天。",

@@ -1,0 +1,132 @@
+/* owner 2026-11-10: the salary card - earnings and deductions side by side, each with its total */
+.section {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--border-light);
+  border-top-width: 3px;
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
+}
+
+.earnings {
+  border-top-color: var(--status-success-text);
+}
+
+.deductions {
+  border-top-color: var(--brand-danger, #dc2626);
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.head h4 {
+  margin: 0;
+  font-size: var(--font-md, 1rem);
+}
+
+.total {
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+.empty {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+}
+
+.rows {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rows li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 8.5rem;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.rows label {
+  min-width: 0;
+  font-size: var(--font-sm);
+  color: var(--text-primary);
+}
+
+.rows label small {
+  color: var(--text-secondary);
+}
+
+.inputWrap {
+  position: relative;
+}
+
+.inputWrap input,
+.addRow input {
+  width: 100%;
+  min-height: 38px;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--border-medium, var(--border-light));
+  border-radius: var(--radius-sm);
+  background: var(--surface-card);
+  color: var(--text-primary);
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+.inputWrap input:focus,
+.addRow input:focus {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: -1px;
+}
+
+.unit {
+  position: absolute;
+  inset-inline-start: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+}
+
+.addRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 7rem auto auto;
+  gap: 6px;
+  align-items: center;
+}
+
+.addRow input:first-child {
+  text-align: start;
+}
+
+.addButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  justify-self: start;
+  padding: 4px 8px;
+  border: 1px dashed var(--border-light);
+  border-radius: 999px;
+  background: none;
+  color: var(--text-link, var(--brand-primary));
+  font: inherit;
+  font-size: var(--font-sm);
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .addRow {
+    grid-template-columns: minmax(0, 1fr) 6rem;
+  }
+}

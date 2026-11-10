@@ -227,7 +227,21 @@
     "moreOptions": "Weitere Optionen (Währung, Daten, Notizen)",
     "badNumber": "Ungültige Zahl in: {{field}}",
     "search": "Nach Name oder Code suchen",
-    "tapToEdit": "Tippen Sie auf eine Person, um ihr ganzes Gehalt anzulegen oder zu ändern."
+    "tapToEdit": "Tippen Sie auf eine Person, um ihr ganzes Gehalt anzulegen oder zu ändern.",
+    "earningsTitle": "Bezüge",
+    "deductionsTitle": "Abzüge",
+    "earningsEmpty": "Noch keine Bezüge.",
+    "deductionsEmpty": "Noch keine Abzüge.",
+    "earningsAdd": "Bezug hinzufügen",
+    "deductionsAdd": "Abzug hinzufügen",
+    "newItemName": "Name des Postens",
+    "newItemAmount": "Betrag",
+    "newItemAdd": "Hinzufügen",
+    "basicTag": "Grundgehalt",
+    "netBeforeStatutory": "Netto vor Versicherung und Steuer",
+    "savedNotice": "Gehalt von {{name}} gespeichert ({{count}} Posten).",
+    "savedNoticeFile": "Akte von {{name}} gespeichert.",
+    "savedShort": "Gespeichert."
   },
   "installments": {
     "title": "Raten und Vorschüsse",
@@ -402,7 +416,8 @@
     "fileFailed": "Die Datei konnte nicht erstellt werden. Bitte erneut versuchen.",
     "statutoryRate": "Ein Satz muss zwischen 0 und 100 liegen.",
     "statutoryBrackets": "Die Stufen müssen aufsteigen; die letzte hat keine Obergrenze.",
-    "statutoryWage": "Der Höchstlohn darf nicht unter dem Mindestlohn liegen."
+    "statutoryWage": "Der Höchstlohn darf nicht unter dem Mindestlohn liegen.",
+    "chooseItem": "Wählen Sie zuerst den Posten."
   },
   "exports": {
     "hint": "Lohnzettel eines genehmigten oder gesperrten Laufs werden auf dem Server als ein ZIP erstellt, jeder mit eigener Nummer. Sie können die Seite verlassen; die Datei bleibt 7 Tage verfügbar.",
