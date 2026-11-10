@@ -20,6 +20,7 @@ import AnnouncementEditor from "./AnnouncementEditor";
 import AnnouncementReadsModal from "./AnnouncementReadsModal";
 import { announcementError } from "./announcementsUi";
 import { AttachmentList, useOpenAttachment } from "./AttachmentList";
+import SuccessText from "../../components/common/SuccessText";
 
 const STATUS_BADGE: Record<string, string> = { draft: "inactive", scheduled: "pending", published: "active", expired: "inactive", withdrawn: "inactive" };
 
@@ -109,7 +110,7 @@ export default function AnnouncementsPage() {
         </div>
       ) : null}
       <ErrorText>{error}</ErrorText>
-      {notice ? <p role="status" style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{notice}</p> : null}
+      {notice ? <SuccessText>{notice}</SuccessText> : null}
 
       {tab === "mine" ? (
         <>

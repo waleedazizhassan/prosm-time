@@ -221,7 +221,7 @@
     "saveAll": "Tout enregistrer",
     "savedAll": "Enregistré.",
     "applyFromDate": "Les nouvelles valeurs s'appliquent à partir du",
-    "applyFromHint": "En général le 1er du mois",
+    "applyFromHint": "En général le 1er du mois. Les changements arrivent seuls dans les cycles ouverts à partir de cette date ; les cycles approuvés ne changent pas.",
     "salaryTitle": "Salaire et éléments fixes",
     "salaryHint": "Saisissez les montants - les chiffres arabes sont acceptés. Les valeurs inchangées ne sont pas réenregistrées ; une case vidée met fin à l'élément.",
     "moreOptions": "Plus d'options (devise, dates, notes)",
@@ -241,7 +241,11 @@
     "netBeforeStatutory": "Net avant cotisations et impôt",
     "savedNotice": "Salaire de {{name}} enregistré ({{count}} élément(s)).",
     "savedNoticeFile": "Fiche de {{name}} enregistrée.",
-    "savedShort": "Enregistré."
+    "savedShort": "Enregistré.",
+    "deleteItem": "Supprimer",
+    "deleteItemLabel": "Supprimer l'élément {{name}}",
+    "deleteItemConfirm": "Supprimer « {{name}} » du salaire de tous ? Les cycles approuvés ne changent pas.",
+    "itemDeleted": "L'élément « {{name}} » a été supprimé."
   },
   "installments": {
     "title": "Échéances et avances",
@@ -417,7 +421,8 @@
     "statutoryRate": "Un taux doit être entre 0 et 100.",
     "statutoryBrackets": "Les tranches doivent croître et la dernière n'a pas de plafond.",
     "statutoryWage": "Le maximum ne peut pas être inférieur au minimum.",
-    "chooseItem": "Choisissez d'abord l'élément."
+    "chooseItem": "Choisissez d'abord l'élément.",
+    "basicCannotBeDeleted": "Le salaire de base ne peut pas être supprimé."
   },
   "exports": {
     "hint": "Les bulletins d'un cycle approuvé ou verrouillé sont préparés sur le serveur dans un ZIP, chacun avec son numéro. Vous pouvez quitter la page ; le fichier reste disponible 7 jours.",

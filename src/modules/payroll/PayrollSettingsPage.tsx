@@ -16,6 +16,7 @@ import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
 import PayrollStatutoryCard from "./PayrollStatutoryCard";
 import { payrollError } from "./payrollUi";
+import SuccessText from "../../components/common/SuccessText";
 
 type Draft = Partial<PayrollComponent> & { name_ar: string };
 const EMPTY: Draft = { name_ar: "", name_en: "", category: "earning", source: "variable", calc_type: "amount", include_in_net: true, include_in_combined: false, prorate: false, is_basic: false, sort_order: 100, is_active: true, taxable: true, insurable: false, applies_to_all: false, default_amount: null };
@@ -88,7 +89,7 @@ export default function PayrollSettingsPage() {
     <PageShell title={t("nav.settings")} wide>
       <Button variant="ghost" size="sm" onClick={() => navigate("/payroll")}>{t("nav.back")}</Button>
       <ErrorText>{error}</ErrorText>
-      {notice ? <p role="status" style={{ margin: "var(--space-2) 0", padding: "var(--space-2) var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--status-success-bg)", color: "var(--status-success-text)", fontWeight: 600 }}>✓ {notice}</p> : null}
+      {notice ? <SuccessText>{notice}</SuccessText> : null}
 
       <Card title={t("components.title")} subtitle={t("components.hint")} actions={<Button size="sm" onClick={() => { setDraftError(""); setDraft({ id: null, value: { ...EMPTY } }); }}>{t("components.add")}</Button>}>
         <Table columns={columns} data={components} getRowId={(c) => c.id} emptyMessage={t("components.empty")}

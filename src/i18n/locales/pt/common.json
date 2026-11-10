@@ -374,5 +374,20 @@
     "seePlan": "Ver o plano",
     "askOwner": "Fale com o proprietário da sua organização."
   },
-  "issuedVia": "Emitido através de"
+  "issuedVia": "Emitido através de",
+  "feedback": {
+    "errorTitle": "Algo deu errado",
+    "successTitle": "Pronto",
+    "ok": "OK",
+    "close": "Fechar",
+    "fix": {
+      "retry": "Tentar de novo",
+      "reload": "Recarregar",
+      "signIn": "Entrar",
+      "openSettings": "Abrir configurações",
+      "askAgain": "Permitir de novo",
+      "back": "Voltar",
+      "seePlan": "Ver o plano"
+    }
+  }
 }

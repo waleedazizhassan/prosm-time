@@ -219,7 +219,18 @@
     "confirmClockOutAction": "Confirmar salida",
     "confirmDateLabel": "Fecha",
     "locationStale": "Tu ubicación no está disponible ahora. Actualiza la página o cierra y vuelve a abrir la app, y ficha de nuevo.",
-    "recenter": "Volver a mi ubicación"
+    "recenter": "Volver a mi ubicación",
+    "notice": {
+      "problem": "No se pudo completar",
+      "attention": "Atención",
+      "clockedIn": "Entrada registrada ✓",
+      "at": "a las {{time}}",
+      "breakStarted": "Pausa iniciada",
+      "breakEnded": "Pausa terminada, de vuelta al trabajo",
+      "siteChanged": "Sitio cambiado",
+      "savedOffline": "Guardado en tu teléfono",
+      "savedOfflineText": "Sin conexión ahora; se enviará solo en cuanto vuelva."
+    }
   },
   "kioskPin": {
     "title": "PIN del quiosco",

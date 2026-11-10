@@ -36,6 +36,7 @@ import AllowanceSummary from "./AllowanceSummary";
 import { allowanceSheetTable } from "./allowanceSheetTable";
 import { toXlsx } from "../../core/utils/spreadsheet";
 import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
+import SuccessText from "../../components/common/SuccessText";
 
 const ALL_EMPLOYEES = "";
 
@@ -558,7 +559,7 @@ export default function AllowancesPage() {
         // period stands, instead of a list of buttons.
         <Card title={t("flow.title")}>
           <ErrorText>{addError}</ErrorText>
-          {fillMessage ? <p style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-sm)", color: "var(--status-success-text)" }}>{fillMessage}</p> : null}
+          {fillMessage ? <SuccessText>{fillMessage}</SuccessText> : null}
           <ol style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: "var(--space-4)" }}>
             <FlowStep number={1} title={t("flow.step1")} hint={t("flow.step1Hint")}>
               <Button fullWidth onClick={handleFill} loading={filling}>

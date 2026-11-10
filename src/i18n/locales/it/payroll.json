@@ -221,7 +221,7 @@
     "saveAll": "Salva tutto",
     "savedAll": "Salvato.",
     "applyFromDate": "I nuovi valori valgono dal",
-    "applyFromHint": "Di solito il 1° del mese",
+    "applyFromHint": "Di solito il 1° del mese. Le modifiche arrivano da sole nei cicli aperti da questa data; quelli approvati non cambiano.",
     "salaryTitle": "Stipendio e voci fisse",
     "salaryHint": "Inserisci gli importi - le cifre arabe sono accettate. I valori invariati non vengono risalvati; una casella svuotata chiude la voce.",
     "moreOptions": "Altre opzioni (valuta, date, note)",
@@ -241,7 +241,11 @@
     "netBeforeStatutory": "Netto prima di contributi e imposte",
     "savedNotice": "Stipendio di {{name}} salvato ({{count}} voce/i).",
     "savedNoticeFile": "Scheda di {{name}} salvata.",
-    "savedShort": "Salvato."
+    "savedShort": "Salvato.",
+    "deleteItem": "Elimina",
+    "deleteItemLabel": "Elimina la voce {{name}}",
+    "deleteItemConfirm": "Eliminare «{{name}}» dallo stipendio di tutti? I cicli approvati non cambiano.",
+    "itemDeleted": "La voce «{{name}}» è stata eliminata."
   },
   "installments": {
     "title": "Rate e anticipi",
@@ -417,7 +421,8 @@
     "statutoryRate": "L'aliquota deve essere tra 0 e 100.",
     "statutoryBrackets": "Gli scaglioni devono crescere e l'ultimo non ha limite.",
     "statutoryWage": "Il massimo non può essere inferiore al minimo.",
-    "chooseItem": "Scegli prima la voce."
+    "chooseItem": "Scegli prima la voce.",
+    "basicCannotBeDeleted": "Lo stipendio base non si può eliminare."
   },
   "exports": {
     "hint": "I cedolini di un ciclo approvato o bloccato vengono preparati sul server in un unico ZIP, ognuno con il suo numero. Puoi lasciare la pagina; il file resta disponibile 7 giorni.",

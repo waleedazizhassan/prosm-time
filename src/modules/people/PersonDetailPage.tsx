@@ -27,6 +27,7 @@ import LivenessExemptionCard from "./LivenessExemptionCard";
 import FieldWorkerCard from "./FieldWorkerCard";
 import RoleChangeCard from "./RoleChangeCard";
 import DepartmentCard from "./DepartmentCard";
+import SuccessText from "../../components/common/SuccessText";
 
 const MANAGER_ONLY_PERMISSIONS = ["leave.approve", "attendance.clock_in_on_behalf", "attendance.clock_out_on_behalf"];
 
@@ -305,7 +306,7 @@ export default function PersonDetailPage() {
             <p style={{ fontSize: "var(--font-sm)", margin: "0 0 var(--space-2)" }}>{t("detail.leaveEntitlementCurrent", { days: annualEntitlement })}</p>
           ) : null}
           <ErrorText>{entitlementError}</ErrorText>
-          {entitlementSuccess ? <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("detail.leaveEntitlementSuccess")}</p> : null}
+          {entitlementSuccess ? <SuccessText>{t("detail.leaveEntitlementSuccess")}</SuccessText> : null}
           <Input
             label={t("detail.leaveEntitlementLabel")}
             name="annualEntitlement"

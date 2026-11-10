@@ -35,6 +35,9 @@ import AttendanceConfirmModal from "../../components/common/AttendanceConfirmMod
 import ClockOutSummaryModal from "../../components/common/ClockOutSummaryModal";
 import LiveLocationMap from "../../components/common/LiveLocationMap";
 import ErrorText from "../../components/common/ErrorText";
+import ClockNotice, { type ClockNoticeMessage } from "./ClockNotice";
+import { classifyBackendError, errorKindFor } from "../../core/utils/errorKind";
+import { errorFixFor } from "../../core/utils/errorFix";
 import styles from "./ClockInOutCard.module.css";
 import SessionReviewRepository from "../../core/repositories/SessionReviewRepository";
 import LongSessionPrompt from "./LongSessionPrompt";
@@ -245,6 +248,14 @@ export default function ClockInOutCard() {
   const [completedBreakSeconds, setCompletedBreakSeconds] = useState(initialCache?.completedBreakSeconds ?? 0);
   const [breakSubmitting, setBreakSubmitting] = useState(false);
   const [breakWarning, setBreakWarning] = useState("");
+  // Owner 2026-11-10: a clear, short confirmation after each attendance action
+  const [clockNotice, setClockNotice] = useState<ClockNoticeMessage | null>(null);
+  const closeClockNotice = useCallback(() => {
+    setClockNotice(null);
+    setError("");
+    setEvidenceWarning("");
+    setBreakWarning("");
+  }, []);
   // § live UX review, user-directed - a real summary (worked/break/
   // overtime minutes, exceptions this shift, an early-leave reason
   // field) shown right after a successful Clock Out.
@@ -672,6 +683,7 @@ export default function ClockInOutCard() {
     setConfirmModalOpen(false);
     setConfirmAction(null);
     setPendingEvidenceFile(null);
+    sayDone(t("attendance.notice.clockedIn"), t("attendance.notice.at", { time: formatTimeOnly(new Date().toISOString(), i18n.language) }));
     load();
   };
 
@@ -719,6 +731,7 @@ export default function ClockInOutCard() {
       setConfirmModalOpen(false);
       setConfirmAction(null);
       setPendingEvidenceFile(null);
+      setClockNotice({ tone: "warning", title: t("attendance.notice.savedOffline"), text: t("attendance.notice.savedOfflineText") });
     } catch (queueError) {
       setConfirmError(queueError instanceof Error ? queueError.message : t("attendance.offlineQueueError"));
     }
@@ -804,6 +817,8 @@ export default function ClockInOutCard() {
   };
 
   // Plan stage 8.4: a "yes" passes the site it was asked about, as its selection reaches this render only after the tap.
+  const sayDone = (title: string, text?: string) => setClockNotice({ tone: "success", title, text });
+
   const handleClockInTap = (suggested?: Site) => {
     // Owner 2026-11-09: no clock-in on a stuck or missing location - refresh first
     if (locationStatus !== "available" || !currentLocation) {
@@ -972,6 +987,8 @@ export default function ClockInOutCard() {
       }
       if (result.data?.maxDurationExceeded) {
         setBreakWarning(t("attendance.breakExceeded"));
+      } else {
+        sayDone(t("attendance.notice.breakEnded"));
       }
       await load();
     } else {
@@ -985,6 +1002,7 @@ export default function ClockInOutCard() {
         setError(humanizeBackendError(result.message, t) ?? t("attendance.breakStartError"));
         return;
       }
+      sayDone(t("attendance.notice.breakStarted"));
       await load();
     }
   };
@@ -1079,6 +1097,7 @@ export default function ClockInOutCard() {
 
     setChangeSiteModalOpen(false);
     setActiveBreakId(null);
+    sayDone(t("attendance.notice.siteChanged"));
     load();
   };
 
@@ -1120,9 +1139,19 @@ export default function ClockInOutCard() {
         </>
       ) : null}
 
-      <ErrorText>{error}</ErrorText>
-      {evidenceWarning ? <p style={{ color: "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>{evidenceWarning}</p> : null}
-      {breakWarning ? <p style={{ color: "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>{breakWarning}</p> : null}
+      {/* Owner 2026-11-10: attendance messages in their own style, at the top of the map */}
+      <ClockNotice
+        notice={
+          error
+            ? { tone: "error", title: t("attendance.notice.problem"), text: error, fix: errorFixFor(errorKindFor(error) ?? classifyBackendError(error), error, t) }
+            : evidenceWarning
+              ? { tone: "warning", title: t("attendance.notice.attention"), text: evidenceWarning }
+              : breakWarning
+                ? { tone: "warning", title: t("attendance.notice.attention"), text: breakWarning }
+                : clockNotice
+        }
+        onClose={closeClockNotice}
+      />
 
       {hasQueuedActions ? (
         <div data-testid="offline-queue" style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--surface-hover)", marginBottom: "var(--space-3)" }}>

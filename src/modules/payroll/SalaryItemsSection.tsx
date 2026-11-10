@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Plus } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 
 import type { PayrollComponent } from "../../core/repositories/PayrollCycleRepository";
 import Button from "../../components/common/Button";
@@ -22,6 +22,7 @@ export default function SalaryItemsSection({
   values,
   onChange,
   onAdd,
+  onDelete,
   adding,
   label,
 }: {
@@ -30,6 +31,8 @@ export default function SalaryItemsSection({
   values: Record<string, ItemValue>;
   onChange: (id: string, value: ItemValue) => void;
   onAdd: (name: string, amount: string) => Promise<boolean>;
+  /** Owner 2026-11-10: delete an item (it leaves every card and the open cycles; never the basic). */
+  onDelete: (component: PayrollComponent) => Promise<boolean>;
   adding: boolean;
   label: (c: PayrollComponent) => string;
 }) {
@@ -37,6 +40,8 @@ export default function SalaryItemsSection({
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
+  const [confirming, setConfirming] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState<string | null>(null);
 
   const total = items.reduce((sum, c) => {
     if (c.calc_type === "percent") return sum;
@@ -64,6 +69,22 @@ export default function SalaryItemsSection({
         {items.map((c) => {
           const value = values[c.id] ?? { amount: "", percent: "", from: "" };
           const isPercent = c.calc_type === "percent";
+          if (confirming === c.id) {
+            return (
+              <li key={c.id} className={styles.confirmRow}>
+                <span>{t("profiles.deleteItemConfirm", { name: label(c) })}</span>
+                <span className={styles.confirmActions}>
+                  <Button size="xs" variant="danger" loading={deleting === c.id} onClick={async () => {
+                    setDeleting(c.id);
+                    const done = await onDelete(c);
+                    setDeleting(null);
+                    if (done) setConfirming(null);
+                  }}>{t("profiles.deleteItem")}</Button>
+                  <Button size="xs" variant="ghost" onClick={() => setConfirming(null)}>{t("common:actions.cancel")}</Button>
+                </span>
+              </li>
+            );
+          }
           return (
             <li key={c.id}>
               <label htmlFor={`item-${c.id}`}>
@@ -81,6 +102,11 @@ export default function SalaryItemsSection({
                 />
                 {isPercent ? <span className={styles.unit}>%</span> : null}
               </span>
+              {c.is_basic ? <span className={styles.trashSpace} /> : (
+                <button type="button" className={styles.trash} onClick={() => setConfirming(c.id)} aria-label={t("profiles.deleteItemLabel", { name: label(c) })} title={t("profiles.deleteItemLabel", { name: label(c) })}>
+                  <Trash2 size={15} />
+                </button>
+              )}
             </li>
           );
         })}

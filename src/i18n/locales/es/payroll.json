@@ -221,7 +221,7 @@
     "saveAll": "Guardar todo",
     "savedAll": "Guardado.",
     "applyFromDate": "Los nuevos valores rigen desde",
-    "applyFromHint": "Normalmente el día 1 del mes",
+    "applyFromHint": "Normalmente el día 1. Los cambios llegan solos a los ciclos abiertos desde esta fecha; los aprobados no cambian.",
     "salaryTitle": "Salario y conceptos fijos",
     "salaryHint": "Escriba los importes - se aceptan dígitos árabes. Lo que no cambia no se vuelve a guardar; una casilla vacía termina el concepto.",
     "moreOptions": "Más opciones (moneda, fechas, notas)",
@@ -241,7 +241,11 @@
     "netBeforeStatutory": "Neto antes de seguros e impuestos",
     "savedNotice": "Salario de {{name}} guardado ({{count}} concepto(s)).",
     "savedNoticeFile": "Ficha de {{name}} guardada.",
-    "savedShort": "Guardado."
+    "savedShort": "Guardado.",
+    "deleteItem": "Eliminar",
+    "deleteItemLabel": "Eliminar el concepto {{name}}",
+    "deleteItemConfirm": "¿Eliminar «{{name}}» del salario de todos? Los ciclos aprobados no cambian.",
+    "itemDeleted": "Se eliminó el concepto «{{name}}»."
   },
   "installments": {
     "title": "Cuotas y anticipos",
@@ -417,7 +421,8 @@
     "statutoryRate": "El tipo debe estar entre 0 y 100.",
     "statutoryBrackets": "Los tramos deben ir en orden creciente y el último sin límite.",
     "statutoryWage": "El máximo no puede ser inferior al mínimo.",
-    "chooseItem": "Elija primero el concepto."
+    "chooseItem": "Elija primero el concepto.",
+    "basicCannotBeDeleted": "El salario básico no se puede eliminar."
   },
   "exports": {
     "hint": "Los recibos de un ciclo aprobado o cerrado se preparan en el servidor en un ZIP, cada uno con su número. Puede salir de la página; el archivo queda disponible 7 días.",

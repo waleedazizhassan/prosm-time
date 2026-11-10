@@ -76,6 +76,7 @@ export function payrollError(message: string | null | undefined, t: TFunction): 
     [/YOUR OWN REQUEST/, "ownRequest"],
     // 2026-11-10: a choice left empty (an item, a person) - never show the database's own words
     [/invalid input syntax for type uuid|COMPONENT REQUIRED|COMPONENT NOT FOUND/i, "chooseItem"],
+    [/BASIC SALARY CANNOT BE DELETED/, "basicCannotBeDeleted"],
   ];
   const hit = codes.find(([pattern]) => pattern.test(message));
   return hit ? t(`payroll:errors.${hit[1]}`) : message;

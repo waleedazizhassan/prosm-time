@@ -42,11 +42,13 @@
    LiveLocationMap.tsx via attributionControl.setPrefix(false)) - not
    a license requirement, just Leaflet's own default courtesy credit. */
 .map :global(.leaflet-control-attribution) {
-  background: rgba(0, 0, 0, 0.35);
-  font-size: 9px;
-  line-height: 1.4;
-  padding: 0 4px;
-  color: #e5e7eb;
+  /* owner 2026-11-10: small, see-through, never in the way of a tap */
+  background: transparent;
+  font-size: 8px;
+  line-height: 1.2;
+  padding: 0 3px;
+  color: rgba(229, 231, 235, 0.55);
+  pointer-events: none;
 }
 
 .map :global(.leaflet-control-attribution a) {

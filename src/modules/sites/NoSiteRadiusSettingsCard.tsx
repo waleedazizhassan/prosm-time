@@ -9,6 +9,7 @@ import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
+import SuccessText from "../../components/common/SuccessText";
 
 // PROSM Time - § live UX review, user-directed: "control every
 // employee the same way, whether they clocked in at a registered site
@@ -79,7 +80,7 @@ export default function NoSiteRadiusSettingsCard() {
         </Button>
       </div>
       <ErrorText>{error}</ErrorText>
-      {saved ? <p style={{ margin: "var(--space-2) 0 0", fontSize: "var(--font-sm)", color: "var(--status-success-text)" }}>{t("noSiteRadius.saveSuccess")}</p> : null}
+      {saved ? <SuccessText>{t("noSiteRadius.saveSuccess")}</SuccessText> : null}
     </Card>
   );
 }

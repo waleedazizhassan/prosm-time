@@ -216,7 +216,18 @@
     "confirmClockOutAction": "Ausstempeln bestätigen",
     "confirmDateLabel": "Datum",
     "locationStale": "Ihr Standort ist gerade nicht verfügbar. Seite neu laden oder die App schließen und neu öffnen, dann einstempeln.",
-    "recenter": "Zurück zu meinem Standort"
+    "recenter": "Zurück zu meinem Standort",
+    "notice": {
+      "problem": "Das hat nicht geklappt",
+      "attention": "Hinweis",
+      "clockedIn": "Eingestempelt ✓",
+      "at": "um {{time}}",
+      "breakStarted": "Pause gestartet",
+      "breakEnded": "Pause beendet - weiter geht's",
+      "siteChanged": "Standort gewechselt",
+      "savedOffline": "Auf dem Telefon gespeichert",
+      "savedOfflineText": "Gerade keine Verbindung; wird automatisch gesendet, sobald sie zurück ist."
+    }
   },
   "kioskPin": {
     "title": "Kiosk-PIN",

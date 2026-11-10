@@ -8,6 +8,7 @@ import "./components/common/design-tokens.css";
 import AppRoutes from "./routes/AppRoutes";
 import { ThemeProvider } from "./core/context/ThemeContext";
 import { CalendarProvider } from "./core/context/CalendarContext";
+import { FeedbackProvider } from "./core/context/FeedbackContext";
 import ErrorBoundary from "./components/common/ErrorBoundary";
 import useAndroidBackButton from "./core/hooks/useAndroidBackButton";
 import useSessionResume from "./core/hooks/useSessionResume";
@@ -29,7 +30,10 @@ export default function App() {
     <ErrorBoundary>
       <ThemeProvider>
         <CalendarProvider>
-          <AppRoutes />
+          {/* Owner 2026-11-10: one message box for every error and success */}
+          <FeedbackProvider>
+            <AppRoutes />
+          </FeedbackProvider>
         </CalendarProvider>
       </ThemeProvider>
     </ErrorBoundary>

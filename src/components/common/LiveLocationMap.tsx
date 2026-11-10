@@ -29,7 +29,7 @@ import styles from "./LiveLocationMap.module.css";
 // plain brand-colored dot matches this app's own MapPin/token language
 // better than Leaflet's default blue pin anyway.
 const TILE_URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-const TILE_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+const TILE_ATTRIBUTION = "© OpenStreetMap";
 
 function buildMarkerIcon(): L.DivIcon {
   return L.divIcon({

@@ -19,6 +19,7 @@ import illustration from "../../assets/illustrations/allowances.svg";
 import { money, payrollError } from "./payrollUi";
 import usePayrollDigits from "./usePayrollDigits";
 import { buildOnePayslipPdf } from "./payrollDocuments";
+import SuccessText from "../../components/common/SuccessText";
 
 // Owner 2026-11-08: "My payslips" - the person's own published payslips (locked cycles only). They
 // are viewed in the app when the organisation allows it, and can always be asked for by email: an
@@ -87,7 +88,7 @@ export default function MyPayslipsPage() {
     <PageShell title="">
       <PageBanner pageId="payslips" illustration={illustration} />
       <ErrorText>{error}</ErrorText>
-      {notice ? <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{notice}</p> : null}
+      {notice ? <SuccessText>{notice}</SuccessText> : null}
       {data === null ? <LoadingState /> : data.cycles.length === 0 ? <EmptyState message={t("mine.empty")} /> : null}
       {data?.cycles.map((cycle) => {
         const open = cycle.request && cycle.request.status !== "sent";

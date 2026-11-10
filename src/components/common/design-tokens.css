@@ -371,3 +371,20 @@ select optgroup {
   background-color: var(--surface-card);
   color: var(--text-primary);
 }
+
+/* Owner 2026-11-10: on every map in the app the OpenStreetMap credit is small, see-through and
+   cannot be tapped by mistake (it stays visible, as OpenStreetMap's licence asks). */
+.leaflet-container .leaflet-control-attribution {
+  background: transparent !important;
+  font-size: 8px !important;
+  line-height: 1.2 !important;
+  padding: 0 3px !important;
+  color: rgba(148, 163, 184, 0.6) !important;
+  box-shadow: none !important;
+  pointer-events: none;
+}
+
+.leaflet-container .leaflet-control-attribution a {
+  color: inherit !important;
+  pointer-events: none;
+}

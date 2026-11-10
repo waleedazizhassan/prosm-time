@@ -374,5 +374,20 @@
     "seePlan": "Ver el plan",
     "askOwner": "Pregunta al propietario de tu organización."
   },
-  "issuedVia": "Emitido con"
+  "issuedVia": "Emitido con",
+  "feedback": {
+    "errorTitle": "Algo salió mal",
+    "successTitle": "Listo",
+    "ok": "Aceptar",
+    "close": "Cerrar",
+    "fix": {
+      "retry": "Reintentar",
+      "reload": "Recargar",
+      "signIn": "Iniciar sesión",
+      "openSettings": "Abrir ajustes",
+      "askAgain": "Permitir de nuevo",
+      "back": "Volver",
+      "seePlan": "Ver el plan"
+    }
+  }
 }

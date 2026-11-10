@@ -221,7 +221,7 @@
     "saveAll": "全部保存",
     "savedAll": "已保存。",
     "applyFromDate": "新数值生效日期",
-    "applyFromHint": "通常为当月 1 日",
+    "applyFromHint": "通常为当月 1 日。更改会自动进入此日期之后的未结周期；已批准的周期不变。",
     "salaryTitle": "工资与固定项目",
     "salaryHint": "输入金额 - 支持阿拉伯数字。未更改的值不会重复保存；清空的框会结束该项目。",
     "moreOptions": "更多选项（货币、日期、备注）",
@@ -241,7 +241,11 @@
     "netBeforeStatutory": "社保和税前净额",
     "savedNotice": "已保存 {{name}} 的工资（{{count}} 项）。",
     "savedNoticeFile": "已保存 {{name}} 的档案。",
-    "savedShort": "已保存。"
+    "savedShort": "已保存。",
+    "deleteItem": "删除",
+    "deleteItemLabel": "删除项目 {{name}}",
+    "deleteItemConfirm": "从所有人的工资中删除「{{name}}」？已批准的周期不变。",
+    "itemDeleted": "已删除项目「{{name}}」。"
   },
   "installments": {
     "title": "分期与预支",
@@ -417,7 +421,8 @@
     "statutoryRate": "比例必须在 0 到 100 之间。",
     "statutoryBrackets": "级距必须递增，最后一级无上限。",
     "statutoryWage": "最高参保工资不能低于最低值。",
-    "chooseItem": "请先选择项目。"
+    "chooseItem": "请先选择项目。",
+    "basicCannotBeDeleted": "基本工资不能删除。"
   },
   "exports": {
     "hint": "已批准或已锁定周期的工资单会在服务器上打包为一个 ZIP，每份都有独立编号。您可以离开此页面；文件保留 7 天。",

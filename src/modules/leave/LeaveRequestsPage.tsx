@@ -22,6 +22,7 @@ import HintText from "../../components/common/HintText";
 import DateRange from "../../components/common/DateRange";
 import FieldRow from "../../components/common/FieldRow";
 import PermissionRequestCard from "./PermissionRequestCard";
+import SuccessText from "../../components/common/SuccessText";
 
 
 function isoDate(date: Date): string {
@@ -328,7 +329,7 @@ export default function LeaveRequestsPage() {
         {isRealOwner ? <HintText>{t("ownerAutoApproveHint")}</HintText> : null}
         <Textarea label={t("reasonLabel")} name="leaveReason" value={reason} onChange={(event) => setReason(event.target.value)} disabled={submitting} rows={2} />
         <ErrorText>{submitError}</ErrorText>
-        {submitSuccess ? <p style={{ margin: "0 0 var(--space-2)", fontSize: "var(--font-sm)", color: "var(--status-success-text)" }}>{t("ownerAutoApprovedMessage")}</p> : null}
+        {submitSuccess ? <SuccessText>{t("ownerAutoApprovedMessage")}</SuccessText> : null}
         <Button onClick={handleSubmit} loading={submitting} disabled={!startDate || !endDate}>
           {t("submitAction")}
         </Button>

@@ -219,7 +219,18 @@
     "confirmClockOutAction": "Confirmer le départ",
     "confirmDateLabel": "Date",
     "locationStale": "Votre position n'est pas disponible. Actualisez la page ou fermez et rouvrez l'application, puis pointez.",
-    "recenter": "Revenir à ma position"
+    "recenter": "Revenir à ma position",
+    "notice": {
+      "problem": "L'action n'a pas abouti",
+      "attention": "Attention",
+      "clockedIn": "Arrivée pointée ✓",
+      "at": "à {{time}}",
+      "breakStarted": "Pause commencée",
+      "breakEnded": "Pause terminée, retour au travail",
+      "siteChanged": "Site changé",
+      "savedOffline": "Enregistré sur votre téléphone",
+      "savedOfflineText": "Pas de connexion pour l'instant ; envoi automatique dès son retour."
+    }
   },
   "kioskPin": {
     "title": "Code PIN kiosque",

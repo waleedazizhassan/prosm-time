@@ -17,6 +17,7 @@ import HintText from "../../components/common/HintText";
 import { money, parseAmount, payrollError } from "./payrollUi";
 import SalaryItemsSection from "./SalaryItemsSection";
 import usePayrollDigits from "./usePayrollDigits";
+import SuccessText from "../../components/common/SuccessText";
 
 const today = () => new Date().toISOString().slice(0, 10);
 const firstOfMonth = () => {
@@ -145,6 +146,20 @@ export default function PayrollProfilesPage() {
     window.setTimeout(() => setEditing(null), 900);
   };
 
+  // Owner 2026-11-10: delete an item - it stops for everyone (open cycles follow; approved ones keep their copy).
+  const deleteItem = async (component: PayrollComponent) => {
+    setSaveError("");
+    const result = await PayrollCycleRepository.saveComponent(component.id, { is_active: false });
+    if (result.error) {
+      setSaveError(payrollError(result.error, t));
+      return false;
+    }
+    const comps = await PayrollCycleRepository.listComponents();
+    setComponents(comps.data ?? []);
+    setNotice(t("profiles.itemDeleted", { name: label(component) }));
+    return true;
+  };
+
   // A new fixed item created from the card itself, already on the right side (earning or deduction).
   const addItem = async (kind: "earnings" | "deductions", name: string, amount: string) => {
     const parsed = parseAmount(amount);
@@ -211,7 +226,7 @@ export default function PayrollProfilesPage() {
     <PageShell title={t("nav.profiles")} subtitle={t("profiles.hint")} wide>
       <Button variant="ghost" size="sm" onClick={() => navigate("/payroll")}>{t("nav.back")}</Button>
       <ErrorText>{error}</ErrorText>
-      {notice ? <p role="status" style={{ margin: "var(--space-2) 0", padding: "var(--space-2) var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--status-success-bg)", color: "var(--status-success-text)", fontWeight: 600 }}>✓ {notice}</p> : null}
+      {notice ? <SuccessText>{notice}</SuccessText> : null}
       <Card title={t("profiles.title")}>
         <div style={{ maxWidth: 360, marginBottom: "var(--space-2)" }}>
           <Input label={t("profiles.search")} name="profilesSearch" value={search} onChange={(event) => setSearch(event.target.value)} />
@@ -247,7 +262,7 @@ export default function PayrollProfilesPage() {
         {editing ? (
           <>
             {saveError ? <div ref={(el) => el?.scrollIntoView({ block: "nearest" })}><ErrorText>{saveError}</ErrorText></div> : null}
-            {saved ? <p role="status" style={{ margin: "0 0 var(--space-2)", padding: "var(--space-2) var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--status-success-bg)", color: "var(--status-success-text)", fontWeight: 600 }}>✓ {t("profiles.savedAll")}</p> : null}
+            {saved ? <SuccessText>{t("profiles.savedAll")}</SuccessText> : null}
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(10rem, 1fr))", gap: "var(--space-2)" }}>
               <Input label={t("doc.code")} name="profileCode" value={form.employee_code} onChange={(event) => setForm({ ...form, employee_code: event.target.value })} />
@@ -257,9 +272,9 @@ export default function PayrollProfilesPage() {
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(19rem, 100%), 1fr))", gap: "var(--space-3)", marginTop: "var(--space-3)" }}>
               <SalaryItemsSection kind="earnings" items={earningItems} values={values} label={label} adding={addingItem === "earnings"}
-                onChange={(id, value) => setValues((all) => ({ ...all, [id]: value }))} onAdd={(name, amount) => addItem("earnings", name, amount)} />
+                onChange={(id, value) => setValues((all) => ({ ...all, [id]: value }))} onAdd={(name, amount) => addItem("earnings", name, amount)} onDelete={deleteItem} />
               <SalaryItemsSection kind="deductions" items={deductionItems} values={values} label={label} adding={addingItem === "deductions"}
-                onChange={(id, value) => setValues((all) => ({ ...all, [id]: value }))} onAdd={(name, amount) => addItem("deductions", name, amount)} />
+                onChange={(id, value) => setValues((all) => ({ ...all, [id]: value }))} onAdd={(name, amount) => addItem("deductions", name, amount)} onDelete={deleteItem} />
             </div>
             {(() => {
               const sum = (list: PayrollComponent[]) => list.reduce((s, c) => {

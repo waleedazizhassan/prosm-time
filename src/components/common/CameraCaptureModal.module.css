@@ -180,7 +180,8 @@
 
 @media (max-width: 640px) {
   .viewport {
-    min-height: calc(100dvh - 190px);
+    min-height: 0;
+    height: calc(100dvh - 260px - env(safe-area-inset-bottom, 0px));
     border-radius: var(--radius-lg);
   }
 
