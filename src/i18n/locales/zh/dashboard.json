@@ -212,7 +212,8 @@
     "confirmClockInAction": "确认上班打卡",
     "confirmClockOutAction": "确认下班打卡",
     "confirmDateLabel": "日期",
-    "locationStale": "当前无法获取您的位置。请刷新页面或关闭并重新打开应用后再打卡。"
+    "locationStale": "当前无法获取您的位置。请刷新页面或关闭并重新打开应用后再打卡。",
+    "recenter": "回到我的位置"
   },
   "kioskPin": {
     "title": "考勤机 PIN",

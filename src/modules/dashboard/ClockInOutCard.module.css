@@ -50,7 +50,8 @@
 .mapInfo {
   position: absolute;
   top: var(--space-3);
-  inset-inline: var(--space-3);
+  inset-inline-start: var(--space-3);
+  inset-inline-end: calc(var(--space-3) + 44px);
   z-index: 2;
   display: flex;
   flex-direction: column;

@@ -218,7 +218,8 @@
     "confirmClockInAction": "Confirmer l'arrivée",
     "confirmClockOutAction": "Confirmer le départ",
     "confirmDateLabel": "Date",
-    "locationStale": "Votre position n'est pas disponible. Actualisez la page ou fermez et rouvrez l'application, puis pointez."
+    "locationStale": "Votre position n'est pas disponible. Actualisez la page ou fermez et rouvrez l'application, puis pointez.",
+    "recenter": "Revenir à ma position"
   },
   "kioskPin": {
     "title": "Code PIN kiosque",

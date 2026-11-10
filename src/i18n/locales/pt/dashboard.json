@@ -218,7 +218,8 @@
     "confirmClockInAction": "Confirmar entrada",
     "confirmClockOutAction": "Confirmar saída",
     "confirmDateLabel": "Data",
-    "locationStale": "A sua localização não está disponível agora. Atualize a página ou feche e reabra a app, depois registe."
+    "locationStale": "A sua localização não está disponível agora. Atualize a página ou feche e reabra a app, depois registe.",
+    "recenter": "Voltar à minha localização"
   },
   "kioskPin": {
     "title": "PIN do quiosque",

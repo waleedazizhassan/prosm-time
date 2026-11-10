@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { LocateFixed } from "lucide-react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -48,9 +49,11 @@ interface LiveLocationMapProps {
   // area, orange when outside it; plus the reading's own accuracy circle.
   siteTone?: "inside" | "outside" | "neutral";
   accuracyMeters?: number | null;
+  /** Owner 2026-11-10: a small button at the top of the map that brings it back to where you are. */
+  recenterLabel?: string;
 }
 
-export default function LiveLocationMap({ latitude, longitude, site = null, height = 200, siteTone = "neutral", accuracyMeters = null }: LiveLocationMapProps) {
+export default function LiveLocationMap({ latitude, longitude, site = null, height = 200, siteTone = "neutral", accuracyMeters = null, recenterLabel }: LiveLocationMapProps) {
   const { resolvedTheme } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
@@ -148,5 +151,19 @@ export default function LiveLocationMap({ latitude, longitude, site = null, heig
     }
   }, [latitude, longitude, site, siteTone, accuracyMeters]);
 
-  return <div ref={containerRef} className={styles.map} style={{ height }} />;
+  const recenter = () => {
+    const map = mapRef.current;
+    if (!map || latitude === null || longitude === null) return;
+    map.setView([latitude, longitude], Math.max(map.getZoom(), 16), { animate: true });
+  };
+
+  if (!recenterLabel) return <div ref={containerRef} className={styles.map} style={{ height }} />;
+  return (
+    <div className={styles.wrap}>
+      <div ref={containerRef} className={styles.map} style={{ height }} />
+      <button type="button" className={styles.recenter} onClick={recenter} disabled={latitude === null || longitude === null} aria-label={recenterLabel} title={recenterLabel}>
+        <LocateFixed size={18} />
+      </button>
+    </div>
+  );
 }

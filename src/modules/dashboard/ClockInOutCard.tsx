@@ -1189,6 +1189,7 @@ export default function ClockInOutCard() {
           siteTone={mapTone}
           accuracyMeters={currentLocation?.accuracyMeters ?? null}
           height={380}
+          recenterLabel={t("attendance.recenter")}
         />
         {/* Owner 2026-11-09: SOS floats above the hours and reminders buttons, the same size */}
         {session && planAllows("sos") ? (

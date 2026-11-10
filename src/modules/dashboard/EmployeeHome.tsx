@@ -41,6 +41,13 @@ export default function EmployeeHome() {
     if (hideTimer.current) window.clearTimeout(hideTimer.current);
   }, []);
 
+  // Owner 2026-11-10: the home is the map alone - no privacy/terms/version line, no scrolling
+  // (Main.module.css reads this class; the line stays on every other page and in Help).
+  useEffect(() => {
+    document.documentElement.classList.add("employee-home");
+    return () => document.documentElement.classList.remove("employee-home");
+  }, []);
+
   // owner 2026-11-09: a tap anywhere on the screen closes the hours
   useEffect(() => {
     if (!showHours) return undefined;

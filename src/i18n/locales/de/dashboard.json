@@ -215,7 +215,8 @@
     "confirmClockInAction": "Einstempeln bestätigen",
     "confirmClockOutAction": "Ausstempeln bestätigen",
     "confirmDateLabel": "Datum",
-    "locationStale": "Ihr Standort ist gerade nicht verfügbar. Seite neu laden oder die App schließen und neu öffnen, dann einstempeln."
+    "locationStale": "Ihr Standort ist gerade nicht verfügbar. Seite neu laden oder die App schließen und neu öffnen, dann einstempeln.",
+    "recenter": "Zurück zu meinem Standort"
   },
   "kioskPin": {
     "title": "Kiosk-PIN",

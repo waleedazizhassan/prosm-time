@@ -218,7 +218,8 @@
     "confirmClockInAction": "Confirmar entrada",
     "confirmClockOutAction": "Confirmar salida",
     "confirmDateLabel": "Fecha",
-    "locationStale": "Tu ubicación no está disponible ahora. Actualiza la página o cierra y vuelve a abrir la app, y ficha de nuevo."
+    "locationStale": "Tu ubicación no está disponible ahora. Actualiza la página o cierra y vuelve a abrir la app, y ficha de nuevo.",
+    "recenter": "Volver a mi ubicación"
   },
   "kioskPin": {
     "title": "PIN del quiosco",

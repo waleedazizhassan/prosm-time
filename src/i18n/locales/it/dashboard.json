@@ -218,7 +218,8 @@
     "confirmClockInAction": "Conferma entrata",
     "confirmClockOutAction": "Conferma uscita",
     "confirmDateLabel": "Data",
-    "locationStale": "La tua posizione non è disponibile ora. Aggiorna la pagina o chiudi e riapri l'app, poi timbra."
+    "locationStale": "La tua posizione non è disponibile ora. Aggiorna la pagina o chiudi e riapri l'app, poi timbra.",
+    "recenter": "Torna alla mia posizione"
   },
   "kioskPin": {
     "title": "PIN chiosco",
