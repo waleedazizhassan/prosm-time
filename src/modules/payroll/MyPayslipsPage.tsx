@@ -17,6 +17,7 @@ import EmptyState from "../../components/common/EmptyState";
 import LoadingState from "../../components/common/LoadingState";
 import illustration from "../../assets/illustrations/allowances.svg";
 import { money, payrollError } from "./payrollUi";
+import usePayrollDigits from "./usePayrollDigits";
 import { buildOnePayslipPdf } from "./payrollDocuments";
 
 // Owner 2026-11-08: "My payslips" - the person's own published payslips (locked cycles only). They
@@ -24,6 +25,7 @@ import { buildOnePayslipPdf } from "./payrollDocuments";
 // allowed manager then sends the approved, stored version as a PDF to the registered email.
 export default function MyPayslipsPage() {
   const { t, i18n } = useTranslation("payroll");
+  usePayrollDigits();
   const isRtl = i18n.dir() === "rtl";
   const [data, setData] = useState<{ canViewInApp: boolean; email: string | null; cycles: MyPayslipCycle[] } | null>(null);
   const [error, setError] = useState("");

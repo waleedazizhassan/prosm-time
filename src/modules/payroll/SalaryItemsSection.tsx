@@ -4,7 +4,7 @@ import { Plus } from "lucide-react";
 
 import type { PayrollComponent } from "../../core/repositories/PayrollCycleRepository";
 import Button from "../../components/common/Button";
-import { money, parseAmount } from "./payrollUi";
+import { money, parseAmount, shownDigits } from "./payrollUi";
 import styles from "./SalaryItemsSection.module.css";
 
 export interface ItemValue {
@@ -75,8 +75,8 @@ export default function SalaryItemsSection({
                 <input
                   id={`item-${c.id}`}
                   inputMode="decimal"
-                  value={isPercent ? value.percent : value.amount}
-                  placeholder={c.applies_to_all && c.default_amount != null ? String(c.default_amount) : "0"}
+                  value={shownDigits(isPercent ? value.percent : value.amount)}
+                  placeholder={shownDigits(c.applies_to_all && c.default_amount != null ? String(c.default_amount) : "0")}
                   onChange={(event) => onChange(c.id, isPercent ? { ...value, percent: event.target.value } : { ...value, amount: event.target.value })}
                 />
                 {isPercent ? <span className={styles.unit}>%</span> : null}
@@ -88,7 +88,7 @@ export default function SalaryItemsSection({
       {open ? (
         <div className={styles.addRow}>
           <input aria-label={t("profiles.newItemName")} placeholder={t("profiles.newItemName")} value={name} onChange={(event) => setName(event.target.value)} />
-          <input aria-label={t("profiles.newItemAmount")} placeholder={t("profiles.newItemAmount")} inputMode="decimal" value={amount} onChange={(event) => setAmount(event.target.value)} />
+          <input aria-label={t("profiles.newItemAmount")} placeholder={t("profiles.newItemAmount")} inputMode="decimal" value={shownDigits(amount)} onChange={(event) => setAmount(event.target.value)} />
           <Button size="sm" loading={adding} disabled={!name.trim()} onClick={() => void submit()}>{t("profiles.newItemAdd")}</Button>
           <Button size="sm" variant="ghost" onClick={() => setOpen(false)}>{t("common:actions.cancel")}</Button>
         </div>

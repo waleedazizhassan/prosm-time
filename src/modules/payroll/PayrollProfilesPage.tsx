@@ -16,6 +16,7 @@ import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
 import { money, parseAmount, payrollError } from "./payrollUi";
 import SalaryItemsSection from "./SalaryItemsSection";
+import usePayrollDigits from "./usePayrollDigits";
 
 const today = () => new Date().toISOString().slice(0, 10);
 const firstOfMonth = () => {
@@ -30,6 +31,7 @@ export default function PayrollProfilesPage() {
   const { t, i18n } = useTranslation("payroll");
   const navigate = useNavigate();
   const isRtl = i18n.dir() === "rtl";
+  usePayrollDigits();
   const [people, setPeople] = useState<PayrollPerson[] | null>(null);
   const [components, setComponents] = useState<PayrollComponent[]>([]);
   const [plans, setPlans] = useState<InstallmentPlan[]>([]);
@@ -107,8 +109,8 @@ export default function PayrollProfilesPage() {
       const before = initial[c.id] ?? { amount: "", percent: "" };
       const raw = c.calc_type === "percent" ? now.percent : now.amount;
       const was = c.calc_type === "percent" ? before.percent : before.amount;
-      if (raw.trim() === was.trim()) continue;
       const parsed = parseAmount(raw);
+      if (raw.trim() === was.trim() || (parsed !== null && !Number.isNaN(parsed) && parsed === parseAmount(was))) continue;
       if (Number.isNaN(parsed)) {
         setSaveError(t("profiles.badNumber", { field: label(c) }));
         return;

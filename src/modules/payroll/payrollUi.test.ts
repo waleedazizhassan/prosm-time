@@ -1,7 +1,7 @@
 // 2026-11-08 payroll screens: the CSV import parser, the default period and the error wording.
 import { describe, expect, it } from "vitest";
 
-import { defaultPeriod, parseAmount, parseCsv, payrollError } from "./payrollUi";
+import { defaultPeriod, money, parseAmount, parseCsv, payrollError, setPayrollDigits, shownDigits } from "./payrollUi";
 
 const t = ((key: string) => key) as never;
 
@@ -48,5 +48,18 @@ describe("parseAmount", () => {
   it("empty is null, nonsense is NaN", () => {
     expect(parseAmount("  ")).toBeNull();
     expect(parseAmount("abc")).toBeNaN();
+  });
+});
+
+describe("payroll digits (owner 2026-11-10)", () => {
+  it("shows amounts in the payroll country's digits and reads them back", () => {
+    setPayrollDigits("arab");
+    expect(shownDigits("4500.5")).toBe("\u0664\u0665\u0660\u0660\u066B\u0665");
+    expect(parseAmount(shownDigits("4500.5"))).toBe(4500.5);
+    expect(money(24500)).toContain("\u0662\u0664");
+    setPayrollDigits("latn");
+    expect(shownDigits("\u0664\u0665\u0660\u0660")).toBe("4500");
+    expect(money(24500)).toBe("24,500.00");
+    setPayrollDigits(null);
   });
 });

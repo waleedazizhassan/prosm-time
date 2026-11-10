@@ -19,11 +19,13 @@ import HintText from "../../components/common/HintText";
 import illustration from "../../assets/illustrations/timesheets.svg";
 import PayrollStepsCard from "./PayrollStepsCard";
 import { STATUS_BADGE, defaultPeriod, money, payrollError } from "./payrollUi";
+import usePayrollDigits from "./usePayrollDigits";
 
 // 2026-11-08: the payroll home - the cycles in the caller's scope, a new cycle, and the way to
 // profiles, settings and the payslip requests. What each person may do is decided by the server.
 export default function PayrollHomePage() {
   const { t, i18n } = useTranslation("payroll");
+  usePayrollDigits();
   const { hasPermission, profile } = useAuth();
   const navigate = useNavigate();
   const [cycles, setCycles] = useState<CycleSummary[] | null>(null);

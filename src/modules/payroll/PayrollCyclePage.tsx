@@ -24,6 +24,7 @@ import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
 import LoadingState from "../../components/common/LoadingState";
 import { STATUS_BADGE, money, parseAmount, parseCsv, payrollError, saveXlsx } from "./payrollUi";
+import usePayrollDigits from "./usePayrollDigits";
 import { buildPayslipsPdf, buildReportXlsx, buildSummaryPdf } from "./payrollDocuments";
 
 type Action = "submit" | "return" | "approve" | "lock" | "reopen" | "cancel";
@@ -35,6 +36,7 @@ const NEEDS_REASON: Action[] = ["return", "reopen", "cancel"];
 export default function PayrollCyclePage() {
   const { cycleId = "" } = useParams();
   const { t, i18n } = useTranslation("payroll");
+  usePayrollDigits();
   const navigate = useNavigate();
   const isRtl = i18n.dir() === "rtl";
   const [detail, setDetail] = useState<CycleDetail | null>(null);
