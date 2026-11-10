@@ -24,6 +24,7 @@ import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
 import Modal from "../../components/common/Modal";
 import ScheduleRoster, { isoDay, weekDays } from "./ScheduleRoster";
+import rosterStyles from "./ScheduleRoster.module.css";
 import FieldRow from "../../components/common/FieldRow";
 import BreakRulesModal from "./BreakRulesModal";
 import ShiftSwapCard from "./ShiftSwapCard";
@@ -265,26 +266,28 @@ export default function SchedulePage() {
         <>
           <Card title={t("manageTitle")}>
             {/* owner 2026-11-09: the site and the week on one line, then the week as a roster */}
-            <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap", alignItems: "flex-end", marginBottom: "var(--space-3)" }}>
-              <div style={{ minWidth: 200 }}>
+            {/* owner 2026-11-10 ("the page is muddled" on a phone): the site and the add button on one row,
+                the week on its own row that never runs off the screen */}
+            <div className={rosterStyles.toolbar}>
+              <div className={rosterStyles.siteField}>
                 <Select label={t("siteLabel")} name="scheduleSite" value={selectedSiteId} onChange={(event) => setSelectedSiteId(event.target.value)} options={sites.map((site) => ({ value: site.id, label: site.name }))} />
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
+              <div className={rosterStyles.addButton}>
+                <Button onClick={() => openAssign(null, isoDay(new Date()) >= rangeStart && isoDay(new Date()) <= rangeEnd ? isoDay(new Date()) : rangeStart)} disabled={!selectedSiteId}>
+                  <Plus size={16} /> {t("assignTitle")}
+                </Button>
+              </div>
+              <div className={rosterStyles.weekNav}>
                 <Button size="sm" variant="ghost" aria-label={t("roster.previous")} onClick={() => setWeekStart(shiftWeek(weekStart, -7))}>
                   {isRtl(i18n.language) ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
                 </Button>
-                <strong style={{ minWidth: "11rem", textAlign: "center", fontSize: "var(--font-sm)" }}>
+                <strong className={rosterStyles.weekRange}>
                   {formatDateOnly(rangeStart, i18n.language)} – {formatDateOnly(rangeEnd, i18n.language)}
                 </strong>
                 <Button size="sm" variant="ghost" aria-label={t("roster.next")} onClick={() => setWeekStart(shiftWeek(weekStart, 7))}>
                   {isRtl(i18n.language) ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
                 </Button>
                 <Button size="sm" variant="ghost" onClick={() => setWeekStart(startOfWeek(new Date()))}>{t("roster.thisWeek")}</Button>
-              </div>
-              <div style={{ marginInlineStart: "auto" }}>
-                <Button onClick={() => openAssign(null, isoDay(new Date()) >= rangeStart && isoDay(new Date()) <= rangeEnd ? isoDay(new Date()) : rangeStart)} disabled={!selectedSiteId}>
-                  <Plus size={16} /> {t("assignTitle")}
-                </Button>
               </div>
             </div>
             <ErrorText>{assignError && !assignOpen ? assignError : ""}</ErrorText>

@@ -27,7 +27,11 @@
     "noAssignmentsYet": "No one is assigned to this site yet, so there's no one to exempt.",
     "saveAction": "Save",
     "saveSuccess": "Site policy updated.",
-    "genericError": "Unable to update this site's policy."
+    "genericError": "Unable to update this site's policy.",
+    "area": {
+      "title": "Where the site is and its range",
+      "hint": "The site's range and how people clock in there. Its name, address and coordinates change on the site's page."
+    }
   },
   "integrations": {
     "title": "Integrations",
@@ -277,37 +281,11 @@
     "label": "Ask the person to clock in",
     "failed": "Unable to save this setting."
   },
-  "sections": {
-    "sites": "Sites and clocking",
-    "organization": "Organisation",
-    "attendanceLeave": "Attendance and leave",
-    "payroll": "Payroll",
-    "governance": "Security and governance"
-  },
-  "links": {
-    "calendar": {
-      "title": "Work calendar",
-      "hint": "Public holidays, weekly rest days and exceptional days."
-    },
-    "payroll": {
-      "title": "Payroll settings",
-      "hint": "Components, proration, cycle periods, reports, publishing and export."
-    },
-    "externalPolicy": {
-      "title": "External labour pay policy",
-      "hint": "Deductions and additions, and the day-rate rule for monthly and yearly rates."
-    },
-    "permissions": {
-      "title": "Grant permissions and delegation",
-      "hint": "Give a person the owner's authority - all of it or chosen permissions, for a period."
-    },
-    "auditLog": {
-      "title": "Action log",
-      "hint": "Who did what and when, with the reason."
-    },
-    "integrations": {
-      "title": "Integrations and API",
-      "hint": "Keys for accounting, HR and other systems, receiving attendance, and webhooks."
-    }
+  "tabs": {
+    "label": "Settings sections",
+    "sites": "Sites",
+    "outside": "Outside the sites",
+    "people": "People and attendance",
+    "other": "Plan and security"
   }
 }

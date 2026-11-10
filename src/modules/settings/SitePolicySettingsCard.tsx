@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import { useAuth } from "../../core/context/AuthContext";
 
-import SiteRepository, { type Site, type SiteAssignment, type BreakRoundingMode, type OutsideZonePolicy } from "../../core/repositories/SiteRepository";
+import SiteRepository, { type Site, type SiteAssignment, type BreakRoundingMode, type OutsideZonePolicy, type KioskMode } from "../../core/repositories/SiteRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import Card from "../../components/common/Card";
@@ -17,9 +17,12 @@ import FieldRow from "../../components/common/FieldRow";
 import SiteIntegritySettings from "./SiteIntegritySettings";
 import SiteExitPolicySettings from "./SiteExitPolicySettings";
 import SuccessText from "../../components/common/SuccessText";
+import LiveLocationMap from "../../components/common/LiveLocationMap";
+import styles from "./SitePolicySettingsCard.module.css";
 
 const BREAK_ROUNDING_MODE_OPTIONS: BreakRoundingMode[] = ["cumulative", "full_hour"];
 const OUTSIDE_ZONE_POLICY_OPTIONS: OutsideZonePolicy[] = ["ALLOW_WITH_EXCEPTION", "BLOCK"];
+const KIOSK_MODE_OPTIONS: KioskMode[] = ["personal_device_only", "kiosk_only", "both_allowed"];
 
 const toggleRowStyle = {
   display: "flex",
@@ -64,6 +67,13 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
   const [blockSelfClockInAfterGrace, setBlockSelfClockInAfterGrace] = useState(false);
   const [outsideZonePolicy, setOutsideZonePolicy] = useState<OutsideZonePolicy>("ALLOW_WITH_EXCEPTION");
   const [presenceMonitoringEnabled, setPresenceMonitoringEnabled] = useState(false);
+  // owner 2026-11-10 ("the site settings have no range - it is only in the site's edit form"): the
+  // range and how people clock in there are here too, so a site's every setting is in one place
+  const [allowedRadiusMeters, setAllowedRadiusMeters] = useState("250");
+  const [cameraRequired, setCameraRequired] = useState(false);
+  const [attendanceAllowed, setAttendanceAllowed] = useState(true);
+  const [geofenceRequired, setGeofenceRequired] = useState(true);
+  const [kioskMode, setKioskMode] = useState<KioskMode>("personal_device_only");
 
   const [assignments, setAssignments] = useState<SiteAssignment[]>([]);
   const [exemptionSavingUserId, setExemptionSavingUserId] = useState<string | null>(null);
@@ -117,6 +127,11 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
       setBlockSelfClockInAfterGrace(loaded.blockSelfClockInAfterGrace);
       setOutsideZonePolicy(loaded.outsideZonePolicy);
       setPresenceMonitoringEnabled(loaded.presenceMonitoringEnabled);
+      setAllowedRadiusMeters(String(loaded.allowedRadiusMeters));
+      setCameraRequired(loaded.cameraRequired);
+      setAttendanceAllowed(loaded.attendanceAllowed);
+      setGeofenceRequired(loaded.geofenceRequired);
+      setKioskMode(loaded.kioskMode);
       setAssignments(assignmentsResult.success ? assignmentsResult.data ?? [] : []);
     });
   }, [selectedSiteId, t]);
@@ -152,6 +167,11 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
     setSaved(false);
 
     const result = await SiteRepository.updateSite(selectedSiteId, {
+      allowedRadiusMeters: Number(allowedRadiusMeters),
+      cameraRequired,
+      attendanceAllowed,
+      geofenceRequired,
+      kioskMode,
       gpsAccuracyToleranceMeters: Number(gpsAccuracyToleranceMeters),
       graceToleranceMinutes: Number(graceToleranceMinutes),
       shiftStartTime: shiftStartTime || null,
@@ -180,17 +200,16 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
     <Card title={t("sitePolicy.title")}>
       <HintText>{t("sitePolicy.hint")}</HintText>
 
-      {siteId ? null : (
-      <div style={{ maxWidth: 320 }}>
-        <Select
-          label={t("sitePolicy.siteSelectLabel")}
-          name="sitePolicySiteId"
-          value={selectedSiteId}
-          onChange={(event) => setSelectedSiteId(event.target.value)}
-          disabled={sitesLoading}
-          options={[{ value: "", label: t("sitePolicy.siteSelectPlaceholder") }, ...sites.map((s) => ({ value: s.id, label: s.name }))]}
-        />
-      </div>
+      {/* owner 2026-11-10: the settings as a tree - every site in a list, its settings beside it */}
+      {siteId || sites.length === 0 ? null : (
+        <nav className={styles.tree} aria-label={t("sitePolicy.siteSelectLabel")}>
+          {sites.map((s) => (
+            <button key={s.id} type="button" className={s.id === selectedSiteId ? `${styles.treeItem} ${styles.treeItemActive}` : styles.treeItem}
+              aria-current={s.id === selectedSiteId ? "true" : undefined} onClick={() => setSelectedSiteId(s.id)}>
+              {s.name}
+            </button>
+          ))}
+        </nav>
       )}
 
       {!siteId && !sitesLoading && sites.length === 0 ? <HintText>{t("sitePolicy.noSites")}</HintText> : null}
@@ -199,6 +218,39 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
 
       {siteLoading ? null : site ? (
         <>
+          <section className={styles.area}>
+            <h3 className={styles.areaTitle}>{t("sitePolicy.area.title")}</h3>
+            <HintText small>{t("sitePolicy.area.hint")}</HintText>
+            <div className={styles.rangeRow}>
+              <input type="range" min={20} max={2000} step={10} value={Number(allowedRadiusMeters) || 0}
+                onChange={(event) => { setAllowedRadiusMeters(event.target.value); setSaved(false); }}
+                disabled={saving} aria-label={t("sites:form.allowedRadiusLabel")} className={styles.range} />
+              <div className={styles.rangeNumber}>
+                <Input label={t("sites:form.allowedRadiusLabel")} name="policyAllowedRadius" type="number" value={allowedRadiusMeters}
+                  onChange={(event) => { setAllowedRadiusMeters(event.target.value); setSaved(false); }} disabled={saving} />
+              </div>
+            </div>
+            {site.latitude !== null && site.longitude !== null ? (
+              <LiveLocationMap latitude={null} longitude={null} height={200}
+                site={{ name: site.name, latitude: site.latitude, longitude: site.longitude, allowedRadiusMeters: Number(allowedRadiusMeters) || 0 }} />
+            ) : null}
+            <div style={toggleRowStyle}>
+              <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("sites:form.cameraRequiredLabel")}</span>
+              <Toggle checked={cameraRequired} onChange={(checked) => { setCameraRequired(checked); setSaved(false); }} disabled={saving} label={t("sites:form.cameraRequiredLabel")} />
+            </div>
+            <div style={toggleRowStyle}>
+              <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("sites:form.attendanceAllowedLabel")}</span>
+              <Toggle checked={attendanceAllowed} onChange={(checked) => { setAttendanceAllowed(checked); setSaved(false); }} disabled={saving} label={t("sites:form.attendanceAllowedLabel")} />
+            </div>
+            <div style={toggleRowStyle}>
+              <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("sites:form.geofenceRequiredLabel")}</span>
+              <Toggle checked={geofenceRequired} onChange={(checked) => { setGeofenceRequired(checked); setSaved(false); }} disabled={saving} label={t("sites:form.geofenceRequiredLabel")} />
+            </div>
+            <Select label={t("sites:form.kioskModeLabel")} name="policyKioskMode" value={kioskMode}
+              onChange={(event) => { setKioskMode(event.target.value as KioskMode); setSaved(false); }} disabled={saving}
+              options={KIOSK_MODE_OPTIONS.map((mode) => ({ value: mode, label: t(`sites:kioskMode.${mode}`) }))} />
+          </section>
+
           <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap", marginTop: "var(--space-3)" }}>
             <div style={{ maxWidth: 220 }}>
               <Input

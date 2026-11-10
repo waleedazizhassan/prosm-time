@@ -560,7 +560,35 @@
         "people": "Persone",
         "devices": "Dispositivi e foto",
         "settings": "Impostazioni",
+        "schedule": "Turni",
+        "payroll": "Paghe e manodopera esterna",
+        "announcements": "Bacheca e reparti",
+        "reports": "Report",
         "other": "Altro"
+      },
+      "op": {
+        "insert": "aggiunto",
+        "update": "modificato",
+        "delete": "rimosso"
+      },
+      "table": {
+        "timesheet_approvals": "Approvazione foglio ore",
+        "timesheet_corrections": "Correzione presenze",
+        "exception_actions": "Decisione su eccezione",
+        "leave_entitlements": "Saldo ferie",
+        "site_workers": "Lavoratore esterno",
+        "shift_templates": "Modello di turno",
+        "shift_assignments": "Turno",
+        "open_shifts": "Turno aperto",
+        "open_shift_requests": "Richiesta turno aperto",
+        "allowance_categories": "Categoria indennità",
+        "allowance_category_members": "Membro categoria indennità",
+        "site_checklist_items": "Attività della lista del sito",
+        "payroll_export_templates": "Modello export paghe",
+        "organization_settings": "Impostazioni dell’organizzazione",
+        "sites": "Impostazioni del sito",
+        "report_exports": "Report esportato",
+        "entitlements": "Piano e licenza"
       }
     },
     "external": {

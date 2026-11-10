@@ -111,7 +111,7 @@
     "count": "{{count}} 个班次",
     "notWorked": "未出勤",
     "addFor": "为 {{name}} 在 {{day}} 添加班次",
-    "someoneElse": "其他人",
+    "someoneElse": "添加人员",
     "addOn": "在 {{day}} 添加班次",
     "empty": "本周没有班次。点击任一天下方的 + 添加。",
     "previous": "上一周",

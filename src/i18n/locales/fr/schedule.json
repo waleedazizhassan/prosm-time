@@ -111,7 +111,7 @@
     "count": "{{count}} quarts",
     "notWorked": "Non travaillé",
     "addFor": "Ajouter un quart pour {{name}} le {{day}}",
-    "someoneElse": "Quelqu'un d'autre",
+    "someoneElse": "Ajouter une personne",
     "addOn": "Ajouter un quart le {{day}}",
     "empty": "Aucun quart cette semaine. Touchez + sous un jour.",
     "previous": "Semaine précédente",

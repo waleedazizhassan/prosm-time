@@ -11,7 +11,20 @@ import { base64, fontsFor, prosmLogo } from "./pdfFonts.ts";
 
 // 2026-11-08: fonts, logo and base64 moved to pdfFonts.ts (shared with the payslip PDF).
 const escape = (text: string) => text.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c] as string);
-const PLAN_NAMES: Record<string, string> = { starter: "Starter", business: "Business", pro: "Pro" };
+const PLAN_NAMES: Record<string, string> = { starter: "Starter", business: "Business", pro: "Pro", enterprise: "Enterprise" };
+// the order of the plans sheet (as on the app's plan card)
+const FEATURE_ROWS = [
+  "sos", "announcements", "departments", "leave", "scheduling", "allowances", "kiosk", "on_behalf", "clock_rules", "export", "payroll_export", "roles_manager",
+  "payroll", "labor_cost", "audit", "roles_all", "clock_suggestion", "daily_summary", "manager_alerts",
+  "integrations", "delegation", "retention",
+];
+
+/** The plan's row from the plans table (read by the sender). */
+export interface LicencePlanInfo {
+  featureFlags: Record<string, unknown> | null;
+  maxSites: number | null;
+  historyDays: number | null;
+}
 
 export interface LicenceEmailRow {
   organizationId: string;
@@ -28,6 +41,7 @@ export interface LicenceEmailRow {
   data: Record<string, any>;
   createdAt: string;
   language?: string | null;
+  planInfo?: LicencePlanInfo | null;
 }
 
 function words(language: string) {
@@ -81,14 +95,28 @@ export function licencePdfData(row: LicenceEmailRow, language: string): LicenceP
     devicesValue: row.maxDevices === null ? T("licence.pdf.unlimited") : String(row.maxDevices),
     validUntilValue: row.expiresAt ? date(row.expiresAt) : T("licence.pdf.noEnd"),
     changes: licenceChanges(row, language),
+    includes: planIncludes(row.planInfo ?? null, language),
   };
+}
+
+// Owner 2026-11-10: the certificate lists what the plan includes, like the plan card in Settings.
+export function planIncludes(info: LicencePlanInfo | null, language: string): LicencePdfData["includes"] {
+  if (!info) return null;
+  const { T } = words(language);
+  const flags = info.featureFlags ?? {};
+  // a right-to-left PDF line cannot show brackets and guillemets the right way round: "X (Y)" reads "X - Y"
+  const plain = (text: string) => (isRtl(language) ? text.replace(/\s*\(([^)]*)\)/g, " - $1").replace(/[«»]/g, "") : text);
+  const features = FEATURE_ROWS.filter((key) => flags[key] === true).map((key) => plain(T(`licence.pdf.features.${key}`)));
+  const sites = typeof info.maxSites === "number" ? T("licence.pdf.sitesUpTo", { count: info.maxSites }) : T("licence.pdf.sitesAll");
+  const history = info.historyDays ? T("licence.pdf.history", { count: Math.round(info.historyDays / 365) }) : T("licence.pdf.historyAll");
+  return { title: T("licence.pdf.includes"), summary: [plain(`${sites} · ${history}`), plain(T("licence.pdf.always"))], features };
 }
 
 export async function renderLicenceEmail(row: LicenceEmailRow) {
   const language = emailLanguage(row.language);
   const { T } = words(language);
   const data = licencePdfData(row, language);
-  const pageTexts = [data.organizationName, ...Object.values(data.texts), data.planValue, data.statusValue, data.usersValue, data.devicesValue, data.validUntilValue, ...data.changes.flatMap((c) => [c.label, c.from, c.to])];
+  const pageTexts = [data.organizationName, ...Object.values(data.texts), data.planValue, data.statusValue, data.usersValue, data.devicesValue, data.validUntilValue, ...data.changes.flatMap((c) => [c.label, c.from, c.to]), ...(data.includes ? [data.includes.title, ...data.includes.summary, ...data.includes.features] : [])];
   const fonts = await fontsFor(pageTexts);
   const logo = await prosmLogo();
   const pdf = await buildLicencePdf({ PDFDocument, rgb, fontkit } as any, fonts, logo, data);

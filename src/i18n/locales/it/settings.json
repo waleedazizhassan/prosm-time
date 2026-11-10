@@ -27,7 +27,11 @@
     "noAssignmentsYet": "Nessuno è ancora assegnato a questa sede, quindi non c'è nessuno da esentare.",
     "saveAction": "Salva",
     "saveSuccess": "Politica della sede aggiornata.",
-    "genericError": "Impossibile aggiornare la politica di questa sede."
+    "genericError": "Impossibile aggiornare la politica di questa sede.",
+    "area": {
+      "title": "Posizione e raggio del sito",
+      "hint": "Il raggio del sito e come si timbra lì. Nome, indirizzo e coordinate si cambiano nella pagina del sito."
+    }
   },
   "integrations": {
     "title": "Integrazioni",
@@ -278,37 +282,11 @@
     "label": "Chiedi alla persona di timbrare",
     "failed": "Impossibile salvare questa impostazione."
   },
-  "sections": {
-    "sites": "Sedi e timbrature",
-    "organization": "Organizzazione",
-    "attendanceLeave": "Presenze e ferie",
-    "payroll": "Paghe",
-    "governance": "Sicurezza e governance"
-  },
-  "links": {
-    "calendar": {
-      "title": "Calendario di lavoro",
-      "hint": "Festività, riposi settimanali e giorni eccezionali."
-    },
-    "payroll": {
-      "title": "Impostazioni paghe",
-      "hint": "Voci, proporzionamento, periodi, report, pubblicazione ed esportazione."
-    },
-    "externalPolicy": {
-      "title": "Regole paga esterni",
-      "hint": "Trattenute e aggiunte, e la regola della paga giornaliera per tariffe mensili e annuali."
-    },
-    "permissions": {
-      "title": "Permessi e delega",
-      "hint": "Dai a una persona l'autorità del titolare - tutta o permessi scelti, per un periodo."
-    },
-    "auditLog": {
-      "title": "Registro azioni",
-      "hint": "Chi ha fatto cosa e quando, con il motivo."
-    },
-    "integrations": {
-      "title": "Integrazioni e API",
-      "hint": "Chiavi per contabilità, HR e altri sistemi, ricezione presenze e webhook."
-    }
+  "tabs": {
+    "label": "Sezioni delle impostazioni",
+    "sites": "Siti",
+    "outside": "Fuori dai siti",
+    "people": "Persone e presenze",
+    "other": "Piano e sicurezza"
   }
 }

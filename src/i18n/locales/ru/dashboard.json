@@ -563,7 +563,35 @@
         "people": "Сотрудники",
         "devices": "Устройства и фото",
         "settings": "Настройки",
+        "schedule": "Смены",
+        "payroll": "Зарплата и внешние работники",
+        "announcements": "Доска объявлений и отделы",
+        "reports": "Отчёты",
         "other": "Другое"
+      },
+      "op": {
+        "insert": "добавлено",
+        "update": "изменено",
+        "delete": "удалено"
+      },
+      "table": {
+        "timesheet_approvals": "Утверждение табеля",
+        "timesheet_corrections": "Исправление посещаемости",
+        "exception_actions": "Решение по исключению",
+        "leave_entitlements": "Остаток отпуска",
+        "site_workers": "Внешний работник",
+        "shift_templates": "Шаблон смены",
+        "shift_assignments": "Смена",
+        "open_shifts": "Открытая смена",
+        "open_shift_requests": "Запрос открытой смены",
+        "allowance_categories": "Категория надбавок",
+        "allowance_category_members": "Участник категории надбавок",
+        "site_checklist_items": "Задача чек-листа объекта",
+        "payroll_export_templates": "Шаблон выгрузки зарплаты",
+        "organization_settings": "Настройки организации",
+        "sites": "Настройки объекта",
+        "report_exports": "Отчёт выгружен",
+        "entitlements": "Тариф и лицензия"
       }
     },
     "external": {

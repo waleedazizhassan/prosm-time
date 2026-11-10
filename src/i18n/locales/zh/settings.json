@@ -27,7 +27,11 @@
     "noAssignmentsYet": "此工地还没有分配任何人，因此没有可豁免的人员。",
     "saveAction": "保存",
     "saveSuccess": "工地规则已更新。",
-    "genericError": "无法更新此工地的规则。"
+    "genericError": "无法更新此工地的规则。",
+    "area": {
+      "title": "站点位置与范围",
+      "hint": "站点的范围以及在此打卡的方式。名称、地址和坐标在站点页面中修改。"
+    }
   },
   "integrations": {
     "title": "集成",
@@ -276,37 +280,11 @@
     "label": "询问本人是否打卡",
     "failed": "无法保存此设置。"
   },
-  "sections": {
-    "sites": "站点设置",
-    "organization": "组织设置",
-    "attendanceLeave": "考勤与请假设置",
-    "payroll": "工资设置",
-    "governance": "安全与治理"
-  },
-  "links": {
-    "calendar": {
-      "title": "工作日历",
-      "hint": "公共假日、每周休息日和特殊日期。"
-    },
-    "payroll": {
-      "title": "工资设置与项目",
-      "hint": "工资项目、按比例计算、周期、报表、发布与导出。"
-    },
-    "externalPolicy": {
-      "title": "外部工人薪酬政策",
-      "hint": "扣款与加项，以及月薪/年薪换算日薪的规则。"
-    },
-    "permissions": {
-      "title": "授权与委托",
-      "hint": "将所有者的权限授予某人——全部或所选权限，并设定期限。"
-    },
-    "auditLog": {
-      "title": "操作日志",
-      "hint": "谁在何时做了什么，以及原因。"
-    },
-    "integrations": {
-      "title": "集成与 API",
-      "hint": "用于财务、人事等系统的密钥、考勤导入和 Webhook。"
-    }
+  "tabs": {
+    "label": "设置分区",
+    "sites": "站点",
+    "outside": "站点之外",
+    "people": "人员与考勤",
+    "other": "套餐与安全"
   }
 }

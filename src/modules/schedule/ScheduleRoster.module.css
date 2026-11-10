@@ -135,3 +135,65 @@
   color: var(--text-secondary);
   font-weight: normal;
 }
+
+/* owner 2026-11-10: the toolbar on a phone - site + add on one row, the week on its own row */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-2) var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.siteField {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.addButton {
+  flex: 0 0 auto;
+  margin-bottom: var(--space-4);
+}
+
+.weekNav {
+  display: flex;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.weekRange {
+  min-width: 0;
+  font-size: var(--font-sm);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.emptyNote {
+  margin: 0 0 var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border: 1px dashed var(--border-light);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+}
+
+.addLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-secondary);
+  font-weight: normal;
+}
+
+@media (max-width: 640px) {
+  .roster {
+    min-width: 640px;
+  }
+
+  .personCol {
+    width: 7rem;
+  }
+}

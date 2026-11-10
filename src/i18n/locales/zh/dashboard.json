@@ -554,7 +554,35 @@
         "people": "人员",
         "devices": "设备与照片",
         "settings": "设置",
+        "schedule": "班次",
+        "payroll": "薪资与外部劳务",
+        "announcements": "公告栏与部门",
+        "reports": "报表",
         "other": "其他"
+      },
+      "op": {
+        "insert": "已添加",
+        "update": "已修改",
+        "delete": "已删除"
+      },
+      "table": {
+        "timesheet_approvals": "工时表审批",
+        "timesheet_corrections": "考勤更正",
+        "exception_actions": "例外处理决定",
+        "leave_entitlements": "假期余额",
+        "site_workers": "外部工人",
+        "shift_templates": "班次模板",
+        "shift_assignments": "班次",
+        "open_shifts": "开放班次",
+        "open_shift_requests": "开放班次申请",
+        "allowance_categories": "津贴类别",
+        "allowance_category_members": "津贴类别成员",
+        "site_checklist_items": "站点清单任务",
+        "payroll_export_templates": "薪资导出模板",
+        "organization_settings": "组织设置",
+        "sites": "站点设置",
+        "report_exports": "报表已导出",
+        "entitlements": "套餐与许可证"
       }
     },
     "external": {

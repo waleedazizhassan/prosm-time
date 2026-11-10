@@ -557,7 +557,35 @@
         "people": "People",
         "devices": "Devices and photos",
         "settings": "Settings",
+        "schedule": "Shifts",
+        "payroll": "Payroll and external labour",
+        "announcements": "Notice board and departments",
+        "reports": "Reports",
         "other": "Other"
+      },
+      "op": {
+        "insert": "added",
+        "update": "changed",
+        "delete": "removed"
+      },
+      "table": {
+        "timesheet_approvals": "Timesheet approval",
+        "timesheet_corrections": "Attendance correction",
+        "exception_actions": "Exception decision",
+        "leave_entitlements": "Leave balance",
+        "site_workers": "External worker",
+        "shift_templates": "Shift template",
+        "shift_assignments": "Shift",
+        "open_shifts": "Open shift",
+        "open_shift_requests": "Open shift request",
+        "allowance_categories": "Allowance category",
+        "allowance_category_members": "Allowance category member",
+        "site_checklist_items": "Site checklist task",
+        "payroll_export_templates": "Payroll export template",
+        "organization_settings": "Organisation settings",
+        "sites": "Site settings",
+        "report_exports": "Report exported",
+        "entitlements": "Plan and licence"
       }
     },
     "external": {

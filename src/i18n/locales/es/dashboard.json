@@ -560,7 +560,35 @@
         "people": "Personas",
         "devices": "Dispositivos y fotos",
         "settings": "Ajustes",
+        "schedule": "Turnos",
+        "payroll": "Nómina y mano de obra externa",
+        "announcements": "Tablón y departamentos",
+        "reports": "Informes",
         "other": "Otros"
+      },
+      "op": {
+        "insert": "añadido",
+        "update": "modificado",
+        "delete": "eliminado"
+      },
+      "table": {
+        "timesheet_approvals": "Aprobación de horas",
+        "timesheet_corrections": "Corrección de asistencia",
+        "exception_actions": "Decisión sobre excepción",
+        "leave_entitlements": "Saldo de vacaciones",
+        "site_workers": "Trabajador externo",
+        "shift_templates": "Plantilla de turno",
+        "shift_assignments": "Turno",
+        "open_shifts": "Turno abierto",
+        "open_shift_requests": "Solicitud de turno abierto",
+        "allowance_categories": "Categoría de complementos",
+        "allowance_category_members": "Miembro de categoría de complementos",
+        "site_checklist_items": "Tarea de la lista del sitio",
+        "payroll_export_templates": "Plantilla de exportación de nómina",
+        "organization_settings": "Ajustes de la organización",
+        "sites": "Ajustes del sitio",
+        "report_exports": "Informe exportado",
+        "entitlements": "Plan y licencia"
       }
     },
     "external": {

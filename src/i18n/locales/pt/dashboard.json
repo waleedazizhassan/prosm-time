@@ -560,7 +560,35 @@
         "people": "Pessoas",
         "devices": "Dispositivos e fotos",
         "settings": "Configurações",
+        "schedule": "Turnos",
+        "payroll": "Folha de pagamento e mão de obra externa",
+        "announcements": "Mural e departamentos",
+        "reports": "Relatórios",
         "other": "Outros"
+      },
+      "op": {
+        "insert": "adicionado",
+        "update": "alterado",
+        "delete": "removido"
+      },
+      "table": {
+        "timesheet_approvals": "Aprovação de folha de ponto",
+        "timesheet_corrections": "Correção de presença",
+        "exception_actions": "Decisão sobre exceção",
+        "leave_entitlements": "Saldo de férias",
+        "site_workers": "Trabalhador externo",
+        "shift_templates": "Modelo de turno",
+        "shift_assignments": "Turno",
+        "open_shifts": "Turno aberto",
+        "open_shift_requests": "Pedido de turno aberto",
+        "allowance_categories": "Categoria de subsídios",
+        "allowance_category_members": "Membro de categoria de subsídios",
+        "site_checklist_items": "Tarefa da lista do local",
+        "payroll_export_templates": "Modelo de exportação da folha",
+        "organization_settings": "Configurações da organização",
+        "sites": "Configurações do local",
+        "report_exports": "Relatório exportado",
+        "entitlements": "Plano e licença"
       }
     },
     "external": {

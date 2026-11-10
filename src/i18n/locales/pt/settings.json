@@ -27,7 +27,11 @@
     "noAssignmentsYet": "Ainda não há ninguém vinculado a esta unidade, então não há quem isentar.",
     "saveAction": "Salvar",
     "saveSuccess": "Política da unidade atualizada.",
-    "genericError": "Não foi possível atualizar a política desta unidade."
+    "genericError": "Não foi possível atualizar a política desta unidade.",
+    "area": {
+      "title": "Localização e alcance do local",
+      "hint": "O alcance do local e como se bate o ponto lá. Nome, endereço e coordenadas mudam na página do local."
+    }
   },
   "integrations": {
     "title": "Integrações",
@@ -278,37 +282,11 @@
     "label": "Perguntar se a pessoa quer registrar a entrada",
     "failed": "Não foi possível salvar esta configuração."
   },
-  "sections": {
-    "sites": "Locais e registos",
-    "organization": "Organização",
-    "attendanceLeave": "Assiduidade e férias",
-    "payroll": "Folha de salários",
-    "governance": "Segurança e governação"
-  },
-  "links": {
-    "calendar": {
-      "title": "Calendário de trabalho",
-      "hint": "Feriados, descansos semanais e dias excecionais."
-    },
-    "payroll": {
-      "title": "Definições salariais",
-      "hint": "Itens, proporcionalidade, períodos, relatórios, publicação e exportação."
-    },
-    "externalPolicy": {
-      "title": "Política de pagamento de externos",
-      "hint": "Descontos e acréscimos, e a regra da diária para valores mensais e anuais."
-    },
-    "permissions": {
-      "title": "Permissões e delegação",
-      "hint": "Dê a uma pessoa a autoridade do proprietário - toda ou permissões escolhidas, por um período."
-    },
-    "auditLog": {
-      "title": "Registo de ações",
-      "hint": "Quem fez o quê e quando, com o motivo."
-    },
-    "integrations": {
-      "title": "Integrações e API",
-      "hint": "Chaves para contabilidade, RH e outros sistemas, receção de presenças e webhooks."
-    }
+  "tabs": {
+    "label": "Seções das configurações",
+    "sites": "Locais",
+    "outside": "Fora dos locais",
+    "people": "Pessoas e presença",
+    "other": "Plano e segurança"
   }
 }
