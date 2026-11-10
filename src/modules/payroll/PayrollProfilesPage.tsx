@@ -145,6 +145,20 @@ export default function PayrollProfilesPage() {
     window.setTimeout(() => setEditing(null), 900);
   };
 
+  // Owner 2026-11-10: delete an item - it stops for everyone (open cycles follow; approved ones keep their copy).
+  const deleteItem = async (component: PayrollComponent) => {
+    setSaveError("");
+    const result = await PayrollCycleRepository.saveComponent(component.id, { is_active: false });
+    if (result.error) {
+      setSaveError(payrollError(result.error, t));
+      return false;
+    }
+    const comps = await PayrollCycleRepository.listComponents();
+    setComponents(comps.data ?? []);
+    setNotice(t("profiles.itemDeleted", { name: label(component) }));
+    return true;
+  };
+
   // A new fixed item created from the card itself, already on the right side (earning or deduction).
   const addItem = async (kind: "earnings" | "deductions", name: string, amount: string) => {
     const parsed = parseAmount(amount);
@@ -257,9 +271,9 @@ export default function PayrollProfilesPage() {
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(19rem, 100%), 1fr))", gap: "var(--space-3)", marginTop: "var(--space-3)" }}>
               <SalaryItemsSection kind="earnings" items={earningItems} values={values} label={label} adding={addingItem === "earnings"}
-                onChange={(id, value) => setValues((all) => ({ ...all, [id]: value }))} onAdd={(name, amount) => addItem("earnings", name, amount)} />
+                onChange={(id, value) => setValues((all) => ({ ...all, [id]: value }))} onAdd={(name, amount) => addItem("earnings", name, amount)} onDelete={deleteItem} />
               <SalaryItemsSection kind="deductions" items={deductionItems} values={values} label={label} adding={addingItem === "deductions"}
-                onChange={(id, value) => setValues((all) => ({ ...all, [id]: value }))} onAdd={(name, amount) => addItem("deductions", name, amount)} />
+                onChange={(id, value) => setValues((all) => ({ ...all, [id]: value }))} onAdd={(name, amount) => addItem("deductions", name, amount)} onDelete={deleteItem} />
             </div>
             {(() => {
               const sum = (list: PayrollComponent[]) => list.reduce((s, c) => {

@@ -241,7 +241,11 @@
     "netBeforeStatutory": "Líquido antes de encargos e impostos",
     "savedNotice": "Salário de {{name}} salvo ({{count}} item(ns)).",
     "savedNoticeFile": "Ficha de {{name}} salva.",
-    "savedShort": "Salvo."
+    "savedShort": "Salvo.",
+    "deleteItem": "Excluir",
+    "deleteItemLabel": "Excluir o item {{name}}",
+    "deleteItemConfirm": "Excluir «{{name}}» do salário de todos? Ciclos aprovados não mudam.",
+    "itemDeleted": "O item «{{name}}» foi excluído."
   },
   "installments": {
     "title": "Prestações e adiantamentos",
@@ -417,7 +421,8 @@
     "statutoryRate": "A taxa tem de estar entre 0 e 100.",
     "statutoryBrackets": "Os escalões têm de subir e o último não tem limite.",
     "statutoryWage": "O máximo não pode ser inferior ao mínimo.",
-    "chooseItem": "Escolha primeiro o item."
+    "chooseItem": "Escolha primeiro o item.",
+    "basicCannotBeDeleted": "O salário básico não pode ser excluído."
   },
   "exports": {
     "hint": "Os recibos de um ciclo aprovado ou fechado são preparados no servidor num ZIP, cada um com o seu número. Pode sair da página; o ficheiro fica disponível 7 dias.",

@@ -51,7 +51,7 @@
 
 .rows li {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 8.5rem;
+  grid-template-columns: minmax(0, 1fr) 8.5rem 30px;
   align-items: center;
   gap: var(--space-2);
 }
@@ -129,4 +129,45 @@
   .addRow {
     grid-template-columns: minmax(0, 1fr) 6rem;
   }
+}
+
+/* owner 2026-11-10: delete an item, with a confirmation in its own row */
+.trash,
+.trashSpace {
+  width: 30px;
+  height: 30px;
+}
+
+.trash {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.trash:hover,
+.trash:focus-visible {
+  background: color-mix(in srgb, var(--brand-danger, #dc2626) 14%, transparent);
+  color: var(--brand-danger, #dc2626);
+}
+
+.rows li.confirmRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--brand-danger, #dc2626) 10%, transparent);
+  font-size: var(--font-sm);
+}
+
+.confirmActions {
+  display: inline-flex;
+  gap: 6px;
 }

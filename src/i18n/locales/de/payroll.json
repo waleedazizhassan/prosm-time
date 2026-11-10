@@ -241,7 +241,11 @@
     "netBeforeStatutory": "Netto vor Versicherung und Steuer",
     "savedNotice": "Gehalt von {{name}} gespeichert ({{count}} Posten).",
     "savedNoticeFile": "Akte von {{name}} gespeichert.",
-    "savedShort": "Gespeichert."
+    "savedShort": "Gespeichert.",
+    "deleteItem": "Löschen",
+    "deleteItemLabel": "Posten {{name}} löschen",
+    "deleteItemConfirm": "\"{{name}}\" aus allen Gehältern löschen? Genehmigte Läufe ändern sich nicht.",
+    "itemDeleted": "Der Posten \"{{name}}\" wurde gelöscht."
   },
   "installments": {
     "title": "Raten und Vorschüsse",
@@ -417,7 +421,8 @@
     "statutoryRate": "Ein Satz muss zwischen 0 und 100 liegen.",
     "statutoryBrackets": "Die Stufen müssen aufsteigen; die letzte hat keine Obergrenze.",
     "statutoryWage": "Der Höchstlohn darf nicht unter dem Mindestlohn liegen.",
-    "chooseItem": "Wählen Sie zuerst den Posten."
+    "chooseItem": "Wählen Sie zuerst den Posten.",
+    "basicCannotBeDeleted": "Das Grundgehalt kann nicht gelöscht werden."
   },
   "exports": {
     "hint": "Lohnzettel eines genehmigten oder gesperrten Laufs werden auf dem Server als ein ZIP erstellt, jeder mit eigener Nummer. Sie können die Seite verlassen; die Datei bleibt 7 Tage verfügbar.",

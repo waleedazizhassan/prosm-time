@@ -241,7 +241,11 @@
     "netBeforeStatutory": "Netto prima di contributi e imposte",
     "savedNotice": "Stipendio di {{name}} salvato ({{count}} voce/i).",
     "savedNoticeFile": "Scheda di {{name}} salvata.",
-    "savedShort": "Salvato."
+    "savedShort": "Salvato.",
+    "deleteItem": "Elimina",
+    "deleteItemLabel": "Elimina la voce {{name}}",
+    "deleteItemConfirm": "Eliminare «{{name}}» dallo stipendio di tutti? I cicli approvati non cambiano.",
+    "itemDeleted": "La voce «{{name}}» è stata eliminata."
   },
   "installments": {
     "title": "Rate e anticipi",
@@ -417,7 +421,8 @@
     "statutoryRate": "L'aliquota deve essere tra 0 e 100.",
     "statutoryBrackets": "Gli scaglioni devono crescere e l'ultimo non ha limite.",
     "statutoryWage": "Il massimo non può essere inferiore al minimo.",
-    "chooseItem": "Scegli prima la voce."
+    "chooseItem": "Scegli prima la voce.",
+    "basicCannotBeDeleted": "Lo stipendio base non si può eliminare."
   },
   "exports": {
     "hint": "I cedolini di un ciclo approvato o bloccato vengono preparati sul server in un unico ZIP, ognuno con il suo numero. Puoi lasciare la pagina; il file resta disponibile 7 giorni.",

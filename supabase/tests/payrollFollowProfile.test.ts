@@ -47,4 +47,35 @@ describe("open payroll cycles follow the salary file", () => {
     const after = await lines();
     expect(after.find((l) => l.name_en === "Bonus")?.amount).toBe("1000.00");
   });
+
+  it("deletes an item from the cards and the open cycle, never the basic salary", async () => {
+    const t = await buildDatabase();
+    const org = await createOrg(t, "Delete Co");
+    await t.su("update payroll_settings set statutory = '{}'::jsonb");
+    const amira = await addMember(t, org, "employee", "Amira");
+    const rpc = async <T,>(sql: string, params: unknown[] = []) => {
+      const r = await t.as<T>(org.owner.authId, sql, params);
+      if (r.error) throw new Error(r.error);
+      return r.rows![0];
+    };
+    const component = async (body: Record<string, unknown>) =>
+      (await rpc<{ r: { id: string } }>("select public.save_prosm_time_payroll_component(null, $1) as r", [JSON.stringify(body)])).r.id;
+    const basic = await component({ name_ar: "الأساسي", name_en: "Basic", category: "earning", source: "fixed", is_basic: true });
+    const fee = await component({ name_ar: "بدل غلاسة", name_en: "Fee", category: "deduction", source: "fixed", calc_type: "amount", include_in_net: true });
+    await rpc("select public.save_prosm_time_payroll_profile($1, $2)", [amira.userId, JSON.stringify({ currency: "EGP" })]);
+    await rpc("select public.set_prosm_time_payroll_profile_component($1, $2, 10000, null, '2027-04-01')", [amira.userId, basic]);
+    await rpc("select public.set_prosm_time_payroll_profile_component($1, $2, 500, null, '2027-04-01')", [amira.userId, fee]);
+    const created = await rpc<{ r: { cycleId: string } }>("select public.create_prosm_time_payroll_cycle('2027-04-01', '2027-04-30', null, 'April') as r");
+    const names = async () => (await t.su<{ name_en: string }>(
+      "select l.name_en from payroll_cycle_lines l join payroll_cycle_employees ce on ce.id = l.cycle_employee_id where ce.cycle_id = $1 order by 1", [created.r.cycleId])).map((r) => r.name_en);
+    expect(await names()).toEqual(["Basic", "Fee"]);
+
+    await rpc("select public.save_prosm_time_payroll_component($1, $2)", [fee, JSON.stringify({ is_active: false })]);
+    expect(await names()).toEqual(["Basic"]);
+    const list = await rpc<{ r: { id: string; is_active: boolean }[] }>("select public.list_prosm_time_payroll_components() as r");
+    expect(list.r.find((c) => c.id === fee)?.is_active).toBe(false);
+
+    const refused = await t.as(org.owner.authId, "select public.save_prosm_time_payroll_component($1, $2)", [basic, JSON.stringify({ is_active: false })]);
+    expect(refused.error).toMatch(/BASIC SALARY CANNOT BE DELETED/);
+  });
 });
