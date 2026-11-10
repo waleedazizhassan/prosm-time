@@ -137,8 +137,8 @@ serve(async (request: Request) => {
 
     const urgent = message.priority === "high" || message.type === "sos_alert";
     // v2.3.61 (owner 2026-10-28): clock-in and clock-out reminders ring with the alarm tone (MainActivity's channel)
-    // Owner 2026-11-10: a Buzz rings with the same alarm tone and vibration
-    const reminder = message.type === "clock_in_reminder" || message.type === "clock_out_reminder" || message.type === "buzz";
+    // Owner 2026-11-10: a Buzz to a closed app is an ordinary notification (not the alarm tone)
+    const reminder = message.type === "clock_in_reminder" || message.type === "clock_out_reminder";
     const gone: string[] = [];
     let sent = 0;
     for (const { token: deviceToken, language } of devices) {
