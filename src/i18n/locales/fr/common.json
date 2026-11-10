@@ -378,6 +378,16 @@
   "feedback": {
     "errorTitle": "Un problème est survenu",
     "successTitle": "Terminé",
-    "ok": "OK"
+    "ok": "OK",
+    "close": "Fermer",
+    "fix": {
+      "retry": "Réessayer",
+      "reload": "Recharger",
+      "signIn": "Se connecter",
+      "openSettings": "Ouvrir les réglages",
+      "askAgain": "Autoriser à nouveau",
+      "back": "Retour",
+      "seePlan": "Voir l'offre"
+    }
   }
 }

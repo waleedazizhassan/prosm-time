@@ -10,6 +10,7 @@ import Button from "../../components/common/Button";
 import Divider from "../../components/common/Divider";
 import AuthLayout from "../../components/common/AuthLayout";
 import styles from "../../components/common/AuthLayout.module.css";
+import SuccessText from "../../components/common/SuccessText";
 import ErrorText from "../../components/common/ErrorText";
 import { registerDevice, takeDeviceLimitBlocked } from "../../core/services/DeviceService";
 
@@ -104,11 +105,7 @@ export default function LoginPage() {
           {t("login.forgotPassword")}
         </button>
 
-        {accountDeleted && !error ? (
-          <p role="status" style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-sm)", color: "var(--status-success-text)" }}>
-            {t("login.accountDeleted")}
-          </p>
-        ) : null}
+        {accountDeleted && !error ? <SuccessText>{t("login.accountDeleted")}</SuccessText> : null}
         <ErrorText kind="session">{error}</ErrorText>
 
         <Button type="submit" fullWidth loading={submitting}>

@@ -378,6 +378,16 @@
   "feedback": {
     "errorTitle": "出现问题",
     "successTitle": "已完成",
-    "ok": "确定"
+    "ok": "确定",
+    "close": "关闭",
+    "fix": {
+      "retry": "重试",
+      "reload": "重新加载",
+      "signIn": "登录",
+      "openSettings": "打开设置",
+      "askAgain": "重新允许",
+      "back": "返回",
+      "seePlan": "查看套餐"
+    }
   }
 }

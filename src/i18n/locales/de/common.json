@@ -378,6 +378,16 @@
   "feedback": {
     "errorTitle": "Etwas ist schiefgelaufen",
     "successTitle": "Erledigt",
-    "ok": "OK"
+    "ok": "OK",
+    "close": "Schließen",
+    "fix": {
+      "retry": "Erneut versuchen",
+      "reload": "Neu laden",
+      "signIn": "Anmelden",
+      "openSettings": "Einstellungen öffnen",
+      "askAgain": "Erneut erlauben",
+      "back": "Zurück",
+      "seePlan": "Plan ansehen"
+    }
   }
 }

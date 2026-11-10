@@ -13,6 +13,8 @@ export interface FeedbackMessage {
   kind?: StateKind;
   title?: string;
   action?: { label: string; onClick: () => void };
+  /** Owner 2026-11-10: the step that solves the problem; the main button runs it. */
+  fix?: { label: string; run: () => void } | null;
 }
 
 interface FeedbackApi {

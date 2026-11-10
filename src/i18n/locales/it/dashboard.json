@@ -219,7 +219,18 @@
     "confirmClockOutAction": "Conferma uscita",
     "confirmDateLabel": "Data",
     "locationStale": "La tua posizione non è disponibile ora. Aggiorna la pagina o chiudi e riapri l'app, poi timbra.",
-    "recenter": "Torna alla mia posizione"
+    "recenter": "Torna alla mia posizione",
+    "notice": {
+      "problem": "Operazione non riuscita",
+      "attention": "Attenzione",
+      "clockedIn": "Entrata registrata ✓",
+      "at": "alle {{time}}",
+      "breakStarted": "Pausa iniziata",
+      "breakEnded": "Pausa finita, si torna al lavoro",
+      "siteChanged": "Sede cambiata",
+      "savedOffline": "Salvato sul telefono",
+      "savedOfflineText": "Nessuna connessione ora; verrà inviato da solo appena torna."
+    }
   },
   "kioskPin": {
     "title": "PIN chiosco",

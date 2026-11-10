@@ -378,6 +378,16 @@
   "feedback": {
     "errorTitle": "Something went wrong",
     "successTitle": "Done",
-    "ok": "OK"
+    "ok": "OK",
+    "close": "Close",
+    "fix": {
+      "retry": "Try again",
+      "reload": "Reload",
+      "signIn": "Sign in",
+      "openSettings": "Open settings",
+      "askAgain": "Allow again",
+      "back": "Go back",
+      "seePlan": "See the plan"
+    }
   }
 }

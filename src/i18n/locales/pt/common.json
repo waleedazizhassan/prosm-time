@@ -378,6 +378,16 @@
   "feedback": {
     "errorTitle": "Algo deu errado",
     "successTitle": "Pronto",
-    "ok": "OK"
+    "ok": "OK",
+    "close": "Fechar",
+    "fix": {
+      "retry": "Tentar de novo",
+      "reload": "Recarregar",
+      "signIn": "Entrar",
+      "openSettings": "Abrir configurações",
+      "askAgain": "Permitir de novo",
+      "back": "Voltar",
+      "seePlan": "Ver o plano"
+    }
   }
 }

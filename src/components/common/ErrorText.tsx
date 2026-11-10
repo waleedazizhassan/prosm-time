@@ -1,7 +1,9 @@
 import { useEffect, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
 import { useFeedback } from "../../core/context/FeedbackContext";
 import { errorKindFor, type StateKind } from "../../core/utils/errorKind";
+import { errorFixFor } from "../../core/utils/errorFix";
 import { STATE_ART } from "./stateArt";
 import styles from "./ErrorText.module.css";
 
@@ -25,6 +27,7 @@ import styles from "./ErrorText.module.css";
 // Outside the app's provider (tests, isolated renders) the message stays inline as before.
 export default function ErrorText({ children, kind }: { children: ReactNode; kind?: StateKind }) {
   const feedback = useFeedback();
+  const { t } = useTranslation();
   const text = typeof children === "string" || typeof children === "number" ? String(children) : null;
   const known = text ? errorKindFor(text) : null;
   const offline = typeof navigator !== "undefined" && navigator.onLine === false;
@@ -32,7 +35,7 @@ export default function ErrorText({ children, kind }: { children: ReactNode; kin
   const resolved: StateKind = offline ? "offline" : kind ?? known ?? "error";
 
   useEffect(() => {
-    if (feedback && text) feedback.show({ tone: "error", text, kind: resolved });
+    if (feedback && text) feedback.show({ tone: "error", text, kind: resolved, fix: errorFixFor(resolved, text, t) });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [feedback, text]);
 

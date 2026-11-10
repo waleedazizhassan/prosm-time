@@ -213,7 +213,18 @@
     "confirmClockOutAction": "确认下班打卡",
     "confirmDateLabel": "日期",
     "locationStale": "当前无法获取您的位置。请刷新页面或关闭并重新打开应用后再打卡。",
-    "recenter": "回到我的位置"
+    "recenter": "回到我的位置",
+    "notice": {
+      "problem": "操作未完成",
+      "attention": "提示",
+      "clockedIn": "已打卡上班 ✓",
+      "at": "于 {{time}}",
+      "breakStarted": "已开始休息",
+      "breakEnded": "休息结束，继续工作",
+      "siteChanged": "已更换地点",
+      "savedOffline": "已保存在手机上",
+      "savedOfflineText": "当前无网络；恢复连接后会自动发送。"
+    }
   },
   "kioskPin": {
     "title": "考勤机 PIN",

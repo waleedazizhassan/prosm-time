@@ -378,6 +378,16 @@
   "feedback": {
     "errorTitle": "Si è verificato un problema",
     "successTitle": "Fatto",
-    "ok": "OK"
+    "ok": "OK",
+    "close": "Chiudi",
+    "fix": {
+      "retry": "Riprova",
+      "reload": "Ricarica",
+      "signIn": "Accedi",
+      "openSettings": "Apri impostazioni",
+      "askAgain": "Consenti di nuovo",
+      "back": "Indietro",
+      "seePlan": "Vedi il piano"
+    }
   }
 }

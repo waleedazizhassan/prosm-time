@@ -216,7 +216,18 @@
     "confirmClockOutAction": "Confirm clock-out",
     "confirmDateLabel": "Date",
     "locationStale": "Your location isn't available right now. Refresh the page, or close and reopen the app, then clock in.",
-    "recenter": "Back to my location"
+    "recenter": "Back to my location",
+    "notice": {
+      "problem": "That didn't go through",
+      "attention": "Heads up",
+      "clockedIn": "You're clocked in ✓",
+      "at": "at {{time}}",
+      "breakStarted": "Break started",
+      "breakEnded": "Break over - back to work",
+      "siteChanged": "Site changed",
+      "savedOffline": "Saved on your phone",
+      "savedOfflineText": "No connection right now; it is sent by itself as soon as it returns."
+    }
   },
   "kioskPin": {
     "title": "Kiosk PIN",

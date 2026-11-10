@@ -16,9 +16,14 @@ export default function FeedbackDialog({ message, onClose }: { message: Feedback
   useEffect(() => {
     okRef.current?.focus();
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape" || event.key === "Enter") {
+      if (event.key === "Escape") {
         event.preventDefault();
         onClose();
+      } else if (event.key === "Enter") {
+        // Enter does what the main button does: the fix when there is one
+        event.preventDefault();
+        onClose();
+        message.fix?.run();
       }
     };
     document.addEventListener("keydown", onKey);
@@ -46,9 +51,18 @@ export default function FeedbackDialog({ message, onClose }: { message: Feedback
               {message.action.label}
             </button>
           ) : null}
-          <button ref={okRef} type="button" className={styles.ok} onClick={onClose}>
-            {t("feedback.ok")}
-          </button>
+          {message.fix ? (
+            <>
+              <button type="button" className={styles.secondary} onClick={onClose}>{t("feedback.close")}</button>
+              <button ref={okRef} type="button" className={styles.ok} onClick={() => { onClose(); message.fix?.run(); }}>
+                {message.fix.label}
+              </button>
+            </>
+          ) : (
+            <button ref={okRef} type="button" className={styles.ok} onClick={onClose}>
+              {t("feedback.ok")}
+            </button>
+          )}
         </div>
       </div>
     </div>,
