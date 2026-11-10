@@ -374,5 +374,10 @@
     "seePlan": "Paket ansehen",
     "askOwner": "Fragen Sie den Inhaber."
   },
-  "issuedVia": "Erstellt mit"
+  "issuedVia": "Erstellt mit",
+  "feedback": {
+    "errorTitle": "Etwas ist schiefgelaufen",
+    "successTitle": "Erledigt",
+    "ok": "OK"
+  }
 }

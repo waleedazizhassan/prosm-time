@@ -26,6 +26,7 @@ import LoadingState from "../../components/common/LoadingState";
 import { STATUS_BADGE, money, parseAmount, parseCsv, payrollError, saveXlsx } from "./payrollUi";
 import usePayrollDigits from "./usePayrollDigits";
 import { buildPayslipsPdf, buildReportXlsx, buildSummaryPdf } from "./payrollDocuments";
+import SuccessText from "../../components/common/SuccessText";
 
 type Action = "submit" | "return" | "approve" | "lock" | "reopen" | "cancel";
 const NEEDS_REASON: Action[] = ["return", "reopen", "cancel"];
@@ -247,7 +248,7 @@ export default function PayrollCyclePage() {
       </div>
       {cycle.reopen_reason && cycle.status === "reopened" ? <HintText small>{t("cycle.reopenedBecause", { reason: cycle.reopen_reason })}</HintText> : null}
       <ErrorText>{error}</ErrorText>
-      {notice ? <p role="status" style={{ margin: "var(--space-2) 0", padding: "var(--space-2) var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--status-success-bg)", color: "var(--status-success-text)", fontWeight: 600 }}>✓ {notice}</p> : null}
+      {notice ? <SuccessText>{notice}</SuccessText> : null}
 
       {checks && (checks.errors.length > 0 || checks.warnings.length > 0) && cycle.status !== "cancelled" ? (
         <Card title={t("checks.title")}>

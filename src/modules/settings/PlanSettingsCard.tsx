@@ -12,6 +12,7 @@ import Input from "../../components/common/Input";
 import { appLocale } from "../../core/utils/formatDate";
 import { useAuth } from "../../core/context/AuthContext";
 import usePlanFeatures, { resetPlanFeatures, type PlanFeature } from "../../core/hooks/usePlanFeatures";
+import SuccessText from "../../components/common/SuccessText";
 
 // Owner 2026-11-03: what the plan includes, in the order of the plans sheet.
 // 2026-11-10: the four plans, in their order (Business, then Pro, then Enterprise additions).
@@ -142,7 +143,7 @@ export default function PlanSettingsCard() {
         </>
       )}
       <ErrorText>{error}</ErrorText>
-      {saved ? <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("plan.redeemed")}</p> : null}
+      {saved ? <SuccessText>{t("plan.redeemed")}</SuccessText> : null}
     </Card>
     </div>
   );

@@ -374,5 +374,10 @@
     "seePlan": "Ver el plan",
     "askOwner": "Pregunta al propietario de tu organización."
   },
-  "issuedVia": "Emitido con"
+  "issuedVia": "Emitido con",
+  "feedback": {
+    "errorTitle": "Algo salió mal",
+    "successTitle": "Listo",
+    "ok": "Aceptar"
+  }
 }

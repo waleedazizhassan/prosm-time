@@ -6,6 +6,7 @@ import Button from "../../components/common/Button";
 import Card from "../../components/common/Card";
 import ErrorText from "../../components/common/ErrorText";
 import Textarea from "../../components/common/Textarea";
+import SuccessText from "../../components/common/SuccessText";
 
 // docs/IDEAS.md 6: the site's end-of-shift checklist, one item per line. Empty = none.
 export default function ChecklistSettingsCard({ siteId }: { siteId: string }) {
@@ -35,7 +36,7 @@ export default function ChecklistSettingsCard({ siteId }: { siteId: string }) {
     <Card title={t("checklist.title")} subtitle={t("checklist.subtitle")}>
       <Textarea label={t("checklist.label")} name="siteChecklist" value={text} onChange={(event) => setText(event.target.value)} rows={4} />
       <ErrorText>{error}</ErrorText>
-      {saved ? <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("checklist.saved")}</p> : null}
+      {saved ? <SuccessText>{t("checklist.saved")}</SuccessText> : null}
       <Button onClick={save}>{t("checklist.save")}</Button>
     </Card>
   );

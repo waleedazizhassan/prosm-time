@@ -7,6 +7,7 @@ import Card from "../../components/common/Card";
 import ErrorText from "../../components/common/ErrorText";
 import FormGrid from "../../components/common/FormGrid";
 import Input from "../../components/common/Input";
+import SuccessText from "../../components/common/SuccessText";
 
 const MAX_LOCATION_DAYS = 30;
 const MAX_PHOTO_DAYS = 90;
@@ -59,7 +60,7 @@ export default function RetentionSettingsCard() {
         </Button>
       </div>
       <ErrorText>{error}</ErrorText>
-      {saved ? <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("retention.saved")}</p> : null}
+      {saved ? <SuccessText>{t("retention.saved")}</SuccessText> : null}
     </Card>
   );
 }

@@ -14,6 +14,7 @@ import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
 import { payrollError } from "./payrollUi";
+import SuccessText from "../../components/common/SuccessText";
 
 const BADGE: Record<PayslipRequest["status"], string> = { pending: "pending", sent: "active", failed: "inactive" };
 
@@ -92,7 +93,7 @@ export default function PayslipRequestsPage() {
     <PageShell title={t("nav.requests")} subtitle={t("requests.hint")} wide>
       <Button variant="ghost" size="sm" onClick={() => navigate("/payroll")}>{t("nav.back")}</Button>
       <ErrorText>{error}</ErrorText>
-      {notice ? <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{notice}</p> : null}
+      {notice ? <SuccessText>{notice}</SuccessText> : null}
       <Card actions={<Select name="requestFilter" value={filter} onChange={(event) => setFilter(event.target.value)}
         options={["open", "pending", "failed", "sent", "all"].map((v) => ({ value: v, label: t(`requests.filters.${v}`) }))} />}>
         <Table columns={columns} data={shown} getRowId={(r) => r.id} loading={requests === null} emptyMessage={t("requests.empty")} />

@@ -16,6 +16,7 @@ import HintText from "../../components/common/HintText";
 import FieldRow from "../../components/common/FieldRow";
 import SiteIntegritySettings from "./SiteIntegritySettings";
 import SiteExitPolicySettings from "./SiteExitPolicySettings";
+import SuccessText from "../../components/common/SuccessText";
 
 const BREAK_ROUNDING_MODE_OPTIONS: BreakRoundingMode[] = ["cumulative", "full_hour"];
 const OUTSIDE_ZONE_POLICY_OPTIONS: OutsideZonePolicy[] = ["ALLOW_WITH_EXCEPTION", "BLOCK"];
@@ -389,7 +390,7 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
             </Button>
           </div>
           <ErrorText>{saveError}</ErrorText>
-          {saved ? <p style={{ margin: "var(--space-2) 0 0", fontSize: "var(--font-sm)", color: "var(--status-success-text)" }}>{t("sitePolicy.saveSuccess")}</p> : null}
+          {saved ? <SuccessText>{t("sitePolicy.saveSuccess")}</SuccessText> : null}
         </>
       ) : null}
     </Card>

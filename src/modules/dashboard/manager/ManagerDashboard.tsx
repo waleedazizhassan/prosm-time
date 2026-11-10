@@ -18,6 +18,7 @@ import Input from "../../../components/common/Input";
 import Toggle from "../../../components/common/Toggle";
 import Textarea from "../../../components/common/Textarea";
 import ErrorText from "../../../components/common/ErrorText";
+import SuccessText from "../../../components/common/SuccessText";
 import Avatar from "../../../components/common/Avatar";
 import PeopleByRole from "../../people/PeopleByRole";
 import ApprovalsQueue from "./ApprovalsQueue";
@@ -648,7 +649,7 @@ export default function ManagerDashboard() {
           )
         }
       >
-        {grantDone ? <p className={styles.rowMeta} role="status">{grantDone}</p> : null}
+        {grantDone ? <SuccessText>{grantDone}</SuccessText> : null}
         {absenceRows.length === 0 ? (
           <EmptyState message={absenceView === "leave" ? t("manager.absence.noneLeave") : t("manager.absence.noneAbsent")} />
         ) : (

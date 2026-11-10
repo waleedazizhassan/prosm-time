@@ -374,5 +374,10 @@
     "seePlan": "Vedi il piano",
     "askOwner": "Chiedi al titolare."
   },
-  "issuedVia": "Emesso tramite"
+  "issuedVia": "Emesso tramite",
+  "feedback": {
+    "errorTitle": "Si è verificato un problema",
+    "successTitle": "Fatto",
+    "ok": "OK"
+  }
 }

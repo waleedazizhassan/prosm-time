@@ -374,5 +374,10 @@
     "seePlan": "See the plan",
     "askOwner": "Ask your organisation’s owner."
   },
-  "issuedVia": "Issued via"
+  "issuedVia": "Issued via",
+  "feedback": {
+    "errorTitle": "Something went wrong",
+    "successTitle": "Done",
+    "ok": "OK"
+  }
 }

@@ -374,5 +374,10 @@
     "seePlan": "Voir l’offre",
     "askOwner": "Demandez au propriétaire."
   },
-  "issuedVia": "Émis via"
+  "issuedVia": "Émis via",
+  "feedback": {
+    "errorTitle": "Un problème est survenu",
+    "successTitle": "Terminé",
+    "ok": "OK"
+  }
 }

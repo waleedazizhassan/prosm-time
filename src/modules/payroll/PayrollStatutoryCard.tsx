@@ -11,6 +11,7 @@ import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
 import { payrollError } from "./payrollUi";
 import { resetPayrollDigits } from "./usePayrollDigits";
+import SuccessText from "../../components/common/SuccessText";
 
 // 2026-11-09 (owner): Egyptian law is the default and every figure can be changed - a country's
 // values come from its pack and the organisation edits its own copy. New cycles use the rules as
@@ -164,7 +165,7 @@ export default function PayrollStatutoryCard() {
 
       <HintText small>{t("statutory.appliesToNew")}</HintText>
       <ErrorText>{error}</ErrorText>
-      {saved ? <p role="status" style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{saved}</p> : null}
+      {saved ? <SuccessText>{saved}</SuccessText> : null}
       <Button loading={busy === "save"} onClick={save}>{t("statutory.save")}</Button>
     </Card>
   );

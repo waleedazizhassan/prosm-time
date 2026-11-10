@@ -374,5 +374,10 @@
     "seePlan": "查看套餐",
     "askOwner": "请联系您组织的所有者。"
   },
-  "issuedVia": "出具自"
+  "issuedVia": "出具自",
+  "feedback": {
+    "errorTitle": "出现问题",
+    "successTitle": "已完成",
+    "ok": "确定"
+  }
 }

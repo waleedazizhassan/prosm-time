@@ -374,5 +374,10 @@
     "seePlan": "اعرض الباقة",
     "askOwner": "اطلبها من مالك المؤسسة."
   },
-  "issuedVia": "صادر من خلال"
+  "issuedVia": "صادر من خلال",
+  "feedback": {
+    "errorTitle": "حصلت مشكلة",
+    "successTitle": "تم بنجاح",
+    "ok": "حسناً"
+  }
 }

@@ -10,6 +10,7 @@ import Select from "../../components/common/Select";
 import Button from "../../components/common/Button";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
+import SuccessText from "../../components/common/SuccessText";
 
 type BreakRoundingMode = Organization["defaultBreakRoundingMode"];
 
@@ -127,7 +128,7 @@ export default function SiteDefaultsSettingsCard() {
       </div>
 
       <ErrorText>{error}</ErrorText>
-      {saved ? <p style={{ margin: "var(--space-2) 0 0", fontSize: "var(--font-sm)", color: "var(--status-success-text)" }}>{t("siteDefaults.saveSuccess")}</p> : null}
+      {saved ? <SuccessText>{t("siteDefaults.saveSuccess")}</SuccessText> : null}
     </Card>
   );
 }
