@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { LocateFixed, Maximize2, Minimize2 } from "lucide-react";
 import L from "leaflet";
@@ -12,6 +12,26 @@ import styles from "./ManagerDashboard.module.css";
 
 const TILE_URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 const TILE_ATTRIBUTION = "© OpenStreetMap";
+
+// metres between two points (for "is this person inside that site's circle")
+function metres(aLat: number, aLng: number, bLat: number, bLng: number): number {
+  const rad = Math.PI / 180;
+  const dLat = (bLat - aLat) * rad;
+  const dLng = (bLng - aLng) * rad;
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(aLat * rad) * Math.cos(bLat * rad) * Math.sin(dLng / 2) ** 2;
+  return 2 * 6371000 * Math.asin(Math.sqrt(h));
+}
+
+// Owner 2026-11-10: where each person really is - their last point, else where they clocked in, else
+// (no point at all) their site's centre - and the site whose circle they are inside, if any.
+function placeOf(person: DashboardPresent, sites: DashboardSite[]) {
+  const own = person.siteId ? sites.find((x) => x.id === person.siteId) : undefined;
+  const lat = person.lastLatitude ?? person.latitude ?? own?.latitude ?? null;
+  const lng = person.lastLongitude ?? person.longitude ?? own?.longitude ?? null;
+  if (lat === null || lng === null) return { lat: null, lng: null, siteId: null as string | null };
+  const inside = sites.find((s) => s.latitude !== null && s.longitude !== null && metres(lat, lng, s.latitude, s.longitude) <= s.radius + 50);
+  return { lat, lng, siteId: inside?.id ?? null };
+}
 
 function escapeHtml(value: string): string {
   return value.replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char] ?? char);
@@ -47,6 +67,14 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
   const allBoundsRef = useRef<L.LatLngBounds | null>(null);
   const circlesRef = useRef(new Map<string, L.Circle>());
   const [fullScreen, setFullScreen] = useState(false);
+  // who is inside which site's circle right now, and who is at none of them ("different places")
+  const placed = useMemo(() => people.map((person) => ({ person, ...placeOf(person, sites) })), [people, sites]);
+  const insideCount = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const p of placed) if (p.siteId) counts.set(p.siteId, (counts.get(p.siteId) ?? 0) + 1);
+    return counts;
+  }, [placed]);
+  const elsewhere = useMemo(() => placed.filter((p) => !p.siteId), [placed]);
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
@@ -96,9 +124,10 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
     for (const site of sites) {
       if (site.latitude === null || site.longitude === null) continue;
       // red with an SOS, green with people there now, grey when nobody is there
-      const color = siteColor(site);
+      const here = insideCount.get(site.id) ?? 0;
+      const color = siteColor(site, here);
       const circle = L.circle([site.latitude, site.longitude], { radius: site.radius, color, fillColor: color, fillOpacity: 0.12, weight: 1.5 });
-      circle.bindTooltip(`${escapeHtml(site.name)} · ${site.present}${site.expected ? ` / ${site.expected}` : ""}${site.external?.presentNow ? ` · ${escapeHtml(t("manager.map.external", { count: site.external.presentNow }))}` : ""}`, { permanent: true, direction: "top", className: styles.siteLabel, interactive: true });
+      circle.bindTooltip(`${escapeHtml(site.name)} · ${here}${site.expected ? ` / ${site.expected}` : ""}${site.external?.presentNow ? ` · ${escapeHtml(t("manager.map.external", { count: site.external.presentNow }))}` : ""}`, { permanent: true, direction: "top", className: styles.siteLabel, interactive: true });
       // owner 2026-10-26: a click on the site's name (or its circle) zooms to the site
       circle.on("click", () => map.flyToBounds(circle.getBounds(), { padding: [24, 24], maxZoom: 17, duration: 0.6 }));
       circle.addTo(layer);
@@ -106,10 +135,8 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
       bounds.extend(circle.getBounds());
     }
     for (const person of people) {
-      // 2026-11-09 (owner: "everyone visible"): no point of their own -> their site's centre; none at all -> the list below
-      const site = person.siteId ? sites.find((x) => x.id === person.siteId) : undefined;
-      const lat = person.lastLatitude ?? person.latitude ?? site?.latitude ?? null;
-      const lng = person.lastLongitude ?? person.longitude ?? site?.longitude ?? null;
+      // Owner 2026-11-10: everyone clocked in is on the map, where they really are
+      const { lat, lng } = placeOf(person, sites);
       if (lat === null || lng === null) continue;
       L.marker([lat, lng], { icon: personIcon(person) })
         .bindTooltip(`${escapeHtml(person.name)}${person.siteName ? ` · ${escapeHtml(person.siteName)}` : ""}`)
@@ -121,7 +148,7 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
       map.fitBounds(bounds, { padding: [28, 28], maxZoom: 16 });
       fittedRef.current = true;
     }
-  }, [sites, people, t]);
+  }, [sites, people, t, insideCount]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => mapRef.current?.invalidateSize(), 120);
@@ -136,12 +163,17 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
     if (circle) mapRef.current?.flyToBounds(circle.getBounds(), { padding: [24, 24], maxZoom: 17, duration: 0.6 });
   };
   // the key: every site on the map, the ones with people first
-  const keyed = sites.filter((site) => site.latitude !== null && site.longitude !== null).sort((a, b) => Number(b.sos) - Number(a.sos) || b.present - a.present);
+  const keyed = sites
+    .filter((site) => site.latitude !== null && site.longitude !== null)
+    .sort((a, b) => Number(b.sos) - Number(a.sos) || (insideCount.get(b.id) ?? 0) - (insideCount.get(a.id) ?? 0));
   const [showUnplaced, setShowUnplaced] = useState(false);
-  const unplaced = people.filter((person) => {
-    const site = person.siteId ? sites.find((x) => x.id === person.siteId) : undefined;
-    return (person.lastLatitude ?? person.latitude ?? site?.latitude ?? null) === null;
-  });
+  const unplaced = elsewhere.map((p) => p.person);
+  // tap "different places": the map shows all of them, and their names open under it
+  const showElsewhere = () => {
+    setShowUnplaced((v) => !v);
+    const points = elsewhere.filter((p) => p.lat !== null && p.lng !== null).map((p) => [p.lat as number, p.lng as number] as [number, number]);
+    if (points.length > 0) mapRef.current?.flyToBounds(L.latLngBounds(points), { padding: [36, 36], maxZoom: 14, duration: 0.6 });
+  };
 
   return (
     <div className={fullScreen ? styles.mapFullScreen : styles.mapBox}>
@@ -155,17 +187,18 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
       {keyed.length > 0 || unplaced.length > 0 ? (
         <div className={styles.mapKey} role="group" aria-label={t("manager.map.keyLabel")}>
           {keyed.map((site) => (
-            <button key={site.id} type="button" className={styles.mapKeyItem} onClick={() => goTo(site.id)} title={site.sos ? t("manager.map.stateSos") : site.present > 0 ? t("manager.map.stateActive") : t("manager.map.stateIdle")}>
-              <span className={styles.mapKeyDot} style={{ background: siteColor(site) }} aria-hidden="true" />
+            <button key={site.id} type="button" className={styles.mapKeyItem} onClick={() => goTo(site.id)} title={site.sos ? t("manager.map.stateSos") : (insideCount.get(site.id) ?? 0) > 0 ? t("manager.map.stateActive") : t("manager.map.stateIdle")}>
+              <span className={styles.mapKeyDot} style={{ background: siteColor(site, insideCount.get(site.id) ?? 0) }} aria-hidden="true" />
               <span>{site.name}</span>
-              <b>{site.present}</b>
+              <b>{insideCount.get(site.id) ?? 0}</b>
             </button>
           ))}
-          {/* Owner 2026-11-09: people with no location are one small item like the sites; tap shows the names */}
+          {/* Owner 2026-11-10: everyone who is at none of the sites is one item, "different places" -
+              tap: the map shows them all and their names open */}
           {unplaced.length > 0 ? (
-            <button type="button" className={styles.mapKeyItem} onClick={() => setShowUnplaced((v) => !v)} title={unplaced.map((p) => p.name).join("، ")}>
+            <button type="button" className={styles.mapKeyItem} onClick={showElsewhere} title={unplaced.map((p) => p.name).join("، ")}>
               <span className={styles.mapKeyDot} style={{ background: "#f59e0b" }} aria-hidden="true" />
-              <span>{t("manager.map.noLocationShort")}</span>
+              <span>{t("manager.map.elsewhere")}</span>
               <b>{unplaced.length}</b>
             </button>
           ) : null}
@@ -180,7 +213,7 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
   );
 }
 
-function siteColor(site: DashboardSite): string {
+function siteColor(site: DashboardSite, here: number): string {
   if (site.sos) return "#dc2626";
-  return site.present > 0 ? "#16a34a" : "#94a3b8";
+  return here > 0 ? "#16a34a" : "#94a3b8";
 }

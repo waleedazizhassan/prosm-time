@@ -238,6 +238,9 @@ export default function ManagerDashboard() {
   const overdueCount = data?.overdue?.length ?? 0;
   const canClockOutOthers = isOwner || hasPermission("attendance.clock_out_on_behalf");
 
+  // Owner 2026-11-10: "16 of 23" counted the whole team; today it is out of those due today -
+  // present, absent and on leave (people off today are not counted).
+  const todayTotal = (kpi?.presentNow ?? 0) + (kpi?.absentToday ?? 0) + (kpi?.onLeaveToday ?? 0);
   const workedTrend = trend(kpi?.workedMinutes ?? 0, kpi?.previous?.workedMinutes);
   const overtimeTrend = trend(kpi?.overtimeMinutes ?? 0, kpi?.previous?.overtimeMinutes, true);
   const lateTrend = trend(kpi?.lateCount ?? 0, kpi?.previous?.lateCount, true);
@@ -580,8 +583,8 @@ export default function ManagerDashboard() {
           {/* Owner 2026-11-09 (review the KPI cards): one shape for every card - icon and name, the figure
               with its unit, one line of context, and a short trend or progress line at the bottom. */}
           <Kpi icon={Users} label={t("manager.kpi.present")} value={kpi.presentNow} title={t("manager.kpi.def.present")} onClick={() => setSheet("present")}
-            hint={kpi.hasSchedule ? t("manager.kpi.ofExpected", { expected: kpi.expectedToday }) : t("manager.kpi.ofTeam", { team: data?.teamSize ?? 0 })}
-            progress={Math.min(100, Math.round((kpi.presentNow / Math.max(1, kpi.hasSchedule ? kpi.expectedToday : data?.teamSize ?? 1)) * 100))} />
+            hint={kpi.hasSchedule ? t("manager.kpi.ofExpected", { expected: kpi.expectedToday }) : t("manager.kpi.ofToday", { count: todayTotal })}
+            progress={Math.min(100, Math.round((kpi.presentNow / Math.max(1, kpi.hasSchedule ? kpi.expectedToday : todayTotal)) * 100))} />
           <Kpi icon={Clock3} label={t("manager.kpi.hours")} value={hours(kpi.workedMinutes)} unit={t("manager.kpi.hoursShort")} title={t("manager.kpi.def.hours")} onClick={() => setSheet("hours")}
             hint={kpi.scheduledMinutes ? t("manager.kpi.scheduled", { hours: hours(kpi.scheduledMinutes) }) : t("manager.kpi.noSchedule")}
             trend={workedTrend} t={t} />

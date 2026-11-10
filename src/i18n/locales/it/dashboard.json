@@ -414,7 +414,8 @@
       },
       "hoursShort": "h",
       "overtimeShort": "Straordinari",
-      "overtimeApproved": "Straordinari approvati nel periodo"
+      "overtimeApproved": "Straordinari approvati nel periodo",
+      "ofToday": "su {{count}} oggi"
     },
     "map": {
       "title": "I siti ora",
@@ -430,7 +431,8 @@
       "zoomOut": "Riduci",
       "noLocation": "Senza posizione sulla mappa",
       "noLocationHint": "Ha timbrato senza coordinate (es. dispositivo senza GPS), non posizionabile.",
-      "noLocationShort": "Senza posizione"
+      "noLocationShort": "Senza posizione",
+      "elsewhere": "Altri luoghi"
     },
     "present": {
       "title": "Presenti ora ({{count}})",

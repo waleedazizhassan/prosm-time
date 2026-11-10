@@ -411,7 +411,8 @@
       },
       "hoursShort": "h",
       "overtimeShort": "Overtime",
-      "overtimeApproved": "Approved overtime in the period"
+      "overtimeApproved": "Approved overtime in the period",
+      "ofToday": "of {{count}} today"
     },
     "map": {
       "title": "Sites now",
@@ -427,7 +428,8 @@
       "zoomOut": "Zoom out",
       "noLocation": "Not on the map",
       "noLocationHint": "Clocked in without coordinates (for example a device without GPS), so they cannot be placed.",
-      "noLocationShort": "No location"
+      "noLocationShort": "No location",
+      "elsewhere": "Different places"
     },
     "present": {
       "title": "Here now ({{count}})",

@@ -417,7 +417,8 @@
       },
       "hoursShort": "ч",
       "overtimeShort": "Сверхурочные",
-      "overtimeApproved": "Одобренные сверхурочные за период"
+      "overtimeApproved": "Одобренные сверхурочные за период",
+      "ofToday": "из {{count}} сегодня"
     },
     "map": {
       "title": "Объекты сейчас",
@@ -433,7 +434,8 @@
       "zoomOut": "Отдалить",
       "noLocation": "Нет на карте",
       "noLocationHint": "Отметился без координат (например, без GPS) - разместить нельзя.",
-      "noLocationShort": "Без места"
+      "noLocationShort": "Без места",
+      "elsewhere": "Другие места"
     },
     "present": {
       "title": "Сейчас на месте ({{count}})",

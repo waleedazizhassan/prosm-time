@@ -414,7 +414,8 @@
       },
       "hoursShort": "h",
       "overtimeShort": "Horas extras",
-      "overtimeApproved": "Horas extras aprovadas no período"
+      "overtimeApproved": "Horas extras aprovadas no período",
+      "ofToday": "de {{count}} hoje"
     },
     "map": {
       "title": "Locais agora",
@@ -430,7 +431,8 @@
       "zoomOut": "Afastar",
       "noLocation": "Sem localização no mapa",
       "noLocationHint": "Registou sem coordenadas (ex.: sem GPS), não pode ser colocado.",
-      "noLocationShort": "Sem localização"
+      "noLocationShort": "Sem localização",
+      "elsewhere": "Outros locais"
     },
     "present": {
       "title": "Presentes agora ({{count}})",
