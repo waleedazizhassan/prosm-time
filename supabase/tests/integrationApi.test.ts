@@ -40,8 +40,8 @@ beforeAll(async () => {
   worker = await addMember(t, org, "employee", "Worker");
   manager = await addMember(t, org, "manager", "Manager");
   await assignToSite(t, siteId, worker);
-  // the owner turns the API on for this plan (no plan includes it since 2026-11-03)
-  await t.su("update plans set feature_flags = feature_flags || '{\"integrations\": true}'::jsonb");
+  // organisations from before plans keep the API (Enterprise only for new plans, 2026-11-10)
+  await t.su("update entitlements set plan = 'legacy' where organization_id = $1", [org.id]);
 });
 
 describe("API keys", () => {
@@ -91,11 +91,11 @@ describe("authentication", () => {
     expect(await auth(fullKey, "sites:read")).toBeNull();
     expect(await legacy(fullKey)).toBeNull();
     await t.su("update license_activation_state set is_trial = false, expires_at = now() + interval '1 year' where organization_id = $1", [org.id]);
-    await t.su("update plans set feature_flags = feature_flags - 'integrations'");
+    await t.su("update entitlements set plan = 'pro' where organization_id = $1", [org.id]); // Pro has no API (Enterprise only, 2026-11-10)
     expect(await auth(fullKey, "sites:read")).toBeNull();
     // the legacy export endpoints keep serving the keys already in use
     expect(await legacy(fullKey)).toBe(org.id);
-    await t.su("update plans set feature_flags = feature_flags || '{\"integrations\": true}'::jsonb");
+    await t.su("update entitlements set plan = 'legacy' where organization_id = $1", [org.id]);
   });
 
   it("keeps legacy keys working with what they could do before", async () => {

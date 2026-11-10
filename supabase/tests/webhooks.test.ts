@@ -32,10 +32,10 @@ beforeAll(async () => {
 
 describe("webhooks", () => {
   it("need the plan, the real owner and an https address", async () => {
-    // every plan includes the API since 2026-11-09 (migration 20261109210000); start without it
-    await t.su("update plans set feature_flags = feature_flags - 'integrations'");
+    // the API is Enterprise (and legacy) only since 2026-11-10; start on Pro
+    await t.su("update entitlements set plan = 'pro' where organization_id = $1", [org.id]); // Pro has no API (Enterprise only, 2026-11-10)
     expect((await owner("select public.create_prosm_time_webhook('https://erp.example.com/hook', array['employee.created'])")).error).toMatch(/FEATURE NOT IN PLAN/);
-    await t.su("update plans set feature_flags = feature_flags || '{\"integrations\": true}'::jsonb");
+    await t.su("update entitlements set plan = 'legacy' where organization_id = $1", [org.id]);
     expect((await t.as(manager.authId, "select public.create_prosm_time_webhook('https://erp.example.com/hook', array['employee.created'])")).error).toMatch(/OWNER/);
     expect((await owner("select public.create_prosm_time_webhook('http://erp.example.com/hook', array['employee.created'])")).error).toMatch(/https/);
     expect((await owner("select public.create_prosm_time_webhook('https://erp.example.com/hook', array['payroll.paid'])")).error).toMatch(/VALID EVENTS/);
@@ -96,7 +96,7 @@ describe("webhooks", () => {
 
   it("produce nothing without the plan", async () => {
     await ok(owner("select public.set_prosm_time_webhook_active($1, true)", [endpointId]));
-    await t.su("update plans set feature_flags = feature_flags - 'integrations'");
+    await t.su("update entitlements set plan = 'pro' where organization_id = $1", [org.id]); // Pro has no API (Enterprise only, 2026-11-10)
     await addMember(t, org, "employee", "No Plan");
     expect(await outbox("employee.created")).toHaveLength(1);
   });
