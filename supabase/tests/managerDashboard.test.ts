@@ -138,4 +138,22 @@ describe("manager dashboard", () => {
     // the sites table covers work at a site; the hour recorded with no site is the only difference
     expect(Number(d.kpi.workedMinutes) - sites).toBe(60);
   });
+
+  it("counts whoever works at the manager's sites even without an assignment, as the people list shows them (owner 2026-11-10)", async () => {
+    const before = await dash(manager, "mine");
+    const walkIn = await addMember(t, org, "employee", "Walk In");
+    // clocked in with no site; the nearest site (Site A, the manager's) is responsible
+    const [session] = await t.su<{ id: string }>(
+      "insert into attendance_sessions (organization_id, user_id, status, clock_in_at, responsible_site_id, manual_location_label) values ($1, $2, 'clocked_in', now() - interval '1 hour', $3, 'Gate') returning id",
+      [org.id, walkIn.userId, siteA],
+    );
+    expect(session.id).toBeTruthy();
+    const after = await dash(manager, "mine");
+    expect(after.teamSize).toBe(before.teamSize + 1);
+    expect(after.kpi.presentNow).toBe(before.kpi.presentNow + 1);
+    // still never someone who works only at another manager's site
+    const people = await t.as<{ id: string }>(manager.authId, "select id from public.list_prosm_time_visible_members()");
+    expect(people.rows!.map((r) => r.id)).toContain(walkIn.userId);
+    expect(people.rows!.map((r) => r.id)).not.toContain(b1.userId);
+  });
 });
