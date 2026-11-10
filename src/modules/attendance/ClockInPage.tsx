@@ -2,9 +2,7 @@ import { Navigate } from "react-router-dom";
 
 import { useAuth } from "../../core/context/AuthContext";
 import PageShell from "../../components/common/PageShell";
-import ClockInOutCard from "../dashboard/ClockInOutCard";
-import clockInOutHeaderImage from "../../assets/illustrations/clockIn.svg";
-import PageBanner from "../../components/common/PageBanner";
+import EmployeeHome from "../dashboard/EmployeeHome";
 
 // § user-directed - "the Owner/Manager shouldn't have the clock-in
 // widget on their own Dashboard the way an Employee does - a sidebar
@@ -18,10 +16,10 @@ export default function ClockInPage() {
   if (profile?.isRealOwner) return <Navigate to="/dashboard" replace />;
 
   return (
-    <PageShell title="">
-      <PageBanner pageId="clockIn" illustration={clockInOutHeaderImage} />
-
-      <ClockInOutCard />
+    // Owner 2026-11-10: managers and supervisors get the same clock-in screen as employees - the map
+    // alone (no banner card over it), with the floating "My hours" and reminders buttons.
+    <PageShell compact>
+      <EmployeeHome />
     </PageShell>
   );
 }

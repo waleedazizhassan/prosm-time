@@ -4,7 +4,6 @@ import UnreadAnnouncementsBanner from "../announcements/UnreadAnnouncementsBanne
 import PageShell from "../../components/common/PageShell";
 import EmployeeHome from "./EmployeeHome";
 import AdminOverviewCard from "./AdminOverviewCard";
-import PersonalRemindersCard from "./PersonalRemindersCard";
 import ManagerDashboard from "./manager/ManagerDashboard";
 
 // PROSM Time Implementation Master File V3.0, WP-03/§21/§37 - "Admin
@@ -54,9 +53,7 @@ export default function DashboardPage() {
       {/* v2.3.43 step 17: the Owner and whoever holds dashboard.view get the
           full dashboard; other management roles keep the light overview. */}
       {showFullDashboard ? <ManagerDashboard /> : hasManagementScope ? <AdminOverviewCard /> : <EmployeeHome />}
-      {/* Owner 2026-10-21: each person sets their own clock-in/out reminders (not the Owner). */}
-      {/* Owner 2026-11-09: an employee opens their reminders from a floating button on their map page */}
-      {showFullDashboard || hasManagementScope ? <PersonalRemindersCard /> : null}
+      {/* Owner 2026-11-10: reminders open from the floating button on the clock-in page, for everyone */}
     </PageShell>
   );
 }

@@ -74,7 +74,14 @@
 
   .screen .body {
     flex: 1;
+    min-height: 0;
     padding: var(--space-4);
+  }
+
+  /* Owner 2026-11-10: "use the photo" and "retake" sat under the phone's navigation bar on some
+     phones - the footer keeps clear of it (safe area, plus a margin for bars that draw over pages). */
+  .screen .footer {
+    padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px) + 28px);
   }
 }
 
