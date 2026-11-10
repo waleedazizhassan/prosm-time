@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import BuzzButton from "../../components/common/BuzzButton";
 import styles from "./PersonDetailPage.module.css";
 import { useTranslation } from "react-i18next";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
@@ -287,9 +288,13 @@ export default function PersonDetailPage() {
 
   return (
     <PageShell title={member.fullName} subtitle={`${member.email} · ${t(`common:roles.${member.roleKey}`, { defaultValue: member.roleName })}`}>
-      <Link to="/people" style={{ color: "var(--text-link)", fontSize: "var(--font-sm)" }}>
-        {t("detail.backToList")}
-      </Link>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--space-2)", flexWrap: "wrap" }}>
+        <Link to="/people" style={{ color: "var(--text-link)", fontSize: "var(--font-sm)" }}>
+          {t("detail.backToList")}
+        </Link>
+        {/* owner 2026-11-10: Buzz this person */}
+        {userId && member.isActive !== false ? <BuzzButton userId={userId} name={member.fullName} /> : null}
+      </div>
 
       {/* Owner 2026-11-09: the person's cards in one even order, close together - who they are and their
           work first, then their role and permissions, then checks and devices, and access last */}

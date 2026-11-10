@@ -250,6 +250,13 @@
       "statementTitle": "Nouveau communiqué officiel",
       "publishedBody": "{{title}}",
       "ackBody": "{{title}} - merci de confirmer la lecture."
+    },
+    "buzz": {
+      "title": "Buzz de {{name}}",
+      "clock_in": "Merci de pointer ton arrivée.",
+      "clock_out": "Merci de pointer ton départ.",
+      "call_me": "Merci de m’appeler.",
+      "attention": "Merci de regarder l’application."
     }
   },
   "items": {
@@ -465,5 +472,20 @@
     "banner": "Votre organisation est en lecture seule : sa licence a pris fin. Tout reste visible ; les modifications sont suspendues et rien n’est supprimé.",
     "reopen": "Saisir un code d’activation",
     "askOwner": "Le propriétaire peut la rouvrir."
+  },
+  "buzz": {
+    "action": "Buzz",
+    "title": "Buzzer {{name}}",
+    "hint": "Son téléphone va vibrer et sonner.",
+    "reasons": {
+      "clock_in": "Pointer l’arrivée",
+      "clock_out": "Pointer le départ",
+      "call_me": "Appelle-moi",
+      "attention": "Regarde l’appli"
+    },
+    "messageLabel": "Message court (facultatif)",
+    "send": "Envoyer le buzz",
+    "sent": "{{name}} a été buzzé.",
+    "failed": "Le buzz n’a pas été envoyé. Réessaie."
   }
 }

@@ -196,6 +196,13 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "statementTitle": "بيان رسمي جديد",
         "publishedBody": "{{title}}",
         "ackBody": "{{title}} - برجاء تأكيد القراءة."
+      },
+      "buzz": {
+        "title": "تنبيه من {{name}}",
+        "clock_in": "سجّل حضورك من فضلك.",
+        "clock_out": "سجّل انصرافك من فضلك.",
+        "call_me": "كلّمني من فضلك.",
+        "attention": "افتح البرنامج من فضلك."
       }
     },
     "leaveTypes": {
@@ -403,6 +410,13 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "statementTitle": "Neue offizielle Mitteilung",
         "publishedBody": "{{title}}",
         "ackBody": "{{title}} - bitte bestätigen Sie das Lesen."
+      },
+      "buzz": {
+        "title": "Buzz von {{name}}",
+        "clock_in": "Bitte einstempeln.",
+        "clock_out": "Bitte ausstempeln.",
+        "call_me": "Bitte ruf mich an.",
+        "attention": "Bitte schau in die App."
       }
     },
     "leaveTypes": {
@@ -610,6 +624,13 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "statementTitle": "New official statement",
         "publishedBody": "{{title}}",
         "ackBody": "{{title}} - please confirm you have read it."
+      },
+      "buzz": {
+        "title": "Buzz from {{name}}",
+        "clock_in": "Please clock in.",
+        "clock_out": "Please clock out.",
+        "call_me": "Please call me.",
+        "attention": "Please check the app."
       }
     },
     "leaveTypes": {
@@ -817,6 +838,13 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "statementTitle": "Nuevo comunicado oficial",
         "publishedBody": "{{title}}",
         "ackBody": "{{title}} - confirma que lo has leído."
+      },
+      "buzz": {
+        "title": "Aviso de {{name}}",
+        "clock_in": "Por favor, ficha la entrada.",
+        "clock_out": "Por favor, ficha la salida.",
+        "call_me": "Por favor, llámame.",
+        "attention": "Por favor, revisa la app."
       }
     },
     "leaveTypes": {
@@ -1024,6 +1052,13 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "statementTitle": "Nouveau communiqué officiel",
         "publishedBody": "{{title}}",
         "ackBody": "{{title}} - merci de confirmer la lecture."
+      },
+      "buzz": {
+        "title": "Buzz de {{name}}",
+        "clock_in": "Merci de pointer ton arrivée.",
+        "clock_out": "Merci de pointer ton départ.",
+        "call_me": "Merci de m’appeler.",
+        "attention": "Merci de regarder l’application."
       }
     },
     "leaveTypes": {
@@ -1231,6 +1266,13 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "statementTitle": "Nuovo comunicato ufficiale",
         "publishedBody": "{{title}}",
         "ackBody": "{{title}} - conferma di averlo letto."
+      },
+      "buzz": {
+        "title": "Avviso da {{name}}",
+        "clock_in": "Per favore, timbra l’entrata.",
+        "clock_out": "Per favore, timbra l’uscita.",
+        "call_me": "Per favore, chiamami.",
+        "attention": "Per favore, guarda l’app."
       }
     },
     "leaveTypes": {
@@ -1438,6 +1480,13 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "statementTitle": "Novo comunicado oficial",
         "publishedBody": "{{title}}",
         "ackBody": "{{title}} - confirme que leu."
+      },
+      "buzz": {
+        "title": "Alerta de {{name}}",
+        "clock_in": "Por favor, registe a entrada.",
+        "clock_out": "Por favor, registe a saída.",
+        "call_me": "Por favor, ligue-me.",
+        "attention": "Por favor, veja o app."
       }
     },
     "leaveTypes": {
@@ -1645,6 +1694,13 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "statementTitle": "Новое официальное заявление",
         "publishedBody": "{{title}}",
         "ackBody": "{{title}} - подтвердите прочтение."
+      },
+      "buzz": {
+        "title": "Сигнал от {{name}}",
+        "clock_in": "Пожалуйста, отметьте приход.",
+        "clock_out": "Пожалуйста, отметьте уход.",
+        "call_me": "Пожалуйста, позвоните мне.",
+        "attention": "Пожалуйста, откройте приложение."
       }
     },
     "leaveTypes": {
@@ -1852,6 +1908,13 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "statementTitle": "新的正式声明",
         "publishedBody": "{{title}}",
         "ackBody": "{{title}} - 请确认已阅读。"
+      },
+      "buzz": {
+        "title": "来自 {{name}} 的提醒",
+        "clock_in": "请打卡上班。",
+        "clock_out": "请打卡下班。",
+        "call_me": "请给我回电话。",
+        "attention": "请查看应用。"
       }
     },
     "leaveTypes": {

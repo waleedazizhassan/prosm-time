@@ -250,6 +250,13 @@
       "statementTitle": "Nuevo comunicado oficial",
       "publishedBody": "{{title}}",
       "ackBody": "{{title}} - confirma que lo has leído."
+    },
+    "buzz": {
+      "title": "Aviso de {{name}}",
+      "clock_in": "Por favor, ficha la entrada.",
+      "clock_out": "Por favor, ficha la salida.",
+      "call_me": "Por favor, llámame.",
+      "attention": "Por favor, revisa la app."
     }
   },
   "items": {
@@ -465,5 +472,20 @@
     "banner": "Tu organización está en solo lectura: su licencia terminó. Puedes verlo todo; los cambios están en pausa y no se borra nada.",
     "reopen": "Introducir un código de activación",
     "askOwner": "El propietario de tu organización puede reabrirla."
+  },
+  "buzz": {
+    "action": "Avisar",
+    "title": "Avisar a {{name}}",
+    "hint": "Su teléfono vibrará y sonará.",
+    "reasons": {
+      "clock_in": "Fichar entrada",
+      "clock_out": "Fichar salida",
+      "call_me": "Llámame",
+      "attention": "Revisa la app"
+    },
+    "messageLabel": "Mensaje corto (opcional)",
+    "send": "Enviar aviso",
+    "sent": "Se avisó a {{name}}.",
+    "failed": "No se envió el aviso. Inténtalo de nuevo."
   }
 }

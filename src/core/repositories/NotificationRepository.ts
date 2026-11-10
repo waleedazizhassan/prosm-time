@@ -82,6 +82,18 @@ class NotificationRepository {
     }
   }
 
+  // Owner 2026-11-10: a Buzz - the person's phone vibrates and sounds (owner / manager / supervisor).
+  async sendBuzz(userId: string, reason: BuzzReason, message: string | null): Promise<ServiceResult> {
+    try {
+      const { data, error } = await this.client.rpc("send_prosm_time_buzz", { p_user_id: userId, p_reason: reason, p_message: message });
+      if (error) return createError(error.message);
+      if (data?.success === false) return createError("Unable to send the buzz.");
+      return createSuccess();
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Notification service unavailable.");
+    }
+  }
+
   async markRead(notificationId: string): Promise<ServiceResult> {
     try {
       const { data, error } = await this.client.rpc("mark_prosm_time_notification_read", { p_notification_id: notificationId });
@@ -93,5 +105,8 @@ class NotificationRepository {
     }
   }
 }
+
+export type BuzzReason = "clock_in" | "clock_out" | "call_me" | "attention";
+export const BUZZ_REASONS: BuzzReason[] = ["clock_in", "clock_out", "call_me", "attention"];
 
 export default new NotificationRepository();

@@ -250,6 +250,12 @@ export default function localizeNotification(notification: AppNotification, t: T
       return { title: t("shell:notifications.payslip.sentTitle"), body: t("shell:notifications.payslip.sentBody", { cycle: String(data.cycleTitle ?? "") }) };
     case "payslip_send_failed":
       return { title: t("shell:notifications.payslip.failedTitle"), body: t("shell:notifications.payslip.failedBody", { cycle: String(data.cycleTitle ?? "") }) };
+    // Owner 2026-11-10: a Buzz - from whom, and what for (or their own short message)
+    case "buzz": {
+      const reason = typeof data.reason === "string" && ["clock_in", "clock_out", "call_me", "attention"].includes(data.reason) ? data.reason : "attention";
+      const message = typeof data.message === "string" && data.message.trim() ? data.message.trim() : null;
+      return { title: t("shell:notifications.buzz.title", { name: String(data.fromName ?? "") }), body: message ?? t(`shell:notifications.buzz.${reason}`) };
+    }
     case "announcement_published": {
       const vars = { title: String(data.title ?? notification.body ?? "") };
       return {

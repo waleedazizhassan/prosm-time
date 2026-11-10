@@ -250,6 +250,13 @@
       "statementTitle": "New official statement",
       "publishedBody": "{{title}}",
       "ackBody": "{{title}} - please confirm you have read it."
+    },
+    "buzz": {
+      "title": "Buzz from {{name}}",
+      "clock_in": "Please clock in.",
+      "clock_out": "Please clock out.",
+      "call_me": "Please call me.",
+      "attention": "Please check the app."
     }
   },
   "items": {
@@ -460,5 +467,20 @@
     "banner": "Your organisation is read-only: its licence ended. You can see everything; changes are paused, and nothing is deleted.",
     "reopen": "Enter an activation code",
     "askOwner": "Your organisation owner can reopen it."
+  },
+  "buzz": {
+    "action": "Buzz",
+    "title": "Buzz {{name}}",
+    "hint": "Their phone will vibrate and ring.",
+    "reasons": {
+      "clock_in": "Clock in",
+      "clock_out": "Clock out",
+      "call_me": "Call me",
+      "attention": "Check the app"
+    },
+    "messageLabel": "Short message (optional)",
+    "send": "Send buzz",
+    "sent": "{{name}} was buzzed.",
+    "failed": "The buzz was not sent. Try again."
   }
 }

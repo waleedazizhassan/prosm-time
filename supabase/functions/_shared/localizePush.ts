@@ -205,6 +205,14 @@ export function localizePush(type: string, data: Data, language: string, fallbac
     case "payslip_send_failed":
       result = pair("payslip.failedTitle", "payslip.failedBody", { cycle: data.cycleTitle ?? "" });
       break;
+    // Owner 2026-11-10: a Buzz
+    case "buzz": {
+      const reason = ["clock_in", "clock_out", "call_me", "attention"].includes(String(data.reason)) ? String(data.reason) : "attention";
+      const title = t("buzz.title", { name: data.fromName ?? "" });
+      const body = str(data.message)?.trim() || t(`buzz.${reason}`);
+      if (title && body) result = { title, body };
+      break;
+    }
     case "announcement_published":
       result = pair(data.kind === "statement" ? "announcement.statementTitle" : "announcement.publishedTitle", data.requiresAck ? "announcement.ackBody" : "announcement.publishedBody", { title: data.title ?? "" });
       break;

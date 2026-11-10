@@ -5,6 +5,9 @@ import { describe, expect, it, vi } from "vitest";
 import type { DashboardPersonFigures, ManagerDashboard } from "../../../core/repositories/DashboardRepository";
 import KpiSheet from "./KpiSheet";
 
+// the Buzz button needs the signed-in person; not part of these tests
+vi.mock("../../../components/common/BuzzButton", () => ({ default: () => null }));
+
 const person = (over: Partial<DashboardPersonFigures>): DashboardPersonFigures => ({
   userId: "u",
   name: "Someone",

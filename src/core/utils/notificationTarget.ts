@@ -62,6 +62,9 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
     case "payslip_requested":
     case "payslip_send_failed":
       return "/payroll/requests";
+    // Owner 2026-11-10: a Buzz opens the clock-in screen (where "clock in / out" is done)
+    case "buzz":
+      return "/clock-in";
     // 2026-11-09 Media Center: the employee's announcements
     case "announcement_published":
       return "/announcements";

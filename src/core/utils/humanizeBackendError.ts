@@ -336,6 +336,9 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "PLAN MANAGER LIMIT REACHED": "planManagerLimit",
   "PLAN EXTERNAL WORKER LIMIT REACHED": "planExternalWorkerLimit",
   LOCATION_REQUIRED: "locationRequired",
+  // 2026-11-10: Buzz
+  "BUZZ TOO SOON": "buzzTooSoon",
+  "YOU CANNOT BUZZ YOURSELF": "buzzSelf",
   "A REASON IS REQUIRED TO REJECT": "rejectReasonRequired",
   "PLAN EMPLOYEE LIMIT REACHED": "planEmployeeLimit",
   "TOO MANY ATTEMPTS": "tooManyCodeAttempts",

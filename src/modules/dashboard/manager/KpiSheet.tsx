@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
+import BuzzButton from "../../../components/common/BuzzButton";
 import Avatar from "../../../components/common/Avatar";
 import Button from "../../../components/common/Button";
 import EmptyState from "../../../components/common/EmptyState";
@@ -35,11 +36,13 @@ export default function KpiSheet({
   if (!kind || !data) return null;
   const people = data.byPerson ?? [];
 
-  const person = (name: string, avatarUrl: string | null) => (
+  // owner 2026-11-10: a Buzz beside each name (owner, managers, supervisors)
+  const person = (name: string, avatarUrl: string | null, userId?: string) => (
     <td style={{ fontWeight: 600 }}>
       <span className={styles.personCell}>
         <Avatar name={name} url={avatarUrl} size="sm" />
         {name}
+        {userId ? <BuzzButton userId={userId} name={name} compact /> : null}
       </span>
     </td>
   );
@@ -65,7 +68,7 @@ export default function KpiSheet({
         <tbody>
           {shown.map((row) => (
             <tr key={row.userId}>
-              {person(row.name, row.avatarUrl)}
+              {person(row.name, row.avatarUrl, row.userId)}
               <td data-label={col("site")}>{row.siteName ?? "—"}</td>
               <td data-label={col("shiftEnded")}>{time(row.endedAt)}</td>
               <td data-label={col("overdueBy")}>
@@ -91,7 +94,7 @@ export default function KpiSheet({
         <tbody>
           {data.presentNow.map((row) => (
             <tr key={row.userId}>
-              {person(row.name, row.avatarUrl)}
+              {person(row.name, row.avatarUrl, row.userId)}
               <td data-label={col("site")}>{row.siteName ?? "—"}</td>
               <td data-label={col("since")}>{time(row.clockInAt)}</td>
               <td data-label={col("status")}>
@@ -111,7 +114,7 @@ export default function KpiSheet({
         <tbody>
           {shown.map((row) => (
             <tr key={row.userId}>
-              {person(row.name, row.avatarUrl)}
+              {person(row.name, row.avatarUrl, row.userId)}
               <td data-label={col("days")}>{row.days}</td>
               <td data-label={col("worked")}>{hours(row.workedMinutes)}</td>
               <td data-label={col("overtime")}>{hours(row.overtimeMinutes)}</td>
@@ -131,7 +134,7 @@ export default function KpiSheet({
         <tbody>
           {shown.map((row) => (
             <tr key={row.userId}>
-              {person(row.name, row.avatarUrl)}
+              {person(row.name, row.avatarUrl, row.userId)}
               <td data-label={col("today")}>
                 {Number(row.lateTodayMinutes ?? 0) > 0 ? (
                   <span className={styles.statusWarn}>{t("manager.sheet.lateBy", { minutes: Math.round(Number(row.lateTodayMinutes)), time: row.firstInToday ? time(row.firstInToday) : "—" })}</span>
@@ -155,7 +158,7 @@ export default function KpiSheet({
         <tbody>
           {shown.map((row) => (
             <tr key={row.userId}>
-              {person(row.name, row.avatarUrl)}
+              {person(row.name, row.avatarUrl, row.userId)}
               <td data-label={col("overtime")}>{hours(row.overtimeMinutes)}</td>
               <td data-label={col("overtimeWaiting")}>{Number(row.overtimePendingMinutes) > 0 ? <span className={styles.statusWarn}>{hours(row.overtimePendingMinutes)}</span> : "—"}</td>
             </tr>

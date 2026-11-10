@@ -296,7 +296,9 @@
     "ownerAuthorityNone": "Cette personne n'a pas l'autorité du propriétaire.",
     "ownerAuthorityInactive": "Cette personne n'est pas active.",
     "planManagerLimit": "L'offre Starter comprend un responsable. Passez à une offre supérieure pour en ajouter.",
-    "planExternalWorkerLimit": "Vous avez atteint le nombre de travailleurs externes autorisé par votre licence. Contactez PROSM."
+    "planExternalWorkerLimit": "Vous avez atteint le nombre de travailleurs externes autorisé par votre licence. Contactez PROSM.",
+    "buzzTooSoon": "Attends 30 secondes avant de buzzer à nouveau la même personne.",
+    "buzzSelf": "Tu ne peux pas te buzzer toi-même."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

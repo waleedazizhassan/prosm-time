@@ -296,7 +296,9 @@
     "ownerAuthorityNone": "此人没有所有者权限。",
     "ownerAuthorityInactive": "此人未启用。",
     "planManagerLimit": "Starter 套餐只有一名经理。升级套餐可添加更多经理或主管。",
-    "planExternalWorkerLimit": "已达到许可证允许的外部人员数量。请联系 PROSM。"
+    "planExternalWorkerLimit": "已达到许可证允许的外部人员数量。请联系 PROSM。",
+    "buzzTooSoon": "请等待 30 秒后再提醒同一个人。",
+    "buzzSelf": "不能提醒自己。"
   },
   "pageLoad": {
     "title": "此页面需要网络连接",

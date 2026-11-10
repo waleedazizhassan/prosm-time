@@ -8,10 +8,13 @@ import { useAuth } from "../../core/context/AuthContext";
 import NotificationRepository, { type AppNotification } from "../../core/repositories/NotificationRepository";
 import { formatDateTime } from "../../core/utils/formatDate";
 import playNotificationSound from "../../core/utils/playNotificationSound";
+import playBuzzSound, { vibrateBuzz } from "../../core/utils/playBuzzSound";
 import playSirenSound from "../../core/utils/playSirenSound";
 import localizeNotification from "../../core/utils/localizeNotification";
 import notificationTarget from "../../core/utils/notificationTarget";
 import SosAlertOverlay from "./SosAlertOverlay";
+import { NOTIFICATION_ARRIVED_EVENT } from "../../core/services/PushService";
+import { requireSupabaseClient } from "../../core/api/supabaseClient";
 import styles from "./NotificationBell.module.css";
 
 const SOS_SIREN_SECONDS = 30;
@@ -128,7 +131,13 @@ export default function NotificationBell() {
         // top of the screen - above everything, the full-screen map too
         const fresh = newOnes.filter((notification) => notification.type !== "sos_alert" && notification.readAt === null);
         if (fresh.length > 0) {
-          playNotificationSound();
+          // a Buzz vibrates and plays the buzzer; anything else plays the chime
+          if (fresh.some((notification) => notification.type === "buzz")) {
+            vibrateBuzz();
+            playBuzzSound();
+          } else {
+            playNotificationSound();
+          }
           setToasts((current) => [...fresh.slice(0, 3), ...current].slice(0, 3));
           for (const notification of fresh.slice(0, 3)) {
             window.setTimeout(() => setToasts((current) => current.filter((item) => item.id !== notification.id)), TOAST_MS);
@@ -144,6 +153,28 @@ export default function NotificationBell() {
     const interval = setInterval(load, 60000);
     return () => clearInterval(interval);
   }, [load]);
+
+  // Owner 2026-11-10 (Buzz): a new notification shows at once, not at the next minute - from the
+  // database's live feed of this person's notifications, and from a push arriving while the app is open
+  const profileId = profile?.id;
+  useEffect(() => {
+    if (!profileId) return undefined;
+    const onArrived = () => load();
+    window.addEventListener(NOTIFICATION_ARRIVED_EVENT, onArrived);
+    let channel: ReturnType<ReturnType<typeof requireSupabaseClient>["channel"]> | null = null;
+    try {
+      channel = requireSupabaseClient()
+        .channel(`notifications-${profileId}`)
+        .on("postgres_changes", { event: "INSERT", schema: "public", table: "notifications", filter: `user_id=eq.${profileId}` }, onArrived)
+        .subscribe();
+    } catch {
+      // no live feed: the minute check still runs
+    }
+    return () => {
+      window.removeEventListener(NOTIFICATION_ARRIVED_EVENT, onArrived);
+      if (channel) void channel.unsubscribe();
+    };
+  }, [profileId, load]);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -228,7 +259,7 @@ export default function NotificationBell() {
               {toasts.map((notification) => {
                 const localized = localizeNotification(notification, t);
                 return (
-                  <button key={notification.id} type="button" className={styles.toast}
+                  <button key={notification.id} type="button" className={notification.type === "buzz" ? `${styles.toast} ${styles.toastBuzz}` : styles.toast}
                     onClick={() => { setToasts((current) => current.filter((item) => item.id !== notification.id)); handleSelect(notification); }}>
                     <span className={styles.toastIcon} aria-hidden="true"><Bell size={16} /></span>
                     <span className={styles.toastText}>

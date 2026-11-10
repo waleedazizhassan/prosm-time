@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import BuzzButton from "../../../components/common/BuzzButton";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { AlarmClock, AlertTriangle, ArrowDown, ArrowUp, CalendarRange, Clock3, FileDown, GripVertical, HardHat, LogOut, Palmtree, Settings2, Timer, TrendingDown, TrendingUp, Users, UserX, Wallet, type LucideIcon } from "lucide-react";
@@ -294,6 +295,7 @@ export default function ManagerDashboard() {
                         </span>
                       </span>
                       <span className={person.status === "in" ? styles.statusOk : person.status === "break" ? styles.statusWarn : styles.statusBad}>{t(`manager.present.status.${person.status}`)}</span>
+                      <BuzzButton userId={person.userId} name={person.name} compact />
                     </li>
                   ))}
                 </ul>
@@ -673,6 +675,7 @@ export default function ManagerDashboard() {
                     <span className={styles.personCell}>
                       <Avatar name={row.name} url={row.avatarUrl} size="sm" />
                       {row.name}
+                      {row.state === "absent" ? <BuzzButton userId={row.userId} name={row.name} compact /> : null}
                     </span>
                   </td>
                   <td data-label={t("manager.absence.columns.site")}>{row.siteName ?? "—"}</td>

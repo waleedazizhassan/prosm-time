@@ -182,3 +182,21 @@
 @media (prefers-reduced-motion: reduce) {
   .toast { animation: none; }
 }
+
+/* Owner 2026-11-10: a Buzz shakes in, amber */
+.toastBuzz {
+  border-color: #f59e0b;
+  animation: toastIn 0.28s ease-out, buzzShake 0.5s ease-in-out 0.3s 2, toastOut 0.3s ease-in 4.7s forwards;
+}
+
+.toastBuzz .toastIcon {
+  background: linear-gradient(135deg, #f59e0b, #dc2626);
+}
+
+@keyframes buzzShake {
+  0%, 100% { transform: none; }
+  20% { transform: translateX(-6px) rotate(-1deg); }
+  40% { transform: translateX(6px) rotate(1deg); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}

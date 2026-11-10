@@ -296,7 +296,9 @@
     "ownerAuthorityNone": "This person does not have the owner's authority.",
     "ownerAuthorityInactive": "This person is not active.",
     "planManagerLimit": "The Starter plan has one manager. Upgrade the plan for more managers or supervisors.",
-    "planExternalWorkerLimit": "You have reached the number of external workers your licence allows. Contact PROSM to raise it."
+    "planExternalWorkerLimit": "You have reached the number of external workers your licence allows. Contact PROSM to raise it.",
+    "buzzTooSoon": "Wait 30 seconds before buzzing the same person again.",
+    "buzzSelf": "You cannot buzz yourself."
   },
   "pageLoad": {
     "title": "This page needs a connection",
