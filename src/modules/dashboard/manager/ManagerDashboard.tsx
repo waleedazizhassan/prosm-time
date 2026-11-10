@@ -516,7 +516,8 @@ export default function ManagerDashboard() {
 
       <div className={styles.filters}>
         <div className={styles.segmented} role="group" aria-label={t("manager.scopeLabel")}>
-          {((isOwner ? ["org", "mine", "me"] : ["mine", "me"]) as DashboardScope[]).map((value) => (
+          {/* owner 2026-11-10: "my sites" means nothing to the owner (every site is theirs - it showed zeros) */}
+          {((isOwner ? ["org", "me"] : ["mine", "me"]) as DashboardScope[]).map((value) => (
             <button key={value} type="button" aria-pressed={scope === value} onClick={() => setScope(value)}>
               {t(`manager.scope.${value}`)}
             </button>
