@@ -294,7 +294,9 @@
     "ownerAuthorityOwnerOnly": "Nur der Inhaber erteilt oder entzieht die Befugnis des Inhabers.",
     "ownerAuthorityAlready": "Diese Person hat die Befugnis des Inhabers bereits.",
     "ownerAuthorityNone": "Diese Person hat die Befugnis des Inhabers nicht.",
-    "ownerAuthorityInactive": "Diese Person ist nicht aktiv."
+    "ownerAuthorityInactive": "Diese Person ist nicht aktiv.",
+    "planManagerLimit": "Der Starter-Plan hat einen Manager. Für weitere Manager oder Vorgesetzte den Plan erweitern.",
+    "planExternalWorkerLimit": "Die laut Lizenz erlaubte Zahl externer Arbeitskräfte ist erreicht. Wenden Sie sich an PROSM."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

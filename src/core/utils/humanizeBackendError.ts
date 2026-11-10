@@ -332,6 +332,9 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   // v2.3.55: the licence's user limit, and licence details being the Owner's
   "LICENSED USER LIMIT REACHED": "licensedUserLimit",
   "PLAN SITE LIMIT REACHED": "planSiteLimit",
+  // 2026-11-10: Starter has one manager; external workers follow the licence
+  "PLAN MANAGER LIMIT REACHED": "planManagerLimit",
+  "PLAN EXTERNAL WORKER LIMIT REACHED": "planExternalWorkerLimit",
   LOCATION_REQUIRED: "locationRequired",
   "A REASON IS REQUIRED TO REJECT": "rejectReasonRequired",
   "PLAN EMPLOYEE LIMIT REACHED": "planEmployeeLimit",

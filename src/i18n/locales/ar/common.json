@@ -294,7 +294,9 @@
     "ownerAuthorityOwnerOnly": "المالك بس هو اللي يمنح أو يسحب صلاحيات المالك.",
     "ownerAuthorityAlready": "الشخص ده معاه صلاحيات المالك بالفعل.",
     "ownerAuthorityNone": "الشخص ده مش معاه صلاحيات المالك.",
-    "ownerAuthorityInactive": "الشخص ده مش مفعّل."
+    "ownerAuthorityInactive": "الشخص ده مش مفعّل.",
+    "planManagerLimit": "باقة Starter فيها مدير واحد فقط. للمزيد من المديرين أو المشرفين رقِّ الباقة.",
+    "planExternalWorkerLimit": "وصلت لعدد العمالة الخارجية المسموح في ترخيصك. لزيادته تواصل مع PROSM."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

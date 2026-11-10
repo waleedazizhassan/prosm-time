@@ -294,7 +294,9 @@
     "ownerAuthorityOwnerOnly": "Só o proprietário concede ou retira a autoridade do proprietário.",
     "ownerAuthorityAlready": "Esta pessoa já tem a autoridade do proprietário.",
     "ownerAuthorityNone": "Esta pessoa não tem a autoridade do proprietário.",
-    "ownerAuthorityInactive": "Esta pessoa não está ativa."
+    "ownerAuthorityInactive": "Esta pessoa não está ativa.",
+    "planManagerLimit": "O plano Starter tem um gestor. Faça upgrade para ter mais gestores ou supervisores.",
+    "planExternalWorkerLimit": "Você atingiu o número de trabalhadores externos permitido pela licença. Contate a PROSM."
   },
   "pageLoad": {
     "title": "Esta página precisa de conexão",

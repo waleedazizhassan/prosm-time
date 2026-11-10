@@ -113,7 +113,7 @@ const ALL_NAV_ITEMS: NavItem[] = [
   { id: "emergencyLog", planFeature: "sos", labelKey: "items.emergencyLog", path: "/emergency-log", icon: Siren, requiredPermission: "attendance.view", section: "attendance" },
   { id: "people", labelKey: "items.people", path: "/people", icon: Users, requiredPermission: "employees.view", section: "people" },
   // 2026-11-09 Media Center: announcements and official statements - everyone reads what was addressed to them.
-  { id: "announcements", labelKey: "items.announcements", path: "/announcements", icon: Megaphone, requiredPermission: null, section: "people" },
+  { id: "announcements", planFeature: "announcements", labelKey: "items.announcements", path: "/announcements", icon: Megaphone, requiredPermission: null, section: "people" },
   { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage", section: "sites" },
   // Owner 2026-10-18/19: external workers for the whole organisation (app-generated kiosk numbers).
   // Owner 2026-11-09: one item "External labour" - the workers, and their pay inside it
@@ -154,7 +154,7 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // inside an unrelated page. Owner-only, matching that setting's own
   // existing RPC-level gate.
   // Owner 2026-10-20: every setting lives here - each site's rules too, so managers who manage sites see it.
-  { id: "grantPermissions", labelKey: "items.grantPermissions", path: "/permissions", icon: KeyRound, requiredPermission: null, ownerOnly: true, realOwnerOnly: true, section: "settings" },
+  { id: "grantPermissions", planFeature: "delegation", labelKey: "items.grantPermissions", path: "/permissions", icon: KeyRound, requiredPermission: null, ownerOnly: true, realOwnerOnly: true, section: "settings" },
   { id: "settings", labelKey: "items.settings", path: "/settings", icon: Settings, requiredPermission: "sites.manage", section: "settings" },
   // § user-directed 2026-09-09 - "API [keys] should appear on its own
   // in the sidebar, not inside Settings." Same Owner-only gate as

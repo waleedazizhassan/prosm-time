@@ -14,7 +14,12 @@ import { useAuth } from "../../core/context/AuthContext";
 import usePlanFeatures, { resetPlanFeatures, type PlanFeature } from "../../core/hooks/usePlanFeatures";
 
 // Owner 2026-11-03: what the plan includes, in the order of the plans sheet.
-const FEATURE_ROWS: PlanFeature[] = ["on_behalf", "kiosk", "leave", "allowances", "export", "payroll_export", "clock_rules", "scheduling", "roles_manager", "audit", "sos", "roles_all", "clock_suggestion", "labor_cost", "daily_summary", "manager_alerts"];
+// 2026-11-10: the four plans, in their order (Business, then Pro, then Enterprise additions).
+const FEATURE_ROWS: PlanFeature[] = [
+  "sos", "announcements", "departments", "leave", "scheduling", "allowances", "kiosk", "on_behalf", "clock_rules", "export", "payroll_export", "roles_manager",
+  "payroll", "labor_cost", "audit", "roles_all", "clock_suggestion", "daily_summary", "manager_alerts",
+  "integrations", "delegation", "retention",
+];
 
 // The Owner's plan: which one, what is used, when it ends, and a code PROSM
 // issued. In the Google Play build too: it shows state and takes no payment.
@@ -81,6 +86,18 @@ export default function PlanSettingsCard() {
           <dt>{t("plan.sites")}</dt>
           <dd style={{ margin: 0 }}>{usage(status.sites, status.maxSites)}</dd>
         </div>
+        {status.externalWorkers !== undefined && (status.externalWorkers > 0 || status.maxExternalWorkers != null) ? (
+          <div>
+            <dt>{t("plan.externalWorkers")}</dt>
+            <dd style={{ margin: 0 }}>{usage(status.externalWorkers, status.maxExternalWorkers ?? null)}</dd>
+          </div>
+        ) : null}
+        {status.billedUsers !== undefined ? (
+          <div>
+            <dt title={t("plan.billedHint")}>{t("plan.billedUsers")}</dt>
+            <dd style={{ margin: 0 }}>{status.billedUsers}</dd>
+          </div>
+        ) : null}
         <div>
           <dt>{t("plan.ends")}</dt>
           <dd style={{ margin: 0 }}>{date}</dd>
