@@ -227,7 +227,21 @@
     "moreOptions": "Más opciones (moneda, fechas, notas)",
     "badNumber": "Número no válido en: {{field}}",
     "search": "Buscar por nombre o código",
-    "tapToEdit": "Toque a cualquier persona para añadir o editar todo su salario."
+    "tapToEdit": "Toque a cualquier persona para añadir o editar todo su salario.",
+    "earningsTitle": "Devengos",
+    "deductionsTitle": "Deducciones",
+    "earningsEmpty": "Aún no hay devengos.",
+    "deductionsEmpty": "Aún no hay deducciones.",
+    "earningsAdd": "Añadir devengo",
+    "deductionsAdd": "Añadir deducción",
+    "newItemName": "Nombre del concepto",
+    "newItemAmount": "Importe",
+    "newItemAdd": "Añadir",
+    "basicTag": "básico",
+    "netBeforeStatutory": "Neto antes de seguros e impuestos",
+    "savedNotice": "Salario de {{name}} guardado ({{count}} concepto(s)).",
+    "savedNoticeFile": "Ficha de {{name}} guardada.",
+    "savedShort": "Guardado."
   },
   "installments": {
     "title": "Cuotas y anticipos",
@@ -402,7 +416,8 @@
     "fileFailed": "No se pudo crear el archivo. Inténtelo de nuevo.",
     "statutoryRate": "El tipo debe estar entre 0 y 100.",
     "statutoryBrackets": "Los tramos deben ir en orden creciente y el último sin límite.",
-    "statutoryWage": "El máximo no puede ser inferior al mínimo."
+    "statutoryWage": "El máximo no puede ser inferior al mínimo.",
+    "chooseItem": "Elija primero el concepto."
   },
   "exports": {
     "hint": "Los recibos de un ciclo aprobado o cerrado se preparan en el servidor en un ZIP, cada uno con su número. Puede salir de la página; el archivo queda disponible 7 días.",

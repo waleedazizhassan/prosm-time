@@ -24,6 +24,7 @@ import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
 import LoadingState from "../../components/common/LoadingState";
 import { STATUS_BADGE, money, parseAmount, parseCsv, payrollError, saveXlsx } from "./payrollUi";
+import usePayrollDigits from "./usePayrollDigits";
 import { buildPayslipsPdf, buildReportXlsx, buildSummaryPdf } from "./payrollDocuments";
 
 type Action = "submit" | "return" | "approve" | "lock" | "reopen" | "cancel";
@@ -35,6 +36,7 @@ const NEEDS_REASON: Action[] = ["return", "reopen", "cancel"];
 export default function PayrollCyclePage() {
   const { cycleId = "" } = useParams();
   const { t, i18n } = useTranslation("payroll");
+  usePayrollDigits();
   const navigate = useNavigate();
   const isRtl = i18n.dir() === "rtl";
   const [detail, setDetail] = useState<CycleDetail | null>(null);
@@ -125,9 +127,11 @@ export default function PayrollCyclePage() {
   const run = async (key: string, task: () => Promise<{ error: string | null }>) => {
     setBusy(key);
     setError("");
+    setNotice("");
     const result = await task();
     setBusy("");
     if (result.error) setError(payrollError(result.error, t));
+    else setNotice(t("profiles.savedShort"));
     await load();
     return !result.error;
   };
@@ -243,6 +247,7 @@ export default function PayrollCyclePage() {
       </div>
       {cycle.reopen_reason && cycle.status === "reopened" ? <HintText small>{t("cycle.reopenedBecause", { reason: cycle.reopen_reason })}</HintText> : null}
       <ErrorText>{error}</ErrorText>
+      {notice ? <p role="status" style={{ margin: "var(--space-2) 0", padding: "var(--space-2) var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--status-success-bg)", color: "var(--status-success-text)", fontWeight: 600 }}>✓ {notice}</p> : null}
 
       {checks && (checks.errors.length > 0 || checks.warnings.length > 0) && cycle.status !== "cancelled" ? (
         <Card title={t("checks.title")}>
@@ -280,7 +285,6 @@ export default function PayrollCyclePage() {
             </>
           ) : null}
         </div>
-        {notice ? <HintText small>{notice}</HintText> : null}
         <Table columns={canBulk ? [{ key: "choose", header: "", render: (e: CycleEmployee) => (
             <input type="checkbox" aria-label={e.full_name} checked={chosen.includes(e.id)} onClick={(event) => event.stopPropagation()} onChange={() => toggle(e.id)} />
           ) }, ...columns] : columns} data={shown} getRowId={(e) => e.id} emptyMessage={t("cycle.empty")} onRowClick={(e) => setOpen(e)} />
@@ -434,6 +438,7 @@ export default function PayrollCyclePage() {
       <Modal isOpen={Boolean(line)} onClose={() => setLine(null)} title={line?.id ? t("lines.edit") : t("lines.add")}
         footer={<Button loading={busy === "line"} onClick={async () => {
           if (!line || !open) return;
+          if (!line.id && !line.componentId) { setError(t("errors.chooseItem")); return; }
           const amount = amountOf(line.amount);
           if (amount === null) return;
           const ok = await run("line", () => PayrollCycleRepository.saveLine(open.id, line.id, line.id ? null : line.componentId, amount, line.notes.trim() || null, line.version));
@@ -454,6 +459,7 @@ export default function PayrollCyclePage() {
       <Modal isOpen={Boolean(accepting)} onClose={() => setAccepting(null)} title={t("suggestions.review")}
         footer={<Button loading={busy === "accept"} onClick={async () => {
           if (!accepting) return;
+          if (!accepting.componentId) { setError(t("errors.chooseItem")); return; }
           const amount = amountOf(accepting.amount);
           if (amount === null) return;
           const ok = await run("accept", () => PayrollCycleRepository.saveLine(accepting.s.cycleEmployeeId, null, accepting.componentId, amount, null, null, "attendance_suggestion",

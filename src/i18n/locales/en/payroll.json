@@ -227,7 +227,21 @@
     "moreOptions": "More options (currency, dates, notes)",
     "badNumber": "Invalid number in: {{field}}",
     "search": "Search by name or code",
-    "tapToEdit": "Tap anyone to add or edit their whole salary."
+    "tapToEdit": "Tap anyone to add or edit their whole salary.",
+    "earningsTitle": "Earnings",
+    "deductionsTitle": "Deductions",
+    "earningsEmpty": "No earnings yet.",
+    "deductionsEmpty": "No deductions yet.",
+    "earningsAdd": "Add an earning",
+    "deductionsAdd": "Add a deduction",
+    "newItemName": "Item name",
+    "newItemAmount": "Amount",
+    "newItemAdd": "Add",
+    "basicTag": "basic",
+    "netBeforeStatutory": "Net before insurance and tax",
+    "savedNotice": "{{name}}'s salary saved ({{count}} item(s)).",
+    "savedNoticeFile": "{{name}}'s file saved.",
+    "savedShort": "Saved."
   },
   "installments": {
     "title": "Installments and advances",
@@ -402,7 +416,8 @@
     "fileFailed": "The file could not be made. Try again.",
     "statutoryRate": "A rate must be between 0 and 100.",
     "statutoryBrackets": "Brackets must rise in order, and the last has no upper limit.",
-    "statutoryWage": "The maximum insurable wage must not be below the minimum."
+    "statutoryWage": "The maximum insurable wage must not be below the minimum.",
+    "chooseItem": "Choose the item first."
   },
   "exports": {
     "hint": "Payslips of an approved or locked cycle are prepared on the server as one ZIP, each with its own serial number. You can leave the page; the file stays available for 7 days.",

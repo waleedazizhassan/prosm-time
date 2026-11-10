@@ -15,6 +15,8 @@ import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
 import { money, parseAmount, payrollError } from "./payrollUi";
+import SalaryItemsSection from "./SalaryItemsSection";
+import usePayrollDigits from "./usePayrollDigits";
 
 const today = () => new Date().toISOString().slice(0, 10);
 const firstOfMonth = () => {
@@ -29,6 +31,7 @@ export default function PayrollProfilesPage() {
   const { t, i18n } = useTranslation("payroll");
   const navigate = useNavigate();
   const isRtl = i18n.dir() === "rtl";
+  usePayrollDigits();
   const [people, setPeople] = useState<PayrollPerson[] | null>(null);
   const [components, setComponents] = useState<PayrollComponent[]>([]);
   const [plans, setPlans] = useState<InstallmentPlan[]>([]);
@@ -42,10 +45,17 @@ export default function PayrollProfilesPage() {
   const [saveError, setSaveError] = useState("");
   const [saved, setSaved] = useState(false);
   const [search, setSearch] = useState("");
+  // Owner 2026-11-10: say plainly that it was saved (on the page too, after the window closes)
+  const [notice, setNotice] = useState("");
+  const [addingItem, setAddingItem] = useState("");
   const [plan, setPlan] = useState({ userId: "", name: "", total: "", count: "", start: today(), installment: "" });
   const [change, setChange] = useState<{ plan: InstallmentPlan; action: "settle" | "cancel" | "reschedule"; reason: string; installment: string } | null>(null);
+  const [changeError, setChangeError] = useState("");
 
   const fixed = useMemo(() => components.filter((c) => c.is_active && c.source === "fixed"), [components]);
+  // Owner 2026-11-10: the salary card shows earnings and deductions together - basic first.
+  const earningItems = useMemo(() => fixed.filter((c) => c.category === "earning" || c.category === "allowance").sort((a, b) => Number(b.is_basic) - Number(a.is_basic) || a.sort_order - b.sort_order), [fixed]);
+  const deductionItems = useMemo(() => fixed.filter((c) => c.category === "deduction").sort((a, b) => a.sort_order - b.sort_order), [fixed]);
   const label = (c: { name_ar: string; name_en: string | null }) => (isRtl ? c.name_ar : c.name_en || c.name_ar);
 
   const load = useCallback(async () => {
@@ -99,8 +109,8 @@ export default function PayrollProfilesPage() {
       const before = initial[c.id] ?? { amount: "", percent: "" };
       const raw = c.calc_type === "percent" ? now.percent : now.amount;
       const was = c.calc_type === "percent" ? before.percent : before.amount;
-      if (raw.trim() === was.trim()) continue;
       const parsed = parseAmount(raw);
+      if (raw.trim() === was.trim() || (parsed !== null && !Number.isNaN(parsed) && parsed === parseAmount(was))) continue;
       if (Number.isNaN(parsed)) {
         setSaveError(t("profiles.badNumber", { field: label(c) }));
         return;
@@ -131,14 +141,43 @@ export default function PayrollProfilesPage() {
     setSaved(true);
     await load();
     setInitial(Object.fromEntries(fixed.map((c) => [c.id, { amount: values[c.id]?.amount ?? "", percent: values[c.id]?.percent ?? "" }])));
+    setNotice(changes.length > 0 ? t("profiles.savedNotice", { name: editing.fullName, count: changes.length }) : t("profiles.savedNoticeFile", { name: editing.fullName }));
+    window.setTimeout(() => setEditing(null), 900);
+  };
+
+  // A new fixed item created from the card itself, already on the right side (earning or deduction).
+  const addItem = async (kind: "earnings" | "deductions", name: string, amount: string) => {
+    const parsed = parseAmount(amount);
+    if (Number.isNaN(parsed)) {
+      setSaveError(t("profiles.badNumber", { field: name }));
+      return false;
+    }
+    setAddingItem(kind);
+    setSaveError("");
+    const result = await PayrollCycleRepository.saveComponent(null, {
+      name_ar: name, name_en: name, category: kind === "earnings" ? "earning" : "deduction", source: "fixed", calc_type: "amount", include_in_net: true,
+    });
+    setAddingItem("");
+    if (result.error || !result.data?.id) {
+      setSaveError(payrollError(result.error, t));
+      return false;
+    }
+    const id = result.data.id;
+    const comps = await PayrollCycleRepository.listComponents();
+    setComponents(comps.data ?? []);
+    setValues((all) => ({ ...all, [id]: { amount: parsed === null ? "" : String(parsed), percent: "", from: valuesFrom } }));
+    setInitial((all) => ({ ...all, [id]: { amount: "", percent: "" } }));
+    return true;
   };
 
   const act = async (key: string, task: () => Promise<{ error: string | null }>) => {
     setBusy(key);
     setError("");
+    setNotice("");
     const result = await task();
     setBusy("");
     if (result.error) setError(payrollError(result.error, t));
+    else setNotice(t("profiles.savedShort"));
     await load();
     return !result.error;
   };
@@ -172,7 +211,7 @@ export default function PayrollProfilesPage() {
     <PageShell title={t("nav.profiles")} subtitle={t("profiles.hint")} wide>
       <Button variant="ghost" size="sm" onClick={() => navigate("/payroll")}>{t("nav.back")}</Button>
       <ErrorText>{error}</ErrorText>
-      {fixed.length === 0 ? <HintText>{t("profiles.noFixedComponents")}</HintText> : null}
+      {notice ? <p role="status" style={{ margin: "var(--space-2) 0", padding: "var(--space-2) var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--status-success-bg)", color: "var(--status-success-text)", fontWeight: 600 }}>✓ {notice}</p> : null}
       <Card title={t("profiles.title")}>
         <div style={{ maxWidth: 360, marginBottom: "var(--space-2)" }}>
           <Input label={t("profiles.search")} name="profilesSearch" value={search} onChange={(event) => setSearch(event.target.value)} />
@@ -207,8 +246,8 @@ export default function PayrollProfilesPage() {
         footer={<Button fullWidth loading={busy === "save-all"} onClick={() => void saveAll()}>{t("profiles.saveAll")}</Button>}>
         {editing ? (
           <>
-            {saveError ? <ErrorText>{saveError}</ErrorText> : null}
-            {saved ? <p role="status" style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)", marginTop: 0 }}>{t("profiles.savedAll")}</p> : null}
+            {saveError ? <div ref={(el) => el?.scrollIntoView({ block: "nearest" })}><ErrorText>{saveError}</ErrorText></div> : null}
+            {saved ? <p role="status" style={{ margin: "0 0 var(--space-2)", padding: "var(--space-2) var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--status-success-bg)", color: "var(--status-success-text)", fontWeight: 600 }}>✓ {t("profiles.savedAll")}</p> : null}
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(10rem, 1fr))", gap: "var(--space-2)" }}>
               <Input label={t("doc.code")} name="profileCode" value={form.employee_code} onChange={(event) => setForm({ ...form, employee_code: event.target.value })} />
@@ -216,24 +255,25 @@ export default function PayrollProfilesPage() {
                 helperText={t("profiles.applyFromHint")} />
             </div>
 
-            <h4 style={{ margin: "var(--space-3) 0 var(--space-1)" }}>{t("profiles.salaryTitle")}</h4>
-            {fixed.length === 0 ? <HintText small>{t("profiles.noFixedComponents")}</HintText> : null}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(12rem, 1fr))", gap: "var(--space-2)" }}>
-              {fixed.map((c) => {
-                const value = values[c.id] ?? { amount: "", percent: "", from: valuesFrom };
-                const isPercent = c.calc_type === "percent";
-                return (
-                  <Input key={c.id}
-                    label={`${label(c)}${isPercent ? " %" : ""}`}
-                    name={`value-${c.id}`}
-                    inputMode="decimal"
-                    value={isPercent ? value.percent : value.amount}
-                    placeholder={c.applies_to_all && c.default_amount != null ? String(c.default_amount) : ""}
-                    helperText={t(`categories.${c.category}`)}
-                    onChange={(event) => setValues({ ...values, [c.id]: isPercent ? { ...value, percent: event.target.value } : { ...value, amount: event.target.value } })} />
-                );
-              })}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(19rem, 100%), 1fr))", gap: "var(--space-3)", marginTop: "var(--space-3)" }}>
+              <SalaryItemsSection kind="earnings" items={earningItems} values={values} label={label} adding={addingItem === "earnings"}
+                onChange={(id, value) => setValues((all) => ({ ...all, [id]: value }))} onAdd={(name, amount) => addItem("earnings", name, amount)} />
+              <SalaryItemsSection kind="deductions" items={deductionItems} values={values} label={label} adding={addingItem === "deductions"}
+                onChange={(id, value) => setValues((all) => ({ ...all, [id]: value }))} onAdd={(name, amount) => addItem("deductions", name, amount)} />
             </div>
+            {(() => {
+              const sum = (list: PayrollComponent[]) => list.reduce((s, c) => {
+                if (c.calc_type === "percent") return s;
+                const v = parseAmount(values[c.id]?.amount ?? "");
+                return s + (v && !Number.isNaN(v) ? v : 0);
+              }, 0);
+              return (
+                <p style={{ display: "flex", justifyContent: "space-between", margin: "var(--space-3) 0 0", padding: "var(--space-2) var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--brand-gradient-soft, transparent), var(--surface-sunken)", fontWeight: 700 }}>
+                  <span>{t("profiles.netBeforeStatutory")}</span>
+                  <span>{money(sum(earningItems) - sum(deductionItems))} {form.currency || editing.profile?.currency || ""}</span>
+                </p>
+              );
+            })()}
             <HintText small>{t("profiles.salaryHint")}</HintText>
 
             <h4 style={{ margin: "var(--space-3) 0 var(--space-1)" }}>{t("profiles.statutoryTitle")}</h4>
@@ -272,10 +312,15 @@ export default function PayrollProfilesPage() {
       <Modal isOpen={Boolean(change)} onClose={() => setChange(null)} title={change ? t(`installments.${change.action}`) : ""}
         footer={<Button variant={change?.action === "cancel" ? "danger" : "primary"} loading={busy === "change"} onClick={async () => {
           if (!change) return;
-          if (!change.reason.trim()) { setError(t("errors.reasonRequired")); return; }
-          const ok = await act("change", () => PayrollCycleRepository.changeInstallment(change.plan.id, change.action, change.reason.trim(), parseAmount(change.installment), null, change.plan.row_version));
-          if (ok) setChange(null);
+          if (!change.reason.trim()) { setChangeError(t("errors.reasonRequired")); return; }
+          setChangeError("");
+          const result = await PayrollCycleRepository.changeInstallment(change.plan.id, change.action, change.reason.trim(), parseAmount(change.installment), null, change.plan.row_version);
+          if (result.error) { setChangeError(payrollError(result.error, t)); return; }
+          setChange(null);
+          setNotice(t("profiles.savedShort"));
+          await load();
         }}>{change ? t(`installments.${change.action}`) : ""}</Button>}>
+        {changeError ? <ErrorText>{changeError}</ErrorText> : null}
         {change?.action === "reschedule" ? <Input label={t("installments.amount")} name="newInstallment" inputMode="decimal" value={change.installment} onChange={(event) => setChange({ ...change, installment: event.target.value })} /> : null}
         {change ? <Textarea label={t("actions.reason")} name="planReason" value={change.reason} onChange={(event) => setChange({ ...change, reason: event.target.value })} /> : null}
       </Modal>

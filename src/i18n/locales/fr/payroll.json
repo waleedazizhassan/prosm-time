@@ -227,7 +227,21 @@
     "moreOptions": "Plus d'options (devise, dates, notes)",
     "badNumber": "Nombre invalide dans : {{field}}",
     "search": "Rechercher par nom ou code",
-    "tapToEdit": "Touchez une personne pour ajouter ou modifier tout son salaire."
+    "tapToEdit": "Touchez une personne pour ajouter ou modifier tout son salaire.",
+    "earningsTitle": "Gains",
+    "deductionsTitle": "Retenues",
+    "earningsEmpty": "Aucun gain pour l'instant.",
+    "deductionsEmpty": "Aucune retenue pour l'instant.",
+    "earningsAdd": "Ajouter un gain",
+    "deductionsAdd": "Ajouter une retenue",
+    "newItemName": "Nom de l'élément",
+    "newItemAmount": "Montant",
+    "newItemAdd": "Ajouter",
+    "basicTag": "base",
+    "netBeforeStatutory": "Net avant cotisations et impôt",
+    "savedNotice": "Salaire de {{name}} enregistré ({{count}} élément(s)).",
+    "savedNoticeFile": "Fiche de {{name}} enregistrée.",
+    "savedShort": "Enregistré."
   },
   "installments": {
     "title": "Échéances et avances",
@@ -402,7 +416,8 @@
     "fileFailed": "Le fichier n'a pas pu être créé. Réessayez.",
     "statutoryRate": "Un taux doit être entre 0 et 100.",
     "statutoryBrackets": "Les tranches doivent croître et la dernière n'a pas de plafond.",
-    "statutoryWage": "Le maximum ne peut pas être inférieur au minimum."
+    "statutoryWage": "Le maximum ne peut pas être inférieur au minimum.",
+    "chooseItem": "Choisissez d'abord l'élément."
   },
   "exports": {
     "hint": "Les bulletins d'un cycle approuvé ou verrouillé sont préparés sur le serveur dans un ZIP, chacun avec son numéro. Vous pouvez quitter la page ; le fichier reste disponible 7 jours.",

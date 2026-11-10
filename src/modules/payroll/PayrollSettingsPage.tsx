@@ -31,6 +31,9 @@ export default function PayrollSettingsPage() {
   const [components, setComponents] = useState<PayrollComponent[]>([]);
   const [error, setError] = useState("");
   const [saved, setSaved] = useState(false);
+  // Owner 2026-11-10: an item's save is said plainly; its errors show inside its window
+  const [notice, setNotice] = useState("");
+  const [draftError, setDraftError] = useState("");
   const [busy, setBusy] = useState("");
   const [draft, setDraft] = useState<{ id: string | null; value: Draft } | null>(null);
 
@@ -67,12 +70,14 @@ export default function PayrollSettingsPage() {
 
   const saveComponent = async () => {
     if (!draft) return;
-    if (!draft.value.name_ar.trim()) { setError(t("components.nameRequired")); return; }
+    if (!draft.value.name_ar.trim()) { setDraftError(t("components.nameRequired")); return; }
     setBusy("component");
-    setError("");
+    setDraftError("");
+    setNotice("");
     const result = await PayrollCycleRepository.saveComponent(draft.id, draft.value);
     setBusy("");
-    if (result.error) { setError(payrollError(result.error, t)); return; }
+    if (result.error) { setDraftError(payrollError(result.error, t)); return; }
+    setNotice(t("profiles.savedShort"));
     setDraft(null);
     await load();
   };
@@ -83,10 +88,11 @@ export default function PayrollSettingsPage() {
     <PageShell title={t("nav.settings")} wide>
       <Button variant="ghost" size="sm" onClick={() => navigate("/payroll")}>{t("nav.back")}</Button>
       <ErrorText>{error}</ErrorText>
+      {notice ? <p role="status" style={{ margin: "var(--space-2) 0", padding: "var(--space-2) var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--status-success-bg)", color: "var(--status-success-text)", fontWeight: 600 }}>✓ {notice}</p> : null}
 
-      <Card title={t("components.title")} subtitle={t("components.hint")} actions={<Button size="sm" onClick={() => setDraft({ id: null, value: { ...EMPTY } })}>{t("components.add")}</Button>}>
+      <Card title={t("components.title")} subtitle={t("components.hint")} actions={<Button size="sm" onClick={() => { setDraftError(""); setDraft({ id: null, value: { ...EMPTY } }); }}>{t("components.add")}</Button>}>
         <Table columns={columns} data={components} getRowId={(c) => c.id} emptyMessage={t("components.empty")}
-          onRowClick={(c) => setDraft({ id: c.id, value: { ...c, name_en: c.name_en ?? "" } })} />
+          onRowClick={(c) => { setDraftError(""); setDraft({ id: c.id, value: { ...c, name_en: c.name_en ?? "" } }); }} />
       </Card>
 
       <PayrollStatutoryCard />
@@ -125,6 +131,7 @@ export default function PayrollSettingsPage() {
         footer={<Button loading={busy === "component"} onClick={saveComponent}>{t("components.save")}</Button>}>
         {d ? (
           <>
+            {draftError ? <ErrorText>{draftError}</ErrorText> : null}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(11rem, 1fr))", gap: "var(--space-2)" }}>
               <Input label={t("components.nameAr")} name="nameAr" value={d.name_ar} onChange={(event) => setD({ name_ar: event.target.value })} />
               <Input label={t("components.nameEn")} name="nameEn" value={d.name_en ?? ""} onChange={(event) => setD({ name_en: event.target.value })} />

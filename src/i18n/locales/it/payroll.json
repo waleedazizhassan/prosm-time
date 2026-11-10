@@ -227,7 +227,21 @@
     "moreOptions": "Altre opzioni (valuta, date, note)",
     "badNumber": "Numero non valido in: {{field}}",
     "search": "Cerca per nome o codice",
-    "tapToEdit": "Tocca una persona per aggiungere o modificare tutto il suo stipendio."
+    "tapToEdit": "Tocca una persona per aggiungere o modificare tutto il suo stipendio.",
+    "earningsTitle": "Competenze",
+    "deductionsTitle": "Trattenute",
+    "earningsEmpty": "Nessuna competenza.",
+    "deductionsEmpty": "Nessuna trattenuta.",
+    "earningsAdd": "Aggiungi competenza",
+    "deductionsAdd": "Aggiungi trattenuta",
+    "newItemName": "Nome della voce",
+    "newItemAmount": "Importo",
+    "newItemAdd": "Aggiungi",
+    "basicTag": "base",
+    "netBeforeStatutory": "Netto prima di contributi e imposte",
+    "savedNotice": "Stipendio di {{name}} salvato ({{count}} voce/i).",
+    "savedNoticeFile": "Scheda di {{name}} salvata.",
+    "savedShort": "Salvato."
   },
   "installments": {
     "title": "Rate e anticipi",
@@ -402,7 +416,8 @@
     "fileFailed": "Impossibile creare il file. Riprova.",
     "statutoryRate": "L'aliquota deve essere tra 0 e 100.",
     "statutoryBrackets": "Gli scaglioni devono crescere e l'ultimo non ha limite.",
-    "statutoryWage": "Il massimo non può essere inferiore al minimo."
+    "statutoryWage": "Il massimo non può essere inferiore al minimo.",
+    "chooseItem": "Scegli prima la voce."
   },
   "exports": {
     "hint": "I cedolini di un ciclo approvato o bloccato vengono preparati sul server in un unico ZIP, ognuno con il suo numero. Puoi lasciare la pagina; il file resta disponibile 7 giorni.",

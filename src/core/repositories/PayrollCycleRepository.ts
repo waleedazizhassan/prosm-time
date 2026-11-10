@@ -295,8 +295,14 @@ class PayrollCycleRepository {
   }
 
   private async call<T>(fn: string, args: Record<string, unknown> = {}): Promise<Result<T>> {
+    // Owner 2026-11-10 ("invalid input syntax for type uuid"): an id left empty in a form is sent as
+    // no id, so the server answers with what is missing instead of a database error.
+    const clean = Object.fromEntries(Object.entries(args).map(([key, value]) => [
+      key,
+      /(^p_id$|_id$|_ids$)/.test(key) ? (value === "" ? null : Array.isArray(value) ? value.filter((v) => v !== "") : value) : value,
+    ]));
     try {
-      const { data, error } = await this.client.rpc(fn, args);
+      const { data, error } = await this.client.rpc(fn, clean);
       if (error) return { data: null, error: error.message };
       return { data: data as T, error: null };
     } catch (error) {

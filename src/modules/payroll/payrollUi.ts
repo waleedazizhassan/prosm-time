@@ -20,8 +20,25 @@ export function parseAmount(text: string): number | null {
   return Number.isFinite(value) ? value : NaN;
 }
 
+// Owner 2026-11-10: payroll numbers in one shape, by the payroll country (usePayrollDigits sets it).
+export type DigitSystem = "arab" | "latn";
+let digitSystem: DigitSystem | null = null;
+export function setPayrollDigits(system: DigitSystem | null) {
+  digitSystem = system;
+}
+
 export const money = (value: number | string | null | undefined) =>
-  Number(value ?? 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  Number(value ?? 0).toLocaleString(digitSystem === "arab" ? "ar-EG" : digitSystem === "latn" ? "en-US" : undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+/** A typed amount shown in the payroll's digits (parseAmount reads both). */
+export function shownDigits(text: string): string {
+  if (digitSystem === "arab") return text.replace(/[0-9]/g, (d) => String.fromCharCode(0x0660 + Number(d))).replace(/\./g, String.fromCharCode(0x066b));
+  if (digitSystem === "latn") {
+    const parsed = text.replace(/[\u0660-\u0669]/g, (d) => String(d.charCodeAt(0) - 0x0660)).replace(/[\u06F0-\u06F9]/g, (d) => String(d.charCodeAt(0) - 0x06f0)).replace(/\u066B/g, ".");
+    return parsed;
+  }
+  return text;
+}
 
 export const STATUS_BADGE: Record<CycleStatus, string> = {
   draft: "neutral",
@@ -57,6 +74,8 @@ export function payrollError(message: string | null | undefined, t: TFunction): 
     [/CREATE THE PAYROLL PROFILE FIRST/, "profileFirst"],
     [/CANNOT BE CHANGED IN STATUS/, "notEditable"],
     [/YOUR OWN REQUEST/, "ownRequest"],
+    // 2026-11-10: a choice left empty (an item, a person) - never show the database's own words
+    [/invalid input syntax for type uuid|COMPONENT REQUIRED|COMPONENT NOT FOUND/i, "chooseItem"],
   ];
   const hit = codes.find(([pattern]) => pattern.test(message));
   return hit ? t(`payroll:errors.${hit[1]}`) : message;

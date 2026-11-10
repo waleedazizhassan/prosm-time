@@ -10,6 +10,7 @@ import Toggle from "../../components/common/Toggle";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
 import { payrollError } from "./payrollUi";
+import { resetPayrollDigits } from "./usePayrollDigits";
 
 // 2026-11-09 (owner): Egyptian law is the default and every figure can be changed - a country's
 // values come from its pack and the organisation edits its own copy. New cycles use the rules as
@@ -53,6 +54,7 @@ export default function PayrollStatutoryCard() {
     setError("");
     setSaved("");
     const result = await PayrollCycleRepository.saveStatutory(cfg);
+    resetPayrollDigits(); // the number style follows the country
     setBusy("");
     if (result.error) setError(payrollError(result.error, t));
     else setSaved(t("statutory.saved"));
@@ -63,6 +65,7 @@ export default function PayrollStatutoryCard() {
     setError("");
     setSaved("");
     const result = await PayrollCycleRepository.resetStatutory(code);
+    resetPayrollDigits(); // the number style follows the country
     setBusy("");
     if (result.error) setError(payrollError(result.error, t));
     else {
