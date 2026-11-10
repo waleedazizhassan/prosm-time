@@ -43,6 +43,9 @@ function remembered(): string | null {
 
 let started = false;
 
+/** Fired when a notification arrives while the app is open (the bell reads its list again). */
+export const NOTIFICATION_ARRIVED_EVENT = "prosm:notification-arrived";
+
 /** Asks for permission (once, unless `ask` is false), registers this phone and hands a tapped notification's data to `onTap` (which opens its page). */
 export async function startPush(onTap: (data: Record<string, unknown> | undefined) => void, ask = true): Promise<void> {
   if (!isPushSupported() || started) return;
@@ -62,6 +65,8 @@ export async function startPush(onTap: (data: Record<string, unknown> | undefine
       await requireSupabaseClient().rpc("register_prosm_time_push_device", { p_token: value, p_platform: "android", p_language: currentLanguage() });
     });
     await PushNotifications.addListener("pushNotificationActionPerformed", ({ notification }) => onTap(notification.data));
+    // Owner 2026-11-10: a push that arrives while the app is open (a Buzz) is shown at once in the app
+    await PushNotifications.addListener("pushNotificationReceived", () => window.dispatchEvent(new Event(NOTIFICATION_ARRIVED_EVENT)));
     let permission = await PushNotifications.checkPermissions();
     if (ask && (permission.receive === "prompt" || permission.receive === "prompt-with-rationale")) permission = await PushNotifications.requestPermissions();
     if (permission.receive !== "granted") return;

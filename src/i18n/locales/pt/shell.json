@@ -250,6 +250,13 @@
       "statementTitle": "Novo comunicado oficial",
       "publishedBody": "{{title}}",
       "ackBody": "{{title}} - confirme que leu."
+    },
+    "buzz": {
+      "title": "Alerta de {{name}}",
+      "clock_in": "Por favor, registe a entrada.",
+      "clock_out": "Por favor, registe a saída.",
+      "call_me": "Por favor, ligue-me.",
+      "attention": "Por favor, veja o app."
     }
   },
   "items": {
@@ -465,5 +472,20 @@
     "banner": "Sua organização está somente leitura: a licença terminou. Você pode ver tudo; as alterações estão pausadas e nada é apagado.",
     "reopen": "Inserir um código de ativação",
     "askOwner": "O proprietário da sua organização pode reabri-la."
+  },
+  "buzz": {
+    "action": "Alertar",
+    "title": "Alertar {{name}}",
+    "hint": "O telemóvel vai vibrar e tocar.",
+    "reasons": {
+      "clock_in": "Registar entrada",
+      "clock_out": "Registar saída",
+      "call_me": "Liga-me",
+      "attention": "Ver o app"
+    },
+    "messageLabel": "Mensagem curta (opcional)",
+    "send": "Enviar alerta",
+    "sent": "{{name}} foi alertado.",
+    "failed": "O alerta não foi enviado. Tente de novo."
   }
 }

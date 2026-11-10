@@ -250,6 +250,13 @@
       "statementTitle": "新的正式声明",
       "publishedBody": "{{title}}",
       "ackBody": "{{title}} - 请确认已阅读。"
+    },
+    "buzz": {
+      "title": "来自 {{name}} 的提醒",
+      "clock_in": "请打卡上班。",
+      "clock_out": "请打卡下班。",
+      "call_me": "请给我回电话。",
+      "attention": "请查看应用。"
     }
   },
   "items": {
@@ -455,5 +462,20 @@
     "banner": "您的组织为只读状态：许可证已到期。您可以查看所有内容；修改已暂停，不会删除任何数据。",
     "reopen": "输入激活码",
     "askOwner": "组织所有者可以重新开放。"
+  },
+  "buzz": {
+    "action": "提醒",
+    "title": "提醒 {{name}}",
+    "hint": "对方手机会振动并响铃。",
+    "reasons": {
+      "clock_in": "打卡上班",
+      "clock_out": "打卡下班",
+      "call_me": "给我回电话",
+      "attention": "查看应用"
+    },
+    "messageLabel": "简短留言（可选）",
+    "send": "发送提醒",
+    "sent": "已提醒 {{name}}。",
+    "failed": "提醒未发送，请重试。"
   }
 }

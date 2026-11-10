@@ -296,7 +296,9 @@
     "ownerAuthorityNone": "Esta pessoa não tem a autoridade do proprietário.",
     "ownerAuthorityInactive": "Esta pessoa não está ativa.",
     "planManagerLimit": "O plano Starter tem um gestor. Faça upgrade para ter mais gestores ou supervisores.",
-    "planExternalWorkerLimit": "Você atingiu o número de trabalhadores externos permitido pela licença. Contate a PROSM."
+    "planExternalWorkerLimit": "Você atingiu o número de trabalhadores externos permitido pela licença. Contate a PROSM.",
+    "buzzTooSoon": "Espere 30 segundos antes de alertar a mesma pessoa de novo.",
+    "buzzSelf": "Não pode alertar-se a si mesmo."
   },
   "pageLoad": {
     "title": "Esta página precisa de conexão",

@@ -185,13 +185,32 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
   const keyed = sites
     .filter((site) => site.latitude !== null && site.longitude !== null)
     .sort((a, b) => Number(b.sos) - Number(a.sos) || (insideCount.get(b.id) ?? 0) - (insideCount.get(a.id) ?? 0));
-  const [showUnplaced, setShowUnplaced] = useState(false);
+  // Owner 2026-11-10: a site's item lists the people inside it, as "outside the sites" does - each
+  // name goes to that person; a tap anywhere outside the list closes it and the map stays where it is.
+  const [listFor, setListFor] = useState<string | null>(null);
   const unplaced = elsewhere.map((p) => p.person);
-  // tap "different places": the map shows all of them, and their names open under it
+  const listedPeople = listFor === null ? [] : listFor === ELSEWHERE ? unplaced : placed.filter((p) => p.siteId === listFor).map((p) => p.person);
+  const keyRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (listFor === null) return undefined;
+    const close = (event: PointerEvent) => {
+      const target = event.target as Node;
+      if (listRef.current?.contains(target) || keyRef.current?.contains(target)) return;
+      setListFor(null);
+    };
+    document.addEventListener("pointerdown", close);
+    return () => document.removeEventListener("pointerdown", close);
+  }, [listFor]);
+  // tap "outside the sites": the map shows all of them, and their names open under it
   const showElsewhere = () => {
-    setShowUnplaced((v) => !v);
+    setListFor((v) => (v === ELSEWHERE ? null : ELSEWHERE));
     const points = elsewhere.filter((p) => p.lat !== null && p.lng !== null).map((p) => [p.lat as number, p.lng as number] as [number, number]);
     if (points.length > 0) mapRef.current?.flyToBounds(L.latLngBounds(points), { padding: [36, 36], maxZoom: 14, duration: 0.6 });
+  };
+  const showSite = (siteId: string) => {
+    goTo(siteId);
+    setListFor((v) => (v === siteId || (insideCount.get(siteId) ?? 0) === 0 ? null : siteId));
   };
 
   // a name in the list: the map goes to that person and shows their name
@@ -212,9 +231,9 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
         <LocateFixed size={16} />
       </button>
       {keyed.length > 0 || unplaced.length > 0 ? (
-        <div className={styles.mapKey} role="group" aria-label={t("manager.map.keyLabel")}>
+        <div ref={keyRef} className={styles.mapKey} role="group" aria-label={t("manager.map.keyLabel")}>
           {keyed.map((site) => (
-            <button key={site.id} type="button" className={styles.mapKeyItem} onClick={() => goTo(site.id)} title={site.sos ? t("manager.map.stateSos") : (insideCount.get(site.id) ?? 0) > 0 ? t("manager.map.stateActive") : t("manager.map.stateIdle")}>
+            <button key={site.id} type="button" className={styles.mapKeyItem} onClick={() => showSite(site.id)} aria-expanded={listFor === site.id} title={site.sos ? t("manager.map.stateSos") : (insideCount.get(site.id) ?? 0) > 0 ? t("manager.map.stateActive") : t("manager.map.stateIdle")}>
               <span className={styles.mapKeyDot} style={{ background: siteColor(site, insideCount.get(site.id) ?? 0) }} aria-hidden="true" />
               <span>{site.name}</span>
               <b>{insideCount.get(site.id) ?? 0}</b>
@@ -223,7 +242,7 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
           {/* Owner 2026-11-10: everyone who is at none of the sites is one item, "different places" -
               tap: the map shows them all and their names open */}
           {unplaced.length > 0 ? (
-            <button type="button" className={styles.mapKeyItem} onClick={showElsewhere} title={unplaced.map((p) => p.name).join("، ")}>
+            <button type="button" className={styles.mapKeyItem} onClick={showElsewhere} aria-expanded={listFor === ELSEWHERE} title={unplaced.map((p) => p.name).join("، ")}>
               <span className={styles.mapKeyDot} style={{ background: "#f59e0b" }} aria-hidden="true" />
               <span>{t("manager.map.elsewhere")}</span>
               <b>{unplaced.length}</b>
@@ -231,9 +250,9 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
           ) : null}
         </div>
       ) : null}
-      {showUnplaced && unplaced.length > 0 ? (
-        <div className={styles.mapUnplaced} role="status">
-          {unplaced.map((person) => (
+      {listedPeople.length > 0 ? (
+        <div ref={listRef} className={styles.mapUnplaced} role="status">
+          {listedPeople.map((person) => (
             <button key={person.userId} type="button" className={styles.mapUnplacedName} onClick={() => goToPerson(person.userId)}>
               {person.name}{person.siteName ? ` · ${person.siteName}` : ""}
             </button>
@@ -243,6 +262,8 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
     </div>
   );
 }
+
+const ELSEWHERE = "__elsewhere__";
 
 function siteColor(site: DashboardSite, here: number): string {
   if (site.sos) return "#dc2626";

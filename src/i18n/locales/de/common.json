@@ -296,7 +296,9 @@
     "ownerAuthorityNone": "Diese Person hat die Befugnis des Inhabers nicht.",
     "ownerAuthorityInactive": "Diese Person ist nicht aktiv.",
     "planManagerLimit": "Der Starter-Plan hat einen Manager. Für weitere Manager oder Vorgesetzte den Plan erweitern.",
-    "planExternalWorkerLimit": "Die laut Lizenz erlaubte Zahl externer Arbeitskräfte ist erreicht. Wenden Sie sich an PROSM."
+    "planExternalWorkerLimit": "Die laut Lizenz erlaubte Zahl externer Arbeitskräfte ist erreicht. Wenden Sie sich an PROSM.",
+    "buzzTooSoon": "Warte 30 Sekunden, bevor du dieselbe Person erneut anbuzzt.",
+    "buzzSelf": "Du kannst dich nicht selbst anbuzzen."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

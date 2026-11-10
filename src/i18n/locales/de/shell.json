@@ -250,6 +250,13 @@
       "statementTitle": "Neue offizielle Mitteilung",
       "publishedBody": "{{title}}",
       "ackBody": "{{title}} - bitte bestätigen Sie das Lesen."
+    },
+    "buzz": {
+      "title": "Buzz von {{name}}",
+      "clock_in": "Bitte einstempeln.",
+      "clock_out": "Bitte ausstempeln.",
+      "call_me": "Bitte ruf mich an.",
+      "attention": "Bitte schau in die App."
     }
   },
   "items": {
@@ -460,5 +467,20 @@
     "banner": "Ihre Organisation ist schreibgeschützt: Die Lizenz ist abgelaufen. Alles bleibt sichtbar; Änderungen sind pausiert, nichts wird gelöscht.",
     "reopen": "Aktivierungscode eingeben",
     "askOwner": "Der Inhaber kann sie wieder öffnen."
+  },
+  "buzz": {
+    "action": "Buzz",
+    "title": "{{name}} anbuzzen",
+    "hint": "Das Telefon vibriert und klingelt.",
+    "reasons": {
+      "clock_in": "Einstempeln",
+      "clock_out": "Ausstempeln",
+      "call_me": "Ruf mich an",
+      "attention": "In die App schauen"
+    },
+    "messageLabel": "Kurze Nachricht (optional)",
+    "send": "Buzz senden",
+    "sent": "{{name}} wurde angebuzzt.",
+    "failed": "Der Buzz wurde nicht gesendet. Versuch es noch einmal."
   }
 }

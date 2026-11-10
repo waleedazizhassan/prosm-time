@@ -250,6 +250,13 @@
       "statementTitle": "Nuovo comunicato ufficiale",
       "publishedBody": "{{title}}",
       "ackBody": "{{title}} - conferma di averlo letto."
+    },
+    "buzz": {
+      "title": "Avviso da {{name}}",
+      "clock_in": "Per favore, timbra l’entrata.",
+      "clock_out": "Per favore, timbra l’uscita.",
+      "call_me": "Per favore, chiamami.",
+      "attention": "Per favore, guarda l’app."
     }
   },
   "items": {
@@ -465,5 +472,20 @@
     "banner": "La tua organizzazione è in sola lettura: la licenza è scaduta. Vedi tutto; le modifiche sono sospese e nulla viene eliminato.",
     "reopen": "Inserisci un codice di attivazione",
     "askOwner": "Il titolare può riaprirla."
+  },
+  "buzz": {
+    "action": "Avvisa",
+    "title": "Avvisa {{name}}",
+    "hint": "Il telefono vibrerà e suonerà.",
+    "reasons": {
+      "clock_in": "Timbra l’entrata",
+      "clock_out": "Timbra l’uscita",
+      "call_me": "Chiamami",
+      "attention": "Guarda l’app"
+    },
+    "messageLabel": "Messaggio breve (facoltativo)",
+    "send": "Invia avviso",
+    "sent": "{{name}} è stato avvisato.",
+    "failed": "L’avviso non è stato inviato. Riprova."
   }
 }
