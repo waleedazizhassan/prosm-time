@@ -244,7 +244,7 @@
     "savedShort": "Guardado.",
     "deleteItem": "Eliminar",
     "deleteItemLabel": "Eliminar el concepto {{name}}",
-    "deleteItemConfirm": "¿Eliminar «{{name}}» del salario de todos? Los ciclos aprobados no cambian.",
+    "deleteItemConfirm": "¿Quitar «{{name}}» solo de la nómina de esta persona? Los demás empleados y los ciclos aprobados no cambian.",
     "itemDeleted": "Se eliminó el concepto «{{name}}»."
   },
   "installments": {

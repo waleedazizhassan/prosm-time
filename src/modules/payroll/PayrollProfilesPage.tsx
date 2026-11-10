@@ -54,9 +54,15 @@ export default function PayrollProfilesPage() {
   const [changeError, setChangeError] = useState("");
 
   const fixed = useMemo(() => components.filter((c) => c.is_active && c.source === "fixed"), [components]);
+  // Owner 2026-11-10 ("an item I add on one employee's card shows on everyone's, and deleting it from one
+  // deletes it from all"): a card shows the basic salary and that person's own items only - an item added
+  // here is this person's, and deleting it ends it for this person alone.
+  const [addedHere, setAddedHere] = useState<string[]>([]);
+  const ownIds = useMemo(() => new Set([...(editing?.components ?? []).map((v) => v.componentId), ...addedHere]), [editing, addedHere]);
+  const shown = useMemo(() => fixed.filter((c) => c.is_basic || ownIds.has(c.id)), [fixed, ownIds]);
   // Owner 2026-11-10: the salary card shows earnings and deductions together - basic first.
-  const earningItems = useMemo(() => fixed.filter((c) => c.category === "earning" || c.category === "allowance").sort((a, b) => Number(b.is_basic) - Number(a.is_basic) || a.sort_order - b.sort_order), [fixed]);
-  const deductionItems = useMemo(() => fixed.filter((c) => c.category === "deduction").sort((a, b) => a.sort_order - b.sort_order), [fixed]);
+  const earningItems = useMemo(() => shown.filter((c) => c.category === "earning" || c.category === "allowance").sort((a, b) => Number(b.is_basic) - Number(a.is_basic) || a.sort_order - b.sort_order), [shown]);
+  const deductionItems = useMemo(() => shown.filter((c) => c.category === "deduction").sort((a, b) => a.sort_order - b.sort_order), [shown]);
   const label = (c: { name_ar: string; name_en: string | null }) => (isRtl ? c.name_ar : c.name_en || c.name_ar);
 
   const load = useCallback(async () => {
@@ -74,6 +80,7 @@ export default function PayrollProfilesPage() {
 
   const openPerson = (person: PayrollPerson) => {
     setEditing(person);
+    setAddedHere([]);
     setSaveError("");
     setSaved(false);
     setValuesFrom(firstOfMonth());
@@ -146,16 +153,23 @@ export default function PayrollProfilesPage() {
     window.setTimeout(() => setEditing(null), 900);
   };
 
-  // Owner 2026-11-10: delete an item - it stops for everyone (open cycles follow; approved ones keep their copy).
+  // Owner 2026-11-10: delete an item from THIS person's card - it ends for them from the chosen date (their
+  // open cycles follow; approved ones keep their copy); other people's cards are not touched.
   const deleteItem = async (component: PayrollComponent) => {
+    if (!editing) return false;
     setSaveError("");
-    const result = await PayrollCycleRepository.saveComponent(component.id, { is_active: false });
-    if (result.error) {
-      setSaveError(payrollError(result.error, t));
-      return false;
+    const hasValue = editing.components.some((v) => v.componentId === component.id);
+    if (hasValue) {
+      const result = await PayrollCycleRepository.setProfileComponent(editing.userId, component.id, null, null, valuesFrom || firstOfMonth());
+      if (result.error) {
+        setSaveError(payrollError(result.error, t));
+        return false;
+      }
     }
-    const comps = await PayrollCycleRepository.listComponents();
-    setComponents(comps.data ?? []);
+    setAddedHere((ids) => ids.filter((id) => id !== component.id));
+    setValues((all) => ({ ...all, [component.id]: { amount: "", percent: "", from: valuesFrom } }));
+    setInitial((all) => ({ ...all, [component.id]: { amount: "", percent: "" } }));
+    if (hasValue) await load();
     setNotice(t("profiles.itemDeleted", { name: label(component) }));
     return true;
   };
@@ -169,17 +183,27 @@ export default function PayrollProfilesPage() {
     }
     setAddingItem(kind);
     setSaveError("");
-    const result = await PayrollCycleRepository.saveComponent(null, {
-      name_ar: name, name_en: name, category: kind === "earnings" ? "earning" : "deduction", source: "fixed", calc_type: "amount", include_in_net: true,
-    });
-    setAddingItem("");
-    if (result.error || !result.data?.id) {
-      setSaveError(payrollError(result.error, t));
-      return false;
+    // an item of the same name and side that already exists is used again (no duplicate in the list)
+    const category = kind === "earnings" ? "earning" : "deduction";
+    const wanted = name.trim().toLowerCase();
+    const existing = fixed.find((c) => !c.is_basic && c.calc_type === "amount" && (c.category === category || (category === "earning" && c.category === "allowance"))
+      && [c.name_ar, c.name_en ?? ""].some((n) => n.trim().toLowerCase() === wanted));
+    let id = existing?.id ?? "";
+    if (!id) {
+      const result = await PayrollCycleRepository.saveComponent(null, {
+        name_ar: name, name_en: name, category, source: "fixed", calc_type: "amount", include_in_net: true,
+      });
+      if (result.error || !result.data?.id) {
+        setAddingItem("");
+        setSaveError(payrollError(result.error, t));
+        return false;
+      }
+      id = result.data.id;
+      const comps = await PayrollCycleRepository.listComponents();
+      setComponents(comps.data ?? []);
     }
-    const id = result.data.id;
-    const comps = await PayrollCycleRepository.listComponents();
-    setComponents(comps.data ?? []);
+    setAddingItem("");
+    setAddedHere((ids) => (ids.includes(id) ? ids : [...ids, id]));
     setValues((all) => ({ ...all, [id]: { amount: parsed === null ? "" : String(parsed), percent: "", from: valuesFrom } }));
     setInitial((all) => ({ ...all, [id]: { amount: "", percent: "" } }));
     return true;

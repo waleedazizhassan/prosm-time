@@ -244,7 +244,7 @@
     "savedShort": "Gespeichert.",
     "deleteItem": "Löschen",
     "deleteItemLabel": "Posten {{name}} löschen",
-    "deleteItemConfirm": "\"{{name}}\" aus allen Gehältern löschen? Genehmigte Läufe ändern sich nicht.",
+    "deleteItemConfirm": "„{{name}}“ nur aus dem Gehalt dieser Person entfernen? Andere Mitarbeitende und genehmigte Abrechnungen bleiben unverändert.",
     "itemDeleted": "Der Posten \"{{name}}\" wurde gelöscht."
   },
   "installments": {

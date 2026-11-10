@@ -244,7 +244,7 @@
     "savedShort": "已保存。",
     "deleteItem": "删除",
     "deleteItemLabel": "删除项目 {{name}}",
-    "deleteItemConfirm": "从所有人的工资中删除「{{name}}」？已批准的周期不变。",
+    "deleteItemConfirm": "仅从此员工的工资中删除“{{name}}”？其他员工和已批准的周期不变。",
     "itemDeleted": "已删除项目「{{name}}」。"
   },
   "installments": {

@@ -244,7 +244,7 @@
     "savedShort": "Salvato.",
     "deleteItem": "Elimina",
     "deleteItemLabel": "Elimina la voce {{name}}",
-    "deleteItemConfirm": "Eliminare «{{name}}» dallo stipendio di tutti? I cicli approvati non cambiano.",
+    "deleteItemConfirm": "Rimuovere «{{name}}» solo dalla busta paga di questa persona? Gli altri dipendenti e i cicli approvati non cambiano.",
     "itemDeleted": "La voce «{{name}}» è stata eliminata."
   },
   "installments": {

@@ -244,7 +244,7 @@
     "savedShort": "تم الحفظ.",
     "deleteItem": "حذف",
     "deleteItemLabel": "حذف البند {{name}}",
-    "deleteItemConfirm": "حذف «{{name}}» من مرتبات كل الموظفين؟ الدورات المعتمدة لا تتغير.",
+    "deleteItemConfirm": "حذف «{{name}}» من مرتب الموظف ده بس؟ باقي الموظفين والدورات المعتمدة مش هيتغيروا.",
     "itemDeleted": "تم حذف البند «{{name}}»."
   },
   "installments": {

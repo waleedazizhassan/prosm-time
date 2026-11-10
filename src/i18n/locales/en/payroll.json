@@ -244,7 +244,7 @@
     "savedShort": "Saved.",
     "deleteItem": "Delete",
     "deleteItemLabel": "Delete the item {{name}}",
-    "deleteItemConfirm": "Delete \"{{name}}\" from everyone's salary? Approved cycles do not change.",
+    "deleteItemConfirm": "Remove “{{name}}” from this employee’s pay only? Other employees and approved cycles do not change.",
     "itemDeleted": "The item \"{{name}}\" was deleted."
   },
   "installments": {

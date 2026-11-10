@@ -244,7 +244,7 @@
     "savedShort": "Enregistré.",
     "deleteItem": "Supprimer",
     "deleteItemLabel": "Supprimer l'élément {{name}}",
-    "deleteItemConfirm": "Supprimer « {{name}} » du salaire de tous ? Les cycles approuvés ne changent pas.",
+    "deleteItemConfirm": "Retirer « {{name}} » de la paie de cette personne seulement ? Les autres salariés et les cycles validés ne changent pas.",
     "itemDeleted": "L'élément « {{name}} » a été supprimé."
   },
   "installments": {
