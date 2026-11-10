@@ -2,6 +2,7 @@
 // clock-out and site change without a valid location, online or offline; an
 // organisation with it off behaves as before. Migration 20261101150000.
 import { randomUUID } from "node:crypto";
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 import { buildDatabase, type TestDatabase } from "./support/db";
@@ -71,5 +72,18 @@ describe("require_gps", () => {
     const { t, org, site, worker } = await setup("Legacy Gps Co");
     await t.su("update organization_settings set require_gps = false where organization_id = $1", [org.id]);
     expect((await clockIn(t, worker, site, null, null, null)).error).toBeNull();
+  });
+
+  // 2026-11-10 (owner): an older organisation with it off let a clock-in with no location skip the
+  // area and fake-location checks; migration 20261110160000 turns it on everywhere.
+  it("is turned on for older organisations that had it off, with an audit row", async () => {
+    const { t, org, site, worker } = await setup("Old Co");
+    await t.su("update organization_settings set require_gps = false where organization_id = $1", [org.id]);
+    const sql = readFileSync(new URL("../migrations/20261110160000_require_location_everywhere.sql", import.meta.url), "utf8");
+    // the migration's one statement (without begin/commit)
+    await t.su(sql.slice(sql.indexOf("with changed"), sql.lastIndexOf(";", sql.indexOf("commit;") - 1)));
+    expect((await clockIn(t, worker, site, null, null, null)).error).toMatch(/LOCATION_REQUIRED/);
+    const audit = await t.su("select 1 from audit_logs where organization_id = $1 and action = 'require_gps_turned_on'", [org.id]);
+    expect(audit.length).toBe(1);
   });
 });
