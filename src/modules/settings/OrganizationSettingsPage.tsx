@@ -12,7 +12,6 @@ import SessionPolicySettingsCard from "./SessionPolicySettingsCard";
 import OvertimePolicySettingsCard from "./OvertimePolicySettingsCard";
 import LeaveTypesSettingsCard from "./LeaveTypesSettingsCard";
 import settingsHeaderImage from "../../assets/illustrations/settings.svg";
-import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
 import PlanSettingsCard from "./PlanSettingsCard";
 import RetentionSettingsCard from "./RetentionSettingsCard";
@@ -93,7 +92,6 @@ export default function OrganizationSettingsPage() {
       {active === "sites" ? (
         <>
           <SitePolicySettingsCard />
-          {isOwner ? <SiteDefaultsSettingsCard /> : null}
           {isOwner && allows("clock_suggestion") ? <ClockSuggestionCard /> : null}
         </>
       ) : null}
