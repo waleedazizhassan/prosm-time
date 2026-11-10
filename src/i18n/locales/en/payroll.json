@@ -221,7 +221,7 @@
     "saveAll": "Save everything",
     "savedAll": "Saved.",
     "applyFromDate": "New values apply from",
-    "applyFromHint": "Usually the 1st of the month",
+    "applyFromHint": "Usually the 1st of the month. Changes reach open cycles whose period is on or after this date by themselves; approved cycles do not change.",
     "salaryTitle": "Salary and fixed items",
     "salaryHint": "Type the amounts - Arabic digits are accepted. Unchanged values are not saved again; an emptied box ends the item.",
     "moreOptions": "More options (currency, dates, notes)",

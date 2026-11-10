@@ -221,7 +221,7 @@
     "saveAll": "Tout enregistrer",
     "savedAll": "Enregistré.",
     "applyFromDate": "Les nouvelles valeurs s'appliquent à partir du",
-    "applyFromHint": "En général le 1er du mois",
+    "applyFromHint": "En général le 1er du mois. Les changements arrivent seuls dans les cycles ouverts à partir de cette date ; les cycles approuvés ne changent pas.",
     "salaryTitle": "Salaire et éléments fixes",
     "salaryHint": "Saisissez les montants - les chiffres arabes sont acceptés. Les valeurs inchangées ne sont pas réenregistrées ; une case vidée met fin à l'élément.",
     "moreOptions": "Plus d'options (devise, dates, notes)",

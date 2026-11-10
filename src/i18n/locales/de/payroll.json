@@ -221,7 +221,7 @@
     "saveAll": "Alles speichern",
     "savedAll": "Gespeichert.",
     "applyFromDate": "Neue Werte gelten ab",
-    "applyFromHint": "Meist der 1. des Monats",
+    "applyFromHint": "Meist der 1. des Monats. Änderungen erscheinen automatisch in offenen Läufen ab diesem Datum; genehmigte Läufe ändern sich nicht.",
     "salaryTitle": "Gehalt und feste Posten",
     "salaryHint": "Beträge eingeben - arabische Ziffern werden akzeptiert. Unveränderte Werte werden nicht erneut gespeichert; ein geleertes Feld beendet den Posten.",
     "moreOptions": "Weitere Optionen (Währung, Daten, Notizen)",

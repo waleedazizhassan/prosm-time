@@ -221,7 +221,7 @@
     "saveAll": "Salvar tudo",
     "savedAll": "Salvo.",
     "applyFromDate": "Os novos valores valem a partir de",
-    "applyFromHint": "Normalmente o dia 1 do mês",
+    "applyFromHint": "Normalmente o dia 1. As mudanças entram sozinhas nos ciclos abertos a partir desta data; os aprovados não mudam.",
     "salaryTitle": "Salário e itens fixos",
     "salaryHint": "Digite os valores - dígitos árabes são aceitos. Valores inalterados não são salvos de novo; um campo esvaziado encerra o item.",
     "moreOptions": "Mais opções (moeda, datas, notas)",

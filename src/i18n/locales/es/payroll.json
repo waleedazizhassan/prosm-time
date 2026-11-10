@@ -221,7 +221,7 @@
     "saveAll": "Guardar todo",
     "savedAll": "Guardado.",
     "applyFromDate": "Los nuevos valores rigen desde",
-    "applyFromHint": "Normalmente el día 1 del mes",
+    "applyFromHint": "Normalmente el día 1. Los cambios llegan solos a los ciclos abiertos desde esta fecha; los aprobados no cambian.",
     "salaryTitle": "Salario y conceptos fijos",
     "salaryHint": "Escriba los importes - se aceptan dígitos árabes. Lo que no cambia no se vuelve a guardar; una casilla vacía termina el concepto.",
     "moreOptions": "Más opciones (moneda, fechas, notas)",

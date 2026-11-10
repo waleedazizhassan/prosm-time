@@ -1,0 +1,50 @@
+// 2026-11-10 (owner): items added to a salary card after a cycle was created reach that cycle while
+// it is open (draft / reopened); an approved or locked cycle keeps its copy. Migration 20261110130000.
+import { describe, expect, it } from "vitest";
+
+import { buildDatabase } from "./support/db";
+import { addMember, createOrg } from "./support/fixtures";
+
+describe("open payroll cycles follow the salary file", () => {
+  it("adds a new earning and deduction to the open cycle, and leaves an approved one as it was", async () => {
+    const t = await buildDatabase();
+    const org = await createOrg(t, "Follow Co");
+    await t.su("update payroll_settings set statutory = '{}'::jsonb");
+    const amira = await addMember(t, org, "employee", "Amira");
+    const rpc = async <T,>(sql: string, params: unknown[] = []) => {
+      const r = await t.as<T>(org.owner.authId, sql, params);
+      if (r.error) throw new Error(r.error);
+      return r.rows![0];
+    };
+    const component = async (body: Record<string, unknown>) =>
+      (await rpc<{ r: { id: string } }>("select public.save_prosm_time_payroll_component(null, $1) as r", [JSON.stringify(body)])).r.id;
+    const basic = await component({ name_ar: "الأساسي", name_en: "Basic", category: "earning", source: "fixed", is_basic: true });
+    await rpc("select public.save_prosm_time_payroll_profile($1, $2)", [amira.userId, JSON.stringify({ currency: "EGP" })]);
+    await rpc("select public.set_prosm_time_payroll_profile_component($1, $2, 10000, null, '2027-03-01')", [amira.userId, basic]);
+
+    const created = await rpc<{ r: { cycleId: string } }>("select public.create_prosm_time_payroll_cycle('2027-03-01', '2027-03-31', null, 'March') as r");
+    const lines = async () =>
+      (await t.su<{ name_en: string; amount: string; category: string }>(
+        "select l.name_en, l.amount::text, l.category from payroll_cycle_lines l join payroll_cycle_employees ce on ce.id = l.cycle_employee_id where ce.cycle_id = $1 and ce.user_id = $2 order by l.name_en",
+        [created.r.cycleId, amira.userId],
+      ));
+    expect((await lines()).map((l) => l.name_en)).toEqual(["Basic"]);
+
+    // the owner adds an earning and a deduction from the salary card
+    const love = await component({ name_ar: "بالحب", name_en: "Bonus", category: "earning", source: "fixed", calc_type: "amount", include_in_net: true });
+    const fee = await component({ name_ar: "بدل غلاسة", name_en: "Fee", category: "deduction", source: "fixed", calc_type: "amount", include_in_net: true });
+    await rpc("select public.set_prosm_time_payroll_profile_component($1, $2, 1000, null, '2027-03-01')", [amira.userId, love]);
+    await rpc("select public.set_prosm_time_payroll_profile_component($1, $2, 250, null, '2027-03-01')", [amira.userId, fee]);
+
+    const now = await lines();
+    expect(now.map((l) => l.name_en)).toEqual(["Basic", "Bonus", "Fee"]);
+    const [ce] = await t.su<{ net_salary: string }>("select net_salary::text from payroll_cycle_employees where cycle_id = $1 and user_id = $2", [created.r.cycleId, amira.userId]);
+    expect(Number(ce.net_salary)).toBe(10000 + 1000 - 250);
+
+    // an approved cycle keeps its copy
+    await t.su("update payroll_cycles set status = 'approved' where id = $1", [created.r.cycleId]);
+    await rpc("select public.set_prosm_time_payroll_profile_component($1, $2, 2000, null, '2027-03-01')", [amira.userId, love]);
+    const after = await lines();
+    expect(after.find((l) => l.name_en === "Bonus")?.amount).toBe("1000.00");
+  });
+});

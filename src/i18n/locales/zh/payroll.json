@@ -221,7 +221,7 @@
     "saveAll": "全部保存",
     "savedAll": "已保存。",
     "applyFromDate": "新数值生效日期",
-    "applyFromHint": "通常为当月 1 日",
+    "applyFromHint": "通常为当月 1 日。更改会自动进入此日期之后的未结周期；已批准的周期不变。",
     "salaryTitle": "工资与固定项目",
     "salaryHint": "输入金额 - 支持阿拉伯数字。未更改的值不会重复保存；清空的框会结束该项目。",
     "moreOptions": "更多选项（货币、日期、备注）",

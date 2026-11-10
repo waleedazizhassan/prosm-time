@@ -221,7 +221,7 @@
     "saveAll": "Salva tutto",
     "savedAll": "Salvato.",
     "applyFromDate": "I nuovi valori valgono dal",
-    "applyFromHint": "Di solito il 1° del mese",
+    "applyFromHint": "Di solito il 1° del mese. Le modifiche arrivano da sole nei cicli aperti da questa data; quelli approvati non cambiano.",
     "salaryTitle": "Stipendio e voci fisse",
     "salaryHint": "Inserisci gli importi - le cifre arabe sono accettate. I valori invariati non vengono risalvati; una casella svuotata chiude la voce.",
     "moreOptions": "Altre opzioni (valuta, date, note)",
