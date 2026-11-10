@@ -423,7 +423,8 @@
       },
       "hoursShort": "س",
       "overtimeShort": "الإضافي",
-      "overtimeApproved": "إضافي معتمد في الفترة"
+      "overtimeApproved": "إضافي معتمد في الفترة",
+      "ofToday": "من {{count}} اليوم"
     },
     "map": {
       "title": "المواقع الآن",
@@ -439,7 +440,8 @@
       "zoomOut": "تصغير",
       "noLocation": "بدون موقع على الخريطة",
       "noLocationHint": "سجّل حضوره بدون إحداثيات (مثلًا من جهاز بدون GPS)، فلا يمكن وضعه على الخريطة.",
-      "noLocationShort": "بدون موقع"
+      "noLocationShort": "بدون موقع",
+      "elsewhere": "مواقع مختلفة"
     },
     "present": {
       "title": "الموجودون الآن ({{count}})",

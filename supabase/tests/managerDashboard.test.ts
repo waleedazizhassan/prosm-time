@@ -156,4 +156,12 @@ describe("manager dashboard", () => {
     expect(people.rows!.map((r) => r.id)).toContain(walkIn.userId);
     expect(people.rows!.map((r) => r.id)).not.toContain(b1.userId);
   });
+
+  it("counts as late today whoever clocked in after the site's start time, with no roster (owner 2026-11-10)", async () => {
+    await t.su("update sites set shift_start_time = '00:00', grace_tolerance_minutes = 0, late_deduction_start_time = null where id = $1", [siteA]);
+    const d = await dash(org.owner);
+    expect(Number((d.kpi as unknown as { lateToday: number }).lateToday)).toBeGreaterThanOrEqual(1);
+    const site = d.sites.find((x) => x.id === siteA) as unknown as { late: number };
+    expect(Number(site.late)).toBeGreaterThanOrEqual(1);
+  });
 });

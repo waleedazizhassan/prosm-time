@@ -414,7 +414,8 @@
       },
       "hoursShort": "h",
       "overtimeShort": "Heures sup.",
-      "overtimeApproved": "Heures sup. approuvées sur la période"
+      "overtimeApproved": "Heures sup. approuvées sur la période",
+      "ofToday": "sur {{count}} aujourd'hui"
     },
     "map": {
       "title": "Les sites maintenant",
@@ -430,7 +431,8 @@
       "zoomOut": "Zoom arrière",
       "noLocation": "Sans position sur la carte",
       "noLocationHint": "Pointé sans coordonnées (par ex. appareil sans GPS), impossible à placer.",
-      "noLocationShort": "Sans position"
+      "noLocationShort": "Sans position",
+      "elsewhere": "Autres lieux"
     },
     "present": {
       "title": "Présents maintenant ({{count}})",
