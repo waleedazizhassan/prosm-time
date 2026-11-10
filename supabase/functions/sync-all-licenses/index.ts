@@ -53,6 +53,8 @@ serve(async (request: Request) => {
           p_max_devices: result.data.maxDevices,
           p_expires_at: result.data.expiresAt,
           p_plan_id: result.data.planId ?? null,
+          // 2026-11-10: the real number of external workers the licence allows (empty = no limit)
+          p_max_external_workers: result.data.maxExternalWorkers ?? null,
         });
         if (refreshError) failures.push({ organizationId: licence.organization_id, message: refreshError.message });
         else synced += 1;

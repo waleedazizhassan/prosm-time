@@ -249,5 +249,9 @@
       "approved": "已批准：{{count}}",
       "total": "应得：{{amount}}"
     }
+  },
+  "summary": {
+    "title": "期间津贴合计",
+    "days": "{{count}} 天"
   }
 }

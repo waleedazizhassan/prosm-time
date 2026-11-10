@@ -218,7 +218,8 @@
     "confirmClockInAction": "Confirmar entrada",
     "confirmClockOutAction": "Confirmar saída",
     "confirmDateLabel": "Data",
-    "locationStale": "A sua localização não está disponível agora. Atualize a página ou feche e reabra a app, depois registe."
+    "locationStale": "A sua localização não está disponível agora. Atualize a página ou feche e reabra a app, depois registe.",
+    "recenter": "Voltar à minha localização"
   },
   "kioskPin": {
     "title": "PIN do quiosque",
@@ -343,7 +344,7 @@
       "sites": "Locais",
       "approvals": "Aprovações",
       "people": "Pessoas por função",
-      "chart": "Agendado x real",
+      "chart": "Tendência das horas trabalhadas",
       "cost": "Adicionais e custo",
       "audit": "Registro de ações",
       "external": "Trabalhadores externos",
@@ -399,7 +400,10 @@
         "leave": "Pessoas cujas férias aprovadas incluem hoje. Não contam como ausentes.",
         "overdue": "Ainda com entrada uma hora após o fim do turno (ou do dia do local), ou aberta desde um dia anterior.",
         "overtime": "Horas extra aprovadas no período. As pendentes não contam."
-      }
+      },
+      "hoursShort": "h",
+      "overtimeShort": "Horas extras",
+      "overtimeApproved": "Horas extras aprovadas no período"
     },
     "map": {
       "title": "Locais agora",
@@ -476,12 +480,20 @@
       "title": "Pessoas"
     },
     "chart": {
-      "title": "Agendado x real",
+      "title": "Tendência das horas trabalhadas",
       "week": "Semana",
       "month": "Mês",
       "year": "Ano",
       "empty": "Ainda não há horas neste período.",
-      "legend": "Cheio: trabalhado · tracejado: agendado · claro: aguardando análise"
+      "worked": "Real",
+      "scheduled": "Programado",
+      "pending": "Aguardando revisão",
+      "workedTotal": "h reais",
+      "scheduledTotal": "h programadas",
+      "adherence": "Aderência {{rate}}%",
+      "tipWorked": "{{hours}} h reais",
+      "tipScheduled": "{{hours}} h programadas",
+      "tipPending": "{{hours}} h aguardando"
     },
     "cost": {
       "title": "Adicionais e custo",
@@ -626,7 +638,12 @@
       "lateMeta": "{{days}} dias · {{minutes}} min",
       "overtimeMeta": "{{days}} dias · {{minutes}} min",
       "none": "Ninguém neste período.",
-      "unavailable": "Escolha um período de no máximo dois meses."
+      "unavailable": "Escolha um período de no máximo dois meses.",
+      "noSchedule": "Nenhum turno programado neste período - adicione uma escala para ver a taxa.",
+      "lateTotal": "{{minutes}} min no total",
+      "overtimeTotal": "{{hours}} h no total",
+      "lateShort": "{{days}} d · {{minutes}} min",
+      "overtimeShort": "{{days}} d · {{minutes}} min"
     }
   },
   "devices": {

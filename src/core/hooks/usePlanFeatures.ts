@@ -25,6 +25,11 @@ export const PLAN_FEATURES = [
   "manager_alerts",
   // 2026-11-08: the payroll module (Pro and the organisations from before plans)
   "payroll",
+  // 2026-11-10: four plans - the media centre (Business+), delegation and retention control (Enterprise)
+  "announcements",
+  "departments",
+  "delegation",
+  "retention",
 ] as const;
 export type PlanFeature = (typeof PLAN_FEATURES)[number];
 

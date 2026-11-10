@@ -29,7 +29,8 @@ export interface NavItem {
   // catalog, checked via the same hasPermission() every other gated
   // control in this app already uses - never a second, parallel
   // authorization concept.
-  requiredPermission: string | null;
+  /** one key, or several (any of them is enough) */
+  requiredPermission: string | string[] | null;
   // § live UX review, user-directed - Settings is Owner-only (matches
   // its page's own gate) but isn't backed by a permission-catalog key
   // the way every other item above is - a dedicated boolean rather
@@ -112,10 +113,11 @@ const ALL_NAV_ITEMS: NavItem[] = [
   { id: "emergencyLog", planFeature: "sos", labelKey: "items.emergencyLog", path: "/emergency-log", icon: Siren, requiredPermission: "attendance.view", section: "attendance" },
   { id: "people", labelKey: "items.people", path: "/people", icon: Users, requiredPermission: "employees.view", section: "people" },
   // 2026-11-09 Media Center: announcements and official statements - everyone reads what was addressed to them.
-  { id: "announcements", labelKey: "items.announcements", path: "/announcements", icon: Megaphone, requiredPermission: null, section: "people" },
+  { id: "announcements", planFeature: "announcements", labelKey: "items.announcements", path: "/announcements", icon: Megaphone, requiredPermission: null, section: "people" },
   { id: "sites", labelKey: "items.sites", path: "/sites", icon: MapPin, requiredPermission: "sites.manage", section: "sites" },
   // Owner 2026-10-18/19: external workers for the whole organisation (app-generated kiosk numbers).
-  { id: "workers", planFeature: "kiosk", labelKey: "items.workers", path: "/workers", icon: HardHat, requiredPermission: "sites.manage", section: "sites" },
+  // Owner 2026-11-09: one item "External labour" - the workers, and their pay inside it
+  { id: "workers", planFeature: "kiosk", labelKey: "items.workers", path: "/workers", icon: HardHat, requiredPermission: ["sites.manage", "external_labor.view_pay"], section: "sites" },
   // §22: "Employee reviews their period" - self-access to one's own
   // timesheets needs no special permission (same as Dashboard), so
   // this nav item is visible to every authenticated org member; the
@@ -135,8 +137,6 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // 2026-11-08: the payroll module (its own payroll.* permissions; the owner holds them all) and
   // each person's own published payslips.
   { id: "payroll", planFeature: "payroll", labelKey: "items.payroll", path: "/payroll", icon: Banknote, requiredPermission: "payroll.access", section: "payroll" },
-  // 2026-11-08 B-07: external labour pay - separate from payroll and its permissions.
-  { id: "externalPay", planFeature: "kiosk", labelKey: "items.externalPay", path: "/workers/pay", icon: HardHat, requiredPermission: "external_labor.view_pay", section: "payroll" },
   { id: "payslips", planFeature: "payroll", labelKey: "items.payslips", path: "/payslips", icon: Receipt, requiredPermission: null, hiddenFromOwner: true, section: "payroll" },
   { id: "leave", planFeature: "leave", labelKey: "items.leave", path: "/leave", icon: CalendarDays, requiredPermission: null, section: "people" },
   // § live UX review, user-directed - "a Reports Center where any PDF
@@ -154,7 +154,7 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // inside an unrelated page. Owner-only, matching that setting's own
   // existing RPC-level gate.
   // Owner 2026-10-20: every setting lives here - each site's rules too, so managers who manage sites see it.
-  { id: "grantPermissions", labelKey: "items.grantPermissions", path: "/permissions", icon: KeyRound, requiredPermission: null, ownerOnly: true, realOwnerOnly: true, section: "settings" },
+  { id: "grantPermissions", planFeature: "delegation", labelKey: "items.grantPermissions", path: "/permissions", icon: KeyRound, requiredPermission: null, ownerOnly: true, realOwnerOnly: true, section: "settings" },
   { id: "settings", labelKey: "items.settings", path: "/settings", icon: Settings, requiredPermission: "sites.manage", section: "settings" },
   // § user-directed 2026-09-09 - "API [keys] should appear on its own
   // in the sidebar, not inside Settings." Same Owner-only gate as

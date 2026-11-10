@@ -105,5 +105,20 @@
     "saved": "Salvato.",
     "failed": "Impossibile salvare la lista.",
     "tooMany": "Al massimo venti voci."
+  },
+  "roster": {
+    "label": "Turni della settimana",
+    "count": "{{count}} turni",
+    "notWorked": "Non lavorato",
+    "addFor": "Aggiungi turno per {{name}} il {{day}}",
+    "someoneElse": "Un'altra persona",
+    "addOn": "Aggiungi turno il {{day}}",
+    "empty": "Nessun turno questa settimana. Tocca + sotto un giorno.",
+    "previous": "Settimana precedente",
+    "next": "Settimana successiva",
+    "thisWeek": "Questa settimana",
+    "hint": "Tocca una cella vuota per aggiungere un turno, o un turno per annullarlo. Il colore viene dal modello; ✓ significa lavorato.",
+    "days": "Giorni",
+    "assignDays": "Aggiungi {{count}} turni"
   }
 }

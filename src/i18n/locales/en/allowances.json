@@ -251,5 +251,9 @@
       "approved": "Approved: {{count}}",
       "total": "Due: {{amount}}"
     }
+  },
+  "summary": {
+    "title": "Allowances in the period",
+    "days": "{{count}} days"
   }
 }

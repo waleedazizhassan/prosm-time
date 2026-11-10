@@ -14,9 +14,13 @@ import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
-import { money, payrollError } from "./payrollUi";
+import { money, parseAmount, payrollError } from "./payrollUi";
 
 const today = () => new Date().toISOString().slice(0, 10);
+const firstOfMonth = () => {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-01`;
+};
 
 // 2026-11-08: payroll profiles - each person's code, currency, start/end dates and fixed
 // components with effective dates (a new value never rewrites an earlier cycle) - and the
@@ -33,6 +37,11 @@ export default function PayrollProfilesPage() {
   const [editing, setEditing] = useState<PayrollPerson | null>(null);
   const [form, setForm] = useState({ employee_code: "", currency: "", start_date: "", end_date: "", is_active: true, notes: "", insurance_exempt: false, insurable_wage: "", tax_exempt: false });
   const [values, setValues] = useState<Record<string, { amount: string; percent: string; from: string }>>({});
+  const [initial, setInitial] = useState<Record<string, { amount: string; percent: string }>>({});
+  const [valuesFrom, setValuesFrom] = useState(firstOfMonth());
+  const [saveError, setSaveError] = useState("");
+  const [saved, setSaved] = useState(false);
+  const [search, setSearch] = useState("");
   const [plan, setPlan] = useState({ userId: "", name: "", total: "", count: "", start: today(), installment: "" });
   const [change, setChange] = useState<{ plan: InstallmentPlan; action: "settle" | "cancel" | "reschedule"; reason: string; installment: string } | null>(null);
 
@@ -54,6 +63,9 @@ export default function PayrollProfilesPage() {
 
   const openPerson = (person: PayrollPerson) => {
     setEditing(person);
+    setSaveError("");
+    setSaved(false);
+    setValuesFrom(firstOfMonth());
     setForm({
       employee_code: person.profile?.employee_code ?? "", currency: person.profile?.currency ?? "", start_date: person.profile?.start_date ?? "",
       end_date: person.profile?.end_date ?? "", is_active: person.profile?.is_active ?? true, notes: person.profile?.notes ?? "",
@@ -64,6 +76,61 @@ export default function PayrollProfilesPage() {
       const current = person.components.filter((v) => v.componentId === c.id).sort((a, b) => b.effectiveFrom.localeCompare(a.effectiveFrom))[0];
       return [c.id, { amount: current?.amount != null ? String(current.amount) : "", percent: current?.percent != null ? String(current.percent) : c.percent != null ? String(c.percent) : "", from: today() }];
     })));
+    setInitial(Object.fromEntries(fixed.map((c) => {
+      const current = person.components.filter((v) => v.componentId === c.id).sort((a, b) => b.effectiveFrom.localeCompare(a.effectiveFrom))[0];
+      return [c.id, { amount: current?.amount != null ? String(current.amount) : "", percent: current?.percent != null ? String(current.percent) : "" }];
+    })));
+  };
+
+  // One save for everything: the file first (it is created if missing), then every item whose value changed,
+  // from the chosen date. Stops at the first refusal and says which item.
+  const saveAll = async () => {
+    if (!editing) return;
+    setSaveError("");
+    setSaved(false);
+    const insurable = parseAmount(form.insurable_wage);
+    if (Number.isNaN(insurable)) {
+      setSaveError(t("profiles.badNumber", { field: t("profiles.insurableWage") }));
+      return;
+    }
+    const changes: { id: string; name: string; amount: number | null; percent: number | null }[] = [];
+    for (const c of fixed) {
+      const now = values[c.id] ?? { amount: "", percent: "" };
+      const before = initial[c.id] ?? { amount: "", percent: "" };
+      const raw = c.calc_type === "percent" ? now.percent : now.amount;
+      const was = c.calc_type === "percent" ? before.percent : before.amount;
+      if (raw.trim() === was.trim()) continue;
+      const parsed = parseAmount(raw);
+      if (Number.isNaN(parsed)) {
+        setSaveError(t("profiles.badNumber", { field: label(c) }));
+        return;
+      }
+      // emptied: the item ends the day before the chosen date (its history stays)
+      changes.push({ id: c.id, name: label(c), amount: c.calc_type === "amount" ? parsed : null, percent: c.calc_type === "percent" ? parsed : null });
+    }
+    setBusy("save-all");
+    const profile = await PayrollCycleRepository.saveProfile(editing.userId, {
+      employee_code: form.employee_code, currency: form.currency.toUpperCase() || null, start_date: form.start_date || null, end_date: form.end_date || null,
+      is_active: form.is_active, notes: form.notes, insurance_exempt: form.insurance_exempt, insurable_wage: insurable, tax_exempt: form.tax_exempt,
+    });
+    if (profile.error) {
+      setBusy("");
+      setSaveError(payrollError(profile.error, t));
+      return;
+    }
+    for (const change of changes) {
+      const result = await PayrollCycleRepository.setProfileComponent(editing.userId, change.id, change.amount, change.percent, valuesFrom || today());
+      if (result.error) {
+        setBusy("");
+        setSaveError(`${change.name}: ${payrollError(result.error, t)}`);
+        await load();
+        return;
+      }
+    }
+    setBusy("");
+    setSaved(true);
+    await load();
+    setInitial(Object.fromEntries(fixed.map((c) => [c.id, { amount: values[c.id]?.amount ?? "", percent: values[c.id]?.percent ?? "" }])));
   };
 
   const act = async (key: string, task: () => Promise<{ error: string | null }>) => {
@@ -107,7 +174,12 @@ export default function PayrollProfilesPage() {
       <ErrorText>{error}</ErrorText>
       {fixed.length === 0 ? <HintText>{t("profiles.noFixedComponents")}</HintText> : null}
       <Card title={t("profiles.title")}>
-        <Table columns={columns} data={people ?? []} getRowId={(p) => p.userId} loading={people === null} emptyMessage={t("profiles.empty")} onRowClick={openPerson} />
+        <div style={{ maxWidth: 360, marginBottom: "var(--space-2)" }}>
+          <Input label={t("profiles.search")} name="profilesSearch" value={search} onChange={(event) => setSearch(event.target.value)} />
+        </div>
+        <HintText small>{t("profiles.tapToEdit")}</HintText>
+        <Table columns={columns} data={(people ?? []).filter((p) => !search.trim() || p.fullName.toLowerCase().includes(search.trim().toLowerCase()) || (p.profile?.employee_code ?? "").includes(search.trim()))}
+          getRowId={(p) => p.userId} loading={people === null} emptyMessage={t("profiles.empty")} onRowClick={openPerson} />
       </Card>
 
       <Card title={t("installments.title")} subtitle={t("installments.hint")}>
@@ -115,38 +187,56 @@ export default function PayrollProfilesPage() {
           <Select label={t("profiles.person")} name="planUser" value={plan.userId} onChange={(event) => setPlan({ ...plan, userId: event.target.value })}
             options={[{ value: "", label: "-" }, ...(people ?? []).filter((p) => p.profile).map((p) => ({ value: p.userId, label: p.fullName }))]} />
           <Input label={t("installments.name")} name="planName" value={plan.name} onChange={(event) => setPlan({ ...plan, name: event.target.value })} />
-          <Input label={t("installments.total")} name="planTotal" type="number" value={plan.total} onChange={(event) => setPlan({ ...plan, total: event.target.value })} />
-          <Input label={t("installments.count")} name="planCount" type="number" value={plan.count} onChange={(event) => setPlan({ ...plan, count: event.target.value })} />
+          <Input label={t("installments.total")} name="planTotal" inputMode="decimal" value={plan.total} onChange={(event) => setPlan({ ...plan, total: event.target.value })} />
+          <Input label={t("installments.count")} name="planCount" inputMode="numeric" value={plan.count} onChange={(event) => setPlan({ ...plan, count: event.target.value })} />
           <Input label={t("installments.start")} name="planStart" type="date" value={plan.start} onChange={(event) => setPlan({ ...plan, start: event.target.value })} />
-          <Input label={t("installments.amountOptional")} name="planAmount" type="number" value={plan.installment} onChange={(event) => setPlan({ ...plan, installment: event.target.value })} />
+          <Input label={t("installments.amountOptional")} name="planAmount" inputMode="decimal" value={plan.installment} onChange={(event) => setPlan({ ...plan, installment: event.target.value })} />
         </div>
         <Button size="sm" loading={busy === "plan"} disabled={!plan.userId || !plan.name.trim() || !plan.total || !plan.count}
           onClick={async () => {
-            const ok = await act("plan", () => PayrollCycleRepository.saveInstallment(plan.userId, plan.name.trim(), Number(plan.total), Number(plan.count), plan.start, plan.installment ? Number(plan.installment) : null));
+            const ok = await act("plan", () => PayrollCycleRepository.saveInstallment(plan.userId, plan.name.trim(), parseAmount(plan.total) ?? 0, parseAmount(plan.count) ?? 0, plan.start, parseAmount(plan.installment)));
             if (ok) setPlan({ userId: "", name: "", total: "", count: "", start: today(), installment: "" });
           }}>{t("installments.add")}</Button>
         <Table columns={planColumns} data={plans} getRowId={(p) => p.id} emptyMessage={t("installments.empty")} />
       </Card>
 
-      <Modal isOpen={Boolean(editing)} onClose={() => setEditing(null)} title={editing?.fullName ?? ""} size="lg"
-        footer={<Button loading={busy === "profile"} onClick={() => editing && act("profile", () => PayrollCycleRepository.saveProfile(editing.userId, {
-          employee_code: form.employee_code, currency: form.currency.toUpperCase() || null, start_date: form.start_date || null, end_date: form.end_date || null, is_active: form.is_active, notes: form.notes,
-          insurance_exempt: form.insurance_exempt, insurable_wage: form.insurable_wage === "" ? null : Number(form.insurable_wage), tax_exempt: form.tax_exempt,
-        }))}>{t("profiles.saveProfile")}</Button>}>
+      {/* Owner 2026-11-09 ("payroll must be simpler; the fields don't save"): one screen per person - the
+          salary items with one start date, insurance and tax, and ONE save that keeps everything.
+          Errors show inside the window. Amounts accept Arabic digits. */}
+      <Modal isOpen={Boolean(editing)} onClose={() => setEditing(null)} title={editing ? t("profiles.editorTitle", { name: editing.fullName }) : ""} size="lg"
+        footer={<Button fullWidth loading={busy === "save-all"} onClick={() => void saveAll()}>{t("profiles.saveAll")}</Button>}>
         {editing ? (
           <>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(9rem, 1fr))", gap: "var(--space-2)" }}>
+            {saveError ? <ErrorText>{saveError}</ErrorText> : null}
+            {saved ? <p role="status" style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)", marginTop: 0 }}>{t("profiles.savedAll")}</p> : null}
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(10rem, 1fr))", gap: "var(--space-2)" }}>
               <Input label={t("doc.code")} name="profileCode" value={form.employee_code} onChange={(event) => setForm({ ...form, employee_code: event.target.value })} />
-              <Input label={t("doc.currency")} name="profileCurrency" value={form.currency} onChange={(event) => setForm({ ...form, currency: event.target.value.toUpperCase().slice(0, 3) })} />
-              <Input label={t("profiles.startDate")} name="profileStart" type="date" value={form.start_date} onChange={(event) => setForm({ ...form, start_date: event.target.value })} />
-              <Input label={t("profiles.endDate")} name="profileEnd" type="date" value={form.end_date} onChange={(event) => setForm({ ...form, end_date: event.target.value })} />
+              <Input label={t("profiles.applyFromDate")} name="valuesFrom" type="date" value={valuesFrom} onChange={(event) => setValuesFrom(event.target.value)}
+                helperText={t("profiles.applyFromHint")} />
             </div>
-            <label style={{ display: "flex", gap: "var(--space-2)", alignItems: "center", margin: "var(--space-2) 0" }}>
-              <input type="checkbox" checked={form.is_active} onChange={(event) => setForm({ ...form, is_active: event.target.checked })} /> {t("profiles.active")}
-            </label>
-            <Textarea label={t("profiles.notes")} name="profileNotes" value={form.notes} onChange={(event) => setForm({ ...form, notes: event.target.value })} rows={2} />
-            {/* 2026-11-09: this person's insurance and tax (the rules are in Payroll settings) */}
-            <h4>{t("profiles.statutoryTitle")}</h4>
+
+            <h4 style={{ margin: "var(--space-3) 0 var(--space-1)" }}>{t("profiles.salaryTitle")}</h4>
+            {fixed.length === 0 ? <HintText small>{t("profiles.noFixedComponents")}</HintText> : null}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(12rem, 1fr))", gap: "var(--space-2)" }}>
+              {fixed.map((c) => {
+                const value = values[c.id] ?? { amount: "", percent: "", from: valuesFrom };
+                const isPercent = c.calc_type === "percent";
+                return (
+                  <Input key={c.id}
+                    label={`${label(c)}${isPercent ? " %" : ""}`}
+                    name={`value-${c.id}`}
+                    inputMode="decimal"
+                    value={isPercent ? value.percent : value.amount}
+                    placeholder={c.applies_to_all && c.default_amount != null ? String(c.default_amount) : ""}
+                    helperText={t(`categories.${c.category}`)}
+                    onChange={(event) => setValues({ ...values, [c.id]: isPercent ? { ...value, percent: event.target.value } : { ...value, amount: event.target.value } })} />
+                );
+              })}
+            </div>
+            <HintText small>{t("profiles.salaryHint")}</HintText>
+
+            <h4 style={{ margin: "var(--space-3) 0 var(--space-1)" }}>{t("profiles.statutoryTitle")}</h4>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-3)", alignItems: "flex-end" }}>
               <label style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}>
                 <input type="checkbox" checked={form.insurance_exempt} onChange={(event) => setForm({ ...form, insurance_exempt: event.target.checked })} /> {t("profiles.insuranceExempt")}
@@ -155,31 +245,26 @@ export default function PayrollProfilesPage() {
                 <input type="checkbox" checked={form.tax_exempt} onChange={(event) => setForm({ ...form, tax_exempt: event.target.checked })} /> {t("profiles.taxExempt")}
               </label>
               {!form.insurance_exempt ? (
-                <div style={{ maxWidth: 220 }}>
-                  <Input label={t("profiles.insurableWage")} name="insurableWage" type="number" value={form.insurable_wage} onChange={(event) => setForm({ ...form, insurable_wage: event.target.value })} />
+                <div style={{ maxWidth: 240 }}>
+                  <Input label={t("profiles.insurableWage")} name="insurableWage" inputMode="decimal" value={form.insurable_wage} onChange={(event) => setForm({ ...form, insurable_wage: event.target.value })} />
                 </div>
               ) : null}
             </div>
             <HintText small>{t("profiles.statutoryHint")}</HintText>
 
-            <h4>{t("profiles.fixedTitle")}</h4>
-            {!editing.profile ? <HintText small>{t("errors.profileFirst")}</HintText> : fixed.map((c) => {
-              const value = values[c.id] ?? { amount: "", percent: "", from: today() };
-              return (
-                <div key={c.id} style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)", alignItems: "flex-end", borderBottom: "1px solid var(--border-light)", paddingBottom: "var(--space-2)", marginBottom: "var(--space-2)" }}>
-                  <div style={{ flex: "1 1 10rem" }}><strong>{label(c)}</strong><HintText small>{t(`categories.${c.category}`)}{c.include_in_net ? "" : ` · ${t("lines.outsideNet")}`}</HintText></div>
-                  {c.calc_type === "amount"
-                    ? <Input label={t("lines.amount")} name={`amount-${c.id}`} type="number" value={value.amount} onChange={(event) => setValues({ ...values, [c.id]: { ...value, amount: event.target.value } })} />
-                    : <Input label={t("components.percent")} name={`percent-${c.id}`} type="number" value={value.percent} onChange={(event) => setValues({ ...values, [c.id]: { ...value, percent: event.target.value } })} />}
-                  <Input label={t("profiles.effectiveFrom")} name={`from-${c.id}`} type="date" value={value.from} onChange={(event) => setValues({ ...values, [c.id]: { ...value, from: event.target.value } })} />
-                  <Button size="sm" variant="ghost" loading={busy === c.id} onClick={() => act(c.id, () => PayrollCycleRepository.setProfileComponent(editing.userId, c.id,
-                    c.calc_type === "amount" ? (value.amount === "" ? null : Number(value.amount)) : null, c.calc_type === "percent" ? (value.percent === "" ? null : Number(value.percent)) : null, value.from))}>
-                    {t("profiles.applyFrom")}
-                  </Button>
-                </div>
-              );
-            })}
-            <HintText small>{t("profiles.historyHint")}</HintText>
+            <details style={{ marginTop: "var(--space-3)" }}>
+              <summary style={{ cursor: "pointer", fontSize: "var(--font-sm)", color: "var(--text-link)" }}>{t("profiles.moreOptions")}</summary>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(9rem, 1fr))", gap: "var(--space-2)", marginTop: "var(--space-2)" }}>
+                <Input label={t("doc.currency")} name="profileCurrency" value={form.currency} onChange={(event) => setForm({ ...form, currency: event.target.value.toUpperCase().slice(0, 3) })} />
+                <Input label={t("profiles.startDate")} name="profileStart" type="date" value={form.start_date} onChange={(event) => setForm({ ...form, start_date: event.target.value })} />
+                <Input label={t("profiles.endDate")} name="profileEnd" type="date" value={form.end_date} onChange={(event) => setForm({ ...form, end_date: event.target.value })} />
+              </div>
+              <label style={{ display: "flex", gap: "var(--space-2)", alignItems: "center", margin: "var(--space-2) 0" }}>
+                <input type="checkbox" checked={form.is_active} onChange={(event) => setForm({ ...form, is_active: event.target.checked })} /> {t("profiles.active")}
+              </label>
+              <Textarea label={t("profiles.notes")} name="profileNotes" value={form.notes} onChange={(event) => setForm({ ...form, notes: event.target.value })} rows={2} />
+              <HintText small>{t("profiles.historyHint")}</HintText>
+            </details>
           </>
         ) : null}
       </Modal>
@@ -188,10 +273,10 @@ export default function PayrollProfilesPage() {
         footer={<Button variant={change?.action === "cancel" ? "danger" : "primary"} loading={busy === "change"} onClick={async () => {
           if (!change) return;
           if (!change.reason.trim()) { setError(t("errors.reasonRequired")); return; }
-          const ok = await act("change", () => PayrollCycleRepository.changeInstallment(change.plan.id, change.action, change.reason.trim(), change.installment ? Number(change.installment) : null, null, change.plan.row_version));
+          const ok = await act("change", () => PayrollCycleRepository.changeInstallment(change.plan.id, change.action, change.reason.trim(), parseAmount(change.installment), null, change.plan.row_version));
           if (ok) setChange(null);
         }}>{change ? t(`installments.${change.action}`) : ""}</Button>}>
-        {change?.action === "reschedule" ? <Input label={t("installments.amount")} name="newInstallment" type="number" value={change.installment} onChange={(event) => setChange({ ...change, installment: event.target.value })} /> : null}
+        {change?.action === "reschedule" ? <Input label={t("installments.amount")} name="newInstallment" inputMode="decimal" value={change.installment} onChange={(event) => setChange({ ...change, installment: event.target.value })} /> : null}
         {change ? <Textarea label={t("actions.reason")} name="planReason" value={change.reason} onChange={(event) => setChange({ ...change, reason: event.target.value })} /> : null}
       </Modal>
     </PageShell>

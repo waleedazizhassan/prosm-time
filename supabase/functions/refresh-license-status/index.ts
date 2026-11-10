@@ -20,6 +20,7 @@ interface LicenseStatusResult {
     maxDevices: number | null;
     expiresAt: string | null;
     planId?: string | null;
+    maxExternalWorkers?: number | null;
   };
   error?: { message: string; code?: string };
 }
@@ -137,6 +138,8 @@ serve(async (request: Request) => {
       p_expires_at: statusResult.data.expiresAt,
       // 2026-11-03: the plan follows Platform Manager too (empty limits now mean no limit)
       p_plan_id: statusResult.data.planId ?? null,
+      // 2026-11-10: the real number of external workers the licence allows (empty = no limit)
+      p_max_external_workers: statusResult.data.maxExternalWorkers ?? null,
     });
 
     if (refreshError || !refreshResult?.success) {

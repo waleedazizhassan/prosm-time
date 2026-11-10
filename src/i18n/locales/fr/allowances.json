@@ -253,5 +253,9 @@
       "approved": "Validés : {{count}}",
       "total": "Dû : {{amount}}"
     }
+  },
+  "summary": {
+    "title": "Indemnités de la période",
+    "days": "{{count}} jours"
   }
 }

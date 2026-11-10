@@ -1,7 +1,7 @@
 // 2026-11-08 payroll screens: the CSV import parser, the default period and the error wording.
 import { describe, expect, it } from "vitest";
 
-import { defaultPeriod, parseCsv, payrollError } from "./payrollUi";
+import { defaultPeriod, parseAmount, parseCsv, payrollError } from "./payrollUi";
 
 const t = ((key: string) => key) as never;
 
@@ -33,5 +33,20 @@ describe("payrollError", () => {
     expect(payrollError("THIS CYCLE WAS CHANGED BY SOMEONE ELSE - RELOAD", t)).toBe("payroll:errors.changedBySomeoneElse");
     expect(payrollError("THIS PAYSLIP WAS ALREADY SENT", t)).toBe("payroll:errors.alreadySent");
     expect(payrollError(null, t)).toBe("payroll:errors.generic");
+  });
+});
+
+describe("parseAmount", () => {
+  it("reads Latin, Arabic-Indic and Persian digits, Arabic decimal and thousands marks", () => {
+    expect(parseAmount("4500")).toBe(4500);
+    expect(parseAmount("٤٥٠٠")).toBe(4500);
+    expect(parseAmount("۱۲")).toBe(12);
+    expect(parseAmount("٤٨٧٫٤٧")).toBe(487.47);
+    expect(parseAmount("17٬868")).toBe(17868);
+    expect(parseAmount(" 6,5 ")).toBe(6.5);
+  });
+  it("empty is null, nonsense is NaN", () => {
+    expect(parseAmount("  ")).toBeNull();
+    expect(parseAmount("abc")).toBeNaN();
   });
 });

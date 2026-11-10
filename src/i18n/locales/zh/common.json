@@ -294,7 +294,9 @@
     "ownerAuthorityOwnerOnly": "只有所有者可以授予或撤回所有者权限。",
     "ownerAuthorityAlready": "此人已拥有所有者权限。",
     "ownerAuthorityNone": "此人没有所有者权限。",
-    "ownerAuthorityInactive": "此人未启用。"
+    "ownerAuthorityInactive": "此人未启用。",
+    "planManagerLimit": "Starter 套餐只有一名经理。升级套餐可添加更多经理或主管。",
+    "planExternalWorkerLimit": "已达到许可证允许的外部人员数量。请联系 PROSM。"
   },
   "pageLoad": {
     "title": "此页面需要网络连接",

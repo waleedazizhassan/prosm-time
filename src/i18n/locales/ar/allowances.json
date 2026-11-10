@@ -259,5 +259,9 @@
       "approved": "معتمد: {{count}}",
       "total": "المستحق: {{amount}}"
     }
+  },
+  "summary": {
+    "title": "إجمالي البدلات في الفترة",
+    "days": "{{count}} يوم"
   }
 }

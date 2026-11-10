@@ -216,7 +216,18 @@
     "insuranceExempt": "Non assuré",
     "taxExempt": "Exonéré d'impôt",
     "insurableWage": "Salaire assurable fixe (facultatif)",
-    "statutoryHint": "Ce n'est pas le salaire : saisissez-le plus haut dans \"Salaire de base\". Un salaire assurable fixe ne remplace le base que pour les cotisations, dans les limites."
+    "statutoryHint": "Ce n'est pas le salaire : saisissez-le plus haut dans \"Salaire de base\". Un salaire assurable fixe ne remplace le base que pour les cotisations, dans les limites.",
+    "editorTitle": "Salaire de {{name}}",
+    "saveAll": "Tout enregistrer",
+    "savedAll": "Enregistré.",
+    "applyFromDate": "Les nouvelles valeurs s'appliquent à partir du",
+    "applyFromHint": "En général le 1er du mois",
+    "salaryTitle": "Salaire et éléments fixes",
+    "salaryHint": "Saisissez les montants - les chiffres arabes sont acceptés. Les valeurs inchangées ne sont pas réenregistrées ; une case vidée met fin à l'élément.",
+    "moreOptions": "Plus d'options (devise, dates, notes)",
+    "badNumber": "Nombre invalide dans : {{field}}",
+    "search": "Rechercher par nom ou code",
+    "tapToEdit": "Touchez une personne pour ajouter ou modifier tout son salaire."
   },
   "installments": {
     "title": "Échéances et avances",

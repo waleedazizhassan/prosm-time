@@ -205,5 +205,6 @@
     "cannotDelete": "Solo se elimina un borrador que nunca se aprobó."
   },
   "addRateFailed": "Se añadió el trabajador, pero no se guardó la tarifa: {{error}}. Fíjala en Pago de mano de obra externa.",
-  "addRate": "Pago"
+  "addRate": "Pago",
+  "payTab": "Pagos"
 }

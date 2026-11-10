@@ -205,5 +205,6 @@
     "cannotDelete": "Seul un brouillon jamais approuvé peut être supprimé."
   },
   "addRateFailed": "Le travailleur a été ajouté, mais le tarif n'a pas été enregistré : {{error}}. Réglez-le dans Paie de la main-d'œuvre externe.",
-  "addRate": "Rémunération"
+  "addRate": "Rémunération",
+  "payTab": "Paie"
 }

@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Capacitor } from "@capacitor/core";
 import { LocalNotifications } from "@capacitor/local-notifications";
 import { ensureAlertChannel, NOTIFICATION_STYLE } from "../../core/services/notificationStyle";
 import { Download } from "lucide-react";
+import { AppUpdate, AppUpdateAvailability } from "@capawesome/capacitor-app-update";
 
 import { useUpdateCheck } from "../../core/hooks/useUpdateCheck";
 import styles from "./UpdateAvailableBanner.module.css";
@@ -33,9 +34,89 @@ const UPDATE_NOTICE_ID = 7101;
 // other notices (it no longer adds a bar above a full-screen app);
 // before sign-in it stays at the top, below the phone's status bar.
 export default function UpdateAvailableBanner({ placement = "top" }: { placement?: "top" | "shell" }) {
-  // Google Play updates its own build: nothing here reaches that bundle.
-  if (import.meta.env.VITE_DISTRIBUTION === "play") return null;
+  // Owner 2026-11-09: the Google Play build is told about an update too - by Google Play itself
+  // (in-app updates), so the notice appears only when Play really has the new version.
+  if (import.meta.env.VITE_DISTRIBUTION === "play") return <PlayUpdateBanner placement={placement} />;
   return <SelfUpdateBanner placement={placement} />;
+}
+
+const PLAY_URL = "https://play.google.com/store/apps/details?id=net.prosm.time";
+const PLAY_RECHECK_MS = 30 * 60 * 1000;
+
+function PlayUpdateBanner({ placement }: { placement: "top" | "shell" }) {
+  const { t } = useTranslation("shell");
+  const [version, setVersion] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!Capacitor.isNativePlatform()) return undefined;
+    let live = true;
+    const check = async () => {
+      try {
+        const info = await AppUpdate.getAppUpdateInfo();
+        if (!live) return;
+        const available = info.updateAvailability === AppUpdateAvailability.UPDATE_AVAILABLE;
+        setVersion(available ? info.availableVersionName ?? info.availableVersionCode ?? "" : null);
+      } catch {
+        // not installed from Google Play (or Play unreachable): no notice
+        if (live) setVersion(null);
+      }
+    };
+    void check();
+    const interval = window.setInterval(() => void check(), PLAY_RECHECK_MS);
+    const onReturn = () => {
+      if (document.visibilityState === "visible") void check();
+    };
+    document.addEventListener("visibilitychange", onReturn);
+    return () => {
+      live = false;
+      window.clearInterval(interval);
+      document.removeEventListener("visibilitychange", onReturn);
+    };
+  }, []);
+
+  // the same phone notification as the other builds, until the update is installed
+  useEffect(() => {
+    if (!Capacitor.isNativePlatform()) return;
+    void (async () => {
+      try {
+        await LocalNotifications.cancel({ notifications: [{ id: UPDATE_NOTICE_ID }] });
+        if (version === null) return;
+        const permission = await LocalNotifications.checkPermissions();
+        if (permission.display !== "granted") return;
+        await ensureAlertChannel();
+        await LocalNotifications.schedule({
+          notifications: [{ id: UPDATE_NOTICE_ID, title: t("update.noticeTitle"), body: version ? t("update.available", { version }) : t("update.availablePlay"), autoCancel: true, ...NOTIFICATION_STYLE }],
+        });
+      } catch (error) {
+        console.warn("[update] could not show the update notification", error);
+      }
+    })();
+  }, [version, t]);
+
+  if (version === null) return null;
+
+  // Google Play's own update screen; if it cannot run, the store page
+  const handleUpdate = async () => {
+    try {
+      await AppUpdate.performImmediateUpdate();
+    } catch {
+      try {
+        await AppUpdate.openAppStore();
+      } catch {
+        window.open(PLAY_URL, "_blank", "noopener,noreferrer");
+      }
+    }
+  };
+
+  return (
+    <div className={placement === "shell" ? `${styles.banner} ${styles.inShell}` : styles.banner} role="status">
+      <Download size={16} />
+      <span>{version ? t("update.available", { version }) : t("update.availablePlay")}</span>
+      <button type="button" className={styles.action} onClick={() => void handleUpdate()}>
+        {t("update.action")}
+      </button>
+    </div>
+  );
 }
 
 function SelfUpdateBanner({ placement }: { placement: "top" | "shell" }) {

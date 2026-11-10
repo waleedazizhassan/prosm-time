@@ -1,7 +1,7 @@
 import DatabaseManager from "../database/DatabaseManager";
 
 export interface PlanStatus {
-  plan: "legacy" | "starter" | "business" | "pro";
+  plan: "legacy" | "starter" | "business" | "pro" | "enterprise";
   status: "trial" | "active" | "expired" | "suspended";
   endsAt: string | null;
   graceEndsAt: string | null;
@@ -9,6 +9,11 @@ export interface PlanStatus {
   sites: number;
   maxEmployees: number | null;
   maxSites: number | null;
+  /** 2026-11-10: active external workers, the number the licence allows (null = no limit), and the
+   *  users billed: employees + one per 10 external workers. */
+  externalWorkers?: number;
+  maxExternalWorkers?: number | null;
+  billedUsers?: number;
 }
 
 // The owner's plan: what it is, what is used, when it ends. PROSM sets plans;

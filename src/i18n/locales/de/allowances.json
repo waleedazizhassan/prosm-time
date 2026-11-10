@@ -251,5 +251,9 @@
       "approved": "Genehmigt: {{count}}",
       "total": "Fällig: {{amount}}"
     }
+  },
+  "summary": {
+    "title": "Zulagen im Zeitraum",
+    "days": "{{count}} Tage"
   }
 }

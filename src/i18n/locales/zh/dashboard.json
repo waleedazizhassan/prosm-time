@@ -212,7 +212,8 @@
     "confirmClockInAction": "确认上班打卡",
     "confirmClockOutAction": "确认下班打卡",
     "confirmDateLabel": "日期",
-    "locationStale": "当前无法获取您的位置。请刷新页面或关闭并重新打开应用后再打卡。"
+    "locationStale": "当前无法获取您的位置。请刷新页面或关闭并重新打开应用后再打卡。",
+    "recenter": "回到我的位置"
   },
   "kioskPin": {
     "title": "考勤机 PIN",
@@ -337,7 +338,7 @@
       "sites": "地点",
       "approvals": "审批",
       "people": "按角色的人员",
-      "chart": "计划与实际",
+      "chart": "工时趋势",
       "cost": "津贴与成本",
       "audit": "操作日志",
       "external": "外部工人",
@@ -393,7 +394,10 @@
         "leave": "已批准假期包含今日的人员，不计为缺勤。",
         "overdue": "班次（或站点工作日）结束一小时后仍未签退，或自前一天起仍未结束。",
         "overtime": "所选期间内已批准的加班，待审核的不计入。"
-      }
+      },
+      "hoursShort": "小时",
+      "overtimeShort": "加班",
+      "overtimeApproved": "期间内已批准的加班"
     },
     "map": {
       "title": "当前地点",
@@ -470,12 +474,20 @@
       "title": "人员"
     },
     "chart": {
-      "title": "计划与实际",
+      "title": "工时趋势",
       "week": "周",
       "month": "月",
       "year": "年",
       "empty": "此时段暂无工时。",
-      "legend": "实心：已工作 · 虚线：计划 · 浅色：待审核"
+      "worked": "实际",
+      "scheduled": "计划",
+      "pending": "待审核",
+      "workedTotal": "小时实际",
+      "scheduledTotal": "小时计划",
+      "adherence": "达成率 {{rate}}%",
+      "tipWorked": "实际 {{hours}} 小时",
+      "tipScheduled": "计划 {{hours}} 小时",
+      "tipPending": "待审核 {{hours}} 小时"
     },
     "cost": {
       "title": "津贴与成本",
@@ -618,7 +630,12 @@
       "lateMeta": "{{days}} 天 · {{minutes}} 分钟",
       "overtimeMeta": "{{days}} 天 · {{minutes}} 分钟",
       "none": "此时段没有人。",
-      "unavailable": "请选择不超过两个月的时段。"
+      "unavailable": "请选择不超过两个月的时段。",
+      "noSchedule": "此期间没有排班 - 添加排班表即可查看出勤率。",
+      "lateTotal": "共 {{minutes}} 分钟",
+      "overtimeTotal": "共 {{hours}} 小时",
+      "lateShort": "{{days}} 天 · {{minutes}} 分钟",
+      "overtimeShort": "{{days}} 天 · {{minutes}} 分钟"
     }
   },
   "devices": {

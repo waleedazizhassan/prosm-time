@@ -56,3 +56,14 @@
     display: none;
   }
 }
+
+/* Owner 2026-11-10: the employee's home is the map alone - no footer line and no scrolling. */
+:global(html.employee-home) .footer {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  :global(html.employee-home) .main {
+    overflow: hidden;
+  }
+}

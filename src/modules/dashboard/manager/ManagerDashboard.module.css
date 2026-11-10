@@ -168,7 +168,10 @@
 
 .kpi {
   display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  align-content: start;
   gap: 4px;
+  min-width: 0;
   padding: var(--space-3);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
@@ -180,8 +183,159 @@
 }
 
 .kpiLabel {
+  min-width: 0;
   font-size: 0.75rem;
   color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* owner 2026-11-09: every figure card has the same shape - icon + name, figure + unit, context, footer */
+.kpiHead {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.kpiIcon {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--brand-primary) 14%, transparent);
+  color: var(--brand-primary);
+}
+
+.kpiUnit {
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+}
+
+.kpiFoot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 18px;
+}
+
+.kpi.kpiWarn {
+  border-color: color-mix(in srgb, var(--status-warning-text, #b45309) 55%, transparent);
+}
+
+.kpi.kpiWarn .kpiIcon {
+  background: color-mix(in srgb, var(--status-warning-text, #b45309) 16%, transparent);
+  color: var(--status-warning-text, #b45309);
+}
+
+.kpi.kpiAlert .kpiIcon {
+  background: color-mix(in srgb, var(--brand-danger) 16%, transparent);
+  color: var(--brand-danger);
+}
+
+/* the hours chart: totals above, a colour legend below */
+.chartSummary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.chartSummary b {
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+/* attendance indicators: three tiles, a ring and two bar lists */
+.insights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--space-3);
+}
+
+.insightTile {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
+}
+
+.ringRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.ring {
+  width: 96px;
+  height: 96px;
+  flex: none;
+}
+
+.ringText {
+  display: grid;
+  gap: 4px;
+}
+
+.personBars {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.personBars li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+}
+
+.personBarName {
+  width: 7.5rem;
+  flex: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.personBarValue {
+  flex: none;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
 }
 
 .kpiValue {
@@ -199,7 +353,12 @@
 
 .trendUp,
 .trendDown {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
   justify-self: start;
+  white-space: nowrap;
+  line-height: 1.6;
   padding: 0 6px;
   border-radius: 999px;
   font-size: 0.75rem;
@@ -692,6 +851,26 @@
   .kpiHint {
     font-size: 0.6875rem;
     line-height: 1.25;
+  }
+
+  .kpiLabel {
+    white-space: normal;
+  }
+
+  .kpiHead {
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .kpiIcon {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+  }
+
+  .kpiIcon svg {
+    width: 12px;
+    height: 12px;
   }
 
   .kpiValue {

@@ -18,6 +18,7 @@ export default function HelpPage() {
 
   const guideSections = [
     "gettingStarted",
+    "employeeHome",
     "attendance",
     "offline",
     "walkInGeofence",
@@ -51,15 +52,18 @@ export default function HelpPage() {
     "announcements",
     "departments",
     "peopleAndPhotos",
+    "personPage",
     "permissions",
     "calendar",
     "phoneNotifications",
     "getTheApp",
+    "updates",
+    "headerTools",
     "liveMap",
     "radio",
     "privacy",
   ] as const;
-  const faqEntries = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] as const;
+  const faqEntries = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18] as const;
 
   return (
     <PageShell title="">

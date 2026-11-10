@@ -32,6 +32,7 @@ import PeriodDeductionsCard from "./PeriodDeductionsCard";
 import DateRange from "../../components/common/DateRange";
 import PersonName from "../../components/common/PersonName";
 import AllowanceSheetGrid, { entryInput } from "./AllowanceSheetGrid";
+import AllowanceSummary from "./AllowanceSummary";
 import { allowanceSheetTable } from "./allowanceSheetTable";
 import { toXlsx } from "../../core/utils/spreadsheet";
 import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
@@ -61,17 +62,6 @@ function entryTotal(entry: AllowanceEntry): number {
     entry.extraDaysAmount
   );
 }
-
-const TOTALS: [string, (entry: AllowanceEntry) => number][] = [
-  ["meal", (entry) => entry.mealAllowance],
-  ["expatriation", (entry) => entry.expatriationAllowance],
-  ["transportation", (entry) => entry.transportationAllowance],
-  ["housing", (entry) => entry.housingAllowance],
-  ["travel", (entry) => entry.travelAllowance],
-  ["other", (entry) => entry.otherAllowance],
-  ["overtimeAmount", (entry) => entry.overtimeAmount + entry.extraDaysAmount],
-  ["total", entryTotal],
-];
 
 function isoDate(date: Date): string {
   return date.toISOString().slice(0, 10);
@@ -527,7 +517,17 @@ export default function AllowancesPage() {
     <PageShell title="">
       <PageBanner pageId="allowances" illustration={allowancesHeaderImage} />
 
-      <div style={{ display: "flex", justifyContent: "flex-end", flexWrap: "wrap", gap: "var(--space-2)", marginBottom: "var(--space-4)" }}>
+      <Card title={t("filters.title")}>
+        <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
+          <DateRange>
+            <Input label={t("filters.fromLabel")} name="allowancesFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />
+            <Input label={t("filters.toLabel")} name="allowancesTo" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
+          </DateRange>
+          {showEmployeeFilter ? (
+            <Select label={t("filters.employeeLabel")} name="allowancesEmployee" value={employeeFilter} onChange={(event) => setEmployeeFilter(event.target.value)} options={employeeOptions} />
+          ) : null}
+          {/* owner 2026-11-09: the period and its actions in one bar */}
+          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", gap: "var(--space-2)", marginInlineStart: "auto" }}>
         {canApprove || ownerAuthority ? (
           <Button variant="ghost" onClick={() => navigate("/allowances/prices")}>
             {t("prices.openAction")}
@@ -547,19 +547,11 @@ export default function AllowancesPage() {
         <Button onClick={() => handleExportPdf()} loading={exportingPdf} disabled={filteredEntries.length === 0}>
           {t("exportPdfAction")}
         </Button>
-      </div>
-
-      <Card title={t("filters.title")}>
-        <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
-          <DateRange>
-            <Input label={t("filters.fromLabel")} name="allowancesFrom" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />
-            <Input label={t("filters.toLabel")} name="allowancesTo" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
-          </DateRange>
-          {showEmployeeFilter ? (
-            <Select label={t("filters.employeeLabel")} name="allowancesEmployee" value={employeeFilter} onChange={(event) => setEmployeeFilter(event.target.value)} options={employeeOptions} />
-          ) : null}
+          </div>
         </div>
       </Card>
+
+      <AllowanceSummary entries={filteredEntries} />
 
       {isOwner ? null : (
         // Owner 2026-11-04: "a shorter workflow, and clearer" - three numbered steps and where the
@@ -567,18 +559,6 @@ export default function AllowancesPage() {
         <Card title={t("flow.title")}>
           <ErrorText>{addError}</ErrorText>
           {fillMessage ? <p style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-sm)", color: "var(--status-success-text)" }}>{fillMessage}</p> : null}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)", marginBottom: "var(--space-4)" }}>
-            {[
-              ["draft", t("flow.status.draft", { count: ownCounts.draft }), "var(--surface-sunken)"],
-              ["sent", t("flow.status.sent", { count: ownCounts.sent }), "var(--status-warning-bg, var(--surface-sunken))"],
-              ["approved", t("flow.status.approved", { count: ownCounts.approved }), "var(--status-success-bg, var(--surface-sunken))"],
-              ["total", t("flow.status.total", { amount: ownCounts.total.toLocaleString(appLocale(i18n.language), { maximumFractionDigits: 2 }) }), "var(--brand-gradient-soft), var(--surface-sunken)"],
-            ].map(([key, label, background]) => (
-              <span key={key} style={{ padding: "4px 10px", borderRadius: 999, background, fontSize: "var(--font-sm)", fontWeight: key === "total" ? 700 : 500 }}>
-                {label}
-              </span>
-            ))}
-          </div>
           <ol style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: "var(--space-4)" }}>
             <FlowStep number={1} title={t("flow.step1")} hint={t("flow.step1Hint")}>
               <Button fullWidth onClick={handleFill} loading={filling}>
@@ -746,19 +726,6 @@ export default function AllowancesPage() {
           onSetSite={saveSite}
         />
       </Card>
-
-      {filteredEntries.length > 0 ? (
-        <Card title={t("totals.title")}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: "var(--space-3)" }}>
-            {TOTALS.map(([key, pick]) => (
-              <div key={key} style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", background: key === "total" ? "var(--brand-gradient-soft), var(--surface-sunken)" : "var(--surface-sunken)" }}>
-                <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t(`columns.${key}`)}</div>
-                <div style={{ fontSize: "var(--font-lg)", fontWeight: 700 }}>{filteredEntries.reduce((sum, entry) => sum + pick(entry), 0).toFixed(2)}</div>
-              </div>
-            ))}
-          </div>
-        </Card>
-      ) : null}
 
       {myRates.length > 0 ? (
         <Card title={t("myPrices.title")} subtitle={t("myPrices.hint")} flush>

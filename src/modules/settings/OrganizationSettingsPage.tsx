@@ -89,7 +89,7 @@ export default function OrganizationSettingsPage() {
       {isOwner ? <PlanSettingsCard /> : null}
       {hasPermission("calendar.manage") ? <SettingsLink to="/calendar" title={t("links.calendar.title")} hint={t("links.calendar.hint")} /> : null}
       {/* 2026-11-09 Media Center: departments (announcements can be addressed to them) */}
-      {hasPermission("departments.manage") ? <DepartmentsSettingsCard /> : null}
+      {allows("departments") && hasPermission("departments.manage") ? <DepartmentsSettingsCard /> : null}
 
       <SectionHeading>{t("sections.sites")}</SectionHeading>
       <SitePolicySettingsCard />
@@ -114,7 +114,7 @@ export default function OrganizationSettingsPage() {
       {profile?.isRealOwner || showAudit || isOwner ? <SectionHeading>{t("sections.governance")}</SectionHeading> : null}
       {profile?.isRealOwner ? <SettingsLink to="/permissions" title={t("links.permissions.title")} hint={t("links.permissions.hint")} /> : null}
       {showAudit ? <SettingsLink to="/audit-log" title={t("links.auditLog.title")} hint={t("links.auditLog.hint")} /> : null}
-      {isOwner ? <RetentionSettingsCard /> : null}
+      {isOwner && allows("retention") ? <RetentionSettingsCard /> : null}
       {/* 2026-11-09: the API is on again (owner) - keys and webhooks live on their own page */}
       {FEATURES.integrations && isOwner && allows("integrations") ? <SettingsLink to="/integrations" title={t("links.integrations.title")} hint={t("links.integrations.hint")} /> : null}
     </PageShell>

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Copy } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
@@ -32,6 +32,7 @@ export default function ExternalWorkersPage() {
   const { t, i18n } = useTranslation(["workforce", "externalPay"]);
   const [confirm, confirmDialog] = useConfirm();
   const { profile, hasPermission } = useAuth();
+  const navigate = useNavigate();
   const allowed = Boolean(profile?.isOwner) || hasPermission("sites.manage");
 
   const [workers, setWorkers] = useState<ExternalWorker[]>([]);
@@ -79,7 +80,9 @@ export default function ExternalWorkersPage() {
     if (allowed) void load();
   }, [allowed, load]);
 
-  if (!allowed) return <Navigate to="/dashboard" replace />;
+  // owner 2026-11-09: whoever only sees the pay lands on it
+  const seesPay = Boolean(profile?.isOwner) || hasPermission("external_labor.view_pay");
+  if (!allowed) return <Navigate to={seesPay ? "/workers/pay" : "/dashboard"} replace />;
 
   const handleAdd = async () => {
     setAdding(true);
@@ -220,6 +223,13 @@ export default function ExternalWorkersPage() {
   return (
     <PageShell title="">
       <PageBanner pageId="workers" illustration={workersArt} />
+      {/* Owner 2026-11-09: the workers and their pay are one place */}
+      {seesPay ? (
+        <div role="tablist" style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)", marginBottom: "var(--space-3)" }}>
+          <Button role="tab" aria-selected>{t("externalPay:views.workers")}</Button>
+          <Button role="tab" variant="ghost" onClick={() => navigate("/workers/pay")}>{t("externalPay:payTab")}</Button>
+        </div>
+      ) : null}
       {confirmDialog}
 
       <Card title={t("addTitle")}>

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import styles from "./PersonDetailPage.module.css";
 import { useTranslation } from "react-i18next";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 
@@ -7,7 +8,6 @@ import EmployeeRepository, { type OrgMember } from "../../core/repositories/Empl
 import PermissionRepository, { type Permission } from "../../core/repositories/PermissionRepository";
 import DeviceBindingRepository, { type DeviceBinding } from "../../core/repositories/DeviceBindingRepository";
 import LeaveRepository from "../../core/repositories/LeaveRepository";
-import PayRateRepository, { type PayRate, type PayRateType } from "../../core/repositories/PayRateRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import PageShell from "../../components/common/PageShell";
@@ -17,7 +17,6 @@ import EmptyState from "../../components/common/EmptyState";
 import ListRow from "../../components/common/ListRow";
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
-import Select from "../../components/common/Select";
 import Modal from "../../components/common/Modal";
 import Textarea from "../../components/common/Textarea";
 import StatusBadge from "../../components/common/StatusBadge";
@@ -71,13 +70,6 @@ export default function PersonDetailPage() {
   const [entitlementError, setEntitlementError] = useState("");
   const [entitlementSuccess, setEntitlementSuccess] = useState(false);
 
-  const [currentPayRate, setCurrentPayRate] = useState<PayRate | null>(null);
-  const [payRateTypeInput, setPayRateTypeInput] = useState<PayRateType>("MONTHLY");
-  const [payRateAmountInput, setPayRateAmountInput] = useState("");
-  const [payRateSubmitting, setPayRateSubmitting] = useState(false);
-  const [payRateError, setPayRateError] = useState("");
-  const [payRateSuccess, setPayRateSuccess] = useState(false);
-
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [deleteReason, setDeleteReason] = useState("");
   const [deleteSubmitting, setDeleteSubmitting] = useState(false);
@@ -118,23 +110,19 @@ export default function PersonDetailPage() {
   // social-insurance tenure legally entitles 30 days/year, not the
   // org's 21-day default). Owner-only, same posture as canDeactivate.
   const canEditLeaveEntitlement = Boolean(profile?.isOwner);
-  // § PROSM Finance labor-cost bridge (2026-09-14) - compensation data,
-  // Owner-only both here and server-side (set_worker_pay_rate).
-  const canEditPayRate = Boolean(profile?.isOwner);
 
   const load = useCallback(async () => {
     if (!userId) return;
     setLoading(true);
     setLoadError("");
 
-    const [memberResult, catalogResult, effectiveResult, overridesResult, devicesResult, leaveBalanceResult, payRateResult] = await Promise.all([
+    const [memberResult, catalogResult, effectiveResult, overridesResult, devicesResult, leaveBalanceResult] = await Promise.all([
       EmployeeRepository.getMember(userId),
       PermissionRepository.listCatalog(),
       PermissionRepository.getEffectivePermissions(userId),
       PermissionRepository.getUserOverrides(userId),
       DeviceBindingRepository.listForUser(userId),
       LeaveRepository.getBalanceFor(userId),
-      PayRateRepository.getCurrentForUser(userId),
     ]);
 
     if (!memberResult.success) {
@@ -152,13 +140,6 @@ export default function PersonDetailPage() {
       const annual = leaveBalanceResult.data.balances.find((entry) => entry.leaveType === "annual");
       setAnnualEntitlement(annual?.entitledDays ?? null);
       setAnnualEntitlementInput(annual?.entitledDays != null ? String(annual.entitledDays) : "");
-    }
-    if (payRateResult.success) {
-      setCurrentPayRate(payRateResult.data);
-      if (payRateResult.data) {
-        setPayRateTypeInput(payRateResult.data.rateType);
-        setPayRateAmountInput(String(payRateResult.data.rateAmount));
-      }
     }
     setLoading(false);
   }, [userId, t]);
@@ -178,23 +159,6 @@ export default function PersonDetailPage() {
     }
     setAnnualEntitlement(days);
     setEntitlementSuccess(true);
-  };
-
-  const handleSetPayRate = async () => {
-    if (!userId) return;
-    const amount = Number(payRateAmountInput);
-    if (!Number.isFinite(amount) || amount <= 0) return;
-    setPayRateSubmitting(true);
-    setPayRateError("");
-    setPayRateSuccess(false);
-    const result = await PayRateRepository.setRateForUser(userId, payRateTypeInput, amount);
-    setPayRateSubmitting(false);
-    if (!result.success) {
-      setPayRateError(humanizeBackendError(result.message, t) ?? t("detail.payRateError"));
-      return;
-    }
-    setPayRateSuccess(true);
-    await load();
   };
 
   useEffect(() => {
@@ -326,49 +290,41 @@ export default function PersonDetailPage() {
         {t("detail.backToList")}
       </Link>
 
-      {/* Owner 2026-10-20 ("nothing repeated"): one Account card - stop or
-          restore access (reversible), or remove the person for good
-          (their sign-in account too) - instead of two separate cards. */}
-      {!member.isActive || (canDeactivate && !member.isOwner) ? (
-        <Card title={t("detail.accessTitle")}>
-          {!member.isActive ? <StatusBadge status="deactivated">{t("detail.deactivatedBadge")}</StatusBadge> : null}
-          {canDeactivate && !member.isOwner ? (
-            <>
-              <HintText small>{member.isActive ? t("detail.deactivateHint") : null}</HintText>
-              <HintText small>{t("detail.removeHint")}</HintText>
-            </>
+      {/* Owner 2026-11-09: the person's cards in one even order, close together - who they are and their
+          work first, then their role and permissions, then checks and devices, and access last */}
+      <div className={styles.cards}>
+      {/* 2026-11-09 Media Center: the person's department */}
+      {userId && !member.isOwner ? <DepartmentCard userId={userId} canEdit={hasPermission("employees.edit")} /> : null}
+      {userId && (canEditLeaveEntitlement || hasPermission("employees.edit")) ? (
+        <EmploymentDetailsCard userId={userId} canEdit={Boolean(profile?.isOwner) || hasPermission("employees.edit")} />
+      ) : null}
+      {canEditLeaveEntitlement ? (
+        <Card title={t("detail.leaveEntitlementTitle")}>
+          <HintText small>{t("detail.leaveEntitlementHint")}</HintText>
+          {annualEntitlement != null ? (
+            <p style={{ fontSize: "var(--font-sm)", margin: "0 0 var(--space-2)" }}>{t("detail.leaveEntitlementCurrent", { days: annualEntitlement })}</p>
           ) : null}
-          <ErrorText>{reactivateError}</ErrorText>
-          {canDeactivate ? (
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)", marginTop: "var(--space-3)" }}>
-              {member.isActive ? (
-                member.isOwner ? null : (
-                  <Button variant="ghost" onClick={() => setDeactivateModalOpen(true)}>
-                    {t("detail.deactivateAction")}
-                  </Button>
-                )
-              ) : (
-                <Button onClick={handleReactivate} loading={reactivateSubmitting}>
-                  {t("detail.reactivateAction")}
-                </Button>
-              )}
-              {member.isOwner ? null : (
-                <Button variant="danger" onClick={() => setRemoveModalOpen(true)}>
-                  {t("detail.removeAction")}
-                </Button>
-              )}
-            </div>
-          ) : null}
+          <ErrorText>{entitlementError}</ErrorText>
+          {entitlementSuccess ? <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("detail.leaveEntitlementSuccess")}</p> : null}
+          <Input
+            label={t("detail.leaveEntitlementLabel")}
+            name="annualEntitlement"
+            type="number"
+            value={annualEntitlementInput}
+            onChange={(event) => setAnnualEntitlementInput(event.target.value)}
+            disabled={entitlementSubmitting}
+          />
+          <Button onClick={handleSetAnnualEntitlement} loading={entitlementSubmitting} disabled={!annualEntitlementInput.trim()}>
+            {t("detail.leaveEntitlementAction")}
+          </Button>
         </Card>
       ) : null}
-
       {/* 2026-11-09 B-01: change the role (the server decides who may and for which role) */}
       {!member.isOwner && member.id !== profile?.id && (profile?.isRealOwner || hasPermission("permissions.assign")) ? (
         <RoleChangeCard key={member.roleKey} userId={member.id} currentRole={member.roleKey} onChanged={() => void load()} />
       ) : null}
-
       {canManagePermissions ? (
-        <Card title={t("detail.permissionsTitle")}>
+        <Card title={t("detail.permissionsTitle")} className="wide">
           <HintText small>{t("detail.permissionsHint")}</HintText>
 
           {member.isOwner ? (
@@ -411,7 +367,10 @@ export default function PersonDetailPage() {
           )}
         </Card>
       ) : null}
-
+      {userId && userId !== profile?.id && (hasPermission("attendance.review_integrity_flags") || hasPermission("sites.manage_integrity")) ? <LivenessExemptionCard userId={userId} /> : null}
+      {userId && userId !== profile?.id && hasPermission("sites.manage_exit_policy") ? <FieldWorkerCard userId={userId} /> : null}
+      {/* Owner 2026-11-09: shown only when there is a device to show */}
+      {devices.length > 0 ? (
       <Card title={t("detail.devicesTitle")}>
         <HintText small>{t("detail.devicesHint")}</HintText>
         <ErrorText>{deviceActionError}</ErrorText>
@@ -440,78 +399,52 @@ export default function PersonDetailPage() {
           ))
         )}
       </Card>
-
-      {/* 2026-11-09 Media Center: the person's department */}
-      {userId && !member.isOwner ? <DepartmentCard userId={userId} canEdit={hasPermission("employees.edit")} /> : null}
-
-      {userId && (canEditLeaveEntitlement || hasPermission("employees.edit")) ? (
-        <EmploymentDetailsCard userId={userId} canEdit={Boolean(profile?.isOwner) || hasPermission("employees.edit")} />
       ) : null}
-
-      {userId && userId !== profile?.id && (hasPermission("attendance.review_integrity_flags") || hasPermission("sites.manage_integrity")) ? <LivenessExemptionCard userId={userId} /> : null}
-      {userId && userId !== profile?.id && hasPermission("sites.manage_exit_policy") ? <FieldWorkerCard userId={userId} /> : null}
-
-      {canEditLeaveEntitlement ? (
-        <Card title={t("detail.leaveEntitlementTitle")}>
-          <HintText small>{t("detail.leaveEntitlementHint")}</HintText>
-          {annualEntitlement != null ? (
-            <p style={{ fontSize: "var(--font-sm)", margin: "0 0 var(--space-2)" }}>{t("detail.leaveEntitlementCurrent", { days: annualEntitlement })}</p>
+      {/* Owner 2026-10-20 ("nothing repeated"): one Account card - stop or
+          restore access (reversible), or remove the person for good
+          (their sign-in account too) - instead of two separate cards. */}
+      {/* Owner 2026-11-09: access and the data rights in one card */}
+      {!member.isActive || (canDeactivate && !member.isOwner) || canManageDevices ? (
+        <Card title={t("detail.accessTitle")}>
+          {!member.isActive ? <StatusBadge status="deactivated">{t("detail.deactivatedBadge")}</StatusBadge> : null}
+          {canDeactivate && !member.isOwner ? (
+            <>
+              <HintText small>{member.isActive ? t("detail.deactivateHint") : null}</HintText>
+              <HintText small>{t("detail.removeHint")}</HintText>
+            </>
           ) : null}
-          <ErrorText>{entitlementError}</ErrorText>
-          {entitlementSuccess ? <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("detail.leaveEntitlementSuccess")}</p> : null}
-          <Input
-            label={t("detail.leaveEntitlementLabel")}
-            name="annualEntitlement"
-            type="number"
-            value={annualEntitlementInput}
-            onChange={(event) => setAnnualEntitlementInput(event.target.value)}
-            disabled={entitlementSubmitting}
-          />
-          <Button onClick={handleSetAnnualEntitlement} loading={entitlementSubmitting} disabled={!annualEntitlementInput.trim()}>
-            {t("detail.leaveEntitlementAction")}
-          </Button>
-        </Card>
-      ) : null}
-
-      {canEditPayRate ? (
-        <Card title={t("detail.payRateTitle")}>
-          <HintText small>{t("detail.payRateHint")}</HintText>
-          {currentPayRate ? (
-            <p style={{ fontSize: "var(--font-sm)", margin: "0 0 var(--space-2)" }}>
-              {t("detail.payRateCurrent", { amount: currentPayRate.rateAmount, currency: currentPayRate.currency, type: t(`detail.payRateType.${currentPayRate.rateType}`) })}
-            </p>
+          <ErrorText>{reactivateError}</ErrorText>
+          {canDeactivate ? (
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)", marginTop: "var(--space-3)" }}>
+              {member.isActive ? (
+                member.isOwner ? null : (
+                  <Button variant="ghost" onClick={() => setDeactivateModalOpen(true)}>
+                    {t("detail.deactivateAction")}
+                  </Button>
+                )
+              ) : (
+                <Button onClick={handleReactivate} loading={reactivateSubmitting}>
+                  {t("detail.reactivateAction")}
+                </Button>
+              )}
+              {member.isOwner ? null : (
+                <Button variant="danger" onClick={() => setRemoveModalOpen(true)}>
+                  {t("detail.removeAction")}
+                </Button>
+              )}
+            </div>
           ) : null}
-          <ErrorText>{payRateError}</ErrorText>
-          {payRateSuccess ? <p style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("detail.payRateSuccess")}</p> : null}
-          <Select
-            label={t("detail.payRateTypeLabel")}
-            name="payRateType"
-            value={payRateTypeInput}
-            onChange={(event) => setPayRateTypeInput(event.target.value as PayRateType)}
-            disabled={payRateSubmitting}
-            options={[
-              { value: "MONTHLY", label: t("detail.payRateType.MONTHLY") },
-              { value: "HOURLY", label: t("detail.payRateType.HOURLY") },
-            ]}
-          />
-          <Input label={t("detail.payRateAmountLabel")} name="payRateAmount" type="number" value={payRateAmountInput} onChange={(event) => setPayRateAmountInput(event.target.value)} disabled={payRateSubmitting} />
-          <Button onClick={handleSetPayRate} loading={payRateSubmitting} disabled={!payRateAmountInput.trim()}>
-            {t("detail.payRateAction")}
-          </Button>
+          {canManageDevices ? (
+            <div style={{ marginTop: "var(--space-3)", paddingTop: "var(--space-3)", borderTop: "1px solid var(--border-light)" }}>
+              <HintText small>{t("detail.dataRightsHint")}</HintText>
+              <Button variant="danger" onClick={() => setDeleteModalOpen(true)}>
+                {t("detail.deleteDataAction")}
+              </Button>
+            </div>
+          ) : null}
         </Card>
       ) : null}
-
-      {canManageDevices ? (
-        <Card title={t("detail.dataRightsTitle")}>
-          <HintText small>{t("detail.dataRightsHint")}</HintText>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
-            <Button variant="danger" onClick={() => setDeleteModalOpen(true)}>
-              {t("detail.deleteDataAction")}
-            </Button>
-          </div>
-        </Card>
-      ) : null}
-
+      </div>
       {/* Owner 2026-11-09: clocking in on someone's behalf lives on its own page in the sidebar only */}
 
       <Modal

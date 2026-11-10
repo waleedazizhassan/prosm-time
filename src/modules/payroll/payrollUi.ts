@@ -6,6 +6,20 @@ import type { CycleStatus } from "../../core/repositories/PayrollCycleRepository
 
 // Small shared pieces of the payroll screens (2026-11-08).
 
+/** An amount typed on any keyboard: Arabic-Indic and Persian digits, Arabic comma/decimal sign (owner 2026-11-09:
+ *  "the fields don't save" - number fields dropped digits typed on an Arabic keyboard). Empty -> null. */
+export function parseAmount(text: string): number | null {
+  const ascii = text
+    .trim()
+    .replace(/[\u0660-\u0669]/g, (d) => String(d.charCodeAt(0) - 0x0660))
+    .replace(/[\u06F0-\u06F9]/g, (d) => String(d.charCodeAt(0) - 0x06f0))
+    .replace(/[\u066B\u060C,]/g, ".")
+    .replace(/[\u066C\s]/g, "");
+  if (ascii === "") return null;
+  const value = Number(ascii);
+  return Number.isFinite(value) ? value : NaN;
+}
+
 export const money = (value: number | string | null | undefined) =>
   Number(value ?? 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 

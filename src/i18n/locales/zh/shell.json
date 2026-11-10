@@ -39,7 +39,8 @@
     "checkAction": "检查更新",
     "checking": "正在检查...",
     "upToDate": "您使用的是最新版本。",
-    "noticeTitle": "PROSM Time 更新"
+    "noticeTitle": "PROSM Time 更新",
+    "availablePlay": "Google Play 上有新版本可用。"
   },
   "offline": {
     "message": "别担心，上班、下班和休息打卡仍然可用，恢复联网后我们会立即发送。",

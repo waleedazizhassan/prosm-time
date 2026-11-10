@@ -23,7 +23,7 @@ import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
 import LoadingState from "../../components/common/LoadingState";
-import { STATUS_BADGE, money, parseCsv, payrollError, saveXlsx } from "./payrollUi";
+import { STATUS_BADGE, money, parseAmount, parseCsv, payrollError, saveXlsx } from "./payrollUi";
 import { buildPayslipsPdf, buildReportXlsx, buildSummaryPdf } from "./payrollDocuments";
 
 type Action = "submit" | "return" | "approve" | "lock" | "reopen" | "cancel";
@@ -109,6 +109,18 @@ export default function PayrollCyclePage() {
     window.addEventListener("beforeunload", warn);
     return () => window.removeEventListener("beforeunload", warn);
   }, [dirty]);
+
+  // Amount boxes accept Arabic digits (owner 2026-11-09: "the fields don't save"); a bad number is said
+  // inside the open window instead of silently becoming 0.
+  const amountOf = (text: string): number | null => {
+    const value = parseAmount(text);
+    if (value === null || Number.isNaN(value) || value < 0) {
+      setError(t("profiles.badNumber", { field: t("lines.amount") }));
+      return null;
+    }
+    return value;
+  };
+  const modalError = error ? <ErrorText>{error}</ErrorText> : null;
 
   const run = async (key: string, task: () => Promise<{ error: string | null }>) => {
     setBusy(key);
@@ -359,9 +371,11 @@ export default function PayrollCyclePage() {
 
       {/* one line for the chosen people (all or nothing) */}
       <Modal isOpen={bulk !== null} onClose={() => setBulk(null)} title={t("cycle.addToChosen", { count: chosen.length })}
-        footer={<Button loading={busy === "bulk"} disabled={!bulk?.componentId || bulk.amount === "" || Number(bulk.amount) < 0} onClick={async () => {
+        footer={<Button loading={busy === "bulk"} disabled={!bulk?.componentId || bulk.amount.trim() === ""} onClick={async () => {
           if (!bulk) return;
-          const okBulk = await run("bulk", () => PayrollCycleRepository.addLineBulk(cycleId, chosen, bulk.componentId, Number(bulk.amount), bulk.notes.trim() || null));
+          const amount = amountOf(bulk.amount);
+          if (amount === null) return;
+          const okBulk = await run("bulk", () => PayrollCycleRepository.addLineBulk(cycleId, chosen, bulk.componentId, amount, bulk.notes.trim() || null));
           if (okBulk) {
             setBulk(null);
             setChosen([]);
@@ -369,9 +383,10 @@ export default function PayrollCyclePage() {
         }}>{t("lines.save")}</Button>}>
         {bulk ? (
           <div style={{ display: "grid", gap: "var(--space-3)" }}>
+            {modalError}
             <Select label={t("lines.component")} name="bulkComponent" value={bulk.componentId} onChange={(event) => setBulk({ ...bulk, componentId: event.target.value })}
               options={variableComponents.map((c) => ({ value: c.id, label: isRtl ? c.name_ar : c.name_en || c.name_ar }))} />
-            <Input label={t("lines.amount")} name="bulkAmount" type="number" value={bulk.amount} onChange={(event) => setBulk({ ...bulk, amount: event.target.value })} />
+            <Input label={t("lines.amount")} name="bulkAmount" inputMode="decimal" value={bulk.amount} onChange={(event) => setBulk({ ...bulk, amount: event.target.value })} />
             <Input label={t("lines.notes")} name="bulkNotes" value={bulk.notes} onChange={(event) => setBulk({ ...bulk, notes: event.target.value })} />
             <HintText small>{t("cycle.bulkHint")}</HintText>
           </div>
@@ -383,6 +398,7 @@ export default function PayrollCyclePage() {
         footer={open && editable && can.enterVariables ? <Button onClick={() => setLine({ id: null, componentId: variableComponents[0]?.id ?? "", amount: "", notes: "", version: null })}>{t("lines.add")}</Button> : undefined}>
         {open ? (
           <div>
+            {line || bulk || accepting ? null : modalError}
             {(["earning", "allowance", "deduction", "installment"] as CycleLine["category"][]).map((category) => {
               const lines = open.lines.filter((l) => l.category === category);
               if (lines.length === 0) return null;
@@ -418,14 +434,17 @@ export default function PayrollCyclePage() {
       <Modal isOpen={Boolean(line)} onClose={() => setLine(null)} title={line?.id ? t("lines.edit") : t("lines.add")}
         footer={<Button loading={busy === "line"} onClick={async () => {
           if (!line || !open) return;
-          const ok = await run("line", () => PayrollCycleRepository.saveLine(open.id, line.id, line.id ? null : line.componentId, Number(line.amount), line.notes.trim() || null, line.version));
+          const amount = amountOf(line.amount);
+          if (amount === null) return;
+          const ok = await run("line", () => PayrollCycleRepository.saveLine(open.id, line.id, line.id ? null : line.componentId, amount, line.notes.trim() || null, line.version));
           if (ok) setLine(null);
         }}>{t("lines.save")}</Button>}>
         {line ? (
           <>
+            {modalError}
             {!line.id ? <Select label={t("lines.component")} name="lineComponent" value={line.componentId} onChange={(event) => setLine({ ...line, componentId: event.target.value })}
               options={variableComponents.map((c) => ({ value: c.id, label: `${isRtl ? c.name_ar : c.name_en || c.name_ar} · ${t(`categories.${c.category}`)}` }))} /> : null}
-            <Input label={t("lines.amount")} name="lineAmount" type="number" value={line.amount} onChange={(event) => setLine({ ...line, amount: event.target.value })} />
+            <Input label={t("lines.amount")} name="lineAmount" inputMode="decimal" value={line.amount} onChange={(event) => setLine({ ...line, amount: event.target.value })} />
             <Input label={t("lines.notes")} name="lineNotes" value={line.notes} onChange={(event) => setLine({ ...line, notes: event.target.value })} />
             {variableComponents.length === 0 ? <HintText small>{t("lines.noVariableComponents")}</HintText> : null}
           </>
@@ -435,16 +454,19 @@ export default function PayrollCyclePage() {
       <Modal isOpen={Boolean(accepting)} onClose={() => setAccepting(null)} title={t("suggestions.review")}
         footer={<Button loading={busy === "accept"} onClick={async () => {
           if (!accepting) return;
-          const ok = await run("accept", () => PayrollCycleRepository.saveLine(accepting.s.cycleEmployeeId, null, accepting.componentId, Number(accepting.amount), null, null, "attendance_suggestion",
+          const amount = amountOf(accepting.amount);
+          if (amount === null) return;
+          const ok = await run("accept", () => PayrollCycleRepository.saveLine(accepting.s.cycleEmployeeId, null, accepting.componentId, amount, null, null, "attendance_suggestion",
             { kind: accepting.s.kind, quantity: accepting.s.quantity, unit: accepting.s.unit, suggested: accepting.s.amount }));
           if (ok) setAccepting(null);
         }}>{t("suggestions.accept")}</Button>}>
         {accepting ? (
           <>
+            {modalError}
             <HintText small>{accepting.s.fullName} · {t(`suggestions.${accepting.s.kind}`, { quantity: Math.round(accepting.s.quantity * 100) / 100 })}</HintText>
             <Select label={t("lines.component")} name="acceptComponent" value={accepting.componentId} onChange={(event) => setAccepting({ ...accepting, componentId: event.target.value })}
               options={variableComponents.map((c) => ({ value: c.id, label: `${isRtl ? c.name_ar : c.name_en || c.name_ar} · ${t(`categories.${c.category}`)}` }))} />
-            <Input label={t("lines.amount")} name="acceptAmount" type="number" value={accepting.amount} onChange={(event) => setAccepting({ ...accepting, amount: event.target.value })} />
+            <Input label={t("lines.amount")} name="acceptAmount" inputMode="decimal" value={accepting.amount} onChange={(event) => setAccepting({ ...accepting, amount: event.target.value })} />
           </>
         ) : null}
       </Modal>

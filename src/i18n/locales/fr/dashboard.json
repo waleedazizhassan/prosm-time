@@ -218,7 +218,8 @@
     "confirmClockInAction": "Confirmer l'arrivée",
     "confirmClockOutAction": "Confirmer le départ",
     "confirmDateLabel": "Date",
-    "locationStale": "Votre position n'est pas disponible. Actualisez la page ou fermez et rouvrez l'application, puis pointez."
+    "locationStale": "Votre position n'est pas disponible. Actualisez la page ou fermez et rouvrez l'application, puis pointez.",
+    "recenter": "Revenir à ma position"
   },
   "kioskPin": {
     "title": "Code PIN kiosque",
@@ -343,7 +344,7 @@
       "sites": "Sites",
       "approvals": "Approbations",
       "people": "Personnes par rôle",
-      "chart": "Prévu vs réel",
+      "chart": "Tendance des heures travaillées",
       "cost": "Indemnités et coût",
       "audit": "Journal des actions",
       "external": "Travailleurs externes",
@@ -399,7 +400,10 @@
         "leave": "Personnes dont le congé approuvé couvre aujourd'hui. Elles ne sont pas comptées absentes.",
         "overdue": "Toujours pointés une heure après la fin de leur poste (ou de la journée du site), ou ouverts depuis un jour précédent.",
         "overtime": "Heures supplémentaires approuvées sur la période. Celles en attente ne comptent pas."
-      }
+      },
+      "hoursShort": "h",
+      "overtimeShort": "Heures sup.",
+      "overtimeApproved": "Heures sup. approuvées sur la période"
     },
     "map": {
       "title": "Les sites maintenant",
@@ -476,12 +480,20 @@
       "title": "Personnes"
     },
     "chart": {
-      "title": "Prévu vs réel",
+      "title": "Tendance des heures travaillées",
       "week": "Semaine",
       "month": "Mois",
       "year": "Année",
       "empty": "Aucune heure sur cette période.",
-      "legend": "Plein : travaillé · pointillé : prévu · clair : en attente"
+      "worked": "Réel",
+      "scheduled": "Planifié",
+      "pending": "En attente de revue",
+      "workedTotal": "h réelles",
+      "scheduledTotal": "h planifiées",
+      "adherence": "Respect {{rate}} %",
+      "tipWorked": "{{hours}} h réelles",
+      "tipScheduled": "{{hours}} h planifiées",
+      "tipPending": "{{hours}} h en attente"
     },
     "cost": {
       "title": "Indemnités et coût",
@@ -626,7 +638,12 @@
       "lateMeta": "{{days}} jours · {{minutes}} min",
       "overtimeMeta": "{{days}} jours · {{minutes}} min",
       "none": "Personne sur cette période.",
-      "unavailable": "Choisissez deux mois au plus."
+      "unavailable": "Choisissez deux mois au plus.",
+      "noSchedule": "Aucun quart planifié sur cette période - ajoutez un planning pour voir le taux.",
+      "lateTotal": "{{minutes}} min au total",
+      "overtimeTotal": "{{hours}} h au total",
+      "lateShort": "{{days}} j · {{minutes}} min",
+      "overtimeShort": "{{days}} j · {{minutes}} min"
     }
   },
   "devices": {

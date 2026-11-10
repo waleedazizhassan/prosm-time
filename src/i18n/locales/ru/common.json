@@ -294,7 +294,9 @@
     "ownerAuthorityOwnerOnly": "Выдавать и отзывать полномочия владельца может только владелец.",
     "ownerAuthorityAlready": "У этого сотрудника уже есть полномочия владельца.",
     "ownerAuthorityNone": "У этого сотрудника нет полномочий владельца.",
-    "ownerAuthorityInactive": "Этот сотрудник не активен."
+    "ownerAuthorityInactive": "Этот сотрудник не активен.",
+    "planManagerLimit": "В тарифе Starter один руководитель. Для большего числа смените тариф.",
+    "planExternalWorkerLimit": "Достигнуто число внешних работников по лицензии. Обратитесь в PROSM."
   },
   "pageLoad": {
     "title": "Для этой страницы нужно подключение",

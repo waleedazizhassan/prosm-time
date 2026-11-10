@@ -105,5 +105,20 @@
     "saved": "Guardado.",
     "failed": "No se pudo guardar la lista.",
     "tooMany": "Veinte puntos como máximo."
+  },
+  "roster": {
+    "label": "Turnos de la semana",
+    "count": "{{count}} turnos",
+    "notWorked": "No trabajado",
+    "addFor": "Añadir turno para {{name}} el {{day}}",
+    "someoneElse": "Otra persona",
+    "addOn": "Añadir turno el {{day}}",
+    "empty": "No hay turnos esta semana. Pulse + bajo cualquier día.",
+    "previous": "Semana anterior",
+    "next": "Semana siguiente",
+    "thisWeek": "Esta semana",
+    "hint": "Toque una celda vacía para añadir un turno, o un turno para cancelarlo. El color viene de la plantilla; ✓ indica que se trabajó.",
+    "days": "Días",
+    "assignDays": "Añadir {{count}} turnos"
   }
 }

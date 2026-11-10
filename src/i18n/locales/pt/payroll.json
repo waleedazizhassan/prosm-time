@@ -216,7 +216,18 @@
     "insuranceExempt": "Não segurado",
     "taxExempt": "Isento de imposto",
     "insurableWage": "Salário segurável fixo (opcional)",
-    "statutoryHint": "Isto não é o salário: indique-o acima em \"Salário base\". Um salário segurável fixo substitui o base só para a segurança social, dentro dos limites."
+    "statutoryHint": "Isto não é o salário: indique-o acima em \"Salário base\". Um salário segurável fixo substitui o base só para a segurança social, dentro dos limites.",
+    "editorTitle": "Salário de {{name}}",
+    "saveAll": "Salvar tudo",
+    "savedAll": "Salvo.",
+    "applyFromDate": "Os novos valores valem a partir de",
+    "applyFromHint": "Normalmente o dia 1 do mês",
+    "salaryTitle": "Salário e itens fixos",
+    "salaryHint": "Digite os valores - dígitos árabes são aceitos. Valores inalterados não são salvos de novo; um campo esvaziado encerra o item.",
+    "moreOptions": "Mais opções (moeda, datas, notas)",
+    "badNumber": "Número inválido em: {{field}}",
+    "search": "Buscar por nome ou código",
+    "tapToEdit": "Toque em qualquer pessoa para adicionar ou editar todo o salário."
   },
   "installments": {
     "title": "Prestações e adiantamentos",
