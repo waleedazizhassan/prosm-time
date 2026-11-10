@@ -121,3 +121,64 @@
   font-size: 0.75rem;
   color: var(--text-disabled);
 }
+
+/* Owner 2026-11-10: a new notification shows for 5 seconds at the top, above the full-screen map too */
+.toasts {
+  position: fixed;
+  inset-block-start: calc(env(safe-area-inset-top, 0px) + 12px);
+  inset-inline: 0;
+  z-index: calc(var(--z-modal) + 40);
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: min(420px, 100%);
+  padding: 10px 14px;
+  border: 1px solid color-mix(in srgb, var(--brand-primary) 30%, var(--border-light));
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface-card) 92%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.22);
+  color: var(--text-primary);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  pointer-events: auto;
+  animation: toastIn 0.28s ease-out, toastOut 0.3s ease-in 4.7s forwards;
+}
+
+.toastIcon {
+  display: grid;
+  flex: 0 0 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-primary), #16a34a);
+  color: #fff;
+}
+
+.toastText {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes toastOut {
+  to { opacity: 0; transform: translateY(-8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast { animation: none; }
+}
