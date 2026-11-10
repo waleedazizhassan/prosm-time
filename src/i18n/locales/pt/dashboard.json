@@ -134,7 +134,7 @@
     "manualLocationLabel": "Local de trabalho",
     "manualLocationHint": "Digite onde você realmente está (ex.: no cliente, home office) - obrigatório quando nenhum local é escolhido.",
     "manualLocationRequired": "Informe seu local de trabalho para registrar o ponto sem um local cadastrado.",
-    "clockInBlockedContactManager": "A tolerância do turno deste local já passou - fale com seu gestor para registrar sua frequência.",
+    "clockInBlockedContactManager": "O atraso já está a contar no turno deste local - contacte o seu gestor para registar a sua entrada.",
     "clockOutBlockedContactManager": "Você está fora da área de trabalho deste local - fale com seu gestor para registrar sua saída.",
     "projectLabel": "Projeto (opcional)",
     "noProject": "Sem projeto",

@@ -24,6 +24,6 @@ describe("SiteFormModal", () => {
     );
     const link = await screen.findByRole("link", { name: "Open the site's rules" });
     expect(link).toHaveAttribute("href", "/settings?site=site-42");
-    expect(screen.getByText(/ongoing presence monitoring/)).toBeInTheDocument();
+    expect(screen.getByText(/presence monitoring/)).toBeInTheDocument();
   });
 });

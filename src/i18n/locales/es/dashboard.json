@@ -134,7 +134,7 @@
     "manualLocationLabel": "Lugar de trabajo",
     "manualLocationHint": "Escribe dónde estás realmente (p. ej., en un cliente, teletrabajo); obligatorio si no eliges sede.",
     "manualLocationRequired": "Indica tu lugar de trabajo para fichar sin una sede registrada.",
-    "clockInBlockedContactManager": "Ha pasado el margen de cortesía del turno de esta sede: contacta con tu responsable para registrar tu asistencia.",
+    "clockInBlockedContactManager": "Ya cuenta el retraso en el turno de este sitio: contacta con tu responsable para que te fiche.",
     "clockOutBlockedContactManager": "Estás fuera de la zona de trabajo de esta sede: contacta con tu responsable para registrar tu salida.",
     "projectLabel": "Proyecto (opcional)",
     "noProject": "Sin proyecto",

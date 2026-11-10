@@ -48,7 +48,7 @@
     },
     "sites": {
       "title": "Sites (Administrators)",
-      "body": "Sites is where work sites are set up and people are assigned. Adding a site needs only a name, its location - stand there and press Use my current location - the radius and whether a photo is required; everything else is under More options. A new site takes your device's time zone. When you assign someone, their role at the site starts from their organisation role - a Manager or Supervisor becomes the site's manager, so they see its people. Everything else about a site is on its own page, under Site rules: GPS tolerance, grace period, shift hours, overtime and late-deduction times, break rounding, ongoing presence monitoring, exempt employees, and the self-service blocks (after the grace period, clock-out outside the work area, clock-in outside the work area)."
+      "body": "Sites is where work sites are set up and people are assigned. Adding a site needs only a name, its location - stand there and press Use my current location - the radius and whether a photo is required; everything else is under More options. A new site takes your device's time zone. When you assign someone, their role at the site starts from their organisation role - a Manager or Supervisor becomes the site's manager, so they see its people. Everything else about a site is on its own page, under Site rules: GPS tolerance, shift hours, overtime and late-deduction times, break rounding, ongoing presence monitoring, exempt employees, and the self-service blocks (once lateness starts counting, clock-out outside the work area, clock-in outside the work area)."
     },
     "workers": {
       "title": "External Workers",

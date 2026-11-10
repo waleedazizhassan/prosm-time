@@ -48,7 +48,7 @@
     },
     "sites": {
       "title": "Standorte (Administratoren)",
-      "body": "Unter Standorte werden Arbeitsorte angelegt und Personen zugewiesen. Für einen neuen Standort brauchen Sie nur den Namen, den Ort - dort stehen und Meinen aktuellen Standort verwenden tippen -, den Radius und ob ein Foto nötig ist; alles andere steht unter Weitere Optionen. Ein neuer Standort übernimmt die Zeitzone Ihres Geräts. Bei der Zuweisung richtet sich die Rolle am Standort nach der Rolle in der Organisation. Alles Weitere zu einem Standort steht auf seiner eigenen Seite unter Standortregeln: GPS-Toleranz, Kulanzzeit, Schichtzeiten, Überstunden- und Verspätungsabzug, Pausenrundung, laufende Anwesenheitsüberwachung, ausgenommene Mitarbeitende und die Selbstbedienungs-Sperren."
+      "body": "Unter Standorte werden Arbeitsorte angelegt und Personen zugewiesen. Für einen neuen Standort brauchen Sie nur den Namen, den Ort - dort stehen und Meinen aktuellen Standort verwenden tippen -, den Radius und ob ein Foto nötig ist; alles andere steht unter Weitere Optionen. Ein neuer Standort übernimmt die Zeitzone Ihres Geräts. Bei der Zuweisung richtet sich die Rolle am Standort nach der Rolle in der Organisation. Alles Weitere zu einem Standort steht auf seiner eigenen Seite unter Standortregeln: GPS-Toleranz, Schichtzeiten, Überstunden- und Verspätungsabzug, Pausenrundung, laufende Anwesenheitsüberwachung, ausgenommene Mitarbeitende und die Selbstbedienungs-Sperren."
     },
     "workers": {
       "title": "Externe Arbeiter",

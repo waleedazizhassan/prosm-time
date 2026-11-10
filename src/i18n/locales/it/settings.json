@@ -19,7 +19,7 @@
   },
   "sitePolicy": {
     "title": "Regole della sede",
-    "hint": "Margine GPS, tolleranza, orari dei turni, straordinari e trattenute per ritardo, arrotondamento delle pause, monitoraggio della presenza, dipendenti esentati e blocchi self-service di questa sede.",
+    "hint": "Margine GPS di questo sito, orari, straordinari e trattenute per ritardo, arrotondamento pause, monitoraggio presenza, esenzioni e limiti della timbratura autonoma.",
     "siteSelectLabel": "Sede",
     "siteSelectPlaceholder": "Seleziona una sede…",
     "noSites": "Nessuna sede ancora - aggiungine una da Sedi prima.",

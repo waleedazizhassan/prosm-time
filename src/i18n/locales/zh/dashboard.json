@@ -130,7 +130,7 @@
     "manualLocationLabel": "工作地点",
     "manualLocationHint": "填写您实际所在的位置（例如客户现场、居家办公）- 未选择地点时必填。",
     "manualLocationRequired": "请填写工作地点，才能在没有登记地点的情况下打卡。",
-    "clockInBlockedContactManager": "此地点班次的宽限时间已过 - 请联系您的主管登记考勤。",
+    "clockInBlockedContactManager": "本站点班次已开始计算迟到——请联系经理为你打卡。",
     "clockOutBlockedContactManager": "您不在此地点的工作区域内 - 请联系您的主管登记下班打卡。",
     "projectLabel": "项目（可选）",
     "noProject": "无项目",

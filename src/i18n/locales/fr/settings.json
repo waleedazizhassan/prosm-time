@@ -19,7 +19,7 @@
   },
   "sitePolicy": {
     "title": "Règles du site",
-    "hint": "Marge GPS, délai de grâce, horaires, heures supplémentaires et retenues de retard, arrondi des pauses, suivi de présence, employés exemptés et blocages en libre-service de ce site.",
+    "hint": "La marge GPS de ce site, les horaires, les heures sup et retenues de retard, l’arrondi des pauses, le suivi de présence, les exemptions et les limites du pointage soi-même.",
     "siteSelectLabel": "Site",
     "siteSelectPlaceholder": "Sélectionner un site…",
     "noSites": "Aucun site pour l'instant - ajoutez-en un depuis Sites d'abord.",

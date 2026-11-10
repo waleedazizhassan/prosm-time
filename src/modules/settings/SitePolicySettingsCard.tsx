@@ -58,7 +58,6 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
   const [loadError, setLoadError] = useState("");
 
   const [gpsAccuracyToleranceMeters, setGpsAccuracyToleranceMeters] = useState("50");
-  const [graceToleranceMinutes, setGraceToleranceMinutes] = useState("5");
   const [shiftStartTime, setShiftStartTime] = useState("");
   const [shiftEndTime, setShiftEndTime] = useState("");
   const [overtimeStartTime, setOvertimeStartTime] = useState("");
@@ -118,7 +117,6 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
       const loaded = siteResult.data;
       setSite(loaded);
       setGpsAccuracyToleranceMeters(String(loaded.gpsAccuracyToleranceMeters));
-      setGraceToleranceMinutes(String(loaded.graceToleranceMinutes));
       setShiftStartTime(loaded.shiftStartTime ?? "");
       setShiftEndTime(loaded.shiftEndTime ?? "");
       setOvertimeStartTime(loaded.overtimeStartTime ?? "");
@@ -173,7 +171,6 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
       geofenceRequired,
       kioskMode,
       gpsAccuracyToleranceMeters: Number(gpsAccuracyToleranceMeters),
-      graceToleranceMinutes: Number(graceToleranceMinutes),
       shiftStartTime: shiftStartTime || null,
       shiftEndTime: shiftEndTime || null,
       overtimeStartTime: overtimeStartTime || null,
@@ -260,19 +257,6 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
                 value={gpsAccuracyToleranceMeters}
                 onChange={(event) => {
                   setGpsAccuracyToleranceMeters(event.target.value);
-                  setSaved(false);
-                }}
-                disabled={saving}
-              />
-            </div>
-            <div style={{ maxWidth: 220 }}>
-              <Input
-                label={t("sites:form.graceToleranceLabel")}
-                name="policyGraceTolerance"
-                type="number"
-                value={graceToleranceMinutes}
-                onChange={(event) => {
-                  setGraceToleranceMinutes(event.target.value);
                   setSaved(false);
                 }}
                 disabled={saving}

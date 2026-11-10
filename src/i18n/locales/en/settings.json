@@ -19,7 +19,7 @@
   },
   "sitePolicy": {
     "title": "Site rules",
-    "hint": "This site's GPS tolerance, grace period, shift times, overtime and late deduction, break rounding, presence monitoring, exempt employees and self-service blocks.",
+    "hint": "This site's GPS margin, shift hours, overtime and late deductions, break rounding, presence monitoring, exempt people and self clock-in limits.",
     "siteSelectLabel": "Site",
     "siteSelectPlaceholder": "Select a site…",
     "noSites": "No sites yet - add one from Sites first.",

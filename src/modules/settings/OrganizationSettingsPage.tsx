@@ -7,6 +7,7 @@ import DepartmentsSettingsCard from "./DepartmentsSettingsCard";
 import PageShell from "../../components/common/PageShell";
 import Button from "../../components/common/Button";
 import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
+import NoSiteHoursSettingsCard from "../sites/NoSiteHoursSettingsCard";
 import MockLocationSettingsCard from "./MockLocationSettingsCard";
 import SessionPolicySettingsCard from "./SessionPolicySettingsCard";
 import OvertimePolicySettingsCard from "./OvertimePolicySettingsCard";
@@ -96,7 +97,12 @@ export default function OrganizationSettingsPage() {
         </>
       ) : null}
 
-      {active === "outside" ? <NoSiteRadiusSettingsCard /> : null}
+      {active === "outside" ? (
+        <>
+          <NoSiteRadiusSettingsCard />
+          <NoSiteHoursSettingsCard />
+        </>
+      ) : null}
 
       {active === "people" ? (
         <>

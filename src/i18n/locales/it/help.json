@@ -48,7 +48,7 @@
     },
     "sites": {
       "title": "Sedi (amministratori)",
-      "body": "In Sedi si creano i luoghi di lavoro e si assegnano le persone. Per aggiungere una sede servono solo il nome, la posizione - mettiti lì e premi Usa la mia posizione attuale -, il raggio e se serve una foto; il resto è in Altre opzioni. Una nuova sede prende il fuso orario del tuo dispositivo. Il ruolo nella sede parte dal ruolo nell'organizzazione. Tutto il resto di una sede si imposta nella sua pagina, in Regole della sede: margine GPS, tolleranza, orari dei turni, straordinari e trattenute per ritardo, arrotondamento delle pause, monitoraggio della presenza, dipendenti esentati e blocchi self-service."
+      "body": "In Sedi si creano i luoghi di lavoro e si assegnano le persone. Per aggiungere una sede servono solo il nome, la posizione - mettiti lì e premi Usa la mia posizione attuale -, il raggio e se serve una foto; il resto è in Altre opzioni. Una nuova sede prende il fuso orario del tuo dispositivo. Il ruolo nella sede parte dal ruolo nell'organizzazione. Tutto il resto di una sede si imposta nella sua pagina, in Regole della sede: margine GPS, orari dei turni, straordinari e trattenute per ritardo, arrotondamento delle pause, monitoraggio della presenza, dipendenti esentati e blocchi self-service."
     },
     "workers": {
       "title": "Lavoratori esterni",

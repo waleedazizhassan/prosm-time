@@ -19,7 +19,7 @@
   },
   "sitePolicy": {
     "title": "Reglas de la sede",
-    "hint": "La tolerancia GPS de esta sede, el margen, el horario de turno, las horas extra y el descuento por retraso, el redondeo del descanso, el seguimiento de presencia, los empleados exentos y los bloqueos de autoservicio.",
+    "hint": "El margen GPS de este sitio, el horario, las horas extra y descuentos por retraso, el redondeo de descansos, la supervisión, las exenciones y los límites del fichaje propio.",
     "siteSelectLabel": "Sede",
     "siteSelectPlaceholder": "Selecciona una sede…",
     "noSites": "Todavía no hay sedes: añade una primero desde Sedes.",

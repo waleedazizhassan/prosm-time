@@ -19,7 +19,7 @@
   },
   "sitePolicy": {
     "title": "Regras da unidade",
-    "hint": "A tolerância de GPS desta unidade, a tolerância de horário, os horários de turno, as horas extras e o desconto por atraso, o arredondamento do intervalo, o acompanhamento de presença, os isentos e os bloqueios de autoatendimento.",
+    "hint": "A margem do GPS deste local, o horário, as horas extra e descontos por atraso, o arredondamento das pausas, o acompanhamento, as isenções e os limites do ponto próprio.",
     "siteSelectLabel": "Unidade",
     "siteSelectPlaceholder": "Selecione uma unidade…",
     "noSites": "Ainda não há unidades: adicione uma em Unidades primeiro.",
