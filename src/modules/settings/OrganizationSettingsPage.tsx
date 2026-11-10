@@ -1,12 +1,11 @@
-import { Link, Navigate, useSearchParams } from "react-router-dom";
-import { FEATURES } from "../../config/features";
+import { Link, Navigate, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { useAuth } from "../../core/context/AuthContext";
 
 import DepartmentsSettingsCard from "./DepartmentsSettingsCard";
 import PageShell from "../../components/common/PageShell";
-import Card from "../../components/common/Card";
+import Button from "../../components/common/Button";
 import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
 import MockLocationSettingsCard from "./MockLocationSettingsCard";
 import SessionPolicySettingsCard from "./SessionPolicySettingsCard";
@@ -30,19 +29,7 @@ import usePlanFeatures from "../../core/hooks/usePlanFeatures";
 // PROSM Platform's own Header/OrganizationCard, replaced bulkier
 // Dashboard cards per an earlier pass) - a genuinely good existing
 // home, not something misplaced.
-function SectionHeading({ children }: { children: string }) {
-  return <h2 style={{ margin: "var(--space-2) 0 calc(var(--space-2) * -1)", fontSize: "var(--font-lg)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)" }}>{children}</h2>;
-}
-
-// A setting that has its own page, reached from the settings tree.
-function SettingsLink({ to, title, hint }: { to: string; title: string; hint: string }) {
-  return (
-    <Card title={title}>
-      <p style={{ margin: "0 0 var(--space-2)", color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>{hint}</p>
-      <Link to={to}>{title}</Link>
-    </Card>
-  );
-}
+type SettingsTab = "sites" | "outside" | "people" | "other";
 
 export default function OrganizationSettingsPage() {
   const { t } = useTranslation("settings");
@@ -53,6 +40,11 @@ export default function OrganizationSettingsPage() {
   // settings"): opened for one site, the page shows that site's rules only
   const [searchParams] = useSearchParams();
   const focusedSite = searchParams.get("site");
+  // the open part: ?tab=..., and a link to "#plan" opens the plan's part
+  const location = useLocation();
+  const navigate = useNavigate();
+  const tab = (location.hash === "#plan" ? "other" : searchParams.get("tab") ?? "sites") as SettingsTab;
+  const chooseTab = (next: SettingsTab) => navigate(next === "sites" ? "/settings" : `/settings?tab=${next}`, { replace: true });
 
   // Owner 2026-10-20 ("move every setting, the sites' too, to the Settings
   // page"): each site's rules are chosen here from a site list - managers
@@ -62,9 +54,9 @@ export default function OrganizationSettingsPage() {
     return <Navigate to="/dashboard" replace />;
   }
 
-  const showPayroll = allows("payroll") && (isOwner || hasPermission("payroll.manage_settings"));
-  const showExternalPolicy = allows("kiosk") && (isOwner || hasPermission("external_labor.manage_policy"));
-  const showAudit = allows("audit") && (isOwner || hasPermission("audit.view"));
+  const showDepartments = allows("departments") && hasPermission("departments.manage");
+  const showPeople = isOwner || hasPermission("settings.session_policy") || hasPermission("leave.manage_types") || showDepartments;
+  const showOther = isOwner;
 
   if (focusedSite) {
     return (
@@ -79,44 +71,52 @@ export default function OrganizationSettingsPage() {
     );
   }
 
+  // Owner 2026-11-10: the settings as a tree - the sites (each site's every setting), outside the
+  // sites, people, and everything else - one part at a time. Pages that have their own place in the
+  // menu (calendar, permissions, action log, API, payroll settings) are not repeated here.
+  const tabs: SettingsTab[] = ["sites", ...(isOwner ? (["outside"] as SettingsTab[]) : []),
+    ...(showPeople ? (["people"] as SettingsTab[]) : []), ...(showOther ? (["other"] as SettingsTab[]) : [])];
+  const active: SettingsTab = tabs.includes(tab) ? tab : "sites";
+
   return (
     <PageShell title="">
       <PageBanner pageId="settings" illustration={settingsHeaderImage} />
 
-      {/* 2026-11-09 B-05: grouped like the target settings tree (spec 25.5); a section shows only
-          what the reader may change, and a setting that lives on its own page is linked from here. */}
-      {isOwner || hasPermission("calendar.manage") || hasPermission("departments.manage") ? <SectionHeading>{t("sections.organization")}</SectionHeading> : null}
-      {isOwner ? <PlanSettingsCard /> : null}
-      {hasPermission("calendar.manage") ? <SettingsLink to="/calendar" title={t("links.calendar.title")} hint={t("links.calendar.hint")} /> : null}
-      {/* 2026-11-09 Media Center: departments (announcements can be addressed to them) */}
-      {allows("departments") && hasPermission("departments.manage") ? <DepartmentsSettingsCard /> : null}
+      <div role="tablist" aria-label={t("tabs.label")} style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
+        {tabs.map((key) => (
+          <Button key={key} role="tab" aria-selected={active === key} variant={active === key ? "primary" : "ghost"} onClick={() => chooseTab(key)}>
+            {t(`tabs.${key}`)}
+          </Button>
+        ))}
+      </div>
 
-      <SectionHeading>{t("sections.sites")}</SectionHeading>
-      <SitePolicySettingsCard />
-      {isOwner ? (
+      {active === "sites" ? (
         <>
-          <SiteDefaultsSettingsCard />
-          <NoSiteRadiusSettingsCard />
-          <MockLocationSettingsCard />
-          {allows("clock_suggestion") ? <ClockSuggestionCard /> : null}
+          <SitePolicySettingsCard />
+          {isOwner ? <SiteDefaultsSettingsCard /> : null}
+          {isOwner && allows("clock_suggestion") ? <ClockSuggestionCard /> : null}
         </>
       ) : null}
 
-      {hasPermission("settings.session_policy") || isOwner || hasPermission("leave.manage_types") ? <SectionHeading>{t("sections.attendanceLeave")}</SectionHeading> : null}
-      {hasPermission("settings.session_policy") ? <SessionPolicySettingsCard /> : null}
-      {isOwner ? <OvertimePolicySettingsCard /> : null}
-      {hasPermission("leave.manage_types") ? <LeaveTypesSettingsCard /> : null}
+      {active === "outside" ? <NoSiteRadiusSettingsCard /> : null}
 
-      {showPayroll || showExternalPolicy ? <SectionHeading>{t("sections.payroll")}</SectionHeading> : null}
-      {showPayroll ? <SettingsLink to="/payroll/settings" title={t("links.payroll.title")} hint={t("links.payroll.hint")} /> : null}
-      {showExternalPolicy ? <SettingsLink to="/workers/pay?view=policy" title={t("links.externalPolicy.title")} hint={t("links.externalPolicy.hint")} /> : null}
+      {active === "people" ? (
+        <>
+          {hasPermission("settings.session_policy") ? <SessionPolicySettingsCard /> : null}
+          {isOwner ? <OvertimePolicySettingsCard /> : null}
+          {hasPermission("leave.manage_types") ? <LeaveTypesSettingsCard /> : null}
+          {/* 2026-11-09 Media Center: departments (announcements can be addressed to them) */}
+          {showDepartments ? <DepartmentsSettingsCard /> : null}
+        </>
+      ) : null}
 
-      {profile?.isRealOwner || showAudit || isOwner ? <SectionHeading>{t("sections.governance")}</SectionHeading> : null}
-      {profile?.isRealOwner ? <SettingsLink to="/permissions" title={t("links.permissions.title")} hint={t("links.permissions.hint")} /> : null}
-      {showAudit ? <SettingsLink to="/audit-log" title={t("links.auditLog.title")} hint={t("links.auditLog.hint")} /> : null}
-      {isOwner && allows("retention") ? <RetentionSettingsCard /> : null}
-      {/* 2026-11-09: the API is on again (owner) - keys and webhooks live on their own page */}
-      {FEATURES.integrations && isOwner && allows("integrations") ? <SettingsLink to="/integrations" title={t("links.integrations.title")} hint={t("links.integrations.hint")} /> : null}
+      {active === "other" ? (
+        <>
+          {isOwner ? <PlanSettingsCard /> : null}
+          {isOwner ? <MockLocationSettingsCard /> : null}
+          {isOwner && allows("retention") ? <RetentionSettingsCard /> : null}
+        </>
+      ) : null}
     </PageShell>
   );
 }

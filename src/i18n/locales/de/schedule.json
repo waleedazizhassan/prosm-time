@@ -111,7 +111,7 @@
     "count": "{{count}} Schichten",
     "notWorked": "Nicht gearbeitet",
     "addFor": "Schicht für {{name}} am {{day}} hinzufügen",
-    "someoneElse": "Jemand anderes",
+    "someoneElse": "Person hinzufügen",
     "addOn": "Schicht am {{day}} hinzufügen",
     "empty": "Keine Schichten in dieser Woche. Tippen Sie auf + unter einem Tag.",
     "previous": "Vorige Woche",

@@ -33,6 +33,8 @@ export interface LicencePdfData {
   validUntilValue: string;
   /** from is "" when there is nothing before (a new end date, a status). */
   changes: { label: string; from: string; to: string }[];
+  /** Owner 2026-11-10: what the plan includes - shown under the changes when known. */
+  includes?: { title: string; summary: string[]; features: string[] } | null;
 }
 
 export interface PdfLibs {
@@ -195,6 +197,35 @@ export async function buildLicencePdf(libs: PdfLibs, fonts: LicencePdfFonts, log
   if (data.changes.length === 0) {
     y -= 26;
     drawStart(data.texts.noChanges, margin + 16, y, 12, "regular", ink);
+  }
+
+  // Owner 2026-11-10: what the plan includes - a short summary line or two, then the features in
+  // two columns, sized to fit above the footer
+  if (data.includes && data.includes.features.length > 0) {
+    y -= 34;
+    drawStart(data.includes.title, margin, y, 15, "bold", blue);
+    for (const line of data.includes.summary) {
+      y -= 18;
+      drawStart(line, margin, y, textWidth(W - margin * 2, line, 10, "regular"), "regular", muted);
+    }
+    y -= 8;
+    const items = data.includes.features;
+    const perColumn = Math.ceil(items.length / 2);
+    const room = y - 92;
+    const step = Math.max(12, Math.min(19, room / perColumn));
+    const size = step >= 16 ? 10.5 : 9;
+    const columnWidth = (W - margin * 2) / 2;
+    items.forEach((label, index) => {
+      const column = Math.floor(index / perColumn);
+      const rowY = y - step * ((index % perColumn) + 1);
+      const inset = margin + column * columnWidth;
+      const dotX = rtl ? W - inset - 6 : inset + 6;
+      page.drawCircle({ x: dotX, y: rowY + 3.5, size: 2.6, color: green });
+      const text = label;
+      const fit = textWidth(columnWidth - 22, text, size, "regular");
+      if (rtl) drawRight(text, W - inset - 16, rowY, fit, "regular", ink);
+      else drawLeft(text, inset + 16, rowY, fit, "regular", ink);
+    });
   }
 
   // footer

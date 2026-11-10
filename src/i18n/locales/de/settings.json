@@ -27,7 +27,11 @@
     "noAssignmentsYet": "Diesem Standort ist noch niemand zugewiesen, es gibt also niemanden zum Befreien.",
     "saveAction": "Speichern",
     "saveSuccess": "Standort-Richtlinie aktualisiert.",
-    "genericError": "Die Richtlinie dieses Standorts konnte nicht aktualisiert werden."
+    "genericError": "Die Richtlinie dieses Standorts konnte nicht aktualisiert werden.",
+    "area": {
+      "title": "Lage und Bereich des Standorts",
+      "hint": "Der Bereich des Standorts und wie dort gestempelt wird. Name, Adresse und Koordinaten ändern Sie auf der Seite des Standorts."
+    }
   },
   "integrations": {
     "title": "Integrationen",
@@ -277,37 +281,11 @@
     "label": "Die Person zum Einstempeln fragen",
     "failed": "Diese Einstellung konnte nicht gespeichert werden."
   },
-  "sections": {
-    "sites": "Standorte und Stempeln",
-    "organization": "Organisation",
-    "attendanceLeave": "Anwesenheit und Urlaub",
-    "payroll": "Lohnabrechnung",
-    "governance": "Sicherheit und Governance"
-  },
-  "links": {
-    "calendar": {
-      "title": "Arbeitskalender",
-      "hint": "Feiertage, wöchentliche Ruhetage und Ausnahmetage."
-    },
-    "payroll": {
-      "title": "Lohneinstellungen",
-      "hint": "Bestandteile, Anteilsberechnung, Abrechnungszeiträume, Berichte, Veröffentlichung und Export."
-    },
-    "externalPolicy": {
-      "title": "Regeln für Lohn externer Kräfte",
-      "hint": "Abzüge und Zuschläge sowie die Tagessatz-Regel für Monats- und Jahressätze."
-    },
-    "permissions": {
-      "title": "Berechtigungen und Delegation",
-      "hint": "Einer Person die Befugnis des Inhabers geben - ganz oder ausgewählte Berechtigungen, befristet."
-    },
-    "auditLog": {
-      "title": "Aktionsprotokoll",
-      "hint": "Wer hat was wann getan, mit Begründung."
-    },
-    "integrations": {
-      "title": "Integrationen und API",
-      "hint": "Schlüssel für Buchhaltung, HR und andere Systeme, Anwesenheitsimport und Webhooks."
-    }
+  "tabs": {
+    "label": "Einstellungsbereiche",
+    "sites": "Standorte",
+    "outside": "Außerhalb der Standorte",
+    "people": "Personen und Anwesenheit",
+    "other": "Paket und Sicherheit"
   }
 }

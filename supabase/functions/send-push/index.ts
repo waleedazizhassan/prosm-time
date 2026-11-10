@@ -89,6 +89,11 @@ async function sendLicenceEmail(client: any, notificationId: string): Promise<nu
     const { data } = await client.rpc("get_prosm_time_license_email", { p_notification_id: notificationId });
     if (!data) return 0;
     const row = data as LicenceEmailRow;
+    // owner 2026-11-10: the certificate lists what the plan includes
+    if (row.plan) {
+      const { data: plan } = await client.from("plans").select("feature_flags, max_sites, history_days").eq("key", row.plan).maybeSingle();
+      if (plan) row.planInfo = { featureFlags: plan.feature_flags, maxSites: plan.max_sites, historyDays: plan.history_days };
+    }
     const email = await renderLicenceEmail(row);
     const result = await sendEmail({ ...email, purpose: "licence_changed", supabase: client, organizationId: row.organizationId });
     return result.sent ? 1 : 0;

@@ -111,7 +111,7 @@
     "count": "{{count}} turnos",
     "notWorked": "No trabajado",
     "addFor": "Añadir turno para {{name}} el {{day}}",
-    "someoneElse": "Otra persona",
+    "someoneElse": "Añadir persona",
     "addOn": "Añadir turno el {{day}}",
     "empty": "No hay turnos esta semana. Pulse + bajo cualquier día.",
     "previous": "Semana anterior",

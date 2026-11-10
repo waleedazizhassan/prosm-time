@@ -569,7 +569,35 @@
         "people": "الأشخاص",
         "devices": "الأجهزة والصور",
         "settings": "الإعدادات",
+        "schedule": "الورديات",
+        "payroll": "المرتبات والعمالة الخارجية",
+        "announcements": "لوحة الإعلانات والأقسام",
+        "reports": "التقارير",
         "other": "أخرى"
+      },
+      "op": {
+        "insert": "إضافة",
+        "update": "تعديل",
+        "delete": "حذف"
+      },
+      "table": {
+        "timesheet_approvals": "اعتماد كشف ساعات",
+        "timesheet_corrections": "تصحيح حضور",
+        "exception_actions": "قرار على استثناء",
+        "leave_entitlements": "رصيد إجازات",
+        "site_workers": "عامل خارجي",
+        "shift_templates": "قالب وردية",
+        "shift_assignments": "وردية",
+        "open_shifts": "وردية مفتوحة",
+        "open_shift_requests": "طلب وردية مفتوحة",
+        "allowance_categories": "فئة بدلات",
+        "allowance_category_members": "عضو في فئة بدلات",
+        "site_checklist_items": "مهمة في قائمة الموقع",
+        "payroll_export_templates": "قالب تصدير المرتبات",
+        "organization_settings": "إعدادات المؤسسة",
+        "sites": "إعدادات موقع",
+        "report_exports": "تصدير تقرير",
+        "entitlements": "الباقة والترخيص"
       }
     },
     "external": {

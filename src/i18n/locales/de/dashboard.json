@@ -557,7 +557,35 @@
         "people": "Personen",
         "devices": "Geräte und Fotos",
         "settings": "Einstellungen",
+        "schedule": "Schichten",
+        "payroll": "Lohn und externe Arbeitskräfte",
+        "announcements": "Schwarzes Brett und Abteilungen",
+        "reports": "Berichte",
         "other": "Sonstiges"
+      },
+      "op": {
+        "insert": "hinzugefügt",
+        "update": "geändert",
+        "delete": "entfernt"
+      },
+      "table": {
+        "timesheet_approvals": "Stundenzettel-Freigabe",
+        "timesheet_corrections": "Anwesenheitskorrektur",
+        "exception_actions": "Entscheidung zu Ausnahme",
+        "leave_entitlements": "Urlaubsguthaben",
+        "site_workers": "Externe Arbeitskraft",
+        "shift_templates": "Schichtvorlage",
+        "shift_assignments": "Schicht",
+        "open_shifts": "Offene Schicht",
+        "open_shift_requests": "Anfrage offene Schicht",
+        "allowance_categories": "Zulagenkategorie",
+        "allowance_category_members": "Mitglied einer Zulagenkategorie",
+        "site_checklist_items": "Standort-Checklistenaufgabe",
+        "payroll_export_templates": "Lohnexport-Vorlage",
+        "organization_settings": "Organisationseinstellungen",
+        "sites": "Standorteinstellungen",
+        "report_exports": "Bericht exportiert",
+        "entitlements": "Paket und Lizenz"
       }
     },
     "external": {

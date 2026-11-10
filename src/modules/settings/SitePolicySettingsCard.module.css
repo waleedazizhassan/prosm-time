@@ -1,0 +1,64 @@
+/* owner 2026-11-10: the settings as a tree - the sites listed, the chosen one's settings under them */
+.tree {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: var(--space-2) 0 var(--space-3);
+}
+
+.treeItem {
+  max-width: 100%;
+  padding: 6px 12px;
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  background: var(--surface-card);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: var(--font-sm);
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.treeItem:hover,
+.treeItem:focus-visible {
+  border-color: var(--brand-primary);
+}
+
+.treeItemActive {
+  border-color: var(--brand-primary);
+  background: var(--brand-primary);
+  color: #fff;
+  font-weight: var(--font-weight-semibold);
+}
+
+.area {
+  margin-top: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+}
+
+.areaTitle {
+  margin: 0 0 var(--space-1);
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.rangeRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.range {
+  flex: 1;
+  min-width: 0;
+  accent-color: var(--brand-primary);
+}
+
+.rangeNumber {
+  width: 120px;
+}

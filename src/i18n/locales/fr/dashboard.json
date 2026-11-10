@@ -560,7 +560,35 @@
         "people": "Personnes",
         "devices": "Appareils et photos",
         "settings": "Paramètres",
+        "schedule": "Équipes",
+        "payroll": "Paie et main-d’œuvre externe",
+        "announcements": "Tableau d’affichage et services",
+        "reports": "Rapports",
         "other": "Autre"
+      },
+      "op": {
+        "insert": "ajouté",
+        "update": "modifié",
+        "delete": "supprimé"
+      },
+      "table": {
+        "timesheet_approvals": "Validation de feuille de temps",
+        "timesheet_corrections": "Correction de présence",
+        "exception_actions": "Décision sur exception",
+        "leave_entitlements": "Solde de congés",
+        "site_workers": "Travailleur externe",
+        "shift_templates": "Modèle d’équipe",
+        "shift_assignments": "Équipe",
+        "open_shifts": "Équipe ouverte",
+        "open_shift_requests": "Demande d’équipe ouverte",
+        "allowance_categories": "Catégorie d’indemnités",
+        "allowance_category_members": "Membre d’une catégorie d’indemnités",
+        "site_checklist_items": "Tâche de la liste du site",
+        "payroll_export_templates": "Modèle d’export de paie",
+        "organization_settings": "Paramètres de l’organisation",
+        "sites": "Paramètres du site",
+        "report_exports": "Rapport exporté",
+        "entitlements": "Offre et licence"
       }
     },
     "external": {

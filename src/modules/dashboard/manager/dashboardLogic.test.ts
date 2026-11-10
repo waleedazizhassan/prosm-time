@@ -36,5 +36,11 @@ describe("dashboard logic", () => {
     expect(auditLabel("site.outside_zone_policy", t)).toBe("manager.audit.groups.sites");
     expect(auditLabel("XERO_DISCONNECTED", t)).toBe("manager.audit.groups.settings");
     expect(auditLabel("SOMETHING_NEW", t)).toBe("manager.audit.groups.other");
+    // owner 2026-11-10: a table change reads as "<what> · <added/changed/removed>", newer actions have a kind
+    expect(auditLabel("shift_templates.insert", t)).toBe("manager.audit.table.shift_templates · manager.audit.op.insert");
+    expect(auditLabel("report_exports.insert", t)).toBe("manager.audit.table.report_exports");
+    expect(auditLabel("ANNOUNCEMENT_PUBLISHED", t)).toBe("manager.audit.groups.announcements");
+    expect(auditLabel("EXTERNAL_PAY_RUN_CREATED", t)).toBe("manager.audit.groups.payroll");
+    expect(auditLabel("WEBHOOK_CREATED", t)).toBe("manager.audit.groups.settings");
   });
 });

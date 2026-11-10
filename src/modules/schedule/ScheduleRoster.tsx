@@ -1,9 +1,9 @@
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Plus } from "lucide-react";
 
 import type { ShiftActual, ShiftTemplate, SiteShiftRow } from "../../core/repositories/ShiftRepository";
 import { appLocale, formatTimeOnly } from "../../core/utils/formatDate";
-import EmptyState from "../../components/common/EmptyState";
 import styles from "./ScheduleRoster.module.css";
 
 export function isoDay(date: Date): string {
@@ -43,8 +43,27 @@ export default function ScheduleRoster({
     templates.find((tpl) => tpl.startTime.slice(0, 5) === shift.startTime.slice(0, 5) && tpl.endTime.slice(0, 5) === shift.endTime.slice(0, 5))?.color ?? null;
   const perDay = (day: string) => live.filter((shift) => shift.shiftDate === day).length;
 
+  // owner 2026-11-10: on a phone the week opened on its first (past) days - it now opens on today
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const weekKey = days[0];
+  useEffect(() => {
+    const box = scrollerRef.current;
+    const cell = box?.querySelector<HTMLElement>("thead th[data-today]");
+    const name = box?.querySelector<HTMLElement>("thead th");
+    if (!box || !cell || !name || box.scrollWidth <= box.clientWidth) return;
+    const rtl = getComputedStyle(box).direction === "rtl";
+    const boxRect = box.getBoundingClientRect();
+    const cellRect = cell.getBoundingClientRect();
+    const nameWidth = name.getBoundingClientRect().width;
+    const offset = rtl ? boxRect.right - nameWidth - cellRect.right : cellRect.left - boxRect.left - nameWidth;
+    box.scrollLeft += rtl ? -offset : offset;
+  }, [weekKey, loading]);
+
   return (
-    <div className={styles.scroller} role="region" aria-label={t("roster.label")} tabIndex={0}>
+    <>
+    {/* owner 2026-11-10: an empty week says so above the roster, not as a big picture squeezed under it */}
+    {!loading && people.length === 0 ? <p className={styles.emptyNote}>{t("roster.empty")}</p> : null}
+    <div ref={scrollerRef} className={styles.scroller} role="region" aria-label={t("roster.label")} tabIndex={0}>
       <table className={styles.roster}>
         <thead>
           <tr>
@@ -52,7 +71,7 @@ export default function ScheduleRoster({
             {days.map((day) => {
               const date = new Date(`${day}T00:00:00`);
               return (
-                <th key={day} className={day === today ? styles.today : undefined}>
+                <th key={day} className={day === today ? styles.today : undefined} data-today={day === today ? "" : undefined}>
                   <span className={styles.dayName}>{date.toLocaleDateString(appLocale(i18n.language), { weekday: "short" })}</span>
                   <span className={styles.dayDate}>{date.toLocaleDateString(appLocale(i18n.language), { day: "numeric", month: "short" })}</span>
                   <span className={styles.dayCount}>{t("roster.count", { count: perDay(day) })}</span>
@@ -99,7 +118,9 @@ export default function ScheduleRoster({
             </tr>
           ))}
           <tr className={styles.addRow}>
-            <th scope="row" className={styles.personCol}>{t("roster.someoneElse")}</th>
+            <th scope="row" className={styles.personCol}>
+              <span className={styles.addLabel}><Plus size={13} aria-hidden="true" /> {t("roster.someoneElse")}</span>
+            </th>
             {days.map((day) => (
               <td key={day} className={day === today ? styles.today : undefined}>
                 {day >= today ? (
@@ -112,7 +133,7 @@ export default function ScheduleRoster({
           </tr>
         </tbody>
       </table>
-      {!loading && people.length === 0 ? <EmptyState message={t("roster.empty")} /> : null}
     </div>
+    </>
   );
 }

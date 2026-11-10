@@ -27,7 +27,11 @@
     "noAssignmentsYet": "Personne n'est encore assigné à ce site, il n'y a donc personne à exempter.",
     "saveAction": "Enregistrer",
     "saveSuccess": "Politique du site mise à jour.",
-    "genericError": "Impossible de mettre à jour la politique de ce site."
+    "genericError": "Impossible de mettre à jour la politique de ce site.",
+    "area": {
+      "title": "Emplacement et périmètre du site",
+      "hint": "Le périmètre du site et la façon d’y pointer. Le nom, l’adresse et les coordonnées se modifient sur la page du site."
+    }
   },
   "integrations": {
     "title": "Intégrations",
@@ -278,37 +282,11 @@
     "label": "Demander à la personne de pointer",
     "failed": "Impossible d'enregistrer ce réglage."
   },
-  "sections": {
-    "sites": "Sites et pointage",
-    "organization": "Organisation",
-    "attendanceLeave": "Présence et congés",
-    "payroll": "Paie",
-    "governance": "Sécurité et gouvernance"
-  },
-  "links": {
-    "calendar": {
-      "title": "Calendrier de travail",
-      "hint": "Jours fériés, repos hebdomadaires et jours exceptionnels."
-    },
-    "payroll": {
-      "title": "Paramètres de paie",
-      "hint": "Éléments, prorata, périodes, rapports, publication et export."
-    },
-    "externalPolicy": {
-      "title": "Règles de paie des externes",
-      "hint": "Retenues et ajouts, et la règle du taux journalier pour les taux mensuels et annuels."
-    },
-    "permissions": {
-      "title": "Autorisations et délégation",
-      "hint": "Donnez à une personne l'autorité du propriétaire - entière ou des autorisations choisies, pour une période."
-    },
-    "auditLog": {
-      "title": "Journal des actions",
-      "hint": "Qui a fait quoi et quand, avec le motif."
-    },
-    "integrations": {
-      "title": "Intégrations et API",
-      "hint": "Clés pour la comptabilité, les RH et d'autres systèmes, réception des présences et webhooks."
-    }
+  "tabs": {
+    "label": "Sections des paramètres",
+    "sites": "Sites",
+    "outside": "Hors des sites",
+    "people": "Personnes et présence",
+    "other": "Offre et sécurité"
   }
 }

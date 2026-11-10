@@ -111,7 +111,7 @@
     "count": "{{count}} shifts",
     "notWorked": "Not worked",
     "addFor": "Add a shift for {{name}} on {{day}}",
-    "someoneElse": "Someone else",
+    "someoneElse": "Add a person",
     "addOn": "Add a shift on {{day}}",
     "empty": "No shifts this week. Press + under any day to add one.",
     "previous": "Previous week",
