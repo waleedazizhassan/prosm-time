@@ -432,7 +432,7 @@
       "noLocation": "Sans position sur la carte",
       "noLocationHint": "Pointé sans coordonnées (par ex. appareil sans GPS), impossible à placer.",
       "noLocationShort": "Sans position",
-      "elsewhere": "Autres lieux"
+      "elsewhere": "Hors des sites"
     },
     "present": {
       "title": "Présents maintenant ({{count}})",

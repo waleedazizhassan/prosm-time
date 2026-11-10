@@ -435,7 +435,7 @@
       "noLocation": "Нет на карте",
       "noLocationHint": "Отметился без координат (например, без GPS) - разместить нельзя.",
       "noLocationShort": "Без места",
-      "elsewhere": "Другие места"
+      "elsewhere": "Вне объектов"
     },
     "present": {
       "title": "Сейчас на месте ({{count}})",

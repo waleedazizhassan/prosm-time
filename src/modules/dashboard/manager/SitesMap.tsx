@@ -37,7 +37,15 @@ function escapeHtml(value: string): string {
   return value.replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char] ?? char);
 }
 
-function personIcon(person: DashboardPresent): L.DivIcon {
+// shift (in pixels) for the i-th of n avatars on the same spot, so none hides under another
+function spread(i: number, n: number): [number, number] {
+  if (n <= 1) return [0, 0];
+  const r = n <= 6 ? 18 : 18 + (n - 6) * 3;
+  const a = (2 * Math.PI * i) / n - Math.PI / 2;
+  return [Math.round(r * Math.cos(a)), Math.round(r * Math.sin(a))];
+}
+
+function personIcon(person: DashboardPresent, shift: [number, number] = [0, 0]): L.DivIcon {
   const initial = escapeHtml(person.name.trim().charAt(0).toUpperCase() || "?");
   const ring = person.status === "outside" ? "#ea580c" : person.status === "long" ? "#dc2626" : person.status === "break" ? "#d97706" : "#16a34a";
   // a safe URL only (https), shown as a background, never as markup
@@ -46,7 +54,7 @@ function personIcon(person: DashboardPresent): L.DivIcon {
     className: "",
     html: `<span style="display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:3px solid ${ring};background:#e0ecff center/cover no-repeat;${photo}color:#1e3a8a;font:600 13px system-ui;box-shadow:0 1px 4px rgba(0,0,0,.35)">${photo ? "" : initial}</span>`,
     iconSize: [30, 30],
-    iconAnchor: [15, 15],
+    iconAnchor: [15 - shift[0], 15 - shift[1]],
   });
 }
 
@@ -67,6 +75,7 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
   const allBoundsRef = useRef<L.LatLngBounds | null>(null);
   const circlesRef = useRef(new Map<string, L.Circle>());
   const [fullScreen, setFullScreen] = useState(false);
+  const markersRef = useRef(new Map<string, L.Marker>());
   // who is inside which site's circle right now, and who is at none of them ("different places")
   const placed = useMemo(() => people.map((person) => ({ person, ...placeOf(person, sites) })), [people, sites]);
   const insideCount = useMemo(() => {
@@ -134,13 +143,23 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
       circlesRef.current.set(site.id, circle);
       bounds.extend(circle.getBounds());
     }
-    for (const person of people) {
+    // Owner 2026-11-10 ("only Mohamed is not showing"): people on the same spot (the same site centre,
+    // or the same point within ~10 m) sat exactly on top of each other - they now fan out around it.
+    const spotKey = (lat: number, lng: number) => `${lat.toFixed(4)},${lng.toFixed(4)}`;
+    const onSpot = new Map<string, number>();
+    for (const p of placed) if (p.lat !== null && p.lng !== null) onSpot.set(spotKey(p.lat, p.lng), (onSpot.get(spotKey(p.lat, p.lng)) ?? 0) + 1);
+    const seen = new Map<string, number>();
+    markersRef.current.clear();
+    for (const { person, lat, lng } of placed) {
       // Owner 2026-11-10: everyone clocked in is on the map, where they really are
-      const { lat, lng } = placeOf(person, sites);
       if (lat === null || lng === null) continue;
-      L.marker([lat, lng], { icon: personIcon(person) })
+      const key = spotKey(lat, lng);
+      const i = seen.get(key) ?? 0;
+      seen.set(key, i + 1);
+      const marker = L.marker([lat, lng], { icon: personIcon(person, spread(i, onSpot.get(key) ?? 1)) })
         .bindTooltip(`${escapeHtml(person.name)}${person.siteName ? ` · ${escapeHtml(person.siteName)}` : ""}`)
         .addTo(layer);
+      markersRef.current.set(person.userId, marker);
       bounds.extend([lat, lng]);
     }
     allBoundsRef.current = bounds.isValid() ? bounds : null;
@@ -148,7 +167,7 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
       map.fitBounds(bounds, { padding: [28, 28], maxZoom: 16 });
       fittedRef.current = true;
     }
-  }, [sites, people, t, insideCount]);
+  }, [sites, placed, t, insideCount]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => mapRef.current?.invalidateSize(), 120);
@@ -173,6 +192,14 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
     setShowUnplaced((v) => !v);
     const points = elsewhere.filter((p) => p.lat !== null && p.lng !== null).map((p) => [p.lat as number, p.lng as number] as [number, number]);
     if (points.length > 0) mapRef.current?.flyToBounds(L.latLngBounds(points), { padding: [36, 36], maxZoom: 14, duration: 0.6 });
+  };
+
+  // a name in the list: the map goes to that person and shows their name
+  const goToPerson = (userId: string) => {
+    const marker = markersRef.current.get(userId);
+    if (!marker) return;
+    mapRef.current?.flyTo(marker.getLatLng(), Math.max(mapRef.current.getZoom(), 15), { duration: 0.6 });
+    marker.openTooltip();
   };
 
   return (
@@ -206,7 +233,11 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
       ) : null}
       {showUnplaced && unplaced.length > 0 ? (
         <div className={styles.mapUnplaced} role="status">
-          {unplaced.map((person) => <div key={person.userId}>{person.name}{person.siteName ? ` · ${person.siteName}` : ""}</div>)}
+          {unplaced.map((person) => (
+            <button key={person.userId} type="button" className={styles.mapUnplacedName} onClick={() => goToPerson(person.userId)}>
+              {person.name}{person.siteName ? ` · ${person.siteName}` : ""}
+            </button>
+          ))}
         </div>
       ) : null}
     </div>
