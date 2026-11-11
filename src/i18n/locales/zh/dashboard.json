@@ -251,6 +251,14 @@
         "hint": "选择 PROSM Time，设为“不优化”或“无限制”。",
         "action": "设置"
       }
+    },
+    "mood": {
+      "question": "今天的工作怎么样？",
+      "great": "很好",
+      "normal": "一般",
+      "tough": "辛苦",
+      "thanks": "谢谢，已保存。",
+      "label": "班次感受"
     }
   },
   "kioskPin": {

@@ -267,6 +267,7 @@ export default function ClockInOutCard() {
   // field) shown right after a successful Clock Out.
   const [summaryModalOpen, setSummaryModalOpen] = useState(false);
   const [clockOutSummary, setClockOutSummary] = useState<{
+    sessionId?: string;
     workedMinutes: number;
     breakMinutes: number;
     overtimeMinutes: number;
@@ -821,7 +822,7 @@ export default function ClockInOutCard() {
 
     const summaryResult = await AttendanceRepository.getSessionSummary(completedSessionId);
     if (summaryResult.success && summaryResult.data) {
-      setClockOutSummary(summaryResult.data);
+      setClockOutSummary({ ...summaryResult.data, sessionId: completedSessionId });
       setSummaryModalOpen(true);
     }
   };
@@ -1438,6 +1439,7 @@ export default function ClockInOutCard() {
           breakMinutes={clockOutSummary.breakMinutes}
           overtimeMinutes={clockOutSummary.overtimeMinutes}
           exceptionsCount={clockOutSummary.exceptionsCount}
+          sessionId={clockOutSummary.sessionId ?? null}
           onClose={handleCloseSummary}
         />
       ) : null}

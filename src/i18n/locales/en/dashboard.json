@@ -254,6 +254,14 @@
         "hint": "Pick PROSM Time and set it to “Not optimised” or “Unrestricted”.",
         "action": "Settings"
       }
+    },
+    "mood": {
+      "question": "How was today's work?",
+      "great": "Great",
+      "normal": "Normal",
+      "tough": "Tough",
+      "thanks": "Thanks - your answer was saved.",
+      "label": "How the shift felt"
     }
   },
   "kioskPin": {

@@ -257,6 +257,14 @@
         "hint": "Elige PROSM Time y ponlo en «Sin optimizar» o «Sin restricciones».",
         "action": "Ajustes"
       }
+    },
+    "mood": {
+      "question": "¿Qué tal el trabajo hoy?",
+      "great": "Genial",
+      "normal": "Normal",
+      "tough": "Duro",
+      "thanks": "Gracias, guardado.",
+      "label": "Cómo fue el turno"
     }
   },
   "kioskPin": {

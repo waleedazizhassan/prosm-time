@@ -257,6 +257,14 @@
         "hint": "Choisis PROSM Time et mets « Non optimisé » ou « Sans restriction ».",
         "action": "Réglages"
       }
+    },
+    "mood": {
+      "question": "Comment s’est passée ta journée ?",
+      "great": "Super",
+      "normal": "Normal",
+      "tough": "Difficile",
+      "thanks": "Merci, c’est noté.",
+      "label": "Ressenti du service"
     }
   },
   "kioskPin": {

@@ -254,6 +254,14 @@
         "hint": "PROSM Time auf „Nicht optimiert“ oder „Unbeschränkt“ stellen.",
         "action": "Einstellungen"
       }
+    },
+    "mood": {
+      "question": "Wie war die Arbeit heute?",
+      "great": "Super",
+      "normal": "Normal",
+      "tough": "Schwer",
+      "thanks": "Danke - gespeichert.",
+      "label": "Wie die Schicht war"
     }
   },
   "kioskPin": {

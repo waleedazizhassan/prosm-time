@@ -257,6 +257,14 @@
         "hint": "Scegli PROSM Time e impostalo su «Non ottimizzata» o «Senza limitazioni».",
         "action": "Impostazioni"
       }
+    },
+    "mood": {
+      "question": "Com’è andato il lavoro oggi?",
+      "great": "Ottimo",
+      "normal": "Normale",
+      "tough": "Duro",
+      "thanks": "Grazie, salvato.",
+      "label": "Com’è andato il turno"
     }
   },
   "kioskPin": {

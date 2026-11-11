@@ -257,6 +257,14 @@
         "hint": "Escolha o PROSM Time e defina «Não otimizado» ou «Sem restrições».",
         "action": "Definições"
       }
+    },
+    "mood": {
+      "question": "Como foi o trabalho hoje?",
+      "great": "Ótimo",
+      "normal": "Normal",
+      "tough": "Difícil",
+      "thanks": "Obrigado, guardado.",
+      "label": "Como foi o turno"
     }
   },
   "kioskPin": {
