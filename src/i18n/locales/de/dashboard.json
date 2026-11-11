@@ -227,6 +227,33 @@
       "siteChanged": "Standort gewechselt",
       "savedOffline": "Auf dem Telefon gespeichert",
       "savedOfflineText": "Gerade keine Verbindung; wird automatisch gesendet, sobald sie zurück ist."
+    },
+    "trackingGate": {
+      "title": "Vor dem Einstempeln",
+      "lead": "PROSM Time verfolgt deinen Standort nur während der Schicht - auch bei geschlossener App -, damit Anwesenheit und Verlassen des Standorts richtig erfasst werden. Benötigt:",
+      "later": "Später",
+      "check": "Erneut prüfen",
+      "light": "Sparsam bei Akku und Daten: ein Standort bei 50 m Bewegung oder alle 5 Minuten; endet beim Ausstempeln.",
+      "consent": {
+        "title": "Standort während der Schicht zustimmen",
+        "hint": "Nur während der Schicht; endet beim Ausstempeln.",
+        "action": "Zustimmen"
+      },
+      "location": {
+        "title": "Standort erlauben",
+        "hint": "„Während der Nutzung“ und genauen Standort wählen.",
+        "action": "Erlauben"
+      },
+      "notifications": {
+        "title": "Benachrichtigungen erlauben",
+        "hint": "Für die Schicht-Benachrichtigung und die Warnung beim Verlassen.",
+        "action": "Einstellungen"
+      },
+      "battery": {
+        "title": "Akku-Optimierung für PROSM Time ausschalten",
+        "hint": "PROSM Time auf „Nicht optimiert“ oder „Unbeschränkt“ stellen.",
+        "action": "Einstellungen"
+      }
     }
   },
   "kioskPin": {

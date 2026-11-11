@@ -224,6 +224,33 @@
       "siteChanged": "已更换地点",
       "savedOffline": "已保存在手机上",
       "savedOfflineText": "当前无网络；恢复连接后会自动发送。"
+    },
+    "trackingGate": {
+      "title": "打卡上班之前",
+      "lead": "PROSM Time 仅在班次期间跟踪你的位置——即使应用已关闭——以准确记录出勤和离开站点。需要：",
+      "later": "稍后",
+      "check": "重新检查",
+      "light": "省电省流量：移动 50 米或每 5 分钟发送一次位置，下班打卡后停止。",
+      "consent": {
+        "title": "同意班次期间的位置跟踪",
+        "hint": "仅在班次期间；下班打卡后停止。",
+        "action": "同意"
+      },
+      "location": {
+        "title": "允许位置",
+        "hint": "选择“使用应用时”和精确位置。",
+        "action": "允许"
+      },
+      "notifications": {
+        "title": "允许通知",
+        "hint": "用于班次通知和离开站点提醒。",
+        "action": "设置"
+      },
+      "battery": {
+        "title": "关闭 PROSM Time 的电池优化",
+        "hint": "选择 PROSM Time，设为“不优化”或“无限制”。",
+        "action": "设置"
+      }
     }
   },
   "kioskPin": {

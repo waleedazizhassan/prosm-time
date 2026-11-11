@@ -482,5 +482,9 @@
     "send": "Send buzz",
     "sent": "{{name}} was buzzed.",
     "failed": "The buzz was not sent. Try again."
+  },
+  "shiftTracking": {
+    "resumeTitle": "Resume your shift",
+    "resumeBody": "Your phone restarted while you were clocked in. Open PROSM Time so your shift is followed again."
   }
 }

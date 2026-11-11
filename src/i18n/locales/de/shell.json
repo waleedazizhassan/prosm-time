@@ -482,5 +482,9 @@
     "send": "Buzz senden",
     "sent": "{{name}} wurde angebuzzt.",
     "failed": "Der Buzz wurde nicht gesendet. Versuch es noch einmal."
+  },
+  "shiftTracking": {
+    "resumeTitle": "Schicht fortsetzen",
+    "resumeBody": "Dein Telefon wurde während der Schicht neu gestartet. Öffne PROSM Time, damit die Schicht wieder verfolgt wird."
   }
 }

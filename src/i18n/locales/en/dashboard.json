@@ -227,6 +227,33 @@
       "siteChanged": "Site changed",
       "savedOffline": "Saved on your phone",
       "savedOfflineText": "No connection right now; it is sent by itself as soon as it returns."
+    },
+    "trackingGate": {
+      "title": "Before you clock in",
+      "lead": "PROSM Time follows your location during the shift only - also with the app closed - so attendance and leaving the site are recorded right. It needs:",
+      "later": "Later",
+      "check": "Check again",
+      "light": "Light on battery and data: a location is sent when you move 50 m or every 5 minutes, and it stops when you clock out.",
+      "consent": {
+        "title": "Agree to location during the shift",
+        "hint": "During the shift only; it stops at clock-out.",
+        "action": "Agree"
+      },
+      "location": {
+        "title": "Allow location",
+        "hint": "Choose “While using the app” and precise location.",
+        "action": "Allow"
+      },
+      "notifications": {
+        "title": "Allow notifications",
+        "hint": "For the shift notification and the left-the-site alert.",
+        "action": "Settings"
+      },
+      "battery": {
+        "title": "Turn off battery saving for PROSM Time",
+        "hint": "Pick PROSM Time and set it to “Not optimised” or “Unrestricted”.",
+        "action": "Settings"
+      }
     }
   },
   "kioskPin": {

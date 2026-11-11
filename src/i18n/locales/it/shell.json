@@ -487,5 +487,9 @@
     "send": "Invia avviso",
     "sent": "{{name}} è stato avvisato.",
     "failed": "L’avviso non è stato inviato. Riprova."
+  },
+  "shiftTracking": {
+    "resumeTitle": "Riprendi il turno",
+    "resumeBody": "Il telefono si è riavviato durante il turno. Apri PROSM Time per riprendere il monitoraggio."
   }
 }

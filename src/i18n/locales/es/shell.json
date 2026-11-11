@@ -487,5 +487,9 @@
     "send": "Enviar aviso",
     "sent": "Se avisó a {{name}}.",
     "failed": "No se envió el aviso. Inténtalo de nuevo."
+  },
+  "shiftTracking": {
+    "resumeTitle": "Reanuda tu turno",
+    "resumeBody": "Tu teléfono se reinició durante el turno. Abre PROSM Time para que se siga de nuevo."
   }
 }

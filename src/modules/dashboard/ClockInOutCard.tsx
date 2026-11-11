@@ -42,6 +42,9 @@ import styles from "./ClockInOutCard.module.css";
 import SessionReviewRepository from "../../core/repositories/SessionReviewRepository";
 import LongSessionPrompt from "./LongSessionPrompt";
 import ExitSitePrompt from "./ExitSitePrompt";
+import TrackingGate, { type TrackingNeed } from "./TrackingGate";
+import { missingForTracking, shiftTrackingAvailable, shiftTrackingStatus } from "../../core/services/ShiftTrackingNative";
+import { readBackgroundConsent } from "../../core/services/StartupPermissions";
 import { nearestSite, orderSitesByDistance } from "./siteProximity";
 
 const CHANGE_SITE_NO_SITE_VALUE = "__no_site__";
@@ -251,6 +254,8 @@ export default function ClockInOutCard() {
   // Owner 2026-11-10: a clear, short confirmation after each attendance action
   const [recenterTick, setRecenterTick] = useState(0);
   const [clockNotice, setClockNotice] = useState<ClockNoticeMessage | null>(null);
+  // owner 2026-11-11: what the Android phone still needs before a shift can start (null = nothing asked)
+  const [trackingGate, setTrackingGate] = useState<{ missing: TrackingNeed[]; suggested?: Site } | null>(null);
   const closeClockNotice = useCallback(() => {
     setClockNotice(null);
     setError("");
@@ -820,13 +825,26 @@ export default function ClockInOutCard() {
   // Plan stage 8.4: a "yes" passes the site it was asked about, as its selection reaches this render only after the tap.
   const sayDone = (title: string, text?: string) => setClockNotice({ tone: "success", title, text });
 
-  const handleClockInTap = (suggested?: Site) => {
+  // Owner 2026-11-11: on the Android app a shift starts only when the phone can follow it in the background
+  const trackingMissing = async (): Promise<TrackingNeed[]> => {
+    if (!shiftTrackingAvailable()) return [];
+    const missing: TrackingNeed[] = readBackgroundConsent() === "accepted" ? [] : ["consent"];
+    return [...missing, ...missingForTracking(await shiftTrackingStatus())];
+  };
+
+  const handleClockInTap = async (suggested?: Site) => {
     // Owner 2026-11-09: no clock-in on a stuck or missing location - refresh first
     if (locationStatus !== "available" || !currentLocation) {
       setError(t("attendance.locationStale"));
       return;
     }
     setError("");
+    const missing = await trackingMissing();
+    if (missing.length > 0) {
+      setTrackingGate({ missing, suggested });
+      return;
+    }
+    setTrackingGate(null);
     if (suggested ? suggested.cameraRequired : clockInCameraRequired) {
       setCameraFor("clockIn");
       return;
@@ -1141,6 +1159,10 @@ export default function ClockInOutCard() {
       ) : null}
 
       {/* Owner 2026-11-10: attendance messages in their own style, at the top of the map */}
+      {trackingGate ? (
+        <TrackingGate missing={trackingGate.missing} onClose={() => setTrackingGate(null)}
+          onCheck={() => void handleClockInTap(trackingGate.suggested)} />
+      ) : null}
       <ClockNotice
         notice={
           error

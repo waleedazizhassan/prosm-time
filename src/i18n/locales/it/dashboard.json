@@ -230,6 +230,33 @@
       "siteChanged": "Sede cambiata",
       "savedOffline": "Salvato sul telefono",
       "savedOfflineText": "Nessuna connessione ora; verrà inviato da solo appena torna."
+    },
+    "trackingGate": {
+      "title": "Prima di timbrare",
+      "lead": "PROSM Time segue la tua posizione solo durante il turno - anche ad app chiusa - per registrare bene presenza e uscita dal sito. Serve:",
+      "later": "Più tardi",
+      "check": "Ricontrolla",
+      "light": "Leggero su batteria e dati: posizione ogni 50 m o ogni 5 minuti; si ferma all’uscita.",
+      "consent": {
+        "title": "Accetta la posizione durante il turno",
+        "hint": "Solo durante il turno; si ferma all’uscita.",
+        "action": "Accetto"
+      },
+      "location": {
+        "title": "Consenti la posizione",
+        "hint": "Scegli «Mentre usi l’app» e posizione precisa.",
+        "action": "Consenti"
+      },
+      "notifications": {
+        "title": "Consenti le notifiche",
+        "hint": "Per la notifica del turno e l’avviso di uscita.",
+        "action": "Impostazioni"
+      },
+      "battery": {
+        "title": "Disattiva il risparmio batteria per PROSM Time",
+        "hint": "Scegli PROSM Time e impostalo su «Non ottimizzata» o «Senza limitazioni».",
+        "action": "Impostazioni"
+      }
     }
   },
   "kioskPin": {

@@ -477,5 +477,9 @@
     "send": "发送提醒",
     "sent": "已提醒 {{name}}。",
     "failed": "提醒未发送，请重试。"
+  },
+  "shiftTracking": {
+    "resumeTitle": "继续你的班次",
+    "resumeBody": "手机在班次期间重启了。请打开 PROSM Time 以恢复跟踪。"
   }
 }

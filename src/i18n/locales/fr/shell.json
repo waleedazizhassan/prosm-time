@@ -487,5 +487,9 @@
     "send": "Envoyer le buzz",
     "sent": "{{name}} a été buzzé.",
     "failed": "Le buzz n’a pas été envoyé. Réessaie."
+  },
+  "shiftTracking": {
+    "resumeTitle": "Reprends ton service",
+    "resumeBody": "Ton téléphone a redémarré pendant le service. Ouvre PROSM Time pour que le suivi reprenne."
   }
 }
