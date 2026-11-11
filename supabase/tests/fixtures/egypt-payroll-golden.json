@@ -1,0 +1,184 @@
+{
+  "minimum_wage_floor": {
+    "insEmployee": 297,
+    "insEmployer": 506.25,
+    "tax": 0,
+    "fund": 1,
+    "net": 1702
+  },
+  "just_above_min_insurable": {
+    "insEmployee": 297.11,
+    "insEmployer": 506.44,
+    "tax": 0,
+    "fund": 1.35,
+    "net": 2402.54
+  },
+  "small_pay_no_tax": {
+    "insEmployee": 385,
+    "insEmployer": 656.25,
+    "tax": 0,
+    "fund": 1.75,
+    "net": 3113.25
+  },
+  "mid_pay": {
+    "insEmployee": 990,
+    "insEmployer": 1687.5,
+    "tax": 714.5,
+    "fund": 5.5,
+    "net": 9290
+  },
+  "at_max_insurable": {
+    "insEmployee": 1837,
+    "insEmployer": 3131.25,
+    "tax": 1785.1,
+    "fund": 8.35,
+    "net": 13069.55
+  },
+  "above_max_insurable": {
+    "insEmployee": 1837,
+    "insEmployer": 3131.25,
+    "tax": 3565.84,
+    "fund": 12.5,
+    "net": 19584.66
+  },
+  "bracket_40k_exact": {
+    "insEmployee": 617.98,
+    "insEmployer": 1053.37,
+    "tax": 0,
+    "fund": 2.81,
+    "net": 4997.19
+  },
+  "bracket_40k_plus": {
+    "insEmployee": 618.09,
+    "insEmployer": 1053.56,
+    "tax": 0.09,
+    "fund": 2.81,
+    "net": 4997.99
+  },
+  "bracket_55k_exact": {
+    "insEmployee": 772.47,
+    "insEmployer": 1316.71,
+    "tax": 125,
+    "fund": 3.51,
+    "net": 6121.49
+  },
+  "bracket_70k_exact": {
+    "insEmployee": 926.97,
+    "insEmployer": 1580.06,
+    "tax": 312.5,
+    "fund": 4.21,
+    "net": 7183.29
+  },
+  "bracket_200k_exact": {
+    "insEmployee": 1837,
+    "insEmployer": 3131.25,
+    "tax": 2479.17,
+    "fund": 10.09,
+    "net": 15844.07
+  },
+  "bracket_400k_exact": {
+    "insEmployee": 1837,
+    "insEmployer": 3131.25,
+    "tax": 6229.17,
+    "fund": 18.42,
+    "net": 28752.41
+  },
+  "tier_600k_below": {
+    "insEmployee": 1837,
+    "insEmployer": 3131.25,
+    "tax": 10729.17,
+    "fund": 26.75,
+    "net": 40910.75
+  },
+  "tier_600k_above": {
+    "insEmployee": 1837,
+    "insEmployer": 3131.25,
+    "tax": 10729.42,
+    "fund": 26.75,
+    "net": 40911.5
+  },
+  "tier_700k_above": {
+    "insEmployee": 1837,
+    "insEmployer": 3131.25,
+    "tax": 13041.92,
+    "fund": 30.92,
+    "net": 46928.16
+  },
+  "tier_800k_above": {
+    "insEmployee": 1837,
+    "insEmployer": 3131.25,
+    "tax": 15416.92,
+    "fund": 35.09,
+    "net": 52882.32
+  },
+  "tier_900k_above": {
+    "insEmployee": 1837,
+    "insEmployer": 3131.25,
+    "tax": 17916.92,
+    "fund": 39.25,
+    "net": 58711.5
+  },
+  "tier_1_2m_above": {
+    "insEmployee": 1837,
+    "insEmployer": 3131.25,
+    "tax": 25000.28,
+    "fund": 51.75,
+    "net": 76615.64
+  },
+  "very_high_pay": {
+    "insEmployee": 1837,
+    "insEmployer": 3131.25,
+    "tax": 70786.49,
+    "fund": 135,
+    "net": 197241.51
+  },
+  "pre_tax_items": {
+    "insEmployee": 1320,
+    "insEmployer": 2250,
+    "tax": 1451.01,
+    "fund": 7.5,
+    "net": 11434.02
+  },
+  "fixed_insurable_wage": {
+    "insEmployee": 550,
+    "insEmployer": 937.5,
+    "tax": 2730.42,
+    "fund": 10,
+    "net": 16709.58
+  },
+  "insurance_exempt": {
+    "insEmployee": 0,
+    "insEmployer": 0,
+    "tax": 1812.5,
+    "fund": 7.5,
+    "net": 13180
+  },
+  "tax_exempt": {
+    "insEmployee": 1650,
+    "insEmployer": 2812.5,
+    "tax": 0,
+    "fund": 7.5,
+    "net": 13342.5
+  },
+  "both_exempt": {
+    "insEmployee": 0,
+    "insEmployer": 0,
+    "tax": 0,
+    "fund": 15,
+    "net": 29985
+  },
+  "joined_mid_month": {
+    "insEmployee": 1320,
+    "insEmployer": 2250,
+    "tax": 1148.5,
+    "fund": 6.5,
+    "net": 10525
+  },
+  "left_mid_month": {
+    "insEmployee": 1320,
+    "insEmployer": 2250,
+    "tax": 948.5,
+    "fund": 6,
+    "net": 9725.5
+  }
+}
