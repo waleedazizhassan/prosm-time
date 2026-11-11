@@ -43,12 +43,13 @@ export default function MyProfilePage() {
   if (!file || !profile) return <PageShell title={t("profile.myTitle")}><LoadingState fullHeight /></PageShell>;
 
   const tabs: TabItem<MyTab>[] = [
+    // the same order as the user file (owner review 2026-11-12)
     { key: "data", label: t("profile.tabs.data") },
-    ...(allows("documents") ? [{ key: "documents" as const, label: t("profile.tabs.documents") }] : []),
-    ...(allows("penalties") ? [{ key: "penalties" as const, label: t("profile.tabs.penalties") }] : []),
     { key: "contract", label: t("profile.tabs.contract") },
+    ...(allows("documents") ? [{ key: "documents" as const, label: t("profile.tabs.documents") }] : []),
     { key: "attendance", label: t("profile.tabs.attendance") },
     { key: "leave", label: t("profile.tabs.leave") },
+    ...(allows("penalties") ? [{ key: "penalties" as const, label: t("profile.tabs.penalties") }] : []),
   ];
   const requested = searchParams.get("tab") as MyTab | null;
   const tab: MyTab = requested && tabs.some((x) => x.key === requested) ? requested : "data";

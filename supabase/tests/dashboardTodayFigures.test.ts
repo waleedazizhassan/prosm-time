@@ -65,7 +65,10 @@ describe("today's figures", () => {
     const shift = (startMinutes: number) =>
       t.su(
         `insert into shift_assignments (organization_id, user_id, site_id, shift_date, start_time, end_time)
-         values ($1, $2, $3, ${cairoToday}, least(((now() + make_interval(mins => $4)) at time zone 'Africa/Cairo')::time(0), time '23:00'), time '23:59')`,
+         values ($1, $2, $3, ${cairoToday},
+           -- kept inside today in Cairo whatever the hour (it wrapped past midnight in the evening)
+           least(greatest((now() at time zone 'Africa/Cairo') + make_interval(mins => $4), date_trunc('day', now() at time zone 'Africa/Cairo')),
+                 date_trunc('day', now() at time zone 'Africa/Cairo') + interval '23 hours 58 minutes')::time(0), time '23:59:59')`,
         [org.id, missing.userId, site, startMinutes],
       );
     await shift(180); // starts in three hours
