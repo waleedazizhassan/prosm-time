@@ -30,6 +30,9 @@ export const PLAN_FEATURES = [
   "departments",
   "delegation",
   "retention",
+  // 2026-11-11 HR suite: employee documents and the penalties bylaw (Business+)
+  "documents",
+  "penalties",
 ] as const;
 export type PlanFeature = (typeof PLAN_FEATURES)[number];
 

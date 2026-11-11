@@ -581,7 +581,11 @@
         "allowances_edit_during_review": "Adicional editado na análise",
         "leave_approved_cancelled": "Afastamento aprovado cancelado",
         "OWNER_AUTHORITY_GRANTED": "Autoridade do proprietário concedida",
-        "OWNER_AUTHORITY_REVOKED": "Autoridade do proprietário retirada"
+        "OWNER_AUTHORITY_REVOKED": "Autoridade do proprietário retirada",
+        "hr_profile_changed": "Ficha alterada",
+        "hr_contract_saved": "Contrato guardado",
+        "hr_contract_deleted": "Contrato apagado",
+        "hr_job_title_saved": "Cargo guardado"
       },
       "groups": {
         "sos": "SOS",

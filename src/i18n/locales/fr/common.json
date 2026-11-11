@@ -169,7 +169,7 @@
     "networkProblem": "Impossible de joindre le serveur pour le moment. Vérifiez votre connexion et réessayez dans un instant.",
     "allowanceAlreadyApproved": "Cette indemnité est déjà approuvée et ne peut plus être modifiée.",
     "ownerDoesNotClockIn": "Le propriétaire ne pointe pas - la présence est enregistrée pour le reste de l'équipe.",
-    "nameRequired": "Veuillez saisir un nom.",
+    "nameRequired": "Saisis le nom.",
     "noFreeWorkerNumber": "Impossible de créer un numéro pour l'instant. Veuillez réessayer.",
     "onBehalfOwnerOrManagerOnly": "Seuls le propriétaire ou un responsable peuvent pointer pour le compte de quelqu'un.",
     "workerKioskOwnerOrManager": "Seuls le propriétaire ou le responsable de ce site peuvent utiliser la borne des intervenants externes.",
@@ -279,7 +279,7 @@
     "grantLeaveOverlap": "Cet employé a déjà un congé en attente ou approuvé ces jours-là.",
     "invalidLeaveType": "Ce type de congé n'est pas valide.",
     "notAuthorizedReviewLeave": "Vous n'êtes pas autorisé à approuver les congés.",
-    "endBeforeStart": "La date de fin précède la date de début.",
+    "endBeforeStart": "La date de fin précède le début.",
     "chooseLeaveReviewer": "Choisissez une personne qui peut approuver votre congé.",
     "licensedUserLimit": "La limite d'utilisateurs de votre licence est atteinte. Désactivez un compte inutilisé ou contactez sales@prosm.net.",
     "ownerOnlyLicence": "Seul le propriétaire peut voir la licence.",
@@ -298,7 +298,13 @@
     "planManagerLimit": "L'offre Starter comprend un responsable. Passez à une offre supérieure pour en ajouter.",
     "planExternalWorkerLimit": "Vous avez atteint le nombre de travailleurs externes autorisé par votre licence. Contactez PROSM.",
     "buzzTooSoon": "Attends 30 secondes avant de buzzer à nouveau la même personne.",
-    "buzzSelf": "Tu ne peux pas te buzzer toi-même."
+    "buzzSelf": "Tu ne peux pas te buzzer toi-même.",
+    "notFound": "Cet élément n’existe pas ou a été supprimé.",
+    "birthDateFuture": "La date de naissance ne peut pas être dans le futur.",
+    "contractNeedsEnd": "Ce contrat a besoin d’une date de fin.",
+    "jobTitleExists": "Ce poste existe déjà.",
+    "chooseContractType": "Choisis le type de contrat.",
+    "startDateRequired": "Saisis la date de début."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

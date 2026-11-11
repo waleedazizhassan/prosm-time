@@ -292,7 +292,8 @@
     "payslips": "My payslips",
     "externalPay": "External labour pay",
     "announcements": "Notice board",
-    "exceptions": "My exceptions"
+    "exceptions": "My exceptions",
+    "myProfile": "My file"
   },
   "sosOverlay": {
     "title": "SOS/Emergency alert",
@@ -399,7 +400,8 @@
     "payroll": "Payroll cycles, profiles, the three reports and payslips - with separate permissions and stored versions.",
     "payslips": "Your published payslips - view them or ask for them by email.",
     "externalPay": "Rates by day, week, month or year, pay runs, the policy and individual adjustments - approved and frozen, kept apart from payroll.",
-    "announcements": "Announcements and official statements addressed to you; confirm the ones that ask for it."
+    "announcements": "Announcements and official statements addressed to you; confirm the ones that ask for it.",
+    "myProfile": "Your details, documents, warnings and attendance."
   },
   "backgroundDisclosure": {
     "title": "Location during your shift",

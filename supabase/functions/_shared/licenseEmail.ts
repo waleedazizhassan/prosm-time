@@ -14,7 +14,7 @@ const escape = (text: string) => text.replace(/[&<>"]/g, (c) => ({ "&": "&amp;",
 const PLAN_NAMES: Record<string, string> = { starter: "Starter", business: "Business", pro: "Pro", enterprise: "Enterprise" };
 // the order of the plans sheet (as on the app's plan card)
 const FEATURE_ROWS = [
-  "sos", "announcements", "departments", "leave", "scheduling", "allowances", "kiosk", "on_behalf", "clock_rules", "export", "payroll_export", "roles_manager",
+  "sos", "announcements", "departments", "documents", "penalties", "leave", "scheduling", "allowances", "kiosk", "on_behalf", "clock_rules", "export", "payroll_export", "roles_manager",
   "payroll", "labor_cost", "audit", "roles_all", "clock_suggestion", "daily_summary", "manager_alerts",
   "integrations", "delegation", "retention",
 ];

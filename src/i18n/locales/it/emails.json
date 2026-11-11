@@ -178,7 +178,9 @@
         "payroll": "Paghe (contributi, imposte, prestiti, buste)",
         "integrations": "Integrazioni, API e presenze da lettori biometrici",
         "delegation": "Delega completa e a tempo",
-        "retention": "Controllo della conservazione dei dati"
+        "retention": "Controllo della conservazione dei dati",
+        "documents": "Documenti dei dipendenti e scadenze",
+        "penalties": "Regolamento sanzioni progressive e incentivi"
       }
     }
   },

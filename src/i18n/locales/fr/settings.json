@@ -256,7 +256,9 @@
       "payroll": "Paie (cotisations, impôt, prêts, bulletins)",
       "integrations": "Intégrations, API et pointage des badgeuses",
       "delegation": "Délégation complète et temporaire",
-      "retention": "Contrôle de la conservation des données"
+      "retention": "Contrôle de la conservation des données",
+      "documents": "Documents des salariés et leur expiration",
+      "penalties": "Règlement de sanctions progressives et primes"
     },
     "managedByProsm": "Toute modification ou tout renouvellement de votre licence est fait par PROSM ; vous recevez une notification et un e-mail avec la nouvelle licence. Pour la modifier : sales@prosm.net.",
     "historyAll": "Pointages affichés : tous. Positions et photos sont supprimées automatiquement après la durée de « Conservation ».",
@@ -310,5 +312,17 @@
       "label": "Non comptés",
       "hint": "Sans effet - visibles seulement dans les heures."
     }
+  },
+  "jobTitles": {
+    "title": "Postes",
+    "hint": "Les postes de l’entreprise : choisis dans chaque dossier et utilisés par les documents exigés selon le poste.",
+    "name": "Intitulé du poste",
+    "add": "Ajouter",
+    "stop": "Désactiver",
+    "restore": "Rétablir",
+    "people_one": "1 personne",
+    "people_other": "{{count}} personnes",
+    "error": "Enregistrement impossible.",
+    "people_many": "{{count}} personnes"
   }
 }

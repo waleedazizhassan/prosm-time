@@ -1,0 +1,131 @@
+/* HR suite feature 3 (2026-11-11): the employee profile */
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  background: var(--surface-card);
+}
+
+.headerMain {
+  flex: 1 1 14rem;
+  min-width: 0;
+}
+
+.name {
+  margin: 0;
+  font-size: var(--font-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.legal {
+  margin: 2px 0 0;
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+}
+
+.facts {
+  margin: 4px 0 0;
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+}
+
+.headerSide {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-2);
+}
+
+.completion {
+  display: grid;
+  gap: 4px;
+  min-width: 11rem;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.bar {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--surface-sunken);
+}
+
+.bar > span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+}
+
+.panel {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: var(--space-2) var(--space-3);
+}
+
+.fact {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.fact dt {
+  color: var(--text-secondary);
+  font-size: var(--font-xs);
+}
+
+.fact dd {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: var(--font-sm);
+  overflow-wrap: anywhere;
+}
+
+.section {
+  margin: var(--space-4) 0 var(--space-2);
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: var(--space-2);
+}
+
+.tile {
+  padding: var(--space-3);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+}
+
+.tile b {
+  display: block;
+  font-size: var(--font-xl);
+  color: var(--text-primary);
+}
+
+.tile span {
+  color: var(--text-secondary);
+  font-size: var(--font-xs);
+}
+
+@media (max-width: 640px) {
+  .headerSide {
+    align-items: flex-start;
+    width: 100%;
+  }
+}

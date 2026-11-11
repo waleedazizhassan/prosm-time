@@ -169,7 +169,7 @@
     "networkProblem": "We can't reach the server right now. Check your connection and try again in a moment.",
     "allowanceAlreadyApproved": "This allowance entry is already approved and can no longer be changed.",
     "ownerDoesNotClockIn": "The Owner does not clock in or out - attendance is recorded for the rest of the team.",
-    "nameRequired": "Please enter a name.",
+    "nameRequired": "Enter the name.",
     "noFreeWorkerNumber": "Could not create a number right now. Please try again.",
     "onBehalfOwnerOrManagerOnly": "Only the Owner or a Manager can clock someone in or out on their behalf.",
     "workerKioskOwnerOrManager": "Only the Owner or this site's manager can run the workers' kiosk.",
@@ -279,7 +279,7 @@
     "grantLeaveOverlap": "This employee already has pending or approved leave on these days.",
     "invalidLeaveType": "This leave type is not valid.",
     "notAuthorizedReviewLeave": "You are not allowed to approve leave.",
-    "endBeforeStart": "The end date is before the start date.",
+    "endBeforeStart": "The end date is before the start.",
     "chooseLeaveReviewer": "Choose someone who can approve your leave.",
     "licensedUserLimit": "Your licence's user limit is reached. Deactivate someone who no longer works here, or contact sales@prosm.net for more users.",
     "ownerOnlyLicence": "Only the owner can see the licence.",
@@ -298,7 +298,13 @@
     "planManagerLimit": "The Starter plan has one manager. Upgrade the plan for more managers or supervisors.",
     "planExternalWorkerLimit": "You have reached the number of external workers your licence allows. Contact PROSM to raise it.",
     "buzzTooSoon": "Wait 30 seconds before buzzing the same person again.",
-    "buzzSelf": "You cannot buzz yourself."
+    "buzzSelf": "You cannot buzz yourself.",
+    "notFound": "This item does not exist or was deleted.",
+    "birthDateFuture": "The date of birth cannot be in the future.",
+    "contractNeedsEnd": "This contract needs an end date.",
+    "jobTitleExists": "This job title already exists.",
+    "chooseContractType": "Choose the contract type.",
+    "startDateRequired": "Enter the start date."
   },
   "pageLoad": {
     "title": "This page needs a connection",

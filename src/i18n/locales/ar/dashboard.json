@@ -590,7 +590,11 @@
         "allowances_edit_during_review": "تعديل بدل أثناء المراجعة",
         "leave_approved_cancelled": "إلغاء إجازة معتمدة",
         "OWNER_AUTHORITY_GRANTED": "منح صلاحيات المالك",
-        "OWNER_AUTHORITY_REVOKED": "سحب صلاحيات المالك"
+        "OWNER_AUTHORITY_REVOKED": "سحب صلاحيات المالك",
+        "hr_profile_changed": "تعديل ملف الموظف",
+        "hr_contract_saved": "حفظ عقد",
+        "hr_contract_deleted": "حذف عقد",
+        "hr_job_title_saved": "حفظ وظيفة"
       },
       "groups": {
         "sos": "استغاثة",

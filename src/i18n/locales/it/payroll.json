@@ -249,7 +249,8 @@
     "legalNameArabicLabel": "Nome in arabo (come sul documento)",
     "legalNameLabel": "Nome ufficiale",
     "legalNameHint": "È il nome sulla busta paga, non il nome utente ({{user}}).",
-    "legalNameMissing": "Manca il nome ufficiale"
+    "legalNameMissing": "Manca il nome ufficiale",
+    "notInPayroll": "Questa persona non è nelle paghe (il titolare non riceve stipendio)."
   },
   "installments": {
     "title": "Rate e anticipi",

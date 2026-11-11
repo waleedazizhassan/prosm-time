@@ -169,7 +169,7 @@
     "networkProblem": "Der Server ist gerade nicht erreichbar. Prüfen Sie Ihre Verbindung und versuchen Sie es gleich noch einmal.",
     "allowanceAlreadyApproved": "Dieser Zulageneintrag ist bereits genehmigt und kann nicht mehr geändert werden.",
     "ownerDoesNotClockIn": "Der Inhaber stempelt nicht ein oder aus - die Anwesenheit wird für das übrige Team erfasst.",
-    "nameRequired": "Bitte einen Namen eingeben.",
+    "nameRequired": "Namen eingeben.",
     "noFreeWorkerNumber": "Es konnte gerade keine Nummer erstellt werden. Bitte erneut versuchen.",
     "onBehalfOwnerOrManagerOnly": "Nur der Inhaber oder ein Manager kann jemanden in dessen Namen ein- oder ausstempeln.",
     "workerKioskOwnerOrManager": "Nur der Inhaber oder der Manager dieses Standorts kann den Kiosk für externe Arbeiter betreiben.",
@@ -279,7 +279,7 @@
     "grantLeaveOverlap": "Dieser Mitarbeiter hat an diesen Tagen bereits beantragten oder genehmigten Urlaub.",
     "invalidLeaveType": "Diese Urlaubsart ist ungültig.",
     "notAuthorizedReviewLeave": "Sie dürfen keinen Urlaub genehmigen.",
-    "endBeforeStart": "Das Enddatum liegt vor dem Startdatum.",
+    "endBeforeStart": "Das Ende liegt vor dem Beginn.",
     "chooseLeaveReviewer": "Wählen Sie jemanden, der Ihren Urlaub genehmigen darf.",
     "licensedUserLimit": "Die Nutzergrenze Ihrer Lizenz ist erreicht. Deaktivieren Sie ein ungenutztes Konto oder kontaktieren Sie sales@prosm.net.",
     "ownerOnlyLicence": "Nur der Inhaber kann die Lizenz sehen.",
@@ -298,7 +298,13 @@
     "planManagerLimit": "Der Starter-Plan hat einen Manager. Für weitere Manager oder Vorgesetzte den Plan erweitern.",
     "planExternalWorkerLimit": "Die laut Lizenz erlaubte Zahl externer Arbeitskräfte ist erreicht. Wenden Sie sich an PROSM.",
     "buzzTooSoon": "Warte 30 Sekunden, bevor du dieselbe Person erneut anbuzzt.",
-    "buzzSelf": "Du kannst dich nicht selbst anbuzzen."
+    "buzzSelf": "Du kannst dich nicht selbst anbuzzen.",
+    "notFound": "Dieser Eintrag existiert nicht oder wurde gelöscht.",
+    "birthDateFuture": "Das Geburtsdatum darf nicht in der Zukunft liegen.",
+    "contractNeedsEnd": "Dieser Vertrag braucht ein Enddatum.",
+    "jobTitleExists": "Diese Stelle gibt es bereits.",
+    "chooseContractType": "Vertragsart wählen.",
+    "startDateRequired": "Beginn eingeben."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

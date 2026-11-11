@@ -581,7 +581,11 @@
         "allowances_edit_during_review": "Indennità modificata in revisione",
         "leave_approved_cancelled": "Ferie approvate annullate",
         "OWNER_AUTHORITY_GRANTED": "Autorità del titolare concessa",
-        "OWNER_AUTHORITY_REVOKED": "Autorità del titolare ritirata"
+        "OWNER_AUTHORITY_REVOKED": "Autorità del titolare ritirata",
+        "hr_profile_changed": "Fascicolo modificato",
+        "hr_contract_saved": "Contratto salvato",
+        "hr_contract_deleted": "Contratto eliminato",
+        "hr_job_title_saved": "Mansione salvata"
       },
       "groups": {
         "sos": "SOS",

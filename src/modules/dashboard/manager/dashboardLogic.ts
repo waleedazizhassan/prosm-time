@@ -37,7 +37,7 @@ export function mergeOrder(saved: WidgetId[]): WidgetId[] {
 
 // The audit log speaks the reader's language: a few key actions by name,
 // every other one by its kind (the server's own text is English).
-const AUDIT_NAMED = new Set(["SOS_ALERT_TRIGGERED", "SOS_ALERT_RESOLVED", "ADMIN_CLOCK_IN_ON_BEHALF", "ADMIN_CLOCK_OUT_ON_BEHALF", "PERMISSION_GRANTED", "PERMISSION_REVOKED", "EMPLOYEE_DEACTIVATED", "EMPLOYEE_REMOVED", "USER_INVITED", "attendance.override_block", "attendance.day_adjusted", "attendance.overtime_approved", "attendance.auto_close", "allowances.edit_during_review", "leave.approved_cancelled"]);
+const AUDIT_NAMED = new Set(["SOS_ALERT_TRIGGERED", "SOS_ALERT_RESOLVED", "ADMIN_CLOCK_IN_ON_BEHALF", "ADMIN_CLOCK_OUT_ON_BEHALF", "PERMISSION_GRANTED", "PERMISSION_REVOKED", "EMPLOYEE_DEACTIVATED", "EMPLOYEE_REMOVED", "USER_INVITED", "attendance.override_block", "attendance.day_adjusted", "attendance.overtime_approved", "attendance.auto_close", "allowances.edit_during_review", "leave.approved_cancelled", "hr.profile_changed", "hr.contract_saved", "hr.contract_deleted", "hr.job_title_saved"]);
 // Owner 2026-11-10 ("the action log has many things that are not clear"): the automatic records of a
 // table change ("<table>.<insert|update|delete>") and the newer actions get their own kind, not "other".
 const AUDIT_GROUPS: [RegExp, string][] = [
@@ -51,7 +51,7 @@ const AUDIT_GROUPS: [RegExp, string][] = [
   [/^payroll|^EXTERNAL_PAY_|^EXTERNAL_LABOR_|^external_labor_/, "payroll"],
   [/^calendar\.|^public_holidays\.|^schedule_exceptions\./, "calendar"],
   [/^PROJECT_|^project_assignments\./, "projects"],
-  [/^USER_|^EMPLOYEE_|^employees\.|^PASSWORD_|^EXTERNAL_WORKER|^ACCOUNT_|^site_workers\./, "people"],
+  [/^USER_|^EMPLOYEE_|^employees\.|^PASSWORD_|^EXTERNAL_WORKER|^ACCOUNT_|^site_workers\.|^hr\./, "people"],
   [/^DEVICE_|^CAMERA_|^KIOSK_PIN|^device\.|^security\.|^camera_evidence\.|^integrity_flags\./, "devices"],
   [/^ANNOUNCEMENT_|^DEPARTMENT_/, "announcements"],
   [/^report_exports\./, "reports"],

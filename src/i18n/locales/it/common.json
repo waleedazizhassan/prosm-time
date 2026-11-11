@@ -169,7 +169,7 @@
     "networkProblem": "Al momento non riusciamo a raggiungere il server. Controlla la connessione e riprova tra poco.",
     "allowanceAlreadyApproved": "Questa indennità è già approvata e non può più essere modificata.",
     "ownerDoesNotClockIn": "Il titolare non timbra - la presenza viene registrata per il resto del team.",
-    "nameRequired": "Inserisci un nome.",
+    "nameRequired": "Inserisci il nome.",
     "noFreeWorkerNumber": "Impossibile creare un numero ora. Riprova.",
     "onBehalfOwnerOrManagerOnly": "Solo il titolare o un responsabile può timbrare per conto di qualcuno.",
     "workerKioskOwnerOrManager": "Solo il titolare o il responsabile di questa sede può usare il chiosco dei lavoratori esterni.",
@@ -279,7 +279,7 @@
     "grantLeaveOverlap": "Questo dipendente ha già ferie in attesa o approvate in questi giorni.",
     "invalidLeaveType": "Questo tipo di ferie non è valido.",
     "notAuthorizedReviewLeave": "Non sei autorizzato ad approvare le ferie.",
-    "endBeforeStart": "La data di fine è prima della data di inizio.",
+    "endBeforeStart": "La fine è prima dell’inizio.",
     "chooseLeaveReviewer": "Scegli qualcuno che può approvare le tue ferie.",
     "licensedUserLimit": "Il limite di utenti della licenza è raggiunto. Disattiva un account non più usato o contatta sales@prosm.net.",
     "ownerOnlyLicence": "Solo il titolare può vedere la licenza.",
@@ -298,7 +298,13 @@
     "planManagerLimit": "Il piano Starter ha un solo responsabile. Passa a un piano superiore per averne di più.",
     "planExternalWorkerLimit": "Hai raggiunto il numero di lavoratori esterni consentito dalla licenza. Contatta PROSM.",
     "buzzTooSoon": "Aspetta 30 secondi prima di avvisare di nuovo la stessa persona.",
-    "buzzSelf": "Non puoi avvisare te stesso."
+    "buzzSelf": "Non puoi avvisare te stesso.",
+    "notFound": "Elemento inesistente o eliminato.",
+    "birthDateFuture": "La data di nascita non può essere futura.",
+    "contractNeedsEnd": "Questo contratto richiede una data di fine.",
+    "jobTitleExists": "Questa mansione esiste già.",
+    "chooseContractType": "Scegli il tipo di contratto.",
+    "startDateRequired": "Inserisci la data di inizio."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

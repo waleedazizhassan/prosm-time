@@ -584,7 +584,11 @@
         "allowances_edit_during_review": "Надбавка изменена при проверке",
         "leave_approved_cancelled": "Одобренный отпуск отменён",
         "OWNER_AUTHORITY_GRANTED": "Выданы полномочия владельца",
-        "OWNER_AUTHORITY_REVOKED": "Отозваны полномочия владельца"
+        "OWNER_AUTHORITY_REVOKED": "Отозваны полномочия владельца",
+        "hr_profile_changed": "Личное дело изменено",
+        "hr_contract_saved": "Договор сохранён",
+        "hr_contract_deleted": "Договор удалён",
+        "hr_job_title_saved": "Должность сохранена"
       },
       "groups": {
         "sos": "SOS",

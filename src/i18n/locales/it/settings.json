@@ -256,7 +256,9 @@
       "payroll": "Paghe (contributi, imposte, prestiti, buste)",
       "integrations": "Integrazioni, API e presenze da lettori biometrici",
       "delegation": "Delega completa e a tempo",
-      "retention": "Controllo della conservazione dei dati"
+      "retention": "Controllo della conservazione dei dati",
+      "documents": "Documenti dei dipendenti e scadenze",
+      "penalties": "Regolamento sanzioni progressive e incentivi"
     },
     "managedByProsm": "Ogni modifica o rinnovo della licenza è fatto da PROSM; ricevi una notifica e un’e-mail con la nuova licenza. Per modificarla scrivi a sales@prosm.net.",
     "historyAll": "Timbrature mostrate: tutte. Posizioni e foto si eliminano automaticamente dopo il periodo in «Conservazione dei dati».",
@@ -310,5 +312,17 @@
       "label": "Non conteggiati",
       "hint": "Non incide su nulla: si vede solo nelle ore."
     }
+  },
+  "jobTitles": {
+    "title": "Mansioni",
+    "hint": "Le mansioni dell’azienda: scelte in ogni fascicolo e usate dai documenti richiesti per mansione.",
+    "name": "Mansione",
+    "add": "Aggiungi",
+    "stop": "Disattiva",
+    "restore": "Ripristina",
+    "people_one": "1 persona",
+    "people_other": "{{count}} persone",
+    "error": "Impossibile salvare.",
+    "people_many": "{{count}} persone"
   }
 }

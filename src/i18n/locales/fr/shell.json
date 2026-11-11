@@ -292,7 +292,8 @@
     "payslips": "Mes bulletins",
     "externalPay": "Paie des externes",
     "announcements": "Tableau d'affichage",
-    "exceptions": "Mes exceptions"
+    "exceptions": "Mes exceptions",
+    "myProfile": "Mon dossier"
   },
   "sosOverlay": {
     "title": "Alerte SOS/Urgence",
@@ -404,7 +405,8 @@
     "payroll": "Cycles de paie, dossiers, les trois rapports et les bulletins - avec des droits séparés et des versions conservées.",
     "payslips": "Vos bulletins publiés - consultez-les ou demandez-les par e-mail.",
     "externalPay": "Taux à la journée, à la semaine, au mois ou à l'année, paies, règles et ajustements individuels - approuvés et figés, séparés de la paie des employés.",
-    "announcements": "Annonces et communiqués officiels qui vous sont adressés ; confirmez ceux qui le demandent."
+    "announcements": "Annonces et communiqués officiels qui vous sont adressés ; confirmez ceux qui le demandent.",
+    "myProfile": "Tes données, documents, avertissements et présences."
   },
   "backgroundDisclosure": {
     "title": "Position pendant votre poste",

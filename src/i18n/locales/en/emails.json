@@ -174,7 +174,9 @@
         "payroll": "Payroll (insurance, tax, loans, payslips)",
         "integrations": "Integrations, API and attendance from fingerprint devices",
         "delegation": "Full and time-limited delegation",
-        "retention": "Data retention control"
+        "retention": "Data retention control",
+        "documents": "Employee documents and their expiry",
+        "penalties": "Progressive penalties bylaw and incentives"
       }
     }
   },

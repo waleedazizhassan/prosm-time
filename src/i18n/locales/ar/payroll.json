@@ -249,7 +249,8 @@
     "legalNameArabicLabel": "اسم الموظف بالعربي (كما في البطاقة)",
     "legalNameLabel": "الاسم الرسمي للموظف",
     "legalNameHint": "ده الاسم اللي هيظهر في المفردات وكشوف المرتبات، مش اسم المستخدم ({{user}}).",
-    "legalNameMissing": "ناقص الاسم الرسمي"
+    "legalNameMissing": "ناقص الاسم الرسمي",
+    "notInPayroll": "الشخص ده مش ظاهر في المرتبات (المالك لا يُصرف له مرتب)."
   },
   "installments": {
     "title": "الأقساط والسلف",

@@ -298,7 +298,13 @@
     "planManagerLimit": "Starter 套餐只有一名经理。升级套餐可添加更多经理或主管。",
     "planExternalWorkerLimit": "已达到许可证允许的外部人员数量。请联系 PROSM。",
     "buzzTooSoon": "请等待 30 秒后再提醒同一个人。",
-    "buzzSelf": "不能提醒自己。"
+    "buzzSelf": "不能提醒自己。",
+    "notFound": "该项目不存在或已删除。",
+    "birthDateFuture": "出生日期不能是将来。",
+    "contractNeedsEnd": "此合同需要结束日期。",
+    "jobTitleExists": "该职位已存在。",
+    "chooseContractType": "请选择合同类型。",
+    "startDateRequired": "请输入开始日期。"
   },
   "pageLoad": {
     "title": "此页面需要网络连接",

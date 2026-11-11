@@ -256,7 +256,9 @@
       "payroll": "Nómina (seguros, impuestos, préstamos, recibos)",
       "integrations": "Integraciones, API y asistencia de lectores de huella",
       "delegation": "Delegación completa y temporal",
-      "retention": "Control de retención de datos"
+      "retention": "Control de retención de datos",
+      "documents": "Documentos del personal y su vencimiento",
+      "penalties": "Reglamento de sanciones progresivas e incentivos"
     },
     "managedByProsm": "Cualquier cambio o renovación de tu licencia lo hace PROSM; recibes una notificación y un correo con la nueva licencia. Para cambiarla, escribe a sales@prosm.net.",
     "historyAll": "Registros de asistencia visibles: todos. Los puntos de ubicación y las fotos se eliminan automáticamente tras el plazo de «Conservación de datos».",
@@ -310,5 +312,17 @@
       "label": "No se cuentan",
       "hint": "No afecta a nada: solo se ve en las horas."
     }
+  },
+  "jobTitles": {
+    "title": "Puestos",
+    "hint": "Los puestos de la empresa: se eligen en cada expediente y los usan los documentos exigidos por puesto.",
+    "name": "Puesto",
+    "add": "Añadir",
+    "stop": "Desactivar",
+    "restore": "Recuperar",
+    "people_one": "1 persona",
+    "people_other": "{{count}} personas",
+    "error": "No se pudo guardar.",
+    "people_many": "{{count}} personas"
   }
 }

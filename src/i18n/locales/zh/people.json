@@ -84,7 +84,8 @@
     "announcements.publish": "发布公告",
     "announcements.manage": "管理所有公告",
     "announcements.view_reads": "查看公告阅读情况",
-    "departments.manage": "管理部门"
+    "departments.manage": "管理部门",
+    "hr.manage": "管理员工档案"
   },
   "invite": {
     "actionLabel": "邀请员工",
@@ -313,5 +314,102 @@
     "grantsLeft": "仍然有效的直接权限：",
     "granted": "已授予",
     "revoked": "已撤销"
+  },
+  "profile": {
+    "tabsLabel": "员工档案分区",
+    "myTitle": "我的档案",
+    "code": "工号 {{code}}",
+    "since": "自 {{date}}",
+    "completion": "档案完整度 {{percent}}%",
+    "completionTitle": "已提交的必需证件",
+    "missing_other": "缺少 {{count}} 份证件",
+    "loadError": "无法加载数据。",
+    "saveError": "无法保存。",
+    "uploadError": "无法上传文件。",
+    "save": "保存",
+    "saved": "已保存。",
+    "edit": "编辑",
+    "noJobTitle": "无职位",
+    "noJobTitlesYet": "请先在设置中添加职位",
+    "status": {
+      "active": "在职",
+      "suspended": "停职",
+      "ended": "已离职",
+      "deactivated": "已停用登录"
+    },
+    "tabs": {
+      "data": "资料",
+      "contract": "合同",
+      "documents": "证件",
+      "payroll": "工资",
+      "attendance": "考勤",
+      "leave": "假期",
+      "penalties": "处罚与奖励",
+      "history": "记录"
+    },
+    "fields": {
+      "jobTitle": "职位",
+      "status": "员工状态",
+      "phone": "手机号",
+      "emergency_contact_name": "紧急联系人",
+      "emergency_contact_phone": "紧急联系电话",
+      "national_id": "身份证号",
+      "birth_date": "出生日期",
+      "address": "地址"
+    },
+    "contracts": {
+      "empty": "暂无合同。",
+      "add": "添加合同",
+      "editTitle": "编辑合同",
+      "type": "合同类型",
+      "start": "开始日期",
+      "end": "结束日期",
+      "endOptional": "结束日期（可选）",
+      "probation": "试用期结束（可选）",
+      "file": "已签署合同（PDF 或照片）",
+      "notes": "备注",
+      "noEnd": "无固定期限",
+      "probationUntil": "试用期至 {{date}}",
+      "view": "查看",
+      "types": {
+        "fixed_term": "固定期限",
+        "open_ended": "无固定期限",
+        "temporary": "临时"
+      },
+      "state": {
+        "current": "有效",
+        "ending": "即将到期",
+        "upcoming": "尚未开始",
+        "ended": "已结束"
+      }
+    },
+    "attendance": {
+      "day": "日期",
+      "site": "站点",
+      "in": "上班",
+      "out": "下班",
+      "worked": "工时",
+      "absent": "缺勤",
+      "late": "迟到 {{minutes}} 分钟",
+      "daysWorked": "出勤天数（近 {{days}} 天）",
+      "hours": "总工时",
+      "lateDays": "迟到天数",
+      "absentDays": "缺勤天数",
+      "empty": "此期间无考勤。"
+    },
+    "leave": {
+      "empty": "近一年无休假。",
+      "days_other": "{{count}} 天",
+      "status": {
+        "pending": "待处理",
+        "approved": "已批准",
+        "rejected": "已拒绝",
+        "cancelled": "已取消"
+      }
+    },
+    "history": {
+      "empty": "暂无变更记录。",
+      "more": "查看更早"
+    }
   }
 }

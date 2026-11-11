@@ -169,7 +169,7 @@
     "networkProblem": "Não conseguimos falar com o servidor agora. Verifique sua conexão e tente de novo em instantes.",
     "allowanceAlreadyApproved": "Este adicional já foi aprovado e não pode mais ser alterado.",
     "ownerDoesNotClockIn": "O proprietário não registra ponto - a frequência é registrada para o restante da equipe.",
-    "nameRequired": "Informe um nome.",
+    "nameRequired": "Escreva o nome.",
     "noFreeWorkerNumber": "Não foi possível criar um número agora. Tente de novo.",
     "onBehalfOwnerOrManagerOnly": "Somente o proprietário ou um gestor pode registrar o ponto por outra pessoa.",
     "workerKioskOwnerOrManager": "Somente o proprietário ou o gestor deste local pode usar o quiosque de trabalhadores.",
@@ -279,7 +279,7 @@
     "grantLeaveOverlap": "Este funcionário já tem afastamento pendente ou aprovado nesses dias.",
     "invalidLeaveType": "Este tipo de afastamento não é válido.",
     "notAuthorizedReviewLeave": "Você não tem permissão para aprovar afastamentos.",
-    "endBeforeStart": "A data de término é anterior à de início.",
+    "endBeforeStart": "A data de fim é anterior ao início.",
     "chooseLeaveReviewer": "Escolha alguém que possa aprovar o seu afastamento.",
     "licensedUserLimit": "O limite de usuários da sua licença foi atingido. Desative alguém que não trabalha mais aqui ou fale com sales@prosm.net para mais usuários.",
     "ownerOnlyLicence": "Somente o proprietário pode ver a licença.",
@@ -298,7 +298,13 @@
     "planManagerLimit": "O plano Starter tem um gestor. Faça upgrade para ter mais gestores ou supervisores.",
     "planExternalWorkerLimit": "Você atingiu o número de trabalhadores externos permitido pela licença. Contate a PROSM.",
     "buzzTooSoon": "Espere 30 segundos antes de alertar a mesma pessoa de novo.",
-    "buzzSelf": "Não pode alertar-se a si mesmo."
+    "buzzSelf": "Não pode alertar-se a si mesmo.",
+    "notFound": "Este item não existe ou foi apagado.",
+    "birthDateFuture": "A data de nascimento não pode ser futura.",
+    "contractNeedsEnd": "Este contrato precisa de data de fim.",
+    "jobTitleExists": "Este cargo já existe.",
+    "chooseContractType": "Escolha o tipo de contrato.",
+    "startDateRequired": "Escreva a data de início."
   },
   "pageLoad": {
     "title": "Esta página precisa de conexão",

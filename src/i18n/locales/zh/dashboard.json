@@ -575,7 +575,11 @@
         "allowances_edit_during_review": "审核中修改津贴",
         "leave_approved_cancelled": "取消已批准的假期",
         "OWNER_AUTHORITY_GRANTED": "授予所有者权限",
-        "OWNER_AUTHORITY_REVOKED": "撤回所有者权限"
+        "OWNER_AUTHORITY_REVOKED": "撤回所有者权限",
+        "hr_profile_changed": "员工档案已修改",
+        "hr_contract_saved": "合同已保存",
+        "hr_contract_deleted": "合同已删除",
+        "hr_job_title_saved": "职位已保存"
       },
       "groups": {
         "sos": "SOS",

@@ -256,7 +256,9 @@
       "payroll": "工资（社保、税、借款、工资单）",
       "integrations": "集成、API 与指纹设备考勤",
       "delegation": "完全及限期授权",
-      "retention": "数据保留控制"
+      "retention": "数据保留控制",
+      "documents": "员工证件及到期提醒",
+      "penalties": "阶梯处罚规章与奖励"
     },
     "managedByProsm": "许可证的任何变更或续订都由 PROSM 处理；您会收到通知和附有新许可证的邮件。如需变更，请写信至 sales@prosm.net。",
     "historyAll": "显示的考勤记录：全部。位置点和照片会在“数据保留”中的期限后自动删除。",
@@ -308,5 +310,15 @@
       "label": "不计算",
       "hint": "不影响任何内容——只在工时中显示。"
     }
+  },
+  "jobTitles": {
+    "title": "职位",
+    "hint": "公司的职位：在员工档案中选择，并用于按职位要求的证件。",
+    "name": "职位名称",
+    "add": "添加",
+    "stop": "停用",
+    "restore": "恢复",
+    "people_other": "{{count}} 人",
+    "error": "无法保存。"
   }
 }

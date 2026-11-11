@@ -178,7 +178,9 @@
         "payroll": "Paie (cotisations, impôt, prêts, bulletins)",
         "integrations": "Intégrations, API et pointage des badgeuses",
         "delegation": "Délégation complète et temporaire",
-        "retention": "Contrôle de la conservation des données"
+        "retention": "Contrôle de la conservation des données",
+        "documents": "Documents des salariés et leur expiration",
+        "penalties": "Règlement de sanctions progressives et primes"
       }
     }
   },

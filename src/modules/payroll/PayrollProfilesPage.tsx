@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -29,7 +29,9 @@ const firstOfMonth = () => {
 // 2026-11-08: payroll profiles - each person's code, currency, start/end dates and fixed
 // components with effective dates (a new value never rewrites an earlier cycle) - and the
 // installment / advance plans.
-export default function PayrollProfilesPage() {
+// HR suite feature 3 (2026-11-11): the same salary file also opens inside the employee profile's
+// "Pay" tab (embedUserId) - the same editor and the same save, without the list around it.
+export default function PayrollProfilesPage({ embedUserId }: { embedUserId?: string } = {}) {
   const { t, i18n } = useTranslation("payroll");
   const navigate = useNavigate();
   const isRtl = i18n.dir() === "rtl";
@@ -163,7 +165,7 @@ export default function PayrollProfilesPage() {
     await load();
     setInitial(Object.fromEntries(fixed.map((c) => [c.id, { amount: values[c.id]?.amount ?? "", percent: values[c.id]?.percent ?? "" }])));
     setNotice(changes.length > 0 ? t("profiles.savedNotice", { name: editing.fullName, count: changes.length }) : t("profiles.savedNoticeFile", { name: editing.fullName }));
-    window.setTimeout(() => setEditing(null), 900);
+    if (!embedUserId) window.setTimeout(() => setEditing(null), 900);
   };
 
   // Owner 2026-11-10: delete an item from THIS person's card - it ends for them from the chosen date (their
@@ -234,6 +236,17 @@ export default function PayrollProfilesPage() {
     return !result.error;
   };
 
+  const embedOpenedRef = useRef(false);
+  useEffect(() => {
+    if (!embedUserId || embedOpenedRef.current || !people || components.length === 0) return;
+    const person = people.find((p) => p.userId === embedUserId);
+    if (!person) return;
+    embedOpenedRef.current = true;
+    openPerson(person);
+    // openPerson only reads the loaded lists
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [embedUserId, people, components]);
+
   const columns: TableColumn<PayrollPerson>[] = [
     { key: "name", header: t("profiles.person"), render: (p) => (
       <span style={{ display: "grid" }}>
@@ -265,44 +278,9 @@ export default function PayrollProfilesPage() {
       </div>) : null) },
   ];
 
-  return (
-    <PageShell title={t("nav.profiles")} subtitle={t("profiles.hint")} wide>
-      <Button variant="ghost" size="sm" onClick={() => navigate("/payroll")}>{t("nav.back")}</Button>
-      <ErrorText>{error}</ErrorText>
-      {notice ? <SuccessText>{notice}</SuccessText> : null}
-      <Card title={t("profiles.title")}>
-        <div style={{ maxWidth: 360, marginBottom: "var(--space-2)" }}>
-          <Input label={t("profiles.search")} name="profilesSearch" value={search} onChange={(event) => setSearch(event.target.value)} />
-        </div>
-        <HintText small>{t("profiles.tapToEdit")}</HintText>
-        <Table columns={columns} data={(people ?? []).filter((p) => !search.trim() || p.fullName.toLowerCase().includes(search.trim().toLowerCase()) || (p.profile?.legal_name ?? "").includes(search.trim()) || (p.profile?.employee_code ?? "").includes(search.trim()))}
-          getRowId={(p) => p.userId} loading={people === null} emptyMessage={t("profiles.empty")} onRowClick={openPerson} />
-      </Card>
-
-      <Card title={t("installments.title")} subtitle={t("installments.hint")}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(9rem, 1fr))", gap: "var(--space-2)" }}>
-          <Select label={t("profiles.person")} name="planUser" value={plan.userId} onChange={(event) => setPlan({ ...plan, userId: event.target.value })}
-            options={[{ value: "", label: "-" }, ...(people ?? []).filter((p) => p.profile).map((p) => ({ value: p.userId, label: p.fullName }))]} />
-          <Input label={t("installments.name")} name="planName" value={plan.name} onChange={(event) => setPlan({ ...plan, name: event.target.value })} />
-          <Input label={t("installments.total")} name="planTotal" inputMode="decimal" value={plan.total} onChange={(event) => setPlan({ ...plan, total: event.target.value })} />
-          <Input label={t("installments.count")} name="planCount" inputMode="numeric" value={plan.count} onChange={(event) => setPlan({ ...plan, count: event.target.value })} />
-          <Input label={t("installments.start")} name="planStart" type="date" value={plan.start} onChange={(event) => setPlan({ ...plan, start: event.target.value })} />
-          <Input label={t("installments.amountOptional")} name="planAmount" inputMode="decimal" value={plan.installment} onChange={(event) => setPlan({ ...plan, installment: event.target.value })} />
-        </div>
-        <Button size="sm" loading={busy === "plan"} disabled={!plan.userId || !plan.name.trim() || !plan.total || !plan.count}
-          onClick={async () => {
-            const ok = await act("plan", () => PayrollCycleRepository.saveInstallment(plan.userId, plan.name.trim(), parseAmount(plan.total) ?? 0, parseAmount(plan.count) ?? 0, plan.start, parseAmount(plan.installment)));
-            if (ok) setPlan({ userId: "", name: "", total: "", count: "", start: today(), installment: "" });
-          }}>{t("installments.add")}</Button>
-        <Table columns={planColumns} data={plans} getRowId={(p) => p.id} emptyMessage={t("installments.empty")} />
-      </Card>
-
-      {/* Owner 2026-11-09 ("payroll must be simpler; the fields don't save"): one screen per person - the
-          salary items with one start date, insurance and tax, and ONE save that keeps everything.
-          Errors show inside the window. Amounts accept Arabic digits. */}
-      <Modal isOpen={Boolean(editing)} onClose={() => setEditing(null)} title={editing ? t("profiles.editorTitle", { name: editing.fullName }) : ""} size="lg"
-        footer={<Button fullWidth loading={busy === "save-all"} onClick={() => void saveAll()}>{t("profiles.saveAll")}</Button>}>
-        {editing ? (
+  const editorBody = (
+    <>
+{editing ? (
           <>
             {saveError ? <div ref={(el) => el?.scrollIntoView({ block: "nearest" })}><ErrorText>{saveError}</ErrorText></div> : null}
             {saved ? <SuccessText>{t("profiles.savedAll")}</SuccessText> : null}
@@ -369,6 +347,57 @@ export default function PayrollProfilesPage() {
             </details>
           </>
         ) : null}
+    </>
+  );
+
+  if (embedUserId) {
+    return (
+      <div style={{ display: "grid", gap: "var(--space-3)" }}>
+        {people !== null && !people.some((p) => p.userId === embedUserId) ? <HintText>{t("profiles.notInPayroll")}</HintText> : null}
+        {editorBody}
+        {editing ? <Button fullWidth loading={busy === "save-all"} onClick={() => void saveAll()}>{t("profiles.saveAll")}</Button> : null}
+      </div>
+    );
+  }
+
+  return (
+    <PageShell title={t("nav.profiles")} subtitle={t("profiles.hint")} wide>
+      <Button variant="ghost" size="sm" onClick={() => navigate("/payroll")}>{t("nav.back")}</Button>
+      <ErrorText>{error}</ErrorText>
+      {notice ? <SuccessText>{notice}</SuccessText> : null}
+      <Card title={t("profiles.title")}>
+        <div style={{ maxWidth: 360, marginBottom: "var(--space-2)" }}>
+          <Input label={t("profiles.search")} name="profilesSearch" value={search} onChange={(event) => setSearch(event.target.value)} />
+        </div>
+        <HintText small>{t("profiles.tapToEdit")}</HintText>
+        <Table columns={columns} data={(people ?? []).filter((p) => !search.trim() || p.fullName.toLowerCase().includes(search.trim().toLowerCase()) || (p.profile?.legal_name ?? "").includes(search.trim()) || (p.profile?.employee_code ?? "").includes(search.trim()))}
+          getRowId={(p) => p.userId} loading={people === null} emptyMessage={t("profiles.empty")} onRowClick={openPerson} />
+      </Card>
+
+      <Card title={t("installments.title")} subtitle={t("installments.hint")}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(9rem, 1fr))", gap: "var(--space-2)" }}>
+          <Select label={t("profiles.person")} name="planUser" value={plan.userId} onChange={(event) => setPlan({ ...plan, userId: event.target.value })}
+            options={[{ value: "", label: "-" }, ...(people ?? []).filter((p) => p.profile).map((p) => ({ value: p.userId, label: p.fullName }))]} />
+          <Input label={t("installments.name")} name="planName" value={plan.name} onChange={(event) => setPlan({ ...plan, name: event.target.value })} />
+          <Input label={t("installments.total")} name="planTotal" inputMode="decimal" value={plan.total} onChange={(event) => setPlan({ ...plan, total: event.target.value })} />
+          <Input label={t("installments.count")} name="planCount" inputMode="numeric" value={plan.count} onChange={(event) => setPlan({ ...plan, count: event.target.value })} />
+          <Input label={t("installments.start")} name="planStart" type="date" value={plan.start} onChange={(event) => setPlan({ ...plan, start: event.target.value })} />
+          <Input label={t("installments.amountOptional")} name="planAmount" inputMode="decimal" value={plan.installment} onChange={(event) => setPlan({ ...plan, installment: event.target.value })} />
+        </div>
+        <Button size="sm" loading={busy === "plan"} disabled={!plan.userId || !plan.name.trim() || !plan.total || !plan.count}
+          onClick={async () => {
+            const ok = await act("plan", () => PayrollCycleRepository.saveInstallment(plan.userId, plan.name.trim(), parseAmount(plan.total) ?? 0, parseAmount(plan.count) ?? 0, plan.start, parseAmount(plan.installment)));
+            if (ok) setPlan({ userId: "", name: "", total: "", count: "", start: today(), installment: "" });
+          }}>{t("installments.add")}</Button>
+        <Table columns={planColumns} data={plans} getRowId={(p) => p.id} emptyMessage={t("installments.empty")} />
+      </Card>
+
+      {/* Owner 2026-11-09 ("payroll must be simpler; the fields don't save"): one screen per person - the
+          salary items with one start date, insurance and tax, and ONE save that keeps everything.
+          Errors show inside the window. Amounts accept Arabic digits. */}
+      <Modal isOpen={Boolean(editing) && !embedUserId} onClose={() => setEditing(null)} title={editing ? t("profiles.editorTitle", { name: editing.fullName }) : ""} size="lg"
+        footer={<Button fullWidth loading={busy === "save-all"} onClick={() => void saveAll()}>{t("profiles.saveAll")}</Button>}>
+        {embedUserId ? null : editorBody}
       </Modal>
 
       <Modal isOpen={Boolean(change)} onClose={() => setChange(null)} title={change ? t(`installments.${change.action}`) : ""}

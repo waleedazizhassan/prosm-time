@@ -249,7 +249,8 @@
     "legalNameArabicLabel": "阿拉伯文姓名（与证件一致）",
     "legalNameLabel": "正式姓名",
     "legalNameHint": "这是工资单上的姓名，而不是用户名（{{user}}）。",
-    "legalNameMissing": "缺少正式姓名"
+    "legalNameMissing": "缺少正式姓名",
+    "notInPayroll": "此人不在工资名单中（所有者不领取工资）。"
   },
   "installments": {
     "title": "分期与预支",

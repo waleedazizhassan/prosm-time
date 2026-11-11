@@ -578,7 +578,11 @@
         "allowances_edit_during_review": "Zulage in Prüfung geändert",
         "leave_approved_cancelled": "Genehmigter Urlaub storniert",
         "OWNER_AUTHORITY_GRANTED": "Befugnis des Inhabers erteilt",
-        "OWNER_AUTHORITY_REVOKED": "Befugnis des Inhabers entzogen"
+        "OWNER_AUTHORITY_REVOKED": "Befugnis des Inhabers entzogen",
+        "hr_profile_changed": "Personalakte geändert",
+        "hr_contract_saved": "Vertrag gespeichert",
+        "hr_contract_deleted": "Vertrag gelöscht",
+        "hr_job_title_saved": "Stelle gespeichert"
       },
       "groups": {
         "sos": "SOS",

@@ -174,7 +174,9 @@
         "payroll": "Lohn (Versicherung, Steuer, Darlehen, Abrechnungen)",
         "integrations": "Integrationen, API und Anwesenheit aus Fingerabdruckgeräten",
         "delegation": "Volle und befristete Vertretung",
-        "retention": "Steuerung der Datenaufbewahrung"
+        "retention": "Steuerung der Datenaufbewahrung",
+        "documents": "Mitarbeiterdokumente und Ablaufdaten",
+        "penalties": "Gestufte Sanktionsordnung und Prämien"
       }
     }
   },

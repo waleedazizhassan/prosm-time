@@ -249,7 +249,8 @@
     "legalNameArabicLabel": "Nombre en árabe (como en el documento)",
     "legalNameLabel": "Nombre oficial",
     "legalNameHint": "Este es el nombre de la nómina, no el nombre de usuario ({{user}}).",
-    "legalNameMissing": "Falta el nombre oficial"
+    "legalNameMissing": "Falta el nombre oficial",
+    "notInPayroll": "Esta persona no está en la nómina (el propietario no cobra salario)."
   },
   "installments": {
     "title": "Cuotas y anticipos",

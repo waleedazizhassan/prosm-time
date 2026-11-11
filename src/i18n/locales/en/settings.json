@@ -256,7 +256,9 @@
       "payroll": "Payroll (insurance, tax, loans, payslips)",
       "integrations": "Integrations, API and attendance from fingerprint devices",
       "delegation": "Full and time-limited delegation",
-      "retention": "Data retention control"
+      "retention": "Data retention control",
+      "documents": "Employee documents and their expiry",
+      "penalties": "Progressive penalties bylaw and incentives"
     },
     "managedByProsm": "Any change or renewal of your licence is made by PROSM; you get a notification and an email with the new licence. To change it, write to sales@prosm.net.",
     "historyAll": "Attendance records shown: all of them. Location points and photos are deleted automatically after the period in “Data retention”.",
@@ -309,5 +311,16 @@
       "label": "Not counted",
       "hint": "Affects nothing - it only shows in the hours."
     }
+  },
+  "jobTitles": {
+    "title": "Job titles",
+    "hint": "The company's job titles: chosen in each employee's file, and used by documents required for a job.",
+    "name": "Job title",
+    "add": "Add",
+    "stop": "Stop",
+    "restore": "Restore",
+    "people_one": "1 person",
+    "people_other": "{{count}} people",
+    "error": "Could not save."
   }
 }

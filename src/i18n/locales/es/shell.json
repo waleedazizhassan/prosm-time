@@ -292,7 +292,8 @@
     "payslips": "Mis recibos",
     "externalPay": "Pago de externos",
     "announcements": "Tablón de anuncios",
-    "exceptions": "Mis excepciones"
+    "exceptions": "Mis excepciones",
+    "myProfile": "Mi expediente"
   },
   "sosOverlay": {
     "title": "Alerta SOS/Emergencia",
@@ -404,7 +405,8 @@
     "payroll": "Ciclos, fichas, los tres informes y los recibos de nómina, con permisos separados y versiones guardadas.",
     "payslips": "Sus recibos publicados: véalos o pídalos por correo.",
     "externalPay": "Tarifas por día, semana, mes o año, liquidaciones, la política y ajustes individuales: aprobados y congelados, separados de la nómina.",
-    "announcements": "Anuncios y comunicados oficiales dirigidos a ti; confirma los que lo piden."
+    "announcements": "Anuncios y comunicados oficiales dirigidos a ti; confirma los que lo piden.",
+    "myProfile": "Tus datos, documentos, avisos y asistencia."
   },
   "backgroundDisclosure": {
     "title": "Ubicación durante tu turno",

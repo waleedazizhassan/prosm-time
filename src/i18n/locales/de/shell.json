@@ -292,7 +292,8 @@
     "payslips": "Meine Abrechnungen",
     "externalPay": "Lohn externer Kräfte",
     "announcements": "Schwarzes Brett",
-    "exceptions": "Meine Ausnahmen"
+    "exceptions": "Meine Ausnahmen",
+    "myProfile": "Meine Akte"
   },
   "sosOverlay": {
     "title": "SOS-/Notfallalarm",
@@ -399,7 +400,8 @@
     "payroll": "Abrechnungszeiträume, Profile, die drei Berichte und Abrechnungen - mit getrennten Rechten und gespeicherten Versionen.",
     "payslips": "Ihre veröffentlichten Abrechnungen - ansehen oder per E-Mail anfordern.",
     "externalPay": "Sätze pro Tag, Woche, Monat oder Jahr, Lohnläufe, Regeln und Einzelkorrekturen - genehmigt und eingefroren, getrennt von der Lohnabrechnung.",
-    "announcements": "Mitteilungen und offizielle Erklärungen an Sie; bestätigen Sie die, die es verlangen."
+    "announcements": "Mitteilungen und offizielle Erklärungen an Sie; bestätigen Sie die, die es verlangen.",
+    "myProfile": "Deine Daten, Dokumente, Verwarnungen und Anwesenheit."
   },
   "backgroundDisclosure": {
     "title": "Standort während Ihrer Schicht",

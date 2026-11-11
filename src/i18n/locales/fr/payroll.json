@@ -249,7 +249,8 @@
     "legalNameArabicLabel": "Nom en arabe (comme sur la pièce d’identité)",
     "legalNameLabel": "Nom officiel",
     "legalNameHint": "C’est le nom sur la fiche de paie, pas le nom d’utilisateur ({{user}}).",
-    "legalNameMissing": "Nom officiel manquant"
+    "legalNameMissing": "Nom officiel manquant",
+    "notInPayroll": "Cette personne n’est pas dans la paie (le propriétaire n’est pas salarié)."
   },
   "installments": {
     "title": "Échéances et avances",

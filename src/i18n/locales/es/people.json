@@ -84,7 +84,8 @@
     "announcements.publish": "Publicar anuncios",
     "announcements.manage": "Gestionar todos los anuncios",
     "announcements.view_reads": "Ver quién leyó los anuncios",
-    "departments.manage": "Gestionar departamentos"
+    "departments.manage": "Gestionar departamentos",
+    "hr.manage": "Gestionar expedientes"
   },
   "invite": {
     "actionLabel": "Invitar empleado",
@@ -313,5 +314,106 @@
     "grantsLeft": "Permisos directos que siguen vigentes:",
     "granted": "concedido",
     "revoked": "retirado"
+  },
+  "profile": {
+    "tabsLabel": "Secciones del expediente",
+    "myTitle": "Mi expediente",
+    "code": "Código {{code}}",
+    "since": "Desde {{date}}",
+    "completion": "Expediente al {{percent}}%",
+    "completionTitle": "Documentos obligatorios presentados",
+    "missing_one": "Falta un documento",
+    "missing_other": "Faltan {{count}} documentos",
+    "loadError": "No se pudieron cargar los datos.",
+    "saveError": "No se pudo guardar.",
+    "uploadError": "No se pudo subir el archivo.",
+    "save": "Guardar",
+    "saved": "Guardado.",
+    "edit": "Editar",
+    "noJobTitle": "Sin puesto",
+    "noJobTitlesYet": "Primero añade puestos en Ajustes",
+    "status": {
+      "active": "Activo",
+      "suspended": "Suspendido",
+      "ended": "Baja",
+      "deactivated": "Acceso detenido"
+    },
+    "tabs": {
+      "data": "Datos",
+      "contract": "Contrato",
+      "documents": "Documentos",
+      "payroll": "Salario",
+      "attendance": "Asistencia",
+      "leave": "Permisos",
+      "penalties": "Sanciones e incentivos",
+      "history": "Historial"
+    },
+    "fields": {
+      "jobTitle": "Puesto",
+      "status": "Estado",
+      "phone": "Móvil",
+      "emergency_contact_name": "Contacto de emergencia",
+      "emergency_contact_phone": "Teléfono de emergencia",
+      "national_id": "Documento de identidad",
+      "birth_date": "Fecha de nacimiento",
+      "address": "Dirección"
+    },
+    "contracts": {
+      "empty": "No hay contratos.",
+      "add": "Añadir contrato",
+      "editTitle": "Editar contrato",
+      "type": "Tipo de contrato",
+      "start": "Inicio",
+      "end": "Fin",
+      "endOptional": "Fin (opcional)",
+      "probation": "Fin del periodo de prueba (opcional)",
+      "file": "Contrato firmado (PDF o foto)",
+      "notes": "Notas",
+      "noEnd": "Indefinido",
+      "probationUntil": "Prueba hasta {{date}}",
+      "view": "Ver",
+      "types": {
+        "fixed_term": "Temporal con fecha",
+        "open_ended": "Indefinido",
+        "temporary": "Eventual"
+      },
+      "state": {
+        "current": "Vigente",
+        "ending": "Termina pronto",
+        "upcoming": "Empieza después",
+        "ended": "Terminado"
+      }
+    },
+    "attendance": {
+      "day": "Día",
+      "site": "Sitio",
+      "in": "Entrada",
+      "out": "Salida",
+      "worked": "Horas",
+      "absent": "Ausente",
+      "late": "{{minutes}} min tarde",
+      "daysWorked": "Días trabajados (últimos {{days}})",
+      "hours": "Horas totales",
+      "lateDays": "Días con retraso",
+      "absentDays": "Días de ausencia",
+      "empty": "Sin asistencia en este periodo."
+    },
+    "leave": {
+      "empty": "Sin permisos en el último año.",
+      "days_one": "1 día",
+      "days_other": "{{count}} días",
+      "status": {
+        "pending": "Pendiente",
+        "approved": "Aprobado",
+        "rejected": "Rechazado",
+        "cancelled": "Cancelado"
+      },
+      "days_many": "{{count}} días"
+    },
+    "history": {
+      "empty": "Aún no hay cambios.",
+      "more": "Ver anteriores"
+    },
+    "missing_many": "Faltan {{count}} documentos"
   }
 }

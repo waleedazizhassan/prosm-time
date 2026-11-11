@@ -84,7 +84,8 @@
     "announcements.publish": "Публиковать объявления",
     "announcements.manage": "Управлять всеми объявлениями",
     "announcements.view_reads": "Видеть, кто прочитал объявления",
-    "departments.manage": "Управлять отделами"
+    "departments.manage": "Управлять отделами",
+    "hr.manage": "Управление личными делами"
   },
   "invite": {
     "actionLabel": "Пригласить сотрудника",
@@ -313,5 +314,108 @@
     "grantsLeft": "Оставшиеся прямые права:",
     "granted": "выдано",
     "revoked": "отозвано"
+  },
+  "profile": {
+    "tabsLabel": "Разделы личного дела",
+    "myTitle": "Моё дело",
+    "code": "Таб. № {{code}}",
+    "since": "С {{date}}",
+    "completion": "Дело заполнено на {{percent}}%",
+    "completionTitle": "Обязательные документы на месте",
+    "missing_one": "Не хватает {{count}} документа",
+    "missing_few": "Не хватает {{count}} документов",
+    "missing_many": "Не хватает {{count}} документов",
+    "missing_other": "Не хватает {{count}} документов",
+    "loadError": "Не удалось загрузить данные.",
+    "saveError": "Не удалось сохранить.",
+    "uploadError": "Не удалось загрузить файл.",
+    "save": "Сохранить",
+    "saved": "Сохранено.",
+    "edit": "Изменить",
+    "noJobTitle": "Без должности",
+    "noJobTitlesYet": "Сначала добавьте должности в настройках",
+    "status": {
+      "active": "Работает",
+      "suspended": "Отстранён",
+      "ended": "Уволен",
+      "deactivated": "Доступ закрыт"
+    },
+    "tabs": {
+      "data": "Данные",
+      "contract": "Договор",
+      "documents": "Документы",
+      "payroll": "Зарплата",
+      "attendance": "Посещаемость",
+      "leave": "Отпуска",
+      "penalties": "Взыскания и поощрения",
+      "history": "История"
+    },
+    "fields": {
+      "jobTitle": "Должность",
+      "status": "Статус",
+      "phone": "Мобильный",
+      "emergency_contact_name": "Контакт на экстренный случай",
+      "emergency_contact_phone": "Экстренный телефон",
+      "national_id": "Номер документа",
+      "birth_date": "Дата рождения",
+      "address": "Адрес"
+    },
+    "contracts": {
+      "empty": "Договоров нет.",
+      "add": "Добавить договор",
+      "editTitle": "Изменить договор",
+      "type": "Тип договора",
+      "start": "Начало",
+      "end": "Окончание",
+      "endOptional": "Окончание (необязательно)",
+      "probation": "Конец испытательного срока (необязательно)",
+      "file": "Подписанный договор (PDF или фото)",
+      "notes": "Примечания",
+      "noEnd": "Бессрочный",
+      "probationUntil": "Испытание до {{date}}",
+      "view": "Открыть",
+      "types": {
+        "fixed_term": "Срочный",
+        "open_ended": "Бессрочный",
+        "temporary": "Временный"
+      },
+      "state": {
+        "current": "Действует",
+        "ending": "Скоро истекает",
+        "upcoming": "Начнётся позже",
+        "ended": "Истёк"
+      }
+    },
+    "attendance": {
+      "day": "День",
+      "site": "Объект",
+      "in": "Приход",
+      "out": "Уход",
+      "worked": "Часы",
+      "absent": "Отсутствовал",
+      "late": "Опоздание {{minutes}} мин",
+      "daysWorked": "Отработано дней (за {{days}})",
+      "hours": "Всего часов",
+      "lateDays": "Дней с опозданием",
+      "absentDays": "Дней отсутствия",
+      "empty": "Нет посещаемости за период."
+    },
+    "leave": {
+      "empty": "Нет отпусков за год.",
+      "days_one": "{{count}} день",
+      "days_few": "{{count}} дня",
+      "days_many": "{{count}} дней",
+      "days_other": "{{count}} дня",
+      "status": {
+        "pending": "Ожидает",
+        "approved": "Одобрен",
+        "rejected": "Отклонён",
+        "cancelled": "Отменён"
+      }
+    },
+    "history": {
+      "empty": "Изменений пока нет.",
+      "more": "Показать ранние"
+    }
   }
 }

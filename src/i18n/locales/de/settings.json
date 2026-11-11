@@ -256,7 +256,9 @@
       "payroll": "Lohn (Versicherung, Steuer, Darlehen, Abrechnungen)",
       "integrations": "Integrationen, API und Anwesenheit aus Fingerabdruckgeräten",
       "delegation": "Volle und befristete Vertretung",
-      "retention": "Steuerung der Datenaufbewahrung"
+      "retention": "Steuerung der Datenaufbewahrung",
+      "documents": "Mitarbeiterdokumente und Ablaufdaten",
+      "penalties": "Gestufte Sanktionsordnung und Prämien"
     },
     "managedByProsm": "Änderungen und Verlängerungen Ihrer Lizenz nimmt PROSM vor; Sie erhalten eine Benachrichtigung und eine E-Mail mit der neuen Lizenz. Änderungen: sales@prosm.net.",
     "historyAll": "Angezeigte Stempelungen: alle. Standortpunkte und Fotos werden nach der Frist unter „Aufbewahrung“ automatisch gelöscht.",
@@ -309,5 +311,16 @@
       "label": "Nicht verrechnet",
       "hint": "Wirkt sich nicht aus - nur in den Stunden sichtbar."
     }
+  },
+  "jobTitles": {
+    "title": "Stellen",
+    "hint": "Die Stellen des Unternehmens: in jeder Personalakte gewählt und für stellenbezogene Dokumente genutzt.",
+    "name": "Stellenbezeichnung",
+    "add": "Hinzufügen",
+    "stop": "Deaktivieren",
+    "restore": "Wiederherstellen",
+    "people_one": "1 Person",
+    "people_other": "{{count}} Personen",
+    "error": "Speichern fehlgeschlagen."
   }
 }

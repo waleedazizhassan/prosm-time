@@ -249,7 +249,8 @@
     "legalNameArabicLabel": "Name auf Arabisch (wie im Ausweis)",
     "legalNameLabel": "Offizieller Name",
     "legalNameHint": "Dieser Name steht auf der Gehaltsabrechnung, nicht der Benutzername ({{user}}).",
-    "legalNameMissing": "Offizieller Name fehlt"
+    "legalNameMissing": "Offizieller Name fehlt",
+    "notInPayroll": "Diese Person ist nicht in der Lohnabrechnung (der Inhaber erhält kein Gehalt)."
   },
   "installments": {
     "title": "Raten und Vorschüsse",

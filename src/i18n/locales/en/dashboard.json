@@ -578,7 +578,11 @@
         "allowances_edit_during_review": "Allowance edited in review",
         "leave_approved_cancelled": "Approved leave cancelled",
         "OWNER_AUTHORITY_GRANTED": "Owner's authority granted",
-        "OWNER_AUTHORITY_REVOKED": "Owner's authority withdrawn"
+        "OWNER_AUTHORITY_REVOKED": "Owner's authority withdrawn",
+        "hr_profile_changed": "Personnel file changed",
+        "hr_contract_saved": "Contract saved",
+        "hr_contract_deleted": "Contract deleted",
+        "hr_job_title_saved": "Job title saved"
       },
       "groups": {
         "sos": "SOS",

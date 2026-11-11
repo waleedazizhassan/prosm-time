@@ -84,7 +84,8 @@
     "announcements.publish": "Mitteilungen veröffentlichen",
     "announcements.manage": "Alle Mitteilungen verwalten",
     "announcements.view_reads": "Sehen, wer Mitteilungen gelesen hat",
-    "departments.manage": "Abteilungen verwalten"
+    "departments.manage": "Abteilungen verwalten",
+    "hr.manage": "Personalakten verwalten"
   },
   "invite": {
     "actionLabel": "Mitarbeiter einladen",
@@ -313,5 +314,104 @@
     "grantsLeft": "Weiterhin direkte Berechtigungen:",
     "granted": "erteilt",
     "revoked": "entzogen"
+  },
+  "profile": {
+    "tabsLabel": "Bereiche der Personalakte",
+    "myTitle": "Meine Akte",
+    "code": "Nr. {{code}}",
+    "since": "Seit {{date}}",
+    "completion": "Akte zu {{percent}}% vollständig",
+    "completionTitle": "Vorhandene Pflichtdokumente",
+    "missing_one": "Ein Dokument fehlt",
+    "missing_other": "{{count}} Dokumente fehlen",
+    "loadError": "Die Daten konnten nicht geladen werden.",
+    "saveError": "Speichern fehlgeschlagen.",
+    "uploadError": "Hochladen fehlgeschlagen.",
+    "save": "Speichern",
+    "saved": "Gespeichert.",
+    "edit": "Bearbeiten",
+    "noJobTitle": "Keine Stelle",
+    "noJobTitlesYet": "Zuerst Stellen in den Einstellungen anlegen",
+    "status": {
+      "active": "Aktiv",
+      "suspended": "Suspendiert",
+      "ended": "Ausgeschieden",
+      "deactivated": "Zugang gesperrt"
+    },
+    "tabs": {
+      "data": "Daten",
+      "contract": "Vertrag",
+      "documents": "Dokumente",
+      "payroll": "Gehalt",
+      "attendance": "Anwesenheit",
+      "leave": "Urlaub",
+      "penalties": "Sanktionen & Prämien",
+      "history": "Verlauf"
+    },
+    "fields": {
+      "jobTitle": "Stelle",
+      "status": "Status",
+      "phone": "Mobilnummer",
+      "emergency_contact_name": "Notfallkontakt",
+      "emergency_contact_phone": "Notfallnummer",
+      "national_id": "Ausweisnummer",
+      "birth_date": "Geburtsdatum",
+      "address": "Adresse"
+    },
+    "contracts": {
+      "empty": "Keine Verträge erfasst.",
+      "add": "Vertrag hinzufügen",
+      "editTitle": "Vertrag bearbeiten",
+      "type": "Vertragsart",
+      "start": "Vertragsbeginn",
+      "end": "Vertragsende",
+      "endOptional": "Vertragsende (optional)",
+      "probation": "Probezeit endet (optional)",
+      "file": "Unterschriebener Vertrag (PDF oder Foto)",
+      "notes": "Notizen",
+      "noEnd": "Unbefristet",
+      "probationUntil": "Probezeit bis {{date}}",
+      "view": "Ansehen",
+      "types": {
+        "fixed_term": "Befristet",
+        "open_ended": "Unbefristet",
+        "temporary": "Aushilfe"
+      },
+      "state": {
+        "current": "Gültig",
+        "ending": "Endet bald",
+        "upcoming": "Beginnt später",
+        "ended": "Beendet"
+      }
+    },
+    "attendance": {
+      "day": "Tag",
+      "site": "Standort",
+      "in": "Kommen",
+      "out": "Gehen",
+      "worked": "Stunden",
+      "absent": "Abwesend",
+      "late": "{{minutes}} Min. zu spät",
+      "daysWorked": "Arbeitstage (letzte {{days}} Tage)",
+      "hours": "Stunden gesamt",
+      "lateDays": "Tage mit Verspätung",
+      "absentDays": "Fehltage",
+      "empty": "Keine Anwesenheit in diesem Zeitraum."
+    },
+    "leave": {
+      "empty": "Kein Urlaub im letzten Jahr.",
+      "days_one": "1 Tag",
+      "days_other": "{{count}} Tage",
+      "status": {
+        "pending": "Offen",
+        "approved": "Genehmigt",
+        "rejected": "Abgelehnt",
+        "cancelled": "Storniert"
+      }
+    },
+    "history": {
+      "empty": "Noch keine Änderungen.",
+      "more": "Ältere anzeigen"
+    }
   }
 }

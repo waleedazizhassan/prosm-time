@@ -84,7 +84,8 @@
     "announcements.publish": "Publicar anúncios",
     "announcements.manage": "Gerir todos os anúncios",
     "announcements.view_reads": "Ver quem leu os anúncios",
-    "departments.manage": "Gerir departamentos"
+    "departments.manage": "Gerir departamentos",
+    "hr.manage": "Gerir fichas de pessoal"
   },
   "invite": {
     "actionLabel": "Convidar funcionário",
@@ -313,5 +314,106 @@
     "grantsLeft": "Permissões diretas ainda ativas:",
     "granted": "concedida",
     "revoked": "retirada"
+  },
+  "profile": {
+    "tabsLabel": "Secções da ficha",
+    "myTitle": "A minha ficha",
+    "code": "Código {{code}}",
+    "since": "Desde {{date}}",
+    "completion": "Ficha {{percent}}% completa",
+    "completionTitle": "Documentos obrigatórios entregues",
+    "missing_one": "Falta um documento",
+    "missing_other": "Faltam {{count}} documentos",
+    "loadError": "Não foi possível carregar os dados.",
+    "saveError": "Não foi possível guardar.",
+    "uploadError": "Não foi possível enviar o ficheiro.",
+    "save": "Guardar",
+    "saved": "Guardado.",
+    "edit": "Editar",
+    "noJobTitle": "Sem cargo",
+    "noJobTitlesYet": "Adicione primeiro os cargos em Configurações",
+    "status": {
+      "active": "Ativo",
+      "suspended": "Suspenso",
+      "ended": "Saiu",
+      "deactivated": "Acesso parado"
+    },
+    "tabs": {
+      "data": "Dados",
+      "contract": "Contrato",
+      "documents": "Documentos",
+      "payroll": "Salário",
+      "attendance": "Presença",
+      "leave": "Férias",
+      "penalties": "Sanções e incentivos",
+      "history": "Histórico"
+    },
+    "fields": {
+      "jobTitle": "Cargo",
+      "status": "Estado",
+      "phone": "Telemóvel",
+      "emergency_contact_name": "Contacto de emergência",
+      "emergency_contact_phone": "Telefone de emergência",
+      "national_id": "N.º de identificação",
+      "birth_date": "Data de nascimento",
+      "address": "Morada"
+    },
+    "contracts": {
+      "empty": "Sem contratos registados.",
+      "add": "Adicionar contrato",
+      "editTitle": "Editar contrato",
+      "type": "Tipo de contrato",
+      "start": "Início",
+      "end": "Fim",
+      "endOptional": "Fim (opcional)",
+      "probation": "Fim do período experimental (opcional)",
+      "file": "Contrato assinado (PDF ou foto)",
+      "notes": "Notas",
+      "noEnd": "Sem termo",
+      "probationUntil": "Experiência até {{date}}",
+      "view": "Ver",
+      "types": {
+        "fixed_term": "A termo",
+        "open_ended": "Sem termo",
+        "temporary": "Temporário"
+      },
+      "state": {
+        "current": "Em vigor",
+        "ending": "Termina em breve",
+        "upcoming": "Começa depois",
+        "ended": "Terminado"
+      }
+    },
+    "attendance": {
+      "day": "Dia",
+      "site": "Local",
+      "in": "Entrada",
+      "out": "Saída",
+      "worked": "Horas",
+      "absent": "Ausente",
+      "late": "{{minutes}} min de atraso",
+      "daysWorked": "Dias trabalhados (últimos {{days}})",
+      "hours": "Total de horas",
+      "lateDays": "Dias com atraso",
+      "absentDays": "Dias de ausência",
+      "empty": "Sem presença neste período."
+    },
+    "leave": {
+      "empty": "Sem férias no último ano.",
+      "days_one": "1 dia",
+      "days_other": "{{count}} dias",
+      "status": {
+        "pending": "Pendente",
+        "approved": "Aprovado",
+        "rejected": "Recusado",
+        "cancelled": "Cancelado"
+      },
+      "days_many": "{{count}} dias"
+    },
+    "history": {
+      "empty": "Ainda sem alterações.",
+      "more": "Ver anteriores"
+    },
+    "missing_many": "Faltam {{count}} documentos"
   }
 }

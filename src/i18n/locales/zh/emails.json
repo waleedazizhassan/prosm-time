@@ -170,7 +170,9 @@
         "payroll": "工资（社保、税、借款、工资单）",
         "integrations": "集成、API 与指纹设备考勤",
         "delegation": "完全及限期授权",
-        "retention": "数据保留控制"
+        "retention": "数据保留控制",
+        "documents": "员工证件及到期提醒",
+        "penalties": "阶梯处罚规章与奖励"
       }
     }
   },

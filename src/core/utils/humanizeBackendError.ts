@@ -336,6 +336,15 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "PLAN MANAGER LIMIT REACHED": "planManagerLimit",
   "PLAN EXTERNAL WORKER LIMIT REACHED": "planExternalWorkerLimit",
   LOCATION_REQUIRED: "locationRequired",
+  // 2026-11-11 HR suite: the employee file
+  "THIS JOB TITLE ALREADY EXISTS": "jobTitleExists",
+  "CHOOSE THE CONTRACT TYPE": "chooseContractType",
+  "THE START DATE IS REQUIRED": "startDateRequired",
+  "THE END DATE IS BEFORE THE START": "endBeforeStart",
+  "THIS CONTRACT NEEDS AN END DATE": "contractNeedsEnd",
+  "THE BIRTH DATE CANNOT BE IN THE FUTURE": "birthDateFuture",
+  "JOB TITLE NOT FOUND": "notFound",
+  "CONTRACT NOT FOUND": "notFound",
   // 2026-11-10: Buzz
   "BUZZ TOO SOON": "buzzTooSoon",
   "YOU CANNOT BUZZ YOURSELF": "buzzSelf",

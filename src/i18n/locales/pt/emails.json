@@ -178,7 +178,9 @@
         "payroll": "Folha (encargos, impostos, empréstimos, holerites)",
         "integrations": "Integrações, API e ponto de leitores biométricos",
         "delegation": "Delegação completa e temporária",
-        "retention": "Controle de retenção de dados"
+        "retention": "Controle de retenção de dados",
+        "documents": "Documentos dos funcionários e validade",
+        "penalties": "Regulamento de sanções progressivas e incentivos"
       }
     }
   },

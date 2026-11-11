@@ -84,7 +84,8 @@
     "announcements.publish": "Pubblicare annunci",
     "announcements.manage": "Gestire tutti gli annunci",
     "announcements.view_reads": "Vedere chi ha letto gli annunci",
-    "departments.manage": "Gestire i reparti"
+    "departments.manage": "Gestire i reparti",
+    "hr.manage": "Gestire i fascicoli del personale"
   },
   "invite": {
     "actionLabel": "Invita dipendente",
@@ -313,5 +314,106 @@
     "grantsLeft": "Permessi diretti ancora attivi:",
     "granted": "concesso",
     "revoked": "revocato"
+  },
+  "profile": {
+    "tabsLabel": "Sezioni del fascicolo",
+    "myTitle": "Il mio fascicolo",
+    "code": "Matricola {{code}}",
+    "since": "Dal {{date}}",
+    "completion": "Fascicolo completo al {{percent}}%",
+    "completionTitle": "Documenti obbligatori presenti",
+    "missing_one": "Manca un documento",
+    "missing_other": "Mancano {{count}} documenti",
+    "loadError": "Impossibile caricare i dati.",
+    "saveError": "Impossibile salvare.",
+    "uploadError": "Impossibile caricare il file.",
+    "save": "Salva",
+    "saved": "Salvato.",
+    "edit": "Modifica",
+    "noJobTitle": "Nessuna mansione",
+    "noJobTitlesYet": "Aggiungi prima le mansioni in Impostazioni",
+    "status": {
+      "active": "Attivo",
+      "suspended": "Sospeso",
+      "ended": "Cessato",
+      "deactivated": "Accesso bloccato"
+    },
+    "tabs": {
+      "data": "Dati",
+      "contract": "Contratto",
+      "documents": "Documenti",
+      "payroll": "Paga",
+      "attendance": "Presenze",
+      "leave": "Ferie",
+      "penalties": "Sanzioni e incentivi",
+      "history": "Storico"
+    },
+    "fields": {
+      "jobTitle": "Mansione",
+      "status": "Stato",
+      "phone": "Cellulare",
+      "emergency_contact_name": "Contatto di emergenza",
+      "emergency_contact_phone": "Telefono di emergenza",
+      "national_id": "N. documento",
+      "birth_date": "Data di nascita",
+      "address": "Indirizzo"
+    },
+    "contracts": {
+      "empty": "Nessun contratto registrato.",
+      "add": "Aggiungi contratto",
+      "editTitle": "Modifica contratto",
+      "type": "Tipo di contratto",
+      "start": "Inizio",
+      "end": "Fine",
+      "endOptional": "Fine (facoltativa)",
+      "probation": "Fine periodo di prova (facoltativa)",
+      "file": "Contratto firmato (PDF o foto)",
+      "notes": "Note",
+      "noEnd": "Tempo indeterminato",
+      "probationUntil": "Prova fino al {{date}}",
+      "view": "Vedi",
+      "types": {
+        "fixed_term": "Tempo determinato",
+        "open_ended": "Tempo indeterminato",
+        "temporary": "Temporaneo"
+      },
+      "state": {
+        "current": "In corso",
+        "ending": "In scadenza",
+        "upcoming": "Inizia dopo",
+        "ended": "Concluso"
+      }
+    },
+    "attendance": {
+      "day": "Giorno",
+      "site": "Sede",
+      "in": "Entrata",
+      "out": "Uscita",
+      "worked": "Ore",
+      "absent": "Assente",
+      "late": "{{minutes}} min di ritardo",
+      "daysWorked": "Giorni lavorati (ultimi {{days}})",
+      "hours": "Ore totali",
+      "lateDays": "Giorni di ritardo",
+      "absentDays": "Giorni di assenza",
+      "empty": "Nessuna presenza nel periodo."
+    },
+    "leave": {
+      "empty": "Nessuna ferie nell’ultimo anno.",
+      "days_one": "1 giorno",
+      "days_other": "{{count}} giorni",
+      "status": {
+        "pending": "In attesa",
+        "approved": "Approvate",
+        "rejected": "Rifiutate",
+        "cancelled": "Annullate"
+      },
+      "days_many": "{{count}} giorni"
+    },
+    "history": {
+      "empty": "Ancora nessuna modifica.",
+      "more": "Mostra precedenti"
+    },
+    "missing_many": "Mancano {{count}} documenti"
   }
 }

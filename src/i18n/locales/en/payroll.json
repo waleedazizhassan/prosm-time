@@ -249,7 +249,8 @@
     "legalNameArabicLabel": "Employee name in Arabic (as on the ID card)",
     "legalNameLabel": "Employee's official name",
     "legalNameHint": "This is the name on the payslip and payroll sheets, not the user name ({{user}}).",
-    "legalNameMissing": "Official name missing"
+    "legalNameMissing": "Official name missing",
+    "notInPayroll": "This person is not in payroll (the owner is not paid a salary)."
   },
   "installments": {
     "title": "Installments and advances",

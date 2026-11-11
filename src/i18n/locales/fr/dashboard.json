@@ -581,7 +581,11 @@
         "allowances_edit_during_review": "Indemnité modifiée en revue",
         "leave_approved_cancelled": "Congé approuvé annulé",
         "OWNER_AUTHORITY_GRANTED": "Autorité du propriétaire accordée",
-        "OWNER_AUTHORITY_REVOKED": "Autorité du propriétaire retirée"
+        "OWNER_AUTHORITY_REVOKED": "Autorité du propriétaire retirée",
+        "hr_profile_changed": "Dossier modifié",
+        "hr_contract_saved": "Contrat enregistré",
+        "hr_contract_deleted": "Contrat supprimé",
+        "hr_job_title_saved": "Poste enregistré"
       },
       "groups": {
         "sos": "SOS",

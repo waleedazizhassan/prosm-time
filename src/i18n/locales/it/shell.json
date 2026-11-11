@@ -292,7 +292,8 @@
     "payslips": "Le mie buste paga",
     "externalPay": "Paga esterni",
     "announcements": "Bacheca",
-    "exceptions": "Le mie eccezioni"
+    "exceptions": "Le mie eccezioni",
+    "myProfile": "Il mio fascicolo"
   },
   "sosOverlay": {
     "title": "Allarme SOS/Emergenza",
@@ -404,7 +405,8 @@
     "payroll": "Cicli paghe, schede, i tre report e le buste paga - con permessi separati e versioni salvate.",
     "payslips": "Le tue buste paga pubblicate: visualizzale o richiedile via email.",
     "externalPay": "Tariffe a giorno, settimana, mese o anno, elaborazioni, regole e rettifiche individuali - approvate e congelate, separate dalle paghe.",
-    "announcements": "Annunci e comunicati ufficiali indirizzati a te; conferma quelli che lo richiedono."
+    "announcements": "Annunci e comunicati ufficiali indirizzati a te; conferma quelli che lo richiedono.",
+    "myProfile": "I tuoi dati, documenti, richiami e presenze."
   },
   "backgroundDisclosure": {
     "title": "Posizione durante il turno",
