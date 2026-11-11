@@ -177,6 +177,34 @@
     "personPage": {
       "title": "Die Personenseite (für Administratoren)",
       "body": "Tippen Sie unter Personen auf jemanden, um seine Seite in geordneten Karten zu öffnen: Abteilung, Beschäftigung, Urlaub, Rolle, Berechtigungen, Prüfungen, Geräte (nur wenn Geräte registriert sind) und „Anwendungszugriff“ mit Zugangssperre und dem Löschen persönlicher Anwesenheitsdaten auf Antrag. Das Gehalt wird unter Lohn verwaltet, nicht auf der Personenseite."
+    },
+    "myFile": {
+      "title": "Meine Akte",
+      "body": "Menü → Meine Akte zeigt Ihre Daten, Ihren Vertrag, Dokumente, Abmahnungen und Prämien, Anwesenheit und Urlaub. Nur lesbar: Änderungen über die Personalabteilung."
+    },
+    "myDocuments": {
+      "title": "Meine Dokumente",
+      "body": "Benötigte Dokumente stehen in Meine Akte → Dokumente mit ihrem Status. Tippen Sie auf „Hochladen“ oder „Erneuern“: Die Kamera öffnet sich, fotografieren Sie das Dokument und geben Sie die Daten ein. Ohne Internet wird es auf dem Telefon gespeichert und später gesendet. Sie werden vor dem Ablauf erinnert."
+    },
+    "myPenalties": {
+      "title": "Abmahnungen und Prämien",
+      "body": "Bei einer Entscheidung erhalten Sie eine Benachrichtigung. In Meine Akte → Sanktionen und Prämien bedeutet „Zur Kenntnis genommen“ erhalten, nicht einverstanden. Innerhalb der Frist können Sie Einspruch einlegen oder Ihre Antwort schreiben."
+    },
+    "penaltiesManager": {
+      "title": "Sanktionen erfassen und genehmigen",
+      "body": "Menü → Sanktionen und Prämien. „Verstoß erfassen“ für Personen an Ihren Standorten (mit Foto); Verspätung und Fehlen werden automatisch erfasst. Die Ordnung wählt die Sanktion nach der Häufigkeit. Unter „Wartet auf mich“ untersuchen, genehmigen, mildern oder ablehnen Sie (mit Grund). Sie können auch eine Prämie vorschlagen."
+    },
+    "documentsAdmin": {
+      "title": "Mitarbeiterdokumente",
+      "body": "Einstellungen → Personen → Mitarbeiterdokumente: welche Dokumente jede Person braucht, Ablauf, Erinnerungstage und was beim Einstempeln nach Ablauf passiert. Menü → Dokumente zeigt Abgelaufenes, bald Ablaufendes, Fehlendes und zu Prüfendes; erinnern oder CSV exportieren."
+    },
+    "bylaw": {
+      "title": "Sanktionsordnung",
+      "body": "Einstellungen → Personen → Sanktionsordnung. Legen Sie zuerst die Grenzen fest (Abzugsgrenze, Einspruchstage) und akzeptieren Sie den Hinweis – PROSM gibt keine rechtlichen Werte vor. Fügen Sie Verstöße mit Stufen hinzu, legen Sie Schritte und Genehmigungsstufen fest und veröffentlichen Sie ab einem Datum: eine neue Version im Medienzentrum. Erfasste Verstöße behalten ihre Version."
+    },
+    "taxConfig": {
+      "title": "Steuern und Sozialversicherung",
+      "body": "Lohnabrechnung → Einstellungen → Steuern und Sozialversicherung. Ägypten ist mit den Werten von PROSM fertig. „Kopieren und bearbeiten“ erstellt Ihre eigene Version (auf Ihre Verantwortung). Für andere Länder Stufen, Freibetrag und Kategorien eingeben. Der Rechner nutzt die Engine der Lohnabrechnung. Jede Speicherung ist eine Version ab einem Monat. Nur der Inhaber ändert das Land, nie bei offenem Lauf."
     }
   },
   "faq": {
@@ -259,5 +287,7 @@
     "body": "Für Produkthilfe oder Support kontaktieren Sie uns unter:",
     "infoLabel": "Allgemeine Anfragen:",
     "supportLabel": "Support:"
-  }
+  },
+  "showAllTopics": "Alle Themen anzeigen ({{count}} weitere)",
+  "roleTopicsOnly": "Nur Themen für meine Rolle"
 }

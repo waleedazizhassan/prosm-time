@@ -369,7 +369,8 @@
     "bracketRequired": "请至少添加一档。",
     "insurableMinMax": "缴费基数上限不能低于下限。",
     "invalidTier": "请检查高收入档次。",
-    "invalidExemption": "免税额不能为负数。"
+    "invalidExemption": "免税额不能为负数。",
+    "reductionLighter": "减轻必须更轻：改为警告，或同类处罚但数值更小。"
   },
   "pageLoad": {
     "title": "此页面需要网络连接",

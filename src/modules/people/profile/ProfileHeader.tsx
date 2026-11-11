@@ -38,7 +38,7 @@ export default function ProfileHeader({ profile, onBuzz = true }: { profile: Emp
             <span>{t("profile.completion", { percent: completion.percent })}</span>
             <div className={styles.bar} role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={completion.percent}
               aria-label={t("profile.completionTitle")}>
-              <span style={{ width: `${completion.percent}%`, background: completion.percent >= 100 ? "var(--status-success-text)" : "#d97706" }} />
+              <span style={{ width: `${completion.percent}%`, background: completion.percent >= 100 ? "var(--status-success-text)" : "var(--status-warning-text)" }} />
             </div>
             {completion.missing > 0 ? <small>{t("profile.missing", { count: completion.missing })}</small> : null}
           </div>

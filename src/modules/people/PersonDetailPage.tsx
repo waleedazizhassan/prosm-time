@@ -134,15 +134,15 @@ export default function PersonDetailPage() {
     setLoading(true);
     setLoadError("");
 
-    const [memberResult, catalogResult, effectiveResult, overridesResult, devicesResult, leaveBalanceResult] = await Promise.all([
+    const [memberResult, catalogResult, effectiveResult, overridesResult, devicesResult, leaveBalanceResult, hrResult] = await Promise.all([
       EmployeeRepository.getMember(userId),
       PermissionRepository.listCatalog(),
       PermissionRepository.getEffectivePermissions(userId),
       PermissionRepository.getUserOverrides(userId),
       DeviceBindingRepository.listForUser(userId),
       LeaveRepository.getBalanceFor(userId),
+      EmployeeProfileRepository.get(userId),
     ]);
-    const hrResult = await EmployeeProfileRepository.get(userId);
     setHr(hrResult.data);
 
     if (!memberResult.success) {
@@ -163,6 +163,13 @@ export default function PersonDetailPage() {
     }
     setLoading(false);
   }, [userId, t]);
+
+  // HR suite review 2026-11-11: a save inside a profile tab refreshes the file only (no full-page reload)
+  const reloadHr = useCallback(async () => {
+    if (!userId) return;
+    const r = await EmployeeProfileRepository.get(userId);
+    if (r.data) setHr(r.data);
+  }, [userId]);
 
   const handleSetAnnualEntitlement = async () => {
     if (!userId) return;
@@ -339,8 +346,8 @@ export default function PersonDetailPage() {
       <Tabs items={tabs} active={tab} onChange={chooseTab} label={t("profile.tabsLabel")} />
 
       {tabs.find((x) => x.key === tab)?.locked ? <PlanLockedNote plan={lockedPlan(tab)} /> : null}
-      {hr && tab === "contract" && !tabs.find((x) => x.key === tab)?.locked ? <ContractsTab profile={hr} onSaved={() => void load()} /> : null}
-      {hr && tab === "documents" && allows("documents") ? <ProfileDocumentsTab profile={hr} onChanged={() => void load()} /> : null}
+      {hr && tab === "contract" && !tabs.find((x) => x.key === tab)?.locked ? <ContractsTab profile={hr} onSaved={() => void reloadHr()} /> : null}
+      {hr && tab === "documents" && allows("documents") ? <ProfileDocumentsTab profile={hr} onChanged={() => void reloadHr()} /> : null}
       {userId && tab === "payroll" && allows("payroll") ? <PayrollProfilesPage embedUserId={userId} /> : null}
       {userId && tab === "attendance" ? <AttendanceTab userId={userId} /> : null}
       {userId && tab === "leave" ? (
@@ -375,7 +382,7 @@ export default function PersonDetailPage() {
           work first, then their role and permissions, then checks and devices, and access last */}
       {tab === "data" ? (
       <>
-      {hr ? <PersonalDataTab key={hr.header.jobTitleId ?? "none"} profile={hr} onSaved={() => void load()} /> : null}
+      {hr ? <PersonalDataTab key={hr.header.jobTitleId ?? "none"} profile={hr} onSaved={() => void reloadHr()} /> : null}
       <div className={styles.cards}>
       {/* 2026-11-09 Media Center: the person's department */}
       {userId && !member.isOwner ? <DepartmentCard userId={userId} canEdit={hasPermission("employees.edit")} /> : null}

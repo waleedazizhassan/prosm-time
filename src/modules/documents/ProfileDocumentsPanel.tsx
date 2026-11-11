@@ -55,16 +55,20 @@ export default function ProfileDocumentsPanel({ profile, onChanged }: { profile:
     if (url) window.open(url, "_blank", "noopener");
   };
 
-  const act = async (key: string, task: () => Promise<{ error: string | null }>, done: string) => {
+  const act = async (key: string, task: () => Promise<{ error: string | null }>, done: string): Promise<boolean> => {
     setBusy(key);
     setError("");
     setNotice("");
     const r = await task();
     setBusy("");
-    if (r.error) return setError(humanizeBackendError(r.error, t) ?? t("actionError"));
+    if (r.error) {
+      setError(humanizeBackendError(r.error, t) ?? t("actionError"));
+      return false;
+    }
     setNotice(done);
     await load();
     onChanged();
+    return true;
   };
 
   if (!docs) return <LoadingState />;
@@ -72,12 +76,18 @@ export default function ProfileDocumentsPanel({ profile, onChanged }: { profile:
     <Card title={t("tabTitle")}>
       <ErrorText>{error}</ErrorText>
       {notice ? <SuccessText>{notice}</SuccessText> : null}
-      {queued.length > 0 ? <HintText>{t("queued", { count: queued.length })}</HintText> : null}
+      {queued.filter((q) => !q.error).length > 0 ? <HintText>{t("queued", { count: queued.filter((q) => !q.error).length })}</HintText> : null}
+      {queued.filter((q) => q.error).map((q) => (
+        <div key={q.id} style={{ display: "flex", gap: "var(--space-2)", alignItems: "center", flexWrap: "wrap" }}>
+          <ErrorText>{t("queuedRefused", { name: q.typeName, reason: humanizeBackendError(q.error, t) ?? t("upload.badFile") })}</ErrorText>
+          <Button size="sm" variant="ghost" onClick={() => void DocumentUploadQueue.remove(q.id)}>{t("removeQueued")}</Button>
+        </div>
+      ))}
       {docs.length === 0 ? <EmptyState message={isHr ? t("emptyHr") : t("empty")} /> : (
         <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "grid" }}>
           {docs.map((d) => {
             const s = statusText(d.status, d.daysLeft);
-            const waiting = queued.some((q) => q.typeId === d.typeId);
+            const waiting = queued.some((q) => q.typeId === d.typeId && !q.error);
             return (
               <li key={d.id} style={{ padding: "var(--space-3) 0", borderBottom: "1px solid var(--border-light)" }}>
                 <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "var(--space-2)" }}>
@@ -96,10 +106,12 @@ export default function ProfileDocumentsPanel({ profile, onChanged }: { profile:
                   <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                     {d.hasFile ? <Button size="sm" variant="ghost" onClick={() => void view(d.filePath)}>{t("view")}</Button> : null}
                     {isHr && d.pending ? <Button size="sm" onClick={() => { setReason(""); setReview(d); }}>{t("review")}</Button> : null}
-                    <Button size="sm" variant={NEEDS_ACTION.includes(d.status) ? "primary" : "ghost"}
-                      onClick={() => setUpload({ userId, typeId: d.typeId, typeName: d.typeName, hasExpiry: d.hasExpiry })}>
-                      {d.hasFile ? t("renew") : t("upload.action")}
-                    </Button>
+                    {isHr || (!d.pendingId && !waiting) ? (
+                      <Button size="sm" variant={NEEDS_ACTION.includes(d.status) ? "primary" : "ghost"}
+                        onClick={() => setUpload({ userId, typeId: d.typeId, typeName: d.typeName, hasExpiry: d.hasExpiry })}>
+                        {d.hasFile ? t("renew") : t("upload.action")}
+                      </Button>
+                    ) : null}
                     {isHr && NEEDS_ACTION.includes(d.status) ? (
                       <Button size="sm" variant="ghost" loading={busy === `r${d.id}`} onClick={() => void act(`r${d.id}`, () => DocumentsRepository.remind(d.id), t("reminded"))}>{t("remind")}</Button>
                     ) : null}
@@ -128,8 +140,8 @@ export default function ProfileDocumentsPanel({ profile, onChanged }: { profile:
       <Modal isOpen={Boolean(review)} onClose={() => setReview(null)} title={review ? t("reviewTitle", { name: review.typeName }) : ""} size="sm"
         footer={(
           <>
-            <Button variant="danger" loading={busy === "reject"} onClick={() => review?.pending && void act("reject", () => DocumentsRepository.review(review.pending!.id, false, reason.trim()), t("rejected")).then(() => setReview(null))}>{t("reject")}</Button>
-            <Button loading={busy === "accept"} onClick={() => review?.pending && void act("accept", () => DocumentsRepository.review(review.pending!.id, true, null), t("accepted")).then(() => setReview(null))}>{t("accept")}</Button>
+            <Button variant="danger" loading={busy === "reject"} disabled={!reason.trim()} onClick={() => review?.pending && void act("reject", () => DocumentsRepository.review(review.pending!.id, false, reason.trim()), t("rejected")).then((ok) => ok && setReview(null))}>{t("reject")}</Button>
+            <Button loading={busy === "accept"} onClick={() => review?.pending && void act("accept", () => DocumentsRepository.review(review.pending!.id, true, null), t("accepted")).then((ok) => ok && setReview(null))}>{t("accept")}</Button>
           </>
         )}>
         {review?.pending ? (

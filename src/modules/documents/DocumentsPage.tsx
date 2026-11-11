@@ -16,7 +16,7 @@ import { formatDateOnly } from "../../core/utils/formatDate";
 import { toCsv } from "../../core/utils/spreadsheet";
 import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
 import DocumentsRepository, { type DocumentsOverview, type DocumentsOverviewRow, type DocumentStatus } from "../../core/repositories/DocumentsRepository";
-import { STATUS_BADGE, statusText } from "./documentUi";
+import { NEEDS_ACTION, STATUS_BADGE, statusText } from "./documentUi";
 
 type View = "action" | "all";
 type Tile = "expired" | "expiring" | "missing" | "pendingReview";
@@ -85,7 +85,7 @@ export default function DocumentsPage() {
         <span style={{ display: "inline-flex", gap: 6 }} onClick={(e) => e.stopPropagation()}>
           {r.status === "pending_review"
             ? <Button size="xs" onClick={() => navigate(`/people/${r.userId}?tab=documents`)}>{t("review")}</Button>
-            : r.status !== "valid" ? <Button size="xs" variant="ghost" loading={busy === r.id} onClick={() => void remind(r)}>{t("remind")}</Button> : null}
+            : NEEDS_ACTION.includes(r.status) ? <Button size="xs" variant="ghost" loading={busy === r.id} onClick={() => void remind(r)}>{t("remind")}</Button> : null}
         </span>
       ),
     },

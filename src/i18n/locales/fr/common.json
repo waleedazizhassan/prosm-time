@@ -369,7 +369,8 @@
     "bracketRequired": "Ajoutez au moins une tranche.",
     "insurableMinMax": "Le salaire assurable maximum ne peut pas être inférieur au minimum.",
     "invalidTier": "Vérifiez les tranches de hauts revenus.",
-    "invalidExemption": "Le montant exonéré ne peut pas être négatif."
+    "invalidExemption": "Le montant exonéré ne peut pas être négatif.",
+    "reductionLighter": "Une réduction doit être plus légère : un avertissement ou la même sanction avec une valeur moindre."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

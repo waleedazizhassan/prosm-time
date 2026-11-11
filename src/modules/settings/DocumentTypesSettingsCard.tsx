@@ -36,11 +36,18 @@ export default function DocumentTypesSettingsCard() {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
 
-  const load = async () => setTypes((await DocumentsRepository.listTypes()).data ?? []);
+  const [loaded, setLoaded] = useState(false);
+  const load = async () => {
+    const r = await DocumentsRepository.listTypes();
+    if (r.error) return setError(humanizeBackendError(r.error, t) ?? t("types.error"));
+    setTypes(r.data ?? []);
+    setLoaded(true);
+  };
   useEffect(() => {
     void load();
     void EmployeeProfileRepository.listJobTitles().then((r) => setTitles((r.data ?? []).filter((x) => x.isActive)));
     void SiteRepository.listSites().then((r) => setSites((r.data ?? []).map((s) => ({ id: s.id, name: s.name }))));
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once, when the card opens
   }, []);
 
   const edit = (type: DocumentType | null) => {
@@ -92,7 +99,7 @@ export default function DocumentTypesSettingsCard() {
       <HintText>{t("types.hint")}</HintText>
       <ErrorText>{draft ? "" : error}</ErrorText>
       {notice ? <SuccessText>{notice}</SuccessText> : null}
-      {types.length === 0 ? (
+      {!loaded ? null : types.length === 0 ? (
         <div style={{ display: "grid", gap: "var(--space-2)" }}>
           <HintText small>{t("types.templatesHint")}</HintText>
           <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>

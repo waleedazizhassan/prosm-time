@@ -369,7 +369,8 @@
     "bracketRequired": "Adicione pelo menos uma faixa.",
     "insurableMinMax": "O salário de contribuição máximo não pode ser menor que o mínimo.",
     "invalidTier": "Revise as faixas de rendas altas.",
-    "invalidExemption": "O valor isento não pode ser negativo."
+    "invalidExemption": "O valor isento não pode ser negativo.",
+    "reductionLighter": "A redução deve ser mais leve: uma advertência ou a mesma penalidade com valor menor."
   },
   "pageLoad": {
     "title": "Esta página precisa de conexão",

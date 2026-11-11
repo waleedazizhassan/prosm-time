@@ -62,7 +62,8 @@
     "number": "Numero del documento",
     "issue": "Data di rilascio",
     "expiry": "Data di scadenza",
-    "offlineHint": "Niente internet? Viene salvato sul telefono e inviato dopo."
+    "offlineHint": "Niente internet? Viene salvato sul telefono e inviato dopo.",
+    "badFile": "Usa una foto JPG, PNG, WEBP o un PDF, fino a 10 MB."
   },
   "types": {
     "title": "Documenti dei dipendenti",
@@ -143,5 +144,7 @@
     "more_many": "e altri {{count}} documenti",
     "more_other": "e altri {{count}} documenti",
     "photograph": "Fotografa"
-  }
+  },
+  "queuedRefused": "{{name}} non è stato inviato: {{reason}}",
+  "removeQueued": "Rimuovi"
 }

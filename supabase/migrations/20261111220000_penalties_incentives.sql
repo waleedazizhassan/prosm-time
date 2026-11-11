@@ -14,6 +14,10 @@
 -- action with no money. Incentives use the same approval path and become an earning line.
 -- Not live until the owner approves (HR suite).
 --
+-- Review 2026-11-11 (security team): cancelled cycles never hold money back, refunds and clawbacks are
+-- worked out at build time from approved/locked cycles, the cap is per calendar month, evidence lives
+-- outside the person's folder, a reduction is lighter, one person approves one level, managers see no money.
+--
 -- Rollback: unschedule 'prosm-time-penalties'; drop the triggers penalties_follow_*; restore
 -- prosm_time_payroll_build_employee from 20261110180000 (drop the penalty/incentive block); drop the
 -- functions *_prosm_time_penalt*, *_prosm_time_violation*, *_prosm_time_incentive* and the tables
@@ -219,6 +223,7 @@ create table if not exists public.employee_incentives (
     current_level integer not null default 0,
     status text not null default 'pending_approval' check (status in ('pending_approval', 'approved', 'rejected', 'cancelled')),
     created_by uuid references public.users(id) on delete set null,
+    approvers uuid[] not null default '{}',
     decided_by uuid references public.users(id) on delete set null,
     decided_at timestamptz,
     decision_note text,
@@ -289,16 +294,16 @@ create policy "hr files: managers add violation evidence" on storage.objects for
 with check (
     bucket_id = 'hr-files'
     and (storage.foldername(name))[1] = public.current_prosm_time_organization_id()::text
-    and (storage.foldername(name))[3] = 'evidence'
-    and public.prosm_time_hr_evidence_allowed((storage.foldername(name))[2])
+    and (storage.foldername(name))[2] = 'evidence'
+    and public.prosm_time_hr_evidence_allowed((storage.foldername(name))[3])
 );
 drop policy if exists "hr files: managers read violation evidence" on storage.objects;
 create policy "hr files: managers read violation evidence" on storage.objects for select to authenticated
 using (
     bucket_id = 'hr-files'
     and (storage.foldername(name))[1] = public.current_prosm_time_organization_id()::text
-    and (storage.foldername(name))[3] = 'evidence'
-    and public.prosm_time_hr_evidence_allowed((storage.foldername(name))[2])
+    and (storage.foldername(name))[2] = 'evidence'
+    and public.prosm_time_hr_evidence_allowed((storage.foldername(name))[3])
 );
 
 -- ---------------------------------------------------------------- helpers
@@ -626,7 +631,7 @@ begin
     if v_v.id is null or v_v.status in ('cancelled', 'rejected', 'lapsed') then return; end if;
     select coalesce(sum(pp.amount), 0) into v_paid
     from penalty_payroll_postings pp join payroll_cycles c on c.id = pp.cycle_id
-    where pp.violation_id = p_id and c.status not in ('draft', 'reopened', 'cancelled');
+    where pp.violation_id = p_id and c.status in ('approved', 'locked');
     update employee_violations set status = 'cancelled', decision_note = coalesce(p_reason, decision_note),
            settlement_amount = nullif(v_paid, 0), updated_at = now()
     where id = p_id;
@@ -712,7 +717,11 @@ declare
     v_day date;
 begin
     if tg_table_name = 'leave_requests' then
-        if new.status is not distinct from old.status or new.status not in ('approved', 'cancelled') then return new; end if;
+        if tg_op = 'INSERT' then
+            if new.status <> 'approved' then return new; end if;
+        elsif new.status is not distinct from old.status or new.status not in ('approved', 'cancelled') then
+            return new;
+        end if;
         v_user := new.user_id; v_from := new.start_date; v_to := least(new.end_date, new.start_date + 62);
     elsif tg_table_name = 'exception_actions' then
         if new.geofence_exception_id is null then return new; end if;
@@ -745,7 +754,7 @@ drop trigger if exists penalties_follow_adjustments on public.attendance_day_adj
 create trigger penalties_follow_adjustments after insert on public.attendance_day_adjustments
 for each row execute function public.prosm_time_penalties_follow_day();
 drop trigger if exists penalties_follow_leave on public.leave_requests;
-create trigger penalties_follow_leave after update of status on public.leave_requests
+create trigger penalties_follow_leave after insert or update of status on public.leave_requests
 for each row execute function public.prosm_time_penalties_follow_day();
 drop trigger if exists penalties_follow_exceptions on public.exception_actions;
 create trigger penalties_follow_exceptions after insert on public.exception_actions
@@ -830,6 +839,10 @@ begin
     if v_unit in ('days_per_month', 'both') and (v_days is null or v_days <= 0) then raise exception 'ENTER THE DEDUCTION CAP IN DAYS'; end if;
     if v_unit in ('percent_of_wage', 'both') and (v_percent is null or v_percent <= 0 or v_percent > 100) then raise exception 'ENTER THE DEDUCTION CAP AS A PERCENTAGE'; end if;
     if cardinality(v_levels) not between 1 and 3 or not v_levels <@ array['manager', 'hr', 'owner'] then raise exception 'INVALID APPROVAL LEVELS'; end if;
+    if exists (select 1 from bylaw_versions where organization_id = v_org) then
+        if v_unit is null then raise exception 'SET THE DEDUCTION CAP FIRST'; end if;
+        if nullif(p_data ->> 'appealWindowDays', '') is null then raise exception 'SET THE APPEAL WINDOW FIRST'; end if;
+    end if;
     select to_jsonb(s) into v_old from penalty_settings s where s.organization_id = v_org;
     update penalty_settings set
         cap_unit = v_unit,
@@ -1129,7 +1142,7 @@ begin
     v_tz := public.prosm_time_site_timezone(public.prosm_time_calendar_site(p_user_id), v_org);
     if p_day is null or p_day > (now() at time zone v_tz)::date then raise exception 'THE DATE CANNOT BE IN THE FUTURE'; end if;
     if length(trim(coalesce(p_note, ''))) = 0 then raise exception 'DESCRIBE WHAT HAPPENED'; end if;
-    if p_evidence is not null and p_evidence not like v_org || '/' || p_user_id || '/%' then raise exception 'INVALID FILE'; end if;
+    if p_evidence is not null and p_evidence not like v_org || '/evidence/' || p_user_id || '/%' then raise exception 'INVALID FILE'; end if;
     if not exists (select 1 from jsonb_array_elements((public.prosm_time_bylaw_for(v_org, p_day)).snapshot -> 'violationTypes') x
                    where x ->> 'id' = p_type_id::text and x ->> 'source' = 'manual') then
         if (public.prosm_time_bylaw_for(v_org, p_day)).id is null then raise exception 'THE PENALTY BYLAW IS NOT ACTIVE'; end if;
@@ -1162,6 +1175,8 @@ declare
     v_out text[] := '{}';
 begin
     v_can_level := v_level is not null and public.prosm_time_penalty_can_act_level(v.user_id, v_level)
+                   and (public.current_prosm_time_user_is_real_owner() or not exists (
+                        select 1 from employee_violation_steps st where st.violation_id = v.id and st.actor_id = v_me and st.step_type in ('approval', 'reduced')))
                    and not (coalesce((v.rule_snapshot #>> '{action,reporterCannotApprove}')::boolean, true) and v.reported_by = v_me
                             and not public.current_prosm_time_user_is_real_owner());
     if v.status = 'pending_investigation' then
@@ -1245,6 +1260,11 @@ begin
             where b.id = v_v.bylaw_version_id and a ->> 'id' = p_data ->> 'actionTypeId';
             if v_action is null then raise exception 'PENALTY TYPE NOT FOUND'; end if;
             if v_action ->> 'kind' in ('deduction', 'suspension') and coalesce((v_action ->> 'value')::numeric, 0) <= 0 then raise exception 'ENTER THE PENALTY VALUE'; end if;
+            if not (v_action ->> 'kind' = 'warning'
+                    or (v_action ->> 'kind' = v_v.final_action ->> 'kind' and coalesce(v_action ->> 'unit', '') = coalesce(v_v.final_action ->> 'unit', '')
+                        and coalesce((v_action ->> 'value')::numeric, 0) <= coalesce((v_v.final_action ->> 'value')::numeric, 0))) then
+                raise exception 'A REDUCTION MUST BE LIGHTER';
+            end if;
             if v_action ->> 'kind' not in ('deduction', 'suspension') then v_action := v_action || jsonb_build_object('value', null); end if;
             if v_note is null then raise exception 'A REASON IS REQUIRED'; end if;
             update employee_violations set final_action = v_action,
@@ -1296,6 +1316,7 @@ begin
         update employee_violations set status = 'appealed', status_before_appeal = status, appeal_text = v_note, appealed_at = now(), updated_at = now()
         where id = p_id returning * into v_v;
         insert into employee_violation_steps (organization_id, violation_id, step_type, actor_id, note) values (v_org, p_id, 'appeal', v_me, v_note);
+        perform public.prosm_time_penalties_refresh_payroll(v_v.user_id);
         v_data := public.prosm_time_violation_note_data(v_v);
         perform public.prosm_time_penalty_notify_level(v_org, v_v.user_id, 'hr', 'penalty_appeal', 'An appeal', coalesce(v_data ->> 'employeeName', ''),
             'employee_violations', p_id, v_data);
@@ -1305,6 +1326,7 @@ begin
         update employee_violations set status = status_before_appeal, appeal_decided_by = v_me, appeal_decided_at = now(), updated_at = now()
         where id = p_id returning * into v_v;
         insert into employee_violation_steps (organization_id, violation_id, step_type, actor_id, note) values (v_org, p_id, 'appeal_confirmed', v_me, v_note);
+        perform public.prosm_time_penalties_refresh_payroll(v_v.user_id);
         perform public.create_prosm_time_notification(v_org, v_v.user_id, 'penalty_appeal_decided', 'normal', 'Your appeal was decided',
             coalesce(v_v.rule_snapshot #>> '{type,name}', ''), 'employee_violations', p_id,
             public.prosm_time_violation_note_data(v_v) || jsonb_build_object('result', 'confirmed'));
@@ -1339,7 +1361,8 @@ as $$
         'id', v.id, 'userId', v.user_id, 'name', u.full_name, 'avatarUrl', u.avatar_url,
         'violationName', v.rule_snapshot #>> '{type,name}', 'templateKey', v.rule_snapshot #>> '{type,templateKey}',
         'source', v.source, 'occurredOn', v.occurred_on, 'occurrence', v.occurrence_number,
-        'suggested', v.suggested, 'finalAction', v.final_action, 'amount', v.amount,
+        'suggested', v.suggested, 'finalAction', v.final_action,
+        'amount', case when v.user_id = public.current_prosm_time_user_id() or public.prosm_time_is_hr() then v.amount end,
         'status', v.status, 'levels', to_jsonb(v.levels), 'currentLevel', v.current_level,
         'note', v.note, 'evidencePath', v.evidence_path, 'responseDueAt', v.response_due_at, 'employeeResponse', v.employee_response,
         'decidedAt', v.decided_at, 'decidedBy', (select full_name from users where id = v.decided_by), 'decisionNote', v.decision_note,
@@ -1349,8 +1372,10 @@ as $$
                             then v.decided_at + make_interval(days => (v.rule_snapshot #>> '{settings,appealWindowDays}')::integer) end,
         'version', (v.rule_snapshot ->> 'version')::integer, 'versionFrom', v.rule_snapshot ->> 'effectiveFrom',
         'reportedBy', (select full_name from users where id = v.reported_by),
-        'posted', (select coalesce(sum(amount), 0) from penalty_payroll_postings where violation_id = v.id),
-        'settlement', v.settlement_amount,
+        'posted', case when v.user_id = public.current_prosm_time_user_id() or public.prosm_time_is_hr()
+                       then (select coalesce(sum(pp.amount), 0) from penalty_payroll_postings pp join payroll_cycles c on c.id = pp.cycle_id
+                             where pp.violation_id = v.id and c.status <> 'cancelled') else 0 end,
+        'settlement', case when v.user_id = public.current_prosm_time_user_id() or public.prosm_time_is_hr() then v.settlement_amount end,
         'actions', to_jsonb(public.prosm_time_violation_actions(v)),
         'steps', case when p_steps then coalesce((select jsonb_agg(jsonb_build_object('type', s.step_type, 'level', s.level_order, 'at', s.created_at,
                                          'by', (select full_name from users where id = s.actor_id), 'note', s.note, 'attachment', s.attachment_path, 'data', s.data)
@@ -1539,14 +1564,14 @@ begin
         if v_note is null then raise exception 'A REASON IS REQUIRED'; end if;
         update employee_incentives set status = 'cancelled', decision_note = v_note, updated_at = now() where id = p_id;
     elsif v_i.status <> 'pending_approval' or not public.prosm_time_penalty_can_act_level(v_i.user_id, v_i.levels[v_i.current_level + 1])
-          or v_i.created_by = v_me and not public.current_prosm_time_user_is_real_owner() then
+          or (v_i.created_by = v_me or v_me = any(v_i.approvers)) and not public.current_prosm_time_user_is_real_owner() then
         raise exception 'THIS STEP IS NOT AVAILABLE NOW';
     elsif p_action = 'reject' then
         if v_note is null then raise exception 'A REASON IS REQUIRED TO REJECT'; end if;
         update employee_incentives set status = 'rejected', decided_by = v_me, decided_at = now(), decision_note = v_note, updated_at = now() where id = p_id;
     elsif p_action = 'approve' then
         if v_i.current_level + 1 < cardinality(v_i.levels) then
-            update employee_incentives set current_level = current_level + 1, updated_at = now() where id = p_id returning * into v_i;
+            update employee_incentives set current_level = current_level + 1, approvers = approvers || v_me, updated_at = now() where id = p_id returning * into v_i;
             v_name := (select full_name from users where id = v_i.user_id);
             perform public.prosm_time_penalty_notify_level(v_org, v_i.user_id, v_i.levels[v_i.current_level + 1], 'incentive_review', 'An incentive to review',
                 coalesce(v_name, ''), 'employee_incentives', p_id, jsonb_build_object('kind', 'incentive', 'incentiveId', p_id, 'employeeName', v_name,
@@ -1585,11 +1610,13 @@ begin
     return coalesce((
         select jsonb_agg(jsonb_build_object('id', i.id, 'userId', i.user_id, 'name', u.full_name, 'reason', i.reason,
                     'templateKey', (select template_key from incentive_rules where id = i.rule_id), 'ruleName', (select name from incentive_rules where id = i.rule_id),
-                    'periodMonth', i.period_month, 'amountType', i.amount_type, 'value', i.value, 'amount', i.amount, 'status', i.status,
+                    'periodMonth', i.period_month, 'amountType', i.amount_type,
+                    'value', case when i.amount_type <> 'amount' or i.user_id = v_me or public.prosm_time_is_hr() then i.value end,
+                    'amount', case when i.user_id = v_me or public.prosm_time_is_hr() then i.amount end, 'status', i.status,
                     'levels', to_jsonb(i.levels), 'currentLevel', i.current_level, 'createdAt', i.created_at,
                     'createdBy', (select full_name from users where id = i.created_by), 'decidedAt', i.decided_at, 'decisionNote', i.decision_note,
                     'canAct', i.status = 'pending_approval' and public.prosm_time_penalty_can_act_level(i.user_id, i.levels[i.current_level + 1])
-                              and (i.created_by is distinct from v_me or public.current_prosm_time_user_is_real_owner()),
+                              and ((i.created_by is distinct from v_me and not v_me = any(i.approvers)) or public.current_prosm_time_user_is_real_owner()),
                     'canCancel', i.status <> 'cancelled' and i.user_id <> v_me and public.prosm_time_is_hr())
                     order by i.created_at desc)
         from (select * from employee_incentives i
@@ -1638,10 +1665,16 @@ begin
                 when ''percent_of_wage'' then v_ps.cap_percent / 100 * v_wage * coalesce((v_cycle.policy_snapshot ->> ''day_divisor'')::numeric, 30)
                 when ''both'' then least(v_ps.cap_days * v_wage, v_ps.cap_percent / 100 * v_wage * coalesce((v_cycle.policy_snapshot ->> ''day_divisor'')::numeric, 30))
             end;
-            v_left := coalesce(v_cap, 0);
+            -- the cap is per calendar month: what other cycles of the same month already took counts (review 2026-11-11)
+            v_left := greatest(coalesce(v_cap, 0) - coalesce((
+                select sum(pp.amount) from penalty_payroll_postings pp join payroll_cycles c on c.id = pp.cycle_id
+                join employee_violations x on x.id = pp.violation_id
+                where x.user_id = v_ce.user_id and pp.cycle_id <> v_ce.cycle_id and c.status <> ''cancelled''
+                  and date_trunc(''month'', c.period_end) = date_trunc(''month'', v_cycle.period_end)), 0), 0);
             for v_pen in
                 select e.id, e.amount, e.occurred_on, e.rule_snapshot, e.final_action,
-                       e.amount - coalesce((select sum(pp.amount) from penalty_payroll_postings pp where pp.violation_id = e.id and pp.cycle_id <> v_ce.cycle_id), 0) as remaining
+                       e.amount - coalesce((select sum(pp.amount) from penalty_payroll_postings pp join payroll_cycles c on c.id = pp.cycle_id
+                                            where pp.violation_id = e.id and pp.cycle_id <> v_ce.cycle_id and c.status <> ''cancelled''), 0) as remaining
                 from employee_violations e
                 where e.user_id = v_ce.user_id and e.status in (''approved'', ''reduced'') and coalesce(e.amount, 0) > 0
                   and e.occurred_on <= v_cycle.period_end
@@ -1661,25 +1694,30 @@ begin
                         jsonb_build_object(''kind'', ''violation'', ''violationId'', v_pen.id),
                         case when v_take < v_pen.remaining then ''Carried to the next cycle: '' || (v_pen.remaining - v_take) end);
             end loop;
-            -- a cancelled penalty that a closed cycle already took is paid back once
+            -- a cancelled penalty: what approved or locked cycles took, less what they already paid back
             for v_pen in
-                select e.id, e.settlement_amount, e.rule_snapshot, e.occurred_on from employee_violations e
-                where e.user_id = v_ce.user_id and e.status = ''cancelled'' and coalesce(e.settlement_amount, 0) > 0 and e.settlement_cycle_id is null
-                  and not exists (select 1 from payroll_cycle_lines l join payroll_cycle_employees x on x.id = l.cycle_employee_id
-                                  join payroll_cycles c on c.id = x.cycle_id
-                                  where l.source = ''incentive'' and l.source_ref ->> ''settlementOf'' = e.id::text and c.status not in (''draft'', ''reopened'', ''cancelled''))
+                select e.id, e.rule_snapshot, e.occurred_on,
+                       coalesce((select sum(pp.amount) from penalty_payroll_postings pp join payroll_cycles c on c.id = pp.cycle_id
+                                 where pp.violation_id = e.id and c.status in (''approved'', ''locked'')), 0)
+                     - coalesce((select sum(l.amount) from payroll_cycle_lines l join payroll_cycle_employees x on x.id = l.cycle_employee_id
+                                 join payroll_cycles c on c.id = x.cycle_id
+                                 where l.source = ''incentive'' and l.source_ref ->> ''settlementOf'' = e.id::text
+                                   and c.status in (''approved'', ''locked'') and c.id <> v_ce.cycle_id), 0) as due
+                from employee_violations e
+                where e.user_id = v_ce.user_id and e.status = ''cancelled''
             loop
-                update employee_violations set settlement_cycle_id = v_ce.cycle_id where id = v_pen.id;
+                continue when v_pen.due <= 0;
                 insert into payroll_cycle_lines (organization_id, cycle_employee_id, name_ar, name_en, category, source, raw_amount, include_in_net,
                                                  show_in_payslip, show_in_summary, include_in_combined, sort_order, taxable, insurable, source_ref)
                 values (v_ce.organization_id, v_ce.id, ''رد جزاء ملغي ('' || to_char(v_pen.occurred_on, ''YYYY-MM-DD'') || '')'',
                         ''Cancelled penalty refunded ('' || to_char(v_pen.occurred_on, ''YYYY-MM-DD'') || '')'',
-                        ''earning'', ''incentive'', v_pen.settlement_amount, true, true, true, false, 960, false, false,
+                        ''earning'', ''incentive'', v_pen.due, true, true, true, false, 960, false, false,
                         jsonb_build_object(''kind'', ''settlement'', ''settlementOf'', v_pen.id));
             end loop;
             for v_inc in
                 select i.* from employee_incentives i
-                where i.user_id = v_ce.user_id and i.status = ''approved'' and coalesce(i.amount, 0) > 0 and i.payroll_cycle_id is null
+                where i.user_id = v_ce.user_id and i.status = ''approved'' and coalesce(i.amount, 0) > 0
+                  and (i.payroll_cycle_id is null or i.payroll_cycle_id in (select id from payroll_cycles where status = ''cancelled''))
                   and coalesce(i.period_month, i.decided_at::date) <= v_cycle.period_end
             loop
                 update employee_incentives set payroll_cycle_id = v_ce.cycle_id where id = v_inc.id;
@@ -1688,6 +1726,26 @@ begin
                 values (v_ce.organization_id, v_ce.id, ''حافز: '' || left(v_inc.reason, 80), ''Incentive: '' || left(v_inc.reason, 80),
                         ''earning'', ''incentive'', v_inc.amount, true, true, true, false, 940, true, false,
                         jsonb_build_object(''kind'', ''incentive'', ''incentiveId'', v_inc.id));
+            end loop;
+            -- an incentive cancelled after an approved or locked cycle paid it is taken back once
+            for v_inc in
+                select i.id, i.reason,
+                       coalesce((select sum(l.amount) from payroll_cycle_lines l join payroll_cycle_employees x on x.id = l.cycle_employee_id
+                                 join payroll_cycles c on c.id = x.cycle_id
+                                 where l.source = ''incentive'' and l.source_ref ->> ''incentiveId'' = i.id::text and c.status in (''approved'', ''locked'')), 0)
+                     - coalesce((select sum(l.amount) from payroll_cycle_lines l join payroll_cycle_employees x on x.id = l.cycle_employee_id
+                                 join payroll_cycles c on c.id = x.cycle_id
+                                 where l.source = ''penalty'' and l.source_ref ->> ''clawbackOf'' = i.id::text
+                                   and c.status in (''approved'', ''locked'') and c.id <> v_ce.cycle_id), 0) as due
+                from employee_incentives i
+                where i.user_id = v_ce.user_id and i.status = ''cancelled''
+            loop
+                continue when v_inc.due <= 0;
+                insert into payroll_cycle_lines (organization_id, cycle_employee_id, name_ar, name_en, category, source, raw_amount, include_in_net,
+                                                 show_in_payslip, show_in_summary, include_in_combined, sort_order, taxable, insurable, source_ref)
+                values (v_ce.organization_id, v_ce.id, ''استرداد حافز ملغي: '' || left(v_inc.reason, 60), ''Cancelled incentive recovered: '' || left(v_inc.reason, 60),
+                        ''deduction'', ''penalty'', v_inc.due, true, true, true, false, 955, false, false,
+                        jsonb_build_object(''kind'', ''clawback'', ''clawbackOf'', v_inc.id));
             end loop;
         end;
     end if;

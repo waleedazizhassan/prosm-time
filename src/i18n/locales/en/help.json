@@ -177,6 +177,34 @@
     "personPage": {
       "title": "The person page (for administrators)",
       "body": "Press anyone in People to open their page in tidy cards: department, employment, leave, role, permissions, checks, devices (shown only when they have registered devices), and \"Application Access\", with blocking access and deleting their personal attendance data on request. A person's salary is managed in Payroll, not on their page."
+    },
+    "myFile": {
+      "title": "My file",
+      "body": "Menu → My file shows your details, contract, documents, warnings and incentives, attendance and leave. It is read-only: ask personnel to change your details."
+    },
+    "myDocuments": {
+      "title": "My documents",
+      "body": "The documents your company needs from you appear in My file → Documents with their state (missing, expiring, expired). Tap \"Upload\" or \"Renew\": the camera opens, photograph the document and enter its dates. Without internet it is kept on the phone and sent later. Personnel review it; if refused you are told why. You are reminded before a document expires."
+    },
+    "myPenalties": {
+      "title": "Warnings and incentives",
+      "body": "When a penalty is decided you get a notification. Open it in My file → Penalties and incentives: \"Received\" means you have seen it, not that you agree. You can appeal within the time your company set, and if your reply is requested you write it there. Incentives appear there too."
+    },
+    "penaltiesManager": {
+      "title": "Recording and approving penalties",
+      "body": "Menu → Penalties and incentives. \"Record a violation\" for a person at your sites (with a photo from the phone); lateness and absence are recorded automatically by the bylaw. The bylaw chooses the penalty by how many times it happened. In \"Waiting for me\" you investigate, approve, reduce (with a reason) or refuse (with a reason). Whoever recorded a violation cannot approve it if the bylaw says so. You can also propose an incentive."
+    },
+    "documentsAdmin": {
+      "title": "Employee documents",
+      "body": "Settings → People → Employee documents: the documents each person must have (for everyone, some job titles or some sites), with expiry, reminder days and what happens at clock-in after one expires. Menu → Documents shows what has expired, expires soon, is missing or waits for review; remind a person with one tap or export a CSV."
+    },
+    "bylaw": {
+      "title": "Penalties bylaw",
+      "body": "Settings → People → Penalties bylaw. First set your company's limits (deduction cap, days to appeal) and accept the notice - PROSM gives no legal values. Add violations with their ladder, set each penalty type's steps (investigation, the employee's reply) and approval levels, then publish from a date: it becomes a new version, posted in the Media Center for everyone to confirm reading. Recorded violations keep the version they were recorded under."
+    },
+    "taxConfig": {
+      "title": "Tax and insurance",
+      "body": "Payroll → Settings → Tax and insurance. Egypt is ready with PROSM's values, kept up to date. \"Copy and edit\" makes your own version (your company takes responsibility). For another country, enter the brackets, the exemption and the insurance categories. Try any salary in the calculator - it uses the payroll's own engine. Each save is a version from a month; cycles already made keep their rules. Only the owner changes the country, never with a cycle open."
     }
   },
   "faq": {
@@ -259,5 +287,7 @@
     "body": "For product help or support, contact us at:",
     "infoLabel": "General inquiries:",
     "supportLabel": "Support:"
-  }
+  },
+  "showAllTopics": "Show all topics ({{count}} more)",
+  "roleTopicsOnly": "Show only the topics for my role"
 }

@@ -8,6 +8,7 @@ import StatusBadge from "../../components/common/StatusBadge";
 import EmptyState from "../../components/common/EmptyState";
 import LoadingState from "../../components/common/LoadingState";
 import SuccessText from "../../components/common/SuccessText";
+import ErrorText from "../../components/common/ErrorText";
 import { formatDateOnly } from "../../core/utils/formatDate";
 import { useAuth } from "../../core/context/AuthContext";
 import type { EmployeeProfile } from "../../core/repositories/EmployeeProfileRepository";
@@ -30,9 +31,11 @@ export default function ProfilePenaltiesPanel({ profile: file }: { profile: Empl
   const [record, setRecord] = useState(false);
   const [grant, setGrant] = useState(false);
   const [notice, setNotice] = useState("");
+  const [loadError, setLoadError] = useState(false);
 
   const load = useCallback(async () => {
     const [v, i] = await Promise.all([PenaltiesRepository.list(userId), PenaltiesRepository.incentives(userId)]);
+    setLoadError(Boolean(v.error || i.error));
     setRows(v.data ?? []);
     setIncentives(i.data ?? []);
   }, [userId]);
@@ -54,8 +57,9 @@ export default function ProfilePenaltiesPanel({ profile: file }: { profile: Empl
           </span>
         ) : undefined}>
         {notice ? <SuccessText>{notice}</SuccessText> : null}
+        {loadError ? <ErrorText>{t("loadError")}</ErrorText> : null}
         {self && needsMe.length > 0 ? <p style={{ margin: "0 0 var(--space-2)", fontWeight: 600 }}>{t("needsYou", { count: needsMe.length })}</p> : null}
-        {rows.length === 0 && incentives.length === 0 ? <EmptyState message={self ? t("emptySelf") : t("empty")} /> : (
+        {loadError ? null : rows.length === 0 && incentives.length === 0 ? <EmptyState message={self ? t("emptySelf") : t("empty")} /> : (
           <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
             {incentives.filter((i) => i.status === "approved" || !self).map((i) => (
               <li key={`i${i.id}`} style={{ display: "flex", gap: "var(--space-2)", alignItems: "center", flexWrap: "wrap", padding: "var(--space-2) 0", borderBottom: "1px solid var(--border-light)" }}>

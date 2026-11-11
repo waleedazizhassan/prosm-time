@@ -177,6 +177,34 @@
     "personPage": {
       "title": "La página de la persona (para administradores)",
       "body": "Pulse a cualquiera en Personas para abrir su página en tarjetas ordenadas: departamento, empleo, permisos, rol, autorizaciones, verificaciones, dispositivos (solo si tiene registrados) y «Acceso a la aplicación», con el bloqueo del acceso y el borrado de sus datos personales de asistencia a petición. El salario se gestiona en Nómina, no en su página."
+    },
+    "myFile": {
+      "title": "Mi ficha",
+      "body": "Menú → Mi ficha muestra tus datos, contrato, documentos, amonestaciones e incentivos, asistencia y permisos. Es de solo lectura: pide a RR. HH. que cambie tus datos."
+    },
+    "myDocuments": {
+      "title": "Mis documentos",
+      "body": "Los documentos que necesita tu empresa aparecen en Mi ficha → Documentos con su estado. Pulsa «Subir» o «Renovar»: se abre la cámara, fotografía el documento e indica sus fechas. Sin internet se guarda en el teléfono y se envía después. Recibirás un recordatorio antes del vencimiento."
+    },
+    "myPenalties": {
+      "title": "Amonestaciones e incentivos",
+      "body": "Cuando se decide una sanción recibes una notificación. En Mi ficha → Sanciones e incentivos, «Recibido» significa que la viste, no que estés de acuerdo. Puedes recurrir dentro del plazo o escribir tu respuesta si se te pide."
+    },
+    "penaltiesManager": {
+      "title": "Registrar y aprobar sanciones",
+      "body": "Menú → Sanciones e incentivos. «Registrar infracción» para alguien de tus centros (con foto); los retrasos y ausencias se registran solos. El reglamento elige la sanción según las veces. En «Esperan por mí» investigas, apruebas, reduces o rechazas (con motivo). También puedes proponer un incentivo."
+    },
+    "documentsAdmin": {
+      "title": "Documentos de empleados",
+      "body": "Ajustes → Personas → Documentos de empleados: qué documentos necesita cada persona, vencimiento, recordatorios y qué pasa al fichar tras vencer. Menú → Documentos muestra lo vencido, por vencer, faltante y por revisar; recuerda con un toque o exporta CSV."
+    },
+    "bylaw": {
+      "title": "Reglamento de sanciones",
+      "body": "Ajustes → Personas → Reglamento de sanciones. Primero fija los límites (descuento máximo, días para recurrir) y acepta el aviso: PROSM no da valores legales. Añade infracciones con su escala, fija pasos y niveles de aprobación y publica desde una fecha: una nueva versión en el Centro de medios. Las infracciones registradas conservan su versión."
+    },
+    "taxConfig": {
+      "title": "Impuestos y seguridad social",
+      "body": "Nómina → Ajustes → Impuestos y seguridad social. Egipto viene listo con los valores de PROSM. «Copiar y editar» crea tu versión (bajo tu responsabilidad). Para otro país introduce tramos, exención y categorías. La calculadora usa el motor de la nómina. Cada guardado es una versión desde un mes. Solo el propietario cambia el país, nunca con un ciclo abierto."
     }
   },
   "faq": {
@@ -259,5 +287,7 @@
     "body": "Para ayuda con el producto o soporte, escríbenos a:",
     "infoLabel": "Consultas generales:",
     "supportLabel": "Soporte:"
-  }
+  },
+  "showAllTopics": "Ver todos los temas ({{count}} más)",
+  "roleTopicsOnly": "Ver solo los temas de mi rol"
 }

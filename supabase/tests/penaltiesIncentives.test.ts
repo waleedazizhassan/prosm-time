@@ -107,6 +107,8 @@ describe("penalties and incentives", () => {
     await evaluate(t, amira.userId, "2026-10-05");
     list = await violations(t, org, amira.userId);
     expect(list[2]).toMatchObject({ occurrence: 2, suggested: { code: "deduct_days", value: 0.25 } });
+    // a reduction is lighter, never heavier
+    expect((await t.as(org.owner.authId, "select public.act_prosm_time_violation($1, 'reduce', $2)", [list[2].id, JSON.stringify({ actionTypeId: action("deduct_days"), value: 1, note: "x" })])).error).toMatch(/LIGHTER/);
 
     // a new bylaw version (now 1 day) does not change the one still waiting
     await rpc(t, org.owner.authId, "select public.save_prosm_time_violation_type($1, $2)", [type.r.id, JSON.stringify({

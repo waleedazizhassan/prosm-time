@@ -43,14 +43,20 @@ export default function DocumentUploadModal({ target, onClose, onDone }: { targe
   const send = async () => {
     if (!target || !profile) return;
     if (!file) return setError(t("upload.needFile"));
+    if (!/^(image\/(jpeg|png|webp)|application\/pdf)$/.test(file.type) || file.size > 10 * 1024 * 1024) return setError(t("upload.badFile"));
     if (target.hasExpiry && !expiry) return setError(t("upload.needExpiry"));
     setBusy(true);
     setError("");
     const keep = async () => {
-      await DocumentUploadQueue.enqueue({
-        organizationId: profile.organizationId, userId: target.userId, typeId: target.typeId, typeName: target.typeName,
-        documentNumber: number.trim() || null, issueDate: issue || null, expiryDate: expiry || null, file, fileName: file.name,
-      });
+      try {
+        await DocumentUploadQueue.enqueue({
+          organizationId: profile.organizationId, userId: target.userId, typeId: target.typeId, typeName: target.typeName,
+          documentNumber: number.trim() || null, issueDate: issue || null, expiryDate: expiry || null, file, fileName: file.name, submittedBy: profile.id,
+        });
+      } catch {
+        setBusy(false);
+        return setError(t("upload.error"));
+      }
       setBusy(false);
       reset();
       onDone(true);
@@ -81,7 +87,7 @@ export default function DocumentUploadModal({ target, onClose, onDone }: { targe
           <Camera size={28} aria-hidden="true" color="var(--brand-primary)" />
           <strong>{file ? file.name : t("upload.photo")}</strong>
           <small style={{ color: "var(--text-secondary)" }}>{t("upload.photoHint")}</small>
-          <input type="file" accept="image/*,application/pdf" capture="environment" style={{ display: "none" }}
+          <input type="file" accept="image/jpeg,image/png,image/webp,application/pdf" capture="environment" style={{ display: "none" }}
             onChange={(event) => setFile(event.target.files?.[0] ?? null)} />
         </label>
         <Input label={t("upload.number")} name="docNumber" value={number} onChange={(e) => setNumber(e.target.value)} />

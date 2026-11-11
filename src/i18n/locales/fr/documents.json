@@ -62,7 +62,8 @@
     "number": "Numéro du document",
     "issue": "Date de délivrance",
     "expiry": "Date d'expiration",
-    "offlineHint": "Pas d'internet ? Il est enregistré sur le téléphone et envoyé plus tard."
+    "offlineHint": "Pas d'internet ? Il est enregistré sur le téléphone et envoyé plus tard.",
+    "badFile": "Utilisez une photo JPG, PNG, WEBP ou un PDF, jusqu'à 10 Mo."
   },
   "types": {
     "title": "Documents des employés",
@@ -143,5 +144,7 @@
     "more_many": "et {{count}} autres documents",
     "more_other": "et {{count}} autres documents",
     "photograph": "Photographier"
-  }
+  },
+  "queuedRefused": "{{name}} n'a pas été envoyé : {{reason}}",
+  "removeQueued": "Retirer"
 }

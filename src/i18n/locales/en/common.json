@@ -369,7 +369,8 @@
     "bracketRequired": "Add at least one bracket.",
     "insurableMinMax": "The maximum insurable wage must not be below the minimum.",
     "invalidTier": "Check the high-income tiers.",
-    "invalidExemption": "The exempt amount cannot be negative."
+    "invalidExemption": "The exempt amount cannot be negative.",
+    "reductionLighter": "A reduction must be lighter: a warning, or the same penalty with a smaller value."
   },
   "pageLoad": {
     "title": "This page needs a connection",

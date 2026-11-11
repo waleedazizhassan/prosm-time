@@ -44,7 +44,7 @@ export default function TaxConfigPage() {
     setS(r.data);
     setDraft(null);
     setCopied(false);
-    setMonth(monthOf(r.data!.nextFreeMonth));
+    setMonth(r.data!.nextFreeMonth ? monthOf(r.data!.nextFreeMonth) : new Date().toISOString().slice(0, 7));
     const c = await PayrollCycleRepository.listComponents();
     setComponents((c.data ?? []).filter((x) => x.is_active && (x.category === "earning" || x.category === "allowance")));
   }, [t]);

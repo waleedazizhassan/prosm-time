@@ -177,6 +177,34 @@
     "personPage": {
       "title": "La page d'une personne (pour les administrateurs)",
       "body": "Touchez une personne dans Personnes pour ouvrir sa page en cartes ordonnées : service, emploi, congés, rôle, autorisations, vérifications, appareils (seulement s'il y en a) et « Accès à l'application », avec le blocage de l'accès et la suppression de ses données personnelles de présence sur demande. Le salaire se gère dans Paie, pas sur sa page."
+    },
+    "myFile": {
+      "title": "Mon dossier",
+      "body": "Menu → Mon dossier affiche vos données, contrat, documents, avertissements et primes, présence et congés. En lecture seule : demandez aux RH de modifier vos données."
+    },
+    "myDocuments": {
+      "title": "Mes documents",
+      "body": "Les documents demandés apparaissent dans Mon dossier → Documents avec leur état. Touchez « Envoyer » ou « Renouveler » : l'appareil photo s'ouvre, photographiez le document et saisissez ses dates. Sans internet, il est gardé sur le téléphone et envoyé plus tard. Un rappel arrive avant l'expiration."
+    },
+    "myPenalties": {
+      "title": "Avertissements et primes",
+      "body": "Quand une sanction est décidée, vous êtes notifié. Dans Mon dossier → Sanctions et primes, « Reçu » signifie que vous l'avez vue, pas que vous êtes d'accord. Vous pouvez faire un recours dans le délai ou répondre si on vous le demande."
+    },
+    "penaltiesManager": {
+      "title": "Enregistrer et approuver les sanctions",
+      "body": "Menu → Sanctions et primes. « Enregistrer une infraction » pour une personne de vos sites (avec photo) ; retards et absences sont enregistrés automatiquement. Le règlement choisit la sanction selon le nombre de fois. Dans « En attente de moi », enquêtez, approuvez, réduisez ou refusez (avec motif). Vous pouvez aussi proposer une prime."
+    },
+    "documentsAdmin": {
+      "title": "Documents des employés",
+      "body": "Paramètres → Personnes → Documents des employés : les documents exigés, l'expiration, les rappels et ce qui se passe au pointage après expiration. Menu → Documents affiche l'expiré, le bientôt expiré, le manquant et l'à vérifier ; relancez d'un geste ou exportez en CSV."
+    },
+    "bylaw": {
+      "title": "Règlement des sanctions",
+      "body": "Paramètres → Personnes → Règlement des sanctions. Fixez d'abord vos limites (plafond, jours de recours) et acceptez l'avis : PROSM ne donne aucune valeur juridique. Ajoutez les infractions et leur échelle, les étapes et niveaux d'approbation, puis publiez à partir d'une date : une nouvelle version dans le Centre médias. Les infractions enregistrées gardent leur version."
+    },
+    "taxConfig": {
+      "title": "Impôts et cotisations",
+      "body": "Paie → Paramètres → Impôts et cotisations. L'Égypte est prête avec les valeurs de PROSM. « Copier et modifier » crée votre version (sous votre responsabilité). Pour un autre pays, saisissez tranches, abattement et catégories. Le calculateur utilise le moteur de paie. Chaque enregistrement est une version à partir d'un mois. Seul le propriétaire change le pays, jamais avec un cycle ouvert."
     }
   },
   "faq": {
@@ -259,5 +287,7 @@
     "body": "Pour toute aide produit ou assistance, contactez-nous à :",
     "infoLabel": "Demandes générales :",
     "supportLabel": "Assistance :"
-  }
+  },
+  "showAllTopics": "Voir tous les sujets ({{count}} de plus)",
+  "roleTopicsOnly": "Voir seulement les sujets de mon rôle"
 }

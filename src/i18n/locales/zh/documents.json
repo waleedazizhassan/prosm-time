@@ -54,7 +54,8 @@
     "number": "证件号码",
     "issue": "签发日期",
     "expiry": "到期日期",
-    "offlineHint": "没有网络？会先保存在手机上，稍后发送。"
+    "offlineHint": "没有网络？会先保存在手机上，稍后发送。",
+    "badFile": "请使用 JPG、PNG、WEBP 照片或 PDF，最大 10 MB。"
   },
   "types": {
     "title": "员工证件",
@@ -131,5 +132,7 @@
   "alert": {
     "more_other": "还有 {{count}} 份证件",
     "photograph": "立即拍摄"
-  }
+  },
+  "queuedRefused": "{{name}} 未发送：{{reason}}",
+  "removeQueued": "删除"
 }

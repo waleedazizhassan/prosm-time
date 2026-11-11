@@ -58,7 +58,8 @@
     "number": "Document number",
     "issue": "Issue date",
     "expiry": "Expiry date",
-    "offlineHint": "No internet? It is saved on the phone and sent later."
+    "offlineHint": "No internet? It is saved on the phone and sent later.",
+    "badFile": "Use a JPG, PNG, WEBP photo or a PDF, up to 10 MB."
   },
   "types": {
     "title": "Employee documents",
@@ -137,5 +138,7 @@
     "more_one": "and {{count}} more document",
     "more_other": "and {{count}} more documents",
     "photograph": "Photograph it"
-  }
+  },
+  "queuedRefused": "{{name}} was not sent: {{reason}}",
+  "removeQueued": "Remove"
 }

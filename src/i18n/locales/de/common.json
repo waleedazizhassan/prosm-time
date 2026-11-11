@@ -369,7 +369,8 @@
     "bracketRequired": "Mindestens eine Stufe hinzufügen.",
     "insurableMinMax": "Das Höchstentgelt darf nicht unter dem Mindestentgelt liegen.",
     "invalidTier": "Prüfen Sie die Stufen für hohe Einkommen.",
-    "invalidExemption": "Der Freibetrag darf nicht negativ sein."
+    "invalidExemption": "Der Freibetrag darf nicht negativ sein.",
+    "reductionLighter": "Eine Milderung muss leichter sein: eine Abmahnung oder dieselbe Sanktion mit kleinerem Wert."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

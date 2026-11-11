@@ -58,7 +58,8 @@
     "number": "Dokumentnummer",
     "issue": "Ausstellungsdatum",
     "expiry": "Ablaufdatum",
-    "offlineHint": "Kein Internet? Es wird auf dem Telefon gespeichert und später gesendet."
+    "offlineHint": "Kein Internet? Es wird auf dem Telefon gespeichert und später gesendet.",
+    "badFile": "Verwenden Sie ein JPG-, PNG-, WEBP-Foto oder ein PDF bis 10 MB."
   },
   "types": {
     "title": "Mitarbeiterdokumente",
@@ -137,5 +138,7 @@
     "more_one": "und {{count}} weiteres Dokument",
     "more_other": "und {{count}} weitere Dokumente",
     "photograph": "Jetzt fotografieren"
-  }
+  },
+  "queuedRefused": "{{name}} wurde nicht gesendet: {{reason}}",
+  "removeQueued": "Entfernen"
 }

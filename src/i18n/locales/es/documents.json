@@ -62,7 +62,8 @@
     "number": "Número del documento",
     "issue": "Fecha de emisión",
     "expiry": "Fecha de vencimiento",
-    "offlineHint": "¿Sin internet? Se guarda en el teléfono y se envía después."
+    "offlineHint": "¿Sin internet? Se guarda en el teléfono y se envía después.",
+    "badFile": "Usa una foto JPG, PNG o WEBP, o un PDF, de hasta 10 MB."
   },
   "types": {
     "title": "Documentos de empleados",
@@ -143,5 +144,7 @@
     "more_many": "y {{count}} documentos más",
     "more_other": "y {{count}} documentos más",
     "photograph": "Fotografiar"
-  }
+  },
+  "queuedRefused": "{{name}} no se envió: {{reason}}",
+  "removeQueued": "Quitar"
 }

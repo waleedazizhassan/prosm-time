@@ -382,7 +382,7 @@ begin
     if v_access not in ('full', 'self') then raise exception 'PERMISSION DENIED'; end if;
     perform public.prosm_time_require_feature('documents');
     if v_ref is not null then
-        select id into v_existing from employee_documents where client_ref = v_ref;
+        select id into v_existing from employee_documents where client_ref = v_ref and organization_id = v_org;
         if v_existing is not null then return jsonb_build_object('success', true, 'id', v_existing, 'replay', true); end if;
     end if;
     select * into v_type from document_types where id = p_type_id and organization_id = v_org and is_active;
@@ -400,8 +400,8 @@ begin
     values (v_org, public.current_prosm_time_user_id(), p_user_id, 'hr.document_uploaded', 'employee_documents', v_id, 'Document uploaded',
             jsonb_build_object('type', v_type.name, 'expiryDate', v_expiry));
 
-    if v_access = 'full' then
-        -- the personnel manager's own upload is the review
+    if v_access = 'full' and p_user_id <> public.current_prosm_time_user_id() then
+        -- the personnel manager's upload for someone else is the review (their own file is reviewed by another)
         perform public.review_prosm_time_document(v_id, true, null);
     else
         select full_name into v_name from users where id = p_user_id;
@@ -527,7 +527,7 @@ begin
             'completePercent', case when (select count(*) from people) = 0 then 100 else round(100.0 * (select count(*) from complete) / (select count(*) from people)) end,
             'action', coalesce((select jsonb_agg(x order by x ->> 'rank', x ->> 'daysLeft' nulls first) from (
                 select jsonb_build_object('id', c.id, 'userId', c.user_id, 'name', c.full_name, 'site', (select name from sites where id = c.site_id),
-                    'typeName', c.type_name, 'status', c.status, 'daysLeft', case when c.expiry_date is not null then c.expiry_date - v_today end,
+                    'typeName', c.type_name, 'status', c.status, 'expiryDate', c.expiry_date, 'daysLeft', case when c.expiry_date is not null then c.expiry_date - v_today end,
                     'lastRemindedAt', c.last_reminded_at, 'rank', case c.status when 'expired' then '1' when 'missing' then '2' when 'rejected' then '3' else '4' end) as x
                 from cur c where c.status in ('expired', 'expiring') or (c.is_mandatory and c.status in ('missing', 'rejected'))
                 union all

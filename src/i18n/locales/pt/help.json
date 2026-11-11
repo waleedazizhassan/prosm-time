@@ -177,6 +177,34 @@
     "personPage": {
       "title": "A página da pessoa (para administradores)",
       "body": "Toque em alguém em Pessoas para abrir a página em cartões organizados: departamento, vínculo, férias, função, permissões, verificações, dispositivos (só se houver registrados) e «Acesso ao aplicativo», com o bloqueio de acesso e a exclusão dos dados pessoais de ponto a pedido. O salário é gerido na Folha, não na página da pessoa."
+    },
+    "myFile": {
+      "title": "Minha ficha",
+      "body": "Menu → Minha ficha mostra seus dados, contrato, documentos, advertências e incentivos, presença e férias. Somente leitura: peça ao RH para alterar seus dados."
+    },
+    "myDocuments": {
+      "title": "Meus documentos",
+      "body": "Os documentos exigidos aparecem em Minha ficha → Documentos com sua situação. Toque em «Enviar» ou «Renovar»: a câmera abre, fotografe o documento e informe as datas. Sem internet fica no telefone e é enviado depois. Você recebe um lembrete antes do vencimento."
+    },
+    "myPenalties": {
+      "title": "Advertências e incentivos",
+      "body": "Quando uma penalidade é decidida você é notificado. Em Minha ficha → Penalidades e incentivos, «Recebido» significa que você viu, não que concorda. Você pode recorrer no prazo ou responder se for pedido."
+    },
+    "penaltiesManager": {
+      "title": "Registrar e aprovar penalidades",
+      "body": "Menu → Penalidades e incentivos. «Registrar infração» para alguém dos seus locais (com foto); atrasos e faltas são registrados sozinhos. O regulamento escolhe a penalidade pelo número de vezes. Em «Aguardando por mim» você investiga, aprova, reduz ou recusa (com motivo). Também pode propor um incentivo."
+    },
+    "documentsAdmin": {
+      "title": "Documentos dos funcionários",
+      "body": "Configurações → Pessoas → Documentos dos funcionários: quais documentos cada pessoa precisa, vencimento, lembretes e o que acontece no ponto após vencer. Menu → Documentos mostra vencidos, a vencer, faltando e para revisar; lembre com um toque ou exporte CSV."
+    },
+    "bylaw": {
+      "title": "Regulamento de penalidades",
+      "body": "Configurações → Pessoas → Regulamento de penalidades. Defina primeiro os limites (desconto máximo, dias de recurso) e aceite o aviso: a PROSM não dá valores legais. Adicione infrações com sua escala, etapas e níveis de aprovação e publique a partir de uma data: uma nova versão no Centro de mídia. Infrações registradas mantêm sua versão."
+    },
+    "taxConfig": {
+      "title": "Impostos e previdência",
+      "body": "Folha → Configurações → Impostos e previdência. O Egito vem pronto com os valores da PROSM. «Copiar e editar» cria sua versão (por sua conta). Para outro país informe faixas, isenção e categorias. A calculadora usa o motor da folha. Cada gravação é uma versão a partir de um mês. Só o proprietário muda o país, nunca com ciclo aberto."
     }
   },
   "faq": {
@@ -259,5 +287,7 @@
     "body": "Para ajuda com o produto ou suporte, fale conosco em:",
     "infoLabel": "Dúvidas gerais:",
     "supportLabel": "Suporte:"
-  }
+  },
+  "showAllTopics": "Ver todos os tópicos (mais {{count}})",
+  "roleTopicsOnly": "Ver só os tópicos do meu papel"
 }

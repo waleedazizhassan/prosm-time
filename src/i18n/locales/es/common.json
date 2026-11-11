@@ -369,7 +369,8 @@
     "bracketRequired": "Añade al menos un tramo.",
     "insurableMinMax": "El salario asegurable máximo no puede ser menor que el mínimo.",
     "invalidTier": "Revisa los tramos de ingresos altos.",
-    "invalidExemption": "El importe exento no puede ser negativo."
+    "invalidExemption": "El importe exento no puede ser negativo.",
+    "reductionLighter": "La reducción debe ser más leve: una amonestación o la misma sanción con menor valor."
   },
   "pageLoad": {
     "title": "Esta página necesita conexión",
