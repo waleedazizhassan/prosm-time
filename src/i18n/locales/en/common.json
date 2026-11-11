@@ -370,7 +370,8 @@
     "insurableMinMax": "The maximum insurable wage must not be below the minimum.",
     "invalidTier": "Check the high-income tiers.",
     "invalidExemption": "The exempt amount cannot be negative.",
-    "reductionLighter": "A reduction must be lighter: a warning, or the same penalty with a smaller value."
+    "reductionLighter": "A reduction must be lighter: a warning, or the same penalty with a smaller value.",
+    "legalNameRequired": "Enter the full legal name."
   },
   "pageLoad": {
     "title": "This page needs a connection",
@@ -446,7 +447,8 @@
   "planLocked": {
     "text": "This is part of the {{plan}} plan.",
     "seePlan": "See the plan",
-    "askOwner": "Ask your organisation’s owner."
+    "askOwner": "Ask your organisation’s owner.",
+    "textAbove": "Available from the {{plan}} plan and above."
   },
   "issuedVia": "Issued via",
   "feedback": {

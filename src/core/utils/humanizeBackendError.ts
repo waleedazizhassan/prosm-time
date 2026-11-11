@@ -420,6 +420,7 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "ENTER THE WITNESS NAME": "witnessRequired",
   "WRITE THE REASON FOR THE APPEAL": "appealReasonRequired",
   "A REDUCTION MUST BE LIGHTER": "reductionLighter",
+  "ENTER THE FULL LEGAL NAME": "legalNameRequired",
   "NOT FOUND": "notFound",
   // 2026-11-10: Buzz
   "BUZZ TOO SOON": "buzzTooSoon",

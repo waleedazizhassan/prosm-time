@@ -91,7 +91,7 @@
     "actionLabel": "Invitar empleado",
     "title": "Invitar a un empleado",
     "emailLabel": "Correo",
-    "fullNameLabel": "Nombre completo",
+    "fullNameLabel": "Nombre corto",
     "roleLabel": "Rol",
     "role": {
       "manager": "Responsable / Responsable de sede",
@@ -108,10 +108,14 @@
     "copyLinkAction": "Copiar enlace",
     "linkCopied": "Enlace copiado",
     "codeLabel": "Código de verificación",
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "legalNameLabel": "Nombre legal completo",
+    "legalNameHint": "Como figura en documentos oficiales: se usa en nóminas e informes.",
+    "shortNameHint": "El nombre que aparece en la app.",
+    "legalNameNotSaved": "Se envió la invitación, pero no se guardó el nombre legal. Añádelo desde la ficha del usuario."
   },
   "detail": {
-    "title": "Miembro",
+    "title": "Ficha del usuario",
     "backToList": "Volver a Personas",
     "loadError": "No se pudo cargar este miembro.",
     "permissionsTitle": "Permisos",
@@ -346,7 +350,8 @@
       "attendance": "Asistencia",
       "leave": "Permisos",
       "penalties": "Sanciones e incentivos",
-      "history": "Historial"
+      "history": "Historial",
+      "account": "Cuenta y permisos"
     },
     "fields": {
       "jobTitle": "Puesto",
@@ -356,7 +361,8 @@
       "emergency_contact_phone": "Teléfono de emergencia",
       "national_id": "Documento de identidad",
       "birth_date": "Fecha de nacimiento",
-      "address": "Dirección"
+      "address": "Dirección",
+      "legalName": "Nombre legal completo"
     },
     "contracts": {
       "empty": "No hay contratos.",
@@ -415,5 +421,42 @@
       "more": "Ver anteriores"
     },
     "missing_many": "Faltan {{count}} documentos"
+  },
+  "bundles": {
+    "hint": "Concede un rol completo con un clic, o permisos sueltos de la lista. Lo que concede un rol aparece concedido en la lista al instante y nunca se concede dos veces.",
+    "grant": "Conceder",
+    "revoke": "Retirar",
+    "granted": "Concedido por completo",
+    "partial": "{{held}} de {{total}} concedidos",
+    "grantNote": "Solo se concede lo que la persona aún no tiene.",
+    "revokeNote": "Solo se retira lo concedido además de su rol; lo del rol se mantiene.",
+    "owner": {
+      "title": "Autoridad del propietario",
+      "hint": "La autoridad completa del propietario, en su nombre"
+    },
+    "finance": {
+      "title": "Director financiero",
+      "hint": "Nómina, complementos, costes laborales e informes"
+    },
+    "hr": {
+      "title": "Director de RR. HH.",
+      "hint": "Fichas, permisos, departamentos y anuncios"
+    },
+    "attendance": {
+      "title": "Solo asistencia",
+      "hint": "Registros, correcciones, excepciones y hojas de horas"
+    },
+    "sites": {
+      "title": "Gestión de centros",
+      "hint": "Centros, turnos, calendario y mano de obra externa"
+    },
+    "reports": {
+      "title": "Informes",
+      "hint": "Panel, informes y registro de acciones"
+    },
+    "media": {
+      "title": "Centro de medios",
+      "hint": "Publicar y gestionar anuncios"
+    }
   }
 }

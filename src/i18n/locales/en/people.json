@@ -91,7 +91,7 @@
     "actionLabel": "Invite employee",
     "title": "Invite an employee",
     "emailLabel": "Email",
-    "fullNameLabel": "Full name",
+    "fullNameLabel": "Short name",
     "roleLabel": "Role",
     "role": {
       "manager": "Manager / Site Manager",
@@ -108,10 +108,14 @@
     "copyLinkAction": "Copy link",
     "linkCopied": "Link copied",
     "codeLabel": "Verification code",
-    "close": "Close"
+    "close": "Close",
+    "legalNameLabel": "Full legal name",
+    "legalNameHint": "As written on official papers: used on payslips and reports.",
+    "shortNameHint": "The name shown in the app.",
+    "legalNameNotSaved": "The invitation was sent, but the legal name was not saved. Add it from the user file."
   },
   "detail": {
-    "title": "Member",
+    "title": "User file",
     "backToList": "Back to people",
     "loadError": "Unable to load this member.",
     "permissionsTitle": "Permissions",
@@ -346,7 +350,8 @@
       "attendance": "Attendance",
       "leave": "Leave",
       "penalties": "Penalties & incentives",
-      "history": "History"
+      "history": "History",
+      "account": "Account and permissions"
     },
     "fields": {
       "jobTitle": "Job title",
@@ -356,7 +361,8 @@
       "emergency_contact_phone": "Emergency phone",
       "national_id": "National ID",
       "birth_date": "Date of birth",
-      "address": "Address"
+      "address": "Address",
+      "legalName": "Full legal name (official papers)"
     },
     "contracts": {
       "empty": "No contracts recorded.",
@@ -412,6 +418,43 @@
     "history": {
       "empty": "No changes recorded yet.",
       "more": "Show older"
+    }
+  },
+  "bundles": {
+    "hint": "Grant a whole role in one click, or single permissions from the list. What a role grants shows as granted in the list at once and is never granted twice.",
+    "grant": "Grant",
+    "revoke": "Take back",
+    "granted": "Fully granted",
+    "partial": "{{held}} of {{total}} granted",
+    "grantNote": "Only what the person does not hold yet is granted.",
+    "revokeNote": "Only permissions given on top of their role are taken back; the role's own stay.",
+    "owner": {
+      "title": "Organisation owner's authority",
+      "hint": "The owner's full authority, on their behalf"
+    },
+    "finance": {
+      "title": "Finance manager",
+      "hint": "Payroll, allowances, labour costs and reports"
+    },
+    "hr": {
+      "title": "HR manager",
+      "hint": "Personnel files, leave, departments and announcements"
+    },
+    "attendance": {
+      "title": "Attendance only",
+      "hint": "Records, corrections, exceptions and timesheets"
+    },
+    "sites": {
+      "title": "Sites management",
+      "hint": "Sites, shifts, calendar and external labour"
+    },
+    "reports": {
+      "title": "Reports",
+      "hint": "Dashboard, reports and the action log"
+    },
+    "media": {
+      "title": "Media Center",
+      "hint": "Publish and manage announcements, follow reading"
     }
   }
 }

@@ -91,7 +91,7 @@
     "actionLabel": "Inviter un employé",
     "title": "Inviter un employé",
     "emailLabel": "E-mail",
-    "fullNameLabel": "Nom complet",
+    "fullNameLabel": "Nom court",
     "roleLabel": "Rôle",
     "role": {
       "manager": "Manager / Responsable de site",
@@ -108,10 +108,14 @@
     "copyLinkAction": "Copier le lien",
     "linkCopied": "Lien copié",
     "codeLabel": "Code de vérification",
-    "close": "Fermer"
+    "close": "Fermer",
+    "legalNameLabel": "Nom légal complet",
+    "legalNameHint": "Tel qu'écrit sur les documents officiels : utilisé sur les bulletins et rapports.",
+    "shortNameHint": "Le nom affiché dans l'application.",
+    "legalNameNotSaved": "L'invitation a été envoyée, mais le nom légal n'a pas été enregistré. Ajoutez-le depuis le dossier de l'utilisateur."
   },
   "detail": {
-    "title": "Membre",
+    "title": "Dossier de l'utilisateur",
     "backToList": "Retour aux personnes",
     "loadError": "Impossible de charger ce membre.",
     "permissionsTitle": "Autorisations",
@@ -346,7 +350,8 @@
       "attendance": "Présence",
       "leave": "Congés",
       "penalties": "Sanctions et primes",
-      "history": "Historique"
+      "history": "Historique",
+      "account": "Compte et droits"
     },
     "fields": {
       "jobTitle": "Poste",
@@ -356,7 +361,8 @@
       "emergency_contact_phone": "Téléphone d’urgence",
       "national_id": "N° d’identité",
       "birth_date": "Date de naissance",
-      "address": "Adresse"
+      "address": "Adresse",
+      "legalName": "Nom légal complet"
     },
     "contracts": {
       "empty": "Aucun contrat enregistré.",
@@ -415,5 +421,42 @@
       "more": "Voir les plus anciens"
     },
     "missing_many": "Il manque {{count}} documents"
+  },
+  "bundles": {
+    "hint": "Accordez un rôle entier en un clic, ou des droits isolés dans la liste. Ce qu'un rôle accorde apparaît aussitôt comme accordé et n'est jamais accordé deux fois.",
+    "grant": "Accorder",
+    "revoke": "Retirer",
+    "granted": "Entièrement accordé",
+    "partial": "{{held}} sur {{total}} accordés",
+    "grantNote": "Seul ce que la personne n'a pas encore est accordé.",
+    "revokeNote": "Seuls les droits ajoutés à son rôle sont retirés ; ceux du rôle restent.",
+    "owner": {
+      "title": "Autorité du propriétaire",
+      "hint": "L'autorité complète du propriétaire, en son nom"
+    },
+    "finance": {
+      "title": "Directeur financier",
+      "hint": "Paie, indemnités, coûts de main-d'œuvre et rapports"
+    },
+    "hr": {
+      "title": "Directeur RH",
+      "hint": "Dossiers, congés, départements et annonces"
+    },
+    "attendance": {
+      "title": "Présence uniquement",
+      "hint": "Pointages, corrections, exceptions et feuilles de temps"
+    },
+    "sites": {
+      "title": "Gestion des sites",
+      "hint": "Sites, équipes, calendrier et main-d'œuvre externe"
+    },
+    "reports": {
+      "title": "Rapports",
+      "hint": "Tableau de bord, rapports et journal"
+    },
+    "media": {
+      "title": "Centre médias",
+      "hint": "Publier et gérer les annonces"
+    }
   }
 }

@@ -358,7 +358,12 @@
     "appliesToAllLabel": "Se aplica a todos los empleados",
     "defaultAmount": "Importe por defecto",
     "appliesToAllHint": "Se añade en cada ciclo nuevo a todos los que tienen ficha de nómina. Si la persona tiene un valor propio, se usa ese.",
-    "preTaxLabel": "Se resta de la base imponible (antes del impuesto)"
+    "preTaxLabel": "Se resta de la base imponible (antes del impuesto)",
+    "remove": "Quitar",
+    "restore": "Restaurar",
+    "removeConfirm": "¿Quitar el concepto «{{name}}»? Sale de las fichas salariales y de los ciclos abiertos; los aprobados lo conservan.",
+    "removed": "Concepto quitado.",
+    "restored": "Concepto restaurado."
   },
   "requests": {
     "hint": "Recibos que pidió su equipo. Un clic envía el recibo aprobado y guardado en PDF al correo registrado: la misma versión, sin recalcular.",

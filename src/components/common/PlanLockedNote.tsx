@@ -12,7 +12,8 @@ export default function PlanLockedNote({ plan }: { plan: "business" | "pro" | "e
   return (
     <p style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", flexWrap: "wrap", margin: 0, fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>
       <Lock size={14} aria-hidden="true" />
-      <span>{t("planLocked.text", { plan: plan === "enterprise" ? "Enterprise" : plan === "pro" ? "Pro" : "Business" })}</span>
+      {/* owner 2026-11-12: what Business has, Pro and Enterprise have too - the note says "and above" */}
+      <span>{plan === "enterprise" ? t("planLocked.text", { plan: "Enterprise" }) : t("planLocked.textAbove", { plan: plan === "pro" ? "Pro" : "Business" })}</span>
       {profile?.isOwner ? <Link to="/settings#plan">{t("planLocked.seePlan")}</Link> : <span>{t("planLocked.askOwner")}</span>}
     </p>
   );

@@ -370,7 +370,8 @@
     "insurableMinMax": "O salário de contribuição máximo não pode ser menor que o mínimo.",
     "invalidTier": "Revise as faixas de rendas altas.",
     "invalidExemption": "O valor isento não pode ser negativo.",
-    "reductionLighter": "A redução deve ser mais leve: uma advertência ou a mesma penalidade com valor menor."
+    "reductionLighter": "A redução deve ser mais leve: uma advertência ou a mesma penalidade com valor menor.",
+    "legalNameRequired": "Informe o nome legal completo."
   },
   "pageLoad": {
     "title": "Esta página precisa de conexão",
@@ -446,7 +447,8 @@
   "planLocked": {
     "text": "Isto faz parte do plano {{plan}}.",
     "seePlan": "Ver o plano",
-    "askOwner": "Fale com o proprietário da sua organização."
+    "askOwner": "Fale com o proprietário da sua organização.",
+    "textAbove": "Disponível a partir do plano {{plan}}."
   },
   "issuedVia": "Emitido através de",
   "feedback": {

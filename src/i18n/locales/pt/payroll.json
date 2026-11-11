@@ -358,7 +358,12 @@
     "appliesToAllLabel": "Aplica-se a todos os trabalhadores",
     "defaultAmount": "Montante predefinido",
     "appliesToAllHint": "Adicionado em cada novo ciclo para todos com ficha salarial. Se a pessoa tiver valor próprio, usa-se esse.",
-    "preTaxLabel": "Deduzido da base tributável (antes do imposto)"
+    "preTaxLabel": "Deduzido da base tributável (antes do imposto)",
+    "remove": "Remover",
+    "restore": "Restaurar",
+    "removeConfirm": "Remover o item \"{{name}}\"? Ele sai das fichas salariais e dos ciclos abertos; ciclos aprovados o mantêm.",
+    "removed": "Item removido.",
+    "restored": "Item restaurado."
   },
   "requests": {
     "hint": "Recibos pedidos pela sua equipa. Um clique envia o recibo aprovado e guardado em PDF para o e-mail registado: a mesma versão, sem recalcular.",

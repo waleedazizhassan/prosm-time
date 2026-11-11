@@ -358,7 +358,12 @@
     "appliesToAllLabel": "S'applique à tous les employés",
     "defaultAmount": "Montant par défaut",
     "appliesToAllHint": "Ajouté dans chaque nouveau cycle pour toute personne ayant un profil de paie. Sa propre valeur, si elle existe, prime.",
-    "preTaxLabel": "Déduit de la base imposable (avant l'impôt)"
+    "preTaxLabel": "Déduit de la base imposable (avant l'impôt)",
+    "remove": "Retirer",
+    "restore": "Rétablir",
+    "removeConfirm": "Retirer l'élément « {{name}} » ? Il quitte les fiches de paie et les cycles ouverts ; les cycles approuvés le gardent.",
+    "removed": "Élément retiré.",
+    "restored": "Élément rétabli."
   },
   "requests": {
     "hint": "Bulletins demandés par votre équipe. Un clic envoie le bulletin approuvé et enregistré en PDF à l'e-mail enregistré - même version, rien n'est recalculé.",

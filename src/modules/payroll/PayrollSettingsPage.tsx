@@ -16,6 +16,7 @@ import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
 import { payrollError } from "./payrollUi";
 import SuccessText from "../../components/common/SuccessText";
+import useConfirm from "../../components/common/useConfirm";
 
 type Draft = Partial<PayrollComponent> & { name_ar: string };
 const EMPTY: Draft = { name_ar: "", name_en: "", category: "earning", source: "variable", calc_type: "amount", include_in_net: true, include_in_combined: false, prorate: false, is_basic: false, sort_order: 100, is_active: true, taxable: true, insurable: false, applies_to_all: false, default_amount: null };
@@ -33,6 +34,7 @@ export default function PayrollSettingsPage() {
   const [saved, setSaved] = useState(false);
   // Owner 2026-11-10: an item's save is said plainly; its errors show inside its window
   const [notice, setNotice] = useState("");
+  const [confirm, confirmDialog] = useConfirm();
   const [draftError, setDraftError] = useState("");
   const [busy, setBusy] = useState("");
   const [draft, setDraft] = useState<{ id: string | null; value: Draft } | null>(null);
@@ -66,7 +68,26 @@ export default function PayrollSettingsPage() {
     { key: "calc", header: t("components.calc"), render: (c) => (c.calc_type === "percent" ? `${c.percent}% · ${t(`components.bases.${c.percent_base}`)}` : t("components.amountType")) },
     { key: "net", header: t("components.inNet"), render: (c) => (c.include_in_net ? t("components.yes") : <StatusBadge status="neutral">{t("lines.outsideNet")}</StatusBadge>) },
     { key: "flags", header: "", render: (c) => [c.is_basic ? t("components.basic") : null, c.prorate ? t("components.prorated") : null, c.include_in_combined ? t("components.inCombined") : null, !c.is_active ? t("components.inactive") : null].filter(Boolean).join(" · ") },
+    // owner 2026-11-11: as an item can be added, it can be removed (it leaves the salary cards and open cycles; history stays)
+    { key: "remove", header: "", render: (c) => (c.is_basic ? null : (
+      <span onClick={(event) => event.stopPropagation()}>
+        {c.is_active
+          ? <Button size="xs" variant="ghost" loading={busy === `rm${c.id}`} onClick={() => void setActive(c, false)}>{t("components.remove")}</Button>
+          : <Button size="xs" variant="ghost" loading={busy === `rm${c.id}`} onClick={() => void setActive(c, true)}>{t("components.restore")}</Button>}
+      </span>
+    )) },
   ];
+
+  const setActive = async (c: PayrollComponent, active: boolean) => {
+    if (!active && !(await confirm(t("components.removeConfirm", { name: isRtl ? c.name_ar : c.name_en || c.name_ar })))) return;
+    setBusy(`rm${c.id}`);
+    setError("");
+    const result = await PayrollCycleRepository.saveComponent(c.id, { ...c, is_active: active });
+    setBusy("");
+    if (result.error) { setError(payrollError(result.error, t)); return; }
+    setNotice(active ? t("components.restored") : t("components.removed"));
+    await load();
+  };
 
   const saveComponent = async () => {
     if (!draft) return;
@@ -212,6 +233,7 @@ export default function PayrollSettingsPage() {
           </>
         ) : null}
       </Modal>
+      {confirmDialog}
     </PageShell>
   );
 }

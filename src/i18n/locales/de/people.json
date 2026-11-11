@@ -91,7 +91,7 @@
     "actionLabel": "Mitarbeiter einladen",
     "title": "Einen Mitarbeiter einladen",
     "emailLabel": "E-Mail",
-    "fullNameLabel": "Vollständiger Name",
+    "fullNameLabel": "Kurzname",
     "roleLabel": "Rolle",
     "role": {
       "manager": "Manager / Standortleiter",
@@ -108,10 +108,14 @@
     "copyLinkAction": "Link kopieren",
     "linkCopied": "Link kopiert",
     "codeLabel": "Verifizierungscode",
-    "close": "Schließen"
+    "close": "Schließen",
+    "legalNameLabel": "Vollständiger amtlicher Name",
+    "legalNameHint": "Wie in amtlichen Dokumenten: für Lohnabrechnungen und Berichte.",
+    "shortNameHint": "Der Name in der App.",
+    "legalNameNotSaved": "Die Einladung wurde gesendet, der amtliche Name aber nicht gespeichert. Fügen Sie ihn in der Benutzerakte hinzu."
   },
   "detail": {
-    "title": "Mitglied",
+    "title": "Benutzerakte",
     "backToList": "Zurück zu Personen",
     "loadError": "Dieses Mitglied konnte nicht geladen werden.",
     "permissionsTitle": "Berechtigungen",
@@ -346,7 +350,8 @@
       "attendance": "Anwesenheit",
       "leave": "Urlaub",
       "penalties": "Sanktionen & Prämien",
-      "history": "Verlauf"
+      "history": "Verlauf",
+      "account": "Konto und Rechte"
     },
     "fields": {
       "jobTitle": "Stelle",
@@ -356,7 +361,8 @@
       "emergency_contact_phone": "Notfallnummer",
       "national_id": "Ausweisnummer",
       "birth_date": "Geburtsdatum",
-      "address": "Adresse"
+      "address": "Adresse",
+      "legalName": "Vollständiger amtlicher Name"
     },
     "contracts": {
       "empty": "Keine Verträge erfasst.",
@@ -412,6 +418,43 @@
     "history": {
       "empty": "Noch keine Änderungen.",
       "more": "Ältere anzeigen"
+    }
+  },
+  "bundles": {
+    "hint": "Eine ganze Rolle mit einem Klick vergeben oder Einzelrechte aus der Liste. Was eine Rolle vergibt, erscheint sofort als vergeben und wird nie doppelt vergeben.",
+    "grant": "Vergeben",
+    "revoke": "Entziehen",
+    "granted": "Vollständig vergeben",
+    "partial": "{{held}} von {{total}} vergeben",
+    "grantNote": "Vergeben wird nur, was die Person noch nicht hat.",
+    "revokeNote": "Entzogen wird nur, was über die Rolle hinaus vergeben wurde.",
+    "owner": {
+      "title": "Befugnis des Inhabers",
+      "hint": "Die volle Befugnis des Inhabers, in seinem Namen"
+    },
+    "finance": {
+      "title": "Finanzleitung",
+      "hint": "Lohn, Zulagen, Arbeitskosten und Berichte"
+    },
+    "hr": {
+      "title": "Personalleitung",
+      "hint": "Personalakten, Urlaub, Abteilungen und Mitteilungen"
+    },
+    "attendance": {
+      "title": "Nur Anwesenheit",
+      "hint": "Erfassungen, Korrekturen, Ausnahmen und Zeitnachweise"
+    },
+    "sites": {
+      "title": "Standortverwaltung",
+      "hint": "Standorte, Schichten, Kalender und externe Arbeitskräfte"
+    },
+    "reports": {
+      "title": "Berichte",
+      "hint": "Dashboard, Berichte und Aktionsprotokoll"
+    },
+    "media": {
+      "title": "Medienzentrum",
+      "hint": "Mitteilungen veröffentlichen und verwalten"
     }
   }
 }

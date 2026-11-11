@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import BuzzButton from "../../components/common/BuzzButton";
 import styles from "./PersonDetailPage.module.css";
 import { useTranslation } from "react-i18next";
+import PermissionBundles from "./PermissionBundles";
 import { Link, Navigate, useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 import { useAuth } from "../../core/context/AuthContext";
@@ -40,7 +41,7 @@ import { AttendanceTab, HistoryTab, LeaveTab } from "./profile/ActivityTabs";
 import PayrollProfilesPage from "../payroll/PayrollProfilesPage";
 import { ProfileDocumentsTab, ProfilePenaltiesTab } from "./profile/LaterTabs";
 
-type ProfileTab = "data" | "contract" | "documents" | "payroll" | "attendance" | "leave" | "penalties" | "history";
+type ProfileTab = "data" | "account" | "contract" | "documents" | "payroll" | "attendance" | "leave" | "penalties" | "history";
 
 const MANAGER_ONLY_PERMISSIONS = ["leave.approve", "attendance.clock_in_on_behalf", "attendance.clock_out_on_behalf"];
 
@@ -315,6 +316,8 @@ export default function PersonDetailPage() {
   const seesPay = access === "full" && (Boolean(profile?.isOwner) || hasPermission("payroll.manage_profiles"));
   const tabs: TabItem<ProfileTab>[] = [
     { key: "data", label: t("profile.tabs.data") },
+    // owner 2026-11-12: the role, permissions, devices and access on their own tab - the data tab stays the person's data
+    ...(access !== "self" ? [{ key: "account" as const, label: t("profile.tabs.account") }] : []),
     ...(access !== "manager" ? [{ key: "contract" as const, label: t("profile.tabs.contract") }] : []),
     ...(access !== "manager" ? [{ key: "documents" as const, label: t("profile.tabs.documents"), locked: !allows("documents") }] : []),
     ...(seesPay ? [{ key: "payroll" as const, label: t("profile.tabs.payroll"), locked: !allows("payroll") }] : []),
@@ -333,7 +336,7 @@ export default function PersonDetailPage() {
   const lockedPlan = (key: ProfileTab) => (key === "payroll" ? "pro" : "business");
 
   return (
-    <PageShell title="">
+    <PageShell title={t("detail.title")} compact>
       <Link to="/people" style={{ color: "var(--text-link)", fontSize: "var(--font-sm)" }}>
         {t("detail.backToList")}
       </Link>
@@ -389,6 +392,13 @@ export default function PersonDetailPage() {
       {userId && (canEditLeaveEntitlement || hasPermission("employees.edit")) ? (
         <EmploymentDetailsCard userId={userId} canEdit={Boolean(profile?.isOwner) || hasPermission("employees.edit")} />
       ) : null}
+      </div>
+      </>
+      ) : null}
+
+      {tab === "account" ? (
+      <>
+      <div className={styles.cards}>
       {/* 2026-11-09 B-01: change the role (the server decides who may and for which role) */}
       {!member.isOwner && member.id !== profile?.id && (profile?.isRealOwner || hasPermission("permissions.assign")) ? (
         <RoleChangeCard key={member.roleKey} userId={member.id} currentRole={member.roleKey} onChanged={() => void load()} />
@@ -396,6 +406,10 @@ export default function PersonDetailPage() {
       {canManagePermissions ? (
         <Card title={t("detail.permissionsTitle")} className="wide">
           <HintText small>{t("detail.permissionsHint")}</HintText>
+          {!member.isOwner && userId ? (
+            <PermissionBundles userId={userId} effective={effective} overrides={overrides} catalogKeys={catalog.map((p) => p.permissionKey)}
+              canChange={canChangePermission} canGrantOwner={Boolean(profile?.isRealOwner) && allows("delegation") && member.id !== profile?.id} onChanged={() => void load()} />
+          ) : null}
 
           {member.isOwner ? (
             <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>

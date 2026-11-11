@@ -55,7 +55,8 @@ export default function ExternalWorkersPage() {
   const [overrideDraft, setOverrideDraft] = useState<{ workerId: string; reason: string } | null>(null);
   const [rowError, setRowError] = useState("");
   // Owner 2026-10-21: edit a worker's name and contractor, or delete one added by mistake.
-  const [editing, setEditing] = useState<{ worker: ExternalWorker; name: string; contractor: string } | null>(null);
+  // owner 2026-11-11: editing a worker includes their pay - a higher or lower day rate, or another period (weekly, monthly...)
+  const [editing, setEditing] = useState<{ worker: ExternalWorker; name: string; contractor: string; rate: string; unit: RateUnit; currency: string; from: string } | null>(null);
   const [editError, setEditError] = useState("");
   const [savingEdit, setSavingEdit] = useState(false);
 
@@ -139,6 +140,19 @@ export default function ExternalWorkersPage() {
       setEditError(humanizeBackendError(result.message, t) ?? t("updateError"));
       return;
     }
+    const current = rates[editing.worker.id];
+    const rateChanged = canSetPay && editing.rate.trim() !== "" && Number(editing.rate) > 0
+      && (!current || Number(current.amount) !== Number(editing.rate) || current.unit !== editing.unit || current.currency !== editing.currency.trim().toUpperCase());
+    if (rateChanged) {
+      setSavingEdit(true);
+      const rate = await ExternalLaborRepository.setRate(editing.worker.id, Number(editing.rate), editing.currency.trim().toUpperCase() || "EGP", editing.unit, editing.from);
+      setSavingEdit(false);
+      if (rate.error) {
+        setEditError(humanizeBackendError(rate.error, t) ?? rate.error);
+        void load();
+        return;
+      }
+    }
     setEditing(null);
     void load();
   };
@@ -206,7 +220,9 @@ export default function ExternalWorkersPage() {
               {t("clockOutAction")}
             </Button>
           ) : null}
-          <Button variant="ghost" size="xs" onClick={() => setEditing({ worker, name: worker.fullName, contractor: worker.contractorName ?? "" })} disabled={busyId === worker.id}>
+          <Button variant="ghost" size="xs" onClick={() => setEditing({ worker, name: worker.fullName, contractor: worker.contractorName ?? "",
+            rate: rates[worker.id] ? String(rates[worker.id]!.amount) : "", unit: (rates[worker.id]?.unit as RateUnit | undefined) ?? "DAILY",
+            currency: rates[worker.id]?.currency ?? "EGP", from: new Date().toLocaleDateString("en-CA") })} disabled={busyId === worker.id}>
             {t("editAction")}
           </Button>
           <Button variant="ghost" size="xs" onClick={() => setStatus(worker, worker.status === "active" ? "inactive" : "active")} loading={busyId === worker.id}>
@@ -310,6 +326,18 @@ export default function ExternalWorkersPage() {
         <HintText small>{t("editHint", { number: editing?.worker.workerNumber ?? "" })}</HintText>
         <Input label={t("nameLabel")} name="editWorkerName" value={editing?.name ?? ""} onChange={(event) => setEditing((current) => (current ? { ...current, name: event.target.value } : current))} />
         <Input label={t("contractorLabel")} name="editWorkerContractor" value={editing?.contractor ?? ""} onChange={(event) => setEditing((current) => (current ? { ...current, contractor: event.target.value } : current))} />
+        {canSetPay && editing ? (
+          <>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(8rem, 1fr))", gap: "var(--space-2)" }}>
+              <Input label={t("externalPay:rates.amount")} name="editWorkerRate" type="number" value={editing.rate} onChange={(event) => setEditing({ ...editing, rate: event.target.value })} />
+              <Select label={t("externalPay:rates.unit")} name="editWorkerRateUnit" value={editing.unit} onChange={(event) => setEditing({ ...editing, unit: event.target.value as RateUnit })}
+                options={(["DAILY", "WEEKLY", "MONTHLY", "HOURLY", "YEARLY"] as RateUnit[]).map((u) => ({ value: u, label: t(`externalPay:unit.${u}`) }))} />
+              <Input label={t("externalPay:rates.currency")} name="editWorkerRateCurrency" value={editing.currency} onChange={(event) => setEditing({ ...editing, currency: event.target.value.toUpperCase().slice(0, 3) })} />
+              <Input label={t("externalPay:rates.effectiveFrom")} name="editWorkerRateFrom" type="date" value={editing.from} onChange={(event) => setEditing({ ...editing, from: event.target.value })} />
+            </div>
+            <HintText small>{t("externalPay:rates.hint")}</HintText>
+          </>
+        ) : null}
         <ErrorText>{editError}</ErrorText>
       </Modal>
     </PageShell>

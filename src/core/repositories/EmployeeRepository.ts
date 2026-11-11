@@ -148,6 +148,17 @@ class EmployeeRepository {
     }
   }
 
+  /** owner 2026-11-12: the full legal name given at the invitation (payslips, reports, official papers) */
+  async setLegalName(userId: string, legalName: string): Promise<ServiceResult<null>> {
+    try {
+      const { error } = await this.client.rpc("set_prosm_time_user_legal_name", { p_user_id: userId, p_legal_name: legalName });
+      if (error) return createError(error.message);
+      return createSuccess(null);
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Employee service unavailable.");
+    }
+  }
+
   async inviteUser(input: InviteInput): Promise<ServiceResult<InviteResultData>> {
     try {
       const { data, error } = await this.client.functions.invoke("invite-user", { body: { ...input, language: i18n.language?.slice(0, 2) } });

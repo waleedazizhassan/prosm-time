@@ -358,7 +358,12 @@
     "appliesToAllLabel": "适用于所有员工",
     "defaultAmount": "默认金额",
     "appliesToAllHint": "每个新周期为所有有薪资档案的人添加；个人设置了自己的值时以个人值为准。",
-    "preTaxLabel": "计税前从应税工资中扣除"
+    "preTaxLabel": "计税前从应税工资中扣除",
+    "remove": "移除",
+    "restore": "恢复",
+    "removeConfirm": "移除项目“{{name}}”？它将从工资档案和未关闭的周期中移除；已批准的周期保留。",
+    "removed": "项目已移除。",
+    "restored": "项目已恢复。"
   },
   "requests": {
     "hint": "团队申请的工资单。一键将已核准并保存的工资单以 PDF 发送到登记邮箱——同一版本，不重新计算。",

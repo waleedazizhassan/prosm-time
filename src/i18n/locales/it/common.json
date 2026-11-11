@@ -370,7 +370,8 @@
     "insurableMinMax": "L'imponibile massimo non può essere inferiore al minimo.",
     "invalidTier": "Controlla gli scaglioni dei redditi alti.",
     "invalidExemption": "L'importo esente non può essere negativo.",
-    "reductionLighter": "La riduzione deve essere più lieve: un richiamo o la stessa sanzione con valore minore."
+    "reductionLighter": "La riduzione deve essere più lieve: un richiamo o la stessa sanzione con valore minore.",
+    "legalNameRequired": "Inserisci il nome legale completo."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",
@@ -446,7 +447,8 @@
   "planLocked": {
     "text": "Questa funzione fa parte del piano {{plan}}.",
     "seePlan": "Vedi il piano",
-    "askOwner": "Chiedi al titolare."
+    "askOwner": "Chiedi al titolare.",
+    "textAbove": "Disponibile dal piano {{plan}} in su."
   },
   "issuedVia": "Emesso tramite",
   "feedback": {

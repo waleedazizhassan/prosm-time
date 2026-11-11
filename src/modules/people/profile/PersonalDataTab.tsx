@@ -9,6 +9,7 @@ import ErrorText from "../../../components/common/ErrorText";
 import SuccessText from "../../../components/common/SuccessText";
 import humanizeBackendError from "../../../core/utils/humanizeBackendError";
 import { formatDateOnly } from "../../../core/utils/formatDate";
+import EmployeeRepository from "../../../core/repositories/EmployeeRepository";
 import EmployeeProfileRepository, { type EmployeeProfile, type JobTitle } from "../../../core/repositories/EmployeeProfileRepository";
 import styles from "./Profile.module.css";
 
@@ -26,6 +27,8 @@ export default function PersonalDataTab({ profile, onSaved }: { profile: Employe
     job_title_id: profile.header.jobTitleId ?? "", employment_status: profile.header.employmentStatus,
   };
   const [form, setForm] = useState(initial);
+  // owner 2026-11-12: the full legal name (payslips, reports, official papers) beside the short account name
+  const [legalName, setLegalName] = useState(profile.header.legalName ?? "");
   const [titles, setTitles] = useState<JobTitle[]>([]);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
@@ -40,6 +43,10 @@ export default function PersonalDataTab({ profile, onSaved }: { profile: Employe
     setError("");
     setSaved(false);
     const result = await EmployeeProfileRepository.saveHrData(profile.header.id, { ...form });
+    if (!result.error && legalName.trim() !== (profile.header.legalName ?? "")) {
+      const legal = await EmployeeRepository.setLegalName(profile.header.id, legalName.trim());
+      if (!legal.success) result.error = legal.message;
+    }
     setSaving(false);
     if (result.error) {
       setError(humanizeBackendError(result.error, t) ?? t("profile.saveError"));
@@ -51,6 +58,7 @@ export default function PersonalDataTab({ profile, onSaved }: { profile: Employe
 
   if (!profile.canEdit) {
     const facts: [string, string | null][] = [
+      [t("profile.fields.legalName"), profile.header.legalName],
       [t("profile.fields.jobTitle"), profile.header.jobTitle],
       [t("profile.fields.phone"), p.phone],
       [t("profile.fields.emergency_contact_name"), p.emergencyContactName],
@@ -80,6 +88,7 @@ export default function PersonalDataTab({ profile, onSaved }: { profile: Employe
   return (
     <Card title={t("profile.tabs.data")}>
       <div className={styles.grid}>
+        <Input label={t("profile.fields.legalName")} name="legalName" value={legalName} onChange={(event) => { setLegalName(event.target.value); setSaved(false); }} disabled={saving} />
         <Select label={t("profile.fields.jobTitle")} name="jobTitle" value={form.job_title_id}
           onChange={(event) => { setForm({ ...form, job_title_id: event.target.value }); setSaved(false); }}
           options={[{ value: "", label: titles.length ? t("profile.noJobTitle") : t("profile.noJobTitlesYet") },

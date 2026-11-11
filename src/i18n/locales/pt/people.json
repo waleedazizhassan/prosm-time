@@ -91,7 +91,7 @@
     "actionLabel": "Convidar funcionário",
     "title": "Convidar um funcionário",
     "emailLabel": "E-mail",
-    "fullNameLabel": "Nome completo",
+    "fullNameLabel": "Nome curto",
     "roleLabel": "Função",
     "role": {
       "manager": "Gerente / Gerente de unidade",
@@ -108,10 +108,14 @@
     "copyLinkAction": "Copiar link",
     "linkCopied": "Link copiado",
     "codeLabel": "Código de verificação",
-    "close": "Fechar"
+    "close": "Fechar",
+    "legalNameLabel": "Nome legal completo",
+    "legalNameHint": "Como nos documentos oficiais: usado em holerites e relatórios.",
+    "shortNameHint": "O nome exibido no app.",
+    "legalNameNotSaved": "O convite foi enviado, mas o nome legal não foi salvo. Adicione-o na ficha do usuário."
   },
   "detail": {
-    "title": "Membro",
+    "title": "Ficha do usuário",
     "backToList": "Voltar a Pessoas",
     "loadError": "Não foi possível carregar este membro.",
     "permissionsTitle": "Permissões",
@@ -346,7 +350,8 @@
       "attendance": "Presença",
       "leave": "Férias",
       "penalties": "Sanções e incentivos",
-      "history": "Histórico"
+      "history": "Histórico",
+      "account": "Conta e permissões"
     },
     "fields": {
       "jobTitle": "Cargo",
@@ -356,7 +361,8 @@
       "emergency_contact_phone": "Telefone de emergência",
       "national_id": "N.º de identificação",
       "birth_date": "Data de nascimento",
-      "address": "Morada"
+      "address": "Morada",
+      "legalName": "Nome legal completo"
     },
     "contracts": {
       "empty": "Sem contratos registados.",
@@ -415,5 +421,42 @@
       "more": "Ver anteriores"
     },
     "missing_many": "Faltam {{count}} documentos"
+  },
+  "bundles": {
+    "hint": "Conceda um papel inteiro com um clique ou permissões avulsas da lista. O que um papel concede aparece concedido na lista na hora e nunca é concedido duas vezes.",
+    "grant": "Conceder",
+    "revoke": "Retirar",
+    "granted": "Totalmente concedido",
+    "partial": "{{held}} de {{total}} concedidos",
+    "grantNote": "Só é concedido o que a pessoa ainda não tem.",
+    "revokeNote": "Só é retirado o que foi dado além do papel; as do papel ficam.",
+    "owner": {
+      "title": "Autoridade do proprietário",
+      "hint": "A autoridade total do proprietário, em seu nome"
+    },
+    "finance": {
+      "title": "Gerente financeiro",
+      "hint": "Folha, adicionais, custos de mão de obra e relatórios"
+    },
+    "hr": {
+      "title": "Gerente de RH",
+      "hint": "Fichas, férias, departamentos e comunicados"
+    },
+    "attendance": {
+      "title": "Somente ponto",
+      "hint": "Registros, correções, exceções e folhas de horas"
+    },
+    "sites": {
+      "title": "Gestão de locais",
+      "hint": "Locais, turnos, calendário e mão de obra externa"
+    },
+    "reports": {
+      "title": "Relatórios",
+      "hint": "Painel, relatórios e registro de ações"
+    },
+    "media": {
+      "title": "Centro de mídia",
+      "hint": "Publicar e gerenciar comunicados"
+    }
   }
 }

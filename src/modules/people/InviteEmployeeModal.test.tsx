@@ -10,7 +10,7 @@ vi.mock("../../core/context/AuthContext", () => ({
 }));
 
 vi.mock("../../core/repositories/EmployeeRepository", () => ({
-  default: { inviteUser: vi.fn() },
+  default: { inviteUser: vi.fn(), setLegalName: vi.fn().mockResolvedValue({ success: true, message: null, data: null }) },
 }));
 
 // 2026-11-09: the form offers the organisation's departments (none here)
@@ -39,7 +39,8 @@ describe("InviteEmployeeModal", () => {
     render(<InviteEmployeeModal isOpen onClose={() => {}} onInvited={() => {}} />);
 
     fireEvent.change(screen.getByLabelText(/Email/i), { target: { value: "morgan@acme.example" } });
-    fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: "Morgan Manager" } });
+    fireEvent.change(screen.getByLabelText(/Full legal name/i), { target: { value: "Morgan Adam Lee Manager" } });
+    fireEvent.change(screen.getByLabelText(/Short name/i), { target: { value: "Morgan Manager" } });
     // the role list is the app's own drop-down (owner 2026-10-26)
     fireEvent.click(screen.getByLabelText(/Role/i));
     fireEvent.click(screen.getByRole("option", { name: /manager/i }));
@@ -69,7 +70,8 @@ describe("InviteEmployeeModal", () => {
     render(<InviteEmployeeModal isOpen onClose={() => {}} onInvited={() => {}} />);
 
     fireEvent.change(screen.getByLabelText(/Email/i), { target: { value: "morgan@acme.example" } });
-    fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: "Morgan Manager" } });
+    fireEvent.change(screen.getByLabelText(/Full legal name/i), { target: { value: "Morgan Adam Lee Manager" } });
+    fireEvent.change(screen.getByLabelText(/Short name/i), { target: { value: "Morgan Manager" } });
     fireEvent.click(screen.getByRole("button", { name: /Send invitation/i }));
 
     expect(await screen.findByText("A user with this email already exists in this organization.")).toBeInTheDocument();

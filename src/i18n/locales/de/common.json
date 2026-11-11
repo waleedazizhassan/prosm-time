@@ -370,7 +370,8 @@
     "insurableMinMax": "Das Höchstentgelt darf nicht unter dem Mindestentgelt liegen.",
     "invalidTier": "Prüfen Sie die Stufen für hohe Einkommen.",
     "invalidExemption": "Der Freibetrag darf nicht negativ sein.",
-    "reductionLighter": "Eine Milderung muss leichter sein: eine Abmahnung oder dieselbe Sanktion mit kleinerem Wert."
+    "reductionLighter": "Eine Milderung muss leichter sein: eine Abmahnung oder dieselbe Sanktion mit kleinerem Wert.",
+    "legalNameRequired": "Geben Sie den vollständigen amtlichen Namen ein."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",
@@ -446,7 +447,8 @@
   "planLocked": {
     "text": "Diese Funktion gehört zum Paket {{plan}}.",
     "seePlan": "Paket ansehen",
-    "askOwner": "Fragen Sie den Inhaber."
+    "askOwner": "Fragen Sie den Inhaber.",
+    "textAbove": "Verfügbar ab dem Tarif {{plan}} und höher."
   },
   "issuedVia": "Erstellt mit",
   "feedback": {

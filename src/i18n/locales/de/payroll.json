@@ -358,7 +358,12 @@
     "appliesToAllLabel": "Gilt für alle Mitarbeitenden",
     "defaultAmount": "Standardbetrag",
     "appliesToAllHint": "Wird in jedem neuen Zyklus für alle mit Gehaltsprofil hinzugefügt. Hat eine Person einen eigenen Wert, gilt dieser.",
-    "preTaxLabel": "Vor der Lohnsteuer abziehen"
+    "preTaxLabel": "Vor der Lohnsteuer abziehen",
+    "remove": "Entfernen",
+    "restore": "Wiederherstellen",
+    "removeConfirm": "Bestandteil „{{name}}“ entfernen? Er verschwindet aus Gehaltskarten und offenen Läufen; genehmigte Läufe behalten ihn.",
+    "removed": "Bestandteil entfernt.",
+    "restored": "Bestandteil wiederhergestellt."
   },
   "requests": {
     "hint": "Von Ihrem Team angeforderte Abrechnungen. Ein Klick sendet die genehmigte, gespeicherte Abrechnung als PDF an die registrierte E-Mail - dieselbe Version, nichts wird neu berechnet.",

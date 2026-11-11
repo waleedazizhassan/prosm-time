@@ -91,7 +91,7 @@
     "actionLabel": "邀请员工",
     "title": "邀请员工",
     "emailLabel": "邮箱",
-    "fullNameLabel": "全名",
+    "fullNameLabel": "简称",
     "roleLabel": "角色",
     "role": {
       "manager": "经理 / 工地经理",
@@ -108,10 +108,14 @@
     "copyLinkAction": "复制链接",
     "linkCopied": "链接已复制",
     "codeLabel": "验证码",
-    "close": "关闭"
+    "close": "关闭",
+    "legalNameLabel": "完整法定姓名",
+    "legalNameHint": "与正式文件一致：用于工资单和报表。",
+    "shortNameHint": "在应用中显示的名称。",
+    "legalNameNotSaved": "邀请已发送，但法定姓名未保存。请在用户档案中补充。"
   },
   "detail": {
-    "title": "成员",
+    "title": "用户档案",
     "backToList": "返回人员",
     "loadError": "无法加载此成员。",
     "permissionsTitle": "权限",
@@ -345,7 +349,8 @@
       "attendance": "考勤",
       "leave": "假期",
       "penalties": "处罚与奖励",
-      "history": "记录"
+      "history": "记录",
+      "account": "账户与权限"
     },
     "fields": {
       "jobTitle": "职位",
@@ -355,7 +360,8 @@
       "emergency_contact_phone": "紧急联系电话",
       "national_id": "身份证号",
       "birth_date": "出生日期",
-      "address": "地址"
+      "address": "地址",
+      "legalName": "完整法定姓名"
     },
     "contracts": {
       "empty": "暂无合同。",
@@ -410,6 +416,43 @@
     "history": {
       "empty": "暂无变更记录。",
       "more": "查看更早"
+    }
+  },
+  "bundles": {
+    "hint": "一键授予整个角色，或在列表中授予单项权限。随角色授予的权限会立即在列表中显示为已授予，不会重复授予。",
+    "grant": "授予",
+    "revoke": "收回",
+    "granted": "已全部授予",
+    "partial": "已授予 {{held}}/{{total}}",
+    "grantNote": "只授予此人尚未拥有的权限。",
+    "revokeNote": "只收回在其角色之外额外授予的权限；角色本身的权限保留。",
+    "owner": {
+      "title": "组织所有者权限",
+      "hint": "代表所有者的全部权限"
+    },
+    "finance": {
+      "title": "财务经理",
+      "hint": "工资、津贴、人工成本和报表"
+    },
+    "hr": {
+      "title": "人力资源经理",
+      "hint": "员工档案、请假、部门和公告"
+    },
+    "attendance": {
+      "title": "仅考勤管理",
+      "hint": "记录、更正、例外和工时表"
+    },
+    "sites": {
+      "title": "工地管理",
+      "hint": "工地、班次、日历和外部劳务"
+    },
+    "reports": {
+      "title": "报表",
+      "hint": "仪表板、报表和操作日志"
+    },
+    "media": {
+      "title": "媒体中心",
+      "hint": "发布和管理公告"
     }
   }
 }

@@ -786,7 +786,7 @@ function Kpi({ icon: Icon, label, value, unit, hint, title, onClick, trend: chan
         <span className={styles.kpiIcon} aria-hidden="true"><Icon size={14} /></span>
         <span className={styles.kpiLabel}>{label}</span>
       </span>
-      <span className={styles.kpiValue}>{value}{unit ? <small className={styles.kpiUnit}> {unit}</small> : null}</span>
+      <span className={`${styles.kpiValue} ${String(value).length > 9 ? styles.kpiValueXLong : String(value).length > 5 ? styles.kpiValueLong : ""}`}>{value}{unit ? <small className={styles.kpiUnit}> {unit}</small> : null}</span>
       <span className={styles.kpiHint}>{hint}</span>
       <span className={styles.kpiFoot}>
         {progress !== undefined ? <span className={styles.bar} style={{ flex: 1 }}><span style={{ width: `${progress}%` }} /></span> : null}

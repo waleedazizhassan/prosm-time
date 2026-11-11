@@ -358,7 +358,12 @@
     "appliesToAllLabel": "Si applica a tutti i dipendenti",
     "defaultAmount": "Importo predefinito",
     "appliesToAllHint": "Aggiunto in ogni nuovo ciclo per chi ha un profilo paghe. Se la persona ha un proprio valore, vale quello.",
-    "preTaxLabel": "Dedotto dall'imponibile (prima dell'imposta)"
+    "preTaxLabel": "Dedotto dall'imponibile (prima dell'imposta)",
+    "remove": "Rimuovi",
+    "restore": "Ripristina",
+    "removeConfirm": "Rimuovere la voce «{{name}}»? Esce dalle schede paga e dai cicli aperti; i cicli approvati la mantengono.",
+    "removed": "Voce rimossa.",
+    "restored": "Voce ripristinata."
   },
   "requests": {
     "hint": "Buste paga richieste dal tuo team. Un clic invia la busta paga approvata e salvata in PDF all'email registrata: stessa versione, nulla ricalcolato.",

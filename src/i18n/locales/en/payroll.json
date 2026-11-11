@@ -358,7 +358,12 @@
     "appliesToAllLabel": "Applies to every employee",
     "defaultAmount": "Default amount",
     "appliesToAllHint": "Added in every new cycle for everyone with a payroll profile. A person's own value, when set, is used instead.",
-    "preTaxLabel": "Taken off the taxable pay (before the tax)"
+    "preTaxLabel": "Taken off the taxable pay (before the tax)",
+    "remove": "Remove",
+    "restore": "Restore",
+    "removeConfirm": "Remove the item \"{{name}}\"? It leaves the salary cards and open cycles; approved cycles keep it.",
+    "removed": "Item removed.",
+    "restored": "Item restored."
   },
   "requests": {
     "hint": "Payslips your team asked for. One click sends the approved, stored payslip as a PDF to the person's registered email - the same version, nothing recalculated.",

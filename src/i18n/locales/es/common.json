@@ -370,7 +370,8 @@
     "insurableMinMax": "El salario asegurable máximo no puede ser menor que el mínimo.",
     "invalidTier": "Revisa los tramos de ingresos altos.",
     "invalidExemption": "El importe exento no puede ser negativo.",
-    "reductionLighter": "La reducción debe ser más leve: una amonestación o la misma sanción con menor valor."
+    "reductionLighter": "La reducción debe ser más leve: una amonestación o la misma sanción con menor valor.",
+    "legalNameRequired": "Escribe el nombre legal completo."
   },
   "pageLoad": {
     "title": "Esta página necesita conexión",
@@ -446,7 +447,8 @@
   "planLocked": {
     "text": "Esto forma parte del plan {{plan}}.",
     "seePlan": "Ver el plan",
-    "askOwner": "Pregunta al propietario de tu organización."
+    "askOwner": "Pregunta al propietario de tu organización.",
+    "textAbove": "Disponible desde el plan {{plan}} en adelante."
   },
   "issuedVia": "Emitido con",
   "feedback": {

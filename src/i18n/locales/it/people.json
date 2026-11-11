@@ -91,7 +91,7 @@
     "actionLabel": "Invita dipendente",
     "title": "Invita un dipendente",
     "emailLabel": "Email",
-    "fullNameLabel": "Nome completo",
+    "fullNameLabel": "Nome breve",
     "roleLabel": "Ruolo",
     "role": {
       "manager": "Manager / Responsabile di sede",
@@ -108,10 +108,14 @@
     "copyLinkAction": "Copia link",
     "linkCopied": "Link copiato",
     "codeLabel": "Codice di verifica",
-    "close": "Chiudi"
+    "close": "Chiudi",
+    "legalNameLabel": "Nome legale completo",
+    "legalNameHint": "Come nei documenti ufficiali: usato in buste paga e report.",
+    "shortNameHint": "Il nome mostrato nell'app.",
+    "legalNameNotSaved": "L'invito è stato inviato, ma il nome legale non è stato salvato. Aggiungilo dal fascicolo dell'utente."
   },
   "detail": {
-    "title": "Membro",
+    "title": "Fascicolo dell'utente",
     "backToList": "Torna alle persone",
     "loadError": "Impossibile caricare questo membro.",
     "permissionsTitle": "Autorizzazioni",
@@ -346,7 +350,8 @@
       "attendance": "Presenze",
       "leave": "Ferie",
       "penalties": "Sanzioni e incentivi",
-      "history": "Storico"
+      "history": "Storico",
+      "account": "Account e permessi"
     },
     "fields": {
       "jobTitle": "Mansione",
@@ -356,7 +361,8 @@
       "emergency_contact_phone": "Telefono di emergenza",
       "national_id": "N. documento",
       "birth_date": "Data di nascita",
-      "address": "Indirizzo"
+      "address": "Indirizzo",
+      "legalName": "Nome legale completo"
     },
     "contracts": {
       "empty": "Nessun contratto registrato.",
@@ -415,5 +421,42 @@
       "more": "Mostra precedenti"
     },
     "missing_many": "Mancano {{count}} documenti"
+  },
+  "bundles": {
+    "hint": "Concedi un ruolo intero con un clic o permessi singoli dall'elenco. Ciò che concede un ruolo appare subito concesso e non viene mai concesso due volte.",
+    "grant": "Concedi",
+    "revoke": "Revoca",
+    "granted": "Concesso per intero",
+    "partial": "{{held}} di {{total}} concessi",
+    "grantNote": "Si concede solo ciò che la persona non ha ancora.",
+    "revokeNote": "Si revoca solo ciò che è stato dato oltre il ruolo; quelli del ruolo restano.",
+    "owner": {
+      "title": "Autorità del titolare",
+      "hint": "L'autorità piena del titolare, per suo conto"
+    },
+    "finance": {
+      "title": "Direttore finanziario",
+      "hint": "Paghe, indennità, costi del lavoro e report"
+    },
+    "hr": {
+      "title": "Direttore del personale",
+      "hint": "Fascicoli, ferie, reparti e comunicazioni"
+    },
+    "attendance": {
+      "title": "Solo presenze",
+      "hint": "Registrazioni, correzioni, eccezioni e fogli ore"
+    },
+    "sites": {
+      "title": "Gestione sedi",
+      "hint": "Sedi, turni, calendario e manodopera esterna"
+    },
+    "reports": {
+      "title": "Report",
+      "hint": "Cruscotto, report e registro azioni"
+    },
+    "media": {
+      "title": "Centro media",
+      "hint": "Pubblicare e gestire comunicazioni"
+    }
   }
 }
