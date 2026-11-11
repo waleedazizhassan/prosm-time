@@ -257,6 +257,12 @@
       "clock_out": "请打卡下班。",
       "call_me": "请给我回电话。",
       "attention": "请查看应用。"
+    },
+    "mockLocation": {
+      "title": "虚假位置",
+      "clock_in": "{{name}} 使用虚假位置打卡上班。",
+      "clock_out": "{{name}} 使用虚假位置打卡下班。",
+      "presence": "{{name}} 在班次期间使用了虚假位置——这些位置未被记录。"
     }
   },
   "items": {

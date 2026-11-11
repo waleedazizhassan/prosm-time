@@ -203,6 +203,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_out": "سجّل انصرافك من فضلك.",
         "call_me": "كلّمني من فضلك.",
         "attention": "افتح البرنامج من فضلك."
+      },
+      "mockLocation": {
+        "title": "موقع مزيف",
+        "clock_in": "{{name}} سجّل حضور بموقع مزيف (برنامج تزييف موقع).",
+        "clock_out": "{{name}} سجّل انصراف بموقع مزيف (برنامج تزييف موقع).",
+        "presence": "{{name}} شغّل موقع مزيف أثناء الوردية - الأماكن دي ماتسجلتش."
       }
     },
     "leaveTypes": {
@@ -417,6 +423,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_out": "Bitte ausstempeln.",
         "call_me": "Bitte ruf mich an.",
         "attention": "Bitte schau in die App."
+      },
+      "mockLocation": {
+        "title": "Gefälschter Standort",
+        "clock_in": "{{name}} hat mit einem gefälschten Standort eingestempelt.",
+        "clock_out": "{{name}} hat mit einem gefälschten Standort ausgestempelt.",
+        "presence": "{{name}} hat während der Schicht einen gefälschten Standort verwendet - diese Standorte wurden nicht erfasst."
       }
     },
     "leaveTypes": {
@@ -631,6 +643,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_out": "Please clock out.",
         "call_me": "Please call me.",
         "attention": "Please check the app."
+      },
+      "mockLocation": {
+        "title": "Fake location",
+        "clock_in": "{{name}} clocked in with a fake location (a location-spoofing app).",
+        "clock_out": "{{name}} clocked out with a fake location (a location-spoofing app).",
+        "presence": "{{name}} used a fake location during the shift - those locations were not recorded."
       }
     },
     "leaveTypes": {
@@ -845,6 +863,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_out": "Por favor, ficha la salida.",
         "call_me": "Por favor, llámame.",
         "attention": "Por favor, revisa la app."
+      },
+      "mockLocation": {
+        "title": "Ubicación falsa",
+        "clock_in": "{{name}} fichó la entrada con una ubicación falsa.",
+        "clock_out": "{{name}} fichó la salida con una ubicación falsa.",
+        "presence": "{{name}} usó una ubicación falsa durante el turno; esas ubicaciones no se registraron."
       }
     },
     "leaveTypes": {
@@ -1059,6 +1083,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_out": "Merci de pointer ton départ.",
         "call_me": "Merci de m’appeler.",
         "attention": "Merci de regarder l’application."
+      },
+      "mockLocation": {
+        "title": "Position falsifiée",
+        "clock_in": "{{name}} a pointé son arrivée avec une position falsifiée.",
+        "clock_out": "{{name}} a pointé son départ avec une position falsifiée.",
+        "presence": "{{name}} a utilisé une position falsifiée pendant le service - ces positions n’ont pas été enregistrées."
       }
     },
     "leaveTypes": {
@@ -1273,6 +1303,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_out": "Per favore, timbra l’uscita.",
         "call_me": "Per favore, chiamami.",
         "attention": "Per favore, guarda l’app."
+      },
+      "mockLocation": {
+        "title": "Posizione falsa",
+        "clock_in": "{{name}} ha timbrato l’entrata con una posizione falsa.",
+        "clock_out": "{{name}} ha timbrato l’uscita con una posizione falsa.",
+        "presence": "{{name}} ha usato una posizione falsa durante il turno: quelle posizioni non sono state registrate."
       }
     },
     "leaveTypes": {
@@ -1487,6 +1523,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_out": "Por favor, registe a saída.",
         "call_me": "Por favor, ligue-me.",
         "attention": "Por favor, veja o app."
+      },
+      "mockLocation": {
+        "title": "Localização falsa",
+        "clock_in": "{{name}} registou a entrada com uma localização falsa.",
+        "clock_out": "{{name}} registou a saída com uma localização falsa.",
+        "presence": "{{name}} usou uma localização falsa durante o turno - essas localizações não foram registadas."
       }
     },
     "leaveTypes": {
@@ -1701,6 +1743,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_out": "Пожалуйста, отметьте уход.",
         "call_me": "Пожалуйста, позвоните мне.",
         "attention": "Пожалуйста, откройте приложение."
+      },
+      "mockLocation": {
+        "title": "Поддельное местоположение",
+        "clock_in": "{{name}} отметил приход с поддельным местоположением.",
+        "clock_out": "{{name}} отметил уход с поддельным местоположением.",
+        "presence": "{{name}} использовал поддельное местоположение во время смены - эти точки не записаны."
       }
     },
     "leaveTypes": {
@@ -1915,6 +1963,12 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_out": "请打卡下班。",
         "call_me": "请给我回电话。",
         "attention": "请查看应用。"
+      },
+      "mockLocation": {
+        "title": "虚假位置",
+        "clock_in": "{{name}} 使用虚假位置打卡上班。",
+        "clock_out": "{{name}} 使用虚假位置打卡下班。",
+        "presence": "{{name}} 在班次期间使用了虚假位置——这些位置未被记录。"
       }
     },
     "leaveTypes": {

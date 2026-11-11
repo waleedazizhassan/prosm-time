@@ -257,6 +257,12 @@
       "clock_out": "Per favore, timbra l’uscita.",
       "call_me": "Per favore, chiamami.",
       "attention": "Per favore, guarda l’app."
+    },
+    "mockLocation": {
+      "title": "Posizione falsa",
+      "clock_in": "{{name}} ha timbrato l’entrata con una posizione falsa.",
+      "clock_out": "{{name}} ha timbrato l’uscita con una posizione falsa.",
+      "presence": "{{name}} ha usato una posizione falsa durante il turno: quelle posizioni non sono state registrate."
     }
   },
   "items": {

@@ -257,6 +257,12 @@
       "clock_out": "Por favor, registe a saída.",
       "call_me": "Por favor, ligue-me.",
       "attention": "Por favor, veja o app."
+    },
+    "mockLocation": {
+      "title": "Localização falsa",
+      "clock_in": "{{name}} registou a entrada com uma localização falsa.",
+      "clock_out": "{{name}} registou a saída com uma localização falsa.",
+      "presence": "{{name}} usou uma localização falsa durante o turno - essas localizações não foram registadas."
     }
   },
   "items": {

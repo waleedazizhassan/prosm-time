@@ -257,6 +257,12 @@
       "clock_out": "Please clock out.",
       "call_me": "Please call me.",
       "attention": "Please check the app."
+    },
+    "mockLocation": {
+      "title": "Fake location",
+      "clock_in": "{{name}} clocked in with a fake location (a location-spoofing app).",
+      "clock_out": "{{name}} clocked out with a fake location (a location-spoofing app).",
+      "presence": "{{name}} used a fake location during the shift - those locations were not recorded."
     }
   },
   "items": {

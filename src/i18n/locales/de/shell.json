@@ -257,6 +257,12 @@
       "clock_out": "Bitte ausstempeln.",
       "call_me": "Bitte ruf mich an.",
       "attention": "Bitte schau in die App."
+    },
+    "mockLocation": {
+      "title": "Gefälschter Standort",
+      "clock_in": "{{name}} hat mit einem gefälschten Standort eingestempelt.",
+      "clock_out": "{{name}} hat mit einem gefälschten Standort ausgestempelt.",
+      "presence": "{{name}} hat während der Schicht einen gefälschten Standort verwendet - diese Standorte wurden nicht erfasst."
     }
   },
   "items": {

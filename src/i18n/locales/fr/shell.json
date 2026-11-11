@@ -257,6 +257,12 @@
       "clock_out": "Merci de pointer ton départ.",
       "call_me": "Merci de m’appeler.",
       "attention": "Merci de regarder l’application."
+    },
+    "mockLocation": {
+      "title": "Position falsifiée",
+      "clock_in": "{{name}} a pointé son arrivée avec une position falsifiée.",
+      "clock_out": "{{name}} a pointé son départ avec une position falsifiée.",
+      "presence": "{{name}} a utilisé une position falsifiée pendant le service - ces positions n’ont pas été enregistrées."
     }
   },
   "items": {

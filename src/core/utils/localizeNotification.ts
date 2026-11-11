@@ -300,6 +300,11 @@ export default function localizeNotification(notification: AppNotification, t: T
     }
     case "location_plausibility_flag": {
       const name = typeof data.employeeName === "string" ? data.employeeName : null;
+      // owner 2026-11-11: a fake (simulated) location at clock-in/out or during the shift
+      if (name && (data.kind === "mock_location" || data.kind === "mock_presence")) {
+        const which = data.kind === "mock_presence" ? "presence" : data.eventType === "clock_out" ? "clock_out" : "clock_in";
+        return { title: t("shell:notifications.mockLocation.title"), body: t(`shell:notifications.mockLocation.${which}`, { name }) };
+      }
       const speed = typeof data.impliedSpeedKmh === "number" ? data.impliedSpeedKmh : null;
       if (!name || speed === null) break;
       return { title: t("shell:notifications.locationPlausibilityFlag.title"), body: t("shell:notifications.locationPlausibilityFlag.body", { name, speed }) };

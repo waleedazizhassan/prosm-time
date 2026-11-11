@@ -255,6 +255,12 @@ export function localizePush(type: string, data: Data, language: string, fallbac
         : pair("autoCheckoutGeofence.titleEmployee", "autoCheckoutGeofence.bodyEmployee");
       break;
     case "location_plausibility_flag":
+      // owner 2026-11-11: a fake (simulated) location at clock-in/out or during the shift
+      if (str(data.employeeName) && (data.kind === "mock_location" || data.kind === "mock_presence")) {
+        const which = data.kind === "mock_presence" ? "presence" : data.eventType === "clock_out" ? "clock_out" : "clock_in";
+        result = pair("mockLocation.title", `mockLocation.${which}`, { name: data.employeeName });
+        break;
+      }
       if (str(data.employeeName) && num(data.impliedSpeedKmh) !== null)
         result = pair("locationPlausibilityFlag.title", "locationPlausibilityFlag.body", { name: data.employeeName, speed: data.impliedSpeedKmh });
       break;
