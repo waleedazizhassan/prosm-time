@@ -41,7 +41,7 @@
     "travel": "Поездки",
     "other": "Другое",
     "status": "Статус",
-    "overtimeAmount": "Сумма сверхурочных",
+    "overtimeAmount": "Сверхурочные и опоздания",
     "total": "Итого"
   },
   "status": {
@@ -64,7 +64,8 @@
     "reviewNotesLabel": "Примечание проверяющего (необязательно)",
     "daySessionsLine": "Смен в этот день: {{count}} · отработано {{hours}} ч {{minutes}} мин",
     "reviewNotesLine": "Примечание проверяющего: {{notes}}",
-    "overtimeValueLine": "на сумму {{amount}}"
+    "overtimeValueLine": "на сумму {{amount}}",
+    "lateLine": "опоздание {{minutes}} мин удержано: {{amount}}"
   },
   "totals": {
     "title": "Итоги за период"
@@ -119,7 +120,8 @@
       "travel": "Поездки",
       "other": "Другое",
       "overtimeHour": "Час сверхурочной работы",
-      "extraDay": "Доп. день"
+      "extraDay": "Доп. день",
+      "lateMinute": "Минута опоздания (удержание)"
     }
   },
   "pdf": {

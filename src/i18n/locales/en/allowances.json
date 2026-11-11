@@ -41,7 +41,7 @@
     "travel": "Travel",
     "other": "Other",
     "status": "Status",
-    "overtimeAmount": "Overtime value",
+    "overtimeAmount": "Overtime and lateness value",
     "total": "Total"
   },
   "status": {
@@ -64,7 +64,8 @@
     "reviewNotesLabel": "Review notes (optional)",
     "daySessionsLine": "{{count}} sessions this day · {{hours}} h {{minutes}} min worked",
     "reviewNotesLine": "Reviewer's note: {{notes}}",
-    "overtimeValueLine": "worth {{amount}}"
+    "overtimeValueLine": "worth {{amount}}",
+    "lateLine": "lateness {{minutes}} min deducted: {{amount}}"
   },
   "totals": {
     "title": "Totals for this period"
@@ -119,7 +120,8 @@
       "travel": "Travel",
       "other": "Other",
       "overtimeHour": "Overtime hour",
-      "extraDay": "Extra day"
+      "extraDay": "Extra day",
+      "lateMinute": "Late minute (deducted)"
     }
   },
   "pdf": {

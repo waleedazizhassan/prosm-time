@@ -10,7 +10,7 @@ const day = (date: string, extra: Partial<AllowanceEntry> = {}): AllowanceEntry 
   id: date, userId: "u1", userFullName: "Omar", entryDate: date, siteName: "Capital", siteId: null,
   clockInAt: null, clockOutAt: null, sessionCount: 0, workedMinutes: 0,
   mealAllowance: 0, expatriationAllowance: 200, transportationAllowance: 50, housingAllowance: 0, travelAllowance: 0, otherAllowance: 0, otherAllowanceNote: null,
-  overtimeHours: 0, overtimeMinutes: 90, overtimeDays: 0, manualOverrides: {}, overtimeAmount: 37.5, extraDaysAmount: 0,
+  overtimeHours: 0, overtimeMinutes: 90, overtimeDays: 0, manualOverrides: {}, overtimeAmount: 37.5, extraDaysAmount: 0, lateMinutes: 0, lateAmount: 0,
   status: "draft", submittedAt: null, approvedAt: null, reviewNotes: null, sheetId: null,
   ...extra,
 } as AllowanceEntry);
