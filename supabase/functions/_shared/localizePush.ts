@@ -241,7 +241,7 @@ export function localizePush(type: string, data: Data, language: string, fallbac
       break;
     }
     case "daily_digest":
-      result = pair("dailyDigest.title", "dailyDigest.body", { present: data.present ?? 0, noShows: data.noShows ?? 0, leave: data.leave ?? 0, exceptions: data.exceptions ?? 0, open: data.open ?? 0 });
+      result = pair("dailyDigest.title", "dailyDigest.body", { present: data.present ?? 0, absent: data.absent ?? data.noShows ?? 0, late: data.late ?? 0, onLeave: data.onLeave ?? 0, leave: data.leave ?? 0, exceptions: data.exceptions ?? 0, open: data.open ?? 0 });
       break;
     case "clock_in_reminder":
       result = pair("clockInReminder.title", "clockInReminder.body", { time: data.time ?? "", site: data.siteName ?? "" });

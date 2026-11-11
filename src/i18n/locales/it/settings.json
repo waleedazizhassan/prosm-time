@@ -288,5 +288,27 @@
     "outside": "Fuori dai siti",
     "people": "Persone e presenze",
     "other": "Piano e sicurezza"
+  },
+  "overtimeTarget": {
+    "title": "Straordinari e ritardi",
+    "hint": "Scegli dove si contano straordinari e ritardi delle presenze. Giorni e cicli approvati non cambiano.",
+    "saved": "Salvato.",
+    "error": "Impossibile salvare. Riprova.",
+    "payroll": {
+      "label": "Sullo stipendio",
+      "hint": "Proposti nel ciclo paghe da accettare."
+    },
+    "allowances": {
+      "label": "Sulle indennità",
+      "hint": "Gli straordinari si valorizzano nei fogli indennità."
+    },
+    "counted": {
+      "label": "Conteggiati",
+      "hint": "Gli straordinari si valorizzano nei fogli indennità."
+    },
+    "none": {
+      "label": "Non conteggiati",
+      "hint": "Non incide su nulla: si vede solo nelle ore."
+    }
   }
 }

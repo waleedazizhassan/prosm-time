@@ -209,5 +209,12 @@
       "longer_than_24_hours": "plus de 24 heures",
       "overlaps_existing_attendance": "chevauche une présence déjà enregistrée"
     }
+  },
+  "exceptionStatus": {
+    "title": "{{name}} a quitté sa zone de travail",
+    "pendingReason": "Aucun motif envoyé pour l’instant. Dès qu’il arrive, tu seras prévenu et tu le trouveras ici pour le vérifier.",
+    "pendingReview": "Le motif est envoyé - il est dans la liste à vérifier ci-dessous.",
+    "resolved": "Cette exception a déjà été traitée.",
+    "notFound": "Cette exception n’existe pas ou ne te concerne pas."
   }
 }

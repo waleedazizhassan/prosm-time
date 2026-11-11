@@ -214,7 +214,7 @@
     },
     "dailyDigest": {
       "title": "Resumo de ontem",
-      "body": "{{present}} trabalharam, {{noShows}} faltaram a um turno. Pendentes: {{leave}} afastamentos, {{exceptions}} exceções. Com ponto aberto agora: {{open}}."
+      "body": "{{present}} trabalharam, {{late}} atrasados, {{absent}} ausentes, {{onLeave}} de férias. À espera: {{leave}} férias, {{exceptions}} exceções. Com ponto agora: {{open}}."
     },
     "licenseChanged": {
       "title": "Sua licença mudou",

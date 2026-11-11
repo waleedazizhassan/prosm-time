@@ -209,5 +209,12 @@
       "longer_than_24_hours": "más de 24 horas",
       "overlaps_existing_attendance": "se solapa con asistencia registrada"
     }
+  },
+  "exceptionStatus": {
+    "title": "{{name}} salió de su zona de trabajo",
+    "pendingReason": "Aún no ha enviado el motivo. Cuando lo haga, se te avisará y lo verás aquí para revisarlo.",
+    "pendingReview": "Envió el motivo: está en la lista de revisión abajo.",
+    "resolved": "Esta excepción ya se revisó.",
+    "notFound": "Esta excepción no existe o no te corresponde."
   }
 }

@@ -49,14 +49,15 @@
 
 .mapInfo {
   position: absolute;
-  top: var(--space-3);
-  inset-inline-start: var(--space-3);
-  inset-inline-end: calc(var(--space-3) + 44px);
+  top: var(--space-2);
+  inset-inline-start: var(--space-2);
+  inset-inline-end: var(--space-2);
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: var(--space-2) var(--space-3);
+  gap: 2px;
+  padding: 6px var(--space-3);
+  cursor: pointer;
   border-radius: var(--radius-md);
   background: color-mix(in srgb, var(--surface-card) 88%, transparent);
   border: 1px solid var(--border-light);
@@ -171,7 +172,7 @@
 }
 
 .mapTimer {
-  font-size: var(--font-xl);
+  font-size: var(--font-lg);
   font-weight: var(--font-weight-bold);
   font-variant-numeric: tabular-nums;
 }
@@ -257,4 +258,19 @@
   border: 1px solid rgba(255, 255, 255, 0.28);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+}
+
+/* owner 2026-11-11: a slimmer card - smaller lines, the card itself brings the map back */
+.mapInfo {
+  font-size: var(--font-xs);
+  line-height: 1.35;
+}
+
+.mapInfo:active {
+  transform: scale(0.99);
+}
+
+.mapInfo:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
 }

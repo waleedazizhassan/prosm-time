@@ -11,6 +11,7 @@ import NoSiteHoursSettingsCard from "../sites/NoSiteHoursSettingsCard";
 import MockLocationSettingsCard from "./MockLocationSettingsCard";
 import SessionPolicySettingsCard from "./SessionPolicySettingsCard";
 import OvertimePolicySettingsCard from "./OvertimePolicySettingsCard";
+import OvertimeLateTargetCard from "./OvertimeLateTargetCard";
 import LeaveTypesSettingsCard from "./LeaveTypesSettingsCard";
 import settingsHeaderImage from "../../assets/illustrations/settings.svg";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
@@ -107,6 +108,7 @@ export default function OrganizationSettingsPage() {
       {active === "people" ? (
         <>
           {hasPermission("settings.session_policy") ? <SessionPolicySettingsCard /> : null}
+          {isOwner ? <OvertimeLateTargetCard hasPayroll={allows("payroll")} hasAllowances={allows("allowances")} /> : null}
           {isOwner ? <OvertimePolicySettingsCard /> : null}
           {hasPermission("leave.manage_types") ? <LeaveTypesSettingsCard /> : null}
           {/* 2026-11-09 Media Center: departments (announcements can be addressed to them) */}

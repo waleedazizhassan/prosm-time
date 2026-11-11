@@ -214,7 +214,7 @@
     },
     "dailyDigest": {
       "title": "昨日概览",
-      "body": "{{present}} 人出勤，{{noShows}} 人缺勤。待处理：{{leave}} 个请假，{{exceptions}} 个异常。当前在岗：{{open}}。"
+      "body": "{{present}} 人工作，{{late}} 人迟到，{{absent}} 人缺勤，{{onLeave}} 人休假。待处理：{{leave}} 个假期、{{exceptions}} 个例外。当前在岗：{{open}}。"
     },
     "licenseChanged": {
       "title": "您的许可证已变更",

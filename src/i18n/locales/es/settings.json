@@ -288,5 +288,27 @@
     "outside": "Fuera de los sitios",
     "people": "Personas y asistencia",
     "other": "Plan y seguridad"
+  },
+  "overtimeTarget": {
+    "title": "Horas extra y retrasos",
+    "hint": "Elige dónde se cuentan las horas extra y los retrasos de la asistencia. Los días y ciclos aprobados no cambian.",
+    "saved": "Guardado.",
+    "error": "No se pudo guardar. Inténtalo de nuevo.",
+    "payroll": {
+      "label": "En el salario",
+      "hint": "Se sugiere en el ciclo de nómina para que lo aceptes."
+    },
+    "allowances": {
+      "label": "En los complementos",
+      "hint": "Las horas extra se valoran en las hojas de complementos."
+    },
+    "counted": {
+      "label": "Se cuentan",
+      "hint": "Las horas extra se valoran en las hojas de complementos."
+    },
+    "none": {
+      "label": "No se cuentan",
+      "hint": "No afecta a nada: solo se ve en las horas."
+    }
   }
 }

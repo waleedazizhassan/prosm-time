@@ -214,7 +214,7 @@
     },
     "dailyDigest": {
       "title": "Hier en bref",
-      "body": "{{present}} ont travaillé, {{noShows}} ont manqué un poste. En attente : {{leave}} congés, {{exceptions}} exceptions. Pointés maintenant : {{open}}."
+      "body": "{{present}} ont travaillé, {{late}} en retard, {{absent}} absents, {{onLeave}} en congé. En attente : {{leave}} congés, {{exceptions}} exceptions. Pointés maintenant : {{open}}."
     },
     "licenseChanged": {
       "title": "Votre licence a changé",

@@ -214,7 +214,7 @@
     },
     "dailyDigest": {
       "title": "Gestern im Überblick",
-      "body": "{{present}} haben gearbeitet, {{noShows}} haben eine Schicht verpasst. Offen: {{leave}} Urlaub, {{exceptions}} Ausnahmen. Jetzt eingestempelt: {{open}}."
+      "body": "{{present}} gearbeitet, {{late}} verspätet, {{absent}} abwesend, {{onLeave}} im Urlaub. Wartet auf dich: {{leave}} Urlaub, {{exceptions}} Ausnahmen. Jetzt eingestempelt: {{open}}."
     },
     "licenseChanged": {
       "title": "Ihre Lizenz wurde geändert",

@@ -10,7 +10,8 @@ import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
 import { readBackgroundConsent, writeBackgroundConsent, STARTUP_PERMISSIONS_EVENT, type BackgroundConsent } from "../../core/services/StartupPermissions";
 
-const PRESENCE_SAMPLE_INTERVAL_MS = 5 * 60 * 1000;
+// Owner 2026-11-11 ("notifications arrive late"): every 2 minutes (was 5), so leaving a site is seen sooner
+const PRESENCE_SAMPLE_INTERVAL_MS = 2 * 60 * 1000;
 // Cheap "is a presence session active right now" recheck - much
 // shorter than the sample interval so a fresh Clock In (which starts a
 // new presence session) is picked up quickly, without paying the

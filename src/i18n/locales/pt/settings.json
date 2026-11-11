@@ -288,5 +288,27 @@
     "outside": "Fora dos locais",
     "people": "Pessoas e presença",
     "other": "Plano e segurança"
+  },
+  "overtimeTarget": {
+    "title": "Horas extra e atrasos",
+    "hint": "Escolha onde contam as horas extra e os atrasos da presença. Dias e ciclos aprovados não mudam.",
+    "saved": "Guardado.",
+    "error": "Não foi possível guardar. Tente de novo.",
+    "payroll": {
+      "label": "No salário",
+      "hint": "Sugerido no ciclo de pagamento para aceitar."
+    },
+    "allowances": {
+      "label": "Nos subsídios",
+      "hint": "As horas extra são valorizadas nas folhas de subsídios."
+    },
+    "counted": {
+      "label": "Contados",
+      "hint": "As horas extra são valorizadas nas folhas de subsídios."
+    },
+    "none": {
+      "label": "Não contados",
+      "hint": "Não afeta nada - só aparece nas horas."
+    }
   }
 }

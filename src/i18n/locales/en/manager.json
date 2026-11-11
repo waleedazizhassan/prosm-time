@@ -206,5 +206,12 @@
       "longer_than_24_hours": "longer than 24 hours",
       "overlaps_existing_attendance": "overlaps attendance already recorded"
     }
+  },
+  "exceptionStatus": {
+    "title": "{{name}} left their work area",
+    "pendingReason": "They have not sent a reason yet. When they do, you will be notified and find it here to review.",
+    "pendingReview": "They sent a reason - it is in the review list below.",
+    "resolved": "This exception has already been reviewed.",
+    "notFound": "This exception does not exist or is not yours to see."
   }
 }

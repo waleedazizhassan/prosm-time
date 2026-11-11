@@ -214,7 +214,7 @@
     },
     "dailyDigest": {
       "title": "Resumen de ayer",
-      "body": "{{present}} trabajaron, {{noShows}} faltaron a un turno. Pendientes: {{leave}} ausencias, {{exceptions}} excepciones. Con entrada fichada ahora: {{open}}."
+      "body": "{{present}} trabajaron, {{late}} con retraso, {{absent}} ausentes, {{onLeave}} de permiso. Pendiente: {{leave}} permisos, {{exceptions}} excepciones. Fichados ahora: {{open}}."
     },
     "licenseChanged": {
       "title": "Tu licencia cambió",

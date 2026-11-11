@@ -214,7 +214,7 @@
     },
     "dailyDigest": {
       "title": "Ieri in breve",
-      "body": "{{present}} hanno lavorato, {{noShows}} hanno saltato un turno. In attesa: {{leave}} ferie, {{exceptions}} eccezioni. In servizio ora: {{open}}."
+      "body": "{{present}} hanno lavorato, {{late}} in ritardo, {{absent}} assenti, {{onLeave}} in ferie. In attesa: {{leave}} ferie, {{exceptions}} eccezioni. Presenti ora: {{open}}."
     },
     "licenseChanged": {
       "title": "La tua licenza è cambiata",

@@ -160,7 +160,7 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       },
       "dailyDigest": {
         "title": "ملخص أمس",
-        "body": "عمل {{present}}، وغاب عن ورديته {{noShows}}. بانتظارك: {{leave}} إجازة و{{exceptions}} استثناء. الحاضرون الآن: {{open}}."
+        "body": "عمل {{present}}، وتأخر {{late}}، وغاب {{absent}}، وفي إجازة {{onLeave}}. بانتظارك: {{leave}} إجازة و{{exceptions}} استثناء. الحاضرون الآن: {{open}}."
       },
       "licenseChanged": {
         "title": "تغيّر ترخيصك",
@@ -374,7 +374,7 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       },
       "dailyDigest": {
         "title": "Gestern im Überblick",
-        "body": "{{present}} haben gearbeitet, {{noShows}} haben eine Schicht verpasst. Offen: {{leave}} Urlaub, {{exceptions}} Ausnahmen. Jetzt eingestempelt: {{open}}."
+        "body": "{{present}} gearbeitet, {{late}} verspätet, {{absent}} abwesend, {{onLeave}} im Urlaub. Wartet auf dich: {{leave}} Urlaub, {{exceptions}} Ausnahmen. Jetzt eingestempelt: {{open}}."
       },
       "licenseChanged": {
         "title": "Ihre Lizenz wurde geändert",
@@ -588,7 +588,7 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       },
       "dailyDigest": {
         "title": "Yesterday at a glance",
-        "body": "{{present}} worked, {{noShows}} missed a shift. Waiting: {{leave}} leave, {{exceptions}} exceptions. Clocked in now: {{open}}."
+        "body": "{{present}} worked, {{late}} late, {{absent}} absent, {{onLeave}} on leave. Waiting for you: {{leave}} leave, {{exceptions}} exceptions. Clocked in now: {{open}}."
       },
       "licenseChanged": {
         "title": "Your licence changed",
@@ -802,7 +802,7 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       },
       "dailyDigest": {
         "title": "Resumen de ayer",
-        "body": "{{present}} trabajaron, {{noShows}} faltaron a un turno. Pendientes: {{leave}} ausencias, {{exceptions}} excepciones. Con entrada fichada ahora: {{open}}."
+        "body": "{{present}} trabajaron, {{late}} con retraso, {{absent}} ausentes, {{onLeave}} de permiso. Pendiente: {{leave}} permisos, {{exceptions}} excepciones. Fichados ahora: {{open}}."
       },
       "licenseChanged": {
         "title": "Tu licencia cambió",
@@ -1016,7 +1016,7 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       },
       "dailyDigest": {
         "title": "Hier en bref",
-        "body": "{{present}} ont travaillé, {{noShows}} ont manqué un poste. En attente : {{leave}} congés, {{exceptions}} exceptions. Pointés maintenant : {{open}}."
+        "body": "{{present}} ont travaillé, {{late}} en retard, {{absent}} absents, {{onLeave}} en congé. En attente : {{leave}} congés, {{exceptions}} exceptions. Pointés maintenant : {{open}}."
       },
       "licenseChanged": {
         "title": "Votre licence a changé",
@@ -1230,7 +1230,7 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       },
       "dailyDigest": {
         "title": "Ieri in breve",
-        "body": "{{present}} hanno lavorato, {{noShows}} hanno saltato un turno. In attesa: {{leave}} ferie, {{exceptions}} eccezioni. In servizio ora: {{open}}."
+        "body": "{{present}} hanno lavorato, {{late}} in ritardo, {{absent}} assenti, {{onLeave}} in ferie. In attesa: {{leave}} ferie, {{exceptions}} eccezioni. Presenti ora: {{open}}."
       },
       "licenseChanged": {
         "title": "La tua licenza è cambiata",
@@ -1444,7 +1444,7 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       },
       "dailyDigest": {
         "title": "Resumo de ontem",
-        "body": "{{present}} trabalharam, {{noShows}} faltaram a um turno. Pendentes: {{leave}} afastamentos, {{exceptions}} exceções. Com ponto aberto agora: {{open}}."
+        "body": "{{present}} trabalharam, {{late}} atrasados, {{absent}} ausentes, {{onLeave}} de férias. À espera: {{leave}} férias, {{exceptions}} exceções. Com ponto agora: {{open}}."
       },
       "licenseChanged": {
         "title": "Sua licença mudou",
@@ -1658,7 +1658,7 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       },
       "dailyDigest": {
         "title": "Вчера коротко",
-        "body": "Работали: {{present}}, пропустили смену: {{noShows}}. Ожидают: отпуска - {{leave}}, исключения - {{exceptions}}. Сейчас на смене: {{open}}."
+        "body": "Работали: {{present}}, опоздали: {{late}}, отсутствовали: {{absent}}, в отпуске: {{onLeave}}. Ждут вас: отпуска {{leave}}, исключения {{exceptions}}. Сейчас на месте: {{open}}."
       },
       "licenseChanged": {
         "title": "Ваша лицензия изменена",
@@ -1872,7 +1872,7 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       },
       "dailyDigest": {
         "title": "昨日概览",
-        "body": "{{present}} 人出勤，{{noShows}} 人缺勤。待处理：{{leave}} 个请假，{{exceptions}} 个异常。当前在岗：{{open}}。"
+        "body": "{{present}} 人工作，{{late}} 人迟到，{{absent}} 人缺勤，{{onLeave}} 人休假。待处理：{{leave}} 个假期、{{exceptions}} 个例外。当前在岗：{{open}}。"
       },
       "licenseChanged": {
         "title": "您的许可证已变更",

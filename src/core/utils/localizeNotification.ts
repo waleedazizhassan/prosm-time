@@ -286,7 +286,7 @@ export default function localizeNotification(notification: AppNotification, t: T
     case "daily_digest":
       return {
         title: t("shell:notifications.dailyDigest.title"),
-        body: t("shell:notifications.dailyDigest.body", { present: Number(data.present ?? 0), noShows: Number(data.noShows ?? 0), leave: Number(data.leave ?? 0), exceptions: Number(data.exceptions ?? 0), open: Number(data.open ?? 0) }),
+        body: t("shell:notifications.dailyDigest.body", { present: Number(data.present ?? 0), absent: Number(data.absent ?? data.noShows ?? 0), late: Number(data.late ?? 0), onLeave: Number(data.onLeave ?? 0), leave: Number(data.leave ?? 0), exceptions: Number(data.exceptions ?? 0), open: Number(data.open ?? 0) }),
       };
     case "clock_in_reminder":
       return { title: t("shell:notifications.clockInReminder.title"), body: t("shell:notifications.clockInReminder.body", { time: String(data.time ?? ""), site: String(data.siteName ?? "") }) };

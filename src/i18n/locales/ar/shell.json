@@ -214,7 +214,7 @@
     },
     "dailyDigest": {
       "title": "ملخص أمس",
-      "body": "عمل {{present}}، وغاب عن ورديته {{noShows}}. بانتظارك: {{leave}} إجازة و{{exceptions}} استثناء. الحاضرون الآن: {{open}}."
+      "body": "عمل {{present}}، وتأخر {{late}}، وغاب {{absent}}، وفي إجازة {{onLeave}}. بانتظارك: {{leave}} إجازة و{{exceptions}} استثناء. الحاضرون الآن: {{open}}."
     },
     "licenseChanged": {
       "title": "تغيّر ترخيصك",

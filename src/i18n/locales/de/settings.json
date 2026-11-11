@@ -287,5 +287,27 @@
     "outside": "Außerhalb der Standorte",
     "people": "Personen und Anwesenheit",
     "other": "Paket und Sicherheit"
+  },
+  "overtimeTarget": {
+    "title": "Überstunden und Verspätung verrechnen",
+    "hint": "Wähle, wo Überstunden und Verspätung aus der Anwesenheit verrechnet werden. Genehmigte Tage und Abrechnungen ändern sich nicht.",
+    "saved": "Gespeichert.",
+    "error": "Die Auswahl konnte nicht gespeichert werden.",
+    "payroll": {
+      "label": "Auf das Gehalt",
+      "hint": "Wird in der Abrechnung als Vorschlag angezeigt."
+    },
+    "allowances": {
+      "label": "Auf die Zulagen",
+      "hint": "Überstunden werden in den Zulagenbögen bewertet."
+    },
+    "counted": {
+      "label": "Verrechnet",
+      "hint": "Überstunden werden in den Zulagenbögen bewertet."
+    },
+    "none": {
+      "label": "Nicht verrechnet",
+      "hint": "Wirkt sich nicht aus - nur in den Stunden sichtbar."
+    }
   }
 }

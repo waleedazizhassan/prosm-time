@@ -206,5 +206,12 @@
       "longer_than_24_hours": "länger als 24 Stunden",
       "overlaps_existing_attendance": "überschneidet sich mit erfasster Anwesenheit"
     }
+  },
+  "exceptionStatus": {
+    "title": "{{name}} hat den Arbeitsbereich verlassen",
+    "pendingReason": "Noch keine Begründung. Sobald sie kommt, wirst du benachrichtigt und findest sie hier zur Prüfung.",
+    "pendingReview": "Begründung gesendet - sie steht unten in der Prüfliste.",
+    "resolved": "Diese Ausnahme wurde bereits geprüft.",
+    "notFound": "Diese Ausnahme gibt es nicht oder sie ist nicht für dich sichtbar."
   }
 }

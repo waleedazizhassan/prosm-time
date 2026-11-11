@@ -249,6 +249,7 @@ export default function ClockInOutCard() {
   const [breakSubmitting, setBreakSubmitting] = useState(false);
   const [breakWarning, setBreakWarning] = useState("");
   // Owner 2026-11-10: a clear, short confirmation after each attendance action
+  const [recenterTick, setRecenterTick] = useState(0);
   const [clockNotice, setClockNotice] = useState<ClockNoticeMessage | null>(null);
   const closeClockNotice = useCallback(() => {
     setClockNotice(null);
@@ -1218,7 +1219,7 @@ export default function ClockInOutCard() {
           siteTone={mapTone}
           accuracyMeters={currentLocation?.accuracyMeters ?? null}
           height={380}
-          recenterLabel={t("attendance.recenter")}
+          recenterSignal={recenterTick}
         />
         {/* Owner 2026-11-09: SOS floats above the hours and reminders buttons, the same size */}
         {session && planAllows("sos") ? (
@@ -1226,7 +1227,10 @@ export default function ClockInOutCard() {
             {sosSent ? "✓" : "🆘"}
           </button>
         ) : null}
-        <div className={styles.mapInfo}>
+        {/* Owner 2026-11-11: the card is the "back to me" button too (the separate button is gone) */}
+        <div className={styles.mapInfo} role="button" tabIndex={0} title={t("attendance.recenter")} aria-label={t("attendance.recenter")}
+          onClick={() => setRecenterTick((n) => n + 1)}
+          onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); setRecenterTick((n) => n + 1); } }}>
           <div className={styles.mapInfoTop}>
             <StatusBadge status={statusKey}>{t(`attendance.status.${statusKey}`)}</StatusBadge>
             {view.session ? (

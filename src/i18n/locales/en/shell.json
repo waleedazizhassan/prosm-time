@@ -214,7 +214,7 @@
     },
     "dailyDigest": {
       "title": "Yesterday at a glance",
-      "body": "{{present}} worked, {{noShows}} missed a shift. Waiting: {{leave}} leave, {{exceptions}} exceptions. Clocked in now: {{open}}."
+      "body": "{{present}} worked, {{late}} late, {{absent}} absent, {{onLeave}} on leave. Waiting for you: {{leave}} leave, {{exceptions}} exceptions. Clocked in now: {{open}}."
     },
     "licenseChanged": {
       "title": "Your licence changed",

@@ -9,6 +9,8 @@ export interface NotificationRef {
   entityType?: unknown;
   /** The notification's data.kind, when known (the bell has it; a push tap doesn't). */
   kind?: unknown;
+  /** The related record's id (push: data.entityId; bell: relatedEntityId). */
+  entityId?: unknown;
   /** The day a daily summary is about (the bell has it; a push tap opens yesterday). */
   date?: unknown;
 }
@@ -27,11 +29,14 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
     case "sos_alert":
       return viewer.isOwner || viewer.canViewEmergencyLog ? "/emergency-log" : "/dashboard";
     // Leave requests are reviewed on the Manager Console too.
+    // Owner 2026-11-11: someone left their work area - the manager page says what became of it (still
+    // waiting for the reason, waiting for review, or decided) instead of opening on nothing
+    case "out_of_zone_manager":
+      return ref?.entityId ? `/manager?exceptionId=${String(ref.entityId)}` : "/manager";
     case "exception_pending_review":
     case "correction_submitted":
     case "site_change_alert":
     case "location_plausibility_flag":
-    case "out_of_zone_manager":
     case "missing_clock_out":
       return "/manager";
     // v2.3.43 step 2: the manager reviews an automatically closed shift on the

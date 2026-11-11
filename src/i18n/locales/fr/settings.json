@@ -288,5 +288,27 @@
     "outside": "Hors des sites",
     "people": "Personnes et présence",
     "other": "Offre et sécurité"
+  },
+  "overtimeTarget": {
+    "title": "Heures sup et retards",
+    "hint": "Choisis où comptent les heures sup et les retards issus de la présence. Les jours et cycles validés ne changent pas.",
+    "saved": "Enregistré.",
+    "error": "Impossible d’enregistrer. Réessaie.",
+    "payroll": {
+      "label": "Sur le salaire",
+      "hint": "Proposé dans le cycle de paie, à accepter."
+    },
+    "allowances": {
+      "label": "Sur les indemnités",
+      "hint": "Les heures sup sont valorisées dans les feuilles d’indemnités."
+    },
+    "counted": {
+      "label": "Comptés",
+      "hint": "Les heures sup sont valorisées dans les feuilles d’indemnités."
+    },
+    "none": {
+      "label": "Non comptés",
+      "hint": "Sans effet - visibles seulement dans les heures."
+    }
   }
 }

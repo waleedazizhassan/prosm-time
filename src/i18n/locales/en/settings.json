@@ -287,5 +287,27 @@
     "outside": "Outside the sites",
     "people": "People and attendance",
     "other": "Plan and security"
+  },
+  "overtimeTarget": {
+    "title": "Counting overtime and lateness",
+    "hint": "Choose where the overtime and lateness from attendance are counted. Approved days and cycles do not change.",
+    "saved": "Saved.",
+    "error": "The choice could not be saved. Try again.",
+    "payroll": {
+      "label": "On the salary",
+      "hint": "Suggested in the payroll cycle for you to accept."
+    },
+    "allowances": {
+      "label": "On the allowances",
+      "hint": "Overtime is priced on the allowance sheets."
+    },
+    "counted": {
+      "label": "Counted",
+      "hint": "Overtime is priced on the allowance sheets."
+    },
+    "none": {
+      "label": "Not counted",
+      "hint": "Affects nothing - it only shows in the hours."
+    }
   }
 }
