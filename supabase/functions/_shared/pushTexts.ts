@@ -160,7 +160,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       },
       "dailyDigest": {
         "title": "ملخص أمس",
-        "body": "عمل {{present}}، وتأخر {{late}}، وغاب {{absent}}، وفي إجازة {{onLeave}}. بانتظارك: {{leave}} إجازة و{{exceptions}} استثناء. الحاضرون الآن: {{open}}."
+        "body": "عمل {{present}}، وتأخر {{late}}، وغاب {{absent}}، وفي إجازة {{onLeave}}. بانتظارك: {{leave}} إجازة و{{exceptions}} استثناء. الحاضرون الآن: {{open}}.",
+        "documents": "المستندات: {{expired}} منتهية، {{missing}} ناقصة."
       },
       "licenseChanged": {
         "title": "تغيّر ترخيصك",
@@ -209,6 +210,36 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_in": "{{name}} سجّل حضور بموقع مزيف (برنامج تزييف موقع).",
         "clock_out": "{{name}} سجّل انصراف بموقع مزيف (برنامج تزييف موقع).",
         "presence": "{{name}} شغّل موقع مزيف أثناء الوردية - الأماكن دي ماتسجلتش."
+      },
+      "documents": {
+        "missingTitleSelf": "مستند مطلوب",
+        "missingBodySelf": "{{document}} مطلوب في ملفك. صوّره من التطبيق.",
+        "missingTitleHr": "مستندات موظف جديد",
+        "missingBodyHr": "{{name}} يحتاج {{count}} مستند في ملفه.",
+        "expiringTitleSelf": "{{document}} قارب على الانتهاء",
+        "expiringBodySelf": "متبقٍ {{count}} يوم على انتهاء {{document}}. جدّده وارفع الجديد.",
+        "expiringTitleHr": "مستند قارب على الانتهاء",
+        "expiringBodyHr": "{{name}}: {{document}} ينتهي بعد {{count}} يوم.",
+        "expiredTitleSelf": "{{document}} ينتهي اليوم",
+        "expiredBodySelf": "ارفع {{document}} بعد تجديده من ملفك.",
+        "expiredTitleHr": "مستند ينتهي اليوم",
+        "expiredBodyHr": "{{name}}: {{document}} ينتهي اليوم.",
+        "rejectedTitleSelf": "المستند لم يُقبل",
+        "rejectedBodySelf": "{{document}}: {{reason}}. صوّره مرة أخرى وأرسله.",
+        "rejectedTitleHr": "المستند لم يُقبل",
+        "rejectedBodyHr": "{{document}}: {{reason}}",
+        "reminderTitleSelf": "تذكير بمستند",
+        "reminderBodySelf": "من فضلك ارفع {{document}} من ملفك.",
+        "reminderTitleHr": "تذكير بمستند",
+        "reminderBodyHr": "{{name}}: {{document}}",
+        "uploadedTitleHr": "مستند للمراجعة",
+        "uploadedBodyHr": "{{name}} رفع {{document}}.",
+        "uploadedTitleSelf": "تم رفع المستند",
+        "uploadedBodySelf": "{{document}}",
+        "clockInTitleHr": "حضور بمستند منتهي",
+        "clockInBodyHr": "{{name}} سجّل حضوره و{{document}} منتهي.",
+        "clockInTitleSelf": "مستند منتهي",
+        "clockInBodySelf": "{{document}} منتهي."
       }
     },
     "leaveTypes": {
@@ -380,7 +411,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       },
       "dailyDigest": {
         "title": "Gestern im Überblick",
-        "body": "{{present}} gearbeitet, {{late}} verspätet, {{absent}} abwesend, {{onLeave}} im Urlaub. Wartet auf dich: {{leave}} Urlaub, {{exceptions}} Ausnahmen. Jetzt eingestempelt: {{open}}."
+        "body": "{{present}} gearbeitet, {{late}} verspätet, {{absent}} abwesend, {{onLeave}} im Urlaub. Wartet auf dich: {{leave}} Urlaub, {{exceptions}} Ausnahmen. Jetzt eingestempelt: {{open}}.",
+        "documents": "Dokumente: {{expired}} abgelaufen, {{missing}} fehlen."
       },
       "licenseChanged": {
         "title": "Ihre Lizenz wurde geändert",
@@ -429,6 +461,36 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_in": "{{name}} hat mit einem gefälschten Standort eingestempelt.",
         "clock_out": "{{name}} hat mit einem gefälschten Standort ausgestempelt.",
         "presence": "{{name}} hat während der Schicht einen gefälschten Standort verwendet - diese Standorte wurden nicht erfasst."
+      },
+      "documents": {
+        "missingTitleSelf": "Ein Dokument wird benötigt",
+        "missingBodySelf": "{{document}} wird in Ihrer Akte benötigt. Fotografieren Sie es in der App.",
+        "missingTitleHr": "Dokumente für neue Mitarbeitende",
+        "missingBodyHr": "{{name}} benötigt {{count}} Dokument(e) in der Akte.",
+        "expiringTitleSelf": "{{document}} läuft bald ab",
+        "expiringBodySelf": "Noch {{count}} Tag(e) für {{document}}. Erneuern und neu hochladen.",
+        "expiringTitleHr": "Ein Dokument läuft bald ab",
+        "expiringBodyHr": "{{name}}: {{document}} läuft in {{count}} Tag(en) ab.",
+        "expiredTitleSelf": "{{document}} läuft heute ab",
+        "expiredBodySelf": "Laden Sie das erneuerte {{document}} in Ihrer Akte hoch.",
+        "expiredTitleHr": "Ein Dokument läuft heute ab",
+        "expiredBodyHr": "{{name}}: {{document}} läuft heute ab.",
+        "rejectedTitleSelf": "Dokument nicht angenommen",
+        "rejectedBodySelf": "{{document}}: {{reason}}. Bitte erneut fotografieren und senden.",
+        "rejectedTitleHr": "Dokument nicht angenommen",
+        "rejectedBodyHr": "{{document}}: {{reason}}",
+        "reminderTitleSelf": "Dokumenterinnerung",
+        "reminderBodySelf": "Bitte laden Sie {{document}} in Ihrer Akte hoch.",
+        "reminderTitleHr": "Dokumenterinnerung",
+        "reminderBodyHr": "{{name}}: {{document}}",
+        "uploadedTitleHr": "Ein Dokument zu prüfen",
+        "uploadedBodyHr": "{{name}} hat {{document}} hochgeladen.",
+        "uploadedTitleSelf": "Dokument hochgeladen",
+        "uploadedBodySelf": "{{document}}",
+        "clockInTitleHr": "Eingestempelt mit abgelaufenem Dokument",
+        "clockInBodyHr": "{{name}} hat eingestempelt, obwohl {{document}} abgelaufen ist.",
+        "clockInTitleSelf": "Abgelaufenes Dokument",
+        "clockInBodySelf": "{{document}} ist abgelaufen."
       }
     },
     "leaveTypes": {
@@ -600,7 +662,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       },
       "dailyDigest": {
         "title": "Yesterday at a glance",
-        "body": "{{present}} worked, {{late}} late, {{absent}} absent, {{onLeave}} on leave. Waiting for you: {{leave}} leave, {{exceptions}} exceptions. Clocked in now: {{open}}."
+        "body": "{{present}} worked, {{late}} late, {{absent}} absent, {{onLeave}} on leave. Waiting for you: {{leave}} leave, {{exceptions}} exceptions. Clocked in now: {{open}}.",
+        "documents": "Documents: {{expired}} expired, {{missing}} missing."
       },
       "licenseChanged": {
         "title": "Your licence changed",
@@ -649,6 +712,36 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_in": "{{name}} clocked in with a fake location (a location-spoofing app).",
         "clock_out": "{{name}} clocked out with a fake location (a location-spoofing app).",
         "presence": "{{name}} used a fake location during the shift - those locations were not recorded."
+      },
+      "documents": {
+        "missingTitleSelf": "A document is needed",
+        "missingBodySelf": "{{document}} is needed in your file. Photograph it in the app.",
+        "missingTitleHr": "New employee documents",
+        "missingBodyHr": "{{name}} needs {{count}} document(s) in their file.",
+        "expiringTitleSelf": "{{document}} expires soon",
+        "expiringBodySelf": "{{count}} day(s) left on {{document}}. Renew it and upload the new one.",
+        "expiringTitleHr": "A document expires soon",
+        "expiringBodyHr": "{{name}}: {{document}} expires in {{count}} day(s).",
+        "expiredTitleSelf": "{{document}} expires today",
+        "expiredBodySelf": "Upload the renewed {{document}} from your file.",
+        "expiredTitleHr": "A document expires today",
+        "expiredBodyHr": "{{name}}: {{document}} expires today.",
+        "rejectedTitleSelf": "Document not accepted",
+        "rejectedBodySelf": "{{document}}: {{reason}}. Photograph it again and send it.",
+        "rejectedTitleHr": "Document not accepted",
+        "rejectedBodyHr": "{{document}}: {{reason}}",
+        "reminderTitleSelf": "Document reminder",
+        "reminderBodySelf": "Please upload {{document}} from your file.",
+        "reminderTitleHr": "Document reminder",
+        "reminderBodyHr": "{{name}}: {{document}}",
+        "uploadedTitleHr": "A document to review",
+        "uploadedBodyHr": "{{name}} uploaded {{document}}.",
+        "uploadedTitleSelf": "Document uploaded",
+        "uploadedBodySelf": "{{document}}",
+        "clockInTitleHr": "Clocked in with an expired document",
+        "clockInBodyHr": "{{name}} clocked in while {{document}} has expired.",
+        "clockInTitleSelf": "Expired document",
+        "clockInBodySelf": "{{document}} has expired."
       }
     },
     "leaveTypes": {
@@ -820,7 +913,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       },
       "dailyDigest": {
         "title": "Resumen de ayer",
-        "body": "{{present}} trabajaron, {{late}} con retraso, {{absent}} ausentes, {{onLeave}} de permiso. Pendiente: {{leave}} permisos, {{exceptions}} excepciones. Fichados ahora: {{open}}."
+        "body": "{{present}} trabajaron, {{late}} con retraso, {{absent}} ausentes, {{onLeave}} de permiso. Pendiente: {{leave}} permisos, {{exceptions}} excepciones. Fichados ahora: {{open}}.",
+        "documents": "Documentos: {{expired}} vencidos, {{missing}} faltan."
       },
       "licenseChanged": {
         "title": "Tu licencia cambió",
@@ -869,6 +963,36 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_in": "{{name}} fichó la entrada con una ubicación falsa.",
         "clock_out": "{{name}} fichó la salida con una ubicación falsa.",
         "presence": "{{name}} usó una ubicación falsa durante el turno; esas ubicaciones no se registraron."
+      },
+      "documents": {
+        "missingTitleSelf": "Se necesita un documento",
+        "missingBodySelf": "Se necesita {{document}} en tu ficha. Fotografíalo en la app.",
+        "missingTitleHr": "Documentos de un nuevo empleado",
+        "missingBodyHr": "{{name}} necesita {{count}} documento(s) en su ficha.",
+        "expiringTitleSelf": "{{document}} vence pronto",
+        "expiringBodySelf": "Quedan {{count}} día(s) de {{document}}. Renuévalo y sube el nuevo.",
+        "expiringTitleHr": "Un documento vence pronto",
+        "expiringBodyHr": "{{name}}: {{document}} vence en {{count}} día(s).",
+        "expiredTitleSelf": "{{document}} vence hoy",
+        "expiredBodySelf": "Sube {{document}} renovado desde tu ficha.",
+        "expiredTitleHr": "Un documento vence hoy",
+        "expiredBodyHr": "{{name}}: {{document}} vence hoy.",
+        "rejectedTitleSelf": "Documento no aceptado",
+        "rejectedBodySelf": "{{document}}: {{reason}}. Fotografíalo de nuevo y envíalo.",
+        "rejectedTitleHr": "Documento no aceptado",
+        "rejectedBodyHr": "{{document}}: {{reason}}",
+        "reminderTitleSelf": "Recordatorio de documento",
+        "reminderBodySelf": "Sube {{document}} desde tu ficha, por favor.",
+        "reminderTitleHr": "Recordatorio de documento",
+        "reminderBodyHr": "{{name}}: {{document}}",
+        "uploadedTitleHr": "Un documento por revisar",
+        "uploadedBodyHr": "{{name}} subió {{document}}.",
+        "uploadedTitleSelf": "Documento subido",
+        "uploadedBodySelf": "{{document}}",
+        "clockInTitleHr": "Fichaje con un documento vencido",
+        "clockInBodyHr": "{{name}} fichó con {{document}} vencido.",
+        "clockInTitleSelf": "Documento vencido",
+        "clockInBodySelf": "{{document}} ha vencido."
       }
     },
     "leaveTypes": {
@@ -1040,7 +1164,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       },
       "dailyDigest": {
         "title": "Hier en bref",
-        "body": "{{present}} ont travaillé, {{late}} en retard, {{absent}} absents, {{onLeave}} en congé. En attente : {{leave}} congés, {{exceptions}} exceptions. Pointés maintenant : {{open}}."
+        "body": "{{present}} ont travaillé, {{late}} en retard, {{absent}} absents, {{onLeave}} en congé. En attente : {{leave}} congés, {{exceptions}} exceptions. Pointés maintenant : {{open}}.",
+        "documents": "Documents : {{expired}} expirés, {{missing}} manquants."
       },
       "licenseChanged": {
         "title": "Votre licence a changé",
@@ -1089,6 +1214,36 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_in": "{{name}} a pointé son arrivée avec une position falsifiée.",
         "clock_out": "{{name}} a pointé son départ avec une position falsifiée.",
         "presence": "{{name}} a utilisé une position falsifiée pendant le service - ces positions n’ont pas été enregistrées."
+      },
+      "documents": {
+        "missingTitleSelf": "Un document est demandé",
+        "missingBodySelf": "{{document}} est demandé dans votre dossier. Photographiez-le dans l'application.",
+        "missingTitleHr": "Documents d'un nouvel employé",
+        "missingBodyHr": "{{name}} doit fournir {{count}} document(s).",
+        "expiringTitleSelf": "{{document}} expire bientôt",
+        "expiringBodySelf": "Encore {{count}} jour(s) pour {{document}}. Renouvelez-le et envoyez le nouveau.",
+        "expiringTitleHr": "Un document expire bientôt",
+        "expiringBodyHr": "{{name}} : {{document}} expire dans {{count}} jour(s).",
+        "expiredTitleSelf": "{{document}} expire aujourd'hui",
+        "expiredBodySelf": "Envoyez {{document}} renouvelé depuis votre dossier.",
+        "expiredTitleHr": "Un document expire aujourd'hui",
+        "expiredBodyHr": "{{name}} : {{document}} expire aujourd'hui.",
+        "rejectedTitleSelf": "Document non accepté",
+        "rejectedBodySelf": "{{document}} : {{reason}}. Photographiez-le à nouveau et envoyez-le.",
+        "rejectedTitleHr": "Document non accepté",
+        "rejectedBodyHr": "{{document}} : {{reason}}",
+        "reminderTitleSelf": "Relance de document",
+        "reminderBodySelf": "Merci d'envoyer {{document}} depuis votre dossier.",
+        "reminderTitleHr": "Relance de document",
+        "reminderBodyHr": "{{name}} : {{document}}",
+        "uploadedTitleHr": "Un document à vérifier",
+        "uploadedBodyHr": "{{name}} a envoyé {{document}}.",
+        "uploadedTitleSelf": "Document envoyé",
+        "uploadedBodySelf": "{{document}}",
+        "clockInTitleHr": "Pointage avec un document expiré",
+        "clockInBodyHr": "{{name}} a pointé alors que {{document}} a expiré.",
+        "clockInTitleSelf": "Document expiré",
+        "clockInBodySelf": "{{document}} a expiré."
       }
     },
     "leaveTypes": {
@@ -1260,7 +1415,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       },
       "dailyDigest": {
         "title": "Ieri in breve",
-        "body": "{{present}} hanno lavorato, {{late}} in ritardo, {{absent}} assenti, {{onLeave}} in ferie. In attesa: {{leave}} ferie, {{exceptions}} eccezioni. Presenti ora: {{open}}."
+        "body": "{{present}} hanno lavorato, {{late}} in ritardo, {{absent}} assenti, {{onLeave}} in ferie. In attesa: {{leave}} ferie, {{exceptions}} eccezioni. Presenti ora: {{open}}.",
+        "documents": "Documenti: {{expired}} scaduti, {{missing}} mancanti."
       },
       "licenseChanged": {
         "title": "La tua licenza è cambiata",
@@ -1309,6 +1465,36 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_in": "{{name}} ha timbrato l’entrata con una posizione falsa.",
         "clock_out": "{{name}} ha timbrato l’uscita con una posizione falsa.",
         "presence": "{{name}} ha usato una posizione falsa durante il turno: quelle posizioni non sono state registrate."
+      },
+      "documents": {
+        "missingTitleSelf": "Serve un documento",
+        "missingBodySelf": "Nel tuo fascicolo serve {{document}}. Fotografalo nell'app.",
+        "missingTitleHr": "Documenti di un nuovo dipendente",
+        "missingBodyHr": "{{name}} deve fornire {{count}} documento/i.",
+        "expiringTitleSelf": "{{document}} sta per scadere",
+        "expiringBodySelf": "Mancano {{count}} giorno/i per {{document}}. Rinnovalo e carica il nuovo.",
+        "expiringTitleHr": "Un documento sta per scadere",
+        "expiringBodyHr": "{{name}}: {{document}} scade tra {{count}} giorno/i.",
+        "expiredTitleSelf": "{{document}} scade oggi",
+        "expiredBodySelf": "Carica {{document}} rinnovato dal tuo fascicolo.",
+        "expiredTitleHr": "Un documento scade oggi",
+        "expiredBodyHr": "{{name}}: {{document}} scade oggi.",
+        "rejectedTitleSelf": "Documento non accettato",
+        "rejectedBodySelf": "{{document}}: {{reason}}. Fotografalo di nuovo e invialo.",
+        "rejectedTitleHr": "Documento non accettato",
+        "rejectedBodyHr": "{{document}}: {{reason}}",
+        "reminderTitleSelf": "Promemoria documento",
+        "reminderBodySelf": "Carica {{document}} dal tuo fascicolo, per favore.",
+        "reminderTitleHr": "Promemoria documento",
+        "reminderBodyHr": "{{name}}: {{document}}",
+        "uploadedTitleHr": "Un documento da verificare",
+        "uploadedBodyHr": "{{name}} ha caricato {{document}}.",
+        "uploadedTitleSelf": "Documento caricato",
+        "uploadedBodySelf": "{{document}}",
+        "clockInTitleHr": "Timbratura con documento scaduto",
+        "clockInBodyHr": "{{name}} ha timbrato con {{document}} scaduto.",
+        "clockInTitleSelf": "Documento scaduto",
+        "clockInBodySelf": "{{document}} è scaduto."
       }
     },
     "leaveTypes": {
@@ -1480,7 +1666,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       },
       "dailyDigest": {
         "title": "Resumo de ontem",
-        "body": "{{present}} trabalharam, {{late}} atrasados, {{absent}} ausentes, {{onLeave}} de férias. À espera: {{leave}} férias, {{exceptions}} exceções. Com ponto agora: {{open}}."
+        "body": "{{present}} trabalharam, {{late}} atrasados, {{absent}} ausentes, {{onLeave}} de férias. À espera: {{leave}} férias, {{exceptions}} exceções. Com ponto agora: {{open}}.",
+        "documents": "Documentos: {{expired}} vencidos, {{missing}} faltando."
       },
       "licenseChanged": {
         "title": "Sua licença mudou",
@@ -1529,6 +1716,36 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_in": "{{name}} registou a entrada com uma localização falsa.",
         "clock_out": "{{name}} registou a saída com uma localização falsa.",
         "presence": "{{name}} usou uma localização falsa durante o turno - essas localizações não foram registadas."
+      },
+      "documents": {
+        "missingTitleSelf": "Um documento é necessário",
+        "missingBodySelf": "{{document}} é necessário na sua ficha. Fotografe no app.",
+        "missingTitleHr": "Documentos de novo funcionário",
+        "missingBodyHr": "{{name}} precisa de {{count}} documento(s) na ficha.",
+        "expiringTitleSelf": "{{document}} vence em breve",
+        "expiringBodySelf": "Faltam {{count}} dia(s) para {{document}}. Renove e envie o novo.",
+        "expiringTitleHr": "Um documento vence em breve",
+        "expiringBodyHr": "{{name}}: {{document}} vence em {{count}} dia(s).",
+        "expiredTitleSelf": "{{document}} vence hoje",
+        "expiredBodySelf": "Envie {{document}} renovado pela sua ficha.",
+        "expiredTitleHr": "Um documento vence hoje",
+        "expiredBodyHr": "{{name}}: {{document}} vence hoje.",
+        "rejectedTitleSelf": "Documento não aceito",
+        "rejectedBodySelf": "{{document}}: {{reason}}. Fotografe de novo e envie.",
+        "rejectedTitleHr": "Documento não aceito",
+        "rejectedBodyHr": "{{document}}: {{reason}}",
+        "reminderTitleSelf": "Lembrete de documento",
+        "reminderBodySelf": "Envie {{document}} pela sua ficha, por favor.",
+        "reminderTitleHr": "Lembrete de documento",
+        "reminderBodyHr": "{{name}}: {{document}}",
+        "uploadedTitleHr": "Um documento para revisar",
+        "uploadedBodyHr": "{{name}} enviou {{document}}.",
+        "uploadedTitleSelf": "Documento enviado",
+        "uploadedBodySelf": "{{document}}",
+        "clockInTitleHr": "Ponto com documento vencido",
+        "clockInBodyHr": "{{name}} bateu o ponto com {{document}} vencido.",
+        "clockInTitleSelf": "Documento vencido",
+        "clockInBodySelf": "{{document}} venceu."
       }
     },
     "leaveTypes": {
@@ -1700,7 +1917,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       },
       "dailyDigest": {
         "title": "Вчера коротко",
-        "body": "Работали: {{present}}, опоздали: {{late}}, отсутствовали: {{absent}}, в отпуске: {{onLeave}}. Ждут вас: отпуска {{leave}}, исключения {{exceptions}}. Сейчас на месте: {{open}}."
+        "body": "Работали: {{present}}, опоздали: {{late}}, отсутствовали: {{absent}}, в отпуске: {{onLeave}}. Ждут вас: отпуска {{leave}}, исключения {{exceptions}}. Сейчас на месте: {{open}}.",
+        "documents": "Документы: истекло {{expired}}, нет {{missing}}."
       },
       "licenseChanged": {
         "title": "Ваша лицензия изменена",
@@ -1749,6 +1967,36 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_in": "{{name}} отметил приход с поддельным местоположением.",
         "clock_out": "{{name}} отметил уход с поддельным местоположением.",
         "presence": "{{name}} использовал поддельное местоположение во время смены - эти точки не записаны."
+      },
+      "documents": {
+        "missingTitleSelf": "Нужен документ",
+        "missingBodySelf": "В вашем деле нужен документ: {{document}}. Сфотографируйте его в приложении.",
+        "missingTitleHr": "Документы нового сотрудника",
+        "missingBodyHr": "{{name}}: нужно документов — {{count}}.",
+        "expiringTitleSelf": "{{document}} скоро истекает",
+        "expiringBodySelf": "До окончания {{document}} осталось дней: {{count}}. Обновите и загрузите новый.",
+        "expiringTitleHr": "Документ скоро истекает",
+        "expiringBodyHr": "{{name}}: {{document}} истекает через дней: {{count}}.",
+        "expiredTitleSelf": "{{document}} истекает сегодня",
+        "expiredBodySelf": "Загрузите обновлённый документ ({{document}}) в своё дело.",
+        "expiredTitleHr": "Документ истекает сегодня",
+        "expiredBodyHr": "{{name}}: {{document}} истекает сегодня.",
+        "rejectedTitleSelf": "Документ не принят",
+        "rejectedBodySelf": "{{document}}: {{reason}}. Сфотографируйте заново и отправьте.",
+        "rejectedTitleHr": "Документ не принят",
+        "rejectedBodyHr": "{{document}}: {{reason}}",
+        "reminderTitleSelf": "Напоминание о документе",
+        "reminderBodySelf": "Пожалуйста, загрузите {{document}} в своё дело.",
+        "reminderTitleHr": "Напоминание о документе",
+        "reminderBodyHr": "{{name}}: {{document}}",
+        "uploadedTitleHr": "Документ на проверку",
+        "uploadedBodyHr": "{{name}} загрузил(а) {{document}}.",
+        "uploadedTitleSelf": "Документ загружен",
+        "uploadedBodySelf": "{{document}}",
+        "clockInTitleHr": "Приход с истёкшим документом",
+        "clockInBodyHr": "{{name}} отметил(а) приход, хотя {{document}} истёк.",
+        "clockInTitleSelf": "Документ истёк",
+        "clockInBodySelf": "{{document}} истёк."
       }
     },
     "leaveTypes": {
@@ -1920,7 +2168,8 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
       },
       "dailyDigest": {
         "title": "昨日概览",
-        "body": "{{present}} 人工作，{{late}} 人迟到，{{absent}} 人缺勤，{{onLeave}} 人休假。待处理：{{leave}} 个假期、{{exceptions}} 个例外。当前在岗：{{open}}。"
+        "body": "{{present}} 人工作，{{late}} 人迟到，{{absent}} 人缺勤，{{onLeave}} 人休假。待处理：{{leave}} 个假期、{{exceptions}} 个例外。当前在岗：{{open}}。",
+        "documents": "证件：{{expired}} 份过期，{{missing}} 份缺失。"
       },
       "licenseChanged": {
         "title": "您的许可证已变更",
@@ -1969,6 +2218,36 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_in": "{{name}} 使用虚假位置打卡上班。",
         "clock_out": "{{name}} 使用虚假位置打卡下班。",
         "presence": "{{name}} 在班次期间使用了虚假位置——这些位置未被记录。"
+      },
+      "documents": {
+        "missingTitleSelf": "需要提交证件",
+        "missingBodySelf": "您的档案需要 {{document}}，请在应用中拍摄。",
+        "missingTitleHr": "新员工证件",
+        "missingBodyHr": "{{name}} 需要提交 {{count}} 份证件。",
+        "expiringTitleSelf": "{{document}} 即将到期",
+        "expiringBodySelf": "{{document}} 还有 {{count}} 天到期，请更新并上传。",
+        "expiringTitleHr": "证件即将到期",
+        "expiringBodyHr": "{{name}}：{{document}} 将在 {{count}} 天后到期。",
+        "expiredTitleSelf": "{{document}} 今天到期",
+        "expiredBodySelf": "请在档案中上传更新后的 {{document}}。",
+        "expiredTitleHr": "证件今天到期",
+        "expiredBodyHr": "{{name}}：{{document}} 今天到期。",
+        "rejectedTitleSelf": "证件未通过",
+        "rejectedBodySelf": "{{document}}：{{reason}}。请重新拍摄并发送。",
+        "rejectedTitleHr": "证件未通过",
+        "rejectedBodyHr": "{{document}}：{{reason}}",
+        "reminderTitleSelf": "证件提醒",
+        "reminderBodySelf": "请在档案中上传 {{document}}。",
+        "reminderTitleHr": "证件提醒",
+        "reminderBodyHr": "{{name}}：{{document}}",
+        "uploadedTitleHr": "有证件待审核",
+        "uploadedBodyHr": "{{name}} 上传了 {{document}}。",
+        "uploadedTitleSelf": "证件已上传",
+        "uploadedBodySelf": "{{document}}",
+        "clockInTitleHr": "持过期证件打卡",
+        "clockInBodyHr": "{{name}} 在 {{document}} 过期的情况下打卡。",
+        "clockInTitleSelf": "证件已过期",
+        "clockInBodySelf": "{{document}} 已过期。"
       }
     },
     "leaveTypes": {

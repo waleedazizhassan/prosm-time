@@ -394,7 +394,8 @@
       "cost": "Indennità e costi",
       "audit": "Registro delle azioni",
       "external": "Lavoratori esterni",
-      "insights": "Indicatori di presenza"
+      "insights": "Indicatori di presenza",
+      "documents": "Documenti"
     },
     "sos": {
       "text": "SOS da {{name}} a {{site}} dalle {{time}}",
@@ -585,7 +586,13 @@
         "hr_profile_changed": "Fascicolo modificato",
         "hr_contract_saved": "Contratto salvato",
         "hr_contract_deleted": "Contratto eliminato",
-        "hr_job_title_saved": "Mansione salvata"
+        "hr_job_title_saved": "Mansione salvata",
+        "hr_document_type_saved": "Impostazione documento salvata",
+        "hr_document_template_added": "Elenco documenti aggiunto",
+        "hr_document_uploaded": "Documento caricato",
+        "hr_document_accepted": "Documento accettato",
+        "hr_document_rejected": "Documento non accettato",
+        "hr_document_reminded": "Promemoria documento"
       },
       "groups": {
         "sos": "SOS",

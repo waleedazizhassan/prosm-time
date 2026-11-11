@@ -304,7 +304,18 @@
     "contractNeedsEnd": "Dieser Vertrag braucht ein Enddatum.",
     "jobTitleExists": "Diese Stelle gibt es bereits.",
     "chooseContractType": "Vertragsart wählen.",
-    "startDateRequired": "Beginn eingeben."
+    "startDateRequired": "Beginn eingeben.",
+    "attachDocument": "Fügen Sie das Foto oder die Datei des Dokuments bei.",
+    "expiryRequired": "Geben Sie das Ablaufdatum ein.",
+    "expiryBeforeIssue": "Das Ablaufdatum liegt vor dem Ausstellungsdatum.",
+    "documentAlreadyReviewed": "Dieses Dokument wurde bereits geprüft.",
+    "alreadyReminded": "Diese Person wurde gerade erst erinnert. Später erneut versuchen.",
+    "chooseJobTitle": "Wählen Sie mindestens eine Berufsbezeichnung.",
+    "chooseSite": "Wählen Sie mindestens einen Standort.",
+    "unknownTemplate": "Diese Liste ist nicht verfügbar.",
+    "invalidFile": "Diese Datei kann nicht verwendet werden. Bitte erneut hochladen.",
+    "permissionDenied": "Dafür haben Sie keine Berechtigung.",
+    "documentRequiredToClockIn": "Einstempeln nicht möglich: {{name}} ist abgelaufen. Laden Sie das neue unter „Meine Akte“ hoch oder wenden Sie sich an Ihre Führungskraft."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

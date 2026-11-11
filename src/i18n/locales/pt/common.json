@@ -304,7 +304,18 @@
     "contractNeedsEnd": "Este contrato precisa de data de fim.",
     "jobTitleExists": "Este cargo já existe.",
     "chooseContractType": "Escolha o tipo de contrato.",
-    "startDateRequired": "Escreva a data de início."
+    "startDateRequired": "Escreva a data de início.",
+    "attachDocument": "Anexe a foto ou o arquivo do documento.",
+    "expiryRequired": "Informe a data de vencimento.",
+    "expiryBeforeIssue": "A data de vencimento é anterior à de emissão.",
+    "documentAlreadyReviewed": "Este documento já foi revisado.",
+    "alreadyReminded": "Esta pessoa acabou de ser lembrada. Tente mais tarde.",
+    "chooseJobTitle": "Escolha pelo menos um cargo.",
+    "chooseSite": "Escolha pelo menos um local.",
+    "unknownTemplate": "Esta lista não está disponível.",
+    "invalidFile": "Este arquivo não pode ser usado. Envie novamente.",
+    "permissionDenied": "Você não tem permissão para isso.",
+    "documentRequiredToClockIn": "Não é possível bater o ponto: {{name}} venceu. Envie o novo em Minha ficha ou fale com seu gestor."
   },
   "pageLoad": {
     "title": "Esta página precisa de conexão",

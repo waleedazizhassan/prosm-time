@@ -283,11 +283,27 @@ export default function localizeNotification(notification: AppNotification, t: T
       if (data.planChanged) parts.push(typeof data.plan === "string" ? tn("licenseChanged.planTo", { plan: data.plan.charAt(0).toUpperCase() + data.plan.slice(1) }) : tn("licenseChanged.plan"));
       return { title: t("shell:notifications.licenseChanged.title"), body: t("shell:notifications.licenseChanged.body", { changes: parts.join(" · ") }) };
     }
-    case "daily_digest":
+    // 2026-11-11 HR suite feature 2: documents - to the person ("self") or to personnel managers ("hr")
+    case "document_missing":
+    case "document_expiring":
+    case "document_expired":
+    case "document_rejected":
+    case "document_reminder":
+    case "document_uploaded":
+    case "document_clock_in": {
+      const key = ({ document_missing: "missing", document_expiring: "expiring", document_expired: "expired", document_rejected: "rejected", document_reminder: "reminder", document_uploaded: "uploaded", document_clock_in: "clockIn" } as Record<string, string>)[notification.type];
+      const who = data.kind === "hr" ? "Hr" : "Self";
+      const vars = { document: String(data.documentName ?? ""), name: String(data.employeeName ?? ""), count: Number(data.days ?? data.count ?? 0), reason: String(data.reason ?? "") };
+      return { title: t(`shell:notifications.documents.${key}Title${who}`, vars), body: t(`shell:notifications.documents.${key}Body${who}`, vars) };
+    }
+    case "daily_digest": {
+      const docs = Number(data.documentsExpired ?? 0) + Number(data.documentsMissing ?? 0) > 0
+        ? ` ${t("shell:notifications.dailyDigest.documents", { expired: Number(data.documentsExpired ?? 0), missing: Number(data.documentsMissing ?? 0) })}` : "";
       return {
         title: t("shell:notifications.dailyDigest.title"),
-        body: t("shell:notifications.dailyDigest.body", { present: Number(data.present ?? 0), absent: Number(data.absent ?? data.noShows ?? 0), late: Number(data.late ?? 0), onLeave: Number(data.onLeave ?? 0), leave: Number(data.leave ?? 0), exceptions: Number(data.exceptions ?? 0), open: Number(data.open ?? 0) }),
+        body: t("shell:notifications.dailyDigest.body", { present: Number(data.present ?? 0), absent: Number(data.absent ?? data.noShows ?? 0), late: Number(data.late ?? 0), onLeave: Number(data.onLeave ?? 0), leave: Number(data.leave ?? 0), exceptions: Number(data.exceptions ?? 0), open: Number(data.open ?? 0) }) + docs,
       };
+    }
     case "clock_in_reminder":
       return { title: t("shell:notifications.clockInReminder.title"), body: t("shell:notifications.clockInReminder.body", { time: String(data.time ?? ""), site: String(data.siteName ?? "") }) };
     case "clock_out_reminder":

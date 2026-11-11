@@ -214,7 +214,8 @@
     },
     "dailyDigest": {
       "title": "Вчера коротко",
-      "body": "Работали: {{present}}, опоздали: {{late}}, отсутствовали: {{absent}}, в отпуске: {{onLeave}}. Ждут вас: отпуска {{leave}}, исключения {{exceptions}}. Сейчас на месте: {{open}}."
+      "body": "Работали: {{present}}, опоздали: {{late}}, отсутствовали: {{absent}}, в отпуске: {{onLeave}}. Ждут вас: отпуска {{leave}}, исключения {{exceptions}}. Сейчас на месте: {{open}}.",
+      "documents": "Документы: истекло {{expired}}, нет {{missing}}."
     },
     "licenseChanged": {
       "title": "Ваша лицензия изменена",
@@ -263,6 +264,36 @@
       "clock_in": "{{name}} отметил приход с поддельным местоположением.",
       "clock_out": "{{name}} отметил уход с поддельным местоположением.",
       "presence": "{{name}} использовал поддельное местоположение во время смены - эти точки не записаны."
+    },
+    "documents": {
+      "missingTitleSelf": "Нужен документ",
+      "missingBodySelf": "В вашем деле нужен документ: {{document}}. Сфотографируйте его в приложении.",
+      "missingTitleHr": "Документы нового сотрудника",
+      "missingBodyHr": "{{name}}: нужно документов — {{count}}.",
+      "expiringTitleSelf": "{{document}} скоро истекает",
+      "expiringBodySelf": "До окончания {{document}} осталось дней: {{count}}. Обновите и загрузите новый.",
+      "expiringTitleHr": "Документ скоро истекает",
+      "expiringBodyHr": "{{name}}: {{document}} истекает через дней: {{count}}.",
+      "expiredTitleSelf": "{{document}} истекает сегодня",
+      "expiredBodySelf": "Загрузите обновлённый документ ({{document}}) в своё дело.",
+      "expiredTitleHr": "Документ истекает сегодня",
+      "expiredBodyHr": "{{name}}: {{document}} истекает сегодня.",
+      "rejectedTitleSelf": "Документ не принят",
+      "rejectedBodySelf": "{{document}}: {{reason}}. Сфотографируйте заново и отправьте.",
+      "rejectedTitleHr": "Документ не принят",
+      "rejectedBodyHr": "{{document}}: {{reason}}",
+      "reminderTitleSelf": "Напоминание о документе",
+      "reminderBodySelf": "Пожалуйста, загрузите {{document}} в своё дело.",
+      "reminderTitleHr": "Напоминание о документе",
+      "reminderBodyHr": "{{name}}: {{document}}",
+      "uploadedTitleHr": "Документ на проверку",
+      "uploadedBodyHr": "{{name}} загрузил(а) {{document}}.",
+      "uploadedTitleSelf": "Документ загружен",
+      "uploadedBodySelf": "{{document}}",
+      "clockInTitleHr": "Приход с истёкшим документом",
+      "clockInBodyHr": "{{name}} отметил(а) приход, хотя {{document}} истёк.",
+      "clockInTitleSelf": "Документ истёк",
+      "clockInBodySelf": "{{document}} истёк."
     }
   },
   "items": {
@@ -293,7 +324,8 @@
     "externalPay": "Оплата внешних",
     "announcements": "Доска объявлений",
     "exceptions": "Мои исключения",
-    "myProfile": "Моё дело"
+    "myProfile": "Моё дело",
+    "documents": "Документы"
   },
   "sosOverlay": {
     "title": "Сигнал SOS/тревога",
@@ -411,7 +443,8 @@
     "payslips": "Ваши опубликованные листки - посмотрите или запросите по почте.",
     "externalPay": "Ставки за день, неделю, месяц или год, расчёты, правила и индивидуальные корректировки - утверждаются и фиксируются, отдельно от зарплаты.",
     "announcements": "Объявления и официальные заявления для вас; подтвердите те, что этого требуют.",
-    "myProfile": "Ваши данные, документы, взыскания и посещаемость."
+    "myProfile": "Ваши данные, документы, взыскания и посещаемость.",
+    "documents": "Документы всех сотрудников и сроки их действия."
   },
   "backgroundDisclosure": {
     "title": "Местоположение во время смены",

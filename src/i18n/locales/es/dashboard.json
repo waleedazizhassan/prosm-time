@@ -394,7 +394,8 @@
       "cost": "Asignaciones y coste",
       "audit": "Registro de acciones",
       "external": "Trabajadores externos",
-      "insights": "Análisis de asistencia"
+      "insights": "Análisis de asistencia",
+      "documents": "Documentos"
     },
     "sos": {
       "text": "SOS de {{name}} en {{site}} desde las {{time}}",
@@ -585,7 +586,13 @@
         "hr_profile_changed": "Expediente modificado",
         "hr_contract_saved": "Contrato guardado",
         "hr_contract_deleted": "Contrato eliminado",
-        "hr_job_title_saved": "Puesto guardado"
+        "hr_job_title_saved": "Puesto guardado",
+        "hr_document_type_saved": "Ajuste de documento guardado",
+        "hr_document_template_added": "Lista de documentos añadida",
+        "hr_document_uploaded": "Documento subido",
+        "hr_document_accepted": "Documento aceptado",
+        "hr_document_rejected": "Documento no aceptado",
+        "hr_document_reminded": "Recordatorio de documento"
       },
       "groups": {
         "sos": "SOS",

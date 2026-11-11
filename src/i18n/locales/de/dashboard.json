@@ -391,7 +391,8 @@
       "cost": "Zulagen und Kosten",
       "audit": "Aktionsprotokoll",
       "external": "Externe Arbeitskräfte",
-      "insights": "Anwesenheitskennzahlen"
+      "insights": "Anwesenheitskennzahlen",
+      "documents": "Dokumente"
     },
     "sos": {
       "text": "SOS von {{name}} bei {{site}} seit {{time}}",
@@ -582,7 +583,13 @@
         "hr_profile_changed": "Personalakte geändert",
         "hr_contract_saved": "Vertrag gespeichert",
         "hr_contract_deleted": "Vertrag gelöscht",
-        "hr_job_title_saved": "Stelle gespeichert"
+        "hr_job_title_saved": "Stelle gespeichert",
+        "hr_document_type_saved": "Dokumenteinstellung gespeichert",
+        "hr_document_template_added": "Dokumentliste hinzugefügt",
+        "hr_document_uploaded": "Dokument hochgeladen",
+        "hr_document_accepted": "Dokument angenommen",
+        "hr_document_rejected": "Dokument nicht angenommen",
+        "hr_document_reminded": "An Dokument erinnert"
       },
       "groups": {
         "sos": "SOS",

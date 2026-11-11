@@ -304,7 +304,18 @@
     "contractNeedsEnd": "Este contrato necesita fecha de fin.",
     "jobTitleExists": "Este puesto ya existe.",
     "chooseContractType": "Elige el tipo de contrato.",
-    "startDateRequired": "Escribe la fecha de inicio."
+    "startDateRequired": "Escribe la fecha de inicio.",
+    "attachDocument": "Adjunta la foto o el archivo del documento.",
+    "expiryRequired": "Indica la fecha de vencimiento.",
+    "expiryBeforeIssue": "La fecha de vencimiento es anterior a la de emisión.",
+    "documentAlreadyReviewed": "Este documento ya fue revisado.",
+    "alreadyReminded": "A esta persona se le recordó hace un momento. Inténtalo más tarde.",
+    "chooseJobTitle": "Elige al menos un puesto.",
+    "chooseSite": "Elige al menos un centro.",
+    "unknownTemplate": "Esta lista no está disponible.",
+    "invalidFile": "Este archivo no se puede usar. Súbelo de nuevo.",
+    "permissionDenied": "No tienes permiso para hacer esto.",
+    "documentRequiredToClockIn": "No puedes fichar: {{name}} ha vencido. Sube el nuevo desde Mi ficha o habla con tu responsable."
   },
   "pageLoad": {
     "title": "Esta página necesita conexión",

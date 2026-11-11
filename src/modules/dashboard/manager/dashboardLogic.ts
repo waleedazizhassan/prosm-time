@@ -1,8 +1,8 @@
 // v2.3.43 step 17: the dashboard's pure rules, kept apart so they are tested.
 
 export type Period = "day" | "week" | "month" | "custom";
-export type WidgetId = "map" | "present" | "sites" | "approvals" | "external" | "people" | "chart" | "insights" | "cost" | "audit";
-export const DEFAULT_ORDER: WidgetId[] = ["map", "present", "sites", "approvals", "external", "people", "chart", "insights", "cost", "audit"];
+export type WidgetId = "map" | "present" | "sites" | "approvals" | "documents" | "external" | "people" | "chart" | "insights" | "cost" | "audit";
+export const DEFAULT_ORDER: WidgetId[] = ["map", "present", "sites", "approvals", "documents", "external", "people", "chart", "insights", "cost", "audit"];
 
 export function iso(date: Date): string {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
@@ -37,7 +37,7 @@ export function mergeOrder(saved: WidgetId[]): WidgetId[] {
 
 // The audit log speaks the reader's language: a few key actions by name,
 // every other one by its kind (the server's own text is English).
-const AUDIT_NAMED = new Set(["SOS_ALERT_TRIGGERED", "SOS_ALERT_RESOLVED", "ADMIN_CLOCK_IN_ON_BEHALF", "ADMIN_CLOCK_OUT_ON_BEHALF", "PERMISSION_GRANTED", "PERMISSION_REVOKED", "EMPLOYEE_DEACTIVATED", "EMPLOYEE_REMOVED", "USER_INVITED", "attendance.override_block", "attendance.day_adjusted", "attendance.overtime_approved", "attendance.auto_close", "allowances.edit_during_review", "leave.approved_cancelled", "hr.profile_changed", "hr.contract_saved", "hr.contract_deleted", "hr.job_title_saved"]);
+const AUDIT_NAMED = new Set(["SOS_ALERT_TRIGGERED", "SOS_ALERT_RESOLVED", "ADMIN_CLOCK_IN_ON_BEHALF", "ADMIN_CLOCK_OUT_ON_BEHALF", "PERMISSION_GRANTED", "PERMISSION_REVOKED", "EMPLOYEE_DEACTIVATED", "EMPLOYEE_REMOVED", "USER_INVITED", "attendance.override_block", "attendance.day_adjusted", "attendance.overtime_approved", "attendance.auto_close", "allowances.edit_during_review", "leave.approved_cancelled", "hr.profile_changed", "hr.contract_saved", "hr.contract_deleted", "hr.job_title_saved", "hr.document_type_saved", "hr.document_template_added", "hr.document_uploaded", "hr.document_accepted", "hr.document_rejected", "hr.document_reminded"]);
 // Owner 2026-11-10 ("the action log has many things that are not clear"): the automatic records of a
 // table change ("<table>.<insert|update|delete>") and the newer actions get their own kind, not "other".
 const AUDIT_GROUPS: [RegExp, string][] = [

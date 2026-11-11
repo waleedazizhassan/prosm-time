@@ -57,6 +57,7 @@ const PayrollSettingsPage = lazy(() => import("../modules/payroll/PayrollSetting
 const PayslipRequestsPage = lazy(() => import("../modules/payroll/PayslipRequestsPage"));
 const MyPayslipsPage = lazy(() => import("../modules/payroll/MyPayslipsPage"));
 const MyProfilePage = lazy(() => import("../modules/people/MyProfilePage"));
+const DocumentsPage = lazy(() => import("../modules/documents/DocumentsPage"));
 const ExceptionsPage = lazy(() => import("../modules/dashboard/ExceptionsPage"));
 const AnnouncementsPage = lazy(() => import("../modules/announcements/AnnouncementsPage"));
 
@@ -159,6 +160,7 @@ export default function AppRoutes() {
             <Route path="/payroll/requests" element={<PlanRoute feature="payroll"><PayslipRequestsPage /></PlanRoute>} />
             <Route path="/payslips" element={<PlanRoute feature="payroll"><MyPayslipsPage /></PlanRoute>} />
             <Route path="/me" element={<MyProfilePage />} />
+            <Route path="/documents" element={<PlanRoute feature="documents"><DocumentsPage /></PlanRoute>} />
             {/* 2026-11-09 Media Center: announcements for everyone; publishing is checked on the server */}
             <Route path="/announcements" element={<AnnouncementsPage />} />
             <Route path="/exceptions" element={<ExceptionsPage />} />

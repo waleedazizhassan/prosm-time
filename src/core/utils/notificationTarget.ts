@@ -67,6 +67,17 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
     case "payslip_requested":
     case "payslip_send_failed":
       return "/payroll/requests";
+    // 2026-11-11 HR suite feature 2: a document - personnel managers to the documents page, the person to
+    // the documents in their own file (where the camera button is)
+    case "document_uploaded":
+    case "document_clock_in":
+      return "/documents";
+    case "document_missing":
+    case "document_expiring":
+    case "document_expired":
+    case "document_rejected":
+    case "document_reminder":
+      return ref?.kind === "hr" || viewer.isOwner ? "/documents" : "/me?tab=documents";
     // Owner 2026-11-10: a Buzz opens the clock-in screen (where "clock in / out" is done)
     case "buzz":
       return "/clock-in";

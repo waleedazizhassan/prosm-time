@@ -391,7 +391,8 @@
       "cost": "Allowances and cost",
       "audit": "Action log",
       "external": "External workers",
-      "insights": "Attendance insights"
+      "insights": "Attendance insights",
+      "documents": "Documents"
     },
     "sos": {
       "text": "SOS from {{name}} at {{site}} since {{time}}",
@@ -582,7 +583,13 @@
         "hr_profile_changed": "Personnel file changed",
         "hr_contract_saved": "Contract saved",
         "hr_contract_deleted": "Contract deleted",
-        "hr_job_title_saved": "Job title saved"
+        "hr_job_title_saved": "Job title saved",
+        "hr_document_type_saved": "Document setting saved",
+        "hr_document_template_added": "Document list added",
+        "hr_document_uploaded": "Document uploaded",
+        "hr_document_accepted": "Document accepted",
+        "hr_document_rejected": "Document not accepted",
+        "hr_document_reminded": "Employee reminded of a document"
       },
       "groups": {
         "sos": "SOS",

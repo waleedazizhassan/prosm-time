@@ -214,7 +214,8 @@
     },
     "dailyDigest": {
       "title": "Hier en bref",
-      "body": "{{present}} ont travaillé, {{late}} en retard, {{absent}} absents, {{onLeave}} en congé. En attente : {{leave}} congés, {{exceptions}} exceptions. Pointés maintenant : {{open}}."
+      "body": "{{present}} ont travaillé, {{late}} en retard, {{absent}} absents, {{onLeave}} en congé. En attente : {{leave}} congés, {{exceptions}} exceptions. Pointés maintenant : {{open}}.",
+      "documents": "Documents : {{expired}} expirés, {{missing}} manquants."
     },
     "licenseChanged": {
       "title": "Votre licence a changé",
@@ -263,6 +264,36 @@
       "clock_in": "{{name}} a pointé son arrivée avec une position falsifiée.",
       "clock_out": "{{name}} a pointé son départ avec une position falsifiée.",
       "presence": "{{name}} a utilisé une position falsifiée pendant le service - ces positions n’ont pas été enregistrées."
+    },
+    "documents": {
+      "missingTitleSelf": "Un document est demandé",
+      "missingBodySelf": "{{document}} est demandé dans votre dossier. Photographiez-le dans l'application.",
+      "missingTitleHr": "Documents d'un nouvel employé",
+      "missingBodyHr": "{{name}} doit fournir {{count}} document(s).",
+      "expiringTitleSelf": "{{document}} expire bientôt",
+      "expiringBodySelf": "Encore {{count}} jour(s) pour {{document}}. Renouvelez-le et envoyez le nouveau.",
+      "expiringTitleHr": "Un document expire bientôt",
+      "expiringBodyHr": "{{name}} : {{document}} expire dans {{count}} jour(s).",
+      "expiredTitleSelf": "{{document}} expire aujourd'hui",
+      "expiredBodySelf": "Envoyez {{document}} renouvelé depuis votre dossier.",
+      "expiredTitleHr": "Un document expire aujourd'hui",
+      "expiredBodyHr": "{{name}} : {{document}} expire aujourd'hui.",
+      "rejectedTitleSelf": "Document non accepté",
+      "rejectedBodySelf": "{{document}} : {{reason}}. Photographiez-le à nouveau et envoyez-le.",
+      "rejectedTitleHr": "Document non accepté",
+      "rejectedBodyHr": "{{document}} : {{reason}}",
+      "reminderTitleSelf": "Relance de document",
+      "reminderBodySelf": "Merci d'envoyer {{document}} depuis votre dossier.",
+      "reminderTitleHr": "Relance de document",
+      "reminderBodyHr": "{{name}} : {{document}}",
+      "uploadedTitleHr": "Un document à vérifier",
+      "uploadedBodyHr": "{{name}} a envoyé {{document}}.",
+      "uploadedTitleSelf": "Document envoyé",
+      "uploadedBodySelf": "{{document}}",
+      "clockInTitleHr": "Pointage avec un document expiré",
+      "clockInBodyHr": "{{name}} a pointé alors que {{document}} a expiré.",
+      "clockInTitleSelf": "Document expiré",
+      "clockInBodySelf": "{{document}} a expiré."
     }
   },
   "items": {
@@ -293,7 +324,8 @@
     "externalPay": "Paie des externes",
     "announcements": "Tableau d'affichage",
     "exceptions": "Mes exceptions",
-    "myProfile": "Mon dossier"
+    "myProfile": "Mon dossier",
+    "documents": "Documents"
   },
   "sosOverlay": {
     "title": "Alerte SOS/Urgence",
@@ -406,7 +438,8 @@
     "payslips": "Vos bulletins publiés - consultez-les ou demandez-les par e-mail.",
     "externalPay": "Taux à la journée, à la semaine, au mois ou à l'année, paies, règles et ajustements individuels - approuvés et figés, séparés de la paie des employés.",
     "announcements": "Annonces et communiqués officiels qui vous sont adressés ; confirmez ceux qui le demandent.",
-    "myProfile": "Tes données, documents, avertissements et présences."
+    "myProfile": "Tes données, documents, avertissements et présences.",
+    "documents": "Les documents de chaque employé et leurs dates d'expiration."
   },
   "backgroundDisclosure": {
     "title": "Position pendant votre poste",

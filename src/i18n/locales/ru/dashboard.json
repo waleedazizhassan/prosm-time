@@ -397,7 +397,8 @@
       "cost": "Надбавки и затраты",
       "audit": "Журнал действий",
       "external": "Внешние рабочие",
-      "insights": "Аналитика посещаемости"
+      "insights": "Аналитика посещаемости",
+      "documents": "Документы"
     },
     "sos": {
       "text": "SOS от {{name}} на {{site}} с {{time}}",
@@ -588,7 +589,13 @@
         "hr_profile_changed": "Личное дело изменено",
         "hr_contract_saved": "Договор сохранён",
         "hr_contract_deleted": "Договор удалён",
-        "hr_job_title_saved": "Должность сохранена"
+        "hr_job_title_saved": "Должность сохранена",
+        "hr_document_type_saved": "Настройка документа сохранена",
+        "hr_document_template_added": "Добавлен список документов",
+        "hr_document_uploaded": "Документ загружен",
+        "hr_document_accepted": "Документ принят",
+        "hr_document_rejected": "Документ не принят",
+        "hr_document_reminded": "Напоминание о документе"
       },
       "groups": {
         "sos": "SOS",

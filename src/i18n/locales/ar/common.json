@@ -304,7 +304,18 @@
     "contractNeedsEnd": "العقد ده محتاج تاريخ نهاية.",
     "jobTitleExists": "الوظيفة دي موجودة بالفعل.",
     "chooseContractType": "اختار نوع العقد.",
-    "startDateRequired": "اكتب تاريخ البداية."
+    "startDateRequired": "اكتب تاريخ البداية.",
+    "attachDocument": "أرفق صورة المستند أو ملفه.",
+    "expiryRequired": "أدخل تاريخ الانتهاء.",
+    "expiryBeforeIssue": "تاريخ الانتهاء قبل تاريخ الإصدار.",
+    "documentAlreadyReviewed": "تمت مراجعة هذا المستند بالفعل.",
+    "alreadyReminded": "تم تذكير هذا الشخص منذ قليل. حاول لاحقًا.",
+    "chooseJobTitle": "اختر مسمى وظيفيًا واحدًا على الأقل.",
+    "chooseSite": "اختر موقعًا واحدًا على الأقل.",
+    "unknownTemplate": "هذه القائمة غير متاحة.",
+    "invalidFile": "لا يمكن استخدام هذا الملف. ارفعه مرة أخرى.",
+    "permissionDenied": "ليست لديك صلاحية لهذا الإجراء.",
+    "documentRequiredToClockIn": "لا يمكنك تسجيل الحضور: {{name}} منتهي. ارفع الجديد من «ملفي» أو كلّم مديرك."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

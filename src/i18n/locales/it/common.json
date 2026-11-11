@@ -304,7 +304,18 @@
     "contractNeedsEnd": "Questo contratto richiede una data di fine.",
     "jobTitleExists": "Questa mansione esiste già.",
     "chooseContractType": "Scegli il tipo di contratto.",
-    "startDateRequired": "Inserisci la data di inizio."
+    "startDateRequired": "Inserisci la data di inizio.",
+    "attachDocument": "Allega la foto o il file del documento.",
+    "expiryRequired": "Inserisci la data di scadenza.",
+    "expiryBeforeIssue": "La data di scadenza è precedente a quella di rilascio.",
+    "documentAlreadyReviewed": "Questo documento è già stato verificato.",
+    "alreadyReminded": "Questa persona è appena stata sollecitata. Riprova più tardi.",
+    "chooseJobTitle": "Scegli almeno una mansione.",
+    "chooseSite": "Scegli almeno una sede.",
+    "unknownTemplate": "Questo elenco non è disponibile.",
+    "invalidFile": "Questo file non può essere usato. Caricalo di nuovo.",
+    "permissionDenied": "Non hai il permesso per farlo.",
+    "documentRequiredToClockIn": "Non puoi timbrare: {{name}} è scaduto. Carica il nuovo da Il mio fascicolo o parla con il tuo responsabile."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

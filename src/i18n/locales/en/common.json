@@ -304,7 +304,18 @@
     "contractNeedsEnd": "This contract needs an end date.",
     "jobTitleExists": "This job title already exists.",
     "chooseContractType": "Choose the contract type.",
-    "startDateRequired": "Enter the start date."
+    "startDateRequired": "Enter the start date.",
+    "attachDocument": "Attach the document's photo or file.",
+    "expiryRequired": "Enter the expiry date.",
+    "expiryBeforeIssue": "The expiry date is before the issue date.",
+    "documentAlreadyReviewed": "Someone already reviewed this document.",
+    "alreadyReminded": "This person was reminded a moment ago. Try again later.",
+    "chooseJobTitle": "Choose at least one job title.",
+    "chooseSite": "Choose at least one site.",
+    "unknownTemplate": "This list isn't available.",
+    "invalidFile": "This file can't be used. Upload it again.",
+    "permissionDenied": "You don't have permission to do this.",
+    "documentRequiredToClockIn": "You can't clock in: {{name}} has expired. Upload the new one from My file, or ask your manager."
   },
   "pageLoad": {
     "title": "This page needs a connection",

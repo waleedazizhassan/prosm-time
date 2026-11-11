@@ -5,6 +5,7 @@ import { useAuth } from "../../core/context/AuthContext";
 
 import DepartmentsSettingsCard from "./DepartmentsSettingsCard";
 import JobTitlesSettingsCard from "./JobTitlesSettingsCard";
+import DocumentTypesSettingsCard from "./DocumentTypesSettingsCard";
 import PageShell from "../../components/common/PageShell";
 import Button from "../../components/common/Button";
 import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
@@ -114,6 +115,8 @@ export default function OrganizationSettingsPage() {
           {hasPermission("leave.manage_types") ? <LeaveTypesSettingsCard /> : null}
           {/* 2026-11-11 HR suite: the company's job titles */}
           {isOwner || hasPermission("hr.manage") ? <JobTitlesSettingsCard /> : null}
+          {/* 2026-11-11 HR suite feature 2: the documents each person must keep valid */}
+          {(isOwner || hasPermission("hr.manage")) && allows("documents") ? <DocumentTypesSettingsCard /> : null}
           {/* 2026-11-09 Media Center: departments (announcements can be addressed to them) */}
           {showDepartments ? <DepartmentsSettingsCard /> : null}
         </>

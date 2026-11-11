@@ -25,6 +25,7 @@ import PeopleByRole from "../../people/PeopleByRole";
 import ApprovalsQueue from "./ApprovalsQueue";
 import ExternalWorkersWidget from "./ExternalWorkersWidget";
 import InsightsWidget from "./InsightsWidget";
+import DocumentsWidget from "./DocumentsWidget";
 import SitesMap from "./SitesMap";
 import styles from "./ManagerDashboard.module.css";
 import { auditLabel, DEFAULT_HIDDEN, DEFAULT_ORDER, iso, mergeOrder, periodRange, trend, type Period, type WidgetId } from "./dashboardLogic";
@@ -251,6 +252,7 @@ export default function ManagerDashboard() {
     if (id === "cost") return Boolean(data?.canViewCost);
     if (id === "audit") return Boolean(data?.canViewAudit);
     if (id === "external") return Boolean(data?.canViewExternal);
+    if (id === "documents") return allows("documents") && (isOwner || hasPermission("hr.manage"));
     return true;
   };
 
@@ -365,6 +367,12 @@ export default function ManagerDashboard() {
         return (
           <section key={id} id="dash-external" className={`${styles.widget} ${styles.span12}`} style={{ order: order.indexOf(id) }}>
             {data ? <ExternalWorkersWidget sites={data.sites} refreshKey={data.asOf} /> : <div className={styles.skeleton} style={{ height: 120 }} />}
+          </section>
+        );
+      case "documents":
+        return (
+          <section key={id} className={`${styles.widget} ${styles.span4}`} style={{ order: order.indexOf(id) }}>
+            <DocumentsWidget refreshKey={data?.asOf ?? ""} />
           </section>
         );
       case "approvals":

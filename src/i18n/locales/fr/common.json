@@ -304,7 +304,18 @@
     "contractNeedsEnd": "Ce contrat a besoin d’une date de fin.",
     "jobTitleExists": "Ce poste existe déjà.",
     "chooseContractType": "Choisis le type de contrat.",
-    "startDateRequired": "Saisis la date de début."
+    "startDateRequired": "Saisis la date de début.",
+    "attachDocument": "Joignez la photo ou le fichier du document.",
+    "expiryRequired": "Saisissez la date d'expiration.",
+    "expiryBeforeIssue": "La date d'expiration est antérieure à la date de délivrance.",
+    "documentAlreadyReviewed": "Ce document a déjà été vérifié.",
+    "alreadyReminded": "Cette personne vient d'être relancée. Réessayez plus tard.",
+    "chooseJobTitle": "Choisissez au moins un poste.",
+    "chooseSite": "Choisissez au moins un site.",
+    "unknownTemplate": "Cette liste n'est pas disponible.",
+    "invalidFile": "Ce fichier ne peut pas être utilisé. Envoyez-le à nouveau.",
+    "permissionDenied": "Vous n'avez pas l'autorisation de faire cela.",
+    "documentRequiredToClockIn": "Pointage impossible : {{name}} a expiré. Envoyez le nouveau depuis Mon dossier ou contactez votre responsable."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

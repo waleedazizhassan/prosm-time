@@ -1,0 +1,141 @@
+{
+  "pageTitle": "Dokumente",
+  "tabTitle": "Dokumente",
+  "loadError": "Die Dokumente konnten nicht geladen werden. Bitte erneut versuchen.",
+  "actionError": "Das hat nicht geklappt. Bitte erneut versuchen.",
+  "queued_one": "{{count}} Dokument ist auf diesem Telefon gespeichert und wird gesendet, sobald Sie online sind.",
+  "queued_other": "{{count}} Dokumente sind auf diesem Telefon gespeichert und werden gesendet, sobald Sie online sind.",
+  "empty": "Von Ihnen werden keine Dokumente benötigt.",
+  "emptyHr": "Für diese Person werden keine Dokumente benötigt. Legen Sie die Dokumente unter Einstellungen → Personen fest.",
+  "mandatory": "Pflicht",
+  "expires": "Läuft ab am {{date}}",
+  "noExpiry": "Läuft nicht ab",
+  "rejectedBecause": "Nicht angenommen: {{reason}}",
+  "status": {
+    "missing": "Fehlt",
+    "pending_review": "Wartet auf Prüfung",
+    "valid": "Gültig",
+    "expiring": "Läuft bald ab",
+    "expired": "Abgelaufen",
+    "rejected": "Nicht angenommen",
+    "not_required": "Nicht erforderlich",
+    "waitingToSend": "Wartet auf Versand"
+  },
+  "state": {
+    "expiresToday": "Läuft heute ab",
+    "expiresIn_one": "Läuft in {{count}} Tag ab",
+    "expiresIn_other": "Läuft in {{count}} Tagen ab",
+    "expiredAgo_one": "Seit {{count}} Tag abgelaufen",
+    "expiredAgo_other": "Seit {{count}} Tagen abgelaufen"
+  },
+  "view": "Ansehen",
+  "review": "Prüfen",
+  "renew": "Erneuern",
+  "remind": "Erinnern",
+  "reminded": "Erinnerung gesendet.",
+  "remindedName": "Erinnerung an {{name}} gesendet.",
+  "archive_one": "{{count}} ältere Version",
+  "archive_other": "{{count}} ältere Versionen",
+  "savedOffline": "Keine Verbindung: Das Dokument ist auf dem Telefon gespeichert und wird automatisch gesendet.",
+  "uploadedHr": "Dokument gespeichert.",
+  "uploadedSelf": "Gesendet. Ihre Führungskraft prüft es.",
+  "reviewTitle": "Prüfen: {{name}}",
+  "reject": "Nicht annehmen",
+  "accept": "Annehmen",
+  "rejected": "Die Person wurde über den Grund informiert.",
+  "accepted": "Dokument angenommen.",
+  "viewUpload": "Hochgeladene Datei öffnen",
+  "rejectReason": "Grund (zum Ablehnen nötig)",
+  "upload": {
+    "action": "Hochladen",
+    "title": "Hochladen: {{name}}",
+    "send": "Senden",
+    "needFile": "Fotografieren Sie das Dokument oder wählen Sie die Datei.",
+    "needExpiry": "Geben Sie das Ablaufdatum ein.",
+    "error": "Das Dokument konnte nicht gesendet werden. Bitte erneut versuchen.",
+    "photo": "Foto aufnehmen",
+    "photoHint": "Auf dem Telefon öffnet sich die Kamera. Ein PDF geht auch.",
+    "number": "Dokumentnummer",
+    "issue": "Ausstellungsdatum",
+    "expiry": "Ablaufdatum",
+    "offlineHint": "Kein Internet? Es wird auf dem Telefon gespeichert und später gesendet."
+  },
+  "types": {
+    "title": "Mitarbeiterdokumente",
+    "add": "Dokument hinzufügen",
+    "hint": "Die Dokumente, die jede Person in ihrer Akte haben muss, wann erinnert wird und was beim Einstempeln nach Ablauf passiert.",
+    "templatesHint": "Beginnen Sie mit einer fertigen Namensliste (inaktiv hinzugefügt, damit Sie sie zuerst prüfen) oder fügen Sie eigene hinzu.",
+    "templateEg": "Liste Ägypten",
+    "templateGulf": "Liste Golfstaaten",
+    "templateAdded_one": "{{count}} Name inaktiv hinzugefügt – prüfen und aktivieren.",
+    "templateAdded_other": "{{count}} Namen inaktiv hinzugefügt – prüfen und aktivieren.",
+    "error": "Speichern fehlgeschlagen. Bitte erneut versuchen.",
+    "saved": "Gespeichert. Die Listen aller wurden aktualisiert.",
+    "mandatory": "Pflicht",
+    "optional": "Optional",
+    "remindAt": "Erinnerung {{days}} Tage vorher",
+    "noExpiry": "Ohne Ablauf",
+    "appliesTo": {
+      "all": "Alle",
+      "job_titles": "Bestimmte Berufsbezeichnungen",
+      "sites": "Bestimmte Standorte"
+    },
+    "clockIn": {
+      "warn": "Warnt beim Einstempeln",
+      "block": "Sperrt das Einstempeln"
+    },
+    "stopped": "Inaktiv",
+    "edit": "Bearbeiten",
+    "editTitle": "Dokument bearbeiten",
+    "addTitle": "Neues Dokument",
+    "save": "Speichern",
+    "name": "Name des Dokuments",
+    "mandatoryLabel": "Für diese Personen Pflicht",
+    "hasExpiry": "Hat ein Ablaufdatum",
+    "reminderDays": "Erinnern (Tage vor Ablauf)",
+    "reminderDaysHint": "Zum Beispiel 30, 7, 0 – 0 ist der Ablauftag selbst.",
+    "clockInRule": "Beim Einstempeln nach Ablauf",
+    "clockInOption": {
+      "none": "Nichts",
+      "warn": "Erlauben und Personalverantwortliche informieren",
+      "block": "Einstempeln nicht erlauben"
+    },
+    "appliesToLabel": "Wer es braucht",
+    "noJobTitles": "Fügen Sie zuerst Berufsbezeichnungen hinzu (in diesem Tab).",
+    "active": "In Verwendung"
+  },
+  "completeLine": "Akten vollständig: {{percent}} %",
+  "typesLink": "Dokumenteinstellungen",
+  "export": "CSV exportieren",
+  "exportName": "dokumente",
+  "columns": {
+    "person": "Person",
+    "site": "Standort",
+    "document": "Dokument",
+    "status": "Status",
+    "expiry": "Ablauf"
+  },
+  "tiles": {
+    "expired": "Abgelaufen",
+    "expiring": "Läuft bald ab",
+    "missing": "Fehlt",
+    "pendingReview": "Zu prüfen"
+  },
+  "tabs": {
+    "action": "Handlungsbedarf",
+    "all": "Alle"
+  },
+  "search": "Name oder Dokument suchen",
+  "nothingToDo": "Nichts zu tun. Alle Akten sind in Ordnung.",
+  "noDocuments": "Noch keine Dokumente.",
+  "widget": {
+    "title": "Dokumente",
+    "open": "Öffnen",
+    "allGood": "Alle Dokumente sind in Ordnung ({{percent}} % vollständig)."
+  },
+  "alert": {
+    "more_one": "und {{count}} weiteres Dokument",
+    "more_other": "und {{count}} weitere Dokumente",
+    "photograph": "Jetzt fotografieren"
+  }
+}

@@ -214,7 +214,8 @@
     },
     "dailyDigest": {
       "title": "Yesterday at a glance",
-      "body": "{{present}} worked, {{late}} late, {{absent}} absent, {{onLeave}} on leave. Waiting for you: {{leave}} leave, {{exceptions}} exceptions. Clocked in now: {{open}}."
+      "body": "{{present}} worked, {{late}} late, {{absent}} absent, {{onLeave}} on leave. Waiting for you: {{leave}} leave, {{exceptions}} exceptions. Clocked in now: {{open}}.",
+      "documents": "Documents: {{expired}} expired, {{missing}} missing."
     },
     "licenseChanged": {
       "title": "Your licence changed",
@@ -263,6 +264,36 @@
       "clock_in": "{{name}} clocked in with a fake location (a location-spoofing app).",
       "clock_out": "{{name}} clocked out with a fake location (a location-spoofing app).",
       "presence": "{{name}} used a fake location during the shift - those locations were not recorded."
+    },
+    "documents": {
+      "missingTitleSelf": "A document is needed",
+      "missingBodySelf": "{{document}} is needed in your file. Photograph it in the app.",
+      "missingTitleHr": "New employee documents",
+      "missingBodyHr": "{{name}} needs {{count}} document(s) in their file.",
+      "expiringTitleSelf": "{{document}} expires soon",
+      "expiringBodySelf": "{{count}} day(s) left on {{document}}. Renew it and upload the new one.",
+      "expiringTitleHr": "A document expires soon",
+      "expiringBodyHr": "{{name}}: {{document}} expires in {{count}} day(s).",
+      "expiredTitleSelf": "{{document}} expires today",
+      "expiredBodySelf": "Upload the renewed {{document}} from your file.",
+      "expiredTitleHr": "A document expires today",
+      "expiredBodyHr": "{{name}}: {{document}} expires today.",
+      "rejectedTitleSelf": "Document not accepted",
+      "rejectedBodySelf": "{{document}}: {{reason}}. Photograph it again and send it.",
+      "rejectedTitleHr": "Document not accepted",
+      "rejectedBodyHr": "{{document}}: {{reason}}",
+      "reminderTitleSelf": "Document reminder",
+      "reminderBodySelf": "Please upload {{document}} from your file.",
+      "reminderTitleHr": "Document reminder",
+      "reminderBodyHr": "{{name}}: {{document}}",
+      "uploadedTitleHr": "A document to review",
+      "uploadedBodyHr": "{{name}} uploaded {{document}}.",
+      "uploadedTitleSelf": "Document uploaded",
+      "uploadedBodySelf": "{{document}}",
+      "clockInTitleHr": "Clocked in with an expired document",
+      "clockInBodyHr": "{{name}} clocked in while {{document}} has expired.",
+      "clockInTitleSelf": "Expired document",
+      "clockInBodySelf": "{{document}} has expired."
     }
   },
   "items": {
@@ -293,7 +324,8 @@
     "externalPay": "External labour pay",
     "announcements": "Notice board",
     "exceptions": "My exceptions",
-    "myProfile": "My file"
+    "myProfile": "My file",
+    "documents": "Documents"
   },
   "sosOverlay": {
     "title": "SOS/Emergency alert",
@@ -401,7 +433,8 @@
     "payslips": "Your published payslips - view them or ask for them by email.",
     "externalPay": "Rates by day, week, month or year, pay runs, the policy and individual adjustments - approved and frozen, kept apart from payroll.",
     "announcements": "Announcements and official statements addressed to you; confirm the ones that ask for it.",
-    "myProfile": "Your details, documents, warnings and attendance."
+    "myProfile": "Your details, documents, warnings and attendance.",
+    "documents": "Every employee's documents and their expiry dates."
   },
   "backgroundDisclosure": {
     "title": "Location during your shift",

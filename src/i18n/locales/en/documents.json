@@ -1,0 +1,141 @@
+{
+  "pageTitle": "Documents",
+  "tabTitle": "Documents",
+  "loadError": "Couldn't load the documents. Try again.",
+  "actionError": "That didn't work. Try again.",
+  "queued_one": "{{count}} document is saved on this phone and will be sent when you're online.",
+  "queued_other": "{{count}} documents are saved on this phone and will be sent when you're online.",
+  "empty": "No documents are required from you.",
+  "emptyHr": "No documents are required for this person. Set the company's documents in Settings → People.",
+  "mandatory": "Required",
+  "expires": "Expires {{date}}",
+  "noExpiry": "Does not expire",
+  "rejectedBecause": "Not accepted: {{reason}}",
+  "status": {
+    "missing": "Missing",
+    "pending_review": "Waiting for review",
+    "valid": "Valid",
+    "expiring": "Expiring soon",
+    "expired": "Expired",
+    "rejected": "Not accepted",
+    "not_required": "Not required",
+    "waitingToSend": "Waiting to send"
+  },
+  "state": {
+    "expiresToday": "Expires today",
+    "expiresIn_one": "Expires in {{count}} day",
+    "expiresIn_other": "Expires in {{count}} days",
+    "expiredAgo_one": "Expired {{count}} day ago",
+    "expiredAgo_other": "Expired {{count}} days ago"
+  },
+  "view": "View",
+  "review": "Review",
+  "renew": "Renew",
+  "remind": "Remind",
+  "reminded": "Reminder sent.",
+  "remindedName": "Reminder sent to {{name}}.",
+  "archive_one": "{{count}} older copy",
+  "archive_other": "{{count}} older copies",
+  "savedOffline": "No connection: the document is saved on this phone and will be sent automatically.",
+  "uploadedHr": "Document saved.",
+  "uploadedSelf": "Sent. Your manager will review it.",
+  "reviewTitle": "Review: {{name}}",
+  "reject": "Not accepted",
+  "accept": "Accept",
+  "rejected": "The person was told why.",
+  "accepted": "Document accepted.",
+  "viewUpload": "Open the uploaded file",
+  "rejectReason": "Reason (needed to refuse)",
+  "upload": {
+    "action": "Upload",
+    "title": "Upload: {{name}}",
+    "send": "Send",
+    "needFile": "Take a photo of the document or choose its file.",
+    "needExpiry": "Enter the expiry date.",
+    "error": "Couldn't send the document. Try again.",
+    "photo": "Take a photo",
+    "photoHint": "The camera opens on a phone. A PDF works too.",
+    "number": "Document number",
+    "issue": "Issue date",
+    "expiry": "Expiry date",
+    "offlineHint": "No internet? It is saved on the phone and sent later."
+  },
+  "types": {
+    "title": "Employee documents",
+    "add": "Add a document",
+    "hint": "The documents each person must keep in their file, when to remind, and what happens at clock-in after one expires.",
+    "templatesHint": "Start from a ready list of names (added stopped, so you review them first), or add your own.",
+    "templateEg": "Egypt list",
+    "templateGulf": "Gulf list",
+    "templateAdded_one": "{{count}} name added, stopped - review it and turn it on.",
+    "templateAdded_other": "{{count}} names added, stopped - review them and turn them on.",
+    "error": "Couldn't save. Try again.",
+    "saved": "Saved. Everyone's list was updated.",
+    "mandatory": "Required",
+    "optional": "Optional",
+    "remindAt": "Reminders {{days}} days before",
+    "noExpiry": "No expiry",
+    "appliesTo": {
+      "all": "Everyone",
+      "job_titles": "Some job titles",
+      "sites": "Some sites"
+    },
+    "clockIn": {
+      "warn": "Warns at clock-in",
+      "block": "Blocks clock-in"
+    },
+    "stopped": "Stopped",
+    "edit": "Edit",
+    "editTitle": "Edit document",
+    "addTitle": "New document",
+    "save": "Save",
+    "name": "Document name",
+    "mandatoryLabel": "Required for these people",
+    "hasExpiry": "It has an expiry date",
+    "reminderDays": "Remind (days before expiry)",
+    "reminderDaysHint": "For example 30, 7, 0 - 0 is the expiry day itself.",
+    "clockInRule": "At clock-in after it expires",
+    "clockInOption": {
+      "none": "Nothing",
+      "warn": "Allow, and tell personnel managers",
+      "block": "Don't allow clock-in"
+    },
+    "appliesToLabel": "Who needs it",
+    "noJobTitles": "Add job titles first (in this tab).",
+    "active": "In use"
+  },
+  "completeLine": "Files complete: {{percent}}%",
+  "typesLink": "Document settings",
+  "export": "Export CSV",
+  "exportName": "documents",
+  "columns": {
+    "person": "Person",
+    "site": "Site",
+    "document": "Document",
+    "status": "Status",
+    "expiry": "Expiry"
+  },
+  "tiles": {
+    "expired": "Expired",
+    "expiring": "Expiring soon",
+    "missing": "Missing",
+    "pendingReview": "To review"
+  },
+  "tabs": {
+    "action": "Needs action",
+    "all": "All"
+  },
+  "search": "Search a name or document",
+  "nothingToDo": "Nothing needs action. Every file is in order.",
+  "noDocuments": "No documents yet.",
+  "widget": {
+    "title": "Documents",
+    "open": "Open",
+    "allGood": "All documents are in order ({{percent}}% complete)."
+  },
+  "alert": {
+    "more_one": "and {{count}} more document",
+    "more_other": "and {{count}} more documents",
+    "photograph": "Photograph it"
+  }
+}

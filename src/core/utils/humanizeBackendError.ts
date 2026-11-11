@@ -52,6 +52,9 @@ function translate(trimmed: string, t: TFunction): string | null {
   if (/failed to fetch|networkerror|network request failed|load failed|fetch failed|failed to send a request|err_internet_disconnected|timed? ?out/i.test(trimmed)) {
     return t("common:backendErrors.networkProblem");
   }
+  // 2026-11-11 HR suite: clock-in stopped by an expired document (its name follows the colon)
+  const documentBlock = /DOCUMENT REQUIRED TO CLOCK IN: (.+)$/.exec(unwrap(trimmed));
+  if (documentBlock) return t("common:backendErrors.documentRequiredToClockIn", { name: documentBlock[1] });
   // Owner 2026-11-03: a feature outside the organisation's plan.
   if (trimmed.includes("FEATURE NOT IN PLAN")) return t("common:backendErrors.featureNotInPlan");
   if (trimmed.includes("presence_sessions_one_active_per_user")) {
@@ -345,6 +348,19 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "THE BIRTH DATE CANNOT BE IN THE FUTURE": "birthDateFuture",
   "JOB TITLE NOT FOUND": "notFound",
   "CONTRACT NOT FOUND": "notFound",
+  // 2026-11-11 HR suite feature 2: documents
+  "ATTACH THE DOCUMENT": "attachDocument",
+  "THE EXPIRY DATE IS REQUIRED": "expiryRequired",
+  "THE EXPIRY DATE IS BEFORE THE ISSUE DATE": "expiryBeforeIssue",
+  "DOCUMENT TYPE NOT FOUND": "notFound",
+  "DOCUMENT NOT FOUND": "notFound",
+  "THIS DOCUMENT WAS ALREADY REVIEWED": "documentAlreadyReviewed",
+  "ALREADY REMINDED RECENTLY": "alreadyReminded",
+  "CHOOSE AT LEAST ONE JOB TITLE": "chooseJobTitle",
+  "CHOOSE AT LEAST ONE SITE": "chooseSite",
+  "UNKNOWN TEMPLATE": "unknownTemplate",
+  "INVALID FILE": "invalidFile",
+  "PERMISSION DENIED": "permissionDenied",
   // 2026-11-10: Buzz
   "BUZZ TOO SOON": "buzzTooSoon",
   "YOU CANNOT BUZZ YOURSELF": "buzzSelf",

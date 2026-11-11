@@ -394,7 +394,8 @@
       "cost": "Indemnités et coût",
       "audit": "Journal des actions",
       "external": "Travailleurs externes",
-      "insights": "Indicateurs de présence"
+      "insights": "Indicateurs de présence",
+      "documents": "Documents"
     },
     "sos": {
       "text": "SOS de {{name}} à {{site}} depuis {{time}}",
@@ -585,7 +586,13 @@
         "hr_profile_changed": "Dossier modifié",
         "hr_contract_saved": "Contrat enregistré",
         "hr_contract_deleted": "Contrat supprimé",
-        "hr_job_title_saved": "Poste enregistré"
+        "hr_job_title_saved": "Poste enregistré",
+        "hr_document_type_saved": "Paramètre de document enregistré",
+        "hr_document_template_added": "Liste de documents ajoutée",
+        "hr_document_uploaded": "Document envoyé",
+        "hr_document_accepted": "Document accepté",
+        "hr_document_rejected": "Document refusé",
+        "hr_document_reminded": "Relance de document"
       },
       "groups": {
         "sos": "SOS",

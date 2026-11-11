@@ -394,7 +394,8 @@
       "cost": "Adicionais e custo",
       "audit": "Registro de ações",
       "external": "Trabalhadores externos",
-      "insights": "Análise de frequência"
+      "insights": "Análise de frequência",
+      "documents": "Documentos"
     },
     "sos": {
       "text": "SOS de {{name}} em {{site}} desde {{time}}",
@@ -585,7 +586,13 @@
         "hr_profile_changed": "Ficha alterada",
         "hr_contract_saved": "Contrato guardado",
         "hr_contract_deleted": "Contrato apagado",
-        "hr_job_title_saved": "Cargo guardado"
+        "hr_job_title_saved": "Cargo guardado",
+        "hr_document_type_saved": "Configuração de documento salva",
+        "hr_document_template_added": "Lista de documentos adicionada",
+        "hr_document_uploaded": "Documento enviado",
+        "hr_document_accepted": "Documento aceito",
+        "hr_document_rejected": "Documento não aceito",
+        "hr_document_reminded": "Lembrete de documento"
       },
       "groups": {
         "sos": "SOS",

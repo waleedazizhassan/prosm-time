@@ -214,7 +214,8 @@
     },
     "dailyDigest": {
       "title": "ملخص أمس",
-      "body": "عمل {{present}}، وتأخر {{late}}، وغاب {{absent}}، وفي إجازة {{onLeave}}. بانتظارك: {{leave}} إجازة و{{exceptions}} استثناء. الحاضرون الآن: {{open}}."
+      "body": "عمل {{present}}، وتأخر {{late}}، وغاب {{absent}}، وفي إجازة {{onLeave}}. بانتظارك: {{leave}} إجازة و{{exceptions}} استثناء. الحاضرون الآن: {{open}}.",
+      "documents": "المستندات: {{expired}} منتهية، {{missing}} ناقصة."
     },
     "licenseChanged": {
       "title": "تغيّر ترخيصك",
@@ -263,6 +264,36 @@
       "clock_in": "{{name}} سجّل حضور بموقع مزيف (برنامج تزييف موقع).",
       "clock_out": "{{name}} سجّل انصراف بموقع مزيف (برنامج تزييف موقع).",
       "presence": "{{name}} شغّل موقع مزيف أثناء الوردية - الأماكن دي ماتسجلتش."
+    },
+    "documents": {
+      "missingTitleSelf": "مستند مطلوب",
+      "missingBodySelf": "{{document}} مطلوب في ملفك. صوّره من التطبيق.",
+      "missingTitleHr": "مستندات موظف جديد",
+      "missingBodyHr": "{{name}} يحتاج {{count}} مستند في ملفه.",
+      "expiringTitleSelf": "{{document}} قارب على الانتهاء",
+      "expiringBodySelf": "متبقٍ {{count}} يوم على انتهاء {{document}}. جدّده وارفع الجديد.",
+      "expiringTitleHr": "مستند قارب على الانتهاء",
+      "expiringBodyHr": "{{name}}: {{document}} ينتهي بعد {{count}} يوم.",
+      "expiredTitleSelf": "{{document}} ينتهي اليوم",
+      "expiredBodySelf": "ارفع {{document}} بعد تجديده من ملفك.",
+      "expiredTitleHr": "مستند ينتهي اليوم",
+      "expiredBodyHr": "{{name}}: {{document}} ينتهي اليوم.",
+      "rejectedTitleSelf": "المستند لم يُقبل",
+      "rejectedBodySelf": "{{document}}: {{reason}}. صوّره مرة أخرى وأرسله.",
+      "rejectedTitleHr": "المستند لم يُقبل",
+      "rejectedBodyHr": "{{document}}: {{reason}}",
+      "reminderTitleSelf": "تذكير بمستند",
+      "reminderBodySelf": "من فضلك ارفع {{document}} من ملفك.",
+      "reminderTitleHr": "تذكير بمستند",
+      "reminderBodyHr": "{{name}}: {{document}}",
+      "uploadedTitleHr": "مستند للمراجعة",
+      "uploadedBodyHr": "{{name}} رفع {{document}}.",
+      "uploadedTitleSelf": "تم رفع المستند",
+      "uploadedBodySelf": "{{document}}",
+      "clockInTitleHr": "حضور بمستند منتهي",
+      "clockInBodyHr": "{{name}} سجّل حضوره و{{document}} منتهي.",
+      "clockInTitleSelf": "مستند منتهي",
+      "clockInBodySelf": "{{document}} منتهي."
     }
   },
   "items": {
@@ -293,7 +324,8 @@
     "externalPay": "أجور العمالة الخارجية",
     "announcements": "لوحة الإعلانات",
     "exceptions": "استثناءاتي",
-    "myProfile": "ملفي"
+    "myProfile": "ملفي",
+    "documents": "المستندات"
   },
   "sosOverlay": {
     "title": "تنبيه طوارئ (SOS)",
@@ -421,7 +453,8 @@
     "payslips": "مفردات مرتبك المنشورة - اعرضها أو اطلبها بالبريد الإلكتروني.",
     "externalPay": "الأجور باليوم أو الأسبوع أو الشهر أو السنة، ومسيرات الأجور، والسياسة والتعديلات الفردية - تُعتمد وتُجمّد، ومنفصلة عن الرواتب.",
     "announcements": "الإعلانات والبيانات الرسمية الموجهة إليك؛ أكّد قراءة ما يطلب ذلك.",
-    "myProfile": "بياناتك ومستنداتك وإنذاراتك وحضورك."
+    "myProfile": "بياناتك ومستنداتك وإنذاراتك وحضورك.",
+    "documents": "مستندات كل الموظفين وتواريخ انتهائها."
   },
   "backgroundDisclosure": {
     "title": "موقعك أثناء الوردية",

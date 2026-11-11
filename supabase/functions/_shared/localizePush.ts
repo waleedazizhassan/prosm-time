@@ -240,8 +240,25 @@ export function localizePush(type: string, data: Data, language: string, fallbac
       result = pair("licenseChanged.title", "licenseChanged.body", { changes: parts.join(" · ") });
       break;
     }
+    // 2026-11-11 HR suite feature 2: documents (same texts as the bell)
+    case "document_missing":
+    case "document_expiring":
+    case "document_expired":
+    case "document_rejected":
+    case "document_reminder":
+    case "document_uploaded":
+    case "document_clock_in": {
+      const key = ({ document_missing: "missing", document_expiring: "expiring", document_expired: "expired", document_rejected: "rejected", document_reminder: "reminder", document_uploaded: "uploaded", document_clock_in: "clockIn" } as Record<string, string>)[type];
+      const who = data.kind === "hr" ? "Hr" : "Self";
+      result = pair(`documents.${key}Title${who}`, `documents.${key}Body${who}`, { document: data.documentName ?? "", name: data.employeeName ?? "", count: num(data.days) ?? num(data.count) ?? 0, reason: data.reason ?? "" });
+      break;
+    }
     case "daily_digest":
       result = pair("dailyDigest.title", "dailyDigest.body", { present: data.present ?? 0, absent: data.absent ?? data.noShows ?? 0, late: data.late ?? 0, onLeave: data.onLeave ?? 0, leave: data.leave ?? 0, exceptions: data.exceptions ?? 0, open: data.open ?? 0 });
+      if (result && (num(data.documentsExpired) ?? 0) + (num(data.documentsMissing) ?? 0) > 0) {
+        const docs = t("dailyDigest.documents", { expired: num(data.documentsExpired) ?? 0, missing: num(data.documentsMissing) ?? 0 });
+        if (docs) result = { title: result.title, body: `${result.body} ${docs}` };
+      }
       break;
     case "clock_in_reminder":
       result = pair("clockInReminder.title", "clockInReminder.body", { time: data.time ?? "", site: data.siteName ?? "" });

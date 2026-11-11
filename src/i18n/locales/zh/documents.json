@@ -1,0 +1,135 @@
+{
+  "pageTitle": "证件",
+  "tabTitle": "证件",
+  "loadError": "无法加载证件，请重试。",
+  "actionError": "操作未成功，请重试。",
+  "queued_other": "{{count}} 份证件已保存在此手机上，联网后自动发送。",
+  "empty": "目前没有需要您提交的证件。",
+  "emptyHr": "此人没有需要提交的证件。请在 设置 → 人员 中设置公司证件。",
+  "mandatory": "必需",
+  "expires": "{{date}} 到期",
+  "noExpiry": "无到期日",
+  "rejectedBecause": "未通过：{{reason}}",
+  "status": {
+    "missing": "缺失",
+    "pending_review": "待审核",
+    "valid": "有效",
+    "expiring": "即将到期",
+    "expired": "已过期",
+    "rejected": "未通过",
+    "not_required": "无需提交",
+    "waitingToSend": "等待发送"
+  },
+  "state": {
+    "expiresToday": "今天到期",
+    "expiresIn_other": "{{count}} 天后到期",
+    "expiredAgo_other": "已过期 {{count}} 天"
+  },
+  "view": "查看",
+  "review": "审核",
+  "renew": "更新",
+  "remind": "提醒",
+  "reminded": "提醒已发送。",
+  "remindedName": "已提醒 {{name}}。",
+  "archive_other": "{{count}} 份旧版本",
+  "savedOffline": "无网络：证件已保存在手机上，将自动发送。",
+  "uploadedHr": "证件已保存。",
+  "uploadedSelf": "已发送，等待主管审核。",
+  "reviewTitle": "审核：{{name}}",
+  "reject": "不通过",
+  "accept": "通过",
+  "rejected": "已告知对方原因。",
+  "accepted": "证件已通过。",
+  "viewUpload": "打开上传的文件",
+  "rejectReason": "原因（不通过时必填）",
+  "upload": {
+    "action": "上传",
+    "title": "上传：{{name}}",
+    "send": "发送",
+    "needFile": "请拍摄证件或选择文件。",
+    "needExpiry": "请填写到期日期。",
+    "error": "无法发送证件，请重试。",
+    "photo": "拍照",
+    "photoHint": "手机上会打开相机，也可以上传 PDF。",
+    "number": "证件号码",
+    "issue": "签发日期",
+    "expiry": "到期日期",
+    "offlineHint": "没有网络？会先保存在手机上，稍后发送。"
+  },
+  "types": {
+    "title": "员工证件",
+    "add": "添加证件",
+    "hint": "每个人档案中必须具备的证件、何时提醒，以及证件过期后打卡时如何处理。",
+    "templatesHint": "可从现成的名称列表开始（添加后为停用状态，供您先审核），或自行添加。",
+    "templateEg": "埃及列表",
+    "templateGulf": "海湾列表",
+    "templateAdded_other": "已添加 {{count}} 个名称（停用）——请审核后启用。",
+    "error": "无法保存，请重试。",
+    "saved": "已保存，所有人的列表已更新。",
+    "mandatory": "必需",
+    "optional": "可选",
+    "remindAt": "提前 {{days}} 天提醒",
+    "noExpiry": "无到期日",
+    "appliesTo": {
+      "all": "所有人",
+      "job_titles": "部分职位",
+      "sites": "部分工地"
+    },
+    "clockIn": {
+      "warn": "打卡时提醒",
+      "block": "禁止打卡"
+    },
+    "stopped": "已停用",
+    "edit": "编辑",
+    "editTitle": "编辑证件",
+    "addTitle": "新证件",
+    "save": "保存",
+    "name": "证件名称",
+    "mandatoryLabel": "这些人必须提交",
+    "hasExpiry": "有到期日期",
+    "reminderDays": "提醒（到期前天数）",
+    "reminderDaysHint": "例如 30, 7, 0——0 表示到期当天。",
+    "clockInRule": "过期后打卡时",
+    "clockInOption": {
+      "none": "不处理",
+      "warn": "允许打卡并通知人事负责人",
+      "block": "不允许打卡"
+    },
+    "appliesToLabel": "适用人员",
+    "noJobTitles": "请先添加职位（在此标签页）。",
+    "active": "使用中"
+  },
+  "completeLine": "档案完整度：{{percent}}%",
+  "typesLink": "证件设置",
+  "export": "导出 CSV",
+  "exportName": "证件",
+  "columns": {
+    "person": "人员",
+    "site": "工地",
+    "document": "证件",
+    "status": "状态",
+    "expiry": "到期"
+  },
+  "tiles": {
+    "expired": "已过期",
+    "expiring": "即将到期",
+    "missing": "缺失",
+    "pendingReview": "待审核"
+  },
+  "tabs": {
+    "action": "需处理",
+    "all": "全部"
+  },
+  "search": "搜索姓名或证件",
+  "nothingToDo": "没有需要处理的事项，所有档案均完整。",
+  "noDocuments": "暂无证件。",
+  "widget": {
+    "title": "证件",
+    "open": "打开",
+    "allGood": "所有证件均正常（完整度 {{percent}}%）。"
+  },
+  "alert": {
+    "more_other": "还有 {{count}} 份证件",
+    "photograph": "立即拍摄"
+  }
+}

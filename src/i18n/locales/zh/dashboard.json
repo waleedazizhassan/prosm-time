@@ -388,7 +388,8 @@
       "cost": "津贴与成本",
       "audit": "操作日志",
       "external": "外部工人",
-      "insights": "考勤分析"
+      "insights": "考勤分析",
+      "documents": "证件"
     },
     "sos": {
       "text": "{{name}} 在 {{site}} 发出 SOS，自 {{time}} 起",
@@ -579,7 +580,13 @@
         "hr_profile_changed": "员工档案已修改",
         "hr_contract_saved": "合同已保存",
         "hr_contract_deleted": "合同已删除",
-        "hr_job_title_saved": "职位已保存"
+        "hr_job_title_saved": "职位已保存",
+        "hr_document_type_saved": "证件设置已保存",
+        "hr_document_template_added": "已添加证件列表",
+        "hr_document_uploaded": "证件已上传",
+        "hr_document_accepted": "证件已通过",
+        "hr_document_rejected": "证件未通过",
+        "hr_document_reminded": "已提醒员工提交证件"
       },
       "groups": {
         "sos": "SOS",

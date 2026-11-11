@@ -403,7 +403,8 @@
       "cost": "البدلات والتكلفة",
       "audit": "سجل الإجراءات",
       "external": "العمالة الخارجية",
-      "insights": "مؤشرات الحضور"
+      "insights": "مؤشرات الحضور",
+      "documents": "المستندات"
     },
     "sos": {
       "text": "استغاثة من {{name}} في {{site}} منذ {{time}}",
@@ -594,7 +595,13 @@
         "hr_profile_changed": "تعديل ملف الموظف",
         "hr_contract_saved": "حفظ عقد",
         "hr_contract_deleted": "حذف عقد",
-        "hr_job_title_saved": "حفظ وظيفة"
+        "hr_job_title_saved": "حفظ وظيفة",
+        "hr_document_type_saved": "حفظ إعداد مستند",
+        "hr_document_template_added": "إضافة قائمة مستندات",
+        "hr_document_uploaded": "رفع مستند",
+        "hr_document_accepted": "قبول مستند",
+        "hr_document_rejected": "رفض مستند",
+        "hr_document_reminded": "تذكير موظف بمستند"
       },
       "groups": {
         "sos": "استغاثة",
