@@ -22,8 +22,7 @@ create index if not exists tracking_keys_user_idx on public.tracking_keys (user_
 alter table public.tracking_keys enable row level security;
 revoke all on public.tracking_keys from public, anon, authenticated;
 
--- a new key for the signed-in person (their older keys on this phone are replaced by the app; expired
--- ones are removed)
+-- a new key for the signed-in person (expired ones are removed)
 create or replace function public.issue_prosm_time_tracking_key()
 returns text
 language plpgsql
@@ -35,7 +34,8 @@ declare
     v_key text;
 begin
     if v_me is null then raise exception 'NO AUTHENTICATED SESSION'; end if;
-    delete from tracking_keys where user_id = v_me and (expires_at < now() or created_at < now() - interval '1 day');
+    -- only expired keys go: a phone that was offline for days keeps working with the key it holds
+    delete from tracking_keys where user_id = v_me and expires_at < now();
     -- 64 hex characters from two random UUIDs (built in; no extension needed)
     v_key := replace(gen_random_uuid()::text, '-', '') || replace(gen_random_uuid()::text, '-', '');
     insert into tracking_keys (organization_id, user_id, key_hash)

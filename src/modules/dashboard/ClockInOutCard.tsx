@@ -43,7 +43,7 @@ import SessionReviewRepository from "../../core/repositories/SessionReviewReposi
 import LongSessionPrompt from "./LongSessionPrompt";
 import ExitSitePrompt from "./ExitSitePrompt";
 import TrackingGate, { type TrackingNeed } from "./TrackingGate";
-import { missingForTracking, shiftTrackingAvailable, shiftTrackingStatus } from "../../core/services/ShiftTrackingNative";
+import { missingForTracking, shiftTrackingAvailable, shiftTrackingStatus, startShiftTracking, stopShiftTracking } from "../../core/services/ShiftTrackingNative";
 import { readBackgroundConsent } from "../../core/services/StartupPermissions";
 import { nearestSite, orderSitesByDistance } from "./siteProximity";
 
@@ -689,6 +689,7 @@ export default function ClockInOutCard() {
     setConfirmModalOpen(false);
     setConfirmAction(null);
     setPendingEvidenceFile(null);
+    beginShiftTracking();
     sayDone(t("attendance.notice.clockedIn"), t("attendance.notice.at", { time: formatTimeOnly(new Date().toISOString(), i18n.language) }));
     load();
   };
@@ -737,6 +738,8 @@ export default function ClockInOutCard() {
       setConfirmModalOpen(false);
       setConfirmAction(null);
       setPendingEvidenceFile(null);
+      if (type === "clock_in") beginShiftTracking();
+      if (type === "clock_out") void stopShiftTracking();
       setClockNotice({ tone: "warning", title: t("attendance.notice.savedOffline"), text: t("attendance.notice.savedOfflineText") });
     } catch (queueError) {
       setConfirmError(queueError instanceof Error ? queueError.message : t("attendance.offlineQueueError"));
@@ -808,6 +811,7 @@ export default function ClockInOutCard() {
     }
 
     const completedSessionId = result.data.sessionId;
+    void stopShiftTracking();
 
     setSubmitting(false);
     setConfirmModalOpen(false);
@@ -830,6 +834,21 @@ export default function ClockInOutCard() {
     if (!shiftTrackingAvailable()) return [];
     const missing: TrackingNeed[] = readBackgroundConsent() === "accepted" ? [] : ["consent"];
     return [...missing, ...missingForTracking(await shiftTrackingStatus())];
+  };
+
+  // Owner 2026-11-11: the phone's shift service starts with the clock-in (also one saved offline) and
+  // stops with the clock-out; the server's answers keep it right afterwards.
+  const tShell = i18n.getFixedT(null, "shell");
+  const beginShiftTracking = () => {
+    if (!shiftTrackingAvailable() || readBackgroundConsent() !== "accepted") return;
+    void startShiftTracking({
+      title: tShell("backgroundTrackingTitle"),
+      text: tShell("backgroundTrackingMessage"),
+      exitTitle: tShell("exitPrompt.title"),
+      exitBody: tShell("exitPrompt.body"),
+      resumeTitle: tShell("shiftTracking.resumeTitle"),
+      resumeBody: tShell("shiftTracking.resumeBody"),
+    });
   };
 
   const handleClockInTap = async (suggested?: Site) => {

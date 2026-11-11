@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../../core/context/AuthContext";
 import PresenceRepository, { type PresenceSession } from "../../core/repositories/PresenceRepository";
 import BackgroundLocationService, { type TrackingFailure } from "../../core/services/BackgroundLocationService";
-import { shiftTrackingAvailable, startShiftTracking, stopShiftTracking } from "../../core/services/ShiftTrackingNative";
+import { ensureTrackingKey, shiftTrackingAvailable, startShiftTracking, stopShiftTracking } from "../../core/services/ShiftTrackingNative";
 import { getCurrentPosition } from "../../core/utils/geo";
 import playAlertSound from "../../core/utils/playAlertSound";
 import Modal from "../../components/common/Modal";
@@ -130,6 +130,10 @@ export default function PresenceTrackingLoop() {
   // disclosure was accepted), kept running after the app is closed, stopped when the shift ends. It is not
   // stopped when this screen goes away: only the end of the shift (here, or the server's answer) stops it.
   const nativeStartedRef = useRef(false);
+  // a key kept on the phone ahead of time (for an offline clock-in)
+  useEffect(() => {
+    if (profile?.id) void ensureTrackingKey();
+  }, [profile?.id]);
   useEffect(() => {
     if (!shiftTrackingAvailable()) return;
     if (activePresenceSessionId && backgroundConsent === "accepted") {

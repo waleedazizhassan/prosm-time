@@ -19,7 +19,7 @@ interface ShiftTrackingPlugin {
   start(options: {
     url: string;
     anonKey: string;
-    key: string;
+    key?: string;
     title: string;
     text: string;
     exitTitle: string;
@@ -28,6 +28,7 @@ interface ShiftTrackingPlugin {
     resumeBody: string;
   }): Promise<void>;
   stop(): Promise<void>;
+  setKey(options: { key: string }): Promise<void>;
   status(): Promise<ShiftTrackingStatus>;
   openBatterySettings(): Promise<void>;
   openAppSettings(): Promise<void>;
@@ -84,16 +85,46 @@ export interface ShiftTrackingTexts {
   resumeBody: string;
 }
 
-/** Starts (or restarts) the service with a fresh tracking key. false when it could not start. */
+const KEY_ISSUED_AT = "prosm_time_tracking_key_at";
+
+/**
+ * Owner 2026-11-11 ("there is offline recording"): the phone keeps a tracking key ahead of time (renewed
+ * once a day while online), so a clock-in made offline is followed from its first minute.
+ */
+export async function ensureTrackingKey(force = false): Promise<void> {
+  if (!shiftTrackingAvailable() || !navigator.onLine) return;
+  let last = 0;
+  try {
+    last = Number(localStorage.getItem(KEY_ISSUED_AT) ?? 0);
+  } catch {
+    last = 0;
+  }
+  if (!force && Date.now() - last < 24 * 3600_000) return;
+  try {
+    const { data: key, error } = await requireSupabaseClient().rpc("issue_prosm_time_tracking_key");
+    if (error || typeof key !== "string") return;
+    await ShiftTracking.setKey({ key });
+    try {
+      localStorage.setItem(KEY_ISSUED_AT, String(Date.now()));
+    } catch {
+      // the next start renews it
+    }
+  } catch {
+    // offline or not signed in: the kept key is used
+  }
+}
+
+/**
+ * Starts (or restarts) the service. Online, the key is renewed first; offline, the key kept on the phone
+ * is used and the locations wait on the phone until they can be sent. false when it could not start.
+ */
 export async function startShiftTracking(texts: ShiftTrackingTexts): Promise<boolean> {
   if (!shiftTrackingAvailable()) return false;
   try {
-    const { data: key, error } = await requireSupabaseClient().rpc("issue_prosm_time_tracking_key");
-    if (error || typeof key !== "string") return false;
+    await ensureTrackingKey(true);
     await ShiftTracking.start({
       url: import.meta.env.VITE_SUPABASE_URL,
       anonKey: import.meta.env.VITE_SUPABASE_ANON_KEY,
-      key,
       ...texts,
     });
     return true;

@@ -23,6 +23,7 @@ import android.os.Looper;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -31,6 +32,10 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -55,6 +60,15 @@ public class ShiftTrackingService extends Service implements LocationListener {
     private static final float MIN_DISTANCE_M = 50f;
     private static final long HEARTBEAT_MS = 5 * 60_000L;
     private static final long MIN_GAP_MS = 20_000L;
+    // Owner 2026-11-11 ("there is offline recording - the server must not stop it"): locations that could
+    // not be sent are kept (up to this many) and sent later with the time each was taken.
+    private static final int QUEUE_MAX = 300;
+    // A clock-in made offline reaches the server later: until the server has seen this shift once, "no
+    // shift" does not stop the service (for up to this long).
+    private static final long UNCONFIRMED_GRACE_MS = 12 * 3600_000L;
+    private static final int SENT = 0;
+    private static final int RETRY = 1;
+    private static final int STOP = 2;
 
     private LocationManager locationManager;
     private Handler handler;
@@ -181,24 +195,93 @@ public class ShiftTrackingService extends Service implements LocationListener {
         if (!heartbeatTick && last.getTime() == lastSentFix) return;
         lastSentAt = now;
         lastSentFix = last.getTime();
-        final Location fix = last;
-        io.execute(() -> post(fix));
+        final JSONObject sample = sampleOf(last);
+        io.execute(() -> deliver(sample));
     }
 
-    private void post(Location fix) {
+    private static String iso(long millis) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
+        format.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return format.format(new Date(millis));
+    }
+
+    @SuppressWarnings("deprecation")
+    private static JSONObject sampleOf(Location fix) {
+        JSONObject sample = new JSONObject();
+        try {
+            sample.put("lat", fix.getLatitude());
+            sample.put("lng", fix.getLongitude());
+            sample.put("acc", fix.hasAccuracy() ? (double) fix.getAccuracy() : JSONObject.NULL);
+            sample.put("at", iso(fix.getTime()));
+            // Android's own "this location is simulated" (mock location apps)
+            boolean simulated = Build.VERSION.SDK_INT >= 31 ? fix.isMock() : fix.isFromMockProvider();
+            sample.put("sim", simulated);
+        } catch (Exception ignored) {
+            // a plain JSON object cannot fail here
+        }
+        return sample;
+    }
+
+    private JSONArray queue() {
+        try {
+            return new JSONArray(prefs(this).getString("queue", "[]"));
+        } catch (Exception broken) {
+            return new JSONArray();
+        }
+    }
+
+    private void saveQueue(JSONArray queue) {
+        while (queue.length() > QUEUE_MAX) queue.remove(0);
+        prefs(this).edit().putString("queue", queue.toString()).apply();
+    }
+
+    /** The kept locations first (oldest first), then this one; anything not delivered stays kept. */
+    private void deliver(JSONObject fresh) {
+        JSONArray queue = queue();
+        JSONArray left = new JSONArray();
+        boolean stopNow = false;
+        boolean blocked = false;
+        for (int i = 0; i < queue.length(); i++) {
+            JSONObject sample = queue.optJSONObject(i);
+            if (sample == null) continue;
+            if (blocked) {
+                left.put(sample);
+                continue;
+            }
+            int outcome = post(sample);
+            if (outcome == RETRY) {
+                left.put(sample);
+                blocked = true;
+            } else if (outcome == STOP) {
+                stopNow = true;
+                break;
+            }
+        }
+        if (!stopNow) {
+            int outcome = blocked ? RETRY : post(fresh);
+            if (outcome == RETRY) left.put(fresh);
+            if (outcome == STOP) stopNow = true;
+        }
+        saveQueue(stopNow ? new JSONArray() : left);
+        if (stopNow) handler.post(this::finish);
+    }
+
+    private int post(JSONObject sample) {
         SharedPreferences p = prefs(this);
         String base = p.getString("url", null);
         String anon = p.getString("anonKey", null);
         String key = p.getString("key", null);
-        if (base == null || anon == null || key == null) return;
+        // no key yet (a first clock-in made offline): kept until the app hands one over
+        if (base == null || anon == null || key == null) return RETRY;
         HttpURLConnection connection = null;
         try {
             JSONObject body = new JSONObject();
             body.put("p_key", key);
-            body.put("p_latitude", fix.getLatitude());
-            body.put("p_longitude", fix.getLongitude());
-            body.put("p_accuracy", fix.hasAccuracy() ? (double) fix.getAccuracy() : JSONObject.NULL);
-            body.put("p_at", JSONObject.NULL);
+            body.put("p_latitude", sample.getDouble("lat"));
+            body.put("p_longitude", sample.getDouble("lng"));
+            body.put("p_accuracy", sample.opt("acc"));
+            body.put("p_at", sample.has("at") ? sample.getString("at") : JSONObject.NULL);
+            body.put("p_simulated", sample.optBoolean("sim", false));
             connection = (HttpURLConnection) new URL(base + "/rest/v1/rpc/record_prosm_time_location_by_key").openConnection();
             connection.setRequestMethod("POST");
             connection.setConnectTimeout(15_000);
@@ -211,20 +294,29 @@ public class ShiftTrackingService extends Service implements LocationListener {
                 out.write(body.toString().getBytes(StandardCharsets.UTF_8));
             }
             int code = connection.getResponseCode();
-            if (code < 200 || code >= 300) return;
+            if (code < 200 || code >= 300) return RETRY;
             StringBuilder text = new StringBuilder();
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
                 String line;
                 while ((line = reader.readLine()) != null) text.append(line);
             }
             JSONObject result = new JSONObject(text.toString());
-            if (!result.optBoolean("active", true)) {
-                handler.post(this::finish);
-                return;
+            if (result.optBoolean("active", true)) {
+                p.edit().putBoolean("confirmed", true).apply();
+                if (result.optBoolean("exitPrompted", false)) handler.post(this::showExit);
+                return SENT;
             }
-            if (result.optBoolean("exitPrompted", false)) handler.post(this::showExit);
+            if ("no_shift".equals(result.optString("reason", ""))) {
+                // the shift ended - unless it has not reached the server yet (an offline clock-in)
+                boolean confirmed = p.getBoolean("confirmed", false);
+                long startedAt = p.getLong("startedAt", System.currentTimeMillis());
+                if (!confirmed && System.currentTimeMillis() - startedAt < UNCONFIRMED_GRACE_MS) return RETRY;
+                return STOP;
+            }
+            // the key is no longer valid: kept until the app hands over a new one
+            return RETRY;
         } catch (Exception offline) {
-            // no network now: the next movement or the 5-minute tick sends again
+            return RETRY;
         } finally {
             if (connection != null) connection.disconnect();
         }
@@ -248,7 +340,7 @@ public class ShiftTrackingService extends Service implements LocationListener {
     }
 
     private void finish() {
-        prefs(this).edit().putBoolean("active", false).remove("key").apply();
+        prefs(this).edit().putBoolean("active", false).putBoolean("confirmed", false).apply();
         if (locationManager != null) locationManager.removeUpdates(this);
         handler.removeCallbacks(heartbeat);
         stopForeground(true);

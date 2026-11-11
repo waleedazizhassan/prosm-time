@@ -29,17 +29,20 @@ public class ShiftTrackingPlugin extends Plugin {
     public void start(PluginCall call) {
         String url = call.getString("url");
         String anonKey = call.getString("anonKey");
-        String key = call.getString("key");
-        if (url == null || anonKey == null || key == null) {
-            call.reject("url, anonKey and key are required");
+        if (url == null || anonKey == null) {
+            call.reject("url and anonKey are required");
             return;
         }
         Context context = getContext();
-        ShiftTrackingService.prefs(context).edit()
-            .putBoolean("active", true)
+        android.content.SharedPreferences.Editor edit = ShiftTrackingService.prefs(context).edit();
+        // a key given now replaces the kept one; without one (an offline clock-in) the kept one is used
+        String key = call.getString("key");
+        if (key != null) edit.putString("key", key);
+        edit.putBoolean("active", true)
+            .putBoolean("confirmed", false)
+            .putLong("startedAt", System.currentTimeMillis())
             .putString("url", url)
             .putString("anonKey", anonKey)
-            .putString("key", key)
             .putString("title", call.getString("title", "PROSM Time"))
             .putString("text", call.getString("text", ""))
             .putString("exitTitle", call.getString("exitTitle", "PROSM Time"))
@@ -58,8 +61,20 @@ public class ShiftTrackingPlugin extends Plugin {
     @PluginMethod
     public void stop(PluginCall call) {
         Context context = getContext();
-        ShiftTrackingService.prefs(context).edit().putBoolean("active", false).remove("key").apply();
+        ShiftTrackingService.prefs(context).edit().putBoolean("active", false).putBoolean("confirmed", false).apply();
         context.stopService(new Intent(context, ShiftTrackingService.class));
+        call.resolve();
+    }
+
+    /** Owner 2026-11-11: a tracking key kept on the phone ahead of time, so an offline clock-in is followed too. */
+    @PluginMethod
+    public void setKey(PluginCall call) {
+        String key = call.getString("key");
+        if (key == null) {
+            call.reject("key is required");
+            return;
+        }
+        ShiftTrackingService.prefs(getContext()).edit().putString("key", key).apply();
         call.resolve();
     }
 
