@@ -37,7 +37,7 @@ async function publishBackdated(t: TestDatabase, org: TestOrg) {
 
 const lateOn = (t: TestDatabase, org: TestOrg, userId: string, site: string, day: string) =>
   t.su("insert into attendance_sessions (organization_id, user_id, site_id, status, clock_in_at, clock_out_at) values ($1, $2, $3, 'clocked_out', $4, $5)",
-    [org.id, userId, site, `${day} 06:30:00+00`, `${day} 14:00:00+00`]); // 08:30 Cairo, 30 minutes late
+    [org.id, userId, site, `${day} 08:30:00 Africa/Cairo`, `${day} 16:00:00 Africa/Cairo`]); // 30 minutes late
 
 const evaluate = (t: TestDatabase, userId: string, day: string) => t.su("select public.prosm_time_penalties_evaluate_day($1, $2)", [userId, day]);
 
@@ -78,7 +78,8 @@ describe("penalties and incentives", () => {
     const t = await buildDatabase();
     const org = await createOrg(t, "Late Co");
     const site = await createSite(t, org, "Main");
-    await t.su("update sites set timezone = 'Africa/Cairo', shift_start_time = '08:00', late_deduction_start_time = '08:00' where id = $1", [site]);
+    // no fixed Friday: this site works every day (owner 2026-11-11)
+    await t.su("update sites set timezone = 'Africa/Cairo', shift_start_time = '08:00', late_deduction_start_time = '08:00', rest_days = '{}' where id = $1", [site]);
     const amira = await addMember(t, org, "employee", "Amira");
     await assignToSite(t, site, amira);
     await t.su("update users set created_at = '2026-01-01' where id = $1", [amira.userId]);
@@ -96,8 +97,8 @@ describe("penalties and incentives", () => {
     let list = await violations(t, org, amira.userId);
     expect(list.map((v) => [v.occurrence, v.suggested.code])).toEqual([[1, "written_warning"]]);
 
-    await lateOn(t, org, amira.userId, site, "2026-10-04");
-    await evaluate(t, amira.userId, "2026-10-04");
+    await lateOn(t, org, amira.userId, site, "2026-10-02");
+    await evaluate(t, amira.userId, "2026-10-02");
     list = await violations(t, org, amira.userId);
     expect(list[1]).toMatchObject({ occurrence: 2, suggested: { code: "deduct_days", value: 0.25 }, status: "pending_approval" });
     // refused (with a reason): it no longer counts

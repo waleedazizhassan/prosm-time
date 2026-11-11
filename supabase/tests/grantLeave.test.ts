@@ -51,6 +51,8 @@ describe("granting leave on someone's behalf", () => {
   });
 
   it("works for past days and refreshes a draft timesheet", async () => {
+    // owner 2026-11-11: no fixed Friday - this organisation works every day, so both days are working days
+    await t.su("update organization_settings set rest_days = '{}' where organization_id = $1", [org.id]);
     await t.su(
       `insert into timesheets (organization_id, user_id, period_start, period_end, status) values ($1, $2, ${cairoToday} - 10, ${cairoToday} - 1, 'draft')`,
       [org.id, employee.userId],
@@ -61,6 +63,7 @@ describe("granting leave on someone's behalf", () => {
     expect(result.rows![0].r).toMatchObject({ timesheetsUpdated: 1, timesheetsToReopen: 0 });
     const [sheet] = await t.su<{ total_leave_days: number }>("select total_leave_days from timesheets where user_id = $1", [employee.userId]);
     expect(Number(sheet.total_leave_days)).toBe(2);
+    await t.su("update organization_settings set rest_days = '{5}' where organization_id = $1", [org.id]);
   });
 
   it("refuses overlapping leave, oneself, and people outside the caller's sites", async () => {
