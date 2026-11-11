@@ -108,9 +108,10 @@ const EmployeeProfileRepository = {
   activity: (userId: string, days = 30) => rpc<EmployeeActivity>("get_prosm_time_employee_activity", { p_user_id: userId, p_days: days }),
 
   /** A personnel file (contract, document) into the private bucket: <organisation>/<person>/<random>.<ext> */
-  async uploadFile(organizationId: string, userId: string, file: Blob, extension: string): Promise<Result<string>> {
+  /** folder "evidence": a manager's photo of a violation (managers may add it for their own people) */
+  async uploadFile(organizationId: string, userId: string, file: Blob, extension: string, folder?: "evidence"): Promise<Result<string>> {
     try {
-      const path = `${organizationId}/${userId}/${crypto.randomUUID()}.${extension.replace(/[^a-z0-9]/gi, "").toLowerCase() || "bin"}`;
+      const path = `${organizationId}/${userId}/${folder ? `${folder}/` : ""}${crypto.randomUUID()}.${extension.replace(/[^a-z0-9]/gi, "").toLowerCase() || "bin"}`;
       const { error } = await requireSupabaseClient().storage.from("hr-files").upload(path, file, { upsert: false, contentType: file.type || undefined });
       if (error) return { data: null, error: error.message };
       return { data: path, error: null };

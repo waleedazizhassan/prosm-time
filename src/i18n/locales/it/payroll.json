@@ -68,7 +68,8 @@
     "chooseAll": "Scegli tutti i mostrati",
     "chooseNone": "Annulla la scelta",
     "addToChosen": "Aggiungi una voce a {{count}} scelti",
-    "bulkHint": "Tutti i scelti ricevono la stessa voce, o nessuno se per uno non è possibile (per esempio fuori dalle tue sedi)."
+    "bulkHint": "Tutti i scelti ricevono la stessa voce, o nessuno se per uno non è possibile (per esempio fuori dalle tue sedi).",
+    "customRules": "Regole fiscali proprie"
   },
   "actions": {
     "submit": "Invia in revisione",
@@ -193,7 +194,8 @@
     "managementApproval": "Approvazione della direzione",
     "combinedTotal": "Stipendio totale (con indennità)",
     "totalSalaries": "Totale stipendi",
-    "no": "N."
+    "no": "N.",
+    "customRules": "Calcolato con regole fiscali e contributive proprie dell'azienda"
   },
   "profiles": {
     "title": "Persone",
@@ -250,7 +252,9 @@
     "legalNameLabel": "Nome ufficiale",
     "legalNameHint": "È il nome sulla busta paga, non il nome utente ({{user}}).",
     "legalNameMissing": "Manca il nome ufficiale",
-    "notInPayroll": "Questa persona non è nelle paghe (il titolare non riceve stipendio)."
+    "notInPayroll": "Questa persona non è nelle paghe (il titolare non riceve stipendio).",
+    "insuranceCategory": "Categoria previdenziale",
+    "insuranceCategoryDefault": "Categoria predefinita"
   },
   "installments": {
     "title": "Rate e anticipi",
@@ -497,5 +501,10 @@
     "twoAction": "Schede paghe",
     "three": "Il ciclo del mese",
     "threeText": "Crea il ciclo qui sotto → inserisci le variabili e verifica i suggerimenti → invia → un'altra persona approva → blocca e pubblica."
+  },
+  "taxLink": {
+    "title": "Imposte e contributi",
+    "hint": "Il paese, gli scaglioni, i contributi e un calcolatore, in una pagina dedicata.",
+    "open": "Apri"
   }
 }

@@ -122,6 +122,7 @@ as $$
         when p_expiry - p_today <= coalesce((select max(d) from unnest(p_reminder_days) d), 30) then 'expiring'
         else 'valid' end;
 $$;
+revoke all on function public.prosm_time_document_state(date, integer[], date) from public, anon, authenticated;
 
 -- the personnel managers of an organisation (owner + hr.manage)
 create or replace function public.prosm_time_hr_people(p_org uuid)

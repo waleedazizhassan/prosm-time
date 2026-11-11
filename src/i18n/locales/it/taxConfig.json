@@ -1,0 +1,138 @@
+{
+  "title": "Imposte e contributi",
+  "subtitle": "Le regole per calcolare l'imposta sullo stipendio e i contributi previdenziali nelle paghe.",
+  "error": "Non ha funzionato. Riprova.",
+  "badge": {
+    "official": "Corrisponde ai valori ufficiali dell'Egitto",
+    "modified": "Modificato dall'azienda",
+    "manual": "Configurazione manuale"
+  },
+  "country": {
+    "title": "Paese",
+    "change": "Cambia paese",
+    "currency": "Valuta: {{currency}}",
+    "version": "versione {{version}}",
+    "officialUpdated": "Aggiornati da PROSM il {{date}}",
+    "changed": "Dal {{date}} le paghe seguono {{country}}.",
+    "search": "Cerca un paese",
+    "fromMonth": "Si applica dal {{date}}, il primo mese senza ciclo paghe.",
+    "oldCyclesKept": "I cicli già creati mantengono paese e regole.",
+    "readyRules": "Questo paese ha regole pronte di PROSM.",
+    "emptyRules": "Questo paese parte vuoto: la tua azienda inserisce le regole.",
+    "categoriesKept": "Le vecchie categorie previdenziali restano con i vecchi cicli.",
+    "currencyLabel": "Valuta",
+    "typeCode": "Digita {{code}} per confermare",
+    "confirmButton": "Cambia il paese",
+    "chooseAnother": "Scegli un altro paese",
+    "openCycle": "C'è un ciclo paghe aperto: chiudilo o annullalo prima di cambiare paese."
+  },
+  "manualNotice": "La configurazione manuale non è un'approvazione legale di PROSM. L'azienda inserisce questi valori sotto la propria responsabilità e deve verificarli con il proprio commercialista o consulente prima della prima paga.",
+  "officialChanged": "PROSM ha aggiornato i valori ufficiali da quando la tua azienda ha modificato i propri. Verificali o torna ai valori ufficiali.",
+  "backToOfficial": "Torna ai valori ufficiali",
+  "lockedText": "Questi sono i valori pronti di PROSM, sempre aggiornati. Per usare valori diversi, copiali e modificali (l'azienda se ne assume la responsabilità).",
+  "copyAndEdit": "Copia e modifica",
+  "missing": {
+    "title": "Categoria previdenziale mancante ({{count}})",
+    "hint": "Scegli la categoria di ogni persona nella sua scheda paga prima della prossima paga."
+  },
+  "items": {
+    "title": "Voci soggette a imposta e contributi",
+    "hint": "Si applica subito ai prossimi calcoli.",
+    "item": "Voce",
+    "taxable": "Imponibile",
+    "insurable": "Soggetta a contributi"
+  },
+  "how": {
+    "title": "Come si calcola",
+    "gross": "Lordo = tutte le competenze e indennità.",
+    "insurance": "Contributi = retribuzione imponibile (il base o un importo fisso) tra minimo e massimo × aliquota del dipendente; la quota datore è un costo fuori dal netto.",
+    "taxBase": "Imponibile = voci imponibili meno le trattenute prima delle imposte e (se previsto) i contributi del dipendente.",
+    "tax": "Imposta = scaglioni sull'imponibile annuo (dopo la franchigia) ÷ 12, oppure mensile.",
+    "levies": "Altri prelievi = aliquota × base.",
+    "net": "Netto = lordo meno le trattenute del dipendente."
+  },
+  "calc": {
+    "title": "Prova",
+    "hint": "Calcolato sul server con la stessa funzione delle paghe, sulle regole di questa pagina (nulla viene salvato).",
+    "basic": "Stipendio base",
+    "taxableAllowances": "Indennità imponibili",
+    "nonTaxableAllowances": "Indennità esenti",
+    "preTax": "Trattenute prima delle imposte",
+    "category": "Categoria previdenziale",
+    "defaultCategory": "Categoria predefinita",
+    "run": "Calcola",
+    "gross": "Lordo",
+    "net": "Netto",
+    "employerCost": "Contributi datore (costo)"
+  },
+  "rules": {
+    "insurance_employee": "Previdenza sociale",
+    "insurance_employer": "Quota datore",
+    "income_tax": "Imposta sullo stipendio",
+    "martyrs_fund": "Fondo dei martiri"
+  },
+  "tax": {
+    "title": "Imposta sullo stipendio",
+    "enabled": "Si applica l'imposta",
+    "period": "Calcolo",
+    "annual": "Annuale diviso 12",
+    "monthly": "Mensile",
+    "exemption": "Importo esente",
+    "deductInsurance": "Sottrai i contributi del dipendente prima dell'imposta",
+    "roundDown": "Arrotonda l'imposta mensile all'unità inferiore",
+    "brackets": "Scaglioni",
+    "from": "Da {{value}}",
+    "upTo": "Fino a",
+    "andAbove": "e oltre",
+    "rate": "Aliquota %",
+    "addBracket": "Aggiungi scaglione",
+    "tiers": "Redditi alti",
+    "tiersHint": "Oltre questi redditi annui gli scaglioni inferiori non si applicano (come nelle regole pronte).",
+    "tierRow": "Oltre {{above}}: dallo scaglione {{n}}"
+  },
+  "ins": {
+    "title": "Previdenza sociale",
+    "enabled": "Si applicano i contributi",
+    "categoryName": "Categoria (es. cittadino)",
+    "employeeRate": "Dipendente %",
+    "employerRate": "Datore %",
+    "min": "Imponibile minimo",
+    "max": "Imponibile massimo",
+    "base": "Retribuzione imponibile",
+    "removeCategory": "Rimuovi categoria",
+    "addCategory": "Aggiungi categoria",
+    "defaultCategory": "Categoria per chi non ne ha una",
+    "fixedWageHint": "Un imponibile fisso nella scheda paga sostituisce lo stipendio base."
+  },
+  "bases": {
+    "basic": "Stipendio base",
+    "gross": "Lordo",
+    "taxable": "Imponibile",
+    "insurable": "Voci soggette a contributi"
+  },
+  "levy": {
+    "title": "Altri prelievi",
+    "hint": "Per esempio un fondo come percentuale del lordo. Aggiungi solo ciò che richiede la legge del tuo paese.",
+    "name": "Nome",
+    "rate": "Aliquota %",
+    "base": "Su",
+    "payer": "Paga",
+    "employee": "Dipendente",
+    "employer": "Datore",
+    "on": "Attivo",
+    "add": "Aggiungi prelievo"
+  },
+  "remove": "Rimuovi",
+  "saveTitle": "Salva come nuova versione",
+  "saveHint": "I cicli già creati mantengono le loro regole. La nuova versione si applica dal mese scelto.",
+  "effectiveFrom": "Si applica dal (mese)",
+  "cancelEdit": "Annulla",
+  "save": "Salva versione",
+  "liability": "La configurazione manuale non è un'approvazione legale di PROSM: l'azienda inserisce questi valori sotto la propria responsabilità e li verifica con il proprio consulente.",
+  "liabilityDone": "Responsabilità accettata da {{name}} il {{date}}.",
+  "saved": "Salvato come versione {{version}}, dal {{date}}.",
+  "versions": {
+    "title": "Versioni",
+    "row": "Versione {{version}} – {{country}} – dal {{date}} – {{by}}"
+  }
+}

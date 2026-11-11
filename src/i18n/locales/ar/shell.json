@@ -294,6 +294,32 @@
       "clockInBodyHr": "{{name}} سجّل حضوره و{{document}} منتهي.",
       "clockInTitleSelf": "مستند منتهي",
       "clockInBodySelf": "{{document}} منتهي."
+    },
+    "penalties": {
+      "reviewTitle": "جزاء للمراجعة",
+      "reviewBody": "{{name}}: {{violation}} ({{date}})",
+      "investigationTitle": "مطلوب تحقيق",
+      "investigationBody": "{{name}}: {{violation}} ({{date}})",
+      "repliedTitle": "رد الموظف",
+      "repliedBody": "{{name}}: {{violation}} - جاهزة للاعتماد",
+      "noReplyTitle": "انتهت مدة الرد",
+      "noReplyBody": "{{name}}: {{violation}} - جاهزة للاعتماد",
+      "responseTitle": "مطلوب ردك",
+      "responseBody": "{{violation}} ({{date}}). أرسل ردك قبل {{due}}.",
+      "decidedTitle": "قرار جزاء",
+      "decidedBody": "{{violation}} ({{date}}). افتحه لتأكيد الاطلاع أو للتظلم.",
+      "rejectedTitle": "لا جزاء",
+      "rejectedBody": "{{violation}} ({{date}}): لم يُطبق جزاء.",
+      "appealTitle": "تظلم",
+      "appealBody": "{{name}} تظلّم: {{violation}} ({{date}})",
+      "appealConfirmedTitle": "تم البت في تظلمك",
+      "appealConfirmedBody": "{{violation}}: تم تأكيد الجزاء.",
+      "cancelledTitle": "تم إلغاء جزاء",
+      "cancelledBody": "{{violation}} ({{date}}) أُلغي.",
+      "incentiveReviewTitle": "حافز للمراجعة",
+      "incentiveReviewBody": "{{name}}: {{reason}}",
+      "incentiveGrantedTitle": "مبروك!",
+      "incentiveGrantedBody": "حصلت على حافز: {{reason}}"
     }
   },
   "items": {
@@ -325,7 +351,8 @@
     "announcements": "لوحة الإعلانات",
     "exceptions": "استثناءاتي",
     "myProfile": "ملفي",
-    "documents": "المستندات"
+    "documents": "المستندات",
+    "penalties": "الجزاءات والحوافز"
   },
   "sosOverlay": {
     "title": "تنبيه طوارئ (SOS)",
@@ -454,7 +481,8 @@
     "externalPay": "الأجور باليوم أو الأسبوع أو الشهر أو السنة، ومسيرات الأجور، والسياسة والتعديلات الفردية - تُعتمد وتُجمّد، ومنفصلة عن الرواتب.",
     "announcements": "الإعلانات والبيانات الرسمية الموجهة إليك؛ أكّد قراءة ما يطلب ذلك.",
     "myProfile": "بياناتك ومستنداتك وإنذاراتك وحضورك.",
-    "documents": "مستندات كل الموظفين وتواريخ انتهائها."
+    "documents": "مستندات كل الموظفين وتواريخ انتهائها.",
+    "penalties": "المخالفات والاعتماد والتظلمات والحوافز."
   },
   "backgroundDisclosure": {
     "title": "موقعك أثناء الوردية",

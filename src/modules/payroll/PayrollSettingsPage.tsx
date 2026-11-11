@@ -14,7 +14,6 @@ import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
-import PayrollStatutoryCard from "./PayrollStatutoryCard";
 import { payrollError } from "./payrollUi";
 import SuccessText from "../../components/common/SuccessText";
 
@@ -96,7 +95,8 @@ export default function PayrollSettingsPage() {
           onRowClick={(c) => { setDraftError(""); setDraft({ id: c.id, value: { ...c, name_en: c.name_en ?? "" } }); }} />
       </Card>
 
-      <PayrollStatutoryCard />
+      {/* 2026-11-11 HR suite feature 4: taxes and insurance have their own page (country, versions, calculator) */}
+      <Card title={t("taxLink.title")} subtitle={t("taxLink.hint")} actions={<Button size="sm" onClick={() => navigate("/payroll/tax")}>{t("taxLink.open")}</Button>}>{null}</Card>
 
       {/* Owner 2026-11-09: what is used most first - components, insurance and taxes; the policies after */}
       <Card title={t("settings.title")}>

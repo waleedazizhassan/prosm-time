@@ -294,6 +294,32 @@
       "clockInBodyHr": "{{name}} bateu o ponto com {{document}} vencido.",
       "clockInTitleSelf": "Documento vencido",
       "clockInBodySelf": "{{document}} venceu."
+    },
+    "penalties": {
+      "reviewTitle": "Uma penalidade para revisar",
+      "reviewBody": "{{name}}: {{violation}} ({{date}})",
+      "investigationTitle": "É preciso uma investigação",
+      "investigationBody": "{{name}}: {{violation}} ({{date}})",
+      "repliedTitle": "O funcionário respondeu",
+      "repliedBody": "{{name}}: {{violation}} – pronta para aprovação",
+      "noReplyTitle": "Sem resposta no prazo",
+      "noReplyBody": "{{name}}: {{violation}} – pronta para aprovação",
+      "responseTitle": "Sua resposta é solicitada",
+      "responseBody": "{{violation}} ({{date}}). Responda até {{due}}.",
+      "decidedTitle": "Uma decisão de penalidade",
+      "decidedBody": "{{violation}} ({{date}}). Abra para confirmar o recebimento ou recorrer.",
+      "rejectedTitle": "Sem penalidade",
+      "rejectedBody": "{{violation}} ({{date}}): nenhuma penalidade aplicada.",
+      "appealTitle": "Um recurso",
+      "appealBody": "{{name}} recorreu: {{violation}} ({{date}})",
+      "appealConfirmedTitle": "Seu recurso foi decidido",
+      "appealConfirmedBody": "{{violation}}: a penalidade foi mantida.",
+      "cancelledTitle": "Uma penalidade foi cancelada",
+      "cancelledBody": "{{violation}} ({{date}}) foi cancelada.",
+      "incentiveReviewTitle": "Um incentivo para revisar",
+      "incentiveReviewBody": "{{name}}: {{reason}}",
+      "incentiveGrantedTitle": "Parabéns!",
+      "incentiveGrantedBody": "Você recebeu um incentivo: {{reason}}"
     }
   },
   "items": {
@@ -325,7 +351,8 @@
     "announcements": "Mural de avisos",
     "exceptions": "As minhas exceções",
     "myProfile": "A minha ficha",
-    "documents": "Documentos"
+    "documents": "Documentos",
+    "penalties": "Penalidades e incentivos"
   },
   "sosOverlay": {
     "title": "Alerta SOS/Emergência",
@@ -439,7 +466,8 @@
     "externalPay": "Valores por dia, semana, mês ou ano, folhas, a política e ajustes individuais - aprovados e congelados, separados da folha de salários.",
     "announcements": "Anúncios e comunicados oficiais dirigidos a si; confirme os que o pedem.",
     "myProfile": "Os seus dados, documentos, avisos e presenças.",
-    "documents": "Os documentos de cada funcionário e seus vencimentos."
+    "documents": "Os documentos de cada funcionário e seus vencimentos.",
+    "penalties": "Infrações, aprovações, recursos e incentivos."
   },
   "backgroundDisclosure": {
     "title": "Localização durante o turno",

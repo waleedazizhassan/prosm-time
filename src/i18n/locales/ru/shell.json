@@ -294,6 +294,32 @@
       "clockInBodyHr": "{{name}} отметил(а) приход, хотя {{document}} истёк.",
       "clockInTitleSelf": "Документ истёк",
       "clockInBodySelf": "{{document}} истёк."
+    },
+    "penalties": {
+      "reviewTitle": "Взыскание на рассмотрение",
+      "reviewBody": "{{name}}: {{violation}} ({{date}})",
+      "investigationTitle": "Нужно расследование",
+      "investigationBody": "{{name}}: {{violation}} ({{date}})",
+      "repliedTitle": "Сотрудник ответил",
+      "repliedBody": "{{name}}: {{violation}} — готово к утверждению",
+      "noReplyTitle": "Нет ответа в срок",
+      "noReplyBody": "{{name}}: {{violation}} — готово к утверждению",
+      "responseTitle": "Требуется ваш ответ",
+      "responseBody": "{{violation}} ({{date}}). Ответьте до {{due}}.",
+      "decidedTitle": "Решение о взыскании",
+      "decidedBody": "{{violation}} ({{date}}). Откройте, чтобы подтвердить ознакомление или обжаловать.",
+      "rejectedTitle": "Без взыскания",
+      "rejectedBody": "{{violation}} ({{date}}): взыскание не применено.",
+      "appealTitle": "Жалоба",
+      "appealBody": "{{name}} обжаловал(а): {{violation}} ({{date}})",
+      "appealConfirmedTitle": "По вашей жалобе принято решение",
+      "appealConfirmedBody": "{{violation}}: взыскание оставлено.",
+      "cancelledTitle": "Взыскание отменено",
+      "cancelledBody": "{{violation}} ({{date}}) отменено.",
+      "incentiveReviewTitle": "Поощрение на рассмотрение",
+      "incentiveReviewBody": "{{name}}: {{reason}}",
+      "incentiveGrantedTitle": "Отлично!",
+      "incentiveGrantedBody": "Вы получили поощрение: {{reason}}"
     }
   },
   "items": {
@@ -325,7 +351,8 @@
     "announcements": "Доска объявлений",
     "exceptions": "Мои исключения",
     "myProfile": "Моё дело",
-    "documents": "Документы"
+    "documents": "Документы",
+    "penalties": "Взыскания и поощрения"
   },
   "sosOverlay": {
     "title": "Сигнал SOS/тревога",
@@ -444,7 +471,8 @@
     "externalPay": "Ставки за день, неделю, месяц или год, расчёты, правила и индивидуальные корректировки - утверждаются и фиксируются, отдельно от зарплаты.",
     "announcements": "Объявления и официальные заявления для вас; подтвердите те, что этого требуют.",
     "myProfile": "Ваши данные, документы, взыскания и посещаемость.",
-    "documents": "Документы всех сотрудников и сроки их действия."
+    "documents": "Документы всех сотрудников и сроки их действия.",
+    "penalties": "Нарушения, утверждения, жалобы и поощрения."
   },
   "backgroundDisclosure": {
     "title": "Местоположение во время смены",

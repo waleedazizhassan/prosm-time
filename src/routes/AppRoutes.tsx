@@ -54,10 +54,13 @@ const PayrollHomePage = lazy(() => import("../modules/payroll/PayrollHomePage"))
 const PayrollCyclePage = lazy(() => import("../modules/payroll/PayrollCyclePage"));
 const PayrollProfilesPage = lazy(() => import("../modules/payroll/PayrollProfilesPage"));
 const PayrollSettingsPage = lazy(() => import("../modules/payroll/PayrollSettingsPage"));
+const TaxConfigPage = lazy(() => import("../modules/payroll/tax/TaxConfigPage"));
 const PayslipRequestsPage = lazy(() => import("../modules/payroll/PayslipRequestsPage"));
 const MyPayslipsPage = lazy(() => import("../modules/payroll/MyPayslipsPage"));
 const MyProfilePage = lazy(() => import("../modules/people/MyProfilePage"));
 const DocumentsPage = lazy(() => import("../modules/documents/DocumentsPage"));
+const PenaltiesPage = lazy(() => import("../modules/penalties/PenaltiesPage"));
+const BylawPage = lazy(() => import("../modules/penalties/BylawPage"));
 const ExceptionsPage = lazy(() => import("../modules/dashboard/ExceptionsPage"));
 const AnnouncementsPage = lazy(() => import("../modules/announcements/AnnouncementsPage"));
 
@@ -157,10 +160,13 @@ export default function AppRoutes() {
             <Route path="/payroll/cycles/:cycleId" element={<PlanRoute feature="payroll"><PayrollCyclePage /></PlanRoute>} />
             <Route path="/payroll/profiles" element={<PlanRoute feature="payroll"><PayrollProfilesPage /></PlanRoute>} />
             <Route path="/payroll/settings" element={<PlanRoute feature="payroll"><PayrollSettingsPage /></PlanRoute>} />
+            <Route path="/payroll/tax" element={<PlanRoute feature="payroll"><TaxConfigPage /></PlanRoute>} />
             <Route path="/payroll/requests" element={<PlanRoute feature="payroll"><PayslipRequestsPage /></PlanRoute>} />
             <Route path="/payslips" element={<PlanRoute feature="payroll"><MyPayslipsPage /></PlanRoute>} />
             <Route path="/me" element={<MyProfilePage />} />
             <Route path="/documents" element={<PlanRoute feature="documents"><DocumentsPage /></PlanRoute>} />
+            <Route path="/penalties" element={<PlanRoute feature="penalties"><PenaltiesPage /></PlanRoute>} />
+            <Route path="/penalties/bylaw" element={<PlanRoute feature="penalties"><BylawPage /></PlanRoute>} />
             {/* 2026-11-09 Media Center: announcements for everyone; publishing is checked on the server */}
             <Route path="/announcements" element={<AnnouncementsPage />} />
             <Route path="/exceptions" element={<ExceptionsPage />} />

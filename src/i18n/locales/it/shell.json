@@ -294,6 +294,32 @@
       "clockInBodyHr": "{{name}} ha timbrato con {{document}} scaduto.",
       "clockInTitleSelf": "Documento scaduto",
       "clockInBodySelf": "{{document}} è scaduto."
+    },
+    "penalties": {
+      "reviewTitle": "Una sanzione da esaminare",
+      "reviewBody": "{{name}}: {{violation}} ({{date}})",
+      "investigationTitle": "Serve un'indagine",
+      "investigationBody": "{{name}}: {{violation}} ({{date}})",
+      "repliedTitle": "Il dipendente ha risposto",
+      "repliedBody": "{{name}}: {{violation}} – pronta per l'approvazione",
+      "noReplyTitle": "Nessuna risposta in tempo",
+      "noReplyBody": "{{name}}: {{violation}} – pronta per l'approvazione",
+      "responseTitle": "Ti è richiesta una risposta",
+      "responseBody": "{{violation}} ({{date}}). Rispondi entro il {{due}}.",
+      "decidedTitle": "Una decisione di sanzione",
+      "decidedBody": "{{violation}} ({{date}}). Aprila per confermare la ricezione o fare ricorso.",
+      "rejectedTitle": "Nessuna sanzione",
+      "rejectedBody": "{{violation}} ({{date}}): nessuna sanzione applicata.",
+      "appealTitle": "Un ricorso",
+      "appealBody": "{{name}} ha fatto ricorso: {{violation}} ({{date}})",
+      "appealConfirmedTitle": "Il tuo ricorso è stato deciso",
+      "appealConfirmedBody": "{{violation}}: la sanzione è confermata.",
+      "cancelledTitle": "Una sanzione è stata annullata",
+      "cancelledBody": "{{violation}} ({{date}}) è stata annullata.",
+      "incentiveReviewTitle": "Un incentivo da esaminare",
+      "incentiveReviewBody": "{{name}}: {{reason}}",
+      "incentiveGrantedTitle": "Ben fatto!",
+      "incentiveGrantedBody": "Hai ricevuto un incentivo: {{reason}}"
     }
   },
   "items": {
@@ -325,7 +351,8 @@
     "announcements": "Bacheca",
     "exceptions": "Le mie eccezioni",
     "myProfile": "Il mio fascicolo",
-    "documents": "Documenti"
+    "documents": "Documenti",
+    "penalties": "Sanzioni e incentivi"
   },
   "sosOverlay": {
     "title": "Allarme SOS/Emergenza",
@@ -439,7 +466,8 @@
     "externalPay": "Tariffe a giorno, settimana, mese o anno, elaborazioni, regole e rettifiche individuali - approvate e congelate, separate dalle paghe.",
     "announcements": "Annunci e comunicati ufficiali indirizzati a te; conferma quelli che lo richiedono.",
     "myProfile": "I tuoi dati, documenti, richiami e presenze.",
-    "documents": "I documenti di ogni dipendente e le loro scadenze."
+    "documents": "I documenti di ogni dipendente e le loro scadenze.",
+    "penalties": "Infrazioni, approvazioni, ricorsi e incentivi."
   },
   "backgroundDisclosure": {
     "title": "Posizione durante il turno",

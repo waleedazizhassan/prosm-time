@@ -1,0 +1,138 @@
+{
+  "title": "Tax and insurance",
+  "subtitle": "The rules used to compute salary tax and social insurance in payroll.",
+  "error": "That didn't work. Try again.",
+  "badge": {
+    "official": "Matches the official Egypt values",
+    "modified": "Changed by the company",
+    "manual": "Manual setup"
+  },
+  "country": {
+    "title": "Country",
+    "change": "Change country",
+    "currency": "Currency: {{currency}}",
+    "version": "version {{version}}",
+    "officialUpdated": "PROSM last updated these values on {{date}}",
+    "changed": "From {{date}}, payroll follows {{country}}.",
+    "search": "Search a country",
+    "fromMonth": "It applies from {{date}} - the first month with no payroll cycle.",
+    "oldCyclesKept": "Payroll cycles already made keep their country and rules.",
+    "readyRules": "This country has ready rules from PROSM.",
+    "emptyRules": "This country starts empty: your company enters its rules.",
+    "categoriesKept": "Employees' old insurance categories are kept with the old cycles.",
+    "currencyLabel": "Currency",
+    "typeCode": "Type {{code}} to confirm",
+    "confirmButton": "Change the country",
+    "chooseAnother": "Choose another country",
+    "openCycle": "A payroll cycle is open: close or cancel it before changing the country."
+  },
+  "manualNotice": "Manual setup is not legal approval from PROSM. The company enters these values on its own responsibility and must review them with its accountant or local adviser before the first payroll.",
+  "officialChanged": "PROSM has updated the official values since your company changed its own. Review them, or go back to the official values.",
+  "backToOfficial": "Back to the official values",
+  "lockedText": "These are PROSM's ready values, kept up to date. To use different values, copy them and edit (your company takes responsibility for the changes).",
+  "copyAndEdit": "Copy and edit",
+  "missing": {
+    "title": "Missing insurance category ({{count}})",
+    "hint": "Choose each person's category in their salary card before the next payroll."
+  },
+  "items": {
+    "title": "Salary items subject to tax and insurance",
+    "hint": "Applied at once to the next calculations.",
+    "item": "Item",
+    "taxable": "Taxable",
+    "insurable": "Insurable"
+  },
+  "how": {
+    "title": "How it's calculated",
+    "gross": "Gross pay = all earnings and allowances.",
+    "insurance": "Insurance = the insurable wage (the basic, or a fixed insurable wage), held between the minimum and maximum, times the employee's rate; the employer's share is a cost outside the net.",
+    "taxBase": "Taxable pay = taxable items less items taken off before tax and (when set) the employee's insurance.",
+    "tax": "Tax = the brackets applied to the taxable pay over the year (less the exemption), divided by 12 - or over the month.",
+    "levies": "Other levies = their rate times their base.",
+    "net": "Net = gross less the employee's deductions."
+  },
+  "calc": {
+    "title": "Try it",
+    "hint": "Calculated on the server by the same function the payroll uses, on the rules shown on this page (nothing is saved).",
+    "basic": "Basic salary",
+    "taxableAllowances": "Taxable allowances",
+    "nonTaxableAllowances": "Non-taxable allowances",
+    "preTax": "Deductions before tax",
+    "category": "Insurance category",
+    "defaultCategory": "Default category",
+    "run": "Calculate",
+    "gross": "Gross",
+    "net": "Net pay",
+    "employerCost": "Employer's insurance (cost)"
+  },
+  "rules": {
+    "insurance_employee": "Social insurance",
+    "insurance_employer": "Employer's insurance",
+    "income_tax": "Salary tax",
+    "martyrs_fund": "Martyrs' fund"
+  },
+  "tax": {
+    "title": "Salary income tax",
+    "enabled": "Salary tax applies",
+    "period": "Calculated",
+    "annual": "Over the year, divided by 12",
+    "monthly": "Monthly",
+    "exemption": "Exempt amount",
+    "deductInsurance": "Deduct the employee's insurance before tax",
+    "roundDown": "Round the monthly tax down to a whole unit",
+    "brackets": "Brackets",
+    "from": "From {{value}}",
+    "upTo": "Up to",
+    "andAbove": "and above",
+    "rate": "Rate %",
+    "addBracket": "Add a bracket",
+    "tiers": "High incomes",
+    "tiersHint": "Above these yearly incomes the lower brackets are dropped (as set in the ready rules).",
+    "tierRow": "Above {{above}}: from bracket {{n}}"
+  },
+  "ins": {
+    "title": "Social insurance",
+    "enabled": "Social insurance applies",
+    "categoryName": "Category (e.g. citizen)",
+    "employeeRate": "Employee %",
+    "employerRate": "Employer %",
+    "min": "Minimum insurable wage",
+    "max": "Maximum insurable wage",
+    "base": "Insurable wage",
+    "removeCategory": "Remove category",
+    "addCategory": "Add a category",
+    "defaultCategory": "Category for people with none chosen",
+    "fixedWageHint": "A fixed insurable wage set in a person's salary card is used instead of the basic."
+  },
+  "bases": {
+    "basic": "Basic salary",
+    "gross": "Gross pay",
+    "taxable": "Taxable pay",
+    "insurable": "Items marked insurable"
+  },
+  "levy": {
+    "title": "Other levies",
+    "hint": "For example a fund taken as a share of gross pay. Add only what your country's law requires.",
+    "name": "Name",
+    "rate": "Rate %",
+    "base": "On",
+    "payer": "Paid by",
+    "employee": "Employee",
+    "employer": "Employer",
+    "on": "On",
+    "add": "Add a levy"
+  },
+  "remove": "Remove",
+  "saveTitle": "Save as a new version",
+  "saveHint": "Cycles already made keep their rules. The new version applies from the month you choose.",
+  "effectiveFrom": "Applies from (month)",
+  "cancelEdit": "Cancel",
+  "save": "Save version",
+  "liability": "Manual setup is not legal approval from PROSM: the company enters these values on its own responsibility and reviews them with its accountant or adviser.",
+  "liabilityDone": "Liability accepted by {{name}} on {{date}}.",
+  "saved": "Saved as version {{version}}, from {{date}}.",
+  "versions": {
+    "title": "Versions",
+    "row": "Version {{version}} - {{country}} - from {{date}} - {{by}}"
+  }
+}

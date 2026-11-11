@@ -68,7 +68,8 @@
     "chooseAll": "Tout sélectionner",
     "chooseNone": "Effacer la sélection",
     "addToChosen": "Ajouter une ligne à {{count}} sélection(s)",
-    "bulkHint": "Toutes les personnes choisies reçoivent la même ligne, ou personne si l'une ne peut pas (par exemple hors de vos sites)."
+    "bulkHint": "Toutes les personnes choisies reçoivent la même ligne, ou personne si l'une ne peut pas (par exemple hors de vos sites).",
+    "customRules": "Règles fiscales propres"
   },
   "actions": {
     "submit": "Envoyer en revue",
@@ -193,7 +194,8 @@
     "managementApproval": "Visa de la direction",
     "combinedTotal": "Salaire total (avec indemnités)",
     "totalSalaries": "Total des salaires",
-    "no": "N°"
+    "no": "N°",
+    "customRules": "Calculé avec les règles d'impôt et de cotisations propres à l'entreprise"
   },
   "profiles": {
     "title": "Personnes",
@@ -250,7 +252,9 @@
     "legalNameLabel": "Nom officiel",
     "legalNameHint": "C’est le nom sur la fiche de paie, pas le nom d’utilisateur ({{user}}).",
     "legalNameMissing": "Nom officiel manquant",
-    "notInPayroll": "Cette personne n’est pas dans la paie (le propriétaire n’est pas salarié)."
+    "notInPayroll": "Cette personne n’est pas dans la paie (le propriétaire n’est pas salarié).",
+    "insuranceCategory": "Catégorie d'assurance",
+    "insuranceCategoryDefault": "Catégorie par défaut"
   },
   "installments": {
     "title": "Échéances et avances",
@@ -497,5 +501,10 @@
     "twoAction": "Dossiers de paie",
     "three": "Le cycle du mois",
     "threeText": "Créez le cycle ci-dessous → saisissez les variables et vérifiez les suggestions → soumettez → une autre personne approuve → verrouillez et publiez."
+  },
+  "taxLink": {
+    "title": "Impôts et cotisations",
+    "hint": "Le pays, les tranches, les cotisations et un calculateur, sur une page dédiée.",
+    "open": "Ouvrir"
   }
 }

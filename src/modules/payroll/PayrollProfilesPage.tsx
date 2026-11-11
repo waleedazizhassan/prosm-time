@@ -18,6 +18,7 @@ import { money, parseAmount, payrollError } from "./payrollUi";
 import SalaryItemsSection from "./SalaryItemsSection";
 import { legalNameProblem, nameMustBeArabic } from "./payrollUi";
 import usePayrollDigits from "./usePayrollDigits";
+import TaxConfigRepository from "../../core/repositories/TaxConfigRepository";
 import SuccessText from "../../components/common/SuccessText";
 
 const today = () => new Date().toISOString().slice(0, 10);
@@ -48,7 +49,12 @@ export default function PayrollProfilesPage({ embedUserId }: { embedUserId?: str
   useEffect(() => {
     void PayrollCycleRepository.getStatutory().then((r) => setNameInArabic(nameMustBeArabic(r.data?.countryCode)));
   }, []);
-  const [form, setForm] = useState({ legal_name: "", employee_code: "", currency: "", start_date: "", end_date: "", is_active: true, notes: "", insurance_exempt: false, insurable_wage: "", tax_exempt: false });
+  const [form, setForm] = useState({ legal_name: "", employee_code: "", currency: "", start_date: "", end_date: "", is_active: true, notes: "", insurance_exempt: false, insurable_wage: "", tax_exempt: false, insurance_category: "" });
+  // 2026-11-11 HR suite feature 4: the insurance categories in force (citizen / non-citizen...)
+  const [categories, setCategories] = useState<{ code: string; name: string }[]>([]);
+  useEffect(() => {
+    void TaxConfigRepository.categories().then((r) => setCategories(r.data ?? []));
+  }, []);
   const [values, setValues] = useState<Record<string, { amount: string; percent: string; from: string }>>({});
   const [initial, setInitial] = useState<Record<string, { amount: string; percent: string }>>({});
   const [valuesFrom, setValuesFrom] = useState(firstOfMonth());
@@ -97,6 +103,7 @@ export default function PayrollProfilesPage({ embedUserId }: { embedUserId?: str
       legal_name: person.profile?.legal_name ?? "", employee_code: person.profile?.employee_code ?? "", currency: person.profile?.currency ?? "", start_date: person.profile?.start_date ?? "",
       end_date: person.profile?.end_date ?? "", is_active: person.profile?.is_active ?? true, notes: person.profile?.notes ?? "",
       insurance_exempt: Boolean(person.profile?.insurance_exempt), insurable_wage: person.profile?.insurable_wage != null ? String(person.profile.insurable_wage) : "",
+      insurance_category: person.profile?.insurance_category ?? "",
       tax_exempt: Boolean(person.profile?.tax_exempt),
     });
     setValues(Object.fromEntries(fixed.map((c) => {
@@ -145,6 +152,7 @@ export default function PayrollProfilesPage({ embedUserId }: { embedUserId?: str
     const profile = await PayrollCycleRepository.saveProfile(editing.userId, {
       legal_name: legalName, employee_code: form.employee_code, currency: form.currency.toUpperCase() || null, start_date: form.start_date || null, end_date: form.end_date || null,
       is_active: form.is_active, notes: form.notes, insurance_exempt: form.insurance_exempt, insurable_wage: insurable, tax_exempt: form.tax_exempt,
+      ...(categories.length > 1 ? { insurance_category: form.insurance_category || null } : {}),
     });
     if (profile.error) {
       setBusy("");
@@ -324,6 +332,12 @@ export default function PayrollProfilesPage({ embedUserId }: { embedUserId?: str
               <label style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}>
                 <input type="checkbox" checked={form.tax_exempt} onChange={(event) => setForm({ ...form, tax_exempt: event.target.checked })} /> {t("profiles.taxExempt")}
               </label>
+              {!form.insurance_exempt && categories.length > 1 ? (
+                <div style={{ maxWidth: 240 }}>
+                  <Select label={t("profiles.insuranceCategory")} name="insuranceCategory" value={form.insurance_category} onChange={(event) => setForm({ ...form, insurance_category: event.target.value })}
+                    options={[{ value: "", label: t("profiles.insuranceCategoryDefault") }, ...categories.map((c) => ({ value: c.code, label: c.name }))]} />
+                </div>
+              ) : null}
               {!form.insurance_exempt ? (
                 <div style={{ maxWidth: 240 }}>
                   <Input label={t("profiles.insurableWage")} name="insurableWage" inputMode="decimal" value={form.insurable_wage} onChange={(event) => setForm({ ...form, insurable_wage: event.target.value })} />

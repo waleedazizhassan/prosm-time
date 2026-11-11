@@ -294,6 +294,32 @@
       "clockInBodyHr": "{{name}} hat eingestempelt, obwohl {{document}} abgelaufen ist.",
       "clockInTitleSelf": "Abgelaufenes Dokument",
       "clockInBodySelf": "{{document}} ist abgelaufen."
+    },
+    "penalties": {
+      "reviewTitle": "Eine Sanktion zur Prüfung",
+      "reviewBody": "{{name}}: {{violation}} ({{date}})",
+      "investigationTitle": "Eine Untersuchung ist nötig",
+      "investigationBody": "{{name}}: {{violation}} ({{date}})",
+      "repliedTitle": "Die Person hat geantwortet",
+      "repliedBody": "{{name}}: {{violation}} – bereit zur Genehmigung",
+      "noReplyTitle": "Keine Antwort in der Frist",
+      "noReplyBody": "{{name}}: {{violation}} – bereit zur Genehmigung",
+      "responseTitle": "Ihre Antwort wird erbeten",
+      "responseBody": "{{violation}} ({{date}}). Antworten Sie bis {{due}}.",
+      "decidedTitle": "Eine Sanktionsentscheidung",
+      "decidedBody": "{{violation}} ({{date}}). Öffnen, um den Erhalt zu bestätigen oder Einspruch einzulegen.",
+      "rejectedTitle": "Keine Sanktion",
+      "rejectedBody": "{{violation}} ({{date}}): keine Sanktion verhängt.",
+      "appealTitle": "Ein Einspruch",
+      "appealBody": "{{name}} hat Einspruch eingelegt: {{violation}} ({{date}})",
+      "appealConfirmedTitle": "Über Ihren Einspruch wurde entschieden",
+      "appealConfirmedBody": "{{violation}}: die Sanktion bleibt bestehen.",
+      "cancelledTitle": "Eine Sanktion wurde aufgehoben",
+      "cancelledBody": "{{violation}} ({{date}}) wurde aufgehoben.",
+      "incentiveReviewTitle": "Eine Prämie zur Prüfung",
+      "incentiveReviewBody": "{{name}}: {{reason}}",
+      "incentiveGrantedTitle": "Gut gemacht!",
+      "incentiveGrantedBody": "Sie haben eine Prämie erhalten: {{reason}}"
     }
   },
   "items": {
@@ -325,7 +351,8 @@
     "announcements": "Schwarzes Brett",
     "exceptions": "Meine Ausnahmen",
     "myProfile": "Meine Akte",
-    "documents": "Dokumente"
+    "documents": "Dokumente",
+    "penalties": "Sanktionen und Prämien"
   },
   "sosOverlay": {
     "title": "SOS-/Notfallalarm",
@@ -434,7 +461,8 @@
     "externalPay": "Sätze pro Tag, Woche, Monat oder Jahr, Lohnläufe, Regeln und Einzelkorrekturen - genehmigt und eingefroren, getrennt von der Lohnabrechnung.",
     "announcements": "Mitteilungen und offizielle Erklärungen an Sie; bestätigen Sie die, die es verlangen.",
     "myProfile": "Deine Daten, Dokumente, Verwarnungen und Anwesenheit.",
-    "documents": "Die Dokumente aller Mitarbeitenden und ihre Ablaufdaten."
+    "documents": "Die Dokumente aller Mitarbeitenden und ihre Ablaufdaten.",
+    "penalties": "Verstöße, Genehmigungen, Einsprüche und Prämien."
   },
   "backgroundDisclosure": {
     "title": "Standort während Ihrer Schicht",

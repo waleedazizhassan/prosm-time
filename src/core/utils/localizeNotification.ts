@@ -296,6 +296,19 @@ export default function localizeNotification(notification: AppNotification, t: T
       const vars = { document: String(data.documentName ?? ""), name: String(data.employeeName ?? ""), count: Number(data.days ?? data.count ?? 0), reason: String(data.reason ?? "") };
       return { title: t(`shell:notifications.documents.${key}Title${who}`, vars), body: t(`shell:notifications.documents.${key}Body${who}`, vars) };
     }
+    // 2026-11-11 HR suite feature 1: penalties and incentives
+    case "penalty_review":
+    case "penalty_response":
+    case "penalty_decided":
+    case "penalty_appeal":
+    case "penalty_appeal_decided":
+    case "incentive_review":
+    case "incentive_granted": {
+      const key = penaltyNotificationKey(notification.type, data);
+      const vars = { name: String(data.employeeName ?? ""), violation: String(data.violationName ?? ""), date: String(data.date ?? ""),
+                     due: typeof data.due === "string" ? data.due.slice(0, 10) : "", reason: String(data.reason ?? "") };
+      return { title: t(`shell:notifications.penalties.${key}Title`, vars), body: t(`shell:notifications.penalties.${key}Body`, vars) };
+    }
     case "daily_digest": {
       const docs = Number(data.documentsExpired ?? 0) + Number(data.documentsMissing ?? 0) > 0
         ? ` ${t("shell:notifications.dailyDigest.documents", { expired: Number(data.documentsExpired ?? 0), missing: Number(data.documentsMissing ?? 0) })}` : "";
@@ -328,4 +341,24 @@ export default function localizeNotification(notification: AppNotification, t: T
   }
 
   return { title: notification.title, body: notification.body };
+}
+
+// 2026-11-11 HR suite feature 1: which text a penalty or incentive notification uses
+export function penaltyNotificationKey(type: string, data: Record<string, unknown>): string {
+  switch (type) {
+    case "penalty_review":
+      return data.step === "investigation" ? "investigation" : data.step === "replied" ? "replied" : data.step === "no_reply" ? "noReply" : "review";
+    case "penalty_response":
+      return "response";
+    case "penalty_decided":
+      return data.result === "rejected" ? "rejected" : "decided";
+    case "penalty_appeal":
+      return "appeal";
+    case "penalty_appeal_decided":
+      return data.result === "cancelled" ? "cancelled" : "appealConfirmed";
+    case "incentive_review":
+      return "incentiveReview";
+    default:
+      return "incentiveGranted";
+  }
 }

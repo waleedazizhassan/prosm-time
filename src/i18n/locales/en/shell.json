@@ -294,6 +294,32 @@
       "clockInBodyHr": "{{name}} clocked in while {{document}} has expired.",
       "clockInTitleSelf": "Expired document",
       "clockInBodySelf": "{{document}} has expired."
+    },
+    "penalties": {
+      "reviewTitle": "A penalty to review",
+      "reviewBody": "{{name}}: {{violation}} ({{date}})",
+      "investigationTitle": "An investigation is needed",
+      "investigationBody": "{{name}}: {{violation}} ({{date}})",
+      "repliedTitle": "The employee replied",
+      "repliedBody": "{{name}}: {{violation}} - ready for approval",
+      "noReplyTitle": "No reply in time",
+      "noReplyBody": "{{name}}: {{violation}} - ready for approval",
+      "responseTitle": "Your reply is requested",
+      "responseBody": "{{violation}} ({{date}}). Reply before {{due}}.",
+      "decidedTitle": "A penalty decision",
+      "decidedBody": "{{violation}} ({{date}}). Open it to confirm you received it, or appeal.",
+      "rejectedTitle": "No penalty",
+      "rejectedBody": "{{violation}} ({{date}}): no penalty was applied.",
+      "appealTitle": "An appeal",
+      "appealBody": "{{name}} appealed: {{violation}} ({{date}})",
+      "appealConfirmedTitle": "Your appeal was decided",
+      "appealConfirmedBody": "{{violation}}: the penalty was kept.",
+      "cancelledTitle": "A penalty was cancelled",
+      "cancelledBody": "{{violation}} ({{date}}) was cancelled.",
+      "incentiveReviewTitle": "An incentive to review",
+      "incentiveReviewBody": "{{name}}: {{reason}}",
+      "incentiveGrantedTitle": "Well done!",
+      "incentiveGrantedBody": "You got an incentive: {{reason}}"
     }
   },
   "items": {
@@ -325,7 +351,8 @@
     "announcements": "Notice board",
     "exceptions": "My exceptions",
     "myProfile": "My file",
-    "documents": "Documents"
+    "documents": "Documents",
+    "penalties": "Penalties and incentives"
   },
   "sosOverlay": {
     "title": "SOS/Emergency alert",
@@ -434,7 +461,8 @@
     "externalPay": "Rates by day, week, month or year, pay runs, the policy and individual adjustments - approved and frozen, kept apart from payroll.",
     "announcements": "Announcements and official statements addressed to you; confirm the ones that ask for it.",
     "myProfile": "Your details, documents, warnings and attendance.",
-    "documents": "Every employee's documents and their expiry dates."
+    "documents": "Every employee's documents and their expiry dates.",
+    "penalties": "Violations, approvals, appeals and incentives."
   },
   "backgroundDisclosure": {
     "title": "Location during your shift",

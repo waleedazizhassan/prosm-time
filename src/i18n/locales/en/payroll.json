@@ -68,7 +68,8 @@
     "chooseAll": "Choose all shown",
     "chooseNone": "Clear the choice",
     "addToChosen": "Add a line to {{count}} chosen",
-    "bulkHint": "Everyone chosen gets the same line, or nobody does if one of them cannot (for example outside your sites)."
+    "bulkHint": "Everyone chosen gets the same line, or nobody does if one of them cannot (for example outside your sites).",
+    "customRules": "Company's own tax rules"
   },
   "actions": {
     "submit": "Send for review",
@@ -193,7 +194,8 @@
     "managementApproval": "Management approval",
     "combinedTotal": "Total salary (incl. allowances)",
     "totalSalaries": "Total salaries",
-    "no": "No."
+    "no": "No.",
+    "customRules": "Computed with the company's own tax and insurance rules"
   },
   "profiles": {
     "title": "People",
@@ -250,7 +252,9 @@
     "legalNameLabel": "Employee's official name",
     "legalNameHint": "This is the name on the payslip and payroll sheets, not the user name ({{user}}).",
     "legalNameMissing": "Official name missing",
-    "notInPayroll": "This person is not in payroll (the owner is not paid a salary)."
+    "notInPayroll": "This person is not in payroll (the owner is not paid a salary).",
+    "insuranceCategory": "Insurance category",
+    "insuranceCategoryDefault": "The default category"
   },
   "installments": {
     "title": "Installments and advances",
@@ -497,5 +501,10 @@
     "twoAction": "Payroll files",
     "three": "The month's cycle",
     "threeText": "Create the cycle below → add the variable amounts and review the attendance suggestions → submit → someone else approves → lock and publish the payslips."
+  },
+  "taxLink": {
+    "title": "Tax and insurance",
+    "hint": "The country, the tax brackets, insurance and a calculator - in their own page.",
+    "open": "Open"
   }
 }

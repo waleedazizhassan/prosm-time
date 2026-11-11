@@ -294,6 +294,32 @@
       "clockInBodyHr": "{{name}} fichó con {{document}} vencido.",
       "clockInTitleSelf": "Documento vencido",
       "clockInBodySelf": "{{document}} ha vencido."
+    },
+    "penalties": {
+      "reviewTitle": "Una sanción por revisar",
+      "reviewBody": "{{name}}: {{violation}} ({{date}})",
+      "investigationTitle": "Se necesita una investigación",
+      "investigationBody": "{{name}}: {{violation}} ({{date}})",
+      "repliedTitle": "El empleado respondió",
+      "repliedBody": "{{name}}: {{violation}} - lista para aprobar",
+      "noReplyTitle": "Sin respuesta en plazo",
+      "noReplyBody": "{{name}}: {{violation}} - lista para aprobar",
+      "responseTitle": "Se pide tu respuesta",
+      "responseBody": "{{violation}} ({{date}}). Responde antes del {{due}}.",
+      "decidedTitle": "Una decisión de sanción",
+      "decidedBody": "{{violation}} ({{date}}). Ábrela para confirmar que la recibiste o para recurrir.",
+      "rejectedTitle": "Sin sanción",
+      "rejectedBody": "{{violation}} ({{date}}): no se aplicó sanción.",
+      "appealTitle": "Un recurso",
+      "appealBody": "{{name}} recurrió: {{violation}} ({{date}})",
+      "appealConfirmedTitle": "Se resolvió tu recurso",
+      "appealConfirmedBody": "{{violation}}: se mantuvo la sanción.",
+      "cancelledTitle": "Se anuló una sanción",
+      "cancelledBody": "{{violation}} ({{date}}) se anuló.",
+      "incentiveReviewTitle": "Un incentivo por revisar",
+      "incentiveReviewBody": "{{name}}: {{reason}}",
+      "incentiveGrantedTitle": "¡Bien hecho!",
+      "incentiveGrantedBody": "Recibiste un incentivo: {{reason}}"
     }
   },
   "items": {
@@ -325,7 +351,8 @@
     "announcements": "Tablón de anuncios",
     "exceptions": "Mis excepciones",
     "myProfile": "Mi expediente",
-    "documents": "Documentos"
+    "documents": "Documentos",
+    "penalties": "Sanciones e incentivos"
   },
   "sosOverlay": {
     "title": "Alerta SOS/Emergencia",
@@ -439,7 +466,8 @@
     "externalPay": "Tarifas por día, semana, mes o año, liquidaciones, la política y ajustes individuales: aprobados y congelados, separados de la nómina.",
     "announcements": "Anuncios y comunicados oficiales dirigidos a ti; confirma los que lo piden.",
     "myProfile": "Tus datos, documentos, avisos y asistencia.",
-    "documents": "Los documentos de cada empleado y sus vencimientos."
+    "documents": "Los documentos de cada empleado y sus vencimientos.",
+    "penalties": "Infracciones, aprobaciones, recursos e incentivos."
   },
   "backgroundDisclosure": {
     "title": "Ubicación durante tu turno",

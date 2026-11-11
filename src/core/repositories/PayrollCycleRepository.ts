@@ -72,7 +72,7 @@ export interface CycleLine {
   name_ar: string;
   name_en: string | null;
   category: LineCategory;
-  source: "fixed" | "variable" | "installment" | "attendance_suggestion" | "import" | "statutory";
+  source: "fixed" | "variable" | "installment" | "attendance_suggestion" | "import" | "statutory" | "penalty" | "incentive";
   calc_type: "amount" | "percent";
   percent: number | null;
   is_basic: boolean;
@@ -108,6 +108,8 @@ export interface CycleEmployee {
 
 export interface PayrollCycle {
   id: string;
+  /** 2026-11-11: the rules it took; mode "custom" = the company's own tax and insurance rules */
+  policy_snapshot?: { statutoryMeta?: { mode?: string; version?: number; country?: string } };
   title: string;
   site_id: string | null;
   siteName?: string | null;
@@ -194,7 +196,7 @@ export interface PayrollReport {
   draft: boolean;
   cycle: { id: string; title: string; periodStart: string; periodEnd: string; status: CycleStatus; cycleVersion: number; siteName: string | null };
   organization: { name: string; logoUrl: string | null };
-  settings: { taxNotice: string | null; footerNote: string | null; showSignatures: boolean; language: "ar" | "en" | "bilingual" };
+  settings: { taxNotice: string | null; footerNote: string | null; showSignatures: boolean; language: "ar" | "en" | "bilingual"; customRules?: boolean };
   employees: CycleEmployee[];
   /** site id -> name (2026-11-09) */
   siteNames?: Record<string, string>;
@@ -221,7 +223,7 @@ export interface PayrollPerson {
   isActive: boolean;
   siteId: string | null;
   siteName: string | null;
-  profile: { id: string; legal_name?: string | null; employee_code: string | null; currency: string; start_date: string | null; end_date: string | null; is_active: boolean; notes: string | null; insurance_exempt?: boolean; insurable_wage?: number | null; tax_exempt?: boolean } | null;
+  profile: { id: string; legal_name?: string | null; employee_code: string | null; currency: string; start_date: string | null; end_date: string | null; is_active: boolean; notes: string | null; insurance_exempt?: boolean; insurable_wage?: number | null; tax_exempt?: boolean; insurance_category?: string | null } | null;
   components: ProfileComponentValue[];
 }
 

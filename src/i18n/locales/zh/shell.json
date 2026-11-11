@@ -294,6 +294,32 @@
       "clockInBodyHr": "{{name}} 在 {{document}} 过期的情况下打卡。",
       "clockInTitleSelf": "证件已过期",
       "clockInBodySelf": "{{document}} 已过期。"
+    },
+    "penalties": {
+      "reviewTitle": "有处罚待审核",
+      "reviewBody": "{{name}}：{{violation}}（{{date}}）",
+      "investigationTitle": "需要调查",
+      "investigationBody": "{{name}}：{{violation}}（{{date}}）",
+      "repliedTitle": "员工已回复",
+      "repliedBody": "{{name}}：{{violation}}——可审批",
+      "noReplyTitle": "未在期限内回复",
+      "noReplyBody": "{{name}}：{{violation}}——可审批",
+      "responseTitle": "需要您的回复",
+      "responseBody": "{{violation}}（{{date}}）。请在 {{due}} 前回复。",
+      "decidedTitle": "处罚决定",
+      "decidedBody": "{{violation}}（{{date}}）。打开以确认已知悉或申诉。",
+      "rejectedTitle": "不予处罚",
+      "rejectedBody": "{{violation}}（{{date}}）：未执行处罚。",
+      "appealTitle": "申诉",
+      "appealBody": "{{name}} 提出申诉：{{violation}}（{{date}}）",
+      "appealConfirmedTitle": "您的申诉已处理",
+      "appealConfirmedBody": "{{violation}}：维持处罚。",
+      "cancelledTitle": "处罚已撤销",
+      "cancelledBody": "{{violation}}（{{date}}）已撤销。",
+      "incentiveReviewTitle": "有奖励待审核",
+      "incentiveReviewBody": "{{name}}：{{reason}}",
+      "incentiveGrantedTitle": "干得好！",
+      "incentiveGrantedBody": "您获得了奖励：{{reason}}"
     }
   },
   "items": {
@@ -325,7 +351,8 @@
     "announcements": "公告栏",
     "exceptions": "我的例外",
     "myProfile": "我的档案",
-    "documents": "证件"
+    "documents": "证件",
+    "penalties": "处罚与奖励"
   },
   "sosOverlay": {
     "title": "SOS/紧急警报",
@@ -429,7 +456,8 @@
     "externalPay": "按天、周、月或年的费率、发薪批次、政策与个人调整——经批准后冻结，与员工工资分开。",
     "announcements": "发给您的公告和正式声明；需要确认的请确认已读。",
     "myProfile": "你的资料、证件、警告和考勤。",
-    "documents": "每位员工的证件及其到期日期。"
+    "documents": "每位员工的证件及其到期日期。",
+    "penalties": "违规、审批、申诉和奖励。"
   },
   "backgroundDisclosure": {
     "title": "班次期间的位置",

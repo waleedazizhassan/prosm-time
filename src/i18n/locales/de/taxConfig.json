@@ -1,0 +1,138 @@
+{
+  "title": "Steuern und Sozialversicherung",
+  "subtitle": "Die Regeln für Lohnsteuer und Sozialversicherung in der Lohnabrechnung.",
+  "error": "Das hat nicht geklappt. Bitte erneut versuchen.",
+  "badge": {
+    "official": "Entspricht den offiziellen Werten Ägyptens",
+    "modified": "Vom Unternehmen geändert",
+    "manual": "Manuelle Einrichtung"
+  },
+  "country": {
+    "title": "Land",
+    "change": "Land ändern",
+    "currency": "Währung: {{currency}}",
+    "version": "Version {{version}}",
+    "officialUpdated": "Von PROSM zuletzt aktualisiert am {{date}}",
+    "changed": "Ab {{date}} folgt die Lohnabrechnung {{country}}.",
+    "search": "Land suchen",
+    "fromMonth": "Gilt ab {{date}} – dem ersten Monat ohne Lohnlauf.",
+    "oldCyclesKept": "Bereits erstellte Lohnläufe behalten Land und Regeln.",
+    "readyRules": "Für dieses Land gibt es fertige Regeln von PROSM.",
+    "emptyRules": "Dieses Land beginnt leer: Ihr Unternehmen trägt die Regeln ein.",
+    "categoriesKept": "Alte Versicherungskategorien bleiben bei den alten Läufen.",
+    "currencyLabel": "Währung",
+    "typeCode": "Zum Bestätigen {{code}} eingeben",
+    "confirmButton": "Land ändern",
+    "chooseAnother": "Anderes Land wählen",
+    "openCycle": "Ein Lohnlauf ist offen: schließen oder stornieren Sie ihn zuerst."
+  },
+  "manualNotice": "Eine manuelle Einrichtung ist keine rechtliche Freigabe durch PROSM. Das Unternehmen gibt die Werte auf eigene Verantwortung ein und prüft sie vor dem ersten Lauf mit seinem Steuerberater.",
+  "officialChanged": "PROSM hat die offiziellen Werte aktualisiert, seit Ihr Unternehmen eigene festgelegt hat. Prüfen Sie sie oder kehren Sie zu den offiziellen Werten zurück.",
+  "backToOfficial": "Zurück zu den offiziellen Werten",
+  "lockedText": "Dies sind die fertigen, aktuell gehaltenen Werte von PROSM. Für andere Werte kopieren und bearbeiten (Ihr Unternehmen trägt die Verantwortung).",
+  "copyAndEdit": "Kopieren und bearbeiten",
+  "missing": {
+    "title": "Fehlende Versicherungskategorie ({{count}})",
+    "hint": "Wählen Sie die Kategorie jeder Person in ihrer Gehaltskarte vor dem nächsten Lauf."
+  },
+  "items": {
+    "title": "Steuer- und versicherungspflichtige Lohnbestandteile",
+    "hint": "Gilt sofort für die nächsten Berechnungen.",
+    "item": "Bestandteil",
+    "taxable": "Steuerpflichtig",
+    "insurable": "Versicherungspflichtig"
+  },
+  "how": {
+    "title": "So wird gerechnet",
+    "gross": "Brutto = alle Bezüge und Zulagen.",
+    "insurance": "Versicherung = versicherungspflichtiges Entgelt (Grundlohn oder fester Wert) zwischen Mindest- und Höchstgrenze × Satz der Person; der Arbeitgeberanteil sind Kosten außerhalb des Nettos.",
+    "taxBase": "Steuerpflichtig = steuerpflichtige Bestandteile abzüglich Abzügen vor Steuer und (falls eingestellt) des Versicherungsanteils.",
+    "tax": "Steuer = Stufen auf das Jahreseinkommen (nach Freibetrag) ÷ 12 – oder monatlich.",
+    "levies": "Sonstige Abgaben = Satz × Bemessungsgrundlage.",
+    "net": "Netto = Brutto abzüglich der Abzüge der Person."
+  },
+  "calc": {
+    "title": "Ausprobieren",
+    "hint": "Auf dem Server mit derselben Funktion wie die Lohnabrechnung berechnet, mit den Regeln auf dieser Seite (nichts wird gespeichert).",
+    "basic": "Grundlohn",
+    "taxableAllowances": "Steuerpflichtige Zulagen",
+    "nonTaxableAllowances": "Steuerfreie Zulagen",
+    "preTax": "Abzüge vor Steuer",
+    "category": "Versicherungskategorie",
+    "defaultCategory": "Standardkategorie",
+    "run": "Berechnen",
+    "gross": "Brutto",
+    "net": "Netto",
+    "employerCost": "Arbeitgeberversicherung (Kosten)"
+  },
+  "rules": {
+    "insurance_employee": "Sozialversicherung",
+    "insurance_employer": "Arbeitgeberanteil",
+    "income_tax": "Lohnsteuer",
+    "martyrs_fund": "Märtyrerfonds"
+  },
+  "tax": {
+    "title": "Lohnsteuer",
+    "enabled": "Lohnsteuer anwenden",
+    "period": "Berechnung",
+    "annual": "Jährlich, geteilt durch 12",
+    "monthly": "Monatlich",
+    "exemption": "Freibetrag",
+    "deductInsurance": "Versicherungsanteil vor der Steuer abziehen",
+    "roundDown": "Monatssteuer auf ganze Einheit abrunden",
+    "brackets": "Stufen",
+    "from": "Ab {{value}}",
+    "upTo": "Bis",
+    "andAbove": "und darüber",
+    "rate": "Satz %",
+    "addBracket": "Stufe hinzufügen",
+    "tiers": "Hohe Einkommen",
+    "tiersHint": "Über diesen Jahreseinkommen entfallen die unteren Stufen (wie in den fertigen Regeln).",
+    "tierRow": "Über {{above}}: ab Stufe {{n}}"
+  },
+  "ins": {
+    "title": "Sozialversicherung",
+    "enabled": "Sozialversicherung anwenden",
+    "categoryName": "Kategorie (z. B. Staatsangehörige)",
+    "employeeRate": "Person %",
+    "employerRate": "Arbeitgeber %",
+    "min": "Mindestentgelt",
+    "max": "Höchstentgelt",
+    "base": "Versicherungspflichtiges Entgelt",
+    "removeCategory": "Kategorie entfernen",
+    "addCategory": "Kategorie hinzufügen",
+    "defaultCategory": "Kategorie für Personen ohne Auswahl",
+    "fixedWageHint": "Ein festes versicherungspflichtiges Entgelt in der Gehaltskarte ersetzt den Grundlohn."
+  },
+  "bases": {
+    "basic": "Grundlohn",
+    "gross": "Brutto",
+    "taxable": "Steuerpflichtig",
+    "insurable": "Als versicherungspflichtig markiert"
+  },
+  "levy": {
+    "title": "Sonstige Abgaben",
+    "hint": "Z. B. ein Fonds als Anteil am Brutto. Fügen Sie nur hinzu, was Ihr Landesrecht verlangt.",
+    "name": "Name",
+    "rate": "Satz %",
+    "base": "Auf",
+    "payer": "Zahlt",
+    "employee": "Person",
+    "employer": "Arbeitgeber",
+    "on": "Aktiv",
+    "add": "Abgabe hinzufügen"
+  },
+  "remove": "Entfernen",
+  "saveTitle": "Als neue Version speichern",
+  "saveHint": "Bestehende Läufe behalten ihre Regeln. Die neue Version gilt ab dem gewählten Monat.",
+  "effectiveFrom": "Gilt ab (Monat)",
+  "cancelEdit": "Abbrechen",
+  "save": "Version speichern",
+  "liability": "Eine manuelle Einrichtung ist keine rechtliche Freigabe durch PROSM: Das Unternehmen gibt die Werte auf eigene Verantwortung ein und prüft sie mit seinem Berater.",
+  "liabilityDone": "Verantwortung übernommen von {{name}} am {{date}}.",
+  "saved": "Als Version {{version}} ab {{date}} gespeichert.",
+  "versions": {
+    "title": "Versionen",
+    "row": "Version {{version}} – {{country}} – ab {{date}} – {{by}}"
+  }
+}

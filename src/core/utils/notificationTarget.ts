@@ -69,6 +69,17 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
       return "/payroll/requests";
     // 2026-11-11 HR suite feature 2: a document - personnel managers to the documents page, the person to
     // the documents in their own file (where the camera button is)
+    // 2026-11-11 HR suite feature 1: deciding goes to the penalties page on that violation; the person to their file
+    case "penalty_review":
+    case "penalty_appeal":
+      return ref?.entityId ? `/penalties?tab=action&open=${String(ref.entityId)}` : "/penalties";
+    case "incentive_review":
+      return "/penalties?tab=incentives";
+    case "penalty_response":
+    case "penalty_decided":
+    case "penalty_appeal_decided":
+    case "incentive_granted":
+      return "/me?tab=penalties";
     case "document_uploaded":
     case "document_clock_in":
       return "/documents";

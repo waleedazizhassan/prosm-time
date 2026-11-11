@@ -68,7 +68,8 @@
     "chooseAll": "全选当前显示",
     "chooseNone": "取消选择",
     "addToChosen": "为所选 {{count}} 人添加一项",
-    "bulkHint": "所选人员都会添加同一项；若其中有人无法添加（例如不在您的站点范围），则全部不添加。"
+    "bulkHint": "所选人员都会添加同一项；若其中有人无法添加（例如不在您的站点范围），则全部不添加。",
+    "customRules": "公司自定义税务规则"
   },
   "actions": {
     "submit": "提交审核",
@@ -193,7 +194,8 @@
     "managementApproval": "管理层审批",
     "combinedTotal": "工资总额（含津贴）",
     "totalSalaries": "工资合计",
-    "no": "序号"
+    "no": "序号",
+    "customRules": "按公司自定义的税务和社保规则计算"
   },
   "profiles": {
     "title": "人员",
@@ -250,7 +252,9 @@
     "legalNameLabel": "正式姓名",
     "legalNameHint": "这是工资单上的姓名，而不是用户名（{{user}}）。",
     "legalNameMissing": "缺少正式姓名",
-    "notInPayroll": "此人不在工资名单中（所有者不领取工资）。"
+    "notInPayroll": "此人不在工资名单中（所有者不领取工资）。",
+    "insuranceCategory": "社保类别",
+    "insuranceCategoryDefault": "默认类别"
   },
   "installments": {
     "title": "分期与预支",
@@ -497,5 +501,10 @@
     "twoAction": "薪资档案",
     "three": "月度周期",
     "threeText": "在下方创建周期 → 录入变动项并检查考勤建议 → 提交 → 由另一人批准 → 锁定并发布工资单。"
+  },
+  "taxLink": {
+    "title": "税务与社保",
+    "hint": "国家、税率表、社保和计算器，都在单独页面中。",
+    "open": "打开"
   }
 }

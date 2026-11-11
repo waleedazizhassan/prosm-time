@@ -1,0 +1,138 @@
+{
+  "title": "税务与社保",
+  "subtitle": "工资中计算个人所得税和社会保险所用的规则。",
+  "error": "操作未成功，请重试。",
+  "badge": {
+    "official": "与埃及官方数值一致",
+    "modified": "已由公司修改",
+    "manual": "手动设置"
+  },
+  "country": {
+    "title": "国家",
+    "change": "更换国家",
+    "currency": "货币：{{currency}}",
+    "version": "第 {{version}} 版",
+    "officialUpdated": "PROSM 最近更新于 {{date}}",
+    "changed": "自 {{date}} 起，工资按 {{country}} 计算。",
+    "search": "搜索国家",
+    "fromMonth": "自 {{date}}（第一个没有工资周期的月份）起生效。",
+    "oldCyclesKept": "已建立的工资周期保留原国家和规则。",
+    "readyRules": "该国家有 PROSM 提供的现成规则。",
+    "emptyRules": "该国家从空白开始：由贵公司填写规则。",
+    "categoriesKept": "员工原有的社保类别随旧周期保留。",
+    "currencyLabel": "货币",
+    "typeCode": "输入 {{code}} 以确认",
+    "confirmButton": "更换国家",
+    "chooseAnother": "选择其他国家",
+    "openCycle": "有未关闭的工资周期：请先关闭或取消。"
+  },
+  "manualNotice": "手动设置并非 PROSM 的法律认可。公司自行负责输入这些数值，并须在首次发薪前与会计或当地顾问核对。",
+  "officialChanged": "在贵公司修改数值之后，PROSM 已更新官方数值。请核对，或恢复为官方数值。",
+  "backToOfficial": "恢复为官方数值",
+  "lockedText": "这些是 PROSM 提供并持续更新的现成数值。如需使用其他数值，请复制后修改（由贵公司承担修改责任）。",
+  "copyAndEdit": "复制并修改",
+  "missing": {
+    "title": "缺少社保类别（{{count}}）",
+    "hint": "请在下次发薪前，在每人的工资档案中选择类别。"
+  },
+  "items": {
+    "title": "需缴税和社保的工资项目",
+    "hint": "立即用于之后的计算。",
+    "item": "项目",
+    "taxable": "需缴税",
+    "insurable": "需缴社保"
+  },
+  "how": {
+    "title": "如何计算",
+    "gross": "应发 = 所有收入和津贴。",
+    "insurance": "社保 = 缴费基数（基本工资或固定基数），限定在上下限之间 × 员工费率；单位部分为成本，不计入实发。",
+    "taxBase": "应税额 = 应税项目减去税前扣除，以及（如设置）员工社保。",
+    "tax": "税额 = 按年度应税额（扣除免税额后）套用税率表 ÷ 12，或按月计算。",
+    "levies": "其他费用 = 费率 × 基数。",
+    "net": "实发 = 应发减员工扣款。"
+  },
+  "calc": {
+    "title": "试算",
+    "hint": "在服务器上使用与工资相同的函数，按本页显示的规则计算（不保存任何内容）。",
+    "basic": "基本工资",
+    "taxableAllowances": "应税津贴",
+    "nonTaxableAllowances": "免税津贴",
+    "preTax": "税前扣除",
+    "category": "社保类别",
+    "defaultCategory": "默认类别",
+    "run": "计算",
+    "gross": "应发",
+    "net": "实发",
+    "employerCost": "单位社保（成本）"
+  },
+  "rules": {
+    "insurance_employee": "社会保险",
+    "insurance_employer": "单位部分",
+    "income_tax": "工资所得税",
+    "martyrs_fund": "烈士基金"
+  },
+  "tax": {
+    "title": "工资所得税",
+    "enabled": "征收工资税",
+    "period": "计算方式",
+    "annual": "按年计算后除以 12",
+    "monthly": "按月",
+    "exemption": "免税额",
+    "deductInsurance": "税前扣除员工社保",
+    "roundDown": "月税额向下取整",
+    "brackets": "税率表",
+    "from": "自 {{value}}",
+    "upTo": "至",
+    "andAbove": "及以上",
+    "rate": "税率 %",
+    "addBracket": "添加档次",
+    "tiers": "高收入",
+    "tiersHint": "年收入超过这些数额时，较低档次不再适用（如现成规则所设）。",
+    "tierRow": "超过 {{above}}：从第 {{n}} 档开始"
+  },
+  "ins": {
+    "title": "社会保险",
+    "enabled": "缴纳社保",
+    "categoryName": "类别（如本国公民）",
+    "employeeRate": "员工 %",
+    "employerRate": "单位 %",
+    "min": "缴费基数下限",
+    "max": "缴费基数上限",
+    "base": "缴费基数",
+    "removeCategory": "删除类别",
+    "addCategory": "添加类别",
+    "defaultCategory": "未选择类别者使用的类别",
+    "fixedWageHint": "工资档案中设置的固定缴费基数将代替基本工资。"
+  },
+  "bases": {
+    "basic": "基本工资",
+    "gross": "应发",
+    "taxable": "应税额",
+    "insurable": "标记为需缴社保的项目"
+  },
+  "levy": {
+    "title": "其他费用",
+    "hint": "例如按应发比例缴纳的基金。只添加贵国法律要求的项目。",
+    "name": "名称",
+    "rate": "费率 %",
+    "base": "基数",
+    "payer": "缴纳方",
+    "employee": "员工",
+    "employer": "单位",
+    "on": "启用",
+    "add": "添加费用"
+  },
+  "remove": "删除",
+  "saveTitle": "保存为新版本",
+  "saveHint": "已建立的周期保留其规则。新版本自所选月份起生效。",
+  "effectiveFrom": "生效月份",
+  "cancelEdit": "取消",
+  "save": "保存版本",
+  "liability": "手动设置并非 PROSM 的法律认可：公司自行负责输入这些数值，并与会计或顾问核对。",
+  "liabilityDone": "{{name}} 于 {{date}} 接受了责任声明。",
+  "saved": "已保存为第 {{version}} 版，自 {{date}} 起生效。",
+  "versions": {
+    "title": "版本",
+    "row": "第 {{version}} 版——{{country}}——自 {{date}}——{{by}}"
+  }
+}

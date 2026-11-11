@@ -68,7 +68,8 @@
     "chooseAll": "Escolher todos os mostrados",
     "chooseNone": "Limpar seleção",
     "addToChosen": "Adicionar linha a {{count}} escolhidos",
-    "bulkHint": "Todos os escolhidos recebem a mesma linha, ou ninguém se algum não puder (por exemplo fora dos seus locais)."
+    "bulkHint": "Todos os escolhidos recebem a mesma linha, ou ninguém se algum não puder (por exemplo fora dos seus locais).",
+    "customRules": "Regras fiscais próprias"
   },
   "actions": {
     "submit": "Enviar para revisão",
@@ -193,7 +194,8 @@
     "managementApproval": "Aprovação da direção",
     "combinedTotal": "Salário total (com subsídios)",
     "totalSalaries": "Total de salários",
-    "no": "N.º"
+    "no": "N.º",
+    "customRules": "Calculado com regras de imposto e previdência próprias da empresa"
   },
   "profiles": {
     "title": "Pessoas",
@@ -250,7 +252,9 @@
     "legalNameLabel": "Nome oficial",
     "legalNameHint": "É o nome no recibo de salário, não o nome de usuário ({{user}}).",
     "legalNameMissing": "Falta o nome oficial",
-    "notInPayroll": "Esta pessoa não está na folha (o proprietário não recebe salário)."
+    "notInPayroll": "Esta pessoa não está na folha (o proprietário não recebe salário).",
+    "insuranceCategory": "Categoria de previdência",
+    "insuranceCategoryDefault": "Categoria padrão"
   },
   "installments": {
     "title": "Prestações e adiantamentos",
@@ -497,5 +501,10 @@
     "twoAction": "Fichas salariais",
     "three": "O ciclo do mês",
     "threeText": "Crie o ciclo abaixo → adicione os variáveis e reveja as sugestões → submeta → outra pessoa aprova → feche e publique."
+  },
+  "taxLink": {
+    "title": "Impostos e previdência",
+    "hint": "O país, as faixas, a previdência e uma calculadora, em uma página própria.",
+    "open": "Abrir"
   }
 }

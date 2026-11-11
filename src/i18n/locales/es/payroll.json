@@ -68,7 +68,8 @@
     "chooseAll": "Elegir todos los mostrados",
     "chooseNone": "Quitar selección",
     "addToChosen": "Añadir concepto a {{count}} elegidos",
-    "bulkHint": "Todos los elegidos reciben el mismo concepto, o ninguno si alguno no puede (por ejemplo fuera de sus sedes)."
+    "bulkHint": "Todos los elegidos reciben el mismo concepto, o ninguno si alguno no puede (por ejemplo fuera de sus sedes).",
+    "customRules": "Reglas fiscales propias"
   },
   "actions": {
     "submit": "Enviar a revisión",
@@ -193,7 +194,8 @@
     "managementApproval": "Aprobación de la dirección",
     "combinedTotal": "Salario total (con complementos)",
     "totalSalaries": "Total de salarios",
-    "no": "N.º"
+    "no": "N.º",
+    "customRules": "Calculado con reglas fiscales y de seguro propias de la empresa"
   },
   "profiles": {
     "title": "Personas",
@@ -250,7 +252,9 @@
     "legalNameLabel": "Nombre oficial",
     "legalNameHint": "Este es el nombre de la nómina, no el nombre de usuario ({{user}}).",
     "legalNameMissing": "Falta el nombre oficial",
-    "notInPayroll": "Esta persona no está en la nómina (el propietario no cobra salario)."
+    "notInPayroll": "Esta persona no está en la nómina (el propietario no cobra salario).",
+    "insuranceCategory": "Categoría de seguro",
+    "insuranceCategoryDefault": "Categoría por defecto"
   },
   "installments": {
     "title": "Cuotas y anticipos",
@@ -497,5 +501,10 @@
     "twoAction": "Fichas de nómina",
     "three": "El ciclo del mes",
     "threeText": "Cree el ciclo abajo → añada los variables y revise las sugerencias → envíe → otra persona aprueba → cierre y publique las nóminas."
+  },
+  "taxLink": {
+    "title": "Impuestos y seguridad social",
+    "hint": "El país, los tramos, el seguro y una calculadora, en su propia página.",
+    "open": "Abrir"
   }
 }

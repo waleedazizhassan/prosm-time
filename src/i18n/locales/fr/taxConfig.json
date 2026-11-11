@@ -1,0 +1,138 @@
+{
+  "title": "Impôts et cotisations",
+  "subtitle": "Les règles de calcul de l'impôt sur le salaire et des cotisations sociales dans la paie.",
+  "error": "Cela n'a pas fonctionné. Réessayez.",
+  "badge": {
+    "official": "Conforme aux valeurs officielles de l'Égypte",
+    "modified": "Modifié par l'entreprise",
+    "manual": "Configuration manuelle"
+  },
+  "country": {
+    "title": "Pays",
+    "change": "Changer de pays",
+    "currency": "Devise : {{currency}}",
+    "version": "version {{version}}",
+    "officialUpdated": "Mises à jour par PROSM le {{date}}",
+    "changed": "À partir du {{date}}, la paie suit {{country}}.",
+    "search": "Rechercher un pays",
+    "fromMonth": "S'applique à partir du {{date}}, premier mois sans cycle de paie.",
+    "oldCyclesKept": "Les cycles déjà créés gardent leur pays et leurs règles.",
+    "readyRules": "Ce pays a des règles prêtes de PROSM.",
+    "emptyRules": "Ce pays commence vide : votre entreprise saisit ses règles.",
+    "categoriesKept": "Les anciennes catégories d'assurance restent liées aux anciens cycles.",
+    "currencyLabel": "Devise",
+    "typeCode": "Tapez {{code}} pour confirmer",
+    "confirmButton": "Changer de pays",
+    "chooseAnother": "Choisir un autre pays",
+    "openCycle": "Un cycle de paie est ouvert : clôturez-le ou annulez-le avant de changer de pays."
+  },
+  "manualNotice": "La configuration manuelle n'est pas une validation juridique de PROSM. L'entreprise saisit ces valeurs sous sa responsabilité et doit les vérifier avec son comptable ou conseiller avant la première paie.",
+  "officialChanged": "PROSM a mis à jour les valeurs officielles depuis que votre entreprise a modifié les siennes. Vérifiez-les ou revenez aux valeurs officielles.",
+  "backToOfficial": "Revenir aux valeurs officielles",
+  "lockedText": "Ce sont les valeurs prêtes de PROSM, tenues à jour. Pour d'autres valeurs, copiez-les et modifiez-les (votre entreprise en assume la responsabilité).",
+  "copyAndEdit": "Copier et modifier",
+  "missing": {
+    "title": "Catégorie d'assurance manquante ({{count}})",
+    "hint": "Choisissez la catégorie de chaque personne dans sa fiche de paie avant la prochaine paie."
+  },
+  "items": {
+    "title": "Éléments soumis à l'impôt et aux cotisations",
+    "hint": "S'applique tout de suite aux prochains calculs.",
+    "item": "Élément",
+    "taxable": "Imposable",
+    "insurable": "Soumis à cotisations"
+  },
+  "how": {
+    "title": "Comment c'est calculé",
+    "gross": "Brut = tous les gains et indemnités.",
+    "insurance": "Cotisations = salaire assurable (le salaire de base ou un montant fixe) entre le minimum et le maximum × taux de l'employé ; la part employeur est un coût hors net.",
+    "taxBase": "Imposable = éléments imposables moins les retenues avant impôt et (si défini) la cotisation de l'employé.",
+    "tax": "Impôt = barème sur l'imposable annuel (après abattement) ÷ 12 – ou mensuel.",
+    "levies": "Autres prélèvements = taux × assiette.",
+    "net": "Net = brut moins les retenues de l'employé."
+  },
+  "calc": {
+    "title": "Essayer",
+    "hint": "Calculé sur le serveur par la même fonction que la paie, avec les règles de cette page (rien n'est enregistré).",
+    "basic": "Salaire de base",
+    "taxableAllowances": "Indemnités imposables",
+    "nonTaxableAllowances": "Indemnités non imposables",
+    "preTax": "Retenues avant impôt",
+    "category": "Catégorie d'assurance",
+    "defaultCategory": "Catégorie par défaut",
+    "run": "Calculer",
+    "gross": "Brut",
+    "net": "Net",
+    "employerCost": "Cotisations employeur (coût)"
+  },
+  "rules": {
+    "insurance_employee": "Sécurité sociale",
+    "insurance_employer": "Part employeur",
+    "income_tax": "Impôt sur le salaire",
+    "martyrs_fund": "Fonds des martyrs"
+  },
+  "tax": {
+    "title": "Impôt sur le salaire",
+    "enabled": "L'impôt s'applique",
+    "period": "Calcul",
+    "annual": "Annuel divisé par 12",
+    "monthly": "Mensuel",
+    "exemption": "Montant exonéré",
+    "deductInsurance": "Déduire la cotisation de l'employé avant l'impôt",
+    "roundDown": "Arrondir l'impôt mensuel à l'unité inférieure",
+    "brackets": "Tranches",
+    "from": "À partir de {{value}}",
+    "upTo": "Jusqu'à",
+    "andAbove": "et au-delà",
+    "rate": "Taux %",
+    "addBracket": "Ajouter une tranche",
+    "tiers": "Hauts revenus",
+    "tiersHint": "Au-delà de ces revenus annuels, les tranches inférieures sont supprimées (selon les règles prêtes).",
+    "tierRow": "Au-delà de {{above}} : à partir de la tranche {{n}}"
+  },
+  "ins": {
+    "title": "Sécurité sociale",
+    "enabled": "Les cotisations s'appliquent",
+    "categoryName": "Catégorie (ex. national)",
+    "employeeRate": "Employé %",
+    "employerRate": "Employeur %",
+    "min": "Salaire assurable minimum",
+    "max": "Salaire assurable maximum",
+    "base": "Salaire assurable",
+    "removeCategory": "Supprimer la catégorie",
+    "addCategory": "Ajouter une catégorie",
+    "defaultCategory": "Catégorie pour les personnes sans choix",
+    "fixedWageHint": "Un salaire assurable fixe dans la fiche de paie remplace le salaire de base."
+  },
+  "bases": {
+    "basic": "Salaire de base",
+    "gross": "Brut",
+    "taxable": "Imposable",
+    "insurable": "Éléments marqués assurables"
+  },
+  "levy": {
+    "title": "Autres prélèvements",
+    "hint": "Par exemple un fonds en pourcentage du brut. N'ajoutez que ce qu'exige la loi de votre pays.",
+    "name": "Nom",
+    "rate": "Taux %",
+    "base": "Sur",
+    "payer": "Payé par",
+    "employee": "Employé",
+    "employer": "Employeur",
+    "on": "Actif",
+    "add": "Ajouter un prélèvement"
+  },
+  "remove": "Supprimer",
+  "saveTitle": "Enregistrer une nouvelle version",
+  "saveHint": "Les cycles déjà créés gardent leurs règles. La nouvelle version s'applique à partir du mois choisi.",
+  "effectiveFrom": "S'applique à partir de (mois)",
+  "cancelEdit": "Annuler",
+  "save": "Enregistrer la version",
+  "liability": "La configuration manuelle n'est pas une validation juridique de PROSM : l'entreprise saisit ces valeurs sous sa responsabilité et les vérifie avec son comptable ou conseiller.",
+  "liabilityDone": "Responsabilité acceptée par {{name}} le {{date}}.",
+  "saved": "Enregistré comme version {{version}}, à partir du {{date}}.",
+  "versions": {
+    "title": "Versions",
+    "row": "Version {{version}} – {{country}} – à partir du {{date}} – {{by}}"
+  }
+}

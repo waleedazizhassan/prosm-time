@@ -68,7 +68,8 @@
     "chooseAll": "Alle angezeigten wählen",
     "chooseNone": "Auswahl aufheben",
     "addToChosen": "Posten für {{count}} Ausgewählte",
-    "bulkHint": "Alle Ausgewählten erhalten denselben Posten - oder niemand, wenn es bei einer Person nicht geht (z. B. außerhalb Ihrer Standorte)."
+    "bulkHint": "Alle Ausgewählten erhalten denselben Posten - oder niemand, wenn es bei einer Person nicht geht (z. B. außerhalb Ihrer Standorte).",
+    "customRules": "Eigene Steuerregeln"
   },
   "actions": {
     "submit": "Zur Prüfung senden",
@@ -193,7 +194,8 @@
     "managementApproval": "Freigabe der Geschäftsleitung",
     "combinedTotal": "Gesamtgehalt (inkl. Zulagen)",
     "totalSalaries": "Summe der Gehälter",
-    "no": "Nr."
+    "no": "Nr.",
+    "customRules": "Mit eigenen Steuer- und Versicherungsregeln berechnet"
   },
   "profiles": {
     "title": "Personen",
@@ -250,7 +252,9 @@
     "legalNameLabel": "Offizieller Name",
     "legalNameHint": "Dieser Name steht auf der Gehaltsabrechnung, nicht der Benutzername ({{user}}).",
     "legalNameMissing": "Offizieller Name fehlt",
-    "notInPayroll": "Diese Person ist nicht in der Lohnabrechnung (der Inhaber erhält kein Gehalt)."
+    "notInPayroll": "Diese Person ist nicht in der Lohnabrechnung (der Inhaber erhält kein Gehalt).",
+    "insuranceCategory": "Versicherungskategorie",
+    "insuranceCategoryDefault": "Standardkategorie"
   },
   "installments": {
     "title": "Raten und Vorschüsse",
@@ -497,5 +501,10 @@
     "twoAction": "Gehaltsprofile",
     "three": "Der Monatszyklus",
     "threeText": "Zyklus unten anlegen → Variable eintragen und Anwesenheitsvorschläge prüfen → einreichen → eine andere Person genehmigt → sperren und Gehaltszettel veröffentlichen."
+  },
+  "taxLink": {
+    "title": "Steuern und Sozialversicherung",
+    "hint": "Land, Steuerstufen, Versicherung und ein Rechner – auf einer eigenen Seite.",
+    "open": "Öffnen"
   }
 }
