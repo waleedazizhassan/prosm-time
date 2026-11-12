@@ -180,7 +180,7 @@
     },
     "myFile": {
       "title": "Il mio fascicolo",
-      "body": "Menu → Il mio fascicolo mostra dati, contratto, documenti, richiami e incentivi, presenze e ferie. Solo lettura: chiedi al personale di modificare i dati."
+      "body": "Menu → Il mio fascicolo mostra dati, contratto, documenti, richiami e incentivi, presenze e ferie. Solo lettura: chiedi al personale di modificare i dati. La scheda Presenze de Il mio fascicolo è l'unico posto delle tue presenze: Riepilogo (ultimi 30 giorni per sede), Registrazioni (ogni timbratura in dettaglio, il mese e la stampa), Fogli ore (richiederne uno e vedere i tuoi) ed Eccezioni (i momenti fuori da un'area che richiedono il tuo motivo). Il pulsante Presenze in basso la apre. Le pagine Presenze e Fogli ore del menu ora sono quelle del team, per i responsabili."
     },
     "myDocuments": {
       "title": "I miei documenti",

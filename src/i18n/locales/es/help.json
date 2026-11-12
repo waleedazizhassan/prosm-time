@@ -180,7 +180,7 @@
     },
     "myFile": {
       "title": "Mi ficha",
-      "body": "Menú → Mi ficha muestra tus datos, contrato, documentos, amonestaciones e incentivos, asistencia y permisos. Es de solo lectura: pide a RR. HH. que cambie tus datos."
+      "body": "Menú → Mi ficha muestra tus datos, contrato, documentos, amonestaciones e incentivos, asistencia y permisos. Es de solo lectura: pide a RR. HH. que cambie tus datos. La pestaña Asistencia de Mi expediente es el único lugar de su asistencia: Resumen (últimos 30 días por sitio), Registros (cada fichaje en detalle, el mes e imprimir), Partes de horas (pedir uno y ver los suyos) y Excepciones (los momentos fuera de un área que necesitan su motivo). El botón Asistencia de abajo la abre. Las páginas Asistencia y Partes de horas del menú son ahora las del equipo, para los gestores."
     },
     "myDocuments": {
       "title": "Mis documentos",

@@ -201,7 +201,7 @@ export default function NotificationBell() {
     const path = notificationTarget({ type: notification.type, entityType: notification.relatedEntityType, entityId: notification.relatedEntityId, kind: notification.data?.kind, date: notification.data?.date }, viewer);
     if (!notification.relatedEntityId) return path;
     if (path === "/emergency-log") return `/emergency-log?alertId=${notification.relatedEntityId}`;
-    if (notification.type === "out_of_zone_employee") return `/exceptions?exceptionId=${notification.relatedEntityId}`;
+    if (notification.type === "out_of_zone_employee") return `/me?tab=attendance&view=exceptions&exceptionId=${notification.relatedEntityId}`;
     return path;
   };
 

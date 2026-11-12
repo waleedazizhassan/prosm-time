@@ -390,7 +390,14 @@
       "siteDays_few": "{{count}} أيام",
       "siteDays_many": "{{count}} يوم",
       "noSite": "بدون موقع",
-      "backToSites": "رجوع للمواقع"
+      "backToSites": "رجوع للمواقع",
+      "viewsLabel": "طرق عرض الحضور",
+      "views": {
+        "summary": "الملخص",
+        "log": "السجل",
+        "timesheets": "الكشوف",
+        "exceptions": "الاستثناءات"
+      }
     },
     "leave": {
       "empty": "مفيش إجازات في آخر سنة.",

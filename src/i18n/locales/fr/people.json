@@ -387,7 +387,14 @@
       "siteDays_other": "{{count}} jours",
       "noSite": "Sans site",
       "backToSites": "Retour aux sites",
-      "siteDays_many": "{{count}} jours"
+      "siteDays_many": "{{count}} jours",
+      "viewsLabel": "Vues de présence",
+      "views": {
+        "summary": "Résumé",
+        "log": "Pointages",
+        "timesheets": "Feuilles de temps",
+        "exceptions": "Exceptions"
+      }
     },
     "leave": {
       "empty": "Aucun congé sur l’année.",

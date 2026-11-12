@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, LogIn, Plug, HardHat, ScrollText, Sunrise, Banknote, Receipt, Megaphone, AlertTriangle, IdCard, FileCheck, Gavel } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, LogIn, Plug, HardHat, ScrollText, Sunrise, Banknote, Receipt, Megaphone, IdCard, FileCheck, Gavel } from "lucide-react";
 
 import { FEATURES } from "../../config/features";
 import type { PlanFeature } from "../../core/hooks/usePlanFeatures";
@@ -85,9 +85,10 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // sessions always; a Manager's managed-site people; everyone for
   // the Owner), so every authenticated member can open this item and
   // simply gets their own scope back.
-  { id: "attendance", labelKey: "items.attendance", path: "/attendance", icon: Clock, requiredPermission: null, section: "attendance" },
+  // Owner 2026-11-12: one's own attendance, timesheets and exceptions live in My file -> Attendance; these
+  // pages are the team's (the exceptions page is gone from the menu, its links land in My file)
+  { id: "attendance", labelKey: "items.attendance", path: "/attendance", icon: Clock, requiredPermission: "attendance.view", section: "attendance" },
   // Owner 2026-11-09: the out-of-area moments to explain, on their own page
-  { id: "exceptions", labelKey: "items.exceptions", path: "/exceptions", icon: AlertTriangle, requiredPermission: null, hiddenFromOwner: true, section: "attendance" },
   // § user-directed follow-up - a direct sidebar entry for
   // Administrative Clock In/Out (On Behalf Of), previously only
   // reachable via a specific employee's own People > detail page. Same
@@ -125,7 +126,7 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // this nav item is visible to every authenticated org member; the
   // page itself further gates its Generate/Approve/Correction-review
   // sections on timesheets.generate/timesheets.approve/attendance.correct.
-  { id: "timesheets", labelKey: "items.timesheets", path: "/timesheets", icon: FileText, requiredPermission: null, section: "payroll" },
+  { id: "timesheets", labelKey: "items.timesheets", path: "/timesheets", icon: FileText, requiredPermission: ["timesheets.generate", "timesheets.approve", "attendance.correct"], section: "payroll" },
   // § approved 2026-09-02 plan (Feature 2) - self-access to one's own
   // allowance entries needs no special permission, same reasoning as
   // Timesheets above; allowance_entries' own RLS is what actually

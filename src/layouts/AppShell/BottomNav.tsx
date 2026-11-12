@@ -10,7 +10,7 @@ import styles from "./BottomNav.module.css";
 // The employee's bar (owner 2026-10-19); the phone menu lists every other page.
 // the pages the employee's bar holds (the phone menu does not repeat them); review 2026-11-12: by plan
 export function employeeBottomPaths(allows: (feature: PlanFeature) => boolean): string[] {
-  return ["/dashboard", "/attendance", allows("allowances") ? "/allowances" : "/schedule", allows("leave") ? "/leave" : "/me"];
+  return ["/dashboard", allows("allowances") ? "/allowances" : "/schedule"];
 }
 
 interface BottomItem {
@@ -43,12 +43,18 @@ export default function BottomNav() {
         { to: "/attendance", label: t("bottomNav.attendance"), icon: Clock },
       ]
     : [
-        { to: "/attendance", label: t("bottomNav.attendance"), icon: Clock },
+        // owner 2026-11-12: one's own attendance is in My file
+        { to: "/me?tab=attendance", label: t("bottomNav.attendance"), icon: Clock },
         // review 2026-11-12: only what the plan includes - else the shifts and the person's own file
         allows("allowances") ? { to: "/allowances", label: t("bottomNav.allowances"), icon: Wallet } : { to: "/schedule", label: t("bottomNav.schedule"), icon: CalendarClock },
         home,
         allows("leave") ? { to: "/me?tab=leave", label: t("bottomNav.leave"), icon: CalendarDays } : { to: "/me", label: t("bottomNav.myFile"), icon: IdCard },
       ];
+  // two buttons may open My file on different tabs: only the open tab's button is lit
+  const sameTab = (to: string) => {
+    const wanted = new URLSearchParams(to.split("?")[1] ?? "").get("tab");
+    return !wanted || new URLSearchParams(location.search).get("tab") === wanted;
+  };
   // on the home page already, home refreshes it and goes back to the top
   const onHome = (event: React.MouseEvent, to: string) => {
     if (to !== "/dashboard" || location.pathname !== "/dashboard") return;
@@ -59,7 +65,7 @@ export default function BottomNav() {
   return (
     <nav className={styles.bar} aria-label={t("bottomNav.label")}>
       {items.map((item) => (
-        <NavLink key={item.to} to={item.to} onClick={(event) => onHome(event, item.to)} className={({ isActive }) => `${styles.item} ${isActive ? styles.active : ""} ${item.to === "/dashboard" ? styles.homeItem : ""}`}>
+        <NavLink key={item.to} to={item.to} onClick={(event) => onHome(event, item.to)} className={({ isActive }) => `${styles.item} ${isActive && sameTab(item.to) ? styles.active : ""} ${item.to === "/dashboard" ? styles.homeItem : ""}`}>
           <span className={styles.icon}>
             <item.icon size={22} />
           </span>

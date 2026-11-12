@@ -390,7 +390,14 @@
       "siteDays_few": "{{count}} дня",
       "siteDays_many": "{{count}} дней",
       "noSite": "Без объекта",
-      "backToSites": "К списку объектов"
+      "backToSites": "К списку объектов",
+      "viewsLabel": "Виды посещаемости",
+      "views": {
+        "summary": "Сводка",
+        "log": "Записи",
+        "timesheets": "Табели",
+        "exceptions": "Исключения"
+      }
     },
     "leave": {
       "empty": "Нет отпусков за год.",

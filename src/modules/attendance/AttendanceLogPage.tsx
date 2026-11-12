@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../core/context/AuthContext";
 import usePlanFeatures from "../../core/hooks/usePlanFeatures";
@@ -117,9 +117,11 @@ function DeviceTimeBadge({ label, hint }: { label: string; hint: string }) {
   );
 }
 
-export default function AttendanceLogPage() {
+// Owner 2026-11-12: one's own attendance lives in My file -> Attendance (this log is embedded there with
+// the person's rows only); the page itself is the team log for those who hold attendance.view.
+export default function AttendanceLogPage({ embedded = false, selfUserId }: { embedded?: boolean; selfUserId?: string } = {}) {
   const { t, i18n } = useTranslation("attendanceLog");
-  const { profile } = useAuth();
+  const { profile, hasPermission } = useAuth();
   const { allows } = usePlanFeatures(profile?.id);
 
   // Owner 2026-10-19: quick day / week (from Sunday) / month views; the
@@ -164,9 +166,9 @@ export default function AttendanceLogPage() {
       setLoading(false);
       return;
     }
-    setRows(result.data ?? []);
+    setRows((result.data ?? []).filter((row) => !selfUserId || row.userId === selfUserId));
     setLoading(false);
-  }, [startDate, endDate, t]);
+  }, [startDate, endDate, t, selfUserId]);
 
   useEffect(() => {
     load();
@@ -331,9 +333,14 @@ export default function AttendanceLogPage() {
     { key: "notes", header: t("columns.notes"), render: (row) => <NotesCell row={row} t={t} time={(iso) => formatTimeOnly(iso, i18n.language)} /> },
   ];
 
+  if (!embedded && profile && !profile.isOwner && !hasPermission("attendance.view")) {
+    return <Navigate to={`/me?tab=attendance&view=log`} replace />;
+  }
+
+  const Shell = embedded ? EmbeddedShell : PageShell;
   return (
-    <PageShell title="">
-      <PageBanner pageId="attendance" illustration={attendanceHeaderImage} />
+    <Shell title="">
+      {embedded ? null : <PageBanner pageId="attendance" illustration={attendanceHeaderImage} />}
 
       <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "var(--space-4)" }}>
         <Button variant="ghost" onClick={() => handleExportPdf("print")} loading={exportingPdf} disabled={filteredRows.length === 0 || !allows("export")} title={allows("export") ? undefined : t("common:planLocked.text", { plan: "Business" })}>
@@ -403,6 +410,10 @@ export default function AttendanceLogPage() {
           <img src={evidenceUrl} alt={t("photoAlt")} style={{ maxWidth: "100%", borderRadius: "var(--radius-md)", display: "block" }} />
         ) : null}
       </Modal>
-    </PageShell>
+    </Shell>
   );
+}
+
+function EmbeddedShell({ children }: { title?: string; children: React.ReactNode }) {
+  return <div style={{ display: "grid", gap: "var(--space-3)" }}>{children}</div>;
 }

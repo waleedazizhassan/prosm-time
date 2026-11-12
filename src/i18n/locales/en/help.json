@@ -180,7 +180,7 @@
     },
     "myFile": {
       "title": "My file",
-      "body": "Menu → My file shows your details, contract, documents, warnings and incentives, attendance and leave. It is read-only: ask personnel to change your details."
+      "body": "Menu → My file shows your details, contract, documents, warnings and incentives, attendance and leave. It is read-only: ask personnel to change your details. The Attendance tab of My file is the one place for your attendance: Summary (the last 30 days by site), Records (every clock-in in detail, the month and printing), Timesheets (ask for one and see yours) and Exceptions (the moments outside a work area that need your reason). The Attendance button at the bottom opens it. The Attendance and Timesheets pages in the menu are now the team's, for managers."
     },
     "myDocuments": {
       "title": "My documents",

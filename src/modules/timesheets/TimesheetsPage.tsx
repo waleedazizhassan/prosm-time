@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Camera, Download } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
@@ -61,14 +61,16 @@ const STATUS_BADGE_KEY: Record<Timesheet["status"], string> = {
 // PDF/spreadsheet export and the Monthly Evidence Pack are WP-17's own
 // later row - this page is the real generate/review/approve/correct
 // workflow the export will eventually read from, not a placeholder.
-export default function TimesheetsPage() {
+// Owner 2026-11-12: one's own timesheets live in My file -> Attendance (embedded here, own only); the page
+// is for those who generate, approve or correct others'.
+export default function TimesheetsPage({ embedded = false }: { embedded?: boolean } = {}) {
   const { t, i18n } = useTranslation("timesheets");
   const { profile, hasPermission } = useAuth();
   const { allows } = usePlanFeatures(profile?.id);
 
-  const canGenerate = hasPermission("timesheets.generate");
-  const canApprove = hasPermission("timesheets.approve");
-  const canCorrect = hasPermission("attendance.correct");
+  const canGenerate = !embedded && hasPermission("timesheets.generate");
+  const canApprove = !embedded && hasPermission("timesheets.approve");
+  const canCorrect = !embedded && hasPermission("attendance.correct");
 
   const [myTimesheets, setMyTimesheets] = useState<Timesheet[]>([]);
   const [pendingApprovals, setPendingApprovals] = useState<Timesheet[]>([]);
@@ -299,14 +301,19 @@ export default function TimesheetsPage() {
   const canSubmitDetail = detailTimesheet ? isOwnDetail && detailTimesheet.status === "draft" : false;
   const canRequestCorrectionDetail = detailTimesheet ? isOwnDetail && detailTimesheet.status === "approved" : false;
 
+  if (!embedded && profile && !profile.isOwner && !hasPermission("timesheets.generate") && !hasPermission("timesheets.approve") && !hasPermission("attendance.correct")) {
+    return <Navigate to="/me?tab=attendance&view=timesheets" replace />;
+  }
+
+  const Shell = embedded ? EmbeddedShell : PageShell;
   return (
-    <PageShell title="">
-      <PageBanner pageId="timesheets" illustration={timesheetsHeaderImage} />
+    <Shell title="">
+      {embedded ? null : <PageBanner pageId="timesheets" illustration={timesheetsHeaderImage} />}
 
       <ErrorText>{error}</ErrorText>
 
       {/* Owner 2026-10-21: everyone produces their own timesheet; generating for others takes timesheets.generate. */}
-      {canGenerate || (profile && !profile.isRealOwner) ? (
+      {canGenerate || (embedded && profile && !profile.isRealOwner) ? (
         <Card title={t("generate.title")}>
           <FormGrid columns={4} gap="sm" alignItems="end">
             {/* § live UX review - two accounts with near-identical names
@@ -365,8 +372,8 @@ export default function TimesheetsPage() {
         </Card>
       ) : null}
 
-      {/* review 2026-11-12: the owner does not clock in - no empty "my timesheets" */}
-      {profile?.isRealOwner ? null : (
+      {/* review 2026-11-12: one's own timesheets are in My file (embedded); the owner does not clock in */}
+      {!embedded || profile?.isRealOwner ? null : (
         <Card title={t("myTimesheets.title")}>
           <Table grid columns={timesheetColumns(false)} data={myTimesheets} getRowId={(row) => row.id} loading={loading} emptyMessage={t("myTimesheets.empty")} onRowClick={openDetail} />
         </Card>
@@ -511,6 +518,10 @@ export default function TimesheetsPage() {
           <img src={evidenceUrl} alt={t("viewPhoto")} style={{ maxWidth: "100%", borderRadius: "var(--radius-md)", display: "block" }} />
         ) : null}
       </Modal>
-    </PageShell>
+    </Shell>
   );
+}
+
+function EmbeddedShell({ children }: { title?: string; children: React.ReactNode }) {
+  return <div style={{ display: "grid", gap: "var(--space-3)" }}>{children}</div>;
 }

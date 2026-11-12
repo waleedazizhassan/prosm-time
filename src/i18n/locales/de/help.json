@@ -180,7 +180,7 @@
     },
     "myFile": {
       "title": "Meine Akte",
-      "body": "Menü → Meine Akte zeigt Ihre Daten, Ihren Vertrag, Dokumente, Abmahnungen und Prämien, Anwesenheit und Urlaub. Nur lesbar: Änderungen über die Personalabteilung."
+      "body": "Menü → Meine Akte zeigt Ihre Daten, Ihren Vertrag, Dokumente, Abmahnungen und Prämien, Anwesenheit und Urlaub. Nur lesbar: Änderungen über die Personalabteilung. Der Reiter Anwesenheit in Meine Akte ist der eine Ort für Ihre Anwesenheit: Übersicht (letzte 30 Tage nach Standort), Einträge (jedes Stempeln im Detail, Monat und Druck), Stundenzettel (anfordern und ansehen) und Ausnahmen (Momente außerhalb eines Arbeitsbereichs, die eine Begründung brauchen). Die Schaltfläche Anwesenheit unten öffnet ihn. Die Seiten Anwesenheit und Stundenzettel im Menü sind jetzt die des Teams, für Manager."
     },
     "myDocuments": {
       "title": "Meine Dokumente",

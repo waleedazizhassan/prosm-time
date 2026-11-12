@@ -180,7 +180,7 @@
     },
     "myFile": {
       "title": "Mon dossier",
-      "body": "Menu → Mon dossier affiche vos données, contrat, documents, avertissements et primes, présence et congés. En lecture seule : demandez aux RH de modifier vos données."
+      "body": "Menu → Mon dossier affiche vos données, contrat, documents, avertissements et primes, présence et congés. En lecture seule : demandez aux RH de modifier vos données. L'onglet Présence de Mon dossier est l'unique endroit de votre présence : Résumé (30 derniers jours par site), Pointages (chaque pointage en détail, le mois et l'impression), Feuilles de temps (en demander une et voir les vôtres) et Exceptions (les moments hors d'une zone qui demandent votre motif). Le bouton Présence en bas l'ouvre. Les pages Présence et Feuilles de temps du menu sont désormais celles de l'équipe, pour les responsables."
     },
     "myDocuments": {
       "title": "Mes documents",

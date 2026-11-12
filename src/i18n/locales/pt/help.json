@@ -180,7 +180,7 @@
     },
     "myFile": {
       "title": "Minha ficha",
-      "body": "Menu → Minha ficha mostra seus dados, contrato, documentos, advertências e incentivos, presença e férias. Somente leitura: peça ao RH para alterar seus dados."
+      "body": "Menu → Minha ficha mostra seus dados, contrato, documentos, advertências e incentivos, presença e férias. Somente leitura: peça ao RH para alterar seus dados. O separador Assiduidade de A minha ficha é o único lugar da sua assiduidade: Resumo (últimos 30 dias por local), Registos (cada picagem em detalhe, o mês e a impressão), Folhas de horas (pedir uma e ver as suas) e Exceções (os momentos fora de uma área que precisam do seu motivo). O botão Assiduidade em baixo abre-o. As páginas Assiduidade e Folhas de horas do menu são agora as da equipa, para os gestores."
     },
     "myDocuments": {
       "title": "Meus documentos",
