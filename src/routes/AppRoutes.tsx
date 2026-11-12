@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import PlanRoute from "./PlanRoute";
+import AccessRoute from "./AccessRoute";
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import PageLoadBoundary from "../components/common/PageLoadBoundary";
 
@@ -143,7 +144,7 @@ export default function AppRoutes() {
             {/* owner 2026-11-12: granting moved into each person's page */}
             <Route path="/permissions" element={<Navigate to="/people" replace />} />
             <Route path="/admin-clock" element={<PlanRoute feature="on_behalf"><AdminOnBehalfPage /></PlanRoute>} />
-            <Route path="/audit-log" element={<PlanRoute feature="audit"><AuditLogPage /></PlanRoute>} />
+            <Route path="/audit-log" element={<AccessRoute anyOf={["audit.view"]}><PlanRoute feature="audit"><AuditLogPage /></PlanRoute></AccessRoute>} />
             <Route path="/sites" element={<SitesPage />} />
             <Route path="/sites/:siteId" element={<SiteDetailPage />} />
             <Route path="/workers" element={<PlanRoute feature="kiosk"><ExternalWorkersPage /></PlanRoute>} />
@@ -156,7 +157,7 @@ export default function AppRoutes() {
             <Route path="/allowances" element={<PlanRoute feature="allowances"><AllowancesPage /></PlanRoute>} />
             <Route path="/allowances/prices" element={<PlanRoute feature="allowances"><AllowancePricesPage /></PlanRoute>} />
             <Route path="/leave" element={<PlanRoute feature="leave"><LeaveRequestsPage /></PlanRoute>} />
-            <Route path="/payroll" element={<PlanRoute feature="payroll"><PayrollHomePage /></PlanRoute>} />
+            <Route path="/payroll" element={<AccessRoute anyOf={["payroll.access"]}><PlanRoute feature="payroll"><PayrollHomePage /></PlanRoute></AccessRoute>} />
             <Route path="/payroll/cycles/:cycleId" element={<PlanRoute feature="payroll"><PayrollCyclePage /></PlanRoute>} />
             <Route path="/payroll/profiles" element={<PlanRoute feature="payroll"><PayrollProfilesPage /></PlanRoute>} />
             <Route path="/payroll/settings" element={<PlanRoute feature="payroll"><PayrollSettingsPage /></PlanRoute>} />
@@ -164,7 +165,7 @@ export default function AppRoutes() {
             <Route path="/payroll/requests" element={<PlanRoute feature="payroll"><PayslipRequestsPage /></PlanRoute>} />
             <Route path="/payslips" element={<PlanRoute feature="payroll"><MyPayslipsPage /></PlanRoute>} />
             <Route path="/me" element={<MyProfilePage />} />
-            <Route path="/documents" element={<PlanRoute feature="documents"><DocumentsPage /></PlanRoute>} />
+            <Route path="/documents" element={<AccessRoute anyOf={["hr.manage"]}><PlanRoute feature="documents"><DocumentsPage /></PlanRoute></AccessRoute>} />
             <Route path="/penalties" element={<PlanRoute feature="penalties"><PenaltiesPage /></PlanRoute>} />
             <Route path="/penalties/bylaw" element={<PlanRoute feature="penalties"><BylawPage /></PlanRoute>} />
             {/* 2026-11-09 Media Center: announcements for everyone; publishing is checked on the server */}
@@ -173,8 +174,8 @@ export default function AppRoutes() {
             <Route path="/schedule" element={<SchedulePage />} />
             <Route path="/calendar" element={<CalendarPage />} />
             <Route path="/emergency-log" element={<PlanRoute feature="sos"><EmergencyLogPage /></PlanRoute>} />
-            <Route path="/reports" element={<ReportsPage />} />
-            <Route path="/daily-summary" element={<PlanRoute feature="daily_summary"><DailySummaryPage /></PlanRoute>} />
+            <Route path="/reports" element={<AccessRoute anyOf={["exceptions.manage", "reports.view"]}><ReportsPage /></AccessRoute>} />
+            <Route path="/daily-summary" element={<AccessRoute ownerOnly><PlanRoute feature="daily_summary"><DailySummaryPage /></PlanRoute></AccessRoute>} />
             <Route path="/settings" element={<OrganizationSettingsPage />} />
             {/* Hidden while FEATURES.integrations is off (owner 2026-10-13). */}
             <Route path="/integrations" element={FEATURES.integrations ? <IntegrationsPage /> : <Navigate to="/dashboard" replace />} />
