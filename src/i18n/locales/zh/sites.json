@@ -93,7 +93,11 @@
     "siteTypeLabel": "地点类型",
     "siteTypeOtherLabel": "填写地点类型",
     "clientNameRequired": "请填写该地点所属的客户。",
-    "siteTypeOtherRequired": "请填写地点类型。"
+    "siteTypeOtherRequired": "请填写地点类型。",
+    "mapLinkLabel": "或粘贴位置链接",
+    "mapLinkPlaceholder": "谷歌地图链接或坐标",
+    "mapLinkAction": "使用链接",
+    "mapLinkUnreadable": "无法从此链接读取位置。请在谷歌地图中打开并复制显示的坐标或完整链接。"
   },
   "detail": {
     "backToList": "返回工地列表",

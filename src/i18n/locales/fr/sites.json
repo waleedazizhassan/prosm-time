@@ -93,7 +93,11 @@
     "siteTypeLabel": "Type de site",
     "siteTypeOtherLabel": "Précisez le type de site",
     "clientNameRequired": "Indiquez le client auquel appartient le site.",
-    "siteTypeOtherRequired": "Précisez le type de site."
+    "siteTypeOtherRequired": "Précisez le type de site.",
+    "mapLinkLabel": "Ou collez un lien de localisation",
+    "mapLinkPlaceholder": "Lien Google Maps ou coordonnées",
+    "mapLinkAction": "Utiliser le lien",
+    "mapLinkUnreadable": "Impossible de lire une position dans ce lien. Ouvrez-le dans Google Maps et copiez les coordonnées affichées, ou le lien complet."
   },
   "detail": {
     "backToList": "Retour aux sites",

@@ -5,7 +5,7 @@ import { LocalNotifications } from "@capacitor/local-notifications";
 import { ensureAlertChannel, REMINDER_STYLE } from "../../core/services/notificationStyle";
 
 import { useAuth } from "../../core/context/AuthContext";
-import AttendanceRepository from "../../core/repositories/AttendanceRepository";
+import AttendanceRepository, { ATTENDANCE_CHANGED_EVENT } from "../../core/repositories/AttendanceRepository";
 import ShiftRepository from "../../core/repositories/ShiftRepository";
 import SiteRepository from "../../core/repositories/SiteRepository";
 import { nextClockReminder } from "../../core/services/clockReminders";
@@ -78,11 +78,25 @@ export default function ClockReminderLoop() {
       }
     };
 
+    // owner 2026-11-12: a clock-in or clock-out drops the waiting reminder at once and works out the next one
+    const onChange = () => {
+      scheduledKey.current = null;
+      void LocalNotifications.cancel({ notifications: [{ id: REMINDER_ID }] }).catch(() => undefined);
+      void check();
+    };
+    const onVisible = () => {
+      if (document.visibilityState === "visible") void check();
+    };
+
     void check();
     const interval = window.setInterval(() => void check(), CHECK_INTERVAL_MS);
+    window.addEventListener(ATTENDANCE_CHANGED_EVENT, onChange);
+    document.addEventListener("visibilitychange", onVisible);
     return () => {
       cancelled = true;
       window.clearInterval(interval);
+      window.removeEventListener(ATTENDANCE_CHANGED_EVENT, onChange);
+      document.removeEventListener("visibilitychange", onVisible);
     };
   }, [enabled, profileId, t]);
 

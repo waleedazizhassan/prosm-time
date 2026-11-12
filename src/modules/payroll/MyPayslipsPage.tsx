@@ -96,10 +96,10 @@ export default function MyPayslipsPage() {
       <PageBanner pageId="payslips" illustration={illustration} />
       <ErrorText>{error}</ErrorText>
       {notice ? <SuccessText>{notice}</SuccessText> : null}
-      {data && data.cycles.length > 0 ? (
+      {/* owner 2026-11-12: the request button is always there - with nothing published yet it says why */}
+      {data ? (
         <div style={{ marginBottom: "var(--space-3)" }}>
-          <Button disabled={askable.length === 0} onClick={() => { setAskCycle(askable[0]?.cycleId ?? ""); setNote(""); setAsking(true); }}>{t("mine.requestButton")}</Button>
-          {askable.length === 0 ? <HintText small>{t("mine.allAsked")}</HintText> : null}
+          <Button onClick={() => { setAskCycle(askable[0]?.cycleId ?? ""); setNote(""); setAsking(true); }}>{t("mine.requestButton")}</Button>
         </div>
       ) : null}
       {data === null ? <LoadingState /> : data.cycles.length === 0 ? <EmptyState message={t("mine.empty")} /> : null}
@@ -122,9 +122,10 @@ export default function MyPayslipsPage() {
 
       <Modal isOpen={asking} onClose={() => setAsking(false)} title={t("mine.requestButton")} footer={<Button loading={busy === "ask"} disabled={!askCycle} onClick={ask}>{t("mine.send")}</Button>}>
         <HintText>{t("mine.askBodyBoth")}</HintText>
-        <Select label={t("mine.whichMonth")} name="payslipCycle" value={askCycle} onChange={(event) => setAskCycle(event.target.value)}
-          options={askable.map((c) => ({ value: c.cycleId, label: `${c.title} · ${formatDateOnly(c.periodStart, i18n.language)} - ${formatDateOnly(c.periodEnd, i18n.language)}` }))} />
-        <Input label={t("mine.note")} name="payslipNote" value={note} onChange={(event) => setNote(event.target.value)} />
+        {askable.length === 0 ? <HintText>{t(data && data.cycles.length > 0 ? "mine.allAsked" : "mine.nothingPublished")}</HintText> : null}
+        {askable.length > 0 ? <Select label={t("mine.whichMonth")} name="payslipCycle" value={askCycle} onChange={(event) => setAskCycle(event.target.value)}
+          options={askable.map((c) => ({ value: c.cycleId, label: `${c.title} · ${formatDateOnly(c.periodStart, i18n.language)} - ${formatDateOnly(c.periodEnd, i18n.language)}` }))} /> : null}
+        {askable.length > 0 ? <Input label={t("mine.note")} name="payslipNote" value={note} onChange={(event) => setNote(event.target.value)} /> : null}
       </Modal>
 
       <Modal isOpen={Boolean(viewing)} onClose={() => setViewing(null)} title={viewing ? `${t("reports.payslip")} · ${viewing.cycle.title}` : ""} size="lg"

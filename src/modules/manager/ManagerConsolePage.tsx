@@ -144,7 +144,8 @@ export default function ManagerConsolePage() {
     load();
   }, [load]);
 
-  if (!hasPermission("attendance.view")) {
+  // review 2026-11-12: the page is for those who decide something here (a viewer has nothing to act on)
+  if (!profile?.isOwner && !hasPermission("exceptions.manage") && !hasPermission("leave.approve")) {
     return <Navigate to="/dashboard" replace />;
   }
 

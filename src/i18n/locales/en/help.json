@@ -4,7 +4,7 @@
   "guides": {
     "gettingStarted": {
       "title": "Getting Started",
-      "body": "Sign in with the email and password your administrator set up for you. The first time (and whenever they change), you're shown what PROSM Time records about you and asked to acknowledge the Privacy Policy and Terms of Use. On the Dashboard, use Clock In to start your shift and Clock Out to end it - a live map shows your current position and, when relevant, the site's work area. The app opens in your device's language when it's one of the nine supported; you can change it any time from the user menu. Employees open to their own home page: clock in and out, their hours today, this week (from Sunday) and this month, and links to their attendance record, allowances, timesheets and leave. The Owner, Managers and Supervisors open to the Dashboard. The Owner doesn't clock in or out."
+      "body": "Sign in with the email and password your administrator set up for you. The first time (and whenever they change), you're shown what PROSM Time records about you and asked to acknowledge the Privacy Policy and Terms of Use. On the Dashboard, use Clock In to start your shift and Clock Out to end it - a live map shows your current position and, when relevant, the site's work area. The app opens in your device's language when it's one of the nine supported; you can change it any time from the user menu. Employees open to their own home page: clock in and out, their hours today, this week (from Sunday) and this month, and the bar at the bottom with attendance and leave (in My file) and allowances. The Owner, Managers and Supervisors open to the Dashboard. The Owner doesn't clock in or out."
     },
     "attendance": {
       "title": "Clocking In & Out",
@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Emergency",
-      "body": "The SOS button is on the Dashboard during every shift once your clock-in is confirmed. Pressing it sends a high-priority alert with your location to your site's managers, the Owner and co-workers clocked in at the same site, and it's logged in the Emergency Log. SOS is not an emergency service - it doesn't call the police or an ambulance. In an emergency, always call your local emergency number. It needs an internet connection. If you work without a chosen site, the managers of the nearest site receive it."
+      "body": "The SOS button is on the Dashboard during every shift once your clock-in is confirmed. Pressing it sends a high-priority alert with your location to your site's managers, the Owner and co-workers clocked in at the same site, and it's logged in the Emergency Log. SOS is not an emergency service - it doesn't call the police or an ambulance. In an emergency, always call your local emergency number. It needs an internet connection. If you work without a chosen site, the managers of the nearest site receive it. When an SOS reaches you, \"Show location\" opens where it was sent from on the map, and \"Silence\" stops the siren and keeps the alert on screen until you close it. \"View the emergency log\" shows only for the owner and managers."
     },
     "notifications": {
       "title": "How Notifications Reach the Right Person",
@@ -32,7 +32,7 @@
     },
     "exceptions": {
       "title": "Reviews - Exceptions, Corrections, Offline Times and Fake Locations",
-      "body": "Everything that needs a manager's decision appears in the Manager Console under Pending Review: out-of-zone exceptions (with your reason), correction requests, actions recorded offline with the device's time, and locations reported as fake. If an exception is approved you're treated as present the full time. If it's rejected, your effective worked time is capped at the moment the situation was first detected. Flags are information for a person to review fairly - not automatic decisions.\n\nNew: the \"My exceptions\" page in the menu lists your exceptions and where each stands (pending review, approved, rejected), and lets you send your reason."
+      "body": "Everything that needs a manager's decision appears in the Manager Console under Pending Review: out-of-zone exceptions (with your reason), correction requests, actions recorded offline with the device's time, and locations reported as fake. If an exception is approved you're treated as present the full time. If it's rejected, your effective worked time is capped at the moment the situation was first detected. Flags are information for a person to review fairly - not automatic decisions.\n\nNew: My file → Attendance → Exceptions lists your exceptions and where each stands (pending review, approved, rejected), and lets you send your reason."
     },
     "allowances": {
       "title": "Allowances",
@@ -48,7 +48,7 @@
     },
     "sites": {
       "title": "Sites (Administrators)",
-      "body": "Sites is where work sites are set up and people are assigned. Adding a site needs only a name, its location - stand there and press Use my current location - the radius and whether a photo is required; everything else is under More options. A new site takes your device's time zone. When you assign someone, their role at the site starts from their organisation role - a Manager or Supervisor becomes the site's manager, so they see its people. Everything else about a site is on its own page, under Site rules: GPS tolerance, shift hours, overtime and late-deduction times, break rounding, ongoing presence monitoring, exempt employees, and the self-service blocks (once lateness starts counting, clock-out outside the work area, clock-in outside the work area). In the site form, say whose site it is - the company's own or a client's (type the client's name; names already used are suggested) - and what kind it is: office, warehouse, construction site, factory, shop / branch, or another kind you name."
+      "body": "Sites is where work sites are set up and people are assigned. Adding a site needs only a name, its location - stand there and press Use my current location - the radius and whether a photo is required; everything else is under More options. A new site takes your device's time zone. When you assign someone, their role at the site starts from their organisation role - a Manager or Supervisor becomes the site's manager, so they see its people. Everything else about a site is on its own page, under Site rules: GPS tolerance, shift hours, overtime and late-deduction times, break rounding, ongoing presence monitoring, exempt employees, and the self-service blocks (once lateness starts counting, clock-out outside the work area, clock-in outside the work area). In the site form, say whose site it is - the company's own or a client's (type the client's name; names already used are suggested) - and what kind it is: office, warehouse, construction site, factory, shop / branch, or another kind you name. If someone sent you the site's location, paste the link (a Google Maps link, short ones too) or the coordinates under \"Or paste a location link\" and press \"Use the link\" - that becomes the site's location."
     },
     "workers": {
       "title": "External Workers",
@@ -180,7 +180,7 @@
     },
     "myFile": {
       "title": "My file",
-      "body": "Menu → My file shows your details, contract, documents, warnings and incentives, attendance and leave. It is read-only: ask personnel to change your details."
+      "body": "Menu → My file shows your details, contract, documents, warnings and incentives, attendance and leave. It is read-only: ask personnel to change your details. The Attendance tab of My file is the one place for your attendance: Summary (the last 30 days by site), Records (every clock-in in detail, the month and printing), Timesheets (ask for one and see yours) and Exceptions (the moments outside a work area that need your reason). The Attendance button at the bottom opens it. The Attendance and Timesheets pages in the menu are now the team's, for managers."
     },
     "myDocuments": {
       "title": "My documents",
@@ -196,7 +196,7 @@
     },
     "documentsAdmin": {
       "title": "Employee documents",
-      "body": "Settings → People → Employee documents: the documents each person must have (for everyone, some job titles or some sites), with expiry, reminder days and what happens at clock-in after one expires. Menu → Documents shows what has expired, expires soon, is missing or waits for review; remind a person with one tap or export a CSV."
+      "body": "From a person's file → Documents press \"Add a document\": its name (or pick one already used), number, start date, end date when it has one, and a photo or PDF - it is recorded as valid at once. A document with an end date changes state by itself: valid, expiring, expired, and a reminder comes 30 and 7 days before the end date and on the day. Menu → Documents only shows: what has expired, expires soon, is missing or waits for review, with a CSV export; each line opens its person's file. When adding (or on any document) you can make it \"Required from every employee\": every file gets it as missing, and with an end date you can choose \"No clock-in once it has expired\"."
     },
     "bylaw": {
       "title": "Penalties bylaw",

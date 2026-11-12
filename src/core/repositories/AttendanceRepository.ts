@@ -144,6 +144,18 @@ function mapSessionRow(row: AttendanceSessionRow): AttendanceSession {
 // (site/project assignment, one open session at a time, idempotent
 // replay) all happens there. A fresh idempotency key is generated per
 // user action; the same key is safe to retry on a network failure.
+// Owner 2026-11-12: "clocked in before the time - it must not ring; clocked out early - it must not ring".
+// A clock-in or clock-out tells the phone's own reminder at once (it used to wait up to two minutes, and an
+// app closed right after clocking left the old reminder to ring).
+export const ATTENDANCE_CHANGED_EVENT = "prosm:attendance-changed";
+function announceAttendanceChange() {
+  try {
+    window.dispatchEvent(new Event(ATTENDANCE_CHANGED_EVENT));
+  } catch {
+    // no window (tests)
+  }
+}
+
 class AttendanceRepository {
   get client() {
     return DatabaseManager.getClient();
@@ -210,6 +222,7 @@ class AttendanceRepository {
         return createError(data?.error?.message ?? "Unable to clock in.");
       }
 
+      announceAttendanceChange();
       return createSuccess({ sessionId: data.data.sessionId, eventId: data.data.eventId, presenceSessionId: data.data.presenceSessionId ?? null });
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Attendance service unavailable.");
@@ -243,6 +256,7 @@ class AttendanceRepository {
         return createError(data?.error?.message ?? "Unable to clock out.");
       }
 
+      announceAttendanceChange();
       return createSuccess({ sessionId: data.data.sessionId, eventId: data.data.eventId });
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Attendance service unavailable.");

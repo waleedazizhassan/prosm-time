@@ -333,3 +333,7 @@ entrypoint = "./functions/announcement-media/index.ts"
 enabled = true
 verify_jwt = false
 entrypoint = "./functions/announcement-email/index.ts"
+
+# 2026-11-12: a short shared map link opened for a signed-in member (Google hosts only)
+[functions.resolve-map-link]
+verify_jwt = true

@@ -262,7 +262,8 @@
       "tough": "Schwer",
       "thanks": "Danke - gespeichert.",
       "label": "Wie die Schicht war"
-    }
+    },
+    "presenceShort": "Überwachung aktiv"
   },
   "kioskPin": {
     "title": "Kiosk-PIN",

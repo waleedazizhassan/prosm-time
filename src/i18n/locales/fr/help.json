@@ -4,7 +4,7 @@
   "guides": {
     "gettingStarted": {
       "title": "Premiers pas",
-      "body": "Connectez-vous avec l'e-mail et le mot de passe fournis par votre administrateur. La première fois (et à chaque changement), l'application vous montre ce que PROSM Time enregistre et vous demande de reconnaître la Politique de confidentialité et les Conditions d'utilisation. Sur le tableau de bord, Pointer l'arrivée commence votre poste et Pointer le départ le termine ; une carte en direct montre votre position et la zone du site. L'application s'ouvre dans la langue de votre appareil si elle est prise en charge ; vous pouvez la changer à tout moment depuis le menu utilisateur. Les employés ouvrent leur propre page d'accueil : pointer l'entrée et la sortie, leurs heures aujourd'hui, cette semaine (à partir du dimanche) et ce mois-ci, et des liens vers leurs pointages, indemnités, feuilles de temps et congés. Le propriétaire, les responsables et les superviseurs ouvrent le tableau de bord. Le propriétaire ne pointe pas."
+      "body": "Connectez-vous avec l'e-mail et le mot de passe fournis par votre administrateur. La première fois (et à chaque changement), l'application vous montre ce que PROSM Time enregistre et vous demande de reconnaître la Politique de confidentialité et les Conditions d'utilisation. Sur le tableau de bord, Pointer l'arrivée commence votre poste et Pointer le départ le termine ; une carte en direct montre votre position et la zone du site. L'application s'ouvre dans la langue de votre appareil si elle est prise en charge ; vous pouvez la changer à tout moment depuis le menu utilisateur. Les employés ouvrent leur propre page d'accueil : pointer l'entrée et la sortie, leurs heures aujourd'hui, cette semaine (à partir du dimanche) et ce mois-ci, et la barre du bas avec la présence et les congés (dans Mon dossier) et les indemnités. Le propriétaire, les responsables et les superviseurs ouvrent le tableau de bord. Le propriétaire ne pointe pas."
     },
     "attendance": {
       "title": "Pointer l'arrivée et le départ",
@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Urgence",
-      "body": "Le bouton SOS est sur le tableau de bord pendant chaque poste, une fois votre pointage confirmé. Il envoie une alerte prioritaire avec votre position aux responsables de votre site, au propriétaire et aux collègues présents, et l'enregistre dans le journal des urgences. SOS n'est pas un service d'urgence : il n'appelle ni la police ni une ambulance. En cas d'urgence, appelez toujours le numéro local. Il nécessite une connexion internet. Si vous travaillez sans site choisi, les responsables du site le plus proche la reçoivent."
+      "body": "Le bouton SOS est sur le tableau de bord pendant chaque poste, une fois votre pointage confirmé. Il envoie une alerte prioritaire avec votre position aux responsables de votre site, au propriétaire et aux collègues présents, et l'enregistre dans le journal des urgences. SOS n'est pas un service d'urgence : il n'appelle ni la police ni une ambulance. En cas d'urgence, appelez toujours le numéro local. Il nécessite une connexion internet. Si vous travaillez sans site choisi, les responsables du site le plus proche la reçoivent. Quand un SOS vous parvient, \"Voir la position\" ouvre sur la carte l'endroit d'où il a été envoyé et \"Silence\" coupe la sirène en laissant l'alerte affichée jusqu'à sa fermeture. Le journal des urgences n'apparaît que pour le propriétaire et les responsables."
     },
     "notifications": {
       "title": "Comment les notifications atteignent la bonne personne",
@@ -32,7 +32,7 @@
     },
     "exceptions": {
       "title": "Vérifications - exceptions, corrections, heures hors ligne, fausses positions",
-      "body": "Tout ce qui demande une décision apparaît dans la console du responsable sous « En attente de vérification » : exceptions hors zone (avec votre motif), demandes de correction, actions hors ligne avec l'heure de l'appareil et positions signalées comme fausses. Une exception approuvée vous compte présent tout le temps ; refusée, votre temps de travail s'arrête au moment de la première détection. Ces signalements sont des informations à vérifier équitablement par une personne, pas des décisions automatiques.\n\nNouveau : la page « Mes exceptions » du menu liste vos exceptions et leur état (en attente, approuvée, refusée) et permet d'envoyer votre motif."
+      "body": "Tout ce qui demande une décision apparaît dans la console du responsable sous « En attente de vérification » : exceptions hors zone (avec votre motif), demandes de correction, actions hors ligne avec l'heure de l'appareil et positions signalées comme fausses. Une exception approuvée vous compte présent tout le temps ; refusée, votre temps de travail s'arrête au moment de la première détection. Ces signalements sont des informations à vérifier équitablement par une personne, pas des décisions automatiques.\n\nNouveau : Mon dossier → Présence → Exceptions liste vos exceptions et leur état (en attente, approuvée, refusée) et permet d'envoyer votre motif."
     },
     "allowances": {
       "title": "Indemnités",
@@ -48,7 +48,7 @@
     },
     "sites": {
       "title": "Sites (administrateurs)",
-      "body": "Sites sert à créer les lieux de travail et à y affecter les personnes. Pour ajouter un site, il suffit d'un nom, de son emplacement - placez-vous sur place et appuyez sur Utiliser ma position actuelle -, du rayon et de l'obligation ou non d'une photo ; le reste est dans Plus d'options. Un nouveau site prend le fuseau horaire de votre appareil. Le rôle sur le site part du rôle dans l'organisation. Tout le reste d'un site se règle sur sa propre page, sous Règles du site : marge GPS, horaires, heures supplémentaires et retenues de retard, arrondi des pauses, suivi de présence, employés exemptés et blocages en libre-service. Dans le formulaire du site, indiquez à qui il appartient - l'entreprise ou un client (saisissez le nom du client ; les noms déjà utilisés sont proposés) - et son type : bureau, entrepôt, chantier, usine, magasin / agence, ou un autre type que vous nommez."
+      "body": "Sites sert à créer les lieux de travail et à y affecter les personnes. Pour ajouter un site, il suffit d'un nom, de son emplacement - placez-vous sur place et appuyez sur Utiliser ma position actuelle -, du rayon et de l'obligation ou non d'une photo ; le reste est dans Plus d'options. Un nouveau site prend le fuseau horaire de votre appareil. Le rôle sur le site part du rôle dans l'organisation. Tout le reste d'un site se règle sur sa propre page, sous Règles du site : marge GPS, horaires, heures supplémentaires et retenues de retard, arrondi des pauses, suivi de présence, employés exemptés et blocages en libre-service. Dans le formulaire du site, indiquez à qui il appartient - l'entreprise ou un client (saisissez le nom du client ; les noms déjà utilisés sont proposés) - et son type : bureau, entrepôt, chantier, usine, magasin / agence, ou un autre type que vous nommez. Si quelqu'un vous a envoyé l'emplacement, collez le lien (Google Maps, liens courts compris) ou les coordonnées dans \"Ou collez un lien de localisation\" et appuyez sur \"Utiliser le lien\"."
     },
     "workers": {
       "title": "Intervenants externes",
@@ -180,7 +180,7 @@
     },
     "myFile": {
       "title": "Mon dossier",
-      "body": "Menu → Mon dossier affiche vos données, contrat, documents, avertissements et primes, présence et congés. En lecture seule : demandez aux RH de modifier vos données."
+      "body": "Menu → Mon dossier affiche vos données, contrat, documents, avertissements et primes, présence et congés. En lecture seule : demandez aux RH de modifier vos données. L'onglet Présence de Mon dossier est l'unique endroit de votre présence : Résumé (30 derniers jours par site), Pointages (chaque pointage en détail, le mois et l'impression), Feuilles de temps (en demander une et voir les vôtres) et Exceptions (les moments hors d'une zone qui demandent votre motif). Le bouton Présence en bas l'ouvre. Les pages Présence et Feuilles de temps du menu sont désormais celles de l'équipe, pour les responsables."
     },
     "myDocuments": {
       "title": "Mes documents",
@@ -196,7 +196,7 @@
     },
     "documentsAdmin": {
       "title": "Documents des employés",
-      "body": "Paramètres → Personnes → Documents des employés : les documents exigés, l'expiration, les rappels et ce qui se passe au pointage après expiration. Menu → Documents affiche l'expiré, le bientôt expiré, le manquant et l'à vérifier ; relancez d'un geste ou exportez en CSV."
+      "body": "Depuis le dossier d'une personne → Documents, appuyez sur \"Ajouter un document\" : nom (ou un nom déjà utilisé), numéro, date de début, date de fin s'il en a une, et une photo ou un PDF - il est valide aussitôt. Un document avec date de fin change d'état seul : valide, expire bientôt, expiré ; un rappel arrive 30 et 7 jours avant et le jour même. Menu → Documents ne fait qu'afficher : l'expiré, le bientôt expiré, le manquant et ce qui attend la vérification, avec export CSV ; chaque ligne ouvre le dossier de la personne. À l'ajout (ou sur tout document) vous pouvez l'\"exiger de tous\" : chaque dossier le reçoit comme manquant et, avec une date de fin, vous pouvez choisir \"Pas de pointage une fois expiré\"."
     },
     "bylaw": {
       "title": "Règlement des sanctions",

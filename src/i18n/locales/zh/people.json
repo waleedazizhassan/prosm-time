@@ -385,7 +385,14 @@
       "siteDays_one": "{{count}} 天",
       "siteDays_other": "{{count}} 天",
       "noSite": "无地点",
-      "backToSites": "返回地点列表"
+      "backToSites": "返回地点列表",
+      "viewsLabel": "考勤视图",
+      "views": {
+        "summary": "摘要",
+        "log": "记录",
+        "timesheets": "工时表",
+        "exceptions": "例外"
+      }
     },
     "leave": {
       "empty": "近一年无休假。",

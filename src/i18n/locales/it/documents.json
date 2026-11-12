@@ -7,7 +7,7 @@
   "queued_many": "{{count}} documenti sono salvati su questo telefono e saranno inviati appena online.",
   "queued_other": "{{count}} documenti sono salvati su questo telefono e saranno inviati appena online.",
   "empty": "Non ti sono richiesti documenti.",
-  "emptyHr": "Nessun documento richiesto per questa persona. Imposta i documenti in Impostazioni → Persone.",
+  "emptyHr": "Nessun documento ancora in questo fascicolo. Premi \"Aggiungi documento\" e carica qualsiasi documento con i suoi dati.",
   "mandatory": "Obbligatorio",
   "expires": "Scade il {{date}}",
   "noExpiry": "Non scade",
@@ -63,7 +63,14 @@
     "issue": "Data di rilascio",
     "expiry": "Data di scadenza",
     "offlineHint": "Niente internet? Viene salvato sul telefono e inviato dopo.",
-    "badFile": "Usa una foto JPG, PNG, WEBP o un PDF, fino a 10 MB."
+    "badFile": "Usa una foto JPG, PNG, WEBP o un PDF, fino a 10 MB.",
+    "name": "Nome del documento",
+    "hasExpiry": "Ha una data di fine",
+    "needName": "Scrivi il nome del documento.",
+    "endBeforeStart": "La data di fine deve essere successiva a quella di inizio.",
+    "expiryHint": "Riceverai un promemoria prima della data di fine (30 e 7 giorni prima e il giorno stesso); lo stato passa da valido a scaduto da solo.",
+    "requiredForAll": "Richiesto a tutti i dipendenti",
+    "blockClockIn": "Nessuna timbratura dopo la scadenza"
   },
   "types": {
     "title": "Documenti dei dipendenti",
@@ -138,7 +145,7 @@
     "title": "Documenti",
     "open": "Apri",
     "allGood": "Tutti i documenti sono in ordine (completi al {{percent}}%).",
-    "noDocuments": "Ancora nessun documento - aggiungi i tipi di documento nella pagina Documenti.",
+    "noDocuments": "Ancora nessun documento: aggiungili dal fascicolo di ogni persona → Documenti.",
     "daysLeft_one": "Manca 1 giorno",
     "daysLeft_many": "Mancano {{count}} giorni",
     "daysLeft_other": "Mancano {{count}} giorni"
@@ -150,5 +157,12 @@
     "photograph": "Fotografa"
   },
   "queuedRefused": "{{name}} non è stato inviato: {{reason}}",
-  "removeQueued": "Rimuovi"
+  "removeQueued": "Rimuovi",
+  "addDocument": "Aggiungi documento",
+  "fromTo": "Dal {{from}} al {{to}}",
+  "issuedOn": "Rilasciato il {{date}}",
+  "makeRequired": "Richiedi a tutti",
+  "makeOptional": "Non richiesto a tutti",
+  "requiredOn": "Ora richiesto a tutti i dipendenti.",
+  "requiredOff": "Non è più richiesto a tutti."
 }

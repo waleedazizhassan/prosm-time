@@ -305,6 +305,9 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "THIS PERSON ALREADY HAS THE OWNER'S AUTHORITY": "ownerAuthorityAlready",
   "THIS PERSON DOES NOT HAVE THE OWNER'S AUTHORITY": "ownerAuthorityNone",
   "THIS PERSON IS NOT ACTIVE": "ownerAuthorityInactive",
+  // owner 2026-11-12: a document added from a person's file
+  "THE DOCUMENT NAME IS REQUIRED": "documentNameRequired",
+  "THE DOCUMENT NAME IS TOO LONG": "documentNameTooLong",
   // owner 2026-11-12: whose site and what kind
   "CLIENT NAME REQUIRED": "clientNameRequired",
   "SITE TYPE NAME REQUIRED": "siteTypeNameRequired",
@@ -426,6 +429,9 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "WRITE THE REASON FOR THE APPEAL": "appealReasonRequired",
   "A REDUCTION MUST BE LIGHTER": "reductionLighter",
   "ENTER THE FULL LEGAL NAME": "legalNameRequired",
+  "ENTER THE NATIONAL ID NUMBER": "nationalIdRequired",
+  "ENTER THE MOBILE NUMBER": "phoneRequired",
+  "LEGAL NAME MUST BE IN ARABIC": "legalNameArabic",
   "NOT FOUND": "notFound",
   // 2026-11-10: Buzz
   "BUZZ TOO SOON": "buzzTooSoon",

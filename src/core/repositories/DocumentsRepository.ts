@@ -88,6 +88,12 @@ const DocumentsRepository = {
   listTypes: () => rpc<DocumentType[]>("list_prosm_time_document_types"),
   saveType: (id: string | null, data: Record<string, unknown>) => rpc<{ id: string }>("save_prosm_time_document_type", { p_id: id, p_data: data }),
   addTemplates: (template: "eg" | "gulf") => rpc<{ added: number }>("add_prosm_time_document_templates", { p_template: template }),
+  /** owner 2026-11-12: personnel add any document from a person's file by its name (reused or made) */
+  ensureTypeFor: (userId: string, name: string, hasExpiry: boolean) =>
+    rpc<{ id: string; name: string; hasExpiry: boolean }>("ensure_prosm_time_person_document_type", { p_user_id: userId, p_name: name, p_has_expiry: hasExpiry }),
+  /** owner 2026-11-12: required from every employee (optionally no clock-in once expired), or not */
+  setRequired: (typeId: string, required: boolean, blockClockIn: boolean) =>
+    rpc<{ success: boolean }>("set_prosm_time_document_required", { p_type_id: typeId, p_required: required, p_block_clock_in: blockClockIn }),
   listFor: (userId: string) => rpc<EmployeeDocument[]>("list_prosm_time_employee_documents", { p_user_id: userId }),
   submit: (userId: string, typeId: string, data: { file_path: string; document_number?: string | null; issue_date?: string | null; expiry_date?: string | null; client_ref?: string | null }) =>
     rpc<{ id: string }>("submit_prosm_time_document", { p_user_id: userId, p_type_id: typeId, p_data: data }),

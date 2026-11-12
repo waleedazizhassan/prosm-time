@@ -15,12 +15,19 @@ import ContractsTab from "./profile/ContractsTab";
 import { AttendanceTab, LeaveTab } from "./profile/ActivityTabs";
 import { ProfileDocumentsTab, ProfilePenaltiesTab } from "./profile/LaterTabs";
 import { MyLeavePanel } from "../leave/LeaveRequestsPage";
+import AttendanceLogPage from "../attendance/AttendanceLogPage";
+import TimesheetsPage from "../timesheets/TimesheetsPage";
+import ExceptionsCard from "../dashboard/ExceptionsCard";
+import Button from "../../components/common/Button";
 
 type MyTab = "data" | "documents" | "penalties" | "contract" | "attendance" | "leave";
 
 // HR suite feature 3 (2026-11-11): "My file" - the person's own file, read only: their data and
 // contract, their documents (which they upload here), their warnings and incentives (acknowledge or
 // appeal), their attendance and leave.
+const ATTENDANCE_VIEWS = ["summary", "log", "timesheets", "exceptions"] as const;
+type AttendanceView = (typeof ATTENDANCE_VIEWS)[number];
+
 export default function MyProfilePage() {
   const { t } = useTranslation("people");
   const { profile } = useAuth();
@@ -54,6 +61,8 @@ export default function MyProfilePage() {
   ];
   const requested = searchParams.get("tab") as MyTab | null;
   const tab: MyTab = requested && tabs.some((x) => x.key === requested) ? requested : "data";
+  const requestedView = searchParams.get("view") as AttendanceView | null;
+  const view: AttendanceView = requestedView && ATTENDANCE_VIEWS.includes(requestedView) ? requestedView : "summary";
 
   return (
     <PageShell title="">
@@ -64,7 +73,24 @@ export default function MyProfilePage() {
       {tab === "documents" ? <ProfileDocumentsTab profile={file} onChanged={() => void load()} /> : null}
       {tab === "penalties" ? <ProfilePenaltiesTab profile={file} /> : null}
       {tab === "contract" ? <ContractsTab profile={file} onSaved={() => void load()} /> : null}
-      {tab === "attendance" ? <AttendanceTab userId={profile.id} /> : null}
+      {/* owner 2026-11-12: one place for one's own attendance - the summary, every record, the timesheets and the
+          moments to explain (these were three pages of the menu) */}
+      {tab === "attendance" ? (
+        <>
+          <div role="tablist" aria-label={t("profile.attendance.viewsLabel")} style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)", margin: "0 0 var(--space-3)" }}>
+            {ATTENDANCE_VIEWS.map((v) => (
+              <Button key={v} size="sm" role="tab" aria-selected={view === v} variant={view === v ? "primary" : "ghost"}
+                onClick={() => setSearchParams((params) => { params.set("tab", "attendance"); if (v === "summary") params.delete("view"); else params.set("view", v); params.delete("exceptionId"); return params; }, { replace: true })}>
+                {t(`profile.attendance.views.${v}`)}
+              </Button>
+            ))}
+          </div>
+          {view === "summary" ? <AttendanceTab userId={profile.id} /> : null}
+          {view === "log" ? <AttendanceLogPage embedded selfUserId={profile.id} /> : null}
+          {view === "timesheets" ? <TimesheetsPage embedded /> : null}
+          {view === "exceptions" ? <ExceptionsCard showEmpty /> : null}
+        </>
+      ) : null}
       {/* owner 2026-11-12: one place for one's own leave - balance, request, permissions and requests */}
       {tab === "leave" ? (allows("leave") ? <MyLeavePanel /> : <LeaveTab userId={profile.id} />) : null}
     </PageShell>

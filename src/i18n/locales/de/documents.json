@@ -6,7 +6,7 @@
   "queued_one": "{{count}} Dokument ist auf diesem Telefon gespeichert und wird gesendet, sobald Sie online sind.",
   "queued_other": "{{count}} Dokumente sind auf diesem Telefon gespeichert und werden gesendet, sobald Sie online sind.",
   "empty": "Von Ihnen werden keine Dokumente benötigt.",
-  "emptyHr": "Für diese Person werden keine Dokumente benötigt. Legen Sie die Dokumente unter Einstellungen → Personen fest.",
+  "emptyHr": "Noch keine Dokumente in dieser Akte. Tippen Sie auf \"Dokument hinzufügen\" und laden Sie ein Dokument mit seinen Angaben hoch.",
   "mandatory": "Pflicht",
   "expires": "Läuft ab am {{date}}",
   "noExpiry": "Läuft nicht ab",
@@ -59,7 +59,14 @@
     "issue": "Ausstellungsdatum",
     "expiry": "Ablaufdatum",
     "offlineHint": "Kein Internet? Es wird auf dem Telefon gespeichert und später gesendet.",
-    "badFile": "Verwenden Sie ein JPG-, PNG-, WEBP-Foto oder ein PDF bis 10 MB."
+    "badFile": "Verwenden Sie ein JPG-, PNG-, WEBP-Foto oder ein PDF bis 10 MB.",
+    "name": "Name des Dokuments",
+    "hasExpiry": "Hat ein Ablaufdatum",
+    "needName": "Geben Sie den Namen des Dokuments ein.",
+    "endBeforeStart": "Das Enddatum muss nach dem Startdatum liegen.",
+    "expiryHint": "Sie werden vor dem Enddatum erinnert (30 und 7 Tage vorher und am Tag); der Status wechselt von selbst von gültig zu abgelaufen.",
+    "requiredForAll": "Von allen Mitarbeitenden verlangt",
+    "blockClockIn": "Kein Einstempeln nach Ablauf"
   },
   "types": {
     "title": "Mitarbeiterdokumente",
@@ -133,7 +140,7 @@
     "title": "Dokumente",
     "open": "Öffnen",
     "allGood": "Alle Dokumente sind in Ordnung ({{percent}} % vollständig).",
-    "noDocuments": "Noch keine Dokumente - legen Sie Dokumentarten auf der Seite Dokumente an.",
+    "noDocuments": "Noch keine Dokumente - fügen Sie sie in der Akte jeder Person → Dokumente hinzu.",
     "daysLeft_one": "Noch 1 Tag",
     "daysLeft_other": "Noch {{count}} Tage"
   },
@@ -143,5 +150,12 @@
     "photograph": "Jetzt fotografieren"
   },
   "queuedRefused": "{{name}} wurde nicht gesendet: {{reason}}",
-  "removeQueued": "Entfernen"
+  "removeQueued": "Entfernen",
+  "addDocument": "Dokument hinzufügen",
+  "fromTo": "Vom {{from}} bis {{to}}",
+  "issuedOn": "Ausgestellt {{date}}",
+  "makeRequired": "Von allen verlangen",
+  "makeOptional": "Nicht von allen verlangt",
+  "requiredOn": "Jetzt von allen Mitarbeitenden verlangt.",
+  "requiredOff": "Nicht mehr von allen verlangt."
 }

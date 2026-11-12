@@ -265,7 +265,8 @@
       "tough": "Difficile",
       "thanks": "Merci, c’est noté.",
       "label": "Ressenti du service"
-    }
+    },
+    "presenceShort": "Surveillance active"
   },
   "kioskPin": {
     "title": "Code PIN kiosque",

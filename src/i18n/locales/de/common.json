@@ -374,7 +374,12 @@
     "legalNameRequired": "Geben Sie den vollständigen amtlichen Namen ein.",
     "clientNameRequired": "Geben Sie den Kunden des Standorts an.",
     "siteTypeNameRequired": "Geben Sie die Art des Standorts an.",
-    "invalidSiteProfile": "Zugehörigkeit oder Art des Standorts ist ungültig."
+    "invalidSiteProfile": "Zugehörigkeit oder Art des Standorts ist ungültig.",
+    "documentNameRequired": "Geben Sie den Namen des Dokuments ein.",
+    "documentNameTooLong": "Der Name des Dokuments ist zu lang.",
+    "legalNameArabic": "Der amtliche Name muss auf Arabisch sein, wie im Ausweis.",
+    "nationalIdRequired": "Geben Sie die Ausweisnummer ein.",
+    "phoneRequired": "Geben Sie die Mobilnummer ein."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

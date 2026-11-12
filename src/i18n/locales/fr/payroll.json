@@ -256,7 +256,12 @@
     "legalNameMissing": "Nom officiel manquant",
     "notInPayroll": "Cette personne n’est pas dans la paie (le propriétaire n’est pas salarié).",
     "insuranceCategory": "Catégorie d'assurance",
-    "insuranceCategoryDefault": "Catégorie par défaut"
+    "insuranceCategoryDefault": "Catégorie par défaut",
+    "insuranceLabel": "Assurance sociale",
+    "insured": "Assuré",
+    "taxLabel": "Impôt",
+    "taxed": "Imposable",
+    "legalNameEditInFile": "Modifier dans le dossier"
   },
   "installments": {
     "title": "Échéances et avances",
@@ -438,7 +443,8 @@
     "allAsked": "Vous avez demandé tous les mois publiés - vous serez prévenu(e).",
     "askBodyBoth": "Choisissez le mois. La demande va au responsable de la paie ; à l'envoi, vous recevez une notification et un e-mail, et le bulletin apparaît ici.",
     "whichMonth": "Mois",
-    "rejectedReason": "Motif : {{reason}}"
+    "rejectedReason": "Motif : {{reason}}",
+    "nothingPublished": "Aucun bulletin ne vous a encore été publié. Dès qu'un cycle de paie est clôturé et publié, vous pourrez le demander ici."
   },
   "errors": {
     "generic": "Une erreur s'est produite. Réessayez.",

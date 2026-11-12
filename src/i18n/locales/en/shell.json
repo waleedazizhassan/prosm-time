@@ -165,7 +165,19 @@
       "rejectedBody": "Your allowances for {{date}} were rejected. You can edit them and send them again.",
       "sheetSubmittedBody": "{{name}} sent allowances for {{days}} days ({{start}} - {{end}}).",
       "sheetApprovedBody": "Your allowances for {{start}} - {{end}} were approved.",
-      "sheetRejectedBody": "Your allowances for {{start}} - {{end}} were rejected. Fix them and send them again."
+      "sheetRejectedBody": "Your allowances for {{start}} - {{end}} were rejected. Fix them and send them again.",
+      "sheetApprovedChangedBody_one": "Your allowances for {{start}} - {{end}} were approved; the manager changed 1 line:",
+      "sheetApprovedChangedBody_other": "Your allowances for {{start}} - {{end}} were approved; the manager changed {{count}} lines:",
+      "lines": {
+        "meal": "Meal",
+        "expatriation": "Expatriation",
+        "transportation": "Transport",
+        "housing": "Housing",
+        "travel": "Travel",
+        "other": "Other",
+        "overtime": "Overtime",
+        "extraDays": "Extra days"
+      }
     },
     "longSessionCheck": {
       "title": "Still working?",
@@ -359,7 +371,10 @@
     "title": "SOS/Emergency alert",
     "subtitle": "{{name}} just triggered an emergency alert.",
     "viewAction": "View Emergency Log",
-    "dismissAction": "Dismiss"
+    "dismissAction": "Dismiss",
+    "locationAction": "Show location",
+    "silenceAction": "Silence",
+    "noLocation": "The alert's location is not available."
   },
   "sections": {
     "attendance": "Field operations",
@@ -478,7 +493,9 @@
     "attendance": "Attendance",
     "allowances": "Allowances",
     "leave": "Leave",
-    "menu": "Menu"
+    "menu": "Menu",
+    "schedule": "Shifts",
+    "myFile": "My file"
   },
   "exitPrompt": {
     "title": "You left the site",

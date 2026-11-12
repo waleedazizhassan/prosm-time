@@ -4,7 +4,7 @@
   "guides": {
     "gettingStarted": {
       "title": "Erste Schritte",
-      "body": "Melden Sie sich mit der E-Mail-Adresse und dem Passwort an, die Ihr Administrator eingerichtet hat. Beim ersten Mal (und bei jeder Änderung) sehen Sie, was PROSM Time über Sie erfasst, und bestätigen die Datenschutzerklärung und die Nutzungsbedingungen. Auf dem Dashboard starten Sie Ihre Schicht mit Einstempeln und beenden sie mit Ausstempeln; eine Live-Karte zeigt Ihre Position und gegebenenfalls den Arbeitsbereich des Standorts. Die App öffnet sich in der Sprache Ihres Geräts, wenn sie unterstützt wird; Sie können sie jederzeit im Benutzermenü ändern. Mitarbeitende öffnen ihre eigene Startseite: Ein- und Ausstempeln, ihre Stunden heute, diese Woche (ab Sonntag) und diesen Monat sowie Links zu Anwesenheit, Zulagen, Stundenzetteln und Urlaub. Inhaber, Manager und Supervisoren öffnen das Dashboard. Der Inhaber stempelt nicht."
+      "body": "Melden Sie sich mit der E-Mail-Adresse und dem Passwort an, die Ihr Administrator eingerichtet hat. Beim ersten Mal (und bei jeder Änderung) sehen Sie, was PROSM Time über Sie erfasst, und bestätigen die Datenschutzerklärung und die Nutzungsbedingungen. Auf dem Dashboard starten Sie Ihre Schicht mit Einstempeln und beenden sie mit Ausstempeln; eine Live-Karte zeigt Ihre Position und gegebenenfalls den Arbeitsbereich des Standorts. Die App öffnet sich in der Sprache Ihres Geräts, wenn sie unterstützt wird; Sie können sie jederzeit im Benutzermenü ändern. Mitarbeitende öffnen ihre eigene Startseite: Ein- und Ausstempeln, ihre Stunden heute, diese Woche (ab Sonntag) und diesen Monat und unten die Leiste mit Anwesenheit und Urlaub (in Meine Akte) und Zulagen. Inhaber, Manager und Supervisoren öffnen das Dashboard. Der Inhaber stempelt nicht."
     },
     "attendance": {
       "title": "Ein- und Ausstempeln",
@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Notfall",
-      "body": "Die SOS-Schaltfläche steht während jeder Schicht auf dem Dashboard, sobald Ihr Einstempeln bestätigt ist. Sie sendet einen dringenden Alarm mit Ihrem Standort an die Vorgesetzten Ihres Standorts, den Inhaber und die Kollegen vor Ort und wird im Notfallprotokoll erfasst. SOS ist kein Notruf - es ruft weder Polizei noch Rettungsdienst. Rufen Sie im Notfall immer die örtliche Notrufnummer an. Es braucht eine Internetverbindung. Wenn Sie ohne gewählten Standort arbeiten, erhalten ihn die Manager des nächstgelegenen Standorts."
+      "body": "Die SOS-Schaltfläche steht während jeder Schicht auf dem Dashboard, sobald Ihr Einstempeln bestätigt ist. Sie sendet einen dringenden Alarm mit Ihrem Standort an die Vorgesetzten Ihres Standorts, den Inhaber und die Kollegen vor Ort und wird im Notfallprotokoll erfasst. SOS ist kein Notruf - es ruft weder Polizei noch Rettungsdienst. Rufen Sie im Notfall immer die örtliche Notrufnummer an. Es braucht eine Internetverbindung. Wenn Sie ohne gewählten Standort arbeiten, erhalten ihn die Manager des nächstgelegenen Standorts. Erreicht Sie ein Notruf, öffnet \"Standort zeigen\" den Ort auf der Karte, und \"Stumm\" stoppt die Sirene, der Alarm bleibt bis zum Schließen sichtbar. Das Notfallprotokoll sehen nur Inhaber und Manager."
     },
     "notifications": {
       "title": "Wie Benachrichtigungen die richtige Person erreichen",
@@ -32,7 +32,7 @@
     },
     "exceptions": {
       "title": "Prüfungen - Ausnahmen, Korrekturen, Offline-Zeiten, gefälschte Standorte",
-      "body": "Alles, was eine Entscheidung braucht, erscheint in der Manager-Konsole unter Ausstehende Prüfung: Ausnahmen außerhalb des Bereichs (mit Ihrem Grund), Korrekturanträge, offline erfasste Aktionen mit Gerätezeit und als gefälscht gemeldete Standorte. Wird eine Ausnahme genehmigt, gelten Sie als die ganze Zeit anwesend; wird sie abgelehnt, zählt Ihre Arbeitszeit nur bis zum Zeitpunkt der ersten Erkennung. Markierungen sind Informationen für eine faire Prüfung durch einen Menschen - keine automatischen Entscheidungen.\n\nNeu: Die Seite „Meine Ausnahmen“ im Menü zeigt Ihre Ausnahmen mit Status (zur Prüfung, genehmigt, abgelehnt) und lässt Sie Ihre Begründung senden."
+      "body": "Alles, was eine Entscheidung braucht, erscheint in der Manager-Konsole unter Ausstehende Prüfung: Ausnahmen außerhalb des Bereichs (mit Ihrem Grund), Korrekturanträge, offline erfasste Aktionen mit Gerätezeit und als gefälscht gemeldete Standorte. Wird eine Ausnahme genehmigt, gelten Sie als die ganze Zeit anwesend; wird sie abgelehnt, zählt Ihre Arbeitszeit nur bis zum Zeitpunkt der ersten Erkennung. Markierungen sind Informationen für eine faire Prüfung durch einen Menschen - keine automatischen Entscheidungen.\n\nNeu: Meine Akte → Anwesenheit → Ausnahmen zeigt Ihre Ausnahmen mit Status (zur Prüfung, genehmigt, abgelehnt) und lässt Sie Ihre Begründung senden."
     },
     "allowances": {
       "title": "Zulagen",
@@ -48,7 +48,7 @@
     },
     "sites": {
       "title": "Standorte (Administratoren)",
-      "body": "Unter Standorte werden Arbeitsorte angelegt und Personen zugewiesen. Für einen neuen Standort brauchen Sie nur den Namen, den Ort - dort stehen und Meinen aktuellen Standort verwenden tippen -, den Radius und ob ein Foto nötig ist; alles andere steht unter Weitere Optionen. Ein neuer Standort übernimmt die Zeitzone Ihres Geräts. Bei der Zuweisung richtet sich die Rolle am Standort nach der Rolle in der Organisation. Alles Weitere zu einem Standort steht auf seiner eigenen Seite unter Standortregeln: GPS-Toleranz, Schichtzeiten, Überstunden- und Verspätungsabzug, Pausenrundung, laufende Anwesenheitsüberwachung, ausgenommene Mitarbeitende und die Selbstbedienungs-Sperren. Im Standortformular geben Sie an, wem der Standort gehört - dem Unternehmen oder einem Kunden (Name des Kunden; bereits verwendete Namen werden vorgeschlagen) - und welche Art er ist: Büro, Lager, Baustelle, Fabrik, Laden / Filiale oder eine andere Art."
+      "body": "Unter Standorte werden Arbeitsorte angelegt und Personen zugewiesen. Für einen neuen Standort brauchen Sie nur den Namen, den Ort - dort stehen und Meinen aktuellen Standort verwenden tippen -, den Radius und ob ein Foto nötig ist; alles andere steht unter Weitere Optionen. Ein neuer Standort übernimmt die Zeitzone Ihres Geräts. Bei der Zuweisung richtet sich die Rolle am Standort nach der Rolle in der Organisation. Alles Weitere zu einem Standort steht auf seiner eigenen Seite unter Standortregeln: GPS-Toleranz, Schichtzeiten, Überstunden- und Verspätungsabzug, Pausenrundung, laufende Anwesenheitsüberwachung, ausgenommene Mitarbeitende und die Selbstbedienungs-Sperren. Im Standortformular geben Sie an, wem der Standort gehört - dem Unternehmen oder einem Kunden (Name des Kunden; bereits verwendete Namen werden vorgeschlagen) - und welche Art er ist: Büro, Lager, Baustelle, Fabrik, Laden / Filiale oder eine andere Art. Hat Ihnen jemand den Ort geschickt, fügen Sie den Link (Google Maps, auch Kurzlinks) oder die Koordinaten unter \"Oder einen Standort-Link einfügen\" ein und tippen Sie auf \"Link verwenden\"."
     },
     "workers": {
       "title": "Externe Arbeiter",
@@ -180,7 +180,7 @@
     },
     "myFile": {
       "title": "Meine Akte",
-      "body": "Menü → Meine Akte zeigt Ihre Daten, Ihren Vertrag, Dokumente, Abmahnungen und Prämien, Anwesenheit und Urlaub. Nur lesbar: Änderungen über die Personalabteilung."
+      "body": "Menü → Meine Akte zeigt Ihre Daten, Ihren Vertrag, Dokumente, Abmahnungen und Prämien, Anwesenheit und Urlaub. Nur lesbar: Änderungen über die Personalabteilung. Der Reiter Anwesenheit in Meine Akte ist der eine Ort für Ihre Anwesenheit: Übersicht (letzte 30 Tage nach Standort), Einträge (jedes Stempeln im Detail, Monat und Druck), Stundenzettel (anfordern und ansehen) und Ausnahmen (Momente außerhalb eines Arbeitsbereichs, die eine Begründung brauchen). Die Schaltfläche Anwesenheit unten öffnet ihn. Die Seiten Anwesenheit und Stundenzettel im Menü sind jetzt die des Teams, für Manager."
     },
     "myDocuments": {
       "title": "Meine Dokumente",
@@ -196,7 +196,7 @@
     },
     "documentsAdmin": {
       "title": "Mitarbeiterdokumente",
-      "body": "Einstellungen → Personen → Mitarbeiterdokumente: welche Dokumente jede Person braucht, Ablauf, Erinnerungstage und was beim Einstempeln nach Ablauf passiert. Menü → Dokumente zeigt Abgelaufenes, bald Ablaufendes, Fehlendes und zu Prüfendes; erinnern oder CSV exportieren."
+      "body": "In der Akte einer Person → Dokumente auf \"Dokument hinzufügen\" tippen: Name (oder einen bereits verwendeten), Nummer, Startdatum, Enddatum falls vorhanden und ein Foto oder PDF - es gilt sofort als gültig. Ein Dokument mit Enddatum wechselt seinen Status von selbst: gültig, läuft bald ab, abgelaufen; eine Erinnerung kommt 30 und 7 Tage vorher und am Tag. Menü → Dokumente zeigt nur an: Abgelaufenes, bald Ablaufendes, Fehlendes und zu Prüfendes, mit CSV-Export; jede Zeile öffnet die Akte der Person. Beim Hinzufügen (oder bei jedem Dokument) können Sie es \"von allen verlangen\": jede Akte erhält es als fehlend, und mit Enddatum können Sie \"Kein Einstempeln nach Ablauf\" wählen."
     },
     "bylaw": {
       "title": "Sanktionsordnung",

@@ -165,7 +165,21 @@
       "rejectedBody": "Ваши надбавки за {{date}} отклонены. Вы можете исправить их и отправить снова.",
       "sheetSubmittedBody": "{{name}} отправил(а) надбавки за {{start}} - {{end}}, дней: {{days}}.",
       "sheetApprovedBody": "Ваши надбавки за {{start}} - {{end}} одобрены.",
-      "sheetRejectedBody": "Ваши надбавки за {{start}} - {{end}} отклонены. Исправьте их и отправьте снова."
+      "sheetRejectedBody": "Ваши надбавки за {{start}} - {{end}} отклонены. Исправьте их и отправьте снова.",
+      "sheetApprovedChangedBody_one": "Ваши надбавки за {{start}} - {{end}} утверждены; руководитель изменил {{count}} строку:",
+      "sheetApprovedChangedBody_few": "Ваши надбавки за {{start}} - {{end}} утверждены; руководитель изменил {{count}} строки:",
+      "sheetApprovedChangedBody_many": "Ваши надбавки за {{start}} - {{end}} утверждены; руководитель изменил {{count}} строк:",
+      "sheetApprovedChangedBody_other": "Ваши надбавки за {{start}} - {{end}} утверждены; руководитель изменил {{count}} строки:",
+      "lines": {
+        "meal": "Питание",
+        "expatriation": "Командировочные",
+        "transportation": "Проезд",
+        "housing": "Жильё",
+        "travel": "Поездка",
+        "other": "Прочее",
+        "overtime": "Сверхурочные",
+        "extraDays": "Доп. дни"
+      }
     },
     "longSessionCheck": {
       "title": "Всё ещё работаете?",
@@ -359,7 +373,10 @@
     "title": "Сигнал SOS/тревога",
     "subtitle": "{{name}} только что подал(а) сигнал тревоги.",
     "viewAction": "Открыть журнал тревог",
-    "dismissAction": "Закрыть"
+    "dismissAction": "Закрыть",
+    "locationAction": "Показать место",
+    "silenceAction": "Без звука",
+    "noLocation": "Место тревоги недоступно."
   },
   "sections": {
     "attendance": "Полевые операции",
@@ -488,7 +505,9 @@
     "attendance": "Посещаемость",
     "allowances": "Надбавки",
     "leave": "Отпуска",
-    "menu": "Меню"
+    "menu": "Меню",
+    "schedule": "Смены",
+    "myFile": "Моё дело"
   },
   "exitPrompt": {
     "title": "Вы покинули объект",

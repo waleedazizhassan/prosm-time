@@ -265,7 +265,8 @@
       "tough": "Duro",
       "thanks": "Grazie, salvato.",
       "label": "Com’è andato il turno"
-    }
+    },
+    "presenceShort": "Monitoraggio attivo"
   },
   "kioskPin": {
     "title": "PIN chiosco",

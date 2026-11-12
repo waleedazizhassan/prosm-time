@@ -93,7 +93,11 @@
     "siteTypeLabel": "Site type",
     "siteTypeOtherLabel": "Name the site type",
     "clientNameRequired": "Enter the client this site belongs to.",
-    "siteTypeOtherRequired": "Name the site type."
+    "siteTypeOtherRequired": "Name the site type.",
+    "mapLinkLabel": "Or paste a location link",
+    "mapLinkPlaceholder": "A Google Maps link or the coordinates",
+    "mapLinkAction": "Use the link",
+    "mapLinkUnreadable": "No position could be read from this link. Open it in Google Maps and copy the coordinates shown, or the full link."
   },
   "detail": {
     "backToList": "Back to sites",

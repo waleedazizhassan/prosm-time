@@ -93,7 +93,11 @@
     "siteTypeLabel": "Art des Standorts",
     "siteTypeOtherLabel": "Art des Standorts angeben",
     "clientNameRequired": "Geben Sie den Kunden des Standorts an.",
-    "siteTypeOtherRequired": "Geben Sie die Art des Standorts an."
+    "siteTypeOtherRequired": "Geben Sie die Art des Standorts an.",
+    "mapLinkLabel": "Oder einen Standort-Link einfügen",
+    "mapLinkPlaceholder": "Google-Maps-Link oder Koordinaten",
+    "mapLinkAction": "Link verwenden",
+    "mapLinkUnreadable": "Aus diesem Link ließ sich keine Position lesen. Öffnen Sie ihn in Google Maps und kopieren Sie die angezeigten Koordinaten oder den vollständigen Link."
   },
   "detail": {
     "backToList": "Zurück zu Standorten",

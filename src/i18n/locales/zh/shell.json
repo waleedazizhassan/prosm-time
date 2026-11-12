@@ -165,7 +165,18 @@
       "rejectedBody": "您 {{date}} 的津贴被驳回。您可以修改后重新提交。",
       "sheetSubmittedBody": "{{name}} 提交了 {{days}} 天的津贴（{{start}} - {{end}}）。",
       "sheetApprovedBody": "您 {{start}} - {{end}} 的津贴已批准。",
-      "sheetRejectedBody": "您 {{start}} - {{end}} 的津贴被驳回。请修改后重新提交。"
+      "sheetRejectedBody": "您 {{start}} - {{end}} 的津贴被驳回。请修改后重新提交。",
+      "sheetApprovedChangedBody_other": "您 {{start}} - {{end}} 的津贴已批准；主管修改了 {{count}} 项：",
+      "lines": {
+        "meal": "餐费",
+        "expatriation": "外派",
+        "transportation": "交通",
+        "housing": "住房",
+        "travel": "差旅",
+        "other": "其他",
+        "overtime": "加班",
+        "extraDays": "额外天数"
+      }
     },
     "longSessionCheck": {
       "title": "还在工作吗？",
@@ -359,7 +370,10 @@
     "title": "SOS/紧急警报",
     "subtitle": "{{name}} 刚刚触发了紧急警报。",
     "viewAction": "查看紧急日志",
-    "dismissAction": "关闭"
+    "dismissAction": "关闭",
+    "locationAction": "查看位置",
+    "silenceAction": "静音",
+    "noLocation": "无法获取警报位置。"
   },
   "sections": {
     "attendance": "现场运营",
@@ -473,7 +487,9 @@
     "attendance": "考勤",
     "allowances": "津贴",
     "leave": "请假",
-    "menu": "菜单"
+    "menu": "菜单",
+    "schedule": "排班",
+    "myFile": "我的档案"
   },
   "exitPrompt": {
     "title": "您已离开工作地点",

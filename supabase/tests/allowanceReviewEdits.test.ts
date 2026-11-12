@@ -93,6 +93,11 @@ describe("editing allowances during review (item 21)", () => {
 
   it("after approval nothing changes, and only the Owner reopens (with a reason)", async () => {
     expect((await t.as(manager.authId, "select public.review_prosm_time_allowance_sheet($1, 'approved')", [sheetId])).error).toBeNull();
+    // owner 2026-11-12: the approval tells the employee what the manager changed
+    const [note] = await t.su<{ data: { changes?: { line: string; before: number; after: number }[] } }>(
+      "select data from notifications where user_id = $1 and type = 'allowance_approved' order by created_at desc limit 1", [worker.userId]);
+    expect(note.data.changes?.length).toBeGreaterThan(0);
+    expect(note.data.changes?.some((c) => c.line === "overtime")).toBe(true);
     expect((await adjust(manager, "meal", 10)).error).toMatch(/ALREADY APPROVED/);
     expect((await t.as(manager.authId, "select public.reopen_prosm_time_allowance_sheet($1, 'fix')", [sheetId])).error).toMatch(/REOPEN_APPROVED/);
     expect((await t.as(org.owner.authId, "select public.reopen_prosm_time_allowance_sheet($1, '')", [sheetId])).error).toMatch(/REASON/);

@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, LogIn, Plug, HardHat, ScrollText, Sunrise, Banknote, Receipt, Megaphone, AlertTriangle, IdCard, FileCheck, Gavel } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, LogIn, Plug, HardHat, ScrollText, Sunrise, Banknote, Receipt, Megaphone, IdCard, FileCheck, Gavel } from "lucide-react";
 
 import { FEATURES } from "../../config/features";
 import type { PlanFeature } from "../../core/hooks/usePlanFeatures";
@@ -74,8 +74,10 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // audience already established for Manager Console below (same
   // permission key, same real audience per the multirole audit).
   // Owner 2026-10-18: the Owner does not clock in or out.
-  { id: "clockIn", labelKey: "items.clockIn", path: "/clock-in", icon: LogIn, requiredPermission: "attendance.view", hiddenFromOwner: true, section: "attendance" },
-  { id: "manager", labelKey: "items.manager", path: "/manager", icon: LayoutGrid, requiredPermission: "attendance.view", section: "attendance" },
+  // Review 2026-11-12: only for those whose home is the dashboard (others clock in from their home page -
+  // a viewer saw it twice), and the manager page only for those who decide something there.
+  { id: "clockIn", labelKey: "items.clockIn", path: "/clock-in", icon: LogIn, requiredPermission: ["exceptions.manage", "dashboard.view"], hiddenFromOwner: true, section: "attendance" },
+  { id: "manager", labelKey: "items.manager", path: "/manager", icon: LayoutGrid, requiredPermission: "exceptions.manage", section: "attendance" },
   // § live UX review, user-directed - "a direct sidebar button to view
   // employees' clock-in/clock-out record." No permission gate, same
   // reasoning as Timesheets below: attendance_sessions' own RLS
@@ -83,9 +85,10 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // sessions always; a Manager's managed-site people; everyone for
   // the Owner), so every authenticated member can open this item and
   // simply gets their own scope back.
-  { id: "attendance", labelKey: "items.attendance", path: "/attendance", icon: Clock, requiredPermission: null, section: "attendance" },
+  // Owner 2026-11-12: one's own attendance, timesheets and exceptions live in My file -> Attendance; these
+  // pages are the team's (the exceptions page is gone from the menu, its links land in My file)
+  { id: "attendance", labelKey: "items.attendance", path: "/attendance", icon: Clock, requiredPermission: "attendance.view", section: "attendance" },
   // Owner 2026-11-09: the out-of-area moments to explain, on their own page
-  { id: "exceptions", labelKey: "items.exceptions", path: "/exceptions", icon: AlertTriangle, requiredPermission: null, hiddenFromOwner: true, section: "attendance" },
   // § user-directed follow-up - a direct sidebar entry for
   // Administrative Clock In/Out (On Behalf Of), previously only
   // reachable via a specific employee's own People > detail page. Same
@@ -123,7 +126,7 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // this nav item is visible to every authenticated org member; the
   // page itself further gates its Generate/Approve/Correction-review
   // sections on timesheets.generate/timesheets.approve/attendance.correct.
-  { id: "timesheets", labelKey: "items.timesheets", path: "/timesheets", icon: FileText, requiredPermission: null, section: "payroll" },
+  { id: "timesheets", labelKey: "items.timesheets", path: "/timesheets", icon: FileText, requiredPermission: ["timesheets.generate", "timesheets.approve", "attendance.correct"], section: "payroll" },
   // § approved 2026-09-02 plan (Feature 2) - self-access to one's own
   // allowance entries needs no special permission, same reasoning as
   // Timesheets above; allowance_entries' own RLS is what actually
@@ -150,7 +153,8 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // page's own report-type selector gates each report by the exact
   // same permission its original source page already used.
   // Owner 2026-11-09: an employee takes every report from its own page; Reports is for those who manage
-  { id: "reports", labelKey: "items.reports", path: "/reports", icon: FileBarChart, requiredPermission: "exceptions.manage", section: "reports" },
+  // review 2026-11-12: a viewer's role is reading reports - the page already serves them
+  { id: "reports", labelKey: "items.reports", path: "/reports", icon: FileBarChart, requiredPermission: ["exceptions.manage", "reports.view"], section: "reports" },
   // owner 2026-11-03: the morning summary opens here - one day, any day, with the names
   { id: "dailySummary", planFeature: "daily_summary", labelKey: "items.dailySummary", path: "/daily-summary", icon: Sunrise, requiredPermission: null, ownerOnly: true, section: "reports" },
   // Owner 2026-10-28: the action log on its own page (it left the dashboard).
@@ -160,7 +164,8 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // inside an unrelated page. Owner-only, matching that setting's own
   // existing RPC-level gate.
   // Owner 2026-10-20: every setting lives here - each site's rules too, so managers who manage sites see it.
-  { id: "settings", labelKey: "items.settings", path: "/settings", icon: Settings, requiredPermission: "sites.manage", section: "settings" },
+  // review 2026-11-12: the page serves personnel managers too (job titles, documents, bylaw)
+  { id: "settings", labelKey: "items.settings", path: "/settings", icon: Settings, requiredPermission: ["sites.manage", "hr.manage"], section: "settings" },
   // § user-directed 2026-09-09 - "API [keys] should appear on its own
   // in the sidebar, not inside Settings." Same Owner-only gate as
   // Settings itself (API keys grant external read access to this

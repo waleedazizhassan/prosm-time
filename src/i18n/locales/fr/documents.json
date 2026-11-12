@@ -7,7 +7,7 @@
   "queued_many": "{{count}} documents sont enregistrés sur ce téléphone et seront envoyés dès la connexion.",
   "queued_other": "{{count}} documents sont enregistrés sur ce téléphone et seront envoyés dès la connexion.",
   "empty": "Aucun document ne vous est demandé.",
-  "emptyHr": "Aucun document n'est demandé à cette personne. Définissez les documents dans Paramètres → Personnes.",
+  "emptyHr": "Aucun document dans ce dossier pour l'instant. Appuyez sur \"Ajouter un document\" et téléversez n'importe quel document avec ses informations.",
   "mandatory": "Obligatoire",
   "expires": "Expire le {{date}}",
   "noExpiry": "N'expire pas",
@@ -63,7 +63,14 @@
     "issue": "Date de délivrance",
     "expiry": "Date d'expiration",
     "offlineHint": "Pas d'internet ? Il est enregistré sur le téléphone et envoyé plus tard.",
-    "badFile": "Utilisez une photo JPG, PNG, WEBP ou un PDF, jusqu'à 10 Mo."
+    "badFile": "Utilisez une photo JPG, PNG, WEBP ou un PDF, jusqu'à 10 Mo.",
+    "name": "Nom du document",
+    "hasExpiry": "Il a une date de fin",
+    "needName": "Saisissez le nom du document.",
+    "endBeforeStart": "La date de fin doit suivre la date de début.",
+    "expiryHint": "Un rappel arrive avant la date de fin (30 et 7 jours avant, et le jour même) ; son état passe seul de valide à expiré.",
+    "requiredForAll": "Exigé de tous les employés",
+    "blockClockIn": "Pas de pointage une fois expiré"
   },
   "types": {
     "title": "Documents des employés",
@@ -138,7 +145,7 @@
     "title": "Documents",
     "open": "Ouvrir",
     "allGood": "Tous les documents sont en ordre ({{percent}} % complets).",
-    "noDocuments": "Aucun document pour l'instant - ajoutez des types de documents sur la page Documents.",
+    "noDocuments": "Aucun document pour l'instant - ajoutez-les depuis le dossier de chaque personne → Documents.",
     "daysLeft_one": "Plus que 1 jour",
     "daysLeft_many": "Plus que {{count}} jours",
     "daysLeft_other": "Plus que {{count}} jours"
@@ -150,5 +157,12 @@
     "photograph": "Photographier"
   },
   "queuedRefused": "{{name}} n'a pas été envoyé : {{reason}}",
-  "removeQueued": "Retirer"
+  "removeQueued": "Retirer",
+  "addDocument": "Ajouter un document",
+  "fromTo": "Du {{from}} au {{to}}",
+  "issuedOn": "Délivré le {{date}}",
+  "makeRequired": "Exiger de tous",
+  "makeOptional": "Non exigé de tous",
+  "requiredOn": "Désormais exigé de tous les employés.",
+  "requiredOff": "N'est plus exigé de tous."
 }

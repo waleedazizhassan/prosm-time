@@ -374,7 +374,12 @@
     "legalNameRequired": "请输入完整的法定姓名。",
     "clientNameRequired": "请填写该地点所属的客户。",
     "siteTypeNameRequired": "请填写地点类型。",
-    "invalidSiteProfile": "地点归属或类型无效。"
+    "invalidSiteProfile": "地点归属或类型无效。",
+    "documentNameRequired": "请填写文件名称。",
+    "documentNameTooLong": "文件名称过长。",
+    "legalNameArabic": "正式姓名必须为阿拉伯文，与身份证一致。",
+    "nationalIdRequired": "请填写身份证号码。",
+    "phoneRequired": "请填写手机号码。"
   },
   "pageLoad": {
     "title": "此页面需要网络连接",

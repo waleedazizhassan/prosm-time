@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState, type ReactNode } from "react";
-import MoodFace from "../../components/common/MoodFace";
 import { useTranslation } from "react-i18next";
 import { Link, useSearchParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -79,7 +78,6 @@ export default function DailySummaryPage() {
     { key: "name", header: t("dailySummary.columns.name"), sortValue: (row) => row.name, render: (row) => (
       <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
         <PersonName name={row.name} userId={row.userId} />
-        {row.mood ? <span title={`${t("dashboard:attendance.mood.label")}: ${t(`dashboard:attendance.mood.${row.mood}`)}`} style={{ display: "inline-flex", color: "var(--text-secondary)" }}><MoodFace mood={row.mood} size={20} active /></span> : null}
       </span>
     ) },
     { key: "site", header: t("dailySummary.columns.site"), sortValue: (row) => row.site ?? "", render: (row) => row.site ?? t("dailySummary.noSite") },

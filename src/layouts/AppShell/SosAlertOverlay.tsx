@@ -1,13 +1,20 @@
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
-import { Siren, X } from "lucide-react";
+import { MapPin, Siren, VolumeX, X } from "lucide-react";
 
 import Button from "../../components/common/Button";
 import styles from "./SosAlertOverlay.module.css";
 
 interface SosAlertOverlayProps {
   employeeName: string;
-  onView: () => void;
+  /** the emergency log - only for whoever may open it (attendance.view or the owner) */
+  onView: (() => void) | null;
+  onShowLocation: () => void;
+  locating: boolean;
+  /** the location could not be read */
+  noLocation: boolean;
+  onSilence: () => void;
+  silenced: boolean;
   onDismiss: () => void;
 }
 
@@ -34,7 +41,10 @@ interface SosAlertOverlayProps {
 // clipped to the Header's own box instead of the viewport. Portaling
 // straight to document.body escapes that entirely, regardless of
 // where this component happens to be mounted.
-export default function SosAlertOverlay({ employeeName, onView, onDismiss }: SosAlertOverlayProps) {
+// Owner 2026-11-12: "the alarm reaches the employee with 'view the emergency log', though that is the
+// managers' - give it 'show the location' and 'silence'". Everyone gets the location (opened on the map) and
+// silence; the emergency log button shows only to whoever may open it.
+export default function SosAlertOverlay({ employeeName, onView, onShowLocation, locating, noLocation, onSilence, silenced, onDismiss }: SosAlertOverlayProps) {
   const { t } = useTranslation("shell");
 
   return createPortal(
@@ -52,13 +62,25 @@ export default function SosAlertOverlay({ employeeName, onView, onDismiss }: Sos
         <p className={styles.subtitle}>{t("sosOverlay.subtitle", { name: employeeName })}</p>
 
         <div className={styles.actions}>
-          <Button variant="danger" onClick={onView}>
+          <Button variant="danger" onClick={onShowLocation} loading={locating}>
+            <MapPin size={16} aria-hidden="true" /> {t("sosOverlay.locationAction")}
+          </Button>
+          {silenced ? (
+            <Button variant="ghost" onClick={onDismiss}>
+              {t("sosOverlay.dismissAction")}
+            </Button>
+          ) : (
+            <Button variant="ghost" onClick={onSilence}>
+              <VolumeX size={16} aria-hidden="true" /> {t("sosOverlay.silenceAction")}
+            </Button>
+          )}
+        </div>
+        {noLocation ? <p className={styles.subtitle}>{t("sosOverlay.noLocation")}</p> : null}
+        {onView ? (
+          <Button variant="ghost" size="sm" onClick={onView}>
             {t("sosOverlay.viewAction")}
           </Button>
-          <Button variant="ghost" onClick={onDismiss}>
-            {t("sosOverlay.dismissAction")}
-          </Button>
-        </div>
+        ) : null}
       </div>
     </div>,
     document.body,

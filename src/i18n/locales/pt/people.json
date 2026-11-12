@@ -387,7 +387,14 @@
       "siteDays_other": "{{count}} dias",
       "noSite": "Sem local",
       "backToSites": "Voltar aos locais",
-      "siteDays_many": "{{count}} dias"
+      "siteDays_many": "{{count}} dias",
+      "viewsLabel": "Vistas da assiduidade",
+      "views": {
+        "summary": "Resumo",
+        "log": "Registos",
+        "timesheets": "Folhas de horas",
+        "exceptions": "Exceções"
+      }
     },
     "leave": {
       "empty": "Sem férias no último ano.",

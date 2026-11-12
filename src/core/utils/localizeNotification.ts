@@ -163,6 +163,14 @@ export default function localizeNotification(notification: AppNotification, t: T
       const date = typeof data.entryDate === "string" ? data.entryDate : null;
       const which = notification.type === "allowance_approved" ? "approved" : "rejected";
       if (typeof data.periodStart === "string" && typeof data.periodEnd === "string") {
+        // owner 2026-11-12: an approval says what the manager changed - each line: day, line, before -> after
+        const changes = which === "approved" && Array.isArray(data.changes) ? (data.changes as { date?: string; line?: string; before?: number; after?: number }[]) : [];
+        if (changes.length > 0) {
+          const list = changes
+            .map((c) => `${c.date ?? ""} ${t(`shell:notifications.allowance.lines.${c.line ?? "other"}`, { defaultValue: c.line ?? "" })} ${Number(c.before ?? 0)} → ${Number(c.after ?? 0)}`)
+            .join(" · ");
+          return { title: t("shell:notifications.allowance.approvedTitle"), body: withNotes(`${t("shell:notifications.allowance.sheetApprovedChangedBody", { start: data.periodStart, end: data.periodEnd, count: changes.length })} ${list}`) };
+        }
         const sheetKey = which === "approved" ? "sheetApprovedBody" : "sheetRejectedBody";
         return { title: t(`shell:notifications.allowance.${which}Title`), body: withNotes(t(`shell:notifications.allowance.${sheetKey}`, { start: data.periodStart, end: data.periodEnd })) };
       }

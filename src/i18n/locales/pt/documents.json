@@ -7,7 +7,7 @@
   "queued_many": "{{count}} documentos estão salvos neste telefone e serão enviados quando houver conexão.",
   "queued_other": "{{count}} documentos estão salvos neste telefone e serão enviados quando houver conexão.",
   "empty": "Nenhum documento é exigido de você.",
-  "emptyHr": "Nenhum documento é exigido desta pessoa. Defina os documentos em Configurações → Pessoas.",
+  "emptyHr": "Ainda não há documentos nesta ficha. Prima \"Adicionar documento\" e carregue qualquer documento com os seus dados.",
   "mandatory": "Obrigatório",
   "expires": "Vence em {{date}}",
   "noExpiry": "Não vence",
@@ -63,7 +63,14 @@
     "issue": "Data de emissão",
     "expiry": "Data de vencimento",
     "offlineHint": "Sem internet? Fica salvo no telefone e é enviado depois.",
-    "badFile": "Use uma foto JPG, PNG, WEBP ou um PDF, de até 10 MB."
+    "badFile": "Use uma foto JPG, PNG, WEBP ou um PDF, de até 10 MB.",
+    "name": "Nome do documento",
+    "hasExpiry": "Tem data de fim",
+    "needName": "Escreva o nome do documento.",
+    "endBeforeStart": "A data de fim tem de ser depois da data de início.",
+    "expiryHint": "Recebe um lembrete antes da data de fim (30 e 7 dias antes e no próprio dia); o estado passa sozinho de válido a expirado.",
+    "requiredForAll": "Exigido a todos os funcionários",
+    "blockClockIn": "Sem picar o ponto depois de expirar"
   },
   "types": {
     "title": "Documentos dos funcionários",
@@ -138,7 +145,7 @@
     "title": "Documentos",
     "open": "Abrir",
     "allGood": "Todos os documentos estão em ordem ({{percent}}% completos).",
-    "noDocuments": "Ainda sem documentos - adicione tipos de documento na página Documentos.",
+    "noDocuments": "Ainda sem documentos - adicione-os na ficha de cada pessoa → Documentos.",
     "daysLeft_one": "Falta 1 dia",
     "daysLeft_many": "Faltam {{count}} dias",
     "daysLeft_other": "Faltam {{count}} dias"
@@ -150,5 +157,12 @@
     "photograph": "Fotografar"
   },
   "queuedRefused": "{{name}} não foi enviado: {{reason}}",
-  "removeQueued": "Remover"
+  "removeQueued": "Remover",
+  "addDocument": "Adicionar documento",
+  "fromTo": "De {{from}} a {{to}}",
+  "issuedOn": "Emitido em {{date}}",
+  "makeRequired": "Exigir a todos",
+  "makeOptional": "Não exigido a todos",
+  "requiredOn": "Agora exigido a todos os funcionários.",
+  "requiredOff": "Já não é exigido a todos."
 }

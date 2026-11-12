@@ -387,7 +387,14 @@
       "siteDays_other": "{{count}} días",
       "noSite": "Sin sitio",
       "backToSites": "Volver a los sitios",
-      "siteDays_many": "{{count}} días"
+      "siteDays_many": "{{count}} días",
+      "viewsLabel": "Vistas de asistencia",
+      "views": {
+        "summary": "Resumen",
+        "log": "Registros",
+        "timesheets": "Partes de horas",
+        "exceptions": "Excepciones"
+      }
     },
     "leave": {
       "empty": "Sin permisos en el último año.",

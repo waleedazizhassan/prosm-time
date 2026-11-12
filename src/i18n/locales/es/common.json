@@ -374,7 +374,12 @@
     "legalNameRequired": "Escribe el nombre legal completo.",
     "clientNameRequired": "Indique el cliente al que pertenece el sitio.",
     "siteTypeNameRequired": "Indique el tipo de sitio.",
-    "invalidSiteProfile": "El propietario o el tipo del sitio no es válido."
+    "invalidSiteProfile": "El propietario o el tipo del sitio no es válido.",
+    "documentNameRequired": "Escriba el nombre del documento.",
+    "documentNameTooLong": "El nombre del documento es demasiado largo.",
+    "legalNameArabic": "El nombre oficial debe estar en árabe, como en el documento de identidad.",
+    "nationalIdRequired": "Escriba el número de documento.",
+    "phoneRequired": "Escriba el número de móvil."
   },
   "pageLoad": {
     "title": "Esta página necesita conexión",

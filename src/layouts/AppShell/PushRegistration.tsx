@@ -16,9 +16,9 @@ export default function PushRegistration() {
   const profileId = profile?.id;
   // Owner 2026-10-20: the same page the bell opens (notificationTarget), for
   // whoever is signed in when the notification is tapped.
-  const viewerRef = useRef({ isOwner: false, canViewEmergencyLog: false });
+  const viewerRef = useRef({ isOwner: false, canViewEmergencyLog: false, canManage: false });
   useEffect(() => {
-    viewerRef.current = { isOwner: Boolean(profile?.isOwner), canViewEmergencyLog: hasPermission("attendance.view") };
+    viewerRef.current = { isOwner: Boolean(profile?.isOwner), canViewEmergencyLog: hasPermission("attendance.view"), canManage: hasPermission("exceptions.manage") };
   });
 
   // Owner 2026-10-28: on the phone the start screen asks for notifications

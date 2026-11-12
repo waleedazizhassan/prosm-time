@@ -259,7 +259,8 @@
       "tough": "辛苦",
       "thanks": "谢谢，已保存。",
       "label": "班次感受"
-    }
+    },
+    "presenceShort": "监控已开启"
   },
   "kioskPin": {
     "title": "考勤机 PIN",

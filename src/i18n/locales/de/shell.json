@@ -165,7 +165,19 @@
       "rejectedBody": "Ihre Zulagen für den {{date}} wurden abgelehnt. Sie können sie bearbeiten und erneut einreichen.",
       "sheetSubmittedBody": "{{name}} hat Zulagen für {{days}} Tage gesendet ({{start}} - {{end}}).",
       "sheetApprovedBody": "Ihre Zulagen für {{start}} - {{end}} wurden genehmigt.",
-      "sheetRejectedBody": "Ihre Zulagen für {{start}} - {{end}} wurden abgelehnt. Korrigieren und erneut senden."
+      "sheetRejectedBody": "Ihre Zulagen für {{start}} - {{end}} wurden abgelehnt. Korrigieren und erneut senden.",
+      "sheetApprovedChangedBody_one": "Ihre Zulagen für {{start}} - {{end}} wurden genehmigt; der Manager hat 1 Position geändert:",
+      "sheetApprovedChangedBody_other": "Ihre Zulagen für {{start}} - {{end}} wurden genehmigt; der Manager hat {{count}} Positionen geändert:",
+      "lines": {
+        "meal": "Verpflegung",
+        "expatriation": "Auslandszulage",
+        "transportation": "Fahrt",
+        "housing": "Unterkunft",
+        "travel": "Reise",
+        "other": "Sonstiges",
+        "overtime": "Überstunden",
+        "extraDays": "Zusatztage"
+      }
     },
     "longSessionCheck": {
       "title": "Noch bei der Arbeit?",
@@ -359,7 +371,10 @@
     "title": "SOS-/Notfallalarm",
     "subtitle": "{{name}} hat gerade einen Notfallalarm ausgelöst.",
     "viewAction": "Notfallprotokoll anzeigen",
-    "dismissAction": "Ausblenden"
+    "dismissAction": "Ausblenden",
+    "locationAction": "Standort zeigen",
+    "silenceAction": "Stumm",
+    "noLocation": "Der Ort des Alarms ist nicht verfügbar."
   },
   "sections": {
     "attendance": "Außendienst",
@@ -478,7 +493,9 @@
     "attendance": "Anwesenheit",
     "allowances": "Zulagen",
     "leave": "Urlaub",
-    "menu": "Menü"
+    "menu": "Menü",
+    "schedule": "Schichten",
+    "myFile": "Meine Akte"
   },
   "exitPrompt": {
     "title": "Sie haben den Standort verlassen",

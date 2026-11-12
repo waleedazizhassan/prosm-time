@@ -374,7 +374,12 @@
     "legalNameRequired": "اكتب الاسم الرباعي كاملًا.",
     "clientNameRequired": "اكتب اسم العميل التابع له الموقع.",
     "siteTypeNameRequired": "اكتب نوع الموقع.",
-    "invalidSiteProfile": "بيانات الجهة أو نوع الموقع غير صحيحة."
+    "invalidSiteProfile": "بيانات الجهة أو نوع الموقع غير صحيحة.",
+    "documentNameRequired": "اكتب اسم المستند.",
+    "documentNameTooLong": "اسم المستند طويل أوي.",
+    "legalNameArabic": "الاسم الرسمي لازم يكون بالعربي، زي ما هو في البطاقة.",
+    "nationalIdRequired": "اكتب الرقم القومي.",
+    "phoneRequired": "اكتب رقم الموبايل."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

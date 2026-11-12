@@ -165,7 +165,20 @@
       "rejectedBody": "Vos indemnités du {{date}} ont été refusées. Vous pouvez les modifier et les renvoyer.",
       "sheetSubmittedBody": "{{name}} a envoyé ses indemnités pour {{days}} jours ({{start}} - {{end}}).",
       "sheetApprovedBody": "Vos indemnités du {{start}} au {{end}} ont été approuvées.",
-      "sheetRejectedBody": "Vos indemnités du {{start}} au {{end}} ont été refusées. Corrigez-les et renvoyez-les."
+      "sheetRejectedBody": "Vos indemnités du {{start}} au {{end}} ont été refusées. Corrigez-les et renvoyez-les.",
+      "sheetApprovedChangedBody_one": "Vos indemnités du {{start}} au {{end}} sont approuvées ; le responsable a modifié 1 ligne :",
+      "sheetApprovedChangedBody_many": "Vos indemnités du {{start}} au {{end}} sont approuvées ; le responsable a modifié {{count}} lignes :",
+      "sheetApprovedChangedBody_other": "Vos indemnités du {{start}} au {{end}} sont approuvées ; le responsable a modifié {{count}} lignes :",
+      "lines": {
+        "meal": "Repas",
+        "expatriation": "Expatriation",
+        "transportation": "Transport",
+        "housing": "Logement",
+        "travel": "Voyage",
+        "other": "Autre",
+        "overtime": "Heures sup.",
+        "extraDays": "Jours supplémentaires"
+      }
     },
     "longSessionCheck": {
       "title": "Toujours au travail ?",
@@ -359,7 +372,10 @@
     "title": "Alerte SOS/Urgence",
     "subtitle": "{{name}} vient de déclencher une alerte d'urgence.",
     "viewAction": "Voir le journal des urgences",
-    "dismissAction": "Ignorer"
+    "dismissAction": "Ignorer",
+    "locationAction": "Voir la position",
+    "silenceAction": "Silence",
+    "noLocation": "La position de l'alerte n'est pas disponible."
   },
   "sections": {
     "attendance": "Opérations terrain",
@@ -483,7 +499,9 @@
     "attendance": "Pointages",
     "allowances": "Indemnités",
     "leave": "Congés",
-    "menu": "Menu"
+    "menu": "Menu",
+    "schedule": "Services",
+    "myFile": "Mon dossier"
   },
   "exitPrompt": {
     "title": "Vous avez quitté le site",

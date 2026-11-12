@@ -1012,3 +1012,26 @@
   font-size: 0.65rem;
   font-variant-numeric: tabular-nums;
 }
+
+/* owner 2026-11-12: the shift ratings follow the card's own width (sidebar open or closed) */
+.moodFrame {
+  container-type: inline-size;
+}
+
+.moodGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+@container (max-width: 860px) {
+  .moodGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container (max-width: 480px) {
+  .moodGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

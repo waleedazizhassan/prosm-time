@@ -4,7 +4,7 @@
   "guides": {
     "gettingStarted": {
       "title": "Per iniziare",
-      "body": "Accedi con l'e-mail e la password impostate dal tuo amministratore. La prima volta (e a ogni modifica) vedi cosa registra PROSM Time e ti viene chiesto di riconoscere l'Informativa sulla privacy e le Condizioni d'uso. Dalla dashboard, Timbra entrata inizia il turno e Timbra uscita lo termina; una mappa mostra la tua posizione e l'area della sede. L'app si apre nella lingua del dispositivo se supportata; puoi cambiarla dal menu utente. I dipendenti aprono la propria pagina iniziale: timbrare entrata e uscita, le ore di oggi, di questa settimana (da domenica) e di questo mese, e i collegamenti a presenze, indennità, fogli ore e ferie. Il titolare, i responsabili e i supervisori aprono la dashboard. Il titolare non timbra."
+      "body": "Accedi con l'e-mail e la password impostate dal tuo amministratore. La prima volta (e a ogni modifica) vedi cosa registra PROSM Time e ti viene chiesto di riconoscere l'Informativa sulla privacy e le Condizioni d'uso. Dalla dashboard, Timbra entrata inizia il turno e Timbra uscita lo termina; una mappa mostra la tua posizione e l'area della sede. L'app si apre nella lingua del dispositivo se supportata; puoi cambiarla dal menu utente. I dipendenti aprono la propria pagina iniziale: timbrare entrata e uscita, le ore di oggi, di questa settimana (da domenica) e di questo mese, e la barra in basso con presenze e ferie (ne Il mio fascicolo) e indennità. Il titolare, i responsabili e i supervisori aprono la dashboard. Il titolare non timbra."
     },
     "attendance": {
       "title": "Timbrare entrata e uscita",
@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Emergenza",
-      "body": "Il pulsante SOS è sulla dashboard durante ogni turno, una volta confermata la timbratura. Invia un allarme prioritario con la tua posizione ai responsabili della sede, al titolare e ai colleghi presenti, e viene registrato nel registro emergenze. SOS non è un servizio di emergenza: non chiama polizia o ambulanza. In emergenza chiama sempre il numero locale. Richiede una connessione internet. Se lavori senza una sede scelta, lo ricevono i responsabili della sede più vicina."
+      "body": "Il pulsante SOS è sulla dashboard durante ogni turno, una volta confermata la timbratura. Invia un allarme prioritario con la tua posizione ai responsabili della sede, al titolare e ai colleghi presenti, e viene registrato nel registro emergenze. SOS non è un servizio di emergenza: non chiama polizia o ambulanza. In emergenza chiama sempre il numero locale. Richiede una connessione internet. Se lavori senza una sede scelta, lo ricevono i responsabili della sede più vicina. Quando ti arriva un SOS, \"Mostra posizione\" apre sulla mappa il punto da cui è stato inviato e \"Silenzia\" ferma la sirena lasciando l'allarme sullo schermo finché non lo chiudi. Il registro emergenze lo vedono solo il titolare e i responsabili."
     },
     "notifications": {
       "title": "Come le notifiche raggiungono la persona giusta",
@@ -32,7 +32,7 @@
     },
     "exceptions": {
       "title": "Verifiche - eccezioni, correzioni, orari offline, posizioni false",
-      "body": "Tutto ciò che richiede una decisione compare nella console del responsabile in «In attesa di verifica»: eccezioni fuori area (con il tuo motivo), richieste di correzione, azioni offline con l'ora del dispositivo e posizioni segnalate come false. Un'eccezione approvata ti considera presente tutto il tempo; respinta, il tempo di lavoro si ferma al momento del primo rilevamento. Le segnalazioni sono informazioni da verificare equamente da una persona, non decisioni automatiche.\n\nNovità: la pagina «Le mie eccezioni» nel menu elenca le tue eccezioni e il loro stato (in revisione, approvata, respinta) e permette di inviare il motivo."
+      "body": "Tutto ciò che richiede una decisione compare nella console del responsabile in «In attesa di verifica»: eccezioni fuori area (con il tuo motivo), richieste di correzione, azioni offline con l'ora del dispositivo e posizioni segnalate come false. Un'eccezione approvata ti considera presente tutto il tempo; respinta, il tempo di lavoro si ferma al momento del primo rilevamento. Le segnalazioni sono informazioni da verificare equamente da una persona, non decisioni automatiche.\n\nNovità: Il mio fascicolo → Presenze → Eccezioni elenca le tue eccezioni e il loro stato (in revisione, approvata, respinta) e permette di inviare il motivo."
     },
     "allowances": {
       "title": "Indennità",
@@ -48,7 +48,7 @@
     },
     "sites": {
       "title": "Sedi (amministratori)",
-      "body": "In Sedi si creano i luoghi di lavoro e si assegnano le persone. Per aggiungere una sede servono solo il nome, la posizione - mettiti lì e premi Usa la mia posizione attuale -, il raggio e se serve una foto; il resto è in Altre opzioni. Una nuova sede prende il fuso orario del tuo dispositivo. Il ruolo nella sede parte dal ruolo nell'organizzazione. Tutto il resto di una sede si imposta nella sua pagina, in Regole della sede: margine GPS, orari dei turni, straordinari e trattenute per ritardo, arrotondamento delle pause, monitoraggio della presenza, dipendenti esentati e blocchi self-service. Nel modulo della sede indica a chi appartiene - all'azienda o a un cliente (scrivi il nome del cliente; i nomi già usati vengono suggeriti) - e di che tipo è: ufficio, magazzino, cantiere, fabbrica, negozio / filiale o un altro tipo che indichi."
+      "body": "In Sedi si creano i luoghi di lavoro e si assegnano le persone. Per aggiungere una sede servono solo il nome, la posizione - mettiti lì e premi Usa la mia posizione attuale -, il raggio e se serve una foto; il resto è in Altre opzioni. Una nuova sede prende il fuso orario del tuo dispositivo. Il ruolo nella sede parte dal ruolo nell'organizzazione. Tutto il resto di una sede si imposta nella sua pagina, in Regole della sede: margine GPS, orari dei turni, straordinari e trattenute per ritardo, arrotondamento delle pause, monitoraggio della presenza, dipendenti esentati e blocchi self-service. Nel modulo della sede indica a chi appartiene - all'azienda o a un cliente (scrivi il nome del cliente; i nomi già usati vengono suggeriti) - e di che tipo è: ufficio, magazzino, cantiere, fabbrica, negozio / filiale o un altro tipo che indichi. Se qualcuno ti ha inviato la posizione, incolla il link (Google Maps, anche quelli brevi) o le coordinate in \"Oppure incolla un link della posizione\" e premi \"Usa il link\"."
     },
     "workers": {
       "title": "Lavoratori esterni",
@@ -180,7 +180,7 @@
     },
     "myFile": {
       "title": "Il mio fascicolo",
-      "body": "Menu → Il mio fascicolo mostra dati, contratto, documenti, richiami e incentivi, presenze e ferie. Solo lettura: chiedi al personale di modificare i dati."
+      "body": "Menu → Il mio fascicolo mostra dati, contratto, documenti, richiami e incentivi, presenze e ferie. Solo lettura: chiedi al personale di modificare i dati. La scheda Presenze de Il mio fascicolo è l'unico posto delle tue presenze: Riepilogo (ultimi 30 giorni per sede), Registrazioni (ogni timbratura in dettaglio, il mese e la stampa), Fogli ore (richiederne uno e vedere i tuoi) ed Eccezioni (i momenti fuori da un'area che richiedono il tuo motivo). Il pulsante Presenze in basso la apre. Le pagine Presenze e Fogli ore del menu ora sono quelle del team, per i responsabili."
     },
     "myDocuments": {
       "title": "I miei documenti",
@@ -196,7 +196,7 @@
     },
     "documentsAdmin": {
       "title": "Documenti dei dipendenti",
-      "body": "Impostazioni → Persone → Documenti dei dipendenti: i documenti richiesti, scadenza, promemoria e cosa succede alla timbratura dopo la scadenza. Menu → Documenti mostra scaduti, in scadenza, mancanti e da verificare; sollecita con un tocco o esporta CSV."
+      "body": "Dal fascicolo di una persona → Documenti premi \"Aggiungi documento\": nome (o uno già usato), numero, data di inizio, data di fine se c'è, e una foto o un PDF - è subito valido. Un documento con data di fine cambia stato da solo: valido, in scadenza, scaduto, e arriva un promemoria 30 e 7 giorni prima e il giorno stesso. Menu → Documenti mostra soltanto: scaduti, in scadenza, mancanti e da verificare, con esportazione CSV; ogni riga apre il fascicolo della persona. Aggiungendolo (o su qualsiasi documento) puoi renderlo \"richiesto a tutti\": ogni fascicolo lo riceve come mancante e, con una data di fine, puoi scegliere \"Nessuna timbratura dopo la scadenza\"."
     },
     "bylaw": {
       "title": "Regolamento sanzioni",

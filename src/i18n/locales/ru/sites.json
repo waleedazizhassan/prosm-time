@@ -93,7 +93,11 @@
     "siteTypeLabel": "Тип объекта",
     "siteTypeOtherLabel": "Укажите тип объекта",
     "clientNameRequired": "Укажите клиента, которому принадлежит объект.",
-    "siteTypeOtherRequired": "Укажите тип объекта."
+    "siteTypeOtherRequired": "Укажите тип объекта.",
+    "mapLinkLabel": "Или вставьте ссылку на место",
+    "mapLinkPlaceholder": "Ссылка Google Карт или координаты",
+    "mapLinkAction": "Использовать ссылку",
+    "mapLinkUnreadable": "Не удалось прочитать место из этой ссылки. Откройте её в Google Картах и скопируйте показанные координаты или полную ссылку."
   },
   "detail": {
     "backToList": "Назад к объектам",

@@ -256,7 +256,12 @@
     "legalNameMissing": "Manca il nome ufficiale",
     "notInPayroll": "Questa persona non è nelle paghe (il titolare non riceve stipendio).",
     "insuranceCategory": "Categoria previdenziale",
-    "insuranceCategoryDefault": "Categoria predefinita"
+    "insuranceCategoryDefault": "Categoria predefinita",
+    "insuranceLabel": "Previdenza",
+    "insured": "Assicurato",
+    "taxLabel": "Imposta",
+    "taxed": "Soggetto a imposta",
+    "legalNameEditInFile": "Modifica nel fascicolo"
   },
   "installments": {
     "title": "Rate e anticipi",
@@ -438,7 +443,8 @@
     "allAsked": "Hai richiesto tutti i mesi pubblicati - riceverai risposta.",
     "askBodyBoth": "Scegli il mese. La richiesta va al responsabile paghe; all'invio ricevi una notifica e un'e-mail, e il cedolino compare qui.",
     "whichMonth": "Mese",
-    "rejectedReason": "Motivo: {{reason}}"
+    "rejectedReason": "Motivo: {{reason}}",
+    "nothingPublished": "Non è ancora stato pubblicato alcun cedolino per te. Quando un ciclo paghe viene chiuso e pubblicato, potrai richiederlo qui."
   },
   "errors": {
     "generic": "Qualcosa è andato storto. Riprova.",

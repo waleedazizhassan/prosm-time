@@ -20,6 +20,7 @@ import { legalNameProblem, nameMustBeArabic } from "./payrollUi";
 import usePayrollDigits from "./usePayrollDigits";
 import TaxConfigRepository from "../../core/repositories/TaxConfigRepository";
 import SuccessText from "../../components/common/SuccessText";
+import EmployeeRepository from "../../core/repositories/EmployeeRepository";
 
 const today = () => new Date().toISOString().slice(0, 10);
 const firstOfMonth = () => {
@@ -149,6 +150,15 @@ export default function PayrollProfilesPage({ embedUserId }: { embedUserId?: str
       changes.push({ id: c.id, name: label(c), amount: c.calc_type === "amount" ? parsed : null, percent: c.calc_type === "percent" ? parsed : null });
     }
     setBusy("save-all");
+    // owner 2026-11-12: the official name lives in the person's file - a card without one fills it there once
+    if (!editing.profile?.legal_name) {
+      const filed = await EmployeeRepository.setLegalName(editing.userId, legalName);
+      if (!filed.success) {
+        setBusy("");
+        setSaveError(payrollError(filed.message, t));
+        return;
+      }
+    }
     const profile = await PayrollCycleRepository.saveProfile(editing.userId, {
       legal_name: legalName, employee_code: form.employee_code, currency: form.currency.toUpperCase() || null, start_date: form.start_date || null, end_date: form.end_date || null,
       is_active: form.is_active, notes: form.notes, insurance_exempt: form.insurance_exempt, insurable_wage: insurable, tax_exempt: form.tax_exempt,
@@ -293,10 +303,21 @@ export default function PayrollProfilesPage({ embedUserId }: { embedUserId?: str
             {saveError ? <div ref={(el) => el?.scrollIntoView({ block: "nearest" })}><ErrorText>{saveError}</ErrorText></div> : null}
             {saved ? <SuccessText>{t("profiles.savedAll")}</SuccessText> : null}
 
-            <Input label={nameInArabic ? t("profiles.legalNameArabicLabel") : t("profiles.legalNameLabel")} name="profileLegalName" required
-              value={form.legal_name} onChange={(event) => setForm({ ...form, legal_name: event.target.value })}
-              helperText={t("profiles.legalNameHint", { user: editing.fullName })}
-              error={form.legal_name.trim() && legalNameProblem(form.legal_name.trim(), nameInArabic) ? t(`errors.${legalNameProblem(form.legal_name.trim(), nameInArabic)}`) : undefined} />
+            {/* owner 2026-11-12: the official name is given once (the invitation or the person's file) and follows here */}
+            {editing.profile?.legal_name ? (
+              <p style={{ margin: "0 0 var(--space-2)" }}>
+                <span style={{ display: "block", fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{nameInArabic ? t("profiles.legalNameArabicLabel") : t("profiles.legalNameLabel")}</span>
+                <strong>{editing.profile.legal_name}</strong>{" "}
+                <button type="button" onClick={() => navigate(`/people/${editing.userId}`)} style={{ border: 0, background: "none", color: "var(--text-link)", cursor: "pointer", font: "inherit", fontSize: "var(--font-sm)" }}>
+                  {t("profiles.legalNameEditInFile")}
+                </button>
+              </p>
+            ) : (
+              <Input label={nameInArabic ? t("profiles.legalNameArabicLabel") : t("profiles.legalNameLabel")} name="profileLegalName" required
+                value={form.legal_name} onChange={(event) => setForm({ ...form, legal_name: event.target.value })}
+                helperText={t("profiles.legalNameHint", { user: editing.fullName })}
+                error={form.legal_name.trim() && legalNameProblem(form.legal_name.trim(), nameInArabic) ? t(`errors.${legalNameProblem(form.legal_name.trim(), nameInArabic)}`) : undefined} />
+            )}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(10rem, 1fr))", gap: "var(--space-2)" }}>
               <Input label={t("doc.code")} name="profileCode" value={form.employee_code} onChange={(event) => setForm({ ...form, employee_code: event.target.value })} />
               <Input label={t("profiles.applyFromDate")} name="valuesFrom" type="date" value={valuesFrom} onChange={(event) => setValuesFrom(event.target.value)}
@@ -326,12 +347,17 @@ export default function PayrollProfilesPage({ embedUserId }: { embedUserId?: str
 
             <h4 style={{ margin: "var(--space-3) 0 var(--space-1)" }}>{t("profiles.statutoryTitle")}</h4>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-3)", alignItems: "flex-end" }}>
-              <label style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}>
-                <input type="checkbox" checked={form.insurance_exempt} onChange={(event) => setForm({ ...form, insurance_exempt: event.target.checked })} /> {t("profiles.insuranceExempt")}
-              </label>
-              <label style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}>
-                <input type="checkbox" checked={form.tax_exempt} onChange={(event) => setForm({ ...form, tax_exempt: event.target.checked })} /> {t("profiles.taxExempt")}
-              </label>
+              {/* owner 2026-11-12: insured or not, taxed or not - said in words, not by an unchecked box */}
+              <div style={{ maxWidth: 220 }}>
+                <Select label={t("profiles.insuranceLabel")} name="insuranceStatus" value={form.insurance_exempt ? "no" : "yes"}
+                  onChange={(event) => setForm({ ...form, insurance_exempt: event.target.value === "no" })}
+                  options={[{ value: "yes", label: t("profiles.insured") }, { value: "no", label: t("profiles.insuranceExempt") }]} />
+              </div>
+              <div style={{ maxWidth: 220 }}>
+                <Select label={t("profiles.taxLabel")} name="taxStatus" value={form.tax_exempt ? "no" : "yes"}
+                  onChange={(event) => setForm({ ...form, tax_exempt: event.target.value === "no" })}
+                  options={[{ value: "yes", label: t("profiles.taxed") }, { value: "no", label: t("profiles.taxExempt") }]} />
+              </div>
               {!form.insurance_exempt && categories.length > 1 ? (
                 <div style={{ maxWidth: 240 }}>
                   <Select label={t("profiles.insuranceCategory")} name="insuranceCategory" value={form.insurance_category} onChange={(event) => setForm({ ...form, insurance_category: event.target.value })}

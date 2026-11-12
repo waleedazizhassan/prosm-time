@@ -165,7 +165,20 @@
       "rejectedBody": "Le tue indennità del {{date}} sono state rifiutate. Puoi modificarle e inviarle di nuovo.",
       "sheetSubmittedBody": "{{name}} ha inviato le indennità di {{days}} giorni ({{start}} - {{end}}).",
       "sheetApprovedBody": "Le tue indennità dal {{start}} al {{end}} sono state approvate.",
-      "sheetRejectedBody": "Le tue indennità dal {{start}} al {{end}} sono state rifiutate. Correggile e inviale di nuovo."
+      "sheetRejectedBody": "Le tue indennità dal {{start}} al {{end}} sono state rifiutate. Correggile e inviale di nuovo.",
+      "sheetApprovedChangedBody_one": "Le tue indennità dal {{start}} al {{end}} sono approvate; il responsabile ha modificato 1 voce:",
+      "sheetApprovedChangedBody_many": "Le tue indennità dal {{start}} al {{end}} sono approvate; il responsabile ha modificato {{count}} voci:",
+      "sheetApprovedChangedBody_other": "Le tue indennità dal {{start}} al {{end}} sono approvate; il responsabile ha modificato {{count}} voci:",
+      "lines": {
+        "meal": "Pasto",
+        "expatriation": "Trasferta estera",
+        "transportation": "Trasporto",
+        "housing": "Alloggio",
+        "travel": "Viaggio",
+        "other": "Altro",
+        "overtime": "Straordinari",
+        "extraDays": "Giorni extra"
+      }
     },
     "longSessionCheck": {
       "title": "Stai ancora lavorando?",
@@ -359,7 +372,10 @@
     "title": "Allarme SOS/Emergenza",
     "subtitle": "{{name}} ha appena attivato un allarme di emergenza.",
     "viewAction": "Vedi registro emergenze",
-    "dismissAction": "Ignora"
+    "dismissAction": "Ignora",
+    "locationAction": "Mostra posizione",
+    "silenceAction": "Silenzia",
+    "noLocation": "La posizione dell'allarme non è disponibile."
   },
   "sections": {
     "attendance": "Operatività sul campo",
@@ -483,7 +499,9 @@
     "attendance": "Presenze",
     "allowances": "Indennità",
     "leave": "Ferie",
-    "menu": "Menu"
+    "menu": "Menu",
+    "schedule": "Turni",
+    "myFile": "Fascicolo"
   },
   "exitPrompt": {
     "title": "Hai lasciato la sede",

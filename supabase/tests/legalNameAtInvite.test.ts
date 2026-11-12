@@ -24,3 +24,22 @@ describe("legal name at the invitation", () => {
     expect(card.legal_name).toBe("أميرة عادل محمد حسن");
   });
 });
+
+// owner 2026-11-12: one place - the file's name wins on the salary card, and Arabic is checked where it is given
+describe("legal name in one place", () => {
+  it("the card always takes the file's name; an Arab payroll refuses a Latin name at once", async () => {
+    const t = await buildDatabase();
+    expect(t.failures).toEqual([]);
+    const org = await createOrg(t, "One Name Co");
+    const amira = await addMember(t, org, "employee", "Amira");
+    expect((await t.as(org.owner.authId, "select public.set_prosm_time_user_legal_name($1, 'أميرة عادل محمد حسن')", [amira.userId])).error).toBeNull();
+    // typed differently on the card: the file's name stays
+    expect((await t.as(org.owner.authId, "select public.save_prosm_time_payroll_profile($1, $2)", [amira.userId, JSON.stringify({ currency: "EGP", legal_name: "اسم آخر تماما" })])).error).toBeNull();
+    const [card] = await t.su<{ legal_name: string }>("select legal_name from payroll_profiles where user_id = $1", [amira.userId]);
+    expect(card.legal_name).toBe("أميرة عادل محمد حسن");
+    const [hasSettings] = await t.su<{ n: number }>("select count(*)::int as n from payroll_settings where organization_id = $1", [org.id]);
+    if (hasSettings.n > 0) {
+      expect((await t.as(org.owner.authId, "select public.set_prosm_time_user_legal_name($1, 'Amira Adel Mohamed')", [amira.userId])).error).toMatch(/ARABIC/);
+    }
+  });
+});

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import SiteRepository, { SITE_TYPES, type Site, type KioskMode, type SiteOwnerKind, type SiteType } from "../../core/repositories/SiteRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import { getCurrentPosition, haversineDistanceMeters } from "../../core/utils/geo";
+import { parseMapLink } from "../../core/utils/mapLink";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import Modal from "../../components/common/Modal";
@@ -80,6 +81,9 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site, defaultK
   const [knownClients, setKnownClients] = useState<string[]>([]);
 
   const [locating, setLocating] = useState(false);
+  // owner 2026-11-12: a map link someone sent (or the coordinates) becomes the site's location
+  const [mapLink, setMapLink] = useState("");
+  const [readingLink, setReadingLink] = useState(false);
   const [locationError, setLocationError] = useState("");
   const [testResult, setTestResult] = useState<{ distanceMeters: number; within: boolean } | null>(null);
 
@@ -119,6 +123,26 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site, defaultK
     } finally {
       setLocating(false);
     }
+  };
+
+  const handleUseMapLink = async () => {
+    setLocationError("");
+    setTestResult(null);
+    let found = parseMapLink(mapLink);
+    if (found === "short") {
+      setReadingLink(true);
+      const opened = await SiteRepository.resolveMapLink(mapLink.trim());
+      setReadingLink(false);
+      found = opened ? parseMapLink(opened) : null;
+      if (found === "short") found = null;
+    }
+    if (!found) {
+      setLocationError(t("form.mapLinkUnreadable"));
+      return;
+    }
+    setLatitude(String(found.latitude));
+    setLongitude(String(found.longitude));
+    setMapLink("");
   };
 
   const handleTestLocation = async () => {
@@ -219,6 +243,15 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site, defaultK
           </Button>
           <Button type="button" variant="ghost" size="sm" onClick={handleTestLocation} loading={locating} disabled={submitting || !latitude || !longitude}>
             {t("form.testLocationAction")}
+          </Button>
+        </div>
+        <div style={{ display: "flex", gap: "var(--space-2)", alignItems: "flex-end", flexWrap: "wrap", marginTop: "var(--space-2)" }}>
+          <div style={{ flex: "1 1 14rem", minWidth: 0 }}>
+            <Input label={t("form.mapLinkLabel")} name="siteMapLink" value={mapLink} placeholder={t("form.mapLinkPlaceholder")}
+              onChange={(event) => setMapLink(event.target.value)} disabled={submitting || readingLink} />
+          </div>
+          <Button type="button" size="sm" variant="ghost" onClick={() => void handleUseMapLink()} loading={readingLink} disabled={submitting || !mapLink.trim()}>
+            {t("form.mapLinkAction")}
           </Button>
         </div>
         <p style={{ margin: "6px 0 0", fontSize: "var(--font-xs)", color: latitude && longitude ? "var(--status-success-text)" : "var(--text-secondary)" }}>

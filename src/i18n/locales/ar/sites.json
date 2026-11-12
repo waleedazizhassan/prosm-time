@@ -93,7 +93,11 @@
     "siteTypeLabel": "نوع الموقع",
     "siteTypeOtherLabel": "اكتب نوع الموقع",
     "clientNameRequired": "اكتب اسم العميل التابع له الموقع.",
-    "siteTypeOtherRequired": "اكتب نوع الموقع."
+    "siteTypeOtherRequired": "اكتب نوع الموقع.",
+    "mapLinkLabel": "أو الصق رابط الموقع",
+    "mapLinkPlaceholder": "رابط خرائط جوجل أو الإحداثيات",
+    "mapLinkAction": "استخدم الرابط",
+    "mapLinkUnreadable": "مقدرناش نقرا مكان من الرابط ده. افتحه في خرائط جوجل وانسخ الإحداثيات اللي بتظهر تحت، أو الرابط الكامل."
   },
   "detail": {
     "backToList": "العودة إلى المواقع",

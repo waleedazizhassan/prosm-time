@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -102,7 +102,6 @@ export default function DocumentsPage() {
     <PageShell title={t("pageTitle")} subtitle={data ? t("completeLine", { percent: data.completePercent }) : undefined}
       actions={(
         <>
-          <Button size="sm" variant="ghost" onClick={() => navigate("/settings?tab=people")}>{t("typesLink")}</Button>
           <Button size="sm" variant="ghost" onClick={() => void exportCsv()} disabled={!rows.length}>{t("export")}</Button>
         </>
       )}>
@@ -128,6 +127,7 @@ export default function DocumentsPage() {
           emptyMessage={view === "action" ? t("nothingToDo") : t("noDocuments")}
           onRowClick={(r) => navigate(`/people/${r.userId}?tab=documents`)} />
       </Card>
+      {/* owner 2026-11-12: this page only shows; documents are added from each person's file */}
     </PageShell>
   );
 }

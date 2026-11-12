@@ -4,7 +4,7 @@
   "guides": {
     "gettingStarted": {
       "title": "Primeiros passos",
-      "body": "Entre com o e-mail e a senha que o seu administrador configurou para você. Na primeira vez (e sempre que mudarem), você vê o que o PROSM Time registra sobre você e precisa aceitar a Política de Privacidade e os Termos de Uso. No Painel, use Registrar entrada para começar o turno e Registrar saída para terminá-lo - um mapa ao vivo mostra sua posição atual e, quando for o caso, a área de trabalho do local. O app abre no idioma do seu dispositivo quando é um dos nove disponíveis; você pode mudá-lo quando quiser no menu do usuário. Funcionários abrem a própria página inicial: registrar entrada e saída, suas horas de hoje, desta semana (a partir de domingo) e deste mês, e links para frequência, adicionais, folhas de ponto e afastamentos. O proprietário, os gestores e os supervisores abrem o Painel. O proprietário não registra ponto."
+      "body": "Entre com o e-mail e a senha que o seu administrador configurou para você. Na primeira vez (e sempre que mudarem), você vê o que o PROSM Time registra sobre você e precisa aceitar a Política de Privacidade e os Termos de Uso. No Painel, use Registrar entrada para começar o turno e Registrar saída para terminá-lo - um mapa ao vivo mostra sua posição atual e, quando for o caso, a área de trabalho do local. O app abre no idioma do seu dispositivo quando é um dos nove disponíveis; você pode mudá-lo quando quiser no menu do usuário. Funcionários abrem a própria página inicial: registrar entrada e saída, suas horas de hoje, desta semana (a partir de domingo) e deste mês, e a barra em baixo com a assiduidade e as férias (em A minha ficha) e os subsídios. O proprietário, os gestores e os supervisores abrem o Painel. O proprietário não registra ponto."
     },
     "attendance": {
       "title": "Registrar entrada e saída",
@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Emergência",
-      "body": "O botão SOS fica no Painel em todo turno, depois que sua entrada é confirmada. Ao tocá-lo, um alerta de alta prioridade com sua localização vai para os gestores do seu local, o proprietário e os colegas com ponto aberto no mesmo local, e fica no Registro de emergências. O SOS não é um serviço de emergência - não chama a polícia nem uma ambulância. Em uma emergência, ligue sempre para o número de emergência local. Ele precisa de internet. Se você trabalha sem local escolhido, os gestores do local mais próximo recebem o alerta."
+      "body": "O botão SOS fica no Painel em todo turno, depois que sua entrada é confirmada. Ao tocá-lo, um alerta de alta prioridade com sua localização vai para os gestores do seu local, o proprietário e os colegas com ponto aberto no mesmo local, e fica no Registro de emergências. O SOS não é um serviço de emergência - não chama a polícia nem uma ambulância. Em uma emergência, ligue sempre para o número de emergência local. Ele precisa de internet. Se você trabalha sem local escolhido, os gestores do local mais próximo recebem o alerta. Quando lhe chega um SOS, \"Ver localização\" abre no mapa o local de onde foi enviado e \"Silenciar\" para a sirene, deixando o alerta no ecrã até o fechar. O registo de emergências só aparece ao proprietário e aos gestores."
     },
     "notifications": {
       "title": "Como as notificações chegam à pessoa certa",
@@ -32,7 +32,7 @@
     },
     "exceptions": {
       "title": "Análises - exceções, correções, horários offline e localizações falsas",
-      "body": "Tudo o que precisa da decisão de um gestor aparece no Console do gestor, em Aguardando análise: exceções fora da área (com o seu motivo), pedidos de correção, ações registradas offline com o horário do dispositivo e localizações apontadas como falsas. Se uma exceção é aprovada, você é considerado presente o tempo todo. Se é rejeitada, o tempo efetivamente trabalhado é limitado ao momento em que a situação foi detectada pela primeira vez. Os alertas são informação para uma pessoa analisar com justiça - não decisões automáticas.\n\nNovo: a página «Minhas exceções» no menu lista suas exceções e a situação de cada uma (em revisão, aprovada, rejeitada) e permite enviar seu motivo."
+      "body": "Tudo o que precisa da decisão de um gestor aparece no Console do gestor, em Aguardando análise: exceções fora da área (com o seu motivo), pedidos de correção, ações registradas offline com o horário do dispositivo e localizações apontadas como falsas. Se uma exceção é aprovada, você é considerado presente o tempo todo. Se é rejeitada, o tempo efetivamente trabalhado é limitado ao momento em que a situação foi detectada pela primeira vez. Os alertas são informação para uma pessoa analisar com justiça - não decisões automáticas.\n\nNovo: A minha ficha → Assiduidade → Exceções lista suas exceções e a situação de cada uma (em revisão, aprovada, rejeitada) e permite enviar seu motivo."
     },
     "allowances": {
       "title": "Adicionais",
@@ -48,7 +48,7 @@
     },
     "sites": {
       "title": "Locais (administradores)",
-      "body": "Em Locais você configura os locais de trabalho e atribui as pessoas. Para adicionar um local basta um nome, a localização - fique lá e toque em Usar minha localização atual -, o raio e se a foto é exigida; todo o resto fica em Mais opções. Um novo local usa o fuso horário do seu dispositivo. Ao atribuir alguém, a função no local parte da função na organização - um gestor ou supervisor passa a ser gestor do local, para ver as pessoas dele. Todo o resto de um local fica na página dele, em Regras do local: tolerância de GPS, horário do turno, horários de hora extra e de desconto por atraso, arredondamento de intervalos, controle de presença contínuo, funcionários dispensados e os bloqueios de autoatendimento (quando o atraso começa a contar, saída fora da área de trabalho, entrada fora da área de trabalho). No formulário do local, indique a quem pertence - à empresa ou a um cliente (escreva o nome do cliente; os nomes já usados são sugeridos) - e de que tipo é: escritório, armazém, obra, fábrica, loja / filial ou outro tipo que indicar."
+      "body": "Em Locais você configura os locais de trabalho e atribui as pessoas. Para adicionar um local basta um nome, a localização - fique lá e toque em Usar minha localização atual -, o raio e se a foto é exigida; todo o resto fica em Mais opções. Um novo local usa o fuso horário do seu dispositivo. Ao atribuir alguém, a função no local parte da função na organização - um gestor ou supervisor passa a ser gestor do local, para ver as pessoas dele. Todo o resto de um local fica na página dele, em Regras do local: tolerância de GPS, horário do turno, horários de hora extra e de desconto por atraso, arredondamento de intervalos, controle de presença contínuo, funcionários dispensados e os bloqueios de autoatendimento (quando o atraso começa a contar, saída fora da área de trabalho, entrada fora da área de trabalho). No formulário do local, indique a quem pertence - à empresa ou a um cliente (escreva o nome do cliente; os nomes já usados são sugeridos) - e de que tipo é: escritório, armazém, obra, fábrica, loja / filial ou outro tipo que indicar. Se alguém lhe enviou a localização, cole a ligação (Google Maps, incluindo as curtas) ou as coordenadas em \"Ou cole uma ligação da localização\" e prima \"Usar a ligação\"."
     },
     "workers": {
       "title": "Trabalhadores externos",
@@ -180,7 +180,7 @@
     },
     "myFile": {
       "title": "Minha ficha",
-      "body": "Menu → Minha ficha mostra seus dados, contrato, documentos, advertências e incentivos, presença e férias. Somente leitura: peça ao RH para alterar seus dados."
+      "body": "Menu → Minha ficha mostra seus dados, contrato, documentos, advertências e incentivos, presença e férias. Somente leitura: peça ao RH para alterar seus dados. O separador Assiduidade de A minha ficha é o único lugar da sua assiduidade: Resumo (últimos 30 dias por local), Registos (cada picagem em detalhe, o mês e a impressão), Folhas de horas (pedir uma e ver as suas) e Exceções (os momentos fora de uma área que precisam do seu motivo). O botão Assiduidade em baixo abre-o. As páginas Assiduidade e Folhas de horas do menu são agora as da equipa, para os gestores."
     },
     "myDocuments": {
       "title": "Meus documentos",
@@ -196,7 +196,7 @@
     },
     "documentsAdmin": {
       "title": "Documentos dos funcionários",
-      "body": "Configurações → Pessoas → Documentos dos funcionários: quais documentos cada pessoa precisa, vencimento, lembretes e o que acontece no ponto após vencer. Menu → Documentos mostra vencidos, a vencer, faltando e para revisar; lembre com um toque ou exporte CSV."
+      "body": "Na ficha de uma pessoa → Documentos prima \"Adicionar documento\": nome (ou um já usado), número, data de início, data de fim se tiver, e uma foto ou PDF - fica válido de imediato. Um documento com data de fim muda de estado sozinho: válido, a expirar, expirado, e chega um lembrete 30 e 7 dias antes e no próprio dia. Menu → Documentos só mostra: o expirado, a expirar, em falta e por rever, com exportação CSV; cada linha abre a ficha da pessoa. Ao adicionar (ou em qualquer documento) pode torná-lo \"exigido a todos\": cada ficha recebe-o como em falta e, com data de fim, pode escolher \"Sem picar o ponto depois de expirar\"."
     },
     "bylaw": {
       "title": "Regulamento de penalidades",

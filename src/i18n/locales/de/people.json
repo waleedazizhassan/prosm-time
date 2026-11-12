@@ -386,7 +386,14 @@
       "siteDays_one": "{{count}} Tag",
       "siteDays_other": "{{count}} Tage",
       "noSite": "Ohne Standort",
-      "backToSites": "Zurück zu den Standorten"
+      "backToSites": "Zurück zu den Standorten",
+      "viewsLabel": "Ansichten der Anwesenheit",
+      "views": {
+        "summary": "Übersicht",
+        "log": "Einträge",
+        "timesheets": "Stundenzettel",
+        "exceptions": "Ausnahmen"
+      }
     },
     "leave": {
       "empty": "Kein Urlaub im letzten Jahr.",

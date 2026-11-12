@@ -374,7 +374,12 @@
     "legalNameRequired": "Inserisci il nome legale completo.",
     "clientNameRequired": "Indica il cliente a cui appartiene la sede.",
     "siteTypeNameRequired": "Indica il tipo di sede.",
-    "invalidSiteProfile": "Appartenenza o tipo della sede non valido."
+    "invalidSiteProfile": "Appartenenza o tipo della sede non valido.",
+    "documentNameRequired": "Scrivi il nome del documento.",
+    "documentNameTooLong": "Il nome del documento è troppo lungo.",
+    "legalNameArabic": "Il nome ufficiale deve essere in arabo, come sul documento.",
+    "nationalIdRequired": "Scrivi il numero del documento.",
+    "phoneRequired": "Scrivi il numero di cellulare."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

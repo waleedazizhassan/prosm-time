@@ -262,7 +262,8 @@
       "tough": "Tough",
       "thanks": "Thanks - your answer was saved.",
       "label": "How the shift felt"
-    }
+    },
+    "presenceShort": "Monitoring on"
   },
   "kioskPin": {
     "title": "Kiosk PIN",

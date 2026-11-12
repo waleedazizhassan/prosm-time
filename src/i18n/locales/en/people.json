@@ -386,7 +386,14 @@
       "siteDays_one": "{{count}} day",
       "siteDays_other": "{{count}} days",
       "noSite": "No site",
-      "backToSites": "Back to sites"
+      "backToSites": "Back to sites",
+      "viewsLabel": "Attendance views",
+      "views": {
+        "summary": "Summary",
+        "log": "Records",
+        "timesheets": "Timesheets",
+        "exceptions": "Exceptions"
+      }
     },
     "leave": {
       "empty": "No leave in the last year.",

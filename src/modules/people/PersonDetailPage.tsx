@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import AttendanceLogPage from "../attendance/AttendanceLogPage";
 import BuzzButton from "../../components/common/BuzzButton";
 import styles from "./PersonDetailPage.module.css";
 import { useTranslation } from "react-i18next";
@@ -329,6 +330,7 @@ export default function PersonDetailPage() {
   ];
   const requested = searchParams.get("tab") as ProfileTab | null;
   const tab: ProfileTab = requested && tabs.some((x) => x.key === requested) ? requested : "data";
+  const attendanceView: "summary" | "log" = searchParams.get("view") === "log" ? "log" : "summary";
   const chooseTab = (next: ProfileTab) => setSearchParams((params) => {
     if (next === "data") params.delete("tab");
     else params.set("tab", next);
@@ -353,7 +355,20 @@ export default function PersonDetailPage() {
       {hr && tab === "contract" && !tabs.find((x) => x.key === tab)?.locked ? <ContractsTab profile={hr} onSaved={() => void reloadHr()} /> : null}
       {hr && tab === "documents" && allows("documents") ? <ProfileDocumentsTab profile={hr} onChanged={() => void reloadHr()} /> : null}
       {userId && tab === "payroll" && allows("payroll") ? <PayrollProfilesPage embedUserId={userId} /> : null}
-      {userId && tab === "attendance" ? <AttendanceTab userId={userId} /> : null}
+      {/* review 2026-11-12: the person's every record here too, not only the summary (no trip to the team log) */}
+      {userId && tab === "attendance" ? (
+        <>
+          <div role="tablist" aria-label={t("profile.attendance.viewsLabel")} style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)", margin: "0 0 var(--space-3)" }}>
+            {(["summary", "log"] as const).map((v) => (
+              <Button key={v} size="sm" role="tab" aria-selected={attendanceView === v} variant={attendanceView === v ? "primary" : "ghost"}
+                onClick={() => setSearchParams((params) => { params.set("tab", "attendance"); if (v === "summary") params.delete("view"); else params.set("view", v); return params; }, { replace: true })}>
+                {t(`profile.attendance.views.${v}`)}
+              </Button>
+            ))}
+          </div>
+          {attendanceView === "summary" ? <AttendanceTab userId={userId} /> : <AttendanceLogPage embedded selfUserId={userId} />}
+        </>
+      ) : null}
       {userId && tab === "leave" ? (
         <LeaveTab userId={userId}>
       {canEditLeaveEntitlement ? (
