@@ -202,6 +202,10 @@ export function localizePush(type: string, data: Data, language: string, fallbac
         ? pair("payslip.inAppTitle", "payslip.inAppBody", { cycle: data.cycleTitle ?? "" })
         : pair("payslip.sentTitle", "payslip.sentBody", { cycle: data.cycleTitle ?? "" });
       break;
+    // owner 2026-11-12: a payslip request declined, with its reason
+    case "payslip_rejected":
+      result = pair("payslip.rejectedTitle", "payslip.rejectedBody", { cycle: data.cycleTitle ?? "", reason: data.reason ?? "" });
+      break;
     case "payslip_send_failed":
       result = pair("payslip.failedTitle", "payslip.failedBody", { cycle: data.cycleTitle ?? "" });
       break;
