@@ -368,7 +368,7 @@
     "restored": "Voce ripristinata."
   },
   "requests": {
-    "hint": "Buste paga richieste dal tuo team. Un clic invia la busta paga approvata e salvata in PDF all'email registrata: stessa versione, nulla ricalcolato.",
+    "hint": "Cedolini richiesti dal tuo team. Apri una richiesta: anteprima del cedolino approvato, poi invio (notifica e PDF via e-mail, stessa versione) o rifiuto motivato.",
     "employee": "Dipendente",
     "cycle": "Ciclo",
     "asked": "Richiesta",
@@ -377,7 +377,8 @@
     "statuses": {
       "pending": "In attesa",
       "sent": "Inviata",
-      "failed": "Non riuscita"
+      "failed": "Non riuscita",
+      "rejected": "Rifiutato"
     },
     "sending": "Invio...",
     "filters": {
@@ -385,7 +386,8 @@
       "pending": "In attesa",
       "failed": "Non riuscite",
       "sent": "Inviate",
-      "all": "Tutte"
+      "all": "Tutte",
+      "rejected": "Rifiutate"
     },
     "send": "Invia per email",
     "retry": "Riprova",
@@ -394,7 +396,24 @@
     "sentTo": "Inviata a {{name}} ({{email}}).",
     "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}",
     "sendInApp": "Invia nell'app",
-    "sentInApp": "La busta paga è nell'app di {{name}}."
+    "sentInApp": "La busta paga è nell'app di {{name}}.",
+    "reviewTitle": "Cedolino di {{name}} - {{cycle}}",
+    "sendNow": "Invia",
+    "reject": "Rifiuta",
+    "back": "Indietro",
+    "reasonLabel": "Motivo (incluso nella notifica)",
+    "reasonRequired": "Scrivi il motivo del rifiuto.",
+    "rejectedNotice": "{{name}} è stato avvisato del rifiuto.",
+    "askedOn": "richiesto il {{date}}",
+    "sendExplain": "L'invio manda il cedolino in PDF a {{email}} con una notifica, e compare in I miei cedolini.",
+    "rejectedWith": "Rifiutato: {{reason}}",
+    "notPublished": "Questo cedolino è stato ritirato (ciclo riaperto) - pubblicalo prima.",
+    "allRequests": "Tutte le richieste",
+    "review": "Apri",
+    "view": "Vedi",
+    "cardTitle_one": "1 richiesta di cedolino",
+    "cardTitle_many": "{{count}} richieste di cedolino",
+    "cardTitle_other": "{{count}} richieste di cedolino"
   },
   "mine": {
     "empty": "Ancora nessuna busta paga pubblicata.",
@@ -409,11 +428,17 @@
     "statuses": {
       "pending": "Richiesta in attesa",
       "sent": "Inviata via email",
-      "failed": "In attesa di nuovo invio"
+      "failed": "In attesa di nuovo invio",
+      "rejected": "Richiesta rifiutata"
     },
     "sentOn": "il {{date}} a {{email}}",
     "ask": "Richiedi la busta paga",
-    "askBodyApp": "La richiesta va all'ufficio paghe; una volta inviata troverai qui la busta paga da vedere e salvare in PDF."
+    "askBodyApp": "La richiesta va all'ufficio paghe; una volta inviata troverai qui la busta paga da vedere e salvare in PDF.",
+    "requestButton": "Richiedi cedolino",
+    "allAsked": "Hai richiesto tutti i mesi pubblicati - riceverai risposta.",
+    "askBodyBoth": "Scegli il mese. La richiesta va al responsabile paghe; all'invio ricevi una notifica e un'e-mail, e il cedolino compare qui.",
+    "whichMonth": "Mese",
+    "rejectedReason": "Motivo: {{reason}}"
   },
   "errors": {
     "generic": "Qualcosa è andato storto. Riprova.",
@@ -440,7 +465,9 @@
     "chooseItem": "Scegli prima la voce.",
     "basicCannotBeDeleted": "Lo stipendio base non si può eliminare.",
     "legalNameRequired": "Inserisci il nome ufficiale: è quello sulla busta paga.",
-    "legalNameArabic": "Scrivi il nome solo in lettere arabe, come sul documento."
+    "legalNameArabic": "Scrivi il nome solo in lettere arabe, come sul documento.",
+    "alreadyDecided": "A questa richiesta è già stata data risposta.",
+    "requestNotFound": "Questa richiesta non esiste più."
   },
   "exports": {
     "hint": "I cedolini di un ciclo approvato o bloccato vengono preparati sul server in un unico ZIP, ognuno con il suo numero. Puoi lasciare la pagina; il file resta disponibile 7 giorni.",

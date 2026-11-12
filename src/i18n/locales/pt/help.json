@@ -140,7 +140,7 @@
     },
     "payslips": {
       "title": "Os meus recibos",
-      "body": "Meus holerites mostra os holerites publicados de ciclos aprovados e fechados, se a organização permitir. Caso contrário, toque em «Pedir o recibo»: o responsável pela folha é avisado e toca em «Enviar no app»; o holerite aparece aqui, você é avisado e pode salvá-lo em PDF. Nenhum arquivo novo fica no servidor: a cópia aprovada é exibida sem recálculo. O envio por e-mail continua disponível. Ninguém mais vê seus holerites."
+      "body": "Os meus recibos mostra os recibos publicados para si de ciclos aprovados e fechados. Prima \"Pedir recibo de vencimento\" no topo, escolha o mês e acrescente uma nota se quiser: o responsável pelos salários recebe uma notificação que abre diretamente, na página do gestor, um cartão com a pré-visualização e dois botões - \"Enviar\" (recebe uma notificação e o PDF por e-mail, e aparece aqui) ou \"Recusar\" com um motivo que lhe chega numa notificação (pode pedir de novo). É enviada a cópia aprovada tal como está, nunca recalculada."
     },
     "externalPay": {
       "title": "Pagamento de mão de obra externa (dentro de Mão de obra externa)",

@@ -368,7 +368,7 @@
     "restored": "Bestandteil wiederhergestellt."
   },
   "requests": {
-    "hint": "Von Ihrem Team angeforderte Abrechnungen. Ein Klick sendet die genehmigte, gespeicherte Abrechnung als PDF an die registrierte E-Mail - dieselbe Version, nichts wird neu berechnet.",
+    "hint": "Von Ihrem Team angeforderte Lohnabrechnungen. Anfrage öffnen: die genehmigte Abrechnung ansehen, dann senden (Benachrichtigung und PDF per E-Mail, dieselbe Version) oder mit Begründung ablehnen.",
     "employee": "Mitarbeiter",
     "cycle": "Zeitraum",
     "asked": "Angefragt",
@@ -377,7 +377,8 @@
     "statuses": {
       "pending": "Offen",
       "sent": "Gesendet",
-      "failed": "Fehlgeschlagen"
+      "failed": "Fehlgeschlagen",
+      "rejected": "Abgelehnt"
     },
     "sending": "Wird gesendet...",
     "filters": {
@@ -385,7 +386,8 @@
       "pending": "Ausstehend",
       "failed": "Fehlgeschlagen",
       "sent": "Gesendet",
-      "all": "Alle"
+      "all": "Alle",
+      "rejected": "Abgelehnt"
     },
     "send": "Per E-Mail senden",
     "retry": "Erneut versuchen",
@@ -394,7 +396,23 @@
     "sentTo": "An {{name}} ({{email}}) gesendet.",
     "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}",
     "sendInApp": "In der App senden",
-    "sentInApp": "Der Gehaltszettel ist für {{name}} in der App."
+    "sentInApp": "Der Gehaltszettel ist für {{name}} in der App.",
+    "reviewTitle": "Abrechnung von {{name}} - {{cycle}}",
+    "sendNow": "Senden",
+    "reject": "Ablehnen",
+    "back": "Zurück",
+    "reasonLabel": "Begründung (steht in der Benachrichtigung)",
+    "reasonRequired": "Geben Sie den Ablehnungsgrund an.",
+    "rejectedNotice": "{{name}} wurde über die Ablehnung informiert.",
+    "askedOn": "angefragt am {{date}}",
+    "sendExplain": "Beim Senden geht die Abrechnung als PDF an {{email}} mit einer Benachrichtigung und erscheint unter Meine Abrechnungen.",
+    "rejectedWith": "Abgelehnt: {{reason}}",
+    "notPublished": "Diese Abrechnung wurde zurückgezogen (Zyklus wieder geöffnet) - zuerst veröffentlichen.",
+    "allRequests": "Alle Anfragen",
+    "review": "Öffnen",
+    "view": "Ansehen",
+    "cardTitle_one": "1 Abrechnungsanfrage",
+    "cardTitle_other": "{{count}} Abrechnungsanfragen"
   },
   "mine": {
     "empty": "Noch keine veröffentlichten Abrechnungen.",
@@ -409,11 +427,17 @@
     "statuses": {
       "pending": "Anfrage offen",
       "sent": "Per E-Mail gesendet",
-      "failed": "Wartet auf erneuten Versand"
+      "failed": "Wartet auf erneuten Versand",
+      "rejected": "Anfrage abgelehnt"
     },
     "sentOn": "am {{date}} an {{email}}",
     "ask": "Gehaltszettel anfordern",
-    "askBodyApp": "Ihre Anfrage geht an die Lohnbuchhaltung; danach finden Sie den Gehaltszettel hier und können ihn als PDF speichern."
+    "askBodyApp": "Ihre Anfrage geht an die Lohnbuchhaltung; danach finden Sie den Gehaltszettel hier und können ihn als PDF speichern.",
+    "requestButton": "Lohnabrechnung anfordern",
+    "allAsked": "Sie haben alle veröffentlichten Monate angefordert - Sie erhalten Bescheid.",
+    "askBodyBoth": "Wählen Sie den Monat. Die Anfrage geht an die zuständige Person; beim Senden erhalten Sie eine Benachrichtigung und eine E-Mail, und die Abrechnung erscheint hier.",
+    "whichMonth": "Monat",
+    "rejectedReason": "Grund: {{reason}}"
   },
   "errors": {
     "generic": "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
@@ -440,7 +464,9 @@
     "chooseItem": "Wählen Sie zuerst den Posten.",
     "basicCannotBeDeleted": "Das Grundgehalt kann nicht gelöscht werden.",
     "legalNameRequired": "Gib den offiziellen Namen ein - er steht auf der Gehaltsabrechnung.",
-    "legalNameArabic": "Schreib den Namen nur mit arabischen Buchstaben, wie im Ausweis."
+    "legalNameArabic": "Schreib den Namen nur mit arabischen Buchstaben, wie im Ausweis.",
+    "alreadyDecided": "Diese Anfrage wurde bereits beantwortet.",
+    "requestNotFound": "Diese Anfrage gibt es nicht mehr."
   },
   "exports": {
     "hint": "Lohnzettel eines genehmigten oder gesperrten Laufs werden auf dem Server als ein ZIP erstellt, jeder mit eigener Nummer. Sie können die Seite verlassen; die Datei bleibt 7 Tage verfügbar.",

@@ -368,7 +368,7 @@
     "restored": "Concepto restaurado."
   },
   "requests": {
-    "hint": "Recibos que pidió su equipo. Un clic envía el recibo aprobado y guardado en PDF al correo registrado: la misma versión, sin recalcular.",
+    "hint": "Nóminas que pidió su equipo. Abra una solicitud: vea la nómina aprobada y envíela (aviso y PDF por correo, la misma versión) o rechácela con un motivo.",
     "employee": "Empleado",
     "cycle": "Ciclo",
     "asked": "Solicitado",
@@ -377,7 +377,8 @@
     "statuses": {
       "pending": "Pendiente",
       "sent": "Enviado",
-      "failed": "Falló"
+      "failed": "Falló",
+      "rejected": "Rechazada"
     },
     "sending": "Enviando...",
     "filters": {
@@ -385,7 +386,8 @@
       "pending": "Pendientes",
       "failed": "Fallidas",
       "sent": "Enviadas",
-      "all": "Todas"
+      "all": "Todas",
+      "rejected": "Rechazadas"
     },
     "send": "Enviar por correo",
     "retry": "Reintentar",
@@ -394,7 +396,24 @@
     "sentTo": "Enviado a {{name}} ({{email}}).",
     "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}",
     "sendInApp": "Enviar en la app",
-    "sentInApp": "La nómina ya está en la app de {{name}}."
+    "sentInApp": "La nómina ya está en la app de {{name}}.",
+    "reviewTitle": "Nómina de {{name}} - {{cycle}}",
+    "sendNow": "Enviar",
+    "reject": "Rechazar",
+    "back": "Volver",
+    "reasonLabel": "Motivo (va en el aviso)",
+    "reasonRequired": "Escriba el motivo del rechazo.",
+    "rejectedNotice": "Se avisó a {{name}} del rechazo.",
+    "askedOn": "pedida el {{date}}",
+    "sendExplain": "Al enviar, la nómina va en PDF a {{email}} con un aviso y aparece en Mis nóminas.",
+    "rejectedWith": "Rechazada: {{reason}}",
+    "notPublished": "Esta nómina se retiró (el ciclo se reabrió); publíquela primero.",
+    "allRequests": "Todas las solicitudes",
+    "review": "Abrir",
+    "view": "Ver",
+    "cardTitle_one": "1 solicitud de nómina",
+    "cardTitle_many": "{{count}} solicitudes de nómina",
+    "cardTitle_other": "{{count}} solicitudes de nómina"
   },
   "mine": {
     "empty": "Aún no hay recibos publicados.",
@@ -409,11 +428,17 @@
     "statuses": {
       "pending": "Solicitud pendiente",
       "sent": "Enviado por correo",
-      "failed": "Pendiente de reenvío"
+      "failed": "Pendiente de reenvío",
+      "rejected": "Solicitud rechazada"
     },
     "sentOn": "el {{date}} a {{email}}",
     "ask": "Pedir tu nómina",
-    "askBodyApp": "Tu solicitud llega a nóminas; cuando la envíen la verás aquí y podrás guardarla en PDF."
+    "askBodyApp": "Tu solicitud llega a nóminas; cuando la envíen la verás aquí y podrás guardarla en PDF.",
+    "requestButton": "Pedir nómina",
+    "allAsked": "Ya pidió todos los meses publicados; recibirá respuesta.",
+    "askBodyBoth": "Elija el mes. La solicitud llega al responsable de nóminas; al enviarla recibirá un aviso y un correo, y aparecerá aquí.",
+    "whichMonth": "Mes",
+    "rejectedReason": "Motivo: {{reason}}"
   },
   "errors": {
     "generic": "Algo salió mal. Inténtelo de nuevo.",
@@ -440,7 +465,9 @@
     "chooseItem": "Elija primero el concepto.",
     "basicCannotBeDeleted": "El salario básico no se puede eliminar.",
     "legalNameRequired": "Escribe el nombre oficial: es el que aparece en la nómina.",
-    "legalNameArabic": "Escribe el nombre solo con letras árabes, como en el documento."
+    "legalNameArabic": "Escribe el nombre solo con letras árabes, como en el documento.",
+    "alreadyDecided": "Esta solicitud ya fue respondida.",
+    "requestNotFound": "Esta solicitud ya no existe."
   },
   "exports": {
     "hint": "Los recibos de un ciclo aprobado o cerrado se preparan en el servidor en un ZIP, cada uno con su número. Puede salir de la página; el archivo queda disponible 7 días.",

@@ -244,7 +244,9 @@
       "publishedTitle": "Su recibo de nómina está disponible",
       "publishedBody": "Se publicó un nuevo recibo de nómina. Puede verlo o pedirlo por correo.",
       "inAppTitle": "Tu nómina está lista",
-      "inAppBody": "Tu nómina de {{cycle}} está en Mis nóminas."
+      "inAppBody": "Tu nómina de {{cycle}} está en Mis nóminas.",
+      "rejectedTitle": "Solicitud de nómina rechazada",
+      "rejectedBody": "Su solicitud de la nómina de {{cycle}} fue rechazada: {{reason}}"
     },
     "announcement": {
       "publishedTitle": "Nuevo anuncio",

@@ -244,7 +244,9 @@
       "publishedTitle": "Your payslip is available",
       "publishedBody": "A new payslip was published. You can view it or ask for it by email.",
       "inAppTitle": "Your payslip is ready",
-      "inAppBody": "Your payslip of {{cycle}} is in My payslips."
+      "inAppBody": "Your payslip of {{cycle}} is in My payslips.",
+      "rejectedTitle": "Payslip request declined",
+      "rejectedBody": "Your request for the payslip of {{cycle}} was declined: {{reason}}"
     },
     "announcement": {
       "publishedTitle": "New announcement",

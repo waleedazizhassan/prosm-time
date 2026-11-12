@@ -244,7 +244,9 @@
       "publishedTitle": "您的工资单已可查看",
       "publishedBody": "新的工资单已发布，您可以查看或通过邮件申请。",
       "inAppTitle": "您的工资单已就绪",
-      "inAppBody": "{{cycle}} 的工资单已在“我的工资单”中。"
+      "inAppBody": "{{cycle}} 的工资单已在“我的工资单”中。",
+      "rejectedTitle": "工资单申请被拒绝",
+      "rejectedBody": "您对 {{cycle}} 工资单的申请被拒绝：{{reason}}"
     },
     "announcement": {
       "publishedTitle": "新公告",

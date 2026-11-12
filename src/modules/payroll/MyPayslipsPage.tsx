@@ -9,6 +9,8 @@ import PageBanner from "../../components/common/PageBanner";
 import Card from "../../components/common/Card";
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
+import Select from "../../components/common/Select";
+import PayslipLines from "./PayslipLines";
 import Modal from "../../components/common/Modal";
 import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
@@ -16,7 +18,7 @@ import HintText from "../../components/common/HintText";
 import EmptyState from "../../components/common/EmptyState";
 import LoadingState from "../../components/common/LoadingState";
 import illustration from "../../assets/illustrations/allowances.svg";
-import { money, payrollError } from "./payrollUi";
+import { payrollError } from "./payrollUi";
 import usePayrollDigits from "./usePayrollDigits";
 import { buildOnePayslipPdf } from "./payrollDocuments";
 import SuccessText from "../../components/common/SuccessText";
@@ -31,7 +33,9 @@ export default function MyPayslipsPage() {
   const [data, setData] = useState<{ canViewInApp: boolean; email: string | null; cycles: MyPayslipCycle[] } | null>(null);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
-  const [asking, setAsking] = useState<MyPayslipCycle | null>(null);
+  // owner 2026-11-12: one clear "request payslip" button - choose the month, add a note, send
+  const [asking, setAsking] = useState(false);
+  const [askCycle, setAskCycle] = useState("");
   const [note, setNote] = useState("");
   const [busy, setBusy] = useState("");
   const [viewing, setViewing] = useState<MyPayslip | null>(null);
@@ -47,17 +51,20 @@ export default function MyPayslipsPage() {
   }, [load]);
 
   const ask = async () => {
-    if (!asking) return;
+    if (!askCycle) return;
     setBusy("ask");
     setError("");
-    const result = await PayrollCycleRepository.requestPayslip(asking.cycleId, note.trim() || null);
+    const result = await PayrollCycleRepository.requestPayslip(askCycle, note.trim() || null);
     setBusy("");
     if (result.error) setError(payrollError(result.error, t));
     else setNotice(t("mine.asked"));
-    setAsking(null);
+    setAsking(false);
     setNote("");
     await load();
   };
+
+  // a month can be asked for unless a request for it is still open
+  const askable = (data?.cycles ?? []).filter((c) => !c.request || c.request.status === "rejected" || c.request.status === "sent");
 
   const view = async (cycle: MyPayslipCycle) => {
     setBusy(`view-${cycle.cycleId}`);
@@ -89,55 +96,40 @@ export default function MyPayslipsPage() {
       <PageBanner pageId="payslips" illustration={illustration} />
       <ErrorText>{error}</ErrorText>
       {notice ? <SuccessText>{notice}</SuccessText> : null}
+      {data && data.cycles.length > 0 ? (
+        <div style={{ marginBottom: "var(--space-3)" }}>
+          <Button disabled={askable.length === 0} onClick={() => { setAskCycle(askable[0]?.cycleId ?? ""); setNote(""); setAsking(true); }}>{t("mine.requestButton")}</Button>
+          {askable.length === 0 ? <HintText small>{t("mine.allAsked")}</HintText> : null}
+        </div>
+      ) : null}
       {data === null ? <LoadingState /> : data.cycles.length === 0 ? <EmptyState message={t("mine.empty")} /> : null}
       {data?.cycles.map((cycle) => {
-        const open = cycle.request && cycle.request.status !== "sent";
         return (
           <Card key={cycle.cycleId} title={cycle.title} subtitle={`${formatDateOnly(cycle.periodStart, i18n.language)} - ${formatDateOnly(cycle.periodEnd, i18n.language)} · v${cycle.cycleVersion}`}>
             {cycle.request ? (
               <HintText small>
-                <StatusBadge status={cycle.request.status === "sent" ? "active" : cycle.request.status === "failed" ? "inactive" : "pending"}>{t(`mine.statuses.${cycle.request.status}`)}</StatusBadge>
+                <StatusBadge status={cycle.request.status === "sent" ? "active" : cycle.request.status === "rejected" ? "revoked" : cycle.request.status === "failed" ? "inactive" : "pending"}>{t(`mine.statuses.${cycle.request.status}`)}</StatusBadge>
+                {cycle.request.status === "rejected" && cycle.request.reason ? ` ${t("mine.rejectedReason", { reason: cycle.request.reason })}` : ""}
                 {cycle.request.status === "sent" && cycle.request.sentAt ? ` ${t("mine.sentOn", { date: formatDateOnly(cycle.request.sentAt.slice(0, 10), i18n.language), email: data.email ?? "" })}` : ""}
               </HintText>
             ) : null}
             <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
               {data.canViewInApp || cycle.canView ? <Button size="sm" loading={busy === `view-${cycle.cycleId}`} onClick={() => view(cycle)}>{t("mine.view")}</Button> : null}
-              {data.canViewInApp || cycle.canView ? null : (
-                <Button size="sm" variant="ghost" disabled={Boolean(open)} onClick={() => { setAsking(cycle); setNote(""); }}>{open ? t("mine.waiting") : t("mine.ask")}</Button>
-              )}
             </div>
           </Card>
         );
       })}
 
-      <Modal isOpen={Boolean(asking)} onClose={() => setAsking(null)} title={t("mine.ask")} footer={<Button loading={busy === "ask"} onClick={ask}>{t("mine.send")}</Button>}>
-        <HintText>{t("mine.askBodyApp")}</HintText>
+      <Modal isOpen={asking} onClose={() => setAsking(false)} title={t("mine.requestButton")} footer={<Button loading={busy === "ask"} disabled={!askCycle} onClick={ask}>{t("mine.send")}</Button>}>
+        <HintText>{t("mine.askBodyBoth")}</HintText>
+        <Select label={t("mine.whichMonth")} name="payslipCycle" value={askCycle} onChange={(event) => setAskCycle(event.target.value)}
+          options={askable.map((c) => ({ value: c.cycleId, label: `${c.title} · ${formatDateOnly(c.periodStart, i18n.language)} - ${formatDateOnly(c.periodEnd, i18n.language)}` }))} />
         <Input label={t("mine.note")} name="payslipNote" value={note} onChange={(event) => setNote(event.target.value)} />
       </Modal>
 
       <Modal isOpen={Boolean(viewing)} onClose={() => setViewing(null)} title={viewing ? `${t("reports.payslip")} · ${viewing.cycle.title}` : ""} size="lg"
         footer={<Button loading={busy === "pdf"} onClick={download}>{t("mine.download")}</Button>}>
-        {viewing ? (
-          <div>
-            {(["earning", "allowance", "deduction", "installment"] as const).map((category) => {
-              const lines = viewing.employee.lines.filter((l) => l.category === category);
-              if (lines.length === 0) return null;
-              return (
-                <div key={category} style={{ marginBottom: "var(--space-2)" }}>
-                  <h4 style={{ margin: "0 0 4px" }}>{t(`categories.${category}`)}</h4>
-                  {lines.map((l) => (
-                    <div key={l.id} style={{ display: "flex", justifyContent: "space-between", fontSize: "var(--font-sm)", padding: "3px 0", borderBottom: "1px solid var(--border-light)" }}>
-                      <span>{isRtl ? l.name_ar : l.name_en || l.name_ar}</span><span>{money(l.amount)}</span>
-                    </div>
-                  ))}
-                </div>
-              );
-            })}
-            <div style={{ display: "flex", justifyContent: "space-between", fontWeight: 700, fontSize: "var(--font-lg)", marginTop: "var(--space-2)" }}>
-              <span>{t("doc.net")}</span><span>{money(viewing.employee.net_salary)} {viewing.employee.currency}</span>
-            </div>
-          </div>
-        ) : null}
+        {viewing ? <PayslipLines payslip={viewing} /> : null}
       </Modal>
     </PageShell>
   );

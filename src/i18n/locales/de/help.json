@@ -140,7 +140,7 @@
     },
     "payslips": {
       "title": "Meine Lohnzettel",
-      "body": "Meine Lohnabrechnungen zeigt die für Sie veröffentlichten Abrechnungen genehmigter, gesperrter Läufe, sofern Ihre Organisation es erlaubt. Sonst tippen Sie auf „Gehaltszettel anfordern“: Die Lohnverantwortlichen werden benachrichtigt und tippen auf „In der App senden“ - die Abrechnung erscheint dann hier, Sie werden benachrichtigt und können sie als PDF speichern. Auf dem Server wird keine neue Datei abgelegt; gezeigt wird die genehmigte Fassung ohne Neuberechnung. Der Versand per E-Mail bleibt möglich. Niemand sonst sieht Ihre Abrechnungen."
+      "body": "Meine Abrechnungen zeigt die für Sie veröffentlichten Abrechnungen aus genehmigten, gesperrten Zyklen. Tippen Sie oben auf \"Lohnabrechnung anfordern\", wählen Sie den Monat und fügen Sie bei Bedarf eine Notiz hinzu: Die zuständige Person erhält eine Benachrichtigung, die direkt auf der Manager-Seite eine Karte mit Vorschau und zwei Schaltflächen öffnet - \"Senden\" (Sie erhalten eine Benachrichtigung und das PDF per E-Mail, und die Abrechnung erscheint hier) oder \"Ablehnen\" mit einer Begründung, die Sie per Benachrichtigung erhalten (Sie können erneut anfragen). Gesendet wird die genehmigte Fassung unverändert, nie neu berechnet."
     },
     "externalPay": {
       "title": "Löhne externer Arbeitskräfte (unter Externe Arbeitskräfte)",

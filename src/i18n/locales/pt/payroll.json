@@ -368,7 +368,7 @@
     "restored": "Item restaurado."
   },
   "requests": {
-    "hint": "Recibos pedidos pela sua equipa. Um clique envia o recibo aprovado e guardado em PDF para o e-mail registado: a mesma versão, sem recalcular.",
+    "hint": "Recibos pedidos pela sua equipa. Abra um pedido: pré-visualize o recibo aprovado e envie-o (notificação e PDF por e-mail, a mesma versão) ou recuse com um motivo.",
     "employee": "Colaborador",
     "cycle": "Ciclo",
     "asked": "Pedido",
@@ -377,7 +377,8 @@
     "statuses": {
       "pending": "Pendente",
       "sent": "Enviado",
-      "failed": "Falhou"
+      "failed": "Falhou",
+      "rejected": "Recusado"
     },
     "sending": "A enviar...",
     "filters": {
@@ -385,7 +386,8 @@
       "pending": "Pendentes",
       "failed": "Falhados",
       "sent": "Enviados",
-      "all": "Todos"
+      "all": "Todos",
+      "rejected": "Recusados"
     },
     "send": "Enviar por e-mail",
     "retry": "Tentar de novo",
@@ -394,7 +396,24 @@
     "sentTo": "Enviado a {{name}} ({{email}}).",
     "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}",
     "sendInApp": "Enviar na app",
-    "sentInApp": "O recibo já está na app de {{name}}."
+    "sentInApp": "O recibo já está na app de {{name}}.",
+    "reviewTitle": "Recibo de {{name}} - {{cycle}}",
+    "sendNow": "Enviar",
+    "reject": "Recusar",
+    "back": "Voltar",
+    "reasonLabel": "Motivo (vai na notificação)",
+    "reasonRequired": "Escreva o motivo da recusa.",
+    "rejectedNotice": "{{name}} foi avisado(a) da recusa.",
+    "askedOn": "pedido em {{date}}",
+    "sendExplain": "Ao enviar, o recibo vai em PDF para {{email}} com uma notificação e aparece em Os meus recibos.",
+    "rejectedWith": "Recusado: {{reason}}",
+    "notPublished": "Este recibo foi retirado (o ciclo foi reaberto) - publique-o primeiro.",
+    "allRequests": "Todos os pedidos",
+    "review": "Abrir",
+    "view": "Ver",
+    "cardTitle_one": "1 pedido de recibo",
+    "cardTitle_many": "{{count}} pedidos de recibo",
+    "cardTitle_other": "{{count}} pedidos de recibo"
   },
   "mine": {
     "empty": "Ainda não há recibos publicados.",
@@ -409,11 +428,17 @@
     "statuses": {
       "pending": "Pedido pendente",
       "sent": "Enviado por e-mail",
-      "failed": "A aguardar novo envio"
+      "failed": "A aguardar novo envio",
+      "rejected": "Pedido recusado"
     },
     "sentOn": "em {{date}} para {{email}}",
     "ask": "Pedir o recibo",
-    "askBodyApp": "O pedido vai para os salários; depois de enviado, encontra aqui o recibo para ver e guardar em PDF."
+    "askBodyApp": "O pedido vai para os salários; depois de enviado, encontra aqui o recibo para ver e guardar em PDF.",
+    "requestButton": "Pedir recibo de vencimento",
+    "allAsked": "Já pediu todos os meses publicados - receberá resposta.",
+    "askBodyBoth": "Escolha o mês. O pedido vai para o responsável pelos salários; ao enviar, recebe uma notificação e um e-mail, e o recibo aparece aqui.",
+    "whichMonth": "Mês",
+    "rejectedReason": "Motivo: {{reason}}"
   },
   "errors": {
     "generic": "Algo correu mal. Tente de novo.",
@@ -440,7 +465,9 @@
     "chooseItem": "Escolha primeiro o item.",
     "basicCannotBeDeleted": "O salário básico não pode ser excluído.",
     "legalNameRequired": "Escreva o nome oficial: é o que aparece no recibo.",
-    "legalNameArabic": "Escreva o nome só com letras árabes, como no documento."
+    "legalNameArabic": "Escreva o nome só com letras árabes, como no documento.",
+    "alreadyDecided": "Este pedido já foi respondido.",
+    "requestNotFound": "Este pedido já não existe."
   },
   "exports": {
     "hint": "Os recibos de um ciclo aprovado ou fechado são preparados no servidor num ZIP, cada um com o seu número. Pode sair da página; o ficheiro fica disponível 7 dias.",

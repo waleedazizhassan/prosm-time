@@ -244,7 +244,9 @@
       "publishedTitle": "Votre bulletin de paie est disponible",
       "publishedBody": "Un nouveau bulletin de paie a été publié. Vous pouvez le consulter ou le demander par e-mail.",
       "inAppTitle": "Votre bulletin est prêt",
-      "inAppBody": "Votre bulletin de {{cycle}} est dans Mes bulletins."
+      "inAppBody": "Votre bulletin de {{cycle}} est dans Mes bulletins.",
+      "rejectedTitle": "Demande de bulletin refusée",
+      "rejectedBody": "Votre demande du bulletin de {{cycle}} a été refusée : {{reason}}"
     },
     "announcement": {
       "publishedTitle": "Nouvelle annonce",

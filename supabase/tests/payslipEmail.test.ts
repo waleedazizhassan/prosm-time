@@ -162,3 +162,23 @@ describe("answering in the app", () => {
     expect(await t.su("select 1 from notifications where user_id = $1 and type = 'payslip_sent' and data ->> 'channel' = 'app'", [colleague.userId])).toHaveLength(1);
   });
 });
+
+// 2026-11-12 (owner): the manager previews the requested payslip, then sends or rejects it with a reason
+describe("deciding a request from the manager page", () => {
+  it("previews for the allowed manager only, rejects with a reason and lets the person ask again", async () => {
+    const id = (await ok<{ r: { id: string } }>(t.as(worker.authId, "select public.request_prosm_time_payslip($1) as r", [cycleId]))).r.id;
+    expect((await t.as(managerB.authId, "select public.get_prosm_time_payslip_request_preview($1)", [id])).error).toMatch(/AUTHORITY/);
+    const preview = await ok<{ r: { employee: { net_salary: string; lines: unknown[] } } }>(t.as(managerA.authId, "select public.get_prosm_time_payslip_request_preview($1) as r", [id]));
+    expect(Number(preview.r.employee.net_salary)).toBeGreaterThan(0);
+    expect((await t.as(managerA.authId, "select public.reject_prosm_time_payslip_request($1, '  ')", [id])).error).toMatch(/REASON/);
+    expect((await t.as(worker.authId, "select public.reject_prosm_time_payslip_request($1, 'no')", [id])).error).toMatch(/AUTHORITY|OWN REQUEST/);
+    await ok(t.as(managerA.authId, "select public.reject_prosm_time_payslip_request($1, 'ask HR in person')", [id]));
+    expect((await t.as(managerA.authId, "select public.reject_prosm_time_payslip_request($1, 'again')", [id])).error).toMatch(/ALREADY DECIDED/);
+    const [note] = await t.su<{ data: { reason: string } }>("select data from notifications where user_id = $1 and type = 'payslip_rejected'", [worker.userId]);
+    expect(note.data.reason).toBe("ask HR in person");
+    const mine = await ok<{ r: { cycles: { cycleId: string; request: { status: string; reason: string } }[] } }>(t.as(worker.authId, "select public.list_my_prosm_time_payslip_cycles() as r"));
+    expect(mine.r.cycles.find((c) => c.cycleId === cycleId)!.request).toMatchObject({ status: "rejected", reason: "ask HR in person" });
+    // asked again after a refusal
+    expect((await t.as(worker.authId, "select public.request_prosm_time_payslip($1)", [cycleId])).error).toBeNull();
+  });
+});

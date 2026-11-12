@@ -140,7 +140,7 @@
     },
     "payslips": {
       "title": "My payslips",
-      "body": "My payslips shows the payslips published to you from approved, locked cycles, where your organisation allows. If they are not open to you, press \"Ask for your payslip\": the payroll manager is notified, opens the request from the notification and presses \"Send in the app\" - it then appears in My payslips, you are notified, and you can save it as PDF on your device. No new file is kept on the server: the cycle's approved copy is shown as it is, never recalculated. Sending by email is still available. Nobody else sees your payslips."
+      "body": "My payslips shows the payslips published to you from approved, locked cycles. Press \"Request payslip\" at the top, choose the month and add a note if you like: the person in charge of payroll gets a notification that opens straight on the manager page, on a card with a preview of the payslip and two buttons - \"Send\", which gives you a notification and the PDF by email and makes it appear here, or \"Decline\" with a reason that reaches you in a notification (you can ask again). What is sent is the approved copy as it is, never recalculated, and nobody but the person in charge sees it."
     },
     "externalPay": {
       "title": "External labour pay (inside External labour)",

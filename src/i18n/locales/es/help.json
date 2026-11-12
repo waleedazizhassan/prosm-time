@@ -140,7 +140,7 @@
     },
     "payslips": {
       "title": "Mis recibos",
-      "body": "Mis recibos muestra los recibos publicados de ciclos aprobados y cerrados, si su organización lo permite. Si no, pulse «Pedir tu nómina»: el responsable de nómina recibe un aviso y pulsa «Enviar en la app»; el recibo aparece aquí, se le avisa y puede guardarlo en PDF en su dispositivo. No se guarda ningún archivo nuevo en el servidor: se muestra la copia aprobada sin recalcular. El envío por correo sigue disponible. Nadie más ve sus recibos."
+      "body": "Mis nóminas muestra las nóminas publicadas para usted de ciclos aprobados y cerrados. Pulse \"Pedir nómina\" arriba, elija el mes y añada una nota si quiere: el responsable de nóminas recibe un aviso que abre directamente en la página del gestor una tarjeta con la vista previa y dos botones: \"Enviar\" (recibe un aviso y el PDF por correo, y aparece aquí) o \"Rechazar\" con un motivo que le llega en un aviso (puede volver a pedirla). Se envía la copia aprobada tal cual, nunca recalculada."
     },
     "externalPay": {
       "title": "Pago de mano de obra externa (dentro de Mano de obra externa)",

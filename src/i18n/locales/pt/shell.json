@@ -244,7 +244,9 @@
       "publishedTitle": "O seu recibo de vencimento está disponível",
       "publishedBody": "Foi publicado um novo recibo de vencimento. Pode vê-lo ou pedi-lo por e-mail.",
       "inAppTitle": "O seu recibo está pronto",
-      "inAppBody": "O recibo de {{cycle}} está em Os meus recibos."
+      "inAppBody": "O recibo de {{cycle}} está em Os meus recibos.",
+      "rejectedTitle": "Pedido de recibo recusado",
+      "rejectedBody": "O seu pedido do recibo de {{cycle}} foi recusado: {{reason}}"
     },
     "announcement": {
       "publishedTitle": "Novo anúncio",

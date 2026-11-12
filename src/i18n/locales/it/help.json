@@ -140,7 +140,7 @@
     },
     "payslips": {
       "title": "I miei cedolini",
-      "body": "Le mie buste paga mostra le buste pubblicate da cicli approvati e chiusi, se l'organizzazione lo consente. Altrimenti tocca «Richiedi la busta paga»: il responsabile paghe riceve un avviso e tocca «Invia nell'app»; la busta appare qui, ricevi un avviso e puoi salvarla in PDF. Sul server non viene conservato alcun nuovo file: si mostra la copia approvata senza ricalcolo. L'invio per e-mail resta disponibile. Nessun altro vede le tue buste paga."
+      "body": "I miei cedolini mostra i cedolini pubblicati per te da cicli approvati e bloccati. Premi \"Richiedi cedolino\" in alto, scegli il mese e aggiungi una nota se vuoi: il responsabile paghe riceve una notifica che apre direttamente, nella pagina del responsabile, una scheda con l'anteprima e due pulsanti - \"Invia\" (ricevi una notifica e il PDF via e-mail, e compare qui) o \"Rifiuta\" con un motivo che ti arriva in una notifica (puoi richiederlo di nuovo). Viene inviata la copia approvata così com'è, mai ricalcolata."
     },
     "externalPay": {
       "title": "Paghe della manodopera esterna (dentro Manodopera esterna)",

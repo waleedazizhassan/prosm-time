@@ -140,7 +140,7 @@
     },
     "payslips": {
       "title": "Mes bulletins",
-      "body": "Mes bulletins affiche les bulletins publiés de cycles approuvés et clôturés, si votre organisation le permet. Sinon, touchez « Demander votre bulletin » : le gestionnaire de paie est averti et touche « Envoyer dans l'app » ; le bulletin apparaît ici, vous êtes averti et pouvez l'enregistrer en PDF. Aucun nouveau fichier n'est conservé sur le serveur : la copie approuvée est affichée sans recalcul. L'envoi par e-mail reste possible. Personne d'autre ne voit vos bulletins."
+      "body": "Mes bulletins affiche les bulletins publiés pour vous à partir de cycles approuvés et verrouillés. Appuyez sur \"Demander mon bulletin\" en haut, choisissez le mois et ajoutez une note si vous voulez : le responsable de la paie reçoit une notification qui ouvre directement, sur la page du responsable, une carte avec l'aperçu et deux boutons - \"Envoyer\" (vous recevez une notification et le PDF par e-mail, et il apparaît ici) ou \"Refuser\" avec un motif qui vous parvient par notification (vous pouvez redemander). C'est la copie approuvée telle quelle qui est envoyée, jamais recalculée."
     },
     "externalPay": {
       "title": "Paie de la main-d'œuvre externe (dans Main-d'œuvre externe)",

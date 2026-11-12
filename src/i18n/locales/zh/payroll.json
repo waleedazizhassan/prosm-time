@@ -368,7 +368,7 @@
     "restored": "项目已恢复。"
   },
   "requests": {
-    "hint": "团队申请的工资单。一键将已核准并保存的工资单以 PDF 发送到登记邮箱——同一版本，不重新计算。",
+    "hint": "团队申请的工资单。打开申请：预览已批准的工资单，然后发送（通知并通过邮件发送同一版本的 PDF）或填写原因拒绝。",
     "employee": "员工",
     "cycle": "周期",
     "asked": "申请时间",
@@ -377,7 +377,8 @@
     "statuses": {
       "pending": "待处理",
       "sent": "已发送",
-      "failed": "发送失败"
+      "failed": "发送失败",
+      "rejected": "已拒绝"
     },
     "sending": "发送中…",
     "filters": {
@@ -385,7 +386,8 @@
       "pending": "待处理",
       "failed": "失败",
       "sent": "已发送",
-      "all": "全部"
+      "all": "全部",
+      "rejected": "已拒绝"
     },
     "send": "通过邮件发送",
     "retry": "重试",
@@ -394,7 +396,22 @@
     "sentTo": "已发送给 {{name}}（{{email}}）。",
     "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}",
     "sendInApp": "在应用内发送",
-    "sentInApp": "工资单已发送到 {{name}} 的应用中。"
+    "sentInApp": "工资单已发送到 {{name}} 的应用中。",
+    "reviewTitle": "{{name}} 的工资单 - {{cycle}}",
+    "sendNow": "发送",
+    "reject": "拒绝",
+    "back": "返回",
+    "reasonLabel": "拒绝原因（会写在通知中）",
+    "reasonRequired": "请填写拒绝原因。",
+    "rejectedNotice": "已通知 {{name}} 申请被拒绝。",
+    "askedOn": "申请于 {{date}}",
+    "sendExplain": "发送后，工资单 PDF 会发到 {{email}} 并附通知，也会出现在其“我的工资单”中。",
+    "rejectedWith": "已拒绝：{{reason}}",
+    "notPublished": "此工资单已撤回（周期已重新打开），请先发布。",
+    "allRequests": "全部申请",
+    "review": "打开",
+    "view": "查看",
+    "cardTitle_other": "{{count}} 个工资单申请"
   },
   "mine": {
     "empty": "暂无已发布的工资单。",
@@ -409,11 +426,17 @@
     "statuses": {
       "pending": "申请待处理",
       "sent": "已通过邮件发送",
-      "failed": "等待重新发送"
+      "failed": "等待重新发送",
+      "rejected": "申请被拒绝"
     },
     "sentOn": "于 {{date}} 发送至 {{email}}",
     "ask": "申请工资单",
-    "askBodyApp": "申请将发送给薪资负责人；发送后您可在此查看并保存为 PDF。"
+    "askBodyApp": "申请将发送给薪资负责人；发送后您可在此查看并保存为 PDF。",
+    "requestButton": "申请工资单",
+    "allAsked": "您已申请所有已发布的月份，处理后会通知您。",
+    "askBodyBoth": "选择月份。申请会发给工资负责人；发送后您会收到通知和邮件，工资单也会出现在这里。",
+    "whichMonth": "月份",
+    "rejectedReason": "原因：{{reason}}"
   },
   "errors": {
     "generic": "出现问题，请重试。",
@@ -440,7 +463,9 @@
     "chooseItem": "请先选择项目。",
     "basicCannotBeDeleted": "基本工资不能删除。",
     "legalNameRequired": "请填写正式姓名——工资单上显示此姓名。",
-    "legalNameArabic": "请仅用阿拉伯字母书写姓名，与证件一致。"
+    "legalNameArabic": "请仅用阿拉伯字母书写姓名，与证件一致。",
+    "alreadyDecided": "此申请已处理。",
+    "requestNotFound": "此申请已不存在。"
   },
   "exports": {
     "hint": "已批准或已锁定周期的工资单会在服务器上打包为一个 ZIP，每份都有独立编号。您可以离开此页面；文件保留 7 天。",
