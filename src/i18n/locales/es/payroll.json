@@ -69,7 +69,9 @@
     "chooseNone": "Quitar selección",
     "addToChosen": "Añadir concepto a {{count}} elegidos",
     "bulkHint": "Todos los elegidos reciben el mismo concepto, o ninguno si alguno no puede (por ejemplo fuera de sus sedes).",
-    "customRules": "Reglas fiscales propias"
+    "customRules": "Reglas fiscales propias",
+    "selfServiceOff": "Los empleados no verán sus nóminas: el «autoservicio» está desactivado en los ajustes de nómina.",
+    "openSettings": "Abrir ajustes"
   },
   "actions": {
     "submit": "Enviar a revisión",

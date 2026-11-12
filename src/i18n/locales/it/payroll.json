@@ -69,7 +69,9 @@
     "chooseNone": "Annulla la scelta",
     "addToChosen": "Aggiungi una voce a {{count}} scelti",
     "bulkHint": "Tutti i scelti ricevono la stessa voce, o nessuno se per uno non è possibile (per esempio fuori dalle tue sedi).",
-    "customRules": "Regole fiscali proprie"
+    "customRules": "Regole fiscali proprie",
+    "selfServiceOff": "I dipendenti non vedranno le buste paga: il «self-service» è disattivato nelle impostazioni paghe.",
+    "openSettings": "Apri impostazioni"
   },
   "actions": {
     "submit": "Invia in revisione",

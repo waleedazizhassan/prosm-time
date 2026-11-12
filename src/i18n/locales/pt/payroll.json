@@ -69,7 +69,9 @@
     "chooseNone": "Limpar seleção",
     "addToChosen": "Adicionar linha a {{count}} escolhidos",
     "bulkHint": "Todos os escolhidos recebem a mesma linha, ou ninguém se algum não puder (por exemplo fora dos seus locais).",
-    "customRules": "Regras fiscais próprias"
+    "customRules": "Regras fiscais próprias",
+    "selfServiceOff": "Os funcionários não verão os holerites: o «autoatendimento» está desligado nas configurações da folha.",
+    "openSettings": "Abrir configurações"
   },
   "actions": {
     "submit": "Enviar para revisão",

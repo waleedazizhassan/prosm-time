@@ -99,7 +99,7 @@ export default function ProfileDocumentsPanel({ profile, onChanged }: { profile:
                     <div style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>
                       {[d.documentNumber, d.expiryDate ? t("expires", { date: formatDateOnly(d.expiryDate, i18n.language) }) : d.hasFile && !d.hasExpiry ? t("noExpiry") : null].filter(Boolean).join(" · ") || "—"}
                     </div>
-                    {d.status === "rejected" && d.rejectionReason ? <div style={{ color: "var(--status-danger-text, #b91c1c)", fontSize: "var(--font-sm)" }}>{t("rejectedBecause", { reason: d.rejectionReason })}</div> : null}
+                    {d.rejectionReason && d.status !== "valid" ? <div style={{ color: "var(--status-danger-text, #b91c1c)", fontSize: "var(--font-sm)" }}>{t("rejectedBecause", { reason: d.rejectionReason })}</div> : null}
                   </div>
                   <StatusBadge status={waiting ? "invited" : STATUS_BADGE[d.status]}>{waiting ? t("status.waitingToSend") : t(s.key, { count: s.count })}</StatusBadge>
                   {d.pendingId && !waiting ? <StatusBadge status="invited">{t("status.pending_review")}</StatusBadge> : null}

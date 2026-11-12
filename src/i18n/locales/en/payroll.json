@@ -69,7 +69,9 @@
     "chooseNone": "Clear the choice",
     "addToChosen": "Add a line to {{count}} chosen",
     "bulkHint": "Everyone chosen gets the same line, or nobody does if one of them cannot (for example outside your sites).",
-    "customRules": "Company's own tax rules"
+    "customRules": "Company's own tax rules",
+    "selfServiceOff": "Employees won't see their payslips: \"employee self-service\" is off in payroll settings.",
+    "openSettings": "Open settings"
   },
   "actions": {
     "submit": "Send for review",

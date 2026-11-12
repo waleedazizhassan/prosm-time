@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 
 import PayrollCycleRepository, {
   type ExportJob,
@@ -63,6 +63,12 @@ export default function PayrollCyclePage() {
   const [exportScope, setExportScope] = useState<string>("all");
   const [siteNames, setSiteNames] = useState<Record<string, string>>({});
   const [importResult, setImportResult] = useState<{ errors: { row: number; code: string }[]; valid: number; saved: boolean; rows: Record<string, unknown>[]; fileName: string } | null>(null);
+
+  // demo run 2026-11-12: payslips published while "employee self-service" is off reach nobody - say so
+  const [selfService, setSelfService] = useState(true);
+  useEffect(() => {
+    void PayrollCycleRepository.getSettings().then((r) => { if (r.data) setSelfService(Boolean(r.data.employee_self_service)); });
+  }, []);
 
   const load = useCallback(async () => {
     const [cycle, comps, validation] = await Promise.all([
@@ -247,6 +253,9 @@ export default function PayrollCyclePage() {
           </Button>
         ) : null}
       </div>
+      {cycle.status === "locked" && can.publish && !selfService ? (
+        <HintText small>{t("cycle.selfServiceOff")} <Link to="/payroll/settings">{t("cycle.openSettings")}</Link></HintText>
+      ) : null}
       {cycle.reopen_reason && cycle.status === "reopened" ? <HintText small>{t("cycle.reopenedBecause", { reason: cycle.reopen_reason })}</HintText> : null}
       <ErrorText>{error}</ErrorText>
       {notice ? <SuccessText>{notice}</SuccessText> : null}

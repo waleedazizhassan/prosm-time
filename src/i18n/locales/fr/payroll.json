@@ -69,7 +69,9 @@
     "chooseNone": "Effacer la sélection",
     "addToChosen": "Ajouter une ligne à {{count}} sélection(s)",
     "bulkHint": "Toutes les personnes choisies reçoivent la même ligne, ou personne si l'une ne peut pas (par exemple hors de vos sites).",
-    "customRules": "Règles fiscales propres"
+    "customRules": "Règles fiscales propres",
+    "selfServiceOff": "Les employés ne verront pas leurs bulletins : le « libre-service » est désactivé dans les paramètres de paie.",
+    "openSettings": "Ouvrir les paramètres"
   },
   "actions": {
     "submit": "Envoyer en revue",

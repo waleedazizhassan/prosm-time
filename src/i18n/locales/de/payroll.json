@@ -69,7 +69,9 @@
     "chooseNone": "Auswahl aufheben",
     "addToChosen": "Posten für {{count}} Ausgewählte",
     "bulkHint": "Alle Ausgewählten erhalten denselben Posten - oder niemand, wenn es bei einer Person nicht geht (z. B. außerhalb Ihrer Standorte).",
-    "customRules": "Eigene Steuerregeln"
+    "customRules": "Eigene Steuerregeln",
+    "selfServiceOff": "Die Mitarbeitenden sehen ihre Abrechnungen nicht: „Self-Service“ ist in den Lohneinstellungen aus.",
+    "openSettings": "Einstellungen öffnen"
   },
   "actions": {
     "submit": "Zur Prüfung senden",

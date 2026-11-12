@@ -17,7 +17,7 @@ async function setup(t: TestDatabase, name: string) {
   return { org, site, type };
 }
 const docs = async (t: TestDatabase, org: TestOrg, m: TestMember) =>
-  (await t.as<{ d: { id: string; typeName: string; status: string; pendingId: string | null; pending: { id: string; expiryDate: string | null } | null; archived: unknown[] }[] }>(org.owner.authId,
+  (await t.as<{ d: { id: string; typeName: string; status: string; rejectionReason?: string | null; pendingId: string | null; pending: { id: string; expiryDate: string | null } | null; archived: unknown[] }[] }>(org.owner.authId,
     "select public.list_prosm_time_employee_documents($1) as d", [m.userId])).rows![0].d;
 const file = (org: TestOrg, m: TestMember) => `${org.id}/${m.userId}/x.pdf`;
 
@@ -67,6 +67,11 @@ describe("employee documents", () => {
     // the completeness bar
     const p = await t.as<{ p: { completion: { percent: number } } }>(org.owner.authId, "select public.get_prosm_time_employee_profile($1) as p", [amira.userId]);
     expect(p.rows![0].p.completion.percent).toBe(100);
+    // a refused renewal shows its reason in her list (demo run 2026-11-12), the document in force stays valid
+    const renewal = await submit(amira, "2034-01-01");
+    expect((await t.as(org.owner.authId, "select public.review_prosm_time_document($1, false, 'الصورة غير واضحة')", [renewal.rows![0].r.id])).error).toBeNull();
+    list = await docs(t, org, amira);
+    expect(list[0]).toMatchObject({ status: "valid", rejectionReason: "الصورة غير واضحة" });
     // somebody else cannot upload into Amira's file
     const omar = await addMember(t, org, "employee", "Omar");
     expect((await t.as(omar.authId, "select public.submit_prosm_time_document($1, $2, $3)", [amira.userId, health, JSON.stringify({ file_path: file(org, amira), expiry_date: "2030-01-01" })])).error).toMatch(/PERMISSION DENIED/);

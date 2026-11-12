@@ -69,7 +69,9 @@
     "chooseNone": "取消选择",
     "addToChosen": "为所选 {{count}} 人添加一项",
     "bulkHint": "所选人员都会添加同一项；若其中有人无法添加（例如不在您的站点范围），则全部不添加。",
-    "customRules": "公司自定义税务规则"
+    "customRules": "公司自定义税务规则",
+    "selfServiceOff": "员工看不到工资单：工资设置中的“员工自助”已关闭。",
+    "openSettings": "打开设置"
   },
   "actions": {
     "submit": "提交审核",
