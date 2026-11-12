@@ -134,7 +134,15 @@ serve(async (request: Request) => {
     // Service role only: anyone else gets "permission denied" here.
     const { data: message, error } = await client.rpc("get_prosm_time_push_message", { p_notification_id: notificationId });
     if (error) return errorResponse("This endpoint requires the service role key.", 401, "UNAUTHORIZED");
-    const devices: { token: string; language: string }[] = message?.devices ?? [];
+    const devices: { token: string; language: string; sosAlarm?: boolean }[] = message?.devices ?? [];
+    // Owner 2026-11-12 ("Buzz notifications are still not translated"): the notification keeps its text in the
+    // person's own language, so an app from before a type's translation shows it translated too.
+    if (message && typeof message.language === "string" && message.language) {
+      const own = localizePush(String(message.type ?? ""), message.data ?? {}, message.language, { title: message.title, body: message.body });
+      if (own.title && (own.title !== message.title || own.body !== message.body)) {
+        await client.from("notifications").update({ title: own.title, body: own.body }).eq("id", notificationId);
+      }
+    }
     if (!message || devices.length === 0) return successResponse({ sent: 0, emailed: await sendNotificationEmails(client, notificationId) });
 
     const rawAccount = Deno.env.get("FCM_SERVICE_ACCOUNT");
@@ -149,24 +157,26 @@ serve(async (request: Request) => {
     const gone: string[] = [];
     let sent = 0;
     // Owner 2026-11-11 (notifications late): every phone of the person at once, not one after another
-    await Promise.all(devices.map(async ({ token: deviceToken, language }) => {
+    await Promise.all(devices.map(async ({ token: deviceToken, language, sosAlarm }) => {
       // In the phone's language, with the in-app bell's own texts.
       const text = localizePush(String(message.type ?? ""), message.data ?? {}, language, { title: message.title, body: message.body });
-      const response = await fetch(`https://fcm.googleapis.com/v1/projects/${account.project_id}/messages:send`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: {
+      const data = {
+        notificationId: String(message.notificationId),
+        type: String(message.type ?? ""),
+        entityType: String(message.entityType ?? ""),
+        entityId: String(message.entityId ?? ""),
+        // v2.3.43: which reader a shared type is for (e.g. "manager"), for the tap's destination.
+        kind: String((message.data as Record<string, unknown> | undefined)?.kind ?? ""),
+      };
+      // Owner 2026-11-12: an app that shows the SOS itself (alarm tone, whole screen over the lock screen) gets
+      // it as a data message, which reaches it closed and locked; every other phone gets the notification.
+      const alarm = message.type === "sos_alert" && sosAlarm === true;
+      const payload = alarm
+        ? { token: deviceToken, data: { ...data, title: text.title, body: text.body }, android: { priority: "HIGH", ttl: "300s" } }
+        : {
             token: deviceToken,
             notification: { title: text.title, body: text.body },
-            data: {
-              notificationId: String(message.notificationId),
-              type: String(message.type ?? ""),
-              entityType: String(message.entityType ?? ""),
-              entityId: String(message.entityId ?? ""),
-              // v2.3.43: which reader a shared type is for (e.g. "manager"), for the tap's destination.
-              kind: String((message.data as Record<string, unknown> | undefined)?.kind ?? ""),
-            },
+            data,
             // Owner 2026-10-20 ("no sound"): channels with sound and vibration
             // (the first ones were created silent and Android keeps a channel's
             // settings, so these are new). HIGH so it shows at once, on screen.
@@ -185,8 +195,11 @@ serve(async (request: Request) => {
                 color: "#1E6FD9",
               },
             },
-          },
-        }),
+          };
+      const response = await fetch(`https://fcm.googleapis.com/v1/projects/${account.project_id}/messages:send`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ message: payload }),
       });
       if (response.ok) {
         sent += 1;

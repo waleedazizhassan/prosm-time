@@ -81,7 +81,8 @@ export default function AttendanceConfirmModal({
       title={t(action === "clockIn" ? "attendance.confirmClockInTitle" : "attendance.confirmClockOutTitle")}
       size="screen"
       footer={
-        <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", width: "100%" }}>
+        // owner 2026-11-12 ("the screen without scrolling"): the two buttons side by side
+        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: "var(--space-2)", width: "100%" }}>
           <Button variant={action === "clockIn" ? "primary" : "danger"} fullWidth onClick={() => onConfirm(note, activity)} loading={submitting}>
             {t(action === "clockIn" ? "attendance.confirmClockInAction" : "attendance.confirmClockOutAction")}
           </Button>
@@ -99,26 +100,27 @@ export default function AttendanceConfirmModal({
           review step - this is the note-adding screen, not another
           photo screen. */}
       {/* 2026-11-09 (owner): step 3 - who and when at a glance, the photo large and round */}
-      <div style={{ display: "flex", alignItems: "center", gap: "var(--space-4)", marginBottom: "var(--space-4)" }}>
+      {/* owner 2026-11-12: everything smaller, so the whole screen fits without scrolling */}
+      <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)", marginBottom: "var(--space-3)" }}>
         {photoPreviewUrl ? (
           <img src={photoPreviewUrl} alt={t("attendance.confirmPhotoLabel")}
-            style={{ width: 104, height: 104, objectFit: "cover", borderRadius: "50%", flexShrink: 0, border: "3px solid transparent", background: "var(--brand-gradient) border-box", padding: 2 }} />
+            style={{ width: 72, height: 72, objectFit: "cover", borderRadius: "50%", flexShrink: 0, border: "3px solid transparent", background: "var(--brand-gradient) border-box", padding: 2 }} />
         ) : null}
         <div style={{ minWidth: 0 }}>
-          {personName ? <div style={{ fontSize: "var(--font-xl)", fontWeight: "var(--font-weight-bold)", color: "var(--text-primary)" }}>{personName}</div> : null}
-          {deviceLabel ? <div style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{t("attendance.viaDevice", { device: deviceLabel })}</div> : null}
-          {lastClockOutLabel ? <div style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>{lastClockOutLabel}</div> : null}
+          {personName ? <div style={{ fontSize: "var(--font-lg)", fontWeight: "var(--font-weight-bold)", color: "var(--text-primary)" }}>{personName}</div> : null}
+          {deviceLabel ? <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("attendance.viaDevice", { device: deviceLabel })}</div> : null}
+          {lastClockOutLabel ? <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{lastClockOutLabel}</div> : null}
           {!photoPreviewUrl ? <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("attendance.confirmNoPhoto")}</div> : null}
         </div>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-2)", marginBottom: "var(--space-3)" }}>
-        <div style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--surface-hover)", textAlign: "center" }}>
+        <div style={{ padding: "var(--space-2)", borderRadius: "var(--radius-md)", background: "var(--surface-hover)", textAlign: "center" }}>
           <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("attendance.confirmDateLabel")}</div>
           <div style={{ fontWeight: "var(--font-weight-bold)" }}>{formatDateOnly(new Date(), i18n.language)}</div>
         </div>
-        <div style={{ padding: "var(--space-3)", borderRadius: "var(--radius-md)", background: "var(--surface-hover)", textAlign: "center" }}>
+        <div style={{ padding: "var(--space-2)", borderRadius: "var(--radius-md)", background: "var(--surface-hover)", textAlign: "center" }}>
           <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{t("attendance.confirmTimeLabel")}</div>
-          <div style={{ fontWeight: "var(--font-weight-bold)", fontSize: "var(--font-lg)" }}>{formatTimeOnly(new Date().toISOString(), i18n.language)}</div>
+          <div style={{ fontWeight: "var(--font-weight-bold)" }}>{formatTimeOnly(new Date().toISOString(), i18n.language)}</div>
         </div>
       </div>
 
@@ -127,11 +129,14 @@ export default function AttendanceConfirmModal({
           {t("attendance.confirmOutside", { site: siteName, meters: outsideByMeters })}
         </p>
       ) : null}
-      <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", marginBottom: "var(--space-4)", fontSize: "var(--font-sm)" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "var(--space-3)" }}>
-          <span style={{ color: "var(--text-secondary)" }}>{t("attendance.siteLabel")}</span>
-          <span style={{ fontWeight: "var(--font-weight-medium)", textAlign: "end" }}>{siteName}</span>
-        </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-1)", marginBottom: "var(--space-3)", fontSize: "var(--font-sm)" }}>
+        {/* the site is chosen just below when the caller asks for it - not said twice */}
+        {children ? null : (
+          <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "var(--space-3)" }}>
+            <span style={{ color: "var(--text-secondary)" }}>{t("attendance.siteLabel")}</span>
+            <span style={{ fontWeight: "var(--font-weight-medium)", textAlign: "end" }}>{siteName}</span>
+          </div>
+        )}
         <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", alignItems: "flex-start", gap: "var(--space-3)" }}>
           <span style={{ color: "var(--text-secondary)", flexShrink: 0 }}>{t("attendance.confirmLocationLabel")}</span>
           {latitude !== null && longitude !== null ? (
@@ -162,9 +167,9 @@ export default function AttendanceConfirmModal({
       </div>
 
       {children}
-      <Textarea label={t("attendance.noteLabel")} name="attendanceNote" value={note} onChange={(event) => setNote(event.target.value)} disabled={submitting} rows={2} placeholder={t("attendance.optionalPlaceholder")} />
-      <div style={{ marginTop: "var(--space-3)" }}>
-        <Textarea label={t("attendance.activityLabel")} name="attendanceActivity" value={activity} onChange={(event) => setActivity(event.target.value)} disabled={submitting} rows={2} placeholder={t("attendance.optionalPlaceholder")} />
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-2)" }}>
+        <Textarea label={t("attendance.noteLabel")} name="attendanceNote" value={note} onChange={(event) => setNote(event.target.value)} disabled={submitting} rows={1} placeholder={t("attendance.optionalPlaceholder")} />
+        <Textarea label={t("attendance.activityLabel")} name="attendanceActivity" value={activity} onChange={(event) => setActivity(event.target.value)} disabled={submitting} rows={1} placeholder={t("attendance.optionalPlaceholder")} />
       </div>
 
       <ErrorText>{error}</ErrorText>

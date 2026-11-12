@@ -70,18 +70,25 @@
     max-height: none;
     border-radius: 0;
     border: none;
+    /* owner 2026-11-12: in the app the page runs under the phone's status bar and navigation bar
+       (Capacitor gives their size as --safe-area-inset-*; env() is 0 there) - the screen keeps clear of both */
+    padding-top: var(--safe-top);
+    padding-bottom: var(--safe-bottom);
+    box-sizing: border-box;
   }
 
   .screen .body {
     flex: 1;
     min-height: 0;
     padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
   }
 
   /* Owner 2026-11-10: "use the photo" and "retake" sat under the phone's navigation bar on some
      phones - the footer keeps clear of it (safe area, plus a margin for bars that draw over pages). */
   .screen .footer {
-    padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px) + 28px);
+    padding-bottom: calc(var(--space-4) + 12px);
   }
 }
 

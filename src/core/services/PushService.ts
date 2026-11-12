@@ -63,6 +63,9 @@ export async function startPush(onTap: (data: Record<string, unknown> | undefine
       remember(value);
       // The app's language, so notifications arrive in it.
       await requireSupabaseClient().rpc("register_prosm_time_push_device", { p_token: value, p_platform: "android", p_language: currentLanguage() });
+      // Owner 2026-11-12: this app shows an SOS itself - alarm tone, whole screen over the lock screen
+      // (SosMessagingService), so the server sends it the SOS as a data message
+      await requireSupabaseClient().rpc("set_prosm_time_push_device_alarm", { p_token: value });
     });
     await PushNotifications.addListener("pushNotificationActionPerformed", ({ notification }) => onTap(notification.data));
     // Owner 2026-11-10: a push that arrives while the app is open (a Buzz) is shown at once in the app

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { Camera, RefreshCw, Upload, X, SwitchCamera } from "lucide-react";
+import { RefreshCw, Upload, X, SwitchCamera } from "lucide-react";
 
 import Modal from "./Modal";
 import Button from "./Button";
@@ -298,22 +298,12 @@ export default function CameraCaptureModal({ isOpen, onClose, onCapture, siteId 
               <Upload size={14} /> {t("chooseFileAction")}
             </Button>
           </>
-        ) : (
-          <>
-            <Button variant="ghost" onClick={onClose}>
-              {t("cancel")}
-            </Button>
-            {challengePending ? (
-              <Button variant="primary" onClick={runChallenge} loading={challengeState === "running"}>
-                {challengeAttempts === 0 ? t("challenge.start") : t("challenge.retry")}
-              </Button>
-            ) : (
-              <Button variant="primary" onClick={handleCapture} disabled={!livenessReady}>
-                <Camera size={14} /> {t("capture")}
-              </Button>
-            )}
-          </>
-        )
+        ) : challengePending ? (
+          <Button variant="primary" onClick={runChallenge} loading={challengeState === "running"}>
+            {challengeAttempts === 0 ? t("challenge.start") : t("challenge.retry")}
+          </Button>
+        ) : // owner 2026-11-12: the round shutter takes the photo, the X closes - no buttons below
+        undefined
       }
     >
       <div className={styles.viewport}>

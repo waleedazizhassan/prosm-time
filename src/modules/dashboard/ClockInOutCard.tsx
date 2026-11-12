@@ -1375,7 +1375,8 @@ export default function ClockInOutCard() {
         >
           {/* Owner 2026-11-09: the site and the place of work on this last step, not the first */}
           {confirmAction === "clockIn" ? (
-        <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", marginBottom: "var(--space-3)" }}>
+        // owner 2026-11-12 ("the screen without scrolling"): the site and the place of work side by side
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-2)", marginBottom: "var(--space-2)", alignItems: "end" }}>
           {/* § live UX review, user-directed - "site should be optional;
               the important thing is registering attendance at the
               employee's actual current location, since they may be
@@ -1424,7 +1425,7 @@ export default function ClockInOutCard() {
               button below does the clock-in (it names the site). No second button, nothing recorded
               until the person presses it. */}
           {suggestOnSite ? (
-            <p role="status" style={{ margin: 0, padding: "var(--space-2) var(--space-3)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-strong)", fontSize: "var(--font-sm)" }}>
+            <p role="status" style={{ gridColumn: "1 / -1", margin: 0, padding: "var(--space-2) var(--space-3)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-strong)", fontSize: "var(--font-sm)" }}>
               {t("attendance.suggestSite", { site: proximitySite!.name })}
             </p>
           ) : null}
