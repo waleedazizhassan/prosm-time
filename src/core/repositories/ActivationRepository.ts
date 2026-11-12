@@ -12,6 +12,10 @@ export interface ActivationInput {
   ownerEmail: string;
   ownerPassword: string;
   ownerFullName: string;
+  /** owner 2026-11-12: the owner's official data, kept with the licence */
+  ownerLegalName?: string;
+  ownerNationalId?: string;
+  ownerPhone?: string;
   /** Demo: a 30-day trial started without an activation code. */
   demo?: boolean;
 }

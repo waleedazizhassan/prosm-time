@@ -11,6 +11,7 @@ import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
+import { applyLicenceOwner } from "../_shared/licenseOwner.ts";
 
 interface LicenseStatusResult {
   success: boolean;
@@ -145,6 +146,9 @@ serve(async (request: Request) => {
     if (refreshError || !refreshResult?.success) {
       return errorResponse(refreshError?.message ?? "Unable to refresh the local license cache.", 500, "LICENSE_STATE_REFRESH_FAILED");
     }
+    // owner 2026-11-12: a newer owner change from Platform Manager reaches the owner's account
+    const ownerFailure = await applyLicenceOwner(serviceClient, callerRow.organization_id, (statusResult.data as any).owner);
+    if (ownerFailure) console.error("[refresh-license-status] owner change not applied:", ownerFailure);
 
     return successResponse({ status: statusResult.data.status, expiresAt: statusResult.data.expiresAt });
   } catch (error: any) {

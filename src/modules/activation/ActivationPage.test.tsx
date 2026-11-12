@@ -19,6 +19,10 @@ function fillAndSubmit() {
   fireEvent.change(screen.getByLabelText(/Activation code/i), { target: { value: "PMTIME-ABCD-1234-EFGH" } });
   fireEvent.change(screen.getByLabelText(/Organization name/i), { target: { value: "Acme Field Services" } });
   fireEvent.change(screen.getByLabelText(/Your full name/i), { target: { value: "Jordan Rivera" } });
+  // owner 2026-11-12: the owner's official data
+  fireEvent.change(screen.getByLabelText(/official full name/i), { target: { value: "Jordan Lee Rivera" } });
+  fireEvent.change(screen.getByLabelText(/National ID number/i), { target: { value: "29001010101010" } });
+  fireEvent.change(screen.getByLabelText(/Mobile number/i), { target: { value: "01000000000" } });
   fireEvent.change(screen.getByLabelText(/Your email/i), { target: { value: "owner@acme.example" } });
   fireEvent.change(screen.getByLabelText(/Choose a password/i), { target: { value: "SuperSecret123" } });
   fireEvent.change(screen.getByLabelText(/Confirm password/i, { selector: "input" }), { target: { value: "SuperSecret123" } });
@@ -55,6 +59,9 @@ describe("ActivationPage", () => {
         ownerEmail: "owner@acme.example",
         ownerPassword: "SuperSecret123",
         ownerFullName: "Jordan Rivera",
+        ownerLegalName: "Jordan Lee Rivera",
+        ownerNationalId: "29001010101010",
+        ownerPhone: "01000000000",
       });
     }, { timeout: 5000 });
   });

@@ -377,7 +377,9 @@
     "invalidSiteProfile": "Zugehörigkeit oder Art des Standorts ist ungültig.",
     "documentNameRequired": "Geben Sie den Namen des Dokuments ein.",
     "documentNameTooLong": "Der Name des Dokuments ist zu lang.",
-    "legalNameArabic": "Der amtliche Name muss auf Arabisch sein, wie im Ausweis."
+    "legalNameArabic": "Der amtliche Name muss auf Arabisch sein, wie im Ausweis.",
+    "nationalIdRequired": "Geben Sie die Ausweisnummer ein.",
+    "phoneRequired": "Geben Sie die Mobilnummer ein."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

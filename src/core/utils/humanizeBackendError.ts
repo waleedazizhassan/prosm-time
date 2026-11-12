@@ -429,6 +429,8 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "WRITE THE REASON FOR THE APPEAL": "appealReasonRequired",
   "A REDUCTION MUST BE LIGHTER": "reductionLighter",
   "ENTER THE FULL LEGAL NAME": "legalNameRequired",
+  "ENTER THE NATIONAL ID NUMBER": "nationalIdRequired",
+  "ENTER THE MOBILE NUMBER": "phoneRequired",
   "LEGAL NAME MUST BE IN ARABIC": "legalNameArabic",
   "NOT FOUND": "notFound",
   // 2026-11-10: Buzz

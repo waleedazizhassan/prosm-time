@@ -377,7 +377,9 @@
     "invalidSiteProfile": "O proprietário ou o tipo do local não é válido.",
     "documentNameRequired": "Escreva o nome do documento.",
     "documentNameTooLong": "O nome do documento é demasiado longo.",
-    "legalNameArabic": "O nome oficial tem de estar em árabe, como no cartão de identidade."
+    "legalNameArabic": "O nome oficial tem de estar em árabe, como no cartão de identidade.",
+    "nationalIdRequired": "Escreva o número de identificação.",
+    "phoneRequired": "Escreva o número de telemóvel."
   },
   "pageLoad": {
     "title": "Esta página precisa de conexão",

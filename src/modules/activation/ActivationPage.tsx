@@ -38,6 +38,11 @@ import { appLocale } from "../../core/utils/formatDate";
 // shell (renderHtmlToPdf) every other export in this app already
 // uses, built from a fresh read of the real license_activation_state
 // row (LicenseRepository) - never data invented client-side.
+// digits of any script read as Latin digits (Arabic-Indic and extended)
+function toLatinDigits(value: string): string {
+  return value.trim().replace(/[\u0660-\u0669]/g, (d) => String(d.charCodeAt(0) - 0x0660)).replace(/[\u06f0-\u06f9]/g, (d) => String(d.charCodeAt(0) - 0x06f0));
+}
+
 export default function ActivationPage() {
   const { t, i18n } = useTranslation(["auth", "common"]);
   const navigate = useNavigate();
@@ -50,6 +55,10 @@ export default function ActivationPage() {
   // 2026-11-11 HR suite feature 4: the organisation's country (Egypt's ready payroll rules, or a form for another country)
   const [country, setCountry] = useState("EG");
   const [ownerFullName, setOwnerFullName] = useState("");
+  // owner 2026-11-12: the owner's official name, national ID and mobile - kept with the licence
+  const [ownerLegalName, setOwnerLegalName] = useState("");
+  const [ownerNationalId, setOwnerNationalId] = useState("");
+  const [ownerPhone, setOwnerPhone] = useState("");
   const [ownerEmail, setOwnerEmail] = useState("");
   const [ownerPassword, setOwnerPassword] = useState("");
   const [confirmOwnerPassword, setConfirmOwnerPassword] = useState("");
@@ -69,6 +78,18 @@ export default function ActivationPage() {
     event.preventDefault();
     setError("");
 
+    if (ownerLegalName.trim().split(/\s+/).length < 3) {
+      setError(t("auth:activation.legalNameError"));
+      return;
+    }
+    if (!/^[0-9A-Za-z-]{4,30}$/.test(toLatinDigits(ownerNationalId))) {
+      setError(t("auth:activation.nationalIdError"));
+      return;
+    }
+    if (!/^\+?[0-9 ]{6,20}$/.test(toLatinDigits(ownerPhone))) {
+      setError(t("auth:activation.phoneError"));
+      return;
+    }
     if (ownerPassword !== confirmOwnerPassword) {
       setError(t("auth:activation.passwordMismatch"));
       return;
@@ -84,6 +105,9 @@ export default function ActivationPage() {
       ownerEmail: ownerEmail.trim(),
       ownerPassword,
       ownerFullName: ownerFullName.trim(),
+      ownerLegalName: ownerLegalName.trim(),
+      ownerNationalId: toLatinDigits(ownerNationalId),
+      ownerPhone: toLatinDigits(ownerPhone),
     });
 
     if (!result.success || !result.data) {
@@ -213,6 +237,34 @@ export default function ActivationPage() {
           onChange={(event) => setOwnerFullName(event.target.value)}
           required
           disabled={submitting || success}
+        />
+        <Input
+          label={t("auth:activation.ownerLegalNameLabel")}
+          name="ownerLegalName"
+          value={ownerLegalName}
+          onChange={(event) => setOwnerLegalName(event.target.value)}
+          required
+          disabled={submitting || success}
+          helperText={t("auth:activation.ownerLegalNameHint")}
+        />
+        <Input
+          label={t("auth:activation.ownerNationalIdLabel")}
+          name="ownerNationalId"
+          value={ownerNationalId}
+          inputMode="numeric"
+          onChange={(event) => setOwnerNationalId(event.target.value)}
+          required
+          disabled={submitting || success}
+        />
+        <Input
+          label={t("auth:activation.ownerPhoneLabel")}
+          name="ownerPhone"
+          type="tel"
+          value={ownerPhone}
+          onChange={(event) => setOwnerPhone(event.target.value)}
+          required
+          disabled={submitting || success}
+          autoComplete="tel"
         />
         <Input
           label={t("auth:activation.ownerEmailLabel")}

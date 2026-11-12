@@ -377,7 +377,9 @@
     "invalidSiteProfile": "The site's owner or type is not valid.",
     "documentNameRequired": "Enter the document's name.",
     "documentNameTooLong": "The document's name is too long.",
-    "legalNameArabic": "The official name must be in Arabic, as on the ID card."
+    "legalNameArabic": "The official name must be in Arabic, as on the ID card.",
+    "nationalIdRequired": "Enter the national ID number.",
+    "phoneRequired": "Enter the mobile number."
   },
   "pageLoad": {
     "title": "This page needs a connection",

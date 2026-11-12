@@ -10,6 +10,7 @@ import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
+import { applyLicenceOwner } from "../_shared/licenseOwner.ts";
 
 serve(async (request: Request) => {
   if (request.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
@@ -58,6 +59,9 @@ serve(async (request: Request) => {
         });
         if (refreshError) failures.push({ organizationId: licence.organization_id, message: refreshError.message });
         else synced += 1;
+        // owner 2026-11-12: a newer owner change from Platform Manager reaches the owner's account
+        const ownerFailure = await applyLicenceOwner(client, licence.organization_id, result.data.owner);
+        if (ownerFailure) failures.push({ organizationId: licence.organization_id, message: ownerFailure });
       } catch (error: any) {
         failures.push({ organizationId: licence.organization_id, message: error?.message ?? "failed" });
       }

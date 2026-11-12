@@ -60,6 +60,10 @@ serve(async (request: Request) => {
   try {
     const payload = await request.json().catch(() => ({}));
     const { activationCode, organizationName, ownerEmail, ownerPassword, ownerFullName } = payload;
+    // Owner 2026-11-12: the owner's official data goes with the licence (shown and changed in Platform Manager)
+    const ownerLegalName = typeof payload.ownerLegalName === "string" ? payload.ownerLegalName.trim().replace(/\s+/g, " ") : "";
+    const ownerNationalId = typeof payload.ownerNationalId === "string" ? payload.ownerNationalId.trim() : "";
+    const ownerPhone = typeof payload.ownerPhone === "string" ? payload.ownerPhone.trim() : "";
     // Demo (owner 2026-09-29): the same activation with only the code skipped - PROSM Platform issues
     // a 30-day trial license instead of redeeming a code; every other step below is unchanged.
     const demo = payload.demo === true;
@@ -79,6 +83,10 @@ serve(async (request: Request) => {
     if (!ownerFullName || typeof ownerFullName !== "string" || ownerFullName.trim().length === 0) {
       return errorResponse("ownerFullName is required.", 400, "INVALID_REQUEST");
     }
+    if (ownerLegalName.length < 3 || ownerLegalName.length > 200) return errorResponse("ENTER THE FULL LEGAL NAME", 400, "INVALID_REQUEST");
+    if (!/^[0-9A-Za-z-]{4,30}$/.test(ownerNationalId)) return errorResponse("ENTER THE NATIONAL ID NUMBER", 400, "INVALID_REQUEST");
+    if (!/^\+?[0-9 ]{6,20}$/.test(ownerPhone)) return errorResponse("ENTER THE MOBILE NUMBER", 400, "INVALID_REQUEST");
+    const owner = { email: ownerEmail.trim().toLowerCase(), fullName: ownerFullName.trim(), legalName: ownerLegalName, nationalId: ownerNationalId, phone: ownerPhone };
 
     // Security Hardening phase (user-directed): activation codes are
     // guessable secrets on a session-less endpoint, so the guessing
@@ -114,6 +122,7 @@ serve(async (request: Request) => {
         ...(demo ? { action: "startTrial" } : { action: "activate", code: activationCode.trim() }),
         customerName: organizationName.trim(),
         customerReference: ownerEmail.trim().toLowerCase(),
+        owner,
       }),
     });
 
@@ -193,6 +202,13 @@ serve(async (request: Request) => {
         return errorResponse("The trial could not be started. Please try again.", 500, "TRIAL_SETUP_FAILED");
       }
     }
+
+    // the owner's official data on their account here too (the licence's first version of it)
+    const { error: ownerError } = await serviceClient.rpc("apply_prosm_time_license_owner", {
+      p_organization_id: bootstrapResult.organizationId,
+      p_owner: { ...owner, version: 1 },
+    });
+    if (ownerError) console.error("[activate-organization] owner data not saved", ownerError);
 
     return successResponse({
       organizationId: bootstrapResult.organizationId,
