@@ -438,7 +438,8 @@
     "allAsked": "Ya pidió todos los meses publicados; recibirá respuesta.",
     "askBodyBoth": "Elija el mes. La solicitud llega al responsable de nóminas; al enviarla recibirá un aviso y un correo, y aparecerá aquí.",
     "whichMonth": "Mes",
-    "rejectedReason": "Motivo: {{reason}}"
+    "rejectedReason": "Motivo: {{reason}}",
+    "nothingPublished": "Aún no se ha publicado ninguna nómina para usted. Cuando nóminas cierre y publique un ciclo, podrá pedirla aquí."
   },
   "errors": {
     "generic": "Algo salió mal. Inténtelo de nuevo.",

@@ -438,7 +438,8 @@
     "allAsked": "Já pediu todos os meses publicados - receberá resposta.",
     "askBodyBoth": "Escolha o mês. O pedido vai para o responsável pelos salários; ao enviar, recebe uma notificação e um e-mail, e o recibo aparece aqui.",
     "whichMonth": "Mês",
-    "rejectedReason": "Motivo: {{reason}}"
+    "rejectedReason": "Motivo: {{reason}}",
+    "nothingPublished": "Ainda não foi publicado nenhum recibo para si. Quando um ciclo salarial for fechado e publicado, pode pedi-lo aqui."
   },
   "errors": {
     "generic": "Algo correu mal. Tente de novo.",

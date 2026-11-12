@@ -437,7 +437,8 @@
     "allAsked": "You asked for every published month - you'll hear back when it is answered.",
     "askBodyBoth": "Choose the month. The request goes to the person in charge of payroll; when they send it you get a notification and an email, and it appears here.",
     "whichMonth": "Month",
-    "rejectedReason": "Reason: {{reason}}"
+    "rejectedReason": "Reason: {{reason}}",
+    "nothingPublished": "No payslip has been published to you yet. Once payroll closes and publishes a cycle, you can request it here."
   },
   "errors": {
     "generic": "Something went wrong. Try again.",

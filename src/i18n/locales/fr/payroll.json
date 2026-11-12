@@ -438,7 +438,8 @@
     "allAsked": "Vous avez demandé tous les mois publiés - vous serez prévenu(e).",
     "askBodyBoth": "Choisissez le mois. La demande va au responsable de la paie ; à l'envoi, vous recevez une notification et un e-mail, et le bulletin apparaît ici.",
     "whichMonth": "Mois",
-    "rejectedReason": "Motif : {{reason}}"
+    "rejectedReason": "Motif : {{reason}}",
+    "nothingPublished": "Aucun bulletin ne vous a encore été publié. Dès qu'un cycle de paie est clôturé et publié, vous pourrez le demander ici."
   },
   "errors": {
     "generic": "Une erreur s'est produite. Réessayez.",

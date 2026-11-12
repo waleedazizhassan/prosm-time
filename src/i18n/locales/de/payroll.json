@@ -437,7 +437,8 @@
     "allAsked": "Sie haben alle veröffentlichten Monate angefordert - Sie erhalten Bescheid.",
     "askBodyBoth": "Wählen Sie den Monat. Die Anfrage geht an die zuständige Person; beim Senden erhalten Sie eine Benachrichtigung und eine E-Mail, und die Abrechnung erscheint hier.",
     "whichMonth": "Monat",
-    "rejectedReason": "Grund: {{reason}}"
+    "rejectedReason": "Grund: {{reason}}",
+    "nothingPublished": "Für Sie wurde noch keine Abrechnung veröffentlicht. Sobald ein Lohnzyklus abgeschlossen und veröffentlicht ist, können Sie sie hier anfordern."
   },
   "errors": {
     "generic": "Etwas ist schiefgelaufen. Bitte erneut versuchen.",

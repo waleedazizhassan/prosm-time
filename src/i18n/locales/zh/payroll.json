@@ -436,7 +436,8 @@
     "allAsked": "您已申请所有已发布的月份，处理后会通知您。",
     "askBodyBoth": "选择月份。申请会发给工资负责人；发送后您会收到通知和邮件，工资单也会出现在这里。",
     "whichMonth": "月份",
-    "rejectedReason": "原因：{{reason}}"
+    "rejectedReason": "原因：{{reason}}",
+    "nothingPublished": "还没有向您发布任何工资单。工资周期关闭并发布后，您就可以在这里申请。"
   },
   "errors": {
     "generic": "出现问题，请重试。",
