@@ -251,7 +251,7 @@
     },
     "q11": {
       "question": "Come funziona la demo di 30 giorni?",
-      "answer": "Nella pagina di benvenuto, «Usa la prova» apre i soliti passaggi di attivazione senza codice e crea subito l’organizzazione e il titolare. La prova dura 30 giorni (ora del server) e una barra mostra i giorni rimasti. Una settimana prima della fine il titolare riceve una notifica e un’e-mail con sales@prosm.net, info@prosm.net e support@prosm.net. Alla fine l’organizzazione diventa di sola lettura senza eliminare nulla: inserisci un codice in Impostazioni > Abbonamento, o chiedi a PROSM di rinnovare la licenza, e tutto riprende come prima. Una prova per e-mail."
+      "answer": "Nella pagina di benvenuto, «Prova gratis per 30 giorni» apre i soliti passaggi di attivazione senza codice e crea subito l’organizzazione e il titolare. La prova dura 30 giorni (ora del server) e una barra mostra i giorni rimasti. Una settimana prima della fine il titolare riceve una notifica e un’e-mail con sales@prosm.net, info@prosm.net e support@prosm.net. Alla fine l’organizzazione diventa di sola lettura senza eliminare nulla: inserisci un codice in Impostazioni > Abbonamento, o chiedi a PROSM di rinnovare la licenza, e tutto riprende come prima. Una prova per e-mail."
     },
     "q12": {
       "question": "La timbratura funziona senza internet?",

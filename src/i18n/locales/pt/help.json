@@ -251,7 +251,7 @@
     },
     "q11": {
       "question": "Como funciona a demonstração de 30 dias?",
-      "answer": "Na página de boas-vindas, \"Usar o teste\" abre as etapas normais de ativação sem código, criando na hora a organização e seu proprietário. O teste dura 30 dias (horário do servidor) e uma barra mostra os dias restantes. Uma semana antes do fim, o proprietário recebe uma notificação e um e-mail com sales@prosm.net, info@prosm.net e support@prosm.net. Quando termina, a organização fica somente leitura, sem apagar nada: insira um código de ativação em Configurações > Assinatura ou peça à PROSM para renovar a licença, e tudo volta a funcionar como antes. Um teste por e-mail."
+      "answer": "Na página de boas-vindas, \"Teste grátis de 30 dias\" abre as etapas normais de ativação sem código, criando na hora a organização e seu proprietário. O teste dura 30 dias (horário do servidor) e uma barra mostra os dias restantes. Uma semana antes do fim, o proprietário recebe uma notificação e um e-mail com sales@prosm.net, info@prosm.net e support@prosm.net. Quando termina, a organização fica somente leitura, sem apagar nada: insira um código de ativação em Configurações > Assinatura ou peça à PROSM para renovar a licença, e tudo volta a funcionar como antes. Um teste por e-mail."
     },
     "q12": {
       "question": "A frequência funciona sem internet?",

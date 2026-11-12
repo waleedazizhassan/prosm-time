@@ -251,7 +251,7 @@
     },
     "q11": {
       "question": "¿Cómo funciona la demo de 30 días?",
-      "answer": "En la página de bienvenida, \"Usar la prueba\" abre los pasos habituales de activación sin código y crea al momento la organización y su propietario. La prueba dura 30 días (hora del servidor) y una barra muestra los días que quedan. Una semana antes del final, el propietario recibe una notificación y un correo con sales@prosm.net, info@prosm.net y support@prosm.net. Al terminar, la organización pasa a solo lectura sin borrar nada: introduce un código de activación en Ajustes > Suscripción, o pide a PROSM que renueve la licencia, y todo funciona como antes. Una prueba por correo."
+      "answer": "En la página de bienvenida, \"Prueba gratis 30 días\" abre los pasos habituales de activación sin código y crea al momento la organización y su propietario. La prueba dura 30 días (hora del servidor) y una barra muestra los días que quedan. Una semana antes del final, el propietario recibe una notificación y un correo con sales@prosm.net, info@prosm.net y support@prosm.net. Al terminar, la organización pasa a solo lectura sin borrar nada: introduce un código de activación en Ajustes > Suscripción, o pide a PROSM que renueve la licencia, y todo funciona como antes. Una prueba por correo."
     },
     "q12": {
       "question": "¿La asistencia funciona sin internet?",
