@@ -4,7 +4,7 @@
   "guides": {
     "gettingStarted": {
       "title": "Per iniziare",
-      "body": "Accedi con l'e-mail e la password impostate dal tuo amministratore. La prima volta (e a ogni modifica) vedi cosa registra PROSM Time e ti viene chiesto di riconoscere l'Informativa sulla privacy e le Condizioni d'uso. Dalla dashboard, Timbra entrata inizia il turno e Timbra uscita lo termina; una mappa mostra la tua posizione e l'area della sede. L'app si apre nella lingua del dispositivo se supportata; puoi cambiarla dal menu utente. I dipendenti aprono la propria pagina iniziale: timbrare entrata e uscita, le ore di oggi, di questa settimana (da domenica) e di questo mese, e i collegamenti a presenze, indennità, fogli ore e ferie. Il titolare, i responsabili e i supervisori aprono la dashboard. Il titolare non timbra."
+      "body": "Accedi con l'e-mail e la password impostate dal tuo amministratore. La prima volta (e a ogni modifica) vedi cosa registra PROSM Time e ti viene chiesto di riconoscere l'Informativa sulla privacy e le Condizioni d'uso. Dalla dashboard, Timbra entrata inizia il turno e Timbra uscita lo termina; una mappa mostra la tua posizione e l'area della sede. L'app si apre nella lingua del dispositivo se supportata; puoi cambiarla dal menu utente. I dipendenti aprono la propria pagina iniziale: timbrare entrata e uscita, le ore di oggi, di questa settimana (da domenica) e di questo mese, e la barra in basso con presenze e ferie (ne Il mio fascicolo) e indennità. Il titolare, i responsabili e i supervisori aprono la dashboard. Il titolare non timbra."
     },
     "attendance": {
       "title": "Timbrare entrata e uscita",
@@ -32,7 +32,7 @@
     },
     "exceptions": {
       "title": "Verifiche - eccezioni, correzioni, orari offline, posizioni false",
-      "body": "Tutto ciò che richiede una decisione compare nella console del responsabile in «In attesa di verifica»: eccezioni fuori area (con il tuo motivo), richieste di correzione, azioni offline con l'ora del dispositivo e posizioni segnalate come false. Un'eccezione approvata ti considera presente tutto il tempo; respinta, il tempo di lavoro si ferma al momento del primo rilevamento. Le segnalazioni sono informazioni da verificare equamente da una persona, non decisioni automatiche.\n\nNovità: la pagina «Le mie eccezioni» nel menu elenca le tue eccezioni e il loro stato (in revisione, approvata, respinta) e permette di inviare il motivo."
+      "body": "Tutto ciò che richiede una decisione compare nella console del responsabile in «In attesa di verifica»: eccezioni fuori area (con il tuo motivo), richieste di correzione, azioni offline con l'ora del dispositivo e posizioni segnalate come false. Un'eccezione approvata ti considera presente tutto il tempo; respinta, il tempo di lavoro si ferma al momento del primo rilevamento. Le segnalazioni sono informazioni da verificare equamente da una persona, non decisioni automatiche.\n\nNovità: Il mio fascicolo → Presenze → Eccezioni elenca le tue eccezioni e il loro stato (in revisione, approvata, respinta) e permette di inviare il motivo."
     },
     "allowances": {
       "title": "Indennità",

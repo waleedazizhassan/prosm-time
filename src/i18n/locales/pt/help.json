@@ -4,7 +4,7 @@
   "guides": {
     "gettingStarted": {
       "title": "Primeiros passos",
-      "body": "Entre com o e-mail e a senha que o seu administrador configurou para você. Na primeira vez (e sempre que mudarem), você vê o que o PROSM Time registra sobre você e precisa aceitar a Política de Privacidade e os Termos de Uso. No Painel, use Registrar entrada para começar o turno e Registrar saída para terminá-lo - um mapa ao vivo mostra sua posição atual e, quando for o caso, a área de trabalho do local. O app abre no idioma do seu dispositivo quando é um dos nove disponíveis; você pode mudá-lo quando quiser no menu do usuário. Funcionários abrem a própria página inicial: registrar entrada e saída, suas horas de hoje, desta semana (a partir de domingo) e deste mês, e links para frequência, adicionais, folhas de ponto e afastamentos. O proprietário, os gestores e os supervisores abrem o Painel. O proprietário não registra ponto."
+      "body": "Entre com o e-mail e a senha que o seu administrador configurou para você. Na primeira vez (e sempre que mudarem), você vê o que o PROSM Time registra sobre você e precisa aceitar a Política de Privacidade e os Termos de Uso. No Painel, use Registrar entrada para começar o turno e Registrar saída para terminá-lo - um mapa ao vivo mostra sua posição atual e, quando for o caso, a área de trabalho do local. O app abre no idioma do seu dispositivo quando é um dos nove disponíveis; você pode mudá-lo quando quiser no menu do usuário. Funcionários abrem a própria página inicial: registrar entrada e saída, suas horas de hoje, desta semana (a partir de domingo) e deste mês, e a barra em baixo com a assiduidade e as férias (em A minha ficha) e os subsídios. O proprietário, os gestores e os supervisores abrem o Painel. O proprietário não registra ponto."
     },
     "attendance": {
       "title": "Registrar entrada e saída",
@@ -32,7 +32,7 @@
     },
     "exceptions": {
       "title": "Análises - exceções, correções, horários offline e localizações falsas",
-      "body": "Tudo o que precisa da decisão de um gestor aparece no Console do gestor, em Aguardando análise: exceções fora da área (com o seu motivo), pedidos de correção, ações registradas offline com o horário do dispositivo e localizações apontadas como falsas. Se uma exceção é aprovada, você é considerado presente o tempo todo. Se é rejeitada, o tempo efetivamente trabalhado é limitado ao momento em que a situação foi detectada pela primeira vez. Os alertas são informação para uma pessoa analisar com justiça - não decisões automáticas.\n\nNovo: a página «Minhas exceções» no menu lista suas exceções e a situação de cada uma (em revisão, aprovada, rejeitada) e permite enviar seu motivo."
+      "body": "Tudo o que precisa da decisão de um gestor aparece no Console do gestor, em Aguardando análise: exceções fora da área (com o seu motivo), pedidos de correção, ações registradas offline com o horário do dispositivo e localizações apontadas como falsas. Se uma exceção é aprovada, você é considerado presente o tempo todo. Se é rejeitada, o tempo efetivamente trabalhado é limitado ao momento em que a situação foi detectada pela primeira vez. Os alertas são informação para uma pessoa analisar com justiça - não decisões automáticas.\n\nNovo: A minha ficha → Assiduidade → Exceções lista suas exceções e a situação de cada uma (em revisão, aprovada, rejeitada) e permite enviar seu motivo."
     },
     "allowances": {
       "title": "Adicionais",

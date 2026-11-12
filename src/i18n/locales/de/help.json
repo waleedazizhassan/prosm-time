@@ -4,7 +4,7 @@
   "guides": {
     "gettingStarted": {
       "title": "Erste Schritte",
-      "body": "Melden Sie sich mit der E-Mail-Adresse und dem Passwort an, die Ihr Administrator eingerichtet hat. Beim ersten Mal (und bei jeder Änderung) sehen Sie, was PROSM Time über Sie erfasst, und bestätigen die Datenschutzerklärung und die Nutzungsbedingungen. Auf dem Dashboard starten Sie Ihre Schicht mit Einstempeln und beenden sie mit Ausstempeln; eine Live-Karte zeigt Ihre Position und gegebenenfalls den Arbeitsbereich des Standorts. Die App öffnet sich in der Sprache Ihres Geräts, wenn sie unterstützt wird; Sie können sie jederzeit im Benutzermenü ändern. Mitarbeitende öffnen ihre eigene Startseite: Ein- und Ausstempeln, ihre Stunden heute, diese Woche (ab Sonntag) und diesen Monat sowie Links zu Anwesenheit, Zulagen, Stundenzetteln und Urlaub. Inhaber, Manager und Supervisoren öffnen das Dashboard. Der Inhaber stempelt nicht."
+      "body": "Melden Sie sich mit der E-Mail-Adresse und dem Passwort an, die Ihr Administrator eingerichtet hat. Beim ersten Mal (und bei jeder Änderung) sehen Sie, was PROSM Time über Sie erfasst, und bestätigen die Datenschutzerklärung und die Nutzungsbedingungen. Auf dem Dashboard starten Sie Ihre Schicht mit Einstempeln und beenden sie mit Ausstempeln; eine Live-Karte zeigt Ihre Position und gegebenenfalls den Arbeitsbereich des Standorts. Die App öffnet sich in der Sprache Ihres Geräts, wenn sie unterstützt wird; Sie können sie jederzeit im Benutzermenü ändern. Mitarbeitende öffnen ihre eigene Startseite: Ein- und Ausstempeln, ihre Stunden heute, diese Woche (ab Sonntag) und diesen Monat und unten die Leiste mit Anwesenheit und Urlaub (in Meine Akte) und Zulagen. Inhaber, Manager und Supervisoren öffnen das Dashboard. Der Inhaber stempelt nicht."
     },
     "attendance": {
       "title": "Ein- und Ausstempeln",
@@ -32,7 +32,7 @@
     },
     "exceptions": {
       "title": "Prüfungen - Ausnahmen, Korrekturen, Offline-Zeiten, gefälschte Standorte",
-      "body": "Alles, was eine Entscheidung braucht, erscheint in der Manager-Konsole unter Ausstehende Prüfung: Ausnahmen außerhalb des Bereichs (mit Ihrem Grund), Korrekturanträge, offline erfasste Aktionen mit Gerätezeit und als gefälscht gemeldete Standorte. Wird eine Ausnahme genehmigt, gelten Sie als die ganze Zeit anwesend; wird sie abgelehnt, zählt Ihre Arbeitszeit nur bis zum Zeitpunkt der ersten Erkennung. Markierungen sind Informationen für eine faire Prüfung durch einen Menschen - keine automatischen Entscheidungen.\n\nNeu: Die Seite „Meine Ausnahmen“ im Menü zeigt Ihre Ausnahmen mit Status (zur Prüfung, genehmigt, abgelehnt) und lässt Sie Ihre Begründung senden."
+      "body": "Alles, was eine Entscheidung braucht, erscheint in der Manager-Konsole unter Ausstehende Prüfung: Ausnahmen außerhalb des Bereichs (mit Ihrem Grund), Korrekturanträge, offline erfasste Aktionen mit Gerätezeit und als gefälscht gemeldete Standorte. Wird eine Ausnahme genehmigt, gelten Sie als die ganze Zeit anwesend; wird sie abgelehnt, zählt Ihre Arbeitszeit nur bis zum Zeitpunkt der ersten Erkennung. Markierungen sind Informationen für eine faire Prüfung durch einen Menschen - keine automatischen Entscheidungen.\n\nNeu: Meine Akte → Anwesenheit → Ausnahmen zeigt Ihre Ausnahmen mit Status (zur Prüfung, genehmigt, abgelehnt) und lässt Sie Ihre Begründung senden."
     },
     "allowances": {
       "title": "Zulagen",

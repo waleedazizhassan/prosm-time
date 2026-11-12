@@ -4,7 +4,7 @@
   "guides": {
     "gettingStarted": {
       "title": "Getting Started",
-      "body": "Sign in with the email and password your administrator set up for you. The first time (and whenever they change), you're shown what PROSM Time records about you and asked to acknowledge the Privacy Policy and Terms of Use. On the Dashboard, use Clock In to start your shift and Clock Out to end it - a live map shows your current position and, when relevant, the site's work area. The app opens in your device's language when it's one of the nine supported; you can change it any time from the user menu. Employees open to their own home page: clock in and out, their hours today, this week (from Sunday) and this month, and links to their attendance record, allowances, timesheets and leave. The Owner, Managers and Supervisors open to the Dashboard. The Owner doesn't clock in or out."
+      "body": "Sign in with the email and password your administrator set up for you. The first time (and whenever they change), you're shown what PROSM Time records about you and asked to acknowledge the Privacy Policy and Terms of Use. On the Dashboard, use Clock In to start your shift and Clock Out to end it - a live map shows your current position and, when relevant, the site's work area. The app opens in your device's language when it's one of the nine supported; you can change it any time from the user menu. Employees open to their own home page: clock in and out, their hours today, this week (from Sunday) and this month, and the bar at the bottom with attendance and leave (in My file) and allowances. The Owner, Managers and Supervisors open to the Dashboard. The Owner doesn't clock in or out."
     },
     "attendance": {
       "title": "Clocking In & Out",
@@ -32,7 +32,7 @@
     },
     "exceptions": {
       "title": "Reviews - Exceptions, Corrections, Offline Times and Fake Locations",
-      "body": "Everything that needs a manager's decision appears in the Manager Console under Pending Review: out-of-zone exceptions (with your reason), correction requests, actions recorded offline with the device's time, and locations reported as fake. If an exception is approved you're treated as present the full time. If it's rejected, your effective worked time is capped at the moment the situation was first detected. Flags are information for a person to review fairly - not automatic decisions.\n\nNew: the \"My exceptions\" page in the menu lists your exceptions and where each stands (pending review, approved, rejected), and lets you send your reason."
+      "body": "Everything that needs a manager's decision appears in the Manager Console under Pending Review: out-of-zone exceptions (with your reason), correction requests, actions recorded offline with the device's time, and locations reported as fake. If an exception is approved you're treated as present the full time. If it's rejected, your effective worked time is capped at the moment the situation was first detected. Flags are information for a person to review fairly - not automatic decisions.\n\nNew: My file → Attendance → Exceptions lists your exceptions and where each stands (pending review, approved, rejected), and lets you send your reason."
     },
     "allowances": {
       "title": "Allowances",
