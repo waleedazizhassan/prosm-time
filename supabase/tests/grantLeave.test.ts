@@ -32,6 +32,9 @@ beforeAll(async () => {
   await t.su("insert into site_assignments (site_id, user_id, role_at_site) values ($1, $2, 'manager')", [site, manager.userId]);
   await assignToSite(t, site, employee);
   await assignToSite(t, other, outsider);
+  // 2026-11-13: the tests ran on a Friday (the default rest day) and "today" had no working day - this
+  // organisation works every day, so the result does not depend on the day the tests run
+  await t.su("update organization_settings set rest_days = '{}' where organization_id = $1", [org.id]);
 });
 
 describe("granting leave on someone's behalf", () => {
