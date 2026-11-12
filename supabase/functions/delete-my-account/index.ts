@@ -49,6 +49,8 @@ serve(async (request: Request) => {
     // account whose photos and documents are gone but whose data is still there.
     const evidence: string[] = prepared.evidencePaths ?? [];
     const documents: string[] = prepared.documentPaths ?? [];
+    // 2026-11-13: the documents uploaded to the HR file (ID card, certificates, licences)
+    const hrDocuments: string[] = prepared.hrDocumentPaths ?? [];
     const avatar = avatarPath(prepared.avatarUrl ?? null);
 
     // 1. their personal data; the work records stay anonymised
@@ -60,6 +62,7 @@ serve(async (request: Request) => {
       evidence.length > 0 ? service.storage.from("camera-evidence").remove(evidence) : null,
       documents.length > 0 ? service.storage.from("leave-documents").remove(documents) : null,
       avatar ? service.storage.from("user-avatars").remove([avatar]) : null,
+      hrDocuments.length > 0 ? service.storage.from("hr-files").remove(hrDocuments) : null,
     ].filter(Boolean);
     for (const result of await Promise.all(removals)) {
       if (result?.error) console.error("[delete-my-account] files left to clean up");

@@ -399,10 +399,10 @@
     "languageNote": "Este documento está disponible en árabe e inglés; se muestra la versión en inglés.",
     "gate": {
       "title": "Antes de continuar",
-      "intro": "PROSM Time registra tu asistencia para tu organización. Según su configuración:",
+      "intro": "PROSM Time registra tu asistencia para tu organización. Esto es lo que pasa con tus datos:",
       "points": [
         "Tu ubicación se registra cuando fichas la entrada o la salida, haces un descanso, cambias de sede o envías un SOS.",
-        "Si tu organización activa el control de presencia, tu ubicación se registra aproximadamente cada 5 minutos solo durante tu turno (en Android también en segundo plano, con una notificación visible). Se detiene cuando fichas la salida.",
+        "Tu ubicación se registra cada 5 minutos aproximadamente solo durante tu turno; en Android incluso con la app cerrada, con una notificación visible. Se detiene en cuanto marcas la salida.",
         "Solo se hace una foto si tu sede la exige. No hay reconocimiento facial.",
         "Los responsables de tu organización ven tus registros. Las ubicaciones se borran a los 30 días y las fotos a los 90 días."
       ],
@@ -413,7 +413,19 @@
       "signOut": "Cerrar sesión",
       "error": "No se pudo guardar. Revisa tu conexión e inténtalo de nuevo.",
       "confirmEuStorage": "Acepto expresamente que mis datos se almacenen en servidores de la Unión Europea, como explica la sección 7 de la Política de privacidad.",
-      "confirmCapture": "Acepto que se registre mi ubicación al fichar la entrada y la salida, y una foto en las sedes que la exigen."
+      "confirmCapture": "Acepto que se registre mi ubicación al fichar la entrada y la salida, y una foto en las sedes que la exigen.",
+      "pointTitles": [
+        "Al fichar entrada y salida",
+        "Durante tu turno",
+        "Fotos",
+        "Quién lo ve y durante cuánto tiempo"
+      ],
+      "consentsTitle": "Tus consentimientos",
+      "consentsProgress": "{{done}} de {{total}}",
+      "confirmTermsTitle": "Política y condiciones",
+      "confirmEuTitle": "Dónde se guardan los datos",
+      "confirmCaptureTitle": "Ubicación y foto",
+      "tapToAgree": "Toca para aceptar"
     }
   },
   "reminders": {

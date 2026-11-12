@@ -399,10 +399,10 @@
     "languageNote": "Dieses Dokument ist auf Arabisch und Englisch verfügbar; die englische Fassung wird angezeigt.",
     "gate": {
       "title": "Bevor Sie fortfahren",
-      "intro": "PROSM Time erfasst Ihre Anwesenheit für Ihre Organisation. Je nach deren Einstellungen:",
+      "intro": "PROSM Time erfasst Ihre Anwesenheit für Ihre Organisation. Das geschieht mit Ihren Daten:",
       "points": [
         "Ihr Standort wird beim Ein- und Ausstempeln, bei Pausen, beim Standortwechsel und bei einem SOS erfasst.",
-        "Wenn Ihre Organisation die Anwesenheitsüberwachung aktiviert, wird Ihr Standort nur während Ihrer Schicht etwa alle 5 Minuten erfasst (unter Android auch im Hintergrund, mit sichtbarer Benachrichtigung). Beim Ausstempeln endet dies.",
+        "Ihr Standort wird nur während Ihrer Schicht etwa alle 5 Minuten erfasst - unter Android auch bei geschlossener App, mit sichtbarer Benachrichtigung. Mit dem Ausstempeln endet dies sofort.",
         "Ein Foto wird nur aufgenommen, wenn Ihr Standort es verlangt. Es gibt keine Gesichtserkennung.",
         "Die Vorgesetzten Ihrer Organisation sehen Ihre Daten. Standortpunkte werden nach 30 Tagen gelöscht, Fotos nach 90 Tagen."
       ],
@@ -413,7 +413,19 @@
       "signOut": "Abmelden",
       "error": "Speichern nicht möglich. Prüfen Sie die Verbindung und versuchen Sie es erneut.",
       "confirmEuStorage": "Ich stimme ausdrücklich zu, dass meine Daten auf Servern in der Europäischen Union gespeichert werden, wie Abschnitt 7 der Datenschutzerklärung erläutert.",
-      "confirmCapture": "Ich stimme zu, dass mein Standort beim Ein- und Ausstempeln erfasst wird und an Orten, die es verlangen, ein Foto aufgenommen wird."
+      "confirmCapture": "Ich stimme zu, dass mein Standort beim Ein- und Ausstempeln erfasst wird und an Orten, die es verlangen, ein Foto aufgenommen wird.",
+      "pointTitles": [
+        "Beim Ein- und Ausstempeln",
+        "Während der Schicht",
+        "Fotos",
+        "Wer es sieht und wie lange"
+      ],
+      "consentsTitle": "Ihre Einwilligungen",
+      "consentsProgress": "{{done}} von {{total}}",
+      "confirmTermsTitle": "Richtlinie und Bedingungen",
+      "confirmEuTitle": "Speicherort der Daten",
+      "confirmCaptureTitle": "Standort und Foto",
+      "tapToAgree": "Zum Zustimmen tippen"
     }
   },
   "reminders": {

@@ -1,5 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
+import { Camera, Check, Eye, MapPin, Radar, type LucideIcon } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import LegalRepository from "../../core/repositories/LegalRepository";
@@ -90,35 +91,65 @@ export default function LegalAcknowledgementGate({ children }: { children: React
   };
 
   const points = t("legal.gate.points", { returnObjects: true }) as string[];
+  const pointTitles = t("legal.gate.pointTitles", { returnObjects: true }) as string[];
+  // owner 2026-11-13: the screen shown better - what happens with the data as four small cards, then the three
+  // consents as cards to tap, with the buttons always in reach at the bottom
+  const icons: LucideIcon[] = [MapPin, Radar, Camera, Eye];
+  const consents = [
+    { key: "terms", on: checked, set: setChecked, title: t("legal.gate.confirmTermsTitle"), text: profile?.isRealOwner ? t("legal.gate.confirmOwner") : t("legal.gate.confirmMember") },
+    { key: "eu", on: euChecked, set: setEuChecked, title: t("legal.gate.confirmEuTitle"), text: t("legal.gate.confirmEuStorage") },
+    { key: "capture", on: captureChecked, set: setCaptureChecked, title: t("legal.gate.confirmCaptureTitle"), text: t("legal.gate.confirmCapture") },
+  ];
+  const done = consents.filter((consent) => consent.on).length;
 
   return (
     <div className={styles.page}>
       <div className={styles.card} role="dialog" aria-labelledby="legal-gate-title">
-        <h1 id="legal-gate-title" className={styles.title}>
-          {t("legal.gate.title")}
-        </h1>
-        <p className={styles.text}>{t("legal.gate.intro")}</p>
-        <ul className={styles.points}>
-          {points.map((point) => (
-            <li key={point}>{point}</li>
-          ))}
-        </ul>
-        <p className={styles.text}>
-          {t("legal.gate.readFull")} <LegalLinks color="var(--text-link)" />
-        </p>
-        <label className={styles.confirm}>
-          <input type="checkbox" checked={checked} onChange={(event) => setChecked(event.target.checked)} />
-          <span>{profile?.isRealOwner ? t("legal.gate.confirmOwner") : t("legal.gate.confirmMember")}</span>
-        </label>
-        <label className={styles.confirm}>
-          <input type="checkbox" checked={euChecked} onChange={(event) => setEuChecked(event.target.checked)} />
-          <span>{t("legal.gate.confirmEuStorage")}</span>
-        </label>
-        <label className={styles.confirm}>
-          <input type="checkbox" checked={captureChecked} onChange={(event) => setCaptureChecked(event.target.checked)} />
-          <span>{t("legal.gate.confirmCapture")}</span>
-        </label>
-        <ErrorText>{error}</ErrorText>
+        <div className={styles.scroll}>
+          <div className={styles.head}>
+            <img src="/prosm-logo.png" alt="" className={styles.logo} />
+            <h1 id="legal-gate-title" className={styles.title}>
+              {t("legal.gate.title")}
+            </h1>
+            <p className={styles.text}>{t("legal.gate.intro")}</p>
+          </div>
+          <ul className={styles.points}>
+            {points.map((point, index) => {
+              const Icon = icons[index] ?? Eye;
+              return (
+                <li key={point} className={styles.point}>
+                  <span className={styles.pointIcon} aria-hidden="true">
+                    <Icon size={18} />
+                  </span>
+                  <span>
+                    {pointTitles[index] ? <strong className={styles.pointTitle}>{pointTitles[index]}</strong> : null}
+                    <span className={styles.pointText}>{point}</span>
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+          <p className={styles.full}>
+            {t("legal.gate.readFull")} <LegalLinks color="var(--text-link)" />
+          </p>
+          <div className={styles.consentsHead}>
+            <h2 className={styles.consentsTitle}>{t("legal.gate.consentsTitle")}</h2>
+            <span className={done === consents.length ? styles.progressDone : styles.progress}>{t("legal.gate.consentsProgress", { done, total: consents.length })}</span>
+          </div>
+          <div className={styles.consents}>
+            {consents.map((consent) => (
+              <label key={consent.key} className={consent.on ? `${styles.consent} ${styles.consentOn}` : styles.consent}>
+                <input type="checkbox" className={styles.hiddenBox} checked={consent.on} onChange={(event) => consent.set(event.target.checked)} />
+                <span className={styles.tick} aria-hidden="true">{consent.on ? <Check size={16} strokeWidth={3} /> : null}</span>
+                <span>
+                  <strong className={styles.consentTitle}>{consent.title}</strong>
+                  <span className={styles.consentText}>{consent.text}</span>
+                </span>
+              </label>
+            ))}
+          </div>
+          <ErrorText>{error}</ErrorText>
+        </div>
         <div className={styles.actions}>
           <Button variant="ghost" onClick={() => signOut()} disabled={saving}>
             {t("legal.gate.signOut")}
