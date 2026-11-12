@@ -128,6 +128,13 @@ export default function ProfileDocumentsPanel({ profile, onChanged }: { profile:
                     {isHr && NEEDS_ACTION.includes(d.status) ? (
                       <Button size="sm" variant="ghost" loading={busy === `r${d.id}`} onClick={() => void act(`r${d.id}`, () => DocumentsRepository.remind(d.id), t("reminded"))}>{t("remind")}</Button>
                     ) : null}
+                    {/* owner 2026-11-12: required from every employee, or not - on the document itself */}
+                    {isHr ? (
+                      <Button size="sm" variant="ghost" loading={busy === `q${d.id}`}
+                        onClick={() => void act(`q${d.id}`, () => DocumentsRepository.setRequired(d.typeId, !d.isMandatory, false), d.isMandatory ? t("requiredOff") : t("requiredOn"))}>
+                        {d.isMandatory ? t("makeOptional") : t("makeRequired")}
+                      </Button>
+                    ) : null}
                     {d.archived.length > 0 ? <Button size="sm" variant="ghost" onClick={() => setOpenArchive(openArchive === d.id ? null : d.id)}>{t("archive", { count: d.archived.length })}</Button> : null}
                   </div>
                 </div>

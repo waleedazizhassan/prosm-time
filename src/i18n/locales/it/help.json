@@ -196,7 +196,7 @@
     },
     "documentsAdmin": {
       "title": "Documenti dei dipendenti",
-      "body": "Dal fascicolo di una persona → Documenti premi \"Aggiungi documento\": nome (o uno già usato), numero, data di inizio, data di fine se c'è, e una foto o un PDF - è subito valido. Un documento con data di fine cambia stato da solo: valido, in scadenza, scaduto, e arriva un promemoria 30 e 7 giorni prima e il giorno stesso. Menu → Documenti mostra soltanto: scaduti, in scadenza, mancanti e da verificare, con esportazione CSV; ogni riga apre il fascicolo della persona."
+      "body": "Dal fascicolo di una persona → Documenti premi \"Aggiungi documento\": nome (o uno già usato), numero, data di inizio, data di fine se c'è, e una foto o un PDF - è subito valido. Un documento con data di fine cambia stato da solo: valido, in scadenza, scaduto, e arriva un promemoria 30 e 7 giorni prima e il giorno stesso. Menu → Documenti mostra soltanto: scaduti, in scadenza, mancanti e da verificare, con esportazione CSV; ogni riga apre il fascicolo della persona. Aggiungendolo (o su qualsiasi documento) puoi renderlo \"richiesto a tutti\": ogni fascicolo lo riceve come mancante e, con una data di fine, puoi scegliere \"Nessuna timbratura dopo la scadenza\"."
     },
     "bylaw": {
       "title": "Regolamento sanzioni",

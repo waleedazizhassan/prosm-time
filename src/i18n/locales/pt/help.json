@@ -196,7 +196,7 @@
     },
     "documentsAdmin": {
       "title": "Documentos dos funcionários",
-      "body": "Na ficha de uma pessoa → Documentos prima \"Adicionar documento\": nome (ou um já usado), número, data de início, data de fim se tiver, e uma foto ou PDF - fica válido de imediato. Um documento com data de fim muda de estado sozinho: válido, a expirar, expirado, e chega um lembrete 30 e 7 dias antes e no próprio dia. Menu → Documentos só mostra: o expirado, a expirar, em falta e por rever, com exportação CSV; cada linha abre a ficha da pessoa."
+      "body": "Na ficha de uma pessoa → Documentos prima \"Adicionar documento\": nome (ou um já usado), número, data de início, data de fim se tiver, e uma foto ou PDF - fica válido de imediato. Um documento com data de fim muda de estado sozinho: válido, a expirar, expirado, e chega um lembrete 30 e 7 dias antes e no próprio dia. Menu → Documentos só mostra: o expirado, a expirar, em falta e por rever, com exportação CSV; cada linha abre a ficha da pessoa. Ao adicionar (ou em qualquer documento) pode torná-lo \"exigido a todos\": cada ficha recebe-o como em falta e, com data de fim, pode escolher \"Sem picar o ponto depois de expirar\"."
     },
     "bylaw": {
       "title": "Regulamento de penalidades",

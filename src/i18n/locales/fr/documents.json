@@ -68,7 +68,9 @@
     "hasExpiry": "Il a une date de fin",
     "needName": "Saisissez le nom du document.",
     "endBeforeStart": "La date de fin doit suivre la date de début.",
-    "expiryHint": "Un rappel arrive avant la date de fin (30 et 7 jours avant, et le jour même) ; son état passe seul de valide à expiré."
+    "expiryHint": "Un rappel arrive avant la date de fin (30 et 7 jours avant, et le jour même) ; son état passe seul de valide à expiré.",
+    "requiredForAll": "Exigé de tous les employés",
+    "blockClockIn": "Pas de pointage une fois expiré"
   },
   "types": {
     "title": "Documents des employés",
@@ -158,5 +160,9 @@
   "removeQueued": "Retirer",
   "addDocument": "Ajouter un document",
   "fromTo": "Du {{from}} au {{to}}",
-  "issuedOn": "Délivré le {{date}}"
+  "issuedOn": "Délivré le {{date}}",
+  "makeRequired": "Exiger de tous",
+  "makeOptional": "Non exigé de tous",
+  "requiredOn": "Désormais exigé de tous les employés.",
+  "requiredOff": "N'est plus exigé de tous."
 }

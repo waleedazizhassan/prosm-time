@@ -152,3 +152,23 @@ describe("a document added from the person's file", () => {
     expect(await docs(t, org, omar)).toEqual([]); // nobody else gets it
   });
 });
+
+// owner 2026-11-12: "required from every employee" from the person's file, and off again
+describe("a document required from everyone", () => {
+  it("reaches every file as missing, can block clock-in, and leaves the files when turned off", async () => {
+    const t = await buildDatabase();
+    expect(t.failures).toEqual([]);
+    const { org } = await setup(t, "Required Co");
+    const amira = await addMember(t, org, "employee", "Amira");
+    const omar = await addMember(t, org, "employee", "Omar");
+    const made = await t.as<{ r: { id: string } }>(org.owner.authId, "select public.ensure_prosm_time_person_document_type($1, 'Health certificate', true) as r", [amira.userId]);
+    const typeId = made.rows![0].r.id;
+    expect((await t.as(amira.authId, "select public.set_prosm_time_document_required($1, true, true)", [typeId])).error).toMatch(/PERMISSION DENIED/);
+    expect((await t.as(org.owner.authId, "select public.set_prosm_time_document_required($1, true, true)", [typeId])).error).toBeNull();
+    expect((await docs(t, org, omar)).map((d) => [d.typeName, d.status])).toEqual([["Health certificate", "missing"]]);
+    const [rule] = await t.su<{ clock_in_rule: string }>("select clock_in_rule from document_types where id = $1", [typeId]);
+    expect(rule.clock_in_rule).toBe("block");
+    expect((await t.as(org.owner.authId, "select public.set_prosm_time_document_required($1, false, false)", [typeId])).error).toBeNull();
+    expect(await docs(t, org, omar)).toEqual([]);
+  });
+});

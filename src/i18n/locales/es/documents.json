@@ -68,7 +68,9 @@
     "hasExpiry": "Tiene fecha de fin",
     "needName": "Escriba el nombre del documento.",
     "endBeforeStart": "La fecha de fin debe ser posterior a la de inicio.",
-    "expiryHint": "Recibirá un aviso antes de la fecha de fin (30 y 7 días antes y el mismo día); su estado pasa solo de vigente a vencido."
+    "expiryHint": "Recibirá un aviso antes de la fecha de fin (30 y 7 días antes y el mismo día); su estado pasa solo de vigente a vencido.",
+    "requiredForAll": "Obligatorio para todos los empleados",
+    "blockClockIn": "Sin fichaje cuando haya vencido"
   },
   "types": {
     "title": "Documentos de empleados",
@@ -158,5 +160,9 @@
   "removeQueued": "Quitar",
   "addDocument": "Añadir documento",
   "fromTo": "Del {{from}} al {{to}}",
-  "issuedOn": "Emitido {{date}}"
+  "issuedOn": "Emitido {{date}}",
+  "makeRequired": "Exigir a todos",
+  "makeOptional": "No exigido a todos",
+  "requiredOn": "Ahora es obligatorio para todos los empleados.",
+  "requiredOff": "Ya no es obligatorio para todos."
 }

@@ -64,7 +64,9 @@
     "hasExpiry": "It has an end date",
     "needName": "Enter the document's name.",
     "endBeforeStart": "The end date must be after the start date.",
-    "expiryHint": "You will be reminded before the end date (30 and 7 days before, and on the day); its state turns from valid to expired by itself."
+    "expiryHint": "You will be reminded before the end date (30 and 7 days before, and on the day); its state turns from valid to expired by itself.",
+    "requiredForAll": "Required from every employee",
+    "blockClockIn": "No clock-in once it has expired"
   },
   "types": {
     "title": "Employee documents",
@@ -151,5 +153,9 @@
   "removeQueued": "Remove",
   "addDocument": "Add a document",
   "fromTo": "From {{from}} to {{to}}",
-  "issuedOn": "Issued {{date}}"
+  "issuedOn": "Issued {{date}}",
+  "makeRequired": "Require from everyone",
+  "makeOptional": "Not required from everyone",
+  "requiredOn": "Now required from every employee.",
+  "requiredOff": "No longer required from everyone."
 }

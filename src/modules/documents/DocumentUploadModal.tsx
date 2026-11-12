@@ -36,6 +36,9 @@ export default function DocumentUploadModal({ target, onClose, onDone }: { targe
   const [error, setError] = useState("");
   const [name, setName] = useState("");
   const [withExpiry, setWithExpiry] = useState(true);
+  // owner 2026-11-12: a new document can be required from every employee (and stop clock-in once expired)
+  const [requiredForAll, setRequiredForAll] = useState(false);
+  const [blockClockIn, setBlockClockIn] = useState(false);
   const isNew = Boolean(target && !target.typeId);
   const needsExpiry = isNew ? withExpiry : Boolean(target?.hasExpiry);
 
@@ -47,6 +50,8 @@ export default function DocumentUploadModal({ target, onClose, onDone }: { targe
     setError("");
     setName("");
     setWithExpiry(true);
+    setRequiredForAll(false);
+    setBlockClockIn(false);
   };
 
   const send = async () => {
@@ -101,6 +106,10 @@ export default function DocumentUploadModal({ target, onClose, onDone }: { targe
     });
     setBusy(false);
     if (sent.error) return setError(humanizeBackendError(sent.error, t) ?? t("upload.error"));
+    if (isNew && requiredForAll) {
+      const req = await DocumentsRepository.setRequired(typeId, true, withExpiry && blockClockIn);
+      if (req.error) return setError(humanizeBackendError(req.error, t) ?? t("upload.error"));
+    }
     reset();
     onDone(false);
   };
@@ -117,6 +126,14 @@ export default function DocumentUploadModal({ target, onClose, onDone }: { targe
             <label style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", fontSize: "var(--font-sm)" }}>
               <input type="checkbox" checked={withExpiry} onChange={(e) => setWithExpiry(e.target.checked)} /> {t("upload.hasExpiry")}
             </label>
+            <label style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", fontSize: "var(--font-sm)" }}>
+              <input type="checkbox" checked={requiredForAll} onChange={(e) => setRequiredForAll(e.target.checked)} /> {t("upload.requiredForAll")}
+            </label>
+            {requiredForAll && withExpiry ? (
+              <label style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", fontSize: "var(--font-sm)", paddingInlineStart: "var(--space-4)" }}>
+                <input type="checkbox" checked={blockClockIn} onChange={(e) => setBlockClockIn(e.target.checked)} /> {t("upload.blockClockIn")}
+              </label>
+            ) : null}
           </>
         ) : null}
         <label style={{ display: "grid", justifyItems: "center", gap: 8, padding: "var(--space-4)", border: "2px dashed var(--border-light)", borderRadius: "var(--radius-md)", cursor: "pointer", textAlign: "center" }}>

@@ -196,7 +196,7 @@
     },
     "documentsAdmin": {
       "title": "Documents des employés",
-      "body": "Depuis le dossier d'une personne → Documents, appuyez sur \"Ajouter un document\" : nom (ou un nom déjà utilisé), numéro, date de début, date de fin s'il en a une, et une photo ou un PDF - il est valide aussitôt. Un document avec date de fin change d'état seul : valide, expire bientôt, expiré ; un rappel arrive 30 et 7 jours avant et le jour même. Menu → Documents ne fait qu'afficher : l'expiré, le bientôt expiré, le manquant et ce qui attend la vérification, avec export CSV ; chaque ligne ouvre le dossier de la personne."
+      "body": "Depuis le dossier d'une personne → Documents, appuyez sur \"Ajouter un document\" : nom (ou un nom déjà utilisé), numéro, date de début, date de fin s'il en a une, et une photo ou un PDF - il est valide aussitôt. Un document avec date de fin change d'état seul : valide, expire bientôt, expiré ; un rappel arrive 30 et 7 jours avant et le jour même. Menu → Documents ne fait qu'afficher : l'expiré, le bientôt expiré, le manquant et ce qui attend la vérification, avec export CSV ; chaque ligne ouvre le dossier de la personne. À l'ajout (ou sur tout document) vous pouvez l'\"exiger de tous\" : chaque dossier le reçoit comme manquant et, avec une date de fin, vous pouvez choisir \"Pas de pointage une fois expiré\"."
     },
     "bylaw": {
       "title": "Règlement des sanctions",

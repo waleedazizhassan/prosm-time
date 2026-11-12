@@ -68,7 +68,9 @@
     "hasExpiry": "Tem data de fim",
     "needName": "Escreva o nome do documento.",
     "endBeforeStart": "A data de fim tem de ser depois da data de início.",
-    "expiryHint": "Recebe um lembrete antes da data de fim (30 e 7 dias antes e no próprio dia); o estado passa sozinho de válido a expirado."
+    "expiryHint": "Recebe um lembrete antes da data de fim (30 e 7 dias antes e no próprio dia); o estado passa sozinho de válido a expirado.",
+    "requiredForAll": "Exigido a todos os funcionários",
+    "blockClockIn": "Sem picar o ponto depois de expirar"
   },
   "types": {
     "title": "Documentos dos funcionários",
@@ -158,5 +160,9 @@
   "removeQueued": "Remover",
   "addDocument": "Adicionar documento",
   "fromTo": "De {{from}} a {{to}}",
-  "issuedOn": "Emitido em {{date}}"
+  "issuedOn": "Emitido em {{date}}",
+  "makeRequired": "Exigir a todos",
+  "makeOptional": "Não exigido a todos",
+  "requiredOn": "Agora exigido a todos os funcionários.",
+  "requiredOff": "Já não é exigido a todos."
 }
