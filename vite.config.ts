@@ -15,6 +15,18 @@ function serviceWorkerAssetList(): Plugin {
   };
 }
 
+// Security review 2026-11-12: the built page runs scripts from its own origin only (an injected script tag
+// or inline script does not run). Build only - the dev server needs its own inline helpers.
+function strictScriptPolicy(): Plugin {
+  return {
+    name: "prosm-time-script-policy",
+    apply: "build",
+    transformIndexHtml(html) {
+      return html.replace("object-src 'none';", "object-src 'none'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:;");
+    },
+  };
+}
+
 // PROSM Time - standalone Vite config, independent from PROSM
 // Platform's own build. See docs/PROSM_TIME_IMPLEMENTATION_MASTER_FILE_V3.md
 // §43.5: "never reuse credentials, project refs, or connection strings
@@ -32,7 +44,7 @@ function serviceWorkerAssetList(): Plugin {
 // behaviour is unchanged - only the readability of the output is.
 export default defineConfig({
   base: process.env.VITE_BASE_PATH || "/",
-  plugins: [react(), serviceWorkerAssetList()],
+  plugins: [react(), serviceWorkerAssetList(), strictScriptPolicy()],
   build: {
     // Never ship a map of the original sources with the product.
     sourcemap: false,

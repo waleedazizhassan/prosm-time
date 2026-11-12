@@ -14,7 +14,21 @@ window.addEventListener("vite:preloadError", (event) => {
 
 registerWebServiceWorker();
 
-const rootElement = document.getElementById("root");
+// Security review 2026-11-12: the host cannot send a frame-blocking header (static hosting), so the app
+// refuses to run inside another site's frame (no clicks tricked through an invisible copy).
+const framed = (() => {
+  try {
+    return window.top !== window.self;
+  } catch {
+    return true;
+  }
+})();
+
+const rootElement = framed ? null : document.getElementById("root");
+if (framed) {
+  document.documentElement.innerHTML = "";
+  throw new Error("PROSM Time does not run inside another page.");
+}
 if (!rootElement) {
   throw new Error("Root element #root not found.");
 }
