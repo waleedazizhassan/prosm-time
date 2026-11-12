@@ -21,6 +21,8 @@ describe("deleting one's own account", () => {
     await t.su("update attendance_sessions set status = 'clocked_out', clock_out_at = now() where user_id = $1", [worker.userId]);
     await t.su("insert into push_devices (organization_id, user_id, token, platform) values ($1, $2, repeat('x', 40), 'android')", [org.id, worker.userId]);
 
+    // 2026-11-13: the HR file's personal data goes too
+    await t.su("update users set legal_name = 'Walid Ahmed Worker', national_id = '29001011234567', phone = '01000000000', address = 'Cairo' where id = $1", [worker.userId]);
     const ready = await t.as<{ p: { authorized: boolean; userId: string } }>(worker.authId, "select public.prepare_prosm_time_self_deletion() as p");
     expect(ready.rows![0].p).toMatchObject({ authorized: true, userId: worker.userId });
     // only the service role runs the deletion
@@ -31,6 +33,9 @@ describe("deleting one's own account", () => {
     expect(user.full_name).toMatch(/^Deleted user/);
     expect(user.email).toMatch(/@deleted\.invalid$/);
     expect(user.is_active).toBe(false);
+    const [hr] = await t.su<{ legal_name: string | null; national_id: string | null; phone: string | null; address: string | null }>(
+      "select legal_name, national_id, phone, address from users where id = $1", [worker.userId]);
+    expect(hr).toEqual({ legal_name: null, national_id: null, phone: null, address: null });
     const [counts] = await t.su<{ sessions: number; devices: number }>(
       "select (select count(*)::int from attendance_sessions where user_id = $1) as sessions, (select count(*)::int from push_devices where user_id = $1) as devices",
       [worker.userId],

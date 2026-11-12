@@ -399,10 +399,10 @@
     "languageNote": "Questo documento è disponibile in arabo e in inglese; viene mostrata la versione inglese.",
     "gate": {
       "title": "Prima di continuare",
-      "intro": "PROSM Time registra la tua presenza per la tua organizzazione. In base alle sue impostazioni:",
+      "intro": "PROSM Time registra le tue presenze per la tua organizzazione. Ecco cosa succede ai tuoi dati:",
       "points": [
         "La tua posizione viene registrata quando timbri, fai una pausa, cambi sede o invii un SOS.",
-        "Se la tua organizzazione attiva il monitoraggio della presenza, la posizione viene registrata circa ogni 5 minuti solo durante il turno (su Android anche in background, con una notifica visibile). Si ferma quando timbri l'uscita.",
+        "La tua posizione viene registrata circa ogni 5 minuti solo durante il turno - su Android anche con l’app chiusa, con una notifica visibile. Si ferma appena timbri l’uscita.",
         "Una foto viene scattata solo se la sede lo richiede. Non c'è riconoscimento facciale.",
         "I responsabili della tua organizzazione vedono i tuoi dati. Le posizioni vengono eliminate dopo 30 giorni e le foto dopo 90 giorni."
       ],
@@ -413,7 +413,19 @@
       "signOut": "Esci",
       "error": "Impossibile salvare. Controlla la connessione e riprova.",
       "confirmEuStorage": "Acconsento espressamente alla conservazione dei miei dati su server nell'Unione europea, come spiegato nella sezione 7 dell'Informativa sulla privacy.",
-      "confirmCapture": "Acconsento alla registrazione della mia posizione alla timbratura e a una foto nei luoghi che la richiedono."
+      "confirmCapture": "Acconsento alla registrazione della mia posizione alla timbratura e a una foto nei luoghi che la richiedono.",
+      "pointTitles": [
+        "All’entrata e all’uscita",
+        "Durante il turno",
+        "Foto",
+        "Chi le vede e per quanto tempo"
+      ],
+      "consentsTitle": "I tuoi consensi",
+      "consentsProgress": "{{done}} di {{total}}",
+      "confirmTermsTitle": "Informativa e condizioni",
+      "confirmEuTitle": "Dove sono conservati i dati",
+      "confirmCaptureTitle": "Posizione e foto",
+      "tapToAgree": "Tocca per accettare"
     }
   },
   "reminders": {

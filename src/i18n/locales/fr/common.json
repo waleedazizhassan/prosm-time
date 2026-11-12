@@ -399,10 +399,10 @@
     "languageNote": "Ce document est disponible en arabe et en anglais ; la version anglaise est affichée.",
     "gate": {
       "title": "Avant de continuer",
-      "intro": "PROSM Time enregistre votre présence pour votre organisation. Selon ses réglages :",
+      "intro": "PROSM Time enregistre votre présence pour votre organisation. Voici ce qu’il advient de vos données :",
       "points": [
         "Votre position est enregistrée lorsque vous pointez, prenez une pause, changez de site ou envoyez un SOS.",
-        "Si votre organisation active le suivi de présence, votre position est enregistrée environ toutes les 5 minutes, uniquement pendant votre poste (sur Android aussi en arrière-plan, avec une notification visible). Cela s'arrête quand vous pointez votre départ.",
+        "Votre position est enregistrée environ toutes les 5 minutes pendant votre service uniquement - sur Android même application fermée, avec une notification visible. Cela s’arrête dès que vous pointez la sortie.",
         "Une photo n'est prise que si votre site l'exige. Il n'y a aucune reconnaissance faciale.",
         "Les responsables de votre organisation voient vos données. Les positions sont supprimées après 30 jours et les photos après 90 jours."
       ],
@@ -413,7 +413,19 @@
       "signOut": "Se déconnecter",
       "error": "Enregistrement impossible. Vérifiez la connexion et réessayez.",
       "confirmEuStorage": "J'accepte expressément que mes données soient stockées sur des serveurs situés dans l'Union européenne, comme l'explique la section 7 de la Politique de confidentialité.",
-      "confirmCapture": "J'accepte l'enregistrement de ma position au pointage, et une photo sur les sites qui l'exigent."
+      "confirmCapture": "J'accepte l'enregistrement de ma position au pointage, et une photo sur les sites qui l'exigent.",
+      "pointTitles": [
+        "À l’arrivée et au départ",
+        "Pendant votre service",
+        "Photos",
+        "Qui les voit, et combien de temps"
+      ],
+      "consentsTitle": "Vos consentements",
+      "consentsProgress": "{{done}} sur {{total}}",
+      "confirmTermsTitle": "Politique et conditions",
+      "confirmEuTitle": "Lieu de stockage des données",
+      "confirmCaptureTitle": "Position et photo",
+      "tapToAgree": "Touchez pour accepter"
     }
   },
   "reminders": {

@@ -96,7 +96,7 @@
     },
     "privacy": {
       "title": "Ihre Privatsphäre",
-      "body": "PROSM Time erfasst Ihren Standort beim Ein- und Ausstempeln, bei Pausen, Standortwechsel und SOS. Nur wenn Ihre Organisation die Anwesenheitsüberwachung aktiviert, auch etwa alle 5 Minuten während der Schicht - unter Android auch im Hintergrund, nach vorheriger Information und mit sichtbarer Benachrichtigung - und immer nur bis zum Ausstempeln. Fotos nur, wo Ihr Standort sie verlangt; keine Gesichtserkennung. Standortpunkte werden nach 30 Tagen, Fotos nach 90 Tagen gelöscht. Berechtigungen können Sie jederzeit in den Geräteeinstellungen entziehen. Für Ihre Rechte wenden Sie sich zuerst an Ihre Organisation oder an info@prosm.net. Einzelheiten in der Datenschutzerklärung und den Nutzungsbedingungen unten. Der Inhaber kann die Aufbewahrung unter Einstellungen > Daten und Datenschutz verkürzen. Meldet sich Ihr Konto auf einem neuen Gerät an, werden Sie und der Inhaber benachrichtigt."
+      "body": "PROSM Time erfasst Ihren Standort beim Ein- und Ausstempeln, bei Pausen, Standortwechsel und SOS. Außerdem nur während der Schicht etwa alle 5 Minuten - unter Android auch im Hintergrund und bei geschlossener App, nach vorheriger Information und mit sichtbarer Benachrichtigung - und immer nur bis zum Ausstempeln. Fotos nur, wo Ihr Standort sie verlangt; keine Gesichtserkennung. Standortpunkte werden nach 30 Tagen, Fotos nach 90 Tagen gelöscht. Berechtigungen können Sie jederzeit in den Geräteeinstellungen entziehen. Für Ihre Rechte wenden Sie sich zuerst an Ihre Organisation oder an info@prosm.net. Einzelheiten in der Datenschutzerklärung und den Nutzungsbedingungen unten. Der Inhaber kann die Aufbewahrung unter Einstellungen > Daten und Datenschutz verkürzen. Meldet sich Ihr Konto auf einem neuen Gerät an, werden Sie und der Inhaber benachrichtigt."
     },
     "workCalendar": {
       "title": "Arbeitskalender: Feiertage, Ruhetage und Sondertage",
@@ -251,7 +251,7 @@
     },
     "q11": {
       "question": "Wie funktioniert die 30-Tage-Demo?",
-      "answer": "Auf der Willkommensseite öffnet „Testversion nutzen“ die üblichen Aktivierungsschritte ohne Code und legt Organisation und Inhaber sofort an. Die Testphase dauert 30 Tage (Serverzeit), eine Leiste zeigt die verbleibenden Tage. Eine Woche vor Ende erhält der Inhaber eine Benachrichtigung und eine E-Mail mit sales@prosm.net, info@prosm.net und support@prosm.net. Danach wird die Organisation schreibgeschützt, ohne dass etwas gelöscht wird: Aktivierungscode unter Einstellungen > Abonnement eingeben oder PROSM um Verlängerung bitten, und alles läuft wie vorher. Eine Testphase pro E-Mail."
+      "answer": "Auf der Willkommensseite öffnet „30 Tage kostenlos testen“ die üblichen Aktivierungsschritte ohne Code und legt Organisation und Inhaber sofort an. Die Testphase dauert 30 Tage (Serverzeit), eine Leiste zeigt die verbleibenden Tage. Eine Woche vor Ende erhält der Inhaber eine Benachrichtigung und eine E-Mail mit sales@prosm.net, info@prosm.net und support@prosm.net. Danach wird die Organisation schreibgeschützt, ohne dass etwas gelöscht wird: Aktivierungscode unter Einstellungen > Abonnement eingeben oder PROSM um Verlängerung bitten, und alles läuft wie vorher. Eine Testphase pro E-Mail."
     },
     "q12": {
       "question": "Funktioniert die Anwesenheit ohne Internet?",

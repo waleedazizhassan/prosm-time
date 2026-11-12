@@ -32,13 +32,14 @@ beforeAll(async () => {
   // no weekly rest day today, the site day started at midnight
   await t.su("update organization_settings set rest_days = '{}' where organization_id = $1", [org.id]);
   await t.su("update sites set rest_days = null, shift_start_time = '00:00', timezone = 'Africa/Cairo' where id = $1", [site]);
-  // the worker clocked in an hour ago, two hours after a shift that started three hours ago
+  // the worker clocked in an hour ago (2026-11-13: never before today's midnight in Cairo, so a run just after
+  // midnight still has them clocked in today), two hours after a shift that started three hours ago
   await t.su(
     `insert into shift_assignments (organization_id, user_id, site_id, shift_date, start_time, end_time)
      values ($1, $2, $3, ${cairoToday}, ((now() - interval '3 hours') at time zone 'Africa/Cairo')::time(0), ((now() + interval '5 hours') at time zone 'Africa/Cairo')::time(0))`,
     [org.id, worker.userId, site],
   ).catch(() => undefined);
-  await t.su("insert into attendance_sessions (organization_id, user_id, site_id, status, clock_in_at) values ($1, $2, $3, 'clocked_in', now() - interval '1 hour')", [org.id, worker.userId, site]);
+  await t.su("insert into attendance_sessions (organization_id, user_id, site_id, status, clock_in_at) values ($1, $2, $3, 'clocked_in', greatest(now() - interval '1 hour', date_trunc('day', now() at time zone 'Africa/Cairo') at time zone 'Africa/Cairo'))", [org.id, worker.userId, site]);
 });
 
 describe("today's figures", () => {

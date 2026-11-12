@@ -399,10 +399,10 @@
     "languageNote": "This document is available in Arabic and English; the English version is shown.",
     "gate": {
       "title": "Before you continue",
-      "intro": "PROSM Time records your attendance for your organisation. Depending on its settings:",
+      "intro": "PROSM Time records your attendance for your organisation. Here is what happens with your data:",
       "points": [
         "Your location is recorded when you clock in or out, take a break, change site or send an SOS.",
-        "If your organisation turns on presence monitoring, your location is recorded about every 5 minutes during your shift only (on Android also in the background, with a visible notification). It stops when you clock out.",
+        "Your location is recorded about every 5 minutes during your shift only - on Android even with the app closed, with a visible notification. It stops as soon as you clock out.",
         "A photo is taken only if your site requires one. There is no facial recognition.",
         "Your organisation's managers see your records. Location samples are deleted after 30 days and photos after 90 days."
       ],
@@ -413,7 +413,19 @@
       "signOut": "Sign out",
       "error": "Couldn't save. Check your connection and try again.",
       "confirmEuStorage": "I explicitly agree to my data being stored on servers in the European Union, as section 7 of the Privacy Policy explains.",
-      "confirmCapture": "I agree to my location being recorded when I clock in and out, and to a photo at sites that require one."
+      "confirmCapture": "I agree to my location being recorded when I clock in and out, and to a photo at sites that require one.",
+      "pointTitles": [
+        "At clock-in and clock-out",
+        "During your shift",
+        "Photos",
+        "Who sees it, and for how long"
+      ],
+      "consentsTitle": "Your consents",
+      "consentsProgress": "{{done}} of {{total}}",
+      "confirmTermsTitle": "Policy and terms",
+      "confirmEuTitle": "Where data is stored",
+      "confirmCaptureTitle": "Location and photo",
+      "tapToAgree": "Tap to agree"
     }
   },
   "reminders": {

@@ -96,7 +96,7 @@
     },
     "privacy": {
       "title": "Votre vie privée",
-      "body": "PROSM Time enregistre votre position lors des pointages, pauses, changements de site et SOS. Seulement si votre organisation active le suivi de présence, aussi environ toutes les 5 minutes pendant le poste - sur Android aussi en arrière-plan, après vous en avoir informé et avec une notification visible - et toujours jusqu'au départ seulement. Une photo uniquement si votre site l'exige ; pas de reconnaissance faciale. Les positions sont supprimées après 30 jours, les photos après 90 jours. Vous pouvez retirer les autorisations dans les réglages de l'appareil. Pour vos droits, adressez-vous d'abord à votre organisation ou à info@prosm.net. Détails dans la Politique de confidentialité et les Conditions d'utilisation ci-dessous. Le propriétaire peut raccourcir la conservation dans Paramètres > Données et confidentialité. Quand votre compte se connecte depuis un nouvel appareil, vous êtes alerté, ainsi que le propriétaire."
+      "body": "PROSM Time enregistre votre position lors des pointages, pauses, changements de site et SOS. Aussi environ toutes les 5 minutes pendant le poste uniquement - sur Android aussi en arrière-plan, même application fermée, après vous en avoir informé et avec une notification visible - et toujours jusqu'au départ seulement. Une photo uniquement si votre site l'exige ; pas de reconnaissance faciale. Les positions sont supprimées après 30 jours, les photos après 90 jours. Vous pouvez retirer les autorisations dans les réglages de l'appareil. Pour vos droits, adressez-vous d'abord à votre organisation ou à info@prosm.net. Détails dans la Politique de confidentialité et les Conditions d'utilisation ci-dessous. Le propriétaire peut raccourcir la conservation dans Paramètres > Données et confidentialité. Quand votre compte se connecte depuis un nouvel appareil, vous êtes alerté, ainsi que le propriétaire."
     },
     "workCalendar": {
       "title": "Calendrier de travail : jours fériés, repos et jours particuliers",
@@ -251,7 +251,7 @@
     },
     "q11": {
       "question": "Comment fonctionne la démo de 30 jours ?",
-      "answer": "Sur la page d’accueil, « Utiliser l’essai » ouvre les étapes d’activation habituelles sans code, et crée aussitôt l’organisation et son propriétaire. L’essai dure 30 jours (heure du serveur) et une barre affiche les jours restants. Une semaine avant la fin, le propriétaire reçoit une notification et un e-mail avec sales@prosm.net, info@prosm.net et support@prosm.net. À la fin, l’organisation passe en lecture seule sans rien supprimer : saisissez un code d’activation dans Paramètres > Abonnement, ou demandez à PROSM de renouveler la licence, et tout reprend comme avant. Un essai par e-mail."
+      "answer": "Sur la page d’accueil, « Essai gratuit de 30 jours » ouvre les étapes d’activation habituelles sans code, et crée aussitôt l’organisation et son propriétaire. L’essai dure 30 jours (heure du serveur) et une barre affiche les jours restants. Une semaine avant la fin, le propriétaire reçoit une notification et un e-mail avec sales@prosm.net, info@prosm.net et support@prosm.net. À la fin, l’organisation passe en lecture seule sans rien supprimer : saisissez un code d’activation dans Paramètres > Abonnement, ou demandez à PROSM de renouveler la licence, et tout reprend comme avant. Un essai par e-mail."
     },
     "q12": {
       "question": "Le pointage fonctionne-t-il sans internet ?",

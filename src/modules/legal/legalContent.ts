@@ -8,7 +8,8 @@
 // read and acknowledge the new version once (LegalAcknowledgementGate).
 import { PRIVACY_V2_AR, PRIVACY_V2_EN } from "./privacyPolicyV2";
 
-export const LEGAL_VERSION = "2026-11-01";
+// 2026-11-13 (owner): both texts brought in line with the app as it is now (privacy version 3)
+export const LEGAL_VERSION = "2026-11-13";
 
 export type LegalBlock = { type: "paragraph"; text: string } | { type: "bullets"; items: string[] } | { type: "table"; head: string[]; rows: string[][] };
 
@@ -31,7 +32,7 @@ export type LegalLanguage = "ar" | "en";
 
 const TERMS_EN: LegalDocument = {
   title: "Terms of Use",
-  updated: "Last updated: 26 October 2026",
+  updated: "Last updated: 13 November 2026",
   intro: [
     "These terms govern the use of PROSM Time, provided by PROSM. By activating an organisation account, signing in, or using a PROSM Time kiosk, you agree to them. The person who activates an account accepts these terms on behalf of the organisation (\"the Organisation\") and confirms that they have authority to do so.",
     "How personal data is handled is described in the Privacy Policy, which forms part of these terms.",
@@ -40,14 +41,14 @@ const TERMS_EN: LegalDocument = {
     {
       heading: "1. The service",
       paragraphs: [
-        "PROSM Time records attendance, breaks, leave, timesheets, allowances and workforce presence. It also offers optional location checks at work sites, attendance photos, kiosk mode and SOS alerts.",
+        "PROSM Time records attendance, breaks, leave, timesheets, allowances and workforce presence during shifts. Depending on the plan, it also offers location checks at work sites, attendance photos, a kiosk for site workers, SOS alerts, shift schedules, announcements, employee files with their documents and contracts, a penalties and incentives bylaw, payroll with payslips, reports, and connection to the Organisation's systems.",
         "It is provided under a licence or a free trial. A trial lasts 30 days. When it ends, the Organisation's account is paused and its data is kept until a licence is activated.",
       ],
     },
     {
       heading: "2. Accounts and security",
       bullets: [
-        "Keep your password and your kiosk PIN secret, and do not let anyone else use your account.",
+        "Keep your password secret, and do not let anyone else use your account.",
         "You are responsible for actions made with your account.",
         "Tell your Organisation, or PROSM at info@prosm.net, without delay if you suspect unauthorised use.",
         "A shared kiosk device must be kept physically secure by the Organisation. Leaving kiosk mode requires the password of the account that opened it.",
@@ -60,7 +61,7 @@ const TERMS_EN: LegalDocument = {
         "having a lawful basis to record attendance, location and photos;",
         "telling its employees and workers clearly what is collected and why;",
         "obtaining consent where the law requires it;",
-        "setting up work areas, photo requirements and ongoing presence monitoring in a way that is necessary, proportionate and lawful;",
+        "telling its people that their location is recorded during their shifts, and setting up work areas, photo requirements and the documents it asks for in a way that is necessary, proportionate and lawful;",
         "not using PROSM Time to follow anyone outside their working time;",
         "handling its people's requests about their data, with PROSM's help;",
         "checking flags such as being outside a work area, a fake location or an offline time fairly, and letting the person explain before taking any action;",
@@ -71,7 +72,7 @@ const TERMS_EN: LegalDocument = {
       heading: "4. Acceptable use",
       paragraphs: ["You must not:"],
       bullets: [
-        "record false attendance in any way, including by faking your location, changing your device's clock, using someone else's PIN or account, or using a photo of someone else;",
+        "record false attendance in any way, including by faking your location, changing your device's clock, using someone else's account or worker number, or using a photo of someone else;",
         "attempt to access data you are not entitled to, or interfere with the service or its security;",
         "copy, reverse-engineer or resell the application, except as the law expressly allows;",
         "use the service for anything unlawful.",
@@ -94,53 +95,60 @@ const TERMS_EN: LegalDocument = {
       ],
     },
     {
-      heading: "7. Data",
+      heading: "7. Payroll, tax and penalties",
+      paragraphs: [
+        "Payroll, social insurance and tax figures are calculated from the settings and rates the Organisation enters. They help the Organisation; it remains responsible for checking them, for paying its people and for its filings with the authorities.",
+        "The penalties and incentives bylaw is written and approved by the Organisation. PROSM gives no legal approval of it; the Organisation is responsible for it complying with the labour law that applies, and for hearing a person before deciding a penalty.",
+      ],
+    },
+    {
+      heading: "8. Data",
       paragraphs: [
         "The Organisation owns the data it and its people enter. It grants PROSM the right to process that data only to provide, secure and support the service, as described in the Privacy Policy.",
         "The Organisation can export its data and can ask for it to be deleted.",
       ],
     },
     {
-      heading: "8. Availability and changes",
+      heading: "9. Availability and changes",
       paragraphs: [
         "We work to keep PROSM Time available and secure, but it is provided \"as is\" and may sometimes be unavailable, for example during maintenance. Clock in, clock out and breaks keep working without a connection and are sent when it returns.",
         "We may update the application to improve it or keep it secure.",
       ],
     },
     {
-      heading: "9. Third-party services",
+      heading: "10. Third-party services",
       paragraphs: [
         "Maps, place names and weather come from third-party services and are shown for convenience. They may be unavailable or inaccurate.",
       ],
     },
     {
-      heading: "10. Suspension and termination",
+      heading: "11. Suspension and termination",
       paragraphs: [
         "PROSM may suspend access that breaks these terms, puts the service or other users at risk, or is used unlawfully. Accounts may also be paused when a licence or trial ends.",
         "The Organisation may stop using the service at any time. What happens to its data then is described in the Privacy Policy.",
       ],
     },
     {
-      heading: "11. Liability",
+      heading: "12. Liability",
       paragraphs: [
         "To the extent permitted by law, PROSM is not liable for indirect or consequential loss, for decisions taken from the application's data (including payroll and disciplinary decisions), or for the outcome of an emergency.",
         "Nothing in these terms limits liability that cannot be limited by law.",
       ],
     },
     {
-      heading: "12. The Organisation's indemnity",
+      heading: "13. The Organisation's indemnity",
       paragraphs: [
         "The Organisation is responsible for claims that arise from its unlawful use or configuration of PROSM Time, for example monitoring that the law does not allow.",
       ],
     },
     {
-      heading: "13. Governing law",
+      heading: "14. Governing law",
       paragraphs: [
         "These terms are governed by the laws of the Arab Republic of Egypt, and the courts of Alexandria have jurisdiction, unless mandatory law where you live gives you other rights.",
       ],
     },
     {
-      heading: "14. Changes and contact",
+      heading: "15. Changes and contact",
       paragraphs: [
         "When these terms change in a meaningful way, the application shows the new version and asks you to accept it before you continue.",
         "Questions: info@prosm.net · prosm.net",
@@ -151,7 +159,7 @@ const TERMS_EN: LegalDocument = {
 
 const TERMS_AR: LegalDocument = {
   title: "شروط الاستخدام",
-  updated: "آخر تحديث: 26 أكتوبر 2026",
+  updated: "آخر تحديث: 13 نوفمبر 2026",
   intro: [
     "تنظّم هذه الشروط استخدام PROSM Time الذي تقدّمه PROSM. وبتفعيل حساب مؤسسة، أو تسجيل الدخول، أو استخدام كشك PROSM Time، فإنك توافق عليها. ومن يفعّل الحساب يقبل هذه الشروط نيابةً عن المؤسسة («المؤسسة»)، ويؤكد أنه مخوَّل بذلك.",
     "تُبيِّن سياسة الخصوصية طريقة التعامل مع البيانات الشخصية، وهي جزء من هذه الشروط.",
@@ -160,14 +168,14 @@ const TERMS_AR: LegalDocument = {
     {
       heading: "1. الخدمة",
       paragraphs: [
-        "يسجّل PROSM Time الحضور والاستراحات والإجازات والكشوف والبدلات ووجود العاملين. ويقدّم أيضاً ميزات اختيارية: التحقق من الموقع في مواقع العمل، وصور الحضور، ووضع الكشك، وتنبيهات الطوارئ SOS.",
+        "يسجّل PROSM Time الحضور والاستراحات والإجازات والكشوف والبدلات ووجود العاملين أثناء الورديات. ويقدّم بحسب الباقة أيضاً: التحقق من الموقع في مواقع العمل، وصور الحضور، وكشكاً لعمال المواقع، وتنبيهات الطوارئ SOS، وجداول الورديات، والإعلانات، وملفات الموظفين بمستنداتها وعقودها، ولائحة الجزاءات والحوافز، والمرتبات ومفرداتها، والتقارير، والربط بأنظمة المؤسسة.",
         "يُقدَّم بموجب ترخيص أو فترة تجريبية مجانية مدتها 30 يوماً. وعند انتهاء الفترة التجريبية يُوقف حساب المؤسسة مؤقتاً، وتُحفظ بياناتها إلى أن يُفعَّل ترخيص.",
       ],
     },
     {
       heading: "2. الحسابات والأمان",
       bullets: [
-        "حافظ على سرية كلمة المرور ورمز PIN الخاص بالكشك، ولا تسمح لغيرك باستخدام حسابك.",
+        "حافظ على سرية كلمة المرور، ولا تسمح لغيرك باستخدام حسابك.",
         "أنت مسؤول عن الإجراءات التي تتم بحسابك.",
         "أبلغ مؤسستك، أو PROSM على info@prosm.net، فوراً إذا اشتبهت في استخدام غير مصرّح به.",
         "على المؤسسة تأمين جهاز الكشك المشترك مادياً. ويتطلب الخروج من وضع الكشك كلمة مرور الحساب الذي فتحه.",
@@ -180,7 +188,7 @@ const TERMS_AR: LegalDocument = {
         "وجود أساس قانوني لتسجيل الحضور والموقع والصور؛",
         "إبلاغ موظفيها وعمالها بوضوح بما يُجمع ولماذا؛",
         "الحصول على الموافقة حيث يشترطها القانون؛",
-        "ضبط نطاقات العمل واشتراط الصور والمتابعة المستمرة للتواجد بقدر الضرورة والتناسب ووفق القانون؛",
+        "إبلاغ العاملين لديها بأن موقعهم يُسجَّل أثناء الورديات، وضبط نطاقات العمل واشتراط الصور والمستندات المطلوبة بقدر الضرورة والتناسب ووفق القانون؛",
         "عدم استخدام PROSM Time لتتبع أي شخص خارج وقت عمله؛",
         "التعامل مع طلبات العاملين لديها بشأن بياناتهم، بمساعدة PROSM؛",
         "مراجعة التنبيهات بإنصاف، مثل الوجود خارج نطاق العمل أو الموقع المزيف أو الوقت المسجَّل دون اتصال، وإتاحة الفرصة للشخص لتقديم تفسيره قبل اتخاذ أي إجراء؛",
@@ -191,7 +199,7 @@ const TERMS_AR: LegalDocument = {
       heading: "4. الاستخدام المقبول",
       paragraphs: ["لا يجوز لك:"],
       bullets: [
-        "تسجيل حضور غير صحيح بأي طريقة، ومن ذلك تزييف موقعك، أو تغيير ساعة جهازك، أو استخدام رمز PIN أو حساب شخص آخر، أو استخدام صورة شخص آخر؛",
+        "تسجيل حضور غير صحيح بأي طريقة، ومن ذلك تزييف موقعك، أو تغيير ساعة جهازك، أو استخدام حساب شخص آخر أو رقم عامل آخر، أو استخدام صورة شخص آخر؛",
         "محاولة الوصول إلى بيانات لا يحق لك الاطلاع عليها، أو العبث بالخدمة أو بأمانها؛",
         "نسخ التطبيق، أو الهندسة العكسية له، أو إعادة بيعه، إلا في الحدود التي يجيزها القانون صراحةً؛",
         "استخدام الخدمة في أي غرض غير مشروع.",
@@ -214,53 +222,60 @@ const TERMS_AR: LegalDocument = {
       ],
     },
     {
-      heading: "7. البيانات",
+      heading: "7. المرتبات والضرائب والجزاءات",
+      paragraphs: [
+        "تُحسب أرقام المرتبات والتأمينات الاجتماعية والضرائب من الإعدادات والنسب التي تُدخلها المؤسسة، وهي أداة مساعدة؛ وتظل المؤسسة مسؤولة عن مراجعتها، وعن صرف أجور العاملين لديها، وعن إقراراتها أمام الجهات المختصة.",
+        "لائحة الجزاءات والحوافز تضعها المؤسسة وتعتمدها، ولا تمثل موافقة قانونية من PROSM؛ والمؤسسة مسؤولة عن مطابقتها لقانون العمل المطبَّق، وعن سماع الشخص قبل توقيع أي جزاء.",
+      ],
+    },
+    {
+      heading: "8. البيانات",
       paragraphs: [
         "تملك المؤسسة البيانات التي تُدخلها هي والعاملون لديها، وتمنح PROSM حق معالجتها فقط لتقديم الخدمة وتأمينها ودعمها، وفق ما تبيّنه سياسة الخصوصية.",
         "تستطيع المؤسسة تصدير بياناتها وطلب حذفها.",
       ],
     },
     {
-      heading: "8. توفر الخدمة وتحديثها",
+      heading: "9. توفر الخدمة وتحديثها",
       paragraphs: [
         "نعمل على إبقاء PROSM Time متاحاً وآمناً، لكنه يُقدَّم «كما هو»، وقد يتعذر الوصول إليه أحياناً، كأثناء الصيانة. ويظل تسجيل الحضور والانصراف والاستراحات يعمل دون اتصال، ويُرسل عند عودته.",
         "قد نحدّث التطبيق لتحسينه أو للحفاظ على أمانه.",
       ],
     },
     {
-      heading: "9. خدمات الأطراف الأخرى",
+      heading: "10. خدمات الأطراف الأخرى",
       paragraphs: [
         "تأتي الخرائط وأسماء الأماكن والطقس من خدمات أطراف أخرى، وتُعرض للتيسير، وقد تكون غير متاحة أو غير دقيقة.",
       ],
     },
     {
-      heading: "10. الإيقاف والإنهاء",
+      heading: "11. الإيقاف والإنهاء",
       paragraphs: [
         "يجوز لـ PROSM إيقاف أي وصول يخالف هذه الشروط، أو يعرّض الخدمة أو المستخدمين الآخرين للخطر، أو يُستخدم استخداماً غير مشروع. وقد يُوقف الحساب مؤقتاً أيضاً عند انتهاء الترخيص أو الفترة التجريبية.",
         "يجوز للمؤسسة التوقف عن استخدام الخدمة في أي وقت، وتبيّن سياسة الخصوصية مصير بياناتها عندئذ.",
       ],
     },
     {
-      heading: "11. المسؤولية",
+      heading: "12. المسؤولية",
       paragraphs: [
         "في الحدود التي يسمح بها القانون، لا تتحمل PROSM المسؤولية عن الخسائر غير المباشرة أو التبعية، ولا عن القرارات المتخذة بناءً على بيانات التطبيق (ومنها قرارات الرواتب والقرارات التأديبية)، ولا عن نتيجة أي حالة طوارئ.",
         "لا يحدّ أي شيء في هذه الشروط من المسؤولية التي لا يجوز قانوناً تحديدها.",
       ],
     },
     {
-      heading: "12. تعويض المؤسسة",
+      heading: "13. تعويض المؤسسة",
       paragraphs: [
         "تتحمل المؤسسة المسؤولية عن المطالبات الناشئة عن استخدامها أو ضبطها لـ PROSM Time بشكل غير مشروع، كالمراقبة التي لا يجيزها القانون.",
       ],
     },
     {
-      heading: "13. القانون الحاكم",
+      heading: "14. القانون الحاكم",
       paragraphs: [
         "تخضع هذه الشروط لقوانين جمهورية مصر العربية، وتختص محاكم الإسكندرية بنظر أي نزاع ينشأ عنها، ما لم تمنحك القوانين الآمرة في بلد إقامتك حقوقاً أخرى.",
       ],
     },
     {
-      heading: "14. التعديلات والتواصل",
+      heading: "15. التعديلات والتواصل",
       paragraphs: [
         "عندما تتغير هذه الشروط تغييراً جوهرياً، يعرض التطبيق النسخة الجديدة ويطلب موافقتك قبل المتابعة.",
         "للاستفسارات: info@prosm.net · prosm.net",
