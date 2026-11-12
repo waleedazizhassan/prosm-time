@@ -38,7 +38,9 @@ export default function MoodWidget({ from, to }: { from: string; to: string }) {
   const maxDay = Math.max(1, ...data.byDay.map((d) => d.total));
 
   return (
-    <div className={styles.insights}>
+    // owner 2026-11-12: follows the space it has (sidebar open or closed) - 4 even columns, then 2 x 2, then 1
+    <div className={styles.moodFrame}>
+    <div className={styles.moodGrid}>
       <div className={styles.insightTile}>
         <TileHead icon={Smile} title={t("manager.mood.score")} aside={t("manager.mood.ratings", { count: data.total })} />
         <div className={styles.ringRow}>
@@ -79,6 +81,7 @@ export default function MoodWidget({ from, to }: { from: string; to: string }) {
           ))}
         </div>
       </div>
+    </div>
     </div>
   );
 }
