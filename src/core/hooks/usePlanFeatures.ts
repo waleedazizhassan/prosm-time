@@ -53,7 +53,15 @@ function load(userKey: string): Promise<PlanFeatures | null> {
   if (cached && cachedFor === userKey && Date.now() - cachedAt < MAX_AGE_MS) return cached;
   cachedFor = userKey;
   cachedAt = Date.now();
-  cached = Promise.resolve(DatabaseManager.getClient().rpc("get_prosm_time_plan_features")).then(({ data, error }) => (error ? null : (data as PlanFeatures)));
+  // no client (no connection settings, e.g. in tests): the plan is unknown and everything shows, as before it loads
+  cached = new Promise<PlanFeatures | null>((resolve) => {
+    try {
+      Promise.resolve(DatabaseManager.getClient().rpc("get_prosm_time_plan_features"))
+        .then(({ data, error }) => resolve(error ? null : (data as PlanFeatures)), () => resolve(null));
+    } catch {
+      resolve(null);
+    }
+  });
   return cached;
 }
 
