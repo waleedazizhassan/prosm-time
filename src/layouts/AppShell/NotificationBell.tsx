@@ -196,7 +196,7 @@ export default function NotificationBell() {
 
   const unreadCount = notifications.filter((notification) => !notification.readAt).length;
 
-  const viewer = { isOwner: profile.isOwner, canViewEmergencyLog: hasPermission("attendance.view") };
+  const viewer = { isOwner: profile.isOwner, canViewEmergencyLog: hasPermission("attendance.view"), canManage: hasPermission("exceptions.manage") };
   const targetOf = (notification: AppNotification) => {
     const path = notificationTarget({ type: notification.type, entityType: notification.relatedEntityType, entityId: notification.relatedEntityId, kind: notification.data?.kind, date: notification.data?.date }, viewer);
     if (!notification.relatedEntityId) return path;

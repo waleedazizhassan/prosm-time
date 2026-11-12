@@ -486,7 +486,9 @@
     "attendance": "Frequência",
     "allowances": "Adicionais",
     "leave": "Afastamentos",
-    "menu": "Menu"
+    "menu": "Menu",
+    "schedule": "Turnos",
+    "myFile": "A minha ficha"
   },
   "exitPrompt": {
     "title": "Você saiu do local",

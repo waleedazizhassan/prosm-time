@@ -481,7 +481,9 @@
     "attendance": "Attendance",
     "allowances": "Allowances",
     "leave": "Leave",
-    "menu": "Menu"
+    "menu": "Menu",
+    "schedule": "Shifts",
+    "myFile": "My file"
   },
   "exitPrompt": {
     "title": "You left the site",

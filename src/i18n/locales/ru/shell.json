@@ -491,7 +491,9 @@
     "attendance": "Посещаемость",
     "allowances": "Надбавки",
     "leave": "Отпуска",
-    "menu": "Меню"
+    "menu": "Меню",
+    "schedule": "Смены",
+    "myFile": "Моё дело"
   },
   "exitPrompt": {
     "title": "Вы покинули объект",

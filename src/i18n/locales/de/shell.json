@@ -481,7 +481,9 @@
     "attendance": "Anwesenheit",
     "allowances": "Zulagen",
     "leave": "Urlaub",
-    "menu": "Menü"
+    "menu": "Menü",
+    "schedule": "Schichten",
+    "myFile": "Meine Akte"
   },
   "exitPrompt": {
     "title": "Sie haben den Standort verlassen",

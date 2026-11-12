@@ -365,9 +365,12 @@ export default function TimesheetsPage() {
         </Card>
       ) : null}
 
-      <Card title={t("myTimesheets.title")}>
-        <Table grid columns={timesheetColumns(false)} data={myTimesheets} getRowId={(row) => row.id} loading={loading} emptyMessage={t("myTimesheets.empty")} onRowClick={openDetail} />
-      </Card>
+      {/* review 2026-11-12: the owner does not clock in - no empty "my timesheets" */}
+      {profile?.isRealOwner ? null : (
+        <Card title={t("myTimesheets.title")}>
+          <Table grid columns={timesheetColumns(false)} data={myTimesheets} getRowId={(row) => row.id} loading={loading} emptyMessage={t("myTimesheets.empty")} onRowClick={openDetail} />
+        </Card>
+      )}
 
       <Modal
         isOpen={Boolean(detailTimesheet)}

@@ -19,6 +19,8 @@ export interface NotificationViewer {
   isOwner: boolean;
   /** Can open the Emergency Log (attendance.view). */
   canViewEmergencyLog: boolean;
+  /** Can open the manager page (exceptions.manage) - review 2026-11-12 */
+  canManage?: boolean;
 }
 
 export default function notificationTarget(ref: NotificationRef | undefined, viewer: NotificationViewer): string {
@@ -67,7 +69,7 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
     // owner 2026-11-12: a request opens on the manager page, straight on its preview card
     case "payslip_requested":
     case "payslip_send_failed":
-      if (ref?.entityId && (viewer.isOwner || viewer.canViewEmergencyLog)) return `/manager?payslipRequest=${String(ref.entityId)}`;
+      if (ref?.entityId && (viewer.isOwner || viewer.canManage)) return `/manager?payslipRequest=${String(ref.entityId)}`;
       return ref?.entityId ? `/payroll/requests?open=${String(ref.entityId)}` : "/payroll/requests";
     case "payslip_rejected":
       return "/payslips";

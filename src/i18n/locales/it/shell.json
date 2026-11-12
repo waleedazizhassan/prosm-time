@@ -486,7 +486,9 @@
     "attendance": "Presenze",
     "allowances": "Indennità",
     "leave": "Ferie",
-    "menu": "Menu"
+    "menu": "Menu",
+    "schedule": "Turni",
+    "myFile": "Fascicolo"
   },
   "exitPrompt": {
     "title": "Hai lasciato la sede",

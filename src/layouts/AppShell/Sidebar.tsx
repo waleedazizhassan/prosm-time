@@ -13,7 +13,7 @@ import { Activity, Banknote, BarChart3, HelpCircle, MapPinned, ShieldCheck, User
 const SECTION_ICONS: Record<NavSection, LucideIcon> = { attendance: Activity, sites: MapPinned, people: UsersIcon, payroll: Banknote, reports: BarChart3, settings: ShieldCheck, help: HelpCircle };
 import UserMenu from "./UserMenu";
 import SidebarRadio from "./SidebarRadio";
-import { EMPLOYEE_BOTTOM_PATHS } from "./BottomNav";
+import { employeeBottomPaths } from "./BottomNav";
 import styles from "./Sidebar.module.css";
 
 const OPEN_SECTIONS_KEY = "prosm_time_sidebar_open_v1";
@@ -88,7 +88,8 @@ export default function Sidebar() {
   // the radio; no groups. Managers and the Owner keep the grouped menu.
   const manages = Boolean(profile?.isOwner) || hasPermission("exceptions.manage");
   const simpleMenu = mobileSidebarOpen && !manages;
-  const otherPages = visibleItems.filter((item) => !EMPLOYEE_BOTTOM_PATHS.includes(item.path));
+  const bottomPaths = employeeBottomPaths(allows);
+  const otherPages = visibleItems.filter((item) => !bottomPaths.includes(item.path));
 
   const sections = NAV_SECTION_ORDER.map((section) => ({ section, items: visibleItems.filter((item) => item.section === section) })).filter((group) => group.items.length > 0);
 

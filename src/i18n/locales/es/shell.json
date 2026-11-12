@@ -486,7 +486,9 @@
     "attendance": "Asistencia",
     "allowances": "Asignaciones",
     "leave": "Ausencias",
-    "menu": "Menú"
+    "menu": "Menú",
+    "schedule": "Turnos",
+    "myFile": "Mi expediente"
   },
   "exitPrompt": {
     "title": "Saliste de la sede",

@@ -486,7 +486,9 @@
     "attendance": "Pointages",
     "allowances": "Indemnités",
     "leave": "Congés",
-    "menu": "Menu"
+    "menu": "Menu",
+    "schedule": "Services",
+    "myFile": "Mon dossier"
   },
   "exitPrompt": {
     "title": "Vous avez quitté le site",

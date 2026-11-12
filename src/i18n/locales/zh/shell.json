@@ -476,7 +476,9 @@
     "attendance": "考勤",
     "allowances": "津贴",
     "leave": "请假",
-    "menu": "菜单"
+    "menu": "菜单",
+    "schedule": "排班",
+    "myFile": "我的档案"
   },
   "exitPrompt": {
     "title": "您已离开工作地点",

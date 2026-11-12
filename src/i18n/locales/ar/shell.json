@@ -501,7 +501,9 @@
     "attendance": "الحضور",
     "allowances": "البدلات",
     "leave": "الإجازات",
-    "menu": "القائمة"
+    "menu": "القائمة",
+    "schedule": "الورديات",
+    "myFile": "ملفي"
   },
   "exitPrompt": {
     "title": "خرجت من الموقع",
