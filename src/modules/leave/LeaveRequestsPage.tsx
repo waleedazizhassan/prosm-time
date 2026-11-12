@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Navigate } from "react-router-dom";
 
 import { useAuth } from "../../core/context/AuthContext";
 import leaveTypeLabel from "./leaveTypeLabel";
@@ -43,12 +44,24 @@ const STATUS_BADGE_KEY: Record<LeaveRequestRow["status"], string> = {
 // 'annual' leave (see get_prosm_time_leave_balance's own header
 // comment) - every other type here only ever shows days taken this
 // year, deliberately never a hard cap.
+// Owner 2026-11-12: "no duplicates - what moved into the files leaves its old place, and the owner does not
+// ask himself for leave". A person's own leave (balance, request, short permissions, their requests) lives
+// in the leave tab of their file (/me); this page is only the organisation-wide list for the owner and
+// whoever holds the owner's authority. Approving stays in the manager console.
 export default function LeaveRequestsPage() {
+  const { profile } = useAuth();
+  if (profile && !profile.isOwner) return <Navigate to="/me?tab=leave" replace />;
+  return <LeaveView mode="org" />;
+}
+
+export function MyLeavePanel() {
+  return <LeaveView mode="mine" />;
+}
+
+function LeaveView({ mode }: { mode: "mine" | "org" }) {
   const { t, i18n } = useTranslation("leave");
   const { profile } = useAuth();
-  const isOwner = Boolean(profile?.isOwner);
-  // the owner's own leave is approved at once; a person holding the owner's authority still asks someone
-  const isRealOwner = Boolean(profile?.isRealOwner);
+  const isOwner = mode === "org";
 
   const today = new Date();
   const [requests, setRequests] = useState<LeaveRequestRow[]>([]);
@@ -89,7 +102,7 @@ export default function LeaveRequestsPage() {
     setLoadError("");
     const [requestsResult, balanceResult] = await Promise.all([
       isOwner ? LeaveRepository.listAll() : LeaveRepository.listMine(profileId),
-      LeaveRepository.getBalance(),
+      isOwner ? Promise.resolve(null) : LeaveRepository.getBalance(),
     ]);
     if (!requestsResult.success) {
       setLoadError(humanizeBackendError(requestsResult.message, t) ?? t("loadError"));
@@ -98,7 +111,7 @@ export default function LeaveRequestsPage() {
     } else {
       setRequests((requestsResult.data ?? []) as LeaveRequestRow[]);
     }
-    if (balanceResult.success && balanceResult.data) {
+    if (balanceResult?.success && balanceResult.data) {
       setBalances(balanceResult.data.balances);
       setBalanceYear(balanceResult.data.year);
     }
@@ -128,7 +141,7 @@ export default function LeaveRequestsPage() {
 
   useEffect(() => {
     LeaveRepository.listTypes().then((result) => setLeaveTypes((result.data ?? []).filter((type) => type.isActive)));
-    if (!isRealOwner) {
+    if (mode === "mine") {
       LeaveRepository.listReviewers().then((result) => {
         const list = result.data ?? [];
         setReviewers(list);
@@ -136,7 +149,7 @@ export default function LeaveRequestsPage() {
         setReviewerId((current) => current || (list.find((reviewer) => !reviewer.isOwner) ?? list[0])?.id || "");
       });
     }
-  }, [isRealOwner]);
+  }, [mode]);
 
   const handleSubmit = async () => {
     if (!startDate || !endDate) return;
@@ -220,10 +233,20 @@ export default function LeaveRequestsPage() {
     { key: "reviewedBy", header: t("columns.reviewedBy"), render: (row) => row.reviewedByName ?? "—" },
   ];
 
-  return (
-    <PageShell title="">
-      <PageBanner pageId="leave" illustration={leaveHeaderImage} />
+  if (mode === "org") {
+    return (
+      <PageShell title="">
+        <PageBanner pageId="leave" illustration={leaveHeaderImage} />
+        <Card title={t("orgWideRequestsTitle")}>
+          <ErrorText>{loadError}</ErrorText>
+          <Table grid columns={orgWideColumns} data={orgWideRequests} getRowId={(row) => row.id} loading={loading} emptyMessage={t("empty")} />
+        </Card>
+      </PageShell>
+    );
+  }
 
+  return (
+    <div style={{ display: "grid", gap: "var(--space-3)" }}>
       <Card title={t("balanceTitle", { year: balanceYear })}>
         <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
           {balances.map((entry) => (
@@ -270,7 +293,7 @@ export default function LeaveRequestsPage() {
             disabled={submitting}
             options={(leaveTypes.length > 0 ? leaveTypes : [{ key: "annual", name: "" } as LeaveTypeSetting]).map((type) => ({ value: type.key, label: leaveTypeLabel(t, type.key, type.name) }))}
           />
-          {!isRealOwner && reviewers.length > 0 ? (
+          {reviewers.length > 0 ? (
             <Select
               label={t("reviewerLabel")}
               name="leaveReviewer"
@@ -326,7 +349,6 @@ export default function LeaveRequestsPage() {
             <input type="file" accept="image/*,application/pdf" onChange={(event) => setDocumentFile(event.target.files?.[0] ?? null)} disabled={submitting} />
           </label>
         ) : null}
-        {isRealOwner ? <HintText>{t("ownerAutoApproveHint")}</HintText> : null}
         <Textarea label={t("reasonLabel")} name="leaveReason" value={reason} onChange={(event) => setReason(event.target.value)} disabled={submitting} rows={2} />
         <ErrorText>{submitError}</ErrorText>
         {submitSuccess ? <SuccessText>{t("ownerAutoApprovedMessage")}</SuccessText> : null}
@@ -335,16 +357,12 @@ export default function LeaveRequestsPage() {
         </Button>
       </Card>
 
-      {isOwner ? null : <PermissionRequestCard />}
+      <PermissionRequestCard />
 
-      <Card title={isOwner ? t("orgWideRequestsTitle") : t("myRequestsTitle")}>
+      <Card title={t("myRequestsTitle")}>
         <ErrorText>{loadError}</ErrorText>
-        {isOwner ? (
-          <Table grid columns={orgWideColumns} data={orgWideRequests} getRowId={(row) => row.id} loading={loading} emptyMessage={t("empty")} />
-        ) : (
-          <Table grid columns={columns} data={requests} getRowId={(row) => row.id} loading={loading} emptyMessage={t("empty")} />
-        )}
+        <Table grid columns={columns} data={requests} getRowId={(row) => row.id} loading={loading} emptyMessage={t("empty")} />
       </Card>
-    </PageShell>
+    </div>
   );
 }

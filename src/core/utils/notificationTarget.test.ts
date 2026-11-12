@@ -35,9 +35,9 @@ describe("notificationTarget", () => {
     expect(notificationTarget({ type: "exception_pending_review", kind: "exception" }, supervisor)).toBe("/manager");
   });
 
-  it("sends a reviewed leave request to Leave and other decisions to the dashboard", () => {
-    expect(notificationTarget({ type: "correction_reviewed", kind: "leave" }, employee)).toBe("/leave");
-    expect(notificationTarget({ type: "correction_reviewed", entityType: "leave_requests" }, employee)).toBe("/leave");
+  it("sends a reviewed leave request to the leave tab of My file (owner 2026-11-12) and other decisions to the dashboard", () => {
+    expect(notificationTarget({ type: "correction_reviewed", kind: "leave" }, employee)).toBe("/me?tab=leave");
+    expect(notificationTarget({ type: "correction_reviewed", entityType: "leave_requests" }, employee)).toBe("/me?tab=leave");
     expect(notificationTarget({ type: "correction_reviewed", kind: "mock_location" }, employee)).toBe("/dashboard");
   });
 

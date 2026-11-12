@@ -322,7 +322,8 @@ export default function PersonDetailPage() {
     ...(access !== "manager" ? [{ key: "documents" as const, label: t("profile.tabs.documents"), locked: !allows("documents") }] : []),
     ...(seesPay ? [{ key: "payroll" as const, label: t("profile.tabs.payroll"), locked: !allows("payroll") }] : []),
     { key: "attendance", label: t("profile.tabs.attendance") },
-    { key: "leave", label: t("profile.tabs.leave") },
+    // owner 2026-11-12: the organisation's owner takes no leave - no leave tab in their file
+    ...(!member?.isOwner ? [{ key: "leave" as const, label: t("profile.tabs.leave") }] : []),
     { key: "penalties", label: t("profile.tabs.penalties"), locked: !allows("penalties") },
     ...(access !== "self" ? [{ key: "history" as const, label: t("profile.tabs.history") }] : []),
   ];

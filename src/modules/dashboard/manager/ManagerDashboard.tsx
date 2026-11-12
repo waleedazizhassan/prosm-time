@@ -106,7 +106,8 @@ export default function ManagerDashboard() {
   };
   const openLeavePage = () => {
     setAbsenceView(null);
-    navigate("/leave");
+    // the organisation-wide list is the owner's; a manager approves in the manager console
+    navigate(profile?.isOwner ? "/leave" : "/manager");
   };
   const [chartMode, setChartMode] = useState<"week" | "month" | "year">("week");
   const dragRef = useRef<WidgetId | null>(null);

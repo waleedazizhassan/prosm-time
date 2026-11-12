@@ -144,7 +144,7 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // 2026-11-11 HR suite feature 1: penalties and incentives (personnel managers, managers and supervisors)
   { id: "penalties", planFeature: "penalties", labelKey: "items.penalties", path: "/penalties", icon: Gavel, requiredPermission: ["hr.manage", "employees.view"], section: "people" },
   { id: "myProfile", labelKey: "items.myProfile", path: "/me", icon: IdCard, requiredPermission: null, hiddenFromOwner: true, section: "people" },
-  { id: "leave", planFeature: "leave", labelKey: "items.leave", path: "/leave", icon: CalendarDays, requiredPermission: null, section: "people" },
+  { id: "leave", planFeature: "leave", labelKey: "items.leave", path: "/leave", icon: CalendarDays, requiredPermission: null, ownerOnly: true, section: "people" },
   // § live UX review, user-directed - "a Reports Center where any PDF
   // can be pulled." No permission gate on the nav item itself - the
   // page's own report-type selector gates each report by the exact
