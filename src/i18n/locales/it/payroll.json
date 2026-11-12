@@ -260,7 +260,8 @@
     "insuranceLabel": "Previdenza",
     "insured": "Assicurato",
     "taxLabel": "Imposta",
-    "taxed": "Soggetto a imposta"
+    "taxed": "Soggetto a imposta",
+    "legalNameEditInFile": "Modifica nel fascicolo"
   },
   "installments": {
     "title": "Rate e anticipi",

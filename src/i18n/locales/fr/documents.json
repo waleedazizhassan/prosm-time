@@ -143,7 +143,7 @@
     "title": "Documents",
     "open": "Ouvrir",
     "allGood": "Tous les documents sont en ordre ({{percent}} % complets).",
-    "noDocuments": "Aucun document pour l'instant - ajoutez des types de documents sur la page Documents.",
+    "noDocuments": "Aucun document pour l'instant - ajoutez-les depuis le dossier de chaque personne → Documents.",
     "daysLeft_one": "Plus que 1 jour",
     "daysLeft_many": "Plus que {{count}} jours",
     "daysLeft_other": "Plus que {{count}} jours"

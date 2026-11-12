@@ -260,7 +260,8 @@
     "insuranceLabel": "Соцстрахование",
     "insured": "Застрахован",
     "taxLabel": "Налог",
-    "taxed": "Облагается налогом"
+    "taxed": "Облагается налогом",
+    "legalNameEditInFile": "Изменить в деле"
   },
   "installments": {
     "title": "Взносы и авансы",

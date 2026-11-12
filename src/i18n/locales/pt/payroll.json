@@ -260,7 +260,8 @@
     "insuranceLabel": "Segurança social",
     "insured": "Segurado",
     "taxLabel": "Imposto",
-    "taxed": "Sujeito a imposto"
+    "taxed": "Sujeito a imposto",
+    "legalNameEditInFile": "Editar na ficha"
   },
   "installments": {
     "title": "Prestações e adiantamentos",

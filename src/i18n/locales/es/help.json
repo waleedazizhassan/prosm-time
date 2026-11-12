@@ -196,7 +196,7 @@
     },
     "documentsAdmin": {
       "title": "Documentos de empleados",
-      "body": "Desde el expediente de una persona → Documentos pulse \"Añadir documento\": su nombre (o uno ya usado), número, fecha de inicio, fecha de fin si la tiene y una foto o PDF; queda vigente de inmediato. Un documento con fecha de fin cambia de estado solo: vigente, por vencer, vencido, y llega un aviso 30 y 7 días antes y el mismo día. Los documentos exigidos a todos (o a algunos puestos o sedes), con días de aviso y lo que ocurre al fichar cuando uno vence, se fijan al final de Menú → Documentos; allí también ve lo vencido, por vencer, faltante o pendiente de revisión, con aviso en un toque y exportación CSV."
+      "body": "Desde el expediente de una persona → Documentos pulse \"Añadir documento\": nombre (o uno ya usado), número, fecha de inicio, fecha de fin si la tiene y una foto o PDF; queda vigente de inmediato. Un documento con fecha de fin cambia de estado solo: vigente, por vencer, vencido, y llega un aviso 30 y 7 días antes y el mismo día. Menú → Documentos solo muestra: lo vencido, por vencer, faltante o pendiente de revisión, con exportación CSV; cada línea abre el expediente de la persona."
     },
     "bylaw": {
       "title": "Reglamento de sanciones",

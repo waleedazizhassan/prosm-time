@@ -260,7 +260,8 @@
     "insuranceLabel": "التأمينات",
     "insured": "مؤمّن عليه",
     "taxLabel": "الضريبة",
-    "taxed": "خاضع للضريبة"
+    "taxed": "خاضع للضريبة",
+    "legalNameEditInFile": "تعديل من ملف الشخص"
   },
   "installments": {
     "title": "الأقساط والسلف",

@@ -260,7 +260,8 @@
     "insuranceLabel": "Social insurance",
     "insured": "Insured",
     "taxLabel": "Tax",
-    "taxed": "Taxed"
+    "taxed": "Taxed",
+    "legalNameEditInFile": "Edit in the person's file"
   },
   "installments": {
     "title": "Installments and advances",

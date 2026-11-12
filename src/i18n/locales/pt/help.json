@@ -196,7 +196,7 @@
     },
     "documentsAdmin": {
       "title": "Documentos dos funcionários",
-      "body": "Na ficha de uma pessoa → Documentos prima \"Adicionar documento\": nome (ou um já usado), número, data de início, data de fim se tiver, e uma foto ou PDF - fica válido de imediato. Um documento com data de fim muda de estado sozinho: válido, a expirar, expirado, e chega um lembrete 30 e 7 dias antes e no próprio dia. Os documentos exigidos a todos (ou a algumas funções ou locais), com dias de lembrete e o que acontece ao picar o ponto depois de expirar, definem-se no fim de Menu → Documentos; aí também vê o expirado, a expirar, em falta e por rever, com lembrete num toque e exportação CSV."
+      "body": "Na ficha de uma pessoa → Documentos prima \"Adicionar documento\": nome (ou um já usado), número, data de início, data de fim se tiver, e uma foto ou PDF - fica válido de imediato. Um documento com data de fim muda de estado sozinho: válido, a expirar, expirado, e chega um lembrete 30 e 7 dias antes e no próprio dia. Menu → Documentos só mostra: o expirado, a expirar, em falta e por rever, com exportação CSV; cada linha abre a ficha da pessoa."
     },
     "bylaw": {
       "title": "Regulamento de penalidades",

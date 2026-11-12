@@ -376,7 +376,8 @@
     "siteTypeNameRequired": "Name the site type.",
     "invalidSiteProfile": "The site's owner or type is not valid.",
     "documentNameRequired": "Enter the document's name.",
-    "documentNameTooLong": "The document's name is too long."
+    "documentNameTooLong": "The document's name is too long.",
+    "legalNameArabic": "The official name must be in Arabic, as on the ID card."
   },
   "pageLoad": {
     "title": "This page needs a connection",

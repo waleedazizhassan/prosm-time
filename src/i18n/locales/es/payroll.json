@@ -260,7 +260,8 @@
     "insuranceLabel": "Seguro social",
     "insured": "Asegurado",
     "taxLabel": "Impuesto",
-    "taxed": "Sujeto a impuesto"
+    "taxed": "Sujeto a impuesto",
+    "legalNameEditInFile": "Editar en el expediente"
   },
   "installments": {
     "title": "Cuotas y anticipos",

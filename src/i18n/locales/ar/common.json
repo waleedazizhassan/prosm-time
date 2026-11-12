@@ -376,7 +376,8 @@
     "siteTypeNameRequired": "اكتب نوع الموقع.",
     "invalidSiteProfile": "بيانات الجهة أو نوع الموقع غير صحيحة.",
     "documentNameRequired": "اكتب اسم المستند.",
-    "documentNameTooLong": "اسم المستند طويل أوي."
+    "documentNameTooLong": "اسم المستند طويل أوي.",
+    "legalNameArabic": "الاسم الرسمي لازم يكون بالعربي، زي ما هو في البطاقة."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

@@ -196,7 +196,7 @@
     },
     "documentsAdmin": {
       "title": "Employee documents",
-      "body": "From a person's file → Documents press \"Add a document\": its name (or pick one already used), number, start date, end date when it has one, and a photo or PDF - it is recorded as valid at once. A document with an end date changes state by itself: valid, expiring, expired, and a reminder comes 30 and 7 days before the end date and on the day. The documents required of everyone (or of some job titles or sites), with reminder days and what happens at clock-in after one expires, are set at the bottom of Menu → Documents; that page also shows what has expired, expires soon, is missing or waits for review, with a one-tap reminder and a CSV export."
+      "body": "From a person's file → Documents press \"Add a document\": its name (or pick one already used), number, start date, end date when it has one, and a photo or PDF - it is recorded as valid at once. A document with an end date changes state by itself: valid, expiring, expired, and a reminder comes 30 and 7 days before the end date and on the day. Menu → Documents only shows: what has expired, expires soon, is missing or waits for review, with a CSV export; each line opens its person's file."
     },
     "bylaw": {
       "title": "Penalties bylaw",

@@ -138,7 +138,7 @@
     "title": "Dokumente",
     "open": "Öffnen",
     "allGood": "Alle Dokumente sind in Ordnung ({{percent}} % vollständig).",
-    "noDocuments": "Noch keine Dokumente - legen Sie Dokumentarten auf der Seite Dokumente an.",
+    "noDocuments": "Noch keine Dokumente - fügen Sie sie in der Akte jeder Person → Dokumente hinzu.",
     "daysLeft_one": "Noch 1 Tag",
     "daysLeft_other": "Noch {{count}} Tage"
   },

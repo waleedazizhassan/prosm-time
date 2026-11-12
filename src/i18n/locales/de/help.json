@@ -196,7 +196,7 @@
     },
     "documentsAdmin": {
       "title": "Mitarbeiterdokumente",
-      "body": "In der Akte einer Person → Dokumente auf \"Dokument hinzufügen\" tippen: Name (oder einen bereits verwendeten wählen), Nummer, Startdatum, Enddatum falls vorhanden und ein Foto oder PDF - es gilt sofort als gültig. Ein Dokument mit Enddatum wechselt seinen Status von selbst: gültig, läuft bald ab, abgelaufen; eine Erinnerung kommt 30 und 7 Tage vor dem Enddatum und am Tag. Die von allen (oder bestimmten Stellen oder Standorten) verlangten Dokumente, mit Erinnerungstagen und der Regel beim Einstempeln nach Ablauf, werden unten auf Menü → Dokumente festgelegt; dort sehen Sie auch Abgelaufenes, bald Ablaufendes, Fehlendes und zu Prüfendes, mit Erinnerung per Tipp und CSV-Export."
+      "body": "In der Akte einer Person → Dokumente auf \"Dokument hinzufügen\" tippen: Name (oder einen bereits verwendeten), Nummer, Startdatum, Enddatum falls vorhanden und ein Foto oder PDF - es gilt sofort als gültig. Ein Dokument mit Enddatum wechselt seinen Status von selbst: gültig, läuft bald ab, abgelaufen; eine Erinnerung kommt 30 und 7 Tage vorher und am Tag. Menü → Dokumente zeigt nur an: Abgelaufenes, bald Ablaufendes, Fehlendes und zu Prüfendes, mit CSV-Export; jede Zeile öffnet die Akte der Person."
     },
     "bylaw": {
       "title": "Sanktionsordnung",

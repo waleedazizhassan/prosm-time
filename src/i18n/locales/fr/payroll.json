@@ -260,7 +260,8 @@
     "insuranceLabel": "Assurance sociale",
     "insured": "Assuré",
     "taxLabel": "Impôt",
-    "taxed": "Imposable"
+    "taxed": "Imposable",
+    "legalNameEditInFile": "Modifier dans le dossier"
   },
   "installments": {
     "title": "Échéances et avances",

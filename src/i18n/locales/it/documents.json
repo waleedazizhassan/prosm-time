@@ -143,7 +143,7 @@
     "title": "Documenti",
     "open": "Apri",
     "allGood": "Tutti i documenti sono in ordine (completi al {{percent}}%).",
-    "noDocuments": "Ancora nessun documento - aggiungi i tipi di documento nella pagina Documenti.",
+    "noDocuments": "Ancora nessun documento: aggiungili dal fascicolo di ogni persona → Documenti.",
     "daysLeft_one": "Manca 1 giorno",
     "daysLeft_many": "Mancano {{count}} giorni",
     "daysLeft_other": "Mancano {{count}} giorni"

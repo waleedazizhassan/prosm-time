@@ -133,7 +133,7 @@
     "title": "证件",
     "open": "打开",
     "allGood": "所有证件均正常（完整度 {{percent}}%）。",
-    "noDocuments": "还没有文件 —— 请在“文件”页面添加文件类型。",
+    "noDocuments": "还没有文件——请在每个人的档案 → 文件中添加。",
     "daysLeft_other": "剩余 {{count}} 天"
   },
   "alert": {

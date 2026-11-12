@@ -138,7 +138,7 @@
     "title": "Documents",
     "open": "Open",
     "allGood": "All documents are in order ({{percent}}% complete).",
-    "noDocuments": "No documents yet - add document types on the Documents page.",
+    "noDocuments": "No documents yet - add them from each person's file → Documents.",
     "daysLeft_one": "1 day left",
     "daysLeft_other": "{{count}} days left"
   },

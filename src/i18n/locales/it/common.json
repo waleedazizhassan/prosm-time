@@ -376,7 +376,8 @@
     "siteTypeNameRequired": "Indica il tipo di sede.",
     "invalidSiteProfile": "Appartenenza o tipo della sede non valido.",
     "documentNameRequired": "Scrivi il nome del documento.",
-    "documentNameTooLong": "Il nome del documento è troppo lungo."
+    "documentNameTooLong": "Il nome del documento è troppo lungo.",
+    "legalNameArabic": "Il nome ufficiale deve essere in arabo, come sul documento."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

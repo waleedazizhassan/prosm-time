@@ -260,7 +260,8 @@
     "insuranceLabel": "社保",
     "insured": "参保",
     "taxLabel": "税",
-    "taxed": "需缴税"
+    "taxed": "需缴税",
+    "legalNameEditInFile": "在档案中修改"
   },
   "installments": {
     "title": "分期与预支",

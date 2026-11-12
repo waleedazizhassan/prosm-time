@@ -260,7 +260,8 @@
     "insuranceLabel": "Sozialversicherung",
     "insured": "Versichert",
     "taxLabel": "Steuer",
-    "taxed": "Steuerpflichtig"
+    "taxed": "Steuerpflichtig",
+    "legalNameEditInFile": "In der Akte ändern"
   },
   "installments": {
     "title": "Raten und Vorschüsse",
