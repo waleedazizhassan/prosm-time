@@ -23,8 +23,19 @@ const str = (value: unknown) => (typeof value === "string" ? value : null);
 const num = (value: unknown) => (typeof value === "number" ? value : null);
 
 export function localizePush(type: string, data: Data, language: string, fallback: { title: string; body: string }): { title: string; body: string } {
+  // a counted text (path_one, path_other, ...) picks its plural form like the app does (2026-11-12)
+  const plural = (path: string, count: unknown) => {
+    if (typeof count !== "number") return null;
+    let form = "other";
+    try {
+      form = count === 0 ? "zero" : new Intl.PluralRules(language).select(count);
+    } catch {
+      // unknown language: "other"
+    }
+    return lookup(language, `${path}_${form}`) ?? lookup(language, `${path}_other`);
+  };
   const t = (path: string, vars: Record<string, unknown> = {}) => {
-    const text = lookup(language, path);
+    const text = lookup(language, path) ?? plural(path, vars.count);
     return text === null ? null : fill(text, vars);
   };
   const pair = (titlePath: string, bodyPath: string, vars: Record<string, unknown> = {}) => {
@@ -127,7 +138,9 @@ export function localizePush(type: string, data: Data, language: string, fallbac
         result = pair("allowance.submittedTitle", "allowance.submittedBody", { name: data.employeeName, date: data.entryDate });
       break;
     case "allowance_approved":
-      if (str(data.periodStart) && str(data.periodEnd)) result = withNotes("allowance.approvedTitle", "allowance.sheetApprovedBody", { start: data.periodStart, end: data.periodEnd });
+      // owner 2026-11-12: an approval with the manager's changes says how many lines changed
+      if (str(data.periodStart) && str(data.periodEnd) && Array.isArray(data.changes) && data.changes.length > 0) result = withNotes("allowance.approvedTitle", "allowance.sheetApprovedChangedBody", { start: data.periodStart, end: data.periodEnd, count: data.changes.length });
+      else if (str(data.periodStart) && str(data.periodEnd)) result = withNotes("allowance.approvedTitle", "allowance.sheetApprovedBody", { start: data.periodStart, end: data.periodEnd });
       else if (str(data.entryDate)) result = withNotes("allowance.approvedTitle", "allowance.approvedBody", { date: data.entryDate });
       break;
     case "allowance_rejected":

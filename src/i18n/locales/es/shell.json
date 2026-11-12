@@ -165,7 +165,20 @@
       "rejectedBody": "Tus asignaciones del {{date}} fueron rechazadas. Puedes editarlas y enviarlas de nuevo.",
       "sheetSubmittedBody": "{{name}} envió asignaciones de {{days}} días ({{start}} - {{end}}).",
       "sheetApprovedBody": "Tus asignaciones del {{start}} al {{end}} fueron aprobadas.",
-      "sheetRejectedBody": "Tus asignaciones del {{start}} al {{end}} fueron rechazadas. Corrígelas y envíalas de nuevo."
+      "sheetRejectedBody": "Tus asignaciones del {{start}} al {{end}} fueron rechazadas. Corrígelas y envíalas de nuevo.",
+      "sheetApprovedChangedBody_one": "Sus asignaciones de {{start}} - {{end}} se aprobaron; el gestor cambió 1 línea:",
+      "sheetApprovedChangedBody_many": "Sus asignaciones de {{start}} - {{end}} se aprobaron; el gestor cambió {{count}} líneas:",
+      "sheetApprovedChangedBody_other": "Sus asignaciones de {{start}} - {{end}} se aprobaron; el gestor cambió {{count}} líneas:",
+      "lines": {
+        "meal": "Comida",
+        "expatriation": "Expatriación",
+        "transportation": "Transporte",
+        "housing": "Vivienda",
+        "travel": "Viaje",
+        "other": "Otros",
+        "overtime": "Horas extra",
+        "extraDays": "Días extra"
+      }
     },
     "longSessionCheck": {
       "title": "¿Sigues trabajando?",

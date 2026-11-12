@@ -165,7 +165,20 @@
       "rejectedBody": "Seus adicionais de {{date}} foram rejeitados. Você pode editá-los e enviar de novo.",
       "sheetSubmittedBody": "{{name}} enviou adicionais de {{days}} dias ({{start}} - {{end}}).",
       "sheetApprovedBody": "Seus adicionais de {{start}} a {{end}} foram aprovados.",
-      "sheetRejectedBody": "Seus adicionais de {{start}} a {{end}} foram rejeitados. Corrija e envie de novo."
+      "sheetRejectedBody": "Seus adicionais de {{start}} a {{end}} foram rejeitados. Corrija e envie de novo.",
+      "sheetApprovedChangedBody_one": "Os seus subsídios de {{start}} - {{end}} foram aprovados; o gestor alterou 1 linha:",
+      "sheetApprovedChangedBody_many": "Os seus subsídios de {{start}} - {{end}} foram aprovados; o gestor alterou {{count}} linhas:",
+      "sheetApprovedChangedBody_other": "Os seus subsídios de {{start}} - {{end}} foram aprovados; o gestor alterou {{count}} linhas:",
+      "lines": {
+        "meal": "Refeição",
+        "expatriation": "Expatriação",
+        "transportation": "Transporte",
+        "housing": "Habitação",
+        "travel": "Viagem",
+        "other": "Outro",
+        "overtime": "Horas extra",
+        "extraDays": "Dias extra"
+      }
     },
     "longSessionCheck": {
       "title": "Ainda trabalhando?",

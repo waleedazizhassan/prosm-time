@@ -165,7 +165,18 @@
       "rejectedBody": "您 {{date}} 的津贴被驳回。您可以修改后重新提交。",
       "sheetSubmittedBody": "{{name}} 提交了 {{days}} 天的津贴（{{start}} - {{end}}）。",
       "sheetApprovedBody": "您 {{start}} - {{end}} 的津贴已批准。",
-      "sheetRejectedBody": "您 {{start}} - {{end}} 的津贴被驳回。请修改后重新提交。"
+      "sheetRejectedBody": "您 {{start}} - {{end}} 的津贴被驳回。请修改后重新提交。",
+      "sheetApprovedChangedBody_other": "您 {{start}} - {{end}} 的津贴已批准；主管修改了 {{count}} 项：",
+      "lines": {
+        "meal": "餐费",
+        "expatriation": "外派",
+        "transportation": "交通",
+        "housing": "住房",
+        "travel": "差旅",
+        "other": "其他",
+        "overtime": "加班",
+        "extraDays": "额外天数"
+      }
     },
     "longSessionCheck": {
       "title": "还在工作吗？",

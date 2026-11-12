@@ -111,7 +111,23 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "rejectedBody": "تم رفض بدلاتك ليوم {{date}}. يمكنك تعديلها وإرسالها مرة أخرى.",
         "sheetSubmittedBody": "أرسل {{name}} بدلات {{days}} يوم ({{start}} - {{end}}).",
         "sheetApprovedBody": "تم اعتماد بدلاتك عن الفترة {{start}} - {{end}}.",
-        "sheetRejectedBody": "تم رفض بدلاتك عن الفترة {{start}} - {{end}}. عدّلها وأرسلها مرة أخرى."
+        "sheetRejectedBody": "تم رفض بدلاتك عن الفترة {{start}} - {{end}}. عدّلها وأرسلها مرة أخرى.",
+        "sheetApprovedChangedBody_zero": "تم اعتماد بدلاتك عن الفترة {{start}} - {{end}}.",
+        "sheetApprovedChangedBody_one": "تم اعتماد بدلاتك عن الفترة {{start}} - {{end}}، والمدير عدّل بند واحد:",
+        "sheetApprovedChangedBody_two": "تم اعتماد بدلاتك عن الفترة {{start}} - {{end}}، والمدير عدّل بندين:",
+        "sheetApprovedChangedBody_few": "تم اعتماد بدلاتك عن الفترة {{start}} - {{end}}، والمدير عدّل {{count}} بنود:",
+        "sheetApprovedChangedBody_many": "تم اعتماد بدلاتك عن الفترة {{start}} - {{end}}، والمدير عدّل {{count}} بند:",
+        "sheetApprovedChangedBody_other": "تم اعتماد بدلاتك عن الفترة {{start}} - {{end}}، والمدير عدّل {{count}} بند:",
+        "lines": {
+          "meal": "وجبة",
+          "expatriation": "اغتراب",
+          "transportation": "انتقالات",
+          "housing": "سكن",
+          "travel": "سفر",
+          "other": "أخرى",
+          "overtime": "إضافي",
+          "extraDays": "أيام إضافية"
+        }
       },
       "longSessionCheck": {
         "title": "لسه شغال؟",
@@ -390,7 +406,19 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "rejectedBody": "Ihre Zulagen für den {{date}} wurden abgelehnt. Sie können sie bearbeiten und erneut einreichen.",
         "sheetSubmittedBody": "{{name}} hat Zulagen für {{days}} Tage gesendet ({{start}} - {{end}}).",
         "sheetApprovedBody": "Ihre Zulagen für {{start}} - {{end}} wurden genehmigt.",
-        "sheetRejectedBody": "Ihre Zulagen für {{start}} - {{end}} wurden abgelehnt. Korrigieren und erneut senden."
+        "sheetRejectedBody": "Ihre Zulagen für {{start}} - {{end}} wurden abgelehnt. Korrigieren und erneut senden.",
+        "sheetApprovedChangedBody_one": "Ihre Zulagen für {{start}} - {{end}} wurden genehmigt; der Manager hat 1 Position geändert:",
+        "sheetApprovedChangedBody_other": "Ihre Zulagen für {{start}} - {{end}} wurden genehmigt; der Manager hat {{count}} Positionen geändert:",
+        "lines": {
+          "meal": "Verpflegung",
+          "expatriation": "Auslandszulage",
+          "transportation": "Fahrt",
+          "housing": "Unterkunft",
+          "travel": "Reise",
+          "other": "Sonstiges",
+          "overtime": "Überstunden",
+          "extraDays": "Zusatztage"
+        }
       },
       "longSessionCheck": {
         "title": "Noch bei der Arbeit?",
@@ -669,7 +697,19 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "rejectedBody": "Your allowances for {{date}} were rejected. You can edit them and send them again.",
         "sheetSubmittedBody": "{{name}} sent allowances for {{days}} days ({{start}} - {{end}}).",
         "sheetApprovedBody": "Your allowances for {{start}} - {{end}} were approved.",
-        "sheetRejectedBody": "Your allowances for {{start}} - {{end}} were rejected. Fix them and send them again."
+        "sheetRejectedBody": "Your allowances for {{start}} - {{end}} were rejected. Fix them and send them again.",
+        "sheetApprovedChangedBody_one": "Your allowances for {{start}} - {{end}} were approved; the manager changed 1 line:",
+        "sheetApprovedChangedBody_other": "Your allowances for {{start}} - {{end}} were approved; the manager changed {{count}} lines:",
+        "lines": {
+          "meal": "Meal",
+          "expatriation": "Expatriation",
+          "transportation": "Transport",
+          "housing": "Housing",
+          "travel": "Travel",
+          "other": "Other",
+          "overtime": "Overtime",
+          "extraDays": "Extra days"
+        }
       },
       "longSessionCheck": {
         "title": "Still working?",
@@ -948,7 +988,20 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "rejectedBody": "Tus asignaciones del {{date}} fueron rechazadas. Puedes editarlas y enviarlas de nuevo.",
         "sheetSubmittedBody": "{{name}} envió asignaciones de {{days}} días ({{start}} - {{end}}).",
         "sheetApprovedBody": "Tus asignaciones del {{start}} al {{end}} fueron aprobadas.",
-        "sheetRejectedBody": "Tus asignaciones del {{start}} al {{end}} fueron rechazadas. Corrígelas y envíalas de nuevo."
+        "sheetRejectedBody": "Tus asignaciones del {{start}} al {{end}} fueron rechazadas. Corrígelas y envíalas de nuevo.",
+        "sheetApprovedChangedBody_one": "Sus asignaciones de {{start}} - {{end}} se aprobaron; el gestor cambió 1 línea:",
+        "sheetApprovedChangedBody_many": "Sus asignaciones de {{start}} - {{end}} se aprobaron; el gestor cambió {{count}} líneas:",
+        "sheetApprovedChangedBody_other": "Sus asignaciones de {{start}} - {{end}} se aprobaron; el gestor cambió {{count}} líneas:",
+        "lines": {
+          "meal": "Comida",
+          "expatriation": "Expatriación",
+          "transportation": "Transporte",
+          "housing": "Vivienda",
+          "travel": "Viaje",
+          "other": "Otros",
+          "overtime": "Horas extra",
+          "extraDays": "Días extra"
+        }
       },
       "longSessionCheck": {
         "title": "¿Sigues trabajando?",
@@ -1227,7 +1280,20 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "rejectedBody": "Vos indemnités du {{date}} ont été refusées. Vous pouvez les modifier et les renvoyer.",
         "sheetSubmittedBody": "{{name}} a envoyé ses indemnités pour {{days}} jours ({{start}} - {{end}}).",
         "sheetApprovedBody": "Vos indemnités du {{start}} au {{end}} ont été approuvées.",
-        "sheetRejectedBody": "Vos indemnités du {{start}} au {{end}} ont été refusées. Corrigez-les et renvoyez-les."
+        "sheetRejectedBody": "Vos indemnités du {{start}} au {{end}} ont été refusées. Corrigez-les et renvoyez-les.",
+        "sheetApprovedChangedBody_one": "Vos indemnités du {{start}} au {{end}} sont approuvées ; le responsable a modifié 1 ligne :",
+        "sheetApprovedChangedBody_many": "Vos indemnités du {{start}} au {{end}} sont approuvées ; le responsable a modifié {{count}} lignes :",
+        "sheetApprovedChangedBody_other": "Vos indemnités du {{start}} au {{end}} sont approuvées ; le responsable a modifié {{count}} lignes :",
+        "lines": {
+          "meal": "Repas",
+          "expatriation": "Expatriation",
+          "transportation": "Transport",
+          "housing": "Logement",
+          "travel": "Voyage",
+          "other": "Autre",
+          "overtime": "Heures sup.",
+          "extraDays": "Jours supplémentaires"
+        }
       },
       "longSessionCheck": {
         "title": "Toujours au travail ?",
@@ -1506,7 +1572,20 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "rejectedBody": "Le tue indennità del {{date}} sono state rifiutate. Puoi modificarle e inviarle di nuovo.",
         "sheetSubmittedBody": "{{name}} ha inviato le indennità di {{days}} giorni ({{start}} - {{end}}).",
         "sheetApprovedBody": "Le tue indennità dal {{start}} al {{end}} sono state approvate.",
-        "sheetRejectedBody": "Le tue indennità dal {{start}} al {{end}} sono state rifiutate. Correggile e inviale di nuovo."
+        "sheetRejectedBody": "Le tue indennità dal {{start}} al {{end}} sono state rifiutate. Correggile e inviale di nuovo.",
+        "sheetApprovedChangedBody_one": "Le tue indennità dal {{start}} al {{end}} sono approvate; il responsabile ha modificato 1 voce:",
+        "sheetApprovedChangedBody_many": "Le tue indennità dal {{start}} al {{end}} sono approvate; il responsabile ha modificato {{count}} voci:",
+        "sheetApprovedChangedBody_other": "Le tue indennità dal {{start}} al {{end}} sono approvate; il responsabile ha modificato {{count}} voci:",
+        "lines": {
+          "meal": "Pasto",
+          "expatriation": "Trasferta estera",
+          "transportation": "Trasporto",
+          "housing": "Alloggio",
+          "travel": "Viaggio",
+          "other": "Altro",
+          "overtime": "Straordinari",
+          "extraDays": "Giorni extra"
+        }
       },
       "longSessionCheck": {
         "title": "Stai ancora lavorando?",
@@ -1785,7 +1864,20 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "rejectedBody": "Seus adicionais de {{date}} foram rejeitados. Você pode editá-los e enviar de novo.",
         "sheetSubmittedBody": "{{name}} enviou adicionais de {{days}} dias ({{start}} - {{end}}).",
         "sheetApprovedBody": "Seus adicionais de {{start}} a {{end}} foram aprovados.",
-        "sheetRejectedBody": "Seus adicionais de {{start}} a {{end}} foram rejeitados. Corrija e envie de novo."
+        "sheetRejectedBody": "Seus adicionais de {{start}} a {{end}} foram rejeitados. Corrija e envie de novo.",
+        "sheetApprovedChangedBody_one": "Os seus subsídios de {{start}} - {{end}} foram aprovados; o gestor alterou 1 linha:",
+        "sheetApprovedChangedBody_many": "Os seus subsídios de {{start}} - {{end}} foram aprovados; o gestor alterou {{count}} linhas:",
+        "sheetApprovedChangedBody_other": "Os seus subsídios de {{start}} - {{end}} foram aprovados; o gestor alterou {{count}} linhas:",
+        "lines": {
+          "meal": "Refeição",
+          "expatriation": "Expatriação",
+          "transportation": "Transporte",
+          "housing": "Habitação",
+          "travel": "Viagem",
+          "other": "Outro",
+          "overtime": "Horas extra",
+          "extraDays": "Dias extra"
+        }
       },
       "longSessionCheck": {
         "title": "Ainda trabalhando?",
@@ -2064,7 +2156,21 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "rejectedBody": "Ваши надбавки за {{date}} отклонены. Вы можете исправить их и отправить снова.",
         "sheetSubmittedBody": "{{name}} отправил(а) надбавки за {{start}} - {{end}}, дней: {{days}}.",
         "sheetApprovedBody": "Ваши надбавки за {{start}} - {{end}} одобрены.",
-        "sheetRejectedBody": "Ваши надбавки за {{start}} - {{end}} отклонены. Исправьте их и отправьте снова."
+        "sheetRejectedBody": "Ваши надбавки за {{start}} - {{end}} отклонены. Исправьте их и отправьте снова.",
+        "sheetApprovedChangedBody_one": "Ваши надбавки за {{start}} - {{end}} утверждены; руководитель изменил {{count}} строку:",
+        "sheetApprovedChangedBody_few": "Ваши надбавки за {{start}} - {{end}} утверждены; руководитель изменил {{count}} строки:",
+        "sheetApprovedChangedBody_many": "Ваши надбавки за {{start}} - {{end}} утверждены; руководитель изменил {{count}} строк:",
+        "sheetApprovedChangedBody_other": "Ваши надбавки за {{start}} - {{end}} утверждены; руководитель изменил {{count}} строки:",
+        "lines": {
+          "meal": "Питание",
+          "expatriation": "Командировочные",
+          "transportation": "Проезд",
+          "housing": "Жильё",
+          "travel": "Поездка",
+          "other": "Прочее",
+          "overtime": "Сверхурочные",
+          "extraDays": "Доп. дни"
+        }
       },
       "longSessionCheck": {
         "title": "Всё ещё работаете?",
@@ -2343,7 +2449,18 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "rejectedBody": "您 {{date}} 的津贴被驳回。您可以修改后重新提交。",
         "sheetSubmittedBody": "{{name}} 提交了 {{days}} 天的津贴（{{start}} - {{end}}）。",
         "sheetApprovedBody": "您 {{start}} - {{end}} 的津贴已批准。",
-        "sheetRejectedBody": "您 {{start}} - {{end}} 的津贴被驳回。请修改后重新提交。"
+        "sheetRejectedBody": "您 {{start}} - {{end}} 的津贴被驳回。请修改后重新提交。",
+        "sheetApprovedChangedBody_other": "您 {{start}} - {{end}} 的津贴已批准；主管修改了 {{count}} 项：",
+        "lines": {
+          "meal": "餐费",
+          "expatriation": "外派",
+          "transportation": "交通",
+          "housing": "住房",
+          "travel": "差旅",
+          "other": "其他",
+          "overtime": "加班",
+          "extraDays": "额外天数"
+        }
       },
       "longSessionCheck": {
         "title": "还在工作吗？",

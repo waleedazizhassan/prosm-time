@@ -114,7 +114,14 @@ serve(async (request: Request) => {
   try {
     const authorizationHeader = request.headers.get("authorization");
     if (!authorizationHeader) return errorResponse("Missing Authorization header.", 401, "UNAUTHORIZED");
-    const { notificationId } = await request.json().catch(() => ({}));
+    const { notificationId, warm } = await request.json().catch(() => ({}));
+    // Owner 2026-11-12 ("the SOS notification must be very fast"): a ping every minute keeps this function
+    // started and Google's access token ready, so a real alert does not wait for either.
+    if (warm === true) {
+      const raw = Deno.env.get("FCM_SERVICE_ACCOUNT");
+      if (raw) await accessToken(JSON.parse(raw) as ServiceAccount).catch(() => undefined);
+      return successResponse({ warm: true });
+    }
     if (!notificationId) return errorResponse("notificationId is required.", 400, "BAD_REQUEST");
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
