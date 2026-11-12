@@ -402,7 +402,12 @@
       "hours": "Total hours",
       "lateDays": "Late days",
       "absentDays": "Absent days",
-      "empty": "No attendance in this period."
+      "empty": "No attendance in this period.",
+      "allSites": "All sites",
+      "siteDays_one": "{{count}} day",
+      "siteDays_other": "{{count}} days",
+      "noSite": "No site",
+      "backToSites": "Back to sites"
     },
     "leave": {
       "empty": "No leave in the last year.",

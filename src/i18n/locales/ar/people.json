@@ -402,7 +402,16 @@
       "hours": "إجمالي الساعات",
       "lateDays": "أيام تأخير",
       "absentDays": "أيام غياب",
-      "empty": "مفيش حضور في الفترة دي."
+      "empty": "مفيش حضور في الفترة دي.",
+      "allSites": "كل المواقع",
+      "siteDays_one": "{{count}} يوم",
+      "siteDays_other": "{{count}} يوم",
+      "siteDays_zero": "{{count}} يوم",
+      "siteDays_two": "يومين",
+      "siteDays_few": "{{count}} أيام",
+      "siteDays_many": "{{count}} يوم",
+      "noSite": "بدون موقع",
+      "backToSites": "رجوع للمواقع"
     },
     "leave": {
       "empty": "مفيش إجازات في آخر سنة.",

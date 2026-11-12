@@ -402,7 +402,13 @@
       "hours": "Heures totales",
       "lateDays": "Jours de retard",
       "absentDays": "Jours d’absence",
-      "empty": "Aucune présence sur cette période."
+      "empty": "Aucune présence sur cette période.",
+      "allSites": "Tous les sites",
+      "siteDays_one": "{{count}} jour",
+      "siteDays_other": "{{count}} jours",
+      "noSite": "Sans site",
+      "backToSites": "Retour aux sites",
+      "siteDays_many": "{{count}} jours"
     },
     "leave": {
       "empty": "Aucun congé sur l’année.",

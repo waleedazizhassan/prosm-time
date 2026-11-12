@@ -401,7 +401,12 @@
       "hours": "总工时",
       "lateDays": "迟到天数",
       "absentDays": "缺勤天数",
-      "empty": "此期间无考勤。"
+      "empty": "此期间无考勤。",
+      "allSites": "所有地点",
+      "siteDays_one": "{{count}} 天",
+      "siteDays_other": "{{count}} 天",
+      "noSite": "无地点",
+      "backToSites": "返回地点列表"
     },
     "leave": {
       "empty": "近一年无休假。",

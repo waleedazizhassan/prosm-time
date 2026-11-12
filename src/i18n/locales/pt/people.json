@@ -402,7 +402,13 @@
       "hours": "Total de horas",
       "lateDays": "Dias com atraso",
       "absentDays": "Dias de ausência",
-      "empty": "Sem presença neste período."
+      "empty": "Sem presença neste período.",
+      "allSites": "Todos os locais",
+      "siteDays_one": "{{count}} dia",
+      "siteDays_other": "{{count}} dias",
+      "noSite": "Sem local",
+      "backToSites": "Voltar aos locais",
+      "siteDays_many": "{{count}} dias"
     },
     "leave": {
       "empty": "Sem férias no último ano.",

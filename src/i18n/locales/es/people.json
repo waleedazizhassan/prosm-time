@@ -402,7 +402,13 @@
       "hours": "Horas totales",
       "lateDays": "Días con retraso",
       "absentDays": "Días de ausencia",
-      "empty": "Sin asistencia en este periodo."
+      "empty": "Sin asistencia en este periodo.",
+      "allSites": "Todos los sitios",
+      "siteDays_one": "{{count}} día",
+      "siteDays_other": "{{count}} días",
+      "noSite": "Sin sitio",
+      "backToSites": "Volver a los sitios",
+      "siteDays_many": "{{count}} días"
     },
     "leave": {
       "empty": "Sin permisos en el último año.",

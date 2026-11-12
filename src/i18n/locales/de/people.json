@@ -402,7 +402,12 @@
       "hours": "Stunden gesamt",
       "lateDays": "Tage mit Verspätung",
       "absentDays": "Fehltage",
-      "empty": "Keine Anwesenheit in diesem Zeitraum."
+      "empty": "Keine Anwesenheit in diesem Zeitraum.",
+      "allSites": "Alle Standorte",
+      "siteDays_one": "{{count}} Tag",
+      "siteDays_other": "{{count}} Tage",
+      "noSite": "Ohne Standort",
+      "backToSites": "Zurück zu den Standorten"
     },
     "leave": {
       "empty": "Kein Urlaub im letzten Jahr.",

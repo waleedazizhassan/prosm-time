@@ -402,7 +402,13 @@
       "hours": "Ore totali",
       "lateDays": "Giorni di ritardo",
       "absentDays": "Giorni di assenza",
-      "empty": "Nessuna presenza nel periodo."
+      "empty": "Nessuna presenza nel periodo.",
+      "allSites": "Tutte le sedi",
+      "siteDays_one": "{{count}} giorno",
+      "siteDays_other": "{{count}} giorni",
+      "noSite": "Nessuna sede",
+      "backToSites": "Torna alle sedi",
+      "siteDays_many": "{{count}} giorni"
     },
     "leave": {
       "empty": "Nessuna ferie nell’ultimo anno.",

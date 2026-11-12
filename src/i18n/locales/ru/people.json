@@ -404,7 +404,14 @@
       "hours": "Всего часов",
       "lateDays": "Дней с опозданием",
       "absentDays": "Дней отсутствия",
-      "empty": "Нет посещаемости за период."
+      "empty": "Нет посещаемости за период.",
+      "allSites": "Все объекты",
+      "siteDays_one": "{{count}} день",
+      "siteDays_other": "{{count}} дн.",
+      "siteDays_few": "{{count}} дня",
+      "siteDays_many": "{{count}} дней",
+      "noSite": "Без объекта",
+      "backToSites": "К списку объектов"
     },
     "leave": {
       "empty": "Нет отпусков за год.",
