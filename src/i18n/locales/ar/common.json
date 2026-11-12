@@ -371,7 +371,10 @@
     "invalidTier": "راجع شرائح الدخول المرتفعة.",
     "invalidExemption": "المبلغ المعفى لا يكون سالبًا.",
     "reductionLighter": "التخفيف يجب أن يكون أخف: إنذار، أو نفس الجزاء بقيمة أقل.",
-    "legalNameRequired": "اكتب الاسم الرباعي كاملًا."
+    "legalNameRequired": "اكتب الاسم الرباعي كاملًا.",
+    "clientNameRequired": "اكتب اسم العميل التابع له الموقع.",
+    "siteTypeNameRequired": "اكتب نوع الموقع.",
+    "invalidSiteProfile": "بيانات الجهة أو نوع الموقع غير صحيحة."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

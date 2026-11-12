@@ -368,7 +368,7 @@
     "restored": "Élément rétabli."
   },
   "requests": {
-    "hint": "Bulletins demandés par votre équipe. Un clic envoie le bulletin approuvé et enregistré en PDF à l'e-mail enregistré - même version, rien n'est recalculé.",
+    "hint": "Bulletins demandés par votre équipe. Ouvrez une demande : aperçu du bulletin approuvé, puis envoi (notification et PDF par e-mail, même version) ou refus motivé.",
     "employee": "Employé",
     "cycle": "Cycle",
     "asked": "Demandé",
@@ -377,7 +377,8 @@
     "statuses": {
       "pending": "En attente",
       "sent": "Envoyé",
-      "failed": "Échec"
+      "failed": "Échec",
+      "rejected": "Refusé"
     },
     "sending": "Envoi...",
     "filters": {
@@ -385,7 +386,8 @@
       "pending": "En attente",
       "failed": "Échec",
       "sent": "Envoyées",
-      "all": "Toutes"
+      "all": "Toutes",
+      "rejected": "Refusées"
     },
     "send": "Envoyer par e-mail",
     "retry": "Réessayer",
@@ -394,7 +396,24 @@
     "sentTo": "Envoyé à {{name}} ({{email}}).",
     "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}",
     "sendInApp": "Envoyer dans l'app",
-    "sentInApp": "Le bulletin est dans l'app de {{name}}."
+    "sentInApp": "Le bulletin est dans l'app de {{name}}.",
+    "reviewTitle": "Bulletin de {{name}} - {{cycle}}",
+    "sendNow": "Envoyer",
+    "reject": "Refuser",
+    "back": "Retour",
+    "reasonLabel": "Motif (inclus dans la notification)",
+    "reasonRequired": "Indiquez le motif du refus.",
+    "rejectedNotice": "{{name}} a été informé(e) du refus.",
+    "askedOn": "demandé le {{date}}",
+    "sendExplain": "L'envoi adresse le bulletin en PDF à {{email}} avec une notification, et il apparaît dans Mes bulletins.",
+    "rejectedWith": "Refusé : {{reason}}",
+    "notPublished": "Ce bulletin a été retiré (cycle rouvert) - publiez-le d'abord.",
+    "allRequests": "Toutes les demandes",
+    "review": "Ouvrir",
+    "view": "Voir",
+    "cardTitle_one": "1 demande de bulletin",
+    "cardTitle_many": "{{count}} demandes de bulletin",
+    "cardTitle_other": "{{count}} demandes de bulletin"
   },
   "mine": {
     "empty": "Aucun bulletin publié.",
@@ -409,11 +428,17 @@
     "statuses": {
       "pending": "Demande en attente",
       "sent": "Envoyé par e-mail",
-      "failed": "En attente d'un nouvel envoi"
+      "failed": "En attente d'un nouvel envoi",
+      "rejected": "Demande refusée"
     },
     "sentOn": "le {{date}} à {{email}}",
     "ask": "Demander votre bulletin",
-    "askBodyApp": "Votre demande part à la paie ; une fois envoyé, le bulletin sera ici, à consulter et enregistrer en PDF."
+    "askBodyApp": "Votre demande part à la paie ; une fois envoyé, le bulletin sera ici, à consulter et enregistrer en PDF.",
+    "requestButton": "Demander mon bulletin",
+    "allAsked": "Vous avez demandé tous les mois publiés - vous serez prévenu(e).",
+    "askBodyBoth": "Choisissez le mois. La demande va au responsable de la paie ; à l'envoi, vous recevez une notification et un e-mail, et le bulletin apparaît ici.",
+    "whichMonth": "Mois",
+    "rejectedReason": "Motif : {{reason}}"
   },
   "errors": {
     "generic": "Une erreur s'est produite. Réessayez.",
@@ -440,7 +465,9 @@
     "chooseItem": "Choisissez d'abord l'élément.",
     "basicCannotBeDeleted": "Le salaire de base ne peut pas être supprimé.",
     "legalNameRequired": "Saisis le nom officiel : c’est celui de la fiche de paie.",
-    "legalNameArabic": "Écris le nom en lettres arabes seulement, comme sur la pièce d’identité."
+    "legalNameArabic": "Écris le nom en lettres arabes seulement, comme sur la pièce d’identité.",
+    "alreadyDecided": "Cette demande a déjà reçu une réponse.",
+    "requestNotFound": "Cette demande n'existe plus."
   },
   "exports": {
     "hint": "Les bulletins d'un cycle approuvé ou verrouillé sont préparés sur le serveur dans un ZIP, chacun avec son numéro. Vous pouvez quitter la page ; le fichier reste disponible 7 jours.",

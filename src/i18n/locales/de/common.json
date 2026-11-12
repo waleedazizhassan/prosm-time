@@ -371,7 +371,10 @@
     "invalidTier": "Prüfen Sie die Stufen für hohe Einkommen.",
     "invalidExemption": "Der Freibetrag darf nicht negativ sein.",
     "reductionLighter": "Eine Milderung muss leichter sein: eine Abmahnung oder dieselbe Sanktion mit kleinerem Wert.",
-    "legalNameRequired": "Geben Sie den vollständigen amtlichen Namen ein."
+    "legalNameRequired": "Geben Sie den vollständigen amtlichen Namen ein.",
+    "clientNameRequired": "Geben Sie den Kunden des Standorts an.",
+    "siteTypeNameRequired": "Geben Sie die Art des Standorts an.",
+    "invalidSiteProfile": "Zugehörigkeit oder Art des Standorts ist ungültig."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

@@ -54,8 +54,18 @@ export interface Site {
   // schema level and, until this fix, had no way to be turned on -
   // permanently stuck off for every site.
   presenceMonitoringEnabled: boolean;
+  // Owner 2026-11-12: whose site it is (the company's or a client's) and what kind of place
+  ownerKind?: SiteOwnerKind;
+  clientName?: string | null;
+  siteType?: SiteType | null;
+  siteTypeOther?: string | null;
   createdAt: string;
 }
+
+export type SiteOwnerKind = "company" | "client";
+export const SITE_TYPES = ["office", "warehouse", "construction", "factory", "shop", "other"] as const;
+export type SiteType = (typeof SITE_TYPES)[number];
+export interface SiteProfileInput { ownerKind: SiteOwnerKind; clientName: string | null; siteType: SiteType | null; siteTypeOther: string | null }
 
 export interface NearbySite {
   id: string;
@@ -152,6 +162,10 @@ interface SiteRow {
   block_self_clock_in_outside_geofence?: boolean;
   outside_zone_policy?: OutsideZonePolicy;
   presence_monitoring_enabled: boolean;
+  owner_kind?: SiteOwnerKind | null;
+  client_name?: string | null;
+  site_type?: SiteType | null;
+  site_type_other?: string | null;
   created_at: string;
 }
 
@@ -189,6 +203,10 @@ function mapSiteRow(row: SiteRow): Site {
     blockSelfClockInOutsideGeofence: row.block_self_clock_in_outside_geofence ?? false,
     outsideZonePolicy: row.outside_zone_policy ?? (row.block_self_clock_in_outside_geofence ? "BLOCK" : "ALLOW_WITH_EXCEPTION"),
     presenceMonitoringEnabled: row.presence_monitoring_enabled,
+    ownerKind: row.owner_kind ?? "company",
+    clientName: row.client_name ?? null,
+    siteType: row.site_type ?? null,
+    siteTypeOther: row.site_type_other ?? null,
     createdAt: row.created_at,
   };
 }
@@ -315,6 +333,22 @@ class SiteRepository {
       if (error) return createError(error.message);
       if (!data) return createError("Site not found.");
       return createSuccess(mapSiteRow(data));
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Site service unavailable.");
+    }
+  }
+
+  async setProfile(siteId: string, input: SiteProfileInput): Promise<ServiceResult> {
+    try {
+      const { error } = await this.client.rpc("set_prosm_time_site_profile", {
+        p_site_id: siteId,
+        p_owner_kind: input.ownerKind,
+        p_client_name: input.ownerKind === "client" ? input.clientName : null,
+        p_site_type: input.siteType,
+        p_site_type_other: input.siteType === "other" ? input.siteTypeOther : null,
+      });
+      if (error) return createError(error.message);
+      return createSuccess();
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Site service unavailable.");
     }

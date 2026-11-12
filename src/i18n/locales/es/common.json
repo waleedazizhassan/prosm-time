@@ -371,7 +371,10 @@
     "invalidTier": "Revisa los tramos de ingresos altos.",
     "invalidExemption": "El importe exento no puede ser negativo.",
     "reductionLighter": "La reducción debe ser más leve: una amonestación o la misma sanción con menor valor.",
-    "legalNameRequired": "Escribe el nombre legal completo."
+    "legalNameRequired": "Escribe el nombre legal completo.",
+    "clientNameRequired": "Indique el cliente al que pertenece el sitio.",
+    "siteTypeNameRequired": "Indique el tipo de sitio.",
+    "invalidSiteProfile": "El propietario o el tipo del sitio no es válido."
   },
   "pageLoad": {
     "title": "Esta página necesita conexión",

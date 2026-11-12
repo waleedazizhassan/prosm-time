@@ -6,7 +6,9 @@
     "name": "Nombre",
     "address": "Dirección",
     "kioskMode": "Modo quiosco",
-    "status": "Estado"
+    "status": "Estado",
+    "owner": "Pertenece a",
+    "type": "Tipo"
   },
   "status": {
     "active": "Activa",
@@ -85,7 +87,13 @@
     "clockOutOutsideNote": "Fichar la salida fuera de la zona de trabajo siempre está permitido: se registra y se pide el motivo al empleado, para que nadie se quede dentro sin fichar.",
     "rangeTitle": "Radio de la sede",
     "rangeNeedsLocation": "Primero fije la ubicación (\"Usar mi ubicación actual\") para ver el círculo.",
-    "rangeHint": "El círculo es donde se permite fichar; se suman {{meters}} m de tolerancia GPS."
+    "rangeHint": "El círculo es donde se permite fichar; se suman {{meters}} m de tolerancia GPS.",
+    "ownerKindLabel": "El sitio pertenece a",
+    "clientNameLabel": "Nombre del cliente",
+    "siteTypeLabel": "Tipo de sitio",
+    "siteTypeOtherLabel": "Indique el tipo de sitio",
+    "clientNameRequired": "Indique el cliente al que pertenece el sitio.",
+    "siteTypeOtherRequired": "Indique el tipo de sitio."
   },
   "detail": {
     "backToList": "Volver a las sedes",
@@ -195,5 +203,18 @@
     "clearAction": "Sin horario",
     "saved": "Se guardó el horario.",
     "genericError": "No se pudo guardar el horario. Inténtalo de nuevo."
+  },
+  "ownerKind": {
+    "company": "La empresa",
+    "client": "Un cliente"
+  },
+  "siteType": {
+    "none": "Sin definir",
+    "office": "Oficina",
+    "warehouse": "Almacén",
+    "construction": "Obra",
+    "factory": "Fábrica",
+    "shop": "Tienda / sucursal",
+    "other": "Otro"
   }
 }

@@ -371,7 +371,10 @@
     "invalidTier": "Revise as faixas de rendas altas.",
     "invalidExemption": "O valor isento não pode ser negativo.",
     "reductionLighter": "A redução deve ser mais leve: uma advertência ou a mesma penalidade com valor menor.",
-    "legalNameRequired": "Informe o nome legal completo."
+    "legalNameRequired": "Informe o nome legal completo.",
+    "clientNameRequired": "Indique o cliente a que pertence o local.",
+    "siteTypeNameRequired": "Indique o tipo de local.",
+    "invalidSiteProfile": "O proprietário ou o tipo do local não é válido."
   },
   "pageLoad": {
     "title": "Esta página precisa de conexão",

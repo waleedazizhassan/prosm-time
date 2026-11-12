@@ -395,7 +395,8 @@
       "audit": "Journal des actions",
       "external": "Travailleurs externes",
       "insights": "Indicateurs de présence",
-      "documents": "Documents"
+      "documents": "Documents",
+      "moods": "Évaluation des services"
     },
     "sos": {
       "text": "SOS de {{name}} à {{site}} depuis {{time}}",
@@ -752,6 +753,19 @@
       "overtimeTotal": "{{hours}} h au total",
       "lateShort": "{{days}} j · {{minutes}} min",
       "overtimeShort": "{{days}} j · {{minutes}} min"
+    },
+    "mood": {
+      "empty": "Aucune évaluation sur cette période.",
+      "score": "Satisfaction",
+      "ratings_one": "1 évaluation",
+      "ratings_many": "{{count}} évaluations",
+      "ratings_other": "{{count}} évaluations",
+      "scoreHint": "Excellent = 100, normal = 50, difficile = 0 - d'après les réponses au pointage de sortie.",
+      "bySite": "Par site",
+      "byClient": "Par client",
+      "byDay": "Par jour",
+      "noSite": "Sans site",
+      "scoreShort": "{{score}} % · {{count}}"
     }
   },
   "devices": {

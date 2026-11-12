@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import PayrollCycleRepository, { type PayslipRequest } from "../../core/repositories/PayrollCycleRepository";
 import { formatDateOnly } from "../../core/utils/formatDate";
@@ -8,15 +8,15 @@ import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
 import Button from "../../components/common/Button";
 import Select from "../../components/common/Select";
-import Modal from "../../components/common/Modal";
 import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
 import { payrollError } from "./payrollUi";
 import SuccessText from "../../components/common/SuccessText";
+import PayslipRequestModal from "./PayslipRequestModal";
 
-const BADGE: Record<PayslipRequest["status"], string> = { pending: "pending", sent: "active", failed: "inactive" };
+const BADGE: Record<PayslipRequest["status"], string> = { pending: "pending", sent: "active", failed: "inactive", rejected: "revoked" };
 
 // Owner 2026-11-08: the payslip requests a manager may handle (their payroll scope only). One click
 // sends the approved, stored payslip of the published version as a PDF to the employee's
@@ -24,47 +24,34 @@ const BADGE: Record<PayslipRequest["status"], string> = { pending: "pending", se
 export default function PayslipRequestsPage() {
   const { t, i18n } = useTranslation("payroll");
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [requests, setRequests] = useState<PayslipRequest[] | null>(null);
   const [filter, setFilter] = useState("open");
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
-  const [confirm, setConfirm] = useState<PayslipRequest | null>(null);
-  const [sending, setSending] = useState<string | null>(null);
+  const [open, setOpen] = useState<PayslipRequest | null>(null);
+  const wanted = searchParams.get("open");
 
   const load = useCallback(async () => {
     const result = await PayrollCycleRepository.listRequests(null);
     if (result.error) setError(payrollError(result.error, t));
     setRequests(result.data ?? []);
+    return result.data ?? [];
   }, [t]);
 
   useEffect(() => {
-    void load();
-  }, [load]);
+    void load().then((all) => {
+      const hit = wanted ? all.find((r) => r.id === wanted) : null;
+      if (hit) setOpen(hit);
+    });
+  }, [load, wanted]);
 
-  const send = async (request: PayslipRequest) => {
-    setConfirm(null);
-    setSending(request.id);
-    setError("");
-    setNotice("");
-    const result = await PayrollCycleRepository.sendPayslip(request.id);
-    setSending(null);
-    if (result.error) setError(payrollError(result.error, t));
-    else setNotice(t("requests.sentTo", { email: request.email, name: request.fullName }));
-    await load();
+  const close = () => {
+    setOpen(null);
+    if (wanted) setSearchParams((params) => { params.delete("open"); return params; }, { replace: true });
   };
 
-  const sendInApp = async (request: PayslipRequest) => {
-    setSending(request.id);
-    setError("");
-    setNotice("");
-    const result = await PayrollCycleRepository.sendPayslipInApp(request.id);
-    setSending(null);
-    if (result.error) setError(payrollError(result.error, t));
-    else setNotice(t("requests.sentInApp", { name: request.fullName }));
-    await load();
-  };
-
-  const shown = (requests ?? []).filter((r) => (filter === "open" ? r.status !== "sent" : filter === "all" ? true : r.status === filter));
+  const shown = (requests ?? []).filter((r) => (filter === "open" ? r.status === "pending" || r.status === "failed" : filter === "all" ? true : r.status === filter));
   const columns: TableColumn<PayslipRequest>[] = [
     { key: "who", header: t("requests.employee"), render: (r) => <><strong>{r.fullName}</strong><HintText small>{r.email}</HintText></> },
     { key: "cycle", header: t("requests.cycle"), render: (r) => `${r.cycleTitle} · ${formatDateOnly(r.periodStart, i18n.language)} - ${formatDateOnly(r.periodEnd, i18n.language)}` },
@@ -73,20 +60,16 @@ export default function PayslipRequestsPage() {
       <>
         <StatusBadge status={BADGE[r.status]}>{r.sending ? t("requests.sending") : t(`requests.statuses.${r.status}`)}</StatusBadge>
         {r.status === "sent" && r.sentAt ? <HintText small>{t("requests.sentLine", { date: formatDateOnly(r.sentAt.slice(0, 10), i18n.language), by: r.handledBy ?? "", version: r.cycleVersion, serial: r.exportSerial })}</HintText> : null}
+        {r.status === "rejected" && r.rejectionReason ? <HintText small>{t("requests.rejectedWith", { reason: r.rejectionReason })}</HintText> : null}
         {r.status === "failed" && r.lastError ? <HintText small>{r.lastError}</HintText> : null}
       </>
     ) },
-    { key: "action", header: "", render: (r) => (r.status === "sent" ? null : (
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-1)" }}>
-        {/* owner 2026-11-09: answered in the app first (nothing stored); email stays possible */}
-        <Button size="sm" loading={sending === r.id} disabled={r.sending || !r.cyclePublished || Boolean(sending)} onClick={() => void sendInApp(r)}>
-          {t("requests.sendInApp")}
-        </Button>
-        <Button size="sm" variant="ghost" disabled={r.sending || !r.cyclePublished || Boolean(sending)} onClick={() => setConfirm(r)}>
-          {r.status === "failed" ? t("requests.retry") : t("requests.send")}
-        </Button>
-      </div>
-    )) },
+    // owner 2026-11-12: one way to answer - the card with the preview, send and reject
+    { key: "action", header: "", render: (r) => (
+      <Button size="sm" variant={r.status === "pending" || r.status === "failed" ? "primary" : "ghost"} onClick={() => { setNotice(""); setOpen(r); }}>
+        {r.status === "pending" || r.status === "failed" ? t("requests.review") : t("requests.view")}
+      </Button>
+    ) },
   ];
 
   return (
@@ -95,13 +78,10 @@ export default function PayslipRequestsPage() {
       <ErrorText>{error}</ErrorText>
       {notice ? <SuccessText>{notice}</SuccessText> : null}
       <Card actions={<Select name="requestFilter" value={filter} onChange={(event) => setFilter(event.target.value)}
-        options={["open", "pending", "failed", "sent", "all"].map((v) => ({ value: v, label: t(`requests.filters.${v}`) }))} />}>
+        options={["open", "pending", "failed", "sent", "rejected", "all"].map((v) => ({ value: v, label: t(`requests.filters.${v}`) }))} />}>
         <Table columns={columns} data={shown} getRowId={(r) => r.id} loading={requests === null} emptyMessage={t("requests.empty")} />
       </Card>
-      <Modal isOpen={Boolean(confirm)} onClose={() => setConfirm(null)} title={t("requests.confirmTitle")}
-        footer={<Button onClick={() => confirm && send(confirm)}>{t("requests.send")}</Button>}>
-        {confirm ? <HintText>{t("requests.confirmBody", { name: confirm.fullName, email: confirm.email, cycle: confirm.cycleTitle })}</HintText> : null}
-      </Modal>
+      <PayslipRequestModal request={open} onClose={close} onDone={(message) => { close(); setNotice(message); void load(); }} />
     </PageShell>
   );
 }

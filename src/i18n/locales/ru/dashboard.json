@@ -398,7 +398,8 @@
       "audit": "Журнал действий",
       "external": "Внешние рабочие",
       "insights": "Аналитика посещаемости",
-      "documents": "Документы"
+      "documents": "Документы",
+      "moods": "Оценки смен"
     },
     "sos": {
       "text": "SOS от {{name}} на {{site}} с {{time}}",
@@ -756,6 +757,20 @@
       "overtimeTotal": "всего {{hours}} ч",
       "lateShort": "{{days}} дн · {{minutes}} мин",
       "overtimeShort": "{{days}} дн · {{minutes}} мин"
+    },
+    "mood": {
+      "empty": "За этот период оценок смен нет.",
+      "score": "Удовлетворённость",
+      "ratings_one": "{{count}} оценка",
+      "ratings_few": "{{count}} оценки",
+      "ratings_many": "{{count}} оценок",
+      "ratings_other": "{{count}} оценки",
+      "scoreHint": "Отлично = 100, обычно = 50, тяжело = 0 - по ответам после ухода.",
+      "bySite": "По объектам",
+      "byClient": "По клиентам",
+      "byDay": "По дням",
+      "noSite": "Без объекта",
+      "scoreShort": "{{score}}% · {{count}}"
     }
   },
   "devices": {

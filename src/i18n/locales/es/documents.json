@@ -137,7 +137,11 @@
   "widget": {
     "title": "Documentos",
     "open": "Abrir",
-    "allGood": "Todos los documentos están en orden ({{percent}} % completo)."
+    "allGood": "Todos los documentos están en orden ({{percent}} % completo).",
+    "noDocuments": "Aún no hay documentos - añada tipos de documento en la página Documentos.",
+    "daysLeft_one": "Queda 1 día",
+    "daysLeft_many": "Quedan {{count}} días",
+    "daysLeft_other": "Quedan {{count}} días"
   },
   "alert": {
     "more_one": "y {{count}} documento más",

@@ -190,7 +190,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "publishedTitle": "مفردات مرتبك متاحة",
         "publishedBody": "نُشرت مفردات مرتب جديدة. يمكنك عرضها أو طلبها بالبريد الإلكتروني.",
         "inAppTitle": "مفردات مرتبك جاهزة",
-        "inAppBody": "مفردات مرتبك عن {{cycle}} في «مفرداتي»."
+        "inAppBody": "مفردات مرتبك عن {{cycle}} في «مفرداتي».",
+        "rejectedTitle": "اترفض طلب مفردات المرتب",
+        "rejectedBody": "طلبك لمفردات {{cycle}} اترفض: {{reason}}"
       },
       "announcement": {
         "publishedTitle": "إعلان جديد",
@@ -467,7 +469,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "publishedTitle": "Ihre Gehaltsabrechnung ist verfügbar",
         "publishedBody": "Eine neue Gehaltsabrechnung wurde veröffentlicht. Sie können sie ansehen oder per E-Mail anfordern.",
         "inAppTitle": "Ihr Gehaltszettel ist da",
-        "inAppBody": "Ihr Gehaltszettel für {{cycle}} ist unter \"Meine Gehaltszettel\"."
+        "inAppBody": "Ihr Gehaltszettel für {{cycle}} ist unter \"Meine Gehaltszettel\".",
+        "rejectedTitle": "Abrechnungsanfrage abgelehnt",
+        "rejectedBody": "Ihre Anfrage zur Abrechnung {{cycle}} wurde abgelehnt: {{reason}}"
       },
       "announcement": {
         "publishedTitle": "Neue Mitteilung",
@@ -744,7 +748,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "publishedTitle": "Your payslip is available",
         "publishedBody": "A new payslip was published. You can view it or ask for it by email.",
         "inAppTitle": "Your payslip is ready",
-        "inAppBody": "Your payslip of {{cycle}} is in My payslips."
+        "inAppBody": "Your payslip of {{cycle}} is in My payslips.",
+        "rejectedTitle": "Payslip request declined",
+        "rejectedBody": "Your request for the payslip of {{cycle}} was declined: {{reason}}"
       },
       "announcement": {
         "publishedTitle": "New announcement",
@@ -1021,7 +1027,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "publishedTitle": "Su recibo de nómina está disponible",
         "publishedBody": "Se publicó un nuevo recibo de nómina. Puede verlo o pedirlo por correo.",
         "inAppTitle": "Tu nómina está lista",
-        "inAppBody": "Tu nómina de {{cycle}} está en Mis nóminas."
+        "inAppBody": "Tu nómina de {{cycle}} está en Mis nóminas.",
+        "rejectedTitle": "Solicitud de nómina rechazada",
+        "rejectedBody": "Su solicitud de la nómina de {{cycle}} fue rechazada: {{reason}}"
       },
       "announcement": {
         "publishedTitle": "Nuevo anuncio",
@@ -1298,7 +1306,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "publishedTitle": "Votre bulletin de paie est disponible",
         "publishedBody": "Un nouveau bulletin de paie a été publié. Vous pouvez le consulter ou le demander par e-mail.",
         "inAppTitle": "Votre bulletin est prêt",
-        "inAppBody": "Votre bulletin de {{cycle}} est dans Mes bulletins."
+        "inAppBody": "Votre bulletin de {{cycle}} est dans Mes bulletins.",
+        "rejectedTitle": "Demande de bulletin refusée",
+        "rejectedBody": "Votre demande du bulletin de {{cycle}} a été refusée : {{reason}}"
       },
       "announcement": {
         "publishedTitle": "Nouvelle annonce",
@@ -1575,7 +1585,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "publishedTitle": "La tua busta paga è disponibile",
         "publishedBody": "È stata pubblicata una nuova busta paga. Puoi vederla o richiederla via email.",
         "inAppTitle": "La tua busta paga è pronta",
-        "inAppBody": "La busta paga di {{cycle}} è in Le mie buste paga."
+        "inAppBody": "La busta paga di {{cycle}} è in Le mie buste paga.",
+        "rejectedTitle": "Richiesta di cedolino rifiutata",
+        "rejectedBody": "La tua richiesta del cedolino di {{cycle}} è stata rifiutata: {{reason}}"
       },
       "announcement": {
         "publishedTitle": "Nuovo annuncio",
@@ -1852,7 +1864,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "publishedTitle": "O seu recibo de vencimento está disponível",
         "publishedBody": "Foi publicado um novo recibo de vencimento. Pode vê-lo ou pedi-lo por e-mail.",
         "inAppTitle": "O seu recibo está pronto",
-        "inAppBody": "O recibo de {{cycle}} está em Os meus recibos."
+        "inAppBody": "O recibo de {{cycle}} está em Os meus recibos.",
+        "rejectedTitle": "Pedido de recibo recusado",
+        "rejectedBody": "O seu pedido do recibo de {{cycle}} foi recusado: {{reason}}"
       },
       "announcement": {
         "publishedTitle": "Novo anúncio",
@@ -2129,7 +2143,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "publishedTitle": "Расчётный листок доступен",
         "publishedBody": "Опубликован новый расчётный листок. Его можно посмотреть или запросить по почте.",
         "inAppTitle": "Ваш расчётный лист готов",
-        "inAppBody": "Расчётный лист за {{cycle}} - в «Мои расчётные листы»."
+        "inAppBody": "Расчётный лист за {{cycle}} - в «Мои расчётные листы».",
+        "rejectedTitle": "Запрос расчётного листка отклонён",
+        "rejectedBody": "Ваш запрос листка за {{cycle}} отклонён: {{reason}}"
       },
       "announcement": {
         "publishedTitle": "Новое объявление",
@@ -2406,7 +2422,9 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "publishedTitle": "您的工资单已可查看",
         "publishedBody": "新的工资单已发布，您可以查看或通过邮件申请。",
         "inAppTitle": "您的工资单已就绪",
-        "inAppBody": "{{cycle}} 的工资单已在“我的工资单”中。"
+        "inAppBody": "{{cycle}} 的工资单已在“我的工资单”中。",
+        "rejectedTitle": "工资单申请被拒绝",
+        "rejectedBody": "您对 {{cycle}} 工资单的申请被拒绝：{{reason}}"
       },
       "announcement": {
         "publishedTitle": "新公告",

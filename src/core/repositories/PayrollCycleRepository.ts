@@ -253,7 +253,7 @@ export interface MyPayslipCycle {
   publishedAt: string;
   /** 2026-11-09: may open it in the app (self-service on, or the request answered in the app) */
   canView?: boolean;
-  request: { id: string; status: "pending" | "sent" | "failed"; createdAt: string; sentAt: string | null; cycleVersion: number | null } | null;
+  request: { id: string; status: "pending" | "sent" | "failed" | "rejected"; createdAt: string; sentAt: string | null; cycleVersion: number | null; reason?: string | null } | null;
 }
 
 export interface MyPayslip {
@@ -272,8 +272,11 @@ export interface PayslipRequest {
   cycleTitle: string;
   periodStart: string;
   periodEnd: string;
-  status: "pending" | "sent" | "failed";
+  status: "pending" | "sent" | "failed" | "rejected";
   sending: boolean;
+  /** owner 2026-11-12: a refused request carries its reason */
+  rejectionReason?: string | null;
+  rejectedAt?: string | null;
   note: string | null;
   attempts: number;
   lastError: string | null;
@@ -403,6 +406,10 @@ class PayrollCycleRepository {
   }
 
   /** 2026-11-09: answered in the app - the employee opens it in My payslips; nothing is generated or stored */
+  /** owner 2026-11-12: the requested payslip as the employee would see it, for whoever may issue it */
+  previewRequest = (requestId: string) => this.call<MyPayslip>("get_prosm_time_payslip_request_preview", { p_request_id: requestId });
+  rejectRequest = (requestId: string, reason: string) => this.call<{ status: string }>("reject_prosm_time_payslip_request", { p_request_id: requestId, p_reason: reason });
+
   sendPayslipInApp = (requestId: string) => this.call<{ status: string }>("send_prosm_time_payslip_in_app", { p_request_id: requestId });
 
   async sendPayslip(requestId: string): Promise<Result<{ status: string; serial: number }>> {

@@ -244,7 +244,9 @@
       "publishedTitle": "La tua busta paga è disponibile",
       "publishedBody": "È stata pubblicata una nuova busta paga. Puoi vederla o richiederla via email.",
       "inAppTitle": "La tua busta paga è pronta",
-      "inAppBody": "La busta paga di {{cycle}} è in Le mie buste paga."
+      "inAppBody": "La busta paga di {{cycle}} è in Le mie buste paga.",
+      "rejectedTitle": "Richiesta di cedolino rifiutata",
+      "rejectedBody": "La tua richiesta del cedolino di {{cycle}} è stata rifiutata: {{reason}}"
     },
     "announcement": {
       "publishedTitle": "Nuovo annuncio",

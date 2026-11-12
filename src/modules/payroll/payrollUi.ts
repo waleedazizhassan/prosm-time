@@ -77,6 +77,9 @@ export function payrollError(message: string | null | undefined, t: TFunction): 
     [/LEGAL NAME MUST BE IN ARABIC/, "legalNameArabic"],
     [/CANNOT BE CHANGED IN STATUS/, "notEditable"],
     [/YOUR OWN REQUEST/, "ownRequest"],
+    // 2026-11-12: a payslip request already answered, or gone
+    [/ALREADY DECIDED/, "alreadyDecided"],
+    [/REQUEST NOT FOUND/, "requestNotFound"],
     // 2026-11-10: a choice left empty (an item, a person) - never show the database's own words
     [/invalid input syntax for type uuid|COMPONENT REQUIRED|COMPONENT NOT FOUND/i, "chooseItem"],
     [/BASIC SALARY CANNOT BE DELETED/, "basicCannotBeDeleted"],

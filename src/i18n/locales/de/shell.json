@@ -244,7 +244,9 @@
       "publishedTitle": "Ihre Gehaltsabrechnung ist verfügbar",
       "publishedBody": "Eine neue Gehaltsabrechnung wurde veröffentlicht. Sie können sie ansehen oder per E-Mail anfordern.",
       "inAppTitle": "Ihr Gehaltszettel ist da",
-      "inAppBody": "Ihr Gehaltszettel für {{cycle}} ist unter \"Meine Gehaltszettel\"."
+      "inAppBody": "Ihr Gehaltszettel für {{cycle}} ist unter \"Meine Gehaltszettel\".",
+      "rejectedTitle": "Abrechnungsanfrage abgelehnt",
+      "rejectedBody": "Ihre Anfrage zur Abrechnung {{cycle}} wurde abgelehnt: {{reason}}"
     },
     "announcement": {
       "publishedTitle": "Neue Mitteilung",

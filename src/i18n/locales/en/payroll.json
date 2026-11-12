@@ -368,7 +368,7 @@
     "restored": "Item restored."
   },
   "requests": {
-    "hint": "Payslips your team asked for. One click sends the approved, stored payslip as a PDF to the person's registered email - the same version, nothing recalculated.",
+    "hint": "Payslips your team asked for. Open a request: preview the approved payslip, then send it (a notification and the PDF by email, the same version) or decline with a reason.",
     "employee": "Employee",
     "cycle": "Cycle",
     "asked": "Asked",
@@ -377,7 +377,8 @@
     "statuses": {
       "pending": "Pending",
       "sent": "Sent",
-      "failed": "Failed"
+      "failed": "Failed",
+      "rejected": "Declined"
     },
     "sending": "Sending...",
     "filters": {
@@ -385,7 +386,8 @@
       "pending": "Pending",
       "failed": "Failed",
       "sent": "Sent",
-      "all": "All"
+      "all": "All",
+      "rejected": "Declined"
     },
     "send": "Send by email",
     "retry": "Try again",
@@ -394,7 +396,23 @@
     "sentTo": "Sent to {{name}} ({{email}}).",
     "sentLine": "{{date}} · {{by}} · v{{version}} · #{{serial}}",
     "sendInApp": "Send in the app",
-    "sentInApp": "The payslip is now in {{name}}'s app."
+    "sentInApp": "The payslip is now in {{name}}'s app.",
+    "reviewTitle": "{{name}}'s payslip - {{cycle}}",
+    "sendNow": "Send",
+    "reject": "Decline",
+    "back": "Back",
+    "reasonLabel": "Reason (included in the notification)",
+    "reasonRequired": "Write the reason for declining.",
+    "rejectedNotice": "{{name}} was told the request was declined.",
+    "askedOn": "asked {{date}}",
+    "sendExplain": "Sending emails the payslip as a PDF to {{email}} with a notification, and it opens in their My payslips.",
+    "rejectedWith": "Declined: {{reason}}",
+    "notPublished": "This payslip was withdrawn (the cycle was reopened) - publish it first.",
+    "allRequests": "All requests",
+    "review": "Open",
+    "view": "View",
+    "cardTitle_one": "1 payslip request",
+    "cardTitle_other": "{{count}} payslip requests"
   },
   "mine": {
     "empty": "No published payslips yet.",
@@ -409,11 +427,17 @@
     "statuses": {
       "pending": "Request pending",
       "sent": "Emailed",
-      "failed": "Waiting to be sent again"
+      "failed": "Waiting to be sent again",
+      "rejected": "Request declined"
     },
     "sentOn": "on {{date}} to {{email}}",
     "ask": "Ask for your payslip",
-    "askBodyApp": "Your request goes to payroll; once it is sent you will find the payslip here to view and save as PDF."
+    "askBodyApp": "Your request goes to payroll; once it is sent you will find the payslip here to view and save as PDF.",
+    "requestButton": "Request payslip",
+    "allAsked": "You asked for every published month - you'll hear back when it is answered.",
+    "askBodyBoth": "Choose the month. The request goes to the person in charge of payroll; when they send it you get a notification and an email, and it appears here.",
+    "whichMonth": "Month",
+    "rejectedReason": "Reason: {{reason}}"
   },
   "errors": {
     "generic": "Something went wrong. Try again.",
@@ -440,7 +464,9 @@
     "chooseItem": "Choose the item first.",
     "basicCannotBeDeleted": "The basic salary cannot be deleted.",
     "legalNameRequired": "Enter the employee's official name - it is the name on the payslip.",
-    "legalNameArabic": "Write the name in Arabic letters only, as on the ID card."
+    "legalNameArabic": "Write the name in Arabic letters only, as on the ID card.",
+    "alreadyDecided": "This request has already been answered.",
+    "requestNotFound": "This request no longer exists."
   },
   "exports": {
     "hint": "Payslips of an approved or locked cycle are prepared on the server as one ZIP, each with its own serial number. You can leave the page; the file stays available for 7 days.",

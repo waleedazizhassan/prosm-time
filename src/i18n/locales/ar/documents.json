@@ -152,7 +152,14 @@
   "widget": {
     "title": "المستندات",
     "open": "فتح",
-    "allGood": "كل المستندات سليمة (اكتمال {{percent}}%)."
+    "allGood": "كل المستندات سليمة (اكتمال {{percent}}%).",
+    "noDocuments": "مفيش مستندات لسه - أضف أنواع المستندات من صفحة المستندات.",
+    "daysLeft_zero": "ينتهي النهارده",
+    "daysLeft_one": "باقي يوم",
+    "daysLeft_two": "باقي يومين",
+    "daysLeft_few": "باقي {{count}} أيام",
+    "daysLeft_many": "باقي {{count}} يوم",
+    "daysLeft_other": "باقي {{count}} يوم"
   },
   "alert": {
     "more_zero": "",

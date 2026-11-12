@@ -395,7 +395,8 @@
       "audit": "Registro delle azioni",
       "external": "Lavoratori esterni",
       "insights": "Indicatori di presenza",
-      "documents": "Documenti"
+      "documents": "Documenti",
+      "moods": "Valutazione dei turni"
     },
     "sos": {
       "text": "SOS da {{name}} a {{site}} dalle {{time}}",
@@ -752,6 +753,19 @@
       "overtimeTotal": "{{hours}} h in totale",
       "lateShort": "{{days}} g · {{minutes}} min",
       "overtimeShort": "{{days}} g · {{minutes}} min"
+    },
+    "mood": {
+      "empty": "Nessuna valutazione dei turni in questo periodo.",
+      "score": "Soddisfazione",
+      "ratings_one": "1 valutazione",
+      "ratings_many": "{{count}} valutazioni",
+      "ratings_other": "{{count}} valutazioni",
+      "scoreHint": "Ottimo = 100, normale = 50, pesante = 0 - dalle risposte all'uscita.",
+      "bySite": "Per sede",
+      "byClient": "Per cliente",
+      "byDay": "Per giorno",
+      "noSite": "Senza sede",
+      "scoreShort": "{{score}}% · {{count}}"
     }
   },
   "devices": {

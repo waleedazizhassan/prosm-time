@@ -6,7 +6,9 @@
     "name": "Nom",
     "address": "Adresse",
     "kioskMode": "Mode kiosque",
-    "status": "Statut"
+    "status": "Statut",
+    "owner": "Appartient à",
+    "type": "Type"
   },
   "status": {
     "active": "Actif",
@@ -85,7 +87,13 @@
     "clockOutOutsideNote": "Le pointage de départ hors de la zone est toujours autorisé : il est enregistré et un motif est demandé, pour qu'aucune session ne reste ouverte.",
     "rangeTitle": "Périmètre du site",
     "rangeNeedsLocation": "Définissez d'abord la position du site (\"Utiliser ma position\") pour voir le cercle.",
-    "rangeHint": "Le cercle est la zone où le pointage est permis ; {{meters}} m de tolérance GPS s'y ajoutent."
+    "rangeHint": "Le cercle est la zone où le pointage est permis ; {{meters}} m de tolérance GPS s'y ajoutent.",
+    "ownerKindLabel": "Le site appartient à",
+    "clientNameLabel": "Nom du client",
+    "siteTypeLabel": "Type de site",
+    "siteTypeOtherLabel": "Précisez le type de site",
+    "clientNameRequired": "Indiquez le client auquel appartient le site.",
+    "siteTypeOtherRequired": "Précisez le type de site."
   },
   "detail": {
     "backToList": "Retour aux sites",
@@ -195,5 +203,18 @@
     "clearAction": "Sans horaires",
     "saved": "Les horaires ont été enregistrés.",
     "genericError": "Impossible d’enregistrer les horaires. Réessaie."
+  },
+  "ownerKind": {
+    "company": "L'entreprise",
+    "client": "Un client"
+  },
+  "siteType": {
+    "none": "Non défini",
+    "office": "Bureau",
+    "warehouse": "Entrepôt",
+    "construction": "Chantier",
+    "factory": "Usine",
+    "shop": "Magasin / agence",
+    "other": "Autre"
   }
 }

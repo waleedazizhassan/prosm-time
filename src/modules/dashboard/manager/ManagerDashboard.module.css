@@ -973,3 +973,42 @@
 .mapUnplacedName:focus-visible {
   text-decoration: underline;
 }
+
+/* Owner 2026-11-12: the ratings by day - one stacked column a day (great, normal, tough) */
+.moodDays {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 110px;
+  overflow-x: auto;
+}
+
+.moodDay {
+  display: flex;
+  flex: 1 0 14px;
+  max-width: 28px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  height: 100%;
+}
+
+.moodStack {
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.moodStack > span {
+  display: block;
+  min-height: 2px;
+}
+
+.moodDayLabel {
+  color: var(--text-secondary);
+  font-size: 0.65rem;
+  font-variant-numeric: tabular-nums;
+}

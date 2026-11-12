@@ -392,7 +392,8 @@
       "audit": "Action log",
       "external": "External workers",
       "insights": "Attendance insights",
-      "documents": "Documents"
+      "documents": "Documents",
+      "moods": "Shift ratings"
     },
     "sos": {
       "text": "SOS from {{name}} at {{site}} since {{time}}",
@@ -748,6 +749,18 @@
       "overtimeTotal": "{{hours}} h in total",
       "lateShort": "{{days}} d · {{minutes}} min",
       "overtimeShort": "{{days}} d · {{minutes}} min"
+    },
+    "mood": {
+      "empty": "No shift ratings in this period.",
+      "score": "Satisfaction",
+      "ratings_one": "1 rating",
+      "ratings_other": "{{count}} ratings",
+      "scoreHint": "Great = 100, normal = 50, tough = 0 - from what people answer after clocking out.",
+      "bySite": "By site",
+      "byClient": "By client",
+      "byDay": "By day",
+      "noSite": "No site",
+      "scoreShort": "{{score}}% · {{count}}"
     }
   },
   "devices": {

@@ -244,7 +244,9 @@
       "publishedTitle": "مفردات مرتبك متاحة",
       "publishedBody": "نُشرت مفردات مرتب جديدة. يمكنك عرضها أو طلبها بالبريد الإلكتروني.",
       "inAppTitle": "مفردات مرتبك جاهزة",
-      "inAppBody": "مفردات مرتبك عن {{cycle}} في «مفرداتي»."
+      "inAppBody": "مفردات مرتبك عن {{cycle}} في «مفرداتي».",
+      "rejectedTitle": "اترفض طلب مفردات المرتب",
+      "rejectedBody": "طلبك لمفردات {{cycle}} اترفض: {{reason}}"
     },
     "announcement": {
       "publishedTitle": "إعلان جديد",

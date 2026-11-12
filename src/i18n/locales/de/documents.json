@@ -132,7 +132,10 @@
   "widget": {
     "title": "Dokumente",
     "open": "Öffnen",
-    "allGood": "Alle Dokumente sind in Ordnung ({{percent}} % vollständig)."
+    "allGood": "Alle Dokumente sind in Ordnung ({{percent}} % vollständig).",
+    "noDocuments": "Noch keine Dokumente - legen Sie Dokumentarten auf der Seite Dokumente an.",
+    "daysLeft_one": "Noch 1 Tag",
+    "daysLeft_other": "Noch {{count}} Tage"
   },
   "alert": {
     "more_one": "und {{count}} weiteres Dokument",

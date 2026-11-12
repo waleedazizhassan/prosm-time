@@ -248,6 +248,8 @@ export default function localizeNotification(notification: AppNotification, t: T
     case "payslip_sent":
       if (data.channel === "app") return { title: t("shell:notifications.payslip.inAppTitle"), body: t("shell:notifications.payslip.inAppBody", { cycle: String(data.cycleTitle ?? "") }) };
       return { title: t("shell:notifications.payslip.sentTitle"), body: t("shell:notifications.payslip.sentBody", { cycle: String(data.cycleTitle ?? "") }) };
+    case "payslip_rejected":
+      return { title: t("shell:notifications.payslip.rejectedTitle"), body: t("shell:notifications.payslip.rejectedBody", { cycle: String(data.cycleTitle ?? ""), reason: String(data.reason ?? "") }) };
     case "payslip_send_failed":
       return { title: t("shell:notifications.payslip.failedTitle"), body: t("shell:notifications.payslip.failedBody", { cycle: String(data.cycleTitle ?? "") }) };
     // Owner 2026-11-10: a Buzz - from whom, and what for (or their own short message)

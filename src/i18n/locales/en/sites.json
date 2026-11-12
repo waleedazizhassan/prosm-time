@@ -6,7 +6,9 @@
     "name": "Name",
     "address": "Address",
     "kioskMode": "Kiosk mode",
-    "status": "Status"
+    "status": "Status",
+    "owner": "Belongs to",
+    "type": "Type"
   },
   "status": {
     "active": "Active",
@@ -85,7 +87,13 @@
     "clockOutOutsideNote": "Clocking out from outside the work area is always allowed: it is recorded and the employee is asked for a reason, so nobody is left clocked in.",
     "rangeTitle": "Site range",
     "rangeNeedsLocation": "Set the site's location first (\"Use my current location\") to see the circle on the map.",
-    "rangeHint": "The circle is where clocking in is allowed; {{meters}} m of GPS tolerance is added to it."
+    "rangeHint": "The circle is where clocking in is allowed; {{meters}} m of GPS tolerance is added to it.",
+    "ownerKindLabel": "The site belongs to",
+    "clientNameLabel": "Client name",
+    "siteTypeLabel": "Site type",
+    "siteTypeOtherLabel": "Name the site type",
+    "clientNameRequired": "Enter the client this site belongs to.",
+    "siteTypeOtherRequired": "Name the site type."
   },
   "detail": {
     "backToList": "Back to sites",
@@ -195,5 +203,18 @@
     "clearAction": "No hours",
     "saved": "The hours were saved.",
     "genericError": "The hours could not be saved. Try again."
+  },
+  "ownerKind": {
+    "company": "The company",
+    "client": "A client"
+  },
+  "siteType": {
+    "none": "Not set",
+    "office": "Office",
+    "warehouse": "Warehouse",
+    "construction": "Construction site",
+    "factory": "Factory",
+    "shop": "Shop / branch",
+    "other": "Other"
   }
 }

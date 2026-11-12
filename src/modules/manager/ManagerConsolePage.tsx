@@ -26,6 +26,8 @@ import HintText from "../../components/common/HintText";
 import PendingHoursCard from "./PendingHoursCard";
 import ImportedAttendanceCard from "./ImportedAttendanceCard";
 import PermissionsQueueCard from "./PermissionsQueueCard";
+import PayslipRequestsCard from "./PayslipRequestsCard";
+import usePlanFeatures from "../../core/hooks/usePlanFeatures";
 import IntegrityFlagsCard from "./IntegrityFlagsCard";
 import leaveTypeLabel from "../leave/leaveTypeLabel";
 import PersonName from "../../components/common/PersonName";
@@ -52,6 +54,7 @@ const ACTIONS_BY_KIND: Record<PendingReviewKind, ReviewAction[]> = {
 export default function ManagerConsolePage() {
   const { t, i18n } = useTranslation("manager");
   const { hasPermission, profile } = useAuth();
+  const { allows } = usePlanFeatures(profile?.id);
 
   // Owner 2026-11-11: opened from "someone left their work area" - say what became of it, rather than
   // opening on an empty page (the exception reaches the review list only once the reason is sent)
@@ -261,6 +264,8 @@ export default function ManagerConsolePage() {
         </Link>
       </p>
 
+      {/* owner 2026-11-12: payslip requests - preview, send or reject (the server lists only those one may issue) */}
+      {allows("payroll") ? <PayslipRequestsCard /> : null}
       {hasPermission("sessions.review_pending") ? <PendingHoursCard /> : null}
       {hasPermission("attendance.manage_permissions") ? <PermissionsQueueCard /> : null}
       {hasPermission("attendance.review_integrity_flags") ? <IntegrityFlagsCard /> : null}

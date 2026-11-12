@@ -371,7 +371,10 @@
     "invalidTier": "Check the high-income tiers.",
     "invalidExemption": "The exempt amount cannot be negative.",
     "reductionLighter": "A reduction must be lighter: a warning, or the same penalty with a smaller value.",
-    "legalNameRequired": "Enter the full legal name."
+    "legalNameRequired": "Enter the full legal name.",
+    "clientNameRequired": "Enter the client this site belongs to.",
+    "siteTypeNameRequired": "Name the site type.",
+    "invalidSiteProfile": "The site's owner or type is not valid."
   },
   "pageLoad": {
     "title": "This page needs a connection",

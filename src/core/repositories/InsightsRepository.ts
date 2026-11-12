@@ -14,6 +14,15 @@ export interface AttendanceInsights {
   repeatOvertime: PersonFigure[];
 }
 
+// Owner 2026-11-12: the shift ratings (three faces) as a KPI - score: great 100, normal 50, tough 0
+export interface MoodCounts { great: number; normal: number; tough: number; total: number }
+export interface MoodInsights extends MoodCounts {
+  score: number | null;
+  bySite: (MoodCounts & { siteId: string | null; name: string | null; clientName: string | null; score: number })[];
+  byClient: (MoodCounts & { client: string | null; score: number })[];
+  byDay: (MoodCounts & { day: string })[];
+}
+
 export interface ScheduleCost {
   shifts: number;
   regularHours: number;
@@ -43,6 +52,11 @@ class InsightsRepository {
   async attendance(startDate: string, endDate: string): Promise<AttendanceInsights | null> {
     const { data, error } = await this.client.rpc("get_prosm_time_attendance_insights", { p_start_date: startDate, p_end_date: endDate });
     return error ? null : (data as AttendanceInsights);
+  }
+
+  async moods(startDate: string, endDate: string): Promise<MoodInsights | null> {
+    const { data, error } = await this.client.rpc("get_prosm_time_mood_insights", { p_start_date: startDate, p_end_date: endDate });
+    return error ? null : (data as MoodInsights);
   }
 
   async scheduleCost(siteId: string, startDate: string, endDate: string): Promise<ScheduleCost | null> {

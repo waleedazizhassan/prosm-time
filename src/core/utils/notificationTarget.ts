@@ -64,9 +64,13 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
     case "owner_authority_revoked":
       return "/dashboard";
     // owner 2026-11-08: payslip requests go to the requests list; the employee's to My payslips
+    // owner 2026-11-12: a request opens on the manager page, straight on its preview card
     case "payslip_requested":
     case "payslip_send_failed":
-      return "/payroll/requests";
+      if (ref?.entityId && (viewer.isOwner || viewer.canViewEmergencyLog)) return `/manager?payslipRequest=${String(ref.entityId)}`;
+      return ref?.entityId ? `/payroll/requests?open=${String(ref.entityId)}` : "/payroll/requests";
+    case "payslip_rejected":
+      return "/payslips";
     // 2026-11-11 HR suite feature 2: a document - personnel managers to the documents page, the person to
     // the documents in their own file (where the camera button is)
     // 2026-11-11 HR suite feature 1: deciding goes to the penalties page on that violation; the person to their file

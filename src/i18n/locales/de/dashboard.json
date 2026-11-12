@@ -392,7 +392,8 @@
       "audit": "Aktionsprotokoll",
       "external": "Externe Arbeitskräfte",
       "insights": "Anwesenheitskennzahlen",
-      "documents": "Dokumente"
+      "documents": "Dokumente",
+      "moods": "Schichtbewertungen"
     },
     "sos": {
       "text": "SOS von {{name}} bei {{site}} seit {{time}}",
@@ -748,6 +749,18 @@
       "overtimeTotal": "{{hours}} Std. insgesamt",
       "lateShort": "{{days}} T · {{minutes}} Min.",
       "overtimeShort": "{{days}} T · {{minutes}} Min."
+    },
+    "mood": {
+      "empty": "Keine Schichtbewertungen in diesem Zeitraum.",
+      "score": "Zufriedenheit",
+      "ratings_one": "1 Bewertung",
+      "ratings_other": "{{count}} Bewertungen",
+      "scoreHint": "Sehr gut = 100, normal = 50, schwer = 0 - aus den Antworten nach dem Ausstempeln.",
+      "bySite": "Nach Standort",
+      "byClient": "Nach Kunde",
+      "byDay": "Nach Tag",
+      "noSite": "Ohne Standort",
+      "scoreShort": "{{score}}% · {{count}}"
     }
   },
   "devices": {

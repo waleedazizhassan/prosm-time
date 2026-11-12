@@ -6,7 +6,9 @@
     "name": "الاسم",
     "address": "العنوان",
     "kioskMode": "وضع الكشك",
-    "status": "الحالة"
+    "status": "الحالة",
+    "owner": "الجهة",
+    "type": "النوع"
   },
   "status": {
     "active": "نشط",
@@ -85,7 +87,13 @@
     "clockOutOutsideNote": "الانصراف من خارج النطاق مسموح دائماً: يتسجّل ويُطلب من الموظف سبب، حتى لا تبقى جلسة مفتوحة.",
     "rangeTitle": "نطاق الموقع",
     "rangeNeedsLocation": "حدد مكان الموقع أولًا (زر «استخدم موقعي الحالي») لتظهر الدائرة على الخريطة.",
-    "rangeHint": "الدائرة هي المكان المسموح فيه بتسجيل الحضور. ويُضاف إليها {{meters}} م سماحية لدقة الـ GPS."
+    "rangeHint": "الدائرة هي المكان المسموح فيه بتسجيل الحضور. ويُضاف إليها {{meters}} م سماحية لدقة الـ GPS.",
+    "ownerKindLabel": "الموقع تابع لـ",
+    "clientNameLabel": "اسم العميل",
+    "siteTypeLabel": "نوع الموقع",
+    "siteTypeOtherLabel": "اكتب نوع الموقع",
+    "clientNameRequired": "اكتب اسم العميل التابع له الموقع.",
+    "siteTypeOtherRequired": "اكتب نوع الموقع."
   },
   "detail": {
     "backToList": "العودة إلى المواقع",
@@ -195,5 +203,18 @@
     "clearAction": "بدون مواعيد",
     "saved": "اتحفظت المواعيد.",
     "genericError": "مقدرناش نحفظ المواعيد. جرّب تاني."
+  },
+  "ownerKind": {
+    "company": "الشركة",
+    "client": "عميل"
+  },
+  "siteType": {
+    "none": "بدون تحديد",
+    "office": "مكتب",
+    "warehouse": "مخزن",
+    "construction": "موقع إنشائي",
+    "factory": "مصنع",
+    "shop": "محل / فرع",
+    "other": "نوع آخر"
   }
 }

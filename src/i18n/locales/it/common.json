@@ -371,7 +371,10 @@
     "invalidTier": "Controlla gli scaglioni dei redditi alti.",
     "invalidExemption": "L'importo esente non può essere negativo.",
     "reductionLighter": "La riduzione deve essere più lieve: un richiamo o la stessa sanzione con valore minore.",
-    "legalNameRequired": "Inserisci il nome legale completo."
+    "legalNameRequired": "Inserisci il nome legale completo.",
+    "clientNameRequired": "Indica il cliente a cui appartiene la sede.",
+    "siteTypeNameRequired": "Indica il tipo di sede.",
+    "invalidSiteProfile": "Appartenenza o tipo della sede non valido."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",
