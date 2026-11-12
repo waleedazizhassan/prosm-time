@@ -395,7 +395,8 @@
       "audit": "Registro de ações",
       "external": "Trabalhadores externos",
       "insights": "Análise de frequência",
-      "documents": "Documentos"
+      "documents": "Documentos",
+      "moods": "Avaliação dos turnos"
     },
     "sos": {
       "text": "SOS de {{name}} em {{site}} desde {{time}}",
@@ -752,6 +753,19 @@
       "overtimeTotal": "{{hours}} h no total",
       "lateShort": "{{days}} d · {{minutes}} min",
       "overtimeShort": "{{days}} d · {{minutes}} min"
+    },
+    "mood": {
+      "empty": "Sem avaliações de turnos neste período.",
+      "score": "Satisfação",
+      "ratings_one": "1 avaliação",
+      "ratings_many": "{{count}} avaliações",
+      "ratings_other": "{{count}} avaliações",
+      "scoreHint": "Ótimo = 100, normal = 50, difícil = 0 - das respostas ao registar a saída.",
+      "bySite": "Por local",
+      "byClient": "Por cliente",
+      "byDay": "Por dia",
+      "noSite": "Sem local",
+      "scoreShort": "{{score}}% · {{count}}"
     }
   },
   "devices": {

@@ -389,7 +389,8 @@
       "audit": "操作日志",
       "external": "外部工人",
       "insights": "考勤分析",
-      "documents": "证件"
+      "documents": "证件",
+      "moods": "班次评价"
     },
     "sos": {
       "text": "{{name}} 在 {{site}} 发出 SOS，自 {{time}} 起",
@@ -744,6 +745,17 @@
       "overtimeTotal": "共 {{hours}} 小时",
       "lateShort": "{{days}} 天 · {{minutes}} 分钟",
       "overtimeShort": "{{days}} 天 · {{minutes}} 分钟"
+    },
+    "mood": {
+      "empty": "此期间没有班次评价。",
+      "score": "满意度",
+      "ratings_other": "{{count}} 条评价",
+      "scoreHint": "很好 = 100，一般 = 50，辛苦 = 0 —— 来自下班打卡后的回答。",
+      "bySite": "按地点",
+      "byClient": "按客户",
+      "byDay": "按日",
+      "noSite": "无地点",
+      "scoreShort": "{{score}}% · {{count}}"
     }
   },
   "devices": {

@@ -24,6 +24,7 @@ import Avatar from "../../../components/common/Avatar";
 import PeopleByRole from "../../people/PeopleByRole";
 import ApprovalsQueue from "./ApprovalsQueue";
 import ExternalWorkersWidget from "./ExternalWorkersWidget";
+import MoodWidget from "./MoodWidget";
 import InsightsWidget from "./InsightsWidget";
 import DocumentsWidget from "./DocumentsWidget";
 import SitesMap from "./SitesMap";
@@ -372,7 +373,7 @@ export default function ManagerDashboard() {
         );
       case "documents":
         return (
-          <section key={id} className={`${styles.widget} ${styles.span4}`} style={{ order: order.indexOf(id) }}>
+          <section key={id} className={`${styles.widget} ${styles.span12}`} style={{ order: order.indexOf(id) }}>
             <DocumentsWidget refreshKey={data?.asOf ?? ""} />
           </section>
         );
@@ -416,6 +417,16 @@ export default function ManagerDashboard() {
               <h2 className={styles.widgetTitle}>{t("manager.widgets.insights")}</h2>
             </div>
             <InsightsWidget from={range.from} to={range.to} />
+          </section>
+        );
+      case "moods":
+        // owner 2026-11-12: the shift ratings as a KPI, for the dashboard's period
+        return (
+          <section key={id} className={`${styles.widget} ${styles.span12}`} style={{ order: order.indexOf(id) }}>
+            <div className={styles.widgetHeader}>
+              <h2 className={styles.widgetTitle}>{t("manager.widgets.moods")}</h2>
+            </div>
+            <MoodWidget from={range.from} to={range.to} />
           </section>
         );
       case "cost":

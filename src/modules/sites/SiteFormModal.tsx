@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import SiteRepository, { type Site, type KioskMode } from "../../core/repositories/SiteRepository";
+import SiteRepository, { SITE_TYPES, type Site, type KioskMode, type SiteOwnerKind, type SiteType } from "../../core/repositories/SiteRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import { getCurrentPosition, haversineDistanceMeters } from "../../core/utils/geo";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
@@ -72,6 +72,12 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site, defaultK
   const [geofenceRequired, setGeofenceRequired] = useState(site?.geofenceRequired ?? true);
   const [cameraRequired, setCameraRequired] = useState(site?.cameraRequired ?? false);
   const [isActive, setIsActive] = useState(site?.isActive ?? true);
+  // Owner 2026-11-12: whose site it is and what kind of place - the ratings KPI reads by site and by client
+  const [ownerKind, setOwnerKind] = useState<SiteOwnerKind>(site?.ownerKind ?? "company");
+  const [clientName, setClientName] = useState(site?.clientName ?? "");
+  const [siteType, setSiteType] = useState<SiteType | "">(site?.siteType ?? "");
+  const [siteTypeOther, setSiteTypeOther] = useState(site?.siteTypeOther ?? "");
+  const [knownClients, setKnownClients] = useState<string[]>([]);
 
   const [locating, setLocating] = useState(false);
   const [locationError, setLocationError] = useState("");
@@ -86,6 +92,13 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site, defaultK
   // site, this previews the organization's own current default rather
   // than a stale/hardcoded guess.
   const [gpsAccuracyToleranceMeters, setGpsAccuracyToleranceMeters] = useState(site ? site.gpsAccuracyToleranceMeters : 50);
+
+  useEffect(() => {
+    void SiteRepository.listSites().then((result) => {
+      const names = (result.data ?? []).map((s) => s.clientName).filter((n): n is string => Boolean(n));
+      setKnownClients([...new Set(names)].sort((a, b) => a.localeCompare(b)));
+    });
+  }, []);
 
   useEffect(() => {
     if (isEditing) return;
@@ -127,6 +140,8 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site, defaultK
   };
 
   const handleSubmit = async () => {
+    if (ownerKind === "client" && !clientName.trim()) return setError(t("form.clientNameRequired"));
+    if (siteType === "other" && !siteTypeOther.trim()) return setError(t("form.siteTypeOtherRequired"));
     setSubmitting(true);
     setError("");
 
@@ -144,11 +159,15 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site, defaultK
     };
 
     const result = isEditing && site ? await SiteRepository.updateSite(site.id, { ...input, isActive }) : await SiteRepository.createSite(input);
+    const siteId = isEditing && site ? site.id : (result.data as { siteId?: string } | null)?.siteId;
+    const profile = result.success && siteId
+      ? await SiteRepository.setProfile(siteId, { ownerKind, clientName: clientName.trim() || null, siteType: siteType || null, siteTypeOther: siteTypeOther.trim() || null })
+      : result;
 
     setSubmitting(false);
 
-    if (!result.success) {
-      setError(humanizeBackendError(result.message, t) ?? t("form.genericError"));
+    if (!result.success || !profile.success) {
+      setError(humanizeBackendError((result.success ? profile : result).message, t) ?? t("form.genericError"));
       return;
     }
 
@@ -175,6 +194,22 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site, defaultK
           the location (stand at the site and use the phone's position), the
           radius and the photo; everything else under "More options". */}
       <Input label={t("form.nameLabel")} name="siteName" value={name} onChange={(event) => setName(event.target.value)} required disabled={submitting} />
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(12rem, 1fr))", gap: "0 var(--space-3)" }}>
+        <Select label={t("form.ownerKindLabel")} name="siteOwnerKind" value={ownerKind} onChange={(event) => setOwnerKind(event.target.value as SiteOwnerKind)} disabled={submitting}
+          options={(["company", "client"] as const).map((kind) => ({ value: kind, label: t(`ownerKind.${kind}`) }))} />
+        {ownerKind === "client" ? (
+          <>
+            <Input label={t("form.clientNameLabel")} name="siteClientName" value={clientName} onChange={(event) => setClientName(event.target.value)} required disabled={submitting} list="site-client-names" />
+            <datalist id="site-client-names">{knownClients.map((n) => <option key={n} value={n} />)}</datalist>
+          </>
+        ) : null}
+        <Select label={t("form.siteTypeLabel")} name="siteType" value={siteType} onChange={(event) => setSiteType(event.target.value as SiteType | "")} disabled={submitting}
+          options={[{ value: "", label: t("siteType.none") }, ...SITE_TYPES.map((type) => ({ value: type, label: t(`siteType.${type}`) }))]} />
+        {siteType === "other" ? (
+          <Input label={t("form.siteTypeOtherLabel")} name="siteTypeOther" value={siteTypeOther} onChange={(event) => setSiteTypeOther(event.target.value)} required disabled={submitting} />
+        ) : null}
+      </div>
 
       <div style={{ marginBottom: "var(--space-3)" }}>
         <span style={{ display: "block", fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-medium)", color: "var(--text-primary)", marginBottom: 6 }}>{t("form.locationLabel")}</span>

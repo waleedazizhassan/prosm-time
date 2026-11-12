@@ -6,7 +6,9 @@
     "name": "Nome",
     "address": "Endereço",
     "kioskMode": "Modo quiosque",
-    "status": "Situação"
+    "status": "Situação",
+    "owner": "Pertence a",
+    "type": "Tipo"
   },
   "status": {
     "active": "Ativa",
@@ -85,7 +87,13 @@
     "clockOutOutsideNote": "Registrar a saída fora da área de trabalho é sempre permitido: fica registrado e o funcionário informa o motivo, para que ninguém fique com o ponto aberto.",
     "rangeTitle": "Raio do local",
     "rangeNeedsLocation": "Defina primeiro a localização (\"Usar a minha localização\") para ver o círculo.",
-    "rangeHint": "O círculo é onde é permitido registar; somam-se {{meters}} m de tolerância GPS."
+    "rangeHint": "O círculo é onde é permitido registar; somam-se {{meters}} m de tolerância GPS.",
+    "ownerKindLabel": "O local pertence a",
+    "clientNameLabel": "Nome do cliente",
+    "siteTypeLabel": "Tipo de local",
+    "siteTypeOtherLabel": "Indique o tipo de local",
+    "clientNameRequired": "Indique o cliente a que pertence o local.",
+    "siteTypeOtherRequired": "Indique o tipo de local."
   },
   "detail": {
     "backToList": "Voltar às unidades",
@@ -195,5 +203,18 @@
     "clearAction": "Sem horário",
     "saved": "O horário foi guardado.",
     "genericError": "Não foi possível guardar o horário. Tente de novo."
+  },
+  "ownerKind": {
+    "company": "A empresa",
+    "client": "Um cliente"
+  },
+  "siteType": {
+    "none": "Não definido",
+    "office": "Escritório",
+    "warehouse": "Armazém",
+    "construction": "Obra",
+    "factory": "Fábrica",
+    "shop": "Loja / filial",
+    "other": "Outro"
   }
 }

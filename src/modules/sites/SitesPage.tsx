@@ -81,6 +81,9 @@ export default function SitesPage() {
   const columns: TableColumn<Site>[] = [
     { key: "name", header: t("columns.name"), render: (site) => site.name },
     { key: "address", header: t("columns.address"), render: (site) => site.displayAddress ?? "—" },
+    // owner 2026-11-12: whose site and what kind
+    { key: "owner", header: t("columns.owner"), render: (site) => (site.ownerKind === "client" ? site.clientName ?? t("ownerKind.client") : t("ownerKind.company")) },
+    { key: "type", header: t("columns.type"), render: (site) => (site.siteType === "other" ? site.siteTypeOther ?? t("siteType.other") : site.siteType ? t(`siteType.${site.siteType}`) : "—") },
     { key: "kioskMode", header: t("columns.kioskMode"), render: (site) => t(`kioskMode.${site.kioskMode}`) },
     {
       key: "status",

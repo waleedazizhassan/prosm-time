@@ -305,6 +305,11 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "THIS PERSON ALREADY HAS THE OWNER'S AUTHORITY": "ownerAuthorityAlready",
   "THIS PERSON DOES NOT HAVE THE OWNER'S AUTHORITY": "ownerAuthorityNone",
   "THIS PERSON IS NOT ACTIVE": "ownerAuthorityInactive",
+  // owner 2026-11-12: whose site and what kind
+  "CLIENT NAME REQUIRED": "clientNameRequired",
+  "SITE TYPE NAME REQUIRED": "siteTypeNameRequired",
+  "INVALID SITE OWNER": "invalidSiteProfile",
+  "INVALID SITE TYPE": "invalidSiteProfile",
   "INVALID ALLOWANCE": "invalidAllowance",
   "INVALID CALCULATION BASIS": "invalidCalculationBasis",
   // v2.3.43 step 5: editing allowances during review, reopening.

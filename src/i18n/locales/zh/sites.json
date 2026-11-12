@@ -6,7 +6,9 @@
     "name": "名称",
     "address": "地址",
     "kioskMode": "终端模式",
-    "status": "状态"
+    "status": "状态",
+    "owner": "归属",
+    "type": "类型"
   },
   "status": {
     "active": "启用",
@@ -85,7 +87,13 @@
     "clockOutOutsideNote": "在工作区域外下班打卡始终允许：会被记录并要求员工说明原因，避免有人一直处于上班状态。",
     "rangeTitle": "站点范围",
     "rangeNeedsLocation": "请先设置站点位置（“使用我的当前位置”），即可在地图上看到范围圆。",
-    "rangeHint": "圆圈内允许打卡，另加 {{meters}} 米 GPS 容差。"
+    "rangeHint": "圆圈内允许打卡，另加 {{meters}} 米 GPS 容差。",
+    "ownerKindLabel": "地点归属",
+    "clientNameLabel": "客户名称",
+    "siteTypeLabel": "地点类型",
+    "siteTypeOtherLabel": "填写地点类型",
+    "clientNameRequired": "请填写该地点所属的客户。",
+    "siteTypeOtherRequired": "请填写地点类型。"
   },
   "detail": {
     "backToList": "返回工地列表",
@@ -195,5 +203,18 @@
     "clearAction": "不设时间",
     "saved": "时间已保存。",
     "genericError": "无法保存时间，请重试。"
+  },
+  "ownerKind": {
+    "company": "本公司",
+    "client": "客户"
+  },
+  "siteType": {
+    "none": "未设置",
+    "office": "办公室",
+    "warehouse": "仓库",
+    "construction": "工地",
+    "factory": "工厂",
+    "shop": "门店 / 分店",
+    "other": "其他"
   }
 }

@@ -132,7 +132,10 @@
   "widget": {
     "title": "Documents",
     "open": "Open",
-    "allGood": "All documents are in order ({{percent}}% complete)."
+    "allGood": "All documents are in order ({{percent}}% complete).",
+    "noDocuments": "No documents yet - add document types on the Documents page.",
+    "daysLeft_one": "1 day left",
+    "daysLeft_other": "{{count}} days left"
   },
   "alert": {
     "more_one": "and {{count}} more document",

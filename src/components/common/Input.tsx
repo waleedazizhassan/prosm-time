@@ -19,6 +19,8 @@ interface InputProps {
   autoComplete?: string;
   /** the phone keyboard to show, e.g. "decimal" for amounts */
   inputMode?: "text" | "decimal" | "numeric";
+  /** the id of a <datalist> of suggestions */
+  list?: string;
 }
 
 // § live UX review, user-directed - "a show/hide password button on
@@ -38,6 +40,7 @@ export default function Input({
   helperText = "",
   error = "",
   autoComplete,
+  list,
   inputMode,
 }: InputProps) {
   const { t } = useTranslation("common");
@@ -57,6 +60,7 @@ export default function Input({
       readOnly={readOnly}
       autoComplete={autoComplete}
       inputMode={inputMode}
+      list={list}
       className={[styles.input, error ? styles.errorInput : "", isPassword ? styles.passwordInput : ""].filter(Boolean).join(" ")}
     />
   );

@@ -6,7 +6,9 @@
     "name": "Nome",
     "address": "Indirizzo",
     "kioskMode": "Modalità kiosk",
-    "status": "Stato"
+    "status": "Stato",
+    "owner": "Appartiene a",
+    "type": "Tipo"
   },
   "status": {
     "active": "Attiva",
@@ -85,7 +87,13 @@
     "clockOutOutsideNote": "L'uscita fuori dall'area è sempre consentita: viene registrata e viene chiesto un motivo, così nessun turno resta aperto.",
     "rangeTitle": "Raggio della sede",
     "rangeNeedsLocation": "Imposta prima la posizione (\"Usa la mia posizione\") per vedere il cerchio.",
-    "rangeHint": "Il cerchio è dove si può timbrare; si aggiungono {{meters}} m di tolleranza GPS."
+    "rangeHint": "Il cerchio è dove si può timbrare; si aggiungono {{meters}} m di tolleranza GPS.",
+    "ownerKindLabel": "La sede appartiene a",
+    "clientNameLabel": "Nome del cliente",
+    "siteTypeLabel": "Tipo di sede",
+    "siteTypeOtherLabel": "Indica il tipo di sede",
+    "clientNameRequired": "Indica il cliente a cui appartiene la sede.",
+    "siteTypeOtherRequired": "Indica il tipo di sede."
   },
   "detail": {
     "backToList": "Torna alle sedi",
@@ -195,5 +203,18 @@
     "clearAction": "Nessun orario",
     "saved": "Orari salvati.",
     "genericError": "Impossibile salvare gli orari. Riprova."
+  },
+  "ownerKind": {
+    "company": "L'azienda",
+    "client": "Un cliente"
+  },
+  "siteType": {
+    "none": "Non indicato",
+    "office": "Ufficio",
+    "warehouse": "Magazzino",
+    "construction": "Cantiere",
+    "factory": "Fabbrica",
+    "shop": "Negozio / filiale",
+    "other": "Altro"
   }
 }

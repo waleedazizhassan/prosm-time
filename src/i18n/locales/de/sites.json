@@ -6,7 +6,9 @@
     "name": "Name",
     "address": "Adresse",
     "kioskMode": "Kiosk-Modus",
-    "status": "Status"
+    "status": "Status",
+    "owner": "Gehört zu",
+    "type": "Art"
   },
   "status": {
     "active": "Aktiv",
@@ -85,7 +87,13 @@
     "clockOutOutsideNote": "Ausstempeln außerhalb des Arbeitsbereichs ist immer erlaubt: Es wird erfasst und ein Grund wird abgefragt, damit keine Schicht offen bleibt.",
     "rangeTitle": "Bereich des Standorts",
     "rangeNeedsLocation": "Erst den Standort setzen (\"Aktuellen Standort verwenden\"), dann erscheint der Kreis auf der Karte.",
-    "rangeHint": "Der Kreis ist der Bereich, in dem eingestempelt werden kann; dazu kommen {{meters}} m GPS-Toleranz."
+    "rangeHint": "Der Kreis ist der Bereich, in dem eingestempelt werden kann; dazu kommen {{meters}} m GPS-Toleranz.",
+    "ownerKindLabel": "Der Standort gehört",
+    "clientNameLabel": "Name des Kunden",
+    "siteTypeLabel": "Art des Standorts",
+    "siteTypeOtherLabel": "Art des Standorts angeben",
+    "clientNameRequired": "Geben Sie den Kunden des Standorts an.",
+    "siteTypeOtherRequired": "Geben Sie die Art des Standorts an."
   },
   "detail": {
     "backToList": "Zurück zu Standorten",
@@ -195,5 +203,18 @@
     "clearAction": "Keine Zeiten",
     "saved": "Die Zeiten wurden gespeichert.",
     "genericError": "Die Zeiten konnten nicht gespeichert werden. Versuch es erneut."
+  },
+  "ownerKind": {
+    "company": "Dem Unternehmen",
+    "client": "Einem Kunden"
+  },
+  "siteType": {
+    "none": "Nicht festgelegt",
+    "office": "Büro",
+    "warehouse": "Lager",
+    "construction": "Baustelle",
+    "factory": "Fabrik",
+    "shop": "Laden / Filiale",
+    "other": "Andere"
   }
 }

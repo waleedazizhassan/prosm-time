@@ -404,7 +404,8 @@
       "audit": "سجل الإجراءات",
       "external": "العمالة الخارجية",
       "insights": "مؤشرات الحضور",
-      "documents": "المستندات"
+      "documents": "المستندات",
+      "moods": "تقييم الورديات"
     },
     "sos": {
       "text": "استغاثة من {{name}} في {{site}} منذ {{time}}",
@@ -764,6 +765,22 @@
       "overtimeTotal": "{{hours}} س إجمالًا",
       "lateShort": "{{days}} يوم · {{minutes}} د",
       "overtimeShort": "{{days}} يوم · {{minutes}} د"
+    },
+    "mood": {
+      "empty": "مفيش تقييمات للورديات في الفترة دي.",
+      "score": "نسبة الرضا",
+      "ratings_zero": "{{count}} تقييم",
+      "ratings_one": "تقييم واحد",
+      "ratings_two": "تقييمين",
+      "ratings_few": "{{count}} تقييمات",
+      "ratings_many": "{{count}} تقييم",
+      "ratings_other": "{{count}} تقييم",
+      "scoreHint": "ممتازة = 100، عادية = 50، صعبة = 0 - من ردود الموظفين بعد الانصراف.",
+      "bySite": "حسب الموقع",
+      "byClient": "حسب العميل",
+      "byDay": "حسب اليوم",
+      "noSite": "بدون موقع",
+      "scoreShort": "{{score}}% · {{count}}"
     }
   },
   "devices": {

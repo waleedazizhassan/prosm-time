@@ -35,19 +35,40 @@ export default function DocumentsWidget({ refreshKey }: { refreshKey: string }) 
         </h2>
         <button type="button" className={styles.chip} onClick={() => navigate("/documents")}>{t("widget.open")}</button>
       </div>
+      {/* Owner 2026-11-12: full width like the attendance indicators - no documents says so (not "all good"),
+          and what needs action is named: who, which document, how many days are left */}
       <div className={styles.widgetBody}>
-        {!data ? <div className={styles.skeleton} style={{ height: 60 }} /> : nothing ? (
+        {!data ? <div className={styles.skeleton} style={{ height: 60 }} /> : data.all.length === 0 ? (
+          <EmptyState kind="empty" message={t("widget.noDocuments")} />
+        ) : nothing ? (
           <EmptyState kind="empty" message={t("widget.allGood", { percent: data.completePercent })} />
         ) : (
-          <ul className={styles.rowList}>
-            {items.filter(([, n]) => n > 0).map(([key, n]) => (
-              <li key={key} style={{ cursor: "pointer" }} onClick={() => navigate("/documents")}>
-                <span className={styles.rowMain}><span className={styles.rowName}>{t(`tiles.${key}`)}</span></span>
-                <strong>{n}</strong>
-              </li>
+          <div className={styles.insights}>
+            {items.map(([key, n]) => (
+              <button key={key} type="button" className={styles.insightTile} onClick={() => navigate("/documents")} style={{ cursor: "pointer", textAlign: "start", font: "inherit", color: "inherit" }}>
+                <span className={styles.kpiLabel}>{t(`tiles.${key}`)}</span>
+                <strong style={{ fontSize: "var(--font-xl)", color: n > 0 && key !== "pendingReview" ? "var(--status-danger-text)" : "var(--text-primary)" }}>{n}</strong>
+              </button>
             ))}
-            <li><span className={styles.rowMeta}>{t("completeLine", { percent: data.completePercent })}</span></li>
-          </ul>
+            {data.action.length > 0 ? (
+              <div className={styles.insightTile} style={{ gridColumn: "1 / -1" }}>
+                <ul className={styles.rowList}>
+                  {data.action.slice(0, 6).map((row) => (
+                    <li key={row.id} style={{ cursor: "pointer" }} onClick={() => navigate("/documents")}>
+                      <span className={styles.rowMain}>
+                        <span className={styles.rowName}>{row.name}</span>
+                        <span className={styles.rowMeta}>{[row.typeName, row.site].filter(Boolean).join(" · ")}</span>
+                      </span>
+                      <span className={row.status === "expired" || (row.daysLeft ?? 1) < 0 ? styles.statusBad : styles.statusWarn}>
+                        {row.daysLeft != null && row.daysLeft >= 0 ? t("widget.daysLeft", { count: row.daysLeft }) : t(`tiles.${row.status === "pending_review" ? "pendingReview" : row.status === "expired" ? "expired" : row.status === "missing" ? "missing" : "expiring"}`)}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+            <span className={styles.rowMeta} style={{ gridColumn: "1 / -1" }}>{t("completeLine", { percent: data.completePercent })}</span>
+          </div>
         )}
       </div>
     </>
