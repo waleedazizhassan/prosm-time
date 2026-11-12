@@ -374,7 +374,9 @@
     "legalNameRequired": "Enter the full legal name.",
     "clientNameRequired": "Enter the client this site belongs to.",
     "siteTypeNameRequired": "Name the site type.",
-    "invalidSiteProfile": "The site's owner or type is not valid."
+    "invalidSiteProfile": "The site's owner or type is not valid.",
+    "documentNameRequired": "Enter the document's name.",
+    "documentNameTooLong": "The document's name is too long."
   },
   "pageLoad": {
     "title": "This page needs a connection",

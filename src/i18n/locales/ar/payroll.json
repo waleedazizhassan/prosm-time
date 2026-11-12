@@ -256,7 +256,11 @@
     "legalNameMissing": "ناقص الاسم الرسمي",
     "notInPayroll": "الشخص ده مش ظاهر في المرتبات (المالك لا يُصرف له مرتب).",
     "insuranceCategory": "فئة التأمين",
-    "insuranceCategoryDefault": "الفئة الافتراضية"
+    "insuranceCategoryDefault": "الفئة الافتراضية",
+    "insuranceLabel": "التأمينات",
+    "insured": "مؤمّن عليه",
+    "taxLabel": "الضريبة",
+    "taxed": "خاضع للضريبة"
   },
   "installments": {
     "title": "الأقساط والسلف",

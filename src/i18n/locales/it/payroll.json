@@ -256,7 +256,11 @@
     "legalNameMissing": "Manca il nome ufficiale",
     "notInPayroll": "Questa persona non è nelle paghe (il titolare non riceve stipendio).",
     "insuranceCategory": "Categoria previdenziale",
-    "insuranceCategoryDefault": "Categoria predefinita"
+    "insuranceCategoryDefault": "Categoria predefinita",
+    "insuranceLabel": "Previdenza",
+    "insured": "Assicurato",
+    "taxLabel": "Imposta",
+    "taxed": "Soggetto a imposta"
   },
   "installments": {
     "title": "Rate e anticipi",

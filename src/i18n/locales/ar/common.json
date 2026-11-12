@@ -374,7 +374,9 @@
     "legalNameRequired": "اكتب الاسم الرباعي كاملًا.",
     "clientNameRequired": "اكتب اسم العميل التابع له الموقع.",
     "siteTypeNameRequired": "اكتب نوع الموقع.",
-    "invalidSiteProfile": "بيانات الجهة أو نوع الموقع غير صحيحة."
+    "invalidSiteProfile": "بيانات الجهة أو نوع الموقع غير صحيحة.",
+    "documentNameRequired": "اكتب اسم المستند.",
+    "documentNameTooLong": "اسم المستند طويل أوي."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

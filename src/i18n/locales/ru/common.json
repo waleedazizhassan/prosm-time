@@ -374,7 +374,9 @@
     "legalNameRequired": "Введите полное официальное имя.",
     "clientNameRequired": "Укажите клиента, которому принадлежит объект.",
     "siteTypeNameRequired": "Укажите тип объекта.",
-    "invalidSiteProfile": "Принадлежность или тип объекта указаны неверно."
+    "invalidSiteProfile": "Принадлежность или тип объекта указаны неверно.",
+    "documentNameRequired": "Введите название документа.",
+    "documentNameTooLong": "Название документа слишком длинное."
   },
   "pageLoad": {
     "title": "Для этой страницы нужно подключение",

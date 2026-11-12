@@ -256,7 +256,11 @@
     "legalNameMissing": "Falta o nome oficial",
     "notInPayroll": "Esta pessoa não está na folha (o proprietário não recebe salário).",
     "insuranceCategory": "Categoria de previdência",
-    "insuranceCategoryDefault": "Categoria padrão"
+    "insuranceCategoryDefault": "Categoria padrão",
+    "insuranceLabel": "Segurança social",
+    "insured": "Segurado",
+    "taxLabel": "Imposto",
+    "taxed": "Sujeito a imposto"
   },
   "installments": {
     "title": "Prestações e adiantamentos",

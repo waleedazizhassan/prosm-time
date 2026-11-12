@@ -126,3 +126,29 @@ describe("employee documents", () => {
     expect(active).toBe(0);
   });
 });
+
+// Owner 2026-11-12: personnel add any document from the person's file by its name
+describe("a document added from the person's file", () => {
+  it("reuses the kind by name or makes one that applies to nobody else; the person cannot", async () => {
+    const t = await buildDatabase();
+    expect(t.failures).toEqual([]);
+    const { org } = await setup(t, "File Docs Co");
+    const amira = await addMember(t, org, "employee", "Amira");
+    const omar = await addMember(t, org, "employee", "Omar");
+    const ensure = (by: TestMember, user: TestMember, name: string, expiry = true) =>
+      t.as<{ r: { id: string; hasExpiry: boolean } }>(by.authId, "select public.ensure_prosm_time_person_document_type($1, $2, $3) as r", [user.userId, name, expiry]);
+    expect((await ensure(amira, amira, "Driving licence")).error).toMatch(/PERMISSION DENIED/);
+    expect((await ensure(org.owner, amira, "  ")).error).toMatch(/NAME IS REQUIRED/);
+    const made = await ensure(org.owner, amira, "Driving  licence");
+    expect(made.error).toBeNull();
+    const again = await ensure(org.owner, omar, "driving licence", false);
+    expect(again.rows![0].r.id).toBe(made.rows![0].r.id); // same kind, its own expiry rule kept
+    expect(again.rows![0].r.hasExpiry).toBe(true);
+    // added with its dates: accepted at once (personnel), valid, with its start and end
+    const sent = await t.as(org.owner.authId, "select public.submit_prosm_time_document($1, $2, $3)",
+      [amira.userId, made.rows![0].r.id, JSON.stringify({ file_path: file(org, amira), issue_date: "2026-01-01", expiry_date: "2031-01-01" })]);
+    expect(sent.error).toBeNull();
+    expect((await docs(t, org, amira)).map((d) => [d.typeName, d.status])).toEqual([["Driving licence", "valid"]]);
+    expect(await docs(t, org, omar)).toEqual([]); // nobody else gets it
+  });
+});

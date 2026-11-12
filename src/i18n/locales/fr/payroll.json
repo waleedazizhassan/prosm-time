@@ -256,7 +256,11 @@
     "legalNameMissing": "Nom officiel manquant",
     "notInPayroll": "Cette personne n’est pas dans la paie (le propriétaire n’est pas salarié).",
     "insuranceCategory": "Catégorie d'assurance",
-    "insuranceCategoryDefault": "Catégorie par défaut"
+    "insuranceCategoryDefault": "Catégorie par défaut",
+    "insuranceLabel": "Assurance sociale",
+    "insured": "Assuré",
+    "taxLabel": "Impôt",
+    "taxed": "Imposable"
   },
   "installments": {
     "title": "Échéances et avances",

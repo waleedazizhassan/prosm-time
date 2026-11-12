@@ -7,7 +7,7 @@
   "queued_many": "{{count}} documentos guardados en este teléfono; se enviarán cuando haya conexión.",
   "queued_other": "{{count}} documentos guardados en este teléfono; se enviarán cuando haya conexión.",
   "empty": "No se te pide ningún documento.",
-  "emptyHr": "No se piden documentos a esta persona. Define los documentos en Ajustes → Personas.",
+  "emptyHr": "Aún no hay documentos en este expediente. Pulse \"Añadir documento\" y suba cualquier documento con sus datos.",
   "mandatory": "Obligatorio",
   "expires": "Vence el {{date}}",
   "noExpiry": "No vence",
@@ -63,7 +63,12 @@
     "issue": "Fecha de emisión",
     "expiry": "Fecha de vencimiento",
     "offlineHint": "¿Sin internet? Se guarda en el teléfono y se envía después.",
-    "badFile": "Usa una foto JPG, PNG o WEBP, o un PDF, de hasta 10 MB."
+    "badFile": "Usa una foto JPG, PNG o WEBP, o un PDF, de hasta 10 MB.",
+    "name": "Nombre del documento",
+    "hasExpiry": "Tiene fecha de fin",
+    "needName": "Escriba el nombre del documento.",
+    "endBeforeStart": "La fecha de fin debe ser posterior a la de inicio.",
+    "expiryHint": "Recibirá un aviso antes de la fecha de fin (30 y 7 días antes y el mismo día); su estado pasa solo de vigente a vencido."
   },
   "types": {
     "title": "Documentos de empleados",
@@ -150,5 +155,8 @@
     "photograph": "Fotografiar"
   },
   "queuedRefused": "{{name}} no se envió: {{reason}}",
-  "removeQueued": "Quitar"
+  "removeQueued": "Quitar",
+  "addDocument": "Añadir documento",
+  "fromTo": "Del {{from}} al {{to}}",
+  "issuedOn": "Emitido {{date}}"
 }

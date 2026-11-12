@@ -5,7 +5,7 @@
   "actionError": "操作未成功，请重试。",
   "queued_other": "{{count}} 份证件已保存在此手机上，联网后自动发送。",
   "empty": "目前没有需要您提交的证件。",
-  "emptyHr": "此人没有需要提交的证件。请在 设置 → 人员 中设置公司证件。",
+  "emptyHr": "此档案中还没有文件。点击“添加文件”，上传任何文件并填写信息。",
   "mandatory": "必需",
   "expires": "{{date}} 到期",
   "noExpiry": "无到期日",
@@ -55,7 +55,12 @@
     "issue": "签发日期",
     "expiry": "到期日期",
     "offlineHint": "没有网络？会先保存在手机上，稍后发送。",
-    "badFile": "请使用 JPG、PNG、WEBP 照片或 PDF，最大 10 MB。"
+    "badFile": "请使用 JPG、PNG、WEBP 照片或 PDF，最大 10 MB。",
+    "name": "文件名称",
+    "hasExpiry": "有截止日期",
+    "needName": "请填写文件名称。",
+    "endBeforeStart": "截止日期必须晚于开始日期。",
+    "expiryHint": "截止日期前会提醒您（提前 30 天、7 天和当天）；状态会自动从有效变为已过期。"
   },
   "types": {
     "title": "员工证件",
@@ -136,5 +141,8 @@
     "photograph": "立即拍摄"
   },
   "queuedRefused": "{{name}} 未发送：{{reason}}",
-  "removeQueued": "删除"
+  "removeQueued": "删除",
+  "addDocument": "添加文件",
+  "fromTo": "{{from}} 至 {{to}}",
+  "issuedOn": "签发于 {{date}}"
 }

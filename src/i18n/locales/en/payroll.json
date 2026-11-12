@@ -256,7 +256,11 @@
     "legalNameMissing": "Official name missing",
     "notInPayroll": "This person is not in payroll (the owner is not paid a salary).",
     "insuranceCategory": "Insurance category",
-    "insuranceCategoryDefault": "The default category"
+    "insuranceCategoryDefault": "The default category",
+    "insuranceLabel": "Social insurance",
+    "insured": "Insured",
+    "taxLabel": "Tax",
+    "taxed": "Taxed"
   },
   "installments": {
     "title": "Installments and advances",

@@ -256,7 +256,11 @@
     "legalNameMissing": "Нет официального имени",
     "notInPayroll": "Этого человека нет в расчёте зарплаты (владелец не получает зарплату).",
     "insuranceCategory": "Страховая категория",
-    "insuranceCategoryDefault": "Категория по умолчанию"
+    "insuranceCategoryDefault": "Категория по умолчанию",
+    "insuranceLabel": "Соцстрахование",
+    "insured": "Застрахован",
+    "taxLabel": "Налог",
+    "taxed": "Облагается налогом"
   },
   "installments": {
     "title": "Взносы и авансы",

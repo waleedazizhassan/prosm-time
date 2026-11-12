@@ -196,7 +196,7 @@
     },
     "documentsAdmin": {
       "title": "Documenti dei dipendenti",
-      "body": "Impostazioni → Persone → Documenti dei dipendenti: i documenti richiesti, scadenza, promemoria e cosa succede alla timbratura dopo la scadenza. Menu → Documenti mostra scaduti, in scadenza, mancanti e da verificare; sollecita con un tocco o esporta CSV."
+      "body": "Dal fascicolo di una persona → Documenti premi \"Aggiungi documento\": nome (o uno già usato), numero, data di inizio, data di fine se c'è, e una foto o un PDF - viene registrato subito come valido. Un documento con data di fine cambia stato da solo: valido, in scadenza, scaduto, e arriva un promemoria 30 e 7 giorni prima e il giorno stesso. I documenti richiesti a tutti (o ad alcune mansioni o sedi), con giorni di promemoria e cosa succede alla timbratura dopo la scadenza, si impostano in fondo a Menu → Documenti; lì vedi anche scaduti, in scadenza, mancanti e da verificare, con promemoria in un tocco ed esportazione CSV."
     },
     "bylaw": {
       "title": "Regolamento sanzioni",

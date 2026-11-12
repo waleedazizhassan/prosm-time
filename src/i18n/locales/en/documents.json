@@ -6,7 +6,7 @@
   "queued_one": "{{count}} document is saved on this phone and will be sent when you're online.",
   "queued_other": "{{count}} documents are saved on this phone and will be sent when you're online.",
   "empty": "No documents are required from you.",
-  "emptyHr": "No documents are required for this person. Set the company's documents in Settings → People.",
+  "emptyHr": "No documents in this person's file yet. Press \"Add a document\" and upload any document with its details.",
   "mandatory": "Required",
   "expires": "Expires {{date}}",
   "noExpiry": "Does not expire",
@@ -59,7 +59,12 @@
     "issue": "Issue date",
     "expiry": "Expiry date",
     "offlineHint": "No internet? It is saved on the phone and sent later.",
-    "badFile": "Use a JPG, PNG, WEBP photo or a PDF, up to 10 MB."
+    "badFile": "Use a JPG, PNG, WEBP photo or a PDF, up to 10 MB.",
+    "name": "Document name",
+    "hasExpiry": "It has an end date",
+    "needName": "Enter the document's name.",
+    "endBeforeStart": "The end date must be after the start date.",
+    "expiryHint": "You will be reminded before the end date (30 and 7 days before, and on the day); its state turns from valid to expired by itself."
   },
   "types": {
     "title": "Employee documents",
@@ -143,5 +148,8 @@
     "photograph": "Photograph it"
   },
   "queuedRefused": "{{name}} was not sent: {{reason}}",
-  "removeQueued": "Remove"
+  "removeQueued": "Remove",
+  "addDocument": "Add a document",
+  "fromTo": "From {{from}} to {{to}}",
+  "issuedOn": "Issued {{date}}"
 }

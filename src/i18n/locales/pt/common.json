@@ -374,7 +374,9 @@
     "legalNameRequired": "Informe o nome legal completo.",
     "clientNameRequired": "Indique o cliente a que pertence o local.",
     "siteTypeNameRequired": "Indique o tipo de local.",
-    "invalidSiteProfile": "O proprietário ou o tipo do local não é válido."
+    "invalidSiteProfile": "O proprietário ou o tipo do local não é válido.",
+    "documentNameRequired": "Escreva o nome do documento.",
+    "documentNameTooLong": "O nome do documento é demasiado longo."
   },
   "pageLoad": {
     "title": "Esta página precisa de conexão",

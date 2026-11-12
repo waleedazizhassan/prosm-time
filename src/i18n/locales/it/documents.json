@@ -7,7 +7,7 @@
   "queued_many": "{{count}} documenti sono salvati su questo telefono e saranno inviati appena online.",
   "queued_other": "{{count}} documenti sono salvati su questo telefono e saranno inviati appena online.",
   "empty": "Non ti sono richiesti documenti.",
-  "emptyHr": "Nessun documento richiesto per questa persona. Imposta i documenti in Impostazioni → Persone.",
+  "emptyHr": "Nessun documento ancora in questo fascicolo. Premi \"Aggiungi documento\" e carica qualsiasi documento con i suoi dati.",
   "mandatory": "Obbligatorio",
   "expires": "Scade il {{date}}",
   "noExpiry": "Non scade",
@@ -63,7 +63,12 @@
     "issue": "Data di rilascio",
     "expiry": "Data di scadenza",
     "offlineHint": "Niente internet? Viene salvato sul telefono e inviato dopo.",
-    "badFile": "Usa una foto JPG, PNG, WEBP o un PDF, fino a 10 MB."
+    "badFile": "Usa una foto JPG, PNG, WEBP o un PDF, fino a 10 MB.",
+    "name": "Nome del documento",
+    "hasExpiry": "Ha una data di fine",
+    "needName": "Scrivi il nome del documento.",
+    "endBeforeStart": "La data di fine deve essere successiva a quella di inizio.",
+    "expiryHint": "Riceverai un promemoria prima della data di fine (30 e 7 giorni prima e il giorno stesso); lo stato passa da valido a scaduto da solo."
   },
   "types": {
     "title": "Documenti dei dipendenti",
@@ -150,5 +155,8 @@
     "photograph": "Fotografa"
   },
   "queuedRefused": "{{name}} non è stato inviato: {{reason}}",
-  "removeQueued": "Rimuovi"
+  "removeQueued": "Rimuovi",
+  "addDocument": "Aggiungi documento",
+  "fromTo": "Dal {{from}} al {{to}}",
+  "issuedOn": "Rilasciato il {{date}}"
 }

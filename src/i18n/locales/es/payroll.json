@@ -256,7 +256,11 @@
     "legalNameMissing": "Falta el nombre oficial",
     "notInPayroll": "Esta persona no está en la nómina (el propietario no cobra salario).",
     "insuranceCategory": "Categoría de seguro",
-    "insuranceCategoryDefault": "Categoría por defecto"
+    "insuranceCategoryDefault": "Categoría por defecto",
+    "insuranceLabel": "Seguro social",
+    "insured": "Asegurado",
+    "taxLabel": "Impuesto",
+    "taxed": "Sujeto a impuesto"
   },
   "installments": {
     "title": "Cuotas y anticipos",

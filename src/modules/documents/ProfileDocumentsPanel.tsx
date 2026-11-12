@@ -36,6 +36,12 @@ export default function ProfileDocumentsPanel({ profile, onChanged }: { profile:
   const [reason, setReason] = useState("");
   const [busy, setBusy] = useState("");
   const [openArchive, setOpenArchive] = useState<string | null>(null);
+  const [knownNames, setKnownNames] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (!isHr) return;
+    void DocumentsRepository.listTypes().then((r) => setKnownNames([...new Set((r.data ?? []).map((x) => x.name))]));
+  }, [isHr]);
 
   const load = useCallback(async () => {
     const r = await DocumentsRepository.listFor(userId);
@@ -73,7 +79,9 @@ export default function ProfileDocumentsPanel({ profile, onChanged }: { profile:
 
   if (!docs) return <LoadingState />;
   return (
-    <Card title={t("tabTitle")}>
+    <Card title={t("tabTitle")} actions={isHr ? (
+      <Button size="sm" onClick={() => setUpload({ userId, typeId: null, typeName: "", hasExpiry: true, knownNames })}>{t("addDocument")}</Button>
+    ) : undefined}>
       <ErrorText>{error}</ErrorText>
       {notice ? <SuccessText>{notice}</SuccessText> : null}
       {queued.filter((q) => !q.error).length > 0 ? <HintText>{t("queued", { count: queued.filter((q) => !q.error).length })}</HintText> : null}
@@ -97,7 +105,12 @@ export default function ProfileDocumentsPanel({ profile, onChanged }: { profile:
                       {d.isMandatory ? <Check size={13} aria-label={t("mandatory")} /> : null}
                     </strong>
                     <div style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>
-                      {[d.documentNumber, d.expiryDate ? t("expires", { date: formatDateOnly(d.expiryDate, i18n.language) }) : d.hasFile && !d.hasExpiry ? t("noExpiry") : null].filter(Boolean).join(" · ") || "—"}
+                      {/* owner 2026-11-12: its number, and from - to */}
+                      {[d.documentNumber,
+                        d.issueDate && d.expiryDate ? t("fromTo", { from: formatDateOnly(d.issueDate, i18n.language), to: formatDateOnly(d.expiryDate, i18n.language) })
+                          : d.expiryDate ? t("expires", { date: formatDateOnly(d.expiryDate, i18n.language) })
+                          : d.issueDate ? t("issuedOn", { date: formatDateOnly(d.issueDate, i18n.language) }) : null,
+                        d.hasFile && !d.hasExpiry ? t("noExpiry") : null].filter(Boolean).join(" · ") || "—"}
                     </div>
                     {d.rejectionReason && d.status !== "valid" ? <div style={{ color: "var(--status-danger-text, #b91c1c)", fontSize: "var(--font-sm)" }}>{t("rejectedBecause", { reason: d.rejectionReason })}</div> : null}
                   </div>

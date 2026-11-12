@@ -256,7 +256,11 @@
     "legalNameMissing": "Offizieller Name fehlt",
     "notInPayroll": "Diese Person ist nicht in der Lohnabrechnung (der Inhaber erhält kein Gehalt).",
     "insuranceCategory": "Versicherungskategorie",
-    "insuranceCategoryDefault": "Standardkategorie"
+    "insuranceCategoryDefault": "Standardkategorie",
+    "insuranceLabel": "Sozialversicherung",
+    "insured": "Versichert",
+    "taxLabel": "Steuer",
+    "taxed": "Steuerpflichtig"
   },
   "installments": {
     "title": "Raten und Vorschüsse",

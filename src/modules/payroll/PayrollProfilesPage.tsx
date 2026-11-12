@@ -326,12 +326,17 @@ export default function PayrollProfilesPage({ embedUserId }: { embedUserId?: str
 
             <h4 style={{ margin: "var(--space-3) 0 var(--space-1)" }}>{t("profiles.statutoryTitle")}</h4>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-3)", alignItems: "flex-end" }}>
-              <label style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}>
-                <input type="checkbox" checked={form.insurance_exempt} onChange={(event) => setForm({ ...form, insurance_exempt: event.target.checked })} /> {t("profiles.insuranceExempt")}
-              </label>
-              <label style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}>
-                <input type="checkbox" checked={form.tax_exempt} onChange={(event) => setForm({ ...form, tax_exempt: event.target.checked })} /> {t("profiles.taxExempt")}
-              </label>
+              {/* owner 2026-11-12: insured or not, taxed or not - said in words, not by an unchecked box */}
+              <div style={{ maxWidth: 220 }}>
+                <Select label={t("profiles.insuranceLabel")} name="insuranceStatus" value={form.insurance_exempt ? "no" : "yes"}
+                  onChange={(event) => setForm({ ...form, insurance_exempt: event.target.value === "no" })}
+                  options={[{ value: "yes", label: t("profiles.insured") }, { value: "no", label: t("profiles.insuranceExempt") }]} />
+              </div>
+              <div style={{ maxWidth: 220 }}>
+                <Select label={t("profiles.taxLabel")} name="taxStatus" value={form.tax_exempt ? "no" : "yes"}
+                  onChange={(event) => setForm({ ...form, tax_exempt: event.target.value === "no" })}
+                  options={[{ value: "yes", label: t("profiles.taxed") }, { value: "no", label: t("profiles.taxExempt") }]} />
+              </div>
               {!form.insurance_exempt && categories.length > 1 ? (
                 <div style={{ maxWidth: 240 }}>
                   <Select label={t("profiles.insuranceCategory")} name="insuranceCategory" value={form.insurance_category} onChange={(event) => setForm({ ...form, insurance_category: event.target.value })}

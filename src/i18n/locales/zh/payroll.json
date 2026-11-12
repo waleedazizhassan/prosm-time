@@ -256,7 +256,11 @@
     "legalNameMissing": "缺少正式姓名",
     "notInPayroll": "此人不在工资名单中（所有者不领取工资）。",
     "insuranceCategory": "社保类别",
-    "insuranceCategoryDefault": "默认类别"
+    "insuranceCategoryDefault": "默认类别",
+    "insuranceLabel": "社保",
+    "insured": "参保",
+    "taxLabel": "税",
+    "taxed": "需缴税"
   },
   "installments": {
     "title": "分期与预支",
