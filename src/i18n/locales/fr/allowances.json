@@ -41,7 +41,7 @@
     "travel": "Voyage",
     "other": "Autre",
     "status": "Statut",
-    "overtimeAmount": "Valeur des heures sup.",
+    "overtimeAmount": "Valeur heures sup et retards",
     "total": "Total"
   },
   "status": {
@@ -64,7 +64,8 @@
     "reviewNotesLabel": "Notes de révision (facultatif)",
     "daySessionsLine": "{{count}} sessions ce jour · {{hours}} h {{minutes}} min travaillées",
     "reviewNotesLine": "Note du réviseur : {{notes}}",
-    "overtimeValueLine": "d'une valeur de {{amount}}"
+    "overtimeValueLine": "d'une valeur de {{amount}}",
+    "lateLine": "retard {{minutes}} min retenu : {{amount}}"
   },
   "totals": {
     "title": "Totaux de la période"
@@ -119,7 +120,8 @@
       "travel": "Déplacement",
       "other": "Autre",
       "overtimeHour": "Heure supplémentaire",
-      "extraDay": "Jour supplémentaire"
+      "extraDay": "Jour supplémentaire",
+      "lateMinute": "Minute de retard (retenue)"
     }
   },
   "pdf": {

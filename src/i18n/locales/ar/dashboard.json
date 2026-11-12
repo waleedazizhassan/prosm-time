@@ -140,7 +140,7 @@
     "manualLocationLabel": "مكان العمل",
     "manualLocationHint": "اكتب المكان اللي انت فيه فعلاً (زي موقع عميل أو شغل من البيت) — إلزامي لو مفيش موقع مختار.",
     "manualLocationRequired": "ادخل اسم مكان العمل عشان تسجل حضور من غير موقع مسجّل.",
-    "clockInBlockedContactManager": "انتهت فترة السماح الخاصة بوردية هذا الموقع - من فضلك تواصل مع مديرك لتسجيل حضورك.",
+    "clockInBlockedContactManager": "بدأ احتساب التأخير في وردية هذا الموقع - من فضلك تواصل مع مديرك لتسجيل حضورك.",
     "clockOutBlockedContactManager": "أنت خارج نطاق موقع العمل - من فضلك تواصل مع مديرك لتسجيل انصرافك.",
     "projectLabel": "المشروع (اختياري)",
     "noProject": "بدون مشروع",
@@ -239,6 +239,41 @@
       "siteChanged": "تم تغيير الموقع",
       "savedOffline": "اتحفظ على موبايلك",
       "savedOfflineText": "مفيش إنترنت دلوقتي؛ هيتبعت تلقائيًا أول ما الاتصال يرجع."
+    },
+    "trackingGate": {
+      "title": "قبل ما تسجّل حضورك",
+      "lead": "PROSM Time بيتابع مكانك أثناء الوردية بس - حتى والبرنامج مقفول - عشان الحضور والخروج من الموقع يتسجّلوا صح. محتاجين:",
+      "later": "بعدين",
+      "check": "تحقّق تاني",
+      "light": "خفيف على البطارية والنت: المكان بيتبعت لما تتحرك 50 متر أو مرة كل 5 دقايق، وبيقف أول ما تسجّل انصراف.",
+      "consent": {
+        "title": "توافق على متابعة الموقع أثناء الوردية",
+        "hint": "أثناء الوردية بس، وبيقف مع الانصراف.",
+        "action": "موافق"
+      },
+      "location": {
+        "title": "السماح بالموقع",
+        "hint": "اختار «أثناء استخدام التطبيق» والموقع الدقيق.",
+        "action": "السماح"
+      },
+      "notifications": {
+        "title": "السماح بالإشعارات",
+        "hint": "عشان يظهر إشعار الوردية وتنبيه الخروج من الموقع.",
+        "action": "الإعدادات"
+      },
+      "battery": {
+        "title": "إيقاف توفير البطارية لـ PROSM Time",
+        "hint": "اختار PROSM Time وخليه «غير محسّن» أو «بدون قيود».",
+        "action": "الإعدادات"
+      }
+    },
+    "mood": {
+      "question": "الوردية كانت عاملة إيه معاك النهارده؟",
+      "great": "ممتازة",
+      "normal": "عادية",
+      "tough": "صعبة",
+      "thanks": "شكراً - وصل ردّك.",
+      "label": "إحساسه بالوردية"
     }
   },
   "kioskPin": {
@@ -368,7 +403,8 @@
       "cost": "البدلات والتكلفة",
       "audit": "سجل الإجراءات",
       "external": "العمالة الخارجية",
-      "insights": "مؤشرات الحضور"
+      "insights": "مؤشرات الحضور",
+      "documents": "المستندات"
     },
     "sos": {
       "text": "استغاثة من {{name}} في {{site}} منذ {{time}}",
@@ -555,7 +591,38 @@
         "allowances_edit_during_review": "تعديل بدل أثناء المراجعة",
         "leave_approved_cancelled": "إلغاء إجازة معتمدة",
         "OWNER_AUTHORITY_GRANTED": "منح صلاحيات المالك",
-        "OWNER_AUTHORITY_REVOKED": "سحب صلاحيات المالك"
+        "OWNER_AUTHORITY_REVOKED": "سحب صلاحيات المالك",
+        "hr_profile_changed": "تعديل ملف الموظف",
+        "hr_contract_saved": "حفظ عقد",
+        "hr_contract_deleted": "حذف عقد",
+        "hr_job_title_saved": "حفظ وظيفة",
+        "hr_document_type_saved": "حفظ إعداد مستند",
+        "hr_document_template_added": "إضافة قائمة مستندات",
+        "hr_document_uploaded": "رفع مستند",
+        "hr_document_accepted": "قبول مستند",
+        "hr_document_rejected": "رفض مستند",
+        "hr_document_reminded": "تذكير موظف بمستند",
+        "hr_violation_recorded": "تسجيل مخالفة",
+        "hr_violation_cancelled": "إلغاء مخالفة",
+        "hr_violation_investigate": "تسجيل تحقيق",
+        "hr_violation_respond": "رد الموظف",
+        "hr_violation_approve": "اعتماد جزاء",
+        "hr_violation_reduce": "تخفيف جزاء",
+        "hr_violation_reject": "رفض جزاء",
+        "hr_violation_acknowledge": "اطلاع الموظف على جزاء",
+        "hr_violation_refused_ack": "رفض الموظف التوقيع",
+        "hr_violation_appeal": "تظلم",
+        "hr_violation_appeal_confirm": "التظلم: تأكيد الجزاء",
+        "hr_bylaw_published": "نشر لائحة الجزاءات",
+        "hr_penalty_settings_saved": "حفظ حدود اللائحة",
+        "hr_penalty_type_saved": "حفظ نوع جزاء",
+        "hr_violation_type_saved": "حفظ مخالفة",
+        "hr_penalty_template_added": "إضافة المخالفات المقترحة",
+        "hr_incentive_rule_saved": "حفظ قاعدة حافز",
+        "hr_incentive_proposed": "اقتراح حافز",
+        "hr_incentive_approve": "اعتماد حافز",
+        "hr_incentive_reject": "رفض حافز",
+        "hr_incentive_cancel": "إلغاء حافز"
       },
       "groups": {
         "sos": "استغاثة",

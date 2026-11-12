@@ -19,7 +19,7 @@
   },
   "sitePolicy": {
     "title": "Règles du site",
-    "hint": "Marge GPS, délai de grâce, horaires, heures supplémentaires et retenues de retard, arrondi des pauses, suivi de présence, employés exemptés et blocages en libre-service de ce site.",
+    "hint": "La marge GPS de ce site, les horaires, les heures sup et retenues de retard, l’arrondi des pauses, le suivi de présence, les exemptions et les limites du pointage soi-même.",
     "siteSelectLabel": "Site",
     "siteSelectPlaceholder": "Sélectionner un site…",
     "noSites": "Aucun site pour l'instant - ajoutez-en un depuis Sites d'abord.",
@@ -256,7 +256,9 @@
       "payroll": "Paie (cotisations, impôt, prêts, bulletins)",
       "integrations": "Intégrations, API et pointage des badgeuses",
       "delegation": "Délégation complète et temporaire",
-      "retention": "Contrôle de la conservation des données"
+      "retention": "Contrôle de la conservation des données",
+      "documents": "Documents des salariés et leur expiration",
+      "penalties": "Règlement de sanctions progressives et primes"
     },
     "managedByProsm": "Toute modification ou tout renouvellement de votre licence est fait par PROSM ; vous recevez une notification et un e-mail avec la nouvelle licence. Pour la modifier : sales@prosm.net.",
     "historyAll": "Pointages affichés : tous. Positions et photos sont supprimées automatiquement après la durée de « Conservation ».",
@@ -288,5 +290,39 @@
     "outside": "Hors des sites",
     "people": "Personnes et présence",
     "other": "Offre et sécurité"
+  },
+  "overtimeTarget": {
+    "title": "Heures sup et retards",
+    "hint": "Choisis où comptent les heures sup et les retards issus de la présence. Les jours et cycles validés ne changent pas.",
+    "saved": "Enregistré.",
+    "error": "Impossible d’enregistrer. Réessaie.",
+    "payroll": {
+      "label": "Sur le salaire",
+      "hint": "Proposé dans le cycle de paie, à accepter."
+    },
+    "allowances": {
+      "label": "Sur les indemnités",
+      "hint": "Les heures sup sont valorisées dans les feuilles d’indemnités."
+    },
+    "counted": {
+      "label": "Comptés",
+      "hint": "Les heures sup sont valorisées dans les feuilles d’indemnités."
+    },
+    "none": {
+      "label": "Non comptés",
+      "hint": "Sans effet - visibles seulement dans les heures."
+    }
+  },
+  "jobTitles": {
+    "title": "Postes",
+    "hint": "Les postes de l’entreprise : choisis dans chaque dossier et utilisés par les documents exigés selon le poste.",
+    "name": "Intitulé du poste",
+    "add": "Ajouter",
+    "stop": "Désactiver",
+    "restore": "Rétablir",
+    "people_one": "1 personne",
+    "people_other": "{{count}} personnes",
+    "error": "Enregistrement impossible.",
+    "people_many": "{{count}} personnes"
   }
 }

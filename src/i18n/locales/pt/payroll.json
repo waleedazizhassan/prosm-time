@@ -68,7 +68,10 @@
     "chooseAll": "Escolher todos os mostrados",
     "chooseNone": "Limpar seleção",
     "addToChosen": "Adicionar linha a {{count}} escolhidos",
-    "bulkHint": "Todos os escolhidos recebem a mesma linha, ou ninguém se algum não puder (por exemplo fora dos seus locais)."
+    "bulkHint": "Todos os escolhidos recebem a mesma linha, ou ninguém se algum não puder (por exemplo fora dos seus locais).",
+    "customRules": "Regras fiscais próprias",
+    "selfServiceOff": "Os funcionários não verão os holerites: o «autoatendimento» está desligado nas configurações da folha.",
+    "openSettings": "Abrir configurações"
   },
   "actions": {
     "submit": "Enviar para revisão",
@@ -193,7 +196,8 @@
     "managementApproval": "Aprovação da direção",
     "combinedTotal": "Salário total (com subsídios)",
     "totalSalaries": "Total de salários",
-    "no": "N.º"
+    "no": "N.º",
+    "customRules": "Calculado com regras de imposto e previdência próprias da empresa"
   },
   "profiles": {
     "title": "Pessoas",
@@ -244,8 +248,15 @@
     "savedShort": "Salvo.",
     "deleteItem": "Excluir",
     "deleteItemLabel": "Excluir o item {{name}}",
-    "deleteItemConfirm": "Excluir «{{name}}» do salário de todos? Ciclos aprovados não mudam.",
-    "itemDeleted": "O item «{{name}}» foi excluído."
+    "deleteItemConfirm": "Remover «{{name}}» só do salário desta pessoa? Os outros funcionários e os ciclos aprovados não mudam.",
+    "itemDeleted": "O item «{{name}}» foi excluído.",
+    "legalNameArabicLabel": "Nome em árabe (como no documento)",
+    "legalNameLabel": "Nome oficial",
+    "legalNameHint": "É o nome no recibo de salário, não o nome de usuário ({{user}}).",
+    "legalNameMissing": "Falta o nome oficial",
+    "notInPayroll": "Esta pessoa não está na folha (o proprietário não recebe salário).",
+    "insuranceCategory": "Categoria de previdência",
+    "insuranceCategoryDefault": "Categoria padrão"
   },
   "installments": {
     "title": "Prestações e adiantamentos",
@@ -349,7 +360,12 @@
     "appliesToAllLabel": "Aplica-se a todos os trabalhadores",
     "defaultAmount": "Montante predefinido",
     "appliesToAllHint": "Adicionado em cada novo ciclo para todos com ficha salarial. Se a pessoa tiver valor próprio, usa-se esse.",
-    "preTaxLabel": "Deduzido da base tributável (antes do imposto)"
+    "preTaxLabel": "Deduzido da base tributável (antes do imposto)",
+    "remove": "Remover",
+    "restore": "Restaurar",
+    "removeConfirm": "Remover o item \"{{name}}\"? Ele sai das fichas salariais e dos ciclos abertos; ciclos aprovados o mantêm.",
+    "removed": "Item removido.",
+    "restored": "Item restaurado."
   },
   "requests": {
     "hint": "Recibos pedidos pela sua equipa. Um clique envia o recibo aprovado e guardado em PDF para o e-mail registado: a mesma versão, sem recalcular.",
@@ -422,7 +438,9 @@
     "statutoryBrackets": "Os escalões têm de subir e o último não tem limite.",
     "statutoryWage": "O máximo não pode ser inferior ao mínimo.",
     "chooseItem": "Escolha primeiro o item.",
-    "basicCannotBeDeleted": "O salário básico não pode ser excluído."
+    "basicCannotBeDeleted": "O salário básico não pode ser excluído.",
+    "legalNameRequired": "Escreva o nome oficial: é o que aparece no recibo.",
+    "legalNameArabic": "Escreva o nome só com letras árabes, como no documento."
   },
   "exports": {
     "hint": "Os recibos de um ciclo aprovado ou fechado são preparados no servidor num ZIP, cada um com o seu número. Pode sair da página; o ficheiro fica disponível 7 dias.",
@@ -490,5 +508,10 @@
     "twoAction": "Fichas salariais",
     "three": "O ciclo do mês",
     "threeText": "Crie o ciclo abaixo → adicione os variáveis e reveja as sugestões → submeta → outra pessoa aprova → feche e publique."
+  },
+  "taxLink": {
+    "title": "Impostos e previdência",
+    "hint": "O país, as faixas, a previdência e uma calculadora, em uma página própria.",
+    "open": "Abrir"
   }
 }

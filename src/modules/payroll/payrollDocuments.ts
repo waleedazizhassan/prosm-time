@@ -61,6 +61,8 @@ function versionLine(report: PayrollReport, t: T): string {
   const parts = [
     report.serial ? `${t("payroll:doc.serial")}: ${report.serial}` : null,
     report.cycle.cycleVersion > 0 ? `${t("payroll:doc.version")}: v${report.cycle.cycleVersion}${report.cycle.cycleVersion > 1 ? ` · ${t("payroll:doc.amended")}` : ""}` : null,
+    // 2026-11-11: computed with the company's own tax and insurance rules
+    "customRules" in report.settings && report.settings.customRules ? t("payroll:doc.customRules") : null,
   ].filter(Boolean);
   return parts.length ? `<div style="font-size:10px;color:${MUTED};">${parts.map((p) => escapeHtml(String(p))).join(" &nbsp;·&nbsp; ")}</div>` : "";
 }

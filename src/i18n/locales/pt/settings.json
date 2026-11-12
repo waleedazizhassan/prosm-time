@@ -19,7 +19,7 @@
   },
   "sitePolicy": {
     "title": "Regras da unidade",
-    "hint": "A tolerância de GPS desta unidade, a tolerância de horário, os horários de turno, as horas extras e o desconto por atraso, o arredondamento do intervalo, o acompanhamento de presença, os isentos e os bloqueios de autoatendimento.",
+    "hint": "A margem do GPS deste local, o horário, as horas extra e descontos por atraso, o arredondamento das pausas, o acompanhamento, as isenções e os limites do ponto próprio.",
     "siteSelectLabel": "Unidade",
     "siteSelectPlaceholder": "Selecione uma unidade…",
     "noSites": "Ainda não há unidades: adicione uma em Unidades primeiro.",
@@ -256,7 +256,9 @@
       "payroll": "Folha (encargos, impostos, empréstimos, holerites)",
       "integrations": "Integrações, API e ponto de leitores biométricos",
       "delegation": "Delegação completa e temporária",
-      "retention": "Controle de retenção de dados"
+      "retention": "Controle de retenção de dados",
+      "documents": "Documentos dos funcionários e validade",
+      "penalties": "Regulamento de sanções progressivas e incentivos"
     },
     "managedByProsm": "Qualquer alteração ou renovação da sua licença é feita pela PROSM; você recebe uma notificação e um e-mail com a nova licença. Para alterar, escreva para sales@prosm.net.",
     "historyAll": "Registros de ponto exibidos: todos. Pontos de localização e fotos são apagados automaticamente após o prazo em “Retenção de dados”.",
@@ -288,5 +290,39 @@
     "outside": "Fora dos locais",
     "people": "Pessoas e presença",
     "other": "Plano e segurança"
+  },
+  "overtimeTarget": {
+    "title": "Horas extra e atrasos",
+    "hint": "Escolha onde contam as horas extra e os atrasos da presença. Dias e ciclos aprovados não mudam.",
+    "saved": "Guardado.",
+    "error": "Não foi possível guardar. Tente de novo.",
+    "payroll": {
+      "label": "No salário",
+      "hint": "Sugerido no ciclo de pagamento para aceitar."
+    },
+    "allowances": {
+      "label": "Nos subsídios",
+      "hint": "As horas extra são valorizadas nas folhas de subsídios."
+    },
+    "counted": {
+      "label": "Contados",
+      "hint": "As horas extra são valorizadas nas folhas de subsídios."
+    },
+    "none": {
+      "label": "Não contados",
+      "hint": "Não afeta nada - só aparece nas horas."
+    }
+  },
+  "jobTitles": {
+    "title": "Cargos",
+    "hint": "Os cargos da empresa: escolhidos em cada ficha e usados pelos documentos exigidos por cargo.",
+    "name": "Cargo",
+    "add": "Adicionar",
+    "stop": "Desativar",
+    "restore": "Repor",
+    "people_one": "1 pessoa",
+    "people_other": "{{count}} pessoas",
+    "error": "Não foi possível guardar.",
+    "people_many": "{{count}} pessoas"
   }
 }

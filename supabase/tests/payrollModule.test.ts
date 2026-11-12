@@ -64,7 +64,7 @@ beforeAll(async () => {
   c.penalty = await component({ name_ar: "جزاء", name_en: "Penalty", category: "deduction", source: "variable", sort_order: 11 });
 
   for (const [member, currency] of [[amal, "EGP"], [badr, "EGP"], [carl, "USD"]] as [TestMember, string][]) {
-    await ok(ownerRpc("select public.save_prosm_time_payroll_profile($1, $2)", [member.userId, JSON.stringify({ currency, employee_code: member.userId.slice(0, 6) })]));
+    await ok(ownerRpc("select public.save_prosm_time_payroll_profile($1, $2)", [member.userId, JSON.stringify({ legal_name: "موظف تجريبي", currency, employee_code: member.userId.slice(0, 6) })]));
     await setComponent(member, c.basic, 10000, "2026-01-01");
     await setComponent(member, c.housing, 2000, "2026-01-01");
     await setComponent(member, c.extra, 1500, "2026-01-01");
@@ -235,7 +235,7 @@ describe("proration", () => {
   it("prorates a prorated component for someone who joined mid-period", async () => {
     const dina = await addMember(t, org, "employee", "Dina");
     await assignToSite(t, siteA, dina);
-    await ok(ownerRpc("select public.save_prosm_time_payroll_profile($1, $2)", [dina.userId, JSON.stringify({ currency: "EGP", start_date: "2027-04-16" })]));
+    await ok(ownerRpc("select public.save_prosm_time_payroll_profile($1, $2)", [dina.userId, JSON.stringify({ legal_name: "موظف تجريبي", currency: "EGP", start_date: "2027-04-16" })]));
     await setComponent(dina, c.basic, 3000, "2027-04-16");
     const created = await ok<{ r: { cycleId: string } }>(ownerRpc("select public.create_prosm_time_payroll_cycle('2027-04-01', '2027-04-30', $1) as r", [siteA]));
     const [row] = await t.su<{ proration_factor: string; base_salary: string }>(

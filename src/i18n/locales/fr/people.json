@@ -84,13 +84,14 @@
     "announcements.publish": "Publier des annonces",
     "announcements.manage": "Gérer toutes les annonces",
     "announcements.view_reads": "Voir qui a lu les annonces",
-    "departments.manage": "Gérer les services"
+    "departments.manage": "Gérer les services",
+    "hr.manage": "Gérer les dossiers du personnel"
   },
   "invite": {
     "actionLabel": "Inviter un employé",
     "title": "Inviter un employé",
     "emailLabel": "E-mail",
-    "fullNameLabel": "Nom complet",
+    "fullNameLabel": "Nom court",
     "roleLabel": "Rôle",
     "role": {
       "manager": "Manager / Responsable de site",
@@ -107,10 +108,14 @@
     "copyLinkAction": "Copier le lien",
     "linkCopied": "Lien copié",
     "codeLabel": "Code de vérification",
-    "close": "Fermer"
+    "close": "Fermer",
+    "legalNameLabel": "Nom légal complet",
+    "legalNameHint": "Tel qu'écrit sur les documents officiels : utilisé sur les bulletins et rapports.",
+    "shortNameHint": "Le nom affiché dans l'application.",
+    "legalNameNotSaved": "L'invitation a été envoyée, mais le nom légal n'a pas été enregistré. Ajoutez-le depuis le dossier de l'utilisateur."
   },
   "detail": {
-    "title": "Membre",
+    "title": "Dossier de l'utilisateur",
     "backToList": "Retour aux personnes",
     "loadError": "Impossible de charger ce membre.",
     "permissionsTitle": "Autorisations",
@@ -313,5 +318,145 @@
     "grantsLeft": "Autorisations directes encore en place :",
     "granted": "accordée",
     "revoked": "retirée"
+  },
+  "profile": {
+    "tabsLabel": "Sections du dossier",
+    "myTitle": "Mon dossier",
+    "code": "Matricule {{code}}",
+    "since": "Depuis le {{date}}",
+    "completion": "Dossier complet à {{percent}} %",
+    "completionTitle": "Documents obligatoires fournis",
+    "missing_one": "Il manque un document",
+    "missing_other": "Il manque {{count}} documents",
+    "loadError": "Impossible de charger les données.",
+    "saveError": "Enregistrement impossible.",
+    "uploadError": "Envoi du fichier impossible.",
+    "save": "Enregistrer",
+    "saved": "Enregistré.",
+    "edit": "Modifier",
+    "noJobTitle": "Sans poste",
+    "noJobTitlesYet": "Ajoute d’abord les postes dans Paramètres",
+    "status": {
+      "active": "Actif",
+      "suspended": "Suspendu",
+      "ended": "Parti",
+      "deactivated": "Accès coupé"
+    },
+    "tabs": {
+      "data": "Données",
+      "contract": "Contrat",
+      "documents": "Documents",
+      "payroll": "Paie",
+      "attendance": "Présence",
+      "leave": "Congés",
+      "penalties": "Sanctions et primes",
+      "history": "Historique",
+      "account": "Compte et droits"
+    },
+    "fields": {
+      "jobTitle": "Poste",
+      "status": "Statut",
+      "phone": "Mobile",
+      "emergency_contact_name": "Contact d’urgence",
+      "emergency_contact_phone": "Téléphone d’urgence",
+      "national_id": "N° d’identité",
+      "birth_date": "Date de naissance",
+      "address": "Adresse",
+      "legalName": "Nom légal complet"
+    },
+    "contracts": {
+      "empty": "Aucun contrat enregistré.",
+      "add": "Ajouter un contrat",
+      "editTitle": "Modifier le contrat",
+      "type": "Type de contrat",
+      "start": "Début",
+      "end": "Fin",
+      "endOptional": "Fin (facultatif)",
+      "probation": "Fin de période d’essai (facultatif)",
+      "file": "Contrat signé (PDF ou photo)",
+      "notes": "Notes",
+      "noEnd": "Durée indéterminée",
+      "probationUntil": "Essai jusqu’au {{date}}",
+      "view": "Voir",
+      "types": {
+        "fixed_term": "CDD",
+        "open_ended": "CDI",
+        "temporary": "Intérim"
+      },
+      "state": {
+        "current": "En cours",
+        "ending": "Se termine bientôt",
+        "upcoming": "Commence plus tard",
+        "ended": "Terminé"
+      }
+    },
+    "attendance": {
+      "day": "Jour",
+      "site": "Site",
+      "in": "Arrivée",
+      "out": "Départ",
+      "worked": "Heures",
+      "absent": "Absent",
+      "late": "{{minutes}} min de retard",
+      "daysWorked": "Jours travaillés ({{days}} derniers jours)",
+      "hours": "Heures totales",
+      "lateDays": "Jours de retard",
+      "absentDays": "Jours d’absence",
+      "empty": "Aucune présence sur cette période."
+    },
+    "leave": {
+      "empty": "Aucun congé sur l’année.",
+      "days_one": "1 jour",
+      "days_other": "{{count}} jours",
+      "status": {
+        "pending": "En attente",
+        "approved": "Approuvé",
+        "rejected": "Refusé",
+        "cancelled": "Annulé"
+      },
+      "days_many": "{{count}} jours"
+    },
+    "history": {
+      "empty": "Aucun changement pour l’instant.",
+      "more": "Voir les plus anciens"
+    },
+    "missing_many": "Il manque {{count}} documents"
+  },
+  "bundles": {
+    "hint": "Accordez un rôle entier en un clic, ou des droits isolés dans la liste. Ce qu'un rôle accorde apparaît aussitôt comme accordé et n'est jamais accordé deux fois.",
+    "grant": "Accorder",
+    "revoke": "Retirer",
+    "granted": "Entièrement accordé",
+    "partial": "{{held}} sur {{total}} accordés",
+    "grantNote": "Seul ce que la personne n'a pas encore est accordé.",
+    "revokeNote": "Seuls les droits ajoutés à son rôle sont retirés ; ceux du rôle restent.",
+    "owner": {
+      "title": "Autorité du propriétaire",
+      "hint": "L'autorité complète du propriétaire, en son nom"
+    },
+    "finance": {
+      "title": "Directeur financier",
+      "hint": "Paie, indemnités, coûts de main-d'œuvre et rapports"
+    },
+    "hr": {
+      "title": "Directeur RH",
+      "hint": "Dossiers, congés, départements et annonces"
+    },
+    "attendance": {
+      "title": "Présence uniquement",
+      "hint": "Pointages, corrections, exceptions et feuilles de temps"
+    },
+    "sites": {
+      "title": "Gestion des sites",
+      "hint": "Sites, équipes, calendrier et main-d'œuvre externe"
+    },
+    "reports": {
+      "title": "Rapports",
+      "hint": "Tableau de bord, rapports et journal"
+    },
+    "media": {
+      "title": "Centre médias",
+      "hint": "Publier et gérer les annonces"
+    }
   }
 }

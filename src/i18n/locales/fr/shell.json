@@ -214,7 +214,8 @@
     },
     "dailyDigest": {
       "title": "Hier en bref",
-      "body": "{{present}} ont travaillé, {{noShows}} ont manqué un poste. En attente : {{leave}} congés, {{exceptions}} exceptions. Pointés maintenant : {{open}}."
+      "body": "{{present}} ont travaillé, {{late}} en retard, {{absent}} absents, {{onLeave}} en congé. En attente : {{leave}} congés, {{exceptions}} exceptions. Pointés maintenant : {{open}}.",
+      "documents": "Documents : {{expired}} expirés, {{missing}} manquants."
     },
     "licenseChanged": {
       "title": "Votre licence a changé",
@@ -257,6 +258,68 @@
       "clock_out": "Merci de pointer ton départ.",
       "call_me": "Merci de m’appeler.",
       "attention": "Merci de regarder l’application."
+    },
+    "mockLocation": {
+      "title": "Position falsifiée",
+      "clock_in": "{{name}} a pointé son arrivée avec une position falsifiée.",
+      "clock_out": "{{name}} a pointé son départ avec une position falsifiée.",
+      "presence": "{{name}} a utilisé une position falsifiée pendant le service - ces positions n’ont pas été enregistrées."
+    },
+    "documents": {
+      "missingTitleSelf": "Un document est demandé",
+      "missingBodySelf": "{{document}} est demandé dans votre dossier. Photographiez-le dans l'application.",
+      "missingTitleHr": "Documents d'un nouvel employé",
+      "missingBodyHr": "{{name}} doit fournir {{count}} document(s).",
+      "expiringTitleSelf": "{{document}} expire bientôt",
+      "expiringBodySelf": "Encore {{count}} jour(s) pour {{document}}. Renouvelez-le et envoyez le nouveau.",
+      "expiringTitleHr": "Un document expire bientôt",
+      "expiringBodyHr": "{{name}} : {{document}} expire dans {{count}} jour(s).",
+      "expiredTitleSelf": "{{document}} expire aujourd'hui",
+      "expiredBodySelf": "Envoyez {{document}} renouvelé depuis votre dossier.",
+      "expiredTitleHr": "Un document expire aujourd'hui",
+      "expiredBodyHr": "{{name}} : {{document}} expire aujourd'hui.",
+      "rejectedTitleSelf": "Document non accepté",
+      "rejectedBodySelf": "{{document}} : {{reason}}. Photographiez-le à nouveau et envoyez-le.",
+      "rejectedTitleHr": "Document non accepté",
+      "rejectedBodyHr": "{{document}} : {{reason}}",
+      "reminderTitleSelf": "Relance de document",
+      "reminderBodySelf": "Merci d'envoyer {{document}} depuis votre dossier.",
+      "reminderTitleHr": "Relance de document",
+      "reminderBodyHr": "{{name}} : {{document}}",
+      "uploadedTitleHr": "Un document à vérifier",
+      "uploadedBodyHr": "{{name}} a envoyé {{document}}.",
+      "uploadedTitleSelf": "Document envoyé",
+      "uploadedBodySelf": "{{document}}",
+      "clockInTitleHr": "Pointage avec un document expiré",
+      "clockInBodyHr": "{{name}} a pointé alors que {{document}} a expiré.",
+      "clockInTitleSelf": "Document expiré",
+      "clockInBodySelf": "{{document}} a expiré."
+    },
+    "penalties": {
+      "reviewTitle": "Une sanction à examiner",
+      "reviewBody": "{{name}} : {{violation}} ({{date}})",
+      "investigationTitle": "Une enquête est nécessaire",
+      "investigationBody": "{{name}} : {{violation}} ({{date}})",
+      "repliedTitle": "L'employé a répondu",
+      "repliedBody": "{{name}} : {{violation}} – prête pour approbation",
+      "noReplyTitle": "Pas de réponse dans le délai",
+      "noReplyBody": "{{name}} : {{violation}} – prête pour approbation",
+      "responseTitle": "Votre réponse est demandée",
+      "responseBody": "{{violation}} ({{date}}). Répondez avant le {{due}}.",
+      "decidedTitle": "Une décision de sanction",
+      "decidedBody": "{{violation}} ({{date}}). Ouvrez-la pour confirmer la réception ou faire un recours.",
+      "rejectedTitle": "Pas de sanction",
+      "rejectedBody": "{{violation}} ({{date}}) : aucune sanction appliquée.",
+      "appealTitle": "Un recours",
+      "appealBody": "{{name}} a fait un recours : {{violation}} ({{date}})",
+      "appealConfirmedTitle": "Votre recours a été tranché",
+      "appealConfirmedBody": "{{violation}} : la sanction est maintenue.",
+      "cancelledTitle": "Une sanction a été annulée",
+      "cancelledBody": "{{violation}} ({{date}}) a été annulée.",
+      "incentiveReviewTitle": "Une prime à examiner",
+      "incentiveReviewBody": "{{name}} : {{reason}}",
+      "incentiveGrantedTitle": "Bravo !",
+      "incentiveGrantedBody": "Vous avez reçu une prime : {{reason}}"
     }
   },
   "items": {
@@ -286,7 +349,10 @@
     "payslips": "Mes bulletins",
     "externalPay": "Paie des externes",
     "announcements": "Tableau d'affichage",
-    "exceptions": "Mes exceptions"
+    "exceptions": "Mes exceptions",
+    "myProfile": "Mon dossier",
+    "documents": "Documents",
+    "penalties": "Sanctions et primes"
   },
   "sosOverlay": {
     "title": "Alerte SOS/Urgence",
@@ -398,7 +464,10 @@
     "payroll": "Cycles de paie, dossiers, les trois rapports et les bulletins - avec des droits séparés et des versions conservées.",
     "payslips": "Vos bulletins publiés - consultez-les ou demandez-les par e-mail.",
     "externalPay": "Taux à la journée, à la semaine, au mois ou à l'année, paies, règles et ajustements individuels - approuvés et figés, séparés de la paie des employés.",
-    "announcements": "Annonces et communiqués officiels qui vous sont adressés ; confirmez ceux qui le demandent."
+    "announcements": "Annonces et communiqués officiels qui vous sont adressés ; confirmez ceux qui le demandent.",
+    "myProfile": "Tes données, documents, avertissements et présences.",
+    "documents": "Les documents de chaque employé et leurs dates d'expiration.",
+    "penalties": "Infractions, approbations, recours et primes."
   },
   "backgroundDisclosure": {
     "title": "Position pendant votre poste",
@@ -487,5 +556,9 @@
     "send": "Envoyer le buzz",
     "sent": "{{name}} a été buzzé.",
     "failed": "Le buzz n’a pas été envoyé. Réessaie."
+  },
+  "shiftTracking": {
+    "resumeTitle": "Reprends ton service",
+    "resumeBody": "Ton téléphone a redémarré pendant le service. Ouvre PROSM Time pour que le suivi reprenne."
   }
 }

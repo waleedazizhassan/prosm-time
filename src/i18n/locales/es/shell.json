@@ -214,7 +214,8 @@
     },
     "dailyDigest": {
       "title": "Resumen de ayer",
-      "body": "{{present}} trabajaron, {{noShows}} faltaron a un turno. Pendientes: {{leave}} ausencias, {{exceptions}} excepciones. Con entrada fichada ahora: {{open}}."
+      "body": "{{present}} trabajaron, {{late}} con retraso, {{absent}} ausentes, {{onLeave}} de permiso. Pendiente: {{leave}} permisos, {{exceptions}} excepciones. Fichados ahora: {{open}}.",
+      "documents": "Documentos: {{expired}} vencidos, {{missing}} faltan."
     },
     "licenseChanged": {
       "title": "Tu licencia cambió",
@@ -257,6 +258,68 @@
       "clock_out": "Por favor, ficha la salida.",
       "call_me": "Por favor, llámame.",
       "attention": "Por favor, revisa la app."
+    },
+    "mockLocation": {
+      "title": "Ubicación falsa",
+      "clock_in": "{{name}} fichó la entrada con una ubicación falsa.",
+      "clock_out": "{{name}} fichó la salida con una ubicación falsa.",
+      "presence": "{{name}} usó una ubicación falsa durante el turno; esas ubicaciones no se registraron."
+    },
+    "documents": {
+      "missingTitleSelf": "Se necesita un documento",
+      "missingBodySelf": "Se necesita {{document}} en tu ficha. Fotografíalo en la app.",
+      "missingTitleHr": "Documentos de un nuevo empleado",
+      "missingBodyHr": "{{name}} necesita {{count}} documento(s) en su ficha.",
+      "expiringTitleSelf": "{{document}} vence pronto",
+      "expiringBodySelf": "Quedan {{count}} día(s) de {{document}}. Renuévalo y sube el nuevo.",
+      "expiringTitleHr": "Un documento vence pronto",
+      "expiringBodyHr": "{{name}}: {{document}} vence en {{count}} día(s).",
+      "expiredTitleSelf": "{{document}} vence hoy",
+      "expiredBodySelf": "Sube {{document}} renovado desde tu ficha.",
+      "expiredTitleHr": "Un documento vence hoy",
+      "expiredBodyHr": "{{name}}: {{document}} vence hoy.",
+      "rejectedTitleSelf": "Documento no aceptado",
+      "rejectedBodySelf": "{{document}}: {{reason}}. Fotografíalo de nuevo y envíalo.",
+      "rejectedTitleHr": "Documento no aceptado",
+      "rejectedBodyHr": "{{document}}: {{reason}}",
+      "reminderTitleSelf": "Recordatorio de documento",
+      "reminderBodySelf": "Sube {{document}} desde tu ficha, por favor.",
+      "reminderTitleHr": "Recordatorio de documento",
+      "reminderBodyHr": "{{name}}: {{document}}",
+      "uploadedTitleHr": "Un documento por revisar",
+      "uploadedBodyHr": "{{name}} subió {{document}}.",
+      "uploadedTitleSelf": "Documento subido",
+      "uploadedBodySelf": "{{document}}",
+      "clockInTitleHr": "Fichaje con un documento vencido",
+      "clockInBodyHr": "{{name}} fichó con {{document}} vencido.",
+      "clockInTitleSelf": "Documento vencido",
+      "clockInBodySelf": "{{document}} ha vencido."
+    },
+    "penalties": {
+      "reviewTitle": "Una sanción por revisar",
+      "reviewBody": "{{name}}: {{violation}} ({{date}})",
+      "investigationTitle": "Se necesita una investigación",
+      "investigationBody": "{{name}}: {{violation}} ({{date}})",
+      "repliedTitle": "El empleado respondió",
+      "repliedBody": "{{name}}: {{violation}} - lista para aprobar",
+      "noReplyTitle": "Sin respuesta en plazo",
+      "noReplyBody": "{{name}}: {{violation}} - lista para aprobar",
+      "responseTitle": "Se pide tu respuesta",
+      "responseBody": "{{violation}} ({{date}}). Responde antes del {{due}}.",
+      "decidedTitle": "Una decisión de sanción",
+      "decidedBody": "{{violation}} ({{date}}). Ábrela para confirmar que la recibiste o para recurrir.",
+      "rejectedTitle": "Sin sanción",
+      "rejectedBody": "{{violation}} ({{date}}): no se aplicó sanción.",
+      "appealTitle": "Un recurso",
+      "appealBody": "{{name}} recurrió: {{violation}} ({{date}})",
+      "appealConfirmedTitle": "Se resolvió tu recurso",
+      "appealConfirmedBody": "{{violation}}: se mantuvo la sanción.",
+      "cancelledTitle": "Se anuló una sanción",
+      "cancelledBody": "{{violation}} ({{date}}) se anuló.",
+      "incentiveReviewTitle": "Un incentivo por revisar",
+      "incentiveReviewBody": "{{name}}: {{reason}}",
+      "incentiveGrantedTitle": "¡Bien hecho!",
+      "incentiveGrantedBody": "Recibiste un incentivo: {{reason}}"
     }
   },
   "items": {
@@ -286,7 +349,10 @@
     "payslips": "Mis recibos",
     "externalPay": "Pago de externos",
     "announcements": "Tablón de anuncios",
-    "exceptions": "Mis excepciones"
+    "exceptions": "Mis excepciones",
+    "myProfile": "Mi expediente",
+    "documents": "Documentos",
+    "penalties": "Sanciones e incentivos"
   },
   "sosOverlay": {
     "title": "Alerta SOS/Emergencia",
@@ -398,7 +464,10 @@
     "payroll": "Ciclos, fichas, los tres informes y los recibos de nómina, con permisos separados y versiones guardadas.",
     "payslips": "Sus recibos publicados: véalos o pídalos por correo.",
     "externalPay": "Tarifas por día, semana, mes o año, liquidaciones, la política y ajustes individuales: aprobados y congelados, separados de la nómina.",
-    "announcements": "Anuncios y comunicados oficiales dirigidos a ti; confirma los que lo piden."
+    "announcements": "Anuncios y comunicados oficiales dirigidos a ti; confirma los que lo piden.",
+    "myProfile": "Tus datos, documentos, avisos y asistencia.",
+    "documents": "Los documentos de cada empleado y sus vencimientos.",
+    "penalties": "Infracciones, aprobaciones, recursos e incentivos."
   },
   "backgroundDisclosure": {
     "title": "Ubicación durante tu turno",
@@ -487,5 +556,9 @@
     "send": "Enviar aviso",
     "sent": "Se avisó a {{name}}.",
     "failed": "No se envió el aviso. Inténtalo de nuevo."
+  },
+  "shiftTracking": {
+    "resumeTitle": "Reanuda tu turno",
+    "resumeBody": "Tu teléfono se reinició durante el turno. Abre PROSM Time para que se siga de nuevo."
   }
 }

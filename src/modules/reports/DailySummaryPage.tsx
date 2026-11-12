@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState, type ReactNode } from "react";
+import MoodFace from "../../components/common/MoodFace";
 import { useTranslation } from "react-i18next";
 import { Link, useSearchParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -37,7 +38,7 @@ function Tile({ value, label, tone }: { value: ReactNode; label: string; tone?: 
 }
 
 export default function DailySummaryPage() {
-  const { t, i18n } = useTranslation("reports");
+  const { t, i18n } = useTranslation(["reports", "dashboard"]);
   const { profile } = useAuth();
   const [params, setParams] = useSearchParams();
   const today = isoDay(new Date());
@@ -75,7 +76,12 @@ export default function DailySummaryPage() {
   }
 
   const columns: TableColumn<DailySummaryPerson>[] = [
-    { key: "name", header: t("dailySummary.columns.name"), sortValue: (row) => row.name, render: (row) => <PersonName name={row.name} userId={row.userId} /> },
+    { key: "name", header: t("dailySummary.columns.name"), sortValue: (row) => row.name, render: (row) => (
+      <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+        <PersonName name={row.name} userId={row.userId} />
+        {row.mood ? <span title={`${t("dashboard:attendance.mood.label")}: ${t(`dashboard:attendance.mood.${row.mood}`)}`} style={{ display: "inline-flex", color: "var(--text-secondary)" }}><MoodFace mood={row.mood} size={20} active /></span> : null}
+      </span>
+    ) },
     { key: "site", header: t("dailySummary.columns.site"), sortValue: (row) => row.site ?? "", render: (row) => row.site ?? t("dailySummary.noSite") },
     { key: "in", header: t("dailySummary.columns.in"), sortValue: (row) => row.firstIn, render: (row) => formatTimeOnly(row.firstIn, i18n.language) },
     {

@@ -38,7 +38,7 @@ beforeAll(async () => {
   for (const [i, site] of [siteA, siteA, siteB].entries()) {
     const m = await addMember(t, org, "employee", `Person ${i + 1}`);
     await assignToSite(t, site, m);
-    await ok(owner("select public.save_prosm_time_payroll_profile($1, '{\"currency\": \"EGP\"}')", [m.userId]));
+    await ok(owner("select public.save_prosm_time_payroll_profile($1, '{\"legal_name\": \"موظف تجريبي\", \"currency\": \"EGP\"}')", [m.userId]));
     await ok(owner("select public.set_prosm_time_payroll_profile_component($1, $2, 6000, null, '2027-01-01')", [m.userId, basic.r.id]));
     members.push(m);
   }

@@ -68,7 +68,10 @@
     "chooseAll": "Choose all shown",
     "chooseNone": "Clear the choice",
     "addToChosen": "Add a line to {{count}} chosen",
-    "bulkHint": "Everyone chosen gets the same line, or nobody does if one of them cannot (for example outside your sites)."
+    "bulkHint": "Everyone chosen gets the same line, or nobody does if one of them cannot (for example outside your sites).",
+    "customRules": "Company's own tax rules",
+    "selfServiceOff": "Employees won't see their payslips: \"employee self-service\" is off in payroll settings.",
+    "openSettings": "Open settings"
   },
   "actions": {
     "submit": "Send for review",
@@ -193,7 +196,8 @@
     "managementApproval": "Management approval",
     "combinedTotal": "Total salary (incl. allowances)",
     "totalSalaries": "Total salaries",
-    "no": "No."
+    "no": "No.",
+    "customRules": "Computed with the company's own tax and insurance rules"
   },
   "profiles": {
     "title": "People",
@@ -244,8 +248,15 @@
     "savedShort": "Saved.",
     "deleteItem": "Delete",
     "deleteItemLabel": "Delete the item {{name}}",
-    "deleteItemConfirm": "Delete \"{{name}}\" from everyone's salary? Approved cycles do not change.",
-    "itemDeleted": "The item \"{{name}}\" was deleted."
+    "deleteItemConfirm": "Remove “{{name}}” from this employee’s pay only? Other employees and approved cycles do not change.",
+    "itemDeleted": "The item \"{{name}}\" was deleted.",
+    "legalNameArabicLabel": "Employee name in Arabic (as on the ID card)",
+    "legalNameLabel": "Employee's official name",
+    "legalNameHint": "This is the name on the payslip and payroll sheets, not the user name ({{user}}).",
+    "legalNameMissing": "Official name missing",
+    "notInPayroll": "This person is not in payroll (the owner is not paid a salary).",
+    "insuranceCategory": "Insurance category",
+    "insuranceCategoryDefault": "The default category"
   },
   "installments": {
     "title": "Installments and advances",
@@ -349,7 +360,12 @@
     "appliesToAllLabel": "Applies to every employee",
     "defaultAmount": "Default amount",
     "appliesToAllHint": "Added in every new cycle for everyone with a payroll profile. A person's own value, when set, is used instead.",
-    "preTaxLabel": "Taken off the taxable pay (before the tax)"
+    "preTaxLabel": "Taken off the taxable pay (before the tax)",
+    "remove": "Remove",
+    "restore": "Restore",
+    "removeConfirm": "Remove the item \"{{name}}\"? It leaves the salary cards and open cycles; approved cycles keep it.",
+    "removed": "Item removed.",
+    "restored": "Item restored."
   },
   "requests": {
     "hint": "Payslips your team asked for. One click sends the approved, stored payslip as a PDF to the person's registered email - the same version, nothing recalculated.",
@@ -422,7 +438,9 @@
     "statutoryBrackets": "Brackets must rise in order, and the last has no upper limit.",
     "statutoryWage": "The maximum insurable wage must not be below the minimum.",
     "chooseItem": "Choose the item first.",
-    "basicCannotBeDeleted": "The basic salary cannot be deleted."
+    "basicCannotBeDeleted": "The basic salary cannot be deleted.",
+    "legalNameRequired": "Enter the employee's official name - it is the name on the payslip.",
+    "legalNameArabic": "Write the name in Arabic letters only, as on the ID card."
   },
   "exports": {
     "hint": "Payslips of an approved or locked cycle are prepared on the server as one ZIP, each with its own serial number. You can leave the page; the file stays available for 7 days.",
@@ -490,5 +508,10 @@
     "twoAction": "Payroll files",
     "three": "The month's cycle",
     "threeText": "Create the cycle below → add the variable amounts and review the attendance suggestions → submit → someone else approves → lock and publish the payslips."
+  },
+  "taxLink": {
+    "title": "Tax and insurance",
+    "hint": "The country, the tax brackets, insurance and a calculator - in their own page.",
+    "open": "Open"
   }
 }

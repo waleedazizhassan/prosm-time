@@ -214,7 +214,8 @@
     },
     "dailyDigest": {
       "title": "昨日概览",
-      "body": "{{present}} 人出勤，{{noShows}} 人缺勤。待处理：{{leave}} 个请假，{{exceptions}} 个异常。当前在岗：{{open}}。"
+      "body": "{{present}} 人工作，{{late}} 人迟到，{{absent}} 人缺勤，{{onLeave}} 人休假。待处理：{{leave}} 个假期、{{exceptions}} 个例外。当前在岗：{{open}}。",
+      "documents": "证件：{{expired}} 份过期，{{missing}} 份缺失。"
     },
     "licenseChanged": {
       "title": "您的许可证已变更",
@@ -257,6 +258,68 @@
       "clock_out": "请打卡下班。",
       "call_me": "请给我回电话。",
       "attention": "请查看应用。"
+    },
+    "mockLocation": {
+      "title": "虚假位置",
+      "clock_in": "{{name}} 使用虚假位置打卡上班。",
+      "clock_out": "{{name}} 使用虚假位置打卡下班。",
+      "presence": "{{name}} 在班次期间使用了虚假位置——这些位置未被记录。"
+    },
+    "documents": {
+      "missingTitleSelf": "需要提交证件",
+      "missingBodySelf": "您的档案需要 {{document}}，请在应用中拍摄。",
+      "missingTitleHr": "新员工证件",
+      "missingBodyHr": "{{name}} 需要提交 {{count}} 份证件。",
+      "expiringTitleSelf": "{{document}} 即将到期",
+      "expiringBodySelf": "{{document}} 还有 {{count}} 天到期，请更新并上传。",
+      "expiringTitleHr": "证件即将到期",
+      "expiringBodyHr": "{{name}}：{{document}} 将在 {{count}} 天后到期。",
+      "expiredTitleSelf": "{{document}} 今天到期",
+      "expiredBodySelf": "请在档案中上传更新后的 {{document}}。",
+      "expiredTitleHr": "证件今天到期",
+      "expiredBodyHr": "{{name}}：{{document}} 今天到期。",
+      "rejectedTitleSelf": "证件未通过",
+      "rejectedBodySelf": "{{document}}：{{reason}}。请重新拍摄并发送。",
+      "rejectedTitleHr": "证件未通过",
+      "rejectedBodyHr": "{{document}}：{{reason}}",
+      "reminderTitleSelf": "证件提醒",
+      "reminderBodySelf": "请在档案中上传 {{document}}。",
+      "reminderTitleHr": "证件提醒",
+      "reminderBodyHr": "{{name}}：{{document}}",
+      "uploadedTitleHr": "有证件待审核",
+      "uploadedBodyHr": "{{name}} 上传了 {{document}}。",
+      "uploadedTitleSelf": "证件已上传",
+      "uploadedBodySelf": "{{document}}",
+      "clockInTitleHr": "持过期证件打卡",
+      "clockInBodyHr": "{{name}} 在 {{document}} 过期的情况下打卡。",
+      "clockInTitleSelf": "证件已过期",
+      "clockInBodySelf": "{{document}} 已过期。"
+    },
+    "penalties": {
+      "reviewTitle": "有处罚待审核",
+      "reviewBody": "{{name}}：{{violation}}（{{date}}）",
+      "investigationTitle": "需要调查",
+      "investigationBody": "{{name}}：{{violation}}（{{date}}）",
+      "repliedTitle": "员工已回复",
+      "repliedBody": "{{name}}：{{violation}}——可审批",
+      "noReplyTitle": "未在期限内回复",
+      "noReplyBody": "{{name}}：{{violation}}——可审批",
+      "responseTitle": "需要您的回复",
+      "responseBody": "{{violation}}（{{date}}）。请在 {{due}} 前回复。",
+      "decidedTitle": "处罚决定",
+      "decidedBody": "{{violation}}（{{date}}）。打开以确认已知悉或申诉。",
+      "rejectedTitle": "不予处罚",
+      "rejectedBody": "{{violation}}（{{date}}）：未执行处罚。",
+      "appealTitle": "申诉",
+      "appealBody": "{{name}} 提出申诉：{{violation}}（{{date}}）",
+      "appealConfirmedTitle": "您的申诉已处理",
+      "appealConfirmedBody": "{{violation}}：维持处罚。",
+      "cancelledTitle": "处罚已撤销",
+      "cancelledBody": "{{violation}}（{{date}}）已撤销。",
+      "incentiveReviewTitle": "有奖励待审核",
+      "incentiveReviewBody": "{{name}}：{{reason}}",
+      "incentiveGrantedTitle": "干得好！",
+      "incentiveGrantedBody": "您获得了奖励：{{reason}}"
     }
   },
   "items": {
@@ -286,7 +349,10 @@
     "payslips": "我的工资单",
     "externalPay": "外部工人薪酬",
     "announcements": "公告栏",
-    "exceptions": "我的例外"
+    "exceptions": "我的例外",
+    "myProfile": "我的档案",
+    "documents": "证件",
+    "penalties": "处罚与奖励"
   },
   "sosOverlay": {
     "title": "SOS/紧急警报",
@@ -388,7 +454,10 @@
     "payroll": "薪资周期、档案、三份报表和工资单——权限分离、版本留存。",
     "payslips": "您已发布的工资单——查看或通过邮件申请。",
     "externalPay": "按天、周、月或年的费率、发薪批次、政策与个人调整——经批准后冻结，与员工工资分开。",
-    "announcements": "发给您的公告和正式声明；需要确认的请确认已读。"
+    "announcements": "发给您的公告和正式声明；需要确认的请确认已读。",
+    "myProfile": "你的资料、证件、警告和考勤。",
+    "documents": "每位员工的证件及其到期日期。",
+    "penalties": "违规、审批、申诉和奖励。"
   },
   "backgroundDisclosure": {
     "title": "班次期间的位置",
@@ -477,5 +546,9 @@
     "send": "发送提醒",
     "sent": "已提醒 {{name}}。",
     "failed": "提醒未发送，请重试。"
+  },
+  "shiftTracking": {
+    "resumeTitle": "继续你的班次",
+    "resumeBody": "手机在班次期间重启了。请打开 PROSM Time 以恢复跟踪。"
   }
 }

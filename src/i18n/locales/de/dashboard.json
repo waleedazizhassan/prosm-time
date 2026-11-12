@@ -132,7 +132,7 @@
     "manualLocationLabel": "Arbeitsort",
     "manualLocationHint": "Geben Sie an, wo Sie sich tatsächlich befinden (z. B. beim Kunden, im Homeoffice) — erforderlich, wenn kein Standort ausgewählt ist.",
     "manualLocationRequired": "Geben Sie Ihren Arbeitsort ein, um ohne registrierten Standort einzustempeln.",
-    "clockInBlockedContactManager": "Die Kulanzzeit für die Schicht dieses Standorts ist abgelaufen - bitte wenden Sie sich an Ihren Manager, um Ihre Anwesenheit zu erfassen.",
+    "clockInBlockedContactManager": "Für die Schicht dieses Standorts zählt bereits Verspätung - bitte wende dich an deinen Vorgesetzten zum Einstempeln.",
     "clockOutBlockedContactManager": "Sie befinden sich außerhalb des Arbeitsbereichs dieses Standorts - bitte wenden Sie sich an Ihren Manager, um Ihr Ausstempeln zu erfassen.",
     "projectLabel": "Projekt (optional)",
     "noProject": "Kein Projekt",
@@ -227,6 +227,41 @@
       "siteChanged": "Standort gewechselt",
       "savedOffline": "Auf dem Telefon gespeichert",
       "savedOfflineText": "Gerade keine Verbindung; wird automatisch gesendet, sobald sie zurück ist."
+    },
+    "trackingGate": {
+      "title": "Vor dem Einstempeln",
+      "lead": "PROSM Time verfolgt deinen Standort nur während der Schicht - auch bei geschlossener App -, damit Anwesenheit und Verlassen des Standorts richtig erfasst werden. Benötigt:",
+      "later": "Später",
+      "check": "Erneut prüfen",
+      "light": "Sparsam bei Akku und Daten: ein Standort bei 50 m Bewegung oder alle 5 Minuten; endet beim Ausstempeln.",
+      "consent": {
+        "title": "Standort während der Schicht zustimmen",
+        "hint": "Nur während der Schicht; endet beim Ausstempeln.",
+        "action": "Zustimmen"
+      },
+      "location": {
+        "title": "Standort erlauben",
+        "hint": "„Während der Nutzung“ und genauen Standort wählen.",
+        "action": "Erlauben"
+      },
+      "notifications": {
+        "title": "Benachrichtigungen erlauben",
+        "hint": "Für die Schicht-Benachrichtigung und die Warnung beim Verlassen.",
+        "action": "Einstellungen"
+      },
+      "battery": {
+        "title": "Akku-Optimierung für PROSM Time ausschalten",
+        "hint": "PROSM Time auf „Nicht optimiert“ oder „Unbeschränkt“ stellen.",
+        "action": "Einstellungen"
+      }
+    },
+    "mood": {
+      "question": "Wie war die Arbeit heute?",
+      "great": "Super",
+      "normal": "Normal",
+      "tough": "Schwer",
+      "thanks": "Danke - gespeichert.",
+      "label": "Wie die Schicht war"
     }
   },
   "kioskPin": {
@@ -356,7 +391,8 @@
       "cost": "Zulagen und Kosten",
       "audit": "Aktionsprotokoll",
       "external": "Externe Arbeitskräfte",
-      "insights": "Anwesenheitskennzahlen"
+      "insights": "Anwesenheitskennzahlen",
+      "documents": "Dokumente"
     },
     "sos": {
       "text": "SOS von {{name}} bei {{site}} seit {{time}}",
@@ -543,7 +579,38 @@
         "allowances_edit_during_review": "Zulage in Prüfung geändert",
         "leave_approved_cancelled": "Genehmigter Urlaub storniert",
         "OWNER_AUTHORITY_GRANTED": "Befugnis des Inhabers erteilt",
-        "OWNER_AUTHORITY_REVOKED": "Befugnis des Inhabers entzogen"
+        "OWNER_AUTHORITY_REVOKED": "Befugnis des Inhabers entzogen",
+        "hr_profile_changed": "Personalakte geändert",
+        "hr_contract_saved": "Vertrag gespeichert",
+        "hr_contract_deleted": "Vertrag gelöscht",
+        "hr_job_title_saved": "Stelle gespeichert",
+        "hr_document_type_saved": "Dokumenteinstellung gespeichert",
+        "hr_document_template_added": "Dokumentliste hinzugefügt",
+        "hr_document_uploaded": "Dokument hochgeladen",
+        "hr_document_accepted": "Dokument angenommen",
+        "hr_document_rejected": "Dokument nicht angenommen",
+        "hr_document_reminded": "An Dokument erinnert",
+        "hr_violation_recorded": "Verstoß erfasst",
+        "hr_violation_cancelled": "Verstoß aufgehoben",
+        "hr_violation_investigate": "Untersuchung erfasst",
+        "hr_violation_respond": "Person hat geantwortet",
+        "hr_violation_approve": "Sanktion genehmigt",
+        "hr_violation_reduce": "Sanktion gemildert",
+        "hr_violation_reject": "Sanktion abgelehnt",
+        "hr_violation_acknowledge": "Sanktion zur Kenntnis genommen",
+        "hr_violation_refused_ack": "Unterschrift verweigert",
+        "hr_violation_appeal": "Einspruch",
+        "hr_violation_appeal_confirm": "Einspruch: Sanktion bleibt",
+        "hr_bylaw_published": "Sanktionsordnung veröffentlicht",
+        "hr_penalty_settings_saved": "Grenzen der Ordnung gespeichert",
+        "hr_penalty_type_saved": "Sanktionsart gespeichert",
+        "hr_violation_type_saved": "Verstoß gespeichert",
+        "hr_penalty_template_added": "Vorgeschlagene Verstöße hinzugefügt",
+        "hr_incentive_rule_saved": "Prämienregel gespeichert",
+        "hr_incentive_proposed": "Prämie vorgeschlagen",
+        "hr_incentive_approve": "Prämie genehmigt",
+        "hr_incentive_reject": "Prämie abgelehnt",
+        "hr_incentive_cancel": "Prämie aufgehoben"
       },
       "groups": {
         "sos": "SOS",

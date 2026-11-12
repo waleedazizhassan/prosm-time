@@ -37,6 +37,22 @@
             android:exported="false"
             tools:replace="android:exported" />
 
+        <!-- Owner 2026-11-11: the shift is followed by the app's own service, also after the app is
+             closed (stopWithTask false); after a restart the person is asked to open the app. -->
+        <service
+            android:name=".ShiftTrackingService"
+            android:exported="false"
+            android:foregroundServiceType="location"
+            android:stopWithTask="false" />
+        <receiver
+            android:name=".ShiftTrackingBootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -75,6 +91,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <!-- step 19 (item 12): the radio's background service plays media (patched
          plugin, see DECISIONS D-12); nothing asks to skip battery optimisation. -->

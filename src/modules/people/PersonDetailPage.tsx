@@ -2,7 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import BuzzButton from "../../components/common/BuzzButton";
 import styles from "./PersonDetailPage.module.css";
 import { useTranslation } from "react-i18next";
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import PermissionBundles from "./PermissionBundles";
+import { Link, Navigate, useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 import { useAuth } from "../../core/context/AuthContext";
 import EmployeeRepository, { type OrgMember } from "../../core/repositories/EmployeeRepository";
@@ -29,6 +30,18 @@ import FieldWorkerCard from "./FieldWorkerCard";
 import RoleChangeCard from "./RoleChangeCard";
 import DepartmentCard from "./DepartmentCard";
 import SuccessText from "../../components/common/SuccessText";
+import Tabs, { type TabItem } from "../../components/common/Tabs";
+import PlanLockedNote from "../../components/common/PlanLockedNote";
+import usePlanFeatures from "../../core/hooks/usePlanFeatures";
+import EmployeeProfileRepository, { type EmployeeProfile } from "../../core/repositories/EmployeeProfileRepository";
+import ProfileHeader from "./profile/ProfileHeader";
+import PersonalDataTab from "./profile/PersonalDataTab";
+import ContractsTab from "./profile/ContractsTab";
+import { AttendanceTab, HistoryTab, LeaveTab } from "./profile/ActivityTabs";
+import PayrollProfilesPage from "../payroll/PayrollProfilesPage";
+import { ProfileDocumentsTab, ProfilePenaltiesTab } from "./profile/LaterTabs";
+
+type ProfileTab = "data" | "account" | "contract" | "documents" | "payroll" | "attendance" | "leave" | "penalties" | "history";
 
 const MANAGER_ONLY_PERMISSIONS = ["leave.approve", "attendance.clock_in_on_behalf", "attendance.clock_out_on_behalf"];
 
@@ -51,6 +64,10 @@ export default function PersonDetailPage() {
   const navigate = useNavigate();
 
   const [member, setMember] = useState<OrgMember | null>(null);
+  // HR suite feature 3 (2026-11-11): one page per person - a head and tabs for everything about them
+  const [hr, setHr] = useState<EmployeeProfile | null>(null);
+  const { allows } = usePlanFeatures(profile?.id);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [catalog, setCatalog] = useState<Permission[]>([]);
   const [effective, setEffective] = useState<string[]>([]);
   const [overrides, setOverrides] = useState<Record<string, boolean>>({});
@@ -118,14 +135,16 @@ export default function PersonDetailPage() {
     setLoading(true);
     setLoadError("");
 
-    const [memberResult, catalogResult, effectiveResult, overridesResult, devicesResult, leaveBalanceResult] = await Promise.all([
+    const [memberResult, catalogResult, effectiveResult, overridesResult, devicesResult, leaveBalanceResult, hrResult] = await Promise.all([
       EmployeeRepository.getMember(userId),
       PermissionRepository.listCatalog(),
       PermissionRepository.getEffectivePermissions(userId),
       PermissionRepository.getUserOverrides(userId),
       DeviceBindingRepository.listForUser(userId),
       LeaveRepository.getBalanceFor(userId),
+      EmployeeProfileRepository.get(userId),
     ]);
+    setHr(hrResult.data);
 
     if (!memberResult.success) {
       setLoadError(humanizeBackendError(memberResult.message, t) ?? t("detail.loadError"));
@@ -145,6 +164,13 @@ export default function PersonDetailPage() {
     }
     setLoading(false);
   }, [userId, t]);
+
+  // HR suite review 2026-11-11: a save inside a profile tab refreshes the file only (no full-page reload)
+  const reloadHr = useCallback(async () => {
+    if (!userId) return;
+    const r = await EmployeeProfileRepository.get(userId);
+    if (r.data) setHr(r.data);
+  }, [userId]);
 
   const handleSetAnnualEntitlement = async () => {
     if (!userId) return;
@@ -286,24 +312,49 @@ export default function PersonDetailPage() {
     );
   }
 
-  return (
-    <PageShell title={member.fullName} subtitle={`${member.email} · ${t(`common:roles.${member.roleKey}`, { defaultValue: member.roleName })}`}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--space-2)", flexWrap: "wrap" }}>
-        <Link to="/people" style={{ color: "var(--text-link)", fontSize: "var(--font-sm)" }}>
-          {t("detail.backToList")}
-        </Link>
-        {/* owner 2026-11-10: Buzz this person */}
-        {userId && member.isActive !== false ? <BuzzButton userId={userId} name={member.fullName} /> : null}
-      </div>
+  const access = hr?.access ?? "manager";
+  const seesPay = access === "full" && (Boolean(profile?.isOwner) || hasPermission("payroll.manage_profiles"));
+  const tabs: TabItem<ProfileTab>[] = [
+    { key: "data", label: t("profile.tabs.data") },
+    // owner 2026-11-12: the role, permissions, devices and access on their own tab - the data tab stays the person's data
+    ...(access !== "self" ? [{ key: "account" as const, label: t("profile.tabs.account") }] : []),
+    ...(access !== "manager" ? [{ key: "contract" as const, label: t("profile.tabs.contract") }] : []),
+    ...(access !== "manager" ? [{ key: "documents" as const, label: t("profile.tabs.documents"), locked: !allows("documents") }] : []),
+    ...(seesPay ? [{ key: "payroll" as const, label: t("profile.tabs.payroll"), locked: !allows("payroll") }] : []),
+    { key: "attendance", label: t("profile.tabs.attendance") },
+    { key: "leave", label: t("profile.tabs.leave") },
+    { key: "penalties", label: t("profile.tabs.penalties"), locked: !allows("penalties") },
+    ...(access !== "self" ? [{ key: "history" as const, label: t("profile.tabs.history") }] : []),
+  ];
+  const requested = searchParams.get("tab") as ProfileTab | null;
+  const tab: ProfileTab = requested && tabs.some((x) => x.key === requested) ? requested : "data";
+  const chooseTab = (next: ProfileTab) => setSearchParams((params) => {
+    if (next === "data") params.delete("tab");
+    else params.set("tab", next);
+    return params;
+  }, { replace: true });
+  const lockedPlan = (key: ProfileTab) => (key === "payroll" ? "pro" : "business");
 
-      {/* Owner 2026-11-09: the person's cards in one even order, close together - who they are and their
-          work first, then their role and permissions, then checks and devices, and access last */}
-      <div className={styles.cards}>
-      {/* 2026-11-09 Media Center: the person's department */}
-      {userId && !member.isOwner ? <DepartmentCard userId={userId} canEdit={hasPermission("employees.edit")} /> : null}
-      {userId && (canEditLeaveEntitlement || hasPermission("employees.edit")) ? (
-        <EmploymentDetailsCard userId={userId} canEdit={Boolean(profile?.isOwner) || hasPermission("employees.edit")} />
-      ) : null}
+  return (
+    <PageShell title={t("detail.title")} compact>
+      <Link to="/people" style={{ color: "var(--text-link)", fontSize: "var(--font-sm)" }}>
+        {t("detail.backToList")}
+      </Link>
+      {hr ? <ProfileHeader profile={hr} /> : (
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--space-2)", flexWrap: "wrap" }}>
+          <h1 style={{ margin: 0, fontSize: "var(--font-xl)" }}>{member.fullName}</h1>
+          {userId && member.isActive !== false ? <BuzzButton userId={userId} name={member.fullName} /> : null}
+        </div>
+      )}
+      <Tabs items={tabs} active={tab} onChange={chooseTab} label={t("profile.tabsLabel")} />
+
+      {tabs.find((x) => x.key === tab)?.locked ? <PlanLockedNote plan={lockedPlan(tab)} /> : null}
+      {hr && tab === "contract" && !tabs.find((x) => x.key === tab)?.locked ? <ContractsTab profile={hr} onSaved={() => void reloadHr()} /> : null}
+      {hr && tab === "documents" && allows("documents") ? <ProfileDocumentsTab profile={hr} onChanged={() => void reloadHr()} /> : null}
+      {userId && tab === "payroll" && allows("payroll") ? <PayrollProfilesPage embedUserId={userId} /> : null}
+      {userId && tab === "attendance" ? <AttendanceTab userId={userId} /> : null}
+      {userId && tab === "leave" ? (
+        <LeaveTab userId={userId}>
       {canEditLeaveEntitlement ? (
         <Card title={t("detail.leaveEntitlementTitle")}>
           <HintText small>{t("detail.leaveEntitlementHint")}</HintText>
@@ -325,6 +376,29 @@ export default function PersonDetailPage() {
           </Button>
         </Card>
       ) : null}
+        </LeaveTab>
+      ) : null}
+      {userId && tab === "penalties" && allows("penalties") && hr ? <ProfilePenaltiesTab profile={hr} /> : null}
+      {userId && tab === "history" ? <HistoryTab userId={userId} /> : null}
+
+      {/* Owner 2026-11-09: the person's cards in one even order, close together - who they are and their
+          work first, then their role and permissions, then checks and devices, and access last */}
+      {tab === "data" ? (
+      <>
+      {hr ? <PersonalDataTab key={hr.header.jobTitleId ?? "none"} profile={hr} onSaved={() => void reloadHr()} /> : null}
+      <div className={styles.cards}>
+      {/* 2026-11-09 Media Center: the person's department */}
+      {userId && !member.isOwner ? <DepartmentCard userId={userId} canEdit={hasPermission("employees.edit")} /> : null}
+      {userId && (canEditLeaveEntitlement || hasPermission("employees.edit")) ? (
+        <EmploymentDetailsCard userId={userId} canEdit={Boolean(profile?.isOwner) || hasPermission("employees.edit")} />
+      ) : null}
+      </div>
+      </>
+      ) : null}
+
+      {tab === "account" ? (
+      <>
+      <div className={styles.cards}>
       {/* 2026-11-09 B-01: change the role (the server decides who may and for which role) */}
       {!member.isOwner && member.id !== profile?.id && (profile?.isRealOwner || hasPermission("permissions.assign")) ? (
         <RoleChangeCard key={member.roleKey} userId={member.id} currentRole={member.roleKey} onChanged={() => void load()} />
@@ -332,6 +406,10 @@ export default function PersonDetailPage() {
       {canManagePermissions ? (
         <Card title={t("detail.permissionsTitle")} className="wide">
           <HintText small>{t("detail.permissionsHint")}</HintText>
+          {!member.isOwner && userId ? (
+            <PermissionBundles userId={userId} effective={effective} overrides={overrides} catalogKeys={catalog.map((p) => p.permissionKey)}
+              canChange={canChangePermission} canGrantOwner={Boolean(profile?.isRealOwner) && allows("delegation") && member.id !== profile?.id} onChanged={() => void load()} />
+          ) : null}
 
           {member.isOwner ? (
             <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>
@@ -451,6 +529,8 @@ export default function PersonDetailPage() {
         </Card>
       ) : null}
       </div>
+      </>
+      ) : null}
       {/* Owner 2026-11-09: clocking in on someone's behalf lives on its own page in the sidebar only */}
 
       <Modal

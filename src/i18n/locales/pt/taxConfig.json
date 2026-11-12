@@ -1,0 +1,138 @@
+{
+  "title": "Impostos e previdência",
+  "subtitle": "As regras para calcular o imposto sobre o salário e a previdência social na folha.",
+  "error": "Não funcionou. Tente novamente.",
+  "badge": {
+    "official": "Igual aos valores oficiais do Egito",
+    "modified": "Alterado pela empresa",
+    "manual": "Configuração manual"
+  },
+  "country": {
+    "title": "País",
+    "change": "Mudar o país",
+    "currency": "Moeda: {{currency}}",
+    "version": "versão {{version}}",
+    "officialUpdated": "Atualizados pela PROSM em {{date}}",
+    "changed": "A partir de {{date}}, a folha segue {{country}}.",
+    "search": "Buscar um país",
+    "fromMonth": "Vale a partir de {{date}}, o primeiro mês sem ciclo de folha.",
+    "oldCyclesKept": "Os ciclos já criados mantêm o país e as regras.",
+    "readyRules": "Este país tem regras prontas da PROSM.",
+    "emptyRules": "Este país começa vazio: sua empresa informa as regras.",
+    "categoriesKept": "As categorias de previdência antigas ficam com os ciclos antigos.",
+    "currencyLabel": "Moeda",
+    "typeCode": "Digite {{code}} para confirmar",
+    "confirmButton": "Mudar o país",
+    "chooseAnother": "Escolher outro país",
+    "openCycle": "Há um ciclo de folha aberto: feche-o ou cancele-o antes de mudar o país."
+  },
+  "manualNotice": "A configuração manual não é uma aprovação jurídica da PROSM. A empresa informa estes valores por sua conta e deve revisá-los com seu contador ou consultor antes da primeira folha.",
+  "officialChanged": "A PROSM atualizou os valores oficiais depois que sua empresa alterou os seus. Revise-os ou volte aos valores oficiais.",
+  "backToOfficial": "Voltar aos valores oficiais",
+  "lockedText": "Estes são os valores prontos da PROSM, sempre atualizados. Para usar outros, copie e edite (sua empresa assume a responsabilidade).",
+  "copyAndEdit": "Copiar e editar",
+  "missing": {
+    "title": "Categoria de previdência faltando ({{count}})",
+    "hint": "Escolha a categoria de cada pessoa na ficha salarial antes da próxima folha."
+  },
+  "items": {
+    "title": "Itens sujeitos a imposto e previdência",
+    "hint": "Vale imediatamente para os próximos cálculos.",
+    "item": "Item",
+    "taxable": "Tributável",
+    "insurable": "Sujeito à previdência"
+  },
+  "how": {
+    "title": "Como é calculado",
+    "gross": "Bruto = todos os proventos e adicionais.",
+    "insurance": "Previdência = salário de contribuição (o base ou um valor fixo) entre o mínimo e o máximo × alíquota do empregado; a parte do empregador é custo fora do líquido.",
+    "taxBase": "Tributável = itens tributáveis menos descontos antes do imposto e (se definido) a previdência do empregado.",
+    "tax": "Imposto = faixas sobre o tributável anual (após a isenção) ÷ 12, ou mensal.",
+    "levies": "Outras contribuições = alíquota × base.",
+    "net": "Líquido = bruto menos os descontos do empregado."
+  },
+  "calc": {
+    "title": "Simular",
+    "hint": "Calculado no servidor pela mesma função da folha, com as regras desta página (nada é salvo).",
+    "basic": "Salário base",
+    "taxableAllowances": "Adicionais tributáveis",
+    "nonTaxableAllowances": "Adicionais isentos",
+    "preTax": "Descontos antes do imposto",
+    "category": "Categoria de previdência",
+    "defaultCategory": "Categoria padrão",
+    "run": "Calcular",
+    "gross": "Bruto",
+    "net": "Líquido",
+    "employerCost": "Previdência do empregador (custo)"
+  },
+  "rules": {
+    "insurance_employee": "Previdência social",
+    "insurance_employer": "Parte do empregador",
+    "income_tax": "Imposto sobre o salário",
+    "martyrs_fund": "Fundo dos mártires"
+  },
+  "tax": {
+    "title": "Imposto sobre o salário",
+    "enabled": "Aplica-se imposto",
+    "period": "Cálculo",
+    "annual": "Anual dividido por 12",
+    "monthly": "Mensal",
+    "exemption": "Valor isento",
+    "deductInsurance": "Descontar a previdência do empregado antes do imposto",
+    "roundDown": "Arredondar o imposto mensal para baixo",
+    "brackets": "Faixas",
+    "from": "De {{value}}",
+    "upTo": "Até",
+    "andAbove": "e acima",
+    "rate": "Alíquota %",
+    "addBracket": "Adicionar faixa",
+    "tiers": "Rendas altas",
+    "tiersHint": "Acima destas rendas anuais as faixas inferiores são descartadas (como nas regras prontas).",
+    "tierRow": "Acima de {{above}}: a partir da faixa {{n}}"
+  },
+  "ins": {
+    "title": "Previdência social",
+    "enabled": "Aplica-se a previdência",
+    "categoryName": "Categoria (ex.: nacional)",
+    "employeeRate": "Empregado %",
+    "employerRate": "Empregador %",
+    "min": "Salário de contribuição mínimo",
+    "max": "Salário de contribuição máximo",
+    "base": "Salário de contribuição",
+    "removeCategory": "Remover categoria",
+    "addCategory": "Adicionar categoria",
+    "defaultCategory": "Categoria para quem não tiver uma",
+    "fixedWageHint": "Um salário de contribuição fixo na ficha salarial substitui o salário base."
+  },
+  "bases": {
+    "basic": "Salário base",
+    "gross": "Bruto",
+    "taxable": "Tributável",
+    "insurable": "Itens marcados para previdência"
+  },
+  "levy": {
+    "title": "Outras contribuições",
+    "hint": "Por exemplo um fundo como porcentagem do bruto. Adicione só o que a lei do seu país exige.",
+    "name": "Nome",
+    "rate": "Alíquota %",
+    "base": "Sobre",
+    "payer": "Pago por",
+    "employee": "Empregado",
+    "employer": "Empregador",
+    "on": "Ativa",
+    "add": "Adicionar contribuição"
+  },
+  "remove": "Remover",
+  "saveTitle": "Salvar como nova versão",
+  "saveHint": "Os ciclos já criados mantêm suas regras. A nova versão vale a partir do mês escolhido.",
+  "effectiveFrom": "Vale a partir de (mês)",
+  "cancelEdit": "Cancelar",
+  "save": "Salvar versão",
+  "liability": "A configuração manual não é uma aprovação jurídica da PROSM: a empresa informa estes valores por sua conta e os revisa com seu contador ou consultor.",
+  "liabilityDone": "Responsabilidade aceita por {{name}} em {{date}}.",
+  "saved": "Salvo como versão {{version}}, a partir de {{date}}.",
+  "versions": {
+    "title": "Versões",
+    "row": "Versão {{version}} – {{country}} – a partir de {{date}} – {{by}}"
+  }
+}

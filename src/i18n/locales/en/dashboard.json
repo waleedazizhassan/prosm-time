@@ -132,7 +132,7 @@
     "manualLocationLabel": "Workplace",
     "manualLocationHint": "Type where you actually are (e.g. a client's site, working from home) — required when no site is selected.",
     "manualLocationRequired": "Enter your workplace to clock in without a registered site.",
-    "clockInBlockedContactManager": "The grace period for this site's shift has passed - please contact your manager to register your attendance.",
+    "clockInBlockedContactManager": "Lateness has started counting for this site's shift - please contact your manager to clock you in.",
     "clockOutBlockedContactManager": "You are outside this site's work area - please contact your manager to register your clock-out.",
     "projectLabel": "Project (optional)",
     "noProject": "No project",
@@ -227,6 +227,41 @@
       "siteChanged": "Site changed",
       "savedOffline": "Saved on your phone",
       "savedOfflineText": "No connection right now; it is sent by itself as soon as it returns."
+    },
+    "trackingGate": {
+      "title": "Before you clock in",
+      "lead": "PROSM Time follows your location during the shift only - also with the app closed - so attendance and leaving the site are recorded right. It needs:",
+      "later": "Later",
+      "check": "Check again",
+      "light": "Light on battery and data: a location is sent when you move 50 m or every 5 minutes, and it stops when you clock out.",
+      "consent": {
+        "title": "Agree to location during the shift",
+        "hint": "During the shift only; it stops at clock-out.",
+        "action": "Agree"
+      },
+      "location": {
+        "title": "Allow location",
+        "hint": "Choose “While using the app” and precise location.",
+        "action": "Allow"
+      },
+      "notifications": {
+        "title": "Allow notifications",
+        "hint": "For the shift notification and the left-the-site alert.",
+        "action": "Settings"
+      },
+      "battery": {
+        "title": "Turn off battery saving for PROSM Time",
+        "hint": "Pick PROSM Time and set it to “Not optimised” or “Unrestricted”.",
+        "action": "Settings"
+      }
+    },
+    "mood": {
+      "question": "How was today's work?",
+      "great": "Great",
+      "normal": "Normal",
+      "tough": "Tough",
+      "thanks": "Thanks - your answer was saved.",
+      "label": "How the shift felt"
     }
   },
   "kioskPin": {
@@ -356,7 +391,8 @@
       "cost": "Allowances and cost",
       "audit": "Action log",
       "external": "External workers",
-      "insights": "Attendance insights"
+      "insights": "Attendance insights",
+      "documents": "Documents"
     },
     "sos": {
       "text": "SOS from {{name}} at {{site}} since {{time}}",
@@ -543,7 +579,38 @@
         "allowances_edit_during_review": "Allowance edited in review",
         "leave_approved_cancelled": "Approved leave cancelled",
         "OWNER_AUTHORITY_GRANTED": "Owner's authority granted",
-        "OWNER_AUTHORITY_REVOKED": "Owner's authority withdrawn"
+        "OWNER_AUTHORITY_REVOKED": "Owner's authority withdrawn",
+        "hr_profile_changed": "Personnel file changed",
+        "hr_contract_saved": "Contract saved",
+        "hr_contract_deleted": "Contract deleted",
+        "hr_job_title_saved": "Job title saved",
+        "hr_document_type_saved": "Document setting saved",
+        "hr_document_template_added": "Document list added",
+        "hr_document_uploaded": "Document uploaded",
+        "hr_document_accepted": "Document accepted",
+        "hr_document_rejected": "Document not accepted",
+        "hr_document_reminded": "Employee reminded of a document",
+        "hr_violation_recorded": "Violation recorded",
+        "hr_violation_cancelled": "Violation cancelled",
+        "hr_violation_investigate": "Investigation recorded",
+        "hr_violation_respond": "Employee replied",
+        "hr_violation_approve": "Penalty approved",
+        "hr_violation_reduce": "Penalty reduced",
+        "hr_violation_reject": "Penalty refused",
+        "hr_violation_acknowledge": "Penalty received by employee",
+        "hr_violation_refused_ack": "Employee refused to sign",
+        "hr_violation_appeal": "Appeal",
+        "hr_violation_appeal_confirm": "Appeal: penalty kept",
+        "hr_bylaw_published": "Penalties bylaw published",
+        "hr_penalty_settings_saved": "Bylaw limits saved",
+        "hr_penalty_type_saved": "Penalty type saved",
+        "hr_violation_type_saved": "Violation saved",
+        "hr_penalty_template_added": "Suggested violations added",
+        "hr_incentive_rule_saved": "Incentive rule saved",
+        "hr_incentive_proposed": "Incentive proposed",
+        "hr_incentive_approve": "Incentive approved",
+        "hr_incentive_reject": "Incentive refused",
+        "hr_incentive_cancel": "Incentive cancelled"
       },
       "groups": {
         "sos": "SOS",

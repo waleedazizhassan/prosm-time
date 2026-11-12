@@ -59,9 +59,9 @@
     "overtimeStartTimeLabel": "Overtime starts at",
     "lateDeductionStartTimeLabel": "Lateness deduction starts at",
     "breakRoundingModeLabel": "Break time rounding",
-    "blockSelfClockInLabel": "Block self clock-in past the grace period (require a manager-assisted clock-in instead)",
+    "blockSelfClockInLabel": "Block self clock-in once lateness starts counting (a manager clocks them in instead)",
     "exemptEmployeesTitle": "Exempt employees",
-    "exemptEmployeesHint": "Employees added here skip both the after-grace clock-in block and the outside-geofence clock-out block for this site.",
+    "exemptEmployeesHint": "People added here are exempt at this site from the block after lateness starts and from the block on clocking out outside the area.",
     "exemptEmployeesAddLabel": "Add an exempt employee",
     "exemptEmployeesSelectPlaceholder": "Select an employee…",
     "exemptEmployeesAddAction": "Add",
@@ -73,7 +73,7 @@
     "presenceMonitoringEnabledHint": "Re-checks location periodically during a shift at this site and reports if someone leaves the area after clocking in. Off by default.",
     "cameraRequiredLabel": "Camera required",
     "activeLabel": "Site active",
-    "sitePolicyMovedHint": "GPS accuracy margin, grace period, shift times, ongoing presence monitoring and exempt employees are set on the Settings page.",
+    "sitePolicyMovedHint": "The GPS margin, the shift hours, presence monitoring and exempt people are all set on the Settings page.",
     "confirm": "Save site",
     "genericError": "Unable to save this site.",
     "openSiteSettings": "Open the site's rules",
@@ -142,7 +142,7 @@
     "workforceMovedHint": "External workers are now added once for the whole organisation, on the Workers page. Each gets a 6-digit number made by the app and can clock in and out with it at this site's kiosk or any other.",
     "workforceOpenAction": "Open Workers",
     "rulesTitle": "Site rules",
-    "rulesHint": "GPS tolerance, grace, shift times, overtime, breaks and who is exempt - set on the Settings page.",
+    "rulesHint": "The GPS margin, shift hours, overtime, breaks and exempt people are set on the Settings page.",
     "rulesAction": "Open the site's rules"
   },
   "projectAssignments": {
@@ -187,5 +187,13 @@
     "save": "Save",
     "saved": "Saved.",
     "genericError": "Could not save."
+  },
+  "noSiteHours": {
+    "title": "Hours outside the sites",
+    "hint": "Optional: the hours for a clock-in with no site. Leaving them empty is fine - those days then have no lateness or overtime by the clock.",
+    "saveAction": "Save hours",
+    "clearAction": "No hours",
+    "saved": "The hours were saved.",
+    "genericError": "The hours could not be saved. Try again."
   }
 }

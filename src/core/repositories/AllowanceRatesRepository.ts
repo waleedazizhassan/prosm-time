@@ -10,7 +10,7 @@ export interface ServiceResult<T = null> {
 // allowance is priced per site, per category of staff and per person - the
 // later wins - and a worked day fills itself from those prices
 // (20261020260000). A blank price inherits from the level before it.
-export const RATE_FIELDS = ["meal", "expatriation", "transportation", "housing", "travel", "other", "overtimeHour", "extraDay"] as const;
+export const RATE_FIELDS = ["meal", "expatriation", "transportation", "housing", "travel", "other", "overtimeHour", "extraDay", "lateMinute"] as const;
 export type RateField = (typeof RATE_FIELDS)[number];
 export type Rates = Record<RateField, number | null>;
 
@@ -41,7 +41,7 @@ export const BASIS_FIELDS = ["meal", "expatriation", "transportation", "housing"
 export type BasisField = (typeof BASIS_FIELDS)[number];
 export type AllowanceBasis = "fixed_per_day" | "per_hour" | "per_extra_day";
 
-export const EMPTY_RATES: Rates = { meal: null, expatriation: null, transportation: null, housing: null, travel: null, other: null, overtimeHour: null, extraDay: null };
+export const EMPTY_RATES: Rates = { meal: null, expatriation: null, transportation: null, housing: null, travel: null, other: null, overtimeHour: null, extraDay: null, lateMinute: null };
 
 interface RawRateRow {
   id: string;
@@ -56,6 +56,7 @@ interface RawRateRow {
   other: number | null;
   overtime_hour: number | null;
   extra_day: number | null;
+  late_minute?: number | null;
 }
 
 const num = (value: number | string | null) => (value === null || value === undefined ? null : Number(value));
@@ -77,7 +78,7 @@ class AllowanceRatesRepository {
     try {
       const { data, error } = await this.client
         .from("allowance_rates")
-        .select("id, site_id, category_id, user_id, meal, expatriation, transportation, housing, travel, other, overtime_hour, extra_day");
+        .select("id, site_id, category_id, user_id, meal, expatriation, transportation, housing, travel, other, overtime_hour, extra_day, late_minute");
       if (error) return fail(error.message);
       return ok(
         ((data ?? []) as RawRateRow[]).map((row) => ({
@@ -94,6 +95,7 @@ class AllowanceRatesRepository {
             other: num(row.other),
             overtimeHour: num(row.overtime_hour),
             extraDay: num(row.extra_day),
+            lateMinute: num(row.late_minute ?? null),
           },
         })),
       );

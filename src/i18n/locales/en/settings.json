@@ -19,7 +19,7 @@
   },
   "sitePolicy": {
     "title": "Site rules",
-    "hint": "This site's GPS tolerance, grace period, shift times, overtime and late deduction, break rounding, presence monitoring, exempt employees and self-service blocks.",
+    "hint": "This site's GPS margin, shift hours, overtime and late deductions, break rounding, presence monitoring, exempt people and self clock-in limits.",
     "siteSelectLabel": "Site",
     "siteSelectPlaceholder": "Select a site…",
     "noSites": "No sites yet - add one from Sites first.",
@@ -256,7 +256,9 @@
       "payroll": "Payroll (insurance, tax, loans, payslips)",
       "integrations": "Integrations, API and attendance from fingerprint devices",
       "delegation": "Full and time-limited delegation",
-      "retention": "Data retention control"
+      "retention": "Data retention control",
+      "documents": "Employee documents and their expiry",
+      "penalties": "Progressive penalties bylaw and incentives"
     },
     "managedByProsm": "Any change or renewal of your licence is made by PROSM; you get a notification and an email with the new licence. To change it, write to sales@prosm.net.",
     "historyAll": "Attendance records shown: all of them. Location points and photos are deleted automatically after the period in “Data retention”.",
@@ -287,5 +289,38 @@
     "outside": "Outside the sites",
     "people": "People and attendance",
     "other": "Plan and security"
+  },
+  "overtimeTarget": {
+    "title": "Counting overtime and lateness",
+    "hint": "Choose where the overtime and lateness from attendance are counted. Approved days and cycles do not change.",
+    "saved": "Saved.",
+    "error": "The choice could not be saved. Try again.",
+    "payroll": {
+      "label": "On the salary",
+      "hint": "Suggested in the payroll cycle for you to accept."
+    },
+    "allowances": {
+      "label": "On the allowances",
+      "hint": "Overtime is priced on the allowance sheets."
+    },
+    "counted": {
+      "label": "Counted",
+      "hint": "Overtime is priced on the allowance sheets."
+    },
+    "none": {
+      "label": "Not counted",
+      "hint": "Affects nothing - it only shows in the hours."
+    }
+  },
+  "jobTitles": {
+    "title": "Job titles",
+    "hint": "The company's job titles: chosen in each employee's file, and used by documents required for a job.",
+    "name": "Job title",
+    "add": "Add",
+    "stop": "Stop",
+    "restore": "Restore",
+    "people_one": "1 person",
+    "people_other": "{{count}} people",
+    "error": "Could not save."
   }
 }

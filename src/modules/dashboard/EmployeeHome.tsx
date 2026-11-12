@@ -8,6 +8,7 @@ import ManagerRepository, { type TodayAttendanceRow } from "../../core/repositor
 import Modal from "../../components/common/Modal";
 import ClockInOutCard from "./ClockInOutCard";
 import PersonalRemindersCard from "./PersonalRemindersCard";
+import MyDocumentsAlert from "../documents/MyDocumentsAlert";
 import { PERIODS, formatHours, periodHours, periodRange } from "../attendance/periods";
 import styles from "./EmployeeHome.module.css";
 
@@ -71,6 +72,7 @@ export default function EmployeeHome() {
 
   return (
     <>
+      <MyDocumentsAlert />
       <ClockInOutCard />
 
       <div className={styles.floatingTools}>

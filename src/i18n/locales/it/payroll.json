@@ -68,7 +68,10 @@
     "chooseAll": "Scegli tutti i mostrati",
     "chooseNone": "Annulla la scelta",
     "addToChosen": "Aggiungi una voce a {{count}} scelti",
-    "bulkHint": "Tutti i scelti ricevono la stessa voce, o nessuno se per uno non è possibile (per esempio fuori dalle tue sedi)."
+    "bulkHint": "Tutti i scelti ricevono la stessa voce, o nessuno se per uno non è possibile (per esempio fuori dalle tue sedi).",
+    "customRules": "Regole fiscali proprie",
+    "selfServiceOff": "I dipendenti non vedranno le buste paga: il «self-service» è disattivato nelle impostazioni paghe.",
+    "openSettings": "Apri impostazioni"
   },
   "actions": {
     "submit": "Invia in revisione",
@@ -193,7 +196,8 @@
     "managementApproval": "Approvazione della direzione",
     "combinedTotal": "Stipendio totale (con indennità)",
     "totalSalaries": "Totale stipendi",
-    "no": "N."
+    "no": "N.",
+    "customRules": "Calcolato con regole fiscali e contributive proprie dell'azienda"
   },
   "profiles": {
     "title": "Persone",
@@ -244,8 +248,15 @@
     "savedShort": "Salvato.",
     "deleteItem": "Elimina",
     "deleteItemLabel": "Elimina la voce {{name}}",
-    "deleteItemConfirm": "Eliminare «{{name}}» dallo stipendio di tutti? I cicli approvati non cambiano.",
-    "itemDeleted": "La voce «{{name}}» è stata eliminata."
+    "deleteItemConfirm": "Rimuovere «{{name}}» solo dalla busta paga di questa persona? Gli altri dipendenti e i cicli approvati non cambiano.",
+    "itemDeleted": "La voce «{{name}}» è stata eliminata.",
+    "legalNameArabicLabel": "Nome in arabo (come sul documento)",
+    "legalNameLabel": "Nome ufficiale",
+    "legalNameHint": "È il nome sulla busta paga, non il nome utente ({{user}}).",
+    "legalNameMissing": "Manca il nome ufficiale",
+    "notInPayroll": "Questa persona non è nelle paghe (il titolare non riceve stipendio).",
+    "insuranceCategory": "Categoria previdenziale",
+    "insuranceCategoryDefault": "Categoria predefinita"
   },
   "installments": {
     "title": "Rate e anticipi",
@@ -349,7 +360,12 @@
     "appliesToAllLabel": "Si applica a tutti i dipendenti",
     "defaultAmount": "Importo predefinito",
     "appliesToAllHint": "Aggiunto in ogni nuovo ciclo per chi ha un profilo paghe. Se la persona ha un proprio valore, vale quello.",
-    "preTaxLabel": "Dedotto dall'imponibile (prima dell'imposta)"
+    "preTaxLabel": "Dedotto dall'imponibile (prima dell'imposta)",
+    "remove": "Rimuovi",
+    "restore": "Ripristina",
+    "removeConfirm": "Rimuovere la voce «{{name}}»? Esce dalle schede paga e dai cicli aperti; i cicli approvati la mantengono.",
+    "removed": "Voce rimossa.",
+    "restored": "Voce ripristinata."
   },
   "requests": {
     "hint": "Buste paga richieste dal tuo team. Un clic invia la busta paga approvata e salvata in PDF all'email registrata: stessa versione, nulla ricalcolato.",
@@ -422,7 +438,9 @@
     "statutoryBrackets": "Gli scaglioni devono crescere e l'ultimo non ha limite.",
     "statutoryWage": "Il massimo non può essere inferiore al minimo.",
     "chooseItem": "Scegli prima la voce.",
-    "basicCannotBeDeleted": "Lo stipendio base non si può eliminare."
+    "basicCannotBeDeleted": "Lo stipendio base non si può eliminare.",
+    "legalNameRequired": "Inserisci il nome ufficiale: è quello sulla busta paga.",
+    "legalNameArabic": "Scrivi il nome solo in lettere arabe, come sul documento."
   },
   "exports": {
     "hint": "I cedolini di un ciclo approvato o bloccato vengono preparati sul server in un unico ZIP, ognuno con il suo numero. Puoi lasciare la pagina; il file resta disponibile 7 giorni.",
@@ -490,5 +508,10 @@
     "twoAction": "Schede paghe",
     "three": "Il ciclo del mese",
     "threeText": "Crea il ciclo qui sotto → inserisci le variabili e verifica i suggerimenti → invia → un'altra persona approva → blocca e pubblica."
+  },
+  "taxLink": {
+    "title": "Imposte e contributi",
+    "hint": "Il paese, gli scaglioni, i contributi e un calcolatore, in una pagina dedicata.",
+    "open": "Apri"
   }
 }

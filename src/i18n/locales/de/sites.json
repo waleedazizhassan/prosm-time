@@ -59,9 +59,9 @@
     "overtimeStartTimeLabel": "Überstunden beginnen um",
     "lateDeductionStartTimeLabel": "Verspätungsabzug beginnt um",
     "breakRoundingModeLabel": "Pausenzeit-Rundung",
-    "blockSelfClockInLabel": "Selbst-Einstempeln nach der Kulanzzeit blockieren (erfordert stattdessen ein von einem Manager unterstütztes Einstempeln)",
+    "blockSelfClockInLabel": "Selbst-Einstempeln sperren, sobald Verspätung zählt (ein Vorgesetzter stempelt stattdessen ein)",
     "exemptEmployeesTitle": "Befreite Mitarbeiter",
-    "exemptEmployeesHint": "Hier hinzugefügte Mitarbeiter überspringen sowohl die Einstempel-Blockierung nach der Kulanzzeit als auch die Ausstempel-Blockierung außerhalb des Bereichs für diesen Standort.",
+    "exemptEmployeesHint": "Hier hinzugefügte Personen sind an diesem Standort von der Sperre nach Beginn der Verspätung und vom Ausstempeln außerhalb des Bereichs ausgenommen.",
     "exemptEmployeesAddLabel": "Befreiten Mitarbeiter hinzufügen",
     "exemptEmployeesSelectPlaceholder": "Mitarbeiter auswählen…",
     "exemptEmployeesAddAction": "Hinzufügen",
@@ -73,7 +73,7 @@
     "presenceMonitoringEnabledHint": "Überprüft den Standort während einer Schicht an diesem Standort regelmäßig erneut und meldet, wenn jemand nach dem Einstempeln den Bereich verlässt. Standardmäßig deaktiviert.",
     "cameraRequiredLabel": "Kamera erforderlich",
     "activeLabel": "Standort aktiv",
-    "sitePolicyMovedHint": "GPS-Genauigkeit, Kulanzzeit, Schichtzeiten, laufende Anwesenheitsüberwachung und ausgenommene Mitarbeitende werden auf der Seite Einstellungen eingestellt.",
+    "sitePolicyMovedHint": "GPS-Toleranz, Schichtzeiten, Anwesenheitsüberwachung und Ausnahmen werden auf der Einstellungsseite festgelegt.",
     "confirm": "Standort speichern",
     "genericError": "Dieser Standort konnte nicht gespeichert werden.",
     "openSiteSettings": "Regeln des Standorts öffnen",
@@ -142,7 +142,7 @@
     "workforceMovedHint": "Externe Arbeiter werden jetzt einmal für die ganze Organisation auf der Seite „Externe Arbeiter“ angelegt. Jeder erhält eine 6-stellige Nummer von der App und stempelt damit am Kiosk dieses oder jedes anderen Standorts.",
     "workforceOpenAction": "Externe Arbeiter öffnen",
     "rulesTitle": "Standortregeln",
-    "rulesHint": "GPS-Toleranz, Kulanz, Schichtzeiten, Überstunden, Pausen und Ausnahmen - auf der Seite Einstellungen.",
+    "rulesHint": "GPS-Toleranz, Schichtzeiten, Überstunden, Pausen und Ausnahmen werden auf der Einstellungsseite festgelegt.",
     "rulesAction": "Regeln des Standorts öffnen"
   },
   "projectAssignments": {
@@ -187,5 +187,13 @@
     "save": "Speichern",
     "saved": "Gespeichert.",
     "genericError": "Speichern fehlgeschlagen."
+  },
+  "noSiteHours": {
+    "title": "Zeiten außerhalb der Standorte",
+    "hint": "Optional: die Zeiten für ein Einstempeln ohne Standort. Leer lassen ist in Ordnung - dann gibt es an diesen Tagen keine Verspätung oder Überstunden nach Uhrzeit.",
+    "saveAction": "Zeiten speichern",
+    "clearAction": "Keine Zeiten",
+    "saved": "Die Zeiten wurden gespeichert.",
+    "genericError": "Die Zeiten konnten nicht gespeichert werden. Versuch es erneut."
   }
 }

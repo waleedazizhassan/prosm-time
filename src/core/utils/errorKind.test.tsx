@@ -42,10 +42,10 @@ describe("error kinds", () => {
     expect(container.querySelector("[data-kind]")?.getAttribute("data-kind")).toBe("offline");
   });
 
-  it("renders nothing for an empty message, and an empty state always has a picture", () => {
+  it("renders nothing for an empty message, and an empty state always has its sign (owner 2026-11-12: an icon, not a drawing)", () => {
     const { container } = render(<ErrorText>{""}</ErrorText>);
     expect(container.innerHTML).toBe("");
     const empty = render(<EmptyState message="Nothing yet" />);
-    expect(empty.container.querySelector("img")).not.toBeNull();
+    expect(empty.container.querySelector("svg")).not.toBeNull();
   });
 });

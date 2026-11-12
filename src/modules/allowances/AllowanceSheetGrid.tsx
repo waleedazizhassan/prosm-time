@@ -40,7 +40,7 @@ export function entryInput(entry: AllowanceEntry): AllowanceEntryInput {
 }
 
 const total = (entry: AllowanceEntry) =>
-  entry.mealAllowance + entry.expatriationAllowance + entry.transportationAllowance + entry.housingAllowance + entry.travelAllowance + entry.otherAllowance + entry.overtimeAmount + entry.extraDaysAmount;
+  entry.mealAllowance + entry.expatriationAllowance + entry.transportationAllowance + entry.housingAllowance + entry.travelAllowance + entry.otherAllowance + entry.overtimeAmount + entry.extraDaysAmount - entry.lateAmount;
 
 // v2.3.46 (owner 2026-10-26: "like the Excel sheet - when I open my
 // allowances, the table that gets printed, and I edit in it"): the
@@ -178,7 +178,7 @@ export default function AllowanceSheetGrid({
                 })}
                 <td>{entry.overtimeHours ? Number(entry.overtimeHours.toFixed(2)) : "—"}</td>
                 <td>{entry.overtimeDays ? entry.overtimeDays : "—"}</td>
-                <td>{money(entry.overtimeAmount + entry.extraDaysAmount)}</td>
+                <td>{money(entry.overtimeAmount + entry.extraDaysAmount - entry.lateAmount)}</td>
                 <td className={styles.total}>{money(total(entry))}</td>
                 <td>
                   <StatusBadge status={STATUS_BADGE[entry.status]}>{t(`status.${entry.status}`)}</StatusBadge>
@@ -201,7 +201,7 @@ export default function AllowanceSheetGrid({
             ))}
             <td>{Number(sum((entry) => entry.overtimeHours).toFixed(2))}</td>
             <td>{sum((entry) => entry.overtimeDays)}</td>
-            <td>{money(sum((entry) => entry.overtimeAmount + entry.extraDaysAmount))}</td>
+            <td>{money(sum((entry) => entry.overtimeAmount + entry.extraDaysAmount - entry.lateAmount))}</td>
             <td className={styles.total}>{money(sum(total))}</td>
             <td />
           </tr>

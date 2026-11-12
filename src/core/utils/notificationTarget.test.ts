@@ -8,6 +8,22 @@ const supervisor = { isOwner: false, canViewEmergencyLog: true };
 const owner = { isOwner: true, canViewEmergencyLog: false };
 
 describe("notificationTarget", () => {
+  it("sends a penalty to decide to the penalties page on it, and the person's own to their file", () => {
+    expect(notificationTarget({ type: "penalty_review", entityId: "v1" }, supervisor)).toBe("/penalties?tab=action&open=v1");
+    expect(notificationTarget({ type: "penalty_appeal", entityId: "v2" }, owner)).toBe("/penalties?tab=action&open=v2");
+    expect(notificationTarget({ type: "incentive_review" }, supervisor)).toBe("/penalties?tab=incentives");
+    expect(notificationTarget({ type: "penalty_decided" }, employee)).toBe("/me?tab=penalties");
+    expect(notificationTarget({ type: "incentive_granted" }, employee)).toBe("/me?tab=penalties");
+  });
+
+  it("sends a document to the person's own documents, or personnel managers to the documents page", () => {
+    expect(notificationTarget({ type: "document_expiring", kind: "self" }, employee)).toBe("/me?tab=documents");
+    expect(notificationTarget({ type: "document_rejected", kind: "self" }, employee)).toBe("/me?tab=documents");
+    expect(notificationTarget({ type: "document_expiring", kind: "hr" }, supervisor)).toBe("/documents");
+    expect(notificationTarget({ type: "document_uploaded", kind: "hr" }, supervisor)).toBe("/documents");
+    expect(notificationTarget({ type: "document_missing" }, owner)).toBe("/documents");
+  });
+
   it("opens the Emergency Log only for those who can see it", () => {
     expect(notificationTarget({ type: "sos_alert" }, supervisor)).toBe("/emergency-log");
     expect(notificationTarget({ type: "sos_alert" }, owner)).toBe("/emergency-log");

@@ -134,7 +134,7 @@
     "manualLocationLabel": "Luogo di lavoro",
     "manualLocationHint": "Indica dove ti trovi realmente (es. presso un cliente, lavoro da casa) — obbligatorio se non è selezionata nessuna sede.",
     "manualLocationRequired": "Inserisci il tuo luogo di lavoro per timbrare senza una sede registrata.",
-    "clockInBlockedContactManager": "Il periodo di tolleranza per il turno di questa sede è scaduto - contatta il tuo manager per registrare la tua presenza.",
+    "clockInBlockedContactManager": "Per il turno di questo sito il ritardo sta già contando: contatta il tuo responsabile per la timbratura.",
     "clockOutBlockedContactManager": "Sei fuori dall'area di lavoro di questa sede - contatta il tuo manager per registrare la tua uscita.",
     "projectLabel": "Progetto (facoltativo)",
     "noProject": "Nessun progetto",
@@ -230,6 +230,41 @@
       "siteChanged": "Sede cambiata",
       "savedOffline": "Salvato sul telefono",
       "savedOfflineText": "Nessuna connessione ora; verrà inviato da solo appena torna."
+    },
+    "trackingGate": {
+      "title": "Prima di timbrare",
+      "lead": "PROSM Time segue la tua posizione solo durante il turno - anche ad app chiusa - per registrare bene presenza e uscita dal sito. Serve:",
+      "later": "Più tardi",
+      "check": "Ricontrolla",
+      "light": "Leggero su batteria e dati: posizione ogni 50 m o ogni 5 minuti; si ferma all’uscita.",
+      "consent": {
+        "title": "Accetta la posizione durante il turno",
+        "hint": "Solo durante il turno; si ferma all’uscita.",
+        "action": "Accetto"
+      },
+      "location": {
+        "title": "Consenti la posizione",
+        "hint": "Scegli «Mentre usi l’app» e posizione precisa.",
+        "action": "Consenti"
+      },
+      "notifications": {
+        "title": "Consenti le notifiche",
+        "hint": "Per la notifica del turno e l’avviso di uscita.",
+        "action": "Impostazioni"
+      },
+      "battery": {
+        "title": "Disattiva il risparmio batteria per PROSM Time",
+        "hint": "Scegli PROSM Time e impostalo su «Non ottimizzata» o «Senza limitazioni».",
+        "action": "Impostazioni"
+      }
+    },
+    "mood": {
+      "question": "Com’è andato il lavoro oggi?",
+      "great": "Ottimo",
+      "normal": "Normale",
+      "tough": "Duro",
+      "thanks": "Grazie, salvato.",
+      "label": "Com’è andato il turno"
     }
   },
   "kioskPin": {
@@ -359,7 +394,8 @@
       "cost": "Indennità e costi",
       "audit": "Registro delle azioni",
       "external": "Lavoratori esterni",
-      "insights": "Indicatori di presenza"
+      "insights": "Indicatori di presenza",
+      "documents": "Documenti"
     },
     "sos": {
       "text": "SOS da {{name}} a {{site}} dalle {{time}}",
@@ -546,7 +582,38 @@
         "allowances_edit_during_review": "Indennità modificata in revisione",
         "leave_approved_cancelled": "Ferie approvate annullate",
         "OWNER_AUTHORITY_GRANTED": "Autorità del titolare concessa",
-        "OWNER_AUTHORITY_REVOKED": "Autorità del titolare ritirata"
+        "OWNER_AUTHORITY_REVOKED": "Autorità del titolare ritirata",
+        "hr_profile_changed": "Fascicolo modificato",
+        "hr_contract_saved": "Contratto salvato",
+        "hr_contract_deleted": "Contratto eliminato",
+        "hr_job_title_saved": "Mansione salvata",
+        "hr_document_type_saved": "Impostazione documento salvata",
+        "hr_document_template_added": "Elenco documenti aggiunto",
+        "hr_document_uploaded": "Documento caricato",
+        "hr_document_accepted": "Documento accettato",
+        "hr_document_rejected": "Documento non accettato",
+        "hr_document_reminded": "Promemoria documento",
+        "hr_violation_recorded": "Infrazione registrata",
+        "hr_violation_cancelled": "Infrazione annullata",
+        "hr_violation_investigate": "Indagine registrata",
+        "hr_violation_respond": "Il dipendente ha risposto",
+        "hr_violation_approve": "Sanzione approvata",
+        "hr_violation_reduce": "Sanzione ridotta",
+        "hr_violation_reject": "Sanzione respinta",
+        "hr_violation_acknowledge": "Sanzione ricevuta",
+        "hr_violation_refused_ack": "Rifiuto di firmare",
+        "hr_violation_appeal": "Ricorso",
+        "hr_violation_appeal_confirm": "Ricorso: sanzione confermata",
+        "hr_bylaw_published": "Regolamento sanzioni pubblicato",
+        "hr_penalty_settings_saved": "Limiti del regolamento salvati",
+        "hr_penalty_type_saved": "Tipo di sanzione salvato",
+        "hr_violation_type_saved": "Infrazione salvata",
+        "hr_penalty_template_added": "Infrazioni suggerite aggiunte",
+        "hr_incentive_rule_saved": "Regola di incentivo salvata",
+        "hr_incentive_proposed": "Incentivo proposto",
+        "hr_incentive_approve": "Incentivo approvato",
+        "hr_incentive_reject": "Incentivo respinto",
+        "hr_incentive_cancel": "Incentivo annullato"
       },
       "groups": {
         "sos": "SOS",

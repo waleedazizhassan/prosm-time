@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 
 import PayrollCycleRepository, {
   type ExportJob,
@@ -63,6 +63,12 @@ export default function PayrollCyclePage() {
   const [exportScope, setExportScope] = useState<string>("all");
   const [siteNames, setSiteNames] = useState<Record<string, string>>({});
   const [importResult, setImportResult] = useState<{ errors: { row: number; code: string }[]; valid: number; saved: boolean; rows: Record<string, unknown>[]; fileName: string } | null>(null);
+
+  // demo run 2026-11-12: payslips published while "employee self-service" is off reach nobody - say so
+  const [selfService, setSelfService] = useState(true);
+  useEffect(() => {
+    void PayrollCycleRepository.getSettings().then((r) => { if (r.data) setSelfService(Boolean(r.data.employee_self_service)); });
+  }, []);
 
   const load = useCallback(async () => {
     const [cycle, comps, validation] = await Promise.all([
@@ -236,6 +242,7 @@ export default function PayrollCyclePage() {
         <Button variant="ghost" size="sm" onClick={() => navigate("/payroll")}>{t("nav.back")}</Button>
         <StatusBadge status={STATUS_BADGE[cycle.status]}>{t(`status.${cycle.status}`)}{cycle.cycle_version > 0 ? ` · v${cycle.cycle_version}` : ""}</StatusBadge>
         {cycle.published_version ? <StatusBadge status="active">{t("cycle.published", { version: cycle.published_version })}</StatusBadge> : null}
+        {cycle.policy_snapshot?.statutoryMeta?.mode === "custom" ? <StatusBadge status="pending">{t("cycle.customRules")}</StatusBadge> : null}
         {editable && can.edit ? <Button size="sm" variant="ghost" loading={busy === "recalc"} onClick={() => run("recalc", () => PayrollCycleRepository.recalculate(cycleId, cycle.row_version))}>{t("cycle.recalculate")}</Button> : null}
         {actions.filter((a) => a.show).map((a) => (
           <Button key={a.key} size="sm" variant={a.variant ?? "primary"} onClick={() => { setAction(a.key); setReason(""); setAcknowledge(false); }}>{t(`actions.${a.key}`)}</Button>
@@ -246,6 +253,9 @@ export default function PayrollCyclePage() {
           </Button>
         ) : null}
       </div>
+      {cycle.status === "locked" && can.publish && !selfService ? (
+        <HintText small>{t("cycle.selfServiceOff")} <Link to="/payroll/settings">{t("cycle.openSettings")}</Link></HintText>
+      ) : null}
       {cycle.reopen_reason && cycle.status === "reopened" ? <HintText small>{t("cycle.reopenedBecause", { reason: cycle.reopen_reason })}</HintText> : null}
       <ErrorText>{error}</ErrorText>
       {notice ? <SuccessText>{notice}</SuccessText> : null}
@@ -418,7 +428,7 @@ export default function PayrollCyclePage() {
                         <span style={{ color: "var(--text-secondary)" }}> · {t(`sources.${l.source}`)}{l.calc_type === "percent" ? ` · ${l.percent}%` : ""}{l.notes ? ` · ${l.notes}` : ""}</span>
                       </span>
                       <strong>{money(l.amount)}</strong>
-                      {editable && can.enterVariables && !["fixed", "installment", "statutory"].includes(l.source) ? (
+                      {editable && can.enterVariables && !["fixed", "installment", "statutory", "penalty", "incentive"].includes(l.source) ? (
                         <>
                           <Button size="xs" variant="ghost" onClick={() => setLine({ id: l.id, componentId: l.component_id ?? "", amount: String(l.raw_amount), notes: l.notes ?? "", version: l.row_version })}>{t("lines.edit")}</Button>
                           <Button size="xs" variant="danger" onClick={() => run(`del-${l.id}`, () => PayrollCycleRepository.deleteLine(l.id, l.row_version))}>{t("lines.delete")}</Button>

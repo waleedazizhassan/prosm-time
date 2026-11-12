@@ -41,7 +41,7 @@
     "travel": "差旅",
     "other": "其他",
     "status": "状态",
-    "overtimeAmount": "加班金额",
+    "overtimeAmount": "加班与迟到金额",
     "total": "合计"
   },
   "status": {
@@ -64,7 +64,8 @@
     "reviewNotesLabel": "审核备注（可选）",
     "daySessionsLine": "当天 {{count}} 个班次 · 工作 {{hours}} 小时 {{minutes}} 分钟",
     "reviewNotesLine": "审核人备注：{{notes}}",
-    "overtimeValueLine": "金额 {{amount}}"
+    "overtimeValueLine": "金额 {{amount}}",
+    "lateLine": "迟到 {{minutes}} 分钟扣款：{{amount}}"
   },
   "totals": {
     "title": "本期合计"
@@ -119,7 +120,8 @@
       "travel": "差旅",
       "other": "其他",
       "overtimeHour": "加班一小时",
-      "extraDay": "额外工作日"
+      "extraDay": "额外工作日",
+      "lateMinute": "迟到每分钟（扣款）"
     }
   },
   "pdf": {

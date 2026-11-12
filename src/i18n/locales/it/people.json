@@ -84,13 +84,14 @@
     "announcements.publish": "Pubblicare annunci",
     "announcements.manage": "Gestire tutti gli annunci",
     "announcements.view_reads": "Vedere chi ha letto gli annunci",
-    "departments.manage": "Gestire i reparti"
+    "departments.manage": "Gestire i reparti",
+    "hr.manage": "Gestire i fascicoli del personale"
   },
   "invite": {
     "actionLabel": "Invita dipendente",
     "title": "Invita un dipendente",
     "emailLabel": "Email",
-    "fullNameLabel": "Nome completo",
+    "fullNameLabel": "Nome breve",
     "roleLabel": "Ruolo",
     "role": {
       "manager": "Manager / Responsabile di sede",
@@ -107,10 +108,14 @@
     "copyLinkAction": "Copia link",
     "linkCopied": "Link copiato",
     "codeLabel": "Codice di verifica",
-    "close": "Chiudi"
+    "close": "Chiudi",
+    "legalNameLabel": "Nome legale completo",
+    "legalNameHint": "Come nei documenti ufficiali: usato in buste paga e report.",
+    "shortNameHint": "Il nome mostrato nell'app.",
+    "legalNameNotSaved": "L'invito è stato inviato, ma il nome legale non è stato salvato. Aggiungilo dal fascicolo dell'utente."
   },
   "detail": {
-    "title": "Membro",
+    "title": "Fascicolo dell'utente",
     "backToList": "Torna alle persone",
     "loadError": "Impossibile caricare questo membro.",
     "permissionsTitle": "Autorizzazioni",
@@ -313,5 +318,145 @@
     "grantsLeft": "Permessi diretti ancora attivi:",
     "granted": "concesso",
     "revoked": "revocato"
+  },
+  "profile": {
+    "tabsLabel": "Sezioni del fascicolo",
+    "myTitle": "Il mio fascicolo",
+    "code": "Matricola {{code}}",
+    "since": "Dal {{date}}",
+    "completion": "Fascicolo completo al {{percent}}%",
+    "completionTitle": "Documenti obbligatori presenti",
+    "missing_one": "Manca un documento",
+    "missing_other": "Mancano {{count}} documenti",
+    "loadError": "Impossibile caricare i dati.",
+    "saveError": "Impossibile salvare.",
+    "uploadError": "Impossibile caricare il file.",
+    "save": "Salva",
+    "saved": "Salvato.",
+    "edit": "Modifica",
+    "noJobTitle": "Nessuna mansione",
+    "noJobTitlesYet": "Aggiungi prima le mansioni in Impostazioni",
+    "status": {
+      "active": "Attivo",
+      "suspended": "Sospeso",
+      "ended": "Cessato",
+      "deactivated": "Accesso bloccato"
+    },
+    "tabs": {
+      "data": "Dati",
+      "contract": "Contratto",
+      "documents": "Documenti",
+      "payroll": "Paga",
+      "attendance": "Presenze",
+      "leave": "Ferie",
+      "penalties": "Sanzioni e incentivi",
+      "history": "Storico",
+      "account": "Account e permessi"
+    },
+    "fields": {
+      "jobTitle": "Mansione",
+      "status": "Stato",
+      "phone": "Cellulare",
+      "emergency_contact_name": "Contatto di emergenza",
+      "emergency_contact_phone": "Telefono di emergenza",
+      "national_id": "N. documento",
+      "birth_date": "Data di nascita",
+      "address": "Indirizzo",
+      "legalName": "Nome legale completo"
+    },
+    "contracts": {
+      "empty": "Nessun contratto registrato.",
+      "add": "Aggiungi contratto",
+      "editTitle": "Modifica contratto",
+      "type": "Tipo di contratto",
+      "start": "Inizio",
+      "end": "Fine",
+      "endOptional": "Fine (facoltativa)",
+      "probation": "Fine periodo di prova (facoltativa)",
+      "file": "Contratto firmato (PDF o foto)",
+      "notes": "Note",
+      "noEnd": "Tempo indeterminato",
+      "probationUntil": "Prova fino al {{date}}",
+      "view": "Vedi",
+      "types": {
+        "fixed_term": "Tempo determinato",
+        "open_ended": "Tempo indeterminato",
+        "temporary": "Temporaneo"
+      },
+      "state": {
+        "current": "In corso",
+        "ending": "In scadenza",
+        "upcoming": "Inizia dopo",
+        "ended": "Concluso"
+      }
+    },
+    "attendance": {
+      "day": "Giorno",
+      "site": "Sede",
+      "in": "Entrata",
+      "out": "Uscita",
+      "worked": "Ore",
+      "absent": "Assente",
+      "late": "{{minutes}} min di ritardo",
+      "daysWorked": "Giorni lavorati (ultimi {{days}})",
+      "hours": "Ore totali",
+      "lateDays": "Giorni di ritardo",
+      "absentDays": "Giorni di assenza",
+      "empty": "Nessuna presenza nel periodo."
+    },
+    "leave": {
+      "empty": "Nessuna ferie nell’ultimo anno.",
+      "days_one": "1 giorno",
+      "days_other": "{{count}} giorni",
+      "status": {
+        "pending": "In attesa",
+        "approved": "Approvate",
+        "rejected": "Rifiutate",
+        "cancelled": "Annullate"
+      },
+      "days_many": "{{count}} giorni"
+    },
+    "history": {
+      "empty": "Ancora nessuna modifica.",
+      "more": "Mostra precedenti"
+    },
+    "missing_many": "Mancano {{count}} documenti"
+  },
+  "bundles": {
+    "hint": "Concedi un ruolo intero con un clic o permessi singoli dall'elenco. Ciò che concede un ruolo appare subito concesso e non viene mai concesso due volte.",
+    "grant": "Concedi",
+    "revoke": "Revoca",
+    "granted": "Concesso per intero",
+    "partial": "{{held}} di {{total}} concessi",
+    "grantNote": "Si concede solo ciò che la persona non ha ancora.",
+    "revokeNote": "Si revoca solo ciò che è stato dato oltre il ruolo; quelli del ruolo restano.",
+    "owner": {
+      "title": "Autorità del titolare",
+      "hint": "L'autorità piena del titolare, per suo conto"
+    },
+    "finance": {
+      "title": "Direttore finanziario",
+      "hint": "Paghe, indennità, costi del lavoro e report"
+    },
+    "hr": {
+      "title": "Direttore del personale",
+      "hint": "Fascicoli, ferie, reparti e comunicazioni"
+    },
+    "attendance": {
+      "title": "Solo presenze",
+      "hint": "Registrazioni, correzioni, eccezioni e fogli ore"
+    },
+    "sites": {
+      "title": "Gestione sedi",
+      "hint": "Sedi, turni, calendario e manodopera esterna"
+    },
+    "reports": {
+      "title": "Report",
+      "hint": "Cruscotto, report e registro azioni"
+    },
+    "media": {
+      "title": "Centro media",
+      "hint": "Pubblicare e gestire comunicazioni"
+    }
   }
 }

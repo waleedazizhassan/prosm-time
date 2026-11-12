@@ -13,7 +13,7 @@ const PARTS: { key: string; color: string; pick: (entry: AllowanceEntry) => numb
   { key: "meal", color: "#f59e0b", pick: (e) => e.mealAllowance },
   { key: "housing", color: "#a855f7", pick: (e) => e.housingAllowance },
   { key: "other", color: "#94a3b8", pick: (e) => e.otherAllowance },
-  { key: "overtimeAmount", color: "#ef4444", pick: (e) => e.overtimeAmount + e.extraDaysAmount },
+  { key: "overtimeAmount", color: "#ef4444", pick: (e) => e.overtimeAmount + e.extraDaysAmount - e.lateAmount },
 ];
 
 export default function AllowanceSummary({ entries }: { entries: AllowanceEntry[] }) {

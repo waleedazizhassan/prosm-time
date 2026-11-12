@@ -283,11 +283,40 @@ export default function localizeNotification(notification: AppNotification, t: T
       if (data.planChanged) parts.push(typeof data.plan === "string" ? tn("licenseChanged.planTo", { plan: data.plan.charAt(0).toUpperCase() + data.plan.slice(1) }) : tn("licenseChanged.plan"));
       return { title: t("shell:notifications.licenseChanged.title"), body: t("shell:notifications.licenseChanged.body", { changes: parts.join(" · ") }) };
     }
-    case "daily_digest":
+    // 2026-11-11 HR suite feature 2: documents - to the person ("self") or to personnel managers ("hr")
+    case "document_missing":
+    case "document_expiring":
+    case "document_expired":
+    case "document_rejected":
+    case "document_reminder":
+    case "document_uploaded":
+    case "document_clock_in": {
+      const key = ({ document_missing: "missing", document_expiring: "expiring", document_expired: "expired", document_rejected: "rejected", document_reminder: "reminder", document_uploaded: "uploaded", document_clock_in: "clockIn" } as Record<string, string>)[notification.type];
+      const who = data.kind === "hr" ? "Hr" : "Self";
+      const vars = { document: String(data.documentName ?? ""), name: String(data.employeeName ?? ""), count: Number(data.days ?? data.count ?? 0), reason: String(data.reason ?? "") };
+      return { title: t(`shell:notifications.documents.${key}Title${who}`, vars), body: t(`shell:notifications.documents.${key}Body${who}`, vars) };
+    }
+    // 2026-11-11 HR suite feature 1: penalties and incentives
+    case "penalty_review":
+    case "penalty_response":
+    case "penalty_decided":
+    case "penalty_appeal":
+    case "penalty_appeal_decided":
+    case "incentive_review":
+    case "incentive_granted": {
+      const key = penaltyNotificationKey(notification.type, data);
+      const vars = { name: String(data.employeeName ?? ""), violation: String(data.violationName ?? ""), date: String(data.date ?? ""),
+                     due: typeof data.due === "string" ? data.due.slice(0, 10) : "", reason: String(data.reason ?? "") };
+      return { title: t(`shell:notifications.penalties.${key}Title`, vars), body: t(`shell:notifications.penalties.${key}Body`, vars) };
+    }
+    case "daily_digest": {
+      const docs = Number(data.documentsExpired ?? 0) + Number(data.documentsMissing ?? 0) > 0
+        ? ` ${t("shell:notifications.dailyDigest.documents", { expired: Number(data.documentsExpired ?? 0), missing: Number(data.documentsMissing ?? 0) })}` : "";
       return {
         title: t("shell:notifications.dailyDigest.title"),
-        body: t("shell:notifications.dailyDigest.body", { present: Number(data.present ?? 0), noShows: Number(data.noShows ?? 0), leave: Number(data.leave ?? 0), exceptions: Number(data.exceptions ?? 0), open: Number(data.open ?? 0) }),
+        body: t("shell:notifications.dailyDigest.body", { present: Number(data.present ?? 0), absent: Number(data.absent ?? data.noShows ?? 0), late: Number(data.late ?? 0), onLeave: Number(data.onLeave ?? 0), leave: Number(data.leave ?? 0), exceptions: Number(data.exceptions ?? 0), open: Number(data.open ?? 0) }) + docs,
       };
+    }
     case "clock_in_reminder":
       return { title: t("shell:notifications.clockInReminder.title"), body: t("shell:notifications.clockInReminder.body", { time: String(data.time ?? ""), site: String(data.siteName ?? "") }) };
     case "clock_out_reminder":
@@ -300,6 +329,11 @@ export default function localizeNotification(notification: AppNotification, t: T
     }
     case "location_plausibility_flag": {
       const name = typeof data.employeeName === "string" ? data.employeeName : null;
+      // owner 2026-11-11: a fake (simulated) location at clock-in/out or during the shift
+      if (name && (data.kind === "mock_location" || data.kind === "mock_presence")) {
+        const which = data.kind === "mock_presence" ? "presence" : data.eventType === "clock_out" ? "clock_out" : "clock_in";
+        return { title: t("shell:notifications.mockLocation.title"), body: t(`shell:notifications.mockLocation.${which}`, { name }) };
+      }
       const speed = typeof data.impliedSpeedKmh === "number" ? data.impliedSpeedKmh : null;
       if (!name || speed === null) break;
       return { title: t("shell:notifications.locationPlausibilityFlag.title"), body: t("shell:notifications.locationPlausibilityFlag.body", { name, speed }) };
@@ -307,4 +341,24 @@ export default function localizeNotification(notification: AppNotification, t: T
   }
 
   return { title: notification.title, body: notification.body };
+}
+
+// 2026-11-11 HR suite feature 1: which text a penalty or incentive notification uses
+export function penaltyNotificationKey(type: string, data: Record<string, unknown>): string {
+  switch (type) {
+    case "penalty_review":
+      return data.step === "investigation" ? "investigation" : data.step === "replied" ? "replied" : data.step === "no_reply" ? "noReply" : "review";
+    case "penalty_response":
+      return "response";
+    case "penalty_decided":
+      return data.result === "rejected" ? "rejected" : "decided";
+    case "penalty_appeal":
+      return "appeal";
+    case "penalty_appeal_decided":
+      return data.result === "cancelled" ? "cancelled" : "appealConfirmed";
+    case "incentive_review":
+      return "incentiveReview";
+    default:
+      return "incentiveGranted";
+  }
 }

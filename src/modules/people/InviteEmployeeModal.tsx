@@ -40,6 +40,8 @@ export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: Invi
 
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
+  // owner 2026-11-12: the full legal name (for payslips, reports and official papers); the short name is the account's
+  const [legalName, setLegalName] = useState("");
   const [roleKey, setRoleKey] = useState<InviteInput["roleKey"]>("employee");
   // 2026-11-09 Media Center: the department is chosen when the person is added
   const [departmentId, setDepartmentId] = useState("");
@@ -55,6 +57,7 @@ export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: Invi
   const reset = () => {
     setEmail("");
     setFullName("");
+    setLegalName("");
     setRoleKey("employee");
     setError("");
     setResult(null);
@@ -81,6 +84,10 @@ export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: Invi
       return;
     }
 
+    if (inviteResult.data?.userId && legalName.trim()) {
+      const legal = await EmployeeRepository.setLegalName(inviteResult.data.userId, legalName.trim());
+      if (!legal.success) setError(humanizeBackendError(legal.message, t) ?? t("invite.legalNameNotSaved"));
+    }
     setResult(inviteResult.data);
   };
 
@@ -115,14 +122,17 @@ export default function InviteEmployeeModal({ isOpen, onClose, onInvited }: Invi
           <Button variant="ghost" onClick={handleClose} disabled={submitting}>
             {t("common:actions.cancel")}
           </Button>
-          <Button onClick={handleSubmit} loading={submitting}>
+          <Button onClick={handleSubmit} loading={submitting} disabled={!legalName.trim() || !fullName.trim() || !email.trim()}>
             {t("invite.confirm")}
           </Button>
         </>
       }
     >
       <Input label={t("invite.emailLabel")} name="inviteEmail" type="email" value={email} onChange={(event) => setEmail(event.target.value)} required disabled={submitting} />
+      <Input label={t("invite.legalNameLabel")} name="inviteLegalName" value={legalName} onChange={(event) => setLegalName(event.target.value)} required disabled={submitting} />
+      <HintText small>{t("invite.legalNameHint")}</HintText>
       <Input label={t("invite.fullNameLabel")} name="inviteFullName" value={fullName} onChange={(event) => setFullName(event.target.value)} required disabled={submitting} />
+      <HintText small>{t("invite.shortNameHint")}</HintText>
       <Select
         label={t("invite.roleLabel")}
         name="inviteRole"

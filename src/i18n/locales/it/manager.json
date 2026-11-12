@@ -209,5 +209,12 @@
       "longer_than_24_hours": "più di 24 ore",
       "overlaps_existing_attendance": "si sovrappone a presenze registrate"
     }
+  },
+  "exceptionStatus": {
+    "title": "{{name}} ha lasciato l’area di lavoro",
+    "pendingReason": "Non ha ancora inviato il motivo. Quando lo farà riceverai un avviso e lo troverai qui da rivedere.",
+    "pendingReview": "Ha inviato il motivo: è nell’elenco da rivedere qui sotto.",
+    "resolved": "Questa eccezione è già stata esaminata.",
+    "notFound": "Questa eccezione non esiste o non è di tua competenza."
   }
 }

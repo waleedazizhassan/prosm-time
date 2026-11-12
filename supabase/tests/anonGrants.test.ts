@@ -5,7 +5,11 @@ import { describe, expect, it } from "vitest";
 import { buildDatabase } from "./support/db";
 
 // name(argument types) -> why an anonymous caller needs it
-const ANON_ALLOWED: Record<string, string> = {};
+const ANON_ALLOWED: Record<string, string> = {
+  // 2026-11-11 (live): the phone's tracking service sends locations with its own tracking key when the
+  // app is closed and no session is available; the key is checked inside the function
+  "record_prosm_time_location_by_key(text,double precision,double precision,double precision,timestamp with time zone,boolean)": "tracking service with a device key",
+};
 
 describe("anon function grants", () => {
   it("no public function is executable by anon outside the allow-list", async () => {

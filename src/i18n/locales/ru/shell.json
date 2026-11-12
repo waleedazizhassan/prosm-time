@@ -214,7 +214,8 @@
     },
     "dailyDigest": {
       "title": "Вчера коротко",
-      "body": "Работали: {{present}}, пропустили смену: {{noShows}}. Ожидают: отпуска - {{leave}}, исключения - {{exceptions}}. Сейчас на смене: {{open}}."
+      "body": "Работали: {{present}}, опоздали: {{late}}, отсутствовали: {{absent}}, в отпуске: {{onLeave}}. Ждут вас: отпуска {{leave}}, исключения {{exceptions}}. Сейчас на месте: {{open}}.",
+      "documents": "Документы: истекло {{expired}}, нет {{missing}}."
     },
     "licenseChanged": {
       "title": "Ваша лицензия изменена",
@@ -257,6 +258,68 @@
       "clock_out": "Пожалуйста, отметьте уход.",
       "call_me": "Пожалуйста, позвоните мне.",
       "attention": "Пожалуйста, откройте приложение."
+    },
+    "mockLocation": {
+      "title": "Поддельное местоположение",
+      "clock_in": "{{name}} отметил приход с поддельным местоположением.",
+      "clock_out": "{{name}} отметил уход с поддельным местоположением.",
+      "presence": "{{name}} использовал поддельное местоположение во время смены - эти точки не записаны."
+    },
+    "documents": {
+      "missingTitleSelf": "Нужен документ",
+      "missingBodySelf": "В вашем деле нужен документ: {{document}}. Сфотографируйте его в приложении.",
+      "missingTitleHr": "Документы нового сотрудника",
+      "missingBodyHr": "{{name}}: нужно документов — {{count}}.",
+      "expiringTitleSelf": "{{document}} скоро истекает",
+      "expiringBodySelf": "До окончания {{document}} осталось дней: {{count}}. Обновите и загрузите новый.",
+      "expiringTitleHr": "Документ скоро истекает",
+      "expiringBodyHr": "{{name}}: {{document}} истекает через дней: {{count}}.",
+      "expiredTitleSelf": "{{document}} истекает сегодня",
+      "expiredBodySelf": "Загрузите обновлённый документ ({{document}}) в своё дело.",
+      "expiredTitleHr": "Документ истекает сегодня",
+      "expiredBodyHr": "{{name}}: {{document}} истекает сегодня.",
+      "rejectedTitleSelf": "Документ не принят",
+      "rejectedBodySelf": "{{document}}: {{reason}}. Сфотографируйте заново и отправьте.",
+      "rejectedTitleHr": "Документ не принят",
+      "rejectedBodyHr": "{{document}}: {{reason}}",
+      "reminderTitleSelf": "Напоминание о документе",
+      "reminderBodySelf": "Пожалуйста, загрузите {{document}} в своё дело.",
+      "reminderTitleHr": "Напоминание о документе",
+      "reminderBodyHr": "{{name}}: {{document}}",
+      "uploadedTitleHr": "Документ на проверку",
+      "uploadedBodyHr": "{{name}} загрузил(а) {{document}}.",
+      "uploadedTitleSelf": "Документ загружен",
+      "uploadedBodySelf": "{{document}}",
+      "clockInTitleHr": "Приход с истёкшим документом",
+      "clockInBodyHr": "{{name}} отметил(а) приход, хотя {{document}} истёк.",
+      "clockInTitleSelf": "Документ истёк",
+      "clockInBodySelf": "{{document}} истёк."
+    },
+    "penalties": {
+      "reviewTitle": "Взыскание на рассмотрение",
+      "reviewBody": "{{name}}: {{violation}} ({{date}})",
+      "investigationTitle": "Нужно расследование",
+      "investigationBody": "{{name}}: {{violation}} ({{date}})",
+      "repliedTitle": "Сотрудник ответил",
+      "repliedBody": "{{name}}: {{violation}} — готово к утверждению",
+      "noReplyTitle": "Нет ответа в срок",
+      "noReplyBody": "{{name}}: {{violation}} — готово к утверждению",
+      "responseTitle": "Требуется ваш ответ",
+      "responseBody": "{{violation}} ({{date}}). Ответьте до {{due}}.",
+      "decidedTitle": "Решение о взыскании",
+      "decidedBody": "{{violation}} ({{date}}). Откройте, чтобы подтвердить ознакомление или обжаловать.",
+      "rejectedTitle": "Без взыскания",
+      "rejectedBody": "{{violation}} ({{date}}): взыскание не применено.",
+      "appealTitle": "Жалоба",
+      "appealBody": "{{name}} обжаловал(а): {{violation}} ({{date}})",
+      "appealConfirmedTitle": "По вашей жалобе принято решение",
+      "appealConfirmedBody": "{{violation}}: взыскание оставлено.",
+      "cancelledTitle": "Взыскание отменено",
+      "cancelledBody": "{{violation}} ({{date}}) отменено.",
+      "incentiveReviewTitle": "Поощрение на рассмотрение",
+      "incentiveReviewBody": "{{name}}: {{reason}}",
+      "incentiveGrantedTitle": "Отлично!",
+      "incentiveGrantedBody": "Вы получили поощрение: {{reason}}"
     }
   },
   "items": {
@@ -286,7 +349,10 @@
     "payslips": "Мои листки",
     "externalPay": "Оплата внешних",
     "announcements": "Доска объявлений",
-    "exceptions": "Мои исключения"
+    "exceptions": "Мои исключения",
+    "myProfile": "Моё дело",
+    "documents": "Документы",
+    "penalties": "Взыскания и поощрения"
   },
   "sosOverlay": {
     "title": "Сигнал SOS/тревога",
@@ -403,7 +469,10 @@
     "payroll": "Расчётные циклы, карточки, три отчёта и листки - с раздельными правами и сохранёнными версиями.",
     "payslips": "Ваши опубликованные листки - посмотрите или запросите по почте.",
     "externalPay": "Ставки за день, неделю, месяц или год, расчёты, правила и индивидуальные корректировки - утверждаются и фиксируются, отдельно от зарплаты.",
-    "announcements": "Объявления и официальные заявления для вас; подтвердите те, что этого требуют."
+    "announcements": "Объявления и официальные заявления для вас; подтвердите те, что этого требуют.",
+    "myProfile": "Ваши данные, документы, взыскания и посещаемость.",
+    "documents": "Документы всех сотрудников и сроки их действия.",
+    "penalties": "Нарушения, утверждения, жалобы и поощрения."
   },
   "backgroundDisclosure": {
     "title": "Местоположение во время смены",
@@ -492,5 +561,9 @@
     "send": "Отправить сигнал",
     "sent": "Сигнал отправлен: {{name}}.",
     "failed": "Сигнал не отправлен. Попробуйте ещё раз."
+  },
+  "shiftTracking": {
+    "resumeTitle": "Продолжите смену",
+    "resumeBody": "Телефон перезагрузился во время смены. Откройте PROSM Time, чтобы отслеживание возобновилось."
   }
 }

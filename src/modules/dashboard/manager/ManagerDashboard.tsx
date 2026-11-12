@@ -25,6 +25,7 @@ import PeopleByRole from "../../people/PeopleByRole";
 import ApprovalsQueue from "./ApprovalsQueue";
 import ExternalWorkersWidget from "./ExternalWorkersWidget";
 import InsightsWidget from "./InsightsWidget";
+import DocumentsWidget from "./DocumentsWidget";
 import SitesMap from "./SitesMap";
 import styles from "./ManagerDashboard.module.css";
 import { auditLabel, DEFAULT_HIDDEN, DEFAULT_ORDER, iso, mergeOrder, periodRange, trend, type Period, type WidgetId } from "./dashboardLogic";
@@ -251,6 +252,7 @@ export default function ManagerDashboard() {
     if (id === "cost") return Boolean(data?.canViewCost);
     if (id === "audit") return Boolean(data?.canViewAudit);
     if (id === "external") return Boolean(data?.canViewExternal);
+    if (id === "documents") return allows("documents") && (isOwner || hasPermission("hr.manage"));
     return true;
   };
 
@@ -365,6 +367,12 @@ export default function ManagerDashboard() {
         return (
           <section key={id} id="dash-external" className={`${styles.widget} ${styles.span12}`} style={{ order: order.indexOf(id) }}>
             {data ? <ExternalWorkersWidget sites={data.sites} refreshKey={data.asOf} /> : <div className={styles.skeleton} style={{ height: 120 }} />}
+          </section>
+        );
+      case "documents":
+        return (
+          <section key={id} className={`${styles.widget} ${styles.span4}`} style={{ order: order.indexOf(id) }}>
+            <DocumentsWidget refreshKey={data?.asOf ?? ""} />
           </section>
         );
       case "approvals":
@@ -516,7 +524,8 @@ export default function ManagerDashboard() {
 
       <div className={styles.filters}>
         <div className={styles.segmented} role="group" aria-label={t("manager.scopeLabel")}>
-          {((isOwner ? ["org", "mine", "me"] : ["mine", "me"]) as DashboardScope[]).map((value) => (
+          {/* owner 2026-11-10: "my sites" means nothing to the owner (every site is theirs - it showed zeros) */}
+          {((isOwner ? ["org", "me"] : ["mine", "me"]) as DashboardScope[]).map((value) => (
             <button key={value} type="button" aria-pressed={scope === value} onClick={() => setScope(value)}>
               {t(`manager.scope.${value}`)}
             </button>
@@ -777,7 +786,7 @@ function Kpi({ icon: Icon, label, value, unit, hint, title, onClick, trend: chan
         <span className={styles.kpiIcon} aria-hidden="true"><Icon size={14} /></span>
         <span className={styles.kpiLabel}>{label}</span>
       </span>
-      <span className={styles.kpiValue}>{value}{unit ? <small className={styles.kpiUnit}> {unit}</small> : null}</span>
+      <span className={`${styles.kpiValue} ${String(value).length > 9 ? styles.kpiValueXLong : String(value).length > 5 ? styles.kpiValueLong : ""}`}>{value}{unit ? <small className={styles.kpiUnit}> {unit}</small> : null}</span>
       <span className={styles.kpiHint}>{hint}</span>
       <span className={styles.kpiFoot}>
         {progress !== undefined ? <span className={styles.bar} style={{ flex: 1 }}><span style={{ width: `${progress}%` }} /></span> : null}

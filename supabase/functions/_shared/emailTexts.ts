@@ -193,7 +193,9 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
           "payroll": "المرتبات (التأمينات والضرائب والسلف والمفردات)",
           "integrations": "الربط والـ API والحضور من أجهزة البصمة",
           "delegation": "التفويض الكامل والتفويض لفترة",
-          "retention": "التحكم في مدة الاحتفاظ بالبيانات"
+          "retention": "التحكم في مدة الاحتفاظ بالبيانات",
+          "documents": "مستندات الموظفين وتواريخ انتهائها",
+          "penalties": "لائحة الجزاءات المتدرجة والحوافز"
         }
       }
     },
@@ -390,7 +392,9 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
           "payroll": "Lohn (Versicherung, Steuer, Darlehen, Abrechnungen)",
           "integrations": "Integrationen, API und Anwesenheit aus Fingerabdruckgeräten",
           "delegation": "Volle und befristete Vertretung",
-          "retention": "Steuerung der Datenaufbewahrung"
+          "retention": "Steuerung der Datenaufbewahrung",
+          "documents": "Mitarbeiterdokumente und Ablaufdaten",
+          "penalties": "Gestufte Sanktionsordnung und Prämien"
         }
       }
     },
@@ -587,7 +591,9 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
           "payroll": "Payroll (insurance, tax, loans, payslips)",
           "integrations": "Integrations, API and attendance from fingerprint devices",
           "delegation": "Full and time-limited delegation",
-          "retention": "Data retention control"
+          "retention": "Data retention control",
+          "documents": "Employee documents and their expiry",
+          "penalties": "Progressive penalties bylaw and incentives"
         }
       }
     },
@@ -788,7 +794,9 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
           "payroll": "Nómina (seguros, impuestos, préstamos, recibos)",
           "integrations": "Integraciones, API y asistencia de lectores de huella",
           "delegation": "Delegación completa y temporal",
-          "retention": "Control de retención de datos"
+          "retention": "Control de retención de datos",
+          "documents": "Documentos del personal y su vencimiento",
+          "penalties": "Reglamento de sanciones progresivas e incentivos"
         }
       }
     },
@@ -989,7 +997,9 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
           "payroll": "Paie (cotisations, impôt, prêts, bulletins)",
           "integrations": "Intégrations, API et pointage des badgeuses",
           "delegation": "Délégation complète et temporaire",
-          "retention": "Contrôle de la conservation des données"
+          "retention": "Contrôle de la conservation des données",
+          "documents": "Documents des salariés et leur expiration",
+          "penalties": "Règlement de sanctions progressives et primes"
         }
       }
     },
@@ -1190,7 +1200,9 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
           "payroll": "Paghe (contributi, imposte, prestiti, buste)",
           "integrations": "Integrazioni, API e presenze da lettori biometrici",
           "delegation": "Delega completa e a tempo",
-          "retention": "Controllo della conservazione dei dati"
+          "retention": "Controllo della conservazione dei dati",
+          "documents": "Documenti dei dipendenti e scadenze",
+          "penalties": "Regolamento sanzioni progressive e incentivi"
         }
       }
     },
@@ -1391,7 +1403,9 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
           "payroll": "Folha (encargos, impostos, empréstimos, holerites)",
           "integrations": "Integrações, API e ponto de leitores biométricos",
           "delegation": "Delegação completa e temporária",
-          "retention": "Controle de retenção de dados"
+          "retention": "Controle de retenção de dados",
+          "documents": "Documentos dos funcionários e validade",
+          "penalties": "Regulamento de sanções progressivas e incentivos"
         }
       }
     },
@@ -1596,7 +1610,9 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
           "payroll": "Зарплата (взносы, налог, займы, листки)",
           "integrations": "Интеграции, API и отметки с терминалов",
           "delegation": "Полное и временное делегирование",
-          "retention": "Управление сроками хранения данных"
+          "retention": "Управление сроками хранения данных",
+          "documents": "Документы сотрудников и сроки действия",
+          "penalties": "Положение о взысканиях и поощрения"
         }
       }
     },
@@ -1789,7 +1805,9 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
           "payroll": "工资（社保、税、借款、工资单）",
           "integrations": "集成、API 与指纹设备考勤",
           "delegation": "完全及限期授权",
-          "retention": "数据保留控制"
+          "retention": "数据保留控制",
+          "documents": "员工证件及到期提醒",
+          "penalties": "阶梯处罚规章与奖励"
         }
       }
     },

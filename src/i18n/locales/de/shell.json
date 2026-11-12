@@ -214,7 +214,8 @@
     },
     "dailyDigest": {
       "title": "Gestern im Überblick",
-      "body": "{{present}} haben gearbeitet, {{noShows}} haben eine Schicht verpasst. Offen: {{leave}} Urlaub, {{exceptions}} Ausnahmen. Jetzt eingestempelt: {{open}}."
+      "body": "{{present}} gearbeitet, {{late}} verspätet, {{absent}} abwesend, {{onLeave}} im Urlaub. Wartet auf dich: {{leave}} Urlaub, {{exceptions}} Ausnahmen. Jetzt eingestempelt: {{open}}.",
+      "documents": "Dokumente: {{expired}} abgelaufen, {{missing}} fehlen."
     },
     "licenseChanged": {
       "title": "Ihre Lizenz wurde geändert",
@@ -257,6 +258,68 @@
       "clock_out": "Bitte ausstempeln.",
       "call_me": "Bitte ruf mich an.",
       "attention": "Bitte schau in die App."
+    },
+    "mockLocation": {
+      "title": "Gefälschter Standort",
+      "clock_in": "{{name}} hat mit einem gefälschten Standort eingestempelt.",
+      "clock_out": "{{name}} hat mit einem gefälschten Standort ausgestempelt.",
+      "presence": "{{name}} hat während der Schicht einen gefälschten Standort verwendet - diese Standorte wurden nicht erfasst."
+    },
+    "documents": {
+      "missingTitleSelf": "Ein Dokument wird benötigt",
+      "missingBodySelf": "{{document}} wird in Ihrer Akte benötigt. Fotografieren Sie es in der App.",
+      "missingTitleHr": "Dokumente für neue Mitarbeitende",
+      "missingBodyHr": "{{name}} benötigt {{count}} Dokument(e) in der Akte.",
+      "expiringTitleSelf": "{{document}} läuft bald ab",
+      "expiringBodySelf": "Noch {{count}} Tag(e) für {{document}}. Erneuern und neu hochladen.",
+      "expiringTitleHr": "Ein Dokument läuft bald ab",
+      "expiringBodyHr": "{{name}}: {{document}} läuft in {{count}} Tag(en) ab.",
+      "expiredTitleSelf": "{{document}} läuft heute ab",
+      "expiredBodySelf": "Laden Sie das erneuerte {{document}} in Ihrer Akte hoch.",
+      "expiredTitleHr": "Ein Dokument läuft heute ab",
+      "expiredBodyHr": "{{name}}: {{document}} läuft heute ab.",
+      "rejectedTitleSelf": "Dokument nicht angenommen",
+      "rejectedBodySelf": "{{document}}: {{reason}}. Bitte erneut fotografieren und senden.",
+      "rejectedTitleHr": "Dokument nicht angenommen",
+      "rejectedBodyHr": "{{document}}: {{reason}}",
+      "reminderTitleSelf": "Dokumenterinnerung",
+      "reminderBodySelf": "Bitte laden Sie {{document}} in Ihrer Akte hoch.",
+      "reminderTitleHr": "Dokumenterinnerung",
+      "reminderBodyHr": "{{name}}: {{document}}",
+      "uploadedTitleHr": "Ein Dokument zu prüfen",
+      "uploadedBodyHr": "{{name}} hat {{document}} hochgeladen.",
+      "uploadedTitleSelf": "Dokument hochgeladen",
+      "uploadedBodySelf": "{{document}}",
+      "clockInTitleHr": "Eingestempelt mit abgelaufenem Dokument",
+      "clockInBodyHr": "{{name}} hat eingestempelt, obwohl {{document}} abgelaufen ist.",
+      "clockInTitleSelf": "Abgelaufenes Dokument",
+      "clockInBodySelf": "{{document}} ist abgelaufen."
+    },
+    "penalties": {
+      "reviewTitle": "Eine Sanktion zur Prüfung",
+      "reviewBody": "{{name}}: {{violation}} ({{date}})",
+      "investigationTitle": "Eine Untersuchung ist nötig",
+      "investigationBody": "{{name}}: {{violation}} ({{date}})",
+      "repliedTitle": "Die Person hat geantwortet",
+      "repliedBody": "{{name}}: {{violation}} – bereit zur Genehmigung",
+      "noReplyTitle": "Keine Antwort in der Frist",
+      "noReplyBody": "{{name}}: {{violation}} – bereit zur Genehmigung",
+      "responseTitle": "Ihre Antwort wird erbeten",
+      "responseBody": "{{violation}} ({{date}}). Antworten Sie bis {{due}}.",
+      "decidedTitle": "Eine Sanktionsentscheidung",
+      "decidedBody": "{{violation}} ({{date}}). Öffnen, um den Erhalt zu bestätigen oder Einspruch einzulegen.",
+      "rejectedTitle": "Keine Sanktion",
+      "rejectedBody": "{{violation}} ({{date}}): keine Sanktion verhängt.",
+      "appealTitle": "Ein Einspruch",
+      "appealBody": "{{name}} hat Einspruch eingelegt: {{violation}} ({{date}})",
+      "appealConfirmedTitle": "Über Ihren Einspruch wurde entschieden",
+      "appealConfirmedBody": "{{violation}}: die Sanktion bleibt bestehen.",
+      "cancelledTitle": "Eine Sanktion wurde aufgehoben",
+      "cancelledBody": "{{violation}} ({{date}}) wurde aufgehoben.",
+      "incentiveReviewTitle": "Eine Prämie zur Prüfung",
+      "incentiveReviewBody": "{{name}}: {{reason}}",
+      "incentiveGrantedTitle": "Gut gemacht!",
+      "incentiveGrantedBody": "Sie haben eine Prämie erhalten: {{reason}}"
     }
   },
   "items": {
@@ -286,7 +349,10 @@
     "payslips": "Meine Abrechnungen",
     "externalPay": "Lohn externer Kräfte",
     "announcements": "Schwarzes Brett",
-    "exceptions": "Meine Ausnahmen"
+    "exceptions": "Meine Ausnahmen",
+    "myProfile": "Meine Akte",
+    "documents": "Dokumente",
+    "penalties": "Sanktionen und Prämien"
   },
   "sosOverlay": {
     "title": "SOS-/Notfallalarm",
@@ -393,7 +459,10 @@
     "payroll": "Abrechnungszeiträume, Profile, die drei Berichte und Abrechnungen - mit getrennten Rechten und gespeicherten Versionen.",
     "payslips": "Ihre veröffentlichten Abrechnungen - ansehen oder per E-Mail anfordern.",
     "externalPay": "Sätze pro Tag, Woche, Monat oder Jahr, Lohnläufe, Regeln und Einzelkorrekturen - genehmigt und eingefroren, getrennt von der Lohnabrechnung.",
-    "announcements": "Mitteilungen und offizielle Erklärungen an Sie; bestätigen Sie die, die es verlangen."
+    "announcements": "Mitteilungen und offizielle Erklärungen an Sie; bestätigen Sie die, die es verlangen.",
+    "myProfile": "Deine Daten, Dokumente, Verwarnungen und Anwesenheit.",
+    "documents": "Die Dokumente aller Mitarbeitenden und ihre Ablaufdaten.",
+    "penalties": "Verstöße, Genehmigungen, Einsprüche und Prämien."
   },
   "backgroundDisclosure": {
     "title": "Standort während Ihrer Schicht",
@@ -482,5 +551,9 @@
     "send": "Buzz senden",
     "sent": "{{name}} wurde angebuzzt.",
     "failed": "Der Buzz wurde nicht gesendet. Versuch es noch einmal."
+  },
+  "shiftTracking": {
+    "resumeTitle": "Schicht fortsetzen",
+    "resumeBody": "Dein Telefon wurde während der Schicht neu gestartet. Öffne PROSM Time, damit die Schicht wieder verfolgt wird."
   }
 }

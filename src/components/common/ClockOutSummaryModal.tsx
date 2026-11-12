@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import Modal from "./Modal";
 import Button from "./Button";
+import MoodFace, { type ShiftMood } from "./MoodFace";
+import { requireSupabaseClient } from "../../core/api/supabaseClient";
 
 interface ClockOutSummaryModalProps {
   isOpen: boolean;
@@ -10,8 +13,12 @@ interface ClockOutSummaryModalProps {
   breakMinutes: number;
   overtimeMinutes: number;
   exceptionsCount: number;
+  /** Owner 2026-11-11: the shift just closed - "how was today's work?" is answered for it. */
+  sessionId?: string | null;
   onClose: () => void;
 }
+
+const MOODS: ShiftMood[] = ["great", "normal", "tough"];
 
 function formatMinutes(minutes: number): string {
   const total = Math.round(minutes);
@@ -34,10 +41,22 @@ export default function ClockOutSummaryModal({
   breakMinutes,
   overtimeMinutes,
   exceptionsCount,
+  sessionId = null,
   onClose,
 }: ClockOutSummaryModalProps) {
   const { t } = useTranslation("dashboard");
   const navigate = useNavigate();
+  const [mood, setMood] = useState<ShiftMood | null>(null);
+  const [moodSaved, setMoodSaved] = useState(false);
+
+  // one tap answers; another face can still be chosen instead
+  const chooseMood = async (next: ShiftMood) => {
+    setMood(next);
+    setMoodSaved(false);
+    if (!sessionId || sessionId.startsWith("q:")) return;
+    const { error } = await requireSupabaseClient().rpc("set_prosm_time_shift_mood", { p_session_id: sessionId, p_mood: next });
+    if (!error) setMoodSaved(true);
+  };
 
   const handleGoToAllowances = () => {
     onClose();
@@ -67,6 +86,22 @@ export default function ClockOutSummaryModal({
         ) : null}
       </div>
 
+      {sessionId ? (
+        <div style={{ margin: "0 0 var(--space-4)", textAlign: "center" }}>
+          <p style={{ margin: "0 0 var(--space-3)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)" }}>{t("attendance.mood.question")}</p>
+          <div role="radiogroup" aria-label={t("attendance.mood.question")} style={{ display: "flex", justifyContent: "center", gap: "var(--space-4)" }}>
+            {MOODS.map((key) => (
+              <button key={key} type="button" role="radio" aria-checked={mood === key} onClick={() => void chooseMood(key)}
+                style={{ display: "grid", justifyItems: "center", gap: 6, padding: 4, border: 0, background: "none", cursor: "pointer",
+                  color: mood && mood !== key ? "var(--border-strong)" : "var(--text-secondary)", font: "inherit", fontSize: "var(--font-sm)" }}>
+                <MoodFace mood={key} active={mood === key} />
+                <span>{t(`attendance.mood.${key}`)}</span>
+              </button>
+            ))}
+          </div>
+          {moodSaved ? <p role="status" style={{ margin: "var(--space-2) 0 0", color: "var(--status-success-text)", fontSize: "var(--font-sm)" }}>{t("attendance.mood.thanks")}</p> : null}
+        </div>
+      ) : null}
 
       <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
         <Button fullWidth onClick={handleGoToAllowances}>

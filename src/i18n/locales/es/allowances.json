@@ -41,7 +41,7 @@
     "travel": "Viaje",
     "other": "Otro",
     "status": "Estado",
-    "overtimeAmount": "Valor de las horas extra",
+    "overtimeAmount": "Valor de horas extra y retrasos",
     "total": "Total"
   },
   "status": {
@@ -64,7 +64,8 @@
     "reviewNotesLabel": "Notas de revisión (opcional)",
     "daySessionsLine": "{{count}} jornadas este día · {{hours}} h {{minutes}} min trabajados",
     "reviewNotesLine": "Nota del revisor: {{notes}}",
-    "overtimeValueLine": "por valor de {{amount}}"
+    "overtimeValueLine": "por valor de {{amount}}",
+    "lateLine": "retraso {{minutes}} min descontado: {{amount}}"
   },
   "totals": {
     "title": "Totales del período"
@@ -119,7 +120,8 @@
       "travel": "Viaje",
       "other": "Otro",
       "overtimeHour": "Hora extra",
-      "extraDay": "Día extra"
+      "extraDay": "Día extra",
+      "lateMinute": "Minuto de retraso (descuento)"
     }
   },
   "pdf": {

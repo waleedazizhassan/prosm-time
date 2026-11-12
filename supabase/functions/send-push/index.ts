@@ -141,7 +141,8 @@ serve(async (request: Request) => {
     const reminder = message.type === "clock_in_reminder" || message.type === "clock_out_reminder";
     const gone: string[] = [];
     let sent = 0;
-    for (const { token: deviceToken, language } of devices) {
+    // Owner 2026-11-11 (notifications late): every phone of the person at once, not one after another
+    await Promise.all(devices.map(async ({ token: deviceToken, language }) => {
       // In the phone's language, with the in-app bell's own texts.
       const text = localizePush(String(message.type ?? ""), message.data ?? {}, language, { title: message.title, body: message.body });
       const response = await fetch(`https://fcm.googleapis.com/v1/projects/${account.project_id}/messages:send`, {
@@ -182,12 +183,12 @@ serve(async (request: Request) => {
       });
       if (response.ok) {
         sent += 1;
-        continue;
+        return;
       }
       const failure = await response.json().catch(() => ({}));
       const code = failure?.error?.details?.find((detail: any) => detail.errorCode)?.errorCode ?? failure?.error?.status;
       if (response.status === 404 || code === "UNREGISTERED" || code === "INVALID_ARGUMENT") gone.push(deviceToken);
-    }
+    }));
     if (gone.length > 0) await client.rpc("forget_prosm_time_push_tokens", { p_tokens: gone });
 
     return successResponse({ sent, forgotten: gone.length, emailed: await sendNotificationEmails(client, notificationId) });

@@ -1,8 +1,8 @@
 // v2.3.43 step 17: the dashboard's pure rules, kept apart so they are tested.
 
 export type Period = "day" | "week" | "month" | "custom";
-export type WidgetId = "map" | "present" | "sites" | "approvals" | "external" | "people" | "chart" | "insights" | "cost" | "audit";
-export const DEFAULT_ORDER: WidgetId[] = ["map", "present", "sites", "approvals", "external", "people", "chart", "insights", "cost", "audit"];
+export type WidgetId = "map" | "present" | "sites" | "approvals" | "documents" | "external" | "people" | "chart" | "insights" | "cost" | "audit";
+export const DEFAULT_ORDER: WidgetId[] = ["map", "present", "sites", "approvals", "documents", "external", "people", "chart", "insights", "cost", "audit"];
 
 export function iso(date: Date): string {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
@@ -37,7 +37,7 @@ export function mergeOrder(saved: WidgetId[]): WidgetId[] {
 
 // The audit log speaks the reader's language: a few key actions by name,
 // every other one by its kind (the server's own text is English).
-const AUDIT_NAMED = new Set(["SOS_ALERT_TRIGGERED", "SOS_ALERT_RESOLVED", "ADMIN_CLOCK_IN_ON_BEHALF", "ADMIN_CLOCK_OUT_ON_BEHALF", "PERMISSION_GRANTED", "PERMISSION_REVOKED", "EMPLOYEE_DEACTIVATED", "EMPLOYEE_REMOVED", "USER_INVITED", "attendance.override_block", "attendance.day_adjusted", "attendance.overtime_approved", "attendance.auto_close", "allowances.edit_during_review", "leave.approved_cancelled"]);
+const AUDIT_NAMED = new Set(["SOS_ALERT_TRIGGERED", "SOS_ALERT_RESOLVED", "ADMIN_CLOCK_IN_ON_BEHALF", "ADMIN_CLOCK_OUT_ON_BEHALF", "PERMISSION_GRANTED", "PERMISSION_REVOKED", "EMPLOYEE_DEACTIVATED", "EMPLOYEE_REMOVED", "USER_INVITED", "attendance.override_block", "attendance.day_adjusted", "attendance.overtime_approved", "attendance.auto_close", "allowances.edit_during_review", "leave.approved_cancelled", "hr.profile_changed", "hr.contract_saved", "hr.contract_deleted", "hr.job_title_saved", "hr.document_type_saved", "hr.document_template_added", "hr.document_uploaded", "hr.document_accepted", "hr.document_rejected", "hr.document_reminded", "hr.violation_recorded", "hr.violation_cancelled", "hr.violation_investigate", "hr.violation_respond", "hr.violation_approve", "hr.violation_reduce", "hr.violation_reject", "hr.violation_acknowledge", "hr.violation_refused_ack", "hr.violation_appeal", "hr.violation_appeal_confirm", "hr.bylaw_published", "hr.penalty_settings_saved", "hr.penalty_type_saved", "hr.violation_type_saved", "hr.penalty_template_added", "hr.incentive_rule_saved", "hr.incentive_proposed", "hr.incentive_approve", "hr.incentive_reject", "hr.incentive_cancel"]);
 // Owner 2026-11-10 ("the action log has many things that are not clear"): the automatic records of a
 // table change ("<table>.<insert|update|delete>") and the newer actions get their own kind, not "other".
 const AUDIT_GROUPS: [RegExp, string][] = [
@@ -51,7 +51,7 @@ const AUDIT_GROUPS: [RegExp, string][] = [
   [/^payroll|^EXTERNAL_PAY_|^EXTERNAL_LABOR_|^external_labor_/, "payroll"],
   [/^calendar\.|^public_holidays\.|^schedule_exceptions\./, "calendar"],
   [/^PROJECT_|^project_assignments\./, "projects"],
-  [/^USER_|^EMPLOYEE_|^employees\.|^PASSWORD_|^EXTERNAL_WORKER|^ACCOUNT_|^site_workers\./, "people"],
+  [/^USER_|^EMPLOYEE_|^employees\.|^PASSWORD_|^EXTERNAL_WORKER|^ACCOUNT_|^site_workers\.|^hr\./, "people"],
   [/^DEVICE_|^CAMERA_|^KIOSK_PIN|^device\.|^security\.|^camera_evidence\.|^integrity_flags\./, "devices"],
   [/^ANNOUNCEMENT_|^DEPARTMENT_/, "announcements"],
   [/^report_exports\./, "reports"],

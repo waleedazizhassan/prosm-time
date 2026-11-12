@@ -19,7 +19,7 @@
   },
   "sitePolicy": {
     "title": "Standortregeln",
-    "hint": "GPS-Toleranz, Kulanzzeit, Schichtzeiten, Überstunden und Verspätungsabzug, Pausenrundung, Anwesenheitsüberwachung, ausgenommene Mitarbeitende und Selbstbedienungs-Sperren dieses Standorts.",
+    "hint": "GPS-Toleranz, Schichtzeiten, Überstunden und Verspätungsabzüge, Pausenrundung, Anwesenheitsüberwachung, Ausnahmen und Selbststempel-Regeln dieses Standorts.",
     "siteSelectLabel": "Standort",
     "siteSelectPlaceholder": "Standort auswählen…",
     "noSites": "Noch keine Standorte - legen Sie zuerst einen unter Standorte an.",
@@ -256,7 +256,9 @@
       "payroll": "Lohn (Versicherung, Steuer, Darlehen, Abrechnungen)",
       "integrations": "Integrationen, API und Anwesenheit aus Fingerabdruckgeräten",
       "delegation": "Volle und befristete Vertretung",
-      "retention": "Steuerung der Datenaufbewahrung"
+      "retention": "Steuerung der Datenaufbewahrung",
+      "documents": "Mitarbeiterdokumente und Ablaufdaten",
+      "penalties": "Gestufte Sanktionsordnung und Prämien"
     },
     "managedByProsm": "Änderungen und Verlängerungen Ihrer Lizenz nimmt PROSM vor; Sie erhalten eine Benachrichtigung und eine E-Mail mit der neuen Lizenz. Änderungen: sales@prosm.net.",
     "historyAll": "Angezeigte Stempelungen: alle. Standortpunkte und Fotos werden nach der Frist unter „Aufbewahrung“ automatisch gelöscht.",
@@ -287,5 +289,38 @@
     "outside": "Außerhalb der Standorte",
     "people": "Personen und Anwesenheit",
     "other": "Paket und Sicherheit"
+  },
+  "overtimeTarget": {
+    "title": "Überstunden und Verspätung verrechnen",
+    "hint": "Wähle, wo Überstunden und Verspätung aus der Anwesenheit verrechnet werden. Genehmigte Tage und Abrechnungen ändern sich nicht.",
+    "saved": "Gespeichert.",
+    "error": "Die Auswahl konnte nicht gespeichert werden.",
+    "payroll": {
+      "label": "Auf das Gehalt",
+      "hint": "Wird in der Abrechnung als Vorschlag angezeigt."
+    },
+    "allowances": {
+      "label": "Auf die Zulagen",
+      "hint": "Überstunden werden in den Zulagenbögen bewertet."
+    },
+    "counted": {
+      "label": "Verrechnet",
+      "hint": "Überstunden werden in den Zulagenbögen bewertet."
+    },
+    "none": {
+      "label": "Nicht verrechnet",
+      "hint": "Wirkt sich nicht aus - nur in den Stunden sichtbar."
+    }
+  },
+  "jobTitles": {
+    "title": "Stellen",
+    "hint": "Die Stellen des Unternehmens: in jeder Personalakte gewählt und für stellenbezogene Dokumente genutzt.",
+    "name": "Stellenbezeichnung",
+    "add": "Hinzufügen",
+    "stop": "Deaktivieren",
+    "restore": "Wiederherstellen",
+    "people_one": "1 Person",
+    "people_other": "{{count}} Personen",
+    "error": "Speichern fehlgeschlagen."
   }
 }

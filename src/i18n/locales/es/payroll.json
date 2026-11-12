@@ -68,7 +68,10 @@
     "chooseAll": "Elegir todos los mostrados",
     "chooseNone": "Quitar selección",
     "addToChosen": "Añadir concepto a {{count}} elegidos",
-    "bulkHint": "Todos los elegidos reciben el mismo concepto, o ninguno si alguno no puede (por ejemplo fuera de sus sedes)."
+    "bulkHint": "Todos los elegidos reciben el mismo concepto, o ninguno si alguno no puede (por ejemplo fuera de sus sedes).",
+    "customRules": "Reglas fiscales propias",
+    "selfServiceOff": "Los empleados no verán sus nóminas: el «autoservicio» está desactivado en los ajustes de nómina.",
+    "openSettings": "Abrir ajustes"
   },
   "actions": {
     "submit": "Enviar a revisión",
@@ -193,7 +196,8 @@
     "managementApproval": "Aprobación de la dirección",
     "combinedTotal": "Salario total (con complementos)",
     "totalSalaries": "Total de salarios",
-    "no": "N.º"
+    "no": "N.º",
+    "customRules": "Calculado con reglas fiscales y de seguro propias de la empresa"
   },
   "profiles": {
     "title": "Personas",
@@ -244,8 +248,15 @@
     "savedShort": "Guardado.",
     "deleteItem": "Eliminar",
     "deleteItemLabel": "Eliminar el concepto {{name}}",
-    "deleteItemConfirm": "¿Eliminar «{{name}}» del salario de todos? Los ciclos aprobados no cambian.",
-    "itemDeleted": "Se eliminó el concepto «{{name}}»."
+    "deleteItemConfirm": "¿Quitar «{{name}}» solo de la nómina de esta persona? Los demás empleados y los ciclos aprobados no cambian.",
+    "itemDeleted": "Se eliminó el concepto «{{name}}».",
+    "legalNameArabicLabel": "Nombre en árabe (como en el documento)",
+    "legalNameLabel": "Nombre oficial",
+    "legalNameHint": "Este es el nombre de la nómina, no el nombre de usuario ({{user}}).",
+    "legalNameMissing": "Falta el nombre oficial",
+    "notInPayroll": "Esta persona no está en la nómina (el propietario no cobra salario).",
+    "insuranceCategory": "Categoría de seguro",
+    "insuranceCategoryDefault": "Categoría por defecto"
   },
   "installments": {
     "title": "Cuotas y anticipos",
@@ -349,7 +360,12 @@
     "appliesToAllLabel": "Se aplica a todos los empleados",
     "defaultAmount": "Importe por defecto",
     "appliesToAllHint": "Se añade en cada ciclo nuevo a todos los que tienen ficha de nómina. Si la persona tiene un valor propio, se usa ese.",
-    "preTaxLabel": "Se resta de la base imponible (antes del impuesto)"
+    "preTaxLabel": "Se resta de la base imponible (antes del impuesto)",
+    "remove": "Quitar",
+    "restore": "Restaurar",
+    "removeConfirm": "¿Quitar el concepto «{{name}}»? Sale de las fichas salariales y de los ciclos abiertos; los aprobados lo conservan.",
+    "removed": "Concepto quitado.",
+    "restored": "Concepto restaurado."
   },
   "requests": {
     "hint": "Recibos que pidió su equipo. Un clic envía el recibo aprobado y guardado en PDF al correo registrado: la misma versión, sin recalcular.",
@@ -422,7 +438,9 @@
     "statutoryBrackets": "Los tramos deben ir en orden creciente y el último sin límite.",
     "statutoryWage": "El máximo no puede ser inferior al mínimo.",
     "chooseItem": "Elija primero el concepto.",
-    "basicCannotBeDeleted": "El salario básico no se puede eliminar."
+    "basicCannotBeDeleted": "El salario básico no se puede eliminar.",
+    "legalNameRequired": "Escribe el nombre oficial: es el que aparece en la nómina.",
+    "legalNameArabic": "Escribe el nombre solo con letras árabes, como en el documento."
   },
   "exports": {
     "hint": "Los recibos de un ciclo aprobado o cerrado se preparan en el servidor en un ZIP, cada uno con su número. Puede salir de la página; el archivo queda disponible 7 días.",
@@ -490,5 +508,10 @@
     "twoAction": "Fichas de nómina",
     "three": "El ciclo del mes",
     "threeText": "Cree el ciclo abajo → añada los variables y revise las sugerencias → envíe → otra persona aprueba → cierre y publique las nóminas."
+  },
+  "taxLink": {
+    "title": "Impuestos y seguridad social",
+    "hint": "El país, los tramos, el seguro y una calculadora, en su propia página.",
+    "open": "Abrir"
   }
 }

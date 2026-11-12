@@ -84,13 +84,14 @@
     "announcements.publish": "发布公告",
     "announcements.manage": "管理所有公告",
     "announcements.view_reads": "查看公告阅读情况",
-    "departments.manage": "管理部门"
+    "departments.manage": "管理部门",
+    "hr.manage": "管理员工档案"
   },
   "invite": {
     "actionLabel": "邀请员工",
     "title": "邀请员工",
     "emailLabel": "邮箱",
-    "fullNameLabel": "全名",
+    "fullNameLabel": "简称",
     "roleLabel": "角色",
     "role": {
       "manager": "经理 / 工地经理",
@@ -107,10 +108,14 @@
     "copyLinkAction": "复制链接",
     "linkCopied": "链接已复制",
     "codeLabel": "验证码",
-    "close": "关闭"
+    "close": "关闭",
+    "legalNameLabel": "完整法定姓名",
+    "legalNameHint": "与正式文件一致：用于工资单和报表。",
+    "shortNameHint": "在应用中显示的名称。",
+    "legalNameNotSaved": "邀请已发送，但法定姓名未保存。请在用户档案中补充。"
   },
   "detail": {
-    "title": "成员",
+    "title": "用户档案",
     "backToList": "返回人员",
     "loadError": "无法加载此成员。",
     "permissionsTitle": "权限",
@@ -313,5 +318,141 @@
     "grantsLeft": "仍然有效的直接权限：",
     "granted": "已授予",
     "revoked": "已撤销"
+  },
+  "profile": {
+    "tabsLabel": "员工档案分区",
+    "myTitle": "我的档案",
+    "code": "工号 {{code}}",
+    "since": "自 {{date}}",
+    "completion": "档案完整度 {{percent}}%",
+    "completionTitle": "已提交的必需证件",
+    "missing_other": "缺少 {{count}} 份证件",
+    "loadError": "无法加载数据。",
+    "saveError": "无法保存。",
+    "uploadError": "无法上传文件。",
+    "save": "保存",
+    "saved": "已保存。",
+    "edit": "编辑",
+    "noJobTitle": "无职位",
+    "noJobTitlesYet": "请先在设置中添加职位",
+    "status": {
+      "active": "在职",
+      "suspended": "停职",
+      "ended": "已离职",
+      "deactivated": "已停用登录"
+    },
+    "tabs": {
+      "data": "资料",
+      "contract": "合同",
+      "documents": "证件",
+      "payroll": "工资",
+      "attendance": "考勤",
+      "leave": "假期",
+      "penalties": "处罚与奖励",
+      "history": "记录",
+      "account": "账户与权限"
+    },
+    "fields": {
+      "jobTitle": "职位",
+      "status": "员工状态",
+      "phone": "手机号",
+      "emergency_contact_name": "紧急联系人",
+      "emergency_contact_phone": "紧急联系电话",
+      "national_id": "身份证号",
+      "birth_date": "出生日期",
+      "address": "地址",
+      "legalName": "完整法定姓名"
+    },
+    "contracts": {
+      "empty": "暂无合同。",
+      "add": "添加合同",
+      "editTitle": "编辑合同",
+      "type": "合同类型",
+      "start": "开始日期",
+      "end": "结束日期",
+      "endOptional": "结束日期（可选）",
+      "probation": "试用期结束（可选）",
+      "file": "已签署合同（PDF 或照片）",
+      "notes": "备注",
+      "noEnd": "无固定期限",
+      "probationUntil": "试用期至 {{date}}",
+      "view": "查看",
+      "types": {
+        "fixed_term": "固定期限",
+        "open_ended": "无固定期限",
+        "temporary": "临时"
+      },
+      "state": {
+        "current": "有效",
+        "ending": "即将到期",
+        "upcoming": "尚未开始",
+        "ended": "已结束"
+      }
+    },
+    "attendance": {
+      "day": "日期",
+      "site": "站点",
+      "in": "上班",
+      "out": "下班",
+      "worked": "工时",
+      "absent": "缺勤",
+      "late": "迟到 {{minutes}} 分钟",
+      "daysWorked": "出勤天数（近 {{days}} 天）",
+      "hours": "总工时",
+      "lateDays": "迟到天数",
+      "absentDays": "缺勤天数",
+      "empty": "此期间无考勤。"
+    },
+    "leave": {
+      "empty": "近一年无休假。",
+      "days_other": "{{count}} 天",
+      "status": {
+        "pending": "待处理",
+        "approved": "已批准",
+        "rejected": "已拒绝",
+        "cancelled": "已取消"
+      }
+    },
+    "history": {
+      "empty": "暂无变更记录。",
+      "more": "查看更早"
+    }
+  },
+  "bundles": {
+    "hint": "一键授予整个角色，或在列表中授予单项权限。随角色授予的权限会立即在列表中显示为已授予，不会重复授予。",
+    "grant": "授予",
+    "revoke": "收回",
+    "granted": "已全部授予",
+    "partial": "已授予 {{held}}/{{total}}",
+    "grantNote": "只授予此人尚未拥有的权限。",
+    "revokeNote": "只收回在其角色之外额外授予的权限；角色本身的权限保留。",
+    "owner": {
+      "title": "组织所有者权限",
+      "hint": "代表所有者的全部权限"
+    },
+    "finance": {
+      "title": "财务经理",
+      "hint": "工资、津贴、人工成本和报表"
+    },
+    "hr": {
+      "title": "人力资源经理",
+      "hint": "员工档案、请假、部门和公告"
+    },
+    "attendance": {
+      "title": "仅考勤管理",
+      "hint": "记录、更正、例外和工时表"
+    },
+    "sites": {
+      "title": "工地管理",
+      "hint": "工地、班次、日历和外部劳务"
+    },
+    "reports": {
+      "title": "报表",
+      "hint": "仪表板、报表和操作日志"
+    },
+    "media": {
+      "title": "媒体中心",
+      "hint": "发布和管理公告"
+    }
   }
 }

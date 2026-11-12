@@ -19,7 +19,7 @@
   },
   "sitePolicy": {
     "title": "工地规则",
-    "hint": "此工地的 GPS 容差、宽限时间、班次时间、加班和迟到扣款、休息取整、在岗监测、豁免员工和自助限制。",
+    "hint": "本站点的 GPS 误差、班次时间、加班与迟到扣款、休息取整、在岗监控、豁免人员和自行打卡限制。",
     "siteSelectLabel": "工地",
     "siteSelectPlaceholder": "选择工地…",
     "noSites": "还没有工地，请先在“工地”中添加。",
@@ -256,7 +256,9 @@
       "payroll": "工资（社保、税、借款、工资单）",
       "integrations": "集成、API 与指纹设备考勤",
       "delegation": "完全及限期授权",
-      "retention": "数据保留控制"
+      "retention": "数据保留控制",
+      "documents": "员工证件及到期提醒",
+      "penalties": "阶梯处罚规章与奖励"
     },
     "managedByProsm": "许可证的任何变更或续订都由 PROSM 处理；您会收到通知和附有新许可证的邮件。如需变更，请写信至 sales@prosm.net。",
     "historyAll": "显示的考勤记录：全部。位置点和照片会在“数据保留”中的期限后自动删除。",
@@ -286,5 +288,37 @@
     "outside": "站点之外",
     "people": "人员与考勤",
     "other": "套餐与安全"
+  },
+  "overtimeTarget": {
+    "title": "加班与迟到的计算",
+    "hint": "选择考勤中的加班和迟到计入哪里。已批准的天数和周期不变。",
+    "saved": "已保存。",
+    "error": "无法保存，请重试。",
+    "payroll": {
+      "label": "计入工资",
+      "hint": "在工资周期中作为建议，由你确认。"
+    },
+    "allowances": {
+      "label": "计入津贴",
+      "hint": "加班在津贴表中计价。"
+    },
+    "counted": {
+      "label": "计算",
+      "hint": "加班在津贴表中计价。"
+    },
+    "none": {
+      "label": "不计算",
+      "hint": "不影响任何内容——只在工时中显示。"
+    }
+  },
+  "jobTitles": {
+    "title": "职位",
+    "hint": "公司的职位：在员工档案中选择，并用于按职位要求的证件。",
+    "name": "职位名称",
+    "add": "添加",
+    "stop": "停用",
+    "restore": "恢复",
+    "people_other": "{{count}} 人",
+    "error": "无法保存。"
   }
 }

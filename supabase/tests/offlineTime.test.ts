@@ -106,7 +106,8 @@ describe("server time for live attendance (audit 1.4)", () => {
     // Half an hour before today's UTC midnight: yesterday, within the 24-hour window.
     const now = new Date();
     const yesterday = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) - 1800e3);
-    const day = yesterday.toISOString().slice(0, 10);
+    // the work day is counted in Cairo time, like the server does (the UTC date flaked around midnight)
+    const day = yesterday.toLocaleDateString("en-CA", { timeZone: "Africa/Cairo" });
     await t.su("insert into leave_requests (organization_id, user_id, leave_type, start_date, end_date, days_count, status) values ($1, $2, 'annual', $3, $3, 1, 'approved')", [org.id, emp.userId, day]);
     const result = await clockInAt(emp, yesterday.toISOString(), true);
     expect(result.error).toMatch(/APPROVED LEAVE/);

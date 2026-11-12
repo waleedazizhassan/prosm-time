@@ -58,7 +58,6 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
   const [loadError, setLoadError] = useState("");
 
   const [gpsAccuracyToleranceMeters, setGpsAccuracyToleranceMeters] = useState("50");
-  const [graceToleranceMinutes, setGraceToleranceMinutes] = useState("5");
   const [shiftStartTime, setShiftStartTime] = useState("");
   const [shiftEndTime, setShiftEndTime] = useState("");
   const [overtimeStartTime, setOvertimeStartTime] = useState("");
@@ -66,7 +65,6 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
   const [breakRoundingMode, setBreakRoundingMode] = useState<BreakRoundingMode>("cumulative");
   const [blockSelfClockInAfterGrace, setBlockSelfClockInAfterGrace] = useState(false);
   const [outsideZonePolicy, setOutsideZonePolicy] = useState<OutsideZonePolicy>("ALLOW_WITH_EXCEPTION");
-  const [presenceMonitoringEnabled, setPresenceMonitoringEnabled] = useState(false);
   // owner 2026-11-10 ("the site settings have no range - it is only in the site's edit form"): the
   // range and how people clock in there are here too, so a site's every setting is in one place
   const [allowedRadiusMeters, setAllowedRadiusMeters] = useState("250");
@@ -118,7 +116,6 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
       const loaded = siteResult.data;
       setSite(loaded);
       setGpsAccuracyToleranceMeters(String(loaded.gpsAccuracyToleranceMeters));
-      setGraceToleranceMinutes(String(loaded.graceToleranceMinutes));
       setShiftStartTime(loaded.shiftStartTime ?? "");
       setShiftEndTime(loaded.shiftEndTime ?? "");
       setOvertimeStartTime(loaded.overtimeStartTime ?? "");
@@ -126,7 +123,6 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
       setBreakRoundingMode(loaded.breakRoundingMode);
       setBlockSelfClockInAfterGrace(loaded.blockSelfClockInAfterGrace);
       setOutsideZonePolicy(loaded.outsideZonePolicy);
-      setPresenceMonitoringEnabled(loaded.presenceMonitoringEnabled);
       setAllowedRadiusMeters(String(loaded.allowedRadiusMeters));
       setCameraRequired(loaded.cameraRequired);
       setAttendanceAllowed(loaded.attendanceAllowed);
@@ -173,7 +169,6 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
       geofenceRequired,
       kioskMode,
       gpsAccuracyToleranceMeters: Number(gpsAccuracyToleranceMeters),
-      graceToleranceMinutes: Number(graceToleranceMinutes),
       shiftStartTime: shiftStartTime || null,
       shiftEndTime: shiftEndTime || null,
       overtimeStartTime: overtimeStartTime || null,
@@ -181,7 +176,6 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
       breakRoundingMode,
       blockSelfClockInAfterGrace,
       blockSelfClockOutOutsideGeofence: false,
-      presenceMonitoringEnabled,
     });
     // Audit 2.1 / v2.3.43 step 1 - its own call (audited), same authority as the site update.
     const clockInResult =
@@ -260,19 +254,6 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
                 value={gpsAccuracyToleranceMeters}
                 onChange={(event) => {
                   setGpsAccuracyToleranceMeters(event.target.value);
-                  setSaved(false);
-                }}
-                disabled={saving}
-              />
-            </div>
-            <div style={{ maxWidth: 220 }}>
-              <Input
-                label={t("sites:form.graceToleranceLabel")}
-                name="policyGraceTolerance"
-                type="number"
-                value={graceToleranceMinutes}
-                onChange={(event) => {
-                  setGraceToleranceMinutes(event.target.value);
                   setSaved(false);
                 }}
                 disabled={saving}
@@ -373,19 +354,7 @@ export default function SitePolicySettingsCard({ siteId }: { siteId?: string } =
           <HintText small>{t("sites:form.clockOutOutsideNote")}</HintText>
           {selectedSiteId && (isOwner || hasPermission("sites.manage_integrity")) ? <SiteIntegritySettings siteId={selectedSiteId} /> : null}
           {selectedSiteId && (isOwner || hasPermission("sites.manage_exit_policy")) ? <SiteExitPolicySettings siteId={selectedSiteId} /> : null}
-          <div style={toggleRowStyle}>
-            <span style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)" }}>{t("sites:form.presenceMonitoringEnabledLabel")}</span>
-            <Toggle
-              checked={presenceMonitoringEnabled}
-              onChange={(checked) => {
-                setPresenceMonitoringEnabled(checked);
-                setSaved(false);
-              }}
-              disabled={saving}
-              label={t("sites:form.presenceMonitoringEnabledLabel")}
-            />
-          </div>
-          <HintText small>{t("sites:form.presenceMonitoringEnabledHint")}</HintText>
+          {/* owner 2026-11-11: following the person during the shift is always on now - no switch */}
 
           {assignments.length > 0 ? (
             <div style={{ margin: "var(--space-3) 0" }}>

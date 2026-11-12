@@ -35,7 +35,7 @@ beforeAll(async () => {
   for (const [i, amounts] of [[7333.33, 1111.11, 987.65], [8000.01, 0.99, 1234.56], [9999.99, 500.5, 0.01]].entries()) {
     const m = await addMember(t, org, "employee", `Person ${i + 1}`);
     people.push(m);
-    await ok(owner("select public.save_prosm_time_payroll_profile($1, '{\"currency\": \"EGP\"}')", [m.userId]));
+    await ok(owner("select public.save_prosm_time_payroll_profile($1, $2)", [m.userId, JSON.stringify({ legal_name: ["أحمد", "منى", "كريم"][i], currency: "EGP" })]));
     for (const [id, amount] of [[basic, amounts[0]], [housing, amounts[1]], [tax, amounts[2]]] as const) {
       await ok(owner("select public.set_prosm_time_payroll_profile_component($1, $2, $3, null, '2027-01-01')", [m.userId, id, amount]));
     }

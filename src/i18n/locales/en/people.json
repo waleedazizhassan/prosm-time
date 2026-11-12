@@ -84,13 +84,14 @@
     "announcements.publish": "Publish announcements",
     "announcements.manage": "Manage all announcements",
     "announcements.view_reads": "See who read announcements",
-    "departments.manage": "Manage departments"
+    "departments.manage": "Manage departments",
+    "hr.manage": "Manage personnel files"
   },
   "invite": {
     "actionLabel": "Invite employee",
     "title": "Invite an employee",
     "emailLabel": "Email",
-    "fullNameLabel": "Full name",
+    "fullNameLabel": "Short name",
     "roleLabel": "Role",
     "role": {
       "manager": "Manager / Site Manager",
@@ -107,10 +108,14 @@
     "copyLinkAction": "Copy link",
     "linkCopied": "Link copied",
     "codeLabel": "Verification code",
-    "close": "Close"
+    "close": "Close",
+    "legalNameLabel": "Full legal name",
+    "legalNameHint": "As written on official papers: used on payslips and reports.",
+    "shortNameHint": "The name shown in the app.",
+    "legalNameNotSaved": "The invitation was sent, but the legal name was not saved. Add it from the user file."
   },
   "detail": {
-    "title": "Member",
+    "title": "User file",
     "backToList": "Back to people",
     "loadError": "Unable to load this member.",
     "permissionsTitle": "Permissions",
@@ -313,5 +318,143 @@
     "grantsLeft": "Direct permissions still in place:",
     "granted": "granted",
     "revoked": "withheld"
+  },
+  "profile": {
+    "tabsLabel": "Employee file sections",
+    "myTitle": "My file",
+    "code": "Code {{code}}",
+    "since": "Since {{date}}",
+    "completion": "File {{percent}}% complete",
+    "completionTitle": "Mandatory documents in place",
+    "missing_one": "One document missing",
+    "missing_other": "{{count}} documents missing",
+    "loadError": "The data could not be loaded. Try again.",
+    "saveError": "Could not save. Try again.",
+    "uploadError": "The file could not be uploaded. Try again.",
+    "save": "Save",
+    "saved": "Saved.",
+    "edit": "Edit",
+    "noJobTitle": "No job title",
+    "noJobTitlesYet": "Add job titles in Settings first",
+    "status": {
+      "active": "Active",
+      "suspended": "Suspended",
+      "ended": "Left",
+      "deactivated": "Access stopped"
+    },
+    "tabs": {
+      "data": "Details",
+      "contract": "Contract",
+      "documents": "Documents",
+      "payroll": "Pay",
+      "attendance": "Attendance",
+      "leave": "Leave",
+      "penalties": "Penalties & incentives",
+      "history": "History",
+      "account": "Account and permissions"
+    },
+    "fields": {
+      "jobTitle": "Job title",
+      "status": "Employee status",
+      "phone": "Mobile number",
+      "emergency_contact_name": "Emergency contact",
+      "emergency_contact_phone": "Emergency phone",
+      "national_id": "National ID",
+      "birth_date": "Date of birth",
+      "address": "Address",
+      "legalName": "Full legal name (official papers)"
+    },
+    "contracts": {
+      "empty": "No contracts recorded.",
+      "add": "Add a contract",
+      "editTitle": "Edit the contract",
+      "type": "Contract type",
+      "start": "Contract start",
+      "end": "Contract end",
+      "endOptional": "Contract end (optional)",
+      "probation": "Probation ends (optional)",
+      "file": "Signed contract (PDF or photo)",
+      "notes": "Notes",
+      "noEnd": "Open-ended",
+      "probationUntil": "Probation until {{date}}",
+      "view": "View",
+      "types": {
+        "fixed_term": "Fixed term",
+        "open_ended": "Open-ended",
+        "temporary": "Temporary"
+      },
+      "state": {
+        "current": "Current",
+        "ending": "Ending soon",
+        "upcoming": "Starts later",
+        "ended": "Ended"
+      }
+    },
+    "attendance": {
+      "day": "Day",
+      "site": "Site",
+      "in": "In",
+      "out": "Out",
+      "worked": "Hours",
+      "absent": "Absent",
+      "late": "Late {{minutes}} min",
+      "daysWorked": "Days worked (last {{days}} days)",
+      "hours": "Total hours",
+      "lateDays": "Late days",
+      "absentDays": "Absent days",
+      "empty": "No attendance in this period."
+    },
+    "leave": {
+      "empty": "No leave in the last year.",
+      "days_one": "1 day",
+      "days_other": "{{count}} days",
+      "status": {
+        "pending": "Waiting",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "cancelled": "Cancelled"
+      }
+    },
+    "history": {
+      "empty": "No changes recorded yet.",
+      "more": "Show older"
+    }
+  },
+  "bundles": {
+    "hint": "Grant a whole role in one click, or single permissions from the list. What a role grants shows as granted in the list at once and is never granted twice.",
+    "grant": "Grant",
+    "revoke": "Take back",
+    "granted": "Fully granted",
+    "partial": "{{held}} of {{total}} granted",
+    "grantNote": "Only what the person does not hold yet is granted.",
+    "revokeNote": "Only permissions given on top of their role are taken back; the role's own stay.",
+    "owner": {
+      "title": "Organisation owner's authority",
+      "hint": "The owner's full authority, on their behalf"
+    },
+    "finance": {
+      "title": "Finance manager",
+      "hint": "Payroll, allowances, labour costs and reports"
+    },
+    "hr": {
+      "title": "HR manager",
+      "hint": "Personnel files, leave, departments and announcements"
+    },
+    "attendance": {
+      "title": "Attendance only",
+      "hint": "Records, corrections, exceptions and timesheets"
+    },
+    "sites": {
+      "title": "Sites management",
+      "hint": "Sites, shifts, calendar and external labour"
+    },
+    "reports": {
+      "title": "Reports",
+      "hint": "Dashboard, reports and the action log"
+    },
+    "media": {
+      "title": "Media Center",
+      "hint": "Publish and manage announcements, follow reading"
+    }
   }
 }

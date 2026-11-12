@@ -134,7 +134,7 @@
     "manualLocationLabel": "Local de trabalho",
     "manualLocationHint": "Digite onde você realmente está (ex.: no cliente, home office) - obrigatório quando nenhum local é escolhido.",
     "manualLocationRequired": "Informe seu local de trabalho para registrar o ponto sem um local cadastrado.",
-    "clockInBlockedContactManager": "A tolerância do turno deste local já passou - fale com seu gestor para registrar sua frequência.",
+    "clockInBlockedContactManager": "O atraso já está a contar no turno deste local - contacte o seu gestor para registar a sua entrada.",
     "clockOutBlockedContactManager": "Você está fora da área de trabalho deste local - fale com seu gestor para registrar sua saída.",
     "projectLabel": "Projeto (opcional)",
     "noProject": "Sem projeto",
@@ -230,6 +230,41 @@
       "siteChanged": "Local alterado",
       "savedOffline": "Salvo no seu telefone",
       "savedOfflineText": "Sem conexão agora; será enviado sozinho assim que voltar."
+    },
+    "trackingGate": {
+      "title": "Antes de registar a entrada",
+      "lead": "O PROSM Time segue a sua localização só durante o turno - mesmo com a app fechada - para registar bem a presença e a saída do local. Precisa de:",
+      "later": "Mais tarde",
+      "check": "Verificar",
+      "light": "Leve na bateria e nos dados: envia a localização a cada 50 m ou 5 minutos e para na saída.",
+      "consent": {
+        "title": "Aceitar a localização durante o turno",
+        "hint": "Só durante o turno; para na saída.",
+        "action": "Aceitar"
+      },
+      "location": {
+        "title": "Permitir a localização",
+        "hint": "Escolha «Durante o uso da app» e localização exata.",
+        "action": "Permitir"
+      },
+      "notifications": {
+        "title": "Permitir notificações",
+        "hint": "Para a notificação do turno e o aviso de saída.",
+        "action": "Definições"
+      },
+      "battery": {
+        "title": "Desligar a poupança de bateria do PROSM Time",
+        "hint": "Escolha o PROSM Time e defina «Não otimizado» ou «Sem restrições».",
+        "action": "Definições"
+      }
+    },
+    "mood": {
+      "question": "Como foi o trabalho hoje?",
+      "great": "Ótimo",
+      "normal": "Normal",
+      "tough": "Difícil",
+      "thanks": "Obrigado, guardado.",
+      "label": "Como foi o turno"
     }
   },
   "kioskPin": {
@@ -359,7 +394,8 @@
       "cost": "Adicionais e custo",
       "audit": "Registro de ações",
       "external": "Trabalhadores externos",
-      "insights": "Análise de frequência"
+      "insights": "Análise de frequência",
+      "documents": "Documentos"
     },
     "sos": {
       "text": "SOS de {{name}} em {{site}} desde {{time}}",
@@ -546,7 +582,38 @@
         "allowances_edit_during_review": "Adicional editado na análise",
         "leave_approved_cancelled": "Afastamento aprovado cancelado",
         "OWNER_AUTHORITY_GRANTED": "Autoridade do proprietário concedida",
-        "OWNER_AUTHORITY_REVOKED": "Autoridade do proprietário retirada"
+        "OWNER_AUTHORITY_REVOKED": "Autoridade do proprietário retirada",
+        "hr_profile_changed": "Ficha alterada",
+        "hr_contract_saved": "Contrato guardado",
+        "hr_contract_deleted": "Contrato apagado",
+        "hr_job_title_saved": "Cargo guardado",
+        "hr_document_type_saved": "Configuração de documento salva",
+        "hr_document_template_added": "Lista de documentos adicionada",
+        "hr_document_uploaded": "Documento enviado",
+        "hr_document_accepted": "Documento aceito",
+        "hr_document_rejected": "Documento não aceito",
+        "hr_document_reminded": "Lembrete de documento",
+        "hr_violation_recorded": "Infração registrada",
+        "hr_violation_cancelled": "Infração cancelada",
+        "hr_violation_investigate": "Investigação registrada",
+        "hr_violation_respond": "O funcionário respondeu",
+        "hr_violation_approve": "Penalidade aprovada",
+        "hr_violation_reduce": "Penalidade reduzida",
+        "hr_violation_reject": "Penalidade recusada",
+        "hr_violation_acknowledge": "Penalidade recebida",
+        "hr_violation_refused_ack": "Recusa em assinar",
+        "hr_violation_appeal": "Recurso",
+        "hr_violation_appeal_confirm": "Recurso: penalidade mantida",
+        "hr_bylaw_published": "Regulamento de penalidades publicado",
+        "hr_penalty_settings_saved": "Limites do regulamento salvos",
+        "hr_penalty_type_saved": "Tipo de penalidade salvo",
+        "hr_violation_type_saved": "Infração salva",
+        "hr_penalty_template_added": "Infrações sugeridas adicionadas",
+        "hr_incentive_rule_saved": "Regra de incentivo salva",
+        "hr_incentive_proposed": "Incentivo proposto",
+        "hr_incentive_approve": "Incentivo aprovado",
+        "hr_incentive_reject": "Incentivo recusado",
+        "hr_incentive_cancel": "Incentivo cancelado"
       },
       "groups": {
         "sos": "SOS",

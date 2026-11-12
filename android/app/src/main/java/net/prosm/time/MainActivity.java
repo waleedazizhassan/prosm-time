@@ -47,6 +47,8 @@ public class MainActivity extends BridgeActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        // owner 2026-11-11: the shift's own background service (ShiftTrackingService)
+        registerPlugin(ShiftTrackingPlugin.class);
         super.onCreate(savedInstanceState);
         createReminderChannel();
         if (BuildConfig.DEBUG) return;

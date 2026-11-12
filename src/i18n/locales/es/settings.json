@@ -19,7 +19,7 @@
   },
   "sitePolicy": {
     "title": "Reglas de la sede",
-    "hint": "La tolerancia GPS de esta sede, el margen, el horario de turno, las horas extra y el descuento por retraso, el redondeo del descanso, el seguimiento de presencia, los empleados exentos y los bloqueos de autoservicio.",
+    "hint": "El margen GPS de este sitio, el horario, las horas extra y descuentos por retraso, el redondeo de descansos, la supervisión, las exenciones y los límites del fichaje propio.",
     "siteSelectLabel": "Sede",
     "siteSelectPlaceholder": "Selecciona una sede…",
     "noSites": "Todavía no hay sedes: añade una primero desde Sedes.",
@@ -256,7 +256,9 @@
       "payroll": "Nómina (seguros, impuestos, préstamos, recibos)",
       "integrations": "Integraciones, API y asistencia de lectores de huella",
       "delegation": "Delegación completa y temporal",
-      "retention": "Control de retención de datos"
+      "retention": "Control de retención de datos",
+      "documents": "Documentos del personal y su vencimiento",
+      "penalties": "Reglamento de sanciones progresivas e incentivos"
     },
     "managedByProsm": "Cualquier cambio o renovación de tu licencia lo hace PROSM; recibes una notificación y un correo con la nueva licencia. Para cambiarla, escribe a sales@prosm.net.",
     "historyAll": "Registros de asistencia visibles: todos. Los puntos de ubicación y las fotos se eliminan automáticamente tras el plazo de «Conservación de datos».",
@@ -288,5 +290,39 @@
     "outside": "Fuera de los sitios",
     "people": "Personas y asistencia",
     "other": "Plan y seguridad"
+  },
+  "overtimeTarget": {
+    "title": "Horas extra y retrasos",
+    "hint": "Elige dónde se cuentan las horas extra y los retrasos de la asistencia. Los días y ciclos aprobados no cambian.",
+    "saved": "Guardado.",
+    "error": "No se pudo guardar. Inténtalo de nuevo.",
+    "payroll": {
+      "label": "En el salario",
+      "hint": "Se sugiere en el ciclo de nómina para que lo aceptes."
+    },
+    "allowances": {
+      "label": "En los complementos",
+      "hint": "Las horas extra se valoran en las hojas de complementos."
+    },
+    "counted": {
+      "label": "Se cuentan",
+      "hint": "Las horas extra se valoran en las hojas de complementos."
+    },
+    "none": {
+      "label": "No se cuentan",
+      "hint": "No afecta a nada: solo se ve en las horas."
+    }
+  },
+  "jobTitles": {
+    "title": "Puestos",
+    "hint": "Los puestos de la empresa: se eligen en cada expediente y los usan los documentos exigidos por puesto.",
+    "name": "Puesto",
+    "add": "Añadir",
+    "stop": "Desactivar",
+    "restore": "Recuperar",
+    "people_one": "1 persona",
+    "people_other": "{{count}} personas",
+    "error": "No se pudo guardar.",
+    "people_many": "{{count}} personas"
   }
 }

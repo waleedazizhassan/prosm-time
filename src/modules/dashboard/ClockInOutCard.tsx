@@ -42,6 +42,9 @@ import styles from "./ClockInOutCard.module.css";
 import SessionReviewRepository from "../../core/repositories/SessionReviewRepository";
 import LongSessionPrompt from "./LongSessionPrompt";
 import ExitSitePrompt from "./ExitSitePrompt";
+import TrackingGate, { type TrackingNeed } from "./TrackingGate";
+import { missingForTracking, shiftTrackingAvailable, shiftTrackingStatus, startShiftTracking, stopShiftTracking } from "../../core/services/ShiftTrackingNative";
+import { readBackgroundConsent } from "../../core/services/StartupPermissions";
 import { nearestSite, orderSitesByDistance } from "./siteProximity";
 
 const CHANGE_SITE_NO_SITE_VALUE = "__no_site__";
@@ -249,7 +252,10 @@ export default function ClockInOutCard() {
   const [breakSubmitting, setBreakSubmitting] = useState(false);
   const [breakWarning, setBreakWarning] = useState("");
   // Owner 2026-11-10: a clear, short confirmation after each attendance action
+  const [recenterTick, setRecenterTick] = useState(0);
   const [clockNotice, setClockNotice] = useState<ClockNoticeMessage | null>(null);
+  // owner 2026-11-11: what the Android phone still needs before a shift can start (null = nothing asked)
+  const [trackingGate, setTrackingGate] = useState<{ missing: TrackingNeed[]; suggested?: Site } | null>(null);
   const closeClockNotice = useCallback(() => {
     setClockNotice(null);
     setError("");
@@ -261,6 +267,7 @@ export default function ClockInOutCard() {
   // field) shown right after a successful Clock Out.
   const [summaryModalOpen, setSummaryModalOpen] = useState(false);
   const [clockOutSummary, setClockOutSummary] = useState<{
+    sessionId?: string;
     workedMinutes: number;
     breakMinutes: number;
     overtimeMinutes: number;
@@ -683,6 +690,7 @@ export default function ClockInOutCard() {
     setConfirmModalOpen(false);
     setConfirmAction(null);
     setPendingEvidenceFile(null);
+    beginShiftTracking();
     sayDone(t("attendance.notice.clockedIn"), t("attendance.notice.at", { time: formatTimeOnly(new Date().toISOString(), i18n.language) }));
     load();
   };
@@ -731,6 +739,8 @@ export default function ClockInOutCard() {
       setConfirmModalOpen(false);
       setConfirmAction(null);
       setPendingEvidenceFile(null);
+      if (type === "clock_in") beginShiftTracking();
+      if (type === "clock_out") void stopShiftTracking();
       setClockNotice({ tone: "warning", title: t("attendance.notice.savedOffline"), text: t("attendance.notice.savedOfflineText") });
     } catch (queueError) {
       setConfirmError(queueError instanceof Error ? queueError.message : t("attendance.offlineQueueError"));
@@ -802,6 +812,7 @@ export default function ClockInOutCard() {
     }
 
     const completedSessionId = result.data.sessionId;
+    void stopShiftTracking();
 
     setSubmitting(false);
     setConfirmModalOpen(false);
@@ -811,7 +822,7 @@ export default function ClockInOutCard() {
 
     const summaryResult = await AttendanceRepository.getSessionSummary(completedSessionId);
     if (summaryResult.success && summaryResult.data) {
-      setClockOutSummary(summaryResult.data);
+      setClockOutSummary({ ...summaryResult.data, sessionId: completedSessionId });
       setSummaryModalOpen(true);
     }
   };
@@ -819,13 +830,41 @@ export default function ClockInOutCard() {
   // Plan stage 8.4: a "yes" passes the site it was asked about, as its selection reaches this render only after the tap.
   const sayDone = (title: string, text?: string) => setClockNotice({ tone: "success", title, text });
 
-  const handleClockInTap = (suggested?: Site) => {
+  // Owner 2026-11-11: on the Android app a shift starts only when the phone can follow it in the background
+  const trackingMissing = async (): Promise<TrackingNeed[]> => {
+    if (!shiftTrackingAvailable()) return [];
+    const missing: TrackingNeed[] = readBackgroundConsent() === "accepted" ? [] : ["consent"];
+    return [...missing, ...missingForTracking(await shiftTrackingStatus())];
+  };
+
+  // Owner 2026-11-11: the phone's shift service starts with the clock-in (also one saved offline) and
+  // stops with the clock-out; the server's answers keep it right afterwards.
+  const tShell = i18n.getFixedT(null, "shell");
+  const beginShiftTracking = () => {
+    if (!shiftTrackingAvailable() || readBackgroundConsent() !== "accepted") return;
+    void startShiftTracking({
+      title: tShell("backgroundTrackingTitle"),
+      text: tShell("backgroundTrackingMessage"),
+      exitTitle: tShell("exitPrompt.title"),
+      exitBody: tShell("exitPrompt.body"),
+      resumeTitle: tShell("shiftTracking.resumeTitle"),
+      resumeBody: tShell("shiftTracking.resumeBody"),
+    });
+  };
+
+  const handleClockInTap = async (suggested?: Site) => {
     // Owner 2026-11-09: no clock-in on a stuck or missing location - refresh first
     if (locationStatus !== "available" || !currentLocation) {
       setError(t("attendance.locationStale"));
       return;
     }
     setError("");
+    const missing = await trackingMissing();
+    if (missing.length > 0) {
+      setTrackingGate({ missing, suggested });
+      return;
+    }
+    setTrackingGate(null);
     if (suggested ? suggested.cameraRequired : clockInCameraRequired) {
       setCameraFor("clockIn");
       return;
@@ -1140,6 +1179,10 @@ export default function ClockInOutCard() {
       ) : null}
 
       {/* Owner 2026-11-10: attendance messages in their own style, at the top of the map */}
+      {trackingGate ? (
+        <TrackingGate missing={trackingGate.missing} onClose={() => setTrackingGate(null)}
+          onCheck={() => void handleClockInTap(trackingGate.suggested)} />
+      ) : null}
       <ClockNotice
         notice={
           error
@@ -1218,7 +1261,7 @@ export default function ClockInOutCard() {
           siteTone={mapTone}
           accuracyMeters={currentLocation?.accuracyMeters ?? null}
           height={380}
-          recenterLabel={t("attendance.recenter")}
+          recenterSignal={recenterTick}
         />
         {/* Owner 2026-11-09: SOS floats above the hours and reminders buttons, the same size */}
         {session && planAllows("sos") ? (
@@ -1226,7 +1269,10 @@ export default function ClockInOutCard() {
             {sosSent ? "✓" : "🆘"}
           </button>
         ) : null}
-        <div className={styles.mapInfo}>
+        {/* Owner 2026-11-11: the card is the "back to me" button too (the separate button is gone) */}
+        <div className={styles.mapInfo} role="button" tabIndex={0} title={t("attendance.recenter")} aria-label={t("attendance.recenter")}
+          onClick={() => setRecenterTick((n) => n + 1)}
+          onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); setRecenterTick((n) => n + 1); } }}>
           <div className={styles.mapInfoTop}>
             <StatusBadge status={statusKey}>{t(`attendance.status.${statusKey}`)}</StatusBadge>
             {view.session ? (
@@ -1393,6 +1439,7 @@ export default function ClockInOutCard() {
           breakMinutes={clockOutSummary.breakMinutes}
           overtimeMinutes={clockOutSummary.overtimeMinutes}
           exceptionsCount={clockOutSummary.exceptionsCount}
+          sessionId={clockOutSummary.sessionId ?? null}
           onClose={handleCloseSummary}
         />
       ) : null}

@@ -59,9 +59,9 @@
     "overtimeStartTimeLabel": "A hora extra começa às",
     "lateDeductionStartTimeLabel": "O desconto por atraso começa às",
     "breakRoundingModeLabel": "Arredondamento do intervalo",
-    "blockSelfClockInLabel": "Bloquear a entrada própria depois da tolerância (exige que um gestor registre)",
+    "blockSelfClockInLabel": "Bloquear o ponto próprio quando o atraso começa a contar (um gestor regista no seu lugar)",
     "exemptEmployeesTitle": "Funcionários isentos",
-    "exemptEmployeesHint": "Os funcionários adicionados aqui não sofrem, nesta unidade, o bloqueio de entrada após a tolerância nem o de saída fora da cerca virtual.",
+    "exemptEmployeesHint": "As pessoas adicionadas aqui ficam isentas neste local do bloqueio após o início do atraso e do bloqueio de saída fora da área.",
     "exemptEmployeesAddLabel": "Adicionar um funcionário isento",
     "exemptEmployeesSelectPlaceholder": "Selecione um funcionário…",
     "exemptEmployeesAddAction": "Adicionar",
@@ -73,7 +73,7 @@
     "presenceMonitoringEnabledHint": "Verifica a localização periodicamente durante um turno nesta unidade e avisa se alguém sair da área depois de registrar a entrada. Desligado por padrão.",
     "cameraRequiredLabel": "Câmera obrigatória",
     "activeLabel": "Unidade ativa",
-    "sitePolicyMovedHint": "A margem de precisão do GPS, a tolerância, os horários de turno, o acompanhamento de presença e os funcionários isentos ficam na página Configurações.",
+    "sitePolicyMovedHint": "A margem do GPS, o horário, o acompanhamento de presença e as isenções são definidos na página Configurações.",
     "confirm": "Salvar unidade",
     "genericError": "Não foi possível salvar esta unidade.",
     "openSiteSettings": "Abrir as regras da unidade",
@@ -142,7 +142,7 @@
     "workforceMovedHint": "Os trabalhadores externos agora são adicionados uma vez para toda a organização, na página Trabalhadores externos. Cada um recebe um número de 6 dígitos criado pelo aplicativo e registra o ponto com ele no quiosque desta ou de qualquer outra unidade.",
     "workforceOpenAction": "Abrir Trabalhadores externos",
     "rulesTitle": "Regras da unidade",
-    "rulesHint": "Tolerância do GPS, tolerância de horário, horários de turno, horas extras, intervalos e isenções: definidos na página Configurações.",
+    "rulesHint": "A margem do GPS, o horário, as horas extra, as pausas e as isenções definem-se em Configurações.",
     "rulesAction": "Abrir as regras da unidade"
   },
   "projectAssignments": {
@@ -187,5 +187,13 @@
     "save": "Salvar",
     "saved": "Salvo.",
     "genericError": "Não foi possível salvar."
+  },
+  "noSiteHours": {
+    "title": "Horário fora dos locais",
+    "hint": "Opcional: o horário para um ponto sem local. Deixar em branco não tem problema - nesses dias não há atraso nem horas extra por horário.",
+    "saveAction": "Guardar horário",
+    "clearAction": "Sem horário",
+    "saved": "O horário foi guardado.",
+    "genericError": "Não foi possível guardar o horário. Tente de novo."
   }
 }

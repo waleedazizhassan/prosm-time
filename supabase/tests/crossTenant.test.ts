@@ -97,6 +97,23 @@ const TABLES: Record<string, string> = {
   location_plausibility_flags: byOrg,
   location_samples: "select id from location_samples where presence_session_id in (select id from presence_sessions where organization_id = $1)",
   mock_location_flags: byOrg,
+  // 2026-11-11: tracking keys, the HR suite's job titles and contracts
+  tracking_keys: byOrg,
+  job_titles: byOrg,
+  employee_contracts: byOrg,
+  document_types: byOrg,
+  employee_documents: byOrg,
+  penalty_settings: "select organization_id as id from %t where organization_id = $1",
+  penalty_action_types: byOrg,
+  violation_types: byOrg,
+  bylaw_versions: byOrg,
+  employee_violations: byOrg,
+  employee_violation_steps: byOrg,
+  incentive_rules: byOrg,
+  employee_incentives: byOrg,
+  penalty_payroll_postings: byOrg,
+  payroll_tax_configs: byOrg,
+  document_reminder_log: "select l.document_id::text || l.kind || l.sent_on::text as id from document_reminder_log l join employee_documents d on d.id = l.document_id where d.organization_id = $1",
   notifications: byOrg,
   offline_time_reviews: byOrg,
   organization_settings: byOrg,
@@ -143,6 +160,13 @@ const MUST_BE_SEEDED = [
 
 const today = () => new Date().toISOString().slice(0, 10);
 const daysFromNow = (days: number) => new Date(Date.now() + days * 864e5).toISOString().slice(0, 10);
+// a working day about `days` ahead (the default week rests on Friday and Saturday) - so the test does
+// not fail on the days when "30 days from now" is a rest day (2026-11-11)
+const workdayFromNow = (days: number) => {
+  let d = new Date(Date.now() + days * 864e5);
+  while (d.getUTCDay() === 5 || d.getUTCDay() === 6) d = new Date(d.getTime() + 864e5);
+  return d.toISOString().slice(0, 10);
+};
 
 interface SeededOrg {
   org: TestOrg;
@@ -225,7 +249,7 @@ async function seedOrg(name: string): Promise<SeededOrg> {
   await t.su("insert into device_bindings (user_id, device_identifier) values ($1, $2)", [employee.userId, `device-${name}`]);
 
   // Leave: a pending request reviewed by the owner, plus an entitlement.
-  await must(t.as(employee.authId, "select public.request_prosm_time_leave('annual', $1, $1, $2)", [daysFromNow(30), `${name} family trip`]), "leave request");
+  await must(t.as(employee.authId, "select public.request_prosm_time_leave('annual', $1, $1, $2)", [workdayFromNow(30), `${name} family trip`]), "leave request");
   const [leave] = await t.su<{ id: string }>("select id from leave_requests where user_id = $1", [employee.userId]);
   await must(t.as(org.owner.authId, "select public.review_prosm_time_leave($1, 'approved', 'ok')", [leave.id]), "leave review");
   await t.su(

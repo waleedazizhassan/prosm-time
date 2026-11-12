@@ -178,7 +178,9 @@
         "payroll": "Nómina (seguros, impuestos, préstamos, recibos)",
         "integrations": "Integraciones, API y asistencia de lectores de huella",
         "delegation": "Delegación completa y temporal",
-        "retention": "Control de retención de datos"
+        "retention": "Control de retención de datos",
+        "documents": "Documentos del personal y su vencimiento",
+        "penalties": "Reglamento de sanciones progresivas e incentivos"
       }
     }
   },

@@ -41,7 +41,7 @@
     "travel": "بدل سفر",
     "other": "أخرى",
     "status": "الحالة",
-    "overtimeAmount": "قيمة الإضافي",
+    "overtimeAmount": "قيمة الإضافي والتأخير",
     "total": "الإجمالي"
   },
   "status": {
@@ -64,7 +64,8 @@
     "reviewNotesLabel": "ملاحظات المراجعة (اختياري)",
     "daySessionsLine": "{{count}} جلسات في هذا اليوم · {{hours}} س {{minutes}} د عمل",
     "reviewNotesLine": "ملاحظة المراجع: {{notes}}",
-    "overtimeValueLine": "بقيمة {{amount}}"
+    "overtimeValueLine": "بقيمة {{amount}}",
+    "lateLine": "خصم تأخير {{minutes}} دقيقة: {{amount}}"
   },
   "totals": {
     "title": "إجماليات الفترة"
@@ -119,7 +120,8 @@
       "travel": "السفر",
       "other": "أخرى",
       "overtimeHour": "الساعة الإضافية",
-      "extraDay": "اليوم الإضافي"
+      "extraDay": "اليوم الإضافي",
+      "lateMinute": "دقيقة التأخير (خصم)"
     }
   },
   "pdf": {

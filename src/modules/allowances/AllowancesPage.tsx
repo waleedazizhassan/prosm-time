@@ -60,7 +60,8 @@ function entryTotal(entry: AllowanceEntry): number {
     entry.travelAllowance +
     entry.otherAllowance +
     entry.overtimeAmount +
-    entry.extraDaysAmount
+    entry.extraDaysAmount -
+    entry.lateAmount
   );
 }
 
@@ -801,6 +802,7 @@ export default function AllowancesPage() {
             ) : null}
             <p style={{ fontSize: "var(--font-sm)", color: "var(--text-secondary)" }}>
               {t("detail.overtimeLine", { hours: formatMinutes(detailEntry.overtimeMinutes), days: detailEntry.overtimeDays.toFixed(1) })}
+              {detailEntry.lateAmount > 0 ? ` · ${t("detail.lateLine", { minutes: Math.round(detailEntry.lateMinutes), amount: detailEntry.lateAmount.toFixed(2) })}` : ""}
               {detailEntry.overtimeAmount + detailEntry.extraDaysAmount > 0
                 ? ` · ${t("detail.overtimeValueLine", { amount: (detailEntry.overtimeAmount + detailEntry.extraDaysAmount).toFixed(2) })}`
                 : ""}

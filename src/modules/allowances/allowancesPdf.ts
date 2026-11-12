@@ -37,7 +37,8 @@ function allowanceSum(entry: AllowanceEntry): number {
 }
 
 function extraSum(entry: AllowanceEntry): number {
-  return entry.overtimeAmount + entry.extraDaysAmount;
+  // owner 2026-11-11: lateness priced on the allowances comes off here
+  return entry.overtimeAmount + entry.extraDaysAmount - entry.lateAmount;
 }
 
 function dayList(startDate: string, endDate: string): string[] {

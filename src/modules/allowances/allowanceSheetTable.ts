@@ -19,7 +19,7 @@ const MONEY: { key: keyof AllowanceEntry; label: string }[] = [
 const round2 = (value: number) => Math.round(value * 100) / 100;
 
 export const entryTotal = (entry: AllowanceEntry) =>
-  entry.mealAllowance + entry.expatriationAllowance + entry.transportationAllowance + entry.housingAllowance + entry.travelAllowance + entry.otherAllowance + entry.overtimeAmount + entry.extraDaysAmount;
+  entry.mealAllowance + entry.expatriationAllowance + entry.transportationAllowance + entry.housingAllowance + entry.travelAllowance + entry.otherAllowance + entry.overtimeAmount + entry.extraDaysAmount - entry.lateAmount;
 
 const hoursMinutes = (minutes: number) => {
   const total = Math.round(minutes);
@@ -60,7 +60,7 @@ export function allowanceSheetTable(
     ...MONEY.map((column) => round2(Number(entry[column.key]) || 0)),
     entry.overtimeMinutes ? hoursMinutes(entry.overtimeMinutes) : "",
     entry.overtimeDays || 0,
-    round2(entry.overtimeAmount + entry.extraDaysAmount),
+    round2(entry.overtimeAmount + entry.extraDaysAmount - entry.lateAmount),
     round2(entryTotal(entry)),
     t(`status.${entry.status}`),
   ]);
@@ -76,7 +76,7 @@ export function allowanceSheetTable(
     ...MONEY.map((column) => sum((entry) => Number(entry[column.key]) || 0)),
     hoursMinutes(sorted.reduce((all, entry) => all + entry.overtimeMinutes, 0)),
     sum((entry) => entry.overtimeDays),
-    sum((entry) => entry.overtimeAmount + entry.extraDaysAmount),
+    sum((entry) => entry.overtimeAmount + entry.extraDaysAmount - entry.lateAmount),
     sum(entryTotal),
     "",
   ];

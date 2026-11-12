@@ -130,7 +130,7 @@
     "manualLocationLabel": "工作地点",
     "manualLocationHint": "填写您实际所在的位置（例如客户现场、居家办公）- 未选择地点时必填。",
     "manualLocationRequired": "请填写工作地点，才能在没有登记地点的情况下打卡。",
-    "clockInBlockedContactManager": "此地点班次的宽限时间已过 - 请联系您的主管登记考勤。",
+    "clockInBlockedContactManager": "本站点班次已开始计算迟到——请联系经理为你打卡。",
     "clockOutBlockedContactManager": "您不在此地点的工作区域内 - 请联系您的主管登记下班打卡。",
     "projectLabel": "项目（可选）",
     "noProject": "无项目",
@@ -224,6 +224,41 @@
       "siteChanged": "已更换地点",
       "savedOffline": "已保存在手机上",
       "savedOfflineText": "当前无网络；恢复连接后会自动发送。"
+    },
+    "trackingGate": {
+      "title": "打卡上班之前",
+      "lead": "PROSM Time 仅在班次期间跟踪你的位置——即使应用已关闭——以准确记录出勤和离开站点。需要：",
+      "later": "稍后",
+      "check": "重新检查",
+      "light": "省电省流量：移动 50 米或每 5 分钟发送一次位置，下班打卡后停止。",
+      "consent": {
+        "title": "同意班次期间的位置跟踪",
+        "hint": "仅在班次期间；下班打卡后停止。",
+        "action": "同意"
+      },
+      "location": {
+        "title": "允许位置",
+        "hint": "选择“使用应用时”和精确位置。",
+        "action": "允许"
+      },
+      "notifications": {
+        "title": "允许通知",
+        "hint": "用于班次通知和离开站点提醒。",
+        "action": "设置"
+      },
+      "battery": {
+        "title": "关闭 PROSM Time 的电池优化",
+        "hint": "选择 PROSM Time，设为“不优化”或“无限制”。",
+        "action": "设置"
+      }
+    },
+    "mood": {
+      "question": "今天的工作怎么样？",
+      "great": "很好",
+      "normal": "一般",
+      "tough": "辛苦",
+      "thanks": "谢谢，已保存。",
+      "label": "班次感受"
     }
   },
   "kioskPin": {
@@ -353,7 +388,8 @@
       "cost": "津贴与成本",
       "audit": "操作日志",
       "external": "外部工人",
-      "insights": "考勤分析"
+      "insights": "考勤分析",
+      "documents": "证件"
     },
     "sos": {
       "text": "{{name}} 在 {{site}} 发出 SOS，自 {{time}} 起",
@@ -540,7 +576,38 @@
         "allowances_edit_during_review": "审核中修改津贴",
         "leave_approved_cancelled": "取消已批准的假期",
         "OWNER_AUTHORITY_GRANTED": "授予所有者权限",
-        "OWNER_AUTHORITY_REVOKED": "撤回所有者权限"
+        "OWNER_AUTHORITY_REVOKED": "撤回所有者权限",
+        "hr_profile_changed": "员工档案已修改",
+        "hr_contract_saved": "合同已保存",
+        "hr_contract_deleted": "合同已删除",
+        "hr_job_title_saved": "职位已保存",
+        "hr_document_type_saved": "证件设置已保存",
+        "hr_document_template_added": "已添加证件列表",
+        "hr_document_uploaded": "证件已上传",
+        "hr_document_accepted": "证件已通过",
+        "hr_document_rejected": "证件未通过",
+        "hr_document_reminded": "已提醒员工提交证件",
+        "hr_violation_recorded": "已记录违规",
+        "hr_violation_cancelled": "已撤销违规",
+        "hr_violation_investigate": "已记录调查",
+        "hr_violation_respond": "员工已回复",
+        "hr_violation_approve": "处罚已批准",
+        "hr_violation_reduce": "处罚已减轻",
+        "hr_violation_reject": "处罚已驳回",
+        "hr_violation_acknowledge": "员工已知悉处罚",
+        "hr_violation_refused_ack": "员工拒绝签字",
+        "hr_violation_appeal": "申诉",
+        "hr_violation_appeal_confirm": "申诉：维持处罚",
+        "hr_bylaw_published": "已发布处罚制度",
+        "hr_penalty_settings_saved": "已保存制度限制",
+        "hr_penalty_type_saved": "已保存处罚类型",
+        "hr_violation_type_saved": "已保存违规",
+        "hr_penalty_template_added": "已添加建议违规",
+        "hr_incentive_rule_saved": "已保存奖励规则",
+        "hr_incentive_proposed": "已提议奖励",
+        "hr_incentive_approve": "奖励已批准",
+        "hr_incentive_reject": "奖励已驳回",
+        "hr_incentive_cancel": "奖励已撤销"
       },
       "groups": {
         "sos": "SOS",

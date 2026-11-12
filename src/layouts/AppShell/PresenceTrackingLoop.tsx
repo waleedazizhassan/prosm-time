@@ -4,13 +4,15 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../../core/context/AuthContext";
 import PresenceRepository, { type PresenceSession } from "../../core/repositories/PresenceRepository";
 import BackgroundLocationService, { type TrackingFailure } from "../../core/services/BackgroundLocationService";
+import { ensureTrackingKey, shiftTrackingAvailable, startShiftTracking, stopShiftTracking } from "../../core/services/ShiftTrackingNative";
 import { getCurrentPosition } from "../../core/utils/geo";
 import playAlertSound from "../../core/utils/playAlertSound";
 import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
 import { readBackgroundConsent, writeBackgroundConsent, STARTUP_PERMISSIONS_EVENT, type BackgroundConsent } from "../../core/services/StartupPermissions";
 
-const PRESENCE_SAMPLE_INTERVAL_MS = 5 * 60 * 1000;
+// Owner 2026-11-11 ("notifications arrive late"): every 2 minutes (was 5), so leaving a site is seen sooner
+const PRESENCE_SAMPLE_INTERVAL_MS = 2 * 60 * 1000;
 // Cheap "is a presence session active right now" recheck - much
 // shorter than the sample interval so a fresh Clock In (which starts a
 // new presence session) is picked up quickly, without paying the
@@ -124,11 +126,42 @@ export default function PresenceTrackingLoop() {
     if (result.success && result.data?.exitPrompted) void notifyLeftSite(tRef.current("exitPrompt.title"), tRef.current("exitPrompt.body"));
   };
 
+  // Owner 2026-11-11: the Android app's own shift service - started while a shift is followed (after the
+  // disclosure was accepted), kept running after the app is closed, stopped when the shift ends. It is not
+  // stopped when this screen goes away: only the end of the shift (here, or the server's answer) stops it.
+  const nativeStartedRef = useRef(false);
+  // a key kept on the phone ahead of time (for an offline clock-in)
+  useEffect(() => {
+    if (profile?.id) void ensureTrackingKey();
+  }, [profile?.id]);
+  useEffect(() => {
+    if (!shiftTrackingAvailable()) return;
+    if (activePresenceSessionId && backgroundConsent === "accepted") {
+      void startShiftTracking({
+        title: t("backgroundTrackingTitle"),
+        text: t("backgroundTrackingMessage"),
+        exitTitle: t("exitPrompt.title"),
+        exitBody: t("exitPrompt.body"),
+        resumeTitle: t("shiftTracking.resumeTitle"),
+        resumeBody: t("shiftTracking.resumeBody"),
+      }).then((started) => {
+        nativeStartedRef.current = started;
+        if (!started) setTrackingFailure("failed");
+      });
+    } else if (activePresenceSessionId && backgroundConsent === "unknown") {
+      setDisclosureOpen(true);
+    } else if (!activePresenceSessionId && nativeStartedRef.current) {
+      nativeStartedRef.current = false;
+      void stopShiftTracking();
+    }
+  }, [activePresenceSessionId, backgroundConsent, t]);
+
   // Native path - real background tracking, only after the in-app
   // disclosure has been accepted (Google Play requires a prominent
   // disclosure before background location is requested).
+  // (an older Android build without the shift service)
   useEffect(() => {
-    if (!BackgroundLocationService.isSupported()) return undefined;
+    if (!BackgroundLocationService.isSupported() || shiftTrackingAvailable()) return undefined;
     if (!activePresenceSessionId) return undefined;
     if (backgroundConsent !== "accepted") {
       if (backgroundConsent === "unknown") setDisclosureOpen(true);

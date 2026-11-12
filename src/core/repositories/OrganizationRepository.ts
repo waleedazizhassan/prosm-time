@@ -18,6 +18,7 @@ export interface Organization {
   // way, whether clocked in at a site or not." The org-wide radius
   // (meters) applied around a no-site clock-in's own GPS point.
   noSiteAllowedRadiusMeters: number;
+  noSiteHours: NoSiteHours;
   // Audit 2.4 - refuse a clock in/out from a location the device reports as simulated.
   rejectMockLocation: boolean;
   requireGps: boolean;
@@ -56,7 +57,7 @@ class OrganizationRepository {
       const { data, error } = await this.client
         .from("organizations")
         .select(
-          "id, organization_code, name, status, logo_url, organization_settings(default_language, default_theme, no_site_allowed_radius_meters, require_gps, suggest_clock_in, reject_mock_location, open_session_alert_hours, open_session_max_hours, default_gps_accuracy_tolerance_meters, default_break_rounding_mode, default_grace_tolerance_minutes)",
+          "id, organization_code, name, status, logo_url, organization_settings(default_language, default_theme, no_site_allowed_radius_meters, require_gps, suggest_clock_in, reject_mock_location, open_session_alert_hours, open_session_max_hours, default_gps_accuracy_tolerance_meters, default_break_rounding_mode, default_grace_tolerance_minutes, no_site_shift_start_time, no_site_shift_end_time, no_site_overtime_start_time, no_site_late_deduction_start_time)",
         )
         .maybeSingle();
 
@@ -74,6 +75,13 @@ class OrganizationRepository {
         defaultTheme: settings?.default_theme ?? "dark",
         logoUrl: data.logo_url ?? null,
         noSiteAllowedRadiusMeters: settings?.no_site_allowed_radius_meters ?? 500,
+        // owner 2026-11-10: optional hours for a clock-in outside the sites
+        noSiteHours: {
+          shiftStart: settings?.no_site_shift_start_time?.slice(0, 5) ?? "",
+          shiftEnd: settings?.no_site_shift_end_time?.slice(0, 5) ?? "",
+          overtimeStart: settings?.no_site_overtime_start_time?.slice(0, 5) ?? "",
+          lateStart: settings?.no_site_late_deduction_start_time?.slice(0, 5) ?? "",
+        },
         rejectMockLocation: settings?.reject_mock_location ?? false,
         requireGps: settings?.require_gps ?? false,
         suggestClockIn: settings?.suggest_clock_in ?? false,
@@ -121,6 +129,23 @@ class OrganizationRepository {
   // § live UX review, user-directed - "control every employee the same
   // way, whether clocked in at a site or not." Owner-only, same
   // "no direct client UPDATE grant" posture as uploadLogo above.
+  // owner 2026-11-10: the optional hours for a clock-in outside the sites ("" = none)
+  async setNoSiteHours(hours: NoSiteHours): Promise<ServiceResult> {
+    try {
+      const { data, error } = await this.client.rpc("set_prosm_time_no_site_hours", {
+        p_shift_start: hours.shiftStart || null,
+        p_shift_end: hours.shiftEnd || null,
+        p_overtime_start: hours.overtimeStart || null,
+        p_late_start: hours.lateStart || null,
+      });
+      if (error) return createError(error.message);
+      if (data?.success === false) return createError("Unable to save the hours.");
+      return createSuccess();
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Organization service unavailable.");
+    }
+  }
+
   async setNoSiteAllowedRadius(radiusMeters: number): Promise<ServiceResult> {
     try {
       const { data, error } = await this.client.rpc("set_prosm_time_no_site_radius", { p_radius_meters: radiusMeters });
@@ -171,6 +196,13 @@ class OrganizationRepository {
       return createError(error instanceof Error ? error.message : "Organization service unavailable.");
     }
   }
+}
+
+export interface NoSiteHours {
+  shiftStart: string;
+  shiftEnd: string;
+  overtimeStart: string;
+  lateStart: string;
 }
 
 export default new OrganizationRepository();

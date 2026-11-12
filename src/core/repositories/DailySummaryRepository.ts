@@ -10,6 +10,8 @@ export interface DailySummaryPerson {
   autoClosed: boolean;
   minutes: number;
   lateMinutes: number | null;
+  /** Owner 2026-11-11: their answer to "how was today's work?" */
+  mood?: "great" | "normal" | "tough" | null;
 }
 
 export interface DailySummary {

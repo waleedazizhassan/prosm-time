@@ -68,7 +68,10 @@
     "chooseAll": "全选当前显示",
     "chooseNone": "取消选择",
     "addToChosen": "为所选 {{count}} 人添加一项",
-    "bulkHint": "所选人员都会添加同一项；若其中有人无法添加（例如不在您的站点范围），则全部不添加。"
+    "bulkHint": "所选人员都会添加同一项；若其中有人无法添加（例如不在您的站点范围），则全部不添加。",
+    "customRules": "公司自定义税务规则",
+    "selfServiceOff": "员工看不到工资单：工资设置中的“员工自助”已关闭。",
+    "openSettings": "打开设置"
   },
   "actions": {
     "submit": "提交审核",
@@ -193,7 +196,8 @@
     "managementApproval": "管理层审批",
     "combinedTotal": "工资总额（含津贴）",
     "totalSalaries": "工资合计",
-    "no": "序号"
+    "no": "序号",
+    "customRules": "按公司自定义的税务和社保规则计算"
   },
   "profiles": {
     "title": "人员",
@@ -244,8 +248,15 @@
     "savedShort": "已保存。",
     "deleteItem": "删除",
     "deleteItemLabel": "删除项目 {{name}}",
-    "deleteItemConfirm": "从所有人的工资中删除「{{name}}」？已批准的周期不变。",
-    "itemDeleted": "已删除项目「{{name}}」。"
+    "deleteItemConfirm": "仅从此员工的工资中删除“{{name}}”？其他员工和已批准的周期不变。",
+    "itemDeleted": "已删除项目「{{name}}」。",
+    "legalNameArabicLabel": "阿拉伯文姓名（与证件一致）",
+    "legalNameLabel": "正式姓名",
+    "legalNameHint": "这是工资单上的姓名，而不是用户名（{{user}}）。",
+    "legalNameMissing": "缺少正式姓名",
+    "notInPayroll": "此人不在工资名单中（所有者不领取工资）。",
+    "insuranceCategory": "社保类别",
+    "insuranceCategoryDefault": "默认类别"
   },
   "installments": {
     "title": "分期与预支",
@@ -349,7 +360,12 @@
     "appliesToAllLabel": "适用于所有员工",
     "defaultAmount": "默认金额",
     "appliesToAllHint": "每个新周期为所有有薪资档案的人添加；个人设置了自己的值时以个人值为准。",
-    "preTaxLabel": "计税前从应税工资中扣除"
+    "preTaxLabel": "计税前从应税工资中扣除",
+    "remove": "移除",
+    "restore": "恢复",
+    "removeConfirm": "移除项目“{{name}}”？它将从工资档案和未关闭的周期中移除；已批准的周期保留。",
+    "removed": "项目已移除。",
+    "restored": "项目已恢复。"
   },
   "requests": {
     "hint": "团队申请的工资单。一键将已核准并保存的工资单以 PDF 发送到登记邮箱——同一版本，不重新计算。",
@@ -422,7 +438,9 @@
     "statutoryBrackets": "级距必须递增，最后一级无上限。",
     "statutoryWage": "最高参保工资不能低于最低值。",
     "chooseItem": "请先选择项目。",
-    "basicCannotBeDeleted": "基本工资不能删除。"
+    "basicCannotBeDeleted": "基本工资不能删除。",
+    "legalNameRequired": "请填写正式姓名——工资单上显示此姓名。",
+    "legalNameArabic": "请仅用阿拉伯字母书写姓名，与证件一致。"
   },
   "exports": {
     "hint": "已批准或已锁定周期的工资单会在服务器上打包为一个 ZIP，每份都有独立编号。您可以离开此页面；文件保留 7 天。",
@@ -490,5 +508,10 @@
     "twoAction": "薪资档案",
     "three": "月度周期",
     "threeText": "在下方创建周期 → 录入变动项并检查考勤建议 → 提交 → 由另一人批准 → 锁定并发布工资单。"
+  },
+  "taxLink": {
+    "title": "税务与社保",
+    "hint": "国家、税率表、社保和计算器，都在单独页面中。",
+    "open": "打开"
   }
 }

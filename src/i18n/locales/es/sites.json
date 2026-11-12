@@ -59,9 +59,9 @@
     "overtimeStartTimeLabel": "Las horas extra empiezan a las",
     "lateDeductionStartTimeLabel": "El descuento por retraso empieza a las",
     "breakRoundingModeLabel": "Redondeo del descanso",
-    "blockSelfClockInLabel": "Bloquear la entrada propia tras el margen (exige que la fiche un responsable)",
+    "blockSelfClockInLabel": "Bloquear el fichaje propio cuando empieza a contar el retraso (lo ficha un responsable)",
     "exemptEmployeesTitle": "Empleados exentos",
-    "exemptEmployeesHint": "Los empleados añadidos aquí se saltan en esta sede el bloqueo de entrada tras el margen y el de salida fuera de la geovalla.",
+    "exemptEmployeesHint": "Las personas añadidas aquí quedan exentas en este sitio del bloqueo tras empezar el retraso y del bloqueo de salida fuera del área.",
     "exemptEmployeesAddLabel": "Añadir un empleado exento",
     "exemptEmployeesSelectPlaceholder": "Selecciona un empleado…",
     "exemptEmployeesAddAction": "Añadir",
@@ -73,7 +73,7 @@
     "presenceMonitoringEnabledHint": "Vuelve a comprobar la ubicación periódicamente durante un turno en esta sede e informa si alguien sale de la zona tras fichar. Desactivado por defecto.",
     "cameraRequiredLabel": "Cámara obligatoria",
     "activeLabel": "Sede activa",
-    "sitePolicyMovedHint": "El margen de precisión GPS, el margen de tolerancia, el horario de turno, el seguimiento de presencia y los empleados exentos se configuran en Ajustes.",
+    "sitePolicyMovedHint": "El margen GPS, el horario, la supervisión de presencia y las personas exentas se ajustan en la página de Ajustes.",
     "confirm": "Guardar sede",
     "genericError": "No se pudo guardar esta sede.",
     "openSiteSettings": "Abrir las reglas de la sede",
@@ -142,7 +142,7 @@
     "workforceMovedHint": "Los trabajadores externos ahora se añaden una sola vez para toda la organización, en la página Trabajadores externos. Cada uno recibe un número de 6 cifras creado por la aplicación y ficha con él en el quiosco de esta sede o de cualquier otra.",
     "workforceOpenAction": "Abrir Trabajadores externos",
     "rulesTitle": "Reglas de la sede",
-    "rulesHint": "Tolerancia GPS, margen, horario de turno, horas extra, descansos y quién está exento: se configuran en Ajustes.",
+    "rulesHint": "El margen GPS, el horario, las horas extra, los descansos y las exenciones se ajustan en Ajustes.",
     "rulesAction": "Abrir las reglas de la sede"
   },
   "projectAssignments": {
@@ -187,5 +187,13 @@
     "save": "Guardar",
     "saved": "Guardado.",
     "genericError": "No se pudo guardar."
+  },
+  "noSiteHours": {
+    "title": "Horario fuera de los sitios",
+    "hint": "Opcional: el horario para un fichaje sin sitio. Dejarlo vacío está bien: esos días no tienen retraso ni horas extra por reloj.",
+    "saveAction": "Guardar horario",
+    "clearAction": "Sin horario",
+    "saved": "Se guardó el horario.",
+    "genericError": "No se pudo guardar el horario. Inténtalo de nuevo."
   }
 }

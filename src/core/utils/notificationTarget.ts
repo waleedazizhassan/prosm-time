@@ -9,6 +9,8 @@ export interface NotificationRef {
   entityType?: unknown;
   /** The notification's data.kind, when known (the bell has it; a push tap doesn't). */
   kind?: unknown;
+  /** The related record's id (push: data.entityId; bell: relatedEntityId). */
+  entityId?: unknown;
   /** The day a daily summary is about (the bell has it; a push tap opens yesterday). */
   date?: unknown;
 }
@@ -27,11 +29,14 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
     case "sos_alert":
       return viewer.isOwner || viewer.canViewEmergencyLog ? "/emergency-log" : "/dashboard";
     // Leave requests are reviewed on the Manager Console too.
+    // Owner 2026-11-11: someone left their work area - the manager page says what became of it (still
+    // waiting for the reason, waiting for review, or decided) instead of opening on nothing
+    case "out_of_zone_manager":
+      return ref?.entityId ? `/manager?exceptionId=${String(ref.entityId)}` : "/manager";
     case "exception_pending_review":
     case "correction_submitted":
     case "site_change_alert":
     case "location_plausibility_flag":
-    case "out_of_zone_manager":
     case "missing_clock_out":
       return "/manager";
     // v2.3.43 step 2: the manager reviews an automatically closed shift on the
@@ -62,6 +67,28 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
     case "payslip_requested":
     case "payslip_send_failed":
       return "/payroll/requests";
+    // 2026-11-11 HR suite feature 2: a document - personnel managers to the documents page, the person to
+    // the documents in their own file (where the camera button is)
+    // 2026-11-11 HR suite feature 1: deciding goes to the penalties page on that violation; the person to their file
+    case "penalty_review":
+    case "penalty_appeal":
+      return ref?.entityId ? `/penalties?tab=action&open=${String(ref.entityId)}` : "/penalties";
+    case "incentive_review":
+      return "/penalties?tab=incentives";
+    case "penalty_response":
+    case "penalty_decided":
+    case "penalty_appeal_decided":
+    case "incentive_granted":
+      return "/me?tab=penalties";
+    case "document_uploaded":
+    case "document_clock_in":
+      return "/documents";
+    case "document_missing":
+    case "document_expiring":
+    case "document_expired":
+    case "document_rejected":
+    case "document_reminder":
+      return ref?.kind === "hr" || viewer.isOwner ? "/documents" : "/me?tab=documents";
     // Owner 2026-11-10: a Buzz opens the clock-in screen (where "clock in / out" is done)
     case "buzz":
       return "/clock-in";

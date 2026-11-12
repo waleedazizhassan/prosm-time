@@ -2,7 +2,10 @@
    room, the permissions card (long) across both. */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  /* owner 2026-11-12 ("the person page has no layout"): one even column of full-width cards, never two
+     columns of different heights */
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 980px;
   gap: var(--space-3);
   align-items: start;
   margin-top: var(--space-3);

@@ -214,7 +214,8 @@
     },
     "dailyDigest": {
       "title": "Ieri in breve",
-      "body": "{{present}} hanno lavorato, {{noShows}} hanno saltato un turno. In attesa: {{leave}} ferie, {{exceptions}} eccezioni. In servizio ora: {{open}}."
+      "body": "{{present}} hanno lavorato, {{late}} in ritardo, {{absent}} assenti, {{onLeave}} in ferie. In attesa: {{leave}} ferie, {{exceptions}} eccezioni. Presenti ora: {{open}}.",
+      "documents": "Documenti: {{expired}} scaduti, {{missing}} mancanti."
     },
     "licenseChanged": {
       "title": "La tua licenza è cambiata",
@@ -257,6 +258,68 @@
       "clock_out": "Per favore, timbra l’uscita.",
       "call_me": "Per favore, chiamami.",
       "attention": "Per favore, guarda l’app."
+    },
+    "mockLocation": {
+      "title": "Posizione falsa",
+      "clock_in": "{{name}} ha timbrato l’entrata con una posizione falsa.",
+      "clock_out": "{{name}} ha timbrato l’uscita con una posizione falsa.",
+      "presence": "{{name}} ha usato una posizione falsa durante il turno: quelle posizioni non sono state registrate."
+    },
+    "documents": {
+      "missingTitleSelf": "Serve un documento",
+      "missingBodySelf": "Nel tuo fascicolo serve {{document}}. Fotografalo nell'app.",
+      "missingTitleHr": "Documenti di un nuovo dipendente",
+      "missingBodyHr": "{{name}} deve fornire {{count}} documento/i.",
+      "expiringTitleSelf": "{{document}} sta per scadere",
+      "expiringBodySelf": "Mancano {{count}} giorno/i per {{document}}. Rinnovalo e carica il nuovo.",
+      "expiringTitleHr": "Un documento sta per scadere",
+      "expiringBodyHr": "{{name}}: {{document}} scade tra {{count}} giorno/i.",
+      "expiredTitleSelf": "{{document}} scade oggi",
+      "expiredBodySelf": "Carica {{document}} rinnovato dal tuo fascicolo.",
+      "expiredTitleHr": "Un documento scade oggi",
+      "expiredBodyHr": "{{name}}: {{document}} scade oggi.",
+      "rejectedTitleSelf": "Documento non accettato",
+      "rejectedBodySelf": "{{document}}: {{reason}}. Fotografalo di nuovo e invialo.",
+      "rejectedTitleHr": "Documento non accettato",
+      "rejectedBodyHr": "{{document}}: {{reason}}",
+      "reminderTitleSelf": "Promemoria documento",
+      "reminderBodySelf": "Carica {{document}} dal tuo fascicolo, per favore.",
+      "reminderTitleHr": "Promemoria documento",
+      "reminderBodyHr": "{{name}}: {{document}}",
+      "uploadedTitleHr": "Un documento da verificare",
+      "uploadedBodyHr": "{{name}} ha caricato {{document}}.",
+      "uploadedTitleSelf": "Documento caricato",
+      "uploadedBodySelf": "{{document}}",
+      "clockInTitleHr": "Timbratura con documento scaduto",
+      "clockInBodyHr": "{{name}} ha timbrato con {{document}} scaduto.",
+      "clockInTitleSelf": "Documento scaduto",
+      "clockInBodySelf": "{{document}} è scaduto."
+    },
+    "penalties": {
+      "reviewTitle": "Una sanzione da esaminare",
+      "reviewBody": "{{name}}: {{violation}} ({{date}})",
+      "investigationTitle": "Serve un'indagine",
+      "investigationBody": "{{name}}: {{violation}} ({{date}})",
+      "repliedTitle": "Il dipendente ha risposto",
+      "repliedBody": "{{name}}: {{violation}} – pronta per l'approvazione",
+      "noReplyTitle": "Nessuna risposta in tempo",
+      "noReplyBody": "{{name}}: {{violation}} – pronta per l'approvazione",
+      "responseTitle": "Ti è richiesta una risposta",
+      "responseBody": "{{violation}} ({{date}}). Rispondi entro il {{due}}.",
+      "decidedTitle": "Una decisione di sanzione",
+      "decidedBody": "{{violation}} ({{date}}). Aprila per confermare la ricezione o fare ricorso.",
+      "rejectedTitle": "Nessuna sanzione",
+      "rejectedBody": "{{violation}} ({{date}}): nessuna sanzione applicata.",
+      "appealTitle": "Un ricorso",
+      "appealBody": "{{name}} ha fatto ricorso: {{violation}} ({{date}})",
+      "appealConfirmedTitle": "Il tuo ricorso è stato deciso",
+      "appealConfirmedBody": "{{violation}}: la sanzione è confermata.",
+      "cancelledTitle": "Una sanzione è stata annullata",
+      "cancelledBody": "{{violation}} ({{date}}) è stata annullata.",
+      "incentiveReviewTitle": "Un incentivo da esaminare",
+      "incentiveReviewBody": "{{name}}: {{reason}}",
+      "incentiveGrantedTitle": "Ben fatto!",
+      "incentiveGrantedBody": "Hai ricevuto un incentivo: {{reason}}"
     }
   },
   "items": {
@@ -286,7 +349,10 @@
     "payslips": "Le mie buste paga",
     "externalPay": "Paga esterni",
     "announcements": "Bacheca",
-    "exceptions": "Le mie eccezioni"
+    "exceptions": "Le mie eccezioni",
+    "myProfile": "Il mio fascicolo",
+    "documents": "Documenti",
+    "penalties": "Sanzioni e incentivi"
   },
   "sosOverlay": {
     "title": "Allarme SOS/Emergenza",
@@ -398,7 +464,10 @@
     "payroll": "Cicli paghe, schede, i tre report e le buste paga - con permessi separati e versioni salvate.",
     "payslips": "Le tue buste paga pubblicate: visualizzale o richiedile via email.",
     "externalPay": "Tariffe a giorno, settimana, mese o anno, elaborazioni, regole e rettifiche individuali - approvate e congelate, separate dalle paghe.",
-    "announcements": "Annunci e comunicati ufficiali indirizzati a te; conferma quelli che lo richiedono."
+    "announcements": "Annunci e comunicati ufficiali indirizzati a te; conferma quelli che lo richiedono.",
+    "myProfile": "I tuoi dati, documenti, richiami e presenze.",
+    "documents": "I documenti di ogni dipendente e le loro scadenze.",
+    "penalties": "Infrazioni, approvazioni, ricorsi e incentivi."
   },
   "backgroundDisclosure": {
     "title": "Posizione durante il turno",
@@ -487,5 +556,9 @@
     "send": "Invia avviso",
     "sent": "{{name}} è stato avvisato.",
     "failed": "L’avviso non è stato inviato. Riprova."
+  },
+  "shiftTracking": {
+    "resumeTitle": "Riprendi il turno",
+    "resumeBody": "Il telefono si è riavviato durante il turno. Apri PROSM Time per riprendere il monitoraggio."
   }
 }

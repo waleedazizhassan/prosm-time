@@ -68,7 +68,10 @@
     "chooseAll": "Alle angezeigten wählen",
     "chooseNone": "Auswahl aufheben",
     "addToChosen": "Posten für {{count}} Ausgewählte",
-    "bulkHint": "Alle Ausgewählten erhalten denselben Posten - oder niemand, wenn es bei einer Person nicht geht (z. B. außerhalb Ihrer Standorte)."
+    "bulkHint": "Alle Ausgewählten erhalten denselben Posten - oder niemand, wenn es bei einer Person nicht geht (z. B. außerhalb Ihrer Standorte).",
+    "customRules": "Eigene Steuerregeln",
+    "selfServiceOff": "Die Mitarbeitenden sehen ihre Abrechnungen nicht: „Self-Service“ ist in den Lohneinstellungen aus.",
+    "openSettings": "Einstellungen öffnen"
   },
   "actions": {
     "submit": "Zur Prüfung senden",
@@ -193,7 +196,8 @@
     "managementApproval": "Freigabe der Geschäftsleitung",
     "combinedTotal": "Gesamtgehalt (inkl. Zulagen)",
     "totalSalaries": "Summe der Gehälter",
-    "no": "Nr."
+    "no": "Nr.",
+    "customRules": "Mit eigenen Steuer- und Versicherungsregeln berechnet"
   },
   "profiles": {
     "title": "Personen",
@@ -244,8 +248,15 @@
     "savedShort": "Gespeichert.",
     "deleteItem": "Löschen",
     "deleteItemLabel": "Posten {{name}} löschen",
-    "deleteItemConfirm": "\"{{name}}\" aus allen Gehältern löschen? Genehmigte Läufe ändern sich nicht.",
-    "itemDeleted": "Der Posten \"{{name}}\" wurde gelöscht."
+    "deleteItemConfirm": "„{{name}}“ nur aus dem Gehalt dieser Person entfernen? Andere Mitarbeitende und genehmigte Abrechnungen bleiben unverändert.",
+    "itemDeleted": "Der Posten \"{{name}}\" wurde gelöscht.",
+    "legalNameArabicLabel": "Name auf Arabisch (wie im Ausweis)",
+    "legalNameLabel": "Offizieller Name",
+    "legalNameHint": "Dieser Name steht auf der Gehaltsabrechnung, nicht der Benutzername ({{user}}).",
+    "legalNameMissing": "Offizieller Name fehlt",
+    "notInPayroll": "Diese Person ist nicht in der Lohnabrechnung (der Inhaber erhält kein Gehalt).",
+    "insuranceCategory": "Versicherungskategorie",
+    "insuranceCategoryDefault": "Standardkategorie"
   },
   "installments": {
     "title": "Raten und Vorschüsse",
@@ -349,7 +360,12 @@
     "appliesToAllLabel": "Gilt für alle Mitarbeitenden",
     "defaultAmount": "Standardbetrag",
     "appliesToAllHint": "Wird in jedem neuen Zyklus für alle mit Gehaltsprofil hinzugefügt. Hat eine Person einen eigenen Wert, gilt dieser.",
-    "preTaxLabel": "Vor der Lohnsteuer abziehen"
+    "preTaxLabel": "Vor der Lohnsteuer abziehen",
+    "remove": "Entfernen",
+    "restore": "Wiederherstellen",
+    "removeConfirm": "Bestandteil „{{name}}“ entfernen? Er verschwindet aus Gehaltskarten und offenen Läufen; genehmigte Läufe behalten ihn.",
+    "removed": "Bestandteil entfernt.",
+    "restored": "Bestandteil wiederhergestellt."
   },
   "requests": {
     "hint": "Von Ihrem Team angeforderte Abrechnungen. Ein Klick sendet die genehmigte, gespeicherte Abrechnung als PDF an die registrierte E-Mail - dieselbe Version, nichts wird neu berechnet.",
@@ -422,7 +438,9 @@
     "statutoryBrackets": "Die Stufen müssen aufsteigen; die letzte hat keine Obergrenze.",
     "statutoryWage": "Der Höchstlohn darf nicht unter dem Mindestlohn liegen.",
     "chooseItem": "Wählen Sie zuerst den Posten.",
-    "basicCannotBeDeleted": "Das Grundgehalt kann nicht gelöscht werden."
+    "basicCannotBeDeleted": "Das Grundgehalt kann nicht gelöscht werden.",
+    "legalNameRequired": "Gib den offiziellen Namen ein - er steht auf der Gehaltsabrechnung.",
+    "legalNameArabic": "Schreib den Namen nur mit arabischen Buchstaben, wie im Ausweis."
   },
   "exports": {
     "hint": "Lohnzettel eines genehmigten oder gesperrten Laufs werden auf dem Server als ein ZIP erstellt, jeder mit eigener Nummer. Sie können die Seite verlassen; die Datei bleibt 7 Tage verfügbar.",
@@ -490,5 +508,10 @@
     "twoAction": "Gehaltsprofile",
     "three": "Der Monatszyklus",
     "threeText": "Zyklus unten anlegen → Variable eintragen und Anwesenheitsvorschläge prüfen → einreichen → eine andere Person genehmigt → sperren und Gehaltszettel veröffentlichen."
+  },
+  "taxLink": {
+    "title": "Steuern und Sozialversicherung",
+    "hint": "Land, Steuerstufen, Versicherung und ein Rechner – auf einer eigenen Seite.",
+    "open": "Öffnen"
   }
 }

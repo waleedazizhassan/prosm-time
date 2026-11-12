@@ -59,9 +59,9 @@
     "overtimeStartTimeLabel": "Inizio conteggio straordinario",
     "lateDeductionStartTimeLabel": "Inizio detrazione per ritardo",
     "breakRoundingModeLabel": "Arrotondamento tempo di pausa",
-    "blockSelfClockInLabel": "Blocca la timbratura autonoma oltre il periodo di tolleranza (richiede invece una timbratura assistita dal manager)",
+    "blockSelfClockInLabel": "Blocca la timbratura autonoma quando inizia a contare il ritardo (timbra un responsabile)",
     "exemptEmployeesTitle": "Dipendenti esentati",
-    "exemptEmployeesHint": "I dipendenti aggiunti qui saltano sia il blocco della timbratura dopo il periodo di tolleranza sia il blocco dell'uscita fuori area per questa sede.",
+    "exemptEmployeesHint": "Le persone aggiunte qui sono esentate in questo sito dal blocco dopo l’inizio del ritardo e dal blocco dell’uscita fuori area.",
     "exemptEmployeesAddLabel": "Aggiungi un dipendente esentato",
     "exemptEmployeesSelectPlaceholder": "Seleziona un dipendente…",
     "exemptEmployeesAddAction": "Aggiungi",
@@ -73,7 +73,7 @@
     "presenceMonitoringEnabledHint": "Riverifica periodicamente la posizione durante un turno in questo sito e segnala se qualcuno lascia l'area dopo la timbratura. Disattivato per impostazione predefinita.",
     "cameraRequiredLabel": "Fotocamera richiesta",
     "activeLabel": "Sede attiva",
-    "sitePolicyMovedHint": "Margine GPS, tolleranza, orari dei turni, monitoraggio della presenza e dipendenti esentati si impostano nella pagina Impostazioni.",
+    "sitePolicyMovedHint": "Margine GPS, orari del turno, monitoraggio della presenza ed esenzioni si impostano nella pagina Impostazioni.",
     "confirm": "Salva sede",
     "genericError": "Impossibile salvare questa sede.",
     "openSiteSettings": "Apri le regole della sede",
@@ -142,7 +142,7 @@
     "workforceMovedHint": "I lavoratori esterni ora si aggiungono una sola volta per tutta l'organizzazione, nella pagina Lavoratori esterni. Ognuno riceve un numero a 6 cifre creato dall'app e timbra con esso al chiosco di questa o di qualsiasi altra sede.",
     "workforceOpenAction": "Apri Lavoratori esterni",
     "rulesTitle": "Regole della sede",
-    "rulesHint": "Tolleranza GPS, tolleranza ritardo, orari, straordinari, pause ed esenzioni - nella pagina Impostazioni.",
+    "rulesHint": "Margine GPS, orari, straordinari, pause ed esenzioni si impostano in Impostazioni.",
     "rulesAction": "Apri le regole della sede"
   },
   "projectAssignments": {
@@ -187,5 +187,13 @@
     "save": "Salva",
     "saved": "Salvato.",
     "genericError": "Salvataggio non riuscito."
+  },
+  "noSiteHours": {
+    "title": "Orari fuori dai siti",
+    "hint": "Facoltativo: gli orari per una timbratura senza sito. Lasciarli vuoti va bene: quei giorni non hanno ritardi né straordinari a orario.",
+    "saveAction": "Salva orari",
+    "clearAction": "Nessun orario",
+    "saved": "Orari salvati.",
+    "genericError": "Impossibile salvare gli orari. Riprova."
   }
 }

@@ -3,6 +3,9 @@ import { useTranslation } from "react-i18next";
 import { Link, Navigate } from "react-router-dom";
 
 import { useAuth } from "../../core/context/AuthContext";
+import { useSearchParams } from "react-router-dom";
+import { useFeedback } from "../../core/context/FeedbackContext";
+import { requireSupabaseClient } from "../../core/api/supabaseClient";
 import ManagerRepository, { type PendingReviewItem, type PendingReviewKind } from "../../core/repositories/ManagerRepository";
 import LeaveRepository, { type PendingLeaveReviewRow, type ApprovedLeaveRow } from "../../core/repositories/LeaveRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
@@ -49,6 +52,24 @@ const ACTIONS_BY_KIND: Record<PendingReviewKind, ReviewAction[]> = {
 export default function ManagerConsolePage() {
   const { t, i18n } = useTranslation("manager");
   const { hasPermission, profile } = useAuth();
+
+  // Owner 2026-11-11: opened from "someone left their work area" - say what became of it, rather than
+  // opening on an empty page (the exception reaches the review list only once the reason is sent)
+  const [searchParams, setSearchParams] = useSearchParams();
+  const feedback = useFeedback();
+  const exceptionId = searchParams.get("exceptionId");
+  useEffect(() => {
+    if (!exceptionId) return;
+    void requireSupabaseClient().rpc("get_prosm_time_exception_status", { p_exception_id: exceptionId }).then(({ data }) => {
+      const info = (data ?? { found: false }) as { found: boolean; status?: string; employeeName?: string };
+      const key = !info.found ? "notFound" : info.status === "pending_reason" ? "pendingReason" : info.status === "pending_review" ? "pendingReview" : "resolved";
+      feedback?.show({ tone: info.found ? "success" : "error", title: info.found ? t("exceptionStatus.title", { name: info.employeeName ?? "" }) : undefined, text: t(`exceptionStatus.${key}`) });
+      setSearchParams((params) => {
+        params.delete("exceptionId");
+        return params;
+      }, { replace: true });
+    });
+  }, [exceptionId, feedback, setSearchParams, t]);
 
   const [pendingItems, setPendingItems] = useState<PendingReviewItem[]>([]);
   const [reviewTarget, setReviewTarget] = useState<PendingReviewItem | null>(null);

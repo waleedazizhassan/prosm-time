@@ -48,7 +48,7 @@
     },
     "sites": {
       "title": "Sedi (amministratori)",
-      "body": "In Sedi si creano i luoghi di lavoro e si assegnano le persone. Per aggiungere una sede servono solo il nome, la posizione - mettiti lì e premi Usa la mia posizione attuale -, il raggio e se serve una foto; il resto è in Altre opzioni. Una nuova sede prende il fuso orario del tuo dispositivo. Il ruolo nella sede parte dal ruolo nell'organizzazione. Tutto il resto di una sede si imposta nella sua pagina, in Regole della sede: margine GPS, tolleranza, orari dei turni, straordinari e trattenute per ritardo, arrotondamento delle pause, monitoraggio della presenza, dipendenti esentati e blocchi self-service."
+      "body": "In Sedi si creano i luoghi di lavoro e si assegnano le persone. Per aggiungere una sede servono solo il nome, la posizione - mettiti lì e premi Usa la mia posizione attuale -, il raggio e se serve una foto; il resto è in Altre opzioni. Una nuova sede prende il fuso orario del tuo dispositivo. Il ruolo nella sede parte dal ruolo nell'organizzazione. Tutto il resto di una sede si imposta nella sua pagina, in Regole della sede: margine GPS, orari dei turni, straordinari e trattenute per ritardo, arrotondamento delle pause, monitoraggio della presenza, dipendenti esentati e blocchi self-service."
     },
     "workers": {
       "title": "Lavoratori esterni",
@@ -177,6 +177,34 @@
     "personPage": {
       "title": "La pagina della persona (per gli amministratori)",
       "body": "Tocca qualcuno in Persone per aprire la sua pagina in schede ordinate: reparto, impiego, ferie, ruolo, permessi, verifiche, dispositivi (solo se registrati) e «Accesso all'applicazione», con il blocco dell'accesso e la cancellazione dei dati personali di presenza su richiesta. Lo stipendio si gestisce in Paghe, non nella sua pagina."
+    },
+    "myFile": {
+      "title": "Il mio fascicolo",
+      "body": "Menu → Il mio fascicolo mostra dati, contratto, documenti, richiami e incentivi, presenze e ferie. Solo lettura: chiedi al personale di modificare i dati."
+    },
+    "myDocuments": {
+      "title": "I miei documenti",
+      "body": "I documenti richiesti compaiono in Il mio fascicolo → Documenti con il loro stato. Tocca «Carica» o «Rinnova»: si apre la fotocamera, fotografa il documento e inserisci le date. Senza internet viene salvato sul telefono e inviato dopo. Ricevi un promemoria prima della scadenza."
+    },
+    "myPenalties": {
+      "title": "Richiami e incentivi",
+      "body": "Quando una sanzione è decisa ricevi una notifica. In Il mio fascicolo → Sanzioni e incentivi, «Ricevuto» significa che l'hai vista, non che sei d'accordo. Puoi fare ricorso entro il termine o rispondere se richiesto."
+    },
+    "penaltiesManager": {
+      "title": "Registrare e approvare sanzioni",
+      "body": "Menu → Sanzioni e incentivi. «Registra infrazione» per una persona delle tue sedi (con foto); ritardi e assenze si registrano da soli. Il regolamento sceglie la sanzione in base alle volte. In «In attesa di me» indaghi, approvi, riduci o respingi (con motivo). Puoi anche proporre un incentivo."
+    },
+    "documentsAdmin": {
+      "title": "Documenti dei dipendenti",
+      "body": "Impostazioni → Persone → Documenti dei dipendenti: i documenti richiesti, scadenza, promemoria e cosa succede alla timbratura dopo la scadenza. Menu → Documenti mostra scaduti, in scadenza, mancanti e da verificare; sollecita con un tocco o esporta CSV."
+    },
+    "bylaw": {
+      "title": "Regolamento sanzioni",
+      "body": "Impostazioni → Persone → Regolamento sanzioni. Imposta prima i limiti (trattenuta massima, giorni di ricorso) e accetta l'avviso: PROSM non fornisce valori legali. Aggiungi le infrazioni con la scala, fasi e livelli di approvazione, poi pubblica da una data: una nuova versione nel Centro media. Le infrazioni registrate mantengono la loro versione."
+    },
+    "taxConfig": {
+      "title": "Imposte e contributi",
+      "body": "Paghe → Impostazioni → Imposte e contributi. L'Egitto è pronto con i valori PROSM. «Copia e modifica» crea la tua versione (sotto la tua responsabilità). Per un altro paese inserisci scaglioni, franchigia e categorie. Il calcolatore usa il motore delle paghe. Ogni salvataggio è una versione da un mese. Solo il titolare cambia paese, mai con un ciclo aperto."
     }
   },
   "faq": {
@@ -259,5 +287,7 @@
     "body": "Per assistenza sul prodotto, contattaci a:",
     "infoLabel": "Richieste generali:",
     "supportLabel": "Assistenza:"
-  }
+  },
+  "showAllTopics": "Mostra tutti gli argomenti (altri {{count}})",
+  "roleTopicsOnly": "Solo gli argomenti del mio ruolo"
 }

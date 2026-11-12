@@ -152,7 +152,7 @@ describe("resources", () => {
       [JSON.stringify({ name_ar: "الأساسي", category: "earning", source: "fixed", is_basic: true })]));
     const extra = await ok<{ r: { id: string } }>(owner("select public.save_prosm_time_payroll_component(null, $1) as r",
       [JSON.stringify({ name_ar: "بدل إضافي", category: "allowance", source: "fixed", include_in_net: false, include_in_combined: true })]));
-    await ok(owner("select public.save_prosm_time_payroll_profile($1, '{\"currency\": \"EGP\", \"employee_code\": \"E-7\"}')", [worker.userId]));
+    await ok(owner("select public.save_prosm_time_payroll_profile($1, '{\"legal_name\": \"موظف تجريبي\", \"currency\": \"EGP\", \"employee_code\": \"E-7\"}')", [worker.userId]));
     await ok(owner("select public.set_prosm_time_payroll_profile_component($1, $2, 8000, null, '2026-01-01')", [worker.userId, basic.r.id]));
     await ok(owner("select public.set_prosm_time_payroll_profile_component($1, $2, 900, null, '2026-01-01')", [worker.userId, extra.r.id]));
     const cycleId = (await ok<{ r: { cycleId: string } }>(owner("select public.create_prosm_time_payroll_cycle('2027-05-01', '2027-05-31') as r"))).r.cycleId;

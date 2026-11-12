@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, KeyRound, LogIn, Plug, HardHat, ScrollText, Sunrise, Banknote, Receipt, Megaphone, AlertTriangle } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, KeyRound, LogIn, Plug, HardHat, ScrollText, Sunrise, Banknote, Receipt, Megaphone, AlertTriangle, IdCard, FileCheck, Gavel } from "lucide-react";
 
 import { FEATURES } from "../../config/features";
 import type { PlanFeature } from "../../core/hooks/usePlanFeatures";
@@ -138,6 +138,12 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // each person's own published payslips.
   { id: "payroll", planFeature: "payroll", labelKey: "items.payroll", path: "/payroll", icon: Banknote, requiredPermission: "payroll.access", section: "payroll" },
   { id: "payslips", planFeature: "payroll", labelKey: "items.payslips", path: "/payslips", icon: Receipt, requiredPermission: null, hiddenFromOwner: true, section: "payroll" },
+  // 2026-11-11 HR suite: the person's own file (read only; their documents and warnings)
+  // 2026-11-11 HR suite feature 2: the company's documents and their expiry dates (personnel managers)
+  { id: "documents", planFeature: "documents", labelKey: "items.documents", path: "/documents", icon: FileCheck, requiredPermission: "hr.manage", section: "people" },
+  // 2026-11-11 HR suite feature 1: penalties and incentives (personnel managers, managers and supervisors)
+  { id: "penalties", planFeature: "penalties", labelKey: "items.penalties", path: "/penalties", icon: Gavel, requiredPermission: ["hr.manage", "employees.view"], section: "people" },
+  { id: "myProfile", labelKey: "items.myProfile", path: "/me", icon: IdCard, requiredPermission: null, hiddenFromOwner: true, section: "people" },
   { id: "leave", planFeature: "leave", labelKey: "items.leave", path: "/leave", icon: CalendarDays, requiredPermission: null, section: "people" },
   // § live UX review, user-directed - "a Reports Center where any PDF
   // can be pulled." No permission gate on the nav item itself - the

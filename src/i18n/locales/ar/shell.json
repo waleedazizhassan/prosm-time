@@ -214,7 +214,8 @@
     },
     "dailyDigest": {
       "title": "ملخص أمس",
-      "body": "عمل {{present}}، وغاب عن ورديته {{noShows}}. بانتظارك: {{leave}} إجازة و{{exceptions}} استثناء. الحاضرون الآن: {{open}}."
+      "body": "عمل {{present}}، وتأخر {{late}}، وغاب {{absent}}، وفي إجازة {{onLeave}}. بانتظارك: {{leave}} إجازة و{{exceptions}} استثناء. الحاضرون الآن: {{open}}.",
+      "documents": "المستندات: {{expired}} منتهية، {{missing}} ناقصة."
     },
     "licenseChanged": {
       "title": "تغيّر ترخيصك",
@@ -257,6 +258,68 @@
       "clock_out": "سجّل انصرافك من فضلك.",
       "call_me": "كلّمني من فضلك.",
       "attention": "افتح البرنامج من فضلك."
+    },
+    "mockLocation": {
+      "title": "موقع مزيف",
+      "clock_in": "{{name}} سجّل حضور بموقع مزيف (برنامج تزييف موقع).",
+      "clock_out": "{{name}} سجّل انصراف بموقع مزيف (برنامج تزييف موقع).",
+      "presence": "{{name}} شغّل موقع مزيف أثناء الوردية - الأماكن دي ماتسجلتش."
+    },
+    "documents": {
+      "missingTitleSelf": "مستند مطلوب",
+      "missingBodySelf": "{{document}} مطلوب في ملفك. صوّره من التطبيق.",
+      "missingTitleHr": "مستندات موظف جديد",
+      "missingBodyHr": "{{name}} يحتاج {{count}} مستند في ملفه.",
+      "expiringTitleSelf": "{{document}} قارب على الانتهاء",
+      "expiringBodySelf": "متبقٍ {{count}} يوم على انتهاء {{document}}. جدّده وارفع الجديد.",
+      "expiringTitleHr": "مستند قارب على الانتهاء",
+      "expiringBodyHr": "{{name}}: {{document}} ينتهي بعد {{count}} يوم.",
+      "expiredTitleSelf": "{{document}} ينتهي اليوم",
+      "expiredBodySelf": "ارفع {{document}} بعد تجديده من ملفك.",
+      "expiredTitleHr": "مستند ينتهي اليوم",
+      "expiredBodyHr": "{{name}}: {{document}} ينتهي اليوم.",
+      "rejectedTitleSelf": "المستند لم يُقبل",
+      "rejectedBodySelf": "{{document}}: {{reason}}. صوّره مرة أخرى وأرسله.",
+      "rejectedTitleHr": "المستند لم يُقبل",
+      "rejectedBodyHr": "{{document}}: {{reason}}",
+      "reminderTitleSelf": "تذكير بمستند",
+      "reminderBodySelf": "من فضلك ارفع {{document}} من ملفك.",
+      "reminderTitleHr": "تذكير بمستند",
+      "reminderBodyHr": "{{name}}: {{document}}",
+      "uploadedTitleHr": "مستند للمراجعة",
+      "uploadedBodyHr": "{{name}} رفع {{document}}.",
+      "uploadedTitleSelf": "تم رفع المستند",
+      "uploadedBodySelf": "{{document}}",
+      "clockInTitleHr": "حضور بمستند منتهي",
+      "clockInBodyHr": "{{name}} سجّل حضوره و{{document}} منتهي.",
+      "clockInTitleSelf": "مستند منتهي",
+      "clockInBodySelf": "{{document}} منتهي."
+    },
+    "penalties": {
+      "reviewTitle": "جزاء للمراجعة",
+      "reviewBody": "{{name}}: {{violation}} ({{date}})",
+      "investigationTitle": "مطلوب تحقيق",
+      "investigationBody": "{{name}}: {{violation}} ({{date}})",
+      "repliedTitle": "رد الموظف",
+      "repliedBody": "{{name}}: {{violation}} - جاهزة للاعتماد",
+      "noReplyTitle": "انتهت مدة الرد",
+      "noReplyBody": "{{name}}: {{violation}} - جاهزة للاعتماد",
+      "responseTitle": "مطلوب ردك",
+      "responseBody": "{{violation}} ({{date}}). أرسل ردك قبل {{due}}.",
+      "decidedTitle": "قرار جزاء",
+      "decidedBody": "{{violation}} ({{date}}). افتحه لتأكيد الاطلاع أو للتظلم.",
+      "rejectedTitle": "لا جزاء",
+      "rejectedBody": "{{violation}} ({{date}}): لم يُطبق جزاء.",
+      "appealTitle": "تظلم",
+      "appealBody": "{{name}} تظلّم: {{violation}} ({{date}})",
+      "appealConfirmedTitle": "تم البت في تظلمك",
+      "appealConfirmedBody": "{{violation}}: تم تأكيد الجزاء.",
+      "cancelledTitle": "تم إلغاء جزاء",
+      "cancelledBody": "{{violation}} ({{date}}) أُلغي.",
+      "incentiveReviewTitle": "حافز للمراجعة",
+      "incentiveReviewBody": "{{name}}: {{reason}}",
+      "incentiveGrantedTitle": "مبروك!",
+      "incentiveGrantedBody": "حصلت على حافز: {{reason}}"
     }
   },
   "items": {
@@ -286,7 +349,10 @@
     "payslips": "مفرداتي",
     "externalPay": "أجور العمالة الخارجية",
     "announcements": "لوحة الإعلانات",
-    "exceptions": "استثناءاتي"
+    "exceptions": "استثناءاتي",
+    "myProfile": "ملفي",
+    "documents": "المستندات",
+    "penalties": "الجزاءات والحوافز"
   },
   "sosOverlay": {
     "title": "تنبيه طوارئ (SOS)",
@@ -413,7 +479,10 @@
     "payroll": "دورات المرتبات والملفات والتقارير الثلاثة والمفردات - بصلاحيات منفصلة وإصدارات محفوظة.",
     "payslips": "مفردات مرتبك المنشورة - اعرضها أو اطلبها بالبريد الإلكتروني.",
     "externalPay": "الأجور باليوم أو الأسبوع أو الشهر أو السنة، ومسيرات الأجور، والسياسة والتعديلات الفردية - تُعتمد وتُجمّد، ومنفصلة عن الرواتب.",
-    "announcements": "الإعلانات والبيانات الرسمية الموجهة إليك؛ أكّد قراءة ما يطلب ذلك."
+    "announcements": "الإعلانات والبيانات الرسمية الموجهة إليك؛ أكّد قراءة ما يطلب ذلك.",
+    "myProfile": "بياناتك ومستنداتك وإنذاراتك وحضورك.",
+    "documents": "مستندات كل الموظفين وتواريخ انتهائها.",
+    "penalties": "المخالفات والاعتماد والتظلمات والحوافز."
   },
   "backgroundDisclosure": {
     "title": "موقعك أثناء الوردية",
@@ -502,5 +571,9 @@
     "send": "ابعت البظ",
     "sent": "وصل التنبيه لـ {{name}}.",
     "failed": "ماوصلش التنبيه. جرّب تاني."
+  },
+  "shiftTracking": {
+    "resumeTitle": "كمّل متابعة ورديتك",
+    "resumeBody": "الموبايل اتعمله ريستارت وانت مسجّل حضور. افتح PROSM Time عشان المتابعة ترجع تشتغل."
   }
 }

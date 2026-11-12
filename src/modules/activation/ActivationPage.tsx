@@ -10,6 +10,9 @@ import LicenseRepository from "../../core/repositories/LicenseRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import Input from "../../components/common/Input";
+import Select from "../../components/common/Select";
+import TaxConfigRepository from "../../core/repositories/TaxConfigRepository";
+import { COUNTRY_CODES, countryLabel } from "../payroll/tax/countries";
 import Button from "../../components/common/Button";
 import AuthLayout from "../../components/common/AuthLayout";
 import styles from "../../components/common/AuthLayout.module.css";
@@ -44,6 +47,8 @@ export default function ActivationPage() {
 
   const [activationCode, setActivationCode] = useState("");
   const [organizationName, setOrganizationName] = useState("");
+  // 2026-11-11 HR suite feature 4: the organisation's country (Egypt's ready payroll rules, or a form for another country)
+  const [country, setCountry] = useState("EG");
   const [ownerFullName, setOwnerFullName] = useState("");
   const [ownerEmail, setOwnerEmail] = useState("");
   const [ownerPassword, setOwnerPassword] = useState("");
@@ -100,6 +105,9 @@ export default function ActivationPage() {
       navigate("/login", { replace: true });
       return;
     }
+
+    // the country (Egypt is the default); never fatal - it can be set later in the tax settings
+    if (country !== "EG") await TaxConfigRepository.setOrganizationCountry(country);
 
     let organizationLogoUrl: string | null = null;
     if (logoFile) {
@@ -177,6 +185,15 @@ export default function ActivationPage() {
           onChange={(event) => setOrganizationName(event.target.value)}
           required
           disabled={submitting || success}
+        />
+        <Select
+          label={t("auth:activation.countryLabel")}
+          name="organizationCountry"
+          value={country}
+          onChange={(event) => setCountry(event.target.value)}
+          disabled={submitting || success}
+          options={COUNTRY_CODES.map((code) => ({ value: code, label: countryLabel(code, i18n.language) }))
+            .sort((a, b) => (a.value === "EG" ? -1 : b.value === "EG" ? 1 : a.label.slice(5).localeCompare(b.label.slice(5), i18n.language)))}
         />
         <div className={styles.fileFieldContainer}>
           <span className={styles.fileFieldLabel}>{t("auth:activation.logoLabel")}</span>

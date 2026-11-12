@@ -59,9 +59,9 @@
     "overtimeStartTimeLabel": "加班开始于",
     "lateDeductionStartTimeLabel": "迟到扣款开始于",
     "breakRoundingModeLabel": "休息时间取整",
-    "blockSelfClockInLabel": "超过宽限时间后禁止自助上班打卡（需由经理协助打卡）",
+    "blockSelfClockInLabel": "开始计算迟到后禁止自行打卡（由经理代为打卡）",
     "exemptEmployeesTitle": "豁免员工",
-    "exemptEmployeesHint": "在此添加的员工在本工地不受“宽限后禁止上班打卡”和“地理围栏外禁止下班打卡”的限制。",
+    "exemptEmployeesHint": "此处添加的人员在本站点不受“开始计算迟到后禁止打卡”和“区域外禁止下班打卡”的限制。",
     "exemptEmployeesAddLabel": "添加豁免员工",
     "exemptEmployeesSelectPlaceholder": "选择员工…",
     "exemptEmployeesAddAction": "添加",
@@ -73,7 +73,7 @@
     "presenceMonitoringEnabledHint": "在本工地的班次中定期重新检查位置，若有人打卡后离开区域会报告。默认关闭。",
     "cameraRequiredLabel": "需要拍照",
     "activeLabel": "工地启用",
-    "sitePolicyMovedHint": "GPS 精度余量、宽限时间、班次时间、持续在岗监测和豁免员工在“设置”页面配置。",
+    "sitePolicyMovedHint": "GPS 误差、班次时间、在岗监控和豁免人员都在设置页面中设置。",
     "confirm": "保存工地",
     "genericError": "无法保存此工地。",
     "openSiteSettings": "打开工地规则",
@@ -142,7 +142,7 @@
     "workforceMovedHint": "外部工人现在在“外部工人”页面为整个机构统一添加一次。每人获得一个由应用生成的 6 位号码，可在本工地或任何其他工地的终端打卡。",
     "workforceOpenAction": "打开外部工人",
     "rulesTitle": "工地规则",
-    "rulesHint": "GPS 容差、宽限时间、班次时间、加班、休息和豁免人员：在“设置”页面配置。",
+    "rulesHint": "GPS 误差、班次时间、加班、休息和豁免人员都在设置中设置。",
     "rulesAction": "打开工地规则"
   },
   "projectAssignments": {
@@ -187,5 +187,13 @@
     "save": "保存",
     "saved": "已保存。",
     "genericError": "无法保存。"
+  },
+  "noSiteHours": {
+    "title": "站点外的工作时间",
+    "hint": "可选：不在站点打卡时适用的时间。留空也可以——这些天不按时钟计算迟到或加班。",
+    "saveAction": "保存时间",
+    "clearAction": "不设时间",
+    "saved": "时间已保存。",
+    "genericError": "无法保存时间，请重试。"
   }
 }

@@ -30,12 +30,12 @@ beforeAll(async () => {
 });
 
 describe("SOS on every shift", () => {
-  it("records an alert from a shift at a site without presence monitoring, with the site name", async () => {
+  it("records an alert from any shift (tracking is always on), with the site name", async () => {
     expect((await clockIn(t, emp, plainSite)).error).toBeNull();
     expect((await clockIn(t, coworker, plainSite)).error).toBeNull();
     const sessionId = await openSessionId(t, emp);
     const [presence] = await t.su<{ n: number }>("select count(*)::int as n from presence_sessions where user_id = $1 and status = 'active'", [emp.userId]);
-    expect(presence.n).toBe(0);
+    expect(presence.n).toBe(1); // owner 2026-11-11: tracking is on at every site now; SOS works the same
 
     const result = await shiftSos(emp, sessionId);
     expect(result.error).toBeNull();
@@ -43,7 +43,7 @@ describe("SOS on every shift", () => {
       "select site_name, site_id, attendance_session_id, presence_session_id from sos_alerts where user_id = $1",
       [emp.userId],
     );
-    expect(alert).toMatchObject({ site_name: "Tower B", site_id: plainSite, attendance_session_id: sessionId, presence_session_id: null });
+    expect(alert).toMatchObject({ site_name: "Tower B", site_id: plainSite, attendance_session_id: sessionId, presence_session_id: expect.any(String) });
 
     const [notified] = await t.su<{ n: number }>("select count(*)::int as n from notifications where user_id = $1 and type = 'sos_alert'", [coworker.userId]);
     expect(notified.n).toBe(1);

@@ -51,9 +51,11 @@ interface LiveLocationMapProps {
   accuracyMeters?: number | null;
   /** Owner 2026-11-10: a small button at the top of the map that brings it back to where you are. */
   recenterLabel?: string;
+  /** Owner 2026-11-11: each change brings the map back to the person (a card over the map does it). */
+  recenterSignal?: number;
 }
 
-export default function LiveLocationMap({ latitude, longitude, site = null, height = 200, siteTone = "neutral", accuracyMeters = null, recenterLabel }: LiveLocationMapProps) {
+export default function LiveLocationMap({ latitude, longitude, site = null, height = 200, siteTone = "neutral", accuracyMeters = null, recenterLabel, recenterSignal = 0 }: LiveLocationMapProps) {
   const { resolvedTheme } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
@@ -156,6 +158,12 @@ export default function LiveLocationMap({ latitude, longitude, site = null, heig
     if (!map || latitude === null || longitude === null) return;
     map.setView([latitude, longitude], Math.max(map.getZoom(), 16), { animate: true });
   };
+
+  useEffect(() => {
+    if (recenterSignal > 0) recenter();
+    // only when the signal changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [recenterSignal]);
 
   if (!recenterLabel) return <div ref={containerRef} className={styles.map} style={{ height }} />;
   return (

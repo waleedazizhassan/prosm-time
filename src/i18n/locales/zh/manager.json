@@ -203,5 +203,12 @@
       "longer_than_24_hours": "超过 24 小时",
       "overlaps_existing_attendance": "与已有考勤重叠"
     }
+  },
+  "exceptionStatus": {
+    "title": "{{name}} 离开了工作区域",
+    "pendingReason": "尚未提交原因。提交后你会收到通知，并可在此处审核。",
+    "pendingReview": "已提交原因——在下方的审核列表中。",
+    "resolved": "此例外已审核。",
+    "notFound": "此例外不存在或你无权查看。"
   }
 }

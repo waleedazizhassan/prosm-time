@@ -17,7 +17,7 @@ import SuccessText from "../../components/common/SuccessText";
 // Owner 2026-11-03: what the plan includes, in the order of the plans sheet.
 // 2026-11-10: the four plans, in their order (Business, then Pro, then Enterprise additions).
 const FEATURE_ROWS: PlanFeature[] = [
-  "sos", "announcements", "departments", "leave", "scheduling", "allowances", "kiosk", "on_behalf", "clock_rules", "export", "payroll_export", "roles_manager",
+  "sos", "announcements", "departments", "documents", "penalties", "leave", "scheduling", "allowances", "kiosk", "on_behalf", "clock_rules", "export", "payroll_export", "roles_manager",
   "payroll", "labor_cost", "audit", "roles_all", "clock_suggestion", "daily_summary", "manager_alerts",
   "integrations", "delegation", "retention",
 ];

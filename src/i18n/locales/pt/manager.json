@@ -209,5 +209,12 @@
       "longer_than_24_hours": "mais de 24 horas",
       "overlaps_existing_attendance": "sobrepõe-se a assiduidade registada"
     }
+  },
+  "exceptionStatus": {
+    "title": "{{name}} saiu da área de trabalho",
+    "pendingReason": "Ainda não enviou o motivo. Quando enviar, será avisado e encontrá-lo-á aqui para rever.",
+    "pendingReview": "Enviou o motivo - está na lista para rever abaixo.",
+    "resolved": "Esta exceção já foi revista.",
+    "notFound": "Esta exceção não existe ou não é sua."
   }
 }

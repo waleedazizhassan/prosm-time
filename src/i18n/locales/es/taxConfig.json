@@ -1,0 +1,138 @@
+{
+  "title": "Impuestos y seguridad social",
+  "subtitle": "Las reglas para calcular el impuesto sobre el salario y la seguridad social en la nómina.",
+  "error": "No funcionó. Inténtalo de nuevo.",
+  "badge": {
+    "official": "Coincide con los valores oficiales de Egipto",
+    "modified": "Cambiado por la empresa",
+    "manual": "Configuración manual"
+  },
+  "country": {
+    "title": "País",
+    "change": "Cambiar país",
+    "currency": "Moneda: {{currency}}",
+    "version": "versión {{version}}",
+    "officialUpdated": "PROSM actualizó estos valores el {{date}}",
+    "changed": "Desde el {{date}}, la nómina sigue a {{country}}.",
+    "search": "Buscar un país",
+    "fromMonth": "Se aplica desde {{date}}, el primer mes sin ciclo de nómina.",
+    "oldCyclesKept": "Los ciclos ya creados conservan su país y sus reglas.",
+    "readyRules": "Este país tiene reglas listas de PROSM.",
+    "emptyRules": "Este país empieza vacío: tu empresa introduce sus reglas.",
+    "categoriesKept": "Las categorías de seguro anteriores se conservan con los ciclos anteriores.",
+    "currencyLabel": "Moneda",
+    "typeCode": "Escribe {{code}} para confirmar",
+    "confirmButton": "Cambiar el país",
+    "chooseAnother": "Elegir otro país",
+    "openCycle": "Hay un ciclo de nómina abierto: ciérralo o anúlalo antes de cambiar el país."
+  },
+  "manualNotice": "La configuración manual no es una aprobación legal de PROSM. La empresa introduce estos valores bajo su responsabilidad y debe revisarlos con su contable o asesor antes de la primera nómina.",
+  "officialChanged": "PROSM actualizó los valores oficiales después de que tu empresa cambiara los suyos. Revísalos o vuelve a los valores oficiales.",
+  "backToOfficial": "Volver a los valores oficiales",
+  "lockedText": "Son los valores listos de PROSM, siempre actualizados. Para usar otros, cópialos y edítalos (tu empresa asume la responsabilidad).",
+  "copyAndEdit": "Copiar y editar",
+  "missing": {
+    "title": "Falta la categoría de seguro ({{count}})",
+    "hint": "Elige la categoría de cada persona en su ficha salarial antes de la próxima nómina."
+  },
+  "items": {
+    "title": "Conceptos sujetos a impuesto y seguro",
+    "hint": "Se aplica de inmediato a los próximos cálculos.",
+    "item": "Concepto",
+    "taxable": "Sujeto a impuesto",
+    "insurable": "Sujeto a seguro"
+  },
+  "how": {
+    "title": "Cómo se calcula",
+    "gross": "Bruto = todos los devengos y complementos.",
+    "insurance": "Seguro = salario asegurable (el base o uno fijo) entre el mínimo y el máximo × la tasa del empleado; la parte de la empresa es un coste fuera del neto.",
+    "taxBase": "Base imponible = conceptos sujetos menos deducciones antes de impuestos y (si se indica) el seguro del empleado.",
+    "tax": "Impuesto = tramos sobre la base anual (tras la exención) ÷ 12, o mensual.",
+    "levies": "Otras cargas = su tasa × su base.",
+    "net": "Neto = bruto menos las deducciones del empleado."
+  },
+  "calc": {
+    "title": "Pruébalo",
+    "hint": "Calculado en el servidor con la misma función que la nómina, sobre las reglas de esta página (no se guarda nada).",
+    "basic": "Salario base",
+    "taxableAllowances": "Complementos sujetos",
+    "nonTaxableAllowances": "Complementos exentos",
+    "preTax": "Deducciones antes de impuestos",
+    "category": "Categoría de seguro",
+    "defaultCategory": "Categoría por defecto",
+    "run": "Calcular",
+    "gross": "Bruto",
+    "net": "Neto",
+    "employerCost": "Seguro de la empresa (coste)"
+  },
+  "rules": {
+    "insurance_employee": "Seguridad social",
+    "insurance_employer": "Parte de la empresa",
+    "income_tax": "Impuesto sobre el salario",
+    "martyrs_fund": "Fondo de los mártires"
+  },
+  "tax": {
+    "title": "Impuesto sobre el salario",
+    "enabled": "Se aplica impuesto",
+    "period": "Cálculo",
+    "annual": "Anual dividido entre 12",
+    "monthly": "Mensual",
+    "exemption": "Importe exento",
+    "deductInsurance": "Restar el seguro del empleado antes del impuesto",
+    "roundDown": "Redondear el impuesto mensual a la unidad inferior",
+    "brackets": "Tramos",
+    "from": "Desde {{value}}",
+    "upTo": "Hasta",
+    "andAbove": "y más",
+    "rate": "Tasa %",
+    "addBracket": "Añadir tramo",
+    "tiers": "Ingresos altos",
+    "tiersHint": "Por encima de estos ingresos anuales se omiten los tramos inferiores (según las reglas listas).",
+    "tierRow": "Más de {{above}}: desde el tramo {{n}}"
+  },
+  "ins": {
+    "title": "Seguridad social",
+    "enabled": "Se aplica seguridad social",
+    "categoryName": "Categoría (p. ej. nacional)",
+    "employeeRate": "Empleado %",
+    "employerRate": "Empresa %",
+    "min": "Salario asegurable mínimo",
+    "max": "Salario asegurable máximo",
+    "base": "Salario asegurable",
+    "removeCategory": "Quitar categoría",
+    "addCategory": "Añadir categoría",
+    "defaultCategory": "Categoría para quien no tenga una",
+    "fixedWageHint": "Un salario asegurable fijo en la ficha salarial sustituye al salario base."
+  },
+  "bases": {
+    "basic": "Salario base",
+    "gross": "Bruto",
+    "taxable": "Base imponible",
+    "insurable": "Conceptos marcados como asegurables"
+  },
+  "levy": {
+    "title": "Otras cargas",
+    "hint": "Por ejemplo un fondo como porcentaje del bruto. Añade solo lo que exija la ley de tu país.",
+    "name": "Nombre",
+    "rate": "Tasa %",
+    "base": "Sobre",
+    "payer": "Paga",
+    "employee": "Empleado",
+    "employer": "Empresa",
+    "on": "Activa",
+    "add": "Añadir carga"
+  },
+  "remove": "Quitar",
+  "saveTitle": "Guardar como nueva versión",
+  "saveHint": "Los ciclos ya creados conservan sus reglas. La nueva versión se aplica desde el mes elegido.",
+  "effectiveFrom": "Se aplica desde (mes)",
+  "cancelEdit": "Cancelar",
+  "save": "Guardar versión",
+  "liability": "La configuración manual no es una aprobación legal de PROSM: la empresa introduce estos valores bajo su responsabilidad y los revisa con su contable o asesor.",
+  "liabilityDone": "Responsabilidad aceptada por {{name}} el {{date}}.",
+  "saved": "Guardado como versión {{version}}, desde {{date}}.",
+  "versions": {
+    "title": "Versiones",
+    "row": "Versión {{version}} - {{country}} - desde {{date}} - {{by}}"
+  }
+}

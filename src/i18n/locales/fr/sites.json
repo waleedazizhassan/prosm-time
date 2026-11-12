@@ -59,9 +59,9 @@
     "overtimeStartTimeLabel": "Début du décompte des heures supplémentaires",
     "lateDeductionStartTimeLabel": "Début de la déduction pour retard",
     "breakRoundingModeLabel": "Arrondi du temps de pause",
-    "blockSelfClockInLabel": "Bloquer le pointage automatique après la période de tolérance (nécessite un pointage assisté par un responsable)",
+    "blockSelfClockInLabel": "Bloquer le pointage soi-même dès que le retard compte (un responsable pointe à sa place)",
     "exemptEmployeesTitle": "Employés exemptés",
-    "exemptEmployeesHint": "Les employés ajoutés ici ignorent à la fois le blocage du pointage après la période de tolérance et le blocage du départ hors zone pour ce site.",
+    "exemptEmployeesHint": "Les personnes ajoutées ici sont exemptées sur ce site du blocage après le début du retard et du blocage de départ hors zone.",
     "exemptEmployeesAddLabel": "Ajouter un employé exempté",
     "exemptEmployeesSelectPlaceholder": "Sélectionner un employé…",
     "exemptEmployeesAddAction": "Ajouter",
@@ -73,7 +73,7 @@
     "presenceMonitoringEnabledHint": "Revérifie périodiquement la position pendant un poste sur ce site et signale si quelqu'un quitte la zone après avoir pointé. Désactivé par défaut.",
     "cameraRequiredLabel": "Caméra requise",
     "activeLabel": "Site actif",
-    "sitePolicyMovedHint": "La marge GPS, le délai de grâce, les horaires, le suivi de présence et les employés exemptés se règlent sur la page Paramètres.",
+    "sitePolicyMovedHint": "La marge GPS, les horaires, le suivi de présence et les personnes exemptées se règlent dans la page Paramètres.",
     "confirm": "Enregistrer le site",
     "genericError": "Impossible d'enregistrer ce site.",
     "openSiteSettings": "Ouvrir les règles du site",
@@ -142,7 +142,7 @@
     "workforceMovedHint": "Les intervenants externes sont désormais ajoutés une seule fois pour toute l'organisation, dans la page Intervenants externes. Chacun reçoit un numéro à 6 chiffres créé par l'application et pointe avec lui sur la borne de ce site ou de tout autre.",
     "workforceOpenAction": "Ouvrir Intervenants externes",
     "rulesTitle": "Règles du site",
-    "rulesHint": "Tolérance GPS, délai de grâce, horaires, heures sup., pauses et exemptions - sur la page Paramètres.",
+    "rulesHint": "La marge GPS, les horaires, les heures sup, les pauses et les exemptions se règlent dans Paramètres.",
     "rulesAction": "Ouvrir les règles du site"
   },
   "projectAssignments": {
@@ -187,5 +187,13 @@
     "save": "Enregistrer",
     "saved": "Enregistré.",
     "genericError": "Enregistrement impossible."
+  },
+  "noSiteHours": {
+    "title": "Horaires hors des sites",
+    "hint": "Facultatif : les horaires d’un pointage sans site. Les laisser vides convient - ces jours-là n’ont alors ni retard ni heures sup à l’horloge.",
+    "saveAction": "Enregistrer les horaires",
+    "clearAction": "Sans horaires",
+    "saved": "Les horaires ont été enregistrés.",
+    "genericError": "Impossible d’enregistrer les horaires. Réessaie."
   }
 }

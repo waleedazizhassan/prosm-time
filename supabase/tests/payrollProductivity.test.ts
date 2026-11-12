@@ -51,7 +51,7 @@ beforeAll(async () => {
   const basic = await ok<{ r: { id: string } }>(owner("select public.save_prosm_time_payroll_component(null, $1) as r", [JSON.stringify({ name_ar: "الأساسي", category: "earning", source: "fixed", is_basic: true })]));
   bonus = (await ok<{ r: { id: string } }>(owner("select public.save_prosm_time_payroll_component(null, $1) as r", [JSON.stringify({ name_ar: "مكافأة", category: "earning", source: "variable" })]))).r.id;
   for (const member of [a1, a2, b1]) {
-    await ok(owner("select public.save_prosm_time_payroll_profile($1, '{\"currency\": \"EGP\"}')", [member.userId]));
+    await ok(owner("select public.save_prosm_time_payroll_profile($1, '{\"legal_name\": \"موظف تجريبي\", \"currency\": \"EGP\"}')", [member.userId]));
     await ok(owner("select public.set_prosm_time_payroll_profile_component($1, $2, 5000, null, '2027-01-01')", [member.userId, basic.r.id]));
   }
   mayCycle = (await ok<{ r: { cycleId: string } }>(owner("select public.create_prosm_time_payroll_cycle('2027-05-01', '2027-05-31') as r"))).r.cycleId;

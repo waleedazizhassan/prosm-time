@@ -240,8 +240,38 @@ export function localizePush(type: string, data: Data, language: string, fallbac
       result = pair("licenseChanged.title", "licenseChanged.body", { changes: parts.join(" · ") });
       break;
     }
+    // 2026-11-11 HR suite feature 2: documents (same texts as the bell)
+    case "document_missing":
+    case "document_expiring":
+    case "document_expired":
+    case "document_rejected":
+    case "document_reminder":
+    case "document_uploaded":
+    case "document_clock_in": {
+      const key = ({ document_missing: "missing", document_expiring: "expiring", document_expired: "expired", document_rejected: "rejected", document_reminder: "reminder", document_uploaded: "uploaded", document_clock_in: "clockIn" } as Record<string, string>)[type];
+      const who = data.kind === "hr" ? "Hr" : "Self";
+      result = pair(`documents.${key}Title${who}`, `documents.${key}Body${who}`, { document: data.documentName ?? "", name: data.employeeName ?? "", count: num(data.days) ?? num(data.count) ?? 0, reason: data.reason ?? "" });
+      break;
+    }
+    // 2026-11-11 HR suite feature 1: penalties and incentives (same texts as the bell)
+    case "penalty_review":
+    case "penalty_response":
+    case "penalty_decided":
+    case "penalty_appeal":
+    case "penalty_appeal_decided":
+    case "incentive_review":
+    case "incentive_granted": {
+      const key = penaltyNotificationKey(type, data);
+      result = pair(`penalties.${key}Title`, `penalties.${key}Body`, { name: data.employeeName ?? "", violation: data.violationName ?? "", date: data.date ?? "",
+        due: typeof data.due === "string" ? data.due.slice(0, 10) : "", reason: data.reason ?? "" });
+      break;
+    }
     case "daily_digest":
-      result = pair("dailyDigest.title", "dailyDigest.body", { present: data.present ?? 0, noShows: data.noShows ?? 0, leave: data.leave ?? 0, exceptions: data.exceptions ?? 0, open: data.open ?? 0 });
+      result = pair("dailyDigest.title", "dailyDigest.body", { present: data.present ?? 0, absent: data.absent ?? data.noShows ?? 0, late: data.late ?? 0, onLeave: data.onLeave ?? 0, leave: data.leave ?? 0, exceptions: data.exceptions ?? 0, open: data.open ?? 0 });
+      if (result && (num(data.documentsExpired) ?? 0) + (num(data.documentsMissing) ?? 0) > 0) {
+        const docs = t("dailyDigest.documents", { expired: num(data.documentsExpired) ?? 0, missing: num(data.documentsMissing) ?? 0 });
+        if (docs) result = { title: result.title, body: `${result.body} ${docs}` };
+      }
       break;
     case "clock_in_reminder":
       result = pair("clockInReminder.title", "clockInReminder.body", { time: data.time ?? "", site: data.siteName ?? "" });
@@ -255,9 +285,35 @@ export function localizePush(type: string, data: Data, language: string, fallbac
         : pair("autoCheckoutGeofence.titleEmployee", "autoCheckoutGeofence.bodyEmployee");
       break;
     case "location_plausibility_flag":
+      // owner 2026-11-11: a fake (simulated) location at clock-in/out or during the shift
+      if (str(data.employeeName) && (data.kind === "mock_location" || data.kind === "mock_presence")) {
+        const which = data.kind === "mock_presence" ? "presence" : data.eventType === "clock_out" ? "clock_out" : "clock_in";
+        result = pair("mockLocation.title", `mockLocation.${which}`, { name: data.employeeName });
+        break;
+      }
       if (str(data.employeeName) && num(data.impliedSpeedKmh) !== null)
         result = pair("locationPlausibilityFlag.title", "locationPlausibilityFlag.body", { name: data.employeeName, speed: data.impliedSpeedKmh });
       break;
   }
   return result ?? fallback;
+}
+
+// 2026-11-11 HR suite feature 1: which text a penalty or incentive notification uses
+export function penaltyNotificationKey(type: string, data: Record<string, unknown>): string {
+  switch (type) {
+    case "penalty_review":
+      return data.step === "investigation" ? "investigation" : data.step === "replied" ? "replied" : data.step === "no_reply" ? "noReply" : "review";
+    case "penalty_response":
+      return "response";
+    case "penalty_decided":
+      return data.result === "rejected" ? "rejected" : "decided";
+    case "penalty_appeal":
+      return "appeal";
+    case "penalty_appeal_decided":
+      return data.result === "cancelled" ? "cancelled" : "appealConfirmed";
+    case "incentive_review":
+      return "incentiveReview";
+    default:
+      return "incentiveGranted";
+  }
 }

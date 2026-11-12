@@ -344,6 +344,18 @@
   color: var(--text-primary);
   font-variant-numeric: tabular-nums;
   line-height: 1.1;
+  /* owner 2026-11-11: a long figure (e.g. the estimated cost) stays inside its card */
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.kpiValue.kpiValueLong {
+  font-size: 1.2rem;
+}
+
+.kpiValue.kpiValueXLong {
+  font-size: 1rem;
 }
 
 .kpiHint {

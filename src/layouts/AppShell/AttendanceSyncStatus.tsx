@@ -5,6 +5,7 @@ import { RefreshCw, CloudOff, AlertTriangle } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import OfflineQueueService, { type OfflineQueueItem } from "../../core/offline/OfflineQueueService";
+import DocumentUploadQueue from "../../core/offline/DocumentUploadQueue";
 import styles from "./OfflineBanner.module.css";
 
 // Offline attendance (owner 2026-09-29): the queue is sent from every screen, not only the
@@ -20,7 +21,11 @@ export default function AttendanceSyncStatus() {
   useEffect(() => OfflineQueueService.subscribe((all) => setItems(profile?.id ? all.filter((i) => i.userId === profile.id) : [])), [profile?.id]);
 
   useEffect(() => {
-    const attempt = () => void OfflineQueueService.flush(profile?.id);
+    // HR suite feature 2: documents photographed offline go with the attendance, on the same beats
+    const attempt = () => {
+      void OfflineQueueService.flush(profile?.id);
+      void DocumentUploadQueue.flush(profile?.id);
+    };
     attempt();
     window.addEventListener("online", attempt);
     const interval = setInterval(attempt, 30000);

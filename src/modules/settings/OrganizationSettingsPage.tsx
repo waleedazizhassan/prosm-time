@@ -4,15 +4,19 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../../core/context/AuthContext";
 
 import DepartmentsSettingsCard from "./DepartmentsSettingsCard";
+import JobTitlesSettingsCard from "./JobTitlesSettingsCard";
+import DocumentTypesSettingsCard from "./DocumentTypesSettingsCard";
+import PenaltyBylawSettingsCard from "./PenaltyBylawSettingsCard";
 import PageShell from "../../components/common/PageShell";
 import Button from "../../components/common/Button";
 import NoSiteRadiusSettingsCard from "../sites/NoSiteRadiusSettingsCard";
+import NoSiteHoursSettingsCard from "../sites/NoSiteHoursSettingsCard";
 import MockLocationSettingsCard from "./MockLocationSettingsCard";
 import SessionPolicySettingsCard from "./SessionPolicySettingsCard";
 import OvertimePolicySettingsCard from "./OvertimePolicySettingsCard";
+import OvertimeLateTargetCard from "./OvertimeLateTargetCard";
 import LeaveTypesSettingsCard from "./LeaveTypesSettingsCard";
 import settingsHeaderImage from "../../assets/illustrations/settings.svg";
-import SiteDefaultsSettingsCard from "./SiteDefaultsSettingsCard";
 import SitePolicySettingsCard from "./SitePolicySettingsCard";
 import PlanSettingsCard from "./PlanSettingsCard";
 import RetentionSettingsCard from "./RetentionSettingsCard";
@@ -50,12 +54,12 @@ export default function OrganizationSettingsPage() {
   // page"): each site's rules are chosen here from a site list - managers
   // see the sites they manage - and the organisation-wide settings follow
   // for the Owner.
-  if (!isOwner && !hasPermission("sites.manage")) {
+  if (!isOwner && !hasPermission("sites.manage") && !hasPermission("hr.manage")) {
     return <Navigate to="/dashboard" replace />;
   }
 
   const showDepartments = allows("departments") && hasPermission("departments.manage");
-  const showPeople = isOwner || hasPermission("settings.session_policy") || hasPermission("leave.manage_types") || showDepartments;
+  const showPeople = isOwner || hasPermission("hr.manage") || hasPermission("settings.session_policy") || hasPermission("leave.manage_types") || showDepartments;
   const showOther = isOwner;
 
   if (focusedSite) {
@@ -93,18 +97,28 @@ export default function OrganizationSettingsPage() {
       {active === "sites" ? (
         <>
           <SitePolicySettingsCard />
-          {isOwner ? <SiteDefaultsSettingsCard /> : null}
           {isOwner && allows("clock_suggestion") ? <ClockSuggestionCard /> : null}
         </>
       ) : null}
 
-      {active === "outside" ? <NoSiteRadiusSettingsCard /> : null}
+      {active === "outside" ? (
+        <>
+          <NoSiteRadiusSettingsCard />
+          <NoSiteHoursSettingsCard />
+        </>
+      ) : null}
 
       {active === "people" ? (
         <>
           {hasPermission("settings.session_policy") ? <SessionPolicySettingsCard /> : null}
+          {isOwner ? <OvertimeLateTargetCard hasPayroll={allows("payroll")} hasAllowances={allows("allowances")} /> : null}
           {isOwner ? <OvertimePolicySettingsCard /> : null}
           {hasPermission("leave.manage_types") ? <LeaveTypesSettingsCard /> : null}
+          {/* 2026-11-11 HR suite: the company's job titles */}
+          {isOwner || hasPermission("hr.manage") ? <JobTitlesSettingsCard /> : null}
+          {/* 2026-11-11 HR suite feature 2: the documents each person must keep valid */}
+          {(isOwner || hasPermission("hr.manage")) && allows("documents") ? <DocumentTypesSettingsCard /> : null}
+          {(isOwner || hasPermission("hr.manage")) && allows("penalties") ? <PenaltyBylawSettingsCard /> : null}
           {/* 2026-11-09 Media Center: departments (announcements can be addressed to them) */}
           {showDepartments ? <DepartmentsSettingsCard /> : null}
         </>

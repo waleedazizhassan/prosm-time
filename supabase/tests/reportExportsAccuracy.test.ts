@@ -32,7 +32,7 @@ beforeAll(async () => {
     "insert into shift_templates (organization_id, site_id, name, start_time, end_time) values ($1, $2, 'Day', '08:00', '16:00') returning id",
     [org.id, site],
   );
-  // Mon 2 Nov (workday), Tue 3 Nov (worked just after midnight Cairo time), Wed 4 Nov (holiday), Fri 6 Nov (weekly rest).
+  // Mon 2 Nov (workday), Tue 3 Nov (worked just after midnight Cairo time), Wed 4 Nov (holiday), Fri 6 Nov (the site's rest day, but a shift is scheduled: a work day for him).
   for (const day of ["2026-11-02", "2026-11-03", "2026-11-04", "2026-11-06"]) {
     await t.su(
       "insert into shift_assignments (organization_id, user_id, site_id, shift_template_id, shift_date, start_time, end_time) values ($1, $2, $3, $4, $5, '08:00', '16:00')",
@@ -62,7 +62,8 @@ describe("report exports accuracy", () => {
   it("an absence is only a working day, counted by the site's day", async () => {
     const result = await t.as<{ shift_date: string }>(org.owner.authId, "select shift_date::text from public.list_prosm_time_report_absences('2026-11-01', '2026-11-07')");
     expect(result.error).toBeNull();
-    expect(result.rows!.map((row) => row.shift_date)).toEqual(["2026-11-02"]);
+    // owner 2026-11-12: a shift scheduled on Friday makes it that person's work day, so missing it is an absence
+    expect(result.rows!.map((row) => row.shift_date)).toEqual(["2026-11-02", "2026-11-06"]);
   });
 
   it("a long session closed automatically shows as waiting for review", async () => {
