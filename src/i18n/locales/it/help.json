@@ -20,7 +20,7 @@
     },
     "sos": {
       "title": "SOS / Emergenza",
-      "body": "Il pulsante SOS è sulla dashboard durante ogni turno, una volta confermata la timbratura. Invia un allarme prioritario con la tua posizione ai responsabili della sede, al titolare e ai colleghi presenti, e viene registrato nel registro emergenze. SOS non è un servizio di emergenza: non chiama polizia o ambulanza. In emergenza chiama sempre il numero locale. Richiede una connessione internet. Se lavori senza una sede scelta, lo ricevono i responsabili della sede più vicina."
+      "body": "Il pulsante SOS è sulla dashboard durante ogni turno, una volta confermata la timbratura. Invia un allarme prioritario con la tua posizione ai responsabili della sede, al titolare e ai colleghi presenti, e viene registrato nel registro emergenze. SOS non è un servizio di emergenza: non chiama polizia o ambulanza. In emergenza chiama sempre il numero locale. Richiede una connessione internet. Se lavori senza una sede scelta, lo ricevono i responsabili della sede più vicina. Quando ti arriva un SOS, \"Mostra posizione\" apre sulla mappa il punto da cui è stato inviato e \"Silenzia\" ferma la sirena lasciando l'allarme sullo schermo finché non lo chiudi. Il registro emergenze lo vedono solo il titolare e i responsabili."
     },
     "notifications": {
       "title": "Come le notifiche raggiungono la persona giusta",
@@ -48,7 +48,7 @@
     },
     "sites": {
       "title": "Sedi (amministratori)",
-      "body": "In Sedi si creano i luoghi di lavoro e si assegnano le persone. Per aggiungere una sede servono solo il nome, la posizione - mettiti lì e premi Usa la mia posizione attuale -, il raggio e se serve una foto; il resto è in Altre opzioni. Una nuova sede prende il fuso orario del tuo dispositivo. Il ruolo nella sede parte dal ruolo nell'organizzazione. Tutto il resto di una sede si imposta nella sua pagina, in Regole della sede: margine GPS, orari dei turni, straordinari e trattenute per ritardo, arrotondamento delle pause, monitoraggio della presenza, dipendenti esentati e blocchi self-service. Nel modulo della sede indica a chi appartiene - all'azienda o a un cliente (scrivi il nome del cliente; i nomi già usati vengono suggeriti) - e di che tipo è: ufficio, magazzino, cantiere, fabbrica, negozio / filiale o un altro tipo che indichi."
+      "body": "In Sedi si creano i luoghi di lavoro e si assegnano le persone. Per aggiungere una sede servono solo il nome, la posizione - mettiti lì e premi Usa la mia posizione attuale -, il raggio e se serve una foto; il resto è in Altre opzioni. Una nuova sede prende il fuso orario del tuo dispositivo. Il ruolo nella sede parte dal ruolo nell'organizzazione. Tutto il resto di una sede si imposta nella sua pagina, in Regole della sede: margine GPS, orari dei turni, straordinari e trattenute per ritardo, arrotondamento delle pause, monitoraggio della presenza, dipendenti esentati e blocchi self-service. Nel modulo della sede indica a chi appartiene - all'azienda o a un cliente (scrivi il nome del cliente; i nomi già usati vengono suggeriti) - e di che tipo è: ufficio, magazzino, cantiere, fabbrica, negozio / filiale o un altro tipo che indichi. Se qualcuno ti ha inviato la posizione, incolla il link (Google Maps, anche quelli brevi) o le coordinate in \"Oppure incolla un link della posizione\" e premi \"Usa il link\"."
     },
     "workers": {
       "title": "Lavoratori esterni",

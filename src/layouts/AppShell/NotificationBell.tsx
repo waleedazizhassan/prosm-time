@@ -71,6 +71,9 @@ export default function NotificationBell() {
   // dismiss (or a fresh SOS arriving mid-siren) cut the current one
   // short instead of letting two overlap.
   const [activeSosAlert, setActiveSosAlert] = useState<AppNotification | null>(null);
+  const [sosSilenced, setSosSilenced] = useState(false);
+  const [sosLocating, setSosLocating] = useState(false);
+  const [sosNoLocation, setSosNoLocation] = useState(false);
   const sirenStopRef = useRef<(() => void) | null>(null);
   const sirenTimeoutRef = useRef<number | null>(null);
 
@@ -88,6 +91,8 @@ export default function NotificationBell() {
   const triggerSosAlert = useCallback(
     (notification: AppNotification) => {
       clearSiren();
+      setSosSilenced(false);
+      setSosNoLocation(false);
       setActiveSosAlert(notification);
       const handle = playSirenSound(SOS_SIREN_SECONDS);
       sirenStopRef.current = handle.stop;
@@ -212,6 +217,25 @@ export default function NotificationBell() {
   const handleDismissSos = () => {
     clearSiren();
     setActiveSosAlert(null);
+    setSosSilenced(false);
+    setSosNoLocation(false);
+  };
+
+  // owner 2026-11-12: silence stops the siren and keeps the alert on screen until it is closed
+  const handleSilenceSos = () => {
+    clearSiren();
+    setSosSilenced(true);
+  };
+
+  // owner 2026-11-12: the alert's position on the map, for everyone it reached
+  const handleSosLocation = async () => {
+    const notification = activeSosAlert;
+    if (!notification?.relatedEntityId) return setSosNoLocation(true);
+    setSosLocating(true);
+    const where = await NotificationRepository.getSosLocation(notification.relatedEntityId);
+    setSosLocating(false);
+    if (!where) return setSosNoLocation(true);
+    window.open(`https://www.google.com/maps?q=${where.latitude},${where.longitude}`, "_blank", "noopener");
   };
 
   const handleViewSos = async () => {
@@ -277,7 +301,12 @@ export default function NotificationBell() {
       {activeSosAlert ? (
         <SosAlertOverlay
           employeeName={typeof activeSosAlert.data?.employeeName === "string" ? activeSosAlert.data.employeeName : ""}
-          onView={handleViewSos}
+          onView={viewer.isOwner || viewer.canViewEmergencyLog ? handleViewSos : null}
+          onShowLocation={() => void handleSosLocation()}
+          locating={sosLocating}
+          noLocation={sosNoLocation}
+          onSilence={handleSilenceSos}
+          silenced={sosSilenced}
           onDismiss={handleDismissSos}
         />
       ) : null}

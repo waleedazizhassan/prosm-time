@@ -274,3 +274,18 @@
   outline: 2px solid var(--brand-primary);
   outline-offset: 2px;
 }
+
+/* owner 2026-11-12: the state and the monitoring note on one line */
+.mapInfoState {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+}
+
+.mapInfoNote {
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  white-space: nowrap;
+}

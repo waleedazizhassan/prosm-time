@@ -359,7 +359,10 @@
     "title": "تنبيه طوارئ (SOS)",
     "subtitle": "{{name}} أرسل تنبيه طوارئ الآن.",
     "viewAction": "عرض سجل الطوارئ",
-    "dismissAction": "إغلاق"
+    "dismissAction": "إغلاق",
+    "locationAction": "عرض الموقع",
+    "silenceAction": "إسكات",
+    "noLocation": "مكان التنبيه مش متاح."
   },
   "sections": {
     "attendance": "التشغيل الميداني",

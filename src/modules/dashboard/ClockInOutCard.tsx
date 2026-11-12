@@ -1274,7 +1274,11 @@ export default function ClockInOutCard() {
           onClick={() => setRecenterTick((n) => n + 1)}
           onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); setRecenterTick((n) => n + 1); } }}>
           <div className={styles.mapInfoTop}>
-            <StatusBadge status={statusKey}>{t(`attendance.status.${statusKey}`)}</StatusBadge>
+            {/* owner 2026-11-12: a shorter card - the monitoring note sits beside the state, not on its own line */}
+            <span className={styles.mapInfoState}>
+              <StatusBadge status={statusKey}>{t(`attendance.status.${statusKey}`)}</StatusBadge>
+              {view.session && presenceSession ? <span className={styles.mapInfoNote} title={t("attendance.presenceActive")}>{t("attendance.presenceShort")}</span> : null}
+            </span>
             {view.session ? (
               <span className={styles.mapTimer} title={view.activeBreakId ? t("attendance.timerPausedOnBreak") : t("attendance.clockedInSince", { time: formatTimeOnly(view.session.clockInAt, i18n.language) })}>
                 {formatElapsed(
@@ -1294,9 +1298,6 @@ export default function ClockInOutCard() {
                 : t("attendance.locationUnavailable")}
             </span>
           </div>
-          {view.session && presenceSession ? (
-            <div className={styles.mapInfoRow} style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)" }}>{t("attendance.presenceActive")}</div>
-          ) : null}
           {mapRelevantSite && mapSiteAnyLocation ? (
             <div className={styles.mapInfoRow}>{t("attendance.anyLocationSite", { site: mapRelevantSite.name })}</div>
           ) : mapRelevantSite && mapSiteProximity ? (

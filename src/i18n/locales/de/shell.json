@@ -359,7 +359,10 @@
     "title": "SOS-/Notfallalarm",
     "subtitle": "{{name}} hat gerade einen Notfallalarm ausgelöst.",
     "viewAction": "Notfallprotokoll anzeigen",
-    "dismissAction": "Ausblenden"
+    "dismissAction": "Ausblenden",
+    "locationAction": "Standort zeigen",
+    "silenceAction": "Stumm",
+    "noLocation": "Der Ort des Alarms ist nicht verfügbar."
   },
   "sections": {
     "attendance": "Außendienst",

@@ -359,7 +359,10 @@
     "title": "Сигнал SOS/тревога",
     "subtitle": "{{name}} только что подал(а) сигнал тревоги.",
     "viewAction": "Открыть журнал тревог",
-    "dismissAction": "Закрыть"
+    "dismissAction": "Закрыть",
+    "locationAction": "Показать место",
+    "silenceAction": "Без звука",
+    "noLocation": "Место тревоги недоступно."
   },
   "sections": {
     "attendance": "Полевые операции",

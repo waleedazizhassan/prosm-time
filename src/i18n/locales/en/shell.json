@@ -359,7 +359,10 @@
     "title": "SOS/Emergency alert",
     "subtitle": "{{name}} just triggered an emergency alert.",
     "viewAction": "View Emergency Log",
-    "dismissAction": "Dismiss"
+    "dismissAction": "Dismiss",
+    "locationAction": "Show location",
+    "silenceAction": "Silence",
+    "noLocation": "The alert's location is not available."
   },
   "sections": {
     "attendance": "Field operations",

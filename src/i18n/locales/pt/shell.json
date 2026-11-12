@@ -359,7 +359,10 @@
     "title": "Alerta SOS/Emergência",
     "subtitle": "{{name}} acabou de acionar um alerta de emergência.",
     "viewAction": "Ver registro de emergências",
-    "dismissAction": "Dispensar"
+    "dismissAction": "Dispensar",
+    "locationAction": "Ver localização",
+    "silenceAction": "Silenciar",
+    "noLocation": "A localização do alerta não está disponível."
   },
   "sections": {
     "attendance": "Operação no terreno",

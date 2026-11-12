@@ -58,3 +58,14 @@ describe("SOS recipients (audit 4.5)", () => {
     expect(await visibleAlerts(factoryManager)).toEqual([]);
   });
 });
+
+// 2026-11-12 (owner): whoever received the alarm may open its location on a map - nobody else
+describe("SOS location for its recipients", () => {
+  it("gives the co-worker the position, not a manager of another site", async () => {
+    const [alert] = await t.su<{ id: string }>("select id from sos_alerts where user_id = $1", [worker.userId]);
+    const mine = await t.as<{ r: { latitude: number; longitude: number } }>(coworker.authId, "select public.get_prosm_time_sos_location($1) as r", [alert.id]);
+    expect(mine.error).toBeNull();
+    expect(mine.rows![0].r).toMatchObject({ latitude: 30.02, longitude: 31.75 });
+    expect((await t.as(factoryManager.authId, "select public.get_prosm_time_sos_location($1)", [alert.id])).error).toMatch(/NOT FOUND/);
+  });
+});

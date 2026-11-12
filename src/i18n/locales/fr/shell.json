@@ -359,7 +359,10 @@
     "title": "Alerte SOS/Urgence",
     "subtitle": "{{name}} vient de déclencher une alerte d'urgence.",
     "viewAction": "Voir le journal des urgences",
-    "dismissAction": "Ignorer"
+    "dismissAction": "Ignorer",
+    "locationAction": "Voir la position",
+    "silenceAction": "Silence",
+    "noLocation": "La position de l'alerte n'est pas disponible."
   },
   "sections": {
     "attendance": "Opérations terrain",

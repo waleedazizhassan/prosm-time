@@ -359,7 +359,10 @@
     "title": "SOS/紧急警报",
     "subtitle": "{{name}} 刚刚触发了紧急警报。",
     "viewAction": "查看紧急日志",
-    "dismissAction": "关闭"
+    "dismissAction": "关闭",
+    "locationAction": "查看位置",
+    "silenceAction": "静音",
+    "noLocation": "无法获取警报位置。"
   },
   "sections": {
     "attendance": "现场运营",

@@ -93,7 +93,11 @@
     "siteTypeLabel": "Tipo di sede",
     "siteTypeOtherLabel": "Indica il tipo di sede",
     "clientNameRequired": "Indica il cliente a cui appartiene la sede.",
-    "siteTypeOtherRequired": "Indica il tipo di sede."
+    "siteTypeOtherRequired": "Indica il tipo di sede.",
+    "mapLinkLabel": "Oppure incolla un link della posizione",
+    "mapLinkPlaceholder": "Link di Google Maps o coordinate",
+    "mapLinkAction": "Usa il link",
+    "mapLinkUnreadable": "Impossibile leggere una posizione da questo link. Aprilo in Google Maps e copia le coordinate mostrate, o il link completo."
   },
   "detail": {
     "backToList": "Torna alle sedi",

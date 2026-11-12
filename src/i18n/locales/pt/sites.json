@@ -93,7 +93,11 @@
     "siteTypeLabel": "Tipo de local",
     "siteTypeOtherLabel": "Indique o tipo de local",
     "clientNameRequired": "Indique o cliente a que pertence o local.",
-    "siteTypeOtherRequired": "Indique o tipo de local."
+    "siteTypeOtherRequired": "Indique o tipo de local.",
+    "mapLinkLabel": "Ou cole uma ligação da localização",
+    "mapLinkPlaceholder": "Ligação do Google Maps ou coordenadas",
+    "mapLinkAction": "Usar a ligação",
+    "mapLinkUnreadable": "Não foi possível ler uma posição desta ligação. Abra-a no Google Maps e copie as coordenadas mostradas, ou a ligação completa."
   },
   "detail": {
     "backToList": "Voltar às unidades",

@@ -94,6 +94,17 @@ class NotificationRepository {
     }
   }
 
+  /** Owner 2026-11-12: where an SOS was sent from - only for someone the alert reached */
+  async getSosLocation(alertId: string): Promise<{ latitude: number; longitude: number } | null> {
+    try {
+      const { data, error } = await this.client.rpc("get_prosm_time_sos_location", { p_alert_id: alertId });
+      if (error || !data || data.latitude == null || data.longitude == null) return null;
+      return { latitude: Number(data.latitude), longitude: Number(data.longitude) };
+    } catch {
+      return null;
+    }
+  }
+
   async markRead(notificationId: string): Promise<ServiceResult> {
     try {
       const { data, error } = await this.client.rpc("mark_prosm_time_notification_read", { p_notification_id: notificationId });

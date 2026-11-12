@@ -338,6 +338,17 @@ class SiteRepository {
     }
   }
 
+  /** Owner 2026-11-12: a short shared map link opened on the server (the browser cannot follow it) */
+  async resolveMapLink(url: string): Promise<string | null> {
+    try {
+      const { data, error } = await this.client.functions.invoke("resolve-map-link", { body: { url } });
+      if (error || !data?.success) return null;
+      return typeof data.data?.url === "string" ? data.data.url : null;
+    } catch {
+      return null;
+    }
+  }
+
   async setProfile(siteId: string, input: SiteProfileInput): Promise<ServiceResult> {
     try {
       const { error } = await this.client.rpc("set_prosm_time_site_profile", {

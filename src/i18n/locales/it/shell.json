@@ -359,7 +359,10 @@
     "title": "Allarme SOS/Emergenza",
     "subtitle": "{{name}} ha appena attivato un allarme di emergenza.",
     "viewAction": "Vedi registro emergenze",
-    "dismissAction": "Ignora"
+    "dismissAction": "Ignora",
+    "locationAction": "Mostra posizione",
+    "silenceAction": "Silenzia",
+    "noLocation": "La posizione dell'allarme non è disponibile."
   },
   "sections": {
     "attendance": "Operatività sul campo",
