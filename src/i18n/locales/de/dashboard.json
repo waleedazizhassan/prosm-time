@@ -419,7 +419,7 @@
       "ofTeam": "von {{team}} im Team",
       "hours": "Gearbeitete Stunden",
       "scheduled": "von {{hours}} Std. geplant",
-      "noSchedule": "kein Plan",
+      "noSchedule": "keine geplanten Schichten zum Vergleich",
       "late": "Heute verspätet",
       "lateInPeriod": "{{count}} Verspätungen im Zeitraum",
       "absent": "Heute abwesend",

@@ -23,6 +23,28 @@ describe("absence and exception status", () => {
     expect(await absent()).toBe(true);
   });
 
+  // 2026-11-12 (owner): no hours known for the person must not mean absent from midnight
+  it("is not absent from midnight when no hours are set", async () => {
+    const t = await buildDatabase();
+    expect(t.failures).toEqual([]);
+    const org = await createOrg(t, "No Hours Co");
+    const site = await createSite(t, org, "Main");
+    const other = await createSite(t, org, "Other");
+    const amira = await addMember(t, org, "employee", "Amira");
+    await assignToSite(t, site, amira);
+    const [{ today, weekday }] = await t.su<{ today: string; weekday: number }>(
+      "select ((now() at time zone 'Africa/Cairo')::date)::text as today, extract(dow from (now() at time zone 'Africa/Cairo'))::int as weekday");
+    if (weekday === 5 || weekday === 6) return;
+    await t.su("update sites set timezone = 'Africa/Cairo', shift_start_time = null, late_deduction_start_time = null where organization_id = $1", [org.id]);
+    const absent = async (day: string) => (await t.su<{ v: boolean }>("select public.prosm_time_absent_today($1, $2::date, 'Africa/Cairo') as v", [amira.userId, day]))[0].v;
+    expect(await absent(today)).toBe(false); // no hours anywhere: not before the day ends
+    // her site has none, another site's late start is used
+    await t.su("update sites set late_deduction_start_time = '23:59' where id = $1", [other]);
+    expect(await absent(today)).toBe(false);
+    await t.su("update sites set late_deduction_start_time = '00:00' where id = $1", [other]);
+    expect(await absent(today)).toBe(true);
+  });
+
   it("tells the owner an exception still waits for the employee's reason, and tells nobody else", async () => {
     const t = await buildDatabase();
     const org = await createOrg(t, "Exc Co");

@@ -129,3 +129,57 @@
     width: 100%;
   }
 }
+
+/* Owner 2026-11-12: attendance as a short list of sites, each opens its own table */
+.siteList {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.siteItem {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "name arrow" "meta arrow";
+  align-items: center;
+  gap: 2px var(--space-2);
+  width: 100%;
+  padding: var(--space-3);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  color: var(--text-primary);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.siteItem:hover,
+.siteItem:focus-visible {
+  border-color: var(--brand-primary);
+}
+
+.siteAll {
+  background: var(--surface-sunken);
+}
+
+.siteName {
+  grid-area: name;
+  font-weight: var(--font-weight-semibold, 600);
+  overflow-wrap: anywhere;
+}
+
+.siteMeta {
+  grid-area: meta;
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+}
+
+.siteArrow {
+  grid-area: arrow;
+  color: var(--text-secondary);
+  font-size: var(--font-xl);
+}
+
+[dir="rtl"] .siteArrow {
+  transform: scaleX(-1);
+}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import Button from "../../../components/common/Button";
 import Card from "../../../components/common/Card";
 import EmptyState from "../../../components/common/EmptyState";
 import LoadingState from "../../../components/common/LoadingState";
@@ -33,12 +34,27 @@ function useActivity(userId: string) {
   return { data, error };
 }
 
+const ALL = "__all_sites__";
+
 // HR suite feature 3: the last 30 days of attendance, from the same day figures as timesheets and payroll
 export function AttendanceTab({ userId }: { userId: string }) {
   const { t, i18n } = useTranslation("people");
   const { data, error } = useActivity(userId);
+  const [picked, setPicked] = useState<string | null>(null);
   if (error) return <EmptyState message={t("profile.loadError")} />;
   if (!data) return <LoadingState />;
+  // worked days by site; absent days have no site and show under "all sites"
+  const bySite = new Map<string, { name: string; days: number; minutes: number }>();
+  for (const d of data.attendance) {
+    if (d.state !== "worked") continue;
+    const name = d.site ?? "";
+    const s = bySite.get(name) ?? { name, days: 0, minutes: 0 };
+    s.days += 1;
+    s.minutes += Number(d.workedMinutes ?? 0);
+    bySite.set(name, s);
+  }
+  const sites = [...bySite.values()].sort((a, b) => b.days - a.days || a.name.localeCompare(b.name));
+  const rows = picked === ALL ? data.attendance : data.attendance.filter((d) => d.state === "worked" && (d.site ?? "") === picked);
   const columns: TableColumn<ActivityDay>[] = [
     { key: "day", header: t("profile.attendance.day"), render: (d) => formatDateOnly(d.day, i18n.language) },
     { key: "site", header: t("profile.attendance.site"), render: (d) => d.site ?? "—" },
@@ -57,9 +73,33 @@ export function AttendanceTab({ userId }: { userId: string }) {
         <div className={styles.tile}><b>{data.totals.late}</b><span>{t("profile.attendance.lateDays")}</span></div>
         <div className={styles.tile}><b>{data.totals.absent}</b><span>{t("profile.attendance.absentDays")}</span></div>
       </div>
-      <Card title={t("profile.tabs.attendance")}>
-        <Table columns={columns} data={data.attendance} getRowId={(d) => d.day} emptyMessage={t("profile.attendance.empty")} />
-      </Card>
+      {/* Owner 2026-11-12: a card per day made the page endless on a phone - a short list of sites,
+          each opens its own table, and one button for every site */}
+      {picked === null ? (
+        <Card title={t("profile.tabs.attendance")}>
+          {data.attendance.length === 0 ? <EmptyState message={t("profile.attendance.empty")} /> : (
+            <div className={styles.siteList}>
+              <button type="button" className={`${styles.siteItem} ${styles.siteAll}`} onClick={() => setPicked(ALL)}>
+                <span className={styles.siteName}>{t("profile.attendance.allSites")}</span>
+                <span className={styles.siteMeta}>{t("profile.attendance.siteDays", { count: data.attendance.length })}</span>
+                <span aria-hidden="true" className={styles.siteArrow}>›</span>
+              </button>
+              {sites.map((s) => (
+                <button key={s.name} type="button" className={styles.siteItem} onClick={() => setPicked(s.name)}>
+                  <span className={styles.siteName}>{s.name || t("profile.attendance.noSite")}</span>
+                  <span className={styles.siteMeta}>{t("profile.attendance.siteDays", { count: s.days })} · {hm(s.minutes)}</span>
+                  <span aria-hidden="true" className={styles.siteArrow}>›</span>
+                </button>
+              ))}
+            </div>
+          )}
+        </Card>
+      ) : (
+        <Card title={picked === ALL ? t("profile.attendance.allSites") : picked || t("profile.attendance.noSite")}
+          actions={<Button variant="ghost" size="sm" onClick={() => setPicked(null)}>{t("profile.attendance.backToSites")}</Button>}>
+          <Table grid columns={picked === ALL ? columns : columns.filter((c) => c.key !== "site")} data={rows} getRowId={(d) => d.day} emptyMessage={t("profile.attendance.empty")} />
+        </Card>
+      )}
     </div>
   );
 }

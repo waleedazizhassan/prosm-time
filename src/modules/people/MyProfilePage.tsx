@@ -14,6 +14,7 @@ import PersonalDataTab from "./profile/PersonalDataTab";
 import ContractsTab from "./profile/ContractsTab";
 import { AttendanceTab, LeaveTab } from "./profile/ActivityTabs";
 import { ProfileDocumentsTab, ProfilePenaltiesTab } from "./profile/LaterTabs";
+import { MyLeavePanel } from "../leave/LeaveRequestsPage";
 
 type MyTab = "data" | "documents" | "penalties" | "contract" | "attendance" | "leave";
 
@@ -64,7 +65,8 @@ export default function MyProfilePage() {
       {tab === "penalties" ? <ProfilePenaltiesTab profile={file} /> : null}
       {tab === "contract" ? <ContractsTab profile={file} onSaved={() => void load()} /> : null}
       {tab === "attendance" ? <AttendanceTab userId={profile.id} /> : null}
-      {tab === "leave" ? <LeaveTab userId={profile.id} /> : null}
+      {/* owner 2026-11-12: one place for one's own leave - balance, request, permissions and requests */}
+      {tab === "leave" ? (allows("leave") ? <MyLeavePanel /> : <LeaveTab userId={profile.id} />) : null}
     </PageShell>
   );
 }

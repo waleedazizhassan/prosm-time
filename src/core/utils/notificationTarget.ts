@@ -54,7 +54,7 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
       return ref?.kind === "manager" ? "/attendance?period=today" : "/dashboard";
     // The employee's exceptions card lives on the dashboard.
     case "correction_reviewed":
-      return isLeave ? "/leave" : "/dashboard";
+      return isLeave ? (viewer.isOwner ? "/leave" : "/me?tab=leave") : "/dashboard";
     case "shift_assigned":
       return "/schedule";
     // owner 2026-11-03: the morning summary opens the day it is about; a licence change, the plan card

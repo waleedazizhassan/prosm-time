@@ -431,7 +431,7 @@
       "ofTeam": "من {{team}} في الفريق",
       "hours": "ساعات العمل",
       "scheduled": "من {{hours}} س مخططة",
-      "noSchedule": "لا يوجد جدول",
+      "noSchedule": "مفيش ورديات مخططة للمقارنة",
       "late": "متأخرون اليوم",
       "lateInPeriod": "{{count}} تأخير في الفترة",
       "absent": "غائبون اليوم",

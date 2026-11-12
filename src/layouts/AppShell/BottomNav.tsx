@@ -41,7 +41,7 @@ export default function BottomNav() {
         { to: "/attendance", label: t("bottomNav.attendance"), icon: Clock },
         { to: "/allowances", label: t("bottomNav.allowances"), icon: Wallet },
         home,
-        { to: "/leave", label: t("bottomNav.leave"), icon: CalendarDays },
+        { to: "/me?tab=leave", label: t("bottomNav.leave"), icon: CalendarDays },
       ];
   // on the home page already, home refreshes it and goes back to the top
   const onHome = (event: React.MouseEvent, to: string) => {
