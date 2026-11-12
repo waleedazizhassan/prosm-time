@@ -20,6 +20,18 @@ describe("push notification texts", () => {
     expect(en.body).toContain("Lido");
   });
 
+  // Owner 2026-11-12: "Buzz notifications are still not translated" - send-push stores this text too
+  it("writes a Buzz in every language, with or without its own message", () => {
+    const stored = { title: "Buzz from Walid", body: "Please clock in." };
+    for (const language of ["ar", "de", "en", "es", "fr", "it", "pt", "ru", "zh"]) {
+      const buzz = localizePush("buzz", { fromName: "Walid", reason: "clock_in" }, language, stored);
+      expect(buzz.title).toContain("Walid");
+      if (language !== "en") expect(buzz.title).not.toBe(stored.title);
+      if (language !== "en") expect(buzz.body).not.toBe(stored.body);
+    }
+    expect(localizePush("buzz", { fromName: "Walid", reason: "attention", message: "تعال المكتب" }, "ar", stored).body).toBe("تعال المكتب");
+  });
+
   it("names the leave type in the phone's language", () => {
     const ar = localizePush("exception_pending_review", { employeeName: "Omar", kind: "leave", days: 2, leaveType: "annual", startDate: "2026-10-21", endDate: "2026-10-22" }, "ar", fallback);
     expect(ar.body).toContain("Omar");

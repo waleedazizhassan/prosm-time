@@ -30,6 +30,32 @@
             </intent-filter>
         </activity>
 
+        <!-- Owner 2026-11-12: an SOS rings with the alarm tone and opens on the whole screen, also with the
+             app closed and the phone locked. The app's service takes the push plugin's place (it does all the
+             plugin did, and shows the SOS itself); the SOS screen shows over the lock screen. -->
+        <service
+            android:name="com.capacitorjs.plugins.pushnotifications.MessagingService"
+            tools:node="remove" />
+        <service
+            android:name=".SosMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <receiver
+            android:name=".SosSilenceReceiver"
+            android:exported="false" />
+        <activity
+            android:name=".SosAlarmActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTop"
+            android:taskAffinity="net.prosm.time.sos"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
+            android:theme="@android:style/Theme.Material.NoActionBar" />
+
         <!-- v2.3.43 step 19 (item 12): the plugin declares its location service
              exported; only this app binds to it, so no other app may start it. -->
         <service
@@ -92,6 +118,8 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Owner 2026-11-12: the SOS opens on the whole screen over the lock screen (SosAlarmActivity) -->
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 
     <!-- step 19 (item 12): the radio's background service plays media (patched
          plugin, see DECISIONS D-12); nothing asks to skip battery optimisation. -->

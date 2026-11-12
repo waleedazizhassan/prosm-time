@@ -51,6 +51,8 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(ShiftTrackingPlugin.class);
         super.onCreate(savedInstanceState);
         createReminderChannel();
+        // owner 2026-11-12: the SOS rings with the alarm tone (SosMessagingService)
+        SosMessagingService.ensureSosChannel(this);
         if (BuildConfig.DEBUG) return;
 
         WebView.setWebContentsDebuggingEnabled(false);
@@ -60,6 +62,13 @@ public class MainActivity extends BridgeActivity {
         if (!signedByProsm()) {
             refuseModifiedCopy();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // the app is open: its own SOS window takes over, the ringing stops
+        SosMessagingService.silence(this);
     }
 
     // The id the server's reminder pushes and the app's own reminders use

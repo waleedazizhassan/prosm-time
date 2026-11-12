@@ -3,4 +3,10 @@
     <string name="capacitor_background_geolocation_notification_channel_name">PROSM Time · Presenze</string>
     <string name="reminder_channel_name">Promemoria di entrata e uscita</string>
     <string name="reminder_channel_description">Suona con il tono della sveglia, anche se il telefono è silenzioso.</string>
+    <!-- Owner 2026-11-12: the SOS rings with the alarm tone and opens on the whole screen. -->
+    <string name="sos_channel_name">Avvisi SOS</string>
+    <string name="sos_channel_description">Suona con la suoneria della sveglia, anche in silenzioso, finché non lo apri o lo silenzi.</string>
+    <string name="sos_default_title">Allarme di emergenza</string>
+    <string name="sos_open">Apri</string>
+    <string name="sos_silence">Silenzia</string>
 </resources>
