@@ -40,6 +40,8 @@ beforeAll(async () => {
   await assignToSite(t, siteA, present);
   await assignToSite(t, siteA, onLeave);
   await assignToSite(t, siteB, otherSite);
+  // the sites' day has started (absence waits for a known start since 20261112130000)
+  await t.su("update sites set shift_start_time = '00:00', late_deduction_start_time = '00:00' where organization_id = $1", [org.id]);
   expect((await clockIn(t, present, siteA)).error).toBeNull();
   await t.su("update attendance_sessions set clock_in_at = now() - interval '2 hours' where user_id = $1", [present.userId]);
   await t.su(
