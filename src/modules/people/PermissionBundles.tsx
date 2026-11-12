@@ -8,9 +8,11 @@ import Modal from "../../components/common/Modal";
 import Textarea from "../../components/common/Textarea";
 import ErrorText from "../../components/common/ErrorText";
 import HintText from "../../components/common/HintText";
+import Input from "../../components/common/Input";
+import { formatDateOnly } from "../../core/utils/formatDate";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import PermissionRepository from "../../core/repositories/PermissionRepository";
-import OwnerAuthorityRepository from "../../core/repositories/OwnerAuthorityRepository";
+import OwnerAuthorityRepository, { type OwnerDelegation } from "../../core/repositories/OwnerAuthorityRepository";
 
 // Owner 2026-11-12: "a button per role - the owner's authority, finance manager, HR manager, attendance only,
 // sites... besides the single permissions. Nobody gets a permission twice: one taken with a whole role shows
@@ -36,18 +38,30 @@ export default function PermissionBundles({ userId, effective, overrides, catalo
   userId: string; effective: string[]; overrides: Record<string, boolean>; catalogKeys: string[]; canChange: (key: string) => boolean;
   canGrantOwner: boolean; onChanged: () => void;
 }) {
-  const { t } = useTranslation("people");
+  const { t, i18n } = useTranslation("people");
   const [pending, setPending] = useState<{ id: string; action: "grant" | "revoke" } | null>(null);
   const [reason, setReason] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  const [isOwnerDelegate, setIsOwnerDelegate] = useState(false);
+  // Owner 2026-11-12: the "grant permissions" page is gone - its date window and its history live here now
+  const [delegations, setDelegations] = useState<OwnerDelegation[]>([]);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [tick, setTick] = useState(0);
 
   useEffect(() => {
     if (!canGrantOwner) return;
-    void OwnerAuthorityRepository.list().then((all) => setIsOwnerDelegate(all.some((d) => d.userId === userId && !d.revokedAt))).catch(() => undefined);
+    void OwnerAuthorityRepository.list().then((all) => setDelegations(all.filter((d) => d.userId === userId))).catch(() => undefined);
   }, [canGrantOwner, userId, tick]);
+
+  // not withdrawn and not ended (a scheduled one counts: it blocks a second grant)
+  const activeDelegation = delegations.find((d) => !d.revokedAt && (!d.endsAt || new Date(d.endsAt).getTime() > Date.now())) ?? null;
+  const day = (iso: string) => formatDateOnly(iso.slice(0, 10), i18n.language);
+  const describeWindow = (d: OwnerDelegation) =>
+    d.endsAt ? t("ownerAuthority.window", { from: day(d.startsAt), to: day(d.endsAt) }) : t("ownerAuthority.since", { date: day(d.startsAt) });
+  const ownerState = (d: OwnerDelegation) => new Date(d.startsAt).getTime() > Date.now()
+    ? t("ownerAuthority.scheduled")
+    : d.scope === "partial" ? t("ownerAuthority.hasSome", { count: d.permissionKeys.length }) : t("ownerAuthority.hasAll");
 
   const keysOf = (b: Bundle) => b.keys.filter((k) => catalogKeys.includes(k) && canChange(k));
   const state = (b: Bundle) => {
@@ -63,7 +77,16 @@ export default function PermissionBundles({ userId, effective, overrides, catalo
     setError("");
     let failure: string | null = null;
     if (pending.id === "owner") {
-      failure = pending.action === "grant" ? await OwnerAuthorityRepository.grant(userId, reason.trim()) : await OwnerAuthorityRepository.revoke(userId, reason.trim());
+      if (pending.action === "grant" && startDate && endDate && endDate < startDate) {
+        setBusy(false);
+        return setError(t("ownerAuthority.endBeforeStart"));
+      }
+      // whole days in local time: from the start of the first day to the end of the last day
+      const startsAt = startDate ? new Date(`${startDate}T00:00:00`).toISOString() : null;
+      const endsAt = endDate ? new Date(`${endDate}T23:59:59`).toISOString() : null;
+      failure = pending.action === "grant"
+        ? await OwnerAuthorityRepository.grant(userId, reason.trim(), { scope: "full", startsAt, endsAt })
+        : await OwnerAuthorityRepository.revoke(userId, reason.trim());
     } else {
       const bundle = PERMISSION_BUNDLES.find((b) => b.id === pending.id)!;
       for (const key of keysOf(bundle)) {
@@ -91,7 +114,7 @@ export default function PermissionBundles({ userId, effective, overrides, catalo
         <strong style={{ display: "block", fontSize: "var(--font-sm)" }}>{t(`bundles.${id}.title`)}</strong>
         <small style={{ color: "var(--text-secondary)" }}>{granted ? <><BadgeCheck size={12} aria-hidden="true" /> {t("bundles.granted")}</> : partial ?? t(`bundles.${id}.hint`)}</small>
       </span>
-      <Button size="xs" variant={granted ? "ghost" : "primary"} disabled={disabled} onClick={() => { setReason(""); setError(""); setPending({ id, action: granted ? "revoke" : "grant" }); }}>
+      <Button size="xs" variant={granted ? "ghost" : "primary"} disabled={disabled} onClick={() => { setReason(""); setError(""); setStartDate(""); setEndDate(""); setPending({ id, action: granted ? "revoke" : "grant" }); }}>
         {granted ? t("bundles.revoke") : t("bundles.grant")}
       </Button>
     </div>
@@ -101,18 +124,50 @@ export default function PermissionBundles({ userId, effective, overrides, catalo
     <div style={{ display: "grid", gap: "var(--space-2)", marginBottom: "var(--space-3)" }}>
       <HintText small>{t("bundles.hint")}</HintText>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(15rem, 1fr))", gap: "var(--space-2)" }}>
-        {canGrantOwner ? button("owner", Crown, isOwnerDelegate, null) : null}
+        {canGrantOwner ? button("owner", Crown, Boolean(activeDelegation), null) : null}
         {PERMISSION_BUNDLES.map((b) => {
           const s = state(b);
           if (s.keys.length === 0) return null;
           return button(b.id, b.icon, s.all, s.held > 0 ? t("bundles.partial", { held: s.held, total: s.keys.length }) : null);
         })}
       </div>
+      {canGrantOwner && delegations.length > 0 ? (
+        <details>
+          <summary style={{ cursor: "pointer", fontSize: "var(--font-sm)" }}>
+            {t("ownerAuthority.historyTitle")}{activeDelegation ? ` · ${ownerState(activeDelegation)} · ${describeWindow(activeDelegation)}` : ""}
+          </summary>
+          <ul style={{ listStyle: "none", margin: "var(--space-2) 0 0", padding: 0, display: "grid", gap: "var(--space-2)", fontSize: "var(--font-sm)" }}>
+            {delegations.map((d) => (
+              <li key={d.id} style={{ paddingBottom: "var(--space-2)", borderBottom: "1px solid var(--border-light)" }}>
+                {t("ownerAuthority.grantedLine", { date: day(d.grantedAt), reason: d.reason })}
+                <div style={{ color: "var(--text-secondary)" }}>{ownerState(d)} · {describeWindow(d)}</div>
+                {d.revokedAt ? (
+                  <div style={{ color: "var(--text-secondary)" }}>{t("ownerAuthority.revokedLine", { date: day(d.revokedAt), reason: d.revokeReason ?? "" })}</div>
+                ) : d.endsAt && new Date(d.endsAt).getTime() <= Date.now() ? (
+                  <div style={{ color: "var(--text-secondary)" }}>{t("ownerAuthority.ended")}</div>
+                ) : (
+                  <div style={{ color: "var(--status-success-text)" }}>{t("ownerAuthority.stillActive")}</div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </details>
+      ) : null}
       <Modal isOpen={Boolean(pending)} onClose={() => setPending(null)} size="sm"
         title={pending ? `${pending.action === "grant" ? t("bundles.grant") : t("bundles.revoke")} - ${t(`bundles.${pending.id}.title`)}` : ""}
         footer={<Button fullWidth loading={busy} variant={pending?.action === "revoke" ? "danger" : "primary"} onClick={() => void run()}>{pending?.action === "grant" ? t("bundles.grant") : t("bundles.revoke")}</Button>}>
         <ErrorText>{error}</ErrorText>
         {pending ? <HintText small>{t(pending.action === "grant" ? "bundles.grantNote" : "bundles.revokeNote")}</HintText> : null}
+        {pending?.id === "owner" && pending.action === "grant" ? (
+          <>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(10rem, 1fr))", gap: "var(--space-3)" }}>
+              <Input label={t("ownerAuthority.startLabel")} name="delegationStart" type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+              <Input label={t("ownerAuthority.endLabel")} name="delegationEnd" type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+            </div>
+            <HintText small>{t("ownerAuthority.windowHint")}</HintText>
+            <HintText small>{t("ownerAuthority.neverDelegated")}</HintText>
+          </>
+        ) : null}
         <Textarea label={t("detail.reasonLabel")} name="bundleReason" value={reason} onChange={(e) => setReason(e.target.value)} rows={2} />
       </Modal>
     </div>

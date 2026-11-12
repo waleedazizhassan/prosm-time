@@ -416,7 +416,7 @@
       "ofTeam": "团队共 {{team}} 人",
       "hours": "工作时长",
       "scheduled": "计划 {{hours}} 小时",
-      "noSchedule": "未设置排班",
+      "noSchedule": "无排班可对比",
       "late": "今日迟到",
       "lateInPeriod": "本时段迟到 {{count}} 次",
       "absent": "今日缺勤",

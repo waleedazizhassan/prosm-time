@@ -419,7 +419,7 @@
       "ofTeam": "of {{team}} in the team",
       "hours": "Hours worked",
       "scheduled": "of {{hours}} h scheduled",
-      "noSchedule": "no schedule set",
+      "noSchedule": "no planned shifts to compare",
       "late": "Late today",
       "lateInPeriod": "{{count}} late in the period",
       "absent": "Absent today",
