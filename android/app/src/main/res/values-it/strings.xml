@@ -9,4 +9,7 @@
     <string name="sos_default_title">Allarme di emergenza</string>
     <string name="sos_open">Apri</string>
     <string name="sos_silence">Silenzia</string>
+    <string name="connect_call_channel_name">Chiamate (PROSM Connect)</string>
+    <string name="connect_call_channel_description">Chiamate vocali e video in arrivo dai colleghi</string>
+    <string name="connect_call_open">Apri</string>
 </resources>

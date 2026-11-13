@@ -34,6 +34,8 @@ import java.util.Map;
 public class SosMessagingService extends MessagingService {
     static final String SOS_CHANNEL_ID = "prosm-sos-alarm";
     static final int SOS_NOTIFICATION_ID = 7110;
+    static final String CALL_CHANNEL_ID = "prosm-connect-calls";
+    static final int CALL_NOTIFICATION_ID = 7120;
     static final String EXTRA_PUSH = "prosm.push";
     private static final long RING_FOR_MS = 120_000L;
 
@@ -41,6 +43,11 @@ public class SosMessagingService extends MessagingService {
     public void onMessageReceived(@NonNull RemoteMessage message) {
         super.onMessageReceived(message);
         Map<String, String> data = message.getData();
+        // PROSM Connect (owner 2026-11-13): a call rings like a phone call - also closed and locked
+        if (message.getNotification() == null && "connect_call".equals(data.get("type"))) {
+            if (!appOnScreen(this)) showConnectCall(this, message.getMessageId(), data);
+            return;
+        }
         if (message.getNotification() != null || !"sos_alert".equals(data.get("type"))) return;
         // the app on screen shows its own SOS window (it got the message just above)
         if (appOnScreen(this)) return;
@@ -98,7 +105,11 @@ public class SosMessagingService extends MessagingService {
 
     static void silence(Context context) {
         NotificationManager manager = context.getSystemService(NotificationManager.class);
-        if (manager != null) manager.cancel(SOS_NOTIFICATION_ID);
+        if (manager != null) {
+            manager.cancel(SOS_NOTIFICATION_ID);
+            // an incoming PROSM Connect call stops ringing once the app is open (its own screen rings there)
+            manager.cancel(CALL_NOTIFICATION_ID);
+        }
     }
 
     private static String text(String value, String fallback) {
@@ -150,6 +161,72 @@ public class SosMessagingService extends MessagingService {
         notification.flags |= Notification.FLAG_INSISTENT;
         try {
             manager.notify(SOS_NOTIFICATION_ID, notification);
+        } catch (SecurityException error) {
+            // notifications turned off for the app
+        }
+    }
+
+    // PROSM Connect: the incoming call's own channel - the ringtone, vibration, over the lock screen
+    static void ensureCallChannel(Context context) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return;
+        try {
+            NotificationManager manager = context.getSystemService(NotificationManager.class);
+            if (manager == null || manager.getNotificationChannel(CALL_CHANNEL_ID) != null) return;
+            NotificationChannel channel = new NotificationChannel(CALL_CHANNEL_ID, context.getString(R.string.connect_call_channel_name), NotificationManager.IMPORTANCE_HIGH);
+            channel.setDescription(context.getString(R.string.connect_call_channel_description));
+            Uri ring = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+            channel.setSound(ring != null ? ring : alarmTone(), new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build());
+            channel.enableVibration(true);
+            channel.setVibrationPattern(new long[] {0, 800, 600, 800, 600});
+            channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+            manager.createNotificationChannel(channel);
+        } catch (Exception error) {
+            // without it the call still shows, on the default channel
+        }
+    }
+
+    /** An incoming PROSM Connect call: rings until answered in the app or 45 seconds pass. */
+    static void showConnectCall(Context context, String messageId, Map<String, String> data) {
+        NotificationManager manager = context.getSystemService(NotificationManager.class);
+        if (manager == null) return;
+        ensureCallChannel(context);
+        String title = text(data.get("title"), "PROSM Connect");
+        String body = text(data.get("body"), "");
+        Bundle push = new Bundle();
+        push.putString("google.message_id", text(messageId, "call-" + System.currentTimeMillis()));
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            if (!"title".equals(entry.getKey()) && !"body".equals(entry.getKey())) push.putString(entry.getKey(), entry.getValue());
+        }
+        int flags = PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE;
+        // opening the app shows the ringing screen (the call waits in the switchboard)
+        PendingIntent openApp = PendingIntent.getActivity(context, 7121, openAppIntent(context, push).putExtra("connectCall", true), flags);
+        Intent screen = new Intent(context, SosAlarmActivity.class)
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_USER_ACTION)
+            .putExtra("title", title)
+            .putExtra("body", body)
+            .putExtra(EXTRA_PUSH, push);
+        PendingIntent fullScreen = PendingIntent.getActivity(context, 7122, screen, flags);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CALL_CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_stat_prosm)
+            .setColor(0xFF1E6FD9)
+            .setContentTitle(title)
+            .setContentText(body)
+            .setPriority(NotificationCompat.PRIORITY_MAX)
+            .setCategory(NotificationCompat.CATEGORY_CALL)
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+            .setOngoing(true)
+            .setAutoCancel(true)
+            .setTimeoutAfter(45_000L)
+            .setContentIntent(openApp)
+            .setFullScreenIntent(fullScreen, true)
+            .addAction(0, context.getString(R.string.connect_call_open), openApp);
+        Notification notification = builder.build();
+        notification.flags |= Notification.FLAG_INSISTENT;
+        try {
+            manager.notify(CALL_NOTIFICATION_ID, notification);
         } catch (SecurityException error) {
             // notifications turned off for the app
         }

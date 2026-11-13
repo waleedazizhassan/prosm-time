@@ -364,7 +364,10 @@
     "exceptions": "我的例外",
     "myProfile": "我的档案",
     "documents": "证件",
-    "penalties": "处罚与奖励"
+    "penalties": "处罚与奖励",
+    "connect": "聊天",
+    "connectCalls": "通话记录",
+    "connectMeetings": "会议"
   },
   "sosOverlay": {
     "title": "SOS/紧急警报",
@@ -382,7 +385,8 @@
     "payroll": "薪资",
     "reports": "报表与分析",
     "settings": "管理与治理",
-    "help": "帮助"
+    "help": "帮助",
+    "connect": "PROSM Connect"
   },
   "weather": {
     "loading": "正在加载天气",
@@ -489,7 +493,8 @@
     "leave": "请假",
     "menu": "菜单",
     "schedule": "排班",
-    "myFile": "我的档案"
+    "myFile": "我的档案",
+    "chats": "聊天"
   },
   "exitPrompt": {
     "title": "您已离开工作地点",

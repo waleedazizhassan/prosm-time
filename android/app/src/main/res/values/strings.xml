@@ -18,4 +18,7 @@
     <string name="sos_default_title">Emergency alert</string>
     <string name="sos_open">Open</string>
     <string name="sos_silence">Silence</string>
+    <string name="connect_call_channel_name">Calls (PROSM Connect)</string>
+    <string name="connect_call_channel_description">Incoming voice and video calls from your colleagues</string>
+    <string name="connect_call_open">Open</string>
 </resources>

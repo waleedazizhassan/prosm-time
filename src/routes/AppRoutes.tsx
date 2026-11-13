@@ -35,6 +35,7 @@ const ExternalWorkersPage = lazy(() => import("../modules/workforce/ExternalWork
 const ExternalPayPage = lazy(() => import("../modules/workforce/ExternalPayPage"));
 const ExternalPayRunPage = lazy(() => import("../modules/workforce/ExternalPayRunPage"));
 const ManagerConsolePage = lazy(() => import("../modules/manager/ManagerConsolePage"));
+const ConnectPage = lazy(() => import("../modules/connect/ConnectPage"));
 const AttendanceLogPage = lazy(() => import("../modules/attendance/AttendanceLogPage"));
 const TimesheetsPage = lazy(() => import("../modules/timesheets/TimesheetsPage"));
 const TimesheetReportPage = lazy(() => import("../modules/timesheets/TimesheetReportPage"));
@@ -170,6 +171,10 @@ export default function AppRoutes() {
             <Route path="/penalties/bylaw" element={<PlanRoute feature="penalties"><BylawPage /></PlanRoute>} />
             {/* 2026-11-09 Media Center: announcements for everyone; publishing is checked on the server */}
             <Route path="/announcements" element={<AnnouncementsPage />} />
+            {/* owner 2026-11-13: PROSM Connect (preview builds until its chat works) */}
+            {FEATURES.connect ? <Route path="/connect" element={<ConnectPage />} /> : null}
+            {FEATURES.connect ? <Route path="/connect/calls" element={<ConnectPage />} /> : null}
+            {FEATURES.connect ? <Route path="/connect/meetings" element={<ConnectPage />} /> : null}
             <Route path="/exceptions" element={<ExceptionsPage />} />
             <Route path="/schedule" element={<SchedulePage />} />
             <Route path="/calendar" element={<CalendarPage />} />

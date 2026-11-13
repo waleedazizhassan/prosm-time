@@ -205,6 +205,10 @@
     "taxConfig": {
       "title": "Impôts et cotisations",
       "body": "Paie → Paramètres → Impôts et cotisations. L'Égypte est prête avec les valeurs de PROSM. « Copier et modifier » crée votre version (sous votre responsabilité). Pour un autre pays, saisissez tranches, abattement et catégories. Le calculateur utilise le moteur de paie. Chaque enregistrement est une version à partir d'un mois. Seul le propriétaire change le pays, jamais avec un cycle ouvert."
+    },
+    "connect": {
+      "title": "PROSM Connect : discussions, appels et réunions",
+      "body": "PROSM Connect est dans la même application : chacun a un numéro de poste (le standard est le 001) et, à côté de chaque nom, son statut de présence - sur un site, en pause, absent ou en congé. Discussions : texte, photos, fichiers (jusqu'à 100 Mo) et messages vocaux - maintenez le micro et relâchez pour envoyer (l'autorisation n'est demandée que la première fois). 🕓 signifie encore sur votre téléphone (par exemple hors ligne - envoi automatique au retour), ✓ envoyé, ✓✓ distribué, ✓✓ bleu lu. La caméra vérifiée n'utilise que la caméra de l'application (jamais la galerie) et imprime dans la photo le logo PROSM Time, le site, l'heure du serveur, les coordonnées, votre nom et un code de preuve. Sous « Sur site » vous écrivez à tous les présents ; l'appui pour parler se joue seul pour ceux qui ont l'application ouverte. Les appels passent directement d'un téléphone à l'autre : sur un réseau faible l'image s'allège ou se coupe et l'appel continue en audio ; un changement de réseau affiche « Reconnexion… », et un appel qui ne passe pas propose « Envoyer un message vocal ». Réunions jusqu'à 4 en vidéo et 8 en audio, avec partage d'écran, main levée et une discussion qui disparaît avec la réunion. Un enregistrement reste sur l'appareil de la personne qui enregistre, et tous voient « <nom> enregistre la réunion ». Le serveur ne fait que transmettre : un message est supprimé dès sa réception (ou au plus tard après 7 jours) ; les discussions sont chiffrées sur votre téléphone et supprimées à la déconnexion."
     }
   },
   "faq": {

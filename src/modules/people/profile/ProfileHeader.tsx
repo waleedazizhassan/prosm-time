@@ -1,5 +1,7 @@
 import { useTranslation } from "react-i18next";
 
+import { FEATURES } from "../../../config/features";
+import ConnectPersonButtons from "../../connect/ConnectPersonButtons";
 import Avatar from "../../../components/common/Avatar";
 import StatusBadge from "../../../components/common/StatusBadge";
 import BuzzButton from "../../../components/common/BuzzButton";
@@ -44,6 +46,7 @@ export default function ProfileHeader({ profile, onBuzz = true }: { profile: Emp
           </div>
         ) : null}
         {onBuzz && profile.access !== "self" && h.isActive ? <BuzzButton userId={h.id} name={h.fullName} /> : null}
+        {FEATURES.connect && profile.access !== "self" && h.isActive ? <ConnectPersonButtons userId={h.id} name={h.fullName} size="medium" /> : null}
       </div>
     </section>
   );

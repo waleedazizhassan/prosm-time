@@ -11,4 +11,7 @@ export const FEATURES = {
   // Owner 2026-10-21 (review: things we don't need): projects inside a site
   // are hidden until a client asks for them. Nothing is deleted.
   projects: false,
+  // Owner 2026-11-13: PROSM Connect is built stage by stage; its screens stay hidden in the released app until the
+  // chat (stage 2) works. A preview build turns them on with VITE_CONNECT=on. The server side is live and guarded.
+  connect: import.meta.env.VITE_CONNECT === "on",
 } as const;

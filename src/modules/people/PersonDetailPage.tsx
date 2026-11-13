@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
+import { FEATURES } from "../../config/features";
+import ConnectPersonButtons from "../connect/ConnectPersonButtons";
 import AttendanceLogPage from "../attendance/AttendanceLogPage";
 import BuzzButton from "../../components/common/BuzzButton";
 import styles from "./PersonDetailPage.module.css";
@@ -347,6 +349,7 @@ export default function PersonDetailPage() {
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--space-2)", flexWrap: "wrap" }}>
           <h1 style={{ margin: 0, fontSize: "var(--font-xl)" }}>{member.fullName}</h1>
           {userId && member.isActive !== false ? <BuzzButton userId={userId} name={member.fullName} /> : null}
+          {FEATURES.connect && userId && member.isActive !== false ? <ConnectPersonButtons userId={userId} name={member.fullName} size="medium" /> : null}
         </div>
       )}
       <Tabs items={tabs} active={tab} onChange={chooseTab} label={t("profile.tabsLabel")} />

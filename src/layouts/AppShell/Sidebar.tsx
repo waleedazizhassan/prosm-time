@@ -7,10 +7,10 @@ import { useAuth } from "../../core/context/AuthContext";
 import usePlanFeatures from "../../core/hooks/usePlanFeatures";
 import { useAppLayout } from "./LayoutContext";
 import { NAV_ITEMS, NAV_SECTION_ORDER, type NavSection } from "./navigation";
-import { Activity, Banknote, BarChart3, HelpCircle, MapPinned, ShieldCheck, Users as UsersIcon, type LucideIcon } from "lucide-react";
+import { Activity, Banknote, BarChart3, HelpCircle, MapPinned, Radio, ShieldCheck, Users as UsersIcon, type LucideIcon } from "lucide-react";
 
 // Owner 2026-11-09: each group has its own icon; no item counts (they read like notifications)
-const SECTION_ICONS: Record<NavSection, LucideIcon> = { attendance: Activity, sites: MapPinned, people: UsersIcon, payroll: Banknote, reports: BarChart3, settings: ShieldCheck, help: HelpCircle };
+const SECTION_ICONS: Record<NavSection, LucideIcon> = { attendance: Activity, sites: MapPinned, people: UsersIcon, connect: Radio, payroll: Banknote, reports: BarChart3, settings: ShieldCheck, help: HelpCircle };
 import UserMenu from "./UserMenu";
 import SidebarRadio from "./SidebarRadio";
 import { employeeBottomPaths } from "./BottomNav";

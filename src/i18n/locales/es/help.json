@@ -205,6 +205,10 @@
     "taxConfig": {
       "title": "Impuestos y seguridad social",
       "body": "Nómina → Ajustes → Impuestos y seguridad social. Egipto viene listo con los valores de PROSM. «Copiar y editar» crea tu versión (bajo tu responsabilidad). Para otro país introduce tramos, exención y categorías. La calculadora usa el motor de la nómina. Cada guardado es una versión desde un mes. Solo el propietario cambia el país, nunca con un ciclo abierto."
+    },
+    "connect": {
+      "title": "PROSM Connect: chats, llamadas y reuniones",
+      "body": "PROSM Connect está dentro de la misma app: cada persona tiene una extensión (la centralita es la 001) y junto a cada nombre su estado de asistencia: en un sitio, en descanso, fuera o de permiso. Chats: texto, fotos, archivos (hasta 100 MB) y mensajes de voz; mantén pulsado el micrófono y suelta para enviar (el permiso se pide solo la primera vez). 🕓 significa que sigue en tu móvil (por ejemplo sin conexión; se envía solo al volver), ✓ enviado, ✓✓ entregado, ✓✓ azul leído. La cámara verificada usa solo la cámara de la app (nunca la galería) e imprime en la foto el logo de PROSM Time, el sitio, la hora del servidor, las coordenadas, tu nombre y un código de comprobación. En «En sitios» escribes a todos los presentes, y pulsar para hablar se reproduce solo con la app abierta. Las llamadas van directas entre los móviles: con red débil la imagen se aligera o se apaga y la llamada sigue con voz; si cambia la red verás «Reconectando…» y si no conecta se te ofrece «Enviar mensaje de voz». Reuniones de hasta 4 con vídeo y 8 solo voz, con compartir pantalla, levantar la mano y un chat que desaparece al terminar. Una grabación queda solo en el dispositivo de quien graba y todos ven «<nombre> está grabando la reunión». El servidor solo entrega: un mensaje se borra al llegar (o a los 7 días como máximo); las conversaciones se guardan cifradas en tu móvil y se borran al cerrar sesión."
     }
   },
   "faq": {

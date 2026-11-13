@@ -366,7 +366,10 @@
     "exceptions": "As minhas exceções",
     "myProfile": "A minha ficha",
     "documents": "Documentos",
-    "penalties": "Penalidades e incentivos"
+    "penalties": "Penalidades e incentivos",
+    "connect": "Conversas",
+    "connectCalls": "Registo de chamadas",
+    "connectMeetings": "Reuniões"
   },
   "sosOverlay": {
     "title": "Alerta SOS/Emergência",
@@ -384,7 +387,8 @@
     "payroll": "Folha de pagamento",
     "reports": "Relatórios e análises",
     "settings": "Administração e governação",
-    "help": "Ajuda"
+    "help": "Ajuda",
+    "connect": "PROSM Connect"
   },
   "weather": {
     "loading": "Carregando o clima",
@@ -501,7 +505,8 @@
     "leave": "Afastamentos",
     "menu": "Menu",
     "schedule": "Turnos",
-    "myFile": "A minha ficha"
+    "myFile": "A minha ficha",
+    "chats": "Conversas"
   },
   "exitPrompt": {
     "title": "Você saiu do local",

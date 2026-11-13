@@ -205,6 +205,10 @@
     "taxConfig": {
       "title": "Impostos e previdência",
       "body": "Folha → Configurações → Impostos e previdência. O Egito vem pronto com os valores da PROSM. «Copiar e editar» cria sua versão (por sua conta). Para outro país informe faixas, isenção e categorias. A calculadora usa o motor da folha. Cada gravação é uma versão a partir de um mês. Só o proprietário muda o país, nunca com ciclo aberto."
+    },
+    "connect": {
+      "title": "PROSM Connect: conversas, chamadas e reuniões",
+      "body": "O PROSM Connect está na mesma app: cada pessoa tem uma extensão (a central é a 001) e, junto a cada nome, o estado de assiduidade - num local, em pausa, fora ou de folga. Conversas: texto, fotos, ficheiros (até 100 MB) e mensagens de voz - mantenha o microfone premido e solte para enviar (a permissão só é pedida da primeira vez). 🕓 quer dizer ainda no telemóvel (por exemplo sem rede - segue sozinha quando a ligação voltar), ✓ enviada, ✓✓ entregue, ✓✓ azul lida. A câmara verificada usa só a câmara da app (nunca a galeria) e imprime na foto o logótipo do PROSM Time, o local, a hora do servidor, as coordenadas, o seu nome e um código de verificação. Em «Nos locais» escreve a todos os presentes; premir para falar toca sozinho para quem tem a app aberta. As chamadas vão diretamente entre os telemóveis: com rede fraca a imagem fica mais leve ou desliga-se e a chamada continua com voz; se a rede mudar aparece «A religar…», e se a chamada não ligar é-lhe proposto «Enviar mensagem de voz». Reuniões até 4 com vídeo e 8 só com voz, com partilha de ecrã, levantar a mão e um chat que desaparece com a reunião. Uma gravação fica só no dispositivo de quem grava e todos veem «<nome> está a gravar a reunião». O servidor só entrega: a mensagem é apagada assim que chega (ou após 7 dias, no máximo); as conversas ficam cifradas no telemóvel e são apagadas ao terminar a sessão."
     }
   },
   "faq": {

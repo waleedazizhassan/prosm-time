@@ -15,6 +15,8 @@ import PushRegistration from "./PushRegistration";
 import StartupPermissionsPrompt from "./StartupPermissionsPrompt";
 import { LayoutProvider } from "./LayoutContext";
 import styles from "./AppShell.module.css";
+import { FEATURES } from "../../config/features";
+import ConnectProvider from "../../modules/connect/ConnectProvider";
 import TrialBanner from "./TrialBanner";
 import ReadOnlyBanner from "./ReadOnlyBanner";
 import LanguageSync from "./LanguageSync";
@@ -53,7 +55,8 @@ export default function AppShell() {
             <Main>
               <PageLoadBoundary resetKey={location.pathname}>
                 <Suspense fallback={null}>
-                  <Outlet />
+                  {/* owner 2026-11-13: PROSM Connect lives across the app (calls ring on any page) */}
+                  {FEATURES.connect ? <ConnectProvider><Outlet /></ConnectProvider> : <Outlet />}
                 </Suspense>
               </PageLoadBoundary>
             </Main>

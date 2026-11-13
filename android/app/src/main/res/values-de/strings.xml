@@ -9,4 +9,7 @@
     <string name="sos_default_title">Notfallalarm</string>
     <string name="sos_open">Öffnen</string>
     <string name="sos_silence">Stumm</string>
+    <string name="connect_call_channel_name">Anrufe (PROSM Connect)</string>
+    <string name="connect_call_channel_description">Eingehende Sprach- und Videoanrufe von Kollegen</string>
+    <string name="connect_call_open">Öffnen</string>
 </resources>

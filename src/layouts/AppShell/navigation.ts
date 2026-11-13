@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, LogIn, Plug, HardHat, ScrollText, Sunrise, Banknote, Receipt, Megaphone, IdCard, FileCheck, Gavel } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, LogIn, Plug, HardHat, ScrollText, Sunrise, Banknote, Receipt, Megaphone, IdCard, FileCheck, Gavel, MessagesSquare, PhoneCall, Video } from "lucide-react";
 
 import { FEATURES } from "../../config/features";
 import type { PlanFeature } from "../../core/hooks/usePlanFeatures";
@@ -14,7 +14,7 @@ import type { PlanFeature } from "../../core/hooks/usePlanFeatures";
 // operations (attendance, sites, leave and holidays, shifts, kiosk), "people" Human resources,
 // "payroll" Payroll, "reports" Reports and analytics, "settings" Administration and governance.
 // The ids stay, so nothing that refers to them breaks; every path is unchanged.
-export type NavSection = "attendance" | "sites" | "people" | "payroll" | "reports" | "settings" | "help";
+export type NavSection = "attendance" | "sites" | "people" | "connect" | "payroll" | "reports" | "settings" | "help";
 
 export interface NavItem {
   id: string;
@@ -180,12 +180,16 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // v2.3.43 step 3 (items 7/8): public holidays, weekly rest days and exceptional days.
   { id: "calendar", labelKey: "items.calendar", path: "/calendar", icon: CalendarRange, requiredPermission: "calendar.manage", section: "settings" },
   { id: "integrations", planFeature: "integrations", labelKey: "items.integrations", path: "/integrations", icon: Plug, requiredPermission: null, ownerOnly: true, section: "settings" },
+  // Owner 2026-11-13: PROSM Connect - the conversations, the call log and the meetings
+  { id: "connect", labelKey: "items.connect", path: "/connect", icon: MessagesSquare, requiredPermission: null, planFeature: "connect_chat", section: "connect" },
+  { id: "connectCalls", labelKey: "items.connectCalls", path: "/connect/calls", icon: PhoneCall, requiredPermission: null, planFeature: "connect_calls", section: "connect" },
+  { id: "connectMeetings", labelKey: "items.connectMeetings", path: "/connect/meetings", icon: Video, requiredPermission: null, planFeature: "connect_meetings", section: "connect" },
   { id: "help", labelKey: "items.help", path: "/help", icon: HelpCircle, requiredPermission: null, section: "help" },
 ];
 
 // Hidden features (src/config/features.ts) leave the sidebar and the search.
-export const NAV_ITEMS: NavItem[] = ALL_NAV_ITEMS.filter((item) => item.id !== "integrations" || FEATURES.integrations);
+export const NAV_ITEMS: NavItem[] = ALL_NAV_ITEMS.filter((item) => (item.id !== "integrations" || FEATURES.integrations) && (item.section !== "connect" || FEATURES.connect));
 
 // Owner 2026-11-09 ("the sidebar tree needs work"): daily operations, sites and external labour, people
 // (with leave and announcements), payroll, reports, management.
-export const NAV_SECTION_ORDER: NavSection[] = ["attendance", "sites", "people", "payroll", "reports", "settings", "help"];
+export const NAV_SECTION_ORDER: NavSection[] = ["attendance", "sites", "people", "connect", "payroll", "reports", "settings", "help"];

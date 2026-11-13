@@ -116,3 +116,22 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* owner 2026-11-13: PROSM Connect's "message" beside each person (empty without Connect) */
+.list > li {
+  display: flex;
+  align-items: center;
+}
+
+.list > li > .row {
+  flex: 1;
+  min-width: 0;
+}
+
+.connect:empty {
+  display: none;
+}
+
+.connect {
+  padding-inline-end: var(--space-2);
+}
