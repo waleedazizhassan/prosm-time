@@ -65,7 +65,8 @@
       "approved": "Approved",
       "rejected": "Rejected",
       "cancelled": "Cancelled"
-    }
+    },
+    "noColleagues": "No colleague is free that day: everyone is on leave or has a shift at the same time."
   },
   "cost": {
     "title": "Roster cost",

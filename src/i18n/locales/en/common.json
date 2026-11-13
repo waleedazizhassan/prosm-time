@@ -485,5 +485,9 @@
       "back": "Go back",
       "seePlan": "See the plan"
     }
+  },
+  "monthFolders": {
+    "count_one": "{{count}} record",
+    "count_other": "{{count}} records"
   }
 }

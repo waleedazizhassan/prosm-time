@@ -65,7 +65,8 @@
       "approved": "已批准",
       "rejected": "已拒绝",
       "cancelled": "已取消"
-    }
+    },
+    "noColleagues": "当天没有空闲的同事：所有人都在休假或同一时间有班次。"
   },
   "cost": {
     "title": "排班成本",

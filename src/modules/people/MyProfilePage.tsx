@@ -77,7 +77,9 @@ export default function MyProfilePage() {
           moments to explain (these were three pages of the menu) */}
       {tab === "attendance" ? (
         <>
-          <div role="tablist" aria-label={t("profile.attendance.viewsLabel")} style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)", margin: "0 0 var(--space-3)" }}>
+          <div role="tablist" aria-label={t("profile.attendance.viewsLabel")} style={{ display: "grid", gridTemplateColumns: `repeat(${ATTENDANCE_VIEWS.length}, minmax(max-content, 1fr))`, gap: "var(--space-2)", margin: "0 0 var(--space-3)", overflowX: "auto", scrollbarWidth: "none", paddingBlock: 2 }}>
+            {/* owner 2026-11-13: the four views on one line - "Exceptions" fell alone onto a second line; a narrow
+                phone scrolls the line sideways instead */}
             {ATTENDANCE_VIEWS.map((v) => (
               <Button key={v} size="sm" role="tab" aria-selected={view === v} variant={view === v ? "primary" : "ghost"}
                 onClick={() => setSearchParams((params) => { params.set("tab", "attendance"); if (v === "summary") params.delete("view"); else params.set("view", v); params.delete("exceptionId"); return params; }, { replace: true })}>

@@ -485,5 +485,10 @@
       "back": "Retour",
       "seePlan": "Voir l'offre"
     }
+  },
+  "monthFolders": {
+    "count_one": "{{count}} entrée",
+    "count_other": "{{count}} entrées",
+    "count_many": "{{count}} entrées"
   }
 }

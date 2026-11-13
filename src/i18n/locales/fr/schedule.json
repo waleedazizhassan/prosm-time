@@ -65,7 +65,8 @@
       "approved": "Approuvé",
       "rejected": "Refusé",
       "cancelled": "Annulé"
-    }
+    },
+    "noColleagues": "Aucun collègue n'est libre ce jour-là : tous sont en congé ou ont un poste à la même heure."
   },
   "cost": {
     "title": "Coût du planning",

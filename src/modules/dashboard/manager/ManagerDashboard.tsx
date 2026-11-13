@@ -100,7 +100,7 @@ export default function ManagerDashboard() {
     const attendancePeriod = period === "day" ? "today" : period === "custom" ? "month" : period;
     if (kind === "present") navigate("/attendance?period=today");
     else if (kind === "hours") navigate(`/attendance?period=${attendancePeriod}`);
-    else if (kind === "late") navigate("/reports?type=late");
+    else if (kind === "late" || kind === "latePeriod") navigate("/reports?type=late");
     else if (kind === "overdue") navigate("/reports?type=missingCheckouts");
     else if (kind === "absent") navigate("/reports?type=absences");
     else navigate("/manager");
@@ -410,6 +410,33 @@ export default function ManagerDashboard() {
             <ScheduleChart data={chartData} mode={chartMode} t={t} language={i18n.language} />
           </section>
         );
+      case "latePeriod": {
+        // owner 2026-11-13: lateness over the chosen period has its own card (the "late today" card is today only)
+        const late = (data?.byPerson ?? []).filter((row) => Number(row.lateDays) > 0)
+          .sort((a, b) => Number(b.lateMinutes) - Number(a.lateMinutes)).slice(0, 6);
+        return (
+          <section key={id} className={`${styles.widget} ${styles.span4}`} style={{ order: order.indexOf(id) }}>
+            <div className={styles.widgetHeader}>
+              <h2 className={styles.widgetTitle}>{t("manager.widgets.latePeriod")}</h2>
+            </div>
+            <div className={styles.widgetBody}>
+              {late.length === 0 ? (
+                <p className={styles.muted}>{t("manager.sheet.empty.latePeriod")}</p>
+              ) : (
+                <ul className={styles.lateList}>
+                  {late.map((row) => (
+                    <li key={row.userId}>
+                      <span className={styles.lateName}>{row.name}</span>
+                      <span className={styles.lateFigures}>{t("manager.latePeriod.figures", { days: row.lateDays, minutes: Math.round(Number(row.lateMinutes)) })}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <Button size="sm" variant="ghost" fullWidth onClick={() => setSheet("latePeriod")}>{t("manager.latePeriod.all")}</Button>
+            </div>
+          </section>
+        );
+      }
       case "insights":
         return (
           <section key={id} className={`${styles.widget} ${styles.span12}`} style={{ order: order.indexOf(id) }}>

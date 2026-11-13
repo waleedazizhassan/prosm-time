@@ -536,19 +536,23 @@
     "intro": "L'app ha bisogno di tre autorizzazioni per funzionare del tutto. Ecco a cosa serve ciascuna:",
     "location": {
       "title": "Posizione",
-      "body": "Serve a confermare che sei nel luogo di lavoro quando timbri l'entrata e l'uscita. Nei luoghi in cui la tua organizzazione ha attivato il monitoraggio della presenza, e solo mentre hai timbrato l'entrata, PROSM Time rileva la tua posizione circa ogni 5 minuti, anche quando l'app è chiusa o non in uso, con una notifica fissa per tutto il tempo, e si ferma quando timbri l'uscita. La tua posizione è visibile ai responsabili della tua organizzazione e viene eliminata dopo 30 giorni."
+      "body": "Serve a verificare che sei sul posto di lavoro quando timbri entrata e uscita. Solo durante il turno la tua posizione viene registrata circa ogni 5 minuti - su Android anche con l'app chiusa, con una notifica visibile per tutto il tempo - e si ferma appena timbri l'uscita. La vedono i responsabili della tua organizzazione e viene cancellata dopo 30 giorni.",
+      "short": "Per verificare che sei sul posto di lavoro; registrata solo durante il turno."
     },
     "camera": {
       "title": "Fotocamera",
-      "body": "Per scattare una foto quando timbri l'entrata o l'uscita, solo nei luoghi che la richiedono. La fotocamera si apre solo quando scatti tu la foto."
+      "body": "Per scattare una foto quando timbri l'entrata o l'uscita, solo nei luoghi che la richiedono. La fotocamera si apre solo quando scatti tu la foto.",
+      "short": "Per la foto di entrata e uscita, solo nelle sedi che la chiedono."
     },
     "notifications": {
       "title": "Notifiche",
-      "body": "Per ricevere le risposte alle richieste di ferie e le approvazioni, i promemoria di timbratura, gli avvisi urgenti e la notifica del turno mentre hai timbrato l'entrata."
+      "body": "Per ricevere le risposte alle richieste di ferie e le approvazioni, i promemoria di timbratura, gli avvisi urgenti e la notifica del turno mentre hai timbrato l'entrata.",
+      "short": "Per risposte, promemoria e avvisi urgenti."
     },
     "footer": "Dopo «Continua», Android chiede ogni autorizzazione a turno: scegli «Consenti» o «Mentre usi l'app». Puoi cambiare ogni autorizzazione più tardi nelle impostazioni del telefono.",
     "accept": "Continua",
-    "decline": "Non ora"
+    "decline": "Non ora",
+    "details": "Dettagli"
   },
   "numerals": {
     "label": "Cifre",

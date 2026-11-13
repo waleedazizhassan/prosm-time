@@ -251,7 +251,8 @@
       "managers": "Responsables",
       "supervisors": "Supervisores",
       "employees": "Empleados",
-      "viewers": "Lectores"
+      "viewers": "Lectores",
+      "owner": "Propietario"
     },
     "invitation": {
       "pending": "Invitación aún no aceptada",
@@ -449,6 +450,8 @@
     "media": {
       "title": "Centro de medios",
       "hint": "Publicar y gestionar anuncios"
-    }
+    },
+    "stillHeld": "No se retiró todo: esta persona tiene la autoridad completa del propietario. Retírala primero con el botón «{{owner}}».",
+    "viaOwner": "Viene con la autoridad del propietario: se retira allí"
   }
 }

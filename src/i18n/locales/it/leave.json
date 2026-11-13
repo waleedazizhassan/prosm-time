@@ -110,5 +110,7 @@
       "public_holiday": "festività",
       "day_off": "giorno libero"
     }
-  }
+  },
+  "reviewerDeputy": "per conto del titolare",
+  "reviewerSiteManager": "responsabile della tua sede"
 }

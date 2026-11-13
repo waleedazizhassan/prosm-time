@@ -65,7 +65,8 @@
       "approved": "Aprobado",
       "rejected": "Rechazado",
       "cancelled": "Cancelado"
-    }
+    },
+    "noColleagues": "Ningún compañero está libre ese día: todos están de permiso o tienen un turno a la misma hora."
   },
   "cost": {
     "title": "Coste del cuadrante",

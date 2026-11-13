@@ -65,7 +65,8 @@
       "approved": "Genehmigt",
       "rejected": "Abgelehnt",
       "cancelled": "Storniert"
-    }
+    },
+    "noColleagues": "An diesem Tag ist niemand frei: Alle sind im Urlaub oder haben zur gleichen Zeit eine Schicht."
   },
   "cost": {
     "title": "Kosten des Dienstplans",

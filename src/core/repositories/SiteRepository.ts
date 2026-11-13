@@ -341,11 +341,13 @@ class SiteRepository {
   }
 
   /** Owner 2026-11-12: a short shared map link opened on the server (the browser cannot follow it) */
-  async resolveMapLink(url: string): Promise<string | null> {
+  // owner 2026-11-13: the server also reads the position from the Google Maps page when the opened address has none
+  async resolveMapLink(url: string): Promise<{ url: string; latitude: number | null; longitude: number | null; placeName: string | null } | null> {
     try {
       const { data, error } = await this.client.functions.invoke("resolve-map-link", { body: { url } });
-      if (error || !data?.success) return null;
-      return typeof data.data?.url === "string" ? data.data.url : null;
+      if (error || !data?.success || typeof data.data?.url !== "string") return null;
+      const num = (v: unknown) => (typeof v === "number" && Number.isFinite(v) ? v : null);
+      return { url: data.data.url, latitude: num(data.data.latitude), longitude: num(data.data.longitude), placeName: typeof data.data.placeName === "string" ? data.data.placeName : null };
     } catch {
       return null;
     }

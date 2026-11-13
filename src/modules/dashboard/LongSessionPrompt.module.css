@@ -1,0 +1,22 @@
+/* Owner 2026-11-13: "still working?" as a light glass card over the map, not a heavy black bar */
+.glass {
+  margin: var(--space-3) var(--space-3) 0;
+  padding: var(--space-3) var(--space-4);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(15, 23, 42, 0.42);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+:global([data-theme="light"]) .glass {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(15, 23, 42, 0.1);
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}

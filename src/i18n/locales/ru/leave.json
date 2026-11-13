@@ -111,5 +111,7 @@
       "public_holiday": "праздник",
       "day_off": "выходной"
     }
-  }
+  },
+  "reviewerDeputy": "замещает владельца",
+  "reviewerSiteManager": "руководитель вашего объекта"
 }

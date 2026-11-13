@@ -252,8 +252,10 @@
       "battery": {
         "title": "Turn off battery saving for PROSM Time",
         "hint": "Pick PROSM Time and set it to “Not optimised” or “Unrestricted”.",
-        "action": "Settings"
-      }
+        "action": "Settings",
+        "why": "Keeps following the shift steady on phones that stop apps to save battery. Without it, clocking in works as usual."
+      },
+      "optional": "Optional"
     },
     "mood": {
       "question": "How was today's work?",
@@ -394,7 +396,8 @@
       "external": "External workers",
       "insights": "Attendance insights",
       "documents": "Documents",
-      "moods": "Shift ratings"
+      "moods": "Shift ratings",
+      "latePeriod": "Lateness in the period"
     },
     "sos": {
       "text": "SOS from {{name}} at {{site}} since {{time}}",
@@ -690,9 +693,10 @@
       "title": {
         "present": "Here now",
         "hours": "Hours by person",
-        "late": "Lateness",
+        "late": "Late today",
         "overtime": "Overtime by person",
-        "overdue": "Not clocked out"
+        "overdue": "Not clocked out",
+        "latePeriod": "Lateness in the period"
       },
       "open": {
         "present": "Today's attendance record",
@@ -700,14 +704,16 @@
         "late": "Lateness report",
         "overtime": "Approve overtime",
         "absent": "Absence report",
-        "overdue": "Missing clock-outs report"
+        "overdue": "Missing clock-outs report",
+        "latePeriod": "Lateness report"
       },
       "empty": {
         "present": "Nobody is clocked in now.",
         "hours": "No hours recorded in this period.",
-        "late": "Nobody was late in this period.",
+        "late": "Nobody is late today.",
         "overtime": "No overtime in this period.",
-        "overdue": "Nobody is overdue to clock out."
+        "overdue": "Nobody is overdue to clock out.",
+        "latePeriod": "No lateness in this period."
       },
       "periodNote": "For the period chosen above.",
       "lateBy": "{{minutes}} min · in at {{time}}",
@@ -727,10 +733,14 @@
         "lateTotal": "Total late",
         "overtimeWaiting": "Awaiting approval",
         "shiftEnded": "Shift ended",
-        "overdueBy": "Overdue"
+        "overdueBy": "Overdue",
+        "arrived": "Arrived",
+        "lateBy": "Late by"
       },
       "overdueFor": "{{hours}} h {{minutes}} min",
-      "clockOutAction": "Clock out"
+      "clockOutAction": "Clock out",
+      "todayNote": "Today only - lateness over the week or month is in the \"Lateness in the period\" card.",
+      "afterStart": "after the shift start"
     },
     "export": {
       "action": "Export dashboard PDF",
@@ -762,6 +772,10 @@
       "byDay": "By day",
       "noSite": "No site",
       "scoreShort": "{{score}}% · {{count}}"
+    },
+    "latePeriod": {
+      "figures": "{{days}} d · {{minutes}} min",
+      "all": "See all"
     }
   },
   "devices": {

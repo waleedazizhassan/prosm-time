@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 
 import { useAuth } from "../../core/context/AuthContext";
 import leaveTypeLabel from "./leaveTypeLabel";
-import LeaveRepository, { type LeaveRequestRow, type OrgWideLeaveRow, type LeaveBalanceEntry, type LeaveType, type LeaveTypeSetting, type LeavePreview } from "../../core/repositories/LeaveRepository";
+import LeaveRepository, { type LeaveReviewer, type LeaveRequestRow, type OrgWideLeaveRow, type LeaveBalanceEntry, type LeaveType, type LeaveTypeSetting, type LeavePreview } from "../../core/repositories/LeaveRepository";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import { formatDateOnly, appLocale } from "../../core/utils/formatDate";
 
@@ -76,7 +76,17 @@ function LeaveView({ mode }: { mode: "mine" | "org" }) {
   const [leaveTypes, setLeaveTypes] = useState<LeaveTypeSetting[]>([]);
   const [documentFile, setDocumentFile] = useState<File | null>(null);
   // v2.3.55 (owner 2026-10-27): who receives the request - the Owner or one of the Managers
-  const [reviewers, setReviewers] = useState<{ id: string; name: string; isOwner: boolean }[]>([]);
+  const [reviewers, setReviewers] = useState<LeaveReviewer[]>([]);
+  // owner 2026-11-13: each name with what they are, so the person knows who the request goes to
+  const reviewerLabel = (reviewer: LeaveReviewer) => {
+    if (reviewer.isOwner) return t("reviewerOwner", { name: reviewer.name });
+    const what = reviewer.isDeputy
+      ? t("reviewerDeputy")
+      : reviewer.managesMySite
+        ? t("reviewerSiteManager")
+        : t(`common:roles.${reviewer.role ?? "employee"}`, { defaultValue: "" });
+    return what ? `${reviewer.name} (${what})` : reviewer.name;
+  };
   const [reviewerId, setReviewerId] = useState("");
   const selectedType = leaveTypes.find((type) => type.key === leaveType) ?? null;
   const typeLabel = (key: string) => leaveTypeLabel(t, key, leaveTypes.find((type) => type.key === key)?.name);
@@ -302,7 +312,7 @@ function LeaveView({ mode }: { mode: "mine" | "org" }) {
               value={reviewerId}
               onChange={(event) => setReviewerId(event.target.value)}
               disabled={submitting}
-              options={reviewers.map((reviewer) => ({ value: reviewer.id, label: reviewer.isOwner ? t("reviewerOwner", { name: reviewer.name }) : reviewer.name }))}
+              options={reviewers.map((reviewer) => ({ value: reviewer.id, label: reviewerLabel(reviewer) }))}
             />
           ) : null}
           <DateRange>

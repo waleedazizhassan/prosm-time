@@ -255,8 +255,10 @@
       "battery": {
         "title": "Quitar el ahorro de batería a PROSM Time",
         "hint": "Elige PROSM Time y ponlo en «Sin optimizar» o «Sin restricciones».",
-        "action": "Ajustes"
-      }
+        "action": "Ajustes",
+        "why": "Mantiene el seguimiento del turno estable en móviles que detienen apps para ahorrar batería. Sin ello, fichar funciona igual."
+      },
+      "optional": "Opcional"
     },
     "mood": {
       "question": "¿Qué tal el trabajo hoy?",
@@ -397,7 +399,8 @@
       "external": "Trabajadores externos",
       "insights": "Análisis de asistencia",
       "documents": "Documentos",
-      "moods": "Valoración de turnos"
+      "moods": "Valoración de turnos",
+      "latePeriod": "Retrasos en el periodo"
     },
     "sos": {
       "text": "SOS de {{name}} en {{site}} desde las {{time}}",
@@ -693,9 +696,10 @@
       "title": {
         "present": "Presentes ahora",
         "hours": "Horas por persona",
-        "late": "Retrasos",
+        "late": "Retrasados hoy",
         "overtime": "Horas extra por persona",
-        "overdue": "Sin fichar salida"
+        "overdue": "Sin fichar salida",
+        "latePeriod": "Retrasos en el periodo"
       },
       "open": {
         "present": "Registro de asistencia de hoy",
@@ -703,14 +707,16 @@
         "late": "Informe de retrasos",
         "overtime": "Aprobar horas extra",
         "absent": "Informe de ausencias",
-        "overdue": "Informe de salidas sin fichar"
+        "overdue": "Informe de salidas sin fichar",
+        "latePeriod": "Informe de retrasos"
       },
       "empty": {
         "present": "Nadie tiene la entrada fichada ahora.",
         "hours": "No hay horas registradas en este período.",
-        "late": "Nadie llegó tarde en este período.",
+        "late": "Nadie llegó tarde hoy.",
         "overtime": "No hay horas extra en este período.",
-        "overdue": "Nadie tiene la salida pendiente."
+        "overdue": "Nadie tiene la salida pendiente.",
+        "latePeriod": "No hay retrasos en este periodo."
       },
       "periodNote": "Para el período elegido arriba.",
       "lateBy": "{{minutes}} min · entrada a las {{time}}",
@@ -730,11 +736,15 @@
         "lateTotal": "Retraso total",
         "overtimeWaiting": "Pendiente de aprobación",
         "shiftEnded": "Fin del turno",
-        "overdueBy": "Retraso"
+        "overdueBy": "Retraso",
+        "arrived": "Llegó",
+        "lateBy": "Retraso"
       },
       "overdueFor": "{{hours}} h {{minutes}} min",
       "clockOutAction": "Fichar salida",
-      "minutes_many": "{{count}} minutos"
+      "minutes_many": "{{count}} minutos",
+      "todayNote": "Solo hoy: los retrasos de la semana o el mes están en la tarjeta «Retrasos en el periodo».",
+      "afterStart": "después del inicio del turno"
     },
     "export": {
       "action": "Exportar panel en PDF",
@@ -767,6 +777,10 @@
       "byDay": "Por día",
       "noSite": "Sin sitio",
       "scoreShort": "{{score}}% · {{count}}"
+    },
+    "latePeriod": {
+      "figures": "{{days}} d · {{minutes}} min",
+      "all": "Ver todo"
     }
   },
   "devices": {

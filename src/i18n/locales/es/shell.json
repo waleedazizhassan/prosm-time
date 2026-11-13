@@ -536,19 +536,23 @@
     "intro": "La app necesita tres permisos para funcionar por completo. Para esto se usa cada uno:",
     "location": {
       "title": "Ubicación",
-      "body": "Se usa para confirmar que estás en tu sede de trabajo al fichar la entrada y la salida. En las sedes donde tu organización activó el control de presencia, y solo mientras tienes la entrada fichada, PROSM Time recoge tu ubicación aproximadamente cada 5 minutos, incluso cuando la app está cerrada o no se usa, con una notificación permanente todo el tiempo, y se detiene al fichar la salida. Tu ubicación se comparte con los responsables de tu organización y se borra a los 30 días."
+      "body": "Se usa para comprobar que estás en el lugar de trabajo al fichar la entrada y la salida. Solo durante tu turno se registra tu ubicación cada 5 minutos aproximadamente (en Android incluso con la app cerrada, con una notificación visible todo el tiempo) y se detiene en cuanto fichas la salida. La ven los responsables de tu organización y se borra a los 30 días.",
+      "short": "Para comprobar que estás en el lugar de trabajo; se registra solo durante tu turno."
     },
     "camera": {
       "title": "Cámara",
-      "body": "Para hacer una foto al fichar la entrada o la salida, solo en sedes que lo exigen. La cámara solo se abre cuando haces la foto tú mismo."
+      "body": "Para hacer una foto al fichar la entrada o la salida, solo en sedes que lo exigen. La cámara solo se abre cuando haces la foto tú mismo.",
+      "short": "Para la foto de entrada y salida, solo en los sitios que la piden."
     },
     "notifications": {
       "title": "Notificaciones",
-      "body": "Para las respuestas a tus solicitudes de ausencia y aprobaciones, recordatorios de entrada y salida, alertas urgentes y la notificación del turno mientras tienes la entrada fichada."
+      "body": "Para las respuestas a tus solicitudes de ausencia y aprobaciones, recordatorios de entrada y salida, alertas urgentes y la notificación del turno mientras tienes la entrada fichada.",
+      "short": "Para respuestas, recordatorios y avisos urgentes."
     },
     "footer": "Tras \"Continuar\", Android pide cada permiso por turno: elige \"Permitir\" o \"Mientras se usa la app\". Puedes cambiar cualquier permiso más tarde en los ajustes del teléfono.",
     "accept": "Continuar",
-    "decline": "Ahora no"
+    "decline": "Ahora no",
+    "details": "Detalles"
   },
   "numerals": {
     "label": "Números",

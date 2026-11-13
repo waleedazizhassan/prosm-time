@@ -251,7 +251,8 @@
       "managers": "经理",
       "supervisors": "主管",
       "employees": "员工",
-      "viewers": "只读人员"
+      "viewers": "只读人员",
+      "owner": "所有者"
     },
     "invitation": {
       "pending": "尚未接受邀请",
@@ -444,6 +445,8 @@
     "media": {
       "title": "媒体中心",
       "hint": "发布和管理公告"
-    }
+    },
+    "stillHeld": "未能全部收回：此人拥有所有者的全部权限。请先通过“{{owner}}”按钮收回。",
+    "viaOwner": "随所有者权限授予——需在那里收回"
   }
 }

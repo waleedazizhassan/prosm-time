@@ -6,6 +6,7 @@ import { formatDateOnly } from "../../core/utils/formatDate";
 import Button from "../../components/common/Button";
 import Card from "../../components/common/Card";
 import ErrorText from "../../components/common/ErrorText";
+import HintText from "../../components/common/HintText";
 import Input from "../../components/common/Input";
 import Select from "../../components/common/Select";
 import Table, { type TableColumn } from "../../components/common/Table";
@@ -100,7 +101,10 @@ export default function ShiftSwapCard({ shifts, onChanged }: { shifts: MyShiftRo
             value={colleagueId}
             onChange={(event) => setColleagueId(event.target.value)}
             options={[{ value: "", label: t("swap.chooseColleague") }, ...colleagues.map((person) => ({ value: person.userId, label: person.fullName }))]}
+            disabled={!shiftId || colleagues.length === 0}
           />
+          {/* owner 2026-11-13: say why the list is empty instead of leaving it with its own words only */}
+          {shiftId && colleagues.length === 0 ? <HintText small>{t("swap.noColleagues")}</HintText> : null}
           <Input label={t("swap.reason")} name="swapReason" value={reason} onChange={(event) => setReason(event.target.value)} />
           <Button onClick={request} loading={busy} disabled={busy || !shiftId || !colleagueId}>
             {t("swap.request")}

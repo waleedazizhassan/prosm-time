@@ -99,7 +99,8 @@ export default function MyPayslipsPage() {
       {/* owner 2026-11-12: the request button is always there - with nothing published yet it says why */}
       {data ? (
         <div style={{ marginBottom: "var(--space-3)" }}>
-          <Button onClick={() => { setAskCycle(askable[0]?.cycleId ?? ""); setNote(""); setAsking(true); }}>{t("mine.requestButton")}</Button>
+          {/* owner 2026-11-13: the whole width of the page */}
+          <Button fullWidth onClick={() => { setAskCycle(askable[0]?.cycleId ?? ""); setNote(""); setAsking(true); }}>{t("mine.requestButton")}</Button>
         </div>
       ) : null}
       {data === null ? <LoadingState /> : data.cycles.length === 0 ? <EmptyState message={t("mine.empty")} /> : null}

@@ -485,5 +485,11 @@
       "back": "Назад",
       "seePlan": "Посмотреть тариф"
     }
+  },
+  "monthFolders": {
+    "count_one": "{{count}} запись",
+    "count_few": "{{count}} записи",
+    "count_many": "{{count}} записей",
+    "count_other": "{{count}} записи"
   }
 }

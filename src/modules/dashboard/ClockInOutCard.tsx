@@ -255,7 +255,7 @@ export default function ClockInOutCard() {
   const [recenterTick, setRecenterTick] = useState(0);
   const [clockNotice, setClockNotice] = useState<ClockNoticeMessage | null>(null);
   // owner 2026-11-11: what the Android phone still needs before a shift can start (null = nothing asked)
-  const [trackingGate, setTrackingGate] = useState<{ missing: TrackingNeed[]; suggested?: Site } | null>(null);
+  const [trackingGate, setTrackingGate] = useState<{ missing: TrackingNeed[]; optional: TrackingNeed[]; suggested?: Site } | null>(null);
   const closeClockNotice = useCallback(() => {
     setClockNotice(null);
     setError("");
@@ -831,10 +831,13 @@ export default function ClockInOutCard() {
   const sayDone = (title: string, text?: string) => setClockNotice({ tone: "success", title, text });
 
   // Owner 2026-11-11: on the Android app a shift starts only when the phone can follow it in the background
-  const trackingMissing = async (): Promise<TrackingNeed[]> => {
-    if (!shiftTrackingAvailable()) return [];
+  // Owner 2026-11-13: the battery exemption is optional - the shift starts without it (following may be
+  // lighter on some phones); it is offered with what it is for, never demanded.
+  const trackingMissing = async (): Promise<{ required: TrackingNeed[]; optional: TrackingNeed[] }> => {
+    if (!shiftTrackingAvailable()) return { required: [], optional: [] };
     const missing: TrackingNeed[] = readBackgroundConsent() === "accepted" ? [] : ["consent"];
-    return [...missing, ...missingForTracking(await shiftTrackingStatus())];
+    const all = [...missing, ...missingForTracking(await shiftTrackingStatus())];
+    return { required: all.filter((need) => need !== "battery"), optional: all.filter((need) => need === "battery") };
   };
 
   // Owner 2026-11-11: the phone's shift service starts with the clock-in (also one saved offline) and
@@ -859,9 +862,9 @@ export default function ClockInOutCard() {
       return;
     }
     setError("");
-    const missing = await trackingMissing();
-    if (missing.length > 0) {
-      setTrackingGate({ missing, suggested });
+    const { required, optional } = await trackingMissing();
+    if (required.length > 0) {
+      setTrackingGate({ missing: required, optional, suggested });
       return;
     }
     setTrackingGate(null);
@@ -1180,7 +1183,7 @@ export default function ClockInOutCard() {
 
       {/* Owner 2026-11-10: attendance messages in their own style, at the top of the map */}
       {trackingGate ? (
-        <TrackingGate missing={trackingGate.missing} onClose={() => setTrackingGate(null)}
+        <TrackingGate missing={trackingGate.missing} optional={trackingGate.optional} onClose={() => setTrackingGate(null)}
           onCheck={() => void handleClockInTap(trackingGate.suggested)} />
       ) : null}
       <ClockNotice

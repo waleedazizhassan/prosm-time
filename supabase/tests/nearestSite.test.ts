@@ -73,7 +73,11 @@ describe("a shift with no site belongs to its nearest site", () => {
     await assignToSite(t, monitored, emp);
     expect((await clockIn(t, emp, monitored, { latitude: 31.2653, longitude: 32.3019 })).error).toBeNull();
     const [presence] = await t.su<{ id: string }>("select id from presence_sessions where user_id = $1", [emp.userId]);
-    expect((await t.as(emp.authId, "select public.record_prosm_time_presence_sample($1, 31.29, 32.33, 8)", [presence.id])).error).toBeNull();
+    // leaving is confirmed by 3 good readings outside over at least 3 minutes (owner 2026-11-13)
+    for (let i = 0; i < 3; i++) {
+      if (i === 2) await t.su("update presence_sessions set exit_since = now() - interval '4 minutes' where id = $1", [presence.id]);
+      expect((await t.as(emp.authId, "select public.record_prosm_time_presence_sample($1, 31.29, 32.33, 8)", [presence.id])).error).toBeNull();
+    }
     const seen = await t.as(yardManager.authId, "select id from geofence_exceptions where user_id = $1", [emp.userId]);
     expect(seen.rows).toHaveLength(1);
   });

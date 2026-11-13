@@ -9,7 +9,7 @@ import Modal from "../../../components/common/Modal";
 import type { ManagerDashboard as Dashboard } from "../../../core/repositories/DashboardRepository";
 import styles from "./ManagerDashboard.module.css";
 
-export type KpiSheetKind = "present" | "hours" | "late" | "overtime" | "overdue";
+export type KpiSheetKind = "present" | "hours" | "late" | "latePeriod" | "overtime" | "overdue";
 
 const hours = (minutes: number) => Math.round((Number(minutes) / 60) * 10) / 10;
 
@@ -125,7 +125,28 @@ export default function KpiSheet({
       </table>
     );
   } else if (kind === "late") {
-    // late today first, then the period's late days
+    // owner 2026-11-13: the "late today" card opens today's late people only - how late, and when they came
+    const shown = data.lateTodayList ?? [];
+    count = shown.length;
+    rows = (
+      <table className={styles.table}>
+        {head(col("name"), col("site"), col("arrived"), col("lateBy"))}
+        <tbody>
+          {shown.map((row) => (
+            <tr key={row.userId}>
+              {person(row.name, row.avatarUrl, row.userId)}
+              <td data-label={col("site")}>{row.siteName ?? "—"}</td>
+              <td data-label={col("arrived")}>{row.firstIn ? time(row.firstIn) : "—"}</td>
+              <td data-label={col("lateBy")}>
+                <span className={styles.statusWarn}>{Number(row.lateMinutes) > 0 ? t("manager.sheet.minutes", { count: Math.round(Number(row.lateMinutes)) }) : t("manager.sheet.afterStart")}</span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  } else if (kind === "latePeriod") {
+    // the period's lateness (its own card on the dashboard): late today first, then the period's late days
     const shown = people.filter((row) => Number(row.lateDays) > 0).sort((a, b) => Number(b.lateTodayMinutes ?? 0) - Number(a.lateTodayMinutes ?? 0) || Number(b.lateMinutes) - Number(a.lateMinutes));
     count = shown.length;
     rows = (
@@ -180,7 +201,8 @@ export default function KpiSheet({
         </Button>
       }
     >
-      {kind !== "present" && kind !== "overdue" ? <p className={styles.rowMeta}>{t("manager.sheet.periodNote")}</p> : null}
+      {kind !== "present" && kind !== "overdue" && kind !== "late" ? <p className={styles.rowMeta}>{t("manager.sheet.periodNote")}</p> : null}
+      {kind === "late" ? <p className={styles.rowMeta}>{t("manager.sheet.todayNote")}</p> : null}
       {count === 0 ? <EmptyState message={t(`manager.sheet.empty.${kind}`)} /> : rows}
     </Modal>
   );

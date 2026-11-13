@@ -485,5 +485,13 @@
       "back": "رجوع",
       "seePlan": "عرض الباقة"
     }
+  },
+  "monthFolders": {
+    "count_zero": "لا أيام",
+    "count_one": "سجل واحد",
+    "count_two": "سجلان",
+    "count_few": "{{count}} سجلات",
+    "count_many": "{{count}} سجلاً",
+    "count_other": "{{count}} سجل"
   }
 }

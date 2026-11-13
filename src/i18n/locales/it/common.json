@@ -485,5 +485,10 @@
       "back": "Indietro",
       "seePlan": "Vedi il piano"
     }
+  },
+  "monthFolders": {
+    "count_one": "{{count}} registrazione",
+    "count_other": "{{count}} registrazioni",
+    "count_many": "{{count}} registrazioni"
   }
 }

@@ -485,5 +485,10 @@
       "back": "Voltar",
       "seePlan": "Ver o plano"
     }
+  },
+  "monthFolders": {
+    "count_one": "{{count}} registro",
+    "count_other": "{{count}} registros",
+    "count_many": "{{count}} registros"
   }
 }

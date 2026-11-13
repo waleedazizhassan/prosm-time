@@ -536,19 +536,23 @@
     "intro": "L'application a besoin de trois autorisations pour fonctionner pleinement. Voici à quoi sert chacune :",
     "location": {
       "title": "Position",
-      "body": "Sert à confirmer que vous êtes sur votre site de travail lorsque vous pointez. Sur les sites où votre organisation a activé le suivi de présence, et uniquement pendant que vous êtes pointé, PROSM Time relève votre position environ toutes les 5 minutes, même lorsque l'application est fermée ou inutilisée, avec une notification permanente tout ce temps, et s'arrête lorsque vous dépointez. Votre position est visible par les responsables de votre organisation et supprimée après 30 jours."
+      "body": "Sert à vérifier que vous êtes sur le lieu de travail lorsque vous pointez. Pendant votre service uniquement, votre position est enregistrée environ toutes les 5 minutes - sur Android même application fermée, avec une notification visible tout du long - et cela s'arrête dès que vous pointez la sortie. Les responsables de votre organisation peuvent la voir ; elle est supprimée après 30 jours.",
+      "short": "Pour vérifier que vous êtes sur le lieu de travail ; enregistrée pendant le service uniquement."
     },
     "camera": {
       "title": "Appareil photo",
-      "body": "Pour prendre une photo au pointage d'entrée ou de sortie, uniquement sur les sites qui l'exigent. L'appareil photo ne s'ouvre que lorsque vous prenez la photo vous-même."
+      "body": "Pour prendre une photo au pointage d'entrée ou de sortie, uniquement sur les sites qui l'exigent. L'appareil photo ne s'ouvre que lorsque vous prenez la photo vous-même.",
+      "short": "Pour la photo d'arrivée et de départ, seulement sur les sites qui la demandent."
     },
     "notifications": {
       "title": "Notifications",
-      "body": "Pour recevoir les réponses à vos demandes de congé et les validations, les rappels de pointage, les alertes urgentes et la notification de service pendant que vous êtes pointé."
+      "body": "Pour recevoir les réponses à vos demandes de congé et les validations, les rappels de pointage, les alertes urgentes et la notification de service pendant que vous êtes pointé.",
+      "short": "Pour les réponses, les rappels et les alertes urgentes."
     },
     "footer": "Après « Continuer », Android demande chaque autorisation tour à tour : choisissez « Autoriser » ou « Lorsque vous utilisez l'application ». Vous pouvez modifier chaque autorisation plus tard dans les réglages du téléphone.",
     "accept": "Continuer",
-    "decline": "Plus tard"
+    "decline": "Plus tard",
+    "details": "Détails"
   },
   "numerals": {
     "label": "Chiffres",

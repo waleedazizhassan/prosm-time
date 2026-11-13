@@ -255,8 +255,10 @@
       "battery": {
         "title": "Désactiver l’économie de batterie pour PROSM Time",
         "hint": "Choisis PROSM Time et mets « Non optimisé » ou « Sans restriction ».",
-        "action": "Réglages"
-      }
+        "action": "Réglages",
+        "why": "Garde le suivi du poste régulier sur les téléphones qui arrêtent les applis pour économiser la batterie. Sans cela, le pointage fonctionne normalement."
+      },
+      "optional": "Facultatif"
     },
     "mood": {
       "question": "Comment s’est passée ta journée ?",
@@ -397,7 +399,8 @@
       "external": "Travailleurs externes",
       "insights": "Indicateurs de présence",
       "documents": "Documents",
-      "moods": "Évaluation des services"
+      "moods": "Évaluation des services",
+      "latePeriod": "Retards sur la période"
     },
     "sos": {
       "text": "SOS de {{name}} à {{site}} depuis {{time}}",
@@ -693,9 +696,10 @@
       "title": {
         "present": "Présents",
         "hours": "Heures par personne",
-        "late": "Retards",
+        "late": "En retard aujourd'hui",
         "overtime": "Heures sup. par personne",
-        "overdue": "Sortie non pointée"
+        "overdue": "Sortie non pointée",
+        "latePeriod": "Retards sur la période"
       },
       "open": {
         "present": "Pointages du jour",
@@ -703,14 +707,16 @@
         "late": "Rapport des retards",
         "overtime": "Approuver les heures sup.",
         "absent": "Rapport des absences",
-        "overdue": "Rapport des sorties manquantes"
+        "overdue": "Rapport des sorties manquantes",
+        "latePeriod": "Rapport des retards"
       },
       "empty": {
         "present": "Personne n'est pointé.",
         "hours": "Aucune heure sur cette période.",
-        "late": "Aucun retard sur cette période.",
+        "late": "Personne n'est en retard aujourd'hui.",
         "overtime": "Aucune heure sup. sur cette période.",
-        "overdue": "Personne n'a oublié de pointer sa sortie."
+        "overdue": "Personne n'a oublié de pointer sa sortie.",
+        "latePeriod": "Aucun retard sur cette période."
       },
       "periodNote": "Pour la période choisie en haut.",
       "lateBy": "{{minutes}} min · arrivé à {{time}}",
@@ -731,10 +737,14 @@
         "lateTotal": "Retard total",
         "overtimeWaiting": "À approuver",
         "shiftEnded": "Fin du poste",
-        "overdueBy": "Retard"
+        "overdueBy": "Retard",
+        "arrived": "Arrivé",
+        "lateBy": "Retard"
       },
       "overdueFor": "{{hours}} h {{minutes}} min",
-      "clockOutAction": "Pointer la sortie"
+      "clockOutAction": "Pointer la sortie",
+      "todayNote": "Aujourd'hui seulement - les retards de la semaine ou du mois sont dans la carte « Retards sur la période ».",
+      "afterStart": "après le début du poste"
     },
     "export": {
       "action": "Exporter le tableau de bord en PDF",
@@ -767,6 +777,10 @@
       "byDay": "Par jour",
       "noSite": "Sans site",
       "scoreShort": "{{score}} % · {{count}}"
+    },
+    "latePeriod": {
+      "figures": "{{days}} j · {{minutes}} min",
+      "all": "Tout voir"
     }
   },
   "devices": {

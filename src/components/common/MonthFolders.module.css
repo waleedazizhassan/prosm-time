@@ -1,0 +1,58 @@
+/* Owner 2026-11-13: each month's day cards in a folder named after the month */
+.folders {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.folder {
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg, 14px);
+  background: var(--surface-card);
+  overflow: hidden;
+}
+
+.head {
+  width: 100%;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border: 0;
+  background: var(--surface-sunken);
+  color: var(--text-primary);
+  font: inherit;
+  cursor: pointer;
+  text-align: start;
+}
+
+.head svg:first-child {
+  color: var(--brand-primary);
+  flex-shrink: 0;
+}
+
+.name {
+  flex: 1;
+  font-weight: var(--font-weight-semibold);
+}
+
+.count {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--surface-hover);
+}
+
+.chevron {
+  color: var(--text-secondary);
+  transition: transform var(--transition-fast, 0.15s);
+}
+
+.open .chevron {
+  transform: rotate(180deg);
+}
+
+.body {
+  padding: var(--space-3);
+}

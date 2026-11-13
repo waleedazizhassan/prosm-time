@@ -32,6 +32,8 @@ import timesheetsHeaderImage from "../../assets/illustrations/timesheets.svg";
 import PageBanner from "../../components/common/PageBanner";
 import HintText from "../../components/common/HintText";
 import DateRange from "../../components/common/DateRange";
+import MonthFolders from "../../components/common/MonthFolders";
+import styles from "./TimesheetDays.module.css";
 
 function toDateInput(date: Date): string {
   return date.toISOString().slice(0, 10);
@@ -63,6 +65,17 @@ const STATUS_BADGE_KEY: Record<Timesheet["status"], string> = {
 // workflow the export will eventually read from, not a placeholder.
 // Owner 2026-11-12: one's own timesheets live in My file -> Attendance (embedded here, own only); the page
 // is for those who generate, approve or correct others'.
+// the sessions of a timesheet by local day, newest first
+function entryDays(entries: TimesheetEntry[]): { key: string; entries: TimesheetEntry[] }[] {
+  const byDay = new Map<string, TimesheetEntry[]>();
+  for (const entry of entries) {
+    const d = new Date(entry.clockInAt);
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    byDay.set(key, [...(byDay.get(key) ?? []), entry]);
+  }
+  return [...byDay.entries()].sort((a, b) => (a[0] < b[0] ? 1 : -1)).map(([key, list]) => ({ key, entries: list }));
+}
+
 export default function TimesheetsPage({ embedded = false }: { embedded?: boolean } = {}) {
   const { t, i18n } = useTranslation("timesheets");
   const { profile, hasPermission } = useAuth();
@@ -442,39 +455,42 @@ export default function TimesheetsPage({ embedded = false }: { embedded?: boolea
             ) : entries.length === 0 ? (
               <EmptyState message={t("detail.noEntries")} />
             ) : (
-              <div style={{ display: "grid", gap: "var(--space-2)" }}>
-                {entries.map((entry) => (
-                  <div key={entry.sessionId} style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)", borderTop: "1px solid var(--border-light)", paddingTop: "var(--space-2)" }}>
-                    {formatDateTime(entry.clockInAt, i18n.language)}
-                    {entry.clockInEvidencePath ? (
-                      <button
-                        type="button"
-                        onClick={() => openEvidence(entry.clockInEvidencePath as string, `${t("columns.clockIn")} — ${formatDateTime(entry.clockInAt, i18n.language)}`)}
-                        title={t("viewPhoto")}
-                        aria-label={t("viewPhoto")}
-                        style={{ display: "inline-flex", verticalAlign: "middle", margin: "0 4px", background: "none", border: "none", cursor: "pointer", color: "var(--text-link)", padding: 0 }}
-                      >
-                        <Camera size={12} />
-                      </button>
-                    ) : null}
-                    — {entry.clockOutAt ? formatTimeOnly(entry.clockOutAt, i18n.language) : t("detail.stillOpen")}
-                    {entry.clockOutEvidencePath ? (
-                      <button
-                        type="button"
-                        onClick={() => openEvidence(entry.clockOutEvidencePath as string, `${t("columns.clockOut")} — ${entry.clockOutAt ? formatDateTime(entry.clockOutAt, i18n.language) : ""}`)}
-                        title={t("viewPhoto")}
-                        aria-label={t("viewPhoto")}
-                        style={{ display: "inline-flex", verticalAlign: "middle", margin: "0 4px", background: "none", border: "none", cursor: "pointer", color: "var(--text-link)", padding: 0 }}
-                      >
-                        <Camera size={12} />
-                      </button>
-                    ) : null}
-                    {" "}
-                    · {entry.siteName ?? "—"}
-                    {entry.projectName ? ` · ${entry.projectName}` : ""} · {formatMinutes(entry.workedMinutes)}
+              // owner 2026-11-13: a card for every day (its sessions inside), each month's days in a folder
+              <MonthFolders items={entryDays(entries)} dayOf={(day) => day.key}>
+                {(days) => (
+                  <div className={styles.days}>
+                    {days.map((day) => (
+                      <section key={day.key} className={styles.dayCard}>
+                        <header className={styles.dayHead}>
+                          <strong>{formatDateOnly(day.key, i18n.language)}</strong>
+                          <span>{formatMinutes(day.entries.reduce((sum, entry) => sum + entry.workedMinutes, 0))}</span>
+                        </header>
+                        {day.entries.map((entry) => (
+                          <div key={entry.sessionId} className={styles.session}>
+                            <div className={styles.times}>
+                              <span>{formatTimeOnly(entry.clockInAt, i18n.language)}</span>
+                              {entry.clockInEvidencePath ? (
+                                <button type="button" className={styles.photo} onClick={() => openEvidence(entry.clockInEvidencePath as string, `${t("columns.clockIn")} — ${formatDateTime(entry.clockInAt, i18n.language)}`)} title={t("viewPhoto")} aria-label={t("viewPhoto")}>
+                                  <Camera size={14} />
+                                </button>
+                              ) : null}
+                              <span aria-hidden="true">–</span>
+                              <span>{entry.clockOutAt ? formatTimeOnly(entry.clockOutAt, i18n.language) : t("detail.stillOpen")}</span>
+                              {entry.clockOutEvidencePath ? (
+                                <button type="button" className={styles.photo} onClick={() => openEvidence(entry.clockOutEvidencePath as string, `${t("columns.clockOut")} — ${entry.clockOutAt ? formatDateTime(entry.clockOutAt, i18n.language) : ""}`)} title={t("viewPhoto")} aria-label={t("viewPhoto")}>
+                                  <Camera size={14} />
+                                </button>
+                              ) : null}
+                              <span className={styles.worked}>{formatMinutes(entry.workedMinutes)}</span>
+                            </div>
+                            <div className={styles.where}>{entry.siteName ?? "—"}{entry.projectName ? ` · ${entry.projectName}` : ""}</div>
+                          </div>
+                        ))}
+                      </section>
+                    ))}
                   </div>
-                ))}
-              </div>
+                )}
+              </MonthFolders>
             )}
 
             {canReviewDetail ? <Textarea label={t("detail.notesLabel")} name="reviewNotes" value={reviewNotes} onChange={(event) => setReviewNotes(event.target.value)} disabled={actionSubmitting} /> : null}

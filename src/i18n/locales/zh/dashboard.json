@@ -249,8 +249,10 @@
       "battery": {
         "title": "关闭 PROSM Time 的电池优化",
         "hint": "选择 PROSM Time，设为“不优化”或“无限制”。",
-        "action": "设置"
-      }
+        "action": "设置",
+        "why": "在为省电而停止应用的手机上，让班次跟踪保持稳定。不设置也可以正常打卡。"
+      },
+      "optional": "可选"
     },
     "mood": {
       "question": "今天的工作怎么样？",
@@ -391,7 +393,8 @@
       "external": "外部工人",
       "insights": "考勤分析",
       "documents": "证件",
-      "moods": "班次评价"
+      "moods": "班次评价",
+      "latePeriod": "期间迟到"
     },
     "sos": {
       "text": "{{name}} 在 {{site}} 发出 SOS，自 {{time}} 起",
@@ -687,9 +690,10 @@
       "title": {
         "present": "当前在岗",
         "hours": "每人工时",
-        "late": "迟到",
+        "late": "今日迟到",
         "overtime": "每人加班",
-        "overdue": "未下班打卡"
+        "overdue": "未下班打卡",
+        "latePeriod": "期间迟到"
       },
       "open": {
         "present": "今日考勤记录",
@@ -697,14 +701,16 @@
         "late": "迟到报表",
         "overtime": "批准加班",
         "absent": "缺勤报表",
-        "overdue": "未下班打卡报表"
+        "overdue": "未下班打卡报表",
+        "latePeriod": "迟到报告"
       },
       "empty": {
         "present": "目前没有人上班打卡。",
         "hours": "此时段没有记录工时。",
-        "late": "此时段没有人迟到。",
+        "late": "今天没有人迟到。",
         "overtime": "此时段没有加班。",
-        "overdue": "没有人逾期未下班打卡。"
+        "overdue": "没有人逾期未下班打卡。",
+        "latePeriod": "此期间没有迟到。"
       },
       "periodNote": "按上方所选时段。",
       "lateBy": "{{minutes}} 分钟 · {{time}} 上班",
@@ -723,10 +729,14 @@
         "lateTotal": "迟到总计",
         "overtimeWaiting": "待批准",
         "shiftEnded": "班次结束",
-        "overdueBy": "逾期"
+        "overdueBy": "逾期",
+        "arrived": "到达",
+        "lateBy": "迟到"
       },
       "overdueFor": "{{hours}} 小时 {{minutes}} 分钟",
-      "clockOutAction": "下班打卡"
+      "clockOutAction": "下班打卡",
+      "todayNote": "仅限今天——本周或本月的迟到见“期间迟到”卡片。",
+      "afterStart": "班次开始后"
     },
     "export": {
       "action": "导出仪表板 PDF",
@@ -757,6 +767,10 @@
       "byDay": "按日",
       "noSite": "无地点",
       "scoreShort": "{{score}}% · {{count}}"
+    },
+    "latePeriod": {
+      "figures": "{{days}} 天 · {{minutes}} 分钟",
+      "all": "查看全部"
     }
   },
   "devices": {

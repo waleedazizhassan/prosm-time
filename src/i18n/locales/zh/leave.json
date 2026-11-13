@@ -108,5 +108,7 @@
       "public_holiday": "法定节假日",
       "day_off": "休息日"
     }
-  }
+  },
+  "reviewerDeputy": "代表所有者",
+  "reviewerSiteManager": "您所在地点的经理"
 }

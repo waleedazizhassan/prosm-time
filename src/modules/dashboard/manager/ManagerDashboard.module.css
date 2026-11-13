@@ -1038,3 +1038,43 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* owner 2026-11-13: the period's lateness, its own card */
+.muted {
+  margin: 0 0 var(--space-3);
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+.lateList {
+  list-style: none;
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.lateList li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--surface-hover);
+  font-size: var(--font-sm);
+}
+
+.lateName {
+  font-weight: var(--font-weight-semibold);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lateFigures {
+  flex-shrink: 0;
+  color: var(--status-warning-text, #f59e0b);
+  font-variant-numeric: tabular-nums;
+}
