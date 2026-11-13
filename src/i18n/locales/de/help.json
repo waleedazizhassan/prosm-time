@@ -205,6 +205,10 @@
     "taxConfig": {
       "title": "Steuern und Sozialversicherung",
       "body": "Lohnabrechnung → Einstellungen → Steuern und Sozialversicherung. Ägypten ist mit den Werten von PROSM fertig. „Kopieren und bearbeiten“ erstellt Ihre eigene Version (auf Ihre Verantwortung). Für andere Länder Stufen, Freibetrag und Kategorien eingeben. Der Rechner nutzt die Engine der Lohnabrechnung. Jede Speicherung ist eine Version ab einem Monat. Nur der Inhaber ändert das Land, nie bei offenem Lauf."
+    },
+    "connect": {
+      "title": "PROSM Connect: Chats, Anrufe und Besprechungen",
+      "body": "PROSM Connect ist Teil derselben App: Jede Person hat eine Durchwahl (die Zentrale ist 001), und neben jedem Namen steht der Anwesenheitsstatus - an einem Standort, in der Pause, abwesend oder im Urlaub. Chats: Text, Fotos, Dateien (bis 100 MB) und Sprachnachrichten - Mikrofon halten, loslassen zum Senden; das Mikrofon wird nur beim ersten Mal erfragt. 🕓 heißt noch auf dem Handy (z. B. offline - wird automatisch gesendet), ✓ gesendet, ✓✓ zugestellt, blaues ✓✓ gelesen. Die beglaubigte Kamera nutzt nur die App-Kamera (nie die Galerie) und druckt das PROSM-Time-Logo, den Standort, die Serverzeit, die Koordinaten, Ihren Namen und einen Prüfcode ins Foto. Unter „An Standorten“ schreiben Sie allen Anwesenden; Push-to-Talk spielt bei geöffneter App von selbst ab. Anrufe laufen direkt zwischen den Handys: bei schwachem Netz wird das Bild leichter oder abgeschaltet und der Anruf läuft mit Ton weiter; ein Netzwechsel zeigt „Verbindung wird wiederhergestellt…“, und kommt ein Anruf nicht durch, wird „Sprachnachricht senden“ angeboten. Besprechungen: bis 4 mit Video, 8 nur mit Ton, mit Bildschirmfreigabe, Handheben und einem Chat, der mit der Besprechung verschwindet. Eine Aufnahme bleibt nur auf dem Gerät der aufnehmenden Person, und alle sehen „<Name> nimmt die Besprechung auf“. Der Server stellt nur zu: Eine Nachricht wird nach Empfang gelöscht (spätestens nach 7 Tagen); Unterhaltungen liegen verschlüsselt auf Ihrem Handy und werden beim Abmelden entfernt."
     }
   },
   "faq": {

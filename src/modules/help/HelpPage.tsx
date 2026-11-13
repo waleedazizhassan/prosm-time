@@ -36,6 +36,8 @@ const GUIDES: Guide[] = [
   { id: "timesheets", audience: "all" },
   { id: "longSessions", audience: "all" },
   { id: "leavingSite", audience: "all" },
+  // owner 2026-11-13: PROSM Connect (chats, calls, meetings)
+  { id: "connect", audience: "all", feature: "connect_chat" },
   { id: "liveCheck", audience: "all" },
   { id: "allowances", audience: "all", feature: "allowances" },
   { id: "leave", audience: "all", feature: "leave" },

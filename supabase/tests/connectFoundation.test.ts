@@ -117,9 +117,11 @@ describe("PROSM Connect - the foundation", () => {
 
   it("a meeting takes no more than its limit (4 with video), for every plan", async () => {
     const [{ id }] = await t.su<{ id: string }>("insert into connect_meetings (organization_id, host_id, media, max_peers) values ($1, $2, 'video', 4) returning id", [org.id, omar.userId]);
-    for (const m of [omar, hasan, mona]) expect((await t.as(m.authId, "select public.prosm_time_connect_join_meeting($1)", [id])).error).toBeNull();
     const fourth = await addMember(t, org, "employee", "Karim");
     const fifth = await addMember(t, org, "employee", "Ahmed");
+    // invitations (20261114120000): only the host and those invited join
+    for (const m of [hasan, mona, fourth, fifth]) await t.su("insert into connect_switchboard (organization_id, from_user, to_user, type, ref_id) values ($1, $2, $3, 'meeting_invite', $4)", [org.id, omar.userId, m.userId, id]);
+    for (const m of [omar, hasan, mona]) expect((await t.as(m.authId, "select public.prosm_time_connect_join_meeting($1)", [id])).error).toBeNull();
     expect((await t.as(fourth.authId, "select public.prosm_time_connect_join_meeting($1)", [id])).error).toBeNull();
     expect((await t.as(fifth.authId, "select public.prosm_time_connect_join_meeting($1)", [id])).error).toMatch(/FULL/);
     const bad = await t.su("insert into connect_meetings (organization_id, host_id, media, max_peers) values ($1, $2, 'video', 6)", [org.id, omar.userId]).then(() => null, (e: Error) => e.message);
@@ -142,6 +144,17 @@ describe("PROSM Connect - the foundation", () => {
     expect(await join(starterPerson, `connect:user:${starterPerson.userId}`)).toBe(false);
     expect(await join(hasan, `connect:user:${hasan.userId}:extra`)).toBe(false);
     expect(await join(hasan, "other:topic")).toBe(false);
+  });
+
+  it("an employee sees everyone's name, number and status - nothing else; another company nobody (20261114130000)", async () => {
+    const list = (await rows(mona, "select public.list_prosm_time_connect_people() as r"))[0].r as { id: string; ext: string; presence: string; currentSiteName: string | null; email?: string }[];
+    expect(list.map((p) => p.id)).toEqual(expect.arrayContaining([omar.userId, hasan.userId]));
+    expect(list.every((p) => /^\d{2,6}$/.test(p.ext))).toBe(true);
+    expect(list.find((p) => p.id === hasan.userId)?.presence).toBe("in");
+    expect(list.find((p) => p.id === hasan.userId)?.currentSiteName).toBe("Capital");
+    expect(list.some((p) => "email" in p || "national_id" in p)).toBe(false);
+    expect(list.some((p) => p.id === outsider.userId)).toBe(false);
+    expect((await rows(starterPerson, "select public.list_prosm_time_connect_people() as r"))[0].r).toEqual([]);
   });
 
   it("nothing in Connect is open to someone signed out", async () => {

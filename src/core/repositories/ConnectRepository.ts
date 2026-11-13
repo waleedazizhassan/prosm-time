@@ -40,6 +40,22 @@ export interface ConnectItem {
   createdAt: string;
 }
 
+/** A colleague as Connect shows them (any member may read this short list while the module is on). */
+export interface ConnectPerson {
+  id: string;
+  fullName: string;
+  avatarUrl: string | null;
+  roleKey: string;
+  roleName: string;
+  isOwner: boolean;
+  isActive: boolean;
+  ext: string | null;
+  presence: "in" | "break" | "out" | "leave";
+  clockInAt: string | null;
+  currentSiteName: string | null;
+  siteNames: string[];
+}
+
 export interface ConnectExtension {
   userId: string;
   ext: string;
@@ -90,6 +106,17 @@ class ConnectRepository {
       const { data, error } = await this.client.from("connect_extensions").select("user_id, ext");
       if (error) return [];
       return (data ?? []).map((row) => ({ userId: row.user_id as string, ext: row.ext as string }));
+    } catch {
+      return [];
+    }
+  }
+
+  /** Everyone in the organisation with their number and attendance status. */
+  async people(): Promise<ConnectPerson[]> {
+    try {
+      const { data, error } = await this.client.rpc("list_prosm_time_connect_people");
+      if (error || !Array.isArray(data)) return [];
+      return (data as ConnectPerson[]).map((p) => ({ ...p, isActive: true, siteNames: p.siteNames ?? [] }));
     } catch {
       return [];
     }

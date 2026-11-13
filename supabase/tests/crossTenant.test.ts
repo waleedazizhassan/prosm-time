@@ -101,6 +101,7 @@ const TABLES: Record<string, string> = {
   connect_calls: byOrg,
   connect_meetings: byOrg,
   connect_meeting_peers: "select p.meeting_id as id from connect_meeting_peers p join connect_meetings m on m.id = p.meeting_id where m.organization_id = $1",
+  connect_meeting_invitees: "select i.meeting_id as id from connect_meeting_invitees i join connect_meetings m on m.id = i.meeting_id where m.organization_id = $1",
   connect_photo_proofs: byOrg,
   rate_limit_hits: "select r.user_id as id from rate_limit_hits r join users u on u.id = r.user_id where u.organization_id = $1",
   leave_requests: byOrg,

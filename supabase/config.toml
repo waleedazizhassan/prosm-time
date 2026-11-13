@@ -342,3 +342,8 @@ verify_jwt = true
 [functions.connect-cleanup]
 enabled = true
 verify_jwt = false
+
+# PROSM Connect: wakes the recipients' phones for a new request (calls ring); service role only
+[functions.connect-send-push]
+enabled = true
+verify_jwt = false
