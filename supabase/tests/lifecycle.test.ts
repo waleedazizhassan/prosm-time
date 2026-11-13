@@ -42,6 +42,8 @@ beforeAll(async () => {
   t = await buildDatabase();
   orgA = await createOrg(t, "OrgA");
   orgB = await createOrg(t, "OrgB");
+  // every day is a working day here, so the result does not depend on the day the tests run (Friday is the default rest day)
+  await t.su("update organization_settings set rest_days = '{}' where organization_id = $1", [orgA.id]);
   siteId = await createSite(t, orgA, "Tower B");
   emp = await addMember(t, orgA, "employee", "Emp A");
   emp2 = await addMember(t, orgA, "employee", "Emp Two");

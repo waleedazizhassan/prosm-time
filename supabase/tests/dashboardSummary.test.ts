@@ -30,6 +30,8 @@ const summary = async (member: TestMember) => {
 beforeAll(async () => {
   t = await buildDatabase();
   org = await createOrg(t, "Nile");
+  // every day is a working day here, so the result does not depend on the day the tests run (Friday is the default rest day)
+  await t.su("update organization_settings set rest_days = '{}' where organization_id = $1", [org.id]);
   const siteA = await createSite(t, org, "Site A");
   const siteB = await createSite(t, org, "Site B", { latitude: 30.3, longitude: 31.9 });
   managerA = await addMember(t, org, "manager", "Mona");
