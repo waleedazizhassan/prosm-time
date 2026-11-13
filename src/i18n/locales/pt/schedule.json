@@ -121,5 +121,6 @@
     "hint": "Toque numa célula vazia para adicionar um turno, ou num turno para cancelá-lo. A cor vem do modelo; ✓ significa trabalhado.",
     "days": "Dias",
     "assignDays": "Adicionar {{count}} turnos"
-  }
+  },
+  "assignedOnlyHint": "Só aparecem as pessoas atribuídas a este local."
 }

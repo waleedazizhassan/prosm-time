@@ -9,7 +9,7 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 
 import { corsHeaders, errorResponse, successResponse } from "../_shared/http.ts";
 
-const SHORT_HOSTS = new Set(["maps.app.goo.gl", "goo.gl", "g.co"]);
+const SHORT_HOSTS = new Set(["maps.app.goo.gl", "goo.gl"]);
 const isGoogleHost = (host: string) =>
   SHORT_HOSTS.has(host) || host === "google.com" || host.endsWith(".google.com") || /^(www\.|maps\.)?google\.[a-z.]{2,6}$/.test(host);
 
@@ -52,6 +52,9 @@ serve(async (request: Request) => {
     });
     const { data: who } = await caller.auth.getUser();
     if (!who?.user) return errorResponse("Not signed in.", 401, "UNAUTHORIZED");
+    // owner 2026-11-13: a limit on requests - 20 every 10 minutes for each person
+    const { data: allowed, error: limitError } = await caller.rpc("prosm_time_take_rate_limit", { p_action: "resolve-map-link", p_max: 20, p_window_seconds: 600 });
+    if (limitError || allowed !== true) return errorResponse("Too many requests - try again in a few minutes.", 429, "RATE_LIMITED");
 
     const body = await request.json().catch(() => ({}));
     const raw = typeof body?.url === "string" ? body.url.trim() : "";
@@ -62,7 +65,12 @@ serve(async (request: Request) => {
       return errorResponse("Not a link.", 400, "INVALID_LINK");
     }
     if (url.protocol !== "https:" && url.protocol !== "http:") return errorResponse("Not a link.", 400, "INVALID_LINK");
-    if (!SHORT_HOSTS.has(url.hostname.toLowerCase())) return errorResponse("Only Google Maps short links.", 400, "NOT_A_MAP_LINK");
+    // owner 2026-11-13: Google links only - maps.app.goo.gl, goo.gl/maps and google.com/maps
+    const host = url.hostname.toLowerCase();
+    const isMapLink = host === "maps.app.goo.gl"
+      || (host === "goo.gl" && url.pathname.startsWith("/maps"))
+      || ((host === "google.com" || host === "www.google.com" || host === "maps.google.com") && (host === "maps.google.com" || url.pathname.startsWith("/maps")));
+    if (!isMapLink) return errorResponse("Only Google Maps links.", 400, "NOT_A_MAP_LINK");
 
     let current = url;
     for (let hop = 0; hop < 6; hop++) {

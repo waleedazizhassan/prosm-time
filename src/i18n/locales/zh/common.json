@@ -112,7 +112,7 @@
     "employeeClockedInDifferentSite": "该员工在其他地点上班打卡。",
     "employeeCurrentlyClockedIn": "该员工目前在岗。",
     "employeeNotAssignedToProject": "该员工未分配到此项目。",
-    "employeeNotAssignedToSite": "该员工未分配到此地点。",
+    "employeeNotAssignedToSite": "无法在此地点为该员工排班，因为其未被分配到该地点。请先在“地点”页面进行分配。",
     "employeeNotCurrentlyClockedIn": "该员工目前未上班打卡。",
     "exceptionAlreadyHasReason": "该异常已有原因。",
     "invitationAlreadyUsed": "该邀请已被使用。",

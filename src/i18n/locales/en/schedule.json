@@ -121,5 +121,6 @@
     "hint": "Tap an empty cell to add a shift, or a shift to cancel it. The colour comes from the shift template; ✓ means it was worked.",
     "days": "Days",
     "assignDays": "Add {{count}} shifts"
-  }
+  },
+  "assignedOnlyHint": "Only people assigned to this site are shown."
 }

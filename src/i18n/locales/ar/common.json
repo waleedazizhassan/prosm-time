@@ -112,7 +112,7 @@
     "employeeClockedInDifferentSite": "هذا الموظف مسجل حضوره في موقع مختلف.",
     "employeeCurrentlyClockedIn": "هذا الموظف مسجل حضوره حاليًا.",
     "employeeNotAssignedToProject": "هذا الموظف غير معيّن لهذا المشروع.",
-    "employeeNotAssignedToSite": "هذا الموظف غير معيّن لهذا الموقع.",
+    "employeeNotAssignedToSite": "هذا الموظف غير معيّن على هذا الموقع، فلا يمكن جدولته أو تسجيله فيه. عيّنه على الموقع أولاً من صفحة المواقع.",
     "employeeNotCurrentlyClockedIn": "هذا الموظف غير مسجل حضوره حاليًا.",
     "exceptionAlreadyHasReason": "تم تسجيل سبب لهذا الاستثناء بالفعل.",
     "invitationAlreadyUsed": "تم استخدام هذه الدعوة بالفعل.",

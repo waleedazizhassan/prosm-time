@@ -29,7 +29,8 @@ function valid(lat: number, lng: number): { latitude: number; longitude: number 
 const PAIR = String.raw`(-?\d{1,3}(?:\.\d+)?)\s*,\s*\+?(-?\d{1,3}(?:\.\d+)?)`;
 
 export function isShortMapLink(text: string): boolean {
-  return /^(https?:\/\/)?(maps\.app\.goo\.gl|goo\.gl\/maps|g\.co\/kgs)\//i.test(text.trim());
+  // owner 2026-11-13: Google Maps links only (the server refuses anything else)
+  return /^(https?:\/\/)?(maps\.app\.goo\.gl|goo\.gl\/maps)\//i.test(text.trim());
 }
 
 // Owner 2026-11-13: what the phone's "Share" gives is often the place's name with the link after it

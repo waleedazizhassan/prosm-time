@@ -121,5 +121,6 @@
     "hint": "Toque una celda vacía para añadir un turno, o un turno para cancelarlo. El color viene de la plantilla; ✓ indica que se trabajó.",
     "days": "Días",
     "assignDays": "Añadir {{count}} turnos"
-  }
+  },
+  "assignedOnlyHint": "Solo se muestran las personas asignadas a este sitio."
 }

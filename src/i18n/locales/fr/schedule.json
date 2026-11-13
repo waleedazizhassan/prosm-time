@@ -121,5 +121,6 @@
     "hint": "Touchez une case vide pour ajouter un quart, ou un quart pour l'annuler. La couleur vient du modèle ; ✓ signifie travaillé.",
     "days": "Jours",
     "assignDays": "Ajouter {{count}} quarts"
-  }
+  },
+  "assignedOnlyHint": "Seules les personnes affectées à ce site sont affichées."
 }

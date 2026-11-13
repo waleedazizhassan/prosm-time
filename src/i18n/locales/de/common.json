@@ -112,7 +112,7 @@
     "employeeClockedInDifferentSite": "Dieser Mitarbeiter ist an einem anderen Standort eingestempelt.",
     "employeeCurrentlyClockedIn": "Dieser Mitarbeiter ist derzeit eingestempelt.",
     "employeeNotAssignedToProject": "Dieser Mitarbeiter ist diesem Projekt nicht zugewiesen.",
-    "employeeNotAssignedToSite": "Dieser Mitarbeiter ist diesem Standort nicht zugewiesen.",
+    "employeeNotAssignedToSite": "Diese Person kann an diesem Standort nicht eingeplant werden, weil sie ihm nicht zugeordnet ist. Ordnen Sie sie zuerst auf der Seite Standorte zu.",
     "employeeNotCurrentlyClockedIn": "Dieser Mitarbeiter ist derzeit nicht eingestempelt.",
     "exceptionAlreadyHasReason": "Für diese Ausnahme wurde bereits ein Grund angegeben.",
     "invitationAlreadyUsed": "Diese Einladung wurde bereits verwendet.",

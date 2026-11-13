@@ -121,5 +121,6 @@
     "hint": "Leere Zelle antippen, um eine Schicht hinzuzufügen, oder eine Schicht, um sie zu stornieren. Die Farbe stammt aus der Vorlage; ✓ heißt gearbeitet.",
     "days": "Tage",
     "assignDays": "{{count}} Schichten hinzufügen"
-  }
+  },
+  "assignedOnlyHint": "Es werden nur Personen angezeigt, die diesem Standort zugeordnet sind."
 }
