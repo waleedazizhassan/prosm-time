@@ -56,5 +56,5 @@ export default function AttendanceMonthGrid({ sessions, startDate, endDate, empl
     })),
   ];
 
-  return <Table grid columns={columns} data={people} getRowId={(row) => row.name} emptyMessage={emptyMessage} />;
+  return <Table grid wideOnPhone columns={columns} data={people} getRowId={(row) => row.name} emptyMessage={emptyMessage} />;
 }
