@@ -92,6 +92,8 @@ const TABLES: Record<string, string> = {
   entitlement_events: byOrg,
   data_consents: byOrg,
   push_devices: byOrg,
+  // the request limit (20261113240000)
+  rate_limit_hits: "select r.user_id as id from rate_limit_hits r join users u on u.id = r.user_id where u.organization_id = $1",
   leave_requests: byOrg,
   license_activation_state: byOrg,
   location_plausibility_flags: byOrg,
@@ -311,6 +313,8 @@ async function seedOrg(name: string): Promise<SeededOrg> {
   );
   const [project] = await t.su<{ id: string }>("insert into projects (site_id, name) values ($1, $2) returning id", [siteId, `${name} project`]);
   await t.su("insert into project_assignments (project_id, user_id) values ($1, $2)", [project.id, employee.userId]);
+
+  await must(t.as(employee.authId, "select public.prosm_time_take_rate_limit('test', 5, 60)"), "rate limit");
 
   return { org, name, manager, employee, siteId, sessionId: session.id, timesheetId: timesheet.id };
 }
