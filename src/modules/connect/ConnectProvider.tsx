@@ -17,6 +17,8 @@ import InviteToast from "./InviteToast";
 
 interface ConnectContextValue {
   on: boolean;
+  meId: string | null;
+  canCall: boolean;
   people: Map<string, ConnectPerson>;
   call: CallSession | null;
   meeting: MeetingSession | null;
@@ -116,8 +118,8 @@ export default function ConnectProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo<ConnectContextValue>(() => ({
-    on, people, call, meeting, startCall, startMeeting, joinMeeting, error, clearError: () => setError(null),
-  }), [on, people, call, meeting, startCall, startMeeting, joinMeeting, error]);
+    on, meId: profile?.id ?? null, canCall: Boolean(features?.calls), people, call, meeting, startCall, startMeeting, joinMeeting, error, clearError: () => setError(null),
+  }), [on, profile?.id, features?.calls, people, call, meeting, startCall, startMeeting, joinMeeting, error]);
 
   return (
     <ConnectContext.Provider value={value}>
