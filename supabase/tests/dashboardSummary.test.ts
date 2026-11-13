@@ -70,6 +70,17 @@ describe("dashboard summary", () => {
     expect(s).toMatchObject({ team: 3, present: 1, onLeave: 1, absent: 1, waiting: 1 });
   });
 
+  it("does not show leave on a rest day inside it (owner 2026-11-13, Ratomag)", async () => {
+    // today becomes the organisation's weekly rest day: Sara's leave covers it, but she is not "on leave" today
+    await t.su("update organization_settings set rest_days = array[extract(dow from current_date)::int] where organization_id = $1", [org.id]);
+    const s = await summary(org.owner);
+    expect(s.onLeave).toBe(0);
+    const daily = await t.as<{ r: { onLeave: number } }>(org.owner.authId, "select public.get_prosm_time_daily_summary(current_date) as r");
+    expect(daily.error ?? daily.rows![0].r.onLeave).toBe(0);
+    await t.su("update organization_settings set rest_days = '{}' where organization_id = $1", [org.id]);
+    expect((await summary(org.owner)).onLeave).toBe(1);
+  });
+
   it("refuses someone who cannot view attendance", async () => {
     const result = await t.as(present.authId, "select public.get_prosm_time_dashboard_summary(current_date, 'UTC')");
     expect(result.error).toMatch(/ATTENDANCE.VIEW/);

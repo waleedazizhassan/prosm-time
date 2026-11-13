@@ -68,6 +68,8 @@ describe("absent today", () => {
     await t.su(`insert into public_holidays (organization_id, name, start_date, end_date) values ($1, 'Holiday', ${cairoToday}, ${cairoToday})`, [org.id]);
     const d = await dash();
     expect(d.kpi.absentToday).toBe(0);
-    expect(entry(d, onLeave)?.state).toBe("leave");
+    // owner 2026-11-13: a holiday is not a leave day either - leave takes working days only
+    expect(entry(d, onLeave)).toBeUndefined();
+    expect(d.kpi.onLeaveToday).toBe(0);
   });
 });
