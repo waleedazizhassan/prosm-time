@@ -367,7 +367,10 @@
     "exceptions": "Мои исключения",
     "myProfile": "Моё дело",
     "documents": "Документы",
-    "penalties": "Взыскания и поощрения"
+    "penalties": "Взыскания и поощрения",
+    "connect": "Чаты",
+    "connectCalls": "Журнал звонков",
+    "connectMeetings": "Встречи"
   },
   "sosOverlay": {
     "title": "Сигнал SOS/тревога",
@@ -385,7 +388,8 @@
     "payroll": "Зарплата",
     "reports": "Отчёты и аналитика",
     "settings": "Администрирование",
-    "help": "Справка"
+    "help": "Справка",
+    "connect": "PROSM Connect"
   },
   "weather": {
     "loading": "Загрузка погоды",
@@ -507,7 +511,8 @@
     "leave": "Отпуска",
     "menu": "Меню",
     "schedule": "Смены",
-    "myFile": "Моё дело"
+    "myFile": "Моё дело",
+    "chats": "Чаты"
   },
   "exitPrompt": {
     "title": "Вы покинули объект",

@@ -92,7 +92,16 @@ const TABLES: Record<string, string> = {
   entitlement_events: byOrg,
   data_consents: byOrg,
   push_devices: byOrg,
-  // the request limit (20261113240000)
+  // PROSM Connect (20261114100000) and the request limit (20261113240000)
+  connect_extensions: "select user_id as id from connect_extensions where organization_id = $1",
+  connect_conversations: byOrg,
+  connect_conversation_members: "select m.user_id as id from connect_conversation_members m join connect_conversations c on c.id = m.conversation_id where c.organization_id = $1",
+  connect_switchboard: byOrg,
+  connect_receipts: "select r.item_id as id from connect_receipts r join connect_switchboard s on s.id = r.item_id where s.organization_id = $1",
+  connect_calls: byOrg,
+  connect_meetings: byOrg,
+  connect_meeting_peers: "select p.meeting_id as id from connect_meeting_peers p join connect_meetings m on m.id = p.meeting_id where m.organization_id = $1",
+  connect_photo_proofs: byOrg,
   rate_limit_hits: "select r.user_id as id from rate_limit_hits r join users u on u.id = r.user_id where u.organization_id = $1",
   leave_requests: byOrg,
   license_activation_state: byOrg,
@@ -142,7 +151,7 @@ const TABLES: Record<string, string> = {
   worker_pay_rates: byOrg,
   owner_delegations: byOrg,
 };
-const GLOBAL_TABLES = ["permissions", "roles", "role_default_permissions", "security_rate_limits", "platform_settings", "plans", "activation_codes", "platform_plan_map", "payroll_country_packs"];
+const GLOBAL_TABLES = ["connect_storage_trash", "permissions", "roles", "role_default_permissions", "security_rate_limits", "platform_settings", "plans", "activation_codes", "platform_plan_map", "payroll_country_packs"];
 
 // Tables the seed below must actually fill, so their check is not vacuous.
 const MUST_BE_SEEDED = [
@@ -314,6 +323,15 @@ async function seedOrg(name: string): Promise<SeededOrg> {
   const [project] = await t.su<{ id: string }>("insert into projects (site_id, name) values ($1, $2) returning id", [siteId, `${name} project`]);
   await t.su("insert into project_assignments (project_id, user_id) values ($1, $2)", [project.id, employee.userId]);
 
+  // PROSM Connect: a conversation and a message waiting, a call, a meeting, a photo proof, a request counted
+  const opened = await t.as<{ id: string }>(manager.authId, "select public.prosm_time_connect_open_direct($1) as id", [employee.userId]);
+  if (opened.error) throw new Error(`connect conversation: ${opened.error}`);
+  const [conv] = opened.rows!;
+  await must(t.as(manager.authId, "insert into connect_switchboard (organization_id, from_user, conversation_id, type, body) values ($1, $2, $3, 'message', 'hi')", [org.id, manager.userId, conv.id]), "connect message");
+  await t.su("insert into connect_calls (organization_id, caller_id, callee_id, media) values ($1, $2, $3, 'audio')", [org.id, manager.userId, employee.userId]);
+  const [meeting] = await t.su<{ id: string }>("insert into connect_meetings (organization_id, host_id, media, max_peers) values ($1, $2, 'audio', 8) returning id", [org.id, manager.userId]);
+  await t.su("insert into connect_meeting_peers (meeting_id, user_id) values ($1, $2)", [meeting.id, manager.userId]);
+  await t.su("insert into connect_photo_proofs (organization_id, user_id, code, inside_site, lat, lng) values ($1, $2, $3, true, 30.02, 31.75)", [org.id, employee.userId, `PT-${name}`]);
   await must(t.as(employee.authId, "select public.prosm_time_take_rate_limit('test', 5, 60)"), "rate limit");
 
   return { org, name, manager, employee, siteId, sessionId: session.id, timesheetId: timesheet.id };

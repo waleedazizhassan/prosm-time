@@ -366,7 +366,10 @@
     "exceptions": "Mis excepciones",
     "myProfile": "Mi expediente",
     "documents": "Documentos",
-    "penalties": "Sanciones e incentivos"
+    "penalties": "Sanciones e incentivos",
+    "connect": "Chats",
+    "connectCalls": "Registro de llamadas",
+    "connectMeetings": "Reuniones"
   },
   "sosOverlay": {
     "title": "Alerta SOS/Emergencia",
@@ -384,7 +387,8 @@
     "payroll": "Nómina",
     "reports": "Informes y análisis",
     "settings": "Administración y gobierno",
-    "help": "Ayuda"
+    "help": "Ayuda",
+    "connect": "PROSM Connect"
   },
   "weather": {
     "loading": "Cargando el tiempo",
@@ -501,7 +505,8 @@
     "leave": "Ausencias",
     "menu": "Menú",
     "schedule": "Turnos",
-    "myFile": "Mi expediente"
+    "myFile": "Mi expediente",
+    "chats": "Chats"
   },
   "exitPrompt": {
     "title": "Saliste de la sede",

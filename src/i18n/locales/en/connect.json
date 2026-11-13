@@ -1,0 +1,37 @@
+{
+  "title": "Talk to your team at any site",
+  "lead": "Chat, calls and meetings inside PROSM Time. The server only delivers; conversations are kept on your phone.",
+  "myNumber": "Your extension",
+  "switchboard": "Switchboard",
+  "tabsLabel": "PROSM Connect sections",
+  "tabs": {
+    "chats": "Chats",
+    "calls": "Calls",
+    "meetings": "Meetings"
+  },
+  "searchPlaceholder": "Search by name, number or site",
+  "filtersLabel": "Filter",
+  "filters": {
+    "all": "All",
+    "sites": "At sites",
+    "teams": "Teams",
+    "unread": "Unread"
+  },
+  "presence": {
+    "in": "In",
+    "break": "On a break",
+    "out": "Out",
+    "atSite": "At {{site}}"
+  },
+  "actions": {
+    "message": "Message {{name}}",
+    "callSoon": "Calls coming soon"
+  },
+  "openFailed": "Couldn't open the conversation.",
+  "conversationReady": "Your conversation with {{name}} is ready. Messages start in the next stage.",
+  "noPeople": "Nobody here.",
+  "noUnread": "No unread messages.",
+  "callsSoon": "The call log shows here once calls are on.",
+  "meetingsSoon": "Meetings show here once they are on.",
+  "meetingsNotInPlan": "Meetings are in the Pro plan."
+}

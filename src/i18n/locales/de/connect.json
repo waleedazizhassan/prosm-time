@@ -1,0 +1,37 @@
+{
+  "title": "Sprechen Sie mit Ihrem Team an jedem Standort",
+  "lead": "Chat, Anrufe und Besprechungen in PROSM Time. Der Server stellt nur zu; Unterhaltungen bleiben auf Ihrem Handy.",
+  "myNumber": "Ihre Durchwahl",
+  "switchboard": "Zentrale",
+  "tabsLabel": "Bereiche von PROSM Connect",
+  "tabs": {
+    "chats": "Chats",
+    "calls": "Anrufe",
+    "meetings": "Besprechungen"
+  },
+  "searchPlaceholder": "Nach Name, Nummer oder Standort suchen",
+  "filtersLabel": "Filter",
+  "filters": {
+    "all": "Alle",
+    "sites": "An Standorten",
+    "teams": "Teams",
+    "unread": "Ungelesen"
+  },
+  "presence": {
+    "in": "Anwesend",
+    "break": "In der Pause",
+    "out": "Abwesend",
+    "atSite": "In {{site}}"
+  },
+  "actions": {
+    "message": "Nachricht an {{name}}",
+    "callSoon": "Anrufe folgen bald"
+  },
+  "openFailed": "Die Unterhaltung konnte nicht geöffnet werden.",
+  "conversationReady": "Die Unterhaltung mit {{name}} ist bereit. Nachrichten folgen in der nächsten Stufe.",
+  "noPeople": "Niemand hier.",
+  "noUnread": "Keine ungelesenen Nachrichten.",
+  "callsSoon": "Die Anrufliste erscheint hier, sobald Anrufe aktiv sind.",
+  "meetingsSoon": "Besprechungen erscheinen hier, sobald sie aktiv sind.",
+  "meetingsNotInPlan": "Besprechungen gehören zum Pro-Paket."
+}

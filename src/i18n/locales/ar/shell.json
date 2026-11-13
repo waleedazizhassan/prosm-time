@@ -369,7 +369,10 @@
     "exceptions": "استثناءاتي",
     "myProfile": "ملفي",
     "documents": "المستندات",
-    "penalties": "الجزاءات والحوافز"
+    "penalties": "الجزاءات والحوافز",
+    "connect": "المحادثات",
+    "connectCalls": "سجل المكالمات",
+    "connectMeetings": "الاجتماعات"
   },
   "sosOverlay": {
     "title": "تنبيه طوارئ (SOS)",
@@ -387,7 +390,8 @@
     "payroll": "الرواتب",
     "reports": "التقارير والتحليلات",
     "settings": "الإدارة والحوكمة",
-    "help": "المساعدة"
+    "help": "المساعدة",
+    "connect": "PROSM Connect"
   },
   "weather": {
     "loading": "جارٍ تحميل الطقس",
@@ -519,7 +523,8 @@
     "leave": "الإجازات",
     "menu": "القائمة",
     "schedule": "الورديات",
-    "myFile": "ملفي"
+    "myFile": "ملفي",
+    "chats": "المحادثات"
   },
   "exitPrompt": {
     "title": "خرجت من الموقع",

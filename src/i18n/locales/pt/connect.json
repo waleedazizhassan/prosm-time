@@ -1,0 +1,37 @@
+{
+  "title": "Fale com a sua equipa em qualquer local",
+  "lead": "Chat, chamadas e reuniões dentro do PROSM Time. O servidor só entrega; as conversas ficam no seu telemóvel.",
+  "myNumber": "A sua extensão",
+  "switchboard": "Central",
+  "tabsLabel": "Secções do PROSM Connect",
+  "tabs": {
+    "chats": "Conversas",
+    "calls": "Chamadas",
+    "meetings": "Reuniões"
+  },
+  "searchPlaceholder": "Pesquise por nome, número ou local",
+  "filtersLabel": "Filtrar",
+  "filters": {
+    "all": "Todos",
+    "sites": "Nos locais",
+    "teams": "Equipas",
+    "unread": "Não lidas"
+  },
+  "presence": {
+    "in": "Presente",
+    "break": "Em pausa",
+    "out": "Fora",
+    "atSite": "Em {{site}}"
+  },
+  "actions": {
+    "message": "Mensagem para {{name}}",
+    "callSoon": "Chamadas em breve"
+  },
+  "openFailed": "Não foi possível abrir a conversa.",
+  "conversationReady": "A conversa com {{name}} está pronta. As mensagens chegam na próxima etapa.",
+  "noPeople": "Ninguém aqui.",
+  "noUnread": "Sem mensagens não lidas.",
+  "callsSoon": "O registo de chamadas aparece aqui quando as chamadas estiverem ativas.",
+  "meetingsSoon": "As reuniões aparecem aqui quando estiverem ativas.",
+  "meetingsNotInPlan": "As reuniões estão no plano Pro."
+}

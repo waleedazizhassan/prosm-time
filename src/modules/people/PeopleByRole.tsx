@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
+import { FEATURES } from "../../config/features";
+import ConnectPersonButtons from "../connect/ConnectPersonButtons";
 import { useTranslation } from "react-i18next";
 import { ChevronDown } from "lucide-react";
 
@@ -143,6 +145,7 @@ export default function PeopleByRole({ compact = false, onOpen }: { compact?: bo
                         <StatusBadge status={STATUS_BADGE[person.presence]}>{t(`byRole.presence.${person.presence}`)}</StatusBadge>
                       )}
                     </button>
+                    {FEATURES.connect ? <span className={styles.connect}><ConnectPersonButtons userId={person.id} name={person.fullName} /></span> : null}
                   </li>
                 ))}
               </ul>

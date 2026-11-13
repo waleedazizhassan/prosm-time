@@ -1,0 +1,37 @@
+{
+  "title": "Habla con tu equipo en cualquier sitio",
+  "lead": "Chat, llamadas y reuniones dentro de PROSM Time. El servidor solo entrega; las conversaciones se guardan en tu móvil.",
+  "myNumber": "Tu extensión",
+  "switchboard": "Centralita",
+  "tabsLabel": "Secciones de PROSM Connect",
+  "tabs": {
+    "chats": "Chats",
+    "calls": "Llamadas",
+    "meetings": "Reuniones"
+  },
+  "searchPlaceholder": "Busca por nombre, número o sitio",
+  "filtersLabel": "Filtrar",
+  "filters": {
+    "all": "Todos",
+    "sites": "En sitios",
+    "teams": "Equipos",
+    "unread": "No leídos"
+  },
+  "presence": {
+    "in": "Presente",
+    "break": "En descanso",
+    "out": "Fuera",
+    "atSite": "En {{site}}"
+  },
+  "actions": {
+    "message": "Mensaje a {{name}}",
+    "callSoon": "Llamadas muy pronto"
+  },
+  "openFailed": "No se pudo abrir la conversación.",
+  "conversationReady": "La conversación con {{name}} está lista. Los mensajes llegan en la próxima etapa.",
+  "noPeople": "No hay nadie aquí.",
+  "noUnread": "No hay mensajes sin leer.",
+  "callsSoon": "El registro de llamadas aparece aquí cuando se activen.",
+  "meetingsSoon": "Las reuniones aparecen aquí cuando se activen.",
+  "meetingsNotInPlan": "Las reuniones están en el plan Pro."
+}

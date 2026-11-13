@@ -1,0 +1,37 @@
+{
+  "title": "Parla con il tuo team in qualsiasi sede",
+  "lead": "Chat, chiamate e riunioni dentro PROSM Time. Il server consegna soltanto; le conversazioni restano sul tuo telefono.",
+  "myNumber": "Il tuo interno",
+  "switchboard": "Centralino",
+  "tabsLabel": "Sezioni di PROSM Connect",
+  "tabs": {
+    "chats": "Chat",
+    "calls": "Chiamate",
+    "meetings": "Riunioni"
+  },
+  "searchPlaceholder": "Cerca per nome, numero o sede",
+  "filtersLabel": "Filtra",
+  "filters": {
+    "all": "Tutti",
+    "sites": "In sede",
+    "teams": "Team",
+    "unread": "Non letti"
+  },
+  "presence": {
+    "in": "Presente",
+    "break": "In pausa",
+    "out": "Fuori",
+    "atSite": "A {{site}}"
+  },
+  "actions": {
+    "message": "Messaggio a {{name}}",
+    "callSoon": "Chiamate in arrivo"
+  },
+  "openFailed": "Impossibile aprire la conversazione.",
+  "conversationReady": "La conversazione con {{name}} è pronta. I messaggi arrivano nella prossima fase.",
+  "noPeople": "Nessuno qui.",
+  "noUnread": "Nessun messaggio non letto.",
+  "callsSoon": "Il registro chiamate appare qui quando le chiamate saranno attive.",
+  "meetingsSoon": "Le riunioni appaiono qui quando saranno attive.",
+  "meetingsNotInPlan": "Le riunioni sono nel piano Pro."
+}

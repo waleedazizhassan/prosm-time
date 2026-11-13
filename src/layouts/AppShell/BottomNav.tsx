@@ -1,10 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { NavLink, useLocation } from "react-router-dom";
-import { CalendarClock, CalendarDays, Clock, Home, IdCard, LayoutGrid, Menu, Users, Wallet, type LucideIcon } from "lucide-react";
+import { CalendarClock, CalendarDays, Clock, Home, IdCard, LayoutGrid, Menu, MessagesSquare, Users, Wallet, type LucideIcon } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import usePlanFeatures, { type PlanFeature } from "../../core/hooks/usePlanFeatures";
 import { useAppLayout } from "./LayoutContext";
+import useConnect from "../../modules/connect/useConnect";
 import styles from "./BottomNav.module.css";
 
 // The employee's bar (owner 2026-10-19); the phone menu lists every other page.
@@ -30,12 +31,30 @@ export default function BottomNav() {
   const { openMobileSidebar } = useAppLayout();
   const location = useLocation();
   const { allows } = usePlanFeatures(profile?.id);
+  const connect = useConnect(profile?.id);
   if (!profile) return null;
 
   const manages = profile.isOwner || hasPermission("exceptions.manage");
   // Owner 2026-11-09: home in the middle of the bar
   const home: BottomItem = { to: "/dashboard", label: t("bottomNav.home"), icon: Home };
-  const items: BottomItem[] = manages
+  // Owner 2026-11-13: with PROSM Connect, "Conversations" joins the bar (in place of the manager panel for those
+  // who manage, of the allowances or shifts for the others - both stay in the menu)
+  const chats: BottomItem | null = connect.on ? { to: "/connect", label: t("bottomNav.chats"), icon: MessagesSquare } : null;
+  const items: BottomItem[] = chats
+    ? manages
+      ? [
+          chats,
+          ...(profile.isOwner || hasPermission("employees.view") ? [{ to: "/people", label: t("bottomNav.people"), icon: Users }] : []),
+          home,
+          { to: "/attendance", label: t("bottomNav.attendance"), icon: Clock },
+        ]
+      : [
+          { to: "/me?tab=attendance", label: t("bottomNav.attendance"), icon: Clock },
+          chats,
+          home,
+          allows("leave") ? { to: "/me?tab=leave", label: t("bottomNav.leave"), icon: CalendarDays } : { to: "/me", label: t("bottomNav.myFile"), icon: IdCard },
+        ]
+    : manages
     ? [
         { to: "/manager", label: t("bottomNav.manager"), icon: LayoutGrid },
         ...(profile.isOwner || hasPermission("employees.view") ? [{ to: "/people", label: t("bottomNav.people"), icon: Users }] : []),

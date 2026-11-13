@@ -365,7 +365,10 @@
     "exceptions": "My exceptions",
     "myProfile": "My file",
     "documents": "Documents",
-    "penalties": "Penalties and incentives"
+    "penalties": "Penalties and incentives",
+    "connect": "Chats",
+    "connectCalls": "Call log",
+    "connectMeetings": "Meetings"
   },
   "sosOverlay": {
     "title": "SOS/Emergency alert",
@@ -383,7 +386,8 @@
     "payroll": "Payroll",
     "reports": "Reports and analytics",
     "settings": "Administration and governance",
-    "help": "Help"
+    "help": "Help",
+    "connect": "PROSM Connect"
   },
   "weather": {
     "loading": "Loading weather",
@@ -495,7 +499,8 @@
     "leave": "Leave",
     "menu": "Menu",
     "schedule": "Shifts",
-    "myFile": "My file"
+    "myFile": "My file",
+    "chats": "Chats"
   },
   "exitPrompt": {
     "title": "You left the site",

@@ -1,0 +1,37 @@
+{
+  "title": "Parlez à votre équipe sur n'importe quel site",
+  "lead": "Chat, appels et réunions dans PROSM Time. Le serveur ne fait que transmettre ; les conversations restent sur votre téléphone.",
+  "myNumber": "Votre poste",
+  "switchboard": "Standard",
+  "tabsLabel": "Sections de PROSM Connect",
+  "tabs": {
+    "chats": "Discussions",
+    "calls": "Appels",
+    "meetings": "Réunions"
+  },
+  "searchPlaceholder": "Chercher par nom, numéro ou site",
+  "filtersLabel": "Filtrer",
+  "filters": {
+    "all": "Tous",
+    "sites": "Sur site",
+    "teams": "Équipes",
+    "unread": "Non lus"
+  },
+  "presence": {
+    "in": "Présent",
+    "break": "En pause",
+    "out": "Absent",
+    "atSite": "À {{site}}"
+  },
+  "actions": {
+    "message": "Message à {{name}}",
+    "callSoon": "Appels bientôt"
+  },
+  "openFailed": "Impossible d'ouvrir la conversation.",
+  "conversationReady": "La conversation avec {{name}} est prête. Les messages arrivent à la prochaine étape.",
+  "noPeople": "Personne ici.",
+  "noUnread": "Aucun message non lu.",
+  "callsSoon": "Le journal des appels s'affichera ici une fois les appels activés.",
+  "meetingsSoon": "Les réunions s'afficheront ici une fois activées.",
+  "meetingsNotInPlan": "Les réunions font partie de l'offre Pro."
+}

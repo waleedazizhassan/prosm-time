@@ -33,6 +33,16 @@ export const PLAN_FEATURES = [
   // 2026-11-11 HR suite: employee documents and the penalties bylaw (Business+)
   "documents",
   "penalties",
+  // 2026-11-13 PROSM Connect (Business: chat, verified photo, calls, site message; Pro: push-to-talk, meetings,
+  // screen sharing, meeting recording)
+  "connect_chat",
+  "connect_camera_photo",
+  "connect_calls",
+  "connect_site_broadcast",
+  "connect_push_to_talk",
+  "connect_meetings",
+  "connect_screen_share",
+  "connect_meeting_recording",
 ] as const;
 export type PlanFeature = (typeof PLAN_FEATURES)[number];
 

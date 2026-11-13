@@ -1,0 +1,37 @@
+{
+  "title": "在任何地点与团队沟通",
+  "lead": "PROSM Time 内的聊天、通话和会议。服务器只负责传递；对话保存在您的手机上。",
+  "myNumber": "您的分机号",
+  "switchboard": "总机",
+  "tabsLabel": "PROSM Connect 栏目",
+  "tabs": {
+    "chats": "聊天",
+    "calls": "通话",
+    "meetings": "会议"
+  },
+  "searchPlaceholder": "按姓名、号码或地点搜索",
+  "filtersLabel": "筛选",
+  "filters": {
+    "all": "全部",
+    "sites": "在地点",
+    "teams": "团队",
+    "unread": "未读"
+  },
+  "presence": {
+    "in": "在岗",
+    "break": "休息中",
+    "out": "不在",
+    "atSite": "在 {{site}}"
+  },
+  "actions": {
+    "message": "给 {{name}} 发消息",
+    "callSoon": "通话即将推出"
+  },
+  "openFailed": "无法打开对话。",
+  "conversationReady": "与 {{name}} 的对话已就绪。消息将在下一阶段推出。",
+  "noPeople": "这里没有人。",
+  "noUnread": "没有未读消息。",
+  "callsSoon": "通话启用后，通话记录将显示在这里。",
+  "meetingsSoon": "会议启用后将显示在这里。",
+  "meetingsNotInPlan": "会议属于 Pro 套餐。"
+}

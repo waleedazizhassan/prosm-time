@@ -337,3 +337,8 @@ entrypoint = "./functions/announcement-email/index.ts"
 # 2026-11-12: a short shared map link opened for a signed-in member (Google hosts only)
 [functions.resolve-map-link]
 verify_jwt = true
+
+# PROSM Connect: removes the temporary bucket's files of received or expired requests; service role only
+[functions.connect-cleanup]
+enabled = true
+verify_jwt = false
