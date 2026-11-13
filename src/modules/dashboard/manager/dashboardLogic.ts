@@ -1,8 +1,8 @@
 // v2.3.43 step 17: the dashboard's pure rules, kept apart so they are tested.
 
 export type Period = "day" | "week" | "month" | "custom";
-export type WidgetId = "map" | "present" | "sites" | "approvals" | "documents" | "external" | "people" | "chart" | "insights" | "moods" | "cost" | "audit";
-export const DEFAULT_ORDER: WidgetId[] = ["map", "present", "sites", "approvals", "documents", "external", "people", "chart", "insights", "moods", "cost", "audit"];
+export type WidgetId = "map" | "present" | "sites" | "approvals" | "documents" | "external" | "people" | "chart" | "insights" | "latePeriod" | "moods" | "cost" | "audit";
+export const DEFAULT_ORDER: WidgetId[] = ["map", "present", "sites", "approvals", "documents", "external", "people", "chart", "insights", "latePeriod", "moods", "cost", "audit"];
 
 export function iso(date: Date): string {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;

@@ -43,12 +43,13 @@ vi.mock("../../core/repositories/PeopleDirectoryRepository", () => ({
 import PeopleByRole from "./PeopleByRole";
 
 describe("PeopleByRole", () => {
-  it("shows managers (with the Owner), supervisors, employees, viewers - names in order", async () => {
+  it("shows the Owner on their own, then managers, supervisors, employees, viewers - names in order (owner 2026-11-13)", async () => {
     const { container } = render(<PeopleByRole />);
-    await waitFor(() => expect(container.querySelectorAll("section")).toHaveLength(4));
+    await waitFor(() => expect(container.querySelectorAll("section")).toHaveLength(5));
     const titles = [...container.querySelectorAll("section")].map((section) => section.querySelector("button")!.textContent);
-    expect(titles[0]).toContain("2");
-    const employeeNames = [...container.querySelectorAll("section")[2].querySelectorAll("li")].map((li) => li.textContent ?? "");
+    expect(titles[0]).toContain("1");
+    expect(titles[1]).toContain("1");
+    const employeeNames = [...container.querySelectorAll("section")[3].querySelectorAll("li")].map((li) => li.textContent ?? "");
     expect(employeeNames[0]).toContain("Amr");
     expect(employeeNames[1]).toContain("Zeinab");
   });

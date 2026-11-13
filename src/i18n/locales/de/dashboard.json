@@ -252,8 +252,10 @@
       "battery": {
         "title": "Akku-Optimierung für PROSM Time ausschalten",
         "hint": "PROSM Time auf „Nicht optimiert“ oder „Unbeschränkt“ stellen.",
-        "action": "Einstellungen"
-      }
+        "action": "Einstellungen",
+        "why": "Hält die Schichtbegleitung auf Handys stabil, die Apps zum Akkusparen anhalten. Ohne dies funktioniert das Einstempeln wie gewohnt."
+      },
+      "optional": "Optional"
     },
     "mood": {
       "question": "Wie war die Arbeit heute?",
@@ -394,7 +396,8 @@
       "external": "Externe Arbeitskräfte",
       "insights": "Anwesenheitskennzahlen",
       "documents": "Dokumente",
-      "moods": "Schichtbewertungen"
+      "moods": "Schichtbewertungen",
+      "latePeriod": "Verspätungen im Zeitraum"
     },
     "sos": {
       "text": "SOS von {{name}} bei {{site}} seit {{time}}",
@@ -690,9 +693,10 @@
       "title": {
         "present": "Jetzt anwesend",
         "hours": "Stunden pro Person",
-        "late": "Verspätungen",
+        "late": "Heute zu spät",
         "overtime": "Überstunden pro Person",
-        "overdue": "Nicht ausgestempelt"
+        "overdue": "Nicht ausgestempelt",
+        "latePeriod": "Verspätungen im Zeitraum"
       },
       "open": {
         "present": "Heutige Anwesenheit",
@@ -700,14 +704,16 @@
         "late": "Verspätungsbericht",
         "overtime": "Überstunden genehmigen",
         "absent": "Abwesenheitsbericht",
-        "overdue": "Bericht fehlende Ausstempelungen"
+        "overdue": "Bericht fehlende Ausstempelungen",
+        "latePeriod": "Verspätungsbericht"
       },
       "empty": {
         "present": "Niemand ist eingestempelt.",
         "hours": "Keine Stunden in diesem Zeitraum.",
-        "late": "Keine Verspätungen in diesem Zeitraum.",
+        "late": "Heute ist niemand zu spät.",
         "overtime": "Keine Überstunden in diesem Zeitraum.",
-        "overdue": "Niemand hat das Ausstempeln vergessen."
+        "overdue": "Niemand hat das Ausstempeln vergessen.",
+        "latePeriod": "Keine Verspätungen in diesem Zeitraum."
       },
       "periodNote": "Für den oben gewählten Zeitraum.",
       "lateBy": "{{minutes}} Min. · da um {{time}}",
@@ -727,10 +733,14 @@
         "lateTotal": "Verspätung gesamt",
         "overtimeWaiting": "Wartet auf Freigabe",
         "shiftEnded": "Schicht endete",
-        "overdueBy": "Überfällig"
+        "overdueBy": "Überfällig",
+        "arrived": "Gekommen",
+        "lateBy": "Zu spät"
       },
       "overdueFor": "{{hours}} Std. {{minutes}} Min.",
-      "clockOutAction": "Ausstempeln"
+      "clockOutAction": "Ausstempeln",
+      "todayNote": "Nur heute - Verspätungen über Woche oder Monat stehen in der Karte „Verspätungen im Zeitraum“.",
+      "afterStart": "nach Schichtbeginn"
     },
     "export": {
       "action": "Dashboard als PDF exportieren",
@@ -762,6 +772,10 @@
       "byDay": "Nach Tag",
       "noSite": "Ohne Standort",
       "scoreShort": "{{score}}% · {{count}}"
+    },
+    "latePeriod": {
+      "figures": "{{days}} T · {{minutes}} Min",
+      "all": "Alle anzeigen"
     }
   },
   "devices": {

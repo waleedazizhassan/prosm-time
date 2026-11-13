@@ -536,19 +536,23 @@
     "intro": "O app precisa de três permissões para funcionar por completo. Veja para que serve cada uma:",
     "location": {
       "title": "Localização",
-      "body": "Usada para confirmar que você está no local de trabalho ao registrar a entrada e a saída. Nos locais onde sua organização ativou o controle de presença, e somente enquanto o seu ponto está aberto, o PROSM Time coleta sua localização a cada 5 minutos, aproximadamente, mesmo com o app fechado ou sem uso, com uma notificação contínua o tempo todo, e para quando você registra a saída. Sua localização é compartilhada com os gestores da organização e apagada após 30 dias."
+      "body": "Serve para verificar que está no local de trabalho ao registar a entrada e a saída. Só durante o turno a sua localização é registada a cada 5 minutos, aproximadamente - no Android mesmo com a app fechada, com uma notificação visível o tempo todo - e para assim que registar a saída. Os responsáveis da sua organização podem vê-la; é apagada após 30 dias.",
+      "short": "Para verificar que está no local de trabalho; registada só durante o turno."
     },
     "camera": {
       "title": "Câmera",
-      "body": "Para tirar uma foto ao registrar a entrada ou a saída, somente nos locais que exigem. A câmera só abre quando você mesmo tira a foto."
+      "body": "Para tirar uma foto ao registrar a entrada ou a saída, somente nos locais que exigem. A câmera só abre quando você mesmo tira a foto.",
+      "short": "Para a foto de entrada e saída, só nos locais que a pedem."
     },
     "notifications": {
       "title": "Notificações",
-      "body": "Para respostas aos seus pedidos de afastamento e aprovações, lembretes de entrada e saída, alertas urgentes e a notificação do turno enquanto o seu ponto está aberto."
+      "body": "Para respostas aos seus pedidos de afastamento e aprovações, lembretes de entrada e saída, alertas urgentes e a notificação do turno enquanto o seu ponto está aberto.",
+      "short": "Para respostas, lembretes e alertas urgentes."
     },
     "footer": "Depois de \"Continuar\", o Android pede cada permissão por vez: escolha \"Permitir\" ou \"Durante o uso do app\". Você pode mudar qualquer permissão depois nas configurações do celular.",
     "accept": "Continuar",
-    "decline": "Agora não"
+    "decline": "Agora não",
+    "details": "Detalhes"
   },
   "numerals": {
     "label": "Números",

@@ -13,7 +13,9 @@ export type TrackingNeed = "consent" | "location" | "notifications" | "battery";
 // shift starts only when the phone can follow it - the person agreed, location and notifications are
 // allowed, and the phone does not put PROSM Time to sleep to save battery. Each missing step has its
 // button; "Check again" continues to the clock-in once everything is ready.
-export default function TrackingGate({ missing, onCheck, onClose }: { missing: TrackingNeed[]; onCheck: () => void; onClose: () => void }) {
+// Owner 2026-11-13: the battery exemption is no longer demanded - it is shown apart, marked optional, with
+// what it is for; the shift starts without it.
+export default function TrackingGate({ missing, optional = [], onCheck, onClose }: { missing: TrackingNeed[]; optional?: TrackingNeed[]; onCheck: () => void; onClose: () => void }) {
   const { t } = useTranslation("dashboard");
   const icon = { consent: ShieldCheck, location: MapPin, notifications: Bell, battery: BatteryCharging };
   const act = async (need: TrackingNeed) => {
@@ -31,16 +33,17 @@ export default function TrackingGate({ missing, onCheck, onClose }: { missing: T
       )}>
       <p className={styles.lead}>{t("attendance.trackingGate.lead")}</p>
       <ul className={styles.list}>
-        {missing.map((need) => {
+        {[...missing, ...optional].map((need) => {
+          const isOptional = optional.includes(need) && !missing.includes(need);
           const Icon = icon[need];
           return (
             <li key={need} className={styles.item}>
               <Icon size={18} aria-hidden="true" className={styles.icon} />
               <span className={styles.text}>
-                <strong>{t(`attendance.trackingGate.${need}.title`)}</strong>
-                <small>{t(`attendance.trackingGate.${need}.hint`)}</small>
+                <strong>{t(`attendance.trackingGate.${need}.title`)}{isOptional ? <span className={styles.optional}>{t("attendance.trackingGate.optional")}</span> : null}</strong>
+                <small>{t(isOptional ? `attendance.trackingGate.${need}.why` : `attendance.trackingGate.${need}.hint`)}</small>
               </span>
-              <Button size="sm" onClick={() => void act(need)}>{t(`attendance.trackingGate.${need}.action`)}</Button>
+              <Button size="sm" variant={isOptional ? "ghost" : "primary"} onClick={() => void act(need)}>{t(`attendance.trackingGate.${need}.action`)}</Button>
             </li>
           );
         })}

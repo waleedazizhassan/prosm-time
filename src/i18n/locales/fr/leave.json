@@ -110,5 +110,7 @@
       "public_holiday": "jour férié",
       "day_off": "jour de congé"
     }
-  }
+  },
+  "reviewerDeputy": "remplace le propriétaire",
+  "reviewerSiteManager": "responsable de votre site"
 }

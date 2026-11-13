@@ -251,7 +251,8 @@
       "managers": "Responsabili",
       "supervisors": "Supervisori",
       "employees": "Dipendenti",
-      "viewers": "Osservatori"
+      "viewers": "Osservatori",
+      "owner": "Titolare"
     },
     "invitation": {
       "pending": "Invito non ancora accettato",
@@ -449,6 +450,8 @@
     "media": {
       "title": "Centro media",
       "hint": "Pubblicare e gestire comunicazioni"
-    }
+    },
+    "stillHeld": "Non è stato revocato tutto: questa persona ha l'autorità completa del titolare. Revocala prima con il pulsante «{{owner}}».",
+    "viaOwner": "Viene con l'autorità del titolare - si revoca lì"
   }
 }

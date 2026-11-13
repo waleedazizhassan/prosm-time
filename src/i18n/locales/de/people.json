@@ -251,7 +251,8 @@
       "managers": "Führungskräfte",
       "supervisors": "Vorarbeiter",
       "employees": "Mitarbeitende",
-      "viewers": "Betrachter"
+      "viewers": "Betrachter",
+      "owner": "Inhaber"
     },
     "invitation": {
       "pending": "Einladung noch nicht angenommen",
@@ -446,6 +447,8 @@
     "media": {
       "title": "Medienzentrum",
       "hint": "Mitteilungen veröffentlichen und verwalten"
-    }
+    },
+    "stillHeld": "Nicht alles entzogen: Diese Person hat die volle Befugnis des Inhabers. Entziehen Sie diese zuerst über die Schaltfläche „{{owner}}“.",
+    "viaOwner": "Kommt mit der Befugnis des Inhabers - dort entziehen"
   }
 }

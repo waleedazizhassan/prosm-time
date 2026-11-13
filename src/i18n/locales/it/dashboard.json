@@ -255,8 +255,10 @@
       "battery": {
         "title": "Disattiva il risparmio batteria per PROSM Time",
         "hint": "Scegli PROSM Time e impostalo su «Non ottimizzata» o «Senza limitazioni».",
-        "action": "Impostazioni"
-      }
+        "action": "Impostazioni",
+        "why": "Mantiene regolare il monitoraggio del turno sui telefoni che fermano le app per risparmiare batteria. Senza, la timbratura funziona come sempre."
+      },
+      "optional": "Facoltativo"
     },
     "mood": {
       "question": "Com’è andato il lavoro oggi?",
@@ -397,7 +399,8 @@
       "external": "Lavoratori esterni",
       "insights": "Indicatori di presenza",
       "documents": "Documenti",
-      "moods": "Valutazione dei turni"
+      "moods": "Valutazione dei turni",
+      "latePeriod": "Ritardi nel periodo"
     },
     "sos": {
       "text": "SOS da {{name}} a {{site}} dalle {{time}}",
@@ -693,9 +696,10 @@
       "title": {
         "present": "Presenti ora",
         "hours": "Ore per persona",
-        "late": "Ritardi",
+        "late": "In ritardo oggi",
         "overtime": "Straordinari per persona",
-        "overdue": "Uscita non timbrata"
+        "overdue": "Uscita non timbrata",
+        "latePeriod": "Ritardi nel periodo"
       },
       "open": {
         "present": "Presenze di oggi",
@@ -703,14 +707,16 @@
         "late": "Rapporto ritardi",
         "overtime": "Approva straordinari",
         "absent": "Rapporto assenze",
-        "overdue": "Rapporto uscite mancanti"
+        "overdue": "Rapporto uscite mancanti",
+        "latePeriod": "Rapporto ritardi"
       },
       "empty": {
         "present": "Nessuno ha timbrato.",
         "hours": "Nessuna ora in questo periodo.",
-        "late": "Nessun ritardo in questo periodo.",
+        "late": "Nessuno è in ritardo oggi.",
         "overtime": "Nessuno straordinario in questo periodo.",
-        "overdue": "Nessuno ha dimenticato di timbrare l'uscita."
+        "overdue": "Nessuno ha dimenticato di timbrare l'uscita.",
+        "latePeriod": "Nessun ritardo in questo periodo."
       },
       "periodNote": "Per il periodo scelto sopra.",
       "lateBy": "{{minutes}} min · entrato alle {{time}}",
@@ -731,10 +737,14 @@
         "lateTotal": "Ritardo totale",
         "overtimeWaiting": "Da approvare",
         "shiftEnded": "Fine turno",
-        "overdueBy": "In ritardo"
+        "overdueBy": "In ritardo",
+        "arrived": "Arrivato",
+        "lateBy": "Ritardo"
       },
       "overdueFor": "{{hours}} h {{minutes}} min",
-      "clockOutAction": "Timbra uscita"
+      "clockOutAction": "Timbra uscita",
+      "todayNote": "Solo oggi - i ritardi della settimana o del mese sono nella scheda «Ritardi nel periodo».",
+      "afterStart": "dopo l'inizio del turno"
     },
     "export": {
       "action": "Esporta la dashboard in PDF",
@@ -767,6 +777,10 @@
       "byDay": "Per giorno",
       "noSite": "Senza sede",
       "scoreShort": "{{score}}% · {{count}}"
+    },
+    "latePeriod": {
+      "figures": "{{days}} g · {{minutes}} min",
+      "all": "Vedi tutto"
     }
   },
   "devices": {

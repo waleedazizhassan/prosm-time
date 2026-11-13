@@ -65,7 +65,8 @@
       "approved": "已批准",
       "rejected": "已拒绝",
       "cancelled": "已取消"
-    }
+    },
+    "noColleagues": "当天没有空闲的同事：所有人都在休假或同一时间有班次。"
   },
   "cost": {
     "title": "排班成本",
@@ -120,5 +121,6 @@
     "hint": "点击空格添加班次，点击班次可取消。颜色来自班次模板；✓ 表示已出勤。",
     "days": "日期",
     "assignDays": "添加 {{count}} 个班次"
-  }
+  },
+  "assignedOnlyHint": "仅显示已分配到此地点的人员。"
 }

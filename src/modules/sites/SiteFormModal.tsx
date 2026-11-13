@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import SiteRepository, { SITE_TYPES, type Site, type KioskMode, type SiteOwnerKind, type SiteType } from "../../core/repositories/SiteRepository";
 import OrganizationRepository from "../../core/repositories/OrganizationRepository";
 import { getCurrentPosition, haversineDistanceMeters } from "../../core/utils/geo";
-import { parseMapLink } from "../../core/utils/mapLink";
+import { extractMapLink, parseMapLink } from "../../core/utils/mapLink";
+import { reverseGeocodeAddress } from "../../core/utils/reverseGeocode";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 
 import Modal from "../../components/common/Modal";
@@ -57,7 +58,7 @@ function deviceTimeZone(): string {
 }
 
 export default function SiteFormModal({ isOpen, onClose, onSaved, site, defaultKioskMode = "personal_device_only" }: SiteFormModalProps) {
-  const { t } = useTranslation("sites");
+  const { t, i18n } = useTranslation("sites");
   const isEditing = Boolean(site);
 
   const [name, setName] = useState(site?.name ?? "");
@@ -118,6 +119,7 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site, defaultK
       const position = await getCurrentPosition();
       setLatitude(String(position.latitude));
       setLongitude(String(position.longitude));
+      void fillAddress(position.latitude, position.longitude);
     } catch (geoError) {
       setLocationError(geoError instanceof Error ? geoError.message : t("form.locationError"));
     } finally {
@@ -131,9 +133,12 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site, defaultK
     let found = parseMapLink(mapLink);
     if (found === "short") {
       setReadingLink(true);
-      const opened = await SiteRepository.resolveMapLink(mapLink.trim());
+      const opened = await SiteRepository.resolveMapLink(extractMapLink(mapLink));
       setReadingLink(false);
-      found = opened ? parseMapLink(opened) : null;
+      // owner 2026-11-13: the server reads the position from the page too when the opened address has none
+      found = opened && opened.latitude !== null && opened.longitude !== null
+        ? { latitude: opened.latitude, longitude: opened.longitude }
+        : opened ? parseMapLink(opened.url) : null;
       if (found === "short") found = null;
     }
     if (!found) {
@@ -143,6 +148,14 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site, defaultK
     setLatitude(String(found.latitude));
     setLongitude(String(found.longitude));
     setMapLink("");
+    void fillAddress(found.latitude, found.longitude);
+  };
+
+  // owner 2026-11-13: a site's address is filled from its position when it is still empty
+  const fillAddress = async (lat: number, lng: number) => {
+    if (displayAddress.trim()) return;
+    const address = await reverseGeocodeAddress(lat, lng, i18n.language.slice(0, 2));
+    if (address) setDisplayAddress((current) => current.trim() || address);
   };
 
   const handleTestLocation = async () => {
@@ -169,9 +182,16 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site, defaultK
     setSubmitting(true);
     setError("");
 
+    // an empty address is filled from the position before saving (owner 2026-11-13: "the card shows '—'")
+    let address = displayAddress.trim();
+    if (!address && Number.isFinite(Number(latitude)) && Number.isFinite(Number(longitude)) && latitude !== "" && longitude !== "") {
+      address = (await reverseGeocodeAddress(Number(latitude), Number(longitude), i18n.language.slice(0, 2))) ?? "";
+      if (address) setDisplayAddress(address);
+    }
+
     const input = {
       name: name.trim(),
-      displayAddress: displayAddress.trim() || null,
+      displayAddress: address || null,
       latitude: Number(latitude),
       longitude: Number(longitude),
       allowedRadiusMeters: Number(allowedRadiusMeters),

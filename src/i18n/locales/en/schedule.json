@@ -65,7 +65,8 @@
       "approved": "Approved",
       "rejected": "Rejected",
       "cancelled": "Cancelled"
-    }
+    },
+    "noColleagues": "No colleague is free that day: everyone is on leave or has a shift at the same time."
   },
   "cost": {
     "title": "Roster cost",
@@ -120,5 +121,6 @@
     "hint": "Tap an empty cell to add a shift, or a shift to cancel it. The colour comes from the shift template; ✓ means it was worked.",
     "days": "Days",
     "assignDays": "Add {{count}} shifts"
-  }
+  },
+  "assignedOnlyHint": "Only people assigned to this site are shown."
 }

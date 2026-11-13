@@ -23,6 +23,13 @@ async function presenceId() {
 }
 const sample = async (at: { latitude: number; longitude: number }, accuracy: number) =>
   t.as<{ r: { exit: Record<string, unknown> | null } }>(worker.authId, "select public.record_prosm_time_presence_sample($1, $2, $3, $4) as r", [await presenceId(), at.latitude, at.longitude, accuracy]);
+// 2026-11-13: leaving is confirmed by 3 good readings outside over at least 3 minutes
+const leave = async () => {
+  await sample(outside, 10);
+  await sample(outside, 10);
+  await t.su("update presence_sessions set exit_since = now() - interval '4 minutes' where id = $1", [await presenceId()]);
+  await sample(outside, 10);
+};
 const prompts = async () => (await t.su("select id from notifications where user_id = $1 and type = 'exit_site_prompt'", [worker.userId])).length;
 
 async function freshShift() {
@@ -42,16 +49,32 @@ beforeAll(async () => {
 });
 
 describe("leaving the site (item 24)", () => {
-  it("setting a policy turns presence monitoring on; PROMPT asks once after two good outside readings", async () => {
+  it("setting a policy turns presence monitoring on; PROMPT asks once, only after leaving is confirmed", async () => {
     const [{ on }] = await t.su<{ on: boolean }>("select presence_monitoring_enabled as on from sites where id = $1", [site]);
     expect(on).toBe(true);
     await freshShift();
     expect((await sample(outside, 10)).error).toBeNull();
     expect(await prompts()).toBe(0);
     await sample(outside, 10);
+    await sample(outside, 10);
+    // three good readings within seconds are not yet a confirmed leaving (owner 2026-11-13)
+    expect(await prompts()).toBe(0);
+    await t.su("update presence_sessions set exit_since = now() - interval '4 minutes' where id = $1", [await presenceId()]);
+    await sample(outside, 10);
     expect(await prompts()).toBe(1);
     await sample(outside, 10);
     expect(await prompts()).toBe(1);
+  });
+
+  it("a single reading outside, however accurate, never opens a reason request (owner 2026-11-13)", async () => {
+    await freshShift();
+    await t.su("delete from geofence_exceptions where user_id = $1", [worker.userId]);
+    await sample(outside, 19);
+    await sample(inside, 19);
+    await sample(outside, 19);
+    expect(await t.su("select id from geofence_exceptions where user_id = $1", [worker.userId])).toHaveLength(0);
+    await leave();
+    expect(await t.su("select id from geofence_exceptions where user_id = $1", [worker.userId])).toHaveLength(1);
   });
 
   it("a quick out and back, and weak readings, change nothing", async () => {
@@ -72,8 +95,7 @@ describe("leaving the site (item 24)", () => {
     await freshShift();
     const sessionId = await openSessionId(t, worker);
     await t.su("update attendance_sessions set clock_in_at = now() - interval '3 hours' where id = $1", [sessionId]);
-    await sample(outside, 10);
-    await sample(outside, 10);
+    await leave();
     await t.su("update presence_sessions set exit_since = now() - interval '15 minutes' where id = $1", [await presenceId()]);
     expect((await t.su<{ n: number }>("select public.process_prosm_time_site_exits() as n"))[0].n).toBe(1);
     expect((await t.su<{ n: number }>("select public.process_prosm_time_site_exits() as n"))[0].n).toBe(0);
@@ -96,16 +118,14 @@ describe("leaving the site (item 24)", () => {
   it("PROMPT sites use the normal clock-out, not the confirm-at-leave-time one", async () => {
     await t.as(org.owner.authId, "select public.set_prosm_time_site_exit_policy($1, 'PROMPT', null, null)", [site]);
     await freshShift();
-    await sample(outside, 10);
-    await sample(outside, 10);
+    await leave();
     expect((await t.as(worker.authId, "select public.confirm_prosm_time_site_exit()")).error).toMatch(/NORMAL CLOCK-OUT/);
     await t.as(org.owner.authId, "select public.set_prosm_time_site_exit_policy($1, 'AUTO', 10, null)", [site]);
   });
 
   it("'still working' stops the automatic clock-out", async () => {
     await freshShift();
-    await sample(outside, 10);
-    await sample(outside, 10);
+    await leave();
     expect((await t.as(worker.authId, "select public.respond_prosm_time_site_exit('still_working')")).error).toBeNull();
     await t.su("update presence_sessions set exit_since = now() - interval '30 minutes' where id = $1", [await presenceId()]);
     expect((await t.su<{ n: number }>("select public.process_prosm_time_site_exits() as n"))[0].n).toBe(0);
@@ -115,8 +135,7 @@ describe("leaving the site (item 24)", () => {
   it("a field worker is never prompted nor clocked out", async () => {
     expect((await t.as(org.owner.authId, "select public.set_prosm_time_field_worker($1, true)", [worker.userId])).error).toBeNull();
     await freshShift();
-    await sample(outside, 10);
-    await sample(outside, 10);
+    await leave();
     expect(await prompts()).toBe(0);
   });
 

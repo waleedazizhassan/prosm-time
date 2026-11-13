@@ -90,16 +90,26 @@ export default function PermissionBundles({ userId, effective, overrides, catalo
     } else {
       const bundle = PERMISSION_BUNDLES.find((b) => b.id === pending.id)!;
       for (const key of keysOf(bundle)) {
-        // never twice: grant only what is missing; take back only what was given on top of the role
+        // never twice: grant only what is missing
         if (pending.action === "grant" && effective.includes(key)) continue;
-        if (pending.action === "revoke" && overrides[key] !== true) continue;
+        if (pending.action === "revoke" && !effective.includes(key)) continue;
+        // owner 2026-11-13: taking back really takes back - one given on top of the role is cleared, one the
+        // role (or chosen delegated authority) brings is withdrawn for this person
         const r = pending.action === "grant"
           ? await PermissionRepository.setOverride(userId, key, true, reason.trim())
-          : await PermissionRepository.clearOverride(userId, key, reason.trim());
+          : overrides[key] === true
+            ? await PermissionRepository.clearOverride(userId, key, reason.trim())
+            : await PermissionRepository.setOverride(userId, key, false, reason.trim());
         if (!r.success) { failure = r.message; break; }
+      }
+      // and it is checked: anything still held after taking back comes with the owner's whole authority
+      if (!failure && pending.action === "revoke") {
+        const after = await PermissionRepository.getEffectivePermissions(userId);
+        if (after.success && keysOf(bundle).some((k) => (after.data ?? []).includes(k))) failure = "BUNDLE STILL HELD";
       }
     }
     setBusy(false);
+    if (failure === "BUNDLE STILL HELD") { onChanged(); return setError(t("bundles.stillHeld", { owner: t("bundles.owner.title") })); }
     if (failure) return setError(humanizeBackendError(failure, t) ?? t("detail.genericError"));
     setPending(null);
     setReason("");
@@ -107,12 +117,13 @@ export default function PermissionBundles({ userId, effective, overrides, catalo
     onChanged();
   };
 
-  const button = (id: string, Icon: LucideIcon, granted: boolean, partial: string | null, disabled = false) => (
+  const ownerFull = Boolean(activeDelegation && activeDelegation.scope !== "partial" && new Date(activeDelegation.startsAt).getTime() <= Date.now());
+  const button = (id: string, Icon: LucideIcon, granted: boolean, partial: string | null, disabled = false, note: string | null = null) => (
     <div key={id} style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", padding: "var(--space-2) var(--space-3)", border: "1px solid var(--border-light)", borderRadius: "var(--radius-md)" }}>
       <Icon size={18} aria-hidden="true" color={granted ? "var(--status-success-text)" : "var(--brand-primary)"} />
       <span style={{ flex: 1, minWidth: 0 }}>
         <strong style={{ display: "block", fontSize: "var(--font-sm)" }}>{t(`bundles.${id}.title`)}</strong>
-        <small style={{ color: "var(--text-secondary)" }}>{granted ? <><BadgeCheck size={12} aria-hidden="true" /> {t("bundles.granted")}</> : partial ?? t(`bundles.${id}.hint`)}</small>
+        <small style={{ color: "var(--text-secondary)" }}>{note ?? (granted ? <><BadgeCheck size={12} aria-hidden="true" /> {t("bundles.granted")}</> : partial ?? t(`bundles.${id}.hint`))}</small>
       </span>
       <Button size="xs" variant={granted ? "ghost" : "primary"} disabled={disabled} onClick={() => { setReason(""); setError(""); setStartDate(""); setEndDate(""); setPending({ id, action: granted ? "revoke" : "grant" }); }}>
         {granted ? t("bundles.revoke") : t("bundles.grant")}
@@ -128,6 +139,8 @@ export default function PermissionBundles({ userId, effective, overrides, catalo
         {PERMISSION_BUNDLES.map((b) => {
           const s = state(b);
           if (s.keys.length === 0) return null;
+          // with the owner's whole authority every permission comes from it: it is withdrawn there, not here
+          if (ownerFull) return button(b.id, b.icon, s.all, null, true, t("bundles.viaOwner"));
           return button(b.id, b.icon, s.all, s.held > 0 ? t("bundles.partial", { held: s.held, total: s.keys.length }) : null);
         })}
       </div>

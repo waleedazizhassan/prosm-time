@@ -205,11 +205,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
     window.addEventListener("online", handleOnline);
 
+    // Owner 2026-11-13: permissions taken back (or given) reach a session that is already open - read again
+    // when the app comes back to the screen (at most once a minute) and every 5 minutes while it is open.
+    let lastRefresh = Date.now();
+    const refreshIfDue = (minGapMs: number) => {
+      if (!mounted || !isAuthenticatedRef.current || document.visibilityState !== "visible") return;
+      if (Date.now() - lastRefresh < minGapMs) return;
+      lastRefresh = Date.now();
+      void loadProfile();
+    };
+    const handleVisible = () => refreshIfDue(60_000);
+    document.addEventListener("visibilitychange", handleVisible);
+    const refreshTimer = setInterval(() => refreshIfDue(5 * 60_000), 60_000);
+
     return () => {
       mounted = false;
       clearTimeout(offlineTimer);
+      clearInterval(refreshTimer);
       subscription.unsubscribe();
       window.removeEventListener("online", handleOnline);
+      document.removeEventListener("visibilitychange", handleVisible);
     };
   }, [loadProfile]);
 

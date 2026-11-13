@@ -1,0 +1,85 @@
+/* Owner 2026-11-13: the permissions at the start, in the new look - a small card for each */
+.intro {
+  margin: 0 0 var(--space-3);
+  font-size: var(--font-sm);
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.cards {
+  list-style: none;
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.card {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  padding: var(--space-3);
+  border-radius: 14px;
+  border: 1px solid var(--border-light);
+  background: var(--surface-hover);
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--brand-gradient);
+}
+
+.text {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.title {
+  font-size: var(--font-sm);
+}
+
+.short {
+  font-size: var(--font-xs);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.body {
+  margin-top: var(--space-1);
+  font-size: var(--font-xs);
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+.more {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--font-xs);
+  color: var(--text-link);
+  cursor: pointer;
+}
+
+.turned {
+  transform: rotate(180deg);
+}
+
+.footer {
+  margin: 0;
+  font-size: var(--font-xs);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}

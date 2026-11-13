@@ -17,6 +17,7 @@ import PageShell from "../../components/common/PageShell";
 import Card from "../../components/common/Card";
 import Input from "../../components/common/Input";
 import Select from "../../components/common/Select";
+import MonthFolders from "../../components/common/MonthFolders";
 import Table, { type TableColumn } from "../../components/common/Table";
 import StatusBadge from "../../components/common/StatusBadge";
 import Modal from "../../components/common/Modal";
@@ -119,6 +120,12 @@ function DeviceTimeBadge({ label, hint }: { label: string; hint: string }) {
 
 // Owner 2026-11-12: one's own attendance lives in My file -> Attendance (this log is embedded there with
 // the person's rows only); the page itself is the team log for those who hold attendance.view.
+// the record's local day (YYYY-MM-DD), for the month folders
+const rowDay = (row: TodayAttendanceRow) => {
+  const d = new Date(row.clockInAt);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+};
+
 export default function AttendanceLogPage({ embedded = false, selfUserId }: { embedded?: boolean; selfUserId?: string } = {}) {
   const { t, i18n } = useTranslation("attendanceLog");
   const { profile, hasPermission } = useAuth();
@@ -394,7 +401,16 @@ export default function AttendanceLogPage({ embedded = false, selfUserId }: { em
           </Button>
         </div>
         {monthView ? <AttendanceMonthGrid sessions={filteredRows} startDate={startDate} endDate={endDate} employeeHeader={t("columns.employee")} emptyMessage={t("empty")} /> : null}
-        {!monthView ? <Table grid columns={columns} data={filteredRows} getRowId={(row) => row.sessionId} loading={loading} emptyMessage={t("empty")} groupBy={groupRow} /> : null}
+        {/* owner 2026-11-13: each month's records in a folder named after the month, drawn only when opened */}
+        {!monthView ? (
+          loading || filteredRows.length === 0 ? (
+            <Table grid columns={columns} data={filteredRows} getRowId={(row) => row.sessionId} loading={loading} emptyMessage={t("empty")} groupBy={groupRow} />
+          ) : (
+            <MonthFolders items={filteredRows} dayOf={rowDay}>
+              {(monthRows) => <Table grid columns={columns} data={monthRows} getRowId={(row) => row.sessionId} emptyMessage={t("empty")} groupBy={groupRow} />}
+            </MonthFolders>
+          )
+        ) : null}
         {!loading && filteredRows.length > 0 ? (
           <p style={{ margin: "var(--space-3) 0 0", fontSize: "var(--font-sm)", fontWeight: "var(--font-weight-semibold)", color: "var(--text-primary)" }}>
             {t("totalHours", { hours: formatHours(filteredRows.reduce((sum, row) => sum + sessionHours(row), 0)), count: filteredRows.length })}

@@ -75,6 +75,8 @@ export default function SchedulePage() {
 
   const [sites, setSites] = useState<Site[]>([]);
   const [members, setMembers] = useState<OrgMember[]>([]);
+  // owner 2026-11-13: only the people assigned to the chosen site can be scheduled there
+  const [siteMemberIds, setSiteMemberIds] = useState<Set<string> | null>(null);
   const [templates, setTemplates] = useState<ShiftTemplate[]>([]);
   const [breakTemplate, setBreakTemplate] = useState<ShiftTemplate | null>(null);
   const [selectedSiteId, setSelectedSiteId] = useState("");
@@ -134,6 +136,15 @@ export default function SchedulePage() {
       setMembers(result.success ? result.data ?? [] : []);
     });
   }, [canManage, profileId, profile?.isOwner]);
+
+  useEffect(() => {
+    if (!selectedSiteId) return;
+    let live = true;
+    void SiteRepository.listSiteAssignments(selectedSiteId).then((result) => {
+      if (live) setSiteMemberIds(result.success ? new Set((result.data ?? []).map((a) => a.userId)) : null);
+    });
+    return () => { live = false; };
+  }, [selectedSiteId]);
 
   const loadSiteData = useCallback(async () => {
     if (!canManage || !selectedSiteId) return;
@@ -350,8 +361,11 @@ export default function SchedulePage() {
             value={assignUserId}
             onChange={(event) => setAssignUserId(event.target.value)}
             disabled={assignSubmitting}
-            options={[{ value: "", label: t("selectEmployeePlaceholder") }, ...members.map((member) => ({ value: member.id, label: member.fullName }))]}
+            options={[{ value: "", label: t("selectEmployeePlaceholder") }, ...members
+              .filter((member) => !siteMemberIds || siteMemberIds.has(member.id) || member.isOwner)
+              .map((member) => ({ value: member.id, label: member.fullName }))]}
           />
+          <HintText small>{t("assignedOnlyHint")}</HintText>
           {templates.length > 0 ? (
             <Select
               label={t("templateLabel")}

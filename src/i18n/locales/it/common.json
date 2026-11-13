@@ -112,7 +112,7 @@
     "employeeClockedInDifferentSite": "Questo dipendente ha timbrato l'entrata in un sito diverso.",
     "employeeCurrentlyClockedIn": "Questo dipendente ha attualmente timbrato l'entrata.",
     "employeeNotAssignedToProject": "Questo dipendente non è assegnato a questo progetto.",
-    "employeeNotAssignedToSite": "Questo dipendente non è assegnato a questo sito.",
+    "employeeNotAssignedToSite": "Non è possibile pianificare questa persona in questa sede perché non vi è assegnata. Assegnala prima dalla pagina Sedi.",
     "employeeNotCurrentlyClockedIn": "Questo dipendente non ha attualmente timbrato l'entrata.",
     "exceptionAlreadyHasReason": "Questa eccezione ha già un motivo.",
     "invitationAlreadyUsed": "Questo invito è già stato utilizzato.",
@@ -485,5 +485,10 @@
       "back": "Indietro",
       "seePlan": "Vedi il piano"
     }
+  },
+  "monthFolders": {
+    "count_one": "{{count}} registrazione",
+    "count_other": "{{count}} registrazioni",
+    "count_many": "{{count}} registrazioni"
   }
 }

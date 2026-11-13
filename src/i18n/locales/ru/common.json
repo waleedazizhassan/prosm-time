@@ -112,7 +112,7 @@
     "employeeClockedInDifferentSite": "Этот сотрудник отмечен на другом объекте.",
     "employeeCurrentlyClockedIn": "Этот сотрудник сейчас на смене.",
     "employeeNotAssignedToProject": "Этот сотрудник не назначен на этот проект.",
-    "employeeNotAssignedToSite": "Этот сотрудник не назначен на этот объект.",
+    "employeeNotAssignedToSite": "Этого сотрудника нельзя поставить в смену на этом объекте: он к нему не назначен. Сначала назначьте его на странице «Объекты».",
     "employeeNotCurrentlyClockedIn": "Этот сотрудник сейчас не на смене.",
     "exceptionAlreadyHasReason": "У этого исключения уже есть причина.",
     "invitationAlreadyUsed": "Это приглашение уже использовано.",
@@ -485,5 +485,11 @@
       "back": "Назад",
       "seePlan": "Посмотреть тариф"
     }
+  },
+  "monthFolders": {
+    "count_one": "{{count}} запись",
+    "count_few": "{{count}} записи",
+    "count_many": "{{count}} записей",
+    "count_other": "{{count}} записи"
   }
 }

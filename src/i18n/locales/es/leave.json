@@ -110,5 +110,7 @@
       "public_holiday": "festivo",
       "day_off": "día libre"
     }
-  }
+  },
+  "reviewerDeputy": "en nombre del propietario",
+  "reviewerSiteManager": "responsable de tu sitio"
 }

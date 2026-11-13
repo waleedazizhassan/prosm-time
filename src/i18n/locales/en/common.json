@@ -112,7 +112,7 @@
     "employeeClockedInDifferentSite": "This employee is clocked in at a different site.",
     "employeeCurrentlyClockedIn": "This employee is currently clocked in.",
     "employeeNotAssignedToProject": "This employee isn't assigned to this project.",
-    "employeeNotAssignedToSite": "This employee isn't assigned to this site.",
+    "employeeNotAssignedToSite": "This employee is not assigned to this site, so this can't be done here. Assign them to the site first, on the Sites page.",
     "employeeNotCurrentlyClockedIn": "This employee isn't currently clocked in.",
     "exceptionAlreadyHasReason": "This exception already has a reason.",
     "invitationAlreadyUsed": "This invitation has already been used.",
@@ -485,5 +485,9 @@
       "back": "Go back",
       "seePlan": "See the plan"
     }
+  },
+  "monthFolders": {
+    "count_one": "{{count}} record",
+    "count_other": "{{count}} records"
   }
 }

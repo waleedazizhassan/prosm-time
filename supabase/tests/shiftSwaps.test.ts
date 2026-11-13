@@ -52,8 +52,8 @@ describe("shift swaps", () => {
 
     expect((await request(t, taker, id, giver.userId)).error).toMatch(/SHIFT NOT FOUND/);
     expect((await request(t, giver, id, outsider.userId)).error).toMatch(/NOT AT THIS SITE/);
-    const asked = await request(t, giver, id, taker.userId);
-    expect((await t.as(org.owner.authId, "select public.decide_prosm_time_shift_swap($1, true)", [asked.rows![0].id])).error).toMatch(/OVERLAPPING/);
-    expect((await t.su<{ status: string }>("select status from shift_swap_requests"))[0].status).toBe("pending");
+    // owner 2026-11-13: someone with an overlapping shift that day is not offered, and cannot be asked
+    expect((await request(t, giver, id, taker.userId)).error).toMatch(/NOT AT THIS SITE/);
+    expect(await t.su("select id from shift_swap_requests")).toHaveLength(0);
   });
 });

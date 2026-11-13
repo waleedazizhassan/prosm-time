@@ -109,5 +109,7 @@
       "public_holiday": "public holiday",
       "day_off": "day off"
     }
-  }
+  },
+  "reviewerDeputy": "acting for the owner",
+  "reviewerSiteManager": "your site's manager"
 }

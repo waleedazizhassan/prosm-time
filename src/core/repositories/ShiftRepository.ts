@@ -219,13 +219,19 @@ class ShiftRepository {
   // everyone's shifts in the organisation, which are not "mine".
   async listMine(userId: string): Promise<ServiceResult<MyShiftRow[]>> {
     try {
+      // owner 2026-11-13: one's own shifts come with their site's name, even at a site one is not assigned to
+      // (the call answers only for the signed-in person; for someone else the names stay as read)
+      const own = await Promise.resolve()
+        .then(() => this.client.rpc("list_prosm_time_my_shifts"))
+        .catch(() => ({ data: null, error: { message: "unavailable" } }));
       const { data, error } = await this.client
         .from("shift_assignments")
         .select("id, shift_date, start_time, end_time, status, notes, cancelled_reason, sites(name)")
         .eq("user_id", userId)
         .order("shift_date", { ascending: true });
       if (error) return createError(error.message);
-      return createSuccess((data ?? []).map(mapMyShiftRow));
+      const names = new Map<string, string>(!own.error && Array.isArray(own.data) ? (own.data as { id: string; site_name: string | null }[]).map((r) => [r.id, r.site_name ?? ""]) : []);
+      return createSuccess((data ?? []).map(mapMyShiftRow).map((row) => (row.siteName ? row : { ...row, siteName: names.get(row.id) ?? "" })));
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Schedule service unavailable.");
     }

@@ -12,10 +12,12 @@ import LoadingState from "../../components/common/LoadingState";
 import EmptyState from "../../components/common/EmptyState";
 import styles from "./PeopleByRole.module.css";
 
-// The groups, in order: managers (the Owner with them), supervisors,
+// The groups, in order: the Owner, managers, supervisors,
 // employees, viewers, then any other role by its own order and name.
 function groupOf(person: DirectoryPerson): { key: string; sort: number; label: string | null } {
-  if (person.isOwner || person.roleKey === "owner" || person.roleKey === "manager") return { key: "managers", sort: 20, label: null };
+  // owner 2026-11-13: the owner in a group of their own at the top, not among the managers
+  if (person.isOwner || person.roleKey === "owner") return { key: "owner", sort: 10, label: null };
+  if (person.roleKey === "manager") return { key: "managers", sort: 20, label: null };
   if (person.roleKey === "supervisor") return { key: "supervisors", sort: 30, label: null };
   if (person.roleKey === "employee") return { key: "employees", sort: 40, label: null };
   if (person.roleKey === "read_only") return { key: "viewers", sort: 50, label: null };

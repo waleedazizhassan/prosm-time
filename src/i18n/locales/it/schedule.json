@@ -65,7 +65,8 @@
       "approved": "Approvato",
       "rejected": "Rifiutato",
       "cancelled": "Annullato"
-    }
+    },
+    "noColleagues": "Nessun collega è libero quel giorno: tutti sono in ferie o hanno un turno alla stessa ora."
   },
   "cost": {
     "title": "Costo del turno",
@@ -120,5 +121,6 @@
     "hint": "Tocca una cella vuota per aggiungere un turno, o un turno per annullarlo. Il colore viene dal modello; ✓ significa lavorato.",
     "days": "Giorni",
     "assignDays": "Aggiungi {{count}} turni"
-  }
+  },
+  "assignedOnlyHint": "Sono mostrate solo le persone assegnate a questa sede."
 }

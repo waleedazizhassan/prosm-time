@@ -24,6 +24,13 @@ const sample = async (member: TestMember, at: { latitude: number; longitude: num
   const result = await t.as(member.authId, "select public.record_prosm_time_presence_sample($1, $2, $3, 8)", [await presenceId(member), at.latitude, at.longitude]);
   if (result.error) throw new Error(result.error);
 };
+// 2026-11-13: leaving is confirmed by 3 good readings outside over at least 3 minutes
+const confirmOutside = async (member: TestMember) => {
+  await sample(member, OUTSIDE);
+  await sample(member, OUTSIDE);
+  await t.su("update presence_sessions set exit_since = now() - interval '4 minutes' where user_id = $1 and status = 'active'", [member.userId]);
+  await sample(member, OUTSIDE);
+};
 const exceptions = async (member: TestMember) =>
   (await t.su<{ n: number }>("select count(*)::int as n from geofence_exceptions where user_id = $1", [member.userId]))[0].n;
 // Samples are minutes apart in real life; keep the timeline ordered in the test.
@@ -46,6 +53,9 @@ describe("one reason request per time outside", () => {
     await later(emp);
 
     await sample(emp, OUTSIDE);
+    // one reading outside is not a leaving yet (owner 2026-11-13)
+    expect(await exceptions(emp)).toBe(0);
+    await confirmOutside(emp);
     expect(await exceptions(emp)).toBe(1);
     await sample(emp, OUTSIDE);
     expect(await exceptions(emp)).toBe(1);
@@ -56,7 +66,7 @@ describe("one reason request per time outside", () => {
 
     await sample(emp, INSIDE);
     await later(emp);
-    await sample(emp, OUTSIDE);
+    await confirmOutside(emp);
     expect(await exceptions(emp)).toBe(2);
   });
 
@@ -64,7 +74,7 @@ describe("one reason request per time outside", () => {
     const emp = await employee("Mona Elsayed");
     expect((await clockIn(t, emp, siteId, OUTSIDE)).error).toBeNull();
     expect(await exceptions(emp)).toBe(1);
-    await sample(emp, OUTSIDE);
+    await confirmOutside(emp);
     expect(await exceptions(emp)).toBe(1);
 
     expect((await t.as(emp.authId, "select public.clock_out_prosm_time_attendance(gen_random_uuid()::text, null, $1, $2, 8)", [OUTSIDE.latitude, OUTSIDE.longitude])).error).toBeNull();

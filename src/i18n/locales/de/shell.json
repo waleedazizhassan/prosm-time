@@ -530,19 +530,23 @@
     "intro": "Die App braucht drei Berechtigungen, um vollständig zu funktionieren. Wofür jede verwendet wird:",
     "location": {
       "title": "Standort",
-      "body": "Bestätigt beim Ein- und Ausstempeln, dass Sie an Ihrem Arbeitsort sind. An Orten, für die Ihre Organisation die Anwesenheitsüberwachung eingeschaltet hat, und nur solange Sie eingestempelt sind, erfasst PROSM Time Ihren Standort etwa alle 5 Minuten, auch wenn die App geschlossen ist oder nicht verwendet wird, mit einer dauerhaften Benachrichtigung während der ganzen Zeit, und hört beim Ausstempeln auf. Ihr Standort ist für die Vorgesetzten Ihrer Organisation sichtbar und wird nach 30 Tagen gelöscht."
+      "body": "Wird verwendet, um beim Ein- und Ausstempeln zu prüfen, ob Sie am Arbeitsort sind. Nur während Ihrer Schicht wird Ihr Standort etwa alle 5 Minuten erfasst - unter Android auch bei geschlossener App, die ganze Zeit mit sichtbarer Benachrichtigung - und es endet sofort mit dem Ausstempeln. Die Leitung Ihrer Organisation kann ihn sehen; er wird nach 30 Tagen gelöscht.",
+      "short": "Um zu prüfen, ob Sie am Arbeitsort sind; nur während der Schicht erfasst."
     },
     "camera": {
       "title": "Kamera",
-      "body": "Für ein Foto beim Ein- oder Ausstempeln, nur an Orten, die eines verlangen. Die Kamera öffnet sich nur, wenn Sie das Foto selbst aufnehmen."
+      "body": "Für ein Foto beim Ein- oder Ausstempeln, nur an Orten, die eines verlangen. Die Kamera öffnet sich nur, wenn Sie das Foto selbst aufnehmen.",
+      "short": "Für das Foto beim Ein- und Ausstempeln, nur an Standorten, die es verlangen."
     },
     "notifications": {
       "title": "Benachrichtigungen",
-      "body": "Für Antworten auf Ihre Urlaubsanträge und Freigaben, Erinnerungen ans Ein- und Ausstempeln, dringende Hinweise und die Schicht-Benachrichtigung, solange Sie eingestempelt sind."
+      "body": "Für Antworten auf Ihre Urlaubsanträge und Freigaben, Erinnerungen ans Ein- und Ausstempeln, dringende Hinweise und die Schicht-Benachrichtigung, solange Sie eingestempelt sind.",
+      "short": "Für Antworten, Erinnerungen und dringende Hinweise."
     },
     "footer": "Nach „Weiter“ fragt Android jede Berechtigung einzeln ab: Wählen Sie „Zulassen“ oder „Während der App-Nutzung“. Sie können jede Berechtigung später in den Telefoneinstellungen ändern.",
     "accept": "Weiter",
-    "decline": "Nicht jetzt"
+    "decline": "Nicht jetzt",
+    "details": "Details"
   },
   "numerals": {
     "label": "Ziffern",

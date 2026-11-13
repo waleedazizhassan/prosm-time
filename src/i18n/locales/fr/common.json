@@ -112,7 +112,7 @@
     "employeeClockedInDifferentSite": "Cet employé a pointé son arrivée sur un site différent.",
     "employeeCurrentlyClockedIn": "Cet employé a actuellement pointé son arrivée.",
     "employeeNotAssignedToProject": "Cet employé n'est pas affecté à ce projet.",
-    "employeeNotAssignedToSite": "Cet employé n'est pas affecté à ce site.",
+    "employeeNotAssignedToSite": "Impossible de planifier cette personne sur ce site : elle n'y est pas affectée. Affectez-la d'abord au site depuis la page Sites.",
     "employeeNotCurrentlyClockedIn": "Cet employé n'a pas pointé son arrivée actuellement.",
     "exceptionAlreadyHasReason": "Cette exception a déjà un motif.",
     "invitationAlreadyUsed": "Cette invitation a déjà été utilisée.",
@@ -485,5 +485,10 @@
       "back": "Retour",
       "seePlan": "Voir l'offre"
     }
+  },
+  "monthFolders": {
+    "count_one": "{{count}} entrée",
+    "count_other": "{{count}} entrées",
+    "count_many": "{{count}} entrées"
   }
 }

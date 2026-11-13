@@ -112,7 +112,7 @@
     "employeeClockedInDifferentSite": "Este empleado tiene la entrada fichada en otra sede.",
     "employeeCurrentlyClockedIn": "Este empleado tiene ahora la entrada fichada.",
     "employeeNotAssignedToProject": "Este empleado no está asignado a este proyecto.",
-    "employeeNotAssignedToSite": "Este empleado no está asignado a esta sede.",
+    "employeeNotAssignedToSite": "No se puede programar a esta persona en este sitio porque no está asignada a él. Asígnala primero en la página Sitios.",
     "employeeNotCurrentlyClockedIn": "Este empleado no tiene ahora la entrada fichada.",
     "exceptionAlreadyHasReason": "Esta excepción ya tiene un motivo.",
     "invitationAlreadyUsed": "Esta invitación ya se usó.",
@@ -485,5 +485,10 @@
       "back": "Volver",
       "seePlan": "Ver el plan"
     }
+  },
+  "monthFolders": {
+    "count_one": "{{count}} registro",
+    "count_other": "{{count}} registros",
+    "count_many": "{{count}} registros"
   }
 }

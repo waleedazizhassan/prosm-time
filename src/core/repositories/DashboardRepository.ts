@@ -156,6 +156,8 @@ export interface ManagerDashboard {
   holidays: { name: string; startDate: string; endDate: string }[];
   absence?: DashboardAbsence[];
   byPerson?: DashboardPersonFigures[];
+  // owner 2026-11-13: today's late people (the same rule as the "late today" count)
+  lateTodayList?: { userId: string; name: string; avatarUrl: string | null; siteName: string | null; lateMinutes: number; firstIn: string | null }[];
   // owner 2026-10-27: still clocked in an hour or more after their shift ended
   overdue?: { userId: string; name: string; avatarUrl: string | null; siteName: string | null; clockInAt: string; endedAt: string; overdueMinutes: number }[];
 }

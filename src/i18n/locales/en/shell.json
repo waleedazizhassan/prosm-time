@@ -530,19 +530,23 @@
     "intro": "The app needs three permissions to work fully. This is what each one is used for:",
     "location": {
       "title": "Location",
-      "body": "Used to confirm that you are at your work site when you clock in and out. At sites where your organisation has turned on presence monitoring, and only while you are clocked in, PROSM Time collects your location about every 5 minutes, even when the app is closed or not in use, with an ongoing notification the whole time, and stops when you clock out. Your location is shared with your organisation's managers and deleted after 30 days."
+      "body": "Used to check you are at the work site when you clock in and out. During your shift only, your location is recorded about every 5 minutes - on Android even with the app closed, with a visible notification the whole time - and it stops as soon as you clock out. Your organisation's managers can see it, and it is deleted after 30 days.",
+      "short": "To check you are at the work site; recorded during your shift only."
     },
     "camera": {
       "title": "Camera",
-      "body": "To take a photo when you clock in or out, only at sites that require one. The camera opens only when you take the photo yourself."
+      "body": "To take a photo when you clock in or out, only at sites that require one. The camera opens only when you take the photo yourself.",
+      "short": "For the clock-in and clock-out photo, only at sites that ask for one."
     },
     "notifications": {
       "title": "Notifications",
-      "body": "For answers to your leave requests and approvals, clock-in and clock-out reminders, urgent alerts, and the shift notification while you are clocked in."
+      "body": "For answers to your leave requests and approvals, clock-in and clock-out reminders, urgent alerts, and the shift notification while you are clocked in.",
+      "short": "For answers, reminders and urgent alerts."
     },
     "footer": "After \"Continue\", Android asks for each permission in turn: choose \"Allow\" or \"While using the app\". You can change any permission later in the phone's settings.",
     "accept": "Continue",
-    "decline": "Not now"
+    "decline": "Not now",
+    "details": "Details"
   },
   "numerals": {
     "label": "Numbers",

@@ -154,6 +154,9 @@ export interface LeavePreview {
   accepted: boolean;
 }
 
+/** Owner 2026-11-13: who a leave request can go to, with what they are (20261113170000). */
+export interface LeaveReviewer { id: string; name: string; isOwner: boolean; role?: string | null; managesMySite?: boolean; isDeputy?: boolean }
+
 class LeaveRepository {
   get client() {
     return DatabaseManager.getClient();
@@ -319,7 +322,7 @@ class LeaveRepository {
   }
 
   /** v2.3.55 (owner 2026-10-27): the people who may approve my leave - the requester picks one. */
-  async listReviewers(): Promise<ServiceResult<{ id: string; name: string; isOwner: boolean }[]>> {
+  async listReviewers(): Promise<ServiceResult<LeaveReviewer[]>> {
     try {
       const { data, error } = await this.client.rpc("list_prosm_time_leave_reviewers");
       if (error) return createError(error.message);

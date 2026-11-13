@@ -112,7 +112,7 @@
     "employeeClockedInDifferentSite": "Este funcionário está com o ponto aberto em outro local.",
     "employeeCurrentlyClockedIn": "Este funcionário está com o ponto aberto agora.",
     "employeeNotAssignedToProject": "Este funcionário não está atribuído a este projeto.",
-    "employeeNotAssignedToSite": "Este funcionário não está atribuído a este local.",
+    "employeeNotAssignedToSite": "Não é possível escalar esta pessoa neste local porque ela não está atribuída a ele. Atribua-a primeiro na página Locais.",
     "employeeNotCurrentlyClockedIn": "Este funcionário não está com o ponto aberto agora.",
     "exceptionAlreadyHasReason": "Esta exceção já tem um motivo.",
     "invitationAlreadyUsed": "Este convite já foi usado.",
@@ -485,5 +485,10 @@
       "back": "Voltar",
       "seePlan": "Ver o plano"
     }
+  },
+  "monthFolders": {
+    "count_one": "{{count}} registro",
+    "count_other": "{{count}} registros",
+    "count_many": "{{count}} registros"
   }
 }

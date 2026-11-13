@@ -251,7 +251,8 @@
       "managers": "Managers",
       "supervisors": "Supervisors",
       "employees": "Employees",
-      "viewers": "Viewers"
+      "viewers": "Viewers",
+      "owner": "Owner"
     },
     "invitation": {
       "pending": "Not accepted yet",
@@ -446,6 +447,8 @@
     "media": {
       "title": "Media Center",
       "hint": "Publish and manage announcements, follow reading"
-    }
+    },
+    "stillHeld": "Not all taken back: this person holds the owner's full authority. Withdraw it with the \"{{owner}}\" button first.",
+    "viaOwner": "Comes with the owner's authority - withdraw it there"
   }
 }
