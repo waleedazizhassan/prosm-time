@@ -249,7 +249,8 @@ export default function AttendanceLogPage({ embedded = false, selfUserId }: { em
   }, [grouping, i18n.language]);
 
   const columns: TableColumn<TodayAttendanceRow>[] = [
-    { key: "name", header: t("columns.employee"), sortValue: (row) => row.userFullName, render: (row) => <PersonName name={row.userFullName} userId={row.userId} /> },
+    // owner 2026-11-13: one person's own log does not repeat their name on every row (on a phone each row is a card)
+    ...(selfUserId ? [] : [{ key: "name", header: t("columns.employee"), sortValue: (row: TodayAttendanceRow) => row.userFullName, render: (row: TodayAttendanceRow) => <PersonName name={row.userFullName} userId={row.userId} /> }]),
     // owner 2026-11-03: the day of each record, so a week or a month reads without grouping
     ...(grouping === "day" ? [] : [{ key: "date", header: t("columns.date"), sortValue: (row: TodayAttendanceRow) => row.clockInAt, render: (row: TodayAttendanceRow) => <span style={{ whiteSpace: "nowrap" }}>{formatDateOnly(row.clockInAt, i18n.language)}</span> }]),
     {

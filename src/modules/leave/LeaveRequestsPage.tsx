@@ -223,13 +223,15 @@ function LeaveView({ mode }: { mode: "mine" | "org" }) {
   // Console's own job, unchanged), this page is purely the
   // organization-wide picture plus the Owner's own auto-approved
   // self-requests.
+  // owner 2026-11-13: on a phone the status and the days come first after the name, so a rejected request
+  // never looks like leave taken (the rest of the row scrolls sideways)
   const orgWideColumns: TableColumn<OrgWideLeaveRow>[] = [
     { key: "employee", header: t("columns.employee"), render: (row) => row.employeeName },
-    { key: "type", header: t("columns.type"), render: (row) => typeLabel(row.leaveType) },
+    { key: "status", header: t("columns.status"), render: (row) => <StatusBadge status={STATUS_BADGE_KEY[row.status]}>{t(`status.${row.status}`)}</StatusBadge> },
     { key: "dates", header: t("columns.dates"), render: (row) => `${formatDateOnly(row.startDate, i18n.language)} — ${formatDateOnly(row.endDate, i18n.language)}` },
     { key: "days", header: t("columns.days"), render: (row) => row.daysCount },
+    { key: "type", header: t("columns.type"), render: (row) => typeLabel(row.leaveType) },
     { key: "reason", header: t("columns.reason"), render: (row) => row.reason ?? "—" },
-    { key: "status", header: t("columns.status"), render: (row) => <StatusBadge status={STATUS_BADGE_KEY[row.status]}>{t(`status.${row.status}`)}</StatusBadge> },
     { key: "reviewedBy", header: t("columns.reviewedBy"), render: (row) => row.reviewedByName ?? "—" },
   ];
 

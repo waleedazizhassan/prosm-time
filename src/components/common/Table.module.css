@@ -166,41 +166,112 @@
   cursor: pointer;
 }
 
-/* The spreadsheet look stays a table on a phone and scrolls sideways. */
+/* Owner 2026-11-13: the app is used on a phone above all - the spreadsheet look sideways-scrolled there
+   (columns cut off at the side, a narrow date squeezed out of view). On a phone every table, the spreadsheet
+   ones too, becomes cards: the first column is the card's title, then each value beside its column name. */
 @media (max-width: 767px) {
   .gridScroll {
-    border: 1px solid var(--border-light);
-    background: var(--surface-card);
-    overflow: auto;
+    max-height: none;
+    overflow: visible;
   }
 
   .table.grid {
+    min-width: 0;
+  }
+
+  .grid th:first-child,
+  .grid td:first-child {
+    position: static;
+  }
+
+  .grid .cell {
+    white-space: normal;
+  }
+
+  .row {
+    overflow: hidden;
+  }
+
+  .row > .cell {
+    align-items: center;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--font-sm);
+    overflow-wrap: anywhere;
+    min-width: 0;
+  }
+
+  .row > .cell:first-child {
+    justify-content: flex-start;
+    text-align: start;
+    font-weight: var(--font-weight-semibold);
+    background: var(--surface-sunken);
+  }
+
+  .row > .cell:first-child::before {
+    content: none;
+  }
+
+  .row > .cell:last-child {
+    border-bottom: none;
+  }
+
+  .table tbody > tr:not(.row) {
+    display: block;
+  }
+
+  .table .groupCell {
+    display: block;
+    padding: var(--space-2) 0;
+    border: 0;
+    background: transparent;
+  }
+}
+
+/* A matrix (people by days) stays a table on a phone and scrolls sideways inside its card. */
+@media (max-width: 767px) {
+  .tableScroll:has(.wide) {
+    overflow-x: auto;
+    border: 1px solid var(--border-light);
+    background: var(--surface-card);
+  }
+
+  .table.wide {
     display: table;
     min-width: 640px;
   }
 
-  .grid thead {
+  .table.wide thead {
     display: table-header-group;
   }
 
-  .grid tbody {
+  .table.wide tbody {
     display: table-row-group;
   }
 
-  .grid .row {
+  .table.wide .row {
     display: table-row;
     margin: 0;
     border: 0;
+    border-radius: 0;
   }
 
-  .grid .row > .cell {
+  .table.wide .row > .cell {
     display: table-cell;
+    width: auto;
     text-align: start;
-    border-bottom: 1px solid var(--border-light);
+    white-space: nowrap;
+    background: none;
+    font-weight: inherit;
   }
 
-  .grid .row > .cell::before {
+  .table.wide .row > .cell::before {
     content: none;
+  }
+
+  .table.wide th:first-child,
+  .table.wide td:first-child {
+    position: sticky;
+    background: var(--surface-card);
   }
 }
 

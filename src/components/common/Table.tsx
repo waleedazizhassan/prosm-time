@@ -28,6 +28,8 @@ interface TableProps<T> {
   // Plan stage 4.2, the spreadsheet look for long lists: compact rows, the header
   // and the first column stay in view, and it scrolls sideways on a phone.
   grid?: boolean;
+  // owner 2026-11-13: on a phone every table becomes cards; a matrix (people by days) keeps its columns and scrolls sideways
+  wideOnPhone?: boolean;
   // Rows per page; a grid defaults to 50. A long list stays quick on a phone.
   pageSize?: number;
   // Rows of the same group together, each group under its own heading.
@@ -43,7 +45,7 @@ interface TableProps<T> {
 // selection/density are PROSM Platform's own Table features this
 // product doesn't need yet - the shape (columns + render) is what's
 // shared, not every capability.
-export default function Table<T>({ columns, data, getRowId, loading = false, emptyTitle, emptyMessage, emptyIllustrationSrc, onRowClick, grid = false, pageSize, groupBy }: TableProps<T>) {
+export default function Table<T>({ columns, data, getRowId, loading = false, emptyTitle, emptyMessage, emptyIllustrationSrc, onRowClick, grid = false, wideOnPhone = false, pageSize, groupBy }: TableProps<T>) {
   const { t } = useTranslation("common");
   const [page, setPage] = useState(0);
   const [sort, setSort] = useState<{ key: string; direction: 1 | -1 } | null>(null);
@@ -87,7 +89,7 @@ export default function Table<T>({ columns, data, getRowId, loading = false, emp
   return (
     <div className={styles.wrapper}>
       <div className={grid ? `${styles.tableScroll} ${styles.gridScroll}` : styles.tableScroll}>
-        <table className={grid ? `${styles.table} ${styles.grid}` : styles.table}>
+        <table className={`${styles.table}${grid ? ` ${styles.grid}` : ""}${wideOnPhone ? ` ${styles.wide}` : ""}`}>
           <thead>
             <tr>
               {columns.map((column) => (
