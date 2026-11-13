@@ -163,7 +163,8 @@ export default function AdminOverviewCard() {
         LeaveRepository.listToday(),
         AttendanceRepository.listOnBreakNow(),
         DashboardRepository.getSummary(),
-        LeaveRepository.listPendingReview(),
+        // screens review 2026-11-13: only someone who approves leave asks for the leave queue
+        hasPermission("leave.approve") ? LeaveRepository.listPendingReview() : Promise.resolve({ success: true, message: null, data: [] }),
         TimesheetRepository.listPendingApprovals(),
       ]);
     const realSites = sitesResult.success ? (sitesResult.data ?? []) : [];
@@ -209,7 +210,7 @@ export default function AdminOverviewCard() {
       setScheduledHours(0);
     }
     setLoading(false);
-  }, [profileId, isOwner, roleKey, t]);
+  }, [profileId, isOwner, roleKey, hasPermission, t]);
 
   // Owner 2026-10-20 ("someone is clocked in and the card doesn't show it"):
   // the numbers refresh every minute and whenever the app comes back to the front.

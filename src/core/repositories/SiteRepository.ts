@@ -328,6 +328,8 @@ class SiteRepository {
   }
 
   async getSite(siteId: string): Promise<ServiceResult<Site>> {
+    // screens review 2026-11-13: no site (working without one) is not a lookup - it asked for id "null"
+    if (!siteId || siteId === "null") return createError("Site not found.");
     try {
       const { data, error } = await this.client.from("sites").select("*").eq("id", siteId).maybeSingle();
       if (error) return createError(error.message);

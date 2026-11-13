@@ -72,6 +72,18 @@ export default function Table<T>({ columns, data, getRowId, loading = false, emp
   const rows = grouped.slice(current * perPage, (current + 1) * perPage);
   const toggleSort = (key: string) => setSort((current) => (current?.key === key ? { key, direction: current.direction === 1 ? -1 : 1 } : { key, direction: 1 }));
 
+  // screens review 2026-11-13: an empty or loading table says so across the whole width - inside the table's
+  // horizontal scroll (wider than a phone) the message sat cut off at one side
+  if (loading || data.length === 0) {
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.emptyCell}>
+          {loading ? <LoadingState size="sm" /> : <EmptyState title={emptyTitle} message={emptyMessage} illustrationSrc={emptyIllustrationSrc} />}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={grid ? `${styles.tableScroll} ${styles.gridScroll}` : styles.tableScroll}>
