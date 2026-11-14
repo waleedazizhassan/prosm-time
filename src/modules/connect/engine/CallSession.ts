@@ -35,7 +35,13 @@ export class CallSession {
   private listeners = new Set<() => void>();
   private unsubscribe: (() => void) | null = null;
 
+  // closing the page / app hangs up instead of leaving the other side alone in the call
+  private onPageHide = () => {
+    if (!["ended", "failed", "busy", "rejected", "missed"].includes(this.state)) void this.hangup();
+  };
+
   private constructor(callId: string, peerId: string, media: "audio" | "video", outgoing: boolean) {
+    window.addEventListener("pagehide", this.onPageHide);
     this.callId = callId;
     this.peerId = peerId;
     this.media = media;
@@ -148,16 +154,22 @@ export class CallSession {
     pc.onconnectionstatechange = () => {
       const s = pc.connectionState;
       if (s === "connected") {
+        if (this.dropTimer !== null) {
+          window.clearTimeout(this.dropTimer);
+          this.dropTimer = null;
+        }
         this.everConnected = true;
         if (!this.startedAt) this.startedAt = Date.now();
         this.set("connected");
       } else if (s === "disconnected") {
         this.set("reconnecting");
+        this.armDropTimer();
         // a short drop (a changed network): restart the path if it does not come back by itself
         this.timers.push(window.setTimeout(() => {
           if (this.pc?.connectionState === "disconnected") void this.restart();
         }, 2500));
       } else if (s === "failed") {
+        this.armDropTimer();
         if (this.everConnected) void this.restart();
         else void this.hangup("failed");
       }
@@ -174,6 +186,20 @@ export class CallSession {
     }, 2000);
     this.timers.push(tick);
     return pc;
+  }
+
+  // owner 2026-11-14: "if the call drops on one side it keeps going on the other" - a connection that stays lost for
+  // 20 seconds (the other app closed, its network gone) ends the call on this side too
+  private dropTimer: number | null = null;
+  private armDropTimer() {
+    if (this.dropTimer !== null) return;
+    this.dropTimer = window.setTimeout(() => {
+      this.dropTimer = null;
+      const s = this.pc?.connectionState;
+      // a call that had been talking simply ends (the screen closes by itself); one that never got through says so
+      if (this.state !== "ended" && s !== "connected") void this.hangup(this.everConnected ? "hangup" : "failed");
+    }, 20000);
+    this.timers.push(this.dropTimer);
   }
 
   private watchConnection() {
@@ -298,6 +324,7 @@ export class CallSession {
     if (this.channel) void ConnectEngine.supabase.removeChannel(this.channel);
     this.channel = null;
     this.unsubscribe?.();
+    window.removeEventListener("pagehide", this.onPageHide);
     this.set(state);
   }
 

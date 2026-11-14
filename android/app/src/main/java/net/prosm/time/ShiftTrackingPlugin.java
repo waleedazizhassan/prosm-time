@@ -118,6 +118,14 @@ public class ShiftTrackingPlugin extends Plugin {
         call.resolve();
     }
 
+    /** PROSM Connect (owner 2026-11-14): the app shows its own call screen - the phone's ringing for it stops. */
+    @PluginMethod
+    public void silenceConnectCall(PluginCall call) {
+        android.app.NotificationManager manager = getContext().getSystemService(android.app.NotificationManager.class);
+        if (manager != null) manager.cancel(SosMessagingService.CALL_NOTIFICATION_ID);
+        call.resolve();
+    }
+
     @PluginMethod
     public void openAppSettings(PluginCall call) {
         openDetails(getContext());

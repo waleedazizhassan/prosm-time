@@ -23,6 +23,7 @@ const RING_FOR_S = 45;
 
 interface ConnectSoundPlugin {
   setConnectSound(options: { sound: boolean; vibrate: boolean }): Promise<void>;
+  silenceConnectCall(): Promise<void>;
 }
 const Native = registerPlugin<ConnectSoundPlugin>("ShiftTracking");
 
@@ -128,6 +129,14 @@ function start(build: (ctx: Ctx, out: GainNode) => void, volume: number): () => 
 
 /** The incoming call rings (and vibrates) until the returned function is called. */
 export function startRingtone(prefs = loadSoundPrefs()): () => void {
+  // the app rings itself - the phone's own ringing for the same call stops (and again shortly after, if the push
+  // arrived after the app had the call)
+  if (Capacitor.isNativePlatform()) {
+    const hush = () => void Native.silenceConnectCall().catch(() => undefined);
+    hush();
+    window.setTimeout(hush, 1500);
+    window.setTimeout(hush, 4000);
+  }
   const stopSound = prefs.volume > 0
     ? start((ctx, out) => {
         let at = ctx.currentTime + 0.05;
