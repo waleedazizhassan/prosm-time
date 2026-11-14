@@ -9,7 +9,7 @@
     "calls": "通话",
     "meetings": "会议"
   },
-  "searchPlaceholder": "按姓名、号码或地点搜索",
+  "searchPlaceholder": "按姓名或地点搜索",
   "filtersLabel": "筛选",
   "filters": {
     "all": "全部",
@@ -76,7 +76,8 @@
       "failed": "无法接通",
       "busy": "忙线",
       "rejected": "已拒绝",
-      "missed": "未接来电"
+      "missed": "未接来电",
+      "ringingThere": "正在响铃…"
     },
     "reply": {
       "atSite": "我在现场，稍后回电",
@@ -130,7 +131,9 @@
     "verifiedCamera": "认证相机",
     "verifiedPhoto": "认证照片",
     "recording": "正在录音… 松开发送",
-    "talking": "正在讲话… 松开发送"
+    "talking": "正在讲话… 松开发送",
+    "today": "今天",
+    "yesterday": "昨天"
   },
   "info": {
     "inSince": "自 {{time}} 起在岗",
@@ -184,5 +187,22 @@
     "video": "视频",
     "files": "文件",
     "voice": "语音"
+  },
+  "sound": {
+    "title": "声音和振动",
+    "calls": "通话",
+    "messages": "消息",
+    "tone": "铃声",
+    "tones": {
+      "classic": "经典铃声",
+      "digital": "数字",
+      "marimba": "马林巴"
+    },
+    "volume": "音量",
+    "silent": "静音",
+    "callVibrate": "响铃时振动",
+    "messageSound": "新消息提示音",
+    "messageVibrate": "新消息振动",
+    "note": "这些设置只保存在本设备上。在 Android 应用中,即使应用已关闭或屏幕已锁定,来电也会以手机自己的铃声响起;在浏览器中页面必须保持打开。"
   }
 }

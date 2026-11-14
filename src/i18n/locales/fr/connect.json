@@ -9,7 +9,7 @@
     "calls": "Appels",
     "meetings": "Réunions"
   },
-  "searchPlaceholder": "Chercher par nom, numéro ou site",
+  "searchPlaceholder": "Rechercher par nom ou site",
   "filtersLabel": "Filtrer",
   "filters": {
     "all": "Tous",
@@ -76,7 +76,8 @@
       "failed": "Connexion impossible",
       "busy": "Occupé",
       "rejected": "Refusé",
-      "missed": "Appel manqué"
+      "missed": "Appel manqué",
+      "ringingThere": "Ça sonne…"
     },
     "reply": {
       "atSite": "Sur le site, je vous rappelle vite",
@@ -130,7 +131,9 @@
     "verifiedCamera": "Caméra vérifiée",
     "verifiedPhoto": "Photo vérifiée",
     "recording": "Enregistrement… relâchez pour envoyer",
-    "talking": "Vous parlez… relâchez pour envoyer"
+    "talking": "Vous parlez… relâchez pour envoyer",
+    "today": "Aujourd'hui",
+    "yesterday": "Hier"
   },
   "info": {
     "inSince": "Présent depuis {{time}}",
@@ -184,5 +187,22 @@
     "video": "Vidéo",
     "files": "Fichiers",
     "voice": "Voix"
+  },
+  "sound": {
+    "title": "Son et vibration",
+    "calls": "Appels",
+    "messages": "Messages",
+    "tone": "Sonnerie",
+    "tones": {
+      "classic": "Sonnette classique",
+      "digital": "Numérique",
+      "marimba": "Marimba"
+    },
+    "volume": "Volume",
+    "silent": "Silencieux",
+    "callVibrate": "Vibrer à la sonnerie",
+    "messageSound": "Son pour un nouveau message",
+    "messageVibrate": "Vibrer pour un nouveau message",
+    "note": "Ces réglages restent sur cet appareil. Dans l'app Android, un appel sonne avec la sonnerie du téléphone, même app fermée ou écran verrouillé ; dans un navigateur, la page doit être ouverte."
   }
 }

@@ -9,7 +9,7 @@
     "calls": "Chamadas",
     "meetings": "Reuniões"
   },
-  "searchPlaceholder": "Pesquise por nome, número ou local",
+  "searchPlaceholder": "Pesquisar por nome ou local",
   "filtersLabel": "Filtrar",
   "filters": {
     "all": "Todos",
@@ -76,7 +76,8 @@
       "failed": "Não foi possível ligar",
       "busy": "Ocupado",
       "rejected": "Recusada",
-      "missed": "Chamada perdida"
+      "missed": "Chamada perdida",
+      "ringingThere": "A tocar…"
     },
     "reply": {
       "atSite": "Estou no local, ligo-lhe já",
@@ -130,7 +131,9 @@
     "verifiedCamera": "Câmara verificada",
     "verifiedPhoto": "Foto verificada",
     "recording": "A gravar… solte para enviar",
-    "talking": "A falar… solte para enviar"
+    "talking": "A falar… solte para enviar",
+    "today": "Hoje",
+    "yesterday": "Ontem"
   },
   "info": {
     "inSince": "Presente desde {{time}}",
@@ -184,5 +187,22 @@
     "video": "Vídeo",
     "files": "Ficheiros",
     "voice": "Voz"
+  },
+  "sound": {
+    "title": "Som e vibração",
+    "calls": "Chamadas",
+    "messages": "Mensagens",
+    "tone": "Toque",
+    "tones": {
+      "classic": "Campainha clássica",
+      "digital": "Digital",
+      "marimba": "Marimba"
+    },
+    "volume": "Volume",
+    "silent": "Silêncio",
+    "callVibrate": "Vibrar ao tocar",
+    "messageSound": "Som para nova mensagem",
+    "messageVibrate": "Vibrar com nova mensagem",
+    "note": "Estas definições ficam apenas neste dispositivo. Na app Android a chamada toca com o toque do telemóvel, mesmo com a app fechada ou o ecrã bloqueado; no navegador a página tem de estar aberta."
   }
 }

@@ -107,6 +107,17 @@ public class ShiftTrackingPlugin extends Plugin {
         call.resolve();
     }
 
+    /** PROSM Connect (owner 2026-11-14): the person's sound / vibration choice for a call that rings while the app is closed. */
+    @PluginMethod
+    public void setConnectSound(PluginCall call) {
+        Context context = getContext();
+        context.getSharedPreferences(SosMessagingService.CONNECT_PREFS, Context.MODE_PRIVATE).edit()
+            .putBoolean("sound", Boolean.TRUE.equals(call.getBoolean("sound", true)))
+            .putBoolean("vibrate", Boolean.TRUE.equals(call.getBoolean("vibrate", true)))
+            .apply();
+        call.resolve();
+    }
+
     @PluginMethod
     public void openAppSettings(PluginCall call) {
         openDetails(getContext());

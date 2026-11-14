@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { HardDrive, MessageCircle, Phone, PhoneCall, PhoneIncoming, PhoneMissed, PhoneOutgoing, Radio, Search, Users, Video } from "lucide-react";
+import { HardDrive, MessageCircle, Phone, PhoneCall, PhoneIncoming, PhoneMissed, PhoneOutgoing, Radio, Search, Users, Video, Volume2 } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
@@ -13,6 +13,7 @@ import { ConnectEngine } from "./engine/ConnectEngine";
 import type { LocalConversation } from "./engine/localStore";
 import { useConnectContext } from "./ConnectProvider";
 import ChatView from "./ChatView";
+import SoundSettings from "./SoundSettings";
 import StoragePanel from "./StoragePanel";
 import GlassButton from "./GlassButton";
 import useConnect from "./useConnect";
@@ -40,6 +41,7 @@ export default function ConnectPage() {
   const [sites, setSites] = useState<Site[]>([]);
   const [calls, setCalls] = useState<CallRow[] | null>(null);
   const [storage, setStorage] = useState(false);
+  const [sounds, setSounds] = useState(false);
   const [error, setError] = useState("");
   const [meetingMedia, setMeetingMedia] = useState<"video" | "audio">("video");
   const [invitees, setInvitees] = useState<string[]>([]);
@@ -142,17 +144,15 @@ export default function ConnectPage() {
 
   const list = (
     <div className={styles.side}>
-      <section className={styles.hero}>
-        <div className={styles.heroText}>
-          <span className={styles.eyebrow}><Radio size={14} aria-hidden="true" /> PROSM Connect</span>
-          <h1 className={styles.title}>{t("title")}</h1>
-        </div>
-        <div className={styles.numbers}>
-          <div className={styles.number}><span>{t("myNumber")}</span><strong dir="ltr">{features?.myExtension ?? "—"}</strong></div>
-          <div className={styles.number}><span>{t("switchboard")}</span><strong dir="ltr">001</strong></div>
+      {/* owner 2026-11-14: a short header like a messaging app - no numbers (they had no use for the person) */}
+      <header className={styles.bar}>
+        <h1 className={styles.title}>{t(`tabs.${tab}`)}</h1>
+        <span className={styles.barActions}>
+          {features?.meetings ? <GlassButton label={t("meeting.newTitle")} size="small" onClick={() => navigate("/connect/meetings")}><Users size={16} /></GlassButton> : null}
+          <GlassButton label={t("sound.title")} size="small" onClick={() => setSounds(true)}><Volume2 size={16} /></GlassButton>
           <GlassButton label={t("storage.title")} size="small" onClick={() => setStorage(true)}><HardDrive size={16} /></GlassButton>
-        </div>
-      </section>
+        </span>
+      </header>
 
       <nav className={styles.tabs} aria-label={t("tabsLabel")}>
         {(["chats", "calls", "meetings"] as Tab[]).map((key) => (
@@ -200,12 +200,12 @@ export default function ConnectPage() {
                       <button type="button" className={selected === row.c.id ? `${styles.row} ${styles.rowOn}` : styles.row} onClick={() => setParams({ c: row.c.id })}>
                         <span className={styles.avatar}>
                           {p ? <Avatar name={p.fullName} url={p.avatarUrl} size="md" /> : <span className={styles.siteAvatar}><Radio size={16} /></span>}
-                          {p && p.presence !== "out" ? <i className={styles.online} aria-hidden="true" /> : null}
+                          {p ? <i className={`${styles.dot} ${styles[`dot_${p.presence}`]}`} aria-hidden="true" /> : null}
                         </span>
                         <span className={styles.main}>
-                          <span className={styles.name}>{titleOf(row.c, p)}{p && extensionOf(p.id) ? <small dir="ltr">{extensionOf(p.id)}</small> : null}</span>
+                          <span className={styles.name}>{titleOf(row.c, p)}</span>
                           <span className={styles.last}>{row.c.lastPreview}</span>
-                          {p ? <span className={p.presence === "out" ? `${styles.where} ${styles.whereOut}` : styles.where}>{where(p)}</span> : null}
+                          {p ? <span className={`${styles.where} ${styles[`where_${p.presence}`]}`}>{where(p)}</span> : null}
                         </span>
                         <span className={styles.end}>
                           <small>{row.c.lastAt > "1971" ? formatTimeOnly(row.c.lastAt, i18n.language) : ""}</small>
@@ -219,10 +219,10 @@ export default function ConnectPage() {
                 return (
                   <li key={p.id} className={styles.personRow}>
                     <button type="button" className={styles.row} onClick={() => void openPerson(p)}>
-                      <span className={styles.avatar}><Avatar name={p.fullName} url={p.avatarUrl} size="md" />{p.presence !== "out" ? <i className={styles.online} aria-hidden="true" /> : null}</span>
+                      <span className={styles.avatar}><Avatar name={p.fullName} url={p.avatarUrl} size="md" /><i className={`${styles.dot} ${styles[`dot_${p.presence}`]}`} aria-hidden="true" /></span>
                       <span className={styles.main}>
-                        <span className={styles.name}>{p.fullName}{extensionOf(p.id) ? <small dir="ltr">{extensionOf(p.id)}</small> : null}</span>
-                        <span className={p.presence === "out" ? `${styles.where} ${styles.whereOut}` : styles.where}>{where(p)}</span>
+                        <span className={styles.name}>{p.fullName}</span>
+                        <span className={`${styles.where} ${styles[`where_${p.presence}`]}`}>{where(p)}</span>
                       </span>
                     </button>
                     <span className={styles.actions}>
@@ -285,7 +285,7 @@ export default function ConnectPage() {
                   <label className={styles.row}>
                     <input type="checkbox" checked={checked} disabled={full} onChange={() => setInvitees((list) => (checked ? list.filter((x) => x !== p.id) : [...list, p.id]))} />
                     <span className={styles.avatar}><Avatar name={p.fullName} url={p.avatarUrl} size="sm" /></span>
-                    <span className={styles.main}><span className={styles.name}>{p.fullName}</span><span className={p.presence === "out" ? `${styles.where} ${styles.whereOut}` : styles.where}>{where(p)}</span></span>
+                    <span className={styles.main}><span className={styles.name}>{p.fullName}</span><span className={`${styles.where} ${styles[`where_${p.presence}`]}`}>{where(p)}</span></span>
                   </label>
                 </li>
               );
@@ -307,7 +307,6 @@ export default function ConnectPage() {
         <aside className={styles.info}>
           <Avatar name={currentPerson.fullName} url={currentPerson.avatarUrl} size="lg" />
           <h3>{currentPerson.fullName}</h3>
-          {extensionOf(currentPerson.id) ? <span className={styles.ext} dir="ltr">{extensionOf(currentPerson.id)}</span> : null}
           <dl>
             <dt>{t("info.today")}</dt>
             <dd>{currentPerson.presence === "out" ? t("presence.out") : currentPerson.clockInAt ? t("info.inSince", { time: formatTimeOnly(currentPerson.clockInAt, i18n.language) }) : t(`presence.${currentPerson.presence}`)}</dd>
@@ -319,6 +318,7 @@ export default function ConnectPage() {
         </aside>
       ) : null}
       {storage ? <StoragePanel onClose={() => setStorage(false)} /> : null}
+      {sounds ? <SoundSettings onClose={() => setSounds(false)} /> : null}
     </div>
   );
 }

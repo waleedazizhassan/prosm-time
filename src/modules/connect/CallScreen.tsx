@@ -8,6 +8,7 @@ import Avatar from "../../components/common/Avatar";
 import type { CallSession } from "./engine/CallSession";
 import { ConnectEngine } from "./engine/ConnectEngine";
 import { formatDuration } from "./engine/media";
+import { startRingback, startRingtone } from "./engine/sounds";
 import GlassButton from "./GlassButton";
 import styles from "./CallScreen.module.css";
 
@@ -36,29 +37,12 @@ export default function CallScreen({ session, people, onClose }: { session: Call
     if (remoteAudio.current && remoteAudio.current.srcObject !== session.remote) remoteAudio.current.srcObject = session.remote;
     if (localVideo.current && session.local && localVideo.current.srcObject !== session.local) localVideo.current.srcObject = session.local;
   });
-  // the ringtone while it rings (an incoming call), quiet otherwise
-  useEffect(() => {
-    if (session.state !== "ringing") return undefined;
-    const ctx = new AudioContext();
-    let stop = false;
-    const ring = () => {
-      if (stop) return;
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.frequency.value = 480;
-      gain.gain.value = 0.08;
-      osc.connect(gain).connect(ctx.destination);
-      osc.start();
-      osc.stop(ctx.currentTime + 1.2);
-      window.setTimeout(ring, 3000);
-    };
-    ring();
-    navigator.vibrate?.([600, 400, 600]);
-    return () => {
-      stop = true;
-      void ctx.close();
-    };
-  }, [session.state]);
+  // owner 2026-11-14: an incoming call rings on and on with the chosen tone (and vibrates); the caller hears the
+  // ring-back tone once the other phone rings
+  const ringingHere = session.state === "ringing";
+  const ringingThere = session.outgoing && session.state === "calling" && session.remoteRinging;
+  useEffect(() => (ringingHere ? startRingtone() : undefined), [ringingHere]);
+  useEffect(() => (ringingThere ? startRingback() : undefined), [ringingThere]);
 
   const name = person?.fullName ?? "";
   const ended = ["ended", "missed", "rejected", "busy"].includes(session.state);
@@ -92,7 +76,7 @@ export default function CallScreen({ session, people, onClose }: { session: Call
       {showRemoteVideo ? <video ref={remoteVideo} className={styles.remote} autoPlay playsInline muted /> : null}
       <div className={showRemoteVideo ? `${styles.overlay} ${styles.overlayVideo}` : styles.overlay}>
         <header className={styles.top}>
-          <span className={styles.pill}>{name}{session.startedAt ? ` · ${formatDuration(now - session.startedAt)}` : ""}</span>
+          {showRemoteVideo ? <span className={styles.pill}>{name}{session.startedAt ? ` · ${formatDuration(now - session.startedAt)}` : ""}</span> : <span />}
           {session.state === "connected" || session.state === "reconnecting" ? (
             <span className={styles.bars} aria-label={t("call.network", { level: session.quality.level })}>
               {[1, 2, 3, 4].map((n) => <i key={n} className={n <= session.quality.level ? styles.barOn : undefined} style={{ height: 3 + n * 3 }} />)}
@@ -108,8 +92,14 @@ export default function CallScreen({ session, people, onClose }: { session: Call
               <Avatar name={name} url={person?.avatarUrl ?? null} size="lg" />
             </span>
             <h2 className={styles.name}>{name}</h2>
-            <p className={styles.sub}>{t(`call.state.${session.state}`)}{session.remoteVideoOff && video ? ` · ${t("call.theirVideoOff")}` : ""}</p>
-            {where ? <span className={styles.site}>{where}</span> : null}
+            {/* under the name: calling... -> ringing... -> the call's time once answered */}
+            {session.startedAt && (session.state === "connected" || session.state === "reconnecting") ? (
+              <p className={styles.timer} aria-live="off">{formatDuration(now - session.startedAt)}</p>
+            ) : (
+              <p className={styles.sub} aria-live="polite">{ringingThere ? t("call.state.ringingThere") : t(`call.state.${session.state}`)}</p>
+            )}
+            {session.remoteVideoOff && video && session.state === "connected" ? <p className={styles.sub}>{t("call.theirVideoOff")}</p> : null}
+            {where && person ? <span className={`${styles.site} ${styles[`site_${person.presence}`]}`}>{where}</span> : null}
           </div>
         ) : null}
 

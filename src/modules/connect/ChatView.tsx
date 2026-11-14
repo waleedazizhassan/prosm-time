@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ArrowRight, Camera, Check, CheckCheck, Clock3, Download, FileText, Image as ImageIcon, Mic, Phone, PhoneMissed, Plus, Radio, Send, Users, Video } from "lucide-react";
 
 import type { ConnectPerson } from "../../core/repositories/ConnectRepository";
-import { formatTimeOnly } from "../../core/utils/formatDate";
+import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
 import Avatar from "../../components/common/Avatar";
 import { ConnectEngine } from "./engine/ConnectEngine";
 import type { LocalMessage } from "./engine/localStore";
@@ -87,6 +87,15 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
     if (autoVoice) setError(t("chat.holdToRecord"));
   }, [autoVoice, t]);
 
+  const dayLabel = (iso: string) => {
+    const date = new Date(iso);
+    const today = new Date();
+    const yesterday = new Date(Date.now() - 86400000);
+    if (date.toDateString() === today.toDateString()) return t("chat.today");
+    if (date.toDateString() === yesterday.toDateString()) return t("chat.yesterday");
+    return formatDateOnly(iso, i18n.language);
+  };
+
   const kindForSite = siteId ? "site_broadcast" : "message";
   const sendText = async () => {
     const body = text.trim();
@@ -124,12 +133,6 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
     recorder.current = null;
     if (!result || !mode) return;
     await ConnectEngine.send(conversationId, mode === "ptt" ? "push_to_talk" : "voice_note", { blob: result.blob, durationMs: result.durationMs, fileName: mode === "ptt" ? "ptt.webm" : "voice.webm", otherUserId: person?.id ?? null });
-  };
-
-  const askPhoto = async () => {
-    if (!person) return;
-    const ok = await ConnectEngine.sendTo(person.id, "photo_request", t("chat.photoRequestBody"));
-    if (ok) await ConnectEngine.send(conversationId, "message", { body: t("chat.photoRequestSent"), otherUserId: person.id });
   };
 
   const tick = (m: LocalMessage) => {
@@ -208,13 +211,12 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
       <header className={styles.head}>
         {onBack ? <GlassButton label={t("chat.back")} size="small" onClick={onBack}><ArrowRight size={16} /></GlassButton> : null}
         <span className={styles.who}>
-          {person ? <Avatar name={person.fullName} url={person.avatarUrl} size="sm" /> : <span className={styles.siteIcon}><Radio size={16} /></span>}
+          {person ? <span className={styles.headAvatar}><Avatar name={person.fullName} url={person.avatarUrl} size="sm" /><i className={`${styles.dot} ${styles[`dot_${person.presence}`]}`} aria-hidden="true" /></span> : <span className={styles.siteIcon}><Radio size={16} /></span>}
           <span className={styles.names}>
             <b>{title}</b>
-            <small>{person ? (person.presence === "out" ? t("presence.out") : person.currentSiteName ? t("presence.atSite", { site: person.currentSiteName }) : t(`presence.${person.presence}`)) : t("chat.siteSubtitle")}</small>
+            <small className={person ? styles[`sub_${person.presence}`] : undefined}>{person ? (person.presence === "out" ? t("presence.out") : person.currentSiteName ? t("presence.atSite", { site: person.currentSiteName }) : t(`presence.${person.presence}`)) : t("chat.siteSubtitle")}</small>
           </span>
         </span>
-        {person && canPhoto ? <GlassButton label={t("chat.askPhoto")} size="small" onClick={() => void askPhoto()}><Camera size={16} /></GlassButton> : null}
         {person && canCall ? (
           <>
             <GlassButton label={t("actions.audioCall")} size="small" onClick={() => void connect?.startCall(person.id, "audio")}><Phone size={16} /></GlassButton>
@@ -224,7 +226,17 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
       </header>
 
       <div className={styles.list} ref={list}>
-        {messages.length === 0 ? <p className={styles.empty}>{t("chat.empty")}</p> : messages.map(bubble)}
+        {messages.length === 0 ? <p className={styles.empty}>{t("chat.empty")}</p> : messages.map((m, i) => {
+          // owner 2026-11-14: the day between messages ("Today", "Yesterday", then the date)
+          const day = m.createdAt.slice(0, 10);
+          const showDay = i === 0 || messages[i - 1].createdAt.slice(0, 10) !== day;
+          return (
+            <Fragment key={m.id}>
+              {showDay ? <span className={styles.day}>{dayLabel(m.createdAt)}</span> : null}
+              {bubble(m)}
+            </Fragment>
+          );
+        })}
       </div>
 
       {error ? <p className={styles.error} role="status">{error}</p> : null}

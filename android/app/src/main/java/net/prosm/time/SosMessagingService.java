@@ -36,6 +36,7 @@ public class SosMessagingService extends MessagingService {
     static final int SOS_NOTIFICATION_ID = 7110;
     static final String CALL_CHANNEL_ID = "prosm-connect-calls";
     static final int CALL_NOTIFICATION_ID = 7120;
+    static final String CONNECT_PREFS = "prosm_connect_sound";
     static final String EXTRA_PUSH = "prosm.push";
     private static final long RING_FOR_MS = 120_000L;
 
@@ -166,21 +167,34 @@ public class SosMessagingService extends MessagingService {
         }
     }
 
-    // PROSM Connect: the incoming call's own channel - the ringtone, vibration, over the lock screen
+    // PROSM Connect: the incoming call's own channel - the phone's own ringtone, vibration, over the lock screen.
+    // A channel's sound cannot change once made, so each choice of the person's settings (sound on / off,
+    // vibration on / off - owner 2026-11-14) has its own channel; the default one keeps its old name.
+    static String callChannelId(Context context) {
+        android.content.SharedPreferences prefs = context.getSharedPreferences(CONNECT_PREFS, Context.MODE_PRIVATE);
+        boolean sound = prefs.getBoolean("sound", true);
+        boolean vibrate = prefs.getBoolean("vibrate", true);
+        if (sound && vibrate) return CALL_CHANNEL_ID;
+        return CALL_CHANNEL_ID + (sound ? "-sound" : vibrate ? "-vibrate" : "-quiet");
+    }
+
     static void ensureCallChannel(Context context) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return;
         try {
             NotificationManager manager = context.getSystemService(NotificationManager.class);
-            if (manager == null || manager.getNotificationChannel(CALL_CHANNEL_ID) != null) return;
-            NotificationChannel channel = new NotificationChannel(CALL_CHANNEL_ID, context.getString(R.string.connect_call_channel_name), NotificationManager.IMPORTANCE_HIGH);
+            String id = callChannelId(context);
+            if (manager == null || manager.getNotificationChannel(id) != null) return;
+            boolean sound = !id.endsWith("-vibrate") && !id.endsWith("-quiet");
+            boolean vibrate = !id.endsWith("-sound") && !id.endsWith("-quiet");
+            NotificationChannel channel = new NotificationChannel(id, context.getString(R.string.connect_call_channel_name), NotificationManager.IMPORTANCE_HIGH);
             channel.setDescription(context.getString(R.string.connect_call_channel_description));
             Uri ring = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
-            channel.setSound(ring != null ? ring : alarmTone(), new AudioAttributes.Builder()
+            channel.setSound(sound ? (ring != null ? ring : alarmTone()) : null, new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE)
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                 .build());
-            channel.enableVibration(true);
-            channel.setVibrationPattern(new long[] {0, 800, 600, 800, 600});
+            channel.enableVibration(vibrate);
+            channel.setVibrationPattern(vibrate ? new long[] {0, 1000, 1000, 1000, 1000} : null);
             channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
             manager.createNotificationChannel(channel);
         } catch (Exception error) {
@@ -209,7 +223,7 @@ public class SosMessagingService extends MessagingService {
             .putExtra("body", body)
             .putExtra(EXTRA_PUSH, push);
         PendingIntent fullScreen = PendingIntent.getActivity(context, 7122, screen, flags);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CALL_CHANNEL_ID)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, callChannelId(context))
             .setSmallIcon(R.drawable.ic_stat_prosm)
             .setColor(0xFF1E6FD9)
             .setContentTitle(title)

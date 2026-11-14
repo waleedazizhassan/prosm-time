@@ -23,6 +23,8 @@ export class CallSession {
   localVideoOff = false;
   muted = false;
   startedAt: number | null = null;
+  /** The other phone is ringing (owner 2026-11-14: "calling" turns to "ringing" once the other side rings). */
+  remoteRinging = false;
   private pc: RTCPeerConnection | null = null;
   private channel: RealtimeChannel | null = null;
   private send: ((signal: Omit<Signal, "from">) => Promise<void>) | null = null;
@@ -91,7 +93,18 @@ export class CallSession {
     session.timers.push(window.setTimeout(() => {
       if (session.state === "ringing") session.finish("missed", false);
     }, 45000));
+    void session.announceRinging();
     return session;
+  }
+
+  /** The caller is told this phone rings - again every few seconds, in case they joined the channel after us. */
+  private async announceRinging() {
+    await this.join().catch(() => undefined);
+    const tell = () => {
+      if (this.state === "ringing") void this.send?.({ type: "ringing" }).catch(() => undefined);
+    };
+    tell();
+    this.timers.push(window.setInterval(tell, 2500));
   }
 
   async answer() {
@@ -103,7 +116,7 @@ export class CallSession {
       this.finish("ended", false);
       return;
     }
-    await this.join();
+    if (!this.channel) await this.join();
     await this.send?.({ type: "ready" });
     this.watchConnection();
   }
@@ -218,6 +231,12 @@ export class CallSession {
         else this.pendingIce.push(candidate);
         break;
       }
+      case "ringing":
+        if (this.outgoing && this.state === "calling" && !this.remoteRinging) {
+          this.remoteRinging = true;
+          this.changed();
+        }
+        break;
       case "restart":
         if (this.outgoing) void this.restart();
         break;
