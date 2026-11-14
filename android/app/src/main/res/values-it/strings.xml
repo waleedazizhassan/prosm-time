@@ -12,4 +12,7 @@
     <string name="connect_call_channel_name">Chiamate (Comunicazione)</string>
     <string name="connect_call_channel_description">Chiamate vocali e video in arrivo dai colleghi</string>
     <string name="connect_call_open">Apri</string>
+    <string name="connect_call_incoming">Chiamata in arrivo</string>
+    <string name="connect_call_answer">Rispondi</string>
+    <string name="connect_call_decline">Rifiuta</string>
 </resources>

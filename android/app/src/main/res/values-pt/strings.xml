@@ -12,4 +12,7 @@
     <string name="connect_call_channel_name">Chamadas (Comunicação)</string>
     <string name="connect_call_channel_description">Chamadas de voz e vídeo recebidas dos colegas</string>
     <string name="connect_call_open">Abrir</string>
+    <string name="connect_call_incoming">Chamada recebida</string>
+    <string name="connect_call_answer">Atender</string>
+    <string name="connect_call_decline">Recusar</string>
 </resources>

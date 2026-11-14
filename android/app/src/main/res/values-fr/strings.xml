@@ -12,4 +12,7 @@
     <string name="connect_call_channel_name">Appels (Communication)</string>
     <string name="connect_call_channel_description">Appels vocaux et vidéo entrants de vos collègues</string>
     <string name="connect_call_open">Ouvrir</string>
+    <string name="connect_call_incoming">Appel entrant</string>
+    <string name="connect_call_answer">Répondre</string>
+    <string name="connect_call_decline">Refuser</string>
 </resources>

@@ -12,4 +12,7 @@
     <string name="connect_call_channel_name">المكالمات (التواصل)</string>
     <string name="connect_call_channel_description">مكالمات الصوت والفيديو الواردة من زملائك</string>
     <string name="connect_call_open">فتح</string>
+    <string name="connect_call_incoming">مكالمة واردة</string>
+    <string name="connect_call_answer">رد</string>
+    <string name="connect_call_decline">رفض</string>
 </resources>

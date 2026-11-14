@@ -12,4 +12,7 @@
     <string name="connect_call_channel_name">Anrufe (Kommunikation)</string>
     <string name="connect_call_channel_description">Eingehende Sprach- und Videoanrufe von Kollegen</string>
     <string name="connect_call_open">Öffnen</string>
+    <string name="connect_call_incoming">Eingehender Anruf</string>
+    <string name="connect_call_answer">Annehmen</string>
+    <string name="connect_call_decline">Ablehnen</string>
 </resources>

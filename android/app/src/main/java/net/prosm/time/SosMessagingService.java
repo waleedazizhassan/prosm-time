@@ -221,6 +221,7 @@ public class SosMessagingService extends MessagingService {
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_USER_ACTION)
             .putExtra("title", title)
             .putExtra("body", body)
+            .putExtra("connectCall", true)
             .putExtra(EXTRA_PUSH, push);
         PendingIntent fullScreen = PendingIntent.getActivity(context, 7122, screen, flags);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, callChannelId(context))

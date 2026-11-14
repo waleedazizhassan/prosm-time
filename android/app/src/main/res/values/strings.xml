@@ -21,4 +21,7 @@
     <string name="connect_call_channel_name">Calls (Communication)</string>
     <string name="connect_call_channel_description">Incoming voice and video calls from your colleagues</string>
     <string name="connect_call_open">Open</string>
+    <string name="connect_call_incoming">Incoming call</string>
+    <string name="connect_call_answer">Answer</string>
+    <string name="connect_call_decline">Decline</string>
 </resources>

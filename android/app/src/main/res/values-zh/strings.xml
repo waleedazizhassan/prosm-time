@@ -12,4 +12,7 @@
     <string name="connect_call_channel_name">通话 (沟通)</string>
     <string name="connect_call_channel_description">来自同事的语音和视频来电</string>
     <string name="connect_call_open">打开</string>
+    <string name="connect_call_incoming">来电</string>
+    <string name="connect_call_answer">接听</string>
+    <string name="connect_call_decline">拒绝</string>
 </resources>
