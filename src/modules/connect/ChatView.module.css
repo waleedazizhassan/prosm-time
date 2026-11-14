@@ -328,3 +328,41 @@
 .names small.sub_break { color: #f2b33d; }
 .names small.sub_out { color: var(--text-secondary); }
 .names small.sub_leave { color: #c4b5fd; }
+
+/* owner 2026-11-14: download a photo / document that came in */
+.photoWrap {
+  position: relative;
+  display: block;
+}
+
+.save {
+  position: absolute;
+  bottom: 8px;
+  inset-inline-end: 8px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  background: rgba(5, 10, 22, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+}
+
+button.file {
+  width: 100%;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+button.file {
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.07);
+}

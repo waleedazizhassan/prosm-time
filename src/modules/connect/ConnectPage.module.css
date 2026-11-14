@@ -461,8 +461,6 @@
 }
 
 .startBtn {
-  position: sticky;
-  bottom: calc(var(--safe-bottom, 0px) + 76px);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -563,4 +561,50 @@
 
 .rowOn {
   background: linear-gradient(90deg, rgba(37, 99, 235, 0.14), transparent);
+}
+
+/* owner 2026-11-14: inviting to a meeting without scrolling - small chips that wrap */
+.pickGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 8px;
+}
+
+.pick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 10px 6px 8px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015));
+  color: var(--text-primary);
+  font: inherit;
+  cursor: pointer;
+}
+
+.pick:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.pickOn {
+  border-color: rgba(59, 130, 246, 0.9);
+  background: linear-gradient(160deg, rgba(37, 99, 235, 0.4), rgba(22, 137, 201, 0.15));
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.pickAvatar {
+  position: relative;
+}
+
+.pickName {
+  max-width: 100%;
+  font-size: var(--font-xs);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

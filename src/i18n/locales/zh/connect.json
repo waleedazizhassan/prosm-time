@@ -3,7 +3,7 @@
   "lead": "PROSM Time 内的聊天、通话和会议。服务器只负责传递；对话保存在您的手机上。",
   "myNumber": "您的分机号",
   "switchboard": "总机",
-  "tabsLabel": "PROSM Connect 栏目",
+  "tabsLabel": "沟通 栏目",
   "tabs": {
     "chats": "聊天",
     "calls": "通话",
@@ -133,7 +133,8 @@
     "recording": "正在录音… 松开发送",
     "talking": "正在讲话… 松开发送",
     "today": "今天",
-    "yesterday": "昨天"
+    "yesterday": "昨天",
+    "download": "下载"
   },
   "info": {
     "inSince": "自 {{time}} 起在岗",

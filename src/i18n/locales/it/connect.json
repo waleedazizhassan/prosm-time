@@ -3,7 +3,7 @@
   "lead": "Chat, chiamate e riunioni dentro PROSM Time. Il server consegna soltanto; le conversazioni restano sul tuo telefono.",
   "myNumber": "Il tuo interno",
   "switchboard": "Centralino",
-  "tabsLabel": "Sezioni di PROSM Connect",
+  "tabsLabel": "Sezioni di Comunicazione",
   "tabs": {
     "chats": "Chat",
     "calls": "Chiamate",
@@ -133,7 +133,8 @@
     "recording": "Registrazione… rilascia per inviare",
     "talking": "Stai parlando… rilascia per inviare",
     "today": "Oggi",
-    "yesterday": "Ieri"
+    "yesterday": "Ieri",
+    "download": "Scarica"
   },
   "info": {
     "inSince": "Presente dalle {{time}}",

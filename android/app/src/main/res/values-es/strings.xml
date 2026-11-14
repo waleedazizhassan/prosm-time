@@ -9,7 +9,7 @@
     <string name="sos_default_title">Alerta de emergencia</string>
     <string name="sos_open">Abrir</string>
     <string name="sos_silence">Silenciar</string>
-    <string name="connect_call_channel_name">Llamadas (PROSM Connect)</string>
+    <string name="connect_call_channel_name">Llamadas (Comunicación)</string>
     <string name="connect_call_channel_description">Llamadas de voz y vídeo entrantes de tus compañeros</string>
     <string name="connect_call_open">Abrir</string>
 </resources>

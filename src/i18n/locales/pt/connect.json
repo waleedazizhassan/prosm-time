@@ -3,7 +3,7 @@
   "lead": "Chat, chamadas e reuniões dentro do PROSM Time. O servidor só entrega; as conversas ficam no seu telemóvel.",
   "myNumber": "A sua extensão",
   "switchboard": "Central",
-  "tabsLabel": "Secções do PROSM Connect",
+  "tabsLabel": "Secções do Comunicação",
   "tabs": {
     "chats": "Conversas",
     "calls": "Chamadas",
@@ -133,7 +133,8 @@
     "recording": "A gravar… solte para enviar",
     "talking": "A falar… solte para enviar",
     "today": "Hoje",
-    "yesterday": "Ontem"
+    "yesterday": "Ontem",
+    "download": "Transferir"
   },
   "info": {
     "inSince": "Presente desde {{time}}",

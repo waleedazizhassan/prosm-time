@@ -3,7 +3,7 @@
   "lead": "Chat, Anrufe und Besprechungen in PROSM Time. Der Server stellt nur zu; Unterhaltungen bleiben auf Ihrem Handy.",
   "myNumber": "Ihre Durchwahl",
   "switchboard": "Zentrale",
-  "tabsLabel": "Bereiche von PROSM Connect",
+  "tabsLabel": "Bereiche von Kommunikation",
   "tabs": {
     "chats": "Chats",
     "calls": "Anrufe",
@@ -133,7 +133,8 @@
     "recording": "Aufnahme… loslassen zum Senden",
     "talking": "Sprechen… loslassen zum Senden",
     "today": "Heute",
-    "yesterday": "Gestern"
+    "yesterday": "Gestern",
+    "download": "Herunterladen"
   },
   "info": {
     "inSince": "Anwesend seit {{time}}",

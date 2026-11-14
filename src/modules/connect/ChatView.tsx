@@ -4,6 +4,7 @@ import { ArrowRight, Camera, Check, CheckCheck, Clock3, Download, FileText, Imag
 
 import type { ConnectPerson } from "../../core/repositories/ConnectRepository";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
+import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
 import Avatar from "../../components/common/Avatar";
 import { ConnectEngine } from "./engine/ConnectEngine";
 import type { LocalMessage } from "./engine/localStore";
@@ -135,6 +136,15 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
     await ConnectEngine.send(conversationId, mode === "ptt" ? "push_to_talk" : "voice_note", { blob: result.blob, durationMs: result.durationMs, fileName: mode === "ptt" ? "ptt.webm" : "voice.webm", otherUserId: person?.id ?? null });
   };
 
+  // owner 2026-11-14: save a photo or document that came in (Android: the share sheet - save to Files / Drive / Gallery)
+  const download = async (m: LocalMessage) => {
+    const blob = await ConnectEngine.blob(m.id);
+    if (!blob) return;
+    const ext = (blob.type.split("/")[1] ?? "bin").replace("jpeg", "jpg").split(";")[0];
+    const name = m.fileName ?? `PROSM-${m.kind === "camera_photo" ? "verified" : "photo"}-${m.createdAt.slice(0, 19).replace(/[:T]/g, "-")}.${ext}`;
+    await saveGeneratedFile(name, blob).catch(() => undefined);
+  };
+
   const tick = (m: LocalMessage) => {
     if (!m.mine) return null;
     if (m.status === "pending") return <Clock3 size={12} aria-label={t("chat.pending")} />;
@@ -151,7 +161,12 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
       case "camera_photo":
         content = (
           <>
-            {url ? <img src={url} alt={m.kind === "camera_photo" ? t("chat.verifiedPhoto") : t("chat.photo")} className={styles.photo} /> : <span className={styles.meta}><ImageIcon size={14} /> {t("chat.photo")}</span>}
+            {url ? (
+              <span className={styles.photoWrap}>
+                <img src={url} alt={m.kind === "camera_photo" ? t("chat.verifiedPhoto") : t("chat.photo")} className={styles.photo} />
+                <button type="button" className={styles.save} aria-label={t("chat.download")} onClick={() => void download(m)}><Download size={16} /></button>
+              </span>
+            ) : <span className={styles.meta}><ImageIcon size={14} /> {t("chat.photo")}</span>}
             {m.kind === "camera_photo" && m.proofCode ? <span className={styles.proof}>✓ {t("chat.verifiedPhoto")} · <span dir="ltr">#{m.proofCode}</span></span> : null}
           </>
         );
@@ -168,11 +183,11 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
         break;
       case "file":
         content = (
-          <a className={styles.file} href={url} download={m.fileName ?? "file"}>
+          <button type="button" className={styles.file} disabled={!url} onClick={() => void download(m)} aria-label={`${t("chat.download")} ${m.fileName ?? t("chat.file")}`}>
             <FileText size={18} aria-hidden="true" />
             <span>{m.fileName ?? t("chat.file")}<small>{formatBytes(m.sizeBytes)}</small></span>
-            <Download size={14} aria-hidden="true" />
-          </a>
+            <Download size={16} aria-hidden="true" />
+          </button>
         );
         break;
       case "missed":

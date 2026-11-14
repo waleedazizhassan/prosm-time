@@ -3,7 +3,7 @@
   "lead": "Chat, calls and meetings inside PROSM Time. The server only delivers; conversations are kept on your phone.",
   "myNumber": "Your extension",
   "switchboard": "Switchboard",
-  "tabsLabel": "PROSM Connect sections",
+  "tabsLabel": "Communication sections",
   "tabs": {
     "chats": "Chats",
     "calls": "Calls",
@@ -133,7 +133,8 @@
     "recording": "Recording… let go to send",
     "talking": "Talking… let go to send",
     "today": "Today",
-    "yesterday": "Yesterday"
+    "yesterday": "Yesterday",
+    "download": "Download"
   },
   "info": {
     "inSince": "In since {{time}}",

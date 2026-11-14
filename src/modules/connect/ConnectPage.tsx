@@ -196,7 +196,7 @@ export default function ConnectPage() {
                 if (row.kind === "conversation") {
                   const p = row.person;
                   return (
-                    <li key={row.c.id}>
+                    <li key={row.c.id} className={styles.personRow}>
                       <button type="button" className={selected === row.c.id ? `${styles.row} ${styles.rowOn}` : styles.row} onClick={() => setParams({ c: row.c.id })}>
                         <span className={styles.avatar}>
                           {p ? <Avatar name={p.fullName} url={p.avatarUrl} size="md" /> : <span className={styles.siteAvatar}><Radio size={16} /></span>}
@@ -212,6 +212,14 @@ export default function ConnectPage() {
                           {row.c.unread > 0 ? <b className={styles.badge}>{row.c.unread}</b> : null}
                         </span>
                       </button>
+                      {/* owner 2026-11-14: the same buttons on every row - a person one already talked to keeps them */}
+                      {p ? (
+                        <span className={styles.actions}>
+                          <GlassButton label={t("actions.message", { name: p.fullName })} tone="primary" size="small" onClick={() => setParams({ c: row.c.id })}><MessageCircle size={16} /></GlassButton>
+                          {features?.calls ? <GlassButton label={t("actions.audioCall")} size="small" onClick={() => void connect?.startCall(p.id, "audio")}><Phone size={16} /></GlassButton> : null}
+                          {features?.calls ? <GlassButton label={t("actions.videoCall")} size="small" onClick={() => void connect?.startCall(p.id, "video")}><Video size={16} /></GlassButton> : null}
+                        </span>
+                      ) : null}
                     </li>
                   );
                 }
@@ -276,21 +284,24 @@ export default function ConnectPage() {
           </div>
           <input className={styles.titleInput} value={meetingTitle} onChange={(e) => setMeetingTitle(e.target.value)} placeholder={t("meeting.titlePlaceholder")} maxLength={120} />
           <p className={styles.hint}>{t("meeting.pick", { count: (meetingMedia === "video" ? 3 : 7) - invitees.length })}</p>
-          <ul className={styles.list}>
+          {/* owner 2026-11-14: no long list to scroll - each person a small chip, tapped to invite */}
+          <div className={styles.pickGrid} role="group" aria-label={t("meeting.pick", { count: (meetingMedia === "video" ? 3 : 7) - invitees.length })}>
             {[...people.values()].filter((p) => p.id !== profile.id && p.isActive).map((p) => {
               const checked = invitees.includes(p.id);
               const full = !checked && invitees.length >= (meetingMedia === "video" ? 3 : 7);
               return (
-                <li key={p.id}>
-                  <label className={styles.row}>
-                    <input type="checkbox" checked={checked} disabled={full} onChange={() => setInvitees((list) => (checked ? list.filter((x) => x !== p.id) : [...list, p.id]))} />
-                    <span className={styles.avatar}><Avatar name={p.fullName} url={p.avatarUrl} size="sm" /></span>
-                    <span className={styles.main}><span className={styles.name}>{p.fullName}</span><span className={`${styles.where} ${styles[`where_${p.presence}`]}`}>{where(p)}</span></span>
-                  </label>
-                </li>
+                <button key={p.id} type="button" aria-pressed={checked} disabled={full}
+                  className={checked ? `${styles.pick} ${styles.pickOn}` : styles.pick}
+                  onClick={() => setInvitees((list) => (checked ? list.filter((x) => x !== p.id) : [...list, p.id]))}>
+                  <span className={styles.pickAvatar}>
+                    <Avatar name={p.fullName} url={p.avatarUrl} size="sm" />
+                    <i className={`${styles.dot} ${styles[`dot_${p.presence}`]}`} aria-hidden="true" />
+                  </span>
+                  <span className={styles.pickName}>{p.fullName}</span>
+                </button>
               );
             })}
-          </ul>
+          </div>
           <button type="button" className={styles.startBtn} disabled={invitees.length === 0} onClick={() => void startMeeting()}>
             {meetingMedia === "video" ? <Video size={18} /> : <Phone size={18} />} {t("meeting.start")}
           </button>
