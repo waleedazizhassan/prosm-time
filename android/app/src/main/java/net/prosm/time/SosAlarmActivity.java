@@ -68,6 +68,11 @@ public class SosAlarmActivity extends Activity {
 
     private void render(Intent intent) {
         push = intent.getBundleExtra(SosMessagingService.EXTRA_PUSH);
+        // owner 2026-11-14: an incoming call has its own screen - never the red SOS one
+        if (intent.getBooleanExtra("connectCall", false)) {
+            renderCall(intent);
+            return;
+        }
         String title = intent.getStringExtra("title");
         String body = intent.getStringExtra("body");
 
@@ -114,6 +119,80 @@ public class SosAlarmActivity extends Activity {
         });
         root.addView(silence);
 
+        setContentView(root);
+    }
+
+    /** An incoming call: dark blue like the app, the caller's name, decline and answer. */
+    private void renderCall(Intent intent) {
+        String name = intent.getStringExtra("title");
+        String kind = intent.getStringExtra("body");
+        LinearLayout root = new LinearLayout(this);
+        root.setOrientation(LinearLayout.VERTICAL);
+        root.setGravity(Gravity.CENTER_HORIZONTAL);
+        root.setPadding(dp(24), dp(72), dp(24), dp(56));
+        GradientDrawable ground = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
+            new int[] {Color.parseColor("#0B2A4A"), Color.parseColor("#060B1A")});
+        root.setBackground(ground);
+
+        TextView brand = new TextView(this);
+        brand.setText("PROSM Time");
+        brand.setTextColor(Color.parseColor("#7DD3FC"));
+        brand.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        brand.setGravity(Gravity.CENTER);
+        root.addView(brand);
+
+        TextView avatar = new TextView(this);
+        String initial = name == null || name.trim().isEmpty() ? "?" : name.trim().substring(0, 1).toUpperCase();
+        avatar.setText(initial);
+        avatar.setTextColor(Color.parseColor("#60A5FA"));
+        avatar.setTextSize(TypedValue.COMPLEX_UNIT_SP, 44);
+        avatar.setTypeface(Typeface.DEFAULT_BOLD);
+        avatar.setGravity(Gravity.CENTER);
+        GradientDrawable circle = new GradientDrawable();
+        circle.setShape(GradientDrawable.OVAL);
+        circle.setColor(Color.parseColor("#13294B"));
+        circle.setStroke(dp(3), Color.parseColor("#1E6FD9"));
+        avatar.setBackground(circle);
+        LinearLayout.LayoutParams avatarParams = new LinearLayout.LayoutParams(dp(120), dp(120));
+        avatarParams.topMargin = dp(56);
+        avatar.setLayoutParams(avatarParams);
+        root.addView(avatar);
+
+        TextView heading = new TextView(this);
+        heading.setText(name == null || name.isEmpty() ? "PROSM Time" : name);
+        heading.setTextColor(Color.WHITE);
+        heading.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28);
+        heading.setTypeface(Typeface.DEFAULT_BOLD);
+        heading.setGravity(Gravity.CENTER);
+        heading.setPadding(0, dp(20), 0, dp(6));
+        root.addView(heading);
+
+        TextView sub = new TextView(this);
+        sub.setText(kind == null || kind.isEmpty() ? getString(R.string.connect_call_incoming) : kind);
+        sub.setTextColor(Color.parseColor("#93A2C4"));
+        sub.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
+        sub.setGravity(Gravity.CENTER);
+        root.addView(sub);
+
+        View spacer = new View(this);
+        root.addView(spacer, new LinearLayout.LayoutParams(1, 0, 1f));
+
+        LinearLayout row = new LinearLayout(this);
+        row.setOrientation(LinearLayout.HORIZONTAL);
+        row.setGravity(Gravity.CENTER);
+        Button decline = button(getString(R.string.connect_call_decline), Color.parseColor("#DC2626"), Color.WHITE);
+        decline.setOnClickListener((View view) -> {
+            SosMessagingService.silence(this);
+            finish();
+        });
+        Button answer = button(getString(R.string.connect_call_answer), Color.parseColor("#16A34A"), Color.WHITE);
+        answer.setOnClickListener((View view) -> openInApp());
+        LinearLayout.LayoutParams half = new LinearLayout.LayoutParams(0, dp(60), 1f);
+        half.setMarginStart(dp(8));
+        half.setMarginEnd(dp(8));
+        row.addView(decline, half);
+        row.addView(answer, new LinearLayout.LayoutParams(half));
+        root.addView(row, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         setContentView(root);
     }
 

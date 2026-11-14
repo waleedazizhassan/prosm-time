@@ -57,7 +57,7 @@ describe("who a leave request can go to", () => {
 
   it("anyone listed can really decide it", async () => {
     const sent = await t.as<{ r: { requestId?: string } }>(loner.authId,
-      "select public.request_prosm_time_leave('annual', current_date + 20, current_date + 20, 'trip', null, $1) as r", [unassignedLead.userId]);
+      "select public.request_prosm_time_leave('annual', d, d, 'trip', null, $1) as r from (select current_date + 20 + case extract(dow from current_date + 20)::int when 5 then 2 when 6 then 1 else 0 end as d) x", [unassignedLead.userId]);
     expect(sent.error).toBeNull();
     const [req] = await t.su<{ id: string }>("select id from leave_requests where user_id = $1 order by created_at desc limit 1", [loner.userId]);
     const decided = await t.as(unassignedLead.authId, "select public.review_prosm_time_leave($1, 'approved')", [req.id]);

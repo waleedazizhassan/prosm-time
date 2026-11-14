@@ -283,6 +283,9 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  /* owner 2026-11-14: quick taps (ticking several people, the bottom bar) must not double-tap-zoom the page - the
+     zoom stayed on every page after it. Pinch zoom stays for those who need it. */
+  touch-action: manipulation;
 }
 
 body {

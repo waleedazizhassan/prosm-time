@@ -239,3 +239,18 @@
   color: #e9eefb;
   background: rgba(255, 255, 255, 0.06);
 }
+
+/* owner 2026-11-14: the call's time under the name once answered; the status pill in the person's colour */
+.timer {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  color: #e6edf9;
+  direction: ltr;
+}
+
+.site_out { color: #a3afc6; background: rgba(148, 163, 184, 0.14); }
+.site_break { color: #f6c35b; background: rgba(242, 179, 61, 0.14); }
+.site_leave { color: #c4b5fd; background: rgba(167, 139, 250, 0.14); }

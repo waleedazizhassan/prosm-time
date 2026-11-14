@@ -5,6 +5,7 @@ import ConnectRepository, { type ConnectPerson } from "../../core/repositories/C
 import { ConnectEngine, type IncomingCall, type MeetingInvite } from "./engine/ConnectEngine";
 import type { LocalMessage } from "./engine/localStore";
 import { CallSession } from "./engine/CallSession";
+import { messageAlert } from "./engine/sounds";
 import { MeetingSession } from "./engine/MeetingSession";
 import useConnect from "./useConnect";
 import CallScreen from "./CallScreen";
@@ -64,7 +65,12 @@ export default function ConnectProvider({ children }: { children: ReactNode }) {
     // push to talk plays by itself when the app is open (owner: like a walkie-talkie)
     const offTalk = ConnectEngine.on("message", (detail) => {
       const m = detail as LocalMessage;
-      if (m.kind !== "push_to_talk" || m.mine || document.visibilityState !== "visible") return;
+      if (m.mine || document.visibilityState !== "visible") return;
+      // owner 2026-11-14: a new message chimes / vibrates as chosen in the sound settings
+      if (m.kind !== "push_to_talk") {
+        messageAlert();
+        return;
+      }
       void ConnectEngine.blob(m.id).then((blob) => {
         if (!blob) return;
         const url = URL.createObjectURL(blob);

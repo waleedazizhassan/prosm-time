@@ -3,13 +3,13 @@
   "lead": "Chat, calls and meetings inside PROSM Time. The server only delivers; conversations are kept on your phone.",
   "myNumber": "Your extension",
   "switchboard": "Switchboard",
-  "tabsLabel": "PROSM Connect sections",
+  "tabsLabel": "Communication sections",
   "tabs": {
     "chats": "Chats",
     "calls": "Calls",
     "meetings": "Meetings"
   },
-  "searchPlaceholder": "Search by name, number or site",
+  "searchPlaceholder": "Search by name or site",
   "filtersLabel": "Filter",
   "filters": {
     "all": "All",
@@ -76,7 +76,8 @@
       "failed": "Couldn't connect",
       "busy": "Busy",
       "rejected": "Declined",
-      "missed": "Missed call"
+      "missed": "Missed call",
+      "ringingThere": "Ringing…"
     },
     "reply": {
       "atSite": "At the site, I'll call you shortly",
@@ -130,7 +131,10 @@
     "verifiedCamera": "Verified camera",
     "verifiedPhoto": "Verified photo",
     "recording": "Recording… let go to send",
-    "talking": "Talking… let go to send"
+    "talking": "Talking… let go to send",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "download": "Download"
   },
   "info": {
     "inSince": "In since {{time}}",
@@ -184,5 +188,22 @@
     "video": "Video",
     "files": "Files",
     "voice": "Voice"
+  },
+  "sound": {
+    "title": "Sound and vibration",
+    "calls": "Calls",
+    "messages": "Messages",
+    "tone": "Ringtone",
+    "tones": {
+      "classic": "Classic bell",
+      "digital": "Digital",
+      "marimba": "Marimba"
+    },
+    "volume": "Volume",
+    "silent": "Silent",
+    "callVibrate": "Vibrate when ringing",
+    "messageSound": "Sound for a new message",
+    "messageVibrate": "Vibrate for a new message",
+    "note": "These settings are kept on this device only. In the Android app a call rings with the phone's own ringtone, even when the app is closed or the screen is locked; in a browser the page has to be open."
   }
 }

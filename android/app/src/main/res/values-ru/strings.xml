@@ -9,7 +9,10 @@
     <string name="sos_default_title">Экстренный сигнал</string>
     <string name="sos_open">Открыть</string>
     <string name="sos_silence">Без звука</string>
-    <string name="connect_call_channel_name">Звонки (PROSM Connect)</string>
+    <string name="connect_call_channel_name">Звонки (Связь)</string>
     <string name="connect_call_channel_description">Входящие голосовые и видеозвонки от коллег</string>
     <string name="connect_call_open">Открыть</string>
+    <string name="connect_call_incoming">Входящий звонок</string>
+    <string name="connect_call_answer">Ответить</string>
+    <string name="connect_call_decline">Отклонить</string>
 </resources>

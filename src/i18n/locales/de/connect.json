@@ -3,13 +3,13 @@
   "lead": "Chat, Anrufe und Besprechungen in PROSM Time. Der Server stellt nur zu; Unterhaltungen bleiben auf Ihrem Handy.",
   "myNumber": "Ihre Durchwahl",
   "switchboard": "Zentrale",
-  "tabsLabel": "Bereiche von PROSM Connect",
+  "tabsLabel": "Bereiche von Kommunikation",
   "tabs": {
     "chats": "Chats",
     "calls": "Anrufe",
     "meetings": "Besprechungen"
   },
-  "searchPlaceholder": "Nach Name, Nummer oder Standort suchen",
+  "searchPlaceholder": "Nach Name oder Standort suchen",
   "filtersLabel": "Filter",
   "filters": {
     "all": "Alle",
@@ -76,7 +76,8 @@
       "failed": "Keine Verbindung",
       "busy": "Besetzt",
       "rejected": "Abgelehnt",
-      "missed": "Verpasster Anruf"
+      "missed": "Verpasster Anruf",
+      "ringingThere": "Es klingelt…"
     },
     "reply": {
       "atSite": "Bin am Standort, rufe gleich zurück",
@@ -130,7 +131,10 @@
     "verifiedCamera": "Beglaubigte Kamera",
     "verifiedPhoto": "Beglaubigtes Foto",
     "recording": "Aufnahme… loslassen zum Senden",
-    "talking": "Sprechen… loslassen zum Senden"
+    "talking": "Sprechen… loslassen zum Senden",
+    "today": "Heute",
+    "yesterday": "Gestern",
+    "download": "Herunterladen"
   },
   "info": {
     "inSince": "Anwesend seit {{time}}",
@@ -184,5 +188,22 @@
     "video": "Video",
     "files": "Dateien",
     "voice": "Sprache"
+  },
+  "sound": {
+    "title": "Ton und Vibration",
+    "calls": "Anrufe",
+    "messages": "Nachrichten",
+    "tone": "Klingelton",
+    "tones": {
+      "classic": "Klassische Glocke",
+      "digital": "Digital",
+      "marimba": "Marimba"
+    },
+    "volume": "Lautstärke",
+    "silent": "Stumm",
+    "callVibrate": "Beim Klingeln vibrieren",
+    "messageSound": "Ton bei neuer Nachricht",
+    "messageVibrate": "Vibration bei neuer Nachricht",
+    "note": "Diese Einstellungen gelten nur für dieses Gerät. In der Android-App klingelt ein Anruf mit dem Klingelton des Telefons, auch wenn die App geschlossen oder der Bildschirm gesperrt ist; im Browser muss die Seite geöffnet sein."
   }
 }

@@ -3,13 +3,13 @@
   "lead": "Chat, llamadas y reuniones dentro de PROSM Time. El servidor solo entrega; las conversaciones se guardan en tu móvil.",
   "myNumber": "Tu extensión",
   "switchboard": "Centralita",
-  "tabsLabel": "Secciones de PROSM Connect",
+  "tabsLabel": "Secciones de Comunicación",
   "tabs": {
     "chats": "Chats",
     "calls": "Llamadas",
     "meetings": "Reuniones"
   },
-  "searchPlaceholder": "Busca por nombre, número o sitio",
+  "searchPlaceholder": "Buscar por nombre o sitio",
   "filtersLabel": "Filtrar",
   "filters": {
     "all": "Todos",
@@ -76,7 +76,8 @@
       "failed": "No se pudo conectar",
       "busy": "Ocupado",
       "rejected": "Rechazada",
-      "missed": "Llamada perdida"
+      "missed": "Llamada perdida",
+      "ringingThere": "Sonando…"
     },
     "reply": {
       "atSite": "Estoy en el sitio, te llamo enseguida",
@@ -130,7 +131,10 @@
     "verifiedCamera": "Cámara verificada",
     "verifiedPhoto": "Foto verificada",
     "recording": "Grabando… suelta para enviar",
-    "talking": "Hablando… suelta para enviar"
+    "talking": "Hablando… suelta para enviar",
+    "today": "Hoy",
+    "yesterday": "Ayer",
+    "download": "Descargar"
   },
   "info": {
     "inSince": "Presente desde {{time}}",
@@ -184,5 +188,22 @@
     "video": "Vídeo",
     "files": "Archivos",
     "voice": "Voz"
+  },
+  "sound": {
+    "title": "Sonido y vibración",
+    "calls": "Llamadas",
+    "messages": "Mensajes",
+    "tone": "Tono de llamada",
+    "tones": {
+      "classic": "Timbre clásico",
+      "digital": "Digital",
+      "marimba": "Marimba"
+    },
+    "volume": "Volumen",
+    "silent": "Silencio",
+    "callVibrate": "Vibrar al sonar",
+    "messageSound": "Sonido para mensaje nuevo",
+    "messageVibrate": "Vibrar con mensaje nuevo",
+    "note": "Estos ajustes se guardan solo en este dispositivo. En la app de Android la llamada suena con el tono del teléfono, aunque la app esté cerrada o la pantalla bloqueada; en el navegador la página debe estar abierta."
   }
 }

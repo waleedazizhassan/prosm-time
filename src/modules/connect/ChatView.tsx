@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ArrowRight, Camera, Check, CheckCheck, Clock3, Download, FileText, Image as ImageIcon, Mic, Phone, PhoneMissed, Plus, Radio, Send, Users, Video } from "lucide-react";
 
 import type { ConnectPerson } from "../../core/repositories/ConnectRepository";
-import { formatTimeOnly } from "../../core/utils/formatDate";
+import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
+import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
 import Avatar from "../../components/common/Avatar";
 import { ConnectEngine } from "./engine/ConnectEngine";
 import type { LocalMessage } from "./engine/localStore";
@@ -87,6 +88,15 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
     if (autoVoice) setError(t("chat.holdToRecord"));
   }, [autoVoice, t]);
 
+  const dayLabel = (iso: string) => {
+    const date = new Date(iso);
+    const today = new Date();
+    const yesterday = new Date(Date.now() - 86400000);
+    if (date.toDateString() === today.toDateString()) return t("chat.today");
+    if (date.toDateString() === yesterday.toDateString()) return t("chat.yesterday");
+    return formatDateOnly(iso, i18n.language);
+  };
+
   const kindForSite = siteId ? "site_broadcast" : "message";
   const sendText = async () => {
     const body = text.trim();
@@ -126,10 +136,13 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
     await ConnectEngine.send(conversationId, mode === "ptt" ? "push_to_talk" : "voice_note", { blob: result.blob, durationMs: result.durationMs, fileName: mode === "ptt" ? "ptt.webm" : "voice.webm", otherUserId: person?.id ?? null });
   };
 
-  const askPhoto = async () => {
-    if (!person) return;
-    const ok = await ConnectEngine.sendTo(person.id, "photo_request", t("chat.photoRequestBody"));
-    if (ok) await ConnectEngine.send(conversationId, "message", { body: t("chat.photoRequestSent"), otherUserId: person.id });
+  // owner 2026-11-14: save a photo or document that came in (Android: the share sheet - save to Files / Drive / Gallery)
+  const download = async (m: LocalMessage) => {
+    const blob = await ConnectEngine.blob(m.id);
+    if (!blob) return;
+    const ext = (blob.type.split("/")[1] ?? "bin").replace("jpeg", "jpg").split(";")[0];
+    const name = m.fileName ?? `PROSM-${m.kind === "camera_photo" ? "verified" : "photo"}-${m.createdAt.slice(0, 19).replace(/[:T]/g, "-")}.${ext}`;
+    await saveGeneratedFile(name, blob).catch(() => undefined);
   };
 
   const tick = (m: LocalMessage) => {
@@ -148,7 +161,12 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
       case "camera_photo":
         content = (
           <>
-            {url ? <img src={url} alt={m.kind === "camera_photo" ? t("chat.verifiedPhoto") : t("chat.photo")} className={styles.photo} /> : <span className={styles.meta}><ImageIcon size={14} /> {t("chat.photo")}</span>}
+            {url ? (
+              <span className={styles.photoWrap}>
+                <img src={url} alt={m.kind === "camera_photo" ? t("chat.verifiedPhoto") : t("chat.photo")} className={styles.photo} />
+                <button type="button" className={styles.save} aria-label={t("chat.download")} onClick={() => void download(m)}><Download size={16} /></button>
+              </span>
+            ) : <span className={styles.meta}><ImageIcon size={14} /> {t("chat.photo")}</span>}
             {m.kind === "camera_photo" && m.proofCode ? <span className={styles.proof}>✓ {t("chat.verifiedPhoto")} · <span dir="ltr">#{m.proofCode}</span></span> : null}
           </>
         );
@@ -165,11 +183,11 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
         break;
       case "file":
         content = (
-          <a className={styles.file} href={url} download={m.fileName ?? "file"}>
+          <button type="button" className={styles.file} disabled={!url} onClick={() => void download(m)} aria-label={`${t("chat.download")} ${m.fileName ?? t("chat.file")}`}>
             <FileText size={18} aria-hidden="true" />
             <span>{m.fileName ?? t("chat.file")}<small>{formatBytes(m.sizeBytes)}</small></span>
-            <Download size={14} aria-hidden="true" />
-          </a>
+            <Download size={16} aria-hidden="true" />
+          </button>
         );
         break;
       case "missed":
@@ -208,13 +226,12 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
       <header className={styles.head}>
         {onBack ? <GlassButton label={t("chat.back")} size="small" onClick={onBack}><ArrowRight size={16} /></GlassButton> : null}
         <span className={styles.who}>
-          {person ? <Avatar name={person.fullName} url={person.avatarUrl} size="sm" /> : <span className={styles.siteIcon}><Radio size={16} /></span>}
+          {person ? <span className={styles.headAvatar}><Avatar name={person.fullName} url={person.avatarUrl} size="sm" /><i className={`${styles.dot} ${styles[`dot_${person.presence}`]}`} aria-hidden="true" /></span> : <span className={styles.siteIcon}><Radio size={16} /></span>}
           <span className={styles.names}>
             <b>{title}</b>
-            <small>{person ? (person.presence === "out" ? t("presence.out") : person.currentSiteName ? t("presence.atSite", { site: person.currentSiteName }) : t(`presence.${person.presence}`)) : t("chat.siteSubtitle")}</small>
+            <small className={person ? styles[`sub_${person.presence}`] : undefined}>{person ? (person.presence === "out" ? t("presence.out") : person.currentSiteName ? t("presence.atSite", { site: person.currentSiteName }) : t(`presence.${person.presence}`)) : t("chat.siteSubtitle")}</small>
           </span>
         </span>
-        {person && canPhoto ? <GlassButton label={t("chat.askPhoto")} size="small" onClick={() => void askPhoto()}><Camera size={16} /></GlassButton> : null}
         {person && canCall ? (
           <>
             <GlassButton label={t("actions.audioCall")} size="small" onClick={() => void connect?.startCall(person.id, "audio")}><Phone size={16} /></GlassButton>
@@ -224,7 +241,17 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
       </header>
 
       <div className={styles.list} ref={list}>
-        {messages.length === 0 ? <p className={styles.empty}>{t("chat.empty")}</p> : messages.map(bubble)}
+        {messages.length === 0 ? <p className={styles.empty}>{t("chat.empty")}</p> : messages.map((m, i) => {
+          // owner 2026-11-14: the day between messages ("Today", "Yesterday", then the date)
+          const day = m.createdAt.slice(0, 10);
+          const showDay = i === 0 || messages[i - 1].createdAt.slice(0, 10) !== day;
+          return (
+            <Fragment key={m.id}>
+              {showDay ? <span className={styles.day}>{dayLabel(m.createdAt)}</span> : null}
+              {bubble(m)}
+            </Fragment>
+          );
+        })}
       </div>
 
       {error ? <p className={styles.error} role="status">{error}</p> : null}

@@ -9,7 +9,10 @@
     <string name="sos_default_title">Alerta de emergência</string>
     <string name="sos_open">Abrir</string>
     <string name="sos_silence">Silenciar</string>
-    <string name="connect_call_channel_name">Chamadas (PROSM Connect)</string>
+    <string name="connect_call_channel_name">Chamadas (Comunicação)</string>
     <string name="connect_call_channel_description">Chamadas de voz e vídeo recebidas dos colegas</string>
     <string name="connect_call_open">Abrir</string>
+    <string name="connect_call_incoming">Chamada recebida</string>
+    <string name="connect_call_answer">Atender</string>
+    <string name="connect_call_decline">Recusar</string>
 </resources>

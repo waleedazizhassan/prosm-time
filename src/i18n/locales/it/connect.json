@@ -3,13 +3,13 @@
   "lead": "Chat, chiamate e riunioni dentro PROSM Time. Il server consegna soltanto; le conversazioni restano sul tuo telefono.",
   "myNumber": "Il tuo interno",
   "switchboard": "Centralino",
-  "tabsLabel": "Sezioni di PROSM Connect",
+  "tabsLabel": "Sezioni di Comunicazione",
   "tabs": {
     "chats": "Chat",
     "calls": "Chiamate",
     "meetings": "Riunioni"
   },
-  "searchPlaceholder": "Cerca per nome, numero o sede",
+  "searchPlaceholder": "Cerca per nome o sede",
   "filtersLabel": "Filtra",
   "filters": {
     "all": "Tutti",
@@ -76,7 +76,8 @@
       "failed": "Impossibile connettersi",
       "busy": "Occupato",
       "rejected": "Rifiutata",
-      "missed": "Chiamata persa"
+      "missed": "Chiamata persa",
+      "ringingThere": "Squilla…"
     },
     "reply": {
       "atSite": "Sono in sede, ti richiamo a breve",
@@ -130,7 +131,10 @@
     "verifiedCamera": "Fotocamera verificata",
     "verifiedPhoto": "Foto verificata",
     "recording": "Registrazione… rilascia per inviare",
-    "talking": "Stai parlando… rilascia per inviare"
+    "talking": "Stai parlando… rilascia per inviare",
+    "today": "Oggi",
+    "yesterday": "Ieri",
+    "download": "Scarica"
   },
   "info": {
     "inSince": "Presente dalle {{time}}",
@@ -184,5 +188,22 @@
     "video": "Video",
     "files": "File",
     "voice": "Voce"
+  },
+  "sound": {
+    "title": "Suono e vibrazione",
+    "calls": "Chiamate",
+    "messages": "Messaggi",
+    "tone": "Suoneria",
+    "tones": {
+      "classic": "Campanello classico",
+      "digital": "Digitale",
+      "marimba": "Marimba"
+    },
+    "volume": "Volume",
+    "silent": "Silenzioso",
+    "callVibrate": "Vibra quando squilla",
+    "messageSound": "Suono per nuovo messaggio",
+    "messageVibrate": "Vibra per nuovo messaggio",
+    "note": "Queste impostazioni restano su questo dispositivo. Nell'app Android la chiamata squilla con la suoneria del telefono, anche ad app chiusa o schermo bloccato; nel browser la pagina deve essere aperta."
   }
 }

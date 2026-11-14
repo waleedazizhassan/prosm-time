@@ -1,0 +1,132 @@
+.group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0 10px;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.group:not(:first-child) {
+  margin-top: 18px;
+}
+
+.tones {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.tone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 6px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: var(--font-sm);
+  cursor: pointer;
+}
+
+.toneOn {
+  border-color: rgba(59, 130, 246, 0.8);
+  background: linear-gradient(160deg, rgba(37, 99, 235, 0.35), rgba(22, 137, 201, 0.15));
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+}
+
+.play {
+  position: absolute;
+  top: 6px;
+  inset-inline-end: 6px;
+  opacity: 0.6;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  background: var(--surface-card);
+  cursor: pointer;
+}
+
+.label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--font-sm);
+}
+
+.range {
+  flex: 1;
+  min-width: 0;
+  accent-color: #2f7cf6;
+}
+
+.value {
+  min-width: 44px;
+  text-align: end;
+  font-size: var(--font-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.switch {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  flex-shrink: 0;
+  width: 44px;
+  height: 26px;
+  margin: 0;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.35);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  inset-inline-start: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  transition: inset-inline-start 0.2s;
+}
+
+.switch:checked {
+  background: #22c55e;
+}
+
+.switch:checked::after {
+  inset-inline-start: 21px;
+}
+
+.switch:focus-visible,
+.tone:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
+
+.note {
+  margin: 12px 0 0;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}

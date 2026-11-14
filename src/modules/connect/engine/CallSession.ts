@@ -23,6 +23,8 @@ export class CallSession {
   localVideoOff = false;
   muted = false;
   startedAt: number | null = null;
+  /** The other phone is ringing (owner 2026-11-14: "calling" turns to "ringing" once the other side rings). */
+  remoteRinging = false;
   private pc: RTCPeerConnection | null = null;
   private channel: RealtimeChannel | null = null;
   private send: ((signal: Omit<Signal, "from">) => Promise<void>) | null = null;
@@ -33,7 +35,13 @@ export class CallSession {
   private listeners = new Set<() => void>();
   private unsubscribe: (() => void) | null = null;
 
+  // closing the page / app hangs up instead of leaving the other side alone in the call
+  private onPageHide = () => {
+    if (!["ended", "failed", "busy", "rejected", "missed"].includes(this.state)) void this.hangup();
+  };
+
   private constructor(callId: string, peerId: string, media: "audio" | "video", outgoing: boolean) {
+    window.addEventListener("pagehide", this.onPageHide);
     this.callId = callId;
     this.peerId = peerId;
     this.media = media;
@@ -91,7 +99,18 @@ export class CallSession {
     session.timers.push(window.setTimeout(() => {
       if (session.state === "ringing") session.finish("missed", false);
     }, 45000));
+    void session.announceRinging();
     return session;
+  }
+
+  /** The caller is told this phone rings - again every few seconds, in case they joined the channel after us. */
+  private async announceRinging() {
+    await this.join().catch(() => undefined);
+    const tell = () => {
+      if (this.state === "ringing") void this.send?.({ type: "ringing" }).catch(() => undefined);
+    };
+    tell();
+    this.timers.push(window.setInterval(tell, 2500));
   }
 
   async answer() {
@@ -103,7 +122,7 @@ export class CallSession {
       this.finish("ended", false);
       return;
     }
-    await this.join();
+    if (!this.channel) await this.join();
     await this.send?.({ type: "ready" });
     this.watchConnection();
   }
@@ -135,16 +154,22 @@ export class CallSession {
     pc.onconnectionstatechange = () => {
       const s = pc.connectionState;
       if (s === "connected") {
+        if (this.dropTimer !== null) {
+          window.clearTimeout(this.dropTimer);
+          this.dropTimer = null;
+        }
         this.everConnected = true;
         if (!this.startedAt) this.startedAt = Date.now();
         this.set("connected");
       } else if (s === "disconnected") {
         this.set("reconnecting");
+        this.armDropTimer();
         // a short drop (a changed network): restart the path if it does not come back by itself
         this.timers.push(window.setTimeout(() => {
           if (this.pc?.connectionState === "disconnected") void this.restart();
         }, 2500));
       } else if (s === "failed") {
+        this.armDropTimer();
         if (this.everConnected) void this.restart();
         else void this.hangup("failed");
       }
@@ -161,6 +186,20 @@ export class CallSession {
     }, 2000);
     this.timers.push(tick);
     return pc;
+  }
+
+  // owner 2026-11-14: "if the call drops on one side it keeps going on the other" - a connection that stays lost for
+  // 20 seconds (the other app closed, its network gone) ends the call on this side too
+  private dropTimer: number | null = null;
+  private armDropTimer() {
+    if (this.dropTimer !== null) return;
+    this.dropTimer = window.setTimeout(() => {
+      this.dropTimer = null;
+      const s = this.pc?.connectionState;
+      // a call that had been talking simply ends (the screen closes by itself); one that never got through says so
+      if (this.state !== "ended" && s !== "connected") void this.hangup(this.everConnected ? "hangup" : "failed");
+    }, 20000);
+    this.timers.push(this.dropTimer);
   }
 
   private watchConnection() {
@@ -218,6 +257,12 @@ export class CallSession {
         else this.pendingIce.push(candidate);
         break;
       }
+      case "ringing":
+        if (this.outgoing && this.state === "calling" && !this.remoteRinging) {
+          this.remoteRinging = true;
+          this.changed();
+        }
+        break;
       case "restart":
         if (this.outgoing) void this.restart();
         break;
@@ -279,6 +324,7 @@ export class CallSession {
     if (this.channel) void ConnectEngine.supabase.removeChannel(this.channel);
     this.channel = null;
     this.unsubscribe?.();
+    window.removeEventListener("pagehide", this.onPageHide);
     this.set(state);
   }
 
