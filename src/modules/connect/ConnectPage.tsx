@@ -47,6 +47,9 @@ export default function ConnectPage() {
   const [invitees, setInvitees] = useState<string[]>([]);
   const [meetingTitle, setMeetingTitle] = useState("");
   const people = connect?.people ?? new Map<string, ConnectPerson>();
+  // owner 2026-11-14: the owner sees everyone; nobody else sees the owner in the lists (a conversation the owner
+  // started still shows, so it can be answered)
+  const listable = (p: ConnectPerson) => p.id !== profile?.id && p.isActive && (!p.isOwner || Boolean(profile?.isOwner));
   const selected = params.get("c");
 
   const reload = useCallback(async () => setConversations(await ConnectEngine.conversations()), []);
@@ -79,7 +82,7 @@ export default function ConnectPage() {
       .filter((c) => c.id !== "recordings" || filter === "all")
       .map((c) => ({ kind: "conversation" as const, c, person: c.otherUserId ? people.get(c.otherUserId) ?? null : null }));
     const peopleRows = [...people.values()]
-      .filter((p) => p.id !== profile?.id && p.isActive && !withConversation.has(p.id))
+      .filter((p) => listable(p) && !withConversation.has(p.id))
       .map((p) => ({ kind: "person" as const, p }));
     const all = [...convRows, ...peopleRows];
     return all.filter((row) => {
@@ -288,7 +291,7 @@ export default function ConnectPage() {
           <p className={styles.hint}>{t("meeting.pick", { count: (meetingMedia === "video" ? 3 : 7) - invitees.length })}</p>
           {/* owner 2026-11-14: no long list to scroll - each person a small chip, tapped to invite */}
           <div className={styles.pickGrid} role="group" aria-label={t("meeting.pick", { count: (meetingMedia === "video" ? 3 : 7) - invitees.length })}>
-            {[...people.values()].filter((p) => p.id !== profile.id && p.isActive).map((p) => {
+            {[...people.values()].filter(listable).map((p) => {
               const checked = invitees.includes(p.id);
               const full = !checked && invitees.length >= (meetingMedia === "video" ? 3 : 7);
               return (
