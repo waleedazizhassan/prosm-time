@@ -87,7 +87,9 @@ export default function ConnectPage() {
       const person = row.kind === "conversation" ? row.person : row.p;
       if (q && !name.toLowerCase().includes(q) && !(person && (extensionOf(person.id) ?? "").includes(q)) && !(person?.currentSiteName ?? "").toLowerCase().includes(q)) return false;
       if (filter === "unread") return row.kind === "conversation" && row.c.unread > 0;
-      if (filter === "sites") return row.kind === "conversation" ? row.c.kind === "site" || Boolean(person && person.presence !== "out") : row.p.presence !== "out";
+      // owner 2026-11-14: "at sites" = at work now (in or on a break) - someone on leave is not at a site
+      const atWork = (x: { presence: string } | null | undefined) => Boolean(x && (x.presence === "in" || x.presence === "break"));
+      if (filter === "sites") return row.kind === "conversation" ? row.c.kind === "site" || atWork(person) : atWork(row.p);
       if (filter === "teams") return row.kind === "conversation" && row.c.kind !== "direct";
       return true;
     });

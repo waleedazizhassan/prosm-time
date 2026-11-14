@@ -152,10 +152,16 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site, defaultK
   };
 
   // owner 2026-11-13: a site's address is filled from its position when it is still empty
+  // owner 2026-11-14: a new position replaces the old address (it used to keep the first one forever)
   const fillAddress = async (lat: number, lng: number) => {
-    if (displayAddress.trim()) return;
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
     const address = await reverseGeocodeAddress(lat, lng, i18n.language.slice(0, 2));
-    if (address) setDisplayAddress((current) => current.trim() || address);
+    if (address) setDisplayAddress(address);
+  };
+  const refreshAddressFromFields = () => {
+    if (latitude === "" || longitude === "") return;
+    if (site && Number(latitude) === site.latitude && Number(longitude) === site.longitude) return;
+    void fillAddress(Number(latitude), Number(longitude));
   };
 
   const handleTestLocation = async () => {
@@ -326,7 +332,7 @@ export default function SiteFormModal({ isOpen, onClose, onSaved, site, defaultK
           helperText={t("form.displayAddressHint")}
         />
 
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-3)" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-3)" }} onBlur={refreshAddressFromFields}>
           <Input label={t("form.latitudeLabel")} name="siteLatitude" type="number" value={latitude} onChange={(event) => setLatitude(event.target.value)} required disabled={submitting} />
           <Input label={t("form.longitudeLabel")} name="siteLongitude" type="number" value={longitude} onChange={(event) => setLongitude(event.target.value)} required disabled={submitting} />
         </div>

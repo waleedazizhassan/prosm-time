@@ -37,8 +37,18 @@ function positionIn(text: string): { latitude: number; longitude: number } | nul
       return { latitude, longitude };
     }
   }
+  // owner 2026-11-14: the phone page of a place keeps its view as [[height, lng, lat],[0,0,0],...] (longitude first)
+  const view = text.match(/\[\[\d+(?:\.\d+)?,(-?\d+\.\d+),(-?\d+\.\d+)\],\[0,0,0\]/);
+  if (view) {
+    const longitude = Number(view[1]);
+    const latitude = Number(view[2]);
+    if (Math.abs(latitude) <= 90 && Math.abs(longitude) <= 180 && !(latitude === 0 && longitude === 0)) return { latitude, longitude };
+  }
   return null;
 }
+
+// the computer page carries the map's centre in its preview image (center=lat%2Clng)
+const DESKTOP = { "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36", "accept-language": "en", cookie: "CONSENT=YES+1" };
 
 serve(async (request: Request) => {
   if (request.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
@@ -96,7 +106,7 @@ serve(async (request: Request) => {
     // the address - the position is then read from the Google Maps page itself (same Google host, one request)
     let position = positionIn(decodeSafe(current.toString()));
     if (!position && isGoogleHost(current.hostname.toLowerCase())) {
-      const page = await fetch(current.toString(), { method: "GET", headers: BROWSER, signal: AbortSignal.timeout(6000) }).catch(() => null);
+      const page = await fetch(current.toString(), { method: "GET", headers: DESKTOP, signal: AbortSignal.timeout(6000) }).catch(() => null);
       const html = page && page.ok ? (await page.text()).slice(0, 2_000_000) : "";
       position = positionIn(html);
     }
