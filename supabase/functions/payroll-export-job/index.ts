@@ -19,6 +19,7 @@ import { zipSync } from "npm:fflate@0.8.2";
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
 import { bytes, fontsFor } from "../_shared/pdfFonts.ts";
 import { buildPayslipPdf, payslipTexts, type PayslipData, type PayslipLogo } from "../_shared/payslipPdfCore.ts";
+import { secretsMatch } from "../_shared/constantTime.ts";
 
 declare const EdgeRuntime: { waitUntil(promise: Promise<unknown>): void } | undefined;
 
@@ -134,7 +135,8 @@ serve(async (request: Request) => {
   if (request.method !== "POST") return errorResponse("Method not allowed.", 405, "METHOD_NOT_ALLOWED");
   const authorization = request.headers.get("authorization") ?? "";
   const body = await request.json().catch(() => ({}));
-  const isService = authorization === `Bearer ${serviceKey}`;
+  // governance phase A (2026-11-15): constant-time comparison of the service key
+  const isService = await secretsMatch(authorization.replace(/^Bearer\s+/i, ""), serviceKey);
 
   try {
     if (body.action === "continue") {

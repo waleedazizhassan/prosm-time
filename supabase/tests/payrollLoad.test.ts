@@ -78,4 +78,4 @@ describe("payroll at 1,000 employees x 30 lines", () => {
     );
     for (const [label, ms] of timings) if (!label.startsWith("setup")) expect(ms, label).toBeLessThan(180_000);
   }, 900_000);
-});
+}, 1_800_000); // governance phase A: the 1,000-person setup needs more than the default 10 minutes on a slow machine

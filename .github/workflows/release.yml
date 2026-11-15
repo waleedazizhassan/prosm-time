@@ -211,6 +211,8 @@ jobs:
       - run: npm run build:obfuscated
         env:
           VITE_BUILD_RELEASED_AT: ${{ needs.test.outputs.releasedAt }}
+      # governance phase A (2026-11-15): no server secret may ship inside the APK's web assets
+      - run: node scripts/check-no-secrets.mjs dist
       - run: npx cap sync android
 
       - name: Sync app version into the Android project
@@ -428,6 +430,8 @@ jobs:
       - run: npm run build
         env:
           VITE_BUILD_RELEASED_AT: ${{ needs.test.outputs.releasedAt }}
+      # governance phase A (2026-11-15): no server secret may ship in the web build
+      - run: node scripts/check-no-secrets.mjs dist
 
       # Owner 2026-10-20: the web version is also published on GitHub Pages
       # at time.prosm.net with every release (the copy inside prosm.net's
