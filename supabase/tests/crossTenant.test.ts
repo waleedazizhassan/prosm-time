@@ -76,6 +76,9 @@ const TABLES: Record<string, string> = {
   attendance_events: "select id from attendance_events where session_id in (select id from attendance_sessions where organization_id = $1)",
   attendance_sessions: byOrg,
   audit_logs: byOrg,
+  // governance phases B and E (2026-11-15)
+  attendance_revisions: byOrg,
+  ownership_transfers: byOrg,
   break_events: byOrg,
   camera_evidence: byOrg,
   correction_requests: byOrg,
