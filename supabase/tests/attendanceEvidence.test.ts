@@ -160,7 +160,9 @@ describe("a closed pay period stays closed", () => {
 
 describe("payroll: pending requests in the period are a warning to acknowledge", () => {
   it("lists the employee with a pending correction", async () => {
-    await requestCorrection("clock_out", "now() - interval '20 minutes'");
+    // one pending correction per shift and event (phase D): reuse the one already waiting, if any
+    const pending = await t.su("select 1 from correction_requests where attendance_session_id = $1 and status = 'pending'", [shiftId]);
+    if (pending.length === 0) await requestCorrection("clock_out", "now() - interval '20 minutes'");
     const result = await t.as<{ v: { warnings: { code: string; userId: string }[] } }>(org.owner.authId, "select public.validate_prosm_time_payroll_cycle($1) as v", [cycleId]);
     if (result.error && /FEATURE NOT IN PLAN/.test(result.error)) return; // the payroll feature is checked by its own suites
     expect(result.error).toBeNull();
