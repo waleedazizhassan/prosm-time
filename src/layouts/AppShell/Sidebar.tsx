@@ -161,7 +161,24 @@ export default function Sidebar() {
         <nav className={styles.navigation} aria-label={t("navigationLabel")}>
           {simpleMenu ? (
             <div className={styles.navSection}>
-              {otherPages.map((item) => {
+              {otherPages.filter((item) => item.section !== "connect").map((item) => {
+                const Icon = item.icon;
+                return (
+                  <NavLink key={item.id} to={item.path} end className={({ isActive }) => [styles.item, isActive ? styles.active : ""].filter(Boolean).join(" ")}>
+                    <span className={styles.itemIcon}>
+                      <Icon size={18} strokeWidth={2} />
+                    </span>
+                    <span className={styles.itemLabel}>{t(item.labelKey)}</span>
+                  </NavLink>
+                );
+              })}
+            </div>
+          ) : null}
+          {/* owner 2026-11-15: an employee's Connect pages sit together under one heading, as in the managers' tree */}
+          {simpleMenu && otherPages.some((item) => item.section === "connect") ? (
+            <div className={styles.navSection}>
+              <div className={styles.navSectionLabel}>{t("sections.connect")}</div>
+              {otherPages.filter((item) => item.section === "connect").map((item) => {
                 const Icon = item.icon;
                 return (
                   <NavLink key={item.id} to={item.path} end className={({ isActive }) => [styles.item, isActive ? styles.active : ""].filter(Boolean).join(" ")}>
