@@ -2,7 +2,7 @@
 -- employees took 14 minutes instead of under a second. prosm_time_connect_next_ext scanned every number from 10 to
 -- 999,999 (min() over the whole series; the limit applied after it) for each new person. Same result now - the
 -- smallest free extension from 10 - found from the extensions that exist: 10 if free, else the first taken number
--- whose next number is free.
+-- whose next number is free; with no gap (the usual case) simply the highest plus one, in one pass.
 -- Rollback: re-run prosm_time_connect_next_ext from 20261114100000.
 
 begin;
@@ -14,8 +14,14 @@ volatile
 security definer
 set search_path = public
 as $$
+    with taken as (
+        select count(*) as n, max(ext::int) as top
+        from connect_extensions where organization_id = p_org and ext ~ '^[0-9]{2,6}$' and ext::int >= 10
+    )
     select case
         when not exists (select 1 from connect_extensions where organization_id = p_org and ext = '10') then '10'
+        -- the usual case: 10..top all taken, no gap - the next is top + 1 (one pass, no sort)
+        when (select n from taken) = (select top from taken) - 9 then ((select top from taken) + 1)::text
         else (
             select (x.ext::int + 1)::text
             from connect_extensions x
