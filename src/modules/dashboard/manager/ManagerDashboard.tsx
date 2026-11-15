@@ -263,7 +263,8 @@ export default function ManagerDashboard() {
     switch (id) {
       case "map":
         return (
-          <section key={id} className={`${styles.widget} ${styles.span7} ${styles.equal}`} style={{ order: order.indexOf(id) }}>
+          // owner 2026-11-15: on a computer the map takes the whole width and more height
+          <section key={id} className={`${styles.widget} ${styles.span12} ${styles.mapWidget}`} style={{ order: order.indexOf(id) }}>
             <div className={styles.widgetHeader}>
               <h2 className={styles.widgetTitle}>{t("manager.map.title")}</h2>
               <span className={styles.rowMeta}>{t("manager.liveNote")}</span>
@@ -273,7 +274,7 @@ export default function ManagerDashboard() {
         );
       case "present":
         return (
-          <section key={id} className={`${styles.widget} ${styles.span5} ${styles.equal} ${styles.presentWidget}`} style={{ order: order.indexOf(id) }}>
+          <section key={id} className={`${styles.widget} ${styles.span12} ${styles.equal} ${styles.presentWidget}`} style={{ order: order.indexOf(id) }}>
             <div className={styles.widgetHeader}>
               <h2 className={styles.widgetTitle}>{t("manager.present.title", { count: data?.presentNow.length ?? 0 })}</h2>
               <button type="button" className={styles.chip} onClick={() => navigate("/attendance?period=today")}>

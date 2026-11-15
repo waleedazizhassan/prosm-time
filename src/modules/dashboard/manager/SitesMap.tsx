@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { LocateFixed, Maximize2, Minimize2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, LocateFixed, Maximize2, Minimize2 } from "lucide-react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -192,6 +192,40 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
   const listedPeople = listFor === null ? [] : listFor === ELSEWHERE ? unplaced : placed.filter((p) => p.siteId === listFor).map((p) => p.person);
   const keyRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  // owner 2026-11-15: the site cards scroll well - arrows on a computer, the wheel scrolls sideways
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [edges, setEdges] = useState({ start: true, end: true });
+  const measure = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    const pos = Math.abs(el.scrollLeft); // RTL scrolls with negative values
+    const next = { start: pos <= 2, end: pos >= max - 2 };
+    setEdges((prev) => (prev.start === next.start && prev.end === next.end ? prev : next));
+  };
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return undefined;
+    measure();
+    const wheel = (event: WheelEvent) => {
+      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX) || el.scrollWidth <= el.clientWidth) return;
+      event.preventDefault();
+      el.scrollBy({ left: rtl ? -event.deltaY : event.deltaY, behavior: "auto" });
+    };
+    el.addEventListener("wheel", wheel, { passive: false });
+    window.addEventListener("resize", measure);
+    return () => {
+      el.removeEventListener("wheel", wheel);
+      window.removeEventListener("resize", measure);
+    };
+  });
+  // "forward" is towards the end of the reading direction
+  const page = (forward: boolean) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const step = Math.max(160, el.clientWidth * 0.8) * (forward ? 1 : -1) * (rtl ? -1 : 1);
+    el.scrollBy({ left: step, behavior: "smooth" });
+  };
   useEffect(() => {
     if (listFor === null) return undefined;
     const close = (event: PointerEvent) => {
@@ -232,10 +266,14 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
       </button>
       {keyed.length > 0 || unplaced.length > 0 ? (
         <div ref={keyRef} className={styles.mapKey} role="group" aria-label={t("manager.map.keyLabel")}>
+          <button type="button" className={styles.mapKeyArrow} onClick={() => page(false)} disabled={edges.start} aria-label={t("manager.map.previous")}>
+            {rtl ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+          </button>
+          <div ref={trackRef} className={styles.mapKeyTrack} onScroll={measure}>
           {keyed.map((site) => (
             <button key={site.id} type="button" className={styles.mapKeyItem} onClick={() => showSite(site.id)} aria-expanded={listFor === site.id} title={site.sos ? t("manager.map.stateSos") : (insideCount.get(site.id) ?? 0) > 0 ? t("manager.map.stateActive") : t("manager.map.stateIdle")}>
               <span className={styles.mapKeyDot} style={{ background: siteColor(site, insideCount.get(site.id) ?? 0) }} aria-hidden="true" />
-              <span>{site.name}</span>
+              <span title={site.name}>{site.name}</span>
               <b>{insideCount.get(site.id) ?? 0}</b>
             </button>
           ))}
@@ -248,6 +286,10 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
               <b>{unplaced.length}</b>
             </button>
           ) : null}
+          </div>
+          <button type="button" className={styles.mapKeyArrow} onClick={() => page(true)} disabled={edges.end} aria-label={t("manager.map.next")}>
+            {rtl ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
+          </button>
         </div>
       ) : null}
       {listedPeople.length > 0 ? (

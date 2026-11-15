@@ -495,15 +495,64 @@
   inset-block-end: 22px;
   z-index: 500;
   display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* owner 2026-11-15: the site cards scroll well - snap to a card, the wheel scrolls sideways, arrows on a computer */
+.mapKeyTrack {
+  display: flex;
+  flex: 1;
+  min-width: 0;
   gap: 6px;
   overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
   scrollbar-width: none;
+  overscroll-behavior-x: contain;
   padding: 2px;
+}
+
+.mapKeyTrack::-webkit-scrollbar {
+  display: none;
+}
+
+.mapKeyArrow {
+  display: none;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border-light);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--surface-card) 92%, transparent);
+  color: var(--text-primary);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(15, 23, 42, 0.12));
+}
+
+.mapKeyArrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .mapKeyArrow {
+    display: inline-flex;
+  }
+}
+
+/* the whole map card on a computer: wide and tall, never smaller than useful */
+.mapWidget {
+  height: clamp(380px, 62vh, 720px);
 }
 
 .mapKeyItem {
   display: inline-flex;
   flex: none;
+  scroll-snap-align: start;
+  max-width: clamp(140px, 28vw, 260px);
   align-items: center;
   gap: 6px;
   min-height: 30px;
@@ -520,6 +569,13 @@
 
 .mapKeyItem b {
   font-variant-numeric: tabular-nums;
+}
+
+/* a long site name shortens instead of stretching the card */
+.mapKeyItem > span:not(.mapKeyDot) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .mapKeyDot {
@@ -1077,4 +1133,17 @@
   flex-shrink: 0;
   color: var(--status-warning-text, #f59e0b);
   font-variant-numeric: tabular-nums;
+}
+
+/* owner 2026-11-15: the map card follows the screen - shorter on a tablet and a phone */
+@media (max-width: 1279px) {
+  .mapWidget {
+    height: clamp(340px, 55vh, 560px);
+  }
+}
+
+@media (max-width: 767px) {
+  .mapWidget {
+    height: clamp(300px, 52vh, 460px);
+  }
 }

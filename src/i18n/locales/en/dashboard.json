@@ -470,7 +470,9 @@
       "noLocation": "Not on the map",
       "noLocationHint": "Clocked in without coordinates (for example a device without GPS), so they cannot be placed.",
       "noLocationShort": "No location",
-      "elsewhere": "Outside the sites"
+      "elsewhere": "Outside the sites",
+      "previous": "Previous sites",
+      "next": "More sites"
     },
     "present": {
       "title": "Here now ({{count}})",

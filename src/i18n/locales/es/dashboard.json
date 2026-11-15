@@ -473,7 +473,9 @@
       "noLocation": "Sin ubicación en el mapa",
       "noLocationHint": "Fichó sin coordenadas (p. ej., sin GPS), no se puede situar.",
       "noLocationShort": "Sin ubicación",
-      "elsewhere": "Fuera de los sitios"
+      "elsewhere": "Fuera de los sitios",
+      "previous": "Sedes anteriores",
+      "next": "Más sedes"
     },
     "present": {
       "title": "Presentes ahora ({{count}})",
