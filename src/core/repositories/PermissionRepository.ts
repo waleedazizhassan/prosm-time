@@ -112,6 +112,17 @@ class PermissionRepository {
     }
   }
 
+  // owner 2026-11-15: every individual grant or removal of this person cleared at once - back to the role's defaults
+  async resetToRole(targetUserId: string, reason: string): Promise<ServiceResult> {
+    try {
+      const { error } = await this.client.rpc("reset_prosm_time_user_permissions", { p_target_user_id: targetUserId, p_reason: reason });
+      if (error) return createError(error.message);
+      return createSuccess();
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Permission service unavailable.");
+    }
+  }
+
   async clearOverride(targetUserId: string, permissionKey: string, reason: string): Promise<ServiceResult> {
     try {
       const { data, error } = await this.client.rpc("clear_prosm_time_user_permission_override", {

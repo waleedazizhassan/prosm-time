@@ -282,7 +282,7 @@
     "window": "from {{from}} to {{to}}",
     "ended": "ended",
     "startLabel": "From (optional - today if empty)",
-    "endLabel": "Until (optional - until withdrawn if empty)",
+    "endLabel": "Until (optional - 30 days if empty, at most 30 days)",
     "endBeforeStart": "The end date must be after the start date.",
     "windowHint": "It starts and ends by itself on these dates. You can withdraw it at any time.",
     "neverDelegated": "Never delegated: closing the organisation, the plan and activation codes, data retention, API keys, granting permission management, and delegation itself. Nobody - including the delegate - approves their own request."
@@ -331,7 +331,8 @@
       "leave": "Leave",
       "penalties": "Penalties & incentives",
       "history": "History",
-      "account": "Account and permissions"
+      "account": "Account and permissions",
+      "security": "Security"
     },
     "fields": {
       "jobTitle": "Job title",
@@ -450,5 +451,59 @@
     },
     "stillHeld": "Not all taken back: this person holds the owner's full authority. Withdraw it with the \"{{owner}}\" button first.",
     "viaOwner": "Comes with the owner's authority - withdraw it there"
+  },
+  "security": {
+    "title": "Two-step sign-in",
+    "subtitle": "A code from an authenticator app on your phone, in addition to your password.",
+    "on": "Two-step sign-in is on.",
+    "off": "Two-step sign-in is off.",
+    "requiredForYou": "Your role needs two-step sign-in for payroll and permissions. Turn it on now.",
+    "enable": "Turn on",
+    "scan": "Scan this code with an authenticator app (Google Authenticator, Microsoft Authenticator…), then enter the 6-digit code it shows.",
+    "qrAlt": "QR code for the authenticator app",
+    "secret": "Or enter this key by hand: {{secret}}",
+    "code": "6-digit code",
+    "verify": "Verify and turn on",
+    "cancel": "Cancel",
+    "enabled": "Two-step sign-in is on.",
+    "removed": "The authenticator was removed.",
+    "remove": "Remove",
+    "authenticator": "Authenticator app",
+    "wrongCode": "The code is not correct. Check the time on your phone and try again.",
+    "failed": "Could not start. Try again.",
+    "removeNeedsCode": "To remove it, sign in again with your authenticator code first."
+  },
+  "perms": {
+    "hint": "Switch any line on or off. A grouped line grants or removes everything in it together.",
+    "count": "{{on}} of {{total}}",
+    "partly": "Partly granted",
+    "changedFromRole": "Differs from the role",
+    "resetAll": "Back to the role's defaults",
+    "resetTitle": "Back to the role's permissions?",
+    "resetExplain": "Every permission given or taken away for this person individually is cleared; they get their role's permissions as they are.",
+    "grantTitle": "Grant permission",
+    "revokeTitle": "Remove permission",
+    "lineExplain": "\"{{name}}\" - write the reason; it goes to the activity log.",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "groups": {
+      "attendance": "Attendance",
+      "leave": "Leave and calendar",
+      "people": "People and permissions",
+      "payroll": "Payroll and allowances",
+      "external": "External workforce",
+      "sites": "Sites, schedules and projects",
+      "reports": "Reports, dashboard and log",
+      "settings": "Announcements, notifications and settings",
+      "other": "Other"
+    },
+    "merged": {
+      "onBehalf": "Clock in and out on someone's behalf",
+      "payrollExports": "Export payroll (summary, payslips, allowances)",
+      "reports": "View reports and make PDFs",
+      "timesheets": "Generate and approve timesheets",
+      "announcements": "Publish announcements and see who read them",
+      "externalPay": "View and export external workers' pay"
+    }
   }
 }

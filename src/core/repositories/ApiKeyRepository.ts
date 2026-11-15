@@ -1,4 +1,5 @@
 import DatabaseManager from "../database/DatabaseManager";
+import { withStepUp } from "../auth/stepUp";
 
 export interface ServiceResult<T = null> {
   success: boolean;
@@ -23,6 +24,8 @@ export interface ApiKeySummary {
   createdAt: string;
   lastUsedAt: string | null;
   revokedAt: string | null;
+  /** governance phase D: set once the key was rotated; it then ends within 24 hours */
+  replacedBy?: string | null;
   requests7d: number;
 }
 
@@ -62,14 +65,32 @@ class ApiKeyRepository {
 
   async generate(input: NewApiKey): Promise<ServiceResult<{ keyId: string; apiKey: string }>> {
     try {
-      const { data, error } = await this.client.rpc("generate_prosm_time_api_key_v2", {
-        p_name: input.name,
-        p_scopes: input.scopes,
-        p_expires_at: input.expiresAt,
-        p_environment: input.environment,
+      // governance phase C: creating a key may ask to confirm the identity first (the server decides)
+      const { data, error } = await withStepUp("apikey.create", async () => {
+        const result = await this.client.rpc("generate_prosm_time_api_key_v2", {
+          p_name: input.name,
+          p_scopes: input.scopes,
+          p_expires_at: input.expiresAt,
+          p_environment: input.environment,
+        });
+        return { data: result.data, error: result.error ? result.error.message : null };
       });
-      if (error) return createError(error.message);
+      if (error) return createError(error);
       if (data?.success === false) return createError("Unable to create this API key.");
+      return createSuccess({ keyId: data.keyId, apiKey: data.apiKey });
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "API key service unavailable.");
+    }
+  }
+
+  // governance phase D: a new key with the same scopes; the old one keeps working for 24 hours, then the clock ends it
+  async rotate(keyId: string): Promise<ServiceResult<{ keyId: string; apiKey: string }>> {
+    try {
+      const { data, error } = await withStepUp("apikey.create", async () => {
+        const result = await this.client.rpc("rotate_prosm_time_api_key", { p_key_id: keyId });
+        return { data: result.data, error: result.error ? result.error.message : null };
+      });
+      if (error) return createError(error);
       return createSuccess({ keyId: data.keyId, apiKey: data.apiKey });
     } catch (error) {
       return createError(error instanceof Error ? error.message : "API key service unavailable.");

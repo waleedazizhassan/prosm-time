@@ -111,7 +111,12 @@
         "leave_rejected": "Permiso rechazado",
         "leave_cancelled": "Permiso cancelado"
       }
-    }
+    },
+    "rotateAction": "Rotar",
+    "rotateTitle": "¿Rotar esta clave?",
+    "rotateWarning": "Una clave nueva sustituye a «{{name}}» con los mismos permisos. La antigua sigue funcionando 24 horas para que actualices el otro sistema y luego se detiene sola.",
+    "rotateError": "No se pudo rotar esta clave.",
+    "replaced": "Sustituida: termina en 24 horas"
   },
   "payroll": {
     "title": "Integración de nóminas",
@@ -324,5 +329,27 @@
     "people_other": "{{count}} personas",
     "error": "No se pudo guardar.",
     "people_many": "{{count}} personas"
+  },
+  "ownership": {
+    "title": "Transferir la propiedad",
+    "subtitle": "La única forma de cambiar el propietario.",
+    "explain": "Elige un miembro activo. Debe aceptar; después pasan 72 horas en las que se avisa a todos los gerentes, y puedes cancelar hasta que termine. Después pasarás a ser gerente.",
+    "to": "Nuevo propietario",
+    "choose": "Elige un miembro",
+    "reason": "Motivo",
+    "start": "Iniciar la transferencia",
+    "started": "La transferencia comenzó. Esperando que el destinatario acepte.",
+    "waitingForYou": "{{name}} quiere transferirte la propiedad de la organización. Acepta para continuar.",
+    "waitingForThem": "Esperando que {{name}} acepte.",
+    "cooling": "{{name}} aceptó. La transferencia termina después de {{when}} salvo que se cancele.",
+    "ready": "El periodo de espera terminó. Ya se puede completar la transferencia a {{name}}.",
+    "accept": "Aceptar",
+    "accepted": "Aceptada. La transferencia se puede completar en 72 horas.",
+    "complete": "Completar la transferencia",
+    "completed": "La propiedad fue transferida.",
+    "cancel": "Cancelar la transferencia",
+    "decline": "Rechazar",
+    "cancelled": "La transferencia se canceló.",
+    "failed": "No se pudo realizar este paso."
   }
 }

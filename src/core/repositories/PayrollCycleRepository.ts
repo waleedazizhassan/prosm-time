@@ -1,4 +1,5 @@
 import DatabaseManager from "../database/DatabaseManager";
+import { withStepUp } from "../auth/stepUp";
 
 // 2026-11-08: the payroll module (migrations 20261108130000, 20261108140000). Every rule -
 // permissions and scope, the net, visibility of each line in each report, the workflow,
@@ -357,10 +358,12 @@ class PayrollCycleRepository {
   suggestions = (cycleId: string) => this.call<Suggestion[]>("list_prosm_time_payroll_suggestions", { p_cycle_id: cycleId });
   validate = (cycleId: string) => this.call<{ errors: ValidationItem[]; warnings: ValidationItem[]; canSubmit: boolean }>("validate_prosm_time_payroll_cycle", { p_cycle_id: cycleId });
   transition = (cycleId: string, action: "submit" | "return" | "approve" | "lock" | "reopen" | "cancel", reason: string | null, expectedVersion: number | null, acknowledgeWarnings = false) =>
-    this.call<{ status: CycleStatus }>("transition_prosm_time_payroll_cycle", {
+    // governance phase C: approving and reopening may ask to confirm the identity first (the server decides)
+    withStepUp(`payroll.${action}`, () => this.call<{ status: CycleStatus }>("transition_prosm_time_payroll_cycle", {
       p_cycle_id: cycleId, p_action: action, p_reason: reason, p_expected_version: expectedVersion, p_acknowledge_warnings: acknowledgeWarnings,
-    });
-  publish = (cycleId: string, publish: boolean) => this.call<{ success: boolean }>("publish_prosm_time_payslips", { p_cycle_id: cycleId, p_publish: publish });
+    }));
+  publish = (cycleId: string, publish: boolean) =>
+    withStepUp("payroll.publish_payslips", () => this.call<{ success: boolean }>("publish_prosm_time_payslips", { p_cycle_id: cycleId, p_publish: publish }));
   report = (cycleId: string, reportType: ReportType, format: "preview" | "pdf" | "xlsx" | "zip", userIds: string[] | null = null, siteIds: string[] | null = null) =>
     this.call<PayrollReport>("get_prosm_time_payroll_report", { p_cycle_id: cycleId, p_report_type: reportType, p_user_ids: userIds, p_site_ids: siteIds, p_format: format });
   importLines = (cycleId: string, rows: Record<string, unknown>[], fileName: string, dryRun: boolean) =>

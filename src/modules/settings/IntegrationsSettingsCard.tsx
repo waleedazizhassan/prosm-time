@@ -36,7 +36,8 @@ const SCOPE_LABEL_KEYS: Record<ApiKeyScope, string> = {
   "leaves:read": "integrations.scope.leavesRead",
   "payroll:read": "integrations.scope.payrollRead",
 };
-const EXPIRY_DAYS = ["0", "30", "90", "365"] as const;
+// governance phase D: every key has an expiry (365 days at most) - rotate a key to keep an integration running
+const EXPIRY_DAYS = ["30", "90", "365"] as const;
 
 const chip = {
   display: "inline-block",
@@ -56,13 +57,15 @@ export default function IntegrationsSettingsCard() {
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
   const [scopes, setScopes] = useState<ApiKeyScope[]>(["attendance:read"]);
-  const [expiryDays, setExpiryDays] = useState<string>("365");
+  const [expiryDays, setExpiryDays] = useState<string>("90");
   const [environment, setEnvironment] = useState<ApiKeyEnvironment>("live");
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState("");
   const [revokingId, setRevokingId] = useState<string | null>(null);
   const [confirmRevoke, setConfirmRevoke] = useState<ApiKeySummary | null>(null);
   const [newKeyValue, setNewKeyValue] = useState<string | null>(null);
+  const [rotatingId, setRotatingId] = useState<string | null>(null);
+  const [confirmRotate, setConfirmRotate] = useState<ApiKeySummary | null>(null);
   const [copied, setCopied] = useState(false);
 
   const load = () => {
@@ -95,7 +98,7 @@ export default function IntegrationsSettingsCard() {
     const result = await ApiKeyRepository.generate({
       name: name.trim(),
       scopes,
-      expiresAt: days > 0 ? new Date(Date.now() + days * 24 * 60 * 60 * 1000).toISOString() : null,
+      expiresAt: new Date(Date.now() + days * 24 * 60 * 60 * 1000).toISOString(),
       environment,
     });
     setCreating(false);
@@ -106,6 +109,20 @@ export default function IntegrationsSettingsCard() {
     setNewKeyValue(result.data.apiKey);
     setName("");
     setScopes(["attendance:read"]);
+    load();
+  };
+
+  const handleRotate = async (keyId: string) => {
+    setRotatingId(keyId);
+    setError("");
+    const result = await ApiKeyRepository.rotate(keyId);
+    setRotatingId(null);
+    setConfirmRotate(null);
+    if (!result.success || !result.data) {
+      setError(humanizeBackendError(result.message, t) ?? t("integrations.rotateError"));
+      return;
+    }
+    setNewKeyValue(result.data.apiKey);
     load();
   };
 
@@ -182,11 +199,19 @@ export default function IntegrationsSettingsCard() {
                     {t("integrations.requests7d", { n: key.requests7d })}
                     {" · "}
                     {key.expiresAt ? t("integrations.expiresOn", { time: formatDateTime(key.expiresAt, i18n.language) }) : t("integrations.noExpiry")}
+                    {key.replacedBy ? <>{" · "}{t("integrations.replaced")}</> : null}
                   </p>
                 </div>
-                <Button size="sm" variant="ghost" onClick={() => setConfirmRevoke(key)} loading={revokingId === key.id}>
-                  {t("integrations.revokeAction")}
-                </Button>
+                <div style={{ display: "flex", gap: "var(--space-2)" }}>
+                  {!expired && !key.replacedBy ? (
+                    <Button size="sm" variant="ghost" onClick={() => setConfirmRotate(key)} loading={rotatingId === key.id}>
+                      {t("integrations.rotateAction")}
+                    </Button>
+                  ) : null}
+                  <Button size="sm" variant="ghost" onClick={() => setConfirmRevoke(key)} loading={revokingId === key.id}>
+                    {t("integrations.revokeAction")}
+                  </Button>
+                </div>
               </div>
             );
           })}
@@ -213,7 +238,7 @@ export default function IntegrationsSettingsCard() {
             value={expiryDays}
             onChange={(event) => setExpiryDays(event.target.value)}
             disabled={creating}
-            options={EXPIRY_DAYS.map((days) => ({ value: days, label: days === "0" ? t("integrations.noExpiry") : t("integrations.expiryDays", { n: Number(days) }) }))}
+            options={EXPIRY_DAYS.map((days) => ({ value: days, label: t("integrations.expiryDays", { n: Number(days) }) }))}
           />
         </div>
         <div style={{ minWidth: 140 }}>
@@ -257,6 +282,18 @@ export default function IntegrationsSettingsCard() {
           </Button>
           <Button onClick={() => confirmRevoke && handleRevoke(confirmRevoke.id)} loading={revokingId !== null}>
             {t("integrations.revokeAction")}
+          </Button>
+        </div>
+      </Modal>
+
+      <Modal isOpen={confirmRotate !== null} onClose={() => setConfirmRotate(null)} title={t("integrations.rotateTitle")}>
+        <HintText>{t("integrations.rotateWarning", { name: confirmRotate?.name ?? "" })}</HintText>
+        <div style={{ display: "flex", gap: "var(--space-2)", justifyContent: "flex-end" }}>
+          <Button variant="ghost" onClick={() => setConfirmRotate(null)}>
+            {t("integrations.cancel")}
+          </Button>
+          <Button onClick={() => confirmRotate && handleRotate(confirmRotate.id)} loading={rotatingId !== null}>
+            {t("integrations.rotateAction")}
           </Button>
         </div>
       </Modal>

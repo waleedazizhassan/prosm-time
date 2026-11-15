@@ -382,7 +382,18 @@
     "phoneRequired": "Scrivi il numero di cellulare.",
     "ownerAccountProtected": "L'account del titolare è protetto.",
     "ownerChangesOnlyByTransfer": "Il titolare cambia solo con un trasferimento di proprietà.",
-    "payPeriodLocked": "Questo periodo di paga è bloccato. Riapri prima la busta paga o restituisci il foglio ore."
+    "payPeriodLocked": "Questo periodo di paga è bloccato. Riapri prima la busta paga o restituisci il foglio ore.",
+    "stepUpRequired": "Conferma la tua identità prima di questa azione.",
+    "mfaRequired": "Questa azione richiede l'accesso in due passaggi.",
+    "correctionAlreadyPending": "C'è già una correzione in sospeso per questo.",
+    "apiKeyMax365": "Una chiave API dura al massimo 365 giorni.",
+    "delegationMax30": "Una delega dura al massimo 30 giorni. Concedila di nuovo per prolungarla.",
+    "onlyActiveKeyRotated": "Si può rinnovare solo una chiave attiva.",
+    "onlyOwnerTransfers": "Solo il titolare trasferisce la proprietà.",
+    "ownershipTransferOpen": "C'è già un trasferimento di proprietà aperto.",
+    "waitingNotOver": "Il periodo di attesa non è ancora finito.",
+    "ownershipNotReady": "Il trasferimento di proprietà non è pronto.",
+    "chooseActiveMember": "Scegli un membro attivo dell'organizzazione."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",
@@ -493,5 +504,18 @@
     "count_one": "{{count}} registrazione",
     "count_other": "{{count}} registrazioni",
     "count_many": "{{count}} registrazioni"
+  },
+  "stepUp": {
+    "title": "Conferma la tua identità",
+    "explain": "Questa azione è sensibile. Inserisci la password per continuare.",
+    "explainMfa": "Questa azione è sensibile. Inserisci la password e il codice della tua app di autenticazione.",
+    "password": "Password",
+    "code": "Codice di autenticazione",
+    "confirm": "Conferma",
+    "close": "Chiudi",
+    "wrongPassword": "La password non è corretta.",
+    "wrongCode": "Il codice non è corretto o è scaduto.",
+    "failed": "Impossibile confermare. Riprova.",
+    "enableMfaFirst": "Questa azione richiede l'accesso in due passaggi. Attivalo dal tuo profilo (scheda Sicurezza) e riprova."
   }
 }

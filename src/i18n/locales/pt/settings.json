@@ -111,7 +111,12 @@
         "leave_rejected": "Férias recusadas",
         "leave_cancelled": "Férias canceladas"
       }
-    }
+    },
+    "rotateAction": "Renovar",
+    "rotateTitle": "Renovar esta chave?",
+    "rotateWarning": "Uma nova chave substitui \"{{name}}\" com os mesmos escopos. A antiga continua funcionando por 24 horas para você atualizar o outro sistema e depois para sozinha.",
+    "rotateError": "Não foi possível renovar esta chave.",
+    "replaced": "Substituída – termina em até 24 horas"
   },
   "payroll": {
     "title": "Integração com a folha de pagamento",
@@ -324,5 +329,27 @@
     "people_other": "{{count}} pessoas",
     "error": "Não foi possível guardar.",
     "people_many": "{{count}} pessoas"
+  },
+  "ownership": {
+    "title": "Transferir a propriedade",
+    "subtitle": "A única forma de mudar o proprietário.",
+    "explain": "Escolha um membro ativo. Ele precisa aceitar; depois passam 72 horas em que todos os gestores são avisados, e você pode cancelar até a conclusão. Depois você passa a ser gestor.",
+    "to": "Novo proprietário",
+    "choose": "Escolha um membro",
+    "reason": "Motivo",
+    "start": "Iniciar a transferência",
+    "started": "A transferência começou. Aguardando o destinatário aceitar.",
+    "waitingForYou": "{{name}} quer transferir a propriedade da organização para você. Aceite para continuar.",
+    "waitingForThem": "Aguardando {{name}} aceitar.",
+    "cooling": "{{name}} aceitou. A transferência é concluída após {{when}}, a menos que seja cancelada.",
+    "ready": "O período de espera terminou. A transferência para {{name}} pode ser concluída agora.",
+    "accept": "Aceitar",
+    "accepted": "Aceita. A transferência pode ser concluída após 72 horas.",
+    "complete": "Concluir a transferência",
+    "completed": "A propriedade foi transferida.",
+    "cancel": "Cancelar a transferência",
+    "decline": "Recusar",
+    "cancelled": "A transferência foi cancelada.",
+    "failed": "Não foi possível concluir esta etapa."
   }
 }

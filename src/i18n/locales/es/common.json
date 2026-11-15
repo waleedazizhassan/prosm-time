@@ -382,7 +382,18 @@
     "phoneRequired": "Escriba el número de móvil.",
     "ownerAccountProtected": "La cuenta del propietario está protegida.",
     "ownerChangesOnlyByTransfer": "El propietario solo cambia mediante una transferencia de propiedad.",
-    "payPeriodLocked": "Este periodo de pago está cerrado. Reabre la nómina o devuelve la hoja de horas primero."
+    "payPeriodLocked": "Este periodo de pago está cerrado. Reabre la nómina o devuelve la hoja de horas primero.",
+    "stepUpRequired": "Confirma que eres tú antes de esta acción.",
+    "mfaRequired": "Esta acción requiere el inicio de sesión en dos pasos.",
+    "correctionAlreadyPending": "Ya hay una corrección pendiente para esto.",
+    "apiKeyMax365": "Una clave API dura como máximo 365 días.",
+    "delegationMax30": "Una delegación dura como máximo 30 días. Vuelve a concederla para ampliarla.",
+    "onlyActiveKeyRotated": "Solo se puede rotar una clave activa.",
+    "onlyOwnerTransfers": "Solo el propietario transfiere la propiedad.",
+    "ownershipTransferOpen": "Ya hay una transferencia de propiedad abierta.",
+    "waitingNotOver": "El periodo de espera aún no terminó.",
+    "ownershipNotReady": "La transferencia de propiedad no está lista.",
+    "chooseActiveMember": "Elige un miembro activo de la organización."
   },
   "pageLoad": {
     "title": "Esta página necesita conexión",
@@ -493,5 +504,18 @@
     "count_one": "{{count}} registro",
     "count_other": "{{count}} registros",
     "count_many": "{{count}} registros"
+  },
+  "stepUp": {
+    "title": "Confirma que eres tú",
+    "explain": "Esta acción es sensible. Introduce tu contraseña para continuar.",
+    "explainMfa": "Esta acción es sensible. Introduce tu contraseña y el código de tu app de autenticación.",
+    "password": "Contraseña",
+    "code": "Código de autenticación",
+    "confirm": "Confirmar",
+    "close": "Cerrar",
+    "wrongPassword": "La contraseña no es correcta.",
+    "wrongCode": "El código no es correcto o ha caducado.",
+    "failed": "No se pudo confirmar. Inténtalo de nuevo.",
+    "enableMfaFirst": "Esta acción requiere el inicio de sesión en dos pasos. Actívalo en tu perfil (pestaña Seguridad) y vuelve a intentarlo."
   }
 }

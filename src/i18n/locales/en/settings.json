@@ -111,7 +111,12 @@
         "leave_rejected": "Leave declined",
         "leave_cancelled": "Leave cancelled"
       }
-    }
+    },
+    "rotateAction": "Rotate",
+    "rotateTitle": "Rotate this key?",
+    "rotateWarning": "A new key replaces \"{{name}}\" with the same scopes. The old key keeps working for 24 hours, so you can update the other system, then it stops by itself.",
+    "rotateError": "Could not rotate this key.",
+    "replaced": "Replaced - ends within 24 hours"
   },
   "payroll": {
     "title": "Payroll Integration",
@@ -322,5 +327,27 @@
     "people_one": "1 person",
     "people_other": "{{count}} people",
     "error": "Could not save."
+  },
+  "ownership": {
+    "title": "Transfer the ownership",
+    "subtitle": "The only way the owner changes.",
+    "explain": "Choose an active member. They must accept, then 72 hours pass while every manager is told; you can cancel until it completes. After it, you become a manager.",
+    "to": "New owner",
+    "choose": "Choose a member",
+    "reason": "Reason",
+    "start": "Start the transfer",
+    "started": "The transfer started. Waiting for the recipient to accept.",
+    "waitingForYou": "{{name}} wants to transfer the organisation's ownership to you. Accept to continue.",
+    "waitingForThem": "Waiting for {{name}} to accept.",
+    "cooling": "{{name}} accepted. The transfer completes after {{when}} unless it is cancelled.",
+    "ready": "The waiting period is over. The transfer to {{name}} can be completed now.",
+    "accept": "Accept",
+    "accepted": "Accepted. The transfer can be completed after 72 hours.",
+    "complete": "Complete the transfer",
+    "completed": "The ownership was transferred.",
+    "cancel": "Cancel the transfer",
+    "decline": "Decline",
+    "cancelled": "The transfer was cancelled.",
+    "failed": "This step could not be done."
   }
 }

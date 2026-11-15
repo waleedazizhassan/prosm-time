@@ -382,7 +382,18 @@
     "phoneRequired": "Saisissez le numéro de mobile.",
     "ownerAccountProtected": "Le compte du propriétaire est protégé.",
     "ownerChangesOnlyByTransfer": "Le propriétaire ne change que par un transfert de propriété.",
-    "payPeriodLocked": "Cette période de paie est verrouillée. Rouvrez d'abord la paie ou renvoyez la feuille de temps."
+    "payPeriodLocked": "Cette période de paie est verrouillée. Rouvrez d'abord la paie ou renvoyez la feuille de temps.",
+    "stepUpRequired": "Confirmez votre identité avant cette action.",
+    "mfaRequired": "Cette action nécessite la connexion en deux étapes.",
+    "correctionAlreadyPending": "Une correction est déjà en attente pour cela.",
+    "apiKeyMax365": "Une clé API dure au maximum 365 jours.",
+    "delegationMax30": "Une délégation dure au maximum 30 jours. Accordez-la à nouveau pour la prolonger.",
+    "onlyActiveKeyRotated": "Seule une clé active peut être renouvelée.",
+    "onlyOwnerTransfers": "Seul le propriétaire transfère la propriété.",
+    "ownershipTransferOpen": "Un transfert de propriété est déjà en cours.",
+    "waitingNotOver": "La période d'attente n'est pas terminée.",
+    "ownershipNotReady": "Le transfert de propriété n'est pas prêt.",
+    "chooseActiveMember": "Choisissez un membre actif de l'organisation."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",
@@ -493,5 +504,18 @@
     "count_one": "{{count}} entrée",
     "count_other": "{{count}} entrées",
     "count_many": "{{count}} entrées"
+  },
+  "stepUp": {
+    "title": "Confirmez que c'est vous",
+    "explain": "Cette action est sensible. Saisissez votre mot de passe pour continuer.",
+    "explainMfa": "Cette action est sensible. Saisissez votre mot de passe et le code de votre application d'authentification.",
+    "password": "Mot de passe",
+    "code": "Code d'authentification",
+    "confirm": "Confirmer",
+    "close": "Fermer",
+    "wrongPassword": "Le mot de passe est incorrect.",
+    "wrongCode": "Le code est incorrect ou a expiré.",
+    "failed": "Confirmation impossible. Réessayez.",
+    "enableMfaFirst": "Cette action nécessite la connexion en deux étapes. Activez-la depuis votre profil (onglet Sécurité), puis réessayez."
   }
 }

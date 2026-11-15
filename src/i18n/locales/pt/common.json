@@ -382,7 +382,18 @@
     "phoneRequired": "Escreva o número de telemóvel.",
     "ownerAccountProtected": "A conta do proprietário está protegida.",
     "ownerChangesOnlyByTransfer": "O proprietário só muda por uma transferência de propriedade.",
-    "payPeriodLocked": "Este período de pagamento está bloqueado. Reabra a folha de pagamento ou devolva a folha de horas primeiro."
+    "payPeriodLocked": "Este período de pagamento está bloqueado. Reabra a folha de pagamento ou devolva a folha de horas primeiro.",
+    "stepUpRequired": "Confirme que é você antes desta ação.",
+    "mfaRequired": "Esta ação exige o login em duas etapas.",
+    "correctionAlreadyPending": "Já há uma correção pendente para isto.",
+    "apiKeyMax365": "Uma chave de API dura no máximo 365 dias.",
+    "delegationMax30": "Uma delegação dura no máximo 30 dias. Conceda novamente para estender.",
+    "onlyActiveKeyRotated": "Só uma chave ativa pode ser renovada.",
+    "onlyOwnerTransfers": "Só o proprietário transfere a propriedade.",
+    "ownershipTransferOpen": "Já existe uma transferência de propriedade aberta.",
+    "waitingNotOver": "O período de espera ainda não terminou.",
+    "ownershipNotReady": "A transferência de propriedade não está pronta.",
+    "chooseActiveMember": "Escolha um membro ativo da organização."
   },
   "pageLoad": {
     "title": "Esta página precisa de conexão",
@@ -493,5 +504,18 @@
     "count_one": "{{count}} registro",
     "count_other": "{{count}} registros",
     "count_many": "{{count}} registros"
+  },
+  "stepUp": {
+    "title": "Confirme que é você",
+    "explain": "Esta ação é sensível. Digite sua senha para continuar.",
+    "explainMfa": "Esta ação é sensível. Digite sua senha e o código do seu app autenticador.",
+    "password": "Senha",
+    "code": "Código do autenticador",
+    "confirm": "Confirmar",
+    "close": "Fechar",
+    "wrongPassword": "A senha não está correta.",
+    "wrongCode": "O código não está correto ou expirou.",
+    "failed": "Não foi possível confirmar. Tente novamente.",
+    "enableMfaFirst": "Esta ação exige o login em duas etapas. Ative-o no seu perfil (aba Segurança) e tente novamente."
   }
 }

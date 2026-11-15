@@ -111,7 +111,12 @@
         "leave_rejected": "Ferie rifiutate",
         "leave_cancelled": "Ferie annullate"
       }
-    }
+    },
+    "rotateAction": "Rinnova",
+    "rotateTitle": "Rinnovare questa chiave?",
+    "rotateWarning": "Una nuova chiave sostituisce «{{name}}» con gli stessi ambiti. La vecchia funziona ancora per 24 ore, così puoi aggiornare l'altro sistema, poi si ferma da sola.",
+    "rotateError": "Impossibile rinnovare questa chiave.",
+    "replaced": "Sostituita: termina entro 24 ore"
   },
   "payroll": {
     "title": "Integrazione buste paga",
@@ -324,5 +329,27 @@
     "people_other": "{{count}} persone",
     "error": "Impossibile salvare.",
     "people_many": "{{count}} persone"
+  },
+  "ownership": {
+    "title": "Trasferire la proprietà",
+    "subtitle": "L'unico modo per cambiare il titolare.",
+    "explain": "Scegli un membro attivo. Deve accettare, poi passano 72 ore in cui tutti i manager vengono avvisati; puoi annullare fino al completamento. Dopo diventerai manager.",
+    "to": "Nuovo titolare",
+    "choose": "Scegli un membro",
+    "reason": "Motivo",
+    "start": "Avvia il trasferimento",
+    "started": "Il trasferimento è iniziato. In attesa dell'accettazione.",
+    "waitingForYou": "{{name}} vuole trasferirti la proprietà dell'organizzazione. Accetta per continuare.",
+    "waitingForThem": "In attesa che {{name}} accetti.",
+    "cooling": "{{name}} ha accettato. Il trasferimento si completa dopo {{when}} se non viene annullato.",
+    "ready": "L'attesa è finita. Ora si può completare il trasferimento a {{name}}.",
+    "accept": "Accetta",
+    "accepted": "Accettato. Il trasferimento si può completare dopo 72 ore.",
+    "complete": "Completa il trasferimento",
+    "completed": "La proprietà è stata trasferita.",
+    "cancel": "Annulla il trasferimento",
+    "decline": "Rifiuta",
+    "cancelled": "Il trasferimento è stato annullato.",
+    "failed": "Impossibile completare questo passaggio."
   }
 }

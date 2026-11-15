@@ -282,7 +282,7 @@
     "window": "du {{from}} au {{to}}",
     "ended": "terminée",
     "startLabel": "À partir du (facultatif - aujourd'hui si vide)",
-    "endLabel": "Jusqu'au (facultatif - jusqu'au retrait si vide)",
+    "endLabel": "Jusqu'au (facultatif – 30 jours si vide, 30 jours au maximum)",
     "endBeforeStart": "La date de fin doit être postérieure à la date de début.",
     "windowHint": "Elle commence et se termine d'elle-même à ces dates. Vous pouvez la retirer à tout moment.",
     "neverDelegated": "Jamais délégué : la fermeture de l'organisation, l'abonnement et les codes d'activation, la conservation des données, les clés API, l'octroi de la gestion des autorisations et la délégation elle-même. Personne - pas même le délégué - n'approuve sa propre demande."
@@ -331,7 +331,8 @@
       "leave": "Congés",
       "penalties": "Sanctions et primes",
       "history": "Historique",
-      "account": "Compte et droits"
+      "account": "Compte et droits",
+      "security": "Sécurité"
     },
     "fields": {
       "jobTitle": "Poste",
@@ -453,5 +454,59 @@
     },
     "stillHeld": "Tout n'a pas été retiré : cette personne détient l'autorité complète du propriétaire. Retirez-la d'abord avec le bouton «{{owner}}».",
     "viaOwner": "Vient avec l'autorité du propriétaire - à retirer là"
+  },
+  "security": {
+    "title": "Connexion en deux étapes",
+    "subtitle": "Un code d'une application d'authentification sur votre téléphone, en plus du mot de passe.",
+    "on": "La connexion en deux étapes est activée.",
+    "off": "La connexion en deux étapes est désactivée.",
+    "requiredForYou": "Votre rôle exige la connexion en deux étapes pour la paie et les autorisations. Activez-la maintenant.",
+    "enable": "Activer",
+    "scan": "Scannez ce code avec une application d'authentification (Google Authenticator, Microsoft Authenticator…), puis saisissez le code à 6 chiffres.",
+    "qrAlt": "Code QR pour l'application d'authentification",
+    "secret": "Ou saisissez cette clé manuellement : {{secret}}",
+    "code": "Code à 6 chiffres",
+    "verify": "Vérifier et activer",
+    "cancel": "Annuler",
+    "enabled": "La connexion en deux étapes est activée.",
+    "removed": "L'application d'authentification a été retirée.",
+    "remove": "Retirer",
+    "authenticator": "Application d'authentification",
+    "wrongCode": "Le code est incorrect. Vérifiez l'heure de votre téléphone et réessayez.",
+    "failed": "Impossible de démarrer. Réessayez.",
+    "removeNeedsCode": "Pour la retirer, reconnectez-vous d'abord avec votre code d'authentification."
+  },
+  "perms": {
+    "hint": "Activez ou désactivez chaque ligne. Une ligne groupée accorde ou retire tout son contenu ensemble.",
+    "count": "{{on}} sur {{total}}",
+    "partly": "Accordée en partie",
+    "changedFromRole": "Diffère du rôle",
+    "resetAll": "Revenir aux valeurs du rôle",
+    "resetTitle": "Revenir aux autorisations du rôle ?",
+    "resetExplain": "Toutes les autorisations accordées ou retirées individuellement à cette personne sont annulées ; elle retrouve celles de son rôle.",
+    "grantTitle": "Accorder l'autorisation",
+    "revokeTitle": "Retirer l'autorisation",
+    "lineExplain": "« {{name}} » – indiquez le motif ; il est enregistré dans le journal d'activité.",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "groups": {
+      "attendance": "Présence",
+      "leave": "Congés et calendrier",
+      "people": "Personnes et autorisations",
+      "payroll": "Paie et indemnités",
+      "external": "Main-d'œuvre externe",
+      "sites": "Sites, plannings et projets",
+      "reports": "Rapports, tableau de bord et journal",
+      "settings": "Annonces, notifications et paramètres",
+      "other": "Autres"
+    },
+    "merged": {
+      "onBehalf": "Pointer l'arrivée et le départ pour quelqu'un",
+      "payrollExports": "Exporter la paie (synthèse, bulletins, indemnités)",
+      "reports": "Voir les rapports et créer des PDF",
+      "timesheets": "Générer et approuver les feuilles de temps",
+      "announcements": "Publier des annonces et voir qui les a lues",
+      "externalPay": "Voir et exporter la paie des externes"
+    }
   }
 }

@@ -382,7 +382,18 @@
     "phoneRequired": "Geben Sie die Mobilnummer ein.",
     "ownerAccountProtected": "Das Konto des Inhabers ist geschützt.",
     "ownerChangesOnlyByTransfer": "Der Inhaber wechselt nur durch eine Eigentumsübertragung.",
-    "payPeriodLocked": "Dieser Abrechnungszeitraum ist gesperrt. Öffnen Sie zuerst die Abrechnung erneut oder geben Sie den Stundenzettel zurück."
+    "payPeriodLocked": "Dieser Abrechnungszeitraum ist gesperrt. Öffnen Sie zuerst die Abrechnung erneut oder geben Sie den Stundenzettel zurück.",
+    "stepUpRequired": "Bestätigen Sie vor dieser Aktion, dass Sie es sind.",
+    "mfaRequired": "Diese Aktion erfordert die Anmeldung in zwei Schritten.",
+    "correctionAlreadyPending": "Dafür ist bereits eine Korrektur offen.",
+    "apiKeyMax365": "Ein API-Schlüssel gilt höchstens 365 Tage.",
+    "delegationMax30": "Eine Vertretung gilt höchstens 30 Tage. Erteilen Sie sie erneut, um sie zu verlängern.",
+    "onlyActiveKeyRotated": "Nur ein aktiver Schlüssel kann erneuert werden.",
+    "onlyOwnerTransfers": "Nur der Inhaber überträgt das Eigentum.",
+    "ownershipTransferOpen": "Es läuft bereits eine Eigentumsübertragung.",
+    "waitingNotOver": "Die Wartezeit ist noch nicht vorbei.",
+    "ownershipNotReady": "Die Eigentumsübertragung ist noch nicht bereit.",
+    "chooseActiveMember": "Wählen Sie ein aktives Mitglied der Organisation."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",
@@ -492,5 +503,18 @@
   "monthFolders": {
     "count_one": "{{count}} Eintrag",
     "count_other": "{{count}} Einträge"
+  },
+  "stepUp": {
+    "title": "Bestätigen Sie, dass Sie es sind",
+    "explain": "Diese Aktion ist sensibel. Geben Sie Ihr Passwort ein, um fortzufahren.",
+    "explainMfa": "Diese Aktion ist sensibel. Geben Sie Ihr Passwort und den Code aus Ihrer Authenticator-App ein.",
+    "password": "Passwort",
+    "code": "Authenticator-Code",
+    "confirm": "Bestätigen",
+    "close": "Schließen",
+    "wrongPassword": "Das Passwort ist nicht korrekt.",
+    "wrongCode": "Der Code ist falsch oder abgelaufen.",
+    "failed": "Bestätigung fehlgeschlagen. Bitte erneut versuchen.",
+    "enableMfaFirst": "Diese Aktion erfordert die Anmeldung in zwei Schritten. Aktivieren Sie sie in Ihrem Profil (Registerkarte Sicherheit) und versuchen Sie es erneut."
   }
 }

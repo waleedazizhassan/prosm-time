@@ -282,7 +282,7 @@
     "window": "{{from}} 至 {{to}}",
     "ended": "已结束",
     "startLabel": "开始（可选，留空即今天）",
-    "endLabel": "结束（可选，留空即直到撤回）",
+    "endLabel": "截止日期（可选 - 留空为 30 天，最长 30 天）",
     "endBeforeStart": "结束日期必须晚于开始日期。",
     "windowHint": "将在这些日期自动开始和结束，您可随时撤回。",
     "neverDelegated": "永不委托：关闭组织、套餐与激活码、数据保留、API 密钥、授予权限管理以及委托本身。任何人（包括受托人）都不能审批自己的申请。"
@@ -330,7 +330,8 @@
       "leave": "假期",
       "penalties": "处罚与奖励",
       "history": "记录",
-      "account": "账户与权限"
+      "account": "账户与权限",
+      "security": "安全"
     },
     "fields": {
       "jobTitle": "职位",
@@ -448,5 +449,59 @@
     },
     "stillHeld": "未能全部收回：此人拥有所有者的全部权限。请先通过“{{owner}}”按钮收回。",
     "viaOwner": "随所有者权限授予——需在那里收回"
+  },
+  "security": {
+    "title": "两步登录",
+    "subtitle": "除密码外，还需手机上身份验证器应用的验证码。",
+    "on": "两步登录已开启。",
+    "off": "两步登录未开启。",
+    "requiredForYou": "您的角色在处理工资和权限时需要两步登录。请立即开启。",
+    "enable": "开启",
+    "scan": "用身份验证器应用（Google Authenticator、Microsoft Authenticator…）扫描此二维码，然后输入显示的 6 位验证码。",
+    "qrAlt": "身份验证器应用的二维码",
+    "secret": "或手动输入此密钥：{{secret}}",
+    "code": "6 位验证码",
+    "verify": "验证并开启",
+    "cancel": "取消",
+    "enabled": "两步登录已开启。",
+    "removed": "身份验证器已移除。",
+    "remove": "移除",
+    "authenticator": "身份验证器应用",
+    "wrongCode": "验证码不正确。请检查手机时间后重试。",
+    "failed": "无法开始，请重试。",
+    "removeNeedsCode": "如需移除，请先使用身份验证器验证码重新登录。"
+  },
+  "perms": {
+    "hint": "可开启或关闭任意一行。合并的行会一并授予或收回其中所有权限。",
+    "count": "{{on}} / {{total}}",
+    "partly": "部分授予",
+    "changedFromRole": "与角色不同",
+    "resetAll": "恢复角色默认",
+    "resetTitle": "恢复为角色权限？",
+    "resetExplain": "将清除为此人单独授予或收回的所有权限，恢复其角色的权限。",
+    "grantTitle": "授予权限",
+    "revokeTitle": "收回权限",
+    "lineExplain": "“{{name}}” - 请填写原因，将记录到操作日志。",
+    "cancel": "取消",
+    "confirm": "确认",
+    "groups": {
+      "attendance": "考勤",
+      "leave": "请假与日历",
+      "people": "人员与权限",
+      "payroll": "工资与津贴",
+      "external": "外部劳务",
+      "sites": "场所、排班与项目",
+      "reports": "报表、仪表板与日志",
+      "settings": "公告、通知与设置",
+      "other": "其他"
+    },
+    "merged": {
+      "onBehalf": "代他人打卡上下班",
+      "payrollExports": "导出工资（汇总、工资单、津贴）",
+      "reports": "查看报表并生成 PDF",
+      "timesheets": "生成并审批工时表",
+      "announcements": "发布公告并查看阅读情况",
+      "externalPay": "查看并导出外部劳务工资"
+    }
   }
 }

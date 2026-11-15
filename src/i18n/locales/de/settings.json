@@ -111,7 +111,12 @@
         "leave_rejected": "Urlaub abgelehnt",
         "leave_cancelled": "Urlaub storniert"
       }
-    }
+    },
+    "rotateAction": "Erneuern",
+    "rotateTitle": "Diesen Schlüssel erneuern?",
+    "rotateWarning": "Ein neuer Schlüssel ersetzt „{{name}}“ mit denselben Bereichen. Der alte funktioniert noch 24 Stunden, damit Sie das andere System umstellen können, und endet dann von selbst.",
+    "rotateError": "Der Schlüssel konnte nicht erneuert werden.",
+    "replaced": "Ersetzt – endet innerhalb von 24 Stunden"
   },
   "payroll": {
     "title": "Lohnbuchhaltungs-Integration",
@@ -322,5 +327,27 @@
     "people_one": "1 Person",
     "people_other": "{{count}} Personen",
     "error": "Speichern fehlgeschlagen."
+  },
+  "ownership": {
+    "title": "Eigentum übertragen",
+    "subtitle": "Der einzige Weg, den Inhaber zu wechseln.",
+    "explain": "Wählen Sie ein aktives Mitglied. Es muss annehmen, dann vergehen 72 Stunden, in denen alle Manager informiert werden; bis zum Abschluss können Sie abbrechen. Danach sind Sie Manager.",
+    "to": "Neuer Inhaber",
+    "choose": "Mitglied wählen",
+    "reason": "Grund",
+    "start": "Übertragung starten",
+    "started": "Die Übertragung wurde gestartet. Warten auf die Annahme.",
+    "waitingForYou": "{{name}} möchte Ihnen das Eigentum der Organisation übertragen. Nehmen Sie an, um fortzufahren.",
+    "waitingForThem": "Warten auf die Annahme durch {{name}}.",
+    "cooling": "{{name}} hat angenommen. Die Übertragung wird nach {{when}} abgeschlossen, sofern sie nicht abgebrochen wird.",
+    "ready": "Die Wartezeit ist vorbei. Die Übertragung an {{name}} kann jetzt abgeschlossen werden.",
+    "accept": "Annehmen",
+    "accepted": "Angenommen. Die Übertragung kann nach 72 Stunden abgeschlossen werden.",
+    "complete": "Übertragung abschließen",
+    "completed": "Das Eigentum wurde übertragen.",
+    "cancel": "Übertragung abbrechen",
+    "decline": "Ablehnen",
+    "cancelled": "Die Übertragung wurde abgebrochen.",
+    "failed": "Dieser Schritt war nicht möglich."
   }
 }

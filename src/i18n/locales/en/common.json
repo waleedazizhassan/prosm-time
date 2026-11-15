@@ -382,7 +382,18 @@
     "phoneRequired": "Enter the mobile number.",
     "ownerAccountProtected": "The owner's account is protected.",
     "ownerChangesOnlyByTransfer": "The owner changes only through an ownership transfer.",
-    "payPeriodLocked": "This pay period is locked. Reopen the payroll or return the timesheet first."
+    "payPeriodLocked": "This pay period is locked. Reopen the payroll or return the timesheet first.",
+    "stepUpRequired": "Confirm it's you before this action.",
+    "mfaRequired": "This action needs two-step sign-in.",
+    "correctionAlreadyPending": "A correction for this is already pending.",
+    "apiKeyMax365": "An API key lasts at most 365 days.",
+    "delegationMax30": "A delegation lasts at most 30 days. Grant it again to extend it.",
+    "onlyActiveKeyRotated": "Only an active key can be rotated.",
+    "onlyOwnerTransfers": "Only the owner transfers the ownership.",
+    "ownershipTransferOpen": "An ownership transfer is already open.",
+    "waitingNotOver": "The waiting period is not over yet.",
+    "ownershipNotReady": "The ownership transfer is not ready.",
+    "chooseActiveMember": "Choose an active member of the organisation."
   },
   "pageLoad": {
     "title": "This page needs a connection",
@@ -492,5 +503,18 @@
   "monthFolders": {
     "count_one": "{{count}} record",
     "count_other": "{{count}} records"
+  },
+  "stepUp": {
+    "title": "Confirm it's you",
+    "explain": "This action is sensitive. Enter your password to continue.",
+    "explainMfa": "This action is sensitive. Enter your password and the code from your authenticator app.",
+    "password": "Password",
+    "code": "Authenticator code",
+    "confirm": "Confirm",
+    "close": "Close",
+    "wrongPassword": "The password is not correct.",
+    "wrongCode": "The code is not correct or has expired.",
+    "failed": "Could not confirm. Try again.",
+    "enableMfaFirst": "This action needs two-step sign-in. Turn it on from your profile (Security tab), then try again."
   }
 }

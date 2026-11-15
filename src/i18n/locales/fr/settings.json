@@ -111,7 +111,12 @@
         "leave_rejected": "Congé refusé",
         "leave_cancelled": "Congé annulé"
       }
-    }
+    },
+    "rotateAction": "Renouveler",
+    "rotateTitle": "Renouveler cette clé ?",
+    "rotateWarning": "Une nouvelle clé remplace « {{name}} » avec les mêmes portées. L'ancienne fonctionne encore 24 heures pour mettre à jour l'autre système, puis s'arrête d'elle-même.",
+    "rotateError": "Impossible de renouveler cette clé.",
+    "replaced": "Remplacée – prend fin sous 24 heures"
   },
   "payroll": {
     "title": "Intégration de paie",
@@ -324,5 +329,27 @@
     "people_other": "{{count}} personnes",
     "error": "Enregistrement impossible.",
     "people_many": "{{count}} personnes"
+  },
+  "ownership": {
+    "title": "Transférer la propriété",
+    "subtitle": "Le seul moyen de changer de propriétaire.",
+    "explain": "Choisissez un membre actif. Il doit accepter, puis 72 heures passent pendant lesquelles tous les managers sont prévenus ; vous pouvez annuler jusqu'à la fin. Vous devenez ensuite manager.",
+    "to": "Nouveau propriétaire",
+    "choose": "Choisir un membre",
+    "reason": "Motif",
+    "start": "Lancer le transfert",
+    "started": "Le transfert a commencé. En attente de l'acceptation.",
+    "waitingForYou": "{{name}} souhaite vous transférer la propriété de l'organisation. Acceptez pour continuer.",
+    "waitingForThem": "En attente de l'acceptation de {{name}}.",
+    "cooling": "{{name}} a accepté. Le transfert se termine après {{when}} sauf annulation.",
+    "ready": "La période d'attente est terminée. Le transfert à {{name}} peut être finalisé.",
+    "accept": "Accepter",
+    "accepted": "Accepté. Le transfert pourra être finalisé dans 72 heures.",
+    "complete": "Finaliser le transfert",
+    "completed": "La propriété a été transférée.",
+    "cancel": "Annuler le transfert",
+    "decline": "Refuser",
+    "cancelled": "Le transfert a été annulé.",
+    "failed": "Cette étape n'a pas pu être effectuée."
   }
 }

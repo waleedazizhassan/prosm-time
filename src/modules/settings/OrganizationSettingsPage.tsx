@@ -22,6 +22,7 @@ import RetentionSettingsCard from "./RetentionSettingsCard";
 import ClockSuggestionCard from "./ClockSuggestionCard";
 import PageBanner from "../../components/common/PageBanner";
 import usePlanFeatures from "../../core/hooks/usePlanFeatures";
+import OwnershipTransferCard from "./OwnershipTransferCard";
 
 // PROSM Time - § live UX review, user-directed: "a professional
 // reorganization" - org-wide settings (today: the no-site geofence
@@ -126,6 +127,8 @@ export default function OrganizationSettingsPage() {
       {active === "other" ? (
         <>
           {isOwner ? <PlanSettingsCard /> : null}
+          {/* governance phase E: the only way the owner changes */}
+          {profile?.isRealOwner ? <OwnershipTransferCard /> : null}
           {isOwner ? <MockLocationSettingsCard /> : null}
           {isOwner && allows("retention") ? <RetentionSettingsCard /> : null}
         </>

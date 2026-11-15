@@ -282,7 +282,7 @@
     "window": "vom {{from}} bis {{to}}",
     "ended": "beendet",
     "startLabel": "Ab (optional - heute, wenn leer)",
-    "endLabel": "Bis (optional - bis zum Widerruf, wenn leer)",
+    "endLabel": "Bis (optional – leer bedeutet 30 Tage, höchstens 30 Tage)",
     "endBeforeStart": "Das Enddatum muss nach dem Startdatum liegen.",
     "windowHint": "Sie beginnt und endet automatisch an diesen Daten. Sie können sie jederzeit widerrufen.",
     "neverDelegated": "Nie übertragen: Schließen der Organisation, Tarif und Aktivierungscodes, Datenaufbewahrung, API-Schlüssel, Vergabe der Rechteverwaltung und die Übertragung selbst. Niemand - auch nicht die vertretende Person - genehmigt den eigenen Antrag."
@@ -331,7 +331,8 @@
       "leave": "Urlaub",
       "penalties": "Sanktionen & Prämien",
       "history": "Verlauf",
-      "account": "Konto und Rechte"
+      "account": "Konto und Rechte",
+      "security": "Sicherheit"
     },
     "fields": {
       "jobTitle": "Stelle",
@@ -450,5 +451,59 @@
     },
     "stillHeld": "Nicht alles entzogen: Diese Person hat die volle Befugnis des Inhabers. Entziehen Sie diese zuerst über die Schaltfläche „{{owner}}“.",
     "viaOwner": "Kommt mit der Befugnis des Inhabers - dort entziehen"
+  },
+  "security": {
+    "title": "Anmeldung in zwei Schritten",
+    "subtitle": "Ein Code aus einer Authenticator-App auf Ihrem Telefon, zusätzlich zum Passwort.",
+    "on": "Die Anmeldung in zwei Schritten ist aktiv.",
+    "off": "Die Anmeldung in zwei Schritten ist aus.",
+    "requiredForYou": "Ihre Rolle erfordert die Anmeldung in zwei Schritten für Abrechnung und Berechtigungen. Aktivieren Sie sie jetzt.",
+    "enable": "Aktivieren",
+    "scan": "Scannen Sie diesen Code mit einer Authenticator-App (Google Authenticator, Microsoft Authenticator…) und geben Sie den 6-stelligen Code ein.",
+    "qrAlt": "QR-Code für die Authenticator-App",
+    "secret": "Oder geben Sie diesen Schlüssel manuell ein: {{secret}}",
+    "code": "6-stelliger Code",
+    "verify": "Prüfen und aktivieren",
+    "cancel": "Abbrechen",
+    "enabled": "Die Anmeldung in zwei Schritten ist aktiv.",
+    "removed": "Die Authenticator-App wurde entfernt.",
+    "remove": "Entfernen",
+    "authenticator": "Authenticator-App",
+    "wrongCode": "Der Code ist falsch. Prüfen Sie die Uhrzeit Ihres Telefons und versuchen Sie es erneut.",
+    "failed": "Start fehlgeschlagen. Bitte erneut versuchen.",
+    "removeNeedsCode": "Melden Sie sich zum Entfernen zuerst erneut mit Ihrem Authenticator-Code an."
+  },
+  "perms": {
+    "hint": "Schalten Sie jede Zeile ein oder aus. Eine zusammengefasste Zeile vergibt oder entzieht alles darin gemeinsam.",
+    "count": "{{on}} von {{total}}",
+    "partly": "Teilweise vergeben",
+    "changedFromRole": "Weicht von der Rolle ab",
+    "resetAll": "Zurück zu den Rollenstandards",
+    "resetTitle": "Zurück zu den Berechtigungen der Rolle?",
+    "resetExplain": "Alle einzeln vergebenen oder entzogenen Berechtigungen dieser Person werden aufgehoben; sie erhält die Berechtigungen ihrer Rolle.",
+    "grantTitle": "Berechtigung vergeben",
+    "revokeTitle": "Berechtigung entziehen",
+    "lineExplain": "„{{name}}“ – geben Sie den Grund an; er wird im Aktivitätsprotokoll gespeichert.",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "groups": {
+      "attendance": "Anwesenheit",
+      "leave": "Urlaub und Kalender",
+      "people": "Personen und Berechtigungen",
+      "payroll": "Lohn und Zulagen",
+      "external": "Externe Arbeitskräfte",
+      "sites": "Standorte, Dienstpläne und Projekte",
+      "reports": "Berichte, Übersicht und Protokoll",
+      "settings": "Mitteilungen, Benachrichtigungen und Einstellungen",
+      "other": "Sonstiges"
+    },
+    "merged": {
+      "onBehalf": "Kommen und Gehen für andere erfassen",
+      "payrollExports": "Lohn exportieren (Übersicht, Abrechnungen, Zulagen)",
+      "reports": "Berichte ansehen und als PDF erstellen",
+      "timesheets": "Stundenzettel erstellen und genehmigen",
+      "announcements": "Mitteilungen veröffentlichen und Leser sehen",
+      "externalPay": "Löhne externer Kräfte ansehen und exportieren"
+    }
   }
 }

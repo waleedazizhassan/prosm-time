@@ -18,9 +18,10 @@ import { MyLeavePanel } from "../leave/LeaveRequestsPage";
 import AttendanceLogPage from "../attendance/AttendanceLogPage";
 import TimesheetsPage from "../timesheets/TimesheetsPage";
 import ExceptionsCard from "../dashboard/ExceptionsCard";
+import SecurityTab from "./profile/SecurityTab";
 import Button from "../../components/common/Button";
 
-type MyTab = "data" | "documents" | "penalties" | "contract" | "attendance" | "leave";
+type MyTab = "data" | "documents" | "penalties" | "contract" | "attendance" | "leave" | "security";
 
 // HR suite feature 3 (2026-11-11): "My file" - the person's own file, read only: their data and
 // contract, their documents (which they upload here), their warnings and incentives (acknowledge or
@@ -58,6 +59,8 @@ export default function MyProfilePage() {
     { key: "attendance", label: t("profile.tabs.attendance") },
     { key: "leave", label: t("profile.tabs.leave") },
     ...(allows("penalties") ? [{ key: "penalties" as const, label: t("profile.tabs.penalties") }] : []),
+    // governance phase C: two-step sign-in for one's own account
+    { key: "security", label: t("profile.tabs.security") },
   ];
   const requested = searchParams.get("tab") as MyTab | null;
   const tab: MyTab = requested && tabs.some((x) => x.key === requested) ? requested : "data";
@@ -73,6 +76,7 @@ export default function MyProfilePage() {
       {tab === "documents" ? <ProfileDocumentsTab profile={file} onChanged={() => void load()} /> : null}
       {tab === "penalties" ? <ProfilePenaltiesTab profile={file} /> : null}
       {tab === "contract" ? <ContractsTab profile={file} onSaved={() => void load()} /> : null}
+      {tab === "security" ? <SecurityTab /> : null}
       {/* owner 2026-11-12: one place for one's own attendance - the summary, every record, the timesheets and the
           moments to explain (these were three pages of the menu) */}
       {tab === "attendance" ? (
