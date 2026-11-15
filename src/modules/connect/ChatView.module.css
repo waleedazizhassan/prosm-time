@@ -366,3 +366,11 @@ button.file {
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.07);
 }
+
+/* owner 2026-11-15: the day label is readable on a light background too */
+.day {
+  color: #fff;
+  font-weight: 600;
+  background: rgba(30, 64, 175, 0.72);
+  border-color: rgba(255, 255, 255, 0.25);
+}

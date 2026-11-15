@@ -393,7 +393,9 @@
     "ownershipTransferOpen": "يوجد نقل ملكية مفتوح بالفعل.",
     "waitingNotOver": "لم تنتهِ فترة الانتظار بعد.",
     "ownershipNotReady": "نقل الملكية غير جاهز للإتمام.",
-    "chooseActiveMember": "اختر عضوًا نشطًا في المؤسسة."
+    "chooseActiveMember": "اختر عضوًا نشطًا في المؤسسة.",
+    "meetingEnded": "هذا الاجتماع انتهى.",
+    "meetingFull": "الاجتماع ممتلئ."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

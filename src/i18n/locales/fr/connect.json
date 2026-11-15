@@ -176,7 +176,8 @@
     "videoTitle": "Réunion vidéo",
     "audioTitle": "Réunion audio",
     "videoUpTo": "Vidéo, jusqu'à 4",
-    "audioUpTo": "Audio, jusqu'à 8"
+    "audioUpTo": "Audio, jusqu'à 8",
+    "send": "Envoyer"
   },
   "storage": {
     "clean": "Nettoyer {{what}}",
@@ -206,5 +207,15 @@
     "messageSound": "Son pour un nouveau message",
     "messageVibrate": "Vibrer pour un nouveau message",
     "note": "Ces réglages restent sur cet appareil. Dans l'app Android, un appel sonne avec la sonnerie du téléphone, même app fermée ou écran verrouillé ; dans un navigateur, la page doit être ouverte."
+  },
+  "preview": {
+    "image": "📷 Photo",
+    "camera_photo": "📷 Photo vérifiée",
+    "file": "📎 Fichier",
+    "voice_note": "🎤 Message vocal",
+    "push_to_talk": "📻 Appuyer pour parler",
+    "missed": "📞 Appel manqué",
+    "meeting_invite": "👥 Invitation à une réunion",
+    "photo_request": "📷 Demande de photo"
   }
 }

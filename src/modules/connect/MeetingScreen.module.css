@@ -302,3 +302,48 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
+
+/* owner 2026-11-15: the meeting chat on a phone - a full-width sheet above the controls, with a send button */
+.chatForm {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-top: 1px solid #1e2d50;
+}
+
+.chatForm input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid #22345c;
+  border-radius: 999px;
+  padding: 10px 14px;
+}
+
+.chatSend {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #22c55e);
+  color: #fff;
+  cursor: pointer;
+}
+
+.chatSend:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+@media (max-width: 640px) {
+  .chat {
+    inset-inline: 8px;
+    width: auto;
+    bottom: calc(var(--safe-bottom, 0px) + 96px);
+    max-height: min(55dvh, 420px);
+  }
+}

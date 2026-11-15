@@ -176,7 +176,8 @@
     "videoTitle": "Reunião de vídeo",
     "audioTitle": "Reunião de voz",
     "videoUpTo": "Vídeo, até 4",
-    "audioUpTo": "Voz, até 8"
+    "audioUpTo": "Voz, até 8",
+    "send": "Enviar"
   },
   "storage": {
     "clean": "Limpar {{what}}",
@@ -206,5 +207,15 @@
     "messageSound": "Som para nova mensagem",
     "messageVibrate": "Vibrar com nova mensagem",
     "note": "Estas definições ficam apenas neste dispositivo. Na app Android a chamada toca com o toque do telemóvel, mesmo com a app fechada ou o ecrã bloqueado; no navegador a página tem de estar aberta."
+  },
+  "preview": {
+    "image": "📷 Foto",
+    "camera_photo": "📷 Foto verificada",
+    "file": "📎 Ficheiro",
+    "voice_note": "🎤 Mensagem de voz",
+    "push_to_talk": "📻 Premir para falar",
+    "missed": "📞 Chamada perdida",
+    "meeting_invite": "👥 Convite para reunião",
+    "photo_request": "📷 Pedido de foto"
   }
 }

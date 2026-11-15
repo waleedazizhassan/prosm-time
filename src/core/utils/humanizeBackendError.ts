@@ -202,6 +202,8 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "THE OWNER'S ACCOUNT IS PROTECTED": "ownerAccountProtected",
   "STEP_UP_REQUIRED": "stepUpRequired",
   "MFA_REQUIRED": "mfaRequired",
+  "THIS MEETING HAS ENDED": "meetingEnded",
+  "THIS MEETING IS FULL": "meetingFull",
   "ONLY THE OWNER TRANSFERS THE OWNERSHIP": "onlyOwnerTransfers",
   "AN OWNERSHIP TRANSFER IS ALREADY OPEN": "ownershipTransferOpen",
   "THE WAITING PERIOD IS NOT OVER YET": "waitingNotOver",

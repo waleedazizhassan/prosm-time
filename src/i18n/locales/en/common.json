@@ -393,7 +393,9 @@
     "ownershipTransferOpen": "An ownership transfer is already open.",
     "waitingNotOver": "The waiting period is not over yet.",
     "ownershipNotReady": "The ownership transfer is not ready.",
-    "chooseActiveMember": "Choose an active member of the organisation."
+    "chooseActiveMember": "Choose an active member of the organisation.",
+    "meetingEnded": "This meeting has ended.",
+    "meetingFull": "This meeting is full."
   },
   "pageLoad": {
     "title": "This page needs a connection",

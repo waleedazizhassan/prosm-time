@@ -176,7 +176,8 @@
     "videoTitle": "Video meeting",
     "audioTitle": "Voice meeting",
     "videoUpTo": "Video, up to 4",
-    "audioUpTo": "Voice, up to 8"
+    "audioUpTo": "Voice, up to 8",
+    "send": "Send"
   },
   "storage": {
     "clean": "Clean {{what}}",
@@ -206,5 +207,15 @@
     "messageSound": "Sound for a new message",
     "messageVibrate": "Vibrate for a new message",
     "note": "These settings are kept on this device only. In the Android app a call rings with the phone's own ringtone, even when the app is closed or the screen is locked; in a browser the page has to be open."
+  },
+  "preview": {
+    "image": "📷 Photo",
+    "camera_photo": "📷 Verified photo",
+    "file": "📎 File",
+    "voice_note": "🎤 Voice message",
+    "push_to_talk": "📻 Push to talk",
+    "missed": "📞 Missed call",
+    "meeting_invite": "👥 Meeting invitation",
+    "photo_request": "📷 Photo request"
   }
 }

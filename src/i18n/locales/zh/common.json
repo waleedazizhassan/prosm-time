@@ -393,7 +393,9 @@
     "ownershipTransferOpen": "已有一项进行中的所有权转让。",
     "waitingNotOver": "等待期尚未结束。",
     "ownershipNotReady": "所有权转让尚未就绪。",
-    "chooseActiveMember": "请选择组织中的在职成员。"
+    "chooseActiveMember": "请选择组织中的在职成员。",
+    "meetingEnded": "此会议已结束。",
+    "meetingFull": "会议人数已满。"
   },
   "pageLoad": {
     "title": "此页面需要网络连接",

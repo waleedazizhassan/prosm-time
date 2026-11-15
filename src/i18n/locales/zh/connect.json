@@ -176,7 +176,8 @@
     "videoTitle": "视频会议",
     "audioTitle": "语音会议",
     "videoUpTo": "视频，最多 4 人",
-    "audioUpTo": "语音，最多 8 人"
+    "audioUpTo": "语音，最多 8 人",
+    "send": "发送"
   },
   "storage": {
     "clean": "清理{{what}}",
@@ -206,5 +207,15 @@
     "messageSound": "新消息提示音",
     "messageVibrate": "新消息振动",
     "note": "这些设置只保存在本设备上。在 Android 应用中,即使应用已关闭或屏幕已锁定,来电也会以手机自己的铃声响起;在浏览器中页面必须保持打开。"
+  },
+  "preview": {
+    "image": "📷 照片",
+    "camera_photo": "📷 认证照片",
+    "file": "📎 文件",
+    "voice_note": "🎤 语音消息",
+    "push_to_talk": "📻 一键通话",
+    "missed": "📞 未接来电",
+    "meeting_invite": "👥 会议邀请",
+    "photo_request": "📷 拍照请求"
   }
 }

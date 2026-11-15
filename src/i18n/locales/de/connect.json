@@ -176,7 +176,8 @@
     "videoTitle": "Videobesprechung",
     "audioTitle": "Sprachbesprechung",
     "videoUpTo": "Video, bis 4",
-    "audioUpTo": "Sprache, bis 8"
+    "audioUpTo": "Sprache, bis 8",
+    "send": "Senden"
   },
   "storage": {
     "clean": "{{what}} bereinigen",
@@ -206,5 +207,15 @@
     "messageSound": "Ton bei neuer Nachricht",
     "messageVibrate": "Vibration bei neuer Nachricht",
     "note": "Diese Einstellungen gelten nur für dieses Gerät. In der Android-App klingelt ein Anruf mit dem Klingelton des Telefons, auch wenn die App geschlossen oder der Bildschirm gesperrt ist; im Browser muss die Seite geöffnet sein."
+  },
+  "preview": {
+    "image": "📷 Foto",
+    "camera_photo": "📷 Beglaubigtes Foto",
+    "file": "📎 Datei",
+    "voice_note": "🎤 Sprachnachricht",
+    "push_to_talk": "📻 Push-to-Talk",
+    "missed": "📞 Verpasster Anruf",
+    "meeting_invite": "👥 Besprechungseinladung",
+    "photo_request": "📷 Fotoanfrage"
   }
 }

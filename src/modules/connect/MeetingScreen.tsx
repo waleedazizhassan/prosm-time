@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Circle, Hand, LayoutGrid, MessageSquare, Mic, MicOff, MonitorUp, PhoneOff, Pin, Users, Video, VideoOff, VolumeX } from "lucide-react";
+import { Circle, Hand, LayoutGrid, MessageSquare, Mic, MicOff, MonitorUp, PhoneOff, Pin, Users, Video, VideoOff, VolumeX, Send } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import type { ConnectPerson } from "../../core/repositories/ConnectRepository";
@@ -132,8 +132,10 @@ export default function MeetingScreen({ session, people, onClose }: { session: M
           <ul>
             {session.chat.map((m, i) => <li key={i} className={m.from === me ? styles.mine : undefined}><b>{nameOf(m.from)}</b> {m.text}</li>)}
           </ul>
-          <form onSubmit={(e) => { e.preventDefault(); session.say(text); setText(""); }}>
-            <input value={text} onChange={(e) => setText(e.target.value)} placeholder={t("meeting.chatPlaceholder")} aria-label={t("meeting.chatPlaceholder")} />
+          {/* owner 2026-11-15: a send button (there was none - Enter only) */}
+          <form className={styles.chatForm} onSubmit={(e) => { e.preventDefault(); if (text.trim()) { session.say(text.trim()); setText(""); } }}>
+            <input value={text} onChange={(e) => setText(e.target.value)} placeholder={t("meeting.chatPlaceholder")} aria-label={t("meeting.chatPlaceholder")} enterKeyHint="send" />
+            <button type="submit" className={styles.chatSend} disabled={!text.trim()} aria-label={t("meeting.send")}><Send size={18} /></button>
           </form>
         </aside>
       ) : null}

@@ -393,7 +393,9 @@
     "ownershipTransferOpen": "Es läuft bereits eine Eigentumsübertragung.",
     "waitingNotOver": "Die Wartezeit ist noch nicht vorbei.",
     "ownershipNotReady": "Die Eigentumsübertragung ist noch nicht bereit.",
-    "chooseActiveMember": "Wählen Sie ein aktives Mitglied der Organisation."
+    "chooseActiveMember": "Wählen Sie ein aktives Mitglied der Organisation.",
+    "meetingEnded": "Diese Besprechung ist beendet.",
+    "meetingFull": "Diese Besprechung ist voll."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

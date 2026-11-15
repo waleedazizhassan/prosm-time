@@ -7,6 +7,7 @@ import { useAuth } from "../../core/context/AuthContext";
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
 import type { ConnectPerson } from "../../core/repositories/ConnectRepository";
 import { formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import Avatar from "../../components/common/Avatar";
 import EmptyState from "../../components/common/EmptyState";
 import { ConnectEngine } from "./engine/ConnectEngine";
@@ -108,6 +109,13 @@ export default function ConnectPage() {
     return person?.fullName ?? c.title ?? "";
   }
 
+  // "§kind [file name]" -> the kind's words in the person's language
+  const previewText = (value: string) => {
+    if (!value.startsWith("§")) return value;
+    const [kind, ...rest] = value.slice(1).split(" ");
+    return [t(`preview.${kind}`, { defaultValue: "" }), rest.join(" ")].filter(Boolean).join(" ");
+  };
+
   const where = (p: ConnectPerson) =>
     p.presence === "out" ? t("presence.out") : p.currentSiteName ? t("presence.atSite", { site: p.currentSiteName }) : t(`presence.${p.presence}`);
   const presentAt = (site: Site) => [...people.values()].filter((p) => p.presence !== "out" && p.currentSiteName === site.name).length;
@@ -169,7 +177,7 @@ export default function ConnectPage() {
         ))}
       </nav>
       {error ? <p className={styles.error} role="alert">{error}</p> : null}
-      {connect?.error ? <p className={styles.error} role="alert" data-error={connect.error} onClick={connect.clearError}>{t("actionFailed")}</p> : null}
+      {connect?.error ? <p className={styles.error} role="alert" data-error={connect.error} onClick={connect.clearError}>{humanizeBackendError(connect.error, t) ?? t("actionFailed")}</p> : null}
 
       {tab === "chats" ? (
         <>
@@ -209,7 +217,7 @@ export default function ConnectPage() {
                         </span>
                         <span className={styles.main}>
                           <span className={styles.name}>{titleOf(row.c, p)}</span>
-                          <span className={styles.last}>{row.c.lastPreview}</span>
+                          <span className={styles.last}>{previewText(row.c.lastPreview)}</span>
                           {p ? <span className={`${styles.where} ${styles[`where_${p.presence}`]}`}>{where(p)}</span> : null}
                         </span>
                         <span className={styles.end}>
@@ -299,7 +307,7 @@ export default function ConnectPage() {
                   className={checked ? `${styles.pick} ${styles.pickOn}` : styles.pick}
                   onClick={() => setInvitees((list) => (checked ? list.filter((x) => x !== p.id) : [...list, p.id]))}>
                   <span className={styles.pickAvatar}>
-                    <Avatar name={p.fullName} url={p.avatarUrl} size="sm" />
+                    <Avatar name={p.fullName} url={p.avatarUrl} size="md" />
                     <i className={`${styles.dot} ${styles[`dot_${p.presence}`]}`} aria-hidden="true" />
                   </span>
                   <span className={styles.pickName}>{p.fullName}</span>
@@ -327,7 +335,7 @@ export default function ConnectPage() {
             <dt>{t("info.today")}</dt>
             <dd>{currentPerson.presence === "out" ? t("presence.out") : currentPerson.clockInAt ? t("info.inSince", { time: formatTimeOnly(currentPerson.clockInAt, i18n.language) }) : t(`presence.${currentPerson.presence}`)}</dd>
             <dt>{t("info.site")}</dt>
-            <dd>{currentPerson.currentSiteName ?? currentPerson.siteNames.join("، ") ?? "—"}</dd>
+            <dd>{currentPerson.currentSiteName ?? (currentPerson.siteNames.length > 0 ? currentPerson.siteNames.join("، ") : "—")}</dd>
             <dt>{t("info.role")}</dt>
             <dd>{t(`common:roles.${currentPerson.roleKey}`, { defaultValue: currentPerson.roleName })}</dd>
           </dl>

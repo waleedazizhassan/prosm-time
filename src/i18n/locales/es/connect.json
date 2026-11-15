@@ -176,7 +176,8 @@
     "videoTitle": "Reunión de vídeo",
     "audioTitle": "Reunión de voz",
     "videoUpTo": "Vídeo, hasta 4",
-    "audioUpTo": "Voz, hasta 8"
+    "audioUpTo": "Voz, hasta 8",
+    "send": "Enviar"
   },
   "storage": {
     "clean": "Limpiar {{what}}",
@@ -206,5 +207,15 @@
     "messageSound": "Sonido para mensaje nuevo",
     "messageVibrate": "Vibrar con mensaje nuevo",
     "note": "Estos ajustes se guardan solo en este dispositivo. En la app de Android la llamada suena con el tono del teléfono, aunque la app esté cerrada o la pantalla bloqueada; en el navegador la página debe estar abierta."
+  },
+  "preview": {
+    "image": "📷 Foto",
+    "camera_photo": "📷 Foto verificada",
+    "file": "📎 Archivo",
+    "voice_note": "🎤 Mensaje de voz",
+    "push_to_talk": "📻 Pulsar para hablar",
+    "missed": "📞 Llamada perdida",
+    "meeting_invite": "👥 Invitación a reunión",
+    "photo_request": "📷 Solicitud de foto"
   }
 }

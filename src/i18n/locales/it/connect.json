@@ -176,7 +176,8 @@
     "videoTitle": "Riunione video",
     "audioTitle": "Riunione vocale",
     "videoUpTo": "Video, fino a 4",
-    "audioUpTo": "Voce, fino a 8"
+    "audioUpTo": "Voce, fino a 8",
+    "send": "Invia"
   },
   "storage": {
     "clean": "Pulisci {{what}}",
@@ -206,5 +207,15 @@
     "messageSound": "Suono per nuovo messaggio",
     "messageVibrate": "Vibra per nuovo messaggio",
     "note": "Queste impostazioni restano su questo dispositivo. Nell'app Android la chiamata squilla con la suoneria del telefono, anche ad app chiusa o schermo bloccato; nel browser la pagina deve essere aperta."
+  },
+  "preview": {
+    "image": "📷 Foto",
+    "camera_photo": "📷 Foto verificata",
+    "file": "📎 File",
+    "voice_note": "🎤 Messaggio vocale",
+    "push_to_talk": "📻 Premi per parlare",
+    "missed": "📞 Chiamata persa",
+    "meeting_invite": "👥 Invito a riunione",
+    "photo_request": "📷 Richiesta di foto"
   }
 }

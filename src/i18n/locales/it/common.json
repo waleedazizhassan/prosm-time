@@ -393,7 +393,9 @@
     "ownershipTransferOpen": "C'è già un trasferimento di proprietà aperto.",
     "waitingNotOver": "Il periodo di attesa non è ancora finito.",
     "ownershipNotReady": "Il trasferimento di proprietà non è pronto.",
-    "chooseActiveMember": "Scegli un membro attivo dell'organizzazione."
+    "chooseActiveMember": "Scegli un membro attivo dell'organizzazione.",
+    "meetingEnded": "Questa riunione è terminata.",
+    "meetingFull": "Questa riunione è piena."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

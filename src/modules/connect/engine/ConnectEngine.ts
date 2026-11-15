@@ -346,14 +346,15 @@ function mapRow(row: Record<string, unknown>): ConnectItem {
 
 export function preview(message: LocalMessage): string {
   switch (message.kind) {
-    case "image": return "📷";
-    case "camera_photo": return "📷 ✓";
-    case "file": return `📎 ${message.fileName ?? ""}`;
-    case "voice_note": return "🎤";
-    case "push_to_talk": return "📻";
-    case "missed": return "📞 ✕";
-    case "meeting_invite": return "👥";
-    case "photo_request": return "📷 ?";
+    // owner 2026-11-15: words, not bare emoji - shown translated by the list (previewText)
+    case "image": return "§image";
+    case "camera_photo": return "§camera_photo";
+    case "file": return `§file ${message.fileName ?? ""}`.trim();
+    case "voice_note": return "§voice_note";
+    case "push_to_talk": return "§push_to_talk";
+    case "missed": return "§missed";
+    case "meeting_invite": return "§meeting_invite";
+    case "photo_request": return "§photo_request";
     default: return (message.body ?? "").slice(0, 80);
   }
 }
