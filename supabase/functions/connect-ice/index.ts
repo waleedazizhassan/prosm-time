@@ -2,7 +2,8 @@
 // Gives a signed-in person the ICE servers for a call or a small meeting: Google STUN always, and the free TURN relays
 // configured as Supabase secrets - never in the app's code:
 //   TURN_1_URLS (comma-separated turn:/turns: URLs), TURN_1_USERNAME, TURN_1_CREDENTIAL   e.g. ExpressTURN (free, no card)
-//   METERED_APP (the app's subdomain), METERED_API_KEY                                   Metered Open Relay (free, no card)
+//   TURN_2_URLS, TURN_2_USERNAME, TURN_2_CREDENTIAL                                      e.g. Metered (free, no card)
+//   METERED_APP (the app's subdomain), METERED_API_KEY                                   or Metered's per-request credentials
 // Metered issues its own credentials per request; a relay that does not answer is skipped (the call still tries STUN).
 // Free plans without a card stop when their monthly allowance is used - they cannot bill.
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
@@ -34,11 +35,16 @@ async function meteredServers(): Promise<RTCIceServer[]> {
   }
 }
 
+// TURN_1_* and TURN_2_* - two relays with fixed credentials (e.g. ExpressTURN and Metered); either may be absent
 function staticServers(): RTCIceServer[] {
-  const urls = (Deno.env.get("TURN_1_URLS") ?? "").split(",").map((u) => u.trim()).filter((u) => /^turns?:/i.test(u));
-  const username = Deno.env.get("TURN_1_USERNAME");
-  const credential = Deno.env.get("TURN_1_CREDENTIAL");
-  return urls.length > 0 && username && credential ? [{ urls, username, credential }] : [];
+  const servers: RTCIceServer[] = [];
+  for (const n of [1, 2]) {
+    const urls = (Deno.env.get(`TURN_${n}_URLS`) ?? "").split(",").map((u) => u.trim()).filter((u) => /^turns?:/i.test(u));
+    const username = Deno.env.get(`TURN_${n}_USERNAME`);
+    const credential = Deno.env.get(`TURN_${n}_CREDENTIAL`);
+    if (urls.length > 0 && username && credential) servers.push({ urls, username, credential });
+  }
+  return servers;
 }
 
 serve(async (request: Request) => {
