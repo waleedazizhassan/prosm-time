@@ -644,10 +644,16 @@
     min-height: 0;
     overflow-y: auto;
     overscroll-behavior: contain;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: var(--space-3);
-    align-content: start;
     border-radius: 20px;
+  }
+
+  /* the list keeps its full height inside the scroll area (a list with overflow: hidden would shrink to fit and
+     nothing would scroll - found 2026-11-15) */
+  .side > .scroll > * {
+    flex-shrink: 0;
   }
 
   .tabs {
