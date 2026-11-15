@@ -262,7 +262,17 @@
       "thanks": "谢谢，已保存。",
       "label": "班次感受"
     },
-    "presenceShort": "监控已开启"
+    "presenceShort": "监控已开启",
+    "mapTools": {
+      "label": "地图工具",
+      "layers": "图层",
+      "myLocation": "我的位置",
+      "style": {
+        "auto": "自动",
+        "light": "浅色",
+        "dark": "深色"
+      }
+    }
   },
   "kioskPin": {
     "title": "考勤机 PIN",

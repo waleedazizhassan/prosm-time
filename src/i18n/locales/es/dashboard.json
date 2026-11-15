@@ -268,7 +268,17 @@
       "thanks": "Gracias, guardado.",
       "label": "Cómo fue el turno"
     },
-    "presenceShort": "Supervisión activa"
+    "presenceShort": "Supervisión activa",
+    "mapTools": {
+      "label": "Herramientas del mapa",
+      "layers": "Capas",
+      "myLocation": "Mi ubicación",
+      "style": {
+        "auto": "Automático",
+        "light": "Claro",
+        "dark": "Oscuro"
+      }
+    }
   },
   "kioskPin": {
     "title": "PIN del quiosco",

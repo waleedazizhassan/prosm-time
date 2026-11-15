@@ -265,7 +265,17 @@
       "thanks": "Danke - gespeichert.",
       "label": "Wie die Schicht war"
     },
-    "presenceShort": "Überwachung aktiv"
+    "presenceShort": "Überwachung aktiv",
+    "mapTools": {
+      "label": "Kartenwerkzeuge",
+      "layers": "Ebenen",
+      "myLocation": "Mein Standort",
+      "style": {
+        "auto": "Automatisch",
+        "light": "Hell",
+        "dark": "Dunkel"
+      }
+    }
   },
   "kioskPin": {
     "title": "Kiosk-PIN",

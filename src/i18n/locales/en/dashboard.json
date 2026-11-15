@@ -265,7 +265,17 @@
       "thanks": "Thanks - your answer was saved.",
       "label": "How the shift felt"
     },
-    "presenceShort": "Monitoring on"
+    "presenceShort": "Monitoring on",
+    "mapTools": {
+      "label": "Map tools",
+      "layers": "Layers",
+      "myLocation": "My location",
+      "style": {
+        "auto": "Auto",
+        "light": "Light",
+        "dark": "Dark"
+      }
+    }
   },
   "kioskPin": {
     "title": "Kiosk PIN",

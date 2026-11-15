@@ -1,7 +1,7 @@
 import { Capacitor } from "@capacitor/core";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Coffee, LogIn, LogOut, MapPin, Play, Repeat } from "lucide-react";
+import { Coffee, MapPin, Play, Repeat, Fingerprint, Layers, LocateFixed } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import { useDashboardRefresh } from "../../core/hooks/useDashboardRefresh";
@@ -253,6 +253,11 @@ export default function ClockInOutCard() {
   const [breakWarning, setBreakWarning] = useState("");
   // Owner 2026-11-10: a clear, short confirmation after each attendance action
   const [recenterTick, setRecenterTick] = useState(0);
+  // owner 2026-11-15: the map style the person picked (kept on this device)
+  const [mapStyle, setMapStyle] = useState<"auto" | "light" | "dark">(() => {
+    try { const v = localStorage.getItem("prosm.mapStyle"); return v === "light" || v === "dark" ? v : "auto"; } catch { return "auto"; }
+  });
+  const [stylePicker, setStylePicker] = useState(false);
   const [clockNotice, setClockNotice] = useState<ClockNoticeMessage | null>(null);
   // owner 2026-11-11: what the Android phone still needs before a shift can start (null = nothing asked)
   const [trackingGate, setTrackingGate] = useState<{ missing: TrackingNeed[]; optional: TrackingNeed[]; suggested?: Site } | null>(null);
@@ -1265,7 +1270,34 @@ export default function ClockInOutCard() {
           accuracyMeters={currentLocation?.accuracyMeters ?? null}
           height={380}
           recenterSignal={recenterTick}
+          tileMode={mapStyle}
+          siteLabel={mapRelevantSite?.name ?? null}
         />
+        {/* owner 2026-11-15: north is always up on this map; a compass says so, and a glass toolbar holds the
+            map style and "back to me" */}
+        <span className={styles.compass} aria-hidden="true">N</span>
+        <div className={styles.mapTools} role="group" aria-label={t("attendance.mapTools.label")}>
+          <button type="button" className={styles.mapTool} onClick={() => setStylePicker((open) => !open)} aria-expanded={stylePicker}>
+            <Layers size={18} />
+            <span>{t("attendance.mapTools.layers")}</span>
+          </button>
+          <button type="button" className={styles.mapTool} onClick={() => setRecenterTick((n) => n + 1)}>
+            <LocateFixed size={18} />
+            <span>{t("attendance.mapTools.myLocation")}</span>
+          </button>
+        </div>
+        {stylePicker ? (
+          <div className={styles.stylePicker} role="radiogroup" aria-label={t("attendance.mapTools.layers")}>
+            {(["auto", "light", "dark"] as const).map((mode) => (
+              <button key={mode} type="button" role="radio" aria-checked={mapStyle === mode}
+                className={`${styles.styleOption} ${mapStyle === mode ? styles.styleOptionOn : ""}`}
+                onClick={() => { setMapStyle(mode); setStylePicker(false); try { localStorage.setItem("prosm.mapStyle", mode); } catch { /* private mode */ } }}>
+                <span className={`${styles.styleSwatch} ${styles[`swatch_${mode}`]}`} aria-hidden="true" />
+                <span>{t(`attendance.mapTools.style.${mode}`)}</span>
+              </button>
+            ))}
+          </div>
+        ) : null}
         {/* Owner 2026-11-09: SOS floats above the hours and reminders buttons, the same size */}
         {session && planAllows("sos") ? (
           <button type="button" className={styles.sosFloat} onClick={handleSos} disabled={sosSubmitting || sosSent} aria-label={t("attendance.sosAction")} title={sosSent ? t("attendance.sosSent") : t("attendance.sosAction")}>
@@ -1314,27 +1346,29 @@ export default function ClockInOutCard() {
         {failedOfflineItem ? null : (
           <div className={styles.fabBar}>
             {view.session ? (
-              <>
-                <button type="button" className={`${styles.fab} ${styles.fabOut}`} onClick={handleClockOutTap} disabled={submitting}>
-                  <LogOut size={20} />
+              // owner 2026-11-15: one round glass button in the middle, break and change site beside it
+              <div className={styles.roundRow}>
+                <button type="button" className={styles.sideButton} onClick={handleToggleBreak} disabled={breakSubmitting}>
+                  {view.activeBreakId ? <Play size={18} /> : <Coffee size={18} />}
+                  <span>{view.activeBreakId ? t("attendance.breakEndAction") : t("attendance.breakStartAction")}</span>
+                </button>
+                <button type="button" className={`${styles.roundButton} ${styles.roundOut}`} onClick={handleClockOutTap} disabled={submitting}>
+                  <Fingerprint size={34} strokeWidth={1.8} />
                   <span>{t("attendance.clockOutAction")}</span>
                 </button>
-                <div className={styles.fabRow}>
-                  <button type="button" className={styles.fabSmall} onClick={handleToggleBreak} disabled={breakSubmitting}>
-                    {view.activeBreakId ? <Play size={16} /> : <Coffee size={16} />}
-                    <span>{view.activeBreakId ? t("attendance.breakEndAction") : t("attendance.breakStartAction")}</span>
-                  </button>
-                  <button type="button" className={styles.fabSmall} onClick={handleOpenChangeSiteModal}>
-                    <Repeat size={16} />
-                    <span>{t("attendance.changeSiteAction")}</span>
-                  </button>
-                </div>
-              </>
+                <button type="button" className={styles.sideButton} onClick={handleOpenChangeSiteModal}>
+                  <Repeat size={18} />
+                  <span>{t("attendance.changeSiteAction")}</span>
+                </button>
+              </div>
             ) : (
-              <button type="button" className={`${styles.fab} ${styles.fabIn}`} onClick={() => handleClockInTap()} disabled={submitting}>
-                <LogIn size={20} />
-                <span>{suggestOnSite && siteId === proximitySite!.id ? t("attendance.clockInAt", { site: proximitySite!.name }) : t("attendance.clockInAction")}</span>
-              </button>
+              <div className={styles.roundRow}>
+                <button type="button" className={`${styles.roundButton} ${styles.roundIn}`} onClick={() => handleClockInTap()} disabled={submitting}
+                  title={suggestOnSite && siteId === proximitySite!.id ? t("attendance.clockInAt", { site: proximitySite!.name }) : undefined}>
+                  <Fingerprint size={34} strokeWidth={1.8} />
+                  <span>{t("attendance.clockInAction")}</span>
+                </button>
+              </div>
             )}
           </div>
         )}

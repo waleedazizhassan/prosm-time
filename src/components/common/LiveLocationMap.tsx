@@ -53,9 +53,13 @@ interface LiveLocationMapProps {
   recenterLabel?: string;
   /** Owner 2026-11-11: each change brings the map back to the person (a card over the map does it). */
   recenterSignal?: number;
+  /** Owner 2026-11-15: the map style picked by the person ("auto" follows the app's theme). */
+  tileMode?: "auto" | "light" | "dark";
+  /** Owner 2026-11-15: the site's name as a glass label on its zone. */
+  siteLabel?: string | null;
 }
 
-export default function LiveLocationMap({ latitude, longitude, site = null, height = 200, siteTone = "neutral", accuracyMeters = null, recenterLabel, recenterSignal = 0 }: LiveLocationMapProps) {
+export default function LiveLocationMap({ latitude, longitude, site = null, height = 200, siteTone = "neutral", accuracyMeters = null, recenterLabel, recenterSignal = 0, tileMode = "auto", siteLabel = null }: LiveLocationMapProps) {
   const { resolvedTheme } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
@@ -91,11 +95,11 @@ export default function LiveLocationMap({ latitude, longitude, site = null, heig
     const tileLayer = L.tileLayer(TILE_URL, {
       attribution: TILE_ATTRIBUTION,
       maxZoom: 19,
-      className: resolvedTheme === "dark" ? styles.darkTiles : undefined,
+      className: (tileMode === "auto" ? resolvedTheme === "dark" : tileMode === "dark") ? styles.darkTiles : undefined,
     });
     tileLayer.addTo(map);
     tileLayerRef.current = tileLayer;
-  }, [resolvedTheme]);
+  }, [resolvedTheme, tileMode]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -134,13 +138,18 @@ export default function LiveLocationMap({ latitude, longitude, site = null, heig
           : siteTone === "outside"
           ? "#ea580c"
           : tokens.getPropertyValue("--brand-primary").trim() || "#2563eb";
+      // owner 2026-11-15: a brighter zone with a glowing edge, and its name as a glass label
       circleRef.current = L.circle([site.latitude, site.longitude], {
         radius: site.allowedRadiusMeters,
         color: brandColor,
         fillColor: brandColor,
-        fillOpacity: 0.15,
-        weight: 1.5,
+        fillOpacity: 0.16,
+        weight: 2.5,
+        className: styles.siteZone,
       }).addTo(map);
+      if (siteLabel) {
+        circleRef.current.bindTooltip(siteLabel.replace(/[&<>"']/g, ""), { permanent: true, direction: "top", className: styles.siteLabel, offset: [0, -6] });
+      }
     }
 
     if (site) {
@@ -151,7 +160,7 @@ export default function LiveLocationMap({ latitude, longitude, site = null, heig
     } else if (latitude !== null && longitude !== null) {
       map.setView([latitude, longitude], 15);
     }
-  }, [latitude, longitude, site, siteTone, accuracyMeters]);
+  }, [latitude, longitude, site, siteTone, accuracyMeters, siteLabel]);
 
   const recenter = () => {
     const map = mapRef.current;

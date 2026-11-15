@@ -268,7 +268,17 @@
       "thanks": "Grazie, salvato.",
       "label": "Com’è andato il turno"
     },
-    "presenceShort": "Monitoraggio attivo"
+    "presenceShort": "Monitoraggio attivo",
+    "mapTools": {
+      "label": "Strumenti mappa",
+      "layers": "Livelli",
+      "myLocation": "La mia posizione",
+      "style": {
+        "auto": "Automatico",
+        "light": "Chiaro",
+        "dark": "Scuro"
+      }
+    }
   },
   "kioskPin": {
     "title": "PIN chiosco",

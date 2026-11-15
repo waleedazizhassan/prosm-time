@@ -268,7 +268,17 @@
       "thanks": "Merci, c’est noté.",
       "label": "Ressenti du service"
     },
-    "presenceShort": "Surveillance active"
+    "presenceShort": "Surveillance active",
+    "mapTools": {
+      "label": "Outils de la carte",
+      "layers": "Calques",
+      "myLocation": "Ma position",
+      "style": {
+        "auto": "Auto",
+        "light": "Clair",
+        "dark": "Sombre"
+      }
+    }
   },
   "kioskPin": {
     "title": "Code PIN kiosque",

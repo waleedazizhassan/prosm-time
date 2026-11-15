@@ -277,7 +277,17 @@
       "thanks": "شكراً - وصل ردّك.",
       "label": "إحساسه بالوردية"
     },
-    "presenceShort": "المراقبة مفعّلة"
+    "presenceShort": "المراقبة مفعّلة",
+    "mapTools": {
+      "label": "أدوات الخريطة",
+      "layers": "الطبقات",
+      "myLocation": "موقعي",
+      "style": {
+        "auto": "تلقائي",
+        "light": "فاتح",
+        "dark": "داكن"
+      }
+    }
   },
   "kioskPin": {
     "title": "رمز الكشك",

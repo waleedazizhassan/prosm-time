@@ -271,7 +271,17 @@
       "thanks": "Спасибо, сохранено.",
       "label": "Как прошла смена"
     },
-    "presenceShort": "Контроль включён"
+    "presenceShort": "Контроль включён",
+    "mapTools": {
+      "label": "Инструменты карты",
+      "layers": "Слои",
+      "myLocation": "Моё место",
+      "style": {
+        "auto": "Авто",
+        "light": "Светлая",
+        "dark": "Тёмная"
+      }
+    }
   },
   "kioskPin": {
     "title": "PIN киоска",
