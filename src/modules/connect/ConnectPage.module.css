@@ -608,3 +608,117 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* owner 2026-11-15 ("crowded, not aligned, some columns move and some stay"): on a computer the page is one screen
+   tall; every column starts on the same line, fills the height and scrolls on its own. The title, the search and
+   the filters stay in place. The sidebar already holds Conversations / Calls / Meetings, so the tabs are not
+   repeated there. The person card shows only on a wide screen. */
+.scroll {
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .page {
+    height: calc(100dvh - 120px);
+    min-height: 480px;
+    padding: var(--space-4) var(--space-5) 0;
+    align-items: stretch;
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .side,
+  .hasChat .side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .side > * {
+    flex-shrink: 0;
+  }
+
+  .side > .scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    display: grid;
+    gap: var(--space-3);
+    align-content: start;
+    border-radius: 20px;
+  }
+
+  .tabs {
+    display: none;
+  }
+
+  .chatCol,
+  .hasChat .chatCol {
+    position: static;
+    top: auto;
+    height: auto;
+    min-height: 0;
+  }
+
+  .chatCol > * {
+    height: 100%;
+  }
+
+  .hasChat:has(.info) {
+    grid-template-columns: minmax(300px, 360px) 1fr;
+  }
+
+  .info {
+    display: none;
+  }
+
+  /* the call buttons: quiet, shown on hover / keyboard focus and for the open conversation */
+  .actions {
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .personRow:hover .actions,
+  .personRow:focus-within .actions,
+  .personRow:has(.rowOn) .actions {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 1360px) {
+  .hasChat:has(.info) {
+    grid-template-columns: minmax(300px, 360px) 1fr 260px;
+  }
+
+  .info {
+    display: flex;
+    position: static;
+    align-self: stretch;
+    justify-content: flex-start;
+    overflow-y: auto;
+  }
+}
+
+@media (hover: none) {
+  .actions {
+    opacity: 1;
+  }
+}
+
+/* the whole row lights up together, the call buttons included */
+.personRow:hover,
+.personRow:has(.rowOn) {
+  background: var(--surface-hover);
+}
+
+.personRow:has(.rowOn) {
+  background: linear-gradient(270deg, rgba(37, 99, 235, 0.14), transparent);
+}
+
+.personRow > .row:hover,
+.personRow > .rowOn {
+  background: transparent;
+}

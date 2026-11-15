@@ -190,6 +190,8 @@ export default function ConnectPage() {
               <button key={key} type="button" className={filter === key ? `${styles.chip} ${styles.chipOn}` : styles.chip} onClick={() => setFilter(key)} aria-pressed={filter === key}>{t(`filters.${key}`)}</button>
             ))}
           </div>
+          {/* owner 2026-11-15: the list scrolls on its own; the title, tabs, search and filters stay in place */}
+          <div className={styles.scroll}>
           {filter === "sites" && features?.siteBroadcast ? (
             <ul className={styles.list}>
               {sites.map((site) => (
@@ -225,10 +227,10 @@ export default function ConnectPage() {
                           {row.c.unread > 0 ? <b className={styles.badge}>{row.c.unread}</b> : null}
                         </span>
                       </button>
-                      {/* owner 2026-11-14: the same buttons on every row - a person one already talked to keeps them */}
+                      {/* owner 2026-11-15: the row opens the conversation; only the two call buttons stay, quieter (on a
+                          computer they show on hover or for the open conversation) */}
                       {p ? (
                         <span className={styles.actions}>
-                          <GlassButton label={t("actions.message", { name: p.fullName })} tone="primary" size="small" onClick={() => setParams({ c: row.c.id })}><MessageCircle size={16} /></GlassButton>
                           {features?.calls ? <GlassButton label={t("actions.audioCall")} size="small" onClick={() => void connect?.startCall(p.id, "audio")}><Phone size={16} /></GlassButton> : null}
                           {features?.calls ? <GlassButton label={t("actions.videoCall")} size="small" onClick={() => void connect?.startCall(p.id, "video")}><Video size={16} /></GlassButton> : null}
                         </span>
@@ -247,7 +249,6 @@ export default function ConnectPage() {
                       </span>
                     </button>
                     <span className={styles.actions}>
-                      <GlassButton label={t("actions.message", { name: p.fullName })} tone="primary" size="small" onClick={() => void openPerson(p)}><MessageCircle size={16} /></GlassButton>
                       {features?.calls ? <GlassButton label={t("actions.audioCall")} size="small" onClick={() => void connect?.startCall(p.id, "audio")}><Phone size={16} /></GlassButton> : null}
                       {features?.calls ? <GlassButton label={t("actions.videoCall")} size="small" onClick={() => void connect?.startCall(p.id, "video")}><Video size={16} /></GlassButton> : null}
                     </span>
@@ -256,9 +257,11 @@ export default function ConnectPage() {
               })}
             </ul>
           )}
+          </div>
         </>
       ) : tab === "calls" ? (
         !features?.calls ? <EmptyState message={t("callsNotInPlan")} /> : calls === null ? null : calls.length === 0 ? <EmptyState message={t("noCalls")} /> : (
+          <div className={styles.scroll}>
           <ul className={styles.list}>
             {calls.map((c) => {
               const p = people.get(c.otherId);
@@ -283,9 +286,10 @@ export default function ConnectPage() {
               );
             })}
           </ul>
+          </div>
         )
       ) : !features?.meetings ? <EmptyState message={t("meetingsNotInPlan")} /> : (
-        <section className={styles.meetingForm}>
+        <section className={`${styles.meetingForm} ${styles.scroll}`}>
           <h2>{t("meeting.newTitle")}</h2>
           <div className={styles.mediaToggle} role="radiogroup" aria-label={t("meeting.mediaLabel")}>
             {(["video", "audio"] as const).map((m) => (
