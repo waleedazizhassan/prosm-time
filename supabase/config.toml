@@ -347,3 +347,8 @@ verify_jwt = false
 [functions.connect-send-push]
 enabled = true
 verify_jwt = false
+
+# PROSM Connect phase G (2026-11-15): the ICE servers (STUN + free TURN relays held as secrets) for a signed-in person
+[functions.connect-ice]
+enabled = true
+verify_jwt = true

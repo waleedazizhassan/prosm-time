@@ -187,3 +187,23 @@ export async function connectionRoute(pc: RTCPeerConnection): Promise<"host" | "
     return null;
   }
 }
+
+/**
+ * Phase G (owner 2026-11-15): the ICE servers for a call - STUN plus the free TURN relays the server holds as secrets
+ * (connect-ice). Asked once and kept for 30 minutes; if the server cannot be reached the call still tries STUN alone.
+ */
+let iceCache: { at: number; servers: RTCIceServer[] } | null = null;
+export async function loadIceServers(invoke: (name: string) => Promise<{ data: unknown; error: unknown }>): Promise<RTCIceServer[]> {
+  if (iceCache && Date.now() - iceCache.at < 30 * 60 * 1000) return iceCache.servers;
+  try {
+    const { data, error } = await invoke("connect-ice");
+    const servers = (data as { data?: { iceServers?: RTCIceServer[] } } | null)?.data?.iceServers;
+    if (!error && Array.isArray(servers) && servers.length > 0) {
+      iceCache = { at: Date.now(), servers };
+      return servers;
+    }
+  } catch {
+    // fall back to STUN below
+  }
+  return ICE_SERVERS;
+}

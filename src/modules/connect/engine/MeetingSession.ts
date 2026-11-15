@@ -1,7 +1,7 @@
 import type { RealtimeChannel } from "@supabase/supabase-js";
 
 import { ConnectEngine } from "./ConnectEngine";
-import { ICE_SERVERS, QualityGuard, localMedia, signalChannel, tuneOpus, type Signal } from "./rtc";
+import { ICE_SERVERS, QualityGuard, loadIceServers, localMedia, signalChannel, tuneOpus, type Signal } from "./rtc";
 
 // PROSM Connect - a small meeting, straight between the devices (owner 2026-11-13: no media server). Every device
 // connects with every other (a mesh): up to 4 with video, 8 with sound only, enforced on the server. The one with the
@@ -88,7 +88,11 @@ export class MeetingSession {
     return session;
   }
 
+  private iceServers: RTCIceServer[] = ICE_SERVERS;
+
   async join() {
+    // phase G: STUN plus the free TURN relays, before any connection to the others is made
+    this.iceServers = await loadIceServers((name) => ConnectEngine.supabase.functions.invoke(name, { body: {} }));
     const { error } = await ConnectEngine.supabase.rpc("prosm_time_connect_join_meeting", { p_meeting_id: this.meetingId });
     if (error) throw new Error(error.message);
     const { data } = await ConnectEngine.supabase.rpc("get_prosm_time_connect_meeting", { p_meeting: this.meetingId });
@@ -153,7 +157,7 @@ export class MeetingSession {
   private peer(userId: string): RTCPeerConnection {
     const existing = this.connections.get(userId);
     if (existing) return existing;
-    const pc = new RTCPeerConnection({ iceServers: ICE_SERVERS, bundlePolicy: "max-bundle" });
+    const pc = new RTCPeerConnection({ iceServers: this.iceServers, bundlePolicy: "max-bundle" });
     this.connections.set(userId, pc);
     if (this.local) for (const track of this.local.getTracks()) pc.addTrack(track, this.local);
     if (this.media === "video" && !this.local?.getVideoTracks().length) pc.addTransceiver("video", { direction: "recvonly" });

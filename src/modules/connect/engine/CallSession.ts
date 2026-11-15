@@ -1,7 +1,7 @@
 import type { RealtimeChannel } from "@supabase/supabase-js";
 
 import { ConnectEngine } from "./ConnectEngine";
-import { ICE_SERVERS, QualityGuard, connectionRoute, localMedia, signalChannel, tuneOpus, type LinkQuality, type Signal } from "./rtc";
+import { ICE_SERVERS, QualityGuard, connectionRoute, loadIceServers, localMedia, signalChannel, tuneOpus, type LinkQuality, type Signal } from "./rtc";
 
 // PROSM Connect - a call between two people (owner 2026-11-13). The switchboard rings the other person (a push wakes a
 // closed app); once they answer, both join the call's private channel and the sound and picture go straight between
@@ -134,14 +134,18 @@ export class CallSession {
     this.finish("rejected", false);
   }
 
+  private iceServers: RTCIceServer[] = ICE_SERVERS;
+
   private async join() {
+    // phase G: STUN plus the free TURN relays (a path through mobile networks' NAT)
+    this.iceServers = await loadIceServers((name) => ConnectEngine.supabase.functions.invoke(name, { body: {} }));
     const { channel, send } = await signalChannel(`connect:call:${this.callId}`, (signal) => void this.onSignal(signal));
     this.channel = channel;
     this.send = send;
   }
 
   private makePeer() {
-    const pc = new RTCPeerConnection({ iceServers: ICE_SERVERS, bundlePolicy: "max-bundle" });
+    const pc = new RTCPeerConnection({ iceServers: this.iceServers, bundlePolicy: "max-bundle" });
     this.pc = pc;
     if (this.local) for (const track of this.local.getTracks()) pc.addTrack(track, this.local);
     // a picture can still come from the other side (one of us may have no camera)
