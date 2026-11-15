@@ -236,6 +236,9 @@ export function localizePush(type: string, data: Data, language: string, fallbac
     case "payslip_published":
       result = pair("payslip.publishedTitle", "payslip.publishedBody");
       break;
+    case "ownership_transfer":
+      result = pair("ownership.title", "ownership.body");
+      break;
     case "owner_authority_granted":
       result = pair("ownerAuthority.grantedTitle", "ownerAuthority.grantedBody");
       break;

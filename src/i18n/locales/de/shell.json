@@ -334,6 +334,10 @@
       "incentiveReviewBody": "{{name}}: {{reason}}",
       "incentiveGrantedTitle": "Gut gemacht!",
       "incentiveGrantedBody": "Sie haben eine Prämie erhalten: {{reason}}"
+    },
+    "ownership": {
+      "title": "Eigentumsübertragung",
+      "body": "Die Eigentumsübertragung der Organisation hat sich geändert. Öffnen Sie sie für Details."
     }
   },
   "items": {

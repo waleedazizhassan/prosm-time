@@ -65,10 +65,12 @@ begin
 end $$;
 
 -- 2. The owner's row ---------------------------------------------------------------------------
+-- SECURITY INVOKER on purpose: current_user must be the real writer (a definer trigger would always see its owner),
+-- so only a function owned by prosm_ownership_admin passes the first check.
 create or replace function public.prosm_time_protect_owner_row()
 returns trigger
 language plpgsql
-security definer
+security invoker
 set search_path = public
 as $$
 begin

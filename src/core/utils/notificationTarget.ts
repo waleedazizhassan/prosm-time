@@ -104,6 +104,9 @@ export default function notificationTarget(ref: NotificationRef | undefined, vie
     case "payslip_sent":
     case "payslip_published":
       return "/payslips";
+    // governance phase E: the owner follows it in Settings, the recipient on their profile's Security tab
+    case "ownership_transfer":
+      return viewer.isOwner ? "/settings" : "/me";
     // B-10 (2026-11-08): the licence reminder opens the plan card too (it fell through to the dashboard)
     case "license_changed":
     case "license_ending":

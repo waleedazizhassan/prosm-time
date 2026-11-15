@@ -336,6 +336,10 @@
       "incentiveReviewBody": "{{name}}: {{reason}}",
       "incentiveGrantedTitle": "Отлично!",
       "incentiveGrantedBody": "Вы получили поощрение: {{reason}}"
+    },
+    "ownership": {
+      "title": "Передача владения",
+      "body": "Статус передачи владения организацией изменился. Откройте, чтобы узнать подробности."
     }
   },
   "items": {

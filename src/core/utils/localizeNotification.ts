@@ -275,6 +275,8 @@ export default function localizeNotification(notification: AppNotification, t: T
     }
     case "payslip_published":
       return { title: t("shell:notifications.payslip.publishedTitle"), body: t("shell:notifications.payslip.publishedBody") };
+    case "ownership_transfer":
+      return { title: t("shell:notifications.ownership.title"), body: t("shell:notifications.ownership.body") };
     case "owner_authority_granted":
       return { title: t("shell:notifications.ownerAuthority.grantedTitle"), body: t("shell:notifications.ownerAuthority.grantedBody") };
     case "owner_authority_revoked":

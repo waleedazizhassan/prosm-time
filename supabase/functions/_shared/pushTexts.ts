@@ -284,6 +284,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "incentiveReviewBody": "{{name}}: {{reason}}",
         "incentiveGrantedTitle": "مبروك!",
         "incentiveGrantedBody": "حصلت على حافز: {{reason}}"
+      },
+      "ownership": {
+        "title": "نقل ملكية المؤسسة",
+        "body": "تغيّرت حالة نقل ملكية المؤسسة. افتح التفاصيل."
       }
     },
     "leaveTypes": {
@@ -575,6 +579,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "incentiveReviewBody": "{{name}}: {{reason}}",
         "incentiveGrantedTitle": "Gut gemacht!",
         "incentiveGrantedBody": "Sie haben eine Prämie erhalten: {{reason}}"
+      },
+      "ownership": {
+        "title": "Eigentumsübertragung",
+        "body": "Die Eigentumsübertragung der Organisation hat sich geändert. Öffnen Sie sie für Details."
       }
     },
     "leaveTypes": {
@@ -866,6 +874,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "incentiveReviewBody": "{{name}}: {{reason}}",
         "incentiveGrantedTitle": "Well done!",
         "incentiveGrantedBody": "You got an incentive: {{reason}}"
+      },
+      "ownership": {
+        "title": "Ownership transfer",
+        "body": "The organisation's ownership transfer changed. Open it for the details."
       }
     },
     "leaveTypes": {
@@ -1158,6 +1170,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "incentiveReviewBody": "{{name}}: {{reason}}",
         "incentiveGrantedTitle": "¡Bien hecho!",
         "incentiveGrantedBody": "Recibiste un incentivo: {{reason}}"
+      },
+      "ownership": {
+        "title": "Transferencia de propiedad",
+        "body": "La transferencia de propiedad de la organización cambió. Ábrela para ver los detalles."
       }
     },
     "leaveTypes": {
@@ -1450,6 +1466,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "incentiveReviewBody": "{{name}} : {{reason}}",
         "incentiveGrantedTitle": "Bravo !",
         "incentiveGrantedBody": "Vous avez reçu une prime : {{reason}}"
+      },
+      "ownership": {
+        "title": "Transfert de propriété",
+        "body": "Le transfert de propriété de l'organisation a changé. Ouvrez-le pour les détails."
       }
     },
     "leaveTypes": {
@@ -1742,6 +1762,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "incentiveReviewBody": "{{name}}: {{reason}}",
         "incentiveGrantedTitle": "Ben fatto!",
         "incentiveGrantedBody": "Hai ricevuto un incentivo: {{reason}}"
+      },
+      "ownership": {
+        "title": "Trasferimento di proprietà",
+        "body": "Il trasferimento di proprietà dell'organizzazione è cambiato. Aprilo per i dettagli."
       }
     },
     "leaveTypes": {
@@ -2034,6 +2058,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "incentiveReviewBody": "{{name}}: {{reason}}",
         "incentiveGrantedTitle": "Parabéns!",
         "incentiveGrantedBody": "Você recebeu um incentivo: {{reason}}"
+      },
+      "ownership": {
+        "title": "Transferência de propriedade",
+        "body": "A transferência de propriedade da organização mudou. Abra para ver os detalhes."
       }
     },
     "leaveTypes": {
@@ -2327,6 +2355,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "incentiveReviewBody": "{{name}}: {{reason}}",
         "incentiveGrantedTitle": "Отлично!",
         "incentiveGrantedBody": "Вы получили поощрение: {{reason}}"
+      },
+      "ownership": {
+        "title": "Передача владения",
+        "body": "Статус передачи владения организацией изменился. Откройте, чтобы узнать подробности."
       }
     },
     "leaveTypes": {
@@ -2617,6 +2649,10 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "incentiveReviewBody": "{{name}}：{{reason}}",
         "incentiveGrantedTitle": "干得好！",
         "incentiveGrantedBody": "您获得了奖励：{{reason}}"
+      },
+      "ownership": {
+        "title": "所有权转让",
+        "body": "组织的所有权转让有更新，打开查看详情。"
       }
     },
     "leaveTypes": {

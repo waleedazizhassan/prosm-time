@@ -338,6 +338,10 @@
       "incentiveReviewBody": "{{name}}: {{reason}}",
       "incentiveGrantedTitle": "مبروك!",
       "incentiveGrantedBody": "حصلت على حافز: {{reason}}"
+    },
+    "ownership": {
+      "title": "نقل ملكية المؤسسة",
+      "body": "تغيّرت حالة نقل ملكية المؤسسة. افتح التفاصيل."
     }
   },
   "items": {

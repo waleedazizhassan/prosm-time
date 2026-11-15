@@ -334,6 +334,10 @@
       "incentiveReviewBody": "{{name}}: {{reason}}",
       "incentiveGrantedTitle": "Well done!",
       "incentiveGrantedBody": "You got an incentive: {{reason}}"
+    },
+    "ownership": {
+      "title": "Ownership transfer",
+      "body": "The organisation's ownership transfer changed. Open it for the details."
     }
   },
   "items": {

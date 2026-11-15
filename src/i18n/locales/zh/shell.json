@@ -333,6 +333,10 @@
       "incentiveReviewBody": "{{name}}：{{reason}}",
       "incentiveGrantedTitle": "干得好！",
       "incentiveGrantedBody": "您获得了奖励：{{reason}}"
+    },
+    "ownership": {
+      "title": "所有权转让",
+      "body": "组织的所有权转让有更新，打开查看详情。"
     }
   },
   "items": {

@@ -335,6 +335,10 @@
       "incentiveReviewBody": "{{name}}: {{reason}}",
       "incentiveGrantedTitle": "Ben fatto!",
       "incentiveGrantedBody": "Hai ricevuto un incentivo: {{reason}}"
+    },
+    "ownership": {
+      "title": "Trasferimento di proprietà",
+      "body": "Il trasferimento di proprietà dell'organizzazione è cambiato. Aprilo per i dettagli."
     }
   },
   "items": {
