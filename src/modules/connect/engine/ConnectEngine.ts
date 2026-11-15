@@ -64,23 +64,74 @@ class Engine {
     } catch {
       // the channel retries with the session it has
     }
+    this.subscribe(userId);
+    window.addEventListener("online", this.onOnline);
+    // owner 2026-11-15 ("a message arrives but only shows once I open the chat"): the moment the app is in front again,
+    // read what came; and while the live channel is down, read every few seconds instead of every 30
+    document.addEventListener("visibilitychange", this.onVisible);
+    window.addEventListener("focus", this.onVisible);
+    this.schedule();
+    void this.drain();
+    void this.flush();
+  }
+
+  /** true while the private live channel is joined; false makes the inbox the (faster) path */
+  private live = false;
+
+  private subscribe(userId: string) {
     const channel = this.supabase.channel(`connect:user:${userId}`, { config: { private: true } });
     channel
       .on("broadcast", { event: "item" }, (message) => void this.fetchAndHandle((message.payload as { id: string }).id))
       .on("broadcast", { event: "receipt" }, (message) => void this.handleReceipt(message.payload as Record<string, unknown>))
       .on("broadcast", { event: "call" }, (message) => this.emit("call-signal", message.payload))
-      .subscribe((status) => {
-        if (status === "SUBSCRIBED") void this.drain();
+      .subscribe((status, error) => {
+        if (status === "SUBSCRIBED") {
+          this.live = true;
+          this.schedule();
+          void this.drain();
+          return;
+        }
+        if (status === "CHANNEL_ERROR" || status === "TIMED_OUT" || status === "CLOSED") {
+          const wasLive = this.live;
+          this.live = false;
+          this.schedule();
+          if (status !== "CLOSED" || wasLive) console.warn("[connect] live channel", status, error?.message ?? "");
+          // join again with a fresh session, unless the engine was stopped
+          if (status !== "CLOSED" && this.me?.userId === userId) {
+            window.setTimeout(() => void this.rejoin(userId), 5000);
+          }
+        }
       });
     this.channel = channel;
-    window.addEventListener("online", this.onOnline);
+  }
+
+  private async rejoin(userId: string) {
+    if (this.me?.userId !== userId || this.live) return;
+    try {
+      const session = (await this.supabase.auth.getSession()).data.session;
+      if (session) await this.supabase.realtime.setAuth(session.access_token);
+    } catch {
+      // try with what the client has
+    }
+    if (this.channel) await this.supabase.removeChannel(this.channel).catch(() => undefined);
+    this.subscribe(userId);
+  }
+
+  /** 30 s while the live channel brings everything, 5 s while it is down */
+  private schedule() {
+    if (this.timer) window.clearInterval(this.timer);
     this.timer = window.setInterval(() => {
       void this.drain();
       void this.flush();
-    }, 30000);
-    void this.drain();
-    void this.flush();
+    }, this.live ? 30000 : 5000);
   }
+
+  private onVisible = () => {
+    if (document.visibilityState === "visible") {
+      void this.drain();
+      void this.flush();
+    }
+  };
 
   async stop() {
     if (this.channel) await this.supabase.removeChannel(this.channel).catch(() => undefined);
@@ -88,6 +139,9 @@ class Engine {
     if (this.timer) window.clearInterval(this.timer);
     this.timer = null;
     window.removeEventListener("online", this.onOnline);
+    document.removeEventListener("visibilitychange", this.onVisible);
+    window.removeEventListener("focus", this.onVisible);
+    this.live = false;
     this.me = null;
   }
 
