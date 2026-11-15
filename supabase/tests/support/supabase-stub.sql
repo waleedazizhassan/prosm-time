@@ -87,3 +87,12 @@ create or replace function storage.filename(name text) returns text language sql
   select (string_to_array(name, '/'))[array_length(string_to_array(name, '/'), 1)];
 $$;
 grant execute on function storage.foldername(text), storage.filename(text) to anon, authenticated, service_role;
+
+-- Governance phase C (2026-11-15): Supabase's auth.jwt() - the request's verified claims as jsonb.
+create or replace function auth.jwt() returns jsonb language sql stable as $$
+  select coalesce(
+    nullif(current_setting('request.jwt.claim', true), ''),
+    nullif(current_setting('request.jwt.claims', true), '')
+  )::jsonb;
+$$;
+grant execute on function auth.jwt() to anon, authenticated, service_role;
