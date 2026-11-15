@@ -75,6 +75,14 @@ describe("mfa_required: aal2 and a TOTP at most 10 minutes old, for the owner an
     expect((await createKey({ aal: "aal2", amr: [{ method: "password", timestamp: now() - 4000 }, { method: "totp", timestamp: now() - 20 }] })).error).toBeNull();
     expect((await createKey({ aal: "aal2", amr: [{ method: "totp", timestamp: now() - 700 }] })).error).toMatch(/STEP_UP_REQUIRED/);
   });
+  it("reads a real Supabase token: the claims captured on PROSM Time on 2026-11-15, before and after TOTP", async () => {
+    // exact shape of the live tokens (Ratomag test account): password sign-in, then TOTP one second later
+    const signedIn = now() - 5;
+    const afterPassword = { aal: "aal1", amr: [{ method: "password", timestamp: signedIn }] };
+    const afterTotp = { aal: "aal2", amr: [{ method: "totp", timestamp: signedIn + 1 }, { method: "password", timestamp: signedIn }] };
+    expect((await createKey(afterPassword)).error).toMatch(/MFA_REQUIRED/);
+    expect((await createKey(afterTotp)).error).toBeNull();
+  });
   it("tells the app who must use MFA", async () => {
     const owner = await asClaims(org.owner.authId, {}, "select public.get_prosm_time_step_up_policy() as p");
     expect((owner.rows![0] as { p: { mfaRequired: boolean } }).p.mfaRequired).toBe(true);

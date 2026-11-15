@@ -386,6 +386,7 @@
     "stepUpRequired": "执行此操作前请确认是您本人。",
     "mfaRequired": "此操作需要两步登录。",
     "correctionAlreadyPending": "此项已有待处理的更正。",
+    "requestAlreadyDecided": "其他人已经处理了此请求 - 请刷新查看当前状态。",
     "apiKeyMax365": "API 密钥最长有效 365 天。",
     "delegationMax30": "授权最长持续 30 天。如需延长请重新授予。",
     "onlyActiveKeyRotated": "只有有效的密钥可以轮换。",

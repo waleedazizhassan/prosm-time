@@ -386,6 +386,7 @@
     "stepUpRequired": "Bestätigen Sie vor dieser Aktion, dass Sie es sind.",
     "mfaRequired": "Diese Aktion erfordert die Anmeldung in zwei Schritten.",
     "correctionAlreadyPending": "Dafür ist bereits eine Korrektur offen.",
+    "requestAlreadyDecided": "Jemand anderes hat diese Anfrage bereits entschieden - aktualisiere, um den aktuellen Stand zu sehen.",
     "apiKeyMax365": "Ein API-Schlüssel gilt höchstens 365 Tage.",
     "delegationMax30": "Eine Vertretung gilt höchstens 30 Tage. Erteilen Sie sie erneut, um sie zu verlängern.",
     "onlyActiveKeyRotated": "Nur ein aktiver Schlüssel kann erneuert werden.",

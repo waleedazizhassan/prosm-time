@@ -386,6 +386,7 @@
     "stepUpRequired": "Confirm it's you before this action.",
     "mfaRequired": "This action needs two-step sign-in.",
     "correctionAlreadyPending": "A correction for this is already pending.",
+    "requestAlreadyDecided": "Someone else already decided this request - refresh to see its current state.",
     "apiKeyMax365": "An API key lasts at most 365 days.",
     "delegationMax30": "A delegation lasts at most 30 days. Grant it again to extend it.",
     "onlyActiveKeyRotated": "Only an active key can be rotated.",

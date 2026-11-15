@@ -68,7 +68,7 @@ describe("payroll: the owner approves their own cycle only when nobody else can"
 describe("one decision per request", () => {
   it("deciding locks the request row first", async () => {
     const defs = await t.su<{ d: string }>(
-      `select pg_get_functiondef('public.review_prosm_time_leave(uuid, text, text, numeric)'::regprocedure) || pg_get_functiondef('public.review_prosm_time_exception(text, uuid, text, text)'::regprocedure) as d`);
+      `select pg_get_functiondef('public.review_prosm_time_leave(uuid, text, text, numeric, text)'::regprocedure) || pg_get_functiondef('public.review_prosm_time_exception(text, uuid, text, text)'::regprocedure) as d`);
     expect(defs[0].d).toContain("from leave_requests where id = p_request_id and organization_id = v_org for update;");
     expect(defs[0].d).toContain("where id = p_target_id and organization_id = v_caller_org for update;");
     expect(defs[0].d).not.toMatch(/where id = p_target_id and organization_id = v_caller_org;/);

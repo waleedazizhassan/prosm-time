@@ -460,13 +460,16 @@ class LeaveRepository {
     }
   }
 
-  async review(requestId: string, action: "approved" | "rejected", notes?: string, deductionPerDay?: number | null): Promise<ServiceResult> {
+  // expectedStatus: what the screen showed - the server refuses the decision if another manager decided first
+  // (a reject landing on a just-approved leave would otherwise become a revoke).
+  async review(requestId: string, action: "approved" | "rejected", notes?: string, deductionPerDay?: number | null, expectedStatus: "pending" | "approved" = "pending"): Promise<ServiceResult> {
     try {
       const { data, error } = await this.client.rpc("review_prosm_time_leave", {
         p_request_id: requestId,
         p_action: action,
         p_notes: notes?.trim() || null,
         p_deduction_per_day: deductionPerDay ?? null,
+        p_expected_status: expectedStatus,
       });
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to review this leave request.");
@@ -520,7 +523,7 @@ class LeaveRepository {
   // names the real intent clearly at the call site rather than making
   // every caller remember that "reject" is also how you revoke.
   async revokeApproved(requestId: string, notes: string): Promise<ServiceResult> {
-    return this.review(requestId, "rejected", notes);
+    return this.review(requestId, "rejected", notes, null, "approved");
   }
 
   // § real request, user-directed: an Owner-only override for a

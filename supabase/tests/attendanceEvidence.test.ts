@@ -115,14 +115,12 @@ describe("a closed pay period stays closed", () => {
       expect(await asService("update attendance_events set occurred_at = occurred_at - interval '5 minutes' where session_id = $1", [shiftId])).toMatch(/PAY PERIOD IS LOCKED/);
       expect(await asService("delete from attendance_sessions where id = $1", [shiftId])).toMatch(/PAY PERIOD IS LOCKED/);
     }
-    const [leaveType] = await t.su<{ id: string }>("select id from leave_types where organization_id = $1 limit 1", [org.id]);
-    if (leaveType) {
-      const [leave] = await t.su<{ id: string }>(
-        "insert into leave_requests (organization_id, user_id, leave_type_id, start_date, end_date, status) values ($1, $2, $3, current_date, current_date, 'pending') returning id",
-        [org.id, employee.userId, leaveType.id],
-      ).catch(() => [] as { id: string }[]);
-      if (leave) expect(await asService("update leave_requests set status = 'approved' where id = $1", [leave.id])).toMatch(/PAY PERIOD IS LOCKED/);
-    }
+    // a leave decision inside the locked period is refused too (approving it, or withdrawing an approved one)
+    const [leave] = await t.su<{ id: string }>(
+      "insert into leave_requests (organization_id, user_id, leave_type, start_date, end_date, days_count, status) values ($1, $2, 'annual', current_date, current_date, 1, 'pending') returning id",
+      [org.id, employee.userId],
+    );
+    expect(await asService("update leave_requests set status = 'approved' where id = $1", [leave.id])).toMatch(/PAY PERIOD IS LOCKED/);
   });
 
   it("the person still clocks in and out for themselves, and an open shift still closes", async () => {

@@ -386,6 +386,7 @@
     "stepUpRequired": "Confirmez votre identité avant cette action.",
     "mfaRequired": "Cette action nécessite la connexion en deux étapes.",
     "correctionAlreadyPending": "Une correction est déjà en attente pour cela.",
+    "requestAlreadyDecided": "Quelqu'un d'autre a déjà décidé de cette demande - actualisez pour voir son état actuel.",
     "apiKeyMax365": "Une clé API dure au maximum 365 jours.",
     "delegationMax30": "Une délégation dure au maximum 30 jours. Accordez-la à nouveau pour la prolonger.",
     "onlyActiveKeyRotated": "Seule une clé active peut être renouvelée.",

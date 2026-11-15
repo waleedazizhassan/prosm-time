@@ -210,6 +210,7 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "THE OWNERSHIP TRANSFER IS NOT READY": "ownershipNotReady",
   "CHOOSE AN ACTIVE MEMBER OF THE ORGANIZATION": "chooseActiveMember",
   "A CORRECTION FOR THIS IS ALREADY PENDING": "correctionAlreadyPending",
+  "THIS REQUEST WAS ALREADY DECIDED": "requestAlreadyDecided",
   "AN API KEY LASTS AT MOST 365 DAYS": "apiKeyMax365",
   "A DELEGATION LASTS AT MOST 30 DAYS - GRANT IT AGAIN TO EXTEND": "delegationMax30",
   "ONLY AN ACTIVE KEY IS ROTATED": "onlyActiveKeyRotated",

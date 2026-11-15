@@ -105,7 +105,11 @@ begin
             jsonb_build_object('ownerUserId', v_t.from_user_id), jsonb_build_object('ownerUserId', v_t.to_user_id));
 end;
 $$;
+-- handing a function to a role needs that role to hold CREATE on the schema (a superuser skips the check, so the
+-- in-memory tests did not show it; found on a Supabase-like role set-up, 2026-11-15). Granted for the hand-over only.
+grant create on schema public to prosm_ownership_admin;
 alter function public.prosm_time_complete_ownership_switch(uuid) owner to prosm_ownership_admin;
+revoke create on schema public from prosm_ownership_admin;
 revoke all on function public.prosm_time_complete_ownership_switch(uuid) from public, anon, authenticated, service_role;
 grant execute on function public.prosm_time_complete_ownership_switch(uuid) to postgres;
 
