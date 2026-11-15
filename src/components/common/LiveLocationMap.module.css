@@ -140,3 +140,53 @@
 .siteLabel::before {
   display: none;
 }
+
+/* ===== owner 2026-11-15: a nicer map, free (OpenStreetMap tiles styled here, no paid layer) ===== */
+
+/* light: calm and clean - softer colours, a cool tint, no shouting reds and yellows */
+.lightTiles {
+  filter: saturate(0.5) brightness(1.07) contrast(0.92) hue-rotate(-10deg);
+}
+
+/* dark: a deep navy night map where the roads glow */
+.darkTiles {
+  filter: invert(1) hue-rotate(192deg) brightness(0.82) contrast(1.12) saturate(0.7);
+}
+
+/* depth: a soft light around the map's edge, between the tiles and the drawings */
+.map::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 250;
+  pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 45%, transparent 55%, rgba(15, 23, 42, 0.18) 100%);
+}
+
+:global([data-theme="dark"]) .map::after,
+.map.mapDark::after {
+  background:
+    radial-gradient(70% 55% at 50% 50%, rgba(59, 130, 246, 0.1), transparent 70%),
+    radial-gradient(120% 90% at 50% 45%, transparent 50%, rgba(2, 6, 23, 0.55) 100%);
+}
+
+/* "you are here": a blue dot with a white ring and a breathing halo */
+.markerIcon span {
+  width: 16px;
+  height: 16px;
+  border: 3px solid #fff;
+  background: #2563eb;
+  box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.22), 0 2px 8px rgba(2, 8, 23, 0.4);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .markerIcon span {
+    animation: liveLocationPulseBlue 2.2s ease-out infinite;
+  }
+}
+
+@keyframes liveLocationPulseBlue {
+  0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.45), 0 2px 8px rgba(2, 8, 23, 0.4); }
+  70% { box-shadow: 0 0 0 16px rgba(37, 99, 235, 0), 0 2px 8px rgba(2, 8, 23, 0.4); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0), 0 2px 8px rgba(2, 8, 23, 0.4); }
+}

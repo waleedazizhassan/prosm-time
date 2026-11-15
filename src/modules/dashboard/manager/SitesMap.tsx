@@ -124,7 +124,7 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
     const map = mapRef.current;
     if (!map) return;
     if (tileRef.current) map.removeLayer(tileRef.current);
-    tileRef.current = L.tileLayer(TILE_URL, { attribution: TILE_ATTRIBUTION, maxZoom: 19, className: resolvedTheme === "dark" ? mapStyles.darkTiles : undefined }).addTo(map);
+    tileRef.current = L.tileLayer(TILE_URL, { attribution: TILE_ATTRIBUTION, maxZoom: 19, className: resolvedTheme === "dark" ? mapStyles.darkTiles : mapStyles.lightTiles }).addTo(map);
   }, [resolvedTheme]);
 
   useEffect(() => {

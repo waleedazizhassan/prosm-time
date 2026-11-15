@@ -95,8 +95,10 @@ export default function LiveLocationMap({ latitude, longitude, site = null, heig
     const tileLayer = L.tileLayer(TILE_URL, {
       attribution: TILE_ATTRIBUTION,
       maxZoom: 19,
-      className: (tileMode === "auto" ? resolvedTheme === "dark" : tileMode === "dark") ? styles.darkTiles : undefined,
+      className: (tileMode === "auto" ? resolvedTheme === "dark" : tileMode === "dark") ? styles.darkTiles : styles.lightTiles,
     });
+    // the edge light follows the chosen style
+    containerRef.current?.classList.toggle(styles.mapDark, tileMode === "auto" ? resolvedTheme === "dark" : tileMode === "dark");
     tileLayer.addTo(map);
     tileLayerRef.current = tileLayer;
   }, [resolvedTheme, tileMode]);
