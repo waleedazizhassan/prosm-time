@@ -83,7 +83,8 @@
       "atSite": "Sur le site, je vous rappelle vite",
       "callLater": "Je ne peux pas répondre, je rappelle",
       "inMeeting": "En réunion, je rappelle après"
-    }
+    },
+    "enableSound": "Touchez pour activer le son"
   },
   "callStatus": {
     "ringing": "Sonne",

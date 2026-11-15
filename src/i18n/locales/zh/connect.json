@@ -83,7 +83,8 @@
       "atSite": "我在现场，稍后回电",
       "callLater": "现在不方便接听，稍后回电",
       "inMeeting": "正在开会，会后回电"
-    }
+    },
+    "enableSound": "点按以开启声音"
   },
   "callStatus": {
     "ringing": "响铃中",

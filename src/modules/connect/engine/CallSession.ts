@@ -1,7 +1,7 @@
 import type { RealtimeChannel } from "@supabase/supabase-js";
 
 import { ConnectEngine } from "./ConnectEngine";
-import { ICE_SERVERS, QualityGuard, localMedia, signalChannel, tuneOpus, type LinkQuality, type Signal } from "./rtc";
+import { ICE_SERVERS, QualityGuard, connectionRoute, localMedia, signalChannel, tuneOpus, type LinkQuality, type Signal } from "./rtc";
 
 // PROSM Connect - a call between two people (owner 2026-11-13). The switchboard rings the other person (a push wakes a
 // closed app); once they answer, both join the call's private channel and the sound and picture go straight between
@@ -25,6 +25,8 @@ export class CallSession {
   startedAt: number | null = null;
   /** The other phone is ringing (owner 2026-11-14: "calling" turns to "ringing" once the other side rings). */
   remoteRinging = false;
+  /** phase G: how the connected call travels (host / srflx / relay), for diagnosis */
+  route: "host" | "srflx" | "prflx" | "relay" | null = null;
   private pc: RTCPeerConnection | null = null;
   private channel: RealtimeChannel | null = null;
   private send: ((signal: Omit<Signal, "from">) => Promise<void>) | null = null;
@@ -160,6 +162,11 @@ export class CallSession {
         }
         this.everConnected = true;
         if (!this.startedAt) this.startedAt = Date.now();
+        void connectionRoute(pc).then((route) => {
+          this.route = route;
+          console.info("[connect] call connected via", route ?? "unknown");
+          this.changed();
+        });
         this.set("connected");
       } else if (s === "disconnected") {
         this.set("reconnecting");

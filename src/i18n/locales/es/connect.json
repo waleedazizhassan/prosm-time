@@ -83,7 +83,8 @@
       "atSite": "Estoy en el sitio, te llamo enseguida",
       "callLater": "No puedo ahora, te llamo",
       "inMeeting": "En una reunión, te llamo después"
-    }
+    },
+    "enableSound": "Toca para activar el sonido"
   },
   "callStatus": {
     "ringing": "Sonando",

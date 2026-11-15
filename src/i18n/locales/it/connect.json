@@ -83,7 +83,8 @@
       "atSite": "Sono in sede, ti richiamo a breve",
       "callLater": "Non posso ora, ti richiamo",
       "inMeeting": "In riunione, ti chiamo dopo"
-    }
+    },
+    "enableSound": "Tocca per attivare l'audio"
   },
   "callStatus": {
     "ringing": "Squilla",

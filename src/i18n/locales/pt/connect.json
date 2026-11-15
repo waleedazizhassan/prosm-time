@@ -83,7 +83,8 @@
       "atSite": "Estou no local, ligo-lhe já",
       "callLater": "Não posso atender, ligo de volta",
       "inMeeting": "Em reunião, ligo depois"
-    }
+    },
+    "enableSound": "Toque para ligar o som"
   },
   "callStatus": {
     "ringing": "A tocar",

@@ -83,7 +83,8 @@
       "atSite": "At the site, I'll call you shortly",
       "callLater": "Can't answer now, I'll call you back",
       "inMeeting": "In a meeting, I'll call you after"
-    }
+    },
+    "enableSound": "Tap to turn the sound on"
   },
   "callStatus": {
     "ringing": "Ringing",

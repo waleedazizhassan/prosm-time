@@ -83,7 +83,8 @@
       "atSite": "Bin am Standort, rufe gleich zurück",
       "callLater": "Kann gerade nicht, rufe zurück",
       "inMeeting": "In einer Besprechung, rufe danach an"
-    }
+    },
+    "enableSound": "Tippen, um den Ton einzuschalten"
   },
   "callStatus": {
     "ringing": "Klingelt",

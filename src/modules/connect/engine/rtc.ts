@@ -163,3 +163,27 @@ async function setMaxBitrate(sender: RTCRtpSender, bitrate: number) {
     // older engines: the browser adapts by itself
   }
 }
+
+/**
+ * Phase G (owner 2026-11-15): how a connected call actually travels - "host" (same network), "srflx" (direct through
+ * the internet, found by STUN) or "relay" (through a TURN server). Measured instead of guessed; null if unknown.
+ */
+export async function connectionRoute(pc: RTCPeerConnection): Promise<"host" | "srflx" | "prflx" | "relay" | null> {
+  try {
+    const stats = await pc.getStats();
+    let pairId: string | null = null;
+    stats.forEach((report) => {
+      if (report.type === "transport" && report.selectedCandidatePairId) pairId = report.selectedCandidatePairId;
+    });
+    let pair: RTCIceCandidatePairStats | null = null;
+    stats.forEach((report) => {
+      if (report.type === "candidate-pair" && (report.id === pairId || (!pairId && report.state === "succeeded" && report.nominated))) pair = report;
+    });
+    if (!pair) return null;
+    const local = stats.get((pair as RTCIceCandidatePairStats).localCandidateId) as { candidateType?: string } | undefined;
+    const type = local?.candidateType;
+    return type === "host" || type === "srflx" || type === "prflx" || type === "relay" ? type : null;
+  } catch {
+    return null;
+  }
+}

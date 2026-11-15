@@ -9,6 +9,7 @@ import type { MeetingSession } from "./engine/MeetingSession";
 import { ConnectEngine } from "./engine/ConnectEngine";
 import GlassButton from "./GlassButton";
 import styles from "./MeetingScreen.module.css";
+import { playMedia } from "./engine/media";
 
 type Layout = "host" | "share" | "grid";
 
@@ -25,6 +26,13 @@ export default function MeetingScreen({ session, people, onClose }: { session: M
   const [text, setText] = useState("");
   const [layoutChoice, setLayoutChoice] = useState<Layout | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+  // phase G: the browser refused to start someone's sound by itself - one tap starts everyone's
+  const [soundBlocked, setSoundBlocked] = useState(false);
+  const startSound = (el: HTMLMediaElement | null) => void playMedia(el).then((ok) => { if (!ok) setSoundBlocked(true); });
+  const enableAllSound = () => {
+    setSoundBlocked(false);
+    document.querySelectorAll<HTMLMediaElement>("[data-connect-remote]").forEach((el) => startSound(el));
+  };
   const videos = useRef(new Map<string, HTMLVideoElement>());
   const recorders = useRef(new Set<string>());
 
@@ -65,16 +73,18 @@ export default function MeetingScreen({ session, people, onClose }: { session: M
         <video
           className={t0.local && session.sharingBy !== me ? styles.mirror : undefined}
           autoPlay playsInline muted={t0.local}
+          data-connect-remote={t0.local ? undefined : ""}
           ref={(el) => {
             if (!el) return;
             videos.current.set(t0.userId, el);
             if (el.srcObject !== t0.stream) el.srcObject = t0.stream;
+            if (!t0.local) startSound(el);
           }}
         />
       ) : (
         <>
           <Avatar name={nameOf(t0.userId)} url={people.get(t0.userId)?.avatarUrl ?? null} size={big ? "lg" : "md"} />
-          {!t0.local && t0.stream ? <audio autoPlay ref={(el) => { if (el && el.srcObject !== t0.stream) el.srcObject = t0.stream; }} /> : null}
+          {!t0.local && t0.stream ? <audio autoPlay data-connect-remote="" ref={(el) => { if (el && el.srcObject !== t0.stream) el.srcObject = t0.stream; if (el) startSound(el); }} /> : null}
         </>
       )}
       <span className={styles.label}>
@@ -95,6 +105,9 @@ export default function MeetingScreen({ session, people, onClose }: { session: M
 
   return (
     <div className={styles.screen} role="dialog" aria-modal="true" aria-label={t("meeting.label")}>
+      {soundBlocked ? (
+        <button type="button" className={styles.enableSound} onClick={enableAllSound}>{t("call.enableSound")}</button>
+      ) : null}
       <header className={styles.top}>
         <b>{t(session.media === "video" ? "meeting.videoTitle" : "meeting.audioTitle")}</b>
         <span className={styles.count}><Users size={14} aria-hidden="true" /> {tiles.length}/{session.media === "video" ? 4 : 8}</span>
