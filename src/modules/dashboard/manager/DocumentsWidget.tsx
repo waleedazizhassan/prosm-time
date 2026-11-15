@@ -39,9 +39,9 @@ export default function DocumentsWidget({ refreshKey }: { refreshKey: string }) 
           and what needs action is named: who, which document, how many days are left */}
       <div className={styles.widgetBody}>
         {!data ? <div className={styles.skeleton} style={{ height: 60 }} /> : data.all.length === 0 ? (
-          <EmptyState kind="empty" message={t("widget.noDocuments")} />
+          <EmptyState compact kind="empty" message={t("widget.noDocuments")} />
         ) : nothing ? (
-          <EmptyState kind="empty" message={t("widget.allGood", { percent: data.completePercent })} />
+          <EmptyState compact kind="success" message={t("widget.allGood", { percent: data.completePercent })} />
         ) : (
           <div className={styles.insights}>
             {items.map(([key, n]) => (

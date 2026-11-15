@@ -91,6 +91,10 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
     map.attributionControl.setPrefix(false);
     map.setView([30.0444, 31.2357], 11);
     mapRef.current = map;
+    // owner 2026-11-15: the site names overlapped when zoomed out - they show from zoom 12, the cards below name them always
+    const labels = () => containerRef.current?.classList.toggle(styles.labelsHidden, map.getZoom() < 12);
+    map.on("zoomend", labels);
+    labels();
     layerRef.current = L.layerGroup().addTo(map);
     return () => {
       map.remove();
