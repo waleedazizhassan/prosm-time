@@ -103,7 +103,8 @@
     "ZERO_NET": "Net nul",
     "PARTIAL_PERIOD": "Arrivée ou départ pendant la période",
     "NET_CHANGED": "Le net a beaucoup changé depuis le cycle précédent",
-    "ATTENDANCE_CHANGED": "Les présences ont changé après acceptation d'une suggestion"
+    "ATTENDANCE_CHANGED": "Les présences ont changé après acceptation d'une suggestion",
+    "PENDING_REQUESTS": "Demandes encore en attente sur la période"
   },
   "suggestions": {
     "title": "Depuis les présences",

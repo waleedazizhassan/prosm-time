@@ -379,7 +379,10 @@
     "documentNameTooLong": "The document's name is too long.",
     "legalNameArabic": "The official name must be in Arabic, as on the ID card.",
     "nationalIdRequired": "Enter the national ID number.",
-    "phoneRequired": "Enter the mobile number."
+    "phoneRequired": "Enter the mobile number.",
+    "ownerAccountProtected": "The owner's account is protected.",
+    "ownerChangesOnlyByTransfer": "The owner changes only through an ownership transfer.",
+    "payPeriodLocked": "This pay period is locked. Reopen the payroll or return the timesheet first."
   },
   "pageLoad": {
     "title": "This page needs a connection",

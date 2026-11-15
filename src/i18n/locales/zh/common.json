@@ -379,7 +379,10 @@
     "documentNameTooLong": "文件名称过长。",
     "legalNameArabic": "正式姓名必须为阿拉伯文，与身份证一致。",
     "nationalIdRequired": "请填写身份证号码。",
-    "phoneRequired": "请填写手机号码。"
+    "phoneRequired": "请填写手机号码。",
+    "ownerAccountProtected": "所有者的账户受到保护。",
+    "ownerChangesOnlyByTransfer": "所有者只能通过所有权转让变更。",
+    "payPeriodLocked": "此工资期已锁定。请先重新打开工资单或退回工时表。"
   },
   "pageLoad": {
     "title": "此页面需要网络连接",

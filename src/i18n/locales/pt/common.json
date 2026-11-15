@@ -379,7 +379,10 @@
     "documentNameTooLong": "O nome do documento é demasiado longo.",
     "legalNameArabic": "O nome oficial tem de estar em árabe, como no cartão de identidade.",
     "nationalIdRequired": "Escreva o número de identificação.",
-    "phoneRequired": "Escreva o número de telemóvel."
+    "phoneRequired": "Escreva o número de telemóvel.",
+    "ownerAccountProtected": "A conta do proprietário está protegida.",
+    "ownerChangesOnlyByTransfer": "O proprietário só muda por uma transferência de propriedade.",
+    "payPeriodLocked": "Este período de pagamento está bloqueado. Reabra a folha de pagamento ou devolva a folha de horas primeiro."
   },
   "pageLoad": {
     "title": "Esta página precisa de conexão",

@@ -379,7 +379,10 @@
     "documentNameTooLong": "El nombre del documento es demasiado largo.",
     "legalNameArabic": "El nombre oficial debe estar en árabe, como en el documento de identidad.",
     "nationalIdRequired": "Escriba el número de documento.",
-    "phoneRequired": "Escriba el número de móvil."
+    "phoneRequired": "Escriba el número de móvil.",
+    "ownerAccountProtected": "La cuenta del propietario está protegida.",
+    "ownerChangesOnlyByTransfer": "El propietario solo cambia mediante una transferencia de propiedad.",
+    "payPeriodLocked": "Este periodo de pago está cerrado. Reabre la nómina o devuelve la hoja de horas primero."
   },
   "pageLoad": {
     "title": "Esta página necesita conexión",

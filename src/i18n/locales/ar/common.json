@@ -379,7 +379,10 @@
     "documentNameTooLong": "اسم المستند طويل أوي.",
     "legalNameArabic": "الاسم الرسمي لازم يكون بالعربي، زي ما هو في البطاقة.",
     "nationalIdRequired": "اكتب الرقم القومي.",
-    "phoneRequired": "اكتب رقم الموبايل."
+    "phoneRequired": "اكتب رقم الموبايل.",
+    "ownerAccountProtected": "لا يمكن المساس بحساب المالك.",
+    "ownerChangesOnlyByTransfer": "المالك يتغير فقط عن طريق نقل الملكية.",
+    "payPeriodLocked": "فترة الرواتب هذه مقفلة. أعد فتح الرواتب أو أرجع كشف الدوام أولاً."
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

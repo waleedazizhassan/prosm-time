@@ -103,7 +103,8 @@
     "ZERO_NET": "Líquido zero",
     "PARTIAL_PERIOD": "Entrou ou saiu durante o período",
     "NET_CHANGED": "O líquido mudou muito face ao ciclo anterior",
-    "ATTENDANCE_CHANGED": "A assiduidade mudou depois de aceitar uma sugestão"
+    "ATTENDANCE_CHANGED": "A assiduidade mudou depois de aceitar uma sugestão",
+    "PENDING_REQUESTS": "Pedidos ainda pendentes no período"
   },
   "suggestions": {
     "title": "Da assiduidade",

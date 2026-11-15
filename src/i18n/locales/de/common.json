@@ -379,7 +379,10 @@
     "documentNameTooLong": "Der Name des Dokuments ist zu lang.",
     "legalNameArabic": "Der amtliche Name muss auf Arabisch sein, wie im Ausweis.",
     "nationalIdRequired": "Geben Sie die Ausweisnummer ein.",
-    "phoneRequired": "Geben Sie die Mobilnummer ein."
+    "phoneRequired": "Geben Sie die Mobilnummer ein.",
+    "ownerAccountProtected": "Das Konto des Inhabers ist geschützt.",
+    "ownerChangesOnlyByTransfer": "Der Inhaber wechselt nur durch eine Eigentumsübertragung.",
+    "payPeriodLocked": "Dieser Abrechnungszeitraum ist gesperrt. Öffnen Sie zuerst die Abrechnung erneut oder geben Sie den Stundenzettel zurück."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

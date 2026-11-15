@@ -379,7 +379,10 @@
     "documentNameTooLong": "Il nome del documento è troppo lungo.",
     "legalNameArabic": "Il nome ufficiale deve essere in arabo, come sul documento.",
     "nationalIdRequired": "Scrivi il numero del documento.",
-    "phoneRequired": "Scrivi il numero di cellulare."
+    "phoneRequired": "Scrivi il numero di cellulare.",
+    "ownerAccountProtected": "L'account del titolare è protetto.",
+    "ownerChangesOnlyByTransfer": "Il titolare cambia solo con un trasferimento di proprietà.",
+    "payPeriodLocked": "Questo periodo di paga è bloccato. Riapri prima la busta paga o restituisci il foglio ore."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

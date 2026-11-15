@@ -103,7 +103,8 @@
     "ZERO_NET": "实发为零",
     "PARTIAL_PERIOD": "期间内入职或离职",
     "NET_CHANGED": "实发与上一周期相比变化较大",
-    "ATTENDANCE_CHANGED": "接受建议后考勤发生变化"
+    "ATTENDANCE_CHANGED": "接受建议后考勤发生变化",
+    "PENDING_REQUESTS": "期间内仍有待处理的申请"
   },
   "suggestions": {
     "title": "来自考勤",

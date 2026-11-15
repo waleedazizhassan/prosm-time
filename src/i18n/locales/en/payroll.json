@@ -103,7 +103,8 @@
     "ZERO_NET": "Zero net",
     "PARTIAL_PERIOD": "Joined or left during the period",
     "NET_CHANGED": "The net changed a lot from the previous cycle",
-    "ATTENDANCE_CHANGED": "Attendance changed after a suggestion was accepted"
+    "ATTENDANCE_CHANGED": "Attendance changed after a suggestion was accepted",
+    "PENDING_REQUESTS": "Requests still pending in the period"
   },
   "suggestions": {
     "title": "From attendance",

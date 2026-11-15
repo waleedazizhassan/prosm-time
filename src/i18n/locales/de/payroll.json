@@ -103,7 +103,8 @@
     "ZERO_NET": "Netto null",
     "PARTIAL_PERIOD": "Eintritt oder Austritt im Zeitraum",
     "NET_CHANGED": "Netto stark verändert zum Vorzeitraum",
-    "ATTENDANCE_CHANGED": "Anwesenheit nach Übernahme eines Vorschlags geändert"
+    "ATTENDANCE_CHANGED": "Anwesenheit nach Übernahme eines Vorschlags geändert",
+    "PENDING_REQUESTS": "Noch offene Anträge im Zeitraum"
   },
   "suggestions": {
     "title": "Aus der Anwesenheit",
