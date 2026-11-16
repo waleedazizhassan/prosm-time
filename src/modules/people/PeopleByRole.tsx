@@ -118,7 +118,9 @@ export default function PeopleByRole({ compact = false, onOpen }: { compact?: bo
       {groups.map((group) => {
         const isCollapsed = Boolean(collapsed[group.key]);
         // owner 2026-11-16: the department managers' group shows even before any is chosen - with where to choose them
-        const emptyManagers = group.key === "owner" && !compact && departmentManagers.size === 0 && !query && !site && !status && !shift ? (
+        // the owner stays in the owner's group (one of a kind) - the group is "empty" when nobody else manages a department
+        const othersManage = (people ?? []).some((p) => !p.isOwner && departmentManagers.has(p.id));
+        const emptyManagers = group.key === "owner" && !compact && !othersManage && !query && !site && !status && !shift ? (
           <section key="departmentManagers-empty" className={styles.group}>
             <div className={styles.groupHeader}>
               <span className={styles.groupTitle}>{t("byRole.groups.departmentManagers")}</span>
@@ -145,7 +147,7 @@ export default function PeopleByRole({ compact = false, onOpen }: { compact?: bo
                       <span className={styles.main}>
                         <span className={styles.name}>{person.fullName}</span>
                         <span className={styles.meta}>
-                          {[person.isOwner ? t("ownerBadge") : departmentManagers.has(person.id) ? t("byRole.managesDepartment", { names: departmentManagers.get(person.id)!.join("، ") }) : t(`common:roles.${person.roleKey}`, { defaultValue: person.roleName }), person.currentSiteName ?? person.siteNames.join("، "), person.shiftStart ? `${person.shiftStart}–${person.shiftEnd}` : null]
+                          {[person.isOwner ? (departmentManagers.has(person.id) ? `${t("ownerBadge")} · ${t("byRole.managesDepartment", { names: departmentManagers.get(person.id)!.join("، ") })}` : t("ownerBadge")) : departmentManagers.has(person.id) ? t("byRole.managesDepartment", { names: departmentManagers.get(person.id)!.join("، ") }) : t(`common:roles.${person.roleKey}`, { defaultValue: person.roleName }), person.currentSiteName ?? person.siteNames.join("، "), person.shiftStart ? `${person.shiftStart}–${person.shiftEnd}` : null]
                             .filter(Boolean)
                             .join(" · ")}
                         </span>

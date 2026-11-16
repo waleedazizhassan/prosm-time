@@ -91,4 +91,15 @@ describe("PeopleByRole", () => {
     expect(titles.some((title) => /^Managers|byRole.groups.managers/.test(title))).toBe(false);
     departmentManagersFixture = new Map();
   });
+
+  it("the owner managing a department stays under the owner (with the department) - the managers' group still shows, empty", async () => {
+    departmentManagersFixture = new Map([["o1", ["Safety"]]]);
+    const { container } = render(<PeopleByRole />);
+    await waitFor(() => expect(container.querySelectorAll("section")).toHaveLength(6));
+    const sections = [...container.querySelectorAll("section")];
+    expect(sections[0].textContent).toContain("Safety");
+    expect((sections[1].querySelector("div") as HTMLElement).textContent).toMatch(/departmentManagers|Department managers/);
+    departmentManagersFixture = new Map();
+  });
 });
+
