@@ -252,7 +252,8 @@
       "supervisors": "Начальники смен",
       "employees": "Сотрудники",
       "viewers": "Наблюдатели",
-      "owner": "Владелец"
+      "owner": "Владелец",
+      "departmentManagers": "Руководители отделов"
     },
     "invitation": {
       "pending": "Приглашение ещё не принято",
@@ -263,7 +264,8 @@
       "android": "Android",
       "ios": "iPhone",
       "web": "Браузер / компьютер"
-    }
+    },
+    "managesDepartment": "Руководит: {{names}}"
   },
   "deviceStatus": {
     "pending": "Ожидает",

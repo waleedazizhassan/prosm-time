@@ -252,7 +252,8 @@
       "supervisors": "主管",
       "employees": "员工",
       "viewers": "只读人员",
-      "owner": "所有者"
+      "owner": "所有者",
+      "departmentManagers": "部门经理"
     },
     "invitation": {
       "pending": "尚未接受邀请",
@@ -263,7 +264,8 @@
       "android": "Android",
       "ios": "iPhone",
       "web": "浏览器 / 电脑"
-    }
+    },
+    "managesDepartment": "管理 {{names}}"
   },
   "deviceStatus": {
     "pending": "等待中",

@@ -15,9 +15,11 @@ import styles from "./PeopleByRole.module.css";
 
 // The groups, in order: the Owner, managers, supervisors,
 // employees, viewers, then any other role by its own order and name.
-function groupOf(person: DirectoryPerson): { key: string; sort: number; label: string | null } {
+function groupOf(person: DirectoryPerson, departmentManagers: Map<string, string[]>): { key: string; sort: number; label: string | null } {
   // owner 2026-11-13: the owner in a group of their own at the top, not among the managers
   if (person.isOwner || person.roleKey === "owner") return { key: "owner", sort: 10, label: null };
+  // owner 2026-11-16: department managers (finance, HR ...) in their own group - and in no other
+  if (departmentManagers.has(person.id)) return { key: "departmentManagers", sort: 15, label: null };
   if (person.roleKey === "manager") return { key: "managers", sort: 20, label: null };
   if (person.roleKey === "supervisor") return { key: "supervisors", sort: 30, label: null };
   if (person.roleKey === "employee") return { key: "employees", sort: 40, label: null };
@@ -42,9 +44,12 @@ export default function PeopleByRole({ compact = false, onOpen }: { compact?: bo
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
 
   const [statuses, setStatuses] = useState<Map<string, PersonStatus>>(new Map());
+  // owner 2026-11-16: who manages which department (empty until the server has it)
+  const [departmentManagers, setDepartmentManagers] = useState<Map<string, string[]>>(new Map());
   useEffect(() => {
     PeopleDirectoryRepository.list(true).then(setPeople);
     PeopleDirectoryRepository.status().then(setStatuses);
+    void PeopleDirectoryRepository.departmentManagers().then(setDepartmentManagers);
   }, []);
 
   const collator = useMemo(() => new Intl.Collator(i18n.language), [i18n.language]);
@@ -66,14 +71,14 @@ export default function PeopleByRole({ compact = false, onOpen }: { compact?: bo
     });
     const byGroup = new Map<string, { key: string; sort: number; label: string | null; people: DirectoryPerson[] }>();
     for (const person of filtered) {
-      const group = groupOf(person);
+      const group = groupOf(person, departmentManagers);
       if (!byGroup.has(group.key)) byGroup.set(group.key, { ...group, people: [] });
       byGroup.get(group.key)!.people.push(person);
     }
     return [...byGroup.values()]
       .map((group) => ({ ...group, people: group.people.sort((a, b) => collator.compare(a.fullName, b.fullName)) }))
       .sort((a, b) => a.sort - b.sort || collator.compare(a.label ?? a.key, b.label ?? b.key));
-  }, [people, query, site, status, shift, collator]);
+  }, [people, query, site, status, shift, collator, departmentManagers]);
 
   if (!people) return <LoadingState />;
 
@@ -127,7 +132,7 @@ export default function PeopleByRole({ compact = false, onOpen }: { compact?: bo
                       <span className={styles.main}>
                         <span className={styles.name}>{person.fullName}</span>
                         <span className={styles.meta}>
-                          {[person.isOwner ? t("ownerBadge") : t(`common:roles.${person.roleKey}`, { defaultValue: person.roleName }), person.currentSiteName ?? person.siteNames.join("، "), person.shiftStart ? `${person.shiftStart}–${person.shiftEnd}` : null]
+                          {[person.isOwner ? t("ownerBadge") : departmentManagers.has(person.id) ? t("byRole.managesDepartment", { names: departmentManagers.get(person.id)!.join("، ") }) : t(`common:roles.${person.roleKey}`, { defaultValue: person.roleName }), person.currentSiteName ?? person.siteNames.join("، "), person.shiftStart ? `${person.shiftStart}–${person.shiftEnd}` : null]
                             .filter(Boolean)
                             .join(" · ")}
                         </span>

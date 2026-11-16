@@ -127,7 +127,9 @@
     "personTitle": "部门",
     "choose": "部门",
     "noDepartment": "无部门",
-    "saved": "已保存。"
+    "saved": "已保存。",
+    "manager": "部门经理",
+    "noManager": "无经理"
   },
   "errors": {
     "generic": "无法完成此操作。",

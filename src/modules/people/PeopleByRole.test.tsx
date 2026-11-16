@@ -25,6 +25,8 @@ const person = (id: string, fullName: string, roleKey: string, extra: Partial<Di
   ...extra,
 });
 
+let departmentManagersFixture = new Map<string, string[]>();
+
 // the Buzz beside each person reads who is signed in (owner 2026-11-16); signed out here, so it stays hidden
 vi.mock("../../core/context/AuthContext", () => ({ useAuth: () => ({ profile: null }) }));
 
@@ -40,6 +42,8 @@ vi.mock("../../core/repositories/PeopleDirectoryRepository", () => ({
       person("s1", "Sami", "supervisor"),
     ]),
     avatarOf: vi.fn(async () => null),
+    // owner 2026-11-16: department managers (none unless a test sets them)
+    departmentManagers: vi.fn(async () => departmentManagersFixture),
   },
 }));
 
@@ -65,5 +69,20 @@ describe("PeopleByRole", () => {
     fireEvent.change(container.querySelector("input[name=peopleSearch]")!, { target: { value: "nobody" } });
     expect(container.querySelectorAll("section")).toHaveLength(0);
     expect(screen.getByText(/byRole.noResults|No one matches/)).toBeTruthy();
+  });
+
+  it("a department manager is listed under department managers, with the department - and in no other group (owner 2026-11-16)", async () => {
+    departmentManagersFixture = new Map([["m1", ["Finance"]]]);
+    const { container } = render(<PeopleByRole />);
+    await waitFor(() => expect(container.querySelectorAll("section")).toHaveLength(5));
+    const sections = [...container.querySelectorAll("section")];
+    const titles = sections.map((section) => section.querySelector("button")!.textContent ?? "");
+    expect(titles[1]).toMatch(/departmentManagers|Department managers/);
+    expect(sections[1].textContent).toContain("Mona");
+    expect(sections[1].textContent).toContain("Finance");
+    const monaRows = [...container.querySelectorAll("li")].filter((li) => (li.textContent ?? "").includes("Mona"));
+    expect(monaRows).toHaveLength(1);
+    expect(titles.some((title) => /^Managers|byRole.groups.managers/.test(title))).toBe(false);
+    departmentManagersFixture = new Map();
   });
 });

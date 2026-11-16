@@ -127,7 +127,9 @@
     "personTitle": "القسم",
     "choose": "القسم",
     "noDepartment": "بدون قسم",
-    "saved": "تم الحفظ."
+    "saved": "تم الحفظ.",
+    "manager": "مدير القسم",
+    "noManager": "بدون مدير"
   },
   "errors": {
     "generic": "تعذر إتمام هذا الإجراء.",

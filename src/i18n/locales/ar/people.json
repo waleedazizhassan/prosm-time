@@ -252,7 +252,8 @@
       "supervisors": "المشرفون",
       "employees": "الموظفون",
       "viewers": "المشاهدون",
-      "owner": "المالك"
+      "owner": "المالك",
+      "departmentManagers": "مديرو الأقسام"
     },
     "invitation": {
       "pending": "لسه ماقبلش الدعوة",
@@ -263,7 +264,8 @@
       "android": "أندرويد",
       "ios": "آيفون",
       "web": "متصفح / كمبيوتر"
-    }
+    },
+    "managesDepartment": "مدير {{names}}"
   },
   "deviceStatus": {
     "pending": "في الانتظار",

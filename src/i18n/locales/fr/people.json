@@ -252,7 +252,8 @@
       "supervisors": "Superviseurs",
       "employees": "Employés",
       "viewers": "Lecteurs",
-      "owner": "Propriétaire"
+      "owner": "Propriétaire",
+      "departmentManagers": "Responsables de service"
     },
     "invitation": {
       "pending": "Invitation pas encore acceptée",
@@ -263,7 +264,8 @@
       "android": "Android",
       "ios": "iPhone",
       "web": "Navigateur / ordinateur"
-    }
+    },
+    "managesDepartment": "Dirige {{names}}"
   },
   "deviceStatus": {
     "pending": "En attente",

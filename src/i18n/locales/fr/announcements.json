@@ -127,7 +127,9 @@
     "personTitle": "Service",
     "choose": "Service",
     "noDepartment": "Aucun service",
-    "saved": "Enregistré."
+    "saved": "Enregistré.",
+    "manager": "Responsable du service",
+    "noManager": "Sans responsable"
   },
   "errors": {
     "generic": "Impossible d'effectuer cette action.",

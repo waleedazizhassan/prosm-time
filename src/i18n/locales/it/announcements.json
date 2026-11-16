@@ -127,7 +127,9 @@
     "personTitle": "Reparto",
     "choose": "Reparto",
     "noDepartment": "Nessun reparto",
-    "saved": "Salvato."
+    "saved": "Salvato.",
+    "manager": "Responsabile del reparto",
+    "noManager": "Nessun responsabile"
   },
   "errors": {
     "generic": "Impossibile completare questa azione.",

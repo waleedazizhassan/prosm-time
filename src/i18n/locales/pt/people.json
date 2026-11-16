@@ -252,7 +252,8 @@
       "supervisors": "Supervisores",
       "employees": "Funcionários",
       "viewers": "Leitores",
-      "owner": "Proprietário"
+      "owner": "Proprietário",
+      "departmentManagers": "Gestores de departamento"
     },
     "invitation": {
       "pending": "Convite ainda não aceito",
@@ -263,7 +264,8 @@
       "android": "Android",
       "ios": "iPhone",
       "web": "Navegador / computador"
-    }
+    },
+    "managesDepartment": "Gere {{names}}"
   },
   "deviceStatus": {
     "pending": "Aguardando",

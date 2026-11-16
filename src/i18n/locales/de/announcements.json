@@ -127,7 +127,9 @@
     "personTitle": "Abteilung",
     "choose": "Abteilung",
     "noDepartment": "Keine Abteilung",
-    "saved": "Gespeichert."
+    "saved": "Gespeichert.",
+    "manager": "Abteilungsleitung",
+    "noManager": "Keine Leitung"
   },
   "errors": {
     "generic": "Diese Aktion konnte nicht ausgeführt werden.",
