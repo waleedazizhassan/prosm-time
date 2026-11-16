@@ -12,6 +12,11 @@ describe("humanizeBackendError", () => {
     expect(humanizeBackendError("KIOSK CLOCK IN FAILED: INCORRECT PIN", t)).toBe(t("common:backendErrors.incorrectPin"));
   });
 
+  it("QA-011: a clock-in that lost a same-moment race reads 'already clocked in', not the database's own words", () => {
+    const raw = 'CLOCK IN FAILED: duplicate key value violates unique constraint "attendance_sessions_one_open_per_user"';
+    expect(humanizeBackendError(raw, t)).toBe(t("common:backendErrors.youAreAlreadyClockedIn"));
+  });
+
   it("maps an unknown worker number", () => {
     expect(humanizeBackendError("KIOSK WORKER CLOCK IN FAILED: NO WORKER WITH THIS NUMBER", t)).toBe("This number is not registered.");
   });

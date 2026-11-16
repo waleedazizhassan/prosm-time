@@ -81,3 +81,10 @@
     padding: var(--space-4) var(--space-4) 0;
   }
 }
+
+/* QA-013 (2026-11-16): a card's button group (often an inline-flex span) never pushes past the card - on a phone in
+   English the bylaw's two buttons ran off the screen. The group wraps and is never wider than the card. */
+.actions > * {
+  flex-wrap: wrap;
+  max-width: 100%;
+}

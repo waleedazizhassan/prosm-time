@@ -60,6 +60,11 @@ function translate(trimmed: string, t: TFunction): string | null {
   if (trimmed.includes("presence_sessions_one_active_per_user")) {
     return t("common:backendErrors.orphanedPresenceSession");
   }
+  // QA-011 (2026-11-16): two clock-ins at the same moment - the second meets the one-open-shift index before the
+  // friendly check; it means exactly "you are already clocked in"
+  if (trimmed.includes("attendance_sessions_one_open_per_user")) {
+    return t("common:backendErrors.youAreAlreadyClockedIn");
+  }
   return null;
 }
 

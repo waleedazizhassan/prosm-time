@@ -157,7 +157,7 @@ export default function IntegrationsSettingsCard() {
     <Card title={t("integrations.title")}>
       <HintText>{t("integrations.hint")}</HintText>
       <p style={{ margin: "0 0 var(--space-3)", fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
-        {t("integrations.endpoint")} <code dir="ltr" style={{ fontFamily: "monospace" }}>{apiBaseUrl()}</code>
+        {t("integrations.endpoint")} <code dir="ltr" style={{ fontFamily: "monospace", overflowWrap: "anywhere", wordBreak: "break-all" }}>{apiBaseUrl()}</code>
       </p>
 
       {activeKeys.length > 0 ? (
