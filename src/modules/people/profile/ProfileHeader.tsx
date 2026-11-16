@@ -45,8 +45,13 @@ export default function ProfileHeader({ profile, onBuzz = true }: { profile: Emp
             {completion.missing > 0 ? <small>{t("profile.missing", { count: completion.missing })}</small> : null}
           </div>
         ) : null}
-        {onBuzz && profile.access !== "self" && h.isActive ? <BuzzButton userId={h.id} name={h.fullName} /> : null}
-        {FEATURES.connect && profile.access !== "self" && h.isActive ? <ConnectPersonButtons userId={h.id} name={h.fullName} size="medium" /> : null}
+        {/* owner 2026-11-16 ("the buttons under each other look bad"): one row - buzz, message, call, video */}
+        {profile.access !== "self" && h.isActive ? (
+          <div className={styles.actionRow}>
+            {onBuzz ? <BuzzButton userId={h.id} name={h.fullName} /> : null}
+            {FEATURES.connect ? <ConnectPersonButtons userId={h.id} name={h.fullName} size="medium" /> : null}
+          </div>
+        ) : null}
       </div>
     </section>
   );

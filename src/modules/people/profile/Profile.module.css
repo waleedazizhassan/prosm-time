@@ -183,3 +183,12 @@
 [dir="rtl"] .siteArrow {
   transform: scaleX(-1);
 }
+
+/* owner 2026-11-16: the person's actions side by side, not stacked */
+.actionRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
