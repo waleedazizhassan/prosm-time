@@ -16,19 +16,28 @@ let manager: TestMember;
 const cairoDay = async (days: number) =>
   (await t.su<{ d: string }>("select ((now() at time zone 'Africa/Cairo')::date + $1::int)::text as d", [days]))[0].d;
 
-async function approvedLeave(from: number, to: number) {
+// 2026-11-16: one person cannot hold two approved leaves on the same day (20261116120000 enforces it on every
+// write), so each scenario's leave belongs to its own employee at the same site - the timing rules tested here are
+// unchanged. `worker` stays the first scenario's person.
+let site: string;
+let nth = 0;
+async function approvedLeave(from: number, to: number, who?: TestMember) {
+  const person = who ?? (nth++ === 0 ? worker : await addMember(t, org, "employee", `Laila ${nth}`));
+  if (person !== worker) await assignToSite(t, site, person);
   const [start, end] = [await cairoDay(from), await cairoDay(to)];
   const [row] = await t.su<{ id: string }>(
     "insert into leave_requests (organization_id, user_id, leave_type, start_date, end_date, days_count, status, reviewed_by, reviewed_at) values ($1, $2, 'annual', $3, $4, ($4::date - $3::date) + 1, 'approved', $5, now()) returning id",
-    [org.id, worker.userId, start, end, manager.userId],
+    [org.id, person.userId, start, end, manager.userId],
   );
+  lastPerson = person;
   return row.id;
 }
+let lastPerson: TestMember;
 
 beforeAll(async () => {
   t = await buildDatabase();
   org = await createOrg(t, "Fayoum");
-  const site = await createSite(t, org, "Oasis");
+  site = await createSite(t, org, "Oasis");
   worker = await addMember(t, org, "employee", "Laila Nabil");
   manager = await addMember(t, org, "manager", "Oasis Manager");
   await assignToSite(t, site, worker);
@@ -46,15 +55,16 @@ describe("approved leave is cancelled only before it starts (item 20)", () => {
 
   it("the day itself: refused for the employee and for the manager", async () => {
     const id = await approvedLeave(0, 0);
-    expect((await t.as(worker.authId, "select public.cancel_prosm_time_leave_request($1)", [id])).error).toMatch(/HAS STARTED/);
+    expect((await t.as(lastPerson.authId, "select public.cancel_prosm_time_leave_request($1)", [id])).error).toMatch(/HAS STARTED/);
     expect((await t.as(manager.authId, "select public.review_prosm_time_leave($1, 'rejected', 'x')", [id])).error).toMatch(/HAS STARTED/);
   });
 
   it("after it, and a multi-day leave that started yesterday: refused", async () => {
     const past = await approvedLeave(-3, -2);
     const running = await approvedLeave(-1, 3);
+    const runningPerson = lastPerson;
     expect((await t.as(manager.authId, "select public.review_prosm_time_leave($1, 'rejected', 'x')", [past])).error).toMatch(/HAS STARTED/);
-    expect((await t.as(worker.authId, "select public.cancel_prosm_time_leave_request($1)", [running])).error).toMatch(/HAS STARTED/);
+    expect((await t.as(runningPerson.authId, "select public.cancel_prosm_time_leave_request($1)", [running])).error).toMatch(/HAS STARTED/);
   });
 
   it("the Owner is no exception; before the start the manager can still revoke", async () => {
