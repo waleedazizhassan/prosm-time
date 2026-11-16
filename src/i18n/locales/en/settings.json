@@ -384,5 +384,14 @@
     "openMine": "Open my security",
     "saved": "Saved.",
     "saveFailed": "Not saved. Try again."
+  },
+  "employeeCodes": {
+    "title": "Employee codes",
+    "subtitle": "5 sequential digits by hiring seniority.",
+    "hint": "A code is given automatically as soon as a hiring date is entered, and it stays. If you add older hiring dates, number everyone again here to restore seniority order. Approved payroll keeps its codes.",
+    "renumber": "Number again by seniority",
+    "confirm": "Number every employee again by hiring date? Current codes will change.",
+    "done": "{{count}} employees numbered again.",
+    "failed": "Not numbered again. Try again."
   }
 }

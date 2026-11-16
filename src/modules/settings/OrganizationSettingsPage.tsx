@@ -25,6 +25,7 @@ import usePlanFeatures from "../../core/hooks/usePlanFeatures";
 import OwnershipTransferCard from "./OwnershipTransferCard";
 import ConnectUsageCard from "./ConnectUsageCard";
 import SecurityPolicyCard from "./SecurityPolicyCard";
+import EmployeeCodesCard from "./EmployeeCodesCard";
 
 // PROSM Time - § live UX review, user-directed: "a professional
 // reorganization" - org-wide settings (today: the no-site geofence
@@ -116,6 +117,8 @@ export default function OrganizationSettingsPage() {
           {isOwner ? <OvertimeLateTargetCard hasPayroll={allows("payroll")} hasAllowances={allows("allowances")} /> : null}
           {isOwner ? <OvertimePolicySettingsCard /> : null}
           {hasPermission("leave.manage_types") ? <LeaveTypesSettingsCard /> : null}
+          {/* owner 2026-11-16: employee codes by hiring seniority */}
+          {isOwner ? <EmployeeCodesCard /> : null}
           {/* 2026-11-11 HR suite: the company's job titles */}
           {isOwner || hasPermission("hr.manage") ? <JobTitlesSettingsCard /> : null}
           {/* owner 2026-11-12: the documents moved out of Settings - added from each person's file, and the

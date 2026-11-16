@@ -386,5 +386,14 @@
     "openMine": "Abrir minha segurança",
     "saved": "Salvo.",
     "saveFailed": "Não foi salvo. Tente de novo."
+  },
+  "employeeCodes": {
+    "title": "Códigos de funcionário",
+    "subtitle": "5 dígitos sequenciais por antiguidade de contratação.",
+    "hint": "O código é dado automaticamente assim que a data de contratação é informada e permanece. Se adicionar datas mais antigas, numere de novo aqui para recuperar a ordem. A folha aprovada mantém seus códigos.",
+    "renumber": "Numerar de novo por antiguidade",
+    "confirm": "Numerar todos de novo pela data de contratação? Os códigos atuais vão mudar.",
+    "done": "{{count}} funcionários numerados de novo.",
+    "failed": "Não foi renumerado. Tente de novo."
   }
 }

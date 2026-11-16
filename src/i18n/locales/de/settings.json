@@ -384,5 +384,14 @@
     "openMine": "Meine Sicherheit öffnen",
     "saved": "Gespeichert.",
     "saveFailed": "Nicht gespeichert. Versuch es noch einmal."
+  },
+  "employeeCodes": {
+    "title": "Mitarbeiternummern",
+    "subtitle": "5 fortlaufende Ziffern nach Betriebszugehörigkeit.",
+    "hint": "Eine Nummer wird automatisch vergeben, sobald ein Eintrittsdatum eingetragen ist, und bleibt. Wenn du ältere Eintrittsdaten ergänzt, nummeriere hier neu, um die Reihenfolge wiederherzustellen. Freigegebene Lohnabrechnungen behalten ihre Nummern.",
+    "renumber": "Nach Zugehörigkeit neu nummerieren",
+    "confirm": "Alle Mitarbeitenden nach Eintrittsdatum neu nummerieren? Die aktuellen Nummern ändern sich.",
+    "done": "{{count}} Mitarbeitende neu nummeriert.",
+    "failed": "Nicht neu nummeriert. Versuch es noch einmal."
   }
 }

@@ -386,5 +386,14 @@
     "openMine": "Ouvrir ma sécurité",
     "saved": "Enregistré.",
     "saveFailed": "Non enregistré. Réessayez."
+  },
+  "employeeCodes": {
+    "title": "Codes des employés",
+    "subtitle": "5 chiffres consécutifs selon l’ancienneté d’embauche.",
+    "hint": "Le code est attribué automatiquement dès qu’une date d’embauche est saisie, puis il reste. Si vous ajoutez des dates plus anciennes, renumérotez ici pour rétablir l’ordre. La paie approuvée garde ses codes.",
+    "renumber": "Renuméroter par ancienneté",
+    "confirm": "Renuméroter tous les employés selon la date d’embauche ? Les codes actuels changeront.",
+    "done": "{{count}} employés renumérotés.",
+    "failed": "Non renuméroté. Réessayez."
   }
 }

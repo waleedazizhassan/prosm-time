@@ -386,5 +386,14 @@
     "openMine": "Apri la mia sicurezza",
     "saved": "Salvato.",
     "saveFailed": "Non salvato. Riprova."
+  },
+  "employeeCodes": {
+    "title": "Codici dipendente",
+    "subtitle": "5 cifre progressive per anzianità di assunzione.",
+    "hint": "Il codice viene assegnato automaticamente appena si inserisce la data di assunzione e resta. Se aggiungi date più vecchie, rinumera qui per ripristinare l’ordine. Le buste paga approvate mantengono i loro codici.",
+    "renumber": "Rinumera per anzianità",
+    "confirm": "Rinumerare tutti per data di assunzione? I codici attuali cambieranno.",
+    "done": "{{count}} dipendenti rinumerati.",
+    "failed": "Non rinumerato. Riprova."
   }
 }

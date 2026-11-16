@@ -386,5 +386,14 @@
     "openMine": "Abrir mi seguridad",
     "saved": "Guardado.",
     "saveFailed": "No se guardó. Inténtalo de nuevo."
+  },
+  "employeeCodes": {
+    "title": "Códigos de empleado",
+    "subtitle": "5 dígitos consecutivos por antigüedad de contratación.",
+    "hint": "El código se asigna automáticamente al introducir la fecha de contratación y se mantiene. Si añades fechas más antiguas, vuelve a numerar aquí para recuperar el orden. La nómina aprobada conserva sus códigos.",
+    "renumber": "Volver a numerar por antigüedad",
+    "confirm": "¿Volver a numerar a todos por fecha de contratación? Los códigos actuales cambiarán.",
+    "done": "{{count}} empleados numerados de nuevo.",
+    "failed": "No se volvió a numerar. Inténtalo de nuevo."
   }
 }
