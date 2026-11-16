@@ -35,7 +35,7 @@ export default function BuzzButton({ userId, name, compact = false }: { userId: 
   const send = async () => {
     setSending(true);
     setError("");
-    const result = await NotificationRepository.sendBuzz(userId, reason, message.trim() || null);
+    const result = await NotificationRepository.sendBuzz(userId, reason, message.trim() || null, t(`shell:notifications.buzz.${reason}`));
     setSending(false);
     if (!result.success) {
       setError(humanizeBackendError(result.message, t) ?? t("shell:buzz.failed"));
