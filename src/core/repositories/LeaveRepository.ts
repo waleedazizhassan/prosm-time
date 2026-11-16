@@ -464,13 +464,19 @@ class LeaveRepository {
   // (a reject landing on a just-approved leave would otherwise become a revoke).
   async review(requestId: string, action: "approved" | "rejected", notes?: string, deductionPerDay?: number | null, expectedStatus: "pending" | "approved" = "pending"): Promise<ServiceResult> {
     try {
-      const { data, error } = await this.client.rpc("review_prosm_time_leave", {
+      const args = {
         p_request_id: requestId,
         p_action: action,
         p_notes: notes?.trim() || null,
         p_deduction_per_day: deductionPerDay ?? null,
-        p_expected_status: expectedStatus,
-      });
+      };
+      let { data, error } = await this.client.rpc("review_prosm_time_leave", { ...args, p_expected_status: expectedStatus });
+      // QA-002 (2026-11-16): a database without 20261115170000 does not know p_expected_status and answers
+      // "function not found" (PGRST202) - every leave decision failed. Asked again the old way, so the web and the
+      // database can be updated in either order.
+      if (error && (error as { code?: string }).code === "PGRST202") {
+        ({ data, error } = await this.client.rpc("review_prosm_time_leave", args));
+      }
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to review this leave request.");
       return createSuccess();
