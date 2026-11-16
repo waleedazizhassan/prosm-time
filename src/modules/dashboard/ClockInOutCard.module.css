@@ -188,7 +188,8 @@
   }
 
   .mapStage :global(.leaflet-container) {
-    height: calc(100dvh - var(--header-height, 64px) - 64px - var(--safe-top, 0px) - var(--safe-bottom, 0px)) !important;
+    /* owner 2026-11-16 ("the map covers the whole screen"): from under the header down behind the bottom bar */
+    height: calc(100dvh - 56px - var(--safe-top, 0px)) !important;
     border-radius: 0 !important;
   }
 }
@@ -641,10 +642,6 @@
 }
 
 @media (max-width: 900px) {
-  .clockRoot {
-    margin-top: 0;
-  }
-
   .mapInfo {
     top: var(--space-3);
   }
