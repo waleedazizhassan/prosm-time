@@ -7,11 +7,9 @@ import "leaflet/dist/leaflet.css";
 import { useTheme } from "../../../core/context/ThemeContext";
 import { isRtl } from "../../../i18n/direction";
 import type { DashboardPresent, DashboardSite } from "../../../core/repositories/DashboardRepository";
+import { addBaseLayer } from "../../../components/common/mapBase";
 import mapStyles from "../../../components/common/LiveLocationMap.module.css";
 import styles from "./ManagerDashboard.module.css";
-
-const TILE_URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-const TILE_ATTRIBUTION = "© OpenStreetMap";
 
 // metres between two points (for "is this person inside that site's circle")
 function metres(aLat: number, aLng: number, bLat: number, bLng: number): number {
@@ -68,7 +66,7 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
   const rtl = isRtl(i18n.language);
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
-  const tileRef = useRef<L.TileLayer | null>(null);
+  const tileRef = useRef<L.Layer | null>(null);
   const layerRef = useRef<L.LayerGroup | null>(null);
   const fittedRef = useRef(false);
   // owner 2026-10-26: back to every site at once, and a key under the map
@@ -123,9 +121,16 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
-    if (tileRef.current) map.removeLayer(tileRef.current);
-    tileRef.current = L.tileLayer(TILE_URL, { attribution: TILE_ATTRIBUTION, maxZoom: 19, className: resolvedTheme === "dark" ? mapStyles.darkTiles : mapStyles.lightTiles }).addTo(map);
-  }, [resolvedTheme]);
+    const dark = resolvedTheme === "dark";
+    let cancelled = false;
+    void addBaseLayer(map, dark, dark ? mapStyles.darkTiles : mapStyles.lightTiles, () => !cancelled && mapRef.current === map, i18n.language).then((layer) => {
+      if (!layer) return;
+      if (cancelled || mapRef.current !== map) { layer.remove(); return; }
+      if (tileRef.current) map.removeLayer(tileRef.current);
+      tileRef.current = layer;
+    });
+    return () => { cancelled = true; };
+  }, [resolvedTheme, i18n.language]);
 
   useEffect(() => {
     const map = mapRef.current;

@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import PageLoadBoundary from "../../components/common/PageLoadBoundary";
 
@@ -21,6 +21,7 @@ import TrialBanner from "./TrialBanner";
 import ReadOnlyBanner from "./ReadOnlyBanner";
 import LanguageSync from "./LanguageSync";
 import AttendanceSyncStatus from "./AttendanceSyncStatus";
+import { preloadBaseMap } from "../../components/common/mapPreload";
 
 // PROSM Time Implementation Master File V3.0, §30 ("Navigation must be
 // explicitly designed and implemented") - the real application shell:
@@ -32,6 +33,13 @@ import AttendanceSyncStatus from "./AttendanceSyncStatus";
 // AppRoutes - see that file's own layout-route usage.
 export default function AppShell() {
   const location = useLocation();
+  // the map library warms up in the background once the app has settled, so the first map opens quickly
+  useEffect(() => {
+    const start = () => preloadBaseMap();
+    const idle = (window as unknown as { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number }).requestIdleCallback;
+    if (idle) idle(start, { timeout: 4000 });
+    else window.setTimeout(start, 2500);
+  }, []);
   return (
     <LayoutProvider>
       <div className={styles.layout}>

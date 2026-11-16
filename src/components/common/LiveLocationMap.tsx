@@ -1,9 +1,11 @@
 import { useEffect, useRef } from "react";
 import { LocateFixed } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 import { useTheme } from "../../core/context/ThemeContext";
+import { addBaseLayer } from "./mapBase";
 import styles from "./LiveLocationMap.module.css";
 
 // PROSM Time - § live UX review, user-directed: a real, theme-aware
@@ -28,8 +30,7 @@ import styles from "./LiveLocationMap.module.css";
 // image path doesn't resolve correctly once bundled by Vite, and a
 // plain brand-colored dot matches this app's own MapPin/token language
 // better than Leaflet's default blue pin anyway.
-const TILE_URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-const TILE_ATTRIBUTION = "© OpenStreetMap";
+// The base map itself (and its credit) comes from ./mapBase - owner 2026-11-15.
 
 function buildMarkerIcon(): L.DivIcon {
   return L.divIcon({
@@ -61,9 +62,10 @@ interface LiveLocationMapProps {
 
 export default function LiveLocationMap({ latitude, longitude, site = null, height = 200, siteTone = "neutral", accuracyMeters = null, recenterLabel, recenterSignal = 0, tileMode = "auto", siteLabel = null }: LiveLocationMapProps) {
   const { resolvedTheme } = useTheme();
+  const { i18n } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
-  const tileLayerRef = useRef<L.TileLayer | null>(null);
+  const tileLayerRef = useRef<L.Layer | null>(null);
   const markerRef = useRef<L.Marker | null>(null);
   const circleRef = useRef<L.Circle | null>(null);
   const accuracyRef = useRef<L.Circle | null>(null);
@@ -91,17 +93,18 @@ export default function LiveLocationMap({ latitude, longitude, site = null, heig
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
-    if (tileLayerRef.current) map.removeLayer(tileLayerRef.current);
-    const tileLayer = L.tileLayer(TILE_URL, {
-      attribution: TILE_ATTRIBUTION,
-      maxZoom: 19,
-      className: (tileMode === "auto" ? resolvedTheme === "dark" : tileMode === "dark") ? styles.darkTiles : styles.lightTiles,
-    });
+    const dark = tileMode === "auto" ? resolvedTheme === "dark" : tileMode === "dark";
     // the edge light follows the chosen style
-    containerRef.current?.classList.toggle(styles.mapDark, tileMode === "auto" ? resolvedTheme === "dark" : tileMode === "dark");
-    tileLayer.addTo(map);
-    tileLayerRef.current = tileLayer;
-  }, [resolvedTheme, tileMode]);
+    containerRef.current?.classList.toggle(styles.mapDark, dark);
+    let cancelled = false;
+    void addBaseLayer(map, dark, dark ? styles.darkTiles : styles.lightTiles, () => !cancelled && mapRef.current === map, i18n.language).then((layer) => {
+      if (!layer) return;
+      if (cancelled || mapRef.current !== map) { layer.remove(); return; }
+      if (tileLayerRef.current) map.removeLayer(tileLayerRef.current);
+      tileLayerRef.current = layer;
+    });
+    return () => { cancelled = true; };
+  }, [resolvedTheme, tileMode, i18n.language]);
 
   useEffect(() => {
     const map = mapRef.current;

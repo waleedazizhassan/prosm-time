@@ -44,15 +44,18 @@
 .map :global(.leaflet-control-attribution) {
   /* owner 2026-11-10: small, see-through, never in the way of a tap */
   background: transparent;
-  font-size: 8px;
+  font-size: 7px;
   line-height: 1.2;
   padding: 0 3px;
-  color: rgba(229, 231, 235, 0.55);
+  color: rgba(128, 138, 156, 0.4);
   pointer-events: none;
 }
 
+/* owner 2026-11-15: barely there, see-through, smaller, and not a link */
 .map :global(.leaflet-control-attribution a) {
-  color: #e5e7eb;
+  color: inherit;
+  text-decoration: none;
+  pointer-events: none;
 }
 
 .markerIcon {

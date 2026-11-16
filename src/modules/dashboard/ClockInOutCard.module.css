@@ -539,3 +539,49 @@
     bottom: auto;
   }
 }
+
+/* ===== owner 2026-11-16: the clock-in page on a computer - a framed glass map, a compact glass status card in
+   its corner instead of a strip across the whole width, and the tools lined up under it ===== */
+@media (min-width: 901px) {
+  .mapStage {
+    border-radius: 24px;
+    border: 1px solid color-mix(in srgb, var(--border-light) 70%, transparent);
+    box-shadow: 0 24px 60px -28px rgba(2, 8, 23, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .mapStage :global(.leaflet-container) {
+    height: min(680px, calc(100dvh - 190px)) !important;
+  }
+
+  .mapInfo {
+    top: var(--space-4);
+    inset-inline-start: var(--space-4);
+    inset-inline-end: auto;
+    max-width: min(440px, calc(100% - 140px));
+    padding: 10px 14px;
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--surface-card) 58%, transparent);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(14px) saturate(1.2);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 12px 30px -12px rgba(2, 8, 23, 0.45);
+  }
+
+  .compass {
+    top: var(--space-4);
+    inset-inline-start: auto;
+    inset-inline-end: var(--space-4);
+  }
+
+  .mapTools {
+    top: calc(var(--space-4) + 50px);
+  }
+
+  .stylePicker {
+    top: calc(var(--space-4) + 50px);
+  }
+
+  .fabBar {
+    bottom: var(--space-5);
+  }
+}

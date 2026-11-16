@@ -169,3 +169,26 @@
     bottom: calc(64px + 256px + var(--safe-bottom, 0px));
   }
 }
+
+/* owner 2026-11-16 ("the clock-in page on a laptop looks very bad; the buttons are outside"): on a computer the
+   two round buttons belong to the map - inside its lower corner, glass like the rest of the map's tools. */
+.clockStage {
+  position: relative;
+}
+
+@media (min-width: 901px) {
+  .clockStage .floatingTools {
+    position: absolute;
+    inset-inline-end: var(--space-4);
+    bottom: var(--space-5);
+    z-index: 5;
+  }
+
+  .clockStage .toolButton {
+    background: color-mix(in srgb, var(--surface-card) 50%, transparent);
+    border-color: rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 8px 20px rgba(2, 8, 23, 0.25);
+  }
+}
