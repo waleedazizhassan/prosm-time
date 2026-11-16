@@ -107,7 +107,10 @@
     "endingContinue": "To continue, contact the sales team to renew the licence (licence {{license}}):",
     "endedSubject": "Your PROSM Time trial has ended",
     "endedBody": "The PROSM Time trial of {{org}} has ended. The organisation is now read-only: everyone can still see everything, and all your data is kept.",
-    "endedContinue": "Enter an activation code in Settings > Subscription after signing in, or contact us, and everything works as before (licence {{license}}):"
+    "endedContinue": "Enter an activation code in Settings > Subscription after signing in, or contact us, and everything works as before (licence {{license}}):",
+    "whenDays": "in {{days}}",
+    "licenseHow": "To renew: write to info@prosm.net or support@prosm.net with your licence number {{license}} and we will prepare the renewal. Once done it applies to the app by itself, and you get a notification and an email with the new licence.",
+    "licenseAfter": "If the licence is not renewed, the app becomes read-only after the grace period until it is renewed; no data is ever deleted."
   },
   "licence": {
     "subject": "PROSM Time - licence of {{org}} changed",

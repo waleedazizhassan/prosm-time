@@ -110,7 +110,10 @@
     "endingContinue": "Para continuar, contacta con el equipo comercial para renovar la licencia (licencia {{license}}):",
     "endedSubject": "Tu prueba de PROSM Time ha terminado",
     "endedBody": "La prueba de PROSM Time de {{org}} ha terminado. La organización ahora es de solo lectura: todos siguen viendo todo y todos tus datos se conservan.",
-    "endedContinue": "Introduce un código de activación en Ajustes > Suscripción después de iniciar sesión, o contáctanos, y todo vuelve a funcionar como antes (licencia {{license}}):"
+    "endedContinue": "Introduce un código de activación en Ajustes > Suscripción después de iniciar sesión, o contáctanos, y todo vuelve a funcionar como antes (licencia {{license}}):",
+    "whenDays": "en {{days}}",
+    "licenseHow": "Para renovar: escribe a info@prosm.net o support@prosm.net con tu número de licencia {{license}} y prepararemos la renovación. Se aplica sola en la app y recibirás un aviso y un correo con la nueva licencia.",
+    "licenseAfter": "Si no se renueva, tras el periodo de gracia la app queda en solo lectura hasta renovarla; nunca se borra ningún dato."
   },
   "licence": {
     "subject": "PROSM Time - se modificó la licencia de {{org}}",

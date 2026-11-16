@@ -35,3 +35,23 @@
 .close:hover {
   background: rgba(0, 0, 0, 0.08);
 }
+
+/* owner 2026-11-16: the owner can close it */
+.close {
+  margin-inline-start: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.close:hover {
+  background: rgba(0, 0, 0, 0.12);
+}

@@ -69,7 +69,10 @@ serve(async (request: Request) => {
     // license_activation_state is org-scoped and RLS'd - the caller's
     // own session can read it directly (established pattern already
     // used by refresh-license-status).
-    const { data: licenseRow } = await callerClient.from("license_activation_state").select("license_number").maybeSingle();
+    // 2026-11-16: read with the service client - an employee's own session cannot read the licence row, so an
+    // installation registered from an employee's device carried no licence number and fell into GRACE
+    const { data: licenseRow } = await serviceClient.from("license_activation_state").select("license_number, status")
+      .eq("organization_id", callerRow.organization_id).maybeSingle();
 
     const { data: credRows } = await serviceClient.rpc("get_prosm_time_installation_credentials", { p_organization_id: callerRow.organization_id });
     let credentials = credRows?.[0] as { installation_key: string; installation_secret: string } | undefined;
@@ -102,17 +105,50 @@ serve(async (request: Request) => {
       credentials = { installation_key: registerResult.data.installationKey, installation_secret: registerResult.data.installationSecret };
     }
 
-    const validateResponse = await fetch(managementApiUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "x-prosm-api-key": managementApiKey },
-      body: JSON.stringify({
-        action: "validateInstallation",
-        installationKey: credentials.installation_key,
-        installationSecret: credentials.installation_secret,
-        appVersion: APP_VERSION,
-      }),
-    });
-    const validateResult = await validateResponse.json().catch(() => null);
+    const validate = async (creds: { installation_key: string; installation_secret: string }) => {
+      const response = await fetch(managementApiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-prosm-api-key": managementApiKey },
+        body: JSON.stringify({
+          action: "validateInstallation",
+          installationKey: creds.installation_key,
+          installationSecret: creds.installation_secret,
+          appVersion: APP_VERSION,
+        }),
+      });
+      return { response, result: await response.json().catch(() => null) };
+    };
+    let { response: validateResponse, result: validateResult } = await validate(credentials);
+
+    // 2026-11-16: an installation linked to an old licence record (a licence changed in PROSM Platform) or to none
+    // stays in GRACE although the organisation holds an active licence - register again with the licence number
+    // (the Platform re-links the installation) and validate once more. Heals itself after any licence change.
+    if (validateResponse.ok && validateResult?.success && validateResult.data?.state !== "ACTIVE" && licenseRow?.license_number) {
+      const relink = await fetch(managementApiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-prosm-api-key": managementApiKey },
+        body: JSON.stringify({
+          action: "registerInstallation",
+          organizationId: callerRow.organization_id,
+          externalUserId: callerRow.id,
+          platform,
+          appVersion: APP_VERSION,
+          licenseNumber: licenseRow.license_number,
+        }),
+      });
+      const relinked = await relink.json().catch(() => null);
+      if (relink.ok && relinked?.success) {
+        await serviceClient.rpc("upsert_prosm_time_installation_identity", {
+          p_organization_id: callerRow.organization_id,
+          p_installation_key: relinked.data.installationKey,
+          p_installation_secret: relinked.data.installationSecret,
+          p_platform: platform,
+          p_app_version: APP_VERSION,
+        });
+        credentials = { installation_key: relinked.data.installationKey, installation_secret: relinked.data.installationSecret };
+        ({ response: validateResponse, result: validateResult } = await validate(credentials));
+      }
+    }
     if (!validateResponse.ok || !validateResult?.success) {
       return errorResponse(validateResult?.error?.message ?? "Unable to validate this installation.", 400, validateResult?.error?.code ?? "VALIDATION_FAILED");
     }

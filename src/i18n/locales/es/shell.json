@@ -31,7 +31,8 @@
   },
   "installation": {
     "grace": "Esta instalación no está cubierta por una licencia válida. Activa una licencia antes del {{date}}.",
-    "blocked": "Esta instalación no está cubierta por una licencia válida y el acceso se ha suspendido. Contacta con tu administrador."
+    "blocked": "Esta instalación no está cubierta por una licencia válida y el acceso se ha suspendido. Contacta con tu administrador.",
+    "close": "Cerrar"
   },
   "update": {
     "available": "Hay una nueva versión (v{{version}}) disponible.",

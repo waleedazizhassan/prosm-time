@@ -31,7 +31,8 @@
   },
   "installation": {
     "grace": "Diese Installation ist nicht durch eine gültige Lizenz abgedeckt. Bitte aktivieren Sie eine Lizenz bis {{date}}.",
-    "blocked": "Diese Installation ist nicht durch eine gültige Lizenz abgedeckt und der Zugriff wurde gesperrt. Bitte wenden Sie sich an Ihren Administrator."
+    "blocked": "Diese Installation ist nicht durch eine gültige Lizenz abgedeckt und der Zugriff wurde gesperrt. Bitte wenden Sie sich an Ihren Administrator.",
+    "close": "Schließen"
   },
   "update": {
     "available": "Eine neue Version (v{{version}}) ist verfügbar.",
