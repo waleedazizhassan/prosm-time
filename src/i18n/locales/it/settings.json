@@ -294,7 +294,8 @@
     "sites": "Siti",
     "outside": "Fuori dai siti",
     "people": "Persone e presenze",
-    "other": "Piano e sicurezza"
+    "other": "Piano e sicurezza",
+    "governance": "Modello di governance"
   },
   "overtimeTarget": {
     "title": "Straordinari e ritardi",
@@ -396,26 +397,132 @@
     "done": "{{count}} dipendenti rinumerati.",
     "failed": "Non rinumerato. Riprova."
   },
-  "approvalModes": {
-    "title": "Come si approvano le ferie",
-    "subtitle": "Chi decide le richieste. Paghe, permessi, fatturazione, chiavi e proprietà restano sempre al proprietario.",
-    "direct": {
-      "title": "Diretto (predefinito)",
-      "hint": "Qualsiasi responsabile della persona (del suo sito o reparto), le risorse umane o il proprietario. Un passaggio."
+  "governance": {
+    "title": "Modello di governance",
+    "subtitle": "Chi decide le richieste dei dipendenti. Scegli il modello adatto e leggi prima come funziona ciascuno.",
+    "current": "Modello attuale:",
+    "custom": "Personalizzato per tipo",
+    "active": "Attivo",
+    "appliesTo": "Vale per: ferie, permessi e correzioni presenze",
+    "sections": {
+      "perms": "Chi può cosa",
+      "flow": "Flusso",
+      "life": "Ciclo di vita della richiesta"
     },
-    "decentralized": {
-      "title": "Decentrato",
-      "hint": "Il responsabile del sito, altrimenti del reparto, altrimenti le risorse umane, poi il proprietario. Un passaggio: chi decide per primo chiude."
+    "modes": {
+      "direct": {
+        "title": "Semplice (predefinito)",
+        "tagline": "Qualsiasi responsabile del dipendente decide in un passaggio.",
+        "how": "La richiesta appare a tutti quelli con autorità sul dipendente: responsabile del sito, del reparto, risorse umane e proprietario. Chi decide per primo la chiude.",
+        "perms": {
+          "1": "Responsabile del sito: per le persone del suo sito",
+          "2": "Responsabile del reparto: per il suo reparto",
+          "3": "Risorse umane: per tutti",
+          "4": "Proprietario e delegati: per tutto"
+        },
+        "flow": {
+          "1": "Il dipendente invia la richiesta",
+          "2": "Appare a tutti i suoi responsabili",
+          "3": "Il primo approva o rifiuta",
+          "4": "Il dipendente riceve la decisione"
+        },
+        "life": {
+          "1": "Inviata",
+          "2": "In revisione",
+          "3": "Approvata o rifiutata"
+        },
+        "fits": "Adatto a: piccole aziende (da 5 a 30 dipendenti)."
+      },
+      "decentralized": {
+        "title": "Decentrato",
+        "tagline": "Decide l’operativo: sito o reparto.",
+        "how": "Il responsabile del sito o del reparto decide per la sua gente. Le risorse umane intervengono solo se il dipendente non ha un responsabile diretto; il proprietario è sempre la riserva.",
+        "perms": {
+          "1": "Responsabile di sito o reparto: per la sua gente",
+          "2": "Risorse umane: solo senza responsabile diretto",
+          "3": "Proprietario e delegati: per tutto"
+        },
+        "flow": {
+          "1": "Il dipendente invia la richiesta",
+          "2": "Va al responsabile del sito o del reparto",
+          "3": "Il responsabile approva o rifiuta",
+          "4": "Il dipendente riceve la decisione"
+        },
+        "life": {
+          "1": "Inviata",
+          "2": "In attesa del responsabile",
+          "3": "Approvata o rifiutata"
+        },
+        "fits": "Adatto a: aziende con molte sedi e siti."
+      },
+      "centralized": {
+        "title": "Centralizzato",
+        "tagline": "Decidono solo le risorse umane.",
+        "how": "Tutte le richieste vanno alle risorse umane. I responsabili di sito e reparto seguono la loro gente ma non decidono; proprietario e delegati sono la riserva.",
+        "perms": {
+          "1": "Risorse umane: per tutti",
+          "2": "Responsabili di sito e reparto: solo consultazione",
+          "3": "Proprietario e delegati: per tutto"
+        },
+        "flow": {
+          "1": "Il dipendente invia la richiesta",
+          "2": "Va alle risorse umane",
+          "3": "Le risorse umane approvano o rifiutano",
+          "4": "Il dipendente riceve la decisione"
+        },
+        "life": {
+          "1": "Inviata",
+          "2": "In attesa delle risorse umane",
+          "3": "Approvata o rifiutata"
+        },
+        "fits": "Adatto a: aziende con risorse umane forti e decisioni uniformi."
+      },
+      "two_step": {
+        "title": "Combinato (due passaggi)",
+        "tagline": "Prima approva il responsabile, poi conferma l’HR.",
+        "how": "Il responsabile del sito o del reparto approva, poi la richiesta passa alle risorse umane per l’approvazione finale. Un rifiuto la chiude. Senza responsabile diretto va subito alle risorse umane; chi ha entrambi i ruoli approva una volta.",
+        "perms": {
+          "1": "Responsabile di sito o reparto: prima approvazione",
+          "2": "Risorse umane: approvazione finale",
+          "3": "Proprietario e delegati: approvano subito"
+        },
+        "flow": {
+          "1": "Il dipendente invia la richiesta",
+          "2": "Il responsabile approva o rifiuta",
+          "3": "Approvata, passa alle risorse umane",
+          "4": "Le risorse umane approvano o rifiutano",
+          "5": "Il dipendente riceve la decisione"
+        },
+        "life": {
+          "1": "Inviata",
+          "2": "In attesa del responsabile",
+          "3": "In attesa delle risorse umane",
+          "4": "Approvata o rifiutata"
+        },
+        "fits": "Adatto a: aziende medie e grandi (100+ dipendenti)."
+      }
     },
-    "centralized": {
-      "title": "Centralizzato",
-      "hint": "Solo le risorse umane (il proprietario come riserva)."
+    "alwaysTitle": "Uguale in ogni modello",
+    "always": {
+      "1": "Paghe, indennità, sanzioni, permessi, fatturazione e proprietà restano al proprietario",
+      "2": "Nessuno decide la propria richiesta",
+      "3": "Proprietario e delegati possono decidere qualsiasi richiesta",
+      "4": "Un periodo paghe chiuso non si può modificare",
+      "5": "Ogni decisione e ogni cambio di modello viene registrato"
     },
-    "two_step": {
-      "title": "In due passaggi",
-      "hint": "Prima il responsabile del sito o del reparto, poi le risorse umane: servono entrambi. Senza responsabile diretto va subito alle risorse umane."
+    "kinds": {
+      "leave": "Ferie",
+      "permission": "Permessi (ritardo / uscita anticipata)",
+      "correction": "Correzioni presenze"
     },
-    "sources": "Risorse umane = chi ha \"Decidere tutte le richieste non sensibili\". I responsabili di reparto si impostano in Reparti. Il proprietario e i delegati decidono sempre.",
+    "perKind": "Regolazione fine: un modello diverso per tipo di richiesta",
+    "needHr": "Nessuno ha \"Decidere tutte le richieste non sensibili (risorse umane)\". Assegnalo nella pagina dei permessi, altrimenti le richieste vanno al proprietario.",
+    "needManagers": "Non ci sono responsabili di sito o reparto. Definiscili prima, altrimenti le richieste vanno alle risorse umane o al proprietario.",
+    "use": "Usa questo modello",
+    "isActive": "Questo è il modello attivo",
+    "confirmTitle": "Passare a questo modello?",
+    "confirm": "Passa",
+    "confirmNote": "Vale subito per le richieste nuove e in attesa: ferie, permessi e correzioni.",
     "saved": "Salvato.",
     "failed": "Non salvato. Riprova."
   }

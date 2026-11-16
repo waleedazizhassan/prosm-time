@@ -513,6 +513,6 @@
       "announcements": "Pubblicare annunci e vedere chi li ha letti",
       "externalPay": "Vedere ed esportare la paga degli esterni"
     },
-    "hrMoves": "{{names}} ha ora l’autorità di responsabile delle risorse umane. Darla qui gliela toglie (solo quanto ricevuto dal pacchetto HR; i permessi del ruolo restano)."
+    "setMoves": "{{names}} gestisce ora «{{set}}». Darlo qui glielo toglie (solo quanto ricevuto da questo pacchetto; i permessi del ruolo e condivisi restano)."
   }
 }

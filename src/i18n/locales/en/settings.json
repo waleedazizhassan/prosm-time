@@ -293,7 +293,8 @@
     "sites": "Sites",
     "outside": "Outside the sites",
     "people": "People and attendance",
-    "other": "Plan and security"
+    "other": "Plan and security",
+    "governance": "Governance model"
   },
   "overtimeTarget": {
     "title": "Counting overtime and lateness",
@@ -394,26 +395,132 @@
     "done": "{{count}} employees numbered again.",
     "failed": "Not numbered again. Try again."
   },
-  "approvalModes": {
-    "title": "How leave is approved",
-    "subtitle": "Who decides leave requests. Payroll, permissions, billing, keys and ownership always stay with the owner.",
-    "direct": {
-      "title": "Direct (default)",
-      "hint": "Any manager responsible for the person (their site or department manager), HR, or the owner. One step."
+  "governance": {
+    "title": "Governance model",
+    "subtitle": "Who decides employees' requests. Choose the model that fits your company - read how each one works before choosing.",
+    "current": "Current model:",
+    "custom": "Custom per kind",
+    "active": "Active",
+    "appliesTo": "Applies to: leave, permissions and attendance corrections",
+    "sections": {
+      "perms": "Who can do what",
+      "flow": "Workflow",
+      "life": "Request life cycle"
     },
-    "decentralized": {
-      "title": "Decentralized",
-      "hint": "The site manager, else the department manager, else HR, then the owner. One step - the first to decide closes it."
+    "modes": {
+      "direct": {
+        "title": "Simple (default)",
+        "tagline": "Any manager responsible for the employee decides, in one step.",
+        "how": "The request shows to everyone with authority over the employee: their site manager, department manager, HR and the owner. The first to decide closes it.",
+        "perms": {
+          "1": "Site manager: decides for their site's people",
+          "2": "Department manager: decides for their department",
+          "3": "HR: decides for every employee",
+          "4": "Owner and deputies: decide everything"
+        },
+        "flow": {
+          "1": "The employee submits the request",
+          "2": "It shows to everyone responsible for them",
+          "3": "The first one approves or rejects",
+          "4": "The employee is notified of the decision"
+        },
+        "life": {
+          "1": "Submitted",
+          "2": "Under review",
+          "3": "Approved or rejected"
+        },
+        "fits": "Fits: small companies (5 to 30 employees)."
+      },
+      "decentralized": {
+        "title": "Decentralized",
+        "tagline": "Operations decide: the site or the department.",
+        "how": "The site or department manager decides for their people. HR steps in only when the employee has no direct manager; the owner is always the fallback.",
+        "perms": {
+          "1": "Site or department manager: decides for their people",
+          "2": "HR: only for those without a direct manager",
+          "3": "Owner and deputies: decide everything"
+        },
+        "flow": {
+          "1": "The employee submits the request",
+          "2": "It goes to their site or department manager",
+          "3": "The manager approves or rejects",
+          "4": "The employee is notified of the decision"
+        },
+        "life": {
+          "1": "Submitted",
+          "2": "Waiting for the manager",
+          "3": "Approved or rejected"
+        },
+        "fits": "Fits: companies with many branches and sites, each manager responsible for their people."
+      },
+      "centralized": {
+        "title": "Centralized",
+        "tagline": "Only HR decides.",
+        "how": "Every request goes to HR. Site and department managers follow their people but do not decide; the owner and deputies are the fallback.",
+        "perms": {
+          "1": "HR: decides for every employee",
+          "2": "Site and department managers: follow only",
+          "3": "Owner and deputies: decide everything"
+        },
+        "flow": {
+          "1": "The employee submits the request",
+          "2": "It goes to HR",
+          "3": "HR approves or rejects",
+          "4": "The employee is notified of the decision"
+        },
+        "life": {
+          "1": "Submitted",
+          "2": "Waiting for HR",
+          "3": "Approved or rejected"
+        },
+        "fits": "Fits: companies with a strong HR department that want one consistent decision."
+      },
+      "two_step": {
+        "title": "Combined (two steps)",
+        "tagline": "The manager approves first, then HR confirms.",
+        "how": "The site or department manager approves, then the request moves to HR for the final approval. A rejection by either closes it. With no direct manager it goes straight to HR; one person holding both roles approves once.",
+        "perms": {
+          "1": "Site or department manager: first approval",
+          "2": "HR: final approval",
+          "3": "Owner and deputies: approve directly"
+        },
+        "flow": {
+          "1": "The employee submits the request",
+          "2": "The manager approves or rejects",
+          "3": "Once approved it goes to HR",
+          "4": "HR approves or rejects",
+          "5": "The employee is notified of the decision"
+        },
+        "life": {
+          "1": "Submitted",
+          "2": "Waiting for the manager",
+          "3": "Waiting for HR",
+          "4": "Approved or rejected"
+        },
+        "fits": "Fits: medium and large companies (100+ employees)."
+      }
     },
-    "centralized": {
-      "title": "Centralized",
-      "hint": "HR only (the owner as fallback)."
+    "alwaysTitle": "The same in every model",
+    "always": {
+      "1": "Payroll, allowances, penalties, permissions, billing and ownership stay with the owner",
+      "2": "Nobody decides their own request",
+      "3": "The owner and deputies can decide any request",
+      "4": "A closed payroll period cannot be changed",
+      "5": "Every decision and every model change is recorded in the audit log"
     },
-    "two_step": {
-      "title": "Two steps",
-      "hint": "The site or department manager approves first, then HR - both are needed. With no direct manager it goes straight to HR."
+    "kinds": {
+      "leave": "Leave",
+      "permission": "Permissions (late arrival / early leave)",
+      "correction": "Attendance corrections"
     },
-    "sources": "HR = whoever holds \"Decide every employee's non-sensitive requests\". Department managers are set under Departments. The owner and deputies always decide.",
+    "perKind": "Fine tuning: a different model per request kind",
+    "needHr": "Nobody holds \"Decide every employee's non-sensitive requests (HR)\". Give it to someone on the permissions page, or requests go to the owner.",
+    "needManagers": "There are no site or department managers. Set them first, or requests go to HR or the owner.",
+    "use": "Use this model",
+    "isActive": "This is the active model",
+    "confirmTitle": "Switch to this model?",
+    "confirm": "Switch",
+    "confirmNote": "It applies at once to new and still-pending requests: leave, permissions and attendance corrections.",
     "saved": "Saved.",
     "failed": "Not saved. Try again."
   }

@@ -294,7 +294,8 @@
     "sites": "Sitios",
     "outside": "Fuera de los sitios",
     "people": "Personas y asistencia",
-    "other": "Plan y seguridad"
+    "other": "Plan y seguridad",
+    "governance": "Modelo de gobierno"
   },
   "overtimeTarget": {
     "title": "Horas extra y retrasos",
@@ -396,26 +397,132 @@
     "done": "{{count}} empleados numerados de nuevo.",
     "failed": "No se volvió a numerar. Inténtalo de nuevo."
   },
-  "approvalModes": {
-    "title": "Cómo se aprueban las vacaciones",
-    "subtitle": "Quién decide las solicitudes. Nómina, permisos, facturación, claves y propiedad quedan siempre con el propietario.",
-    "direct": {
-      "title": "Directo (por defecto)",
-      "hint": "Cualquier responsable de la persona (jefe de su sitio o departamento), RR. HH. o el propietario. Un paso."
+  "governance": {
+    "title": "Modelo de gobierno",
+    "subtitle": "Quién decide las solicitudes de los empleados. Elige el modelo adecuado y lee antes cómo funciona cada uno.",
+    "current": "Modelo actual:",
+    "custom": "Personalizado por tipo",
+    "active": "Activo",
+    "appliesTo": "Se aplica a: vacaciones, permisos y correcciones de asistencia",
+    "sections": {
+      "perms": "Quién puede qué",
+      "flow": "Flujo de trabajo",
+      "life": "Ciclo de vida de la solicitud"
     },
-    "decentralized": {
-      "title": "Descentralizado",
-      "hint": "El jefe del sitio, si no el del departamento, si no RR. HH., y luego el propietario. Un paso: el primero que decide la cierra."
+    "modes": {
+      "direct": {
+        "title": "Simple (por defecto)",
+        "tagline": "Cualquier responsable del empleado decide en un paso.",
+        "how": "La solicitud aparece a todos los que tienen autoridad sobre el empleado: jefe de sitio, jefe de departamento, RR. HH. y propietario. El primero que decide la cierra.",
+        "perms": {
+          "1": "Jefe de sitio: decide por la gente de su sitio",
+          "2": "Jefe de departamento: decide por su departamento",
+          "3": "RR. HH.: decide por todos",
+          "4": "Propietario y adjuntos: deciden todo"
+        },
+        "flow": {
+          "1": "El empleado presenta la solicitud",
+          "2": "Aparece a todos sus responsables",
+          "3": "El primero aprueba o rechaza",
+          "4": "El empleado recibe la decisión"
+        },
+        "life": {
+          "1": "Presentada",
+          "2": "En revisión",
+          "3": "Aprobada o rechazada"
+        },
+        "fits": "Ideal para: empresas pequeñas (5 a 30 empleados)."
+      },
+      "decentralized": {
+        "title": "Descentralizado",
+        "tagline": "Decide la operación: el sitio o el departamento.",
+        "how": "El jefe de sitio o de departamento decide por su gente. RR. HH. solo interviene si el empleado no tiene jefe directo; el propietario siempre es respaldo.",
+        "perms": {
+          "1": "Jefe de sitio o departamento: decide por su gente",
+          "2": "RR. HH.: solo sin jefe directo",
+          "3": "Propietario y adjuntos: deciden todo"
+        },
+        "flow": {
+          "1": "El empleado presenta la solicitud",
+          "2": "Va a su jefe de sitio o departamento",
+          "3": "El jefe aprueba o rechaza",
+          "4": "El empleado recibe la decisión"
+        },
+        "life": {
+          "1": "Presentada",
+          "2": "Esperando al jefe",
+          "3": "Aprobada o rechazada"
+        },
+        "fits": "Ideal para: empresas con muchas sedes y sitios."
+      },
+      "centralized": {
+        "title": "Centralizado",
+        "tagline": "Solo RR. HH. decide.",
+        "how": "Todas las solicitudes van a RR. HH. Los jefes de sitio y departamento siguen a su gente pero no deciden; el propietario y adjuntos son respaldo.",
+        "perms": {
+          "1": "RR. HH.: decide por todos",
+          "2": "Jefes de sitio y departamento: solo seguimiento",
+          "3": "Propietario y adjuntos: deciden todo"
+        },
+        "flow": {
+          "1": "El empleado presenta la solicitud",
+          "2": "Va a RR. HH.",
+          "3": "RR. HH. aprueba o rechaza",
+          "4": "El empleado recibe la decisión"
+        },
+        "life": {
+          "1": "Presentada",
+          "2": "Esperando a RR. HH.",
+          "3": "Aprobada o rechazada"
+        },
+        "fits": "Ideal para: empresas con un RR. HH. fuerte y decisiones uniformes."
+      },
+      "two_step": {
+        "title": "Combinado (dos pasos)",
+        "tagline": "Primero aprueba el jefe y luego confirma RR. HH.",
+        "how": "El jefe de sitio o departamento aprueba y la solicitud pasa a RR. HH. para la aprobación final. Un rechazo de cualquiera la cierra. Sin jefe directo va directo a RR. HH.; quien tiene ambos roles aprueba una vez.",
+        "perms": {
+          "1": "Jefe de sitio o departamento: primera aprobación",
+          "2": "RR. HH.: aprobación final",
+          "3": "Propietario y adjuntos: aprueban directo"
+        },
+        "flow": {
+          "1": "El empleado presenta la solicitud",
+          "2": "El jefe aprueba o rechaza",
+          "3": "Aprobada, pasa a RR. HH.",
+          "4": "RR. HH. aprueba o rechaza",
+          "5": "El empleado recibe la decisión"
+        },
+        "life": {
+          "1": "Presentada",
+          "2": "Esperando al jefe",
+          "3": "Esperando a RR. HH.",
+          "4": "Aprobada o rechazada"
+        },
+        "fits": "Ideal para: empresas medianas y grandes (100+ empleados)."
+      }
     },
-    "centralized": {
-      "title": "Centralizado",
-      "hint": "Solo RR. HH. (el propietario como respaldo)."
+    "alwaysTitle": "Igual en todos los modelos",
+    "always": {
+      "1": "Nómina, asignaciones, sanciones, permisos, facturación y propiedad quedan con el propietario",
+      "2": "Nadie decide su propia solicitud",
+      "3": "El propietario y los adjuntos pueden decidir cualquier solicitud",
+      "4": "Un periodo de nómina cerrado no se puede cambiar",
+      "5": "Cada decisión y cada cambio de modelo queda en el registro"
     },
-    "two_step": {
-      "title": "En dos pasos",
-      "hint": "Primero el jefe del sitio o departamento, luego RR. HH.: hacen falta los dos. Sin jefe directo va directo a RR. HH."
+    "kinds": {
+      "leave": "Vacaciones",
+      "permission": "Permisos (llegada tarde / salida temprana)",
+      "correction": "Correcciones de asistencia"
     },
-    "sources": "RR. HH. = quien tiene \"Decidir las solicitudes no sensibles de todos\". Los jefes de departamento se fijan en Departamentos. El propietario y sus adjuntos siempre deciden.",
+    "perKind": "Ajuste fino: un modelo distinto por tipo de solicitud",
+    "needHr": "Nadie tiene \"Decidir las solicitudes no sensibles de todos (RR. HH.)\". Asígnalo en la página de permisos o las solicitudes irán al propietario.",
+    "needManagers": "No hay jefes de sitio ni de departamento. Defínelos primero o las solicitudes irán a RR. HH. o al propietario.",
+    "use": "Usar este modelo",
+    "isActive": "Este es el modelo activo",
+    "confirmTitle": "¿Cambiar a este modelo?",
+    "confirm": "Cambiar",
+    "confirmNote": "Se aplica al instante a las solicitudes nuevas y pendientes: vacaciones, permisos y correcciones.",
     "saved": "Guardado.",
     "failed": "No se guardó. Inténtalo de nuevo."
   }

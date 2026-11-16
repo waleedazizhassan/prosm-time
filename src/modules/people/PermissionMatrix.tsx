@@ -13,7 +13,8 @@ import HintText from "../../components/common/HintText";
 import Input from "../../components/common/Input";
 import Modal from "../../components/common/Modal";
 import Toggle from "../../components/common/Toggle";
-import HrMoveNotice from "./HrMoveNotice";
+import ManagementMoveNotice from "./ManagementMoveNotice";
+import { PERMISSION_BUNDLES } from "./PermissionBundles";
 
 // related permissions shown and changed as one line
 const MERGED: { id: string; keys: string[] }[] = [
@@ -176,7 +177,12 @@ export default function PermissionMatrix({ userId, catalog, effective, overrides
         <HintText>
           {pending?.kind === "reset" ? t("perms.resetExplain") : pending ? t("perms.lineExplain", { name: pending.line.label }) : null}
         </HintText>
-        {pending?.kind === "line" && pending.on && pending.line.keys.includes("hr.manage") ? <HrMoveNotice userId={userId} /> : null}
+        {/* a switch that completes an administration's whole set makes this person its manager: say who loses it */}
+        {pending?.kind === "line" && pending.on
+          ? PERMISSION_BUNDLES.filter((b) => b.keys.some((k) => pending.line.keys.includes(k))
+              && b.keys.filter((k) => catalog.some((p) => p.permissionKey === k)).every((k) => effective.includes(k) || pending.line.keys.includes(k)))
+              .map((b) => <ManagementMoveNotice key={b.id} userId={userId} set={b.id} />)
+          : null}
         <Input name="permission-reason" label={t("detail.reasonLabel")} value={reason} onChange={(e) => setReason(e.target.value)} required />
         {error ? <ErrorText>{error}</ErrorText> : null}
         <div style={{ display: "flex", gap: "var(--space-2)", justifyContent: "flex-end", marginTop: "var(--space-2)" }}>

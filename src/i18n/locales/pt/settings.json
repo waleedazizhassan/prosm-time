@@ -294,7 +294,8 @@
     "sites": "Locais",
     "outside": "Fora dos locais",
     "people": "Pessoas e presença",
-    "other": "Plano e segurança"
+    "other": "Plano e segurança",
+    "governance": "Modelo de governança"
   },
   "overtimeTarget": {
     "title": "Horas extra e atrasos",
@@ -396,26 +397,132 @@
     "done": "{{count}} funcionários numerados de novo.",
     "failed": "Não foi renumerado. Tente de novo."
   },
-  "approvalModes": {
-    "title": "Como as férias são aprovadas",
-    "subtitle": "Quem decide os pedidos. Folha, permissões, faturamento, chaves e propriedade ficam sempre com o proprietário.",
-    "direct": {
-      "title": "Direto (padrão)",
-      "hint": "Qualquer gestor responsável pela pessoa (do seu local ou departamento), RH ou o proprietário. Uma etapa."
+  "governance": {
+    "title": "Modelo de governança",
+    "subtitle": "Quem decide os pedidos dos funcionários. Escolha o modelo certo e leia antes como cada um funciona.",
+    "current": "Modelo atual:",
+    "custom": "Personalizado por tipo",
+    "active": "Ativo",
+    "appliesTo": "Vale para: férias, permissões e correções de ponto",
+    "sections": {
+      "perms": "Quem pode o quê",
+      "flow": "Fluxo",
+      "life": "Ciclo de vida do pedido"
     },
-    "decentralized": {
-      "title": "Descentralizado",
-      "hint": "O gestor do local, senão o do departamento, senão o RH, depois o proprietário. Uma etapa: quem decide primeiro fecha."
+    "modes": {
+      "direct": {
+        "title": "Simples (padrão)",
+        "tagline": "Qualquer gestor responsável pelo funcionário decide em uma etapa.",
+        "how": "O pedido aparece para todos com autoridade sobre o funcionário: gestor do local, do departamento, RH e proprietário. Quem decidir primeiro fecha.",
+        "perms": {
+          "1": "Gestor do local: decide pelo pessoal do local",
+          "2": "Gestor do departamento: decide pelo departamento",
+          "3": "RH: decide por todos",
+          "4": "Proprietário e delegados: decidem tudo"
+        },
+        "flow": {
+          "1": "O funcionário envia o pedido",
+          "2": "Aparece para todos os responsáveis",
+          "3": "O primeiro aprova ou rejeita",
+          "4": "O funcionário recebe a decisão"
+        },
+        "life": {
+          "1": "Enviado",
+          "2": "Em análise",
+          "3": "Aprovado ou rejeitado"
+        },
+        "fits": "Indicado para: empresas pequenas (5 a 30 funcionários)."
+      },
+      "decentralized": {
+        "title": "Descentralizado",
+        "tagline": "Decide a operação: o local ou o departamento.",
+        "how": "O gestor do local ou do departamento decide pelo seu pessoal. O RH só entra se o funcionário não tiver gestor direto; o proprietário é sempre a reserva.",
+        "perms": {
+          "1": "Gestor do local ou departamento: decide pelo seu pessoal",
+          "2": "RH: só sem gestor direto",
+          "3": "Proprietário e delegados: decidem tudo"
+        },
+        "flow": {
+          "1": "O funcionário envia o pedido",
+          "2": "Vai ao gestor do local ou departamento",
+          "3": "O gestor aprova ou rejeita",
+          "4": "O funcionário recebe a decisão"
+        },
+        "life": {
+          "1": "Enviado",
+          "2": "Aguardando o gestor",
+          "3": "Aprovado ou rejeitado"
+        },
+        "fits": "Indicado para: empresas com muitas filiais e locais."
+      },
+      "centralized": {
+        "title": "Centralizado",
+        "tagline": "Só o RH decide.",
+        "how": "Todos os pedidos vão ao RH. Gestores de local e departamento acompanham o pessoal mas não decidem; proprietário e delegados são a reserva.",
+        "perms": {
+          "1": "RH: decide por todos",
+          "2": "Gestores de local e departamento: só acompanham",
+          "3": "Proprietário e delegados: decidem tudo"
+        },
+        "flow": {
+          "1": "O funcionário envia o pedido",
+          "2": "Vai ao RH",
+          "3": "O RH aprova ou rejeita",
+          "4": "O funcionário recebe a decisão"
+        },
+        "life": {
+          "1": "Enviado",
+          "2": "Aguardando o RH",
+          "3": "Aprovado ou rejeitado"
+        },
+        "fits": "Indicado para: empresas com RH forte e decisões uniformes."
+      },
+      "two_step": {
+        "title": "Combinado (duas etapas)",
+        "tagline": "O gestor aprova primeiro, depois o RH confirma.",
+        "how": "O gestor do local ou do departamento aprova e o pedido vai ao RH para a aprovação final. Uma rejeição de qualquer um fecha o pedido. Sem gestor direto vai direto ao RH; quem tem os dois papéis aprova uma vez.",
+        "perms": {
+          "1": "Gestor do local ou departamento: primeira aprovação",
+          "2": "RH: aprovação final",
+          "3": "Proprietário e delegados: aprovam direto"
+        },
+        "flow": {
+          "1": "O funcionário envia o pedido",
+          "2": "O gestor aprova ou rejeita",
+          "3": "Aprovado, vai ao RH",
+          "4": "O RH aprova ou rejeita",
+          "5": "O funcionário recebe a decisão"
+        },
+        "life": {
+          "1": "Enviado",
+          "2": "Aguardando o gestor",
+          "3": "Aguardando o RH",
+          "4": "Aprovado ou rejeitado"
+        },
+        "fits": "Indicado para: empresas médias e grandes (100+ funcionários)."
+      }
     },
-    "centralized": {
-      "title": "Centralizado",
-      "hint": "Só o RH (o proprietário como reserva)."
+    "alwaysTitle": "Igual em todos os modelos",
+    "always": {
+      "1": "Folha, adicionais, penalidades, permissões, faturamento e propriedade ficam com o proprietário",
+      "2": "Ninguém decide o próprio pedido",
+      "3": "O proprietário e os delegados podem decidir qualquer pedido",
+      "4": "Um período de folha fechado não pode ser alterado",
+      "5": "Cada decisão e cada troca de modelo fica registrada"
     },
-    "two_step": {
-      "title": "Em duas etapas",
-      "hint": "Primeiro o gestor do local ou do departamento, depois o RH: os dois são necessários. Sem gestor direto vai direto ao RH."
+    "kinds": {
+      "leave": "Férias",
+      "permission": "Permissões (atraso / saída antecipada)",
+      "correction": "Correções de ponto"
     },
-    "sources": "RH = quem tem \"Decidir os pedidos não sensíveis de todos\". Os gestores de departamento são definidos em Departamentos. O proprietário e os delegados sempre decidem.",
+    "perKind": "Ajuste fino: um modelo diferente por tipo de pedido",
+    "needHr": "Ninguém tem \"Decidir os pedidos não sensíveis de todos (RH)\". Atribua na página de permissões, senão os pedidos vão ao proprietário.",
+    "needManagers": "Não há gestores de local nem de departamento. Defina-os primeiro, senão os pedidos vão ao RH ou ao proprietário.",
+    "use": "Usar este modelo",
+    "isActive": "Este é o modelo ativo",
+    "confirmTitle": "Mudar para este modelo?",
+    "confirm": "Mudar",
+    "confirmNote": "Vale na hora para pedidos novos e pendentes: férias, permissões e correções.",
     "saved": "Salvo.",
     "failed": "Não foi salvo. Tente de novo."
   }

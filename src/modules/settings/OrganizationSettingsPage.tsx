@@ -26,7 +26,7 @@ import OwnershipTransferCard from "./OwnershipTransferCard";
 import ConnectUsageCard from "./ConnectUsageCard";
 import SecurityPolicyCard from "./SecurityPolicyCard";
 import EmployeeCodesCard from "./EmployeeCodesCard";
-import ApprovalModesCard from "./ApprovalModesCard";
+import GovernanceModelCard from "./GovernanceModelCard";
 
 // PROSM Time - § live UX review, user-directed: "a professional
 // reorganization" - org-wide settings (today: the no-site geofence
@@ -37,7 +37,7 @@ import ApprovalModesCard from "./ApprovalModesCard";
 // PROSM Platform's own Header/OrganizationCard, replaced bulkier
 // Dashboard cards per an earlier pass) - a genuinely good existing
 // home, not something misplaced.
-type SettingsTab = "sites" | "outside" | "people" | "other";
+type SettingsTab = "sites" | "governance" | "outside" | "people" | "other";
 
 export default function OrganizationSettingsPage() {
   const { t } = useTranslation("settings");
@@ -82,7 +82,7 @@ export default function OrganizationSettingsPage() {
   // Owner 2026-11-10: the settings as a tree - the sites (each site's every setting), outside the
   // sites, people, and everything else - one part at a time. Pages that have their own place in the
   // menu (calendar, permissions, action log, API, payroll settings) are not repeated here.
-  const tabs: SettingsTab[] = ["sites", ...(isOwner ? (["outside"] as SettingsTab[]) : []),
+  const tabs: SettingsTab[] = ["sites", ...(isOwner ? (["governance", "outside"] as SettingsTab[]) : []),
     ...(showPeople ? (["people"] as SettingsTab[]) : []), ...(showOther ? (["other"] as SettingsTab[]) : [])];
   const active: SettingsTab = tabs.includes(tab) ? tab : "sites";
 
@@ -105,6 +105,9 @@ export default function OrganizationSettingsPage() {
         </>
       ) : null}
 
+      {/* phase F (owner 2026-11-16): the organisation's governance model, in its own tab */}
+      {active === "governance" ? <GovernanceModelCard /> : null}
+
       {active === "outside" ? (
         <>
           <NoSiteRadiusSettingsCard />
@@ -118,8 +121,6 @@ export default function OrganizationSettingsPage() {
           {isOwner ? <OvertimeLateTargetCard hasPayroll={allows("payroll")} hasAllowances={allows("allowances")} /> : null}
           {isOwner ? <OvertimePolicySettingsCard /> : null}
           {hasPermission("leave.manage_types") ? <LeaveTypesSettingsCard /> : null}
-          {/* phase F: how leave is approved */}
-          {isOwner ? <ApprovalModesCard /> : null}
           {/* owner 2026-11-16: employee codes by hiring seniority */}
           {isOwner ? <EmployeeCodesCard /> : null}
           {/* 2026-11-11 HR suite: the company's job titles */}

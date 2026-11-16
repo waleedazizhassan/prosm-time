@@ -513,6 +513,6 @@
       "announcements": "Publicar anuncios y ver quién los leyó",
       "externalPay": "Ver y exportar el pago del personal externo"
     },
-    "hrMoves": "{{names}} tiene ahora la autoridad de jefe de RR. HH. Darla aquí se la quita (solo lo recibido del conjunto de RR. HH.; los permisos de su rol se quedan)."
+    "setMoves": "{{names}} gestiona ahora «{{set}}». Darlo aquí se lo quita (solo lo recibido de este conjunto; los permisos de su rol y los compartidos se quedan)."
   }
 }

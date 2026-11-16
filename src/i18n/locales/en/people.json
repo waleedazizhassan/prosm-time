@@ -510,6 +510,6 @@
       "announcements": "Publish announcements and see who read them",
       "externalPay": "View and export external workers' pay"
     },
-    "hrMoves": "{{names}} holds the HR manager authority now. Giving it here takes it from them (what they were given from the HR set only; their role's permissions stay)."
+    "setMoves": "{{names}} manages \"{{set}}\" now. Giving it here takes it from them (only what they were given from this set; their role's and shared permissions stay)."
   }
 }
