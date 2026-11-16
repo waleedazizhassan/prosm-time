@@ -285,7 +285,13 @@ export class MeetingSession {
         }
         break;
       case "end":
-        if (from === this.hostId) this.close(false);
+        // release audit SA-05: the sender written in a broadcast is not proof - close only when the server says the
+        // meeting really ended (the host ends it through prosm_time_connect_end_meeting)
+        if (from === this.hostId) {
+          void ConnectEngine.supabase.rpc("get_prosm_time_connect_meeting", { p_meeting: this.meetingId }).then(({ data }) => {
+            if ((data as { status?: string } | null)?.status !== "live") this.close(false);
+          });
+        }
         break;
     }
     this.changed();
