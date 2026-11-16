@@ -195,7 +195,8 @@
     "full": "Plein écran",
     "exitFull": "Quitter le plein écran",
     "reactions": "Réactions rapides",
-    "chatUnread": "Discussion ({{count}} nouveaux)"
+    "chatUnread": "Discussion ({{count}} nouveaux)",
+    "react": "Réagir"
   },
   "storage": {
     "clean": "Nettoyer {{what}}",

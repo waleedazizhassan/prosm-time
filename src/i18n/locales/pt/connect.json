@@ -195,7 +195,8 @@
     "full": "Tela cheia",
     "exitFull": "Sair da tela cheia",
     "reactions": "Reações rápidas",
-    "chatUnread": "Chat ({{count}} novas)"
+    "chatUnread": "Chat ({{count}} novas)",
+    "react": "Reagir"
   },
   "storage": {
     "clean": "Limpar {{what}}",

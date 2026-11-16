@@ -195,7 +195,8 @@
     "full": "Schermo intero",
     "exitFull": "Esci dallo schermo intero",
     "reactions": "Reazioni rapide",
-    "chatUnread": "Chat ({{count}} nuovi)"
+    "chatUnread": "Chat ({{count}} nuovi)",
+    "react": "Reagisci"
   },
   "storage": {
     "clean": "Pulisci {{what}}",

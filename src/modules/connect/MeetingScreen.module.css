@@ -441,3 +441,58 @@
     padding-inline-end: calc(min(92vw, 340px) + 24px);
   }
 }
+
+/* owner 2026-11-16: reactions floating over the person's picture, and their bar above the buttons */
+.floatReact {
+  position: absolute;
+  bottom: 18%;
+  z-index: 3;
+  font-size: clamp(30px, 6vw, 46px);
+  line-height: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
+  animation: floatUp 3.4s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(20px) scale(0.6); opacity: 0; }
+  12% { transform: translateY(0) scale(1.15); opacity: 1; }
+  25% { transform: translateY(-6px) scale(1); }
+  80% { opacity: 1; }
+  100% { transform: translateY(-90px) scale(1); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floatReact { animation: none; }
+}
+
+.reactBar {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 auto 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid #2a3c66;
+  background: rgba(10, 19, 38, 0.95);
+}
+
+.reactBar button {
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+.reactBar button:hover,
+.reactBar button:focus-visible {
+  transform: scale(1.2);
+  background: rgba(255, 255, 255, 0.08);
+}

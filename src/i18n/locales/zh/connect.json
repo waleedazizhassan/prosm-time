@@ -195,7 +195,8 @@
     "full": "全屏",
     "exitFull": "退出全屏",
     "reactions": "快捷表情",
-    "chatUnread": "聊天（{{count}} 条新消息）"
+    "chatUnread": "聊天（{{count}} 条新消息）",
+    "react": "表情反应"
   },
   "storage": {
     "clean": "清理{{what}}",

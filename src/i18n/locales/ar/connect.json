@@ -195,7 +195,8 @@
     "full": "ملء الشاشة",
     "exitFull": "خروج من ملء الشاشة",
     "reactions": "تفاعلات جاهزة",
-    "chatUnread": "الشات ({{count}} جديدة)"
+    "chatUnread": "الشات ({{count}} جديدة)",
+    "react": "تفاعل"
   },
   "storage": {
     "clean": "تنضيف {{what}}",

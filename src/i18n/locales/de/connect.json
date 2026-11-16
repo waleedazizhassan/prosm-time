@@ -195,7 +195,8 @@
     "full": "Vollbild",
     "exitFull": "Vollbild beenden",
     "reactions": "Schnelle Reaktionen",
-    "chatUnread": "Chat ({{count}} neu)"
+    "chatUnread": "Chat ({{count}} neu)",
+    "react": "Reagieren"
   },
   "storage": {
     "clean": "{{what}} bereinigen",

@@ -22,6 +22,9 @@ export interface Peer {
 }
 
 export interface MeetingChat { from: string; text: string; at: number }
+// owner 2026-11-16: a reaction floats over the person's picture for everyone for a few seconds - not in the chat
+export const REACTIONS = ["👍", "👏", "❤️", "😂", "😮", "🙏", "✅", "🎉"] as const;
+export interface MeetingReaction { from: string; emoji: string; at: number; id: number }
 
 export class MeetingSession {
   readonly meetingId: string;
@@ -33,6 +36,8 @@ export class MeetingSession {
   local: MediaStream | null = null;
   peers = new Map<string, Peer>();
   chat: MeetingChat[] = [];
+  reactions: MeetingReaction[] = [];
+  private reactionSeq = 0;
   pinned: string | null = null;
   sharingBy: string | null = null;
   myHand = false;
@@ -265,6 +270,9 @@ export class MeetingSession {
       case "chat":
         this.chat = [...this.chat, { from, text: String(signal.text ?? "").slice(0, 1000), at: Date.now() }].slice(-200);
         break;
+      case "react":
+        if (REACTIONS.includes(String(signal.emoji) as (typeof REACTIONS)[number])) this.addReaction(from, String(signal.emoji));
+        break;
       case "recording": {
         const peer = this.peers.get(from);
         if (peer) peer.recording = Boolean(signal.on);
@@ -324,6 +332,23 @@ export class MeetingSession {
     this.pinned = userId;
     void this.send?.({ type: "pin", userId });
     this.changed();
+  }
+
+  /** A reaction over my picture, seen by everyone for a few seconds. */
+  react(emoji: string) {
+    if (!REACTIONS.includes(emoji as (typeof REACTIONS)[number])) return;
+    this.addReaction(this.me, emoji);
+    void this.send?.({ type: "react", emoji });
+  }
+
+  private addReaction(from: string, emoji: string) {
+    const id = ++this.reactionSeq;
+    this.reactions = [...this.reactions, { from, emoji, at: Date.now(), id }].slice(-30);
+    this.changed();
+    window.setTimeout(() => {
+      this.reactions = this.reactions.filter((r) => r.id !== id);
+      this.changed();
+    }, 3500);
   }
 
   say(text: string) {

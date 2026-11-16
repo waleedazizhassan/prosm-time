@@ -1,11 +1,11 @@
 import { useEffect, useReducer, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Circle, Hand, LayoutGrid, Maximize2, MessageSquare, Mic, MicOff, Minimize2, MonitorUp, PhoneOff, Pin, Users, Video, VideoOff, VolumeX, Send } from "lucide-react";
+import { Circle, Hand, LayoutGrid, Maximize2, SmilePlus, MessageSquare, Mic, MicOff, Minimize2, MonitorUp, PhoneOff, Pin, Users, Video, VideoOff, VolumeX, Send } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import type { ConnectPerson } from "../../core/repositories/ConnectRepository";
 import Avatar from "../../components/common/Avatar";
-import type { MeetingSession } from "./engine/MeetingSession";
+import { REACTIONS, type MeetingSession } from "./engine/MeetingSession";
 import { ConnectEngine } from "./engine/ConnectEngine";
 import GlassButton from "./GlassButton";
 import styles from "./MeetingScreen.module.css";
@@ -13,7 +13,7 @@ import { playMedia } from "./engine/media";
 import { messageAlert } from "./engine/sounds";
 
 // owner 2026-11-16: ready reactions in the meeting chat, one tap sends
-const QUICK = ["👍", "👏", "❤️", "😂", "😮", "🙏", "✅", "🎉"];
+const QUICK: readonly string[] = REACTIONS;
 // a transparent poster: the phone's web view drew a big "play" sign on a video until it starts
 const NO_POSTER = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 export const MEETING_LIMIT = { video: 6, audio: 12 } as const;
@@ -30,6 +30,9 @@ export default function MeetingScreen({ session, people, onClose }: { session: M
   const { profile } = useAuth();
   const [, refresh] = useReducer((n: number) => n + 1, 0);
   const [chatOpen, setChatOpen] = useState(false);
+  // owner 2026-11-16: "a reaction that shows on the screen - someone says something, another answers 'fine' without
+  // sound" - the reactions bar, apart from the chat
+  const [reactOpen, setReactOpen] = useState(false);
   const [text, setText] = useState("");
   const [layoutChoice, setLayoutChoice] = useState<Layout | null>(null);
   const [toast, setToast] = useState<string | null>(null);
@@ -135,6 +138,9 @@ export default function MeetingScreen({ session, people, onClose }: { session: M
           {full === t0.userId ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
         </button>
       ) : null}
+      {session.reactions.filter((r) => r.from === t0.userId).slice(-3).map((r, i) => (
+        <span key={r.id} className={styles.floatReact} style={{ insetInlineStart: `${18 + i * 22}%` }} aria-live="polite">{r.emoji}</span>
+      ))}
       <span className={styles.label}>
         {t0.userId === session.hostId ? <span className={styles.hostTag}>{t("meeting.host")}</span> : null}
         {nameOf(t0.userId)}
@@ -195,6 +201,14 @@ export default function MeetingScreen({ session, people, onClose }: { session: M
         </aside>
       ) : null}
 
+      {reactOpen ? (
+        <div className={styles.reactBar} role="group" aria-label={t("meeting.reactions")}>
+          {REACTIONS.map((emoji) => (
+            <button key={emoji} type="button" aria-label={emoji} onClick={() => { session.react(emoji); setReactOpen(false); }}>{emoji}</button>
+          ))}
+        </div>
+      ) : null}
+
       <footer className={styles.controls}>
         <GlassButton label={session.muted ? t("call.unmute") : t("call.mute")} onClick={() => session.toggleMute()}>{session.muted ? <MicOff size={18} /> : <Mic size={18} />}</GlassButton>
         {session.media === "video" ? <GlassButton label={session.videoOff ? t("call.videoOn") : t("call.videoOff")} onClick={() => session.toggleVideo()}>{session.videoOff ? <VideoOff size={18} /> : <Video size={18} />}</GlassButton> : null}
@@ -202,6 +216,7 @@ export default function MeetingScreen({ session, people, onClose }: { session: M
           <GlassButton label={t("meeting.share")} tone={session.sharingBy === me ? "primary" : "plain"} onClick={() => void session.toggleShare()}><MonitorUp size={18} /></GlassButton>
         ) : null}
         <GlassButton label={t("meeting.hand")} tone={session.myHand ? "primary" : "plain"} onClick={() => session.raiseHand()}><Hand size={18} /></GlassButton>
+        <GlassButton label={t("meeting.react")} tone={reactOpen ? "primary" : "plain"} onClick={() => setReactOpen((v) => !v)}><SmilePlus size={18} /></GlassButton>
         <GlassButton label={unread ? t("meeting.chatUnread", { count: unread }) : t("meeting.chat")} tone={chatOpen ? "primary" : "plain"} className={styles.chatButton} onClick={() => setChatOpen((v) => !v)}>
           <MessageSquare size={18} />
           {unread ? <span className={styles.badge} aria-hidden="true">{unread > 9 ? "9+" : unread}</span> : null}
