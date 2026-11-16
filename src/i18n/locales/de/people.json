@@ -509,6 +509,7 @@
       "timesheets": "Stundenzettel erstellen und genehmigen",
       "announcements": "Mitteilungen veröffentlichen und Leser sehen",
       "externalPay": "Löhne externer Kräfte ansehen und exportieren"
-    }
+    },
+    "hrMoves": "{{names}} hat derzeit die HR-Leitung. Wenn du sie hier vergibst, wird sie dort entzogen (nur das aus dem HR-Paket; die Rechte der Rolle bleiben)."
   }
 }

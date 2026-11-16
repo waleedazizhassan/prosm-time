@@ -13,6 +13,7 @@ import { formatDateOnly } from "../../core/utils/formatDate";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import PermissionRepository from "../../core/repositories/PermissionRepository";
 import OwnerAuthorityRepository, { type OwnerDelegation } from "../../core/repositories/OwnerAuthorityRepository";
+import HrMoveNotice from "./HrMoveNotice";
 
 // Owner 2026-11-12: "a button per role - the owner's authority, finance manager, HR manager, attendance only,
 // sites... besides the single permissions. Nobody gets a permission twice: one taken with a whole role shows
@@ -171,6 +172,7 @@ export default function PermissionBundles({ userId, effective, overrides, catalo
         footer={<Button fullWidth loading={busy} variant={pending?.action === "revoke" ? "danger" : "primary"} onClick={() => void run()}>{pending?.action === "grant" ? t("bundles.grant") : t("bundles.revoke")}</Button>}>
         <ErrorText>{error}</ErrorText>
         {pending ? <HintText small>{t(pending.action === "grant" ? "bundles.grantNote" : "bundles.revokeNote")}</HintText> : null}
+        {pending?.id === "hr" && pending.action === "grant" ? <HrMoveNotice userId={userId} /> : null}
         {pending?.id === "owner" && pending.action === "grant" ? (
           <>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(10rem, 1fr))", gap: "var(--space-3)" }}>

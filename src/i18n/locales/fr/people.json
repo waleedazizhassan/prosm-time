@@ -512,6 +512,7 @@
       "timesheets": "Générer et approuver les feuilles de temps",
       "announcements": "Publier des annonces et voir qui les a lues",
       "externalPay": "Voir et exporter la paie des externes"
-    }
+    },
+    "hrMoves": "{{names}} détient actuellement l’autorité de responsable RH. La donner ici la lui retire (seulement ce qu’il a reçu de l’ensemble RH ; les droits de son rôle restent)."
   }
 }

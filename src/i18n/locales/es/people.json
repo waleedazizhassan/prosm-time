@@ -512,6 +512,7 @@
       "timesheets": "Generar y aprobar hojas de horas",
       "announcements": "Publicar anuncios y ver quién los leyó",
       "externalPay": "Ver y exportar el pago del personal externo"
-    }
+    },
+    "hrMoves": "{{names}} tiene ahora la autoridad de jefe de RR. HH. Darla aquí se la quita (solo lo recibido del conjunto de RR. HH.; los permisos de su rol se quedan)."
   }
 }

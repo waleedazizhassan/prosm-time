@@ -512,6 +512,7 @@
       "timesheets": "Gerar e aprovar folhas de horas",
       "announcements": "Publicar avisos e ver quem leu",
       "externalPay": "Ver e exportar o pagamento de externos"
-    }
+    },
+    "hrMoves": "{{names}} tem agora a autoridade de gestor de RH. Dar aqui tira dele (só o que recebeu do conjunto de RH; as permissões do cargo ficam)."
   }
 }

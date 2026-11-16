@@ -509,6 +509,7 @@
       "timesheets": "Generate and approve timesheets",
       "announcements": "Publish announcements and see who read them",
       "externalPay": "View and export external workers' pay"
-    }
+    },
+    "hrMoves": "{{names}} holds the HR manager authority now. Giving it here takes it from them (what they were given from the HR set only; their role's permissions stay)."
   }
 }

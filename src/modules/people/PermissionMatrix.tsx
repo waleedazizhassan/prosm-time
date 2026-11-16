@@ -13,6 +13,7 @@ import HintText from "../../components/common/HintText";
 import Input from "../../components/common/Input";
 import Modal from "../../components/common/Modal";
 import Toggle from "../../components/common/Toggle";
+import HrMoveNotice from "./HrMoveNotice";
 
 // related permissions shown and changed as one line
 const MERGED: { id: string; keys: string[] }[] = [
@@ -175,6 +176,7 @@ export default function PermissionMatrix({ userId, catalog, effective, overrides
         <HintText>
           {pending?.kind === "reset" ? t("perms.resetExplain") : pending ? t("perms.lineExplain", { name: pending.line.label }) : null}
         </HintText>
+        {pending?.kind === "line" && pending.on && pending.line.keys.includes("hr.manage") ? <HrMoveNotice userId={userId} /> : null}
         <Input name="permission-reason" label={t("detail.reasonLabel")} value={reason} onChange={(e) => setReason(e.target.value)} required />
         {error ? <ErrorText>{error}</ErrorText> : null}
         <div style={{ display: "flex", gap: "var(--space-2)", justifyContent: "flex-end", marginTop: "var(--space-2)" }}>
