@@ -135,7 +135,11 @@
     "talking": "正在讲话… 松开发送",
     "today": "今天",
     "yesterday": "昨天",
-    "download": "下载"
+    "download": "下载",
+    "deleteMessage": "删除消息",
+    "deleteMessageConfirm": "从你的设备删除这条消息？对方仍会保留。",
+    "deleteChat": "删除对话",
+    "deleteChatConfirm": "从你的设备删除整个对话？对方仍会保留。"
   },
   "info": {
     "inSince": "自 {{time}} 起在岗",
@@ -217,5 +221,11 @@
     "missed": "📞 未接来电",
     "meeting_invite": "👥 会议邀请",
     "photo_request": "📷 拍照请求"
+  },
+  "callLog": {
+    "clear": "清空通话记录",
+    "clearConfirm": "从你的记录中清除所有通话？组织的记录仍会保留。",
+    "deleteOne": "从记录中移除",
+    "deleteOneConfirm": "从你的记录中移除这次通话？"
   }
 }

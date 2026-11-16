@@ -135,7 +135,11 @@
     "talking": "Vous parlez… relâchez pour envoyer",
     "today": "Aujourd'hui",
     "yesterday": "Hier",
-    "download": "Télécharger"
+    "download": "Télécharger",
+    "deleteMessage": "Supprimer le message",
+    "deleteMessageConfirm": "Supprimer ce message de votre appareil ? L'autre personne garde le sien.",
+    "deleteChat": "Supprimer la discussion",
+    "deleteChatConfirm": "Supprimer toute la discussion de votre appareil ? L'autre personne garde la sienne."
   },
   "info": {
     "inSince": "Présent depuis {{time}}",
@@ -217,5 +221,11 @@
     "missed": "📞 Appel manqué",
     "meeting_invite": "👥 Invitation à une réunion",
     "photo_request": "📷 Demande de photo"
+  },
+  "callLog": {
+    "clear": "Effacer le journal d'appels",
+    "clearConfirm": "Retirer tous les appels de votre journal ? L'historique de l'organisation reste.",
+    "deleteOne": "Retirer du journal",
+    "deleteOneConfirm": "Retirer cet appel de votre journal ?"
   }
 }

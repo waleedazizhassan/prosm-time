@@ -135,7 +135,11 @@
     "talking": "Talking… let go to send",
     "today": "Today",
     "yesterday": "Yesterday",
-    "download": "Download"
+    "download": "Download",
+    "deleteMessage": "Delete message",
+    "deleteMessageConfirm": "Delete this message from your device? The other person keeps theirs.",
+    "deleteChat": "Delete chat",
+    "deleteChatConfirm": "Delete the whole chat from your device? The other person keeps theirs."
   },
   "info": {
     "inSince": "In since {{time}}",
@@ -217,5 +221,11 @@
     "missed": "📞 Missed call",
     "meeting_invite": "👥 Meeting invitation",
     "photo_request": "📷 Photo request"
+  },
+  "callLog": {
+    "clear": "Clear call log",
+    "clearConfirm": "Clear every call from your log? The organisation's record stays.",
+    "deleteOne": "Remove from log",
+    "deleteOneConfirm": "Remove this call from your log?"
   }
 }

@@ -135,7 +135,11 @@
     "talking": "Sprechen… loslassen zum Senden",
     "today": "Heute",
     "yesterday": "Gestern",
-    "download": "Herunterladen"
+    "download": "Herunterladen",
+    "deleteMessage": "Nachricht löschen",
+    "deleteMessageConfirm": "Diese Nachricht von deinem Gerät löschen? Die andere Person behält ihre.",
+    "deleteChat": "Chat löschen",
+    "deleteChatConfirm": "Den ganzen Chat von deinem Gerät löschen? Die andere Person behält ihren."
   },
   "info": {
     "inSince": "Anwesend seit {{time}}",
@@ -217,5 +221,11 @@
     "missed": "📞 Verpasster Anruf",
     "meeting_invite": "👥 Besprechungseinladung",
     "photo_request": "📷 Fotoanfrage"
+  },
+  "callLog": {
+    "clear": "Anrufliste leeren",
+    "clearConfirm": "Alle Anrufe aus deiner Liste entfernen? Der Eintrag der Organisation bleibt.",
+    "deleteOne": "Aus Liste entfernen",
+    "deleteOneConfirm": "Diesen Anruf aus deiner Liste entfernen?"
   }
 }

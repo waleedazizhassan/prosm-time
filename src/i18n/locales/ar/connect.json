@@ -135,7 +135,11 @@
     "talking": "بتتكلم… سيب الزرار للإرسال",
     "today": "النهارده",
     "yesterday": "امبارح",
-    "download": "تنزيل"
+    "download": "تنزيل",
+    "deleteMessage": "حذف الرسالة",
+    "deleteMessageConfirm": "تحذف الرسالة من جهازك؟ الطرف الآخر تبقى عنده.",
+    "deleteChat": "حذف المحادثة",
+    "deleteChatConfirm": "تحذف المحادثة كلها من جهازك؟ الطرف الآخر تبقى عنده."
   },
   "info": {
     "inSince": "حاضر من {{time}}",
@@ -217,5 +221,11 @@
     "missed": "📞 مكالمة فائتة",
     "meeting_invite": "👥 دعوة اجتماع",
     "photo_request": "📷 طلب صورة"
+  },
+  "callLog": {
+    "clear": "مسح سجل المكالمات",
+    "clearConfirm": "تمسح كل المكالمات من سجلك؟ سجل المؤسسة يبقى كما هو.",
+    "deleteOne": "حذف من السجل",
+    "deleteOneConfirm": "تحذف المكالمة من سجلك؟"
   }
 }

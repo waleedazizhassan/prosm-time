@@ -1,11 +1,12 @@
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ArrowRight, Camera, Check, CheckCheck, Clock3, Download, FileText, Image as ImageIcon, Mic, Phone, PhoneMissed, Plus, Radio, Send, Users, Video } from "lucide-react";
+import { ArrowRight, Camera, Check, CheckCheck, Clock3, Download, FileText, Image as ImageIcon, Mic, Phone, PhoneMissed, Plus, Radio, Send, Trash2, Users, Video } from "lucide-react";
 
 import type { ConnectPerson } from "../../core/repositories/ConnectRepository";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
 import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
 import Avatar from "../../components/common/Avatar";
+import useConfirm from "../../components/common/useConfirm";
 import { ConnectEngine } from "./engine/ConnectEngine";
 import type { LocalMessage } from "./engine/localStore";
 import { VoiceRecorder, compressImage, formatBytes, formatDuration } from "./engine/media";
@@ -44,6 +45,19 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
   const list = useRef<HTMLDivElement>(null);
   const urls = useRef(new Map<string, string>());
   const [, setUrlTick] = useState(0);
+  // owner 2026-11-16: delete a message or the whole conversation (from this device; the other side keeps theirs)
+  const [confirm, confirmDialog] = useConfirm();
+  const deleteMessage = async (m: LocalMessage) => {
+    if (!(await confirm(t("chat.deleteMessageConfirm")))) return;
+    await ConnectEngine.deleteMessages(conversationId, [m.id]);
+    urls.current.delete(m.id);
+    await load();
+  };
+  const deleteConversation = async () => {
+    if (!(await confirm(t("chat.deleteChatConfirm")))) return;
+    await ConnectEngine.deleteConversation(conversationId);
+    onBack?.();
+  };
 
   const load = useCallback(async () => {
     setMessages(await ConnectEngine.messages(conversationId));
@@ -57,9 +71,16 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
       if ((m as LocalMessage).conversationId === conversationId) void load();
     });
     const offStatus = ConnectEngine.on("status", () => void load());
+    // QA-019 (2026-11-16): a chat opened before Connect had started (a reload, a link) read nothing and showed "no
+    // messages yet" - it reads again when the engine is ready (and after a deletion)
+    const offReady = ConnectEngine.on("conversations", () => {
+      void load();
+      void ConnectEngine.markRead(conversationId);
+    });
     return () => {
       offMessage();
       offStatus();
+      offReady();
       if (ConnectEngine.openConversation === conversationId) ConnectEngine.openConversation = null;
     };
   }, [conversationId, load]);
@@ -217,6 +238,9 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
         {siteId && !m.mine ? <b className={styles.sender}>{connect?.people.get(m.fromUser)?.fullName ?? ""}</b> : null}
         {content}
         <span className={styles.time}>{formatTimeOnly(m.createdAt, i18n.language)} {tick(m)}</span>
+        <button type="button" className={styles.deleteOne} aria-label={t("chat.deleteMessage")} title={t("chat.deleteMessage")} onClick={() => void deleteMessage(m)}>
+          <Trash2 size={13} aria-hidden="true" />
+        </button>
       </div>
     );
   };
@@ -238,7 +262,9 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
             <GlassButton label={t("actions.videoCall")} tone="primary" size="small" onClick={() => void connect?.startCall(person.id, "video")}><Video size={16} /></GlassButton>
           </>
         ) : null}
+        {messages.length > 0 ? <GlassButton label={t("chat.deleteChat")} size="small" onClick={() => void deleteConversation()}><Trash2 size={16} /></GlassButton> : null}
       </header>
+      {confirmDialog}
 
       <div className={styles.list} ref={list}>
         {messages.length === 0 ? <p className={styles.empty}>{t("chat.empty")}</p> : messages.map((m, i) => {

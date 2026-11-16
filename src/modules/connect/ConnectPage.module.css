@@ -728,3 +728,24 @@
 .personRow > .rowOn {
   background: transparent;
 }
+
+/* owner 2026-11-16: clear the call log (mine only) */
+.clearLog {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border-light);
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: var(--font-xs);
+  cursor: pointer;
+}
+
+.clearLog:hover {
+  color: var(--status-danger-text, #f87171);
+  border-color: currentColor;
+}

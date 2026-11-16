@@ -375,6 +375,35 @@ class Engine {
     return true;
   }
 
+  /** owner 2026-11-16: delete messages for me (this device) - the other side keeps theirs. */
+  async deleteMessages(conversationId: string, ids: string[]) {
+    const me = this.me;
+    if (!me || ids.length === 0) return;
+    await LocalStore.deleteMessages(me.userId, ids);
+    // the conversation's last line follows what is left
+    const left = await LocalStore.messages(me.userId, conversationId);
+    const conversation = await LocalStore.getConversation(me.userId, conversationId);
+    if (conversation) {
+      const last = left[left.length - 1];
+      await LocalStore.putConversation(me.userId, { ...conversation, lastPreview: last ? preview(last) : "", lastAt: last?.createdAt ?? conversation.lastAt });
+    }
+    this.emit("conversations");
+  }
+
+  /** owner 2026-11-16: delete a whole conversation from this device. */
+  async deleteConversation(conversationId: string) {
+    const me = this.me;
+    if (!me) return;
+    await LocalStore.deleteConversation(me.userId, conversationId);
+    this.emit("conversations");
+  }
+
+  /** owner 2026-11-16: remove calls from my call log (null = all); the organisation's record stays. */
+  async hideCalls(callIds: string[] | null): Promise<boolean> {
+    const { error } = await this.supabase.rpc("prosm_time_connect_hide_calls", { p_call_ids: callIds });
+    return !error;
+  }
+
   async messages(conversationId: string) {
     return this.me ? LocalStore.messages(this.me.userId, conversationId) : [];
   }

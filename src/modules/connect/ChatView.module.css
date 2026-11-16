@@ -374,3 +374,36 @@ button.file {
   background: rgba(30, 64, 175, 0.72);
   border-color: rgba(255, 255, 255, 0.25);
 }
+
+/* owner 2026-11-16: delete a message - a small bin on the bubble, shown on hover / keyboard focus (always on touch) */
+.bubble {
+  position: relative;
+}
+
+.deleteOne {
+  position: absolute;
+  top: 4px;
+  inset-inline-end: 4px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--surface-card) 70%, transparent);
+  color: var(--text-secondary);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.bubble:hover .deleteOne,
+.deleteOne:focus-visible {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .deleteOne {
+    opacity: 0.55;
+  }
+}

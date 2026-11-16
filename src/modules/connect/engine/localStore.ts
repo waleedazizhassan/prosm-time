@@ -217,6 +217,21 @@ export const LocalStore = {
     return freed;
   },
 
+  /** owner 2026-11-16: delete messages from this device (and their files). */
+  async deleteMessages(userId: string, ids: string[]): Promise<void> {
+    for (const id of ids) {
+      await tx(userId, "messages", "readwrite", (s) => s.delete(id));
+      await tx(userId, "blobs", "readwrite", (s) => s.delete(id));
+    }
+  },
+
+  /** owner 2026-11-16: delete a whole conversation from this device - its messages, their files and the entry. */
+  async deleteConversation(userId: string, conversationId: string): Promise<void> {
+    const rows = (await tx<StoredMessage[]>(userId, "messages", "readonly", (s) => s.getAll())) ?? [];
+    await this.deleteMessages(userId, rows.filter((row) => row.conversationId === conversationId).map((row) => row.id));
+    await tx(userId, "conversations", "readwrite", (s) => s.delete(conversationId));
+  },
+
   /** Sign-out: the person's Connect data leaves this device. */
   async wipe(userId: string): Promise<void> {
     if (dbOwner === userId && dbPromise) {

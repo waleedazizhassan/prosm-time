@@ -135,7 +135,11 @@
     "talking": "Stai parlando… rilascia per inviare",
     "today": "Oggi",
     "yesterday": "Ieri",
-    "download": "Scarica"
+    "download": "Scarica",
+    "deleteMessage": "Elimina messaggio",
+    "deleteMessageConfirm": "Eliminare questo messaggio dal tuo dispositivo? L'altra persona conserva il suo.",
+    "deleteChat": "Elimina chat",
+    "deleteChatConfirm": "Eliminare tutta la chat dal tuo dispositivo? L'altra persona conserva la sua."
   },
   "info": {
     "inSince": "Presente dalle {{time}}",
@@ -217,5 +221,11 @@
     "missed": "📞 Chiamata persa",
     "meeting_invite": "👥 Invito a riunione",
     "photo_request": "📷 Richiesta di foto"
+  },
+  "callLog": {
+    "clear": "Svuota registro chiamate",
+    "clearConfirm": "Togliere tutte le chiamate dal tuo registro? Il registro dell'organizzazione resta.",
+    "deleteOne": "Togli dal registro",
+    "deleteOneConfirm": "Togliere questa chiamata dal tuo registro?"
   }
 }

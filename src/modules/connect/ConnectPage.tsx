@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { HardDrive, MessageCircle, Phone, PhoneCall, PhoneIncoming, PhoneMissed, PhoneOutgoing, Radio, Search, Users, Video, Volume2 } from "lucide-react";
+import { HardDrive, MessageCircle, Phone, PhoneCall, PhoneIncoming, PhoneMissed, PhoneOutgoing, Radio, Search, Trash2, Users, Video, Volume2 } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
@@ -10,6 +10,7 @@ import { formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import Avatar from "../../components/common/Avatar";
 import EmptyState from "../../components/common/EmptyState";
+import useConfirm from "../../components/common/useConfirm";
 import { ConnectEngine } from "./engine/ConnectEngine";
 import type { LocalConversation } from "./engine/localStore";
 import { useConnectContext } from "./ConnectProvider";
@@ -47,6 +48,13 @@ export default function ConnectPage() {
   const [meetingMedia, setMeetingMedia] = useState<"video" | "audio">("video");
   const [invitees, setInvitees] = useState<string[]>([]);
   const [meetingTitle, setMeetingTitle] = useState("");
+  // owner 2026-11-16: remove calls from MY log (the organisation's record stays)
+  const [confirm, confirmDialog] = useConfirm();
+  const hideCalls = async (ids: string[] | null) => {
+    if (!(await confirm(t(ids ? "callLog.deleteOneConfirm" : "callLog.clearConfirm")))) return;
+    if (await ConnectEngine.hideCalls(ids)) setCalls((list) => (ids ? (list ?? []).filter((c) => !ids.includes(c.id)) : []));
+    else setError(t("actionFailed"));
+  };
   const people = connect?.people ?? new Map<string, ConnectPerson>();
   // owner 2026-11-14: the owner sees everyone; nobody else sees the owner in the lists (a conversation the owner
   // started still shows, so it can be answered)
@@ -262,6 +270,9 @@ export default function ConnectPage() {
       ) : tab === "calls" ? (
         !features?.calls ? <EmptyState message={t("callsNotInPlan")} /> : calls === null ? null : calls.length === 0 ? <EmptyState message={t("noCalls")} /> : (
           <div className={styles.scroll}>
+          <button type="button" className={styles.clearLog} onClick={() => void hideCalls(null)}>
+            <Trash2 size={14} aria-hidden="true" /> {t("callLog.clear")}
+          </button>
           <ul className={styles.list}>
             {calls.map((c) => {
               const p = people.get(c.otherId);
@@ -281,6 +292,7 @@ export default function ConnectPage() {
                   <span className={styles.actions}>
                     <GlassButton label={t("actions.audioCall")} size="small" onClick={() => void connect?.startCall(c.otherId, "audio")}><Phone size={16} /></GlassButton>
                     <GlassButton label={t("actions.videoCall")} tone="primary" size="small" onClick={() => void connect?.startCall(c.otherId, "video")}><Video size={16} /></GlassButton>
+                    <GlassButton label={t("callLog.deleteOne")} size="small" onClick={() => void hideCalls([c.id])}><Trash2 size={15} /></GlassButton>
                   </span>
                 </li>
               );
@@ -345,6 +357,7 @@ export default function ConnectPage() {
           </dl>
         </aside>
       ) : null}
+      {confirmDialog}
       {storage ? <StoragePanel onClose={() => setStorage(false)} /> : null}
       {sounds ? <SoundSettings onClose={() => setSounds(false)} /> : null}
     </div>
