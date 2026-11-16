@@ -216,6 +216,7 @@ export default function ManagerDashboard() {
   const time = (value: string) => formatTimeOnly(value, i18n.language);
   const kpi = data?.kpi;
   const priorities = data?.priorities ?? {};
+  const approvalsShown = !hidden.includes("approvals" as WidgetId);
   const priorityChips = [
     { key: "longSessions", to: "/manager" },
     { key: "pendingHours", to: "/manager" },
@@ -227,7 +228,10 @@ export default function ManagerDashboard() {
     { key: "timesheets", to: "/timesheets" },
     { key: "integrity", to: "/manager" },
     { key: "permissions", to: "/manager" },
-  ].filter((chip) => (priorities[chip.key] ?? 0) > 0);
+  ].filter((chip) => (priorities[chip.key] ?? 0) > 0)
+    // owner 2026-11-16 ("nothing shown twice"): what the approvals card already lists is not repeated as a chip;
+    // with that card hidden the chips come back, so nothing waiting is ever out of sight
+    .filter((chip) => !(approvalsShown && QUEUED_IN_APPROVALS.has(chip.key)));
 
   // External workers are counted apart from the employees (never in "here now").
   const externalNow = (data?.sites ?? []).reduce((sum, site) => sum + (site.external?.presentNow ?? 0), 0);
@@ -971,6 +975,10 @@ function ScheduleChart({ data, mode, t, language }: { data: Dashboard | null; mo
     </>
   );
 }
+
+// the kinds the approvals card lists (ApprovalsQueue): exceptions incl. out-of-range, corrections, leave, allowance
+// sheets, permissions, hours to confirm, timesheets, integrity flags
+const QUEUED_IN_APPROVALS = new Set(["outsideExceptions", "corrections", "leave", "allowanceSheets", "permissions", "pendingHours", "timesheets", "integrity"]);
 
 // owner 2026-11-16 ("no card left alone on the screen - one that is alone takes the whole width"): the cards are
 // placed in rows of 12 (7 / 5 / 4 / 12 on a wide screen, 6 / 12 on a medium one, in the reader's own order and
