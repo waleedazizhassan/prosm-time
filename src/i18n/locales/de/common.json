@@ -396,7 +396,8 @@
     "ownershipNotReady": "Die Eigentumsübertragung ist noch nicht bereit.",
     "chooseActiveMember": "Wählen Sie ein aktives Mitglied der Organisation.",
     "meetingEnded": "Diese Besprechung ist beendet.",
-    "meetingFull": "Diese Besprechung ist voll."
+    "meetingFull": "Diese Besprechung ist voll.",
+    "waitingForHr": "Wartet auf HR"
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

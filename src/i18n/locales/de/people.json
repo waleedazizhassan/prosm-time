@@ -85,7 +85,8 @@
     "announcements.manage": "Alle Mitteilungen verwalten",
     "announcements.view_reads": "Sehen, wer Mitteilungen gelesen hat",
     "departments.manage": "Abteilungen verwalten",
-    "hr.manage": "Personalakten verwalten"
+    "hr.manage": "Personalakten verwalten",
+    "hr.approve_all_requests": "Alle nicht sensiblen Anträge entscheiden (HR)"
   },
   "invite": {
     "actionLabel": "Mitarbeiter einladen",

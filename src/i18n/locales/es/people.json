@@ -85,7 +85,8 @@
     "announcements.manage": "Gestionar todos los anuncios",
     "announcements.view_reads": "Ver quién leyó los anuncios",
     "departments.manage": "Gestionar departamentos",
-    "hr.manage": "Gestionar expedientes"
+    "hr.manage": "Gestionar expedientes",
+    "hr.approve_all_requests": "Decidir las solicitudes no sensibles de todos (RR. HH.)"
   },
   "invite": {
     "actionLabel": "Invitar empleado",

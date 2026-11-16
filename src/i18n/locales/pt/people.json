@@ -85,7 +85,8 @@
     "announcements.manage": "Gerir todos os anúncios",
     "announcements.view_reads": "Ver quem leu os anúncios",
     "departments.manage": "Gerir departamentos",
-    "hr.manage": "Gerir fichas de pessoal"
+    "hr.manage": "Gerir fichas de pessoal",
+    "hr.approve_all_requests": "Decidir os pedidos não sensíveis de todos (RH)"
   },
   "invite": {
     "actionLabel": "Convidar funcionário",

@@ -396,7 +396,8 @@
     "ownershipNotReady": "所有权转让尚未就绪。",
     "chooseActiveMember": "请选择组织中的在职成员。",
     "meetingEnded": "此会议已结束。",
-    "meetingFull": "会议人数已满。"
+    "meetingFull": "会议人数已满。",
+    "waitingForHr": "等待人力资源"
   },
   "pageLoad": {
     "title": "此页面需要网络连接",

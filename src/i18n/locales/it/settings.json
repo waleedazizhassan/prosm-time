@@ -395,5 +395,28 @@
     "confirm": "Rinumerare tutti per data di assunzione? I codici attuali cambieranno.",
     "done": "{{count}} dipendenti rinumerati.",
     "failed": "Non rinumerato. Riprova."
+  },
+  "approvalModes": {
+    "title": "Come si approvano le ferie",
+    "subtitle": "Chi decide le richieste. Paghe, permessi, fatturazione, chiavi e proprietà restano sempre al proprietario.",
+    "direct": {
+      "title": "Diretto (predefinito)",
+      "hint": "Qualsiasi responsabile della persona (del suo sito o reparto), le risorse umane o il proprietario. Un passaggio."
+    },
+    "decentralized": {
+      "title": "Decentrato",
+      "hint": "Il responsabile del sito, altrimenti del reparto, altrimenti le risorse umane, poi il proprietario. Un passaggio: chi decide per primo chiude."
+    },
+    "centralized": {
+      "title": "Centralizzato",
+      "hint": "Solo le risorse umane (il proprietario come riserva)."
+    },
+    "two_step": {
+      "title": "In due passaggi",
+      "hint": "Prima il responsabile del sito o del reparto, poi le risorse umane: servono entrambi. Senza responsabile diretto va subito alle risorse umane."
+    },
+    "sources": "Risorse umane = chi ha \"Decidere tutte le richieste non sensibili\". I responsabili di reparto si impostano in Reparti. Il proprietario e i delegati decidono sempre.",
+    "saved": "Salvato.",
+    "failed": "Non salvato. Riprova."
   }
 }

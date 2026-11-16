@@ -85,7 +85,8 @@
     "announcements.manage": "Manage all announcements",
     "announcements.view_reads": "See who read announcements",
     "departments.manage": "Manage departments",
-    "hr.manage": "Manage personnel files"
+    "hr.manage": "Manage personnel files",
+    "hr.approve_all_requests": "Decide every employee's non-sensitive requests (HR)"
   },
   "invite": {
     "actionLabel": "Invite employee",

@@ -393,5 +393,28 @@
     "confirm": "Number every employee again by hiring date? Current codes will change.",
     "done": "{{count}} employees numbered again.",
     "failed": "Not numbered again. Try again."
+  },
+  "approvalModes": {
+    "title": "How leave is approved",
+    "subtitle": "Who decides leave requests. Payroll, permissions, billing, keys and ownership always stay with the owner.",
+    "direct": {
+      "title": "Direct (default)",
+      "hint": "Any manager responsible for the person (their site or department manager), HR, or the owner. One step."
+    },
+    "decentralized": {
+      "title": "Decentralized",
+      "hint": "The site manager, else the department manager, else HR, then the owner. One step - the first to decide closes it."
+    },
+    "centralized": {
+      "title": "Centralized",
+      "hint": "HR only (the owner as fallback)."
+    },
+    "two_step": {
+      "title": "Two steps",
+      "hint": "The site or department manager approves first, then HR - both are needed. With no direct manager it goes straight to HR."
+    },
+    "sources": "HR = whoever holds \"Decide every employee's non-sensitive requests\". Department managers are set under Departments. The owner and deputies always decide.",
+    "saved": "Saved.",
+    "failed": "Not saved. Try again."
   }
 }

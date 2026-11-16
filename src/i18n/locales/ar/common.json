@@ -396,7 +396,8 @@
     "ownershipNotReady": "نقل الملكية غير جاهز للإتمام.",
     "chooseActiveMember": "اختر عضوًا نشطًا في المؤسسة.",
     "meetingEnded": "هذا الاجتماع انتهى.",
-    "meetingFull": "الاجتماع ممتلئ."
+    "meetingFull": "الاجتماع ممتلئ.",
+    "waitingForHr": "بانتظار الموارد البشرية"
   },
   "pageLoad": {
     "title": "الصفحة دي محتاجة إنترنت",

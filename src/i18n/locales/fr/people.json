@@ -85,7 +85,8 @@
     "announcements.manage": "Gérer toutes les annonces",
     "announcements.view_reads": "Voir qui a lu les annonces",
     "departments.manage": "Gérer les services",
-    "hr.manage": "Gérer les dossiers du personnel"
+    "hr.manage": "Gérer les dossiers du personnel",
+    "hr.approve_all_requests": "Décider des demandes non sensibles de tous (RH)"
   },
   "invite": {
     "actionLabel": "Inviter un employé",

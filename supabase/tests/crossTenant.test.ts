@@ -79,6 +79,12 @@ const TABLES: Record<string, string> = {
   // governance phases B and E (2026-11-15)
   attendance_revisions: byOrg,
   ownership_transfers: byOrg,
+  // 2026-11-16: Connect usage / call log / deletions and the approval modes - none of them readable directly
+  connect_turn_usage: byOrg,
+  connect_retractions: byOrg,
+  approval_modes: "select request_kind as id from %t where organization_id = $1",
+  connect_call_hidden: "select call_id as id from %t where user_id in (select id from users where organization_id = $1)",
+  connect_turn_alerts: "select server as id from %t where $1::uuid is not null",
   break_events: byOrg,
   camera_evidence: byOrg,
   correction_requests: byOrg,

@@ -395,5 +395,28 @@
     "confirm": "Renuméroter tous les employés selon la date d’embauche ? Les codes actuels changeront.",
     "done": "{{count}} employés renumérotés.",
     "failed": "Non renuméroté. Réessayez."
+  },
+  "approvalModes": {
+    "title": "Comment les congés sont approuvés",
+    "subtitle": "Qui décide des demandes. Paie, droits, facturation, clés et propriété restent toujours au propriétaire.",
+    "direct": {
+      "title": "Direct (par défaut)",
+      "hint": "Tout responsable de la personne (responsable de son site ou service), les RH ou le propriétaire. Une étape."
+    },
+    "decentralized": {
+      "title": "Décentralisé",
+      "hint": "Le responsable du site, sinon du service, sinon les RH, puis le propriétaire. Une étape : le premier qui décide clôt la demande."
+    },
+    "centralized": {
+      "title": "Centralisé",
+      "hint": "Les RH uniquement (le propriétaire en secours)."
+    },
+    "two_step": {
+      "title": "En deux étapes",
+      "hint": "Le responsable du site ou du service d’abord, puis les RH : les deux sont nécessaires. Sans responsable direct, elle va directement aux RH."
+    },
+    "sources": "RH = qui détient « Décider des demandes non sensibles de tous ». Les responsables de service se fixent dans Services. Le propriétaire et ses délégués décident toujours.",
+    "saved": "Enregistré.",
+    "failed": "Non enregistré. Réessayez."
   }
 }

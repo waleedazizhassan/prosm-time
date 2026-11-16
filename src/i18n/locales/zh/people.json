@@ -85,7 +85,8 @@
     "announcements.manage": "管理所有公告",
     "announcements.view_reads": "查看公告阅读情况",
     "departments.manage": "管理部门",
-    "hr.manage": "管理员工档案"
+    "hr.manage": "管理员工档案",
+    "hr.approve_all_requests": "决定所有员工的非敏感申请（人力资源）"
   },
   "invite": {
     "actionLabel": "邀请员工",

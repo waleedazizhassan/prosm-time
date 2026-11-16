@@ -396,7 +396,8 @@
     "ownershipNotReady": "Il trasferimento di proprietà non è pronto.",
     "chooseActiveMember": "Scegli un membro attivo dell'organizzazione.",
     "meetingEnded": "Questa riunione è terminata.",
-    "meetingFull": "Questa riunione è piena."
+    "meetingFull": "Questa riunione è piena.",
+    "waitingForHr": "In attesa delle risorse umane"
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

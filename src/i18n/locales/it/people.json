@@ -85,7 +85,8 @@
     "announcements.manage": "Gestire tutti gli annunci",
     "announcements.view_reads": "Vedere chi ha letto gli annunci",
     "departments.manage": "Gestire i reparti",
-    "hr.manage": "Gestire i fascicoli del personale"
+    "hr.manage": "Gestire i fascicoli del personale",
+    "hr.approve_all_requests": "Decidere tutte le richieste non sensibili (risorse umane)"
   },
   "invite": {
     "actionLabel": "Invita dipendente",

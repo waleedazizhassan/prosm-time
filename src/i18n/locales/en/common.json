@@ -396,7 +396,8 @@
     "ownershipNotReady": "The ownership transfer is not ready.",
     "chooseActiveMember": "Choose an active member of the organisation.",
     "meetingEnded": "This meeting has ended.",
-    "meetingFull": "This meeting is full."
+    "meetingFull": "This meeting is full.",
+    "waitingForHr": "Waiting for HR"
   },
   "pageLoad": {
     "title": "This page needs a connection",

@@ -393,5 +393,28 @@
     "confirm": "Alle Mitarbeitenden nach Eintrittsdatum neu nummerieren? Die aktuellen Nummern ändern sich.",
     "done": "{{count}} Mitarbeitende neu nummeriert.",
     "failed": "Nicht neu nummeriert. Versuch es noch einmal."
+  },
+  "approvalModes": {
+    "title": "Wie Urlaub genehmigt wird",
+    "subtitle": "Wer über Urlaubsanträge entscheidet. Lohn, Rechte, Abrechnung, Schlüssel und Eigentum bleiben immer beim Inhaber.",
+    "direct": {
+      "title": "Direkt (Standard)",
+      "hint": "Jede zuständige Leitung (Standort oder Abteilung), HR oder der Inhaber. Ein Schritt."
+    },
+    "decentralized": {
+      "title": "Dezentral",
+      "hint": "Standortleitung, sonst Abteilungsleitung, sonst HR, dann der Inhaber. Ein Schritt - wer zuerst entscheidet, schließt ab."
+    },
+    "centralized": {
+      "title": "Zentral",
+      "hint": "Nur HR (der Inhaber als Vertretung)."
+    },
+    "two_step": {
+      "title": "Zwei Schritte",
+      "hint": "Erst die Standort- oder Abteilungsleitung, dann HR - beide nötig. Ohne direkte Leitung geht es direkt an HR."
+    },
+    "sources": "HR = wer \"Alle nicht sensiblen Anträge entscheiden\" hat. Abteilungsleitungen unter Abteilungen. Inhaber und Vertretungen entscheiden immer.",
+    "saved": "Gespeichert.",
+    "failed": "Nicht gespeichert. Versuch es noch einmal."
   }
 }

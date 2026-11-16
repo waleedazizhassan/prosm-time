@@ -395,5 +395,28 @@
     "confirm": "¿Volver a numerar a todos por fecha de contratación? Los códigos actuales cambiarán.",
     "done": "{{count}} empleados numerados de nuevo.",
     "failed": "No se volvió a numerar. Inténtalo de nuevo."
+  },
+  "approvalModes": {
+    "title": "Cómo se aprueban las vacaciones",
+    "subtitle": "Quién decide las solicitudes. Nómina, permisos, facturación, claves y propiedad quedan siempre con el propietario.",
+    "direct": {
+      "title": "Directo (por defecto)",
+      "hint": "Cualquier responsable de la persona (jefe de su sitio o departamento), RR. HH. o el propietario. Un paso."
+    },
+    "decentralized": {
+      "title": "Descentralizado",
+      "hint": "El jefe del sitio, si no el del departamento, si no RR. HH., y luego el propietario. Un paso: el primero que decide la cierra."
+    },
+    "centralized": {
+      "title": "Centralizado",
+      "hint": "Solo RR. HH. (el propietario como respaldo)."
+    },
+    "two_step": {
+      "title": "En dos pasos",
+      "hint": "Primero el jefe del sitio o departamento, luego RR. HH.: hacen falta los dos. Sin jefe directo va directo a RR. HH."
+    },
+    "sources": "RR. HH. = quien tiene \"Decidir las solicitudes no sensibles de todos\". Los jefes de departamento se fijan en Departamentos. El propietario y sus adjuntos siempre deciden.",
+    "saved": "Guardado.",
+    "failed": "No se guardó. Inténtalo de nuevo."
   }
 }

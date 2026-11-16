@@ -85,7 +85,8 @@
     "announcements.manage": "إدارة كل الإعلانات",
     "announcements.view_reads": "رؤية من قرأ الإعلانات",
     "departments.manage": "إدارة الأقسام",
-    "hr.manage": "إدارة ملفات الموظفين"
+    "hr.manage": "إدارة ملفات الموظفين",
+    "hr.approve_all_requests": "البت في كل طلبات الموظفين غير الحساسة (الموارد البشرية)"
   },
   "invite": {
     "actionLabel": "دعوة موظف",

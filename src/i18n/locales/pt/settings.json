@@ -395,5 +395,28 @@
     "confirm": "Numerar todos de novo pela data de contratação? Os códigos atuais vão mudar.",
     "done": "{{count}} funcionários numerados de novo.",
     "failed": "Não foi renumerado. Tente de novo."
+  },
+  "approvalModes": {
+    "title": "Como as férias são aprovadas",
+    "subtitle": "Quem decide os pedidos. Folha, permissões, faturamento, chaves e propriedade ficam sempre com o proprietário.",
+    "direct": {
+      "title": "Direto (padrão)",
+      "hint": "Qualquer gestor responsável pela pessoa (do seu local ou departamento), RH ou o proprietário. Uma etapa."
+    },
+    "decentralized": {
+      "title": "Descentralizado",
+      "hint": "O gestor do local, senão o do departamento, senão o RH, depois o proprietário. Uma etapa: quem decide primeiro fecha."
+    },
+    "centralized": {
+      "title": "Centralizado",
+      "hint": "Só o RH (o proprietário como reserva)."
+    },
+    "two_step": {
+      "title": "Em duas etapas",
+      "hint": "Primeiro o gestor do local ou do departamento, depois o RH: os dois são necessários. Sem gestor direto vai direto ao RH."
+    },
+    "sources": "RH = quem tem \"Decidir os pedidos não sensíveis de todos\". Os gestores de departamento são definidos em Departamentos. O proprietário e os delegados sempre decidem.",
+    "saved": "Salvo.",
+    "failed": "Não foi salvo. Tente de novo."
   }
 }
