@@ -1,6 +1,8 @@
 // v2.3.43 step 15 (item 18): groups in role order, alphabetical inside,
 // one search across groups, "no results".
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render as rtlRender, screen, waitFor } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import type { ReactElement } from "react";
 import { describe, expect, it, vi } from "vitest";
 
 import type { DirectoryPerson } from "../../core/repositories/PeopleDirectoryRepository";
@@ -49,14 +51,18 @@ vi.mock("../../core/repositories/PeopleDirectoryRepository", () => ({
 
 import PeopleByRole from "./PeopleByRole";
 
+const render = (ui: ReactElement) => rtlRender(<MemoryRouter>{ui}</MemoryRouter>);
+
 describe("PeopleByRole", () => {
   it("shows the Owner on their own, then managers, supervisors, employees, viewers - names in order (owner 2026-11-13)", async () => {
     const { container } = render(<PeopleByRole />);
-    await waitFor(() => expect(container.querySelectorAll("section")).toHaveLength(5));
-    const titles = [...container.querySelectorAll("section")].map((section) => section.querySelector("button")!.textContent);
+    // owner, the (still empty) department managers with where to choose them, managers, supervisors, employees, viewers
+    await waitFor(() => expect(container.querySelectorAll("section")).toHaveLength(6));
+    const titles = [...container.querySelectorAll("section")].map((section) => (section.querySelector("button, div") as HTMLElement).textContent);
     expect(titles[0]).toContain("1");
-    expect(titles[1]).toContain("1");
-    const employeeNames = [...container.querySelectorAll("section")[3].querySelectorAll("li")].map((li) => li.textContent ?? "");
+    expect(titles[1]).toMatch(/departmentManagers|Department managers/);
+    expect(titles[2]).toContain("1");
+    const employeeNames = [...container.querySelectorAll("section")[4].querySelectorAll("li")].map((li) => li.textContent ?? "");
     expect(employeeNames[0]).toContain("Amr");
     expect(employeeNames[1]).toContain("Zeinab");
   });

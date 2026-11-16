@@ -265,7 +265,9 @@
       "ios": "iPhone",
       "web": "Navegador / computador"
     },
-    "managesDepartment": "Gere {{names}}"
+    "managesDepartment": "Gere {{names}}",
+    "noDepartmentManagers": "Nenhum departamento tem gestor ainda.",
+    "chooseDepartmentManagers": "Escolha em Configurações > Pessoas > Departamentos"
   },
   "deviceStatus": {
     "pending": "Aguardando",

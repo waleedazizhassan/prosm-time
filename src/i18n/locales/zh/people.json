@@ -265,7 +265,9 @@
       "ios": "iPhone",
       "web": "浏览器 / 电脑"
     },
-    "managesDepartment": "管理 {{names}}"
+    "managesDepartment": "管理 {{names}}",
+    "noDepartmentManagers": "还没有为任何部门指定经理。",
+    "chooseDepartmentManagers": "在 设置 > 人员 > 部门 中选择"
   },
   "deviceStatus": {
     "pending": "等待中",

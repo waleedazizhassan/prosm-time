@@ -265,7 +265,9 @@
       "ios": "iPhone",
       "web": "Navigateur / ordinateur"
     },
-    "managesDepartment": "Dirige {{names}}"
+    "managesDepartment": "Dirige {{names}}",
+    "noDepartmentManagers": "Aucun service n’a encore de responsable.",
+    "chooseDepartmentManagers": "Choisissez-les dans Paramètres > Personnes > Services"
   },
   "deviceStatus": {
     "pending": "En attente",

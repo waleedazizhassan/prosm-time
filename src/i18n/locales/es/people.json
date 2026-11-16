@@ -265,7 +265,9 @@
       "ios": "iPhone",
       "web": "Navegador / ordenador"
     },
-    "managesDepartment": "Dirige {{names}}"
+    "managesDepartment": "Dirige {{names}}",
+    "noDepartmentManagers": "Ningún departamento tiene jefe todavía.",
+    "chooseDepartmentManagers": "Elígelos en Ajustes > Personas > Departamentos"
   },
   "deviceStatus": {
     "pending": "Pendiente",

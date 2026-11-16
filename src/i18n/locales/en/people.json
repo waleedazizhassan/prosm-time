@@ -265,7 +265,9 @@
       "ios": "iPhone",
       "web": "Browser / desktop"
     },
-    "managesDepartment": "Manages {{names}}"
+    "managesDepartment": "Manages {{names}}",
+    "noDepartmentManagers": "No department has a manager yet.",
+    "chooseDepartmentManagers": "Choose them in Settings > People > Departments"
   },
   "deviceStatus": {
     "pending": "Waiting",

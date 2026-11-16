@@ -265,7 +265,9 @@
       "ios": "آيفون",
       "web": "متصفح / كمبيوتر"
     },
-    "managesDepartment": "مدير {{names}}"
+    "managesDepartment": "مدير {{names}}",
+    "noDepartmentManagers": "لسه ما اتحددش مدير لأي قسم.",
+    "chooseDepartmentManagers": "اختارهم من الإعدادات ← الأشخاص والحضور ← الأقسام"
   },
   "deviceStatus": {
     "pending": "في الانتظار",

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import BuzzButton from "../../components/common/BuzzButton";
 import { useTranslation } from "react-i18next";
 import { ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import PeopleDirectoryRepository, { type DirectoryPerson, type PersonStatus } from "../../core/repositories/PeopleDirectoryRepository";
 
@@ -116,7 +117,19 @@ export default function PeopleByRole({ compact = false, onOpen }: { compact?: bo
 
       {groups.map((group) => {
         const isCollapsed = Boolean(collapsed[group.key]);
-        return (
+        // owner 2026-11-16: the department managers' group shows even before any is chosen - with where to choose them
+        const emptyManagers = group.key === "owner" && !compact && departmentManagers.size === 0 && !query && !site && !status && !shift ? (
+          <section key="departmentManagers-empty" className={styles.group}>
+            <div className={styles.groupHeader}>
+              <span className={styles.groupTitle}>{t("byRole.groups.departmentManagers")}</span>
+              <span className={styles.count}>0</span>
+            </div>
+            <p style={{ margin: "var(--space-2) var(--space-3)", color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>
+              {t("byRole.noDepartmentManagers")} <Link to="/settings?tab=people">{t("byRole.chooseDepartmentManagers")}</Link>
+            </p>
+          </section>
+        ) : null;
+        return [
           <section key={group.key} className={styles.group}>
             <button type="button" className={styles.groupHeader} aria-expanded={!isCollapsed} onClick={() => setCollapsed((all) => ({ ...all, [group.key]: !isCollapsed }))}>
               <span className={styles.groupTitle}>{group.label ?? t(`byRole.groups.${group.key}`)}</span>
@@ -156,8 +169,9 @@ export default function PeopleByRole({ compact = false, onOpen }: { compact?: bo
                 ))}
               </ul>
             )}
-          </section>
-        );
+          </section>,
+          emptyManagers,
+        ];
       })}
     </div>
   );

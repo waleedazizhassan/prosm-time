@@ -265,7 +265,9 @@
       "ios": "iPhone",
       "web": "Browser / Computer"
     },
-    "managesDepartment": "Leitet {{names}}"
+    "managesDepartment": "Leitet {{names}}",
+    "noDepartmentManagers": "Noch keine Abteilung hat eine Leitung.",
+    "chooseDepartmentManagers": "Unter Einstellungen > Personen > Abteilungen festlegen"
   },
   "deviceStatus": {
     "pending": "Wartend",

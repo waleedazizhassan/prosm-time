@@ -265,7 +265,9 @@
       "ios": "iPhone",
       "web": "Браузер / компьютер"
     },
-    "managesDepartment": "Руководит: {{names}}"
+    "managesDepartment": "Руководит: {{names}}",
+    "noDepartmentManagers": "Ни у одного отдела пока нет руководителя.",
+    "chooseDepartmentManagers": "Выберите их в Настройках > Люди > Отделы"
   },
   "deviceStatus": {
     "pending": "Ожидает",

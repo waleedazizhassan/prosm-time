@@ -265,7 +265,9 @@
       "ios": "iPhone",
       "web": "Browser / computer"
     },
-    "managesDepartment": "Dirige {{names}}"
+    "managesDepartment": "Dirige {{names}}",
+    "noDepartmentManagers": "Nessun reparto ha ancora un responsabile.",
+    "chooseDepartmentManagers": "Sceglili in Impostazioni > Persone > Reparti"
   },
   "deviceStatus": {
     "pending": "In attesa",
