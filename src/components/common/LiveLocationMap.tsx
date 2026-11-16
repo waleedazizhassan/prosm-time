@@ -32,13 +32,17 @@ import styles from "./LiveLocationMap.module.css";
 // better than Leaflet's default blue pin anyway.
 // The base map itself (and its credit) comes from ./mapBase - owner 2026-11-15.
 
-function buildMarkerIcon(): L.DivIcon {
-  return L.divIcon({
-    className: styles.markerIcon,
-    html: '<span></span>',
-    iconSize: [16, 16],
-    iconAnchor: [8, 8],
-  });
+// owner 2026-11-16: the person is their picture on the map (their first letter without one), not a dot
+const escapeHtml = (value: string) => value.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] ?? c);
+function buildMarkerIcon(person?: { name: string; avatarUrl: string | null } | null): L.DivIcon {
+  if (!person) {
+    return L.divIcon({ className: styles.markerIcon, html: "<span></span>", iconSize: [16, 16], iconAnchor: [8, 8] });
+  }
+  const initial = escapeHtml((person.name.trim()[0] ?? "?").toUpperCase());
+  const inner = person.avatarUrl
+    ? `<img src="${escapeHtml(person.avatarUrl)}" alt="" referrerpolicy="no-referrer" onerror="this.replaceWith(document.createTextNode('${initial}'))" />`
+    : initial;
+  return L.divIcon({ className: styles.personIcon, html: `<span>${inner}</span>`, iconSize: [44, 44], iconAnchor: [22, 22] });
 }
 
 interface LiveLocationMapProps {
@@ -58,9 +62,11 @@ interface LiveLocationMapProps {
   tileMode?: "auto" | "light" | "dark";
   /** Owner 2026-11-15: the site's name as a glass label on its zone. */
   siteLabel?: string | null;
+  /** Owner 2026-11-16: the person shown at their place - their picture, or their first letter. */
+  person?: { name: string; avatarUrl: string | null } | null;
 }
 
-export default function LiveLocationMap({ latitude, longitude, site = null, height = 200, siteTone = "neutral", accuracyMeters = null, recenterLabel, recenterSignal = 0, tileMode = "auto", siteLabel = null }: LiveLocationMapProps) {
+export default function LiveLocationMap({ latitude, longitude, site = null, height = 200, siteTone = "neutral", accuracyMeters = null, recenterLabel, recenterSignal = 0, tileMode = "auto", siteLabel = null, person = null }: LiveLocationMapProps) {
   const { resolvedTheme } = useTheme();
   const { i18n } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -124,7 +130,7 @@ export default function LiveLocationMap({ latitude, longitude, site = null, heig
     }
 
     if (latitude !== null && longitude !== null) {
-      markerRef.current = L.marker([latitude, longitude], { icon: buildMarkerIcon() }).addTo(map);
+      markerRef.current = L.marker([latitude, longitude], { icon: buildMarkerIcon(person) }).addTo(map);
       if (accuracyMeters && accuracyMeters > 0) {
         const markerColor = getComputedStyle(document.documentElement).getPropertyValue("--brand-primary").trim() || "#2563eb";
         accuracyRef.current = L.circle([latitude, longitude], { radius: accuracyMeters, color: markerColor, fillColor: markerColor, fillOpacity: 0.06, weight: 1, dashArray: "4 4", interactive: false }).addTo(map);
@@ -165,7 +171,7 @@ export default function LiveLocationMap({ latitude, longitude, site = null, heig
     } else if (latitude !== null && longitude !== null) {
       map.setView([latitude, longitude], 15);
     }
-  }, [latitude, longitude, site, siteTone, accuracyMeters, siteLabel]);
+  }, [latitude, longitude, site, siteTone, accuracyMeters, siteLabel, person?.name, person?.avatarUrl]);
 
   const recenter = () => {
     const map = mapRef.current;

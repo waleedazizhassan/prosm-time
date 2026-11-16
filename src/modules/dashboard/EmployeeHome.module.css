@@ -196,9 +196,20 @@
 /* owner 2026-11-16: on a computer the hours and reminders buttons sit in the strip under the map, side by side */
 @media (min-width: 901px) {
   .clockStage .floatingTools {
-    flex-direction: row;
-    bottom: 61px;
+    flex-direction: column;
+    bottom: 14px;
     inset-inline-end: auto;
     inset-inline-start: var(--space-5);
+  }
+}
+
+/* a phone: the hours and reminders column sits just above the clock buttons, never over them */
+@media (max-width: 900px) {
+  .floatingTools {
+    bottom: calc(64px + 18px + 120px + var(--safe-bottom, 0px));
+  }
+
+  .hoursPopover {
+    bottom: calc(64px + 18px + 120px + 3 * 46px + 3 * 8px + var(--safe-bottom, 0px));
   }
 }

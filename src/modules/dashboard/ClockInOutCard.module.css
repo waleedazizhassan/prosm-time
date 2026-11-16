@@ -622,3 +622,64 @@
     inset-inline-end: var(--space-5);
   }
 }
+
+/* ===== owner 2026-11-16 (a phone, 368 x 719): smaller buttons, nothing under the bottom bar, the card clear of the
+   header, SOS above the hours button ===== */
+.roundButton {
+  width: clamp(88px, 24vw, 108px);
+  font-size: 0.85rem;
+}
+
+.roundButton svg {
+  width: 28px;
+  height: 28px;
+}
+
+.sideButton {
+  width: clamp(58px, 16vw, 70px);
+  font-size: 0.64rem;
+}
+
+@media (max-width: 900px) {
+  .clockRoot {
+    margin-top: 0;
+  }
+
+  .mapInfo {
+    top: var(--space-3);
+  }
+
+  /* the buttons stand clear above the bottom bar (64px) with room for their breathing ring */
+  .fabBar {
+    bottom: calc(64px + 18px + var(--safe-bottom, 0px));
+  }
+
+  /* SOS at the top of the column of round buttons, above hours and reminders */
+  .sosFloat {
+    position: fixed;
+    top: auto;
+    bottom: calc(64px + 18px + 120px + 2 * 46px + 2 * 8px + var(--safe-bottom, 0px));
+    inset-inline-start: auto;
+    inset-inline-end: var(--space-4);
+    width: 46px;
+    height: 46px;
+    font-size: 18px;
+    z-index: 850;
+  }
+}
+
+@media (min-width: 901px) {
+  /* a computer: SOS sits above the hours and reminders buttons at the strip's start */
+  .sosFloat {
+    width: 46px;
+    height: 46px;
+    font-size: 18px;
+    bottom: calc(14px + 2 * 46px + 2 * 8px);
+    inset-inline-end: auto;
+    inset-inline-start: var(--space-5);
+  }
+
+  .fabBar {
+    min-height: 176px;
+  }
+}

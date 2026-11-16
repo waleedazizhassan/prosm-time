@@ -1271,6 +1271,7 @@ export default function ClockInOutCard() {
           recenterSignal={recenterTick}
           tileMode={mapStyle}
           siteLabel={mapRelevantSite?.name ?? null}
+          person={profile ? { name: profile.fullName ?? "", avatarUrl: profile.avatarUrl ?? null } : null}
         />
         {/* owner 2026-11-16: no compass, no layers, no "my location" button - the card on top brings the map back to
             the person, and the buttons sit under the map on a computer */}
