@@ -69,9 +69,19 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
   const tileRef = useRef<L.Layer | null>(null);
   const layerRef = useRef<L.LayerGroup | null>(null);
   const fittedRef = useRef(false);
+  const userMovedRef = useRef(false);
+  const framedFor = useRef("");
   // owner 2026-10-26: back to every site at once, and a key under the map
   const allBoundsRef = useRef<L.LatLngBounds | null>(null);
   const circlesRef = useRef(new Map<string, L.Circle>());
+  // owner 2026-11-16 ("no avatar hidden inside the map, none under the site cards"): when the map frames people it
+  // keeps their whole avatar (and its fanned-out neighbours) clear of the edges, the zoom / full-screen buttons on top
+  // and the row of site cards along the bottom - measured, so it fits whatever the row's height is.
+  const frame = (extra = 0): L.FitBoundsOptions => {
+    const keyHeight = keyRef.current?.offsetHeight ?? 0;
+    const side = 56 + extra;
+    return { paddingTopLeft: [side, 64 + extra], paddingBottomRight: [side, keyHeight + 40 + extra] };
+  };
   const [fullScreen, setFullScreen] = useState(false);
   const markersRef = useRef(new Map<string, L.Marker>());
   // who is inside which site's circle right now, and who is at none of them ("different places")
@@ -94,7 +104,18 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
     map.on("zoomend", labels);
     labels();
     layerRef.current = L.layerGroup().addTo(map);
+    // once the person moves or zooms the map themselves, it stops re-framing on its own
+    const byHand = (event: L.LeafletEvent) => { if ((event as L.LeafletEvent & { originalEvent?: Event }).originalEvent) userMovedRef.current = true; };
+    map.on("dragstart", () => { userMovedRef.current = true; });
+    map.on("zoomstart", byHand);
+    // the map's box settles after the page lays out (and the base map loads): frame again while untouched
+    const observer = typeof ResizeObserver !== "undefined" ? new ResizeObserver(() => {
+      map.invalidateSize({ pan: false });
+      if (!userMovedRef.current && allBoundsRef.current) map.fitBounds(allBoundsRef.current, { ...frame(), maxZoom: 16 });
+    }) : null;
+    observer?.observe(containerRef.current);
     return () => {
+      observer?.disconnect();
       map.remove();
       mapRef.current = null;
       layerRef.current = null;
@@ -147,7 +168,7 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
       const circle = L.circle([site.latitude, site.longitude], { radius: site.radius, color, fillColor: color, fillOpacity: 0.12, weight: 1.5 });
       circle.bindTooltip(`${escapeHtml(site.name)} · ${here}${site.expected ? ` / ${site.expected}` : ""}${site.external?.presentNow ? ` · ${escapeHtml(t("manager.map.external", { count: site.external.presentNow }))}` : ""}`, { permanent: true, direction: "top", className: styles.siteLabel, interactive: true });
       // owner 2026-10-26: a click on the site's name (or its circle) zooms to the site
-      circle.on("click", () => map.flyToBounds(circle.getBounds(), { padding: [24, 24], maxZoom: 17, duration: 0.6 }));
+      circle.on("click", () => map.flyToBounds(circle.getBounds(), { ...frame(), maxZoom: 17, duration: 0.6 }));
       circle.addTo(layer);
       circlesRef.current.set(site.id, circle);
       bounds.extend(circle.getBounds());
@@ -172,9 +193,12 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
       bounds.extend([lat, lng]);
     }
     allBoundsRef.current = bounds.isValid() ? bounds : null;
-    if (bounds.isValid() && !fittedRef.current) {
-      map.fitBounds(bounds, { padding: [28, 28], maxZoom: 16 });
+    // framed again whenever who is on the map changes (people arrive after the sites), until moved by hand
+    const who = placed.filter((p) => p.lat !== null && p.lng !== null).map((p) => p.person.userId).sort().join(",");
+    if (bounds.isValid() && !userMovedRef.current && (!fittedRef.current || framedFor.current !== who)) {
+      map.fitBounds(bounds, { ...frame(), maxZoom: 16 });
       fittedRef.current = true;
+      framedFor.current = who;
     }
   }, [sites, placed, t, insideCount]);
 
@@ -184,11 +208,12 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
   }, [fullScreen]);
 
   const showAll = () => {
-    if (allBoundsRef.current) mapRef.current?.flyToBounds(allBoundsRef.current, { padding: [28, 28], maxZoom: 16, duration: 0.6 });
+    userMovedRef.current = false;
+    if (allBoundsRef.current) mapRef.current?.flyToBounds(allBoundsRef.current, { ...frame(), maxZoom: 16, duration: 0.6 });
   };
   const goTo = (siteId: string) => {
     const circle = circlesRef.current.get(siteId);
-    if (circle) mapRef.current?.flyToBounds(circle.getBounds(), { padding: [24, 24], maxZoom: 17, duration: 0.6 });
+    if (circle) mapRef.current?.flyToBounds(circle.getBounds(), { ...frame(), maxZoom: 17, duration: 0.6 });
   };
   // the key: every site on the map, the ones with people first
   const keyed = sites
@@ -249,7 +274,7 @@ export default function SitesMap({ sites, people }: { sites: DashboardSite[]; pe
   const showElsewhere = () => {
     setListFor((v) => (v === ELSEWHERE ? null : ELSEWHERE));
     const points = elsewhere.filter((p) => p.lat !== null && p.lng !== null).map((p) => [p.lat as number, p.lng as number] as [number, number]);
-    if (points.length > 0) mapRef.current?.flyToBounds(L.latLngBounds(points), { padding: [36, 36], maxZoom: 14, duration: 0.6 });
+    if (points.length > 0) mapRef.current?.flyToBounds(L.latLngBounds(points), { ...frame(8), maxZoom: 14, duration: 0.6 });
   };
   const showSite = (siteId: string) => {
     goTo(siteId);
