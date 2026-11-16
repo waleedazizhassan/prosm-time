@@ -44,7 +44,8 @@
     "pending": "Ausstehend",
     "approved": "Genehmigt",
     "rejected": "Abgelehnt",
-    "cancelled": "Storniert"
+    "cancelled": "Storniert",
+    "awaitingHr": "Wartet auf HR"
   },
   "permission": {
     "title": "Genehmigung beantragen",

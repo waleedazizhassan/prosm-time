@@ -27,6 +27,7 @@ interface MyPermission {
   paid: boolean;
   reason: string;
   review_notes: string | null;
+  approval_step?: number | null;
 }
 
 // v2.3.43 step 6 (item 23): the employee asks for a permission in advance
@@ -45,13 +46,17 @@ export default function PermissionRequestCard() {
 
   const load = useCallback(async () => {
     if (!profile?.id) return;
-    const { data } = await DatabaseManager.getClient()
+    const columns = "id, work_date, kind, minutes, status, paid, reason, review_notes";
+    const read = (withStep: boolean) => DatabaseManager.getClient()
       .from("attendance_permissions")
-      .select("id, work_date, kind, minutes, status, paid, reason, review_notes")
+      .select(withStep ? `${columns}, approval_step` : columns)
       .eq("user_id", profile.id)
       .order("work_date", { ascending: false })
       .limit(10);
-    setMine((data ?? []) as MyPermission[]);
+    // phase F: the approval step (a server without it: as before)
+    let { data, error } = await read(true);
+    if (error && /approval_step/.test(error.message)) ({ data } = await read(false));
+    setMine((data ?? []) as unknown as MyPermission[]);
   }, [profile?.id]);
 
   useEffect(() => {
@@ -100,7 +105,7 @@ export default function PermissionRequestCard() {
             <ListRow key={row.id}>
               <div>
                 <div style={{ fontSize: "var(--font-sm)", color: "var(--text-primary)", fontWeight: "var(--font-weight-semibold)" }}>
-                  {t(`permission.kind.${row.kind}`)} · {formatDateOnly(row.work_date, i18n.language)} · {t(`permission.status.${row.status}`)}
+                  {t(`permission.kind.${row.kind}`)} · {formatDateOnly(row.work_date, i18n.language)} · {row.status === "pending" && row.approval_step === 2 ? t("status.awaitingHr") : t(`permission.status.${row.status}`)}
                   {row.status === "approved" && (row.kind === "late_arrival" || row.kind === "early_leave") ? ` · ${row.paid ? t("permission.noDeduction") : t("permission.partialDeduction")}` : ""}
                 </div>
                 <div style={{ fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>{row.review_notes ?? row.reason}</div>

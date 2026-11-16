@@ -44,7 +44,8 @@
     "pending": "На рассмотрении",
     "approved": "Одобрено",
     "rejected": "Отклонено",
-    "cancelled": "Отменено"
+    "cancelled": "Отменено",
+    "awaitingHr": "Ждёт отдел кадров"
   },
   "permission": {
     "title": "Попросить разрешение",

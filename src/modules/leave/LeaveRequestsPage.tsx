@@ -205,7 +205,7 @@ function LeaveView({ mode }: { mode: "mine" | "org" }) {
     { key: "dates", header: t("columns.dates"), render: (row) => `${formatDateOnly(row.startDate, i18n.language)} — ${formatDateOnly(row.endDate, i18n.language)}` },
     { key: "days", header: t("columns.days"), render: (row) => row.daysCount },
     { key: "reason", header: t("columns.reason"), render: (row) => row.reason ?? "—" },
-    { key: "status", header: t("columns.status"), render: (row) => <StatusBadge status={STATUS_BADGE_KEY[row.status]}>{t(`status.${row.status}`)}</StatusBadge> },
+    { key: "status", header: t("columns.status"), render: (row) => <StatusBadge status={STATUS_BADGE_KEY[row.status]}>{row.awaitingHr ? t("status.awaitingHr") : t(`status.${row.status}`)}</StatusBadge> },
     // v2.3.43 step 9 (item 19): the deduction of an approved unpaid leave.
     {
       key: "deduction",

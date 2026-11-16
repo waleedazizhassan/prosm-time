@@ -44,7 +44,8 @@
     "pending": "In attesa",
     "approved": "Approvata",
     "rejected": "Rifiutata",
-    "cancelled": "Annullata"
+    "cancelled": "Annullata",
+    "awaitingHr": "In attesa delle risorse umane"
   },
   "permission": {
     "title": "Chiedi un permesso",

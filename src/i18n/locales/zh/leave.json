@@ -44,7 +44,8 @@
     "pending": "待批",
     "approved": "已批准",
     "rejected": "已拒绝",
-    "cancelled": "已取消"
+    "cancelled": "已取消",
+    "awaitingHr": "等待人力资源"
   },
   "permission": {
     "title": "申请许可",
