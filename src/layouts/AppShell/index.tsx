@@ -20,6 +20,7 @@ import ConnectProvider from "../../modules/connect/ConnectProvider";
 import TrialBanner from "./TrialBanner";
 import ReadOnlyBanner from "./ReadOnlyBanner";
 import LanguageSync from "./LanguageSync";
+import MfaGate from "./MfaGate";
 import AttendanceSyncStatus from "./AttendanceSyncStatus";
 import { preloadBaseMap } from "../../components/common/mapPreload";
 
@@ -41,6 +42,8 @@ export default function AppShell() {
     else window.setTimeout(start, 2500);
   }, []);
   return (
+    // owner 2026-11-17: two-step sign-in asks for the code before anything opens
+    <MfaGate>
     <LayoutProvider>
       <div className={styles.layout}>
         <PresenceTrackingLoop />
@@ -73,5 +76,6 @@ export default function AppShell() {
         <BottomNav />
       </div>
     </LayoutProvider>
+    </MfaGate>
   );
 }

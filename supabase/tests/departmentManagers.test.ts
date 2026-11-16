@@ -46,3 +46,12 @@ describe("a manager for each department", () => {
     expect(await list(worker)).toEqual([]);
   });
 });
+
+describe("demotion (owner 2026-11-17)", () => {
+  it("a manager made an employee stops managing their department", async () => {
+    const [{ id: dept }] = await t.su<{ id: string }>("insert into departments (organization_id, name, manager_user_id) values ($1, 'Demote', $2) returning id", [org.id, rana.userId]);
+    await t.su("update users set role_id = (select id from roles where role_key = 'employee') where id = $1", [rana.userId]);
+    const [{ m }] = await t.su<{ m: string | null }>("select manager_user_id as m from departments where id = $1", [dept]);
+    expect(m).toBeNull();
+  });
+});

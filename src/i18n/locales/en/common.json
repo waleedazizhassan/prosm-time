@@ -526,5 +526,13 @@
     "wrongCode": "The code is not correct or has expired.",
     "failed": "Could not confirm. Try again.",
     "enableMfaFirst": "This action needs two-step sign-in. Turn it on from your profile (Security tab), then try again."
+  },
+  "mfaGate": {
+    "title": "Two-step verification",
+    "explain": "Enter the 6-digit code from the authenticator app on your phone.",
+    "code": "Code",
+    "confirm": "Confirm",
+    "signOut": "Sign out",
+    "wrong": "The code is wrong or expired. Try the new one."
   }
 }
