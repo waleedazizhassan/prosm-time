@@ -222,9 +222,9 @@
 .chat {
   position: absolute;
   inset-inline-end: 12px;
-  bottom: calc(var(--safe-bottom, 0px) + 84px);
+  top: calc(var(--safe-top, 0px) + 64px);
+  bottom: calc(var(--safe-bottom, 0px) + 96px);
   width: min(92vw, 340px);
-  max-height: 46vh;
   display: flex;
   flex-direction: column;
   border-radius: 18px;
@@ -236,6 +236,8 @@
 
 .chat ul {
   flex: 1;
+  min-height: 0;
+  align-content: end;
   margin: 0;
   padding: 10px 12px;
   list-style: none;
@@ -254,9 +256,6 @@
 }
 
 .chat input {
-  border: 0;
-  border-top: 1px solid #1e2d50;
-  padding: 12px;
   background: transparent;
   color: #e9eefb;
   font: inherit;
@@ -305,6 +304,7 @@
 
 /* owner 2026-11-15: the meeting chat on a phone - a full-width sheet above the controls, with a send button */
 .chatForm {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -340,10 +340,104 @@
 }
 
 @media (max-width: 640px) {
+  /* a sheet in the screen's own flow, between the people and the buttons - the people shrink, nothing is cut */
   .chat {
-    inset-inline: 8px;
+    position: static;
     width: auto;
-    bottom: calc(var(--safe-bottom, 0px) + 96px);
-    max-height: min(55dvh, 420px);
+    margin: 0 8px 8px;
+    height: min(42dvh, 360px);
+    flex-shrink: 0;
+  }
+}
+
+/* owner 2026-11-16: ready reactions, full screen, unread count */
+.quick {
+  flex-shrink: 0;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 6px 8px 0;
+  border-top: 1px solid #1e2d50;
+}
+
+.quick button {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.quick button:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.bigEmoji {
+  font-size: 24px;
+  vertical-align: middle;
+}
+
+.chatButton {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: -4px;
+  inset-inline-end: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: #ef4444;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
+
+.fullBtn {
+  position: absolute;
+  top: 8px;
+  inset-inline-start: 8px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  background: rgba(5, 10, 22, 0.6);
+  color: #fff;
+  cursor: pointer;
+}
+
+.full {
+  position: fixed !important;
+  inset: 0;
+  z-index: 40;
+  width: 100vw !important;
+  height: 100dvh !important;
+  max-height: none !important;
+  border-radius: 0 !important;
+  background: #000;
+}
+
+.full video,
+.share .big video {
+  object-fit: contain;
+  background: #000;
+}
+
+/* a laptop: the people move aside while the chat is open, nothing is covered */
+@media (min-width: 641px) {
+  .withChat .stage {
+    padding-inline-end: calc(min(92vw, 340px) + 24px);
   }
 }

@@ -4,7 +4,7 @@ import { ConnectEngine } from "./ConnectEngine";
 import { ICE_SERVERS, QualityGuard, UsageMeter, loadIceServers, localMedia, reportUsage, signalChannel, tuneOpus, tuneSenders, type Signal } from "./rtc";
 
 // PROSM Connect - a small meeting, straight between the devices (owner 2026-11-13: no media server). Every device
-// connects with every other (a mesh): up to 4 with video, 8 with sound only, enforced on the server. The one with the
+// connects with every other (a mesh): up to 6 with video, 12 with sound only (owner 2026-11-16), enforced on the server. The one with the
 // smaller id makes the offer, so two never cross. Who is present comes from the channel's presence. The host can
 // mute everyone, pin someone in the middle and stop recording; anyone can raise a hand; the meeting's chat is
 // broadcast only and gone with the meeting. Recording happens on the recorder's device only, and everyone is told

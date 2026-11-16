@@ -189,9 +189,13 @@
     "you": "Vous",
     "videoTitle": "Réunion vidéo",
     "audioTitle": "Réunion audio",
-    "videoUpTo": "Vidéo, jusqu'à 4",
-    "audioUpTo": "Audio, jusqu'à 8",
-    "send": "Envoyer"
+    "videoUpTo": "Vidéo jusqu’à 6",
+    "audioUpTo": "Audio jusqu’à 12",
+    "send": "Envoyer",
+    "full": "Plein écran",
+    "exitFull": "Quitter le plein écran",
+    "reactions": "Réactions rapides",
+    "chatUnread": "Discussion ({{count}} nouveaux)"
   },
   "storage": {
     "clean": "Nettoyer {{what}}",

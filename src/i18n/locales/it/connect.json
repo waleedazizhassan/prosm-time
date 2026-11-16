@@ -189,9 +189,13 @@
     "you": "Tu",
     "videoTitle": "Riunione video",
     "audioTitle": "Riunione vocale",
-    "videoUpTo": "Video, fino a 4",
-    "audioUpTo": "Voce, fino a 8",
-    "send": "Invia"
+    "videoUpTo": "Video fino a 6",
+    "audioUpTo": "Voce fino a 12",
+    "send": "Invia",
+    "full": "Schermo intero",
+    "exitFull": "Esci dallo schermo intero",
+    "reactions": "Reazioni rapide",
+    "chatUnread": "Chat ({{count}} nuovi)"
   },
   "storage": {
     "clean": "Pulisci {{what}}",

@@ -189,9 +189,13 @@
     "you": "You",
     "videoTitle": "Video meeting",
     "audioTitle": "Voice meeting",
-    "videoUpTo": "Video, up to 4",
-    "audioUpTo": "Voice, up to 8",
-    "send": "Send"
+    "videoUpTo": "Video up to 6",
+    "audioUpTo": "Voice up to 12",
+    "send": "Send",
+    "full": "Full screen",
+    "exitFull": "Exit full screen",
+    "reactions": "Quick reactions",
+    "chatUnread": "Chat ({{count}} new)"
   },
   "storage": {
     "clean": "Clean {{what}}",

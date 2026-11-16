@@ -189,9 +189,13 @@
     "you": "إنت",
     "videoTitle": "اجتماع فيديو",
     "audioTitle": "اجتماع صوت",
-    "videoUpTo": "فيديو حتى 4",
-    "audioUpTo": "صوت حتى 8",
-    "send": "إرسال"
+    "videoUpTo": "فيديو حتى 6",
+    "audioUpTo": "صوت حتى 12",
+    "send": "إرسال",
+    "full": "ملء الشاشة",
+    "exitFull": "خروج من ملء الشاشة",
+    "reactions": "تفاعلات جاهزة",
+    "chatUnread": "الشات ({{count}} جديدة)"
   },
   "storage": {
     "clean": "تنضيف {{what}}",

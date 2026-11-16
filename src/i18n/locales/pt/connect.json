@@ -189,9 +189,13 @@
     "you": "Você",
     "videoTitle": "Reunião de vídeo",
     "audioTitle": "Reunião de voz",
-    "videoUpTo": "Vídeo, até 4",
-    "audioUpTo": "Voz, até 8",
-    "send": "Enviar"
+    "videoUpTo": "Vídeo até 6",
+    "audioUpTo": "Voz até 12",
+    "send": "Enviar",
+    "full": "Tela cheia",
+    "exitFull": "Sair da tela cheia",
+    "reactions": "Reações rápidas",
+    "chatUnread": "Chat ({{count}} novas)"
   },
   "storage": {
     "clean": "Limpar {{what}}",

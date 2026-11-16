@@ -189,9 +189,13 @@
     "you": "Sie",
     "videoTitle": "Videobesprechung",
     "audioTitle": "Sprachbesprechung",
-    "videoUpTo": "Video, bis 4",
-    "audioUpTo": "Sprache, bis 8",
-    "send": "Senden"
+    "videoUpTo": "Video bis 6",
+    "audioUpTo": "Audio bis 12",
+    "send": "Senden",
+    "full": "Vollbild",
+    "exitFull": "Vollbild beenden",
+    "reactions": "Schnelle Reaktionen",
+    "chatUnread": "Chat ({{count}} neu)"
   },
   "storage": {
     "clean": "{{what}} bereinigen",

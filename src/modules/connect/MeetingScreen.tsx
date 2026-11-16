@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Circle, Hand, LayoutGrid, MessageSquare, Mic, MicOff, MonitorUp, PhoneOff, Pin, Users, Video, VideoOff, VolumeX, Send } from "lucide-react";
+import { Circle, Hand, LayoutGrid, Maximize2, MessageSquare, Mic, MicOff, Minimize2, MonitorUp, PhoneOff, Pin, Users, Video, VideoOff, VolumeX, Send } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import type { ConnectPerson } from "../../core/repositories/ConnectRepository";
@@ -10,6 +10,13 @@ import { ConnectEngine } from "./engine/ConnectEngine";
 import GlassButton from "./GlassButton";
 import styles from "./MeetingScreen.module.css";
 import { playMedia } from "./engine/media";
+import { messageAlert } from "./engine/sounds";
+
+// owner 2026-11-16: ready reactions in the meeting chat, one tap sends
+const QUICK = ["👍", "👏", "❤️", "😂", "😮", "🙏", "✅", "🎉"];
+// a transparent poster: the phone's web view drew a big "play" sign on a video until it starts
+const NO_POSTER = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+export const MEETING_LIMIT = { video: 6, audio: 12 } as const;
 
 type Layout = "host" | "share" | "grid";
 
@@ -34,6 +41,38 @@ export default function MeetingScreen({ session, people, onClose }: { session: M
     document.querySelectorAll<HTMLMediaElement>("[data-connect-remote]").forEach((el) => startSound(el));
   };
   const videos = useRef(new Map<string, HTMLVideoElement>());
+  // owner 2026-11-16: full screen for a shared screen or the person in the middle
+  const [full, setFull] = useState<string | null>(null);
+  const tileEls = useRef(new Map<string, HTMLDivElement>());
+  const openFull = (userId: string) => {
+    setFull(userId);
+    const el = tileEls.current.get(userId);
+    void el?.requestFullscreen?.().catch(() => undefined);
+  };
+  const closeFull = () => {
+    setFull(null);
+    if (document.fullscreenElement) void document.exitFullscreen().catch(() => undefined);
+  };
+  useEffect(() => {
+    const onChange = () => { if (!document.fullscreenElement) setFull(null); };
+    document.addEventListener("fullscreenchange", onChange);
+    return () => document.removeEventListener("fullscreenchange", onChange);
+  }, []);
+  // owner 2026-11-16: a message in the meeting chat was silent - a count on the chat button, the message on top, a sound
+  const [seen, setSeen] = useState(0);
+  const lastCount = useRef(session.chat.length);
+  useEffect(() => {
+    if (session.chat.length > lastCount.current) {
+      const last = session.chat[session.chat.length - 1];
+      if (last && last.from !== (profile?.id ?? "") && !chatOpen) {
+        setToast(`${people.get(last.from)?.fullName ?? ""}: ${last.text}`);
+        messageAlert();
+      }
+    }
+    lastCount.current = session.chat.length;
+    if (chatOpen) setSeen(session.chat.length);
+  });
+  const unread = chatOpen ? 0 : session.chat.slice(seen).filter((m) => m.from !== (profile?.id ?? "")).length;
   const recorders = useRef(new Set<string>());
 
   useEffect(() => session.onChange(refresh), [session]);
@@ -68,25 +107,34 @@ export default function MeetingScreen({ session, people, onClose }: { session: M
   const recordingBy = [...session.peers.values()].find((p) => p.recording)?.userId ?? (session.recording ? me : null);
 
   const tile = (t0: (typeof tiles)[number], big = false) => (
-    <div key={t0.userId} className={`${styles.tile} ${big ? styles.big : ""} ${t0.recording ? styles.recTile : ""}`}>
+    <div key={t0.userId} className={`${styles.tile} ${big ? styles.big : ""} ${t0.recording ? styles.recTile : ""} ${full === t0.userId ? styles.full : ""}`}
+      ref={(el) => { if (el) tileEls.current.set(t0.userId, el); }}
+      onDoubleClick={() => (full === t0.userId ? closeFull() : openFull(t0.userId))}>
       {!t0.videoOff && t0.stream ? (
+        // owner 2026-11-16 (a person's picture missing on the phone): the phone's web view will not start a video
+        // with sound by itself, so the picture is always silent and the sound plays on its own element below
         <video
           className={t0.local && session.sharingBy !== me ? styles.mirror : undefined}
-          autoPlay playsInline muted={t0.local}
-          data-connect-remote={t0.local ? undefined : ""}
+          autoPlay playsInline muted poster={NO_POSTER}
           ref={(el) => {
             if (!el) return;
             videos.current.set(t0.userId, el);
+            el.muted = true;
             if (el.srcObject !== t0.stream) el.srcObject = t0.stream;
-            if (!t0.local) startSound(el);
+            void playMedia(el);
           }}
+          onLoadedMetadata={(e) => void playMedia(e.currentTarget)}
         />
       ) : (
-        <>
-          <Avatar name={nameOf(t0.userId)} url={people.get(t0.userId)?.avatarUrl ?? null} size={big ? "lg" : "md"} />
-          {!t0.local && t0.stream ? <audio autoPlay data-connect-remote="" ref={(el) => { if (el && el.srcObject !== t0.stream) el.srcObject = t0.stream; if (el) startSound(el); }} /> : null}
-        </>
+        <Avatar name={nameOf(t0.userId)} url={people.get(t0.userId)?.avatarUrl ?? null} size={big ? "lg" : "md"} />
       )}
+      {!t0.local && t0.stream ? <audio autoPlay data-connect-remote="" ref={(el) => { if (el && el.srcObject !== t0.stream) el.srcObject = t0.stream; if (el) startSound(el); }} /> : null}
+      {!t0.videoOff && t0.stream ? (
+        <button type="button" className={styles.fullBtn} onClick={(e) => { e.stopPropagation(); if (full === t0.userId) closeFull(); else openFull(t0.userId); }}
+          aria-label={full === t0.userId ? t("meeting.exitFull") : t("meeting.full")} title={full === t0.userId ? t("meeting.exitFull") : t("meeting.full")}>
+          {full === t0.userId ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
+        </button>
+      ) : null}
       <span className={styles.label}>
         {t0.userId === session.hostId ? <span className={styles.hostTag}>{t("meeting.host")}</span> : null}
         {nameOf(t0.userId)}
@@ -104,13 +152,13 @@ export default function MeetingScreen({ session, people, onClose }: { session: M
   const others = tiles.filter((x) => x !== centerTile);
 
   return (
-    <div className={styles.screen} role="dialog" aria-modal="true" aria-label={t("meeting.label")}>
+    <div className={`${styles.screen} ${chatOpen ? styles.withChat : ""}`} role="dialog" aria-modal="true" aria-label={t("meeting.label")}>
       {soundBlocked ? (
         <button type="button" className={styles.enableSound} onClick={enableAllSound}>{t("call.enableSound")}</button>
       ) : null}
       <header className={styles.top}>
         <b>{t(session.media === "video" ? "meeting.videoTitle" : "meeting.audioTitle")}</b>
-        <span className={styles.count}><Users size={14} aria-hidden="true" /> {tiles.length}/{session.media === "video" ? 4 : 8}</span>
+        <span className={styles.count}><Users size={14} aria-hidden="true" /> {tiles.length}/{session.media === "video" ? MEETING_LIMIT.video : MEETING_LIMIT.audio}</span>
       </header>
       {recordingBy ? <div className={styles.recBar}>{t("meeting.recordingBy", { name: nameOf(recordingBy) })}</div> : null}
       {toast ? <div className={styles.toast} role="status">{toast}</div> : null}
@@ -130,8 +178,15 @@ export default function MeetingScreen({ session, people, onClose }: { session: M
       {chatOpen ? (
         <aside className={styles.chat}>
           <ul>
-            {session.chat.map((m, i) => <li key={i} className={m.from === me ? styles.mine : undefined}><b>{nameOf(m.from)}</b> {m.text}</li>)}
+            {session.chat.map((m, i) => (
+              <li key={i} className={m.from === me ? styles.mine : undefined}>
+                <b>{nameOf(m.from)}</b> <span className={QUICK.includes(m.text) ? styles.bigEmoji : undefined}>{m.text}</span>
+              </li>
+            ))}
           </ul>
+          <div className={styles.quick} role="group" aria-label={t("meeting.reactions")}>
+            {QUICK.map((emoji) => <button key={emoji} type="button" onClick={() => session.say(emoji)} aria-label={emoji}>{emoji}</button>)}
+          </div>
           {/* owner 2026-11-15: a send button (there was none - Enter only) */}
           <form className={styles.chatForm} onSubmit={(e) => { e.preventDefault(); if (text.trim()) { session.say(text.trim()); setText(""); } }}>
             <input value={text} onChange={(e) => setText(e.target.value)} placeholder={t("meeting.chatPlaceholder")} aria-label={t("meeting.chatPlaceholder")} enterKeyHint="send" />
@@ -147,7 +202,10 @@ export default function MeetingScreen({ session, people, onClose }: { session: M
           <GlassButton label={t("meeting.share")} tone={session.sharingBy === me ? "primary" : "plain"} onClick={() => void session.toggleShare()}><MonitorUp size={18} /></GlassButton>
         ) : null}
         <GlassButton label={t("meeting.hand")} tone={session.myHand ? "primary" : "plain"} onClick={() => session.raiseHand()}><Hand size={18} /></GlassButton>
-        <GlassButton label={t("meeting.chat")} tone={chatOpen ? "primary" : "plain"} onClick={() => setChatOpen((v) => !v)}><MessageSquare size={18} /></GlassButton>
+        <GlassButton label={unread ? t("meeting.chatUnread", { count: unread }) : t("meeting.chat")} tone={chatOpen ? "primary" : "plain"} className={styles.chatButton} onClick={() => setChatOpen((v) => !v)}>
+          <MessageSquare size={18} />
+          {unread ? <span className={styles.badge} aria-hidden="true">{unread > 9 ? "9+" : unread}</span> : null}
+        </GlassButton>
         <GlassButton label={t("meeting.layout")} onClick={() => setLayoutChoice(layout === "grid" ? "host" : "grid")}><LayoutGrid size={18} /></GlassButton>
         {session.recordingFeature && session.recordingAllowed ? (
           <GlassButton label={session.recording ? t("meeting.stopRecording") : t("meeting.record")} tone={session.recording ? "danger" : "plain"}

@@ -189,9 +189,13 @@
     "you": "你",
     "videoTitle": "视频会议",
     "audioTitle": "语音会议",
-    "videoUpTo": "视频，最多 4 人",
-    "audioUpTo": "语音，最多 8 人",
-    "send": "发送"
+    "videoUpTo": "视频最多 6 人",
+    "audioUpTo": "语音最多 12 人",
+    "send": "发送",
+    "full": "全屏",
+    "exitFull": "退出全屏",
+    "reactions": "快捷表情",
+    "chatUnread": "聊天（{{count}} 条新消息）"
   },
   "storage": {
     "clean": "清理{{what}}",

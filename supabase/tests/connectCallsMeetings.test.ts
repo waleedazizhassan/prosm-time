@@ -61,8 +61,8 @@ describe("calls", () => {
 });
 
 describe("meetings", () => {
-  it("video: the host and up to 3 invitees; nobody else gets in", async () => {
-    expect((await t.as(omar.authId, "select public.prosm_time_connect_start_meeting('video', $1)", [[hasan.userId, mona.userId, karim.userId, people[0].userId]])).error).toMatch(/FULL/);
+  it("video: the host and up to 5 invitees (owner 2026-11-16: 6 with video); nobody else gets in", async () => {
+    expect((await t.as(omar.authId, "select public.prosm_time_connect_start_meeting('video', $1)", [[hasan.userId, mona.userId, karim.userId, people[0].userId, people[2].userId, people[3].userId]])).error).toMatch(/FULL/);
     const id = await call<string>(omar, "select public.prosm_time_connect_start_meeting('video', $1, 'Site review') as r", [[hasan.userId, mona.userId, karim.userId]]);
     // the invitation is received (and leaves the server) before joining - joining still works (20261114150000)
     for (const m of [hasan, mona, karim]) {
@@ -74,7 +74,7 @@ describe("meetings", () => {
     expect((await t.as(people[1].authId, "select public.prosm_time_connect_join_meeting($1)", [id])).error).toMatch(/NOT INVITED|FULL/);
     const meeting = await call<{ peers: string[]; maxPeers: number }>(hasan, "select public.get_prosm_time_connect_meeting($1) as r", [id]);
     expect(meeting.peers).toHaveLength(4);
-    expect(meeting.maxPeers).toBe(4);
+    expect(meeting.maxPeers).toBe(6);
     expect((await t.as(hasan.authId, "select public.prosm_time_connect_end_meeting($1)", [id])).error).toMatch(/ONLY THE HOST/);
     expect((await t.as(omar.authId, "select public.prosm_time_connect_end_meeting($1)", [id])).error).toBeNull();
   });

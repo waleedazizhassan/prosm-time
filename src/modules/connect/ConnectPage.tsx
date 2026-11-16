@@ -325,18 +325,18 @@ export default function ConnectPage() {
           <div className={styles.mediaToggle} role="radiogroup" aria-label={t("meeting.mediaLabel")}>
             {(["video", "audio"] as const).map((m) => (
               <button key={m} type="button" role="radio" aria-checked={meetingMedia === m} className={meetingMedia === m ? `${styles.chip} ${styles.chipOn}` : styles.chip}
-                onClick={() => { setMeetingMedia(m); setInvitees((list) => list.slice(0, m === "video" ? 3 : 7)); }}>
+                onClick={() => { setMeetingMedia(m); setInvitees((list) => list.slice(0, m === "video" ? 5 : 11)); }}>
                 {m === "video" ? <Video size={14} /> : <Phone size={14} />} {t(m === "video" ? "meeting.videoUpTo" : "meeting.audioUpTo")}
               </button>
             ))}
           </div>
           <input className={styles.titleInput} value={meetingTitle} onChange={(e) => setMeetingTitle(e.target.value)} placeholder={t("meeting.titlePlaceholder")} maxLength={120} />
-          <p className={styles.hint}>{t("meeting.pick", { count: (meetingMedia === "video" ? 3 : 7) - invitees.length })}</p>
+          <p className={styles.hint}>{t("meeting.pick", { count: (meetingMedia === "video" ? 5 : 11) - invitees.length })}</p>
           {/* owner 2026-11-14: no long list to scroll - each person a small chip, tapped to invite */}
-          <div className={styles.pickGrid} role="group" aria-label={t("meeting.pick", { count: (meetingMedia === "video" ? 3 : 7) - invitees.length })}>
+          <div className={styles.pickGrid} role="group" aria-label={t("meeting.pick", { count: (meetingMedia === "video" ? 5 : 11) - invitees.length })}>
             {[...people.values()].filter(listable).map((p) => {
               const checked = invitees.includes(p.id);
-              const full = !checked && invitees.length >= (meetingMedia === "video" ? 3 : 7);
+              const full = !checked && invitees.length >= (meetingMedia === "video" ? 5 : 11);
               return (
                 <button key={p.id} type="button" aria-pressed={checked} disabled={full}
                   className={checked ? `${styles.pick} ${styles.pickOn}` : styles.pick}

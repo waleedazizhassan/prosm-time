@@ -115,7 +115,7 @@ describe("PROSM Connect - the foundation", () => {
     expect(await t.su("select path from connect_storage_trash where path = $1", [path])).toHaveLength(1);
   });
 
-  it("a meeting takes no more than its limit (4 with video), for every plan", async () => {
+  it("a meeting takes no more than its limit (a 4-place meeting stays 4; video up to 6 since 2026-11-16), for every plan", async () => {
     const [{ id }] = await t.su<{ id: string }>("insert into connect_meetings (organization_id, host_id, media, max_peers) values ($1, $2, 'video', 4) returning id", [org.id, omar.userId]);
     const fourth = await addMember(t, org, "employee", "Karim");
     const fifth = await addMember(t, org, "employee", "Ahmed");
@@ -124,8 +124,9 @@ describe("PROSM Connect - the foundation", () => {
     for (const m of [omar, hasan, mona]) expect((await t.as(m.authId, "select public.prosm_time_connect_join_meeting($1)", [id])).error).toBeNull();
     expect((await t.as(fourth.authId, "select public.prosm_time_connect_join_meeting($1)", [id])).error).toBeNull();
     expect((await t.as(fifth.authId, "select public.prosm_time_connect_join_meeting($1)", [id])).error).toMatch(/FULL/);
-    const bad = await t.su("insert into connect_meetings (organization_id, host_id, media, max_peers) values ($1, $2, 'video', 6)", [org.id, omar.userId]).then(() => null, (e: Error) => e.message);
+    const bad = await t.su("insert into connect_meetings (organization_id, host_id, media, max_peers) values ($1, $2, 'video', 7)", [org.id, omar.userId]).then(() => null, (e: Error) => e.message);
     expect(bad).toMatch(/check/i);
+    expect((await t.su("insert into connect_meetings (organization_id, host_id, media, max_peers) values ($1, $2, 'audio', 12) returning id", [org.id, omar.userId])).length).toBe(1);
   });
 
   it("private channels: each joins only their own (owner 2026-11-13; Realtime itself is tested on a local Supabase)", async () => {
