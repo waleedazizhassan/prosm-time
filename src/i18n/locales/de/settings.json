@@ -367,5 +367,22 @@
       "video": "Videoanruf",
       "meeting": "Meeting"
     }
+  },
+  "security": {
+    "title": "Sicherheit für sensible Aktionen",
+    "subtitle": "Lohnabrechnung freigeben oder wieder öffnen, Lohnzettel veröffentlichen, API-Schlüssel, Rechte ändern, Eigentum übertragen.",
+    "stepUp": {
+      "title": "Identität vor einer sensiblen Aktion bestätigen",
+      "hint": "Liegt die letzte Anmeldung über 10 Minuten zurück, fragt die App vorher nach dem Passwort (oder dem Zwei-Faktor-Code)."
+    },
+    "mfa": {
+      "title": "Zwei-Faktor-Bestätigung für Inhaber, Lohnfreigeber und Rechtevergeber vorschreiben",
+      "hint": "Bestätigt wird mit einem Code aus einer Authenticator-App (Google oder Microsoft Authenticator), nicht nur mit dem Passwort. Wer sie nicht hat, richtet sie zuerst ein."
+    },
+    "platformOn": "Von der Plattform für alle Organisationen eingeschaltet.",
+    "howTo": "Jede Person schaltet die Zwei-Faktor-Bestätigung in ihrem Profil > Sicherheit ein: QR-Code mit einer Authenticator-App scannen und den 6-stelligen Code eingeben.",
+    "openMine": "Meine Sicherheit öffnen",
+    "saved": "Gespeichert.",
+    "saveFailed": "Nicht gespeichert. Versuch es noch einmal."
   }
 }

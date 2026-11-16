@@ -24,6 +24,7 @@ import PageBanner from "../../components/common/PageBanner";
 import usePlanFeatures from "../../core/hooks/usePlanFeatures";
 import OwnershipTransferCard from "./OwnershipTransferCard";
 import ConnectUsageCard from "./ConnectUsageCard";
+import SecurityPolicyCard from "./SecurityPolicyCard";
 
 // PROSM Time - § live UX review, user-directed: "a professional
 // reorganization" - org-wide settings (today: the no-site geofence
@@ -127,6 +128,8 @@ export default function OrganizationSettingsPage() {
 
       {active === "other" ? (
         <>
+          {/* owner 2026-11-16: identity confirmation / two-step verification for sensitive actions */}
+          {isOwner ? <SecurityPolicyCard /> : null}
           {isOwner ? <PlanSettingsCard /> : null}
           {/* governance phase E: the only way the owner changes */}
           {profile?.isRealOwner ? <OwnershipTransferCard /> : null}

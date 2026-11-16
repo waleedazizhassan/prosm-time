@@ -369,5 +369,22 @@
       "video": "Videollamada",
       "meeting": "Reunión"
     }
+  },
+  "security": {
+    "title": "Seguridad para acciones sensibles",
+    "subtitle": "Aprobar o reabrir la nómina, publicar recibos, claves API, cambiar permisos, transferir la propiedad.",
+    "stepUp": {
+      "title": "Confirmar identidad antes de una acción sensible",
+      "hint": "Si el último inicio de sesión tiene más de 10 minutos, la app pide la contraseña (o el código de dos pasos) antes de seguir."
+    },
+    "mfa": {
+      "title": "Exigir verificación en dos pasos al propietario, aprobadores de nómina y asignadores de permisos",
+      "hint": "Se confirma con un código de una app de autenticación (Google o Microsoft Authenticator), no solo con la contraseña. Quien no la tenga debe activarla primero."
+    },
+    "platformOn": "Activado por la plataforma para todas las organizaciones.",
+    "howTo": "Cada persona activa la verificación en dos pasos desde su perfil > Seguridad: escanea el código QR con una app de autenticación e introduce el código de 6 dígitos.",
+    "openMine": "Abrir mi seguridad",
+    "saved": "Guardado.",
+    "saveFailed": "No se guardó. Inténtalo de nuevo."
   }
 }

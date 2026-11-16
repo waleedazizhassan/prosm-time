@@ -369,5 +369,22 @@
       "video": "Appel vidéo",
       "meeting": "Réunion"
     }
+  },
+  "security": {
+    "title": "Sécurité des actions sensibles",
+    "subtitle": "Approuver ou rouvrir la paie, publier les bulletins, clés API, modifier les droits, transférer la propriété.",
+    "stepUp": {
+      "title": "Confirmer l’identité avant une action sensible",
+      "hint": "Si la dernière connexion date de plus de 10 minutes, l’application demande le mot de passe (ou le code à deux facteurs) avant d’agir."
+    },
+    "mfa": {
+      "title": "Exiger la vérification en deux étapes pour le propriétaire, les approbateurs de paie et ceux qui attribuent les droits",
+      "hint": "La confirmation se fait par un code d’une application d’authentification (Google ou Microsoft Authenticator), pas seulement le mot de passe. Qui ne l’a pas doit l’activer d’abord."
+    },
+    "platformOn": "Activé par la plateforme pour toutes les organisations.",
+    "howTo": "Chacun active la vérification en deux étapes dans son profil > Sécurité : scanner le QR code avec une application d’authentification et saisir le code à 6 chiffres.",
+    "openMine": "Ouvrir ma sécurité",
+    "saved": "Enregistré.",
+    "saveFailed": "Non enregistré. Réessayez."
   }
 }

@@ -369,5 +369,22 @@
       "video": "Videochamada",
       "meeting": "Reunião"
     }
+  },
+  "security": {
+    "title": "Segurança para ações sensíveis",
+    "subtitle": "Aprovar ou reabrir a folha, publicar holerites, chaves de API, alterar permissões, transferir a propriedade.",
+    "stepUp": {
+      "title": "Confirmar a identidade antes de uma ação sensível",
+      "hint": "Se o último login tiver mais de 10 minutos, o app pede a senha (ou o código de dois fatores) antes de continuar."
+    },
+    "mfa": {
+      "title": "Exigir verificação em duas etapas do proprietário, aprovadores da folha e de quem atribui permissões",
+      "hint": "A confirmação é por um código de um app autenticador (Google ou Microsoft Authenticator), não só a senha. Quem não tiver deve ativar primeiro."
+    },
+    "platformOn": "Ativado pela plataforma para todas as organizações.",
+    "howTo": "Cada pessoa ativa a verificação em duas etapas no seu perfil > Segurança: lê o QR code com um app autenticador e digita o código de 6 dígitos.",
+    "openMine": "Abrir minha segurança",
+    "saved": "Salvo.",
+    "saveFailed": "Não foi salvo. Tente de novo."
   }
 }

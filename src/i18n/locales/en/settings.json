@@ -367,5 +367,22 @@
       "video": "Video call",
       "meeting": "Meeting"
     }
+  },
+  "security": {
+    "title": "Security for sensitive actions",
+    "subtitle": "Approving or reopening payroll, publishing payslips, API keys, changing permissions, transferring ownership.",
+    "stepUp": {
+      "title": "Confirm identity before a sensitive action",
+      "hint": "If the last sign-in is older than 10 minutes, the app asks for the password (or the two-step code) before going ahead."
+    },
+    "mfa": {
+      "title": "Require two-step verification for the owner, payroll approvers and permission assigners",
+      "hint": "The confirmation is a code from an authenticator app (Google or Microsoft Authenticator), not the password alone. Anyone without it is asked to set it up first."
+    },
+    "platformOn": "Turned on by the platform for every organisation.",
+    "howTo": "Each person turns on two-step verification from their profile > Security: scan the QR code with an authenticator app and enter the 6-digit code.",
+    "openMine": "Open my security",
+    "saved": "Saved.",
+    "saveFailed": "Not saved. Try again."
   }
 }

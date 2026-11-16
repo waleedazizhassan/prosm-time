@@ -369,5 +369,22 @@
       "video": "Videochiamata",
       "meeting": "Riunione"
     }
+  },
+  "security": {
+    "title": "Sicurezza per le azioni sensibili",
+    "subtitle": "Approvare o riaprire le buste paga, pubblicare i cedolini, chiavi API, modificare i permessi, trasferire la proprietà.",
+    "stepUp": {
+      "title": "Confermare l’identità prima di un’azione sensibile",
+      "hint": "Se l’ultimo accesso risale a più di 10 minuti fa, l’app chiede la password (o il codice a due fattori) prima di procedere."
+    },
+    "mfa": {
+      "title": "Richiedere la verifica in due passaggi a proprietario, approvatori paghe e assegnatori di permessi",
+      "hint": "Si conferma con un codice da un’app di autenticazione (Google o Microsoft Authenticator), non solo con la password. Chi non l’ha deve attivarla prima."
+    },
+    "platformOn": "Attivato dalla piattaforma per tutte le organizzazioni.",
+    "howTo": "Ognuno attiva la verifica in due passaggi dal proprio profilo > Sicurezza: scansiona il QR con un’app di autenticazione e inserisce il codice a 6 cifre.",
+    "openMine": "Apri la mia sicurezza",
+    "saved": "Salvato.",
+    "saveFailed": "Non salvato. Riprova."
   }
 }
