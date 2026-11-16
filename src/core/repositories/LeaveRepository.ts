@@ -44,6 +44,8 @@ export interface LeaveRequestRow {
   // v2.3.43 step 9: the unpaid-leave deduction the employee sees.
   deductionTotal: number | null;
   deductionCurrency: string | null;
+  /** governance (combined model): the manager approved, human resources has not decided yet */
+  awaitingHr?: boolean;
 }
 
 export interface OrgWideLeaveRow {
@@ -109,6 +111,7 @@ function createError<T>(message: string): ServiceResult<T> {
 }
 
 interface LeaveRequestRowRaw {
+  approval_step?: number | null;
   id: string;
   leave_type: LeaveType;
   start_date: string;
@@ -137,6 +140,7 @@ function mapRow(row: LeaveRequestRowRaw): LeaveRequestRow {
     createdAt: row.created_at,
     deductionTotal: row.deduction_total === null || row.deduction_total === undefined ? null : Number(row.deduction_total),
     deductionCurrency: row.deduction_currency ?? null,
+    awaitingHr: row.status === "pending" && row.approval_step === 2,
   };
 }
 
@@ -166,13 +170,17 @@ class LeaveRepository {
   // requests of the employees at their sites.
   async listMine(userId: string): Promise<ServiceResult<LeaveRequestRow[]>> {
     try {
-      const { data, error } = await this.client
+      const columns = "id, leave_type, start_date, end_date, days_count, reason, status, reviewed_at, review_notes, created_at, deduction_total, deduction_currency";
+      const read = (withStep: boolean) => this.client
         .from("leave_requests")
-        .select("id, leave_type, start_date, end_date, days_count, reason, status, reviewed_at, review_notes, created_at, deduction_total, deduction_currency")
+        .select(withStep ? `${columns}, approval_step` : columns)
         .eq("user_id", userId)
         .order("created_at", { ascending: false });
+      // phase F: the approval step (a server without it: the list as before)
+      let { data, error } = await read(true);
+      if (error && /approval_step/.test(error.message)) ({ data, error } = await read(false));
       if (error) return createError(error.message);
-      return createSuccess((data ?? []).map(mapRow));
+      return createSuccess(((data ?? []) as unknown as LeaveRequestRowRaw[]).map(mapRow));
     } catch (error) {
       return createError(error instanceof Error ? error.message : "Leave service unavailable.");
     }
@@ -460,14 +468,23 @@ class LeaveRepository {
     }
   }
 
-  async review(requestId: string, action: "approved" | "rejected", notes?: string, deductionPerDay?: number | null): Promise<ServiceResult> {
+  // expectedStatus: what the screen showed - the server refuses the decision if another manager decided first
+  // (a reject landing on a just-approved leave would otherwise become a revoke).
+  async review(requestId: string, action: "approved" | "rejected", notes?: string, deductionPerDay?: number | null, expectedStatus: "pending" | "approved" = "pending"): Promise<ServiceResult> {
     try {
-      const { data, error } = await this.client.rpc("review_prosm_time_leave", {
+      const args = {
         p_request_id: requestId,
         p_action: action,
         p_notes: notes?.trim() || null,
         p_deduction_per_day: deductionPerDay ?? null,
-      });
+      };
+      let { data, error } = await this.client.rpc("review_prosm_time_leave", { ...args, p_expected_status: expectedStatus });
+      // QA-002 (2026-11-16): a database without 20261115170000 does not know p_expected_status and answers
+      // "function not found" (PGRST202) - every leave decision failed. Asked again the old way, so the web and the
+      // database can be updated in either order.
+      if (error && (error as { code?: string }).code === "PGRST202") {
+        ({ data, error } = await this.client.rpc("review_prosm_time_leave", args));
+      }
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to review this leave request.");
       return createSuccess();
@@ -520,7 +537,7 @@ class LeaveRepository {
   // names the real intent clearly at the call site rather than making
   // every caller remember that "reject" is also how you revoke.
   async revokeApproved(requestId: string, notes: string): Promise<ServiceResult> {
-    return this.review(requestId, "rejected", notes);
+    return this.review(requestId, "rejected", notes, null, "approved");
   }
 
   // § real request, user-directed: an Owner-only override for a

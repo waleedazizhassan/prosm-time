@@ -111,7 +111,12 @@
         "leave_rejected": "Ferie rifiutate",
         "leave_cancelled": "Ferie annullate"
       }
-    }
+    },
+    "rotateAction": "Rinnova",
+    "rotateTitle": "Rinnovare questa chiave?",
+    "rotateWarning": "Una nuova chiave sostituisce «{{name}}» con gli stessi ambiti. La vecchia funziona ancora per 24 ore, così puoi aggiornare l'altro sistema, poi si ferma da sola.",
+    "rotateError": "Impossibile rinnovare questa chiave.",
+    "replaced": "Sostituita: termina entro 24 ore"
   },
   "payroll": {
     "title": "Integrazione buste paga",
@@ -231,7 +236,7 @@
       "enterprise": "Enterprise"
     },
     "includes": "Cosa include il tuo piano",
-    "always": "In ogni piano: timbratura in sede con geofence e foto, offline, mappa in tempo reale, SOS, radio, meteo e 9 lingue.",
+    "always": "In ogni piano: timbratura in sede con geofence e foto, offline, mappa in tempo reale, SOS, radio, meteo e 9 lingue. Inoltre: verifica in due passaggi e conferma dell’identità, codici dipendente e il modello di approvazione semplice.",
     "included": "incluso",
     "notIncluded": "non incluso nel tuo piano",
     "features": {
@@ -258,7 +263,17 @@
       "delegation": "Delega completa e a tempo",
       "retention": "Controllo della conservazione dei dati",
       "documents": "Documenti dei dipendenti e scadenze",
-      "penalties": "Regolamento sanzioni progressive e incentivi"
+      "penalties": "Regolamento sanzioni progressive e incentivi",
+      "governance_models": "Modelli di governance: decentrato e centralizzato",
+      "governance_advanced": "Governance combinata (due passaggi) e un modello per tipo",
+      "connect_chat": "Chat e gruppi",
+      "connect_camera_photo": "Foto verificata dalla fotocamera in chat",
+      "connect_calls": "Chiamate vocali e video",
+      "connect_site_broadcast": "Messaggio a tutto un sito",
+      "connect_push_to_talk": "Premi per parlare (radio)",
+      "connect_meetings": "Riunioni e chiamate di gruppo",
+      "connect_screen_share": "Condivisione schermo",
+      "connect_meeting_recording": "Registrazione riunioni"
     },
     "managedByProsm": "Ogni modifica o rinnovo della licenza è fatto da PROSM; ricevi una notifica e un’e-mail con la nuova licenza. Per modificarla scrivi a sales@prosm.net.",
     "historyAll": "Timbrature mostrate: tutte. Posizioni e foto si eliminano automaticamente dopo il periodo in «Conservazione dei dati».",
@@ -289,7 +304,8 @@
     "sites": "Siti",
     "outside": "Fuori dai siti",
     "people": "Persone e presenze",
-    "other": "Piano e sicurezza"
+    "other": "Piano e sicurezza",
+    "governance": "Modello di governance"
   },
   "overtimeTarget": {
     "title": "Straordinari e ritardi",
@@ -324,5 +340,201 @@
     "people_other": "{{count}} persone",
     "error": "Impossibile salvare.",
     "people_many": "{{count}} persone"
+  },
+  "ownership": {
+    "title": "Trasferire la proprietà",
+    "subtitle": "L'unico modo per cambiare il titolare.",
+    "explain": "Scegli un membro attivo. Deve accettare, poi passano 72 ore in cui tutti i manager vengono avvisati; puoi annullare fino al completamento. Dopo diventerai manager.",
+    "to": "Nuovo titolare",
+    "choose": "Scegli un membro",
+    "reason": "Motivo",
+    "start": "Avvia il trasferimento",
+    "started": "Il trasferimento è iniziato. In attesa dell'accettazione.",
+    "waitingForYou": "{{name}} vuole trasferirti la proprietà dell'organizzazione. Accetta per continuare.",
+    "waitingForThem": "In attesa che {{name}} accetti.",
+    "cooling": "{{name}} ha accettato. Il trasferimento si completa dopo {{when}} se non viene annullato.",
+    "ready": "L'attesa è finita. Ora si può completare il trasferimento a {{name}}.",
+    "accept": "Accetta",
+    "accepted": "Accettato. Il trasferimento si può completare dopo 72 ore.",
+    "complete": "Completa il trasferimento",
+    "completed": "La proprietà è stata trasferita.",
+    "cancel": "Annulla il trasferimento",
+    "decline": "Rifiuta",
+    "cancelled": "Il trasferimento è stato annullato.",
+    "failed": "Impossibile completare questo passaggio."
+  },
+  "connectUsage": {
+    "title": "Uso di Connect (chiamate e riunioni)",
+    "subtitle": "Questo mese: ciò che è passato direttamente tra dispositivi (gratis) e ciò che è passato da un relay (conta sulla sua quota gratuita).",
+    "empty": "Nessuna chiamata misurata questo mese.",
+    "kind": "Tipo",
+    "sessions": "Numero",
+    "directMinutes": "Minuti diretti",
+    "relayMinutes": "Minuti via relay",
+    "relayMb": "MB via relay",
+    "perMinute": "MB/min",
+    "total": "Via relay {{relay}} MB su {{total}} MB.",
+    "server": "{{server}}: {{mb}} MB in {{minutes}} min",
+    "kinds": {
+      "audio": "Chiamata vocale",
+      "video": "Videochiamata",
+      "meeting": "Riunione"
+    }
+  },
+  "security": {
+    "title": "Sicurezza per le azioni sensibili",
+    "subtitle": "Approvare o riaprire le buste paga, pubblicare i cedolini, chiavi API, modificare i permessi, trasferire la proprietà.",
+    "stepUp": {
+      "title": "Confermare l’identità prima di un’azione sensibile",
+      "hint": "Se l’ultimo accesso risale a più di 10 minuti fa, l’app chiede la password (o il codice a due fattori) prima di procedere."
+    },
+    "mfa": {
+      "title": "Richiedere la verifica in due passaggi a proprietario, approvatori paghe e assegnatori di permessi",
+      "hint": "Si conferma con un codice da un’app di autenticazione (Google o Microsoft Authenticator), non solo con la password. Chi non l’ha deve attivarla prima."
+    },
+    "platformOn": "Attivato dalla piattaforma per tutte le organizzazioni.",
+    "howTo": "Ognuno attiva la verifica in due passaggi dal proprio profilo > Sicurezza: scansiona il QR con un’app di autenticazione e inserisce il codice a 6 cifre.",
+    "openMine": "Apri la mia sicurezza",
+    "saved": "Salvato.",
+    "saveFailed": "Non salvato. Riprova."
+  },
+  "employeeCodes": {
+    "title": "Codici dipendente",
+    "subtitle": "5 cifre progressive per anzianità di assunzione.",
+    "hint": "Il codice viene assegnato automaticamente appena si inserisce la data di assunzione e resta. Se aggiungi date più vecchie, rinumera qui per ripristinare l’ordine. Le buste paga approvate mantengono i loro codici.",
+    "renumber": "Rinumera per anzianità",
+    "confirm": "Rinumerare tutti per data di assunzione? I codici attuali cambieranno.",
+    "done": "{{count}} dipendenti rinumerati.",
+    "failed": "Non rinumerato. Riprova."
+  },
+  "governance": {
+    "title": "Modello di governance",
+    "subtitle": "Chi decide le richieste dei dipendenti. Scegli il modello adatto e leggi prima come funziona ciascuno.",
+    "current": "Modello attuale:",
+    "custom": "Personalizzato per tipo",
+    "active": "Attivo",
+    "appliesTo": "Vale per: ferie, permessi e correzioni presenze",
+    "sections": {
+      "perms": "Chi può cosa",
+      "flow": "Flusso",
+      "life": "Ciclo di vita della richiesta"
+    },
+    "modes": {
+      "direct": {
+        "title": "Semplice (predefinito)",
+        "tagline": "Qualsiasi responsabile del dipendente decide in un passaggio.",
+        "how": "La richiesta appare a tutti quelli con autorità sul dipendente: responsabile del sito, del reparto, risorse umane e proprietario. Chi decide per primo la chiude.",
+        "perms": {
+          "1": "Responsabile del sito: per le persone del suo sito",
+          "2": "Responsabile del reparto: per il suo reparto",
+          "3": "Risorse umane: per tutti",
+          "4": "Proprietario e delegati: per tutto"
+        },
+        "flow": {
+          "1": "Il dipendente invia la richiesta",
+          "2": "Appare a tutti i suoi responsabili",
+          "3": "Il primo approva o rifiuta",
+          "4": "Il dipendente riceve la decisione"
+        },
+        "life": {
+          "1": "Inviata",
+          "2": "In revisione",
+          "3": "Approvata o rifiutata"
+        },
+        "fits": "Adatto a: piccole aziende (da 5 a 30 dipendenti)."
+      },
+      "decentralized": {
+        "title": "Decentrato",
+        "tagline": "Decide l’operativo: sito o reparto.",
+        "how": "Il responsabile del sito o del reparto decide per la sua gente. Le risorse umane intervengono solo se il dipendente non ha un responsabile diretto; il proprietario è sempre la riserva.",
+        "perms": {
+          "1": "Responsabile di sito o reparto: per la sua gente",
+          "2": "Risorse umane: solo senza responsabile diretto",
+          "3": "Proprietario e delegati: per tutto"
+        },
+        "flow": {
+          "1": "Il dipendente invia la richiesta",
+          "2": "Va al responsabile del sito o del reparto",
+          "3": "Il responsabile approva o rifiuta",
+          "4": "Il dipendente riceve la decisione"
+        },
+        "life": {
+          "1": "Inviata",
+          "2": "In attesa del responsabile",
+          "3": "Approvata o rifiutata"
+        },
+        "fits": "Adatto a: aziende con molte sedi e siti."
+      },
+      "centralized": {
+        "title": "Centralizzato",
+        "tagline": "Decidono solo le risorse umane.",
+        "how": "Tutte le richieste vanno alle risorse umane. I responsabili di sito e reparto seguono la loro gente ma non decidono; proprietario e delegati sono la riserva.",
+        "perms": {
+          "1": "Risorse umane: per tutti",
+          "2": "Responsabili di sito e reparto: solo consultazione",
+          "3": "Proprietario e delegati: per tutto"
+        },
+        "flow": {
+          "1": "Il dipendente invia la richiesta",
+          "2": "Va alle risorse umane",
+          "3": "Le risorse umane approvano o rifiutano",
+          "4": "Il dipendente riceve la decisione"
+        },
+        "life": {
+          "1": "Inviata",
+          "2": "In attesa delle risorse umane",
+          "3": "Approvata o rifiutata"
+        },
+        "fits": "Adatto a: aziende con risorse umane forti e decisioni uniformi."
+      },
+      "two_step": {
+        "title": "Combinato (due passaggi)",
+        "tagline": "Prima approva il responsabile, poi conferma l’HR.",
+        "how": "Il responsabile del sito o del reparto approva, poi la richiesta passa alle risorse umane per l’approvazione finale. Un rifiuto la chiude. Senza responsabile diretto va subito alle risorse umane; chi ha entrambi i ruoli approva una volta.",
+        "perms": {
+          "1": "Responsabile di sito o reparto: prima approvazione",
+          "2": "Risorse umane: approvazione finale",
+          "3": "Proprietario e delegati: approvano subito"
+        },
+        "flow": {
+          "1": "Il dipendente invia la richiesta",
+          "2": "Il responsabile approva o rifiuta",
+          "3": "Approvata, passa alle risorse umane",
+          "4": "Le risorse umane approvano o rifiutano",
+          "5": "Il dipendente riceve la decisione"
+        },
+        "life": {
+          "1": "Inviata",
+          "2": "In attesa del responsabile",
+          "3": "In attesa delle risorse umane",
+          "4": "Approvata o rifiutata"
+        },
+        "fits": "Adatto a: aziende medie e grandi (100+ dipendenti)."
+      }
+    },
+    "alwaysTitle": "Uguale in ogni modello",
+    "always": {
+      "1": "Paghe, indennità, sanzioni, permessi, fatturazione e proprietà restano al proprietario",
+      "2": "Nessuno decide la propria richiesta",
+      "3": "Proprietario e delegati possono decidere qualsiasi richiesta",
+      "4": "Un periodo paghe chiuso non si può modificare",
+      "5": "Ogni decisione e ogni cambio di modello viene registrato"
+    },
+    "kinds": {
+      "leave": "Ferie",
+      "permission": "Permessi (ritardo / uscita anticipata)",
+      "correction": "Correzioni presenze"
+    },
+    "perKind": "Regolazione fine: un modello diverso per tipo di richiesta",
+    "needHr": "Nessuno ha \"Decidere tutte le richieste non sensibili (risorse umane)\". Assegnalo nella pagina dei permessi, altrimenti le richieste vanno al proprietario.",
+    "needManagers": "Non ci sono responsabili di sito o reparto. Definiscili prima, altrimenti le richieste vanno alle risorse umane o al proprietario.",
+    "use": "Usa questo modello",
+    "isActive": "Questo è il modello attivo",
+    "confirmTitle": "Passare a questo modello?",
+    "confirm": "Passa",
+    "confirmNote": "Vale subito per le richieste nuove e in attesa: ferie, permessi e correzioni.",
+    "saved": "Salvato.",
+    "failed": "Non salvato. Riprova.",
+    "notInPlan": "Questo modello è incluso dal piano {{plan}} in su."
   }
 }

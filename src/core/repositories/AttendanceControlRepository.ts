@@ -124,7 +124,16 @@ class AttendanceControlRepository {
     }
   }
 
+  // QA 2026-11-16: the queue is read by more than one card at once - one request in flight is shared
+  private queueInFlight: Promise<ServiceResult<{ requests: PermissionRequest[]; overtime: OvertimeAwaiting[] }>> | null = null;
+
   queue(): Promise<ServiceResult<{ requests: PermissionRequest[]; overtime: OvertimeAwaiting[] }>> {
+    if (this.queueInFlight) return this.queueInFlight;
+    this.queueInFlight = this.queueOnce().finally(() => { this.queueInFlight = null; });
+    return this.queueInFlight;
+  }
+
+  private queueOnce(): Promise<ServiceResult<{ requests: PermissionRequest[]; overtime: OvertimeAwaiting[] }>> {
     return this.call("list_prosm_time_permission_queue", {}, (data) => {
       const raw = (data ?? {}) as { requests?: PermissionRequest[]; overtime?: Record<string, unknown>[] };
       return {

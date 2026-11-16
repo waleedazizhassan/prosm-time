@@ -43,6 +43,9 @@ export const PLAN_FEATURES = [
   "connect_meetings",
   "connect_screen_share",
   "connect_meeting_recording",
+  // 2026-11-16 governance model: decentralized / centralized (Business+), combined and per kind (Pro+)
+  "governance_models",
+  "governance_advanced",
 ] as const;
 export type PlanFeature = (typeof PLAN_FEATURES)[number];
 

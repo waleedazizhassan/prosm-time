@@ -60,6 +60,11 @@ function translate(trimmed: string, t: TFunction): string | null {
   if (trimmed.includes("presence_sessions_one_active_per_user")) {
     return t("common:backendErrors.orphanedPresenceSession");
   }
+  // QA-011 (2026-11-16): two clock-ins at the same moment - the second meets the one-open-shift index before the
+  // friendly check; it means exactly "you are already clocked in"
+  if (trimmed.includes("attendance_sessions_one_open_per_user")) {
+    return t("common:backendErrors.youAreAlreadyClockedIn");
+  }
   return null;
 }
 
@@ -199,6 +204,32 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "SOS REQUIRES AN ACTIVE PRESENCE SESSION": "sosRequiresActivePresenceSession",
   "STORAGE PATH IS REQUIRED": "storagePathRequired",
   "THE OWNER'S AUTHORITY CANNOT BE OVERRIDDEN": "ownerAuthorityCannotBeOverridden",
+  "THE OWNER'S ACCOUNT IS PROTECTED": "ownerAccountProtected",
+  "STEP_UP_REQUIRED": "stepUpRequired",
+  "MFA_REQUIRED": "mfaRequired",
+  "THIS MEETING HAS ENDED": "meetingEnded",
+  "THIS MEETING IS FULL": "meetingFull",
+  "ONLY THE OWNER TRANSFERS THE OWNERSHIP": "onlyOwnerTransfers",
+  "AN OWNERSHIP TRANSFER IS ALREADY OPEN": "ownershipTransferOpen",
+  "THE WAITING PERIOD IS NOT OVER YET": "waitingNotOver",
+  "THE OWNERSHIP TRANSFER IS NOT READY": "ownershipNotReady",
+  "CHOOSE AN ACTIVE MEMBER OF THE ORGANIZATION": "chooseActiveMember",
+  "A CORRECTION FOR THIS IS ALREADY PENDING": "correctionAlreadyPending",
+  "THIS REQUEST WAS ALREADY DECIDED": "requestAlreadyDecided",
+  "THIS REQUEST IS WAITING FOR HUMAN RESOURCES": "waitingForHr",
+  // release audit 2026-11-16
+  "YOU CANNOT CHANGE YOUR OWN PERMISSIONS": "ownPermissions",
+  "YOU CANNOT CONTACT THIS PERSON": "cannotContact",
+  "YOU CANNOT APPOINT YOURSELF": "appointYourself",
+  "A DEPARTMENT MANAGER MUST HAVE THE MANAGER ROLE": "departmentManagerRole",
+  "YOU CANNOT CHANGE YOUR OWN PAY": "ownPay",
+  "THIS PAY PERIOD IS LOCKED": "payPeriodLocked",
+  "THIS ADMINISTRATION IS HELD BY SOMEONE ELSE": "administrationHeld",
+  "AN API KEY LASTS AT MOST 365 DAYS": "apiKeyMax365",
+  "A DELEGATION LASTS AT MOST 30 DAYS - GRANT IT AGAIN TO EXTEND": "delegationMax30",
+  "ONLY AN ACTIVE KEY IS ROTATED": "onlyActiveKeyRotated",
+  "THE OWNER CHANGES ONLY THROUGH AN OWNERSHIP TRANSFER": "ownerChangesOnlyByTransfer",
+  "THIS PAY PERIOD IS LOCKED - REOPEN THE PAYROLL OR RETURN THE TIMESHEET FIRST": "payPeriodLocked",
   "THIS ALLOWANCE ENTRY HAS ALREADY BEEN SUBMITTED - EDITING IS ONLY ALLOWED WHILE IN DRAFT": "allowanceEntryAlreadySubmitted",
   "THIS ALLOWANCE ENTRY IS NOT AWAITING APPROVAL": "allowanceEntryNotAwaitingApproval",
   "THIS ALLOWANCE ENTRY IS NOT IN DRAFT STATUS": "allowanceEntryNotInDraft",

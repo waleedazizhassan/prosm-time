@@ -7,7 +7,7 @@ import type { ConnectPerson } from "../../core/repositories/ConnectRepository";
 import Avatar from "../../components/common/Avatar";
 import type { CallSession } from "./engine/CallSession";
 import { ConnectEngine } from "./engine/ConnectEngine";
-import { formatDuration } from "./engine/media";
+import { formatDuration, playMedia } from "./engine/media";
 import { startRingback, startRingtone } from "./engine/sounds";
 import GlassButton from "./GlassButton";
 import styles from "./CallScreen.module.css";
@@ -25,6 +25,8 @@ export default function CallScreen({ session, people, onClose }: { session: Call
   const localVideo = useRef<HTMLVideoElement>(null);
   const [now, setNow] = useState(Date.now());
   const [quickReplies, setQuickReplies] = useState(false);
+  // phase G: the browser refused to start the other side's sound by itself - one tap starts it
+  const [soundBlocked, setSoundBlocked] = useState(false);
   const person = people.get(session.peerId);
 
   useEffect(() => session.onChange(refresh), [session]);
@@ -36,7 +38,12 @@ export default function CallScreen({ session, people, onClose }: { session: Call
     if (remoteVideo.current && remoteVideo.current.srcObject !== session.remote) remoteVideo.current.srcObject = session.remote;
     if (remoteAudio.current && remoteAudio.current.srcObject !== session.remote) remoteAudio.current.srcObject = session.remote;
     if (localVideo.current && session.local && localVideo.current.srcObject !== session.local) localVideo.current.srcObject = session.local;
+    if (session.remote.getAudioTracks().length > 0) void playMedia(remoteAudio.current).then((ok) => setSoundBlocked(!ok));
   });
+  const enableSound = () => {
+    void playMedia(remoteAudio.current).then((ok) => setSoundBlocked(!ok));
+    void playMedia(remoteVideo.current);
+  };
   // owner 2026-11-14: an incoming call rings on and on with the chosen tone (and vibrates); the caller hears the
   // ring-back tone once the other phone rings
   const ringingHere = session.state === "ringing";
@@ -73,6 +80,9 @@ export default function CallScreen({ session, people, onClose }: { session: Call
   return (
     <div className={styles.screen} role="dialog" aria-modal="true" aria-label={t("call.label", { name })}>
       <audio ref={remoteAudio} autoPlay />
+      {soundBlocked && !ended ? (
+        <button type="button" className={styles.enableSound} onClick={enableSound}>{t("call.enableSound")}</button>
+      ) : null}
       {showRemoteVideo ? <video ref={remoteVideo} className={styles.remote} autoPlay playsInline muted /> : null}
       <div className={showRemoteVideo ? `${styles.overlay} ${styles.overlayVideo}` : styles.overlay}>
         <header className={styles.top}>

@@ -122,7 +122,10 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
       "endingContinue": "للاستمرار تواصل مع فريق المبيعات لتجديد الترخيص (رقم الترخيص {{license}}):",
       "endedSubject": "انتهت الفترة التجريبية لـ PROSM Time",
       "endedBody": "انتهت الفترة التجريبية لمؤسسة {{org}}. أصبحت المؤسسة للقراءة فقط: يستطيع الجميع رؤية كل شيء، وكل بياناتك محفوظة.",
-      "endedContinue": "أدخل كود تفعيل من الإعدادات ← الاشتراك بعد تسجيل الدخول، أو تواصل معنا، فيعود كل شيء كما كان (رقم الترخيص {{license}}):"
+      "endedContinue": "أدخل كود تفعيل من الإعدادات ← الاشتراك بعد تسجيل الدخول، أو تواصل معنا، فيعود كل شيء كما كان (رقم الترخيص {{license}}):",
+      "whenDays": "بعد {{days}}",
+      "licenseHow": "علشان تجدّد: ابعتلنا على info@prosm.net أو support@prosm.net برقم الترخيص {{license}} ، وهنجهّزلك التجديد. أول ما يتعمل بيتطبّق على البرنامج لوحده، ويوصلك إشعار وإيميل فيه الترخيص الجديد.",
+      "licenseAfter": "لو الترخيص ما اتجددش، البرنامج بيبقى للقراءة بس بعد فترة السماح لحد ما يتجدد، ومفيش أي بيانات بتتمسح."
     },
     "licence": {
       "subject": "PROSM Time - تعديل ترخيص {{org}}",
@@ -325,7 +328,10 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
       "endingContinue": "Um weiterzumachen, wenden Sie sich an den Vertrieb, um die Lizenz zu verlängern (Lizenz {{license}}):",
       "endedSubject": "Ihre PROSM Time Testphase ist beendet",
       "endedBody": "Die PROSM Time Testphase von {{org}} ist beendet. Die Organisation ist jetzt schreibgeschützt: Alle sehen weiterhin alles, und alle Ihre Daten bleiben erhalten.",
-      "endedContinue": "Geben Sie nach der Anmeldung unter Einstellungen > Abonnement einen Aktivierungscode ein oder kontaktieren Sie uns, und alles läuft wie vorher (Lizenz {{license}}):"
+      "endedContinue": "Geben Sie nach der Anmeldung unter Einstellungen > Abonnement einen Aktivierungscode ein oder kontaktieren Sie uns, und alles läuft wie vorher (Lizenz {{license}}):",
+      "whenDays": "in {{days}}",
+      "licenseHow": "Zur Verlängerung: Schreib an info@prosm.net oder support@prosm.net mit deiner Lizenznummer {{license}} – wir bereiten die Verlängerung vor. Sie gilt danach automatisch, und du bekommst eine Benachrichtigung und eine E-Mail mit der neuen Lizenz.",
+      "licenseAfter": "Ohne Verlängerung ist die App nach der Kulanzfrist nur noch lesbar, bis verlängert wird; es werden keine Daten gelöscht."
     },
     "licence": {
       "subject": "PROSM Time - Lizenz von {{org}} geändert",
@@ -524,7 +530,10 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
       "endingContinue": "To continue, contact the sales team to renew the licence (licence {{license}}):",
       "endedSubject": "Your PROSM Time trial has ended",
       "endedBody": "The PROSM Time trial of {{org}} has ended. The organisation is now read-only: everyone can still see everything, and all your data is kept.",
-      "endedContinue": "Enter an activation code in Settings > Subscription after signing in, or contact us, and everything works as before (licence {{license}}):"
+      "endedContinue": "Enter an activation code in Settings > Subscription after signing in, or contact us, and everything works as before (licence {{license}}):",
+      "whenDays": "in {{days}}",
+      "licenseHow": "To renew: write to info@prosm.net or support@prosm.net with your licence number {{license}} and we will prepare the renewal. Once done it applies to the app by itself, and you get a notification and an email with the new licence.",
+      "licenseAfter": "If the licence is not renewed, the app becomes read-only after the grace period until it is renewed; no data is ever deleted."
     },
     "licence": {
       "subject": "PROSM Time - licence of {{org}} changed",
@@ -726,7 +735,10 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
       "endingContinue": "Para continuar, contacta con el equipo comercial para renovar la licencia (licencia {{license}}):",
       "endedSubject": "Tu prueba de PROSM Time ha terminado",
       "endedBody": "La prueba de PROSM Time de {{org}} ha terminado. La organización ahora es de solo lectura: todos siguen viendo todo y todos tus datos se conservan.",
-      "endedContinue": "Introduce un código de activación en Ajustes > Suscripción después de iniciar sesión, o contáctanos, y todo vuelve a funcionar como antes (licencia {{license}}):"
+      "endedContinue": "Introduce un código de activación en Ajustes > Suscripción después de iniciar sesión, o contáctanos, y todo vuelve a funcionar como antes (licencia {{license}}):",
+      "whenDays": "en {{days}}",
+      "licenseHow": "Para renovar: escribe a info@prosm.net o support@prosm.net con tu número de licencia {{license}} y prepararemos la renovación. Se aplica sola en la app y recibirás un aviso y un correo con la nueva licencia.",
+      "licenseAfter": "Si no se renueva, tras el periodo de gracia la app queda en solo lectura hasta renovarla; nunca se borra ningún dato."
     },
     "licence": {
       "subject": "PROSM Time - se modificó la licencia de {{org}}",
@@ -929,7 +941,10 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
       "endingContinue": "Pour continuer, contactez l’équipe commerciale pour renouveler la licence (licence {{license}}) :",
       "endedSubject": "Votre essai PROSM Time est terminé",
       "endedBody": "L’essai PROSM Time de {{org}} est terminé. L’organisation est désormais en lecture seule : tout le monde voit tout, et toutes vos données sont conservées.",
-      "endedContinue": "Saisissez un code d’activation dans Paramètres > Abonnement après connexion, ou contactez-nous, et tout reprend comme avant (licence {{license}}) :"
+      "endedContinue": "Saisissez un code d’activation dans Paramètres > Abonnement après connexion, ou contactez-nous, et tout reprend comme avant (licence {{license}}) :",
+      "whenDays": "dans {{days}}",
+      "licenseHow": "Pour renouveler : écrivez à info@prosm.net ou support@prosm.net avec votre numéro de licence {{license}}, nous préparerons le renouvellement. Il s’applique ensuite tout seul, et vous recevez une notification et un e-mail avec la nouvelle licence.",
+      "licenseAfter": "Sans renouvellement, l’application passe en lecture seule après le délai de grâce jusqu’au renouvellement ; aucune donnée n’est jamais supprimée."
     },
     "licence": {
       "subject": "PROSM Time - licence de {{org}} modifiée",
@@ -1132,7 +1147,10 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
       "endingContinue": "Per continuare, contatta il team commerciale per rinnovare la licenza (licenza {{license}}):",
       "endedSubject": "La tua prova di PROSM Time è terminata",
       "endedBody": "La prova di PROSM Time di {{org}} è terminata. L’organizzazione è ora in sola lettura: tutti continuano a vedere tutto e tutti i tuoi dati restano salvati.",
-      "endedContinue": "Inserisci un codice di attivazione in Impostazioni > Abbonamento dopo l’accesso, oppure contattaci, e tutto torna come prima (licenza {{license}}):"
+      "endedContinue": "Inserisci un codice di attivazione in Impostazioni > Abbonamento dopo l’accesso, oppure contattaci, e tutto torna come prima (licenza {{license}}):",
+      "whenDays": "tra {{days}}",
+      "licenseHow": "Per rinnovare: scrivi a info@prosm.net o support@prosm.net con il numero di licenza {{license}} e prepariamo il rinnovo. Si applica da solo all’app e ricevi una notifica e un’email con la nuova licenza.",
+      "licenseAfter": "Senza rinnovo, dopo il periodo di tolleranza l’app è in sola lettura fino al rinnovo; nessun dato viene mai cancellato."
     },
     "licence": {
       "subject": "PROSM Time - licenza di {{org}} modificata",
@@ -1335,7 +1353,10 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
       "endingContinue": "Para continuar, fale com a equipe comercial para renovar a licença (licença {{license}}):",
       "endedSubject": "Seu teste do PROSM Time terminou",
       "endedBody": "O teste do PROSM Time de {{org}} terminou. A organização agora está somente para leitura: todos continuam vendo tudo, e todos os seus dados ficam guardados.",
-      "endedContinue": "Digite um código de ativação em Configurações > Assinatura depois de entrar, ou fale conosco, e tudo volta a funcionar como antes (licença {{license}}):"
+      "endedContinue": "Digite um código de ativação em Configurações > Assinatura depois de entrar, ou fale conosco, e tudo volta a funcionar como antes (licença {{license}}):",
+      "whenDays": "em {{days}}",
+      "licenseHow": "Para renovar: escreva para info@prosm.net ou support@prosm.net com o número da licença {{license}} e prepararemos a renovação. Ela se aplica sozinha ao app e você recebe um aviso e um e-mail com a nova licença.",
+      "licenseAfter": "Sem renovação, o app fica só para leitura após o período de carência até ser renovado; nenhum dado é apagado."
     },
     "licence": {
       "subject": "PROSM Time - licença de {{org}} alterada",
@@ -1541,7 +1562,10 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
       "endingContinue": "Чтобы продолжить, свяжитесь с отделом продаж и продлите лицензию (лицензия {{license}}):",
       "endedSubject": "Пробный период PROSM Time закончился",
       "endedBody": "Пробный период PROSM Time для {{org}} закончился. Организация доступна только для просмотра: все по-прежнему видят всё, и все ваши данные сохранены.",
-      "endedContinue": "После входа введите код активации в разделе Настройки > Подписка или свяжитесь с нами - и всё заработает как прежде (лицензия {{license}}):"
+      "endedContinue": "После входа введите код активации в разделе Настройки > Подписка или свяжитесь с нами - и всё заработает как прежде (лицензия {{license}}):",
+      "whenDays": "через {{days}}",
+      "licenseHow": "Чтобы продлить: напишите на info@prosm.net или support@prosm.net, указав номер лицензии {{license}}, и мы подготовим продление. Оно применится в приложении само, а вы получите уведомление и письмо с новой лицензией.",
+      "licenseAfter": "Если лицензию не продлить, после льготного периода приложение будет только для чтения до продления; данные никогда не удаляются."
     },
     "licence": {
       "subject": "PROSM Time - лицензия {{org}} изменена",
@@ -1739,7 +1763,10 @@ export const EMAIL_TEXTS: Record<string, Record<string, any>> = {
       "endingContinue": "如需继续使用，请联系销售团队续订许可证（编号 {{license}}）：",
       "endedSubject": "您的 PROSM Time 试用已结束",
       "endedBody": "{{org}} 的 PROSM Time 试用已结束。机构现为只读状态：所有人仍可查看全部内容，您的所有数据都会保留。",
-      "endedContinue": "登录后在 设置 > 订阅 中输入激活码，或联系我们，一切即可恢复如初（许可证编号 {{license}}）："
+      "endedContinue": "登录后在 设置 > 订阅 中输入激活码，或联系我们，一切即可恢复如初（许可证编号 {{license}}）：",
+      "whenDays": "{{days}}后",
+      "licenseHow": "续订方法：请发送邮件至 info@prosm.net 或 support@prosm.net 并注明许可证号 {{license}}，我们将为你准备续订。完成后会自动应用到应用中，你会收到通知和附有新许可证的邮件。",
+      "licenseAfter": "如未续订，宽限期结束后应用将变为只读，直到续订；任何数据都不会被删除。"
     },
     "licence": {
       "subject": "PROSM Time - {{org}} 的许可证已变更",

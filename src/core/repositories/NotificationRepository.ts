@@ -1,3 +1,4 @@
+import type { BuzzReason } from "../utils/buzzReasons";
 import DatabaseManager from "../database/DatabaseManager";
 
 export interface ServiceResult<T = null> {
@@ -83,9 +84,18 @@ class NotificationRepository {
   }
 
   // Owner 2026-11-10: a Buzz - the person's phone vibrates and sounds (owner / manager / supervisor).
-  async sendBuzz(userId: string, reason: BuzzReason, message: string | null): Promise<ServiceResult> {
+  // fallbackText: the reason in words - used only if the server does not know a newer reason yet
+  async sendBuzz(userId: string, reason: BuzzReason, message: string | null, fallbackText?: string): Promise<ServiceResult> {
     try {
-      const { data, error } = await this.client.rpc("send_prosm_time_buzz", { p_user_id: userId, p_reason: reason, p_message: message });
+      let { data, error } = await this.client.rpc("send_prosm_time_buzz", { p_user_id: userId, p_reason: reason, p_message: message });
+      // QA-015 (2026-11-16): a database without 20261116100000 refuses the newer ready reasons (INVALID BUZZ REASON).
+      // The buzz still goes out - as "check the app" carrying the reason's words - so the web and the database can
+      // be updated in either order. The four original reasons are never re-sent.
+      if (error?.message?.includes("INVALID BUZZ REASON") && !LEGACY_BUZZ_REASONS.includes(reason)) {
+        ({ data, error } = await this.client.rpc("send_prosm_time_buzz", {
+          p_user_id: userId, p_reason: "attention", p_message: (message ?? fallbackText ?? null)?.slice(0, 140) ?? null,
+        }));
+      }
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to send the buzz.");
       return createSuccess();
@@ -117,7 +127,7 @@ class NotificationRepository {
   }
 }
 
-export type BuzzReason = "clock_in" | "clock_out" | "call_me" | "attention";
-export const BUZZ_REASONS: BuzzReason[] = ["clock_in", "clock_out", "call_me", "attention"];
+export { BUZZ_REASONS, type BuzzReason } from "../utils/buzzReasons";
+const LEGACY_BUZZ_REASONS: string[] = ["clock_in", "clock_out", "call_me", "attention"];
 
 export default new NotificationRepository();

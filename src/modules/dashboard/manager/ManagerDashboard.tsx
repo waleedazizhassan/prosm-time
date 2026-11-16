@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { cloneElement, isValidElement, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactElement } from "react";
 import BuzzButton from "../../../components/common/BuzzButton";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -216,6 +216,7 @@ export default function ManagerDashboard() {
   const time = (value: string) => formatTimeOnly(value, i18n.language);
   const kpi = data?.kpi;
   const priorities = data?.priorities ?? {};
+  const approvalsShown = !hidden.includes("approvals" as WidgetId);
   const priorityChips = [
     { key: "longSessions", to: "/manager" },
     { key: "pendingHours", to: "/manager" },
@@ -227,7 +228,10 @@ export default function ManagerDashboard() {
     { key: "timesheets", to: "/timesheets" },
     { key: "integrity", to: "/manager" },
     { key: "permissions", to: "/manager" },
-  ].filter((chip) => (priorities[chip.key] ?? 0) > 0);
+  ].filter((chip) => (priorities[chip.key] ?? 0) > 0)
+    // owner 2026-11-16 ("nothing shown twice"): what the approvals card already lists is not repeated as a chip;
+    // with that card hidden the chips come back, so nothing waiting is ever out of sight
+    .filter((chip) => !(approvalsShown && QUEUED_IN_APPROVALS.has(chip.key)));
 
   // External workers are counted apart from the employees (never in "here now").
   const externalNow = (data?.sites ?? []).reduce((sum, site) => sum + (site.external?.presentNow ?? 0), 0);
@@ -263,7 +267,8 @@ export default function ManagerDashboard() {
     switch (id) {
       case "map":
         return (
-          <section key={id} className={`${styles.widget} ${styles.span7} ${styles.equal}`} style={{ order: order.indexOf(id) }}>
+          // owner 2026-11-15: on a computer the map takes the whole width and more height
+          <section key={id} className={`${styles.widget} ${styles.span12} ${styles.mapWidget}`} style={{ order: order.indexOf(id) }}>
             <div className={styles.widgetHeader}>
               <h2 className={styles.widgetTitle}>{t("manager.map.title")}</h2>
               <span className={styles.rowMeta}>{t("manager.liveNote")}</span>
@@ -273,7 +278,7 @@ export default function ManagerDashboard() {
         );
       case "present":
         return (
-          <section key={id} className={`${styles.widget} ${styles.span5} ${styles.equal} ${styles.presentWidget}`} style={{ order: order.indexOf(id) }}>
+          <section key={id} className={`${styles.widget} ${styles.span12} ${styles.equal} ${styles.presentWidget}`} style={{ order: order.indexOf(id) }}>
             <div className={styles.widgetHeader}>
               <h2 className={styles.widgetTitle}>{t("manager.present.title", { count: data?.presentNow.length ?? 0 })}</h2>
               <button type="button" className={styles.chip} onClick={() => navigate("/attendance?period=today")}>
@@ -661,7 +666,7 @@ export default function ManagerDashboard() {
       ) : null}
 
       {/* rows 3-6: the widgets (order and visibility are the reader's own) */}
-      <div className={styles.grid}>{order.map(renderWidget)}</div>
+      <div className={styles.grid}>{fillRows(order.map(renderWidget))}</div>
 
       {/* owner 2026-10-26: the absent-today card opens the day's sheet - absent first, then on leave */}
       <KpiSheet
@@ -970,3 +975,48 @@ function ScheduleChart({ data, mode, t, language }: { data: Dashboard | null; mo
     </>
   );
 }
+
+// the kinds the approvals card lists (ApprovalsQueue): exceptions incl. out-of-range, corrections, leave, allowance
+// sheets, permissions, hours to confirm, timesheets, integrity flags
+const QUEUED_IN_APPROVALS = new Set(["outsideExceptions", "corrections", "leave", "allowanceSheets", "permissions", "pendingHours", "timesheets", "integrity"]);
+
+// owner 2026-11-16 ("no card left alone on the screen - one that is alone takes the whole width"): the cards are
+// placed in rows of 12 (7 / 5 / 4 / 12 on a wide screen, 6 / 12 on a medium one, in the reader's own order and
+// choice). Each row is worked out the way the grid places them; when a row is not full, its last card stretches
+// to the row's end. Phones show one card per row anyway.
+type Placed = ReactElement<{ className?: string; style?: CSSProperties }>;
+function fillRows(nodes: unknown[]) {
+  const items = nodes.filter((node): node is Placed => isValidElement(node));
+  const spanOf = (node: Placed, wide: boolean) => {
+    const cls = String(node.props.className ?? "");
+    const span = /span12/.test(cls) ? 12 : /span7/.test(cls) ? 7 : /span5/.test(cls) ? 5 : /span4/.test(cls) ? 4 : 12;
+    return wide ? span : span === 12 ? 12 : 6;
+  };
+  const stretch = (wide: boolean) => {
+    const extra = new Map<number, number>();
+    let used = 0;
+    let last = -1;
+    items.forEach((node, index) => {
+      const span = spanOf(node, wide);
+      if (used + span > 12 && last >= 0) {
+        if (used < 12) extra.set(last, spanOf(items[last], wide) + 12 - used);
+        used = 0;
+      }
+      used += span;
+      last = index;
+    });
+    if (last >= 0 && used < 12) extra.set(last, spanOf(items[last], wide) + 12 - used);
+    return extra;
+  };
+  const wide = stretch(true);
+  const mid = stretch(false);
+  return items.map((node, index) => {
+    if (!wide.has(index) && !mid.has(index)) return node;
+    const style = { ...(node.props.style ?? {}) } as CSSProperties & Record<string, string | number>;
+    const classes = [node.props.className ?? ""];
+    if (wide.has(index)) { style["--fill-wide"] = `span ${wide.get(index)}`; classes.push(styles.fillWide); }
+    if (mid.has(index)) { style["--fill-mid"] = `span ${mid.get(index)}`; classes.push(styles.fillMid); }
+    return cloneElement(node, { className: classes.join(" "), style });
+  });
+}
+

@@ -1,14 +1,19 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { HardDrive, MessageCircle, Phone, PhoneCall, PhoneIncoming, PhoneMissed, PhoneOutgoing, Radio, Search, Users, Video, Volume2 } from "lucide-react";
+import { HardDrive, MessageCircle, Phone, PhoneCall, PhoneIncoming, PhoneMissed, PhoneOutgoing, Radio, Search, Trash2, UserPlus, Users, Video, Volume2 } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
 import type { ConnectPerson } from "../../core/repositories/ConnectRepository";
 import { formatDateTime, formatTimeOnly } from "../../core/utils/formatDate";
+import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import Avatar from "../../components/common/Avatar";
 import EmptyState from "../../components/common/EmptyState";
+import useConfirm from "../../components/common/useConfirm";
+import Modal from "../../components/common/Modal";
+import Button from "../../components/common/Button";
+import Input from "../../components/common/Input";
 import { ConnectEngine } from "./engine/ConnectEngine";
 import type { LocalConversation } from "./engine/localStore";
 import { useConnectContext } from "./ConnectProvider";
@@ -46,6 +51,28 @@ export default function ConnectPage() {
   const [meetingMedia, setMeetingMedia] = useState<"video" | "audio">("video");
   const [invitees, setInvitees] = useState<string[]>([]);
   const [meetingTitle, setMeetingTitle] = useState("");
+  // owner 2026-11-16: remove calls from MY log (the organisation's record stays)
+  const [confirm, confirmDialog] = useConfirm();
+  // owner 2026-11-15 / 16: a new group - a name and its members (the creator becomes its admin)
+  const [groupOpen, setGroupOpen] = useState(false);
+  const [groupTitle, setGroupTitle] = useState("");
+  const [groupMembers, setGroupMembers] = useState<string[]>([]);
+  const [groupBusy, setGroupBusy] = useState(false);
+  const createGroup = async () => {
+    setGroupBusy(true);
+    const id = await ConnectEngine.createGroup(groupTitle.trim(), groupMembers);
+    setGroupBusy(false);
+    if (!id) { setError(t("group.createFailed")); return; }
+    setGroupOpen(false);
+    setGroupTitle("");
+    setGroupMembers([]);
+    setParams({ c: id });
+  };
+  const hideCalls = async (ids: string[] | null) => {
+    if (!(await confirm(t(ids ? "callLog.deleteOneConfirm" : "callLog.clearConfirm")))) return;
+    if (await ConnectEngine.hideCalls(ids)) setCalls((list) => (ids ? (list ?? []).filter((c) => !ids.includes(c.id)) : []));
+    else setError(t("actionFailed"));
+  };
   const people = connect?.people ?? new Map<string, ConnectPerson>();
   // owner 2026-11-14: the owner sees everyone; nobody else sees the owner in the lists (a conversation the owner
   // started still shows, so it can be answered)
@@ -108,6 +135,13 @@ export default function ConnectPage() {
     return person?.fullName ?? c.title ?? "";
   }
 
+  // "§kind [file name]" -> the kind's words in the person's language
+  const previewText = (value: string) => {
+    if (!value.startsWith("§")) return value;
+    const [kind, ...rest] = value.slice(1).split(" ");
+    return [t(`preview.${kind}`, { defaultValue: "" }), rest.join(" ")].filter(Boolean).join(" ");
+  };
+
   const where = (p: ConnectPerson) =>
     p.presence === "out" ? t("presence.out") : p.currentSiteName ? t("presence.atSite", { site: p.currentSiteName }) : t(`presence.${p.presence}`);
   const presentAt = (site: Site) => [...people.values()].filter((p) => p.presence !== "out" && p.currentSiteName === site.name).length;
@@ -154,6 +188,7 @@ export default function ConnectPage() {
         <h1 className={styles.title}>{t(`tabs.${tab}`)}</h1>
         <span className={styles.barActions}>
           {features?.meetings ? <GlassButton label={t("meeting.newTitle")} size="small" onClick={() => navigate("/connect/meetings")}><Users size={16} /></GlassButton> : null}
+          {features?.chat !== false ? <GlassButton label={t("group.new")} size="small" onClick={() => setGroupOpen(true)}><UserPlus size={16} /></GlassButton> : null}
           <GlassButton label={t("sound.title")} size="small" onClick={() => setSounds(true)}><Volume2 size={16} /></GlassButton>
           <GlassButton label={t("storage.title")} size="small" onClick={() => setStorage(true)}><HardDrive size={16} /></GlassButton>
         </span>
@@ -169,7 +204,7 @@ export default function ConnectPage() {
         ))}
       </nav>
       {error ? <p className={styles.error} role="alert">{error}</p> : null}
-      {connect?.error ? <p className={styles.error} role="alert" data-error={connect.error} onClick={connect.clearError}>{t("actionFailed")}</p> : null}
+      {connect?.error ? <p className={styles.error} role="alert" data-error={connect.error} onClick={connect.clearError}>{humanizeBackendError(connect.error, t) ?? t("actionFailed")}</p> : null}
 
       {tab === "chats" ? (
         <>
@@ -182,6 +217,8 @@ export default function ConnectPage() {
               <button key={key} type="button" className={filter === key ? `${styles.chip} ${styles.chipOn}` : styles.chip} onClick={() => setFilter(key)} aria-pressed={filter === key}>{t(`filters.${key}`)}</button>
             ))}
           </div>
+          {/* owner 2026-11-15: the list scrolls on its own; the title, tabs, search and filters stay in place */}
+          <div className={styles.scroll}>
           {filter === "sites" && features?.siteBroadcast ? (
             <ul className={styles.list}>
               {sites.map((site) => (
@@ -204,12 +241,12 @@ export default function ConnectPage() {
                     <li key={row.c.id} className={styles.personRow}>
                       <button type="button" className={selected === row.c.id ? `${styles.row} ${styles.rowOn}` : styles.row} onClick={() => setParams({ c: row.c.id })}>
                         <span className={styles.avatar}>
-                          {p ? <Avatar name={p.fullName} url={p.avatarUrl} size="md" /> : <span className={styles.siteAvatar}><Radio size={16} /></span>}
+                          {p ? <Avatar name={p.fullName} url={p.avatarUrl} size="md" /> : <span className={styles.siteAvatar}>{row.c.kind === "group" ? <Users size={16} /> : <Radio size={16} />}</span>}
                           {p ? <i className={`${styles.dot} ${styles[`dot_${p.presence}`]}`} aria-hidden="true" /> : null}
                         </span>
                         <span className={styles.main}>
                           <span className={styles.name}>{titleOf(row.c, p)}</span>
-                          <span className={styles.last}>{row.c.lastPreview}</span>
+                          <span className={styles.last}>{previewText(row.c.lastPreview)}</span>
                           {p ? <span className={`${styles.where} ${styles[`where_${p.presence}`]}`}>{where(p)}</span> : null}
                         </span>
                         <span className={styles.end}>
@@ -217,10 +254,10 @@ export default function ConnectPage() {
                           {row.c.unread > 0 ? <b className={styles.badge}>{row.c.unread}</b> : null}
                         </span>
                       </button>
-                      {/* owner 2026-11-14: the same buttons on every row - a person one already talked to keeps them */}
+                      {/* owner 2026-11-15: the row opens the conversation; only the two call buttons stay, quieter (on a
+                          computer they show on hover or for the open conversation) */}
                       {p ? (
                         <span className={styles.actions}>
-                          <GlassButton label={t("actions.message", { name: p.fullName })} tone="primary" size="small" onClick={() => setParams({ c: row.c.id })}><MessageCircle size={16} /></GlassButton>
                           {features?.calls ? <GlassButton label={t("actions.audioCall")} size="small" onClick={() => void connect?.startCall(p.id, "audio")}><Phone size={16} /></GlassButton> : null}
                           {features?.calls ? <GlassButton label={t("actions.videoCall")} size="small" onClick={() => void connect?.startCall(p.id, "video")}><Video size={16} /></GlassButton> : null}
                         </span>
@@ -239,7 +276,6 @@ export default function ConnectPage() {
                       </span>
                     </button>
                     <span className={styles.actions}>
-                      <GlassButton label={t("actions.message", { name: p.fullName })} tone="primary" size="small" onClick={() => void openPerson(p)}><MessageCircle size={16} /></GlassButton>
                       {features?.calls ? <GlassButton label={t("actions.audioCall")} size="small" onClick={() => void connect?.startCall(p.id, "audio")}><Phone size={16} /></GlassButton> : null}
                       {features?.calls ? <GlassButton label={t("actions.videoCall")} size="small" onClick={() => void connect?.startCall(p.id, "video")}><Video size={16} /></GlassButton> : null}
                     </span>
@@ -248,9 +284,14 @@ export default function ConnectPage() {
               })}
             </ul>
           )}
+          </div>
         </>
       ) : tab === "calls" ? (
         !features?.calls ? <EmptyState message={t("callsNotInPlan")} /> : calls === null ? null : calls.length === 0 ? <EmptyState message={t("noCalls")} /> : (
+          <div className={styles.scroll}>
+          <button type="button" className={styles.clearLog} onClick={() => void hideCalls(null)}>
+            <Trash2 size={14} aria-hidden="true" /> {t("callLog.clear")}
+          </button>
           <ul className={styles.list}>
             {calls.map((c) => {
               const p = people.get(c.otherId);
@@ -270,36 +311,38 @@ export default function ConnectPage() {
                   <span className={styles.actions}>
                     <GlassButton label={t("actions.audioCall")} size="small" onClick={() => void connect?.startCall(c.otherId, "audio")}><Phone size={16} /></GlassButton>
                     <GlassButton label={t("actions.videoCall")} tone="primary" size="small" onClick={() => void connect?.startCall(c.otherId, "video")}><Video size={16} /></GlassButton>
+                    <GlassButton label={t("callLog.deleteOne")} size="small" onClick={() => void hideCalls([c.id])}><Trash2 size={15} /></GlassButton>
                   </span>
                 </li>
               );
             })}
           </ul>
+          </div>
         )
       ) : !features?.meetings ? <EmptyState message={t("meetingsNotInPlan")} /> : (
-        <section className={styles.meetingForm}>
+        <section className={`${styles.meetingForm} ${styles.scroll}`}>
           <h2>{t("meeting.newTitle")}</h2>
           <div className={styles.mediaToggle} role="radiogroup" aria-label={t("meeting.mediaLabel")}>
             {(["video", "audio"] as const).map((m) => (
               <button key={m} type="button" role="radio" aria-checked={meetingMedia === m} className={meetingMedia === m ? `${styles.chip} ${styles.chipOn}` : styles.chip}
-                onClick={() => { setMeetingMedia(m); setInvitees((list) => list.slice(0, m === "video" ? 3 : 7)); }}>
+                onClick={() => { setMeetingMedia(m); setInvitees((list) => list.slice(0, m === "video" ? 5 : 11)); }}>
                 {m === "video" ? <Video size={14} /> : <Phone size={14} />} {t(m === "video" ? "meeting.videoUpTo" : "meeting.audioUpTo")}
               </button>
             ))}
           </div>
           <input className={styles.titleInput} value={meetingTitle} onChange={(e) => setMeetingTitle(e.target.value)} placeholder={t("meeting.titlePlaceholder")} maxLength={120} />
-          <p className={styles.hint}>{t("meeting.pick", { count: (meetingMedia === "video" ? 3 : 7) - invitees.length })}</p>
+          <p className={styles.hint}>{t("meeting.pick", { count: (meetingMedia === "video" ? 5 : 11) - invitees.length })}</p>
           {/* owner 2026-11-14: no long list to scroll - each person a small chip, tapped to invite */}
-          <div className={styles.pickGrid} role="group" aria-label={t("meeting.pick", { count: (meetingMedia === "video" ? 3 : 7) - invitees.length })}>
+          <div className={styles.pickGrid} role="group" aria-label={t("meeting.pick", { count: (meetingMedia === "video" ? 5 : 11) - invitees.length })}>
             {[...people.values()].filter(listable).map((p) => {
               const checked = invitees.includes(p.id);
-              const full = !checked && invitees.length >= (meetingMedia === "video" ? 3 : 7);
+              const full = !checked && invitees.length >= (meetingMedia === "video" ? 5 : 11);
               return (
                 <button key={p.id} type="button" aria-pressed={checked} disabled={full}
                   className={checked ? `${styles.pick} ${styles.pickOn}` : styles.pick}
                   onClick={() => setInvitees((list) => (checked ? list.filter((x) => x !== p.id) : [...list, p.id]))}>
                   <span className={styles.pickAvatar}>
-                    <Avatar name={p.fullName} url={p.avatarUrl} size="sm" />
+                    <Avatar name={p.fullName} url={p.avatarUrl} size="md" />
                     <i className={`${styles.dot} ${styles[`dot_${p.presence}`]}`} aria-hidden="true" />
                   </span>
                   <span className={styles.pickName}>{p.fullName}</span>
@@ -327,12 +370,36 @@ export default function ConnectPage() {
             <dt>{t("info.today")}</dt>
             <dd>{currentPerson.presence === "out" ? t("presence.out") : currentPerson.clockInAt ? t("info.inSince", { time: formatTimeOnly(currentPerson.clockInAt, i18n.language) }) : t(`presence.${currentPerson.presence}`)}</dd>
             <dt>{t("info.site")}</dt>
-            <dd>{currentPerson.currentSiteName ?? currentPerson.siteNames.join("، ") ?? "—"}</dd>
+            <dd>{currentPerson.currentSiteName ?? (currentPerson.siteNames.length > 0 ? currentPerson.siteNames.join("، ") : "—")}</dd>
             <dt>{t("info.role")}</dt>
             <dd>{t(`common:roles.${currentPerson.roleKey}`, { defaultValue: currentPerson.roleName })}</dd>
           </dl>
         </aside>
       ) : null}
+      {confirmDialog}
+      <Modal isOpen={groupOpen} onClose={() => setGroupOpen(false)} title={t("group.new")} size="md"
+        footer={(
+          <>
+            <Button variant="ghost" onClick={() => setGroupOpen(false)}>{t("chat.cancel")}</Button>
+            <Button loading={groupBusy} disabled={!groupTitle.trim() || groupMembers.length === 0} onClick={() => void createGroup()}>{t("group.create")}</Button>
+          </>
+        )}>
+        <Input label={t("group.name")} name="groupTitle" value={groupTitle} onChange={(e) => setGroupTitle(e.target.value.slice(0, 120))} />
+        <p className={styles.hint}>{t("group.pick", { count: groupMembers.length })}</p>
+        <div className={styles.pickGrid} role="group" aria-label={t("group.pick", { count: groupMembers.length })}>
+          {[...people.values()].filter(listable).map((p) => {
+            const checked = groupMembers.includes(p.id);
+            return (
+              <button key={p.id} type="button" aria-pressed={checked} className={checked ? `${styles.pick} ${styles.pickOn}` : styles.pick}
+                disabled={!checked && groupMembers.length >= 49}
+                onClick={() => setGroupMembers((list) => (checked ? list.filter((x) => x !== p.id) : [...list, p.id]))}>
+                <span className={styles.pickAvatar}><Avatar name={p.fullName} url={p.avatarUrl} size="md" /></span>
+                <span className={styles.pickName}>{p.fullName}</span>
+              </button>
+            );
+          })}
+        </div>
+      </Modal>
       {storage ? <StoragePanel onClose={() => setStorage(false)} /> : null}
       {sounds ? <SoundSettings onClose={() => setSounds(false)} /> : null}
     </div>

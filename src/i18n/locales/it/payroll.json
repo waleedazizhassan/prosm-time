@@ -103,7 +103,8 @@
     "ZERO_NET": "Netto zero",
     "PARTIAL_PERIOD": "Entrato o uscito nel periodo",
     "NET_CHANGED": "Il netto è cambiato molto rispetto al ciclo precedente",
-    "ATTENDANCE_CHANGED": "Presenze cambiate dopo l'accettazione di un suggerimento"
+    "ATTENDANCE_CHANGED": "Presenze cambiate dopo l'accettazione di un suggerimento",
+    "PENDING_REQUESTS": "Richieste ancora in sospeso nel periodo"
   },
   "suggestions": {
     "title": "Dalle presenze",

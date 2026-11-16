@@ -188,7 +188,8 @@
   }
 
   .mapStage :global(.leaflet-container) {
-    height: calc(100dvh - var(--header-height, 64px) - 64px - var(--safe-top, 0px) - var(--safe-bottom, 0px)) !important;
+    /* owner 2026-11-16 ("the map covers the whole screen"): from under the header down behind the bottom bar */
+    height: calc(100dvh - 56px - var(--safe-top, 0px)) !important;
     border-radius: 0 !important;
   }
 }
@@ -288,4 +289,422 @@
   color: var(--text-secondary);
   font-size: 0.7rem;
   white-space: nowrap;
+}
+
+/* ===== owner 2026-11-15: a round glass clock button, a glass map toolbar, a compass ===== */
+.roundRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 5vw, 28px);
+}
+
+.roundButton {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: clamp(104px, 28vw, 128px);
+  aspect-ratio: 1;
+  padding: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  color: #fff;
+  font: inherit;
+  font-size: var(--font-md, 1rem);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -10px 24px rgba(0, 0, 0, 0.12),
+    0 14px 34px var(--round-glow, rgba(30, 111, 217, 0.45));
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
+}
+
+/* a soft ring that breathes around the button */
+.roundButton::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid var(--round-ring, rgba(96, 165, 250, 0.55));
+  animation: roundBreath 2.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.roundButton:active {
+  transform: scale(0.96);
+}
+
+.roundButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.roundIn {
+  --round-glow: rgba(30, 111, 217, 0.5);
+  --round-ring: rgba(96, 165, 250, 0.6);
+  background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.35), transparent 45%),
+    linear-gradient(145deg, rgba(37, 99, 235, 0.62), rgba(34, 197, 94, 0.5));
+}
+
+.roundOut {
+  --round-glow: rgba(220, 38, 38, 0.45);
+  --round-ring: rgba(248, 113, 113, 0.6);
+  background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.35), transparent 45%),
+    linear-gradient(145deg, rgba(220, 38, 38, 0.6), rgba(249, 115, 22, 0.5));
+}
+
+@keyframes roundBreath {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.06); opacity: 0.35; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roundButton::after {
+    animation: none;
+  }
+}
+
+.sideButton {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: clamp(68px, 19vw, 84px);
+  aspect-ratio: 1;
+  padding: 4px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: color-mix(in srgb, var(--surface-card) 42%, transparent);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.15;
+  text-align: center;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 8px 20px rgba(2, 8, 23, 0.25);
+}
+
+.sideButton:disabled {
+  opacity: 0.55;
+}
+
+/* the toolbar on the map's side, under the card */
+.mapTools {
+  position: absolute;
+  top: 116px;
+  inset-inline-end: var(--space-3);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 4px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: color-mix(in srgb, var(--surface-card) 55%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 22px rgba(2, 8, 23, 0.22);
+}
+
+.mapTool {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 54px;
+  padding: 6px 4px;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 0.65rem;
+  cursor: pointer;
+}
+
+.mapTool:hover,
+.mapTool[aria-expanded="true"] {
+  background: color-mix(in srgb, var(--brand-primary) 16%, transparent);
+}
+
+.compass {
+  position: absolute;
+  top: 116px;
+  inset-inline-start: var(--space-3);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: color-mix(in srgb, var(--surface-card) 60%, transparent);
+  color: var(--text-primary);
+  font-size: 0.72rem;
+  font-weight: var(--font-weight-bold);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 6px 16px rgba(2, 8, 23, 0.22);
+}
+
+.compass::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  border-inline: 5px solid transparent;
+  border-bottom: 8px solid #ef4444;
+}
+
+.stylePicker {
+  position: absolute;
+  top: 116px;
+  inset-inline-end: calc(var(--space-3) + 72px);
+  z-index: 4;
+  display: flex;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: color-mix(in srgb, var(--surface-card) 70%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 26px rgba(2, 8, 23, 0.28);
+}
+
+.styleOption {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 0.68rem;
+  cursor: pointer;
+}
+
+.styleOptionOn {
+  border-color: var(--brand-primary);
+  background: color-mix(in srgb, var(--brand-primary) 14%, transparent);
+}
+
+.styleSwatch {
+  width: 56px;
+  height: 38px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.swatch_auto {
+  background: linear-gradient(135deg, #e8eef8 50%, #0f1b33 50%);
+}
+
+.swatch_light {
+  background: linear-gradient(135deg, #f1f5f9, #dbe7f5);
+}
+
+.swatch_dark {
+  background: linear-gradient(135deg, #0b1324, #1d3557);
+}
+
+/* SOS moves to the map's side, half way down, as in the owner's mock-up */
+.sosFloat {
+  position: absolute;
+  inset-inline-end: auto;
+  inset-inline-start: var(--space-3);
+  top: 46%;
+  bottom: auto;
+  z-index: 3;
+  width: 54px;
+  height: 54px;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 0 0 6px rgba(220, 38, 38, 0.18), 0 10px 22px rgba(220, 38, 38, 0.45);
+}
+
+@media (max-width: 900px) {
+  .sosFloat {
+    bottom: auto;
+  }
+}
+
+/* ===== owner 2026-11-16: the clock-in page on a computer - a framed glass map, a compact glass status card in
+   its corner instead of a strip across the whole width, and the tools lined up under it ===== */
+@media (min-width: 901px) {
+  .mapStage {
+    border-radius: 24px;
+    border: 1px solid color-mix(in srgb, var(--border-light) 70%, transparent);
+    box-shadow: 0 24px 60px -28px rgba(2, 8, 23, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .mapStage :global(.leaflet-container) {
+    height: min(680px, calc(100dvh - 190px)) !important;
+  }
+
+  .mapInfo {
+    top: var(--space-4);
+    inset-inline-start: var(--space-4);
+    inset-inline-end: auto;
+    max-width: min(440px, calc(100% - 140px));
+    padding: 10px 14px;
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--surface-card) 58%, transparent);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(14px) saturate(1.2);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 12px 30px -12px rgba(2, 8, 23, 0.45);
+  }
+
+  .compass {
+    top: var(--space-4);
+    inset-inline-start: auto;
+    inset-inline-end: var(--space-4);
+  }
+
+  .mapTools {
+    top: calc(var(--space-4) + 50px);
+  }
+
+  .stylePicker {
+    top: calc(var(--space-4) + 50px);
+  }
+
+  .fabBar {
+    bottom: var(--space-5);
+  }
+}
+
+/* ===== owner 2026-11-16 ("put all the buttons in the empty part; remove layers, my location and the compass"):
+   on a computer the map ends above a strip that holds every button - clock in/out in the middle with break and
+   change site, SOS at one end, hours and reminders (EmployeeHome) at the other. The phone keeps its layout. ===== */
+@media (min-width: 901px) {
+  .mapStage {
+    display: flex;
+    flex-direction: column;
+    background: color-mix(in srgb, var(--surface-card) 70%, transparent);
+  }
+
+  .mapStage :global(.leaflet-container) {
+    height: min(560px, calc(100dvh - 360px)) !important;
+    min-height: 300px;
+  }
+
+  .fabBar {
+    position: static;
+    inset: auto;
+    min-height: 168px;
+    justify-content: center;
+    padding: var(--space-4) var(--space-5);
+    border-top: 1px solid color-mix(in srgb, var(--border-light) 70%, transparent);
+  }
+
+  .sideButton {
+    width: 84px;
+  }
+
+  .sosFloat {
+    position: absolute;
+    top: auto;
+    bottom: 57px;
+    inset-inline-start: auto;
+    inset-inline-end: var(--space-5);
+  }
+}
+
+/* ===== owner 2026-11-16 (a phone, 368 x 719): smaller buttons, nothing under the bottom bar, the card clear of the
+   header, SOS above the hours button ===== */
+.roundButton {
+  width: clamp(88px, 24vw, 108px);
+  font-size: 0.85rem;
+}
+
+.roundButton svg {
+  width: 28px;
+  height: 28px;
+}
+
+.sideButton {
+  width: clamp(58px, 16vw, 70px);
+  font-size: 0.64rem;
+}
+
+@media (max-width: 900px) {
+  .mapInfo {
+    top: var(--space-3);
+  }
+
+  /* the buttons stand clear above the bottom bar (64px) with room for their breathing ring */
+  .fabBar {
+    bottom: calc(64px + 18px + var(--safe-bottom, 0px));
+  }
+
+  /* SOS at the top of the column of round buttons, above hours and reminders */
+  .sosFloat {
+    position: fixed;
+    top: auto;
+    bottom: calc(64px + 18px + 120px + 2 * 46px + 2 * 8px + var(--safe-bottom, 0px));
+    inset-inline-start: auto;
+    inset-inline-end: var(--space-4);
+    width: 46px;
+    height: 46px;
+    font-size: 18px;
+    z-index: 850;
+  }
+}
+
+@media (min-width: 901px) {
+  /* a computer: SOS sits above the hours and reminders buttons at the strip's start */
+  .sosFloat {
+    width: 46px;
+    height: 46px;
+    font-size: 18px;
+    bottom: calc(14px + 2 * 46px + 2 * 8px);
+    inset-inline-end: auto;
+    inset-inline-start: var(--space-5);
+  }
+
+  .fabBar {
+    min-height: 176px;
+  }
+}
+
+/* owner 2026-11-16: the words stay inside the circle, a softer type, and a more see-through button */
+.roundButton span {
+  display: block;
+  max-width: 78%;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  letter-spacing: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  overflow-wrap: anywhere;
+}
+
+.roundIn {
+  background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.28), transparent 45%),
+    linear-gradient(145deg, rgba(37, 99, 235, 0.42), rgba(34, 197, 94, 0.32));
+}
+
+.roundOut {
+  background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.28), transparent 45%),
+    linear-gradient(145deg, rgba(220, 38, 38, 0.42), rgba(249, 115, 22, 0.32));
+}
+
+.sideButton span {
+  max-width: 86%;
+  font-weight: 600;
 }

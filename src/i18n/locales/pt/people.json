@@ -85,7 +85,8 @@
     "announcements.manage": "Gerir todos os anúncios",
     "announcements.view_reads": "Ver quem leu os anúncios",
     "departments.manage": "Gerir departamentos",
-    "hr.manage": "Gerir fichas de pessoal"
+    "hr.manage": "Gerir fichas de pessoal",
+    "hr.approve_all_requests": "Decidir os pedidos não sensíveis de todos (RH)"
   },
   "invite": {
     "actionLabel": "Convidar funcionário",
@@ -252,7 +253,8 @@
       "supervisors": "Supervisores",
       "employees": "Funcionários",
       "viewers": "Leitores",
-      "owner": "Proprietário"
+      "owner": "Proprietário",
+      "departmentManagers": "Gestores de departamento"
     },
     "invitation": {
       "pending": "Convite ainda não aceito",
@@ -263,7 +265,10 @@
       "android": "Android",
       "ios": "iPhone",
       "web": "Navegador / computador"
-    }
+    },
+    "managesDepartment": "Gere {{names}}",
+    "noDepartmentManagers": "Nenhum departamento tem gestor ainda.",
+    "chooseDepartmentManagers": "Escolha em Configurações > Pessoas > Departamentos"
   },
   "deviceStatus": {
     "pending": "Aguardando",
@@ -282,7 +287,7 @@
     "window": "de {{from}} a {{to}}",
     "ended": "terminada",
     "startLabel": "A partir de (opcional - hoje se vazio)",
-    "endLabel": "Até (opcional - até retirar se vazio)",
+    "endLabel": "Até (opcional – 30 dias se vazio, no máximo 30 dias)",
     "endBeforeStart": "A data de fim deve ser posterior à de início.",
     "windowHint": "Começa e termina sozinha nessas datas. Pode retirá-la a qualquer momento.",
     "neverDelegated": "Nunca delegado: encerrar a organização, o plano e códigos de ativação, a retenção de dados, as chaves de API, conceder a gestão de permissões e a própria delegação. Ninguém - nem o delegado - aprova o próprio pedido."
@@ -331,7 +336,8 @@
       "leave": "Férias",
       "penalties": "Sanções e incentivos",
       "history": "Histórico",
-      "account": "Conta e permissões"
+      "account": "Conta e permissões",
+      "security": "Segurança"
     },
     "fields": {
       "jobTitle": "Cargo",
@@ -453,5 +459,60 @@
     },
     "stillHeld": "Nem tudo foi retirado: esta pessoa tem a autoridade total do proprietário. Retire-a primeiro no botão «{{owner}}».",
     "viaOwner": "Vem com a autoridade do proprietário - retire lá"
+  },
+  "security": {
+    "title": "Login em duas etapas",
+    "subtitle": "Um código de um app autenticador no seu telefone, além da senha.",
+    "on": "O login em duas etapas está ativado.",
+    "off": "O login em duas etapas está desativado.",
+    "requiredForYou": "Sua função exige o login em duas etapas para folha de pagamento e permissões. Ative agora.",
+    "enable": "Ativar",
+    "scan": "Escaneie este código com um app autenticador (Google Authenticator, Microsoft Authenticator…) e digite o código de 6 dígitos.",
+    "qrAlt": "Código QR para o app autenticador",
+    "secret": "Ou digite esta chave manualmente: {{secret}}",
+    "code": "Código de 6 dígitos",
+    "verify": "Verificar e ativar",
+    "cancel": "Cancelar",
+    "enabled": "O login em duas etapas está ativado.",
+    "removed": "O app autenticador foi removido.",
+    "remove": "Remover",
+    "authenticator": "App autenticador",
+    "wrongCode": "O código não está correto. Verifique a hora do telefone e tente novamente.",
+    "failed": "Não foi possível iniciar. Tente novamente.",
+    "removeNeedsCode": "Para removê-lo, entre novamente com o código do autenticador primeiro."
+  },
+  "perms": {
+    "hint": "Ligue ou desligue qualquer linha. Uma linha agrupada concede ou retira tudo junto.",
+    "count": "{{on}} de {{total}}",
+    "partly": "Concedida em parte",
+    "changedFromRole": "Diferente da função",
+    "resetAll": "Voltar ao padrão da função",
+    "resetTitle": "Voltar às permissões da função?",
+    "resetExplain": "Todas as permissões concedidas ou retiradas individualmente desta pessoa são desfeitas; ela fica com as permissões da função.",
+    "grantTitle": "Conceder permissão",
+    "revokeTitle": "Retirar permissão",
+    "lineExplain": "\"{{name}}\" - escreva o motivo; ele vai para o registro de atividades.",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "groups": {
+      "attendance": "Ponto",
+      "leave": "Férias e calendário",
+      "people": "Pessoas e permissões",
+      "payroll": "Folha e adicionais",
+      "external": "Mão de obra externa",
+      "sites": "Locais, escalas e projetos",
+      "reports": "Relatórios, painel e registro",
+      "settings": "Avisos, notificações e configurações",
+      "other": "Outros"
+    },
+    "merged": {
+      "onBehalf": "Registrar entrada e saída por outra pessoa",
+      "payrollExports": "Exportar a folha (resumo, holerites, adicionais)",
+      "reports": "Ver relatórios e gerar PDF",
+      "timesheets": "Gerar e aprovar folhas de horas",
+      "announcements": "Publicar avisos e ver quem leu",
+      "externalPay": "Ver e exportar o pagamento de externos"
+    },
+    "setMoves": "{{names}} gerencia agora \"{{set}}\". Dar aqui tira dele (só o que recebeu deste conjunto; as permissões do cargo e compartilhadas ficam)."
   }
 }

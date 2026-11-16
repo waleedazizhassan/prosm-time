@@ -83,7 +83,8 @@
       "atSite": "Bin am Standort, rufe gleich zurück",
       "callLater": "Kann gerade nicht, rufe zurück",
       "inMeeting": "In einer Besprechung, rufe danach an"
-    }
+    },
+    "enableSound": "Tippen, um den Ton einzuschalten"
   },
   "callStatus": {
     "ringing": "Klingelt",
@@ -134,7 +135,21 @@
     "talking": "Sprechen… loslassen zum Senden",
     "today": "Heute",
     "yesterday": "Gestern",
-    "download": "Herunterladen"
+    "download": "Herunterladen",
+    "deleteMessage": "Nachricht löschen",
+    "deleteMessageConfirm": "Diese Nachricht von deinem Gerät löschen? Die andere Person behält ihre.",
+    "deleteChat": "Chat löschen",
+    "deleteChatConfirm": "Den ganzen Chat von deinem Gerät löschen? Die andere Person behält ihren.",
+    "deleteForMe": "Für mich löschen",
+    "deleteForEveryone": "Für alle löschen",
+    "deleteMineHint": "„Für alle löschen“ entfernt sie von den Geräten aller im Chat (aktualisierte Apps).",
+    "deletedMessage": "Diese Nachricht wurde gelöscht",
+    "youDeleted": "Du hast diese Nachricht gelöscht",
+    "deleteForEveryoneFailed": "Nicht für alle gelöscht. Versuch es noch einmal.",
+    "cancel": "Abbrechen",
+    "reply": "Antworten",
+    "cancelReply": "Antwort abbrechen",
+    "typing": "{{name}} schreibt…"
   },
   "info": {
     "inSince": "Anwesend seit {{time}}",
@@ -174,8 +189,14 @@
     "you": "Sie",
     "videoTitle": "Videobesprechung",
     "audioTitle": "Sprachbesprechung",
-    "videoUpTo": "Video, bis 4",
-    "audioUpTo": "Sprache, bis 8"
+    "videoUpTo": "Video bis 6",
+    "audioUpTo": "Audio bis 12",
+    "send": "Senden",
+    "full": "Vollbild",
+    "exitFull": "Vollbild beenden",
+    "reactions": "Schnelle Reaktionen",
+    "chatUnread": "Chat ({{count}} neu)",
+    "react": "Reagieren"
   },
   "storage": {
     "clean": "{{what}} bereinigen",
@@ -205,5 +226,39 @@
     "messageSound": "Ton bei neuer Nachricht",
     "messageVibrate": "Vibration bei neuer Nachricht",
     "note": "Diese Einstellungen gelten nur für dieses Gerät. In der Android-App klingelt ein Anruf mit dem Klingelton des Telefons, auch wenn die App geschlossen oder der Bildschirm gesperrt ist; im Browser muss die Seite geöffnet sein."
+  },
+  "preview": {
+    "image": "📷 Foto",
+    "camera_photo": "📷 Beglaubigtes Foto",
+    "file": "📎 Datei",
+    "voice_note": "🎤 Sprachnachricht",
+    "push_to_talk": "📻 Push-to-Talk",
+    "missed": "📞 Verpasster Anruf",
+    "meeting_invite": "👥 Besprechungseinladung",
+    "photo_request": "📷 Fotoanfrage",
+    "deleted": "Eine Nachricht wurde gelöscht"
+  },
+  "callLog": {
+    "clear": "Anrufliste leeren",
+    "clearConfirm": "Alle Anrufe aus deiner Liste entfernen? Der Eintrag der Organisation bleibt.",
+    "deleteOne": "Aus Liste entfernen",
+    "deleteOneConfirm": "Diesen Anruf aus deiner Liste entfernen?"
+  },
+  "group": {
+    "new": "Neue Gruppe",
+    "name": "Gruppenname",
+    "pick": "Mitglieder wählen ({{count}} gewählt)",
+    "create": "Gruppe erstellen",
+    "createFailed": "Die Gruppe wurde nicht erstellt. Versuch es noch einmal.",
+    "members": "Mitglieder ({{count}})",
+    "admin": "Admin",
+    "you": "Du",
+    "remove": "Aus der Gruppe entfernen",
+    "add": "Hinzufügen",
+    "choosePerson": "Person wählen",
+    "leave": "Gruppe verlassen",
+    "leaveConfirm": "Gruppe verlassen? Der Chat wird von diesem Gerät entfernt.",
+    "audioCall": "Gruppen-Sprachanruf",
+    "videoCall": "Gruppen-Videoanruf"
   }
 }

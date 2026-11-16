@@ -31,7 +31,8 @@
   },
   "installation": {
     "grace": "此安装未获得有效许可证。请在 {{date}} 前激活许可证。",
-    "blocked": "此安装未获得有效许可证，访问已被暂停。请联系您的管理员。"
+    "blocked": "此安装未获得有效许可证，访问已被暂停。请联系您的管理员。",
+    "close": "关闭"
   },
   "update": {
     "available": "有新版本（v{{version}}）可用。",
@@ -270,7 +271,15 @@
       "clock_in": "请打卡上班。",
       "clock_out": "请打卡下班。",
       "call_me": "请给我回电话。",
-      "attention": "请查看应用。"
+      "attention": "请查看应用。",
+      "go_home_early": "你今天可以早点下班。",
+      "tomorrow_off": "你明天休息。",
+      "dont_be_late": "请不要上班迟到。",
+      "end_break": "请结束休息。",
+      "come_to_office": "请来办公室一趟。",
+      "check_messages": "请查看你的消息。",
+      "shift_changed": "你的班次已变更，请查看排班。",
+      "well_done": "干得好，谢谢。"
     },
     "mockLocation": {
       "title": "虚假位置",
@@ -333,6 +342,10 @@
       "incentiveReviewBody": "{{name}}：{{reason}}",
       "incentiveGrantedTitle": "干得好！",
       "incentiveGrantedBody": "您获得了奖励：{{reason}}"
+    },
+    "ownership": {
+      "title": "所有权转让",
+      "body": "组织的所有权转让有更新，打开查看详情。"
     }
   },
   "items": {
@@ -367,7 +380,9 @@
     "penalties": "处罚与奖励",
     "connect": "聊天",
     "connectCalls": "通话记录",
-    "connectMeetings": "会议"
+    "connectMeetings": "会议",
+    "governance": "治理模式",
+    "security": "安全"
   },
   "sosOverlay": {
     "title": "SOS/紧急警报",
@@ -565,7 +580,15 @@
       "clock_in": "打卡上班",
       "clock_out": "打卡下班",
       "call_me": "给我回电话",
-      "attention": "查看应用"
+      "attention": "查看应用",
+      "go_home_early": "早点下班",
+      "tomorrow_off": "明天休息",
+      "dont_be_late": "别迟到",
+      "end_break": "结束休息",
+      "come_to_office": "来办公室",
+      "check_messages": "查看消息",
+      "shift_changed": "班次已变更",
+      "well_done": "干得好"
     },
     "messageLabel": "简短留言（可选）",
     "send": "发送提醒",

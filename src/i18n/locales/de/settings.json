@@ -111,7 +111,12 @@
         "leave_rejected": "Urlaub abgelehnt",
         "leave_cancelled": "Urlaub storniert"
       }
-    }
+    },
+    "rotateAction": "Erneuern",
+    "rotateTitle": "Diesen Schlüssel erneuern?",
+    "rotateWarning": "Ein neuer Schlüssel ersetzt „{{name}}“ mit denselben Bereichen. Der alte funktioniert noch 24 Stunden, damit Sie das andere System umstellen können, und endet dann von selbst.",
+    "rotateError": "Der Schlüssel konnte nicht erneuert werden.",
+    "replaced": "Ersetzt – endet innerhalb von 24 Stunden"
   },
   "payroll": {
     "title": "Lohnbuchhaltungs-Integration",
@@ -231,7 +236,7 @@
       "enterprise": "Enterprise"
     },
     "includes": "Was Ihr Paket enthält",
-    "always": "In jedem Plan: Stempeln am Standort mit Geofence und Fotonachweis, offline, Live-Karte, SOS, Radio, Wetter und 9 Sprachen.",
+    "always": "In jedem Plan: Stempeln am Standort mit Geofence und Fotonachweis, offline, Live-Karte, SOS, Radio, Wetter und 9 Sprachen. Außerdem: Zwei-Faktor-Prüfung und Identitätsbestätigung, Personalnummern und das einfache Genehmigungsmodell.",
     "included": "enthalten",
     "notIncluded": "nicht in Ihrem Paket",
     "features": {
@@ -258,7 +263,17 @@
       "delegation": "Volle und befristete Vertretung",
       "retention": "Steuerung der Datenaufbewahrung",
       "documents": "Mitarbeiterdokumente und Ablaufdaten",
-      "penalties": "Gestufte Sanktionsordnung und Prämien"
+      "penalties": "Gestufte Sanktionsordnung und Prämien",
+      "governance_models": "Governance-Modelle: dezentral und zentral",
+      "governance_advanced": "Kombinierte Governance (zwei Schritte) und ein Modell je Antragsart",
+      "connect_chat": "Chats und Gruppen",
+      "connect_camera_photo": "Verifiziertes Kamerafoto im Chat",
+      "connect_calls": "Sprach- und Videoanrufe",
+      "connect_site_broadcast": "Nachricht an alle eines Standorts",
+      "connect_push_to_talk": "Push-to-Talk (Funk)",
+      "connect_meetings": "Besprechungen und Gruppenanrufe",
+      "connect_screen_share": "Bildschirmfreigabe",
+      "connect_meeting_recording": "Besprechungsaufzeichnung"
     },
     "managedByProsm": "Änderungen und Verlängerungen Ihrer Lizenz nimmt PROSM vor; Sie erhalten eine Benachrichtigung und eine E-Mail mit der neuen Lizenz. Änderungen: sales@prosm.net.",
     "historyAll": "Angezeigte Stempelungen: alle. Standortpunkte und Fotos werden nach der Frist unter „Aufbewahrung“ automatisch gelöscht.",
@@ -288,7 +303,8 @@
     "sites": "Standorte",
     "outside": "Außerhalb der Standorte",
     "people": "Personen und Anwesenheit",
-    "other": "Paket und Sicherheit"
+    "other": "Paket und Sicherheit",
+    "governance": "Governance-Modell"
   },
   "overtimeTarget": {
     "title": "Überstunden und Verspätung verrechnen",
@@ -322,5 +338,201 @@
     "people_one": "1 Person",
     "people_other": "{{count}} Personen",
     "error": "Speichern fehlgeschlagen."
+  },
+  "ownership": {
+    "title": "Eigentum übertragen",
+    "subtitle": "Der einzige Weg, den Inhaber zu wechseln.",
+    "explain": "Wählen Sie ein aktives Mitglied. Es muss annehmen, dann vergehen 72 Stunden, in denen alle Manager informiert werden; bis zum Abschluss können Sie abbrechen. Danach sind Sie Manager.",
+    "to": "Neuer Inhaber",
+    "choose": "Mitglied wählen",
+    "reason": "Grund",
+    "start": "Übertragung starten",
+    "started": "Die Übertragung wurde gestartet. Warten auf die Annahme.",
+    "waitingForYou": "{{name}} möchte Ihnen das Eigentum der Organisation übertragen. Nehmen Sie an, um fortzufahren.",
+    "waitingForThem": "Warten auf die Annahme durch {{name}}.",
+    "cooling": "{{name}} hat angenommen. Die Übertragung wird nach {{when}} abgeschlossen, sofern sie nicht abgebrochen wird.",
+    "ready": "Die Wartezeit ist vorbei. Die Übertragung an {{name}} kann jetzt abgeschlossen werden.",
+    "accept": "Annehmen",
+    "accepted": "Angenommen. Die Übertragung kann nach 72 Stunden abgeschlossen werden.",
+    "complete": "Übertragung abschließen",
+    "completed": "Das Eigentum wurde übertragen.",
+    "cancel": "Übertragung abbrechen",
+    "decline": "Ablehnen",
+    "cancelled": "Die Übertragung wurde abgebrochen.",
+    "failed": "Dieser Schritt war nicht möglich."
+  },
+  "connectUsage": {
+    "title": "Connect-Nutzung (Anrufe und Meetings)",
+    "subtitle": "Diesen Monat: was direkt zwischen Geräten lief (kostenlos) und was über ein Relay lief (zählt zum freien Kontingent des Relays).",
+    "empty": "Diesen Monat noch keine gemessenen Anrufe.",
+    "kind": "Art",
+    "sessions": "Anzahl",
+    "directMinutes": "Minuten direkt",
+    "relayMinutes": "Minuten über Relay",
+    "relayMb": "MB über Relay",
+    "perMinute": "MB/Min",
+    "total": "Über ein Relay {{relay}} MB von {{total}} MB.",
+    "server": "{{server}}: {{mb}} MB in {{minutes}} Min",
+    "kinds": {
+      "audio": "Sprachanruf",
+      "video": "Videoanruf",
+      "meeting": "Meeting"
+    }
+  },
+  "security": {
+    "title": "Sicherheit für sensible Aktionen",
+    "subtitle": "Lohnabrechnung freigeben oder wieder öffnen, Lohnzettel veröffentlichen, API-Schlüssel, Rechte ändern, Eigentum übertragen.",
+    "stepUp": {
+      "title": "Identität vor einer sensiblen Aktion bestätigen",
+      "hint": "Liegt die letzte Anmeldung über 10 Minuten zurück, fragt die App vorher nach dem Passwort (oder dem Zwei-Faktor-Code)."
+    },
+    "mfa": {
+      "title": "Zwei-Faktor-Bestätigung für Inhaber, Lohnfreigeber und Rechtevergeber vorschreiben",
+      "hint": "Bestätigt wird mit einem Code aus einer Authenticator-App (Google oder Microsoft Authenticator), nicht nur mit dem Passwort. Wer sie nicht hat, richtet sie zuerst ein."
+    },
+    "platformOn": "Von der Plattform für alle Organisationen eingeschaltet.",
+    "howTo": "Jede Person schaltet die Zwei-Faktor-Bestätigung in ihrem Profil > Sicherheit ein: QR-Code mit einer Authenticator-App scannen und den 6-stelligen Code eingeben.",
+    "openMine": "Meine Sicherheit öffnen",
+    "saved": "Gespeichert.",
+    "saveFailed": "Nicht gespeichert. Versuch es noch einmal."
+  },
+  "employeeCodes": {
+    "title": "Mitarbeiternummern",
+    "subtitle": "5 fortlaufende Ziffern nach Betriebszugehörigkeit.",
+    "hint": "Eine Nummer wird automatisch vergeben, sobald ein Eintrittsdatum eingetragen ist, und bleibt. Wenn du ältere Eintrittsdaten ergänzt, nummeriere hier neu, um die Reihenfolge wiederherzustellen. Freigegebene Lohnabrechnungen behalten ihre Nummern.",
+    "renumber": "Nach Zugehörigkeit neu nummerieren",
+    "confirm": "Alle Mitarbeitenden nach Eintrittsdatum neu nummerieren? Die aktuellen Nummern ändern sich.",
+    "done": "{{count}} Mitarbeitende neu nummeriert.",
+    "failed": "Nicht neu nummeriert. Versuch es noch einmal."
+  },
+  "governance": {
+    "title": "Governance-Modell",
+    "subtitle": "Wer über Anträge der Mitarbeitenden entscheidet. Wähle das passende Modell - lies vorher, wie jedes funktioniert.",
+    "current": "Aktuelles Modell:",
+    "custom": "Je Antragsart angepasst",
+    "active": "Aktiv",
+    "appliesTo": "Gilt für: Urlaub, Freistellungen und Zeitkorrekturen",
+    "sections": {
+      "perms": "Wer darf was",
+      "flow": "Ablauf",
+      "life": "Lebenszyklus des Antrags"
+    },
+    "modes": {
+      "direct": {
+        "title": "Einfach (Standard)",
+        "tagline": "Jede zuständige Leitung entscheidet in einem Schritt.",
+        "how": "Der Antrag erscheint bei allen mit Befugnis über die Person: Standortleitung, Abteilungsleitung, HR und Inhaber. Wer zuerst entscheidet, schließt ihn ab.",
+        "perms": {
+          "1": "Standortleitung: für die Leute ihres Standorts",
+          "2": "Abteilungsleitung: für ihre Abteilung",
+          "3": "HR: für alle Mitarbeitenden",
+          "4": "Inhaber und Vertretungen: für alle"
+        },
+        "flow": {
+          "1": "Antrag wird gestellt",
+          "2": "Er erscheint bei allen Zuständigen",
+          "3": "Die erste Person genehmigt oder lehnt ab",
+          "4": "Die Person wird benachrichtigt"
+        },
+        "life": {
+          "1": "Gestellt",
+          "2": "In Prüfung",
+          "3": "Genehmigt oder abgelehnt"
+        },
+        "fits": "Passt für: kleine Firmen (5 bis 30 Mitarbeitende)."
+      },
+      "decentralized": {
+        "title": "Dezentral",
+        "tagline": "Der Betrieb entscheidet: Standort oder Abteilung.",
+        "how": "Die Standort- oder Abteilungsleitung entscheidet für ihre Leute. HR nur, wenn es keine direkte Leitung gibt; der Inhaber ist immer Vertretung.",
+        "perms": {
+          "1": "Standort- oder Abteilungsleitung: für ihre Leute",
+          "2": "HR: nur ohne direkte Leitung",
+          "3": "Inhaber und Vertretungen: für alle"
+        },
+        "flow": {
+          "1": "Antrag wird gestellt",
+          "2": "Er geht an die Standort- oder Abteilungsleitung",
+          "3": "Die Leitung genehmigt oder lehnt ab",
+          "4": "Die Person wird benachrichtigt"
+        },
+        "life": {
+          "1": "Gestellt",
+          "2": "Wartet auf die Leitung",
+          "3": "Genehmigt oder abgelehnt"
+        },
+        "fits": "Passt für: Firmen mit vielen Filialen und Standorten."
+      },
+      "centralized": {
+        "title": "Zentral",
+        "tagline": "Nur HR entscheidet.",
+        "how": "Alle Anträge gehen an HR. Standort- und Abteilungsleitungen sehen ihre Leute, entscheiden aber nicht; Inhaber und Vertretungen sind Vertretung.",
+        "perms": {
+          "1": "HR: für alle Mitarbeitenden",
+          "2": "Standort- und Abteilungsleitungen: nur Einblick",
+          "3": "Inhaber und Vertretungen: für alle"
+        },
+        "flow": {
+          "1": "Antrag wird gestellt",
+          "2": "Er geht an HR",
+          "3": "HR genehmigt oder lehnt ab",
+          "4": "Die Person wird benachrichtigt"
+        },
+        "life": {
+          "1": "Gestellt",
+          "2": "Wartet auf HR",
+          "3": "Genehmigt oder abgelehnt"
+        },
+        "fits": "Passt für: Firmen mit starker HR-Abteilung und einheitlichen Entscheidungen."
+      },
+      "two_step": {
+        "title": "Kombiniert (zwei Schritte)",
+        "tagline": "Erst die Leitung, dann bestätigt HR.",
+        "how": "Die Standort- oder Abteilungsleitung genehmigt, dann geht der Antrag zur endgültigen Freigabe an HR. Eine Ablehnung beendet ihn. Ohne direkte Leitung geht er direkt an HR; wer beide Rollen hat, genehmigt einmal.",
+        "perms": {
+          "1": "Standort- oder Abteilungsleitung: erste Genehmigung",
+          "2": "HR: endgültige Freigabe",
+          "3": "Inhaber und Vertretungen: direkt"
+        },
+        "flow": {
+          "1": "Antrag wird gestellt",
+          "2": "Die Leitung genehmigt oder lehnt ab",
+          "3": "Nach der Genehmigung geht er an HR",
+          "4": "HR genehmigt oder lehnt ab",
+          "5": "Die Person wird benachrichtigt"
+        },
+        "life": {
+          "1": "Gestellt",
+          "2": "Wartet auf die Leitung",
+          "3": "Wartet auf HR",
+          "4": "Genehmigt oder abgelehnt"
+        },
+        "fits": "Passt für: mittlere und große Firmen (ab 100 Mitarbeitenden)."
+      }
+    },
+    "alwaysTitle": "In jedem Modell gleich",
+    "always": {
+      "1": "Lohn, Zulagen, Sanktionen, Rechte, Abrechnung und Eigentum bleiben beim Inhaber",
+      "2": "Niemand entscheidet seinen eigenen Antrag",
+      "3": "Inhaber und Vertretungen können jeden Antrag entscheiden",
+      "4": "Ein abgeschlossener Lohnzeitraum kann nicht geändert werden",
+      "5": "Jede Entscheidung und jede Modelländerung wird protokolliert"
+    },
+    "kinds": {
+      "leave": "Urlaub",
+      "permission": "Freistellungen (Verspätung / früher Gehen)",
+      "correction": "Zeitkorrekturen"
+    },
+    "perKind": "Feinabstimmung: ein eigenes Modell je Antragsart",
+    "needHr": "Niemand hat „Alle nicht sensiblen Anträge entscheiden (HR)“. Vergib es auf der Rechteseite, sonst gehen Anträge an den Inhaber.",
+    "needManagers": "Es gibt keine Standort- oder Abteilungsleitungen. Lege sie zuerst fest, sonst gehen Anträge an HR oder den Inhaber.",
+    "use": "Dieses Modell verwenden",
+    "isActive": "Das ist das aktive Modell",
+    "confirmTitle": "Zu diesem Modell wechseln?",
+    "confirm": "Wechseln",
+    "confirmNote": "Gilt sofort für neue und noch offene Anträge: Urlaub, Freistellungen und Zeitkorrekturen.",
+    "saved": "Gespeichert.",
+    "failed": "Nicht gespeichert. Versuch es noch einmal.",
+    "notInPlan": "Dieses Modell gibt es ab dem Paket {{plan}}."
   }
 }

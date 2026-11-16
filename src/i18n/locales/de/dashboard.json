@@ -265,7 +265,17 @@
       "thanks": "Danke - gespeichert.",
       "label": "Wie die Schicht war"
     },
-    "presenceShort": "Überwachung aktiv"
+    "presenceShort": "Überwachung aktiv",
+    "mapTools": {
+      "label": "Kartenwerkzeuge",
+      "layers": "Ebenen",
+      "myLocation": "Mein Standort",
+      "style": {
+        "auto": "Automatisch",
+        "light": "Hell",
+        "dark": "Dunkel"
+      }
+    }
   },
   "kioskPin": {
     "title": "Kiosk-PIN",
@@ -470,7 +480,9 @@
       "noLocation": "Ohne Standort auf der Karte",
       "noLocationHint": "Ohne Koordinaten eingestempelt (z. B. Gerät ohne GPS) - kann nicht platziert werden.",
       "noLocationShort": "Ohne Standort",
-      "elsewhere": "Außerhalb der Standorte"
+      "elsewhere": "Außerhalb der Standorte",
+      "previous": "Vorherige Standorte",
+      "next": "Weitere Standorte"
     },
     "present": {
       "title": "Jetzt anwesend ({{count}})",

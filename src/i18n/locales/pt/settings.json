@@ -111,7 +111,12 @@
         "leave_rejected": "Férias recusadas",
         "leave_cancelled": "Férias canceladas"
       }
-    }
+    },
+    "rotateAction": "Renovar",
+    "rotateTitle": "Renovar esta chave?",
+    "rotateWarning": "Uma nova chave substitui \"{{name}}\" com os mesmos escopos. A antiga continua funcionando por 24 horas para você atualizar o outro sistema e depois para sozinha.",
+    "rotateError": "Não foi possível renovar esta chave.",
+    "replaced": "Substituída – termina em até 24 horas"
   },
   "payroll": {
     "title": "Integração com a folha de pagamento",
@@ -231,7 +236,7 @@
       "enterprise": "Enterprise"
     },
     "includes": "O que o seu plano inclui",
-    "always": "Em todos os planos: ponto no local com geocerca e foto, offline, mapa ao vivo, SOS, rádio, clima e 9 idiomas.",
+    "always": "Em todos os planos: ponto no local com geocerca e foto, offline, mapa ao vivo, SOS, rádio, clima e 9 idiomas. Também: verificação em duas etapas e confirmação de identidade, códigos de funcionário e o modelo de aprovação simples.",
     "included": "incluído",
     "notIncluded": "não incluído no seu plano",
     "features": {
@@ -258,7 +263,17 @@
       "delegation": "Delegação completa e temporária",
       "retention": "Controle de retenção de dados",
       "documents": "Documentos dos funcionários e validade",
-      "penalties": "Regulamento de sanções progressivas e incentivos"
+      "penalties": "Regulamento de sanções progressivas e incentivos",
+      "governance_models": "Modelos de governança: descentralizado e centralizado",
+      "governance_advanced": "Governança combinada (duas etapas) e um modelo por tipo",
+      "connect_chat": "Conversas e grupos",
+      "connect_camera_photo": "Foto verificada da câmera na conversa",
+      "connect_calls": "Chamadas de voz e vídeo",
+      "connect_site_broadcast": "Mensagem para todo um local",
+      "connect_push_to_talk": "Apertar para falar (rádio)",
+      "connect_meetings": "Reuniões e chamadas em grupo",
+      "connect_screen_share": "Compartilhar tela",
+      "connect_meeting_recording": "Gravação de reuniões"
     },
     "managedByProsm": "Qualquer alteração ou renovação da sua licença é feita pela PROSM; você recebe uma notificação e um e-mail com a nova licença. Para alterar, escreva para sales@prosm.net.",
     "historyAll": "Registros de ponto exibidos: todos. Pontos de localização e fotos são apagados automaticamente após o prazo em “Retenção de dados”.",
@@ -289,7 +304,8 @@
     "sites": "Locais",
     "outside": "Fora dos locais",
     "people": "Pessoas e presença",
-    "other": "Plano e segurança"
+    "other": "Plano e segurança",
+    "governance": "Modelo de governança"
   },
   "overtimeTarget": {
     "title": "Horas extra e atrasos",
@@ -324,5 +340,201 @@
     "people_other": "{{count}} pessoas",
     "error": "Não foi possível guardar.",
     "people_many": "{{count}} pessoas"
+  },
+  "ownership": {
+    "title": "Transferir a propriedade",
+    "subtitle": "A única forma de mudar o proprietário.",
+    "explain": "Escolha um membro ativo. Ele precisa aceitar; depois passam 72 horas em que todos os gestores são avisados, e você pode cancelar até a conclusão. Depois você passa a ser gestor.",
+    "to": "Novo proprietário",
+    "choose": "Escolha um membro",
+    "reason": "Motivo",
+    "start": "Iniciar a transferência",
+    "started": "A transferência começou. Aguardando o destinatário aceitar.",
+    "waitingForYou": "{{name}} quer transferir a propriedade da organização para você. Aceite para continuar.",
+    "waitingForThem": "Aguardando {{name}} aceitar.",
+    "cooling": "{{name}} aceitou. A transferência é concluída após {{when}}, a menos que seja cancelada.",
+    "ready": "O período de espera terminou. A transferência para {{name}} pode ser concluída agora.",
+    "accept": "Aceitar",
+    "accepted": "Aceita. A transferência pode ser concluída após 72 horas.",
+    "complete": "Concluir a transferência",
+    "completed": "A propriedade foi transferida.",
+    "cancel": "Cancelar a transferência",
+    "decline": "Recusar",
+    "cancelled": "A transferência foi cancelada.",
+    "failed": "Não foi possível concluir esta etapa."
+  },
+  "connectUsage": {
+    "title": "Uso do Connect (chamadas e reuniões)",
+    "subtitle": "Este mês: o que foi direto entre dispositivos (grátis) e o que passou por um relay (conta na cota gratuita dele).",
+    "empty": "Ainda não há chamadas medidas este mês.",
+    "kind": "Tipo",
+    "sessions": "Quantidade",
+    "directMinutes": "Minutos diretos",
+    "relayMinutes": "Minutos via relay",
+    "relayMb": "MB via relay",
+    "perMinute": "MB/min",
+    "total": "Via relay {{relay}} MB de {{total}} MB.",
+    "server": "{{server}}: {{mb}} MB em {{minutes}} min",
+    "kinds": {
+      "audio": "Chamada de voz",
+      "video": "Videochamada",
+      "meeting": "Reunião"
+    }
+  },
+  "security": {
+    "title": "Segurança para ações sensíveis",
+    "subtitle": "Aprovar ou reabrir a folha, publicar holerites, chaves de API, alterar permissões, transferir a propriedade.",
+    "stepUp": {
+      "title": "Confirmar a identidade antes de uma ação sensível",
+      "hint": "Se o último login tiver mais de 10 minutos, o app pede a senha (ou o código de dois fatores) antes de continuar."
+    },
+    "mfa": {
+      "title": "Exigir verificação em duas etapas do proprietário, aprovadores da folha e de quem atribui permissões",
+      "hint": "A confirmação é por um código de um app autenticador (Google ou Microsoft Authenticator), não só a senha. Quem não tiver deve ativar primeiro."
+    },
+    "platformOn": "Ativado pela plataforma para todas as organizações.",
+    "howTo": "Cada pessoa ativa a verificação em duas etapas no seu perfil > Segurança: lê o QR code com um app autenticador e digita o código de 6 dígitos.",
+    "openMine": "Abrir minha segurança",
+    "saved": "Salvo.",
+    "saveFailed": "Não foi salvo. Tente de novo."
+  },
+  "employeeCodes": {
+    "title": "Códigos de funcionário",
+    "subtitle": "5 dígitos sequenciais por antiguidade de contratação.",
+    "hint": "O código é dado automaticamente assim que a data de contratação é informada e permanece. Se adicionar datas mais antigas, numere de novo aqui para recuperar a ordem. A folha aprovada mantém seus códigos.",
+    "renumber": "Numerar de novo por antiguidade",
+    "confirm": "Numerar todos de novo pela data de contratação? Os códigos atuais vão mudar.",
+    "done": "{{count}} funcionários numerados de novo.",
+    "failed": "Não foi renumerado. Tente de novo."
+  },
+  "governance": {
+    "title": "Modelo de governança",
+    "subtitle": "Quem decide os pedidos dos funcionários. Escolha o modelo certo e leia antes como cada um funciona.",
+    "current": "Modelo atual:",
+    "custom": "Personalizado por tipo",
+    "active": "Ativo",
+    "appliesTo": "Vale para: férias, permissões e correções de ponto",
+    "sections": {
+      "perms": "Quem pode o quê",
+      "flow": "Fluxo",
+      "life": "Ciclo de vida do pedido"
+    },
+    "modes": {
+      "direct": {
+        "title": "Simples (padrão)",
+        "tagline": "Qualquer gestor responsável pelo funcionário decide em uma etapa.",
+        "how": "O pedido aparece para todos com autoridade sobre o funcionário: gestor do local, do departamento, RH e proprietário. Quem decidir primeiro fecha.",
+        "perms": {
+          "1": "Gestor do local: decide pelo pessoal do local",
+          "2": "Gestor do departamento: decide pelo departamento",
+          "3": "RH: decide por todos",
+          "4": "Proprietário e delegados: decidem tudo"
+        },
+        "flow": {
+          "1": "O funcionário envia o pedido",
+          "2": "Aparece para todos os responsáveis",
+          "3": "O primeiro aprova ou rejeita",
+          "4": "O funcionário recebe a decisão"
+        },
+        "life": {
+          "1": "Enviado",
+          "2": "Em análise",
+          "3": "Aprovado ou rejeitado"
+        },
+        "fits": "Indicado para: empresas pequenas (5 a 30 funcionários)."
+      },
+      "decentralized": {
+        "title": "Descentralizado",
+        "tagline": "Decide a operação: o local ou o departamento.",
+        "how": "O gestor do local ou do departamento decide pelo seu pessoal. O RH só entra se o funcionário não tiver gestor direto; o proprietário é sempre a reserva.",
+        "perms": {
+          "1": "Gestor do local ou departamento: decide pelo seu pessoal",
+          "2": "RH: só sem gestor direto",
+          "3": "Proprietário e delegados: decidem tudo"
+        },
+        "flow": {
+          "1": "O funcionário envia o pedido",
+          "2": "Vai ao gestor do local ou departamento",
+          "3": "O gestor aprova ou rejeita",
+          "4": "O funcionário recebe a decisão"
+        },
+        "life": {
+          "1": "Enviado",
+          "2": "Aguardando o gestor",
+          "3": "Aprovado ou rejeitado"
+        },
+        "fits": "Indicado para: empresas com muitas filiais e locais."
+      },
+      "centralized": {
+        "title": "Centralizado",
+        "tagline": "Só o RH decide.",
+        "how": "Todos os pedidos vão ao RH. Gestores de local e departamento acompanham o pessoal mas não decidem; proprietário e delegados são a reserva.",
+        "perms": {
+          "1": "RH: decide por todos",
+          "2": "Gestores de local e departamento: só acompanham",
+          "3": "Proprietário e delegados: decidem tudo"
+        },
+        "flow": {
+          "1": "O funcionário envia o pedido",
+          "2": "Vai ao RH",
+          "3": "O RH aprova ou rejeita",
+          "4": "O funcionário recebe a decisão"
+        },
+        "life": {
+          "1": "Enviado",
+          "2": "Aguardando o RH",
+          "3": "Aprovado ou rejeitado"
+        },
+        "fits": "Indicado para: empresas com RH forte e decisões uniformes."
+      },
+      "two_step": {
+        "title": "Combinado (duas etapas)",
+        "tagline": "O gestor aprova primeiro, depois o RH confirma.",
+        "how": "O gestor do local ou do departamento aprova e o pedido vai ao RH para a aprovação final. Uma rejeição de qualquer um fecha o pedido. Sem gestor direto vai direto ao RH; quem tem os dois papéis aprova uma vez.",
+        "perms": {
+          "1": "Gestor do local ou departamento: primeira aprovação",
+          "2": "RH: aprovação final",
+          "3": "Proprietário e delegados: aprovam direto"
+        },
+        "flow": {
+          "1": "O funcionário envia o pedido",
+          "2": "O gestor aprova ou rejeita",
+          "3": "Aprovado, vai ao RH",
+          "4": "O RH aprova ou rejeita",
+          "5": "O funcionário recebe a decisão"
+        },
+        "life": {
+          "1": "Enviado",
+          "2": "Aguardando o gestor",
+          "3": "Aguardando o RH",
+          "4": "Aprovado ou rejeitado"
+        },
+        "fits": "Indicado para: empresas médias e grandes (100+ funcionários)."
+      }
+    },
+    "alwaysTitle": "Igual em todos os modelos",
+    "always": {
+      "1": "Folha, adicionais, penalidades, permissões, faturamento e propriedade ficam com o proprietário",
+      "2": "Ninguém decide o próprio pedido",
+      "3": "O proprietário e os delegados podem decidir qualquer pedido",
+      "4": "Um período de folha fechado não pode ser alterado",
+      "5": "Cada decisão e cada troca de modelo fica registrada"
+    },
+    "kinds": {
+      "leave": "Férias",
+      "permission": "Permissões (atraso / saída antecipada)",
+      "correction": "Correções de ponto"
+    },
+    "perKind": "Ajuste fino: um modelo diferente por tipo de pedido",
+    "needHr": "Ninguém tem \"Decidir os pedidos não sensíveis de todos (RH)\". Atribua na página de permissões, senão os pedidos vão ao proprietário.",
+    "needManagers": "Não há gestores de local nem de departamento. Defina-os primeiro, senão os pedidos vão ao RH ou ao proprietário.",
+    "use": "Usar este modelo",
+    "isActive": "Este é o modelo ativo",
+    "confirmTitle": "Mudar para este modelo?",
+    "confirm": "Mudar",
+    "confirmNote": "Vale na hora para pedidos novos e pendentes: férias, permissões e correções.",
+    "saved": "Salvo.",
+    "failed": "Não foi salvo. Tente de novo.",
+    "notInPlan": "Este modelo vem com o plano {{plan}} ou superior."
   }
 }

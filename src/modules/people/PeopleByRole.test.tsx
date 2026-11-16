@@ -1,6 +1,8 @@
 // v2.3.43 step 15 (item 18): groups in role order, alphabetical inside,
 // one search across groups, "no results".
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render as rtlRender, screen, waitFor } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import type { ReactElement } from "react";
 import { describe, expect, it, vi } from "vitest";
 
 import type { DirectoryPerson } from "../../core/repositories/PeopleDirectoryRepository";
@@ -25,6 +27,11 @@ const person = (id: string, fullName: string, roleKey: string, extra: Partial<Di
   ...extra,
 });
 
+let departmentManagersFixture = new Map<string, string[]>();
+
+// the Buzz beside each person reads who is signed in (owner 2026-11-16); signed out here, so it stays hidden
+vi.mock("../../core/context/AuthContext", () => ({ useAuth: () => ({ profile: null }) }));
+
 vi.mock("../../core/repositories/PeopleDirectoryRepository", () => ({
   default: {
     status: vi.fn(async () => new Map()),
@@ -37,19 +44,25 @@ vi.mock("../../core/repositories/PeopleDirectoryRepository", () => ({
       person("s1", "Sami", "supervisor"),
     ]),
     avatarOf: vi.fn(async () => null),
+    // owner 2026-11-16: department managers (none unless a test sets them)
+    departmentManagers: vi.fn(async () => departmentManagersFixture),
   },
 }));
 
 import PeopleByRole from "./PeopleByRole";
 
+const render = (ui: ReactElement) => rtlRender(<MemoryRouter>{ui}</MemoryRouter>);
+
 describe("PeopleByRole", () => {
   it("shows the Owner on their own, then managers, supervisors, employees, viewers - names in order (owner 2026-11-13)", async () => {
     const { container } = render(<PeopleByRole />);
-    await waitFor(() => expect(container.querySelectorAll("section")).toHaveLength(5));
-    const titles = [...container.querySelectorAll("section")].map((section) => section.querySelector("button")!.textContent);
+    // owner, the (still empty) department managers with where to choose them, managers, supervisors, employees, viewers
+    await waitFor(() => expect(container.querySelectorAll("section")).toHaveLength(6));
+    const titles = [...container.querySelectorAll("section")].map((section) => (section.querySelector("button, div") as HTMLElement).textContent);
     expect(titles[0]).toContain("1");
-    expect(titles[1]).toContain("1");
-    const employeeNames = [...container.querySelectorAll("section")[3].querySelectorAll("li")].map((li) => li.textContent ?? "");
+    expect(titles[1]).toMatch(/departmentManagers|Department managers/);
+    expect(titles[2]).toContain("1");
+    const employeeNames = [...container.querySelectorAll("section")[4].querySelectorAll("li")].map((li) => li.textContent ?? "");
     expect(employeeNames[0]).toContain("Amr");
     expect(employeeNames[1]).toContain("Zeinab");
   });
@@ -63,4 +76,30 @@ describe("PeopleByRole", () => {
     expect(container.querySelectorAll("section")).toHaveLength(0);
     expect(screen.getByText(/byRole.noResults|No one matches/)).toBeTruthy();
   });
+
+  it("a department manager is listed under department managers, with the department - and in no other group (owner 2026-11-16)", async () => {
+    departmentManagersFixture = new Map([["m1", ["Finance"]]]);
+    const { container } = render(<PeopleByRole />);
+    await waitFor(() => expect(container.querySelectorAll("section")).toHaveLength(5));
+    const sections = [...container.querySelectorAll("section")];
+    const titles = sections.map((section) => section.querySelector("button")!.textContent ?? "");
+    expect(titles[1]).toMatch(/departmentManagers|Department managers/);
+    expect(sections[1].textContent).toContain("Mona");
+    expect(sections[1].textContent).toContain("Finance");
+    const monaRows = [...container.querySelectorAll("li")].filter((li) => (li.textContent ?? "").includes("Mona"));
+    expect(monaRows).toHaveLength(1);
+    expect(titles.some((title) => /^Managers|byRole.groups.managers/.test(title))).toBe(false);
+    departmentManagersFixture = new Map();
+  });
+
+  it("the owner managing a department stays under the owner (with the department) - the managers' group still shows, empty", async () => {
+    departmentManagersFixture = new Map([["o1", ["Safety"]]]);
+    const { container } = render(<PeopleByRole />);
+    await waitFor(() => expect(container.querySelectorAll("section")).toHaveLength(6));
+    const sections = [...container.querySelectorAll("section")];
+    expect(sections[0].textContent).toContain("Safety");
+    expect((sections[1].querySelector("div") as HTMLElement).textContent).toMatch(/departmentManagers|Department managers/);
+    departmentManagersFixture = new Map();
+  });
 });
+

@@ -31,7 +31,8 @@
   },
   "installation": {
     "grace": "النسخة دي مش مغطاة بترخيص صالح. برجاء تفعيل الترخيص قبل {{date}}.",
-    "blocked": "النسخة دي مش مغطاة بترخيص صالح وتم إيقاف الوصول. برجاء التواصل مع المسؤول عندك."
+    "blocked": "النسخة دي مش مغطاة بترخيص صالح وتم إيقاف الوصول. برجاء التواصل مع المسؤول عندك.",
+    "close": "إغلاق"
   },
   "update": {
     "available": "في نسخة جديدة (v{{version}}) متاحة.",
@@ -275,7 +276,15 @@
       "clock_in": "سجّل حضورك من فضلك.",
       "clock_out": "سجّل انصرافك من فضلك.",
       "call_me": "كلّمني من فضلك.",
-      "attention": "افتح البرنامج من فضلك."
+      "attention": "افتح البرنامج من فضلك.",
+      "go_home_early": "تقدر تروّح بدري النهارده.",
+      "tomorrow_off": "إنت بكرة إجازة.",
+      "dont_be_late": "متتأخرش على ورديتك من فضلك.",
+      "end_break": "خلّص استراحتك من فضلك.",
+      "come_to_office": "تعالى المكتب من فضلك.",
+      "check_messages": "شوف رسايلك من فضلك.",
+      "shift_changed": "ورديتك اتغيرت - شوف جدولك.",
+      "well_done": "شغل ممتاز - شكراً ليك."
     },
     "mockLocation": {
       "title": "موقع مزيف",
@@ -338,6 +347,10 @@
       "incentiveReviewBody": "{{name}}: {{reason}}",
       "incentiveGrantedTitle": "مبروك!",
       "incentiveGrantedBody": "حصلت على حافز: {{reason}}"
+    },
+    "ownership": {
+      "title": "نقل ملكية المؤسسة",
+      "body": "تغيّرت حالة نقل ملكية المؤسسة. افتح التفاصيل."
     }
   },
   "items": {
@@ -372,7 +385,9 @@
     "penalties": "الجزاءات والحوافز",
     "connect": "المحادثات",
     "connectCalls": "سجل المكالمات",
-    "connectMeetings": "الاجتماعات"
+    "connectMeetings": "الاجتماعات",
+    "governance": "نموذج الحوكمة",
+    "security": "الأمان"
   },
   "sosOverlay": {
     "title": "تنبيه طوارئ (SOS)",
@@ -595,7 +610,15 @@
       "clock_in": "سجّل حضورك",
       "clock_out": "سجّل انصرافك",
       "call_me": "كلّمني",
-      "attention": "افتح البرنامج"
+      "attention": "افتح البرنامج",
+      "go_home_early": "روّح بدري",
+      "tomorrow_off": "بكرة إجازتك",
+      "dont_be_late": "متتأخرش على الوردية",
+      "end_break": "خلّص استراحتك",
+      "come_to_office": "تعالى المكتب",
+      "check_messages": "شوف رسايلك",
+      "shift_changed": "ورديتك اتغيرت",
+      "well_done": "شغل ممتاز"
     },
     "messageLabel": "رسالة قصيرة (اختياري)",
     "send": "ابعت البظ",

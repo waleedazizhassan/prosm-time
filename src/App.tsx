@@ -10,6 +10,7 @@ import { ThemeProvider } from "./core/context/ThemeContext";
 import { CalendarProvider } from "./core/context/CalendarContext";
 import { FeedbackProvider } from "./core/context/FeedbackContext";
 import ErrorBoundary from "./components/common/ErrorBoundary";
+import StepUpHost from "./components/common/StepUpHost";
 import useAndroidBackButton from "./core/hooks/useAndroidBackButton";
 import useSessionResume from "./core/hooks/useSessionResume";
 
@@ -33,6 +34,8 @@ export default function App() {
           {/* Owner 2026-11-10: one message box for every error and success */}
           <FeedbackProvider>
             <AppRoutes />
+            {/* governance phase C: "confirm it's you" before a sensitive action, when the server asks */}
+            <StepUpHost />
           </FeedbackProvider>
         </CalendarProvider>
       </ThemeProvider>

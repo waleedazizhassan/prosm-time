@@ -268,7 +268,17 @@
       "thanks": "Obrigado, guardado.",
       "label": "Como foi o turno"
     },
-    "presenceShort": "Monitorização ativa"
+    "presenceShort": "Monitorização ativa",
+    "mapTools": {
+      "label": "Ferramentas do mapa",
+      "layers": "Camadas",
+      "myLocation": "Minha localização",
+      "style": {
+        "auto": "Automático",
+        "light": "Claro",
+        "dark": "Escuro"
+      }
+    }
   },
   "kioskPin": {
     "title": "PIN do quiosque",
@@ -473,7 +483,9 @@
       "noLocation": "Sem localização no mapa",
       "noLocationHint": "Registou sem coordenadas (ex.: sem GPS), não pode ser colocado.",
       "noLocationShort": "Sem localização",
-      "elsewhere": "Fora dos locais"
+      "elsewhere": "Fora dos locais",
+      "previous": "Locais anteriores",
+      "next": "Mais locais"
     },
     "present": {
       "title": "Presentes agora ({{count}})",

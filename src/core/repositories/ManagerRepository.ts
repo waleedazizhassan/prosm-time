@@ -492,7 +492,17 @@ class ManagerRepository {
         };
       });
 
-      const correctionItems: PendingReviewItem[] = reviewable((correctionsResult.data ?? []) as RawCorrectionRequestRow[]).map((row) => {
+      // phase F: the server lists the corrections this person may decide now (HR / department managers decide
+      // people outside their sites; the combined model's HR step). Older servers: the table read below.
+      const serverQueue = await this.client.rpc("list_prosm_time_correction_queue");
+      const queued = !serverQueue.error && Array.isArray(serverQueue.data)
+        ? (serverQueue.data as { id: string; userId: string; fullName: string; eventType: string; correctTime: string; reason: string; createdAt: string }[])
+        : null;
+      const correctionRows: RawCorrectionRequestRow[] = queued
+        ? queued.map((q) => ({ id: q.id, user_id: q.userId, proposed_event_type: q.eventType, proposed_correct_time: q.correctTime, reason: q.reason,
+            created_at: q.createdAt, users: { full_name: q.fullName } as RawUserRef }))
+        : reviewable((correctionsResult.data ?? []) as RawCorrectionRequestRow[]);
+      const correctionItems: PendingReviewItem[] = correctionRows.map((row) => {
         const user = Array.isArray(row.users) ? row.users[0] : row.users;
         return {
           kind: "correction_request" as const,

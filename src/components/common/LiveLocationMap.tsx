@@ -1,9 +1,11 @@
 import { useEffect, useRef } from "react";
 import { LocateFixed } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 import { useTheme } from "../../core/context/ThemeContext";
+import { addBaseLayer } from "./mapBase";
 import styles from "./LiveLocationMap.module.css";
 
 // PROSM Time - § live UX review, user-directed: a real, theme-aware
@@ -28,16 +30,19 @@ import styles from "./LiveLocationMap.module.css";
 // image path doesn't resolve correctly once bundled by Vite, and a
 // plain brand-colored dot matches this app's own MapPin/token language
 // better than Leaflet's default blue pin anyway.
-const TILE_URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-const TILE_ATTRIBUTION = "© OpenStreetMap";
+// The base map itself (and its credit) comes from ./mapBase - owner 2026-11-15.
 
-function buildMarkerIcon(): L.DivIcon {
-  return L.divIcon({
-    className: styles.markerIcon,
-    html: '<span></span>',
-    iconSize: [16, 16],
-    iconAnchor: [8, 8],
-  });
+// owner 2026-11-16: the person is their picture on the map (their first letter without one), not a dot
+const escapeHtml = (value: string) => value.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] ?? c);
+function buildMarkerIcon(person?: { name: string; avatarUrl: string | null } | null): L.DivIcon {
+  if (!person) {
+    return L.divIcon({ className: styles.markerIcon, html: "<span></span>", iconSize: [16, 16], iconAnchor: [8, 8] });
+  }
+  const initial = escapeHtml((person.name.trim()[0] ?? "?").toUpperCase());
+  const inner = person.avatarUrl
+    ? `<img src="${escapeHtml(person.avatarUrl)}" alt="" referrerpolicy="no-referrer" onerror="this.replaceWith(document.createTextNode('${initial}'))" />`
+    : initial;
+  return L.divIcon({ className: styles.personIcon, html: `<span>${inner}</span>`, iconSize: [44, 44], iconAnchor: [22, 22] });
 }
 
 interface LiveLocationMapProps {
@@ -53,13 +58,20 @@ interface LiveLocationMapProps {
   recenterLabel?: string;
   /** Owner 2026-11-11: each change brings the map back to the person (a card over the map does it). */
   recenterSignal?: number;
+  /** Owner 2026-11-15: the map style picked by the person ("auto" follows the app's theme). */
+  tileMode?: "auto" | "light" | "dark";
+  /** Owner 2026-11-15: the site's name as a glass label on its zone. */
+  siteLabel?: string | null;
+  /** Owner 2026-11-16: the person shown at their place - their picture, or their first letter. */
+  person?: { name: string; avatarUrl: string | null } | null;
 }
 
-export default function LiveLocationMap({ latitude, longitude, site = null, height = 200, siteTone = "neutral", accuracyMeters = null, recenterLabel, recenterSignal = 0 }: LiveLocationMapProps) {
+export default function LiveLocationMap({ latitude, longitude, site = null, height = 200, siteTone = "neutral", accuracyMeters = null, recenterLabel, recenterSignal = 0, tileMode = "auto", siteLabel = null, person = null }: LiveLocationMapProps) {
   const { resolvedTheme } = useTheme();
+  const { i18n } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
-  const tileLayerRef = useRef<L.TileLayer | null>(null);
+  const tileLayerRef = useRef<L.Layer | null>(null);
   const markerRef = useRef<L.Marker | null>(null);
   const circleRef = useRef<L.Circle | null>(null);
   const accuracyRef = useRef<L.Circle | null>(null);
@@ -87,15 +99,18 @@ export default function LiveLocationMap({ latitude, longitude, site = null, heig
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
-    if (tileLayerRef.current) map.removeLayer(tileLayerRef.current);
-    const tileLayer = L.tileLayer(TILE_URL, {
-      attribution: TILE_ATTRIBUTION,
-      maxZoom: 19,
-      className: resolvedTheme === "dark" ? styles.darkTiles : undefined,
+    const dark = tileMode === "auto" ? resolvedTheme === "dark" : tileMode === "dark";
+    // the edge light follows the chosen style
+    containerRef.current?.classList.toggle(styles.mapDark, dark);
+    let cancelled = false;
+    void addBaseLayer(map, dark, dark ? styles.darkTiles : styles.lightTiles, () => !cancelled && mapRef.current === map, i18n.language).then((layer) => {
+      if (!layer) return;
+      if (cancelled || mapRef.current !== map) { layer.remove(); return; }
+      if (tileLayerRef.current) map.removeLayer(tileLayerRef.current);
+      tileLayerRef.current = layer;
     });
-    tileLayer.addTo(map);
-    tileLayerRef.current = tileLayer;
-  }, [resolvedTheme]);
+    return () => { cancelled = true; };
+  }, [resolvedTheme, tileMode, i18n.language]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -115,7 +130,7 @@ export default function LiveLocationMap({ latitude, longitude, site = null, heig
     }
 
     if (latitude !== null && longitude !== null) {
-      markerRef.current = L.marker([latitude, longitude], { icon: buildMarkerIcon() }).addTo(map);
+      markerRef.current = L.marker([latitude, longitude], { icon: buildMarkerIcon(person) }).addTo(map);
       if (accuracyMeters && accuracyMeters > 0) {
         const markerColor = getComputedStyle(document.documentElement).getPropertyValue("--brand-primary").trim() || "#2563eb";
         accuracyRef.current = L.circle([latitude, longitude], { radius: accuracyMeters, color: markerColor, fillColor: markerColor, fillOpacity: 0.06, weight: 1, dashArray: "4 4", interactive: false }).addTo(map);
@@ -134,13 +149,18 @@ export default function LiveLocationMap({ latitude, longitude, site = null, heig
           : siteTone === "outside"
           ? "#ea580c"
           : tokens.getPropertyValue("--brand-primary").trim() || "#2563eb";
+      // owner 2026-11-15: a brighter zone with a glowing edge, and its name as a glass label
       circleRef.current = L.circle([site.latitude, site.longitude], {
         radius: site.allowedRadiusMeters,
         color: brandColor,
         fillColor: brandColor,
-        fillOpacity: 0.15,
-        weight: 1.5,
+        fillOpacity: 0.16,
+        weight: 2.5,
+        className: styles.siteZone,
       }).addTo(map);
+      if (siteLabel) {
+        circleRef.current.bindTooltip(siteLabel.replace(/[&<>"']/g, ""), { permanent: true, direction: "top", className: styles.siteLabel, offset: [0, -6] });
+      }
     }
 
     if (site) {
@@ -151,7 +171,7 @@ export default function LiveLocationMap({ latitude, longitude, site = null, heig
     } else if (latitude !== null && longitude !== null) {
       map.setView([latitude, longitude], 15);
     }
-  }, [latitude, longitude, site, siteTone, accuracyMeters]);
+  }, [latitude, longitude, site, siteTone, accuracyMeters, siteLabel, person?.name, person?.avatarUrl]);
 
   const recenter = () => {
     const map = mapRef.current;

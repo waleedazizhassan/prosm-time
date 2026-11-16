@@ -13,6 +13,7 @@ import { formatDateOnly } from "../../core/utils/formatDate";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import PermissionRepository from "../../core/repositories/PermissionRepository";
 import OwnerAuthorityRepository, { type OwnerDelegation } from "../../core/repositories/OwnerAuthorityRepository";
+import ManagementMoveNotice from "./ManagementMoveNotice";
 
 // Owner 2026-11-12: "a button per role - the owner's authority, finance manager, HR manager, attendance only,
 // sites... besides the single permissions. Nobody gets a permission twice: one taken with a whole role shows
@@ -89,7 +90,12 @@ export default function PermissionBundles({ userId, effective, overrides, catalo
         : await OwnerAuthorityRepository.revoke(userId, reason.trim());
     } else {
       const bundle = PERMISSION_BUNDLES.find((b) => b.id === pending.id)!;
-      for (const key of keysOf(bundle)) {
+      // owner 2026-11-16: taking a set back leaves what another set the person holds also needs (reports.view in
+      // both HR and finance - taking HR back must not break their finance work)
+      const neededElsewhere = (key: string) => PERMISSION_BUNDLES.some((other) => other.id !== bundle.id && other.keys.includes(key)
+        && keysOf(other).every((k) => effective.includes(k)));
+      const ownKeys = keysOf(bundle).filter((k) => pending.action === "grant" || !neededElsewhere(k));
+      for (const key of ownKeys) {
         // never twice: grant only what is missing
         if (pending.action === "grant" && effective.includes(key)) continue;
         if (pending.action === "revoke" && !effective.includes(key)) continue;
@@ -105,7 +111,7 @@ export default function PermissionBundles({ userId, effective, overrides, catalo
       // and it is checked: anything still held after taking back comes with the owner's whole authority
       if (!failure && pending.action === "revoke") {
         const after = await PermissionRepository.getEffectivePermissions(userId);
-        if (after.success && keysOf(bundle).some((k) => (after.data ?? []).includes(k))) failure = "BUNDLE STILL HELD";
+        if (after.success && ownKeys.some((k) => (after.data ?? []).includes(k))) failure = "BUNDLE STILL HELD";
       }
     }
     setBusy(false);
@@ -171,6 +177,7 @@ export default function PermissionBundles({ userId, effective, overrides, catalo
         footer={<Button fullWidth loading={busy} variant={pending?.action === "revoke" ? "danger" : "primary"} onClick={() => void run()}>{pending?.action === "grant" ? t("bundles.grant") : t("bundles.revoke")}</Button>}>
         <ErrorText>{error}</ErrorText>
         {pending ? <HintText small>{t(pending.action === "grant" ? "bundles.grantNote" : "bundles.revokeNote")}</HintText> : null}
+        {pending && pending.id !== "owner" && pending.action === "grant" ? <ManagementMoveNotice userId={userId} set={pending.id} /> : null}
         {pending?.id === "owner" && pending.action === "grant" ? (
           <>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(10rem, 1fr))", gap: "var(--space-3)" }}>

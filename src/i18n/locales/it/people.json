@@ -85,7 +85,8 @@
     "announcements.manage": "Gestire tutti gli annunci",
     "announcements.view_reads": "Vedere chi ha letto gli annunci",
     "departments.manage": "Gestire i reparti",
-    "hr.manage": "Gestire i fascicoli del personale"
+    "hr.manage": "Gestire i fascicoli del personale",
+    "hr.approve_all_requests": "Decidere tutte le richieste non sensibili (risorse umane)"
   },
   "invite": {
     "actionLabel": "Invita dipendente",
@@ -252,7 +253,8 @@
       "supervisors": "Supervisori",
       "employees": "Dipendenti",
       "viewers": "Osservatori",
-      "owner": "Titolare"
+      "owner": "Titolare",
+      "departmentManagers": "Responsabili di reparto"
     },
     "invitation": {
       "pending": "Invito non ancora accettato",
@@ -263,7 +265,10 @@
       "android": "Android",
       "ios": "iPhone",
       "web": "Browser / computer"
-    }
+    },
+    "managesDepartment": "Dirige {{names}}",
+    "noDepartmentManagers": "Nessun reparto ha ancora un responsabile.",
+    "chooseDepartmentManagers": "Sceglili in Impostazioni > Persone > Reparti"
   },
   "deviceStatus": {
     "pending": "In attesa",
@@ -282,7 +287,7 @@
     "window": "dal {{from}} al {{to}}",
     "ended": "terminata",
     "startLabel": "Dal (facoltativo - oggi se vuoto)",
-    "endLabel": "Fino al (facoltativo - fino alla revoca se vuoto)",
+    "endLabel": "Fino al (facoltativo: 30 giorni se vuoto, al massimo 30 giorni)",
     "endBeforeStart": "La data di fine deve essere successiva a quella di inizio.",
     "windowHint": "Inizia e termina da sola in queste date. Puoi revocarla in qualsiasi momento.",
     "neverDelegated": "Mai delegati: chiusura dell'organizzazione, piano e codici di attivazione, conservazione dei dati, chiavi API, concessione della gestione dei permessi e la delega stessa. Nessuno - neanche il delegato - approva la propria richiesta."
@@ -331,7 +336,8 @@
       "leave": "Ferie",
       "penalties": "Sanzioni e incentivi",
       "history": "Storico",
-      "account": "Account e permessi"
+      "account": "Account e permessi",
+      "security": "Sicurezza"
     },
     "fields": {
       "jobTitle": "Mansione",
@@ -453,5 +459,60 @@
     },
     "stillHeld": "Non è stato revocato tutto: questa persona ha l'autorità completa del titolare. Revocala prima con il pulsante «{{owner}}».",
     "viaOwner": "Viene con l'autorità del titolare - si revoca lì"
+  },
+  "security": {
+    "title": "Accesso in due passaggi",
+    "subtitle": "Un codice da un'app di autenticazione sul telefono, oltre alla password.",
+    "on": "L'accesso in due passaggi è attivo.",
+    "off": "L'accesso in due passaggi non è attivo.",
+    "requiredForYou": "Il tuo ruolo richiede l'accesso in due passaggi per buste paga e permessi. Attivalo ora.",
+    "enable": "Attiva",
+    "scan": "Scansiona questo codice con un'app di autenticazione (Google Authenticator, Microsoft Authenticator…) e inserisci il codice a 6 cifre.",
+    "qrAlt": "Codice QR per l'app di autenticazione",
+    "secret": "Oppure inserisci questa chiave a mano: {{secret}}",
+    "code": "Codice a 6 cifre",
+    "verify": "Verifica e attiva",
+    "cancel": "Annulla",
+    "enabled": "L'accesso in due passaggi è attivo.",
+    "removed": "L'app di autenticazione è stata rimossa.",
+    "remove": "Rimuovi",
+    "authenticator": "App di autenticazione",
+    "wrongCode": "Il codice non è corretto. Controlla l'ora del telefono e riprova.",
+    "failed": "Impossibile avviare. Riprova.",
+    "removeNeedsCode": "Per rimuoverla, accedi di nuovo prima con il codice di autenticazione."
+  },
+  "perms": {
+    "hint": "Attiva o disattiva ogni riga. Una riga raggruppata concede o toglie tutto insieme.",
+    "count": "{{on}} di {{total}}",
+    "partly": "Concesso in parte",
+    "changedFromRole": "Diverso dal ruolo",
+    "resetAll": "Torna ai valori del ruolo",
+    "resetTitle": "Tornare ai permessi del ruolo?",
+    "resetExplain": "Tutti i permessi concessi o tolti singolarmente a questa persona vengono annullati; riceve i permessi del suo ruolo.",
+    "grantTitle": "Concedi permesso",
+    "revokeTitle": "Togli permesso",
+    "lineExplain": "«{{name}}»: scrivi il motivo; viene salvato nel registro attività.",
+    "cancel": "Annulla",
+    "confirm": "Conferma",
+    "groups": {
+      "attendance": "Presenze",
+      "leave": "Ferie e calendario",
+      "people": "Persone e permessi",
+      "payroll": "Paghe e indennità",
+      "external": "Personale esterno",
+      "sites": "Sedi, turni e progetti",
+      "reports": "Report, cruscotto e registro",
+      "settings": "Annunci, notifiche e impostazioni",
+      "other": "Altro"
+    },
+    "merged": {
+      "onBehalf": "Timbrare entrata e uscita per un altro",
+      "payrollExports": "Esportare le paghe (riepilogo, cedolini, indennità)",
+      "reports": "Vedere i report e creare PDF",
+      "timesheets": "Generare e approvare i fogli ore",
+      "announcements": "Pubblicare annunci e vedere chi li ha letti",
+      "externalPay": "Vedere ed esportare la paga degli esterni"
+    },
+    "setMoves": "{{names}} gestisce ora «{{set}}». Darlo qui glielo toglie (solo quanto ricevuto da questo pacchetto; i permessi del ruolo e condivisi restano)."
   }
 }

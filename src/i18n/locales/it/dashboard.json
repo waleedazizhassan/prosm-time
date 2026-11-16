@@ -268,7 +268,17 @@
       "thanks": "Grazie, salvato.",
       "label": "Com’è andato il turno"
     },
-    "presenceShort": "Monitoraggio attivo"
+    "presenceShort": "Monitoraggio attivo",
+    "mapTools": {
+      "label": "Strumenti mappa",
+      "layers": "Livelli",
+      "myLocation": "La mia posizione",
+      "style": {
+        "auto": "Automatico",
+        "light": "Chiaro",
+        "dark": "Scuro"
+      }
+    }
   },
   "kioskPin": {
     "title": "PIN chiosco",
@@ -473,7 +483,9 @@
       "noLocation": "Senza posizione sulla mappa",
       "noLocationHint": "Ha timbrato senza coordinate (es. dispositivo senza GPS), non posizionabile.",
       "noLocationShort": "Senza posizione",
-      "elsewhere": "Fuori dai siti"
+      "elsewhere": "Fuori dai siti",
+      "previous": "Sedi precedenti",
+      "next": "Altre sedi"
     },
     "present": {
       "title": "Presenti ora ({{count}})",

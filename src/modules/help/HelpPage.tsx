@@ -72,6 +72,11 @@ const GUIDES: Guide[] = [
   { id: "externalPay", audience: "payroll", feature: "kiosk" },
   { id: "documentsAdmin", audience: "admin", feature: "documents" },
   { id: "bylaw", audience: "admin", feature: "penalties" },
+  // owner 2026-11-16: the governance model and security, each with its own place
+  { id: "dailySummary", audience: "admin", feature: "daily_summary" },
+  { id: "auditLog", audience: "admin", feature: "audit" },
+  { id: "governance", audience: "admin" },
+  { id: "security", audience: "admin" },
   { id: "settingsCenter", audience: "admin" },
   { id: "permissions", audience: "admin" },
   { id: "departments", audience: "admin", feature: "departments" },

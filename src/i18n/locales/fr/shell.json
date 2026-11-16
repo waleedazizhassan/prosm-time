@@ -31,7 +31,8 @@
   },
   "installation": {
     "grace": "Cette installation n'est pas couverte par une licence valide. Veuillez activer une licence avant le {{date}}.",
-    "blocked": "Cette installation n'est pas couverte par une licence valide et l'accès a été suspendu. Veuillez contacter votre administrateur."
+    "blocked": "Cette installation n'est pas couverte par une licence valide et l'accès a été suspendu. Veuillez contacter votre administrateur.",
+    "close": "Fermer"
   },
   "update": {
     "available": "Une nouvelle version (v{{version}}) est disponible.",
@@ -272,7 +273,15 @@
       "clock_in": "Merci de pointer ton arrivée.",
       "clock_out": "Merci de pointer ton départ.",
       "call_me": "Merci de m’appeler.",
-      "attention": "Merci de regarder l’application."
+      "attention": "Merci de regarder l’application.",
+      "go_home_early": "Tu peux partir plus tôt aujourd'hui.",
+      "tomorrow_off": "Tu es en repos demain.",
+      "dont_be_late": "Merci de ne pas être en retard à ton poste.",
+      "end_break": "Merci de terminer ta pause.",
+      "come_to_office": "Merci de venir au bureau.",
+      "check_messages": "Merci de lire tes messages.",
+      "shift_changed": "Ton poste a changé - consulte ton planning.",
+      "well_done": "Bravo - merci."
     },
     "mockLocation": {
       "title": "Position falsifiée",
@@ -335,6 +344,10 @@
       "incentiveReviewBody": "{{name}} : {{reason}}",
       "incentiveGrantedTitle": "Bravo !",
       "incentiveGrantedBody": "Vous avez reçu une prime : {{reason}}"
+    },
+    "ownership": {
+      "title": "Transfert de propriété",
+      "body": "Le transfert de propriété de l'organisation a changé. Ouvrez-le pour les détails."
     }
   },
   "items": {
@@ -369,7 +382,9 @@
     "penalties": "Sanctions et primes",
     "connect": "Discussions",
     "connectCalls": "Journal des appels",
-    "connectMeetings": "Réunions"
+    "connectMeetings": "Réunions",
+    "governance": "Modèle de gouvernance",
+    "security": "Sécurité"
   },
   "sosOverlay": {
     "title": "Alerte SOS/Urgence",
@@ -577,7 +592,15 @@
       "clock_in": "Pointer l’arrivée",
       "clock_out": "Pointer le départ",
       "call_me": "Appelle-moi",
-      "attention": "Regarde l’appli"
+      "attention": "Regarde l’appli",
+      "go_home_early": "Partir plus tôt",
+      "tomorrow_off": "Repos demain",
+      "dont_be_late": "Ne sois pas en retard",
+      "end_break": "Termine ta pause",
+      "come_to_office": "Viens au bureau",
+      "check_messages": "Lis tes messages",
+      "shift_changed": "Poste modifié",
+      "well_done": "Bravo"
     },
     "messageLabel": "Message court (facultatif)",
     "send": "Envoyer le buzz",

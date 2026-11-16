@@ -218,7 +218,22 @@ class DashboardRepository {
     }
   }
 
-  async load(from: string, to: string, scope: DashboardScope, siteId: string | null): Promise<ServiceResult<ManagerDashboard>> {
+  // QA 2026-11-16 (found: "canceling statement due to statement timeout"): the dashboard asked for the same figures
+  // up to four times at once (the figures and the chart share a period by default; development mode runs effects
+  // twice), the database slowed under the load and every copy timed out. Identical requests in flight now share one
+  // answer.
+  private inFlight = new Map<string, Promise<ServiceResult<ManagerDashboard>>>();
+
+  load(from: string, to: string, scope: DashboardScope, siteId: string | null): Promise<ServiceResult<ManagerDashboard>> {
+    const key = [from, to, scope, siteId ?? ""].join("|");
+    const running = this.inFlight.get(key);
+    if (running) return running;
+    const request = this.loadOnce(from, to, scope, siteId).finally(() => this.inFlight.delete(key));
+    this.inFlight.set(key, request);
+    return request;
+  }
+
+  private async loadOnce(from: string, to: string, scope: DashboardScope, siteId: string | null): Promise<ServiceResult<ManagerDashboard>> {
     try {
       const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Africa/Cairo";
       const { data, error } = await this.client.rpc("get_prosm_time_manager_dashboard", {

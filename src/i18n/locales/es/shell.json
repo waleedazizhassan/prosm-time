@@ -31,7 +31,8 @@
   },
   "installation": {
     "grace": "Esta instalación no está cubierta por una licencia válida. Activa una licencia antes del {{date}}.",
-    "blocked": "Esta instalación no está cubierta por una licencia válida y el acceso se ha suspendido. Contacta con tu administrador."
+    "blocked": "Esta instalación no está cubierta por una licencia válida y el acceso se ha suspendido. Contacta con tu administrador.",
+    "close": "Cerrar"
   },
   "update": {
     "available": "Hay una nueva versión (v{{version}}) disponible.",
@@ -272,7 +273,15 @@
       "clock_in": "Por favor, ficha la entrada.",
       "clock_out": "Por favor, ficha la salida.",
       "call_me": "Por favor, llámame.",
-      "attention": "Por favor, revisa la app."
+      "attention": "Por favor, revisa la app.",
+      "go_home_early": "Puedes salir temprano hoy.",
+      "tomorrow_off": "Mañana tienes libre.",
+      "dont_be_late": "Por favor, no llegues tarde a tu turno.",
+      "end_break": "Por favor, termina tu descanso.",
+      "come_to_office": "Por favor, ven a la oficina.",
+      "check_messages": "Por favor, revisa tus mensajes.",
+      "shift_changed": "Tu turno ha cambiado: revisa tu horario.",
+      "well_done": "Buen trabajo, gracias."
     },
     "mockLocation": {
       "title": "Ubicación falsa",
@@ -335,6 +344,10 @@
       "incentiveReviewBody": "{{name}}: {{reason}}",
       "incentiveGrantedTitle": "¡Bien hecho!",
       "incentiveGrantedBody": "Recibiste un incentivo: {{reason}}"
+    },
+    "ownership": {
+      "title": "Transferencia de propiedad",
+      "body": "La transferencia de propiedad de la organización cambió. Ábrela para ver los detalles."
     }
   },
   "items": {
@@ -369,7 +382,9 @@
     "penalties": "Sanciones e incentivos",
     "connect": "Chats",
     "connectCalls": "Registro de llamadas",
-    "connectMeetings": "Reuniones"
+    "connectMeetings": "Reuniones",
+    "governance": "Modelo de gobierno",
+    "security": "Seguridad"
   },
   "sosOverlay": {
     "title": "Alerta SOS/Emergencia",
@@ -577,7 +592,15 @@
       "clock_in": "Fichar entrada",
       "clock_out": "Fichar salida",
       "call_me": "Llámame",
-      "attention": "Revisa la app"
+      "attention": "Revisa la app",
+      "go_home_early": "Salir temprano",
+      "tomorrow_off": "Libre mañana",
+      "dont_be_late": "No llegues tarde",
+      "end_break": "Termina tu descanso",
+      "come_to_office": "Ven a la oficina",
+      "check_messages": "Revisa mensajes",
+      "shift_changed": "Turno cambiado",
+      "well_done": "Buen trabajo"
     },
     "messageLabel": "Mensaje corto (opcional)",
     "send": "Enviar aviso",

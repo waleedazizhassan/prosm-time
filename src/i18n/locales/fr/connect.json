@@ -83,7 +83,8 @@
       "atSite": "Sur le site, je vous rappelle vite",
       "callLater": "Je ne peux pas répondre, je rappelle",
       "inMeeting": "En réunion, je rappelle après"
-    }
+    },
+    "enableSound": "Touchez pour activer le son"
   },
   "callStatus": {
     "ringing": "Sonne",
@@ -134,7 +135,21 @@
     "talking": "Vous parlez… relâchez pour envoyer",
     "today": "Aujourd'hui",
     "yesterday": "Hier",
-    "download": "Télécharger"
+    "download": "Télécharger",
+    "deleteMessage": "Supprimer le message",
+    "deleteMessageConfirm": "Supprimer ce message de votre appareil ? L'autre personne garde le sien.",
+    "deleteChat": "Supprimer la discussion",
+    "deleteChatConfirm": "Supprimer toute la discussion de votre appareil ? L'autre personne garde la sienne.",
+    "deleteForMe": "Supprimer pour moi",
+    "deleteForEveryone": "Supprimer pour tous",
+    "deleteMineHint": "« Supprimer pour tous » le retire des appareils de tous les membres de la discussion (applications à jour).",
+    "deletedMessage": "Ce message a été supprimé",
+    "youDeleted": "Vous avez supprimé ce message",
+    "deleteForEveryoneFailed": "Non supprimé pour tous. Réessayez.",
+    "cancel": "Annuler",
+    "reply": "Répondre",
+    "cancelReply": "Annuler la réponse",
+    "typing": "{{name}} écrit…"
   },
   "info": {
     "inSince": "Présent depuis {{time}}",
@@ -174,8 +189,14 @@
     "you": "Vous",
     "videoTitle": "Réunion vidéo",
     "audioTitle": "Réunion audio",
-    "videoUpTo": "Vidéo, jusqu'à 4",
-    "audioUpTo": "Audio, jusqu'à 8"
+    "videoUpTo": "Vidéo jusqu’à 6",
+    "audioUpTo": "Audio jusqu’à 12",
+    "send": "Envoyer",
+    "full": "Plein écran",
+    "exitFull": "Quitter le plein écran",
+    "reactions": "Réactions rapides",
+    "chatUnread": "Discussion ({{count}} nouveaux)",
+    "react": "Réagir"
   },
   "storage": {
     "clean": "Nettoyer {{what}}",
@@ -205,5 +226,39 @@
     "messageSound": "Son pour un nouveau message",
     "messageVibrate": "Vibrer pour un nouveau message",
     "note": "Ces réglages restent sur cet appareil. Dans l'app Android, un appel sonne avec la sonnerie du téléphone, même app fermée ou écran verrouillé ; dans un navigateur, la page doit être ouverte."
+  },
+  "preview": {
+    "image": "📷 Photo",
+    "camera_photo": "📷 Photo vérifiée",
+    "file": "📎 Fichier",
+    "voice_note": "🎤 Message vocal",
+    "push_to_talk": "📻 Appuyer pour parler",
+    "missed": "📞 Appel manqué",
+    "meeting_invite": "👥 Invitation à une réunion",
+    "photo_request": "📷 Demande de photo",
+    "deleted": "Un message a été supprimé"
+  },
+  "callLog": {
+    "clear": "Effacer le journal d'appels",
+    "clearConfirm": "Retirer tous les appels de votre journal ? L'historique de l'organisation reste.",
+    "deleteOne": "Retirer du journal",
+    "deleteOneConfirm": "Retirer cet appel de votre journal ?"
+  },
+  "group": {
+    "new": "Nouveau groupe",
+    "name": "Nom du groupe",
+    "pick": "Choisir les membres ({{count}} choisis)",
+    "create": "Créer le groupe",
+    "createFailed": "Le groupe n’a pas été créé. Réessayez.",
+    "members": "Membres ({{count}})",
+    "admin": "admin",
+    "you": "Vous",
+    "remove": "Retirer du groupe",
+    "add": "Ajouter",
+    "choosePerson": "Choisir une personne",
+    "leave": "Quitter le groupe",
+    "leaveConfirm": "Quitter le groupe ? La discussion quitte cet appareil.",
+    "audioCall": "Appel vocal du groupe",
+    "videoCall": "Appel vidéo du groupe"
   }
 }

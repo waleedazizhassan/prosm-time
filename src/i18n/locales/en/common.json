@@ -379,7 +379,31 @@
     "documentNameTooLong": "The document's name is too long.",
     "legalNameArabic": "The official name must be in Arabic, as on the ID card.",
     "nationalIdRequired": "Enter the national ID number.",
-    "phoneRequired": "Enter the mobile number."
+    "phoneRequired": "Enter the mobile number.",
+    "ownerAccountProtected": "The owner's account is protected.",
+    "ownerChangesOnlyByTransfer": "The owner changes only through an ownership transfer.",
+    "payPeriodLocked": "This pay period is locked and cannot change.",
+    "stepUpRequired": "Confirm it's you before this action.",
+    "mfaRequired": "This action needs two-step sign-in.",
+    "correctionAlreadyPending": "A correction for this is already pending.",
+    "requestAlreadyDecided": "Someone else already decided this request - refresh to see its current state.",
+    "apiKeyMax365": "An API key lasts at most 365 days.",
+    "delegationMax30": "A delegation lasts at most 30 days. Grant it again to extend it.",
+    "onlyActiveKeyRotated": "Only an active key can be rotated.",
+    "onlyOwnerTransfers": "Only the owner transfers the ownership.",
+    "ownershipTransferOpen": "An ownership transfer is already open.",
+    "waitingNotOver": "The waiting period is not over yet.",
+    "ownershipNotReady": "The ownership transfer is not ready.",
+    "chooseActiveMember": "Choose an active member of the organisation.",
+    "meetingEnded": "This meeting has ended.",
+    "meetingFull": "This meeting is full.",
+    "waitingForHr": "Waiting for HR",
+    "ownPermissions": "You cannot change your own permissions. Only the owner can.",
+    "appointYourself": "You cannot appoint yourself a department manager.",
+    "departmentManagerRole": "A department manager must have the Manager role. Change their role first.",
+    "ownPay": "You cannot change your own pay.",
+    "administrationHeld": "Someone outside your authority holds this. Only the owner can move it.",
+    "cannotContact": "You cannot contact this person. You can reach the people of your site and department and your managers."
   },
   "pageLoad": {
     "title": "This page needs a connection",
@@ -472,7 +496,7 @@
   },
   "issuedVia": "Issued via",
   "feedback": {
-    "errorTitle": "Something went wrong",
+    "errorTitle": "Couldn't complete this",
     "successTitle": "Done",
     "ok": "OK",
     "close": "Close",
@@ -489,5 +513,18 @@
   "monthFolders": {
     "count_one": "{{count}} record",
     "count_other": "{{count}} records"
+  },
+  "stepUp": {
+    "title": "Confirm it's you",
+    "explain": "This action is sensitive. Enter your password to continue.",
+    "explainMfa": "This action is sensitive. Enter your password and the code from your authenticator app.",
+    "password": "Password",
+    "code": "Authenticator code",
+    "confirm": "Confirm",
+    "close": "Close",
+    "wrongPassword": "The password is not correct.",
+    "wrongCode": "The code is not correct or has expired.",
+    "failed": "Could not confirm. Try again.",
+    "enableMfaFirst": "This action needs two-step sign-in. Turn it on from your profile (Security tab), then try again."
   }
 }

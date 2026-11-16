@@ -21,6 +21,8 @@ interface EmptyStateProps {
   // "empty" unless the page names another kind (e.g. "notFound" for a
   // search with no results, "success" for "all caught up").
   kind?: StateKind;
+  /** owner 2026-11-15: one quiet line instead of a big dashed card (an empty dashboard widget) */
+  compact?: boolean;
   /** a sign that fits the page (e.g. a calendar for leave); else the kind's own */
   icon?: LucideIcon;
 }
@@ -29,8 +31,17 @@ interface EmptyStateProps {
 // exactly (§ visual consistency pass): a dashed-border card, the one
 // shared "no data yet" treatment every list/table should reuse
 // instead of a bare paragraph of secondary text.
-export default function EmptyState({ title, message, action, illustrationSrc, kind, icon }: EmptyStateProps) {
+export default function EmptyState({ title, message, action, illustrationSrc, kind, icon, compact = false }: EmptyStateProps) {
   const Icon = icon ?? STATE_ICON[kind ?? "empty"];
+  if (compact) {
+    return (
+      <div className={styles.compact} role="status" aria-live="polite">
+        <Icon size={16} strokeWidth={1.75} aria-hidden="true" />
+        <span>{message}</span>
+        {action ? <span className={styles.compactAction}>{action}</span> : null}
+      </div>
+    );
+  }
   return (
     <div className={styles.empty} role="status" aria-live="polite">
       {illustrationSrc ? <img src={illustrationSrc} alt="" className={styles.illustration} /> : (

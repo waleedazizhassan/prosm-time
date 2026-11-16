@@ -127,7 +127,9 @@
     "personTitle": "Department",
     "choose": "Department",
     "noDepartment": "No department",
-    "saved": "Saved."
+    "saved": "Saved.",
+    "manager": "Department manager",
+    "noManager": "No manager"
   },
   "errors": {
     "generic": "Unable to complete this action.",

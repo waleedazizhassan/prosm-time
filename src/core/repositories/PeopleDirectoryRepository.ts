@@ -95,6 +95,11 @@ class PeopleDirectoryRepository {
 
   // Owner 2026-11-04: whether each person accepted the invitation, and the app version they use
   // (for the Owner and anyone who manages people; others get an empty list).
+  /** owner 2026-11-16: person id -> the departments they manage */
+  departmentManagers(): Promise<Map<string, string[]>> {
+    return listDepartmentManagers(DatabaseManager.getClient());
+  }
+
   async status(): Promise<Map<string, PersonStatus>> {
     const { data, error } = await DatabaseManager.getClient().rpc("list_prosm_time_people_status");
     const map = new Map<string, PersonStatus>();
@@ -113,4 +118,13 @@ export interface PersonStatus {
   lastSeenAt: string | null;
 }
 
+
+/** owner 2026-11-16: who manages which department - person id -> department names (empty until the server has it) */
+export async function listDepartmentManagers(client: { rpc: (fn: string) => PromiseLike<{ data: unknown; error: unknown }> }): Promise<Map<string, string[]>> {
+  const { data, error } = await client.rpc("list_prosm_time_department_managers");
+  const map = new Map<string, string[]>();
+  if (error || !Array.isArray(data)) return map;
+  for (const row of data as { userId: string; departmentName: string }[]) map.set(row.userId, [...(map.get(row.userId) ?? []), row.departmentName]);
+  return map;
+}
 export default new PeopleDirectoryRepository();

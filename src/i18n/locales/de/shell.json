@@ -31,7 +31,8 @@
   },
   "installation": {
     "grace": "Diese Installation ist nicht durch eine gültige Lizenz abgedeckt. Bitte aktivieren Sie eine Lizenz bis {{date}}.",
-    "blocked": "Diese Installation ist nicht durch eine gültige Lizenz abgedeckt und der Zugriff wurde gesperrt. Bitte wenden Sie sich an Ihren Administrator."
+    "blocked": "Diese Installation ist nicht durch eine gültige Lizenz abgedeckt und der Zugriff wurde gesperrt. Bitte wenden Sie sich an Ihren Administrator.",
+    "close": "Schließen"
   },
   "update": {
     "available": "Eine neue Version (v{{version}}) ist verfügbar.",
@@ -271,7 +272,15 @@
       "clock_in": "Bitte einstempeln.",
       "clock_out": "Bitte ausstempeln.",
       "call_me": "Bitte ruf mich an.",
-      "attention": "Bitte schau in die App."
+      "attention": "Bitte schau in die App.",
+      "go_home_early": "Du kannst heute früher gehen.",
+      "tomorrow_off": "Du hast morgen frei.",
+      "dont_be_late": "Bitte sei pünktlich zu deiner Schicht.",
+      "end_break": "Bitte beende deine Pause.",
+      "come_to_office": "Bitte komm ins Büro.",
+      "check_messages": "Bitte lies deine Nachrichten.",
+      "shift_changed": "Deine Schicht hat sich geändert - sieh in deinen Plan.",
+      "well_done": "Gut gemacht - danke."
     },
     "mockLocation": {
       "title": "Gefälschter Standort",
@@ -334,6 +343,10 @@
       "incentiveReviewBody": "{{name}}: {{reason}}",
       "incentiveGrantedTitle": "Gut gemacht!",
       "incentiveGrantedBody": "Sie haben eine Prämie erhalten: {{reason}}"
+    },
+    "ownership": {
+      "title": "Eigentumsübertragung",
+      "body": "Die Eigentumsübertragung der Organisation hat sich geändert. Öffnen Sie sie für Details."
     }
   },
   "items": {
@@ -368,7 +381,9 @@
     "penalties": "Sanktionen und Prämien",
     "connect": "Chats",
     "connectCalls": "Anrufliste",
-    "connectMeetings": "Besprechungen"
+    "connectMeetings": "Besprechungen",
+    "governance": "Governance-Modell",
+    "security": "Sicherheit"
   },
   "sosOverlay": {
     "title": "SOS-/Notfallalarm",
@@ -571,7 +586,15 @@
       "clock_in": "Einstempeln",
       "clock_out": "Ausstempeln",
       "call_me": "Ruf mich an",
-      "attention": "In die App schauen"
+      "attention": "In die App schauen",
+      "go_home_early": "Früher gehen",
+      "tomorrow_off": "Morgen frei",
+      "dont_be_late": "Nicht zu spät",
+      "end_break": "Pause beenden",
+      "come_to_office": "Ins Büro kommen",
+      "check_messages": "Nachrichten lesen",
+      "shift_changed": "Schicht geändert",
+      "well_done": "Gut gemacht"
     },
     "messageLabel": "Kurze Nachricht (optional)",
     "send": "Buzz senden",

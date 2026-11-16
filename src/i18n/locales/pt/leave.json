@@ -44,7 +44,8 @@
     "pending": "Pendente",
     "approved": "Aprovado",
     "rejected": "Recusado",
-    "cancelled": "Cancelado"
+    "cancelled": "Cancelado",
+    "awaitingHr": "Aguardando o RH"
   },
   "permission": {
     "title": "Pedir uma permissão",

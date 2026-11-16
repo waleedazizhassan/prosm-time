@@ -103,7 +103,8 @@
     "ZERO_NET": "صافٍ صفري",
     "PARTIAL_PERIOD": "انضم أو غادر خلال الفترة",
     "NET_CHANGED": "تغير الصافي كثيرًا عن الدورة السابقة",
-    "ATTENDANCE_CHANGED": "تغير الحضور بعد قبول المقترح"
+    "ATTENDANCE_CHANGED": "تغير الحضور بعد قبول المقترح",
+    "PENDING_REQUESTS": "طلبات معلقة داخل الفترة"
   },
   "suggestions": {
     "title": "من الحضور",

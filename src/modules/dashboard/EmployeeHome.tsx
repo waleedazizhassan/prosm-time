@@ -73,6 +73,8 @@ export default function EmployeeHome() {
   return (
     <>
       <MyDocumentsAlert />
+      {/* owner 2026-11-16: on a computer the hours / reminders buttons sit inside the map, not at the screen's edge */}
+      <div className={styles.clockStage}>
       <ClockInOutCard />
 
       <div className={styles.floatingTools}>
@@ -82,6 +84,7 @@ export default function EmployeeHome() {
         <button type="button" className={styles.toolButton} onClick={() => setShowReminders(true)} aria-label={t("reminders.title")} title={t("reminders.title")}>
           <BellRing size={20} />
         </button>
+      </div>
       </div>
 
       {showHours ? (

@@ -107,7 +107,10 @@
     "endingContinue": "Um weiterzumachen, wenden Sie sich an den Vertrieb, um die Lizenz zu verlängern (Lizenz {{license}}):",
     "endedSubject": "Ihre PROSM Time Testphase ist beendet",
     "endedBody": "Die PROSM Time Testphase von {{org}} ist beendet. Die Organisation ist jetzt schreibgeschützt: Alle sehen weiterhin alles, und alle Ihre Daten bleiben erhalten.",
-    "endedContinue": "Geben Sie nach der Anmeldung unter Einstellungen > Abonnement einen Aktivierungscode ein oder kontaktieren Sie uns, und alles läuft wie vorher (Lizenz {{license}}):"
+    "endedContinue": "Geben Sie nach der Anmeldung unter Einstellungen > Abonnement einen Aktivierungscode ein oder kontaktieren Sie uns, und alles läuft wie vorher (Lizenz {{license}}):",
+    "whenDays": "in {{days}}",
+    "licenseHow": "Zur Verlängerung: Schreib an info@prosm.net oder support@prosm.net mit deiner Lizenznummer {{license}} – wir bereiten die Verlängerung vor. Sie gilt danach automatisch, und du bekommst eine Benachrichtigung und eine E-Mail mit der neuen Lizenz.",
+    "licenseAfter": "Ohne Verlängerung ist die App nach der Kulanzfrist nur noch lesbar, bis verlängert wird; es werden keine Daten gelöscht."
   },
   "licence": {
     "subject": "PROSM Time - Lizenz von {{org}} geändert",

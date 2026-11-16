@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
-import { FEATURES } from "../../config/features";
-import ConnectPersonButtons from "../connect/ConnectPersonButtons";
+import BuzzButton from "../../components/common/BuzzButton";
 import { useTranslation } from "react-i18next";
 import { ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import PeopleDirectoryRepository, { type DirectoryPerson, type PersonStatus } from "../../core/repositories/PeopleDirectoryRepository";
 
@@ -16,9 +16,11 @@ import styles from "./PeopleByRole.module.css";
 
 // The groups, in order: the Owner, managers, supervisors,
 // employees, viewers, then any other role by its own order and name.
-function groupOf(person: DirectoryPerson): { key: string; sort: number; label: string | null } {
+function groupOf(person: DirectoryPerson, departmentManagers: Map<string, string[]>): { key: string; sort: number; label: string | null } {
   // owner 2026-11-13: the owner in a group of their own at the top, not among the managers
   if (person.isOwner || person.roleKey === "owner") return { key: "owner", sort: 10, label: null };
+  // owner 2026-11-16: department managers (finance, HR ...) in their own group - and in no other
+  if (departmentManagers.has(person.id)) return { key: "departmentManagers", sort: 15, label: null };
   if (person.roleKey === "manager") return { key: "managers", sort: 20, label: null };
   if (person.roleKey === "supervisor") return { key: "supervisors", sort: 30, label: null };
   if (person.roleKey === "employee") return { key: "employees", sort: 40, label: null };
@@ -43,9 +45,12 @@ export default function PeopleByRole({ compact = false, onOpen }: { compact?: bo
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
 
   const [statuses, setStatuses] = useState<Map<string, PersonStatus>>(new Map());
+  // owner 2026-11-16: who manages which department (empty until the server has it)
+  const [departmentManagers, setDepartmentManagers] = useState<Map<string, string[]>>(new Map());
   useEffect(() => {
     PeopleDirectoryRepository.list(true).then(setPeople);
     PeopleDirectoryRepository.status().then(setStatuses);
+    void PeopleDirectoryRepository.departmentManagers().then(setDepartmentManagers);
   }, []);
 
   const collator = useMemo(() => new Intl.Collator(i18n.language), [i18n.language]);
@@ -67,14 +72,14 @@ export default function PeopleByRole({ compact = false, onOpen }: { compact?: bo
     });
     const byGroup = new Map<string, { key: string; sort: number; label: string | null; people: DirectoryPerson[] }>();
     for (const person of filtered) {
-      const group = groupOf(person);
+      const group = groupOf(person, departmentManagers);
       if (!byGroup.has(group.key)) byGroup.set(group.key, { ...group, people: [] });
       byGroup.get(group.key)!.people.push(person);
     }
     return [...byGroup.values()]
       .map((group) => ({ ...group, people: group.people.sort((a, b) => collator.compare(a.fullName, b.fullName)) }))
       .sort((a, b) => a.sort - b.sort || collator.compare(a.label ?? a.key, b.label ?? b.key));
-  }, [people, query, site, status, shift, collator]);
+  }, [people, query, site, status, shift, collator, departmentManagers]);
 
   if (!people) return <LoadingState />;
 
@@ -112,7 +117,21 @@ export default function PeopleByRole({ compact = false, onOpen }: { compact?: bo
 
       {groups.map((group) => {
         const isCollapsed = Boolean(collapsed[group.key]);
-        return (
+        // owner 2026-11-16: the department managers' group shows even before any is chosen - with where to choose them
+        // the owner stays in the owner's group (one of a kind) - the group is "empty" when nobody else manages a department
+        const othersManage = (people ?? []).some((p) => !p.isOwner && departmentManagers.has(p.id));
+        const emptyManagers = group.key === "owner" && !compact && !othersManage && !query && !site && !status && !shift ? (
+          <section key="departmentManagers-empty" className={styles.group}>
+            <div className={styles.groupHeader}>
+              <span className={styles.groupTitle}>{t("byRole.groups.departmentManagers")}</span>
+              <span className={styles.count}>0</span>
+            </div>
+            <p style={{ margin: "var(--space-2) var(--space-3)", color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>
+              {t("byRole.noDepartmentManagers")} <Link to="/settings?tab=people">{t("byRole.chooseDepartmentManagers")}</Link>
+            </p>
+          </section>
+        ) : null;
+        return [
           <section key={group.key} className={styles.group}>
             <button type="button" className={styles.groupHeader} aria-expanded={!isCollapsed} onClick={() => setCollapsed((all) => ({ ...all, [group.key]: !isCollapsed }))}>
               <span className={styles.groupTitle}>{group.label ?? t(`byRole.groups.${group.key}`)}</span>
@@ -128,7 +147,7 @@ export default function PeopleByRole({ compact = false, onOpen }: { compact?: bo
                       <span className={styles.main}>
                         <span className={styles.name}>{person.fullName}</span>
                         <span className={styles.meta}>
-                          {[person.isOwner ? t("ownerBadge") : t(`common:roles.${person.roleKey}`, { defaultValue: person.roleName }), person.currentSiteName ?? person.siteNames.join("، "), person.shiftStart ? `${person.shiftStart}–${person.shiftEnd}` : null]
+                          {[person.isOwner ? (departmentManagers.has(person.id) ? `${t("ownerBadge")} · ${t("byRole.managesDepartment", { names: departmentManagers.get(person.id)!.join("، ") })}` : t("ownerBadge")) : departmentManagers.has(person.id) ? t("byRole.managesDepartment", { names: departmentManagers.get(person.id)!.join("، ") }) : t(`common:roles.${person.roleKey}`, { defaultValue: person.roleName }), person.currentSiteName ?? person.siteNames.join("، "), person.shiftStart ? `${person.shiftStart}–${person.shiftEnd}` : null]
                             .filter(Boolean)
                             .join(" · ")}
                         </span>
@@ -145,13 +164,16 @@ export default function PeopleByRole({ compact = false, onOpen }: { compact?: bo
                         <StatusBadge status={STATUS_BADGE[person.presence]}>{t(`byRole.presence.${person.presence}`)}</StatusBadge>
                       )}
                     </button>
-                    {FEATURES.connect ? <span className={styles.connect}><ConnectPersonButtons userId={person.id} name={person.fullName} /></span> : null}
+                    {/* owner 2026-11-16: the call / message icons squeezed the names away - calls and messages live in
+                        Connect and on the person's page; beside each person only the Buzz stays */}
+                    {person.isActive === false ? null : <span className={styles.connect}><BuzzButton userId={person.id} name={person.fullName} compact /></span>}
                   </li>
                 ))}
               </ul>
             )}
-          </section>
-        );
+          </section>,
+          emptyManagers,
+        ];
       })}
     </div>
   );

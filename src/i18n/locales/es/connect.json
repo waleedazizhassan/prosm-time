@@ -83,7 +83,8 @@
       "atSite": "Estoy en el sitio, te llamo enseguida",
       "callLater": "No puedo ahora, te llamo",
       "inMeeting": "En una reunión, te llamo después"
-    }
+    },
+    "enableSound": "Toca para activar el sonido"
   },
   "callStatus": {
     "ringing": "Sonando",
@@ -134,7 +135,21 @@
     "talking": "Hablando… suelta para enviar",
     "today": "Hoy",
     "yesterday": "Ayer",
-    "download": "Descargar"
+    "download": "Descargar",
+    "deleteMessage": "Eliminar mensaje",
+    "deleteMessageConfirm": "¿Eliminar este mensaje de tu dispositivo? La otra persona conserva el suyo.",
+    "deleteChat": "Eliminar chat",
+    "deleteChatConfirm": "¿Eliminar todo el chat de tu dispositivo? La otra persona conserva el suyo.",
+    "deleteForMe": "Eliminar para mí",
+    "deleteForEveryone": "Eliminar para todos",
+    "deleteMineHint": "\"Eliminar para todos\" lo quita de los dispositivos de todos en el chat (apps actualizadas).",
+    "deletedMessage": "Se eliminó este mensaje",
+    "youDeleted": "Eliminaste este mensaje",
+    "deleteForEveryoneFailed": "No se eliminó para todos. Inténtalo de nuevo.",
+    "cancel": "Cancelar",
+    "reply": "Responder",
+    "cancelReply": "Cancelar respuesta",
+    "typing": "{{name}} está escribiendo…"
   },
   "info": {
     "inSince": "Presente desde {{time}}",
@@ -174,8 +189,14 @@
     "you": "Tú",
     "videoTitle": "Reunión de vídeo",
     "audioTitle": "Reunión de voz",
-    "videoUpTo": "Vídeo, hasta 4",
-    "audioUpTo": "Voz, hasta 8"
+    "videoUpTo": "Video hasta 6",
+    "audioUpTo": "Voz hasta 12",
+    "send": "Enviar",
+    "full": "Pantalla completa",
+    "exitFull": "Salir de pantalla completa",
+    "reactions": "Reacciones rápidas",
+    "chatUnread": "Chat ({{count}} nuevos)",
+    "react": "Reaccionar"
   },
   "storage": {
     "clean": "Limpiar {{what}}",
@@ -205,5 +226,39 @@
     "messageSound": "Sonido para mensaje nuevo",
     "messageVibrate": "Vibrar con mensaje nuevo",
     "note": "Estos ajustes se guardan solo en este dispositivo. En la app de Android la llamada suena con el tono del teléfono, aunque la app esté cerrada o la pantalla bloqueada; en el navegador la página debe estar abierta."
+  },
+  "preview": {
+    "image": "📷 Foto",
+    "camera_photo": "📷 Foto verificada",
+    "file": "📎 Archivo",
+    "voice_note": "🎤 Mensaje de voz",
+    "push_to_talk": "📻 Pulsar para hablar",
+    "missed": "📞 Llamada perdida",
+    "meeting_invite": "👥 Invitación a reunión",
+    "photo_request": "📷 Solicitud de foto",
+    "deleted": "Se eliminó un mensaje"
+  },
+  "callLog": {
+    "clear": "Borrar registro de llamadas",
+    "clearConfirm": "¿Quitar todas las llamadas de tu registro? El registro de la organización se mantiene.",
+    "deleteOne": "Quitar del registro",
+    "deleteOneConfirm": "¿Quitar esta llamada de tu registro?"
+  },
+  "group": {
+    "new": "Nuevo grupo",
+    "name": "Nombre del grupo",
+    "pick": "Elige miembros ({{count}} elegidos)",
+    "create": "Crear grupo",
+    "createFailed": "No se creó el grupo. Inténtalo de nuevo.",
+    "members": "Miembros ({{count}})",
+    "admin": "admin",
+    "you": "Tú",
+    "remove": "Quitar del grupo",
+    "add": "Añadir",
+    "choosePerson": "Elige una persona",
+    "leave": "Salir del grupo",
+    "leaveConfirm": "¿Salir del grupo? El chat se borra de este dispositivo.",
+    "audioCall": "Llamada de voz del grupo",
+    "videoCall": "Videollamada del grupo"
   }
 }

@@ -83,7 +83,8 @@
       "atSite": "我在现场，稍后回电",
       "callLater": "现在不方便接听，稍后回电",
       "inMeeting": "正在开会，会后回电"
-    }
+    },
+    "enableSound": "点按以开启声音"
   },
   "callStatus": {
     "ringing": "响铃中",
@@ -134,7 +135,21 @@
     "talking": "正在讲话… 松开发送",
     "today": "今天",
     "yesterday": "昨天",
-    "download": "下载"
+    "download": "下载",
+    "deleteMessage": "删除消息",
+    "deleteMessageConfirm": "从你的设备删除这条消息？对方仍会保留。",
+    "deleteChat": "删除对话",
+    "deleteChatConfirm": "从你的设备删除整个对话？对方仍会保留。",
+    "deleteForMe": "为我删除",
+    "deleteForEveryone": "为所有人删除",
+    "deleteMineHint": "“为所有人删除”会从对话中所有人的设备上移除（已更新的应用）。",
+    "deletedMessage": "此消息已被删除",
+    "youDeleted": "你删除了此消息",
+    "deleteForEveryoneFailed": "未能为所有人删除，请重试。",
+    "cancel": "取消",
+    "reply": "回复",
+    "cancelReply": "取消回复",
+    "typing": "{{name}} 正在输入…"
   },
   "info": {
     "inSince": "自 {{time}} 起在岗",
@@ -174,8 +189,14 @@
     "you": "你",
     "videoTitle": "视频会议",
     "audioTitle": "语音会议",
-    "videoUpTo": "视频，最多 4 人",
-    "audioUpTo": "语音，最多 8 人"
+    "videoUpTo": "视频最多 6 人",
+    "audioUpTo": "语音最多 12 人",
+    "send": "发送",
+    "full": "全屏",
+    "exitFull": "退出全屏",
+    "reactions": "快捷表情",
+    "chatUnread": "聊天（{{count}} 条新消息）",
+    "react": "表情反应"
   },
   "storage": {
     "clean": "清理{{what}}",
@@ -205,5 +226,39 @@
     "messageSound": "新消息提示音",
     "messageVibrate": "新消息振动",
     "note": "这些设置只保存在本设备上。在 Android 应用中,即使应用已关闭或屏幕已锁定,来电也会以手机自己的铃声响起;在浏览器中页面必须保持打开。"
+  },
+  "preview": {
+    "image": "📷 照片",
+    "camera_photo": "📷 认证照片",
+    "file": "📎 文件",
+    "voice_note": "🎤 语音消息",
+    "push_to_talk": "📻 一键通话",
+    "missed": "📞 未接来电",
+    "meeting_invite": "👥 会议邀请",
+    "photo_request": "📷 拍照请求",
+    "deleted": "一条消息已被删除"
+  },
+  "callLog": {
+    "clear": "清空通话记录",
+    "clearConfirm": "从你的记录中清除所有通话？组织的记录仍会保留。",
+    "deleteOne": "从记录中移除",
+    "deleteOneConfirm": "从你的记录中移除这次通话？"
+  },
+  "group": {
+    "new": "新建群组",
+    "name": "群组名称",
+    "pick": "选择成员（已选 {{count}}）",
+    "create": "创建群组",
+    "createFailed": "群组未创建，请重试。",
+    "members": "成员（{{count}}）",
+    "admin": "管理员",
+    "you": "你",
+    "remove": "移出群组",
+    "add": "添加",
+    "choosePerson": "选择一个人",
+    "leave": "退出群组",
+    "leaveConfirm": "退出群组？对话将从此设备删除。",
+    "audioCall": "群组语音通话",
+    "videoCall": "群组视频通话"
   }
 }

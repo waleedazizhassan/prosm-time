@@ -222,9 +222,9 @@
 .chat {
   position: absolute;
   inset-inline-end: 12px;
-  bottom: calc(var(--safe-bottom, 0px) + 84px);
+  top: calc(var(--safe-top, 0px) + 64px);
+  bottom: calc(var(--safe-bottom, 0px) + 96px);
   width: min(92vw, 340px);
-  max-height: 46vh;
   display: flex;
   flex-direction: column;
   border-radius: 18px;
@@ -236,6 +236,8 @@
 
 .chat ul {
   flex: 1;
+  min-height: 0;
+  align-content: end;
   margin: 0;
   padding: 10px 12px;
   list-style: none;
@@ -254,9 +256,6 @@
 }
 
 .chat input {
-  border: 0;
-  border-top: 1px solid #1e2d50;
-  padding: 12px;
   background: transparent;
   color: #e9eefb;
   font: inherit;
@@ -281,4 +280,219 @@
   font: inherit;
   font-size: 12px;
   cursor: pointer;
+}
+
+/* phase G (owner 2026-11-15): "tap to turn the sound on" when the phone's browser refused to start it */
+.enableSound {
+  position: absolute;
+  top: calc(var(--safe-top, 0px) + 72px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  padding: 10px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.85);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(2, 8, 23, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* owner 2026-11-15: the meeting chat on a phone - a full-width sheet above the controls, with a send button */
+.chatForm {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-top: 1px solid #1e2d50;
+}
+
+.chatForm input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid #22345c;
+  border-radius: 999px;
+  padding: 10px 14px;
+}
+
+.chatSend {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #22c55e);
+  color: #fff;
+  cursor: pointer;
+}
+
+.chatSend:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+@media (max-width: 640px) {
+  /* a sheet in the screen's own flow, between the people and the buttons - the people shrink, nothing is cut */
+  .chat {
+    position: static;
+    width: auto;
+    margin: 0 8px 8px;
+    height: min(42dvh, 360px);
+    flex-shrink: 0;
+  }
+}
+
+/* owner 2026-11-16: ready reactions, full screen, unread count */
+.quick {
+  flex-shrink: 0;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 6px 8px 0;
+  border-top: 1px solid #1e2d50;
+}
+
+.quick button {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.quick button:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.bigEmoji {
+  font-size: 24px;
+  vertical-align: middle;
+}
+
+.chatButton {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: -4px;
+  inset-inline-end: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: #ef4444;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
+
+.fullBtn {
+  position: absolute;
+  top: 8px;
+  inset-inline-start: 8px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  background: rgba(5, 10, 22, 0.6);
+  color: #fff;
+  cursor: pointer;
+}
+
+.full {
+  position: fixed !important;
+  inset: 0;
+  z-index: 40;
+  width: 100vw !important;
+  height: 100dvh !important;
+  max-height: none !important;
+  border-radius: 0 !important;
+  background: #000;
+}
+
+.full video,
+.share .big video {
+  object-fit: contain;
+  background: #000;
+}
+
+/* a laptop: the people move aside while the chat is open, nothing is covered */
+@media (min-width: 641px) {
+  .withChat .stage {
+    padding-inline-end: calc(min(92vw, 340px) + 24px);
+  }
+}
+
+/* owner 2026-11-16: reactions floating over the person's picture, and their bar above the buttons */
+.floatReact {
+  position: absolute;
+  bottom: 18%;
+  z-index: 3;
+  font-size: clamp(30px, 6vw, 46px);
+  line-height: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
+  animation: floatUp 3.4s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(20px) scale(0.6); opacity: 0; }
+  12% { transform: translateY(0) scale(1.15); opacity: 1; }
+  25% { transform: translateY(-6px) scale(1); }
+  80% { opacity: 1; }
+  100% { transform: translateY(-90px) scale(1); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floatReact { animation: none; }
+}
+
+.reactBar {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 auto 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid #2a3c66;
+  background: rgba(10, 19, 38, 0.95);
+}
+
+.reactBar button {
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+.reactBar button:hover,
+.reactBar button:focus-visible {
+  transform: scale(1.2);
+  background: rgba(255, 255, 255, 0.08);
 }

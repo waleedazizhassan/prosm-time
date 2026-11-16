@@ -375,19 +375,20 @@ select optgroup {
   color: var(--text-primary);
 }
 
-/* Owner 2026-11-10: on every map in the app the OpenStreetMap credit is small, see-through and
+/* Owner 2026-11-10 / 2026-11-15: on every map in the app the OpenStreetMap credit is tiny, barely visible, plain text and
    cannot be tapped by mistake (it stays visible, as OpenStreetMap's licence asks). */
 .leaflet-container .leaflet-control-attribution {
   background: transparent !important;
-  font-size: 8px !important;
+  font-size: 7px !important;
   line-height: 1.2 !important;
   padding: 0 3px !important;
-  color: rgba(148, 163, 184, 0.6) !important;
+  color: rgba(128, 138, 156, 0.4) !important;
   box-shadow: none !important;
   pointer-events: none;
 }
 
 .leaflet-container .leaflet-control-attribution a {
   color: inherit !important;
+  text-decoration: none !important;
   pointer-events: none;
 }

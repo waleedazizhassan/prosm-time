@@ -319,7 +319,8 @@ export default function PayrollProfilesPage({ embedUserId }: { embedUserId?: str
                 error={form.legal_name.trim() && legalNameProblem(form.legal_name.trim(), nameInArabic) ? t(`errors.${legalNameProblem(form.legal_name.trim(), nameInArabic)}`) : undefined} />
             )}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(10rem, 1fr))", gap: "var(--space-2)" }}>
-              <Input label={t("doc.code")} name="profileCode" value={form.employee_code} onChange={(event) => setForm({ ...form, employee_code: event.target.value })} />
+              {/* owner 2026-11-16: the code is the person's own (5 digits by hiring seniority) - shown, not typed */}
+              <Input label={t("doc.code")} name="profileCode" value={form.employee_code} readOnly disabled onChange={() => undefined} />
               <Input label={t("profiles.applyFromDate")} name="valuesFrom" type="date" value={valuesFrom} onChange={(event) => setValuesFrom(event.target.value)}
                 helperText={t("profiles.applyFromHint")} />
             </div>

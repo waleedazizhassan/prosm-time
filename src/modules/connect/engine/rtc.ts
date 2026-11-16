@@ -38,11 +38,16 @@ export async function signalChannel(topic: string, onSignal: (signal: Signal) =>
   return { channel, send };
 }
 
+export const VIDEO_CONSTRAINTS: MediaTrackConstraints = { facingMode: "user", width: { ideal: 640 }, height: { ideal: 360 }, frameRate: { ideal: 15, max: 15 } };
+/** The video's starting ceiling; QualityGuard steps it down on a weak network, then turns the picture off. */
+export const VIDEO_START_BITRATE = 450_000;
+
 /** The camera and the microphone - asked for only when the person starts or answers (owner: never remotely). */
 export async function localMedia(video: boolean): Promise<MediaStream> {
   const audio: MediaTrackConstraints = { echoCancellation: true, noiseSuppression: true, autoGainControl: true };
   try {
-    return await navigator.mediaDevices.getUserMedia({ audio, video: video ? { facingMode: "user", width: { ideal: 640 }, height: { ideal: 480 }, frameRate: { ideal: 24, max: 30 } } : false });
+    // owner 2026-11-16 (TURN strategy): 360p at 15 frames by default - clear enough for a face, a fraction of the data
+    return await navigator.mediaDevices.getUserMedia({ audio, video: video ? VIDEO_CONSTRAINTS : false });
   } catch (error) {
     // no camera (or refused): the call goes on with sound
     if (video) return navigator.mediaDevices.getUserMedia({ audio, video: false });
@@ -80,7 +85,7 @@ export class QualityGuard {
   private strong = 0;
   private step = 0;
   videoOff = false;
-  private readonly steps = [900_000, 500_000, 250_000, 120_000];
+  private readonly steps = [VIDEO_START_BITRATE, 300_000, 180_000, 100_000];
 
   constructor(private pc: RTCPeerConnection, private onVideoOff: (off: boolean) => void) {}
 
@@ -163,3 +168,141 @@ async function setMaxBitrate(sender: RTCRtpSender, bitrate: number) {
     // older engines: the browser adapts by itself
   }
 }
+
+/**
+ * Phase G (owner 2026-11-15): how a connected call actually travels - "host" (same network), "srflx" (direct through
+ * the internet, found by STUN) or "relay" (through a TURN server). Measured instead of guessed; null if unknown.
+ */
+export async function connectionRoute(pc: RTCPeerConnection): Promise<"host" | "srflx" | "prflx" | "relay" | null> {
+  try {
+    const stats = await pc.getStats();
+    let pairId: string | null = null;
+    stats.forEach((report) => {
+      if (report.type === "transport" && report.selectedCandidatePairId) pairId = report.selectedCandidatePairId;
+    });
+    let pair: RTCIceCandidatePairStats | null = null;
+    stats.forEach((report) => {
+      if (report.type === "candidate-pair" && (report.id === pairId || (!pairId && report.state === "succeeded" && report.nominated))) pair = report;
+    });
+    if (!pair) return null;
+    const local = stats.get((pair as RTCIceCandidatePairStats).localCandidateId) as { candidateType?: string } | undefined;
+    const type = local?.candidateType;
+    return type === "host" || type === "srflx" || type === "prflx" || type === "relay" ? type : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Phase G (owner 2026-11-15): the ICE servers for a call - STUN plus the free TURN relays the server holds as secrets
+ * (connect-ice). Asked once and kept for 30 minutes; if the server cannot be reached the call still tries STUN alone.
+ */
+let iceCache: { at: number; servers: RTCIceServer[] } | null = null;
+export async function loadIceServers(invoke: (name: string) => Promise<{ data: unknown; error: unknown }>): Promise<RTCIceServer[]> {
+  if (iceCache && Date.now() - iceCache.at < 30 * 60 * 1000) return iceCache.servers;
+  try {
+    const { data, error } = await invoke("connect-ice");
+    const servers = (data as { data?: { iceServers?: RTCIceServer[] } } | null)?.data?.iceServers;
+    if (!error && Array.isArray(servers) && servers.length > 0) {
+      iceCache = { at: Date.now(), servers };
+      return servers;
+    }
+  } catch {
+    // fall back to STUN below
+  }
+  return ICE_SERVERS;
+}
+
+/**
+ * TURN strategy (owner 2026-11-16): sound first. Audio is sent at high priority with Opus's own 32 kb/s ceiling; the
+ * picture at low priority, 15 frames, starting at 450 kb/s - when the network is short the picture gives way, never
+ * the sound. Applied once the connection is up (some engines refuse sender parameters before negotiation).
+ */
+export async function tuneSenders(pc: RTCPeerConnection): Promise<void> {
+  for (const sender of pc.getSenders()) {
+    const kind = sender.track?.kind;
+    if (!kind) continue;
+    try {
+      const params = sender.getParameters();
+      if (!params.encodings || params.encodings.length === 0) params.encodings = [{}];
+      const encoding = params.encodings[0] as RTCRtpEncodingParameters & { priority?: string; networkPriority?: string; maxFramerate?: number };
+      if (kind === "audio") {
+        encoding.priority = "high";
+        encoding.networkPriority = "high";
+        encoding.maxBitrate = 32_000;
+      } else {
+        encoding.priority = "low";
+        encoding.networkPriority = "low";
+        encoding.maxFramerate = 15;
+        if (!encoding.maxBitrate || encoding.maxBitrate > VIDEO_START_BITRATE) encoding.maxBitrate = VIDEO_START_BITRATE;
+      }
+      await sender.setParameters(params);
+    } catch {
+      // an engine without these settings adapts by itself
+    }
+  }
+}
+
+/** turn:host:port?transport=udp -> host (lower case). The same rule as connect-ice, so reports match its quotas. */
+export function relayHost(url: string): string {
+  return url.replace(/^turns?:/i, "").replace(/^\/\//, "").split("?")[0].replace(/:\d+$/, "").replace(/^\[|\]$/g, "").toLowerCase();
+}
+
+export type Route = "host" | "srflx" | "prflx" | "relay" | "unknown";
+export interface UsageSlice { route: Route; server: string | null; bytes: number; seconds: number }
+
+/**
+ * TURN strategy (owner 2026-11-16): what a connection actually carried, and how - read from its own counters.
+ * Each call to take() returns what passed since the previous one, split by route (a call can move from direct to a
+ * relay and back after a network change). Only this device's own relay allocation is counted as relay, so the
+ * organisation's reports add up to what each relay server carried.
+ */
+export class UsageMeter {
+  private lastBytes = new Map<string, number>();
+  private lastAt = performance.now();
+  constructor(private pc: RTCPeerConnection) {}
+
+  async take(): Promise<UsageSlice[]> {
+    const now = performance.now();
+    const seconds = Math.max(0, Math.round((now - this.lastAt) / 1000));
+    this.lastAt = now;
+    let stats: RTCStatsReport;
+    try {
+      stats = await this.pc.getStats();
+    } catch {
+      return [];
+    }
+    let selected: string | null = null;
+    stats.forEach((r) => { if (r.type === "transport" && r.selectedCandidatePairId) selected = r.selectedCandidatePairId; });
+    const slices = new Map<string, UsageSlice>();
+    stats.forEach((r) => {
+      if (r.type !== "candidate-pair") return;
+      const total = (r.bytesSent ?? 0) + (r.bytesReceived ?? 0);
+      const delta = total - (this.lastBytes.get(r.id) ?? 0);
+      this.lastBytes.set(r.id, total);
+      if (delta <= 0) return;
+      const local = stats.get(r.localCandidateId) as { candidateType?: string; url?: string } | undefined;
+      const type = local?.candidateType;
+      const route: Route = type === "host" || type === "srflx" || type === "prflx" || type === "relay" ? type : "unknown";
+      const server = route === "relay" && local?.url ? relayHost(local.url) : null;
+      const key = `${route}|${server ?? ""}`;
+      const slice = slices.get(key) ?? { route, server, bytes: 0, seconds: 0 };
+      slice.bytes += delta;
+      // the time belongs to the path in use now
+      if (r.id === selected || (!selected && r.nominated)) slice.seconds = seconds;
+      slices.set(key, slice);
+    });
+    return [...slices.values()];
+  }
+}
+
+/** Sends a meter's slices to the organisation's usage log (fire and forget - a lost report never touches the call). */
+export async function reportUsage(kind: "audio" | "video" | "meeting", refId: string | null, slices: UsageSlice[]): Promise<void> {
+  for (const slice of slices) {
+    if (slice.bytes <= 0 && slice.seconds <= 0) continue;
+    await ConnectEngine.supabase.rpc("record_prosm_time_connect_usage", {
+      p_kind: kind, p_ref_id: refId, p_route: slice.route, p_server: slice.server, p_bytes: Math.round(slice.bytes), p_seconds: Math.min(7200, slice.seconds),
+    }).then(() => undefined, () => undefined);
+  }
+}
+

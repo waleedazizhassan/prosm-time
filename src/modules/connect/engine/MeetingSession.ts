@@ -1,10 +1,10 @@
 import type { RealtimeChannel } from "@supabase/supabase-js";
 
 import { ConnectEngine } from "./ConnectEngine";
-import { ICE_SERVERS, QualityGuard, localMedia, signalChannel, tuneOpus, type Signal } from "./rtc";
+import { ICE_SERVERS, QualityGuard, UsageMeter, loadIceServers, localMedia, reportUsage, signalChannel, tuneOpus, tuneSenders, type Signal } from "./rtc";
 
 // PROSM Connect - a small meeting, straight between the devices (owner 2026-11-13: no media server). Every device
-// connects with every other (a mesh): up to 4 with video, 8 with sound only, enforced on the server. The one with the
+// connects with every other (a mesh): up to 6 with video, 12 with sound only (owner 2026-11-16), enforced on the server. The one with the
 // smaller id makes the offer, so two never cross. Who is present comes from the channel's presence. The host can
 // mute everyone, pin someone in the middle and stop recording; anyone can raise a hand; the meeting's chat is
 // broadcast only and gone with the meeting. Recording happens on the recorder's device only, and everyone is told
@@ -22,6 +22,9 @@ export interface Peer {
 }
 
 export interface MeetingChat { from: string; text: string; at: number }
+// owner 2026-11-16: a reaction floats over the person's picture for everyone for a few seconds - not in the chat
+export const REACTIONS = ["👍", "👏", "❤️", "😂", "😮", "🙏", "✅", "🎉"] as const;
+export interface MeetingReaction { from: string; emoji: string; at: number; id: number }
 
 export class MeetingSession {
   readonly meetingId: string;
@@ -33,6 +36,8 @@ export class MeetingSession {
   local: MediaStream | null = null;
   peers = new Map<string, Peer>();
   chat: MeetingChat[] = [];
+  reactions: MeetingReaction[] = [];
+  private reactionSeq = 0;
   pinned: string | null = null;
   sharingBy: string | null = null;
   myHand = false;
@@ -88,7 +93,11 @@ export class MeetingSession {
     return session;
   }
 
+  private iceServers: RTCIceServer[] = ICE_SERVERS;
+
   async join() {
+    // phase G: STUN plus the free TURN relays, before any connection to the others is made
+    this.iceServers = await loadIceServers((name) => ConnectEngine.supabase.functions.invoke(name, { body: {} }));
     const { error } = await ConnectEngine.supabase.rpc("prosm_time_connect_join_meeting", { p_meeting_id: this.meetingId });
     if (error) throw new Error(error.message);
     const { data } = await ConnectEngine.supabase.rpc("get_prosm_time_connect_meeting", { p_meeting: this.meetingId });
@@ -100,6 +109,7 @@ export class MeetingSession {
     this.screenShareFeature = info.screenShareFeature;
     this.local = await localMedia(this.media === "video").catch(() => null);
     this.camera = this.local?.getVideoTracks()[0] ?? null;
+    if (this.usageTimer === null) this.usageTimer = window.setInterval(() => this.reportAllUsage(), 30_000);
     const { channel, send } = await signalChannel(`connect:meeting:${this.meetingId}`, (signal) => void this.onSignal(signal), this.me, () => this.syncPresence());
     this.channel = channel;
     this.send = send;
@@ -141,8 +151,24 @@ export class MeetingSession {
     }
   }
 
+  private meters = new Map<string, UsageMeter>();
+  private usageTimer: number | null = null;
+
+  /** closes a link after reading what it carried since the last report */
+  private closeLink(userId: string) {
+    const pc = this.connections.get(userId);
+    const meter = this.meters.get(userId);
+    this.meters.delete(userId);
+    if (pc && meter) void meter.take().then((slices) => { pc.close(); return reportUsage("meeting", this.meetingId, slices); }, () => pc.close());
+    else pc?.close();
+  }
+
+  private reportAllUsage() {
+    for (const meter of this.meters.values()) void meter.take().then((slices) => reportUsage("meeting", this.meetingId, slices));
+  }
+
   private reset(userId: string) {
-    this.connections.get(userId)?.close();
+    this.closeLink(userId);
     this.connections.delete(userId);
     this.guards.delete(userId);
     this.pendingIce.delete(userId);
@@ -153,7 +179,7 @@ export class MeetingSession {
   private peer(userId: string): RTCPeerConnection {
     const existing = this.connections.get(userId);
     if (existing) return existing;
-    const pc = new RTCPeerConnection({ iceServers: ICE_SERVERS, bundlePolicy: "max-bundle" });
+    const pc = new RTCPeerConnection({ iceServers: this.iceServers, bundlePolicy: "max-bundle" });
     this.connections.set(userId, pc);
     if (this.local) for (const track of this.local.getTracks()) pc.addTrack(track, this.local);
     if (this.media === "video" && !this.local?.getVideoTracks().length) pc.addTransceiver("video", { direction: "recvonly" });
@@ -169,6 +195,11 @@ export class MeetingSession {
     };
     pc.onconnectionstatechange = () => {
       if (pc.connectionState === "failed" && this.me < userId) void this.call(userId, true);
+      // TURN strategy (owner 2026-11-16): sound first, a light picture; each link's data measured
+      if (pc.connectionState === "connected") {
+        void tuneSenders(pc);
+        if (!this.meters.has(userId)) this.meters.set(userId, new UsageMeter(pc));
+      }
       this.changed();
     };
     this.guards.set(userId, new QualityGuard(pc, (off) => {
@@ -239,6 +270,9 @@ export class MeetingSession {
       case "chat":
         this.chat = [...this.chat, { from, text: String(signal.text ?? "").slice(0, 1000), at: Date.now() }].slice(-200);
         break;
+      case "react":
+        if (REACTIONS.includes(String(signal.emoji) as (typeof REACTIONS)[number])) this.addReaction(from, String(signal.emoji));
+        break;
       case "recording": {
         const peer = this.peers.get(from);
         if (peer) peer.recording = Boolean(signal.on);
@@ -251,7 +285,13 @@ export class MeetingSession {
         }
         break;
       case "end":
-        if (from === this.hostId) this.close(false);
+        // release audit SA-05: the sender written in a broadcast is not proof - close only when the server says the
+        // meeting really ended (the host ends it through prosm_time_connect_end_meeting)
+        if (from === this.hostId) {
+          void ConnectEngine.supabase.rpc("get_prosm_time_connect_meeting", { p_meeting: this.meetingId }).then(({ data }) => {
+            if ((data as { status?: string } | null)?.status !== "live") this.close(false);
+          });
+        }
         break;
     }
     this.changed();
@@ -274,6 +314,11 @@ export class MeetingSession {
     if (!track) return;
     track.enabled = !track.enabled;
     this.videoOff = !track.enabled;
+    // TURN strategy (owner 2026-11-16): a camera that is off sends nothing to anyone (not black frames)
+    for (const pc of this.connections.values()) {
+      const sender = pc.getTransceivers().find((t) => t.sender.track === track || (t.sender.track === null && t.receiver.track?.kind === "video"))?.sender;
+      if (sender) void sender.replaceTrack(track.enabled ? track : null).catch(() => undefined);
+    }
     this.broadcastState();
     this.changed();
   }
@@ -293,6 +338,23 @@ export class MeetingSession {
     this.pinned = userId;
     void this.send?.({ type: "pin", userId });
     this.changed();
+  }
+
+  /** A reaction over my picture, seen by everyone for a few seconds. */
+  react(emoji: string) {
+    if (!REACTIONS.includes(emoji as (typeof REACTIONS)[number])) return;
+    this.addReaction(this.me, emoji);
+    void this.send?.({ type: "react", emoji });
+  }
+
+  private addReaction(from: string, emoji: string) {
+    const id = ++this.reactionSeq;
+    this.reactions = [...this.reactions, { from, emoji, at: Date.now(), id }].slice(-30);
+    this.changed();
+    window.setTimeout(() => {
+      this.reactions = this.reactions.filter((r) => r.id !== id);
+      this.changed();
+    }, 3500);
   }
 
   say(text: string) {
@@ -413,7 +475,7 @@ export class MeetingSession {
   }
 
   private drop(userId: string) {
-    this.connections.get(userId)?.close();
+    this.closeLink(userId);
     this.connections.delete(userId);
     this.guards.delete(userId);
     this.peers.delete(userId);
@@ -436,7 +498,8 @@ export class MeetingSession {
     if (this.recording) this.stopRecording();
     if (!left) void ConnectEngine.supabase.rpc("prosm_time_connect_leave_meeting", { p_meeting: this.meetingId });
     this.timers.forEach((t) => window.clearInterval(t));
-    for (const pc of this.connections.values()) pc.close();
+    if (this.usageTimer !== null) window.clearInterval(this.usageTimer);
+    for (const userId of [...this.connections.keys()]) this.closeLink(userId);
     this.connections.clear();
     this.local?.getTracks().forEach((t) => t.stop());
     this.screen?.getTracks().forEach((t) => t.stop());

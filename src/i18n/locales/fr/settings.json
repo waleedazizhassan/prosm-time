@@ -111,7 +111,12 @@
         "leave_rejected": "Congé refusé",
         "leave_cancelled": "Congé annulé"
       }
-    }
+    },
+    "rotateAction": "Renouveler",
+    "rotateTitle": "Renouveler cette clé ?",
+    "rotateWarning": "Une nouvelle clé remplace « {{name}} » avec les mêmes portées. L'ancienne fonctionne encore 24 heures pour mettre à jour l'autre système, puis s'arrête d'elle-même.",
+    "rotateError": "Impossible de renouveler cette clé.",
+    "replaced": "Remplacée – prend fin sous 24 heures"
   },
   "payroll": {
     "title": "Intégration de paie",
@@ -231,7 +236,7 @@
       "enterprise": "Enterprise"
     },
     "includes": "Ce que comprend votre offre",
-    "always": "Dans chaque offre : pointage sur site avec géorepérage et photo, hors ligne, carte en direct, SOS, radio, météo et 9 langues.",
+    "always": "Dans chaque offre : pointage sur site avec géorepérage et photo, hors ligne, carte en direct, SOS, radio, météo et 9 langues. Aussi : vérification en deux étapes et confirmation d’identité, matricules et le modèle d’approbation simple.",
     "included": "inclus",
     "notIncluded": "non inclus dans votre offre",
     "features": {
@@ -258,7 +263,17 @@
       "delegation": "Délégation complète et temporaire",
       "retention": "Contrôle de la conservation des données",
       "documents": "Documents des salariés et leur expiration",
-      "penalties": "Règlement de sanctions progressives et primes"
+      "penalties": "Règlement de sanctions progressives et primes",
+      "governance_models": "Modèles de gouvernance : décentralisé et centralisé",
+      "governance_advanced": "Gouvernance combinée (deux étapes) et un modèle par type",
+      "connect_chat": "Discussions et groupes",
+      "connect_camera_photo": "Photo vérifiée de l’appareil dans la discussion",
+      "connect_calls": "Appels vocaux et vidéo",
+      "connect_site_broadcast": "Message à tout un site",
+      "connect_push_to_talk": "Appuyer pour parler (radio)",
+      "connect_meetings": "Réunions et appels de groupe",
+      "connect_screen_share": "Partage d’écran",
+      "connect_meeting_recording": "Enregistrement des réunions"
     },
     "managedByProsm": "Toute modification ou tout renouvellement de votre licence est fait par PROSM ; vous recevez une notification et un e-mail avec la nouvelle licence. Pour la modifier : sales@prosm.net.",
     "historyAll": "Pointages affichés : tous. Positions et photos sont supprimées automatiquement après la durée de « Conservation ».",
@@ -289,7 +304,8 @@
     "sites": "Sites",
     "outside": "Hors des sites",
     "people": "Personnes et présence",
-    "other": "Offre et sécurité"
+    "other": "Offre et sécurité",
+    "governance": "Modèle de gouvernance"
   },
   "overtimeTarget": {
     "title": "Heures sup et retards",
@@ -324,5 +340,201 @@
     "people_other": "{{count}} personnes",
     "error": "Enregistrement impossible.",
     "people_many": "{{count}} personnes"
+  },
+  "ownership": {
+    "title": "Transférer la propriété",
+    "subtitle": "Le seul moyen de changer de propriétaire.",
+    "explain": "Choisissez un membre actif. Il doit accepter, puis 72 heures passent pendant lesquelles tous les managers sont prévenus ; vous pouvez annuler jusqu'à la fin. Vous devenez ensuite manager.",
+    "to": "Nouveau propriétaire",
+    "choose": "Choisir un membre",
+    "reason": "Motif",
+    "start": "Lancer le transfert",
+    "started": "Le transfert a commencé. En attente de l'acceptation.",
+    "waitingForYou": "{{name}} souhaite vous transférer la propriété de l'organisation. Acceptez pour continuer.",
+    "waitingForThem": "En attente de l'acceptation de {{name}}.",
+    "cooling": "{{name}} a accepté. Le transfert se termine après {{when}} sauf annulation.",
+    "ready": "La période d'attente est terminée. Le transfert à {{name}} peut être finalisé.",
+    "accept": "Accepter",
+    "accepted": "Accepté. Le transfert pourra être finalisé dans 72 heures.",
+    "complete": "Finaliser le transfert",
+    "completed": "La propriété a été transférée.",
+    "cancel": "Annuler le transfert",
+    "decline": "Refuser",
+    "cancelled": "Le transfert a été annulé.",
+    "failed": "Cette étape n'a pas pu être effectuée."
+  },
+  "connectUsage": {
+    "title": "Usage de Connect (appels et réunions)",
+    "subtitle": "Ce mois-ci : ce qui est passé directement entre appareils (gratuit) et ce qui est passé par un relais (compté sur son quota gratuit).",
+    "empty": "Pas encore d'appels mesurés ce mois-ci.",
+    "kind": "Type",
+    "sessions": "Nombre",
+    "directMinutes": "Minutes directes",
+    "relayMinutes": "Minutes via relais",
+    "relayMb": "Mo via relais",
+    "perMinute": "Mo/min",
+    "total": "Via un relais {{relay}} Mo sur {{total}} Mo.",
+    "server": "{{server}} : {{mb}} Mo en {{minutes}} min",
+    "kinds": {
+      "audio": "Appel vocal",
+      "video": "Appel vidéo",
+      "meeting": "Réunion"
+    }
+  },
+  "security": {
+    "title": "Sécurité des actions sensibles",
+    "subtitle": "Approuver ou rouvrir la paie, publier les bulletins, clés API, modifier les droits, transférer la propriété.",
+    "stepUp": {
+      "title": "Confirmer l’identité avant une action sensible",
+      "hint": "Si la dernière connexion date de plus de 10 minutes, l’application demande le mot de passe (ou le code à deux facteurs) avant d’agir."
+    },
+    "mfa": {
+      "title": "Exiger la vérification en deux étapes pour le propriétaire, les approbateurs de paie et ceux qui attribuent les droits",
+      "hint": "La confirmation se fait par un code d’une application d’authentification (Google ou Microsoft Authenticator), pas seulement le mot de passe. Qui ne l’a pas doit l’activer d’abord."
+    },
+    "platformOn": "Activé par la plateforme pour toutes les organisations.",
+    "howTo": "Chacun active la vérification en deux étapes dans son profil > Sécurité : scanner le QR code avec une application d’authentification et saisir le code à 6 chiffres.",
+    "openMine": "Ouvrir ma sécurité",
+    "saved": "Enregistré.",
+    "saveFailed": "Non enregistré. Réessayez."
+  },
+  "employeeCodes": {
+    "title": "Codes des employés",
+    "subtitle": "5 chiffres consécutifs selon l’ancienneté d’embauche.",
+    "hint": "Le code est attribué automatiquement dès qu’une date d’embauche est saisie, puis il reste. Si vous ajoutez des dates plus anciennes, renumérotez ici pour rétablir l’ordre. La paie approuvée garde ses codes.",
+    "renumber": "Renuméroter par ancienneté",
+    "confirm": "Renuméroter tous les employés selon la date d’embauche ? Les codes actuels changeront.",
+    "done": "{{count}} employés renumérotés.",
+    "failed": "Non renuméroté. Réessayez."
+  },
+  "governance": {
+    "title": "Modèle de gouvernance",
+    "subtitle": "Qui décide des demandes des employés. Choisissez le modèle adapté et lisez d’abord comment chacun fonctionne.",
+    "current": "Modèle actuel :",
+    "custom": "Personnalisé par type",
+    "active": "Actif",
+    "appliesTo": "S’applique aux congés, autorisations et corrections de présence",
+    "sections": {
+      "perms": "Qui peut quoi",
+      "flow": "Déroulement",
+      "life": "Cycle de vie de la demande"
+    },
+    "modes": {
+      "direct": {
+        "title": "Simple (par défaut)",
+        "tagline": "Tout responsable de l’employé décide en une étape.",
+        "how": "La demande apparaît chez tous ceux qui ont autorité sur l’employé : responsable de site, de service, RH et propriétaire. Le premier qui décide la clôt.",
+        "perms": {
+          "1": "Responsable de site : pour les gens de son site",
+          "2": "Responsable de service : pour son service",
+          "3": "RH : pour tous les employés",
+          "4": "Propriétaire et délégués : pour tout"
+        },
+        "flow": {
+          "1": "L’employé dépose la demande",
+          "2": "Elle apparaît chez tous ses responsables",
+          "3": "Le premier approuve ou refuse",
+          "4": "L’employé est informé de la décision"
+        },
+        "life": {
+          "1": "Déposée",
+          "2": "En examen",
+          "3": "Approuvée ou refusée"
+        },
+        "fits": "Pour : petites entreprises (5 à 30 employés)."
+      },
+      "decentralized": {
+        "title": "Décentralisé",
+        "tagline": "L’opérationnel décide : le site ou le service.",
+        "how": "Le responsable de site ou de service décide pour ses équipes. Les RH n’interviennent que si l’employé n’a pas de responsable direct ; le propriétaire reste le recours.",
+        "perms": {
+          "1": "Responsable de site ou de service : pour ses équipes",
+          "2": "RH : seulement sans responsable direct",
+          "3": "Propriétaire et délégués : pour tout"
+        },
+        "flow": {
+          "1": "L’employé dépose la demande",
+          "2": "Elle va à son responsable de site ou de service",
+          "3": "Le responsable approuve ou refuse",
+          "4": "L’employé est informé de la décision"
+        },
+        "life": {
+          "1": "Déposée",
+          "2": "En attente du responsable",
+          "3": "Approuvée ou refusée"
+        },
+        "fits": "Pour : entreprises avec de nombreuses agences et sites."
+      },
+      "centralized": {
+        "title": "Centralisé",
+        "tagline": "Seules les RH décident.",
+        "how": "Toutes les demandes vont aux RH. Les responsables de site et de service suivent leurs équipes sans décider ; le propriétaire et les délégués sont le recours.",
+        "perms": {
+          "1": "RH : pour tous les employés",
+          "2": "Responsables de site et de service : suivi seulement",
+          "3": "Propriétaire et délégués : pour tout"
+        },
+        "flow": {
+          "1": "L’employé dépose la demande",
+          "2": "Elle va aux RH",
+          "3": "Les RH approuvent ou refusent",
+          "4": "L’employé est informé de la décision"
+        },
+        "life": {
+          "1": "Déposée",
+          "2": "En attente des RH",
+          "3": "Approuvée ou refusée"
+        },
+        "fits": "Pour : entreprises avec des RH fortes et des décisions uniformes."
+      },
+      "two_step": {
+        "title": "Combiné (deux étapes)",
+        "tagline": "Le responsable approuve d’abord, puis les RH confirment.",
+        "how": "Le responsable de site ou de service approuve, puis la demande passe aux RH pour l’approbation finale. Un refus de l’un ou l’autre la clôt. Sans responsable direct, elle va directement aux RH ; une personne ayant les deux rôles approuve une seule fois.",
+        "perms": {
+          "1": "Responsable de site ou de service : première approbation",
+          "2": "RH : approbation finale",
+          "3": "Propriétaire et délégués : approuvent directement"
+        },
+        "flow": {
+          "1": "L’employé dépose la demande",
+          "2": "Le responsable approuve ou refuse",
+          "3": "Approuvée, elle passe aux RH",
+          "4": "Les RH approuvent ou refusent",
+          "5": "L’employé est informé de la décision"
+        },
+        "life": {
+          "1": "Déposée",
+          "2": "En attente du responsable",
+          "3": "En attente des RH",
+          "4": "Approuvée ou refusée"
+        },
+        "fits": "Pour : moyennes et grandes entreprises (100+ employés)."
+      }
+    },
+    "alwaysTitle": "Identique dans tous les modèles",
+    "always": {
+      "1": "Paie, indemnités, sanctions, droits, facturation et propriété restent au propriétaire",
+      "2": "Personne ne décide de sa propre demande",
+      "3": "Le propriétaire et les délégués peuvent décider toute demande",
+      "4": "Une période de paie clôturée ne peut pas être modifiée",
+      "5": "Chaque décision et chaque changement de modèle est journalisé"
+    },
+    "kinds": {
+      "leave": "Congés",
+      "permission": "Autorisations (retard / départ anticipé)",
+      "correction": "Corrections de présence"
+    },
+    "perKind": "Réglage fin : un modèle différent par type de demande",
+    "needHr": "Personne ne détient « Décider des demandes non sensibles de tous (RH) ». Attribuez-le dans la page des droits, sinon les demandes iront au propriétaire.",
+    "needManagers": "Il n’y a aucun responsable de site ou de service. Définissez-les d’abord, sinon les demandes iront aux RH ou au propriétaire.",
+    "use": "Utiliser ce modèle",
+    "isActive": "C’est le modèle actif",
+    "confirmTitle": "Passer à ce modèle ?",
+    "confirm": "Passer",
+    "confirmNote": "S’applique immédiatement aux demandes nouvelles et en attente : congés, autorisations et corrections.",
+    "saved": "Enregistré.",
+    "failed": "Non enregistré. Réessayez.",
+    "notInPlan": "Ce modèle est inclus à partir de l’offre {{plan}}."
   }
 }

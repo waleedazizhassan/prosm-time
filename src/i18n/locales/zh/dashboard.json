@@ -262,7 +262,17 @@
       "thanks": "谢谢，已保存。",
       "label": "班次感受"
     },
-    "presenceShort": "监控已开启"
+    "presenceShort": "监控已开启",
+    "mapTools": {
+      "label": "地图工具",
+      "layers": "图层",
+      "myLocation": "我的位置",
+      "style": {
+        "auto": "自动",
+        "light": "浅色",
+        "dark": "深色"
+      }
+    }
   },
   "kioskPin": {
     "title": "考勤机 PIN",
@@ -467,7 +477,9 @@
       "noLocation": "未在地图上",
       "noLocationHint": "打卡时没有坐标（例如设备无 GPS），无法在地图上显示。",
       "noLocationShort": "无位置",
-      "elsewhere": "不在站点内"
+      "elsewhere": "不在站点内",
+      "previous": "上一组场所",
+      "next": "更多场所"
     },
     "present": {
       "title": "当前在岗（{{count}}）",

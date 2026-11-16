@@ -149,8 +149,8 @@ export default function AppRoutes() {
             <Route path="/sites" element={<SitesPage />} />
             <Route path="/sites/:siteId" element={<SiteDetailPage />} />
             <Route path="/workers" element={<PlanRoute feature="kiosk"><ExternalWorkersPage /></PlanRoute>} />
-            <Route path="/workers/pay" element={<PlanRoute feature="kiosk"><ExternalPayPage /></PlanRoute>} />
-            <Route path="/workers/pay/:runId" element={<PlanRoute feature="kiosk"><ExternalPayRunPage /></PlanRoute>} />
+            <Route path="/workers/pay" element={<AccessRoute anyOf={["external_labor.view_pay", "external_labor.manage_policy"]}><PlanRoute feature="kiosk"><ExternalPayPage /></PlanRoute></AccessRoute>} />
+            <Route path="/workers/pay/:runId" element={<AccessRoute anyOf={["external_labor.view_pay", "external_labor.manage_policy"]}><PlanRoute feature="kiosk"><ExternalPayRunPage /></PlanRoute></AccessRoute>} />
             <Route path="/manager" element={<ManagerConsolePage />} />
             <Route path="/attendance" element={<AttendanceLogPage />} />
             <Route path="/timesheets" element={<TimesheetsPage />} />
@@ -158,12 +158,14 @@ export default function AppRoutes() {
             <Route path="/allowances" element={<PlanRoute feature="allowances"><AllowancesPage /></PlanRoute>} />
             <Route path="/allowances/prices" element={<PlanRoute feature="allowances"><AllowancePricesPage /></PlanRoute>} />
             <Route path="/leave" element={<PlanRoute feature="leave"><LeaveRequestsPage /></PlanRoute>} />
+            {/* QA-003 (2026-11-16): the payroll and external-pay pages behind the same permission as their home page - a
+                manager typing the address got the page with a "no payroll permission" error (the server refused the data) */}
             <Route path="/payroll" element={<AccessRoute anyOf={["payroll.access"]}><PlanRoute feature="payroll"><PayrollHomePage /></PlanRoute></AccessRoute>} />
-            <Route path="/payroll/cycles/:cycleId" element={<PlanRoute feature="payroll"><PayrollCyclePage /></PlanRoute>} />
-            <Route path="/payroll/profiles" element={<PlanRoute feature="payroll"><PayrollProfilesPage /></PlanRoute>} />
-            <Route path="/payroll/settings" element={<PlanRoute feature="payroll"><PayrollSettingsPage /></PlanRoute>} />
-            <Route path="/payroll/tax" element={<PlanRoute feature="payroll"><TaxConfigPage /></PlanRoute>} />
-            <Route path="/payroll/requests" element={<PlanRoute feature="payroll"><PayslipRequestsPage /></PlanRoute>} />
+            <Route path="/payroll/cycles/:cycleId" element={<AccessRoute anyOf={["payroll.access"]}><PlanRoute feature="payroll"><PayrollCyclePage /></PlanRoute></AccessRoute>} />
+            <Route path="/payroll/profiles" element={<AccessRoute anyOf={["payroll.access"]}><PlanRoute feature="payroll"><PayrollProfilesPage /></PlanRoute></AccessRoute>} />
+            <Route path="/payroll/settings" element={<AccessRoute anyOf={["payroll.access"]}><PlanRoute feature="payroll"><PayrollSettingsPage /></PlanRoute></AccessRoute>} />
+            <Route path="/payroll/tax" element={<AccessRoute anyOf={["payroll.access"]}><PlanRoute feature="payroll"><TaxConfigPage /></PlanRoute></AccessRoute>} />
+            <Route path="/payroll/requests" element={<AccessRoute anyOf={["payroll.access"]}><PlanRoute feature="payroll"><PayslipRequestsPage /></PlanRoute></AccessRoute>} />
             <Route path="/payslips" element={<PlanRoute feature="payroll"><MyPayslipsPage /></PlanRoute>} />
             <Route path="/me" element={<MyProfilePage />} />
             <Route path="/documents" element={<AccessRoute anyOf={["hr.manage"]}><PlanRoute feature="documents"><DocumentsPage /></PlanRoute></AccessRoute>} />

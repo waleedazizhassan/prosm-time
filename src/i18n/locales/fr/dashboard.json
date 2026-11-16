@@ -268,7 +268,17 @@
       "thanks": "Merci, c’est noté.",
       "label": "Ressenti du service"
     },
-    "presenceShort": "Surveillance active"
+    "presenceShort": "Surveillance active",
+    "mapTools": {
+      "label": "Outils de la carte",
+      "layers": "Calques",
+      "myLocation": "Ma position",
+      "style": {
+        "auto": "Auto",
+        "light": "Clair",
+        "dark": "Sombre"
+      }
+    }
   },
   "kioskPin": {
     "title": "Code PIN kiosque",
@@ -473,7 +483,9 @@
       "noLocation": "Sans position sur la carte",
       "noLocationHint": "Pointé sans coordonnées (par ex. appareil sans GPS), impossible à placer.",
       "noLocationShort": "Sans position",
-      "elsewhere": "Hors des sites"
+      "elsewhere": "Hors des sites",
+      "previous": "Sites précédents",
+      "next": "Autres sites"
     },
     "present": {
       "title": "Présents maintenant ({{count}})",

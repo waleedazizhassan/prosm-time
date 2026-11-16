@@ -49,7 +49,7 @@ beforeAll(async () => {
        select $1, p.id, c.id, case when c.is_basic then 8000 when c.category = 'earning' then 150 else 40 end, '2027-01-01'
        from payroll_profiles p cross join payroll_components c where p.organization_id = $1 and c.organization_id = $1`, [org.id]);
   });
-}, 600_000);
+}, 1_800_000); // governance phase A: the 1,000-person setup needs more than 10 minutes on a slow machine
 
 describe("payroll at 1,000 employees x 30 lines", () => {
   it("creates, recalculates, submits, approves and reports within limits", async () => {

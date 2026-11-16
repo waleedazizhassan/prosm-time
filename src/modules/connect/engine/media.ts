@@ -175,3 +175,18 @@ export function formatDuration(ms: number): string {
   const s = Math.max(0, Math.round(ms / 1000));
   return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 }
+
+/**
+ * Phase G (owner 2026-11-15: "the call connects but there is no sound"): start the other side's sound explicitly.
+ * A phone's browser may refuse to start sound by itself; false means it was refused and the person must tap once.
+ */
+export async function playMedia(el: HTMLMediaElement | null): Promise<boolean> {
+  if (!el || !el.srcObject) return true;
+  if (!el.paused) return true;
+  try {
+    await el.play();
+    return true;
+  } catch {
+    return false;
+  }
+}

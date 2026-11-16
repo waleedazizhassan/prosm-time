@@ -1,3 +1,4 @@
+import { withStepUp } from "../auth/stepUp";
 import DatabaseManager from "../database/DatabaseManager";
 
 export interface ServiceResult<T = null> {
@@ -73,12 +74,16 @@ class PermissionRepository {
 
   async setOverride(targetUserId: string, permissionKey: string, isGranted: boolean, reason: string): Promise<ServiceResult> {
     try {
-      const { data, error } = await this.client.rpc("set_prosm_time_user_permission_override", {
-        p_target_user_id: targetUserId,
-        p_permission_key: permissionKey,
-        p_is_granted: isGranted,
-        p_reason: reason,
-      });
+      // release audit SA-01: identity confirmation when the organisation asks for it
+      const { data, error } = await withStepUp("permissions.change", async () => {
+        const r = await this.client.rpc("set_prosm_time_user_permission_override", {
+          p_target_user_id: targetUserId,
+          p_permission_key: permissionKey,
+          p_is_granted: isGranted,
+          p_reason: reason,
+        });
+        return { data: r.data, error: r.error?.message ?? null };
+      }).then((r) => ({ data: r.data, error: r.error ? { message: r.error } : null }));
 
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to update this permission.");
@@ -112,13 +117,30 @@ class PermissionRepository {
     }
   }
 
+  // owner 2026-11-15: every individual grant or removal of this person cleared at once - back to the role's defaults
+  async resetToRole(targetUserId: string, reason: string): Promise<ServiceResult> {
+    try {
+      const { error } = await withStepUp("permissions.change", async () => {
+        const r = await this.client.rpc("reset_prosm_time_user_permissions", { p_target_user_id: targetUserId, p_reason: reason });
+        return { error: r.error?.message ?? null };
+      }).then((r) => ({ error: r.error ? { message: r.error } : null }));
+      if (error) return createError(error.message);
+      return createSuccess();
+    } catch (error) {
+      return createError(error instanceof Error ? error.message : "Permission service unavailable.");
+    }
+  }
+
   async clearOverride(targetUserId: string, permissionKey: string, reason: string): Promise<ServiceResult> {
     try {
-      const { data, error } = await this.client.rpc("clear_prosm_time_user_permission_override", {
-        p_target_user_id: targetUserId,
-        p_permission_key: permissionKey,
-        p_reason: reason,
-      });
+      const { data, error } = await withStepUp("permissions.change", async () => {
+        const r = await this.client.rpc("clear_prosm_time_user_permission_override", {
+          p_target_user_id: targetUserId,
+          p_permission_key: permissionKey,
+          p_reason: reason,
+        });
+        return { data: r.data, error: r.error?.message ?? null };
+      }).then((r) => ({ data: r.data, error: r.error ? { message: r.error } : null }));
 
       if (error) return createError(error.message);
       if (data?.success === false) return createError("Unable to clear this permission override.");

@@ -135,3 +135,17 @@
 .connect {
   padding-inline-end: var(--space-2);
 }
+
+/* owner 2026-11-15: a name stays on one line (it was breaking beside the call buttons on a phone) */
+.name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .connect :global(button) {
+    width: 36px;
+    height: 36px;
+  }
+}

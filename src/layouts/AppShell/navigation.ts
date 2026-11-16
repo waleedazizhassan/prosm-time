@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, LogIn, Plug, HardHat, ScrollText, Sunrise, Banknote, Receipt, Megaphone, IdCard, FileCheck, Gavel, MessagesSquare, PhoneCall, Video } from "lucide-react";
+import { Users, MapPin, LayoutGrid, FileText, FileBarChart, Settings, HelpCircle, Clock, Wallet, Siren, CalendarDays, CalendarClock, CalendarRange, MonitorSmartphone, UserCog, LogIn, Plug, HardHat, ScrollText, Sunrise, Banknote, Receipt, Megaphone, IdCard, FileCheck, Gavel, MessagesSquare, PhoneCall, Video, ShieldCheck, Landmark } from "lucide-react";
 
 import { FEATURES } from "../../config/features";
 import type { PlanFeature } from "../../core/hooks/usePlanFeatures";
@@ -165,6 +165,9 @@ const ALL_NAV_ITEMS: NavItem[] = [
   // existing RPC-level gate.
   // Owner 2026-10-20: every setting lives here - each site's rules too, so managers who manage sites see it.
   // review 2026-11-12: the page serves personnel managers too (job titles, documents, bylaw)
+  // owner 2026-11-16: governance and security in a clear place - straight to their Settings tabs
+  { id: "governance", labelKey: "items.governance", path: "/settings?tab=governance", icon: Landmark, requiredPermission: null, ownerOnly: true, section: "settings" },
+  { id: "security", labelKey: "items.security", path: "/settings?tab=security", icon: ShieldCheck, requiredPermission: null, ownerOnly: true, section: "settings" },
   { id: "settings", labelKey: "items.settings", path: "/settings", icon: Settings, requiredPermission: ["sites.manage", "hr.manage"], section: "settings" },
   // § user-directed 2026-09-09 - "API [keys] should appear on its own
   // in the sidebar, not inside Settings." Same Owner-only gate as

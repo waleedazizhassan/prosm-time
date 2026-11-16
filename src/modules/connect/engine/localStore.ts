@@ -25,6 +25,9 @@ export interface LocalMessage {
   proofCode?: string | null;
   refId?: string | null;
   hasBlob?: boolean;
+  /** owner 2026-11-16: the message this one answers (its client id) and a short snippet of it */
+  replyTo?: string | null;
+  replySnippet?: string | null;
 }
 
 export interface LocalConversation {
@@ -61,6 +64,8 @@ export interface OutboxEntry {
   proofCode: string | null;
   createdAt: string;
   tries: number;
+  replyTo?: string | null;
+  replySnippet?: string | null;
 }
 
 const VERSION = 1;
@@ -116,8 +121,8 @@ async function openJson<T>(stored: { sealed?: Sealed | null; plain?: string | nu
 
 export const LocalStore = {
   async putMessage(userId: string, message: LocalMessage): Promise<void> {
-    const { body, fileName, mimeType, durationMs, proofCode, refId, hasBlob, ...meta } = message;
-    const secret = await sealJson({ body, fileName, mimeType, durationMs, proofCode, refId, hasBlob });
+    const { body, fileName, mimeType, durationMs, proofCode, refId, hasBlob, replySnippet, ...meta } = message;
+    const secret = await sealJson({ body, fileName, mimeType, durationMs, proofCode, refId, hasBlob, replySnippet });
     const stored: StoredMessage = { ...meta, ...secret };
     await tx(userId, "messages", "readwrite", (s) => s.put(stored));
   },
@@ -146,6 +151,11 @@ export const LocalStore = {
     }));
     const slice = rows.slice(-limit);
     return Promise.all(slice.map((row) => LocalStore.decode(row)));
+  },
+
+  async getMessage(userId: string, id: string): Promise<LocalMessage | null> {
+    const row = await tx<StoredMessage>(userId, "messages", "readonly", (s) => s.get(id));
+    return row ? LocalStore.decode(row) : null;
   },
 
   async hasMessage(userId: string, id: string): Promise<boolean> {
@@ -215,6 +225,21 @@ export const LocalStore = {
       await tx(userId, "messages", "readwrite", (s) => s.put({ ...row, sizeBytes: 0 }));
     }
     return freed;
+  },
+
+  /** owner 2026-11-16: delete messages from this device (and their files). */
+  async deleteMessages(userId: string, ids: string[]): Promise<void> {
+    for (const id of ids) {
+      await tx(userId, "messages", "readwrite", (s) => s.delete(id));
+      await tx(userId, "blobs", "readwrite", (s) => s.delete(id));
+    }
+  },
+
+  /** owner 2026-11-16: delete a whole conversation from this device - its messages, their files and the entry. */
+  async deleteConversation(userId: string, conversationId: string): Promise<void> {
+    const rows = (await tx<StoredMessage[]>(userId, "messages", "readonly", (s) => s.getAll())) ?? [];
+    await this.deleteMessages(userId, rows.filter((row) => row.conversationId === conversationId).map((row) => row.id));
+    await tx(userId, "conversations", "readwrite", (s) => s.delete(conversationId));
   },
 
   /** Sign-out: the person's Connect data leaves this device. */

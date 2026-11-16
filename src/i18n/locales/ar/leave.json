@@ -44,7 +44,8 @@
     "pending": "قيد المراجعة",
     "approved": "موافق عليها",
     "rejected": "مرفوضة",
-    "cancelled": "ملغاة"
+    "cancelled": "ملغاة",
+    "awaitingHr": "بانتظار الموارد البشرية"
   },
   "permission": {
     "title": "طلب إذن",

@@ -38,6 +38,8 @@ export interface ConnectItem {
   mimeType: string | null;
   sizeBytes: number | null;
   createdAt: string;
+  replyTo?: string | null;
+  replySnippet?: string | null;
 }
 
 /** A colleague as Connect shows them (any member may read this short list while the module is on). */
@@ -79,6 +81,8 @@ function mapItem(row: Record<string, unknown>): ConnectItem {
     clientId: (row.client_id as string | null) ?? null,
     attachmentPath: (row.attachment_path as string | null) ?? null,
     mimeType: (row.mime_type as string | null) ?? null,
+    replyTo: (row.reply_to as string | null) ?? null,
+    replySnippet: (row.reply_snippet as string | null) ?? null,
     sizeBytes: row.size_bytes === null || row.size_bytes === undefined ? null : Number(row.size_bytes),
     createdAt: String(row.created_at),
   };

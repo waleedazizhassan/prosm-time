@@ -103,7 +103,8 @@
     "ZERO_NET": "Neto cero",
     "PARTIAL_PERIOD": "Alta o baja durante el periodo",
     "NET_CHANGED": "El neto cambió mucho respecto al ciclo anterior",
-    "ATTENDANCE_CHANGED": "La asistencia cambió tras aceptar una sugerencia"
+    "ATTENDANCE_CHANGED": "La asistencia cambió tras aceptar una sugerencia",
+    "PENDING_REQUESTS": "Solicitudes aún pendientes en el periodo"
   },
   "suggestions": {
     "title": "Desde la asistencia",

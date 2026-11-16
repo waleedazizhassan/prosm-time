@@ -127,7 +127,9 @@
     "personTitle": "Departamento",
     "choose": "Departamento",
     "noDepartment": "Sin departamento",
-    "saved": "Guardado."
+    "saved": "Guardado.",
+    "manager": "Jefe del departamento",
+    "noManager": "Sin jefe"
   },
   "errors": {
     "generic": "No se pudo completar esta acción.",

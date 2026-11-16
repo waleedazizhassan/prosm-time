@@ -111,7 +111,12 @@
         "leave_rejected": "Leave declined",
         "leave_cancelled": "Leave cancelled"
       }
-    }
+    },
+    "rotateAction": "Rotate",
+    "rotateTitle": "Rotate this key?",
+    "rotateWarning": "A new key replaces \"{{name}}\" with the same scopes. The old key keeps working for 24 hours, so you can update the other system, then it stops by itself.",
+    "rotateError": "Could not rotate this key.",
+    "replaced": "Replaced - ends within 24 hours"
   },
   "payroll": {
     "title": "Payroll Integration",
@@ -231,7 +236,7 @@
       "enterprise": "Enterprise"
     },
     "includes": "What your plan includes",
-    "always": "In every plan: clocking at the site with geofence and photo proof, offline, the live map, SOS, radio, weather and 9 languages.",
+    "always": "In every plan: clocking at the site with geofence and photo proof, offline, the live map, SOS, radio, weather and 9 languages. Also: two-step verification and identity confirmation, employee codes, and the simple approval model.",
     "included": "included",
     "notIncluded": "not in your plan",
     "features": {
@@ -258,7 +263,17 @@
       "delegation": "Full and time-limited delegation",
       "retention": "Data retention control",
       "documents": "Employee documents and their expiry",
-      "penalties": "Progressive penalties bylaw and incentives"
+      "penalties": "Progressive penalties bylaw and incentives",
+      "governance_models": "Governance models: decentralized and centralized",
+      "governance_advanced": "Combined (two-step) governance and a model per request kind",
+      "connect_chat": "Chats and groups",
+      "connect_camera_photo": "Verified camera photo in chat",
+      "connect_calls": "Voice and video calls",
+      "connect_site_broadcast": "A message to everyone on a site",
+      "connect_push_to_talk": "Push to talk (radio)",
+      "connect_meetings": "Meetings and group calls",
+      "connect_screen_share": "Screen sharing",
+      "connect_meeting_recording": "Meeting recording"
     },
     "managedByProsm": "Any change or renewal of your licence is made by PROSM; you get a notification and an email with the new licence. To change it, write to sales@prosm.net.",
     "historyAll": "Attendance records shown: all of them. Location points and photos are deleted automatically after the period in “Data retention”.",
@@ -288,7 +303,8 @@
     "sites": "Sites",
     "outside": "Outside the sites",
     "people": "People and attendance",
-    "other": "Plan and security"
+    "other": "Plan and security",
+    "governance": "Governance model"
   },
   "overtimeTarget": {
     "title": "Counting overtime and lateness",
@@ -322,5 +338,201 @@
     "people_one": "1 person",
     "people_other": "{{count}} people",
     "error": "Could not save."
+  },
+  "ownership": {
+    "title": "Transfer the ownership",
+    "subtitle": "The only way the owner changes.",
+    "explain": "Choose an active member. They must accept, then 72 hours pass while every manager is told; you can cancel until it completes. After it, you become a manager.",
+    "to": "New owner",
+    "choose": "Choose a member",
+    "reason": "Reason",
+    "start": "Start the transfer",
+    "started": "The transfer started. Waiting for the recipient to accept.",
+    "waitingForYou": "{{name}} wants to transfer the organisation's ownership to you. Accept to continue.",
+    "waitingForThem": "Waiting for {{name}} to accept.",
+    "cooling": "{{name}} accepted. The transfer completes after {{when}} unless it is cancelled.",
+    "ready": "The waiting period is over. The transfer to {{name}} can be completed now.",
+    "accept": "Accept",
+    "accepted": "Accepted. The transfer can be completed after 72 hours.",
+    "complete": "Complete the transfer",
+    "completed": "The ownership was transferred.",
+    "cancel": "Cancel the transfer",
+    "decline": "Decline",
+    "cancelled": "The transfer was cancelled.",
+    "failed": "This step could not be done."
+  },
+  "connectUsage": {
+    "title": "Connect usage (calls and meetings)",
+    "subtitle": "This month: what went directly between devices (free) and what went through a relay (counted against the relay's free allowance).",
+    "empty": "No measured calls this month yet.",
+    "kind": "Kind",
+    "sessions": "Count",
+    "directMinutes": "Direct minutes",
+    "relayMinutes": "Relay minutes",
+    "relayMb": "MB via relay",
+    "perMinute": "MB/min",
+    "total": "Through a relay {{relay}} MB of {{total}} MB.",
+    "server": "{{server}}: {{mb}} MB in {{minutes}} min",
+    "kinds": {
+      "audio": "Voice call",
+      "video": "Video call",
+      "meeting": "Meeting"
+    }
+  },
+  "security": {
+    "title": "Security for sensitive actions",
+    "subtitle": "Approving or reopening payroll, publishing payslips, API keys, changing permissions, transferring ownership.",
+    "stepUp": {
+      "title": "Confirm identity before a sensitive action",
+      "hint": "If the last sign-in is older than 10 minutes, the app asks for the password (or the two-step code) before going ahead."
+    },
+    "mfa": {
+      "title": "Require two-step verification for the owner, payroll approvers and permission assigners",
+      "hint": "The confirmation is a code from an authenticator app (Google or Microsoft Authenticator), not the password alone. Anyone without it is asked to set it up first."
+    },
+    "platformOn": "Turned on by the platform for every organisation.",
+    "howTo": "Each person turns on two-step verification from their profile > Security: scan the QR code with an authenticator app and enter the 6-digit code.",
+    "openMine": "Open my security",
+    "saved": "Saved.",
+    "saveFailed": "Not saved. Try again."
+  },
+  "employeeCodes": {
+    "title": "Employee codes",
+    "subtitle": "5 sequential digits by hiring seniority.",
+    "hint": "A code is given automatically as soon as a hiring date is entered, and it stays. If you add older hiring dates, number everyone again here to restore seniority order. Approved payroll keeps its codes.",
+    "renumber": "Number again by seniority",
+    "confirm": "Number every employee again by hiring date? Current codes will change.",
+    "done": "{{count}} employees numbered again.",
+    "failed": "Not numbered again. Try again."
+  },
+  "governance": {
+    "title": "Governance model",
+    "subtitle": "Who decides employees' requests. Choose the model that fits your company - read how each one works before choosing.",
+    "current": "Current model:",
+    "custom": "Custom per kind",
+    "active": "Active",
+    "appliesTo": "Applies to: leave, permissions and attendance corrections",
+    "sections": {
+      "perms": "Who can do what",
+      "flow": "Workflow",
+      "life": "Request life cycle"
+    },
+    "modes": {
+      "direct": {
+        "title": "Simple (default)",
+        "tagline": "Any manager responsible for the employee decides, in one step.",
+        "how": "The request shows to everyone with authority over the employee: their site manager, department manager, HR and the owner. The first to decide closes it.",
+        "perms": {
+          "1": "Site manager: decides for their site's people",
+          "2": "Department manager: decides for their department",
+          "3": "HR: decides for every employee",
+          "4": "Owner and deputies: decide everything"
+        },
+        "flow": {
+          "1": "The employee submits the request",
+          "2": "It shows to everyone responsible for them",
+          "3": "The first one approves or rejects",
+          "4": "The employee is notified of the decision"
+        },
+        "life": {
+          "1": "Submitted",
+          "2": "Under review",
+          "3": "Approved or rejected"
+        },
+        "fits": "Fits: small companies (5 to 30 employees)."
+      },
+      "decentralized": {
+        "title": "Decentralized",
+        "tagline": "Operations decide: the site or the department.",
+        "how": "The site or department manager decides for their people. HR steps in only when the employee has no direct manager; the owner is always the fallback.",
+        "perms": {
+          "1": "Site or department manager: decides for their people",
+          "2": "HR: only for those without a direct manager",
+          "3": "Owner and deputies: decide everything"
+        },
+        "flow": {
+          "1": "The employee submits the request",
+          "2": "It goes to their site or department manager",
+          "3": "The manager approves or rejects",
+          "4": "The employee is notified of the decision"
+        },
+        "life": {
+          "1": "Submitted",
+          "2": "Waiting for the manager",
+          "3": "Approved or rejected"
+        },
+        "fits": "Fits: companies with many branches and sites, each manager responsible for their people."
+      },
+      "centralized": {
+        "title": "Centralized",
+        "tagline": "Only HR decides.",
+        "how": "Every request goes to HR. Site and department managers follow their people but do not decide; the owner and deputies are the fallback.",
+        "perms": {
+          "1": "HR: decides for every employee",
+          "2": "Site and department managers: follow only",
+          "3": "Owner and deputies: decide everything"
+        },
+        "flow": {
+          "1": "The employee submits the request",
+          "2": "It goes to HR",
+          "3": "HR approves or rejects",
+          "4": "The employee is notified of the decision"
+        },
+        "life": {
+          "1": "Submitted",
+          "2": "Waiting for HR",
+          "3": "Approved or rejected"
+        },
+        "fits": "Fits: companies with a strong HR department that want one consistent decision."
+      },
+      "two_step": {
+        "title": "Combined (two steps)",
+        "tagline": "The manager approves first, then HR confirms.",
+        "how": "The site or department manager approves, then the request moves to HR for the final approval. A rejection by either closes it. With no direct manager it goes straight to HR; one person holding both roles approves once.",
+        "perms": {
+          "1": "Site or department manager: first approval",
+          "2": "HR: final approval",
+          "3": "Owner and deputies: approve directly"
+        },
+        "flow": {
+          "1": "The employee submits the request",
+          "2": "The manager approves or rejects",
+          "3": "Once approved it goes to HR",
+          "4": "HR approves or rejects",
+          "5": "The employee is notified of the decision"
+        },
+        "life": {
+          "1": "Submitted",
+          "2": "Waiting for the manager",
+          "3": "Waiting for HR",
+          "4": "Approved or rejected"
+        },
+        "fits": "Fits: medium and large companies (100+ employees)."
+      }
+    },
+    "alwaysTitle": "The same in every model",
+    "always": {
+      "1": "Payroll, allowances, penalties, permissions, billing and ownership stay with the owner",
+      "2": "Nobody decides their own request",
+      "3": "The owner and deputies can decide any request",
+      "4": "A closed payroll period cannot be changed",
+      "5": "Every decision and every model change is recorded in the audit log"
+    },
+    "kinds": {
+      "leave": "Leave",
+      "permission": "Permissions (late arrival / early leave)",
+      "correction": "Attendance corrections"
+    },
+    "perKind": "Fine tuning: a different model per request kind",
+    "needHr": "Nobody holds \"Decide every employee's non-sensitive requests (HR)\". Give it to someone on the permissions page, or requests go to the owner.",
+    "needManagers": "There are no site or department managers. Set them first, or requests go to HR or the owner.",
+    "use": "Use this model",
+    "isActive": "This is the active model",
+    "confirmTitle": "Switch to this model?",
+    "confirm": "Switch",
+    "confirmNote": "It applies at once to new and still-pending requests: leave, permissions and attendance corrections.",
+    "saved": "Saved.",
+    "failed": "Not saved. Try again.",
+    "notInPlan": "This model comes with the {{plan}} plan and up."
   }
 }

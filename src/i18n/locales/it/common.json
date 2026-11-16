@@ -379,7 +379,31 @@
     "documentNameTooLong": "Il nome del documento è troppo lungo.",
     "legalNameArabic": "Il nome ufficiale deve essere in arabo, come sul documento.",
     "nationalIdRequired": "Scrivi il numero del documento.",
-    "phoneRequired": "Scrivi il numero di cellulare."
+    "phoneRequired": "Scrivi il numero di cellulare.",
+    "ownerAccountProtected": "L'account del titolare è protetto.",
+    "ownerChangesOnlyByTransfer": "Il titolare cambia solo con un trasferimento di proprietà.",
+    "payPeriodLocked": "Questo periodo paghe è bloccato e non può cambiare.",
+    "stepUpRequired": "Conferma la tua identità prima di questa azione.",
+    "mfaRequired": "Questa azione richiede l'accesso in due passaggi.",
+    "correctionAlreadyPending": "C'è già una correzione in sospeso per questo.",
+    "requestAlreadyDecided": "Qualcun altro ha già deciso questa richiesta: aggiorna per vederne lo stato attuale.",
+    "apiKeyMax365": "Una chiave API dura al massimo 365 giorni.",
+    "delegationMax30": "Una delega dura al massimo 30 giorni. Concedila di nuovo per prolungarla.",
+    "onlyActiveKeyRotated": "Si può rinnovare solo una chiave attiva.",
+    "onlyOwnerTransfers": "Solo il titolare trasferisce la proprietà.",
+    "ownershipTransferOpen": "C'è già un trasferimento di proprietà aperto.",
+    "waitingNotOver": "Il periodo di attesa non è ancora finito.",
+    "ownershipNotReady": "Il trasferimento di proprietà non è pronto.",
+    "chooseActiveMember": "Scegli un membro attivo dell'organizzazione.",
+    "meetingEnded": "Questa riunione è terminata.",
+    "meetingFull": "Questa riunione è piena.",
+    "waitingForHr": "In attesa delle risorse umane",
+    "ownPermissions": "Non puoi cambiare i tuoi permessi. Solo il proprietario può farlo.",
+    "appointYourself": "Non puoi nominarti responsabile di reparto.",
+    "departmentManagerRole": "Un responsabile di reparto deve avere il ruolo Responsabile. Cambia prima il ruolo.",
+    "ownPay": "Non puoi modificare la tua paga.",
+    "administrationHeld": "Lo detiene qualcuno fuori dalla tua autorità. Solo il proprietario può spostarlo.",
+    "cannotContact": "Non puoi contattare questa persona. Puoi raggiungere le persone del tuo sito e reparto e i tuoi responsabili."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",
@@ -472,7 +496,7 @@
   },
   "issuedVia": "Emesso tramite",
   "feedback": {
-    "errorTitle": "Si è verificato un problema",
+    "errorTitle": "Non è stato possibile completare",
     "successTitle": "Fatto",
     "ok": "OK",
     "close": "Chiudi",
@@ -490,5 +514,18 @@
     "count_one": "{{count}} registrazione",
     "count_other": "{{count}} registrazioni",
     "count_many": "{{count}} registrazioni"
+  },
+  "stepUp": {
+    "title": "Conferma la tua identità",
+    "explain": "Questa azione è sensibile. Inserisci la password per continuare.",
+    "explainMfa": "Questa azione è sensibile. Inserisci la password e il codice della tua app di autenticazione.",
+    "password": "Password",
+    "code": "Codice di autenticazione",
+    "confirm": "Conferma",
+    "close": "Chiudi",
+    "wrongPassword": "La password non è corretta.",
+    "wrongCode": "Il codice non è corretto o è scaduto.",
+    "failed": "Impossibile confermare. Riprova.",
+    "enableMfaFirst": "Questa azione richiede l'accesso in due passaggi. Attivalo dal tuo profilo (scheda Sicurezza) e riprova."
   }
 }

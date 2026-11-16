@@ -104,7 +104,10 @@
     "endingContinue": "如需继续使用，请联系销售团队续订许可证（编号 {{license}}）：",
     "endedSubject": "您的 PROSM Time 试用已结束",
     "endedBody": "{{org}} 的 PROSM Time 试用已结束。机构现为只读状态：所有人仍可查看全部内容，您的所有数据都会保留。",
-    "endedContinue": "登录后在 设置 > 订阅 中输入激活码，或联系我们，一切即可恢复如初（许可证编号 {{license}}）："
+    "endedContinue": "登录后在 设置 > 订阅 中输入激活码，或联系我们，一切即可恢复如初（许可证编号 {{license}}）：",
+    "whenDays": "{{days}}后",
+    "licenseHow": "续订方法：请发送邮件至 info@prosm.net 或 support@prosm.net 并注明许可证号 {{license}}，我们将为你准备续订。完成后会自动应用到应用中，你会收到通知和附有新许可证的邮件。",
+    "licenseAfter": "如未续订，宽限期结束后应用将变为只读，直到续订；任何数据都不会被删除。"
   },
   "licence": {
     "subject": "PROSM Time - {{org}} 的许可证已变更",

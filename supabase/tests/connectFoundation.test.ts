@@ -43,6 +43,12 @@ beforeAll(async () => {
   outsider = await addMember(t, other, "employee", "Outsider");
   starterPerson = await addMember(t, starter, "employee", "Sami");
   await assignToSite(t, site, hasan);
+  // 2026-11-16 Connect visibility: these tests are about Connect's features, so everyone of the organisation works
+  // at one shared site and sees each other (who sees whom is connectVisibility.test.ts)
+  {
+    const [{ id: shared }] = await t.su<{ id: string }>("insert into sites (organization_id, name, latitude, longitude, allowed_radius_meters) values ($1, 'Shared', 30.0, 31.0, 200) returning id", [org.id]);
+    await t.su("insert into site_assignments (site_id, user_id) select $1, u.id from users u where u.organization_id = $2 and not u.is_owner on conflict do nothing", [shared, org.id]);
+  }
 });
 
 describe("PROSM Connect - the foundation", () => {
@@ -115,17 +121,18 @@ describe("PROSM Connect - the foundation", () => {
     expect(await t.su("select path from connect_storage_trash where path = $1", [path])).toHaveLength(1);
   });
 
-  it("a meeting takes no more than its limit (4 with video), for every plan", async () => {
+  it("a meeting takes no more than its limit (a 4-place meeting stays 4; video up to 6 since 2026-11-16), for every plan", async () => {
     const [{ id }] = await t.su<{ id: string }>("insert into connect_meetings (organization_id, host_id, media, max_peers) values ($1, $2, 'video', 4) returning id", [org.id, omar.userId]);
     const fourth = await addMember(t, org, "employee", "Karim");
     const fifth = await addMember(t, org, "employee", "Ahmed");
     // invitations (20261114120000): only the host and those invited join
-    for (const m of [hasan, mona, fourth, fifth]) await t.su("insert into connect_switchboard (organization_id, from_user, to_user, type, ref_id) values ($1, $2, $3, 'meeting_invite', $4)", [org.id, omar.userId, m.userId, id]);
+    for (const m of [hasan, mona, fourth, fifth]) await t.su("insert into connect_meeting_invitees (meeting_id, user_id) values ($1, $2) on conflict do nothing", [id, m.userId]);
     for (const m of [omar, hasan, mona]) expect((await t.as(m.authId, "select public.prosm_time_connect_join_meeting($1)", [id])).error).toBeNull();
     expect((await t.as(fourth.authId, "select public.prosm_time_connect_join_meeting($1)", [id])).error).toBeNull();
     expect((await t.as(fifth.authId, "select public.prosm_time_connect_join_meeting($1)", [id])).error).toMatch(/FULL/);
-    const bad = await t.su("insert into connect_meetings (organization_id, host_id, media, max_peers) values ($1, $2, 'video', 6)", [org.id, omar.userId]).then(() => null, (e: Error) => e.message);
+    const bad = await t.su("insert into connect_meetings (organization_id, host_id, media, max_peers) values ($1, $2, 'video', 7)", [org.id, omar.userId]).then(() => null, (e: Error) => e.message);
     expect(bad).toMatch(/check/i);
+    expect((await t.su("insert into connect_meetings (organization_id, host_id, media, max_peers) values ($1, $2, 'audio', 12) returning id", [org.id, omar.userId])).length).toBe(1);
   });
 
   it("private channels: each joins only their own (owner 2026-11-13; Realtime itself is tested on a local Supabase)", async () => {

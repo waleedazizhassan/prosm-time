@@ -83,7 +83,8 @@
       "atSite": "At the site, I'll call you shortly",
       "callLater": "Can't answer now, I'll call you back",
       "inMeeting": "In a meeting, I'll call you after"
-    }
+    },
+    "enableSound": "Tap to turn the sound on"
   },
   "callStatus": {
     "ringing": "Ringing",
@@ -134,7 +135,21 @@
     "talking": "Talking… let go to send",
     "today": "Today",
     "yesterday": "Yesterday",
-    "download": "Download"
+    "download": "Download",
+    "deleteMessage": "Delete message",
+    "deleteMessageConfirm": "Delete this message from your device? The other person keeps theirs.",
+    "deleteChat": "Delete chat",
+    "deleteChatConfirm": "Delete the whole chat from your device? The other person keeps theirs.",
+    "deleteForMe": "Delete for me",
+    "deleteForEveryone": "Delete for everyone",
+    "deleteMineHint": "\"Delete for everyone\" removes it from the devices of everyone in the chat (updated apps).",
+    "deletedMessage": "This message was deleted",
+    "youDeleted": "You deleted this message",
+    "deleteForEveryoneFailed": "It was not deleted for everyone. Try again.",
+    "cancel": "Cancel",
+    "reply": "Reply",
+    "cancelReply": "Cancel reply",
+    "typing": "{{name}} is typing…"
   },
   "info": {
     "inSince": "In since {{time}}",
@@ -174,8 +189,14 @@
     "you": "You",
     "videoTitle": "Video meeting",
     "audioTitle": "Voice meeting",
-    "videoUpTo": "Video, up to 4",
-    "audioUpTo": "Voice, up to 8"
+    "videoUpTo": "Video up to 6",
+    "audioUpTo": "Voice up to 12",
+    "send": "Send",
+    "full": "Full screen",
+    "exitFull": "Exit full screen",
+    "reactions": "Quick reactions",
+    "chatUnread": "Chat ({{count}} new)",
+    "react": "React"
   },
   "storage": {
     "clean": "Clean {{what}}",
@@ -205,5 +226,39 @@
     "messageSound": "Sound for a new message",
     "messageVibrate": "Vibrate for a new message",
     "note": "These settings are kept on this device only. In the Android app a call rings with the phone's own ringtone, even when the app is closed or the screen is locked; in a browser the page has to be open."
+  },
+  "preview": {
+    "image": "📷 Photo",
+    "camera_photo": "📷 Verified photo",
+    "file": "📎 File",
+    "voice_note": "🎤 Voice message",
+    "push_to_talk": "📻 Push to talk",
+    "missed": "📞 Missed call",
+    "meeting_invite": "👥 Meeting invitation",
+    "photo_request": "📷 Photo request",
+    "deleted": "A message was deleted"
+  },
+  "callLog": {
+    "clear": "Clear call log",
+    "clearConfirm": "Clear every call from your log? The organisation's record stays.",
+    "deleteOne": "Remove from log",
+    "deleteOneConfirm": "Remove this call from your log?"
+  },
+  "group": {
+    "new": "New group",
+    "name": "Group name",
+    "pick": "Choose members ({{count}} chosen)",
+    "create": "Create group",
+    "createFailed": "The group was not created. Try again.",
+    "members": "Members ({{count}})",
+    "admin": "admin",
+    "you": "You",
+    "remove": "Remove from group",
+    "add": "Add",
+    "choosePerson": "Choose a person",
+    "leave": "Leave group",
+    "leaveConfirm": "Leave the group? The chat leaves this device.",
+    "audioCall": "Group voice call",
+    "videoCall": "Group video call"
   }
 }

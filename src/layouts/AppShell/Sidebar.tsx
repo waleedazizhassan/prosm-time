@@ -91,10 +91,21 @@ export default function Sidebar() {
   const bottomPaths = employeeBottomPaths(allows);
   const otherPages = visibleItems.filter((item) => !bottomPaths.includes(item.path));
 
-  const sections = NAV_SECTION_ORDER.map((section) => ({ section, items: visibleItems.filter((item) => item.section === section) })).filter((group) => group.items.length > 0);
+  // owner 2026-11-16: the tree at every level - an employee's phone menu is grouped too (without the pages the
+  // bottom bar already has, so nothing shows twice)
+  const treeItems = simpleMenu ? otherPages : visibleItems;
+  const sections = NAV_SECTION_ORDER.map((section) => ({ section, items: treeItems.filter((item) => item.section === section) })).filter((group) => group.items.length > 0);
 
   // Which tree branches the person opened or closed (remembered on this device).
   const location = useLocation();
+  // owner 2026-11-16: Settings' Governance and Security tabs have their own menu entries - each lights only on its tab
+  const tabbed = NAV_ITEMS.filter((n) => n.path.includes("?")).map((n) => n.path);
+  const isOn = (path: string, routerActive: boolean) => {
+    if (!routerActive) return false;
+    const [base, query] = path.split("?");
+    if (query) return new URLSearchParams(location.search).get("tab") === new URLSearchParams(query).get("tab");
+    return !tabbed.some((other) => other.startsWith(`${base}?`) && location.search.includes(other.split("?")[1]));
+  };
   const [openSections, setOpenSections] = useState<Record<string, boolean>>(() => {
     try {
       return JSON.parse(localStorage.getItem(OPEN_SECTIONS_KEY) ?? "{}") as Record<string, boolean>;
@@ -159,22 +170,7 @@ export default function Sidebar() {
         ) : null}
 
         <nav className={styles.navigation} aria-label={t("navigationLabel")}>
-          {simpleMenu ? (
-            <div className={styles.navSection}>
-              {otherPages.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <NavLink key={item.id} to={item.path} end className={({ isActive }) => [styles.item, isActive ? styles.active : ""].filter(Boolean).join(" ")}>
-                    <span className={styles.itemIcon}>
-                      <Icon size={18} strokeWidth={2} />
-                    </span>
-                    <span className={styles.itemLabel}>{t(item.labelKey)}</span>
-                  </NavLink>
-                );
-              })}
-            </div>
-          ) : null}
-          {simpleMenu ? null : sections.map((group) => {
+          {sections.map((group) => {
             const renderItem = (item: (typeof group.items)[number]) => {
               const Icon = item.icon;
               return (
@@ -182,7 +178,7 @@ export default function Sidebar() {
                   key={item.id}
                   to={item.path}
                   end
-                  className={({ isActive }) => [styles.item, isActive ? styles.active : ""].filter(Boolean).join(" ")}
+                  className={({ isActive }) => [styles.item, isOn(item.path, isActive) ? styles.active : ""].filter(Boolean).join(" ")}
                   title={sidebarCollapsed ? t(item.labelKey) : undefined}
                 >
                   <span className={styles.itemIcon}>
@@ -192,8 +188,9 @@ export default function Sidebar() {
                 </NavLink>
               );
             };
-            // The rail, and a group of one, show the items themselves.
-            if (sidebarCollapsed || group.items.length === 1) {
+            // The rail shows the items themselves; so does Help (one page). Every other group is a branch, even
+            // with one page (owner 2026-11-16: "the tree at every level").
+            if (sidebarCollapsed || group.section === "help") {
               return (
                 <div key={group.section} className={styles.navSection}>
                   {group.items.map(renderItem)}

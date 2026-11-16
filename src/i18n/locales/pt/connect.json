@@ -83,7 +83,8 @@
       "atSite": "Estou no local, ligo-lhe já",
       "callLater": "Não posso atender, ligo de volta",
       "inMeeting": "Em reunião, ligo depois"
-    }
+    },
+    "enableSound": "Toque para ligar o som"
   },
   "callStatus": {
     "ringing": "A tocar",
@@ -134,7 +135,21 @@
     "talking": "A falar… solte para enviar",
     "today": "Hoje",
     "yesterday": "Ontem",
-    "download": "Transferir"
+    "download": "Transferir",
+    "deleteMessage": "Apagar mensagem",
+    "deleteMessageConfirm": "Apagar esta mensagem do seu dispositivo? A outra pessoa mantém a dela.",
+    "deleteChat": "Apagar conversa",
+    "deleteChatConfirm": "Apagar toda a conversa do seu dispositivo? A outra pessoa mantém a dela.",
+    "deleteForMe": "Apagar para mim",
+    "deleteForEveryone": "Apagar para todos",
+    "deleteMineHint": "\"Apagar para todos\" remove dos dispositivos de todos na conversa (apps atualizados).",
+    "deletedMessage": "Esta mensagem foi apagada",
+    "youDeleted": "Você apagou esta mensagem",
+    "deleteForEveryoneFailed": "Não foi apagada para todos. Tente de novo.",
+    "cancel": "Cancelar",
+    "reply": "Responder",
+    "cancelReply": "Cancelar resposta",
+    "typing": "{{name}} está digitando…"
   },
   "info": {
     "inSince": "Presente desde {{time}}",
@@ -174,8 +189,14 @@
     "you": "Você",
     "videoTitle": "Reunião de vídeo",
     "audioTitle": "Reunião de voz",
-    "videoUpTo": "Vídeo, até 4",
-    "audioUpTo": "Voz, até 8"
+    "videoUpTo": "Vídeo até 6",
+    "audioUpTo": "Voz até 12",
+    "send": "Enviar",
+    "full": "Tela cheia",
+    "exitFull": "Sair da tela cheia",
+    "reactions": "Reações rápidas",
+    "chatUnread": "Chat ({{count}} novas)",
+    "react": "Reagir"
   },
   "storage": {
     "clean": "Limpar {{what}}",
@@ -205,5 +226,39 @@
     "messageSound": "Som para nova mensagem",
     "messageVibrate": "Vibrar com nova mensagem",
     "note": "Estas definições ficam apenas neste dispositivo. Na app Android a chamada toca com o toque do telemóvel, mesmo com a app fechada ou o ecrã bloqueado; no navegador a página tem de estar aberta."
+  },
+  "preview": {
+    "image": "📷 Foto",
+    "camera_photo": "📷 Foto verificada",
+    "file": "📎 Ficheiro",
+    "voice_note": "🎤 Mensagem de voz",
+    "push_to_talk": "📻 Premir para falar",
+    "missed": "📞 Chamada perdida",
+    "meeting_invite": "👥 Convite para reunião",
+    "photo_request": "📷 Pedido de foto",
+    "deleted": "Uma mensagem foi apagada"
+  },
+  "callLog": {
+    "clear": "Limpar registro de chamadas",
+    "clearConfirm": "Tirar todas as chamadas do seu registro? O registro da organização permanece.",
+    "deleteOne": "Tirar do registro",
+    "deleteOneConfirm": "Tirar esta chamada do seu registro?"
+  },
+  "group": {
+    "new": "Novo grupo",
+    "name": "Nome do grupo",
+    "pick": "Escolha os membros ({{count}} escolhidos)",
+    "create": "Criar grupo",
+    "createFailed": "O grupo não foi criado. Tente de novo.",
+    "members": "Membros ({{count}})",
+    "admin": "admin",
+    "you": "Você",
+    "remove": "Tirar do grupo",
+    "add": "Adicionar",
+    "choosePerson": "Escolha uma pessoa",
+    "leave": "Sair do grupo",
+    "leaveConfirm": "Sair do grupo? A conversa sai deste dispositivo.",
+    "audioCall": "Chamada de voz do grupo",
+    "videoCall": "Videochamada do grupo"
   }
 }

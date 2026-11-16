@@ -271,7 +271,17 @@
       "thanks": "Спасибо, сохранено.",
       "label": "Как прошла смена"
     },
-    "presenceShort": "Контроль включён"
+    "presenceShort": "Контроль включён",
+    "mapTools": {
+      "label": "Инструменты карты",
+      "layers": "Слои",
+      "myLocation": "Моё место",
+      "style": {
+        "auto": "Авто",
+        "light": "Светлая",
+        "dark": "Тёмная"
+      }
+    }
   },
   "kioskPin": {
     "title": "PIN киоска",
@@ -476,7 +486,9 @@
       "noLocation": "Нет на карте",
       "noLocationHint": "Отметился без координат (например, без GPS) - разместить нельзя.",
       "noLocationShort": "Без места",
-      "elsewhere": "Вне объектов"
+      "elsewhere": "Вне объектов",
+      "previous": "Предыдущие объекты",
+      "next": "Ещё объекты"
     },
     "present": {
       "title": "Сейчас на месте ({{count}})",

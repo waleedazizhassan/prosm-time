@@ -85,7 +85,8 @@
     "announcements.manage": "Gestionar todos los anuncios",
     "announcements.view_reads": "Ver quién leyó los anuncios",
     "departments.manage": "Gestionar departamentos",
-    "hr.manage": "Gestionar expedientes"
+    "hr.manage": "Gestionar expedientes",
+    "hr.approve_all_requests": "Decidir las solicitudes no sensibles de todos (RR. HH.)"
   },
   "invite": {
     "actionLabel": "Invitar empleado",
@@ -252,7 +253,8 @@
       "supervisors": "Supervisores",
       "employees": "Empleados",
       "viewers": "Lectores",
-      "owner": "Propietario"
+      "owner": "Propietario",
+      "departmentManagers": "Jefes de departamento"
     },
     "invitation": {
       "pending": "Invitación aún no aceptada",
@@ -263,7 +265,10 @@
       "android": "Android",
       "ios": "iPhone",
       "web": "Navegador / ordenador"
-    }
+    },
+    "managesDepartment": "Dirige {{names}}",
+    "noDepartmentManagers": "Ningún departamento tiene jefe todavía.",
+    "chooseDepartmentManagers": "Elígelos en Ajustes > Personas > Departamentos"
   },
   "deviceStatus": {
     "pending": "Pendiente",
@@ -282,7 +287,7 @@
     "window": "del {{from}} al {{to}}",
     "ended": "finalizada",
     "startLabel": "Desde (opcional - hoy si está vacío)",
-    "endLabel": "Hasta (opcional - hasta retirarla si está vacío)",
+    "endLabel": "Hasta (opcional: 30 días si se deja vacío, como máximo 30 días)",
     "endBeforeStart": "La fecha de fin debe ser posterior a la de inicio.",
     "windowHint": "Empieza y termina sola en esas fechas. Puede retirarla en cualquier momento.",
     "neverDelegated": "Nunca se delega: cerrar la organización, el plan y los códigos de activación, la retención de datos, las claves API, conceder la gestión de permisos y la propia delegación. Nadie, ni el delegado, aprueba su propia solicitud."
@@ -331,7 +336,8 @@
       "leave": "Permisos",
       "penalties": "Sanciones e incentivos",
       "history": "Historial",
-      "account": "Cuenta y permisos"
+      "account": "Cuenta y permisos",
+      "security": "Seguridad"
     },
     "fields": {
       "jobTitle": "Puesto",
@@ -453,5 +459,60 @@
     },
     "stillHeld": "No se retiró todo: esta persona tiene la autoridad completa del propietario. Retírala primero con el botón «{{owner}}».",
     "viaOwner": "Viene con la autoridad del propietario: se retira allí"
+  },
+  "security": {
+    "title": "Inicio de sesión en dos pasos",
+    "subtitle": "Un código de una app de autenticación en tu teléfono, además de tu contraseña.",
+    "on": "El inicio de sesión en dos pasos está activado.",
+    "off": "El inicio de sesión en dos pasos está desactivado.",
+    "requiredForYou": "Tu rol requiere el inicio de sesión en dos pasos para nómina y permisos. Actívalo ahora.",
+    "enable": "Activar",
+    "scan": "Escanea este código con una app de autenticación (Google Authenticator, Microsoft Authenticator…) e introduce el código de 6 dígitos.",
+    "qrAlt": "Código QR para la app de autenticación",
+    "secret": "O introduce esta clave a mano: {{secret}}",
+    "code": "Código de 6 dígitos",
+    "verify": "Verificar y activar",
+    "cancel": "Cancelar",
+    "enabled": "El inicio de sesión en dos pasos está activado.",
+    "removed": "Se eliminó la app de autenticación.",
+    "remove": "Eliminar",
+    "authenticator": "App de autenticación",
+    "wrongCode": "El código no es correcto. Revisa la hora de tu teléfono e inténtalo de nuevo.",
+    "failed": "No se pudo iniciar. Inténtalo de nuevo.",
+    "removeNeedsCode": "Para eliminarla, vuelve a iniciar sesión con tu código de autenticación primero."
+  },
+  "perms": {
+    "hint": "Activa o desactiva cualquier línea. Una línea agrupada concede o retira todo lo que incluye a la vez.",
+    "count": "{{on}} de {{total}}",
+    "partly": "Concedido en parte",
+    "changedFromRole": "Distinto del rol",
+    "resetAll": "Volver a los valores del rol",
+    "resetTitle": "¿Volver a los permisos del rol?",
+    "resetExplain": "Se eliminan todos los permisos concedidos o retirados individualmente a esta persona; recibe los permisos de su rol tal cual.",
+    "grantTitle": "Conceder permiso",
+    "revokeTitle": "Retirar permiso",
+    "lineExplain": "«{{name}}»: escribe el motivo; queda en el registro de actividad.",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "groups": {
+      "attendance": "Asistencia",
+      "leave": "Permisos y calendario",
+      "people": "Personas y permisos",
+      "payroll": "Nómina y complementos",
+      "external": "Personal externo",
+      "sites": "Sedes, horarios y proyectos",
+      "reports": "Informes, panel y registro",
+      "settings": "Anuncios, notificaciones y ajustes",
+      "other": "Otros"
+    },
+    "merged": {
+      "onBehalf": "Fichar entrada y salida por otra persona",
+      "payrollExports": "Exportar nómina (resumen, recibos, complementos)",
+      "reports": "Ver informes y generar PDF",
+      "timesheets": "Generar y aprobar hojas de horas",
+      "announcements": "Publicar anuncios y ver quién los leyó",
+      "externalPay": "Ver y exportar el pago del personal externo"
+    },
+    "setMoves": "{{names}} gestiona ahora «{{set}}». Darlo aquí se lo quita (solo lo recibido de este conjunto; los permisos de su rol y los compartidos se quedan)."
   }
 }

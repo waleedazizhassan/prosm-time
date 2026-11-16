@@ -379,7 +379,31 @@
     "documentNameTooLong": "文件名称过长。",
     "legalNameArabic": "正式姓名必须为阿拉伯文，与身份证一致。",
     "nationalIdRequired": "请填写身份证号码。",
-    "phoneRequired": "请填写手机号码。"
+    "phoneRequired": "请填写手机号码。",
+    "ownerAccountProtected": "所有者的账户受到保护。",
+    "ownerChangesOnlyByTransfer": "所有者只能通过所有权转让变更。",
+    "payPeriodLocked": "此工资期已锁定，无法更改。",
+    "stepUpRequired": "执行此操作前请确认是您本人。",
+    "mfaRequired": "此操作需要两步登录。",
+    "correctionAlreadyPending": "此项已有待处理的更正。",
+    "requestAlreadyDecided": "其他人已经处理了此请求 - 请刷新查看当前状态。",
+    "apiKeyMax365": "API 密钥最长有效 365 天。",
+    "delegationMax30": "授权最长持续 30 天。如需延长请重新授予。",
+    "onlyActiveKeyRotated": "只有有效的密钥可以轮换。",
+    "onlyOwnerTransfers": "只有所有者才能转让所有权。",
+    "ownershipTransferOpen": "已有一项进行中的所有权转让。",
+    "waitingNotOver": "等待期尚未结束。",
+    "ownershipNotReady": "所有权转让尚未就绪。",
+    "chooseActiveMember": "请选择组织中的在职成员。",
+    "meetingEnded": "此会议已结束。",
+    "meetingFull": "会议人数已满。",
+    "waitingForHr": "等待人力资源",
+    "ownPermissions": "你不能更改自己的权限，只有所有者可以。",
+    "appointYourself": "你不能任命自己为部门经理。",
+    "departmentManagerRole": "部门经理必须拥有“经理”角色，请先更改其角色。",
+    "ownPay": "你不能修改自己的工资。",
+    "administrationHeld": "此权限由你无权管理的人持有，只有所有者可以转移。",
+    "cannotContact": "你无法联系此人。你可以联系同一站点和部门的人以及你的经理。"
   },
   "pageLoad": {
     "title": "此页面需要网络连接",
@@ -472,7 +496,7 @@
   },
   "issuedVia": "出具自",
   "feedback": {
-    "errorTitle": "出现问题",
+    "errorTitle": "无法完成",
     "successTitle": "已完成",
     "ok": "确定",
     "close": "关闭",
@@ -488,5 +512,18 @@
   },
   "monthFolders": {
     "count_other": "{{count}} 条记录"
+  },
+  "stepUp": {
+    "title": "确认是您本人",
+    "explain": "这是敏感操作。请输入密码以继续。",
+    "explainMfa": "这是敏感操作。请输入密码和身份验证器应用中的验证码。",
+    "password": "密码",
+    "code": "身份验证器验证码",
+    "confirm": "确认",
+    "close": "关闭",
+    "wrongPassword": "密码不正确。",
+    "wrongCode": "验证码不正确或已过期。",
+    "failed": "无法确认，请重试。",
+    "enableMfaFirst": "此操作需要两步登录。请在个人资料（安全选项卡）中开启后再试。"
   }
 }

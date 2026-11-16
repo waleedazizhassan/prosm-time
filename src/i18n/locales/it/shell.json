@@ -31,7 +31,8 @@
   },
   "installation": {
     "grace": "Questa installazione non è coperta da una licenza valida. Attiva una licenza entro il {{date}}.",
-    "blocked": "Questa installazione non è coperta da una licenza valida e l'accesso è stato sospeso. Contatta il tuo amministratore."
+    "blocked": "Questa installazione non è coperta da una licenza valida e l'accesso è stato sospeso. Contatta il tuo amministratore.",
+    "close": "Chiudi"
   },
   "update": {
     "available": "È disponibile una nuova versione (v{{version}}).",
@@ -272,7 +273,15 @@
       "clock_in": "Per favore, timbra l’entrata.",
       "clock_out": "Per favore, timbra l’uscita.",
       "call_me": "Per favore, chiamami.",
-      "attention": "Per favore, guarda l’app."
+      "attention": "Per favore, guarda l’app.",
+      "go_home_early": "Oggi puoi uscire prima.",
+      "tomorrow_off": "Domani sei libero.",
+      "dont_be_late": "Per favore, non fare tardi al turno.",
+      "end_break": "Per favore, termina la pausa.",
+      "come_to_office": "Per favore, vieni in ufficio.",
+      "check_messages": "Per favore, leggi i messaggi.",
+      "shift_changed": "Il tuo turno è cambiato: controlla l'orario.",
+      "well_done": "Ottimo lavoro, grazie."
     },
     "mockLocation": {
       "title": "Posizione falsa",
@@ -335,6 +344,10 @@
       "incentiveReviewBody": "{{name}}: {{reason}}",
       "incentiveGrantedTitle": "Ben fatto!",
       "incentiveGrantedBody": "Hai ricevuto un incentivo: {{reason}}"
+    },
+    "ownership": {
+      "title": "Trasferimento di proprietà",
+      "body": "Il trasferimento di proprietà dell'organizzazione è cambiato. Aprilo per i dettagli."
     }
   },
   "items": {
@@ -369,7 +382,9 @@
     "penalties": "Sanzioni e incentivi",
     "connect": "Chat",
     "connectCalls": "Registro chiamate",
-    "connectMeetings": "Riunioni"
+    "connectMeetings": "Riunioni",
+    "governance": "Modello di governance",
+    "security": "Sicurezza"
   },
   "sosOverlay": {
     "title": "Allarme SOS/Emergenza",
@@ -577,7 +592,15 @@
       "clock_in": "Timbra l’entrata",
       "clock_out": "Timbra l’uscita",
       "call_me": "Chiamami",
-      "attention": "Guarda l’app"
+      "attention": "Guarda l’app",
+      "go_home_early": "Esci prima",
+      "tomorrow_off": "Libero domani",
+      "dont_be_late": "Non fare tardi",
+      "end_break": "Termina la pausa",
+      "come_to_office": "Vieni in ufficio",
+      "check_messages": "Leggi i messaggi",
+      "shift_changed": "Turno cambiato",
+      "well_done": "Ottimo lavoro"
     },
     "messageLabel": "Messaggio breve (facoltativo)",
     "send": "Invia avviso",

@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import AnnouncementRepository, { type Department } from "../../core/repositories/AnnouncementRepository";
+import PeopleDirectoryRepository, { type DirectoryPerson } from "../../core/repositories/PeopleDirectoryRepository";
+import { requireSupabaseClient } from "../../core/api/supabaseClient";
 import Card from "../../components/common/Card";
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
@@ -18,12 +20,30 @@ export default function DepartmentsSettingsCard() {
   const [renaming, setRenaming] = useState<{ id: string; name: string } | null>(null);
   const [busy, setBusy] = useState("");
   const [error, setError] = useState("");
+  // owner 2026-11-16: each department's manager (null until the server has it - 20261116180000)
+  const [managers, setManagers] = useState<Map<string, string> | null>(null);
+  const [people, setPeople] = useState<DirectoryPerson[]>([]);
 
   const load = useCallback(async () => {
     const result = await AnnouncementRepository.departments();
     if (result.error) setError(announcementError(result.error, t));
     setItems(result.data ?? []);
+    const { data, error: e } = await requireSupabaseClient().rpc("list_prosm_time_department_managers");
+    setManagers(e ? null : new Map(((data ?? []) as { departmentId: string; userId: string }[]).map((row) => [row.departmentId, row.userId])));
   }, [t]);
+
+  useEffect(() => {
+    void PeopleDirectoryRepository.list(true).then((list) => setPeople((list ?? []).filter((p) => p.isActive !== false)));
+  }, []);
+
+  const setManager = async (departmentId: string, userId: string) => {
+    setBusy(departmentId);
+    setError("");
+    const { error: e } = await requireSupabaseClient().rpc("set_prosm_time_department_manager", { p_department: departmentId, p_user: userId || null });
+    setBusy("");
+    if (e) setError(announcementError(e.message, t));
+    await load();
+  };
 
   useEffect(() => {
     void load();
@@ -68,6 +88,14 @@ export default function DepartmentsSettingsCard() {
               <>
                 <span style={{ flex: "1 1 auto" }}>{d.name}{d.isActive ? "" : ` · ${t("departments.archived")}`}</span>
                 <span style={{ color: "var(--text-secondary)", fontSize: "var(--font-xs)" }}>{t("departments.members", { count: d.members })}</span>
+                {managers && d.isActive ? (
+                  <select aria-label={t("departments.manager")} value={managers.get(d.id) ?? ""} disabled={busy === d.id}
+                    onChange={(event) => void setManager(d.id, event.target.value)}
+                    style={{ minHeight: 32, borderRadius: 8, border: "1px solid var(--border-light)", background: "var(--surface-card)", color: "var(--text-primary)", padding: "0 8px", maxWidth: 220 }}>
+                    <option value="">{t("departments.noManager")}</option>
+                    {people.map((p) => <option key={p.id} value={p.id}>{p.fullName}</option>)}
+                  </select>
+                ) : null}
                 <Button size="xs" variant="ghost" onClick={() => setRenaming({ id: d.id, name: d.name })}>{t("departments.rename")}</Button>
                 <Button size="xs" variant="ghost" loading={busy === d.id} onClick={() => void save(d.id, d.name, !d.isActive)}>{d.isActive ? t("departments.archive") : t("departments.restore")}</Button>
               </>

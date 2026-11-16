@@ -495,15 +495,64 @@
   inset-block-end: 22px;
   z-index: 500;
   display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* owner 2026-11-15: the site cards scroll well - snap to a card, the wheel scrolls sideways, arrows on a computer */
+.mapKeyTrack {
+  display: flex;
+  flex: 1;
+  min-width: 0;
   gap: 6px;
   overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
   scrollbar-width: none;
+  overscroll-behavior-x: contain;
   padding: 2px;
+}
+
+.mapKeyTrack::-webkit-scrollbar {
+  display: none;
+}
+
+.mapKeyArrow {
+  display: none;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border-light);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--surface-card) 92%, transparent);
+  color: var(--text-primary);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(15, 23, 42, 0.12));
+}
+
+.mapKeyArrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .mapKeyArrow {
+    display: inline-flex;
+  }
+}
+
+/* the whole map card on a computer: wide and tall, never smaller than useful */
+.mapWidget {
+  height: clamp(380px, 62vh, 720px);
 }
 
 .mapKeyItem {
   display: inline-flex;
   flex: none;
+  scroll-snap-align: start;
+  max-width: clamp(140px, 28vw, 260px);
   align-items: center;
   gap: 6px;
   min-height: 30px;
@@ -520,6 +569,13 @@
 
 .mapKeyItem b {
   font-variant-numeric: tabular-nums;
+}
+
+/* a long site name shortens instead of stretching the card */
+.mapKeyItem > span:not(.mapKeyDot) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .mapKeyDot {
@@ -1077,4 +1133,148 @@
   flex-shrink: 0;
   color: var(--status-warning-text, #f59e0b);
   font-variant-numeric: tabular-nums;
+}
+
+/* owner 2026-11-15: the map card follows the screen - shorter on a tablet and a phone */
+@media (max-width: 1279px) {
+  .mapWidget {
+    height: clamp(340px, 55vh, 560px);
+  }
+}
+
+@media (max-width: 767px) {
+  .mapWidget {
+    height: clamp(300px, 52vh, 460px);
+  }
+}
+
+/* ===== owner 2026-11-15: a cleaner, more professional dashboard ===== */
+
+/* the site names on the map show once zoomed in enough not to overlap */
+.labelsHidden :global(.leaflet-tooltip) {
+  display: none;
+}
+
+/* the page reads calmer: more room between the cards, softer card edges and depth */
+.widget {
+  border-color: color-mix(in srgb, var(--border-light) 80%, transparent);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, var(--shadow-sm, 0 1px 2px rgba(15, 23, 42, 0.05));
+}
+
+.widgetTitle {
+  letter-spacing: -0.01em;
+}
+
+/* a computer: no hole is left beside a short card - the next card that fits takes it */
+@media (min-width: 1280px) {
+  .grid {
+    grid-auto-flow: row dense;
+    gap: var(--space-5, 24px);
+  }
+
+  .kpi {
+    min-height: 132px;
+  }
+}
+
+/* figure cards all the same height in their row, the figure always on the same line */
+.kpi {
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+@media (hover: hover) {
+  .kpi:hover {
+    transform: translateY(-2px);
+    border-color: var(--brand-primary-subtle-border, var(--border-medium));
+    box-shadow: var(--shadow-md, 0 6px 18px rgba(15, 23, 42, 0.12));
+  }
+}
+
+/* a phone: two figure cards per row (three made every name break), the period bar scrolls instead of being cut,
+   the site table becomes short cards, and people's names stay on one line */
+@media (max-width: 767px) {
+  .kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .kpis > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .kpi {
+    min-height: 0;
+    padding: var(--space-3);
+  }
+
+  .filters {
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+  }
+
+  .filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .segmented {
+    flex: none;
+  }
+
+  .table tr {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2px var(--space-2);
+    padding: var(--space-2) 0;
+  }
+
+  .table td:first-child {
+    grid-column: 1 / -1;
+    font-size: var(--font-sm);
+  }
+
+  .table td {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    padding: 2px 0;
+    font-size: var(--font-sm);
+  }
+
+  .table td[data-label]::before {
+    font-size: 0.7rem;
+  }
+
+}
+
+/* owner 2026-11-16 ("the cost figure splits over two lines: 2,15 / 3"): a figure never breaks - it stays on one
+   line and shrinks with its card's width (container units), whatever the screen */
+.kpi {
+  container-type: inline-size;
+}
+
+.kpi .kpiValue {
+  white-space: nowrap;
+  overflow-wrap: normal;
+  font-size: min(1.75rem, 21cqi);
+}
+
+.kpi .kpiValue.kpiValueLong {
+  font-size: min(1.4rem, 16cqi);
+}
+
+.kpi .kpiValue.kpiValueXLong {
+  font-size: min(1.15rem, 12cqi);
+}
+
+/* owner 2026-11-16: the last card of a row that is not full stretches to the row's end (worked out in fillRows) */
+@media (min-width: 1280px) {
+  .fillWide {
+    grid-column: var(--fill-wide) !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .fillMid {
+    grid-column: var(--fill-mid) !important;
+  }
 }

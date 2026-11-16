@@ -379,7 +379,31 @@
     "documentNameTooLong": "O nome do documento é demasiado longo.",
     "legalNameArabic": "O nome oficial tem de estar em árabe, como no cartão de identidade.",
     "nationalIdRequired": "Escreva o número de identificação.",
-    "phoneRequired": "Escreva o número de telemóvel."
+    "phoneRequired": "Escreva o número de telemóvel.",
+    "ownerAccountProtected": "A conta do proprietário está protegida.",
+    "ownerChangesOnlyByTransfer": "O proprietário só muda por uma transferência de propriedade.",
+    "payPeriodLocked": "Este período de folha está fechado e não pode mudar.",
+    "stepUpRequired": "Confirme que é você antes desta ação.",
+    "mfaRequired": "Esta ação exige o login em duas etapas.",
+    "correctionAlreadyPending": "Já há uma correção pendente para isto.",
+    "requestAlreadyDecided": "Outra pessoa já decidiu este pedido - atualize para ver o estado atual.",
+    "apiKeyMax365": "Uma chave de API dura no máximo 365 dias.",
+    "delegationMax30": "Uma delegação dura no máximo 30 dias. Conceda novamente para estender.",
+    "onlyActiveKeyRotated": "Só uma chave ativa pode ser renovada.",
+    "onlyOwnerTransfers": "Só o proprietário transfere a propriedade.",
+    "ownershipTransferOpen": "Já existe uma transferência de propriedade aberta.",
+    "waitingNotOver": "O período de espera ainda não terminou.",
+    "ownershipNotReady": "A transferência de propriedade não está pronta.",
+    "chooseActiveMember": "Escolha um membro ativo da organização.",
+    "meetingEnded": "Esta reunião terminou.",
+    "meetingFull": "Esta reunião está cheia.",
+    "waitingForHr": "Aguardando o RH",
+    "ownPermissions": "Você não pode mudar suas próprias permissões. Só o proprietário pode.",
+    "appointYourself": "Você não pode se nomear gestor de departamento.",
+    "departmentManagerRole": "Um gestor de departamento precisa ter o cargo Gestor. Mude o cargo primeiro.",
+    "ownPay": "Você não pode mudar o próprio salário.",
+    "administrationHeld": "Alguém fora da sua autoridade tem isso. Só o proprietário pode mover.",
+    "cannotContact": "Você não pode contatar esta pessoa. Pode falar com o pessoal do seu local e departamento e com seus gestores."
   },
   "pageLoad": {
     "title": "Esta página precisa de conexão",
@@ -472,7 +496,7 @@
   },
   "issuedVia": "Emitido através de",
   "feedback": {
-    "errorTitle": "Algo deu errado",
+    "errorTitle": "Não foi possível concluir",
     "successTitle": "Pronto",
     "ok": "OK",
     "close": "Fechar",
@@ -490,5 +514,18 @@
     "count_one": "{{count}} registro",
     "count_other": "{{count}} registros",
     "count_many": "{{count}} registros"
+  },
+  "stepUp": {
+    "title": "Confirme que é você",
+    "explain": "Esta ação é sensível. Digite sua senha para continuar.",
+    "explainMfa": "Esta ação é sensível. Digite sua senha e o código do seu app autenticador.",
+    "password": "Senha",
+    "code": "Código do autenticador",
+    "confirm": "Confirmar",
+    "close": "Fechar",
+    "wrongPassword": "A senha não está correta.",
+    "wrongCode": "O código não está correto ou expirou.",
+    "failed": "Não foi possível confirmar. Tente novamente.",
+    "enableMfaFirst": "Esta ação exige o login em duas etapas. Ative-o no seu perfil (aba Segurança) e tente novamente."
   }
 }

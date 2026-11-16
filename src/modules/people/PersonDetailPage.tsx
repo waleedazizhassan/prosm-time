@@ -43,6 +43,7 @@ import ContractsTab from "./profile/ContractsTab";
 import { AttendanceTab, HistoryTab, LeaveTab } from "./profile/ActivityTabs";
 import PayrollProfilesPage from "../payroll/PayrollProfilesPage";
 import { ProfileDocumentsTab, ProfilePenaltiesTab } from "./profile/LaterTabs";
+import PermissionMatrix from "./PermissionMatrix";
 
 type ProfileTab = "data" | "account" | "contract" | "documents" | "payroll" | "attendance" | "leave" | "penalties" | "history";
 
@@ -199,12 +200,6 @@ export default function PersonDetailPage() {
   if (!hasPermission("employees.view")) {
     return <Navigate to="/dashboard" replace />;
   }
-
-  const openChange = (permission: Permission, action: PendingChange["action"]) => {
-    setChangeError("");
-    setReason("");
-    setPendingChange({ permission, action });
-  };
 
   const handleConfirmChange = async () => {
     if (!pendingChange || !userId) return;
@@ -424,7 +419,6 @@ export default function PersonDetailPage() {
       ) : null}
       {canManagePermissions ? (
         <Card title={t("detail.permissionsTitle")} className="wide">
-          <HintText small>{t("detail.permissionsHint")}</HintText>
           {!member.isOwner && userId ? (
             <PermissionBundles userId={userId} effective={effective} overrides={overrides} catalogKeys={catalog.map((p) => p.permissionKey)}
               canChange={canChangePermission} canGrantOwner={Boolean(profile?.isRealOwner) && allows("delegation") && member.id !== profile?.id} onChanged={() => void load()} />
@@ -434,40 +428,11 @@ export default function PersonDetailPage() {
             <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-sm)" }}>
               {t("ownerBadge")}: {catalog.length}/{catalog.length}
             </p>
-          ) : (
-            catalog.map((permission) => {
-              const isGranted = effective.includes(permission.permissionKey);
-              const isOverridden = permission.permissionKey in overrides;
-              return (
-                <ListRow key={permission.id}>
-                  <div>
-                    <div style={{ fontWeight: isOverridden ? "var(--font-weight-bold)" : "var(--font-weight-regular)", color: "var(--text-primary)", fontSize: "var(--font-sm)" }}>
-                      {t(`catalog.${permission.permissionKey}`, { defaultValue: permission.name })}
-                    </div>
-                    <StatusBadge status={isGranted ? "active" : "neutral"}>{isGranted ? t("detail.grantedLabel") : t("detail.notGrantedLabel")}</StatusBadge>
-                  </div>
-                  {canChangePermission(permission.permissionKey) ? (
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
-                    {!isGranted ? (
-                      <Button variant="ghost" size="xs" onClick={() => openChange(permission, "grant")}>
-                        {t("detail.grantAction")}
-                      </Button>
-                    ) : (
-                      <Button variant="ghost" size="xs" onClick={() => openChange(permission, "revoke")}>
-                        {t("detail.revokeAction")}
-                      </Button>
-                    )}
-                    {isOverridden ? (
-                      <Button variant="ghost" size="xs" onClick={() => openChange(permission, "reset")}>
-                        {t("detail.resetAction")}
-                      </Button>
-                    ) : null}
-                  </div>
-                  ) : null}
-                </ListRow>
-              );
-            })
-          )}
+          ) : userId ? (
+            // owner 2026-11-15: grouped, folded, one switch per line, related permissions merged, one reset button
+            <PermissionMatrix userId={userId} catalog={catalog} effective={effective} overrides={overrides}
+              canChange={canChangePermission} onChanged={() => void load()} />
+          ) : null}
         </Card>
       ) : null}
       {userId && userId !== profile?.id && (hasPermission("attendance.review_integrity_flags") || hasPermission("sites.manage_integrity")) ? <LivenessExemptionCard userId={userId} /> : null}
