@@ -527,5 +527,13 @@
     "wrongCode": "O código não está correto ou expirou.",
     "failed": "Não foi possível confirmar. Tente novamente.",
     "enableMfaFirst": "Esta ação exige o login em duas etapas. Ative-o no seu perfil (aba Segurança) e tente novamente."
+  },
+  "mfaGate": {
+    "title": "Verificação em duas etapas",
+    "explain": "Digite o código de 6 dígitos do app autenticador no seu celular.",
+    "code": "Código",
+    "confirm": "Confirmar",
+    "signOut": "Sair",
+    "wrong": "O código está errado ou expirou. Tente o novo."
   }
 }

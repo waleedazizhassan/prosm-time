@@ -527,5 +527,13 @@
     "wrongCode": "El código no es correcto o ha caducado.",
     "failed": "No se pudo confirmar. Inténtalo de nuevo.",
     "enableMfaFirst": "Esta acción requiere el inicio de sesión en dos pasos. Actívalo en tu perfil (pestaña Seguridad) y vuelve a intentarlo."
+  },
+  "mfaGate": {
+    "title": "Verificación en dos pasos",
+    "explain": "Escribe el código de 6 dígitos de la app de autenticación de tu móvil.",
+    "code": "Código",
+    "confirm": "Confirmar",
+    "signOut": "Cerrar sesión",
+    "wrong": "El código es incorrecto o caducó. Prueba el nuevo."
   }
 }

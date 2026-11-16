@@ -526,5 +526,13 @@
     "wrongCode": "Der Code ist falsch oder abgelaufen.",
     "failed": "Bestätigung fehlgeschlagen. Bitte erneut versuchen.",
     "enableMfaFirst": "Diese Aktion erfordert die Anmeldung in zwei Schritten. Aktivieren Sie sie in Ihrem Profil (Registerkarte Sicherheit) und versuchen Sie es erneut."
+  },
+  "mfaGate": {
+    "title": "Zwei-Faktor-Prüfung",
+    "explain": "Gib den 6-stelligen Code aus der Authenticator-App auf deinem Handy ein.",
+    "code": "Code",
+    "confirm": "Bestätigen",
+    "signOut": "Abmelden",
+    "wrong": "Der Code ist falsch oder abgelaufen. Versuch den neuen."
   }
 }

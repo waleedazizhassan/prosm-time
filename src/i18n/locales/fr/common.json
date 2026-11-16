@@ -527,5 +527,13 @@
     "wrongCode": "Le code est incorrect ou a expiré.",
     "failed": "Confirmation impossible. Réessayez.",
     "enableMfaFirst": "Cette action nécessite la connexion en deux étapes. Activez-la depuis votre profil (onglet Sécurité), puis réessayez."
+  },
+  "mfaGate": {
+    "title": "Vérification en deux étapes",
+    "explain": "Saisissez le code à 6 chiffres de l’application d’authentification de votre téléphone.",
+    "code": "Code",
+    "confirm": "Confirmer",
+    "signOut": "Se déconnecter",
+    "wrong": "Code incorrect ou expiré. Essayez le nouveau."
   }
 }

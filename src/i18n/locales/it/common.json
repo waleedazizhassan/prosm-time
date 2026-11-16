@@ -527,5 +527,13 @@
     "wrongCode": "Il codice non è corretto o è scaduto.",
     "failed": "Impossibile confermare. Riprova.",
     "enableMfaFirst": "Questa azione richiede l'accesso in due passaggi. Attivalo dal tuo profilo (scheda Sicurezza) e riprova."
+  },
+  "mfaGate": {
+    "title": "Verifica in due passaggi",
+    "explain": "Inserisci il codice a 6 cifre dell’app di autenticazione sul telefono.",
+    "code": "Codice",
+    "confirm": "Conferma",
+    "signOut": "Esci",
+    "wrong": "Il codice è errato o scaduto. Prova quello nuovo."
   }
 }

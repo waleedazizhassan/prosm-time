@@ -15,7 +15,10 @@ export default function ProfileHeader({ profile, onBuzz = true }: { profile: Emp
   const { t, i18n } = useTranslation("people");
   const h = profile.header;
   const status = !h.isActive ? "deactivated" : h.employmentStatus;
+  // owner 2026-11-17: the role in the system shows first, always - a job title alone kept saying "department
+  // manager" after the person was made an employee
   const facts = [
+    h.isOwner ? null : t(`common:roles.${h.roleKey}`, { defaultValue: h.roleKey }),
     h.jobTitle,
     h.siteName,
     h.departmentName,
