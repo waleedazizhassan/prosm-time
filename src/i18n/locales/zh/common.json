@@ -402,7 +402,8 @@
     "appointYourself": "你不能任命自己为部门经理。",
     "departmentManagerRole": "部门经理必须拥有“经理”角色，请先更改其角色。",
     "ownPay": "你不能修改自己的工资。",
-    "administrationHeld": "此权限由你无权管理的人持有，只有所有者可以转移。"
+    "administrationHeld": "此权限由你无权管理的人持有，只有所有者可以转移。",
+    "cannotContact": "你无法联系此人。你可以联系同一站点和部门的人以及你的经理。"
   },
   "pageLoad": {
     "title": "此页面需要网络连接",

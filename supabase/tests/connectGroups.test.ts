@@ -27,6 +27,12 @@ beforeAll(async () => {
   mona = await addMember(t, org, "employee", "Mona");
   karim = await addMember(t, org, "employee", "Karim");
   stranger = await addMember(t, other, "employee", "Stranger");
+  // 2026-11-16 Connect visibility: these tests are about Connect's features, so everyone of the organisation works
+  // at one shared site and sees each other (who sees whom is connectVisibility.test.ts)
+  {
+    const [{ id: shared }] = await t.su<{ id: string }>("insert into sites (organization_id, name, latitude, longitude, allowed_radius_meters) values ($1, 'Shared', 30.0, 31.0, 200) returning id", [org.id]);
+    await t.su("insert into site_assignments (site_id, user_id) select $1, u.id from users u where u.organization_id = $2 and not u.is_owner on conflict do nothing", [shared, org.id]);
+  }
 });
 
 describe("groups", () => {

@@ -402,7 +402,8 @@
     "appointYourself": "Du kannst dich nicht selbst zur Abteilungsleitung machen.",
     "departmentManagerRole": "Eine Abteilungsleitung braucht die Rolle Leitung. Ändere zuerst die Rolle.",
     "ownPay": "Du kannst deinen eigenen Lohn nicht ändern.",
-    "administrationHeld": "Das hält jemand außerhalb deiner Befugnis. Nur der Inhaber kann es übertragen."
+    "administrationHeld": "Das hält jemand außerhalb deiner Befugnis. Nur der Inhaber kann es übertragen.",
+    "cannotContact": "Du kannst diese Person nicht kontaktieren. Erreichbar sind die Leute deines Standorts und deiner Abteilung und deine Leitungen."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

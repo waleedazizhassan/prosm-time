@@ -402,7 +402,8 @@
     "appointYourself": "Vous ne pouvez pas vous nommer responsable de service.",
     "departmentManagerRole": "Un responsable de service doit avoir le rôle Responsable. Changez d’abord son rôle.",
     "ownPay": "Vous ne pouvez pas modifier votre propre paie.",
-    "administrationHeld": "Quelqu’un hors de votre autorité le détient. Seul le propriétaire peut le transférer."
+    "administrationHeld": "Quelqu’un hors de votre autorité le détient. Seul le propriétaire peut le transférer.",
+    "cannotContact": "Vous ne pouvez pas contacter cette personne. Vous pouvez joindre les gens de votre site et de votre service, et vos responsables."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

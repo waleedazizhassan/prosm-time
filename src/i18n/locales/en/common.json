@@ -402,7 +402,8 @@
     "appointYourself": "You cannot appoint yourself a department manager.",
     "departmentManagerRole": "A department manager must have the Manager role. Change their role first.",
     "ownPay": "You cannot change your own pay.",
-    "administrationHeld": "Someone outside your authority holds this. Only the owner can move it."
+    "administrationHeld": "Someone outside your authority holds this. Only the owner can move it.",
+    "cannotContact": "You cannot contact this person. You can reach the people of your site and department and your managers."
   },
   "pageLoad": {
     "title": "This page needs a connection",

@@ -402,7 +402,8 @@
     "appointYourself": "Non puoi nominarti responsabile di reparto.",
     "departmentManagerRole": "Un responsabile di reparto deve avere il ruolo Responsabile. Cambia prima il ruolo.",
     "ownPay": "Non puoi modificare la tua paga.",
-    "administrationHeld": "Lo detiene qualcuno fuori dalla tua autorità. Solo il proprietario può spostarlo."
+    "administrationHeld": "Lo detiene qualcuno fuori dalla tua autorità. Solo il proprietario può spostarlo.",
+    "cannotContact": "Non puoi contattare questa persona. Puoi raggiungere le persone del tuo sito e reparto e i tuoi responsabili."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

@@ -402,7 +402,8 @@
     "appointYourself": "No puedes nombrarte jefe de departamento.",
     "departmentManagerRole": "Un jefe de departamento debe tener el rol de Jefe. Cambia su rol primero.",
     "ownPay": "No puedes cambiar tu propia nómina.",
-    "administrationHeld": "Lo tiene alguien fuera de tu autoridad. Solo el propietario puede moverlo."
+    "administrationHeld": "Lo tiene alguien fuera de tu autoridad. Solo el propietario puede moverlo.",
+    "cannotContact": "No puedes contactar a esta persona. Puedes hablar con la gente de tu sitio y departamento y con tus jefes."
   },
   "pageLoad": {
     "title": "Esta página necesita conexión",

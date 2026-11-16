@@ -219,6 +219,7 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "THIS REQUEST IS WAITING FOR HUMAN RESOURCES": "waitingForHr",
   // release audit 2026-11-16
   "YOU CANNOT CHANGE YOUR OWN PERMISSIONS": "ownPermissions",
+  "YOU CANNOT CONTACT THIS PERSON": "cannotContact",
   "YOU CANNOT APPOINT YOURSELF": "appointYourself",
   "A DEPARTMENT MANAGER MUST HAVE THE MANAGER ROLE": "departmentManagerRole",
   "YOU CANNOT CHANGE YOUR OWN PAY": "ownPay",

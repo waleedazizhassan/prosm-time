@@ -28,6 +28,11 @@ beforeAll(async () => {
   hasan = await addMember(t, org, "employee", "Hasan");
   mona = await addMember(t, org, "employee", "Mona");
   stranger = await addMember(t, other, "employee", "Stranger");
+  // 2026-11-16 Connect visibility: the three work at one site, so they see each other
+  {
+    const [{ id: shared }] = await t.su<{ id: string }>("insert into sites (organization_id, name, latitude, longitude, allowed_radius_meters) values ($1, 'Shared', 30.0, 31.0, 200) returning id", [org.id]);
+    await t.su("insert into site_assignments (site_id, user_id) select $1, u.id from users u where u.organization_id = $2 and not u.is_owner on conflict do nothing", [shared, org.id]);
+  }
   conv = (await t.as<{ id: string }>(omar.authId, "select public.prosm_time_connect_open_direct($1) as id", [hasan.userId])).rows![0].id;
 });
 

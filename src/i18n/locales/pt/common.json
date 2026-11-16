@@ -402,7 +402,8 @@
     "appointYourself": "Você não pode se nomear gestor de departamento.",
     "departmentManagerRole": "Um gestor de departamento precisa ter o cargo Gestor. Mude o cargo primeiro.",
     "ownPay": "Você não pode mudar o próprio salário.",
-    "administrationHeld": "Alguém fora da sua autoridade tem isso. Só o proprietário pode mover."
+    "administrationHeld": "Alguém fora da sua autoridade tem isso. Só o proprietário pode mover.",
+    "cannotContact": "Você não pode contatar esta pessoa. Pode falar com o pessoal do seu local e departamento e com seus gestores."
   },
   "pageLoad": {
     "title": "Esta página precisa de conexão",
