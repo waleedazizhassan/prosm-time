@@ -349,5 +349,23 @@
     "decline": "Ablehnen",
     "cancelled": "Die Übertragung wurde abgebrochen.",
     "failed": "Dieser Schritt war nicht möglich."
+  },
+  "connectUsage": {
+    "title": "Connect-Nutzung (Anrufe und Meetings)",
+    "subtitle": "Diesen Monat: was direkt zwischen Geräten lief (kostenlos) und was über ein Relay lief (zählt zum freien Kontingent des Relays).",
+    "empty": "Diesen Monat noch keine gemessenen Anrufe.",
+    "kind": "Art",
+    "sessions": "Anzahl",
+    "directMinutes": "Minuten direkt",
+    "relayMinutes": "Minuten über Relay",
+    "relayMb": "MB über Relay",
+    "perMinute": "MB/Min",
+    "total": "Über ein Relay {{relay}} MB von {{total}} MB.",
+    "server": "{{server}}: {{mb}} MB in {{minutes}} Min",
+    "kinds": {
+      "audio": "Sprachanruf",
+      "video": "Videoanruf",
+      "meeting": "Meeting"
+    }
   }
 }

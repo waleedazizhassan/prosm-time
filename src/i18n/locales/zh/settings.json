@@ -347,5 +347,23 @@
     "decline": "拒绝",
     "cancelled": "转让已取消。",
     "failed": "无法完成此步骤。"
+  },
+  "connectUsage": {
+    "title": "Connect 用量（通话和会议）",
+    "subtitle": "本月：设备之间直接传输（免费）和经中继传输（计入中继的免费额度）的数据。",
+    "empty": "本月还没有已计量的通话。",
+    "kind": "类型",
+    "sessions": "次数",
+    "directMinutes": "直连分钟",
+    "relayMinutes": "中继分钟",
+    "relayMb": "中继 MB",
+    "perMinute": "MB/分钟",
+    "total": "经中继 {{relay}} MB，共 {{total}} MB。",
+    "server": "{{server}}：{{minutes}} 分钟 {{mb}} MB",
+    "kinds": {
+      "audio": "语音通话",
+      "video": "视频通话",
+      "meeting": "会议"
+    }
   }
 }

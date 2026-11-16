@@ -349,5 +349,23 @@
     "decline": "Decline",
     "cancelled": "The transfer was cancelled.",
     "failed": "This step could not be done."
+  },
+  "connectUsage": {
+    "title": "Connect usage (calls and meetings)",
+    "subtitle": "This month: what went directly between devices (free) and what went through a relay (counted against the relay's free allowance).",
+    "empty": "No measured calls this month yet.",
+    "kind": "Kind",
+    "sessions": "Count",
+    "directMinutes": "Direct minutes",
+    "relayMinutes": "Relay minutes",
+    "relayMb": "MB via relay",
+    "perMinute": "MB/min",
+    "total": "Through a relay {{relay}} MB of {{total}} MB.",
+    "server": "{{server}}: {{mb}} MB in {{minutes}} min",
+    "kinds": {
+      "audio": "Voice call",
+      "video": "Video call",
+      "meeting": "Meeting"
+    }
   }
 }

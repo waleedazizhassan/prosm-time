@@ -351,5 +351,23 @@
     "decline": "Rifiuta",
     "cancelled": "Il trasferimento è stato annullato.",
     "failed": "Impossibile completare questo passaggio."
+  },
+  "connectUsage": {
+    "title": "Uso di Connect (chiamate e riunioni)",
+    "subtitle": "Questo mese: ciò che è passato direttamente tra dispositivi (gratis) e ciò che è passato da un relay (conta sulla sua quota gratuita).",
+    "empty": "Nessuna chiamata misurata questo mese.",
+    "kind": "Tipo",
+    "sessions": "Numero",
+    "directMinutes": "Minuti diretti",
+    "relayMinutes": "Minuti via relay",
+    "relayMb": "MB via relay",
+    "perMinute": "MB/min",
+    "total": "Via relay {{relay}} MB su {{total}} MB.",
+    "server": "{{server}}: {{mb}} MB in {{minutes}} min",
+    "kinds": {
+      "audio": "Chiamata vocale",
+      "video": "Videochiamata",
+      "meeting": "Riunione"
+    }
   }
 }

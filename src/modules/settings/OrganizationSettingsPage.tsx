@@ -23,6 +23,7 @@ import ClockSuggestionCard from "./ClockSuggestionCard";
 import PageBanner from "../../components/common/PageBanner";
 import usePlanFeatures from "../../core/hooks/usePlanFeatures";
 import OwnershipTransferCard from "./OwnershipTransferCard";
+import ConnectUsageCard from "./ConnectUsageCard";
 
 // PROSM Time - § live UX review, user-directed: "a professional
 // reorganization" - org-wide settings (today: the no-site geofence
@@ -131,6 +132,8 @@ export default function OrganizationSettingsPage() {
           {profile?.isRealOwner ? <OwnershipTransferCard /> : null}
           {isOwner ? <MockLocationSettingsCard /> : null}
           {isOwner && allows("retention") ? <RetentionSettingsCard /> : null}
+          {/* owner 2026-11-16 TURN strategy: what calls and meetings carried, direct vs relay */}
+          {isOwner ? <ConnectUsageCard /> : null}
         </>
       ) : null}
     </PageShell>

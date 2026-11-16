@@ -1,7 +1,7 @@
 import type { RealtimeChannel } from "@supabase/supabase-js";
 
 import { ConnectEngine } from "./ConnectEngine";
-import { ICE_SERVERS, QualityGuard, loadIceServers, localMedia, signalChannel, tuneOpus, type Signal } from "./rtc";
+import { ICE_SERVERS, QualityGuard, UsageMeter, loadIceServers, localMedia, reportUsage, signalChannel, tuneOpus, tuneSenders, type Signal } from "./rtc";
 
 // PROSM Connect - a small meeting, straight between the devices (owner 2026-11-13: no media server). Every device
 // connects with every other (a mesh): up to 4 with video, 8 with sound only, enforced on the server. The one with the
@@ -104,6 +104,7 @@ export class MeetingSession {
     this.screenShareFeature = info.screenShareFeature;
     this.local = await localMedia(this.media === "video").catch(() => null);
     this.camera = this.local?.getVideoTracks()[0] ?? null;
+    if (this.usageTimer === null) this.usageTimer = window.setInterval(() => this.reportAllUsage(), 30_000);
     const { channel, send } = await signalChannel(`connect:meeting:${this.meetingId}`, (signal) => void this.onSignal(signal), this.me, () => this.syncPresence());
     this.channel = channel;
     this.send = send;
@@ -145,8 +146,24 @@ export class MeetingSession {
     }
   }
 
+  private meters = new Map<string, UsageMeter>();
+  private usageTimer: number | null = null;
+
+  /** closes a link after reading what it carried since the last report */
+  private closeLink(userId: string) {
+    const pc = this.connections.get(userId);
+    const meter = this.meters.get(userId);
+    this.meters.delete(userId);
+    if (pc && meter) void meter.take().then((slices) => { pc.close(); return reportUsage("meeting", this.meetingId, slices); }, () => pc.close());
+    else pc?.close();
+  }
+
+  private reportAllUsage() {
+    for (const meter of this.meters.values()) void meter.take().then((slices) => reportUsage("meeting", this.meetingId, slices));
+  }
+
   private reset(userId: string) {
-    this.connections.get(userId)?.close();
+    this.closeLink(userId);
     this.connections.delete(userId);
     this.guards.delete(userId);
     this.pendingIce.delete(userId);
@@ -173,6 +190,11 @@ export class MeetingSession {
     };
     pc.onconnectionstatechange = () => {
       if (pc.connectionState === "failed" && this.me < userId) void this.call(userId, true);
+      // TURN strategy (owner 2026-11-16): sound first, a light picture; each link's data measured
+      if (pc.connectionState === "connected") {
+        void tuneSenders(pc);
+        if (!this.meters.has(userId)) this.meters.set(userId, new UsageMeter(pc));
+      }
       this.changed();
     };
     this.guards.set(userId, new QualityGuard(pc, (off) => {
@@ -278,6 +300,11 @@ export class MeetingSession {
     if (!track) return;
     track.enabled = !track.enabled;
     this.videoOff = !track.enabled;
+    // TURN strategy (owner 2026-11-16): a camera that is off sends nothing to anyone (not black frames)
+    for (const pc of this.connections.values()) {
+      const sender = pc.getTransceivers().find((t) => t.sender.track === track || (t.sender.track === null && t.receiver.track?.kind === "video"))?.sender;
+      if (sender) void sender.replaceTrack(track.enabled ? track : null).catch(() => undefined);
+    }
     this.broadcastState();
     this.changed();
   }
@@ -417,7 +444,7 @@ export class MeetingSession {
   }
 
   private drop(userId: string) {
-    this.connections.get(userId)?.close();
+    this.closeLink(userId);
     this.connections.delete(userId);
     this.guards.delete(userId);
     this.peers.delete(userId);
@@ -440,7 +467,8 @@ export class MeetingSession {
     if (this.recording) this.stopRecording();
     if (!left) void ConnectEngine.supabase.rpc("prosm_time_connect_leave_meeting", { p_meeting: this.meetingId });
     this.timers.forEach((t) => window.clearInterval(t));
-    for (const pc of this.connections.values()) pc.close();
+    if (this.usageTimer !== null) window.clearInterval(this.usageTimer);
+    for (const userId of [...this.connections.keys()]) this.closeLink(userId);
     this.connections.clear();
     this.local?.getTracks().forEach((t) => t.stop());
     this.screen?.getTracks().forEach((t) => t.stop());

@@ -1,7 +1,7 @@
 import type { RealtimeChannel } from "@supabase/supabase-js";
 
 import { ConnectEngine } from "./ConnectEngine";
-import { ICE_SERVERS, QualityGuard, connectionRoute, loadIceServers, localMedia, signalChannel, tuneOpus, type LinkQuality, type Signal } from "./rtc";
+import { ICE_SERVERS, QualityGuard, UsageMeter, connectionRoute, loadIceServers, localMedia, reportUsage, signalChannel, tuneOpus, tuneSenders, type LinkQuality, type Signal } from "./rtc";
 
 // PROSM Connect - a call between two people (owner 2026-11-13). The switchboard rings the other person (a push wakes a
 // closed app); once they answer, both join the call's private channel and the sound and picture go straight between
@@ -135,6 +135,8 @@ export class CallSession {
   }
 
   private iceServers: RTCIceServer[] = ICE_SERVERS;
+  private meter: UsageMeter | null = null;
+  private videoSender: RTCRtpSender | null = null;
 
   private async join() {
     // phase G: STUN plus the free TURN relays (a path through mobile networks' NAT)
@@ -166,6 +168,12 @@ export class CallSession {
         }
         this.everConnected = true;
         if (!this.startedAt) this.startedAt = Date.now();
+        // TURN strategy (owner 2026-11-16): sound first, a light picture; what the call carries is measured
+        void tuneSenders(pc);
+        if (!this.meter) {
+          this.meter = new UsageMeter(pc);
+          this.timers.push(window.setInterval(() => void this.meter?.take().then((slices) => reportUsage(this.media, this.callId, slices)), 30_000));
+        }
         void connectionRoute(pc).then((route) => {
           this.route = route;
           console.info("[connect] call connected via", route ?? "unknown");
@@ -299,6 +307,12 @@ export class CallSession {
     if (!track) return;
     track.enabled = !track.enabled;
     this.localVideoOff = !track.enabled;
+    // TURN strategy (owner 2026-11-16): a camera that is off sends nothing at all (not black frames)
+    const sender = this.pc?.getSenders().find((s) => s.track === track || (s.track === null && this.videoSender === s));
+    if (sender) {
+      this.videoSender = sender;
+      void sender.replaceTrack(track.enabled ? track : null).catch(() => undefined);
+    }
     void this.send?.({ type: "video-off", off: this.localVideoOff });
     this.changed();
   }
@@ -329,8 +343,13 @@ export class CallSession {
     this.timers.forEach((t) => window.clearTimeout(t));
     this.timers.forEach((t) => window.clearInterval(t));
     this.timers = [];
-    this.pc?.close();
+    // the last part of the call is measured before the connection closes
+    const pc = this.pc;
+    const meter = this.meter;
     this.pc = null;
+    this.meter = null;
+    if (pc && meter) void meter.take().then((slices) => { pc.close(); return reportUsage(this.media, this.callId, slices); }, () => pc.close());
+    else pc?.close();
     this.local?.getTracks().forEach((t) => t.stop());
     if (this.channel) void ConnectEngine.supabase.removeChannel(this.channel);
     this.channel = null;

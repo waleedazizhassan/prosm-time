@@ -351,5 +351,23 @@
     "decline": "Refuser",
     "cancelled": "Le transfert a été annulé.",
     "failed": "Cette étape n'a pas pu être effectuée."
+  },
+  "connectUsage": {
+    "title": "Usage de Connect (appels et réunions)",
+    "subtitle": "Ce mois-ci : ce qui est passé directement entre appareils (gratuit) et ce qui est passé par un relais (compté sur son quota gratuit).",
+    "empty": "Pas encore d'appels mesurés ce mois-ci.",
+    "kind": "Type",
+    "sessions": "Nombre",
+    "directMinutes": "Minutes directes",
+    "relayMinutes": "Minutes via relais",
+    "relayMb": "Mo via relais",
+    "perMinute": "Mo/min",
+    "total": "Via un relais {{relay}} Mo sur {{total}} Mo.",
+    "server": "{{server}} : {{mb}} Mo en {{minutes}} min",
+    "kinds": {
+      "audio": "Appel vocal",
+      "video": "Appel vidéo",
+      "meeting": "Réunion"
+    }
   }
 }
