@@ -37,7 +37,7 @@ import GovernanceModelCard from "./GovernanceModelCard";
 // PROSM Platform's own Header/OrganizationCard, replaced bulkier
 // Dashboard cards per an earlier pass) - a genuinely good existing
 // home, not something misplaced.
-type SettingsTab = "sites" | "governance" | "outside" | "people" | "other";
+type SettingsTab = "governance" | "security" | "sites" | "attendance" | "people" | "plan";
 
 export default function OrganizationSettingsPage() {
   const { t } = useTranslation("settings");
@@ -51,8 +51,11 @@ export default function OrganizationSettingsPage() {
   // the open part: ?tab=..., and a link to "#plan" opens the plan's part
   const location = useLocation();
   const navigate = useNavigate();
-  const tab = (location.hash === "#plan" ? "other" : searchParams.get("tab") ?? "sites") as SettingsTab;
-  const chooseTab = (next: SettingsTab) => navigate(next === "sites" ? "/settings" : `/settings?tab=${next}`, { replace: true });
+  // older links: "outside" lives in Attendance now, "other" was security and the plan
+  const OLD_TABS: Record<string, SettingsTab> = { outside: "attendance", other: "security" };
+  const asked = location.hash === "#plan" ? "plan" : searchParams.get("tab");
+  const tab = (asked ? OLD_TABS[asked] ?? asked : null) as SettingsTab | null;
+  const chooseTab = (next: SettingsTab) => navigate(`/settings?tab=${next}`, { replace: true });
 
   // Owner 2026-10-20 ("move every setting, the sites' too, to the Settings
   // page"): each site's rules are chosen here from a site list - managers
@@ -63,8 +66,8 @@ export default function OrganizationSettingsPage() {
   }
 
   const showDepartments = allows("departments") && hasPermission("departments.manage");
-  const showPeople = isOwner || hasPermission("hr.manage") || hasPermission("settings.session_policy") || hasPermission("leave.manage_types") || showDepartments;
-  const showOther = isOwner;
+  const showPeople = isOwner || hasPermission("hr.manage") || hasPermission("leave.manage_types") || showDepartments;
+  const showAttendance = isOwner || hasPermission("settings.session_policy");
 
   if (focusedSite) {
     return (
@@ -82,9 +85,16 @@ export default function OrganizationSettingsPage() {
   // Owner 2026-11-10: the settings as a tree - the sites (each site's every setting), outside the
   // sites, people, and everything else - one part at a time. Pages that have their own place in the
   // menu (calendar, permissions, action log, API, payroll settings) are not repeated here.
-  const tabs: SettingsTab[] = ["sites", ...(isOwner ? (["governance", "outside"] as SettingsTab[]) : []),
-    ...(showPeople ? (["people"] as SettingsTab[]) : []), ...(showOther ? (["other"] as SettingsTab[]) : [])];
-  const active: SettingsTab = tabs.includes(tab) ? tab : "sites";
+  // Owner 2026-11-16: one place per setting, no card twice - governance and security first and clear, then the
+  // sites, attendance, human resources, and the plan with what it is used for.
+  const tabs: SettingsTab[] = [
+    ...(isOwner ? (["governance", "security"] as SettingsTab[]) : []),
+    "sites",
+    ...(showAttendance ? (["attendance"] as SettingsTab[]) : []),
+    ...(showPeople ? (["people"] as SettingsTab[]) : []),
+    ...(isOwner ? (["plan"] as SettingsTab[]) : []),
+  ];
+  const active: SettingsTab = tab && tabs.includes(tab) ? tab : tabs[0];
 
   return (
     <PageShell title="">
@@ -98,6 +108,18 @@ export default function OrganizationSettingsPage() {
         ))}
       </div>
 
+      {active === "governance" ? <GovernanceModelCard /> : null}
+
+      {active === "security" ? (
+        <>
+          {/* identity confirmation / two-step verification for sensitive actions */}
+          <SecurityPolicyCard />
+          {/* governance phase E: the only way the owner changes */}
+          {profile?.isRealOwner ? <OwnershipTransferCard /> : null}
+          {allows("retention") ? <RetentionSettingsCard /> : null}
+        </>
+      ) : null}
+
       {active === "sites" ? (
         <>
           <SitePolicySettingsCard />
@@ -105,45 +127,32 @@ export default function OrganizationSettingsPage() {
         </>
       ) : null}
 
-      {/* phase F (owner 2026-11-16): the organisation's governance model, in its own tab */}
-      {active === "governance" ? <GovernanceModelCard /> : null}
-
-      {active === "outside" ? (
+      {active === "attendance" ? (
         <>
-          <NoSiteRadiusSettingsCard />
-          <NoSiteHoursSettingsCard />
+          {hasPermission("settings.session_policy") ? <SessionPolicySettingsCard /> : null}
+          {isOwner ? <NoSiteRadiusSettingsCard /> : null}
+          {isOwner ? <NoSiteHoursSettingsCard /> : null}
+          {isOwner ? <OvertimeLateTargetCard hasPayroll={allows("payroll")} hasAllowances={allows("allowances")} /> : null}
+          {isOwner ? <OvertimePolicySettingsCard /> : null}
+          {isOwner ? <MockLocationSettingsCard /> : null}
         </>
       ) : null}
 
       {active === "people" ? (
         <>
-          {hasPermission("settings.session_policy") ? <SessionPolicySettingsCard /> : null}
-          {isOwner ? <OvertimeLateTargetCard hasPayroll={allows("payroll")} hasAllowances={allows("allowances")} /> : null}
-          {isOwner ? <OvertimePolicySettingsCard /> : null}
-          {hasPermission("leave.manage_types") ? <LeaveTypesSettingsCard /> : null}
-          {/* owner 2026-11-16: employee codes by hiring seniority */}
-          {isOwner ? <EmployeeCodesCard /> : null}
-          {/* 2026-11-11 HR suite: the company's job titles */}
-          {isOwner || hasPermission("hr.manage") ? <JobTitlesSettingsCard /> : null}
-          {/* owner 2026-11-12: the documents moved out of Settings - added from each person's file, and the
-              ones required of everyone are set on the Documents page */}
-          {(isOwner || hasPermission("hr.manage")) && allows("penalties") ? <PenaltyBylawSettingsCard /> : null}
-          {/* 2026-11-09 Media Center: departments (announcements can be addressed to them) */}
           {showDepartments ? <DepartmentsSettingsCard /> : null}
+          {isOwner || hasPermission("hr.manage") ? <JobTitlesSettingsCard /> : null}
+          {isOwner ? <EmployeeCodesCard /> : null}
+          {hasPermission("leave.manage_types") ? <LeaveTypesSettingsCard /> : null}
+          {(isOwner || hasPermission("hr.manage")) && allows("penalties") ? <PenaltyBylawSettingsCard /> : null}
         </>
       ) : null}
 
-      {active === "other" ? (
+      {active === "plan" ? (
         <>
-          {/* owner 2026-11-16: identity confirmation / two-step verification for sensitive actions */}
-          {isOwner ? <SecurityPolicyCard /> : null}
-          {isOwner ? <PlanSettingsCard /> : null}
-          {/* governance phase E: the only way the owner changes */}
-          {profile?.isRealOwner ? <OwnershipTransferCard /> : null}
-          {isOwner ? <MockLocationSettingsCard /> : null}
-          {isOwner && allows("retention") ? <RetentionSettingsCard /> : null}
-          {/* owner 2026-11-16 TURN strategy: what calls and meetings carried, direct vs relay */}
-          {isOwner ? <ConnectUsageCard /> : null}
+          <PlanSettingsCard />
+          {/* what calls and meetings carried, direct vs relay */}
+          <ConnectUsageCard />
         </>
       ) : null}
     </PageShell>

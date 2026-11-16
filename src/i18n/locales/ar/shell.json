@@ -384,7 +384,9 @@
     "penalties": "الجزاءات والحوافز",
     "connect": "المحادثات",
     "connectCalls": "سجل المكالمات",
-    "connectMeetings": "الاجتماعات"
+    "connectMeetings": "الاجتماعات",
+    "governance": "نموذج الحوكمة",
+    "security": "الأمان"
   },
   "sosOverlay": {
     "title": "تنبيه طوارئ (SOS)",

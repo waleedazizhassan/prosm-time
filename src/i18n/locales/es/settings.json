@@ -236,7 +236,7 @@
       "enterprise": "Enterprise"
     },
     "includes": "Qué incluye tu plan",
-    "always": "En todos los planes: fichaje en el sitio con geocerca y foto, sin conexión, mapa en vivo, SOS, radio, clima y 9 idiomas.",
+    "always": "En todos los planes: fichaje en el sitio con geocerca y foto, sin conexión, mapa en vivo, SOS, radio, clima y 9 idiomas. Además: verificación en dos pasos y confirmación de identidad, códigos de empleado y el modelo de aprobación simple.",
     "included": "incluido",
     "notIncluded": "no incluido en tu plan",
     "features": {
@@ -263,7 +263,17 @@
       "delegation": "Delegación completa y temporal",
       "retention": "Control de retención de datos",
       "documents": "Documentos del personal y su vencimiento",
-      "penalties": "Reglamento de sanciones progresivas e incentivos"
+      "penalties": "Reglamento de sanciones progresivas e incentivos",
+      "governance_models": "Modelos de gobierno: descentralizado y centralizado",
+      "governance_advanced": "Gobierno combinado (dos pasos) y un modelo por tipo",
+      "connect_chat": "Chats y grupos",
+      "connect_camera_photo": "Foto verificada de cámara en el chat",
+      "connect_calls": "Llamadas de voz y video",
+      "connect_site_broadcast": "Mensaje a todo un sitio",
+      "connect_push_to_talk": "Pulsar para hablar (radio)",
+      "connect_meetings": "Reuniones y llamadas de grupo",
+      "connect_screen_share": "Compartir pantalla",
+      "connect_meeting_recording": "Grabación de reuniones"
     },
     "managedByProsm": "Cualquier cambio o renovación de tu licencia lo hace PROSM; recibes una notificación y un correo con la nueva licencia. Para cambiarla, escribe a sales@prosm.net.",
     "historyAll": "Registros de asistencia visibles: todos. Los puntos de ubicación y las fotos se eliminan automáticamente tras el plazo de «Conservación de datos».",
@@ -524,6 +534,7 @@
     "confirm": "Cambiar",
     "confirmNote": "Se aplica al instante a las solicitudes nuevas y pendientes: vacaciones, permisos y correcciones.",
     "saved": "Guardado.",
-    "failed": "No se guardó. Inténtalo de nuevo."
+    "failed": "No se guardó. Inténtalo de nuevo.",
+    "notInPlan": "Este modelo viene con el plan {{plan}} o superior."
   }
 }

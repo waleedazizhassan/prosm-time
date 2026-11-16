@@ -4,6 +4,8 @@ import { ArrowLeftRight, Building2, CheckCircle2, GitMerge, Network, ShieldCheck
 import type { LucideIcon } from "lucide-react";
 
 import { requireSupabaseClient } from "../../core/api/supabaseClient";
+import { useAuth } from "../../core/context/AuthContext";
+import usePlanFeatures from "../../core/hooks/usePlanFeatures";
 import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import Button from "../../components/common/Button";
 import Card from "../../components/common/Card";
@@ -43,6 +45,12 @@ export default function GovernanceModelCard() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [saved, setSaved] = useState(false);
+  // owner 2026-11-16: the models follow the plan (Starter simple; Business decentralized / centralized; Pro combined
+  // and per kind) - the server refuses the rest, the screen says which plan has it
+  const { profile } = useAuth();
+  const { allows } = usePlanFeatures(profile?.id);
+  const inPlan = (m: Mode) => m === "direct" || (m === "two_step" ? allows("governance_advanced") : allows("governance_models"));
+  const planFor = (m: Mode) => (m === "two_step" ? "Pro" : "Business");
 
   const load = useCallback(async () => {
     const { data, error: e } = await requireSupabaseClient().rpc("get_prosm_time_governance_overview");
@@ -149,7 +157,9 @@ export default function GovernanceModelCard() {
         <HintText small>{t(`governance.modes.${shown}.fits`)}</HintText>
         {warning(shown) ? <p role="alert" style={{ margin: "var(--space-2) 0 0", color: "var(--status-warning-text)", fontSize: "var(--font-sm)" }}>{warning(shown)}</p> : null}
         <div style={{ marginTop: "var(--space-3)" }}>
-          {current === shown ? (
+          {!inPlan(shown) ? (
+            <HintText small>{t("governance.notInPlan", { plan: planFor(shown) })}</HintText>
+          ) : current === shown ? (
             <span style={{ color: "var(--status-success-text)", fontSize: "var(--font-sm)", display: "inline-flex", gap: 6, alignItems: "center" }}>
               <CheckCircle2 size={16} aria-hidden="true" /> {t("governance.isActive")}
             </span>
@@ -171,7 +181,7 @@ export default function GovernanceModelCard() {
       </div>
 
       {/* fine tuning: a different model per kind */}
-      <details style={{ marginTop: "var(--space-3)" }}>
+      {allows("governance_advanced") ? <details style={{ marginTop: "var(--space-3)" }}>
         <summary style={{ cursor: "pointer", fontSize: "var(--font-sm)" }}>{t("governance.perKind")}</summary>
         <div style={{ display: "grid", gap: "var(--space-2)", marginTop: "var(--space-2)" }}>
           {KINDS.map((kind) => (
@@ -184,7 +194,7 @@ export default function GovernanceModelCard() {
             </label>
           ))}
         </div>
-      </details>
+      </details> : null}
 
       <ErrorText>{error}</ErrorText>
       {saved ? <SuccessText>{t("governance.saved")}</SuccessText> : null}

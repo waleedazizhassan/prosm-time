@@ -381,7 +381,9 @@
     "penalties": "Sanzioni e incentivi",
     "connect": "Chat",
     "connectCalls": "Registro chiamate",
-    "connectMeetings": "Riunioni"
+    "connectMeetings": "Riunioni",
+    "governance": "Modello di governance",
+    "security": "Sicurezza"
   },
   "sosOverlay": {
     "title": "Allarme SOS/Emergenza",

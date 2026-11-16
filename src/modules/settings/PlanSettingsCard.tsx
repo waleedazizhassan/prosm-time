@@ -20,6 +20,10 @@ const FEATURE_ROWS: PlanFeature[] = [
   "sos", "announcements", "departments", "documents", "penalties", "leave", "scheduling", "allowances", "kiosk", "on_behalf", "clock_rules", "export", "payroll_export", "roles_manager",
   "payroll", "labor_cost", "audit", "roles_all", "clock_suggestion", "daily_summary", "manager_alerts",
   "integrations", "delegation", "retention",
+  // 2026-11-16: the governance models and PROSM Connect were missing from this list
+  "governance_models", "governance_advanced",
+  "connect_chat", "connect_camera_photo", "connect_calls", "connect_site_broadcast",
+  "connect_push_to_talk", "connect_meetings", "connect_screen_share", "connect_meeting_recording",
 ];
 
 // The Owner's plan: which one, what is used, when it ends, and a code PROSM

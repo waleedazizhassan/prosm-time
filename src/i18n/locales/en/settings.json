@@ -236,7 +236,7 @@
       "enterprise": "Enterprise"
     },
     "includes": "What your plan includes",
-    "always": "In every plan: clocking at the site with geofence and photo proof, offline, the live map, SOS, radio, weather and 9 languages.",
+    "always": "In every plan: clocking at the site with geofence and photo proof, offline, the live map, SOS, radio, weather and 9 languages. Also: two-step verification and identity confirmation, employee codes, and the simple approval model.",
     "included": "included",
     "notIncluded": "not in your plan",
     "features": {
@@ -263,7 +263,17 @@
       "delegation": "Full and time-limited delegation",
       "retention": "Data retention control",
       "documents": "Employee documents and their expiry",
-      "penalties": "Progressive penalties bylaw and incentives"
+      "penalties": "Progressive penalties bylaw and incentives",
+      "governance_models": "Governance models: decentralized and centralized",
+      "governance_advanced": "Combined (two-step) governance and a model per request kind",
+      "connect_chat": "Chats and groups",
+      "connect_camera_photo": "Verified camera photo in chat",
+      "connect_calls": "Voice and video calls",
+      "connect_site_broadcast": "A message to everyone on a site",
+      "connect_push_to_talk": "Push to talk (radio)",
+      "connect_meetings": "Meetings and group calls",
+      "connect_screen_share": "Screen sharing",
+      "connect_meeting_recording": "Meeting recording"
     },
     "managedByProsm": "Any change or renewal of your licence is made by PROSM; you get a notification and an email with the new licence. To change it, write to sales@prosm.net.",
     "historyAll": "Attendance records shown: all of them. Location points and photos are deleted automatically after the period in “Data retention”.",
@@ -522,6 +532,7 @@
     "confirm": "Switch",
     "confirmNote": "It applies at once to new and still-pending requests: leave, permissions and attendance corrections.",
     "saved": "Saved.",
-    "failed": "Not saved. Try again."
+    "failed": "Not saved. Try again.",
+    "notInPlan": "This model comes with the {{plan}} plan and up."
   }
 }

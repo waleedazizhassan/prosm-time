@@ -236,7 +236,7 @@
       "enterprise": "Enterprise"
     },
     "includes": "Cosa include il tuo piano",
-    "always": "In ogni piano: timbratura in sede con geofence e foto, offline, mappa in tempo reale, SOS, radio, meteo e 9 lingue.",
+    "always": "In ogni piano: timbratura in sede con geofence e foto, offline, mappa in tempo reale, SOS, radio, meteo e 9 lingue. Inoltre: verifica in due passaggi e conferma dell’identità, codici dipendente e il modello di approvazione semplice.",
     "included": "incluso",
     "notIncluded": "non incluso nel tuo piano",
     "features": {
@@ -263,7 +263,17 @@
       "delegation": "Delega completa e a tempo",
       "retention": "Controllo della conservazione dei dati",
       "documents": "Documenti dei dipendenti e scadenze",
-      "penalties": "Regolamento sanzioni progressive e incentivi"
+      "penalties": "Regolamento sanzioni progressive e incentivi",
+      "governance_models": "Modelli di governance: decentrato e centralizzato",
+      "governance_advanced": "Governance combinata (due passaggi) e un modello per tipo",
+      "connect_chat": "Chat e gruppi",
+      "connect_camera_photo": "Foto verificata dalla fotocamera in chat",
+      "connect_calls": "Chiamate vocali e video",
+      "connect_site_broadcast": "Messaggio a tutto un sito",
+      "connect_push_to_talk": "Premi per parlare (radio)",
+      "connect_meetings": "Riunioni e chiamate di gruppo",
+      "connect_screen_share": "Condivisione schermo",
+      "connect_meeting_recording": "Registrazione riunioni"
     },
     "managedByProsm": "Ogni modifica o rinnovo della licenza è fatto da PROSM; ricevi una notifica e un’e-mail con la nuova licenza. Per modificarla scrivi a sales@prosm.net.",
     "historyAll": "Timbrature mostrate: tutte. Posizioni e foto si eliminano automaticamente dopo il periodo in «Conservazione dei dati».",
@@ -524,6 +534,7 @@
     "confirm": "Passa",
     "confirmNote": "Vale subito per le richieste nuove e in attesa: ferie, permessi e correzioni.",
     "saved": "Salvato.",
-    "failed": "Non salvato. Riprova."
+    "failed": "Non salvato. Riprova.",
+    "notInPlan": "Questo modello è incluso dal piano {{plan}} in su."
   }
 }

@@ -382,7 +382,9 @@
     "penalties": "Взыскания и поощрения",
     "connect": "Чаты",
     "connectCalls": "Журнал звонков",
-    "connectMeetings": "Встречи"
+    "connectMeetings": "Встречи",
+    "governance": "Модель управления",
+    "security": "Безопасность"
   },
   "sosOverlay": {
     "title": "Сигнал SOS/тревога",

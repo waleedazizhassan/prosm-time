@@ -236,7 +236,7 @@
       "enterprise": "Enterprise"
     },
     "includes": "Was Ihr Paket enthält",
-    "always": "In jedem Plan: Stempeln am Standort mit Geofence und Fotonachweis, offline, Live-Karte, SOS, Radio, Wetter und 9 Sprachen.",
+    "always": "In jedem Plan: Stempeln am Standort mit Geofence und Fotonachweis, offline, Live-Karte, SOS, Radio, Wetter und 9 Sprachen. Außerdem: Zwei-Faktor-Prüfung und Identitätsbestätigung, Personalnummern und das einfache Genehmigungsmodell.",
     "included": "enthalten",
     "notIncluded": "nicht in Ihrem Paket",
     "features": {
@@ -263,7 +263,17 @@
       "delegation": "Volle und befristete Vertretung",
       "retention": "Steuerung der Datenaufbewahrung",
       "documents": "Mitarbeiterdokumente und Ablaufdaten",
-      "penalties": "Gestufte Sanktionsordnung und Prämien"
+      "penalties": "Gestufte Sanktionsordnung und Prämien",
+      "governance_models": "Governance-Modelle: dezentral und zentral",
+      "governance_advanced": "Kombinierte Governance (zwei Schritte) und ein Modell je Antragsart",
+      "connect_chat": "Chats und Gruppen",
+      "connect_camera_photo": "Verifiziertes Kamerafoto im Chat",
+      "connect_calls": "Sprach- und Videoanrufe",
+      "connect_site_broadcast": "Nachricht an alle eines Standorts",
+      "connect_push_to_talk": "Push-to-Talk (Funk)",
+      "connect_meetings": "Besprechungen und Gruppenanrufe",
+      "connect_screen_share": "Bildschirmfreigabe",
+      "connect_meeting_recording": "Besprechungsaufzeichnung"
     },
     "managedByProsm": "Änderungen und Verlängerungen Ihrer Lizenz nimmt PROSM vor; Sie erhalten eine Benachrichtigung und eine E-Mail mit der neuen Lizenz. Änderungen: sales@prosm.net.",
     "historyAll": "Angezeigte Stempelungen: alle. Standortpunkte und Fotos werden nach der Frist unter „Aufbewahrung“ automatisch gelöscht.",
@@ -522,6 +532,7 @@
     "confirm": "Wechseln",
     "confirmNote": "Gilt sofort für neue und noch offene Anträge: Urlaub, Freistellungen und Zeitkorrekturen.",
     "saved": "Gespeichert.",
-    "failed": "Nicht gespeichert. Versuch es noch einmal."
+    "failed": "Nicht gespeichert. Versuch es noch einmal.",
+    "notInPlan": "Dieses Modell gibt es ab dem Paket {{plan}}."
   }
 }

@@ -380,7 +380,9 @@
     "penalties": "Sanktionen und Prämien",
     "connect": "Chats",
     "connectCalls": "Anrufliste",
-    "connectMeetings": "Besprechungen"
+    "connectMeetings": "Besprechungen",
+    "governance": "Governance-Modell",
+    "security": "Sicherheit"
   },
   "sosOverlay": {
     "title": "SOS-/Notfallalarm",

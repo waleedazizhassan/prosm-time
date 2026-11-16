@@ -380,7 +380,9 @@
     "penalties": "Penalties and incentives",
     "connect": "Chats",
     "connectCalls": "Call log",
-    "connectMeetings": "Meetings"
+    "connectMeetings": "Meetings",
+    "governance": "Governance model",
+    "security": "Security"
   },
   "sosOverlay": {
     "title": "SOS/Emergency alert",

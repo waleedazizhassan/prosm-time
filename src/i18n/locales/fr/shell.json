@@ -381,7 +381,9 @@
     "penalties": "Sanctions et primes",
     "connect": "Discussions",
     "connectCalls": "Journal des appels",
-    "connectMeetings": "Réunions"
+    "connectMeetings": "Réunions",
+    "governance": "Modèle de gouvernance",
+    "security": "Sécurité"
   },
   "sosOverlay": {
     "title": "Alerte SOS/Urgence",

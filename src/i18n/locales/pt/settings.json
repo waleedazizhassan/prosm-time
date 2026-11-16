@@ -236,7 +236,7 @@
       "enterprise": "Enterprise"
     },
     "includes": "O que o seu plano inclui",
-    "always": "Em todos os planos: ponto no local com geocerca e foto, offline, mapa ao vivo, SOS, rádio, clima e 9 idiomas.",
+    "always": "Em todos os planos: ponto no local com geocerca e foto, offline, mapa ao vivo, SOS, rádio, clima e 9 idiomas. Também: verificação em duas etapas e confirmação de identidade, códigos de funcionário e o modelo de aprovação simples.",
     "included": "incluído",
     "notIncluded": "não incluído no seu plano",
     "features": {
@@ -263,7 +263,17 @@
       "delegation": "Delegação completa e temporária",
       "retention": "Controle de retenção de dados",
       "documents": "Documentos dos funcionários e validade",
-      "penalties": "Regulamento de sanções progressivas e incentivos"
+      "penalties": "Regulamento de sanções progressivas e incentivos",
+      "governance_models": "Modelos de governança: descentralizado e centralizado",
+      "governance_advanced": "Governança combinada (duas etapas) e um modelo por tipo",
+      "connect_chat": "Conversas e grupos",
+      "connect_camera_photo": "Foto verificada da câmera na conversa",
+      "connect_calls": "Chamadas de voz e vídeo",
+      "connect_site_broadcast": "Mensagem para todo um local",
+      "connect_push_to_talk": "Apertar para falar (rádio)",
+      "connect_meetings": "Reuniões e chamadas em grupo",
+      "connect_screen_share": "Compartilhar tela",
+      "connect_meeting_recording": "Gravação de reuniões"
     },
     "managedByProsm": "Qualquer alteração ou renovação da sua licença é feita pela PROSM; você recebe uma notificação e um e-mail com a nova licença. Para alterar, escreva para sales@prosm.net.",
     "historyAll": "Registros de ponto exibidos: todos. Pontos de localização e fotos são apagados automaticamente após o prazo em “Retenção de dados”.",
@@ -524,6 +534,7 @@
     "confirm": "Mudar",
     "confirmNote": "Vale na hora para pedidos novos e pendentes: férias, permissões e correções.",
     "saved": "Salvo.",
-    "failed": "Não foi salvo. Tente de novo."
+    "failed": "Não foi salvo. Tente de novo.",
+    "notInPlan": "Este modelo vem com o plano {{plan}} ou superior."
   }
 }

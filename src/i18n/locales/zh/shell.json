@@ -379,7 +379,9 @@
     "penalties": "处罚与奖励",
     "connect": "聊天",
     "connectCalls": "通话记录",
-    "connectMeetings": "会议"
+    "connectMeetings": "会议",
+    "governance": "治理模式",
+    "security": "安全"
   },
   "sosOverlay": {
     "title": "SOS/紧急警报",

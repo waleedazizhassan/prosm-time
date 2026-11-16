@@ -95,6 +95,14 @@ export default function Sidebar() {
 
   // Which tree branches the person opened or closed (remembered on this device).
   const location = useLocation();
+  // owner 2026-11-16: Settings' Governance and Security tabs have their own menu entries - each lights only on its tab
+  const tabbed = NAV_ITEMS.filter((n) => n.path.includes("?")).map((n) => n.path);
+  const isOn = (path: string, routerActive: boolean) => {
+    if (!routerActive) return false;
+    const [base, query] = path.split("?");
+    if (query) return new URLSearchParams(location.search).get("tab") === new URLSearchParams(query).get("tab");
+    return !tabbed.some((other) => other.startsWith(`${base}?`) && location.search.includes(other.split("?")[1]));
+  };
   const [openSections, setOpenSections] = useState<Record<string, boolean>>(() => {
     try {
       return JSON.parse(localStorage.getItem(OPEN_SECTIONS_KEY) ?? "{}") as Record<string, boolean>;
@@ -164,7 +172,7 @@ export default function Sidebar() {
               {otherPages.filter((item) => item.section !== "connect").map((item) => {
                 const Icon = item.icon;
                 return (
-                  <NavLink key={item.id} to={item.path} end className={({ isActive }) => [styles.item, isActive ? styles.active : ""].filter(Boolean).join(" ")}>
+                  <NavLink key={item.id} to={item.path} end className={({ isActive }) => [styles.item, isOn(item.path, isActive) ? styles.active : ""].filter(Boolean).join(" ")}>
                     <span className={styles.itemIcon}>
                       <Icon size={18} strokeWidth={2} />
                     </span>
@@ -181,7 +189,7 @@ export default function Sidebar() {
               {otherPages.filter((item) => item.section === "connect").map((item) => {
                 const Icon = item.icon;
                 return (
-                  <NavLink key={item.id} to={item.path} end className={({ isActive }) => [styles.item, isActive ? styles.active : ""].filter(Boolean).join(" ")}>
+                  <NavLink key={item.id} to={item.path} end className={({ isActive }) => [styles.item, isOn(item.path, isActive) ? styles.active : ""].filter(Boolean).join(" ")}>
                     <span className={styles.itemIcon}>
                       <Icon size={18} strokeWidth={2} />
                     </span>
@@ -199,7 +207,7 @@ export default function Sidebar() {
                   key={item.id}
                   to={item.path}
                   end
-                  className={({ isActive }) => [styles.item, isActive ? styles.active : ""].filter(Boolean).join(" ")}
+                  className={({ isActive }) => [styles.item, isOn(item.path, isActive) ? styles.active : ""].filter(Boolean).join(" ")}
                   title={sidebarCollapsed ? t(item.labelKey) : undefined}
                 >
                   <span className={styles.itemIcon}>

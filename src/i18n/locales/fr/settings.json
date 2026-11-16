@@ -236,7 +236,7 @@
       "enterprise": "Enterprise"
     },
     "includes": "Ce que comprend votre offre",
-    "always": "Dans chaque offre : pointage sur site avec géorepérage et photo, hors ligne, carte en direct, SOS, radio, météo et 9 langues.",
+    "always": "Dans chaque offre : pointage sur site avec géorepérage et photo, hors ligne, carte en direct, SOS, radio, météo et 9 langues. Aussi : vérification en deux étapes et confirmation d’identité, matricules et le modèle d’approbation simple.",
     "included": "inclus",
     "notIncluded": "non inclus dans votre offre",
     "features": {
@@ -263,7 +263,17 @@
       "delegation": "Délégation complète et temporaire",
       "retention": "Contrôle de la conservation des données",
       "documents": "Documents des salariés et leur expiration",
-      "penalties": "Règlement de sanctions progressives et primes"
+      "penalties": "Règlement de sanctions progressives et primes",
+      "governance_models": "Modèles de gouvernance : décentralisé et centralisé",
+      "governance_advanced": "Gouvernance combinée (deux étapes) et un modèle par type",
+      "connect_chat": "Discussions et groupes",
+      "connect_camera_photo": "Photo vérifiée de l’appareil dans la discussion",
+      "connect_calls": "Appels vocaux et vidéo",
+      "connect_site_broadcast": "Message à tout un site",
+      "connect_push_to_talk": "Appuyer pour parler (radio)",
+      "connect_meetings": "Réunions et appels de groupe",
+      "connect_screen_share": "Partage d’écran",
+      "connect_meeting_recording": "Enregistrement des réunions"
     },
     "managedByProsm": "Toute modification ou tout renouvellement de votre licence est fait par PROSM ; vous recevez une notification et un e-mail avec la nouvelle licence. Pour la modifier : sales@prosm.net.",
     "historyAll": "Pointages affichés : tous. Positions et photos sont supprimées automatiquement après la durée de « Conservation ».",
@@ -524,6 +534,7 @@
     "confirm": "Passer",
     "confirmNote": "S’applique immédiatement aux demandes nouvelles et en attente : congés, autorisations et corrections.",
     "saved": "Enregistré.",
-    "failed": "Non enregistré. Réessayez."
+    "failed": "Non enregistré. Réessayez.",
+    "notInPlan": "Ce modèle est inclus à partir de l’offre {{plan}}."
   }
 }

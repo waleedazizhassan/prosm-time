@@ -236,7 +236,7 @@
       "enterprise": "Enterprise"
     },
     "includes": "您的套餐包含",
-    "always": "所有套餐均包含：现场打卡（地理围栏和照片）、离线、实时地图、SOS、电台、天气和 9 种语言。",
+    "always": "所有套餐均包含：现场打卡（地理围栏和照片）、离线、实时地图、SOS、电台、天气和 9 种语言。 另外：两步验证和身份确认、员工编号以及简单审批模式。",
     "included": "已包含",
     "notIncluded": "不在您的套餐内",
     "features": {
@@ -263,7 +263,17 @@
       "delegation": "完全及限期授权",
       "retention": "数据保留控制",
       "documents": "员工证件及到期提醒",
-      "penalties": "阶梯处罚规章与奖励"
+      "penalties": "阶梯处罚规章与奖励",
+      "governance_models": "治理模式：分散和集中",
+      "governance_advanced": "组合（两步）治理和按申请类型设置模式",
+      "connect_chat": "聊天和群组",
+      "connect_camera_photo": "聊天中的已验证相机照片",
+      "connect_calls": "语音和视频通话",
+      "connect_site_broadcast": "向站点所有人发送消息",
+      "connect_push_to_talk": "一键通话（对讲）",
+      "connect_meetings": "会议和群组通话",
+      "connect_screen_share": "屏幕共享",
+      "connect_meeting_recording": "会议录制"
     },
     "managedByProsm": "许可证的任何变更或续订都由 PROSM 处理；您会收到通知和附有新许可证的邮件。如需变更，请写信至 sales@prosm.net。",
     "historyAll": "显示的考勤记录：全部。位置点和照片会在“数据保留”中的期限后自动删除。",
@@ -520,6 +530,7 @@
     "confirm": "切换",
     "confirmNote": "立即适用于新的和待处理的申请：休假、请假许可和考勤更正。",
     "saved": "已保存。",
-    "failed": "未保存，请重试。"
+    "failed": "未保存，请重试。",
+    "notInPlan": "此模式包含在 {{plan}} 及以上套餐中。"
   }
 }
