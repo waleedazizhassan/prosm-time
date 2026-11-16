@@ -146,7 +146,10 @@
     "deletedMessage": "This message was deleted",
     "youDeleted": "You deleted this message",
     "deleteForEveryoneFailed": "It was not deleted for everyone. Try again.",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "reply": "Reply",
+    "cancelReply": "Cancel reply",
+    "typing": "{{name}} is typing…"
   },
   "info": {
     "inSince": "In since {{time}}",
@@ -235,5 +238,22 @@
     "clearConfirm": "Clear every call from your log? The organisation's record stays.",
     "deleteOne": "Remove from log",
     "deleteOneConfirm": "Remove this call from your log?"
+  },
+  "group": {
+    "new": "New group",
+    "name": "Group name",
+    "pick": "Choose members ({{count}} chosen)",
+    "create": "Create group",
+    "createFailed": "The group was not created. Try again.",
+    "members": "Members ({{count}})",
+    "admin": "admin",
+    "you": "You",
+    "remove": "Remove from group",
+    "add": "Add",
+    "choosePerson": "Choose a person",
+    "leave": "Leave group",
+    "leaveConfirm": "Leave the group? The chat leaves this device.",
+    "audioCall": "Group voice call",
+    "videoCall": "Group video call"
   }
 }

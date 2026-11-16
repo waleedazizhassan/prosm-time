@@ -20,6 +20,7 @@ const uuid = () => (crypto.randomUUID ? crypto.randomUUID() : `${Date.now().toSt
 const TEXT_KINDS = new Set(["message", "site_broadcast", "photo_request", "missed", "meeting_invite"]);
 /** the body of a message taken back by its sender (shown as "this message was deleted") */
 export const DELETED = "§deleted";
+export interface ConnectGroup { id: string; title: string; createdAt: string; members: { userId: string; role: "admin" | "member" }[] }
 interface Retraction { from: string; conversationId: string | null; siteId: string | null; clientIds: string[]; createdAt?: string }
 
 class Engine {
@@ -88,6 +89,7 @@ class Engine {
       .on("broadcast", { event: "receipt" }, (message) => void this.handleReceipt(message.payload as Record<string, unknown>))
       .on("broadcast", { event: "call" }, (message) => this.emit("call-signal", message.payload))
       .on("broadcast", { event: "retract" }, (message) => void this.applyRetraction(message.payload as Retraction))
+      .on("broadcast", { event: "typing" }, (message) => this.emit("typing", message.payload))
       .subscribe((status, error) => {
         if (status === "SUBSCRIBED") {
           this.live = true;
@@ -222,10 +224,11 @@ class Engine {
       body: TEXT_KINDS.has(item.type) ? item.body : (meta.caption as string | undefined) ?? null,
       fileName: (meta.fileName as string | undefined) ?? null, mimeType: item.mimeType,
       durationMs: (meta.durationMs as number | undefined) ?? null, proofCode: (meta.proofCode as string | undefined) ?? null,
-      refId: item.refId,
+      refId: item.refId, replyTo: item.replyTo ?? null, replySnippet: item.replySnippet ?? null,
     };
     await LocalStore.putMessage(me.userId, message);
-    await this.touchConversation(conversationId, message, item.siteId ? "site" : "direct", item.fromUser, this.openConversation !== conversationId);
+    const group = item.conversationId ? await this.groupOf(item.conversationId) : null;
+    await this.touchConversation(conversationId, message, item.siteId ? "site" : group ? "group" : "direct", group ? null : item.fromUser, this.openConversation !== conversationId, group?.title ?? null);
     await ConnectRepository.ack(item.id);
     this.emit("message", message);
     if (this.openConversation === conversationId) void this.markRead(conversationId);
@@ -278,11 +281,11 @@ class Engine {
     return result.id;
   }
 
-  private async touchConversation(id: string, message: LocalMessage, kind: LocalConversation["kind"], otherUserId: string | null, countUnread: boolean) {
+  private async touchConversation(id: string, message: LocalMessage, kind: LocalConversation["kind"], otherUserId: string | null, countUnread: boolean, title: string | null = null) {
     const me = this.me!;
     const current = await LocalStore.getConversation(me.userId, id);
     await LocalStore.putConversation(me.userId, {
-      id, kind: current?.kind ?? kind, otherUserId: current?.otherUserId ?? (kind === "direct" ? otherUserId : null), title: current?.title ?? null,
+      id, kind: kind === "group" ? "group" : current?.kind ?? kind, otherUserId: kind === "group" ? null : current?.otherUserId ?? (kind === "direct" ? otherUserId : null), title: title ?? current?.title ?? null,
       lastAt: message.createdAt, lastPreview: preview(message), unread: (current?.unread ?? 0) + (countUnread && !message.mine ? 1 : 0),
     });
     this.emit("conversations");
@@ -290,7 +293,7 @@ class Engine {
 
   // ---- sending --------------------------------------------------------------------------------------------------
   /** Writes the message on the device at once (🕓) and sends it when it can. */
-  async send(conversationId: string, kind: MessageKind, input: { body?: string | null; blob?: Blob | null; fileName?: string | null; durationMs?: number | null; proofCode?: string | null; otherUserId?: string | null }) {
+  async send(conversationId: string, kind: MessageKind, input: { body?: string | null; blob?: Blob | null; fileName?: string | null; durationMs?: number | null; proofCode?: string | null; otherUserId?: string | null; replyTo?: string | null; replySnippet?: string | null }) {
     const me = this.me;
     if (!me) throw new Error("Connect is not started.");
     const id = uuid();
@@ -300,10 +303,12 @@ class Engine {
       id, conversationId, fromUser: me.userId, kind, createdAt, status: "pending", mine: true,
       sizeBytes: input.blob?.size ?? (input.body ?? "").length, body: input.body ?? null, fileName: input.fileName ?? null,
       mimeType: input.blob?.type ?? null, durationMs: input.durationMs ?? null, proofCode: input.proofCode ?? null, hasBlob: Boolean(input.blob),
+      replyTo: input.replyTo ?? null, replySnippet: input.replySnippet?.slice(0, 200) ?? null,
     };
     await LocalStore.putMessage(me.userId, message);
-    await this.touchConversation(conversationId, message, conversationId.startsWith("site:") ? "site" : "direct", input.otherUserId ?? null, false);
-    const entry: OutboxEntry = { id, conversationId, kind, body: input.body ?? null, fileName: input.fileName ?? null, mimeType: input.blob?.type ?? null, durationMs: input.durationMs ?? null, proofCode: input.proofCode ?? null, createdAt, tries: 0 };
+    const group = conversationId.startsWith("site:") ? null : await this.groupOf(conversationId);
+    await this.touchConversation(conversationId, message, conversationId.startsWith("site:") ? "site" : group ? "group" : "direct", input.otherUserId ?? null, false, group?.title ?? null);
+    const entry: OutboxEntry = { id, conversationId, kind, body: input.body ?? null, fileName: input.fileName ?? null, mimeType: input.blob?.type ?? null, durationMs: input.durationMs ?? null, proofCode: input.proofCode ?? null, createdAt, tries: 0, replyTo: message.replyTo, replySnippet: message.replySnippet };
     await LocalStore.putOutbox(me.userId, entry);
     this.emit("message", message);
     void this.flush();
@@ -367,17 +372,84 @@ class Engine {
     const body = TEXT_KINDS.has(entry.kind)
       ? entry.body
       : JSON.stringify({ caption: entry.body ?? undefined, fileName: entry.fileName ?? undefined, durationMs: entry.durationMs ?? undefined, proofCode: entry.proofCode ?? undefined });
-    const { error } = await this.supabase.from("connect_switchboard").insert({
+    const row: Record<string, unknown> = {
       id: itemId, organization_id: me.orgId, from_user: me.userId,
       conversation_id: site ? null : entry.conversationId, site_id: site,
       type: entry.kind, body, client_id: entry.id, attachment_path: path, mime_type: entry.mimeType, size_bytes: blob?.size ?? null,
-    });
+    };
+    let { error } = await this.supabase.from("connect_switchboard").insert(entry.replyTo ? { ...row, reply_to: entry.replyTo, reply_snippet: entry.replySnippet ?? null } : row);
+    // a server without the reply columns (20261116190000) still gets the message - without its quote
+    if (error && entry.replyTo && /reply_(to|snippet)/i.test(error.message)) ({ error } = await this.supabase.from("connect_switchboard").insert(row));
     if (error && !/duplicate/i.test(error.message)) return false;
     if (blob && path) {
       const { error: uploadError } = await this.supabase.storage.from("connect-temp").upload(path, blob, { contentType: blob.type || "application/octet-stream", upsert: true });
       if (uploadError) return false;
     }
     return true;
+  }
+
+  // ---- groups (owner 2026-11-15 / 16) -------------------------------------------------------------------------
+  private groups = new Map<string, ConnectGroup>();
+  private groupsLoadedAt = 0;
+
+  /** my groups (name, members, roles) - read again at most every 10 s, or when a group is unknown */
+  async loadGroups(force = false): Promise<ConnectGroup[]> {
+    if (!force && Date.now() - this.groupsLoadedAt < 10_000) return [...this.groups.values()];
+    const { data, error } = await this.supabase.rpc("list_prosm_time_connect_groups");
+    if (error || !Array.isArray(data)) return [...this.groups.values()];
+    this.groups = new Map((data as ConnectGroup[]).map((g) => [g.id, g]));
+    this.groupsLoadedAt = Date.now();
+    return [...this.groups.values()];
+  }
+
+  async groupOf(conversationId: string): Promise<ConnectGroup | null> {
+    if (!this.groups.has(conversationId)) await this.loadGroups();
+    return this.groups.get(conversationId) ?? null;
+  }
+
+  groupNow(conversationId: string): ConnectGroup | null {
+    return this.groups.get(conversationId) ?? null;
+  }
+
+  async createGroup(title: string, members: string[]): Promise<string | null> {
+    const me = this.me;
+    if (!me) return null;
+    const { data, error } = await this.supabase.rpc("prosm_time_connect_create_group", { p_title: title, p_members: members });
+    if (error || !data) return null;
+    const id = String(data);
+    await this.loadGroups(true);
+    await LocalStore.putConversation(me.userId, { id, kind: "group", otherUserId: null, title, lastAt: new Date().toISOString(), lastPreview: "", unread: 0 });
+    this.emit("conversations");
+    return id;
+  }
+
+  async updateGroup(conversationId: string, change: { title?: string | null; add?: string[] | null; remove?: string[] | null }): Promise<boolean> {
+    const { error } = await this.supabase.rpc("prosm_time_connect_update_group", { p_conversation: conversationId, p_title: change.title ?? null, p_add: change.add ?? null, p_remove: change.remove ?? null });
+    if (error) return false;
+    await this.loadGroups(true);
+    const me = this.me;
+    const current = me ? await LocalStore.getConversation(me.userId, conversationId) : null;
+    if (me && current && change.title) await LocalStore.putConversation(me.userId, { ...current, title: change.title });
+    this.emit("conversations");
+    return true;
+  }
+
+  async leaveGroup(conversationId: string): Promise<boolean> {
+    const { error } = await this.supabase.rpc("prosm_time_connect_leave_group", { p_conversation: conversationId });
+    if (error) return false;
+    await this.loadGroups(true);
+    await this.deleteConversation(conversationId);
+    return true;
+  }
+
+  /** owner 2026-11-16: "typing" - at most every 3 s per conversation; never stored */
+  private typingSentAt = new Map<string, number>();
+  typing(conversationId: string) {
+    if (!this.me || conversationId.startsWith("site:")) return;
+    const last = this.typingSentAt.get(conversationId) ?? 0;
+    if (Date.now() - last < 3000) return;
+    this.typingSentAt.set(conversationId, Date.now());
+    void this.supabase.rpc("prosm_time_connect_typing", { p_conversation: conversationId }).then(() => undefined, () => undefined);
   }
 
   /** owner 2026-11-16: delete messages for me (this device) - the other side keeps theirs. */
@@ -488,6 +560,7 @@ function mapRow(row: Record<string, unknown>): ConnectItem {
     type: row.type as ConnectItem["type"], body: (row.body as string | null) ?? null, refId: (row.ref_id as string | null) ?? null,
     clientId: (row.client_id as string | null) ?? null, attachmentPath: (row.attachment_path as string | null) ?? null,
     mimeType: (row.mime_type as string | null) ?? null, sizeBytes: row.size_bytes == null ? null : Number(row.size_bytes), createdAt: String(row.created_at),
+    replyTo: (row.reply_to as string | null) ?? null, replySnippet: (row.reply_snippet as string | null) ?? null,
   };
 }
 

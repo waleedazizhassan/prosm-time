@@ -146,7 +146,10 @@
     "deletedMessage": "Diese Nachricht wurde gelöscht",
     "youDeleted": "Du hast diese Nachricht gelöscht",
     "deleteForEveryoneFailed": "Nicht für alle gelöscht. Versuch es noch einmal.",
-    "cancel": "Abbrechen"
+    "cancel": "Abbrechen",
+    "reply": "Antworten",
+    "cancelReply": "Antwort abbrechen",
+    "typing": "{{name}} schreibt…"
   },
   "info": {
     "inSince": "Anwesend seit {{time}}",
@@ -235,5 +238,22 @@
     "clearConfirm": "Alle Anrufe aus deiner Liste entfernen? Der Eintrag der Organisation bleibt.",
     "deleteOne": "Aus Liste entfernen",
     "deleteOneConfirm": "Diesen Anruf aus deiner Liste entfernen?"
+  },
+  "group": {
+    "new": "Neue Gruppe",
+    "name": "Gruppenname",
+    "pick": "Mitglieder wählen ({{count}} gewählt)",
+    "create": "Gruppe erstellen",
+    "createFailed": "Die Gruppe wurde nicht erstellt. Versuch es noch einmal.",
+    "members": "Mitglieder ({{count}})",
+    "admin": "Admin",
+    "you": "Du",
+    "remove": "Aus der Gruppe entfernen",
+    "add": "Hinzufügen",
+    "choosePerson": "Person wählen",
+    "leave": "Gruppe verlassen",
+    "leaveConfirm": "Gruppe verlassen? Der Chat wird von diesem Gerät entfernt.",
+    "audioCall": "Gruppen-Sprachanruf",
+    "videoCall": "Gruppen-Videoanruf"
   }
 }

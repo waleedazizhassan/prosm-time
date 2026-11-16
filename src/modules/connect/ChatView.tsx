@@ -1,6 +1,6 @@
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ArrowRight, Camera, Check, CheckCheck, Clock3, Download, FileText, Image as ImageIcon, Mic, Phone, PhoneMissed, Plus, Radio, Send, Trash2, Users, Video } from "lucide-react";
+import { ArrowRight, Camera, Check, CheckCheck, Clock3, Download, FileText, Image as ImageIcon, Mic, Phone, PhoneMissed, Plus, Radio, Reply, Send, Trash2, UserMinus, UserPlus, Users, Video, X, LogOut } from "lucide-react";
 
 import type { ConnectPerson } from "../../core/repositories/ConnectRepository";
 import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
@@ -9,7 +9,7 @@ import Avatar from "../../components/common/Avatar";
 import useConfirm from "../../components/common/useConfirm";
 import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
-import { ConnectEngine, DELETED } from "./engine/ConnectEngine";
+import { ConnectEngine, DELETED, type ConnectGroup } from "./engine/ConnectEngine";
 import type { LocalMessage } from "./engine/localStore";
 import { VoiceRecorder, compressImage, formatBytes, formatDuration } from "./engine/media";
 import { useConnectContext } from "./ConnectProvider";
@@ -37,6 +37,23 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
 }) {
   const { t, i18n } = useTranslation("connect");
   const connect = useConnectContext();
+  // owner 2026-11-15 / 16: a group conversation - its name, members, a group call (a small meeting), managing members
+  const [group, setGroup] = useState<ConnectGroup | null>(ConnectEngine.groupNow(conversationId));
+  const isGroup = Boolean(group);
+  const [membersOpen, setMembersOpen] = useState(false);
+  const [adding, setAdding] = useState("");
+  useEffect(() => {
+    let alive = true;
+    void ConnectEngine.groupOf(conversationId).then((g) => { if (alive) setGroup(g); });
+    const off = ConnectEngine.on("conversations", () => setGroup(ConnectEngine.groupNow(conversationId)));
+    return () => { alive = false; off(); };
+  }, [conversationId]);
+  const me = connect?.meId ?? null;
+  const amAdmin = Boolean(group?.members.some((m) => m.userId === me && m.role === "admin"));
+  const groupCall = (media: "audio" | "video") => {
+    if (!group) return;
+    void connect?.startMeeting(media, group.members.map((m) => m.userId).filter((id) => id !== me), group.title);
+  };
   const [messages, setMessages] = useState<LocalMessage[]>([]);
   const [text, setText] = useState("");
   const [recording, setRecording] = useState<"voice" | "ptt" | null>(null);
@@ -137,12 +154,32 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
   };
 
   const kindForSite = siteId ? "site_broadcast" : "message";
+  // owner 2026-11-16: reply to a message (a quote above the answer)
+  const [replyTo, setReplyTo] = useState<LocalMessage | null>(null);
+  const snippetOf = (m: LocalMessage) => (m.body && m.body !== DELETED ? m.body : t(`preview.${m.kind}`, { defaultValue: m.fileName ?? "" })).slice(0, 200);
   const sendText = async () => {
     const body = text.trim();
     if (!body) return;
     setText("");
-    await ConnectEngine.send(conversationId, kindForSite, { body, otherUserId: person?.id ?? null });
+    const quoted = replyTo;
+    setReplyTo(null);
+    await ConnectEngine.send(conversationId, kindForSite, { body, otherUserId: person?.id ?? null, replyTo: quoted?.id ?? null, replySnippet: quoted ? snippetOf(quoted) : null });
   };
+
+  // owner 2026-11-16: "typing" - who is writing in this conversation right now
+  const [typingFrom, setTypingFrom] = useState<string | null>(null);
+  useEffect(() => {
+    let timer: number | null = null;
+    const off = ConnectEngine.on("typing", (payload) => {
+      const p = payload as { from?: string; conversationId?: string };
+      if (p?.conversationId !== conversationId || !p.from) return;
+      setTypingFrom(p.from);
+      if (timer !== null) window.clearTimeout(timer);
+      timer = window.setTimeout(() => setTypingFrom(null), 4500);
+    });
+    const offMessage = ConnectEngine.on("message", (m) => { if ((m as LocalMessage).fromUser === typingFrom) setTypingFrom(null); });
+    return () => { off(); offMessage(); if (timer !== null) window.clearTimeout(timer); };
+  }, [conversationId, typingFrom]);
 
   const sendFile = async (picked: File | null) => {
     if (!picked) return;
@@ -255,9 +292,15 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
     }
     return (
       <div key={m.id} className={m.mine ? `${styles.bubble} ${styles.out}` : `${styles.bubble} ${styles.in}`}>
-        {siteId && !m.mine ? <b className={styles.sender}>{connect?.people.get(m.fromUser)?.fullName ?? ""}</b> : null}
+        {(siteId || isGroup) && !m.mine ? <b className={styles.sender}>{connect?.people.get(m.fromUser)?.fullName ?? ""}</b> : null}
+        {m.replyTo ? <span className={styles.quote}>{m.replySnippet ?? ""}</span> : null}
         {content}
         <span className={styles.time}>{formatTimeOnly(m.createdAt, i18n.language)} {tick(m)}</span>
+        {m.body !== DELETED ? (
+          <button type="button" className={styles.replyOne} aria-label={t("chat.reply")} title={t("chat.reply")} onClick={() => setReplyTo(m)}>
+            <Reply size={13} aria-hidden="true" />
+          </button>
+        ) : null}
         <button type="button" className={styles.deleteOne} aria-label={t("chat.deleteMessage")} title={t("chat.deleteMessage")} onClick={() => void deleteMessage(m)}>
           <Trash2 size={13} aria-hidden="true" />
         </button>
@@ -276,6 +319,13 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
             <small className={person ? styles[`sub_${person.presence}`] : undefined}>{person ? (person.presence === "out" ? t("presence.out") : person.currentSiteName ? t("presence.atSite", { site: person.currentSiteName }) : t(`presence.${person.presence}`)) : t("chat.siteSubtitle")}</small>
           </span>
         </span>
+        {group && canCall ? (
+          <>
+            <GlassButton label={t("group.audioCall")} size="small" onClick={() => groupCall("audio")}><Phone size={16} /></GlassButton>
+            <GlassButton label={t("group.videoCall")} tone="primary" size="small" onClick={() => groupCall("video")}><Video size={16} /></GlassButton>
+          </>
+        ) : null}
+        {group ? <GlassButton label={t("group.members", { count: group.members.length })} size="small" onClick={() => setMembersOpen(true)}><Users size={16} /></GlassButton> : null}
         {person && canCall ? (
           <>
             <GlassButton label={t("actions.audioCall")} size="small" onClick={() => void connect?.startCall(person.id, "audio")}><Phone size={16} /></GlassButton>
@@ -285,6 +335,33 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
         {messages.length > 0 ? <GlassButton label={t("chat.deleteChat")} size="small" onClick={() => void deleteConversation()}><Trash2 size={16} /></GlassButton> : null}
       </header>
       {confirmDialog}
+      {group ? (
+        <Modal isOpen={membersOpen} onClose={() => setMembersOpen(false)} title={group.title} size="sm"
+          footer={<Button variant="danger" onClick={() => void (async () => { if (await confirm(t("group.leaveConfirm"))) { setMembersOpen(false); if (await ConnectEngine.leaveGroup(conversationId)) onBack?.(); } })()}><LogOut size={14} /> {t("group.leave")}</Button>}>
+          <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: 6 }}>
+            {group.members.map((m) => (
+              <li key={m.userId} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <Avatar name={connect?.people.get(m.userId)?.fullName ?? ""} url={connect?.people.get(m.userId)?.avatarUrl ?? null} size="sm" />
+                <span style={{ flex: 1 }}>{m.userId === me ? t("group.you") : connect?.people.get(m.userId)?.fullName ?? ""}{m.role === "admin" ? ` · ${t("group.admin")}` : ""}</span>
+                {amAdmin && m.userId !== me ? (
+                  <button type="button" aria-label={t("group.remove")} title={t("group.remove")} style={{ border: 0, background: "transparent", color: "var(--text-secondary)", cursor: "pointer" }}
+                    onClick={() => void ConnectEngine.updateGroup(conversationId, { remove: [m.userId] })}><UserMinus size={16} /></button>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+          {amAdmin ? (
+            <div style={{ display: "flex", gap: 8, marginTop: 12, alignItems: "center" }}>
+              <select aria-label={t("group.add")} value={adding} onChange={(e) => setAdding(e.target.value)}
+                style={{ flex: 1, minHeight: 34, borderRadius: 8, border: "1px solid var(--border-light)", background: "var(--surface-card)", color: "var(--text-primary)", padding: "0 8px" }}>
+                <option value="">{t("group.choosePerson")}</option>
+                {[...(connect?.people.values() ?? [])].filter((p) => p.isActive && !group.members.some((m) => m.userId === p.id)).map((p) => <option key={p.id} value={p.id}>{p.fullName}</option>)}
+              </select>
+              <Button size="sm" disabled={!adding} onClick={() => void ConnectEngine.updateGroup(conversationId, { add: [adding] }).then(() => setAdding(""))}><UserPlus size={14} /> {t("group.add")}</Button>
+            </div>
+          ) : null}
+        </Modal>
+      ) : null}
       <Modal isOpen={Boolean(deleting)} onClose={() => setDeleting(null)} title={t("chat.deleteMessage")} size="sm"
         footer={deleting ? (
           <>
@@ -313,12 +390,20 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
       {error ? <p className={styles.error} role="status">{error}</p> : null}
       {recording ? <div className={styles.recording}>{t(recording === "ptt" ? "chat.talking" : "chat.recording")}</div> : null}
 
+      {typingFrom ? <p className={styles.typing} aria-live="polite">{t("chat.typing", { name: connect?.people.get(typingFrom)?.fullName ?? "" })}</p> : null}
+      {replyTo ? (
+        <div className={styles.replyBar}>
+          <Reply size={14} aria-hidden="true" />
+          <span>{snippetOf(replyTo)}</span>
+          <button type="button" aria-label={t("chat.cancelReply")} onClick={() => setReplyTo(null)}><X size={14} /></button>
+        </div>
+      ) : null}
       <footer className={styles.composer}>
         <input ref={file} type="file" hidden onChange={(e) => { void sendFile(e.target.files?.[0] ?? null); e.target.value = ""; }} />
         <GlassButton label={t("chat.attach")} size="small" onClick={() => file.current?.click()}><Plus size={18} /></GlassButton>
         {canPhoto ? <GlassButton label={t("chat.verifiedCamera")} size="small" onClick={() => setCamera(true)}><Camera size={18} /></GlassButton> : null}
         <form className={styles.field} onSubmit={(e) => { e.preventDefault(); void sendText(); }}>
-          <input value={text} onChange={(e) => setText(e.target.value)} placeholder={t("chat.placeholder")} aria-label={t("chat.placeholder")} maxLength={4000} />
+          <input value={text} onChange={(e) => { setText(e.target.value); if (e.target.value) ConnectEngine.typing(conversationId); }} placeholder={t("chat.placeholder")} aria-label={t("chat.placeholder")} maxLength={4000} />
         </form>
         {text.trim() ? (
           <GlassButton label={t("chat.send")} tone="primary" onClick={() => void sendText()}><Send size={18} /></GlassButton>

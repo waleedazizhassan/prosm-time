@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { HardDrive, MessageCircle, Phone, PhoneCall, PhoneIncoming, PhoneMissed, PhoneOutgoing, Radio, Search, Trash2, Users, Video, Volume2 } from "lucide-react";
+import { HardDrive, MessageCircle, Phone, PhoneCall, PhoneIncoming, PhoneMissed, PhoneOutgoing, Radio, Search, Trash2, UserPlus, Users, Video, Volume2 } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import SiteRepository, { type Site } from "../../core/repositories/SiteRepository";
@@ -11,6 +11,9 @@ import humanizeBackendError from "../../core/utils/humanizeBackendError";
 import Avatar from "../../components/common/Avatar";
 import EmptyState from "../../components/common/EmptyState";
 import useConfirm from "../../components/common/useConfirm";
+import Modal from "../../components/common/Modal";
+import Button from "../../components/common/Button";
+import Input from "../../components/common/Input";
 import { ConnectEngine } from "./engine/ConnectEngine";
 import type { LocalConversation } from "./engine/localStore";
 import { useConnectContext } from "./ConnectProvider";
@@ -50,6 +53,21 @@ export default function ConnectPage() {
   const [meetingTitle, setMeetingTitle] = useState("");
   // owner 2026-11-16: remove calls from MY log (the organisation's record stays)
   const [confirm, confirmDialog] = useConfirm();
+  // owner 2026-11-15 / 16: a new group - a name and its members (the creator becomes its admin)
+  const [groupOpen, setGroupOpen] = useState(false);
+  const [groupTitle, setGroupTitle] = useState("");
+  const [groupMembers, setGroupMembers] = useState<string[]>([]);
+  const [groupBusy, setGroupBusy] = useState(false);
+  const createGroup = async () => {
+    setGroupBusy(true);
+    const id = await ConnectEngine.createGroup(groupTitle.trim(), groupMembers);
+    setGroupBusy(false);
+    if (!id) { setError(t("group.createFailed")); return; }
+    setGroupOpen(false);
+    setGroupTitle("");
+    setGroupMembers([]);
+    setParams({ c: id });
+  };
   const hideCalls = async (ids: string[] | null) => {
     if (!(await confirm(t(ids ? "callLog.deleteOneConfirm" : "callLog.clearConfirm")))) return;
     if (await ConnectEngine.hideCalls(ids)) setCalls((list) => (ids ? (list ?? []).filter((c) => !ids.includes(c.id)) : []));
@@ -170,6 +188,7 @@ export default function ConnectPage() {
         <h1 className={styles.title}>{t(`tabs.${tab}`)}</h1>
         <span className={styles.barActions}>
           {features?.meetings ? <GlassButton label={t("meeting.newTitle")} size="small" onClick={() => navigate("/connect/meetings")}><Users size={16} /></GlassButton> : null}
+          {features?.chat !== false ? <GlassButton label={t("group.new")} size="small" onClick={() => setGroupOpen(true)}><UserPlus size={16} /></GlassButton> : null}
           <GlassButton label={t("sound.title")} size="small" onClick={() => setSounds(true)}><Volume2 size={16} /></GlassButton>
           <GlassButton label={t("storage.title")} size="small" onClick={() => setStorage(true)}><HardDrive size={16} /></GlassButton>
         </span>
@@ -222,7 +241,7 @@ export default function ConnectPage() {
                     <li key={row.c.id} className={styles.personRow}>
                       <button type="button" className={selected === row.c.id ? `${styles.row} ${styles.rowOn}` : styles.row} onClick={() => setParams({ c: row.c.id })}>
                         <span className={styles.avatar}>
-                          {p ? <Avatar name={p.fullName} url={p.avatarUrl} size="md" /> : <span className={styles.siteAvatar}><Radio size={16} /></span>}
+                          {p ? <Avatar name={p.fullName} url={p.avatarUrl} size="md" /> : <span className={styles.siteAvatar}>{row.c.kind === "group" ? <Users size={16} /> : <Radio size={16} />}</span>}
                           {p ? <i className={`${styles.dot} ${styles[`dot_${p.presence}`]}`} aria-hidden="true" /> : null}
                         </span>
                         <span className={styles.main}>
@@ -358,6 +377,29 @@ export default function ConnectPage() {
         </aside>
       ) : null}
       {confirmDialog}
+      <Modal isOpen={groupOpen} onClose={() => setGroupOpen(false)} title={t("group.new")} size="md"
+        footer={(
+          <>
+            <Button variant="ghost" onClick={() => setGroupOpen(false)}>{t("chat.cancel")}</Button>
+            <Button loading={groupBusy} disabled={!groupTitle.trim() || groupMembers.length === 0} onClick={() => void createGroup()}>{t("group.create")}</Button>
+          </>
+        )}>
+        <Input label={t("group.name")} name="groupTitle" value={groupTitle} onChange={(e) => setGroupTitle(e.target.value.slice(0, 120))} />
+        <p className={styles.hint}>{t("group.pick", { count: groupMembers.length })}</p>
+        <div className={styles.pickGrid} role="group" aria-label={t("group.pick", { count: groupMembers.length })}>
+          {[...people.values()].filter(listable).map((p) => {
+            const checked = groupMembers.includes(p.id);
+            return (
+              <button key={p.id} type="button" aria-pressed={checked} className={checked ? `${styles.pick} ${styles.pickOn}` : styles.pick}
+                disabled={!checked && groupMembers.length >= 49}
+                onClick={() => setGroupMembers((list) => (checked ? list.filter((x) => x !== p.id) : [...list, p.id]))}>
+                <span className={styles.pickAvatar}><Avatar name={p.fullName} url={p.avatarUrl} size="md" /></span>
+                <span className={styles.pickName}>{p.fullName}</span>
+              </button>
+            );
+          })}
+        </div>
+      </Modal>
       {storage ? <StoragePanel onClose={() => setStorage(false)} /> : null}
       {sounds ? <SoundSettings onClose={() => setSounds(false)} /> : null}
     </div>

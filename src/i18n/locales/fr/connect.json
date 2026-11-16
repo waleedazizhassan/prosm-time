@@ -146,7 +146,10 @@
     "deletedMessage": "Ce message a été supprimé",
     "youDeleted": "Vous avez supprimé ce message",
     "deleteForEveryoneFailed": "Non supprimé pour tous. Réessayez.",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "reply": "Répondre",
+    "cancelReply": "Annuler la réponse",
+    "typing": "{{name}} écrit…"
   },
   "info": {
     "inSince": "Présent depuis {{time}}",
@@ -235,5 +238,22 @@
     "clearConfirm": "Retirer tous les appels de votre journal ? L'historique de l'organisation reste.",
     "deleteOne": "Retirer du journal",
     "deleteOneConfirm": "Retirer cet appel de votre journal ?"
+  },
+  "group": {
+    "new": "Nouveau groupe",
+    "name": "Nom du groupe",
+    "pick": "Choisir les membres ({{count}} choisis)",
+    "create": "Créer le groupe",
+    "createFailed": "Le groupe n’a pas été créé. Réessayez.",
+    "members": "Membres ({{count}})",
+    "admin": "admin",
+    "you": "Vous",
+    "remove": "Retirer du groupe",
+    "add": "Ajouter",
+    "choosePerson": "Choisir une personne",
+    "leave": "Quitter le groupe",
+    "leaveConfirm": "Quitter le groupe ? La discussion quitte cet appareil.",
+    "audioCall": "Appel vocal du groupe",
+    "videoCall": "Appel vidéo du groupe"
   }
 }

@@ -146,7 +146,10 @@
     "deletedMessage": "Questo messaggio è stato eliminato",
     "youDeleted": "Hai eliminato questo messaggio",
     "deleteForEveryoneFailed": "Non eliminato per tutti. Riprova.",
-    "cancel": "Annulla"
+    "cancel": "Annulla",
+    "reply": "Rispondi",
+    "cancelReply": "Annulla risposta",
+    "typing": "{{name}} sta scrivendo…"
   },
   "info": {
     "inSince": "Presente dalle {{time}}",
@@ -235,5 +238,22 @@
     "clearConfirm": "Togliere tutte le chiamate dal tuo registro? Il registro dell'organizzazione resta.",
     "deleteOne": "Togli dal registro",
     "deleteOneConfirm": "Togliere questa chiamata dal tuo registro?"
+  },
+  "group": {
+    "new": "Nuovo gruppo",
+    "name": "Nome del gruppo",
+    "pick": "Scegli i membri ({{count}} scelti)",
+    "create": "Crea gruppo",
+    "createFailed": "Il gruppo non è stato creato. Riprova.",
+    "members": "Membri ({{count}})",
+    "admin": "admin",
+    "you": "Tu",
+    "remove": "Togli dal gruppo",
+    "add": "Aggiungi",
+    "choosePerson": "Scegli una persona",
+    "leave": "Esci dal gruppo",
+    "leaveConfirm": "Uscire dal gruppo? La chat lascia questo dispositivo.",
+    "audioCall": "Chiamata vocale di gruppo",
+    "videoCall": "Videochiamata di gruppo"
   }
 }

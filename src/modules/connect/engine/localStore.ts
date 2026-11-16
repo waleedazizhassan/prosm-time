@@ -25,6 +25,9 @@ export interface LocalMessage {
   proofCode?: string | null;
   refId?: string | null;
   hasBlob?: boolean;
+  /** owner 2026-11-16: the message this one answers (its client id) and a short snippet of it */
+  replyTo?: string | null;
+  replySnippet?: string | null;
 }
 
 export interface LocalConversation {
@@ -61,6 +64,8 @@ export interface OutboxEntry {
   proofCode: string | null;
   createdAt: string;
   tries: number;
+  replyTo?: string | null;
+  replySnippet?: string | null;
 }
 
 const VERSION = 1;
@@ -116,8 +121,8 @@ async function openJson<T>(stored: { sealed?: Sealed | null; plain?: string | nu
 
 export const LocalStore = {
   async putMessage(userId: string, message: LocalMessage): Promise<void> {
-    const { body, fileName, mimeType, durationMs, proofCode, refId, hasBlob, ...meta } = message;
-    const secret = await sealJson({ body, fileName, mimeType, durationMs, proofCode, refId, hasBlob });
+    const { body, fileName, mimeType, durationMs, proofCode, refId, hasBlob, replySnippet, ...meta } = message;
+    const secret = await sealJson({ body, fileName, mimeType, durationMs, proofCode, refId, hasBlob, replySnippet });
     const stored: StoredMessage = { ...meta, ...secret };
     await tx(userId, "messages", "readwrite", (s) => s.put(stored));
   },

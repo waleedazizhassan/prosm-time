@@ -146,7 +146,10 @@
     "deletedMessage": "此消息已被删除",
     "youDeleted": "你删除了此消息",
     "deleteForEveryoneFailed": "未能为所有人删除，请重试。",
-    "cancel": "取消"
+    "cancel": "取消",
+    "reply": "回复",
+    "cancelReply": "取消回复",
+    "typing": "{{name}} 正在输入…"
   },
   "info": {
     "inSince": "自 {{time}} 起在岗",
@@ -235,5 +238,22 @@
     "clearConfirm": "从你的记录中清除所有通话？组织的记录仍会保留。",
     "deleteOne": "从记录中移除",
     "deleteOneConfirm": "从你的记录中移除这次通话？"
+  },
+  "group": {
+    "new": "新建群组",
+    "name": "群组名称",
+    "pick": "选择成员（已选 {{count}}）",
+    "create": "创建群组",
+    "createFailed": "群组未创建，请重试。",
+    "members": "成员（{{count}}）",
+    "admin": "管理员",
+    "you": "你",
+    "remove": "移出群组",
+    "add": "添加",
+    "choosePerson": "选择一个人",
+    "leave": "退出群组",
+    "leaveConfirm": "退出群组？对话将从此设备删除。",
+    "audioCall": "群组语音通话",
+    "videoCall": "群组视频通话"
   }
 }
