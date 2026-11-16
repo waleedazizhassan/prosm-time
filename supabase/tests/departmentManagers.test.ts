@@ -35,8 +35,9 @@ describe("a manager for each department", () => {
   });
 
   it("someone without departments.manage cannot; a person of another organisation cannot be chosen", async () => {
-    expect((await set(worker, finance, worker.userId)).error).toMatch(/NOT ALLOWED/);
-    expect((await set(org.owner, finance, stranger.userId)).error).toMatch(/ACTIVE MEMBER/);
+    expect((await set(worker, finance, worker.userId)).error).toMatch(/NOT ALLOWED|APPOINT YOURSELF/);
+    expect((await set(worker, finance, rana.userId)).error).toMatch(/NOT ALLOWED/);
+    expect((await set(org.owner, finance, stranger.userId)).error).toMatch(/ACTIVE MEMBER|MANAGER ROLE/);
   });
 
   it("another organisation sees nothing of it; clearing removes them from the list", async () => {

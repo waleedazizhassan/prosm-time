@@ -382,7 +382,7 @@
     "phoneRequired": "Saisissez le numéro de mobile.",
     "ownerAccountProtected": "Le compte du propriétaire est protégé.",
     "ownerChangesOnlyByTransfer": "Le propriétaire ne change que par un transfert de propriété.",
-    "payPeriodLocked": "Cette période de paie est verrouillée. Rouvrez d'abord la paie ou renvoyez la feuille de temps.",
+    "payPeriodLocked": "Cette période de paie est verrouillée et ne peut pas changer.",
     "stepUpRequired": "Confirmez votre identité avant cette action.",
     "mfaRequired": "Cette action nécessite la connexion en deux étapes.",
     "correctionAlreadyPending": "Une correction est déjà en attente pour cela.",
@@ -397,7 +397,12 @@
     "chooseActiveMember": "Choisissez un membre actif de l'organisation.",
     "meetingEnded": "Cette réunion est terminée.",
     "meetingFull": "Cette réunion est complète.",
-    "waitingForHr": "En attente des RH"
+    "waitingForHr": "En attente des RH",
+    "ownPermissions": "Vous ne pouvez pas modifier vos propres droits. Seul le propriétaire le peut.",
+    "appointYourself": "Vous ne pouvez pas vous nommer responsable de service.",
+    "departmentManagerRole": "Un responsable de service doit avoir le rôle Responsable. Changez d’abord son rôle.",
+    "ownPay": "Vous ne pouvez pas modifier votre propre paie.",
+    "administrationHeld": "Quelqu’un hors de votre autorité le détient. Seul le propriétaire peut le transférer."
   },
   "pageLoad": {
     "title": "Cette page a besoin d'une connexion",

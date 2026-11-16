@@ -382,7 +382,7 @@
     "phoneRequired": "Geben Sie die Mobilnummer ein.",
     "ownerAccountProtected": "Das Konto des Inhabers ist geschützt.",
     "ownerChangesOnlyByTransfer": "Der Inhaber wechselt nur durch eine Eigentumsübertragung.",
-    "payPeriodLocked": "Dieser Abrechnungszeitraum ist gesperrt. Öffnen Sie zuerst die Abrechnung erneut oder geben Sie den Stundenzettel zurück.",
+    "payPeriodLocked": "Dieser Lohnzeitraum ist gesperrt und kann nicht geändert werden.",
     "stepUpRequired": "Bestätigen Sie vor dieser Aktion, dass Sie es sind.",
     "mfaRequired": "Diese Aktion erfordert die Anmeldung in zwei Schritten.",
     "correctionAlreadyPending": "Dafür ist bereits eine Korrektur offen.",
@@ -397,7 +397,12 @@
     "chooseActiveMember": "Wählen Sie ein aktives Mitglied der Organisation.",
     "meetingEnded": "Diese Besprechung ist beendet.",
     "meetingFull": "Diese Besprechung ist voll.",
-    "waitingForHr": "Wartet auf HR"
+    "waitingForHr": "Wartet auf HR",
+    "ownPermissions": "Du kannst deine eigenen Rechte nicht ändern. Nur der Inhaber kann das.",
+    "appointYourself": "Du kannst dich nicht selbst zur Abteilungsleitung machen.",
+    "departmentManagerRole": "Eine Abteilungsleitung braucht die Rolle Leitung. Ändere zuerst die Rolle.",
+    "ownPay": "Du kannst deinen eigenen Lohn nicht ändern.",
+    "administrationHeld": "Das hält jemand außerhalb deiner Befugnis. Nur der Inhaber kann es übertragen."
   },
   "pageLoad": {
     "title": "Diese Seite braucht eine Verbindung",

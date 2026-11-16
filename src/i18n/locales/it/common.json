@@ -382,7 +382,7 @@
     "phoneRequired": "Scrivi il numero di cellulare.",
     "ownerAccountProtected": "L'account del titolare è protetto.",
     "ownerChangesOnlyByTransfer": "Il titolare cambia solo con un trasferimento di proprietà.",
-    "payPeriodLocked": "Questo periodo di paga è bloccato. Riapri prima la busta paga o restituisci il foglio ore.",
+    "payPeriodLocked": "Questo periodo paghe è bloccato e non può cambiare.",
     "stepUpRequired": "Conferma la tua identità prima di questa azione.",
     "mfaRequired": "Questa azione richiede l'accesso in due passaggi.",
     "correctionAlreadyPending": "C'è già una correzione in sospeso per questo.",
@@ -397,7 +397,12 @@
     "chooseActiveMember": "Scegli un membro attivo dell'organizzazione.",
     "meetingEnded": "Questa riunione è terminata.",
     "meetingFull": "Questa riunione è piena.",
-    "waitingForHr": "In attesa delle risorse umane"
+    "waitingForHr": "In attesa delle risorse umane",
+    "ownPermissions": "Non puoi cambiare i tuoi permessi. Solo il proprietario può farlo.",
+    "appointYourself": "Non puoi nominarti responsabile di reparto.",
+    "departmentManagerRole": "Un responsabile di reparto deve avere il ruolo Responsabile. Cambia prima il ruolo.",
+    "ownPay": "Non puoi modificare la tua paga.",
+    "administrationHeld": "Lo detiene qualcuno fuori dalla tua autorità. Solo il proprietario può spostarlo."
   },
   "pageLoad": {
     "title": "Questa pagina ha bisogno di una connessione",

@@ -382,7 +382,7 @@
     "phoneRequired": "Escreva o número de telemóvel.",
     "ownerAccountProtected": "A conta do proprietário está protegida.",
     "ownerChangesOnlyByTransfer": "O proprietário só muda por uma transferência de propriedade.",
-    "payPeriodLocked": "Este período de pagamento está bloqueado. Reabra a folha de pagamento ou devolva a folha de horas primeiro.",
+    "payPeriodLocked": "Este período de folha está fechado e não pode mudar.",
     "stepUpRequired": "Confirme que é você antes desta ação.",
     "mfaRequired": "Esta ação exige o login em duas etapas.",
     "correctionAlreadyPending": "Já há uma correção pendente para isto.",
@@ -397,7 +397,12 @@
     "chooseActiveMember": "Escolha um membro ativo da organização.",
     "meetingEnded": "Esta reunião terminou.",
     "meetingFull": "Esta reunião está cheia.",
-    "waitingForHr": "Aguardando o RH"
+    "waitingForHr": "Aguardando o RH",
+    "ownPermissions": "Você não pode mudar suas próprias permissões. Só o proprietário pode.",
+    "appointYourself": "Você não pode se nomear gestor de departamento.",
+    "departmentManagerRole": "Um gestor de departamento precisa ter o cargo Gestor. Mude o cargo primeiro.",
+    "ownPay": "Você não pode mudar o próprio salário.",
+    "administrationHeld": "Alguém fora da sua autoridade tem isso. Só o proprietário pode mover."
   },
   "pageLoad": {
     "title": "Esta página precisa de conexão",

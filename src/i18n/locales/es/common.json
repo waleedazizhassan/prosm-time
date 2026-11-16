@@ -382,7 +382,7 @@
     "phoneRequired": "Escriba el número de móvil.",
     "ownerAccountProtected": "La cuenta del propietario está protegida.",
     "ownerChangesOnlyByTransfer": "El propietario solo cambia mediante una transferencia de propiedad.",
-    "payPeriodLocked": "Este periodo de pago está cerrado. Reabre la nómina o devuelve la hoja de horas primero.",
+    "payPeriodLocked": "Este periodo de nómina está cerrado y no se puede cambiar.",
     "stepUpRequired": "Confirma que eres tú antes de esta acción.",
     "mfaRequired": "Esta acción requiere el inicio de sesión en dos pasos.",
     "correctionAlreadyPending": "Ya hay una corrección pendiente para esto.",
@@ -397,7 +397,12 @@
     "chooseActiveMember": "Elige un miembro activo de la organización.",
     "meetingEnded": "Esta reunión ha terminado.",
     "meetingFull": "Esta reunión está llena.",
-    "waitingForHr": "Esperando a RR. HH."
+    "waitingForHr": "Esperando a RR. HH.",
+    "ownPermissions": "No puedes cambiar tus propios permisos. Solo el propietario puede.",
+    "appointYourself": "No puedes nombrarte jefe de departamento.",
+    "departmentManagerRole": "Un jefe de departamento debe tener el rol de Jefe. Cambia su rol primero.",
+    "ownPay": "No puedes cambiar tu propia nómina.",
+    "administrationHeld": "Lo tiene alguien fuera de tu autoridad. Solo el propietario puede moverlo."
   },
   "pageLoad": {
     "title": "Esta página necesita conexión",

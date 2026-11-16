@@ -1,3 +1,4 @@
+import { withStepUp } from "../../core/auth/stepUp";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -28,7 +29,13 @@ export default function RoleChangeCard({ userId, currentRole, onChanged }: { use
     setBusy(true);
     setError("");
     setResult(null);
-    const { data, error: rpcError } = await DatabaseManager.getClient().rpc("change_prosm_time_user_role", { p_user_id: userId, p_role_key: role, p_reason: reason.trim() });
+    // release audit SA-01: identity confirmation when the organisation asks for it
+    const answer = await withStepUp("roles.change", async () => {
+      const r = await DatabaseManager.getClient().rpc("change_prosm_time_user_role", { p_user_id: userId, p_role_key: role, p_reason: reason.trim() });
+      return { data: r.data, error: r.error?.message ?? null };
+    });
+    const data = answer.data;
+    const rpcError = answer.error ? { message: answer.error } : null;
     setBusy(false);
     if (rpcError) {
       setError(humanizeBackendError(rpcError.message, t) ?? rpcError.message);

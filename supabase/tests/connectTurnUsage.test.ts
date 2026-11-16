@@ -11,8 +11,14 @@ let a: TestOrg;
 let b: TestOrg;
 let worker: TestMember;
 const RELAY = "global.relay.metered.ca";
-const report = (who: TestMember, kind: string, route: string, server: string | null, bytes: number, seconds: number) =>
-  t.as(who.authId, "select public.record_prosm_time_connect_usage($1, gen_random_uuid(), $2, $3, $4, $5)", [kind, route, server, bytes, seconds]);
+let peerB: TestMember;
+// SA-06 (2026-11-16): usage counts only for a call the reporter took part in - each report gets its own call
+const report = async (who: TestMember, kind: string, route: string, server: string | null, bytes: number, seconds: number) => {
+  const [{ org }] = await t.su<{ org: string }>("select organization_id as org from users where id = $1", [who.userId]);
+  const [{ other }] = await t.su<{ other: string }>("select id as other from users where organization_id = $1 and id <> $2 limit 1", [org, who.userId]);
+  const [{ id }] = await t.su<{ id: string }>("insert into connect_calls (organization_id, caller_id, callee_id, media) values ($1, $2, $3, 'audio') returning id", [org, who.userId, other]);
+  return t.as(who.authId, "select public.record_prosm_time_connect_usage($1, $2, $3, $4, $5, $6)", [kind, id, route, server, bytes, seconds]);
+};
 const asService = async <T,>(sql: string, params: unknown[] = []): Promise<T[]> => {
   let rows: T[] = [];
   await t.db.transaction(async (tx) => {
@@ -28,6 +34,7 @@ beforeAll(async () => {
   a = await createOrg(t, "TurnA");
   b = await createOrg(t, "TurnB");
   worker = await addMember(t, a, "employee", "Wael");
+  peerB = await addMember(t, b, "employee", "PeerB");
   expect((await report(worker, "video", "relay", RELAY, 6_000_000, 120)).error).toBeNull();
   expect((await report(a.owner, "audio", "srflx", "ignored.example", 900_000, 300)).error).toBeNull();
   expect((await report(b.owner, "meeting", "relay", RELAY, 4_000_000, 60)).error).toBeNull();

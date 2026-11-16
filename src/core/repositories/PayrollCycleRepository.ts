@@ -401,7 +401,8 @@ class PayrollCycleRepository {
   }
 
   startExportJob(cycleId: string, userIds: string[] | null = null) {
-    return this.invokeExport<{ jobId: string; total: number }>({ action: "start", cycleId, userIds });
+    // release audit SA-01: identity confirmation when the organisation asks for it
+    return withStepUp("payroll.export", () => this.invokeExport<{ jobId: string; total: number }>({ action: "start", cycleId, userIds }));
   }
 
   downloadExportJob(jobId: string) {

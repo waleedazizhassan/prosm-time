@@ -382,7 +382,7 @@
     "phoneRequired": "Enter the mobile number.",
     "ownerAccountProtected": "The owner's account is protected.",
     "ownerChangesOnlyByTransfer": "The owner changes only through an ownership transfer.",
-    "payPeriodLocked": "This pay period is locked. Reopen the payroll or return the timesheet first.",
+    "payPeriodLocked": "This pay period is locked and cannot change.",
     "stepUpRequired": "Confirm it's you before this action.",
     "mfaRequired": "This action needs two-step sign-in.",
     "correctionAlreadyPending": "A correction for this is already pending.",
@@ -397,7 +397,12 @@
     "chooseActiveMember": "Choose an active member of the organisation.",
     "meetingEnded": "This meeting has ended.",
     "meetingFull": "This meeting is full.",
-    "waitingForHr": "Waiting for HR"
+    "waitingForHr": "Waiting for HR",
+    "ownPermissions": "You cannot change your own permissions. Only the owner can.",
+    "appointYourself": "You cannot appoint yourself a department manager.",
+    "departmentManagerRole": "A department manager must have the Manager role. Change their role first.",
+    "ownPay": "You cannot change your own pay.",
+    "administrationHeld": "Someone outside your authority holds this. Only the owner can move it."
   },
   "pageLoad": {
     "title": "This page needs a connection",

@@ -25,7 +25,7 @@ beforeAll(async () => {
   t = await buildDatabase();
   a = await createOrg(t, "OrgA");
   b = await createOrg(t, "OrgB");
-  hrA = await addMember(t, a, "employee", "HrA");
+  hrA = await addMember(t, a, "manager", "HrA");
   await grant(hrA, "hr.approve_all_requests");
   deptBossA = await addMember(t, a, "manager", "DeptBossA");
   await grant(deptBossA, "leave.approve");
@@ -62,7 +62,7 @@ describe("no mixing between organisations", () => {
 
   it("a department manager cannot be someone from another organisation", async () => {
     const [{ id: dept }] = await t.su<{ id: string }>("select id from departments where organization_id = $1 and name = 'Finance'", [a.id]);
-    expect((await t.as(a.owner.authId, "select public.set_prosm_time_department_manager($1, $2)", [dept, workerB.userId])).error).toMatch(/ACTIVE MEMBER/);
+    expect((await t.as(a.owner.authId, "select public.set_prosm_time_department_manager($1, $2)", [dept, workerB.userId])).error).toMatch(/ACTIVE MEMBER|MANAGER ROLE/);
   });
 });
 

@@ -1,3 +1,4 @@
+import { withStepUp } from "../auth/stepUp";
 import DatabaseManager from "../database/DatabaseManager";
 
 // Owner 2026-11-04 / 2026-11-08: the owner delegates authority to a person - all of it or only
@@ -77,15 +78,19 @@ class OwnerAuthorityRepository {
   }
 
   async grant(userId: string, reason: string, options: DelegationOptions = { scope: "full" }): Promise<string | null> {
-    const { error } = await this.client.rpc("grant_prosm_time_owner_authority", {
-      p_user_id: userId,
-      p_reason: reason,
-      p_starts_at: options.startsAt ?? null,
-      p_ends_at: options.endsAt ?? null,
-      p_scope: options.scope,
-      p_permission_keys: options.scope === "partial" ? options.permissionKeys ?? [] : null,
+    // release audit SA-01: identity confirmation when the organisation asks for it
+    const answer = await withStepUp("owner.delegate", async () => {
+      const r = await this.client.rpc("grant_prosm_time_owner_authority", {
+        p_user_id: userId,
+        p_reason: reason,
+        p_starts_at: options.startsAt ?? null,
+        p_ends_at: options.endsAt ?? null,
+        p_scope: options.scope,
+        p_permission_keys: options.scope === "partial" ? options.permissionKeys ?? [] : null,
+      });
+      return { error: r.error?.message ?? null };
     });
-    return error ? error.message : null;
+    return answer.error;
   }
 
   async revoke(userId: string, reason: string): Promise<string | null> {

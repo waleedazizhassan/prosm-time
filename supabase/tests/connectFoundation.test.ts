@@ -120,7 +120,7 @@ describe("PROSM Connect - the foundation", () => {
     const fourth = await addMember(t, org, "employee", "Karim");
     const fifth = await addMember(t, org, "employee", "Ahmed");
     // invitations (20261114120000): only the host and those invited join
-    for (const m of [hasan, mona, fourth, fifth]) await t.su("insert into connect_switchboard (organization_id, from_user, to_user, type, ref_id) values ($1, $2, $3, 'meeting_invite', $4)", [org.id, omar.userId, m.userId, id]);
+    for (const m of [hasan, mona, fourth, fifth]) await t.su("insert into connect_meeting_invitees (meeting_id, user_id) values ($1, $2) on conflict do nothing", [id, m.userId]);
     for (const m of [omar, hasan, mona]) expect((await t.as(m.authId, "select public.prosm_time_connect_join_meeting($1)", [id])).error).toBeNull();
     expect((await t.as(fourth.authId, "select public.prosm_time_connect_join_meeting($1)", [id])).error).toBeNull();
     expect((await t.as(fifth.authId, "select public.prosm_time_connect_join_meeting($1)", [id])).error).toMatch(/FULL/);

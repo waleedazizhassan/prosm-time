@@ -217,6 +217,13 @@ const BACKEND_ERROR_KEYS: Record<string, string> = {
   "A CORRECTION FOR THIS IS ALREADY PENDING": "correctionAlreadyPending",
   "THIS REQUEST WAS ALREADY DECIDED": "requestAlreadyDecided",
   "THIS REQUEST IS WAITING FOR HUMAN RESOURCES": "waitingForHr",
+  // release audit 2026-11-16
+  "YOU CANNOT CHANGE YOUR OWN PERMISSIONS": "ownPermissions",
+  "YOU CANNOT APPOINT YOURSELF": "appointYourself",
+  "A DEPARTMENT MANAGER MUST HAVE THE MANAGER ROLE": "departmentManagerRole",
+  "YOU CANNOT CHANGE YOUR OWN PAY": "ownPay",
+  "THIS PAY PERIOD IS LOCKED": "payPeriodLocked",
+  "THIS ADMINISTRATION IS HELD BY SOMEONE ELSE": "administrationHeld",
   "AN API KEY LASTS AT MOST 365 DAYS": "apiKeyMax365",
   "A DELEGATION LASTS AT MOST 30 DAYS - GRANT IT AGAIN TO EXTEND": "delegationMax30",
   "ONLY AN ACTIVE KEY IS ROTATED": "onlyActiveKeyRotated",

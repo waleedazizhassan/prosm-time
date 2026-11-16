@@ -35,7 +35,7 @@ beforeAll(async () => {
   siteManager = await addMember(t, org, "manager", "SiteBoss");
   await t.su("insert into site_assignments (site_id, user_id, role_at_site) values ($1, $2, 'manager')", [site, siteManager.userId]);
   deptManager = await addMember(t, org, "manager", "DeptBoss");
-  hr = await addMember(t, org, "employee", "HrPerson");
+  hr = await addMember(t, org, "manager", "HrPerson");
   await t.su("insert into user_permission_overrides (user_id, permission_id, is_granted) select $1, id, true from permissions where permission_key = 'hr.approve_all_requests'", [hr.userId]);
   // leave decisions still need leave.approve (as before); HR needs only hr.approve_all_requests
   await t.su("insert into user_permission_overrides (user_id, permission_id, is_granted) select u, p.id, true from unnest($1::uuid[]) u cross join permissions p where p.permission_key = 'leave.approve' on conflict do nothing", [[siteManager.userId, deptManager.userId]]);

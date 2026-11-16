@@ -48,7 +48,7 @@ beforeAll(async () => {
   siteManager = await addMember(t, org, "manager", "SiteBoss");
   await t.su("insert into site_assignments (site_id, user_id, role_at_site) values ($1, $2, 'manager')", [site, siteManager.userId]);
   await t.su("insert into user_permission_overrides (user_id, permission_id, is_granted) select $1, id, true from permissions where permission_key in ('attendance.manage_permissions', 'exceptions.manage') on conflict do nothing", [siteManager.userId]);
-  hr = await addMember(t, org, "employee", "HrPerson");
+  hr = await addMember(t, org, "manager", "HrPerson");
   await t.su("insert into user_permission_overrides (user_id, permission_id, is_granted) select $1, id, true from permissions where permission_key = 'hr.approve_all_requests'", [hr.userId]);
   worker = await addMember(t, org, "employee", "Worker");
   await assignToSite(t, site, worker);
