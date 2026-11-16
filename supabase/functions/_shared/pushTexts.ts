@@ -221,7 +221,15 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_in": "سجّل حضورك من فضلك.",
         "clock_out": "سجّل انصرافك من فضلك.",
         "call_me": "كلّمني من فضلك.",
-        "attention": "افتح البرنامج من فضلك."
+        "attention": "افتح البرنامج من فضلك.",
+        "go_home_early": "تقدر تروّح بدري النهارده.",
+        "tomorrow_off": "إنت بكرة إجازة.",
+        "dont_be_late": "متتأخرش على ورديتك من فضلك.",
+        "end_break": "خلّص استراحتك من فضلك.",
+        "come_to_office": "تعالى المكتب من فضلك.",
+        "check_messages": "شوف رسايلك من فضلك.",
+        "shift_changed": "ورديتك اتغيرت - شوف جدولك.",
+        "well_done": "شغل ممتاز - شكراً ليك."
       },
       "mockLocation": {
         "title": "موقع مزيف",
@@ -516,7 +524,15 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_in": "Bitte einstempeln.",
         "clock_out": "Bitte ausstempeln.",
         "call_me": "Bitte ruf mich an.",
-        "attention": "Bitte schau in die App."
+        "attention": "Bitte schau in die App.",
+        "go_home_early": "Du kannst heute früher gehen.",
+        "tomorrow_off": "Du hast morgen frei.",
+        "dont_be_late": "Bitte sei pünktlich zu deiner Schicht.",
+        "end_break": "Bitte beende deine Pause.",
+        "come_to_office": "Bitte komm ins Büro.",
+        "check_messages": "Bitte lies deine Nachrichten.",
+        "shift_changed": "Deine Schicht hat sich geändert - sieh in deinen Plan.",
+        "well_done": "Gut gemacht - danke."
       },
       "mockLocation": {
         "title": "Gefälschter Standort",
@@ -811,7 +827,15 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_in": "Please clock in.",
         "clock_out": "Please clock out.",
         "call_me": "Please call me.",
-        "attention": "Please check the app."
+        "attention": "Please check the app.",
+        "go_home_early": "You can go home early today.",
+        "tomorrow_off": "You are off tomorrow.",
+        "dont_be_late": "Please don't be late for your shift.",
+        "end_break": "Please end your break.",
+        "come_to_office": "Please come to the office.",
+        "check_messages": "Please check your messages.",
+        "shift_changed": "Your shift has changed - check your schedule.",
+        "well_done": "Well done - thank you."
       },
       "mockLocation": {
         "title": "Fake location",
@@ -1107,7 +1131,15 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_in": "Por favor, ficha la entrada.",
         "clock_out": "Por favor, ficha la salida.",
         "call_me": "Por favor, llámame.",
-        "attention": "Por favor, revisa la app."
+        "attention": "Por favor, revisa la app.",
+        "go_home_early": "Puedes salir temprano hoy.",
+        "tomorrow_off": "Mañana tienes libre.",
+        "dont_be_late": "Por favor, no llegues tarde a tu turno.",
+        "end_break": "Por favor, termina tu descanso.",
+        "come_to_office": "Por favor, ven a la oficina.",
+        "check_messages": "Por favor, revisa tus mensajes.",
+        "shift_changed": "Tu turno ha cambiado: revisa tu horario.",
+        "well_done": "Buen trabajo, gracias."
       },
       "mockLocation": {
         "title": "Ubicación falsa",
@@ -1403,7 +1435,15 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_in": "Merci de pointer ton arrivée.",
         "clock_out": "Merci de pointer ton départ.",
         "call_me": "Merci de m’appeler.",
-        "attention": "Merci de regarder l’application."
+        "attention": "Merci de regarder l’application.",
+        "go_home_early": "Tu peux partir plus tôt aujourd'hui.",
+        "tomorrow_off": "Tu es en repos demain.",
+        "dont_be_late": "Merci de ne pas être en retard à ton poste.",
+        "end_break": "Merci de terminer ta pause.",
+        "come_to_office": "Merci de venir au bureau.",
+        "check_messages": "Merci de lire tes messages.",
+        "shift_changed": "Ton poste a changé - consulte ton planning.",
+        "well_done": "Bravo - merci."
       },
       "mockLocation": {
         "title": "Position falsifiée",
@@ -1699,7 +1739,15 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_in": "Per favore, timbra l’entrata.",
         "clock_out": "Per favore, timbra l’uscita.",
         "call_me": "Per favore, chiamami.",
-        "attention": "Per favore, guarda l’app."
+        "attention": "Per favore, guarda l’app.",
+        "go_home_early": "Oggi puoi uscire prima.",
+        "tomorrow_off": "Domani sei libero.",
+        "dont_be_late": "Per favore, non fare tardi al turno.",
+        "end_break": "Per favore, termina la pausa.",
+        "come_to_office": "Per favore, vieni in ufficio.",
+        "check_messages": "Per favore, leggi i messaggi.",
+        "shift_changed": "Il tuo turno è cambiato: controlla l'orario.",
+        "well_done": "Ottimo lavoro, grazie."
       },
       "mockLocation": {
         "title": "Posizione falsa",
@@ -1995,7 +2043,15 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_in": "Por favor, registe a entrada.",
         "clock_out": "Por favor, registe a saída.",
         "call_me": "Por favor, ligue-me.",
-        "attention": "Por favor, veja o app."
+        "attention": "Por favor, veja o app.",
+        "go_home_early": "Você pode sair mais cedo hoje.",
+        "tomorrow_off": "Amanhã é sua folga.",
+        "dont_be_late": "Por favor, não se atrase para o turno.",
+        "end_break": "Por favor, termine sua pausa.",
+        "come_to_office": "Por favor, venha ao escritório.",
+        "check_messages": "Por favor, veja suas mensagens.",
+        "shift_changed": "Seu turno mudou - veja sua escala.",
+        "well_done": "Bom trabalho - obrigado."
       },
       "mockLocation": {
         "title": "Localização falsa",
@@ -2292,7 +2348,15 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_in": "Пожалуйста, отметьте приход.",
         "clock_out": "Пожалуйста, отметьте уход.",
         "call_me": "Пожалуйста, позвоните мне.",
-        "attention": "Пожалуйста, откройте приложение."
+        "attention": "Пожалуйста, откройте приложение.",
+        "go_home_early": "Сегодня можешь уйти пораньше.",
+        "tomorrow_off": "Завтра у тебя выходной.",
+        "dont_be_late": "Пожалуйста, не опаздывай на смену.",
+        "end_break": "Пожалуйста, закончи перерыв.",
+        "come_to_office": "Пожалуйста, зайди в офис.",
+        "check_messages": "Пожалуйста, проверь сообщения.",
+        "shift_changed": "Твоя смена изменилась - проверь график.",
+        "well_done": "Отличная работа, спасибо."
       },
       "mockLocation": {
         "title": "Поддельное местоположение",
@@ -2586,7 +2650,15 @@ export const PUSH_TEXTS: Record<string, { notifications: Record<string, any>; le
         "clock_in": "请打卡上班。",
         "clock_out": "请打卡下班。",
         "call_me": "请给我回电话。",
-        "attention": "请查看应用。"
+        "attention": "请查看应用。",
+        "go_home_early": "你今天可以早点下班。",
+        "tomorrow_off": "你明天休息。",
+        "dont_be_late": "请不要上班迟到。",
+        "end_break": "请结束休息。",
+        "come_to_office": "请来办公室一趟。",
+        "check_messages": "请查看你的消息。",
+        "shift_changed": "你的班次已变更，请查看排班。",
+        "well_done": "干得好，谢谢。"
       },
       "mockLocation": {
         "title": "虚假位置",

@@ -272,7 +272,15 @@
       "clock_in": "Por favor, registe a entrada.",
       "clock_out": "Por favor, registe a saída.",
       "call_me": "Por favor, ligue-me.",
-      "attention": "Por favor, veja o app."
+      "attention": "Por favor, veja o app.",
+      "go_home_early": "Você pode sair mais cedo hoje.",
+      "tomorrow_off": "Amanhã é sua folga.",
+      "dont_be_late": "Por favor, não se atrase para o turno.",
+      "end_break": "Por favor, termine sua pausa.",
+      "come_to_office": "Por favor, venha ao escritório.",
+      "check_messages": "Por favor, veja suas mensagens.",
+      "shift_changed": "Seu turno mudou - veja sua escala.",
+      "well_done": "Bom trabalho - obrigado."
     },
     "mockLocation": {
       "title": "Localização falsa",
@@ -581,7 +589,15 @@
       "clock_in": "Registar entrada",
       "clock_out": "Registar saída",
       "call_me": "Liga-me",
-      "attention": "Ver o app"
+      "attention": "Ver o app",
+      "go_home_early": "Sair mais cedo",
+      "tomorrow_off": "Folga amanhã",
+      "dont_be_late": "Não se atrase",
+      "end_break": "Termine a pausa",
+      "come_to_office": "Venha ao escritório",
+      "check_messages": "Veja as mensagens",
+      "shift_changed": "Turno alterado",
+      "well_done": "Bom trabalho"
     },
     "messageLabel": "Mensagem curta (opcional)",
     "send": "Enviar alerta",

@@ -1,5 +1,6 @@
 import type { TFunction } from "i18next";
 import type { AppNotification } from "../repositories/NotificationRepository";
+import { BUZZ_REASONS } from "./buzzReasons";
 
 // PROSM Time - § live UX review, user-directed: "notifications need to
 // be translated - they're not translated in Arabic mode." Every
@@ -262,7 +263,7 @@ export default function localizeNotification(notification: AppNotification, t: T
       return { title: t("shell:notifications.payslip.failedTitle"), body: t("shell:notifications.payslip.failedBody", { cycle: String(data.cycleTitle ?? "") }) };
     // Owner 2026-11-10: a Buzz - from whom, and what for (or their own short message)
     case "buzz": {
-      const reason = typeof data.reason === "string" && ["clock_in", "clock_out", "call_me", "attention"].includes(data.reason) ? data.reason : "attention";
+      const reason = typeof data.reason === "string" && (BUZZ_REASONS as readonly string[]).includes(data.reason) ? data.reason : "attention";
       const message = typeof data.message === "string" && data.message.trim() ? data.message.trim() : null;
       return { title: t("shell:notifications.buzz.title", { name: String(data.fromName ?? "") }), body: message ?? t(`shell:notifications.buzz.${reason}`) };
     }

@@ -1245,3 +1245,36 @@
   }
 
 }
+
+/* owner 2026-11-16 ("the cost figure splits over two lines: 2,15 / 3"): a figure never breaks - it stays on one
+   line and shrinks with its card's width (container units), whatever the screen */
+.kpi {
+  container-type: inline-size;
+}
+
+.kpi .kpiValue {
+  white-space: nowrap;
+  overflow-wrap: normal;
+  font-size: min(1.75rem, 21cqi);
+}
+
+.kpi .kpiValue.kpiValueLong {
+  font-size: min(1.4rem, 16cqi);
+}
+
+.kpi .kpiValue.kpiValueXLong {
+  font-size: min(1.15rem, 12cqi);
+}
+
+/* owner 2026-11-16: the last card of a row that is not full stretches to the row's end (worked out in fillRows) */
+@media (min-width: 1280px) {
+  .fillWide {
+    grid-column: var(--fill-wide) !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .fillMid {
+    grid-column: var(--fill-mid) !important;
+  }
+}

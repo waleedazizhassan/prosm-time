@@ -271,7 +271,15 @@
       "clock_in": "Please clock in.",
       "clock_out": "Please clock out.",
       "call_me": "Please call me.",
-      "attention": "Please check the app."
+      "attention": "Please check the app.",
+      "go_home_early": "You can go home early today.",
+      "tomorrow_off": "You are off tomorrow.",
+      "dont_be_late": "Please don't be late for your shift.",
+      "end_break": "Please end your break.",
+      "come_to_office": "Please come to the office.",
+      "check_messages": "Please check your messages.",
+      "shift_changed": "Your shift has changed - check your schedule.",
+      "well_done": "Well done - thank you."
     },
     "mockLocation": {
       "title": "Fake location",
@@ -575,7 +583,15 @@
       "clock_in": "Clock in",
       "clock_out": "Clock out",
       "call_me": "Call me",
-      "attention": "Check the app"
+      "attention": "Check the app",
+      "go_home_early": "Go home early",
+      "tomorrow_off": "Off tomorrow",
+      "dont_be_late": "Don't be late",
+      "end_break": "End your break",
+      "come_to_office": "Come to the office",
+      "check_messages": "Check messages",
+      "shift_changed": "Shift changed",
+      "well_done": "Well done"
     },
     "messageLabel": "Short message (optional)",
     "send": "Send buzz",

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { cloneElement, isValidElement, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactElement } from "react";
 import BuzzButton from "../../../components/common/BuzzButton";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -662,7 +662,7 @@ export default function ManagerDashboard() {
       ) : null}
 
       {/* rows 3-6: the widgets (order and visibility are the reader's own) */}
-      <div className={styles.grid}>{order.map(renderWidget)}</div>
+      <div className={styles.grid}>{fillRows(order.map(renderWidget))}</div>
 
       {/* owner 2026-10-26: the absent-today card opens the day's sheet - absent first, then on leave */}
       <KpiSheet
@@ -971,3 +971,44 @@ function ScheduleChart({ data, mode, t, language }: { data: Dashboard | null; mo
     </>
   );
 }
+
+// owner 2026-11-16 ("no card left alone on the screen - one that is alone takes the whole width"): the cards are
+// placed in rows of 12 (7 / 5 / 4 / 12 on a wide screen, 6 / 12 on a medium one, in the reader's own order and
+// choice). Each row is worked out the way the grid places them; when a row is not full, its last card stretches
+// to the row's end. Phones show one card per row anyway.
+type Placed = ReactElement<{ className?: string; style?: CSSProperties }>;
+function fillRows(nodes: unknown[]) {
+  const items = nodes.filter((node): node is Placed => isValidElement(node));
+  const spanOf = (node: Placed, wide: boolean) => {
+    const cls = String(node.props.className ?? "");
+    const span = /span12/.test(cls) ? 12 : /span7/.test(cls) ? 7 : /span5/.test(cls) ? 5 : /span4/.test(cls) ? 4 : 12;
+    return wide ? span : span === 12 ? 12 : 6;
+  };
+  const stretch = (wide: boolean) => {
+    const extra = new Map<number, number>();
+    let used = 0;
+    let last = -1;
+    items.forEach((node, index) => {
+      const span = spanOf(node, wide);
+      if (used + span > 12 && last >= 0) {
+        if (used < 12) extra.set(last, spanOf(items[last], wide) + 12 - used);
+        used = 0;
+      }
+      used += span;
+      last = index;
+    });
+    if (last >= 0 && used < 12) extra.set(last, spanOf(items[last], wide) + 12 - used);
+    return extra;
+  };
+  const wide = stretch(true);
+  const mid = stretch(false);
+  return items.map((node, index) => {
+    if (!wide.has(index) && !mid.has(index)) return node;
+    const style = { ...(node.props.style ?? {}) } as CSSProperties & Record<string, string | number>;
+    const classes = [node.props.className ?? ""];
+    if (wide.has(index)) { style["--fill-wide"] = `span ${wide.get(index)}`; classes.push(styles.fillWide); }
+    if (mid.has(index)) { style["--fill-mid"] = `span ${mid.get(index)}`; classes.push(styles.fillMid); }
+    return cloneElement(node, { className: classes.join(" "), style });
+  });
+}
+

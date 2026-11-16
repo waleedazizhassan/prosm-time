@@ -270,7 +270,15 @@
       "clock_in": "请打卡上班。",
       "clock_out": "请打卡下班。",
       "call_me": "请给我回电话。",
-      "attention": "请查看应用。"
+      "attention": "请查看应用。",
+      "go_home_early": "你今天可以早点下班。",
+      "tomorrow_off": "你明天休息。",
+      "dont_be_late": "请不要上班迟到。",
+      "end_break": "请结束休息。",
+      "come_to_office": "请来办公室一趟。",
+      "check_messages": "请查看你的消息。",
+      "shift_changed": "你的班次已变更，请查看排班。",
+      "well_done": "干得好，谢谢。"
     },
     "mockLocation": {
       "title": "虚假位置",
@@ -569,7 +577,15 @@
       "clock_in": "打卡上班",
       "clock_out": "打卡下班",
       "call_me": "给我回电话",
-      "attention": "查看应用"
+      "attention": "查看应用",
+      "go_home_early": "早点下班",
+      "tomorrow_off": "明天休息",
+      "dont_be_late": "别迟到",
+      "end_break": "结束休息",
+      "come_to_office": "来办公室",
+      "check_messages": "查看消息",
+      "shift_changed": "班次已变更",
+      "well_done": "干得好"
     },
     "messageLabel": "简短留言（可选）",
     "send": "发送提醒",

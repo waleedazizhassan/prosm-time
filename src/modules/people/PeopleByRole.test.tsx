@@ -25,6 +25,9 @@ const person = (id: string, fullName: string, roleKey: string, extra: Partial<Di
   ...extra,
 });
 
+// the Buzz beside each person reads who is signed in (owner 2026-11-16); signed out here, so it stays hidden
+vi.mock("../../core/context/AuthContext", () => ({ useAuth: () => ({ profile: null }) }));
+
 vi.mock("../../core/repositories/PeopleDirectoryRepository", () => ({
   default: {
     status: vi.fn(async () => new Map()),

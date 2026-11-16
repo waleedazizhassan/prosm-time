@@ -1,6 +1,6 @@
 // 2026-11-10 (owner): Buzz - the owner, a manager or a supervisor with authority over a person sends
 // them a vibrating, sounding notification; nobody else can, and not twice within 30 seconds.
-// Migration 20261110170000.
+// Migrations 20261110170000, 20261116100000 (more ready reasons).
 import { describe, expect, it } from "vitest";
 
 import { buildDatabase } from "./support/db";
@@ -37,5 +37,22 @@ describe("buzz", () => {
       "select type, data from notifications where user_id = $1 and type = 'buzz' order by created_at", [amira.userId]);
     expect(rows.map((r) => r.data.reason)).toEqual(["clock_in", "call_me"]);
     expect(rows[1].data.fromName).toBe("Mona");
+  });
+
+  it("the new ready reasons are accepted, each with its own text", async () => {
+    const t = await buildDatabase();
+    const org = await createOrg(t, "Buzz More");
+    const amira = await addMember(t, org, "employee", "Amira");
+    const reasons = ["go_home_early", "tomorrow_off", "dont_be_late", "end_break", "come_to_office", "check_messages", "shift_changed", "well_done"];
+    for (const reason of reasons) {
+      // one at a time: the 30-second rule is per sender, so the previous buzz is moved back first
+      await t.su("update notifications set created_at = now() - interval '1 minute' where user_id = $1", [amira.userId]);
+      expect((await t.as(org.owner.authId, "select public.send_prosm_time_buzz($1, $2, null)", [amira.userId, reason])).error).toBeNull();
+    }
+    const rows = await t.su<{ body: string; data: { reason: string } }>(
+      "select body, data from notifications where user_id = $1 and type = 'buzz' order by created_at", [amira.userId]);
+    expect(rows.map((r) => r.data.reason).sort()).toEqual([...reasons].sort());
+    expect(new Set(rows.map((r) => r.body)).size).toBe(reasons.length);
+    expect(rows.every((r) => r.body !== "Please check the app.")).toBe(true);
   });
 });

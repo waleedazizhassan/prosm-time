@@ -1,3 +1,4 @@
+import type { BuzzReason } from "../utils/buzzReasons";
 import DatabaseManager from "../database/DatabaseManager";
 
 export interface ServiceResult<T = null> {
@@ -117,7 +118,6 @@ class NotificationRepository {
   }
 }
 
-export type BuzzReason = "clock_in" | "clock_out" | "call_me" | "attention";
-export const BUZZ_REASONS: BuzzReason[] = ["clock_in", "clock_out", "call_me", "attention"];
+export { BUZZ_REASONS, type BuzzReason } from "../utils/buzzReasons";
 
 export default new NotificationRepository();
