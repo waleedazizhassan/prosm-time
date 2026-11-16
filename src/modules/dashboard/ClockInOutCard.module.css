@@ -585,3 +585,40 @@
     bottom: var(--space-5);
   }
 }
+
+/* ===== owner 2026-11-16 ("put all the buttons in the empty part; remove layers, my location and the compass"):
+   on a computer the map ends above a strip that holds every button - clock in/out in the middle with break and
+   change site, SOS at one end, hours and reminders (EmployeeHome) at the other. The phone keeps its layout. ===== */
+@media (min-width: 901px) {
+  .mapStage {
+    display: flex;
+    flex-direction: column;
+    background: color-mix(in srgb, var(--surface-card) 70%, transparent);
+  }
+
+  .mapStage :global(.leaflet-container) {
+    height: min(560px, calc(100dvh - 360px)) !important;
+    min-height: 300px;
+  }
+
+  .fabBar {
+    position: static;
+    inset: auto;
+    min-height: 168px;
+    justify-content: center;
+    padding: var(--space-4) var(--space-5);
+    border-top: 1px solid color-mix(in srgb, var(--border-light) 70%, transparent);
+  }
+
+  .sideButton {
+    width: 84px;
+  }
+
+  .sosFloat {
+    position: absolute;
+    top: auto;
+    bottom: 57px;
+    inset-inline-start: auto;
+    inset-inline-end: var(--space-5);
+  }
+}

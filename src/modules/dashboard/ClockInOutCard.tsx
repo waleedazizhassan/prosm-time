@@ -1,7 +1,7 @@
 import { Capacitor } from "@capacitor/core";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Coffee, MapPin, Play, Repeat, Fingerprint, Layers, LocateFixed } from "lucide-react";
+import { Coffee, MapPin, Play, Repeat, Fingerprint } from "lucide-react";
 
 import { useAuth } from "../../core/context/AuthContext";
 import { useDashboardRefresh } from "../../core/hooks/useDashboardRefresh";
@@ -254,10 +254,9 @@ export default function ClockInOutCard() {
   // Owner 2026-11-10: a clear, short confirmation after each attendance action
   const [recenterTick, setRecenterTick] = useState(0);
   // owner 2026-11-15: the map style the person picked (kept on this device)
-  const [mapStyle, setMapStyle] = useState<"auto" | "light" | "dark">(() => {
+  const [mapStyle] = useState<"auto" | "light" | "dark">(() => {
     try { const v = localStorage.getItem("prosm.mapStyle"); return v === "light" || v === "dark" ? v : "auto"; } catch { return "auto"; }
   });
-  const [stylePicker, setStylePicker] = useState(false);
   const [clockNotice, setClockNotice] = useState<ClockNoticeMessage | null>(null);
   // owner 2026-11-11: what the Android phone still needs before a shift can start (null = nothing asked)
   const [trackingGate, setTrackingGate] = useState<{ missing: TrackingNeed[]; optional: TrackingNeed[]; suggested?: Site } | null>(null);
@@ -1273,31 +1272,8 @@ export default function ClockInOutCard() {
           tileMode={mapStyle}
           siteLabel={mapRelevantSite?.name ?? null}
         />
-        {/* owner 2026-11-15: north is always up on this map; a compass says so, and a glass toolbar holds the
-            map style and "back to me" */}
-        <span className={styles.compass} aria-hidden="true">N</span>
-        <div className={styles.mapTools} role="group" aria-label={t("attendance.mapTools.label")}>
-          <button type="button" className={styles.mapTool} onClick={() => setStylePicker((open) => !open)} aria-expanded={stylePicker}>
-            <Layers size={18} />
-            <span>{t("attendance.mapTools.layers")}</span>
-          </button>
-          <button type="button" className={styles.mapTool} onClick={() => setRecenterTick((n) => n + 1)}>
-            <LocateFixed size={18} />
-            <span>{t("attendance.mapTools.myLocation")}</span>
-          </button>
-        </div>
-        {stylePicker ? (
-          <div className={styles.stylePicker} role="radiogroup" aria-label={t("attendance.mapTools.layers")}>
-            {(["auto", "light", "dark"] as const).map((mode) => (
-              <button key={mode} type="button" role="radio" aria-checked={mapStyle === mode}
-                className={`${styles.styleOption} ${mapStyle === mode ? styles.styleOptionOn : ""}`}
-                onClick={() => { setMapStyle(mode); setStylePicker(false); try { localStorage.setItem("prosm.mapStyle", mode); } catch { /* private mode */ } }}>
-                <span className={`${styles.styleSwatch} ${styles[`swatch_${mode}`]}`} aria-hidden="true" />
-                <span>{t(`attendance.mapTools.style.${mode}`)}</span>
-              </button>
-            ))}
-          </div>
-        ) : null}
+        {/* owner 2026-11-16: no compass, no layers, no "my location" button - the card on top brings the map back to
+            the person, and the buttons sit under the map on a computer */}
         {/* Owner 2026-11-09: SOS floats above the hours and reminders buttons, the same size */}
         {session && planAllows("sos") ? (
           <button type="button" className={styles.sosFloat} onClick={handleSos} disabled={sosSubmitting || sosSent} aria-label={t("attendance.sosAction")} title={sosSent ? t("attendance.sosSent") : t("attendance.sosAction")}>
