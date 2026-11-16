@@ -191,7 +191,9 @@ export default function AdminOverviewCard() {
     // Sequential (needs real site ids first) and bounded to this
     // caller's own real sites - a real org has a handful of sites, not
     // hundreds, so N parallel per-site calls stays cheap.
-    if (realSites.length > 0) {
+    // QA-006 (2026-11-16): the schedule is the owner's and schedules.manage holders' - a supervisor's dashboard
+    // asked for every site's schedule on every load and was refused each time
+    if (realSites.length > 0 && (isOwner || hasPermission("schedules.manage"))) {
       const shiftResults = await Promise.all(realSites.map((site) => ShiftRepository.listForSite(site.id, weekStartIso, weekEndIso)));
       let totalScheduled = 0;
       for (const result of shiftResults) {
