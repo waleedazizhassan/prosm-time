@@ -217,6 +217,14 @@
     "security": {
       "title": "Sicherheit (Inhaber)",
       "body": "Im Menü > Verwaltung und Governance > „Sicherheit“ (oder Einstellungen > Sicherheit):\n• Identitätsbestätigung bei sensiblen Aktionen: vor Dingen wie Rechteänderungen, Eigentumsübertragung oder Lohn fragt die App, ob du es bist.\n• Zwei-Faktor-Prüfung: für die Organisation eingeschaltet, melden sich Inhaber und Verwalter zusätzlich mit einem Code aus einer Authenticator-App an. Jede Person schaltet sie unter „Meine Akte“ > Sicherheit ein.\nDas Abschalten braucht eine Identitätsbestätigung und wird protokolliert.\n• Eigentumsübertragung: der einzige Weg, den Inhaber zu wechseln; der neue Inhaber nimmt sie auf seiner Seite an.\n• Aufbewahrung (Enterprise): wie lange alte Daten bleiben."
+    },
+    "dailySummary": {
+      "title": "Tageszusammenfassung (Inhaber)",
+      "body": "Ein Tag deiner Organisation auf einer Seite: wer gearbeitet hat, wer zu spät war, wer fehlte, wer im Urlaub war, und Überstunden. Tag oben wählen, Namen antippen öffnet die Person. Mit Leitungsbenachrichtigungen kommt die Zusammenfassung von gestern jeden Morgen."
+    },
+    "auditLog": {
+      "title": "Protokoll (Verwaltung)",
+      "body": "Jede wichtige Aktion wird mit Person und Zeit protokolliert: Rechteänderungen, ein Rechtepaket, das die Person wechselt, Governance- und Sicherheitsänderungen, Genehmigungen und Ablehnungen, Zeit- und Lohnänderungen, Anmeldungen von neuen Geräten. Filter nach Person, Art oder Zeitraum. Das Protokoll kann niemand ändern oder löschen, auch nicht der Inhaber."
     }
   },
   "faq": {

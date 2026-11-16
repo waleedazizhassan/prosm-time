@@ -217,6 +217,14 @@
     "security": {
       "title": "Sicurezza (proprietario)",
       "body": "Dal menu > Amministrazione e governance > «Sicurezza» (o Impostazioni > Sicurezza):\n• Conferma dell’identità per azioni sensibili: prima di cambiare permessi, trasferire la proprietà o toccare le paghe, l’app verifica che sia tu.\n• Verifica in due passaggi: attiva per l’organizzazione, proprietario e amministratori accedono anche con un codice da un’app di autenticazione. Ognuno la attiva in «La mia scheda» > Sicurezza.\nDisattivarle richiede la conferma dell’identità ed è registrato.\n• Trasferimento della proprietà: l’unico modo per cambiare proprietario; il nuovo lo accetta dalla sua pagina.\n• Conservazione dei dati (Enterprise): per quanto restano i vecchi record."
+    },
+    "dailySummary": {
+      "title": "Riepilogo giornaliero (proprietario)",
+      "body": "Un giorno della tua organizzazione in una pagina: chi ha lavorato, chi era in ritardo, assente o in ferie, e gli straordinari. Scegli il giorno in alto e tocca un nome per aprire la sua pagina. Con gli avvisi ai responsabili, il riepilogo di ieri arriva ogni mattina."
+    },
+    "auditLog": {
+      "title": "Registro di audit (amministratori)",
+      "body": "Ogni azione importante è registrata con chi e quando: modifiche ai permessi, un pacchetto di permessi che passa da una persona a un’altra, modifiche di governance e sicurezza, approvazioni e rifiuti, modifiche a presenze e paghe, accessi da un nuovo dispositivo. Filtra per persona, tipo o periodo. Nessuno può modificare o cancellare il registro, nemmeno il proprietario."
     }
   },
   "faq": {

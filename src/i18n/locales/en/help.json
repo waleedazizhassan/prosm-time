@@ -217,6 +217,14 @@
     "security": {
       "title": "Security (owner)",
       "body": "From the menu > Administration and governance > \"Security\" (or Settings > Security):\n• Identity confirmation for sensitive actions: before things like changing permissions, transferring ownership or payroll, the app asks you to confirm it is you.\n• Two-step verification: when on for the organisation, the owner and administrators sign in with a code from an authenticator app on their phone as well as the password. Each person turns it on for themselves in \"My file\" > Security.\nTurning either one off needs identity confirmation and is recorded in the audit log.\n• Ownership transfer: the only way the owner changes. The current owner starts it and the new owner accepts it from their page.\n• Data retention (Enterprise): how long old records are kept."
+    },
+    "dailySummary": {
+      "title": "Daily summary (owner)",
+      "body": "One day of your organisation on one page: who worked, who was late, who was absent, who was on leave, and overtime. Choose the day at the top and tap any name to open their page. With manager alerts on, yesterday's summary also arrives every morning."
+    },
+    "auditLog": {
+      "title": "Audit log (administrators)",
+      "body": "Every important action is recorded with who did it and when: permission changes, a permission set moving from one person to another, governance model and security changes, approvals and rejections, attendance and payroll edits, sign-ins from a new device. Filter by person, kind or period. The log cannot be edited or deleted, not even by the owner."
     }
   },
   "faq": {

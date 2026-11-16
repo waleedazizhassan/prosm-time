@@ -217,6 +217,14 @@
     "security": {
       "title": "Segurança (proprietário)",
       "body": "No menu > Administração e governança > «Segurança» (ou Configurações > Segurança):\n• Confirmação de identidade em ações sensíveis: antes de mudar permissões, transferir a propriedade ou mexer na folha, o app confirma que é você.\n• Verificação em duas etapas: ligada para a organização, o proprietário e os administradores entram também com um código de um app autenticador. Cada um liga em «Minha ficha» > Segurança.\nDesligar exige confirmar a identidade e fica registrado.\n• Transferência de propriedade: o único jeito de trocar o proprietário; o novo aceita na própria página.\n• Retenção de dados (Enterprise): por quanto tempo os registros antigos ficam guardados."
+    },
+    "dailySummary": {
+      "title": "Resumo diário (proprietário)",
+      "body": "Um dia da sua organização numa página: quem trabalhou, quem atrasou, faltou ou estava de férias, e as horas extras. Escolha o dia no topo e toque num nome para abrir a página. Com os alertas de gestores ligados, o resumo de ontem chega toda manhã."
+    },
+    "auditLog": {
+      "title": "Registro de auditoria (administradores)",
+      "body": "Toda ação importante fica registrada com quem fez e quando: mudanças de permissões, um conjunto de permissões passando de uma pessoa para outra, mudanças de governança e segurança, aprovações e rejeições, alterações de ponto e folha, acessos de um aparelho novo. Filtre por pessoa, tipo ou período. Ninguém pode editar nem apagar o registro, nem o proprietário."
     }
   },
   "faq": {

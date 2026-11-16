@@ -217,6 +217,14 @@
     "security": {
       "title": "Sécurité (propriétaire)",
       "body": "Dans le menu > Administration et gouvernance > « Sécurité » (ou Paramètres > Sécurité) :\n• Confirmation d’identité pour les actions sensibles : avant de modifier des droits, transférer la propriété ou toucher la paie, l’application vérifie que c’est bien vous.\n• Vérification en deux étapes : activée pour l’organisation, le propriétaire et les administrateurs se connectent aussi avec un code d’une application d’authentification. Chacun l’active dans « Mon dossier » > Sécurité.\nLes désactiver exige une confirmation d’identité et est journalisé.\n• Transfert de propriété : le seul moyen de changer de propriétaire ; le nouveau l’accepte depuis sa page.\n• Conservation des données (Enterprise) : la durée de garde des anciens enregistrements."
+    },
+    "dailySummary": {
+      "title": "Résumé quotidien (propriétaire)",
+      "body": "Une journée de votre organisation sur une page : qui a travaillé, qui était en retard, absent ou en congé, et les heures sup. Choisissez le jour en haut et touchez un nom pour ouvrir sa page. Avec les alertes des responsables, le résumé de la veille arrive chaque matin."
+    },
+    "auditLog": {
+      "title": "Journal d’audit (administrateurs)",
+      "body": "Chaque action importante est enregistrée avec son auteur et l’heure : changements de droits, un ensemble de droits passant d’une personne à une autre, changements de gouvernance et de sécurité, approbations et refus, modifications de présence et de paie, connexions depuis un nouvel appareil. Filtrez par personne, type ou période. Personne ne peut modifier ni supprimer le journal, pas même le propriétaire."
     }
   },
   "faq": {

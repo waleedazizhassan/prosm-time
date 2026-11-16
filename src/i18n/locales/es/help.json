@@ -217,6 +217,14 @@
     "security": {
       "title": "Seguridad (propietario)",
       "body": "Desde el menú > Administración y gobierno > «Seguridad» (o Ajustes > Seguridad):\n• Confirmación de identidad en acciones sensibles: antes de cambiar permisos, transferir la propiedad o tocar la nómina, la app confirma que eres tú.\n• Verificación en dos pasos: activada para la organización, el propietario y los administradores entran también con un código de una app de autenticación. Cada uno la activa en «Mi ficha» > Seguridad.\nDesactivarlas exige confirmar la identidad y queda registrado.\n• Transferencia de propiedad: la única forma de cambiar de propietario; el nuevo la acepta en su página.\n• Conservación de datos (Enterprise): cuánto se guardan los registros antiguos."
+    },
+    "dailySummary": {
+      "title": "Resumen diario (propietario)",
+      "body": "Un día de tu organización en una página: quién trabajó, quién llegó tarde, quién faltó, quién estaba de vacaciones y las horas extra. Elige el día arriba y toca un nombre para abrir su página. Con las alertas para jefes activas, el resumen de ayer llega cada mañana."
+    },
+    "auditLog": {
+      "title": "Registro de auditoría (administradores)",
+      "body": "Cada acción importante queda registrada con quién y cuándo: cambios de permisos, un conjunto de permisos que pasa de una persona a otra, cambios de gobierno y seguridad, aprobaciones y rechazos, cambios de asistencia y nómina, accesos desde un dispositivo nuevo. Filtra por persona, tipo o periodo. Nadie puede editar ni borrar el registro, ni siquiera el propietario."
     }
   },
   "faq": {
