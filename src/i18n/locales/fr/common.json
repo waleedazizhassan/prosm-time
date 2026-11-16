@@ -496,7 +496,7 @@
   },
   "issuedVia": "Émis via",
   "feedback": {
-    "errorTitle": "Un problème est survenu",
+    "errorTitle": "Action impossible",
     "successTitle": "Terminé",
     "ok": "OK",
     "close": "Fermer",

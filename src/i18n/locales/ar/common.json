@@ -496,7 +496,7 @@
   },
   "issuedVia": "صادر من خلال",
   "feedback": {
-    "errorTitle": "حصلت مشكلة",
+    "errorTitle": "تعذّر التنفيذ",
     "successTitle": "تم بنجاح",
     "ok": "حسناً",
     "close": "إغلاق",

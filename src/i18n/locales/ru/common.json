@@ -496,7 +496,7 @@
   },
   "issuedVia": "Сформировано в",
   "feedback": {
-    "errorTitle": "Что-то пошло не так",
+    "errorTitle": "Не удалось выполнить",
     "successTitle": "Готово",
     "ok": "ОК",
     "close": "Закрыть",

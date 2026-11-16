@@ -496,7 +496,7 @@
   },
   "issuedVia": "Erstellt mit",
   "feedback": {
-    "errorTitle": "Etwas ist schiefgelaufen",
+    "errorTitle": "Das ging nicht",
     "successTitle": "Erledigt",
     "ok": "OK",
     "close": "Schließen",

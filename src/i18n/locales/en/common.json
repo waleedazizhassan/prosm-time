@@ -496,7 +496,7 @@
   },
   "issuedVia": "Issued via",
   "feedback": {
-    "errorTitle": "Something went wrong",
+    "errorTitle": "Couldn't complete this",
     "successTitle": "Done",
     "ok": "OK",
     "close": "Close",

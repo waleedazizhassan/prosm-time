@@ -496,7 +496,7 @@
   },
   "issuedVia": "出具自",
   "feedback": {
-    "errorTitle": "出现问题",
+    "errorTitle": "无法完成",
     "successTitle": "已完成",
     "ok": "确定",
     "close": "关闭",

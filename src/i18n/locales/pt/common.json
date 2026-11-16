@@ -496,7 +496,7 @@
   },
   "issuedVia": "Emitido através de",
   "feedback": {
-    "errorTitle": "Algo deu errado",
+    "errorTitle": "Não foi possível concluir",
     "successTitle": "Pronto",
     "ok": "OK",
     "close": "Fechar",
