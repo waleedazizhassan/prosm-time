@@ -117,3 +117,13 @@ describe("the governance model", () => {
     expect((await status("correction_requests", c)).status).toBe("approved");
   });
 });
+
+describe("SA-13: whoever decides reads what they decide", () => {
+  it("HR reads the leave rows of the people it decides for in the centralized model", async () => {
+    await model("centralized");
+    const [{ id }] = await t.su<{ id: string }>("insert into leave_requests (organization_id, user_id, leave_type, start_date, end_date, days_count, status) values ($1, $2, 'annual', date '2027-08-02', date '2027-08-02', 1, 'pending') returning id", [org.id, worker.userId]);
+    const seen = await t.as<{ id: string }>(hr.authId, "select id from leave_requests where id = $1", [id]);
+    expect(seen.rows).toHaveLength(1);
+    await model("direct");
+  });
+});
