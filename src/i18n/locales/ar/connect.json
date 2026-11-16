@@ -139,7 +139,14 @@
     "deleteMessage": "حذف الرسالة",
     "deleteMessageConfirm": "تحذف الرسالة من جهازك؟ الطرف الآخر تبقى عنده.",
     "deleteChat": "حذف المحادثة",
-    "deleteChatConfirm": "تحذف المحادثة كلها من جهازك؟ الطرف الآخر تبقى عنده."
+    "deleteChatConfirm": "تحذف المحادثة كلها من جهازك؟ الطرف الآخر تبقى عنده.",
+    "deleteForMe": "حذف عندي",
+    "deleteForEveryone": "حذف عند الجميع",
+    "deleteMineHint": "«حذف عند الجميع» يمسحها من أجهزة كل من في المحادثة (التطبيقات المحدَّثة).",
+    "deletedMessage": "تم حذف هذه الرسالة",
+    "youDeleted": "حذفت هذه الرسالة",
+    "deleteForEveryoneFailed": "ما اتمسحتش عند الجميع. جرّب تاني.",
+    "cancel": "إلغاء"
   },
   "info": {
     "inSince": "حاضر من {{time}}",
@@ -220,7 +227,8 @@
     "push_to_talk": "📻 اضغط واتكلم",
     "missed": "📞 مكالمة فائتة",
     "meeting_invite": "👥 دعوة اجتماع",
-    "photo_request": "📷 طلب صورة"
+    "photo_request": "📷 طلب صورة",
+    "deleted": "تم حذف رسالة"
   },
   "callLog": {
     "clear": "مسح سجل المكالمات",

@@ -139,7 +139,14 @@
     "deleteMessage": "Eliminar mensaje",
     "deleteMessageConfirm": "¿Eliminar este mensaje de tu dispositivo? La otra persona conserva el suyo.",
     "deleteChat": "Eliminar chat",
-    "deleteChatConfirm": "¿Eliminar todo el chat de tu dispositivo? La otra persona conserva el suyo."
+    "deleteChatConfirm": "¿Eliminar todo el chat de tu dispositivo? La otra persona conserva el suyo.",
+    "deleteForMe": "Eliminar para mí",
+    "deleteForEveryone": "Eliminar para todos",
+    "deleteMineHint": "\"Eliminar para todos\" lo quita de los dispositivos de todos en el chat (apps actualizadas).",
+    "deletedMessage": "Se eliminó este mensaje",
+    "youDeleted": "Eliminaste este mensaje",
+    "deleteForEveryoneFailed": "No se eliminó para todos. Inténtalo de nuevo.",
+    "cancel": "Cancelar"
   },
   "info": {
     "inSince": "Presente desde {{time}}",
@@ -220,7 +227,8 @@
     "push_to_talk": "📻 Pulsar para hablar",
     "missed": "📞 Llamada perdida",
     "meeting_invite": "👥 Invitación a reunión",
-    "photo_request": "📷 Solicitud de foto"
+    "photo_request": "📷 Solicitud de foto",
+    "deleted": "Se eliminó un mensaje"
   },
   "callLog": {
     "clear": "Borrar registro de llamadas",

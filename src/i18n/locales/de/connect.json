@@ -139,7 +139,14 @@
     "deleteMessage": "Nachricht löschen",
     "deleteMessageConfirm": "Diese Nachricht von deinem Gerät löschen? Die andere Person behält ihre.",
     "deleteChat": "Chat löschen",
-    "deleteChatConfirm": "Den ganzen Chat von deinem Gerät löschen? Die andere Person behält ihren."
+    "deleteChatConfirm": "Den ganzen Chat von deinem Gerät löschen? Die andere Person behält ihren.",
+    "deleteForMe": "Für mich löschen",
+    "deleteForEveryone": "Für alle löschen",
+    "deleteMineHint": "„Für alle löschen“ entfernt sie von den Geräten aller im Chat (aktualisierte Apps).",
+    "deletedMessage": "Diese Nachricht wurde gelöscht",
+    "youDeleted": "Du hast diese Nachricht gelöscht",
+    "deleteForEveryoneFailed": "Nicht für alle gelöscht. Versuch es noch einmal.",
+    "cancel": "Abbrechen"
   },
   "info": {
     "inSince": "Anwesend seit {{time}}",
@@ -220,7 +227,8 @@
     "push_to_talk": "📻 Push-to-Talk",
     "missed": "📞 Verpasster Anruf",
     "meeting_invite": "👥 Besprechungseinladung",
-    "photo_request": "📷 Fotoanfrage"
+    "photo_request": "📷 Fotoanfrage",
+    "deleted": "Eine Nachricht wurde gelöscht"
   },
   "callLog": {
     "clear": "Anrufliste leeren",

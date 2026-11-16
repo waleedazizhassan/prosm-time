@@ -139,7 +139,14 @@
     "deleteMessage": "Supprimer le message",
     "deleteMessageConfirm": "Supprimer ce message de votre appareil ? L'autre personne garde le sien.",
     "deleteChat": "Supprimer la discussion",
-    "deleteChatConfirm": "Supprimer toute la discussion de votre appareil ? L'autre personne garde la sienne."
+    "deleteChatConfirm": "Supprimer toute la discussion de votre appareil ? L'autre personne garde la sienne.",
+    "deleteForMe": "Supprimer pour moi",
+    "deleteForEveryone": "Supprimer pour tous",
+    "deleteMineHint": "« Supprimer pour tous » le retire des appareils de tous les membres de la discussion (applications à jour).",
+    "deletedMessage": "Ce message a été supprimé",
+    "youDeleted": "Vous avez supprimé ce message",
+    "deleteForEveryoneFailed": "Non supprimé pour tous. Réessayez.",
+    "cancel": "Annuler"
   },
   "info": {
     "inSince": "Présent depuis {{time}}",
@@ -220,7 +227,8 @@
     "push_to_talk": "📻 Appuyer pour parler",
     "missed": "📞 Appel manqué",
     "meeting_invite": "👥 Invitation à une réunion",
-    "photo_request": "📷 Demande de photo"
+    "photo_request": "📷 Demande de photo",
+    "deleted": "Un message a été supprimé"
   },
   "callLog": {
     "clear": "Effacer le journal d'appels",

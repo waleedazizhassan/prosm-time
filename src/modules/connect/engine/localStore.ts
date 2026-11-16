@@ -148,6 +148,11 @@ export const LocalStore = {
     return Promise.all(slice.map((row) => LocalStore.decode(row)));
   },
 
+  async getMessage(userId: string, id: string): Promise<LocalMessage | null> {
+    const row = await tx<StoredMessage>(userId, "messages", "readonly", (s) => s.get(id));
+    return row ? LocalStore.decode(row) : null;
+  },
+
   async hasMessage(userId: string, id: string): Promise<boolean> {
     return Boolean(await tx<StoredMessage>(userId, "messages", "readonly", (s) => s.get(id)));
   },

@@ -7,7 +7,9 @@ import { formatDateOnly, formatTimeOnly } from "../../core/utils/formatDate";
 import saveGeneratedFile from "../../core/utils/saveGeneratedFile";
 import Avatar from "../../components/common/Avatar";
 import useConfirm from "../../components/common/useConfirm";
-import { ConnectEngine } from "./engine/ConnectEngine";
+import Modal from "../../components/common/Modal";
+import Button from "../../components/common/Button";
+import { ConnectEngine, DELETED } from "./engine/ConnectEngine";
 import type { LocalMessage } from "./engine/localStore";
 import { VoiceRecorder, compressImage, formatBytes, formatDuration } from "./engine/media";
 import { useConnectContext } from "./ConnectProvider";
@@ -47,9 +49,25 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
   const [, setUrlTick] = useState(0);
   // owner 2026-11-16: delete a message or the whole conversation (from this device; the other side keeps theirs)
   const [confirm, confirmDialog] = useConfirm();
+  // my own message: for me or for everyone; someone else's: for me
+  const [deleting, setDeleting] = useState<LocalMessage | null>(null);
   const deleteMessage = async (m: LocalMessage) => {
+    if (m.mine && m.body !== DELETED) {
+      setDeleting(m);
+      return;
+    }
     if (!(await confirm(t("chat.deleteMessageConfirm")))) return;
+    await deleteForMe(m);
+  };
+  const deleteForMe = async (m: LocalMessage) => {
+    setDeleting(null);
     await ConnectEngine.deleteMessages(conversationId, [m.id]);
+    urls.current.delete(m.id);
+    await load();
+  };
+  const deleteForEveryone = async (m: LocalMessage) => {
+    setDeleting(null);
+    if (!(await ConnectEngine.retractMessages(conversationId, [m.id]))) setError(t("chat.deleteForEveryoneFailed"));
     urls.current.delete(m.id);
     await load();
   };
@@ -231,7 +249,9 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
         );
         break;
       default:
-        content = <span className={styles.text}>{m.body}</span>;
+        content = m.body === DELETED
+          ? <span className={styles.deleted}>{t(m.mine ? "chat.youDeleted" : "chat.deletedMessage")}</span>
+          : <span className={styles.text}>{m.body}</span>;
     }
     return (
       <div key={m.id} className={m.mine ? `${styles.bubble} ${styles.out}` : `${styles.bubble} ${styles.in}`}>
@@ -265,6 +285,16 @@ export default function ChatView({ conversationId, title, person, siteId, maxFil
         {messages.length > 0 ? <GlassButton label={t("chat.deleteChat")} size="small" onClick={() => void deleteConversation()}><Trash2 size={16} /></GlassButton> : null}
       </header>
       {confirmDialog}
+      <Modal isOpen={Boolean(deleting)} onClose={() => setDeleting(null)} title={t("chat.deleteMessage")} size="sm"
+        footer={deleting ? (
+          <>
+            <Button variant="ghost" onClick={() => setDeleting(null)}>{t("chat.cancel")}</Button>
+            <Button variant="ghost" onClick={() => void deleteForMe(deleting)}>{t("chat.deleteForMe")}</Button>
+            <Button variant="danger" onClick={() => void deleteForEveryone(deleting)}>{t("chat.deleteForEveryone")}</Button>
+          </>
+        ) : null}>
+        <p style={{ margin: 0 }}>{t("chat.deleteMineHint")}</p>
+      </Modal>
 
       <div className={styles.list} ref={list}>
         {messages.length === 0 ? <p className={styles.empty}>{t("chat.empty")}</p> : messages.map((m, i) => {

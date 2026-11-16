@@ -407,3 +407,9 @@ button.file {
     opacity: 0.55;
   }
 }
+
+/* a message its sender took back */
+.deleted {
+  font-style: italic;
+  color: var(--text-secondary);
+}

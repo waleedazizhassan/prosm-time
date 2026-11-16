@@ -18,6 +18,9 @@ type Listener = (detail: unknown) => void;
 
 const uuid = () => (crypto.randomUUID ? crypto.randomUUID() : `${Date.now().toString(16)}-${Math.random().toString(16).slice(2)}`);
 const TEXT_KINDS = new Set(["message", "site_broadcast", "photo_request", "missed", "meeting_invite"]);
+/** the body of a message taken back by its sender (shown as "this message was deleted") */
+export const DELETED = "§deleted";
+interface Retraction { from: string; conversationId: string | null; siteId: string | null; clientIds: string[]; createdAt?: string }
 
 class Engine {
   me: { userId: string; orgId: string } | null = null;
@@ -84,6 +87,7 @@ class Engine {
       .on("broadcast", { event: "item" }, (message) => void this.fetchAndHandle((message.payload as { id: string }).id))
       .on("broadcast", { event: "receipt" }, (message) => void this.handleReceipt(message.payload as Record<string, unknown>))
       .on("broadcast", { event: "call" }, (message) => this.emit("call-signal", message.payload))
+      .on("broadcast", { event: "retract" }, (message) => void this.applyRetraction(message.payload as Retraction))
       .subscribe((status, error) => {
         if (status === "SUBSCRIBED") {
           this.live = true;
@@ -162,6 +166,7 @@ class Engine {
     try {
       const items = await ConnectRepository.inbox();
       for (const item of items) await this.handle(item);
+      await this.syncRetractions();
     } finally {
       this.draining = false;
     }
@@ -388,6 +393,65 @@ class Engine {
       await LocalStore.putConversation(me.userId, { ...conversation, lastPreview: last ? preview(last) : "", lastAt: last?.createdAt ?? conversation.lastAt });
     }
     this.emit("conversations");
+  }
+
+  /**
+   * owner 2026-11-16: delete my own messages FOR EVERYONE. The server keeps a notice for the other devices (newer
+   * apps act on it; older ones never see it) and drops copies not yet fetched; here the messages become
+   * "this message was deleted".
+   */
+  async retractMessages(conversationId: string, ids: string[]): Promise<boolean> {
+    const me = this.me;
+    if (!me || ids.length === 0) return false;
+    const site = conversationId.startsWith("site:") ? conversationId.slice(5) : null;
+    const { error } = await this.supabase.rpc("prosm_time_connect_retract", { p_conversation: site ? null : conversationId, p_site: site, p_client_ids: ids });
+    if (error) return false;
+    for (const id of ids) await this.markDeleted(id, me.userId);
+    this.emit("conversations");
+    return true;
+  }
+
+  private async markDeleted(id: string, expectedSender: string): Promise<LocalMessage | null> {
+    const me = this.me;
+    if (!me) return null;
+    const message = await LocalStore.getMessage(me.userId, id);
+    // only the person who sent a message can take it back
+    if (!message || message.fromUser !== expectedSender || message.body === DELETED) return null;
+    const replaced: LocalMessage = { ...message, kind: "message", body: DELETED, fileName: null, mimeType: null, durationMs: null, proofCode: null, hasBlob: false, sizeBytes: 0 };
+    await LocalStore.deleteMessages(me.userId, [id]);
+    await LocalStore.putMessage(me.userId, replaced);
+    const conversation = await LocalStore.getConversation(me.userId, message.conversationId);
+    if (conversation && conversation.lastAt === message.createdAt) await LocalStore.putConversation(me.userId, { ...conversation, lastPreview: DELETED });
+    return replaced;
+  }
+
+  private async applyRetraction(r: Retraction) {
+    if (!this.me || !r?.from || !Array.isArray(r.clientIds)) return;
+    let changed = false;
+    for (const id of r.clientIds) {
+      const replaced = await this.markDeleted(String(id), r.from);
+      if (replaced) {
+        changed = true;
+        this.emit("message", replaced);
+      }
+    }
+    if (changed) this.emit("conversations");
+  }
+
+  /** notices that came while this device was away (kept 14 days on the server) */
+  private async syncRetractions() {
+    const me = this.me;
+    if (!me) return;
+    const key = `prosm_connect_retract_since:${me.userId}`;
+    let since: string | null = null;
+    try { since = localStorage.getItem(key); } catch { since = null; }
+    const { data, error } = await this.supabase.rpc("list_prosm_time_connect_retractions", { p_since: since });
+    if (error || !Array.isArray(data)) return;
+    for (const r of data as Retraction[]) {
+      await this.applyRetraction(r);
+      since = r.createdAt ?? since;
+    }
+    try { if (since) localStorage.setItem(key, since); } catch { /* the next pass reads again; applying twice changes nothing */ }
   }
 
   /** owner 2026-11-16: delete a whole conversation from this device. */

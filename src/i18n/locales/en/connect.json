@@ -139,7 +139,14 @@
     "deleteMessage": "Delete message",
     "deleteMessageConfirm": "Delete this message from your device? The other person keeps theirs.",
     "deleteChat": "Delete chat",
-    "deleteChatConfirm": "Delete the whole chat from your device? The other person keeps theirs."
+    "deleteChatConfirm": "Delete the whole chat from your device? The other person keeps theirs.",
+    "deleteForMe": "Delete for me",
+    "deleteForEveryone": "Delete for everyone",
+    "deleteMineHint": "\"Delete for everyone\" removes it from the devices of everyone in the chat (updated apps).",
+    "deletedMessage": "This message was deleted",
+    "youDeleted": "You deleted this message",
+    "deleteForEveryoneFailed": "It was not deleted for everyone. Try again.",
+    "cancel": "Cancel"
   },
   "info": {
     "inSince": "In since {{time}}",
@@ -220,7 +227,8 @@
     "push_to_talk": "📻 Push to talk",
     "missed": "📞 Missed call",
     "meeting_invite": "👥 Meeting invitation",
-    "photo_request": "📷 Photo request"
+    "photo_request": "📷 Photo request",
+    "deleted": "A message was deleted"
   },
   "callLog": {
     "clear": "Clear call log",

@@ -139,7 +139,14 @@
     "deleteMessage": "删除消息",
     "deleteMessageConfirm": "从你的设备删除这条消息？对方仍会保留。",
     "deleteChat": "删除对话",
-    "deleteChatConfirm": "从你的设备删除整个对话？对方仍会保留。"
+    "deleteChatConfirm": "从你的设备删除整个对话？对方仍会保留。",
+    "deleteForMe": "为我删除",
+    "deleteForEveryone": "为所有人删除",
+    "deleteMineHint": "“为所有人删除”会从对话中所有人的设备上移除（已更新的应用）。",
+    "deletedMessage": "此消息已被删除",
+    "youDeleted": "你删除了此消息",
+    "deleteForEveryoneFailed": "未能为所有人删除，请重试。",
+    "cancel": "取消"
   },
   "info": {
     "inSince": "自 {{time}} 起在岗",
@@ -220,7 +227,8 @@
     "push_to_talk": "📻 一键通话",
     "missed": "📞 未接来电",
     "meeting_invite": "👥 会议邀请",
-    "photo_request": "📷 拍照请求"
+    "photo_request": "📷 拍照请求",
+    "deleted": "一条消息已被删除"
   },
   "callLog": {
     "clear": "清空通话记录",
