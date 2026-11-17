@@ -200,7 +200,9 @@
       "timeHint": "Vide = maintenant. Jusqu'à 7 jours en arrière.",
       "noSiteOption": "Aucun site enregistré (écrire le lieu)",
       "placeNameLabel": "Nom du lieu"
-    }
+    },
+    "previousPerson": "Personne précédente",
+    "nextPerson": "Personne suivante"
   },
   "onBehalf": {
     "title": "Pointer au nom d'un employé",

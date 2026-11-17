@@ -200,7 +200,9 @@
       "timeHint": "Déjalo vacío para ahora. Hasta 7 días atrás.",
       "noSiteOption": "Sin sede registrada (escribe el lugar)",
       "placeNameLabel": "Nombre del lugar"
-    }
+    },
+    "previousPerson": "Persona anterior",
+    "nextPerson": "Persona siguiente"
   },
   "onBehalf": {
     "title": "Fichar en nombre de otro",

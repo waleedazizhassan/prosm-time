@@ -200,7 +200,9 @@
       "timeHint": "留空表示现在。最多可追溯 7 天。",
       "noSiteOption": "无登记工地（填写地点）",
       "placeNameLabel": "地点名称"
-    }
+    },
+    "previousPerson": "上一个人",
+    "nextPerson": "下一个人"
   },
   "onBehalf": {
     "title": "代为打卡",

@@ -200,7 +200,9 @@
       "timeHint": "Deixe vazio para agora. Até 7 dias atrás.",
       "noSiteOption": "Sem unidade cadastrada (escreva o local)",
       "placeNameLabel": "Nome do local"
-    }
+    },
+    "previousPerson": "Pessoa anterior",
+    "nextPerson": "Próxima pessoa"
   },
   "onBehalf": {
     "title": "Registrar ponto em nome de outro",
