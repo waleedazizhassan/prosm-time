@@ -258,7 +258,7 @@
       "manager_alerts": "经理提醒（缺勤、加班、晨间汇总）",
       "announcements": "公告栏",
       "departments": "部门",
-      "payroll": "工资（社保、税、借款、工资单）",
+      "payroll": "财务: 工资（社保、税、借款、工资单）",
       "integrations": "集成、API 与指纹设备考勤",
       "delegation": "完全及限期授权",
       "retention": "数据保留控制",
