@@ -41,7 +41,9 @@
     "checking": "Verificando...",
     "upToDate": "Você está na versão mais recente.",
     "noticeTitle": "Atualização do PROSM Time",
-    "availablePlay": "Uma nova versão está disponível no Google Play."
+    "availablePlay": "Uma nova versão está disponível no Google Play.",
+    "whatsNew": "Novidades",
+    "tapToUpdate": "Toque para atualizar pelo Google Play"
   },
   "offline": {
     "message": "Tudo certo: entrada, saída e intervalos continuam funcionando, e vamos enviá-los assim que você voltar a ficar online.",

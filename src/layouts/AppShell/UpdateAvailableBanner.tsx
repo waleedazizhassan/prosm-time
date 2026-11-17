@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Capacitor } from "@capacitor/core";
 import { LocalNotifications } from "@capacitor/local-notifications";
 import { ensureAlertChannel, NOTIFICATION_STYLE } from "../../core/services/notificationStyle";
-import { Download } from "lucide-react";
+import { ChevronDown, Download } from "lucide-react";
 import { AppUpdate, AppUpdateAvailability } from "@capawesome/capacitor-app-update";
 
 import { useUpdateCheck } from "../../core/hooks/useUpdateCheck";
@@ -42,10 +42,44 @@ export default function UpdateAvailableBanner({ placement = "top" }: { placement
 
 const PLAY_URL = "https://play.google.com/store/apps/details?id=net.prosm.time";
 const PLAY_RECHECK_MS = 30 * 60 * 1000;
+const NOTES_URL = "https://time.prosm.net/latest-version.json";
+
+// owner 2026-11-17: "what's new" of the latest release (from the published manifest), in the reader's language
+function useReleaseNotes(lang: string): string | null {
+  const [notes, setNotes] = useState<string | null>(null);
+  useEffect(() => {
+    let live = true;
+    void fetch(NOTES_URL, { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).then((m: { notes?: Record<string, string> } | null) => {
+      if (live && m?.notes) setNotes(m.notes[lang.startsWith("ar") ? "ar" : "en"] ?? m.notes.en ?? null);
+    }).catch(() => undefined);
+    return () => { live = false; };
+  }, [lang]);
+  return notes;
+}
+
+// the notice's own tap opens the store (Google Play's update screen when it can)
+async function openStore() {
+  try {
+    await AppUpdate.openAppStore();
+  } catch {
+    window.open(PLAY_URL, "_blank", "noopener,noreferrer");
+  }
+}
 
 function PlayUpdateBanner({ placement }: { placement: "top" | "shell" }) {
-  const { t } = useTranslation("shell");
+  const { t, i18n } = useTranslation("shell");
   const [version, setVersion] = useState<string | null>(null);
+  const notes = useReleaseNotes(i18n.language);
+  const [showNotes, setShowNotes] = useState(false);
+
+  // tapping the phone notification opens Google Play to update
+  useEffect(() => {
+    if (!Capacitor.isNativePlatform()) return undefined;
+    const handle = LocalNotifications.addListener("localNotificationActionPerformed", (event) => {
+      if (event.notification.id === UPDATE_NOTICE_ID) void openStore();
+    });
+    return () => { void handle.then((h) => h.remove()); };
+  }, []);
 
   useEffect(() => {
     if (!Capacitor.isNativePlatform()) return undefined;
@@ -85,13 +119,20 @@ function PlayUpdateBanner({ placement }: { placement: "top" | "shell" }) {
         if (permission.display !== "granted") return;
         await ensureAlertChannel();
         await LocalNotifications.schedule({
-          notifications: [{ id: UPDATE_NOTICE_ID, title: t("update.noticeTitle"), body: version ? t("update.available", { version }) : t("update.availablePlay"), autoCancel: true, ...NOTIFICATION_STYLE }],
+          notifications: [{
+            id: UPDATE_NOTICE_ID, title: t("update.noticeTitle"),
+            body: version ? t("update.available", { version }) : t("update.availablePlay"),
+            // owner 2026-11-17: the notification's down-arrow opens "what's new"
+            largeBody: notes ? `${version ? t("update.available", { version }) : t("update.availablePlay")}\n\n${t("update.whatsNew")}\n${notes}` : undefined,
+            summaryText: t("update.tapToUpdate"),
+            autoCancel: true, ...NOTIFICATION_STYLE,
+          }],
         });
       } catch (error) {
         console.warn("[update] could not show the update notification", error);
       }
     })();
-  }, [version, t]);
+  }, [version, notes, t]);
 
   if (version === null) return null;
 
@@ -112,9 +153,15 @@ function PlayUpdateBanner({ placement }: { placement: "top" | "shell" }) {
     <div className={placement === "shell" ? `${styles.banner} ${styles.inShell}` : styles.banner} role="status">
       <Download size={16} />
       <span>{version ? t("update.available", { version }) : t("update.availablePlay")}</span>
+      {notes ? (
+        <button type="button" className={styles.action} aria-expanded={showNotes} onClick={() => setShowNotes((v) => !v)}>
+          {t("update.whatsNew")} <ChevronDown size={14} style={{ transform: showNotes ? "rotate(180deg)" : undefined, verticalAlign: "middle" }} />
+        </button>
+      ) : null}
       <button type="button" className={styles.action} onClick={() => void handleUpdate()}>
         {t("update.action")}
       </button>
+      {showNotes && notes ? <div className={styles.notes}>{notes}</div> : null}
     </div>
   );
 }

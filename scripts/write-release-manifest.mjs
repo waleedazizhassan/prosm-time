@@ -4,7 +4,7 @@
 // builds (the APK, the web build) writes it before `npm run build`, so the
 // copy inside each build and the published copy always carry the same
 // version (APK 2.3.42 once shipped 2.3.41's manifest).
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
 const version = process.env.RELEASE_VERSION || JSON.parse(readFileSync("package.json", "utf8")).version;
 const releasedAt = process.env.RELEASED_AT || process.env.VITE_BUILD_RELEASED_AT;
@@ -13,9 +13,12 @@ if (!releasedAt) {
   process.exit(1);
 }
 const web = "https://time.prosm.net";
+// owner 2026-11-17: "what's new" in this release, shown in the update notice (release-notes.json, ar / en)
+const notes = existsSync("release-notes.json") ? JSON.parse(readFileSync("release-notes.json", "utf8")) : undefined;
 const manifest = {
   version,
   releasedAt,
+  notes,
   downloads: {
     // Older desktop installs are sent to the web version (owner 2026-10-20).
     windows: web,

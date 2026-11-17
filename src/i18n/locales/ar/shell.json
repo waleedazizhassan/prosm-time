@@ -41,7 +41,9 @@
     "checking": "جاري التحقق...",
     "upToDate": "إنت على آخر نسخة.",
     "noticeTitle": "تحديث PROSM Time",
-    "availablePlay": "في نسخة جديدة متاحة على Google Play."
+    "availablePlay": "في نسخة جديدة متاحة على Google Play.",
+    "whatsNew": "الجديد في التحديث",
+    "tapToUpdate": "اضغط عشان تحدّث من Google Play"
   },
   "offline": {
     "message": "ولا يهمك، تقدر تسجّل حضورك وانصرافك واستراحتك عادي، وهنبعتهم أول ما النت يرجع.",

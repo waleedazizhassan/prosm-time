@@ -41,7 +41,9 @@
     "checking": "Проверка...",
     "upToDate": "У вас последняя версия.",
     "noticeTitle": "Обновление PROSM Time",
-    "availablePlay": "В Google Play доступна новая версия."
+    "availablePlay": "В Google Play доступна новая версия.",
+    "whatsNew": "Что нового",
+    "tapToUpdate": "Нажмите, чтобы обновить через Google Play"
   },
   "offline": {
     "message": "Не волнуйтесь: отметки прихода, ухода и перерывов работают, и мы отправим их, как только появится связь.",
