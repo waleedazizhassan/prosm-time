@@ -100,6 +100,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <!-- PROSM Connect (owner 2026-11-13): voice messages and calls - asked only when the person first presses the microphone or answers -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- owner 2026-11-17: calls use the microphone when there is one; phones and tablets without it can still install -->
+    <uses-feature android:name="android.hardware.microphone" android:required="false" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-feature android:name="android.hardware.camera" android:required="false" />
     <!-- step 19: a phone without GPS can still install the app (location then comes

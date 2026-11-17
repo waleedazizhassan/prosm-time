@@ -258,7 +258,13 @@
         "action": "Definições",
         "why": "Mantém o acompanhamento do turno estável em telemóveis que param apps para poupar bateria. Sem isso, o registo de entrada funciona normalmente."
       },
-      "optional": "Opcional"
+      "optional": "Opcional",
+      "fullScreen": {
+        "title": "Permitir a tela cheia de chamadas",
+        "hint": "Abra as configurações e ative «Permitir notificações em tela cheia» para o PROSM Time.",
+        "action": "Configurações",
+        "why": "So calls and SOS alerts open on the screen even when the phone is locked, instead of a plain notification."
+      }
     },
     "mood": {
       "question": "Como foi o trabalho hoje?",

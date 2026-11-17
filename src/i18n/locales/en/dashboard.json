@@ -255,7 +255,13 @@
         "action": "Settings",
         "why": "Keeps following the shift steady on phones that stop apps to save battery. Without it, clocking in works as usual."
       },
-      "optional": "Optional"
+      "optional": "Optional",
+      "fullScreen": {
+        "title": "Allow the full-screen call screen",
+        "hint": "Open settings and turn on \"Allow full-screen notifications\" for PROSM Time.",
+        "action": "Settings",
+        "why": "So calls and SOS alerts open on the screen even when the phone is locked, instead of a plain notification."
+      }
     },
     "mood": {
       "question": "How was today's work?",

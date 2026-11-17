@@ -13,6 +13,8 @@ export interface ShiftTrackingStatus {
   preciseLocation: boolean;
   notifications: boolean;
   ignoringBattery: boolean;
+  /** Android 14+: calls and SOS may open on the locked screen (missing on older builds = on) */
+  fullScreenCalls?: boolean;
 }
 
 interface ShiftTrackingPlugin {
@@ -32,6 +34,7 @@ interface ShiftTrackingPlugin {
   status(): Promise<ShiftTrackingStatus>;
   openBatterySettings(): Promise<void>;
   openAppSettings(): Promise<void>;
+  openFullScreenSettings(): Promise<void>;
 }
 
 const ShiftTracking = registerPlugin<ShiftTrackingPlugin>("ShiftTracking");
@@ -51,11 +54,13 @@ export async function shiftTrackingStatus(): Promise<ShiftTrackingStatus | null>
 }
 
 /** What still keeps the phone from following the shift (empty = ready). */
-export function missingForTracking(status: ShiftTrackingStatus | null): ("location" | "notifications" | "battery")[] {
+export function missingForTracking(status: ShiftTrackingStatus | null): ("location" | "notifications" | "fullScreen" | "battery")[] {
   if (!status) return [];
-  const missing: ("location" | "notifications" | "battery")[] = [];
+  const missing: ("location" | "notifications" | "fullScreen" | "battery")[] = [];
   if (!status.location) missing.push("location");
   if (!status.notifications) missing.push("notifications");
+  // owner 2026-11-17: with it off, a call or an SOS shows as a plain notification instead of the full screen
+  if (status.fullScreenCalls === false) missing.push("fullScreen");
   if (!status.ignoringBattery) missing.push("battery");
   return missing;
 }
@@ -65,6 +70,15 @@ export async function openBatterySettings(): Promise<void> {
     await ShiftTracking.openBatterySettings();
   } catch {
     // nothing to open
+  }
+}
+
+export async function openFullScreenSettings(): Promise<void> {
+  try {
+    await ShiftTracking.openFullScreenSettings();
+  } catch {
+    // an older build: the app's own settings page
+    await openTrackingAppSettings();
   }
 }
 

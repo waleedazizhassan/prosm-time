@@ -252,7 +252,13 @@
         "action": "设置",
         "why": "在为省电而停止应用的手机上，让班次跟踪保持稳定。不设置也可以正常打卡。"
       },
-      "optional": "可选"
+      "optional": "可选",
+      "fullScreen": {
+        "title": "允许全屏来电界面",
+        "hint": "打开设置，为 PROSM Time 开启“允许全屏通知”。",
+        "action": "设置",
+        "why": "So calls and SOS alerts open on the screen even when the phone is locked, instead of a plain notification."
+      }
     },
     "mood": {
       "question": "今天的工作怎么样？",

@@ -1,13 +1,13 @@
 import { useTranslation } from "react-i18next";
-import { BatteryCharging, Bell, MapPin, ShieldCheck } from "lucide-react";
+import { BatteryCharging, Bell, MapPin, PhoneCall, ShieldCheck } from "lucide-react";
 
 import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
 import { answerStartupPermissions } from "../../core/services/StartupPermissions";
-import { openBatterySettings, openTrackingAppSettings } from "../../core/services/ShiftTrackingNative";
+import { openBatterySettings, openFullScreenSettings, openTrackingAppSettings } from "../../core/services/ShiftTrackingNative";
 import styles from "./TrackingGate.module.css";
 
-export type TrackingNeed = "consent" | "location" | "notifications" | "battery";
+export type TrackingNeed = "consent" | "location" | "notifications" | "fullScreen" | "battery";
 
 // Owner 2026-11-11 ("make running in the background mandatory, like WhatsApp"): on the Android app a
 // shift starts only when the phone can follow it - the person agreed, location and notifications are
@@ -17,10 +17,11 @@ export type TrackingNeed = "consent" | "location" | "notifications" | "battery";
 // what it is for; the shift starts without it.
 export default function TrackingGate({ missing, optional = [], onCheck, onClose }: { missing: TrackingNeed[]; optional?: TrackingNeed[]; onCheck: () => void; onClose: () => void }) {
   const { t } = useTranslation("dashboard");
-  const icon = { consent: ShieldCheck, location: MapPin, notifications: Bell, battery: BatteryCharging };
+  const icon = { consent: ShieldCheck, location: MapPin, notifications: Bell, fullScreen: PhoneCall, battery: BatteryCharging };
   const act = async (need: TrackingNeed) => {
     if (need === "consent" || need === "location") await answerStartupPermissions("accepted");
     else if (need === "notifications") await openTrackingAppSettings();
+    else if (need === "fullScreen") await openFullScreenSettings();
     else await openBatterySettings();
   };
   return (

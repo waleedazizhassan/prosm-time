@@ -258,7 +258,13 @@
         "action": "Ajustes",
         "why": "Mantiene el seguimiento del turno estable en móviles que detienen apps para ahorrar batería. Sin ello, fichar funciona igual."
       },
-      "optional": "Opcional"
+      "optional": "Opcional",
+      "fullScreen": {
+        "title": "Permitir la pantalla completa de llamadas",
+        "hint": "Abre los ajustes y activa «Permitir notificaciones a pantalla completa» para PROSM Time.",
+        "action": "Ajustes",
+        "why": "So calls and SOS alerts open on the screen even when the phone is locked, instead of a plain notification."
+      }
     },
     "mood": {
       "question": "¿Qué tal el trabajo hoy?",

@@ -258,7 +258,13 @@
         "action": "Impostazioni",
         "why": "Mantiene regolare il monitoraggio del turno sui telefoni che fermano le app per risparmiare batteria. Senza, la timbratura funziona come sempre."
       },
-      "optional": "Facoltativo"
+      "optional": "Facoltativo",
+      "fullScreen": {
+        "title": "Consenti la schermata di chiamata a schermo intero",
+        "hint": "Apri le impostazioni e attiva «Consenti notifiche a schermo intero» per PROSM Time.",
+        "action": "Impostazioni",
+        "why": "So calls and SOS alerts open on the screen even when the phone is locked, instead of a plain notification."
+      }
     },
     "mood": {
       "question": "Com’è andato il lavoro oggi?",
