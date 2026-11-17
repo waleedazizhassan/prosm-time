@@ -42,7 +42,7 @@ export default function UpdateAvailableBanner({ placement = "top" }: { placement
 
 const PLAY_URL = "https://play.google.com/store/apps/details?id=net.prosm.time";
 const PLAY_RECHECK_MS = 30 * 60 * 1000;
-const NOTES_URL = "https://time.prosm.net/latest-version.json";
+const NOTES_URL = "https://time.prosm.net/release-notes.json";
 
 // owner 2026-11-17: "what's new" of the latest release (from the published manifest), in the reader's language
 function useReleaseNotes(lang: string): string | null {

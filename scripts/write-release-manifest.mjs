@@ -28,4 +28,7 @@ const manifest = {
   },
 };
 writeFileSync("public/latest-version.json", JSON.stringify(manifest, null, 2));
+// owner 2026-11-17: the notes on their own too - the Google Play build reads them from here, as it must not
+// reference the self-update manifest (scripts/check-play-bundle.mjs)
+writeFileSync("public/release-notes.json", JSON.stringify({ version, notes: notes ?? null }, null, 2));
 console.log(JSON.stringify(manifest, null, 2));
