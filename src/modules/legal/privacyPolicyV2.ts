@@ -1,10 +1,10 @@
-// The Privacy Policy, version 3 (13 November 2026): version 2 (the owner's approved text of 31 October 2026)
+// The Privacy Policy, version 4 (17 November 2026: PROSM Connect, the verified camera, the governance model, two-step verification, the call relays). Version 3 (13 November 2026): version 2 (the owner's approved text of 31 October 2026)
 // brought in line with the app as it is now, at the owner's request (2026-11-13). Change it only with his approval.
 import type { LegalDocument } from "./legalContent";
 
 export const PRIVACY_V2_AR: LegalDocument = {
   "title": "سياسة الخصوصية",
-  "updated": "آخر تحديث: 13 نوفمبر 2026 · الإصدار 3",
+  "updated": "آخر تحديث: 17 نوفمبر 2026 · الإصدار 4",
   "intro": [
     "PROSM Time تطبيق لتسجيل الحضور ووقت العمل ومتابعة وجود العاملين، تقدّمه PROSM للمؤسسات («المؤسسة») ليستخدمه مالكوها ومديروها وموظفوها وعمال مواقعها. توضّح هذه السياسة من يتحكّم في بياناتك ومن يعالجها، وما البيانات التي يعالجها التطبيق ولماذا، ومن يطّلع عليها، ومدة الاحتفاظ بها، وكيف تمارس حقوقك."
   ],
@@ -113,9 +113,12 @@ export const PRIVACY_V2_AR: LegalDocument = {
             "المرتبات: الأجر الأساسي والبدلات والاستقطاعات، وبيانات التأمينات الاجتماعية والضرائب، والسلف والجزاءات المالية، ومفردات المرتب التي قد تُرسل إلى بريدك بصيغة PDF، وطلباتك لمفردات المرتب.",
             "الجزاءات والحوافز: لائحة المؤسسة المعتمدة، والمخالفات المسجّلة عليك وتكرارها وقراراتها، وردّك عليها وتظلّمك، والحوافز.",
             "التواصل داخل العمل: الإعلانات وتأكيد قراءتك لها، والتنبيهات التي يرسلها لك مديرك (مثل «سجّل حضورك») ونصها، وتقييمك الاختياري لورديتك عند الانصراف (لا يرى المديرون إلا مجموعه دون أسماء).",
+            "PROSM Connect (المحادثات والمكالمات والاجتماعات، حسب الباقة): الرسائل والملفات تُحفظ على جهازك أنت. الخادم يوصّلها فقط: ما لم يُستلم بعد ينتظر في مخزن مؤقت خاص ويُحذف فور استلامه أو بعد 7 أيام على الأكثر. المكالمات والاجتماعات ومشاركة الشاشة تمر بين الأجهزة مباشرة ومشفّرة، ويحفظ الخادم بياناتها فقط (من اتصل بمن، ومتى، والمدة، والنتيجة) لمدة 24 ساعة، ثم تبقى في سجل المكالمات على جهازك. لا نسجّل محتوى أي مكالمة؛ وتسجيل الاجتماع لا يتم إلا إذا سمح به المضيف، ويُحفظ على جهاز من سجّله. يظهر لزملائك حضورك (متصل، في الوردية، الموقع) حسب قواعد الظهور أدناه. حذف المحادثة أو سجل المكالمات من القائمة يحذفها من جهازك فقط.",
+            "الكاميرا الموثّقة: عندما تلتقط صورة إثبات، يضيف الخادم الوقت وأقرب موقع عمل للمؤسسة وهل أنت داخله، ورمزاً قصيراً وبصمة الصورة (SHA-256). الصورة نفسها لا تصل إلى الخادم إلا إذا أرسلتها في محادثة.",
             "الاستثناءات والمراجعات: أسباب وجودك خارج نطاق العمل، وطلبات التصحيح، والتنبيهات التي يراجعها المدير (تحقق حي فاشل، صورة قديمة أو معاد استخدامها، موقع مشبوه)، وقرارات المديرين وملاحظاتهم.",
             "العمالة الخارجية: الاسم، المقاول (إن ذُكر)، الرقم المكوّن من 6 أرقام الذي يولّده التطبيق، وموقع كل تسجيل حضور وانصراف وأوقاته وموقع الكشك، والأجر إذا سجّلته المؤسسة.",
             "الأمان: معرّف الجهاز إذا ربطت المؤسسة الحسابات بالأجهزة، ومفتاح خاص بجهازك يرسل به الموقع أثناء الوردية والتطبيق مغلق، وإصدار التطبيق، وسجلات الأمان والتدقيق للإجراءات المهمة، والحماية من المحاولات المتكررة (عنوان الشبكة يُحفظ مجزّأً غير مقروء فقط).",
+            "التحقق بخطوتين وتأكيد الهوية: إذا فعّلت التحقق بخطوتين يُحفظ مفتاح تطبيق المصادقة لدى مزوّد تسجيل الدخول ولا نراه، وتُسجَّل عمليات تأكيد الهوية قبل الأعمال الحساسة (مثل الدخول إلى الإدارة المالية) في سجل التدقيق.",
             "على جهازك: الإجراءات دون اتصال تُحفظ مشفّرة حتى تُرسل ثم تُحذف منه، وتحفظ نسخة الويب ملفات البرنامج نفسه (لا بياناتك) لتعمل دون اتصال."
           ]
         }
@@ -168,7 +171,8 @@ export const PRIVACY_V2_AR: LegalDocument = {
           "type": "bullets",
           "items": [
             "المالك يطّلع على المؤسسة كلها.",
-            "المديرون والمشرفون يطّلعون على من يعملون في المواقع التي يديرونها فقط. ولا يوافق على الإجازات أو يسجّل الحضور بالنيابة إلا المالك والمديرون (وليس لأنفسهم أبداً).",
+            "المديرون والمشرفون يطّلعون على من يعملون في المواقع والأقسام التي يديرونها فقط. ومن يوافق على الطلبات يحدده نموذج الحوكمة الذي تختاره المؤسسة (مباشر، أو لامركزي عبر مدير الموقع والقسم، أو مركزي عبر الموارد البشرية، أو على مرحلتين)، ولا يوافق أحد على طلبه هو أبداً. وكل قرار يُسجَّل في سجل تدقيق لا يُعدَّل ولا يُحذف.",
+            "في PROSM Connect: يرى الموظف زملاءه في موقعه وقسمه فقط، ويرى المديرون والمالك الجميع، ولا يظهر المالك في قائمة الموظفين. لا يستطيع أحد أن يرى محادثة ليس طرفاً فيها، ولا حتى المالك أو PROSM.",
             "من يمنحه المالك صلاحيات إضافية (مثل الموارد البشرية أو المرتبات) يطّلع على ما تتيحه له هذه الصلاحيات فقط: ملفات العاملين ومستنداتهم، أو الأجور والمرتبات.",
             "المشاهد يطّلع ولا يعدّل.",
             "الموظفون يطّلعون على سجلاتهم فقط.",
@@ -190,6 +194,7 @@ export const PRIVACY_V2_AR: LegalDocument = {
             "GitHub Pages: يستضيف ملفات نسخة الويب (time.prosm.net). لا تمر بياناتك من خلاله، ويتلقى ما يتلقاه أي موقع من طلب الصفحة (مثل عنوان الشبكة).",
             "Cloudflare: لتوصيل موقع prosm.net.",
             "Google Firebase Cloud Messaging: لتوصيل الإشعارات إلى تطبيق أندرويد حتى وهو مغلق. يتلقى رمزاً خاصاً بجهازك وعنوان كل إشعار ونصه، ويُحذف الرمز عند تسجيل خروجك.",
+            "خوادم وصل المكالمات (TURN: ExpressTURN وMetered): تُستخدم فقط عندما يتعذّر الاتصال المباشر بين جهازين، فتمرّر الصوت والصورة مشفّرين دون أن تستطيع فتحهما، وتتلقى عنوان الشبكة لكل طرف.",
             "البريد الإلكتروني: تُرسَل الدعوات وأكواد استعادة كلمة المرور وتنبيهات الفترة التجريبية والترخيص ورسائل الإجازة ومفردات المرتب والإعلانات من noreply@prosm.net عبر خدمة البريد الخاصة بـPROSM (المستضافة لدى Zoho Mail). رسالة الإجازة لا تتجاوز طالب الإجازة ومن يستلم الطلب أو يرد عليه، وتتضمن اسميهما وبريديهما ونوع الإجازة وتواريخها وعدد أيامها وسببها والقرار وملاحظته والرصيد المتبقي."
           ]
         },
@@ -203,7 +208,7 @@ export const PRIVACY_V2_AR: LegalDocument = {
             "OpenStreetMap: صور الخريطة للمنطقة المعروضة.",
             "BigDataCloud: يتلقى موقعك التقريبي ليُعيد اسم المدينة.",
             "Open-Meteo: يتلقى موقعك التقريبي ليُعيد حالة الطقس.",
-            "Radio Browser: فقط إذا شغّلت الراديو عبر الإنترنت؛ يتلقى الدولة التي تشير إليها المنطقة الزمنية لجهازك فقط.",
+            "Radio Browser ومحطات الراديو: فقط إذا شغّلت الراديو؛ يتلقى الدليل الدولة التي تشير إليها المنطقة الزمنية لجهازك، وتتلقى المحطة التي تختارها ما يتلقاه أي بث (مثل عنوان الشبكة).",
             "خرائط Google: فقط إذا ضغطت رابطاً لفتح موقع على الخريطة، أو لصق المدير رابط خريطة عند إضافة موقع عمل (يفتحه خادمنا ليعرف إحداثياته)."
           ]
         },
@@ -374,7 +379,7 @@ export const PRIVACY_V2_AR: LegalDocument = {
 
 export const PRIVACY_V2_EN: LegalDocument = {
   "title": "Privacy Policy",
-  "updated": "Last updated: November 13, 2026 · Version 3",
+  "updated": "Last updated: November 17, 2026 · Version 4",
   "intro": [
     "PROSM Time is an attendance, time-tracking and workforce-presence app provided by PROSM to organisations (the \"Organisation\") for use by their owners, managers, employees and site workers. This policy explains who controls and who processes your data, what the app processes and why, who can see it, how long it is kept, and how you can exercise your rights."
   ],
@@ -483,9 +488,12 @@ export const PRIVACY_V2_EN: LegalDocument = {
             "Payroll: basic pay, allowances and deductions, social insurance and tax data, advances and money penalties, payslips that may be emailed to you as a PDF, and your payslip requests.",
             "Penalties and incentives: your organisation's approved bylaw, violations recorded about you, their repetition and decisions, your response and appeal, and incentives.",
             "Communication at work: announcements and your confirmation of reading them, alerts your manager sends you (such as \"please clock in\") and their text, and your optional rating of your shift at clock-out (managers see only totals, without names).",
+            "PROSM Connect (chats, calls and meetings, depending on the plan): messages and files are kept on your own device. The server only delivers them: anything not yet received waits in a private temporary store and is deleted as soon as it is received, or after 7 days at most. Calls, meetings and screen sharing travel directly between devices, encrypted; the server keeps only their details (who called whom, when, how long, the outcome) for 24 hours, after which they stay in the call log on your device. We never record what is said; a meeting is recorded only if the host allows it, and the recording stays on the device of whoever recorded it. Your presence (online, on shift, site) is shown to colleagues under the visibility rules below. Deleting a chat or the call log from the list deletes it from your device only.",
+            "Verified camera: when you take a proof photo, the server adds the time, the organisation's nearest work site and whether you are inside it, a short code and the photo's fingerprint (SHA-256). The photo itself reaches the server only if you send it in a chat.",
             "Exceptions and reviews: reasons you give when outside the work area, correction requests, alerts a manager reviews (failed liveness, old or reused photo, suspicious or identical location), and managers' decisions and notes.",
             "External workers: name, contractor (if given), the 6-digit number the app generates, the location and time of each clock-in/out, kiosk location, and pay if the organisation records it.",
             "Device and security data: device identifier if the organisation binds accounts to devices, a key specific to your device used to send your location during the shift while the app is closed, app install and version, security and audit logs of important actions, and repeated-attempt protection that stores only a hashed network address.",
+            "Two-step verification and identity confirmation: if you turn on two-step verification, the authenticator key is kept by the sign-in provider and we never see it; identity confirmations before sensitive work (such as entering Finance) are recorded in the audit log.",
             "On your device: actions taken offline are stored encrypted until sent, then deleted. The web version caches the app's own files (not your data) so it opens offline."
           ]
         }
@@ -538,7 +546,8 @@ export const PRIVACY_V2_EN: LegalDocument = {
           "type": "bullets",
           "items": [
             "The owner sees the whole organisation.",
-            "Managers and supervisors see and act only for people at the sites they manage. Only the owner and managers approve leave or record attendance on someone's behalf (never for themselves).",
+            "Managers and supervisors see and act only for people at the sites and departments they manage. Who approves requests is set by the governance model the organisation chooses (direct, decentralized through the site and department manager, centralized through HR, or two-step); nobody ever approves their own request, and every decision is kept in an audit log that cannot be edited or deleted.",
+            "In PROSM Connect: an employee sees colleagues at their own site and department; managers and the owner see everyone, and the owner is not listed to employees. Nobody can see a conversation they are not part of - not the owner, and not PROSM.",
             "People the owner gives extra rights (such as HR or payroll) see only what those rights allow: employee files and documents, or pay and payroll.",
             "A viewer can look but not change anything.",
             "Employees see only their own records.",
@@ -561,6 +570,7 @@ export const PRIVACY_V2_EN: LegalDocument = {
             "GitHub Pages: hosts the web version's files (time.prosm.net). Your data does not pass through it; it receives what any website receives from a page request (such as the network address).",
             "Cloudflare: delivers the prosm.net website.",
             "Google Firebase Cloud Messaging: delivers notifications to the Android app even when closed. It receives a device-specific token and each notification's title and text; the token is deleted when you sign out.",
+            "Call relay servers (TURN: ExpressTURN and Metered): used only when two devices cannot connect directly; they pass the sound and picture on encrypted, without being able to open them, and receive each side's network address.",
             "Email: invitations, password-reset codes, trial and licence messages, leave messages, payslips and announcements are sent from noreply@prosm.net through PROSM's own mail service (hosted by Zoho Mail). A leave email goes only to the requester and whoever receives or answers the request, and includes their names and emails, leave type, dates, number of days, reason, decision and note, and remaining balance."
           ]
         },
@@ -574,7 +584,7 @@ export const PRIVACY_V2_EN: LegalDocument = {
             "OpenStreetMap: map tiles for the area shown.",
             "BigDataCloud: receives your approximate location to return a city name.",
             "Open-Meteo: receives your approximate location to return the weather.",
-            "Radio Browser: only if you play internet radio; receives only the country implied by your device time zone.",
+            "Radio Browser and radio stations: only if you play the radio; the directory receives the country implied by your device time zone, and the station you pick receives what any stream receives (such as the network address).",
             "Google Maps: only if you tap a link to open a place on the map, or a manager pastes a map link when adding a work site (our server opens it to read its coordinates)."
           ]
         },
