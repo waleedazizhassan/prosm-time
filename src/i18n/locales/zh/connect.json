@@ -149,7 +149,9 @@
     "cancel": "取消",
     "reply": "回复",
     "cancelReply": "取消回复",
-    "typing": "{{name}} 正在输入…"
+    "typing": "{{name}} 正在输入…",
+    "deleteAll": "删除所有聊天",
+    "deleteAllConfirm": "从此设备删除所有聊天？对方的记录会保留。"
   },
   "info": {
     "inSince": "自 {{time}} 起在岗",

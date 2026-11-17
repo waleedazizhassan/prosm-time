@@ -149,7 +149,9 @@
     "cancel": "Cancelar",
     "reply": "Responder",
     "cancelReply": "Cancelar resposta",
-    "typing": "{{name}} está digitando…"
+    "typing": "{{name}} está digitando…",
+    "deleteAll": "Apagar todas as conversas",
+    "deleteAllConfirm": "Apagar todas as conversas deste aparelho? O outro lado mantém as dele."
   },
   "info": {
     "inSince": "Presente desde {{time}}",

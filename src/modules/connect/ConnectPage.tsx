@@ -80,6 +80,13 @@ export default function ConnectPage() {
   const selected = params.get("c");
 
   const reload = useCallback(async () => setConversations(await ConnectEngine.conversations()), []);
+  // owner 2026-11-17: delete chats from the list like the call log - one, or all (from this device; the other side keeps theirs)
+  const deleteChats = async (ids: string[] | null) => {
+    if (!(await confirm(t(ids ? "chat.deleteChatConfirm" : "chat.deleteAllConfirm")))) return;
+    for (const id of ids ?? conversations.map((c) => c.id)) await ConnectEngine.deleteConversation(id);
+    if (selected && (!ids || ids.includes(selected))) setParams({});
+    await reload();
+  };
   useEffect(() => {
     if (!on) return undefined;
     void reload();
@@ -233,6 +240,12 @@ export default function ConnectPage() {
             </ul>
           ) : null}
           {rows.length === 0 ? <EmptyState message={t(filter === "unread" ? "noUnread" : "noPeople")} /> : (
+            <>
+            {conversations.length > 0 && filter !== "sites" ? (
+              <button type="button" className={styles.clearLog} onClick={() => void deleteChats(null)}>
+                <Trash2 size={14} aria-hidden="true" /> {t("chat.deleteAll")}
+              </button>
+            ) : null}
             <ul className={styles.list}>
               {rows.map((row) => {
                 if (row.kind === "conversation") {
@@ -256,12 +269,11 @@ export default function ConnectPage() {
                       </button>
                       {/* owner 2026-11-15: the row opens the conversation; only the two call buttons stay, quieter (on a
                           computer they show on hover or for the open conversation) */}
-                      {p ? (
-                        <span className={styles.actions}>
-                          {features?.calls ? <GlassButton label={t("actions.audioCall")} size="small" onClick={() => void connect?.startCall(p.id, "audio")}><Phone size={16} /></GlassButton> : null}
-                          {features?.calls ? <GlassButton label={t("actions.videoCall")} size="small" onClick={() => void connect?.startCall(p.id, "video")}><Video size={16} /></GlassButton> : null}
-                        </span>
-                      ) : null}
+                      <span className={styles.actions}>
+                        {p && features?.calls ? <GlassButton label={t("actions.audioCall")} size="small" onClick={() => void connect?.startCall(p.id, "audio")}><Phone size={16} /></GlassButton> : null}
+                        {p && features?.calls ? <GlassButton label={t("actions.videoCall")} size="small" onClick={() => void connect?.startCall(p.id, "video")}><Video size={16} /></GlassButton> : null}
+                        <GlassButton label={t("chat.deleteChat")} size="small" onClick={() => void deleteChats([row.c.id])}><Trash2 size={15} /></GlassButton>
+                      </span>
                     </li>
                   );
                 }
@@ -283,6 +295,7 @@ export default function ConnectPage() {
                 );
               })}
             </ul>
+            </>
           )}
           </div>
         </>

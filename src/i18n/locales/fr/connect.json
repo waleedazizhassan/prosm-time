@@ -149,7 +149,9 @@
     "cancel": "Annuler",
     "reply": "Répondre",
     "cancelReply": "Annuler la réponse",
-    "typing": "{{name}} écrit…"
+    "typing": "{{name}} écrit…",
+    "deleteAll": "Supprimer toutes les discussions",
+    "deleteAllConfirm": "Supprimer toutes les discussions de cet appareil ? L’autre côté garde les siennes."
   },
   "info": {
     "inSince": "Présent depuis {{time}}",
