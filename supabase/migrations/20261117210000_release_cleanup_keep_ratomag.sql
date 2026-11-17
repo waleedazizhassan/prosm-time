@@ -12,7 +12,8 @@ declare
     v_auth integer;
 begin
     if not exists (select 1 from public.organizations where id = v_keep) then
-        raise exception 'Ratomag not found - nothing deleted';
+        raise notice 'Ratomag not found - nothing deleted'; -- a fresh database (tests): nothing to clean
+        return;
     end if;
     delete from public.organizations where id <> v_keep;
     get diagnostics v_orgs = row_count;

@@ -13,3 +13,12 @@ create table if not exists vault.secrets(id uuid primary key default gen_random_
 create or replace view vault.decrypted_secrets as select id,name,secret as decrypted_secret,description from vault.secrets;
 create or replace function vault.create_secret(new_secret text, new_name text default null, new_description text default '') returns uuid language sql as $$ insert into vault.secrets(name,secret,description) values (new_name,new_secret,new_description) returning id $$;
 create or replace function cron.unschedule(job_id bigint) returns boolean language sql as $$ delete from cron.job where jobid=job_id returning true $$;
+
+-- Supabase Auth's factor table (the 2026-11-17 data step clears it)
+create table if not exists auth.mfa_factors (
+    id uuid primary key default gen_random_uuid(),
+    user_id uuid references auth.users(id) on delete cascade,
+    factor_type text,
+    status text,
+    created_at timestamptz default now()
+);

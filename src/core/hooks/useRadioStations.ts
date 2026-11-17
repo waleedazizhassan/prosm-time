@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import RadioBrowserClient, { type RadioStation } from "../services/RadioBrowserClient";
 import { radioCountry, radioNeighbour } from "../services/radioRegion";
+import { getSupabaseClient } from "../api/supabaseClient";
 
-const CACHE_KEY = "prosm_time_radio_stations_v3";
+const CACHE_KEY = "prosm_time_radio_stations_v4";
+// Owner 2026-11-17: the pinned stations come from the server (public.radio_pinned_stations), so their order can
+// change without a new release; this list is only the fallback when the server cannot be reached.
 // Owner 2026-11-17: Egyptian stations first - the Holy Quran from Cairo, then the most listened Egyptian stations
 // that stream directly (https). Maspero's General Programme / Middle East / Sawt El Qahira stream only inside
 // Dailymotion video players, so they cannot play here.
@@ -17,22 +20,39 @@ const PINNED = [
 ];
 const CACHE_MS = 24 * 60 * 60 * 1000;
 
-function readCache(): RadioStation[] | null {
+/** The pinned stations' ids in order, from the server - null when it cannot be read (the built-in list is used). */
+async function serverPinned(): Promise<string[] | null> {
+  try {
+    const { data, error } = await getSupabaseClient()
+      .from("radio_pinned_stations")
+      .select("station_uuid, country_code")
+      .order("position", { ascending: true });
+    if (error || !Array.isArray(data) || data.length === 0) return null;
+    const country = radioCountry();
+    // a station marked for one country is pinned only there; an unmarked one for everyone
+    return data.filter((row) => !row.country_code || row.country_code === country).map((row) => String(row.station_uuid));
+  } catch {
+    return null;
+  }
+}
+
+function readCache(pinned: string[]): RadioStation[] | null {
   try {
     const raw = localStorage.getItem(CACHE_KEY);
     if (!raw) return null;
-    const cached = JSON.parse(raw) as { at: number; country: string | null; stations: RadioStation[] };
-    // a new day, or the device moved to another country: fetch again
+    const cached = JSON.parse(raw) as { at: number; country: string | null; pinned?: string[]; stations: RadioStation[] };
+    // a new day, the device moved to another country, or the pinned list changed on the server: fetch again
     if (Date.now() - cached.at > CACHE_MS || cached.country !== radioCountry()) return null;
+    if ((cached.pinned ?? []).join(",") !== pinned.join(",")) return null;
     return Array.isArray(cached.stations) && cached.stations.length > 0 ? cached.stations : null;
   } catch {
     return null;
   }
 }
 
-function writeCache(stations: RadioStation[]) {
+function writeCache(stations: RadioStation[], pinned: string[]) {
   try {
-    localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), country: radioCountry(), stations }));
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), country: radioCountry(), pinned, stations }));
   } catch {
     // storage unavailable: the list is fetched again next time
   }
@@ -61,15 +81,17 @@ export default function useRadioStations(active: boolean) {
     // stations of the device's own country (its time zone), then a few from
     // a neighbour, then the world's most played - one or two requests
     // instead of four, kept for a day so the list opens at once.
-    const cached = readCache();
+    void (async () => {
+    const pinnedIds = (await serverPinned()) ?? PINNED;
+    const cached = readCache(pinnedIds);
     if (cached) {
       setDefaultStations(cached);
       return;
     }
     const country = radioCountry();
     const neighbour = radioNeighbour(country);
-    Promise.allSettled([
-      RadioBrowserClient.listByUuids(PINNED).catch(() => [] as RadioStation[]),
+    await Promise.allSettled([
+      RadioBrowserClient.listByUuids(pinnedIds).catch(() => [] as RadioStation[]),
       country ? RadioBrowserClient.listByCountryCode(country, 20) : Promise.resolve([] as RadioStation[]),
       neighbour ? RadioBrowserClient.listByCountryCode(neighbour, 6) : Promise.resolve([] as RadioStation[]),
     ])
@@ -86,9 +108,10 @@ export default function useRadioStations(active: boolean) {
         }
         const list = [...merged.values()];
         setDefaultStations(list);
-        if (list.length > 0) writeCache(list);
+        if (list.length > 0) writeCache(list, pinnedIds);
       })
       .catch(() => setDefaultStations([]));
+    })();
   }, [active, loadedDefaults]);
 
   useEffect(() => {
