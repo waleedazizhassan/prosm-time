@@ -1,6 +1,10 @@
 {
-  "version": "2.4.1",
-  "releasedAt": "2026-11-16T23:39:21.294Z",
+  "version": "2.4.2",
+  "releasedAt": "2026-11-17T01:26:20.954Z",
+  "notes": {
+    "ar": "• الإذاعات المصرية وإذاعة القرآن الكريم في أول الراديو\n• «الإدارة المالية» تجمع المرتبات والبدلات\n• تنقّل بين الأشخاص بالسحب يمين وشمال\n• حذف المحادثات من القايمة زي سجل المكالمات\n• إشعار التحديث بيعرض الجديد ويفتح Google Play\n• تجهيز الموبايل بيشيّك على إذن شاشة المكالمات الكاملة\n• تحديث سياسة الخصوصية وشروط الاستخدام والمساعدة\n• تحسينات في الأمان والتحقق بخطوتين",
+    "en": "• Egyptian stations and the Holy Quran radio first in the radio\n• \"Finance\" brings payroll and allowances together\n• Swipe sideways between people\n• Delete chats from the list, like the call log\n• The update notice shows what's new and opens Google Play\n• Phone readiness checks the full-screen call permission\n• Updated privacy policy, terms of use and help\n• Security and two-step verification improvements"
+  },
   "downloads": {
     "windows": "https://time.prosm.net",
     "android": "https://play.google.com/store/apps/details?id=net.prosm.time",
