@@ -10,8 +10,10 @@ import styles from "./BottomNav.module.css";
 
 // The employee's bar (owner 2026-10-19); the phone menu lists every other page.
 // the pages the employee's bar holds (the phone menu does not repeat them); review 2026-11-12: by plan
-export function employeeBottomPaths(allows: (feature: PlanFeature) => boolean): string[] {
-  return ["/dashboard", allows("allowances") ? "/allowances" : "/schedule"];
+// The pages an employee's bar already holds (the phone menu leaves them out). With PROSM Connect the bar holds
+// "Conversations" instead of the allowances or shifts (owner 2026-11-17: the allowances had vanished from both).
+export function employeeBottomPaths(allows: (feature: PlanFeature) => boolean, connectOn = false): string[] {
+  return connectOn ? ["/dashboard", "/connect"] : ["/dashboard", allows("allowances") ? "/allowances" : "/schedule"];
 }
 
 interface BottomItem {
