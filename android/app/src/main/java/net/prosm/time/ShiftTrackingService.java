@@ -290,6 +290,8 @@ public class ShiftTrackingService extends Service implements LocationListener {
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestProperty("apikey", anon);
             connection.setRequestProperty("Authorization", "Bearer " + anon);
+            // owner 2026-11-17: the build names itself, like the app (public.prosm_time_client_gate)
+            connection.setRequestProperty("x-client-info", "prosm-time/" + ("play".equals(BuildConfig.FLAVOR) ? "play" : "direct") + "/" + BuildConfig.VERSION_NAME);
             try (OutputStream out = connection.getOutputStream()) {
                 out.write(body.toString().getBytes(StandardCharsets.UTF_8));
             }

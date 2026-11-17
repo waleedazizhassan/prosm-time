@@ -47,6 +47,9 @@ describe("database security posture", () => {
       // background location while the app is closed: a 32+ character secret key, stored hashed, expiring, used only
       // during an active shift (20261111150000)
       "record_prosm_time_location_by_key(text,double precision,double precision,double precision,timestamp with time zone,boolean)",
+      // PostgREST's pre-request build check (20261118120000): reads only the request's headers and one platform
+      // setting, returns nothing, changes nothing
+      "prosm_time_client_gate()",
     ]);
     const unexpected = rows.map((r) => r.name).filter((n) => !allowed.has(n));
     expect(unexpected).toEqual([]);

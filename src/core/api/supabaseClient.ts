@@ -1,3 +1,5 @@
+import { APP_VERSION } from "../appVersion";
+import { Capacitor } from "@capacitor/core";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 // PROSM Time's own Supabase client - its own project, own URL, own anon
@@ -70,10 +72,20 @@ export function getSupabaseClient(): SupabaseClient {
     },
     global: {
       fetch: fetchWithTimeout,
+      // Owner 2026-11-17 ("only the Google Play builds may talk to the server"): every request says which build it
+      // comes from - the server refuses an APK build (public.prosm_time_client_gate). x-client-info is the header
+      // the server already accepts from browsers (CORS), so nothing else changes.
+      headers: { "x-client-info": `prosm-time/${clientDistribution()}/${APP_VERSION}` },
     },
   });
 
   return supabaseClient;
+}
+
+/** "play" (the Google Play bundle), "web" (time.prosm.net) or "direct" (any other Android build - refused). */
+export function clientDistribution(): "play" | "web" | "direct" {
+  if (import.meta.env.VITE_DISTRIBUTION === "play") return "play";
+  return Capacitor.isNativePlatform() ? "direct" : "web";
 }
 
 export function requireSupabaseClient(): SupabaseClient {

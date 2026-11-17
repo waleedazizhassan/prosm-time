@@ -9,6 +9,8 @@ const ANON_ALLOWED: Record<string, string> = {
   // 2026-11-11 (live): the phone's tracking service sends locations with its own tracking key when the
   // app is closed and no session is available; the key is checked inside the function
   "record_prosm_time_location_by_key(text,double precision,double precision,double precision,timestamp with time zone,boolean)": "tracking service with a device key",
+  // 2026-11-17: PostgREST's pre-request check runs as the caller, signed in or not - it only reads the request headers
+  "prosm_time_client_gate()": "pre-request build check",
 };
 
 describe("anon function grants", () => {
