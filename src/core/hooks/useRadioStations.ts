@@ -2,7 +2,19 @@ import { useEffect, useRef, useState } from "react";
 import RadioBrowserClient, { type RadioStation } from "../services/RadioBrowserClient";
 import { radioCountry, radioNeighbour } from "../services/radioRegion";
 
-const CACHE_KEY = "prosm_time_radio_stations_v2";
+const CACHE_KEY = "prosm_time_radio_stations_v3";
+// Owner 2026-11-17: Egyptian stations first - the Holy Quran from Cairo, then the most listened Egyptian stations
+// that stream directly (https). Maspero's General Programme / Middle East / Sawt El Qahira stream only inside
+// Dailymotion video players, so they cannot play here.
+const PINNED = [
+  "f62577e7-24e6-416d-a262-033545e41b44", // إذاعة القرآن الكريم من القاهرة
+  "006d7922-ffce-4c74-85ab-55ff2ed60fcc", // Radio 9090
+  "047fcfb5-9e59-478e-9e6a-a006cc401868", // Nogoum FM
+  "b1d17829-6522-481b-bb5c-839c3fd44353", // Radio Hits 88.2 Cairo
+  "b8305209-741d-4cd4-8a6d-fac3a5f43e1b", // Mix FM 87.8
+  "9346c66b-f42a-4a06-865d-e96dc44b1aa3", // Sha3by FM
+  "79282606-a5a9-467b-88dc-7a63fc642f80", // On Sport FM
+];
 const CACHE_MS = 24 * 60 * 60 * 1000;
 
 function readCache(): RadioStation[] | null {
@@ -57,12 +69,13 @@ export default function useRadioStations(active: boolean) {
     const country = radioCountry();
     const neighbour = radioNeighbour(country);
     Promise.allSettled([
+      RadioBrowserClient.listByUuids(PINNED).catch(() => [] as RadioStation[]),
       country ? RadioBrowserClient.listByCountryCode(country, 20) : Promise.resolve([] as RadioStation[]),
       neighbour ? RadioBrowserClient.listByCountryCode(neighbour, 6) : Promise.resolve([] as RadioStation[]),
     ])
-      .then(async ([own, near]) => {
+      .then(async ([pinned, own, near]) => {
         const merged = new Map<string, RadioStation>();
-        for (const settled of [own, near]) {
+        for (const settled of [pinned, own, near]) {
           if (settled.status !== "fulfilled") continue;
           for (const station of settled.value) if (!merged.has(station.stationUuid)) merged.set(station.stationUuid, station);
         }

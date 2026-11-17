@@ -37,3 +37,8 @@ export async function withStepUp<T extends { error: string | null }>(action: str
   if (!confirmer || !(await confirmer(code))) return first;
   return run();
 }
+
+/** Owner 2026-11-17: ask the person to confirm who they are now (entering the finance module), without a refused call first. */
+export async function askToConfirm(code: StepUpCode): Promise<boolean> {
+  return confirmer ? confirmer(code) : false;
+}

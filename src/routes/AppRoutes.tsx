@@ -1,3 +1,4 @@
+import FinanceGate from "../components/common/FinanceGate";
 import { lazy, Suspense } from "react";
 import PlanRoute from "./PlanRoute";
 import AccessRoute from "./AccessRoute";
@@ -160,12 +161,12 @@ export default function AppRoutes() {
             <Route path="/leave" element={<PlanRoute feature="leave"><LeaveRequestsPage /></PlanRoute>} />
             {/* QA-003 (2026-11-16): the payroll and external-pay pages behind the same permission as their home page - a
                 manager typing the address got the page with a "no payroll permission" error (the server refused the data) */}
-            <Route path="/payroll" element={<AccessRoute anyOf={["payroll.access"]}><PlanRoute feature="payroll"><PayrollHomePage /></PlanRoute></AccessRoute>} />
-            <Route path="/payroll/cycles/:cycleId" element={<AccessRoute anyOf={["payroll.access"]}><PlanRoute feature="payroll"><PayrollCyclePage /></PlanRoute></AccessRoute>} />
-            <Route path="/payroll/profiles" element={<AccessRoute anyOf={["payroll.access"]}><PlanRoute feature="payroll"><PayrollProfilesPage /></PlanRoute></AccessRoute>} />
-            <Route path="/payroll/settings" element={<AccessRoute anyOf={["payroll.access"]}><PlanRoute feature="payroll"><PayrollSettingsPage /></PlanRoute></AccessRoute>} />
-            <Route path="/payroll/tax" element={<AccessRoute anyOf={["payroll.access"]}><PlanRoute feature="payroll"><TaxConfigPage /></PlanRoute></AccessRoute>} />
-            <Route path="/payroll/requests" element={<AccessRoute anyOf={["payroll.access"]}><PlanRoute feature="payroll"><PayslipRequestsPage /></PlanRoute></AccessRoute>} />
+            <Route path="/payroll" element={<AccessRoute anyOf={["payroll.access"]}><PlanRoute feature="payroll"><FinanceGate><PayrollHomePage /></FinanceGate></PlanRoute></AccessRoute>} />
+            <Route path="/payroll/cycles/:cycleId" element={<AccessRoute anyOf={["payroll.access"]}><PlanRoute feature="payroll"><FinanceGate><PayrollCyclePage /></FinanceGate></PlanRoute></AccessRoute>} />
+            <Route path="/payroll/profiles" element={<AccessRoute anyOf={["payroll.access"]}><PlanRoute feature="payroll"><FinanceGate><PayrollProfilesPage /></FinanceGate></PlanRoute></AccessRoute>} />
+            <Route path="/payroll/settings" element={<AccessRoute anyOf={["payroll.access"]}><PlanRoute feature="payroll"><FinanceGate><PayrollSettingsPage /></FinanceGate></PlanRoute></AccessRoute>} />
+            <Route path="/payroll/tax" element={<AccessRoute anyOf={["payroll.access"]}><PlanRoute feature="payroll"><FinanceGate><TaxConfigPage /></FinanceGate></PlanRoute></AccessRoute>} />
+            <Route path="/payroll/requests" element={<AccessRoute anyOf={["payroll.access"]}><PlanRoute feature="payroll"><FinanceGate><PayslipRequestsPage /></FinanceGate></PlanRoute></AccessRoute>} />
             <Route path="/payslips" element={<PlanRoute feature="payroll"><MyPayslipsPage /></PlanRoute>} />
             <Route path="/me" element={<MyProfilePage />} />
             <Route path="/documents" element={<AccessRoute anyOf={["hr.manage"]}><PlanRoute feature="documents"><DocumentsPage /></PlanRoute></AccessRoute>} />

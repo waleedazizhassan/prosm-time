@@ -147,6 +147,14 @@ class RadioBrowserClient {
       .map(mapStation);
   }
 
+  // owner 2026-11-17: chosen stations by their directory ids (one request), in the order given
+  async listByUuids(uuids: string[]): Promise<RadioStation[]> {
+    if (uuids.length === 0) return [];
+    const rows = await this.requestJson<RawStationRow[]>(`/json/stations/byuuid/${uuids.join(",")}`);
+    const byId = new Map((rows ?? []).map((row) => [mapStation(row).stationUuid, mapStation(row)]));
+    return uuids.map((id) => byId.get(id)).filter((s): s is RadioStation => Boolean(s));
+  }
+
   async listTopStations(limit = 30): Promise<RadioStation[]> {
     // § switched from the path-based /topclick/{limit} to /search -
     // see this file's own MIN_BITRATE_KBPS comment for why: bitrateMin
