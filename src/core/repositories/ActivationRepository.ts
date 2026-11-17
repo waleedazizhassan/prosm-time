@@ -1,3 +1,4 @@
+import i18n from "../../i18n";
 import DatabaseManager from "../database/DatabaseManager";
 
 export interface ServiceResult<T = null> {
@@ -46,8 +47,9 @@ class ActivationRepository {
 
   async activateOrganization(input: ActivationInput): Promise<ServiceResult<ActivationResultData>> {
     try {
+      // owner 2026-11-17: the welcome email is written in the language the owner activated in
       const { data, error } = await this.client.functions.invoke("activate-organization", {
-        body: input,
+        body: { ...input, language: i18n.language },
       });
 
       if (error) {

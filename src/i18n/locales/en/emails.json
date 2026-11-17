@@ -174,14 +174,36 @@
         "manager_alerts": "Manager alerts (missed shift, overtime, morning summary)",
         "announcements": "Notice board",
         "departments": "Departments",
-        "payroll": "Payroll (insurance, tax, loans, payslips)",
+        "payroll": "Finance: Payroll (insurance, tax, loans, payslips)",
         "integrations": "Integrations, API and attendance from fingerprint devices",
         "delegation": "Full and time-limited delegation",
         "retention": "Data retention control",
         "documents": "Employee documents and their expiry",
-        "penalties": "Progressive penalties bylaw and incentives"
-      }
-    }
+        "penalties": "Progressive penalties bylaw and incentives",
+        "governance_models": "Governance models: decentralized and centralized",
+        "governance_advanced": "Combined (two-step) governance and a model per request kind",
+        "connect_chat": "Chats and groups",
+        "connect_camera_photo": "Verified camera photo in chat",
+        "connect_calls": "Voice and video calls",
+        "connect_site_broadcast": "A message to everyone on a site",
+        "connect_push_to_talk": "Push to talk (radio)",
+        "connect_meetings": "Meetings and group calls",
+        "connect_screen_share": "Screen sharing",
+        "connect_meeting_recording": "Meeting recording"
+      },
+      "welcomeNote": "{{org}} has been created in PROSM Time with licence number {{license}}.",
+      "welcomeHeading": "New licence",
+      "welcomeFooter": "Issued automatically by PROSM when the organisation was created. Questions: support@prosm.net"
+    },
+    "welcomeSubject": "Welcome to PROSM Time - {{org}} is ready",
+    "welcomeIntro": "{{org}} has been created in PROSM Time with licence number {{license}}. Your licence certificate is attached as a PDF, with your plan and everything it includes.",
+    "welcomeTrial": "The trial lasts 30 days with every feature, and your data is kept afterwards - nothing is deleted.",
+    "welcomeStepsTitle": "First steps:",
+    "welcomeStep1": "Add your work sites in \"Sites\" and set each site's area.",
+    "welcomeStep2": "Invite your team from \"People\": each person gets an invitation email.",
+    "welcomeStep3": "Choose the governance model in Settings > Governance: who approves requests.",
+    "welcomeStep4": "Install the Android app from Google Play for the whole team.",
+    "welcomeOpen": "Sign in here:"
   },
   "payslip": {
     "subject": "Your payslip - {{cycle}}",
