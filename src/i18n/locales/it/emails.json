@@ -178,14 +178,36 @@
         "manager_alerts": "Avvisi ai responsabili (assenza, straordinario, riepilogo)",
         "announcements": "Bacheca",
         "departments": "Reparti",
-        "payroll": "Paghe (contributi, imposte, prestiti, buste)",
+        "payroll": "Finanza: Paghe (contributi, imposte, prestiti, buste)",
         "integrations": "Integrazioni, API e presenze da lettori biometrici",
         "delegation": "Delega completa e a tempo",
         "retention": "Controllo della conservazione dei dati",
         "documents": "Documenti dei dipendenti e scadenze",
-        "penalties": "Regolamento sanzioni progressive e incentivi"
-      }
-    }
+        "penalties": "Regolamento sanzioni progressive e incentivi",
+        "governance_models": "Modelli di governance: decentrato e centralizzato",
+        "governance_advanced": "Governance combinata (due passaggi) e un modello per tipo",
+        "connect_chat": "Chat e gruppi",
+        "connect_camera_photo": "Foto verificata dalla fotocamera in chat",
+        "connect_calls": "Chiamate vocali e video",
+        "connect_site_broadcast": "Messaggio a tutto un sito",
+        "connect_push_to_talk": "Premi per parlare (radio)",
+        "connect_meetings": "Riunioni e chiamate di gruppo",
+        "connect_screen_share": "Condivisione schermo",
+        "connect_meeting_recording": "Registrazione riunioni"
+      },
+      "welcomeNote": "{{org}} è stata creata in PROSM Time con la licenza numero {{license}}.",
+      "welcomeHeading": "Nuova licenza",
+      "welcomeFooter": "Emesso automaticamente da PROSM alla creazione dell'organizzazione. Domande: support@prosm.net"
+    },
+    "welcomeSubject": "Benvenuto in PROSM Time - {{org}} è pronta",
+    "welcomeIntro": "{{org}} è stata creata in PROSM Time con la licenza numero {{license}}. Il certificato di licenza è allegato in PDF, con il tuo piano e tutto ciò che include.",
+    "welcomeTrial": "La prova dura 30 giorni con tutte le funzioni e i tuoi dati restano conservati dopo.",
+    "welcomeStepsTitle": "Primi passi:",
+    "welcomeStep1": "Aggiungi le sedi in «Sedi» e imposta l'area di ciascuna.",
+    "welcomeStep2": "Invita il tuo team da «Persone»: ognuno riceve un'email di invito.",
+    "welcomeStep3": "Scegli il modello di governance in Impostazioni > Governance: chi approva le richieste.",
+    "welcomeStep4": "Installa l'app Android da Google Play per tutto il team.",
+    "welcomeOpen": "Accedi qui:"
   },
   "payslip": {
     "subject": "La tua busta paga - {{cycle}}",

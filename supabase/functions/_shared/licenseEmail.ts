@@ -17,6 +17,10 @@ const FEATURE_ROWS = [
   "sos", "announcements", "departments", "documents", "penalties", "leave", "scheduling", "allowances", "kiosk", "on_behalf", "clock_rules", "export", "payroll_export", "roles_manager",
   "payroll", "labor_cost", "audit", "roles_all", "clock_suggestion", "daily_summary", "manager_alerts",
   "integrations", "delegation", "retention",
+  // owner 2026-11-17: the governance models and PROSM Connect, as on the plan card
+  "governance_models", "governance_advanced",
+  "connect_chat", "connect_camera_photo", "connect_calls", "connect_site_broadcast",
+  "connect_push_to_talk", "connect_meetings", "connect_screen_share", "connect_meeting_recording",
 ];
 
 /** The plan's row from the plans table (read by the sender). */
@@ -112,10 +116,17 @@ export function planIncludes(info: LicencePlanInfo | null, language: string): Li
   return { title: T("licence.pdf.includes"), summary: [plain(`${sites} · ${history}`), plain(T("licence.pdf.always"))], features };
 }
 
-export async function renderLicenceEmail(row: LicenceEmailRow) {
+/** Owner 2026-11-17: `welcome` - the email sent when the organisation is created (the certificate, no changes). */
+export async function renderLicenceEmail(row: LicenceEmailRow, options: { welcome?: boolean; trial?: boolean } = {}) {
   const language = emailLanguage(row.language);
   const { T } = words(language);
   const data = licencePdfData(row, language);
+  if (options.welcome) {
+    data.changes = [];
+    data.texts.whatChanged = T("licence.pdf.welcomeHeading");
+    data.texts.noChanges = T("licence.pdf.welcomeNote", { org: row.organizationName, license: row.licenseNumber });
+    data.texts.footer = T("licence.pdf.welcomeFooter");
+  }
   const pageTexts = [data.organizationName, ...Object.values(data.texts), data.planValue, data.statusValue, data.usersValue, data.devicesValue, data.validUntilValue, ...data.changes.flatMap((c) => [c.label, c.from, c.to]), ...(data.includes ? [data.includes.title, ...data.includes.summary, ...data.includes.features] : [])];
   const fonts = await fontsFor(pageTexts);
   const logo = await prosmLogo();
@@ -135,6 +146,26 @@ export async function renderLicenceEmail(row: LicenceEmailRow) {
   <hr style="border:none;border-top:1px solid #e3e9f2">
   <p style="color:#5b6b86;font-size:13px">${escape(T("common.signature"))}</p>
 </div>`;
+  if (options.welcome) {
+    const stepList = [1, 2, 3, 4].map((i) => `<li>${escape(T(`licence.welcomeStep${i}`))}</li>`).join("");
+    const welcomeHtml = `<div dir="${rtl ? "rtl" : "ltr"}" style="font-family:Tahoma,Arial,sans-serif;font-size:15px;color:#1b2640;line-height:1.8;text-align:${rtl ? "right" : "left"}">
+  <p>${escape(T("licence.greeting", { name: row.name ?? "" }))}</p>
+  <p>${escape(T("licence.welcomeIntro", { org: row.organizationName, license: row.licenseNumber }))}</p>
+  ${options.trial ? `<p>${escape(T("licence.welcomeTrial"))}</p>` : ""}
+  <p><b>${escape(T("licence.welcomeStepsTitle"))}</b></p>
+  <ol>${stepList}</ol>
+  <p>${escape(T("licence.welcomeOpen"))} <a href="https://time.prosm.net">time.prosm.net</a></p>
+  <p>${escape(T("licence.contact"))} <a href="mailto:support@prosm.net">support@prosm.net</a></p>
+  <hr style="border:none;border-top:1px solid #e3e9f2">
+  <p style="color:#5b6b86;font-size:13px">${escape(T("common.signature"))}</p>
+</div>`;
+    return {
+      to: row.to,
+      subject: T("licence.welcomeSubject", { org: row.organizationName }),
+      html: welcomeHtml,
+      attachments: [{ name: `PROSM-Time-licence-${row.licenseNumber}.pdf`, contentBase64: base64(pdf) }],
+    };
+  }
   return {
     to: row.to,
     subject: T("licence.subject", { org: row.organizationName }),

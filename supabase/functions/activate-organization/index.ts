@@ -35,6 +35,8 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 
 import { corsHeaders, successResponse, errorResponse } from "../_shared/http.ts";
 import { clientIdentifier, enforceRateLimits, hashIdentifier } from "../_shared/rateLimit.ts";
+import { renderLicenceEmail, type LicenceEmailRow } from "../_shared/licenseEmail.ts";
+import { sendEmail } from "../_shared/emailService.ts";
 
 interface ActivationResult {
   success: boolean;
@@ -209,6 +211,40 @@ serve(async (request: Request) => {
       p_owner: { ...owner, version: 1 },
     });
     if (ownerError) console.error("[activate-organization] owner data not saved", ownerError);
+
+    // Owner 2026-11-17: a welcome email to the owner with the licence certificate (PDF) listing the plan.
+    // Best effort - the organisation exists either way, and a failure is only logged.
+    try {
+      const organizationId = bootstrapResult.organizationId as string;
+      const [{ data: org }, { data: state }, { data: ent }] = await Promise.all([
+        serviceClient.from("organizations").select("name").eq("id", organizationId).maybeSingle(),
+        serviceClient.from("license_activation_state").select("license_number, status, max_users, max_devices, expires_at").eq("organization_id", organizationId).maybeSingle(),
+        serviceClient.from("entitlements").select("plan").eq("organization_id", organizationId).maybeSingle(),
+      ]);
+      const planKey = (ent?.plan as string | undefined) ?? "legacy";
+      const { data: plan } = await serviceClient.from("plans").select("feature_flags, max_sites, history_days").eq("key", planKey).maybeSingle();
+      const row: LicenceEmailRow = {
+        organizationId,
+        to: owner.email,
+        name: owner.fullName,
+        organizationName: (org?.name as string | undefined) ?? organizationName.trim(),
+        licenseNumber: (state?.license_number as string | undefined) ?? license.licenseNumber,
+        status: (state?.status as string | undefined) ?? "ACTIVE",
+        plan: planKey,
+        maxUsers: (state?.max_users as number | null | undefined) ?? license.maxUsers ?? null,
+        maxDevices: (state?.max_devices as number | null | undefined) ?? license.maxDevices ?? null,
+        activeUsers: 1,
+        expiresAt: (state?.expires_at as string | null | undefined) ?? license.expiresAt ?? null,
+        data: {},
+        createdAt: new Date().toISOString(),
+        language: typeof payload.language === "string" ? payload.language : null,
+        planInfo: plan ? { featureFlags: plan.feature_flags, maxSites: plan.max_sites, historyDays: plan.history_days } : null,
+      };
+      const email = await renderLicenceEmail(row, { welcome: true, trial: demo });
+      await sendEmail({ ...email, purpose: "licence_welcome", supabase: serviceClient, organizationId });
+    } catch (welcomeError) {
+      console.error("[activate-organization] welcome email not sent", welcomeError);
+    }
 
     return successResponse({
       organizationId: bootstrapResult.organizationId,

@@ -178,14 +178,36 @@
         "manager_alerts": "Avisos a responsables (falta, horas extra, resumen de la mañana)",
         "announcements": "Tablón de anuncios",
         "departments": "Departamentos",
-        "payroll": "Nómina (seguros, impuestos, préstamos, recibos)",
+        "payroll": "Finanzas: Nómina (seguros, impuestos, préstamos, recibos)",
         "integrations": "Integraciones, API y asistencia de lectores de huella",
         "delegation": "Delegación completa y temporal",
         "retention": "Control de retención de datos",
         "documents": "Documentos del personal y su vencimiento",
-        "penalties": "Reglamento de sanciones progresivas e incentivos"
-      }
-    }
+        "penalties": "Reglamento de sanciones progresivas e incentivos",
+        "governance_models": "Modelos de gobierno: descentralizado y centralizado",
+        "governance_advanced": "Gobierno combinado (dos pasos) y un modelo por tipo",
+        "connect_chat": "Chats y grupos",
+        "connect_camera_photo": "Foto verificada de cámara en el chat",
+        "connect_calls": "Llamadas de voz y video",
+        "connect_site_broadcast": "Mensaje a todo un sitio",
+        "connect_push_to_talk": "Pulsar para hablar (radio)",
+        "connect_meetings": "Reuniones y llamadas de grupo",
+        "connect_screen_share": "Compartir pantalla",
+        "connect_meeting_recording": "Grabación de reuniones"
+      },
+      "welcomeNote": "{{org}} se ha creado en PROSM Time con la licencia número {{license}}.",
+      "welcomeHeading": "Nueva licencia",
+      "welcomeFooter": "Emitido automáticamente por PROSM al crear la organización. Consultas: support@prosm.net"
+    },
+    "welcomeSubject": "Bienvenido a PROSM Time - {{org}} está lista",
+    "welcomeIntro": "{{org}} se ha creado en PROSM Time con la licencia número {{license}}. El certificado de licencia va adjunto en PDF, con tu plan y todo lo que incluye.",
+    "welcomeTrial": "La prueba dura 30 días con todas las funciones y tus datos se conservan después.",
+    "welcomeStepsTitle": "Primeros pasos:",
+    "welcomeStep1": "Añade tus sedes en «Sedes» y define el área de cada una.",
+    "welcomeStep2": "Invita a tu equipo desde «Personas»: cada persona recibe un correo de invitación.",
+    "welcomeStep3": "Elige el modelo de gobierno en Ajustes > Gobierno: quién aprueba las solicitudes.",
+    "welcomeStep4": "Instala la app de Android desde Google Play para todo el equipo.",
+    "welcomeOpen": "Entra aquí:"
   },
   "payslip": {
     "subject": "Su recibo de nómina - {{cycle}}",

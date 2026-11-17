@@ -174,14 +174,36 @@
         "manager_alerts": "Manager-Hinweise (Fehlen, Überstunden, Morgenübersicht)",
         "announcements": "Schwarzes Brett",
         "departments": "Abteilungen",
-        "payroll": "Lohn (Versicherung, Steuer, Darlehen, Abrechnungen)",
+        "payroll": "Finanzen: Lohn (Versicherung, Steuer, Darlehen, Abrechnungen)",
         "integrations": "Integrationen, API und Anwesenheit aus Fingerabdruckgeräten",
         "delegation": "Volle und befristete Vertretung",
         "retention": "Steuerung der Datenaufbewahrung",
         "documents": "Mitarbeiterdokumente und Ablaufdaten",
-        "penalties": "Gestufte Sanktionsordnung und Prämien"
-      }
-    }
+        "penalties": "Gestufte Sanktionsordnung und Prämien",
+        "governance_models": "Governance-Modelle: dezentral und zentral",
+        "governance_advanced": "Kombinierte Governance (zwei Schritte) und ein Modell je Antragsart",
+        "connect_chat": "Chats und Gruppen",
+        "connect_camera_photo": "Verifiziertes Kamerafoto im Chat",
+        "connect_calls": "Sprach- und Videoanrufe",
+        "connect_site_broadcast": "Nachricht an alle eines Standorts",
+        "connect_push_to_talk": "Push-to-Talk (Funk)",
+        "connect_meetings": "Besprechungen und Gruppenanrufe",
+        "connect_screen_share": "Bildschirmfreigabe",
+        "connect_meeting_recording": "Besprechungsaufzeichnung"
+      },
+      "welcomeNote": "{{org}} wurde in PROSM Time mit der Lizenznummer {{license}} angelegt.",
+      "welcomeHeading": "Neue Lizenz",
+      "welcomeFooter": "Automatisch von PROSM beim Anlegen der Organisation ausgestellt. Fragen: support@prosm.net"
+    },
+    "welcomeSubject": "Willkommen bei PROSM Time - {{org}} ist bereit",
+    "welcomeIntro": "{{org}} wurde in PROSM Time mit der Lizenznummer {{license}} angelegt. Das Lizenzzertifikat ist als PDF angehängt, mit Ihrem Paket und allem, was es enthält.",
+    "welcomeTrial": "Die Testphase dauert 30 Tage mit allen Funktionen; Ihre Daten bleiben danach erhalten.",
+    "welcomeStepsTitle": "Erste Schritte:",
+    "welcomeStep1": "Legen Sie unter „Standorte“ Ihre Arbeitsorte und deren Bereich an.",
+    "welcomeStep2": "Laden Sie Ihr Team unter „Personen“ ein: jede Person erhält eine Einladung per E-Mail.",
+    "welcomeStep3": "Wählen Sie unter Einstellungen > Governance, wer Anträge genehmigt.",
+    "welcomeStep4": "Installieren Sie die Android-App aus Google Play für das ganze Team.",
+    "welcomeOpen": "Hier anmelden:"
   },
   "payslip": {
     "subject": "Ihre Gehaltsabrechnung - {{cycle}}",

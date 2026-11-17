@@ -204,9 +204,20 @@ export async function buildLicencePdf(libs: PdfLibs, fonts: LicencePdfFonts, log
   if (data.includes && data.includes.features.length > 0) {
     y -= 34;
     drawStart(data.includes.title, margin, y, 15, "bold", blue);
+    // owner 2026-11-17: a long summary line is wrapped (it used to run off the page edge)
+    const maxWidth = W - margin * 2;
     for (const line of data.includes.summary) {
-      y -= 18;
-      drawStart(line, margin, y, textWidth(W - margin * 2, line, 10, "regular"), "regular", muted);
+      const rows: string[] = [];
+      let current = "";
+      for (const word of line.split(" ")) {
+        const next = current ? `${current} ${word}` : word;
+        if (current && widthOf(next, 9, "regular") > maxWidth) { rows.push(current); current = word; } else current = next;
+      }
+      if (current) rows.push(current);
+      rows.forEach((row, i) => {
+        y -= i === 0 ? 18 : 13;
+        drawStart(row, margin, y, 9, "regular", muted);
+      });
     }
     y -= 8;
     const items = data.includes.features;

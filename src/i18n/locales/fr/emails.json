@@ -178,14 +178,36 @@
         "manager_alerts": "Alertes responsables (absence, heures sup., résumé du matin)",
         "announcements": "Tableau d'affichage",
         "departments": "Services",
-        "payroll": "Paie (cotisations, impôt, prêts, bulletins)",
+        "payroll": "Finances: Paie (cotisations, impôt, prêts, bulletins)",
         "integrations": "Intégrations, API et pointage des badgeuses",
         "delegation": "Délégation complète et temporaire",
         "retention": "Contrôle de la conservation des données",
         "documents": "Documents des salariés et leur expiration",
-        "penalties": "Règlement de sanctions progressives et primes"
-      }
-    }
+        "penalties": "Règlement de sanctions progressives et primes",
+        "governance_models": "Modèles de gouvernance : décentralisé et centralisé",
+        "governance_advanced": "Gouvernance combinée (deux étapes) et un modèle par type",
+        "connect_chat": "Discussions et groupes",
+        "connect_camera_photo": "Photo vérifiée de l’appareil dans la discussion",
+        "connect_calls": "Appels vocaux et vidéo",
+        "connect_site_broadcast": "Message à tout un site",
+        "connect_push_to_talk": "Appuyer pour parler (radio)",
+        "connect_meetings": "Réunions et appels de groupe",
+        "connect_screen_share": "Partage d’écran",
+        "connect_meeting_recording": "Enregistrement des réunions"
+      },
+      "welcomeNote": "{{org}} a été créée dans PROSM Time avec la licence numéro {{license}}.",
+      "welcomeHeading": "Nouvelle licence",
+      "welcomeFooter": "Émis automatiquement par PROSM à la création de l'organisation. Questions : support@prosm.net"
+    },
+    "welcomeSubject": "Bienvenue sur PROSM Time - {{org}} est prête",
+    "welcomeIntro": "{{org}} a été créée dans PROSM Time avec la licence numéro {{license}}. Le certificat de licence est joint en PDF, avec votre offre et tout ce qu'elle comprend.",
+    "welcomeTrial": "L'essai dure 30 jours avec toutes les fonctions, et vos données sont conservées ensuite.",
+    "welcomeStepsTitle": "Premiers pas :",
+    "welcomeStep1": "Ajoutez vos sites dans « Sites » et définissez la zone de chacun.",
+    "welcomeStep2": "Invitez votre équipe depuis « Personnes » : chacun reçoit un e-mail d'invitation.",
+    "welcomeStep3": "Choisissez le modèle de gouvernance dans Paramètres > Gouvernance : qui approuve les demandes.",
+    "welcomeStep4": "Installez l'application Android depuis Google Play pour toute l'équipe.",
+    "welcomeOpen": "Connectez-vous ici :"
   },
   "payslip": {
     "subject": "Votre bulletin de paie - {{cycle}}",

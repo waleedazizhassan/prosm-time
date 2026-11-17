@@ -170,14 +170,36 @@
         "manager_alerts": "经理提醒（缺勤、加班、晨间汇总）",
         "announcements": "公告栏",
         "departments": "部门",
-        "payroll": "工资（社保、税、借款、工资单）",
+        "payroll": "财务: 工资（社保、税、借款、工资单）",
         "integrations": "集成、API 与指纹设备考勤",
         "delegation": "完全及限期授权",
         "retention": "数据保留控制",
         "documents": "员工证件及到期提醒",
-        "penalties": "阶梯处罚规章与奖励"
-      }
-    }
+        "penalties": "阶梯处罚规章与奖励",
+        "governance_models": "治理模式：分散和集中",
+        "governance_advanced": "组合（两步）治理和按申请类型设置模式",
+        "connect_chat": "聊天和群组",
+        "connect_camera_photo": "聊天中的已验证相机照片",
+        "connect_calls": "语音和视频通话",
+        "connect_site_broadcast": "向站点所有人发送消息",
+        "connect_push_to_talk": "一键通话（对讲）",
+        "connect_meetings": "会议和群组通话",
+        "connect_screen_share": "屏幕共享",
+        "connect_meeting_recording": "会议录制"
+      },
+      "welcomeNote": "{{org}} 已在 PROSM Time 中创建，许可证编号 {{license}}。",
+      "welcomeHeading": "新许可证",
+      "welcomeFooter": "由 PROSM 在创建组织时自动签发。如有疑问：support@prosm.net"
+    },
+    "welcomeSubject": "欢迎使用 PROSM Time - {{org}} 已就绪",
+    "welcomeIntro": "{{org}} 已在 PROSM Time 中创建，许可证编号 {{license}}。附件 PDF 是许可证证书，列出你的套餐及其包含的全部内容。",
+    "welcomeTrial": "试用期为 30 天，包含所有功能；试用结束后数据会保留。",
+    "welcomeStepsTitle": "第一步：",
+    "welcomeStep1": "在「站点」中添加工作站点并设置范围。",
+    "welcomeStep2": "在「人员」中邀请团队：每人都会收到邀请邮件。",
+    "welcomeStep3": "在 设置 > 治理 中选择治理模式：由谁审批申请。",
+    "welcomeStep4": "为整个团队从 Google Play 安装 Android 应用。",
+    "welcomeOpen": "在此登录："
   },
   "payslip": {
     "subject": "您的工资单 - {{cycle}}",

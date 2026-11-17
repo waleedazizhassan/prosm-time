@@ -178,14 +178,36 @@
         "manager_alerts": "Alertas aos gestores (falta, hora extra, resumo da manhã)",
         "announcements": "Mural de avisos",
         "departments": "Departamentos",
-        "payroll": "Folha (encargos, impostos, empréstimos, holerites)",
+        "payroll": "Financeiro: Folha (encargos, impostos, empréstimos, holerites)",
         "integrations": "Integrações, API e ponto de leitores biométricos",
         "delegation": "Delegação completa e temporária",
         "retention": "Controle de retenção de dados",
         "documents": "Documentos dos funcionários e validade",
-        "penalties": "Regulamento de sanções progressivas e incentivos"
-      }
-    }
+        "penalties": "Regulamento de sanções progressivas e incentivos",
+        "governance_models": "Modelos de governança: descentralizado e centralizado",
+        "governance_advanced": "Governança combinada (duas etapas) e um modelo por tipo",
+        "connect_chat": "Conversas e grupos",
+        "connect_camera_photo": "Foto verificada da câmera na conversa",
+        "connect_calls": "Chamadas de voz e vídeo",
+        "connect_site_broadcast": "Mensagem para todo um local",
+        "connect_push_to_talk": "Apertar para falar (rádio)",
+        "connect_meetings": "Reuniões e chamadas em grupo",
+        "connect_screen_share": "Compartilhar tela",
+        "connect_meeting_recording": "Gravação de reuniões"
+      },
+      "welcomeNote": "{{org}} foi criada no PROSM Time com a licença número {{license}}.",
+      "welcomeHeading": "Nova licença",
+      "welcomeFooter": "Emitido automaticamente pela PROSM ao criar a organização. Dúvidas: support@prosm.net"
+    },
+    "welcomeSubject": "Bem-vindo ao PROSM Time - {{org}} está pronta",
+    "welcomeIntro": "{{org}} foi criada no PROSM Time com a licença número {{license}}. O certificado de licença vai anexado em PDF, com o seu plano e tudo o que inclui.",
+    "welcomeTrial": "O teste dura 30 dias com todas as funções e os seus dados ficam guardados depois.",
+    "welcomeStepsTitle": "Primeiros passos:",
+    "welcomeStep1": "Adicione os locais de trabalho em «Locais» e defina a área de cada um.",
+    "welcomeStep2": "Convide a equipe em «Pessoas»: cada pessoa recebe um e-mail de convite.",
+    "welcomeStep3": "Escolha o modelo de governança em Configurações > Governança: quem aprova os pedidos.",
+    "welcomeStep4": "Instale o app Android pelo Google Play para toda a equipe.",
+    "welcomeOpen": "Entre aqui:"
   },
   "payslip": {
     "subject": "O seu recibo de vencimento - {{cycle}}",
