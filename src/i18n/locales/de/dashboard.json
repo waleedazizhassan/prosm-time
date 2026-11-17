@@ -255,7 +255,13 @@
         "action": "Einstellungen",
         "why": "Hält die Schichtbegleitung auf Handys stabil, die Apps zum Akkusparen anhalten. Ohne dies funktioniert das Einstempeln wie gewohnt."
       },
-      "optional": "Optional"
+      "optional": "Optional",
+      "fullScreen": {
+        "title": "Vollbild-Anrufbildschirm erlauben",
+        "hint": "Öffne die Einstellungen und aktiviere „Vollbildbenachrichtigungen erlauben“ für PROSM Time.",
+        "action": "Einstellungen",
+        "why": "So calls and SOS alerts open on the screen even when the phone is locked, instead of a plain notification."
+      }
     },
     "mood": {
       "question": "Wie war die Arbeit heute?",

@@ -149,7 +149,9 @@
     "cancel": "Annulla",
     "reply": "Rispondi",
     "cancelReply": "Annulla risposta",
-    "typing": "{{name}} sta scrivendo…"
+    "typing": "{{name}} sta scrivendo…",
+    "deleteAll": "Elimina tutte le chat",
+    "deleteAllConfirm": "Eliminare tutte le chat da questo dispositivo? L’altra parte conserva le sue."
   },
   "info": {
     "inSince": "Presente dalle {{time}}",

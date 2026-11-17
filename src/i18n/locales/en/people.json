@@ -200,7 +200,9 @@
       "timeHint": "Leave empty for now. Up to 7 days back.",
       "noSiteOption": "No registered site (write the place)",
       "placeNameLabel": "Place name"
-    }
+    },
+    "previousPerson": "Previous person",
+    "nextPerson": "Next person"
   },
   "onBehalf": {
     "title": "Clock In/Out On Behalf",

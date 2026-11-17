@@ -200,7 +200,9 @@
       "timeHint": "Leer = jetzt. Bis zu 7 Tage zurück.",
       "noSiteOption": "Kein registrierter Standort (Ort eingeben)",
       "placeNameLabel": "Ortsname"
-    }
+    },
+    "previousPerson": "Vorherige Person",
+    "nextPerson": "Nächste Person"
   },
   "onBehalf": {
     "title": "Im Auftrag ein-/ausstempeln",

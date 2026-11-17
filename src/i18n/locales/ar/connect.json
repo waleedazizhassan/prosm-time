@@ -149,7 +149,9 @@
     "cancel": "إلغاء",
     "reply": "رد",
     "cancelReply": "إلغاء الرد",
-    "typing": "{{name}} يكتب…"
+    "typing": "{{name}} يكتب…",
+    "deleteAll": "مسح كل المحادثات",
+    "deleteAllConfirm": "تمسح كل المحادثات من جهازك؟ الطرف التاني بتفضل عنده."
   },
   "info": {
     "inSince": "حاضر من {{time}}",

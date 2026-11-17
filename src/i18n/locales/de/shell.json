@@ -41,7 +41,9 @@
     "checking": "Wird überprüft...",
     "upToDate": "Sie haben die neueste Version.",
     "noticeTitle": "PROSM Time-Update",
-    "availablePlay": "Eine neue Version ist bei Google Play verfügbar."
+    "availablePlay": "Eine neue Version ist bei Google Play verfügbar.",
+    "whatsNew": "Neu in diesem Update",
+    "tapToUpdate": "Tippen, um über Google Play zu aktualisieren"
   },
   "offline": {
     "message": "Kein Problem - Ein- und Ausstempeln und Pausen funktionieren weiter und werden gesendet, sobald Sie wieder online sind.",
@@ -398,7 +400,7 @@
     "attendance": "Außendienst",
     "sites": "Standorte und externe Kräfte",
     "people": "Personal",
-    "payroll": "Gehaltsabrechnung",
+    "payroll": "Finanzen",
     "reports": "Berichte und Analysen",
     "settings": "Verwaltung und Governance",
     "help": "Hilfe",

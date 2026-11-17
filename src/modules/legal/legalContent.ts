@@ -8,8 +8,9 @@
 // read and acknowledge the new version once (LegalAcknowledgementGate).
 import { PRIVACY_V2_AR, PRIVACY_V2_EN } from "./privacyPolicyV2";
 
+// 2026-11-17 (owner): PROSM Connect, governance, two-step verification and the call relays added (privacy version 4).
 // 2026-11-13 (owner): both texts brought in line with the app as it is now (privacy version 3)
-export const LEGAL_VERSION = "2026-11-13";
+export const LEGAL_VERSION = "2026-11-17";
 
 export type LegalBlock = { type: "paragraph"; text: string } | { type: "bullets"; items: string[] } | { type: "table"; head: string[]; rows: string[][] };
 
@@ -32,7 +33,7 @@ export type LegalLanguage = "ar" | "en";
 
 const TERMS_EN: LegalDocument = {
   title: "Terms of Use",
-  updated: "Last updated: 13 November 2026",
+  updated: "Last updated: 17 November 2026",
   intro: [
     "These terms govern the use of PROSM Time, provided by PROSM. By activating an organisation account, signing in, or using a PROSM Time kiosk, you agree to them. The person who activates an account accepts these terms on behalf of the organisation (\"the Organisation\") and confirms that they have authority to do so.",
     "How personal data is handled is described in the Privacy Policy, which forms part of these terms.",
@@ -41,7 +42,7 @@ const TERMS_EN: LegalDocument = {
     {
       heading: "1. The service",
       paragraphs: [
-        "PROSM Time records attendance, breaks, leave, timesheets, allowances and workforce presence during shifts. Depending on the plan, it also offers location checks at work sites, attendance photos, a kiosk for site workers, SOS alerts, shift schedules, announcements, employee files with their documents and contracts, a penalties and incentives bylaw, payroll with payslips, reports, and connection to the Organisation's systems.",
+        "PROSM Time records attendance, breaks, leave, timesheets, allowances and workforce presence during shifts. Depending on the plan, it also offers location checks at work sites, attendance photos, a kiosk for site workers, SOS alerts, shift schedules, announcements, employee files with their documents and contracts, a penalties and incentives bylaw, finance (payroll with payslips and allowances), a choice of governance model for approvals, PROSM Connect (chats, calls, meetings and a verified camera inside the Organisation), reports, and connection to the Organisation's systems.",
         "It is provided under a licence or a free trial. A trial lasts 30 days. When it ends, the Organisation's account is paused and its data is kept until a licence is activated.",
       ],
     },
@@ -50,6 +51,7 @@ const TERMS_EN: LegalDocument = {
       bullets: [
         "Keep your password secret, and do not let anyone else use your account.",
         "You are responsible for actions made with your account.",
+        "Where two-step verification or identity confirmation is turned on, keep the device with your authenticator app safe; sensitive work (such as Finance) asks you to confirm it is you.",
         "Tell your Organisation, or PROSM at info@prosm.net, without delay if you suspect unauthorised use.",
         "A shared kiosk device must be kept physically secure by the Organisation. Leaving kiosk mode requires the password of the account that opened it.",
       ],
@@ -75,6 +77,8 @@ const TERMS_EN: LegalDocument = {
         "record false attendance in any way, including by faking your location, changing your device's clock, using someone else's account or worker number, or using a photo of someone else;",
         "attempt to access data you are not entitled to, or interfere with the service or its security;",
         "copy, reverse-engineer or resell the application, except as the law expressly allows;",
+        "use PROSM Connect to harass, threaten or insult anyone, or to send unlawful or offensive content;",
+        "record a call or meeting, or pass on someone's messages or photos outside the Organisation, without the consent the law requires;",
         "use the service for anything unlawful.",
       ],
     },
@@ -82,7 +86,7 @@ const TERMS_EN: LegalDocument = {
       heading: "5. SOS alerts",
       paragraphs: [
         "The SOS button sends an alert with your location to your site's managers, the Organisation's owner and co-workers clocked in at the same site. If you work without a chosen site, the managers of the nearest site receive it.",
-        "It is not an emergency service and does not contact the police, an ambulance or the fire service. In an emergency, always call your local emergency number.",
+        "It is not an emergency service and does not contact the police, an ambulance or the fire service; neither do PROSM Connect calls. In an emergency, always call your local emergency number.",
         "An alert needs an internet connection and a shift confirmed by the server, and its delivery cannot be guaranteed. Use SOS for real emergencies only.",
       ],
     },
@@ -159,7 +163,7 @@ const TERMS_EN: LegalDocument = {
 
 const TERMS_AR: LegalDocument = {
   title: "شروط الاستخدام",
-  updated: "آخر تحديث: 13 نوفمبر 2026",
+  updated: "آخر تحديث: 17 نوفمبر 2026",
   intro: [
     "تنظّم هذه الشروط استخدام PROSM Time الذي تقدّمه PROSM. وبتفعيل حساب مؤسسة، أو تسجيل الدخول، أو استخدام كشك PROSM Time، فإنك توافق عليها. ومن يفعّل الحساب يقبل هذه الشروط نيابةً عن المؤسسة («المؤسسة»)، ويؤكد أنه مخوَّل بذلك.",
     "تُبيِّن سياسة الخصوصية طريقة التعامل مع البيانات الشخصية، وهي جزء من هذه الشروط.",
@@ -168,7 +172,7 @@ const TERMS_AR: LegalDocument = {
     {
       heading: "1. الخدمة",
       paragraphs: [
-        "يسجّل PROSM Time الحضور والاستراحات والإجازات والكشوف والبدلات ووجود العاملين أثناء الورديات. ويقدّم بحسب الباقة أيضاً: التحقق من الموقع في مواقع العمل، وصور الحضور، وكشكاً لعمال المواقع، وتنبيهات الطوارئ SOS، وجداول الورديات، والإعلانات، وملفات الموظفين بمستنداتها وعقودها، ولائحة الجزاءات والحوافز، والمرتبات ومفرداتها، والتقارير، والربط بأنظمة المؤسسة.",
+        "يسجّل PROSM Time الحضور والاستراحات والإجازات والكشوف والبدلات ووجود العاملين أثناء الورديات. ويقدّم بحسب الباقة أيضاً: التحقق من الموقع في مواقع العمل، وصور الحضور، وكشكاً لعمال المواقع، وتنبيهات الطوارئ SOS، وجداول الورديات، والإعلانات، وملفات الموظفين بمستنداتها وعقودها، ولائحة الجزاءات والحوافز، والإدارة المالية (المرتبات وقسائمها والبدلات)، واختيار نموذج الحوكمة للموافقات، وPROSM Connect (محادثات ومكالمات واجتماعات وكاميرا موثّقة داخل المؤسسة)، والتقارير، والربط بأنظمة المؤسسة.",
         "يُقدَّم بموجب ترخيص أو فترة تجريبية مجانية مدتها 30 يوماً. وعند انتهاء الفترة التجريبية يُوقف حساب المؤسسة مؤقتاً، وتُحفظ بياناتها إلى أن يُفعَّل ترخيص.",
       ],
     },
@@ -177,6 +181,7 @@ const TERMS_AR: LegalDocument = {
       bullets: [
         "حافظ على سرية كلمة المرور، ولا تسمح لغيرك باستخدام حسابك.",
         "أنت مسؤول عن الإجراءات التي تتم بحسابك.",
+        "إذا كان التحقق بخطوتين أو تأكيد الهوية مفعّلاً، حافظ على الجهاز الذي عليه تطبيق المصادقة؛ فالأعمال الحساسة (مثل الإدارة المالية) تطلب منك تأكيد أنك أنت.",
         "أبلغ مؤسستك، أو PROSM على info@prosm.net، فوراً إذا اشتبهت في استخدام غير مصرّح به.",
         "على المؤسسة تأمين جهاز الكشك المشترك مادياً. ويتطلب الخروج من وضع الكشك كلمة مرور الحساب الذي فتحه.",
       ],
@@ -202,6 +207,8 @@ const TERMS_AR: LegalDocument = {
         "تسجيل حضور غير صحيح بأي طريقة، ومن ذلك تزييف موقعك، أو تغيير ساعة جهازك، أو استخدام حساب شخص آخر أو رقم عامل آخر، أو استخدام صورة شخص آخر؛",
         "محاولة الوصول إلى بيانات لا يحق لك الاطلاع عليها، أو العبث بالخدمة أو بأمانها؛",
         "نسخ التطبيق، أو الهندسة العكسية له، أو إعادة بيعه، إلا في الحدود التي يجيزها القانون صراحةً؛",
+        "استخدام PROSM Connect في مضايقة أي شخص أو تهديده أو إهانته، أو إرسال محتوى غير مشروع أو مسيء؛",
+        "تسجيل مكالمة أو اجتماع، أو نقل رسائل شخص أو صوره خارج المؤسسة، دون الموافقة التي يشترطها القانون؛",
         "استخدام الخدمة في أي غرض غير مشروع.",
       ],
     },
@@ -209,7 +216,7 @@ const TERMS_AR: LegalDocument = {
       heading: "5. تنبيهات الطوارئ SOS",
       paragraphs: [
         "يرسل زر SOS تنبيهاً بموقعك إلى مديري موقعك، ومالك المؤسسة، والزملاء المسجَّل حضورهم في الموقع نفسه. وإذا كنت تعمل دون اختيار موقع، يصل التنبيه إلى مديري أقرب موقع.",
-        "زر SOS ليس خدمة طوارئ، ولا يتصل بالشرطة أو الإسعاف أو الإطفاء. وفي حالات الطوارئ اتصل دائماً برقم الطوارئ المحلي.",
+        "زر SOS ليس خدمة طوارئ، ولا يتصل بالشرطة أو الإسعاف أو الإطفاء، وكذلك مكالمات PROSM Connect. وفي حالات الطوارئ اتصل دائماً برقم الطوارئ المحلي.",
         "يحتاج التنبيه إلى اتصال بالإنترنت ووردية مؤكدة من الخادم، ولا يمكن ضمان وصوله. استخدم SOS في الطوارئ الحقيقية فقط.",
       ],
     },

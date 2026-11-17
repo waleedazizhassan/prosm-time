@@ -41,7 +41,9 @@
     "checking": "Checking...",
     "upToDate": "You're on the latest version.",
     "noticeTitle": "PROSM Time update",
-    "availablePlay": "A new version is available on Google Play."
+    "availablePlay": "A new version is available on Google Play.",
+    "whatsNew": "What's new",
+    "tapToUpdate": "Tap to update from Google Play"
   },
   "offline": {
     "message": "No worries - clock in, clock out and breaks still work, and we'll send them as soon as you're back online.",
@@ -398,7 +400,7 @@
     "attendance": "Field operations",
     "sites": "Sites and external labour",
     "people": "Human resources",
-    "payroll": "Payroll",
+    "payroll": "Finance",
     "reports": "Reports and analytics",
     "settings": "Administration and governance",
     "help": "Help",

@@ -14,6 +14,7 @@ const SECTION_ICONS: Record<NavSection, LucideIcon> = { attendance: Activity, si
 import UserMenu from "./UserMenu";
 import SidebarRadio from "./SidebarRadio";
 import { employeeBottomPaths } from "./BottomNav";
+import useConnect from "../../modules/connect/useConnect";
 import styles from "./Sidebar.module.css";
 
 const OPEN_SECTIONS_KEY = "prosm_time_sidebar_open_v1";
@@ -88,7 +89,8 @@ export default function Sidebar() {
   // the radio; no groups. Managers and the Owner keep the grouped menu.
   const manages = Boolean(profile?.isOwner) || hasPermission("exceptions.manage");
   const simpleMenu = mobileSidebarOpen && !manages;
-  const bottomPaths = employeeBottomPaths(allows);
+  const connectState = useConnect(profile?.id);
+  const bottomPaths = employeeBottomPaths(allows, connectState.on);
   const otherPages = visibleItems.filter((item) => !bottomPaths.includes(item.path));
 
   // owner 2026-11-16: the tree at every level - an employee's phone menu is grouped too (without the pages the

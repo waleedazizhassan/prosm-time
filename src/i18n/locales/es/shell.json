@@ -41,7 +41,9 @@
     "checking": "Comprobando...",
     "upToDate": "Tienes la última versión.",
     "noticeTitle": "Actualización de PROSM Time",
-    "availablePlay": "Hay una nueva versión disponible en Google Play."
+    "availablePlay": "Hay una nueva versión disponible en Google Play.",
+    "whatsNew": "Novedades",
+    "tapToUpdate": "Toca para actualizar desde Google Play"
   },
   "offline": {
     "message": "No te preocupes: la entrada, la salida y los descansos siguen funcionando, y los enviaremos en cuanto vuelvas a tener conexión.",
@@ -399,7 +401,7 @@
     "attendance": "Operación de campo",
     "sites": "Sedes y mano de obra externa",
     "people": "Recursos humanos",
-    "payroll": "Nómina",
+    "payroll": "Finanzas",
     "reports": "Informes y análisis",
     "settings": "Administración y gobierno",
     "help": "Ayuda",

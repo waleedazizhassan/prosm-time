@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.PowerManager;
 import android.provider.Settings;
 
@@ -90,6 +91,13 @@ public class ShiftTrackingPlugin extends Plugin {
         result.put("preciseLocation", fine);
         result.put("notifications", NotificationManagerCompat.from(context).areNotificationsEnabled());
         result.put("ignoringBattery", power == null || power.isIgnoringBatteryOptimizations(context.getPackageName()));
+        // owner 2026-11-17: Android 14+ lets the person turn off the full-screen call screen; earlier it is always on
+        boolean fullScreen = true;
+        if (Build.VERSION.SDK_INT >= 34) {
+            android.app.NotificationManager manager = context.getSystemService(android.app.NotificationManager.class);
+            fullScreen = manager == null || manager.canUseFullScreenIntent();
+        }
+        result.put("fullScreenCalls", fullScreen);
         call.resolve(result);
     }
 
@@ -99,6 +107,21 @@ public class ShiftTrackingPlugin extends Plugin {
         Context context = getContext();
         try {
             Intent intent = new Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        } catch (Exception noScreen) {
+            openDetails(context);
+        }
+        call.resolve();
+    }
+
+    /** Owner 2026-11-17: Android 14+'s "full-screen notifications" switch for PROSM Time (calls and SOS on the locked screen). */
+    @PluginMethod
+    public void openFullScreenSettings(PluginCall call) {
+        Context context = getContext();
+        try {
+            if (Build.VERSION.SDK_INT < 34) throw new IllegalStateException("not needed");
+            Intent intent = new Intent(Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT, Uri.parse("package:" + context.getPackageName()));
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         } catch (Exception noScreen) {

@@ -45,7 +45,14 @@ export default function SecurityTab() {
     setBusy(true);
     setError("");
     setDone("");
-    const { data, error: enrolError } = await getSupabaseClient().auth.mfa.enroll({ factorType: "totp", friendlyName: `PROSM ${new Date().toISOString().slice(0, 10)}` });
+    const client = getSupabaseClient();
+    // owner 2026-11-17 ("could not start"): an earlier attempt left an unfinished factor with the same name - clear
+    // the unfinished ones, and every attempt gets its own name
+    const { data: existing } = await client.auth.mfa.listFactors();
+    for (const factor of existing?.all ?? []) {
+      if (factor.status !== "verified") await client.auth.mfa.unenroll({ factorId: factor.id }).catch(() => undefined);
+    }
+    const { data, error: enrolError } = await client.auth.mfa.enroll({ factorType: "totp", friendlyName: `PROSM ${new Date().toISOString().slice(0, 16).replace("T", " ")}` });
     setBusy(false);
     if (enrolError || !data) {
       setError(t("security.failed"));

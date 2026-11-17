@@ -149,7 +149,9 @@
     "cancel": "Cancel",
     "reply": "Reply",
     "cancelReply": "Cancel reply",
-    "typing": "{{name}} is typing…"
+    "typing": "{{name}} is typing…",
+    "deleteAll": "Delete all chats",
+    "deleteAllConfirm": "Delete every chat from this device? The other side keeps theirs."
   },
   "info": {
     "inSince": "In since {{time}}",

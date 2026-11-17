@@ -43,3 +43,12 @@
     margin: var(--space-2) var(--space-3) 0;
   }
 }
+
+/* owner 2026-11-17: "what's new" under the update notice */
+.notes {
+  flex-basis: 100%;
+  white-space: pre-line;
+  font-size: var(--font-sm);
+  line-height: 1.6;
+  padding: var(--space-2) var(--space-1) 0;
+}

@@ -200,7 +200,9 @@
       "timeHint": "Vuoto = adesso. Fino a 7 giorni indietro.",
       "noSiteOption": "Nessuna sede registrata (scrivi il luogo)",
       "placeNameLabel": "Nome del luogo"
-    }
+    },
+    "previousPerson": "Persona precedente",
+    "nextPerson": "Persona successiva"
   },
   "onBehalf": {
     "title": "Timbra entrata/uscita per conto di",

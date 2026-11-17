@@ -149,7 +149,9 @@
     "cancel": "Abbrechen",
     "reply": "Antworten",
     "cancelReply": "Antwort abbrechen",
-    "typing": "{{name}} schreibt…"
+    "typing": "{{name}} schreibt…",
+    "deleteAll": "Alle Chats löschen",
+    "deleteAllConfirm": "Alle Chats von diesem Gerät löschen? Die andere Seite behält ihre."
   },
   "info": {
     "inSince": "Anwesend seit {{time}}",

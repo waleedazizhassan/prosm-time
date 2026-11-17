@@ -44,6 +44,8 @@ import { AttendanceTab, HistoryTab, LeaveTab } from "./profile/ActivityTabs";
 import PayrollProfilesPage from "../payroll/PayrollProfilesPage";
 import { ProfileDocumentsTab, ProfilePenaltiesTab } from "./profile/LaterTabs";
 import PermissionMatrix from "./PermissionMatrix";
+import usePersonSwipe from "./usePersonSwipe";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type ProfileTab = "data" | "account" | "contract" | "documents" | "payroll" | "attendance" | "leave" | "penalties" | "history";
 
@@ -64,6 +66,8 @@ interface PendingChange {
 export default function PersonDetailPage() {
   const { t } = useTranslation("people");
   const { userId } = useParams<{ userId: string }>();
+  // owner 2026-11-17: swipe sideways (or the arrows) to the next or previous person
+  const swipe = usePersonSwipe(userId);
   const { hasPermission, profile } = useAuth();
   const navigate = useNavigate();
 
@@ -335,11 +339,26 @@ export default function PersonDetailPage() {
   }, { replace: true });
   const lockedPlan = (key: ProfileTab) => (key === "payroll" ? "pro" : "business");
 
+  const rtl = document.documentElement.dir === "rtl";
+  const arrowStyle = { display: "inline-flex", alignItems: "center", justifyContent: "center", width: 32, height: 32, borderRadius: 10,
+    border: "1px solid var(--border-light)", background: "transparent", color: "var(--text-primary)", cursor: "pointer" } as const;
   return (
+    <div {...swipe.handlers}>
     <PageShell title={t("detail.title")} compact>
-      <Link to="/people" style={{ color: "var(--text-link)", fontSize: "var(--font-sm)" }}>
-        {t("detail.backToList")}
-      </Link>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--space-2)" }}>
+        <Link to="/people" style={{ color: "var(--text-link)", fontSize: "var(--font-sm)" }}>
+          {t("detail.backToList")}
+        </Link>
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: "var(--font-xs)", color: "var(--text-secondary)" }}>
+          <button type="button" style={arrowStyle} disabled={!swipe.prevId} onClick={swipe.goPrev} aria-label={t("detail.previousPerson")} title={t("detail.previousPerson")}>
+            {rtl ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+          </button>
+          {swipe.position}
+          <button type="button" style={arrowStyle} disabled={!swipe.nextId} onClick={swipe.goNext} aria-label={t("detail.nextPerson")} title={t("detail.nextPerson")}>
+            {rtl ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
+          </button>
+        </span>
+      </div>
       {hr ? <ProfileHeader profile={hr} /> : (
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--space-2)", flexWrap: "wrap" }}>
           <h1 style={{ margin: 0, fontSize: "var(--font-xl)" }}>{member.fullName}</h1>
@@ -581,5 +600,6 @@ export default function PersonDetailPage() {
         <ErrorText>{changeError}</ErrorText>
       </Modal>
     </PageShell>
+    </div>
   );
 }
