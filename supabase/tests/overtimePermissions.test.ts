@@ -65,6 +65,9 @@ describe("overtime, deductions and permissions (item 23)", () => {
     expect((await t.as(manager.authId, "select public.adjust_prosm_time_attendance_day($1, '2026-10-25', null, null, null, true, 'stock count')", [worker.userId])).error).toBeNull();
     expect(Number((await summary("2026-10-25")).overtimeMinutes)).toBeCloseTo(60, 6);
     expect((await entry("2026-10-25")).amount).toBe(100);
+    // 2026-11-17: the kept overtime list is recalculated after the approval - the day leaves the queue at once
+    const after = await t.as<{ q: { overtime: unknown[] } }>(manager.authId, "select public.list_prosm_time_permission_queue() as q");
+    expect(after.rows?.[0].q.overtime).toHaveLength(0);
     expect(await t.su("select id from audit_logs where action = 'attendance.overtime_approved'")).toHaveLength(1);
   });
 
