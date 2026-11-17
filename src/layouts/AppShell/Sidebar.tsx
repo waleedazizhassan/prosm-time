@@ -14,6 +14,7 @@ const SECTION_ICONS: Record<NavSection, LucideIcon> = { attendance: Activity, si
 import UserMenu from "./UserMenu";
 import SidebarRadio from "./SidebarRadio";
 import { employeeBottomPaths } from "./BottomNav";
+import useConnect from "../../modules/connect/useConnect";
 import styles from "./Sidebar.module.css";
 
 const OPEN_SECTIONS_KEY = "prosm_time_sidebar_open_v1";
